@@ -951,7 +951,7 @@ static void CB2_EndRematchBattle(void)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         SetBattledTrainerFlag();
-        sub_810CDE8();
+        ClearRematchStateOfLastTalked();
         ResetDeferredLinkEvent();
     }
 }

@@ -34,9 +34,9 @@ struct TradeMenuResources
     /*0x0035*/ u8 tradeMenuCursorPosition;
     /*0x0036*/ u8 partyCounts[2];
     /*0x0038*/ bool8 tradeMenuOptionsActive[13];
-    /*0x0045*/ u8 battleableFlags[2][PARTY_SIZE];
-    /*0x0051*/ u8 eggFlags[2][PARTY_SIZE];
-    /*0x005D*/ u8 unk_5D[2][PARTY_SIZE];
+    /*0x0045*/ bool8 battleableFlags[2][PARTY_SIZE];
+    /*0x0051*/ bool8 eggFlags[2][PARTY_SIZE];
+    /*0x005D*/ u8 hpBarLevels[2][PARTY_SIZE];
     /*0x0069*/ u8 state;
     /*0x006A*/ u8 filler_6A[0x6F - 0x6A];
     /*0x006F*/ u8 tradeMenuCBnum;
@@ -54,7 +54,7 @@ struct TradeMenuResources
     /*0x007F*/ u8 filler_7F;
     /*0x0080*/ u16 linkData[20];
     /*0x00A8*/ u8 loadUiSpritesState;
-    /*0x00A9*/ u8 unk_A9[11];
+    /*0x00A9*/ u8 giftRibbons[11];
     /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
     /*0x08D0*/ struct {
         bool8 active;
@@ -110,7 +110,7 @@ static void RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 unused);
 static void sub_804F748(u8 side);
 static void sub_804F890(u8 side);
 static void sub_804F964(void);
-static void sub_804F9D8(void);
+static void CopyGiftRibbonsToSav1(void);
 static u32 TestWhetherSelectedMonCanBeTraded(struct Pokemon * party, int partyCount, int cursorPos);
 
 static const size_t gUnknown_8260814[] = {
@@ -836,7 +836,7 @@ static void sub_804C728(void)
     case 6:
         if (shedinja_maker_maybe())
         {
-            sub_804F9D8();
+            CopyGiftRibbonsToSav1();
             gMain.state++;
         }
         break;
@@ -1440,7 +1440,7 @@ static bool8 shedinja_maker_maybe(void)
     case 20:
         if (GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(sTradeMenuResourcesPtr->unk_A9, gBlockRecvBuffer[id ^ 1], 11);
+            Trade_Memcpy(sTradeMenuResourcesPtr->giftRibbons, gBlockRecvBuffer[id ^ 1], 11);
             ResetBlockReceivedFlags();
             sTradeMenuResourcesPtr->state++;
         }
@@ -2565,7 +2565,7 @@ static void sub_804F890(u8 who)
         {
             curHp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
             maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-            sTradeMenuResourcesPtr->unk_5D[0][i] = GetHPBarLevel(curHp, maxHp);
+            sTradeMenuResourcesPtr->hpBarLevels[0][i] = GetHPBarLevel(curHp, maxHp);
         }
         break;
     case 1:
@@ -2573,7 +2573,7 @@ static void sub_804F890(u8 who)
         {
             curHp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
             maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
-            sTradeMenuResourcesPtr->unk_5D[1][i] = GetHPBarLevel(curHp, maxHp);
+            sTradeMenuResourcesPtr->hpBarLevels[1][i] = GetHPBarLevel(curHp, maxHp);
         }
         break;
     }
@@ -2586,18 +2586,18 @@ static void sub_804F964(void)
     {
         for (j = 0; j < sTradeMenuResourcesPtr->partyCounts[i]; j++)
         {
-            SetPartyHPBarSprite(&gSprites[sTradeMenuResourcesPtr->partyIcons[i][j]], 4 - sTradeMenuResourcesPtr->unk_5D[i][j]);
+            SetPartyHPBarSprite(&gSprites[sTradeMenuResourcesPtr->partyIcons[i][j]], 4 - sTradeMenuResourcesPtr->hpBarLevels[i][j]);
         }
     }
 }
 
-static void sub_804F9D8(void)
+static void CopyGiftRibbonsToSav1(void)
 {
     int i;
     for (i = 0; i < 11; i++)
     {
-        if (gSaveBlock1Ptr->giftRibbons[i] == 0 && sTradeMenuResourcesPtr->unk_A9[i] != 0)
-            gSaveBlock1Ptr->giftRibbons[i] = sTradeMenuResourcesPtr->unk_A9[i];
+        if (gSaveBlock1Ptr->giftRibbons[i] == 0 && sTradeMenuResourcesPtr->giftRibbons[i] != 0)
+            gSaveBlock1Ptr->giftRibbons[i] = sTradeMenuResourcesPtr->giftRibbons[i];
     }
 }
 

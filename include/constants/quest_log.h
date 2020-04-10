@@ -1,7 +1,6 @@
 #ifndef GUARD_CONSTANTS_QUEST_LOG_H
 #define GUARD_CONSTANTS_QUEST_LOG_H
 
-// TODO: Name and use state constants
 #define QL_STATE_RECORDING     1
 #define QL_STATE_PLAYBACK      2
 #define QL_STATE_PLAYBACK_LAST 3

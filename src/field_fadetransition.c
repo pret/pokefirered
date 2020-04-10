@@ -503,7 +503,7 @@ static void Task_SafariZoneRanOutOfBalls(u8 taskId)
     {
         ScriptContext2_Disable();
         DestroyTask(taskId);
-        sub_80696C0();
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     }
 }
 

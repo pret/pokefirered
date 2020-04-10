@@ -25,6 +25,7 @@
 #include "constants/maps.h"
 #include "constants/items.h"
 #include "constants/quest_log.h"
+#include "constants/trainer_types.h"
 
 enum
 {
@@ -82,28 +83,30 @@ static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
 static void VsSeekerResetInBagStepCounter(void);
 static void VsSeekerResetChargingStepCounter(void);
 static void Task_ResetObjectsRematchWantedState(u8 taskId);
-static void sub_810C594(void);
+static void ResetMovementOfRematchableTrainers(void);
 static void Task_VsSeeker_1(u8 taskId);
 static void Task_VsSeeker_2(u8 taskId);
 static void GatherNearbyTrainerInfo(void);
 static void Task_VsSeeker_3(u8 taskId);
 static bool8 CanUseVsSeeker(void);
 static u8 GetVsSeekerResponseInArea(const VsSeekerData *);
-static u8 GetRematchTrainerIdGivenGameState(const u16 *, u8);
-static u8 sub_810CD80(const VsSeekerData *, u16);
+static u8 GetRematchTrainerIdGivenGameState(const u16 *trainerIdxs, u8 rematchIdx);
+static u8 ShouldTryRematchBattleInternal(const VsSeekerData *, u16);
 static u8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *, u16);
-static s32 sub_810CE10(const VsSeekerData * a0, u16 a1);
-static bool8 sub_810CED0(const VsSeekerData *, u16);
+static int LookupVsSeekerOpponentInArray(const VsSeekerData * array, u16 trainerId);
+static bool8 IsTrainerReadyForRematchInternal(const VsSeekerData *, u16);
 static u8 GetRunningBehaviorFromGraphicsId(u8);
 static u16 GetTrainerFlagFromScript(const u8 *);
-static s32 GetRematchIdx(const VsSeekerData *, u16);
+static int GetRematchIdx(const VsSeekerData *, u16);
 static bool32 IsThisTrainerRematchable(u32);
+static void ClearAllTrainerRematchStates(void);
 static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo *);
 static u8 GetNextAvailableRematchTrainer(const VsSeekerData *, u16, u8 *);
 static u8 GetRematchableTrainerLocalId(void);
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo *, const u8 *);
 static u8 GetCurVsSeekerResponse(s32, u16);
 static void StartAllRespondantIdleMovements(void);
+static bool8 ObjectEventIdIsSane(u8 a0);
 static u8 GetRandomFaceDirectionMovementType();
 
 // rodata
@@ -552,14 +555,14 @@ static const VsSeekerData sVsSeekerData[] = {
       MAP_GROUP(SEVEN_ISLAND_TANOBY_RUINS), MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS) },
 };
 
-static const u8 gUnknown_8453F5C[] = {
+static const u8 sMovementScript_Wait48[] = {
     MOVEMENT_ACTION_DELAY_16,
     MOVEMENT_ACTION_DELAY_16,
     MOVEMENT_ACTION_DELAY_16,
     MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 gUnknown_8453F60[] = {
+static const u8 sMovementScript_TrainerUnfought[] = {
     MOVEMENT_ACTION_EMOTE_EXCLAMATION_MARK,
     MOVEMENT_ACTION_STEP_END
 };
@@ -575,7 +578,7 @@ static const u8 sMovementScript_TrainerRematch[] = {
     MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 gUnknown_8453F67[] = {
+static const u8 sFaceDirectionMovementTypeByFacingDirection[] = {
     MOVEMENT_TYPE_FACE_DOWN,
     MOVEMENT_TYPE_FACE_DOWN,
     MOVEMENT_TYPE_FACE_UP,
@@ -605,7 +608,7 @@ static void Task_ResetObjectsRematchWantedState(u8 taskId)
     {
         for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         {
-            if (sub_810CF04(i) == TRUE)
+            if (ObjectEventIdIsSane(i) == TRUE)
             {
                 if (gObjectEvents[i].singleMovementActive)
                     return;
@@ -638,7 +641,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
             movementType = GetRandomFaceDirectionMovementType();
             TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
             objectEvent = &gObjectEvents[objEventId];
-            if (sub_810CF04(objEventId) == TRUE)
+            if (ObjectEventIdIsSane(objEventId) == TRUE)
             {
                 SetTrainerMovementType(objectEvent, movementType);
             }
@@ -673,7 +676,7 @@ bool8 UpdateVsSeekerStepCounter(void)
         {
             FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
             VsSeekerResetChargingStepCounter();
-            sub_810D0D0();
+            ClearAllTrainerRematchStates();
             return TRUE;
         }
     }
@@ -681,15 +684,15 @@ bool8 UpdateVsSeekerStepCounter(void)
     return FALSE;
 }
 
-void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
+void MapResetTrainerRematches(u16 mapGroup, u16 mapNum)
 {
     FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
     VsSeekerResetChargingStepCounter();
-    sub_810D0D0();
-    sub_810C594();
+    ClearAllTrainerRematchStates();
+    ResetMovementOfRematchableTrainers();
 }
 
-static void sub_810C594(void)
+static void ResetMovementOfRematchableTrainers(void)
 {
     u8 i;
 
@@ -745,12 +748,12 @@ void Task_VsSeeker_0(u8 taskId)
     if (respval == VSSEEKER_NOT_CHARGED)
     {
         Free(sVsSeeker);
-        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_BatteryNotChargedNeedXSteps, sub_80A1E0C);
+        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_BatteryNotChargedNeedXSteps, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
     }
     else if (respval == VSSEEKER_NO_ONE_IN_RANGE)
     {
         Free(sVsSeeker);
-        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_NoTrainersWithinRange, sub_80A1E0C);
+        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_NoTrainersWithinRange, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
     }
     else if (respval == VSSEEKER_CAN_USE)
     {
@@ -787,7 +790,7 @@ static void Task_VsSeeker_2(u8 taskId)
         data[2] = 0;
         VsSeekerResetInBagStepCounter();
         sVsSeeker->responseCode = GetVsSeekerResponseInArea(sVsSeekerData);
-        ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_8453F5C);
+        ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, sMovementScript_Wait48);
         gTasks[taskId].func = Task_VsSeeker_3;
     }
 }
@@ -823,14 +826,14 @@ static void Task_VsSeeker_3(u8 taskId)
     {
         if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_NO_RESPONSE)
         {
-            DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_TrainersNotReady, sub_80A1E0C);
+            DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_TrainersNotReady, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
         }
         else
         {
             if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_FOUND_REMATCHES)
                 StartAllRespondantIdleMovements();
-            ClearDialogWindowAndFrame(0, 1);
-            sub_80696C0();
+            ClearDialogWindowAndFrame(0, TRUE);
+            ClearPlayerHeldMovementAndUnfreezeObjectEvents();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -874,7 +877,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
             r8 = sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx;
             if (!HasTrainerBeenFought(r8))
             {
-                StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F60);
+                StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerUnfought);
                 sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx += 0;
                 sVsSeeker->trainerHasNotYetBeenFought = 1;
             }
@@ -942,86 +945,86 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
     return VSSEEKER_RESPONSE_NO_RESPONSE;
 }
 
-void sub_810CB90(void)
+void ClearRematchStateByTrainerId(void)
 {
     u8 objEventId = 0;
-    struct ObjectEventTemplate *r4 = gSaveBlock1Ptr->objectEventTemplates;
-    s32 r9 = sub_810CE10(sVsSeekerData, gTrainerBattleOpponent_A);
+    struct ObjectEventTemplate *objectEventTemplates = gSaveBlock1Ptr->objectEventTemplates;
+    int vsSeekerDataIdx = LookupVsSeekerOpponentInArray(sVsSeekerData, gTrainerBattleOpponent_A);
 
-    if (r9 != -1)
+    if (vsSeekerDataIdx != -1)
     {
-        s32 r8;
+        int i;
 
-        for (r8 = 0; r8 < gMapHeader.events->objectEventCount; r8++)
+        for (i = 0; i < gMapHeader.events->objectEventCount; i++)
         {
-            if ((r4[r8].trainerType == 1 || r4[r8].trainerType == 3) && r9 == sub_810CE10(sVsSeekerData, GetTrainerFlagFromScript(r4[r8].script)))
+            if ((objectEventTemplates[i].trainerType == TRAINER_TYPE_NORMAL || objectEventTemplates[i].trainerType == TRAINER_TYPE_BURIED) && vsSeekerDataIdx == LookupVsSeekerOpponentInArray(sVsSeekerData, GetTrainerFlagFromScript(objectEventTemplates[i].script)))
             {
-                struct ObjectEvent *r4_2;
+                struct ObjectEvent *objectEvent;
 
-                TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
-                r4_2 = &gObjectEvents[objEventId];
-                GetRandomFaceDirectionMovementType(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
-                OverrideMovementTypeForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
-                gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
+                TryGetObjectEventIdByLocalIdAndMap(objectEventTemplates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+                objectEvent = &gObjectEvents[objEventId];
+                GetRandomFaceDirectionMovementType(&objectEventTemplates[i]); // You are using this function incorrectly.  Please consult the manual.
+                OverrideMovementTypeForObjectEvent(objectEvent, sFaceDirectionMovementTypeByFacingDirection[objectEvent->facingDirection]);
+                gSaveBlock1Ptr->trainerRematches[objectEventTemplates[i].localId] = 0;
                 if (gSelectedObjectEvent == objEventId)
-                    r4_2->movementType = gUnknown_8453F67[r4_2->facingDirection];
+                    objectEvent->movementType = sFaceDirectionMovementTypeByFacingDirection[objectEvent->facingDirection];
                 else
-                    r4_2->movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    objectEvent->movementType = MOVEMENT_TYPE_FACE_DOWN;
             }
         }
     }
 }
 
-static void TryGetRematchTrainerIdGivenGameState(const u16 * a0, u8 * a1)
+static void TryGetRematchTrainerIdGivenGameState(const u16 * trainerIdxs, u8 * rematchIdx_p)
 {
-    switch (*a1)
+    switch (*rematchIdx_p)
     {
         case 0:
             break;
         case 1:
             if (!FlagGet(FLAG_GOT_VS_SEEKER))
-                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
+                *rematchIdx_p = GetRematchTrainerIdGivenGameState(trainerIdxs, *rematchIdx_p);
             break;
         case 2:
             if (!FlagGet(FLAG_WORLD_MAP_CELADON_CITY))
-                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
+                *rematchIdx_p = GetRematchTrainerIdGivenGameState(trainerIdxs, *rematchIdx_p);
             break;
         case 3:
             if (!FlagGet(FLAG_WORLD_MAP_FUCHSIA_CITY))
-                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
+                *rematchIdx_p = GetRematchTrainerIdGivenGameState(trainerIdxs, *rematchIdx_p);
             break;
         case 4:
             if (!FlagGet(FLAG_SYS_GAME_CLEAR))
-                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
+                *rematchIdx_p = GetRematchTrainerIdGivenGameState(trainerIdxs, *rematchIdx_p);
             break;
         case 5:
             if (!FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
-                *a1 = GetRematchTrainerIdGivenGameState(a0, *a1);
+                *rematchIdx_p = GetRematchTrainerIdGivenGameState(trainerIdxs, *rematchIdx_p);
             break;
     }
 }
 
-static u8 GetRematchTrainerIdGivenGameState(const u16 * a0, u8 a1)
+static u8 GetRematchTrainerIdGivenGameState(const u16 *trainerIdxs, u8 rematchIdx)
 {
-    while (--a1 != 0)
+    while (--rematchIdx != 0)
     {
-        const u16 *r0 = a0 + a1;
-        if (*r0 != 0xFFFF)
-            return a1;
+        const u16 *rematch_p = trainerIdxs + rematchIdx;
+        if (*rematch_p != 0xFFFF)
+            return rematchIdx;
     }
     return 0;
 }
 
 u8 ShouldTryRematchBattle(void)
 {
-    if (sub_810CD80(sVsSeekerData, gTrainerBattleOpponent_A))
+    if (ShouldTryRematchBattleInternal(sVsSeekerData, gTrainerBattleOpponent_A))
     {
         return 1;
     }
     return HasRematchTrainerAlreadyBeenFought(sVsSeekerData, gTrainerBattleOpponent_A);
 }
 
-static bool8 sub_810CD80(const VsSeekerData *vsSeekerData, u16 trainerBattleOpponent)
+static bool8 ShouldTryRematchBattleInternal(const VsSeekerData *vsSeekerData, u16 trainerBattleOpponent)
 {
     s32 rematchIdx = GetRematchIdx(vsSeekerData, trainerBattleOpponent);
 
@@ -1046,40 +1049,39 @@ static bool8 HasRematchTrainerAlreadyBeenFought(const VsSeekerData *vsSeekerData
     return TRUE;
 }
 
-void sub_810CDE8(void)
+void ClearRematchStateOfLastTalked(void)
 {
     gSaveBlock1Ptr->trainerRematches[gSpecialVar_LastTalked] = 0;
     SetBattledTrainerFlag();
 }
 
-static s32 sub_810CE10(const VsSeekerData * a0, u16 a1)
+static int LookupVsSeekerOpponentInArray(const VsSeekerData * array, u16 trainerId)
 {
-    u32 r1;
-    s32 r3;
+    int i, j;
 
-    for (r1 = 0; r1 < NELEMS(sVsSeekerData); r1++)
+    for (i = 0; i < NELEMS(sVsSeekerData); i++)
     {
-        for (r3 = 0; r3 < 6; r3++)
+        for (j = 0; j < 6; j++)
         {
-            u16 r0;
-            if (a0[r1].trainerIdxs[r3] == 0)
+            u16 testTrainerId;
+            if (array[i].trainerIdxs[j] == 0)
                 break;
-            r0 = a0[r1].trainerIdxs[r3];
-            if (r0 == 0xFFFF)
+            testTrainerId = array[i].trainerIdxs[j];
+            if (testTrainerId == 0xFFFF)
                 continue;
-            if (r0 == a1)
-                return r1;
+            if (testTrainerId == trainerId)
+                return i;
         }
     }
 
     return -1;
 }
 
-s32 GetRematchTrainerId(u16 a0)
+int GetRematchTrainerId(u16 trainerId)
 {
     u8 i;
     u8 j;
-    j = GetNextAvailableRematchTrainer(sVsSeekerData, a0, &i);
+    j = GetNextAvailableRematchTrainer(sVsSeekerData, trainerId, &i);
     if (!j)
         return 0;
     TryGetRematchTrainerIdGivenGameState(sVsSeekerData[i].trainerIdxs, &j);
@@ -1088,27 +1090,27 @@ s32 GetRematchTrainerId(u16 a0)
 
 u8 IsTrainerReadyForRematch(void)
 {
-    return sub_810CED0(sVsSeekerData, gTrainerBattleOpponent_A);
+    return IsTrainerReadyForRematchInternal(sVsSeekerData, gTrainerBattleOpponent_A);
 }
 
-static bool8 sub_810CED0(const VsSeekerData * a0, u16 a1)
+static bool8 IsTrainerReadyForRematchInternal(const VsSeekerData * array, u16 trainerId)
 {
-    s32 r1 = sub_810CE10(a0, a1);
+    int rematchTrainerIdx = LookupVsSeekerOpponentInArray(array, trainerId);
 
-    if (r1 == -1)
+    if (rematchTrainerIdx == -1)
         return FALSE;
-    if ((u32)r1 >= NELEMS(sVsSeekerData))
+    if (rematchTrainerIdx >= NELEMS(sVsSeekerData))
         return FALSE;
     if (!IsThisTrainerRematchable(gSpecialVar_LastTalked))
         return FALSE;
     return TRUE;
 }
 
-bool8 sub_810CF04(u8 a0)
+static bool8 ObjectEventIdIsSane(u8 objectEventId)
 {
-    struct ObjectEvent *r1 = &gObjectEvents[a0];
+    struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
 
-    if (r1->active && gMapHeader.events->objectEventCount >= r1->localId && gSprites[r1->spriteId].data[0] == a0)
+    if (objectEvent->active && gMapHeader.events->objectEventCount >= objectEvent->localId && gSprites[objectEvent->spriteId].data[0] == objectEventId)
         return TRUE;
     return FALSE;
 }
@@ -1189,9 +1191,9 @@ static u16 GetTrainerFlagFromScript(const u8 *script)
     return trainerFlag;
 }
 
-static s32 GetRematchIdx(const VsSeekerData * vsSeekerData, u16 trainerFlagIdx)
+static int GetRematchIdx(const VsSeekerData * vsSeekerData, u16 trainerFlagIdx)
 {
-    u32 i;
+    int i;
 
     for (i = 0; i < NELEMS(sVsSeekerData); i++)
     {
@@ -1209,7 +1211,7 @@ static bool32 IsThisTrainerRematchable(u32 a0)
     return TRUE;
 }
 
-void sub_810D0D0(void)
+static void ClearAllTrainerRematchStates(void)
 {
     u8 i;
 
@@ -1230,15 +1232,14 @@ static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
         && x + 7 >= trainerInfo->xCoord
         && y - 5 <= trainerInfo->yCoord
         && y + 5 >= trainerInfo->yCoord
-        && sub_810CF04(trainerInfo->objectEventId) == 1)
+        && ObjectEventIdIsSane(trainerInfo->objectEventId) == 1)
         return TRUE;
     return FALSE;
 }
 
 static u8 GetNextAvailableRematchTrainer(const VsSeekerData * vsSeekerData, u16 trainerFlagNo, u8 * idxPtr)
 {
-    u32 i;
-    s32 j;
+    int i, j;
 
     for (i = 0; i < NELEMS(sVsSeekerData); i++)
     {
@@ -1320,7 +1321,7 @@ static void StartAllRespondantIdleMovements(void)
             {
                 struct ObjectEvent *r4 = &gObjectEvents[sVsSeeker->trainerInfo[j].objectEventId];
 
-                if (sub_810CF04(sVsSeeker->trainerInfo[j].objectEventId) == 1)
+                if (ObjectEventIdIsSane(sVsSeeker->trainerInfo[j].objectEventId) == 1)
                     SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 OverrideMovementTypeForObjectEvent(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);

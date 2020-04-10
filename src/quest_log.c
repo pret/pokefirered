@@ -1182,7 +1182,7 @@ static void Task_EndQuestLog(u8 taskId)
         CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
         Free(gUnknown_203AE90);
         sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
-        sub_80696C0();
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
         ScriptContext2_Disable();
         gTextFlags.autoScroll = FALSE;
         gUnknown_2036E28 = 0;

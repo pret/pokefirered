@@ -763,7 +763,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
+    MapResetTrainerRematches(mapGroup, mapNum);
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
@@ -798,7 +798,7 @@ static void mli0_load_map(bool32 a1)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (isOutdoors)

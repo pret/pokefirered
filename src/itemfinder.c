@@ -150,7 +150,7 @@ void ItemUseOnFieldCB_Itemfinder(u8 taskId)
 static void Task_NoResponse_CleanUp(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, TRUE);
-    sub_80696C0();
+    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
@@ -486,7 +486,7 @@ static void Task_ItemfinderResponseCleanUp(u8 taskId)
 {
     DestroyArrowAndStarTiles();
     ClearDialogWindowAndFrame(0, TRUE);
-    sub_80696C0();
+    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }

@@ -1957,7 +1957,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, 1);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgPositions();
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
         InitWindows(sWindowTemplates);
 
@@ -2206,10 +2206,10 @@ static bool8 SlotsTask_ShowHelp(u8 * state, struct SlotMachineSetupTaskData * pt
     {
     case 0:
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WININ, 0x3F);
-        SetGpuReg(REG_OFFSET_WINOUT, 0x3D);
-        SetGpuReg(REG_OFFSET_WIN0H, 0x00);
-        SetGpuReg(REG_OFFSET_WIN1H, 0xA0);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0,   0));
+        SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, 160));
         ShowBg(1);
         PlaySE(SE_WIN_OPEN);
         ptr->bg1X = 0;
@@ -2223,7 +2223,7 @@ static bool8 SlotsTask_ShowHelp(u8 * state, struct SlotMachineSetupTaskData * pt
             (*state)++;
         }
         ChangeBgX(1, 256 * (256 - ptr->bg1X), 0);
-        SetGpuReg(REG_OFFSET_WIN0H, ptr->bg1X);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, ptr->bg1X));
         break;
     case 2:
         return FALSE;
@@ -2247,7 +2247,7 @@ static bool8 SlotsTask_HideHelp(u8 * state, struct SlotMachineSetupTaskData * pt
             (*state)++;
         }
         ChangeBgX(1, 256 * (256 - ptr->bg1X), 0);
-        SetGpuReg(REG_OFFSET_WIN0H, ptr->bg1X);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, ptr->bg1X));
         break;
     case 2:
         HideBg(1);

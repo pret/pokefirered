@@ -169,7 +169,7 @@ extern const u8 gText_WithdrawItem[];
 extern const u8 gText_Withdraw[];
 extern const u8 gText_ReturnToPC[];
 
-extern const u8 gUnknown_8416425[];
+extern const u8 gText_OakForbidsUseOfItemHere[];
 extern const u8 gUnknown_8416451[];
 extern const u8 gUnknown_8416537[];
 extern const u8 gUnknown_841658C[];

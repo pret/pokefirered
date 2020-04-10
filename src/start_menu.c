@@ -575,7 +575,7 @@ static bool8 StartCB_Save2(void)
         break;
     case SAVECB_RETURN_OKAY:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        sub_80696C0();
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
         ScriptContext2_Disable();
         RestoreHelpContext();
         return TRUE;
@@ -587,7 +587,7 @@ static bool8 StartCB_Save2(void)
         break;
     case SAVECB_RETURN_ERROR:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        sub_80696C0();
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
         ScriptContext2_Disable();
         RestoreHelpContext();
         return TRUE;
@@ -995,7 +995,7 @@ static void CloseStartMenu(void)
     PlaySE(SE_SELECT);
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
-    sub_80696C0();
+    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 

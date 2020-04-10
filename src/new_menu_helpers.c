@@ -640,10 +640,10 @@ static u16 GetStdPalColor(u8 colorNum)
     return gTMCaseMainWindowPalette[colorNum];
 }
 
-void DisplayItemMessageOnField(u8 taskId, u8 bgId, const u8 *string, TaskFunc callback)
+void DisplayItemMessageOnField(u8 taskId, u8 textSpeed, const u8 *string, TaskFunc callback)
 {
     LoadStdWindowFrameGfx();
-    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, bgId, GetTextSpeedSetting(), string, callback);
+    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, textSpeed, GetTextSpeedSetting(), string, callback);
     CopyWindowToVram(0, 3);
 }
 

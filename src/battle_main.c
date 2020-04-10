@@ -3771,7 +3771,7 @@ static void HandleEndTurn_FinishBattle(void)
         }
         TrySetQuestLogBattleEvent();
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            sub_810CB90();
+            ClearRematchStateByTrainerId();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;

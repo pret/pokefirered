@@ -391,7 +391,7 @@ void InitAnimBgTilemapBuffer(u32 bgId, const void *src);
 void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src);
 u8 GetBattleBgPaletteNum(void);
 void sub_8075458(bool8 arg0);
-void sub_8075490(struct Sprite *sprite);
+void StartSpriteLinearTranslationFromCurrentPos(struct Sprite *sprite);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void StartAnimLinearTranslation(struct Sprite *sprite);

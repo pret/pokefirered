@@ -1,7 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "task.h"
-#include "bg.h"
-#include "sound.h"
 #include "constants/songs.h"
 
 static void Task_FieldPoisonEffect(u8 taskId)

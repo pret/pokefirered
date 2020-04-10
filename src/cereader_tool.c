@@ -1,7 +1,7 @@
 #include "global.h"
+#include "gflib.h"
 #include "util.h"
 #include "save.h"
-#include "malloc.h"
 #include "cereader_tool.h"
 
 u8 sub_815D654(void)

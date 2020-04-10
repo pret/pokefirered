@@ -1,5 +1,5 @@
 #include "global.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "decompress.h"
 #include "pokemon.h"
 #include "constants/species.h"

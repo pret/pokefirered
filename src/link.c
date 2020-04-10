@@ -1,12 +1,9 @@
 #include "global.h"
-#include "palette.h"
-#include "bg.h"
+#include "gflib.h"
 #include "m4a.h"
 #include "scanline_effect.h"
 #include "bg_regs.h"
-#include "gpu_regs.h"
 #include "decompress.h"
-#include "malloc.h"
 #include "save.h"
 #include "battle.h"
 #include "quest_log.h"
@@ -15,16 +12,12 @@
 #include "random.h"
 #include "task.h"
 #include "event_data.h"
-#include "string_util.h"
 #include "item_menu.h"
 #include "trade.h"
-#include "text.h"
-#include "sound.h"
 #include "menu.h"
 #include "overworld.h"
 #include "new_menu_helpers.h"
 #include "link.h"
-#include "window.h"
 #include "graphics.h"
 #include "strings.h"
 #include "help_system.h"
@@ -229,7 +222,7 @@ static const u8 sLinkErrorTextColor[] = { 0x00, 0x01, 0x02 };
 
 bool8 IsWirelessAdapterConnected(void)
 {
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return FALSE;
 
     SetWirelessCommType1();
@@ -816,7 +809,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             {
                 if (gLinkPlayers[0].linkType == 0x1133)
                 {
-                    switch (sub_804FB34())
+                    switch (Trade_CalcLinkPlayerCompatibilityParam())
                     {
                     case 0:
                         sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
@@ -1006,11 +999,11 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
     return InitBlockSend(src, size);
 }
 
-bool8 sub_800A474(u8 blockRequestType)
+bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType)
 {
     if (gWirelessCommType == 1)
     {
-        return sub_80FA0F8(blockRequestType);
+        return LinkRfu_PrepareCmd0xA100(blockRequestType);
     }
     if (gLinkCallback == NULL)
     {

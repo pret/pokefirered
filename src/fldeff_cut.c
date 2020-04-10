@@ -287,7 +287,7 @@ static void SpriteCallback_CutGrass_Cleanup(struct Sprite * sprite)
     }
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     Free(sCutGrassSpriteArrayPtr);
-    sub_80696C0();
+    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 

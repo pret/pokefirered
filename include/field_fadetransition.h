@@ -10,7 +10,7 @@ void DoDoorWarp(void);
 
 void DoFallWarp(void);
 void DoTeleportWarp(void);
-void sub_807E500(void);
+void DoTeleport2Warp(void);
 void FieldCB_DefaultWarpExit(void);
 void WarpFadeOutScreen(void);
 void FieldCB_ContinueScriptHandleMusic(void);
@@ -22,7 +22,7 @@ void sub_807DCE4(void);
 
 bool32 FieldFadeTransitionBackgroundEffectIsFinished(void);
 void palette_bg_faded_fill_black(void);
-void sub_807E4A0(u16 metatileBehavior, u16 delay);
+void DoStairWarp(u16 metatileBehavior, u16 delay);
 void DoEscalatorWarp(u8 a0);
 void DoLavaridgeGymB1FWarp(void);
 void DoLavaridgeGym1FWarp(void);

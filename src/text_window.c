@@ -1,7 +1,5 @@
 #include "global.h"
-#include "bg.h"
-#include "palette.h"
-#include "window.h"
+#include "gflib.h"
 #include "text_window.h"
 #include "text_window_graphics.h"
 #include "quest_log.h"
@@ -28,7 +26,7 @@ void sub_814FD6C(u8 bgId, u16 destOffset, u8 palIdx)
     LoadPalette(stdpal_get(1), palIdx, 32);
 }
 
-void sub_814FDA0(u8 bgId, u16 destOffset, u8 palIdx)
+void DrawWindowBorderWithStdpal3(u8 bgId, u16 destOffset, u8 palIdx)
 {
     LoadBgTiles(bgId, gStdFrame0, 0x120, destOffset);
     LoadPalette(stdpal_get(3), palIdx, 32);

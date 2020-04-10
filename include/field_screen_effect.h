@@ -6,7 +6,7 @@
 void sub_80AF79C(void);
 void AnimateFlash(u8);
 void sub_80B0244(void);
-void sub_807E3EC(void);
+void FieldCB_SafariZoneRanOutOfBalls(void);
 void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);
 void FieldCB_RushInjuredPokemonToCenter(void);

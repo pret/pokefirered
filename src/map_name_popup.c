@@ -1,16 +1,11 @@
 #include "global.h"
-#include "bg.h"
-#include "gpu_regs.h"
-#include "window.h"
-#include "palette.h"
+#include "gflib.h"
 #include "task.h"
 #include "event_data.h"
 #include "text_window.h"
 #include "quest_log.h"
 #include "region_map.h"
-#include "text.h"
 #include "strings.h"
-#include "string_util.h"
 #include "constants/flags.h"
 
 static void Task_MapNamePopup(u8 taskId);
@@ -31,7 +26,7 @@ static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 {
     u8 taskId;
-    if (FlagGet(FLAG_DONT_SHOW_MAP_NAME_POPUP) != TRUE && !(gQuestLogState == QL_STATE_2 || gQuestLogState == QL_STATE_3))
+    if (FlagGet(FLAG_DONT_SHOW_MAP_NAME_POPUP) != TRUE && !QL_IS_PLAYBACK_STATE)
     {
         taskId = FindTaskIdByFunc(Task_MapNamePopup);
         if (taskId == 0xFF)

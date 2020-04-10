@@ -1,10 +1,6 @@
 #include "global.h"
-#include "sprite.h"
-#include "window.h"
-#include "malloc.h"
-#include "palette.h"
+#include "gflib.h"
 #include "decompress.h"
-#include "pokemon.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];

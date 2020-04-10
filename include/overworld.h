@@ -110,10 +110,10 @@ u32 GetGameStat(u8 statId);
 void SetGameStat(u8 statId, u32 value);
 
 void CB2_ContinueSavedGame(void);
-void sub_8055D5C(struct WarpData *);
-void sub_80572A8(void);
-void sub_805726C(void);
-void sub_8057430(void);
+void Overworld_SetWarpDestinationFromWarp(struct WarpData *);
+void CB2_SetUpOverworldForQLPlayback(void);
+void CB2_SetUpOverworldForQLPlaybackWithWarpExit(void);
+void CB2_EnterFieldFromQuestLog(void);
 void Overworld_PlaySpecialMapMusic(void);
 
 u8 GetCurrentRegionMapSectionId(void);
@@ -133,7 +133,7 @@ extern bool8 (* gFieldCallback2)(void);
 
 void SetLastHealLocationWarp(u8 healLocaionId);
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
-void sub_80568FC(void);
+void CB2_ReturnToFieldFromDiploma(void);
 void CB2_OverworldBasic(void);
 void CB2_NewGame(void);
 bool8 IsMapTypeOutdoors(u8 mapType);

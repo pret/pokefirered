@@ -1,6 +1,5 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include "global.h"
 #include "config.h"
 #include "gba/gba.h"
 

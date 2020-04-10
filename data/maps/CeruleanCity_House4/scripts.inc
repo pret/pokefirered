@@ -3,7 +3,7 @@ CeruleanCity_House4_MapScripts:: @ 816ACEE
 
 CeruleanCity_House4_EventScript_WonderNewsBerryMan:: @ 816ACEF
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	lock
 	specialvar VAR_0x8004, GetMENewsJisanItemAndState
 	copyvar VAR_0x8008, VAR_RESULT

@@ -1,8 +1,7 @@
 #include "global.h"
-#include "palette.h"
+#include "gflib.h"
 #include "util.h"
 #include "decompress.h"
-#include "gpu_regs.h"
 #include "task.h"
 
 enum

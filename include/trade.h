@@ -14,7 +14,7 @@ extern const u8 gText_GenderlessSymbol[];
 
 extern const u16 gUnknown_826601C[];
 void CB2_ReturnFromLinkTrade(void);
-s32 sub_804FB34(void);
+s32 Trade_CalcLinkPlayerCompatibilityParam(void);
 s32 CanRegisterMonForTradingBoard(struct GFtgtGnameSub rfuPlayer, u16 species2, u16 species, u8 isObedientBitSet);
 s32 GetUnionRoomTradeMessageId(struct GFtgtGnameSub rfuPlayer, struct GFtgtGnameSub rfuPartner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isObedientBitSet);
 

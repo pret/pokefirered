@@ -1,13 +1,11 @@
 #include "global.h"
+#include "gflib.h"
 #include "decompress.h"
-#include "dma3.h"
 #include "gba/flash_internal.h"
-#include "gpu_regs.h"
 #include "help_system.h"
 #include "m4a.h"
 #include "save.h"
 #include "strings.h"
-#include "text.h"
 
 bool32 sIsInSaveFailedScreen;
 

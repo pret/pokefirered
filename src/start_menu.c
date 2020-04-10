@@ -8,6 +8,7 @@
 #include "party_menu.h"
 #include "save.h"
 #include "link_rfu.h"
+#include "help_message.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "safari_zone.h"
@@ -390,7 +391,7 @@ void ShowStartMenu(void)
     if (!IsUpdateLinkStateCBActive())
     {
         FreezeObjectEvents();
-        sub_805C270();
+        HandleEnforcedLookDirectionOnPlayerStopMoving();
         StopPlayerAvatar();
     }
     OpenStartMenuWithFollowupFunc(Task_StartMenuHandleInput);
@@ -574,7 +575,7 @@ static bool8 StartCB_Save2(void)
         break;
     case SAVECB_RETURN_OKAY:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        sub_80696C0();
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
         ScriptContext2_Disable();
         RestoreHelpContext();
         return TRUE;
@@ -586,7 +587,7 @@ static bool8 StartCB_Save2(void)
         break;
     case SAVECB_RETURN_ERROR:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        sub_80696C0();
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
         ScriptContext2_Disable();
         RestoreHelpContext();
         return TRUE;
@@ -994,7 +995,7 @@ static void CloseStartMenu(void)
     PlaySE(SE_SELECT);
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
-    sub_80696C0();
+    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 

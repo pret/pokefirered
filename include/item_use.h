@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void sub_80A1E0C(u8);
+void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
 void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
 
 void FieldUseFunc_OrangeMail(u8 taskId);

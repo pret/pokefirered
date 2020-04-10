@@ -1,12 +1,9 @@
 #include "global.h"
-#include "bg.h"
+#include "gflib.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "strings.h"
 #include "text_window.h"
-#include "window.h"
-#include "sound.h"
-#include "palette.h"
 #include "constants/songs.h"
 
 struct Menu

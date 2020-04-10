@@ -179,7 +179,7 @@ u16 *GetVarPointer(u16 idx)
         return NULL;
     if (idx < SPECIAL_VARS_START)
     {
-        switch (gUnknown_3005E88)
+        switch (gQuestLogPlaybackState)
         {
         case 0:
         default:
@@ -250,7 +250,7 @@ u8 *GetFlagAddr(u16 idx)
         return NULL;
     if (idx < SPECIAL_FLAGS_START)
     {
-        switch (gUnknown_3005E88)
+        switch (gQuestLogPlaybackState)
         {
         case 0:
         default:

@@ -1,12 +1,11 @@
 #include "global.h"
+#include "gflib.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "sound.h"
-#include "sprite.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 

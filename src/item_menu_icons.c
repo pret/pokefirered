@@ -1,8 +1,8 @@
 #include "global.h"
+#include "gflib.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "item_menu_icons.h"
-#include "malloc.h"
 #include "constants/items.h"
 
 static EWRAM_DATA u8 sItemMenuIconSpriteIds[12] = {0};

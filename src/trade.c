@@ -53,7 +53,7 @@ struct TradeMenuResources
     /*0x007C*/ u8 filler_7C[0x7E - 0x7C];
     /*0x007E*/ u8 otherPlayerCursorPosition;
     /*0x0080*/ u16 linkData[20];
-    /*0x00A8*/ u8 loadUiSpritesState;
+    /*0x00A8*/ u8 loadUISpritesState;
     /*0x00A9*/ u8 giftRibbons[NUM_TRADED_GIFT_RIBBONS];
     /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
     /*0x08D0*/ struct {
@@ -83,13 +83,13 @@ EWRAM_DATA struct MailStruct gLinkPartnerMail[6] = {};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct TradeMenuResources * sTradeMenuResourcesPtr = NULL;
 
-static void sub_804C728(void);
+static void CB2_ReturnFromLinkTrade2(void);
 static void VblankCB_Trade(void);
 static void CB2_TradeMenu(void);
-static void sub_804D694(u8 state);
-static void sub_804D764(void);
+static void LoadTradeBackgroundGfxAndPals(u8 state);
+static void SetTradeMenuOptionActiveFlags(void);
 static u8 shedinja_maker_maybe(void);
-static void sub_804DFF0(void);
+static void CB1_HandleBlockReceive(void);
 static void RunTradeMenuCallback(void);
 static void SignalRedrawTradeMenus(u8 a0);
 static void HandleRedrawTradeMenuOnSide(u8 side);
@@ -99,21 +99,21 @@ static void PrintPartyNicknames(u8 side);
 static void PrintLevelAndGenderDirectlyOnVram(u8 a0, u8 partyIdx, u8 a2, u8 a3, u8 a4, u8 a5);
 static void PrintPartyLevelsAndGendersDirectlyOnVram(u8 side);
 static void PrintTradePartnerPartyNicknames(void);
-static void sub_804F3C8(u8 a0);
+static void RedrawPartyWindow(u8 a0);
 static void TradeMenuAction_Summary(u8 taskId);
 static void TradeMenuAction_Trade(u8 taskId);
 static void ScheduleLinkTaskWithDelay(u16 delay, u8 kind);
 static void RunScheduledLinkTasks(void);
 static void PrintTradeErrorOrStatusMessage(u8 strIdx);
-static bool8 sub_804F610(void);
+static bool8 LoadUISprites(void);
 static void RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 unused);
-static void sub_804F748(u8 side);
-static void sub_804F890(u8 side);
-static void sub_804F964(void);
+static void ComputePartyTradeableFlags(u8 side);
+static void ComputePartyHPBarLevels(u8 side);
+static void SetMonIconsAnimByHPBarLevel(void);
 static void CopyGiftRibbonsToSav1(void);
 static u32 TestWhetherSelectedMonCanBeTraded(struct Pokemon * party, int partyCount, int cursorPos);
 
-static const size_t gUnknown_8260814[] = {
+static const size_t sSizesAndOffsets[] = {
     sizeof(struct SaveBlock2),
     sizeof(struct SaveBlock1),
     sizeof(struct MapLayout),
@@ -671,7 +671,7 @@ static const u8 gUnknown_8262055[][2] = {
     {19,  3}
 };
 
-static void sub_804C600(void)
+static void InitTradeMenuResources(void)
 {
     int i;
     static vu16 dummy;
@@ -707,16 +707,16 @@ static void sub_804C600(void)
         sTradeMenuResourcesPtr->menuRedrawState[1] = 0;
         sTradeMenuResourcesPtr->unk_7A = 0;
         sTradeMenuResourcesPtr->unk_7B = 0;
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
     }
 }
 
 void CB2_ReturnFromLinkTrade(void)
 {
-    SetMainCallback2(sub_804C728);
+    SetMainCallback2(CB2_ReturnFromLinkTrade2);
 }
 
-static void sub_804C728(void)
+static void CB2_ReturnFromLinkTrade2(void)
 {
     int i;
     struct SpriteTemplate temp;
@@ -734,7 +734,7 @@ static void sub_804C728(void)
     {
     case 0:
         sTradeMenuResourcesPtr = AllocZeroed(sizeof(*sTradeMenuResourcesPtr));
-        sub_804C600();
+        InitTradeMenuResources();
         sSpriteTextTileBuffer = AllocZeroed(0xE00);
 
         for (i = 0; i < 14; i++)
@@ -758,7 +758,7 @@ static void sub_804C728(void)
         if (!gReceivedRemoteLinkPlayers)
         {
             gLinkType = 0x1122;
-            sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+            sTradeMenuResourcesPtr->loadUISpritesState = 0;
 
             if (gWirelessCommType)
             {
@@ -772,7 +772,7 @@ static void sub_804C728(void)
                 gMain.state++;
             }
             if (gWirelessCommType == 0)
-                CreateTask(sub_8081A90, 1);
+                CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 1);
         }
         else
         {
@@ -780,10 +780,10 @@ static void sub_804C728(void)
         }
         break;
     case 2:
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
-        if (sTradeMenuResourcesPtr->loadUiSpritesState > 11)
+        sTradeMenuResourcesPtr->loadUISpritesState++;
+        if (sTradeMenuResourcesPtr->loadUISpritesState > 11)
         {
-            sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+            sTradeMenuResourcesPtr->loadUISpritesState = 0;
             gMain.state++;
         }
         break;
@@ -792,7 +792,7 @@ static void sub_804C728(void)
         {
             if (IsLinkMaster())
             {
-                if (++sTradeMenuResourcesPtr->loadUiSpritesState > 30)
+                if (++sTradeMenuResourcesPtr->loadUISpritesState > 30)
                 {
                     CheckShouldAdvanceLinkState();
                     gMain.state++;
@@ -810,10 +810,10 @@ static void sub_804C728(void)
             LinkRfu_DestroyIdleTask();
             CalculatePlayerPartyCount();
             gMain.state++;
-            sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+            sTradeMenuResourcesPtr->loadUISpritesState = 0;
             if (gWirelessCommType)
             {
-                sub_80FA484(TRUE);
+                ToggleLMANlinkRecovery(TRUE);
                 PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             }
         }
@@ -888,10 +888,10 @@ static void sub_804C728(void)
         DrawTextWindowAndBufferTiles(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
         RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], sSpriteTextTilePtrs[8], 24);
         gMain.state++;
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
         break;
     case 11:
-        if (sub_804F610())
+        if (LoadUISprites())
             gMain.state++;
         break;
     case 12:
@@ -937,25 +937,25 @@ static void sub_804C728(void)
         rbox_fill_rectangle(0);
         break;
     case 14:
-        sub_804F748(0);
+        ComputePartyTradeableFlags(0);
         PrintPartyNicknames(0);
         sTradeMenuResourcesPtr->bg2hofs = 0;
         sTradeMenuResourcesPtr->bg3hofs = 0;
-        sub_804D764();
+        SetTradeMenuOptionActiveFlags();
         gMain.state++;
         PlayBGM(MUS_SLOT);
         break;
     case 15:
-        sub_804F748(1);
+        ComputePartyTradeableFlags(1);
         PrintPartyNicknames(1);
         gMain.state++;
         // fallthrough
     case 16:
-        sub_804D694(0);
+        LoadTradeBackgroundGfxAndPals(0);
         gMain.state++;
         break;
     case 17:
-        sub_804D694(1);
+        LoadTradeBackgroundGfxAndPals(1);
         gMain.state++;
         break;
     case 18:
@@ -964,22 +964,22 @@ static void sub_804C728(void)
         break;
     case 19:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-        sub_804D694(2);
+        LoadTradeBackgroundGfxAndPals(2);
         gMain.state++;
         break;
     case 20:
-        sub_804F890(0);
+        ComputePartyHPBarLevels(0);
         gMain.state++;
         break;
     case 21:
-        sub_804F890(1);
-        sub_804F964();
+        ComputePartyHPBarLevels(1);
+        SetMonIconsAnimByHPBarLevel();
         gMain.state++;
         break;
     case 22:
         if (!gPaletteFade.active)
         {
-            gMain.callback1 = sub_804DFF0;
+            gMain.callback1 = CB1_HandleBlockReceive;
             SetMainCallback2(CB2_TradeMenu);
         }
         break;
@@ -992,7 +992,7 @@ static void sub_804C728(void)
     UpdatePaletteFade();
 }
 
-void sub_804CF14(void)
+void CB2_ReturnToTradeMenuFromSummary(void)
 {
     int i;
     struct SpriteTemplate temp;
@@ -1009,12 +1009,12 @@ void sub_804CF14(void)
     switch (gMain.state)
     {
     case 0:
-        sub_804C600();
+        InitTradeMenuResources();
         gMain.state++;
         break;
     case 1:
         gMain.state++;
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
         break;
     case 2:
         gMain.state++;
@@ -1086,10 +1086,10 @@ void sub_804CF14(void)
         DrawTextWindowAndBufferTiles(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
         RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], sSpriteTextTilePtrs[8], 24);
         gMain.state++;
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
         break;
     case 11:
-        if (sub_804F610())
+        if (LoadUISprites())
         {
             gMain.state++;
         }
@@ -1140,14 +1140,14 @@ void sub_804CF14(void)
         gMain.state = 16;
         break;
     case 16:
-        sub_804D694(0);
+        LoadTradeBackgroundGfxAndPals(0);
         gMain.state++;
         break;
     case 17:
-        sub_804D694(1);
+        LoadTradeBackgroundGfxAndPals(1);
         sTradeMenuResourcesPtr->bg2hofs = 0;
         sTradeMenuResourcesPtr->bg3hofs = 0;
-        sub_804D764();
+        SetTradeMenuOptionActiveFlags();
         gMain.state++;
         break;
     case 18:
@@ -1158,14 +1158,14 @@ void sub_804CF14(void)
         break;
     case 19:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-        sub_804D694(2);
+        LoadTradeBackgroundGfxAndPals(2);
         gMain.state++;
         break;
     case 20:
         gMain.state++;
         break;
     case 21:
-        sub_804F964();
+        SetMonIconsAnimByHPBarLevel();
         gMain.state++;
         break;
     case 22:
@@ -1191,7 +1191,7 @@ static void VblankCB_Trade(void)
 
 static void TradeMenuCB_9(void)
 {
-    if (++sTradeMenuResourcesPtr->loadUiSpritesState >= 16)
+    if (++sTradeMenuResourcesPtr->loadUISpritesState >= 16)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sTradeMenuResourcesPtr->tradeMenuCBnum = 10;
@@ -1259,7 +1259,7 @@ static void CB2_TradeMenu(void)
     UpdatePaletteFade();
 }
 
-static void sub_804D694(u8 state)
+static void LoadTradeBackgroundGfxAndPals(u8 state)
 {
     int i;
 
@@ -1291,7 +1291,7 @@ static void sub_804D694(u8 state)
     }
 }
 
-static void sub_804D764(void)
+static void SetTradeMenuOptionActiveFlags(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1338,7 +1338,7 @@ static bool8 shedinja_maker_maybe(void)
     case 0:
         Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[0], 2 * sizeof(struct Pokemon));
         sTradeMenuResourcesPtr->state++;
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
         break;
     case 1:
         if (IsLinkTaskFinished())
@@ -1470,10 +1470,10 @@ static bool8 shedinja_maker_maybe(void)
     case 10:
     case 14:
     case 18:
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
-        if (sTradeMenuResourcesPtr->loadUiSpritesState > 10)
+        sTradeMenuResourcesPtr->loadUISpritesState++;
+        if (sTradeMenuResourcesPtr->loadUISpritesState > 10)
         {
-            sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+            sTradeMenuResourcesPtr->loadUISpritesState = 0;
             sTradeMenuResourcesPtr->state++;
         }
         break;
@@ -1481,14 +1481,14 @@ static bool8 shedinja_maker_maybe(void)
     return FALSE;
 }
 
-static void sub_804DBAC(void)
+static void PrintIsThisTradeOkay(void)
 {
-    RenderTextToVramViaBuffer(gUnknown_841E0A5, (u8 *)OBJ_VRAM0 + sTradeMenuResourcesPtr->cursorStartTile * 32, 0x18);
+    RenderTextToVramViaBuffer(gText_IsThisTradeOkay, (u8 *)OBJ_VRAM0 + sTradeMenuResourcesPtr->cursorStartTile * 32, 0x18);
 }
 
-static void sub_804DBD4(u8 a0, u8 a1)
+static void Master_HandleBlockReceivedStatus(u8 mpId, u8 blockReceivedFlags)
 {
-    if (a1 & 1)
+    if (blockReceivedFlags & 1)
     {
         switch (gBlockRecvBuffer[0][0])
         {
@@ -1508,7 +1508,7 @@ static void sub_804DBD4(u8 a0, u8 a1)
         ResetBlockReceivedFlag(0);
     }
 
-    if (a1 & 2)
+    if (blockReceivedFlags & 2)
     {
         switch (gBlockRecvBuffer[1][0])
         {
@@ -1530,9 +1530,9 @@ static void sub_804DBD4(u8 a0, u8 a1)
     }
 }
 
-static void sub_804DCF4(u8 a0, u8 a1)
+static void Slave_HandleBlockReceivedStatus(u8 mpId, u8 blockReceivedFlags)
 {
-    if (a1 & 1)
+    if (blockReceivedFlags & 1)
     {
         switch (gBlockRecvBuffer[0][0])
         {
@@ -1563,11 +1563,11 @@ static void sub_804DCF4(u8 a0, u8 a1)
         ResetBlockReceivedFlag(0);
     }
 
-    if (a1 & 2)
+    if (blockReceivedFlags & 2)
         ResetBlockReceivedFlag(1);
 }
 
-static void sub_804DDF0(void)
+static void Master_HandleCommunication(void)
 {
     if (sTradeMenuResourcesPtr->unk_78 && sTradeMenuResourcesPtr->unk_79)
     {
@@ -1635,22 +1635,22 @@ static void sub_804DDF0(void)
     }
 }
 
-static void sub_804DFF0(void)
+static void CB1_HandleBlockReceive(void)
 {
     u8 mpId = GetMultiplayerId();
     u8 status;
     if ((status = GetBlockReceivedStatus()))
     {
         if (mpId == 0)
-            sub_804DBD4(0, status);
+            Master_HandleBlockReceivedStatus(mpId, status);
         else
-            sub_804DCF4(mpId, status);
+            Slave_HandleBlockReceivedStatus(mpId, status);
     }
     if (mpId == 0)
-        sub_804DDF0();
+        Master_HandleCommunication();
 }
 
-static u8 sub_804E028(u8 oldPosition, u8 direction)
+static u8 TradeMenuGetNewCursorLocation(u8 oldPosition, u8 direction)
 {
     int i;
     u8 newPosition = 0;
@@ -1670,7 +1670,7 @@ static u8 sub_804E028(u8 oldPosition, u8 direction)
 
 static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
 {
-    u8 newPosition = sub_804E028(*tradeMenuCursorPosition, direction);
+    u8 newPosition = TradeMenuGetNewCursorLocation(*tradeMenuCursorPosition, direction);
 
     if (newPosition == 12) // CANCEL
     {
@@ -1693,7 +1693,7 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     *tradeMenuCursorPosition = newPosition;
 }
 
-static void sub_804E134(void)
+static void CommunicatePlayerSelectedMonForTrade(void)
 {
     PrintTradeErrorOrStatusMessage(TRADESTATMSG_COMMSTANDBY);
     sTradeMenuResourcesPtr->tradeMenuCBnum = 5;
@@ -1702,7 +1702,7 @@ static void sub_804E134(void)
     {
         sTradeMenuResourcesPtr->linkData[0] = 0xAABB;
         sTradeMenuResourcesPtr->linkData[1] = sTradeMenuResourcesPtr->tradeMenuCursorPosition;
-        SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 0x14);
+        SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
     }
     else
     {
@@ -1765,7 +1765,7 @@ static void TradeMenuCB_0(void)
     }
 }
 
-static void sub_804E330(void)
+static void RedrawChooseAPokemonWindow(void)
 {
     PrintTradePartnerPartyNicknames();
     sTradeMenuResourcesPtr->tradeMenuCBnum = 0;
@@ -1779,32 +1779,32 @@ static void TradeMenuCB_1(void)
     {
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        sub_804E330();
+        RedrawChooseAPokemonWindow();
         break;
     case MENU_NOTHING_CHOSEN:
         break;
-    case 0:
+    case 0: // SUMMARY
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sTradeMenuResourcesPtr->tradeMenuCBnum = 2;
         break;
-    case 1:
+    case 1: // Trade
         switch (TestWhetherSelectedMonCanBeTraded(gPlayerParty, gPlayerPartyCount, sTradeMenuResourcesPtr->tradeMenuCursorPosition))
         {
-        case 0:
-            sub_804E134();
+        case 0: // Can trade
+            CommunicatePlayerSelectedMonForTrade();
             gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].invisible = TRUE;
             break;
-        case 1:
+        case 1: // Don't have enough alive mons
             ScheduleLinkTaskWithDelay(3, 3);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 8;
             break;
-        case 2:
-        case 4:
+        case 2: // Player lacks national dex
+        case 4: // Partner lacks national dex
             ScheduleLinkTaskWithDelay(3, 6);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 8;
             break;
-        case 3:
-        case 5:
+        case 3: // Player lacks national dex (egg)
+        case 5: // Partner lacks national dex (egg)
             ScheduleLinkTaskWithDelay(3, 7);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 8;
             break;
@@ -1818,7 +1818,7 @@ static void TradeMenuCB_15(void)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_804E330();
+        RedrawChooseAPokemonWindow();
     }
 }
 
@@ -1827,9 +1827,9 @@ static void TradeMenuCB_2(void)
     if (!gPaletteFade.active)
     {
         if (sTradeMenuResourcesPtr->tradeMenuCursorPosition < 6)
-            ShowPokemonSummaryScreen(gPlayerParty, sTradeMenuResourcesPtr->tradeMenuCursorPosition, sTradeMenuResourcesPtr->partyCounts[0] - 1, sub_804CF14, 4);
+            ShowPokemonSummaryScreen(gPlayerParty, sTradeMenuResourcesPtr->tradeMenuCursorPosition, sTradeMenuResourcesPtr->partyCounts[0] - 1, CB2_ReturnToTradeMenuFromSummary, 4);
         else
-            ShowPokemonSummaryScreen(gEnemyParty, sTradeMenuResourcesPtr->tradeMenuCursorPosition - 6, sTradeMenuResourcesPtr->partyCounts[1] - 1, sub_804CF14, 4);
+            ShowPokemonSummaryScreen(gEnemyParty, sTradeMenuResourcesPtr->tradeMenuCursorPosition - 6, sTradeMenuResourcesPtr->partyCounts[1] - 1, CB2_ReturnToTradeMenuFromSummary, 4);
         FreeAllWindowBuffers();
     }
 }
@@ -1908,7 +1908,7 @@ static void TradeMenuCB_3(void)
     }
 }
 
-static void sub_804E6FC(void)
+static void CommitWindows(void)
 {
     int i;
 
@@ -1930,12 +1930,12 @@ static void TradeMenuCB_4(void)
         ScheduleLinkTaskWithDelay(5, 0);
         gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].invisible = TRUE;
         sTradeMenuResourcesPtr->tradeMenuCBnum = 100;
-        sub_804E6FC();
+        CommitWindows();
         break;
     case 1:
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        sub_804E330();
+        RedrawChooseAPokemonWindow();
         break;
     }
 }
@@ -1955,19 +1955,19 @@ static void TradeMenuCB_7(void)
 {
     if (sTradeMenuResourcesPtr->menuRedrawState[0] == 5 && sTradeMenuResourcesPtr->menuRedrawState[1] == 5)
     {
-        sub_804DBAC();
+        PrintIsThisTradeOkay();
         sTradeMenuResourcesPtr->tradeMenuCBnum = 14;
     }
 }
 
 static void TradeMenuCB_14(void)
 {
-    sTradeMenuResourcesPtr->loadUiSpritesState++;
+    sTradeMenuResourcesPtr->loadUISpritesState++;
 
-    if (sTradeMenuResourcesPtr->loadUiSpritesState > 120)
+    if (sTradeMenuResourcesPtr->loadUISpritesState > 120)
     {
         CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 1, 14, 0);
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
         sTradeMenuResourcesPtr->tradeMenuCBnum = 3;
     }
 }
@@ -1988,8 +1988,8 @@ static void TradeMenuCB_8(void)
             rbox_fill_rectangle(i + 14);
         }
 
-        sub_804F3C8(0);
-        sub_804F3C8(1);
+        RedrawPartyWindow(0);
+        RedrawPartyWindow(1);
         sTradeMenuResourcesPtr->tradeMenuCBnum = 0;
         gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].invisible = FALSE;
     }
@@ -2039,7 +2039,7 @@ static void TradeMenuCB_12(void)
 
 static void TradeMenuCB_16(void)
 {
-    if (!sub_80FA484(FALSE))
+    if (!ToggleLMANlinkRecovery(FALSE))
     {
         PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         sTradeMenuResourcesPtr->tradeMenuCBnum = 13;
@@ -2064,6 +2064,9 @@ static void RunTradeMenuCallback(void)
         break;
     case 4:
         TradeMenuCB_4();
+        break;
+    case 5:
+        // nop
         break;
     case 6:
         TradeMenuCB_6();
@@ -2147,7 +2150,7 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[4] = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
         StoreSpriteCallbackInData6(&gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]], SpriteCB_MonIcon);
         sTradeMenuResourcesPtr->menuRedrawState[side]++;
-        sub_8075490(&gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]]);
+        StartSpriteLinearTranslationFromCurrentPos(&gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]]);
         CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, side * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(0);
@@ -2362,7 +2365,7 @@ static void PrintTradePartnerPartyNicknames(void)
     PrintPartyNicknames(1);
 }
 
-static void sub_804F3C8(u8 whichParty)
+static void RedrawPartyWindow(u8 whichParty)
 {
     CopyToBgTilemapBufferRect_ChangePalette(1, sTradePartyBoxTilemap, 15 * whichParty, 0, 15, 17, 0);
     CopyBgTilemapBufferToVram(1);
@@ -2455,45 +2458,45 @@ static void PrintTradeErrorOrStatusMessage(u8 idx)
     CopyWindowToVram(0, 3);
 }
 
-static bool8 sub_804F610(void)
+static bool8 LoadUISprites(void)
 {
     struct SpriteSheet sheet;
 
-    if (sTradeMenuResourcesPtr->loadUiSpritesState < 14)
+    if (sTradeMenuResourcesPtr->loadUISpritesState < 14)
     {
-        sheet.data = sSpriteTextTilePtrs[sTradeMenuResourcesPtr->loadUiSpritesState];
+        sheet.data = sSpriteTextTilePtrs[sTradeMenuResourcesPtr->loadUISpritesState];
         sheet.size = 0x100;
-        sheet.tag = 200 + sTradeMenuResourcesPtr->loadUiSpritesState;
+        sheet.tag = 200 + sTradeMenuResourcesPtr->loadUISpritesState;
     }
 
-    switch (sTradeMenuResourcesPtr->loadUiSpritesState)
+    switch (sTradeMenuResourcesPtr->loadUISpritesState)
     {
     case 0 ... 7:
         LoadSpriteSheet(&sheet);
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
+        sTradeMenuResourcesPtr->loadUISpritesState++;
         break;
     case 8:
         sTradeMenuResourcesPtr->cursorStartTile = LoadSpriteSheet(&sheet);
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
+        sTradeMenuResourcesPtr->loadUISpritesState++;
         break;
     case 9 ... 13:
         LoadSpriteSheet(&sheet);
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
+        sTradeMenuResourcesPtr->loadUISpritesState++;
         break;
     case 14:
         LoadSpritePalette(&sSpritePalette_Text);
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
+        sTradeMenuResourcesPtr->loadUISpritesState++;
         break;
     case 15:
         LoadSpritePalette(&sTradeButtons_SpritePal);
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
+        sTradeMenuResourcesPtr->loadUISpritesState++;
         break;
     case 16:
         LoadSpriteSheet(&sTradeButtons_SpriteSheet);
-        sTradeMenuResourcesPtr->loadUiSpritesState++;
+        sTradeMenuResourcesPtr->loadUISpritesState++;
         break;
     case 17:
-        sTradeMenuResourcesPtr->loadUiSpritesState = 0;
+        sTradeMenuResourcesPtr->loadUISpritesState = 0;
         return TRUE;
     }
 
@@ -2505,7 +2508,7 @@ static void RenderTextToVramViaBuffer(const u8 *name, u8 *dest, u8 unused)
     DrawTextWindowAndBufferTiles(name, dest, 0, 0, gDecompressionBuffer, 6);
 }
 
-static void sub_804F748(u8 who)
+static void ComputePartyTradeableFlags(u8 who)
 {
     int i;
 
@@ -2554,7 +2557,7 @@ static void sub_804F748(u8 who)
     }
 }
 
-static void sub_804F890(u8 who)
+static void ComputePartyHPBarLevels(u8 who)
 {
     u16 i, curHp, maxHp;
 
@@ -2579,7 +2582,7 @@ static void sub_804F890(u8 who)
     }
 }
 
-static void sub_804F964(void)
+static void SetMonIconsAnimByHPBarLevel(void)
 {
     int i, j;
     for (i = 0; i < 2; i++)
@@ -2678,7 +2681,7 @@ static u32 TestWhetherSelectedMonCanBeTraded(struct Pokemon * party, int partyCo
     }
 }
 
-s32 sub_804FB34(void)
+s32 Trade_CalcLinkPlayerCompatibilityParam(void)
 {
     s32 val;
     u16 version;

@@ -1452,7 +1452,7 @@ bool32 RfuSerialNumberIsValid(u32 serialNo)
     return TRUE;
 }
 
-u8 sub_80FA484(bool32 a0)
+u8 ToggleLMANlinkRecovery(bool32 a0)
 {
     if (!a0)
         return rfu_LMAN_setLinkRecovery(0, 0);

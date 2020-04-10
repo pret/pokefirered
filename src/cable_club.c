@@ -532,7 +532,7 @@ static void Task_ReestablishLinkInCableClubRoom_0(u8 taskId)
     {
         OpenLink();
         ResetLinkPlayers();
-        CreateTask(sub_8081A90, 80);
+        CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 80);
     }
     else if (data[0] > 9)
         gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_1;
@@ -934,7 +934,7 @@ bool32 GetSeeingLinkPlayerCardMsg(u8 who)
     return TRUE;
 }
 
-void sub_8081A90(u8 taskId)
+void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     task->data[0]++;

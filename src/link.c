@@ -809,7 +809,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             {
                 if (gLinkPlayers[0].linkType == 0x1133)
                 {
-                    switch (sub_804FB34())
+                    switch (Trade_CalcLinkPlayerCompatibilityParam())
                     {
                     case 0:
                         sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;

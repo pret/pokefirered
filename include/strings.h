@@ -838,7 +838,7 @@ extern const u8 gText_SixIsland[];
 extern const u8 gText_SevenIsland[];
 
 // trade
-extern const u8 gUnknown_841E0A5[];
+extern const u8 gText_IsThisTradeOkay[];
 extern const u8 gText_XWillBeSentToY[];
 extern const u8 gText_ByeByeVar1[];
 extern const u8 gText_XSentOverY[];

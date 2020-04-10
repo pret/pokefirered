@@ -219,7 +219,7 @@ bool32 IsRfuRecvQueueEmpty(void);
 u32 GetRfuRecvQueueLength(void);
 void LinkRfu_Shutdown(void);
 void LinkRfu_CreateIdleTask(void);
-bool8 sub_80FA484(bool32 a0);
+bool8 ToggleLMANlinkRecovery(bool32 a0);
 void var_800D_set_xB(void);
 struct GFtgtGname *GetHostRFUtgtGname(void);
 void UpdateWirelessStatusIndicatorSprite(void);

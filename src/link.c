@@ -1656,7 +1656,7 @@ bool8 HandleLinkConnection(void)
     {
         gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
         LinkMain2(&gMain.heldKeys);
-        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && sub_8058318() == TRUE)
+        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && IsSendingKeysOverCable() == TRUE)
         {
             return TRUE;
         }
@@ -1665,7 +1665,7 @@ bool8 HandleLinkConnection(void)
     {
         r4 = LinkRfuMain1();
         r5 = LinkRfuMain2();
-        if (sub_8058318() == TRUE)
+        if (IsSendingKeysOverCable() == TRUE)
         {
             if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
             {

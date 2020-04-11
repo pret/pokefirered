@@ -3192,7 +3192,7 @@ bool32 Overworld_LinkRecvQueueLengthMoreThan2(void)
     return sReceivingFromLink;
 }
 
-bool32 sub_8058274(void)
+bool32 Overworld_RecvKeysFromLinkIsRunning(void)
 {
     u8 temp;
 
@@ -3218,7 +3218,7 @@ bool32 sub_8058274(void)
         return FALSE;
 }
 
-bool32 sub_80582E0(void)
+bool32 Overworld_SendKeysToLinkIsRunning(void)
 {
     if (GetLinkSendQueueLength() < 2)
         return FALSE;
@@ -3232,7 +3232,7 @@ bool32 sub_80582E0(void)
         return FALSE;
 }
 
-bool32 sub_8058318(void)
+bool32 IsSendingKeysOverCable(void)
 {
     if (gWirelessCommType != 0)
         return FALSE;
@@ -3298,17 +3298,17 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     ObjectEventUpdateZCoord(objEvent);
 }
 
-static void sub_8058488(u8 linkPlayerId, u8 a2)
+static void SetLinkPlayerObjectRange(u8 linkPlayerId, u8 range)
 {
     if (gLinkPlayerObjectEvents[linkPlayerId].active)
     {
         u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
         struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-        objEvent->range.as_byte = a2;
+        objEvent->range.as_byte = range;
     }
 }
 
-static void sub_80584B8(u8 linkPlayerId)
+static void DestroyLinkPlayerOBject(u8 linkPlayerId)
 {
     struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
     u8 objEventId = linkPlayerObjEvent->objEventId;
@@ -3349,7 +3349,7 @@ static u8 GetLinkPlayerElevation(u8 linkPlayerId)
     return objEvent->currentElevation;
 }
 
-static s32 sub_8058590(u8 linkPlayerId)
+static s32 GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
 {
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];

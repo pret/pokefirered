@@ -23,6 +23,7 @@ PalletTown_PlayersHouse_2F_FirstWarpIn:: @ 8168CC8
 
 PalletTown_PlayersHouse_2F_EventScript_NES:: @ 8168CD2
 	msgbox PalletTown_PlayersHouse_2F_Text_PlayedWithNES, MSGBOX_SIGN
+	giveitem_msg PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM48
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_Sign:: @ 8168CDB

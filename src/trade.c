@@ -1233,7 +1233,7 @@ static void TradeMenuCB_13(void)
     }
     else
     {
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             Free(sSpriteTextTileBuffer);
             FreeAllWindowBuffers();
@@ -2686,7 +2686,7 @@ s32 Trade_CalcLinkPlayerCompatibilityParam(void)
     s32 val;
     u16 version;
 
-    if (gReceivedRemoteLinkPlayers != 0)
+    if (gReceivedRemoteLinkPlayers)
     {
         val = 0;
         version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);

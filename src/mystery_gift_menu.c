@@ -1252,7 +1252,7 @@ void task00_mystery_gift(u8 taskId)
         data->state = 6;
         break;
     case  6:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(TRUE);
             data->state = 7;
@@ -1600,7 +1600,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 30:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(1);
             data->state = 31;

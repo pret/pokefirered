@@ -3544,7 +3544,7 @@ static void BT_GenerateCircle(s16 *buffer, s16 x, s16 y, s16 radius)
     s16 i;
 
     memset(buffer, 0xA, 320);
-    // 64 iterations because we only want to cover [0, π/2) discretely. 
+    // 64 iterations because we only want to cover [0, π/2) discretely.
     for (i = 0; i < 64; ++i)
     {
         s16 sinResult, cosResult, leftX, topY, bottomY, nextTopY, nextBottomY, winVal;

@@ -668,7 +668,7 @@ static void Task_ReturnFromLinkRoomWarp(u8 taskId)
         }
         break;
     case 2:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);

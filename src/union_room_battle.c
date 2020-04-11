@@ -190,7 +190,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 6:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gMain.state++;
         }
@@ -202,7 +202,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 8:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gMain.state++;
         }

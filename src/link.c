@@ -380,7 +380,7 @@ void OpenLink(void)
     {
         sub_80F86F4();
     }
-    gReceivedRemoteLinkPlayers = 0;
+    gReceivedRemoteLinkPlayers = FALSE;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gRemoteLinkPlayersNotReceived[i] = TRUE;
@@ -515,9 +515,9 @@ void HandleReceiveRemoteLinkPlayer(u8 who)
     {
         count += gRemoteLinkPlayersNotReceived[i];
     }
-    if (count == 0 && gReceivedRemoteLinkPlayers == 0)
+    if (count == 0 && !gReceivedRemoteLinkPlayers)
     {
-        gReceivedRemoteLinkPlayers = 1;
+        gReceivedRemoteLinkPlayers = TRUE;
     }
 }
 
@@ -1678,7 +1678,7 @@ bool8 HandleLinkConnection(void)
 
 void SetWirelessCommType1(void)
 {
-    if (gReceivedRemoteLinkPlayers == 0)
+    if (!gReceivedRemoteLinkPlayers)
     {
         gWirelessCommType = 1;
     }
@@ -1686,7 +1686,7 @@ void SetWirelessCommType1(void)
 
 static void SetWirelessCommType0(void)
 {
-    if (gReceivedRemoteLinkPlayers == 0)
+    if (!gReceivedRemoteLinkPlayers)
     {
         gWirelessCommType = 0;
     }
@@ -1694,7 +1694,7 @@ static void SetWirelessCommType0(void)
 
 void SetWirelessCommType0_UnusedCopy(void)
 {
-    if (gReceivedRemoteLinkPlayers == 0)
+    if (!gReceivedRemoteLinkPlayers)
     {
         gWirelessCommType = 0;
     }

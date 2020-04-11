@@ -543,7 +543,7 @@ static void ChatEntryRoutine_AskQuitChatting(void)
         }
         break;
     case 5:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             GoToRoutine(CHATENTRYROUTINE_SAVEANDEXIT);
         }

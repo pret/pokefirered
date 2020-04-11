@@ -1765,7 +1765,7 @@ static bool8 Task_DrawFlippedCardSide(struct Task* task)
             return FALSE;
         }
         sTrainerCardDataPtr->flipDrawState++;
-    } while (gReceivedRemoteLinkPlayers == 0);
+    } while (!gReceivedRemoteLinkPlayers);
 
     return FALSE;
 }

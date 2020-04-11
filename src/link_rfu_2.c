@@ -712,7 +712,7 @@ static bool32 sub_80F911C(void)
                     if (!lman.acceptSlot_flag)
                     {
                         LinkRfu_Shutdown();
-                        gReceivedRemoteLinkPlayers = 0;
+                        gReceivedRemoteLinkPlayers = FALSE;
                         return FALSE;
                     }
                 }
@@ -985,7 +985,7 @@ static void RfuHandleReceiveCommand(u8 unused)
         switch (gRecvCmds[i][0] & 0xff00)
         {
         case RFU_COMMAND_0x7800:
-            if (Rfu.parent_child == MODE_CHILD && gReceivedRemoteLinkPlayers != 0)
+            if (Rfu.parent_child == MODE_CHILD && gReceivedRemoteLinkPlayers)
                 return;
             // fallthrough
         case RFU_COMMAND_0x7700:
@@ -1017,7 +1017,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 {
                     Rfu.cmd_8800_recvbuf[i].receiving = 2;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers != 0 && Rfu.parent_child == MODE_CHILD)
+                    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers && Rfu.parent_child == MODE_CHILD)
                         ValidateAndReceivePokemonSioInfo(gBlockRecvBuffer);
                 }
             }
@@ -1035,11 +1035,11 @@ static void RfuHandleReceiveCommand(u8 unused)
         case RFU_COMMAND_0xed00:
             if (Rfu.parent_child == MODE_CHILD)
             {
-                if (gReceivedRemoteLinkPlayers != 0)
+                if (gReceivedRemoteLinkPlayers)
                 {
                     if (gRecvCmds[i][1] & gRfuLinkStatus->connSlotFlag)
                     {
-                        gReceivedRemoteLinkPlayers = 0;
+                        gReceivedRemoteLinkPlayers = FALSE;
                         rfu_LMAN_requestChangeAgbClockMaster();
                         Rfu.unk_ce4 = gRecvCmds[i][2];
                     }
@@ -1283,7 +1283,7 @@ static void RfuFunc_End5F00_PowerDownRfu(void)
 {
     rfu_clearAllSlot();
     rfu_LMAN_powerDownRFU();
-    gReceivedRemoteLinkPlayers = 0;
+    gReceivedRemoteLinkPlayers = FALSE;
     Rfu.isShuttingDown = TRUE;
     Rfu.RfuFunc = NULL;
 }
@@ -1682,7 +1682,7 @@ static void sub_80FA834(u8 taskId)
         break;
     case 6:
         DestroyTask(taskId);
-        gReceivedRemoteLinkPlayers = 1;
+        gReceivedRemoteLinkPlayers = TRUE;
         Rfu.unk_ce8 = FALSE;
         rfu_LMAN_setLinkRecovery(1, 600);
         if (Rfu.unionRoomChatters)
@@ -1836,7 +1836,7 @@ static void sub_80FACF0(u8 taskId)
         {
             ReceiveRfuLinkPlayers((const struct SioInfo *)gBlockRecvBuffer);
             ResetBlockReceivedFlag(0);
-            gReceivedRemoteLinkPlayers = 1;
+            gReceivedRemoteLinkPlayers = TRUE;
             DestroyTask(taskId);
         }
         break;

@@ -1034,7 +1034,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         else
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 UpdateGameData_GroupLockedIn(TRUE);
                 CreateTask_RunScriptAndFadeToActivity();
@@ -1385,7 +1385,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         }
         break;
     case 6:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             sPlayerCurrActivity = data->field_0->arr[data->leaderId].gname_uname.gname.activity;
             RfuSetErrorStatus(0, 0);
@@ -2233,7 +2233,7 @@ static void Task_MEvent_Leader(u8 taskId)
         {
             data->state = 13;
         }
-        else if (gReceivedRemoteLinkPlayers != 0)
+        else if (gReceivedRemoteLinkPlayers)
         {
             UpdateGameData_GroupLockedIn(TRUE);
             data->state++;
@@ -2365,7 +2365,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         data->state = 5;
         break;
     case 5:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             sPlayerCurrActivity = data->field_0->arr[data->leaderId].gname_uname.gname.activity;
             data->state = 10;
@@ -2530,7 +2530,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         data->state = 5;
         break;
     case 5:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             sPlayerCurrActivity = data->field_0->arr[data->leaderId].gname_uname.gname.activity;
             data->state = 12;
@@ -2855,7 +2855,7 @@ static void Task_RunUnionRoom(u8 taskId)
             break;
         }
 
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
             CreateTask(Task_ExchangeCards, 5);
@@ -2872,7 +2872,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case 30:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             HandleCancelTrade(FALSE);
             UpdateUnionGroupMemberFacing(taskData[0], taskData[1], data->field_0);
@@ -2888,7 +2888,7 @@ static void Task_RunUnionRoom(u8 taskId)
         var5 = ListMenuHandler_AllItemsAvailable(&data->textState, &data->topListMenuWindowId, &data->topListMenuListMenuId, &sWindowTemplate_InviteToActivity, &sListMenuTemplate_InviteToActivity);
         if (var5 != -1)
         {
-            if (gReceivedRemoteLinkPlayers == 0)
+            if (!gReceivedRemoteLinkPlayers)
             {
                 data->state = 28;
             }
@@ -2947,7 +2947,7 @@ static void Task_RunUnionRoom(u8 taskId)
         data->state = 29;
         break;
     case 29:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             StringCopy(gStringVar4, gUnknown_8458434);
             data->state = 28;
@@ -3064,7 +3064,7 @@ static void Task_RunUnionRoom(u8 taskId)
             else
                 UnionRoom_ScheduleFieldMessageWithFollowupState(30, gUnknown_84585E8[playerGender]);
         }
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
             data->state = 16;
         break;
     case 11:
@@ -3079,7 +3079,7 @@ static void Task_RunUnionRoom(u8 taskId)
             HandleCancelTrade(FALSE);
             data->state = 2;
         }
-        else if (gReceivedRemoteLinkPlayers != 0)
+        else if (gReceivedRemoteLinkPlayers)
         {
             CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
             CreateTask(Task_ExchangeCards, 5);
@@ -3168,7 +3168,7 @@ static void Task_RunUnionRoom(u8 taskId)
         break;
     case 36:
         // You said no
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             sPlayerCurrActivity = IN_UNION_ROOM;
             UnionRoom_ScheduleFieldMessageWithFollowupState(37, gStringVar4);

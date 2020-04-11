@@ -1,6 +1,18 @@
 #ifndef GUARD_BERRY_CRUSH_H
 #define GUARD_BERRY_CRUSH_H
 
+enum {
+    BCTEXT_AREYOUREADY,
+    BCTEXT_WAITFOROTHERS,
+    BCTEXT_GAINEDPOWDER,
+    BCTEXT_RECORDINGRESULTS,
+    BCTEXT_ASKPLAYAGAIN,
+    BCTEXT_CANCEL_NOBERRIES,
+    BCTEXT_CANCEL_DROPPEDOUT,
+    BCTEXT_TIMEUP,
+    BCTEXT_COMMSTANDBY,
+};
+
 struct BerryCrushGame_Player
 {
     u16 unk0;
@@ -68,7 +80,7 @@ union BerryCrushGame_68
     struct BerryCrushGame_68_y
     {
         u8 filler00[28];
-        struct BerryCrushGame_Player unk1C[5];
+        struct BerryCrushGame_Player players[5];
         u8 fillerBC[20];
     } as_five_players;
 };
@@ -107,16 +119,16 @@ struct BerryCrushGame_138
 
 struct BerryCrushGame
 {
-    MainCallback unk0;
-    u32 (*unk4)(struct BerryCrushGame *, u8 *);
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
+    MainCallback savedCallback;
+    u32 (*cmdCallback)(struct BerryCrushGame *, u8 *);
+    u8 localId;
+    u8 playerCount;
+    u8 taskId;
     u8 textSpeed;
-    u8 unkC;
+    u8 cmdState;
     u8 unkD;
-    u8 unkE;
-    u8 unkF;
+    u8 nextCmd;
+    u8 afterPalFadeCmd;
     u16 unk10;
     u16 unk12;
     u16 unk14;
@@ -140,36 +152,35 @@ struct BerryCrushGame
     s16 unk30;
     s16 unk32;
     s16 unk34;
-    u8 unk36[0xA];
+    u8 commandParams[10];
     struct BerryCrushGame_40 unk40;
     struct BerryCrushGame_5C unk5C;
     union BerryCrushGame_68 unk68;
     struct BerryCrushGame_138 unk138;
-    u8 unk1C0[0x1000];
+    u8 bg1Buffer[0x1000];
     u8 unk11C0[0x1000];
-    u8 unk21C0[0x1000];
-    u8 unk31C0[0x1000];
+    u8 bg2Buffer[0x1000];
+    u8 bg3Buffer[0x1000];
 };
 
-#define PLAYER_UNK14(game, i)                        \
+#define BERRYCRUSH_PLAYER_NAME(game, i)                        \
     ((u8 *)(game)                                    \
     + offsetof(struct BerryCrushGame, unk68)         \
     + offsetof(struct BerryCrushGame_68_x, unk30)    \
     + sizeof(struct BerryCrushGame_Player) * (i))
 
-struct BerryCrushGame *sub_814B6F0(void);
+struct BerryCrushGame *GetBerryCrushGame(void);
 void StartBerryCrush(MainCallback callback);
-u32 sub_814B6FC(MainCallback callback);
-void sub_814B8F0(void);
-void sub_814B914(void);
-void sub_814B924(void);
+u32 ExitBerryCrushWithCallback(MainCallback callback);
+void CB2_BerryCrush_GoToBerryPouch(void);
+void BerryCrush_SetVBlankCallback(void);
+void BerryCrush_UnsetVBlankCallback(void);
 void sub_814B930(void);
-void sub_814BABC(struct BerryCrushGame *arg0);
-void sub_814BB4C(u16, u8, u8 *);
-void sub_814D564(u8 *, u32, s32, u32, u32, u32, u32);
+void BerryCrush_RunOrScheduleCommand(u16 command, u8 runMode, u8 *params);
+void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, u32 selectedPals, s8 delay, u8 startY, u8 targetY, u16 palette);
 int sub_814D9CC(struct BerryCrushGame *arg0);
-int sub_814D5C8(void);
-int sub_814D888(void);
+int BerryCrush_InitBgs(void);
+int BerryCrush_TeardownBgs(void);
 void sub_814DA24(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
 void sub_814DC24(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
 void sub_814DC5C(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);

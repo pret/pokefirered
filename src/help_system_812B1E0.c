@@ -1880,7 +1880,7 @@ bool8 HelpSystem_UpdateHasntSeenIntro(void)
 
 bool8 sub_812B45C(void)
 {
-    if (gReceivedRemoteLinkPlayers == 1)
+    if (gReceivedRemoteLinkPlayers == TRUE)
         return FALSE;
     return TRUE;
 }

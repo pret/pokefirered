@@ -9,7 +9,7 @@ VictoryRoad_2F_EventScript_DoubleEdgeTutor:: @ 81C47AE
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DoubleEdgeDeclined
 	msgbox Text_DoubleEdgeWhichMon
-	setvar VAR_0x8005, MOVETUTOR_DOUBLE_EDGE
+	setvar VAR_0x8005, MOVE_DOUBLE_EDGE
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_DoubleEdgeDeclined
@@ -38,7 +38,7 @@ EventScript_ThunderWaveTutor:: @ 81C4816
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_ThunderWaveDeclined
 	msgbox Text_ThunderWaveWhichMon
-	setvar VAR_0x8005, MOVETUTOR_THUNDER_WAVE
+	setvar VAR_0x8005, MOVE_THUNDER_WAVE
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_ThunderWaveDeclined
@@ -67,7 +67,7 @@ RockTunnel_B1F_EventScript_RockSlideTutor:: @ 81C487E
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_RockSlideDeclined
 	msgbox Text_RockSlideWhichMon
-	setvar VAR_0x8005, MOVETUTOR_ROCK_SLIDE
+	setvar VAR_0x8005, MOVE_ROCK_SLIDE
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_RockSlideDeclined
@@ -96,7 +96,7 @@ MtEmber_Exterior_EventScript_ExplosionTutor:: @ 81C48E6
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_ExplosionDeclined
 	msgbox Text_ExplosionWhichMon
-	setvar VAR_0x8005, MOVETUTOR_EXPLOSION
+	setvar VAR_0x8005, MOVE_EXPLOSION
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_ExplosionDeclined
@@ -125,7 +125,7 @@ Route4_EventScript_MegaPunchTutor:: @ 81C494E
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_MegaPunchDeclined
 	msgbox Text_MegaPunchWhichMon
-	setvar VAR_0x8005, MOVETUTOR_MEGA_PUNCH
+	setvar VAR_0x8005, MOVE_MEGA_PUNCH
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_MegaPunchDeclined
@@ -154,7 +154,7 @@ Route4_EventScript_MegaKickTutor:: @ 81C49B6
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_MegaKickDeclined
 	msgbox Text_MegaKickWhichMon
-	setvar VAR_0x8005, MOVETUTOR_MEGA_KICK
+	setvar VAR_0x8005, MOVE_MEGA_KICK
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_MegaKickDeclined
@@ -183,7 +183,7 @@ EventScript_DreamEaterTutor:: @ 81C4A1E
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DreamEaterDeclined
 	msgbox Text_DreamEaterWhichMon
-	setvar VAR_0x8005, MOVETUTOR_DREAM_EATER
+	setvar VAR_0x8005, MOVE_DREAM_EATER
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_DreamEaterDeclined
@@ -212,7 +212,7 @@ EventScript_SoftboiledTutor:: @ 81C4A86
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_SoftboiledDeclined
 	msgbox Text_SoftboiledWhichMon
-	setvar VAR_0x8005, MOVETUTOR_SOFT_BOILED
+	setvar VAR_0x8005, MOVE_SOFT_BOILED
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SoftboiledDeclined
@@ -241,7 +241,7 @@ FuchsiaCity_EventScript_SubstituteTutor:: @ 81C4AEE
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_SubstituteDeclined
 	msgbox Text_SubstituteWhichMon
-	setvar VAR_0x8005, MOVETUTOR_SUBSTITUTE
+	setvar VAR_0x8005, MOVE_SUBSTITUTE
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SubstituteDeclined
@@ -270,7 +270,7 @@ SevenIsland_EventScript_SwordsDanceTutor:: @ 81C4B56
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_SwordsDanceDeclined
 	msgbox Text_SwordsDanceWhichMon
-	setvar VAR_0x8005, MOVETUTOR_SWORDS_DANCE
+	setvar VAR_0x8005, MOVE_SWORDS_DANCE
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SwordsDanceDeclined
@@ -299,7 +299,7 @@ PewterCity_Museum_1F_EventScript_SeismicTossTutor:: @ 81C4BBE
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_SeismicTossDeclined
 	msgbox Text_SeismicTossWhichMon
-	setvar VAR_0x8005, MOVETUTOR_SEISMIC_TOSS
+	setvar VAR_0x8005, MOVE_SEISMIC_TOSS
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SeismicTossDeclined
@@ -328,7 +328,7 @@ EventScript_CounterTutor:: @ 81C4C26
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CounterDeclined
 	msgbox Text_CounterWhichMon
-	setvar VAR_0x8005, MOVETUTOR_COUNTER
+	setvar VAR_0x8005, MOVE_COUNTER
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_CounterDeclined
@@ -357,7 +357,7 @@ EventScript_MetronomeTutor:: @ 81C4C8E
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_MetronomeDeclined
 	msgbox Text_MetronomeWhichMon
-	setvar VAR_0x8005, MOVETUTOR_METRONOME
+	setvar VAR_0x8005, MOVE_METRONOME
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_MetronomeDeclined
@@ -384,7 +384,7 @@ EventScript_MimicTutor:: @ 81C4CF6
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_MimicDeclined
 	msgbox Text_MimicWhichMon
-	setvar VAR_0x8005, MOVETUTOR_MIMIC
+	setvar VAR_0x8005, MOVE_MIMIC
 	call EventScript_ChooseMoveTutorMon
 	lock
 	faceplayer
@@ -428,7 +428,7 @@ FourIsland_House1_EventScript_BodySlamTutor:: @ 81C4D84
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_BodySlamDeclined
 	msgbox Text_BodySlamWhichMon
-	setvar VAR_0x8005, MOVETUTOR_BODY_SLAM
+	setvar VAR_0x8005, MOVE_BODY_SLAM
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BodySlamDeclined

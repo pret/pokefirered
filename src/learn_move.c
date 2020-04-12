@@ -594,7 +594,7 @@ static void PrintTeachWhichMoveToStrVar1(bool8 onInit)
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToMon);
         PrintTextOnWindow(7, gStringVar4, 0, 2, 0, 2);
         PutWindowTilemap(7);
-        CopyWindowToVram(7, 3);
+        CopyWindowToVram(7, COPYWIN_BOTH);
     }
 }
 
@@ -714,7 +714,7 @@ static void MoveRelearnerMenuHandleInput(void)
 static void MoveLearnerInitListMenu(void)
 {
     sMoveRelearner->listMenuTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearner->listMenuScrollPos, sMoveRelearner->listMenuScrollRow);
-    CopyWindowToVram(6, 1);
+    CopyWindowToVram(6, COPYWIN_MAP);
 }
 
 static void PrintMoveInfo(u16 move)
@@ -760,8 +760,8 @@ static void LoadMoveInfoUI(void)
     PutWindowTilemap(5);
     PutWindowTilemap(2);
     PutWindowTilemap(7);
-    CopyWindowToVram(0, 2);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 static void PrintMoveInfoHandleCancel_CopyToVram(void)
@@ -776,15 +776,15 @@ static void PrintMoveInfoHandleCancel_CopyToVram(void)
         for (i = 2; i < 6; i++)
         {
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
-            CopyWindowToVram(i, 2);
+            CopyWindowToVram(i, COPYWIN_GFX);
         }
     }
-    CopyWindowToVram(3, 2);
-    CopyWindowToVram(4, 2);
-    CopyWindowToVram(2, 2);
-    CopyWindowToVram(2, 2);
-    CopyWindowToVram(5, 2);
-    CopyWindowToVram(7, 3);
+    CopyWindowToVram(3, COPYWIN_GFX);
+    CopyWindowToVram(4, COPYWIN_GFX);
+    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(5, COPYWIN_GFX);
+    CopyWindowToVram(7, COPYWIN_BOTH);
 }
 
 static void MoveRelearnerMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -803,7 +803,7 @@ static s8 YesNoMenuProcessInput(void)
     if (input != -2)
     {
         PutWindowTilemap(6);
-        CopyWindowToVram(6, 1);
+        CopyWindowToVram(6, COPYWIN_MAP);
     }
     return input;
 }

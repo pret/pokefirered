@@ -76,7 +76,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
     case 0:
         data[1] = AddWindow(&gUnknown_846E2CC);
         sub_814B5C4(data[1]);
-        CopyWindowToVram(data[1], 3);
+        CopyWindowToVram(data[1], COPYWIN_BOTH);
         data[0]++;
         break;
     case 1:
@@ -87,7 +87,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(data[1]);
-            CopyWindowToVram(data[1], 1);
+            CopyWindowToVram(data[1], COPYWIN_MAP);
             data[0]++;
         }
         break;

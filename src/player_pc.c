@@ -392,7 +392,7 @@ static void Task_WithdrawItem_WaitFadeAndGoToItemStorage(u8 taskId)
 static void Task_WithdrawItemBeginFade(u8 taskId)
 {
     gTasks[taskId].func = Task_WithdrawItem_WaitFadeAndGoToItemStorage;
-    ItemPc_SetInitializedFlag(0);
+    ItemPc_SetInitializedFlag(FALSE);
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
@@ -401,7 +401,7 @@ static void Task_PlayerPcCancel(u8 taskId)
     s16 *data = gTasks[taskId].data;
     ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
     ClearWindowTilemap(tWindowId);
-    CopyWindowToVram(tWindowId, 1);
+    CopyWindowToVram(tWindowId, COPYWIN_MAP);
     RemoveWindow(tWindowId);
     Task_ReturnToTopMenu(taskId);
 }

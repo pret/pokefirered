@@ -1952,9 +1952,9 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         SetVBlankCallback(NULL);
         ResetSpriteData();
         FreeAllSpritePalettes();
-        RequestDma3Fill(0, (void *)OAM, OAM_SIZE, 1);
-        RequestDma3Fill(0, (void *)VRAM, 0x20, 1);
-        RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, 1);
+        RequestDma3Fill(0, (void *)OAM, OAM_SIZE, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)VRAM, 0x20, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, DMA3_32BIT);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgPositions();
         ResetBgsAndClearDma3BusyFlags(FALSE);
@@ -2119,7 +2119,7 @@ static bool8 SlotsTask_MessageOutOfCoins(u8 * state, struct SlotMachineSetupTask
     {
     case 0:
         Slot_PrintOnWindow0(gString_OutOfCoins);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -2137,7 +2137,7 @@ static bool8 SlotsTask_AskQuitPlaying(u8 * state, struct SlotMachineSetupTaskDat
     case 0:
         Slot_PrintOnWindow0(gString_QuitPlaying);
         Slot_CreateYesNoMenu(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -2155,7 +2155,7 @@ static bool8 SlotsTask_DestroyYesNoMenu(u8 * state, struct SlotMachineSetupTaskD
     case 0:
         Slot_ClearWindow0();
         Slot_DestroyYesNoMenu();
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:

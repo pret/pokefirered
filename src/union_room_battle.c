@@ -78,7 +78,7 @@ static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s3
         DrawTextBorderOuter(0, 0x001, 0xD);
         UnionRoomBattle_CreateTextPrinter(0, str, 0, 2, speed);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -190,7 +190,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 6:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gMain.state++;
         }
@@ -202,7 +202,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 8:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gMain.state++;
         }

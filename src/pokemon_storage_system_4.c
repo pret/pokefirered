@@ -996,10 +996,10 @@ static void sub_8091420(u8 taskId)
     case 0:
         gPSSData->field_2D2 = 0;
         gPSSData->bg2_X = 0;
-        task->data[1] = RequestDma3Fill(0, gPSSData->field_4AC4, 0x1000, 1);
+        task->data[1] = RequestDma3Fill(0, gPSSData->field_4AC4, 0x1000, DMA3_32BIT);
         break;
     case 1:
-        if (CheckForSpaceForDma3Request(task->data[1]) == -1)
+        if (WaitDma3Request(task->data[1]) == -1)
             return;
 
         SetBgTilemapBuffer(2, gPSSData->field_4AC4);

@@ -708,7 +708,7 @@ static void pokemon_transfer_to_pc_with_message(void)
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 static bool8 sub_809E1D4(void)
@@ -1804,7 +1804,7 @@ static void PrintBufferCharactersOnScreen(void)
     }
 
     CallAddGenderIconFunc();
-    CopyWindowToVram(sNamingScreenData->windows[2], 2);
+    CopyWindowToVram(sNamingScreenData->windows[2], COPYWIN_GFX);
     PutWindowTilemap(sNamingScreenData->windows[2]);
 }
 
@@ -1887,7 +1887,7 @@ static void sub_809FAE4(void)
     FillWindowPixelBuffer(sNamingScreenData->windows[4], PIXEL_FILL(15));
     AddTextPrinterParameterized3(sNamingScreenData->windows[4], 0, 236 - strwidth, 0, color, 0, gText_MoveOkBack);
     PutWindowTilemap(sNamingScreenData->windows[4]);
-    CopyWindowToVram(sNamingScreenData->windows[4], 3);
+    CopyWindowToVram(sNamingScreenData->windows[4], COPYWIN_BOTH);
 }
 
 static void sub_809FB70(void)

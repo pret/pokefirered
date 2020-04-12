@@ -470,7 +470,7 @@ bool8 FieldIsDoorAnimationRunning(void)
     return FuncIsActiveTask(Task_AnimateDoor);
 }
 
-u16 GetDoorSoundEffect(x, y)
+u16 GetDoorSoundEffect(int x, int y)
 {
     if (GetDoorSoundType(sDoorGraphics, x, y) == DOOR_SOUND_NORMAL)
         return MUS_W_DOOR;

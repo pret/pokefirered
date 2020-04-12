@@ -1323,7 +1323,7 @@ static void PrintTitleText(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 static void EC_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -1379,7 +1379,7 @@ static void PrintECInterfaceTextById(u8 direction)
     if (text2)
         EC_AddTextPrinterParameterized(1, 1, text2, 0, 16, TEXT_SPEED_FF, NULL);
 
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_BOTH);
 }
 
 static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos)
@@ -1454,7 +1454,7 @@ static void PrintECFields(void)
         EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, 1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SPEED_FF, NULL);
     }
 
-    CopyWindowToVram(sEasyChatGraphicsResources->windowId, 3);
+    CopyWindowToVram(sEasyChatGraphicsResources->windowId, COPYWIN_BOTH);
 }
 
 static void DrawECFrameInTilemapBuffer(u16 *tilemap)
@@ -1537,7 +1537,7 @@ static void PrintECMenuById(u32 id)
         break;
     }
 
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static void PrintECGroupOrAlphaMenu(void)
@@ -1659,7 +1659,7 @@ static void PrintECRowsWin2(u8 row, u8 remrow)
 
     }
 
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static void ClearECRowsWin2(u8 row, u8 remrow)
@@ -1690,7 +1690,7 @@ static void ClearECRowsWin2(u8 row, u8 remrow)
 static void ClearWin2AndCopyToVram(void)
 {
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static void StartWin2FrameAnim(int animNo)

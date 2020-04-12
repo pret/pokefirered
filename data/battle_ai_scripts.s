@@ -14,6 +14,7 @@
 @ To make adding these improvements easier they are commented and tagged with "Improvement in Emerald"
 @ Emerald also adds a few entirely new AI commands (mostly to expand Double Battle AI), which are not included
 
+	.align 2
 gBattleAI_ScriptsTable:: @ 81D9BF4
 	.4byte AI_CheckBadMove
 	.4byte AI_CheckViability

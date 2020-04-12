@@ -71,8 +71,8 @@ void Overworld_SetObjEventTemplateMovementType(u8, u8);
 
 void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
-void SetDynamicWarp(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
-void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId);
+void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -158,7 +158,7 @@ void ResetGameStats(void);
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *, u8);
 
-bool32 sub_8058318(void);
+bool32 IsSendingKeysOverCable(void);
 
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_WhiteOut(void);
@@ -170,8 +170,8 @@ void SetContinueGameWarpToHealLocation(u8 loc);
 
 void UpdateAmbientCry(s16 *state, u16 *delayCounter);
 void SetWarpDestinationToHealLocation(u8 a0);
-bool32 sub_80582E0(void);
-bool32 sub_8058274(void);
+bool32 Overworld_SendKeysToLinkIsRunning(void);
+bool32 Overworld_RecvKeysFromLinkIsRunning(void);
 void OverworldWhiteOutGetMoneyLoss(void);
 u8 GetCurrentMapBattleScene(void);
 void Overworld_ResetStateAfterFly(void);

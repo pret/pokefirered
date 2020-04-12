@@ -935,7 +935,7 @@ static void CB2_HandleStartBattle(void)
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (IsLinkTaskFinished())
                 {
@@ -1107,7 +1107,7 @@ static void CB2_PreInitMultiBattle(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
+        if (gReceivedRemoteLinkPlayers && IsLinkTaskFinished())
         {
             sub_80108C4();
             SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_184, sizeof(gMultiPartnerParty));
@@ -1153,7 +1153,7 @@ static void CB2_PreInitMultiBattle(void)
                 SetMainCallback2(CB2_InitBattleInternal);
             }
         }
-        else if (gReceivedRemoteLinkPlayers == 0)
+        else if (!gReceivedRemoteLinkPlayers)
         {
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
@@ -1190,7 +1190,7 @@ static void CB2_HandleStartMultiBattle(void)
             LoadWirelessStatusIndicatorSpriteGfx();
         break;
     case 1:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             if (IsLinkTaskFinished())
             {
@@ -3843,7 +3843,7 @@ static void ReturnFromBattleToOverworld(void)
         RandomlyGivePartyPokerus(gPlayerParty);
         PartySpreadPokerus(gPlayerParty);
     }
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || gReceivedRemoteLinkPlayers == 0)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || !gReceivedRemoteLinkPlayers)
     {
         gSpecialVar_Result = gBattleOutcome;
         gMain.inBattle = FALSE;

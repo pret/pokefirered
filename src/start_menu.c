@@ -255,7 +255,7 @@ static void DrawSafariZoneStatsWindow(void)
     ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
     AddTextPrinterParameterized(sSafariZoneStatsWindowId,2, gStringVar4, 4, 3, 0xFF, NULL);
-    CopyWindowToVram(sSafariZoneStatsWindowId, 2);
+    CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
 
 static void DestroySafariZoneStatsWindow(void)
@@ -263,7 +263,7 @@ static void DestroySafariZoneStatsWindow(void)
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariZoneStatsWindowId, FALSE);
-        CopyWindowToVram(sSafariZoneStatsWindowId, 2);
+        CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
         RemoveWindow(sSafariZoneStatsWindowId);
     }
 }
@@ -324,7 +324,7 @@ static s8 DoDrawStartMenu(void)
         {
             DrawHelpMessageWindowWithText(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]]);
         }
-        CopyWindowToVram(GetStartMenuWindowId(), 1);
+        CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
     return FALSE;
@@ -913,7 +913,7 @@ static void task50_after_link_battle_save(u8 taskId)
             AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0xFF, NULL, 2, 1, 3);
             DrawTextBorderOuter(0, 0x008, 0x0F);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_BOTH);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             if (gWirelessCommType != 0 && InUnionRoom())
                 data[0] = 5;
@@ -942,11 +942,11 @@ static void task50_after_link_battle_save(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(sub_80DA634, 5);
+            CreateTask(Task_SaveGame_UpdatedLinkRecords, 5);
             data[0] = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(sub_80DA634))
+            if (!FuncIsActiveTask(Task_SaveGame_UpdatedLinkRecords))
                 data[0] = 3;
             break;
         }
@@ -981,7 +981,7 @@ static void PrintSaveStats(void)
     AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 2, y, sTextColor_StatName, -1, gSaveStatName_Time);
     SaveStatToString(SAVE_STAT_TIME, gStringVar4, 2);
     AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 60, y, sTextColor_StatValue, -1, gStringVar4);
-    CopyWindowToVram(sSaveStatsWindowId, 2);
+    CopyWindowToVram(sSaveStatsWindowId, COPYWIN_GFX);
 }
 
 static void CloseSaveStatsWindow(void)

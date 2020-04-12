@@ -335,9 +335,9 @@ struct PokemonStorageSystemData
     /* 0d88 */ bool8 (*monPlaceChangeFunc)(void);
     /* 0d8c */ u8 monPlaceChangeState;
     /* 0d8d */ u8 field_D91;
-    /* 0d90 */ struct Sprite *field_D94;
+    /* 0d90 */ struct Sprite *monMarkingSprite;
     /* 0d94 */ struct Sprite *field_D98[2];
-    /* 0d9c */ u16 *field_DA0;
+    /* 0d9c */ u16 *monMarkingSpriteTileStart;
     /* 0da0 */ struct PokemonMarkMenu field_DA4;
     /* 1e58 */ struct UnkPSSStruct_2002370 field_1E5C;
     /* 20a0 */ struct Pokemon movingMon;

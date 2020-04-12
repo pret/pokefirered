@@ -541,7 +541,7 @@ static void TeachyTvCreateAndRenderRbox(void)
     FillWindowPixelBuffer(0, 0xCC);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
 }
 
 static u8 TeachyTvSetupWindow(void)
@@ -811,7 +811,7 @@ static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
         sResources->grassAnimDisabled = 1;
         TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0, 0, 0);
         FillWindowPixelBuffer(0, 0xCC);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         TeachyTvClearBg1EndGraphicText();
         data[2] = 0;
         data[3] = 0;
@@ -937,7 +937,7 @@ static void TTVcmd_EraseTextWindowIfKeyPressed(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(0, 0xCC);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         ++data[3];
     }
 }

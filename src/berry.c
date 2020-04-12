@@ -867,7 +867,7 @@ const struct Berry gBerries[] = {
 
 };
 
-const struct UnkStruct_0858AB24 gUnknown_83DFC9C[] = {
+const struct BerryCrushStats gBerryCrushStats[] = {
     { 50,  20},
     { 50,  20},
     { 50,  20},

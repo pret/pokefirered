@@ -1003,12 +1003,12 @@ static bool32 sub_814881C(void)
     case 2:
         if (sub_8149804())
         {
-            CreateTask(sub_80DA634, 6);
+            CreateTask(Task_SaveGame_UpdatedLinkRecords, 6);
             gUnknown_203F3D4->unk8++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_80DA634))
+        if (!FuncIsActiveTask(Task_SaveGame_UpdatedLinkRecords))
         {
             sub_814A6CC();
             gUnknown_203F3D4->unk8++;

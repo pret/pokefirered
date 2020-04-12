@@ -602,7 +602,7 @@ static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1)
     if (a1 == 0xFF)
     {
         FillWindowPixelRect(0, 0, 0, a0, GetFontAttribute(2, 0), GetFontAttribute(2, 1));
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
     }
     else
     {
@@ -797,7 +797,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
     if (itemid_is_unique(gSpecialVar_ItemId))
     {
         PlaceHMTileInWindow(2, 0, 2);
-        CopyWindowToVram(2, 2);
+        CopyWindowToVram(2, COPYWIN_GFX);
     }
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
@@ -1341,7 +1341,7 @@ static void DrawMoveInfoUIMarkers(void)
     BlitMoveInfoIcon(4, 20, 0, 12);
     BlitMoveInfoIcon(4, 21, 0, 24);
     BlitMoveInfoIcon(4, 22, 0, 36);
-    CopyWindowToVram(4, 2);
+    CopyWindowToVram(4, COPYWIN_GFX);
 }
 
 static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
@@ -1357,7 +1357,7 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
         {
             AddTextPrinterParameterized_ColorByIndex(5, 3, gText_ThreeHyphens, 7, 12 * i, 0, 0, 0xFF, 3);
         }
-        CopyWindowToVram(5, 2);
+        CopyWindowToVram(5, COPYWIN_GFX);
     }
     else
     {
@@ -1381,7 +1381,7 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
         AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 24, 0, 0, 0xFF, 3);
         ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized_ColorByIndex(5, 3, gStringVar1, 7, 36, 0, 0, 0xFF, 3);
-        CopyWindowToVram(5, 2);
+        CopyWindowToVram(5, COPYWIN_GFX);
     }
 }
 

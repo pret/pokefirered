@@ -180,7 +180,7 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
 
         offset = destOffset + offset;
 
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, DMA3_16BIT);
 
         if (cursor == -1)
         {
@@ -472,7 +472,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     if (IsInvalidBg32(bg) == FALSE)
     {
         paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, 0);
+        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, DMA3_16BIT);
 
         if (cursor == -1)
         {
@@ -500,7 +500,7 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
 
         if ((sDmaBusyBitfield[div] & (1 << mod)))
         {
-            s8 reqSpace = CheckForSpaceForDma3Request(i);
+            s8 reqSpace = WaitDma3Request(i);
             if (reqSpace == -1)
                 return TRUE;
             sDmaBusyBitfield[div] &= ~(1 << mod);
@@ -567,7 +567,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
         case BG_ATTR_WRAPAROUND:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
-        case BG_ATTR_TEXTORAFFINEMODE:
+        case BG_ATTR_MAPSIZE:
             switch (GetBgType(bg))
             {
                 case 0:

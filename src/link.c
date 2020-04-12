@@ -380,7 +380,7 @@ void OpenLink(void)
     {
         sub_80F86F4();
     }
-    gReceivedRemoteLinkPlayers = 0;
+    gReceivedRemoteLinkPlayers = FALSE;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gRemoteLinkPlayersNotReceived[i] = TRUE;
@@ -515,9 +515,9 @@ void HandleReceiveRemoteLinkPlayer(u8 who)
     {
         count += gRemoteLinkPlayersNotReceived[i];
     }
-    if (count == 0 && gReceivedRemoteLinkPlayers == 0)
+    if (count == 0 && !gReceivedRemoteLinkPlayers)
     {
-        gReceivedRemoteLinkPlayers = 1;
+        gReceivedRemoteLinkPlayers = TRUE;
     }
 }
 
@@ -1513,7 +1513,7 @@ void sub_800AE1C(void)
     PutWindowTilemap(0);
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_BOTH);
     ShowBg(0);
     ShowBg(1);
 }
@@ -1526,7 +1526,7 @@ void sub_800AED0(void)
     PutWindowTilemap(1);
     PutWindowTilemap(2);
     CopyWindowToVram(1, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_BOTH);
     ShowBg(0);
 }
 
@@ -1656,7 +1656,7 @@ bool8 HandleLinkConnection(void)
     {
         gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
         LinkMain2(&gMain.heldKeys);
-        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && sub_8058318() == TRUE)
+        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && IsSendingKeysOverCable() == TRUE)
         {
             return TRUE;
         }
@@ -1665,7 +1665,7 @@ bool8 HandleLinkConnection(void)
     {
         r4 = LinkRfuMain1();
         r5 = LinkRfuMain2();
-        if (sub_8058318() == TRUE)
+        if (IsSendingKeysOverCable() == TRUE)
         {
             if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
             {
@@ -1678,7 +1678,7 @@ bool8 HandleLinkConnection(void)
 
 void SetWirelessCommType1(void)
 {
-    if (gReceivedRemoteLinkPlayers == 0)
+    if (!gReceivedRemoteLinkPlayers)
     {
         gWirelessCommType = 1;
     }
@@ -1686,7 +1686,7 @@ void SetWirelessCommType1(void)
 
 static void SetWirelessCommType0(void)
 {
-    if (gReceivedRemoteLinkPlayers == 0)
+    if (!gReceivedRemoteLinkPlayers)
     {
         gWirelessCommType = 0;
     }
@@ -1694,7 +1694,7 @@ static void SetWirelessCommType0(void)
 
 void SetWirelessCommType0_UnusedCopy(void)
 {
-    if (gReceivedRemoteLinkPlayers == 0)
+    if (!gReceivedRemoteLinkPlayers)
     {
         gWirelessCommType = 0;
     }

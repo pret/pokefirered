@@ -1233,7 +1233,7 @@ static void TradeMenuCB_13(void)
     }
     else
     {
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             Free(sSpriteTextTileBuffer);
             FreeAllWindowBuffers();
@@ -1742,7 +1742,7 @@ static void TradeMenuCB_0(void)
             UnionRoomAndTradeMenuPrintOptions(1, 3, 16, 2, sMenuAction_SummaryTrade);
             Menu_InitCursor(1, 3, 0, 0, 16, 2, 0);
             PutWindowTilemap(1);
-            CopyWindowToVram(1, 3);
+            CopyWindowToVram(1, COPYWIN_BOTH);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 1;
         }
         else if (sTradeMenuResourcesPtr->tradeMenuCursorPosition < 12)
@@ -1915,7 +1915,7 @@ static void CommitWindows(void)
     for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[1] - 4; i++)
     {
         PutWindowTilemap(i + 12);
-        CopyWindowToVram(i + 12, 1);
+        CopyWindowToVram(i + 12, COPYWIN_MAP);
     }
 }
 
@@ -2174,9 +2174,9 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
         BuildMovesString(movesString, whichParty, partyIdx);
         AddTextPrinterParameterized4((side * 2) + 15, 1, 0, 0, 0, 0, sTextColor_PartyMonNickname, 0, movesString);
         PutWindowTilemap((side * 2) + 14);
-        CopyWindowToVram((side * 2) + 14, 3);
+        CopyWindowToVram((side * 2) + 14, COPYWIN_BOTH);
         PutWindowTilemap((side * 2) + 15);
-        CopyWindowToVram((side * 2) + 15, 3);
+        CopyWindowToVram((side * 2) + 15, COPYWIN_BOTH);
         sTradeMenuResourcesPtr->menuRedrawState[side]++;
         break;
     case 4:
@@ -2244,7 +2244,7 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, const u8 *str)
     xPos = (64u - GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING))) / 2;
     AddTextPrinterParameterized3(windowId, 0, xPos, 4, sTextColor_PartyMonNickname, speed, str);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void PrintPartyNicknames(u8 whichParty)
@@ -2455,7 +2455,7 @@ static void PrintTradeErrorOrStatusMessage(u8 idx)
     AddTextPrinterParameterized(0, 3, sTradeErrorOrStatusMessagePtrs[idx], 0, 2, 0xFF, NULL);
     DrawTextBorderOuter(0, 0x014, 12);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 static bool8 LoadUISprites(void)
@@ -2686,7 +2686,7 @@ s32 Trade_CalcLinkPlayerCompatibilityParam(void)
     s32 val;
     u16 version;
 
-    if (gReceivedRemoteLinkPlayers != 0)
+    if (gReceivedRemoteLinkPlayers)
     {
         val = 0;
         version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);

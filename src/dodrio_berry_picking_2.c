@@ -1055,7 +1055,7 @@ static void sub_8154B34(void)
                 colorsId = 2;
             name = sub_81533C4(id);
             AddTextPrinterParameterized3(gUnknown_203F440->unk3008[i], 0, left, 1, sTextColorTable[colorsId], -1, name);
-            CopyWindowToVram(gUnknown_203F440->unk3008[i], 2);
+            CopyWindowToVram(gUnknown_203F440->unk3008[i], COPYWIN_GFX);
             window.baseBlock += 0xE;
             sub_8154868(&window);
         }
@@ -1199,8 +1199,8 @@ static void sub_8154F80(void)
                     AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, sp0C, sUnknown_8478EA8[j] - width, sUnknown_8478EB0[i], -1, NULL);
             }
         }
-        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
-        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;
     case 3:
@@ -1232,8 +1232,8 @@ static void sub_8154F80(void)
         break;
     case 6:
         sub_8154D9C(playersCount);
-        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
-        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;
     case 7:
@@ -1291,8 +1291,8 @@ static void sub_8154F80(void)
                 DynamicPlaceholderTextUtil_ExpandPlaceholders(sp0C, gText_FilledStorageSpace);
             AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, sp0C, 8, 40, -1, NULL);
         }
-        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
-        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;
     case 10:
@@ -1349,8 +1349,8 @@ static void sub_81556E0(void)
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_Yes, 8, 2, -1, NULL);
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_No, 8, 16, -1, NULL);
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_SelectorArrow2, 0, 2, -1, NULL);
-        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
-        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;
     case 2:
@@ -1370,7 +1370,7 @@ static void sub_81556E0(void)
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_Yes, 8, 2, -1, NULL);
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_No, 8, 16, -1, NULL);
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_SelectorArrow2, 0, y == 1 ? 2 : 16, -1, NULL);
-        CopyWindowToVram(gUnknown_203F440->unk3008[1], 3);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], COPYWIN_BOTH);
         // Increment state only if A or B button have been pressed.
         if (JOY_NEW(A_BUTTON))
         {
@@ -1425,18 +1425,18 @@ static void sub_8155A78(void)
         gUnknown_203F440->state++;
         break;
     case 1:
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         gUnknown_203F440->state++;
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateTask(sub_80DA634, 0);
+            CreateTask(Task_SaveGame_UpdatedLinkRecords, 0);
             gUnknown_203F440->state++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_80DA634))
+        if (!FuncIsActiveTask(Task_SaveGame_UpdatedLinkRecords))
             gUnknown_203F440->state++;
         break;
     default:
@@ -1460,7 +1460,7 @@ static void sub_8155B4C(void)
     case 1:
         FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_CommunicationStandby3, 0, 6, -1, NULL);
-        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;
     case 2:
@@ -1500,7 +1500,7 @@ static void sub_8155C80(void)
     case 1:
         FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_SomeoneDroppedOut, 0, 6, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;
     case 2:

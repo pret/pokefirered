@@ -44,6 +44,7 @@ gMovesWithQuietBGM:: @ 81C68EC
 	.2byte MOVE_GRASS_WHISTLE
 	.2byte 0xFFFF
 
+	.align 2
 gBattleAnims_Moves::
 	.4byte Move_NONE
 	.4byte Move_POUND

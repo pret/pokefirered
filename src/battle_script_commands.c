@@ -5764,7 +5764,7 @@ static void atk6C_drawlvlupbox(void)
     case 4:
         DrawLevelUpWindow1();
         PutWindowTilemap(12);
-        CopyWindowToVram(12, 3);
+        CopyWindowToVram(12, COPYWIN_BOTH);
         ++gBattleScripting.atk6C_state;
         break;
     case 5:
@@ -5780,7 +5780,7 @@ static void atk6C_drawlvlupbox(void)
         {
             PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
-            CopyWindowToVram(12, 2);
+            CopyWindowToVram(12, COPYWIN_GFX);
             ++gBattleScripting.atk6C_state;
         }
         break;
@@ -5796,9 +5796,9 @@ static void atk6C_drawlvlupbox(void)
         if (!sub_8026648())
         {
             ClearWindowTilemap(13);
-            CopyWindowToVram(13, 1);
+            CopyWindowToVram(13, COPYWIN_MAP);
             ClearWindowTilemap(12);
-            CopyWindowToVram(12, 1);
+            CopyWindowToVram(12, COPYWIN_MAP);
             SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             ShowBg(2);
             gBattleScripting.atk6C_state = 10;
@@ -5840,7 +5840,7 @@ static void sub_8026480(void)
     LoadPalette(gUnknown_82506D0, 0x60, 0x20);
     CopyToWindowPixelBuffer(13, gUnknown_82506F0, 0, 0);
     PutWindowTilemap(13);
-    CopyWindowToVram(13, 3);
+    CopyWindowToVram(13, COPYWIN_BOTH);
     PutMonIconOnLvlUpBox();
 }
 
@@ -5909,8 +5909,8 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     }
     printerTemplate.y = 10;
     printerTemplate.currentY = 10;
-    AddTextPrinter(&printerTemplate, 0xFF, NULL);
-    CopyWindowToVram(13, 2);
+    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(13, COPYWIN_GFX);
 }
 
 static bool8 sub_8026648(void)

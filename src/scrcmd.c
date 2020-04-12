@@ -1277,7 +1277,7 @@ bool8 ScrCmd_loadhelp(struct ScriptContext * ctx)
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
     DrawHelpMessageWindowWithText(msg);
-    CopyWindowToVram(GetStartMenuWindowId(), 1);
+    CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
     return FALSE;
 }
 

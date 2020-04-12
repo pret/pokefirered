@@ -84,7 +84,7 @@ static void Task_MapNamePopup(u8 taskId)
             if (task->tReshow)
             {
                 MapNamePopupPrintMapNameOnWindow(task->tWindowId);
-                CopyWindowToVram(task->tWindowId, 2);
+                CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
                 task->tState = 1;
                 task->tReshow = FALSE;
             }
@@ -100,7 +100,7 @@ static void Task_MapNamePopup(u8 taskId)
         if (task->tWindowExists && !task->tWindowCleared)
         {
             rbox_fill_rectangle(task->tWindowId);
-            CopyWindowToVram(task->tWindowId, 1);
+            CopyWindowToVram(task->tWindowId, COPYWIN_MAP);
             task->tWindowCleared = TRUE;
         }
         task->tState = 7;
@@ -183,7 +183,7 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     DrawTextBorderOuter(windowId, r6, 0xD);
     PutWindowTilemap(windowId);
     MapNamePopupPrintMapNameOnWindow(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
     return windowId;
 }
 

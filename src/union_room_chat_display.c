@@ -488,7 +488,7 @@ static bool32 DisplaySubtask_PrintWin3(u8 *state)
     {
     case 0:
         PrintKeyboardSwapTextsOnWin3();
-        CopyWindowToVram(3, 3);
+        CopyWindowToVram(3, COPYWIN_BOTH);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -504,7 +504,7 @@ static bool32 DisplaySubtask_HideWin3(u8 *state)
     {
     case 0:
         ClearWin3();
-        CopyWindowToVram(3, 3);
+        CopyWindowToVram(3, COPYWIN_BOTH);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -524,7 +524,7 @@ static bool32 DisplaySubtask_SwitchPages(u8 *state)
             return TRUE;
 
         PrintCurrentKeyboardPage();
-        CopyWindowToVram(2, 2);
+        CopyWindowToVram(2, COPYWIN_GFX);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -557,7 +557,7 @@ static bool32 DisplaySubtask_ShowQuitChattingDialog(u8 *state)
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_QUIT_CHATTING, 0);
         PlaceYesNoMenuAt(23, 11, 1);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -601,7 +601,7 @@ static bool32 DisplaySubtask_UpdateMessageBuffer(u8 *state)
         FillWin1Rect(start, length, PIXEL_FILL(0));
         str = UnionRoomChat_GetMessageEntryBuffer();
         PrintOnWin1Parameterized(0, str, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -630,13 +630,13 @@ static bool32 DisplaySubtask_PrintRegisterWhere(u8 *state)
         length = StringLength_Multibyte(str);
         FillWin1Rect(var0, length, PIXEL_FILL(6));
         PrintOnWin1Parameterized(var0, str, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             PlaceStdMessageWindow(STDMESSAGE_REGISTER_WHERE, 16);
-            CopyWindowToVram(sWork->messageWindowId, 3);
+            CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         }
         else
         {
@@ -671,13 +671,13 @@ static bool32 DisplaySubtask_CancelRegister(u8 *state)
         length = StringLength_Multibyte(str);
         FillWin1Rect(x, length, PIXEL_FILL(0));
         PrintOnWin1Parameterized(x, str, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             HideStdMessageWindow();
-            CopyWindowToVram(sWork->messageWindowId, 3);
+            CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         }
         else
         {
@@ -709,7 +709,7 @@ static bool32 DisplaySubtask_ReturnToKeyboard(u8 *state)
     {
     case 0:
         PrintCurrentKeyboardPage();
-        CopyWindowToVram(2, 2);
+        CopyWindowToVram(2, COPYWIN_GFX);
         (*state)++;
         break;
     case 1:
@@ -735,7 +735,7 @@ static bool32 DisplaySubtask_ScrollChat(u8 *state)
         str = UnionRoomChat_GetLastReceivedMessage();
         colorIdx = UnionRoomChat_GetReceivedPlayerIndex();
         PrintTextOnWin0Colorized(row, str, colorIdx);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -755,7 +755,7 @@ static bool32 DisplaySubtask_ScrollChat(u8 *state)
         // fall through
     case 2:
         ScrollWindow(0, 0, 5, PIXEL_FILL(1));
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         sWork->scrollCount++;
         (*state)++;
         // fall through
@@ -800,7 +800,7 @@ static bool32 DisplaySubtask_PrintInputText(u8 *state)
     {
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_INPUT_TEXT, 16);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -816,7 +816,7 @@ static bool32 DisplaySubtask_PrintExitingChat(u8 *state)
     {
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_EXITING_CHAT, 0);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -837,7 +837,7 @@ static bool32 DisplaySubtask_PrintLeaderLeft(u8 *state)
         str = UnionRoomChat_GetNameOfPlayerWhoDisbandedChat();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
         PlaceStdMessageWindow(STDMESSAGE_LEADER_LEFT, 0);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -854,7 +854,7 @@ static bool32 DisplaySubtask_AskSave(u8 *state)
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_ASK_SAVE, 0);
         PlaceYesNoMenuAt(23, 10, 1);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -871,7 +871,7 @@ static bool32 DisplaySubtask_AskOverwriteSave(u8 *state)
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_ASK_OVERWRITE, 0);
         PlaceYesNoMenuAt(23, 10, 1);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -887,7 +887,7 @@ static bool32 DisplaySubtask_PrintSavingDontTurnOffPower(u8 *state)
     {
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_SAVING_NO_OFF, 0);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -905,7 +905,7 @@ static bool32 DisplaySubtask_PrintSavedTheGame(u8 *state)
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         PlaceStdMessageWindow(STDMESSAGE_SAVED_THE_GAME, 0);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -922,7 +922,7 @@ static bool32 DisplaySubtask_ShowConfirmLeaderLeaveDialog(u8 *state)
     case 0:
         PlaceStdMessageWindow(STDMESSAGE_WARN_LEADER_LEAVE, 0);
         PlaceYesNoMenuAt(23, 10, 1);
-        CopyWindowToVram(sWork->messageWindowId, 3);
+        CopyWindowToVram(sWork->messageWindowId, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -1252,7 +1252,7 @@ static void SetBgTilemapWorkBuffers(void)
 
 static void ClearBg0(void)
 {
-    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, 1);
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, DMA3_32BIT);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
 }
@@ -1279,7 +1279,7 @@ static void LoadLinkMiscMenuGfx(void)
 static void LoadBg1Pal8(void)
 {
     LoadPalette(sBg1Pal8, 0x80, 0x20);
-    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, DMA3_32BIT);
 }
 
 static void LoadWin0(void)
@@ -1287,21 +1287,21 @@ static void LoadWin0(void)
     LoadPalette(sWin0PalF, 0xF0, 0x20);
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 static void LoadWin2(void)
 {
     PutWindowTilemap(2);
     PrintCurrentKeyboardPage();
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_BOTH);
 }
 
 static void LoadWin1(void)
 {
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_BOTH);
 }
 
 static void LoadWin3(void)

@@ -120,14 +120,14 @@ static const struct MenuAction sItemPcSubmenuOptions[] = {
     {gFameCheckerText_Cancel, {.void_u8 = Task_ItemPcCancel}}
 };
 
-static const u8 gUnknown_8453F8C[][3] = {
-    {0,  1, 2},
-    {0,  2, 3},
-    {0,  3, 2},
-    {0, 10, 2}
+static const u8 sTextColors[][3] = {
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_DARK_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_DARK_GREY}
 };
 
-static const struct WindowTemplate gUnknown_8453F98[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 0x07,
@@ -179,7 +179,7 @@ static const struct WindowTemplate gUnknown_8453F98[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_8453FD0[] = {
+static const struct WindowTemplate sSubwindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 0x06,
@@ -207,11 +207,11 @@ static const struct WindowTemplate gUnknown_8453FD0[] = {
     }
 };
 
-void ItemPc_Init(u8 a0, MainCallback callback)
+void ItemPc_Init(u8 kind, MainCallback callback)
 {
     u8 i;
 
-    if (a0 >= 2)
+    if (kind >= 2)
     {
         SetMainCallback2(callback);
         return;
@@ -221,7 +221,7 @@ void ItemPc_Init(u8 a0, MainCallback callback)
         SetMainCallback2(callback);
         return;
     }
-    if (a0 != 1)
+    if (kind != 1)
     {
         sListMenuState.savedCallback = callback;
         sListMenuState.scroll = sListMenuState.row = 0;
@@ -373,7 +373,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         else
         {
             BeginPCScreenEffect_TurnOn(0, 0, 0);
-            ItemPc_SetInitializedFlag(1);
+            ItemPc_SetInitializedFlag(TRUE);
             PlaySE(SE_PC_LOGIN);
         }
         gMain.state++;
@@ -702,15 +702,15 @@ static void ItemPc_SetScrollPosition(void)
     }
 }
 
-static void ItemPc_SetMessageWindowPalette(int a0)
+static void ItemPc_SetMessageWindowPalette(int palIdx)
 {
-    SetBgTilemapPalette(1, 0, 14, 30, 6, a0 + 1);
+    SetBgTilemapPalette(1, 0, 14, 30, 6, palIdx + 1);
     ScheduleBgCopyTilemapToVram(1);
 }
 
-void ItemPc_SetInitializedFlag(u8 a0)
+void ItemPc_SetInitializedFlag(bool8 flag)
 {
-    sListMenuState.initialized = a0;
+    sListMenuState.initialized = flag;
 }
 
 static void Task_ItemPcMain(u8 taskId)
@@ -740,7 +740,7 @@ static void Task_ItemPcMain(u8 taskId)
             break;
         case -2:
             PlaySE(SE_SELECT);
-            ItemPc_SetInitializedFlag(0);
+            ItemPc_SetInitializedFlag(FALSE);
             gTasks[taskId].func = Task_ItemPcTurnOff1;
             break;
         default:
@@ -965,9 +965,9 @@ static void ItemPc_WithdrawMultipleInitWindow(u16 slotId)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void sub_810E670(s16 quantity)
+static void UpdateWithdrawQuantityDisplay(s16 quantity)
 {
-    FillWindowPixelRect(3, 0x11, 10, 10, 28, 12);
+    FillWindowPixelRect(3, PIXEL_FILL(1), 10, 10, 28, 12);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     ItemPc_AddTextPrinterParameterized(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
@@ -978,7 +978,7 @@ static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
-        sub_810E670(data[8]);
+        UpdateWithdrawQuantityDisplay(data[8]);
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -1067,7 +1067,7 @@ static void ItemPc_InitWindows(void)
 {
     u8 i;
 
-    InitWindows(gUnknown_8453F98);
+    InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     TextWindow_SetUserSelectedFrame(0, 0x3C0, 0xE0);
     TextWindow_SetStdFrame0_WithPal(0, 0x3A3, 0xC0);
@@ -1106,7 +1106,7 @@ static void unused_ItemPc_AddTextPrinterParameterized(u8 windowId, const u8 * st
 
 static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
 {
-    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, gUnknown_8453F8C[colorIdx], speed, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sTextColors[colorIdx], speed, str);
 }
 
 static void ItemPc_SetBorderStyleOnWindow(u8 windowId)
@@ -1118,7 +1118,7 @@ static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
 {
     if (sSubmenuWindowIds[idx] == 0xFF)
     {
-        sSubmenuWindowIds[idx] = AddWindow(&gUnknown_8453FD0[idx]);
+        sSubmenuWindowIds[idx] = AddWindow(&sSubwindowTemplates[idx]);
         DrawStdFrameWithCustomTileAndPalette(sSubmenuWindowIds[idx], TRUE, 0x3A3, 0x0C);
     }
 

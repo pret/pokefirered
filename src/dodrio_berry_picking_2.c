@@ -1431,12 +1431,12 @@ static void sub_8155A78(void)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateTask(sub_80DA634, 0);
+            CreateTask(Task_SaveGame_UpdatedLinkRecords, 0);
             gUnknown_203F440->state++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_80DA634))
+        if (!FuncIsActiveTask(Task_SaveGame_UpdatedLinkRecords))
             gUnknown_203F440->state++;
         break;
     default:

@@ -85,11 +85,11 @@ void StartBerryCrush(MainCallback callback)
     sBerryCrushGamePtr->localId = multiplayerId;
     sBerryCrushGamePtr->playerCount = playerCount;
     BerryCrush_InitPlayerNamesAndTextSpeed(sBerryCrushGamePtr);
-    sBerryCrushGamePtr->unk12 = 1;
-    sBerryCrushGamePtr->nextCmd = 1;
-    sBerryCrushGamePtr->afterPalFadeCmd = 6;
+    sBerryCrushGamePtr->gameState = 1;
+    sBerryCrushGamePtr->nextCmd = BCCMD_BeginNormalPaletteFade;
+    sBerryCrushGamePtr->afterPalFadeCmd = BCCMD_SignalReadyToBegin;
     BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, TRUE, 0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->commandParams);
+    BerryCrush_RunOrScheduleCommand(BCCMD_InitGfx, 1, sBerryCrushGamePtr->commandParams);
     SetMainCallback2(CB2_BerryCrush);
     sBerryCrushGamePtr->taskId = CreateTask(Task_RunBerryCrushGame, 8);
 }
@@ -101,11 +101,11 @@ static void CB2_ReturnToBerryCrushGameFromBerryPouch(void)
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
-    sBerryCrushGamePtr->unk68.as_four_players.others[sBerryCrushGamePtr->localId].unk0 = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
-    sBerryCrushGamePtr->nextCmd = 1;
-    sBerryCrushGamePtr->afterPalFadeCmd = 9;
+    sBerryCrushGamePtr->unk68.as_four_players.others[sBerryCrushGamePtr->localId].berryId = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    sBerryCrushGamePtr->nextCmd = BCCMD_BeginNormalPaletteFade;
+    sBerryCrushGamePtr->afterPalFadeCmd = BCCMD_WaitForOthersToPickBerries;
     BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, FALSE, 0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->commandParams);
+    BerryCrush_RunOrScheduleCommand(BCCMD_InitGfx, 1, sBerryCrushGamePtr->commandParams);
     sBerryCrushGamePtr->taskId = CreateTask(Task_RunBerryCrushGame, 8);
     SetMainCallback2(CB2_BerryCrush);
 }
@@ -126,51 +126,52 @@ void BerryCrush_UnsetVBlankCallback(void)
     SetVBlankCallback(NULL);
 }
 
-void sub_814B930(void)
+void BerryCrush_UpdateSav2Records(void)
 {
     u32 var0, var1;
 
+    // unk0A / (unk04 / 60)
     var0 = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk04;
     var0 <<= 8;
-    var0 = sub_80D8B68(var0, 60 << 8);
+    var0 = MathUtil_Div32(var0, 60 << 8);
     var1 = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk0A;
     var1 <<= 8;
-    var1 = sub_80D8B68(var1, var0) & 0xFFFF;
-    sBerryCrushGamePtr->unk16 = var1;
+    var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
+    sBerryCrushGamePtr->pressingSpeed = var1;
     switch (sBerryCrushGamePtr->playerCount)
     {
     case 2:
-        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
+        if (sBerryCrushGamePtr->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
         {
             sBerryCrushGamePtr->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = sBerryCrushGamePtr->unk16;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = sBerryCrushGamePtr->pressingSpeed;
         }
         break;
     case 3:
-        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
+        if (sBerryCrushGamePtr->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
         {
             sBerryCrushGamePtr->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = sBerryCrushGamePtr->unk16;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = sBerryCrushGamePtr->pressingSpeed;
         }
         break;
     case 4:
-        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
+        if (sBerryCrushGamePtr->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
         {
             sBerryCrushGamePtr->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = sBerryCrushGamePtr->unk16;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = sBerryCrushGamePtr->pressingSpeed;
         }
         break;
     case 5:
-        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
+        if (sBerryCrushGamePtr->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
         {
             sBerryCrushGamePtr->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = sBerryCrushGamePtr->unk16;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = sBerryCrushGamePtr->pressingSpeed;
         }
         break;
     }
 
-    sBerryCrushGamePtr->unk1C = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk00;
-    if (GiveBerryPowder(sBerryCrushGamePtr->unk1C))
+    sBerryCrushGamePtr->powder = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk00;
+    if (GiveBerryPowder(sBerryCrushGamePtr->powder))
         return;
 
     sBerryCrushGamePtr->unk25_0 = 1;

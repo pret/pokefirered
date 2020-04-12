@@ -846,7 +846,7 @@ u32 TryWriteSpecialSaveSection(u8 sector, u8* src)
     return 1;
 }
 
-void sub_80DA634(u8 taskId)
+void Task_SaveGame_UpdatedLinkRecords(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {

@@ -21,18 +21,18 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
-static void sub_814DEC0(struct BerryCrushGame_138 * arg0, u16 arg1);
-static void sub_814DF44(u8 windowId, u8 left, u8 colorId, const u8 *string);
-static void sub_814DFA4(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 r3);
+static void FramesToMinSec(struct BerryCrushGame_138 * arg0, u16 arg1);
+static void PrintTextCentered(u8 windowId, u8 left, u8 colorId, const u8 *string);
+static void PrintBerryCrushResultWindow(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 r3);
 static void sub_814E32C(struct BerryCrushGame * r8);
 static void Task_ShowBerryCrushRankings(u8 r4);
-static void sub_814EAD4(struct BerryCrushGame_138 * r4, u16 r1);
+static void BerryCrush_PrintTimeOnSprites(struct BerryCrushGame_138 * r4, u16 r1);
 static void sub_814EB38(struct BerryCrushGame * r5);
 static void sub_814EBB0(struct BerryCrushGame * r6);
 static void sub_814EC80(struct BerryCrushGame * r6);
 static void sub_814ECE0(struct BerryCrushGame * r6);
 static void sub_814EF10(struct BerryCrushGame * r5);
-static void sub_814EFD0(struct Sprite * sprite);
+static void SpriteCB_BerryCrushImpact(struct Sprite * sprite);
 static void sub_814EFFC(struct Sprite * sprite);
 static void sub_814F044(struct Sprite * sprite);
 static void sub_814F0D8(struct Sprite * sprite);
@@ -101,7 +101,7 @@ static const u8 sBerryCrushTextColorTable[][3] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_846E3F0 = {
+static const struct WindowTemplate sWindowTemplate_BerryCrushRankings = {
     .bg = 0,
     .tilemapLeft = 3,
     .tilemapTop = 4,
@@ -188,25 +188,27 @@ static const u8 gUnknown_846E448[][4] = {
     { 12, 14, 15, 16}
 };
 
-static const u32 gUnknown_846E450[] = {
-    50000000, 
-    25000000, 
-    12500000, 
-     6250000, 
-     3125000, 
-     1562500, 
-      781250, 
-      390625
+static const u32 sPressingSpeedConversionTable[] = {
+    // Decimal point is vertically aligned with the pixel
+    // directly between the >< below.
+    50000000, // 50
+    25000000, // 25
+    12500000, // 12.5
+     6250000, //  6.25
+     3125000, //  3.125
+     1562500, //  1.5625
+      781250, //  0.78125
+      390625  //  0.390625
 };
 
-static const u16 gUnknown_846E470[] = INCBIN_U16("graphics/link_games/unk_846E4D0.gbapal");
-static const u16 gUnknown_846E490[] = INCBIN_U16("graphics/link_games/unk_846E7FC.gbapal");
-static const u16 gUnknown_846E4B0[] = INCBIN_U16("graphics/link_games/unk_846ECC4.gbapal");
+static const u16 sBerryCrushCorePal[] = INCBIN_U16("graphics/link_games/unk_846E4D0.gbapal");
+static const u16 sBerryCrushImpactAndSparklesPal[] = INCBIN_U16("graphics/link_games/unk_846E7FC.gbapal");
+static const u16 sBerryCrushTImerPal[] = INCBIN_U16("graphics/link_games/unk_846ECC4.gbapal");
 
-static const u32 gUnknown_846E4D0[] = INCBIN_U32("graphics/link_games/unk_846E4D0.4bpp.lz");
-static const u32 gUnknown_846E7FC[] = INCBIN_U32("graphics/link_games/unk_846E7FC.4bpp.lz");
-static const u32 gUnknown_846EB78[] = INCBIN_U32("graphics/link_games/unk_846EB78.4bpp.lz");
-static const u32 gUnknown_846ECC4[] = INCBIN_U32("graphics/link_games/unk_846ECC4.4bpp.lz");
+static const u32 sBerryCrushCoreTiles[] = INCBIN_U32("graphics/link_games/unk_846E4D0.4bpp.lz");
+static const u32 sBerryCrushImpactTiles[] = INCBIN_U32("graphics/link_games/unk_846E7FC.4bpp.lz");
+static const u32 sBerryCrushPowderSparklesTiles[] = INCBIN_U32("graphics/link_games/unk_846EB78.4bpp.lz");
+static const u32 sBerryCrushTimerTiles[] = INCBIN_U32("graphics/link_games/unk_846ECC4.4bpp.lz");
 
 static const u32 gBerryCrushGrinderTopTilemap[] = INCBIN_U32("graphics/link_games/unk_846ED90.bin.lz");
 static const u32 gBerryCrushContainerCapTilemap[] = INCBIN_U32("graphics/link_games/unk_846EEC0.bin.lz");
@@ -219,50 +221,50 @@ static const u8 gUnknown_846F280[][5] = {
     {0, 1, 3, 2, 4}
 };
 
-static const struct BerryCrushGame_138_C gUnknown_846F294[] = {
-    {0x00, 0x00, 0x00, 0x0000, 0xfff0, 0x0000, 0x0000},
-    {0x01, 0x00, 0x03, 0xffe4, 0xfffc, 0xffe8, 0x0010},
-    {0x02, 0x00, 0x06, 0xfff0, 0x0014, 0xfff8, 0x0010},
-    {0x03, 0x14, 0x03, 0x001c, 0xfffc, 0x0020, 0xfff8},
-    {0x04, 0x14, 0x06, 0x0010, 0x0014, 0x0010, 0xfff8}
+static const struct BerryCrushPlayerSeatCoords gUnknown_846F294[] = {
+    {0, 0, 0, 0, -16, 0, 0},
+    {1, 0, 3, -28, -4, -24, 16},
+    {2, 0, 6, -16, 20, -8, 16},
+    {3, 20, 3, 28, -4, 32, -8},
+    {4, 20, 6, 16, 20, 16, -8}
 };
 
 static const s8 gUnknown_846F2D0[][2] = {
-    {0x00, 0x00},
-    {0xff, 0x00},
-    {0x01, 0x01}
+    { 0,  0},
+    {-1,  0},
+    { 1,  1}
 };
 
 static const s8 gUnknown_846F2D6[][2] = {
-    {0x00, 0x00},
-    {0xf0, 0xfc},
-    {0x10, 0xfc},
-    {0xf8, 0xfe},
-    {0x08, 0xfe},
-    {0xe8, 0xf8},
-    {0x18, 0xf8},
-    {0xe0, 0xf4},
-    {0x20, 0xf4},
-    {0xd8, 0xf0},
-    {0x28, 0xf0}
+    {  0,   0},
+    {-16,  -4},
+    { 16,  -4},
+    { -8,  -2},
+    {  8,  -2},
+    {-24,  -8},
+    { 24,  -8},
+    {-32, -12},
+    { 32, -12},
+    {-40, -16},
+    { 40, -16}
 };
 
-static const u16 gUnknown_846F2EC[] = {
+static const u16 sPlayerBerrySpriteTags[] = {
     5, 6, 7, 8, 9
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {gUnknown_846E4D0, 0x0800, 1},
-    {gUnknown_846E7FC, 0x0e00, 2},
-    {gUnknown_846EB78, 0x0700, 3},
-    {gUnknown_846ECC4, 0x02c0, 4},
+    {sBerryCrushCoreTiles, 0x0800, 1},
+    {sBerryCrushImpactTiles, 0x0e00, 2},
+    {sBerryCrushPowderSparklesTiles, 0x0700, 3},
+    {sBerryCrushTimerTiles, 0x02c0, 4},
     {}
 };
 
 static const struct SpritePalette sSpritePals[] = {
-    {gUnknown_846E470, 1},
-    {gUnknown_846E490, 2},
-    {gUnknown_846E4B0, 4},
+    {sBerryCrushCorePal, 1},
+    {sBerryCrushImpactAndSparklesPal, 2},
+    {sBerryCrushTImerPal, 4},
     {}
 };
 
@@ -330,21 +332,21 @@ static const union AffineAnimCmd gUnknown_846F3D4[] = {
     AFFINEANIMCMD_JUMP(1)
 };
 
-static const union AnimCmd *const gUnknown_846F3EC[] = {
+static const union AnimCmd *const sAnimTable_BerryCrushCore[] = {
     gUnknown_846F340
 };
 
-static const union AnimCmd *const gUnknown_846F3F0[] = {
+static const union AnimCmd *const sAnimTable_BerryCrushImpact[] = {
     gUnknown_846F348,
     gUnknown_846F358
 };
 
-static const union AnimCmd *const gUnknown_846F3F8[] = {
+static const union AnimCmd *const sAnimTable_BerryCrushPowderSparkles[] = {
     gUnknown_846F36C,
     gUnknown_846F388
 };
 
-static const union AnimCmd *const gUnknown_846F400[] = {
+static const union AnimCmd *const sAnimTable_BerryCrushTimer[] = {
     gUnknown_846F3AC
 };
 
@@ -358,43 +360,43 @@ static const union AffineAnimCmd *const gUnknown_846F408[] = {
 };
 
 
-static const struct SpriteTemplate gUnknown_846F410 = {
+static const struct SpriteTemplate sSpriteTemplate_BerryCrushCore = {
     .tileTag = 1,
     .paletteTag = 1,
     .oam = &gOamData_AffineOff_ObjNormal_64x64,
-    .anims = gUnknown_846F3EC,
+    .anims = sAnimTable_BerryCrushCore,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_846F428 = {
+static const struct SpriteTemplate sSpriteTemplate_BerryCrushImpact = {
     .tileTag = 2,
     .paletteTag = 2,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_846F3F0,
+    .anims = sAnimTable_BerryCrushImpact,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_814EFD0
+    .callback = SpriteCB_BerryCrushImpact
 };
 
-static const struct SpriteTemplate gUnknown_846F440 = {
+static const struct SpriteTemplate sSpriteTemplate_BerryCrushPowderSparkles = {
     .tileTag = 3,
     .paletteTag = 2,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_846F3F8,
+    .anims = sAnimTable_BerryCrushPowderSparkles,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_846F458 = {
+static const struct SpriteTemplate sSpriteTemplate_BerryCrushTimer = {
     .tileTag = 4,
     .paletteTag = 4,
     .oam = &gOamData_AffineOff_ObjNormal_8x16,
-    .anims = gUnknown_846F400,
+    .anims = sAnimTable_BerryCrushTimer,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_846F470 = {
+static const struct SpriteTemplate sSpriteTemplate_PlayerBerry = {
     .tileTag = 5,
     .paletteTag = 5,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
@@ -609,25 +611,25 @@ int BerryCrush_TeardownBgs(void)
 
 int sub_814D9CC(struct BerryCrushGame * game)
 {
-    gSpriteCoordOffsetY = game->unk2A + game->unk2C;
+    gSpriteCoordOffsetY = game->depth + game->vibration;
     SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
-    if (game->unk12 == 7)
+    if (game->gameState == 7)
     {
-        sub_814EAD4(&game->unk138, game->unk28);
+        BerryCrush_PrintTimeOnSprites(&game->spritesManager, game->timer);
     }
 
     return 0;
 }
 
-void sub_814DA04(struct BerryCrushGame * arg0)
+void sub_814DA04(struct BerryCrushGame * game)
 {
-    arg0->unk2A = -104;
-    arg0->unk2C = 0;
+    game->depth = -104;
+    game->vibration = 0;
     gSpriteCoordOffsetX = 0;
     gSpriteCoordOffsetY = -104;
 }
 
-void sub_814DA24(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
+void BerryCrush_CreateBerrySprites(struct BerryCrushGame * game, struct BerryCrushGame_138 * spritesManager)
 {
     u8 i;
     u8 spriteId;
@@ -637,24 +639,24 @@ void sub_814DA24(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
     s16 var5;
     u32 var6;
 
-    for (i = 0; i < arg0->playerCount; i++)
+    for (i = 0; i < game->playerCount; i++)
     {
         spriteId = AddItemIconObjectWithCustomObjectTemplate(
-            &gUnknown_846F470,
-            gUnknown_846F2EC[i],
-            gUnknown_846F2EC[i],
-            arg0->unk68.as_four_players.others[i].unk0 + FIRST_BERRY_INDEX);
-        arg1->unk38[i] = &gSprites[spriteId];
-        arg1->unk38[i]->oam.priority = 3;
-        arg1->unk38[i]->affineAnimPaused = TRUE;
-        arg1->unk38[i]->pos1.x = arg1->unkC[i]->unk8 + 120;
-        arg1->unk38[i]->pos1.y = -16;
-        data = arg1->unk38[i]->data;
+            &sSpriteTemplate_PlayerBerry,
+            sPlayerBerrySpriteTags[i],
+            sPlayerBerrySpriteTags[i],
+            game->unk68.as_four_players.others[i].berryId + FIRST_BERRY_INDEX);
+        spritesManager->berrySprites[i] = &gSprites[spriteId];
+        spritesManager->berrySprites[i]->oam.priority = 3;
+        spritesManager->berrySprites[i]->affineAnimPaused = TRUE;
+        spritesManager->berrySprites[i]->pos1.x = spritesManager->seatCoords[i]->unk8 + 120;
+        spritesManager->berrySprites[i]->pos1.y = -16;
+        data = spritesManager->berrySprites[i]->data;
         var5 = 512;
         data[1] = var5;
         data[2] = 32;
         data[7] = 112;
-        var0 = arg1->unkC[i]->unkA - arg1->unkC[i]->unk8;
+        var0 = spritesManager->seatCoords[i]->unkA - spritesManager->seatCoords[i]->unk8;
         var3 = var0;
         if (var0 < 0)
             var3 += 3;
@@ -663,19 +665,19 @@ void sub_814DA24(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
         var0 *= 128;
         var6 = var5 + 32;
         var6 = var6 / 2;
-        var1 = sub_80D8B40(7, 0x3F80, var6);
-        data[0] = (u16)arg1->unk38[i]->pos1.x * 128;
-        data[3] = sub_80D8B40(7, var0, var1);
-        var1 = sub_80D8ABC(7, var1, 85);
+        var1 = MathUtil_Div16Shift(7, 0x3F80, var6);
+        data[0] = (u16)spritesManager->berrySprites[i]->pos1.x * 128;
+        data[3] = MathUtil_Div16Shift(7, var0, var1);
+        var1 = MathUtil_Mul16Shift(7, var1, 85);
         data[4] = 0;
-        data[5] = sub_80D8B40(7, 0x3F80, var1);
+        data[5] = MathUtil_Div16Shift(7, 0x3F80, var1);
         data[7] |= 0x8000;
-        if (arg1->unkC[i]->unk8 < 0)
-            StartSpriteAffineAnim(arg1->unk38[i], 1);
+        if (spritesManager->seatCoords[i]->unk8 < 0)
+            StartSpriteAffineAnim(spritesManager->berrySprites[i], 1);
     }
 }
 
-void sub_814DB84(struct Sprite * sprite)
+void SpriteCB_DropBerryIntoCrusher(struct Sprite * sprite)
 {
     s16 *data = sprite->data;
 
@@ -702,17 +704,17 @@ void sub_814DB84(struct Sprite * sprite)
     }
 }
 
-void sub_814DC24(struct BerryCrushGame * arg0, UNUSED struct BerryCrushGame_138 * arg1)
+void BerryCrushFreeBerrySpriteGfx(struct BerryCrushGame * arg0, UNUSED struct BerryCrushGame_138 * arg1)
 {
     u8 i;
     for (i = 0; i < arg0->playerCount; i++)
     {
-        FreeSpritePaletteByTag(gUnknown_846F2EC[i]);
-        FreeSpriteTilesByTag(gUnknown_846F2EC[i]);
+        FreeSpritePaletteByTag(sPlayerBerrySpriteTags[i]);
+        FreeSpriteTilesByTag(sPlayerBerrySpriteTags[i]);
     }
 }
 
-void sub_814DC5C(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
+void sub_814DC5C(struct BerryCrushGame * game, struct BerryCrushGame_138 * manager)
 {
     u8 sp4;
     struct BerryCrushGame_4E * var4E;
@@ -720,47 +722,47 @@ void sub_814DC5C(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
     u16 var, var2;
 
     sp4 = 0;
-    var4E = &arg0->unk40.unkE;
-    for (i = 0; i < arg0->playerCount; i++)
+    var4E = (struct BerryCrushGame_4E *)&game->recvCmd;
+    for (i = 0; i < game->playerCount; i++)
     {
-        var = var4E->unkA >> (i * 3);
+        var = var4E->data.unk08 >> (i * 3);
         var &= 7;
         if (var)
         {
             sp4++;
             if (var & 0x4)
-                StartSpriteAnim(arg1->unk24[i], 1);
+                StartSpriteAnim(manager->impactSprites[i], 1);
             else
-                StartSpriteAnim(arg1->unk24[i], 0);
+                StartSpriteAnim(manager->impactSprites[i], 0);
 
-            arg1->unk24[i]->invisible = FALSE;
-            arg1->unk24[i]->animPaused = FALSE;
-            arg1->unk24[i]->pos2.x = gUnknown_846F2D0[(var % 4) - 1][0];
-            arg1->unk24[i]->pos2.y = gUnknown_846F2D0[(var % 4) - 1][1];
+            manager->impactSprites[i]->invisible = FALSE;
+            manager->impactSprites[i]->animPaused = FALSE;
+            manager->impactSprites[i]->pos2.x = gUnknown_846F2D0[(var % 4) - 1][0];
+            manager->impactSprites[i]->pos2.y = gUnknown_846F2D0[(var % 4) - 1][1];
         }
     }
 
     if (sp4 == 0)
     {
-        arg0->unk25_2 = 0;
+        game->unk25_2 = 0;
     }
     else
     {
-        var = (u8)(arg0->unk28 % 3);
+        var = (u8)(game->timer % 3);
         var2 = var;
-        for (i = 0; i < var4E->unkC * 2 + 3; i++)
+        for (i = 0; i < var4E->data.unk0A * 2 + 3; i++)
         {
-            if (arg1->unk4C[i]->invisible)
+            if (manager->sparkleSprites[i]->invisible)
             {
-                arg1->unk4C[i]->callback = sub_814F0D8;
-                arg1->unk4C[i]->pos1.x = gUnknown_846F2D6[i][0] + 120;
-                arg1->unk4C[i]->pos1.y = gUnknown_846F2D6[i][1] + 136 - (var * 4);
-                arg1->unk4C[i]->pos2.x = gUnknown_846F2D6[i][0] + (gUnknown_846F2D6[i][0] / (var2 * 4));
-                arg1->unk4C[i]->pos2.y = gUnknown_846F2D6[i][1];
-                if (var4E->unk4_1)
-                    StartSpriteAnim(arg1->unk4C[i], 1);
+                manager->sparkleSprites[i]->callback = sub_814F0D8;
+                manager->sparkleSprites[i]->pos1.x = gUnknown_846F2D6[i][0] + 120;
+                manager->sparkleSprites[i]->pos1.y = gUnknown_846F2D6[i][1] + 136 - (var * 4);
+                manager->sparkleSprites[i]->pos2.x = gUnknown_846F2D6[i][0] + (gUnknown_846F2D6[i][0] / (var2 * 4));
+                manager->sparkleSprites[i]->pos2.y = gUnknown_846F2D6[i][1];
+                if (var4E->data.unk02_1)
+                    StartSpriteAnim(manager->sparkleSprites[i], 1);
                 else
-                    StartSpriteAnim(arg1->unk4C[i], 0);
+                    StartSpriteAnim(manager->sparkleSprites[i], 0);
 
                 var++;
                 if (var > 3)
@@ -768,9 +770,9 @@ void sub_814DC5C(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
             }
         }
 
-        if (arg0->unk25_2)
+        if (game->unk25_2)
         {
-            arg0->unk25_2 = 0;
+            game->unk25_2 = 0;
         }
         else
         {
@@ -779,7 +781,7 @@ void sub_814DC5C(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg1)
             else
                 PlaySE(SE_TOY_KABE);
 
-            arg0->unk25_2 = 1;
+            game->unk25_2 = 1;
         }
     }
 }
@@ -790,48 +792,48 @@ bool32 sub_814DE50(struct BerryCrushGame * arg0, struct BerryCrushGame_138 * arg
 
     for (i = 0; i < arg0->playerCount; i++)
     {
-        if (!arg1->unk24[i]->invisible)
+        if (!arg1->impactSprites[i]->invisible)
             return FALSE;
     }
 
     for (i = 0; i < 11; i++)
     {
-        if (!arg1->unk4C[i]->invisible)
+        if (!arg1->sparkleSprites[i]->invisible)
             return FALSE;
     }
 
-    if (arg0->unk2C != 0)
-        arg0->unk2C = 0;
+    if (arg0->vibration != 0)
+        arg0->vibration = 0;
 
     return TRUE;
 }
 
-static void sub_814DEC0(struct BerryCrushGame_138 * arg0, u16 arg1)
+static void FramesToMinSec(struct BerryCrushGame_138 * manager, u16 frames)
 {
     u8 i = 0;
-    u32 r7 = 0;
+    u32 fractionalFrames = 0;
     s16 r3 = 0;
 
-    arg0->unk4 = arg1 / 3600;
-    arg0->unk6 = (arg1 % 3600) / 60;
-    r3 = sub_80D8AA0((arg1 % 60) << 8, 4);
+    manager->minutes = frames / 3600;
+    manager->secondsInt = (frames % 3600) / 60;
+    r3 = MathUtil_Mul16((frames % 60) << 8, 4);
 
     for (i = 0; i < 8; i++)
     {
         if ((r3 >> (7 - i)) & 1)
-            r7 += gUnknown_846E450[i];
+            fractionalFrames += sPressingSpeedConversionTable[i];
     }
 
-    arg0->unk8 = r7 / 1000000;
+    manager->secondsFrac = fractionalFrames / 1000000;
 }
 
-static void sub_814DF44(u8 windowId, u8 left, u8 colorId, const u8 *string)
+static void PrintTextCentered(u8 windowId, u8 left, u8 colorId, const u8 *string)
 {
     left = (left * 4) - (GetStringWidth(2, string, -1) / 2u);
     AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColorTable[colorId], 0, string);
 }
 
-static void sub_814DFA4(struct BerryCrushGame * game, u8 command, u8 x, u8 y)
+static void PrintBerryCrushResultWindow(struct BerryCrushGame * game, u8 command, u8 x, u8 y)
 {
     u8 i = 0;
     u8 linkPlayerId = 0;
@@ -848,37 +850,40 @@ static void sub_814DFA4(struct BerryCrushGame * game, u8 command, u8 x, u8 y)
         switch (command)
         {
         case 0:
+            // Number of presses
             linkPlayerId = bcPlayers->as_five_players.players[0].unk4.as_2d_bytes[command][i];
-            if (i != 0 && bcPlayers->as_four_players.unk00.unk0C[command][i] != bcPlayers->as_four_players.unk00.unk0C[command][i - 1])
+            if (i != 0 && bcPlayers->as_four_players.unk00.stats[command][i] != bcPlayers->as_four_players.unk00.stats[command][i - 1])
             {
                 linkIdToPrint = i;
             }
-            ConvertIntToDecimalStringN(gStringVar1, bcPlayers->as_four_players.unk00.unk0C[command][i], STR_CONV_MODE_RIGHT_ALIGN, 4);
+            ConvertIntToDecimalStringN(gStringVar1, bcPlayers->as_four_players.unk00.stats[command][i], STR_CONV_MODE_RIGHT_ALIGN, 4);
             realX = x - GetStringWidth(2, sBCRankingHeaders[command], -1) - 4;
-            AddTextPrinterParameterized3(game->unk138.unk82, 2, realX, y + 14 * i, sBerryCrushTextColorTable[0], 0, sBCRankingHeaders[command]);
-            AddTextPrinterParameterized3(game->unk138.unk82, 2, realX - 24, y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar1);
+            AddTextPrinterParameterized3(game->spritesManager.unk82, 2, realX, y + 14 * i, sBerryCrushTextColorTable[0], 0, sBCRankingHeaders[command]);
+            AddTextPrinterParameterized3(game->spritesManager.unk82, 2, realX - 24, y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar1);
             break;
         case 1:
+            // Neatness
             linkPlayerId = bcPlayers->as_five_players.players[0].unk4.as_2d_bytes[command][i];
-            if (i != 0 && bcPlayers->as_four_players.unk00.unk0C[command][i] != bcPlayers->as_four_players.unk00.unk0C[command][i - 1])
+            if (i != 0 && bcPlayers->as_four_players.unk00.stats[command][i] != bcPlayers->as_four_players.unk00.stats[command][i - 1])
             {
                 linkIdToPrint = i;
             }
-            ConvertIntToDecimalStringN(gStringVar1, bcPlayers->as_four_players.unk00.unk0C[command][i] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar1, bcPlayers->as_four_players.unk00.stats[command][i] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
             score = 0;
-            realX = bcPlayers->as_four_players.unk00.unk0C[command][i] & 15;
+            realX = bcPlayers->as_four_players.unk00.stats[command][i] & 15;
             for (j = 0; j < 4; j++)
             {
                 if ((realX >> (3 - j)) & 1)
-                    score += gUnknown_846E450[j];
+                    score += sPressingSpeedConversionTable[j];
             }
             realX = score / 1000000u;
             ConvertIntToDecimalStringN(gStringVar2, realX, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, sBCRankingHeaders[command]);
             realX2 = x - 4;
-            AddTextPrinterParameterized3(game->unk138.unk82, 2, realX2 - GetStringWidth(2, gStringVar4, 0), y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar4);
+            AddTextPrinterParameterized3(game->spritesManager.unk82, 2, realX2 - GetStringWidth(2, gStringVar4, 0), y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar4);
             break;
         case 2:
+            // Berry names
             linkPlayerId = i;
             linkIdToPrint = i;
             j = game->unk68.as_five_players.players[i].unk14[12];
@@ -886,7 +891,7 @@ static void sub_814DFA4(struct BerryCrushGame * game, u8 command, u8 x, u8 y)
                 j = 0;
             StringCopy(gStringVar1, gBerries[j].name);
             StringExpandPlaceholders(gStringVar4, sBCRankingHeaders[command]);
-            AddTextPrinterParameterized3(game->unk138.unk82, 2, x - GetStringWidth(2, gStringVar4, -1) - 4, y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar4);
+            AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x - GetStringWidth(2, gStringVar4, -1) - 4, y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar4);
             break;
         }
         if (linkPlayerId == game->localId)
@@ -896,127 +901,127 @@ static void sub_814DFA4(struct BerryCrushGame * game, u8 command, u8 x, u8 y)
         gStringVar3[0] = linkIdToPrint + CHAR_1;
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, BERRYCRUSH_PLAYER_NAME(game, linkPlayerId));
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gStringVar3);
-        AddTextPrinterParameterized3(game->unk138.unk82, 2, 4, y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->spritesManager.unk82, 2, 4, y + 14 * i, sBerryCrushTextColorTable[0], 0, gStringVar4);
     }
 }
 
-static void sub_814E32C(struct BerryCrushGame * r8)
+static void sub_814E32C(struct BerryCrushGame * game)
 {
-    u8 r10 = 0;
-    u8 r6 = 0;
-    u32 sp0C = 0;
-    union BerryCrushGame_68 *sp10 = &r8->unk68;
-    u8 r7 = GetWindowAttribute(r8->unk138.unk82, WINDOW_HEIGHT) * 8 - 42;
+    u8 i = 0;
+    u8 x = 0;
+    u32 score = 0;
+    union BerryCrushGame_68 *players = &game->unk68;
+    u8 y = GetWindowAttribute(game->spritesManager.unk82, WINDOW_HEIGHT) * 8 - 42;
 
-    sub_814DEC0(&r8->unk138, sp10->as_four_players.unk00.unk04);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 2, r7, sBerryCrushTextColorTable[0], 0, gText_TimeColon);
+    FramesToMinSec(&game->spritesManager, players->as_four_players.unk00.unk04);
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, 2, y, sBerryCrushTextColorTable[0], 0, gText_TimeColon);
 
-    r6 = 190 - (u8)GetStringWidth(2, gText_SpaceSec, 0);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceSec);
+    x = 190 - (u8)GetStringWidth(2, gText_SpaceSec, 0);
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[0], 0, gText_SpaceSec);
 
-    r6 -= 32;
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk6, STR_CONV_MODE_LEADING_ZEROS, 2);
-    ConvertIntToDecimalStringN(gStringVar2, r8->unk138.unk8, STR_CONV_MODE_LEADING_ZEROS, 2);
+    x -= 32;
+    ConvertIntToDecimalStringN(gStringVar1, game->spritesManager.secondsInt, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, game->spritesManager.secondsFrac, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY2);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[0], 0, gStringVar4);
 
-    r6 -= (u8)GetStringWidth(2, gText_SpaceMin, 0) + 3;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceMin);
+    x -= (u8)GetStringWidth(2, gText_SpaceMin, 0) + 3;
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[0], 0, gText_SpaceMin);
 
-    r6 -= 9;
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk4, STR_CONV_MODE_LEADING_ZEROS, 1);
+    x -= 9;
+    ConvertIntToDecimalStringN(gStringVar1, game->spritesManager.minutes, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringExpandPlaceholders(gStringVar4, gText_StrVar1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[0], 0, gStringVar4);
 
-    r7 += 14;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 2, r7, sBerryCrushTextColorTable[0], 0, gText_PressingSpeed);
+    y += 14;
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, 2, y, sBerryCrushTextColorTable[0], 0, gText_PressingSpeed);
 
-    r6 = 190 - (u8)GetStringWidth(2, gText_TimesPerSec, 0);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 3, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
+    x = 190 - (u8)GetStringWidth(2, gText_TimesPerSec, 0);
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 3, x, y, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
 
-    for (r10 = 0; r10 < 8; ++r10)
-        if (((u8)r8->unk16 >> (7 - r10)) & 1)
-            sp0C += *(r10 + gUnknown_846E450); // It's accessed in a different way here for unknown reason
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk16 >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
+    for (i = 0; i < 8; ++i)
+        if (((u8)game->pressingSpeed >> (7 - i)) & 1)
+            score += *(i + sPressingSpeedConversionTable); // It's accessed in a different way here for unknown reason
+    ConvertIntToDecimalStringN(gStringVar1, game->pressingSpeed >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
-    r6 -= 38;
-    if (r8->unk25_1)
-        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[5], 0, gStringVar4);
+    x -= 38;
+    if (game->unk25_1)
+        AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[5], 0, gStringVar4);
     else
-        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[0], 0, gStringVar4);
 
-    r7 += 14;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 2, r7, sBerryCrushTextColorTable[0], 0, gText_Silkiness);
+    y += 14;
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, 2, y, sBerryCrushTextColorTable[0], 0, gText_Silkiness);
 
-    ConvertIntToDecimalStringN(gStringVar1, sp10->as_four_players.unk00.unk08, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, players->as_four_players.unk00.unk08, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
-    r6 = 190 - (u8)GetStringWidth(2, gStringVar4, 0);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+    x = 190 - (u8)GetStringWidth(2, gStringVar4, 0);
+    AddTextPrinterParameterized3(game->spritesManager.unk82, 2, x, y, sBerryCrushTextColorTable[0], 0, gStringVar4);
 }
 
-bool32 sub_814E644(struct BerryCrushGame * r4, struct BerryCrushGame_138 * r6)
+bool32 sub_814E644(struct BerryCrushGame * game, struct BerryCrushGame_138 * spriteManager)
 {
-    u8 r5;
+    u8 playerCountMinus2;
     struct WindowTemplate template;
 
-    switch (r6->unk80)
+    switch (spriteManager->unk80)
     {
     case 0:
-        r5 = r4->playerCount - 2;
-        sub_814EB04(r6);
-        memcpy(&template, &gUnknown_846E428[r4->unk12 - 11], sizeof(struct WindowTemplate));
-        if (r4->unk12 == 13)
-            template.height = gUnknown_846E448[1][r5];
+        playerCountMinus2 = game->playerCount - 2;
+        BerryCrush_HideTimerSprites(spriteManager);
+        memcpy(&template, &gUnknown_846E428[game->gameState - 11], sizeof(struct WindowTemplate));
+        if (game->gameState == 13)
+            template.height = gUnknown_846E448[1][playerCountMinus2];
         else
-            template.height = gUnknown_846E448[0][r5];
-        r6->unk82 = AddWindow(&template);
+            template.height = gUnknown_846E448[0][playerCountMinus2];
+        spriteManager->unk82 = AddWindow(&template);
         break;
     case 1:
-        PutWindowTilemap(r6->unk82);
-        FillWindowPixelBuffer(r6->unk82, PIXEL_FILL(0));
+        PutWindowTilemap(spriteManager->unk82);
+        FillWindowPixelBuffer(spriteManager->unk82, PIXEL_FILL(0));
         break;
     case 2:
-        TextWindow_SetStdFrame0_WithPal(r6->unk82, 0x21D, 0xD0);
-        DrawStdFrameWithCustomTileAndPalette(r6->unk82, 0, 541, 13);
+        TextWindow_SetStdFrame0_WithPal(spriteManager->unk82, 0x21D, 0xD0);
+        DrawStdFrameWithCustomTileAndPalette(spriteManager->unk82, FALSE, 541, 13);
         break;
     case 3:
-        r5 = r4->playerCount - 2;
-        switch (r4->unk12)
+        playerCountMinus2 = game->playerCount - 2;
+        switch (game->gameState)
         {
         case 11:
-            sub_814DF44(r6->unk82, 22, 3, gText_PressesRankings);
-            sub_814DFA4(r4, 0, 0xB0, 8 * gUnknown_846E448[0][r5] - r4->playerCount * 14);
-            r6->unk80 = 5;
+            PrintTextCentered(spriteManager->unk82, 22, 3, gText_PressesRankings);
+            PrintBerryCrushResultWindow(game, 0, 0xB0, 8 * gUnknown_846E448[0][playerCountMinus2] - game->playerCount * 14);
+            spriteManager->unk80 = 5;
             return FALSE;
         case 12:
-            sub_814DF44(r6->unk82, 22, 4, sBCRankingHeaders[r4->unk68.as_five_players.players[0].unk4.as_2d_bytes[0][7] + 3]);
-            sub_814DFA4(r4, 1, 0xB0, 8 * gUnknown_846E448[0][r5] - r4->playerCount * 14);
-            r6->unk80 = 5;
+            PrintTextCentered(spriteManager->unk82, 22, 4, sBCRankingHeaders[game->unk68.as_five_players.players[0].unk4.as_2d_bytes[0][7] + 3]);
+            PrintBerryCrushResultWindow(game, 1, 0xB0, 8 * gUnknown_846E448[0][playerCountMinus2] - game->playerCount * 14);
+            spriteManager->unk80 = 5;
             return FALSE;
         case 13:
-            sub_814DF44(r6->unk82, 24, 3, gText_CrushingResults);
-            sub_814DFA4(r4, 2, 0xC0, 0x10);
+            PrintTextCentered(spriteManager->unk82, 24, 3, gText_CrushingResults);
+            PrintBerryCrushResultWindow(game, 2, 0xC0, 0x10);
             break;
         }
         break;
     case 4:
-        sub_814E32C(r4);
+        sub_814E32C(game);
         break;
     case 5:
-        CopyWindowToVram(r6->unk82, COPYWIN_BOTH);
-        r6->unk80 = 0;
+        CopyWindowToVram(spriteManager->unk82, COPYWIN_BOTH);
+        spriteManager->unk80 = 0;
         return TRUE;
     }
-    ++r6->unk80;
+    ++spriteManager->unk80;
     return FALSE;
 }
 
-void sub_814E80C(struct BerryCrushGame * r4)
+void sub_814E80C(struct BerryCrushGame * game)
 {
-    ClearStdWindowAndFrameToTransparent(r4->unk138.unk82, 1);
-    RemoveWindow(r4->unk138.unk82);
-    sub_814EBB0(r4);
+    ClearStdWindowAndFrameToTransparent(game->spritesManager.unk82, 1);
+    RemoveWindow(game->spritesManager.unk82);
+    sub_814EBB0(game);
 }
 
 static void Task_ShowBerryCrushRankings(u8 taskId)
@@ -1029,7 +1034,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
     switch (data[0])
     {
     case 0:
-        data[1] = AddWindow(&gUnknown_846E3F0);
+        data[1] = AddWindow(&sWindowTemplate_BerryCrushRankings);
         PutWindowTilemap(data[1]);
         FillWindowPixelBuffer(data[1], PIXEL_FILL(0));
         TextWindow_SetStdFrame0_WithPal(data[1], 0x21D, 0xD0);
@@ -1073,7 +1078,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
             for (j = 0; j < 8; ++j)
             {
                 if (((data[i + 2] & 0xFF) >> (7 - j)) & 1)
-                    score += gUnknown_846E450[j];
+                    score += sPressingSpeedConversionTable[j];
             }
             ConvertIntToDecimalStringN(gStringVar1, (u16)data[i + 2] >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
             ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -1125,18 +1130,18 @@ void ShowBerryCrushRankings(void)
     gTasks[taskId].data[5] = gSaveBlock2Ptr->berryCrush.berryCrushResults[3];
 }
 
-static void sub_814EAD4(struct BerryCrushGame_138 * r4, u16 r1)
+static void BerryCrush_PrintTimeOnSprites(struct BerryCrushGame_138 * manager, u16 frames)
 {
-    sub_814DEC0(r4, r1);
-    DigitObjUtil_PrintNumOn(0, r4->unk4);
-    DigitObjUtil_PrintNumOn(1, r4->unk6);
-    DigitObjUtil_PrintNumOn(2, r4->unk8);
+    FramesToMinSec(manager, frames);
+    DigitObjUtil_PrintNumOn(0, manager->minutes);
+    DigitObjUtil_PrintNumOn(1, manager->secondsInt);
+    DigitObjUtil_PrintNumOn(2, manager->secondsFrac);
 }
 
-void sub_814EB04(struct BerryCrushGame_138 * r0)
+void BerryCrush_HideTimerSprites(struct BerryCrushGame_138 * manager)
 {
-    r0->unk78[0]->invisible = TRUE;
-    r0->unk78[1]->invisible = TRUE;
+    manager->timerSprites[0]->invisible = TRUE;
+    manager->timerSprites[1]->invisible = TRUE;
     DigitObjUtil_HideOrShow(2, 1);
     DigitObjUtil_HideOrShow(1, 1);
     DigitObjUtil_HideOrShow(0, 1);
@@ -1148,10 +1153,10 @@ static void sub_814EB38(struct BerryCrushGame * game)
 
     for (i = 0; i < game->playerCount; ++i)
     {
-        game->unk138.unkC[i] = &gUnknown_846F294[gUnknown_846F280[game->playerCount - 2][i]];
-        game->unk138.unk83[i] = AddWindow(&gUnknown_846E3F8[game->unk138.unkC[i]->unk0]);
-        PutWindowTilemap(game->unk138.unk83[i]);
-        FillWindowPixelBuffer(game->unk138.unk83[i], PIXEL_FILL(0));
+        game->spritesManager.seatCoords[i] = &gUnknown_846F294[gUnknown_846F280[game->playerCount - 2][i]];
+        game->spritesManager.unk83[i] = AddWindow(&gUnknown_846E3F8[game->spritesManager.seatCoords[i]->unk0]);
+        PutWindowTilemap(game->spritesManager.unk83[i]);
+        FillWindowPixelBuffer(game->spritesManager.unk83[i], PIXEL_FILL(0));
     }
 }
 
@@ -1161,11 +1166,11 @@ static void sub_814EBB0(struct BerryCrushGame * game)
 
     for (i = 0; i < game->playerCount; ++i)
     {
-        PutWindowTilemap(game->unk138.unk83[i]);
+        PutWindowTilemap(game->spritesManager.unk83[i]);
         if (i == game->localId)
         {
             AddTextPrinterParameterized4(
-                game->unk138.unk83[i],
+                game->spritesManager.unk83[i],
                 2,
                 36 - GetStringWidth(2, BERRYCRUSH_PLAYER_NAME(game, i), 0) / 2u,
                 1,
@@ -1179,7 +1184,7 @@ static void sub_814EBB0(struct BerryCrushGame * game)
         else
         {
             AddTextPrinterParameterized4(
-                game->unk138.unk83[i],
+                game->spritesManager.unk83[i],
                 2,
                 36 - GetStringWidth(2, BERRYCRUSH_PLAYER_NAME(game, i), 0) / 2u,
                 1,
@@ -1190,7 +1195,7 @@ static void sub_814EBB0(struct BerryCrushGame * game)
                 BERRYCRUSH_PLAYER_NAME(game, i)
             );
         }
-        CopyWindowToVram(game->unk138.unk83[i], COPYWIN_BOTH);
+        CopyWindowToVram(game->spritesManager.unk83[i], COPYWIN_BOTH);
     }
     CopyBgTilemapBufferToVram(0);
 }
@@ -1210,12 +1215,12 @@ static void sub_814EC80(struct BerryCrushGame * game)
     LZ77UnCompWram(r0, r4);
     for (; i < game->playerCount; ++i)
     {
-        r0_ = game->unk138.unkC[i]->unk0;
+        r0_ = game->spritesManager.seatCoords[i]->unk0;
         CopyToBgTilemapBufferRect(
             3,
             &r4[r0_ * 40],
-            game->unk138.unkC[i]->unk1,
-            game->unk138.unkC[i]->unk2,
+            game->spritesManager.seatCoords[i]->unk1,
+            game->spritesManager.seatCoords[i]->unk2,
             10,
             2
         );
@@ -1228,64 +1233,64 @@ static void sub_814ECE0(struct BerryCrushGame * game)
     u8 i = 0;
     u8 spriteId;
 
-    game->unk2A = -104;
-    game->unk2C = 0;
+    game->depth = -104;
+    game->vibration = 0;
     gSpriteCoordOffsetX = 0;
     gSpriteCoordOffsetY = -104;
     for (; i < 4; ++i)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
     LoadSpritePalettes(sSpritePals);
-    spriteId = CreateSprite(&gUnknown_846F410, 120, 88, 5);
-    game->unk138.unk20 = &gSprites[spriteId];
-    game->unk138.unk20->oam.priority = 3;
-    game->unk138.unk20->coordOffsetEnabled = TRUE;
-    game->unk138.unk20->animPaused = TRUE;
+    spriteId = CreateSprite(&sSpriteTemplate_BerryCrushCore, 120, 88, 5);
+    game->spritesManager.coreSprite = &gSprites[spriteId];
+    game->spritesManager.coreSprite->oam.priority = 3;
+    game->spritesManager.coreSprite->coordOffsetEnabled = TRUE;
+    game->spritesManager.coreSprite->animPaused = TRUE;
     for (i = 0; i < game->playerCount; ++i)
     {
         spriteId = CreateSprite(
-            &gUnknown_846F428,
-            game->unk138.unkC[i]->unk4 + 120,
-            game->unk138.unkC[i]->unk6 + 32,
+            &sSpriteTemplate_BerryCrushImpact,
+            game->spritesManager.seatCoords[i]->unk4 + 120,
+            game->spritesManager.seatCoords[i]->unk6 + 32,
             0
         );
-        game->unk138.unk24[i] = &gSprites[spriteId];
-        game->unk138.unk24[i]->oam.priority = 1;
-        game->unk138.unk24[i]->invisible = TRUE;
-        game->unk138.unk24[i]->coordOffsetEnabled = TRUE;
-        game->unk138.unk24[i]->animPaused = TRUE;
+        game->spritesManager.impactSprites[i] = &gSprites[spriteId];
+        game->spritesManager.impactSprites[i]->oam.priority = 1;
+        game->spritesManager.impactSprites[i]->invisible = TRUE;
+        game->spritesManager.impactSprites[i]->coordOffsetEnabled = TRUE;
+        game->spritesManager.impactSprites[i]->animPaused = TRUE;
     }
-    for (i = 0; i < NELEMS(game->unk138.unk4C); ++i)
+    for (i = 0; i < NELEMS(game->spritesManager.sparkleSprites); ++i)
     {
         spriteId = CreateSprite(
-            &gUnknown_846F440,
+            &sSpriteTemplate_BerryCrushPowderSparkles,
             gUnknown_846F2D6[i][0] + 120,
             gUnknown_846F2D6[i][1] + 136,
             6
         );
-        game->unk138.unk4C[i] = &gSprites[spriteId];
-        game->unk138.unk4C[i]->oam.priority = 3;
-        game->unk138.unk4C[i]->invisible = TRUE;
-        game->unk138.unk4C[i]->animPaused = TRUE;
-        game->unk138.unk4C[i]->data[0] = i;
+        game->spritesManager.sparkleSprites[i] = &gSprites[spriteId];
+        game->spritesManager.sparkleSprites[i]->oam.priority = 3;
+        game->spritesManager.sparkleSprites[i]->invisible = TRUE;
+        game->spritesManager.sparkleSprites[i]->animPaused = TRUE;
+        game->spritesManager.sparkleSprites[i]->data[0] = i;
     }
-    for (i = 0; i < NELEMS(game->unk138.unk78); ++i)
+    for (i = 0; i < NELEMS(game->spritesManager.timerSprites); ++i)
     {
         spriteId = CreateSprite(
-            &gUnknown_846F458,
+            &sSpriteTemplate_BerryCrushTimer,
             24 * i + 176,
             8,
             0
         );
-        game->unk138.unk78[i] = &gSprites[spriteId];
-        game->unk138.unk78[i]->oam.priority = 0;
-        game->unk138.unk78[i]->invisible = FALSE;
-        game->unk138.unk78[i]->animPaused = FALSE;
+        game->spritesManager.timerSprites[i] = &gSprites[spriteId];
+        game->spritesManager.timerSprites[i]->oam.priority = 0;
+        game->spritesManager.timerSprites[i]->invisible = FALSE;
+        game->spritesManager.timerSprites[i]->animPaused = FALSE;
     }
     DigitObjUtil_CreatePrinter(0, 0, &sDigitObjTemplates[0]);
     DigitObjUtil_CreatePrinter(1, 0, &sDigitObjTemplates[1]);
     DigitObjUtil_CreatePrinter(2, 0, &sDigitObjTemplates[2]);
-    if (game->unk12 == 1)
-        sub_814EB04(&game->unk138);
+    if (game->gameState == 1)
+            BerryCrush_HideTimerSprites(&game->spritesManager);
 }
 
 static void sub_814EF10(struct BerryCrushGame * r5)
@@ -1299,20 +1304,20 @@ static void sub_814EF10(struct BerryCrushGame * r5)
     FreeSpritePaletteByTag(4);
     FreeSpritePaletteByTag(2);
     FreeSpritePaletteByTag(1);
-    for (; r4 < NELEMS(r5->unk138.unk78); ++r4)
-        DestroySprite(r5->unk138.unk78[r4]);
+    for (; r4 < NELEMS(r5->spritesManager.timerSprites); ++r4)
+        DestroySprite(r5->spritesManager.timerSprites[r4]);
     DigitObjUtil_DeletePrinter(2);
     DigitObjUtil_DeletePrinter(1);
     DigitObjUtil_DeletePrinter(0);
-    for (r4 = 0; r4 < NELEMS(r5->unk138.unk4C); ++r4)
-        DestroySprite(r5->unk138.unk4C[r4]);
+    for (r4 = 0; r4 < NELEMS(r5->spritesManager.sparkleSprites); ++r4)
+        DestroySprite(r5->spritesManager.sparkleSprites[r4]);
     for (r4 = 0; r4 < r5->playerCount; ++r4)
-        DestroySprite(r5->unk138.unk24[r4]);
-    if (r5->unk138.unk20->inUse)
-        DestroySprite(r5->unk138.unk20);
+        DestroySprite(r5->spritesManager.impactSprites[r4]);
+    if (r5->spritesManager.coreSprite->inUse)
+        DestroySprite(r5->spritesManager.coreSprite);
 }
 
-static void sub_814EFD0(struct Sprite * sprite)
+static void SpriteCB_BerryCrushImpact(struct Sprite * sprite)
 {
     if (sprite->animEnded)
     {
@@ -1369,12 +1374,12 @@ static void sub_814F0D8(struct Sprite * sprite)
     r7[2] = 32;
     r7[7] = 168;
     r4 = sprite->pos2.x * 128;
-    r5 = sub_80D8B40(7, (168 - sprite->pos1.y) << 7, (r2 + 32) >> 1);
+    r5 = MathUtil_Div16Shift(7, (168 - sprite->pos1.y) << 7, (r2 + 32) >> 1);
     sprite->data[0] = sprite->pos1.x << 7;
-    r7[3] = sub_80D8B40(7, r4, r5);
-    r2 = sub_80D8ABC(7, r5, 85);
+    r7[3] = MathUtil_Div16Shift(7, r4, r5);
+    r2 = MathUtil_Mul16Shift(7, r5, 85);
     r7[4] = r8;
-    r7[5] = sub_80D8B40(7, 0x3F80, r2);
+    r7[5] = MathUtil_Div16Shift(7, 0x3F80, r2);
     r7[6] = sprite->pos2.x / 4;
     r7[7] |= 0x8000;
     sprite->pos2.y = r8;

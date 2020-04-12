@@ -589,7 +589,7 @@ static void BerryCrush_ProcessGamePartnerInput(struct BerryCrushGame * game)
     }
 }
 
-void BerryCrush_BuildLocalState(struct BerryCrushGame * game)
+static void BerryCrush_BuildLocalState(struct BerryCrushGame * game)
 {
     u8 count = 0;
     u16 r1 = 0;
@@ -727,7 +727,7 @@ static void BerryCrush_HandlePlayerInput(struct BerryCrushGame * game)
     RfuPrepareSend0x2f00(game->sendCmd + 1);
 }
 
-void BerryCrush_UpdateGameState(struct BerryCrushGame * game)
+static void BerryCrush_UpdateGameState(struct BerryCrushGame * game)
 {
     struct BerryCrushGame_4E * r4_;
 #ifndef NONMATCHING
@@ -1431,7 +1431,7 @@ void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, u32 sel
     params[9] = communicateAfter;
 }
 
-static void BerryCrush_SetShowMessageParams(u8 *params, u8 stringId, u8 flags, u16 waitKeys, u8 followupCmd)
+void BerryCrush_SetShowMessageParams(u8 *params, u8 stringId, u8 flags, u16 waitKeys, u8 followupCmd)
 {
     params[0] = stringId;
     params[1] = flags;

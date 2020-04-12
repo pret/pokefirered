@@ -534,7 +534,7 @@ static void Task_ReturnToTileScreen(u8 taskId)
 static void MoveWindowByMenuTypeAndCursorPos(u8 menuType, u8 cursorPos)
 {
     u16 win0vTop, win0vBot;
-    SetGpuReg(REG_OFFSET_WIN0H, 0x12DE);
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(18, 222));
     switch (menuType)
     {
     default:
@@ -578,8 +578,8 @@ static bool8 HandleMenuInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0xA0);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
         gTasks[taskId].func = Task_ReturnToTileScreen;
     }
     else if (JOY_NEW(DPAD_UP) && gTasks[taskId].tCursorPos > 0)
@@ -603,8 +603,8 @@ static void PrintMessageOnWindow4(const u8 *str)
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_ERROR, 2, 0, 2, sTextColor1, 2, str);
     PutWindowTilemap(MAIN_MENU_WINDOW_ERROR);
     CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, COPYWIN_GFX);
-    SetGpuReg(REG_OFFSET_WIN0H, 0x13DD);
-    SetGpuReg(REG_OFFSET_WIN0V, 0x739D);
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 19, 221));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(115, 157));
 }
 
 static void PrintContinueStats(void)

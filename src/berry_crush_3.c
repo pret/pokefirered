@@ -1204,7 +1204,7 @@ static void sub_814EC80(struct BerryCrushGame * game)
 {
     u8 i = 0;
     const u32 *r0 = gUnknown_8EB0ADC;
-#ifndef NONMATCHING // r4, i, game register roulette
+#ifndef NONMATCHING // r4, r5, r6 register roulette
     register u8 *r4 asm("r4") = gDecompressionBuffer;
     register u32 r0_ asm("r0");
 #else

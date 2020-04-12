@@ -523,15 +523,15 @@
 
 // Unused?
 #define FLAG_0x1FF               0x1FF
-#define FLAG_0x200               0x200
-#define FLAG_0x201               0x201
-#define FLAG_0x202               0x202
-#define FLAG_0x203               0x203
-#define FLAG_0x204               0x204
-#define FLAG_0x205               0x205
-#define FLAG_0x206               0x206
-#define FLAG_0x207               0x207
-#define FLAG_0x208               0x208
+#define FLAG_EGG_MOVES           0x200
+#define FLAG_TUTOR_MOVES         0x201
+#define FLAG_TM_MOVES            0x202
+#define FLAG_HM_MOVES            0x203
+#define FLAG_VC_MOVES            0x204
+#define FLAG_EVENT_MOVES         0x205
+#define FLAG_GEN_7_MOVE_REMINDER 0x206
+#define FLAG_LEARN_MOVES         0x207
+#define FLAG_FORCED_EVOLUTION    0x208
 #define FLAG_0x209               0x209
 #define FLAG_0x20A               0x20A
 #define FLAG_0x20B               0x20B

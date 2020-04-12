@@ -23,6 +23,7 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 
+
 struct MoveTutorMoveInfoHeaders
 {
     const u8 *text;
@@ -45,9 +46,9 @@ struct LearnMoveGfxResources
     u8 unk_1C;
     u8 unk_1D;
     u8 unk_1E;
-    struct ListMenuItem listMenuItems[25];
-    u16 learnableMoves[25];
-    u8 listMenuStrbufs[25][13];
+    struct ListMenuItem listMenuItems[255];
+    u16 learnableMoves[255];
+    u8 listMenuStrbufs[255][13];
     bool8 scheduleMoveInfoUpdate;
     u8 selectedPartyMember;
     u8 selectedMoveSlot;
@@ -656,6 +657,12 @@ static void SpawnListMenuScrollIndicatorSprites(void)
         gSprites[sMoveRelearner->spriteIds[i]].invisible = TRUE;
 }
 
+u8 GetTMMoves(struct Pokemon *mon, u16 *moves);
+u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
+u8 GetTutorMoves(struct Pokemon *mon, u16 *moves);
+u8 GetHMMoves(struct Pokemon *mon, u16 *moves);
+u8 GetVCMoves(struct Pokemon *mon, u16 *moves);
+u8 GetEventMoves(struct Pokemon *mon, u16 *moves);
 static void MoveRelearnerInitListMenuBuffersEtc(void)
 {
     int i;
@@ -663,7 +670,31 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
     u8 nickname[11];
 
     sMoveRelearner->numLearnableMoves = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
+    if (FlagGet(FLAG_EGG_MOVES))
+	sMoveRelearner->numLearnableMoves += GetEggMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_TM_MOVES))
+	sMoveRelearner->numLearnableMoves += GetTMMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_HM_MOVES))
+	sMoveRelearner->numLearnableMoves += GetHMMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_TUTOR_MOVES))
+	sMoveRelearner->numLearnableMoves += GetTutorMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_VC_MOVES))
+	sMoveRelearner->numLearnableMoves += GetVCMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_EVENT_MOVES))
+	sMoveRelearner->numLearnableMoves += GetEventMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
     count = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
+    if (FlagGet(FLAG_EGG_MOVES))
+	count += GetEggMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_TM_MOVES))
+	count += GetTMMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+	if (FlagGet(FLAG_HM_MOVES))
+	count += GetHMMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_TUTOR_MOVES))
+	count += GetTutorMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_VC_MOVES))
+	count += GetVCMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
+    if (FlagGet(FLAG_EVENT_MOVES))
+	count += GetEventMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves + sMoveRelearner->numLearnableMoves);
     for (i = 0; i < sMoveRelearner->numLearnableMoves; i++)
         StringCopy(sMoveRelearner->listMenuStrbufs[i], gMoveNames[sMoveRelearner->learnableMoves[i]]);
     GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_NICKNAME, nickname);
@@ -690,9 +721,11 @@ static void MoveRelearnerMenuHandleInput(void)
         PlaySE(SE_SELECT);
         if (sMoveRelearner->selectedIndex != 0xFE)
         {
-            sMoveRelearner->state = 8;
-            StringCopy(gStringVar2, sMoveRelearner->listMenuStrbufs[sMoveRelearner->selectedIndex]);
-            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_TeachMoveQues);
+			if (FlagGet(FLAG_LEARN_MOVES)) {
+				sMoveRelearner->state = 8;
+				StringCopy(gStringVar2, sMoveRelearner->listMenuStrbufs[sMoveRelearner->selectedIndex]);
+				StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_TeachMoveQues);
+			}
         }
         else
         {

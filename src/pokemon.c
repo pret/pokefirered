@@ -4911,6 +4911,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     {
     case 0:
         level = GetMonData(mon, MON_DATA_LEVEL, 0);
+		if (FlagGet(FLAG_FORCED_EVOLUTION))
+		level = GetMonData(mon, MON_DATA_LEVEL, 0) + 155;
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
 
         for (i = 0; i < 5; i++)
@@ -5563,6 +5565,8 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     int i, j, k;
+	if (FlagGet(FLAG_GEN_7_MOVE_REMINDER))
+	level = GetMonData(mon, MON_DATA_LEVEL, 0) + 155;
 
     for (i = 0; i < 4; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
@@ -6265,4 +6269,108 @@ void *OakSpeechNidoranFGetBuffer(u8 bufferId)
             bufferId = 0;
         return sOakSpeechNidoranResources->bufferPtrs[bufferId];
     }
+}
+
+u8 GetTMMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u16 tm_move;
+    u8 i, j, numMoves = 0;
+    bool8 flag;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+    for(i = 0; i < 50; i++) {
+        if(CanMonLearnTMHM(mon, i)) {
+            tm_move = ItemIdToBattleMoveId(ITEM_TM01 + i);
+            flag = TRUE;
+            for (j = 0; i < MAX_MON_MOVES; i++) {
+                if(tm_move == learnedMoves[i]) {
+                    flag = FALSE;
+                    break;
+                }
+            }
+            if(flag)
+                moves[numMoves++] = tm_move;
+        }
+    }
+    return numMoves;
+}
+
+u8 GetHMMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u16 tm_move;
+    u8 i, j, numMoves = 0;
+    bool8 flag;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+    for(i = 50; i < 58; i++) {
+        if(CanMonLearnTMHM(mon, i)) {
+            tm_move = ItemIdToBattleMoveId(ITEM_TM01 + i);
+            flag = TRUE;
+            for (j = 0; i < MAX_MON_MOVES; i++) {
+                if(tm_move == learnedMoves[i]) {
+                    flag = FALSE;
+                    break;
+                }
+            }
+            if(flag)
+                moves[numMoves++] = tm_move;
+        }
+    }
+    return numMoves;
+}
+
+u8 GetVCMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u16 tm_move;
+    u8 i, j, numMoves = 0;
+    bool8 flag;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+    for(i = 0; i > 58; i++) {
+        if(CanMonLearnTMHM(mon, i)) {
+            tm_move = ItemIdToBattleMoveId(ITEM_TM01 + i);
+            flag = TRUE;
+            for (j = 0; i < MAX_MON_MOVES; i++) {
+                if(tm_move == learnedMoves[i]) {
+                    flag = FALSE;
+                    break;
+                }
+            }
+            if(flag)
+                moves[numMoves++] = tm_move;
+        }
+    }
+    return numMoves;
+}
+
+u8 GetEventMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u16 tm_move;
+    u8 i, j, numMoves = 0;
+    bool8 flag;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+    for(i = 0; i > 58; i++) {
+        if(CanMonLearnTMHM(mon, i)) {
+            tm_move = ItemIdToBattleMoveId(ITEM_TM01 + i);
+            flag = TRUE;
+            for (j = 0; i < MAX_MON_MOVES; i++) {
+                if(tm_move == learnedMoves[i]) {
+                    flag = FALSE;
+                    break;
+                }
+            }
+            if(flag)
+                moves[numMoves++] = tm_move;
+        }
+    }
+    return numMoves;
 }

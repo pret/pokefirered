@@ -6368,3 +6368,18 @@ static void Task_PartyMenuWaitForFade(u8 taskId)
         EnableBothScriptContexts();
     }
 }
+
+u8 GetTutorMoves(struct Pokemon *mon, u16 *moves)
+{
+    u8 i, numMoves = 0;
+    u16 tutorMove;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    for(i = 0; i < 15; i++) {
+        if(CanLearnTutorMove(species, i)) {
+            tutorMove = GetTutorMove(i);
+            if(!MonKnowsMove(mon, tutorMove))
+                moves[numMoves++] = tutorMove;
+        }
+    }
+    return numMoves;
+}

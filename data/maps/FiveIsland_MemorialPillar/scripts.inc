@@ -33,7 +33,7 @@ FiveIsland_MemorialPillar_EventScript_ReturnedForTM42:: @ 8168A22
 
 FiveIsland_MemorialPillar_EventScript_Memorial:: @ 8168A48
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	lockall
 	goto_if_set FLAG_GOT_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
 	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced

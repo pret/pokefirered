@@ -1,5 +1,5 @@
 #include "global.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "script.h"
 #include "mevent.h"
 #include "mevent_server.h"

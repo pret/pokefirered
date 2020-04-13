@@ -1909,6 +1909,7 @@ _081DDD90:
 	.align 2, 0 @ Don't pad with nop.
 
     .bss
+    .align 3
 gUnknown_030007B8:
     .space 0x40
     .size gUnknown_030007B8, .-gUnknown_030007B8

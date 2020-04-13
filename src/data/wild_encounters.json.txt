@@ -66,6 +66,16 @@ const struct WildPokemon {{ encounter.base_label }}_FishingMons[] =
 
 const struct WildPokemonInfo {{ encounter.base_label }}_FishingMonsInfo = { {{encounter.fishing_mons.encounter_rate}}, {{ encounter.base_label }}_FishingMons };
 {% endif %}
+{% if existsIn(encounter, "rpg_mons") %}
+const struct WildPokemon {{ encounter.base_label }}_RPGMons[] =
+{
+## for wild_mon in encounter.rpg_mons.mons
+    { {{ wild_mon.min_level }}, {{ wild_mon.max_level }}, {{ wild_mon.species }} },
+## endfor
+};
+
+const struct WildPokemonInfo {{ encounter.base_label }}_RPGMonsInfo = { {{encounter.rpg_mons.encounter_rate}}, {{ encounter.base_label }}_RPGMons };
+{% endif %}
 {% if contains(encounter.base_label, "FireRed") or contains(encounter.base_label, "LeafGreen") %}#endif{% endif %}
 
 ## endfor

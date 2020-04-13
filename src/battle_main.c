@@ -569,7 +569,7 @@ static void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_RUN] = HandleAction_Run,
     [B_ACTION_SAFARI_WATCH_CAREFULLY] = HandleAction_WatchesCarefully,
     [B_ACTION_SAFARI_BALL] = HandleAction_SafariZoneBallThrow,
-    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowBait,
+    [B_ACTION_SAFARI_BAIT] = HandleAction_ThrowBait,
     [B_ACTION_SAFARI_GO_NEAR] = HandleAction_ThrowRock,
     [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
     [B_ACTION_OLDMAN_THROW] = HandleAction_OldManBallThrow,
@@ -935,7 +935,7 @@ static void CB2_HandleStartBattle(void)
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 if (IsLinkTaskFinished())
                 {
@@ -1107,7 +1107,7 @@ static void CB2_PreInitMultiBattle(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
+        if (gReceivedRemoteLinkPlayers && IsLinkTaskFinished())
         {
             sub_80108C4();
             SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->field_184, sizeof(gMultiPartnerParty));
@@ -1153,7 +1153,7 @@ static void CB2_PreInitMultiBattle(void)
                 SetMainCallback2(CB2_InitBattleInternal);
             }
         }
-        else if (gReceivedRemoteLinkPlayers == 0)
+        else if (!gReceivedRemoteLinkPlayers)
         {
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
@@ -1190,7 +1190,7 @@ static void CB2_HandleStartMultiBattle(void)
             LoadWirelessStatusIndicatorSpriteGfx();
         break;
     case 1:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             if (IsLinkTaskFinished())
             {
@@ -3260,7 +3260,7 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_SAFARI_BALL:
                     ++gBattleCommunication[gActiveBattler];
                     break;
-                case B_ACTION_SAFARI_POKEBLOCK:
+                case B_ACTION_SAFARI_BAIT:
                 case B_ACTION_SAFARI_GO_NEAR:
                     ++gBattleCommunication[gActiveBattler];
                     break;
@@ -3771,7 +3771,7 @@ static void HandleEndTurn_FinishBattle(void)
         }
         TrySetQuestLogBattleEvent();
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            sub_810CB90();
+            ClearRematchStateByTrainerId();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
@@ -3843,7 +3843,7 @@ static void ReturnFromBattleToOverworld(void)
         RandomlyGivePartyPokerus(gPlayerParty);
         PartySpreadPokerus(gPlayerParty);
     }
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || gReceivedRemoteLinkPlayers == 0)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || !gReceivedRemoteLinkPlayers)
     {
         gSpecialVar_Result = gBattleOutcome;
         gMain.inBattle = FALSE;
@@ -3851,7 +3851,11 @@ static void ReturnFromBattleToOverworld(void)
         if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
         {
             UpdateRoamerHPStatus(&gEnemyParty[0]);
-            if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
+#ifdef BUGFIX
+            if ((gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
+#else
+            if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT) // Bug: When Roar is used by roamer, gBattleOutcome is B_OUTCOME_PLAYER_TELEPORTED (5).
+#endif                                                                                  // & with B_OUTCOME_WON (1) will return TRUE and deactivates the roamer.
                 SetRoamerInactive();
         }
         m4aSongNumStop(SE_HINSI);

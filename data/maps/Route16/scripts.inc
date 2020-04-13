@@ -34,7 +34,7 @@ Route16_EventScript_Snorlax:: @ 8168121
 	faceplayer
 	goto_if_unset FLAG_GOT_POKE_FLUTE, Route16_EventScript_SnorlaxNoPokeFlute
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	msgbox Text_WantToUsePokeFlute, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route16_EventScript_DontUsePokeFlute

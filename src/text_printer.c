@@ -108,7 +108,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
         }
 
         if (speed != TEXT_SPEED_FF)
-          CopyWindowToVram(sTempTextPrinter.printerTemplate.windowId, 2);
+          CopyWindowToVram(sTempTextPrinter.printerTemplate.windowId, COPYWIN_GFX);
         sTextPrinters[textSubPrinter->windowId].active = 0;
     }
     return TRUE;
@@ -126,7 +126,7 @@ void RunTextPrinters(void)
             temp = RenderFont(&sTextPrinters[i]);
             switch (temp) {
                 case 0:
-                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, 2);
+                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                 case 3:
                     if (sTextPrinters[i].callback != 0)
                         sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);

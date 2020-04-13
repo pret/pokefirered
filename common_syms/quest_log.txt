@@ -1,4 +1,4 @@
-gUnknown_3005E88
+gQuestLogPlaybackState
 sNumEventsInLogEntry
 gQuestLogFieldInput
 sCurQuestLogEntry

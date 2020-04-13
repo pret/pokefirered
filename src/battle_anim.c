@@ -1382,7 +1382,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_GreenSpike, 0x0080, ANIM_TAG_GREEN_SPIKE},
     {gBattleAnimSpriteGfx_CircleOfLight, 0x0800, ANIM_TAG_WHITE_CIRCLE_OF_LIGHT},
     {gBattleAnimSpriteGfx_GlowyRedOrb, 0x0020, ANIM_TAG_GLOWY_BLUE_ORB},
-    {gBattleAnimSpriteGfx_Pokeblock, 0x0080, ANIM_TAG_POKEBLOCK},
+    {gBattleAnimSpriteGfx_SafariBait, 0x0080, ANIM_TAG_SAFARI_BAIT},
     {gBattleAnimSpriteGfx_WhiteFeather, 0x0400, ANIM_TAG_WHITE_FEATHER},
     {gBattleAnimSpriteGfx_Sparkle6, 0x0080, ANIM_TAG_SPARKLE_6},
     {gBattleAnimSpriteGfx_Splash, 0x0800, ANIM_TAG_SPLASH},
@@ -1675,7 +1675,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_GreenSpike, ANIM_TAG_GREEN_SPIKE},
     {gBattleAnimSpritePal_WhiteCircleOfLight, ANIM_TAG_WHITE_CIRCLE_OF_LIGHT},
     {gBattleAnimSpritePal_GlowyBlueOrb, ANIM_TAG_GLOWY_BLUE_ORB},
-    {gBattleAnimSpritePal_Pokeblock, ANIM_TAG_POKEBLOCK},
+    {gBattleAnimSpritePal_SafariBait, ANIM_TAG_SAFARI_BAIT},
     {gBattleAnimSpritePal_WhiteFeather, ANIM_TAG_WHITE_FEATHER},
     {gBattleAnimSpritePal_Sparkle6, ANIM_TAG_SPARKLE_6},
     {gBattleAnimSpritePal_Splash, ANIM_TAG_SPLASH},
@@ -2257,8 +2257,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
     if (!toBG_2)
     {
 
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, 1);
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, DMA3_32BIT);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(28)), 0x1000, DMA3_32BIT);
         sub_80752A0(&animBg);
         CpuFill16(toBG_2, animBg.bgTiles, 0x1000);
         CpuFill16(toBG_2, animBg.bgTilemap, 0x800);
@@ -2282,8 +2282,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
     }
     else
     {
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(12)), 0x2000, 1);
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(12)), 0x2000, DMA3_32BIT);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, DMA3_32BIT);
         sub_80752C8(&animBg, 2);
         CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
         CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
@@ -2840,7 +2840,7 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     return pan;
 }
 
-s16 KeepPanInRange(s16 panArg, int oldPan)
+s16 KeepPanInRange(s16 panArg, s32 oldPan)
 {
     s16 pan = panArg;
 

@@ -1,14 +1,11 @@
 #include "global.h"
+#include "gflib.h"
 #include "constants/species.h"
-#include "bg.h"
-#include "palette.h"
 #include "decompress.h"
-#include "malloc.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "pokemon_icon.h"
 #include "mystery_gift_menu.h"
-#include "string_util.h"
 #include "mevent.h"
 #include "battle_anim.h"
 
@@ -400,7 +397,7 @@ static void sub_8145D18(u8 whichWindow)
             }
             break;
     }
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void sub_8146060(void)

@@ -400,7 +400,7 @@ gSpecials:: @ 815FD60
 	def_special GetMartClerkObjectId
 	def_special BattleCardAction
 	def_special GetQuestLogState
-	def_special QuestLog_OnInteractionWithSpecialNpc
+	def_special QuestLog_CutRecording
 	def_special GetMENewsJisanItemAndState
 	def_special GetPCBoxToSendMon
 	def_special OpenMuseumFossilPic

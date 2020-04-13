@@ -1,11 +1,7 @@
 #include "global.h"
-#include "gpu_regs.h"
-#include "bg.h"
-#include "palette.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "quest_log.h"
 #include "new_menu_helpers.h"
-#include "window.h"
 #include "region_map.h"
 #include "menu.h"
 #include "field_fadetransition.h"
@@ -366,7 +362,7 @@ bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
 
 bool32 MapHasPreviewScreen_HandleQLState2(u8 mapsec, u8 type)
 {
-    if (gQuestLogState == QL_STATE_2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
     {
         return FALSE;
     }
@@ -483,7 +479,7 @@ static void Task_RunMapPreviewScreenForest(u8 taskId)
     case 0:
         if (!MapPreview_IsGfxLoadFinished() && !IsDma3ManagerBusyWithBgCopy())
         {
-            CopyWindowToVram(data[11], 3);
+            CopyWindowToVram(data[11], COPYWIN_BOTH);
             data[0]++;
         }
         break;

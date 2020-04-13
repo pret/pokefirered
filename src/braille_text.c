@@ -175,7 +175,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                     ScrollWindow(textPrinter->printerTemplate.windowId, 0, gUnknown_846FB08[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance -= gUnknown_846FB08[gSaveBlock2Ptr->optionsTextSpeed];
                 }
-                CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
+                CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
             }
             else
             {

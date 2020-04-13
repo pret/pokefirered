@@ -18,14 +18,14 @@
 #define GAME_VERSION VERSION_FIRE_RED
 #else // Default version seems to be LeafGreen
 #define GAME_VERSION VERSION_LEAF_GREEN
-#endif
+#endif // GAME_VERSION
 
 // rev1 renamed the source folder for reasons
 #if REVISION == 0
 #define CODE_ROOT "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/"
 #else
 #define CODE_ROOT "C:/WORK/POKeFRLG/Src/pm_lgfr_ose/source/"
-#endif
+#endif // REVISION
 
 #define ABSPATH(x) (CODE_ROOT x)
 
@@ -33,6 +33,12 @@
 #define UNITS_IMPERIAL
 #else
 #define UNITS_METRIC
-#endif
+#endif // ENGLISH
+
+// Crashes may occur due to section reordering in the modern build,
+// so we force BUGFIX here.
+#if MODERN
+#define BUGFIX
+#endif // MODERN
 
 #endif // GUARD_CONFIG_H

@@ -1,7 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "constants/songs.h"
-#include "sprite.h"
-#include "bg.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "graphics.h"
@@ -13,15 +12,7 @@
 #include "new_menu_helpers.h"
 #include "item_menu.h"
 #include "list_menu.h"
-#include "gpu_regs.h"
-#include "palette.h"
 #include "task.h"
-#include "malloc.h"
-#include "main.h"
-#include "sound.h"
-#include "text.h"
-#include "window.h"
-#include "string_util.h"
 #include "event_object_movement.h"
 #include "menu_indicators.h"
 #include "text_window.h"
@@ -801,7 +792,7 @@ static void Setup_DrawMsgAndListBoxes(void)
 static void FC_PutWindowTilemapAndCopyWindowToVramMode3(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
@@ -862,7 +853,7 @@ static void FC_DestroyWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, 0);
     ClearWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     RemoveWindow(windowId);
 }
 
@@ -1385,7 +1376,7 @@ static u8 FC_PopulateListMenu(void)
 static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void FC_CreateScrollIndicatorArrowPair(void)

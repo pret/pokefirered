@@ -1,23 +1,15 @@
 #include "task.h"
-#include "menu.h"
-#include "palette.h"
-#include "sprite.h"
+#include "gflib.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
-#include "sound.h"
-#include "malloc.h"
 #include "scanline_effect.h"
-#include "bg.h"
-#include "gpu_regs.h"
 #include "decompress.h"
-#include "window.h"
 #include "list_menu.h"
 #include "item_menu.h"
 #include "item.h"
 #include "menu_indicators.h"
 #include "event_object_movement.h"
 #include "random.h"
-#include "text.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "event_data.h"
@@ -549,7 +541,7 @@ static void TeachyTvCreateAndRenderRbox(void)
     FillWindowPixelBuffer(0, 0xCC);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
 }
 
 static u8 TeachyTvSetupWindow(void)
@@ -819,7 +811,7 @@ static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
         sResources->grassAnimDisabled = 1;
         TeachyTvSetSpriteCoordsAndSwitchFrame(data[1], 0, 0, 0);
         FillWindowPixelBuffer(0, 0xCC);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         TeachyTvClearBg1EndGraphicText();
         data[2] = 0;
         data[3] = 0;
@@ -945,7 +937,7 @@ static void TTVcmd_EraseTextWindowIfKeyPressed(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(0, 0xCC);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
         ++data[3];
     }
 }

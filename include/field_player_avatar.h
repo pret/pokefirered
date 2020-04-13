@@ -14,7 +14,7 @@ u8 PlayerGetCopyableMovement(void);
 void MovePlayerNotOnBike(u8 direction, u16 heldKeys);
 
 void MovementType_Player(struct Sprite * sprite);
-void sub_805C270(void);
+void HandleEnforcedLookDirectionOnPlayerStopMoving(void);
 void StopPlayerAvatar(void);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8);
@@ -22,7 +22,7 @@ void SetPlayerAvatarStateMask(u8 mask);
 void AlignFishingAnimationFrames(struct Sprite *sprite);
 void CreateStopSurfingTask_NoMusicChange(u8 direction);
 void SavePlayerFacingDirectionForTeleport(u8 direction);
-void SetPlayerAvatarTransitionFlags(u16 a);
+void SetPlayerAvatarTransitionFlags(u16 flags);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 void StartFishing(u8 secondaryId);
 u8 GetPlayerAvatarObjectId(void);

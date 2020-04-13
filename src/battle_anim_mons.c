@@ -898,7 +898,7 @@ void sub_8075458(bool8 arg0)
     }
 }
 
-void sub_8075490(struct Sprite *sprite)
+void StartSpriteLinearTranslationFromCurrentPos(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;

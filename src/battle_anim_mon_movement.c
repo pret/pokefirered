@@ -4,6 +4,7 @@
 #include "task.h"
 #include "trig.h"
 
+#undef abs
 #define abs(x) ((x) < 0 ? -(x) : (x))
 
 static void AnimTask_ShakeMonStep(u8 taskId);

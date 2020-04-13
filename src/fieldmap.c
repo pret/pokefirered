@@ -1,6 +1,5 @@
 #include "global.h"
-#include "bg.h"
-#include "palette.h"
+#include "gflib.h"
 #include "overworld.h"
 #include "script.h"
 #include "new_menu_helpers.h"

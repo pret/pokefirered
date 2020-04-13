@@ -744,7 +744,7 @@ static void BerryPouchSetArrowCursorAt(u8 y, u8 colorIdx)
         width = GetMenuCursorDimensionByFont(2, 0);
         height = GetMenuCursorDimensionByFont(2, 1);
         FillWindowPixelRect(0, 0, 1, y, width, height);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(0, COPYWIN_GFX);
     }
     else
     {

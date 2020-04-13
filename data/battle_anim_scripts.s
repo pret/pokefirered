@@ -44,6 +44,7 @@ gMovesWithQuietBGM:: @ 81C68EC
 	.2byte MOVE_GRASS_WHISTLE
 	.2byte 0xFFFF
 
+	.align 2
 gBattleAnims_Moves::
 	.4byte Move_NONE
 	.4byte Move_POUND
@@ -418,7 +419,7 @@ gBattleAnims_General::
 	.4byte General_StatsChange
 	.4byte General_SubstituteFade
 	.4byte General_SubstituteAppear
-	.4byte General_PokeblockThrow
+	.4byte General_BaitThrow
 	.4byte General_ItemKnockoff
 	.4byte General_TurnTrap
 	.4byte General_ItemEffect
@@ -437,11 +438,11 @@ gBattleAnims_General::
 	.4byte General_FocusPunchSetUp
 	.4byte General_IngrainHeal
 	.4byte General_WishHeal
-	.4byte gUnknown_81D628A
-	.4byte gUnknown_81D6301
-	.4byte gUnknown_81D637B
-	.4byte gUnknown_81D6394
-	.4byte gUnknown_81D63DC
+	.4byte General_MonScared
+	.4byte General_GhostGetOut
+	.4byte General_SilphScoped
+	.4byte General_SafariRockThrow
+	.4byte General_SafariReaction
 
 gBattleAnims_Special::
 	.4byte Special_LevelUp
@@ -10584,17 +10585,17 @@ General_SubstituteAppear:: @ 81D5C04
 	createvisualtask AnimTask_MonToSubstitute, 2, 
 	end
 
-General_PokeblockThrow:: @ 81D5C0C
+General_BaitThrow:: @ 81D5C0C
 	createvisualtask sub_80F1C8C, 2, 0
-	createvisualtask AnimTask_LoadPokeblockGfx, 2, 
+	createvisualtask AnimTask_LoadBaitGfx, 2, 
 	delay 0
 	waitplaysewithpan SE_W026, 192, 22
-	createsprite gPokeblockSpriteTemplate, ANIM_TARGET, 3, -18, 12, 0, 32
+	createsprite gSafariBaitSpriteTemplate, ANIM_TARGET, 3, -18, 12, 0, 32
 	delay 50
 	loopsewithpan SE_W039, 63, 19, 2
 	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 2, 1
 	waitforvisualfinish
-	createvisualtask AnimTask_FreePokeblockGfx, 2, 
+	createvisualtask AnimTask_FreeBaitGfx, 2, 
 	end
 
 General_ItemKnockoff:: @ 81D5C54
@@ -10925,7 +10926,7 @@ General_WishHeal:: @ 81D6250
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 10, 0, 0
 	end
 
-gUnknown_81D628A:: @ 81D628A
+General_MonScared:: @ 81D628A
 	createvisualtask sub_80F1C8C, 2, 1
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_SWEAT_BEAD
@@ -10942,7 +10943,7 @@ gUnknown_81D628A:: @ 81D628A
 	waitforvisualfinish
 	end
 
-gUnknown_81D6301:: @ 81D6301
+General_GhostGetOut:: @ 81D6301
 	createvisualtask sub_80F1C8C, 2, 1
 	waitforvisualfinish
 	fadetobg 2
@@ -10967,7 +10968,7 @@ gUnknown_81D6301:: @ 81D6301
 	waitbgfadein
 	end
 
-gUnknown_81D637B:: @ 81D637B
+General_SilphScoped:: @ 81D637B
 	monbg 0
 	playsewithpan SE_W100, 192
 	waitplaysewithpan SE_W107, 192, 48
@@ -10977,7 +10978,7 @@ gUnknown_81D637B:: @ 81D637B
 	clearmonbg 0
 	end
 
-gUnknown_81D6394:: @ 81D6394
+General_SafariRockThrow:: @ 81D6394
 	createvisualtask sub_80F1C8C, 2, 0
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_ROCKS
@@ -10997,7 +10998,7 @@ gUnknown_81D6394:: @ 81D6394
 	waitforvisualfinish
 	end
 
-gUnknown_81D63DC:: @ 81D63DC
+General_SafariReaction:: @ 81D63DC
 	createvisualtask sub_80F1CE4, 2, 
 	waitforvisualfinish
 	jumpargeq 7, 0, gUnknown_81D63FD

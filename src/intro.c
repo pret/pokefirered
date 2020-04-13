@@ -47,18 +47,18 @@ static EWRAM_DATA u16 gUnknown_203AB06 = 0;
 static EWRAM_DATA u16 gUnknown_203AB08 = 0;
 static EWRAM_DATA u16 gUnknown_203AB0A = 0;
 static EWRAM_DATA u16 gUnknown_203AB0C = 0;
-static EWRAM_DATA u16 gUnknown_203AB0E = 0;
-static EWRAM_DATA u16 gUnknown_203AB10 = 0;
-static EWRAM_DATA u16 gUnknown_203AB12 = 0;
-static EWRAM_DATA u16 gUnknown_203AB14 = 0;
-static EWRAM_DATA u16 gUnknown_203AB16 = 0;
-static EWRAM_DATA u16 gUnknown_203AB18 = 0;
-static EWRAM_DATA u16 gUnknown_203AB1A = 0;
-static EWRAM_DATA u16 gUnknown_203AB1C = 0;
-static EWRAM_DATA u16 gUnknown_203AB1E = 0;
-static EWRAM_DATA u16 gUnknown_203AB20 = 0;
-static EWRAM_DATA u16 gUnknown_203AB22 = 0;
-static EWRAM_DATA u16 gUnknown_203AB24 = 0;
+static EWRAM_DATA u16 sLargeStarXSpeed = 0;
+static EWRAM_DATA u16 sLargeStarYSpeed = 0;
+static EWRAM_DATA u16 sTrailingSparklesXmodMask = 0;
+static EWRAM_DATA u16 sUnusedVarRelatedToGameFreakStars = 0;
+static EWRAM_DATA u16 sTrailingSparklesSpawnRate = 0;
+static EWRAM_DATA u16 sTrailingSparklesFlickerStartTime = 0;
+static EWRAM_DATA u16 sTrailingSparklesDestroySpriteTime = 0;
+static EWRAM_DATA u16 sTrailingSparklesGravityShift = 0;
+static EWRAM_DATA u16 sTrailingSparklesXspeed = 0;
+static EWRAM_DATA u16 sTrailingSparklesYspeed = 0;
+static EWRAM_DATA u16 sTrailingSparklesXprecision = 0;
+static EWRAM_DATA u16 sTrailingSparklesYprecision = 0;
 
 static void CB2_SetUpIntro(void);
 static void CB2_Intro(void);
@@ -181,30 +181,111 @@ static const u32 sSpriteTiles_GengarSwipe[] = INCBIN_U32("graphics/intro/unk_840
 static const u32 sSpriteTiles_NidorinoRecoilDust[] = INCBIN_U32("graphics/intro/unk_840BAE0.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates_GameFreakScene[] = {
-	{ 3, 3, 31, 0, 0, 3, 0x000 },
-	{ 2, 3, 30, 0, 0, 2, 0x010 }
+    {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x010
+    }
 };
 
 static const struct BgTemplate sBgTemplates_FightScene1[] = {
-	{ 0, 0, 28, 2, 0, 0, 0x000 },
-	{ 1, 1, 30, 2, 0, 0, 0x000 }
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }
 };
 
 static const struct BgTemplate sBgTemplates_FightScene2[] = {
-	{ 3, 1, 30, 2, 0, 3, 0x000 },
-	{ 0, 0, 29, 0, 0, 0, 0x000 },
-	{ 2, 3, 27, 0, 0, 2, 0x000 },
-	{ 1, 2, 28, 0, 0, 1, 0x000 }
+    {
+        .bg = 3,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000
+    }, {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 27,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000
+    }
 };
 
 static const struct BgTemplate sBgTemplates_FightScene3[] = {
-	{ 1, 0, 29, 0, 0, 1, 0x000 },
-	{ 0, 1, 30, 2, 0, 0, 0x000 }
+	{
+	    .bg = 1,
+	    .charBaseIndex = 0,
+	    .mapBaseIndex = 29,
+	    .screenSize = 0,
+	    .paletteMode = 0,
+	    .priority = 1,
+	    .baseTile = 0x000
+    }, {
+	    .bg = 0,
+	    .charBaseIndex = 1,
+	    .mapBaseIndex = 30,
+	    .screenSize = 2,
+	    .paletteMode = 0,
+	    .priority = 0,
+	    .baseTile = 0x000
+	}
 };
 
 static const struct WindowTemplate sWindowTemplate[] = {
-	{ 2, 6, 4, 18, 9, 0xD, 0x000 },
-	DUMMY_WIN_TEMPLATE
+	{
+	    .bg = 2,
+	    .tilemapLeft = 6,
+	    .tilemapTop = 4,
+	    .width = 18,
+	    .height = 9,
+	    .paletteNum = 0xD,
+	    .baseBlock = 0x000
+    }, DUMMY_WIN_TEMPLATE
 };
 
 static const u8 sGengarBackSpritePos2UpdateMods[][2] = {
@@ -241,9 +322,31 @@ static const struct Coords16 sTrailingSparkleCoords[] = {
 	{0x0098, 0x0056}
 };
 
-static const struct OamData gOamData_840BC2C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+static const struct OamData gOamData_840BC2C = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_1,
+    .tileNum = 0x000,
+    .priority = 2,
+    .paletteNum = 0
+};
 
-static const struct OamData gOamData_840BC34 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_0, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+static const struct OamData gOamData_840BC34 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_0,
+    .tileNum = 0x000,
+    .priority = 2,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmd_840BC3C[] = {
 	ANIMCMD_FRAME(0, 4),
@@ -266,11 +369,38 @@ static const union AnimCmd *const gAnimCmdTable_840BC64[] = {
 	gAnimCmd_840BC50
 };
 
-static const struct SpriteTemplate sSpriteTemplate_LargeStar = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_LargeStar};
+static const struct SpriteTemplate sSpriteTemplate_LargeStar = {
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gOamData_840BC2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_LargeStar
+};
 
-static const struct SpriteTemplate sSpriteTemplate_TrailingSparkles = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, SpriteCB_TrailingSparkles};
+static const struct SpriteTemplate sSpriteTemplate_TrailingSparkles = {
+    .tileTag = 1,
+    .paletteTag = 1,
+    .oam = &gOamData_840BC34,
+    .anims = gAnimCmdTable_840BC64,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_TrailingSparkles
+};
 
-static const struct OamData gOamData_840BC9C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_2, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
+static const struct OamData gOamData_840BC9C = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_2,
+    .tileNum = 0x000,
+    .priority = 2,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmd_840BCA4[] = {
 	ANIMCMD_FRAME(0, 8),
@@ -284,17 +414,74 @@ static const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
 	gAnimCmd_840BCA4
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RevealGameFreakTextSparkles = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, SpriteCB_RevealGameFreakTextSparkles};
+static const struct SpriteTemplate sSpriteTemplate_RevealGameFreakTextSparkles = {
+    .tileTag = 2,
+    .paletteTag = 1,
+    .oam = &gOamData_840BC9C,
+    .anims = gAnimCmdTable_840BCB8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_RevealGameFreakTextSparkles
+};
 
-static const struct OamData gOamData_840BCD4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
+static const struct OamData gOamData_840BCD4 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_V_RECTANGLE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 3,
+    .paletteNum = 0
+};
 
-static const struct SpriteTemplate sSpriteTemplate_GameFreakLogoArt = {3, 3, &gOamData_840BCD4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GameFreakLogoArt = {
+    .tileTag = 3,
+    .paletteTag = 3,
+    .oam = &gOamData_840BCD4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct OamData gOamData_840BCF4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
+static const struct OamData gOamData_840BCF4 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_1,
+    .tileNum = 0x000,
+    .priority = 3,
+    .paletteNum = 0
+};
 
-static const struct SpriteTemplate sSpriteTemplate_PresentsText = {4, 3, &gOamData_840BCF4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_PresentsText = {
+    .tileTag = 4,
+    .paletteTag = 3,
+    .oam = &gOamData_840BCF4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct OamData gOamData_840BD14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BD14 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmd_840BD1C[] = {
 	ANIMCMD_FRAME(0, 1),
@@ -345,15 +532,61 @@ static const union AffineAnimCmd *const sAffineAnimTable_NidorinoAnim[] = {
 	gAffineAnimCmd_840BD68
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoAnim = {5, 7, &gOamData_840BD14, sAnimTable_NidorinoAnim, NULL, sAffineAnimTable_NidorinoAnim, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoAnim = {
+    .tileTag = 5,
+    .paletteTag = 7,
+    .oam = &gOamData_840BD14,
+    .anims = sAnimTable_NidorinoAnim,
+    .images = NULL,
+    .affineAnims = sAffineAnimTable_NidorinoAnim,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct OamData gOamData_840BDA0 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BDA0 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoStatic = {7, 7, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoStatic = {
+    .tileTag = 7,
+    .paletteTag = 7,
+    .oam = &gOamData_840BDA0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct SpriteTemplate sSpriteTemplate_GengarStatic = {6, 6, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GengarStatic = {
+    .tileTag = 6,
+    .paletteTag = 6,
+    .oam = &gOamData_840BDA0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct OamData gOamData_840BDD8 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 };
+static const struct OamData gOamData_840BDD8 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmds_840BDE0[] = {
 	ANIMCMD_FRAME(0, 0),
@@ -371,9 +604,28 @@ static const union AnimCmd *const gAnimCmdTable_840BDF4[] = {
 	gAnimCmds_840BDE8
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Grass = {8, 8, &gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_Grass = {
+    .tileTag = 8,
+    .paletteTag = 8,
+    .oam = &gOamData_840BDD8,
+    .anims = gAnimCmdTable_840BDF4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct OamData gOamData_840BE14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BE14 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmd_840BE1C[] = {
 	ANIMCMD_FRAME(0, 0),
@@ -402,9 +654,28 @@ static const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
 	gAnimCmd_840BE34
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GengarBack = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, sAffineAnimTable_NidorinoAnim, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GengarBack = {
+    .tileTag = 9,
+    .paletteTag = 6,
+    .oam = &gOamData_840BE14,
+    .anims = gAnimCmdTable_840BE3C,
+    .images = NULL,
+    .affineAnims = sAffineAnimTable_NidorinoAnim,
+    .callback = SpriteCallbackDummy
+};
 
-static const struct OamData gOamData_840BE64 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BE64 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_V_RECTANGLE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_3,
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmd_840BE6C[] = {
 	ANIMCMD_FRAME(0, 8),
@@ -423,9 +694,28 @@ static const union AnimCmd *const gAnimCmdTable_840BE84[] = {
 	gAnimCmd_840BE78
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GengarSwipe = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, SpriteCB_GengarSwipe};
+static const struct SpriteTemplate sSpriteTemplate_GengarSwipe = {
+    .tileTag = 10,
+    .paletteTag = 10,
+    .oam = &gOamData_840BE64,
+    .anims = gAnimCmdTable_840BE84,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_GengarSwipe
+};
 
-static const struct OamData gOamData_840BEA4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
+static const struct OamData gOamData_840BEA4 = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .matrixNum = 0,
+    .size = ST_OAM_SIZE_1,
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
 
 static const union AnimCmd gAnimCmd_840BEAC[] = {
 	ANIMCMD_FRAME(0, 10),
@@ -439,7 +729,15 @@ static const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
 	gAnimCmd_840BEAC
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoRecoilDust = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, SpriteCB_NidorinoRecoilDust};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoRecoilDust = {
+    .tileTag = 11,
+    .paletteTag = 11,
+    .oam = &gOamData_840BEA4,
+    .anims = gAnimCmdTable_840BEC0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_NidorinoRecoilDust
+};
 
 static const struct CompressedSpriteSheet sFightSceneSpriteSheets[] = {
 	{sSpriteTiles_GengarStatic, 0x0800, 6},
@@ -694,7 +992,7 @@ static void IntroCB_Init(struct IntroSequenceData * this)
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         this->state++;
         break;
     case 1:
@@ -820,7 +1118,7 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
         {
             BlitBitmapToWindow(0, this->gamefreakLogoArtSpriteTiles, 0x38, 0x06, 0x20, 0x40);
             BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0x00, 0x28, 0x90, 0x10);
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
             this->state++;
         }
         break;
@@ -1473,58 +1771,58 @@ static void GameFreakScene_LoadGfxCreateStar(void)
 {
     int i;
     u8 spriteId;
-    static EWRAM_DATA u32 gUnknown_203AB28 = 0;
+    static EWRAM_DATA u32 sTrailingSparklesRngSeed = 0;
 
     for (i = 0; i < NELEMS(sSpriteSheets_GameFreakScene); i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheets_GameFreakScene[i]);
     }
     LoadSpritePalettes(sSpritePalettes_GameFreakScene);
-    gUnknown_203AB0E = 0x60;
-    gUnknown_203AB10 = 0x10;
-    gUnknown_203AB12 = 0x07;
-    gUnknown_203AB14 = 0x05;
-    gUnknown_203AB16 = 0x08;
-    gUnknown_203AB18 = 0x5A;
-    gUnknown_203AB1A = 0x78;
-    gUnknown_203AB1E = 0x01;
-    gUnknown_203AB20 = 0x01;
-    gUnknown_203AB22 = 0x05;
-    gUnknown_203AB24 = 0x05;
-    if (gUnknown_203AB28 == 0)
-        gUnknown_203AB28 = 354128453;
+    sLargeStarXSpeed = 0x60;
+    sLargeStarYSpeed = 0x10;
+    sTrailingSparklesXmodMask = 0x07;
+    sUnusedVarRelatedToGameFreakStars = 5;
+    sTrailingSparklesSpawnRate = 8;
+    sTrailingSparklesFlickerStartTime = 90;
+    sTrailingSparklesDestroySpriteTime = 120;
+    sTrailingSparklesXspeed = 1;
+    sTrailingSparklesYspeed = 1;
+    sTrailingSparklesXprecision = 5;
+    sTrailingSparklesYprecision = 5;
+    if (sTrailingSparklesRngSeed == 0)
+        sTrailingSparklesRngSeed = 354128453;
     spriteId = CreateSprite(&sSpriteTemplate_LargeStar, 0xF8, 0x37, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[0] = 0xF80;
         gSprites[spriteId].data[1] = 0x370;
-        gSprites[spriteId].data[2] = gUnknown_203AB0E;
-        gSprites[spriteId].data[3] = gUnknown_203AB10;
-        StoreWordInTwoHalfwords((u16 *)&gSprites[spriteId].data[6], gUnknown_203AB28);
+        gSprites[spriteId].data[2] = sLargeStarXSpeed;
+        gSprites[spriteId].data[3] = sLargeStarYSpeed;
+        StoreWordInTwoHalfwords((u16 *)&gSprites[spriteId].data[6], sTrailingSparklesRngSeed);
     }
 }
 
 static void GameFreakScene_TrailingSparklesGen(s16 x, s16 y, u16 a2)
 {
-    static EWRAM_DATA s16 gUnknown_203AB2C = 0;
+    static EWRAM_DATA s16 sYmod = 0;
 
     u8 spriteId;
-    s16 r4 = (a2 & gUnknown_203AB12) + 2;
-    s16 r2 = gUnknown_203AB2C;
-    gUnknown_203AB2C++;
-    if (gUnknown_203AB2C > 3)
-        gUnknown_203AB2C = -3;
-    x += r4;
-    y += r2;
+    s16 xMod = (a2 & sTrailingSparklesXmodMask) + 2;
+    s16 yMod = sYmod;
+    sYmod++;
+    if (sYmod > 3)
+        sYmod = -3;
+    x += xMod;
+    y += yMod;
     if (x >= 1 && x <= 0xEF)
     {
         spriteId = CreateSprite(&sSpriteTemplate_TrailingSparkles, x, y, 1);
         if (spriteId != MAX_SPRITES)
         {
-            gSprites[spriteId].data[0] = x << gUnknown_203AB22;
-            gSprites[spriteId].data[1] = y << gUnknown_203AB24;
-            gSprites[spriteId].data[2] = gUnknown_203AB1E * r4;
-            gSprites[spriteId].data[3] = gUnknown_203AB20 * r2;
+            gSprites[spriteId].data[0] = x << sTrailingSparklesXprecision;
+            gSprites[spriteId].data[1] = y << sTrailingSparklesYprecision;
+            gSprites[spriteId].data[2] = sTrailingSparklesXspeed * xMod;
+            gSprites[spriteId].data[3] = sTrailingSparklesYspeed * yMod;
         }
     }
 }
@@ -1747,7 +2045,7 @@ static void Task_FightScene3_Bg0Scroll(u8 taskId)
 
 static void SpriteCB_LargeStar(struct Sprite * sprite)
 {
-    u32 v;
+    unsigned v;
     sprite->data[0] -= sprite->data[2];
     sprite->data[1] += sprite->data[3];
     sprite->data[4] += 48;
@@ -1755,7 +2053,7 @@ static void SpriteCB_LargeStar(struct Sprite * sprite)
     sprite->pos1.y = sprite->data[1] >> 4;
     sprite->pos2.y = gSineTable[(sprite->data[4] >> 4) + 0x40] >> 5;
     sprite->data[5]++;
-    if (sprite->data[5] % gUnknown_203AB16)
+    if (sprite->data[5] % sTrailingSparklesSpawnRate)
     {
         LoadWordFromTwoHalfwords(&sprite->data[6], &v);
         v = v * 1103515245 + 24691;
@@ -1776,14 +2074,14 @@ static void SpriteCB_TrailingSparkles(struct Sprite * sprite)
     sprite->data[4]++;
     sprite->data[5] += sprite->data[4];
     sprite->data[7]++;
-    sprite->pos1.x = (u16)sprite->data[0] >> gUnknown_203AB22;
-    sprite->pos1.y = sprite->data[1] >> gUnknown_203AB24;
-    if (gUnknown_203AB1C && sprite->data[3] < 0)
-        sprite->pos2.y = sprite->data[5] >> gUnknown_203AB1C;
-    if (sprite->data[7] > gUnknown_203AB18)
+    sprite->pos1.x = (u16)sprite->data[0] >> sTrailingSparklesXprecision;
+    sprite->pos1.y = sprite->data[1] >> sTrailingSparklesYprecision;
+    if (sTrailingSparklesGravityShift && sprite->data[3] < 0)
+        sprite->pos2.y = sprite->data[5] >> sTrailingSparklesGravityShift;
+    if (sprite->data[7] > sTrailingSparklesFlickerStartTime)
     {
         sprite->invisible = !sprite->invisible;
-        if (sprite->data[7] > gUnknown_203AB1A)
+        if (sprite->data[7] > sTrailingSparklesDestroySpriteTime)
             DestroySprite(sprite);
     }
     if (sprite->pos1.y + sprite->pos2.y < 0 || sprite->pos1.y + sprite->pos2.y > 160)

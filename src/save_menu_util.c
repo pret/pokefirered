@@ -1,6 +1,5 @@
 #include "global.h"
-#include "string_util.h"
-#include "text.h"
+#include "gflib.h"
 #include "event_data.h"
 #include "pokedex.h"
 #include "region_map.h"

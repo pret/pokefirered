@@ -556,7 +556,7 @@ static u8 CheckForPlayerAvatarCollision(u8 direction)
 
     x = playerObjEvent->currentCoords.x;
     y = playerObjEvent->currentCoords.y;
-    if (sub_806DB84(MapGridGetMetatileBehaviorAt(x, y), direction))
+    if (IsDirectionalStairWarpMetatileBehavior(MapGridGetMetatileBehaviorAt(x, y), direction))
         return 8;
     MoveCoords(direction, &x, &y);
     return CheckForObjectEventCollision(playerObjEvent, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
@@ -673,7 +673,7 @@ static void CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collis
     }
 }
 
-void SetPlayerAvatarTransitionFlags(bool16 flags)
+void SetPlayerAvatarTransitionFlags(u16 flags)
 {
     gPlayerAvatar.transitionFlags |= flags;
     DoPlayerAvatarTransition();
@@ -910,7 +910,7 @@ void sub_805C260(void)
     PlayerSetAnimId(MOVEMENT_ACTION_0x9F, 0);
 }
 
-void sub_805C270(void)
+void HandleEnforcedLookDirectionOnPlayerStopMoving(void)
 {
     if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
     {
@@ -1006,12 +1006,12 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 direction)
     {
         if (direction == DIR_WEST)
         {
-            if (MetatileBehavior_IsUnknownWarp6D(metatileBehavior) || MetatileBehavior_IsUnknownWarp6F(metatileBehavior))
+            if (MetatileBehavior_IsDirectionalUpLeftStairWarp(metatileBehavior) || MetatileBehavior_IsDirectionalDownLeftStairWarp(metatileBehavior))
                 return;
         }
         if (direction == DIR_EAST)
         {
-            if (MetatileBehavior_IsUnknownWarp6C(metatileBehavior) || MetatileBehavior_IsUnknownWarp6E(metatileBehavior))
+            if (MetatileBehavior_IsDirectionalUpRightStairWarp(metatileBehavior) || MetatileBehavior_IsDirectionalDownRightStairWarp(metatileBehavior))
                 return;
         }
         if (direction == DIR_NORTH)
@@ -1445,8 +1445,8 @@ static bool8 sub_805CE20(struct Task *task, struct ObjectEvent *playerObject, st
     {
         ObjectEventClearHeldMovementIfFinished(playerObject);
         ObjectEventClearHeldMovementIfFinished(strengthObject);
-        sub_806DE28(strengthObject);
-        sub_806DE70(strengthObject->currentCoords.x, strengthObject->currentCoords.y);
+        HandleBoulderFallThroughHole(strengthObject);
+        HandleBoulderActivateVictoryRoadSwitch(strengthObject->currentCoords.x, strengthObject->currentCoords.y);
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         DestroyTask(FindTaskIdByFunc(Task_BumpBoulder));
@@ -1598,7 +1598,7 @@ void CreateStopSurfingTask_NoMusicChange(u8 direction)
 
 void SeafoamIslandsB4F_CurrentDumpsPlayerOnLand(void)
 {
-    if (gUnknown_3005E88 != 1 && gUnknown_3005E88 != 3)
+    if (gQuestLogPlaybackState != 1 && gQuestLogPlaybackState != 3)
     {
         sub_811278C(gUnknown_835B820[DIR_NORTH], 16);
         CreateStopSurfingTask(DIR_NORTH);

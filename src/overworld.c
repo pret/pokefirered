@@ -160,9 +160,9 @@ static void SetCameraToTrackGuestPlayer_2(void);
 static void sub_8057178(void);
 static void sub_80571A8(void);
 static void CreateLinkPlayerSprites(void);
-static void sub_80572D8(void);
-static void sub_8057300(u8 *state);
-static bool32 sub_8057314(u8 *state);
+static void CB2_LoadMapForQLPlayback(void);
+static void DoLoadMap_QLPlayback(u8 *state);
+static bool32 LoadMap_QLPlayback(u8 *state);
 static bool32 SetUpScrollSceneForCredits(u8 *state, u8 unused);
 static bool8 MapLdr_Credits(void);
 static void CameraCB_CreditsPan(struct CameraObject * camera);
@@ -340,7 +340,7 @@ static void Overworld_ResetStateAfterWhitingOut(void)
     VarSet(VAR_0x404D, 0);
 }
 
-static void sub_8054E40(void)
+static void Overworld_ResetStateOnContinue(void)
 {
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
@@ -763,7 +763,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
+    MapResetTrainerRematches(mapGroup, mapNum);
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
@@ -798,7 +798,7 @@ static void mli0_load_map(bool32 a1)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (isOutdoors)
@@ -921,9 +921,9 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
         return DIR_EAST;
     else if (MetatileBehavior_IsEastArrowWarp(metatileBehavior) == TRUE)
         return DIR_WEST;
-    else if (MetatileBehavior_IsUnknownWarp6C(metatileBehavior) == TRUE || MetatileBehavior_IsUnknownWarp6E(metatileBehavior) == TRUE)
+    else if (MetatileBehavior_IsDirectionalUpRightStairWarp(metatileBehavior) == TRUE || MetatileBehavior_IsDirectionalDownRightStairWarp(metatileBehavior) == TRUE)
         return DIR_WEST;
-    else if (MetatileBehavior_IsUnknownWarp6D(metatileBehavior) == TRUE || MetatileBehavior_IsUnknownWarp6F(metatileBehavior) == TRUE)
+    else if (MetatileBehavior_IsDirectionalUpLeftStairWarp(metatileBehavior) == TRUE || MetatileBehavior_IsDirectionalDownLeftStairWarp(metatileBehavior) == TRUE)
         return DIR_EAST;
     else if ((playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER  && transitionFlags == PLAYER_AVATAR_FLAG_SURFING)
              || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER ))
@@ -979,7 +979,7 @@ void SetCurrentMapLayout(u16 mapLayoutId)
     gMapHeader.mapLayout = GetMapLayout();
 }
 
-void sub_8055D5C(struct WarpData * warp)
+void Overworld_SetWarpDestinationFromWarp(struct WarpData * warp)
 {
     sWarpDestination = *warp;
 }
@@ -1406,7 +1406,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     {
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
-            if (gUnknown_3005E88 == 2)
+            if (gQuestLogPlaybackState == 2)
                 sub_81127F8(&gInputToStoreInQuestLogMaybe);
             ScriptContext2_Enable();
             DismissMapNamePopup();
@@ -1441,7 +1441,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
             RunQuestLogCB();
         }
     }
-    else if (sub_8111CD0() == TRUE)
+    else if (QuestLogScenePlaybackIsEnding() == TRUE)
     {
         RunQuestLogCB();
     }
@@ -1452,7 +1452,7 @@ void CB1_Overworld(void)
 {
     if (gMain.callback2 == CB2_Overworld)
     {
-        if (sub_8112CAC() == TRUE || gQuestLogState == QL_STATE_2)
+        if (sub_8112CAC() == 1 || gQuestLogState == QL_STATE_PLAYBACK)
             DoCB1_Overworld_QuestLogPlayback();
         else
             DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
@@ -1555,7 +1555,7 @@ void CB2_WhiteOut(void)
         gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         do_load_map_stuff_loop(&val);
-        QuestLog_OnInteractionWithSpecialNpc();
+        QuestLog_CutRecording();
         SetFieldVBlankCallback();
         SetMainCallback1(CB1_Overworld);
         SetMainCallback2(CB2_Overworld);
@@ -1575,9 +1575,9 @@ void CB2_LoadMap(void)
 static void CB2_LoadMap2(void)
 {
     do_load_map_stuff_loop(&gMain.state);
-    if (sub_8113748() == TRUE)
+    if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
     {
-        sub_81119C8();
+        QuestLog_AdvancePlayhead_();
     }
     else
     {
@@ -1671,14 +1671,14 @@ void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
     CB2_ReturnToField();
 }
 
-void sub_80568FC(void)
+void CB2_ReturnToFieldFromDiploma(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     CB2_ReturnToField();
 }
 
-static void sub_8056918(void)
+static void FieldCB_ShowMapNameOnContinue(void)
 {
     if (SHOW_MAP_NAME_ENABLED)
         ShowMapNamePopup(FALSE);
@@ -1693,7 +1693,7 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
-    sub_8054E40();
+    Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
     ScriptContext1_Init();
@@ -1709,7 +1709,7 @@ void CB2_ContinueSavedGame(void)
     }
     else
     {
-        gFieldCallback = sub_8056918;
+        gFieldCallback = FieldCB_ShowMapNameOnContinue;
         SetMainCallback1(CB1_Overworld);
         CB2_ReturnToField();
     }
@@ -1861,14 +1861,14 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
         (*state)++;
         break;
     case 3:
-        if (sub_8113748() == TRUE)
+        if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
             return TRUE;
         (*state)++;
         break;
     case 4:
         mli4_mapscripts_and_other();
         sub_8057114();
-        if (gQuestLogState != QL_STATE_2)
+        if (gQuestLogState != QL_STATE_PLAYBACK)
         {
             sub_80CC534();
             sub_80CC59C();
@@ -2205,7 +2205,7 @@ static void CreateLinkPlayerSprites(void)
 
 // Quest Log
 
-void sub_805726C(void)
+void CB2_SetUpOverworldForQLPlaybackWithWarpExit(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gUnknown_2036E28 = 1;
@@ -2213,10 +2213,10 @@ void sub_805726C(void)
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
     SetMainCallback2(CB2_DoChangeMap);
-    gMain.savedCallback = sub_80572D8;
+    gMain.savedCallback = CB2_LoadMapForQLPlayback;
 }
 
-void sub_80572A8(void)
+void CB2_SetUpOverworldForQLPlayback(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gUnknown_2036E28 = 1;
@@ -2224,24 +2224,24 @@ void sub_80572A8(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
-    SetMainCallback2(sub_80572D8);
+    SetMainCallback2(CB2_LoadMapForQLPlayback);
 }
 
-static void sub_80572D8(void)
+static void CB2_LoadMapForQLPlayback(void)
 {
-    sub_8057300(&gMain.state);
+    DoLoadMap_QLPlayback(&gMain.state);
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
 }
 
-static void sub_8057300(u8 *state)
+static void DoLoadMap_QLPlayback(u8 *state)
 {
-    while (!sub_8057314(state))
+    while (!LoadMap_QLPlayback(state))
         ;
 }
 
-static bool32 sub_8057314(u8 *state)
+static bool32 LoadMap_QLPlayback(u8 *state)
 {
     switch (*state)
     {
@@ -2251,7 +2251,7 @@ static bool32 sub_8057314(u8 *state)
         sub_8111F14();
         sub_81113E4();
         sub_8111438();
-        if (sub_8110AC8() == 2)
+        if (GetQuestLogStartType() == QL_START_WARP)
         {
             gUnknown_2031DE0 = FALSE;
             mli0_load_map(FALSE);
@@ -2317,7 +2317,7 @@ static bool32 sub_8057314(u8 *state)
     return FALSE;
 }
 
-void sub_8057430(void)
+void CB2_EnterFieldFromQuestLog(void)
 {
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
@@ -2326,7 +2326,7 @@ void sub_8057430(void)
     LoadSaveblockMapHeader();
     LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
-    sub_8054E40();
+    Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
     ScriptContext1_Init();
@@ -3192,7 +3192,7 @@ bool32 Overworld_LinkRecvQueueLengthMoreThan2(void)
     return sReceivingFromLink;
 }
 
-bool32 sub_8058274(void)
+bool32 Overworld_RecvKeysFromLinkIsRunning(void)
 {
     u8 temp;
 
@@ -3218,7 +3218,7 @@ bool32 sub_8058274(void)
         return FALSE;
 }
 
-bool32 sub_80582E0(void)
+bool32 Overworld_SendKeysToLinkIsRunning(void)
 {
     if (GetLinkSendQueueLength() < 2)
         return FALSE;
@@ -3232,7 +3232,7 @@ bool32 sub_80582E0(void)
         return FALSE;
 }
 
-bool32 sub_8058318(void)
+bool32 IsSendingKeysOverCable(void)
 {
     if (gWirelessCommType != 0)
         return FALSE;
@@ -3298,17 +3298,17 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     ObjectEventUpdateZCoord(objEvent);
 }
 
-static void sub_8058488(u8 linkPlayerId, u8 a2)
+static void SetLinkPlayerObjectRange(u8 linkPlayerId, u8 range)
 {
     if (gLinkPlayerObjectEvents[linkPlayerId].active)
     {
         u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
         struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-        objEvent->range.as_byte = a2;
+        objEvent->range.as_byte = range;
     }
 }
 
-static void sub_80584B8(u8 linkPlayerId)
+static void DestroyLinkPlayerOBject(u8 linkPlayerId)
 {
     struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
     u8 objEventId = linkPlayerObjEvent->objEventId;
@@ -3349,7 +3349,7 @@ static u8 GetLinkPlayerElevation(u8 linkPlayerId)
     return objEvent->currentElevation;
 }
 
-static s32 sub_8058590(u8 linkPlayerId)
+static s32 GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
 {
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];

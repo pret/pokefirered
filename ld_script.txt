@@ -248,6 +248,9 @@ SECTIONS {
         src/mailbox_pc.o(.text);
         src/menu.o(.text);
         src/quest_log.o(.text);
+        src/help_message.o(.text);
+        src/trainer_fan_club.o(.text);
+        src/quest_log_events.o(.text);
         src/union_room.o(.text);
         src/rfu_union_tool.o(.text);
         src/union_room_battle.o(.text);
@@ -549,6 +552,9 @@ SECTIONS {
         src/decoration.o(.rodata);
         src/menu.o(.rodata);
         src/quest_log.o(.rodata);
+        src/help_message.o(.rodata);
+        src/trainer_fan_club.o(.rodata);
+        src/quest_log_events.o(.rodata);
         src/union_room.o(.rodata);
         src/rfu_union_tool.o(.rodata);
         src/union_room_battle.o(.rodata);

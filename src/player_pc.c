@@ -1,5 +1,5 @@
 #include "global.h"
-#include "palette.h"
+#include "gflib.h"
 #include "item.h"
 #include "task.h"
 #include "menu_indicators.h"
@@ -9,7 +9,6 @@
 #include "mail.h"
 #include "mail_data.h"
 #include "help_system.h"
-#include "sound.h"
 #include "overworld.h"
 #include "script.h"
 #include "mailbox_pc.h"
@@ -17,7 +16,6 @@
 #include "field_weather.h"
 #include "event_scripts.h"
 #include "field_fadetransition.h"
-#include "string_util.h"
 #include "item_menu.h"
 #include "item_pc.h"
 #include "party_menu.h"
@@ -394,7 +392,7 @@ static void Task_WithdrawItem_WaitFadeAndGoToItemStorage(u8 taskId)
 static void Task_WithdrawItemBeginFade(u8 taskId)
 {
     gTasks[taskId].func = Task_WithdrawItem_WaitFadeAndGoToItemStorage;
-    ItemPc_SetInitializedFlag(0);
+    ItemPc_SetInitializedFlag(FALSE);
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
@@ -403,7 +401,7 @@ static void Task_PlayerPcCancel(u8 taskId)
     s16 *data = gTasks[taskId].data;
     ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
     ClearWindowTilemap(tWindowId);
-    CopyWindowToVram(tWindowId, 1);
+    CopyWindowToVram(tWindowId, COPYWIN_MAP);
     RemoveWindow(tWindowId);
     Task_ReturnToTopMenu(taskId);
 }

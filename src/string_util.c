@@ -1,6 +1,5 @@
 #include "global.h"
-#include "string_util.h"
-#include "text.h"
+#include "gflib.h"
 
 EWRAM_DATA u8 gStringVar1[32] = {};
 EWRAM_DATA u8 gStringVar2[20] = {};

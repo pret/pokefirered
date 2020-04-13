@@ -796,7 +796,7 @@ static void sub_802F610(void)
 {
     if (gWirelessCommType == 0)
     {
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             m4aSongNumStop(SE_HINSI);
             gMain.inBattle = 0;

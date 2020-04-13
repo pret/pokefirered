@@ -1,13 +1,11 @@
 #include "global.h"
+#include "gflib.h"
 #include "decompress.h"
-#include "dma3.h"
 #include "gba/flash_internal.h"
-#include "gpu_regs.h"
 #include "help_system.h"
 #include "m4a.h"
 #include "save.h"
 #include "strings.h"
-#include "text.h"
 
 bool32 sIsInSaveFailedScreen;
 
@@ -55,8 +53,8 @@ bool32 RunSaveFailedScreen(void)
         sSaveFailedScreenState = 2;
         break;
     case 2:
-        RequestDma3Fill(0, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
-        RequestDma3Copy(sSaveFailedScreenPals, (void *)PLTT, 0x20, 0);
+        RequestDma3Fill(0, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, DMA3_16BIT);
+        RequestDma3Copy(sSaveFailedScreenPals, (void *)PLTT, 0x20, DMA3_16BIT);
         sSaveFailedScreenState = 3;
         break;
     case 3:
@@ -120,12 +118,12 @@ static void BlankPalettes(void)
 
 static void RequestDmaCopyFromScreenBuffer(void)
 {
-    RequestDma3Copy(gDecompressionBuffer + 0x3800, (void *)BG_SCREEN_ADDR(31), 0x500, 0);
+    RequestDma3Copy(gDecompressionBuffer + 0x3800, (void *)BG_SCREEN_ADDR(31), 0x500, DMA3_16BIT);
 }
 
 static void RequestDmaCopyFromCharBuffer(void)
 {
-    RequestDma3Copy(gDecompressionBuffer + 0x020, (void *)BG_CHAR_ADDR(3) + 0x20, 0x2300, 0);
+    RequestDma3Copy(gDecompressionBuffer + 0x020, (void *)BG_CHAR_ADDR(3) + 0x20, 0x2300, DMA3_16BIT);
 }
 
 static void FillBgMapBufferRect(u16 baseBlock, u8 left, u8 top, u8 width, u8 height, u16 blockOffset)

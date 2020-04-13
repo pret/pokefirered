@@ -1,7 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "event_data.h"
-#include "text.h"
-#include "string_util.h"
 #include "menu.h"
 #include "text_window.h"
 #include "strings.h"
@@ -132,6 +131,6 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
 void HideMoneyBox(void)
 {
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
-    CopyWindowToVram(sMoneyBoxWindowId, 2);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
     RemoveWindow(sMoneyBoxWindowId);
 }

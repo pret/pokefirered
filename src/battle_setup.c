@@ -417,7 +417,7 @@ static void CB2_EndWildBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToField);
-        gFieldCallback = sub_807E3EC;
+        gFieldCallback = FieldCB_SafariZoneRanOutOfBalls;
     }
 }
 
@@ -794,13 +794,13 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         SetMapVarsToTrainer();
         return EventScript_TryDoDoubleTrainerBattle;
     case TRAINER_BATTLE_REMATCH_DOUBLE:
-        sub_811231C();
+        FinishRecordingQuestLogScene();
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
         return EventScript_TryDoDoubleRematchBattle;
     case TRAINER_BATTLE_REMATCH:
-        sub_811231C();
+        FinishRecordingQuestLogScene();
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
@@ -951,8 +951,8 @@ static void CB2_EndRematchBattle(void)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         SetBattledTrainerFlag();
-        sub_810CDE8();
-        sub_81138F8();
+        ClearRematchStateOfLastTalked();
+        ResetDeferredLinkEvent();
     }
 }
 
@@ -994,8 +994,7 @@ void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
-    if (gQuestLogState != 2
-     && gQuestLogState != 3
+    if (!QL_IS_PLAYBACK_STATE
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
     {

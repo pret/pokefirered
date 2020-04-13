@@ -1,10 +1,9 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
-#include "sound.h"
+#include "gflib.h"
 #include "battle.h"
 #include "quest_log.h"
 #include "m4a.h"
-#include "main.h"
 #include "constants/songs.h"
 #include "constants/fanfares.h"
 #include "task.h"
@@ -24,11 +23,11 @@ EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
 // iwram bss
-/*IWRAM_DATA*/ static u16 sCurrentMapMusic;
-/*IWRAM_DATA*/ static u16 sNextMapMusic;
-/*IWRAM_DATA*/ static u8 sMapMusicState;
-/*IWRAM_DATA*/ static u8 sMapMusicFadeInSpeed;
-/*IWRAM_DATA*/ static u16 sFanfareCounter;
+static u16 sCurrentMapMusic;
+static u16 sNextMapMusic;
+static u8 sMapMusicState;
+static u8 sMapMusicFadeInSpeed;
+static u16 sFanfareCounter;
 
 // iwram common
 bool8 gDisableMusic;
@@ -193,7 +192,7 @@ void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
     u16 songNum;
 
-    if(gQuestLogState == 2)
+    if(gQuestLogState == QL_STATE_PLAYBACK)
     {
         sFanfareCounter = 0xFF;
     }
@@ -362,7 +361,7 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
 
 void PlayCry7(u16 species, u8 mode) // exclusive to FR/LG
 {
-    if (gQuestLogState != 2 && gQuestLogState != 3)
+    if (!QL_IS_PLAYBACK_STATE)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 85);
         PlayCryInternal(species, 0, CRY_VOLUME, 10, mode);
@@ -571,7 +570,7 @@ void PlayBGM(u16 songNum)
 
 void PlaySE(u16 songNum)
 {
-    if(gDisableMapMusicChangeOnMapLoad == 0 && gQuestLogState != 2)
+    if(gDisableMapMusicChangeOnMapLoad == 0 && gQuestLogState != QL_STATE_PLAYBACK)
         m4aSongNumStart(songNum);
 }
 

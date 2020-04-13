@@ -1,6 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "string_util.h"
-#include "text.h"
 #include "menu.h"
 #include "text_window.h"
 #include "strings.h"

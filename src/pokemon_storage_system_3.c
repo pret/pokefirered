@@ -74,8 +74,8 @@ static void LoadPSSMenuGfx(void);
 static bool8 InitPSSWindows(void);
 static void LoadWaveformSpritePalette(void);
 static void sub_808F078(void);
-static void sub_808F0F4(void);
-static void sub_808F164(void);
+static void PSS_CreateMonMarkingSprite(void);
+static void CreateWaveformSprites(void);
 static void RefreshCursorMonData(void);
 static void BoxSetMosaic(void);
 static void SpriteCB_CursorMon_Mosaic(struct Sprite * sprite);
@@ -2158,22 +2158,22 @@ static void sub_808F078(void)
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     LoadCursorMonSprite();
-    sub_808F0F4();
-    sub_808F164();
+    PSS_CreateMonMarkingSprite();
+    CreateWaveformSprites();
     RefreshCursorMonData();
 }
 
-static void sub_808F0F4(void)
+static void PSS_CreateMonMarkingSprite(void)
 {
-    gPSSData->field_D94 = CreateMonMarkingSprite_AllOff(TAG_TILE_10, TAG_PAL_DAC8, NULL);
-    gPSSData->field_D94->oam.priority = 1;
-    gPSSData->field_D94->subpriority = 1;
-    gPSSData->field_D94->pos1.x = 40;
-    gPSSData->field_D94->pos1.y = 150;
-    gPSSData->field_DA0 = (void *)OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
+    gPSSData->monMarkingSprite = CreateMonMarkingSprite_AllOff(TAG_TILE_10, TAG_PAL_DAC8, NULL);
+    gPSSData->monMarkingSprite->oam.priority = 1;
+    gPSSData->monMarkingSprite->subpriority = 1;
+    gPSSData->monMarkingSprite->pos1.x = 40;
+    gPSSData->monMarkingSprite->pos1.y = 150;
+    gPSSData->monMarkingSpriteTileStart = (void *)OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
 }
 
-static void sub_808F164(void)
+static void CreateWaveformSprites(void)
 {
     u16 i;
     struct SpriteSheet sheet = sWaveformSpriteSheet;
@@ -2309,15 +2309,15 @@ static void PrintCursorMonInfo(void)
         }
     }
 
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     if (gPSSData->cursorMonSpecies != SPECIES_NONE)
     {
-        sub_80BEBD0(gPSSData->cursorMonMarkings, gPSSData->field_DA0);
-        gPSSData->field_D94->invisible = FALSE;
+        RequestDma3LoadMonMarking(gPSSData->cursorMonMarkings, gPSSData->monMarkingSpriteTileStart);
+        gPSSData->monMarkingSprite->invisible = FALSE;
     }
     else
     {
-        gPSSData->field_D94->invisible = TRUE;
+        gPSSData->monMarkingSprite->invisible = TRUE;
     }
 }
 
@@ -2597,7 +2597,7 @@ static void PrintStorageActionText(u8 id)
     AddTextPrinterParameterized(1, 1, gPSSData->field_2190, 0, 2, TEXT_SPEED_FF, NULL);
     DrawTextBorderOuter(1, 2, 13);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
 }
 

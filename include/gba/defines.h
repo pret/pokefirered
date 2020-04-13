@@ -14,6 +14,12 @@
 #define EWRAM_DATA __attribute__((section("ewram_data")))
 #endif
 
+#if MODERN
+#define NOINLINE __attribute__((noinline))
+#else
+#define NOINLINE
+#endif
+
 #define ALIGNED(n) __attribute__((aligned(n)))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)

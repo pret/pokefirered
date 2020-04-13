@@ -1,21 +1,14 @@
 #include "global.h"
-#include "palette.h"
-#include "gpu_regs.h"
-#include "bg.h"
+#include "gflib.h"
 #include "task.h"
 #include "scanline_effect.h"
-#include "malloc.h"
-#include "text.h"
-#include "window.h"
 #include "text_window.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
-#include "sound.h"
 #include "mystery_gift_menu.h"
 #include "title_screen.h"
 #include "list_menu.h"
 #include "link_rfu.h"
-#include "string_util.h"
 #include "mevent.h"
 #include "save.h"
 #include "link.h"
@@ -398,7 +391,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         SetBgTilemapBuffer(0, Alloc(0x800));
 
         LoadUserWindowBorderGfx(0, 10, 0xE0);
-        sub_814FDA0(0,  1, 0xF0);
+        DrawWindowBorderWithStdpal3(0,  1, 0xF0);
         DecompressAndLoadBgGfxUsingHeap(3, gUnkTextboxBorderGfx, 0x100, 0, 0);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();
@@ -485,7 +478,7 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 mg_or_ereader, bool32 usePickOkCance
         AddTextPrinterParameterized4(0, 2, 2, 2, 0, 0, sMG_Ereader_TextColor_1, 0, gJPText_MysteryGift);
         AddTextPrinterParameterized4(0, 0, 0x78, 2, 0, 0, sMG_Ereader_TextColor_1, 0, gJPText_DecideStop);
     }
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(0);
 }
 
@@ -537,14 +530,14 @@ void AddTextPrinterToWindow1(const u8 *str)
     AddTextPrinterParameterized4(1, 2, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
     DrawTextBorderOuter(1, 0x001, 0xF);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_BOTH);
 }
 
 void ClearTextWindow(void)
 {
     rbox_fill_rectangle(1);
     ClearWindowTilemap(1);
-    CopyWindowToVram(1, 1);
+    CopyWindowToVram(1, COPYWIN_MAP);
 }
 
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
@@ -652,7 +645,7 @@ u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
     if (response != -1)
     {
         ClearWindowTilemap(2);
-        CopyWindowToVram(2, 1);
+        CopyWindowToVram(2, COPYWIN_MAP);
     }
     return response;
 }
@@ -677,7 +670,7 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, 2, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
-        CopyWindowToVram(*windowId, 2);
+        CopyWindowToVram(*windowId, COPYWIN_GFX);
         PutWindowTilemap(*windowId);
         (*textState)++;
         break;
@@ -701,7 +694,7 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
             *textState = 0;
             rbox_fill_rectangle(*windowId);
             ClearWindowTilemap(*windowId);
-            CopyWindowToVram(*windowId, 1);
+            CopyWindowToVram(*windowId, COPYWIN_MAP);
             RemoveWindow(*windowId);
             return input;
         }
@@ -710,7 +703,7 @@ s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 
         *textState = 0;
         rbox_fill_rectangle(*windowId);
         ClearWindowTilemap(*windowId);
-        CopyWindowToVram(*windowId, 1);
+        CopyWindowToVram(*windowId, COPYWIN_MAP);
         RemoveWindow(*windowId);
         return -1;
     }
@@ -738,7 +731,7 @@ s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss,
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, 2, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
-        CopyWindowToVram(*windowId, 2);
+        CopyWindowToVram(*windowId, COPYWIN_GFX);
         PutWindowTilemap(*windowId);
         (*textState)++;
         break;
@@ -771,7 +764,7 @@ s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss,
             *textState = 0;
             rbox_fill_rectangle(*windowId);
             ClearWindowTilemap(*windowId);
-            CopyWindowToVram(*windowId, 1);
+            CopyWindowToVram(*windowId, COPYWIN_MAP);
             RemoveWindow(*windowId);
             return input;
         }
@@ -780,7 +773,7 @@ s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss,
         *textState = 0;
         rbox_fill_rectangle(*windowId);
         ClearWindowTilemap(*windowId);
-        CopyWindowToVram(*windowId, 1);
+        CopyWindowToVram(*windowId, COPYWIN_MAP);
         RemoveWindow(*windowId);
         return -2;
     }
@@ -1259,7 +1252,7 @@ void task00_mystery_gift(u8 taskId)
         data->state = 6;
         break;
     case  6:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(TRUE);
             data->state = 7;
@@ -1607,7 +1600,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 30:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ClearScreenInBg0(1);
             data->state = 31;

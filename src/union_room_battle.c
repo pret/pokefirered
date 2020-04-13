@@ -1,18 +1,14 @@
 #include "global.h"
-#include "bg.h"
+#include "gflib.h"
 #include "battle.h"
-#include "gpu_regs.h"
 #include "link.h"
-#include "malloc.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
-#include "palette.h"
 #include "party_menu.h"
 #include "strings.h"
 #include "text_window.h"
 #include "union_room.h"
-#include "window.h"
 #include "constants/union_room.h"
 
 struct UnionRoomBattleWork
@@ -82,7 +78,7 @@ static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s3
         DrawTextBorderOuter(0, 0x001, 0xD);
         UnionRoomBattle_CreateTextPrinter(0, str, 0, 2, speed);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         (*state)++;
         break;
     case 1:
@@ -194,7 +190,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 6:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gMain.state++;
         }
@@ -206,7 +202,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 8:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gMain.state++;
         }

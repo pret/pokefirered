@@ -169,7 +169,7 @@ extern const u8 gText_WithdrawItem[];
 extern const u8 gText_Withdraw[];
 extern const u8 gText_ReturnToPC[];
 
-extern const u8 gUnknown_8416425[];
+extern const u8 gText_OakForbidsUseOfItemHere[];
 extern const u8 gUnknown_8416451[];
 extern const u8 gUnknown_8416537[];
 extern const u8 gUnknown_841658C[];
@@ -838,7 +838,7 @@ extern const u8 gText_SixIsland[];
 extern const u8 gText_SevenIsland[];
 
 // trade
-extern const u8 gUnknown_841E0A5[];
+extern const u8 gText_IsThisTradeOkay[];
 extern const u8 gText_XWillBeSentToY[];
 extern const u8 gText_ByeByeVar1[];
 extern const u8 gText_XSentOverY[];
@@ -861,7 +861,7 @@ extern const u8 gUnknown_841E1C5[];
 extern const u8 gText_PkmnCantBeTradedNow[];
 extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OtherTrainersPkmnCantBeTraded[];
-extern const u8 gUnknown_841E09F[];
+extern const u8 gText_4Qmark[];
 
 extern const u8 gEasyChatGroupName_Pokemon[];
 extern const u8 gEasyChatGroupName_Trainer[];
@@ -1149,15 +1149,15 @@ extern const u8 gUnknown_841DF99[];
 extern const u8 gUnknown_841DFA0[];
 
 // berry_crush
-extern const u8 gUnknown_841CE3C[];
-extern const u8 gUnknown_841CE78[];
-extern const u8 gUnknown_841CEA8[];
-extern const u8 gUnknown_841CF14[];
-extern const u8 gUnknown_841CF50[];
-extern const u8 gUnknown_841CF70[];
-extern const u8 gUnknown_841CFA0[];
-extern const u8 gUnknown_841CFD4[];
-extern const u8 gUnknown_841D008[];
+extern const u8 gText_BerryCrush_AreYouReady[];
+extern const u8 gText_BerryCrush_WaitForOthersToChooseBerry[];
+extern const u8 gText_BerryCrush_GainedXUnitsOfPowder[];
+extern const u8 gText_BerryCrush_RecordingGameResults[];
+extern const u8 gText_BerryCrush_WantToPlayAgain[];
+extern const u8 gText_BerryCrush_NoBerries[];
+extern const u8 gText_BerryCrush_MemberDroppedOut[];
+extern const u8 gText_BerryCrush_TimeUp[];
+extern const u8 gText_BerryCrush_CommunicationStandby[];
 extern const u8 gText_1_ClrLtGryShdwBlk_Dynamic0[];
 extern const u8 gText_1_Dynamic0[];
 extern const u8 gText_SpaceTimes[];

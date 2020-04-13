@@ -1,20 +1,13 @@
 #include "global.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "scanline_effect.h"
 #include "text_window_graphics.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "task.h"
-#include "palette.h"
 #include "overworld.h"
-#include "malloc.h"
 #include "help_system.h"
-#include "main.h"
-#include "bg.h"
-#include "window.h"
-#include "text.h"
 #include "text_window.h"
-#include "string_util.h"
 #include "strings.h"
 #include "field_fadetransition.h"
 #include "gba/m4a_internal.h"
@@ -325,7 +318,7 @@ static void OptionMenu_PickSwitchCancel(void)
     FillWindowPixelBuffer(2, PIXEL_FILL(15)); 
     AddTextPrinterParameterized3(2, 0, x, 0, sOptionMenuPickSwitchCancelTextColor, 0, gText_PickSwitchCancel);
     PutWindowTilemap(2);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_BOTH);
 }
 
 static void OptionMenu_ResetSpriteData(void)
@@ -352,7 +345,7 @@ static bool8 LoadOptionMenuPalette(void)
         LoadPalette(stdpal_get(2), 0xF0, 0x20);
         break;
     case 3:
-        sub_814FDA0(1, 0x1B3, 0x30);
+        DrawWindowBorderWithStdpal3(1, 0x1B3, 0x30);
         break;
     default:
         return TRUE;
@@ -507,7 +500,7 @@ static void BufferOptionMenuString(u8 selection)
         break;
     }
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_BOTH);
 }
 
 static void CloseAndSaveOptionMenu(u8 taskId)
@@ -531,7 +524,7 @@ static void PrintOptionMenuHeader(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(WIN_TEXT_OPTION, 2, gText_MenuOption, 8, 1, TEXT_SPEED_FF, NULL);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 static void DrawOptionMenuBg(void)

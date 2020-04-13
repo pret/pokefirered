@@ -234,7 +234,7 @@ static void sub_8147A34(u8 taskId)
     u16 packet[6];
     s16 *data = gTasks[taskId].data;
 
-    if (gReceivedRemoteLinkPlayers != 0)
+    if (gReceivedRemoteLinkPlayers)
     {
         if (gRecvCmds[0][1] == 0x7FFF)
             data[11] = gRecvCmds[0][2];

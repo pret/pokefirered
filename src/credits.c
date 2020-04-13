@@ -1,19 +1,14 @@
 #include "global.h"
-#include "malloc.h"
-#include "bg.h"
+#include "gflib.h"
 #include "credits.h"
-#include "palette.h"
-#include "gpu_regs.h"
 #include "task.h"
 #include "overworld.h"
 #include "event_data.h"
-#include "window.h"
 #include "new_menu_helpers.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "strings.h"
 #include "trainer_pokemon_sprites.h"
-#include "sound.h"
 #include "constants/species.h"
 #include "constants/maps.h"
 #include "constants/field_weather.h"
@@ -766,7 +761,7 @@ static void CreateCreditsWindow(void)
     sCreditsMgr->windowId = AddWindow(&sCreditsWindowTemplate);
     FillWindowPixelBuffer(sCreditsMgr->windowId, PIXEL_FILL(0));
     PutWindowTilemap(sCreditsMgr->windowId);
-    CopyWindowToVram(sCreditsMgr->windowId, 3);
+    CopyWindowToVram(sCreditsMgr->windowId, COPYWIN_BOTH);
     sCreditsMgr->windowIsActive = TRUE;
 }
 
@@ -936,7 +931,7 @@ static s32 RollCredits(void)
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_DELAY;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_DELAY:
-        CopyWindowToVram(sCreditsMgr->windowId, 2);
+        CopyWindowToVram(sCreditsMgr->windowId, COPYWIN_GFX);
         sCreditsMgr->timer = sCreditsScript[sCreditsMgr->scrcmdidx].duration;
         sCreditsMgr->scrcmdidx++;
         BeginNormalPaletteFade(0x00008000, 0, 16, 0, RGB_BLACK);
@@ -1786,9 +1781,9 @@ static void LoadCreditsMonPic(u8 whichMon)
         CopyToWindowPixelBuffer(2, (const void *)sWindow2Map_Pikachu, 0, 0);
         break;
     }
-    CopyWindowToVram(0, 2);
-    CopyWindowToVram(1, 2);
-    CopyWindowToVram(2, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(1, COPYWIN_GFX);
+    CopyWindowToVram(2, COPYWIN_GFX);
 }
 
 static u16 GetCreditsMonSpecies(u8 whichMon)

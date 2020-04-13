@@ -35,6 +35,10 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 
 // for matching purposes
 
+#if MODERN
+#define AGB_ASSERT_EX(exp, file, line) AGB_ASSERT(exp)
+#define AGB_WARNING_EX(exp, file, line) AGB_WARNING(exp)
+#else
 #ifdef NDEBUG
 #define	AGB_ASSERT_EX(exp, file, line)
 #else
@@ -45,6 +49,7 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
 #define	AGB_WARNING_EX(exp, file, line)
 #else
 #define	AGB_WARNING_EX(exp, file, line) (exp) ? ((void*)0) : AGBAssert(file, line, #exp, 0);
+#endif
 #endif
 
 #endif // GUARD_GBA_ISAGBPRINT_H

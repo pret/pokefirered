@@ -1,12 +1,8 @@
 #include "global.h"
-#include "malloc.h"
-#include "bg.h"
+#include "gflib.h"
 #include "scanline_effect.h"
 #include "palette.h"
-#include "gpu_regs.h"
-#include "window.h"
 #include "text_window.h"
-#include "main.h"
 #include "easy_chat.h"
 #include "mail.h"
 #include "task.h"
@@ -681,8 +677,8 @@ static void AddMailMessagePrinters(void)
     width = GetStringWidth(1, gText_From, 0);
     AddTextPrinterParameterized3(1, 1, sMailViewResources->nameX, sMailViewResources->messageLayout->nameY, sTextColor, 0, gText_From);
     AddTextPrinterParameterized3(1, 1, sMailViewResources->nameX + width, sMailViewResources->messageLayout->nameY, sTextColor, 0, sMailViewResources->authorNameBuffer);
-    CopyWindowToVram(0, 3);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(1, COPYWIN_BOTH);
 }
 
 static void VBlankCB_ShowMail(void)

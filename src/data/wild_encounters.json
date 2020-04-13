@@ -73,6 +73,23 @@
               9
             ]
           }
+        },
+        {
+          "type": "rpg_mons",
+          "encounter_rates": [
+            20,
+            20,
+            10,
+            10,
+            10,
+            10,
+            5,
+            5,
+            4,
+            4,
+            1,
+            1
+          ]
         }
       ],
       "encounters": [
@@ -11193,6 +11210,71 @@
                 "min_level": 25,
                 "max_level": 35,
                 "species": "SPECIES_PSYDUCK"
+              }
+            ]
+          },
+          "rpg_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 14,
+                "max_level": 14,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 10,
+                "max_level": 10,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 12,
+                "max_level": 12,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 6,
+                "max_level": 6,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 14,
+                "max_level": 14,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 8,
+                "max_level": 8,
+                "species": "SPECIES_MEW"
+              },
+              {
+                "min_level": 14,
+                "max_level": 14,
+                "species": "SPECIES_MEW"
               }
             ]
           }

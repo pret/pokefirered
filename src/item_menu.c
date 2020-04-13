@@ -1596,7 +1596,7 @@ static void Task_ItemMenuAction_ToggleSelect(u8 taskId)
     DestroyListMenuTask(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
     Bag_BuildListMenuTemplate(gBagMenuState.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-    CopyWindowToVram(0, 1);
+    CopyWindowToVram(0, COPYWIN_MAP);
     Task_ItemMenuAction_Cancel(taskId);
 }
 
@@ -1608,7 +1608,7 @@ static void Task_ItemMenuAction_Give(u8 taskId)
     HideBagWindow(6);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
-    CopyWindowToVram(0, 1);
+    CopyWindowToVram(0, COPYWIN_MAP);
     if (!CanWriteMailHere(itemId))
         DisplayItemMessageInBag(taskId, 2, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
     else if (!itemid_is_unique(itemId))
@@ -1694,7 +1694,7 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
         HideBagWindow(6);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
-        CopyWindowToVram(0, 1);
+        CopyWindowToVram(0, COPYWIN_MAP);
         ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
     }
 }
@@ -2035,7 +2035,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         {
             ScriptContext2_Enable();
             FreezeObjectEvents();
-            sub_805C270();
+            HandleEnforcedLookDirectionOnPlayerStopMoving();
             StopPlayerAvatar();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
@@ -2131,7 +2131,7 @@ static void Task_Bag_OldManTutorial(u8 taskId)
             HideBagWindow(6);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
-            CopyWindowToVram(0, 1);
+            CopyWindowToVram(0, COPYWIN_MAP);
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             Bag_BeginCloseWin0Animation();
@@ -2242,7 +2242,7 @@ static void Task_Bag_TeachyTvRegister(u8 taskId)
             data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
             Bag_FillMessageBoxWithPalette(0);
             bag_menu_print_cursor_(data[0], 1);
-            CopyWindowToVram(0, 1);
+            CopyWindowToVram(0, COPYWIN_MAP);
             break;
         case 510:
         case 612:
@@ -2305,7 +2305,7 @@ static void Task_Bag_TeachyTvCatching(u8 taskId)
             HideBagWindow(6);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
-            CopyWindowToVram(0, 1);
+            CopyWindowToVram(0, COPYWIN_MAP);
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             Bag_BeginCloseWin0Animation();
@@ -2347,7 +2347,7 @@ static void Task_Bag_TeachyTvStatus(u8 taskId)
             HideBagWindow(6);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
-            CopyWindowToVram(0, 1);
+            CopyWindowToVram(0, COPYWIN_MAP);
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             gItemUseCB = ItemUseCB_MedicineStep;
@@ -2388,7 +2388,7 @@ static void Task_Bag_TeachyTvTMs(u8 taskId)
             HideBagWindow(6);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
-            CopyWindowToVram(0, 1);
+            CopyWindowToVram(0, COPYWIN_MAP);
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             sBagMenuDisplay->exitCB = Pokedude_InitTMCase;

@@ -1,14 +1,9 @@
 #include "global.h"
-#include "palette.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "scanline_effect.h"
-#include "bg.h"
-#include "dma3.h"
 #include "task.h"
-#include "text.h"
 #include "save.h"
 #include "event_data.h"
-#include "window.h"
 #include "menu.h"
 #include "link.h"
 #include "oak_speech.h"
@@ -16,10 +11,8 @@
 #include "quest_log.h"
 #include "mystery_gift_menu.h"
 #include "strings.h"
-#include "sound.h"
 #include "title_screen.h"
 #include "help_system.h"
-#include "string_util.h"
 #include "pokedex.h"
 #include "text_window.h"
 #include "text_window_graphics.h"
@@ -359,7 +352,7 @@ static void Task_PrintMainMenuText(u8 taskId)
         AddTextPrinterParameterized3(MAIN_MENU_WINDOW_NEWGAME_ONLY, 2, 2, 2, sTextColor1, -1, gText_NewGame);
         MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME_ONLY]);
         PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME_ONLY);
-        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME_ONLY, 3);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME_ONLY, COPYWIN_BOTH);
         break;
     case MAIN_MENU_CONTINUE:
         FillWindowPixelBuffer(MAIN_MENU_WINDOW_CONTINUE, PIXEL_FILL(10));
@@ -371,8 +364,8 @@ static void Task_PrintMainMenuText(u8 taskId)
         MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME]);
         PutWindowTilemap(MAIN_MENU_WINDOW_CONTINUE);
         PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME);
-        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, 2);
-        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, 3);
+        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, COPYWIN_GFX);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, COPYWIN_BOTH);
         break;
     case MAIN_MENU_MYSTERYGIFT:
         FillWindowPixelBuffer(MAIN_MENU_WINDOW_CONTINUE, PIXEL_FILL(10));
@@ -389,9 +382,9 @@ static void Task_PrintMainMenuText(u8 taskId)
         PutWindowTilemap(MAIN_MENU_WINDOW_CONTINUE);
         PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME);
         PutWindowTilemap(MAIN_MENU_WINDOW_MYSTERYGIFT);
-        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, 2);
-        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, 2);
-        CopyWindowToVram(MAIN_MENU_WINDOW_MYSTERYGIFT, 3);
+        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, COPYWIN_GFX);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, COPYWIN_GFX);
+        CopyWindowToVram(MAIN_MENU_WINDOW_MYSTERYGIFT, COPYWIN_BOTH);
         break;
     }
     gTasks[taskId].func = Task_WaitDma3AndFadeIn;
@@ -399,7 +392,7 @@ static void Task_PrintMainMenuText(u8 taskId)
 
 static void Task_WaitDma3AndFadeIn(u8 taskId)
 {
-    if (CheckForSpaceForDma3Request(-1) != -1)
+    if (WaitDma3Request(-1) != -1)
     {
         gTasks[taskId].func = Task_UpdateVisualSelection;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
@@ -541,7 +534,7 @@ static void Task_ReturnToTileScreen(u8 taskId)
 static void MoveWindowByMenuTypeAndCursorPos(u8 menuType, u8 cursorPos)
 {
     u16 win0vTop, win0vBot;
-    SetGpuReg(REG_OFFSET_WIN0H, 0x12DE);
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(18, 222));
     switch (menuType)
     {
     default:
@@ -585,8 +578,8 @@ static bool8 HandleMenuInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0xA0);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
         gTasks[taskId].func = Task_ReturnToTileScreen;
     }
     else if (JOY_NEW(DPAD_UP) && gTasks[taskId].tCursorPos > 0)
@@ -609,9 +602,9 @@ static void PrintMessageOnWindow4(const u8 *str)
     MainMenu_DrawWindow(&sWindowTemplate[4]);
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_ERROR, 2, 0, 2, sTextColor1, 2, str);
     PutWindowTilemap(MAIN_MENU_WINDOW_ERROR);
-    CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, 2);
-    SetGpuReg(REG_OFFSET_WIN0H, 0x13DD);
-    SetGpuReg(REG_OFFSET_WIN0V, 0x739D);
+    CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, COPYWIN_GFX);
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 19, 221));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(115, 157));
 }
 
 static void PrintContinueStats(void)

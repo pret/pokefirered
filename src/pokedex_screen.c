@@ -1,17 +1,10 @@
 #include "global.h"
-#include "bg.h"
-#include "malloc.h"
-#include "palette.h"
+#include "gflib.h"
 #include "graphics.h"
-#include "dma3.h"
-#include "gpu_regs.h"
 #include "m4a.h"
 #include "scanline_effect.h"
 #include "task.h"
-#include "text.h"
-#include "window.h"
 #include "new_menu_helpers.h"
-#include "sound.h"
 #include "event_data.h"
 #include "help_system.h"
 #include "menu_indicators.h"
@@ -21,7 +14,6 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
-#include "string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -524,11 +516,11 @@ void sub_8102C28(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     sub_8104C2C(gUnknown_8415DB8);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     PutWindowTilemap(gUnknown_203ACF0->field_16);
-    CopyWindowToVram(gUnknown_203ACF0->field_16, 2);
+    CopyWindowToVram(gUnknown_203ACF0->field_16, COPYWIN_GFX);
 }
 
 void sub_8102EC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -546,7 +538,7 @@ void sub_8102EC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         LoadPalette(gUnknown_84520F4[itemIndex].pal, 0x10, 0x20);
     }
     PutWindowTilemap(gUnknown_203ACF0->field_15);
-    CopyWindowToVram(gUnknown_203ACF0->field_15, 2);
+    CopyWindowToVram(gUnknown_203ACF0->field_15, COPYWIN_GFX);
 }
 
 void sub_8102F48(u8 windowId, s32 itemId, u8 y)
@@ -639,8 +631,8 @@ void sub_810317C(void)
     sub_8106E78(gUnknown_8415F3D, 1);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     sub_8104C2C(gText_PickOKExit);
-    CopyWindowToVram(0, 2);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 void sub_8103238(u8 taskId)
@@ -725,8 +717,8 @@ void sub_810345C(void)
     sub_8106E78(gUnknown_8415F4A, 1);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     sub_8104C2C(gText_PickOKExit);
-    CopyWindowToVram(0, 2);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 u16 sub_8103518(u8 a0)
@@ -1849,7 +1841,7 @@ bool8 sub_8104C64(u16 a0, u8 a1, u8 a2)
         FillWindowPixelBuffer(gUnknown_203ACF0->field_20[a1], PIXEL_FILL(0));
         sub_81049FC(gUnknown_203ACF0->field_20[a1], a0, a1 * 16 + 16);
         PutWindowTilemap(gUnknown_203ACF0->field_20[a1]);
-        CopyWindowToVram(gUnknown_203ACF0->field_20[a1], 2);
+        CopyWindowToVram(gUnknown_203ACF0->field_20[a1], COPYWIN_GFX);
     }
     else
         PutWindowTilemap(gUnknown_203ACF0->field_20[a1]);
@@ -1869,7 +1861,7 @@ bool8 sub_8104C64(u16 a0, u8 a1, u8 a2)
             if (sub_8104AB0(a0, FLAG_GET_CAUGHT, TRUE))
                 BlitBitmapRectToWindow(gUnknown_203ACF0->field_24[a1], gUnknown_8443600, 0, 0, 8, 8, 2, 3, 8, 8);
             PutWindowTilemap(gUnknown_203ACF0->field_24[a1]);
-            CopyWindowToVram(gUnknown_203ACF0->field_24[a1], 2);
+            CopyWindowToVram(gUnknown_203ACF0->field_24[a1], COPYWIN_GFX);
         }
     }
     else
@@ -1914,11 +1906,11 @@ bool8 sub_8104F0C(bool8 a0)
         sub_8106E78(gDexCategoryNamePtrs[gUnknown_203ACF0->field_28], 0);
         sub_8104EC0(0, sub_8106AF8(gUnknown_203ACF0->field_2B), sub_8106AF8(gUnknown_203ACF0->field_2A - 1), 160, 2);
     }
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     if (!a0)
         sub_8104C2C(gUnknown_8415F6C);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     if (gUnknown_203ACF0->field_18[0] != 0xFFFF)
         sub_8104C64(gUnknown_203ACF0->field_18[0], 0, gUnknown_203ACF0->field_2C);
     if (gUnknown_203ACF0->field_18[1] != 0xFFFF)

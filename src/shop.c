@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gflib.h"
 #include "shop.h"
 #include "menu.h"
 #include "data.h"
@@ -7,24 +8,15 @@
 #include "list_menu.h"
 #include "new_menu_helpers.h"
 #include "party_menu.h"
-#include "window.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "task.h"
-#include "text.h"
 #include "item.h"
 #include "item_menu.h"
-#include "main.h"
-#include "sound.h"
-#include "string_util.h"
 #include "overworld.h"
-#include "palette.h"
 #include "field_fadetransition.h"
 #include "scanline_effect.h"
 #include "item_menu_icons.h"
-#include "bg.h"
-#include "gpu_regs.h"
-#include "malloc.h"
 #include "decompress.h"
 #include "menu_indicators.h"
 #include "field_player_avatar.h"
@@ -235,7 +227,7 @@ static u8 CreateShopMenu(u8 a0)
     PrintTextArray(sShopMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
     Menu_InitCursor(sShopMenuWindowId, 2, 0, 2, 16, 3, 0);
     PutWindowTilemap(sShopMenuWindowId);
-    CopyWindowToVram(sShopMenuWindowId, 1);
+    CopyWindowToVram(sShopMenuWindowId, COPYWIN_MAP);
     return CreateTask(Task_ShopMenu, 8);
 }
 
@@ -665,7 +657,7 @@ static void BuyMenuPrintCursorAtYPosition(u8 y, u8 a1)
     if (a1 == 0xFF)
     {
         FillWindowPixelRect(4, 0, 1, y, GetFontAttribute(2, FONTATTR_MAX_LETTER_WIDTH), GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT));
-        CopyWindowToVram(4, 2);
+        CopyWindowToVram(4, COPYWIN_GFX);
     }
     else
     {

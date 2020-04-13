@@ -1,6 +1,5 @@
 #include "global.h"
-#include "text.h"
-#include "string_util.h"
+#include "gflib.h"
 #include "constants/event_objects.h"
 
 static EWRAM_DATA const u8 *sStringPointers[8] = {0};

@@ -1,18 +1,13 @@
 #include "global.h"
-#include "malloc.h"
-#include "dma3.h"
-#include "task.h"
-#include "bg.h"
-#include "window.h"
+#include "gflib.h"
+#include "help_message.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "quest_log.h"
-#include "text.h"
 #include "field_specials.h"
 #include "text_window.h"
 #include "script.h"
-#include "palette.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
@@ -304,7 +299,7 @@ void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 of
 
 static void TaskFreeBufAfterCopyingTileDataToVram(u8 taskId)
 {
-    if (!CheckForSpaceForDma3Request(gTasks[taskId].data[0]))
+    if (!WaitDma3Request(gTasks[taskId].data[0]))
     {
         Free((void *)GetWordTaskArg(taskId, 1));
         DestroyTask(taskId);
@@ -457,7 +452,7 @@ void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonP
 
 void LoadStdWindowFrameGfx(void)
 {
-    if (gQuestLogState == QL_STATE_2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
     {
         gTextFlags.autoScroll = 1;
         TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
@@ -476,7 +471,7 @@ void DrawDialogueFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
@@ -485,7 +480,7 @@ void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
@@ -494,8 +489,8 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
-    if (gQuestLogState == QL_STATE_2)
+        CopyWindowToVram(windowId, COPYWIN_BOTH);
+    if (gQuestLogState == QL_STATE_PLAYBACK)
         CommitQuestLogWindow1();
 }
 
@@ -505,7 +500,7 @@ void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -527,7 +522,7 @@ static void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u
 
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    if (!IsMsgSignPost() || gQuestLogState == QL_STATE_2)
+    if (!IsMsgSignPost() || gQuestLogState == QL_STATE_PLAYBACK)
     {
         FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 0, tilemapLeft - 2, tilemapTop - 1, 1, 1, DLG_WINDOW_PALETTE_NUM);
         FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 1, tilemapLeft - 1, tilemapTop - 1, 1, 1, DLG_WINDOW_PALETTE_NUM);
@@ -611,7 +606,7 @@ void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
 
 void sub_80F7768(u8 windowId, bool8 copyToVram)
 {
-    if (gQuestLogState == QL_STATE_2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
     {
         gTextFlags.autoScroll = 1;
         TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
@@ -645,11 +640,11 @@ static u16 GetStdPalColor(u8 colorNum)
     return gTMCaseMainWindowPalette[colorNum];
 }
 
-void DisplayItemMessageOnField(u8 taskId, u8 bgId, const u8 *string, TaskFunc callback)
+void DisplayItemMessageOnField(u8 taskId, u8 textSpeed, const u8 *string, TaskFunc callback)
 {
     LoadStdWindowFrameGfx();
-    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, bgId, GetTextSpeedSetting(), string, callback);
-    CopyWindowToVram(0, 3);
+    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, textSpeed, GetTextSpeedSetting(), string, callback);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 void DisplayYesNoMenuDefaultYes(void)

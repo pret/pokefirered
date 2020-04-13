@@ -277,7 +277,7 @@ void ClearLinkCallback_2(void);
 void LinkRfu_SetRfuFuncToSend6600(void);
 void IntlConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
-bool8 sub_800A474(u8 blockRequestType);
+bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
 void PrepareLocalLinkPlayerBlock(void);

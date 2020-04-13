@@ -1,23 +1,17 @@
 #include "global.h"
-#include "main.h"
-#include "task.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "util.h"
-#include "string_util.h"
 #include "event_data.h"
 #include "cereader_tool.h"
 #include "easy_chat.h"
-#include "text.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle.h"
 #include "battle_main.h"
 #include "overworld.h"
 #include "item.h"
-#include "window.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
-#include "sound.h"
 #include "constants/vars.h"
 #include "constants/items.h"
 #include "constants/species.h"
@@ -921,7 +915,7 @@ static void ShowResultsBoard(void)
     }
 
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
     VarSet(VAR_TEMP_1, windowId);
 }
 
@@ -1074,7 +1068,7 @@ void PrintTrainerTowerRecords(void)
     }
 
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
     FreeTrainerTowerDataStruct();
 }
 

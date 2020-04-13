@@ -1,17 +1,11 @@
 #include "global.h"
+#include "gflib.h"
 #include "task.h"
-#include "malloc.h"
-#include "bg.h"
-#include "gpu_regs.h"
 #include "util.h"
-#include "window.h"
-#include "sound.h"
 #include "decompress.h"
-#include "palette.h"
 #include "trade.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "text.h"
 #include "mevent.h"
 #include "graphics.h"
 #include "strings.h"
@@ -20,7 +14,6 @@
 #include "battle.h"
 #include "script.h"
 #include "event_data.h"
-#include "string_util.h"
 #include "mail.h"
 #include "mail_data.h"
 #include "pokeball.h"
@@ -930,7 +923,7 @@ void LinkTradeDrawWindow(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 static void TradeAnimInit_LoadGfx(void)
@@ -1007,7 +1000,7 @@ static void CB2_InitTradeAnim_InGameTrade(void)
         LoadTradeMonPic(1, 1);
         FillWindowPixelBuffer(0, PIXEL_FILL(15));
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         gMain.state++;
         break;
     case 9:
@@ -1338,7 +1331,7 @@ static bool8 DoTradeAnim_Cable(void)
         {
             SetTradeSequenceBgGpuRegs(4);
             FillWindowPixelBuffer(0, PIXEL_FILL(15));
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_BOTH);
             sTradeData->state++;
         }
         break;
@@ -1835,7 +1828,7 @@ static bool8 DoTradeAnim_Wireless(void)
         {
             SetTradeSequenceBgGpuRegs(4);
             FillWindowPixelBuffer(0, PIXEL_FILL(15));
-            CopyWindowToVram(0, 3);
+            CopyWindowToVram(0, COPYWIN_BOTH);
             sTradeData->state++;
         }
         break;
@@ -2776,7 +2769,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed)
     sTradeData->textColor[1] = 1;
     sTradeData->textColor[2] = 6;
     AddTextPrinterParameterized4(windowId, 2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void Task_AnimateWirelessSignal(u8 taskId)

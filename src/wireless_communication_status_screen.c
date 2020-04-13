@@ -1,18 +1,11 @@
 #include "global.h"
-#include "bg.h"
-#include "palette.h"
-#include "gpu_regs.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "task.h"
-#include "text.h"
-#include "window.h"
 #include "new_menu_helpers.h"
 #include "scanline_effect.h"
 #include "m4a.h"
-#include "string_util.h"
 #include "dynamic_placeholder_text_util.h"
 #include "overworld.h"
-#include "sound.h"
 #include "strings.h"
 #include "menu.h"
 #include "librfu.h"
@@ -261,9 +254,9 @@ static void PrintHeaderTexts(void)
     }
     WCSS_AddTextPrinterParameterized(1, 3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 2);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 static void Task_WirelessCommunicationScreen(u8 taskId)
@@ -299,7 +292,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
                     WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 100, 2);
             }
             PutWindowTilemap(2);
-            CopyWindowToVram(2, 3);
+            CopyWindowToVram(2, COPYWIN_BOTH);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {

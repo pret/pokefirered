@@ -1,23 +1,15 @@
 #include "global.h"
+#include "gflib.h"
 #include "scanline_effect.h"
-#include "palette.h"
 #include "task.h"
-#include "main.h"
-#include "window.h"
-#include "malloc.h"
 #include "link.h"
-#include "bg.h"
-#include "sound.h"
 #include "overworld.h"
 #include "menu.h"
-#include "text.h"
 #include "event_data.h"
 #include "easy_chat.h"
 #include "money.h"
 #include "strings.h"
-#include "string_util.h"
 #include "trainer_card.h"
-#include "gpu_regs.h"
 #include "pokedex.h"
 #include "pokemon_icon.h"
 #include "graphics.h"
@@ -632,7 +624,7 @@ static void Task_TrainerCard(u8 taskId)
         Link_TryStartSend5FFF();
         DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 2, gText_WaitingTrainerFinishReading, 0, 1, TEXT_SPEED_FF, 0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         sTrainerCardDataPtr->mainState = STATE_CLOSE_CARD_LINK;
         break;
     case STATE_CLOSE_CARD_LINK:
@@ -1475,7 +1467,7 @@ static void LoadStickerGfx(void)
 static void DrawTrainerCardWindow(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static bool8 SetTrainerCardBgsAndPals(void)
@@ -1773,7 +1765,7 @@ static bool8 Task_DrawFlippedCardSide(struct Task* task)
             return FALSE;
         }
         sTrainerCardDataPtr->flipDrawState++;
-    } while (gReceivedRemoteLinkPlayers == 0);
+    } while (!gReceivedRemoteLinkPlayers);
 
     return FALSE;
 }

@@ -1,8 +1,5 @@
 #include "global.h"
-#include "window.h"
-#include "malloc.h"
-#include "bg.h"
-#include "blit.h"
+#include "gflib.h"
 
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
 EWRAM_DATA static u16 sWindowSize = 0;
@@ -19,7 +16,7 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
     u8* memAddress;
     u8 bgLayer;
 
-    for (windowId = 0; windowId < 32; windowId++)
+    for (windowId = 0; windowId < WINDOWS_MAX; windowId++)
     {
         if (gWindows[windowId].window.bg == 0xFF)
             break;
@@ -27,9 +24,9 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
     if (windowId == WINDOWS_MAX)
         return 0xFF;
     bgLayer = template->bg;
-    if (gWindowBgTilemapBuffers[bgLayer] == 0)
+    if (gWindowBgTilemapBuffers[bgLayer] == NULL)
     {
-        u16 attribute = GetBgAttribute(bgLayer, 8);
+        u16 attribute = GetBgAttribute(bgLayer, BG_ATTR_MAPSIZE);
         if (attribute != 0xFFFF)
         {
             s32 i;
@@ -104,13 +101,13 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
 
     switch (mode)
     {
-        case 1:
+        case COPYWIN_MAP:
             CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
             break;
-        case 2:
+        case COPYWIN_GFX:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             break;
-        case 3:
+        case COPYWIN_BOTH:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
             break;

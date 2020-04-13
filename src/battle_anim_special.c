@@ -375,10 +375,10 @@ static const u16 sBallOpenFadeColors[] =
     RGB(4, 0, 0),
 };
 
-const struct SpriteTemplate gPokeblockSpriteTemplate =
+const struct SpriteTemplate gSafariBaitSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POKEBLOCK,
-    .paletteTag = ANIM_TAG_POKEBLOCK,
+    .tileTag = ANIM_TAG_SAFARI_BAIT,
+    .paletteTag = ANIM_TAG_SAFARI_BAIT,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -2027,7 +2027,7 @@ void sub_80F15C8(u8 taskId)
         break;
     case 2:
         spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
-        RequestDma3Fill(0, (void *)OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP, 0x800, 1);
+        RequestDma3Fill(0, (void *)OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP, 0x800, DMA3_32BIT);
         ClearBehindSubstituteBit(gBattleAnimAttacker);
         DestroyAnimVisualTask(taskId);
         break;
@@ -2205,20 +2205,20 @@ static void sub_80F1A80(struct Sprite *sprite)
     }
 }
 
-void AnimTask_LoadPokeblockGfx(u8 taskId)
+void AnimTask_LoadBaitGfx(u8 taskId)
 {
     u8 paletteIndex;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK);
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
+    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_SAFARI_BAIT);
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_FreePokeblockGfx(u8 taskId)
+void AnimTask_FreeBaitGfx(u8 taskId)
 {
-    FreeSpriteTilesByTag(ANIM_TAG_POKEBLOCK);
-    FreeSpritePaletteByTag(ANIM_TAG_POKEBLOCK);
+    FreeSpriteTilesByTag(ANIM_TAG_SAFARI_BAIT);
+    FreeSpritePaletteByTag(ANIM_TAG_SAFARI_BAIT);
     DestroyAnimVisualTask(taskId);
 }
 

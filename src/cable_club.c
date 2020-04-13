@@ -80,13 +80,13 @@ static void PrintNewCountOnLinkPlayerCountDisplayWindow(u16 windowId, s32 num)
     SetStdWindowBorderStyle(windowId, FALSE);
     StringExpandPlaceholders(gStringVar4, gUnknown_841DF82);
     AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 0, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void DestroyLinkPlayerCountDisplayWindow(u16 windowId)
 {
     ClearStdWindowAndFrame(windowId, FALSE);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 num)
@@ -173,7 +173,7 @@ static void sub_80809C4(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
     {
-        sub_800A474(2);
+        Link_PrepareCmd0xCCCC_Rfu0xA100(2);
         DestroyTask(taskId);
     }
 }
@@ -369,7 +369,7 @@ static void Task_LinkupMaster_6(u8 taskId)
             sub_800A900(gFieldLinkPlayerCount);
             TrainerCard_GenerateCardForLinkPlayer((void*)gBlockSendBuffer);
             gTasks[taskId].func = Task_Linkup_6a;
-            sub_800A474(2);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(2);
         }
     }
 }
@@ -532,7 +532,7 @@ static void Task_ReestablishLinkInCableClubRoom_0(u8 taskId)
     {
         OpenLink();
         ResetLinkPlayers();
-        CreateTask(sub_8081A90, 80);
+        CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 80);
     }
     else if (data[0] > 9)
         gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_1;
@@ -934,7 +934,7 @@ bool32 GetSeeingLinkPlayerCardMsg(u8 who)
     return TRUE;
 }
 
-void sub_8081A90(u8 taskId)
+void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     task->data[0]++;

@@ -1,7 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "task.h"
-#include "gpu_regs.h"
-#include "palette.h"
 
 /*
  * Animates the screen as though it was a CRT monitor turning on or off.

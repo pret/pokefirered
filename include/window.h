@@ -54,8 +54,15 @@ u16 AddWindow(const struct WindowTemplate *template);
 int AddWindowWithoutTileMap(const struct WindowTemplate *template);
 void RemoveWindow(u8 windowId);
 void FreeAllWindowBuffers(void);
+
+// Mode parameter for funcs below
+#define COPYWIN_MAP  1
+#define COPYWIN_GFX  2
+#define COPYWIN_BOTH 3
+
 void CopyWindowToVram(u8 windowId, u8 mode);
-void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h);
+void CopyWindowToVram8Bit(u8 windowId, u8 mode);
+
 void PutWindowTilemap(u8 windowId);
 void PutWindowRectTilemapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette);
 void ClearWindowTilemap(u8 windowId);
@@ -73,7 +80,6 @@ u16 AddWindow8Bit(const struct WindowTemplate *template);
 void FillWindowPixelBuffer8Bit(u8 windowId, u8 fillValue);
 void FillWindowPixelRect8Bit(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
 void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 paletteNum);
-void CopyWindowToVram8Bit(u8 windowId, u8 mode);
 
 extern void *gWindowBgTilemapBuffers[];
 extern struct Window gWindows[];

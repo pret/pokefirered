@@ -265,6 +265,7 @@ enum
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
+    WILD_AREA_RPG_MONS,
 };
 
 #define WILD_CHECK_REPEL    0x1
@@ -284,6 +285,9 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 area, u8
         break;
     case WILD_AREA_ROCKS:
         slot = ChooseWildMonIndex_WaterRock();
+        break;
+    case WILD_AREA_RPG_MONS:
+        slot = ChooseWildMonIndex_Land();
         break;
     }
     level = ChooseWildMonLevel(&info->wildPokemon[slot]);
@@ -392,7 +396,6 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
             }
             else
             {
-
                 // try a regular wild land encounter
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL) == TRUE)
                 {
@@ -442,6 +445,42 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
                 }
             }
         }
+        else // rpgMons encounter
+        {
+            if (gWildMonHeaders[headerId].rpgMonsInfo == NULL)
+                return FALSE;
+            if (DoWildEncounterRateTest(gWildMonHeaders[headerId].rpgMonsInfo->encounterRate, FALSE) != TRUE)
+            {
+                AddToWildEncounterRateBuff(gWildMonHeaders[headerId].rpgMonsInfo->encounterRate);
+                return FALSE;
+            }
+
+            else if (TryStartRoamerEncounter() == TRUE)
+            {
+                roamer = &gSaveBlock1Ptr->roamer;
+                if (!IsWildLevelAllowedByRepel(roamer->level))
+                {
+                    return FALSE;
+                }
+
+                StartRoamerBattle();
+                return TRUE;
+            }
+            else
+            {
+                // rpgMons encounter
+                if (TryGenerateWildMon(gWildMonHeaders[headerId].rpgMonsInfo, WILD_AREA_RPG_MONS, WILD_CHECK_REPEL) == TRUE)
+                {
+                    StartWildBattle();
+                    return TRUE;
+                }
+                else
+                {
+                    AddToWildEncounterRateBuff(gWildMonHeaders[headerId].rpgMonsInfo->encounterRate);
+                }
+            }
+        }
+        
     }
 
     return FALSE;
@@ -502,6 +541,21 @@ bool8 SweetScentWildEncounter(void)
                 return FALSE;
 
             TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, 0);
+            StartWildBattle();
+            return TRUE;
+        }
+        else
+        {
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                StartRoamerBattle();
+                return TRUE;
+            }
+
+            if (gWildMonHeaders[headerId].rpgMonsInfo == NULL)
+                return FALSE;
+
+            TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_RPG_MONS, 0);
             StartWildBattle();
             return TRUE;
         }
@@ -584,7 +638,7 @@ bool8 UpdateRepelCounter(void)
     if (InUnionRoom() == TRUE)
         return FALSE;
 
-    if (gQuestLogState == 2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
         return FALSE;
 
     steps = VarGet(VAR_REPEL_STEP_COUNT);
@@ -761,12 +815,12 @@ static bool8 HandleWildEncounterCooldown(u32 currMetatileBehavior)
 
 bool8 TryStandardWildEncounter(u32 currMetatileBehavior)
 {
-    //if (!HandleWildEncounterCooldown(currMetatileBehavior))
-    /* {
+    /*if (!HandleWildEncounterCooldown(currMetatileBehavior))
+    {
         sWildEncounterData.prevMetatileBehavior = GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_BEHAVIOR);
         return FALSE;
-    } */
-    if (StandardWildEncounter(currMetatileBehavior, sWildEncounterData.prevMetatileBehavior) == TRUE)
+    }
+    else */if (StandardWildEncounter(currMetatileBehavior, sWildEncounterData.prevMetatileBehavior) == TRUE)
     {
         sWildEncounterData.encounterRateBuff = 0;
         sWildEncounterData.stepsSinceLastEncounter = 0;

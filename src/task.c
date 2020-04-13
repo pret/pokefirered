@@ -201,7 +201,7 @@ u8 GetTaskCount(void)
     return count;
 }
 
-void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
+void SetWordTaskArg(u8 taskId, u8 dataElem, unsigned long value)
 {
     if (dataElem <= 14)
     {

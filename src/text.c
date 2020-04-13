@@ -1,9 +1,5 @@
 #include "global.h"
-#include "main.h"
-#include "window.h"
-#include "text.h"
-#include "sprite.h"
-#include "sound.h"
+#include "gflib.h"
 #include "m4a.h"
 #include "quest_log.h"
 #include "graphics.h"
@@ -523,7 +519,7 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
 bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
-    u8 delay = (gQuestLogState == 2) ? 50 : 120;
+    u8 delay = (gQuestLogState == QL_STATE_PLAYBACK) ? 50 : 120;
 
     if (subStruct->autoScrollDelay == delay)
     {
@@ -712,7 +708,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 currChar |= *textPrinter->printerTemplate.currentChar << 8;
                 textPrinter->printerTemplate.currentChar++;
-                if (gQuestLogState != 2 && gQuestLogState != 3)
+                if (!QL_IS_PLAYBACK_STATE)
                     PlayBGM(currChar);
                 return 2;
             case 16:
@@ -880,7 +876,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, sWindowVerticalScrollSpeeds[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance -= sWindowVerticalScrollSpeeds[gSaveBlock2Ptr->optionsTextSpeed];
             }
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
         }
         else
         {

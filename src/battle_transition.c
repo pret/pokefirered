@@ -1109,12 +1109,10 @@ static void SpriteCB_BT_Phase2SlidingPokeballs(struct Sprite *sprite)
 
             if (posX != sprite->data[2])
             {
-                u32 var;
                 u16 *ptr;
 
                 sprite->data[2] = posX;
-                var = (((GetGpuReg(REG_OFFSET_BG0CNT) >> 8) & 0x1F) << 11);
-                ptr = (u16 *)(VRAM + var);
+                ptr = (u16 *)BG_SCREEN_ADDR((GetGpuReg(REG_OFFSET_BG0CNT) >> 8) & 0x1F);
                 SOME_VRAM_STORE(ptr, posY - 2, posX, 0xF001);
                 SOME_VRAM_STORE(ptr, posY - 1, posX, 0xF001);
                 SOME_VRAM_STORE(ptr, posY - 0, posX, 0xF001);
@@ -3512,7 +3510,7 @@ static void BT_GetBg0TilesetBase(u16 **tilesetPtr)
     u16 charBase;
 
     charBase = GetGpuReg(REG_OFFSET_BG0CNT) >> 2;
-    charBase <<= 0xE;
+    charBase <<= 14;
     *tilesetPtr = (u16 *)(VRAM + charBase);
 }
 
@@ -3522,8 +3520,8 @@ static void BT_GetBg0TilemapAndTilesetBase(u16 **tilemapPtr, u16 **tilesetPtr)
 
     screenBase = (GetGpuReg(REG_OFFSET_BG0CNT) >> 8) & 0x1F;
     charBase = GetGpuReg(REG_OFFSET_BG0CNT) >> 2;
-    screenBase <<= 0xB;
-    charBase <<= 0xE;
+    screenBase <<= 11;
+    charBase <<= 14;
     *tilemapPtr = (u16 *)(VRAM + screenBase);
     *tilesetPtr = (u16 *)(VRAM + charBase);
 }
@@ -3546,7 +3544,7 @@ static void BT_GenerateCircle(s16 *buffer, s16 x, s16 y, s16 radius)
     s16 i;
 
     memset(buffer, 0xA, 320);
-    // 64 iterations because we only want to cover [0, π/2) discretely. 
+    // 64 iterations because we only want to cover [0, π/2) discretely.
     for (i = 0; i < 64; ++i)
     {
         s16 sinResult, cosResult, leftX, topY, bottomY, nextTopY, nextBottomY, winVal;

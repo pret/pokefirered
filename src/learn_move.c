@@ -54,7 +54,7 @@
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_WHICH_MOVE_PROMPT
  * MoveRelearnerStateMachine: MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN
  *   - Go to ShowSelectMovePokemonSummaryScreen. When done, control returns to
- *     CB2_InitLearnMoveReturnFromSelectMove.
+ *     CB2_MoveRelearner_Resume.
  * 
  * MoveRelearnerStateMachine: MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_TEXT_THEN_FANFARE
@@ -69,7 +69,7 @@
  *   - If the player confirms, go to MENU_STATE_FADE_AND_RETURN, and set VAR_0x8004 to FALSE.
  *   - If the player cancels, go to MENU_STATE_SETUP_BATTLE_MODE.
  * 
- * CB2_InitLearnMoveReturnFromSelectMove:
+ * CB2_MoveRelearner_Resume:
  *   - Do most of the same stuff as CB2_InitLearnMove.
  * MoveRelearnerStateMachine: MENU_STATE_FADE_FROM_SUMMARY_SCREEN
  * MoveRelearnerStateMachine: MENU_STATE_TRY_OVERWRITE_MOVE

@@ -371,12 +371,12 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId != 0xFFFF)
     {
-        //if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
+        if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
-			//else if (previousMetatileBehavior != GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_BEHAVIOR) && !DoGlobalWildEncounterDiceRoll())
-                //return FALSE;
+			else if (previousMetatileBehavior != GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_BEHAVIOR) && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
             if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
             {
                 AddToWildEncounterRateBuff(gWildMonHeaders[headerId].landMonsInfo->encounterRate);
@@ -408,7 +408,7 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
                 }
             }
         }
-        if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_WATER
+        else if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_WATER
                  || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_BEHAVIOR)) == TRUE))
         {
             if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
@@ -586,6 +586,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     u16 headerId;
     const struct WildPokemonInfo * landMonsInfo;
     const struct WildPokemonInfo * waterMonsInfo;
+    const struct WildPokemonInfo * rpgMonsInfo;
 
     *isWaterMon = FALSE;
     headerId = GetCurrentMapWildMonHeaderId();
@@ -593,6 +594,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
         return SPECIES_NONE;
     landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
     waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+    rpgMonsInfo = gWildMonHeaders[headerId].rpgMonsInfo;
     // Neither
     if (landMonsInfo == NULL && waterMonsInfo == NULL)
         return SPECIES_NONE;
@@ -744,7 +746,7 @@ static u8 GetMapBaseEncounterCooldown(u8 encounterType)
             return 8;
         return 8 - (gWildMonHeaders[headerIdx].landMonsInfo->encounterRate / 10);
     }
-    if (encounterType == TILE_ENCOUNTER_WATER)
+    else if (encounterType == TILE_ENCOUNTER_WATER)
     {
         if (gWildMonHeaders[headerIdx].waterMonsInfo == NULL)
             return 0xFF;
@@ -768,8 +770,8 @@ static bool8 HandleWildEncounterCooldown(u32 currMetatileBehavior)
     u8 encounterType = GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
     u32 minSteps;
     u32 encRate;
-    if (encounterType == TILE_ENCOUNTER_NONE)
-        return FALSE;
+    //if (encounterType == TILE_ENCOUNTER_NONE)
+        //return FALSE;
     minSteps = GetMapBaseEncounterCooldown(encounterType);
     if (minSteps == 0xFF)
         return FALSE;

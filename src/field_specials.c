@@ -2553,3 +2553,38 @@ static void Task_WingFlapSound(u8 taskId)
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);
 }
+
+void TakeCharge(void)
+{
+    if (gSaveBlock2Ptr->charge < gSpecialVar_0x8004)
+    {
+        gSaveBlock2Ptr->charge = 0;
+    }
+    else
+    {
+        gSaveBlock2Ptr->charge -= gSpecialVar_0x8004;
+    }
+}
+
+void GiveCharge(void)
+{
+    if (gSaveBlock2Ptr->charge + gSpecialVar_0x8004 > 3)
+    {
+        gSaveBlock2Ptr->charge = 3;
+    }
+    else
+    {
+        gSaveBlock2Ptr->charge = gSaveBlock2Ptr->charge + gSpecialVar_0x8004;
+    }
+}
+
+u16 GetCharge(void)
+{
+    return gSaveBlock2Ptr->charge;
+}
+
+void PrintCharge(void)
+{
+u16 var = gSaveBlock2Ptr->charge;
+ConvertIntToDecimalStringN(gStringVar1, var, STR_CONV_MODE_LEFT_ALIGN, (3));
+}

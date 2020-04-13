@@ -61,6 +61,13 @@ struct LearnMoveGfxResources
     u16 listMenuScrollRow;
 };
 
+static void GiveChargePoints(void)
+{
+    s32 points;
+	
+	gSaveBlock2Ptr->charge += points;
+}
+
 static EWRAM_DATA struct LearnMoveGfxResources * sMoveRelearner = NULL;
 
 static void Task_InitMoveRelearnerMenu(u8 taskId);
@@ -561,6 +568,14 @@ static void MoveRelearnerStateMachine(void)
                 StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_1_2_and_Poof);
                 sMoveRelearner->state = 30;
                 gSpecialVar_0x8004 = TRUE;
+				if (gSaveBlock2Ptr->charge < gSpecialVar_0x8004)
+				{
+					gSaveBlock2Ptr->charge = 0;
+				}
+				else
+				{
+					gSaveBlock2Ptr->charge -= gSpecialVar_0x8004;
+				}
             }
         }
         break;

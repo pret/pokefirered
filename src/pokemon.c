@@ -6297,6 +6297,17 @@ u8 GetTMMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
+static const u16 gMoveFlags[MOVES_COUNT] = {
+  [MOVE_CUT] = FLAG_GOT_HM01,
+  [MOVE_STRENGTH] = FLAG_GOT_HM04,
+  [MOVE_FLY] = FLAG_GOT_HM02,
+  [MOVE_FLASH] = FLAG_GOT_HM05,
+  [MOVE_ROCK_SMASH] = FLAG_GOT_HM06,
+  [MOVE_DIVE] = FLAG_GOT_HM08,
+  [MOVE_SURF] = FLAG_GOT_HM03,
+  [MOVE_WATERFALL] = FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_HM07,
+};
+
 u8 GetHMMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[4];
@@ -6304,19 +6315,21 @@ u8 GetHMMoves(struct Pokemon *mon, u16 *moves)
     u16 tm_move;
     u8 i, j, numMoves = 0;
     bool8 flag;
+	u16 LearnerFlagCheck;
+	
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
     for(i = 50; i < 58; i++) {
         if(CanMonLearnTMHM(mon, i)) {
             tm_move = ItemIdToBattleMoveId(ITEM_TM01 + i);
-            flag = TRUE;
-            for (j = 0; i < MAX_MON_MOVES; i++) {
+			LearnerFlagCheck = gMoveFlags[tm_move];
+			for (j = 0; i < MAX_MON_MOVES; i++) {
                 if(tm_move == learnedMoves[i]) {
                     flag = FALSE;
                     break;
                 }
             }
-            if(flag)
+			if(FlagGet(LearnerFlagCheck) == TRUE && gSaveBlock2Ptr->charge > 0)
                 moves[numMoves++] = tm_move;
         }
     }

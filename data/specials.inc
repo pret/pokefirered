@@ -14,10 +14,10 @@ gSpecials:: @ 815FD60
 	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
-	def_special NullFieldSpecial  @ Secret Base specials
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
+	def_special GiveCharge
+	def_special TakeCharge
+	def_special GetCharge
+	def_special PrintCharge
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial

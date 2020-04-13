@@ -22,14 +22,8 @@
  * ------------------------
  * 
  * CB2_MoveRelearner_Init
- *   - Creates moveDisplayArrowTask to listen to right/left buttons.
- *   - Creates moveListScrollArrowTask to listen to up/down buttons.
- *   - Whenever the selected move changes (and once on init), the MoveRelearnerCursorCallback
- *     is called (see sMoveRelearnerMovesListTemplate). That callback will reload the contest
- *     display and battle display windows for the new move. Both are always loaded in
- *     memory, but only the currently active one is copied to VRAM. The exception to this
- *     is the appeal and jam hearts, which are sprites. MoveRelearnerShowHideHearts is called
- *     while reloading the contest display to control them.
+ *   - Creates listMenuScrollPos to listen to right/left buttons.
+ *   - Creates listMenuScrollRow to listen to up/down buttons.
  * MoveRelearnerStateMachine: MENU_STATE_FADE_TO_BLACK
  * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_FADE
  *   - Go to MENU_STATE_IDLE_BATTLE_MODE

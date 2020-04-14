@@ -17,6 +17,102 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 
+/*
+ * Move relearner state machine
+ * ------------------------
+ * 
+ * CB2_MoveRelearner_Init
+ *   - Creates listMenuScrollPos to listen to right/left buttons.
+ *   - Creates listMenuScrollRow to listen to up/down buttons.
+ * MoveRelearnerStateMachine: MENU_STATE_FADE_TO_BLACK
+ * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_FADE
+ *   - Go to MENU_STATE_IDLE_BATTLE_MODE
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_SETUP_BATTLE_MODE
+ * MoveRelearnerStateMachine: MENU_STATE_IDLE_BATTLE_MODE
+ *   - If the player selected a move (pressed A), go to MENU_STATE_PRINT_TEACH_MOVE_PROMPT.
+ *   - If the player cancelled (pressed B), go to MENU_STATE_PRINT_GIVE_UP_PROMPT.
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_PRINT_TEACH_MOVE_PROMPT
+ * MoveRelearnerStateMachine: MENU_STATE_TEACH_MOVE_CONFIRM
+ *   - Wait for the player to confirm.
+ *   - If cancelled, go to MENU_STATE_SETUP_BATTLE_MODE.
+ *   - If confirmed and the pokemon had an empty move slot, set VAR_0x8004 to TRUE and go to
+ *     MENU_STATE_PRINT_TEXT_THEN_FANFARE.
+ *   - If confirmed and the pokemon doesn't have an empty move slot, go to
+ *     MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT.
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT
+ * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_TRYING_TO_LEARN
+ * MoveRelearnerStateMachine: MENU_STATE_CONFIRM_DELETE_OLD_MOVE
+ *   - If the player confirms, go to MENU_STATE_PRINT_WHICH_MOVE_PROMPT.
+ *   - If the player cancels, go to MENU_STATE_PRINT_STOP_TEACHING
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_PRINT_STOP_TEACHING
+ * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_STOP_TEACHING
+ * MoveRelearnerStateMachine: MENU_STATE_CONFIRM_STOP_TEACHING
+ *   - If the player confirms, go to MENU_STATE_CHOOSE_SETUP_STATE.
+ *   - If the player cancels, go back to MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT.
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_PRINT_WHICH_MOVE_PROMPT
+ * MoveRelearnerStateMachine: MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN
+ *   - Go to ShowSelectMovePokemonSummaryScreen. When done, control returns to
+ *     CB2_MoveRelearner_Resume.
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE
+ * MoveRelearnerStateMachine: MENU_STATE_PRINT_TEXT_THEN_FANFARE
+ * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_FANFARE
+ * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_A_BUTTON
+ * MoveRelearnerStateMachine: MENU_STATE_FADE_AND_RETURN
+ * MoveRelearnerStateMachine: MENU_STATE_RETURN_TO_FIELD
+ *   - Clean up and go to CB2_ReturnToField.
+ * 
+ * MoveRelearnerStateMachine: MENU_STATE_PRINT_GIVE_UP_PROMPT
+ * MoveRelearnerStateMachine: MENU_STATE_GIVE_UP_CONFIRM
+ *   - If the player confirms, go to MENU_STATE_FADE_AND_RETURN, and set VAR_0x8004 to FALSE.
+ *   - If the player cancels, go to MENU_STATE_SETUP_BATTLE_MODE.
+ * 
+ * CB2_MoveRelearner_Resume:
+ *   - Do most of the same stuff as CB2_MoveRelearner_Init.
+ * MoveRelearnerStateMachine: MENU_STATE_FADE_FROM_SUMMARY_SCREEN
+ * MoveRelearnerStateMachine: MENU_STATE_TRY_OVERWRITE_MOVE
+ *   - If any of the pokemon's existing moves were chosen, overwrite the move and
+ *     go to MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE and set VAR_0x8004 to TRUE.
+ *   - If the chosen move is the one the player selected before the summary screen,
+ *     go to MENU_STATE_PRINT_STOP_TEACHING.
+ * 
+ */
+ 
+#define MENU_STATE_FADE_TO_BLACK 0
+#define MENU_STATE_WAIT_FOR_FADE 1
+#define MENU_STATE_UNREACHABLE 2
+#define MENU_STATE_SETUP_BATTLE_MODE 3
+#define MENU_STATE_IDLE_BATTLE_MODE 4
+// States 5, 6, and 7 are skipped.
+#define MENU_STATE_PRINT_TEACH_MOVE_PROMPT 8
+#define MENU_STATE_TEACH_MOVE_CONFIRM 9
+// States 10 and 11 are skipped.
+#define MENU_STATE_PRINT_GIVE_UP_PROMPT 12
+#define MENU_STATE_GIVE_UP_CONFIRM 13
+#define MENU_STATE_FADE_AND_RETURN 14
+#define MENU_STATE_RETURN_TO_FIELD 15
+#define MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT 16
+#define MENU_STATE_WAIT_FOR_TRYING_TO_LEARN 17
+#define MENU_STATE_CONFIRM_DELETE_OLD_MOVE 18
+#define MENU_STATE_PRINT_WHICH_MOVE_PROMPT 19
+#define MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN 20
+// States 21, 22, and 23 are skipped.
+#define MENU_STATE_PRINT_STOP_TEACHING 24
+#define MENU_STATE_WAIT_FOR_STOP_TEACHING 25
+#define MENU_STATE_CONFIRM_STOP_TEACHING 26
+#define MENU_STATE_CHOOSE_SETUP_STATE 27
+#define MENU_STATE_FADE_FROM_SUMMARY_SCREEN 28
+#define MENU_STATE_TRY_OVERWRITE_MOVE 29
+#define MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE 30
+#define MENU_STATE_PRINT_TEXT_THEN_FANFARE 31
+#define MENU_STATE_WAIT_FOR_FANFARE 32
+#define MENU_STATE_WAIT_FOR_A_BUTTON 33
+
 struct MoveTutorMoveInfoHeaders
 {
     const u8 *text;
@@ -383,7 +479,7 @@ static void MoveRelearnerStateMachine(void)
 
     switch (sMoveRelearner->state)
     {
-    case 0:
+    case MENU_STATE_FADE_TO_BLACK:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
@@ -394,26 +490,26 @@ static void MoveRelearnerStateMachine(void)
         MoveLearnerInitListMenu();
         sMoveRelearner->scheduleMoveInfoUpdate = TRUE;
         break;
-    case 1:
+    case MENU_STATE_WAIT_FOR_FADE:
         if (!gPaletteFade.active)
             sMoveRelearner->state = 4;
         break;
-    case 2:
+    case MENU_STATE_UNREACHABLE:
         sMoveRelearner->state++;
         break;
-    case 3:
+    case MENU_STATE_SETUP_BATTLE_MODE:
         PrintTeachWhichMoveToStrVar1(FALSE);
         sMoveRelearner->scheduleMoveInfoUpdate = TRUE;
         sMoveRelearner->state++;
         break;
-    case 4:
+    case MENU_STATE_IDLE_BATTLE_MODE:
         MoveRelearnerMenuHandleInput();
         break;
-    case 8:
+    case MENU_STATE_PRINT_TEACH_MOVE_PROMPT:
         CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
-    case 9:
+    case MENU_STATE_TEACH_MOVE_CONFIRM :
         switch (YesNoMenuProcessInput())
         {
         case 0:
@@ -434,11 +530,11 @@ static void MoveRelearnerStateMachine(void)
             break;
         }
         break;
-    case 12:
+    case MENU_STATE_PRINT_GIVE_UP_PROMPT:
         CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
-    case 13:
+    case MENU_STATE_GIVE_UP_CONFIRM:
         switch (YesNoMenuProcessInput())
         {
         case 0:
@@ -451,15 +547,15 @@ static void MoveRelearnerStateMachine(void)
             break;
         }
         break;
-    case 16:
+    case MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT:
         StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonIsTryingToLearnMove);
         sMoveRelearner->state++;
         break;
-    case 17:
+    case MENU_STATE_WAIT_FOR_TRYING_TO_LEARN:
         CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state = 18;
         break;
-    case 18:
+    case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
         switch (YesNoMenuProcessInput())
         {
         case 0:
@@ -472,15 +568,15 @@ static void MoveRelearnerStateMachine(void)
             break;
         }
         break;
-    case 24:
+    case MENU_STATE_PRINT_STOP_TEACHING:
         StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_StopLearningMove);
         sMoveRelearner->state++;
         break;
-    case 25:
+    case MENU_STATE_WAIT_FOR_STOP_TEACHING:
         CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state = 26;
         break;
-    case 26:
+    case MENU_STATE_CONFIRM_STOP_TEACHING:
         switch (YesNoMenuProcessInput())
         {
         case 0:
@@ -492,14 +588,14 @@ static void MoveRelearnerStateMachine(void)
             break;
         }
         break;
-    case 27:
+    case MENU_STATE_CHOOSE_SETUP_STATE :
         sMoveRelearner->state = 3;
         break;
-    case 19:
+    case MENU_STATE_PRINT_WHICH_MOVE_PROMPT:
         sMoveRelearner->state = 20;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         break;
-    case 20:
+    case MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN:
         if (!gPaletteFade.active)
         {
             ListMenuGetScrollAndRow(sMoveRelearner->listMenuTaskId, &sMoveRelearner->listMenuScrollPos, &sMoveRelearner->listMenuScrollRow);
@@ -514,11 +610,11 @@ static void MoveRelearnerStateMachine(void)
     case 22:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         break;
-    case 14:
+    case MENU_STATE_FADE_AND_RETURN:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         sMoveRelearner->state++;
         break;
-    case 15:
+    case MENU_STATE_RETURN_TO_FIELD:
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
@@ -526,7 +622,7 @@ static void MoveRelearnerStateMachine(void)
             SetMainCallback2(CB2_ReturnToField);
         }
         break;
-    case 28:
+    case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
@@ -537,7 +633,7 @@ static void MoveRelearnerStateMachine(void)
         PrintTeachWhichMoveToStrVar1(TRUE);
         PrintMoveInfoHandleCancel_CopyToVram();
         break;
-    case 29:
+    case MENU_STATE_TRY_OVERWRITE_MOVE:
         if (!gPaletteFade.active)
         {
             if (sMoveRelearner->selectedMoveSlot == 4)
@@ -557,20 +653,20 @@ static void MoveRelearnerStateMachine(void)
             }
         }
         break;
-    case 30:
+    case MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE:
         StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonForgotOldMoveAndMonLearnedNewMove);
         sMoveRelearner->state = 31;
         PlayFanfare(MUS_FANFA1);
         break;
-    case 31:
+    case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
         PlayFanfare(MUS_FANFA1);
         sMoveRelearner->state = 32;
         break;
-    case 32:
+    case MENU_STATE_WAIT_FOR_FANFARE:
         if (IsFanfareTaskInactive())
             sMoveRelearner->state = 33;
         break;
-    case 33:
+    case MENU_STATE_WAIT_FOR_A_BUTTON:
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);

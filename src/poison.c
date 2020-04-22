@@ -134,7 +134,7 @@ static const union AffineAnimCmd gUnknown_83E6A68[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gUnknown_83E6A80[] =
+const union AffineAnimCmd *const gAffineAnims_Droplet[] =
 {
     gUnknown_83E6A68,
 };
@@ -146,7 +146,7 @@ const struct SpriteTemplate gUnknown_83E6A84 =
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_83E69E0,
     .images = NULL,
-    .affineAnims = gUnknown_83E6A80,
+    .affineAnims = gAffineAnims_Droplet,
     .callback = sub_80B17C4,
 };
 
@@ -178,7 +178,7 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
-    .anims = gUnknown_83E5A78,
+    .anims = gAnims_WaterBubble,
     .images = NULL,
     .affineAnims = gUnknown_83E6AB4,
     .callback = AnimBubbleEffect,

@@ -186,7 +186,7 @@ const struct SpriteTemplate gUnknown_83E7C20 =
     .callback = sub_80BA5F8,
 };
 
-const struct SpriteTemplate gUnknown_83E7C38 =
+const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_IMPACT,
     .paletteTag = ANIM_TAG_WATER_IMPACT,

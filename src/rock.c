@@ -100,7 +100,7 @@ const struct SpriteTemplate gUnknown_83E7420 =
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
-    .anims = gUnknown_83E5958,
+    .anims = gAnims_WaterMudOrb,
     .images = NULL,
     .affineAnims = gUnknown_83E741C,
     .callback = sub_80B477C,
@@ -310,7 +310,7 @@ const struct SpriteTemplate gUnknown_83E7590 =
     .anims = gUnknown_83E74B0,
     .images = NULL,
     .affineAnims = gUnknown_83E7540,
-    .callback = sub_8077350,
+    .callback = AnimWeatherBallDown,
 };
 
 static void sub_80B4634(struct Sprite *sprite)

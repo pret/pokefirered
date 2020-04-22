@@ -218,6 +218,7 @@ void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
 void sub_80A2F0C(u8 taskId);
 
 // battle_anim_effects_2.c
+extern const union AffineAnimCmd *const gGrowingRingAffineAnimTable[];
 void sub_80A6E48(struct Sprite *);
 void sub_80A6E98(struct Sprite *);
 void sub_80A6F8C(struct Sprite *);
@@ -345,7 +346,6 @@ void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // battle_anim_mons.c
 extern const struct MonCoords gCastformFrontSpriteCoords[];
-
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
@@ -447,7 +447,7 @@ void sub_8076F58(struct Sprite *sprite);
 void sub_8076FD0(struct Sprite *sprite);
 void sub_8077030(u8 taskId);
 void sub_807729C(struct Sprite *sprite);
-void sub_8077350(struct Sprite *sprite);
+void AnimWeatherBallDown(struct Sprite *sprite);
 
 // battle_anim_mon_movement.c
 void AnimTask_ShakeMon(u8 taskId);
@@ -467,6 +467,7 @@ void sub_8099BD4(u8 taskId);
 // normal.c
 extern const struct SpriteTemplate gUnknown_83E7C98;
 extern const struct SpriteTemplate gBasicHitSplatSpriteTemplate;
+extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
 u32 UnpackSelectedBattleAnimPalettes(s16 selector);
 void AnimTask_CurseBlendEffect(u8 taskId);
 void sub_80B9CE4(u8 taskId);
@@ -478,7 +479,7 @@ void sub_80BA47C(u8 taskId);
 // ground.c
 void sub_80B8E94(u8 taskId);
 void sub_80B90EC(u8 taskId);
-void sub_80B94B4(u8 taskId);
+void AnimTask_HorizontalShake(u8 taskId);
 void AnimTask_IsPowerOver99(u8 taskId);
 void sub_80B9800(u8 taskId);
 
@@ -527,10 +528,14 @@ void sub_80B194C(u8 taskId);
 void sub_80B1D3C(struct Sprite *sprite);
 void sub_80B2868(u8 taskId);
 
+// poison.c
+extern const union AffineAnimCmd *const gAffineAnims_Droplet[];
+
 // fighting.c
 void sub_80B1530(u8 taskId);
 
 // ice.c
+extern const union AnimCmd *const gAnims_SmallBubblePair[];
 void AnimTask_Haze1(u8 taskId);
 void AnimTask_LoadMistTiles(u8 taskId);
 void AnimTask_Hail1(u8 taskId);
@@ -546,15 +551,14 @@ void sub_80AEFA0(u8 taskId);
 
 // fire.c
 extern const union AnimCmd *const gUnknown_83E5D48[];
-
 void sub_80ACEA4(u8 taskId);
 void sub_80ADAD8(u8 taskId);
 void AnimTask_BlendBackground(u8 taskId);
 void sub_80AD800(u8 taskId);
 
 // water.s
-extern const union AnimCmd *const gUnknown_83E5958[];
-extern const union AnimCmd *const gUnknown_83E5A78[];
+extern const union AnimCmd *const gAnims_WaterMudOrb[];
+extern const union AnimCmd *const gAnims_WaterBubble[];
 void AnimWaterPulseRing(struct Sprite *sprite);
 
 // smokescreen.s

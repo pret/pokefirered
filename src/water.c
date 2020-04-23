@@ -56,8 +56,8 @@ static void CreateWaterSportDroplet(struct Task*);
 static void CreateWaterPulseRingBubbles(struct Sprite*, int, int);
 
 // Both unused? Comment copied from pokeemerald
-const u8 gUnknown_83E44F4[] = INCBIN_U8("graphics/battle_anims/unk_83E4874.4bpp");
-const u8 gUnknown_83E4874[] = INCBIN_U8("graphics/battle_anims/unk_83E4874.bin");
+static const u8 gUnknown_83E44F4[] = INCBIN_U8("graphics/battle_anims/unk_83E4874.4bpp");
+static const u8 gUnknown_83E4874[] = INCBIN_U8("graphics/battle_anims/unk_83E4874.bin");
 
 static const union AnimCmd sAnim_RainDrop[] =
 {

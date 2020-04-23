@@ -130,7 +130,7 @@ static const union AnimCmd *const gUnknown_83E632C[] =
     gUnknown_83E6308,
 };
 
-const union AnimCmd *const gUnknown_83E6330[] =
+const union AnimCmd *const gAnims_SmallBubblePair[] =
 {
     gUnknown_83E6310,
 };
@@ -432,7 +432,7 @@ const struct SpriteTemplate gUnknown_83E65BC =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E65A0,
-    .callback = sub_8077350,
+    .callback = AnimWeatherBallDown,
 };
 
 static const union AnimCmd gUnknown_83E65D4[] =

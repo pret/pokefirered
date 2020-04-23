@@ -2225,7 +2225,7 @@ static void sub_80772F4(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8077350(struct Sprite *sprite)
+void AnimWeatherBallDown(struct Sprite *sprite)
 {
     s32 x;
 

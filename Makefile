@@ -76,7 +76,7 @@ ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_RE
 
 LDFLAGS = -Map ../../$(MAP)
 
-LIB := $(LIBPATH) -lgcc -lc
+LIB := $(LIBPATH) -lc -lgcc
 #ifneq ($(MODERN),0)
 #LIB += -lsysbase
 #endif

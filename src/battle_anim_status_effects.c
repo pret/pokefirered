@@ -87,7 +87,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF44C =
     .anims = sSpriteAnimTable_83BF430,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8077350,
+    .callback = AnimWeatherBallDown,
 };
 
 static const union AnimCmd sUnknown_83BF464[] =

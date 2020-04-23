@@ -12,6 +12,8 @@
 #include "trig.h"
 #include "util.h"
 
+#define ISO_RANDOMIZE2(val)(1103515245 * (val) + 12345)
+
 static void AnimRainDrop(struct Sprite *);
 static void AnimRainDrop_Step(struct Sprite *);
 static void AnimWaterBubbleProjectile(struct Sprite *);
@@ -87,7 +89,7 @@ const struct SpriteTemplate gRainDropSpriteTemplate  =
 
 static const union AffineAnimCmd sAffineAnim_WaterBubbleProjectile[] =
 {
-    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 10),
+    AFFINEANIMCMD_FRAME(-0x5, -0x5, 0, 10),
     AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
     AFFINEANIMCMD_JUMP(0),
 };
@@ -259,7 +261,7 @@ static const union AffineAnimCmd sAffineAnim_HydroCannonCharge[] =
 {
     AFFINEANIMCMD_FRAME(0x3, 0x3, 10, 50),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 10),
-    AFFINEANIMCMD_FRAME(0xFFEC, 0xFFEC, -10, 20),
+    AFFINEANIMCMD_FRAME(-0x14, -0x14, -10, 20),
     AFFINEANIMCMD_END,
 };
 
@@ -411,14 +413,14 @@ static const union AnimCmd *const sAnims_WeatherBallWaterDown[] =
 static const union AffineAnimCmd sAffineAnim_WaterPulseRingBubble_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 15),
+    AFFINEANIMCMD_FRAME(-0xA, -0xA, 0, 15),
     AFFINEANIMCMD_END,
 };
 
 static const union AffineAnimCmd sAffineAnim_WaterPulseRingBubble_1[] =
 {
     AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 15),
+    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 15),
     AFFINEANIMCMD_END,
 };
 
@@ -494,11 +496,13 @@ void AnimTask_CreateRaindrops(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-static void AnimRainDrop(struct Sprite *sprite) {
+static void AnimRainDrop(struct Sprite *sprite) 
+{
     sprite->callback = AnimRainDrop_Step;
 }
 
-static void AnimRainDrop_Step(struct Sprite *sprite) {
+static void AnimRainDrop_Step(struct Sprite *sprite) 
+{
     if (++sprite->data[0] < 14) // Was 13 in emerald
     {
         sprite->pos2.x += 1;
@@ -892,7 +896,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     else
     {
         // Changed from Emerald
-        LZDecompressVram(gBattleAnimBgTilemap_SurfContest, animBg->bgTilemap);
+        LZDecompressVram(gBattleAnimBgTilemap_SurfContest, animBg.bgTilemap);
         sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 1);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);

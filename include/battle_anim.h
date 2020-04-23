@@ -556,12 +556,12 @@ void sub_80ADAD8(u8 taskId);
 void AnimTask_BlendBackground(u8 taskId);
 void sub_80AD800(u8 taskId);
 
-// water.s
+// water.c
 extern const union AnimCmd *const gAnims_WaterMudOrb[];
 extern const union AnimCmd *const gAnims_WaterBubble[];
 void AnimWaterPulseRing(struct Sprite *sprite);
 
-// smokescreen.s
+// smokescreen.c
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 
 // battle_anim_utility_funcs.c

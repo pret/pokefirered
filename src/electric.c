@@ -214,7 +214,7 @@ const struct SpriteTemplate gElectricitySpriteTemplate =
     .callback = AnimElectricity,
 };
 
-static const struct SpriteTemplate gElectricBoltSegmentSpriteTemplate =
+static const struct SpriteTemplate sElectricBoltSegmentSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARK,
     .paletteTag = ANIM_TAG_SPARK,
@@ -692,30 +692,30 @@ static void sub_80AE278(u8 taskId)
     {
     case 0:
         r12 *= 1;
-        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
+        spriteId = CreateSprite(&sElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         ++r7;
         break;
     case 2:
         r12 *= 2;
         r8 += r2;
-        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
+        spriteId = CreateSprite(&sElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         ++r7;
         break;
     case 4:
         r12 *= 3;
         r8 += r2 * 2;
-        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
+        spriteId = CreateSprite(&sElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         ++r7;
         break;
     case 6:
         r12 *= 4;
         r8 += r2 * 3;
-        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
+        spriteId = CreateSprite(&sElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         ++r7;
         break;
     case 8:
         r12 *= 5;
-        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
+        spriteId = CreateSprite(&sElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         ++r7;
         break;
     case 10:

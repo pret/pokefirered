@@ -2767,7 +2767,7 @@ static void AnimConstrictBindingStep2(struct Sprite* sprite)
     }
 }
 
-void sub_80A2F0C(u8 taskId)
+void AnimTask_ShrinkTargetCopy(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     
@@ -3605,7 +3605,7 @@ static void AnimFlyingParticleStep(struct Sprite* sprite)
     DestroySpriteAndMatrix(sprite);
 }
 
-void sub_80A41C4(u8 taskId)
+void AnimTask_CycleMagicalLeafPal(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     

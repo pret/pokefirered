@@ -68,7 +68,7 @@ static const union AnimCmd *const sSpriteAnimTable_83BF430[] =
     sUnknown_83BF428
 };
 
-const struct SpriteTemplate gSpriteTemplate_83BF434 =
+const struct SpriteTemplate gWeatherBallUpSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
@@ -79,7 +79,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF434 =
     .callback = sub_807729C,
 };
 
-const struct SpriteTemplate gSpriteTemplate_83BF44C =
+const struct SpriteTemplate gWeatherBallNormalDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
@@ -343,7 +343,7 @@ static void sub_8078380(struct Sprite *sprite)
     }
 }
 
-void sub_80783FC(u8 taskId)
+void AnimTask_FrozenIceCube(u8 taskId)
 {
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;

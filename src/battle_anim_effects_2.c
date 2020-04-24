@@ -32,7 +32,7 @@ static void AnimTask_SplashStep(u8);
 static void AnimTask_GrowAndShrinkStep(u8);
 static void ThrashMoveMonStep(u8);
 static void ThrashMoveMon(u8);
-static void AnimTask_SketchDrawMon(u8);
+static void AnimTask_SketchDrawMon_Step(u8);
 static void AnimPencil_Step(struct Sprite *);
 static void AnimSoftBoiledEgg_Step1(struct Sprite *);
 static void AnimSoftBoiledEgg_Step2(struct Sprite *);
@@ -115,7 +115,7 @@ static const struct SpriteTemplate sUnknown_83E3B30 =
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7910,
+    .affineAnims = gAffineAnims_Bite,
     .callback = sub_80A7020,
 };
 
@@ -2347,7 +2347,7 @@ static void ThrashMoveMon(u8 taskId)
     }
 }
 
-void sub_80A8874(u8 taskId)
+void AnimTask_SketchDrawMon(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     struct ScanlineEffectParams params;
@@ -2385,10 +2385,10 @@ void sub_80A8874(u8 taskId)
     params.initState = 1;
     params.unused9 = 0;
     ScanlineEffect_SetParams(params);
-    task->func = AnimTask_SketchDrawMon;
+    task->func = AnimTask_SketchDrawMon_Step;
 }
 
-static void AnimTask_SketchDrawMon(u8 taskId)
+static void AnimTask_SketchDrawMon_Step(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
 
@@ -2983,7 +2983,7 @@ void AnimSpeedDust(struct Sprite *sprite)
     }
 }
 
-void sub_80A96B4(u8 taskId)
+void AnimTask_LoadMusicNotesPals(u8 taskId)
 {
     int i;
     u8 paletteNums[3];
@@ -3001,7 +3001,7 @@ void sub_80A96B4(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80A9760(u8 taskId)
+void AnimTask_FreeMusicNotesPals(u8 taskId)
 {
     int i;
     
@@ -3101,7 +3101,7 @@ static void FakeOutStep2(u8 taskId)
     }
 }
 
-void sub_80A9A20(u8 taskId)
+void AnimTask_StretchTargetUp(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     
@@ -3122,7 +3122,7 @@ void sub_80A9A20(u8 taskId)
     }
 }
 
-void sub_80A9AB0(u8 taskId)
+void AnimTask_StretchAttackerUp(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     

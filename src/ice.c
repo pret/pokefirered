@@ -74,134 +74,135 @@ static const union AnimCmd gUnknown_83E62E8[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E62F0[] =
+static const union AnimCmd sAnim_IceCrystalLarge[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E62F8[] =
+static const union AnimCmd sAnim_IceCrystalSmall[] =
 {
     ANIMCMD_FRAME(6, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E6300[] =
+static const union AnimCmd sAnim_Snowball[] =
 {
     ANIMCMD_FRAME(7, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E6308[] =
+static const union AnimCmd sAnim_BlizzardIceCrystal[] =
 {
     ANIMCMD_FRAME(8, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E6310[] =
+static const union AnimCmd sAnim_SmallBubblePair[] =
 {
     ANIMCMD_FRAME(12, 6),
     ANIMCMD_FRAME(13, 6),
     ANIMCMD_JUMP(0),
 };
 
+// unused
 static const union AnimCmd *const gUnknown_83E631C[] =
 {
     gUnknown_83E62E8,
 };
 
-static const union AnimCmd *const gUnknown_83E6320[] =
+static const union AnimCmd *const sAnims_IceCrystalLarge[] =
 {
-    gUnknown_83E62F0,
+    sAnim_IceCrystalLarge,
 };
 
-static const union AnimCmd *const gUnknown_83E6324[] =
+static const union AnimCmd *const sAnims_IceCrystalSmall[] =
 {
-    gUnknown_83E62F8,
+    sAnim_IceCrystalSmall,
 };
 
-static const union AnimCmd *const gUnknown_83E6328[] =
+static const union AnimCmd *const sAnims_Snowball[] =
 {
-    gUnknown_83E6300,
+    sAnim_Snowball,
 };
 
-static const union AnimCmd *const gUnknown_83E632C[] =
+static const union AnimCmd *const sAnims_BlizzardIceCrystal[] =
 {
-    gUnknown_83E6308,
+    sAnim_BlizzardIceCrystal,
 };
 
 const union AnimCmd *const gAnims_SmallBubblePair[] =
 {
-    gUnknown_83E6310,
+    sAnim_SmallBubblePair,
 };
 
-static const union AffineAnimCmd gUnknown_83E6334[] =
+static const union AffineAnimCmd sAffineAnim_IceCrystalSpiralInwardLarge[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 40, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd *const gUnknown_83E6344[] =
+static const union AffineAnimCmd *const sAffineAnims_IceCrystalSpiralInwardLarge[] =
 {
-    gUnknown_83E6334,
+    sAffineAnim_IceCrystalSpiralInwardLarge,
 };
 
-const struct SpriteTemplate gUnknown_83E6348 =
+const struct SpriteTemplate gIceCrystalSpiralInwardLarge =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineDouble_ObjBlend_8x16,
-    .anims = gUnknown_83E6320,
+    .anims = sAnims_IceCrystalLarge,
     .images = NULL,
-    .affineAnims = gUnknown_83E6344,
+    .affineAnims = sAffineAnims_IceCrystalSpiralInwardLarge,
     .callback = AnimIcePunchSwirlingParticle,
 };
 
-const struct SpriteTemplate gUnknown_83E6360 =
+const struct SpriteTemplate gIceCrystalSpiralInwardSmall =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjBlend_8x8,
-    .anims = gUnknown_83E6324,
+    .anims = sAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimIcePunchSwirlingParticle,
 };
 
-static const union AffineAnimCmd gUnknown_83E6378[] =
+static const union AffineAnimCmd sAffineAnim_IceBeamInnerCrystal[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 10, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd *const gUnknown_83E6388[] =
+static const union AffineAnimCmd *const sAffineAnims_IceBeamInnerCrystal[] =
 {
-    gUnknown_83E6378,
+    sAffineAnim_IceBeamInnerCrystal,
 };
 
-const struct SpriteTemplate gUnknown_83E638C =
+const struct SpriteTemplate gIceBeamInnerCrystalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x16,
-    .anims = gUnknown_83E6320,
+    .anims = sAnims_IceCrystalLarge,
     .images = NULL,
-    .affineAnims = gUnknown_83E6388,
+    .affineAnims = sAffineAnims_IceBeamInnerCrystal,
     .callback = AnimIceBeamParticle,
 };
 
-const struct SpriteTemplate gUnknown_83E63A4 =
+const struct SpriteTemplate gIceBeamOuterCrystalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjBlend_8x8,
-    .anims = gUnknown_83E6324,
+    .anims = sAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimIceBeamParticle,
 };
 
-static const union AffineAnimCmd gUnknown_83E63BC[] =
+static const union AffineAnimCmd sAffineAnim_IceCrystalHit[] =
 {
     AFFINEANIMCMD_FRAME(0xCE, 0xCE, 0, 0),
     AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
@@ -209,67 +210,67 @@ static const union AffineAnimCmd gUnknown_83E63BC[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E63DC[] =
+static const union AffineAnimCmd *const sAffineAnims_IceCrystalHit[] =
 {
-    gUnknown_83E63BC,
+    sAffineAnim_IceCrystalHit,
 };
 
-const struct SpriteTemplate gUnknown_83E63E0 =
+const struct SpriteTemplate gIceCrystalHitLargeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x16,
-    .anims = gUnknown_83E6320,
+    .anims = sAnims_IceCrystalLarge,
     .images = NULL,
-    .affineAnims = gUnknown_83E63DC,
+    .affineAnims = sAffineAnims_IceCrystalHit,
     .callback = AnimIceEffectParticle,
 };
 
-const struct SpriteTemplate gUnknown_83E63F8 =
+const struct SpriteTemplate gIceCrystalHitSmallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineNormal_ObjBlend_8x8,
-    .anims = gUnknown_83E6324,
+    .anims = sAnims_IceCrystalSmall,
     .images = NULL,
-    .affineAnims = gUnknown_83E63DC,
+    .affineAnims = sAffineAnims_IceCrystalHit,
     .callback = AnimIceEffectParticle,
 };
 
-const struct SpriteTemplate gUnknown_83E6410 =
+const struct SpriteTemplate gSwirlingSnowballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gUnknown_83E6328,
+    .anims = sAnims_Snowball,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSwirlingSnowball_Step1,
 };
 
-const struct SpriteTemplate gUnknown_83E6428 =
+const struct SpriteTemplate gBlizzardIceCrystalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_83E632C,
+    .anims = sAnims_BlizzardIceCrystal,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimMoveParticleBeyondTarget,
 };
 
-const struct SpriteTemplate gUnknown_83E6440 =
+const struct SpriteTemplate gPowderSnowSnowballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gUnknown_83E6328,
+    .anims = sAnims_Snowball,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimMoveParticleBeyondTarget,
 };
 
-static const union AnimCmd gUnknown_83E6458[] =
+static const union AnimCmd sAnim_IceGroundSpike[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(2, 5),
@@ -281,51 +282,51 @@ static const union AnimCmd gUnknown_83E6458[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gUnknown_83E6478[] =
+static const union AnimCmd *const sAnims_IceGroundSpike[] =
 {
-    gUnknown_83E6458,
+    sAnim_IceGroundSpike,
 };
 
-const struct SpriteTemplate gUnknown_83E647C =
+const struct SpriteTemplate gIceGroundSpikeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_SPIKES,
     .paletteTag = ANIM_TAG_ICE_SPIKES,
     .oam = &gOamData_AffineOff_ObjBlend_8x16,
-    .anims = gUnknown_83E6478,
+    .anims = sAnims_IceGroundSpike,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWaveFromCenterOfTarget,
 };
 
-static const union AnimCmd gUnknown_83E6494[] =
+static const union AnimCmd sAnim_Cloud[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(8, 8),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const gUnknown_83E64A0[] =
+static const union AnimCmd *const sAnims_Cloud[] =
 {
-    gUnknown_83E6494,
+    sAnim_Cloud,
 };
 
-const struct SpriteTemplate gUnknown_83E64A4 =
+const struct SpriteTemplate gMistCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MIST_CLOUD,
     .paletteTag = ANIM_TAG_MIST_CLOUD,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
-    .anims = gUnknown_83E64A0,
+    .anims = sAnims_Cloud,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = InitSwirlingFogAnim,
 };
 
-const struct SpriteTemplate gUnknown_83E64BC =
+const struct SpriteTemplate gSmogCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
-    .anims = gUnknown_83E64A0,
+    .anims = sAnims_Cloud,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = InitSwirlingFogAnim,
@@ -336,7 +337,7 @@ static const u8 gUnknown_83E64D4[] =
     0, 1, 2, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6, 6, 6, 7, 8, 8, 8, 9,
 };
 
-const struct SpriteTemplate gUnknown_83E64E8 =
+const struct SpriteTemplate gMistBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -352,18 +353,18 @@ static const u8 gUnknown_83E6500[] =
     0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5,
 };
 
-const struct SpriteTemplate gUnknown_83E6514 =
+const struct SpriteTemplate gPoisonGasCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
-    .anims = gUnknown_83E64A0,
+    .anims = sAnims_Cloud,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = InitPoisonGasCloudAnim,
 };
 
-static const struct HailStruct gUnknown_83E652C[] =
+static const struct HailStruct sHailCoordData[] =
 {
     {100, 120, 0, 2},
     {85, 120, 0, 0},
@@ -377,71 +378,71 @@ static const struct HailStruct gUnknown_83E652C[] =
     {38, 120, 2, 0},
 };
 
-static const union AffineAnimCmd gUnknown_83E6554[] =
+static const union AffineAnimCmd sAffineAnim_HailParticle_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6564[] =
+static const union AffineAnimCmd sAffineAnim_HailParticle_1[] =
 {
     AFFINEANIMCMD_FRAME(0xF0, 0xF0, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6574[] =
+static const union AffineAnimCmd sAffineAnim_HailParticle_2[] =
 {
     AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6584[] =
+static const union AffineAnimCmd sAffineAnim_WeatherBallIceDown[] =
 {
     AFFINEANIMCMD_FRAME(0x150, 0x150, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E6594[] =
+static const union AffineAnimCmd *const sAffineAnims_HailParticle[] =
 {
-    gUnknown_83E6554,
-    gUnknown_83E6564,
-    gUnknown_83E6574,
+    sAffineAnim_HailParticle_0,
+    sAffineAnim_HailParticle_1,
+    sAffineAnim_HailParticle_2,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E65A0[] =
+static const union AffineAnimCmd *const sAffineAnims_WeatherBallIceDown[] =
 {
-    gUnknown_83E6584,
+    sAffineAnim_WeatherBallIceDown,
 };
 
-static const struct SpriteTemplate gUnknown_83E65A4 =
+static const struct SpriteTemplate sHailParticleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HAIL,
     .paletteTag = ANIM_TAG_HAIL,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E6594,
+    .affineAnims = sAffineAnims_HailParticle,
     .callback = AnimHailBegin,
 };
 
-const struct SpriteTemplate gUnknown_83E65BC =
+const struct SpriteTemplate gWeatherBallIceDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HAIL,
     .paletteTag = ANIM_TAG_HAIL,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E65A0,
+    .affineAnims = sAffineAnims_WeatherBallIceDown,
     .callback = AnimWeatherBallDown,
 };
 
-static const union AnimCmd gUnknown_83E65D4[] =
+static const union AnimCmd sAnim_IceBallChunk_0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E65DC[] =
+static const union AnimCmd sAnim_IceBallChunk_1[] =
 {
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_FRAME(32, 4),
@@ -450,68 +451,68 @@ static const union AnimCmd gUnknown_83E65DC[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gUnknown_83E65F0[] =
+static const union AnimCmd *const sAnims_IceBallChunk[] =
 {
-    gUnknown_83E65D4,
-    gUnknown_83E65DC,
+    sAnim_IceBallChunk_0,
+    sAnim_IceBallChunk_1,
 };
 
-static const union AffineAnimCmd gUnknown_83E65F8[] =
+static const union AffineAnimCmd sAffineAnim_IceBallChunk_0[] =
 {
     AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6608[] =
+static const union AffineAnimCmd sAffineAnim_IceBallChunk_1[] =
 {
     AFFINEANIMCMD_FRAME(0x118, 0x118, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6618[] =
+static const union AffineAnimCmd sAffineAnim_IceBallChunk_2[] =
 {
     AFFINEANIMCMD_FRAME(0x150, 0x150, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6628[] =
+static const union AffineAnimCmd sAffineAnim_IceBallChunk_3[] =
 {
     AFFINEANIMCMD_FRAME(0x180, 0x180, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E6638[] =
+static const union AffineAnimCmd sAffineAnim_IceBallChunk_4[] =
 {
     AFFINEANIMCMD_FRAME(0x1C0, 0x1C0, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E6648[] =
+static const union AffineAnimCmd *const sAffineAnims_IceBallChunk[] =
 {
-    gUnknown_83E65F8,
-    gUnknown_83E6608,
-    gUnknown_83E6618,
-    gUnknown_83E6628,
-    gUnknown_83E6638,
+    sAffineAnim_IceBallChunk_0,
+    sAffineAnim_IceBallChunk_1,
+    sAffineAnim_IceBallChunk_2,
+    sAffineAnim_IceBallChunk_3,
+    sAffineAnim_IceBallChunk_4,
 };
 
-const struct SpriteTemplate gUnknown_83E665C =
+const struct SpriteTemplate gIceBallChunkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CHUNK,
     .paletteTag = ANIM_TAG_ICE_CHUNK,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = gUnknown_83E65F0,
+    .anims = sAnims_IceBallChunk,
     .images = NULL,
-    .affineAnims = gUnknown_83E6648,
+    .affineAnims = sAffineAnims_IceBallChunk,
     .callback = InitIceBallAnim,
 };
 
-const struct SpriteTemplate gUnknown_83E6674 =
+const struct SpriteTemplate gIceBallImpactShardSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gUnknown_83E6324,
+    .anims = sAnims_IceCrystalSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = InitIceBallParticle,
@@ -1305,11 +1306,11 @@ static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, 
     s16 battlerX, battlerY;
     s16 spriteX;
     bool8 possibleBool = FALSE;
-    s8 unk = gUnknown_83E652C[hailStructId].unk3;
+    s8 unk = sHailCoordData[hailStructId].unk3;
 
     if (unk != 2)
     {
-        id = GetBattlerAtPosition(gUnknown_83E652C[hailStructId].unk2);
+        id = GetBattlerAtPosition(sHailCoordData[hailStructId].unk2);
         if (IsBattlerSpriteVisible(id))
         {
             possibleBool = TRUE;
@@ -1329,17 +1330,17 @@ static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, 
         }
         else
         {
-            battlerX = (gUnknown_83E652C[hailStructId].unk0);
-            battlerY = (gUnknown_83E652C[hailStructId].unk1);
+            battlerX = (sHailCoordData[hailStructId].unk0);
+            battlerY = (sHailCoordData[hailStructId].unk1);
         }
     }
     else
     {
-        battlerX = (gUnknown_83E652C[hailStructId].unk0);
-        battlerY = (gUnknown_83E652C[hailStructId].unk1);
+        battlerX = (sHailCoordData[hailStructId].unk0);
+        battlerY = (sHailCoordData[hailStructId].unk1);
     }
     spriteX = battlerX - ((battlerY + 8) / 2);
-    id = CreateSprite(&gUnknown_83E65A4, spriteX, -8, 18);
+    id = CreateSprite(&sHailParticleSpriteTemplate, spriteX, -8, 18);
     if (id == MAX_SPRITES)
     {
         return FALSE;
@@ -1367,7 +1368,7 @@ static void AnimHailBegin(struct Sprite *sprite)
         return;
     if (sprite->data[0] == 1 && sprite->data[5] == 0)
     {
-        spriteId = CreateSprite(&gUnknown_83E63E0, sprite->data[3], sprite->data[4], sprite->subpriority);
+        spriteId = CreateSprite(&gIceCrystalHitLargeSpriteTemplate, sprite->data[3], sprite->data[4], sprite->subpriority);
         sprite->data[0] = spriteId;
         if (spriteId != 64)
         {

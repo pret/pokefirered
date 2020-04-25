@@ -577,7 +577,7 @@ static void sub_80BB4B8(u8 taskId)
     }
 }
 
-void sub_80BB660(u8 taskId)
+void AnimTask_Flash(u8 taskId)
 {
     u32 selectedPalettes = SelectBattlerSpritePalettes(1, 1, 1, 1);
 
@@ -646,7 +646,7 @@ static void sub_80BB790(u32 selectedPalettes, u16 color)
                 gPlttBufferFaded[curOffset] = color;
 }
 
-void sub_80BB7DC(u8 taskId)
+void AnimTask_BlendNonAttackerPalettes(u8 taskId)
 {
     s32 j;
     u32 battler, selectedPalettes = 0;
@@ -659,7 +659,7 @@ void sub_80BB7DC(u8 taskId)
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }
 
-void sub_80BB82C(u8 taskId)
+void AnimTask_StartSlidingBg(u8 taskId)
 {
     u8 newTaskId;
 
@@ -712,7 +712,7 @@ void AnimTask_GetTargetIsAttackerPartner(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BB9B0(u8 taskId)
+void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
 {
     u16 battler;
 
@@ -837,19 +837,19 @@ void AnimTask_GetBattleTerrain(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BBE10(u8 taskId)
+void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
     gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BBE3C(u8 taskId)
+void AnimTask_FreeBackupPalBuffer(u8 taskId)
 {
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BBE6C(u8 taskId)
+void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
 {
     u32 selectedPalettes;
     s32 paletteIndex = 0;
@@ -867,7 +867,7 @@ void sub_80BBE6C(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BBF08(u8 taskId)
+void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
 {
     u32 selectedPalettes;
     s32 paletteIndex = 0;
@@ -885,7 +885,7 @@ void sub_80BBF08(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BBFA4(u8 taskId)
+void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
 {
     u32 selectedPalettes;
     s32 paletteIndex = 0;
@@ -912,7 +912,7 @@ void AnimTask_IsContest(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BC060(u8 taskId)
+void AnimTask_SetAnimAttackerAndTargetForEffectTgt(u8 taskId)
 {
     gBattleAnimAttacker = gBattlerTarget;
     gBattleAnimTarget = gEffectBattler;
@@ -928,20 +928,20 @@ void AnimTask_IsTargetSameSide(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BC0DC(u8 taskId)
+void AnimTask_SetAnimTargetToBattlerTarget(u8 taskId)
 {
     gBattleAnimTarget = gBattlerTarget;
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BC0FC(u8 taskId)
+void AnimTask_SetAnimAttackerAndTargetForEffectAtk(u8 taskId)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gEffectBattler;
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BC12C(u8 taskId)
+void AnimTask_SetAttackerInvisibleWaitForSignal(u8 taskId)
 {
     if (IsContest())
     {

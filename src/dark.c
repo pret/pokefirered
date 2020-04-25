@@ -7,11 +7,11 @@
 #include "util.h"
 
 static void sub_80B7ACC(struct Sprite *sprite);
-static void sub_80B7BD4(struct Sprite *sprite);
-static void sub_80B7C88(struct Sprite *sprite);
-static void sub_80B86B0(struct Sprite *sprite);
-static void sub_80B7954(u8 taskId);
-static void sub_80B7A14(u8 taskId);
+static void AnimBite(struct Sprite *sprite);
+static void AnimTearDrop(struct Sprite *sprite);
+static void AnimClawSlash(struct Sprite *sprite);
+static void AnimTask_AttackerFadeToInvisible_Step(u8 taskId);
+static void AnimTask_AttackerFadeFromInvisible_Step(u8 taskId);
 static void sub_80B7B48(struct Sprite *sprite);
 static void sub_80B7C10(struct Sprite *sprite);
 static void sub_80B7C50(struct Sprite *sprite);
@@ -33,120 +33,120 @@ const struct SpriteTemplate gUnknown_83E7878 =
     .callback = sub_80B7ACC,
 };
 
-static const union AffineAnimCmd gUnknown_83E7890[] =
+static const union AffineAnimCmd sAffineAnim_Bite_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E78A0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 32, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E78B0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_2[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 64, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E78C0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_3[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 96, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E78D0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_4[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -128, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E78E0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_5[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -96, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E78F0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_6[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -64, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E7900[] =
+static const union AffineAnimCmd sAffineAnim_Bite_7[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -32, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_83E7910[] =
+const union AffineAnimCmd *const gAffineAnims_Bite[] =
 {
-    gUnknown_83E7890,
-    gUnknown_83E78A0,
-    gUnknown_83E78B0,
-    gUnknown_83E78C0,
-    gUnknown_83E78D0,
-    gUnknown_83E78E0,
-    gUnknown_83E78F0,
-    gUnknown_83E7900,
+    sAffineAnim_Bite_0,
+    sAffineAnim_Bite_1,
+    sAffineAnim_Bite_2,
+    sAffineAnim_Bite_3,
+    sAffineAnim_Bite_4,
+    sAffineAnim_Bite_5,
+    sAffineAnim_Bite_6,
+    sAffineAnim_Bite_7,
 };
 
-const struct SpriteTemplate gUnknown_83E7930 =
+const struct SpriteTemplate gSharpTeethSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SHARP_TEETH,
     .paletteTag = ANIM_TAG_SHARP_TEETH,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7910,
-    .callback = sub_80B7BD4,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite,
 };
 
-const struct SpriteTemplate gUnknown_83E7948 =
+const struct SpriteTemplate gClampJawSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CLAMP,
     .paletteTag = ANIM_TAG_CLAMP,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7910,
-    .callback = sub_80B7BD4,
+    .affineAnims = gAffineAnims_Bite,
+    .callback = AnimBite,
 };
 
-static const union AffineAnimCmd gUnknown_83E7960[] =
+static const union AffineAnimCmd sAffineAnim_TearDrop_0[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 80, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -2, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E7978[] =
+static const union AffineAnimCmd sAffineAnim_TearDrop_1[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, -80, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 2, 8),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E7990[] =
+static const union AffineAnimCmd *const sAffineAnims_TearDrop[] =
 {
-    gUnknown_83E7960,
-    gUnknown_83E7978,
+    sAffineAnim_TearDrop_0,
+    sAffineAnim_TearDrop_1,
 };
 
-const struct SpriteTemplate gUnknown_83E7998 =
+const struct SpriteTemplate gTearDropSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7990,
-    .callback = sub_80B7C88,
+    .affineAnims = sAffineAnims_TearDrop,
+    .callback = AnimTearDrop,
 };
 
-static const union AnimCmd gUnknown_83E79B0[] =
+static const union AnimCmd sAnim_ClawSlash_0[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -156,7 +156,7 @@ static const union AnimCmd gUnknown_83E79B0[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_83E79C8[] =
+static const union AnimCmd sAnim_ClawSlash_1[] =
 {
     ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(16, 4, .hFlip = TRUE),
@@ -166,24 +166,24 @@ static const union AnimCmd gUnknown_83E79C8[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gUnknown_83E79E0[] =
+static const union AnimCmd *const sAnims_ClawSlash[] =
 {
-    gUnknown_83E79B0,
-    gUnknown_83E79C8,
+    sAnim_ClawSlash_0,
+    sAnim_ClawSlash_1,
 };
 
-const struct SpriteTemplate gUnknown_83E79E8 =
+const struct SpriteTemplate gClawSlashSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CLAW_SLASH,
     .paletteTag = ANIM_TAG_CLAW_SLASH,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_83E79E0,
+    .anims = sAnims_ClawSlash,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80B86B0,
+    .callback = AnimClawSlash,
 };
 
-void sub_80B78E0(u8 taskId)
+void AnimTask_AttackerFadeToInvisible(u8 taskId)
 {
     s32 battler;
 
@@ -195,10 +195,10 @@ void sub_80B78E0(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
     else
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-    gTasks[taskId].func = sub_80B7954;
+    gTasks[taskId].func = AnimTask_AttackerFadeToInvisible_Step;
 }
 
-static void sub_80B7954(u8 taskId)
+static void AnimTask_AttackerFadeToInvisible_Step(u8 taskId)
 {
     u8 blendA = gTasks[taskId].data[1] >> 8;
     u8 blendB = gTasks[taskId].data[1];
@@ -222,15 +222,15 @@ static void sub_80B7954(u8 taskId)
     }
 }
 
-void sub_80B79DC(u8 taskId)
+void AnimTask_AttackerFadeFromInvisible(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = BLDALPHA_BLEND(0, 16);
-    gTasks[taskId].func = sub_80B7A14;
+    gTasks[taskId].func = AnimTask_AttackerFadeFromInvisible_Step;
     SetGpuReg(REG_OFFSET_BLDALPHA, gTasks[taskId].data[1]);
 }
 
-static void sub_80B7A14(u8 taskId)
+static void AnimTask_AttackerFadeFromInvisible_Step(u8 taskId)
 {
     u8 blendA = gTasks[taskId].data[1] >> 8;
     u8 blendB = gTasks[taskId].data[1];
@@ -255,7 +255,7 @@ static void sub_80B7A14(u8 taskId)
     }
 }
 
-void sub_80B7A80(u8 taskId)
+void AnimTask_InitAttackerFadeFromInvisible(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
@@ -306,7 +306,7 @@ static void sub_80B7B48(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80B7BD4(struct Sprite *sprite)
+static void AnimBite(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -337,7 +337,7 @@ static void sub_80B7C50(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-static void sub_80B7C88(struct Sprite *sprite)
+static void AnimTearDrop(struct Sprite *sprite)
 {
     u8 battler;
     s8 xOffset;
@@ -385,7 +385,7 @@ static void sub_80B7D88(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-void sub_80B7DA4(u8 taskId)
+void AnimTask_MoveAttackerMementoShadow(u8 taskId)
 {
     struct ScanlineEffectParams scanlineParams;
     struct BattleAnimBgData animBg;
@@ -502,7 +502,7 @@ static void sub_80B7F58(u8 taskId)
     }
 }
 
-void sub_80B8070(u8 taskId)
+void AnimTask_MoveTargetMementoShadow(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     struct ScanlineEffectParams scanlineParams;
@@ -724,7 +724,7 @@ static void sub_80B856C(u8 priority)
     }
 }
 
-void sub_80B85B8(u8 taskId)
+void AnimTask_InitMementoShadow(u8 taskId)
 {
     bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
 
@@ -748,7 +748,7 @@ void sub_80B8664(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-static void sub_80B86B0(struct Sprite *sprite)
+static void AnimClawSlash(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -910,7 +910,7 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80B8B38(u8 taskId)
+void GetIsDoomDesireHitTurn(u8 taskId)
 {
     if (gAnimMoveTurn < 2)
         gBattleAnimArgs[7] = 0;

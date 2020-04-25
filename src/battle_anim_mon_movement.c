@@ -73,7 +73,7 @@ const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
     .callback = SlideMonToOffset,
 };
 
-const struct SpriteTemplate gUnknown_83D4EB4 =
+const struct SpriteTemplate gSlideMonToOffsetAndBackSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -620,7 +620,7 @@ static void AnimTask_WindUpLungePart2(u8 taskId)
     }
 }
 
-void sub_80995FC(u8 taskId)
+void AnimTask_SlideOffScreen(u8 taskId)
 {
     u8 spriteId;
 
@@ -772,7 +772,7 @@ static void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
     }
 }
 
-void sub_8099980(u8 taskId)
+void AnimTask_RotateMonSpriteToSide(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
     PrepareBattlerSpriteForRotScale(spriteId, 0);
@@ -805,7 +805,7 @@ void sub_8099980(u8 taskId)
     gTasks[taskId].func = sub_8099B54;
 }
 
-void sub_8099A78(u8 taskId)
+void AnimTask_RotateMonToSideAndRestore(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
     PrepareBattlerSpriteForRotScale(spriteId, 0);
@@ -866,7 +866,7 @@ static void sub_8099B54(u8 taskId)
     }
 }
 
-void sub_8099BD4(u8 taskId)
+void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
     {

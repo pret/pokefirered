@@ -1174,9 +1174,9 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice:: @ 8169BE1
 	compare PLAYER_STARTER_NUM, 0
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur
 	compare PLAYER_STARTER_NUM, 1
-	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander
-	compare PLAYER_STARTER_NUM, 2
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle
+	compare PLAYER_STARTER_NUM, 2
+	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur:: @ 8169C14
@@ -1187,7 +1187,7 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur:: @ 8169C14
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander:: @ 8169C33
+PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle:: @ 8169C33
 	msgbox PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ChoseStarter
@@ -1195,7 +1195,7 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander:: @ 8169C33
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle:: @ 8169C52
+PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander:: @ 8169C52
 	msgbox PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ChoseStarter

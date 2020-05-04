@@ -1240,9 +1240,9 @@ PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter:: @ 8169CDC
 	compare PLAYER_STARTER_NUM, 0
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander
 	compare PLAYER_STARTER_NUM, 1
-	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle
-	compare PLAYER_STARTER_NUM, 2
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur
+	compare PLAYER_STARTER_NUM, 2
+	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander:: @ 8169CFF
@@ -1251,14 +1251,14 @@ PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander:: @ 8169CFF
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur:: @ 8169D0F
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur
+PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle:: @ 8169D0F
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle:: @ 8169D1F
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle
+PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur:: @ 8169D1F
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
@@ -1293,7 +1293,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalWalksToCharmander:: @ 8169D62
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur:: @ 8169D6B
+PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle:: @ 8169D6B
 	walk_down
 	walk_right
 	walk_right
@@ -1302,7 +1302,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur:: @ 8169D6B
 	walk_in_place_fastest_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle:: @ 8169D72
+PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur:: @ 8169D72
 	walk_down
 	walk_right
 	walk_right

@@ -1466,7 +1466,7 @@ void obj_delete_but_dont_free_vram(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_8076048(u8 taskId)
+void AnimTask_AlphaFadeIn(u8 taskId)
 {
     s16 v1 = 0, v2 = 0;
 
@@ -1584,7 +1584,7 @@ static void AnimTask_BlendMonInAndOutStep(u8 taskId)
     }
 }
 
-void sub_8076288(u8 taskId)
+void AnimTask_BlendPalInAndOutByTag(u8 taskId)
 {
     u8 palette = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
 
@@ -2117,7 +2117,7 @@ void sub_8076FD0(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8077030(u8 taskId)
+void AnimTask_AttackerPunchWithTrace(u8 taskId)
 {
     u16 src;
     u16 dest;
@@ -2225,7 +2225,7 @@ static void sub_80772F4(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8077350(struct Sprite *sprite)
+void AnimWeatherBallDown(struct Sprite *sprite)
 {
     s32 x;
 

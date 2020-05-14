@@ -397,7 +397,7 @@ static const union AnimCmd *const sSpriteAnimTable_840C20C[] =
     sUnknown_840C204,
 };
 
-const struct SpriteTemplate gUnknown_840C210 =
+const struct SpriteTemplate gSafariRockTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
@@ -534,7 +534,7 @@ void sub_80EEFC8(u8 *paletteId1, u8 *paletteId2, u8 battler)
     gSprites[spriteId2].oam.paletteNum = *paletteId2;
 }
 
-void sub_80EF0B4(u8 taskId)
+void AnimTask_LoadHealthboxPalsForLevelUp(u8 taskId)
 {
     u8 paletteId1, paletteId2;
     
@@ -560,13 +560,13 @@ void sub_80EF0E0(u8 battler)
     gSprites[spriteId2].oam.paletteNum = paletteId2;
 }
 
-void sub_80EF180(u8 taskId)
+void AnimTask_FreeHealthboxPalsForLevelUp(u8 taskId)
 {
     sub_80EF0E0(gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80EF1A0(u8 taskId)
+void AnimTask_FlashHealthboxOnLevelUp(u8 taskId)
 {
     gTasks[taskId].data[10] = gBattleAnimArgs[0];
     gTasks[taskId].data[11] = gBattleAnimArgs[1];
@@ -610,7 +610,7 @@ static void sub_80EF1CC(u8 taskId)
     }
 }
 
-void sub_80EF298(u8 taskId)
+void AnimTask_SwitchOutShrinkMon(u8 taskId)
 {
     u8 spriteId;
 
@@ -637,7 +637,7 @@ void sub_80EF298(u8 taskId)
     }
 }
 
-void sub_80EF344(u8 taskId)
+void AnimTask_SwitchOutBallEffect(u8 taskId)
 {
     u8 spriteId;
     u16 ball;
@@ -672,7 +672,7 @@ void sub_80EF344(u8 taskId)
     }
 }
 
-void sub_80EF490(u8 taskId)
+void AnimTask_LoadBallGfx(u8 taskId)
 {
     u8 ballId = ItemIdToBallId(gLastUsedItem);
     
@@ -680,7 +680,7 @@ void sub_80EF490(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80EF4B8(u8 taskId)
+void AnimTask_FreeBallGfx(u8 taskId)
 {
     u8 ballId = ItemIdToBallId(gLastUsedItem);
     
@@ -738,7 +738,7 @@ u8 ItemIdToBallId(u16 ballItem)
     }
 }
 
-void sub_80EF5AC(u8 taskId)
+void AnimTask_ThrowBall(u8 taskId)
 {
     u8 ballId;
     u8 spriteId;
@@ -762,7 +762,7 @@ static void sub_80EF698(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_80EF6D4(u8 taskId)
+void AnimTask_ThrowBallSpecial(u8 taskId)
 {
     int x, y;
     u8 ballId;
@@ -1942,7 +1942,7 @@ static void sub_80F13C0(u8 taskId)
     }
 }
 
-void sub_80F1420(u8 taskId)
+void AnimTask_SwapMonSpriteToFromSubstitute(u8 taskId)
 {
     u8 spriteId;
     u32 x;
@@ -2000,7 +2000,7 @@ void sub_80F1420(u8 taskId)
     }
 }
 
-void sub_80F15C8(u8 taskId)
+void AnimTask_SubstituteFadeToInvisible(u8 taskId)
 {
     u8 spriteId;
 

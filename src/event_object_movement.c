@@ -1335,7 +1335,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     s16 y2;
     s16 elevation2;
     
-    if(template->unk2 == 0xFF)
+    if(template->inConnection == 0xFF)
     {
         var = 1;
         mapNum = template2->trainerType;

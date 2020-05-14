@@ -9,6 +9,8 @@
 #include "graphics.h"
 #include "strings.h"
 #include "trainer_pokemon_sprites.h"
+#include "menu.h"
+#include "field_weather.h"
 #include "constants/species.h"
 #include "constants/maps.h"
 #include "constants/field_weather.h"

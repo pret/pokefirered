@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "menu.h"
 
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;

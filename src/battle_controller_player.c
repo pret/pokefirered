@@ -2406,8 +2406,8 @@ static void PlayerHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gUnknown_83FDA4C, 0);
-    BattlePutTextOnWindow(gUnknown_83FE725, 2);
+    BattlePutTextOnWindow(gText_EmptyString3, 0);
+    BattlePutTextOnWindow(gText_BattleMenu, 2);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);

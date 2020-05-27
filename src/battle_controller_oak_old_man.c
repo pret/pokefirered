@@ -645,7 +645,7 @@ static void sub_80E835C(void)
         }
         break;
     case 2:
-        BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FDAE2);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_ForPetesSake);
         BattlePutTextOnWindow(gDisplayedStringBattle, 24);
         ++gBattleStruct->field_94;
         break;
@@ -664,7 +664,7 @@ static void sub_80E835C(void)
     case 4:
         if (!gPaletteFade.active)
         {
-            BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FDB92);
+            BattleStringExpandPlaceholdersToDisplayedString(gText_TheTrainerThat);
             BattlePutTextOnWindow(gDisplayedStringBattle, 24);
             ++gBattleStruct->field_94;
         }
@@ -684,7 +684,7 @@ static void sub_80E835C(void)
     case 6:
         if (!gPaletteFade.active)
         {
-            BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FDBEF);
+            BattleStringExpandPlaceholdersToDisplayedString(gText_TryBattling);
             BattlePutTextOnWindow(gDisplayedStringBattle, 24);
             ++gBattleStruct->field_94;
         }
@@ -714,27 +714,27 @@ static void sub_80E835C(void)
 
 void sub_80E8570(void)
 {
-    sub_80E85D4(gUnknown_83FDC58, 1);
+    sub_80E85D4(gText_InflictingDamageIsKey, 1);
 }
 
 static void sub_80E8584(void)
 {
-    sub_80E85D4(gUnknown_83FDC95, 64);
+    sub_80E85D4(gText_LoweringStats, 64);
 }
 
 void sub_80E8598(void)
 {
-    sub_80E85D4(gUnknown_83FDD23, 1);
+    sub_80E85D4(gText_OakNoRunningFromATrainer, 1);
 }
 
 static void sub_80E85AC(void)
 {
-    sub_80E85D4(gUnknown_83FDD64, 64);
+    sub_80E85D4(gText_WinEarnsPrizeMoney, 64);
 }
 
 void sub_80E85C0(void)
 {
-    sub_80E85D4(gUnknown_83FDDEB, 64);
+    sub_80E85D4(gText_HowDissapointing, 64);
 }
 
 static void sub_80E85D4(const u8 *text, u8 a2)
@@ -835,7 +835,7 @@ static void sub_80E8704(void)
         }
         break;
     case 3:
-        BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FDCD2);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_KeepAnEyeOnHP);
         BattlePutTextOnWindow(gDisplayedStringBattle, 24);
         ++gBattleStruct->field_94;
         break;
@@ -1809,15 +1809,15 @@ static void OakOldManHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = sub_80EA690;
-    BattlePutTextOnWindow(gUnknown_83FDA4C, 0);
-    BattlePutTextOnWindow(gUnknown_83FE725, 2);
+    BattlePutTextOnWindow(gText_EmptyString3, 0);
+    BattlePutTextOnWindow(gText_BattleMenu, 2);
     for (i = 0; i < MAX_MON_MOVES; ++i)
         ActionSelectionDestroyCursorAt((u8)i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
     else
-        BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FE6FA);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillOldManDo);
     BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 

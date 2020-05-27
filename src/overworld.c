@@ -400,30 +400,27 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
 
 // Routines related to object events
 
-static void sub_8054F68(void)
+static void LoadObjEventTemplatesFromHeader(void)
 {
     u8 i, j;
-    u8 mapGroup;
-    u8 mapNum;
-    u8 localId;
-    const struct MapHeader * linkedMap;
-
     for (i = 0, j = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if (gMapHeader.events->objectEvents[i].unk2 == 0xFF)
+        if (gMapHeader.events->objectEvents[i].inConnection == 0xFF)
         {
-            localId = gMapHeader.events->objectEvents[i].elevation;
-            mapNum = gMapHeader.events->objectEvents[i].trainerType;
-            mapGroup = gMapHeader.events->objectEvents[i].trainerRange_berryTreeId;
-            linkedMap = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
-            gSaveBlock1Ptr->objectEventTemplates[j] = linkedMap->events->objectEvents[localId - 1];
+            // load "in_connection" object from the connecting map
+            u8 localId = gMapHeader.events->objectEvents[i].elevation;
+            u8 mapNum = gMapHeader.events->objectEvents[i].trainerType;
+            u8 mapGroup = gMapHeader.events->objectEvents[i].trainerRange_berryTreeId;
+            const struct MapHeader * connectionMap = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+
+            gSaveBlock1Ptr->objectEventTemplates[j] = connectionMap->events->objectEvents[localId - 1];
             gSaveBlock1Ptr->objectEventTemplates[j].localId = gMapHeader.events->objectEvents[i].localId;
             gSaveBlock1Ptr->objectEventTemplates[j].x = gMapHeader.events->objectEvents[i].x;
             gSaveBlock1Ptr->objectEventTemplates[j].y = gMapHeader.events->objectEvents[i].y;
             gSaveBlock1Ptr->objectEventTemplates[j].elevation = localId;
             gSaveBlock1Ptr->objectEventTemplates[j].trainerType = mapNum;
             gSaveBlock1Ptr->objectEventTemplates[j].trainerRange_berryTreeId = mapGroup;
-            gSaveBlock1Ptr->objectEventTemplates[j].unk2 = 0xFF;
+            gSaveBlock1Ptr->objectEventTemplates[j].inConnection = 0xFF;
             j++;
         }
         else
@@ -758,7 +755,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     Overworld_TryMapConnectionMusicTransition();
     ApplyCurrentWarp();
     LoadCurrentMapData();
-    sub_8054F68();
+    LoadObjEventTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
@@ -791,7 +788,7 @@ static void mli0_load_map(bool32 a1)
     bool8 isOutdoors;
 
     LoadCurrentMapData();
-    sub_8054F68();
+    LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
 
     TrySetMapSaveWarpStatus();
@@ -818,7 +815,7 @@ static void sub_80559A8(void)
     bool8 isOutdoors;
 
     LoadCurrentMapData();
-    sub_8054F68();
+    LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
     TrySetMapSaveWarpStatus();
     SetSav1WeatherFromCurrMapHeader();

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "menu.h"
 #include "malloc.h"
 

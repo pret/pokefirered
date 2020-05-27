@@ -1335,7 +1335,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     s16 y2;
     s16 elevation2;
     
-    if(template->unk2 == 0xFF)
+    if(template->inConnection == 0xFF)
     {
         var = 1;
         mapNum = template2->trainerType;
@@ -1904,7 +1904,7 @@ int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 
     y -= 7;
     objectEventTemplate.localId = localId;
     objectEventTemplate.graphicsId = graphicsId;
-    objectEventTemplate.unk2 = 0;
+    objectEventTemplate.inConnection = 0;
     objectEventTemplate.x = x;
     objectEventTemplate.y = y;
     objectEventTemplate.elevation = z;

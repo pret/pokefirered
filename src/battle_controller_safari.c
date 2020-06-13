@@ -438,12 +438,12 @@ static void SafariHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gUnknown_83FDA4C, 0);
+    BattlePutTextOnWindow(gText_EmptyString3, 0);
     BattlePutTextOnWindow(gUnknown_83FE747, 2);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(gUnknown_83FE6E6);
+    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
     BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 

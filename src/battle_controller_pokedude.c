@@ -1928,8 +1928,8 @@ static void PokedudeHandleChooseAction(void)
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
         gBattlerControllerFuncs[gActiveBattler] = sub_8158B20;
-        BattlePutTextOnWindow(gUnknown_83FDA4C, 0);
-        BattlePutTextOnWindow(gUnknown_83FE725, 2);
+        BattlePutTextOnWindow(gText_EmptyString3, 0);
+        BattlePutTextOnWindow(gText_BattleMenu, 2);
         for (i = 0; i < MAX_MON_MOVES; ++i)
             ActionSelectionDestroyCursorAt((u8)i);
         ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);

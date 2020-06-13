@@ -4819,7 +4819,7 @@ static void sub_8042D50(int stat)
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_825DFF0[stat]]);
     StringCopy(gBattleTextBuff2, gBattleText_Rose);
-    BattleStringExpandPlaceholdersToDisplayedString(gBattleText_UnknownString3);
+    BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
 }
 
 const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)

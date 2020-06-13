@@ -94,7 +94,7 @@ struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 unk2;
+    /*0x02*/ u8 inConnection;
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
@@ -304,7 +304,7 @@ enum {
 #define PLAYER_AVATAR_FLAG_UNDERWATER (1 << PLAYER_AVATAR_STATE_UNDERWATER)
 #define PLAYER_AVATAR_FLAG_FIELD_MOVE (1 << PLAYER_AVATAR_STATE_FIELD_MOVE)
 #define PLAYER_AVATAR_FLAG_FISHING    (1 << PLAYER_AVATAR_STATE_FISHING)
-#define PLAYER_AVATAR_FLAG_WATERING   (1 << PLAYER_AVATAR_STATE_WATERING)
+#define PLAYER_AVATAR_FLAG_DASH       (1 << PLAYER_AVATAR_STATE_WATERING)
 
 enum
 {

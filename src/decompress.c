@@ -117,457 +117,149 @@ static void Unused_LZDecompressWramIndirect(const void **src, void *dest)
     LZ77UnCompWram(*src, dest);
 }
 
-#ifdef NONMATCHING
-static void sub_800EDDC(s32 a0, s32 a1, const u8 *a2, u8 *a3)
+static void sub_800EDDC(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
 {
-    u8 *v1, *v2;
-    int i, j, k, l;
+    /*
+      This function appears to emulate behaviour found in the GB(C) versions regarding how the Pokemon images
+      are stitched together to be displayed on the battle screen.
+      Given "compacted" tiles, an object count and a bounding box/object size, place the tiles in such a way
+      that the result will have each object centered in a 8x8 tile canvas.
+    */
+    s32 i, j, k, l;
+    u8 *src = src_tiles, *dest = dest_tiles;
+    u8 bottom_off;
 
-    if (a0 & 1)
+    if (object_size & 1)
     {
-        u8 v40 = ((a0 >> 1) + 4);
-        for (i = 0; i < a1; ++i)
+        // Object size is odd
+        bottom_off = (object_size >> 1) + 4;
+        for (l = 0; l < object_count; l++)
         {
-            // this nested loop failed to match
-            for (j = 0; j < 8 - a0; ++j)
+            // Clear all unused rows of tiles plus the half-tile required due to centering
+            for (j = 0; j < 8-object_size; j++)
             {
-                for (k = 0; k < 8; ++k)
+                for (k = 0; k < 8; k++)
                 {
-
-                    v1 = a3 + 0x100 * v40 + 0x100 * (j >> 1) + 0x20 * k;
-                    v2 = a3 + 0x20 * k + 0x100 * (j >> 1);
-                    for (l = 0; l < 0x10; ++l)
+                    for (i = 0; i < 16; i++)
                     {
-                        if (!(j & 1))
+                        if (j % 2 == 0)
                         {
-                            v2[0] = j & 1;
-                            v1[16] = 0;
-//                            a3[0x100 * (j / 2) + 0x20 * k + l] = 0;
-//                            a3[0x100 * v40 + 0x100 * (j / 2) + 0x20 * k + l + 0x10] = 0;
+                            // Clear top half of top tile and bottom half of bottom tile when on even j
+                            ((dest+i) + (k << 5))[((j >> 1) << 8)] = 0;
+                            ((bottom_off << 8) + (dest+i) + (k << 5) + 16)[((j >> 1) << 8)] = 0;
                         }
                         else
                         {
-                            v2[16] = 0;
-                            v1[0x100] = 0;
-//                            a3[0x100 * (j / 2) + 0x20 * k + l + 0x10] = 0;
-//                            a3[0x100 * v40 + 0x100 * (j / 2) + 0x20 * k + l + 0x100] = 0;
+                            // Clear bottom half of top tile and top half of tile following bottom tile when on odd j
+                            ((dest+i) + (k << 5) + 16)[((j >> 1) << 8)] = 0;
+                            ((bottom_off << 8) + (dest+i) + (k << 5) + 256)[((j >> 1) << 8)] = 0;
                         }
-                        ++v1;
-                        ++v2; // this should be generated if you write stuff inside operator [] instead of declaring v1/v2
                     }
                 }
             }
-            for (j = 0; j < 2; ++j)
+
+            // Clear the columns to the left and right that wont be used completely
+            // Unlike the previous loops, this will clear the later used space as well
+            for (j = 0; j < 2; j++)
             {
-                for (k = 0; k < 8; ++k)
+                for (i = 0; i < 8; i++)
                 {
-                    for (l = 0; l < 0x20; ++l)
+                    for (k = 0; k < 32; k++)
                     {
-                        a3[0x100 * k + 0x20 * j + l] = 0;
-                        a3[0x100 * k + 0xC0 + 0x20 * j + l] = 0;
+                        // Left side
+                        ((dest+k) + (i << 8))[(j << 5)] = 0;
+                        // Right side
+                        ((dest+k) + (i << 8))[(j << 5)+192] = 0;
                     }
                 }
             }
-            if (a0 == 5)
-                a3 += 0x120;
-            for (j = 0; j < a0; ++j)
+
+            // Skip the top row and first tile on the second row for objects of size 5
+            if (object_size == 5) dest += 0x120;
+
+            // Copy tile data
+            for (j = 0; j < object_size; j++)
             {
-                for (k = 0; k < a0; ++k)
+                for (k = 0; k < object_size; k++)
                 {
-                    for (l = 0; l < 4; ++l)
+                    for (i = 0; i < 4; i++)
                     {
-                        a3[0x12 + 4 * l] = a2[0 + 4 * l];
-                        a3[0x13 + 4 * l] = a2[1 + 4 * l];
-                        a3[0x12 + 0x1E + 4 * l] = a2[2 + 4 * l];
-                        a3[0x12 + 0x1F + 4 * l] = a2[3 + 4 * l];
-                        a3[0x102 + 4 * l] = a2[0x10 + 4 * l];
-                        a3[0x103 + 4 * l] = a2[0x11 + 4 * l];
-                        a3[0x120 + 4 * l] = a2[0x12 + 4 * l];
-                        a3[0x121 + 4 * l] = a2[0x13 + 4 * l];
+                        // Offset the tile by +4px in both x and y directions
+                        (dest + (i << 2))[18] = (src + (i << 2))[0];
+                        (dest + (i << 2))[19] = (src + (i << 2))[1];
+                        (dest + (i << 2))[48] = (src + (i << 2))[2];
+                        (dest + (i << 2))[49] = (src + (i << 2))[3];
+
+                        (dest + (i << 2))[258] = (src + (i << 2))[16];
+                        (dest + (i << 2))[259] = (src + (i << 2))[17];
+                        (dest + (i << 2))[288] = (src + (i << 2))[18];
+                        (dest + (i << 2))[289] = (src + (i << 2))[19];
                     }
-                    a2 += 0x20;
-                    a3 += 0x20;
+                    src += 32;
+                    dest += 32;
                 }
-                if (a0 == 7)
-                    a3 += 0x20;
-                else if (a0 == 5)
-                    a3 += 0x60;
+
+                // At the end of a row, skip enough tiles to get to the beginning of the next row
+                if (object_size == 7) dest += 0x20;
+                else if (object_size == 5) dest += 0x60;
             }
-            if (a0 == 7)
-                a3 += 0x100;
-            else if (a0 == 5)
-                a3 += 0x1E0;
+
+            // Skip remaining unused space to go to the beginning of the next object
+            if (object_size == 7) dest += 0x100;
+            else if (object_size == 5) dest += 0x1e0;
         }
     }
     else
     {
-        for (i = 0; i < a1; ++i)
+        // Object size is even
+        for (i = 0; i < object_count; i++)
         {
-            if (a0 == 6)
-                for (j = 0; j < 0x100; ++j)
-                    *a3++ = 0;
-            for (j = 0; j < a0; ++j)
+            // For objects of size 6, the first and last row and column will be cleared
+            // While the remaining space will be filled with actual data
+            if (object_size == 6)
             {
-                if (a0 == 6)
-                    for (k = 0; k < 0x20; ++k)
-                        *a3++ = 0;
-                for (k = 0; k < 0x20 * a0; ++k)
-                    *a3++ = *a2++;
-                if (a0 == 6)
-                    for (k = 0; k < 0x20; ++k)
-                        *a3++ = 0;
+                for (k = 0; k < 256; k++) {
+                    *dest = 0;
+                    dest++;
+                }
             }
-            if (a0 == 6)
-                for (j = 0; j < 0x100; ++j)
-                    *a3++ = 0;
+
+            for (j = 0; j < object_size; j++)
+            {
+                if (object_size == 6)
+                {
+                    for (k = 0; k < 32; k++) {
+                        *dest = 0;
+                        dest++;
+                    }
+                }
+
+                // Copy tile data
+                for (k = 0; k < 32 * object_size; k++) {
+                    *dest = *src;
+                    src++;
+                    dest++;
+                }
+
+                if (object_size == 6)
+                {
+                    for (k = 0; k < 32; k++) {
+                        *dest = 0;
+                        dest++;
+                    }
+                }
+            }
+
+            if (object_size == 6)
+            {
+                for (k = 0; k < 256; k++) {
+                    *dest = 0;
+                    dest++;
+                }
+            }
         }
     }
 }
-#else
-NAKED
-static void sub_800EDDC(s32 a0, s32 a1, const u8 *a2, u8 *a3)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x24\n\
-        mov r9, r0\n\
-        str r1, [sp]\n\
-        str r2, [sp, 0x4]\n\
-        adds r5, r3, 0\n\
-        movs r0, 0x1\n\
-        mov r1, r9\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        bne _0800EDFC\n\
-        b _0800EF94\n\
-    _0800EDFC:\n\
-        asrs r0, r1, 1\n\
-        adds r0, 0x4\n\
-        lsls r0, 24\n\
-        lsrs r0, 24\n\
-        str r0, [sp, 0x8]\n\
-        movs r0, 0\n\
-        ldr r2, [sp]\n\
-        cmp r0, r2\n\
-        blt _0800EE10\n\
-        b _0800F024\n\
-    _0800EE10:\n\
-        movs r4, 0x8\n\
-        subs r1, r4, r1\n\
-        str r1, [sp, 0x10]\n\
-    _0800EE16:\n\
-        movs r7, 0\n\
-        adds r0, 0x1\n\
-        str r0, [sp, 0x14]\n\
-        ldr r0, [sp, 0x10]\n\
-        cmp r7, r0\n\
-        bge _0800EE92\n\
-        ldr r1, [sp, 0x8]\n\
-        lsls r1, 8\n\
-        str r1, [sp, 0x18]\n\
-        movs r2, 0\n\
-        mov r10, r2\n\
-        mov r0, r9\n\
-        movs r4, 0x8\n\
-        subs r0, r4, r0\n\
-        str r0, [sp, 0xC]\n\
-    _0800EE34:\n\
-        movs r3, 0\n\
-        asrs r0, r7, 1\n\
-        adds r1, r7, 0\n\
-        movs r2, 0x1\n\
-        ands r1, r2\n\
-        str r1, [sp, 0x20]\n\
-        lsls r0, 8\n\
-        mov r8, r0\n\
-        mov r12, r5\n\
-    _0800EE46:\n\
-        lsls r1, r3, 5\n\
-        ldr r4, [sp, 0x18]\n\
-        adds r0, r5, r4\n\
-        adds r0, r1\n\
-        mov r1, r8\n\
-        adds r2, r0, r1\n\
-        mov r1, r12\n\
-        add r1, r8\n\
-        movs r6, 0xF\n\
-    _0800EE58:\n\
-        ldr r4, [sp, 0x20]\n\
-        cmp r4, 0\n\
-        bne _0800EE68\n\
-        strb r4, [r1]\n\
-        add r4, sp, 0x20\n\
-        ldrb r4, [r4]\n\
-        strb r4, [r2, 0x10]\n\
-        b _0800EE76\n\
-    _0800EE68:\n\
-        mov r0, r10\n\
-        strb r0, [r1, 0x10]\n\
-        movs r4, 0x80\n\
-        lsls r4, 1\n\
-        adds r4, r2, r4\n\
-        str r4, [sp, 0x1C]\n\
-        strb r0, [r4]\n\
-    _0800EE76:\n\
-        adds r2, 0x1\n\
-        adds r1, 0x1\n\
-        subs r6, 0x1\n\
-        cmp r6, 0\n\
-        bge _0800EE58\n\
-        movs r0, 0x20\n\
-        add r12, r0\n\
-        adds r3, 0x1\n\
-        cmp r3, 0x7\n\
-        ble _0800EE46\n\
-        adds r7, 0x1\n\
-        ldr r1, [sp, 0xC]\n\
-        cmp r7, r1\n\
-        blt _0800EE34\n\
-    _0800EE92:\n\
-        movs r7, 0\n\
-        movs r2, 0\n\
-    _0800EE96:\n\
-        movs r6, 0\n\
-        adds r4, r7, 0x1\n\
-        mov r8, r4\n\
-        lsls r4, r7, 5\n\
-    _0800EE9E:\n\
-        adds r0, r6, 0x1\n\
-        mov r10, r0\n\
-        lsls r1, r6, 8\n\
-        adds r0, r1, 0\n\
-        adds r0, 0xC0\n\
-        adds r0, r5, r0\n\
-        adds r0, r4\n\
-        adds r1, r5, r1\n\
-        adds r1, r4\n\
-        movs r3, 0x1F\n\
-    _0800EEB2:\n\
-        strb r2, [r1]\n\
-        strb r2, [r0]\n\
-        adds r0, 0x1\n\
-        adds r1, 0x1\n\
-        subs r3, 0x1\n\
-        cmp r3, 0\n\
-        bge _0800EEB2\n\
-        mov r6, r10\n\
-        cmp r6, 0x7\n\
-        ble _0800EE9E\n\
-        mov r7, r8\n\
-        cmp r7, 0x1\n\
-        ble _0800EE96\n\
-        mov r1, r9\n\
-        cmp r1, 0x5\n\
-        bne _0800EED8\n\
-        movs r2, 0x90\n\
-        lsls r2, 1\n\
-        adds r5, r2\n\
-    _0800EED8:\n\
-        movs r7, 0\n\
-        cmp r7, r9\n\
-        bge _0800EF6E\n\
-    _0800EEDE:\n\
-        movs r3, 0\n\
-        adds r7, 0x1\n\
-        mov r8, r7\n\
-        cmp r3, r9\n\
-        bge _0800EF4E\n\
-    _0800EEE8:\n\
-        adds r3, 0x1\n\
-        mov r10, r3\n\
-        ldr r4, [sp, 0x4]\n\
-        adds r4, 0x20\n\
-        adds r7, r5, 0\n\
-        adds r7, 0x20\n\
-        movs r0, 0x12\n\
-        adds r0, r5\n\
-        mov r12, r0\n\
-        ldr r2, [sp, 0x4]\n\
-        adds r3, r5, 0\n\
-        movs r6, 0x3\n\
-    _0800EF00:\n\
-        ldrb r0, [r2]\n\
-        mov r1, r12\n\
-        strb r0, [r1]\n\
-        ldrb r0, [r2, 0x1]\n\
-        strb r0, [r1, 0x1]\n\
-        ldrb r0, [r2, 0x2]\n\
-        strb r0, [r1, 0x1E]\n\
-        ldrb r0, [r2, 0x3]\n\
-        strb r0, [r1, 0x1F]\n\
-        movs r0, 0x81\n\
-        lsls r0, 1\n\
-        adds r1, r3, r0\n\
-        ldrb r0, [r2, 0x10]\n\
-        strb r0, [r1]\n\
-        ldr r0, _0800EF58 @ =0x00000103\n\
-        adds r1, r3, r0\n\
-        ldrb r0, [r2, 0x11]\n\
-        strb r0, [r1]\n\
-        movs r0, 0x90\n\
-        lsls r0, 1\n\
-        adds r1, r3, r0\n\
-        ldrb r0, [r2, 0x12]\n\
-        strb r0, [r1]\n\
-        ldr r0, _0800EF5C @ =0x00000121\n\
-        adds r1, r3, r0\n\
-        ldrb r0, [r2, 0x13]\n\
-        strb r0, [r1]\n\
-        movs r1, 0x4\n\
-        add r12, r1\n\
-        adds r2, 0x4\n\
-        adds r3, 0x4\n\
-        subs r6, 0x1\n\
-        cmp r6, 0\n\
-        bge _0800EF00\n\
-        str r4, [sp, 0x4]\n\
-        adds r5, r7, 0\n\
-        mov r3, r10\n\
-        cmp r3, r9\n\
-        blt _0800EEE8\n\
-    _0800EF4E:\n\
-        mov r2, r9\n\
-        cmp r2, 0x7\n\
-        bne _0800EF60\n\
-        adds r5, 0x20\n\
-        b _0800EF68\n\
-        .align 2, 0\n\
-    _0800EF58: .4byte 0x00000103\n\
-    _0800EF5C: .4byte 0x00000121\n\
-    _0800EF60:\n\
-        mov r4, r9\n\
-        cmp r4, 0x5\n\
-        bne _0800EF68\n\
-        adds r5, 0x60\n\
-    _0800EF68:\n\
-        mov r7, r8\n\
-        cmp r7, r9\n\
-        blt _0800EEDE\n\
-    _0800EF6E:\n\
-        mov r0, r9\n\
-        cmp r0, 0x7\n\
-        bne _0800EF7C\n\
-        movs r1, 0x80\n\
-        lsls r1, 1\n\
-        adds r5, r1\n\
-        b _0800EF88\n\
-    _0800EF7C:\n\
-        mov r2, r9\n\
-        cmp r2, 0x5\n\
-        bne _0800EF88\n\
-        movs r4, 0xF0\n\
-        lsls r4, 1\n\
-        adds r5, r4\n\
-    _0800EF88:\n\
-        ldr r0, [sp, 0x14]\n\
-        ldr r1, [sp]\n\
-        cmp r0, r1\n\
-        bge _0800EF92\n\
-        b _0800EE16\n\
-    _0800EF92:\n\
-        b _0800F024\n\
-    _0800EF94:\n\
-        movs r6, 0\n\
-        ldr r2, [sp]\n\
-        cmp r6, r2\n\
-        bge _0800F024\n\
-    _0800EF9C:\n\
-        adds r6, 0x1\n\
-        mov r10, r6\n\
-        mov r4, r9\n\
-        cmp r4, 0x6\n\
-        bne _0800EFB4\n\
-        movs r0, 0\n\
-        movs r3, 0xFF\n\
-    _0800EFAA:\n\
-        strb r0, [r5]\n\
-        adds r5, 0x1\n\
-        subs r3, 0x1\n\
-        cmp r3, 0\n\
-        bge _0800EFAA\n\
-    _0800EFB4:\n\
-        movs r7, 0\n\
-        cmp r7, r9\n\
-        bge _0800F008\n\
-    _0800EFBA:\n\
-        adds r7, 0x1\n\
-        mov r8, r7\n\
-        mov r1, r9\n\
-        lsls r0, r1, 5\n\
-        cmp r1, 0x6\n\
-        bne _0800EFD4\n\
-        movs r1, 0\n\
-        movs r3, 0x1F\n\
-    _0800EFCA:\n\
-        strb r1, [r5]\n\
-        adds r5, 0x1\n\
-        subs r3, 0x1\n\
-        cmp r3, 0\n\
-        bge _0800EFCA\n\
-    _0800EFD4:\n\
-        adds r1, r0, 0\n\
-        cmp r1, 0\n\
-        ble _0800EFEE\n\
-        adds r3, r1, 0\n\
-    _0800EFDC:\n\
-        ldr r2, [sp, 0x4]\n\
-        ldrb r0, [r2]\n\
-        strb r0, [r5]\n\
-        adds r2, 0x1\n\
-        str r2, [sp, 0x4]\n\
-        adds r5, 0x1\n\
-        subs r3, 0x1\n\
-        cmp r3, 0\n\
-        bne _0800EFDC\n\
-    _0800EFEE:\n\
-        mov r4, r9\n\
-        cmp r4, 0x6\n\
-        bne _0800F002\n\
-        movs r0, 0\n\
-        movs r3, 0x1F\n\
-    _0800EFF8:\n\
-        strb r0, [r5]\n\
-        adds r5, 0x1\n\
-        subs r3, 0x1\n\
-        cmp r3, 0\n\
-        bge _0800EFF8\n\
-    _0800F002:\n\
-        mov r7, r8\n\
-        cmp r7, r9\n\
-        blt _0800EFBA\n\
-    _0800F008:\n\
-        mov r0, r9\n\
-        cmp r0, 0x6\n\
-        bne _0800F01C\n\
-        movs r0, 0\n\
-        movs r3, 0xFF\n\
-    _0800F012:\n\
-        strb r0, [r5]\n\
-        adds r5, 0x1\n\
-        subs r3, 0x1\n\
-        cmp r3, 0\n\
-        bge _0800F012\n\
-    _0800F01C:\n\
-        mov r6, r10\n\
-        ldr r1, [sp]\n\
-        cmp r6, r1\n\
-        blt _0800EF9C\n\
-    _0800F024:\n\
-        add sp, 0x24\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        ");
-}
-#endif
 
 bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet* src)
 {

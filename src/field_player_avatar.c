@@ -181,7 +181,7 @@ static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
     objEvent->inanimate = FALSE;
     objEvent->disableAnim = FALSE;
     objEvent->facingDirectionLocked = FALSE;
-    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_WATERING;
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
 }
 
 static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
@@ -517,7 +517,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             PlayerRunSlow(direction);
         else
             PlayerRun(direction);
-        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_WATERING;
+        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         return;
     }
     else
@@ -1228,7 +1228,7 @@ void ClearPlayerAvatarInfo(void)
 
 void SetPlayerAvatarStateMask(u8 flags)
 {
-    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_WATERING | PLAYER_AVATAR_FLAG_FISHING | PLAYER_AVATAR_FLAG_FIELD_MOVE);
+    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_FISHING | PLAYER_AVATAR_FLAG_FIELD_MOVE);
     gPlayerAvatar.flags |= flags;
 }
 

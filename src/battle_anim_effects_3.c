@@ -3571,7 +3571,7 @@ static void sub_80E1AD8(u8 taskId)
     }
 }
 
-void sub_80E1C48(u8 taskId)
+void AnimTask_SlideMonForFocusBand(u8 taskId)
 {
     gTasks[taskId].data[15] = gBattlerSpriteIds[gBattleAnimAttacker];
     gTasks[taskId].data[14] = gBattleAnimArgs[0];
@@ -3751,7 +3751,7 @@ static void AnimTask_FacadeColorBlendStep(u8 taskId)
     }
 }
 
-void sub_80E2084(u8 taskId)
+void AnimTask_StatusClearedEffect(u8 taskId)
 {
     sub_80BBA20(taskId, 0, 0x1A0, gBattleAnimAttacker, gBattleAnimArgs[0], 10, 2, 30, gCureBubblesGfx, gCureBubblesTilemap, gCureBubblesPal);
 }

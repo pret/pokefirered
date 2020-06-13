@@ -2,9 +2,11 @@
 #include "gflib.h"
 #include "decompress.h"
 #include "m4a.h"
+#include "event_data.h"
 #include "help_system.h"
 #include "list_menu.h"
 #include "strings.h"
+#include "event_data.h"
 #include "constants/songs.h"
 
 extern u8 gGlyphInfo[];

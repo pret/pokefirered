@@ -66,7 +66,7 @@ static void sub_80DCEE4(u8 taskId)
     }
 }
 
-void mas_80DCF38(u8 taskId)
+void SoundTask_LoopSEAdjustPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 targetPan = gBattleAnimArgs[2];
@@ -116,7 +116,7 @@ static void sub_80DCFE8(u8 taskId)
     }
 }
 
-void sub_80DD06C(u8 taskId)
+void SoundTask_PlayCryHighPitch(u8 taskId)
 {
     u16 species = SPECIES_NONE;
     u8 battlerId;
@@ -147,7 +147,7 @@ void sub_80DD06C(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80DD148(u8 taskId)
+void SoundTask_PlayDoubleCry(u8 taskId)
 {
     u16 species = SPECIES_NONE;
     u8 battlerId;
@@ -214,7 +214,7 @@ static void sub_80DD270(u8 taskId)
     }
 }
 
-void sub_80DD2F4(u8 taskId)
+void SoundTask_WaitForCry(u8 taskId)
 {
     if (gTasks[taskId].data[9] < 2)
         ++gTasks[taskId].data[9];
@@ -259,7 +259,7 @@ static void sub_80DD390(u8 taskId)
     }
 }
 
-void sub_80DD3DC(u8 taskId)
+void SoundTask_PlaySE1WithPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
@@ -268,7 +268,7 @@ void sub_80DD3DC(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80DD410(u8 taskId)
+void SoundTask_PlaySE2WithPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
@@ -277,7 +277,7 @@ void sub_80DD410(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80DD444(u8 taskId)
+void SoundTask_AdjustPanningVar(u8 taskId)
 {
     s8 targetPan = gBattleAnimArgs[1];
     s8 panIncrement = gBattleAnimArgs[2];

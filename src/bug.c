@@ -3,90 +3,90 @@
 #include "gpu_regs.h"
 #include "trig.h"
 
-static void sub_80B3FAC(struct Sprite *sprite);
-static void sub_80B407C(struct Sprite *sprite);
+static void AnimMegahornHorn(struct Sprite *sprite);
+static void AnimLeechLifeNeedle(struct Sprite *sprite);
 static void AnimTranslateWebThread(struct Sprite *sprite);
-static void sub_80B41F8(struct Sprite *sprite);
-static void sub_80B42C0(struct Sprite *sprite);
+static void AnimStringWrap(struct Sprite *sprite);
+static void AnimSpiderWeb(struct Sprite *sprite);
 static void AnimTranslateStinger(struct Sprite *sprite);
 static void AnimMissileArc(struct Sprite *sprite);
-static void sub_80B45D8(struct Sprite *sprite);
+static void AnimTailGlowOrb(struct Sprite *sprite);
 static void sub_80B41C0(struct Sprite *sprite);
 static void sub_80B4274(struct Sprite *sprite);
 static void sub_80B42E8(struct Sprite *sprite);
 static void sub_80B4344(struct Sprite *sprite);
 static void AnimMissileArcStep(struct Sprite *sprite);
 
-static const union AffineAnimCmd gUnknown_83E71E8[] =
+static const union AffineAnimCmd sAffineAnim_MegahornHorn_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 30, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E71F8[] =
+static const union AffineAnimCmd sAffineAnim_MegahornHorn_1[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -99, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E7208[] =
+static const union AffineAnimCmd sAffineAnim_MegahornHorn_2[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 94, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E7218[] =
+static const union AffineAnimCmd *const sAffineAnims_MegahornHorn[] =
 {
-    gUnknown_83E71E8,
-    gUnknown_83E71F8,
-    gUnknown_83E7208,
+    sAffineAnim_MegahornHorn_0,
+    sAffineAnim_MegahornHorn_1,
+    sAffineAnim_MegahornHorn_2,
 };
 
-const struct SpriteTemplate gUnknown_83E7224 =
+const struct SpriteTemplate gMegahornHornSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HORN_HIT_2,
     .paletteTag = ANIM_TAG_HORN_HIT_2,
     .oam = &gOamData_AffineDouble_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7218,
-    .callback = sub_80B3FAC,
+    .affineAnims = sAffineAnims_MegahornHorn,
+    .callback = AnimMegahornHorn,
 };
 
-static const union AffineAnimCmd gUnknown_83E723C[] =
+static const union AffineAnimCmd sAffineAnim_LeechLifeNeedle_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -33, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E724C[] =
+static const union AffineAnimCmd sAffineAnim_LeechLifeNeedle_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 96, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gUnknown_83E725C[] =
+static const union AffineAnimCmd sAffineAnim_LeechLifeNeedle_2[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -96, 1),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E726C[] =
+static const union AffineAnimCmd *const sAffineAnims_LeechLifeNeedle[] =
 {
-    gUnknown_83E723C,
-    gUnknown_83E724C,
-    gUnknown_83E725C,
+    sAffineAnim_LeechLifeNeedle_0,
+    sAffineAnim_LeechLifeNeedle_1,
+    sAffineAnim_LeechLifeNeedle_2,
 };
 
-const struct SpriteTemplate gUnknown_83E7278 =
+const struct SpriteTemplate gLeechLifeNeedleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_NEEDLE,
     .paletteTag = ANIM_TAG_NEEDLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E726C,
-    .callback = sub_80B407C,
+    .affineAnims = sAffineAnims_LeechLifeNeedle,
+    .callback = AnimLeechLifeNeedle,
 };
 
 const struct SpriteTemplate gWebThreadSpriteTemplate =
@@ -100,7 +100,7 @@ const struct SpriteTemplate gWebThreadSpriteTemplate =
     .callback = AnimTranslateWebThread,
 };
 
-const struct SpriteTemplate gUnknown_83E72A8 =
+const struct SpriteTemplate gStringWrapSpriteTemplate =
 {
     .tileTag = ANIM_TAG_STRING,
     .paletteTag = ANIM_TAG_STRING,
@@ -108,19 +108,19 @@ const struct SpriteTemplate gUnknown_83E72A8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80B41F8,
+    .callback = AnimStringWrap,
 };
 
-static const union AffineAnimCmd gUnknown_83E72C0[] =
+static const union AffineAnimCmd sAffineAnim_SpiderWeb[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x6, 0x6, 0, 1),
     AFFINEANIMCMD_JUMP(1),
 };
 
-static const union AffineAnimCmd *const gUnknown_83E72D8[] =
+static const union AffineAnimCmd *const sAffineAnims_SpiderWeb[] =
 {
-    gUnknown_83E72C0,
+    sAffineAnim_SpiderWeb,
 };
 
 const struct SpriteTemplate gSpiderWebSpriteTemplate =
@@ -130,8 +130,8 @@ const struct SpriteTemplate gSpiderWebSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E72D8,
-    .callback = sub_80B42C0,
+    .affineAnims = sAffineAnims_SpiderWeb,
+    .callback = AnimSpiderWeb,
 };
 
 const struct SpriteTemplate gLinearStingerSpriteTemplate =
@@ -167,7 +167,7 @@ const struct SpriteTemplate gIcicleSpearSpriteTemplate =
     .callback = AnimMissileArc,
 };
 
-static const union AffineAnimCmd gUnknown_83E733C[] =
+static const union AffineAnimCmd sAffineAnim_TailGlowOrb[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 18),
@@ -178,23 +178,23 @@ static const union AffineAnimCmd gUnknown_83E733C[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E7374[] =
+static const union AffineAnimCmd *const sAffineAnims_TailGlowOrb[] =
 {
-    gUnknown_83E733C,
+    sAffineAnim_TailGlowOrb,
 };
 
-const struct SpriteTemplate gUnknown_83E7378 =
+const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7374,
-    .callback = sub_80B45D8,
+    .affineAnims = sAffineAnims_TailGlowOrb,
+    .callback = AnimTailGlowOrb,
 };
 
-static void sub_80B3FAC(struct Sprite *sprite)
+static void AnimMegahornHorn(struct Sprite *sprite)
 {
     if (IsContest())
     {
@@ -219,7 +219,7 @@ static void sub_80B3FAC(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-static void sub_80B407C(struct Sprite *sprite)
+static void AnimLeechLifeNeedle(struct Sprite *sprite)
 {
     if (IsContest())
     {
@@ -280,7 +280,7 @@ static void sub_80B41C0(struct Sprite *sprite)
     sprite->data[6] = (sprite->data[6] + 13) & 0xFF;
 }
 
-static void sub_80B41F8(struct Sprite *sprite)
+static void AnimStringWrap(struct Sprite *sprite)
 {
     SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -306,7 +306,7 @@ static void sub_80B4274(struct Sprite *sprite)
     }
 }
 
-static void sub_80B42C0(struct Sprite *sprite)
+static void AnimSpiderWeb(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
@@ -445,7 +445,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
     }
 }
 
-static void sub_80B45D8(struct Sprite *sprite)
+static void AnimTailGlowOrb(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {

@@ -188,7 +188,7 @@ extern const u8 gText_Ghost[];
 
 // pokemon
 extern const u8 gBattleText_Rose[];
-extern const u8 gBattleText_UnknownString3[];
+extern const u8 gText_PkmnsStatChanged2[];
 extern const u8 gBattleText_GetPumped[];
 extern const u8 gBattleText_MistShroud[];
 extern const u8 gText_BadEgg[];
@@ -215,9 +215,9 @@ extern const u8 gString_QuitPlaying[];
 extern const u8 gString_SlotMachineControls[];
 
 // battle_controller_safari
-extern const u8 gUnknown_83FDA4C[];
+extern const u8 gText_EmptyString3[];
 extern const u8 gUnknown_83FE747[];
-extern const u8 gUnknown_83FE6E6[];
+extern const u8 gText_WhatWillPlayerThrow[];
 
 // battle_controller_player
 extern const u8 gText_BattleSwitchWhich[];
@@ -225,23 +225,23 @@ extern const u8 gUnknown_83FE770[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
 extern const u8 gText_LinkStandby[];
-extern const u8 gUnknown_83FE725[];
+extern const u8 gText_BattleMenu[];
 extern const u8 gText_WhatWillPkmnDo[];
 
 // battle_script_commands
 extern const u8 gText_BattleYesNoChoice[];
 
 // battle_controller_oak_old_man
-extern const u8 gUnknown_83FDAE2[];
-extern const u8 gUnknown_83FDB92[];
-extern const u8 gUnknown_83FDBEF[];
-extern const u8 gUnknown_83FDC58[];
-extern const u8 gUnknown_83FDC95[];
-extern const u8 gUnknown_83FDD23[];
-extern const u8 gUnknown_83FDD64[];
-extern const u8 gUnknown_83FDDEB[];
-extern const u8 gUnknown_83FDCD2[];
-extern const u8 gUnknown_83FE6FA[];
+extern const u8 gText_ForPetesSake[];
+extern const u8 gText_TheTrainerThat[];
+extern const u8 gText_TryBattling[];
+extern const u8 gText_InflictingDamageIsKey[];
+extern const u8 gText_LoweringStats[];
+extern const u8 gText_KeepAnEyeOnHP[];
+extern const u8 gText_OakNoRunningFromATrainer[];
+extern const u8 gText_WinEarnsPrizeMoney[];
+extern const u8 gText_HowDissapointing[];
+extern const u8 gText_WhatWillOldManDo[];
 
 // battle_controller_pokedude
 extern const u8 Pokedude_Text_SpeedierBattlerGoesFirst[];

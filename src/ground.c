@@ -26,51 +26,51 @@ static void sub_80B967C(u8 taskId);
 static void sub_80B9760(struct Task *task);
 static void sub_80B98A8(u8 taskId);
 
-static const union AffineAnimCmd gUnknown_83E7A00[] =
+static const union AffineAnimCmd sAffineAnim_Bonemerang[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 15, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd gUnknown_83E7A10[] =
+static const union AffineAnimCmd sAffineAnim_SpinningBone[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 20, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd *const gUnknown_83E7A20[] =
+static const union AffineAnimCmd *const sAffineAnims_Bonemerang[] =
 {
-    gUnknown_83E7A00,
+    sAffineAnim_Bonemerang,
 };
 
-static const union AffineAnimCmd *const gUnknown_83E7A24[] =
+static const union AffineAnimCmd *const sAffineAnims_SpinningBone[] =
 {
-    gUnknown_83E7A10,
+    sAffineAnim_SpinningBone,
 };
 
-const struct SpriteTemplate gUnknown_83E7A28 =
+const struct SpriteTemplate gBonemerangSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7A20,
+    .affineAnims = sAffineAnims_Bonemerang,
     .callback = AnimBonemerangProjectile,
 };
 
-const struct SpriteTemplate gUnknown_83E7A40 =
+const struct SpriteTemplate gSpinningBoneSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83E7A24,
+    .affineAnims = sAffineAnims_SpinningBone,
     .callback = AnimBoneHitProjectile,
 };
 
-const struct SpriteTemplate gUnknown_83E7A58 =
+const struct SpriteTemplate gSandAttackDirtSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -81,29 +81,29 @@ const struct SpriteTemplate gUnknown_83E7A58 =
     .callback = AnimDirtScatter,
 };
 
-static const union AnimCmd gUnknown_83E7A70[] =
+static const union AnimCmd sAnim_MudSlapMud[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gUnknown_83E7A78[] =
+static const union AnimCmd *const sAnims_MudSlapMud[] =
 {
-    gUnknown_83E7A70,
+    sAnim_MudSlapMud,
 };
 
-const struct SpriteTemplate gUnknown_83E7A7C =
+const struct SpriteTemplate gMudSlapMudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_83E7A78,
+    .anims = sAnims_MudSlapMud,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDirtScatter,
 };
 
-const struct SpriteTemplate gUnknown_83E7A94 =
+const struct SpriteTemplate gMudsportMudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -114,7 +114,7 @@ const struct SpriteTemplate gUnknown_83E7A94 =
     .callback = AnimMudSportDirt,
 };
 
-const struct SpriteTemplate gUnknown_83E7AAC =
+const struct SpriteTemplate gDirtPlumeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -125,7 +125,7 @@ const struct SpriteTemplate gUnknown_83E7AAC =
     .callback = AnimFissureDirtPlumeParticle,
 };
 
-const struct SpriteTemplate gUnknown_83E7AC4 =
+const struct SpriteTemplate gDirtMoundSpriteTemplate =
 {
     .tileTag = ANIM_TAG_DIRT_MOUND,
     .paletteTag = ANIM_TAG_DIRT_MOUND,
@@ -279,7 +279,7 @@ static void AnimMudSportDirtFalling(struct Sprite *sprite)
     }
 }
 
-void sub_80B8E94(u8 taskId)
+void AnimTask_DigDownMovement(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -372,7 +372,7 @@ static void sub_80B908C(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80B90EC(u8 taskId)
+void AnimTask_DigUpMovement(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -538,7 +538,7 @@ static void AnimDigDirtMound(struct Sprite *sprite)
     sprite->callback = WaitAnimForDuration;
 }
 
-void sub_80B94B4(u8 taskId)
+void AnimTask_HorizontalShake(u8 taskId)
 {
     u16 i;
     struct Task *task = &gTasks[taskId];
@@ -689,7 +689,7 @@ void AnimTask_IsPowerOver99(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80B9800(u8 taskId)
+void AnimTask_PositionFissureBgOnBattler(u8 taskId)
 {
     struct Task *newTask;
     u8 battler = (gBattleAnimArgs[0] & 1) ? gBattleAnimTarget : gBattleAnimAttacker;

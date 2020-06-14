@@ -120,7 +120,7 @@ bool8 MenuHelpers_LinkSomething(void)
         return FALSE;
 }
 
-bool32 MenuHelpers_CallLinkSomething(void)
+bool8 MenuHelpers_CallLinkSomething(void)
 {
     if (!MenuHelpers_LinkSomething())
         return FALSE;
@@ -130,7 +130,7 @@ bool32 MenuHelpers_CallLinkSomething(void)
 
 bool8 sub_80BF748(void)
 {
-    if ((u8)MenuHelpers_CallLinkSomething() == TRUE)
+    if (MenuHelpers_CallLinkSomething() == TRUE)
         return TRUE;
     else if (sub_800B270() != TRUE)
         return FALSE;

@@ -298,7 +298,7 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
 {
     while (1)
     {
-        if ((u8)MenuHelpers_CallLinkSomething() == TRUE)
+        if (MenuHelpers_CallLinkSomething() == TRUE)
             break;
         if (DoSetUpTMCaseUI() == TRUE)
             break;
@@ -727,7 +727,7 @@ static void Task_TMCaseMain(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if ((u8)MenuHelpers_CallLinkSomething() != TRUE)
+        if (MenuHelpers_CallLinkSomething() != TRUE)
         {
             input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
@@ -808,7 +808,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 {
     s8 input;
 
-    if ((u8)MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_CallLinkSomething() != TRUE)
     {
         input = Menu_ProcessInputNoWrapAround();
         switch (input)

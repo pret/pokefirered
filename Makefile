@@ -36,7 +36,7 @@ include config.mk
 GCC_VER = $(shell $(CC) -dumpversion)
 
 ifeq ($(MODERN),0)
-CC1             := tools/agbcc/bin/agbcc
+CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 LIBPATH := -L ../../tools/agbcc/lib
 else
@@ -209,15 +209,15 @@ $(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-$(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 
-$(C_BUILDDIR)/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 $(C_BUILDDIR)/isagbprn.o: CFLAGS := -mthumb-interwork
 
 $(C_BUILDDIR)/trainer_tower.o: CFLAGS += -ffreestanding
 $(C_BUILDDIR)/flying.o: CFLAGS += -ffreestanding
 
-$(C_BUILDDIR)/librfu_intr.o: CC1 := tools/agbcc/bin/agbcc_arm
+$(C_BUILDDIR)/librfu_intr.o: CC1 := tools/agbcc/bin/agbcc_arm$(EXE)
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -O2 -mthumb-interwork -quiet
 else
 $(C_BUILDDIR)/berry_crush_2.o: CFLAGS += -Wno-address-of-packed-member

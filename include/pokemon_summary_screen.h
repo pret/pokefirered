@@ -20,16 +20,18 @@ enum PokemonSummaryScreenMode
 {
     PSS_MODE_NORMAL,
     PSS_MODE_UNK1,
-    PSS_MODE_BOX,
     PSS_MODE_SELECT_MOVE,
+    PSS_MODE_UNK3,
+    PSS_MODE_UNK4,
+    PSS_MODE_BOX,
 };
 
 enum PokemonSummaryScreenPage
 {
     PSS_PAGE_INFO,
     PSS_PAGE_SKILLS,
-    PSS_PAGE_BATTLE_MOVES,
-    PSS_PAGE_CONTEST_MOVES,
+    PSS_PAGE_MOVES,
+    PSS_PAGE_MOVES_INFO,
 };
 
 s32 GetLastViewedMonIndex(void);

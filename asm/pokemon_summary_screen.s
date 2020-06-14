@@ -5,305 +5,12 @@
 
 	.text
 
-	thumb_func_start ShowPokemonSummaryScreen
-ShowPokemonSummaryScreen: @ 81344F8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	mov r8, r0
-	adds r7, r3, 0
-	ldr r0, [sp, 0x20]
-	lsls r1, 24
-	lsrs r6, r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r9, r2
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-	ldr r5, _0813453C @ =gUnknown_203B140
-	ldr r0, _08134540 @ =0x00003308
-	bl AllocZeroed
-	str r0, [r5]
-	ldr r4, _08134544 @ =gUnknown_203B144
-	movs r0, 0x28
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r5, [r5]
-	cmp r5, 0
-	bne _08134548
-	adds r0, r7, 0
-	bl SetMainCallback2
-	b _08134702
-	.align 2, 0
-_0813453C: .4byte gUnknown_203B140
-_08134540: .4byte 0x00003308
-_08134544: .4byte gUnknown_203B144
-_08134548:
-	ldr r0, _08134574 @ =gLastViewedMonIndex
-	strb r6, [r0]
-	ldr r0, _08134578 @ =gUnknown_203B16D
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, _0813457C @ =gUnknown_203B16E
-	strb r1, [r0]
-	ldr r1, _08134580 @ =0x000032f8
-	adds r0, r5, r1
-	str r7, [r0]
-	ldr r2, _08134584 @ =0x000032f4
-	adds r0, r5, r2
-	mov r3, r8
-	str r3, [r0]
-	ldr r0, _08134588 @ =gEnemyParty
-	cmp r8, r0
-	bne _08134590
-	ldr r0, _0813458C @ =0x00003024
-	adds r1, r5, r0
-	movs r0, 0x1
-	b _08134596
-	.align 2, 0
-_08134574: .4byte gLastViewedMonIndex
-_08134578: .4byte gUnknown_203B16D
-_0813457C: .4byte gUnknown_203B16E
-_08134580: .4byte 0x000032f8
-_08134584: .4byte 0x000032f4
-_08134588: .4byte gEnemyParty
-_0813458C: .4byte 0x00003024
-_08134590:
-	ldr r2, _081345C0 @ =0x00003024
-	adds r1, r5, r2
-	movs r0, 0
-_08134596:
-	str r0, [r1]
-	ldr r4, _081345C4 @ =gUnknown_203B140
-	ldr r0, [r4]
-	ldr r3, _081345C8 @ =0x00003210
-	adds r0, r3
-	movs r5, 0
-	mov r1, r9
-	strb r1, [r0]
-	ldr r0, [r4]
-	ldr r1, _081345CC @ =0x00003208
-	adds r0, r1
-	mov r2, r10
-	strb r2, [r0]
-	ldr r0, [r4]
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x3
-	bgt _081345D0
-	cmp r0, 0x2
-	bge _08134634
-	b _081345D4
-	.align 2, 0
-_081345C0: .4byte 0x00003024
-_081345C4: .4byte gUnknown_203B140
-_081345C8: .4byte 0x00003210
-_081345CC: .4byte 0x00003208
-_081345D0:
-	cmp r0, 0x5
-	beq _08134604
-_081345D4:
-	movs r0, 0x6 @ HELPCONTEXT_POKEMON_INFO
-	bl SetHelpContext
-	ldr r2, _081345F8 @ =gUnknown_203B140
-	ldr r0, [r2]
-	ldr r3, _081345FC @ =0x00003214
-	adds r0, r3
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r3, 0x8
-	adds r0, r3
-	strb r1, [r0]
-	ldr r0, [r2]
-	ldr r2, _08134600 @ =0x00003234
-	adds r0, r2
-	b _08134654
-	.align 2, 0
-_081345F8: .4byte gUnknown_203B140
-_081345FC: .4byte 0x00003214
-_08134600: .4byte 0x00003234
-_08134604:
-	movs r0, 0x6 @ HELPCONTEXT_POKEMON_INFO
-	bl SetHelpContext
-	ldr r0, [r4]
-	ldr r3, _08134628 @ =0x00003214
-	adds r0, r3
-	strb r5, [r0]
-	ldr r0, [r4]
-	ldr r1, _0813462C @ =0x0000321c
-	adds r0, r1
-	movs r1, 0x1
-	strb r1, [r0]
-	ldr r0, [r4]
-	ldr r2, _08134630 @ =0x00003234
-	adds r0, r2
-	strb r5, [r0]
-	b _08134656
-	.align 2, 0
-_08134628: .4byte 0x00003214
-_0813462C: .4byte 0x0000321c
-_08134630: .4byte 0x00003234
-_08134634:
-	movs r0, 0x8 @ HELPCONTEXT_POKEMON_MOVES
-	bl SetHelpContext
-	ldr r0, [r4]
-	ldr r3, _08134710 @ =0x00003214
-	adds r0, r3
-	movs r1, 0x3
-	strb r1, [r0]
-	ldr r0, [r4]
-	ldr r1, _08134714 @ =0x0000321c
-	adds r0, r1
-	strb r5, [r0]
-	ldr r0, [r4]
-	ldr r2, _08134718 @ =0x00003234
-	adds r0, r2
-	movs r1, 0x1
-_08134654:
-	strb r1, [r0]
-_08134656:
-	ldr r5, _0813471C @ =gUnknown_203B140
-	ldr r0, [r5]
-	ldr r3, _08134720 @ =0x00003270
-	adds r0, r3
-	movs r2, 0
-	strb r2, [r0]
-	ldr r0, [r5]
-	ldr r1, _08134724 @ =0x00003274
-	adds r0, r1
-	strb r2, [r0]
-	ldr r0, [r5]
-	adds r3, 0x8
-	adds r0, r3
-	strb r2, [r0]
-	ldr r0, [r5]
-	adds r1, 0x8
-	adds r0, r1
-	strb r2, [r0]
-	ldr r0, [r5]
-	subs r3, 0x40
-	adds r0, r3
-	strb r2, [r0]
-	ldr r0, [r5]
-	subs r1, 0x40
-	adds r0, r1
-	movs r1, 0x2
-	strb r1, [r0]
-	ldr r0, [r5]
-	adds r3, 0x8
-	adds r0, r3
-	movs r1, 0x1
-	strb r1, [r0]
-	ldr r0, [r5]
-	adds r3, 0x4
-	adds r0, r3
-	strb r2, [r0]
-	ldr r0, [r5]
-	subs r3, 0x1C
-	adds r0, r3
-	strb r2, [r0]
-	ldr r0, [r5]
-	ldr r2, _08134728 @ =0x0000322c
-	adds r0, r2
-	strb r1, [r0]
-	ldr r0, [r5]
-	ldr r4, _0813472C @ =0x00003290
-	adds r0, r4
-	bl sub_8138B8C
-	ldr r0, [r5]
-	adds r0, r4
-	movs r1, 0x2D
-	bl GetMonData
-	ldr r1, [r5]
-	movs r3, 0xC8
-	lsls r3, 6
-	adds r1, r3
-	strb r0, [r1]
-	ldr r0, [r5]
-	adds r0, r4
-	movs r1, 0x4
-	bl GetMonData
-	ldr r1, [r5]
-	ldr r2, _08134730 @ =0x00003204
-	adds r1, r2
-	strb r0, [r1]
-	ldr r0, [r5]
-	adds r2, r0, r2
-	ldrb r1, [r2]
-	cmp r1, 0x1
-	bne _081346F0
-	movs r2, 0xC8
-	lsls r2, 6
-	adds r0, r2
-	strb r1, [r0]
-_081346F0:
-	ldr r0, [r5]
-	movs r3, 0xCC
-	lsls r3, 6
-	adds r0, r3
-	movs r1, 0xFF
-	strb r1, [r0]
-	ldr r0, _08134734 @ =sub_8135C34
-	bl SetMainCallback2
-_08134702:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08134710: .4byte 0x00003214
-_08134714: .4byte 0x0000321c
-_08134718: .4byte 0x00003234
-_0813471C: .4byte gUnknown_203B140
-_08134720: .4byte 0x00003270
-_08134724: .4byte 0x00003274
-_08134728: .4byte 0x0000322c
-_0813472C: .4byte 0x00003290
-_08134730: .4byte 0x00003204
-_08134734: .4byte sub_8135C34
-	thumb_func_end ShowPokemonSummaryScreen
-
-	thumb_func_start ShowSelectMovePokemonSummaryScreen
-ShowSelectMovePokemonSummaryScreen: @ 8134738
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r5, [sp, 0x10]
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r5, 16
-	lsrs r5, 16
-	movs r4, 0x2
-	str r4, [sp]
-	bl ShowPokemonSummaryScreen
-	ldr r0, _08134764 @ =gUnknown_203B140
-	ldr r0, [r0]
-	ldr r1, _08134768 @ =0x00003260
-	adds r0, r1
-	strh r5, [r0]
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08134764: .4byte gUnknown_203B140
-_08134768: .4byte 0x00003260
-	thumb_func_end ShowSelectMovePokemonSummaryScreen
-
 	thumb_func_start sub_813476C
 sub_813476C: @ 813476C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _08134790 @ =gUnknown_203B140
+	ldr r0, _08134790 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r3, _08134794 @ =0x0000301c
 	adds r0, r1, r3
@@ -318,7 +25,7 @@ sub_813476C: @ 813476C
 	movs r0, 0x1
 	b _0813479E
 	.align 2, 0
-_08134790: .4byte gUnknown_203B140
+_08134790: .4byte gMonSummaryScreen
 _08134794: .4byte 0x0000301c
 _08134798: .4byte 0x00003224
 _0813479C:
@@ -333,7 +40,7 @@ sub_81347A4: @ 81347A4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _081347D4 @ =gUnknown_203B140
+	ldr r0, _081347D4 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	movs r2, 0xC8
 	lsls r2, 6
@@ -356,7 +63,7 @@ _081347D0:
 	movs r0, 0x1
 	b _08134832
 	.align 2, 0
-_081347D4: .4byte gUnknown_203B140
+_081347D4: .4byte gMonSummaryScreen
 _081347D8:
 	adds r0, r4, 0
 	bl sub_813476C
@@ -422,7 +129,7 @@ sub_8134840: @ 8134840
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _0813486C @ =gUnknown_203B140
+	ldr r1, _0813486C @ =gMonSummaryScreen
 	ldr r0, [r1]
 	ldr r2, _08134870 @ =0x00003270
 	adds r0, r2
@@ -438,7 +145,7 @@ _08134860:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0813486C: .4byte gUnknown_203B140
+_0813486C: .4byte gMonSummaryScreen
 _08134870: .4byte 0x00003270
 _08134874: .4byte _08134878
 	.align 2, 0
@@ -457,11 +164,11 @@ _08134890:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, _081348A8 @ =gUnknown_203B140
+	ldr r0, _081348A8 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	b _081348D6
 	.align 2, 0
-_081348A8: .4byte gUnknown_203B140
+_081348A8: .4byte gMonSummaryScreen
 _081348AC:
 	ldr r0, _081348C8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -470,14 +177,14 @@ _081348AC:
 	cmp r0, 0
 	bne _081348D4
 	bl sub_813B784
-	ldr r0, _081348CC @ =gUnknown_203B140
+	ldr r0, _081348CC @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _081348D0 @ =0x00003270
 	adds r0, r2
 	b _08134AF6
 	.align 2, 0
 _081348C8: .4byte gPaletteFade
-_081348CC: .4byte gUnknown_203B140
+_081348CC: .4byte gMonSummaryScreen
 _081348D0: .4byte 0x00003270
 _081348D4:
 	ldr r0, [r4]
@@ -510,7 +217,7 @@ _081348FC:
 	beq _0813490C
 	b _08134B9A
 _0813490C:
-	ldr r5, _08134944 @ =gUnknown_203B140
+	ldr r5, _08134944 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r6, _08134948 @ =0x00003214
 	adds r0, r6
@@ -535,7 +242,7 @@ _0813490C:
 	b _08134B9A
 	.align 2, 0
 _08134940: .4byte sub_813B3F0
-_08134944: .4byte gUnknown_203B140
+_08134944: .4byte gMonSummaryScreen
 _08134948: .4byte 0x00003214
 _0813494C: .4byte sub_8134BAC
 _08134950:
@@ -660,7 +367,7 @@ _08134A4A:
 	ands r0, r1
 	cmp r0, 0
 	beq _08134ABC
-	ldr r4, _08134A70 @ =gUnknown_203B140
+	ldr r4, _08134A70 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r5, _08134A74 @ =0x00003214
 	adds r0, r5
@@ -674,7 +381,7 @@ _08134A4A:
 	adds r0, r2
 	b _08134ACC
 	.align 2, 0
-_08134A70: .4byte gUnknown_203B140
+_08134A70: .4byte gMonSummaryScreen
 _08134A74: .4byte 0x00003214
 _08134A78: .4byte 0x00003270
 _08134A7C:
@@ -714,7 +421,7 @@ _08134ABC:
 	ands r0, r1
 	cmp r0, 0
 	beq _08134B9A
-	ldr r0, _08134AD4 @ =gUnknown_203B140
+	ldr r0, _08134AD4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08134AD8 @ =0x00003270
 	adds r0, r1
@@ -723,7 +430,7 @@ _08134ACC:
 	strb r1, [r0]
 	b _08134B9A
 	.align 2, 0
-_08134AD4: .4byte gUnknown_203B140
+_08134AD4: .4byte gMonSummaryScreen
 _08134AD8: .4byte 0x00003270
 _08134ADC:
 	ldr r3, [r4]
@@ -775,7 +482,7 @@ _08134B38:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08134B58 @ =gUnknown_203B140
+	ldr r0, _08134B58 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08134B5C @ =0x00003270
 	adds r0, r1
@@ -783,7 +490,7 @@ _08134B38:
 	strb r1, [r0]
 	b _08134B9A
 	.align 2, 0
-_08134B58: .4byte gUnknown_203B140
+_08134B58: .4byte gMonSummaryScreen
 _08134B5C: .4byte 0x00003270
 _08134B60:
 	bl Overworld_LinkRecvQueueLengthMoreThan2
@@ -792,7 +499,7 @@ _08134B60:
 	bl sub_800B270
 	cmp r0, 0x1
 	beq _08134B9A
-	ldr r0, _08134B80 @ =gUnknown_203B140
+	ldr r0, _08134B80 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _08134B84 @ =0x00003270
 	adds r0, r2
@@ -800,7 +507,7 @@ _08134B60:
 	strb r1, [r0]
 	b _08134B9A
 	.align 2, 0
-_08134B80: .4byte gUnknown_203B140
+_08134B80: .4byte gMonSummaryScreen
 _08134B84: .4byte 0x00003270
 _08134B88:
 	ldr r0, _08134BA8 @ =gPaletteFade
@@ -863,7 +570,7 @@ _08134BDC:
 _08134C04:
 	bl sub_8135638
 	bl sub_81356EC
-	ldr r4, _08134C38 @ =gUnknown_203B140
+	ldr r4, _08134C38 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r2, _08134C3C @ =0x00003234
 	adds r0, r2
@@ -884,12 +591,12 @@ _08134C04:
 	bl sub_8138280
 	b _08134E74
 	.align 2, 0
-_08134C38: .4byte gUnknown_203B140
+_08134C38: .4byte gMonSummaryScreen
 _08134C3C: .4byte 0x00003234
 _08134C40: .4byte 0x0000301c
 _08134C44: .4byte 0x00003214
 _08134C48:
-	ldr r0, _08134CC8 @ =gUnknown_203B140
+	ldr r0, _08134CC8 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08134CCC @ =0x00003214
 	adds r0, r1, r2
@@ -949,14 +656,14 @@ _08134C7E:
 	bl FillBgTilemapBufferRect_Palette0
 	b _08134E74
 	.align 2, 0
-_08134CC8: .4byte gUnknown_203B140
+_08134CC8: .4byte gMonSummaryScreen
 _08134CCC: .4byte 0x00003214
 _08134CD0: .4byte 0x00003224
 _08134CD4:
 	bl sub_8135AA4
 	bl sub_8135B90
 	bl sub_8138538
-	ldr r0, _08134CF0 @ =gUnknown_203B140
+	ldr r0, _08134CF0 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08134CF4 @ =0x00003214
 	adds r0, r1
@@ -964,10 +671,10 @@ _08134CD4:
 	bl sub_8137D28
 	b _08134E74
 	.align 2, 0
-_08134CF0: .4byte gUnknown_203B140
+_08134CF0: .4byte gMonSummaryScreen
 _08134CF4: .4byte 0x00003214
 _08134CF8:
-	ldr r4, _08134D20 @ =gUnknown_203B140
+	ldr r4, _08134D20 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -986,7 +693,7 @@ _08134CF8:
 	adds r0, r1
 	b _08134DE2
 	.align 2, 0
-_08134D20: .4byte gUnknown_203B140
+_08134D20: .4byte gMonSummaryScreen
 _08134D24: .4byte 0x00003001
 _08134D28: .4byte 0x00003002
 _08134D2C:
@@ -1005,7 +712,7 @@ _08134D38:
 	b _08134E74
 _08134D4C:
 	bl sub_8135514
-	ldr r0, _08134D60 @ =gUnknown_203B140
+	ldr r0, _08134D60 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _08134D64 @ =0x00003244
 	adds r0, r2
@@ -1013,10 +720,10 @@ _08134D4C:
 	strb r1, [r0]
 	b _08134E74
 	.align 2, 0
-_08134D60: .4byte gUnknown_203B140
+_08134D60: .4byte gMonSummaryScreen
 _08134D64: .4byte 0x00003244
 _08134D68:
-	ldr r0, _08134D80 @ =gUnknown_203B140
+	ldr r0, _08134D80 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r3, _08134D84 @ =0x00003224
 	adds r0, r3
@@ -1029,11 +736,11 @@ _08134D68:
 _08134D7E:
 	b _08134E74
 	.align 2, 0
-_08134D80: .4byte gUnknown_203B140
+_08134D80: .4byte gMonSummaryScreen
 _08134D84: .4byte 0x00003224
 _08134D88:
 	bl sub_8136F4C
-	ldr r0, _08134DA8 @ =gUnknown_203B140
+	ldr r0, _08134DA8 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08134DAC @ =0x00003214
 	adds r0, r1
@@ -1046,10 +753,10 @@ _08134D9E:
 	bl sub_8138A38
 	b _08134E74
 	.align 2, 0
-_08134DA8: .4byte gUnknown_203B140
+_08134DA8: .4byte gMonSummaryScreen
 _08134DAC: .4byte 0x00003214
 _08134DB0:
-	ldr r4, _08134DEC @ =gUnknown_203B140
+	ldr r4, _08134DEC @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r2, _08134DF0 @ =0x00003003
 	adds r0, r2
@@ -1077,7 +784,7 @@ _08134DE2:
 	bl CopyWindowToVram
 	b _08134E74
 	.align 2, 0
-_08134DEC: .4byte gUnknown_203B140
+_08134DEC: .4byte gMonSummaryScreen
 _08134DF0: .4byte 0x00003003
 _08134DF4: .4byte 0x00003004
 _08134DF8: .4byte 0x00003005
@@ -1094,7 +801,7 @@ _08134E00:
 	b _08134E74
 _08134E18:
 	bl sub_8138440
-	ldr r5, _08134E5C @ =gUnknown_203B140
+	ldr r5, _08134E5C @ =gMonSummaryScreen
 	ldr r1, [r5]
 	ldr r3, _08134E60 @ =0x00003214
 	adds r0, r1, r3
@@ -1127,7 +834,7 @@ _08134E40:
 	strb r0, [r1]
 	b _08134E7A
 	.align 2, 0
-_08134E5C: .4byte gUnknown_203B140
+_08134E5C: .4byte gMonSummaryScreen
 _08134E60: .4byte 0x00003214
 _08134E64: .4byte 0x00003018
 _08134E68: .4byte sub_8138CD8
@@ -1148,7 +855,7 @@ _08134E7A:
 sub_8134E84: @ 8134E84
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r4, _08134EA4 @ =gUnknown_203B140
+	ldr r4, _08134EA4 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08134EA8 @ =0x00003284
 	adds r0, r1
@@ -1164,7 +871,7 @@ _08134E9A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08134EA4: .4byte gUnknown_203B140
+_08134EA4: .4byte gMonSummaryScreen
 _08134EA8: .4byte 0x00003284
 _08134EAC: .4byte _08134EB0
 	.align 2, 0
@@ -1182,7 +889,7 @@ _08134EB0:
 	.4byte _081350E4
 	.4byte _08135114
 _08134EE0:
-	ldr r1, _08134F04 @ =gUnknown_203B140
+	ldr r1, _08134F04 @ =gMonSummaryScreen
 	ldr r0, [r1]
 	ldr r2, _08134F08 @ =0x00003234
 	adds r0, r2
@@ -1199,12 +906,12 @@ _08134EE0:
 	bl sub_8138280
 	b _08135180
 	.align 2, 0
-_08134F04: .4byte gUnknown_203B140
+_08134F04: .4byte gMonSummaryScreen
 _08134F08: .4byte 0x00003234
 _08134F0C: .4byte 0x0000301c
 _08134F10: .4byte 0x00003214
 _08134F14:
-	ldr r0, _08134F94 @ =gUnknown_203B140
+	ldr r0, _08134F94 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08134F98 @ =0x00003214
 	adds r0, r1, r2
@@ -1264,12 +971,12 @@ _08134F4A:
 	bl FillBgTilemapBufferRect_Palette0
 	b _08135180
 	.align 2, 0
-_08134F94: .4byte gUnknown_203B140
+_08134F94: .4byte gMonSummaryScreen
 _08134F98: .4byte 0x00003214
 _08134F9C: .4byte 0x00003224
 _08134FA0:
 	bl sub_8135638
-	ldr r0, _08134FC0 @ =gUnknown_203B140
+	ldr r0, _08134FC0 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08134FC4 @ =0x00003214
 	adds r0, r1
@@ -1280,7 +987,7 @@ _08134FA0:
 	bl sub_8135AA4
 	b _08135180
 	.align 2, 0
-_08134FC0: .4byte gUnknown_203B140
+_08134FC0: .4byte gMonSummaryScreen
 _08134FC4: .4byte 0x00003214
 _08134FC8:
 	ldr r0, _08134FF0 @ =gUnknown_8419C39
@@ -1313,7 +1020,7 @@ _08135004:
 	.align 2, 0
 _0813500C: .4byte gUnknown_8419CA2
 _08135010:
-	ldr r4, _0813502C @ =gUnknown_203B140
+	ldr r4, _0813502C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	movs r3, 0xC0
 	lsls r3, 6
@@ -1326,7 +1033,7 @@ _08135010:
 	adds r0, r1
 	b _081350FE
 	.align 2, 0
-_0813502C: .4byte gUnknown_203B140
+_0813502C: .4byte gMonSummaryScreen
 _08135030: .4byte 0x00003001
 _08135034:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -1345,7 +1052,7 @@ _08135040:
 _08135054:
 	bl sub_8136F4C
 	bl sub_8137BD0
-	ldr r4, _08135074 @ =gUnknown_203B140
+	ldr r4, _08135074 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r2, _08135078 @ =0x00003003
 	adds r0, r2
@@ -1357,7 +1064,7 @@ _08135054:
 	adds r0, r3
 	b _081350FE
 	.align 2, 0
-_08135074: .4byte gUnknown_203B140
+_08135074: .4byte gMonSummaryScreen
 _08135078: .4byte 0x00003003
 _0813507C: .4byte 0x00003005
 _08135080:
@@ -1370,7 +1077,7 @@ _0813508C:
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	bl sub_8135514
-	ldr r0, _081350A4 @ =gUnknown_203B140
+	ldr r0, _081350A4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _081350A8 @ =0x00003244
 	adds r0, r1
@@ -1378,7 +1085,7 @@ _0813508C:
 	strb r1, [r0]
 	b _08135180
 	.align 2, 0
-_081350A4: .4byte gUnknown_203B140
+_081350A4: .4byte gMonSummaryScreen
 _081350A8: .4byte 0x00003244
 _081350AC:
 	ldr r0, [r5]
@@ -1406,7 +1113,7 @@ _081350D4:
 _081350E0: .4byte gUnknown_8419C45
 _081350E4:
 	bl sub_81356EC
-	ldr r4, _08135108 @ =gUnknown_203B140
+	ldr r4, _08135108 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813510C @ =0x00003006
 	adds r0, r1
@@ -1422,7 +1129,7 @@ _081350FE:
 	bl CopyWindowToVram
 	b _08135180
 	.align 2, 0
-_08135108: .4byte gUnknown_203B140
+_08135108: .4byte gMonSummaryScreen
 _0813510C: .4byte 0x00003006
 _08135110: .4byte 0x00003002
 _08135114:
@@ -1471,7 +1178,7 @@ _08135174: .4byte 0x00003284
 _08135178: .4byte 0x00003234
 _0813517C: .4byte 0x0000301c
 _08135180:
-	ldr r0, _08135198 @ =gUnknown_203B140
+	ldr r0, _08135198 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _0813519C @ =0x00003284
 	adds r1, r0
@@ -1484,7 +1191,7 @@ _0813518E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08135198: .4byte gUnknown_203B140
+_08135198: .4byte gMonSummaryScreen
 _0813519C: .4byte 0x00003284
 	thumb_func_end sub_8134E84
 
@@ -1492,7 +1199,7 @@ _0813519C: .4byte 0x00003284
 sub_81351A0: @ 81351A0
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r4, _081351C0 @ =gUnknown_203B140
+	ldr r4, _081351C0 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _081351C4 @ =0x00003284
 	adds r0, r1
@@ -1508,7 +1215,7 @@ _081351B6:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_081351C0: .4byte gUnknown_203B140
+_081351C0: .4byte gMonSummaryScreen
 _081351C4: .4byte 0x00003284
 _081351C8: .4byte _081351CC
 	.align 2, 0
@@ -1525,7 +1232,7 @@ _081351CC:
 	.4byte _081353AC
 	.4byte _081353EC
 _081351F8:
-	ldr r1, _0813521C @ =gUnknown_203B140
+	ldr r1, _0813521C @ =gMonSummaryScreen
 	ldr r0, [r1]
 	ldr r2, _08135220 @ =0x00003234
 	adds r0, r2
@@ -1542,12 +1249,12 @@ _081351F8:
 	bl sub_8138280
 	b _0813544C
 	.align 2, 0
-_0813521C: .4byte gUnknown_203B140
+_0813521C: .4byte gMonSummaryScreen
 _08135220: .4byte 0x00003234
 _08135224: .4byte 0x0000301c
 _08135228: .4byte 0x00003214
 _0813522C:
-	ldr r0, _081352AC @ =gUnknown_203B140
+	ldr r0, _081352AC @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _081352B0 @ =0x00003214
 	adds r0, r1, r2
@@ -1607,7 +1314,7 @@ _08135262:
 	bl FillBgTilemapBufferRect_Palette0
 	b _0813544C
 	.align 2, 0
-_081352AC: .4byte gUnknown_203B140
+_081352AC: .4byte gMonSummaryScreen
 _081352B0: .4byte 0x00003214
 _081352B4: .4byte 0x00003224
 _081352B8:
@@ -1617,7 +1324,7 @@ _081352BE:
 	bl sub_8136F4C
 	bl sub_81374E8
 	bl sub_8137BD0
-	ldr r4, _08135300 @ =gUnknown_203B140
+	ldr r4, _08135300 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08135304 @ =0x00003003
 	adds r0, r1
@@ -1640,7 +1347,7 @@ _081352BE:
 	bl CopyBgTilemapBufferToVram
 	b _0813544C
 	.align 2, 0
-_08135300: .4byte gUnknown_203B140
+_08135300: .4byte gMonSummaryScreen
 _08135304: .4byte 0x00003003
 _08135308: .4byte 0x00003004
 _0813530C: .4byte 0x00003005
@@ -1654,7 +1361,7 @@ _08135310:
 _08135320: .4byte gUnknown_8419C39
 _08135324: .4byte gUnknown_8419C82
 _08135328:
-	ldr r4, _0813534C @ =gUnknown_203B140
+	ldr r4, _0813534C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -1670,11 +1377,11 @@ _08135328:
 	bl CopyWindowToVram
 	b _081353D0
 	.align 2, 0
-_0813534C: .4byte gUnknown_203B140
+_0813534C: .4byte gMonSummaryScreen
 _08135350: .4byte 0x00003001
 _08135354:
 	bl sub_8135514
-	ldr r4, _0813537C @ =gUnknown_203B140
+	ldr r4, _0813537C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r3, _08135380 @ =0x00003244
 	adds r0, r3
@@ -1689,7 +1396,7 @@ _08135354:
 	bl sub_8138A38
 	b _0813544C
 	.align 2, 0
-_0813537C: .4byte gUnknown_203B140
+_0813537C: .4byte gMonSummaryScreen
 _08135380: .4byte 0x00003244
 _08135384: .4byte 0x00003214
 _08135388:
@@ -1708,7 +1415,7 @@ _08135388:
 _081353A4: .4byte 0x00003224
 _081353A8: .4byte gUnknown_8419C45
 _081353AC:
-	ldr r4, _081353E0 @ =gUnknown_203B140
+	ldr r4, _081353E0 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r3, _081353E4 @ =0x00003006
 	adds r0, r3
@@ -1730,7 +1437,7 @@ _081353D0:
 	bl CopyBgTilemapBufferToVram
 	b _0813544C
 	.align 2, 0
-_081353E0: .4byte gUnknown_203B140
+_081353E0: .4byte gMonSummaryScreen
 _081353E4: .4byte 0x00003006
 _081353E8: .4byte 0x00003002
 _081353EC:
@@ -1774,7 +1481,7 @@ _08135440: .4byte 0x00003284
 _08135444: .4byte 0x00003234
 _08135448: .4byte 0x0000301c
 _0813544C:
-	ldr r0, _08135464 @ =gUnknown_203B140
+	ldr r0, _08135464 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _08135468 @ =0x00003284
 	adds r1, r0
@@ -1787,7 +1494,7 @@ _0813545A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08135464: .4byte gUnknown_203B140
+_08135464: .4byte gMonSummaryScreen
 _08135468: .4byte 0x00003284
 	thumb_func_end sub_81351A0
 
@@ -1889,7 +1596,7 @@ _08135510: .4byte gUnknown_203B15C
 sub_8135514: @ 8135514
 	push {r4-r6,lr}
 	movs r4, 0x1
-	ldr r6, _0813553C @ =gUnknown_203B140
+	ldr r6, _0813553C @ =gMonSummaryScreen
 	ldr r1, [r6]
 	ldr r2, _08135540 @ =0x00003224
 	adds r0, r1, r2
@@ -1909,7 +1616,7 @@ _08135528:
 	strh r0, [r1]
 	b _08135632
 	.align 2, 0
-_0813553C: .4byte gUnknown_203B140
+_0813553C: .4byte gMonSummaryScreen
 _08135540: .4byte 0x00003224
 _08135544: .4byte 0x00003214
 _08135548: .4byte 0x0000324c
@@ -1991,7 +1698,7 @@ _081355EC:
 	movs r1, 0
 	bl sub_81358DC
 _081355FC:
-	ldr r0, _0813561C @ =gUnknown_203B140
+	ldr r0, _0813561C @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08135620 @ =0x00003214
 	adds r0, r1, r2
@@ -2006,7 +1713,7 @@ _081355FC:
 	bl sub_81354C4
 	b _08135632
 	.align 2, 0
-_0813561C: .4byte gUnknown_203B140
+_0813561C: .4byte gMonSummaryScreen
 _08135620: .4byte 0x00003214
 _08135624:
 	bl sub_813546C
@@ -2024,7 +1731,7 @@ _08135632:
 	thumb_func_start sub_8135638
 sub_8135638: @ 8135638
 	push {lr}
-	ldr r0, _08135654 @ =gUnknown_203B140
+	ldr r0, _08135654 @ =gMonSummaryScreen
 	ldr r2, [r0]
 	ldr r3, _08135658 @ =0x00003224
 	adds r1, r2, r3
@@ -2038,7 +1745,7 @@ sub_8135638: @ 8135638
 	subs r0, 0x1
 	b _08135668
 	.align 2, 0
-_08135654: .4byte gUnknown_203B140
+_08135654: .4byte gMonSummaryScreen
 _08135658: .4byte 0x00003224
 _0813565C: .4byte 0x00003214
 _08135660:
@@ -2107,7 +1814,7 @@ _081356E6:
 	thumb_func_start sub_81356EC
 sub_81356EC: @ 81356EC
 	push {lr}
-	ldr r0, _08135708 @ =gUnknown_203B140
+	ldr r0, _08135708 @ =gMonSummaryScreen
 	ldr r2, [r0]
 	ldr r3, _0813570C @ =0x00003224
 	adds r1, r2, r3
@@ -2121,7 +1828,7 @@ sub_81356EC: @ 81356EC
 	subs r0, 0x1
 	b _0813571C
 	.align 2, 0
-_08135708: .4byte gUnknown_203B140
+_08135708: .4byte gMonSummaryScreen
 _0813570C: .4byte 0x00003224
 _08135710: .4byte 0x00003214
 _08135714:
@@ -2194,7 +1901,7 @@ _0813579A:
 sub_81357A0: @ 81357A0
 	push {r4-r6,lr}
 	movs r3, 0x1
-	ldr r0, _081357EC @ =gUnknown_203B140
+	ldr r0, _081357EC @ =gMonSummaryScreen
 	ldr r2, [r0]
 	ldr r4, _081357F0 @ =0x00003224
 	adds r1, r2, r4
@@ -2230,7 +1937,7 @@ _081357B6:
 	ldr r0, [r5]
 	b _0813587E
 	.align 2, 0
-_081357EC: .4byte gUnknown_203B140
+_081357EC: .4byte gMonSummaryScreen
 _081357F0: .4byte 0x00003224
 _081357F4: .4byte 0x00003214
 _081357F8: .4byte 0x0000324c
@@ -2371,7 +2078,7 @@ sub_81358DC: @ 81358DC
 	bl GetGpuReg
 	adds r6, r4, 0
 	ands r6, r0
-	ldr r0, _08135938 @ =gUnknown_203B140
+	ldr r0, _08135938 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _0813593C @ =0x00003224
 	adds r0, r2
@@ -2389,7 +2096,7 @@ sub_81358DC: @ 81358DC
 	bhi _0813594A
 	b _08135944
 	.align 2, 0
-_08135938: .4byte gUnknown_203B140
+_08135938: .4byte gMonSummaryScreen
 _0813593C: .4byte 0x00003224
 _08135940:
 	cmp r5, r6
@@ -2423,7 +2130,7 @@ _0813596C:
 	movs r5, 0
 	movs r6, 0x2
 _08135970:
-	ldr r0, _0813598C @ =gUnknown_203B140
+	ldr r0, _0813598C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08135990 @ =0x00003224
 	adds r0, r1
@@ -2438,7 +2145,7 @@ _08135970:
 	movs r6, 0x2
 	b _08135998
 	.align 2, 0
-_0813598C: .4byte gUnknown_203B140
+_0813598C: .4byte gMonSummaryScreen
 _08135990: .4byte 0x00003224
 _08135994:
 	movs r5, 0x2
@@ -2455,7 +2162,7 @@ _08135998:
 	ldr r2, _081359D8 @ =gUnknown_203B160
 	mov r10, r2
 _081359AC:
-	ldr r0, _081359DC @ =gUnknown_203B140
+	ldr r0, _081359DC @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _081359E0 @ =0x00003214
 	adds r0, r1, r2
@@ -2479,7 +2186,7 @@ _081359AC:
 	b _081359F6
 	.align 2, 0
 _081359D8: .4byte gUnknown_203B160
-_081359DC: .4byte gUnknown_203B140
+_081359DC: .4byte gMonSummaryScreen
 _081359E0: .4byte 0x00003214
 _081359E4:
 	mov r2, r10
@@ -2496,7 +2203,7 @@ _081359F6:
 	strb r0, [r2, 0x5]
 	cmp r4, 0x8
 	bhi _08135A48
-	ldr r2, _08135A28 @ =gUnknown_203B140
+	ldr r2, _08135A28 @ =gMonSummaryScreen
 	ldr r1, [r2]
 	ldr r2, _08135A2C @ =0x00003214
 	adds r0, r1, r2
@@ -2518,7 +2225,7 @@ _081359F6:
 	mov r1, r9
 	b _08135A44
 	.align 2, 0
-_08135A28: .4byte gUnknown_203B140
+_08135A28: .4byte gMonSummaryScreen
 _08135A2C: .4byte 0x00003214
 _08135A30: .4byte gUnknown_203B15C
 _08135A34:
@@ -2577,7 +2284,7 @@ _08135AA0: .4byte 0x0000fffc
 	thumb_func_start sub_8135AA4
 sub_8135AA4: @ 8135AA4
 	push {lr}
-	ldr r0, _08135AC0 @ =gUnknown_203B140
+	ldr r0, _08135AC0 @ =gMonSummaryScreen
 	ldr r2, [r0]
 	ldr r3, _08135AC4 @ =0x00003224
 	adds r1, r2, r3
@@ -2591,7 +2298,7 @@ sub_8135AA4: @ 8135AA4
 	subs r0, 0x1
 	b _08135AD4
 	.align 2, 0
-_08135AC0: .4byte gUnknown_203B140
+_08135AC0: .4byte gMonSummaryScreen
 _08135AC4: .4byte 0x00003224
 _08135AC8: .4byte 0x00003214
 _08135ACC:
@@ -2698,7 +2405,7 @@ _08135B8C: .4byte gUnknown_8E9B950
 	thumb_func_start sub_8135B90
 sub_8135B90: @ 8135B90
 	push {lr}
-	ldr r0, _08135BAC @ =gUnknown_203B140
+	ldr r0, _08135BAC @ =gMonSummaryScreen
 	ldr r2, [r0]
 	ldr r3, _08135BB0 @ =0x00003224
 	adds r1, r2, r3
@@ -2712,7 +2419,7 @@ sub_8135B90: @ 8135B90
 	subs r0, 0x1
 	b _08135BC0
 	.align 2, 0
-_08135BAC: .4byte gUnknown_203B140
+_08135BAC: .4byte gMonSummaryScreen
 _08135BB0: .4byte 0x00003224
 _08135BB4: .4byte 0x00003214
 _08135BB8:
@@ -2788,7 +2495,7 @@ _08135C30: .4byte gUnknown_8463B88
 sub_8135C34: @ 8135C34
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _08135C54 @ =gUnknown_203B140
+	ldr r0, _08135C54 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08135C58 @ =0x00003274
 	adds r0, r1
@@ -2803,7 +2510,7 @@ _08135C48:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08135C54: .4byte gUnknown_203B140
+_08135C54: .4byte gMonSummaryScreen
 _08135C58: .4byte 0x00003274
 _08135C5C: .4byte _08135C60
 	.align 2, 0
@@ -2862,7 +2569,7 @@ _08135CDE:
 	bl sub_8138A38
 	b _08135F00
 _08135CE8:
-	ldr r0, _08135D0C @ =gUnknown_203B140
+	ldr r0, _08135D0C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _08135D10 @ =0x00003208
 	adds r0, r2
@@ -2879,7 +2586,7 @@ _08135CE8:
 	bl CopyToBgTilemapBuffer
 	b _08135D24
 	.align 2, 0
-_08135D0C: .4byte gUnknown_203B140
+_08135D0C: .4byte gMonSummaryScreen
 _08135D10: .4byte 0x00003208
 _08135D14: .4byte gUnknown_8463C80
 _08135D18:
@@ -2894,7 +2601,7 @@ _08135D24:
 	.align 2, 0
 _08135D2C: .4byte gUnknown_8463B88
 _08135D30:
-	ldr r4, _08135D4C @ =gUnknown_203B140
+	ldr r4, _08135D4C @ =gMonSummaryScreen
 	ldr r1, [r4]
 	movs r2, 0xC8
 	lsls r2, 6
@@ -2908,7 +2615,7 @@ _08135D30:
 	ldr r1, _08135D50 @ =gUnknown_8E9BBCC
 	b _08135DAC
 	.align 2, 0
-_08135D4C: .4byte gUnknown_203B140
+_08135D4C: .4byte gMonSummaryScreen
 _08135D50: .4byte gUnknown_8E9BBCC
 _08135D54:
 	ldr r2, _08135D84 @ =0x00003208
@@ -2966,7 +2673,7 @@ _08135DC4:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalettes
-	ldr r0, _08135DE4 @ =gUnknown_203B140
+	ldr r0, _08135DE4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _08135DE8 @ =0x00003214
 	adds r0, r2
@@ -2975,7 +2682,7 @@ _08135DC4:
 	bl sub_8137E28
 	b _08135F00
 	.align 2, 0
-_08135DE4: .4byte gUnknown_203B140
+_08135DE4: .4byte gMonSummaryScreen
 _08135DE8: .4byte 0x00003214
 _08135DEC:
 	movs r0, 0x1
@@ -2985,7 +2692,7 @@ _08135DEC:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r4, _08135E64 @ =gUnknown_203B140
+	ldr r4, _08135E64 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -3031,7 +2738,7 @@ _08135DEC:
 	bl CopyWindowToVram
 	b _08135F00
 	.align 2, 0
-_08135E64: .4byte gUnknown_203B140
+_08135E64: .4byte gMonSummaryScreen
 _08135E68: .4byte 0x00003001
 _08135E6C: .4byte 0x00003002
 _08135E70: .4byte 0x00003006
@@ -3049,7 +2756,7 @@ _08135E80:
 	bl CopyBgTilemapBufferToVram
 	b _08135F00
 _08135E9A:
-	ldr r0, _08135EBC @ =gUnknown_203B140
+	ldr r0, _08135EBC @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _08135EC0 @ =0x00003208
 	adds r0, r2
@@ -3065,7 +2772,7 @@ _08135E9A:
 	bl sub_813A0E8
 	b _08135EE2
 	.align 2, 0
-_08135EBC: .4byte gUnknown_203B140
+_08135EBC: .4byte gMonSummaryScreen
 _08135EC0: .4byte 0x00003208
 _08135EC4:
 	movs r0, 0
@@ -3091,7 +2798,7 @@ _08135EF6:
 	bl sub_8136D54
 	b _08135F0E
 _08135F00:
-	ldr r0, _08135F18 @ =gUnknown_203B140
+	ldr r0, _08135F18 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _08135F1C @ =0x00003274
 	adds r1, r0
@@ -3104,7 +2811,7 @@ _08135F0E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08135F18: .4byte gUnknown_203B140
+_08135F18: .4byte gMonSummaryScreen
 _08135F1C: .4byte 0x00003274
 	thumb_func_end sub_8135C34
 
@@ -3112,7 +2819,7 @@ _08135F1C: .4byte 0x00003274
 sub_8135F20: @ 8135F20
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _08135F3C @ =gUnknown_203B140
+	ldr r0, _08135F3C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08135F40 @ =0x00003278
 	adds r0, r1
@@ -3125,7 +2832,7 @@ sub_8135F20: @ 8135F20
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08135F3C: .4byte gUnknown_203B140
+_08135F3C: .4byte gMonSummaryScreen
 _08135F40: .4byte 0x00003278
 _08135F44: .4byte _08135F48
 	.align 2, 0
@@ -3143,7 +2850,7 @@ _08135F64:
 	movs r1, 0
 	movs r2, 0xA0
 	bl LoadPalette
-	ldr r5, _08135FAC @ =gUnknown_203B140
+	ldr r5, _08135FAC @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r1, _08135FB0 @ =0x00003290
 	adds r0, r1
@@ -3170,7 +2877,7 @@ _08135F64:
 	b _08135FD8
 	.align 2, 0
 _08135FA8: .4byte gUnknown_8E9B310
-_08135FAC: .4byte gUnknown_203B140
+_08135FAC: .4byte gMonSummaryScreen
 _08135FB0: .4byte 0x00003290
 _08135FB4:
 	ldr r4, _08135FC8 @ =gUnknown_8E9B310
@@ -3227,7 +2934,7 @@ _0813600E:
 	.align 2, 0
 _0813601C: .4byte gUnknown_8463700
 _08136020:
-	ldr r0, _08136038 @ =gUnknown_203B140
+	ldr r0, _08136038 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _0813603C @ =0x00003278
 	adds r1, r0
@@ -3242,14 +2949,14 @@ _08136030:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08136038: .4byte gUnknown_203B140
+_08136038: .4byte gMonSummaryScreen
 _0813603C: .4byte 0x00003278
 	thumb_func_end sub_8135F20
 
 	thumb_func_start sub_8136040
 sub_8136040: @ 8136040
 	push {r4-r6,lr}
-	ldr r1, _08136060 @ =gUnknown_203B140
+	ldr r1, _08136060 @ =gMonSummaryScreen
 	ldr r2, [r1]
 	movs r6, 0xCA
 	lsls r6, 6
@@ -3264,7 +2971,7 @@ sub_8136040: @ 8136040
 	beq _0813606A
 	b _081360A8
 	.align 2, 0
-_08136060: .4byte gUnknown_203B140
+_08136060: .4byte gMonSummaryScreen
 _08136064:
 	cmp r4, 0x2
 	beq _08136096
@@ -3310,7 +3017,7 @@ _081360A8:
 	movs r0, 0x1
 	b _081360CA
 _081360B8:
-	ldr r0, _081360D0 @ =gUnknown_203B140
+	ldr r0, _081360D0 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	movs r0, 0xCA
 	lsls r0, 6
@@ -3324,14 +3031,14 @@ _081360CA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081360D0: .4byte gUnknown_203B140
+_081360D0: .4byte gMonSummaryScreen
 	thumb_func_end sub_8136040
 
 	thumb_func_start sub_81360D4
 sub_81360D4: @ 81360D4
 	push {r4-r7,lr}
 	sub sp, 0x14
-	ldr r5, _08136108 @ =gUnknown_203B140
+	ldr r5, _08136108 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r1, _0813610C @ =0x00003290
 	adds r0, r1
@@ -3352,7 +3059,7 @@ sub_81360D4: @ 81360D4
 	bl StringCopy
 	b _0813612C
 	.align 2, 0
-_08136108: .4byte gUnknown_203B140
+_08136108: .4byte gMonSummaryScreen
 _0813610C: .4byte 0x00003290
 _08136110: .4byte 0x0000ffff
 _08136114: .4byte 0x00003064
@@ -3370,7 +3077,7 @@ _0813612C:
 	ldr r1, [r0]
 	movs r0, 0
 	strh r0, [r1]
-	ldr r6, _0813615C @ =gUnknown_203B140
+	ldr r6, _0813615C @ =gMonSummaryScreen
 	ldr r2, [r6]
 	movs r1, 0xC8
 	lsls r1, 6
@@ -3388,7 +3095,7 @@ _0813612C:
 	.align 2, 0
 _08136154: .4byte 0x00003064
 _08136158: .4byte gUnknown_203B144
-_0813615C: .4byte gUnknown_203B140
+_0813615C: .4byte gMonSummaryScreen
 _08136160: .4byte 0x00003290
 _08136164: .4byte 0x00003028
 _08136168:
@@ -3484,7 +3191,7 @@ _08136238:
 	cmp r4, 0x1D
 	bne _08136264
 _08136240:
-	ldr r5, _08136310 @ =gUnknown_203B140
+	ldr r5, _08136310 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r3, _08136314 @ =0x00003034
 	adds r0, r3
@@ -3501,7 +3208,7 @@ _08136240:
 	ldr r1, _0813630C @ =gString_Dummy
 	bl StringCopy
 _08136264:
-	ldr r6, _08136310 @ =gUnknown_203B140
+	ldr r6, _08136310 @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r5, _0813631C @ =0x00003290
 	adds r0, r5
@@ -3573,7 +3280,7 @@ _08136264:
 	.align 2, 0
 _08136308: .4byte 0x00003084
 _0813630C: .4byte gString_Dummy
-_08136310: .4byte gUnknown_203B140
+_08136310: .4byte gMonSummaryScreen
 _08136314: .4byte 0x00003034
 _08136318: .4byte gSpeciesNames
 _0813631C: .4byte 0x00003290
@@ -3605,7 +3312,7 @@ sub_8136350: @ 8136350
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x14
-	ldr r6, _081364F8 @ =gUnknown_203B140
+	ldr r6, _081364F8 @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r7, _081364FC @ =0x00003290
 	adds r0, r7
@@ -3791,7 +3498,7 @@ _081363E6:
 	strh r5, [r2, 0xC]
 	b _08136630
 	.align 2, 0
-_081364F8: .4byte gUnknown_203B140
+_081364F8: .4byte gMonSummaryScreen
 _081364FC: .4byte 0x00003290
 _08136500: .4byte 0x00003090
 _08136504: .4byte gText_Slash
@@ -3800,7 +3507,7 @@ _0813650C: .4byte 0x000032f8
 _08136510: .4byte CB2_ReturnToTradeMenuFromSummary
 _08136514: .4byte 0x00003024
 _08136518:
-	ldr r4, _0813677C @ =gUnknown_203B140
+	ldr r4, _0813677C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r2, _08136780 @ =0x00003290
 	mov r9, r2
@@ -3926,7 +3633,7 @@ _08136518:
 	subs r6, r1
 	strh r6, [r2, 0xC]
 _08136630:
-	ldr r6, _0813677C @ =gUnknown_203B140
+	ldr r6, _0813677C @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r2, _08136780 @ =0x00003290
 	mov r8, r2
@@ -4079,7 +3786,7 @@ _0813676A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813677C: .4byte gUnknown_203B140
+_0813677C: .4byte gMonSummaryScreen
 _08136780: .4byte 0x00003290
 _08136784: .4byte 0x0000309c
 _08136788: .4byte gUnknown_203B144
@@ -4106,7 +3813,7 @@ _081367B4:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _081367B4
-	ldr r0, _081367E0 @ =gUnknown_203B140
+	ldr r0, _081367E0 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _081367E4 @ =0x00003208
 	adds r0, r1
@@ -4120,7 +3827,7 @@ _081367D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081367E0: .4byte gUnknown_203B140
+_081367E0: .4byte gMonSummaryScreen
 _081367E4: .4byte 0x00003208
 	thumb_func_end sub_81367B0
 
@@ -4134,7 +3841,7 @@ sub_81367E8: @ 81367E8
 	lsrs r7, r0, 24
 	cmp r7, 0x3
 	bhi _08136812
-	ldr r4, _08136884 @ =gUnknown_203B140
+	ldr r4, _08136884 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08136888 @ =0x00003290
 	adds r0, r1
@@ -4147,7 +3854,7 @@ sub_81367E8: @ 81367E8
 	adds r1, r2
 	strh r0, [r1]
 _08136812:
-	ldr r6, _08136884 @ =gUnknown_203B140
+	ldr r6, _08136884 @ =gMonSummaryScreen
 	ldr r2, [r6]
 	lsls r0, r7, 1
 	ldr r4, _0813688C @ =0x00003258
@@ -4201,7 +3908,7 @@ _08136812:
 	strh r2, [r1]
 	b _08136ADA
 	.align 2, 0
-_08136884: .4byte gUnknown_203B140
+_08136884: .4byte gMonSummaryScreen
 _08136888: .4byte 0x00003290
 _0813688C: .4byte 0x00003258
 _08136890: .4byte 0x00003128
@@ -4297,7 +4004,7 @@ _08136960: .4byte 0x00003208
 _08136964: .4byte 0x000030b8
 _08136968: .4byte 0x000030f0
 _0813696C:
-	ldr r1, _08136A4C @ =gUnknown_203B140
+	ldr r1, _08136A4C @ =gMonSummaryScreen
 	mov r8, r1
 	movs r0, 0xB
 	adds r5, r7, 0
@@ -4343,7 +4050,7 @@ _0813696C:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 _081369D0:
-	ldr r6, _08136A4C @ =gUnknown_203B140
+	ldr r6, _08136A4C @ =gMonSummaryScreen
 	movs r0, 0xB
 	adds r5, r7, 0
 	muls r5, r0
@@ -4403,7 +4110,7 @@ _081369D0:
 	bl StringCopy
 	b _08136A84
 	.align 2, 0
-_08136A4C: .4byte gUnknown_203B140
+_08136A4C: .4byte gMonSummaryScreen
 _08136A50: .4byte 0x000030b8
 _08136A54: .4byte 0x00003290
 _08136A58: .4byte 0x000030f0
@@ -4424,7 +4131,7 @@ _08136A70:
 	bl ConvertIntToDecimalStringN
 _08136A84:
 	ldr r2, _08136AB4 @ =gBattleMoves
-	ldr r0, _08136AB8 @ =gUnknown_203B140
+	ldr r0, _08136AB8 @ =gMonSummaryScreen
 	ldr r3, [r0]
 	ldr r1, _08136ABC @ =0x00003258
 	adds r0, r3, r1
@@ -4447,7 +4154,7 @@ _08136A84:
 	.align 2, 0
 _08136AB0: .4byte 0x0000316c
 _08136AB4: .4byte gBattleMoves
-_08136AB8: .4byte gUnknown_203B140
+_08136AB8: .4byte gMonSummaryScreen
 _08136ABC: .4byte 0x00003258
 _08136AC0: .4byte 0x00003188
 _08136AC4: .4byte gText_ThreeHyphens
@@ -4474,7 +4181,7 @@ _08136AE8: .4byte 0x00003188
 	thumb_func_start sub_8136AEC
 sub_8136AEC: @ 8136AEC
 	push {lr}
-	ldr r0, _08136B08 @ =gUnknown_203B140
+	ldr r0, _08136B08 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08136B0C @ =0x0000327c
 	adds r0, r1
@@ -4487,7 +4194,7 @@ sub_8136AEC: @ 8136AEC
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08136B08: .4byte gUnknown_203B140
+_08136B08: .4byte gMonSummaryScreen
 _08136B0C: .4byte 0x0000327c
 _08136B10: .4byte _08136B14
 	.align 2, 0
@@ -4545,7 +4252,7 @@ _08136B86:
 	movs r0, 0x1
 	b _08136B9E
 _08136B8E:
-	ldr r0, _08136BA4 @ =gUnknown_203B140
+	ldr r0, _08136BA4 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _08136BA8 @ =0x0000327c
 	adds r1, r0
@@ -4557,7 +4264,7 @@ _08136B9E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08136BA4: .4byte gUnknown_203B140
+_08136BA4: .4byte gMonSummaryScreen
 _08136BA8: .4byte 0x0000327c
 	thumb_func_end sub_8136AEC
 
@@ -4686,7 +4393,7 @@ _08136BEA:
 	ldr r1, _08136D44 @ =0x00005040
 	movs r0, 0
 	bl SetGpuReg
-	ldr r4, _08136D48 @ =gUnknown_203B140
+	ldr r4, _08136D48 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r2, _08136D4C @ =0x00003214
 	adds r0, r2
@@ -4740,7 +4447,7 @@ _08136D38: .4byte 0x040000d4
 _08136D3C: .4byte 0x81000800
 _08136D40: .4byte gUnknown_8463EFC
 _08136D44: .4byte 0x00005040
-_08136D48: .4byte gUnknown_203B140
+_08136D48: .4byte gMonSummaryScreen
 _08136D4C: .4byte 0x00003214
 _08136D50: .4byte 0x00002087
 	thumb_func_end sub_8136BC4
@@ -4748,7 +4455,7 @@ _08136D50: .4byte 0x00002087
 	thumb_func_start sub_8136D54
 sub_8136D54: @ 8136D54
 	push {r4,lr}
-	ldr r4, _08136D70 @ =gUnknown_203B140
+	ldr r4, _08136D70 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08136D74 @ =0x00003208
 	adds r0, r1
@@ -4761,7 +4468,7 @@ sub_8136D54: @ 8136D54
 	ldr r0, _08136D78 @ =sub_81393D4
 	b _08136D7E
 	.align 2, 0
-_08136D70: .4byte gUnknown_203B140
+_08136D70: .4byte gMonSummaryScreen
 _08136D74: .4byte 0x00003208
 _08136D78: .4byte sub_81393D4
 _08136D7C:
@@ -4789,7 +4496,7 @@ sub_8136DA4: @ 8136DA4
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
-	ldr r5, _08136DE8 @ =gUnknown_203B140
+	ldr r5, _08136DE8 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	movs r4, 0xC0
 	lsls r4, 6
@@ -4818,7 +4525,7 @@ sub_8136DA4: @ 8136DA4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08136DE8: .4byte gUnknown_203B140
+_08136DE8: .4byte gMonSummaryScreen
 _08136DEC: .4byte gUnknown_8463FA7
 	thumb_func_end sub_8136DA4
 
@@ -4827,7 +4534,7 @@ sub_8136DF0: @ 8136DF0
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
-	ldr r5, _08136E44 @ =gUnknown_203B140
+	ldr r5, _08136E44 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r4, _08136E48 @ =0x00003001
 	adds r0, r4
@@ -4863,7 +4570,7 @@ sub_8136DF0: @ 8136DF0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08136E44: .4byte gUnknown_203B140
+_08136E44: .4byte gMonSummaryScreen
 _08136E48: .4byte 0x00003001
 _08136E4C: .4byte gUnknown_8463FA7
 	thumb_func_end sub_8136DF0
@@ -4872,7 +4579,7 @@ _08136E4C: .4byte gUnknown_8463FA7
 sub_8136E50: @ 8136E50
 	push {r4-r7,lr}
 	sub sp, 0xC
-	ldr r6, _08136EEC @ =gUnknown_203B140
+	ldr r6, _08136EEC @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r7, _08136EF0 @ =0x00003002
 	adds r0, r7
@@ -4944,7 +4651,7 @@ _08136E9A:
 	bl AddTextPrinterParameterized3
 	b _08136F28
 	.align 2, 0
-_08136EEC: .4byte gUnknown_203B140
+_08136EEC: .4byte gMonSummaryScreen
 _08136EF0: .4byte 0x00003002
 _08136EF4: .4byte 0x00003214
 _08136EF8: .4byte gUnknown_8463FA7
@@ -4967,7 +4674,7 @@ _08136F0C:
 	movs r3, 0x2
 	bl AddTextPrinterParameterized3
 _08136F28:
-	ldr r0, _08136F44 @ =gUnknown_203B140
+	ldr r0, _08136F44 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08136F48 @ =0x00003002
 	adds r0, r1
@@ -4979,14 +4686,14 @@ _08136F28:
 	bx r0
 	.align 2, 0
 _08136F40: .4byte 0x00003084
-_08136F44: .4byte gUnknown_203B140
+_08136F44: .4byte gMonSummaryScreen
 _08136F48: .4byte 0x00003002
 	thumb_func_end sub_8136E50
 
 	thumb_func_start sub_8136F4C
 sub_8136F4C: @ 8136F4C
 	push {r4,lr}
-	ldr r4, _08136F74 @ =gUnknown_203B140
+	ldr r4, _08136F74 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08136F78 @ =0x00003003
 	adds r0, r1
@@ -5005,7 +4712,7 @@ sub_8136F4C: @ 8136F4C
 	beq _08136F8A
 	b _08136F94
 	.align 2, 0
-_08136F74: .4byte gUnknown_203B140
+_08136F74: .4byte gMonSummaryScreen
 _08136F78: .4byte 0x00003003
 _08136F7C: .4byte 0x00003214
 _08136F80:
@@ -5019,7 +4726,7 @@ _08136F8A:
 _08136F90:
 	bl sub_81370EC
 _08136F94:
-	ldr r0, _08136FA8 @ =gUnknown_203B140
+	ldr r0, _08136FA8 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08136FAC @ =0x00003003
 	adds r0, r1
@@ -5029,7 +4736,7 @@ _08136F94:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08136FA8: .4byte gUnknown_203B140
+_08136FA8: .4byte gMonSummaryScreen
 _08136FAC: .4byte 0x00003003
 	thumb_func_end sub_8136F4C
 
@@ -5037,7 +4744,7 @@ _08136FAC: .4byte 0x00003003
 sub_8136FB0: @ 8136FB0
 	push {r4-r7,lr}
 	sub sp, 0xC
-	ldr r6, _08137060 @ =gUnknown_203B140
+	ldr r6, _08137060 @ =gMonSummaryScreen
 	ldr r1, [r6]
 	ldr r2, _08137064 @ =0x00003003
 	adds r0, r1, r2
@@ -5119,7 +4826,7 @@ sub_8136FB0: @ 8136FB0
 	bl AddTextPrinterParameterized3
 	b _081370CA
 	.align 2, 0
-_08137060: .4byte gUnknown_203B140
+_08137060: .4byte gMonSummaryScreen
 _08137064: .4byte 0x00003003
 _08137068: .4byte gUnknown_8463FA4
 _0813706C: .4byte 0x00003028
@@ -5142,7 +4849,7 @@ _08137074:
 	bhi _08137096
 	movs r3, 0x1
 _08137096:
-	ldr r0, _081370D8 @ =gUnknown_203B140
+	ldr r0, _081370D8 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _081370DC @ =0x00003204
 	adds r0, r1, r2
@@ -5175,7 +4882,7 @@ _081370CA:
 	bx r0
 	.align 2, 0
 _081370D4: .4byte 0x00003290
-_081370D8: .4byte gUnknown_203B140
+_081370D8: .4byte gMonSummaryScreen
 _081370DC: .4byte 0x00003204
 _081370E0: .4byte 0x00003003
 _081370E4: .4byte gUnknown_8463FA4
@@ -5189,7 +4896,7 @@ sub_81370EC: @ 81370EC
 	mov r5, r8
 	push {r5,r6}
 	sub sp, 0xC
-	ldr r0, _08137240 @ =gUnknown_203B140
+	ldr r0, _08137240 @ =gMonSummaryScreen
 	mov r9, r0
 	ldr r3, [r0]
 	ldr r4, _08137244 @ =0x00003003
@@ -5347,7 +5054,7 @@ sub_81370EC: @ 81370EC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137240: .4byte gUnknown_203B140
+_08137240: .4byte gMonSummaryScreen
 _08137244: .4byte 0x00003003
 _08137248: .4byte gUnknown_203B144
 _0813724C: .4byte gUnknown_8463FA4
@@ -5374,7 +5081,7 @@ _08137276:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _08137276
-	ldr r0, _081372A8 @ =gUnknown_203B140
+	ldr r0, _081372A8 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _081372AC @ =0x00003214
 	adds r0, r1, r2
@@ -5390,7 +5097,7 @@ _08137276:
 	bl sub_81372E4
 	b _081372CE
 	.align 2, 0
-_081372A8: .4byte gUnknown_203B140
+_081372A8: .4byte gMonSummaryScreen
 _081372AC: .4byte 0x00003214
 _081372B0:
 	ldr r2, _081372D8 @ =0x00003003
@@ -5430,7 +5137,7 @@ sub_81372E4: @ 81372E4
 	lsrs r7, r0, 24
 	movs r0, 0
 	mov r9, r0
-	ldr r1, _0813739C @ =gUnknown_203B140
+	ldr r1, _0813739C @ =gMonSummaryScreen
 	mov r10, r1
 	ldr r0, [r1]
 	ldr r5, _081373A0 @ =0x00003290
@@ -5509,7 +5216,7 @@ _0813733E:
 	mov r9, r5
 	b _081373EA
 	.align 2, 0
-_0813739C: .4byte gUnknown_203B140
+_0813739C: .4byte gMonSummaryScreen
 _081373A0: .4byte 0x00003290
 _081373A4: .4byte 0x00003258
 _081373A8: .4byte 0x00003003
@@ -5549,7 +5256,7 @@ _081373E6:
 	movs r3, 0x1
 	mov r9, r3
 _081373EA:
-	ldr r5, _081374C4 @ =gUnknown_203B140
+	ldr r5, _081374C4 @ =gMonSummaryScreen
 	mov r10, r5
 	ldr r0, [r5]
 	ldr r4, _081374C8 @ =0x00003003
@@ -5656,7 +5363,7 @@ _081374B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081374C4: .4byte gUnknown_203B140
+_081374C4: .4byte gMonSummaryScreen
 _081374C8: .4byte 0x00003003
 _081374CC: .4byte gUnknown_8463EF0
 _081374D0: .4byte gUnknown_8416238
@@ -5670,7 +5377,7 @@ _081374E4: .4byte 0x000030f0
 	thumb_func_start sub_81374E8
 sub_81374E8: @ 81374E8
 	push {r4,lr}
-	ldr r4, _08137510 @ =gUnknown_203B140
+	ldr r4, _08137510 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08137514 @ =0x00003004
 	adds r0, r1
@@ -5689,7 +5396,7 @@ sub_81374E8: @ 81374E8
 	beq _08137526
 	b _08137536
 	.align 2, 0
-_08137510: .4byte gUnknown_203B140
+_08137510: .4byte gMonSummaryScreen
 _08137514: .4byte 0x00003004
 _08137518: .4byte 0x00003214
 _0813751C:
@@ -5707,7 +5414,7 @@ _0813752C:
 _08137532:
 	bl sub_8137AF8
 _08137536:
-	ldr r0, _0813754C @ =gUnknown_203B140
+	ldr r0, _0813754C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137550 @ =0x00003004
 	adds r0, r1
@@ -5717,14 +5424,14 @@ _08137536:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813754C: .4byte gUnknown_203B140
+_0813754C: .4byte gMonSummaryScreen
 _08137550: .4byte 0x00003004
 	thumb_func_end sub_81374E8
 
 	thumb_func_start sub_8137554
 sub_8137554: @ 8137554
 	push {lr}
-	ldr r0, _0813756C @ =gUnknown_203B140
+	ldr r0, _0813756C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	movs r1, 0xC8
 	lsls r1, 6
@@ -5735,7 +5442,7 @@ sub_8137554: @ 8137554
 	bl sub_8137944
 	b _08137574
 	.align 2, 0
-_0813756C: .4byte gUnknown_203B140
+_0813756C: .4byte gMonSummaryScreen
 _08137570:
 	bl sub_8137970
 _08137574:
@@ -5748,7 +5455,7 @@ sub_8137578: @ 8137578
 	push {r4-r7,lr}
 	sub sp, 0xD4
 	bl DynamicPlaceholderTextUtil_Reset
-	ldr r7, _081375E8 @ =gUnknown_203B140
+	ldr r7, _081375E8 @ =gMonSummaryScreen
 	ldr r0, [r7]
 	ldr r4, _081375EC @ =0x00003290
 	adds r0, r4
@@ -5794,7 +5501,7 @@ _081375B2:
 	bl GetMapNameGeneric_
 	b _08137626
 	.align 2, 0
-_081375E8: .4byte gUnknown_203B140
+_081375E8: .4byte gMonSummaryScreen
 _081375EC: .4byte 0x00003290
 _081375F0: .4byte gNatureNamePointers
 _081375F4:
@@ -5825,7 +5532,7 @@ _08137626:
 	adds r1, r4, 0
 	movs r0, 0x2
 	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
-	ldr r4, _08137664 @ =gUnknown_203B140
+	ldr r4, _08137664 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08137668 @ =0x00003290
 	adds r0, r1
@@ -5849,7 +5556,7 @@ _08137626:
 	b _081376CE
 	.align 2, 0
 _08137660: .4byte gUnknown_8419C0B
-_08137664: .4byte gUnknown_203B140
+_08137664: .4byte gMonSummaryScreen
 _08137668: .4byte 0x00003290
 _0813766C: .4byte gUnknown_841996D
 _08137670:
@@ -5911,7 +5618,7 @@ _081376DC:
 	adds r0, r4, 0
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _081376E6:
-	ldr r0, _08137718 @ =gUnknown_203B140
+	ldr r0, _08137718 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813771C @ =0x00003004
 	adds r0, r1
@@ -5935,7 +5642,7 @@ _081376E6:
 	bx r0
 	.align 2, 0
 _08137714: .4byte gUnknown_8419822
-_08137718: .4byte gUnknown_203B140
+_08137718: .4byte gMonSummaryScreen
 _0813771C: .4byte 0x00003004
 _08137720: .4byte gUnknown_8463FA4
 	thumb_func_end sub_8137578
@@ -5945,7 +5652,7 @@ sub_8137724: @ 8137724
 	push {r4-r6,lr}
 	sub sp, 0xD4
 	bl DynamicPlaceholderTextUtil_Reset
-	ldr r5, _081377A0 @ =gUnknown_203B140
+	ldr r5, _081377A0 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r4, _081377A4 @ =0x00003290
 	adds r0, r4
@@ -5995,7 +5702,7 @@ _08137790:
 	bl sub_8137578
 	b _0813792C
 	.align 2, 0
-_081377A0: .4byte gUnknown_203B140
+_081377A0: .4byte gMonSummaryScreen
 _081377A4: .4byte 0x00003290
 _081377A8: .4byte gNatureNamePointers
 _081377AC:
@@ -6035,7 +5742,7 @@ _081377EC:
 	adds r0, r4, 0
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _081377F6:
-	ldr r0, _08137824 @ =gUnknown_203B140
+	ldr r0, _08137824 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137828 @ =0x00003004
 	adds r0, r1
@@ -6056,7 +5763,7 @@ _081377F6:
 	b _0813792C
 	.align 2, 0
 _08137820: .4byte gUnknown_8419782
-_08137824: .4byte gUnknown_203B140
+_08137824: .4byte gMonSummaryScreen
 _08137828: .4byte 0x00003004
 _0813782C: .4byte gUnknown_8463FA4
 _08137830:
@@ -6078,7 +5785,7 @@ _08137850:
 	adds r1, r4, 0
 	movs r0, 0x2
 	bl DynamicPlaceholderTextUtil_SetPlaceholderPtr
-	ldr r4, _08137890 @ =gUnknown_203B140
+	ldr r4, _08137890 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08137894 @ =0x00003290
 	adds r0, r1
@@ -6102,7 +5809,7 @@ _08137850:
 	b _081378EE
 	.align 2, 0
 _0813788C: .4byte gUnknown_8419C0B
-_08137890: .4byte gUnknown_203B140
+_08137890: .4byte gMonSummaryScreen
 _08137894: .4byte 0x00003290
 _08137898: .4byte gUnknown_84199F4
 _0813789C:
@@ -6159,7 +5866,7 @@ _081378FC:
 	adds r0, r4, 0
 	bl DynamicPlaceholderTextUtil_ExpandPlaceholders
 _08137906:
-	ldr r0, _08137938 @ =gUnknown_203B140
+	ldr r0, _08137938 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813793C @ =0x00003004
 	adds r0, r1
@@ -6184,7 +5891,7 @@ _0813792C:
 	bx r0
 	.align 2, 0
 _08137934: .4byte gUnknown_8419860
-_08137938: .4byte gUnknown_203B140
+_08137938: .4byte gMonSummaryScreen
 _0813793C: .4byte 0x00003004
 _08137940: .4byte gUnknown_8463FA4
 	thumb_func_end sub_8137724
@@ -6192,7 +5899,7 @@ _08137940: .4byte gUnknown_8463FA4
 	thumb_func_start sub_8137944
 sub_8137944: @ 8137944
 	push {lr}
-	ldr r0, _08137960 @ =gUnknown_203B140
+	ldr r0, _08137960 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137964 @ =0x00003290
 	adds r0, r1
@@ -6204,7 +5911,7 @@ sub_8137944: @ 8137944
 	bl sub_8137578
 	b _0813796C
 	.align 2, 0
-_08137960: .4byte gUnknown_203B140
+_08137960: .4byte gMonSummaryScreen
 _08137964: .4byte 0x00003290
 _08137968:
 	bl sub_8137724
@@ -6218,7 +5925,7 @@ sub_8137970: @ 8137970
 	push {r4-r7,lr}
 	sub sp, 0x14
 	movs r5, 0
-	ldr r7, _081379C4 @ =gUnknown_203B140
+	ldr r7, _081379C4 @ =gMonSummaryScreen
 	ldr r0, [r7]
 	ldr r6, _081379C8 @ =0x00003290
 	adds r0, r6
@@ -6254,7 +5961,7 @@ sub_8137970: @ 8137970
 	movs r5, 0x1
 	b _081379DE
 	.align 2, 0
-_081379C4: .4byte gUnknown_203B140
+_081379C4: .4byte gMonSummaryScreen
 _081379C8: .4byte 0x00003290
 _081379CC: .4byte 0x000032f4
 _081379D0: .4byte gEnemyParty
@@ -6301,7 +6008,7 @@ _08137A18:
 	bne _08137A1E
 	movs r5, 0x2
 _08137A1E:
-	ldr r0, _08137A78 @ =gUnknown_203B140
+	ldr r0, _08137A78 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137A7C @ =0x00003290
 	adds r0, r1
@@ -6313,7 +6020,7 @@ _08137A1E:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08137A36:
-	ldr r0, _08137A78 @ =gUnknown_203B140
+	ldr r0, _08137A78 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08137A80 @ =0x00003204
 	adds r0, r1, r2
@@ -6347,7 +6054,7 @@ _08137A46:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137A78: .4byte gUnknown_203B140
+_08137A78: .4byte gMonSummaryScreen
 _08137A7C: .4byte 0x00003290
 _08137A80: .4byte 0x00003204
 _08137A84: .4byte 0x00003004
@@ -6361,7 +6068,7 @@ sub_8137A90: @ 8137A90
 	mov r6, r8
 	push {r6}
 	sub sp, 0xC
-	ldr r0, _08137AE4 @ =gUnknown_203B140
+	ldr r0, _08137AE4 @ =gMonSummaryScreen
 	mov r8, r0
 	ldr r0, [r0]
 	ldr r6, _08137AE8 @ =0x00003004
@@ -6397,7 +6104,7 @@ sub_8137A90: @ 8137A90
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137AE4: .4byte gUnknown_203B140
+_08137AE4: .4byte gMonSummaryScreen
 _08137AE8: .4byte 0x00003004
 _08137AEC: .4byte gUnknown_8463FA4
 _08137AF0: .4byte gUnknown_8419C4D
@@ -6415,7 +6122,7 @@ sub_8137AF8: @ 8137AF8
 	ldrb r1, [r0]
 	cmp r1, 0x4
 	bhi _08137B9E
-	ldr r7, _08137BB0 @ =gUnknown_203B140
+	ldr r7, _08137BB0 @ =gMonSummaryScreen
 	ldr r3, [r7]
 	ldr r2, _08137BB4 @ =0x00003208
 	adds r0, r3, r2
@@ -6496,7 +6203,7 @@ _08137B9E:
 	bx r0
 	.align 2, 0
 _08137BAC: .4byte gUnknown_203B16D
-_08137BB0: .4byte gUnknown_203B140
+_08137BB0: .4byte gMonSummaryScreen
 _08137BB4: .4byte 0x00003208
 _08137BB8: .4byte 0x00003004
 _08137BBC: .4byte gUnknown_8463FA4
@@ -6509,7 +6216,7 @@ _08137BCC: .4byte 0x00003258
 	thumb_func_start sub_8137BD0
 sub_8137BD0: @ 8137BD0
 	push {lr}
-	ldr r0, _08137BE8 @ =gUnknown_203B140
+	ldr r0, _08137BE8 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137BEC @ =0x00003214
 	adds r0, r1
@@ -6519,7 +6226,7 @@ sub_8137BD0: @ 8137BD0
 	bl sub_8137C18
 	b _08137BFC
 	.align 2, 0
-_08137BE8: .4byte gUnknown_203B140
+_08137BE8: .4byte gMonSummaryScreen
 _08137BEC: .4byte 0x00003214
 _08137BF0:
 	cmp r0, 0x1
@@ -6528,7 +6235,7 @@ _08137BF0:
 	bgt _08137BFC
 	bl sub_8137C90
 _08137BFC:
-	ldr r0, _08137C10 @ =gUnknown_203B140
+	ldr r0, _08137C10 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137C14 @ =0x00003005
 	adds r0, r1
@@ -6537,7 +6244,7 @@ _08137BFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137C10: .4byte gUnknown_203B140
+_08137C10: .4byte gMonSummaryScreen
 _08137C14: .4byte 0x00003005
 	thumb_func_end sub_8137BD0
 
@@ -6547,7 +6254,7 @@ sub_8137C18: @ 8137C18
 	mov r6, r8
 	push {r6}
 	sub sp, 0xC
-	ldr r5, _08137C7C @ =gUnknown_203B140
+	ldr r5, _08137C7C @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r4, _08137C80 @ =0x00003005
 	adds r0, r4
@@ -6590,7 +6297,7 @@ sub_8137C18: @ 8137C18
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137C7C: .4byte gUnknown_203B140
+_08137C7C: .4byte gMonSummaryScreen
 _08137C80: .4byte 0x00003005
 _08137C84: .4byte gUnknown_8463FA4
 _08137C88: .4byte 0x000031bc
@@ -6600,7 +6307,7 @@ _08137C8C: .4byte 0x000031cc
 	thumb_func_start sub_8137C90
 sub_8137C90: @ 8137C90
 	push {r4,r5,lr}
-	ldr r0, _08137D14 @ =gUnknown_203B140
+	ldr r0, _08137D14 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08137D18 @ =0x00003005
 	adds r0, r1
@@ -6609,7 +6316,7 @@ sub_8137C90: @ 8137C90
 	bl FillWindowPixelBuffer
 	movs r4, 0
 _08137CA4:
-	ldr r5, _08137D14 @ =gUnknown_203B140
+	ldr r5, _08137D14 @ =gMonSummaryScreen
 	ldr r1, [r5]
 	lsls r2, r4, 1
 	ldr r3, _08137D1C @ =0x00003258
@@ -6666,7 +6373,7 @@ _08137D0E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137D14: .4byte gUnknown_203B140
+_08137D14: .4byte gMonSummaryScreen
 _08137D18: .4byte 0x00003005
 _08137D1C: .4byte 0x00003258
 _08137D20: .4byte 0x0000324e
@@ -6698,7 +6405,7 @@ _08137D40:
 _08137D58:
 	ldr r0, _08137D78 @ =gUnknown_8419C1D
 	bl sub_8136DA4
-	ldr r0, _08137D7C @ =gUnknown_203B140
+	ldr r0, _08137D7C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	movs r1, 0xC8
 	lsls r1, 6
@@ -6711,7 +6418,7 @@ _08137D58:
 	b _08137DF2
 	.align 2, 0
 _08137D78: .4byte gUnknown_8419C1D
-_08137D7C: .4byte gUnknown_203B140
+_08137D7C: .4byte gMonSummaryScreen
 _08137D80: .4byte gUnknown_8419C62
 _08137D84:
 	ldr r0, _08137D88 @ =gUnknown_8419C72
@@ -6785,7 +6492,7 @@ _08137E24: .4byte gUnknown_8419C45
 	thumb_func_start sub_8137E28
 sub_8137E28: @ 8137E28
 	push {r4,lr}
-	ldr r4, _08137E58 @ =gUnknown_203B140
+	ldr r4, _08137E58 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -6806,7 +6513,7 @@ sub_8137E28: @ 8137E28
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137E58: .4byte gUnknown_203B140
+_08137E58: .4byte gMonSummaryScreen
 _08137E5C: .4byte 0x00003001
 _08137E60: .4byte 0x00003002
 	thumb_func_end sub_8137E28
@@ -6825,7 +6532,7 @@ sub_8137E64: @ 8137E64
 	bne _08137E82
 	bl StopCryAndClearCrySongs
 _08137E82:
-	ldr r4, _08137ED4 @ =gUnknown_203B140
+	ldr r4, _08137ED4 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08137ED8 @ =0x00003214
 	adds r0, r1
@@ -6861,7 +6568,7 @@ _08137ECC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08137ED4: .4byte gUnknown_203B140
+_08137ED4: .4byte gMonSummaryScreen
 _08137ED8: .4byte 0x00003214
 _08137EDC: .4byte 0x000032f8
 _08137EE0: .4byte gLastViewedMonIndex
@@ -7017,7 +6724,7 @@ _08137FF0: .4byte gUnknown_203B15C
 	thumb_func_start sub_8137FF4
 sub_8137FF4: @ 8137FF4
 	push {r4,r5,lr}
-	ldr r4, _08138038 @ =gUnknown_203B140
+	ldr r4, _08138038 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r3, _0813803C @ =0x0000324c
 	adds r1, r0, r3
@@ -7051,7 +6758,7 @@ _0813801A:
 	bl SetGpuReg
 	b _08138054
 	.align 2, 0
-_08138038: .4byte gUnknown_203B140
+_08138038: .4byte gMonSummaryScreen
 _0813803C: .4byte 0x0000324c
 _08138040: .4byte 0x00003238
 _08138044:
@@ -7071,7 +6778,7 @@ _08138054:
 	thumb_func_start sub_813805C
 sub_813805C: @ 813805C
 	push {r4,r5,lr}
-	ldr r4, _081380A0 @ =gUnknown_203B140
+	ldr r4, _081380A0 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r3, _081380A4 @ =0x0000324c
 	adds r1, r0, r3
@@ -7104,7 +6811,7 @@ _08138080:
 	bl SetGpuReg
 	b _081380BC
 	.align 2, 0
-_081380A0: .4byte gUnknown_203B140
+_081380A0: .4byte gMonSummaryScreen
 _081380A4: .4byte 0x0000324c
 _081380A8: .4byte 0x00003238
 _081380AC:
@@ -7116,7 +6823,7 @@ _081380AC:
 	movs r0, 0x18
 	bl SetGpuReg
 _081380BC:
-	ldr r0, _081380E4 @ =gUnknown_203B140
+	ldr r0, _081380E4 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r5, _081380E8 @ =0x00003214
 	adds r0, r1, r5
@@ -7136,7 +6843,7 @@ _081380DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081380E4: .4byte gUnknown_203B140
+_081380E4: .4byte gMonSummaryScreen
 _081380E8: .4byte 0x00003214
 _081380EC: .4byte 0x0000324c
 	thumb_func_end sub_813805C
@@ -7144,7 +6851,7 @@ _081380EC: .4byte 0x0000324c
 	thumb_func_start sub_81380F0
 sub_81380F0: @ 81380F0
 	push {lr}
-	ldr r0, _08138110 @ =gUnknown_203B140
+	ldr r0, _08138110 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08138114 @ =0x00003224
 	adds r0, r1, r2
@@ -7159,7 +6866,7 @@ sub_81380F0: @ 81380F0
 	bl sub_8137FF4
 	b _08138130
 	.align 2, 0
-_08138110: .4byte gUnknown_203B140
+_08138110: .4byte gMonSummaryScreen
 _08138114: .4byte 0x00003224
 _08138118:
 	ldr r2, _08138128 @ =0x00003214
@@ -7182,7 +6889,7 @@ _08138130:
 	thumb_func_start sub_8138134
 sub_8138134: @ 8138134
 	push {lr}
-	ldr r0, _08138174 @ =gUnknown_203B140
+	ldr r0, _08138174 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08138178 @ =0x00003214
 	adds r0, r1, r2
@@ -7196,7 +6903,7 @@ sub_8138134: @ 8138134
 	bne _08138152
 	bl sub_8137F68
 _08138152:
-	ldr r0, _08138174 @ =gUnknown_203B140
+	ldr r0, _08138174 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08138178 @ =0x00003214
 	adds r0, r1, r2
@@ -7213,7 +6920,7 @@ _0813816E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08138174: .4byte gUnknown_203B140
+_08138174: .4byte gMonSummaryScreen
 _08138178: .4byte 0x00003214
 	thumb_func_end sub_8138134
 
@@ -7223,7 +6930,7 @@ sub_813817C: @ 813817C
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	ldr r0, _081381A4 @ =gUnknown_203B140
+	ldr r0, _081381A4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _081381A8 @ =0x00003244
 	adds r0, r1
@@ -7236,7 +6943,7 @@ _081381A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081381A4: .4byte gUnknown_203B140
+_081381A4: .4byte gMonSummaryScreen
 _081381A8: .4byte 0x00003244
 	thumb_func_end sub_813817C
 
@@ -7273,7 +6980,7 @@ _081381DA:
 	ldr r1, _0813821C @ =gUnknown_8463F0C
 	adds r0, r1
 	bl AddWindow
-	ldr r2, _08138220 @ =gUnknown_203B140
+	ldr r2, _08138220 @ =gMonSummaryScreen
 	ldr r1, [r2]
 	movs r3, 0xC0
 	lsls r3, 6
@@ -7302,7 +7009,7 @@ _08138200:
 	.align 2, 0
 _08138218: .4byte gUnknown_8463F9C
 _0813821C: .4byte gUnknown_8463F0C
-_08138220: .4byte gUnknown_203B140
+_08138220: .4byte gMonSummaryScreen
 _08138224: .4byte 0x00003214
 _08138228:
 	cmp r0, 0x3
@@ -7368,7 +7075,7 @@ sub_8138280: @ 8138280
 	adds r3, r4, 0
 	ands r3, r0
 	movs r4, 0
-	ldr r2, _08138314 @ =gUnknown_203B140
+	ldr r2, _08138314 @ =gMonSummaryScreen
 	movs r0, 0xC0
 	lsls r0, 6
 	mov r12, r0
@@ -7415,7 +7122,7 @@ _081382F0:
 	ldr r1, _08138320 @ =gUnknown_8463F24
 	adds r0, r1
 	bl AddWindow
-	ldr r1, _08138314 @ =gUnknown_203B140
+	ldr r1, _08138314 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -7429,7 +7136,7 @@ _081382F0:
 	bls _081382F0
 	b _081383AC
 	.align 2, 0
-_08138314: .4byte gUnknown_203B140
+_08138314: .4byte gMonSummaryScreen
 _08138318: .4byte 0x00003224
 _0813831C: .4byte 0x00003214
 _08138320: .4byte gUnknown_8463F24
@@ -7440,7 +7147,7 @@ _08138326:
 	ldr r1, _0813834C @ =gUnknown_8463F0C
 	adds r0, r1
 	bl AddWindow
-	ldr r1, _08138350 @ =gUnknown_203B140
+	ldr r1, _08138350 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -7455,7 +7162,7 @@ _08138326:
 	b _081383AC
 	.align 2, 0
 _0813834C: .4byte gUnknown_8463F0C
-_08138350: .4byte gUnknown_203B140
+_08138350: .4byte gMonSummaryScreen
 _08138354:
 	cmp r3, r5
 	bls _08138388
@@ -7465,7 +7172,7 @@ _0813835A:
 	ldr r1, _08138380 @ =gUnknown_8463F0C
 	adds r0, r1
 	bl AddWindow
-	ldr r1, _08138384 @ =gUnknown_203B140
+	ldr r1, _08138384 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -7480,7 +7187,7 @@ _0813835A:
 	b _081383AC
 	.align 2, 0
 _08138380: .4byte gUnknown_8463F0C
-_08138384: .4byte gUnknown_203B140
+_08138384: .4byte gMonSummaryScreen
 _08138388:
 	movs r4, 0
 _0813838A:
@@ -7488,7 +7195,7 @@ _0813838A:
 	ldr r1, _081383C0 @ =gUnknown_8463F24
 	adds r0, r1
 	bl AddWindow
-	ldr r1, _081383C4 @ =gUnknown_203B140
+	ldr r1, _081383C4 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -7502,7 +7209,7 @@ _0813838A:
 	bls _0813838A
 _081383AC:
 	movs r4, 0
-	ldr r5, _081383C4 @ =gUnknown_203B140
+	ldr r5, _081383C4 @ =gMonSummaryScreen
 _081383B0:
 	cmp r6, 0x1
 	beq _081383E4
@@ -7513,7 +7220,7 @@ _081383B0:
 	b _081383E4
 	.align 2, 0
 _081383C0: .4byte gUnknown_8463F24
-_081383C4: .4byte gUnknown_203B140
+_081383C4: .4byte gMonSummaryScreen
 _081383C8:
 	cmp r6, 0x3
 	bgt _081383E4
@@ -7558,7 +7265,7 @@ _08138410: .4byte 0x00003003
 sub_8138414: @ 8138414
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _0813843C @ =gUnknown_203B140
+	ldr r5, _0813843C @ =gMonSummaryScreen
 _0813841A:
 	ldr r0, [r5]
 	movs r1, 0xC0
@@ -7576,13 +7283,13 @@ _0813841A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813843C: .4byte gUnknown_203B140
+_0813843C: .4byte gMonSummaryScreen
 	thumb_func_end sub_8138414
 
 	thumb_func_start sub_8138440
 sub_8138440: @ 8138440
 	push {lr}
-	ldr r0, _0813845C @ =gUnknown_203B140
+	ldr r0, _0813845C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08138460 @ =0x00003214
 	adds r0, r1
@@ -7595,7 +7302,7 @@ sub_8138440: @ 8138440
 	beq _0813846C
 	b _08138476
 	.align 2, 0
-_0813845C: .4byte gUnknown_203B140
+_0813845C: .4byte gMonSummaryScreen
 _08138460: .4byte 0x00003214
 _08138464:
 	cmp r0, 0x3
@@ -7618,7 +7325,7 @@ _08138476:
 sub_813847C: @ 813847C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r5, _081384BC @ =gUnknown_203B140
+	ldr r5, _081384BC @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r1, _081384C0 @ =0x000032f4
 	adds r0, r1
@@ -7646,7 +7353,7 @@ sub_813847C: @ 813847C
 	bl StringCopy
 	b _081384E8
 	.align 2, 0
-_081384BC: .4byte gUnknown_203B140
+_081384BC: .4byte gMonSummaryScreen
 _081384C0: .4byte 0x000032f4
 _081384C4: .4byte gEnemyParty
 _081384C8: .4byte gLinkPlayers
@@ -7670,7 +7377,7 @@ _081384E8:
 	ands r1, r0
 	cmp r4, r1
 	bne _08138518
-	ldr r4, _08138528 @ =gUnknown_203B140
+	ldr r4, _08138528 @ =gMonSummaryScreen
 	ldr r2, [r4]
 	ldr r5, _0813852C @ =0x00003058
 	adds r2, r5
@@ -7691,7 +7398,7 @@ _08138518:
 _0813851C: .4byte 0x0000ffff
 _08138520: .4byte 0x0000304c
 _08138524: .4byte gSaveBlock2Ptr
-_08138528: .4byte gUnknown_203B140
+_08138528: .4byte gMonSummaryScreen
 _0813852C: .4byte 0x00003058
 _08138530:
 	movs r0, 0x1
@@ -7709,7 +7416,7 @@ sub_8138538: @ 8138538
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r0, _08138560 @ =gUnknown_203B140
+	ldr r0, _08138560 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08138564 @ =0x00003214
 	adds r0, r1, r2
@@ -7724,7 +7431,7 @@ _08138554:
 	beq _08138576
 	b _08138A16
 	.align 2, 0
-_08138560: .4byte gUnknown_203B140
+_08138560: .4byte gMonSummaryScreen
 _08138564: .4byte 0x00003214
 _08138568:
 	cmp r7, 0x2
@@ -8288,7 +7995,7 @@ _08138A34: .4byte 0x00000199
 	thumb_func_start sub_8138A38
 sub_8138A38: @ 8138A38
 	push {r4-r6,lr}
-	ldr r6, _08138A54 @ =gUnknown_203B140
+	ldr r6, _08138A54 @ =gMonSummaryScreen
 	ldr r1, [r6]
 	ldr r2, _08138A58 @ =0x00003214
 	adds r0, r1, r2
@@ -8301,7 +8008,7 @@ sub_8138A38: @ 8138A38
 	beq _08138A62
 	b _08138B0E
 	.align 2, 0
-_08138A54: .4byte gUnknown_203B140
+_08138A54: .4byte gMonSummaryScreen
 _08138A58: .4byte 0x00003214
 _08138A5C:
 	cmp r0, 0x3
@@ -8417,14 +8124,14 @@ _08138B34: .4byte gUnknown_203B16E
 
 	thumb_func_start sub_8138B38
 sub_8138B38: @ 8138B38
-	ldr r1, _08138B44 @ =gUnknown_203B140
+	ldr r1, _08138B44 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	ldr r2, _08138B48 @ =0x00003208
 	adds r1, r2
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08138B44: .4byte gUnknown_203B140
+_08138B44: .4byte gMonSummaryScreen
 _08138B48: .4byte 0x00003208
 	thumb_func_end sub_8138B38
 
@@ -8466,7 +8173,7 @@ _08138B86:
 sub_8138B8C: @ 8138B8C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08138BBC @ =gUnknown_203B140
+	ldr r0, _08138BBC @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08138BC0 @ =0x0000321c
 	adds r0, r1, r2
@@ -8487,7 +8194,7 @@ sub_8138B8C: @ 8138B8C
 	bl memcpy
 	b _08138BE2
 	.align 2, 0
-_08138BBC: .4byte gUnknown_203B140
+_08138BBC: .4byte gMonSummaryScreen
 _08138BC0: .4byte 0x0000321c
 _08138BC4:
 	ldr r2, _08138BE8 @ =0x000032f4
@@ -8587,7 +8294,7 @@ _08138C4E:
 sub_8138C5C: @ 8138C5C
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r6, _08138C78 @ =gUnknown_203B140
+	ldr r6, _08138C78 @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r5, _08138C7C @ =0x00003290
 	adds r0, r5
@@ -8598,7 +8305,7 @@ sub_8138C5C: @ 8138C5C
 	movs r0, 0x7
 	b _08138CD2
 	.align 2, 0
-_08138C78: .4byte gUnknown_203B140
+_08138C78: .4byte gMonSummaryScreen
 _08138C7C: .4byte 0x00003290
 _08138C80:
 	movs r0, 0x88
@@ -8659,7 +8366,7 @@ sub_8138CD8: @ 8138CD8
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r6, _08138CFC @ =gUnknown_203B140
+	ldr r6, _08138CFC @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r7, _08138D00 @ =0x00003288
 	adds r3, r0, r7
@@ -8674,7 +8381,7 @@ _08138CF0:
 	beq _08138D12
 	b _08139094
 	.align 2, 0
-_08138CFC: .4byte gUnknown_203B140
+_08138CFC: .4byte gMonSummaryScreen
 _08138D00: .4byte 0x00003288
 _08138D04:
 	cmp r1, 0x2
@@ -8823,7 +8530,7 @@ _08138E14:
 _08138E16:
 	mov r0, r12
 	ldrb r4, [r0]
-	ldr r2, _08138E58 @ =gUnknown_203B140
+	ldr r2, _08138E58 @ =gMonSummaryScreen
 	cmp r4, r5
 	bcs _08138E3C
 	ldr r0, [r2]
@@ -8858,7 +8565,7 @@ _08138E4A:
 	strb r0, [r1]
 	b _08139094
 	.align 2, 0
-_08138E58: .4byte gUnknown_203B140
+_08138E58: .4byte gMonSummaryScreen
 _08138E5C: .4byte 0x00003258
 _08138E60: .4byte 0x00003268
 _08138E64: .4byte gUnknown_203B16D
@@ -8971,7 +8678,7 @@ _08138F3C: .4byte 0x0000321c
 _08138F40:
 	bl sub_81391EC
 _08138F44:
-	ldr r4, _08138F60 @ =gUnknown_203B140
+	ldr r4, _08138F60 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r2, _08138F64 @ =0x00003290
 	adds r0, r2
@@ -8983,7 +8690,7 @@ _08138F44:
 	movs r1, 0x2
 	b _08139092
 	.align 2, 0
-_08138F60: .4byte gUnknown_203B140
+_08138F60: .4byte gMonSummaryScreen
 _08138F64: .4byte 0x00003290
 _08138F68: .4byte 0x00003288
 _08138F6C:
@@ -9143,7 +8850,7 @@ sub_81390B0: @ 81390B0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r0, _081391D8 @ =gUnknown_203B140
+	ldr r0, _081391D8 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _081391DC @ =0x000032f4
 	adds r0, r1
@@ -9274,7 +8981,7 @@ sub_81390B0: @ 81390B0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081391D8: .4byte gUnknown_203B140
+_081391D8: .4byte gMonSummaryScreen
 _081391DC: .4byte 0x000032f4
 _081391E0: .4byte gUnknown_203B16D
 _081391E4: .4byte gUnknown_203B16E
@@ -9289,7 +8996,7 @@ sub_81391EC: @ 81391EC
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r0, _08139314 @ =gUnknown_203B140
+	ldr r0, _08139314 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08139318 @ =0x000032f4
 	adds r0, r1
@@ -9421,7 +9128,7 @@ sub_81391EC: @ 81391EC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139314: .4byte gUnknown_203B140
+_08139314: .4byte gMonSummaryScreen
 _08139318: .4byte 0x000032f4
 _0813931C: .4byte gUnknown_203B16D
 _08139320: .4byte gUnknown_203B16E
@@ -9432,7 +9139,7 @@ _08139324: .4byte gPPUpGetMask
 sub_8139328: @ 8139328
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08139358 @ =gUnknown_203B140
+	ldr r0, _08139358 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _0813935C @ =0x0000321c
 	adds r0, r1, r2
@@ -9453,7 +9160,7 @@ sub_8139328: @ 8139328
 	bl memcpy
 	b _0813937E
 	.align 2, 0
-_08139358: .4byte gUnknown_203B140
+_08139358: .4byte gMonSummaryScreen
 _0813935C: .4byte 0x0000321c
 _08139360:
 	ldr r2, _08139384 @ =0x000032f4
@@ -9480,7 +9187,7 @@ _08139384: .4byte 0x000032f4
 	thumb_func_start sub_8139388
 sub_8139388: @ 8139388
 	push {r4,lr}
-	ldr r4, _081393BC @ =gUnknown_203B140
+	ldr r4, _081393BC @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _081393C0 @ =0x00003290
 	adds r0, r1
@@ -9503,7 +9210,7 @@ sub_8139388: @ 8139388
 	movs r0, 0
 	b _081393CE
 	.align 2, 0
-_081393BC: .4byte gUnknown_203B140
+_081393BC: .4byte gMonSummaryScreen
 _081393C0: .4byte 0x00003290
 _081393C4: .4byte gUnknown_203B16D
 _081393C8: .4byte 0x00003208
@@ -9521,7 +9228,7 @@ sub_81393D4: @ 81393D4
 	sub sp, 0x14
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, _081393F8 @ =gUnknown_203B140
+	ldr r1, _081393F8 @ =gMonSummaryScreen
 	ldr r0, [r1]
 	ldr r3, _081393FC @ =0x00003288
 	adds r0, r3
@@ -9537,7 +9244,7 @@ _081393EE:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_081393F8: .4byte gUnknown_203B140
+_081393F8: .4byte gMonSummaryScreen
 _081393FC: .4byte 0x00003288
 _08139400: .4byte _08139404
 	.align 2, 0
@@ -9557,13 +9264,13 @@ _08139420:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, _0813943C @ =gUnknown_203B140
+	ldr r0, _0813943C @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r4, _08139440 @ =0x00003288
 	adds r1, r4
 	b _08139728
 	.align 2, 0
-_0813943C: .4byte gUnknown_203B140
+_0813943C: .4byte gMonSummaryScreen
 _08139440: .4byte 0x00003288
 _08139444:
 	ldr r0, _08139460 @ =gPaletteFade
@@ -9575,14 +9282,14 @@ _08139444:
 	b _0813975A
 _08139452:
 	bl sub_813B784
-	ldr r0, _08139464 @ =gUnknown_203B140
+	ldr r0, _08139464 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _08139468 @ =0x00003288
 	adds r1, r0
 	b _08139728
 	.align 2, 0
 _08139460: .4byte gPaletteFade
-_08139464: .4byte gUnknown_203B140
+_08139464: .4byte gMonSummaryScreen
 _08139468: .4byte 0x00003288
 _0813946C:
 	ldr r0, _081394BC @ =gMain
@@ -9737,7 +9444,7 @@ _08139584:
 	ldr r1, _081395AC @ =gSpecialVar_0x8005
 	ldrb r0, [r2]
 	strh r0, [r1]
-	ldr r0, _081395B0 @ =gUnknown_203B140
+	ldr r0, _081395B0 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r3, _081395B4 @ =0x00003288
 	adds r0, r3
@@ -9746,12 +9453,12 @@ _08139584:
 _081395A4: .4byte gUnknown_203B16D
 _081395A8: .4byte gUnknown_203B16E
 _081395AC: .4byte gSpecialVar_0x8005
-_081395B0: .4byte gUnknown_203B140
+_081395B0: .4byte gMonSummaryScreen
 _081395B4: .4byte 0x00003288
 _081395B8:
 	movs r0, 0x1A
 	bl PlaySE
-	ldr r0, _081395CC @ =gUnknown_203B140
+	ldr r0, _081395CC @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r4, _081395D0 @ =0x00003288
 	adds r0, r4
@@ -9759,7 +9466,7 @@ _081395B8:
 	strb r1, [r0]
 	b _0813975A
 	.align 2, 0
-_081395CC: .4byte gUnknown_203B140
+_081395CC: .4byte gMonSummaryScreen
 _081395D0: .4byte 0x00003288
 _081395D4:
 	movs r0, 0x2
@@ -9789,7 +9496,7 @@ _08139604:
 	bl sub_8136F4C
 	bl sub_81374E8
 	bl sub_8137BD0
-	ldr r0, _08139620 @ =gUnknown_203B140
+	ldr r0, _08139620 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _08139624 @ =0x00003288
 	adds r0, r2
@@ -9797,7 +9504,7 @@ _08139604:
 	strb r1, [r0]
 	b _0813975A
 	.align 2, 0
-_08139620: .4byte gUnknown_203B140
+_08139620: .4byte gMonSummaryScreen
 _08139624: .4byte 0x00003288
 _08139628:
 	bl MenuHelpers_CallLinkSomething
@@ -9812,7 +9519,7 @@ _08139636:
 	bne _08139640
 	b _0813975A
 _08139640:
-	ldr r4, _08139690 @ =gUnknown_203B140
+	ldr r4, _08139690 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r3, _08139694 @ =0x00003003
 	adds r0, r3
@@ -9846,7 +9553,7 @@ _08139640:
 	adds r0, r4
 	b _081396F8
 	.align 2, 0
-_08139690: .4byte gUnknown_203B140
+_08139690: .4byte gMonSummaryScreen
 _08139694: .4byte 0x00003003
 _08139698: .4byte 0x00003004
 _0813969C: .4byte 0x00003005
@@ -9905,7 +9612,7 @@ _08139710:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _08139730 @ =gUnknown_203B140
+	ldr r0, _08139730 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _08139734 @ =0x00003288
 	adds r1, r2
@@ -9915,7 +9622,7 @@ _08139728:
 	strb r0, [r1]
 	b _0813975A
 	.align 2, 0
-_08139730: .4byte gUnknown_203B140
+_08139730: .4byte gMonSummaryScreen
 _08139734: .4byte 0x00003288
 _08139738:
 	movs r0, 0x5
@@ -9947,7 +9654,7 @@ _08139764: .4byte gPaletteFade
 sub_8139768: @ 8139768
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r0, _081397A4 @ =gUnknown_203B140
+	ldr r0, _081397A4 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r2, _081397A8 @ =0x00003020
 	adds r1, r2
@@ -9975,7 +9682,7 @@ sub_8139768: @ 8139768
 	beq _081397B6
 	b _0813981C
 	.align 2, 0
-_081397A4: .4byte gUnknown_203B140
+_081397A4: .4byte gMonSummaryScreen
 _081397A8: .4byte 0x00003020
 _081397AC: .4byte gUnknown_203B170
 _081397B0:
@@ -10081,7 +9788,7 @@ _08139864: .4byte 0x00003020
 sub_8139868: @ 8139868
 	push {r4-r6,lr}
 	adds r3, r0, 0
-	ldr r5, _081398C0 @ =gUnknown_203B140
+	ldr r5, _081398C0 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r6, _081398C4 @ =0x00003020
 	adds r0, r6
@@ -10125,7 +9832,7 @@ _0813988C:
 	bls _0813994C
 	b _0813993A
 	.align 2, 0
-_081398C0: .4byte gUnknown_203B140
+_081398C0: .4byte gMonSummaryScreen
 _081398C4: .4byte 0x00003020
 _081398C8: .4byte gUnknown_203B170
 _081398CC: .4byte gUnknown_8463FD4
@@ -10215,7 +9922,7 @@ sub_813995C: @ 813995C
 	movs r0, 0xC
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r5, _081399D0 @ =gUnknown_203B140
+	ldr r5, _081399D0 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r4, _081399D4 @ =0x00003290
 	adds r0, r4
@@ -10262,7 +9969,7 @@ sub_813995C: @ 813995C
 	b _08139A40
 	.align 2, 0
 _081399CC: .4byte gUnknown_203B170
-_081399D0: .4byte gUnknown_203B140
+_081399D0: .4byte gMonSummaryScreen
 _081399D4: .4byte 0x00003290
 _081399D8: .4byte 0x000032f8
 _081399DC: .4byte CB2_ReturnToTradeMenuFromSummary
@@ -10343,7 +10050,7 @@ _08139A78:
 	ands r0, r1
 	strb r0, [r2]
 _08139A86:
-	ldr r0, _08139AA4 @ =gUnknown_203B140
+	ldr r0, _08139AA4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08139AA8 @ =0x00003010
 	adds r0, r1
@@ -10357,7 +10064,7 @@ _08139A86:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139AA4: .4byte gUnknown_203B140
+_08139AA4: .4byte gMonSummaryScreen
 _08139AA8: .4byte 0x00003010
 	thumb_func_end sub_813995C
 
@@ -10370,7 +10077,7 @@ sub_8139AAC: @ 8139AAC
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
-	ldr r1, _08139AF4 @ =gUnknown_203B140
+	ldr r1, _08139AF4 @ =gMonSummaryScreen
 	ldr r0, [r1]
 	ldr r2, _08139AF8 @ =0x00003020
 	adds r0, r2
@@ -10399,7 +10106,7 @@ sub_8139AAC: @ 8139AAC
 	strb r0, [r1, 0x8]
 	b _08139B1E
 	.align 2, 0
-_08139AF4: .4byte gUnknown_203B140
+_08139AF4: .4byte gMonSummaryScreen
 _08139AF8: .4byte 0x00003020
 _08139AFC: .4byte 0x00003290
 _08139B00: .4byte gUnknown_203B170
@@ -10561,7 +10268,7 @@ sub_8139C44: @ 8139C44
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _08139C74 @ =gSprites
-	ldr r1, _08139C78 @ =gUnknown_203B140
+	ldr r1, _08139C78 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	ldr r2, _08139C7C @ =0x00003010
 	adds r1, r2
@@ -10583,14 +10290,14 @@ sub_8139C44: @ 8139C44
 	bx lr
 	.align 2, 0
 _08139C74: .4byte gSprites
-_08139C78: .4byte gUnknown_203B140
+_08139C78: .4byte gMonSummaryScreen
 _08139C7C: .4byte 0x00003010
 	thumb_func_end sub_8139C44
 
 	thumb_func_start sub_8139C80
 sub_8139C80: @ 8139C80
 	push {r4,lr}
-	ldr r0, _08139CA4 @ =gUnknown_203B140
+	ldr r0, _08139CA4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08139CA8 @ =0x00003010
 	adds r0, r1
@@ -10605,7 +10312,7 @@ sub_8139C80: @ 8139C80
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139CA4: .4byte gUnknown_203B140
+_08139CA4: .4byte gMonSummaryScreen
 _08139CA8: .4byte 0x00003010
 _08139CAC: .4byte gUnknown_203B170
 	thumb_func_end sub_8139C80
@@ -10613,7 +10320,7 @@ _08139CAC: .4byte gUnknown_203B170
 	thumb_func_start sub_8139CB0
 sub_8139CB0: @ 8139CB0
 	push {r4,lr}
-	ldr r0, _08139CD4 @ =gUnknown_203B140
+	ldr r0, _08139CD4 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	movs r2, 0xC8
 	lsls r2, 6
@@ -10629,7 +10336,7 @@ sub_8139CB0: @ 8139CB0
 	lsrs r0, 16
 	b _08139CDA
 	.align 2, 0
-_08139CD4: .4byte gUnknown_203B140
+_08139CD4: .4byte gMonSummaryScreen
 _08139CD8:
 	movs r0, 0
 _08139CDA:
@@ -10648,7 +10355,7 @@ _08139CDA:
 	movs r2, 0x58
 	movs r3, 0
 	bl CreateSprite
-	ldr r2, _08139D44 @ =gUnknown_203B140
+	ldr r2, _08139D44 @ =gMonSummaryScreen
 	ldr r1, [r2]
 	ldr r3, _08139D48 @ =0x0000300c
 	adds r1, r3
@@ -10682,7 +10389,7 @@ _08139CDA:
 	bx r0
 	.align 2, 0
 _08139D40: .4byte gBallSpriteTemplates
-_08139D44: .4byte gUnknown_203B140
+_08139D44: .4byte gMonSummaryScreen
 _08139D48: .4byte 0x0000300c
 _08139D4C: .4byte gSprites
 _08139D50: .4byte SpriteCallbackDummy
@@ -10693,7 +10400,7 @@ sub_8139D54: @ 8139D54
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _08139D84 @ =gSprites
-	ldr r1, _08139D88 @ =gUnknown_203B140
+	ldr r1, _08139D88 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	ldr r2, _08139D8C @ =0x0000300c
 	adds r1, r2
@@ -10715,14 +10422,14 @@ sub_8139D54: @ 8139D54
 	bx lr
 	.align 2, 0
 _08139D84: .4byte gSprites
-_08139D88: .4byte gUnknown_203B140
+_08139D88: .4byte gMonSummaryScreen
 _08139D8C: .4byte 0x0000300c
 	thumb_func_end sub_8139D54
 
 	thumb_func_start sub_8139D90
 sub_8139D90: @ 8139D90
 	push {lr}
-	ldr r0, _08139DB0 @ =gUnknown_203B140
+	ldr r0, _08139DB0 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08139DB4 @ =0x0000300c
 	adds r0, r1
@@ -10736,7 +10443,7 @@ sub_8139D90: @ 8139D90
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139DB0: .4byte gUnknown_203B140
+_08139DB0: .4byte gMonSummaryScreen
 _08139DB4: .4byte 0x0000300c
 _08139DB8: .4byte gSprites
 	thumb_func_end sub_8139D90
@@ -10745,7 +10452,7 @@ _08139DB8: .4byte gSprites
 sub_8139DBC: @ 8139DBC
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r6, _08139E08 @ =gUnknown_203B140
+	ldr r6, _08139E08 @ =gMonSummaryScreen
 	ldr r0, [r6]
 	ldr r4, _08139E0C @ =0x00003290
 	adds r0, r4
@@ -10778,7 +10485,7 @@ sub_8139DBC: @ 8139DBC
 	str r4, [sp, 0x4]
 	b _08139E58
 	.align 2, 0
-_08139E08: .4byte gUnknown_203B140
+_08139E08: .4byte gMonSummaryScreen
 _08139E0C: .4byte 0x00003290
 _08139E10: .4byte 0x000032f8
 _08139E14: .4byte CB2_ReturnToTradeMenuFromSummary
@@ -10829,7 +10536,7 @@ _08139E58:
 	cmp r0, 0
 	bne _08139EA8
 	ldr r2, _08139EA0 @ =gSprites
-	ldr r0, _08139EA4 @ =gUnknown_203B140
+	ldr r0, _08139EA4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08139E9C @ =0x00003014
 	adds r0, r1
@@ -10847,10 +10554,10 @@ _08139E58:
 _08139E98: .4byte SpriteCallbackDummy
 _08139E9C: .4byte 0x00003014
 _08139EA0: .4byte gSprites
-_08139EA4: .4byte gUnknown_203B140
+_08139EA4: .4byte gMonSummaryScreen
 _08139EA8:
 	ldr r2, _08139ED8 @ =gSprites
-	ldr r0, _08139EDC @ =gUnknown_203B140
+	ldr r0, _08139EDC @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _08139EE0 @ =0x00003014
 	adds r0, r1
@@ -10874,7 +10581,7 @@ _08139EC6:
 	bx r0
 	.align 2, 0
 _08139ED8: .4byte gSprites
-_08139EDC: .4byte gUnknown_203B140
+_08139EDC: .4byte gMonSummaryScreen
 _08139EE0: .4byte 0x00003014
 	thumb_func_end sub_8139DBC
 
@@ -10883,7 +10590,7 @@ sub_8139EE4: @ 8139EE4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _08139F14 @ =gSprites
-	ldr r1, _08139F18 @ =gUnknown_203B140
+	ldr r1, _08139F18 @ =gMonSummaryScreen
 	ldr r1, [r1]
 	ldr r2, _08139F1C @ =0x00003014
 	adds r1, r2
@@ -10905,14 +10612,14 @@ sub_8139EE4: @ 8139EE4
 	bx lr
 	.align 2, 0
 _08139F14: .4byte gSprites
-_08139F18: .4byte gUnknown_203B140
+_08139F18: .4byte gMonSummaryScreen
 _08139F1C: .4byte 0x00003014
 	thumb_func_end sub_8139EE4
 
 	thumb_func_start sub_8139F20
 sub_8139F20: @ 8139F20
 	push {r4,lr}
-	ldr r4, _08139F54 @ =gUnknown_203B140
+	ldr r4, _08139F54 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _08139F58 @ =0x00003290
 	adds r0, r1
@@ -10935,7 +10642,7 @@ sub_8139F20: @ 8139F20
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08139F54: .4byte gUnknown_203B140
+_08139F54: .4byte gMonSummaryScreen
 _08139F58: .4byte 0x00003290
 _08139F5C: .4byte 0x00003014
 _08139F60: .4byte gSprites
@@ -11159,7 +10866,7 @@ sub_813A124: @ 813A124
 	mov r6, r8
 	push {r6,r7}
 	movs r6, 0
-	ldr r3, _0813A19C @ =gUnknown_203B140
+	ldr r3, _0813A19C @ =gMonSummaryScreen
 	ldr r4, _0813A1A0 @ =gUnknown_203B148
 _0813A132:
 	ldr r0, [r3]
@@ -11217,7 +10924,7 @@ _0813A158:
 	strb r2, [r0]
 	b _0813A20E
 	.align 2, 0
-_0813A19C: .4byte gUnknown_203B140
+_0813A19C: .4byte gMonSummaryScreen
 _0813A1A0: .4byte gUnknown_203B148
 _0813A1A4: .4byte 0x00003268
 _0813A1A8: .4byte gUnknown_203B16D
@@ -11444,7 +11151,7 @@ _0813A358: .4byte gUnknown_203B158
 	thumb_func_start sub_813A35C
 sub_813A35C: @ 813A35C
 	push {r4,lr}
-	ldr r4, _0813A38C @ =gUnknown_203B140
+	ldr r4, _0813A38C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813A390 @ =0x00003290
 	adds r0, r1
@@ -11464,7 +11171,7 @@ sub_813A35C: @ 813A35C
 	bl sub_813A3B8
 	b _0813A3AE
 	.align 2, 0
-_0813A38C: .4byte gUnknown_203B140
+_0813A38C: .4byte gMonSummaryScreen
 _0813A390: .4byte 0x00003290
 _0813A394: .4byte 0x0000326c
 _0813A398:
@@ -11490,7 +11197,7 @@ sub_813A3B8: @ 813A3B8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, _0813A3EC @ =gUnknown_203B140
+	ldr r1, _0813A3EC @ =gMonSummaryScreen
 	ldr r2, [r1]
 	ldr r4, _0813A3F0 @ =0x0000326c
 	adds r0, r2, r4
@@ -11515,7 +11222,7 @@ _0813A3DA:
 	strb r0, [r1]
 	b _0813A416
 	.align 2, 0
-_0813A3EC: .4byte gUnknown_203B140
+_0813A3EC: .4byte gMonSummaryScreen
 _0813A3F0: .4byte 0x0000326c
 _0813A3F4: .4byte gUnknown_203B158
 _0813A3F8:
@@ -11600,7 +11307,7 @@ sub_813A45C: @ 813A45C
 	ldr r0, _0813A4C0 @ =gUnknown_8E9B4B8
 	mov r1, r9
 	bl LZ77UnCompWram
-	ldr r5, _0813A4C4 @ =gUnknown_203B140
+	ldr r5, _0813A4C4 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r4, _0813A4C8 @ =0x00003290
 	adds r0, r4
@@ -11621,7 +11328,7 @@ sub_813A45C: @ 813A45C
 	.align 2, 0
 _0813A4BC: .4byte gUnknown_203B15C
 _0813A4C0: .4byte gUnknown_8E9B4B8
-_0813A4C4: .4byte gUnknown_203B140
+_0813A4C4: .4byte gMonSummaryScreen
 _0813A4C8: .4byte 0x00003290
 _0813A4CC:
 	lsrs r0, r1, 1
@@ -11794,7 +11501,7 @@ sub_813A620: @ 813A620
 	sub sp, 0x8
 	movs r0, 0
 	mov r10, r0
-	ldr r5, _0813A688 @ =gUnknown_203B140
+	ldr r5, _0813A688 @ =gMonSummaryScreen
 	ldr r1, [r5]
 	movs r2, 0xC8
 	lsls r2, 6
@@ -11838,7 +11545,7 @@ _0813A684:
 	movs r6, 0
 	b _0813A696
 	.align 2, 0
-_0813A688: .4byte gUnknown_203B140
+_0813A688: .4byte gMonSummaryScreen
 _0813A68C: .4byte 0x00003290
 _0813A690:
 	movs r6, 0x1
@@ -12241,7 +11948,7 @@ sub_813A994: @ 813A994
 	push {r5-r7}
 	sub sp, 0x8
 	movs r7, 0
-	ldr r6, _0813AAD4 @ =gUnknown_203B140
+	ldr r6, _0813AAD4 @ =gMonSummaryScreen
 	ldr r1, [r6]
 	movs r2, 0xC8
 	lsls r2, 6
@@ -12395,7 +12102,7 @@ _0813AAB8:
 	bls _0813AAB8
 	b _0813AB04
 	.align 2, 0
-_0813AAD4: .4byte gUnknown_203B140
+_0813AAD4: .4byte gMonSummaryScreen
 _0813AAD8: .4byte 0x00003290
 _0813AADC: .4byte gExperienceTables
 _0813AAE0: .4byte gBaseStats
@@ -12637,7 +12344,7 @@ _0813ACB0: .4byte gUnknown_203B164
 	thumb_func_start sub_813ACB4
 sub_813ACB4: @ 813ACB4
 	push {r4,lr}
-	ldr r4, _0813ACE4 @ =gUnknown_203B140
+	ldr r4, _0813ACE4 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813ACE8 @ =0x00003290
 	adds r0, r1
@@ -12658,7 +12365,7 @@ sub_813ACB4: @ 813ACB4
 	bl sub_813ACF8
 	b _0813ACF2
 	.align 2, 0
-_0813ACE4: .4byte gUnknown_203B140
+_0813ACE4: .4byte gMonSummaryScreen
 _0813ACE8: .4byte 0x00003290
 _0813ACEC:
 	movs r0, 0x1
@@ -12674,7 +12381,7 @@ sub_813ACF8: @ 813ACF8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _0813AD44 @ =gUnknown_203B140
+	ldr r4, _0813AD44 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813AD48 @ =0x00003290
 	adds r0, r1
@@ -12707,7 +12414,7 @@ sub_813ACF8: @ 813ACF8
 	strb r0, [r2]
 	b _0813ADA2
 	.align 2, 0
-_0813AD44: .4byte gUnknown_203B140
+_0813AD44: .4byte gMonSummaryScreen
 _0813AD48: .4byte 0x00003290
 _0813AD4C: .4byte gUnknown_203B164
 _0813AD50:
@@ -12719,7 +12426,7 @@ _0813AD50:
 	movs r3, 0x4
 	orrs r0, r3
 	strb r0, [r1]
-	ldr r0, _0813AD8C @ =gUnknown_203B140
+	ldr r0, _0813AD8C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813AD90 @ =0x00003214
 	adds r0, r1
@@ -12741,7 +12448,7 @@ _0813AD50:
 	b _0813ADA0
 	.align 2, 0
 _0813AD88: .4byte gUnknown_203B164
-_0813AD8C: .4byte gUnknown_203B140
+_0813AD8C: .4byte gMonSummaryScreen
 _0813AD90: .4byte 0x00003214
 _0813AD94:
 	ldr r2, [r2]
@@ -12887,7 +12594,7 @@ sub_813AEB0: @ 813AEB0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _0813AEF8 @ =gUnknown_203B140
+	ldr r4, _0813AEF8 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813AEFC @ =0x00003290
 	adds r0, r1
@@ -12920,7 +12627,7 @@ sub_813AEB0: @ 813AEB0
 	adds r3, r4, 0
 	b _0813AF14
 	.align 2, 0
-_0813AEF8: .4byte gUnknown_203B140
+_0813AEF8: .4byte gMonSummaryScreen
 _0813AEFC: .4byte 0x00003290
 _0813AF00: .4byte gUnknown_203B168
 _0813AF04:
@@ -12933,7 +12640,7 @@ _0813AF04:
 	orrs r0, r2
 	strb r0, [r1]
 _0813AF14:
-	ldr r0, _0813AF34 @ =gUnknown_203B140
+	ldr r0, _0813AF34 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813AF38 @ =0x00003214
 	adds r0, r1
@@ -12949,7 +12656,7 @@ _0813AF14:
 	b _0813AF48
 	.align 2, 0
 _0813AF30: .4byte gUnknown_203B168
-_0813AF34: .4byte gUnknown_203B140
+_0813AF34: .4byte gMonSummaryScreen
 _0813AF38: .4byte 0x00003214
 _0813AF3C:
 	ldr r2, [r3]
@@ -12968,7 +12675,7 @@ _0813AF48:
 	thumb_func_start sub_813AF50
 sub_813AF50: @ 813AF50
 	push {r4,lr}
-	ldr r4, _0813AF7C @ =gUnknown_203B140
+	ldr r4, _0813AF7C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813AF80 @ =0x00003290
 	adds r0, r1
@@ -12988,7 +12695,7 @@ sub_813AF50: @ 813AF50
 	bl sub_813AEB0
 	b _0813AF8A
 	.align 2, 0
-_0813AF7C: .4byte gUnknown_203B140
+_0813AF7C: .4byte gMonSummaryScreen
 _0813AF80: .4byte 0x00003290
 _0813AF84:
 	movs r0, 0x1
@@ -13040,7 +12747,7 @@ sub_813AFC4: @ 813AFC4
 	thumb_func_start sub_813AFFC
 sub_813AFFC: @ 813AFFC
 	push {r4-r6,lr}
-	ldr r5, _0813B058 @ =gUnknown_203B140
+	ldr r5, _0813B058 @ =gMonSummaryScreen
 	ldr r0, [r5]
 	ldr r1, _0813B05C @ =0x00003290
 	adds r0, r1
@@ -13081,7 +12788,7 @@ _0813B04A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813B058: .4byte gUnknown_203B140
+_0813B058: .4byte gMonSummaryScreen
 _0813B05C: .4byte 0x00003290
 _0813B060: .4byte 0x000032fc
 _0813B064: .4byte gUnknown_84636E0
@@ -13090,7 +12797,7 @@ _0813B064: .4byte gUnknown_84636E0
 	thumb_func_start sub_813B068
 sub_813B068: @ 813B068
 	push {lr}
-	ldr r0, _0813B07C @ =gUnknown_203B140
+	ldr r0, _0813B07C @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813B080 @ =0x000032fc
 	adds r0, r1
@@ -13099,7 +12806,7 @@ sub_813B068: @ 813B068
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813B07C: .4byte gUnknown_203B140
+_0813B07C: .4byte gMonSummaryScreen
 _0813B080: .4byte 0x000032fc
 	thumb_func_end sub_813B068
 
@@ -13108,7 +12815,7 @@ sub_813B084: @ 813B084
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _0813B0B0 @ =gUnknown_203B140
+	ldr r4, _0813B0B0 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813B0B4 @ =0x00003290
 	adds r0, r1
@@ -13127,7 +12834,7 @@ sub_813B084: @ 813B084
 	strb r0, [r1]
 	b _0813B0DA
 	.align 2, 0
-_0813B0B0: .4byte gUnknown_203B140
+_0813B0B0: .4byte gMonSummaryScreen
 _0813B0B4: .4byte 0x00003290
 _0813B0B8: .4byte 0x000032fc
 _0813B0BC:
@@ -13157,7 +12864,7 @@ _0813B0E0: .4byte 0x000032fc
 	thumb_func_start sub_813B0E4
 sub_813B0E4: @ 813B0E4
 	push {r4,lr}
-	ldr r4, _0813B114 @ =gUnknown_203B140
+	ldr r4, _0813B114 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813B118 @ =0x00003290
 	adds r0, r1
@@ -13177,7 +12884,7 @@ sub_813B0E4: @ 813B0E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813B114: .4byte gUnknown_203B140
+_0813B114: .4byte gMonSummaryScreen
 _0813B118: .4byte 0x00003290
 _0813B11C: .4byte 0x000032fc
 	thumb_func_end sub_813B0E4
@@ -13187,7 +12894,7 @@ sub_813B120: @ 813B120
 	push {r4-r6,lr}
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r1, _0813B154 @ =gUnknown_203B140
+	ldr r1, _0813B154 @ =gMonSummaryScreen
 	ldr r2, [r1]
 	ldr r3, _0813B158 @ =0x0000321c
 	adds r0, r2, r3
@@ -13210,7 +12917,7 @@ sub_813B120: @ 813B120
 	ands r5, r0
 	b _0813B16C
 	.align 2, 0
-_0813B154: .4byte gUnknown_203B140
+_0813B154: .4byte gMonSummaryScreen
 _0813B158: .4byte 0x0000321c
 _0813B15C: .4byte 0x00003214
 _0813B160:
@@ -13277,7 +12984,7 @@ _0813B1CC:
 	ldr r0, _0813B200 @ =sub_813B3F0
 	movs r1, 0
 	bl CreateTask
-	ldr r0, _0813B204 @ =gUnknown_203B140
+	ldr r0, _0813B204 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813B208 @ =0x0000328c
 	adds r0, r1
@@ -13290,7 +12997,7 @@ _0813B1F4:
 	.align 2, 0
 _0813B1FC: .4byte gLastViewedMonIndex
 _0813B200: .4byte sub_813B3F0
-_0813B204: .4byte gUnknown_203B140
+_0813B204: .4byte gMonSummaryScreen
 _0813B208: .4byte 0x0000328c
 	thumb_func_end sub_813B120
 
@@ -13299,7 +13006,7 @@ sub_813B20C: @ 813B20C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _0813B258 @ =gUnknown_203B140
+	ldr r2, _0813B258 @ =gMonSummaryScreen
 	ldr r0, [r2]
 	ldr r3, _0813B25C @ =0x000032f4
 	adds r1, r0, r3
@@ -13337,7 +13044,7 @@ _0813B252:
 	adds r0, r4
 	b _0813B2BC
 	.align 2, 0
-_0813B258: .4byte gUnknown_203B140
+_0813B258: .4byte gMonSummaryScreen
 _0813B25C: .4byte 0x000032f4
 _0813B260: .4byte 0x00003214
 _0813B264: .4byte gLastViewedMonIndex
@@ -13357,7 +13064,7 @@ _0813B26E:
 	adds r1, r0, r3
 	cmp r1, 0
 	blt _0813B294
-	ldr r0, _0813B2A0 @ =gUnknown_203B140
+	ldr r0, _0813B2A0 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r2, _0813B2A4 @ =0x00003210
 	adds r0, r2
@@ -13370,7 +13077,7 @@ _0813B294:
 	b _0813B2C0
 	.align 2, 0
 _0813B29C: .4byte gLastViewedMonIndex
-_0813B2A0: .4byte gUnknown_203B140
+_0813B2A0: .4byte gMonSummaryScreen
 _0813B2A4: .4byte 0x00003210
 _0813B2A8:
 	movs r0, 0x64
@@ -13399,7 +13106,7 @@ sub_813B2C8: @ 813B2C8
 	bl GetMonData
 	cmp r0, 0
 	beq _0813B2FC
-	ldr r0, _0813B2F4 @ =gUnknown_203B140
+	ldr r0, _0813B2F4 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813B2F8 @ =0x00003214
 	adds r0, r1
@@ -13415,7 +13122,7 @@ _0813B2F0:
 	movs r0, 0x1
 	b _0813B2FE
 	.align 2, 0
-_0813B2F4: .4byte gUnknown_203B140
+_0813B2F4: .4byte gMonSummaryScreen
 _0813B2F8: .4byte 0x00003214
 _0813B2FC:
 	movs r0, 0
@@ -13567,7 +13274,7 @@ sub_813B3F0: @ 813B3F0
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, _0813B414 @ =gUnknown_203B140
+	ldr r1, _0813B414 @ =gMonSummaryScreen
 	ldr r0, [r1]
 	ldr r4, _0813B418 @ =0x0000328c
 	adds r2, r0, r4
@@ -13583,7 +13290,7 @@ _0813B40A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0813B414: .4byte gUnknown_203B140
+_0813B414: .4byte gMonSummaryScreen
 _0813B418: .4byte 0x0000328c
 _0813B41C: .4byte _0813B420
 	.align 2, 0
@@ -13607,7 +13314,7 @@ _0813B450:
 	strb r1, [r0]
 	ldr r0, _0813B46C @ =gUnknown_203B16E
 	strb r1, [r0]
-	ldr r0, _0813B470 @ =gUnknown_203B140
+	ldr r0, _0813B470 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _0813B474 @ =0x0000328c
 	adds r1, r0
@@ -13615,7 +13322,7 @@ _0813B450:
 	.align 2, 0
 _0813B468: .4byte gUnknown_203B16D
 _0813B46C: .4byte gUnknown_203B16E
-_0813B470: .4byte gUnknown_203B140
+_0813B470: .4byte gMonSummaryScreen
 _0813B474: .4byte 0x0000328c
 _0813B478:
 	bl sub_8139C80
@@ -13671,7 +13378,7 @@ _0813B4DC:
 	movs r2, 0
 	movs r3, 0
 	bl FillBgTilemapBufferRect_Palette0
-	ldr r4, _0813B52C @ =gUnknown_203B140
+	ldr r4, _0813B52C @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813B530 @ =0x00003290
 	adds r0, r1
@@ -13699,7 +13406,7 @@ _0813B4DC:
 	bl LoadPalette
 	b _0813B550
 	.align 2, 0
-_0813B52C: .4byte gUnknown_203B140
+_0813B52C: .4byte gMonSummaryScreen
 _0813B530: .4byte 0x00003290
 _0813B534: .4byte gUnknown_8E9B3D0
 _0813B538:
@@ -13714,17 +13421,17 @@ _0813B538:
 	movs r2, 0x20
 	bl LoadPalette
 _0813B550:
-	ldr r0, _0813B560 @ =gUnknown_203B140
+	ldr r0, _0813B560 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r4, _0813B564 @ =0x0000328c
 	adds r1, r4
 	b _0813B72C
 	.align 2, 0
 _0813B55C: .4byte gUnknown_8E9B310
-_0813B560: .4byte gUnknown_203B140
+_0813B560: .4byte gMonSummaryScreen
 _0813B564: .4byte 0x0000328c
 _0813B568:
-	ldr r4, _0813B5A8 @ =gUnknown_203B140
+	ldr r4, _0813B5A8 @ =gMonSummaryScreen
 	ldr r1, [r4]
 	ldr r2, _0813B5AC @ =0x00003214
 	adds r0, r1, r2
@@ -13754,7 +13461,7 @@ _0813B568:
 	bl CopyToBgTilemapBuffer
 	b _0813B5DC
 	.align 2, 0
-_0813B5A8: .4byte gUnknown_203B140
+_0813B5A8: .4byte gMonSummaryScreen
 _0813B5AC: .4byte 0x00003214
 _0813B5B0: .4byte gUnknown_8E9BBCC
 _0813B5B4: .4byte gUnknown_8E9B750
@@ -13776,7 +13483,7 @@ _0813B5B8:
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 _0813B5DC:
-	ldr r0, _0813B5F4 @ =gUnknown_203B140
+	ldr r0, _0813B5F4 @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r0, _0813B5F8 @ =0x0000328c
 	adds r1, r0
@@ -13785,7 +13492,7 @@ _0813B5DC:
 _0813B5E8: .4byte 0x0000323c
 _0813B5EC: .4byte gUnknown_8E9B598
 _0813B5F0: .4byte gUnknown_8E9B750
-_0813B5F4: .4byte gUnknown_203B140
+_0813B5F4: .4byte gMonSummaryScreen
 _0813B5F8: .4byte 0x0000328c
 _0813B5FC:
 	bl sub_81360D4
@@ -13822,18 +13529,18 @@ _0813B636:
 	bl sub_8136F4C
 	bl sub_81374E8
 	bl sub_8137BD0
-	ldr r0, _0813B64C @ =gUnknown_203B140
+	ldr r0, _0813B64C @ =gMonSummaryScreen
 	ldr r1, [r0]
 	ldr r4, _0813B650 @ =0x0000328c
 	adds r1, r4
 	b _0813B72C
 	.align 2, 0
-_0813B64C: .4byte gUnknown_203B140
+_0813B64C: .4byte gMonSummaryScreen
 _0813B650: .4byte 0x0000328c
 _0813B654:
 	bl sub_8138A38
 	bl sub_8138538
-	ldr r4, _0813B670 @ =gUnknown_203B140
+	ldr r4, _0813B670 @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r1, _0813B674 @ =0x00003214
 	adds r0, r1
@@ -13842,7 +13549,7 @@ _0813B654:
 	ldr r1, [r4]
 	b _0813B728
 	.align 2, 0
-_0813B670: .4byte gUnknown_203B140
+_0813B670: .4byte gMonSummaryScreen
 _0813B674: .4byte 0x00003214
 _0813B678:
 	ldr r0, [r5]
@@ -13914,7 +13621,7 @@ _0813B70C:
 	bl sub_813AFC4
 	bl sub_813B784
 _0813B724:
-	ldr r0, _0813B734 @ =gUnknown_203B140
+	ldr r0, _0813B734 @ =gMonSummaryScreen
 	ldr r1, [r0]
 _0813B728:
 	ldr r2, _0813B738 @ =0x0000328c
@@ -13925,7 +13632,7 @@ _0813B72C:
 	strb r0, [r1]
 	b _0813B746
 	.align 2, 0
-_0813B734: .4byte gUnknown_203B140
+_0813B734: .4byte gMonSummaryScreen
 _0813B738: .4byte 0x0000328c
 _0813B73C:
 	movs r0, 0
@@ -13970,7 +13677,7 @@ _0813B77E:
 	thumb_func_start sub_813B784
 sub_813B784: @ 813B784
 	push {r4,r5,lr}
-	ldr r4, _0813B7BC @ =gUnknown_203B140
+	ldr r4, _0813B7BC @ =gMonSummaryScreen
 	ldr r0, [r4]
 	ldr r5, _0813B7C0 @ =0x00003290
 	adds r0, r5
@@ -13994,7 +13701,7 @@ sub_813B784: @ 813B784
 	bl PlayCry3
 	b _0813B7DA
 	.align 2, 0
-_0813B7BC: .4byte gUnknown_203B140
+_0813B7BC: .4byte gMonSummaryScreen
 _0813B7C0: .4byte 0x00003290
 _0813B7C4:
 	ldr r0, [r4]
@@ -14034,7 +13741,7 @@ _0813B7F4:
 	thumb_func_start sub_813B7F8
 sub_813B7F8: @ 813B7F8
 	push {lr}
-	ldr r0, _0813B828 @ =gUnknown_203B140
+	ldr r0, _0813B828 @ =gMonSummaryScreen
 	ldr r0, [r0]
 	ldr r1, _0813B82C @ =0x00003290
 	adds r0, r1
@@ -14058,7 +13765,7 @@ _0813B824:
 	movs r0, 0x1
 	b _0813B832
 	.align 2, 0
-_0813B828: .4byte gUnknown_203B140
+_0813B828: .4byte gMonSummaryScreen
 _0813B82C: .4byte 0x00003290
 _0813B830:
 	movs r0, 0

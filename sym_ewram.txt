@@ -235,7 +235,7 @@
 
 	.align 2
 	@ .include "src/pokemon_summary_screen.o"
-gUnknown_203B140: @ 203B140
+gMonSummaryScreen: @ 203B140
 	.space 0x4
 
 gUnknown_203B144: @ 203B144

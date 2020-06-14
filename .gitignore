@@ -56,3 +56,5 @@ types_*.taghl
 _Deparsed_XSubs.pm
 porymap.project.cfg
 .vscode/*.*
+baserom.txt
+pokefirered.txt

@@ -2676,31 +2676,6 @@ _08106B24:
 _08106B30: .4byte gUnknown_203ACF0
 	thumb_func_end sub_8106AF8
 
-	thumb_func_start sub_8106B34
-sub_8106B34: @ 8106B34
-	push {lr}
-	ldr r0, _08106B58 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _08106B54
-	ldr r0, _08106B5C @ =gUnknown_203ACF0
-	ldr r0, [r0]
-	adds r0, 0x5A
-	ldrh r0, [r0]
-	movs r1, 0
-	movs r2, 0x7D
-	movs r3, 0xA
-	bl PlayCry2
-_08106B54:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08106B58: .4byte gMain
-_08106B5C: .4byte gUnknown_203ACF0
-	thumb_func_end sub_8106B34
-
 	thumb_func_start sub_8106B60
 sub_8106B60: @ 8106B60
 	push {r4,r5,lr}

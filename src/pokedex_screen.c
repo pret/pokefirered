@@ -2118,8 +2118,10 @@ bool8 sub_81052D0(u8 a0)
     return FALSE;
 }
 
-void sub_8106B34(void){
-    if(gMain.newKeys & 0x8){
+void sub_8106B34(void)
+{
+    if (JOY_NEW(START_BUTTON)) 
+    {
         PlayCry2(gUnknown_203ACF0->field_5A, 0, 125, 10);
     }
 }

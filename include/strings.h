@@ -1468,4 +1468,13 @@ extern const u8 gText_PokemonOnHook[];
 extern const u8 gText_NotEvenANibble[];
 extern const u8 gText_ItGotAway[];
 
+// pokemon_summary_screen
+extern const u8 gUnknown_8419C39[];
+extern const u8 gUnknown_8419C92[];
+extern const u8 gUnknown_8419CA2[];
+extern const u8 gUnknown_8419C45[];
+extern const u8 gUnknown_8419C82[];
+extern const u8 gUnknown_8416202[];
+extern const u8 gUnknown_84161EF[];
+
 #endif //GUARD_STRINGS_H

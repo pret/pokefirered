@@ -21,7 +21,7 @@ enum PokemonSummaryScreenMode
     PSS_MODE_NORMAL,
     PSS_MODE_UNK1,
     PSS_MODE_SELECT_MOVE,
-    PSS_MODE_UNK3,
+    PSS_MODE_FORGET_MOVE,
     PSS_MODE_UNK4,
     PSS_MODE_BOX,
 };

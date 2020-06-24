@@ -58,4 +58,15 @@ s32 GetLastViewedMonIndex(void);
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
 void sub_8138B38(u8);
 
+#define TAG_PSS_UNK_64 0x64
+#define TAG_PSS_UNK_65 0x65
+#define TAG_PSS_UNK_66 0x66
+#define TAG_PSS_UNK_67 0x67
+#define TAG_PSS_UNK_6E 0x6E
+#define TAG_PSS_UNK_78 0x78
+#define TAG_PSS_UNK_82 0x82
+#define TAG_PSS_UNK_8C 0x8C
+#define TAG_PSS_UNK_96 0x96
+#define TAG_PSS_UNK_A0 0xA0
+
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

@@ -18,6 +18,7 @@
 #include "constants/party_menu.h"
 #include "trade.h"
 #include "battle_main.h"
+#include "scanline_effect.h"
 
 extern void sub_8138B8C(struct Pokemon * mon);
 void sub_8135C34(void);
@@ -45,8 +46,8 @@ extern void sub_8136F4C(void);
 extern void sub_81374E8(void);
 extern void sub_8137BD0(void);
 extern void sub_8138A38(void);
-extern void sub_8136DA4(const u8 * str);
-extern void sub_8136DF0(const u8 * str);
+void sub_8136DA4(const u8 * str);
+void sub_8136DF0(const u8 * str);
 extern void sub_8136E50(const u8 * str);
 void sub_81358DC(u8, u8);
 extern void sub_813A838(u8 invisible);
@@ -60,15 +61,15 @@ extern void sub_813AEB0(u8 invisible);
 extern void sub_813A0E8(u8 invisible);
 extern void sub_8139EE4(u8 invisible);
 extern void sub_81381AC(void);
-extern void sub_8136BC4(void);
-extern void sub_8136BAC(void);
+void sub_8136BC4(void);
+void sub_8136BAC(void);
 u8 sub_8135F20(void);
-extern u8 sub_8136AEC(void);
+u8 sub_8136AEC(void);
 extern void sub_81381D0(void);
 u8 sub_8136040(void);
 extern void sub_8137E28(void);
 extern void sub_81381C0(void);
-extern void sub_8136D54(void);
+void sub_8136D54(void);
 extern void sub_81360D4(void);
 extern void sub_8136350(void);
 extern void sub_81367B0(void);
@@ -76,6 +77,18 @@ extern u8 sub_8138C5C(u32 status);
 void sub_81367E8(u8);
 extern u16 sub_8138BEC(struct Pokemon * mon, u8 i);
 extern u16 sub_8138C24(struct Pokemon * mon, u8 i);
+extern void sub_813ADA8(u16, u16);
+extern void sub_813ABAC(u16, u16);
+extern void sub_813AFFC(void);
+extern void sub_8139F64(u16, u16);
+extern void sub_813A254(u16, u16);
+extern void sub_813A45C(u16, u16);
+extern void sub_813A874(u16, u16);
+extern void sub_8139CB0(void);
+extern void sub_8139DBC(void);
+extern void sub_813995C(void);
+extern void sub_81393D4(u8 taskId);
+extern void sub_8137EE8(void);
 
 struct PokemonSummaryScreenData {
     u16 unk0[0x800];
@@ -253,6 +266,10 @@ extern const u32 gUnknown_8E9A460[];
 
 extern const u32 gUnknown_84636C0[];
 extern const u32 gUnknown_8463700[];
+
+extern const struct BgTemplate gUnknown_8463EFC[4];
+
+extern const u8 gUnknown_8463FA7[][3];
 
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, MainCallback savedCallback, u8 mode)
 {
@@ -1583,3 +1600,169 @@ void sub_81367E8(u8 i)
         ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk3188[i], gBattleMoves[gMonSummaryScreen->unk325A[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
 }
 
+u8 sub_8136AEC(void)
+{
+    switch (gMonSummaryScreen->unk327C)
+    {
+    case 0:
+        sub_813ADA8(TAG_PSS_UNK_A0, TAG_PSS_UNK_A0);
+        break;
+    case 1:
+        sub_813ABAC(TAG_PSS_UNK_96, TAG_PSS_UNK_96);
+        break;
+    case 2:
+        sub_813AFFC();
+        break;
+    case 3:
+        sub_8139F64(TAG_PSS_UNK_64, TAG_PSS_UNK_64);
+        break;
+    case 4:
+        sub_813A254(TAG_PSS_UNK_6E, TAG_PSS_UNK_6E);
+        break;
+    case 5:
+        sub_813A45C(TAG_PSS_UNK_78, TAG_PSS_UNK_78);
+        break;
+    case 6:
+        sub_813A874(TAG_PSS_UNK_82, TAG_PSS_UNK_82);
+        break;
+    case 7:
+        sub_8139CB0();
+        break;
+    case 8:
+        sub_8139DBC();
+        break;
+    default:
+        sub_813995C();
+        return TRUE;
+    }
+
+    gMonSummaryScreen->unk327C++;
+    return FALSE;
+}
+
+void sub_8136BAC(void)
+{
+    ResetSpriteData();
+    ResetPaletteFade();
+    FreeAllSpritePalettes();
+    ScanlineEffect_Stop();
+}
+
+void sub_8136BC4(void)
+{
+    DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+    DmaClear32(3, (void *)OAM, OAM_SIZE);
+    DmaClear16(3, (void *)PLTT, PLTT_SIZE);
+
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_8463EFC, ARRAY_COUNT(gUnknown_8463EFC));
+
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+
+    DeactivateAllTextPrinters();
+
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN1_ON);
+
+    sub_813B750(gMonSummaryScreen->curPageIndex);
+
+    SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_OBJ | WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3) << 8);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3);
+    SetGpuReg(REG_OFFSET_WIN1V, 32 << 8 | 135);
+    SetGpuReg(REG_OFFSET_WIN1H, 2 << 8 | 240);
+
+    SetBgTilemapBuffer(1, gMonSummaryScreen->unk0);
+    SetBgTilemapBuffer(2, gMonSummaryScreen->unk1000);
+    SetBgTilemapBuffer(3, gMonSummaryScreen->unk2000);
+
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+}
+
+void sub_8136D54(void)
+{
+    if (gMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE || gMonSummaryScreen->mode == PSS_MODE_FORGET_MOVE)
+        gMonSummaryScreen->unk3018 = CreateTask(sub_81393D4, 0);
+    else
+        gMonSummaryScreen->unk3018 = CreateTask(sub_8134840, 0);
+
+    SetMainCallback2(sub_8137EE8);
+}
+
+void sub_8136DA4(const u8 * str)
+{
+    FillWindowPixelBuffer(gMonSummaryScreen->unk3000[0], 0);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[0], 2, 4, 1, gUnknown_8463FA7[0], 0, str);
+    PutWindowTilemap(gMonSummaryScreen->unk3000[0]);
+}
+
+#ifdef NONMATCHING
+void sub_8136DF0(const u8 * str)
+{
+    u8 v0;
+
+    FillWindowPixelBuffer(gMonSummaryScreen->unk3000[1], 0);
+    v0 = (u8)(0x54 - GetStringWidth(0, str, 0));
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[1], 0, v0, 0, gUnknown_8463FA7[0], 0, str);
+    PutWindowTilemap(gMonSummaryScreen->unk3000[1]);
+}
+#else
+NAKED
+void sub_8136DF0(const u8 * str)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                "\tsub sp, 0xC\n"
+                "\tadds r6, r0, 0\n"
+                "\tldr r5, _08136E44 @ =gMonSummaryScreen\n"
+                "\tldr r0, [r5]\n"
+                "\tldr r4, _08136E48 @ =0x00003001\n"
+                "\tadds r0, r4\n"
+                "\tldrb r0, [r0]\n"
+                "\tmovs r1, 0\n"
+                "\tbl FillWindowPixelBuffer\n"
+                "\tmovs r0, 0\n"
+                "\tadds r1, r6, 0\n"
+                "\tmovs r2, 0\n"
+                "\tbl GetStringWidth\n"
+                "\tldr r1, [r5]\n"
+                "\tadds r1, r4\n"
+                "\tldrb r1, [r1]\n"
+                "\tmovs r2, 0x54\n"
+                "\tsubs r2, r0\n"
+                "\tlsls r2, 24\n"
+                "\tlsrs r2, 24\n"
+                "\tldr r0, _08136E4C @ =gUnknown_8463FA7\n"
+                "\tstr r0, [sp]\n"
+                "\tmovs r0, 0\n"
+                "\tstr r0, [sp, 0x4]\n"
+                "\tstr r6, [sp, 0x8]\n"
+                "\tadds r0, r1, 0\n"
+                "\tmovs r1, 0\n"
+                "\tmovs r3, 0\n"
+                "\tbl AddTextPrinterParameterized3\n"
+                "\tldr r0, [r5]\n"
+                "\tadds r0, r4\n"
+                "\tldrb r0, [r0]\n"
+                "\tbl PutWindowTilemap\n"
+                "\tadd sp, 0xC\n"
+                "\tpop {r4-r6}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_08136E44: .4byte gMonSummaryScreen\n"
+                "_08136E48: .4byte 0x00003001\n"
+                "_08136E4C: .4byte gUnknown_8463FA7\n");
+}
+#endif
+
+    

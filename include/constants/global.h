@@ -6,6 +6,7 @@
 #define ITEM_NAME_LENGTH 14
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
+#define MOVE_NAME_LENGTH 12
 
 #define VERSION_SAPPHIRE    1
 #define VERSION_RUBY        2

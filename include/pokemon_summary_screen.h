@@ -45,6 +45,15 @@ enum PokemonSummaryScreenState3270
     PSS_STATE3270_6
 };
 
+enum PokemonSummaryScreenStat
+{
+    PSS_STAT_ATK,
+    PSS_STAT_DEF,
+    PSS_STAT_SPA,
+    PSS_STAT_SPD,
+    PSS_STAT_SPE
+};
+
 s32 GetLastViewedMonIndex(void);
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
 void sub_8138B38(u8);

@@ -15,6 +15,9 @@
 #include "constants/items.h"
 #include "data.h"
 #include "item.h"
+#include "constants/party_menu.h"
+#include "trade.h"
+#include "battle_main.h"
 
 extern void sub_8138B8C(struct Pokemon * mon);
 void sub_8135C34(void);
@@ -69,6 +72,10 @@ extern void sub_8136D54(void);
 extern void sub_81360D4(void);
 extern void sub_8136350(void);
 extern void sub_81367B0(void);
+extern u8 sub_8138C5C(u32 status);
+void sub_81367E8(u8);
+extern u16 sub_8138BEC(struct Pokemon * mon, u8 i);
+extern u16 sub_8138C24(struct Pokemon * mon, u8 i);
 
 struct PokemonSummaryScreenData {
     u16 unk0[0x800];
@@ -108,8 +115,21 @@ struct PokemonSummaryScreenData {
 
         u8 ALIGNED(4) unk3084[3];
         u8 ALIGNED(4) unk3088[7];
+        u8 ALIGNED(4) unk3090[9];
+        u8 ALIGNED(4) unk309C[5][5];
 
-        u8 ALIGNED(4) pad3090[0x170];
+        u8 ALIGNED(4) unk30B8[5][11];
+        u8 ALIGNED(4) unk30F0[5][11];
+        u8 ALIGNED(4) unk3128[5][MOVE_NAME_LENGTH + 1];
+        u8 ALIGNED(4) unk316C[5][5];
+        u8 ALIGNED(4) unk3188[5][5];
+
+        u8 ALIGNED(4) unk31A4[9];
+        u8 ALIGNED(4) unk31B0[9];
+
+        u8 ALIGNED(4) unk31BC[13];
+        u8 ALIGNED(4) unk31CC[20];
+        u8 ALIGNED(4) pad31E0[0x20];
 
         // u8 ALIGNED(4) unk3090[9];
         // u8 ALIGNED(4) unk309C[5][5];
@@ -1405,3 +1425,161 @@ void sub_81360D4(void)
     else
         CopyItemName(heldItem, gMonSummaryScreen->summary.unk3074);
 }
+
+#define MACRO_8136350_0(x) (63 - StringLength((x)) * 6)
+#define MACRO_8136350_1(x) (27 - StringLength((x)) * 6)
+
+void sub_8136350(void)
+{
+    u8 tempStr[20];
+    u8 level;
+    u16 type;
+    u16 species;
+    u16 hp;
+    u16 statValue;
+    u32 exp;
+    u32 expToNextLevel;
+
+    hp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_HP);
+    ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk3090, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gMonSummaryScreen->summary.unk3090, gText_Slash);
+
+    hp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MAX_HP);
+    ConvertIntToDecimalStringN(tempStr, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gMonSummaryScreen->summary.unk3090, tempStr);
+
+    gUnknown_203B144->unk02 = MACRO_8136350_0(gMonSummaryScreen->summary.unk3090);
+
+    if (gMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary && gMonSummaryScreen->isEnemyParty == TRUE)
+    {
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_ATK2);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_ATK], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk04 = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_ATK]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_DEF2);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_DEF], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk06 = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_DEF]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPATK2);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPA], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk08 = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPA]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPDEF2);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPD], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk0A = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPD]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPEED2);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPE], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk0C = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPE]);
+    }
+    else
+    {
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_ATK);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_ATK], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk04 = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_ATK]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_DEF);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_DEF], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk06 = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_DEF]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPATK);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPA], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk08 = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPA]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPDEF);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPD], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk0A = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPD]);
+
+        statValue = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPEED);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPE], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+        gUnknown_203B144->unk0C = MACRO_8136350_1(gMonSummaryScreen->summary.unk309C[PSS_STAT_SPE]);
+    }
+
+    exp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_EXP);
+    ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk31A4, exp, STR_CONV_MODE_LEFT_ALIGN, 7);
+    gUnknown_203B144->unk0E = MACRO_8136350_0(gMonSummaryScreen->summary.unk31A4);
+
+    level = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_LEVEL);
+    expToNextLevel = 0;
+    if (level < 100)
+    {
+        species = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES);
+        expToNextLevel = gExperienceTables[gBaseStats[species].growthRate][level + 1] - exp;
+    }
+
+    ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk31B0, expToNextLevel, STR_CONV_MODE_LEFT_ALIGN, 7);
+    gUnknown_203B144->unk10 = MACRO_8136350_0(gMonSummaryScreen->summary.unk31B0);
+
+    type = GetAbilityBySpecies(GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES), GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_ABILITY_NUM));
+    StringCopy(gMonSummaryScreen->summary.unk31BC, gAbilityNames[type]);
+    StringCopy(gMonSummaryScreen->summary.unk31CC, gAbilityDescriptionPointers[type]);
+
+    gMonSummaryScreen->unk326C = sub_8138C5C(GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_STATUS));
+    if (gMonSummaryScreen->unk326C == AILMENT_NONE)
+        if (CheckPartyPokerus(&gMonSummaryScreen->currentMon, 0))
+            gMonSummaryScreen->unk326C = AILMENT_PKRS;
+}
+
+void sub_81367B0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sub_81367E8(i);
+
+    if (gMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
+        sub_81367E8(4);
+}
+
+#define MACRO_81367E8_0(a, b) ((6 * (a)) - StringLength((b)) * 6)
+
+void sub_81367E8(u8 i)
+{
+    if (i < 4)
+        gMonSummaryScreen->unk325A[i] = sub_8138BEC(&gMonSummaryScreen->currentMon, i);
+
+    if (gMonSummaryScreen->unk325A[i] == 0)
+    {
+        StringCopy(gMonSummaryScreen->summary.unk3128[i], gUnknown_841620E);
+        StringCopy(gMonSummaryScreen->summary.unk30B8[i], gUnknown_8416210);
+        StringCopy(gMonSummaryScreen->summary.unk316C[i], gText_ThreeHyphens);
+        StringCopy(gMonSummaryScreen->summary.unk3188[i], gText_ThreeHyphens);
+        gUnknown_203B144->unk12[i] = 0xff;
+        gUnknown_203B144->unk1C[i] = 0xff;
+        return;
+    }
+
+    gMonSummaryScreen->unk3264++;
+    gMonSummaryScreen->unk3250[i] = gBattleMoves[gMonSummaryScreen->unk325A[i]].type;
+    StringCopy(gMonSummaryScreen->summary.unk3128[i], gMoveNames[gMonSummaryScreen->unk325A[i]]);
+
+    if (i >= 4 && gMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
+    {
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk30B8[i],
+                                   gBattleMoves[gMonSummaryScreen->unk325A[i]].pp, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk30F0[i],
+                                   gBattleMoves[gMonSummaryScreen->unk325A[i]].pp, STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk30B8[i],
+                                   sub_8138C24(&gMonSummaryScreen->currentMon, i), STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk30F0[i],
+                                   CalculatePPWithBonus(gMonSummaryScreen->unk325A[i], GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_PP_BONUSES), i),
+                                   STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+
+    gUnknown_203B144->unk12[i] = MACRO_81367E8_0(2, gMonSummaryScreen->summary.unk30B8[i]);
+    gUnknown_203B144->unk1C[i] = MACRO_81367E8_0(2, gMonSummaryScreen->summary.unk30F0[i]);
+
+    if (gBattleMoves[gMonSummaryScreen->unk325A[i]].power <= 1)
+        StringCopy(gMonSummaryScreen->summary.unk316C[i], gText_ThreeHyphens);
+    else
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk316C[i], gBattleMoves[gMonSummaryScreen->unk325A[i]].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    if (gBattleMoves[gMonSummaryScreen->unk325A[i]].accuracy == 0)
+        StringCopy(gMonSummaryScreen->summary.unk3188[i], gText_ThreeHyphens);
+    else
+        ConvertIntToDecimalStringN(gMonSummaryScreen->summary.unk3188[i], gBattleMoves[gMonSummaryScreen->unk325A[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+}
+

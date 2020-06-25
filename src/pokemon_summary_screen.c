@@ -19,6 +19,10 @@
 #include "trade.h"
 #include "battle_main.h"
 #include "scanline_effect.h"
+#include "constants/moves.h"
+#include "dynamic_placeholder_text_util.h"
+#include "constants/region_map_sections.h"
+#include "region_map.h"
 
 extern void sub_8138B8C(struct Pokemon * mon);
 void sub_8135C34(void);
@@ -89,6 +93,18 @@ extern void sub_8139DBC(void);
 extern void sub_813995C(void);
 extern void sub_81393D4(u8 taskId);
 extern void sub_8137EE8(void);
+extern void sub_8136FB0(void);
+extern void sub_81370EC(void);
+extern void sub_8137270(void);
+extern void sub_81372E4(u8 i);
+extern void sub_8137554(void);
+extern void sub_8137A90(void);
+extern void sub_8137AF8(void);
+extern void sub_8137944(void);
+extern void sub_8137970(void);
+extern bool32 sub_813B838(u8 metLocation);
+extern bool32 sub_8138B4C(void);
+extern bool32 sub_813B7E0(u8 nature);
 
 struct PokemonSummaryScreenData {
     u16 unk0[0x800];
@@ -269,7 +285,10 @@ extern const u32 gUnknown_8463700[];
 
 extern const struct BgTemplate gUnknown_8463EFC[4];
 
-extern const u8 gUnknown_8463FA7[][3];
+extern const u8 gUnknown_8463FA4[][3];
+extern const u8 gUnknown_8463EF0[][3];
+
+extern const u8 * const gUnknown_8463EC4[];
 
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, MainCallback savedCallback, u8 mode)
 {
@@ -1702,67 +1721,275 @@ void sub_8136D54(void)
 void sub_8136DA4(const u8 * str)
 {
     FillWindowPixelBuffer(gMonSummaryScreen->unk3000[0], 0);
-    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[0], 2, 4, 1, gUnknown_8463FA7[0], 0, str);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[0], 2, 4, 1, gUnknown_8463FA4[1], 0, str);
     PutWindowTilemap(gMonSummaryScreen->unk3000[0]);
 }
 
-#ifdef NONMATCHING
 void sub_8136DF0(const u8 * str)
 {
     u8 v0;
+    s32 width;
+    u8 r1;
 
     FillWindowPixelBuffer(gMonSummaryScreen->unk3000[1], 0);
-    v0 = (u8)(0x54 - GetStringWidth(0, str, 0));
-    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[1], 0, v0, 0, gUnknown_8463FA7[0], 0, str);
+    width = GetStringWidth(0, str, 0);
+    r1 = gMonSummaryScreen->unk3000[1];
+    AddTextPrinterParameterized3(r1, 0, 0x54 - width, 0, gUnknown_8463FA4[1], 0, str);
     PutWindowTilemap(gMonSummaryScreen->unk3000[1]);
 }
-#else
-NAKED
-void sub_8136DF0(const u8 * str)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tsub sp, 0xC\n"
-                "\tadds r6, r0, 0\n"
-                "\tldr r5, _08136E44 @ =gMonSummaryScreen\n"
-                "\tldr r0, [r5]\n"
-                "\tldr r4, _08136E48 @ =0x00003001\n"
-                "\tadds r0, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tmovs r1, 0\n"
-                "\tbl FillWindowPixelBuffer\n"
-                "\tmovs r0, 0\n"
-                "\tadds r1, r6, 0\n"
-                "\tmovs r2, 0\n"
-                "\tbl GetStringWidth\n"
-                "\tldr r1, [r5]\n"
-                "\tadds r1, r4\n"
-                "\tldrb r1, [r1]\n"
-                "\tmovs r2, 0x54\n"
-                "\tsubs r2, r0\n"
-                "\tlsls r2, 24\n"
-                "\tlsrs r2, 24\n"
-                "\tldr r0, _08136E4C @ =gUnknown_8463FA7\n"
-                "\tstr r0, [sp]\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tstr r6, [sp, 0x8]\n"
-                "\tadds r0, r1, 0\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r3, 0\n"
-                "\tbl AddTextPrinterParameterized3\n"
-                "\tldr r0, [r5]\n"
-                "\tadds r0, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tbl PutWindowTilemap\n"
-                "\tadd sp, 0xC\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_08136E44: .4byte gMonSummaryScreen\n"
-                "_08136E48: .4byte 0x00003001\n"
-                "_08136E4C: .4byte gUnknown_8463FA7\n");
-}
-#endif
 
-    
+void sub_8136E50(const u8 * msg)
+{
+    FillWindowPixelBuffer(gMonSummaryScreen->unk3000[2], 0);
+
+    if (!gMonSummaryScreen->isEgg)
+    {
+        if (gMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES_INFO)
+            AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[2], 2, 4, 2, gUnknown_8463FA4[1], 0xff, gMonSummaryScreen->summary.unk3088);
+
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[2], 2, 40, 2, gUnknown_8463FA4[1], 0xff, gMonSummaryScreen->summary.unk3034);
+
+        if (GetMonGender(&gMonSummaryScreen->currentMon) == MON_FEMALE)
+            AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[2], 2, 105, 2, gUnknown_8463FA4[3], 0, gMonSummaryScreen->summary.unk3084);
+        else
+            AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[2], 2, 105, 2, gUnknown_8463FA4[2], 0, gMonSummaryScreen->summary.unk3084);
+    }
+
+    PutWindowTilemap(gMonSummaryScreen->unk3000[2]);
+}
+
+void sub_8136F4C(void)
+{
+    FillWindowPixelBuffer(gMonSummaryScreen->unk3000[3], 0);
+
+    switch (gMonSummaryScreen->curPageIndex)
+    {
+    case PSS_PAGE_INFO:
+        sub_8136FB0();
+        break;
+    case PSS_PAGE_SKILLS:
+        sub_81370EC();
+        break;
+    case PSS_PAGE_MOVES:
+    case PSS_PAGE_MOVES_INFO:
+        sub_8137270();
+        break;
+    }
+
+    PutWindowTilemap(gMonSummaryScreen->unk3000[3]);
+}
+
+void sub_8136FB0(void)
+{
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 47, 19, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk3028);
+
+    if (!gMonSummaryScreen->isEgg)
+    {
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 47 + gUnknown_203B144->unk00, 5, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk3064);
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 47, 49, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk3040);
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 47, 64, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk306C);
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 47, 79, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk3074);
+    }
+    else
+    {
+        u8 eggCycles;
+        u8 hatchMsgIndex;
+
+        eggCycles = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP);
+
+        if (eggCycles <= 5)
+            hatchMsgIndex = 3;
+        else if (eggCycles <= 10)
+            hatchMsgIndex = 2;
+        else if (eggCycles <= 40)
+            hatchMsgIndex = 1;
+        else
+            hatchMsgIndex = 0;
+
+        if (gMonSummaryScreen->isBadEgg)
+            hatchMsgIndex = 0;
+
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 7, 45, gUnknown_8463FA4[0], TEXT_SPEED_FF, gUnknown_8463EC4[hatchMsgIndex]);
+    }
+}
+
+void sub_81370EC(void)
+{
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 14 + gUnknown_203B144->unk02, 4, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk3090);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 50 + gUnknown_203B144->unk04, 22, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk309C[PSS_STAT_ATK]);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 50 + gUnknown_203B144->unk06, 35, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk309C[PSS_STAT_DEF]);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 50 + gUnknown_203B144->unk08, 48, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk309C[PSS_STAT_SPA]);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 50 + gUnknown_203B144->unk0A, 61, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk309C[PSS_STAT_SPD]);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 50 + gUnknown_203B144->unk0C, 74, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk309C[PSS_STAT_SPE]);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 15 + gUnknown_203B144->unk0E, 87, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk31A4);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 15 + gUnknown_203B144->unk10, 100, gUnknown_8463FA4[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk31B0);
+}
+
+#define MACRO_8137270(x) ((x) * 28 + 5)
+
+void sub_8137270(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sub_81372E4(i);
+
+    if (gMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
+    {
+        if (gMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
+            sub_81372E4(4);
+        else
+            AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 3, MACRO_8137270(4), gUnknown_8463EF0[0], TEXT_SPEED_FF, gFameCheckerText_Cancel);
+    }
+}
+
+#define MACRO_81372E4(x) ((x) * 28 + 16)
+
+void sub_81372E4(u8 i)
+{
+    u8 v0 = 0;
+    u8 curPP = sub_8138C24(&gMonSummaryScreen->currentMon, i);
+    u16 move = gMonSummaryScreen->unk325A[i];
+    u8 ppBonuses = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_PP_BONUSES);
+    u8 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
+
+    if (i == 4)
+        curPP = maxPP;
+
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 3, MACRO_8137270(i), gUnknown_8463EF0[0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk3128[i]);
+
+    if (gMonSummaryScreen->unk325A[i] == 0 || (curPP == maxPP))
+        v0 = 0;
+    else if (curPP == 0)
+        v0 = 3;
+    else if (maxPP == 3)
+    {
+        if (curPP == 2)
+            v0 = 2;
+        else if (curPP == 1)
+            v0 = 1;
+    }
+    else if (maxPP == 2)
+    {
+        if (curPP == 1)
+            v0 = 1;
+    }
+    else
+    {
+        if (curPP <= (maxPP / 4))
+            v0 = 2;
+        else if (curPP <= (maxPP / 2))
+            v0 = 1;
+    }
+
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 36, MACRO_81372E4(i), gUnknown_8463EF0[v0], TEXT_SPEED_FF, gUnknown_8416238);
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 46 + gUnknown_203B144->unk12[i], MACRO_81372E4(i), gUnknown_8463EF0[v0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk30B8[i]);
+
+    if (gMonSummaryScreen->unk325A[i] != MOVE_NONE)
+    {
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 58, MACRO_81372E4(i), gUnknown_8463EF0[v0], TEXT_SPEED_FF, gText_Slash);
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 64 + gUnknown_203B144->unk1C[i], MACRO_81372E4(i), gUnknown_8463EF0[v0], TEXT_SPEED_FF, gMonSummaryScreen->summary.unk30F0[i]);
+    }
+}
+
+void sub_81374E8(void)
+{
+    FillWindowPixelBuffer(gMonSummaryScreen->unk3000[4], 0);
+
+    switch (gMonSummaryScreen->curPageIndex)
+    {
+    case PSS_PAGE_INFO:
+        sub_8137554();
+        break;
+    case PSS_PAGE_SKILLS:
+        sub_8137A90();
+        break;
+    case PSS_PAGE_MOVES_INFO:
+        sub_8137AF8();
+        break;
+    case PSS_PAGE_MOVES:
+        break;
+    }
+
+    PutWindowTilemap(gMonSummaryScreen->unk3000[4]);
+}
+
+void sub_8137554(void)
+{
+    if (!gMonSummaryScreen->isEgg)
+        sub_8137944();
+    else
+        sub_8137970();
+}
+
+void sub_8137578(void)
+{
+    u8 nature;
+    u8 level;
+    u8 metLocation;
+    u8 levelStr[5];
+    u8 mapNameStr[32];
+    u8 natureMetOrHatchedAtLevelStr[152];
+
+    DynamicPlaceholderTextUtil_Reset();
+    nature = GetNature(&gMonSummaryScreen->currentMon);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gNatureNamePointers[nature]);
+    level = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LEVEL);
+
+    if (level == 0)
+        level = 5;
+
+    ConvertIntToDecimalStringN(levelStr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, levelStr);
+
+    metLocation = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LOCATION);
+
+    if (sub_813B838(metLocation) == TRUE)
+        GetMapNameGeneric_(mapNameStr, metLocation);
+    else
+    {
+        if (gMonSummaryScreen->isEnemyParty == TRUE || sub_8138B4C() == TRUE)
+            StringCopy(mapNameStr, gUnknown_8419C13);
+        else
+            StringCopy(mapNameStr, gUnknown_8419C0B);
+    }
+
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, mapNameStr);
+
+    if (GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LEVEL) == 0)
+    {
+        if (GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_OBEDIENCE) == 1)
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_841996D);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_841992F);
+        }
+        else
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84198D5);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84198B4);
+        }
+    }
+    else
+    {
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER)
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84197ED);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84197B8);
+        }
+        else
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419841);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419822);
+        }
+    }
+
+    AddTextPrinterParameterized4(gMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, gUnknown_8463FA4[0], TEXT_SPEED_FF, natureMetOrHatchedAtLevelStr);
+}

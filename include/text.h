@@ -141,6 +141,7 @@
 
 #define NUM_TEXT_PRINTERS 32
 
+#define TEXT_SPEED_INSTANT 0
 #define TEXT_SPEED_FF 0xFF
 
 enum

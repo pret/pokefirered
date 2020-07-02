@@ -105,6 +105,8 @@ extern void sub_8137970(void);
 extern bool32 sub_813B838(u8 metLocation);
 extern bool32 sub_8138B4C(void);
 extern bool32 sub_813B7E0(u8 nature);
+void sub_8137724(void);
+extern bool32 sub_813B7F8(void);
 
 struct PokemonSummaryScreenData {
     u16 unk0[0x800];
@@ -1988,6 +1990,101 @@ void sub_8137578(void)
                 DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419841);
             else
                 DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419822);
+        }
+    }
+
+    AddTextPrinterParameterized4(gMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, gUnknown_8463FA4[0], TEXT_SPEED_FF, natureMetOrHatchedAtLevelStr);
+}
+
+void sub_8137724(void)
+{
+    u8 nature;
+    u8 level;
+    u8 metLocation;
+    u8 levelStr[5];
+    u8 mapNameStr[32];
+    u8 natureMetOrHatchedAtLevelStr[152];
+
+    DynamicPlaceholderTextUtil_Reset();
+    nature = GetNature(&gMonSummaryScreen->currentMon);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gNatureNamePointers[nature]);
+
+    level = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LEVEL);
+
+    if (level == 0)
+        level = 5;
+
+    ConvertIntToDecimalStringN(levelStr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, levelStr);
+
+    metLocation = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LOCATION);
+
+    if (!sub_813B838(metLocation) || !sub_813B7F8())
+    {
+        if (sub_8138B4C() == TRUE)
+        {
+            sub_8137578();
+            return;
+        }
+
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER)
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84197ED);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84197B8);
+        }
+        else
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_841979D);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419782);
+        }
+
+        AddTextPrinterParameterized4(gMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, gUnknown_8463FA4[0], TEXT_SPEED_FF, natureMetOrHatchedAtLevelStr);
+        return;
+    }
+
+    if (sub_813B838(metLocation) == TRUE)
+        GetMapNameGeneric_(mapNameStr, metLocation);
+    else
+        StringCopy(mapNameStr, gUnknown_8419C0B);
+
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, mapNameStr);
+
+    if (GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LEVEL) == 0)
+    {
+        if (GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_OBEDIENCE) == 1)
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84199F4);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84199AB);
+        }
+        else
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_841988A);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419860);
+        }
+    }
+    else
+    {
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER)
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84197ED);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_84197B8);
+        }
+        else
+        {
+            if (sub_813B7E0(nature))
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_841988A);
+            else
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gUnknown_8419860);
         }
     }
 

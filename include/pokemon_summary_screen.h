@@ -32,6 +32,8 @@ enum PokemonSummaryScreenPage
     PSS_PAGE_SKILLS,
     PSS_PAGE_MOVES,
     PSS_PAGE_MOVES_INFO,
+    PSS_PAGE_UNK4,
+    PSS_PAGE_MOVE_DELETER,
 };
 
 enum PokemonSummaryScreenState3270
@@ -54,7 +56,7 @@ enum PokemonSummaryScreenStat
     PSS_STAT_SPE
 };
 
-s32 GetLastViewedMonIndex(void);
+u8 GetLastViewedMonIndex(void);
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
 void sub_8138B38(u8);
 

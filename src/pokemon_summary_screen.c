@@ -98,15 +98,16 @@ extern void sub_81370EC(void);
 extern void sub_8137270(void);
 extern void sub_81372E4(u8 i);
 extern void sub_8137554(void);
-extern void sub_8137A90(void);
+void sub_8137A90(void);
 extern void sub_8137AF8(void);
-extern void sub_8137944(void);
-extern void sub_8137970(void);
+void sub_8137944(void);
+void sub_8137970(void);
 extern bool32 sub_813B838(u8 metLocation);
 extern bool32 sub_8138B4C(void);
 extern bool32 sub_813B7E0(u8 nature);
 void sub_8137724(void);
 extern bool32 sub_813B7F8(void);
+extern u8 sub_813847C(struct Pokemon * mon);
 
 struct PokemonSummaryScreenData {
     u16 unk0[0x800];
@@ -291,6 +292,7 @@ extern const u8 gUnknown_8463FA4[][3];
 extern const u8 gUnknown_8463EF0[][3];
 
 extern const u8 * const gUnknown_8463EC4[];
+extern const u8 * const gUnknown_8463ED4[];
 
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, MainCallback savedCallback, u8 mode)
 {
@@ -2089,4 +2091,99 @@ void sub_8137724(void)
     }
 
     AddTextPrinterParameterized4(gMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, gUnknown_8463FA4[0], TEXT_SPEED_FF, natureMetOrHatchedAtLevelStr);
+}
+
+void sub_8137944(void)
+{
+    if (sub_813847C(&gMonSummaryScreen->currentMon) == TRUE)
+        sub_8137578();
+    else
+        sub_8137724();
+}
+
+void sub_8137970(void)
+{
+    u8 metLocation;
+    u8 version;
+    u8 chosenStrIndex = 0;
+
+    metLocation = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_LOCATION);
+
+    if (gMonSummaryScreen->monList.mons != gEnemyParty)
+    {
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER || GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_OBEDIENCE) == 1)
+            chosenStrIndex = 4;
+        else
+        {
+            version = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
+
+            if (version != VERSION_LEAF_GREEN && version != VERSION_FIRE_RED)
+                chosenStrIndex = 1;
+            else if (metLocation == METLOC_SPECIAL_EGG)
+                chosenStrIndex = 2;
+
+            if (chosenStrIndex == 0 || chosenStrIndex == 2)
+                if (sub_813847C(&gMonSummaryScreen->currentMon) == FALSE)
+                    chosenStrIndex++;
+        }
+    }
+    else
+    {
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER || GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_OBEDIENCE) == 1)
+            chosenStrIndex = 4;
+        else
+        {
+            version = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
+
+            if (version != VERSION_LEAF_GREEN && version != VERSION_FIRE_RED)
+            {
+                if (metLocation == METLOC_SPECIAL_EGG)
+                    chosenStrIndex = 5;
+            }
+            else if (metLocation == METLOC_SPECIAL_EGG)
+                chosenStrIndex = 2;
+
+            if (sub_813847C(&gMonSummaryScreen->currentMon) == FALSE)
+                chosenStrIndex++;
+        }
+    }
+
+    if (gMonSummaryScreen->isBadEgg)
+        chosenStrIndex = 0;
+
+    AddTextPrinterParameterized4(gMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, gUnknown_8463FA4[0], TEXT_SPEED_FF, gUnknown_8463ED4[chosenStrIndex]);
+}
+
+void sub_8137A90(void)
+{
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[4], 2,
+                                 26, 7, gUnknown_8463FA4[0], TEXT_SPEED_FF,
+                                 gUnknown_8419C4D);
+
+    AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[4], 2,
+                                 26, 20, gUnknown_8463FA4[0], TEXT_SPEED_FF,
+                                 gUnknown_8419C59);
+}
+
+void sub_8137AF8(void)
+{
+    if (gUnknown_203B16D < 5)
+    {
+        if (gMonSummaryScreen->mode != PSS_MODE_SELECT_MOVE && gUnknown_203B16D == 4)
+            return;
+
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[4], 2,
+                                     57, 1, gUnknown_8463FA4[0], TEXT_SPEED_FF,
+                                     gMonSummaryScreen->summary.unk316C[gUnknown_203B16D]);
+
+        AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[4], 2,
+                                     57, 15, gUnknown_8463FA4[0], TEXT_SPEED_FF,
+                                     gMonSummaryScreen->summary.unk3188[gUnknown_203B16D]);
+
+        AddTextPrinterParameterized4(gMonSummaryScreen->unk3000[4], 2,
+                                     7, 42,
+                                     0, 0,
+                                     gUnknown_8463FA4[0], TEXT_SPEED_FF,
+                                     gMoveDescriptionPointers[gMonSummaryScreen->unk325A[gUnknown_203B16D] - 1]);
+    }
 }

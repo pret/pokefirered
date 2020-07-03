@@ -1503,5 +1503,6 @@ extern const u8 gUnknown_8419C72[];
 extern const u8 gUnknown_8419C2A[];
 extern const u8 gUnknown_8419C7B[];
 extern const u8 gUnknown_8419CA9[];
+extern const u8 gUnknown_8419CB9[];
 
 #endif //GUARD_STRINGS_H

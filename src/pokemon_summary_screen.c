@@ -28,6 +28,8 @@
 #include "constants/battle.h"
 #include "event_data.h"
 #include "trainer_pokemon_sprites.h"
+#include "battle_anim.h"
+#include "pokeball.h"
 
 extern void sub_8138B8C(struct Pokemon * mon);
 void sub_8135C34(void);
@@ -141,20 +143,12 @@ struct PokemonSummaryScreenData {
     bool32 isEnemyParty; /* 0x3024 */
 
     struct PokeSummary {
-        // u8 ALIGNED(4) unk3028[POKEMON_NAME_LENGTH];
-        // u8 ALIGNED(4) unk3034[POKEMON_NAME_LENGTH + 1];
-
-        // u8 ALIGNED(4) unk3040[OT_NAME_LENGTH + 1];
-        // u8 ALIGNED(4) unk3048[2][OT_NAME_LENGTH + 1];
-
         u8 ALIGNED(4) unk3028[POKEMON_NAME_LENGTH];
         u8 ALIGNED(4) unk3034[POKEMON_NAME_LENGTH + 1];
         u8 ALIGNED(4) unk3040[12];
         u8 ALIGNED(4) unk304C[2][12];
 
         u8 ALIGNED(4) unk3064[5];
-        //u8 ALIGNED(4) unk3060[7];
-        //u8 ALIGNED(4) unk3068[16];
         u8 ALIGNED(4) unk306C[7];
         u8 ALIGNED(4) unk3074[ITEM_NAME_LENGTH + 1];
 
@@ -175,22 +169,6 @@ struct PokemonSummaryScreenData {
         u8 ALIGNED(4) unk31BC[13];
         u8 ALIGNED(4) unk31CC[20];
         u8 ALIGNED(4) pad31E0[0x20];
-
-        // u8 ALIGNED(4) unk3090[9];
-        // u8 ALIGNED(4) unk309C[5][5];
-
-        // u8 ALIGNED(4) unk30AC[5][11];
-        // u8 ALIGNED(4) unk30E4[5][11];
-        // u8 ALIGNED(4) unk311C[5][13];
-        // u8 ALIGNED(4) pssd4[5][5];
-        // u8 ALIGNED(4) pssd5[5][5];
-
-        // u8 ALIGNED(4) pssd6[9];
-        // u8 ALIGNED(4) pssd7[9];
-
-        // u8 ALIGNED(4) pssd8[13];
-        // u8 ALIGNED(4) pssd9[20];
-        // u8 ALIGNED(4) tempPadRemoveLater[0x2c];
     } summary;
 
     u8 ALIGNED(4) isEgg; /* 0x3200 */
@@ -3512,4 +3490,35 @@ void sub_8139AAC(u16 spriteId)
         gUnknown_203B170->unk08 = 0;
 
     gSprites[spriteId].callback = sub_8139768;
+}
+
+void sub_8139C44(u8 invisible)
+{
+    gSprites[gMonSummaryScreen->unk3010].invisible = invisible;
+}
+
+void sub_8139C80(void)
+{
+    FreeAndDestroyMonPicSprite(gMonSummaryScreen->unk3010);
+    FREE_AND_SET_NULL(gUnknown_203B170);
+}
+
+void sub_8139CB0(void)
+{
+    u16 ballItemId;
+    u8 ballId;
+
+    if (gMonSummaryScreen->isEgg == 0)
+        ballItemId = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_POKEBALL);
+    else
+        ballItemId = 0;
+
+    ballId = ItemIdToBallId(ballItemId);
+    LoadBallGfx(ballId);
+
+    gMonSummaryScreen->unk300C = CreateSprite(&gBallSpriteTemplates[ballId], 106, 88, 0);
+    gSprites[gMonSummaryScreen->unk300C].callback = SpriteCallbackDummy;
+    gSprites[gMonSummaryScreen->unk300C].oam.priority = 0;
+
+    sub_8139D54(1);
 }

@@ -3,10 +3,8 @@
 
 #include "main.h"
 
-extern u8 gLastViewedMonIndex;
-
-extern const u8 *const gMoveDescriptionPointers[];
-extern const u8 *const gNatureNamePointers[];
+extern const u8 * const gMoveDescriptionPointers[];
+extern const u8 * const gNatureNamePointers[];
 
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
 void ShowPokemonSummaryScreenSet40EF(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));

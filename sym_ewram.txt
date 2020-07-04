@@ -232,45 +232,8 @@
 	.include "src/tm_case.o"
 	.align 2
 	.include "src/menu_indicators.o"
-
 	.align 2
-	@ .include "src/pokemon_summary_screen.o"
-gMonSummaryScreen: @ 203B140
-	.space 0x4
-
-gUnknown_203B144: @ 203B144
-	.space 0x4
-
-gUnknown_203B148: @ 203B148
-	.space 0x10
-
-gUnknown_203B158: @ 203B158
-	.space 0x4
-
-gUnknown_203B15C: @ 203B15C
-	.space 0x4
-
-gUnknown_203B160: @ 203B160
-	.space 0x4
-
-gUnknown_203B164: @ 203B164
-	.space 0x4
-
-gUnknown_203B168: @ 203B168
-	.space 0x4
-
-gLastViewedMonIndex: @ 203B16C
-	.space 0x1
-
-gUnknown_203B16D: @ 203B16D
-	.space 0x1
-
-gUnknown_203B16E: @ 203B16E
-	.space 0x2
-
-gUnknown_203B170: @ 203B170
-	.space 0x4
-
+	.include "src/pokemon_summary_screen.o"
 	.align 2
 	.include "src/help_system.o"
 	.align 2

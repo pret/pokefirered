@@ -316,17 +316,18 @@ struct Struct203B168
     u16 unk06; /* 0x06 */
 };
 
-extern struct PokemonSummaryScreenData * gMonSummaryScreen;
-extern struct Struct203B144 * gUnknown_203B144;
-extern struct Struct203B148 * gUnknown_203B148[4];
-extern struct Struct203B158 * gUnknown_203B158;
-extern struct Struct203B15C * gUnknown_203B15C;
-extern struct Struct203B160 * gUnknown_203B160;
-extern struct Struct203B164 * gUnknown_203B164;
-extern struct Struct203B168 * gUnknown_203B168;
-extern u8 gUnknown_203B16D;
-extern u8 gUnknown_203B16E;
-extern struct Struct203B170 * gUnknown_203B170;
+static EWRAM_DATA struct PokemonSummaryScreenData * gMonSummaryScreen = NULL;
+static EWRAM_DATA struct Struct203B144 * gUnknown_203B144 = NULL;
+static EWRAM_DATA struct Struct203B148 * gUnknown_203B148[4] = {};
+static EWRAM_DATA struct Struct203B158 * gUnknown_203B158 = NULL;
+static EWRAM_DATA struct Struct203B15C * gUnknown_203B15C = NULL;
+static EWRAM_DATA struct Struct203B160 * gUnknown_203B160 = NULL;
+static EWRAM_DATA struct Struct203B164 * gUnknown_203B164 = NULL;
+static EWRAM_DATA struct Struct203B168 * gUnknown_203B168 = NULL;
+static EWRAM_DATA u8 gLastViewedMonIndex = 0;
+static EWRAM_DATA u8 gUnknown_203B16D = 0;
+static EWRAM_DATA u8 gUnknown_203B16E = 0;
+static EWRAM_DATA struct Struct203B170 * gUnknown_203B170 = NULL;
 
 extern const u32 gUnknown_8E9B750[];
 extern const u32 gUnknown_8E9B950[];

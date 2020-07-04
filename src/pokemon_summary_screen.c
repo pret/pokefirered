@@ -231,7 +231,7 @@ struct PokemonSummaryScreenData
     u8 ALIGNED(4) unk3288; /* 0x3288 */
     u8 ALIGNED(4) unk328C; /* 0x328C */
 
-    struct Pokemon currentMon;
+    struct Pokemon currentMon; /* 0x3290 */
 
     union
     {
@@ -398,6 +398,7 @@ extern const struct OamData gUnknown_8463B30;
 extern const union AnimCmd * const gUnknown_8463B40[];
 
 extern const u16 gUnknown_84636E0[];
+extern const u8 gUnknown_8463FB8[];
 
 #define FREE_AND_SET_NULL_IF_SET(ptr) \
 {                                     \
@@ -2415,9 +2416,9 @@ void sub_8137C90(void)
         BlitMoveInfoIcon(gMonSummaryScreen->unk3000[5], gMonSummaryScreen->unk3250[4] + 1, 3, MACRO_8137270(4));
 }
 
-void sub_8137D28(u8 page)
+void sub_8137D28(u8 curPageIndex)
 {
-    switch (page)
+    switch (curPageIndex)
     {
     case PSS_PAGE_INFO:
         sub_8136DA4(gUnknown_8419C1D);
@@ -4442,4 +4443,269 @@ void sub_813B120(u8 taskId, s8 a1)
     gLastViewedMonIndex = v0;
     CreateTask(sub_813B3F0, 0);
     gMonSummaryScreen->unk328C = 0;
+}
+
+s8 sub_813B20C(s8 a0)
+{
+    struct Pokemon * partyMons = gMonSummaryScreen->monList.mons;
+    s8 v1 = 0;
+
+    if (gMonSummaryScreen->curPageIndex == 0)
+    {
+        if (a0 == -1 && gLastViewedMonIndex == 0)
+            return -1;
+        else if (a0 == 1 && gLastViewedMonIndex >= gMonSummaryScreen->lastIndex)
+            return -1;
+        else
+            return gLastViewedMonIndex + a0;
+    }
+
+    while (TRUE)
+    {
+        v1 += a0;
+        if (0 > gLastViewedMonIndex + v1 || gLastViewedMonIndex + v1 > gMonSummaryScreen->lastIndex)
+            return -1;
+
+        if (GetMonData(&partyMons[gLastViewedMonIndex + v1], MON_DATA_IS_EGG) == 0)
+            return gLastViewedMonIndex + v1;
+    }
+
+    return -1;
+}
+
+u8 sub_813B2C8(struct Pokemon * partyMons)
+{
+    if (GetMonData(partyMons, MON_DATA_SPECIES) != 0 && (gMonSummaryScreen->curPageIndex != 0 || GetMonData(partyMons, MON_DATA_IS_EGG) == 0))
+        return TRUE;
+
+    return FALSE;
+}
+
+s8 sub_813B304(u8 a0)
+{
+    while (TRUE)
+    {
+        a0++;
+
+        if (a0 == 6)
+            return -1;
+        if (sub_813B2C8(&gPlayerParty[gUnknown_8463FB8[a0]]) == TRUE)
+            break;
+    }
+
+    return (s8)gUnknown_8463FB8[a0];
+}
+
+s8 sub_813B348(u8 a0)
+{
+    while (1)
+    {
+        if (a0 == 0)
+            return -1;
+
+        a0--;
+
+        if (sub_813B2C8(&gPlayerParty[gUnknown_8463FB8[a0]]) == TRUE)
+            break;
+    }
+
+    return (s8)(gUnknown_8463FB8[a0]);
+}
+
+s8 sub_813B38C(s8 a0)
+{
+    u8 v0 = 0;
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        if (gUnknown_8463FB8[i] == GetLastViewedMonIndex())
+        {
+            v0 = i;
+            break;
+        }
+
+    if ((a0 == -1 && v0 == 0)
+        || (a0 == 1 && v0 == 5))
+        return -1;
+
+    if (a0 == 1)
+        return sub_813B304(v0);
+    else
+        return sub_813B348(v0);
+}
+
+void sub_813B3F0(u8 id)
+{
+    switch (gMonSummaryScreen->unk328C)
+    {
+    case 0:
+        StopCryAndClearCrySongs();
+        gUnknown_203B16D = 0;
+        gUnknown_203B16E = 0;
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 1:
+        sub_8139C80();
+        sub_8139F20();
+        sub_8139D90();
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 2:
+        sub_8138B8C(&gMonSummaryScreen->currentMon);
+
+        gMonSummaryScreen->isEgg = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_IS_EGG);
+        gMonSummaryScreen->isBadEgg = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SANITY_IS_BAD_EGG);
+
+        if (gMonSummaryScreen->isBadEgg == TRUE)
+            gMonSummaryScreen->isEgg = TRUE;
+
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 3:
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+
+        if (IsMonShiny(&gMonSummaryScreen->currentMon) == TRUE && !gMonSummaryScreen->isEgg)
+        {
+            LoadPalette(&gUnknown_8E9B310[16 * 6], 0, 0x20);
+            LoadPalette(&gUnknown_8E9B310[16 * 5], 0x10, 0x20);
+        }
+        else
+        {
+            LoadPalette(&gUnknown_8E9B310[16 * 0], 0, 0x20);
+            LoadPalette(&gUnknown_8E9B310[16 * 1], 0x10, 0x20);
+        }
+
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 4:
+        if (gMonSummaryScreen->curPageIndex == PSS_PAGE_INFO)
+        {
+            if (gMonSummaryScreen->isEgg)
+            {
+                CopyToBgTilemapBuffer(gMonSummaryScreen->unk323C, gUnknown_8E9BBCC, 0, 0);
+                CopyToBgTilemapBuffer(gMonSummaryScreen->unk3240, gUnknown_8E9B750, 0, 0);
+            }
+            else
+            {
+                CopyToBgTilemapBuffer(gMonSummaryScreen->unk323C, gUnknown_8E9B598, 0, 0);
+                CopyToBgTilemapBuffer(gMonSummaryScreen->unk3240, gUnknown_8E9B750, 0, 0);
+            }
+        }
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 5:
+        sub_81360D4();
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 6:
+        if (!gMonSummaryScreen->isEgg)
+            sub_8136350();
+
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 7:
+        if (!gMonSummaryScreen->isEgg)
+            sub_81367B0();
+
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 8:
+        sub_8136F4C();
+        sub_81374E8();
+        sub_8137BD0();
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 9:
+        sub_8138A38();
+        sub_8138538();
+        sub_8137D28(gMonSummaryScreen->curPageIndex);
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 10:
+        CopyWindowToVram(gMonSummaryScreen->unk3000[0], 2);
+        CopyWindowToVram(gMonSummaryScreen->unk3000[1], 2);
+        CopyWindowToVram(gMonSummaryScreen->unk3000[2], 2);
+        CopyWindowToVram(gMonSummaryScreen->unk3000[6], 2);
+        CopyWindowToVram(gMonSummaryScreen->unk3000[3], 2);
+        CopyWindowToVram(gMonSummaryScreen->unk3000[4], 2);
+        CopyWindowToVram(gMonSummaryScreen->unk3000[5], 2);
+        CopyBgTilemapBufferToVram(0);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(3);
+        gMonSummaryScreen->unk328C++;
+        break;
+    case 11:
+        if (!Overworld_LinkRecvQueueLengthMoreThan2() && !sub_800B270())
+        {
+            sub_813AFC4();
+            sub_813B784();
+            gMonSummaryScreen->unk328C++;
+        }
+        break;
+    default:
+        gMonSummaryScreen->unk328C = 0;
+        DestroyTask(id);
+        break;
+    }
+}
+
+void sub_813B750(u8 curPageIndex)
+{
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
+
+    switch (curPageIndex)
+    {
+    case PSS_PAGE_INFO:
+    case PSS_PAGE_SKILLS:
+    case PSS_PAGE_MOVES:
+        SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) | DISPCNT_WIN1_ON);
+        break;
+    default:
+        break;
+    }
+}
+
+void sub_813B784(void)
+{
+    if (!GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_IS_EGG))
+    {
+        if (ShouldPlayNormalPokeCry(&gMonSummaryScreen->currentMon) == TRUE)
+            PlayCry3(GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES2), 0, 0);
+        else
+            PlayCry3(GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES2), 0, 11);
+    }
+}
+
+bool32 sub_813B7E0(u8 nature)
+{
+    if (nature == NATURE_BOLD || nature == NATURE_GENTLE)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_813B7F8(void)
+{
+    u8 version = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
+
+    if (version == VERSION_LEAF_GREEN
+        || version == VERSION_FIRE_RED
+        || version == VERSION_RUBY
+        || version == VERSION_SAPPHIRE
+        || version == VERSION_EMERALD)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_813B838(u8 place)
+{
+    if (place >= MAPSECS_KANTO && place < MAPSEC_NONE)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_813B854(void)
+{
+    ShowPokemonSummaryScreen(0, 0, 0, CB2_ReturnToField, PSS_MODE_NORMAL);
 }

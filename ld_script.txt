@@ -269,7 +269,6 @@ SECTIONS {
         src/menu_indicators.o(.text);
         src/pokedex_area_markers.o(.text);
         src/pokemon_summary_screen.o(.text);
-        asm/pokemon_summary_screen.o(.text);
         src/help_system.o(.text);
         src/wild_pokemon_area.o(.text);
         src/dynamic_placeholder_text_util.o(.text);

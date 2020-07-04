@@ -30,5 +30,7 @@ u8 GetMonIconPaletteIndexFromSpecies(u16 species);
 u16 GetIconSpecies(u16 species, u32 personality);
 void LoadMonIconPalettesAt(u16 offset);
 u8 GetValidMonIconPalIndex(u16 species);
+void SafeLoadMonIconPalette(u16 species);
+void SafeFreeMonIconPalette(u16 species);
 
 #endif // GUARD_POKEMON_ICON_H

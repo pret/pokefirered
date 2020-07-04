@@ -30,6 +30,13 @@
 #include "trainer_pokemon_sprites.h"
 #include "battle_anim.h"
 #include "pokeball.h"
+#include "pokemon_icon.h"
+#include "battle_interface.h"
+#include "mon_markings.h"
+#include "pokemon_storage_system.h"
+
+// needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
+extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
 
 extern void sub_8138B8C(struct Pokemon * mon);
 void sub_8135C34(void);
@@ -123,8 +130,19 @@ extern void sub_81390B0(void);
 extern void sub_81391EC(void);
 extern void sub_8139328(struct Pokemon * mon);
 extern void sub_8139AAC(u16 spriteId);
+extern void sub_813A124(struct Sprite * sprite);
+extern void sub_813A35C(void);
+extern void sub_813A620(void);
+extern void sub_813A994(void);
+extern void sub_813ACB4(void);
+extern void sub_813AF50(void);
+extern void sub_813B068(void);
+extern void sub_813B0E4(void);
+extern s8 sub_813B20C(s8);
+extern s8 sub_813B38C(s8);
 
-struct PokemonSummaryScreenData {
+struct PokemonSummaryScreenData
+{
     u16 unk0[0x800];
     u16 unk1000[0x800];
     u16 unk2000[0x800];
@@ -142,7 +160,8 @@ struct PokemonSummaryScreenData {
 
     bool32 isEnemyParty; /* 0x3024 */
 
-    struct PokeSummary {
+    struct PokeSummary
+    {
         u8 ALIGNED(4) unk3028[POKEMON_NAME_LENGTH];
         u8 ALIGNED(4) unk3034[POKEMON_NAME_LENGTH + 1];
         u8 ALIGNED(4) unk3040[12];
@@ -214,7 +233,8 @@ struct PokemonSummaryScreenData {
 
     struct Pokemon currentMon;
 
-    union {
+    union
+    {
         struct Pokemon * mons;
         struct BoxPokemon * boxMons;
     } monList;
@@ -226,7 +246,8 @@ struct PokemonSummaryScreenData {
     u8 ALIGNED(4) unk3304[3]; /* 0x3304 */
 };
 
-struct Struct203B144 {
+struct Struct203B144
+{
     u16 unk00;
     u16 unk02;
     u16 unk04;
@@ -243,30 +264,66 @@ struct Struct203B144 {
     u16 unk26;
 };
 
-struct Struct203B160 {
-    struct Sprite * sprite00[11]; /* 0x00 */
+struct Struct203B160
+{
+    struct Sprite * sprites[11]; /* 0x00 */
     u16 unk2C[11]; /* 0x2c */
     u16 unk42; /* 0x42 */
     u16 unk44; /* 0x44 */
 };
 
-struct Struct203B15C {
-    struct Sprite * sprite00[10]; /* 0x00 */
+struct Struct203B15C
+{
+    struct Sprite * sprites[10]; /* 0x00 */
     u16 unk28[10]; /* 0x28 */
     u16 unk3C; /* 0x3c */
     u16 unk3E; /* 0x3e */
 };
 
-struct Struct203B170 {
+struct Struct203B170
+{
     u8 ALIGNED(4) unk00; /* 0x00 */
     u8 ALIGNED(4) unk04; /* 0x04 */
     u8 ALIGNED(4) unk08; /* 0x08 */
 };
 
+struct Struct203B148
+{
+    struct Sprite * sprite; /* 0x00 */
+    u16 unk04; /* 0x04 */
+    u16 unk06; /* 0x06 */
+    u16 unk08; /* 0x08 */
+};
+
+struct Struct203B158
+{
+    struct Sprite * sprite; /* 0x00 */
+    u16 unk04; /* 0x04 */
+    u16 unk06; /* 0x06 */
+};
+
+struct Struct203B164
+{
+    struct Sprite * sprite; /* 0x00 */
+    u16 unk04; /* 0x04 */
+    u16 unk06; /* 0x06 */
+};
+
+struct Struct203B168
+{
+    struct Sprite * sprite; /* 0x00 */
+    u16 unk04; /* 0x04 */
+    u16 unk06; /* 0x06 */
+};
+
 extern struct PokemonSummaryScreenData * gMonSummaryScreen;
 extern struct Struct203B144 * gUnknown_203B144;
+extern struct Struct203B148 * gUnknown_203B148[4];
+extern struct Struct203B158 * gUnknown_203B158;
 extern struct Struct203B15C * gUnknown_203B15C;
 extern struct Struct203B160 * gUnknown_203B160;
+extern struct Struct203B164 * gUnknown_203B164;
+extern struct Struct203B168 * gUnknown_203B168;
 extern u8 gUnknown_203B16D;
 extern u8 gUnknown_203B16E;
 extern struct Struct203B170 * gUnknown_203B170;
@@ -307,6 +364,40 @@ extern const s8 gUnknown_8463FCD[7];
 extern const s8 gUnknown_8463FD4[11];
 extern const s8 gUnknown_8463FDF[11];
 extern const s8 gUnknown_8463FEA[15];
+
+extern const u32 gUnknown_8463740[];
+extern const u32 gUnknown_846386C[];
+
+extern const u16 gUnknown_8463720[];
+extern const struct OamData gUnknown_846398C;
+extern const union AnimCmd * const gUnknown_84639A4[];
+
+extern const u32 gUnknown_8E9BF48[];
+extern const u16 gUnknown_8E9BF28[];
+
+extern const struct OamData gUnknown_84639AC;
+extern const union AnimCmd * const gUnknown_84639F4[];
+
+extern const u32 gUnknown_8E9B4B8[];
+extern const u16 * const gUnknown_8463FFC[];
+extern const struct OamData gUnknown_8463A14;
+extern const union AnimCmd * const gUnknown_8463A7C[];
+
+extern const u32 gUnknown_8E9B3F0[];
+extern const u16 gUnknown_8E9B578[];
+
+extern const u32 gUnknown_8463B20[];
+extern const u16 gUnknown_8463B00[];
+
+extern const struct OamData gUnknown_8463AEC;
+extern const union AnimCmd * const gUnknown_8463AFC[];
+
+extern const u32 gUnknown_8463B64[];
+extern const u16 gUnknown_8463B44[];
+extern const struct OamData gUnknown_8463B30;
+extern const union AnimCmd * const gUnknown_8463B40[];
+
+extern const u16 gUnknown_84636E0[];
 
 #define FREE_AND_SET_NULL_IF_SET(ptr) \
 {                                     \
@@ -876,12 +967,12 @@ void sub_813546C(void)
     for (i = 0; i < 11; i++)
     {
         gUnknown_203B160->unk2C[i] = (8 * i) + 396;
-        gUnknown_203B160->sprite00[i]->pos1.x = gUnknown_203B160->unk2C[i];
+        gUnknown_203B160->sprites[i]->pos1.x = gUnknown_203B160->unk2C[i];
         if (i >= 9)
             continue;
 
         gUnknown_203B15C->unk28[i] = (8 * i) + 412;
-        gUnknown_203B15C->sprite00[i]->pos1.x = gUnknown_203B15C->unk28[i];
+        gUnknown_203B15C->sprites[i]->pos1.x = gUnknown_203B15C->unk28[i];
     }
 }
 
@@ -891,11 +982,11 @@ void sub_81354C4(void)
     for (i = 0; i < 11; i++)
     {
         gUnknown_203B160->unk2C[i] = (8 * i) + 156;
-        gUnknown_203B160->sprite00[i]->pos1.x = gUnknown_203B160->unk2C[i];
+        gUnknown_203B160->sprites[i]->pos1.x = gUnknown_203B160->unk2C[i];
         if (i >= 9)
             continue;
         gUnknown_203B15C->unk28[i] = (8 * i) + 172;
-        gUnknown_203B15C->sprite00[i]->pos1.x = gUnknown_203B15C->unk28[i];
+        gUnknown_203B15C->sprites[i]->pos1.x = gUnknown_203B15C->unk28[i];
     }
 }
 
@@ -1151,17 +1242,17 @@ void sub_81358DC(u8 a0, u8 a1)
     for (i = 0; i < 11; i++)
     {
         if (gMonSummaryScreen->curPageIndex == PSS_PAGE_SKILLS && gMonSummaryScreen->unk3224 == 1)
-            gUnknown_203B160->sprite00[i]->oam.priority = bg0Priority;
+            gUnknown_203B160->sprites[i]->oam.priority = bg0Priority;
         else
-            gUnknown_203B160->sprite00[i]->oam.priority = bg1Priority;
+            gUnknown_203B160->sprites[i]->oam.priority = bg1Priority;
 
         if (i >= 9)
             continue;
 
         if (gMonSummaryScreen->curPageIndex == PSS_PAGE_SKILLS && gMonSummaryScreen->unk3224 == 1)
-            gUnknown_203B15C->sprite00[i]->oam.priority = bg0Priority;
+            gUnknown_203B15C->sprites[i]->oam.priority = bg0Priority;
         else
-            gUnknown_203B15C->sprite00[i]->oam.priority = bg1Priority;
+            gUnknown_203B15C->sprites[i]->oam.priority = bg1Priority;
     }
 
     SetGpuReg(REG_OFFSET_BG0CNT, (GetGpuReg(REG_OFFSET_BG0CNT) & 0xfffc) | bg0Priority);
@@ -2408,7 +2499,7 @@ void sub_8137F00(void)
         if (gUnknown_203B160->unk2C[i] < 240)
         {
             gUnknown_203B160->unk2C[i] += 60;
-            gUnknown_203B160->sprite00[i]->pos1.x = gUnknown_203B160->unk2C[i] + 60;
+            gUnknown_203B160->sprites[i]->pos1.x = gUnknown_203B160->unk2C[i] + 60;
         }
 
         if (i >= 9)
@@ -2417,7 +2508,7 @@ void sub_8137F00(void)
         if (gUnknown_203B15C->unk28[i] < 240)
         {
             gUnknown_203B15C->unk28[i] += 60;
-            gUnknown_203B15C->sprite00[i]->pos1.x = gUnknown_203B15C->unk28[i] + 60;
+            gUnknown_203B15C->sprites[i]->pos1.x = gUnknown_203B15C->unk28[i] + 60;
         }
     }
 }
@@ -2435,7 +2526,7 @@ void sub_8137F68(void)
             if (gUnknown_203B160->unk2C[i] < 156 + (8 * i))
                 gUnknown_203B160->unk2C[i] = 156 + (8 * i);
 
-            gUnknown_203B160->sprite00[i]->pos1.x = gUnknown_203B160->unk2C[i];
+            gUnknown_203B160->sprites[i]->pos1.x = gUnknown_203B160->unk2C[i];
         }
 
         if (i >= 9)
@@ -2448,7 +2539,7 @@ void sub_8137F68(void)
             if (gUnknown_203B15C->unk28[i] < 172 + (8 * i))
                 gUnknown_203B15C->unk28[i] = 172 + (8 * i);
 
-            gUnknown_203B15C->sprite00[i]->pos1.x = gUnknown_203B15C->unk28[i];
+            gUnknown_203B15C->sprites[i]->pos1.x = gUnknown_203B15C->unk28[i];
         }
     }
 }
@@ -3221,7 +3312,7 @@ void sub_81393D4(u8 taskId)
 
                 gMonSummaryScreen->unk3288 = 3;
 
-                if (gMonSummaryScreen->unk3268 == 1)
+                if (gMonSummaryScreen->unk3268 == TRUE)
                     v0--;
 
                 for (i = gUnknown_203B16D; i < v0; i++)
@@ -3232,7 +3323,7 @@ void sub_81393D4(u8 taskId)
                         return;
                     }
 
-                if (gMonSummaryScreen->unk3268 == 0)
+                if (!gMonSummaryScreen->unk3268)
                 {
                     PlaySE(SE_SELECT);
                     gUnknown_203B16D = i;
@@ -3508,7 +3599,7 @@ void sub_8139CB0(void)
     u16 ballItemId;
     u8 ballId;
 
-    if (gMonSummaryScreen->isEgg == 0)
+    if (!gMonSummaryScreen->isEgg)
         ballItemId = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_POKEBALL);
     else
         ballItemId = 0;
@@ -3521,4 +3612,834 @@ void sub_8139CB0(void)
     gSprites[gMonSummaryScreen->unk300C].oam.priority = 0;
 
     sub_8139D54(1);
+}
+
+void sub_8139D54(u8 invisible)
+{
+    gSprites[gMonSummaryScreen->unk300C].invisible = invisible;
+}
+
+void sub_8139D90(void)
+{
+    DestroySpriteAndFreeResources2(&gSprites[gMonSummaryScreen->unk300C]);
+}
+
+void sub_8139DBC(void)
+{
+    u16 species;
+    u32 personality;
+
+    species = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES2);
+    personality = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_PERSONALITY);
+
+    SafeLoadMonIconPalette(species);
+
+    if (gMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary)
+    {
+        if (gMonSummaryScreen->isEnemyParty == TRUE)
+            gMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 0);
+        else
+            gMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);
+    }
+    else
+    {
+        if (sub_804455C(3, gLastViewedMonIndex))
+            gMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 0);
+        else
+            gMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);
+    }
+
+    if (!IsPokeSpriteNotFlipped(species))
+        gSprites[gMonSummaryScreen->unk3014].hFlip = TRUE;
+    else
+        gSprites[gMonSummaryScreen->unk3014].hFlip = FALSE;
+
+    sub_8139EE4(1);
+}
+
+void sub_8139EE4(u8 invisible)
+{
+    gSprites[gMonSummaryScreen->unk3014].invisible = invisible;
+}
+
+void sub_8139F20(void)
+{
+    u16 species;
+    species = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES2);
+    SafeFreeMonIconPalette(species);
+    DestroyMonIcon(&gSprites[gMonSummaryScreen->unk3014]);
+}
+
+void sub_8139F64(u16 tileTag, u16 palTag)
+{
+    u8 i;
+    u8 spriteId;
+    void * gfxBufferPtrs[2];
+    gfxBufferPtrs[0] = AllocZeroed(0x20 * 64);
+    gfxBufferPtrs[1] = AllocZeroed(0x20 * 64);
+
+    gUnknown_203B148[0] = AllocZeroed(sizeof(struct Struct203B148));
+    gUnknown_203B148[1] = AllocZeroed(sizeof(struct Struct203B148));
+    gUnknown_203B148[2] = AllocZeroed(sizeof(struct Struct203B148));
+    gUnknown_203B148[3] = AllocZeroed(sizeof(struct Struct203B148));
+
+    LZ77UnCompWram(gUnknown_8463740, gfxBufferPtrs[0]);
+    LZ77UnCompWram(gUnknown_846386C, gfxBufferPtrs[1]);
+
+    for (i = 0; i < 4; i++)
+    {
+        struct SpriteSheet sheet = {
+            .data = gfxBufferPtrs[i % 2],
+            .size = 0x20 * 64,
+            .tag = tileTag + i
+        };
+
+        struct SpritePalette palette = {.data = gUnknown_8463720, .tag = palTag};
+        struct SpriteTemplate template = {
+            .tileTag = tileTag + i,
+            .paletteTag = palTag,
+            .oam = &gUnknown_846398C,
+            .anims = gUnknown_84639A4,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = sub_813A124,
+        };
+
+        LoadSpriteSheet(&sheet);
+        LoadSpritePalette(&palette);
+
+        spriteId = CreateSprite(&template, 64 * (i % 2) + 152, gUnknown_203B16D * 28 + 34, i % 2);
+        gUnknown_203B148[i]->sprite = &gSprites[spriteId];
+        gUnknown_203B148[i]->unk04 = i;
+        gUnknown_203B148[i]->unk06 = tileTag + i;
+        gUnknown_203B148[i]->unk08 = palTag;
+        gUnknown_203B148[i]->sprite->subpriority = i;
+
+        if (i > 1)
+            StartSpriteAnim(gUnknown_203B148[i]->sprite, 1);
+    }
+
+    sub_813A0E8(1);
+
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtrs[0]);
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtrs[1]);
+}
+
+void sub_813A0E8(u8 invisible)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+        gUnknown_203B148[i]->sprite->invisible = invisible;
+}
+
+void sub_813A124(struct Sprite * sprite)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gMonSummaryScreen->unk3268 == TRUE && i > 1)
+            continue;
+
+        gUnknown_203B148[i]->sprite->pos1.y = gUnknown_203B16D * 28 + 34;
+    }
+
+    if (gMonSummaryScreen->unk3268 != TRUE)
+    {
+        if (gMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
+        {
+            gUnknown_203B148[0]->sprite->invisible = FALSE;
+            gUnknown_203B148[1]->sprite->invisible = FALSE;
+        }
+        return;
+    }
+
+    for (i = 0; i < 2; i++)
+    {
+        sprite = gUnknown_203B148[i]->sprite;
+        sprite->data[0]++;
+
+        if (sprite->invisible)
+        {
+            if (sprite->data[0] > 60)
+            {
+                sprite->invisible = FALSE;
+                sprite->data[0] = 0;
+            }
+        }
+        else if (sprite->data[0] > 60)
+        {
+            sprite->invisible = TRUE;
+            sprite->data[0] = 0;
+        }
+    }
+}
+
+void sub_813A21C(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_203B148[i]->sprite != NULL)
+            DestroySpriteAndFreeResources(gUnknown_203B148[i]->sprite);
+
+        FREE_AND_SET_NULL_IF_SET(gUnknown_203B148[i]);
+    }
+}
+
+void sub_813A254(u16 tileTag, u16 palTag)
+{
+    u16 spriteId;
+    void * gfxBufferPtr;
+
+    gUnknown_203B158 = AllocZeroed(sizeof(struct Struct203B158));
+    gfxBufferPtr = AllocZeroed(0x20 * 32);
+
+    LZ77UnCompWram(gUnknown_8E9BF48, gfxBufferPtr);
+
+    if (gUnknown_203B158 != NULL)
+    {
+        struct SpriteSheet sheet = {
+            .data = gfxBufferPtr,
+            .size = 0x20 * 32,
+            .tag = tileTag
+        };
+
+        struct SpritePalette palette = {.data = gUnknown_8E9BF28, .tag = palTag};
+        struct SpriteTemplate template = {
+            .tileTag = tileTag,
+            .paletteTag = palTag,
+            .oam = &gUnknown_84639AC,
+            .anims = gUnknown_84639F4,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        };
+
+        LoadSpriteSheet(&sheet);
+        LoadSpritePalette(&palette);
+
+        spriteId = CreateSprite(&template, 0, 0, 0);
+        gUnknown_203B158->sprite = &gSprites[spriteId];
+        gUnknown_203B158->unk04 = tileTag;
+        gUnknown_203B158->unk06 = palTag;
+    }
+
+    sub_813A3B8(1);
+    sub_813A35C();
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
+}
+
+void sub_813A334(void)
+{
+    if (gUnknown_203B158->sprite != NULL)
+        DestroySpriteAndFreeResources(gUnknown_203B158->sprite);
+
+    FREE_AND_SET_NULL_IF_SET(gUnknown_203B158);
+}
+
+void sub_813A35C(void)
+{
+    gMonSummaryScreen->unk326C = sub_8138C5C(GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_STATUS));
+
+    if (gMonSummaryScreen->unk326C == AILMENT_NONE)
+    {
+        sub_813A3B8(1);
+        return;
+    }
+
+    StartSpriteAnim(gUnknown_203B158->sprite, gMonSummaryScreen->unk326C - 1);
+    sub_813A3B8(0);
+}
+
+void sub_813A3B8(u8 invisible)
+{
+    if (gMonSummaryScreen->unk326C == AILMENT_NONE || gMonSummaryScreen->isEgg)
+        gUnknown_203B158->sprite->invisible = TRUE;
+    else
+        gUnknown_203B158->sprite->invisible = invisible;
+
+    if (gMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
+    {
+        if (gUnknown_203B158->sprite->pos1.y != 45)
+        {
+            gUnknown_203B158->sprite->pos1.x = 16;
+            gUnknown_203B158->sprite->pos1.y = 45;
+            return;
+        }
+    }
+    else if (gUnknown_203B158->sprite->pos1.y != 38)
+    {
+        gUnknown_203B158->sprite->pos1.x = 16;
+        gUnknown_203B158->sprite->pos1.y = 38;
+        return;
+    }
+}
+
+void sub_813A45C(u16 tileTag, u16 palTag)
+{
+    u8 i;
+    u8 spriteId;
+    void * gfxBufferPtr;
+    u32 curHp;
+    u32 maxHp;
+    u8 hpBarPalTagOffset = 0;
+
+    gUnknown_203B15C = AllocZeroed(sizeof(struct Struct203B15C));
+    gfxBufferPtr = AllocZeroed(0x20 * 12);
+    LZ77UnCompWram(gUnknown_8E9B4B8, gfxBufferPtr);
+
+    curHp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_HP);
+    maxHp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MAX_HP);
+
+    if (maxHp / 4 > curHp)
+        hpBarPalTagOffset = 2;
+    else if (maxHp / 2 > curHp)
+        hpBarPalTagOffset = 1;
+
+    if (gfxBufferPtr != NULL)
+    {
+        struct SpriteSheet sheet = {
+            .data = gfxBufferPtr,
+            .size = 0x20 * 12,
+            .tag = tileTag
+        };
+
+        struct SpritePalette palette1 = {.data = gUnknown_8463FFC[0], .tag = palTag};
+        struct SpritePalette palette2 = {.data = gUnknown_8463FFC[1], .tag = palTag + 1};
+        struct SpritePalette palette3 = {.data = gUnknown_8463FFC[2], .tag = palTag + 2};
+
+        LoadSpriteSheet(&sheet);
+        LoadSpritePalette(&palette1);
+        LoadSpritePalette(&palette2);
+        LoadSpritePalette(&palette3);
+    }
+
+    for (i = 0; i < 9; i++)
+    {
+        struct SpriteTemplate template = {
+            .tileTag = tileTag,
+            .paletteTag = palTag + hpBarPalTagOffset,
+            .oam = &gUnknown_8463A14,
+            .anims = gUnknown_8463A7C,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        };
+
+        gUnknown_203B15C->unk28[i] = i * 8 + 172;
+        spriteId = CreateSprite(&template, gUnknown_203B15C->unk28[i], 36, 0);
+        gUnknown_203B15C->sprites[i] = &gSprites[spriteId];
+        gUnknown_203B15C->sprites[i]->invisible = FALSE;
+        gUnknown_203B15C->sprites[i]->oam.priority = 2;
+        gUnknown_203B15C->unk3C = tileTag;
+        gUnknown_203B15C->unk3E = palTag;
+        StartSpriteAnim(gUnknown_203B15C->sprites[i], 8);
+    }
+
+    sub_813A620();
+    sub_813A838(1);
+
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
+}
+
+void sub_813A620(void)
+{
+    u8 numWholeHpBarTiles = 0;
+    u8 i;
+    u8 animNum;
+    u8 two = 2;
+    u8 hpBarPalOffset = 0;
+    u32 curHp;
+    u32 maxHp;
+    s64 v0;
+    s64 v1;
+
+    if (gMonSummaryScreen->isEgg)
+        return;
+
+    curHp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_HP);
+    maxHp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MAX_HP);
+
+    if (maxHp / 5 >= curHp)
+        hpBarPalOffset = 2;
+    else if (maxHp / 2 >= curHp)
+        hpBarPalOffset = 1;
+
+    switch (GetHPBarLevel(curHp, maxHp))
+    {
+    case 3:
+    default:
+        hpBarPalOffset = 0;
+        break;
+    case 2:
+        hpBarPalOffset = 1;
+        break;
+    case 1:
+        hpBarPalOffset = 2;
+        break;
+    }
+
+    for (i = 0; i < 9; i++)
+        gUnknown_203B15C->sprites[i]->oam.paletteNum = IndexOfSpritePaletteTag(TAG_PSS_UNK_78) + hpBarPalOffset;
+
+    if (curHp == maxHp)
+        for (i = two; i < 8; i++)
+            StartSpriteAnim(gUnknown_203B15C->sprites[i], 8);
+
+    else
+    {
+        v0 = (maxHp << 2) / 6;
+        v1 = (curHp << 2);
+
+        while (TRUE)
+        {
+            if (v1 <= v0)
+                break;
+            v1 -= v0;
+            numWholeHpBarTiles++;
+        }
+
+        numWholeHpBarTiles += two;
+
+        for (i = two; i < numWholeHpBarTiles; i++)
+            StartSpriteAnim(gUnknown_203B15C->sprites[i], 8);
+
+        animNum = (v1 * 6) / v0;
+        StartSpriteAnim(gUnknown_203B15C->sprites[numWholeHpBarTiles], animNum);
+
+        for (i = numWholeHpBarTiles + 1; i < 8; i++)
+            StartSpriteAnim(gUnknown_203B15C->sprites[i], 0);
+    }
+
+    StartSpriteAnim(gUnknown_203B15C->sprites[0], 9);
+    StartSpriteAnim(gUnknown_203B15C->sprites[1], 10);
+    StartSpriteAnim(gUnknown_203B15C->sprites[8], 11);
+}
+
+void sub_813A800(void)
+{
+    u8 i;
+
+    for (i = 0; i < 9; i++)
+        if (gUnknown_203B15C->sprites[i] != NULL)
+            DestroySpriteAndFreeResources(gUnknown_203B15C->sprites[i]);
+
+    FREE_AND_SET_NULL_IF_SET(gUnknown_203B15C);
+}
+
+void sub_813A838(u8 invisible)
+{
+    u8 i;
+
+    for (i = 0; i < 9; i++)
+        gUnknown_203B15C->sprites[i]->invisible = invisible;
+}
+
+void sub_813A874(u16 tileTag, u16 palTag)
+{
+    u8 i;
+    u8 spriteId;
+    void * gfxBufferPtr;
+
+    gUnknown_203B160 = AllocZeroed(sizeof(struct Struct203B160));
+    gfxBufferPtr = AllocZeroed(0x20 * 12);
+
+    LZ77UnCompWram(gUnknown_8E9B3F0, gfxBufferPtr);
+    if (gfxBufferPtr != NULL)
+    {
+        struct SpriteSheet sheet = {
+            .data = gfxBufferPtr,
+            .size = 0x20 * 12,
+            .tag = tileTag
+        };
+
+        struct SpritePalette palette = {.data = gUnknown_8E9B578, .tag = palTag};
+        LoadSpriteSheet(&sheet);
+        LoadSpritePalette(&palette);
+    }
+
+    for (i = 0; i < 11; i++)
+    {
+        struct SpriteTemplate template = {
+            .tileTag = tileTag,
+            .paletteTag = palTag,
+            .oam = &gUnknown_8463A14,
+            .anims = gUnknown_8463A7C,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        };
+
+        gUnknown_203B160->unk2C[i] = i * 8 + 156;
+        spriteId = CreateSprite(&template, gUnknown_203B160->unk2C[i], 132, 0);
+        gUnknown_203B160->sprites[i] = &gSprites[spriteId];
+        gUnknown_203B160->sprites[i]->oam.priority = 2;
+        gUnknown_203B160->unk42 = tileTag;
+        gUnknown_203B160->unk44 = palTag;
+    }
+
+    sub_813A994();
+    sub_813AB70(1);
+
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
+}
+
+void sub_813A994(void)
+{
+    u8 numWholeExpBarTiles = 0;
+    u8 i;
+    u8 level;
+    u32 exp;
+    u32 totalExpToNextLevel;
+    u32 curExpToNextLevel;
+    u16 species;
+    s64 v0;
+    s64 v1;
+    u8 animNum;
+    u8 two = 2;
+
+    if (gMonSummaryScreen->isEgg)
+        return;
+
+    exp = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_EXP);
+    level = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_LEVEL);
+    species = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_SPECIES);
+
+    if (level < 100)
+    {
+        totalExpToNextLevel = gExperienceTables[gBaseStats[species].growthRate][level + 1] - gExperienceTables[gBaseStats[species].growthRate][level];
+        curExpToNextLevel = exp - gExperienceTables[gBaseStats[species].growthRate][level];
+        v0 = ((totalExpToNextLevel << 2) / 8);
+        v1 = (curExpToNextLevel << 2);
+
+        while (TRUE)
+        {
+            if (v1 <= v0)
+                break;
+            v1 -= v0;
+            numWholeExpBarTiles++;
+        }
+
+        numWholeExpBarTiles += two;
+
+        for (i = two; i < numWholeExpBarTiles; i++)
+            StartSpriteAnim(gUnknown_203B160->sprites[i], 8);
+
+        if (numWholeExpBarTiles >= 10)
+        {
+            if (totalExpToNextLevel == curExpToNextLevel)
+                return;
+            else
+                StartSpriteAnim(gUnknown_203B160->sprites[9], 7);
+        }
+
+        animNum = (v1 * 8) / v0;
+        StartSpriteAnim(gUnknown_203B160->sprites[numWholeExpBarTiles], animNum);
+
+        for (i = numWholeExpBarTiles + 1; i < 10; i++)
+            StartSpriteAnim(gUnknown_203B160->sprites[i], 0);
+    }
+    else
+        for (i = two; i < 10; i++)
+            StartSpriteAnim(gUnknown_203B160->sprites[i], 0);
+
+    StartSpriteAnim(gUnknown_203B160->sprites[0], 9);
+    StartSpriteAnim(gUnknown_203B160->sprites[1], 10);
+    StartSpriteAnim(gUnknown_203B160->sprites[10], 11);
+}
+
+void sub_813AB38(void)
+{
+    u8 i;
+
+    for (i = 0; i < 11; i++)
+        if (gUnknown_203B160->sprites[i] != NULL)
+            DestroySpriteAndFreeResources(gUnknown_203B160->sprites[i]);
+
+    FREE_AND_SET_NULL_IF_SET(gUnknown_203B160);
+}
+
+void sub_813AB70(u8 invisible)
+{
+    u8 i;
+
+    for (i = 0; i < 11; i++)
+        gUnknown_203B160->sprites[i]->invisible = invisible;
+}
+
+void sub_813ABAC(u16 tileTag, u16 palTag)
+{
+    u16 spriteId;
+    void * gfxBufferPtr;
+
+    gUnknown_203B164 = AllocZeroed(sizeof(struct Struct203B164));
+    gfxBufferPtr = AllocZeroed(0x20 * 1);
+
+    LZ77UnCompWram(gUnknown_8463B20, gfxBufferPtr);
+
+    if (gUnknown_203B164 != NULL)
+    {
+        struct SpriteSheet sheet = {
+            .data = gfxBufferPtr,
+            .size = 0x20 * 1,
+            .tag = tileTag
+        };
+
+        struct SpritePalette palette = {.data = gUnknown_8463B00, .tag = palTag};
+        struct SpriteTemplate template = {
+            .tileTag = tileTag,
+            .paletteTag = palTag,
+            .oam = &gUnknown_8463AEC,
+            .anims = gUnknown_8463AFC,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        };
+
+        LoadSpriteSheet(&sheet);
+        LoadSpritePalette(&palette);
+
+        spriteId = CreateSprite(&template, 114, 92, 0);
+        gUnknown_203B164->sprite = &gSprites[spriteId];
+        gUnknown_203B164->unk04 = tileTag;
+        gUnknown_203B164->unk06 = palTag;
+    }
+
+    sub_813ACF8(1);
+    sub_813ACB4();
+
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
+}
+
+void sub_813AC8C(void)
+{
+    if (gUnknown_203B164->sprite != NULL)
+        DestroySpriteAndFreeResources(gUnknown_203B164->sprite);
+
+    FREE_AND_SET_NULL_IF_SET(gUnknown_203B164);
+}
+
+void sub_813ACB4(void)
+{
+    if (!CheckPartyPokerus(&gMonSummaryScreen->currentMon, 0)
+        && CheckPartyHasHadPokerus(&gMonSummaryScreen->currentMon, 0))
+        sub_813ACF8(0);
+    else
+        sub_813ACF8(1);
+}
+
+void sub_813ACF8(u8 invisible)
+{
+    if (!CheckPartyPokerus(&gMonSummaryScreen->currentMon, 0)
+        && CheckPartyHasHadPokerus(&gMonSummaryScreen->currentMon, 0))
+    {
+        gUnknown_203B164->sprite->invisible = invisible;
+        return;
+    }
+    else
+        gUnknown_203B164->sprite->invisible = TRUE;
+
+    if (gMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
+    {
+        gUnknown_203B164->sprite->invisible = TRUE;
+        gUnknown_203B164->sprite->pos1.x = 16;
+        gUnknown_203B164->sprite->pos1.y = 44;
+    }
+    else
+    {
+        gUnknown_203B164->sprite->pos1.x = 114;
+        gUnknown_203B164->sprite->pos1.y = 92;
+    }
+}
+
+void sub_813ADA8(u16 tileTag, u16 palTag)
+{
+    u16 spriteId;
+    void * gfxBufferPtr;
+
+    gUnknown_203B168 = AllocZeroed(sizeof(struct Struct203B168));
+    gfxBufferPtr = AllocZeroed(0x20 * 2);
+
+    LZ77UnCompWram(gUnknown_8463B64, gfxBufferPtr);
+
+    if (gUnknown_203B168 != NULL)
+    {
+        struct SpriteSheet sheet = {
+            .data = gfxBufferPtr,
+            .size = 0x20 * 2,
+            .tag = tileTag
+        };
+
+        struct SpritePalette palette = {.data = gUnknown_8463B44, .tag = palTag};
+        struct SpriteTemplate template = {
+            .tileTag = tileTag,
+            .paletteTag = palTag,
+            .oam = &gUnknown_8463B30,
+            .anims = gUnknown_8463B40,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        };
+
+        LoadSpriteSheet(&sheet);
+        LoadSpritePalette(&palette);
+        spriteId = CreateSprite(&template, 106, 40, 0);
+        gUnknown_203B168->sprite = &gSprites[spriteId];
+        gUnknown_203B168->unk04 = tileTag;
+        gUnknown_203B168->unk06 = palTag;
+    }
+
+    sub_813AEB0(1);
+    sub_813AF50();
+
+    FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
+}
+
+void sub_813AE88(void)
+{
+    if (gUnknown_203B168->sprite != NULL)
+        DestroySpriteAndFreeResources(gUnknown_203B168->sprite);
+
+    FREE_AND_SET_NULL_IF_SET(gUnknown_203B168);
+}
+
+void sub_813AEB0(u8 invisible)
+{
+    if (IsMonShiny(&gMonSummaryScreen->currentMon) == TRUE
+        && !gMonSummaryScreen->isEgg)
+        gUnknown_203B168->sprite->invisible = invisible;
+    else
+        gUnknown_203B168->sprite->invisible = TRUE;
+
+    if (gMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
+    {
+        gUnknown_203B168->sprite->pos1.x = 8;
+        gUnknown_203B168->sprite->pos1.y = 24;
+    }
+    else
+    {
+        gUnknown_203B168->sprite->pos1.x = 106;
+        gUnknown_203B168->sprite->pos1.y = 40;
+    }
+}
+
+void sub_813AF50(void)
+{
+    if (IsMonShiny(&gMonSummaryScreen->currentMon) == TRUE && !gMonSummaryScreen->isEgg)
+        sub_813AEB0(0);
+    else
+        sub_813AEB0(1);
+}
+
+void sub_813AF90(void)
+{
+    sub_813A21C();
+    sub_813A800();
+    sub_813AB38();
+    sub_8139C80();
+    sub_8139F20();
+    sub_8139D90();
+    sub_813B068();
+    sub_813A334();
+    sub_813AC8C();
+    sub_813AE88();
+    ResetSpriteData();
+}
+
+void sub_813AFC4(void)
+{
+    sub_8139CB0();
+    sub_8139D54(0);
+    sub_8139DBC();
+    sub_813995C();
+    sub_8139C44(0);
+    sub_813A620();
+    sub_813A994();
+    sub_813B0E4();
+    sub_813A35C();
+    sub_813ACB4();
+    sub_813AF50();
+}
+
+void sub_813AFFC(void)
+{
+    u32 markings = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
+
+    DestroySpriteAndFreeResources(gMonSummaryScreen->markingSprite);
+    gMonSummaryScreen->markingSprite = CreateMonMarkingSprite_SelectCombo(TAG_PSS_UNK_8C, TAG_PSS_UNK_8C, gUnknown_84636E0);
+
+    if (gMonSummaryScreen->markingSprite != NULL)
+    {
+        StartSpriteAnim(gMonSummaryScreen->markingSprite, markings);
+        gMonSummaryScreen->markingSprite->pos1.x = 20;
+        gMonSummaryScreen->markingSprite->pos1.y = 91;
+    }
+
+    sub_813B084(1);
+}
+
+void sub_813B068(void)
+{
+    DestroySpriteAndFreeResources(gMonSummaryScreen->markingSprite);
+}
+
+void sub_813B084(u8 invisible)
+{
+    u32 markings = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
+
+    if (markings == 0)
+        gMonSummaryScreen->markingSprite->invisible = TRUE;
+    else
+        gMonSummaryScreen->markingSprite->invisible = invisible;
+}
+
+void sub_813B0E4(void)
+{
+    u32 markings = GetMonData(&gMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
+
+    StartSpriteAnim(gMonSummaryScreen->markingSprite, markings);
+    sub_813B084(0);
+}
+
+void sub_813B120(u8 taskId, s8 a1)
+{
+    s8 v0 = -1;
+
+    if (gMonSummaryScreen->isBoxMon == TRUE)
+    {
+        if (gMonSummaryScreen->curPageIndex != 0)
+        {
+            if (a1 == 1)
+                a1 = 0;
+            else
+                a1 = 2;
+        }
+        else
+        {
+            if (a1 == 1)
+                a1 = 1;
+            else
+                a1 = 3;
+        }
+
+        v0 = SeekToNextMonInBox(gMonSummaryScreen->monList.boxMons, GetLastViewedMonIndex(), gMonSummaryScreen->lastIndex, (u8)a1);
+    }
+    else
+    {
+        if (IsUpdateLinkStateCBActive() == FALSE
+            && gReceivedRemoteLinkPlayers == 1
+            && IsMultiBattle() == TRUE)
+            v0 = sub_813B38C(a1);
+        else
+            v0 = sub_813B20C(a1);
+    }
+
+    if (v0 == -1)
+        return;
+
+    gLastViewedMonIndex = v0;
+    CreateTask(sub_813B3F0, 0);
+    gMonSummaryScreen->unk328C = 0;
 }

@@ -561,8 +561,8 @@ static const union AnimCmd * const gUnknown_8463A7C[] =
     gUnknown_8463A74
 };
 
-const u16 gUnknown_8463AAC[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463AAC.gbapal");
-const u16 gUnknown_8463ACC[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463ACC.gbapal");
+static const u16 gUnknown_8463AAC[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463AAC.gbapal");
+static const u16 gUnknown_8463ACC[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463ACC.gbapal");
 
 static const struct OamData gUnknown_8463AEC = {
     .y = 0,

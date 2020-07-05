@@ -56,7 +56,7 @@ def read_syms():
     return syms
 
 if __name__ == "__main__":
-    SIMPLE = True       
+    SIMPLE = True
     ap = argparse.ArgumentParser()
     ap.add_argument("-m", "--make", dest="make", action="store_true")
     ap.add_argument("-p", "--path", dest="input_path")
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     sorted_syms = sorted(syms, key=lambda kv: kv.value)
     for sym_info in sorted_syms:
         if SIMPLE:
-            sym_dump_output += f"0x{sym_info.value:08x} {sym_info.name} (size: 0x{sym_info.size:x})\n"
+            sym_dump_output += f"0x{sym_info.value:08x} {sym_info.scope} {sym_info.name} (size: 0x{sym_info.size:x})\n"
         else:
             sym_dump_output += "{}: value={:08x}, size=0x{:x}, scope=\"{}\", debug=\"{}\", type=\"{}\", section=\"{}\"\n".format(sym_info.name, sym_info.value, sym_info.size, sym_info.scope, sym_info.debug, sym_info.type, sym_info.section)
             if sym_info.type == "F" and sym_info.value >= 0x8000000:

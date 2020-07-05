@@ -38,108 +38,108 @@
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
 
-extern void sub_8138B8C(struct Pokemon * mon);
-void sub_8135C34(void);
-extern void sub_813B784(void);
-extern void sub_8138414(u8 curPageIndex);
+static void sub_8138B8C(struct Pokemon * mon);
+static void sub_8135C34(void);
+static void sub_813B784(void);
+static void sub_8138414(u8 curPageIndex);
 static void sub_8134BAC(u8 taskId);
 static void sub_8134E84(u8 taskId);
-extern void sub_813B3F0(u8 taskId);
-extern void sub_813B120(u8, s8);
-extern void sub_8137E64(u8 taskId);
-void sub_8135638(void);
-void sub_81356EC(void);
-extern void sub_813B750(u8 curPageIndex);
-extern void sub_8138280(u8 curPageIndex);
-extern void sub_8137D28(u8 curPageIndex);
-void sub_8135514(void);
-u8 sub_81357A0(u8);
-extern void sub_8138440(void);
-extern void sub_8138CD8(u8 taskId);
-void sub_8135AA4(void);
-void sub_8135B90(void);
-extern void sub_8138538(void);
-extern void sub_8137D28(u8 curPageIndex);
-extern void sub_8136F4C(void);
-extern void sub_81374E8(void);
-extern void sub_8137BD0(void);
-extern void sub_8138A38(void);
-void sub_8136DA4(const u8 * str);
-void sub_8136DF0(const u8 * str);
-extern void sub_8136E50(const u8 * str);
-void sub_81358DC(u8, u8);
-extern void sub_813A838(u8 invisible);
-extern void sub_813AB70(u8 invisible);
-extern void sub_8139C44(u8 invisible);
-extern void sub_813B084(u8 invisible);
-extern void sub_8139D54(u8 invisible);
-extern void sub_813A3B8(u8 invisible);
-extern void sub_813ACF8(u8 invisible);
-extern void sub_813AEB0(u8 invisible);
-extern void sub_813A0E8(u8 invisible);
-extern void sub_8139EE4(u8 invisible);
-extern void sub_81381AC(void);
-void sub_8136BC4(void);
-void sub_8136BAC(void);
-u8 sub_8135F20(void);
-u8 sub_8136AEC(void);
-extern void sub_81381D0(void);
-u8 sub_8136040(void);
-extern void sub_8137E28(void);
-extern void sub_81381C0(void);
-void sub_8136D54(void);
-extern void sub_81360D4(void);
-extern void sub_8136350(void);
-extern void sub_81367B0(void);
-extern u8 sub_8138C5C(u32 status);
-void sub_81367E8(u8);
-u16 sub_8138BEC(struct Pokemon * mon, u8 moveSlot);
-u16 sub_8138C24(struct Pokemon * mon, u8 moveSlot);
-extern void sub_813ADA8(u16, u16);
-extern void sub_813ABAC(u16, u16);
-extern void sub_813AFFC(void);
-extern void sub_8139F64(u16, u16);
-extern void sub_813A254(u16, u16);
-extern void sub_813A45C(u16, u16);
-extern void sub_813A874(u16, u16);
-extern void sub_8139CB0(void);
-extern void sub_8139DBC(void);
-extern void sub_813995C(void);
-extern void sub_81393D4(u8 taskId);
-extern void sub_8137EE8(void);
-extern void sub_8136FB0(void);
-extern void sub_81370EC(void);
-extern void sub_8137270(void);
-extern void sub_81372E4(u8 i);
-extern void sub_8137554(void);
-void sub_8137A90(void);
-extern void sub_8137AF8(void);
-void sub_8137944(void);
-void sub_8137970(void);
-extern bool32 sub_813B838(u8 metLocation);
-extern bool32 sub_8138B4C(void);
-extern bool32 sub_813B7E0(u8 nature);
-void sub_8137724(void);
-extern bool32 sub_813B7F8(void);
-extern u8 sub_813847C(struct Pokemon * mon);
-extern void sub_8137C18(void);
-extern void sub_8137C90(void);
-extern void sub_813AF90(void);
-void sub_81380F0(void);
-extern void sub_81390B0(void);
-extern void sub_81391EC(void);
-extern void sub_8139328(struct Pokemon * mon);
-extern void sub_8139AAC(u16 spriteId);
-extern void sub_813A124(struct Sprite * sprite);
-extern void sub_813A35C(void);
-extern void sub_813A620(void);
-extern void sub_813A994(void);
-extern void sub_813ACB4(void);
-extern void sub_813AF50(void);
-extern void sub_813B068(void);
-extern void sub_813B0E4(void);
-extern s8 sub_813B20C(s8);
-extern s8 sub_813B38C(s8);
+static void sub_813B3F0(u8 taskId);
+static void sub_813B120(u8, s8);
+static void sub_8137E64(u8 taskId);
+static void sub_8135638(void);
+static void sub_81356EC(void);
+static void sub_813B750(u8 curPageIndex);
+static void sub_8138280(u8 curPageIndex);
+static void sub_8137D28(u8 curPageIndex);
+static void sub_8135514(void);
+static u8 sub_81357A0(u8);
+static void sub_8138440(void);
+static void sub_8138CD8(u8 taskId);
+static void sub_8135AA4(void);
+static void sub_8135B90(void);
+static void sub_8138538(void);
+static void sub_8137D28(u8 curPageIndex);
+static void sub_8136F4C(void);
+static void sub_81374E8(void);
+static void sub_8137BD0(void);
+static void sub_8138A38(void);
+static void sub_8136DA4(const u8 * str);
+static void sub_8136DF0(const u8 * str);
+static void sub_8136E50(const u8 * str);
+static void sub_81358DC(u8, u8);
+static void sub_813A838(u8 invisible);
+static void sub_813AB70(u8 invisible);
+static void sub_8139C44(u8 invisible);
+static void sub_813B084(u8 invisible);
+static void sub_8139D54(u8 invisible);
+static void sub_813A3B8(u8 invisible);
+static void sub_813ACF8(u8 invisible);
+static void sub_813AEB0(u8 invisible);
+static void sub_813A0E8(u8 invisible);
+static void sub_8139EE4(u8 invisible);
+static void sub_81381AC(void);
+static void sub_8136BC4(void);
+static void sub_8136BAC(void);
+static u8 sub_8135F20(void);
+static u8 sub_8136AEC(void);
+static void sub_81381D0(void);
+static u8 sub_8136040(void);
+static void sub_8137E28(void);
+static void sub_81381C0(void);
+static void sub_8136D54(void);
+static void sub_81360D4(void);
+static void sub_8136350(void);
+static void sub_81367B0(void);
+static u8 sub_8138C5C(u32 status);
+static void sub_81367E8(u8);
+static u16 sub_8138BEC(struct Pokemon * mon, u8 moveSlot);
+static u16 sub_8138C24(struct Pokemon * mon, u8 moveSlot);
+static void sub_813ADA8(u16, u16);
+static void sub_813ABAC(u16, u16);
+static void sub_813AFFC(void);
+static void sub_8139F64(u16, u16);
+static void sub_813A254(u16, u16);
+static void sub_813A45C(u16, u16);
+static void sub_813A874(u16, u16);
+static void sub_8139CB0(void);
+static void sub_8139DBC(void);
+static void sub_813995C(void);
+static void sub_81393D4(u8 taskId);
+static void sub_8137EE8(void);
+static void sub_8136FB0(void);
+static void sub_81370EC(void);
+static void sub_8137270(void);
+static void sub_81372E4(u8 i);
+static void sub_8137554(void);
+static void sub_8137A90(void);
+static void sub_8137AF8(void);
+static void sub_8137944(void);
+static void sub_8137970(void);
+static bool32 sub_813B838(u8 metLocation);
+static bool32 sub_8138B4C(void);
+static bool32 sub_813B7E0(u8 nature);
+static void sub_8137724(void);
+static bool32 sub_813B7F8(void);
+static u8 sub_813847C(struct Pokemon * mon);
+static void sub_8137C18(void);
+static void sub_8137C90(void);
+static void sub_813AF90(void);
+static void sub_81380F0(void);
+static void sub_81390B0(void);
+static void sub_81391EC(void);
+static void sub_8139328(struct Pokemon * mon);
+static void sub_8139AAC(u16 spriteId);
+static void sub_813A124(struct Sprite * sprite);
+static void sub_813A35C(void);
+static void sub_813A620(void);
+static void sub_813A994(void);
+static void sub_813ACB4(void);
+static void sub_813AF50(void);
+static void sub_813B068(void);
+static void sub_813B0E4(void);
+static s8 sub_813B20C(s8);
+static s8 sub_813B38C(s8);
 
 struct PokemonSummaryScreenData
 {
@@ -1034,7 +1034,7 @@ void ShowSelectMovePokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8
     sMonSummaryScreen->unk325A[4] = a4;
 }
 
-u8 sub_813476C(u8 a0)
+static u8 sub_813476C(u8 a0)
 {
     if (sMonSummaryScreen->unk301C == TRUE && sMonSummaryScreen->unk3224 != a0)
         return TRUE;
@@ -1079,7 +1079,7 @@ u32 sub_81347A4(u8 a0)
     return FALSE;
 }
 
-void sub_8134840(u8 taskId)
+static void sub_8134840(u8 taskId)
 {
     switch (sMonSummaryScreen->state3270) {
     case PSS_STATE3270_0:
@@ -1421,7 +1421,7 @@ static void sub_8134E84(u8 taskId)
     return;
 }
 
-void sub_81351A0(u8 taskId)
+static void sub_81351A0(u8 taskId)
 {
     switch (sMonSummaryScreen->unk3284)
     {
@@ -1507,7 +1507,7 @@ void sub_81351A0(u8 taskId)
     return;
 }
 
-void sub_813546C(void)
+static void sub_813546C(void)
 {
     u8 i;
     for (i = 0; i < 11; i++)
@@ -1522,7 +1522,7 @@ void sub_813546C(void)
     }
 }
 
-void sub_81354C4(void)
+static void sub_81354C4(void)
 {
     u8 i;
     for (i = 0; i < 11; i++)
@@ -1536,7 +1536,7 @@ void sub_81354C4(void)
     }
 }
 
-void sub_8135514(void)
+static void sub_8135514(void)
 {
     s8 pageDelta = 1;
 
@@ -1593,7 +1593,7 @@ void sub_8135514(void)
 
 }
 
-void sub_8135638(void)
+static void sub_8135638(void)
 {
     u8 newPage;
 
@@ -1632,7 +1632,7 @@ void sub_8135638(void)
     }
 }
 
-void sub_81356EC(void)
+static void sub_81356EC(void)
 {
     u8 newPage;
 
@@ -1675,7 +1675,7 @@ void sub_81356EC(void)
     }
 }
 
-u8 sub_81357A0(u8 a0)
+static u8 sub_81357A0(u8 a0)
 {
     s8 pageDelta = 1;
 
@@ -1723,7 +1723,7 @@ u8 sub_81357A0(u8 a0)
     return FALSE;
 }
 
-void sub_81358DC(u8 a0, u8 a1)
+static void sub_81358DC(u8 a0, u8 a1)
 {
     u8 i;
     u32 bg0Priority;
@@ -1806,7 +1806,7 @@ void sub_81358DC(u8 a0, u8 a1)
     SetGpuReg(REG_OFFSET_BG2CNT, (GetGpuReg(REG_OFFSET_BG2CNT) & 0xfffc) | bg2Priority);
 }
 
-void sub_8135AA4(void)
+static void sub_8135AA4(void)
 {
     u8 newPage;
 
@@ -1840,7 +1840,7 @@ void sub_8135AA4(void)
     }
 }
 
-void sub_8135B90(void)
+static void sub_8135B90(void)
 {
     u8 newPage;
 
@@ -1869,7 +1869,7 @@ void sub_8135B90(void)
     }
 }
 
-void sub_8135C34(void)
+static void sub_8135C34(void)
 {
     switch (sMonSummaryScreen->unk3274)
     {
@@ -1982,7 +1982,7 @@ void sub_8135C34(void)
     sMonSummaryScreen->unk3274++;
 }
 
-u8 sub_8135F20(void)
+static u8 sub_8135F20(void)
 {
     switch (sMonSummaryScreen->unk3278)
     {
@@ -2028,7 +2028,7 @@ u8 sub_8135F20(void)
     return FALSE;
 }
 
-u8 sub_8136040(void)
+static u8 sub_8136040(void)
 {
     switch (sMonSummaryScreen->unk3280)
     {
@@ -2058,7 +2058,7 @@ u8 sub_8136040(void)
     return FALSE;
 }
 
-void sub_81360D4(void)
+static void sub_81360D4(void)
 {
     u8 tempStr[20];
     u16 dexNum;
@@ -2129,7 +2129,7 @@ void sub_81360D4(void)
 #define MACRO_8136350_0(x) (63 - StringLength((x)) * 6)
 #define MACRO_8136350_1(x) (27 - StringLength((x)) * 6)
 
-void sub_8136350(void)
+static void sub_8136350(void)
 {
     u8 tempStr[20];
     u8 level;
@@ -2220,7 +2220,7 @@ void sub_8136350(void)
             sMonSummaryScreen->unk326C = AILMENT_PKRS;
 }
 
-void sub_81367B0(void)
+static void sub_81367B0(void)
 {
     u8 i;
 
@@ -2233,7 +2233,7 @@ void sub_81367B0(void)
 
 #define MACRO_81367E8_0(a, b) ((6 * (a)) - StringLength((b)) * 6)
 
-void sub_81367E8(u8 i)
+static void sub_81367E8(u8 i)
 {
     if (i < 4)
         sMonSummaryScreen->unk325A[i] = sub_8138BEC(&sMonSummaryScreen->currentMon, i);
@@ -2283,7 +2283,7 @@ void sub_81367E8(u8 i)
         ConvertIntToDecimalStringN(sMonSummaryScreen->summary.unk3188[i], gBattleMoves[sMonSummaryScreen->unk325A[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
 }
 
-u8 sub_8136AEC(void)
+static u8 sub_8136AEC(void)
 {
     switch (sMonSummaryScreen->unk327C)
     {
@@ -2323,7 +2323,7 @@ u8 sub_8136AEC(void)
     return FALSE;
 }
 
-void sub_8136BAC(void)
+static void sub_8136BAC(void)
 {
     ResetSpriteData();
     ResetPaletteFade();
@@ -2331,7 +2331,7 @@ void sub_8136BAC(void)
     ScanlineEffect_Stop();
 }
 
-void sub_8136BC4(void)
+static void sub_8136BC4(void)
 {
     DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaClear32(3, (void *)OAM, OAM_SIZE);
@@ -2372,7 +2372,7 @@ void sub_8136BC4(void)
     ShowBg(3);
 }
 
-void sub_8136D54(void)
+static void sub_8136D54(void)
 {
     if (sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE || sMonSummaryScreen->mode == PSS_MODE_FORGET_MOVE)
         sMonSummaryScreen->unk3018 = CreateTask(sub_81393D4, 0);
@@ -2382,14 +2382,14 @@ void sub_8136D54(void)
     SetMainCallback2(sub_8137EE8);
 }
 
-void sub_8136DA4(const u8 * str)
+static void sub_8136DA4(const u8 * str)
 {
     FillWindowPixelBuffer(sMonSummaryScreen->unk3000[0], 0);
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[0], 2, 4, 1, sUnknown_8463FA4[1], 0, str);
     PutWindowTilemap(sMonSummaryScreen->unk3000[0]);
 }
 
-void sub_8136DF0(const u8 * str)
+static void sub_8136DF0(const u8 * str)
 {
     u8 v0;
     s32 width;
@@ -2402,7 +2402,7 @@ void sub_8136DF0(const u8 * str)
     PutWindowTilemap(sMonSummaryScreen->unk3000[1]);
 }
 
-void sub_8136E50(const u8 * msg)
+static void sub_8136E50(const u8 * msg)
 {
     FillWindowPixelBuffer(sMonSummaryScreen->unk3000[2], 0);
 
@@ -2422,7 +2422,7 @@ void sub_8136E50(const u8 * msg)
     PutWindowTilemap(sMonSummaryScreen->unk3000[2]);
 }
 
-void sub_8136F4C(void)
+static void sub_8136F4C(void)
 {
     FillWindowPixelBuffer(sMonSummaryScreen->unk3000[3], 0);
 
@@ -2443,7 +2443,7 @@ void sub_8136F4C(void)
     PutWindowTilemap(sMonSummaryScreen->unk3000[3]);
 }
 
-void sub_8136FB0(void)
+static void sub_8136FB0(void)
 {
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[3], 2, 47, 19, sUnknown_8463FA4[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.unk3028);
 
@@ -2477,7 +2477,7 @@ void sub_8136FB0(void)
     }
 }
 
-void sub_81370EC(void)
+static void sub_81370EC(void)
 {
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[3], 2, 14 + sUnknown_203B144->unk02, 4, sUnknown_8463FA4[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.unk3090);
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[3], 2, 50 + sUnknown_203B144->unk04, 22, sUnknown_8463FA4[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.unk309C[PSS_STAT_ATK]);
@@ -2491,7 +2491,7 @@ void sub_81370EC(void)
 
 #define MACRO_8137270(x) ((x) * 28 + 5)
 
-void sub_8137270(void)
+static void sub_8137270(void)
 {
     u8 i;
 
@@ -2511,7 +2511,7 @@ void sub_8137270(void)
 
 #define MACRO_81372E4(x) ((x) * 28 + 16)
 
-void sub_81372E4(u8 i)
+static void sub_81372E4(u8 i)
 {
     u8 v0 = 0;
     u8 curPP = sub_8138C24(&sMonSummaryScreen->currentMon, i);
@@ -2558,7 +2558,7 @@ void sub_81372E4(u8 i)
     }
 }
 
-void sub_81374E8(void)
+static void sub_81374E8(void)
 {
     FillWindowPixelBuffer(sMonSummaryScreen->unk3000[4], 0);
 
@@ -2580,7 +2580,7 @@ void sub_81374E8(void)
     PutWindowTilemap(sMonSummaryScreen->unk3000[4]);
 }
 
-void sub_8137554(void)
+static void sub_8137554(void)
 {
     if (!sMonSummaryScreen->isEgg)
         sub_8137944();
@@ -2588,7 +2588,7 @@ void sub_8137554(void)
         sub_8137970();
 }
 
-void sub_8137578(void)
+static void sub_8137578(void)
 {
     u8 nature;
     u8 level;
@@ -2660,7 +2660,7 @@ void sub_8137578(void)
     AddTextPrinterParameterized4(sMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, sUnknown_8463FA4[0], TEXT_SPEED_FF, natureMetOrHatchedAtLevelStr);
 }
 
-void sub_8137724(void)
+static void sub_8137724(void)
 {
     u8 nature;
     u8 level;
@@ -2755,7 +2755,7 @@ void sub_8137724(void)
     AddTextPrinterParameterized4(sMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, sUnknown_8463FA4[0], TEXT_SPEED_FF, natureMetOrHatchedAtLevelStr);
 }
 
-void sub_8137944(void)
+static void sub_8137944(void)
 {
     if (sub_813847C(&sMonSummaryScreen->currentMon) == TRUE)
         sub_8137578();
@@ -2763,7 +2763,7 @@ void sub_8137944(void)
         sub_8137724();
 }
 
-void sub_8137970(void)
+static void sub_8137970(void)
 {
     u8 metLocation;
     u8 version;
@@ -2816,7 +2816,7 @@ void sub_8137970(void)
     AddTextPrinterParameterized4(sMonSummaryScreen->unk3000[4], 2, 0, 3, 0, 0, sUnknown_8463FA4[0], TEXT_SPEED_FF, sUnknown_8463ED4[chosenStrIndex]);
 }
 
-void sub_8137A90(void)
+static void sub_8137A90(void)
 {
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[4], 2,
                                  26, 7,
@@ -2829,7 +2829,7 @@ void sub_8137A90(void)
                                  gUnknown_8419C59);
 }
 
-void sub_8137AF8(void)
+static void sub_8137AF8(void)
 {
     if (sUnknown_203B16D < 5)
     {
@@ -2854,7 +2854,7 @@ void sub_8137AF8(void)
     }
 }
 
-void sub_8137BD0(void)
+static void sub_8137BD0(void)
 {
     switch (sMonSummaryScreen->curPageIndex)
     {
@@ -2874,7 +2874,7 @@ void sub_8137BD0(void)
 
 #ifdef NONMATCHING
 // bad register allocation
-void sub_8137C18(void)
+static void sub_8137C18(void)
 {
     FillWindowPixelBuffer(sMonSummaryScreen->unk3000[5], 0);
 
@@ -2888,7 +2888,7 @@ void sub_8137C18(void)
 }
 #else
 NAKED
-void sub_8137C18(void)
+static void sub_8137C18(void)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                 "\tmov r6, r8\n"
@@ -2945,7 +2945,7 @@ void sub_8137C18(void)
 }
 #endif // NONMATCHING
 
-void sub_8137C90(void)
+static void sub_8137C90(void)
 {
     u8 i;
 
@@ -2963,7 +2963,7 @@ void sub_8137C90(void)
         BlitMoveInfoIcon(sMonSummaryScreen->unk3000[5], sMonSummaryScreen->unk3250[4] + 1, 3, MACRO_8137270(4));
 }
 
-void sub_8137D28(u8 curPageIndex)
+static void sub_8137D28(u8 curPageIndex)
 {
     switch (curPageIndex)
     {
@@ -3004,14 +3004,14 @@ void sub_8137D28(u8 curPageIndex)
     }
 }
 
-void sub_8137E28(void)
+static void sub_8137E28(void)
 {
     PutWindowTilemap(sMonSummaryScreen->unk3000[0]);
     PutWindowTilemap(sMonSummaryScreen->unk3000[1]);
     PutWindowTilemap(sMonSummaryScreen->unk3000[2]);
 }
 
-void sub_8137E64(u8 taskId)
+static void sub_8137E64(u8 taskId)
 {
     sub_813AF90();
     FreeAllSpritePalettes();
@@ -3030,7 +3030,7 @@ void sub_8137E64(u8 taskId)
     FREE_AND_SET_NULL_IF_SET(sUnknown_203B144);
 }
 
-void sub_8137EE8(void)
+static void sub_8137EE8(void)
 {
     RunTasks();
     AnimateSprites();
@@ -3038,7 +3038,7 @@ void sub_8137EE8(void)
     UpdatePaletteFade();
 }
 
-void sub_8137F00(void)
+static void sub_8137F00(void)
 {
     u8 i;
 
@@ -3061,7 +3061,7 @@ void sub_8137F00(void)
     }
 }
 
-void sub_8137F68(void)
+static void sub_8137F68(void)
 {
     u8 i;
 
@@ -3092,7 +3092,7 @@ void sub_8137F68(void)
     }
 }
 
-void sub_8137FF4(void)
+static void sub_8137FF4(void)
 {
     if (sMonSummaryScreen->unk324C < 240)
     {
@@ -3107,7 +3107,7 @@ void sub_8137FF4(void)
     }
 }
 
-void sub_813805C(void)
+static void sub_813805C(void)
 {
     if (sMonSummaryScreen->unk324C >= 60)
     {
@@ -3125,7 +3125,7 @@ void sub_813805C(void)
     }
 }
 
-void sub_81380F0(void)
+static void sub_81380F0(void)
 {
     if (sMonSummaryScreen->unk3224 == 1)
     {
@@ -3143,7 +3143,7 @@ void sub_81380F0(void)
     }
 }
 
-void sub_8138134(void)
+static void sub_8138134(void)
 {
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_SKILLS
         && sMonSummaryScreen->unk3224 == 0)
@@ -3154,7 +3154,7 @@ void sub_8138134(void)
         sub_8137F00();
 }
 
-void sub_813817C(void)
+static void sub_813817C(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -3167,18 +3167,18 @@ void sub_813817C(void)
     sub_8138134();
 }
 
-void sub_81381AC(void)
+static void sub_81381AC(void)
 {
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
 }
 
-void sub_81381C0(void)
+static void sub_81381C0(void)
 {
     SetVBlankCallback(sub_813817C);
 }
 
-void sub_81381D0(void)
+static void sub_81381D0(void)
 {
     u8 i;
 
@@ -3205,7 +3205,7 @@ void sub_81381D0(void)
         }
 }
 
-void sub_8138280(u8 curPageIndex)
+static void sub_8138280(u8 curPageIndex)
 {
     u8 i;
     u32 bgPriority1 = GetGpuReg(REG_OFFSET_BG1CNT) & 3;
@@ -3251,7 +3251,7 @@ void sub_8138280(u8 curPageIndex)
         }
 }
 
-void sub_8138414(u8 curPageIndex)
+static void sub_8138414(u8 curPageIndex)
 {
     u8 i;
 
@@ -3260,7 +3260,7 @@ void sub_8138414(u8 curPageIndex)
 
 }
 
-void sub_8138440(void)
+static void sub_8138440(void)
 {
     switch (sMonSummaryScreen->curPageIndex)
     {
@@ -3277,7 +3277,7 @@ void sub_8138440(void)
     }
 }
 
-u8 sub_813847C(struct Pokemon * mon)
+static u8 sub_813847C(struct Pokemon * mon)
 {
     u8 i;
     u8 multiplayerId;
@@ -3310,7 +3310,7 @@ u8 sub_813847C(struct Pokemon * mon)
 
 #define SUB_8138538_BASE_TILE_NUM (345)
 
-void sub_8138538(void)
+static void sub_8138538(void)
 {
     switch (sMonSummaryScreen->curPageIndex)
     {
@@ -3392,7 +3392,7 @@ void sub_8138538(void)
     }
 }
 
-void sub_8138A38(void)
+static void sub_8138A38(void)
 {
     switch (sMonSummaryScreen->curPageIndex)
     {
@@ -3436,7 +3436,7 @@ void sub_8138B38(u8 mode)
     sMonSummaryScreen->mode = mode;
 }
 
-bool32 sub_8138B4C(void)
+static bool32 sub_8138B4C(void)
 {
     if (!IsUpdateLinkStateCBActive()
         && IsMultiBattle() == TRUE
@@ -3447,7 +3447,7 @@ bool32 sub_8138B4C(void)
     return FALSE;
 }
 
-void sub_8138B8C(struct Pokemon * mon)
+static void sub_8138B8C(struct Pokemon * mon)
 {
     if (!sMonSummaryScreen->isBoxMon)
     {
@@ -3461,7 +3461,7 @@ void sub_8138B8C(struct Pokemon * mon)
     }
 }
 
-u16 sub_8138BEC(struct Pokemon * mon, u8 moveSlot)
+static u16 sub_8138BEC(struct Pokemon * mon, u8 moveSlot)
 {
     u16 move;
 
@@ -3483,7 +3483,7 @@ u16 sub_8138BEC(struct Pokemon * mon, u8 moveSlot)
     return move;
 }
 
-u16 sub_8138C24(struct Pokemon * mon, u8 moveSlot)
+static u16 sub_8138C24(struct Pokemon * mon, u8 moveSlot)
 {
     u16 pp;
 
@@ -3504,7 +3504,7 @@ u16 sub_8138C24(struct Pokemon * mon, u8 moveSlot)
     return pp;
 }
 
-u8 sub_8138C5C(u32 status)
+static u8 sub_8138C5C(u32 status)
 {
     if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP) == 0)
         return AILMENT_FNT;
@@ -3530,7 +3530,7 @@ u8 sub_8138C5C(u32 status)
     return AILMENT_NONE;
 }
 
-void sub_8138CD8(u8 id)
+static void sub_8138CD8(u8 id)
 {
     u8 i;
 
@@ -3714,7 +3714,7 @@ void sub_8138CD8(u8 id)
     }
 }
 
-void sub_81390B0(void)
+static void sub_81390B0(void)
 {
     struct Pokemon * partyMons;
     struct Pokemon * mon;
@@ -3749,7 +3749,7 @@ void sub_81390B0(void)
     SetMonData(mon, MON_DATA_PP_BONUSES, &allMovesPPBonuses);
 }
 
-void sub_81391EC(void)
+static void sub_81391EC(void)
 {
     struct BoxPokemon * boxMons;
     struct BoxPokemon * boxMon;
@@ -3784,7 +3784,7 @@ void sub_81391EC(void)
     SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &allMovesPPBonuses);
 }
 
-void sub_8139328(struct Pokemon * mon)
+static void sub_8139328(struct Pokemon * mon)
 {
     if (!sMonSummaryScreen->isBoxMon)
     {
@@ -3800,7 +3800,7 @@ void sub_8139328(struct Pokemon * mon)
     }
 }
 
-u8 sub_8139388(void)
+static u8 sub_8139388(void)
 {
     u16 move;
 
@@ -3812,7 +3812,7 @@ u8 sub_8139388(void)
     return TRUE;
 }
 
-void sub_81393D4(u8 taskId)
+static void sub_81393D4(u8 taskId)
 {
     u8 i;
 
@@ -3950,7 +3950,7 @@ void sub_81393D4(u8 taskId)
     }
 }
 
-void sub_8139768(struct Sprite * sprite)
+static void sub_8139768(struct Sprite * sprite)
 {
     if (sMonSummaryScreen->unk3020 >= 2)
         return;
@@ -3990,7 +3990,7 @@ void sub_8139768(struct Sprite * sprite)
     }
 }
 
-void sub_8139868(struct Sprite * sprite)
+static void sub_8139868(struct Sprite * sprite)
 {
     if (sMonSummaryScreen->unk3020 >= 2)
         return;
@@ -4037,11 +4037,11 @@ void sub_8139868(struct Sprite * sprite)
     }
 }
 
-void nullsub_96(struct Sprite * sprite)
+static void nullsub_96(struct Sprite * sprite)
 {
 }
 
-void sub_813995C(void)
+static void sub_813995C(void)
 {
     u16 spriteId;
     u16 species;
@@ -4082,7 +4082,7 @@ void sub_813995C(void)
     sub_8139AAC(spriteId);
 }
 
-void sub_8139AAC(u16 spriteId)
+static void sub_8139AAC(u16 spriteId)
 {
     u16 curHp;
     u16 maxHp;
@@ -4131,18 +4131,18 @@ void sub_8139AAC(u16 spriteId)
     gSprites[spriteId].callback = sub_8139768;
 }
 
-void sub_8139C44(u8 invisible)
+static void sub_8139C44(u8 invisible)
 {
     gSprites[sMonSummaryScreen->unk3010].invisible = invisible;
 }
 
-void sub_8139C80(void)
+static void sub_8139C80(void)
 {
     FreeAndDestroyMonPicSprite(sMonSummaryScreen->unk3010);
     FREE_AND_SET_NULL(sUnknown_203B170);
 }
 
-void sub_8139CB0(void)
+static void sub_8139CB0(void)
 {
     u16 ballItemId;
     u8 ballId;
@@ -4162,17 +4162,17 @@ void sub_8139CB0(void)
     sub_8139D54(1);
 }
 
-void sub_8139D54(u8 invisible)
+static void sub_8139D54(u8 invisible)
 {
     gSprites[sMonSummaryScreen->unk300C].invisible = invisible;
 }
 
-void sub_8139D90(void)
+static void sub_8139D90(void)
 {
     DestroySpriteAndFreeResources2(&gSprites[sMonSummaryScreen->unk300C]);
 }
 
-void sub_8139DBC(void)
+static void sub_8139DBC(void)
 {
     u16 species;
     u32 personality;
@@ -4205,12 +4205,12 @@ void sub_8139DBC(void)
     sub_8139EE4(1);
 }
 
-void sub_8139EE4(u8 invisible)
+static void sub_8139EE4(u8 invisible)
 {
     gSprites[sMonSummaryScreen->unk3014].invisible = invisible;
 }
 
-void sub_8139F20(void)
+static void sub_8139F20(void)
 {
     u16 species;
     species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES2);
@@ -4218,7 +4218,7 @@ void sub_8139F20(void)
     DestroyMonIcon(&gSprites[sMonSummaryScreen->unk3014]);
 }
 
-void sub_8139F64(u16 tileTag, u16 palTag)
+static void sub_8139F64(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;
@@ -4273,14 +4273,14 @@ void sub_8139F64(u16 tileTag, u16 palTag)
     FREE_AND_SET_NULL_IF_SET(gfxBufferPtrs[1]);
 }
 
-void sub_813A0E8(u8 invisible)
+static void sub_813A0E8(u8 invisible)
 {
     u8 i;
     for (i = 0; i < 4; i++)
         sUnknown_203B148[i]->sprite->invisible = invisible;
 }
 
-void sub_813A124(struct Sprite * sprite)
+static void sub_813A124(struct Sprite * sprite)
 {
     u8 i;
 
@@ -4323,7 +4323,7 @@ void sub_813A124(struct Sprite * sprite)
     }
 }
 
-void sub_813A21C(void)
+static void sub_813A21C(void)
 {
     u8 i;
 
@@ -4336,7 +4336,7 @@ void sub_813A21C(void)
     }
 }
 
-void sub_813A254(u16 tileTag, u16 palTag)
+static void sub_813A254(u16 tileTag, u16 palTag)
 {
     u16 spriteId;
     void * gfxBufferPtr;
@@ -4379,7 +4379,7 @@ void sub_813A254(u16 tileTag, u16 palTag)
     FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
 }
 
-void sub_813A334(void)
+static void sub_813A334(void)
 {
     if (sUnknown_203B158->sprite != NULL)
         DestroySpriteAndFreeResources(sUnknown_203B158->sprite);
@@ -4387,7 +4387,7 @@ void sub_813A334(void)
     FREE_AND_SET_NULL_IF_SET(sUnknown_203B158);
 }
 
-void sub_813A35C(void)
+static void sub_813A35C(void)
 {
     sMonSummaryScreen->unk326C = sub_8138C5C(GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_STATUS));
 
@@ -4401,7 +4401,7 @@ void sub_813A35C(void)
     sub_813A3B8(0);
 }
 
-void sub_813A3B8(u8 invisible)
+static void sub_813A3B8(u8 invisible)
 {
     if (sMonSummaryScreen->unk326C == AILMENT_NONE || sMonSummaryScreen->isEgg)
         sUnknown_203B158->sprite->invisible = TRUE;
@@ -4425,7 +4425,7 @@ void sub_813A3B8(u8 invisible)
     }
 }
 
-void sub_813A45C(u16 tileTag, u16 palTag)
+static void sub_813A45C(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;
@@ -4492,7 +4492,7 @@ void sub_813A45C(u16 tileTag, u16 palTag)
     FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
 }
 
-void sub_813A620(void)
+static void sub_813A620(void)
 {
     u8 numWholeHpBarTiles = 0;
     u8 i;
@@ -4566,7 +4566,7 @@ void sub_813A620(void)
     StartSpriteAnim(sUnknown_203B15C->sprites[8], 11);
 }
 
-void sub_813A800(void)
+static void sub_813A800(void)
 {
     u8 i;
 
@@ -4577,7 +4577,7 @@ void sub_813A800(void)
     FREE_AND_SET_NULL_IF_SET(sUnknown_203B15C);
 }
 
-void sub_813A838(u8 invisible)
+static void sub_813A838(u8 invisible)
 {
     u8 i;
 
@@ -4585,7 +4585,7 @@ void sub_813A838(u8 invisible)
         sUnknown_203B15C->sprites[i]->invisible = invisible;
 }
 
-void sub_813A874(u16 tileTag, u16 palTag)
+static void sub_813A874(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;
@@ -4634,7 +4634,7 @@ void sub_813A874(u16 tileTag, u16 palTag)
     FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
 }
 
-void sub_813A994(void)
+static void sub_813A994(void)
 {
     u8 numWholeExpBarTiles = 0;
     u8 i;
@@ -4698,7 +4698,7 @@ void sub_813A994(void)
     StartSpriteAnim(sUnknown_203B160->sprites[10], 11);
 }
 
-void sub_813AB38(void)
+static void sub_813AB38(void)
 {
     u8 i;
 
@@ -4709,7 +4709,7 @@ void sub_813AB38(void)
     FREE_AND_SET_NULL_IF_SET(sUnknown_203B160);
 }
 
-void sub_813AB70(u8 invisible)
+static void sub_813AB70(u8 invisible)
 {
     u8 i;
 
@@ -4717,7 +4717,7 @@ void sub_813AB70(u8 invisible)
         sUnknown_203B160->sprites[i]->invisible = invisible;
 }
 
-void sub_813ABAC(u16 tileTag, u16 palTag)
+static void sub_813ABAC(u16 tileTag, u16 palTag)
 {
     u16 spriteId;
     void * gfxBufferPtr;
@@ -4761,7 +4761,7 @@ void sub_813ABAC(u16 tileTag, u16 palTag)
     FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
 }
 
-void sub_813AC8C(void)
+static void sub_813AC8C(void)
 {
     if (sUnknown_203B164->sprite != NULL)
         DestroySpriteAndFreeResources(sUnknown_203B164->sprite);
@@ -4769,7 +4769,7 @@ void sub_813AC8C(void)
     FREE_AND_SET_NULL_IF_SET(sUnknown_203B164);
 }
 
-void sub_813ACB4(void)
+static void sub_813ACB4(void)
 {
     if (!CheckPartyPokerus(&sMonSummaryScreen->currentMon, 0)
         && CheckPartyHasHadPokerus(&sMonSummaryScreen->currentMon, 0))
@@ -4778,7 +4778,7 @@ void sub_813ACB4(void)
         sub_813ACF8(1);
 }
 
-void sub_813ACF8(u8 invisible)
+static void sub_813ACF8(u8 invisible)
 {
     if (!CheckPartyPokerus(&sMonSummaryScreen->currentMon, 0)
         && CheckPartyHasHadPokerus(&sMonSummaryScreen->currentMon, 0))
@@ -4802,7 +4802,7 @@ void sub_813ACF8(u8 invisible)
     }
 }
 
-void sub_813ADA8(u16 tileTag, u16 palTag)
+static void sub_813ADA8(u16 tileTag, u16 palTag)
 {
     u16 spriteId;
     void * gfxBufferPtr;
@@ -4845,7 +4845,7 @@ void sub_813ADA8(u16 tileTag, u16 palTag)
     FREE_AND_SET_NULL_IF_SET(gfxBufferPtr);
 }
 
-void sub_813AE88(void)
+static void sub_813AE88(void)
 {
     if (sUnknown_203B168->sprite != NULL)
         DestroySpriteAndFreeResources(sUnknown_203B168->sprite);
@@ -4853,7 +4853,7 @@ void sub_813AE88(void)
     FREE_AND_SET_NULL_IF_SET(sUnknown_203B168);
 }
 
-void sub_813AEB0(u8 invisible)
+static void sub_813AEB0(u8 invisible)
 {
     if (IsMonShiny(&sMonSummaryScreen->currentMon) == TRUE
         && !sMonSummaryScreen->isEgg)
@@ -4873,7 +4873,7 @@ void sub_813AEB0(u8 invisible)
     }
 }
 
-void sub_813AF50(void)
+static void sub_813AF50(void)
 {
     if (IsMonShiny(&sMonSummaryScreen->currentMon) == TRUE && !sMonSummaryScreen->isEgg)
         sub_813AEB0(0);
@@ -4881,7 +4881,7 @@ void sub_813AF50(void)
         sub_813AEB0(1);
 }
 
-void sub_813AF90(void)
+static void sub_813AF90(void)
 {
     sub_813A21C();
     sub_813A800();
@@ -4896,7 +4896,7 @@ void sub_813AF90(void)
     ResetSpriteData();
 }
 
-void sub_813AFC4(void)
+static void sub_813AFC4(void)
 {
     sub_8139CB0();
     sub_8139D54(0);
@@ -4911,7 +4911,7 @@ void sub_813AFC4(void)
     sub_813AF50();
 }
 
-void sub_813AFFC(void)
+static void sub_813AFFC(void)
 {
     u32 markings = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
 
@@ -4928,12 +4928,12 @@ void sub_813AFFC(void)
     sub_813B084(1);
 }
 
-void sub_813B068(void)
+static void sub_813B068(void)
 {
     DestroySpriteAndFreeResources(sMonSummaryScreen->markingSprite);
 }
 
-void sub_813B084(u8 invisible)
+static void sub_813B084(u8 invisible)
 {
     u32 markings = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
 
@@ -4943,7 +4943,7 @@ void sub_813B084(u8 invisible)
         sMonSummaryScreen->markingSprite->invisible = invisible;
 }
 
-void sub_813B0E4(void)
+static void sub_813B0E4(void)
 {
     u32 markings = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
 
@@ -4951,7 +4951,7 @@ void sub_813B0E4(void)
     sub_813B084(0);
 }
 
-void sub_813B120(u8 taskId, s8 a1)
+static void sub_813B120(u8 taskId, s8 a1)
 {
     s8 v0 = -1;
 
@@ -4992,7 +4992,7 @@ void sub_813B120(u8 taskId, s8 a1)
     sMonSummaryScreen->unk328C = 0;
 }
 
-s8 sub_813B20C(s8 a0)
+static s8 sub_813B20C(s8 a0)
 {
     struct Pokemon * partyMons = sMonSummaryScreen->monList.mons;
     s8 v1 = 0;
@@ -5020,7 +5020,7 @@ s8 sub_813B20C(s8 a0)
     return -1;
 }
 
-u8 sub_813B2C8(struct Pokemon * partyMons)
+static u8 sub_813B2C8(struct Pokemon * partyMons)
 {
     if (GetMonData(partyMons, MON_DATA_SPECIES) != 0 && (sMonSummaryScreen->curPageIndex != 0 || GetMonData(partyMons, MON_DATA_IS_EGG) == 0))
         return TRUE;
@@ -5028,7 +5028,7 @@ u8 sub_813B2C8(struct Pokemon * partyMons)
     return FALSE;
 }
 
-s8 sub_813B304(u8 a0)
+static s8 sub_813B304(u8 a0)
 {
     while (TRUE)
     {
@@ -5043,7 +5043,7 @@ s8 sub_813B304(u8 a0)
     return (s8)sUnknown_8463FB8[a0];
 }
 
-s8 sub_813B348(u8 a0)
+static s8 sub_813B348(u8 a0)
 {
     while (1)
     {
@@ -5059,7 +5059,7 @@ s8 sub_813B348(u8 a0)
     return (s8)(sUnknown_8463FB8[a0]);
 }
 
-s8 sub_813B38C(s8 a0)
+static s8 sub_813B38C(s8 a0)
 {
     u8 v0 = 0;
     u8 i;
@@ -5081,7 +5081,7 @@ s8 sub_813B38C(s8 a0)
         return sub_813B348(v0);
 }
 
-void sub_813B3F0(u8 id)
+static void sub_813B3F0(u8 id)
 {
     switch (sMonSummaryScreen->unk328C)
     {
@@ -5196,7 +5196,7 @@ void sub_813B3F0(u8 id)
     }
 }
 
-void sub_813B750(u8 curPageIndex)
+static void sub_813B750(u8 curPageIndex)
 {
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
 
@@ -5212,7 +5212,7 @@ void sub_813B750(u8 curPageIndex)
     }
 }
 
-void sub_813B784(void)
+static void sub_813B784(void)
 {
     if (!GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_EGG))
     {
@@ -5223,7 +5223,7 @@ void sub_813B784(void)
     }
 }
 
-bool32 sub_813B7E0(u8 nature)
+static bool32 sub_813B7E0(u8 nature)
 {
     if (nature == NATURE_BOLD || nature == NATURE_GENTLE)
         return TRUE;
@@ -5231,7 +5231,7 @@ bool32 sub_813B7E0(u8 nature)
     return FALSE;
 }
 
-bool32 sub_813B7F8(void)
+static bool32 sub_813B7F8(void)
 {
     u8 version = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
 
@@ -5245,14 +5245,14 @@ bool32 sub_813B7F8(void)
     return FALSE;
 }
 
-bool32 sub_813B838(u8 place)
+static bool32 sub_813B838(u8 place)
 {
     if (place >= MAPSECS_KANTO && place < MAPSEC_NONE)
         return TRUE;
     return FALSE;
 }
 
-void sub_813B854(void)
+static void sub_813B854(void)
 {
     ShowPokemonSummaryScreen(0, 0, 0, CB2_ReturnToField, PSS_MODE_NORMAL);
 }

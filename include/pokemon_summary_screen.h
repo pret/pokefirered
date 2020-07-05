@@ -7,10 +7,12 @@ extern const u8 * const gMoveDescriptionPointers[];
 extern const u8 * const gNatureNamePointers[];
 
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
-void ShowPokemonSummaryScreenSet40EF(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetUnknownTaskId(u8 a0);
 void SummaryScreen_DestroyUnknownTask(void);
+u8 GetLastViewedMonIndex(void);
+void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
+void sub_8138B38(u8);
 
 // The Pokemon Summary Screen can operate in different modes. Certain features,
 // such as move re-ordering, are available in the different modes.
@@ -53,10 +55,6 @@ enum PokemonSummaryScreenStat
     PSS_STAT_SPD,
     PSS_STAT_SPE
 };
-
-u8 GetLastViewedMonIndex(void);
-void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
-void sub_8138B38(u8);
 
 #define TAG_PSS_UNK_64 0x64
 #define TAG_PSS_UNK_65 0x65

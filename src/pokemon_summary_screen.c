@@ -186,8 +186,7 @@ struct PokemonSummaryScreenData
         u8 ALIGNED(4) unk31B0[9];
 
         u8 ALIGNED(4) unk31BC[13];
-        u8 ALIGNED(4) unk31CC[20];
-        u8 ALIGNED(4) pad31E0[0x20];
+        u8 ALIGNED(4) unk31CC[52];
     } summary;
 
     u8 ALIGNED(4) isEgg; /* 0x3200 */
@@ -333,73 +332,618 @@ extern const u32 gUnknown_8E9B750[];
 extern const u32 gUnknown_8E9B950[];
 extern const u32 gUnknown_8E9B598[];
 extern const u32 gUnknown_8E9BA9C[];
-extern const u32 gUnknown_8463C80[];
-extern const u32 gUnknown_8463B88[];
 extern const u32 gUnknown_8E9BBCC[];
 extern const u16 gUnknown_8E9B310[];
 extern const u32 gUnknown_8E9A460[];
-
-extern const u32 gUnknown_84636C0[];
-extern const u32 gUnknown_8463700[];
-
-extern const struct BgTemplate gUnknown_8463EFC[4];
-
-extern const u8 gUnknown_8463FA4[][3];
-extern const u8 gUnknown_8463EF0[][3];
-
-extern const u8 * const gUnknown_8463EC4[];
-extern const u8 * const gUnknown_8463ED4[];
-
-extern const struct WindowTemplate gUnknown_8463F9C[];
-extern const struct WindowTemplate gUnknown_8463F0C[];
-extern const struct WindowTemplate gUnknown_8463F3C[];
-extern const struct WindowTemplate gUnknown_8463F5C[];
-extern const struct WindowTemplate gUnknown_8463F7C[];
-extern const struct WindowTemplate gUnknown_8463F24[];
-
-extern const s8 gUnknown_8463FBE[3];
-extern const s8 gUnknown_8463FC1[5];
-extern const s8 gUnknown_8463FC6[7];
-extern const s8 gUnknown_8463FCD[7];
-
-extern const s8 gUnknown_8463FD4[11];
-extern const s8 gUnknown_8463FDF[11];
-extern const s8 gUnknown_8463FEA[15];
-
-extern const u32 gUnknown_8463740[];
-extern const u32 gUnknown_846386C[];
-
-extern const u16 gUnknown_8463720[];
-extern const struct OamData gUnknown_846398C;
-extern const union AnimCmd * const gUnknown_84639A4[];
-
+extern const u16 gUnknown_8E9B578[];
 extern const u32 gUnknown_8E9BF48[];
 extern const u16 gUnknown_8E9BF28[];
-
-extern const struct OamData gUnknown_84639AC;
-extern const union AnimCmd * const gUnknown_84639F4[];
-
 extern const u32 gUnknown_8E9B4B8[];
-extern const u16 * const gUnknown_8463FFC[];
-extern const struct OamData gUnknown_8463A14;
-extern const union AnimCmd * const gUnknown_8463A7C[];
-
 extern const u32 gUnknown_8E9B3F0[];
 extern const u16 gUnknown_8E9B578[];
 
-extern const u32 gUnknown_8463B20[];
-extern const u16 gUnknown_8463B00[];
+static const u32 gUnknown_84636C0[] = INCBIN_U32("graphics/interface/pokesummary_unk_84636C0.gbapal");
+static const u16 gUnknown_84636E0[] = INCBIN_U16("graphics/interface/pokesummary_unk_84636E0.gbapal");
+static const u32 gUnknown_8463700[] = INCBIN_U32("graphics/interface/pokesummary_unk_8463700.gbapal");
+static const u16 gUnknown_8463720[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463720.gbapal");
+static const u32 gUnknown_8463740[] = INCBIN_U32("graphics/interface/pokesummary_unk_8463740.4bpp.lz");
+static const u32 gUnknown_846386C[] = INCBIN_U32("graphics/interface/pokesummary_unk_846386C.4bpp.lz");
 
-extern const struct OamData gUnknown_8463AEC;
-extern const union AnimCmd * const gUnknown_8463AFC[];
+static const struct OamData gUnknown_846398C =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
 
-extern const u32 gUnknown_8463B64[];
-extern const u16 gUnknown_8463B44[];
-extern const struct OamData gUnknown_8463B30;
-extern const union AnimCmd * const gUnknown_8463B40[];
+static const union AnimCmd gUnknown_8463994[] = 
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_JUMP(0),
+};
 
-extern const u16 gUnknown_84636E0[];
-extern const u8 gUnknown_8463FB8[];
+static const union AnimCmd gUnknown_846399C[] = 
+{
+    ANIMCMD_FRAME(0x20, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const gUnknown_84639A4[] =
+{
+    gUnknown_8463994,
+    gUnknown_846399C
+};
+
+static const struct OamData gUnknown_84639AC = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+static const union AnimCmd gUnknown_84639B4[] = 
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639BC[] = 
+{
+    ANIMCMD_FRAME(4, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639C4[] = 
+{
+    ANIMCMD_FRAME(8, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639CC[] = 
+{
+    ANIMCMD_FRAME(12, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639D4[] = 
+{
+    ANIMCMD_FRAME(16, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639DC[] = 
+{
+    ANIMCMD_FRAME(20, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639E4[] = 
+{
+    ANIMCMD_FRAME(24, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_84639EC[] = 
+{
+    ANIMCMD_FRAME(28, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const gUnknown_84639F4[] =
+{
+    gUnknown_84639B4,
+    gUnknown_84639BC,
+    gUnknown_84639C4,
+    gUnknown_84639CC,
+    gUnknown_84639D4,
+    gUnknown_84639DC,
+    gUnknown_84639E4,
+    gUnknown_84639EC
+};
+
+static const struct OamData gUnknown_8463A14 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+static const union AnimCmd gUnknown_8463A1C[] = 
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A24[] = 
+{
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A2C[] = 
+{
+    ANIMCMD_FRAME(2, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A34[] = 
+{
+    ANIMCMD_FRAME(3, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A3C[] = 
+{
+    ANIMCMD_FRAME(4, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A44[] = 
+{
+    ANIMCMD_FRAME(5, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A4C[] = 
+{
+    ANIMCMD_FRAME(6, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A54[] = 
+{
+    ANIMCMD_FRAME(7, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A5C[] = 
+{
+    ANIMCMD_FRAME(8, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A64[] = 
+{
+    ANIMCMD_FRAME(9, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A6C[] = 
+{
+    ANIMCMD_FRAME(10, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gUnknown_8463A74[] = 
+{
+    ANIMCMD_FRAME(11, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const gUnknown_8463A7C[] =
+{
+    gUnknown_8463A1C,
+    gUnknown_8463A24,
+    gUnknown_8463A2C,
+    gUnknown_8463A34,
+    gUnknown_8463A3C,
+    gUnknown_8463A44,
+    gUnknown_8463A4C,
+    gUnknown_8463A54,
+    gUnknown_8463A5C,
+    gUnknown_8463A64,
+    gUnknown_8463A6C,
+    gUnknown_8463A74
+};
+
+const u16 gUnknown_8463AAC[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463AAC.gbapal");
+const u16 gUnknown_8463ACC[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463ACC.gbapal");
+
+static const struct OamData gUnknown_8463AEC = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+static const union AnimCmd gUnknown_8463AF4[] = 
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const gUnknown_8463AFC[] =
+{
+    gUnknown_8463AF4
+};
+
+static const u16 gUnknown_8463B00[] = INCBIN_U16("graphics/interface/pokesummary_unk_8463B00.gbapal");
+static const u32 gUnknown_8463B20[] = INCBIN_U32("graphics/interface/pokesummary_unk_8463B20.4bpp.lz");
+
+static const struct OamData gUnknown_8463B30 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+static const union AnimCmd gUnknown_8463B38[] = 
+{
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const gUnknown_8463B40[] =
+{
+    gUnknown_8463B38
+};
+
+static const u16 gUnknown_8463B44[] = INCBIN_U16( "graphics/interface/pokesummary_unk_8463B44.gbapal");
+static const u32 gUnknown_8463B64[] = INCBIN_U32( "graphics/interface/pokesummary_unk_8463B64.4bpp.lz");
+static const u32 gUnknown_8463B88[] = INCBIN_U32( "graphics/interface/pokesummary_unk_8463B88.bin.lz");
+static const u32 gUnknown_8463C80[] = INCBIN_U32( "graphics/interface/pokesummary_unk_8463C80.bin.lz");
+
+#include "data/text/nature_names.h"
+
+static const u8 * const gUnknown_8463EC4[] = {
+    gUnknown_8419B44,
+    gUnknown_8419B7B,
+    gUnknown_8419BAE,
+    gUnknown_8419BDB
+};
+
+static const u8 * const gUnknown_8463ED4[] = {
+    gUnknown_8419A3D,
+    gUnknown_8419B18,
+    gUnknown_8419A6E,
+    gUnknown_8419B18,
+    gUnknown_8419AA2,
+    gUnknown_8419ADE,
+    gUnknown_8419B18
+};
+
+static const u8 gUnknown_8463EF0[][3] = {
+    {0, 7, 8},
+    {0, 1, 2},
+    {0, 3, 4},
+    {0, 5, 6}
+};
+
+static const struct BgTemplate gUnknown_8463EFC[] = 
+{
+	 {
+	 	.bg = 0,
+	 	.charBaseIndex = 0,
+	 	.mapBaseIndex = 14,
+	 	.screenSize = 1,
+	 	.paletteMode = 0,
+	 	.priority = 0,
+	 	.baseTile = 0x0000
+	 },
+	 {
+	 	.bg = 2,
+	 	.charBaseIndex = 2,
+	 	.mapBaseIndex = 10,
+	 	.screenSize = 1,
+	 	.paletteMode = 0,
+	 	.priority = 1,
+	 	.baseTile = 0x0000
+	 },
+	 {
+	 	.bg = 3,
+	 	.charBaseIndex = 2,
+	 	.mapBaseIndex = 9,
+	 	.screenSize = 0,
+	 	.paletteMode = 0,
+	 	.priority = 3,
+	 	.baseTile = 0x0000
+	 },
+	 {
+	 	.bg = 1,
+	 	.charBaseIndex = 2,
+	 	.mapBaseIndex = 12,
+	 	.screenSize = 1,
+	 	.paletteMode = 0,
+	 	.priority = 2,
+	 	.baseTile = 0x0000
+	 }
+};
+
+static const struct WindowTemplate gUnknown_8463F0C[] =
+{
+    {
+        .bg = 1,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 13,
+        .height = 2,
+        .paletteNum = 7,
+        .baseBlock = 0x0258
+    },
+    {
+        .bg = 1,
+        .tilemapLeft = 19,
+        .tilemapTop = 0,
+        .width = 11,
+        .height = 2,
+        .paletteNum = 7,
+        .baseBlock = 0x0272
+    },
+    {
+        .bg = 1,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 15,
+        .height = 2,
+        .paletteNum = 7,
+        .baseBlock = 0x0288
+    }
+};
+
+static const struct WindowTemplate gUnknown_8463F24[] = 
+{
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 13,
+        .height = 2,
+        .paletteNum = 7,
+        .baseBlock = 0x0258
+    },
+    {
+        .bg = 2,
+        .tilemapLeft = 19,
+        .tilemapTop = 0,
+        .width = 11,
+        .height = 2,
+        .paletteNum = 7,
+        .baseBlock = 0x0272
+    },
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 15,
+        .height = 2,
+        .paletteNum = 7,
+        .baseBlock = 0x0288
+    },
+};
+
+static const struct WindowTemplate gUnknown_8463F3C[] = 
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 2,
+        .width = 15,
+        .height = 12,
+        .paletteNum = 6,
+        .baseBlock = 0x0001
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 14,
+        .width = 28,
+        .height = 6,
+        .paletteNum = 6,
+        .baseBlock = 0x00b5
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0x0000
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0x0000
+    },
+};
+
+static const struct WindowTemplate gUnknown_8463F5C[] = 
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 2,
+        .width = 10,
+        .height = 14,
+        .paletteNum = 6,
+        .baseBlock = 0x0001
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 6,
+        .tilemapTop = 12,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 6,
+        .baseBlock = 0x008d
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 16,
+        .width = 29,
+        .height = 4,
+        .paletteNum = 6,
+        .baseBlock = 0x00c5
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0x0000
+    },
+};
+
+static const struct WindowTemplate gUnknown_8463F7C[] = 
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 2,
+        .width = 10,
+        .height = 18,
+        .paletteNum = 8,
+        .baseBlock = 0x0001
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 7,
+        .width = 15,
+        .height = 13,
+        .paletteNum = 6,
+        .baseBlock = 0x00b5
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 2,
+        .width = 5,
+        .height = 18,
+        .paletteNum = 6,
+        .baseBlock = 0x0178
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 6,
+        .tilemapTop = 4,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 6,
+        .baseBlock = 0x01d2
+    },
+};
+
+static const struct WindowTemplate gUnknown_8463F9C[] = 
+{
+    {
+        .bg = 255,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0x0000
+    },
+};
+
+
+static const u8 gUnknown_8463FA4[][3] =
+{
+    {0, 14, 10},
+    {0, 1, 2},
+    {0, 9, 8},
+    {0, 5, 4},
+    {0, 2, 3},
+    {0, 11, 10},
+};
+
+static const u8 ALIGNED(4) gUnknown_8463FB8[] =
+{
+    0, 2, 3, 1, 4, 5
+};
+
+static const s8 gUnknown_8463FBE[] =
+{
+    -1, 0, 1
+};
+
+static const s8 gUnknown_8463FC1[] =
+{
+    -2, -1, 0, 1, 2
+};
+
+static const s8 gUnknown_8463FC6[] =
+{
+    -3, -2, -1, 0, 1, 2, 3
+};
+
+static const s8 gUnknown_8463FCD[] =
+{
+    -5, -3, -1, 0, 1, 3, 5
+};
+
+static const s8 gUnknown_8463FD4[] =
+{
+    1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1
+};
+
+static const s8 gUnknown_8463FDF[] =
+{
+    2, 1, 0, -1, -2, 0, -2, -1, 0, 1, 2
+};
+
+static const s8 gUnknown_8463FEA[] =
+{
+    2, 1, 1, 0, -1, -1, -2, 0, -2, -1, -1, 0, 1, 1, 2
+};
+
+static const u16 * const gUnknown_8463FFC[] =
+{
+    gUnknown_8E9B578,
+    gUnknown_8463AAC,
+    gUnknown_8463ACC,
+};
+
 
 #define FREE_AND_SET_NULL_IF_SET(ptr) \
 {                                     \
@@ -1959,7 +2503,9 @@ void sub_8137270(void)
         if (gMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
             sub_81372E4(4);
         else
-            AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2, 3, MACRO_8137270(4), gUnknown_8463EF0[0], TEXT_SPEED_FF, gFameCheckerText_Cancel);
+            AddTextPrinterParameterized3(gMonSummaryScreen->unk3000[3], 2,
+                                         3, MACRO_8137270(4),
+                                         gUnknown_8463EF0[0], TEXT_SPEED_FF, gFameCheckerText_Cancel);
     }
 }
 

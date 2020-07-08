@@ -12,6 +12,10 @@ Makefile text eol=lf
 *.sed text eol=lf
 *.sh text eol=lf
 *.json text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+*.yml text eol=lf
+*.py text eol=lf
 
 *.png binary
 *.bin binary

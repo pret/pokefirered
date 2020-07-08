@@ -12,20 +12,6 @@ SECTIONS {
         . = 0x1C000;
 
         *(ewram_data);
-        /* pokemon_summary_screen.o */
-        . = ALIGN(4);
-        gUnknown_203B140 = .; . += 0x4;
-        gUnknown_203B144 = .; . += 0x4;
-        gUnknown_203B148 = .; . += 0x10;
-        gUnknown_203B158 = .; . += 0x4;
-        gUnknown_203B15C = .; . += 0x4;
-        gUnknown_203B160 = .; . += 0x4;
-        gUnknown_203B164 = .; . += 0x4;
-        gUnknown_203B168 = .; . += 0x4;
-        gLastViewedMonIndex = .; . += 0x1;
-        gUnknown_203B16D = .; . += 0x1;
-        gUnknown_203B16E = .; . += 0x2;
-        gUnknown_203B170 = .; . += 0x4;
 
         . = 0x40000;
 }

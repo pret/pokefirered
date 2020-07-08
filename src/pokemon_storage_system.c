@@ -138,7 +138,7 @@ void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
         gPokemonStoragePtr->boxWallpapers[boxId] = wallpaperId;
 }
 
-s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, s8 currIndex, u8 maxIndex, u8 flags)
+s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, s8 curIndex, u8 maxIndex, u8 flags)
 {
     // flags:
     // bit 0: Allow eggs
@@ -152,7 +152,7 @@ s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, s8 currIndex, u8 maxIndex, u
 
     if (flags == 1 || flags == 3)
     {
-        for (i = currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
+        for (i = curIndex + adder; i >= 0 && i <= maxIndex; i += adder)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE)
                 return i;
@@ -160,7 +160,7 @@ s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, s8 currIndex, u8 maxIndex, u
     }
     else
     {
-        for (i = currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
+        for (i = curIndex + adder; i >= 0 && i <= maxIndex; i += adder)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE
                 && !GetBoxMonData(&boxMons[i], MON_DATA_IS_EGG))

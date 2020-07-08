@@ -2872,78 +2872,18 @@ static void sub_8137BD0(void)
     PutWindowTilemap(sMonSummaryScreen->unk3000[5]);
 }
 
-#ifdef NONMATCHING
-// bad register allocation
 static void sub_8137C18(void)
 {
     FillWindowPixelBuffer(sMonSummaryScreen->unk3000[5], 0);
 
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[5], 2,
-                                 66, 1, sUnknown_8463FA4[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.unk31CC);
+                                 66, 1, sUnknown_8463FA4[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.unk31BC);
 
     AddTextPrinterParameterized3(sMonSummaryScreen->unk3000[5], 2,
                                  2, 15, sUnknown_8463FA4[0], TEXT_SPEED_FF,
                                  sMonSummaryScreen->summary.unk31CC);
 
 }
-#else
-NAKED
-static void sub_8137C18(void)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-                "\tmov r6, r8\n"
-                "\tpush {r6}\n"
-                "\tsub sp, 0xC\n"
-                "\tldr r5, _08137C7C @ =sMonSummaryScreen\n"
-                "\tldr r0, [r5]\n"
-                "\tldr r4, _08137C80 @ =0x00003005\n"
-                "\tadds r0, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tmovs r1, 0\n"
-                "\tbl FillWindowPixelBuffer\n"
-                "\tldr r1, [r5]\n"
-                "\tadds r0, r1, r4\n"
-                "\tldrb r0, [r0]\n"
-                "\tldr r2, _08137C84 @ =sUnknown_8463FA4\n"
-                "\tmov r8, r2\n"
-                "\tstr r2, [sp]\n"
-                "\tmovs r6, 0x1\n"
-                "\tnegs r6, r6\n"
-                "\tstr r6, [sp, 0x4]\n"
-                "\tldr r2, _08137C88 @ =0x000031bc\n"
-                "\tadds r1, r2\n"
-                "\tstr r1, [sp, 0x8]\n"
-                "\tmovs r1, 0x2\n"
-                "\tmovs r2, 0x42\n"
-                "\tmovs r3, 0x1\n"
-                "\tbl AddTextPrinterParameterized3\n"
-                "\tldr r1, [r5]\n"
-                "\tadds r4, r1, r4\n"
-                "\tldrb r0, [r4]\n"
-                "\tmov r2, r8\n"
-                "\tstr r2, [sp]\n"
-                "\tstr r6, [sp, 0x4]\n"
-                "\tldr r2, _08137C8C @ =0x000031cc\n"
-                "\tadds r1, r2\n"
-                "\tstr r1, [sp, 0x8]\n"
-                "\tmovs r1, 0x2\n"
-                "\tmovs r2, 0x2\n"
-                "\tmovs r3, 0xF\n"
-                "\tbl AddTextPrinterParameterized3\n"
-                "\tadd sp, 0xC\n"
-                "\tpop {r3}\n"
-                "\tmov r8, r3\n"
-                "\tpop {r4-r6}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_08137C7C: .4byte sMonSummaryScreen\n"
-                "_08137C80: .4byte 0x00003005\n"
-                "_08137C84: .4byte sUnknown_8463FA4\n"
-                "_08137C88: .4byte 0x000031bc\n"
-                "_08137C8C: .4byte 0x000031cc");
-}
-#endif // NONMATCHING
 
 static void sub_8137C90(void)
 {

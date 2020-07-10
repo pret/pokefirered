@@ -443,7 +443,12 @@ u16 MapPreview_CreateMapNameWindow(u8 mapsec)
 {
     u16 windowId;
     u32 xctr;
+    #ifdef BUGFIX
+    // Fixes access violations indicated below.
+    u8 color[3];
+    #else
     u8 color[0];
+    #endif
 
     windowId = AddWindow(&sMapNameWindow);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));

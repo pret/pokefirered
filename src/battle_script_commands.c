@@ -5155,20 +5155,19 @@ static void atk5C_hitanimation(void)
     }
 }
 
-#ifdef NONMATCHING
 static void atk5D_getmoneyreward(void)
 {
     u32 i = 0;
-    u32 lastMonLevel = 0;
-    u32 moneyReward = 0;
-    u32 value;
+    u32 moneyReward;
+    u8 lastMonLevel = 0;
 
-    // The whole function is using wrong registers. 
+    const struct TrainerMonItemCustomMoves *party4; //This needs to be out here
+
     if (gBattleOutcome == B_OUTCOME_WON)
     {
         if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         {
-            moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
+            moneyReward = gBattleResources->secretBase->party.levels[0] * 20 * gBattleStruct->moneyMultiplier;
         }
         else
         {
@@ -5176,45 +5175,40 @@ static void atk5D_getmoneyreward(void)
             {
             case 0:
                 {
-                    const struct TrainerMonNoItemDefaultMoves *party = gTrainers[gTrainerBattleOpponent_A].party.NoItemDefaultMoves;
+                    const struct TrainerMonNoItemDefaultMoves *party1 = gTrainers[gTrainerBattleOpponent_A].party.NoItemDefaultMoves;
                     
-                    lastMonLevel = party[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
+                    lastMonLevel = party1[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
                 }
                 break;
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
                 {
-                    const struct TrainerMonNoItemCustomMoves *party = gTrainers[gTrainerBattleOpponent_A].party.NoItemCustomMoves;
+                    const struct TrainerMonNoItemCustomMoves *party2 = gTrainers[gTrainerBattleOpponent_A].party.NoItemCustomMoves;
                     
-                    lastMonLevel = party[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
+                    lastMonLevel = party2[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
                 }
                 break;
             case F_TRAINER_PARTY_HELD_ITEM:
                 {
-                    const struct TrainerMonItemDefaultMoves *party = gTrainers[gTrainerBattleOpponent_A].party.ItemDefaultMoves;
+                    const struct TrainerMonItemDefaultMoves *party3 = gTrainers[gTrainerBattleOpponent_A].party.ItemDefaultMoves;
                     
-                    lastMonLevel = party[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
+                    lastMonLevel = party3[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
                 }
                 break;
-            case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
+            case (F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM):
                 {
-                    const struct TrainerMonItemCustomMoves *party = gTrainers[gTrainerBattleOpponent_A].party.ItemCustomMoves;
+                    party4 = gTrainers[gTrainerBattleOpponent_A].party.ItemCustomMoves;
                     
-                    lastMonLevel = party[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
+                    lastMonLevel = party4[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
                 }
                 break;
             }
-            for (; gTrainerMoneyTable[i].classId != 0xFF; ++i)
+            for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
             {
                 if (gTrainerMoneyTable[i].classId == gTrainers[gTrainerBattleOpponent_A].trainerClass)
                     break;
             }
-            moneyReward = 4 * lastMonLevel;
-            moneyReward *= gBattleStruct->moneyMultiplier;
-            value = gTrainerMoneyTable[i].value;
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                moneyReward *= (value << 1);
-            else
-                moneyReward *= value;
+            party4 = gTrainers[gTrainerBattleOpponent_A].party.ItemCustomMoves; // Needed to Match. Has no effect.
+            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * (gBattleTypeFlags & BATTLE_TYPE_DOUBLE ? 2 : 1) * gTrainerMoneyTable[i].value;
         }
         AddMoney(&gSaveBlock1Ptr->money, moneyReward);
     }
@@ -5228,242 +5222,6 @@ static void atk5D_getmoneyreward(void)
     else
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
-#else
-NAKED
-static void atk5D_getmoneyreward(void)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r8\n\
-        push {r7}\n\
-        movs r6, 0\n\
-        movs r5, 0\n\
-        ldr r0, _080258F0 @ =gBattleOutcome\n\
-        ldrb r0, [r0]\n\
-        cmp r0, 0x1\n\
-        beq _080258C0\n\
-        b _080259FA\n\
-    _080258C0:\n\
-        ldr r0, _080258F4 @ =gTrainerBattleOpponent_A\n\
-        ldrh r2, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 3\n\
-        cmp r2, r1\n\
-        bne _08025904\n\
-        ldr r0, _080258F8 @ =gBattleResources\n\
-        ldr r0, [r0]\n\
-        ldr r0, [r0]\n\
-        adds r0, 0x94\n\
-        ldrb r2, [r0]\n\
-        ldr r0, _080258FC @ =gBattleStruct\n\
-        ldr r0, [r0]\n\
-        adds r0, 0x4A\n\
-        ldrb r1, [r0]\n\
-        lsls r0, r1, 2\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r4, r2, 0\n\
-        muls r4, r0\n\
-        ldr r0, _08025900 @ =gSaveBlock1Ptr\n\
-        mov r8, r0\n\
-        b _080259E8\n\
-        .align 2, 0\n\
-    _080258F0: .4byte gBattleOutcome\n\
-    _080258F4: .4byte gTrainerBattleOpponent_A\n\
-    _080258F8: .4byte gBattleResources\n\
-    _080258FC: .4byte gBattleStruct\n\
-    _08025900: .4byte gSaveBlock1Ptr\n\
-    _08025904:\n\
-        ldr r2, _08025920 @ =gTrainers\n\
-        ldrh r1, [r0]\n\
-        lsls r0, r1, 2\n\
-        adds r0, r1\n\
-        lsls r3, r0, 3\n\
-        adds r4, r3, r2\n\
-        ldrb r1, [r4]\n\
-        cmp r1, 0x1\n\
-        beq _0802595A\n\
-        cmp r1, 0x1\n\
-        bgt _08025924\n\
-        cmp r1, 0\n\
-        beq _0802592E\n\
-        b _08025970\n\
-        .align 2, 0\n\
-    _08025920: .4byte gTrainers\n\
-    _08025924:\n\
-        cmp r1, 0x2\n\
-        beq _08025944\n\
-        cmp r1, 0x3\n\
-        beq _0802595A\n\
-        b _08025970\n\
-    _0802592E:\n\
-        adds r0, r2, 0\n\
-        adds r0, 0x24\n\
-        adds r0, r3, r0\n\
-        ldr r1, [r0]\n\
-        adds r0, r4, 0\n\
-        adds r0, 0x20\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 3\n\
-        adds r0, r1\n\
-        subs r0, 0x8\n\
-        b _0802596E\n\
-    _08025944:\n\
-        adds r0, r2, 0\n\
-        adds r0, 0x24\n\
-        adds r0, r3, r0\n\
-        ldr r1, [r0]\n\
-        adds r0, r4, 0\n\
-        adds r0, 0x20\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 3\n\
-        adds r0, r1\n\
-        subs r0, 0x8\n\
-        b _0802596E\n\
-    _0802595A:\n\
-        adds r0, r2, 0\n\
-        adds r0, 0x24\n\
-        adds r0, r3, r0\n\
-        ldr r1, [r0]\n\
-        adds r0, r4, 0\n\
-        adds r0, 0x20\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 4\n\
-        adds r0, r1\n\
-        subs r0, 0x10\n\
-    _0802596E:\n\
-        ldrb r5, [r0, 0x2]\n\
-    _08025970:\n\
-        ldr r0, _080259CC @ =gTrainerMoneyTable\n\
-        lsls r1, r6, 2\n\
-        adds r3, r1, r0\n\
-        ldrb r1, [r3]\n\
-        ldr r7, _080259D0 @ =gBattleStruct\n\
-        mov r12, r0\n\
-        lsls r4, r5, 2\n\
-        ldr r5, _080259D4 @ =gBattleTypeFlags\n\
-        ldr r0, _080259D8 @ =gSaveBlock1Ptr\n\
-        mov r8, r0\n\
-        cmp r1, 0xFF\n\
-        beq _080259AA\n\
-        ldr r2, _080259DC @ =gTrainers\n\
-        ldr r0, _080259E0 @ =gTrainerBattleOpponent_A\n\
-        ldrh r1, [r0]\n\
-        lsls r0, r1, 2\n\
-        adds r0, r1\n\
-        lsls r0, 3\n\
-        adds r0, r2\n\
-        ldrb r2, [r0, 0x1]\n\
-        adds r1, r3, 0\n\
-    _0802599A:\n\
-        ldrb r0, [r1]\n\
-        cmp r0, r2\n\
-        beq _080259AA\n\
-        adds r1, 0x4\n\
-        adds r6, 0x1\n\
-        ldrb r0, [r1]\n\
-        cmp r0, 0xFF\n\
-        bne _0802599A\n\
-    _080259AA:\n\
-        ldr r0, [r7]\n\
-        adds r0, 0x4A\n\
-        ldrb r0, [r0]\n\
-        adds r3, r4, 0\n\
-        muls r3, r0\n\
-        lsls r0, r6, 2\n\
-        add r0, r12\n\
-        ldrb r2, [r0, 0x1]\n\
-        ldr r0, [r5]\n\
-        movs r1, 0x1\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _080259E4\n\
-        lsls r0, r2, 1\n\
-        adds r4, r3, 0\n\
-        muls r4, r0\n\
-        b _080259E8\n\
-        .align 2, 0\n\
-    _080259CC: .4byte gTrainerMoneyTable\n\
-    _080259D0: .4byte gBattleStruct\n\
-    _080259D4: .4byte gBattleTypeFlags\n\
-    _080259D8: .4byte gSaveBlock1Ptr\n\
-    _080259DC: .4byte gTrainers\n\
-    _080259E0: .4byte gTrainerBattleOpponent_A\n\
-    _080259E4:\n\
-        adds r4, r3, 0\n\
-        muls r4, r2\n\
-    _080259E8:\n\
-        mov r1, r8\n\
-        ldr r0, [r1]\n\
-        movs r1, 0xA4\n\
-        lsls r1, 2\n\
-        adds r0, r1\n\
-        adds r1, r4, 0\n\
-        bl AddMoney\n\
-        b _08025A00\n\
-    _080259FA:\n\
-        bl ComputeWhiteOutMoneyLoss\n\
-        adds r4, r0, 0\n\
-    _08025A00:\n\
-        ldr r1, _08025A40 @ =gBattleTextBuff1\n\
-        movs r0, 0xFD\n\
-        strb r0, [r1]\n\
-        movs r0, 0x1\n\
-        strb r0, [r1, 0x1]\n\
-        movs r0, 0x4\n\
-        strb r0, [r1, 0x2]\n\
-        movs r0, 0x5\n\
-        strb r0, [r1, 0x3]\n\
-        strb r4, [r1, 0x4]\n\
-        movs r0, 0xFF\n\
-        lsls r0, 8\n\
-        ands r0, r4\n\
-        lsrs r0, 8\n\
-        strb r0, [r1, 0x5]\n\
-        movs r0, 0xFF\n\
-        lsls r0, 16\n\
-        ands r0, r4\n\
-        lsrs r0, 16\n\
-        strb r0, [r1, 0x6]\n\
-        lsrs r0, r4, 24\n\
-        strb r0, [r1, 0x7]\n\
-        movs r0, 0xFF\n\
-        strb r0, [r1, 0x8]\n\
-        cmp r4, 0\n\
-        beq _08025A48\n\
-        ldr r1, _08025A44 @ =gBattlescriptCurrInstr\n\
-        ldr r0, [r1]\n\
-        adds r0, 0x5\n\
-        str r0, [r1]\n\
-        b _08025A62\n\
-        .align 2, 0\n\
-    _08025A40: .4byte gBattleTextBuff1\n\
-    _08025A44: .4byte gBattlescriptCurrInstr\n\
-    _08025A48:\n\
-        ldr r3, _08025A6C @ =gBattlescriptCurrInstr\n\
-        ldr r2, [r3]\n\
-        ldrb r1, [r2, 0x1]\n\
-        ldrb r0, [r2, 0x2]\n\
-        lsls r0, 8\n\
-        orrs r1, r0\n\
-        ldrb r0, [r2, 0x3]\n\
-        lsls r0, 16\n\
-        orrs r1, r0\n\
-        ldrb r0, [r2, 0x4]\n\
-        lsls r0, 24\n\
-        orrs r1, r0\n\
-        str r1, [r3]\n\
-    _08025A62:\n\
-        pop {r3}\n\
-        mov r8, r3\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .align 2, 0\n\
-    _08025A6C: .4byte gBattlescriptCurrInstr\n\
-    ");
-}
-#endif
 
 static void atk5E(void)
 {

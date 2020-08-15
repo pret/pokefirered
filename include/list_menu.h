@@ -23,7 +23,7 @@ enum
 struct ListMenuItem
 {
     const u8 *label;
-    s32 index;
+    u32 index;
 };
 
 struct ListMenu;
@@ -72,7 +72,7 @@ struct ListMenuWindowRect
 
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
-s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
+u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
 u8 ListMenuInit(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
 u8 ListMenuInitInRect(const struct ListMenuTemplate *listMenuTemplate, const struct ListMenuWindowRect *rect, u16 cursorPos, u16 itemsAbove);
 s32 ListMenu_ProcessInput(u8 listTaskId);

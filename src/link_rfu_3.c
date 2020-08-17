@@ -499,7 +499,6 @@ static void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
     q1[i] = EOS;
 }
 
-#ifdef NONMATCHING
 static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
@@ -508,98 +507,31 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
 
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
-        for (i = 0; i < 4; flags >>= 1, i++)
+        for (i = 0; i < 4; i++)
         {
             if (flags & 1)
             {
                 if (maxFlags == flagCount + 1)
+                {
                     return gRfuLinkStatus->strength[i];
+                    break; // This break is needed to match
+                }
                 flagCount++;
             }
+            flags >>= 1;
         }
-        return 0;
     }
     else
     {
-        for (i = 0; i < 4; flags >>= 1, i++)
+        for (i = 0; i < 4; i++)
         {
             if (flags & 1)
                 return gRfuLinkStatus->strength[i];
+            flags >>= 1;
         }
-        return 0;
     }
+    return 0;
 }
-#else
-NAKED
-static u8 GetConnectedChildStrength(u8 maxFlags)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tmovs r6, 0\n"
-                "\tldr r0, _080FCB04 @ =gRfuLinkStatus\n"
-                "\tldr r4, [r0]\n"
-                "\tldrb r2, [r4, 0x2]\n"
-                "\tldrb r1, [r4]\n"
-                "\tadds r7, r0, 0\n"
-                "\tcmp r1, 0x1\n"
-                "\tbne _080FCB32\n"
-                "\tmovs r3, 0\n"
-                "\tands r1, r2\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _080FCB0E\n"
-                "\tcmp r5, 0x1\n"
-                "\tbne _080FCB08\n"
-                "\tldrb r0, [r4, 0xA]\n"
-                "\tb _080FCB4C\n"
-                "\t.align 2, 0\n"
-                "_080FCB04: .4byte gRfuLinkStatus\n"
-                "_080FCB08:\n"
-                "\tadds r0, r6, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "_080FCB0E:\n"
-                "\tlsrs r2, 1\n"
-                "\tadds r0, r3, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x3\n"
-                "\tbhi _080FCB4A\n"
-                "\tmovs r0, 0x1\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080FCB0E\n"
-                "\tadds r0, r6, 0x1\n"
-                "\tcmp r5, r0\n"
-                "\tbne _080FCB08\n"
-                "_080FCB28:\n"
-                "\tldr r0, [r7]\n"
-                "\tadds r0, 0xA\n"
-                "\tadds r0, r3\n"
-                "\tldrb r0, [r0]\n"
-                "\tb _080FCB4C\n"
-                "_080FCB32:\n"
-                "\tmovs r3, 0\n"
-                "\tmovs r1, 0x1\n"
-                "_080FCB36:\n"
-                "\tadds r0, r2, 0\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080FCB28\n"
-                "\tlsrs r2, 1\n"
-                "\tadds r0, r3, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x3\n"
-                "\tbls _080FCB36\n"
-                "_080FCB4A:\n"
-                "\tmovs r0, 0\n"
-                "_080FCB4C:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif
 
 void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders)
 {

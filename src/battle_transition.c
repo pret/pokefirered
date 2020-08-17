@@ -1492,991 +1492,180 @@ static void BT_Phase2AntiClockwiseSpiral(u8 taskId)
     while (sBT_Phase2AntiClockwiseSpiralFuncs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-#ifdef NONMATCHING
 static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
 {
-    s16 i, j;
-
     u8 theta = 0;
+    s16 i, r0, r8;
+    s16 res1, res2, res3, res4;
+
     for (i = 320; i < 960; ++i)
         gScanlineEffectRegBuffers[1][i] = 120;
-    for (i = 0; i < (a2 << 4); ++i, ++theta)
+
+    for (i = 0; i < (a2 * 16); ++i, ++theta)
     {
-        s16 res1, res2, res3, res4, diff, r8, r0;
-        
-        // PROBLEM #1: 
-        // (around line 50 in ASM)
-        // This part completely doesn't match.
-        // It's also not tail merge. 
+        r0 = a1 + (theta >> 3);
         if ((theta >> 3) != ((theta + 1) >> 3))
         {
-            r8 = (theta >> 3) + a1;
-            ++r8;
-            r0 = (theta >> 3) + a1;
+            r8 = r0 + 1;
         }
         else
         {
-            r0 = (theta >> 3) + a1;
-            r8 = (theta >> 3) + a1;
+            r8 = r0;
         }
+
         res1 = 80 - Sin(theta, r0);
         res2 = Cos(theta, r0) + 120;
         res3 = 80 - Sin(theta + 1, r8);
         res4 = Cos(theta + 1, r8) + 120;
-        if ((res1 >= 0 || res3 >= 0) && (res1 <= 159 || res3 <= 159))
+
+        if (res1 < 0 && res3 < 0)
+            continue;
+        if (res1 > 159 && res3 > 159)
+            continue;
+
+        if (res1 < 0)
+            res1 = 0;
+        if (res1 > 159)
+            res1 = 159;
+        if (res2 < 0)
+            res2 = 0;
+        if (res2 > 255)
+            res2 = 255;
+        if (res3 < 0)
+            res3 = 0;
+        if (res3 > 159)
+            res3 = 159;
+        if (res4 < 0)
+            res4 = 0;
+        if (res4 > 255)
+            res4 = 255;
+
+        res3 -= res1;
+
+        if (theta >= 64 && theta < 192)
         {
-            if (res1 < 0)
-                res1 = 0;
-            if (res1 > 159)
-                res1 = 159;
-            if (res2 < 0)
-                res2 = 0;
-            if (res2 > 255)
-                res2 = 255;
+            gScanlineEffectRegBuffers[1][res1 + 320] = res2;
+
+            if (res3 == 0)
+                continue;
+
+            res4 -= res2;
+            if (res4 < -1 && res2 > 1)
+                --res2;
+            else if (res4 > 1 && res2 < 255)
+                ++res2;
+
             if (res3 < 0)
-                res3 = 0;
-            if (res3 > 159)
-                res3 = 159;
-            if (res4 < 0)
-                res4 = 0;
-            if (res4 > 255)
-                res4 = 255;
-            diff = res3 - res1;
-            if (theta - 64 >= 0)
-            {
-                gScanlineEffectRegBuffers[1][res1 + 320] = res2;
-                if (diff)
-                {
-                    s16 diff2 = res4 - res2;
-                    
-                    if (diff2 < -1 && res2 > 1)
-                        --res2;
-                    else if (diff2 > 1 && res2 <= 254)
-                        ++res2;
-                    // PROBLEM #2:
-                    // (around line 300 in ASM)
-                    // The current version matched the control flow, 
-                    // but it looks too weird and some shift doesn't match
-
-                    // functional equivalent:
-                    // for (j = diff; j < 0; ++j)
-                    //     gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
-                    // for (j = diff; j > 0; --j)
-                    //     gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
-                    if ((j = diff) < 0)
-                        do
-                            gScanlineEffectRegBuffers[1][res1 + j + 320] = res2;
-                        while (++j < 0);
-                    else
-                        while (j > 0)
-                        {
-                            gScanlineEffectRegBuffers[1][res1 + j + 320] = res2;
-                            ++j;
-                        }
-                }
-            }
+                for (; res3 < 0; res3++)
+                    gScanlineEffectRegBuffers[1][res1 + res3 + 320] = res2;
             else
-            {
-                gScanlineEffectRegBuffers[1][res1 + 480] = res2;
-                if (diff)
-                {
-                    s16 diff2 = res4 - res2;
+                for (; res3 > 0; res3--)
+                    gScanlineEffectRegBuffers[1][res1 + res3 + 320] = res2;
+        }
+        else
+        {
+            gScanlineEffectRegBuffers[1][res1 + 480] = res2;
 
-                    if (diff2 < -1 && res2 > 1)
-                        --res2;
-                    else if (diff2 > 1 && res2 <= 254)
-                        ++res2;
-                    // same as PROBLEM #2
-                    for (j = diff; j < 0; ++j)
-                        gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
-                    for (j = diff; j > 0; --j)
-                        gScanlineEffectRegBuffers[1][res1 + j + 480] = res2;
-                }
-            }
+            if (res3 == 0)
+                continue;
+
+            res4 -= res2;
+            if (res4 < -1 && res2 > 1)
+                --res2;
+            else if (res4 > 1 && res2 < 255)
+                ++res2;
+
+            if (res3 < 0)
+                for (; res3 < 0; res3++)
+                    gScanlineEffectRegBuffers[1][res1 + res3 + 480] = res2;
+            else
+                for (; res3 > 0; res3--)
+                    gScanlineEffectRegBuffers[1][res1 + res3 + 480] = res2;
         }
     }
+
     if (a3 == 0 || a2 % 4 == 0)
     {
-        for (i = 0; i < 160; ++i)
-            gScanlineEffectRegBuffers[1][i * 2 + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
-    }
-    else
-    {
-        s16 res = Sin(a2 * 16, a1 + a2 * 2);
-        
-        switch (a2 / 4)
+        for (i = 0; i < 160; i++)
         {
-        case 0:
-            if (res > 80)
-                res = 80;
-            // PROBLEM #3: 
-            // (around line 550 in ASM)
-            // Case 0 ... 3 are very similar, so it's very likely that they have the same problem. 
-            // Weird shifts around writing to sTransitionStructPtr->data[2], and the following comparison. 
-            for (i = res; i > 0; --i)
-            {
-                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-                if (sTransitionStructPtr->data[2] <= 255u) // why is this unsigned? 
-                {
-                    sTransitionStructPtr->bg123HOfs = 400 - i;
-                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
-                    if (gScanlineEffectRegBuffers[1][560 - i] < sTransitionStructPtr->data[2])
-                        gScanlineEffectRegBuffers[1][560 - i] = 120;
-                    else if (gScanlineEffectRegBuffers[1][400 - i] < sTransitionStructPtr->data[2])
-                        gScanlineEffectRegBuffers[1][400 - i] = sTransitionStructPtr->data[2];
-                }
-            }
-            break;
-        case 1:
-            if (res > 80)
-                res = 80; 
-            // same as PROBLEM #3
-            for (i = res; i > 0; --i)
-            {
-                s16 unkVal;
-                
-                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-                if (sTransitionStructPtr->data[2] <= 255)
-                {
-                    sTransitionStructPtr->bg123HOfs = 400 - i;
-                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
-                    if (gScanlineEffectRegBuffers[1][400 - i] < sTransitionStructPtr->data[2])
-                        gScanlineEffectRegBuffers[1][400 - i] = sTransitionStructPtr->data[2];
-                }
-            }
-            break;
-        case 2:
-            if (res < -79)
-                res = -79;
-            // same as PROBLEM #3
-            for (i = res; i <= 0; ++i)
-            {
-                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-                if (sTransitionStructPtr->data[2] <= 255)
-                {
-                    sTransitionStructPtr->bg123HOfs = 560 - i;
-                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
-                    if (gScanlineEffectRegBuffers[1][400 - i] >= sTransitionStructPtr->data[2])
-                        gScanlineEffectRegBuffers[1][400 - i] = 120;
-                    else if (gScanlineEffectRegBuffers[1][560 - i] > sTransitionStructPtr->data[2])
-                        gScanlineEffectRegBuffers[1][560 - i] = sTransitionStructPtr->data[2];
-                }
-            }
-            break;
-        case 3:
-            if (res < -79)
-                res = -79; 
-            // same as PROBLEM #3
-            for (i = res; i <= 0; ++i)
-            {
-                sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-                if (sTransitionStructPtr->data[2] <= 255)
-                {
-                    sTransitionStructPtr->bg123HOfs = 560 - i;
-                    sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
-                    if (gScanlineEffectRegBuffers[1][560 - i] > sTransitionStructPtr->data[2])
-                        gScanlineEffectRegBuffers[1][560 - i] = sTransitionStructPtr->data[2];
-                }
-            }        
-            break;
-        default:
-            break;
+            gScanlineEffectRegBuffers[1][i * 2 + a3] = gScanlineEffectRegBuffers[1][i + 320] << 8 | gScanlineEffectRegBuffers[1][i + 480];
         }
-        for (i = 0; i < 160; ++i)
-            gScanlineEffectRegBuffers[1][2 * i + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
+        return;
+    }
+
+    res1 = Sin(a2 * 16, a1 + (a2 << 1));
+
+    switch (a2 / 4)
+    {
+    case 0:
+        if (res1 > 80)
+            res1 = 80;
+        for (i = res1; i > 0; i--)
+        {
+            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+            if (res2 < 0 || res2 > 255)
+                continue;
+            sTransitionStructPtr->bg123HOfs = 400 - i;
+            sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
+            if (gScanlineEffectRegBuffers[1][560 - i] < res2)
+                gScanlineEffectRegBuffers[1][560 - i] = 120;
+            else if (gScanlineEffectRegBuffers[1][400 - i] < res2)
+                gScanlineEffectRegBuffers[1][400 - i] = res2;
+        }
+        break;
+    case 1:
+        if (res1 > 80)
+            res1 = 80;
+        for (i = res1; i > 0; i--)
+        {
+            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+            if (res2 < 0 || res2 > 255)
+                continue;
+            sTransitionStructPtr->bg123HOfs = 400 - i;
+            sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
+            if (gScanlineEffectRegBuffers[1][400 - i] < res2)
+                gScanlineEffectRegBuffers[1][400 - i] = res2;
+        }
+        break;
+    case 2:
+        if (res1 < -79)
+            res1 = -79;
+        for (i = res1; i <= 0; i++)
+        {
+            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+            if (res2 < 0 || res2 > 255)
+                continue;
+            sTransitionStructPtr->bg123HOfs = 560 - i;
+            sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
+            if (gScanlineEffectRegBuffers[1][400 - i] >= res2)
+                gScanlineEffectRegBuffers[1][400 - i] = 120;
+            else if (gScanlineEffectRegBuffers[1][560 - i] > res2)
+                gScanlineEffectRegBuffers[1][560 - i] = res2;
+        }
+        break;
+    case 3:
+        if (res1 < -79)
+            res1 = -79;
+        for (i = res1; i <= 0; i++)
+        {
+            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
+            if (res2 < 0 || res2 > 255)
+                continue;
+            sTransitionStructPtr->bg123HOfs = 560 - i;
+            sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
+            if (gScanlineEffectRegBuffers[1][560 - i] > res2)
+                gScanlineEffectRegBuffers[1][560 - i] = res2;
+        }
+        break;
+    default:
+        break;
+    }
+
+    for (i = 0; i < 160; i++)
+    {
+        gScanlineEffectRegBuffers[1][i * 2 + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
     }
 }
-#else
-NAKED
-static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x14\n\
-        lsls r0, 16\n\
-        lsrs r0, 16\n\
-        str r0, [sp]\n\
-        lsls r1, 16\n\
-        lsrs r5, r1, 16\n\
-        lsls r2, 24\n\
-        lsrs r2, 24\n\
-        str r2, [sp, 0x4]\n\
-        movs r0, 0\n\
-        mov r10, r0\n\
-        movs r1, 0xA0\n\
-        lsls r1, 17\n\
-        ldr r4, _080D1FD8 @ =gScanlineEffectRegBuffers + 0x780\n\
-        ldr r3, _080D1FDC @ =0x000003bf\n\
-        movs r2, 0x78\n\
-    _080D1F8E:\n\
-        asrs r0, r1, 16\n\
-        lsls r1, r0, 1\n\
-        adds r1, r4\n\
-        strh r2, [r1]\n\
-        adds r0, 0x1\n\
-        lsls r1, r0, 16\n\
-        asrs r0, r1, 16\n\
-        cmp r0, r3\n\
-        ble _080D1F8E\n\
-        lsls r0, r5, 16\n\
-        movs r1, 0\n\
-        mov r9, r1\n\
-        str r0, [sp, 0xC]\n\
-        cmp r0, 0\n\
-        bgt _080D1FAE\n\
-        b _080D221A\n\
-    _080D1FAE:\n\
-        mov r3, r10\n\
-        lsrs r2, r3, 3\n\
-        ldr r4, [sp]\n\
-        adds r0, r2, r4\n\
-        lsls r0, 16\n\
-        lsrs r3, r0, 16\n\
-        mov r0, r10\n\
-        adds r0, 0x1\n\
-        asrs r1, r0, 3\n\
-        str r0, [sp, 0x8]\n\
-        cmp r2, r1\n\
-        beq _080D1FE0\n\
-        lsls r1, r3, 16\n\
-        movs r6, 0x80\n\
-        lsls r6, 9\n\
-        adds r0, r1, r6\n\
-        lsrs r0, 16\n\
-        mov r8, r0\n\
-        adds r0, r1, 0\n\
-        b _080D1FE6\n\
-        .align 2, 0\n\
-    _080D1FD8: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D1FDC: .4byte 0x000003bf\n\
-    _080D1FE0:\n\
-        lsls r0, r3, 16\n\
-        lsrs r1, r0, 16\n\
-        mov r8, r1\n\
-    _080D1FE6:\n\
-        asrs r4, r0, 16\n\
-        mov r0, r10\n\
-        adds r1, r4, 0\n\
-        bl Sin\n\
-        movs r5, 0x50\n\
-        subs r0, r5, r0\n\
-        lsls r0, 16\n\
-        lsrs r2, r0, 16\n\
-        mov r0, r10\n\
-        adds r1, r4, 0\n\
-        str r2, [sp, 0x10]\n\
-        bl Cos\n\
-        adds r0, 0x78\n\
-        lsls r0, 16\n\
-        lsrs r7, r0, 16\n\
-        ldr r6, [sp, 0x8]\n\
-        mov r3, r8\n\
-        lsls r4, r3, 16\n\
-        asrs r4, 16\n\
-        adds r0, r6, 0\n\
-        adds r1, r4, 0\n\
-        bl Sin\n\
-        subs r5, r0\n\
-        lsls r5, 16\n\
-        lsrs r5, 16\n\
-        adds r0, r6, 0\n\
-        adds r1, r4, 0\n\
-        bl Cos\n\
-        adds r0, 0x78\n\
-        lsls r0, 16\n\
-        lsrs r3, r0, 16\n\
-        ldr r2, [sp, 0x10]\n\
-        lsls r0, r2, 16\n\
-        asrs r1, r0, 16\n\
-        cmp r1, 0\n\
-        bge _080D203E\n\
-        lsls r0, r5, 16\n\
-        cmp r0, 0\n\
-        bge _080D203E\n\
-        b _080D21F8\n\
-    _080D203E:\n\
-        cmp r1, 0x9F\n\
-        ble _080D204C\n\
-        lsls r0, r5, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x9F\n\
-        ble _080D204C\n\
-        b _080D21F8\n\
-    _080D204C:\n\
-        cmp r1, 0\n\
-        bge _080D2052\n\
-        movs r2, 0\n\
-    _080D2052:\n\
-        lsls r0, r2, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x9F\n\
-        ble _080D205C\n\
-        movs r2, 0x9F\n\
-    _080D205C:\n\
-        lsls r0, r7, 16\n\
-        cmp r0, 0\n\
-        bge _080D2064\n\
-        movs r7, 0\n\
-    _080D2064:\n\
-        lsls r0, r7, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0xFF\n\
-        ble _080D206E\n\
-        movs r7, 0xFF\n\
-    _080D206E:\n\
-        lsls r0, r5, 16\n\
-        cmp r0, 0\n\
-        bge _080D2076\n\
-        movs r5, 0\n\
-    _080D2076:\n\
-        lsls r0, r5, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x9F\n\
-        ble _080D2080\n\
-        movs r5, 0x9F\n\
-    _080D2080:\n\
-        lsls r0, r3, 16\n\
-        cmp r0, 0\n\
-        bge _080D2088\n\
-        movs r3, 0\n\
-    _080D2088:\n\
-        lsls r0, r3, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0xFF\n\
-        ble _080D2092\n\
-        movs r3, 0xFF\n\
-    _080D2092:\n\
-        lsls r0, r5, 16\n\
-        asrs r0, 16\n\
-        lsls r1, r2, 16\n\
-        asrs r2, r1, 16\n\
-        subs r0, r2\n\
-        lsls r0, 16\n\
-        lsrs r5, r0, 16\n\
-        mov r0, r10\n\
-        subs r0, 0x40\n\
-        lsls r0, 24\n\
-        adds r6, r1, 0\n\
-        cmp r0, 0\n\
-        blt _080D2158\n\
-        movs r4, 0xA0\n\
-        lsls r4, 1\n\
-        adds r0, r2, r4\n\
-        lsls r0, 1\n\
-        ldr r1, _080D20E8 @ =gScanlineEffectRegBuffers + 0x780\n\
-        adds r0, r1\n\
-        strh r7, [r0]\n\
-        lsls r0, r5, 16\n\
-        adds r4, r0, 0\n\
-        cmp r4, 0\n\
-        bne _080D20C4\n\
-        b _080D21F8\n\
-    _080D20C4:\n\
-        lsls r0, r3, 16\n\
-        asrs r0, 16\n\
-        lsls r1, r7, 16\n\
-        asrs r2, r1, 16\n\
-        subs r0, r2\n\
-        lsls r0, 16\n\
-        lsrs r3, r0, 16\n\
-        asrs r0, 16\n\
-        mov r8, r0\n\
-        movs r0, 0x1\n\
-        negs r0, r0\n\
-        cmp r8, r0\n\
-        bge _080D20EC\n\
-        cmp r2, 0x1\n\
-        ble _080D20EC\n\
-        subs r0, r2, 0x1\n\
-        b _080D20FC\n\
-        .align 2, 0\n\
-    _080D20E8: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D20EC:\n\
-        lsls r0, r3, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x1\n\
-        ble _080D2100\n\
-        asrs r0, r1, 16\n\
-        cmp r0, 0xFE\n\
-        bgt _080D2100\n\
-        adds r0, 0x1\n\
-    _080D20FC:\n\
-        lsls r0, 16\n\
-        lsrs r7, r0, 16\n\
-    _080D2100:\n\
-        adds r0, r4, 0\n\
-        asrs r1, r0, 16\n\
-        cmp r1, 0\n\
-        bge _080D212C\n\
-        asrs r2, r6, 16\n\
-        ldr r3, _080D2128 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D210C:\n\
-        asrs r1, r0, 16\n\
-        adds r0, r2, r1\n\
-        movs r4, 0xA0\n\
-        lsls r4, 1\n\
-        adds r0, r4\n\
-        lsls r0, 1\n\
-        adds r0, r3\n\
-        strh r7, [r0]\n\
-        adds r1, 0x1\n\
-        lsls r0, r1, 16\n\
-        cmp r0, 0\n\
-        blt _080D210C\n\
-        b _080D21F8\n\
-        .align 2, 0\n\
-    _080D2128: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D212C:\n\
-        cmp r1, 0\n\
-        ble _080D21F8\n\
-        asrs r2, r6, 16\n\
-        ldr r3, _080D2154 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D2134:\n\
-        lsls r1, r5, 16\n\
-        asrs r1, 16\n\
-        adds r0, r2, r1\n\
-        movs r6, 0xA0\n\
-        lsls r6, 1\n\
-        adds r0, r6\n\
-        lsls r0, 1\n\
-        adds r0, r3\n\
-        strh r7, [r0]\n\
-        subs r1, 0x1\n\
-        lsls r1, 16\n\
-        lsrs r5, r1, 16\n\
-        cmp r1, 0\n\
-        bgt _080D2134\n\
-        b _080D21F8\n\
-        .align 2, 0\n\
-    _080D2154: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D2158:\n\
-        movs r1, 0xF0\n\
-        lsls r1, 1\n\
-        adds r0, r2, r1\n\
-        lsls r0, 1\n\
-        ldr r2, _080D2190 @ =gScanlineEffectRegBuffers + 0x780\n\
-        adds r0, r2\n\
-        strh r7, [r0]\n\
-        lsls r0, r5, 16\n\
-        adds r4, r0, 0\n\
-        cmp r4, 0\n\
-        beq _080D21F8\n\
-        lsls r0, r3, 16\n\
-        asrs r0, 16\n\
-        lsls r1, r7, 16\n\
-        asrs r2, r1, 16\n\
-        subs r0, r2\n\
-        lsls r0, 16\n\
-        lsrs r3, r0, 16\n\
-        asrs r0, 16\n\
-        mov r8, r0\n\
-        movs r0, 0x1\n\
-        negs r0, r0\n\
-        cmp r8, r0\n\
-        bge _080D2194\n\
-        cmp r2, 0x1\n\
-        ble _080D2194\n\
-        subs r0, r2, 0x1\n\
-        b _080D21A4\n\
-        .align 2, 0\n\
-    _080D2190: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D2194:\n\
-        lsls r0, r3, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x1\n\
-        ble _080D21A8\n\
-        asrs r0, r1, 16\n\
-        cmp r0, 0xFE\n\
-        bgt _080D21A8\n\
-        adds r0, 0x1\n\
-    _080D21A4:\n\
-        lsls r0, 16\n\
-        lsrs r7, r0, 16\n\
-    _080D21A8:\n\
-        adds r0, r4, 0\n\
-        asrs r1, r0, 16\n\
-        cmp r1, 0\n\
-        bge _080D21D4\n\
-        asrs r2, r6, 16\n\
-        ldr r3, _080D21D0 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D21B4:\n\
-        asrs r1, r0, 16\n\
-        adds r0, r2, r1\n\
-        movs r4, 0xF0\n\
-        lsls r4, 1\n\
-        adds r0, r4\n\
-        lsls r0, 1\n\
-        adds r0, r3\n\
-        strh r7, [r0]\n\
-        adds r1, 0x1\n\
-        lsls r0, r1, 16\n\
-        cmp r0, 0\n\
-        blt _080D21B4\n\
-        b _080D21F8\n\
-        .align 2, 0\n\
-    _080D21D0: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D21D4:\n\
-        cmp r1, 0\n\
-        ble _080D21F8\n\
-        asrs r2, r6, 16\n\
-        ldr r3, _080D2270 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D21DC:\n\
-        lsls r1, r5, 16\n\
-        asrs r1, 16\n\
-        adds r0, r2, r1\n\
-        movs r6, 0xF0\n\
-        lsls r6, 1\n\
-        adds r0, r6\n\
-        lsls r0, 1\n\
-        adds r0, r3\n\
-        strh r7, [r0]\n\
-        subs r1, 0x1\n\
-        lsls r1, 16\n\
-        lsrs r5, r1, 16\n\
-        cmp r1, 0\n\
-        bgt _080D21DC\n\
-    _080D21F8:\n\
-        mov r1, r9\n\
-        lsls r0, r1, 16\n\
-        movs r2, 0x80\n\
-        lsls r2, 9\n\
-        adds r0, r2\n\
-        ldr r3, [sp, 0x8]\n\
-        lsls r1, r3, 24\n\
-        lsrs r1, 24\n\
-        mov r10, r1\n\
-        lsrs r4, r0, 16\n\
-        mov r9, r4\n\
-        asrs r0, 16\n\
-        ldr r6, [sp, 0xC]\n\
-        asrs r1, r6, 12\n\
-        cmp r0, r1\n\
-        bge _080D221A\n\
-        b _080D1FAE\n\
-    _080D221A:\n\
-        ldr r0, [sp, 0x4]\n\
-        cmp r0, 0\n\
-        beq _080D222C\n\
-        movs r0, 0xC0\n\
-        lsls r0, 10\n\
-        ldr r1, [sp, 0xC]\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        bne _080D2274\n\
-    _080D222C:\n\
-        movs r2, 0\n\
-        mov r9, r2\n\
-        ldr r4, _080D2270 @ =gScanlineEffectRegBuffers + 0x780\n\
-        movs r5, 0xA0\n\
-        lsls r5, 1\n\
-    _080D2236:\n\
-        mov r3, r9\n\
-        lsls r1, r3, 16\n\
-        asrs r1, 16\n\
-        lsls r3, r1, 1\n\
-        ldr r6, [sp, 0x4]\n\
-        adds r3, r6\n\
-        lsls r3, 1\n\
-        adds r3, r4\n\
-        adds r0, r1, r5\n\
-        lsls r0, 1\n\
-        adds r0, r4\n\
-        ldrh r2, [r0]\n\
-        lsls r2, 8\n\
-        movs r6, 0xF0\n\
-        lsls r6, 1\n\
-        adds r0, r1, r6\n\
-        lsls r0, 1\n\
-        adds r0, r4\n\
-        ldrh r0, [r0]\n\
-        orrs r2, r0\n\
-        strh r2, [r3]\n\
-        adds r1, 0x1\n\
-        lsls r1, 16\n\
-        lsrs r0, r1, 16\n\
-        mov r9, r0\n\
-        asrs r1, 16\n\
-        cmp r1, 0x9F\n\
-        ble _080D2236\n\
-        b _080D251C\n\
-        .align 2, 0\n\
-    _080D2270: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D2274:\n\
-        ldr r1, [sp, 0xC]\n\
-        asrs r4, r1, 16\n\
-        lsls r0, r4, 20\n\
-        asrs r0, 16\n\
-        lsls r5, r4, 1\n\
-        ldr r2, [sp]\n\
-        lsls r1, r2, 16\n\
-        asrs r1, 16\n\
-        adds r1, r5\n\
-        lsls r1, 16\n\
-        asrs r1, 16\n\
-        bl Sin\n\
-        lsls r0, 16\n\
-        lsrs r2, r0, 16\n\
-        cmp r4, 0\n\
-        bge _080D2298\n\
-        adds r4, 0x3\n\
-    _080D2298:\n\
-        asrs r0, r4, 2\n\
-        cmp r0, 0x1\n\
-        beq _080D234C\n\
-        cmp r0, 0x1\n\
-        bgt _080D22A8\n\
-        cmp r0, 0\n\
-        beq _080D22B6\n\
-        b _080D24DA\n\
-    _080D22A8:\n\
-        cmp r0, 0x2\n\
-        bne _080D22AE\n\
-        b _080D23CC\n\
-    _080D22AE:\n\
-        cmp r0, 0x3\n\
-        bne _080D22B4\n\
-        b _080D2466\n\
-    _080D22B4:\n\
-        b _080D24DA\n\
-    _080D22B6:\n\
-        lsls r0, r2, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x50\n\
-        ble _080D22C0\n\
-        movs r2, 0x50\n\
-    _080D22C0:\n\
-        mov r9, r2\n\
-        lsls r1, r2, 16\n\
-        cmp r1, 0\n\
-        bgt _080D22CA\n\
-        b _080D24DA\n\
-    _080D22CA:\n\
-        ldr r0, _080D2320 @ =gUnknown_83FA444\n\
-        adds r0, r5, r0\n\
-        movs r3, 0\n\
-        ldrsh r4, [r0, r3]\n\
-        ldr r6, _080D2324 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D22D4:\n\
-        ldr r0, _080D2328 @ =sTransitionStructPtr\n\
-        ldr r5, [r0]\n\
-        asrs r2, r1, 16\n\
-        adds r0, r2, 0\n\
-        muls r0, r4\n\
-        asrs r0, 8\n\
-        adds r0, 0x78\n\
-        lsls r1, r0, 16\n\
-        lsrs r7, r1, 16\n\
-        strh r0, [r5, 0x28]\n\
-        lsls r1, r7, 16\n\
-        lsrs r0, r1, 16\n\
-        cmp r0, 0xFF\n\
-        bhi _080D2334\n\
-        movs r3, 0xC8\n\
-        lsls r3, 1\n\
-        adds r0, r3, 0\n\
-        subs r0, r2\n\
-        strh r0, [r5, 0x14]\n\
-        adds r0, r3, 0\n\
-        subs r0, r2\n\
-        lsls r0, 1\n\
-        adds r3, r0, r6\n\
-        ldrh r0, [r3]\n\
-        strh r0, [r5, 0x38]\n\
-        movs r0, 0x8C\n\
-        lsls r0, 2\n\
-        subs r0, r2\n\
-        lsls r0, 1\n\
-        adds r2, r0, r6\n\
-        ldrh r0, [r2]\n\
-        asrs r1, 16\n\
-        cmp r0, r1\n\
-        bge _080D232C\n\
-        movs r0, 0x78\n\
-        strh r0, [r2]\n\
-        b _080D2334\n\
-        .align 2, 0\n\
-    _080D2320: .4byte gUnknown_83FA444\n\
-    _080D2324: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D2328: .4byte sTransitionStructPtr\n\
-    _080D232C:\n\
-        ldrh r0, [r3]\n\
-        cmp r0, r1\n\
-        bge _080D2334\n\
-        strh r7, [r3]\n\
-    _080D2334:\n\
-        mov r1, r9\n\
-        lsls r0, r1, 16\n\
-        ldr r2, _080D2348 @ =0xffff0000\n\
-        adds r0, r2\n\
-        lsrs r0, 16\n\
-        mov r9, r0\n\
-        lsls r1, r0, 16\n\
-        cmp r1, 0\n\
-        bgt _080D22D4\n\
-        b _080D24DA\n\
-        .align 2, 0\n\
-    _080D2348: .4byte 0xffff0000\n\
-    _080D234C:\n\
-        lsls r0, r2, 16\n\
-        asrs r0, 16\n\
-        cmp r0, 0x50\n\
-        ble _080D2356\n\
-        movs r2, 0x50\n\
-    _080D2356:\n\
-        mov r9, r2\n\
-        lsls r1, r2, 16\n\
-        cmp r1, 0\n\
-        bgt _080D2360\n\
-        b _080D24DA\n\
-    _080D2360:\n\
-        ldr r0, _080D23BC @ =gUnknown_83FA444\n\
-        adds r0, r5, r0\n\
-        movs r3, 0\n\
-        ldrsh r4, [r0, r3]\n\
-        ldr r6, _080D23C0 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D236A:\n\
-        ldr r0, _080D23C4 @ =sTransitionStructPtr\n\
-        ldr r3, [r0]\n\
-        asrs r2, r1, 16\n\
-        adds r0, r2, 0\n\
-        muls r0, r4\n\
-        asrs r0, 8\n\
-        adds r0, 0x78\n\
-        lsls r1, r0, 16\n\
-        lsrs r7, r1, 16\n\
-        strh r0, [r3, 0x28]\n\
-        lsls r5, r7, 16\n\
-        lsrs r0, r5, 16\n\
-        cmp r0, 0xFF\n\
-        bhi _080D23A6\n\
-        movs r1, 0xC8\n\
-        lsls r1, 1\n\
-        adds r0, r1, 0\n\
-        subs r0, r2\n\
-        strh r0, [r3, 0x14]\n\
-        adds r0, r1, 0\n\
-        subs r0, r2\n\
-        lsls r0, 1\n\
-        adds r2, r0, r6\n\
-        ldrh r0, [r2]\n\
-        strh r0, [r3, 0x38]\n\
-        ldrh r1, [r2]\n\
-        asrs r0, r5, 16\n\
-        cmp r1, r0\n\
-        bge _080D23A6\n\
-        strh r7, [r2]\n\
-    _080D23A6:\n\
-        mov r2, r9\n\
-        lsls r0, r2, 16\n\
-        ldr r3, _080D23C8 @ =0xffff0000\n\
-        adds r0, r3\n\
-        lsrs r0, 16\n\
-        mov r9, r0\n\
-        lsls r1, r0, 16\n\
-        cmp r1, 0\n\
-        bgt _080D236A\n\
-        b _080D24DA\n\
-        .align 2, 0\n\
-    _080D23BC: .4byte gUnknown_83FA444\n\
-    _080D23C0: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D23C4: .4byte sTransitionStructPtr\n\
-    _080D23C8: .4byte 0xffff0000\n\
-    _080D23CC:\n\
-        lsls r0, r2, 16\n\
-        asrs r0, 16\n\
-        movs r1, 0x4F\n\
-        negs r1, r1\n\
-        cmp r0, r1\n\
-        bge _080D23DA\n\
-        ldr r2, _080D2438 @ =0x0000ffb1\n\
-    _080D23DA:\n\
-        mov r9, r2\n\
-        lsls r1, r2, 16\n\
-        cmp r1, 0\n\
-        bgt _080D24DA\n\
-        ldr r0, _080D243C @ =gUnknown_83FA444\n\
-        adds r0, r5, r0\n\
-        movs r6, 0\n\
-        ldrsh r4, [r0, r6]\n\
-        ldr r6, _080D2440 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D23EC:\n\
-        ldr r0, _080D2444 @ =sTransitionStructPtr\n\
-        ldr r5, [r0]\n\
-        asrs r2, r1, 16\n\
-        adds r0, r2, 0\n\
-        muls r0, r4\n\
-        asrs r0, 8\n\
-        adds r0, 0x78\n\
-        lsls r1, r0, 16\n\
-        lsrs r7, r1, 16\n\
-        strh r0, [r5, 0x28]\n\
-        lsls r1, r7, 16\n\
-        lsrs r0, r1, 16\n\
-        cmp r0, 0xFF\n\
-        bhi _080D2450\n\
-        movs r3, 0x8C\n\
-        lsls r3, 2\n\
-        adds r0, r3, 0\n\
-        subs r0, r2\n\
-        strh r0, [r5, 0x14]\n\
-        adds r0, r3, 0\n\
-        subs r0, r2\n\
-        lsls r0, 1\n\
-        adds r3, r0, r6\n\
-        ldrh r0, [r3]\n\
-        strh r0, [r5, 0x38]\n\
-        movs r0, 0xC8\n\
-        lsls r0, 1\n\
-        subs r0, r2\n\
-        lsls r0, 1\n\
-        adds r2, r0, r6\n\
-        ldrh r0, [r2]\n\
-        asrs r1, 16\n\
-        cmp r0, r1\n\
-        blt _080D2448\n\
-        movs r0, 0x78\n\
-        strh r0, [r2]\n\
-        b _080D2450\n\
-        .align 2, 0\n\
-    _080D2438: .4byte 0x0000ffb1\n\
-    _080D243C: .4byte gUnknown_83FA444\n\
-    _080D2440: .4byte gScanlineEffectRegBuffers + 0x780\n\
-    _080D2444: .4byte sTransitionStructPtr\n\
-    _080D2448:\n\
-        ldrh r0, [r3]\n\
-        cmp r0, r1\n\
-        ble _080D2450\n\
-        strh r7, [r3]\n\
-    _080D2450:\n\
-        mov r1, r9\n\
-        lsls r0, r1, 16\n\
-        movs r2, 0x80\n\
-        lsls r2, 9\n\
-        adds r0, r2\n\
-        lsrs r0, 16\n\
-        mov r9, r0\n\
-        lsls r1, r0, 16\n\
-        cmp r1, 0\n\
-        ble _080D23EC\n\
-        b _080D24DA\n\
-    _080D2466:\n\
-        lsls r0, r2, 16\n\
-        asrs r0, 16\n\
-        movs r1, 0x4F\n\
-        negs r1, r1\n\
-        cmp r0, r1\n\
-        bge _080D2474\n\
-        ldr r2, _080D252C @ =0x0000ffb1\n\
-    _080D2474:\n\
-        mov r9, r2\n\
-        lsls r1, r2, 16\n\
-        cmp r1, 0\n\
-        bgt _080D24DA\n\
-        ldr r0, _080D2530 @ =gUnknown_83FA444\n\
-        adds r0, r5, r0\n\
-        movs r3, 0\n\
-        ldrsh r4, [r0, r3]\n\
-        ldr r6, _080D2534 @ =sTransitionStructPtr\n\
-        mov r8, r6\n\
-        ldr r6, _080D2538 @ =gScanlineEffectRegBuffers + 0x780\n\
-    _080D248A:\n\
-        mov r0, r8\n\
-        ldr r3, [r0]\n\
-        asrs r2, r1, 16\n\
-        adds r0, r2, 0\n\
-        muls r0, r4\n\
-        asrs r0, 8\n\
-        adds r0, 0x78\n\
-        lsls r1, r0, 16\n\
-        lsrs r7, r1, 16\n\
-        strh r0, [r3, 0x28]\n\
-        lsls r5, r7, 16\n\
-        lsrs r0, r5, 16\n\
-        cmp r0, 0xFF\n\
-        bhi _080D24C6\n\
-        movs r1, 0x8C\n\
-        lsls r1, 2\n\
-        adds r0, r1, 0\n\
-        subs r0, r2\n\
-        strh r0, [r3, 0x14]\n\
-        adds r0, r1, 0\n\
-        subs r0, r2\n\
-        lsls r0, 1\n\
-        adds r2, r0, r6\n\
-        ldrh r0, [r2]\n\
-        strh r0, [r3, 0x38]\n\
-        ldrh r1, [r2]\n\
-        asrs r0, r5, 16\n\
-        cmp r1, r0\n\
-        ble _080D24C6\n\
-        strh r7, [r2]\n\
-    _080D24C6:\n\
-        mov r2, r9\n\
-        lsls r0, r2, 16\n\
-        movs r3, 0x80\n\
-        lsls r3, 9\n\
-        adds r0, r3\n\
-        lsrs r0, 16\n\
-        mov r9, r0\n\
-        lsls r1, r0, 16\n\
-        cmp r1, 0\n\
-        ble _080D248A\n\
-    _080D24DA:\n\
-        movs r4, 0\n\
-        mov r9, r4\n\
-        ldr r4, _080D2538 @ =gScanlineEffectRegBuffers + 0x780\n\
-        movs r5, 0xA0\n\
-        lsls r5, 1\n\
-    _080D24E4:\n\
-        mov r6, r9\n\
-        lsls r1, r6, 16\n\
-        asrs r1, 16\n\
-        lsls r3, r1, 1\n\
-        ldr r0, [sp, 0x4]\n\
-        adds r3, r0\n\
-        lsls r3, 1\n\
-        adds r3, r4\n\
-        adds r0, r1, r5\n\
-        lsls r0, 1\n\
-        adds r0, r4\n\
-        ldrh r2, [r0]\n\
-        lsls r2, 8\n\
-        movs r6, 0xF0\n\
-        lsls r6, 1\n\
-        adds r0, r1, r6\n\
-        lsls r0, 1\n\
-        adds r0, r4\n\
-        ldrh r0, [r0]\n\
-        orrs r2, r0\n\
-        strh r2, [r3]\n\
-        adds r1, 0x1\n\
-        lsls r1, 16\n\
-        lsrs r0, r1, 16\n\
-        mov r9, r0\n\
-        asrs r1, 16\n\
-        cmp r1, 0x9F\n\
-        ble _080D24E4\n\
-    _080D251C:\n\
-        add sp, 0x14\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .align 2, 0\n\
-    _080D252C: .4byte 0x0000ffb1\n\
-    _080D2530: .4byte gUnknown_83FA444\n\
-    _080D2534: .4byte sTransitionStructPtr\n\
-    _080D2538: .4byte gScanlineEffectRegBuffers + 0x780\n\
-        ");
-}
-#endif
 
 static bool8 BT_Phase2AntiClockwiseSpiral_Init(struct Task *task)
 {

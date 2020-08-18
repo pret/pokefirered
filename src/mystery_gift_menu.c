@@ -1221,10 +1221,16 @@ void task00_mystery_gift(u8 taskId)
         break;
     case  5:
     {
-        register u8 eos asm("r1");
-        gStringVar1[0] = (eos = EOS);
-        gStringVar2[0] = eos;
-        gStringVar3[0] = eos;
+        #ifndef NONMATCHING
+            register u8 eos asm("r1");
+            gStringVar1[0] = (eos = EOS);
+            gStringVar2[0] = eos;
+            gStringVar3[0] = eos;
+        #else
+            gStringVar1[0] = EOS;
+            gStringVar2[0] = EOS;
+            gStringVar3[0] = EOS;
+        #endif
     }
         switch (data->IsCardOrNews)
         {
@@ -1385,7 +1391,11 @@ void task00_mystery_gift(u8 taskId)
         break;
     case 15:
     {
-        register bool32 flag asm("r1");
+        #ifndef NONMATCHING
+            register bool32 flag asm("r1");
+        #else
+            bool32 flag;
+        #endif
         r1 = mevent_message(&sp0, data->IsCardOrNews, data->source, data->prevPromptWindowId);
         if (r1 == NULL)
         {
@@ -1613,10 +1623,16 @@ void task00_mystery_gift(u8 taskId)
         break;
     case 31:
     {
-        register u8 eos asm("r1");
-        gStringVar1[0] = (eos = EOS);
-        gStringVar2[0] = eos;
-        gStringVar3[0] = eos;
+        #ifndef NONMATCHING
+            register u8 eos asm("r1");
+            gStringVar1[0] = (eos = EOS);
+            gStringVar2[0] = eos;
+            gStringVar3[0] = eos;
+        #else
+            gStringVar1[0] = EOS;
+            gStringVar2[0] = EOS;
+            gStringVar3[0] = EOS;
+        #endif
     }
         if (data->IsCardOrNews == 0)
         {

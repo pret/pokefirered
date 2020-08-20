@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE1",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE1"
     },
     {
-      "map": "MAP_ROUTE21_NORTH",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE21_NORTH"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "in_connection": false,
       "x": 3,
       "y": 10,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "in_connection": false,
       "x": 13,
       "y": 17,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
+      "in_connection": false,
       "x": 10,
       "y": 8,
       "elevation": 3,

@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_PALLET_TOWN",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_PALLET_TOWN"
     },
     {
-      "map": "MAP_ROUTE21_SOUTH",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE21_SOUTH"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 7,
       "y": 27,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 16,
       "y": 26,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
+      "in_connection": false,
       "x": 12,
       "y": 44,
       "elevation": 1,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
+      "in_connection": false,
       "x": 14,
       "y": 35,
       "elevation": 1,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TUBER_M_WATER",
+      "in_connection": false,
       "x": 15,
       "y": 35,
       "elevation": 1,
@@ -106,8 +111,12 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "hidden_item",

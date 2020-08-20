@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_VIRIDIAN_CITY",
+      "direction": "up",
       "offset": -12,
-      "direction": "up"
+      "map": "MAP_VIRIDIAN_CITY"
     },
     {
-      "map": "MAP_PALLET_TOWN",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_PALLET_TOWN"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_CLERK",
+      "in_connection": false,
       "x": 6,
       "y": 28,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "in_connection": false,
       "x": 19,
       "y": 16,
       "elevation": 3,
@@ -53,8 +55,12 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

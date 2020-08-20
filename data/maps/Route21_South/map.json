@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE21_NORTH",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE21_NORTH"
     },
     {
-      "map": "MAP_CINNABAR_ISLAND",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_CINNABAR_ISLAND"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 11,
       "y": 8,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 14,
       "y": 15,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
+      "in_connection": false,
       "x": 15,
       "y": 24,
       "elevation": 1,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
+      "in_connection": false,
       "x": 15,
       "y": 38,
       "elevation": 1,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
+      "in_connection": false,
       "x": 10,
       "y": 29,
       "elevation": 1,
@@ -92,7 +97,13 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

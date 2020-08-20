@@ -13,10 +13,11 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "in_connection": false,
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -30,6 +31,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WORKER_F",
+      "in_connection": false,
       "x": 2,
       "y": 10,
       "elevation": 3,
@@ -43,6 +45,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "in_connection": false,
       "x": 11,
       "y": 10,
       "elevation": 3,
@@ -56,6 +59,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
+      "in_connection": false,
       "x": 6,
       "y": 3,
       "elevation": 3,
@@ -69,6 +73,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 8,
       "y": 4,
       "elevation": 0,
@@ -82,6 +87,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 9,
       "y": 4,
       "elevation": 0,
@@ -95,6 +101,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 10,
       "y": 4,
       "elevation": 0,
@@ -108,6 +115,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
+      "in_connection": false,
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -121,6 +129,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POKEDEX",
+      "in_connection": false,
       "x": 4,
       "y": 1,
       "elevation": 0,
@@ -134,6 +143,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POKEDEX",
+      "in_connection": false,
       "x": 5,
       "y": 1,
       "elevation": 0,

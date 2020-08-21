@@ -5,7 +5,7 @@
 
 FROM devkitpro/devkitarm
 
-RUN git clone https://github.com/pret/agbcc /opt/agbcc
+RUN git clone https://github.com/pret/agbcc /workspaces/agbcc
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
@@ -17,5 +17,4 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN /opt/agbcc/install.sh
-ENTRYPOINT [ "/opt/agbcc/build.sh", "/workspaces/pokefirered"]
+RUN cd /workspaces/agbcc && ./build.sh

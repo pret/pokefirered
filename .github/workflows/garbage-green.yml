@@ -26,12 +26,8 @@ jobs:
         apt-get install -y --no-install-recommends gcc  
         apt-get install -y --no-install-recommends g++ 
         apt-get install -y --no-install-recommends libpng-dev 
-    - name: download agbcc
-      run: git clone https://github.com/pret/agbcc /opt/agbcc
-    - name: build agbcc
-      run: cd /opt/agbcc && ./build.sh
     - name: install agbcc
-      run: cd /opt/agbcc && ./install.sh $GITHUB_WORKSPACE
+      run: git clone https://github.com/pret/agbcc /opt/agbcc && cd /opt/agbcc && ./build.sh && ./install.sh $GITHUB_WORKSPACE
     - name: install cmake
       run: |
         apt-get install -y cmake

@@ -2159,7 +2159,9 @@ static void sub_805EE3C(u8 objectEventId, s16 x, s16 y)
 #undef i
 
     objectEvent = &gObjectEvents[objectEventId];
-    asm("":::"r5");
+    #ifndef NONMATCHING
+        asm("":::"r5");
+    #endif
     subspriteTables = NULL;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     spriteFrameImage.size = graphicsInfo->size;

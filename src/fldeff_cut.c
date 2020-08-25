@@ -136,7 +136,11 @@ bool8 SetUpFieldMove_Cut(void)
     else
     {
         // FIXME: this fakematch
-        register s32 neg1 asm("r8");
+        #ifndef NONMATCHING
+            register s32 neg1 asm("r8");
+        #else
+            s32 neg1;
+        #endif
         struct MapPosition *pos;
         PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
 
@@ -204,7 +208,11 @@ bool8 FldEff_CutGrass(void)
     u8 i, j;
     s16 x, y;
     // FIXME: this fakematch
-    register s32 neg1 asm("r9");
+    #ifndef NONMATCHING
+        register s32 neg1 asm("r9");
+    #else
+        s32 neg1;
+    #endif
     struct MapPosition *pos;
 
     i = 0;

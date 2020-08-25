@@ -1040,7 +1040,11 @@ static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, stru
 {
     u16 species;
     u32 personality;
-    register int x asm("r4"); // FIXME
+    #ifndef NONMATCHING
+        register int x asm("r4"); // FIXME
+    #else
+        int x;
+    #endif
     u8 y;
     if (closeness == 3)
     {
@@ -1252,7 +1256,11 @@ static void Task_UseItem_OutwardSpiralDots(u8 taskId)
     s16 *data = gTasks[taskId].data;
     struct Sprite * sprite;
     int x;
-    register int y asm("r10"); // FIXME
+    #ifndef NONMATCHING
+        register int y asm("r10"); // FIXME
+    #else
+        int y;
+    #endif
     int x2;
     int y2;
     int ampl;

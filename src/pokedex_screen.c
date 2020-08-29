@@ -2067,7 +2067,7 @@ bool8 sub_81052D0(u8 a0)
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 32, 20);
         gUnknown_203ACF0->field_03 = 0;
         gUnknown_203ACF0->field_02++;
-        PlaySE(SE_TB_START);
+        PlaySE(SE_BALL_TRAY_ENTER);
         break;
     case 5:
         if (gUnknown_203ACF0->field_03 < 10)
@@ -2086,7 +2086,7 @@ bool8 sub_81052D0(u8 a0)
         CpuFastCopy(GetBgTilemapBuffer(1), &gUnknown_203ACF0->field_5C[2 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
         gUnknown_203ACF0->field_03 = 9;
         gUnknown_203ACF0->field_02++;
-        PlaySE(SE_TB_START);
+        PlaySE(SE_BALL_TRAY_ENTER);
         break;
     case 7:
         if (gUnknown_203ACF0->field_03 != 0)

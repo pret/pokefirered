@@ -11,7 +11,7 @@ Route1_EventScript_MartClerk:: @ 8167EFE
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BagIsFull
 	getitemname 1, ITEM_POTION
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message Text_ObtainedTheX
 	waitmessage
 	waitfanfare

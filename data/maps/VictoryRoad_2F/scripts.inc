@@ -25,7 +25,7 @@ VictoryRoad_2F_EventScript_FloorSwitch1:: @ 8160FD5
 	goto_if_eq VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed
 	setmetatile 13, 10, METATILE_Cave_Floor_Ledge_Top, 0
 	setmetatile 13, 11, METATILE_Cave_Floor_Ledge_Bottom, 0
-	playse SE_RU_GASYAN
+	playse SE_ICE_BREAK
 	special DrawWholeMapView
 	waitse
 	moveobjectoffscreen 11
@@ -43,7 +43,7 @@ VictoryRoad_2F_EventScript_FloorSwitch2:: @ 8161006
 	goto_if_eq VictoryRoad_2F_EventScript_FloorSwitch2AlreadyPressed
 	setmetatile 33, 16, METATILE_Cave_Floor_Ledge_Top, 0
 	setmetatile 33, 17, METATILE_Cave_Floor_Ledge_Bottom, 0
-	playse SE_RU_GASYAN
+	playse SE_ICE_BREAK
 	special DrawWholeMapView
 	waitse
 	moveobjectoffscreen 12

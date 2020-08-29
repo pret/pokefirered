@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_WATER_PATH_HOUSE2",
   "name": "SixIsland_WaterPath_House2",
   "layout": "LAYOUT_HOUSE3",
-  "music": "MUS_HANADA",
+  "music": "MUS_FUCHSIA",
   "region_map_section": "MAPSEC_WATER_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

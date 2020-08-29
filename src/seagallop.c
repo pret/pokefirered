@@ -236,7 +236,7 @@ static void CB2_SetUpSeagallopScene(void)
     case 7:
         SetDispcnt();
         SetVBlankCallback(VBlankCB_SeaGallop);
-        PlaySE(SE_NAMINORI);
+        PlaySE(SE_SHIP);
         CreateFerrySprite();
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         SetGpuReg(REG_OFFSET_WININ, 0x3F);
@@ -316,7 +316,7 @@ static void Task_Seagallop_3(void)
     warpInfo = sSeag[gSpecialVar_0x8006];
     SetWarpDestination(warpInfo[0], warpInfo[1], -1, warpInfo[2], warpInfo[3]);
     PlayRainStoppingSoundEffect();
-    PlaySE(SE_KAIDAN);
+    PlaySE(SE_EXIT);
     gFieldCallback = FieldCB_DefaultWarpExit;
     WarpIntoMap();
     SetMainCallback2(CB2_LoadMap);

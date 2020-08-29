@@ -64,7 +64,7 @@ Route25_SeaCottage_EventScript_BillAskForHelp:: @ 817059C
 	applymovement LOCALID_BILL_CLEFAIRY, Route25_SeaCottage_Movement_BillEnterTeleporter
 	waitmovement 0
 	removeobject LOCALID_BILL_CLEFAIRY
-	playse SE_C_MAKU_D
+	playse SE_CONTEST_CURTAIN_FALL
 	closedoor 10, 3
 	waitdooranim
 	setflag BILL_IN_TELEPORTER
@@ -113,7 +113,7 @@ Route25_SeaCottage_EventScript_BillGiveSSTicket:: @ 817064A
 	checkitemspace ITEM_SS_TICKET, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route25_SeaCottage_EventScript_NoRoomForSSTicket
-	giveitem_msg Route25_SeaCottage_Text_ReceivedSSTicketFromBill, ITEM_SS_TICKET, 1, MUS_FAN5
+	giveitem_msg Route25_SeaCottage_Text_ReceivedSSTicketFromBill, ITEM_SS_TICKET, 1, MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_GOT_SS_TICKET_DUP
 	setflag FLAG_HIDE_NUGGET_BRIDGE_ROCKET
 	setflag FLAG_GOT_SS_TICKET
@@ -188,7 +188,7 @@ Route25_SeaCottage_EventScript_RunCellSeparator:: @ 81706FA
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	setvar VAR_0x8004, 1
 	special AnimateTeleporterHousing
-	playse SE_TK_WARPIN
+	playse SE_WARP_IN
 	special AnimateTeleporterCable
 	waitse
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
@@ -202,13 +202,13 @@ Route25_SeaCottage_EventScript_RunCellSeparator:: @ 81706FA
 	addobject LOCALID_BILL_HUMAN
 	clearflag FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE
 	delay 50
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	applymovement LOCALID_BILL_HUMAN, Route25_SeaCottage_Movement_BillExitTeleporter
 	waitmovement 0
 	waitfanfare
 	applymovement OBJ_EVENT_ID_CAMERA, Route25_SeaCottage_Movement_CameraPanBackFromTeleporters
 	waitmovement 0
-	playse SE_C_MAKU_D
+	playse SE_CONTEST_CURTAIN_FALL
 	closedoor 3, 3
 	waitdooranim
 	applymovement LOCALID_BILL_HUMAN, Route25_SeaCottage_Movement_BillWalkToMiddleOfRoom
@@ -218,7 +218,7 @@ Route25_SeaCottage_EventScript_RunCellSeparator:: @ 81706FA
 	end
 
 Route25_SeaCottage_EventScript_PlayTeleporterBeepSE:: @ 81707B6
-	playse SE_BOWA
+	playse SE_BALL
 	waitse
 	delay 20
 	return

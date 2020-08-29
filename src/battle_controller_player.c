@@ -798,7 +798,7 @@ static void sub_802F610(void)
     {
         if (!gReceivedRemoteLinkPlayers)
         {
-            m4aSongNumStop(SE_HINSI);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = 0;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(sub_8011A1C);
@@ -807,7 +807,7 @@ static void sub_802F610(void)
     }
     else if (IsLinkTaskFinished())
     {
-        m4aSongNumStop(SE_HINSI);
+        m4aSongNumStop(SE_LOW_HEALTH);
         gMain.inBattle = 0;
         gMain.callback1 = gPreBattleCallback1;
         SetMainCallback2(sub_8011A1C);
@@ -829,7 +829,7 @@ void sub_802F6A8(void)
         }
         else
         {
-            m4aSongNumStop(SE_HINSI);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
@@ -1217,7 +1217,7 @@ static void sub_80303A8(u8 taskId)
         ++data[15];
         break;
     case 2:
-        PlaySE(SE_REGI);
+        PlaySE(SE_RS_SHOP);
         if (IsMonGettingExpSentOut())
             CreateLevelUpVerticalSpritesTask(sprite->pos1.x + sprite->pos2.x,
                         sprite->pos1.y + sprite->pos2.y,
@@ -2252,7 +2252,7 @@ static void PlayerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
+            PlaySE12WithPanning(SE_FAINT, SOUND_PAN_ATTACKER);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8012110;

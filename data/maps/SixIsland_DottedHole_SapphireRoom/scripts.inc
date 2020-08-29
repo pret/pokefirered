@@ -8,17 +8,17 @@ SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire:: @ 81641B5
 	lock
 	faceplayer
 	textcolor 3
-	playfanfare MUS_FAN5
+	playfanfare MUS_OBTAIN_KEY_ITEM
 	message SixIsland_DottedHole_SapphireRoom_Text_FoundSapphire
 	waitmessage
 	waitfanfare
 	closemessage
 	setobjectxyperm LOCALID_THIEF, 5, 0
 	addobject LOCALID_THIEF
-	playse SE_RU_HYUU
+	playse SE_FALL
 	applymovement LOCALID_THIEF, SixIsland_DottedHole_SapphireRoom_Movement_ThiefFallIn
 	waitmovement 0
-	playse SE_W070
+	playse SE_M_STRENGTH
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft
 	compare VAR_FACING, DIR_SOUTH
@@ -71,7 +71,7 @@ SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire:: @ 81641B5
 	call_if_eq SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitEast
 	compare VAR_FACING, DIR_WEST
 	call_if_eq SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitWest
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 35
 	removeobject LOCALID_THIEF
 	setflag FLAG_LEARNED_YES_NAH_CHANSEY

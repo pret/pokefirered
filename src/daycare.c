@@ -1874,10 +1874,10 @@ static void Task_EggHatchPlayBGM(u8 taskID)
         StopMapMusic();
     }
     if (gTasks[taskID].data[0] == 1)
-        PlayBGM(MUS_ME_SHINKA);
+        PlayBGM(MUS_EVOLUTION_INTRO);
     if (gTasks[taskID].data[0] > 60)
     {
-        PlayBGM(MUS_SHINKA);
+        PlayBGM(MUS_EVOLUTION);
         DestroyTask(taskID);
         // UB: task is destroyed, yet the value is incremented
     }
@@ -1932,7 +1932,7 @@ static void CB2_EggHatch_1(void)
         DayCare_GetMonNickname(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_HatchedFromEgg);
         EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 3, 0xFF);
-        PlayFanfare(MUS_FANFA5);
+        PlayFanfare(MUS_EVOLVED);
         sEggHatchData->CB2_state++;
         PutWindowTilemap(sEggHatchData->windowId);
         CopyWindowToVram(sEggHatchData->windowId, COPYWIN_BOTH);
@@ -2011,7 +2011,7 @@ static void SpriteCB_Egg_0(struct Sprite* sprite)
         sprite->pos2.x = Sin(sprite->data[1], 1);
         if (sprite->data[0] == 15)
         {
-            PlaySE(SE_BOWA);
+            PlaySE(SE_BALL);
             StartSpriteAnim(sprite, 1);
             CreateRandomEggShardSprite();
         }
@@ -2034,7 +2034,7 @@ static void SpriteCB_Egg_1(struct Sprite* sprite)
             sprite->pos2.x = Sin(sprite->data[1], 2);
             if (sprite->data[0] == 15)
             {
-                PlaySE(SE_BOWA);
+                PlaySE(SE_BALL);
                 StartSpriteAnim(sprite, 2);
             }
         }
@@ -2071,13 +2071,13 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             sprite->pos2.x = Sin(sprite->data[1], 2);
             if (sprite->data[0] == 15)
             {
-                PlaySE(SE_BOWA);
+                PlaySE(SE_BALL);
                 StartSpriteAnim(sprite, 2);
                 CreateRandomEggShardSprite();
                 CreateRandomEggShardSprite();
             }
             if (sprite->data[0] == 30)
-                PlaySE(SE_BOWA);
+                PlaySE(SE_BALL);
         }
     }
 }
@@ -2104,7 +2104,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
     sprite->data[0]++;
     if (!gPaletteFade.active)
     {
-        PlaySE(SE_TAMAGO);
+        PlaySE(SE_EGG_HATCH);
         sprite->invisible = TRUE;
         sprite->callback = SpriteCB_Egg_5;
         sprite->data[0] = 0;

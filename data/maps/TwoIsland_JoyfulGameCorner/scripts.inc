@@ -69,11 +69,11 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene:: @ 817145F
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_PleaseHelpFindLostelle
 	closemessage
-	playse SE_DOOR
+	playse SE_RS_DOOR
 	waitse
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_17152C
 	waitmovement 0
-	playbgm MUS_SHOUNEN, 0
+	playbgm MUS_ENCOUNTER_BOY, 0
 	addobject LOCALID_BIKER
 	applymovement LOCALID_BIKER, TwoIsland_JoyfulGameCorner_Movement_BikerLookAround
 	waitmovement 0
@@ -85,7 +85,7 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene:: @ 817145F
 	closemessage
 	applymovement LOCALID_BIKER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject LOCALID_BIKER
 	fadedefaultbgm
 	delay 60
@@ -158,7 +158,7 @@ TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite:: @ 817158A
 	msgbox TwoIsland_JoyfulGameCorner_Text_ThisIsForMe
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	textcolor 3
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	message TwoIsland_JoyfulGameCorner_Text_HandedMeteoriteToLostellesDaddy
 	waitmessage
 	waitfanfare

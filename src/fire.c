@@ -1034,7 +1034,7 @@ static void sub_80AD690(struct Sprite *sprite)
         sprite->data[5] = (sprite->data[5] + 4) & 0xFF;
         newData5 = sprite->data[5];
         if ((initialData5 == 0 || initialData5 > 196) && newData5 > 0 && sprite->data[7] == 0)
-            PlaySE12WithPanning(SE_W172, gUnknown_2037F24);
+            PlaySE12WithPanning(SE_M_FLAME_WHEEL, gUnknown_2037F24);
     }
     else
     {

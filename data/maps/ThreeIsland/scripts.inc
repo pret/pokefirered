@@ -230,7 +230,7 @@ ThreeIsland_EventScript_BattleBikersScene:: @ 8167A59
 	waitmovement 0
 	applymovement LOCALID_BIKER1, ThreeIsland_Movement_BikerApproach
 	waitmovement 0
-	playbgm MUS_SHOUNEN, 0
+	playbgm MUS_ENCOUNTER_BOY, 0
 	msgbox ThreeIsland_Text_WannaMakeSomethingOfYourStaring, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq ThreeIsland_EventScript_LeaveBikersAlone
@@ -243,7 +243,7 @@ ThreeIsland_EventScript_BattleBikersScene:: @ 8167A59
 	closemessage
 	applymovement LOCALID_BIKER2, ThreeIsland_Movement_BikerApproach
 	waitmovement 0
-	playbgm MUS_SHOUNEN, 0
+	playbgm MUS_ENCOUNTER_BOY, 0
 	msgbox ThreeIsland_Text_Biker2Intro
 	setvar VAR_LAST_TALKED, LOCALID_BIKER2
 	trainerbattle_no_intro TRAINER_BIKER_GOON_2, ThreeIsland_Text_Biker2Defeat
@@ -253,7 +253,7 @@ ThreeIsland_EventScript_BattleBikersScene:: @ 8167A59
 	closemessage
 	applymovement LOCALID_BIKER3, ThreeIsland_Movement_BikerApproach
 	waitmovement 0
-	playbgm MUS_SHOUNEN, 0
+	playbgm MUS_ENCOUNTER_BOY, 0
 	msgbox ThreeIsland_Text_Biker3Intro
 	setvar VAR_LAST_TALKED, LOCALID_BIKER3
 	trainerbattle_no_intro TRAINER_BIKER_GOON_3, ThreeIsland_Text_Biker3Defeat
@@ -275,7 +275,7 @@ ThreeIsland_EventScript_BattleBikersScene:: @ 8167A59
 	call_if_eq ThreeIsland_EventScript_PaxtonApproachMidRight
 	compare VAR_TEMP_1, 4
 	call_if_eq ThreeIsland_EventScript_PaxtonApproachRight
-	playbgm MUS_SHOUNEN, 0
+	playbgm MUS_ENCOUNTER_BOY, 0
 	msgbox ThreeIsland_Text_PaxtonIntro
 	setvar VAR_LAST_TALKED, LOCALID_PAXTON
 	trainerbattle_no_intro TRAINER_CUE_BALL_PAXTON, ThreeIsland_Text_PaxtonDefeat

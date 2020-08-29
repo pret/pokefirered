@@ -2,7 +2,7 @@
   "id": "MAP_CELADON_CITY_RESTAURANT",
   "name": "CeladonCity_Restaurant",
   "layout": "LAYOUT_CELADON_CITY_RESTAURANT",
-  "music": "MUS_TAMAMUSI",
+  "music": "MUS_CELADON",
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

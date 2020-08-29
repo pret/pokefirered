@@ -23,7 +23,7 @@ Route22_EventScript_EarlyRivalTriggerBottom:: @ 81682AB
 
 Route22_EventScript_EarlyRival:: @ 81682BE
 	textcolor 0
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject 1
 	compare VAR_TEMP_1, 0
 	call_if_eq Route22_EventScript_EarlyRivalApproach
@@ -42,7 +42,7 @@ Route22_EventScript_EarlyRival:: @ 81682BE
 	msgbox Route22_Text_EarlyRivalPostBattle
 	closemessage
 	delay 10
-	playbgm MUS_RIVAL2, 0
+	playbgm MUS_RIVAL_EXIT, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq Route22_EventScript_EarlyRivalExit
 	compare VAR_TEMP_1, 1
@@ -183,7 +183,7 @@ Route22_EventScript_LateRivalTriggerBottom:: @ 816840C
 
 Route22_EventScript_LateRival:: @ 816841F
 	textcolor 0
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject 1
 	compare VAR_TEMP_1, 0
 	call_if_eq Route22_EventScript_LateRivalApproach
@@ -202,7 +202,7 @@ Route22_EventScript_LateRival:: @ 816841F
 	msgbox Route22_Text_LateRivalPostBattle
 	closemessage
 	delay 10
-	playbgm MUS_RIVAL2, 0
+	playbgm MUS_RIVAL_EXIT, 0
 	applymovement 1, Route22_Movement_LateRivalExit
 	waitmovement 0
 	fadedefaultbgm

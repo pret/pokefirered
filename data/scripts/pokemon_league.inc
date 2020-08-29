@@ -1,7 +1,7 @@
 PokemonLeague_EventScript_OpenDoor:: @ 81A7506
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
 	waitmovement 0
-	playse SE_DOOR
+	playse SE_RS_DOOR
 	call PokemonLeague_EventScript_SetDoorOpen
 	special DrawWholeMapView
 	setflag FLAG_TEMP_4
@@ -11,7 +11,7 @@ PokemonLeague_EventScript_EnterRoom:: @ 81A751F
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkUp5
 	waitmovement 0
 	setflag FLAG_TEMP_2
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	call PokemonLeague_EventScript_CloseEntry
 	special DrawWholeMapView
 	return
@@ -34,7 +34,7 @@ PokemonLeague_EventScript_PreventExit:: @ 81A754B
 PokemonLeague_EventScript_OpenDoorLance:: @ 81A7563
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
 	waitmovement 0
-	playse SE_DOOR
+	playse SE_RS_DOOR
 	setmetatile 6, 4, METATILE_PokemonLeague_Door_Top_Open, 1
 	setmetatile 6, 5, METATILE_PokemonLeague_Door_Mid_Open, 0
 	special DrawWholeMapView

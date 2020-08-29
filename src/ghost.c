@@ -252,7 +252,7 @@ static void sub_80B52D0(struct Sprite *sprite)
         return;
     if (r0 <= 0)
         return;
-    PlaySE12WithPanning(SE_W109, gUnknown_2037F24);
+    PlaySE12WithPanning(SE_M_CONFUSE_RAY, gUnknown_2037F24);
 }
 
 static void sub_80B5344(struct Sprite *sprite)
@@ -267,7 +267,7 @@ static void sub_80B5344(struct Sprite *sprite)
     sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
     r0 = sprite->data[5];
     if ((r2 == 0 || r2 > 196) && r0 > 0)
-        PlaySE(SE_W109);
+        PlaySE(SE_M_CONFUSE_RAY);
     if (sprite->data[6] == 0)
     {
         sprite->invisible = TRUE;

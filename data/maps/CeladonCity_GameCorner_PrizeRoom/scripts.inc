@@ -214,7 +214,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonParty:: @ 816CDB3
 	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	getspeciesname 0, VAR_TEMP_1
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message Text_PlayerObtainedTheMon
 	waitmessage
 	waitfanfare
@@ -228,7 +228,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonPC:: @ 816CDE0
 	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	getspeciesname 0, VAR_TEMP_1
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message Text_PlayerObtainedTheMon
 	waitmessage
 	waitfanfare

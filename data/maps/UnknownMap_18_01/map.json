@@ -2,7 +2,7 @@
   "id": "MAP_UNKNOWN_MAP_18_01",
   "name": "UnknownMap_18_01",
   "layout": "LAYOUT_HOUSE2",
-  "music": "MUS_LOAD02",
+  "music": "MUS_ROUTE3",
   "region_map_section": "MAPSEC_ROUTE_6",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

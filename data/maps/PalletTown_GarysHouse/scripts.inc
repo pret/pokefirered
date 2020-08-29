@@ -69,7 +69,7 @@ PalletTown_GarysHouse_EventScript_GroomMon:: @ 8168DB9
 	msgbox PalletTown_GarysHouse_Text_LookingNiceInNoTime
 	closemessage
 	fadescreen FADE_TO_BLACK
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special DaisyMassageServices
 	fadescreen FADE_FROM_BLACK
@@ -155,7 +155,7 @@ PalletTown_GarysHouse_EventScript_GiveTownMap:: @ 8168EF6
 	applymovement LOCALID_DAISY, Movement_FacePlayer
 	waitmovement 0
 	delay 12
-	giveitem_msg PalletTown_GarysHouse_Text_ReceivedTownMapFromDaisy, ITEM_TOWN_MAP, 1, MUS_FAN5
+	giveitem_msg PalletTown_GarysHouse_Text_ReceivedTownMapFromDaisy, ITEM_TOWN_MAP, 1, MUS_OBTAIN_KEY_ITEM
 	release
 	end
 

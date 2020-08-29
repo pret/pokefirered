@@ -38,7 +38,7 @@ RocketHideout_B1F_EventScript_Grunt5:: @ 816120A
 
 RocketHideout_B1F_EventScript_DefeatedGrunt5:: @ 8161225
 	call RocketHideout_B1F_EventScript_RemoveBarrier
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	special DrawWholeMapView
 	waitse
 	release

@@ -473,9 +473,9 @@ bool8 FieldIsDoorAnimationRunning(void)
 u16 GetDoorSoundEffect(int x, int y)
 {
     if (GetDoorSoundType(sDoorGraphics, x, y) == DOOR_SOUND_NORMAL)
-        return MUS_W_DOOR;
+        return SE_DOOR;
     else // DOOR_SOUND_SLIDING
-        return SE_JIDO_DOA;
+        return SE_SLIDING_DOOR;
 }
 
 static s8 GetDoorSoundType(const struct DoorGraphics * gfx, int x, int y)

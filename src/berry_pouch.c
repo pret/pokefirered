@@ -704,7 +704,7 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
 {
     if (onInit != TRUE)
     {
-        PlaySE(SE_BAG1);
+        PlaySE(SE_BAG_CURSOR);
         StartBerryPouchSpriteWobbleAnim();
     }
     DestroyItemMenuIcon(sResources->itemMenuIconId ^ 1);

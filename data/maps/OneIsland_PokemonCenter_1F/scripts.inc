@@ -104,12 +104,12 @@ OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene:: @ 8170CB1
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox OneIsland_PokemonCenter_1F_Text_CanYouDeliverThisMeteoritePlayer
-	msgreceiveditem OneIsland_PokemonCenter_1F_Text_AcceptedMeteoriteFromBill, ITEM_METEORITE, 1, MUS_FAN5
+	msgreceiveditem OneIsland_PokemonCenter_1F_Text_AcceptedMeteoriteFromBill, ITEM_METEORITE, 1, MUS_OBTAIN_KEY_ITEM
 	additem ITEM_METEORITE
 	applymovement LOCALID_CELIO, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox OneIsland_PokemonCenter_1F_Text_CelioPleaseTakeThis
-	giveitem_msg OneIsland_PokemonCenter_1F_Text_ObtainedTriPass, ITEM_TRI_PASS, 1, MUS_FAN5
+	giveitem_msg OneIsland_PokemonCenter_1F_Text_ObtainedTriPass, ITEM_TRI_PASS, 1, MUS_OBTAIN_KEY_ITEM
 	msgbox OneIsland_PokemonCenter_1F_Text_PassLetsYouTravelBetweenIslands
 	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if_ge OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage
@@ -137,7 +137,7 @@ OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerNotChamp:: @ 8170E3D
 
 OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage:: @ 8170E46
 	textcolor 3
-	playfanfare MUS_FAN5
+	playfanfare MUS_OBTAIN_KEY_ITEM
 	message OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap
 	waitmessage
 	waitfanfare
@@ -147,7 +147,7 @@ OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage:: @ 8170E46
 OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMap:: @ 8170E58
 	setflag FLAG_HIDE_TOWN_MAP
 	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
-	giveitem_msg OneIsland_PokemonCenter_1F_Text_ReceivedTownMap, ITEM_TOWN_MAP, 1, MUS_FAN5
+	giveitem_msg OneIsland_PokemonCenter_1F_Text_ReceivedTownMap, ITEM_TOWN_MAP, 1, MUS_OBTAIN_KEY_ITEM
 	return
 
 OneIsland_PokemonCenter_1F_Movement_PlayerWalkToCelio:: @ 8170E7D
@@ -260,7 +260,7 @@ OneIsland_PokemonCenter_1F_EventScript_CelioJustGivenSapphire:: @ 8170F9B
 
 OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire:: @ 8170FA5
 	textcolor 3
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	message OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio
 	waitmessage
 	waitfanfare
@@ -270,7 +270,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire:: @ 8170FA5
 	closemessage
 	applymovement LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine
 	waitmovement 0
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	call OneIsland_PokemonCenter_1F_EventScript_SetSapphireMetatile
 	special DrawWholeMapView
 	msgbox OneIsland_PokemonCenter_1F_Text_OkayThisIsGood
@@ -306,7 +306,7 @@ OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass:: @ 817103A
 OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby:: @ 8171044
 	msgbox OneIsland_PokemonCenter_1F_Text_OhThats
 	textcolor 3
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	message OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio
 	waitmessage
 	waitfanfare
@@ -314,7 +314,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby:: @ 8171044
 	closemessage
 	applymovement LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine
 	waitmovement 0
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	call OneIsland_PokemonCenter_1F_EventScript_SetRubyMetatile
 	special DrawWholeMapView
 	delay 30
@@ -341,11 +341,11 @@ OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass:: @ 81710B2
 	additem ITEM_RAINBOW_PASS
 	setflag FLAG_SYS_SEVII_MAP_4567
 	textcolor 3
-	playfanfare MUS_FAN5
+	playfanfare MUS_OBTAIN_KEY_ITEM
 	message OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass
 	waitmessage
 	waitfanfare
-	playfanfare MUS_FAN5
+	playfanfare MUS_OBTAIN_KEY_ITEM
 	message OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage
 	waitmessage
 	waitfanfare
@@ -501,7 +501,7 @@ OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene:: @ 81711DA
 	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerExit
 	applymovement LOCALID_BILL, OneIsland_PokemonCenter_1F_Movement_BillExit
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	setflag FLAG_HIDE_ONE_ISLAND_POKECENTER_BILL
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
 	clearflag FLAG_HIDE_CINNABAR_BILL

@@ -23,6 +23,6 @@ Text_OnlyPassWithBadgeDontHaveYet:: @ 81A57C1
 Text_OnlyPassWithBadgeOhGoAhead:: @ 81A5839
 	.string "You can pass here only if you have\n"
 	.string "the {STR_VAR_1}.\p"
-	.string "Oh! That is the {STR_VAR_1}!{PAUSE_MUSIC}{PLAY_BGM}{MUS_FANFA1}{PAUSE 0x60}{RESUME_MUSIC}\p"
+	.string "Oh! That is the {STR_VAR_1}!{PAUSE_MUSIC}{PLAY_BGM}{MUS_LEVEL_UP}{PAUSE 0x60}{RESUME_MUSIC}\p"
 	.string "Okay, then.\n"
 	.string "Please, go right ahead.$"

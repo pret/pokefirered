@@ -1883,11 +1883,11 @@ static void atk0E_effectivenesssound(void)
             switch (gMoveResultFlags & (u8)(~(MOVE_RESULT_MISSED)))
             {
             case MOVE_RESULT_SUPER_EFFECTIVE:
-                BtlController_EmitPlaySE(0, SE_KOUKA_H);
+                BtlController_EmitPlaySE(0, SE_SUPER_EFFECTIVE);
                 MarkBattlerForControllerExec(gActiveBattler);
                 break;
             case MOVE_RESULT_NOT_VERY_EFFECTIVE:
-                BtlController_EmitPlaySE(0, SE_KOUKA_L);
+                BtlController_EmitPlaySE(0, SE_NOT_EFFECTIVE);
                 MarkBattlerForControllerExec(gActiveBattler);
                 break;
             case MOVE_RESULT_DOESNT_AFFECT_FOE:
@@ -1900,17 +1900,17 @@ static void atk0E_effectivenesssound(void)
             default:
                 if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
                 {
-                    BtlController_EmitPlaySE(0, SE_KOUKA_H);
+                    BtlController_EmitPlaySE(0, SE_SUPER_EFFECTIVE);
                     MarkBattlerForControllerExec(gActiveBattler);
                 }
                 else if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
                 {
-                    BtlController_EmitPlaySE(0, SE_KOUKA_L);
+                    BtlController_EmitPlaySE(0, SE_NOT_EFFECTIVE);
                     MarkBattlerForControllerExec(gActiveBattler);
                 }
                 else if (!(gMoveResultFlags & (MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)))
                 {
-                    BtlController_EmitPlaySE(0, SE_KOUKA_M);
+                    BtlController_EmitPlaySE(0, SE_EFFECTIVE);
                     MarkBattlerForControllerExec(gActiveBattler);
                 }
                 break;
@@ -3156,7 +3156,7 @@ static void atk23_getexp(void)
                  && !gBattleStruct->wildVictorySong)
                 {
                     BattleStopLowHpSound();
-                    PlayBGM(MUS_WIN_YASEI);
+                    PlayBGM(MUS_VICTORY_WILD);
                     ++gBattleStruct->wildVictorySong;
                 }
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))

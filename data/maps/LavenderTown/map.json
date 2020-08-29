@@ -2,7 +2,7 @@
   "id": "MAP_LAVENDER_TOWN",
   "name": "LavenderTown",
   "layout": "LAYOUT_LAVENDER_TOWN",
-  "music": "MUS_SHION",
+  "music": "MUS_LAVENDER",
   "region_map_section": "MAPSEC_LAVENDER_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

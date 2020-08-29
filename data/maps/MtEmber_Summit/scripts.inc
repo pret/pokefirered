@@ -34,7 +34,7 @@ MtEmber_Summit_EventScript_Moltres:: @ 8163B33
 	waitmessage
 	waitmoncry
 	delay 10
-	playbgm MUS_EXEYE, 0
+	playbgm MUS_ENCOUNTER_GYM_LEADER, 0
 	waitbuttonpress
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle

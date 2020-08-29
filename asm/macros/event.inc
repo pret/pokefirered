@@ -1603,12 +1603,12 @@
 	callstd STD_PUT_ITEM_AWAY
 	.endm
 
-	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_FANFA1
+	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
 	additem \item, \amount
 	msgreceiveditem \msg, \item, \amount, \fanfare
 	.endm
 
-	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_FANFA1
+	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
 	loadword 0, \msg
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount

@@ -34,7 +34,7 @@ FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg:: @ 81688BA
 	setflag FLAG_GOT_TOGEPI_EGG
 	giveegg SPECIES_TOGEPI
 	textcolor 3
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message FiveIsland_WaterLabyrinth_Text_ReceivedEggFromMan
 	waitfanfare
 	waitmessage

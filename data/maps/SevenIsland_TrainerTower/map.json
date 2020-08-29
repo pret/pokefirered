@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_TRAINER_TOWER",
   "name": "SevenIsland_TrainerTower",
   "layout": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER",
-  "music": "MUS_NANASHIMA",
+  "music": "MUS_SEVII_ROUTE",
   "region_map_section": "MAPSEC_TRAINER_TOWER",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -169,7 +169,7 @@ static void Task_ItemfinderResponseSoundsAndAnims(u8 taskId)
         }
         else
         {
-            PlaySE(SE_DAUGI);
+            PlaySE(SE_ITEMFINDER);
             CreateArrowSprite(tDingNum, direction);
             tDingNum++;
             tNumDingsRemaining--;
@@ -190,7 +190,7 @@ static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId)
         }
         else
         {
-            PlaySE(SE_DAUGI);
+            PlaySE(SE_ITEMFINDER);
             tStartSpriteId = CreateStarSprite();
             tDingNum++;
             tNumDingsRemaining--;

@@ -181,7 +181,7 @@ VermilionCity_Gym_EventScript_FoundSwitchTwo:: @ 816B8CB
 	closemessage
 	call VermilionCity_Gym_EventScript_SetBeamsOff
 	special DrawWholeMapView
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	setflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
 	releaseall

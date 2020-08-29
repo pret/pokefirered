@@ -883,7 +883,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         {
             sSlotMachineState->bet++;
             RemoveCoins(1);
-            PlaySE(SE_REGI);
+            PlaySE(SE_RS_SHOP);
             SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
             SetSlotMachineSetupTask(SLOTTASK_UPDATE_LINE_LIGHTS, 1);
             data[0] = 1;
@@ -901,7 +901,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
                 sSlotMachineState->bet += GetCoins();
                 SetCoins(0);
             }
-            PlaySE(SE_REGI);
+            PlaySE(SE_RS_SHOP);
             SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
             SetSlotMachineSetupTask(SLOTTASK_UPDATE_LINE_LIGHTS, 1);
             data[0] = 1;
@@ -941,7 +941,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         {
             if (JOY_NEW(A_BUTTON))
             {
-                PlaySE(SE_JYUNI);
+                PlaySE(SE_CONTEST_PLACE);
                 StopCurrentReel(sSlotMachineState->currentReel, sSlotMachineState->currentReel);
                 PressReelButton(sSlotMachineState->currentReel, 0);
                 data[0] = 4;
@@ -1099,9 +1099,9 @@ static void MainTask_WinHandlePayout(u8 taskId)
     {
     case 0:
         if (sSlotMachineState->slotRewardClass == SLOT_PAYOUT_ROCKET || sSlotMachineState->slotRewardClass == SLOT_PAYOUT_7)
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
         else
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
         SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
         SetSlotMachineSetupTask(SLOTTASK_ANIM_WIN, 1);
         data[1] = 8;

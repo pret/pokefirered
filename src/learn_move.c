@@ -656,10 +656,10 @@ static void MoveRelearnerStateMachine(void)
     case MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE:
         StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonForgotOldMoveAndMonLearnedNewMove);
         sMoveRelearner->state = 31;
-        PlayFanfare(MUS_FANFA1);
+        PlayFanfare(MUS_LEVEL_UP);
         break;
     case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
-        PlayFanfare(MUS_FANFA1);
+        PlayFanfare(MUS_LEVEL_UP);
         sMoveRelearner->state = 32;
         break;
     case MENU_STATE_WAIT_FOR_FANFARE:

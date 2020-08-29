@@ -276,7 +276,7 @@ void FieldUseFunc_MachBike(u8 taskId)
 static void ItemUseOnFieldCB_Bicycle(u8 taskId)
 {
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
-        PlaySE(SE_JITENSYA);
+        PlaySE(SE_BIKE_BELL);
     StartTransitionToFlipBikeState(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE);
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
@@ -552,7 +552,7 @@ void FieldUseFunc_SuperRepel(u8 taskId)
 {
     if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
     {
-        PlaySE(SE_TU_SAA);
+        PlaySE(SE_REPEL);
         gTasks[taskId].func = sub_80A19E8;
     }
     else
@@ -607,7 +607,7 @@ static void sub_80A1B48(u8 taskId)
 {
     if (++gTasks[taskId].data[8] > 7)
     {
-        PlaySE(SE_BIDORO);
+        PlaySE(SE_GLASS_FLUTE);
         DisplayItemMessageInBag(taskId, 2, gStringVar4, Task_ReturnToBagFromContextMenu);
     }
 }
@@ -775,7 +775,7 @@ static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
     if (++data[8] > 7)
     {
         u16 itemId = gSpecialVar_ItemId;
-        PlaySE(SE_KAIFUKU);
+        PlaySE(SE_USE_ITEM);
         RemoveBagItem(itemId, 1);
         DisplayItemMessageInBag(taskId, 2, Battle_PrintStatBoosterEffectMessage(itemId), Task_BattleUse_StatBooster_WaitButton_ReturnToBattle);
     }

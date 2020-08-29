@@ -351,7 +351,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HofIdle);
-            PlayBGM(MUS_DENDOU);
+            PlayBGM(MUS_HALL_OF_FAME);
             return FALSE;
         }
         break;
@@ -571,7 +571,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
     }
 
     HallOfFame_PrintWelcomeText(0, 15);
-    PlaySE(SE_DENDOU);
+    PlaySE(SE_APPLAUSE);
     gTasks[taskId].data[3] = 400;
     gTasks[taskId].func = Task_Hof_ApplauseAndConfetti;
 }

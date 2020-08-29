@@ -2,7 +2,7 @@
   "id": "MAP_VERMILION_CITY",
   "name": "VermilionCity",
   "layout": "LAYOUT_VERMILION_CITY",
-  "music": "MUS_KUCHIBA",
+  "music": "MUS_VERMILLION",
   "region_map_section": "MAPSEC_VERMILION_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

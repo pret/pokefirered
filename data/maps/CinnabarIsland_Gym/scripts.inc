@@ -217,7 +217,7 @@ CinnabarIsland_Gym_EventScript_Quiz1:: @ 816DC00
 	end
 
 CinnabarIsland_Gym_EventScript_CorrectAnswer:: @ 816DC27
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	msgbox CinnabarIsland_Gym_Text_CorrectGoOnThrough
 	return
@@ -238,7 +238,7 @@ CinnabarIsland_Gym_EventScript_Quiz1Correct:: @ 816DC43
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz1Complete:: @ 816DC58
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	call CinnabarIsland_Gym_EventScript_OpenDoor1
 	special DrawWholeMapView
@@ -318,7 +318,7 @@ CinnabarIsland_Gym_EventScript_Quiz2Correct:: @ 816DD1C
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz2Complete:: @ 816DD31
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	call CinnabarIsland_Gym_EventScript_OpenDoor2
 	special DrawWholeMapView
@@ -403,7 +403,7 @@ CinnabarIsland_Gym_EventScript_Quiz3Correct:: @ 816DDFA
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz3Complete:: @ 816DE0F
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	call CinnabarIsland_Gym_EventScript_OpenDoor3
 	special DrawWholeMapView
@@ -479,7 +479,7 @@ CinnabarIsland_Gym_EventScript_Quiz4Correct:: @ 816DED1
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz4Complete:: @ 816DEE6
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	call CinnabarIsland_Gym_EventScript_OpenDoor4
 	special DrawWholeMapView
@@ -555,7 +555,7 @@ CinnabarIsland_Gym_EventScript_Quiz5Correct:: @ 816DFA8
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz5Complete:: @ 816DFBD
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	call CinnabarIsland_Gym_EventScript_OpenDoor5
 	special DrawWholeMapView
@@ -631,7 +631,7 @@ CinnabarIsland_Gym_EventScript_Quiz6Correct:: @ 816E07F
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz6Complete:: @ 816E094
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	waitse
 	call CinnabarIsland_Gym_EventScript_OpenDoor6
 	special DrawWholeMapView

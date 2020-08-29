@@ -106,7 +106,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7:: @ 8164F0B
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed:: @ 8164F2E
 	addvar NUM_SWITCHES_PRESSED, 1
-	playse SE_TRACK_MOVE
+	playse SE_TRUCK_MOVE
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 8
@@ -128,7 +128,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen:: @ 8164
 	setvar VAR_0x8007, 2
 	special ShakeScreen
 	delay 60
-	playse SE_FU_ZUZUZU
+	playse SE_LAVARIDGE_FALL_WARP
 	waitse
 	return
 

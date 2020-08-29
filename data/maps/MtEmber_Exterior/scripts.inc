@@ -40,7 +40,7 @@ MtEmber_Exterior_EventScript_Grunt1Defeated:: @ 816399E
 MtEmber_Exterior_EventScript_BattleGrunt1:: @ 81639A8
 	applymovement 2, Movement_FacePlayer
 	waitmovement 0
-	playbgm MUS_ROCKET, 0
+	playbgm MUS_ENCOUNTER_ROCKET, 0
 	msgbox MtEmber_Exterior_Text_Grunt1Intro
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_Text_Grunt1Defeat
 	msgbox MtEmber_Exterior_Text_Grunt1PostBattle
@@ -77,7 +77,7 @@ MtEmber_Exterior_EventScript_DefeatedGrunt2:: @ 8163A1B
 	end
 
 MtEmber_Exterior_EventScript_BattleGrunt2:: @ 8163A25
-	playbgm MUS_ROCKET, 0
+	playbgm MUS_ENCOUNTER_ROCKET, 0
 	msgbox MtEmber_Exterior_Text_Grunt2Intro
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_Text_Grunt2Defeat
 	msgbox MtEmber_Exterior_Text_Grunt2PostBattle

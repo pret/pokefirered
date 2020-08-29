@@ -18,7 +18,7 @@ Route23_EventScript_MissingBadge:: @ 81A77DE
 Route23_EventScript_AlreadyRecognizedBoulderBadge:: @ 81A77EC
 	message Text_OhThatsBadgeGoRightAhead
 	waitmessage
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	waitbuttonpress
 	release
@@ -101,7 +101,7 @@ Route23_EventScript_CheckEarthBadge:: @ 81A793E
 Route23_EventScript_RecognizeBoulderBadge:: @ 81A794D
 	message Text_OhThatsBadgeGoRightAhead
 	waitmessage
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	waitbuttonpress
 	copyvar VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
@@ -196,7 +196,7 @@ Route23_EventScript_MissingBadgeTrigger:: @ 81A7A77
 Route23_EventScript_RecognizeBoulderBadgeTrigger:: @ 81A7A96
 	message Text_OhThatsBadgeGoRightAhead
 	waitmessage
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	waitbuttonpress
 	copyvar VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1

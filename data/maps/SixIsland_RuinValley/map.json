@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_RUIN_VALLEY",
   "name": "SixIsland_RuinValley",
   "layout": "LAYOUT_SIX_ISLAND_RUIN_VALLEY",
-  "music": "MUS_NANASHIMA",
+  "music": "MUS_SEVII_ROUTE",
   "region_map_section": "MAPSEC_RUIN_VALLEY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

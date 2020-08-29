@@ -7,6 +7,6 @@ MtEmber_RubyPath_B5F_EventScript_Ruby:: @ 8163C49
 	faceplayer
 	setflag FLAG_GOT_RUBY
 	removeobject 1
-	giveitem_msg MtEmber_RubyPath_B3F_Text_FoundARuby, ITEM_RUBY, 1, MUS_FAN5
+	giveitem_msg MtEmber_RubyPath_B3F_Text_FoundARuby, ITEM_RUBY, 1, MUS_OBTAIN_KEY_ITEM
 	release
 	end

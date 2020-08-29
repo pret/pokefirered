@@ -2,7 +2,7 @@
   "id": "MAP_ONE_ISLAND_POKEMON_CENTER_1F",
   "name": "OneIsland_PokemonCenter_1F",
   "layout": "LAYOUT_ONE_ISLAND_POKEMON_CENTER_1F",
-  "music": "MUS_NETWORK",
+  "music": "MUS_NET_CENTER",
   "region_map_section": "MAPSEC_ONE_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

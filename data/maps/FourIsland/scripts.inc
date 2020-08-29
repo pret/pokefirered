@@ -32,7 +32,7 @@ FourIsland_EventScript_RivalScene:: @ 8167CEC
 	textcolor 0
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Movement_Delay48
@@ -46,7 +46,7 @@ FourIsland_EventScript_RivalScene:: @ 8167CEC
 	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 35
 	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
@@ -113,7 +113,7 @@ FourIsland_EventScript_DaycareReceivedEgg:: @ 8167DEB
 	textcolor 3
 	message DayCare_Text_ReceivedEgg
 	call EventScript_RestorePrevTextColor
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	waitbuttonpress
 	msgbox DayCare_Text_TakeGoodCareOfIt

@@ -373,7 +373,7 @@ static u32 sub_8153CA0(struct Sprite * sprite)
     u8 mod = (++sprite->data[1] / 13) % 4;
 
     if (sprite->data[1] % 13 == 0 && mod != 0)
-        PlaySE(SE_W204);
+        PlaySE(SE_M_CHARM);
     if (sprite->data[1] >= 104)
     {
         sprite->data[0] = 0;
@@ -490,7 +490,7 @@ bool32 sub_8153F1C(void)
                 continue;
             gUnknown_203F43C->unkC[i] = 1;
             gUnknown_203F43C->unk16[i] = -16;
-            PlaySE(SE_TK_KASYA);
+            PlaySE(SE_CLICK);
         }
         sprite->pos1.y += gUnknown_203F43C->unk16[i];
     }
@@ -543,16 +543,16 @@ void sub_81540DC(bool8 invisible)
 
 // Unknown unused data, feel free to remove.
 static const u8 sUnused2[] = {
-    SE_W204,
-    SE_TOY_C,
-    SE_TOY_D,
-    SE_TOY_E,
-    SE_TOY_F,
-    SE_TOY_G,
-    SE_TOY_A,
-    SE_TOY_B,
-    SE_TOY_C1,
-    SE_CARD3
+    SE_M_CHARM,
+    SE_NOTE_C,
+    SE_NOTE_D,
+    SE_NOTE_E,
+    SE_NOTE_F,
+    SE_NOTE_G,
+    SE_NOTE_A,
+    SE_NOTE_B,
+    SE_NOTE_C_HIGH,
+    SE_CARD_OPEN
 };
 
 void sub_8154128(void)
@@ -1268,7 +1268,7 @@ static void sub_8154F80(void)
         }
         break;
     case 9:
-        PlayNewMapMusic(MUS_FANFA1);
+        PlayNewMapMusic(MUS_LEVEL_UP);
         FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(gUnknown_203F440->unk3008[1], PIXEL_FILL(1));
         strWidth = GetStringWidth(0, gText_AnnouncingPrizes, -1);
@@ -1302,7 +1302,7 @@ static void sub_8154F80(void)
             PutWindowTilemap(gUnknown_203F440->unk3008[1]);
         }
         CopyBgTilemapBufferToVram(0);
-        FadeOutAndFadeInNewMapMusic(MUS_WIN_YASEI, 20, 10);
+        FadeOutAndFadeInNewMapMusic(MUS_VICTORY_WILD, 20, 10);
         gUnknown_203F440->state++;
         break;
     case 11:

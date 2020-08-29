@@ -12,7 +12,7 @@ PokemonLeague_LancesRoom_Text_Intro:: @ 8178764
     .string "There's no being clever with them.\p"
     .string "Well, are you ready to lose?\p"
     .string "Your LEAGUE challenge ends with\n"
-    .string "me, {PLAYER}!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "me, {PLAYER}!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LancesRoom_Text_RematchIntro:: @ 81788BD
     .string "Ah!\n"
@@ -28,7 +28,7 @@ PokemonLeague_LancesRoom_Text_RematchIntro:: @ 81788BD
     .string "There's no being clever with them.\p"
     .string "Well, are you ready to lose?\p"
     .string "Your LEAGUE challenge ends with\n"
-    .string "me, {PLAYER}!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "me, {PLAYER}!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LancesRoom_Text_Defeat:: @ 8178A15
     .string "That's it!\p"

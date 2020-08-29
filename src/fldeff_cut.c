@@ -216,7 +216,7 @@ bool8 FldEff_CutGrass(void)
     struct MapPosition *pos;
 
     i = 0;
-    PlaySE(SE_W015);
+    PlaySE(SE_M_CUT);
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
 
     for (i = 0, pos = &gPlayerFacingPosition, neg1 = 0xFFFF; i < 3; i++)
@@ -301,7 +301,7 @@ static void SpriteCallback_CutGrass_Cleanup(struct Sprite * sprite)
 
 static void FieldMoveCallback_CutTree(void)
 {
-    PlaySE(SE_W015);
+    PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
     EnableBothScriptContexts();
 }

@@ -86,7 +86,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         // fallthrough
     case 1:
         if (sprite->data[2] == 0)
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
         if (++sprite->data[2] >= 20)
         {
             sprite->data[2] = 0;
@@ -178,7 +178,7 @@ static void SpriteCB_Start(struct Sprite * sprite)
         sprite->pos2.y = data[5] >> 4;
         if (sprite->pos2.y >= 0)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             sprite->pos2.y = 0;
             data[0]++;
         }
@@ -187,7 +187,7 @@ static void SpriteCB_Start(struct Sprite * sprite)
         data[1] += 12;
         if (data[1] >= 128)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             data[1] = 0;
             data[0]++;
         }
@@ -198,7 +198,7 @@ static void SpriteCB_Start(struct Sprite * sprite)
         data[1] += 16;
         if (data[1] >= 128)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             data[1] = 0;
             data[0]++;
         }

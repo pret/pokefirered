@@ -2,7 +2,7 @@
   "id": "MAP_POKEMON_LEAGUE_AGATHAS_ROOM",
   "name": "PokemonLeague_AgathasRoom",
   "layout": "LAYOUT_POKEMON_LEAGUE_AGATHAS_ROOM",
-  "music": "MUS_P_TOWER",
+  "music": "MUS_POKE_TOWER",
   "region_map_section": "MAPSEC_POKEMON_LEAGUE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

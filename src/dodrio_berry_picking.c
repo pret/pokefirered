@@ -209,7 +209,7 @@ void StartDodrioBerryPicking(u16 a0, MainCallback callback)
         sub_8153150();
         sub_81529A4(gUnknown_203F3E0->unk24, &gUnknown_203F3E0->unk44, &gUnknown_203F3E0->unk48);
         StopMapMusic();
-        PlayNewMapMusic(MUS_KINOMIKUI);
+        PlayNewMapMusic(MUS_BERRY_PICK);
     }
     else
     {
@@ -601,7 +601,7 @@ static void sub_8150FDC(void)
         if (WaitFanfare(TRUE))
         {
             sub_8152090(6);
-            FadeOutAndPlayNewMapMusic(MUS_WIN_YASEI, 4);
+            FadeOutAndPlayNewMapMusic(MUS_VICTORY_WILD, 4);
         }
         break;
     }
@@ -643,7 +643,7 @@ static void sub_815109C(void)
         if (WaitFanfare(TRUE)) {
             gUnknown_203F3E0->unk114 = gUnknown_203F3E0->unk4A[gUnknown_203F3E0->multiplayerId][5];
             sub_8152090(6);
-            FadeOutAndPlayNewMapMusic(MUS_WIN_YASEI, 4);
+            FadeOutAndPlayNewMapMusic(MUS_VICTORY_WILD, 4);
         }
         break;
     }
@@ -898,7 +898,7 @@ static void sub_815159C(void)
         gUnknown_203F3E0->unk10++;
         break;
     case 4:
-        PlayNewMapMusic(MUS_KINOMIKUI);
+        PlayNewMapMusic(MUS_BERRY_PICK);
         sub_8154540();
         gUnknown_203F3E0->unk10++;
         break;
@@ -1183,8 +1183,8 @@ static void sub_8151D98(void)
     {
         if (gUnknown_203F3E0->unk144 == 0)
         {
-            m4aSongNumStop(SE_SEIKAI);
-            PlaySE(SE_SEIKAI);
+            m4aSongNumStop(SE_SUCCESS);
+            PlaySE(SE_SUCCESS);
             gUnknown_203F3E0->unk144 = 1;
         }
     }
@@ -1205,7 +1205,7 @@ static void sub_8151D98(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_ME_ZANNEN
+        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -1226,8 +1226,8 @@ static void sub_8151E94(void)
     {
         if (gUnknown_203F3E0->unk144 == 0)
         {
-            m4aSongNumStop(SE_SEIKAI);
-            PlaySE(SE_SEIKAI);
+            m4aSongNumStop(SE_SUCCESS);
+            PlaySE(SE_SUCCESS);
             gUnknown_203F3E0->unk144 = 1;
         }
     }
@@ -1247,7 +1247,7 @@ static void sub_8151E94(void)
         {
             if (gUnknown_203F3E0->unk148[r4] == 0)
             {
-                PlaySE(SE_FUUSEN1 + ptr->unk0[r4]);
+                PlaySE(SE_BALLOON_RED + ptr->unk0[r4]);
                 gUnknown_203F3E0->unk148[r4] = 1;
             }
         }
@@ -1263,7 +1263,7 @@ static void sub_8151E94(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_ME_ZANNEN
+        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -1517,7 +1517,7 @@ static void sub_815256C(void)
                 if (gUnknown_203F3E0->unk148[i] == 0)
                 {
                     gUnknown_203F3E0->unk148[i] = 1;
-                    PlaySE(SE_FUUSEN1 + ptr->unk32CC.unk14.unk0[i]);
+                    PlaySE(SE_BALLOON_RED + ptr->unk32CC.unk14.unk0[i]);
                 }
                 if (gUnknown_203F3E0->unk40 < 10 || r10 == 1)
                 {
@@ -2070,19 +2070,19 @@ static void sub_81532B8(void)
         {
             gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 2;
             gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
-            PlaySE(SE_W204);
+            PlaySE(SE_M_CHARM);
         }
         else if (JOY_NEW(DPAD_LEFT))
         {
             gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 3;
             gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
-            PlaySE(SE_W204);
+            PlaySE(SE_M_CHARM);
         }
         else if (JOY_NEW(DPAD_RIGHT))
         {
             gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 1;
             gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
-            PlaySE(SE_W204);
+            PlaySE(SE_M_CHARM);
         }
         else
         {

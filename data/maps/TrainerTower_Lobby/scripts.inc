@@ -52,7 +52,7 @@ TrainerTower_Lobby_EventScript_ExitElevator:: @ 81648C8
 	waitmovement 0
 	setmetatile 17, 10, METATILE_TrainerTower_CounterBarrier, 1
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	waitse
 	setvar VAR_TEMP_D, 0
 	releaseall

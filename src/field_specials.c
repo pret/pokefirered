@@ -473,7 +473,7 @@ void ShakeScreen(void)
     gTasks[taskId].tDuration = gSpecialVar_0x8007;
     gTasks[taskId].tYtrans = gSpecialVar_0x8004;
     SetCameraPanningCallback(NULL);
-    PlaySE(SE_W070);
+    PlaySE(SE_M_STRENGTH);
 }
 
 static void Task_ShakeScreen(u8 taskId)
@@ -1067,7 +1067,7 @@ void AnimateElevator(void)
     data[5] = sElevatorAnimationDuration[nfloors];
     SetCameraPanningCallback(NULL);
     AnimateElevatorWindowView(nfloors, data[6]);
-    PlaySE(SE_ELEBETA);
+    PlaySE(SE_ELEVATOR);
 }
 
 static void Task_ElevatorShake(u8 taskId)
@@ -1082,7 +1082,7 @@ static void Task_ElevatorShake(u8 taskId)
         SetCameraPanning(0, data[4]);
         if (data[2] == data[5])
         {
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
             DestroyTask(taskId);
             EnableBothScriptContexts();
             InstallCameraPanAheadCallback();
@@ -2306,7 +2306,7 @@ void CutMoveOpenDottedHoleDoor(void)
 {
     MapGridSetMetatileIdAt(31, 31, METATILE_SeviiIslands67_DottedHoleDoor_Open);
     DrawWholeMapView();
-    PlaySE(SE_BAN);
+    PlaySE(SE_BANG);
     FlagSet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE);
     ScriptContext2_Disable();
 }
@@ -2404,9 +2404,9 @@ static void MoveDeoxysObject(u8 num)
     sub_8083598(10);
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)
-        PlaySE(SE_W109);
+        PlaySE(SE_M_CONFUSE_RAY);
     else
-        PlaySE(SE_DEOMOV);
+        PlaySE(SE_DEOXYS_MOVE);
     CreateTask(Task_WaitDeoxysFieldEffect, 8);
     gFieldEffectArguments[0] = 1;
     gFieldEffectArguments[1] = 56;
@@ -2532,7 +2532,7 @@ void LoopWingFlapSound(void)
     // 8004 = Num flaps
     // 8005 = Frame delay between flaps
     CreateTask(Task_WingFlapSound, 8);
-    PlaySE(SE_W017);
+    PlaySE(SE_M_WING_ATTACK);
 }
 
 static void Task_WingFlapSound(u8 taskId)
@@ -2543,7 +2543,7 @@ static void Task_WingFlapSound(u8 taskId)
     {
         data[0]++;
         data[1] = 0;
-        PlaySE(SE_W017);
+        PlaySE(SE_M_WING_ATTACK);
     }
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);

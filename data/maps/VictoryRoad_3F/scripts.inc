@@ -18,7 +18,7 @@ VictoryRoad_3F_EventScript_FloorSwitch:: @ 81610CF
 	goto_if_eq VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed
 	setmetatile 12, 12, METATILE_Cave_Floor_Ledge_Top, 0
 	setmetatile 12, 13, METATILE_Cave_Floor_Ledge_Bottom, 0
-	playse SE_RU_GASYAN
+	playse SE_ICE_BREAK
 	special DrawWholeMapView
 	waitse
 	moveobjectoffscreen 7

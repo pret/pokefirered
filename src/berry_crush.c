@@ -39,7 +39,7 @@ u32 ExitBerryCrushWithCallback(MainCallback callback)
     SetMainCallback2(callback);
     if (callback == CB2_ReturnToField)
     {
-        PlayNewMapMusic(MUS_POKECEN);
+        PlayNewMapMusic(MUS_POKE_CENTER);
         SetMainCallback1(CB1_Overworld);
     }
 

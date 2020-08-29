@@ -9,7 +9,7 @@ FuchsiaCity_Gym_Text_KogaIntro:: @ 819832E
     .string "Poison brings steady doom.\n"
     .string "Sleep renders foes helpless.\p"
     .string "Despair to the creeping horror of\n"
-    .string "POISON-type POKéMON!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "POISON-type POKéMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 FuchsiaCity_Gym_Text_KogaDefeat:: @ 8198444
     .string "Humph!\n"

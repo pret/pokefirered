@@ -1714,7 +1714,7 @@ static void DeleteTextCharacter(void)
     var2 = GetKeyRoleAtCursorPos();
     if (var2 == KEY_ROLE_CHAR || var2 == KEY_ROLE_BACKSPACE)
         sub_809E518(1, 0, 1);
-    PlaySE(SE_BOWA);
+    PlaySE(SE_BALL);
 }
 
 static bool8 AppendCharToBuffer_CheckBufferFull(void)

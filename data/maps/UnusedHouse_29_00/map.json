@@ -2,7 +2,7 @@
   "id": "MAP_UNUSED_HOUSE_29_00",
   "name": "UnusedHouse_29_00",
   "layout": "LAYOUT_HOUSE2",
-  "music": "MUS_CHAMP_R",
+  "music": "MUS_VICTORY_ROAD",
   "region_map_section": "MAPSEC_ROUTE_23",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

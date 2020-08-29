@@ -293,7 +293,7 @@ TrainerTower_Roof_EventScript_GivePrize:
 TrainerTower_Roof_EventScript_ReceivePrize:
 	msgbox TrainerTower_Roof_Text_ThisIsForYou
 	textcolor 3
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message Text_ObtainedTheX
 	waitfanfare
 	waitmessage
@@ -365,7 +365,7 @@ TrainerTower_EventScript_TriggerDoubleBattle:
 
 TrainerTower_EventScript_IneligibleForDoubleBattle:: @ 81C5528
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox TrainerTower_Lobby_Text_NeedTwoMonsForDouble
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Movement_PushPlayerBack

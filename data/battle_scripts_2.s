@@ -134,7 +134,7 @@ BattleScript_PlayerUseItem::
 BattleScript_AIUseFullRestoreOrHpHeal::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
-	playse SE_KAIFUKU
+	playse SE_USE_ITEM
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 64
 	useitemonopponent
@@ -150,7 +150,7 @@ BattleScript_AIUseFullRestoreOrHpHeal::
 BattleScript_AIUseStatRestore::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
-	playse SE_KAIFUKU
+	playse SE_USE_ITEM
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 64
 	useitemonopponent
@@ -163,7 +163,7 @@ BattleScript_AIUseStatRestore::
 BattleScript_AIUseXstat::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
-	playse SE_KAIFUKU
+	playse SE_USE_ITEM
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 64
 	useitemonopponent
@@ -175,7 +175,7 @@ BattleScript_AIUseXstat::
 BattleScript_AIUseGuardSpec::
 	printstring STRINGID_EMPTYSTRING3
 	pause 48
-	playse SE_KAIFUKU
+	playse SE_USE_ITEM
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 64
 	useitemonopponent
@@ -185,7 +185,7 @@ BattleScript_AIUseGuardSpec::
 	finishaction
 
 BattleScript_UseFluffyTail::
-	playse SE_NIGERU
+	playse SE_FLEE
 	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 
@@ -199,7 +199,7 @@ BattleScript_UsePokeFlute::
 BattleScript_PokeFluteWakeUp::
 	printstring STRINGID_POKEFLUTE
 	waitmessage 64
-	fanfare MUS_POKEFUE
+	fanfare MUS_POKE_FLUTE
 	waitfanfare BS_ATTACKER
 	printstring STRINGID_MONHEARINGFLUTEAWOKE
 	waitmessage 64

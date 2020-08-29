@@ -32,7 +32,7 @@ SilphCo_7F_EventScript_RivalTriggerBottom:: @ 81619C8
 
 SilphCo_7F_EventScript_RivalScene:: @ 81619D4
 	textcolor 0
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
@@ -53,12 +53,12 @@ SilphCo_7F_EventScript_RivalScene:: @ 81619D4
 	call_if_eq SilphCo_7F_EventScript_RivalCharmander
 	msgbox SilphCo_7F_Text_RivalPostBattle
 	closemessage
-	playbgm MUS_RIVAL2, 0
+	playbgm MUS_RIVAL_EXIT, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq SilphCo_7F_EventScript_RivalExitTop
 	compare VAR_TEMP_1, 1
 	call_if_eq SilphCo_7F_EventScript_RivalExitBottom
-	playse SE_TK_WARPIN
+	playse SE_WARP_IN
 	fadedefaultbgm
 	removeobject 1
 	waitse
@@ -138,7 +138,7 @@ SilphCo_7F_EventScript_LaprasGuy:: @ 8161AC8
 
 SilphCo_7F_EventScript_ReceiveLaprasParty:: @ 8161B12
 	textcolor 3
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
@@ -153,7 +153,7 @@ SilphCo_7F_EventScript_ReceiveLaprasParty:: @ 8161B12
 
 SilphCo_7F_EventScript_ReceiveLaprasPC:: @ 8161B45
 	textcolor 3
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare

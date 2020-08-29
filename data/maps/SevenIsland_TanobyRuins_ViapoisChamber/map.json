@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER",
   "name": "SevenIsland_TanobyRuins_ViapoisChamber",
   "layout": "LAYOUT_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER",
-  "music": "MUS_NANAISEKI",
+  "music": "MUS_SEVII_DUNGEON",
   "region_map_section": "MAPSEC_VIAPOIS_CHAMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

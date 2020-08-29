@@ -5,7 +5,7 @@ SaffronCity_Gym_Text_SabrinaIntro:: @ 819B53C
     .string "It started when a spoon I\n"
     .string "carelessly tossed, bent.\p"
     .string "I dislike battling, but if you wish,\n"
-    .string "I will show you my powers!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "I will show you my powers!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 SaffronCity_Gym_Text_SabrinaDefeat:: @ 819B602
     .string "This loss shocks me!\n"

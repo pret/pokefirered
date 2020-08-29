@@ -798,7 +798,7 @@ static void sub_80EF7EC(u8 taskId)
 {
     if (gSprites[gBattlerSpriteIds[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]].animCmdIndex == 1)
     {
-        PlaySE12WithPanning(SE_NAGERU, 0);
+        PlaySE12WithPanning(SE_BALL_THROW, 0);
         gSprites[gTasks[taskId].data[0]].callback = sub_80EF8C0;
         CreateTask(sub_80EF864, 10);
         gTasks[taskId].func = sub_80EF698;
@@ -887,7 +887,7 @@ static void sub_80EFA0C(struct Sprite *sprite)
     spriteId = gBattlerSpriteIds[gBattleAnimTarget];
     taskId = sprite->data[5];
     if (++gTasks[taskId].data[1] == 11)
-        PlaySE(SE_SUIKOMU);
+        PlaySE(SE_BALL_TRADE);
 
     switch (gTasks[taskId].data[0])
     {
@@ -965,16 +965,16 @@ static void sub_80EFB9C(struct Sprite *sprite)
             switch (bounceCount)
             {
             case 1:
-                PlaySE(SE_KON);
+                PlaySE(SE_BALL_BOUNCE_1);
                 break;
             case 2:
-                PlaySE(SE_KON2);
+                PlaySE(SE_BALL_BOUNCE_2);
                 break;
             case 3:
-                PlaySE(SE_KON3);
+                PlaySE(SE_BALL_BOUNCE_3);
                 break;
             default:
-                PlaySE(SE_KON4);
+                PlaySE(SE_BALL_BOUNCE_4);
                 break;
             }
         }
@@ -1018,7 +1018,7 @@ static void sub_80EFCA0(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, 1);
         gBattleSpritesDataPtr->animationData->field_C = 0;
         sprite->callback = sub_80EFCEC;
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
     }
 }
 
@@ -1160,7 +1160,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
             else
                 StartSpriteAffineAnim(sprite, 1);
 
-            PlaySE(SE_BOWA);
+            PlaySE(SE_BALL);
         }
         break;
     }
@@ -1191,7 +1191,7 @@ static void sub_80EFFC4(struct Sprite *sprite)
     sprite->data[4]++;
     if (sprite->data[4] == 40)
     {
-        PlaySE(SE_GETTING);
+        PlaySE(SE_BALL_CLICK);
         BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB_BLACK);
         sub_80F01B8(sprite);
     }
@@ -1204,7 +1204,7 @@ static void sub_80EFFC4(struct Sprite *sprite)
         gDoingBattleAnim = FALSE;
         UpdateOamPriorityInAllHealthboxes(1);
         m4aMPlayAllStop();
-        PlaySE(MUS_FAN6);
+        PlaySE(MUS_CAUGHT_INTRO);
     }
     else if (sprite->data[4] == 315)
     {
@@ -1444,7 +1444,7 @@ u8 LaunchBallStarsTask(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId)
     gTasks[taskId].data[3] = priority;
     gTasks[taskId].data[4] = subpriority;
     gTasks[taskId].data[15] = ballId;
-    PlaySE(SE_BOWA2);
+    PlaySE(SE_BALL_OPEN);
     return taskId;
 }
 
@@ -2143,7 +2143,7 @@ static void sub_80F181C(u8 taskId)
             else
                 pan = SOUND_PAN_TARGET;
 
-            PlaySE12WithPanning(SE_REAPOKE, pan);
+            PlaySE12WithPanning(SE_SHINY, pan);
         }
     }
 

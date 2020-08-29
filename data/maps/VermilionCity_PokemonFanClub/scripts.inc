@@ -26,7 +26,7 @@ VermilionCity_PokemonFanClub_EventScript_ChairmanStory:: @ 816B4B1
 	compare VAR_RESULT, FALSE
 	goto_if_eq VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher
 	setflag FLAG_GOT_BIKE_VOUCHER
-	giveitem_msg VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman, ITEM_BIKE_VOUCHER, 1, MUS_FAN5
+	giveitem_msg VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman, ITEM_BIKE_VOUCHER, 1, MUS_OBTAIN_KEY_ITEM
 	msgbox VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher
 	release
 	end

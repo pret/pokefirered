@@ -42,7 +42,7 @@ PokemonLeague_LancesRoom_EventScript_EnterRoom:: @ 8162987
 	waitmovement 0
 	setflag FLAG_TEMP_2
 	call PokemonLeague_LancesRoom_EventScript_SetEntryClosed
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	special DrawWholeMapView
 	waitse
 	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 4

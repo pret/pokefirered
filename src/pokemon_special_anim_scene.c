@@ -528,7 +528,7 @@ bool8 PSA_UseTM_RunZoomOutAnim(void)
         if (scene->field_0004 > 0)
         {
             scene->field_0004 = 0;
-            PlaySE(SE_W025);
+            PlaySE(SE_M_MEGA_KICK);
             BeginNormalPaletteFade(0x00000001, 2, 0, 12, RGB(8, 13, 31));
             PSAScene_SeedRandomInTask(scene);
             scene->state++;
@@ -560,7 +560,7 @@ bool8 PSA_UseTM_RunZoomOutAnim(void)
         }
         break;
     case 8:
-        PlaySE(SE_EXPMAX);
+        PlaySE(SE_EXP_MAX);
         DestroySprite(scene->itemIconSprite);
         scene->state++;
         break;
@@ -584,7 +584,7 @@ bool8 PSA_UseTM_RunMachineSetWobble(void)
     {
     case 0:
         MachineSetWobbleInit();
-        PlaySE(SE_MU_PACHI);
+        PlaySE(SE_SWITCH);
         scene->state++;
         break;
     case 1:
@@ -730,7 +730,7 @@ static void Task_ZoomAnim(u8 taskId)
     case 1:
         if (!IsZoomSpriteCBActive(sprite))
         {
-            PlaySE(SE_TB_KARA);
+            PlaySE(SE_BALL_TRAY_EXIT);
             MonSpriteZoom_UpdateYPos(sprite, tCurrCloseness);
             if (tHasItemSprite)
                 ItemSpriteZoom_UpdateYPos((void *)GetWordTaskArg(taskId, tOff_ItemSprite), tCurrCloseness);
@@ -933,7 +933,7 @@ static void Task_ItemUseOnMonAnim(u8 taskId)
         if (tTimer > 20)
         {
             tTimer = 0;
-            PlaySE(SE_W207B);
+            PlaySE(SE_M_SWAGGER2);
             sprite->invisible = FALSE;
             if (!tSuppressDots)
                 LoadOutwardSpiralDotsGfx();
@@ -949,7 +949,7 @@ static void Task_ItemUseOnMonAnim(u8 taskId)
             StartSpriteAffineAnim(sprite, tCloseness);
             BeginNormalPaletteFade(0x10000 << IndexOfSpritePaletteTag(1), -2, 0, 12, tBlendColor);
             tState = 2;
-            PlaySE(SE_W208);
+            PlaySE(SE_M_MILK_DRINK);
         }
         break;
     case 2:
@@ -968,7 +968,7 @@ static void Task_ItemUseOnMonAnim(u8 taskId)
             if (!tSuppressDots)
                 CreateSprites_UseItem_OutwardSpiralDots(taskId, data, sprite);
             if (tData7 == 0)
-                PlaySE(SE_W179);
+                PlaySE(SE_M_REVERSAL);
             tData7++;
             if (tData7 > 2)
                 tState = 4;

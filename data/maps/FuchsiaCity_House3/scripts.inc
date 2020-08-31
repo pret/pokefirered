@@ -37,7 +37,7 @@ FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter:: @ 816D8B0
 
 FuchsiaCity_House3_EventScript_ForgetMove:: @ 816D919
 	special MoveDeleterForgetMove
-	playfanfare MUS_ME_WASURE
+	playfanfare MUS_MOVE_DELETED
 	waitfanfare
 	msgbox FuchsiaCity_House3_Text_MonHasForgottenMoveCompletely
 	release

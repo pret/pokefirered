@@ -24,14 +24,14 @@ SafariZone_EventScript_Retire:: @ 81BFBC0
 
 SafariZone_EventScript_TimesUp:: @ 81BFBC5
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SafariZone_Text_TimesUp
 	goto SafariZone_EventScript_Exit
 	end
 
 SafariZone_EventScript_OutOfBalls:: @ 81BFBD7
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SafariZone_Text_OutOfBalls
 	goto SafariZone_EventScript_Exit
 	end

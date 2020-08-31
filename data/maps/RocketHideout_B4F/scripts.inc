@@ -26,7 +26,7 @@ RocketHideout_B4F_EventScript_Giovanni:: @ 8161317
 	famechecker FAMECHECKER_GIOVANNI, 0
 	message RocketHideout_B4F_Text_GiovanniIntro
 	waitmessage
-	playbgm MUS_ROCKET, 0
+	playbgm MUS_ENCOUNTER_ROCKET, 0
 	waitbuttonpress
 	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, RocketHideout_B4F_Text_GiovanniDefeat
 	msgbox RocketHideout_B4F_Text_GiovanniPostBattle
@@ -108,7 +108,7 @@ RocketHideout_B4F_EventScript_DefeatedGrunt3:: @ 8161433
 	end
 
 RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval:: @ 8161462
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	special DrawWholeMapView
 	waitse
 	return

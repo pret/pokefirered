@@ -11,7 +11,7 @@ PokemonLeague_AgathasRoom_Text_Intro:: @ 817844D
     .string "He's wrong.\n"
     .string "POKéMON are for battling!\p"
     .string "{PLAYER}! I'll show you how a real\n"
-    .string "TRAINER battles!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "TRAINER battles!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_AgathasRoom_Text_RematchIntro:: @ 817858D
     .string "I am AGATHA of the ELITE FOUR.\p"
@@ -26,7 +26,7 @@ PokemonLeague_AgathasRoom_Text_RematchIntro:: @ 817858D
     .string "He's wrong.\n"
     .string "POKéMON are for battling!\p"
     .string "{PLAYER}! I'll show you how a real\n"
-    .string "TRAINER battles!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "TRAINER battles!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_AgathasRoom_Text_Defeat:: @ 81786D7
     .string "Oh, my!\n"

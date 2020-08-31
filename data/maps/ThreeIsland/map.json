@@ -2,7 +2,7 @@
   "id": "MAP_THREE_ISLAND",
   "name": "ThreeIsland",
   "layout": "LAYOUT_THREE_ISLAND",
-  "music": "MUS_NANA123",
+  "music": "MUS_SEVII_123",
   "region_map_section": "MAPSEC_THREE_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -305,7 +305,7 @@ static void FieldCB_TeleportWarpIn(void)
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
-    PlaySE(SE_TK_WARPOUT);
+    PlaySE(SE_WARP_OUT);
     CreateTask(Task_TeleportWarpIn, 10);
     ScriptContext2_Enable();
 }
@@ -534,7 +534,7 @@ void DoWarp(void)
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
-    PlaySE(SE_KAIDAN);
+    PlaySE(SE_EXIT);
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_Teleport2Warp, 10);
 }
@@ -644,7 +644,7 @@ void DoCableClubWarp(void)
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
-    PlaySE(SE_KAIDAN);
+    PlaySE(SE_EXIT);
     CreateTask(Task_CableClubWarp, 10);
 }
 
@@ -657,7 +657,7 @@ static void Task_ReturnFromLinkRoomWarp(u8 taskId)
         ClearLinkCallback_2();
         FadeScreen(FADE_TO_BLACK, 0);
         TryFadeOutOldMapMusic();
-        PlaySE(SE_KAIDAN);
+        PlaySE(SE_EXIT);
         data[0]++;
         break;
     case 1:
@@ -713,7 +713,7 @@ static void Task_TeleportWarp(u8 taskId)
     case 0:
         FreezeObjectEvents();
         ScriptContext2_Enable();
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         StartTeleportWarpOutPlayerAnim();
         task->data[0]++;
         break;
@@ -813,7 +813,7 @@ static void Task_StairWarp(u8 taskId)
                 PlayRainStoppingSoundEffect();
                 playerSpr->oam.priority = 1;
                 sub_807EB64(data[1], &data[2], &data[3]);
-                PlaySE(SE_KAIDAN);
+                PlaySE(SE_EXIT);
                 data[0]++;
             }
         }

@@ -543,7 +543,7 @@ static void Task_TrainerCard(u8 taskId)
     case 8:
         if (!UpdatePaletteFade() && !IsDma3ManagerBusyWithBgCopy())
         {
-            PlaySE(SE_CARD3);
+            PlaySE(SE_CARD_OPEN);
             sTrainerCardDataPtr->mainState = STATE_HANDLE_INPUT_FRONT;
         }
         break;
@@ -564,7 +564,7 @@ static void Task_TrainerCard(u8 taskId)
         {
             SetHelpContext(HELPCONTEXT_TRAINER_CARD_BACK);
             FlipTrainerCard();
-            PlaySE(SE_CARD1);
+            PlaySE(SE_CARD_FLIP);
             sTrainerCardDataPtr->mainState = STATE_WAIT_FLIP_TO_BACK;
         }
         else if (JOY_NEW(B_BUTTON))
@@ -583,7 +583,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_WAIT_FLIP_TO_BACK:
         if (IsCardFlipTaskActive() && Overworld_LinkRecvQueueLengthMoreThan2() != TRUE)
         {
-            PlaySE(SE_CARD3);
+            PlaySE(SE_CARD_OPEN);
             sTrainerCardDataPtr->mainState = STATE_HANDLE_INPUT_BACK;
         }
         break;
@@ -604,7 +604,7 @@ static void Task_TrainerCard(u8 taskId)
                 SetHelpContext(HELPCONTEXT_TRAINER_CARD_FRONT);
                 FlipTrainerCard();
                 sTrainerCardDataPtr->mainState = STATE_WAIT_FLIP_TO_FRONT;
-                PlaySE(SE_CARD1);
+                PlaySE(SE_CARD_FLIP);
             }
         }
         else if (JOY_NEW(A_BUTTON))
@@ -642,7 +642,7 @@ static void Task_TrainerCard(u8 taskId)
         if (IsCardFlipTaskActive() && Overworld_LinkRecvQueueLengthMoreThan2() != TRUE)
         {
             sTrainerCardDataPtr->mainState = STATE_HANDLE_INPUT_FRONT;
-            PlaySE(SE_CARD3);
+            PlaySE(SE_CARD_OPEN);
         }
         break;
    }
@@ -1787,7 +1787,7 @@ static bool8 Task_SetCardFlipped(struct Task* task)
     sTrainerCardDataPtr->onBack ^= 1;
     task->tFlipState++;
     sTrainerCardDataPtr->allowDMACopy = TRUE;
-    PlaySE(SE_CARD2);
+    PlaySE(SE_CARD_FLIPPING);
     return FALSE;
 }
 

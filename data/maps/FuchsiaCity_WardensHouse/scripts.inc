@@ -16,7 +16,7 @@ FuchsiaCity_WardensHouse_EventScript_Warden:: @ 816D74C
 
 FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth:: @ 816D780
 	textcolor 3
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	message FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden
 	waitmessage
 	waitfanfare

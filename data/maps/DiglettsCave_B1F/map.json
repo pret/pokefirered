@@ -2,7 +2,7 @@
   "id": "MAP_DIGLETTS_CAVE_B1F",
   "name": "DiglettsCave_B1F",
   "layout": "LAYOUT_DIGLETTS_CAVE_B1F",
-  "music": "MUS_T_MORI",
+  "music": "MUS_VIRIDIAN_FOREST",
   "region_map_section": "MAPSEC_DIGLETTS_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

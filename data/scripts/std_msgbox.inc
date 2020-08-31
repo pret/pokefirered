@@ -29,25 +29,25 @@ Std_MsgboxYesNo:: @ 81A4E5C
 
 Std_ReceivedItem:: @ 81A4E66
 	textcolor 3
-	compare VAR_0x8002, MUS_FANFA1
+	compare VAR_0x8002, MUS_LEVEL_UP
 	call_if_eq EventScript_ReceivedItemFanfare1
-	compare VAR_0x8002, MUS_FAN5
+	compare VAR_0x8002, MUS_OBTAIN_KEY_ITEM
 	call_if_eq EventScript_ReceivedItemFanfare2
 	message 0x0
 	waitmessage
 	waitfanfare
-	compare VAR_0x8002, MUS_FANFA1
+	compare VAR_0x8002, MUS_LEVEL_UP
 	call_if_eq EventScript_ReceivedItemWaitFanfare
 	putitemaway VAR_0x8000, VAR_0x8001
 	call EventScript_RestorePrevTextColor
 	return
 
 EventScript_ReceivedItemFanfare1:: @ 81A4EA2
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	return
 
 EventScript_ReceivedItemFanfare2:: @ 81A4EA6
-	playfanfare MUS_FAN5
+	playfanfare MUS_OBTAIN_KEY_ITEM
 	return
 
 EventScript_ReceivedItemWaitFanfare:: @ 81A4EAA

@@ -42,7 +42,7 @@ CeruleanCity_EventScript_RivalTriggerRight:: @ 81664B9
 CeruleanCity_EventScript_Rival:: @ 81664CC
 	textcolor 0
 	setvar VAR_MAP_SCENE_ROUTE22, 2
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject LOCALID_RIVAL
 	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalEnter
 	waitmovement 0
@@ -57,7 +57,7 @@ CeruleanCity_EventScript_Rival:: @ 81664CC
 	famechecker FAMECHECKER_BILL, 0
 	msgbox CeruleanCity_Text_RivalPostBattle
 	closemessage
-	playbgm MUS_RIVAL2, 0
+	playbgm MUS_RIVAL_EXIT, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq CeruleanCity_EventScript_RivalStartExit
 	compare VAR_TEMP_1, 1
@@ -179,7 +179,7 @@ CeruleanCity_EventScript_Grunt:: @ 8166603
 	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_EventScript_GruntDefeated
 	message CeruleanCity_Text_GruntIntro
 	waitmessage
-	playbgm MUS_ROCKET, 0
+	playbgm MUS_ENCOUNTER_ROCKET, 0
 	waitbuttonpress
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_Text_GruntDefeat
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1

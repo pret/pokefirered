@@ -19,7 +19,7 @@ PokemonTower_2F_EventScript_RivalTriggerDown:: @ 816329B
 
 PokemonTower_2F_EventScript_Rival:: @ 81632A7
 	textcolor 0
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq PokemonTower_2F_EventScript_RivalFacePlayerRight
 	compare VAR_TEMP_1, 1
@@ -38,12 +38,12 @@ PokemonTower_2F_EventScript_Rival:: @ 81632A7
 	call_if_eq PokemonTower_2F_EventScript_RivalCharmander
 	msgbox PokemonTower_2F_Text_RivalPostBattle
 	closemessage
-	playbgm MUS_RIVAL2, 0
+	playbgm MUS_RIVAL_EXIT, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq PokemonTower_2F_EventScript_RivalExitRight
 	compare VAR_TEMP_1, 1
 	call_if_eq PokemonTower_2F_EventScript_RivalExitDown
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 25
 	fadedefaultbgm
 	removeobject 1

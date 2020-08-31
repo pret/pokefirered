@@ -279,7 +279,7 @@ static u32 BerryCrushCommand_SignalReadyToBegin(struct BerryCrushGame * game, UN
     case 1:
         if (IsLinkTaskFinished())
         {
-            PlayNewMapMusic(MUS_SLOT);
+            PlayNewMapMusic(MUS_GAME_CORNER);
             BerryCrush_RunOrScheduleCommand(BCCMD_AskPickBerry, 1, NULL);
             game->gameState = 3;
             game->cmdState = 0;
@@ -390,7 +390,7 @@ static u32 BerryCrushCommand_DropBerriesIntoCrusher(struct BerryCrushGame * game
     case 2:
         game->spritesManager.berrySprites[game->spritesManager.animBerryIdx]->callback = SpriteCB_DropBerryIntoCrusher;
         game->spritesManager.berrySprites[game->spritesManager.animBerryIdx]->affineAnimPaused = FALSE;
-        PlaySE(SE_NAGERU);
+        PlaySE(SE_BALL_THROW);
         break;
     case 3:
         if (game->spritesManager.berrySprites[game->spritesManager.animBerryIdx]->callback == SpriteCB_DropBerryIntoCrusher)
@@ -416,7 +416,7 @@ static u32 BerryCrushCommand_DropBerriesIntoCrusher(struct BerryCrushGame * game
     case 6:
         if (!IsLinkTaskFinished())
             return 0;
-        PlaySE(SE_RU_HYUU);
+        PlaySE(SE_FALL);
         BerryCrush_RunOrScheduleCommand(BCCMD_DropLid, 1, NULL);
         game->gameState = 5;
         game->cmdState = 0;
@@ -438,7 +438,7 @@ static u32 BerryCrushCommand_DropLid(struct BerryCrushGame * game,  UNUSED u8 *p
         game->spritesManager.unk1 = 4;
         game->spritesManager.animBerryIdx = 0;
         game->spritesManager.unk2 = gUnknown_846E2F0[game->spritesManager.unk1][0];
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         break;
     case 1:
         game->vibration = gUnknown_846E2F0[game->spritesManager.unk1][game->spritesManager.animBerryIdx];
@@ -832,7 +832,7 @@ static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame * game, UNUSED u8 
     {
     case 0:
         game->gameState = 8;
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 31, 0));
         game->spritesManager.animBerryIdx = 2;
         break;
@@ -889,7 +889,7 @@ static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame * game, u8 *para
     {
     case 0:
         game->gameState = 9;
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 0, 0));
         game->spritesManager.animBerryIdx = 4;
         break;

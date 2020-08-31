@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_DOTTED_HOLE_B1F",
   "name": "SixIsland_DottedHole_B1F",
   "layout": "LAYOUT_SIX_ISLAND_DOTTED_HOLE_B1F",
-  "music": "MUS_NANAISEKI",
+  "music": "MUS_SEVII_DUNGEON",
   "region_map_section": "MAPSEC_DOTTED_HOLE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

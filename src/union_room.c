@@ -1351,14 +1351,14 @@ static void Task_TryJoinLinkGroup(u8 taskId)
                     {
                         AskToJoinRfuGroup(data, id);
                         data->state = 5;
-                        PlaySE(SE_PN_ON);
+                        PlaySE(SE_POKENAV_ON);
                     }
                     else
                     {
                         // Postgame flags not both set
                         StringCopy(gStringVar4, gUnknown_8457608[var - 1]);
                         data->state = 18;
-                        PlaySE(SE_PN_ON);
+                        PlaySE(SE_POKENAV_ON);
                     }
                 }
                 else
@@ -2344,7 +2344,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
                     RedrawListMenu(data->listTaskId);
                     IntlConvPartnerUname(gStringVar1, data->field_0->arr[data->leaderId]);
                     CreateTask_RfuReconnectWithParent(data->field_0->arr[data->leaderId].gname_uname.uname, ReadAsU16(data->field_0->arr[data->leaderId].gname_uname.gname.unk_00.playerTrainerId));
-                    PlaySE(SE_PN_ON);
+                    PlaySE(SE_POKENAV_ON);
                     data->state = 4;
                 }
                 else
@@ -2505,7 +2505,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
                         LoadWirelessStatusIndicatorSpriteGfx();
                         CreateWirelessStatusIndicatorSprite(0, 0);
                         CreateTask_RfuReconnectWithParent(data->field_0->arr[0].gname_uname.uname, ReadAsU16(data->field_0->arr[0].gname_uname.gname.unk_00.playerTrainerId));
-                        PlaySE(SE_PN_ON);
+                        PlaySE(SE_POKENAV_ON);
                         data->state = 4;
                     }
                     else
@@ -2796,7 +2796,7 @@ static void Task_RunUnionRoom(u8 taskId)
             switch (HandlePlayerListUpdate())
             {
             case 1:
-                PlaySE(SE_TOY_C);
+                PlaySE(SE_NOTE_C);
             case 2:
                 ScheduleUnionRoomPlayerRefresh(data);
                 break;
@@ -3068,7 +3068,7 @@ static void Task_RunUnionRoom(u8 taskId)
             data->state = 16;
         break;
     case 11:
-        PlaySE(SE_PINPON);
+        PlaySE(SE_DING_DONG);
         sub_80F8FA0();
         data->state = 12;
         data->recvActivityRequest[0] = 0;

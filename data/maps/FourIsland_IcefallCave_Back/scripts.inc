@@ -47,7 +47,7 @@ FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene:: @ 8163D98
 	waitmovement 0
 	applymovement LOCALID_ROCKET2, FourIsland_IcefallCave_Back_Movement_WalkInPlaceDown
 	waitmovement 0
-	playbgm MUS_ROCKET, 0
+	playbgm MUS_ENCOUNTER_ROCKET, 0
 	textcolor 0
 	msgbox FourIsland_IcefallCave_Back_Text_GruntIntro
 	setvar VAR_LAST_TALKED, LOCALID_ROCKET3

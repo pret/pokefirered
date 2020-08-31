@@ -201,7 +201,7 @@ static void sub_81478BC(struct Sprite *sprite)
         sprite->invisible = FALSE;
     case 1:
     case 2:
-        PlaySE(SE_KON);
+        PlaySE(SE_BALL_BOUNCE_1);
         StartSpriteAnim(sprite, sprite->data[2]);
         break;
     case 3:
@@ -223,7 +223,7 @@ static void sub_81478BC(struct Sprite *sprite)
 static void sub_81479D4(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    PlaySE(SE_KON);
+    PlaySE(SE_BALL_BOUNCE_1);
     gSprites[data[13]].callback = sub_81478BC;
     gSprites[data[13]].invisible = FALSE;
     gTasks[taskId].data[0] = 3;

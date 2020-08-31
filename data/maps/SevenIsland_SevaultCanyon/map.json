@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_SEVAULT_CANYON",
   "name": "SevenIsland_SevaultCanyon",
   "layout": "LAYOUT_SEVEN_ISLAND_SEVAULT_CANYON",
-  "music": "MUS_NANASHIMA",
+  "music": "MUS_SEVII_ROUTE",
   "region_map_section": "MAPSEC_SEVAULT_CANYON",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

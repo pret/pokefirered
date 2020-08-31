@@ -2,7 +2,7 @@
   "id": "MAP_FIVE_ISLAND_RESORT_GORGEOUS",
   "name": "FiveIsland_ResortGorgeous",
   "layout": "LAYOUT_FIVE_ISLAND_RESORT_GORGEOUS",
-  "music": "MUS_NANASHIMA",
+  "music": "MUS_SEVII_ROUTE",
   "region_map_section": "MAPSEC_RESORT_GORGEOUS",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

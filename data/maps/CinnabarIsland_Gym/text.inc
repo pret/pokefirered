@@ -6,7 +6,7 @@ CinnabarIsland_Gym_Text_BlaineIntro:: @ 8199543
     .string "and ready with intense heat!\p"
     .string "They incinerate all challengers!\p"
     .string "Hah!\n"
-    .string "You better have BURN HEAL!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "You better have BURN HEAL!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 CinnabarIsland_Gym_Text_BlaineDefeat:: @ 81995FA
     .string "I have burned down to nothing!\n"

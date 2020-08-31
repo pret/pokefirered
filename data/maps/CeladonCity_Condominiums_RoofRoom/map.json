@@ -2,7 +2,7 @@
   "id": "MAP_CELADON_CITY_CONDOMINIUMS_ROOF_ROOM",
   "name": "CeladonCity_Condominiums_RoofRoom",
   "layout": "LAYOUT_CELADON_CITY_CONDOMINIUMS_ROOF_ROOM",
-  "music": "MUS_TAMAMUSI",
+  "music": "MUS_CELADON",
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

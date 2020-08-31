@@ -527,7 +527,7 @@ void sub_814A468(u16 itemId, u16 quantity)
     gUnknown_203F3D8->unk12 = sub_814A754(4, 8, 22, 4);
     AddTextPrinterParameterized(gUnknown_203F3D8->unk12, 2, gUnknown_203F3D8->strBuff, 0, 2, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(gUnknown_203F3D8->unk12, COPYWIN_GFX);
-    gUnknown_203F3D8->unk14 = MUS_FANFA1;
+    gUnknown_203F3D8->unk14 = MUS_LEVEL_UP;
     gUnknown_203F3D8->unkD = 0;
 }
 

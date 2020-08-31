@@ -431,7 +431,7 @@ static void sub_8147DA0(u8 taskId)
     case 2:
         if (!sub_8149D68() && IsNotWaitingForBGMStop() == TRUE)
         {
-            FadeOutAndPlayNewMapMusic(MUS_JUMP, 8);
+            FadeOutAndPlayNewMapMusic(MUS_POKE_JUMP, 8);
             gUnknown_203F3D4->unk8++;
         }
         break;
@@ -1577,7 +1577,7 @@ static void sub_81492B8(void)
     gUnknown_203F3D4->unk83AC->unk10 = 0;
 }
 
-static const u16 gUnknown_846B6AC[] = {SE_REGI, SE_REAPOKE, SE_W234, SE_EXCELLENT};
+static const u16 gUnknown_846B6AC[] = {SE_RS_SHOP, SE_SHINY, SE_M_MORNING_SUN, SE_POKE_JUMP_SUCCESS};
 
 static void sub_81492D8(void)
 {
@@ -1654,9 +1654,9 @@ static void sub_814937C(void)
     }
 
     if (whichSound & 0x2)
-        PlaySE(SE_NAWAMISS);
+        PlaySE(SE_POKE_JUMP_FAILURE);
     else if (whichSound & 0x1)
-        PlaySE(SE_DANSA);
+        PlaySE(SE_LEDGE);
 }
 
 static const s8 gUnknown_846B6B4[][48] =

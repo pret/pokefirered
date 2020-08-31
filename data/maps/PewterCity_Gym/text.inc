@@ -12,7 +12,7 @@ PewterCity_Gym_Text_BrockIntro:: @ 8190CD4
     .string "That's the TRAINER's honor that\n"
     .string "compels you to challenge me.\p"
     .string "Fine, then!\n"
-    .string "Show me your best!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "Show me your best!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PewterCity_Gym_Text_BrockDefeat:: @ 8190E4F
     .string "I took you for granted, and so\n"
@@ -21,7 +21,7 @@ PewterCity_Gym_Text_BrockDefeat:: @ 8190E4F
     .string "on you this…the official POKéMON\l"
     .string "LEAGUE BOULDERBADGE.\p"
     .string "{SIZE}Á{PLAYER} received the BOULDERBADGE\n"
-    .string "from BROCK!{PAUSE_MUSIC}{PLAY_BGM}{MUS_ME_BACHI}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
+    .string "from BROCK!{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
     .string "{SIZE}ÇJust having the BOULDERBADGE makes\n"
     .string "your POKéMON more powerful.\p"
     .string "It also enables the use of the\n"

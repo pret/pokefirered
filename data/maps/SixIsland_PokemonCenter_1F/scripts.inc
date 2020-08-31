@@ -25,7 +25,7 @@ SixIsland_PokemonCenter_1F_EventScript_RivalScene:: @ 8171D97
 	textcolor 0
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Movement_Delay48
@@ -39,7 +39,7 @@ SixIsland_PokemonCenter_1F_EventScript_RivalScene:: @ 8171D97
 	applymovement LOCALID_RIVAL, SixIsland_PokemonCenter_1F_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 35
 	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 1

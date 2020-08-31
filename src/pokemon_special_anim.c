@@ -339,7 +339,7 @@ static void Task_ForgetMove(u8 taskId)
         ptr->delayTimer++;
         if (ptr->delayTimer > 30)
         {
-            PlaySE(SE_W255);
+            PlaySE(SE_M_SPIT_UP);
             PSA_PrintMessage(PSA_TEXT_FORGET_POOF);
             PSA_DarkenMonSprite();
             ptr->state++;
@@ -560,7 +560,7 @@ static void Task_MachineSet(u8 taskId)
     case 8:
         if (!PSA_IsMessagePrintTaskActive())
         {
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
             ptr->cancelDisabled = TRUE;
             ptr->state++;
         }

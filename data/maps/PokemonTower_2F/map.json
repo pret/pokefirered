@@ -2,7 +2,7 @@
   "id": "MAP_POKEMON_TOWER_2F",
   "name": "PokemonTower_2F",
   "layout": "LAYOUT_POKEMON_TOWER_2F",
-  "music": "MUS_P_TOWER",
+  "music": "MUS_POKE_TOWER",
   "region_map_section": "MAPSEC_POKEMON_TOWER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

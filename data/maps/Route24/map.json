@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE24",
   "name": "Route24",
   "layout": "LAYOUT_ROUTE24",
-  "music": "MUS_OPENING",
+  "music": "MUS_ROUTE24",
   "region_map_section": "MAPSEC_ROUTE_24",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

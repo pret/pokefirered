@@ -18,7 +18,7 @@ SilphCo_11F_EventScript_President:: @ 8161DFE
 	checkitemspace ITEM_MASTER_BALL, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq SilphCo_11F_EventScript_NoRoomForMasterBall
-	giveitem_msg SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_FAN5
+	giveitem_msg SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_OBTAIN_KEY_ITEM
 	msgbox SilphCo_11F_Text_ThatsOurSecretPrototype
 	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
 	release

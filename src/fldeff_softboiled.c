@@ -55,7 +55,7 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
         }
         else
         {
-            PlaySE(SE_KAIFUKU);
+            PlaySE(SE_USE_ITEM);
             PartyMenuModifyHP(taskId, r8, -1, GetMonData(&gPlayerParty[r8], MON_DATA_MAX_HP) / 5, sub_80E57E8);
         }
     }
@@ -63,7 +63,7 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
 
 static void sub_80E57E8(u8 taskId)
 {
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
     PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP) / 5, sub_80E583C);
 }
 

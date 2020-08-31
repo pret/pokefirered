@@ -2,7 +2,7 @@
   "id": "MAP_CINNABAR_ISLAND_POKEMON_LAB_RESEARCH_ROOM",
   "name": "CinnabarIsland_PokemonLab_ResearchRoom",
   "layout": "LAYOUT_CINNABAR_ISLAND_POKEMON_LAB_RESEARCH_ROOM",
-  "music": "MUS_GUREN",
+  "music": "MUS_CINNABAR",
   "region_map_section": "MAPSEC_CINNABAR_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

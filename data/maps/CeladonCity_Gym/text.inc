@@ -12,7 +12,7 @@ CeladonCity_Gym_Text_ErikaIntro:: @ 8197114
     .string "GRASS type.\p"
     .string "…Oh, I'm sorry, I had no idea that\n"
     .string "you wished to challenge me.\p"
-    .string "Very well, but I shall not lose.{PLAY_BGM MUS_EXEYE}$"
+    .string "Very well, but I shall not lose.{PLAY_BGM MUS_ENCOUNTER_GYM_LEADER}$"
 
 CeladonCity_Gym_Text_ErikaDefeat:: @ 8197260
     .string "Oh!\n"

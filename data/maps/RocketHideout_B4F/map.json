@@ -2,7 +2,7 @@
   "id": "MAP_ROCKET_HIDEOUT_B4F",
   "name": "RocketHideout_B4F",
   "layout": "LAYOUT_ROCKET_HIDEOUT_B4F",
-  "music": "MUS_AJITO",
+  "music": "MUS_ROCKET_HIDEOUT",
   "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

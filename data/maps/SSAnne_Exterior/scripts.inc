@@ -18,7 +18,7 @@ SSAnne_Exterior_ExitSSAnne:: @ 8160859
 	call_if_le SSAnne_Exterior_WalkDown
 	compare VAR_0x8005, 7
 	call_if_ge SSAnne_Exterior_WalkInPlaceDown
-	fadenewbgm MUS_NAMINORI
+	fadenewbgm MUS_SURF
 	delay 50
 	special DoSSAnneDepartureCutscene
 	waitstate

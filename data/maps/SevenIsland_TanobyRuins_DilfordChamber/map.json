@@ -2,7 +2,7 @@
   "id": "MAP_SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER",
   "name": "SevenIsland_TanobyRuins_DilfordChamber",
   "layout": "LAYOUT_SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER",
-  "music": "MUS_NANAISEKI",
+  "music": "MUS_SEVII_DUNGEON",
   "region_map_section": "MAPSEC_DILFORD_CHAMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

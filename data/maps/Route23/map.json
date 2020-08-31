@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE23",
   "name": "Route23",
   "layout": "LAYOUT_ROUTE23",
-  "music": "MUS_CHAMP_R",
+  "music": "MUS_VICTORY_ROAD",
   "region_map_section": "MAPSEC_ROUTE_23",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -777,9 +777,9 @@ void sub_814DC5C(struct BerryCrushGame * game, struct BerryCrushGame_138 * manag
         else
         {
             if (sp4 == 1)
-                PlaySE(SE_TOY_DANGO);
+                PlaySE(SE_MUD_BALL);
             else
-                PlaySE(SE_TOY_KABE);
+                PlaySE(SE_BREAKABLE_DOOR);
 
             game->unk25_2 = 1;
         }

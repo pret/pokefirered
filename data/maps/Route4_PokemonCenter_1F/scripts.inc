@@ -109,7 +109,7 @@ Route4_PokemonCenter_1F_EventScript_BoughtMagikarp:: @ 816F86A
 Route4_PokemonCenter_1F_EventScript_PayForMagikarp:: @ 816F86F
 	removemoney MAGIKARP_PRICE, 0
 	updatemoneybox 0, 0, 0
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	message Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp
 	waitmessage
 	waitfanfare

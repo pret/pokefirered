@@ -2,7 +2,7 @@
   "id": "MAP_PROTOTYPE_SEVII_ISLE_9",
   "name": "Prototype_SeviiIsle_9",
   "layout": "LAYOUT_PROTOTYPE_SEVII_ISLE_9",
-  "music": "MUS_NANASHIMA",
+  "music": "MUS_SEVII_ROUTE",
   "region_map_section": "MAPSEC_SEVII_ISLE_9",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

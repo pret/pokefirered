@@ -1614,11 +1614,11 @@ static void PlaySEForSelectedMapsec(void)
     {
         if ((GetSelectedMapsecType(LAYER_MAP) != MAPSECTYPE_ROUTE && GetSelectedMapsecType(LAYER_MAP) != MAPSECTYPE_NONE) 
          || (GetSelectedMapsecType(LAYER_DUNGEON) != MAPSECTYPE_ROUTE && GetSelectedMapsecType(LAYER_DUNGEON) != MAPSECTYPE_NONE))
-            PlaySE(SE_Z_SCROLL);
+            PlaySE(SE_DEX_SCROLL);
         if (GetMapCursorX() == SWITCH_BUTTON_X && GetMapCursorY() == SWITCH_BUTTON_Y && GetRegionMapPermission(MAPPERM_HAS_SWITCH_BUTTON) == TRUE)
-            PlaySE(SE_W255);
+            PlaySE(SE_M_SPIT_UP);
         else if (GetMapCursorX() == CANCEL_BUTTON_X && GetMapCursorY() == CANCEL_BUTTON_Y)
-            PlaySE(SE_W255);
+            PlaySE(SE_M_SPIT_UP);
     }
 }
 
@@ -2234,19 +2234,19 @@ static bool8 HandleSwitchMapInput(void)
     data.bottom = sSwitchMapMenu->highlight.bottom = sSwitchMapMenu->highlight.top + 32;
     if (JOY_NEW(DPAD_UP) && sSwitchMapMenu->currentSelection != 0)
     {
-        PlaySE(SE_BAG1);
+        PlaySE(SE_BAG_CURSOR);
         sSwitchMapMenu->currentSelection--;
         changedSelection = TRUE;
     }
     if (JOY_NEW(DPAD_DOWN) && sSwitchMapMenu->currentSelection < sSwitchMapMenu->maxSelection)
     {
-        PlaySE(SE_BAG1);
+        PlaySE(SE_BAG_CURSOR);
         sSwitchMapMenu->currentSelection++;
         changedSelection = TRUE;
     }
     if (JOY_NEW(A_BUTTON) && sSwitchMapMenu->blendY == (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
     {
-        PlaySE(SE_W129);
+        PlaySE(SE_M_SWIFT);
         sSwitchMapMenu->chosenRegion = sSwitchMapMenu->currentSelection;
         return TRUE;
     }
@@ -2828,7 +2828,7 @@ static void Task_MapOpenAnim(u8 taskId)
         if (!gPaletteFade.active)
         {
             sMapOpenCloseAnim->openState++;
-            PlaySE(SE_CARD3);
+            PlaySE(SE_CARD_OPEN);
         }
         break;
     case 6:
@@ -2872,8 +2872,8 @@ static void Task_MapOpenAnim(u8 taskId)
         FillBgTilemapBufferRect(1, 0x03F, 29, 1, 1, 1, 0x2);
         FillBgTilemapBufferRect(1, 0x03D, 2, 1, 26, 1, 0x2);
         CopyBgTilemapBufferToVram(1);
-        m4aSongNumStop(SE_CARD3);
-        PlaySE(SE_HI_TURUN);
+        m4aSongNumStop(SE_CARD_OPEN);
+        PlaySE(SE_ROTATING_GATE);
         sMapOpenCloseAnim->openState++;
         break;
     case 12:
@@ -3043,7 +3043,7 @@ static void Task_MapCloseAnim(u8 taskId)
     case 6:
         sub_80C2B9C();
         sub_80C2B48();
-        PlaySE(SE_CARD2);
+        PlaySE(SE_CARD_FLIPPING);
         sMapOpenCloseAnim->closeState++;
         break;
     case 7:
@@ -3237,14 +3237,14 @@ static u8 HandleRegionMapInput(void)
         if (sMapCursor->x == CANCEL_BUTTON_X 
          && sMapCursor->y == CANCEL_BUTTON_Y)
         {
-            PlaySE(SE_W063B);
+            PlaySE(SE_M_HYPER_BEAM2);
             input = MAP_INPUT_CANCEL;
         }
         if (sMapCursor->x == SWITCH_BUTTON_X 
          && sMapCursor->y == SWITCH_BUTTON_Y 
          && GetRegionMapPermission(MAPPERM_HAS_SWITCH_BUTTON) == TRUE)
         {
-            PlaySE(SE_W063B);
+            PlaySE(SE_M_HYPER_BEAM2);
             input = MAP_INPUT_SWITCH;
         }
     }
@@ -4373,7 +4373,7 @@ static void Task_FlyMap(u8 taskId)
             break;
         case MAP_INPUT_MOVE_END:
             if (GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_VISITED)
-                PlaySE(SE_Z_PAGE);
+                PlaySE(SE_DEX_PAGE);
             else
                 PlaySEForSelectedMapsec();
             ResetCursorSnap();
@@ -4382,7 +4382,7 @@ static void Task_FlyMap(u8 taskId)
             DrawDungeonNameBox();
             if (GetMapCursorX() == CANCEL_BUTTON_X && GetMapCursorY() == CANCEL_BUTTON_Y)
             {
-                PlaySE(SE_W255);
+                PlaySE(SE_M_SPIT_UP);
                 PrintTopBarTextRight(gText_RegionMap_AButtonCancel);
             }
             else if (GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_VISITED || GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_UNKNOWN)
@@ -4405,7 +4405,7 @@ static void Task_FlyMap(u8 taskId)
                     sFlyMap->state++;
                     break;
                 default:
-                    PlaySE(SE_KAIFUKU);
+                    PlaySE(SE_USE_ITEM);
                     sFlyMap->selectedDestination = TRUE;
                     sFlyMap->state++;
                     break;

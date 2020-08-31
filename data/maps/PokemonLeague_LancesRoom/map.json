@@ -2,7 +2,7 @@
   "id": "MAP_POKEMON_LEAGUE_LANCES_ROOM",
   "name": "PokemonLeague_LancesRoom",
   "layout": "LAYOUT_POKEMON_LEAGUE_LANCES_ROOM",
-  "music": "MUS_CHAMP_R",
+  "music": "MUS_VICTORY_ROAD",
   "region_map_section": "MAPSEC_POKEMON_LEAGUE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

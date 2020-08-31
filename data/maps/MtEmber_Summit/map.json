@@ -2,7 +2,7 @@
   "id": "MAP_MT_EMBER_SUMMIT",
   "name": "MtEmber_Summit",
   "layout": "LAYOUT_MT_EMBER_SUMMIT",
-  "music": "MUS_NANADUNGEON",
+  "music": "MUS_SEVII_CAVE",
   "region_map_section": "MAPSEC_MT_EMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

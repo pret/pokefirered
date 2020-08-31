@@ -2,7 +2,7 @@
   "id": "MAP_TRAINER_TOWER_ROOF",
   "name": "TrainerTower_Roof",
   "layout": "LAYOUT_TRAINER_TOWER_ROOF",
-  "music": "MUS_T_TOWER",
+  "music": "MUS_TRAINER_TOWER",
   "region_map_section": "MAPSEC_TRAINER_TOWER_2",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

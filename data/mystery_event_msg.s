@@ -52,7 +52,7 @@ SurfPichu_GiveIfPossible: @ 8488EC4
 	vmessage sText_MysteryGiftEgg
 	waitmessage
 	waitbuttonpress
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	release
 	end

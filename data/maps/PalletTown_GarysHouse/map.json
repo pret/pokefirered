@@ -2,7 +2,7 @@
   "id": "MAP_PALLET_TOWN_GARYS_HOUSE",
   "name": "PalletTown_GarysHouse",
   "layout": "LAYOUT_PALLET_TOWN_GARYS_HOUSE",
-  "music": "MUS_MASARA",
+  "music": "MUS_PALLET",
   "region_map_section": "MAPSEC_PALLET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

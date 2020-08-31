@@ -943,7 +943,7 @@ static void CB2_ReturnFromLinkTrade2(void)
         sTradeMenuResourcesPtr->bg3hofs = 0;
         SetTradeMenuOptionActiveFlags();
         gMain.state++;
-        PlayBGM(MUS_SLOT);
+        PlayBGM(MUS_GAME_CORNER);
         break;
     case 15:
         ComputePartyTradeableFlags(1);

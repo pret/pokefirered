@@ -10,7 +10,7 @@ PokemonMansion_B1F_EventScript_Statue:: @ 816230C
 	lockall
 	setvar VAR_0x8004, 3
 	call PokemonMansion_EventScript_SecretSwitch
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	special DrawWholeMapView
 	waitse
 	releaseall

@@ -27,11 +27,11 @@ PokedexRating_EventScript_ShowRatingMsg:: @ 81A73B6
 	return
 
 PokedexRating_EventScript_NormalFanfare:: @ 81A73D8
-	playfanfare MUS_FAN2
+	playfanfare MUS_DEX_RATING
 	return
 
 PokedexRating_EventScript_DexCompleteFanfare:: @ 81A73DC
-	playfanfare MUS_FANFA5
+	playfanfare MUS_EVOLVED
 	return
 
 PokedexRating_EventScript_Rate:: @ 81A73E0

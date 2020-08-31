@@ -403,7 +403,7 @@ CeladonCity_GameCorner_EventScript_Poster:: @ 816CAAA
 	end
 
 CeladonCity_GameCorner_EventScript_OpenRocketHideout:: @ 816CABE
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	setmetatile 15, 2, METATILE_GameCorner_Floor_StairsTop, 0
 	setmetatile 16, 2, METATILE_GameCorner_StairsTop, 1
 	setmetatile 17, 2, METATILE_GameCorner_StairsBottom, 1

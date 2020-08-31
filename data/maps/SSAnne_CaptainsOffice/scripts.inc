@@ -8,14 +8,14 @@ SSAnne_CaptainsOffice_EventScript_Captain:: @ 8160B3A
 	textcolor 3
 	message SSAnne_CaptainsOffice_Text_RubbedCaptainsBack
 	waitmessage
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	call EventScript_RestorePrevTextColor
 	delay 50
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut
-	giveitem_msg SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain, ITEM_HM01, 1, MUS_FAN5
+	giveitem_msg SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain, ITEM_HM01, 1, MUS_OBTAIN_KEY_ITEM
 	msgbox SSAnne_CaptainsOffice_Text_ExplainCut
 	setflag FLAG_GOT_HM01
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 1

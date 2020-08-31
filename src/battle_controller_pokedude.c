@@ -1782,14 +1782,14 @@ static void PokedudeHandleFaintAnimation(void)
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-                PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
+                PlaySE12WithPanning(SE_FAINT, SOUND_PAN_ATTACKER);
                 gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
                 gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
                 gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8012110;
             }
             else
             {
-                PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_TARGET);
+                PlaySE12WithPanning(SE_FAINT, SOUND_PAN_TARGET);
                 gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_FaintOpponentMon;
             }
             gBattlerControllerFuncs[gActiveBattler] = sub_8156DCC;
@@ -2607,7 +2607,7 @@ static void sub_8159BA8(void)
             if (gUnknown_3005EE0[gActiveBattler][3] == 13)
             {
                 BattleStopLowHpSound();
-                PlayBGM(MUS_WIN_YASEI);
+                PlayBGM(MUS_VICTORY_WILD);
             }
             gBattle_BG0_Y = gUnknown_3005EE0[gActiveBattler][4];
             sub_80EB524();
@@ -2680,7 +2680,7 @@ static void sub_8159D04(void)
             if (gUnknown_3005EE0[gActiveBattler][3] == 13)
             {
                 BattleStopLowHpSound();
-                PlayBGM(MUS_WIN_YASEI);
+                PlayBGM(MUS_VICTORY_WILD);
             }
             sub_80EF0E0(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
             sub_80EB524();

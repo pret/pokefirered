@@ -512,7 +512,7 @@ EventScript_TryUnlockDoor:: @ 81A8B23
     end
 
 EventScript_OpenDoor:: @ 81A8B32
-    playfanfare MUS_FANFA1
+    playfanfare MUS_LEVEL_UP
     msgbox Text_CardKeyOpenedDoor
     waitfanfare
     compare VAR_TEMP_1, 1
@@ -556,7 +556,7 @@ EventScript_OpenDoor:: @ 81A8B32
     compare VAR_TEMP_1, 20
     call_if_eq EventScript_Open11FDoor
     waitse
-    playse SE_KI_GASYAN
+    playse SE_UNLOCK
     special DrawWholeMapView
     waitse
     special SetHiddenItemFlag

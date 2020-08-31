@@ -78,11 +78,11 @@ EventScript_NoRoomForItem:: @ 81A675E
 	return
 
 EventScript_PlayFanfareObtainedItem:: @ 81A6764
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	return
 
 EventScript_PlayFanfareObtainedTMHM:: @ 81A6768
-	playfanfare MUS_FANFA1
+	playfanfare MUS_LEVEL_UP
 	return
 
 Std_ObtainDecoration:: @ 81A676C
@@ -100,7 +100,7 @@ EventScript_ObtainDecorMessage:: @ 81A677A
 	return
 
 EventScript_ObtainedDecor:: @ 81A6795
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message Text_ObtainedTheDecor
 	waitfanfare
 	waitmessage

@@ -21,9 +21,9 @@ SSAnne_2F_Corridor_EventScript_RivalTriggerRight:: @ 81608F7
 
 SSAnne_2F_Corridor_EventScript_RivalTrigger:: @ 8160903
 	textcolor 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 5
-	playbgm MUS_RIVAL1, 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject 1
 	delay 10
 	applymovement 1, Movement_WalkInPlaceFastestDown
@@ -46,7 +46,7 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger:: @ 8160903
 	msgbox SSAnne_2F_Corridor_Text_RivalPostBattle
 	closemessage
 	delay 10
-	playbgm MUS_RIVAL2, 0
+	playbgm MUS_RIVAL_EXIT, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq SSAnne_2F_Corridor_EventScript_RivalExitLeft
 	compare VAR_TEMP_1, 1

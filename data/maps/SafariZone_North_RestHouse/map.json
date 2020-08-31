@@ -2,7 +2,7 @@
   "id": "MAP_SAFARI_ZONE_NORTH_REST_HOUSE",
   "name": "SafariZone_North_RestHouse",
   "layout": "LAYOUT_SAFARI_ZONE_REST_HOUSE",
-  "music": "MUS_SHINKA",
+  "music": "MUS_EVOLUTION",
   "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

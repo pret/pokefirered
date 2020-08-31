@@ -72,7 +72,7 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 81652C0
 	setfieldeffectarg 1, 56
 	setfieldeffectarg 2, 2
 	dofieldeffect 68
-	playbgm MUS_DEOEYE, 0
+	playbgm MUS_ENCOUNTER_DEOXYS, 0
 	waitfieldeffect 68
 	applymovement 2, Movement_DeoxysApproach
 	waitmovement 0

@@ -21,7 +21,7 @@ FourIsland_IcefallCave_1F_EventScript_FallDownHole:: @ 8163D65
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_IcefallCave_1F_Movement_SetInvisible
 	waitmovement 0
-	playse SE_RU_HYUU
+	playse SE_FALL
 	delay 60
 	warphole MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F
 	waitstate

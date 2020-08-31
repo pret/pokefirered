@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_GREEN_PATH",
   "name": "SixIsland_GreenPath",
   "layout": "LAYOUT_SIX_ISLAND_GREEN_PATH",
-  "music": "MUS_NANASHIMA",
+  "music": "MUS_SEVII_ROUTE",
   "region_map_section": "MAPSEC_GREEN_PATH",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

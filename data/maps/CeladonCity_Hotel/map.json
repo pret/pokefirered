@@ -2,7 +2,7 @@
   "id": "MAP_CELADON_CITY_HOTEL",
   "name": "CeladonCity_Hotel",
   "layout": "LAYOUT_CELADON_CITY_HOTEL",
-  "music": "MUS_TAMAMUSI",
+  "music": "MUS_CELADON",
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

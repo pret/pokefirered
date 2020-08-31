@@ -9,7 +9,7 @@ PokemonLeague_BrunosRoom_Text_Intro:: @ 817820F
     .string "{PLAYER}!\p"
     .string "We will grind you down with our\n"
     .string "superior power!\p"
-    .string "Hoo hah!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_BrunosRoom_Text_RematchIntro:: @ 817830C
     .string "I am BRUNO of the ELITE FOUR!\p"
@@ -22,7 +22,7 @@ PokemonLeague_BrunosRoom_Text_RematchIntro:: @ 817830C
     .string "{PLAYER}!\p"
     .string "We will grind you down with our\n"
     .string "superior power!\p"
-    .string "Hoo hah!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_BrunosRoom_Text_Defeat:: @ 8178409
     .string "Why?\n"

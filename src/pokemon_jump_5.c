@@ -534,7 +534,7 @@ static void sub_814B1CC(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        PlaySE(SE_JITE_PYOKO);
+        PlaySE(SE_BIKE_HOP);
         sprite->data[1] = 0;
         sprite->data[0]++;
         // fall through

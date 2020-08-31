@@ -50,7 +50,7 @@ PokemonTower_7F_EventScript_Grunt1ExitRight:: @ 81635F0
 PokemonTower_7F_EventScript_Grunt1ExitLeft:: @ 8163600
 	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitLeft
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 25
 	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end

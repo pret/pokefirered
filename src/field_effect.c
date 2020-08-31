@@ -861,7 +861,7 @@ static void PokeballGlowEffect_0(struct Sprite * sprite)
         gSprites[endSpriteId].data[0] = sprite->data[7];
         sprite->data[2]++;
         sprite->data[6]--;
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
     }
     if (sprite->data[6] == 0)
     {
@@ -880,7 +880,7 @@ static void PokeballGlowEffect_1(struct Sprite * sprite)
         sprite->data[3] = 0;
         if (sprite->data[5])
         {
-            PlayFanfare(MUS_ME_ASA);
+            PlayFanfare(MUS_HEAL);
         }
     }
 }
@@ -1156,7 +1156,7 @@ static bool8 FallWarpEffect_3(struct Task * task)
     task->data[1] = 1;
     task->data[2] = 0;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
-    PlaySE(SE_RU_HYUU);
+    PlaySE(SE_FALL);
     task->data[0]++;
     return FALSE;
 }
@@ -1186,7 +1186,7 @@ static bool8 FallWarpEffect_4(struct Task * task)
     }
     if (sprite->pos2.y >= 0)
     {
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         objectEvent->triggerGroundEffectsOnStop = TRUE;
         objectEvent->landingJump = TRUE;
         sprite->pos2.y = 0;
@@ -1309,7 +1309,7 @@ static bool8 EscalatorWarpEffect_2(struct Task * task)
         {
             task->data[0] = 4;
         }
-        PlaySE(SE_ESUKA);
+        PlaySE(SE_ESCALATOR);
     }
     return FALSE;
 }
@@ -1740,7 +1740,7 @@ static bool8 LavaridgeGymB1FWarpEffect_3(struct Task * task, struct ObjectEvent 
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
-    PlaySE(SE_W153);
+    PlaySE(SE_M_EXPLOSION);
     task->data[0]++;
     return TRUE;
 }
@@ -1862,7 +1862,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_3(struct Task * task, struct ObjectEv
         task->data[0]++;
         objectEvent->invisible = FALSE;
         CameraObjectReset1();
-        PlaySE(SE_W091);
+        PlaySE(SE_M_DIG);
         ObjectEventSetHeldMovement(objectEvent, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
@@ -1950,7 +1950,7 @@ static bool8 LavaridgeGym1FWarpEffect_2(struct Task * task, struct ObjectEvent *
         {
             task->data[1]++;
             ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFastMovementAction(objectEvent->facingDirection));
-            PlaySE(SE_FU_ZUZUZU);
+            PlaySE(SE_LAVARIDGE_FALL_WARP);
         }
     }
     return FALSE;
@@ -2052,7 +2052,7 @@ static void EscapeRopeFieldEffect_Step1(struct Task * task)
         data[3]++;
         if (data[3] == 20)
         {
-            PlaySE(SE_TK_WARPIN);
+            PlaySE(SE_WARP_IN);
         }
     }
     else if (data[4] == 0 && !sub_80857F0(playerObj, &task->data[5], &task->data[6]))
@@ -2170,7 +2170,7 @@ static bool32 sub_80858A4(struct ObjectEvent * playerObj, s16 *state_p, s16 *y_p
         (*y_p) += 4;
         if (*y_p >= 0)
         {
-            PlaySE(SE_TK_KASYA);
+            PlaySE(SE_CLICK);
             CameraObjectReset1();
             (*state_p)++;
             return FALSE;
@@ -2203,7 +2203,7 @@ static void EscapeRopeExitFieldEffect_Step0(struct Task * task)
 {
     if (IsWeatherNotFadingIn())
     {
-        PlaySE(SE_TK_WARPOUT);
+        PlaySE(SE_WARP_OUT);
         task->data[15] = GetPlayerFacingDirection();
         task->data[0]++;
     }
@@ -2293,7 +2293,7 @@ static void TeleportFieldEffectTask2(struct Task * task)
         task->data[1] = 4;
         task->data[2] = 8;
         task->data[3] = 1;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
     }
 }
 
@@ -2379,7 +2379,7 @@ static void TeleportInFieldEffectTask1(struct Task * task)
         task->data[2] = 1;
         task->data[14] = sprite->subspriteMode;
         task->data[15] = GetPlayerFacingDirection();
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
     }
 }
 
@@ -2889,8 +2889,8 @@ u8 FldEff_UseSurf(void)
     u8 taskId = CreateTask(Task_FldEffUseSurf, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
-    if (Overworld_MusicCanOverrideMapMusic(MUS_NAMINORI))
-        Overworld_ChangeMusicTo(MUS_NAMINORI);
+    if (Overworld_MusicCanOverrideMapMusic(MUS_SURF))
+        Overworld_ChangeMusicTo(MUS_SURF);
     return FALSE;
 }
 
@@ -3052,7 +3052,7 @@ u8 FldEff_NpcFlyOut(void)
     sprite->oam.priority = 1;
     sprite->callback = sub_8086D94;
     sprite->data[1] = gFieldEffectArguments[0];
-    PlaySE(SE_W019);
+    PlaySE(SE_M_FLY);
     return spriteId;
 }
 
@@ -3178,7 +3178,7 @@ static void UseFlyEffect_5(struct Task * task)
     if ((task->data[2] == 0 || (--task->data[2]) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[0]++;
-        PlaySE(SE_W019);
+        PlaySE(SE_M_FLY);
         sub_80871C8(task->data[1]);
     }
 }
@@ -3816,7 +3816,7 @@ static void Task_FldEffUnk44(u8 taskId)
 static void Unk44Effect_0(s16 *data, u8 taskId)
 {
     u8 newTaskId = CreateTask(sub_8087B14, 90);
-    PlaySE(SE_T_KAMI2);
+    PlaySE(SE_THUNDER2);
     data[5] = newTaskId;
     data[1]++;
 }
@@ -3830,7 +3830,7 @@ static void Unk44Effect_1(s16 *data, u8 taskId)
         BlendPalettes(0x0000FFFF, 0x10, RGB_WHITE);
         BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITE);
         sub_8087CFC(sprite);
-        PlaySE(SE_T_KAMI);
+        PlaySE(SE_THUNDER);
         sub_8087BA8(data[5]);
         data[3] = 0;
         data[1]++;

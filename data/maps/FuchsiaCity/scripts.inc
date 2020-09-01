@@ -4,11 +4,11 @@ FuchsiaCity_MapScripts:: @ 8166D75
 
 FuchsiaCity_OnTransition:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
-	call_if_set FLAG_GOT_DOME_FOSSIL, FuchsicaCity_EventScript_SetOmanyteGfx
+	call_if_set FLAG_GOT_DOME_FOSSIL, FuchsiaCity_EventScript_SetOmanyteGfx
 	call_if_unset FLAG_GOT_DOME_FOSSIL, FuchsiaCity_EventScript_SetKabutoGfx
 	end
 
-FuchsicaCity_EventScript_SetOmanyteGfx:: @ 8166D91
+FuchsiaCity_EventScript_SetOmanyteGfx:: @ 8166D91
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OMANYTE
 	return
 

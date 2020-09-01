@@ -22,9 +22,7 @@ struct PokedexScreenData
 {
     u8 field_00;
     u8 field_01;
-    u8 field_02;
-    u8 field_03;
-    u8 field_04;
+    u8 field_02[4];
     u32 field_08;
     u32 field_0C;
     u16 field_10;
@@ -33,9 +31,9 @@ struct PokedexScreenData
     u8 field_15;
     u8 field_16;
     u8 field_17;
-    u16 field_18[0x4];
-    u8 field_20[0x4];
-    u8 field_24[0x4];
+    u16 field_18[4];
+    u8 field_20[4];
+    u8 field_24[4];
     u8 field_28;
     u8 field_29;
     u8 field_2A;
@@ -77,32 +75,32 @@ struct PokedexScreenWindowGfx
 
 EWRAM_DATA struct PokedexScreenData * gUnknown_203ACF0 = NULL;
 
-void sub_810287C(u8 taskId);
-void sub_8102C28(void);
-void sub_8102F80(u8 taskId);
-void sub_810317C(void);
-void sub_8103238(u8 taskId);
-void sub_810345C(void);
-u16 sub_8103518(u8 a0);
-void sub_8103924(const struct ListMenuTemplate * a0, u8 a1);
-u8 sub_81039F0(void);
-void sub_8103988(u8 a0);
-void sub_8103AC8(u8 taskId);
-u8 sub_8104234(void);
-int sub_8104284(void);
-void sub_81042EC(u8 taskId);
-bool32 sub_8104664(u8 a0);
+static void sub_810287C(u8 taskId);
+static void sub_8102C28(void);
+static void sub_8102F80(u8 taskId);
+static void sub_810317C(void);
+static void sub_8103238(u8 taskId);
+static void sub_810345C(void);
+static u16 sub_8103518(u8 a0);
+static void sub_8103924(const struct ListMenuTemplate * a0, u8 a1);
+static u8 sub_81039F0(void);
+static void sub_8103988(u8 a0);
+static void sub_8103AC8(u8 taskId);
+static u8 sub_8104234(void);
+static int sub_8104284(void);
+static void sub_81042EC(u8 taskId);
+static bool32 sub_8104664(u8 a0);
 void sub_81047B0(u8 *windowId_p);
 void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
-void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
+static void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
 void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y);
-u16 sub_8104BBC(u8 caseId, bool8 whichDex);
+static u16 sub_8104BBC(u8 caseId, bool8 whichDex);
 void sub_8104C2C(const u8 *src);
 void sub_8104E90(void);
 bool8 sub_8104F0C(bool8 a0);
 void sub_8105058(u8 a0);
 void sub_8105178(u8 a0, u8 a1, u8 a2);
-bool8 sub_81052D0(u8 a0);
+static bool8 sub_81052D0(u8 a0);
 void sub_8105594(u8 a0, u8 a1);
 void sub_8105E1C(u8 a0);
 void sub_8106014(void);
@@ -119,9 +117,9 @@ void sub_8106E78(const u8 *a0, s32 a1);
 
 #include "data/pokemon_graphics/footprint_table.h"
 
-const u32 gUnknown_8440124[] = INCBIN_U32("graphics/pokedex/unk_8440124.bin.lz");
-const u32 gUnknown_8440274[] = INCBIN_U32("graphics/pokedex/unk_8440274.4bpp.lz");
-const u32 gUnknown_84403AC[] = INCBIN_U32("graphics/pokedex/unk_84403AC.4bpp.lz");
+const u8 gUnknown_8440124[] = INCBIN_U8("graphics/pokedex/unk_8440124.bin.lz");
+const u8 gUnknown_8440274[] = INCBIN_U8("graphics/pokedex/unk_8440274.4bpp.lz");
+const u8 gUnknown_84403AC[] = INCBIN_U8("graphics/pokedex/unk_84403AC.4bpp.lz");
 const u16 gUnknown_84404C8[] = INCBIN_U16("graphics/pokedex/unk_84404C8.gbapal");
 
 const u16 gUnknown_84406C8[] = {
@@ -242,21 +240,21 @@ void sub_810250C(void)
     ScanlineEffect_Stop();
     ResetBgsAndClearDma3BusyFlags(TRUE);
     InitBgsFromTemplates(0, gUnknown_8451EBC, NELEMS(gUnknown_8451EBC));
-    SetBgTilemapBuffer(3, Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(2, Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(3, (u16*)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(2, (u16*)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(1, (u16*)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(0, (u16*)Alloc(BG_SCREEN_SIZE));
     if (natDex)
-        DecompressAndLoadBgGfxUsingHeap(3, gUnknown_84403AC, BG_SCREEN_SIZE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, (void*)gUnknown_84403AC, BG_SCREEN_SIZE, 0, 0);
     else
-        DecompressAndLoadBgGfxUsingHeap(3, gUnknown_8440274, BG_SCREEN_SIZE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, (void*)gUnknown_8440274, BG_SCREEN_SIZE, 0, 0);
     InitWindows(gUnknown_8451ECC);
     DeactivateAllTextPrinters();
     m4aSoundVSyncOn();
     SetVBlankCallback(sub_81024C0);
     EnableInterrupts(INTR_FLAG_VBLANK);
     taskId = CreateTask(sub_810287C, 0);
-    gUnknown_203ACF0 = Alloc(sizeof(*gUnknown_203ACF0));
+    gUnknown_203ACF0 = Alloc(sizeof(struct PokedexScreenData));
     *gUnknown_203ACF0 = gUnknown_8451EE4;
     gUnknown_203ACF0->field_00 = taskId;
     gUnknown_203ACF0->field_44 = Alloc(NATIONAL_DEX_COUNT * sizeof(struct ListMenuItem));
@@ -336,7 +334,7 @@ void sub_8102858(void)
     }
 }
 
-void sub_810287C(u8 taskId)
+static void sub_810287C(u8 taskId)
 {
     int i;
     switch (gUnknown_203ACF0->field_01)
@@ -474,7 +472,7 @@ void sub_810287C(u8 taskId)
     }
 }
 
-void sub_8102C28(void)
+static void sub_8102C28(void)
 {
     struct ListMenuTemplate listMenuTemplate;
     FillBgTilemapBufferRect(3, 0x00E, 0, 0, 30, 20, 0x00);
@@ -541,15 +539,15 @@ void sub_8102EC0(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     CopyWindowToVram(gUnknown_203ACF0->field_15, COPYWIN_GFX);
 }
 
-void sub_8102F48(u8 windowId, s32 itemId, u8 y)
+void sub_8102F48(u8 windowId, u32 itemId, u8 y)
 {
-    if (itemId < 0 || itemId > 8 || gUnknown_203ACF0->field_08 & (1 << itemId))
+    if (itemId > 8 || gUnknown_203ACF0->field_08 & (1 << itemId))
         ListMenuOverrideSetColors(1, 0, 3);
     else
         ListMenuOverrideSetColors(10, 0, 11);
 }
 
-void sub_8102F80(u8 taskId)
+static void sub_8102F80(u8 taskId)
 {
     switch (gUnknown_203ACF0->field_01)
     {
@@ -616,7 +614,7 @@ void sub_8102F80(u8 taskId)
     }
 }
 
-void sub_810317C(void)
+static void sub_810317C(void)
 {
     struct ListMenuTemplate template;
     FillBgTilemapBufferRect(3, 0x00E, 0, 0, 30, 20, 0x00);
@@ -635,7 +633,7 @@ void sub_810317C(void)
     CopyWindowToVram(1, COPYWIN_GFX);
 }
 
-void sub_8103238(u8 taskId)
+static void sub_8103238(u8 taskId)
 {
     switch (gUnknown_203ACF0->field_01)
     {
@@ -702,7 +700,7 @@ void sub_8103238(u8 taskId)
     }
 }
 
-void sub_810345C(void)
+static void sub_810345C(void)
 {
     struct ListMenuTemplate template;
     FillBgTilemapBufferRect(3, 0x00E, 0, 0, 30, 20, 0x00);
@@ -721,7 +719,7 @@ void sub_810345C(void)
     CopyWindowToVram(1, COPYWIN_GFX);
 }
 
-u16 sub_8103518(u8 a0)
+static u16 sub_8103518(u8 a0)
 {
     s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_COUNT : KANTO_DEX_COUNT;
     u16 ndex_num;
@@ -841,7 +839,7 @@ u16 sub_8103518(u8 a0)
     return ret;
 }
 
-void sub_8103924(const struct ListMenuTemplate * template, u8 a1)
+static void sub_8103924(const struct ListMenuTemplate * template, u8 a1)
 {
     switch (a1)
     {
@@ -861,7 +859,7 @@ void sub_8103924(const struct ListMenuTemplate * template, u8 a1)
     }
 }
 
-void sub_8103988(u8 a0)
+static void sub_8103988(u8 a0)
 {
     switch (a0)
     {
@@ -881,7 +879,7 @@ void sub_8103988(u8 a0)
     }
 }
 
-u8 sub_81039F0(void)
+static u8 sub_81039F0(void)
 {
     struct ScrollArrowsTemplate template = gUnknown_84521B4;
     if (gUnknown_203ACF0->field_48 > gUnknown_8452174.maxShowed)
@@ -916,7 +914,7 @@ void sub_8103A40(u8 windowId, s32 itemId, u8 y)
     }
 }
 
-void sub_8103AC8(u8 taskId)
+static void sub_8103AC8(u8 taskId)
 {
     int r4;
     u8 *ptr;
@@ -977,68 +975,66 @@ void sub_8103AC8(u8 taskId)
             RemoveScrollIndicatorArrowPair(gUnknown_203ACF0->field_60);
             ListMenuRemoveCursorObject(gUnknown_203ACF0->field_61, 0);
             gUnknown_203ACF0->field_01 = 12;
+            break;
         }
-        else
+        if (!JOY_HELD(R_BUTTON) && JOY_REPT(DPAD_LEFT))
         {
-            if (!JOY_HELD(R_BUTTON) && JOY_REPT(DPAD_LEFT))
+            if (gUnknown_203ACF0->field_2D != 0)
             {
-                if (gUnknown_203ACF0->field_2D != 0)
+                gUnknown_203ACF0->field_2D--;
+                PlaySE(SE_SELECT);
+                break;
+            }
+            else
+                r4 = 1;
+        }
+        if (!JOY_HELD(R_BUTTON) && JOY_REPT(DPAD_RIGHT))
+        {
+            if (gUnknown_203ACF0->field_2D < gUnknown_203ACF0->field_2C - 1)
+            {
+                gUnknown_203ACF0->field_2D++;
+                PlaySE(SE_SELECT);
+                break;
+            }
+            else
+                r4 = 2;
+        }
+        if (r4 == 0)
+            r4 = sub_8104284();
+        switch (r4)
+        {
+        case 0:
+            break;
+        case 1:
+            while (gUnknown_203ACF0->field_2B > gUnknown_203ACF0->field_29)
+            {
+                gUnknown_203ACF0->field_2B--;
+                if (sub_8106838(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B))
                 {
-                    gUnknown_203ACF0->field_2D--;
-                    PlaySE(SE_SELECT);
+                    gUnknown_203ACF0->field_01 = 8;
                     break;
                 }
-                else
-                    r4 = 1;
             }
-            if (!JOY_HELD(R_BUTTON) && JOY_REPT(DPAD_RIGHT))
-            {
-                if (gUnknown_203ACF0->field_2D < gUnknown_203ACF0->field_2C - 1)
-                {
-                    gUnknown_203ACF0->field_2D++;
-                    PlaySE(SE_SELECT);
-                    break;
-                }
-                else
-                    r4 = 2;
-            }
-            if (r4 == 0)
-                r4 = sub_8104284();
-            switch (r4)
-            {
-            case 0:
-                break;
-            case 1:
-                while (gUnknown_203ACF0->field_2B > gUnknown_203ACF0->field_29)
-                {
-                    gUnknown_203ACF0->field_2B--;
-                    if (sub_8106838(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B))
-                    {
-                        gUnknown_203ACF0->field_01 = 8;
-                        break;
-                    }
-                }
-                if (gUnknown_203ACF0->field_01 != 8)
-                    gUnknown_203ACF0->field_01 = 6;
-                break;
-            case 2:
-                while (gUnknown_203ACF0->field_2B < gUnknown_203ACF0->field_2A - 1)
-                {
-                    gUnknown_203ACF0->field_2B++;
-                    if (sub_8106838(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B))
-                    {
-                        gUnknown_203ACF0->field_01 = 10;
-                        break;
-                    }
-                }
-                if (gUnknown_203ACF0->field_01 != 10)
-                    gUnknown_203ACF0->field_01 = 6;
-                break;
-            }
-            if (JOY_NEW(B_BUTTON))
-            {
+            if (gUnknown_203ACF0->field_01 != 8)
                 gUnknown_203ACF0->field_01 = 6;
+            break;
+        case 2:
+            while (gUnknown_203ACF0->field_2B < gUnknown_203ACF0->field_2A - 1)
+            {
+                gUnknown_203ACF0->field_2B++;
+                if (sub_8106838(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B))
+                {
+                    gUnknown_203ACF0->field_01 = 10;
+                    break;
+                }
             }
+            if (gUnknown_203ACF0->field_01 != 10)
+                gUnknown_203ACF0->field_01 = 6;
+            break;
+        }
+        if (JOY_NEW(B_BUTTON))
+        {
+            gUnknown_203ACF0->field_01 = 6;
         }
         break;
     case 6:
@@ -1054,7 +1050,7 @@ void sub_8103AC8(u8 taskId)
         sub_8105058(0xFF);
         ListMenuUpdateCursorObject(gUnknown_203ACF0->field_61, 0, 0xA0, 0);
         gUnknown_203ACF0->field_2E = 0;
-        gUnknown_203ACF0->field_02 = 0;
+        gUnknown_203ACF0->field_02[0] = 0;
         gUnknown_203ACF0->field_01++;
         break;
     case 9:
@@ -1085,23 +1081,23 @@ void sub_8103AC8(u8 taskId)
         gUnknown_203ACF0->field_01 = 15;
         break;
     case 15:
-        gUnknown_203ACF0->field_02 = 0;
-        gUnknown_203ACF0->field_03 = 0;
+        gUnknown_203ACF0->field_02[0] = 0;
+        gUnknown_203ACF0->field_02[1] = 0;
         gUnknown_203ACF0->field_01++;
         // fallthrough
     case 16:
-        if (gUnknown_203ACF0->field_03 < 6)
+        if (gUnknown_203ACF0->field_02[1] < 6)
         {
-            if (!gUnknown_203ACF0->field_02)
+            if (gUnknown_203ACF0->field_02[0])
             {
-                gUnknown_203ACF0->field_02--;
+                sub_8105594(0, gUnknown_203ACF0->field_02[1]);
+                CopyBgTilemapBufferToVram(0);
+                gUnknown_203ACF0->field_02[0] = 4;
+                gUnknown_203ACF0->field_02[1]++;
             }
             else
             {
-                sub_8105594(0, gUnknown_203ACF0->field_03);
-                CopyBgTilemapBufferToVram(0);
-                gUnknown_203ACF0->field_02 = 4;
-                gUnknown_203ACF0->field_03++;
+                gUnknown_203ACF0->field_02[0]--;
             }
         }
         else
@@ -1112,7 +1108,7 @@ void sub_8103AC8(u8 taskId)
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(0);
             PlayCry2(gUnknown_203ACF0->field_5A, 0, 125, 10);
-            gUnknown_203ACF0->field_02 = 0;
+            gUnknown_203ACF0->field_02[0] = 0;
             gUnknown_203ACF0->field_01 = 17;
         }
         break;
@@ -1143,23 +1139,23 @@ void sub_8103AC8(u8 taskId)
         gUnknown_203ACF0->field_01 = 19;
         break;
     case 19:
-        gUnknown_203ACF0->field_02 = 0;
-        gUnknown_203ACF0->field_03 = 6;
+        gUnknown_203ACF0->field_02[0] = 0;
+        gUnknown_203ACF0->field_02[1] = 6;
         gUnknown_203ACF0->field_01++;
         // fallthrough
     case 20:
-        if (gUnknown_203ACF0->field_03)
+        if (gUnknown_203ACF0->field_02[1])
         {
-            if (gUnknown_203ACF0->field_02)
+            if (gUnknown_203ACF0->field_02[0])
             {
-                gUnknown_203ACF0->field_03--;
+                gUnknown_203ACF0->field_02[1]--;
                 FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
-                sub_8105594(0, gUnknown_203ACF0->field_03);
+                sub_8105594(0, gUnknown_203ACF0->field_02[1]);
                 CopyBgTilemapBufferToVram(0);
-                gUnknown_203ACF0->field_02 = 1;
+                gUnknown_203ACF0->field_02[0] = 1;
             }
             else
-                gUnknown_203ACF0->field_02--;
+                gUnknown_203ACF0->field_02[0]--;
         }
         else
         {
@@ -1224,7 +1220,7 @@ void sub_8103AC8(u8 taskId)
     }
 }
 
-u8 sub_8104234(void)
+static u8 sub_8104234(void)
 {
     struct ScrollArrowsTemplate template = gUnknown_84524B4;
     template.fullyUpThreshold = gUnknown_203ACF0->field_29;
@@ -1233,7 +1229,7 @@ u8 sub_8104234(void)
     return AddScrollIndicatorArrowPair(&template, &gUnknown_203ACF0->field_62);
 }
 
-int sub_8104284(void)
+static int sub_8104284(void)
 {
     switch (gSaveBlock2Ptr->optionsButtonMode)
     {
@@ -1252,13 +1248,13 @@ int sub_8104284(void)
             return 2;
         else
             return 0;
-    default:
     case OPTIONS_BUTTON_MODE_HELP:
+    default:
         return 0;
     }
 }
 
-void sub_81042EC(u8 taskId)
+static void sub_81042EC(u8 taskId)
 {
     switch (gUnknown_203ACF0->field_01)
     {
@@ -1384,18 +1380,15 @@ void sub_81042EC(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
-// HOLY HECK THIS FUNCTION NotLikeThis
-bool32 sub_8104664(u8 a0)
+static bool32 sub_8104664(u8 a0)
 {
-    u16 *r12;
-    u16 *r6;
     int r3;
+    u16 *r6, *r12;
 
     switch (gUnknown_203ACF0->field_42)
     {
-    case 0:
     default:
+    case 0:
         r12 = &gUnknown_203ACF0->field_36;
         r6 = &gUnknown_203ACF0->field_34;
         break;
@@ -1411,32 +1404,49 @@ bool32 sub_8104664(u8 a0)
         r6 = &gUnknown_203ACF0->field_3C;
         break;
     }
+
     r3 = *r12 + *r6;
     if (a0)
     {
         if (r3 == 0)
             return FALSE;
-        while (--r3 >= 0)
+
+        r3--;
+        while (r3 >= 0) //Should be while (--r3 >= 0) without the r3-- in the body or before the while at all, but this is needed to match.
         {
-            if ((((u32)gUnknown_203ACF0->field_44[r3].index) >> 16) & 1)
+            if ((gUnknown_203ACF0->field_44[r3].index >> 16) & 1)
+            {
                 break;
+            }
+            r3--;
         }
+
         if (r3 < 0)
+        {
             return FALSE;
+        }
     }
     else
     {
         if (r3 == gUnknown_203ACF0->field_48 - 1)
-            return FALSE;
-        while (++r3 < gUnknown_203ACF0->field_48)
         {
-            if ((((u32)gUnknown_203ACF0->field_44[r3].index) >> 16) & 1)
+            return FALSE;
+        }
+
+        r3++;
+        while (r3 < gUnknown_203ACF0->field_48) //Should be while (++r3 < gUnknown_203ACF0->field_48) without the r3++ in the body or before the while at all, but this is needed to match.
+        {
+            if ((gUnknown_203ACF0->field_44[r3].index >> 16) & 1)
                 break;
+            r3++;
         }
         if (r3 >= gUnknown_203ACF0->field_48)
+        {
             return FALSE;
+        }
     }
     gUnknown_203ACF0->field_30 = gUnknown_203ACF0->field_44[r3].index;
+
     if (gUnknown_203ACF0->field_48 > 9)
     {
         if (r3 < 4)
@@ -1444,10 +1454,10 @@ bool32 sub_8104664(u8 a0)
             *r12 = 0;
             *r6 = r3;
         }
-        else if (r3 >= gUnknown_203ACF0->field_48 - 4)
+        else if (r3 >= (gUnknown_203ACF0->field_48 - 4))
         {
-            *r12 = gUnknown_203ACF0->field_48 - 9;
-            *r6 = r3 + 9 - gUnknown_203ACF0->field_48;
+            *r12 = (gUnknown_203ACF0->field_48 - 9);
+            *r6 = r3 + 9 - (gUnknown_203ACF0->field_48);
         }
         else
         {
@@ -1457,201 +1467,11 @@ bool32 sub_8104664(u8 a0)
     }
     else
     {
-        *r12 = 0;
-        *r6 = r3;
-    }
-    return TRUE;
+		*r12 = 0;
+		*r6 = r3;
+	}
+	return TRUE;
 }
-#else
-NAKED
-bool32 sub_8104664(u8 a0)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r8\n"
-                "\tpush {r7}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tldr r0, _08104684 @ =gUnknown_203ACF0\n"
-                "\tldr r3, [r0]\n"
-                "\tadds r2, r3, 0\n"
-                "\tadds r2, 0x42\n"
-                "\tldrb r2, [r2]\n"
-                "\tmov r8, r0\n"
-                "\tcmp r2, 0x4\n"
-                "\tbgt _08104688\n"
-                "\tcmp r2, 0x1\n"
-                "\tbge _0810469C\n"
-                "\tb _0810468C\n"
-                "\t.align 2, 0\n"
-                "_08104684: .4byte gUnknown_203ACF0\n"
-                "_08104688:\n"
-                "\tcmp r2, 0x5\n"
-                "\tbeq _081046A8\n"
-                "_0810468C:\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tmovs r2, 0x36\n"
-                "\tadds r2, r0\n"
-                "\tmov r12, r2\n"
-                "\tadds r6, r0, 0\n"
-                "\tadds r6, 0x34\n"
-                "\tb _081046B2\n"
-                "_0810469C:\n"
-                "\tmovs r0, 0x3A\n"
-                "\tadds r0, r3\n"
-                "\tmov r12, r0\n"
-                "\tadds r6, r3, 0\n"
-                "\tadds r6, 0x38\n"
-                "\tb _081046B2\n"
-                "_081046A8:\n"
-                "\tmovs r1, 0x3E\n"
-                "\tadds r1, r3\n"
-                "\tmov r12, r1\n"
-                "\tadds r6, r3, 0\n"
-                "\tadds r6, 0x3C\n"
-                "_081046B2:\n"
-                "\tmov r2, r12\n"
-                "\tldrh r1, [r2]\n"
-                "\tldrh r0, [r6]\n"
-                "\tadds r3, r1, r0\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _08104700\n"
-                "\tcmp r3, 0\n"
-                "\tbeq _0810474C\n"
-                "\tsubs r3, 0x1\n"
-                "\tcmp r3, 0\n"
-                "\tblt _0810474C\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tldr r0, [r0, 0x44]\n"
-                "\tlsls r2, r3, 3\n"
-                "\tadds r0, r2, r0\n"
-                "\tldrh r0, [r0, 0x6]\n"
-                "\tmovs r1, 0x1\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _081046FA\n"
-                "\tmov r5, r8\n"
-                "\tmovs r4, 0x1\n"
-                "\tadds r1, r2, 0\n"
-                "_081046E2:\n"
-                "\tsubs r1, 0x8\n"
-                "\tsubs r3, 0x1\n"
-                "\tcmp r3, 0\n"
-                "\tblt _0810474C\n"
-                "\tldr r0, [r5]\n"
-                "\tldr r0, [r0, 0x44]\n"
-                "\tadds r0, r1, r0\n"
-                "\tldrh r0, [r0, 0x6]\n"
-                "\tands r0, r4\n"
-                "\tadds r2, r1, 0\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _081046E2\n"
-                "_081046FA:\n"
-                "\tcmp r3, 0\n"
-                "\tbge _08104750\n"
-                "\tb _0810474C\n"
-                "_08104700:\n"
-                "\tmov r2, r8\n"
-                "\tldr r5, [r2]\n"
-                "\tadds r0, r5, 0\n"
-                "\tadds r0, 0x48\n"
-                "\tldrh r4, [r0]\n"
-                "\tsubs r0, r4, 0x1\n"
-                "\tcmp r3, r0\n"
-                "\tbeq _0810474C\n"
-                "\tadds r3, 0x1\n"
-                "\tcmp r3, r4\n"
-                "\tbge _0810474C\n"
-                "\tldr r0, [r5, 0x44]\n"
-                "\tlsls r2, r3, 3\n"
-                "\tadds r0, r2, r0\n"
-                "\tldrh r0, [r0, 0x6]\n"
-                "\tmovs r1, 0x1\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _08104740\n"
-                "\tadds r1, r2, 0\n"
-                "\tmovs r7, 0x1\n"
-                "_0810472A:\n"
-                "\tadds r1, 0x8\n"
-                "\tadds r3, 0x1\n"
-                "\tcmp r3, r4\n"
-                "\tbge _0810474C\n"
-                "\tldr r0, [r5, 0x44]\n"
-                "\tadds r0, r1, r0\n"
-                "\tldrh r0, [r0, 0x6]\n"
-                "\tands r0, r7\n"
-                "\tadds r2, r1, 0\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0810472A\n"
-                "_08104740:\n"
-                "\tmov r1, r8\n"
-                "\tldr r0, [r1]\n"
-                "\tadds r0, 0x48\n"
-                "\tldrh r0, [r0]\n"
-                "\tcmp r3, r0\n"
-                "\tblt _08104750\n"
-                "_0810474C:\n"
-                "\tmovs r0, 0\n"
-                "\tb _081047A6\n"
-                "_08104750:\n"
-                "\tmov r0, r8\n"
-                "\tldr r1, [r0]\n"
-                "\tldr r0, [r1, 0x44]\n"
-                "\tadds r0, r2, r0\n"
-                "\tldr r0, [r0, 0x4]\n"
-                "\tstr r0, [r1, 0x30]\n"
-                "\tadds r1, 0x48\n"
-                "\tldrh r0, [r1]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbls _0810479C\n"
-                "\tcmp r3, 0x3\n"
-                "\tbgt _08104770\n"
-                "\tmovs r0, 0\n"
-                "\tmov r1, r12\n"
-                "\tstrh r0, [r1]\n"
-                "\tb _081047A2\n"
-                "_08104770:\n"
-                "\tldrh r1, [r1]\n"
-                "\tsubs r0, r1, 0x4\n"
-                "\tcmp r3, r0\n"
-                "\tblt _08104790\n"
-                "\tsubs r0, 0x5\n"
-                "\tmov r2, r12\n"
-                "\tstrh r0, [r2]\n"
-                "\tadds r1, r3, 0\n"
-                "\tadds r1, 0x9\n"
-                "\tmov r2, r8\n"
-                "\tldr r0, [r2]\n"
-                "\tadds r0, 0x48\n"
-                "\tldrh r0, [r0]\n"
-                "\tsubs r1, r0\n"
-                "\tstrh r1, [r6]\n"
-                "\tb _081047A4\n"
-                "_08104790:\n"
-                "\tsubs r0, r3, 0x4\n"
-                "\tmov r1, r12\n"
-                "\tstrh r0, [r1]\n"
-                "\tmovs r0, 0x4\n"
-                "\tstrh r0, [r6]\n"
-                "\tb _081047A4\n"
-                "_0810479C:\n"
-                "\tmovs r0, 0\n"
-                "\tmov r2, r12\n"
-                "\tstrh r0, [r2]\n"
-                "_081047A2:\n"
-                "\tstrh r3, [r6]\n"
-                "_081047A4:\n"
-                "\tmovs r0, 0x1\n"
-                "_081047A6:\n"
-                "\tpop {r3}\n"
-                "\tmov r8, r3\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif //NONMATCHING
 
 void sub_81047B0(u8 *windowId_p)
 {
@@ -1706,7 +1526,7 @@ void sub_8104880(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx)
     sub_81047C8(windowId, fontId, buff, x, y, colorIdx);
 }
 
-void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx)
+static void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx)
 {
     u8 buff[4];
     int i;
@@ -1794,7 +1614,7 @@ s8 sub_8104AB0(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecies)
     return retVal;
 }
 
-u16 sub_8104BBC(u8 caseId, bool8 whichDex)
+static u16 sub_8104BBC(u8 caseId, bool8 whichDex)
 {
     u16 count = 0;
     u16 i;
@@ -2024,28 +1844,28 @@ bool8 sub_81051F0(u8 a0)
     return FALSE;
 }
 
-bool8 sub_81052D0(u8 a0)
+static bool8 sub_81052D0(u8 a0)
 {
     u16 r4;
     if (IsNationalPokedexEnabled())
         r4 = gUnknown_84406E0[7];
     else
         r4 = gUnknown_84404C8[7];
-    switch (gUnknown_203ACF0->field_02)
+    switch (gUnknown_203ACF0->field_02[0])
     {
     case 0:
         gUnknown_203ACF0->field_5C = Alloc(3 * BG_SCREEN_SIZE);
         if (a0)
-            gUnknown_203ACF0->field_02 = 6;
+            gUnknown_203ACF0->field_02[0] = 6;
         else
-            gUnknown_203ACF0->field_02 = 2;
+            gUnknown_203ACF0->field_02[0] = 2;
         break;
     case 1:
         Free(gUnknown_203ACF0->field_5C);
         return TRUE;
     case 2:
         BeginNormalPaletteFade(0x00007FFF, 0, 0, 16, r4);
-        gUnknown_203ACF0->field_02++;
+        gUnknown_203ACF0->field_02[0]++;
         break;
     case 3:
         FillBgTilemapBufferRect_Palette0(3, 0x00C, 0, 0, 30, 20);
@@ -2054,7 +1874,7 @@ bool8 sub_81052D0(u8 a0)
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
-        gUnknown_203ACF0->field_02++;
+        gUnknown_203ACF0->field_02[0]++;
         break;
     case 4:
         BeginNormalPaletteFade(0x00007FFF, 0, 0, 0, r4);
@@ -2065,40 +1885,42 @@ bool8 sub_81052D0(u8 a0)
         FillBgTilemapBufferRect_Palette0(3, 0x00C, 0, 0, 30, 20);
         FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 32, 20);
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 32, 20);
-        gUnknown_203ACF0->field_03 = 0;
-        gUnknown_203ACF0->field_02++;
+        
+        gUnknown_203ACF0->field_02[1] = 0;
+        gUnknown_203ACF0->field_02[0]++;
         PlaySE(SE_BALL_TRAY_ENTER);
         break;
     case 5:
-        if (gUnknown_203ACF0->field_03 < 10)
+        if (gUnknown_203ACF0->field_02[1] < 10)
         {
-            sub_81051F0(gUnknown_203ACF0->field_03);
-            gUnknown_203ACF0->field_03++;
+            sub_81051F0(gUnknown_203ACF0->field_02[1]);
+            gUnknown_203ACF0->field_02[1]++;
         }
         else
         {
-            gUnknown_203ACF0->field_02 = 1;
+            gUnknown_203ACF0->field_02[0] = 1;
         }
         break;
     case 6:
         CpuFastCopy(GetBgTilemapBuffer(3), &gUnknown_203ACF0->field_5C[0 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
         CpuFastCopy(GetBgTilemapBuffer(2), &gUnknown_203ACF0->field_5C[1 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
         CpuFastCopy(GetBgTilemapBuffer(1), &gUnknown_203ACF0->field_5C[2 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
-        gUnknown_203ACF0->field_03 = 9;
-        gUnknown_203ACF0->field_02++;
+
+        gUnknown_203ACF0->field_02[1] = 9;
+        gUnknown_203ACF0->field_02[0]++;
         PlaySE(SE_BALL_TRAY_ENTER);
         break;
     case 7:
-        if (gUnknown_203ACF0->field_03 != 0)
+        if (gUnknown_203ACF0->field_02[1] != 0)
         {
-            sub_81051F0(gUnknown_203ACF0->field_03);
-            gUnknown_203ACF0->field_03--;
+            sub_81051F0(gUnknown_203ACF0->field_02[1]);
+            gUnknown_203ACF0->field_02[1]--;
         }
         else
         {
-            sub_81051F0(gUnknown_203ACF0->field_02);
+            sub_81051F0(gUnknown_203ACF0->field_02[0]);
             BeginNormalPaletteFade(0x00007FFF, 0, 16, 16, r4);
-            gUnknown_203ACF0->field_02++;
+            gUnknown_203ACF0->field_02[0]++;
         }
         break;
     case 8:
@@ -2107,12 +1929,12 @@ bool8 sub_81052D0(u8 a0)
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
-        gUnknown_203ACF0->field_02++;
+        gUnknown_203ACF0->field_02[0]++;
         break;
     case 9:
         gPaletteFade.bufferTransferDisabled = FALSE;
         BeginNormalPaletteFade(0x00007FFF, 0, 16, 0, r4);
-        gUnknown_203ACF0->field_02 = 1;
+        gUnknown_203ACF0->field_02[0] = 1;
         break;
     }
     return FALSE;

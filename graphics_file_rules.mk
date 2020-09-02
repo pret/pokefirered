@@ -483,10 +483,10 @@ $(SSANNEGFXDIR)/unk_8479A38.4bpp: %.4bpp: %.png
 $(ITEMPCGFXDIR)/unk_8E85090.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 82
 
-$(TITLESCREENGFXDIR)/unk_8ead608.4bpp: %.4bpp: %.png
+$(TITLESCREENGFXDIR)/firered/box_art_mon.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 135
 
-$(TITLESCREENGFXDIR)/unk_lg_8ead788.4bpp: %.4bpp: %.png
+$(TITLESCREENGFXDIR)/leafgreen/box_art_mon.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 123
 
 $(CREDITSGFXDIR)/unk_8EAE548.4bpp: %.4bpp: %.png

@@ -69,23 +69,23 @@ static bool32 IsSlashSpriteHidden(u8 spriteId);
 static void SpriteCallback_Slash(struct Sprite * sprite);
 
 // bg3
-static const u8 sBorderBgTiles[] = INCBIN_U8("graphics/title_screen/unk_83BF58C.4bpp.lz");
+static const u8 sBorderBgTiles[] = INCBIN_U8("graphics/title_screen/border_bg.4bpp.lz");
 #if defined(FIRERED)
-static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/unk_83BF5A8.bin.lz");
+static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/firered/border_bg.bin.lz");
 #elif defined(LEAFGREEN)
-static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/lg_border_bg.bin.lz");
+static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/leafgreen/border_bg.bin.lz");
 #endif
 
 //sprites
-static const u32 sSlashSpriteTiles[] = INCBIN_U32("graphics/title_screen/unk_83bf64c.4bpp.lz");
+static const u32 sSlashSpriteTiles[] = INCBIN_U32("graphics/title_screen/slash_sprite.4bpp.lz");
 #if defined(FIRERED)
-static const u16 sSlashSpritePals[] = INCBIN_U16("graphics/title_screen/unk_83bf77c.gbapal");
-static const u32 sFireSpriteTiles[] = INCBIN_U32("graphics/title_screen/unk_83bf79c.4bpp.lz");
-static const u32 sBlankFireSpriteTiles[] = INCBIN_U32("graphics/title_screen/unk_83bfa14.4bpp.lz");
+static const u16 sSlashSpritePals[] = INCBIN_U16("graphics/title_screen/firered/slash_sprite.gbapal");
+static const u32 sFireSpriteTiles[] = INCBIN_U32("graphics/title_screen/firered/fire_sprite.4bpp.lz");
+static const u32 sBlankFireSpriteTiles[] = INCBIN_U32("graphics/title_screen/firered/blank_fire_sprite.4bpp.lz");
 #elif defined(LEAFGREEN)
-static const u16 sSlashSpritePals[] = INCBIN_U16("graphics/title_screen/unk_lg_83bf764.gbapal");
-static const u32 sLeafSpriteTiles[] = INCBIN_U32("graphics/title_screen/unk_lg_83bf784.4bpp.lz");
-static const u32 sBlankLeafSpriteTiles[] = INCBIN_U32("graphics/title_screen/unk_lg_83bf89c.4bpp.lz");
+static const u16 sSlashSpritePals[] = INCBIN_U16("graphics/title_screen/leafgreen/slash_sprite.gbapal");
+static const u32 sLeafSpriteTiles[] = INCBIN_U32("graphics/title_screen/leafgreen/leaf_sprite.4bpp.lz");
+static const u32 sBlankLeafSpriteTiles[] = INCBIN_U32("graphics/title_screen/leafgreen/blank_leaf_sprite.4bpp.lz");
 #endif
 
 static const struct OamData sOamData_FlameOrLeaf = {

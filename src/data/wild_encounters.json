@@ -17284,7 +17284,7 @@
           }
         },
         {
-          "map": "FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE",
+          "map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE",
           "base_label": "sFourIslandIcefallCaveEntrance_LeafGreen",
           "land_mons": {
             "mons": [

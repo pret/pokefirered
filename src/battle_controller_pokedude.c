@@ -2434,133 +2434,28 @@ static void sub_8159998(void)
     }
 }
 
-#ifdef NONMATCHING
 static bool8 sub_8159AB8(void)
 {
     const struct Unk_84790E8 *r6 = gUnknown_8479198[gBattleStruct->field_96];
-    // why is address of unk_2 loaded first? 
-    const struct Unk_84790E8 *r12 = (const struct Unk_84790E8 *)gBattleBufferA[gActiveBattler];
+    const u16 * r12 = (const u16 *)&gBattleBufferA[gActiveBattler][2];
 
-    if (r12->unk_0 == r6[gBattleStruct->field_97].unk_0
-     && gActiveBattler == r6[gBattleStruct->field_97].unk_1
-     && (r12->unk_0 != 16 || r6[gBattleStruct->field_97].unk_2 == r12->unk_2))
+    if (gBattleBufferA[gActiveBattler][0] != r6[gBattleStruct->field_97].unk_0)
+        return FALSE;
+    if (gActiveBattler != r6[gBattleStruct->field_97].unk_1)
+        return FALSE;
+    if (gBattleBufferA[gActiveBattler][0] == 16 && r6[gBattleStruct->field_97].unk_2 != *r12)
+        return FALSE;
+    if (r6[gBattleStruct->field_97].unk_4 == NULL)
     {
-        // why is mem reloaded here? 
-        // asm("":::"memory");
-        if (r6[gBattleStruct->field_97].unk_4 != NULL)
-        {
-            gBattlerControllerFuncs[gActiveBattler] = r6[gBattleStruct->field_97].unk_4;
-            gUnknown_3005EE0[gActiveBattler][2] = 0;
-            gUnknown_3005EE0[gActiveBattler][3] = r6[gBattleStruct->field_97].unk_2;
-            ++gBattleStruct->field_97;
-            return TRUE;
-        }
-        ++gBattleStruct->field_97;
+        gBattleStruct->field_97++;
+        return FALSE;
     }
-    return FALSE;
+    gBattlerControllerFuncs[gActiveBattler] = r6[gBattleStruct->field_97].unk_4;
+    gUnknown_3005EE0[gActiveBattler][2] = 0;
+    gUnknown_3005EE0[gActiveBattler][3] = r6[gBattleStruct->field_97].unk_2;
+    gBattleStruct->field_97++;
+    return TRUE;
 }
-#else
-NAKED
-static bool8 sub_8159AB8(void)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        ldr r1, _08159B54 @ =gUnknown_8479198\n\
-        ldr r4, _08159B58 @ =gBattleStruct\n\
-        ldr r2, [r4]\n\
-        adds r0, r2, 0\n\
-        adds r0, 0x96\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 2\n\
-        adds r0, r1\n\
-        ldr r6, [r0]\n\
-        ldr r3, _08159B5C @ =gActiveBattler\n\
-        ldrb r5, [r3]\n\
-        lsls r1, r5, 9\n\
-        ldr r0, _08159B60 @ =gBattleBufferA + 2\n\
-        adds r7, r1, r0\n\
-        mov r12, r7\n\
-        subs r0, 0x2\n\
-        adds r1, r0\n\
-        adds r2, 0x97\n\
-        ldrb r0, [r2]\n\
-        lsls r0, 3\n\
-        adds r0, r6\n\
-        ldrb r1, [r1]\n\
-        adds r7, r4, 0\n\
-        adds r4, r3, 0\n\
-        ldrb r2, [r0]\n\
-        cmp r1, r2\n\
-        bne _08159B70\n\
-        ldrb r2, [r0, 0x1]\n\
-        cmp r5, r2\n\
-        bne _08159B70\n\
-        cmp r1, 0x10\n\
-        bne _08159B04\n\
-        ldrh r0, [r0, 0x2]\n\
-        mov r1, r12\n\
-        ldrh r1, [r1]\n\
-        cmp r0, r1\n\
-        bne _08159B70\n\
-    _08159B04:\n\
-        ldr r0, [r7]\n\
-        adds r3, r0, 0\n\
-        adds r3, 0x97\n\
-        ldrb r1, [r3]\n\
-        lsls r0, r1, 3\n\
-        adds r0, r6\n\
-        ldr r2, [r0, 0x4]\n\
-        cmp r2, 0\n\
-        beq _08159B6C\n\
-        ldr r1, _08159B64 @ =gBattlerControllerFuncs\n\
-        ldrb r0, [r4]\n\
-        lsls r0, 2\n\
-        adds r0, r1\n\
-        str r2, [r0]\n\
-        ldr r2, _08159B68 @ =gUnknown_3005EE0\n\
-        ldrb r0, [r4]\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        ldr r1, [r0]\n\
-        movs r0, 0\n\
-        strb r0, [r1, 0x2]\n\
-        ldrb r0, [r4]\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        ldr r1, [r0]\n\
-        ldr r0, [r7]\n\
-        adds r0, 0x97\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 3\n\
-        adds r0, r6\n\
-        ldrh r0, [r0, 0x2]\n\
-        strb r0, [r1, 0x3]\n\
-        ldr r1, [r7]\n\
-        adds r1, 0x97\n\
-        ldrb r0, [r1]\n\
-        adds r0, 0x1\n\
-        strb r0, [r1]\n\
-        movs r0, 0x1\n\
-        b _08159B72\n\
-        .align 2, 0\n\
-    _08159B54: .4byte gUnknown_8479198\n\
-    _08159B58: .4byte gBattleStruct\n\
-    _08159B5C: .4byte gActiveBattler\n\
-    _08159B60: .4byte gBattleBufferA + 2\n\
-    _08159B64: .4byte gBattlerControllerFuncs\n\
-    _08159B68: .4byte gUnknown_3005EE0\n\
-    _08159B6C:\n\
-        adds r0, r1, 0x1\n\
-        strb r0, [r3]\n\
-    _08159B70:\n\
-        movs r0, 0\n\
-    _08159B72:\n\
-        pop {r4-r7}\n\
-        pop {r1}\n\
-        bx r1\n\
-        ");
-}
-#endif
 
 static void sub_8159B78(void)
 {

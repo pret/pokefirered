@@ -1,6 +1,6 @@
 language: generic
 dist: bionic
-sudo: false
+os: linux
 env:
   global:
     - DEVKITPRO=$HOME
@@ -22,7 +22,7 @@ install:
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && sh build.sh && sh install.sh $TRAVIS_BUILD_DIR
   - popd
-matrix:
+jobs:
   include:
     - os: linux
       addons:

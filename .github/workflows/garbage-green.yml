@@ -1,0 +1,36 @@
+name: Garbage Green CI
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: ubuntu-18.04
+    runs-on: ubuntu-18.04
+    container: devkitpro/devkitarm:latest
+ 
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: install deps
+      run: |
+        apt-get update 
+        apt-get install -y --no-install-recommends gcc  
+        apt-get install -y --no-install-recommends g++ 
+        apt-get install -y --no-install-recommends libpng-dev 
+    - name: install agbcc
+      run: git clone https://github.com/pret/agbcc /opt/agbcc && cd /opt/agbcc && ./build.sh && ./install.sh $GITHUB_WORKSPACE
+    - name: install cmake
+      run: |
+        apt-get install -y cmake
+    - name: Build
+      run: |
+        make -j2

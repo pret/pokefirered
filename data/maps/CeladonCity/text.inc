@@ -112,3 +112,6 @@ CeladonCity_Text_SomeoneStoleSilphScope:: @ 81804E1
     .string "But I lost sight of him!\n"
     .string "Where'd he go?$"
 
+CeladonCity_Text_MonSprawledOutInSlumber:: 
+    .string "A POKéMON is sprawled out in\n"
+    .string "a deep and comfortable slumber.$"

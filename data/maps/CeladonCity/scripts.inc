@@ -1,4 +1,5 @@
 CeladonCity_MapScripts:: @ 8166C8F
+	map_script MAP_SCRIPT_ON_RESUME, CeladonCity_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, CeladonCity_OnTransition
 	.byte 0
 
@@ -100,4 +101,55 @@ CeladonCity_EventScript_PrizeExchangeSign:: @ 8166D63
 
 CeladonCity_EventScript_GameCornerSign:: @ 8166D6C
 	msgbox CeladonCity_Text_GameCornerSign, MSGBOX_SIGN
+	end
+
+CeladonCity_OnResume::
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, CeladonCity_EventScript_TryRemoveSnorlax
+	end
+
+CeladonCity_EventScript_TryRemoveSnorlax::
+	removeobject VAR_LAST_TALKED
+	return
+
+CeladonCity_EventScript_Snorlax::
+	lock
+	faceplayer
+	goto_if_unset FLAG_GOT_POKE_FLUTE, CeladonCity_EventScript_SnorlaxNoPokeFlute
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	msgbox Text_WantToUsePokeFlute, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CeladonCity_EventScript_DontUsePokeFlute
+	call EventScript_AwakenSnorlax
+	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
+	waitse
+	playmoncry SPECIES_SNORLAX, 2
+	delay 40
+	waitmoncry
+	setflag FLAG_HIDE_ROUTE_16_SNORLAX
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	dowildbattle
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	specialvar VAR_RESULT, GetBattleOutcome
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq CeladonCity_EventScript_FoughtSnorlax
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq CeladonCity_EventScript_FoughtSnorlax
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq CeladonCity_EventScript_FoughtSnorlax
+	release
+	end
+
+CeladonCity_EventScript_DontUsePokeFlute:: @ 816808D
+	release
+	end
+
+CeladonCity_EventScript_FoughtSnorlax:: @ 816808F
+	msgbox Text_SnorlaxReturnedToMountains
+	release
+	end
+
+CeladonCity_EventScript_SnorlaxNoPokeFlute:: @ 8168099
+	msgbox CeladonCity_Text_MonSprawledOutInSlumber
+	release
 	end

@@ -30,15 +30,15 @@ MtMoon_1F_EventScript_ItemPotion:: @ 81BE5E9
 	finditem ITEM_POTION
 	end
 
-MtMoon_1F_EventScript_ItemRareCandy:: @ 81BE5F6
-	finditem ITEM_RARE_CANDY
+MtMoon_1F_EventScript_ItemNugget:: @ 81BE5F6
+	finditem ITEM_NUGGET
 	end
 
 MtMoon_1F_EventScript_ItemEscapeRope:: @ 81BE603
 	finditem ITEM_ESCAPE_ROPE
 	end
 
-MtMoon_1F_EventScript_ItemNugget:: @ 81BE610
+MtMoon_1F_EventScript_ItemNugget2:: @ 81BE610
 	finditem ITEM_NUGGET
 	end
 
@@ -118,8 +118,8 @@ RocketHideout_B2F_EventScript_ItemSuperPotion:: @ 81BE707
 	finditem ITEM_SUPER_POTION
 	end
 
-RocketHideout_B3F_EventScript_ItemRareCandy:: @ 81BE714
-	finditem ITEM_RARE_CANDY
+RocketHideout_B3F_EventScript_ItemNugget:: @ 81BE714
+	finditem ITEM_NUGGET
 	end
 
 RocketHideout_B3F_EventScript_ItemTM21:: @ 81BE721
@@ -158,8 +158,8 @@ PokemonTower_5F_EventScript_ItemNugget:: @ 81BE789
 	finditem ITEM_NUGGET
 	end
 
-PokemonTower_6F_EventScript_ItemRareCandy:: @ 81BE796
-	finditem ITEM_RARE_CANDY
+PokemonTower_6F_EventScript_ItemNugget:: @ 81BE796
+	finditem ITEM_NUGGET
 	end
 
 PokemonTower_6F_EventScript_ItemXAccuracy:: @ 81BE7A3
@@ -274,8 +274,8 @@ SilphCo_10F_EventScript_ItemUltraBall:: @ 81BE902
 	finditem ITEM_ULTRA_BALL
 	end
 
-SilphCo_10F_EventScript_ItemRareCandy:: @ 81BE90F
-	finditem ITEM_RARE_CANDY
+SilphCo_10F_EventScript_ItemNugget:: @ 81BE90F
+	finditem ITEM_NUGGET
 	end
 
 PowerPlant_EventScript_ItemMaxPotion:: @ 81BE91C
@@ -334,8 +334,8 @@ PokemonMansion_B1F_EventScript_ItemSecretKey:: @ 81BE9C5
 	finditem ITEM_SECRET_KEY
 	end
 
-VictoryRoad_1F_EventScript_ItemRareCandy:: @ 81BE9D2
-	finditem ITEM_RARE_CANDY
+VictoryRoad_1F_EventScript_ItemNugget:: @ 81BE9D2
+	finditem ITEM_NUGGET
 	end
 
 VictoryRoad_1F_EventScript_ItemTM02:: @ 81BE9DF
@@ -398,8 +398,8 @@ CeruleanCave_B1F_EventScript_ItemUltraBall:: @ 81BEA95
 	finditem ITEM_ULTRA_BALL
 	end
 
-FuchsiaCity_WardensHouse_EventScript_ItemRareCandy:: @ 81BEAA2
-	finditem ITEM_RARE_CANDY
+FuchsiaCity_WardensHouse_EventScript_ItemNugget:: @ 81BEAA2
+	finditem ITEM_NUGGET
 	end
 
 TwoIsland_EventScript_ItemRevive:: @ 81BEAAF
@@ -658,8 +658,8 @@ FiveIsland_LostCave_Room13_EventScript_ItemMaxRevive:: @ 81BEDE2
 	finditem ITEM_MAX_REVIVE
 	end
 
-FiveIsland_LostCave_Room14_EventScript_ItemRareCandy:: @ 81BEDEF
-	finditem ITEM_RARE_CANDY
+FiveIsland_LostCave_Room14_EventScript_ItemNugget:: @ 81BEDEF
+	finditem ITEM_NUGGET
 	end
 
 SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch:: @ 81BEDFC

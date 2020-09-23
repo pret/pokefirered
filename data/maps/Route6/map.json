@@ -153,8 +153,8 @@
       "x": 19,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "HIDDEN_ITEM_ROUTE6_RARE_CANDY",
+      "item": "ITEM_NUGGET",
+      "flag": "HIDDEN_ITEM_ROUTE6_NUGGET",
       "quantity": 1,
       "underfoot": false
     }

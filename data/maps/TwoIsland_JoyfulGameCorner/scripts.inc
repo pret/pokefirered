@@ -10,7 +10,7 @@ TwoIsland_JoyfulGameCorner_MapScripts:: @ 81713D0
 	.byte 0
 
 TwoIsland_JoyfulGameCorner_OnTransition:: @ 81713E5
-	call_if_set FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER, TwoIsland_JoyfulGameCorner_EventScript_SetLostelleReturnedPos
+	call_if_set FLAG_GOT_NUGGET_FROM_JOYFUL_GAME_CORNER, TwoIsland_JoyfulGameCorner_EventScript_SetLostelleReturnedPos
 	end
 
 TwoIsland_JoyfulGameCorner_EventScript_SetLostelleReturnedPos:: @ 81713EF
@@ -146,7 +146,7 @@ TwoIsland_JoyfulGameCorner_EventScript_LostellesDaddy:: @ 817155F
 	faceplayer
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if_eq JoyfulGameCorner_EventScript_MinigameAttendant
-	goto_if_set FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER, TwoIsland_JoyfulGameCorner_EventScript_GetGameCornerRunning
+	goto_if_set FLAG_GOT_NUGGET_FROM_JOYFUL_GAME_CORNER, TwoIsland_JoyfulGameCorner_EventScript_GetGameCornerRunning
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	goto_if_eq TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite
 	msgbox TwoIsland_JoyfulGameCorner_Text_PleaseGoToThreeIsland
@@ -154,7 +154,7 @@ TwoIsland_JoyfulGameCorner_EventScript_LostellesDaddy:: @ 817155F
 	end
 
 TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite:: @ 817158A
-	goto_if_set FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE, TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone
+	goto_if_set FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_NUGGET, TwoIsland_JoyfulGameCorner_EventScript_ReceiveNugget
 	msgbox TwoIsland_JoyfulGameCorner_Text_ThisIsForMe
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	textcolor 3
@@ -165,16 +165,16 @@ TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite:: @ 817158A
 	call EventScript_RestorePrevTextColor
 	removeitem ITEM_METEORITE, 1
 	msgbox TwoIsland_JoyfulGameCorner_Text_OhThisIsFromBill
-	goto TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone
+	goto TwoIsland_JoyfulGameCorner_EventScript_ReceiveNugget
 	end
 
-TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone:: @ 81715C4
-	checkitemspace ITEM_MOON_STONE, 1
+TwoIsland_JoyfulGameCorner_EventScript_ReceiveNugget:: @ 81715C4
+	checkitemspace ITEM_NUGGET, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone
-	additem ITEM_MOON_STONE
-	setflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
-	msgreceiveditem TwoIsland_JoyfulGameCorner_Text_ReceivedMoonStoneFromLostellesDaddy, ITEM_MOON_STONE
+	goto_if_eq TwoIsland_JoyfulGameCorner_EventScript_NoRoomForNugget
+	additem ITEM_NUGGET
+	setflag FLAG_GOT_NUGGET_FROM_JOYFUL_GAME_CORNER
+	msgreceiveditem TwoIsland_JoyfulGameCorner_Text_ReceivedNuggetFromLostellesDaddy, ITEM_NUGGET
 	release
 	end
 
@@ -183,8 +183,8 @@ TwoIsland_JoyfulGameCorner_EventScript_GetGameCornerRunning:: @ 81715F5
 	release
 	end
 
-TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone:: @ 81715FF
-	setflag FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE
+TwoIsland_JoyfulGameCorner_EventScript_NoRoomForNugget:: @ 81715FF
+	setflag FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_NUGGET
 	msgbox TwoIsland_JoyfulGameCorner_Text_NotGoingToFitInBag
 	release
 	end

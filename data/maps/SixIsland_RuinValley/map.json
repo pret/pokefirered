@@ -239,8 +239,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SixIsland_RuinValley_EventScript_ItemSunStone",
-      "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE"
+      "script": "SixIsland_RuinValley_EventScript_ItemNugget",
+      "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_NUGGET"
     }
   ],
   "warp_events": [

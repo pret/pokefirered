@@ -225,8 +225,8 @@
       "x": 63,
       "y": 2,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "HIDDEN_ITEM_ROUTE9_RARE_CANDY",
+      "item": "ITEM_NUGGET",
+      "flag": "HIDDEN_ITEM_ROUTE9_NUGGET",
       "quantity": 1,
       "underfoot": false
     },

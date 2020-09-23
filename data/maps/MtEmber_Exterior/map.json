@@ -259,8 +259,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtEmber_Exterior_EventScript_ItemFireStone",
-      "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_FIRE_STONE"
+      "script": "MtEmber_Exterior_EventScript_ItemNugget",
+      "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_NUGGET"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -355,8 +355,8 @@
       "x": 18,
       "y": 17,
       "elevation": 0,
-      "item": "ITEM_FIRE_STONE",
-      "flag": "HIDDEN_ITEM_MT_EMBER_EXTERIOR_FIRE_STONE",
+      "item": "ITEM_NUGGET",
+      "flag": "HIDDEN_ITEM_MT_EMBER_EXTERIOR_NUGGET",
       "quantity": 1,
       "underfoot": false
     },

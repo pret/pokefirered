@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE2",
+      "direction": "down",
       "offset": 12,
-      "direction": "down"
+      "map": "MAP_ROUTE2"
     },
     {
-      "map": "MAP_ROUTE3",
+      "direction": "right",
       "offset": 10,
-      "direction": "right"
+      "map": "MAP_ROUTE3"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "in_connection": false,
       "x": 6,
       "y": 15,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN",
+      "in_connection": false,
       "x": 33,
       "y": 17,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "in_connection": false,
       "x": 21,
       "y": 28,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
+      "in_connection": false,
       "x": 33,
       "y": 27,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "in_connection": false,
       "x": 42,
       "y": 20,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 30,
       "y": 5,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "in_connection": false,
       "x": 46,
       "y": 20,
       "elevation": 3,

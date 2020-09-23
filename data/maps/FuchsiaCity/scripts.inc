@@ -137,3 +137,37 @@ FuchsiaCity_EventScript_OmanyteSign:: @ 8166EBE
 	erasemonpic
 	releaseall
 	end
+
+Script_Rando1:: 
+		lock
+		faceplayer
+		msgbox Text_Rando1, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Rando1:
+	.string "Wow look at that Boulder!\n"
+	.string "Koga must be feeling extra\l"
+	.string "paranoid.\p"
+	.string	"And the Safari Zone is blocked\n"
+	.string "too…\p"
+	.string "I think I saw Surge on Route 13.\n"
+	.string "Maybe he can help you out!$"
+	
+Script_Sabrina_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Sabrina_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Sabrina_Badge_Gate:
+	.string "Sorry, but because of the odd\n"
+	.string "events in the region we can only\l"
+	.string "let the most powerful trainers\l"
+	.string "into the Safari Zone.\p"
+	.string "What was that?\n" 
+	.string "What's powerful?\p"
+	.string "I don't know how about we say…\n"
+	.string "six badges?\p"
+	.string "Yeah six sounds right.$"

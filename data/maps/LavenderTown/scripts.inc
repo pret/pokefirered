@@ -46,3 +46,26 @@ LavenderTown_EventScript_VolunteerHouseSign:: @ 81668CA
 LavenderTown_EventScript_PokemonTowerSign:: @ 81668D3
 	msgbox LavenderTown_Text_PokemonTowerSign, MSGBOX_SIGN
 	end
+
+
+Script_Koga1_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Koga1_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Koga1_Badge_Gate:
+		.string "No one's allowed through. Koga's\n"
+		.string "orders.$"
+		
+Script_Koga2_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Koga2_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Koga2_Badge_Gate:
+		.string "Something unusual is happening on\n"
+		.string "this Route!$"	

@@ -153,3 +153,71 @@ CeladonCity_EventScript_SnorlaxNoPokeFlute:: @ 8168099
 	msgbox CeladonCity_Text_MonSprawledOutInSlumber
 	release
 	end
+	
+Script_Casino_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Casino_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Casino_Gate:
+		.string "Sorry kid, but there have been\n"
+		.string "numerous reports of players\l"
+		.string "receiving Pokemon that are\l"
+		.string "well below their expectations.\p"
+		.string "We have to investigate this for\n"
+		.string "now.$"
+		
+Script_Koga4_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Koga4_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Koga4_Badge_Gate:
+		.string "Koga gave us instructions to keep\n"
+		.string "the city on lockdown.\p"
+		.string "Move it along kid!$"
+		
+Script_Erika1_Badge_Gate:: 
+		lock
+		msgbox Text_Erika1_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Erika1_Badge_Gate:
+		.string "Who does Koga think he is?\n"
+		.string "This is not his jurisdiction!\p"
+		.string "If Celadon has a problem with its\n"
+		.string "Snorlax, Erika decides how to\l"
+		.string "handle it!$"
+		
+Script_Erika2_Badge_Gate:: 
+		lock
+		msgbox Text_Erika2_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Erika2_Badge_Gate:
+		.string "Erika is caught up dealing with\n"
+		.string "the Snorlax at our gym but once\l"
+		.string "she finds another strong trainer\l"
+		.string "to help her out she'll kick you\l"
+		.string "guys out of OUR town!$"
+		
+Script_Erika3_Badge_Gate:: 
+		lock
+		msgbox Text_Erika3_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Erika3_Badge_Gate:
+		.string "This is for the greater good of\n"
+		.string "Kanto!\p"
+		.string "There's some really strange things\n"
+		.string "happening, the Snorlax are just\l"
+		.string "the beginning!\p"
+		.string "We can't let anyone pass until we\n"
+		.string "figure out what the problem is!$"

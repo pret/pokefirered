@@ -15,24 +15,25 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_LAVENDER_TOWN",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_LAVENDER_TOWN"
     },
     {
-      "map": "MAP_ROUTE13",
+      "direction": "down",
       "offset": -48,
-      "direction": "down"
+      "map": "MAP_ROUTE13"
     },
     {
-      "map": "MAP_ROUTE11",
+      "direction": "left",
       "offset": 60,
-      "direction": "left"
+      "map": "MAP_ROUTE11"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 17,
       "y": 32,
       "elevation": 3,
@@ -46,6 +47,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 9,
       "y": 40,
       "elevation": 3,
@@ -59,6 +61,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 16,
       "y": 47,
       "elevation": 3,
@@ -72,6 +75,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 13,
       "y": 59,
       "elevation": 3,
@@ -85,6 +89,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SNORLAX",
+      "in_connection": false,
       "x": 14,
       "y": 70,
       "elevation": 3,
@@ -98,6 +103,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 13,
       "y": 92,
       "elevation": 3,
@@ -111,6 +117,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "in_connection": false,
       "x": 10,
       "y": 99,
       "elevation": 3,
@@ -124,6 +131,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 18,
       "y": 108,
       "elevation": 3,
@@ -137,6 +145,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 11,
       "y": 100,
       "elevation": 3,
@@ -150,6 +159,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 18,
       "y": 36,
       "elevation": 3,
@@ -163,6 +173,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 9,
       "y": 101,
       "elevation": 3,
@@ -176,6 +187,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
+      "in_connection": false,
       "x": 19,
       "y": 64,
       "elevation": 3,
@@ -189,6 +201,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN",
+      "in_connection": false,
       "x": 19,
       "y": 63,
       "elevation": 3,
@@ -202,6 +215,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 12,
       "y": 111,
       "elevation": 3,
@@ -212,6 +226,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 7,
+      "y": 70,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Koga3_Badge_Gate",
+      "flag": "FLAG_DEFEATED_KOGA"
     }
   ],
   "warp_events": [
@@ -244,7 +272,9 @@
       "dest_warp_id": 2
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

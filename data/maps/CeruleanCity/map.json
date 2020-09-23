@@ -15,29 +15,30 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE24",
+      "direction": "up",
       "offset": 12,
-      "direction": "up"
+      "map": "MAP_ROUTE24"
     },
     {
-      "map": "MAP_ROUTE5",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE5"
     },
     {
-      "map": "MAP_ROUTE4",
+      "direction": "left",
       "offset": 10,
-      "direction": "left"
+      "map": "MAP_ROUTE4"
     },
     {
-      "map": "MAP_ROUTE9",
+      "direction": "right",
       "offset": 10,
-      "direction": "right"
+      "map": "MAP_ROUTE9"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 31,
       "y": 12,
       "elevation": 3,
@@ -51,6 +52,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "in_connection": false,
       "x": 33,
       "y": 6,
       "elevation": 3,
@@ -64,6 +66,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
+      "in_connection": false,
       "x": 16,
       "y": 21,
       "elevation": 3,
@@ -77,6 +80,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
+      "in_connection": false,
       "x": 9,
       "y": 23,
       "elevation": 3,
@@ -90,6 +94,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SLOWBRO",
+      "in_connection": false,
       "x": 32,
       "y": 29,
       "elevation": 3,
@@ -103,6 +108,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "in_connection": false,
       "x": 33,
       "y": 29,
       "elevation": 3,
@@ -116,6 +122,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "in_connection": false,
       "x": 34,
       "y": 22,
       "elevation": 3,
@@ -129,6 +136,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
+      "in_connection": false,
       "x": 22,
       "y": 0,
       "elevation": 3,
@@ -142,6 +150,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 26,
       "y": 32,
       "elevation": 3,
@@ -154,21 +163,8 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "in_connection": true,
-      "x": 50,
-      "y": 18,
-      "elevation": 10,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "27",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "0x0",
-      "flag": "0"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "in_connection": false,
       "x": 12,
       "y": 30,
       "elevation": 3,
@@ -182,6 +178,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "in_connection": false,
       "x": 1,
       "y": 13,
       "elevation": 3,
@@ -192,6 +189,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeruleanCity_EventScript_CeruleanCaveGuard",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_GUARD"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "in_connection": false,
+      "x": 50,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Surge_Badge_Gate",
+      "flag": "FLAG_DEFEATED_LT_SURGE"
     }
   ],
   "warp_events": [

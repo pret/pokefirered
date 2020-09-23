@@ -1,21 +1,22 @@
 FuchsiaCity_Gym_Text_KogaIntro:: @ 819832E
-    .string "KOGA: Fwahahaha!\p"
-    .string "A mere child like you dares to\n"
-    .string "challenge me?\p"
-    .string "The very idea makes me shiver\n"
-    .string "with mirth!\p"
-    .string "Very well, I shall show you true\n"
-    .string "terror as a ninja master.\p"
-    .string "Poison brings steady doom.\n"
-    .string "Sleep renders foes helpless.\p"
-    .string "Despair to the creeping horror of\n"
-    .string "POISON-type POKéMON!{PLAY_BGM}{MUS_EXEYE}$"
+    .string "Open up Route 12?\n"
+	.string "With the way the Snorlax are\l"
+	.string "acting?\p"
+	.string "Am I the only one that sees the\n"
+	.string "bigger picture here?\p"
+	.string "Something is happening in Kanto.\n"
+	.string "If none of the other Gym leaders\l"
+	.string "are going to do something about it\l"
+	.string "then I guess I have to.\p"
+	.string "A Ditto?\n"
+	.string "There's no way a mere\l"
+	.string "child fought that rampaging\l"
+	.string "Snorlax in Celadon.\p"
+	.string "Have at you liar!{PLAY_BGM}{MUS_EXEYE}$"
 
 FuchsiaCity_Gym_Text_KogaDefeat:: @ 8198444
-    .string "Humph!\n"
-    .string "You have proven your worth!\p"
-    .string "Here!\n"
-    .string "Take the SOULBADGE!$"
+    .string "A... A Ditto?\n"
+    .string "That's it?$"
 
 FuchsiaCity_Gym_Text_KogaPostBattle:: @ 8198481
     .string "When afflicted by TOXIC, a POKéMON\n"
@@ -25,11 +26,8 @@ FuchsiaCity_Gym_Text_KogaPostBattle:: @ 8198481
     .string "It will surely terrorize foes!$"
 
 FuchsiaCity_Gym_Text_KogaExplainSoulBadge:: @ 819850E
-    .string "Now that you have the SOULBADGE,\n"
-    .string "the DEFENSE of your POKéMON rises.\p"
-    .string "It also lets you SURF outside of\n"
-    .string "battle.\p"
-    .string "Ah!\n"
+    .string "How shameful,\n"
+    .string "I'll call back my forces.\p"
     .string "Take this, too!$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga:: @ 819858F

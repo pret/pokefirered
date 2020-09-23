@@ -15,24 +15,25 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE19",
+      "direction": "down",
       "offset": 12,
-      "direction": "down"
+      "map": "MAP_ROUTE19"
     },
     {
-      "map": "MAP_ROUTE18",
+      "direction": "left",
       "offset": 10,
-      "direction": "left"
+      "map": "MAP_ROUTE18"
     },
     {
-      "map": "MAP_ROUTE15",
+      "direction": "right",
       "offset": 10,
-      "direction": "right"
+      "map": "MAP_ROUTE15"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "in_connection": false,
       "x": 37,
       "y": 17,
       "elevation": 3,
@@ -46,6 +47,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SLOWPOKE",
+      "in_connection": false,
       "x": 36,
       "y": 15,
       "elevation": 3,
@@ -59,6 +61,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_VOLTORB",
+      "in_connection": false,
       "x": 33,
       "y": 8,
       "elevation": 3,
@@ -72,6 +75,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "in_connection": false,
       "x": 33,
       "y": 11,
       "elevation": 3,
@@ -85,6 +89,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
+      "in_connection": false,
       "x": 39,
       "y": 8,
       "elevation": 3,
@@ -98,6 +103,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
+      "in_connection": false,
       "x": 14,
       "y": 15,
       "elevation": 3,
@@ -111,6 +117,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LAPRAS",
+      "in_connection": false,
       "x": 12,
       "y": 20,
       "elevation": 1,
@@ -124,6 +131,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "in_connection": false,
       "x": 36,
       "y": 20,
       "elevation": 3,
@@ -137,6 +145,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "in_connection": false,
       "x": 8,
       "y": 8,
       "elevation": 1,
@@ -150,6 +159,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_KANGASKHAN",
+      "in_connection": false,
       "x": 16,
       "y": 9,
       "elevation": 3,
@@ -163,6 +173,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 30,
       "y": 10,
       "elevation": 3,
@@ -176,6 +187,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 21,
       "y": 13,
       "elevation": 3,
@@ -189,6 +201,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 32,
       "y": 16,
       "elevation": 3,
@@ -202,6 +215,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 24,
       "y": 22,
       "elevation": 3,
@@ -215,6 +229,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
+      "in_connection": false,
       "x": 15,
       "y": 11,
       "elevation": 3,
@@ -228,6 +243,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "in_connection": false,
       "x": 40,
       "y": 6,
       "elevation": 3,
@@ -238,6 +254,48 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_Lass",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
+      "x": 9,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_StrengthBoulder",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
+      "x": 11,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Rando1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "in_connection": false,
+      "x": 24,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Sabrina_Badge_Gate",
+      "flag": "FLAG_DEFEATED_SABRINA"
     }
   ],
   "warp_events": [
@@ -319,7 +377,9 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

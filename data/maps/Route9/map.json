@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_CERULEAN_CITY",
+      "direction": "left",
       "offset": -10,
-      "direction": "left"
+      "map": "MAP_CERULEAN_CITY"
     },
     {
-      "map": "MAP_ROUTE10",
+      "direction": "right",
       "offset": 0,
-      "direction": "right"
+      "map": "MAP_ROUTE10"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
       "x": 14,
       "y": 10,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "in_connection": false,
       "x": 20,
       "y": 17,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "in_connection": false,
       "x": 61,
       "y": 16,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "in_connection": false,
       "x": 26,
       "y": 7,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
+      "in_connection": false,
       "x": 26,
       "y": 1,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
+      "in_connection": false,
       "x": 49,
       "y": 7,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "in_connection": false,
       "x": 53,
       "y": 2,
       "elevation": 3,
@@ -119,6 +126,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
       "x": 60,
       "y": 9,
       "elevation": 3,
@@ -132,6 +140,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "in_connection": false,
       "x": 36,
       "y": 6,
       "elevation": 3,
@@ -144,20 +153,8 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "x": 2,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EventScript_CutTree",
-      "flag": "FLAG_TEMP_12"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 12,
       "y": 17,
       "elevation": 3,
@@ -171,6 +168,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 65,
       "y": 17,
       "elevation": 3,
@@ -181,10 +179,28 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route9_EventScript_ItemBurnHeal",
       "flag": "FLAG_HIDE_ROUTE9_BURN_HEAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "in_connection": false,
+      "x": 2,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Surge_Badge_Gate",
+      "flag": "FLAG_DEFEATED_LT_SURGE"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

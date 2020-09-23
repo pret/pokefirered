@@ -61,3 +61,14 @@ Route12_EventScript_RouteSign:: @ 81680A3
 Route12_EventScript_FishingSign:: @ 81680AC
 	msgbox Route12_Text_SportfishingArea, MSGBOX_SIGN
 	end
+
+Script_Koga3_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Koga3_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Koga3_Badge_Gate:
+		.string "Koga has restricted all access to\n"
+		.string "this Route!$"

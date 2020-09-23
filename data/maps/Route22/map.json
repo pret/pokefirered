@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE23",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE23"
     },
     {
-      "map": "MAP_VIRIDIAN_CITY",
+      "direction": "right",
       "offset": -10,
-      "direction": "right"
+      "map": "MAP_VIRIDIAN_CITY"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
+      "in_connection": false,
       "x": 25,
       "y": 4,
       "elevation": 3,
@@ -38,6 +39,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_ROUTE_22_RIVAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "in_connection": false,
+      "x": 8,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Giovanni_Badge_Gate",
+      "flag": "FLAG_DEFEATED_LEADER_GIOVANNI"
     }
   ],
   "warp_events": [

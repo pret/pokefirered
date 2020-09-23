@@ -1,5 +1,6 @@
 #ifndef GUARD_EVENT_DATA_H
 #define GUARD_EVENT_DATA_H
+#define NUM_SOFT_CAPS 9
 
 #include "global.h"
 
@@ -59,5 +60,6 @@ void ResetMysteryEventVars(void);
 bool32 IsNationalPokedexEnabled(void);
 void sub_806E190(void);
 void ClearTempFieldEventData(void);
-
+extern const u16 sLevelCapFlags[NUM_SOFT_CAPS];
+extern const u16 sLevelCaps[NUM_SOFT_CAPS];
 #endif // GUARD_EVENT_DATA_H

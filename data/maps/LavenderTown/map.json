@@ -15,24 +15,25 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE10",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE10"
     },
     {
-      "map": "MAP_ROUTE12",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE12"
     },
     {
-      "map": "MAP_ROUTE8",
+      "direction": "left",
       "offset": 0,
-      "direction": "left"
+      "map": "MAP_ROUTE8"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "in_connection": false,
       "x": 19,
       "y": 10,
       "elevation": 3,
@@ -46,6 +47,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "in_connection": false,
       "x": 12,
       "y": 12,
       "elevation": 3,
@@ -59,6 +61,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "in_connection": false,
       "x": 10,
       "y": 7,
       "elevation": 3,
@@ -69,6 +72,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LavenderTown_EventScript_Boy",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 11,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Koga1_Badge_Gate",
+      "flag": "FLAG_DEFEATED_KOGA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 12,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Koga2_Badge_Gate",
+      "flag": "FLAG_DEFEATED_KOGA"
     }
   ],
   "warp_events": [
@@ -115,7 +146,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

@@ -247,3 +247,17 @@ Route22_Movement_LateRivalExit:: @ 81684DA
 Route22_EventScript_LeagueGateSign:: @ 81684E2
 	msgbox Route22_Text_LeagueGateSign, MSGBOX_SIGN
 	end
+
+Script_Giovanni_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Giovanni_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Giovanni_Badge_Gate:
+	.string "The boss told me to not let\n"
+	.string "anyone through.\p"
+	.string "I hope he lets me leave soon\n"
+	.string "though, I'm kind of hungry.$"
+	

@@ -1,7 +1,4 @@
 CeladonCity_Gym_Text_ErikaIntro:: @ 8197114
-    .string "Hello…\n"
-    .string "Lovely weather, isn't it?\l"
-    .string "It's so pleasant…\p"
     .string "…Oh, dear…\n"
     .string "I must have dozed off. Welcome.\p"
     .string "My name is ERIKA.\n"
@@ -10,17 +7,18 @@ CeladonCity_Gym_Text_ErikaIntro:: @ 8197114
     .string "flower arranging.\p"
     .string "My POKéMON are solely of the\n"
     .string "GRASS type.\p"
-    .string "…Oh, I'm sorry, I had no idea that\n"
-    .string "you wished to challenge me.\p"
-    .string "Very well, but I shall not lose.{PLAY_BGM MUS_EXEYE}$"
+	.string "Thanks for taking care of the\n"
+	.string "Snorlax!\p" 
+	.string "You seem like a really strong\n"
+	.string "trainer.\p"
+	.string "Maybe you could help me deal with\n"
+	.string "Koga?\p"
+    .string "I won't hold back though!{PLAY_BGM MUS_EXEYE}$"
 
 CeladonCity_Gym_Text_ErikaDefeat:: @ 8197260
-    .string "Oh!\n"
-    .string "I concede defeat.\l"
-    .string "You are remarkably strong.\p"
-    .string "I must confer on you the\n"
-    .string "RAINBOWBADGE.$"
-
+    .string "You really are a skilled trainer!\n"
+	.string "Let me clear the path to Fuchsia\l"
+	.string "for you!$"
 CeladonCity_Gym_Text_ErikaPostBattle:: @ 81972B8
     .string "You are cataloging POKéMON?\n"
     .string "I must say I'm impressed.\p"

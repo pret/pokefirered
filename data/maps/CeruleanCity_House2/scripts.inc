@@ -21,3 +21,16 @@ CeruleanCity_House2_EventScript_Lass:: @ 816A995
 CeruleanCity_House2_EventScript_WallHole:: @ 816A99E
 	msgbox CeruleanCity_House2_Text_TeamRocketLeftWayOut, MSGBOX_SIGN
 	end
+
+Script_Misty_Badge_Gate:: 
+		lock
+		faceplayer
+		msgbox Text_Misty_Badge_Gate, MSGBOX_DEFAULT
+		release
+		end
+		
+Text_Misty_Badge_Gate:
+	.string "Hey kid back off, this is a crime\n"
+	.string "scene for crying out loud!\l"
+	.string "Don't you have a gym leader to\l"
+	.string "defeat or something?$"

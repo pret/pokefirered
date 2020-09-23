@@ -15,30 +15,25 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_CERULEAN_CITY",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_CERULEAN_CITY"
     },
     {
-      "map": "MAP_SAFFRON_CITY_CONNECTION",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_SAFFRON_CITY_CONNECTION"
     }
   ],
-  "object_events": [],
+  "object_events": [
+
+  ],
   "warp_events": [
     {
       "x": 31,
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_UNDERGROUND_PATH_NORTH_ENTRANCE",
-      "dest_warp_id": 1
-    },
-    {
-      "x": 23,
-      "y": 25,
-      "elevation": 0,
-      "dest_map": "MAP_ROUTE5_POKEMON_DAY_CARE",
       "dest_warp_id": 1
     },
     {
@@ -56,7 +51,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
@@ -65,6 +62,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route5_EventScript_UndergroundPathSign"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Daycare_Sign1"
     }
   ]
 }

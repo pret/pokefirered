@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE16",
       "direction": "left",
-      "offset": 10
+      "offset": 10,
+      "map": "MAP_ROUTE16"
     },
     {
-      "map": "MAP_ROUTE7",
       "direction": "right",
-      "offset": 10
+      "offset": 10,
+      "map": "MAP_ROUTE7"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "in_connection": false,
       "x": 48,
       "y": 15,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "in_connection": false,
       "x": 38,
       "y": 14,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLIWRATH",
+      "in_connection": false,
       "x": 36,
       "y": 14,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "in_connection": false,
       "x": 11,
       "y": 18,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "in_connection": false,
       "x": 18,
       "y": 22,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "in_connection": false,
       "x": 30,
       "y": 24,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
+      "in_connection": false,
       "x": 26,
       "y": 19,
       "elevation": 3,
@@ -119,6 +126,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "in_connection": false,
       "x": 38,
       "y": 31,
       "elevation": 3,
@@ -132,6 +140,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "in_connection": false,
       "x": 9,
       "y": 30,
       "elevation": 3,
@@ -145,6 +154,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 52,
       "y": 22,
       "elevation": 3,
@@ -158,6 +168,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 40,
       "y": 35,
       "elevation": 0,
@@ -171,6 +182,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "in_connection": false,
       "x": 25,
       "y": 10,
       "elevation": 3,
@@ -198,6 +210,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -211,6 +224,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "in_connection": false,
       "x": 47,
       "y": 24,
       "elevation": 3,
@@ -235,6 +249,118 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_EventScript_Snorlax",
       "flag": "FLAG_HIDE_ROUTE_16_SNORLAX"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
+      "x": 39,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Casino_Gate",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 30,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Koga4_Badge_Gate",
+      "flag": "FLAG_DEFEATED_KOGA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "in_connection": false,
+      "x": 3,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Erika1_Badge_Gate",
+      "flag": "FLAG_DEFEATED_ERIKA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
+      "x": 3,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Erika2_Badge_Gate",
+      "flag": "FLAG_DEFEATED_ERIKA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 3,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Script_Erika3_Badge_Gate",
+      "flag": "FLAG_DEFEATED_ERIKA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 2,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_DEFEATED_ERIKA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 2,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_DEFEATED_ERIKA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
+      "x": 2,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_DEFEATED_ERIKA"
     }
   ],
   "warp_events": [
@@ -330,7 +456,9 @@
       "dest_warp_id": 5
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

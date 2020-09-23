@@ -308,6 +308,15 @@ static void atkF5_removeattackerstatus1(void);
 static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
 
+const u16 sLevelCapFlags[NUM_SOFT_CAPS] =
+{
+    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
+	FLAG_DEFEATED_LEADER_GIOVANNI,
+};
+
+const u16 sLevelCaps[NUM_SOFT_CAPS] = { 15, 22, 25, 30, 36, 44, 48, 51, 61 };
+const double sLevelCapReduction[7] = { .5, .33, .25, .20, .15, .10, .05 };
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
     atk00_attackcanceler,
@@ -3056,6 +3065,62 @@ static void atk22_jumpiftype(void)
         gBattlescriptCurrInstr += 7;
 }
 
+u8 GetTeamLevel(void)
+{
+    u8 i;
+    u16 partyLevel = 0;
+    u16 threshold = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+            partyLevel += gPlayerParty[i].level;
+        else
+            break;
+    }
+    partyLevel /= i;
+
+    threshold = partyLevel * .8;
+    partyLevel = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            if (gPlayerParty[i].level >= threshold)
+                partyLevel += gPlayerParty[i].level;
+        }
+        else
+            break;
+    }
+    partyLevel /= i;
+
+    return partyLevel;
+}
+
+double GetPkmnExpMultiplier(u8 level)
+{
+    u8 i;
+    double lvlCapMultiplier = 1.0;
+    u8 levelDiff;
+    s8 avgDiff;
+
+    // multiply the usual exp yield by the soft cap multiplier
+    for (i = 0; i < NUM_SOFT_CAPS; i++)
+    {
+        if (!FlagGet(sLevelCapFlags[i]) && level >= sLevelCaps[i])
+        {
+            levelDiff = level - sLevelCaps[i];
+            if (levelDiff > 6)
+                levelDiff = 6;
+            lvlCapMultiplier = 0;
+            break;
+        }
+    }
+ 
+    return lvlCapMultiplier;
+}
+
 static void atk23_getexp(void)
 {
     u16 item;
@@ -3161,12 +3226,13 @@ static void atk23_getexp(void)
                 }
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
                 {
-                    if (gBattleStruct->sentInPokes & 1)
-                        gBattleMoveDamage = *exp;
+                    double expMultiplier = GetPkmnExpMultiplier(gPlayerParty[gBattleStruct->expGetterMonId].level);
+					if (gBattleStruct->sentInPokes & 1)
+                        gBattleMoveDamage = *exp * expMultiplier;
                     else
                         gBattleMoveDamage = 0;
                     if (holdEffect == HOLD_EFFECT_EXP_SHARE)
-                        gBattleMoveDamage += gExpShareExp;
+                        gBattleMoveDamage += gExpShareExp * expMultiplier;
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)

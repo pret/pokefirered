@@ -168,8 +168,8 @@
       "x": 2,
       "y": 21,
       "elevation": 0,
-      "item": "ITEM_MOON_STONE",
-      "flag": "HIDDEN_ITEM_POKEMON_MANSION_1F_MOON_STONE",
+      "item": "ITEM_NUGGET",
+      "flag": "HIDDEN_ITEM_POKEMON_MANSION_1F_NUGGET",
       "quantity": 1,
       "underfoot": false
     }

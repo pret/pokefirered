@@ -38,8 +38,8 @@ MtMoon_1F_EventScript_ItemEscapeRope:: @ 81BE603
 	finditem ITEM_ESCAPE_ROPE
 	end
 
-MtMoon_1F_EventScript_ItemMoonStone:: @ 81BE610
-	finditem ITEM_MOON_STONE
+MtMoon_1F_EventScript_ItemNugget:: @ 81BE610
+	finditem ITEM_NUGGET
 	end
 
 MtMoon_B2F_EventScript_ItemStarPiece:: @ 81BE61D
@@ -106,8 +106,8 @@ RocketHideout_B2F_EventScript_ItemXSpeed:: @ 81BE6E0
 	finditem ITEM_X_SPEED
 	end
 
-RocketHideout_B2F_EventScript_ItemMoonStone:: @ 81BE6ED
-	finditem ITEM_MOON_STONE
+RocketHideout_B2F_EventScript_ItemNugget:: @ 81BE6ED
+	finditem ITEM_NUGGET
 	end
 
 RocketHideout_B2F_EventScript_ItemTM12:: @ 81BE6FA
@@ -194,8 +194,8 @@ SafariZone_East_EventScript_ItemTM11:: @ 81BE7FE
 	finditem ITEM_TM11
 	end
 
-SafariZone_East_EventScript_ItemLeafStone:: @ 81BE80B
-	finditem ITEM_LEAF_STONE
+SafariZone_East_EventScript_ItemNugget:: @ 81BE80B
+	finditem ITEM_NUGGET
 	end
 
 SafariZone_North_EventScript_ItemProtein:: @ 81BE818
@@ -290,8 +290,8 @@ PowerPlant_EventScript_ItemTM25:: @ 81BE936
 	finditem ITEM_TM25
 	end
 
-PowerPlant_EventScript_ItemThunderStone:: @ 81BE943
-	finditem ITEM_THUNDER_STONE
+PowerPlant_EventScript_ItemNugget:: @ 81BE943
+	finditem ITEM_NUGGET
 	end
 
 PowerPlant_EventScript_ItemElixir:: @ 81BE950
@@ -502,8 +502,8 @@ SeafoamIslands_1F_EventScript_ItemIceHeal:: @ 81BEBE7
 	finditem ITEM_ICE_HEAL
 	end
 
-SeafoamIslands_B1F_EventScript_ItemWaterStone:: @ 81BEBF4
-	finditem ITEM_WATER_STONE
+SeafoamIslands_B1F_EventScript_ItemNugget:: @ 81BEBF4
+	finditem ITEM_NUGGET
 	end
 
 SeafoamIslands_B1F_EventScript_ItemRevive:: @ 81BEC01
@@ -570,8 +570,8 @@ SixIsland_RuinValley_EventScript_ItemHPUp:: @ 81BECC4
 	finditem ITEM_HP_UP
 	end
 
-SixIsland_RuinValley_EventScript_ItemSunStone:: @ 81BECD1
-	finditem ITEM_SUN_STONE
+SixIsland_RuinValley_EventScript_ItemNugget:: @ 81BECD1
+	finditem ITEM_NUGGET
 	end
 
 SevenIsland_SevaultCanyon_EventScript_ItemKingsRock:: @ 81BECDE
@@ -602,8 +602,8 @@ MtEmber_Exterior_EventScript_ItemUltraBall:: @ 81BED2C
 	finditem ITEM_ULTRA_BALL
 	end
 
-MtEmber_Exterior_EventScript_ItemFireStone:: @ 81BED39
-	finditem ITEM_FIRE_STONE
+MtEmber_Exterior_EventScript_ItemNugget:: @ 81BED39
+	finditem ITEM_NUGGET
 	end
 
 MtEmber_Exterior_EventScript_ItemDireHit:: @ 81BED46

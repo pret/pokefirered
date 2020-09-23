@@ -359,7 +359,7 @@
 #define FLAG_HIDE_MT_MOON_1F_POTION                             0x15B
 #define FLAG_HIDE_MT_MOON_1F_RARE_CANDY                         0x15C
 #define FLAG_HIDE_MT_MOON_1F_ESCAPE_ROPE                        0x15D
-#define FLAG_HIDE_MT_MOON_1F_MOON_STONE                         0x15E
+#define FLAG_HIDE_MT_MOON_1F_NUGGET                         0x15E
 #define FLAG_HIDE_MT_MOON_B2F_STAR_PIECE                        0x15F
 #define FLAG_HIDE_MT_MOON_B2F_TM46                              0x160
 #define FLAG_HIDE_ROUTE4_TM05                                   0x161
@@ -376,7 +376,7 @@
 #define FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE                0x16C
 #define FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION               0x16D
 #define FLAG_HIDE_ROCKET_HIDEOUT_B2F_X_SPEED                    0x16E
-#define FLAG_HIDE_ROCKET_HIDEOUT_B2F_MOON_STONE                 0x16F
+#define FLAG_HIDE_ROCKET_HIDEOUT_B2F_NUGGET                 0x16F
 #define FLAG_HIDE_ROCKET_HIDEOUT_B2F_TM12                       0x170
 #define FLAG_HIDE_ROCKET_HIDEOUT_B2F_SUPER_POTION               0x171
 #define FLAG_HIDE_ROCKET_HIDEOUT_B3F_RARE_CANDY                 0x172
@@ -398,7 +398,7 @@
 #define FLAG_HIDE_SAFARI_ZONE_EAST_MAX_POTION                   0x182
 #define FLAG_HIDE_SAFARI_ZONE_EAST_FULL_RESTORE                 0x183
 #define FLAG_HIDE_SAFARI_ZONE_EAST_TM11                         0x184
-#define FLAG_HIDE_SAFARI_ZONE_EAST_LEAF_STONE                   0x185
+#define FLAG_HIDE_SAFARI_ZONE_EAST_NUGGET                   0x185
 #define FLAG_HIDE_SAFARI_ZONE_NORTH_PROTEIN                     0x186
 #define FLAG_HIDE_SAFARI_ZONE_NORTH_TM47                        0x187
 #define FLAG_HIDE_SAFARI_ZONE_WEST_TM32                         0x188
@@ -422,7 +422,7 @@
 #define FLAG_HIDE_POWER_PLANT_MAX_POTION                        0x19A
 #define FLAG_HIDE_POWER_PLANT_TM17                              0x19B
 #define FLAG_HIDE_POWER_PLANT_TM25                              0x19C
-#define FLAG_HIDE_POWER_PLANT_THUNDER_STONE                     0x19D
+#define FLAG_HIDE_POWER_PLANT_NUGGET                     0x19D
 #define FLAG_HIDE_POWER_PLANT_ELIXIR                            0x19E
 #define FLAG_HIDE_POKEMON_MANSION_1F_CARBOS                     0x19F
 #define FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE                0x1A0
@@ -478,7 +478,7 @@
 #define FLAG_HIDE_ROCKET_HIDEOUT_B3F_BLACK_GLASSES              0x1D2
 #define FLAG_HIDE_SAFARI_ZONE_NORTH_QUICK_CLAW                  0x1D3
 #define FLAG_HIDE_SEAFOAM_ISLANDS_1F_ICE_HEAL                   0x1D4
-#define FLAG_HIDE_SEAFOAM_ISLANDS_B1F_WATER_STONE               0x1D5
+#define FLAG_HIDE_SEAFOAM_ISLANDS_B1F_NUGGET               0x1D5
 #define FLAG_HIDE_SEAFOAM_ISLANDS_B1F_REVIVE                    0x1D6
 #define FLAG_HIDE_SEAFOAM_ISLANDS_B2F_BIG_PEARL                 0x1D7
 #define FLAG_HIDE_SEAFOAM_ISLANDS_B4F_ULTRA_BALL                0x1D8
@@ -495,7 +495,7 @@
 #define FLAG_HIDE_SIX_ISLAND_WATER_PATH_DRAGON_SCALE            0x1E3
 #define FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE           0x1E4
 #define FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP                  0x1E5
-#define FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE              0x1E6
+#define FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_NUGGET              0x1E6
 #define FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_KINGS_ROCK        0x1E7
 #define FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_MAX_ELIXIR        0x1E8
 #define FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_NUGGET            0x1E9
@@ -503,7 +503,7 @@
 #define FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_FULL_HEAL           0x1EB
 #define FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ELIXIR          0x1EC
 #define FLAG_HIDE_MT_EMBER_EXTERIOR_ULTRA_BALL                  0x1ED
-#define FLAG_HIDE_MT_EMBER_EXTERIOR_FIRE_STONE                  0x1EE
+#define FLAG_HIDE_MT_EMBER_EXTERIOR_NUGGET                  0x1EE
 #define FLAG_HIDE_MT_EMBER_EXTERIOR_DIRE_HIT                    0x1EF
 #define FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_ULTRA_BALL        0x1F0
 #define FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_HM07              0x1F1
@@ -777,10 +777,10 @@
 #define FLAG_TALKED_TO_TEA_LADY_AFTER_HOF                0x2F8
 #define FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION            0x2F9
 #define FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE                0x2FA
-#define FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER      0x2FB
+#define FLAG_GOT_NUGGET_FROM_JOYFUL_GAME_CORNER      0x2FB
 #define FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER 0x2FC
 #define FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE              0x2FD
-#define FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE   0x2FE
+#define FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_NUGGET   0x2FE
 #define FLAG_OAKS_RATING_IS_VIA_PC                       0x2FF
 
 // Unused?
@@ -1022,7 +1022,7 @@
 
 #define HIDDEN_ITEM_VIRIDIAN_FOREST_POTION                              0
 #define HIDDEN_ITEM_VIRIDIAN_FOREST_ANTIDOTE                            1
-#define HIDDEN_ITEM_MT_MOON_B2F_MOON_STONE                              2
+#define HIDDEN_ITEM_MT_MOON_B2F_NUGGET                              2
 #define HIDDEN_ITEM_MT_MOON_B2F_ETHER                                   3
 #define HIDDEN_ITEM_ROUTE25_ELIXIR                                      4
 #define HIDDEN_ITEM_ROUTE25_ETHER                                       5
@@ -1042,16 +1042,16 @@
 #define HIDDEN_ITEM_ROUTE17_PP_UP                                      19
 #define HIDDEN_ITEM_ROUTE17_MAX_REVIVE                                 20
 #define HIDDEN_ITEM_ROUTE17_MAX_ELIXIR                                 21
-#define HIDDEN_ITEM_SAFARI_ZONE_CENTER_LEAF_STONE                      22
+#define HIDDEN_ITEM_SAFARI_ZONE_CENTER_NUGGET                      22
 #define HIDDEN_ITEM_SAFARI_ZONE_WEST_REVIVE                            23
 #define HIDDEN_ITEM_SILPH_CO_5F_ELIXIR                                 24
 #define HIDDEN_ITEM_SILPH_CO_9F_MAX_POTION                             25
 #define HIDDEN_ITEM_SAFFRON_CITY_COPYCATS_HOUSE_2F_NUGGET              26
 #define HIDDEN_ITEM_POWER_PLANT_MAX_ELIXIR                             27
-#define HIDDEN_ITEM_POWER_PLANT_THUNDER_STONE                          28
+#define HIDDEN_ITEM_POWER_PLANT_NUGGET                          28
 #define HIDDEN_ITEM_SEAFOAM_ISLANDS_B3F_NUGGET                         29
-#define HIDDEN_ITEM_SEAFOAM_ISLANDS_B4F_WATER_STONE                    30
-#define HIDDEN_ITEM_POKEMON_MANSION_1F_MOON_STONE                      31
+#define HIDDEN_ITEM_SEAFOAM_ISLANDS_B4F_NUGGET                    30
+#define HIDDEN_ITEM_POKEMON_MANSION_1F_NUGGET                      31
 #define HIDDEN_ITEM_POKEMON_MANSION_3F_RARE_CANDY                      32
 #define HIDDEN_ITEM_POKEMON_MANSION_B1F_ELIXIR                         33
 #define HIDDEN_ITEM_ROUTE23_FULL_RESTORE                               34
@@ -1178,7 +1178,7 @@
 #define HIDDEN_ITEM_ROUTE23_MAX_ELIXIR                                155
 #define HIDDEN_ITEM_ROUTE4_RAZZ_BERRY                                 156
 #define HIDDEN_ITEM_ROUTE14_PINAP_BERRY                               157
-#define HIDDEN_ITEM_MT_EMBER_EXTERIOR_FIRE_STONE                      158
+#define HIDDEN_ITEM_MT_EMBER_EXTERIOR_NUGGET                      158
 #define HIDDEN_ITEM_POKEMON_TOWER_7F_SOOTHE_BELL                      159
 #define HIDDEN_ITEM_NAVEL_ROCK_SUMMIT_SACRED_ASH                      160
 #define HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_PP_MAX                      161

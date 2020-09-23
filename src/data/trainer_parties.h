@@ -6069,7 +6069,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_823C4D0[] = {
         .lvl = 52,
         .species = SPECIES_DEWGONG,
         .heldItem = ITEM_NONE,
-        .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_HAIL, MOVE_SAFEGUARD},
+        .moves = {MOVE_ICE_BEAM, MOVE_SURF_TRAINER, MOVE_HAIL, MOVE_SAFEGUARD},
     },
     {
         .iv = 250,
@@ -6083,7 +6083,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_823C4D0[] = {
         .lvl = 52,
         .species = SPECIES_SLOWBRO,
         .heldItem = ITEM_NONE,
-        .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_AMNESIA, MOVE_YAWN},
+        .moves = {MOVE_ICE_BEAM, MOVE_SURF_TRAINER, MOVE_AMNESIA, MOVE_YAWN},
     },
     {
         .iv = 250,
@@ -6097,7 +6097,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_823C4D0[] = {
         .lvl = 54,
         .species = SPECIES_LAPRAS,
         .heldItem = ITEM_SITRUS_BERRY,
-        .moves = {MOVE_CONFUSE_RAY, MOVE_ICE_BEAM, MOVE_SURF, MOVE_BODY_SLAM},
+        .moves = {MOVE_CONFUSE_RAY, MOVE_ICE_BEAM, MOVE_SURF_TRAINER, MOVE_BODY_SLAM},
     },
 };
 
@@ -11262,14 +11262,14 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_823E2E8[] = {
         .lvl = 64,
         .species = SPECIES_DEWGONG,
         .heldItem = ITEM_NONE,
-        .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_SIGNAL_BEAM, MOVE_DOUBLE_TEAM},
+        .moves = {MOVE_ICE_BEAM, MOVE_SURF_TRAINER, MOVE_SIGNAL_BEAM, MOVE_DOUBLE_TEAM},
     },
     {
         .iv = 255,
         .lvl = 63,
         .species = SPECIES_CLOYSTER,
         .heldItem = ITEM_NONE,
-        .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_SUPERSONIC, MOVE_RAIN_DANCE},
+        .moves = {MOVE_ICE_BEAM, MOVE_SURF_TRAINER, MOVE_SUPERSONIC, MOVE_RAIN_DANCE},
     },
     {
         .iv = 255,
@@ -11290,7 +11290,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_823E2E8[] = {
         .lvl = 66,
         .species = SPECIES_LAPRAS,
         .heldItem = ITEM_CHERI_BERRY,
-        .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_PSYCHIC, MOVE_THUNDER},
+        .moves = {MOVE_ICE_BEAM, MOVE_SURF_TRAINER, MOVE_PSYCHIC, MOVE_THUNDER},
     },
 };
 
@@ -11390,7 +11390,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_823E3D8[] = {
         .lvl = 66,
         .species = SPECIES_KINGDRA,
         .heldItem = ITEM_NONE,
-        .moves = {MOVE_HYPER_BEAM, MOVE_DRAGON_DANCE, MOVE_SURF, MOVE_ICE_BEAM},
+        .moves = {MOVE_HYPER_BEAM, MOVE_DRAGON_DANCE, MOVE_SURF_TRAINER, MOVE_ICE_BEAM},
     },
     {
         .iv = 255,

@@ -155,36 +155,38 @@ gNewGame_HelpDocs7:: @ 81C5981
     .string "press the L or R Button.$"
 
 gOakText_AskPlayerGender:: @ 81C59D5
-    .string "Now tell me. Are you a boy?\n"
-    .string "Or are you a girl?$"
+    .string "Now tell me. Which character\n"
+    .string "would you like to play as?$"
 
 gNewGameAdventureIntro1::
-    .string "In the world which you are about to\n"
-    .string "enter, you will embark on a grand\n"
-    .string "adventure with you as the hero.\n"
-    .string "\n"
-    .string "Speak to people and check things\n"
-    .string "wherever you go, be it towns, roads,\n"
-    .string "or caves. Gather information and\n"
-    .string "hints from every source.$"
+    .string "Welcome to Pokemon Garbage Green!\n"
+	.string "This is a ROM Hack that aims to\n"
+	.string "make Leaf Green much harder by\n" 
+	.string "only giving the player underused \n"
+	.string "and weak Pokemon.\n"
+	.string "\n"
+	.string "Additionally, some Pokemon evolve\n"
+	.string "later than usual or not at all.$"
 
 gNewGameAdventureIntro2::
-    .string "New paths will open to you by helping\n"
-    .string "people in need, overcoming challenges,\n"
-    .string "and solving mysteries.\n"
-    .string "\n"
-    .string "At times, you will be challenged by\n"
-    .string "others and attacked by wild creatures.\n"
-    .string "Be brave and keep pushing on.$"
+    .string "Items can't be used in battle and\n"
+    .string "your Pokemons leveling will be\n"
+    .string "limited.\n"
+    .string "Check the documentation file for\n"
+    .string "more details.\n"
+    .string "This game is intended to be\n"
+    .string "played as a Nuzlocke, but this is\n"
+	.string "not required.$"
 
 gNewGameAdventureIntro3::
-    .string "Through your adventure, we hope\n"
-    .string "that you will interact with all sorts\n"
-    .string "of people and achieve personal growth.\n"
-    .string "That is our biggest objective.\n"
-    .string "\n"
-    .string "Press the A Button, and let your\n"
-    .string "adventure begin!$"
+    .string "If you have further questions\n"
+    .string "about the game or would like to\n"
+    .string "share your progress join my\n"
+    .string "Discord at discord.gg/pchal.\n"
+    .string "Thank you to my community members\n"
+    .string "who helped to create this game,\n"
+    .string "I hope you love playing it as\n"
+	.string "much as I loved making it!$"
 
 gOakText_WelcomeToTheWorld:: @ 81C5C78
     .string "Hello, there!\n"
@@ -229,6 +231,6 @@ gOakText_RememberRivalName:: @ 81C5EC5
     .string "His name is {RIVAL}!\p$"
 
 gOakText_LegendAboutToUnfold:: @ 81C5EF4
-    .string "{PLAYER}!\pYour very own POKéMON legend is\n"
-    .string "about to unfold!\pA world of dreams and adventures\n"
+    .string "{PLAYER}!\pMake sure to follow\n"
+    .string "twitch.tv/pokemonchallenges!\pA world of dreams and adventures\n"
     .string "with POKéMON awaits! Let's go!$"

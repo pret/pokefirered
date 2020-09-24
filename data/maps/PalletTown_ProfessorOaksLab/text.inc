@@ -101,22 +101,22 @@ PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet:: @ 818E177
     .string "Don't go away yet!$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander:: @ 818E194
-    .string "Ah! CHARMANDER is your choice.\n"
-    .string "You should raise it patiently.\p"
+    .string "Ah! SLUGMA is your choice.\n"
+    .string "Wait why are you giggling?\p"
     .string "So, {PLAYER}, you're claiming the\n"
-    .string "FIRE POKéMON CHARMANDER?$"
+    .string "FIRE POKéMON SLUGMA?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle:: @ 818E207
-    .string "Hm! SQUIRTLE is your choice.\n"
-    .string "It's one worth raising.\p"
+    .string "Hm! GOLDEEN is your choice.\n"
+    .string "Maybe google the moveset first?\p"
     .string "So, {PLAYER}, you've decided on the\n"
-    .string "WATER POKéMON SQUIRTLE?$"
+    .string "WATER POKéMON GOLDEEN?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur:: @ 818E272
-    .string "I see! BULBASAUR is your choice.\n"
-    .string "It's very easy to raise.\p"
+    .string "I see! PARAS is your choice.\n"
+    .string "Creepy little fella isn't it?\p"
     .string "So, {PLAYER}, you want to go with\n"
-    .string "the GRASS POKéMON BULBASAUR?$"
+    .string "the GRASS POKéMON PARAS?$"
 
 PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic:: @ 818E2E5
     .string "This POKéMON is really quite\n"

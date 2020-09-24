@@ -27,7 +27,7 @@ Route15_WestEntrance_2F_EventScript_Aide:: @ 81700B9
 	msgbox Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Aide_EventScript_DeclineCheckMons
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo

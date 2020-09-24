@@ -832,22 +832,22 @@ struct PickupItem
 
 static const struct PickupItem sPickupItems[] =
 {
-    { ITEM_ORAN_BERRY, 15 },
-    { ITEM_CHERI_BERRY, 25 },
-    { ITEM_CHESTO_BERRY, 35 },
-    { ITEM_PECHA_BERRY, 45 },
-    { ITEM_RAWST_BERRY, 55 },
-    { ITEM_ASPEAR_BERRY, 65 },
-    { ITEM_PERSIM_BERRY, 75 },
-    { ITEM_TM10, 80 },
-    { ITEM_PP_UP, 85 },
-    { ITEM_RARE_CANDY, 90 },
-    { ITEM_NUGGET, 95 },
-    { ITEM_SPELON_BERRY, 96 },
-    { ITEM_PAMTRE_BERRY, 97 },
-    { ITEM_WATMEL_BERRY, 98 },
-    { ITEM_DURIN_BERRY, 99 },
-    { ITEM_BELUE_BERRY, 1 },
+    { ITEM_BLUK_BERRY, 15 },
+    { ITEM_BLUK_BERRY, 25 },
+    { ITEM_BLUK_BERRY, 35 },
+    { ITEM_BLUK_BERRY, 45 },
+    { ITEM_BLUK_BERRY, 55 },
+    { ITEM_BLUK_BERRY, 65 },
+    { ITEM_BLUK_BERRY, 75 },
+    { ITEM_BLUK_BERRY, 80 },
+    { ITEM_BLUK_BERRY, 85 },
+    { ITEM_BLUK_BERRY, 90 },
+    { ITEM_BLUK_BERRY, 95 },
+    { ITEM_BLUK_BERRY, 96 },
+    { ITEM_BLUK_BERRY, 97 },
+    { ITEM_BLUK_BERRY, 98 },
+    { ITEM_BLUK_BERRY, 99 },
+    { ITEM_BLUK_BERRY, 1 },
 
 };
 

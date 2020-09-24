@@ -27,7 +27,7 @@ Route16_NorthEntrance_2F_EventScript_Aide:: @ 81702E3
 	msgbox Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Aide_EventScript_DeclineCheckMons
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo

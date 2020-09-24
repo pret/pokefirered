@@ -178,7 +178,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil:: @ 816E6A6
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber:: @ 816E6E4
-	getspeciesname 0, SPECIES_AERODACTYL
+	getspeciesname 0, SPECIES_UNOWN
 	getitemname 1, ITEM_OLD_AMBER
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -240,10 +240,10 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto:: @ 816E79D
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl:: @ 816E7E2
-	setvar VAR_TEMP_1, SPECIES_AERODACTYL
-	getspeciesname 0, SPECIES_AERODACTYL
+	setvar VAR_TEMP_1, SPECIES_UNOWN
+	getspeciesname 0, SPECIES_UNOWN
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
-	givemon SPECIES_AERODACTYL, 5, ITEM_NONE
+	givemon SPECIES_UNOWN, 5, ITEM_NONE
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_NoMoreRoomForPokemon
 	setflag FLAG_REVIVED_AMBER

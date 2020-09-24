@@ -14,5 +14,5 @@ CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll:: @ 8195AC9
 CeladonCity_DepartmentStore_4F_Text_FloorSign:: @ 8195B5B
     .string "Express yourself with gifts!\n"
     .string "4F: WISE MAN GIFTS\p"
-    .string "Evolution Special!\n"
-    .string "Element STONES on sale now!$"
+    .string "Mycelium Madness!\n"
+    .string "Mushrooms on sale now!$"

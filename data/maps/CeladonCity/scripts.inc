@@ -121,7 +121,7 @@ CeladonCity_EventScript_Snorlax::
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_EventScript_DontUsePokeFlute
 	call EventScript_AwakenSnorlax
-	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
+	setwildbattle SPECIES_DITTO, 30, ITEM_NONE
 	waitse
 	playmoncry SPECIES_SNORLAX, 2
 	delay 40

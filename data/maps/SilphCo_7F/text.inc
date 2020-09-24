@@ -6,16 +6,16 @@ SilphCo_7F_Text_HaveMonForSavingUs:: @ 8176266
     .string "for saving us.$"
 
 SilphCo_7F_Text_ObtainedLaprasFromEmployee:: @ 81762D7
-    .string "{PLAYER} obtained a LAPRAS from\n"
+    .string "{PLAYER} obtained a Pokémon from\n"
     .string "the SILPH employee!$"
 
 SilphCo_7F_Text_ExplainLapras:: @ 8176305
-    .string "It's a LAPRAS.\n"
+    .string "There you go!\n"
     .string "It's a very intelligent POKéMON.\p"
     .string "We kept it in our lab, but it will\n"
     .string "be much better off with you.\p"
     .string "I think you will be a good TRAINER\n"
-    .string "for LAPRAS!\p"
+    .string "for this Pokémon!\p"
     .string "It's a good swimmer.\n"
     .string "It'll give you a lift across water!$"
 

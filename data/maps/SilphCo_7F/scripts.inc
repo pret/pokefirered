@@ -125,8 +125,8 @@ SilphCo_7F_EventScript_LaprasGuy:: @ 8161AC8
 	faceplayer
 	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
 	msgbox SilphCo_7F_Text_HaveMonForSavingUs
-	setvar VAR_TEMP_1, SPECIES_LAPRAS
-	givemon SPECIES_LAPRAS, 25, ITEM_NONE
+	setvar VAR_TEMP_1, SPECIES_UNOWN
+	givemon SPECIES_UNOWN, 25, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq SilphCo_7F_EventScript_ReceiveLaprasParty
 	compare VAR_RESULT, 1
@@ -142,7 +142,7 @@ SilphCo_7F_EventScript_ReceiveLaprasParty:: @ 8161B12
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_LAPRAS
+	getspeciesname 0, SPECIES_UNOWN
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SilphCo_7F_EventScript_EndReceiveLapras
@@ -157,7 +157,7 @@ SilphCo_7F_EventScript_ReceiveLaprasPC:: @ 8161B45
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_LAPRAS
+	getspeciesname 0, SPECIES_UNOWN
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SilphCo_7F_EventScript_LaprasTransferredToPC

@@ -9,7 +9,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall:: @ 816C46D
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, SPECIES_EEVEE
-	givemon SPECIES_EEVEE, 25, ITEM_NONE
+	givemon SPECIES_UNOWN, 25, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty
 	compare VAR_RESULT, 1

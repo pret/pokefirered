@@ -59,3 +59,19 @@ CeladonCity_DepartmentStore_5F_Vitamins:: @ 816BCBC
 	.2byte ITEM_NONE
 	release
 	end
+
+
+Celadon_Vitamin_Vendor::
+	lock
+	msgbox Text_Celadon_Vitamin_Vendor, MSGBOX_DEFAULT
+	release
+	end
+
+Text_Celadon_Vitamin_Vendor::
+	.string	"Sorry but all X-Items and\n"
+	.string	"Vitamins have been recalled due\l"
+	.string "to a Pokerus contamination.\p"
+	.string "We unfortunately can't sell you\n"
+	.string "any.\p"
+	.string "Please return any related products\n"
+	.string "that you may find!$"

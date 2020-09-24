@@ -27,7 +27,7 @@ MtEmber_Summit_EventScript_Moltres:: @ 8163B33
 	special QuestLog_CutRecording
 	lock
 	faceplayer
-	setwildbattle SPECIES_MOLTRES, 50, ITEM_NONE
+	setwildbattle SPECIES_DITTO, 50, ITEM_NONE
 	waitse
 	playmoncry SPECIES_MOLTRES, 2
 	message Text_Gyaoo

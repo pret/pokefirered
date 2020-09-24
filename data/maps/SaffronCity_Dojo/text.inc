@@ -74,7 +74,7 @@ SaffronCity_Dojo_Text_HitoshiPostBattle:: @ 819B41F
 
 SaffronCity_Dojo_Text_YouWantHitmonlee:: @ 819B44E
     .string "You want the hard-kicking\n"
-    .string "HITMONLEE?$"
+    .string "UNOWN?$"
 
 SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster:: @ 819B473
     .string "{PLAYER} received the {STR_VAR_1}\n"
@@ -82,7 +82,7 @@ SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster:: @ 819B473
 
 SaffronCity_Dojo_Text_YouWantHitmonchan:: @ 819B49E
     .string "You want the piston-punching\n"
-    .string "HITMONCHAN?$"
+    .string "UNOWN?$"
 
 SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster2:: @ 819B4C7
     .string "{PLAYER}は　カラテ　だいおう　から\n"

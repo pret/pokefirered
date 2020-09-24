@@ -20,7 +20,7 @@ Route12_EventScript_Snorlax:: @ 8168014
 	compare VAR_RESULT, NO
 	goto_if_eq Route12_EventScript_DontUsePokeFlute
 	call EventScript_AwakenSnorlax
-	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
+	setwildbattle SPECIES_DITTO, 30, ITEM_NONE
 	waitse
 	playmoncry SPECIES_SNORLAX, 2
 	delay 40

@@ -162,7 +162,7 @@ SeafoamIslands_B4F_EventScript_Articuno:: @ 81631AC
 	special QuestLog_CutRecording
 	lock
 	faceplayer
-	setwildbattle SPECIES_ARTICUNO, 50, ITEM_NONE
+	setwildbattle SPECIES_DITTO, 50, ITEM_NONE
 	waitse
 	playmoncry SPECIES_ARTICUNO, 2
 	message Text_Gyaoo

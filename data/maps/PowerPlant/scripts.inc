@@ -38,7 +38,7 @@ PowerPlant_EventScript_Zapdos:: @ 81637B8
 	special QuestLog_CutRecording
 	lock
 	faceplayer
-	setwildbattle SPECIES_ZAPDOS, 50, ITEM_NONE
+	setwildbattle SPECIES_DITTO, 50, ITEM_NONE
 	waitse
 	playmoncry SPECIES_ZAPDOS, 2
 	message Text_Gyaoo

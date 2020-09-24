@@ -500,7 +500,7 @@ gMoveDescription_TripleKick:: @ 8485446
 	.string "A 3-kick attack\nthat becomes more\npowerful with each\nsuccessive hit.$"
 
 gMoveDescription_Thief:: @ 848548B
-	.string "An attack that may\ntake the foe's held\nitem if the user\nisn't holding one.$"
+	.string "A weak attack.$"
 
 gMoveDescription_SpiderWeb:: @ 84854D6
 	.string "Ensnares the foe \nwith sticky string\nso it doesn't flee\nor switch out.$"
@@ -644,7 +644,7 @@ gMoveDescription_HealBell:: @ 8486145
 	.string "A soothing bell\nchimes to heal the\nstatus problems of\nall allies.$"
 
 gMoveDescription_Return:: @ 8486187
-	.string "This attack move\ngrows more powerful\nthe more the user\nlikes its TRAINER.$"
+	.string "A powerful attack.$"
 
 gMoveDescription_Present:: @ 84861D1
 	.string "The foe is given a\nbooby-trapped gift.\nIt restores HP\nsometimes, however.$"
@@ -1025,7 +1025,7 @@ gMoveDescription_PoisonTail:: @ 8488383
 	.string "An attack with a\nhigh critical-hit\nratio. It may also\npoison the foe.$"
 
 gMoveDescription_Covet:: @ 84883C9
-	.string "A cutely executed\nattack that also\nsteals the foe's\nhold item.$"
+	.string "A cutely executed\nattack.$"
 
 gMoveDescription_VoltTackle:: @ 8488408
 	.string "The user throws an\nelectrified tackle.\nIt hurts the user\na little.$"

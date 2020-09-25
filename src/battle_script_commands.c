@@ -312,10 +312,10 @@ const u16 sLevelCapFlags[NUM_SOFT_CAPS] =
 {
     FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
     FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
-	FLAG_DEFEATED_LEADER_GIOVANNI,
+	FLAG_DEFEATED_LEADER_GIOVANNI, FLAG_0x0AF
 };
 
-const u16 sLevelCaps[NUM_SOFT_CAPS] = { 15, 22, 25, 30, 36, 44, 48, 51, 61 };
+const u16 sLevelCaps[NUM_SOFT_CAPS] = { 15, 22, 25, 30, 40, 44, 48, 51, 61, 100 };
 const double sLevelCapReduction[7] = { .5, .33, .25, .20, .15, .10, .05 };
 void (* const gBattleScriptingCommandsTable[])(void) =
 {

@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE15",
+      "direction": "left",
       "offset": 40,
-      "direction": "left"
+      "map": "MAP_ROUTE15"
     },
     {
-      "map": "MAP_ROUTE13",
+      "direction": "right",
       "offset": 0,
-      "direction": "right"
+      "map": "MAP_ROUTE13"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 7,
       "y": 37,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 18,
       "y": 35,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 10,
       "y": 14,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 16,
       "y": 16,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 7,
       "y": 31,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 7,
       "y": 34,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -119,6 +126,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 7,
       "y": 6,
       "elevation": 3,
@@ -132,6 +140,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 10,
       "y": 37,
       "elevation": 3,
@@ -145,6 +154,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 18,
       "y": 47,
       "elevation": 3,
@@ -158,6 +168,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 7,
       "y": 26,
       "elevation": 3,
@@ -171,6 +182,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 12,
       "y": 35,
       "elevation": 3,
@@ -184,6 +196,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 1,
       "y": 47,
       "elevation": 3,
@@ -197,6 +210,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "in_connection": false,
       "x": 13,
       "y": 51,
       "elevation": 3,
@@ -210,6 +224,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "in_connection": false,
       "x": 12,
       "y": 51,
       "elevation": 3,
@@ -222,8 +237,12 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

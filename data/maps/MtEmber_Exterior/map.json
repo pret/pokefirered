@@ -13,10 +13,11 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "in_connection": false,
       "x": 29,
       "y": 45,
       "elevation": 3,
@@ -30,6 +31,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "in_connection": false,
       "x": 41,
       "y": 40,
       "elevation": 3,
@@ -43,6 +45,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "in_connection": false,
       "x": 42,
       "y": 40,
       "elevation": 3,
@@ -56,6 +59,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
+      "in_connection": false,
       "x": 22,
       "y": 35,
       "elevation": 3,
@@ -69,6 +73,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "in_connection": false,
       "x": 15,
       "y": 28,
       "elevation": 3,
@@ -82,6 +87,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
       "x": 14,
       "y": 42,
       "elevation": 3,
@@ -95,6 +101,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 29,
       "y": 41,
       "elevation": 3,
@@ -108,6 +115,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 30,
       "y": 42,
       "elevation": 3,
@@ -121,6 +129,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 22,
       "y": 45,
       "elevation": 3,
@@ -134,6 +143,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 17,
       "y": 46,
       "elevation": 3,
@@ -147,6 +157,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 36,
       "y": 14,
       "elevation": 3,
@@ -160,6 +171,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 34,
       "y": 14,
       "elevation": 3,
@@ -173,6 +185,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 36,
       "y": 15,
       "elevation": 3,
@@ -186,6 +199,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 35,
       "y": 14,
       "elevation": 3,
@@ -199,6 +213,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 35,
       "y": 17,
       "elevation": 3,
@@ -212,6 +227,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 18,
       "y": 39,
       "elevation": 3,
@@ -225,6 +241,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 19,
       "y": 40,
       "elevation": 3,
@@ -238,6 +255,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 13,
       "y": 6,
       "elevation": 3,
@@ -251,6 +269,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 38,
       "y": 10,
       "elevation": 3,
@@ -264,6 +283,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 48,
       "y": 20,
       "elevation": 3,

@@ -15,14 +15,15 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ONE_ISLAND",
+      "direction": "left",
       "offset": 120,
-      "direction": "left"
+      "map": "MAP_ONE_ISLAND"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
+      "in_connection": false,
       "x": 11,
       "y": 32,
       "elevation": 1,
@@ -36,6 +37,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_LAND",
+      "in_connection": false,
       "x": 17,
       "y": 132,
       "elevation": 3,
@@ -49,6 +51,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
+      "in_connection": false,
       "x": 7,
       "y": 39,
       "elevation": 1,
@@ -62,6 +65,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_LAND",
+      "in_connection": false,
       "x": 19,
       "y": 79,
       "elevation": 3,
@@ -75,6 +79,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "in_connection": false,
       "x": 15,
       "y": 25,
       "elevation": 3,
@@ -88,6 +93,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
+      "in_connection": false,
       "x": 9,
       "y": 53,
       "elevation": 3,
@@ -101,6 +107,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
+      "in_connection": false,
       "x": 18,
       "y": 105,
       "elevation": 4,
@@ -114,6 +121,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "in_connection": false,
       "x": 16,
       "y": 64,
       "elevation": 3,
@@ -127,6 +135,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "in_connection": false,
       "x": 11,
       "y": 64,
       "elevation": 3,
@@ -140,6 +149,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "in_connection": false,
       "x": 11,
       "y": 89,
       "elevation": 3,
@@ -153,6 +163,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
       "x": 9,
       "y": 108,
       "elevation": 3,
@@ -166,6 +177,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "in_connection": false,
       "x": 8,
       "y": 68,
       "elevation": 3,
@@ -179,6 +191,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
+      "in_connection": false,
       "x": 9,
       "y": 68,
       "elevation": 3,
@@ -192,6 +205,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 8,
       "y": 104,
       "elevation": 3,
@@ -205,6 +219,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 11,
       "y": 95,
       "elevation": 3,
@@ -218,6 +233,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 12,
       "y": 96,
       "elevation": 3,
@@ -231,6 +247,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 10,
       "y": 95,
       "elevation": 3,
@@ -244,6 +261,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 9,
       "y": 105,
       "elevation": 3,
@@ -257,6 +275,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 15,
       "y": 75,
       "elevation": 3,
@@ -270,6 +289,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 9,
       "y": 84,
       "elevation": 3,
@@ -283,6 +303,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 15,
       "y": 74,
       "elevation": 3,
@@ -296,6 +317,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 15,
       "y": 73,
       "elevation": 3,
@@ -309,6 +331,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 18,
       "y": 111,
       "elevation": 4,
@@ -322,6 +345,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 10,
       "y": 86,
       "elevation": 3,
@@ -335,6 +359,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 9,
       "y": 110,
       "elevation": 3,
@@ -348,6 +373,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
+      "in_connection": false,
       "x": 18,
       "y": 112,
       "elevation": 4,
@@ -361,6 +387,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 15,
       "y": 70,
       "elevation": 3,
@@ -374,6 +401,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 17,
       "y": 103,
       "elevation": 3,
@@ -387,6 +415,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 18,
       "y": 114,
       "elevation": 4,
@@ -422,7 +451,9 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

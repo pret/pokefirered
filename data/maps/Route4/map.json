@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE3",
+      "direction": "down",
       "offset": -60,
-      "direction": "down"
+      "map": "MAP_ROUTE3"
     },
     {
-      "map": "MAP_CERULEAN_CITY",
+      "direction": "right",
       "offset": -10,
-      "direction": "right"
+      "map": "MAP_CERULEAN_CITY"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "in_connection": false,
       "x": 9,
       "y": 8,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "in_connection": false,
       "x": 75,
       "y": 3,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 67,
       "y": 5,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "in_connection": false,
       "x": 15,
       "y": 14,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "in_connection": false,
       "x": 47,
       "y": 3,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "in_connection": false,
       "x": 50,
       "y": 3,
       "elevation": 3,
@@ -142,7 +148,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

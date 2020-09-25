@@ -13,10 +13,11 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "in_connection": false,
       "x": 40,
       "y": 7,
       "elevation": 3,
@@ -30,6 +31,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
+      "in_connection": false,
       "x": 21,
       "y": 5,
       "elevation": 4,
@@ -43,6 +45,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "in_connection": false,
       "x": 10,
       "y": 17,
       "elevation": 3,
@@ -56,6 +59,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
+      "in_connection": false,
       "x": 11,
       "y": 16,
       "elevation": 3,
@@ -69,6 +73,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 38,
       "y": 7,
       "elevation": 3,
@@ -82,6 +87,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "in_connection": false,
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -95,6 +101,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 19,
       "y": 15,
       "elevation": 3,
@@ -108,6 +115,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 33,
       "y": 18,
       "elevation": 0,
@@ -121,6 +129,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 35,
       "y": 13,
       "elevation": 3,
@@ -134,6 +143,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "in_connection": false,
       "x": 32,
       "y": 5,
       "elevation": 3,
@@ -147,6 +157,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "in_connection": false,
       "x": 38,
       "y": 13,
       "elevation": 3,
@@ -160,6 +171,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
+      "in_connection": false,
       "x": 39,
       "y": 13,
       "elevation": 3,
@@ -220,5 +232,7 @@
       "script": "VictoryRoad_3F_EventScript_FloorSwitch"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+
+  ]
 }

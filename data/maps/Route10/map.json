@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_LAVENDER_TOWN",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_LAVENDER_TOWN"
     },
     {
-      "map": "MAP_ROUTE9",
+      "direction": "left",
       "offset": 0,
-      "direction": "left"
+      "map": "MAP_ROUTE9"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
       "x": 7,
       "y": 60,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "in_connection": false,
       "x": 4,
       "y": 62,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
+      "in_connection": false,
       "x": 15,
       "y": 70,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "in_connection": false,
       "x": 4,
       "y": 68,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
+      "in_connection": false,
       "x": 13,
       "y": 44,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "in_connection": false,
       "x": 9,
       "y": 27,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 10,
       "y": 20,
       "elevation": 0,
@@ -119,6 +126,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 10,
       "y": 22,
       "elevation": 0,
@@ -132,6 +140,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 10,
       "y": 24,
       "elevation": 0,
@@ -145,6 +154,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 10,
       "y": 26,
       "elevation": 0,
@@ -194,7 +204,9 @@
       "dest_warp_id": 3
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

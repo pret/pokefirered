@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE17",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE17"
     },
     {
-      "map": "MAP_FUCHSIA_CITY",
+      "direction": "right",
       "offset": -10,
-      "direction": "right"
+      "map": "MAP_FUCHSIA_CITY"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 46,
       "y": 14,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 41,
       "y": 15,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
+      "in_connection": false,
       "x": 39,
       "y": 12,
       "elevation": 3,
@@ -82,7 +85,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

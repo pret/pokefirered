@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE16",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE16"
     },
     {
-      "map": "MAP_ROUTE18",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE18"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 4,
       "y": 18,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 11,
       "y": 15,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 15,
       "y": 24,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 18,
       "y": 41,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 7,
       "y": 38,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 2,
       "y": 61,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 21,
       "y": 61,
       "elevation": 3,
@@ -119,6 +126,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 18,
       "y": 94,
       "elevation": 3,
@@ -132,6 +140,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 16,
       "y": 134,
       "elevation": 3,
@@ -145,6 +154,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
+      "in_connection": false,
       "x": 4,
       "y": 116,
       "elevation": 3,
@@ -157,8 +167,12 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

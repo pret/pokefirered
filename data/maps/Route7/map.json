@@ -15,14 +15,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_CELADON_CITY",
+      "direction": "left",
       "offset": -10,
-      "direction": "left"
+      "map": "MAP_CELADON_CITY"
     },
     {
-      "map": "MAP_SAFFRON_CITY_CONNECTION",
+      "direction": "right",
       "offset": -10,
-      "direction": "right"
+      "map": "MAP_SAFFRON_CITY_CONNECTION"
     }
   ],
   "object_events": [
@@ -57,7 +57,9 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

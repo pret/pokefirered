@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ONE_ISLAND_TREASURE_BEACH",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ONE_ISLAND_TREASURE_BEACH"
     },
     {
-      "map": "MAP_ONE_ISLAND_KINDLE_ROAD",
+      "direction": "right",
       "offset": -120,
-      "direction": "right"
+      "map": "MAP_ONE_ISLAND_KINDLE_ROAD"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BILL",
+      "in_connection": false,
       "x": 12,
       "y": 16,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "in_connection": false,
       "x": 16,
       "y": 12,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
+      "in_connection": false,
       "x": 13,
       "y": 9,
       "elevation": 3,
@@ -96,7 +99,9 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

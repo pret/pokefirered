@@ -15,14 +15,15 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_THREE_ISLAND",
+      "direction": "right",
       "offset": 0,
-      "direction": "right"
+      "map": "MAP_THREE_ISLAND"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "in_connection": false,
       "x": 27,
       "y": 10,
       "elevation": 3,
@@ -36,6 +37,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "in_connection": false,
       "x": 68,
       "y": 10,
       "elevation": 3,
@@ -49,6 +51,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
+      "in_connection": false,
       "x": 33,
       "y": 13,
       "elevation": 3,
@@ -62,6 +65,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
+      "in_connection": false,
       "x": 50,
       "y": 11,
       "elevation": 3,
@@ -75,6 +79,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
+      "in_connection": false,
       "x": 36,
       "y": 4,
       "elevation": 1,
@@ -88,6 +93,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "in_connection": false,
       "x": 77,
       "y": 5,
       "elevation": 3,
@@ -101,6 +107,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "in_connection": false,
       "x": 78,
       "y": 5,
       "elevation": 3,
@@ -114,6 +121,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 72,
       "y": 8,
       "elevation": 3,
@@ -127,6 +135,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": false,
       "x": 86,
       "y": 13,
       "elevation": 3,
@@ -155,7 +164,9 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

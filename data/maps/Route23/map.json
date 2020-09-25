@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_INDIGO_PLATEAU_EXTERIOR",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_INDIGO_PLATEAU_EXTERIOR"
     },
     {
-      "map": "MAP_ROUTE22",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE22"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 15,
       "y": 149,
       "elevation": 3,
@@ -41,6 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 8,
       "y": 140,
       "elevation": 3,
@@ -54,6 +56,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 14,
       "y": 123,
       "elevation": 3,
@@ -67,6 +70,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 16,
       "y": 112,
       "elevation": 3,
@@ -80,6 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 10,
       "y": 94,
       "elevation": 3,
@@ -93,6 +98,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 14,
       "y": 61,
       "elevation": 3,
@@ -106,6 +112,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "in_connection": false,
       "x": 6,
       "y": 35,
       "elevation": 3,

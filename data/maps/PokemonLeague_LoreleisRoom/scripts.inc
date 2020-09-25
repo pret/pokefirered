@@ -51,6 +51,7 @@ PokemonLeague_LoreleisRoom_EventScript_EnterRoom:: @ 81625CF
 PokemonLeague_LoreleisRoom_EventScript_Lorelei:: @ 81625DC
 	lock
 	faceplayer
+	setflag FLAG_0x0AF
 	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	goto_if_set FLAG_DEFEATED_LORELEI, PokemonLeague_LoreleisRoom_EventScript_PostBattle
 	famechecker FAMECHECKER_LORELEI, 0

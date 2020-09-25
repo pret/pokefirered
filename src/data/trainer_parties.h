@@ -6308,7 +6308,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_823C6B0[] = {
     },
     {
         .iv = 0,
-        .lvl = 43,
+        .lvl = 39,
         .species = SPECIES_WEEZING,
         .moves = {MOVE_TACKLE, MOVE_SLUDGE, MOVE_SMOKESCREEN, MOVE_TOXIC},
     },

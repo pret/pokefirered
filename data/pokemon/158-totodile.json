@@ -1,0 +1,91 @@
+{
+  "species": "totodile",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 65,
+    "base_defense": 64,
+    "base_speed": 43,
+    "base_sp_attack": 44,
+    "base_sp_defense": 48,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 45,
+    "exp_yield": 66,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "torrent",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "crunch",
+    "thrash",
+    "hydro_pump",
+    "ancient_power",
+    "rock_slide",
+    "mud_sport",
+    "water_sport",
+    "dragon_claw"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 18,
+      "species": "croconaw"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 7,
+      "move": "rage"
+    },
+    {
+      "level": 13,
+      "move": "water_gun"
+    },
+    {
+      "level": 20,
+      "move": "bite"
+    },
+    {
+      "level": 27,
+      "move": "scary_face"
+    },
+    {
+      "level": 35,
+      "move": "slash"
+    },
+    {
+      "level": 43,
+      "move": "screech"
+    },
+    {
+      "level": 52,
+      "move": "hydro_pump"
+    }
+  ]
+}

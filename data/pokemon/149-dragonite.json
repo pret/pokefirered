@@ -1,0 +1,92 @@
+{
+  "species": "dragonite",
+  "base_stats": {
+    "base_hp": 91,
+    "base_attack": 134,
+    "base_defense": 95,
+    "base_speed": 80,
+    "base_sp_attack": 100,
+    "base_sp_defense": 100,
+    "type_1": "dragon",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 218,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "dragon_fang",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "inner_focus",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 1,
+      "move": "twister"
+    },
+    {
+      "level": 8,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 15,
+      "move": "twister"
+    },
+    {
+      "level": 22,
+      "move": "dragon_rage"
+    },
+    {
+      "level": 29,
+      "move": "slam"
+    },
+    {
+      "level": 38,
+      "move": "agility"
+    },
+    {
+      "level": 47,
+      "move": "safeguard"
+    },
+    {
+      "level": 55,
+      "move": "wing_attack"
+    },
+    {
+      "level": 61,
+      "move": "outrage"
+    },
+    {
+      "level": 75,
+      "move": "hyper_beam"
+    }
+  ]
+}

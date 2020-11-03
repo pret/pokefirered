@@ -1,0 +1,94 @@
+{
+  "species": "kadabra",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 35,
+    "base_defense": 30,
+    "base_speed": 105,
+    "base_sp_attack": 120,
+    "base_sp_defense": 70,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 100,
+    "exp_yield": 145,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "twisted_spoon",
+    "gender_ratio": 25,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "synchronize",
+      "inner_focus"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "trade",
+      "value": 0,
+      "species": "alakazam"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "teleport"
+    },
+    {
+      "level": 1,
+      "move": "kinesis"
+    },
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 16,
+      "move": "confusion"
+    },
+    {
+      "level": 18,
+      "move": "disable"
+    },
+    {
+      "level": 21,
+      "move": "psybeam"
+    },
+    {
+      "level": 23,
+      "move": "reflect"
+    },
+    {
+      "level": 25,
+      "move": "recover"
+    },
+    {
+      "level": 30,
+      "move": "future_sight"
+    },
+    {
+      "level": 33,
+      "move": "role_play"
+    },
+    {
+      "level": 36,
+      "move": "psychic"
+    },
+    {
+      "level": 43,
+      "move": "trick"
+    }
+  ]
+}

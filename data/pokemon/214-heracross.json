@@ -1,0 +1,85 @@
+{
+  "species": "heracross",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 125,
+    "base_defense": 75,
+    "base_speed": 85,
+    "base_sp_attack": 40,
+    "base_sp_defense": 95,
+    "type_1": "bug",
+    "type_2": "fighting",
+    "catch_rate": 45,
+    "exp_yield": 200,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "swarm",
+      "guts"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "harden",
+    "bide",
+    "flail",
+    "false_swipe"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 6,
+      "move": "horn_attack"
+    },
+    {
+      "level": 11,
+      "move": "endure"
+    },
+    {
+      "level": 17,
+      "move": "fury_attack"
+    },
+    {
+      "level": 23,
+      "move": "brick_break"
+    },
+    {
+      "level": 30,
+      "move": "counter"
+    },
+    {
+      "level": 37,
+      "move": "take_down"
+    },
+    {
+      "level": 45,
+      "move": "reversal"
+    },
+    {
+      "level": 53,
+      "move": "megahorn"
+    }
+  ]
+}

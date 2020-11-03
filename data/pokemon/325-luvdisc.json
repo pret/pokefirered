@@ -1,0 +1,81 @@
+{
+  "species": "luvdisc",
+  "base_stats": {
+    "base_hp": 43,
+    "base_attack": 30,
+    "base_defense": 55,
+    "base_speed": 97,
+    "base_sp_attack": 40,
+    "base_sp_defense": 65,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 225,
+    "exp_yield": 110,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "heart_scale",
+    "item_2": "none",
+    "gender_ratio": 75,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "water_2",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "swift_swim",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "splash",
+    "supersonic",
+    "water_sport",
+    "mud_sport"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 4,
+      "move": "charm"
+    },
+    {
+      "level": 12,
+      "move": "water_gun"
+    },
+    {
+      "level": 16,
+      "move": "agility"
+    },
+    {
+      "level": 24,
+      "move": "take_down"
+    },
+    {
+      "level": 28,
+      "move": "attract"
+    },
+    {
+      "level": 36,
+      "move": "sweet_kiss"
+    },
+    {
+      "level": 40,
+      "move": "flail"
+    },
+    {
+      "level": 48,
+      "move": "safeguard"
+    }
+  ]
+}

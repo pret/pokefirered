@@ -1,0 +1,92 @@
+{
+  "species": "crobat",
+  "base_stats": {
+    "base_hp": 85,
+    "base_attack": 90,
+    "base_defense": 80,
+    "base_speed": 130,
+    "base_sp_attack": 70,
+    "base_sp_defense": 80,
+    "type_1": "poison",
+    "type_2": "flying",
+    "catch_rate": 90,
+    "exp_yield": 204,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 3,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "inner_focus",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "screech"
+    },
+    {
+      "level": 1,
+      "move": "leech_life"
+    },
+    {
+      "level": 1,
+      "move": "astonish"
+    },
+    {
+      "level": 1,
+      "move": "supersonic"
+    },
+    {
+      "level": 6,
+      "move": "astonish"
+    },
+    {
+      "level": 11,
+      "move": "supersonic"
+    },
+    {
+      "level": 16,
+      "move": "bite"
+    },
+    {
+      "level": 21,
+      "move": "wing_attack"
+    },
+    {
+      "level": 28,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 35,
+      "move": "air_cutter"
+    },
+    {
+      "level": 42,
+      "move": "mean_look"
+    },
+    {
+      "level": 49,
+      "move": "poison_fang"
+    },
+    {
+      "level": 56,
+      "move": "haze"
+    }
+  ]
+}

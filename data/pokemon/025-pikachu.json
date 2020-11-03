@@ -1,0 +1,90 @@
+{
+  "species": "pikachu",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 55,
+    "base_defense": 30,
+    "base_speed": 90,
+    "base_sp_attack": 50,
+    "base_sp_defense": 40,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 190,
+    "exp_yield": 82,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 10,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "static",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "thunder_stone",
+      "species": "raichu"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 6,
+      "move": "tail_whip"
+    },
+    {
+      "level": 8,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 11,
+      "move": "quick_attack"
+    },
+    {
+      "level": 15,
+      "move": "double_team"
+    },
+    {
+      "level": 20,
+      "move": "slam"
+    },
+    {
+      "level": 26,
+      "move": "thunderbolt"
+    },
+    {
+      "level": 33,
+      "move": "agility"
+    },
+    {
+      "level": 41,
+      "move": "thunder"
+    },
+    {
+      "level": 50,
+      "move": "light_screen"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "species": "numel",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 60,
+    "base_defense": 40,
+    "base_speed": 35,
+    "base_sp_attack": 65,
+    "base_sp_defense": 45,
+    "type_1": "fire",
+    "type_2": "ground",
+    "catch_rate": 255,
+    "exp_yield": 88,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "rawst_berry",
+    "item_2": "rawst_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "oblivious",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "howl",
+    "scary_face",
+    "body_slam",
+    "rollout",
+    "defense_curl",
+    "stomp"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 33,
+      "species": "camerupt"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 11,
+      "move": "ember"
+    },
+    {
+      "level": 19,
+      "move": "magnitude"
+    },
+    {
+      "level": 25,
+      "move": "focus_energy"
+    },
+    {
+      "level": 29,
+      "move": "take_down"
+    },
+    {
+      "level": 31,
+      "move": "amnesia"
+    },
+    {
+      "level": 35,
+      "move": "earthquake"
+    },
+    {
+      "level": 41,
+      "move": "flamethrower"
+    },
+    {
+      "level": 49,
+      "move": "double_edge"
+    }
+  ]
+}

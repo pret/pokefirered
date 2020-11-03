@@ -1,0 +1,76 @@
+{
+  "species": "regice",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 50,
+    "base_defense": 100,
+    "base_speed": 50,
+    "base_sp_attack": 100,
+    "base_sp_defense": 200,
+    "type_1": "ice",
+    "type_2": "ice",
+    "catch_rate": 3,
+    "exp_yield": 216,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 3,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 80,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "clear_body",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "explosion"
+    },
+    {
+      "level": 9,
+      "move": "icy_wind"
+    },
+    {
+      "level": 17,
+      "move": "curse"
+    },
+    {
+      "level": 25,
+      "move": "superpower"
+    },
+    {
+      "level": 33,
+      "move": "ancient_power"
+    },
+    {
+      "level": 41,
+      "move": "amnesia"
+    },
+    {
+      "level": 49,
+      "move": "zap_cannon"
+    },
+    {
+      "level": 57,
+      "move": "lock_on"
+    },
+    {
+      "level": 65,
+      "move": "hyper_beam"
+    }
+  ]
+}

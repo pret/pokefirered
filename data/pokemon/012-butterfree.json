@@ -1,0 +1,84 @@
+{
+  "species": "butterfree",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 45,
+    "base_defense": 50,
+    "base_speed": 70,
+    "base_sp_attack": 80,
+    "base_sp_defense": 80,
+    "type_1": "bug",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 160,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "silver_powder",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "compound_eyes",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 10,
+      "move": "confusion"
+    },
+    {
+      "level": 13,
+      "move": "poison_powder"
+    },
+    {
+      "level": 14,
+      "move": "stun_spore"
+    },
+    {
+      "level": 15,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 18,
+      "move": "supersonic"
+    },
+    {
+      "level": 23,
+      "move": "whirlwind"
+    },
+    {
+      "level": 28,
+      "move": "gust"
+    },
+    {
+      "level": 34,
+      "move": "psybeam"
+    },
+    {
+      "level": 40,
+      "move": "safeguard"
+    },
+    {
+      "level": 47,
+      "move": "silver_wind"
+    }
+  ]
+}

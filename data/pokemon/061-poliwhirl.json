@@ -1,0 +1,91 @@
+{
+  "species": "poliwhirl",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 65,
+    "base_defense": 65,
+    "base_speed": 90,
+    "base_sp_attack": 50,
+    "base_sp_defense": 50,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 120,
+    "exp_yield": 131,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "water_absorb",
+      "damp"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": true
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "water_stone",
+      "species": "poliwrath"
+    },
+    {
+      "type": "trade_item",
+      "value": "kings_rock",
+      "species": "politoed"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 1,
+      "move": "hypnosis"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 7,
+      "move": "hypnosis"
+    },
+    {
+      "level": 13,
+      "move": "water_gun"
+    },
+    {
+      "level": 19,
+      "move": "double_slap"
+    },
+    {
+      "level": 27,
+      "move": "rain_dance"
+    },
+    {
+      "level": 35,
+      "move": "body_slam"
+    },
+    {
+      "level": 43,
+      "move": "belly_drum"
+    },
+    {
+      "level": 51,
+      "move": "hydro_pump"
+    }
+  ]
+}

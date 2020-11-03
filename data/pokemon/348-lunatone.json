@@ -1,0 +1,80 @@
+{
+  "species": "lunatone",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 55,
+    "base_defense": 65,
+    "base_speed": 70,
+    "base_sp_attack": 95,
+    "base_sp_defense": 85,
+    "type_1": "rock",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 150,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "moon_stone",
+    "gender_ratio": -1,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 7,
+      "move": "confusion"
+    },
+    {
+      "level": 13,
+      "move": "rock_throw"
+    },
+    {
+      "level": 19,
+      "move": "hypnosis"
+    },
+    {
+      "level": 25,
+      "move": "psywave"
+    },
+    {
+      "level": 31,
+      "move": "cosmic_power"
+    },
+    {
+      "level": 37,
+      "move": "psychic"
+    },
+    {
+      "level": 43,
+      "move": "future_sight"
+    },
+    {
+      "level": 49,
+      "move": "explosion"
+    }
+  ]
+}

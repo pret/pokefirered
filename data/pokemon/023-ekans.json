@@ -1,0 +1,96 @@
+{
+  "species": "ekans",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 60,
+    "base_defense": 44,
+    "base_speed": 55,
+    "base_sp_attack": 40,
+    "base_sp_defense": 54,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 255,
+    "exp_yield": 62,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "intimidate",
+      "shed_skin"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "pursuit",
+    "slam",
+    "spite",
+    "beat_up",
+    "poison_fang"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 22,
+      "species": "arbok"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 8,
+      "move": "poison_sting"
+    },
+    {
+      "level": 13,
+      "move": "bite"
+    },
+    {
+      "level": 20,
+      "move": "glare"
+    },
+    {
+      "level": 25,
+      "move": "screech"
+    },
+    {
+      "level": 32,
+      "move": "acid"
+    },
+    {
+      "level": 37,
+      "move": "stockpile"
+    },
+    {
+      "level": 37,
+      "move": "swallow"
+    },
+    {
+      "level": 37,
+      "move": "spit_up"
+    },
+    {
+      "level": 44,
+      "move": "haze"
+    }
+  ]
+}

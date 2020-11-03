@@ -1,0 +1,76 @@
+{
+  "species": "raticate",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 81,
+    "base_defense": 60,
+    "base_speed": 97,
+    "base_sp_attack": 50,
+    "base_sp_defense": 70,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 127,
+    "exp_yield": 116,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "oran_berry",
+    "item_2": "sitrus_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "run_away",
+      "guts"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "quick_attack"
+    },
+    {
+      "level": 7,
+      "move": "quick_attack"
+    },
+    {
+      "level": 13,
+      "move": "hyper_fang"
+    },
+    {
+      "level": 20,
+      "move": "scary_face"
+    },
+    {
+      "level": 30,
+      "move": "pursuit"
+    },
+    {
+      "level": 40,
+      "move": "super_fang"
+    },
+    {
+      "level": 50,
+      "move": "endeavor"
+    }
+  ]
+}

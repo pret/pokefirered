@@ -1,0 +1,87 @@
+{
+  "species": "seel",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 45,
+    "base_defense": 55,
+    "base_speed": 45,
+    "base_sp_attack": 45,
+    "base_sp_defense": 70,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 190,
+    "exp_yield": 100,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "aspear_berry",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "field",
+    "abilities": [
+      "thick_fat",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "lick",
+    "perish_song",
+    "disable",
+    "horn_drill",
+    "slam",
+    "encore",
+    "fake_out",
+    "icicle_spear"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 34,
+      "species": "dewgong"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "headbutt"
+    },
+    {
+      "level": 9,
+      "move": "growl"
+    },
+    {
+      "level": 17,
+      "move": "icy_wind"
+    },
+    {
+      "level": 21,
+      "move": "aurora_beam"
+    },
+    {
+      "level": 29,
+      "move": "rest"
+    },
+    {
+      "level": 37,
+      "move": "take_down"
+    },
+    {
+      "level": 41,
+      "move": "ice_beam"
+    },
+    {
+      "level": 49,
+      "move": "safeguard"
+    }
+  ]
+}

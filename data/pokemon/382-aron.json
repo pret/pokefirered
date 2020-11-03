@@ -1,0 +1,99 @@
+{
+  "species": "aron",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 70,
+    "base_defense": 100,
+    "base_speed": 30,
+    "base_sp_attack": 40,
+    "base_sp_defense": 40,
+    "type_1": "steel",
+    "type_2": "rock",
+    "catch_rate": 180,
+    "exp_yield": 96,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "hard_stone",
+    "gender_ratio": 50,
+    "egg_cycles": 35,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "monster",
+    "abilities": [
+      "sturdy",
+      "rock_head"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "endeavor",
+    "body_slam",
+    "stomp",
+    "smelling_salt"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 32,
+      "species": "lairon"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 4,
+      "move": "harden"
+    },
+    {
+      "level": 7,
+      "move": "mud_slap"
+    },
+    {
+      "level": 10,
+      "move": "headbutt"
+    },
+    {
+      "level": 13,
+      "move": "metal_claw"
+    },
+    {
+      "level": 17,
+      "move": "iron_defense"
+    },
+    {
+      "level": 21,
+      "move": "roar"
+    },
+    {
+      "level": 25,
+      "move": "take_down"
+    },
+    {
+      "level": 29,
+      "move": "iron_tail"
+    },
+    {
+      "level": 34,
+      "move": "protect"
+    },
+    {
+      "level": 39,
+      "move": "metal_sound"
+    },
+    {
+      "level": 44,
+      "move": "double_edge"
+    }
+  ]
+}

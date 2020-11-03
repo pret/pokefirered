@@ -1,0 +1,94 @@
+{
+  "species": "nidoran_m",
+  "base_stats": {
+    "base_hp": 46,
+    "base_attack": 57,
+    "base_defense": 40,
+    "base_speed": 50,
+    "base_sp_attack": 40,
+    "base_sp_defense": 40,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 235,
+    "exp_yield": 60,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "poison_point",
+      "none"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "counter",
+    "disable",
+    "supersonic",
+    "take_down",
+    "amnesia",
+    "confusion",
+    "beat_up"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "nidorino"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 8,
+      "move": "focus_energy"
+    },
+    {
+      "level": 12,
+      "move": "double_kick"
+    },
+    {
+      "level": 17,
+      "move": "poison_sting"
+    },
+    {
+      "level": 20,
+      "move": "horn_attack"
+    },
+    {
+      "level": 23,
+      "move": "helping_hand"
+    },
+    {
+      "level": 30,
+      "move": "fury_attack"
+    },
+    {
+      "level": 38,
+      "move": "flatter"
+    },
+    {
+      "level": 47,
+      "move": "horn_drill"
+    }
+  ]
+}

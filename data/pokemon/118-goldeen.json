@@ -1,0 +1,96 @@
+{
+  "species": "goldeen",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 67,
+    "base_defense": 60,
+    "base_speed": 63,
+    "base_sp_attack": 35,
+    "base_sp_defense": 50,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 225,
+    "exp_yield": 111,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_2",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "swift_swim",
+      "water_veil"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "psybeam",
+    "haze",
+    "hydro_pump",
+    "sleep_talk",
+    "mud_sport"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 33,
+      "species": "seaking"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "water_sport"
+    },
+    {
+      "level": 10,
+      "move": "supersonic"
+    },
+    {
+      "level": 15,
+      "move": "horn_attack"
+    },
+    {
+      "level": 24,
+      "move": "flail"
+    },
+    {
+      "level": 29,
+      "move": "fury_attack"
+    },
+    {
+      "level": 38,
+      "move": "waterfall"
+    },
+    {
+      "level": 43,
+      "move": "horn_drill"
+    },
+    {
+      "level": 52,
+      "move": "agility"
+    },
+    {
+      "level": 57,
+      "move": "megahorn"
+    }
+  ]
+}

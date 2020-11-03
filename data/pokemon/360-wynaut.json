@@ -1,0 +1,74 @@
+{
+  "species": "wynaut",
+  "base_stats": {
+    "base_hp": 95,
+    "base_attack": 23,
+    "base_defense": 48,
+    "base_speed": 23,
+    "base_sp_attack": 23,
+    "base_sp_defense": 48,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 125,
+    "exp_yield": 44,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "shadow_tag",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 15,
+      "species": "wobbuffet"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "splash"
+    },
+    {
+      "level": 1,
+      "move": "charm"
+    },
+    {
+      "level": 1,
+      "move": "encore"
+    },
+    {
+      "level": 15,
+      "move": "counter"
+    },
+    {
+      "level": 15,
+      "move": "mirror_coat"
+    },
+    {
+      "level": 15,
+      "move": "safeguard"
+    },
+    {
+      "level": 15,
+      "move": "destiny_bond"
+    }
+  ]
+}

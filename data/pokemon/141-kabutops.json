@@ -1,0 +1,96 @@
+{
+  "species": "kabutops",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 115,
+    "base_defense": 105,
+    "base_speed": 80,
+    "base_sp_attack": 65,
+    "base_sp_defense": 70,
+    "type_1": "rock",
+    "type_2": "water",
+    "catch_rate": 45,
+    "exp_yield": 201,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 30,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "swift_swim",
+      "battle_armor"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "fury_cutter"
+    },
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 13,
+      "move": "absorb"
+    },
+    {
+      "level": 19,
+      "move": "leer"
+    },
+    {
+      "level": 25,
+      "move": "mud_shot"
+    },
+    {
+      "level": 31,
+      "move": "sand_attack"
+    },
+    {
+      "level": 37,
+      "move": "endure"
+    },
+    {
+      "level": 40,
+      "move": "slash"
+    },
+    {
+      "level": 46,
+      "move": "metal_sound"
+    },
+    {
+      "level": 55,
+      "move": "mega_drain"
+    },
+    {
+      "level": 65,
+      "move": "ancient_power"
+    }
+  ]
+}

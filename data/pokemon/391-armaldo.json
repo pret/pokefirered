@@ -1,0 +1,92 @@
+{
+  "species": "armaldo",
+  "base_stats": {
+    "base_hp": 75,
+    "base_attack": 125,
+    "base_defense": 100,
+    "base_speed": 45,
+    "base_sp_attack": 70,
+    "base_sp_defense": 80,
+    "type_1": "rock",
+    "type_2": "bug",
+    "catch_rate": 45,
+    "exp_yield": 200,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 30,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "water_3",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "battle_armor",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 1,
+      "move": "mud_sport"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 7,
+      "move": "harden"
+    },
+    {
+      "level": 13,
+      "move": "mud_sport"
+    },
+    {
+      "level": 19,
+      "move": "water_gun"
+    },
+    {
+      "level": 25,
+      "move": "metal_claw"
+    },
+    {
+      "level": 31,
+      "move": "protect"
+    },
+    {
+      "level": 37,
+      "move": "ancient_power"
+    },
+    {
+      "level": 46,
+      "move": "fury_cutter"
+    },
+    {
+      "level": 55,
+      "move": "slash"
+    },
+    {
+      "level": 64,
+      "move": "rock_blast"
+    }
+  ]
+}

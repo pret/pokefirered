@@ -1,0 +1,82 @@
+{
+  "species": "mareep",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 40,
+    "base_defense": 40,
+    "base_speed": 35,
+    "base_sp_attack": 65,
+    "base_sp_defense": 45,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 235,
+    "exp_yield": 59,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "static",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "take_down",
+    "body_slam",
+    "safeguard",
+    "screech",
+    "reflect",
+    "odor_sleuth",
+    "charge"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 15,
+      "species": "flaaffy"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 16,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 23,
+      "move": "cotton_spore"
+    },
+    {
+      "level": 30,
+      "move": "light_screen"
+    },
+    {
+      "level": 37,
+      "move": "thunder"
+    }
+  ]
+}

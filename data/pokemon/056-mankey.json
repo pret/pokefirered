@@ -1,0 +1,99 @@
+{
+  "species": "mankey",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 80,
+    "base_defense": 35,
+    "base_speed": 70,
+    "base_sp_attack": 35,
+    "base_sp_defense": 45,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 190,
+    "exp_yield": 74,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "vital_spirit",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "rock_slide",
+    "foresight",
+    "meditate",
+    "counter",
+    "reversal",
+    "beat_up",
+    "revenge",
+    "smelling_salt"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 28,
+      "species": "primeape"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 6,
+      "move": "low_kick"
+    },
+    {
+      "level": 11,
+      "move": "karate_chop"
+    },
+    {
+      "level": 16,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 21,
+      "move": "focus_energy"
+    },
+    {
+      "level": 26,
+      "move": "seismic_toss"
+    },
+    {
+      "level": 31,
+      "move": "cross_chop"
+    },
+    {
+      "level": 36,
+      "move": "swagger"
+    },
+    {
+      "level": 41,
+      "move": "screech"
+    },
+    {
+      "level": 46,
+      "move": "thrash"
+    }
+  ]
+}

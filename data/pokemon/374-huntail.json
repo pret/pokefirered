@@ -1,0 +1,72 @@
+{
+  "species": "huntail",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 104,
+    "base_defense": 105,
+    "base_speed": 52,
+    "base_sp_attack": 94,
+    "base_sp_defense": 75,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 60,
+    "exp_yield": 178,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "swift_swim",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "whirlpool"
+    },
+    {
+      "level": 8,
+      "move": "bite"
+    },
+    {
+      "level": 15,
+      "move": "screech"
+    },
+    {
+      "level": 22,
+      "move": "water_pulse"
+    },
+    {
+      "level": 29,
+      "move": "scary_face"
+    },
+    {
+      "level": 36,
+      "move": "crunch"
+    },
+    {
+      "level": 43,
+      "move": "baton_pass"
+    },
+    {
+      "level": 50,
+      "move": "hydro_pump"
+    }
+  ]
+}

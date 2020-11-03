@@ -1,0 +1,58 @@
+{
+  "species": "magikarp",
+  "base_stats": {
+    "base_hp": 20,
+    "base_attack": 10,
+    "base_defense": 55,
+    "base_speed": 80,
+    "base_sp_attack": 15,
+    "base_sp_defense": 20,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 255,
+    "exp_yield": 20,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 5,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_2",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "swift_swim",
+      "none"
+    ],
+    "safari_zone_flee_rate": 25,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "gyarados"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "splash"
+    },
+    {
+      "level": 15,
+      "move": "tackle"
+    },
+    {
+      "level": 30,
+      "move": "flail"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "species": "aipom",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 70,
+    "base_defense": 55,
+    "base_speed": 85,
+    "base_sp_attack": 40,
+    "base_sp_defense": 55,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 94,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "run_away",
+      "pickup"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "counter",
+    "screech",
+    "pursuit",
+    "agility",
+    "spite",
+    "slam",
+    "double_slap",
+    "beat_up"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 6,
+      "move": "sand_attack"
+    },
+    {
+      "level": 13,
+      "move": "astonish"
+    },
+    {
+      "level": 18,
+      "move": "baton_pass"
+    },
+    {
+      "level": 25,
+      "move": "tickle"
+    },
+    {
+      "level": 31,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 38,
+      "move": "swift"
+    },
+    {
+      "level": 43,
+      "move": "screech"
+    },
+    {
+      "level": 50,
+      "move": "agility"
+    }
+  ]
+}

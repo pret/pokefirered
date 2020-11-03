@@ -1,0 +1,96 @@
+{
+  "species": "glalie",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 80,
+    "base_defense": 80,
+    "base_speed": 80,
+    "base_sp_attack": 80,
+    "base_sp_defense": 80,
+    "type_1": "ice",
+    "type_2": "ice",
+    "catch_rate": 75,
+    "exp_yield": 187,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "never_melt_ice",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "fairy",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "inner_focus",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "powder_snow"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "double_team"
+    },
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 7,
+      "move": "double_team"
+    },
+    {
+      "level": 10,
+      "move": "bite"
+    },
+    {
+      "level": 16,
+      "move": "icy_wind"
+    },
+    {
+      "level": 19,
+      "move": "headbutt"
+    },
+    {
+      "level": 25,
+      "move": "protect"
+    },
+    {
+      "level": 28,
+      "move": "crunch"
+    },
+    {
+      "level": 34,
+      "move": "ice_beam"
+    },
+    {
+      "level": 42,
+      "move": "hail"
+    },
+    {
+      "level": 53,
+      "move": "blizzard"
+    },
+    {
+      "level": 61,
+      "move": "sheer_cold"
+    }
+  ]
+}

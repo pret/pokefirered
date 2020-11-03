@@ -1,0 +1,100 @@
+{
+  "species": "zigzagoon",
+  "base_stats": {
+    "base_hp": 38,
+    "base_attack": 30,
+    "base_defense": 41,
+    "base_speed": 60,
+    "base_sp_attack": 30,
+    "base_sp_defense": 41,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 255,
+    "exp_yield": 60,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "oran_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "pickup",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "charm",
+    "pursuit",
+    "substitute",
+    "tickle",
+    "trick"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "linoone"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 5,
+      "move": "tail_whip"
+    },
+    {
+      "level": 9,
+      "move": "headbutt"
+    },
+    {
+      "level": 13,
+      "move": "sand_attack"
+    },
+    {
+      "level": 17,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 21,
+      "move": "mud_sport"
+    },
+    {
+      "level": 25,
+      "move": "pin_missile"
+    },
+    {
+      "level": 29,
+      "move": "covet"
+    },
+    {
+      "level": 33,
+      "move": "flail"
+    },
+    {
+      "level": 37,
+      "move": "rest"
+    },
+    {
+      "level": 41,
+      "move": "belly_drum"
+    }
+  ]
+}

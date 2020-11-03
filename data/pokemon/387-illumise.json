@@ -1,0 +1,84 @@
+{
+  "species": "illumise",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 47,
+    "base_defense": 55,
+    "base_speed": 85,
+    "base_sp_attack": 73,
+    "base_sp_defense": 75,
+    "type_1": "bug",
+    "type_2": "bug",
+    "catch_rate": 150,
+    "exp_yield": 146,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -3,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "bug",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "oblivious",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "baton_pass",
+    "silver_wind",
+    "growth"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 5,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 9,
+      "move": "charm"
+    },
+    {
+      "level": 13,
+      "move": "moonlight"
+    },
+    {
+      "level": 17,
+      "move": "quick_attack"
+    },
+    {
+      "level": 21,
+      "move": "wish"
+    },
+    {
+      "level": 25,
+      "move": "encore"
+    },
+    {
+      "level": 29,
+      "move": "flatter"
+    },
+    {
+      "level": 33,
+      "move": "helping_hand"
+    },
+    {
+      "level": 37,
+      "move": "covet"
+    }
+  ]
+}

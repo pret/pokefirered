@@ -1,0 +1,93 @@
+{
+  "species": "ponyta",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 85,
+    "base_defense": 55,
+    "base_speed": 90,
+    "base_sp_attack": 65,
+    "base_sp_defense": 65,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 190,
+    "exp_yield": 152,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "run_away",
+      "flash_fire"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "flame_wheel",
+    "thrash",
+    "double_kick",
+    "hypnosis",
+    "charm",
+    "double_edge"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 40,
+      "species": "rapidash"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "quick_attack"
+    },
+    {
+      "level": 5,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "tail_whip"
+    },
+    {
+      "level": 14,
+      "move": "ember"
+    },
+    {
+      "level": 19,
+      "move": "stomp"
+    },
+    {
+      "level": 25,
+      "move": "fire_spin"
+    },
+    {
+      "level": 31,
+      "move": "take_down"
+    },
+    {
+      "level": 38,
+      "move": "agility"
+    },
+    {
+      "level": 45,
+      "move": "bounce"
+    },
+    {
+      "level": 53,
+      "move": "fire_blast"
+    }
+  ]
+}

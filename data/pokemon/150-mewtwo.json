@@ -1,0 +1,84 @@
+{
+  "species": "mewtwo",
+  "base_stats": {
+    "base_hp": 106,
+    "base_attack": 110,
+    "base_defense": 90,
+    "base_speed": 130,
+    "base_sp_attack": 154,
+    "base_sp_defense": 90,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 3,
+    "exp_yield": 220,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 3,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 120,
+    "friendship": 0,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 1,
+      "move": "disable"
+    },
+    {
+      "level": 11,
+      "move": "barrier"
+    },
+    {
+      "level": 22,
+      "move": "mist"
+    },
+    {
+      "level": 33,
+      "move": "swift"
+    },
+    {
+      "level": 44,
+      "move": "recover"
+    },
+    {
+      "level": 55,
+      "move": "safeguard"
+    },
+    {
+      "level": 66,
+      "move": "psychic"
+    },
+    {
+      "level": 77,
+      "move": "psych_up"
+    },
+    {
+      "level": 88,
+      "move": "future_sight"
+    },
+    {
+      "level": 99,
+      "move": "amnesia"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "species": "nidoran_f",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 47,
+    "base_defense": 52,
+    "base_speed": 41,
+    "base_sp_attack": 40,
+    "base_sp_defense": 40,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 235,
+    "exp_yield": 59,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -3,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "poison_point",
+      "none"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "supersonic",
+    "disable",
+    "take_down",
+    "focus_energy",
+    "charm",
+    "counter",
+    "beat_up"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "nidorina"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 8,
+      "move": "tail_whip"
+    },
+    {
+      "level": 12,
+      "move": "double_kick"
+    },
+    {
+      "level": 17,
+      "move": "poison_sting"
+    },
+    {
+      "level": 20,
+      "move": "bite"
+    },
+    {
+      "level": 23,
+      "move": "helping_hand"
+    },
+    {
+      "level": 30,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 38,
+      "move": "flatter"
+    },
+    {
+      "level": 47,
+      "move": "crunch"
+    }
+  ]
+}

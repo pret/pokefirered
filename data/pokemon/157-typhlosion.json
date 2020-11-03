@@ -1,0 +1,80 @@
+{
+  "species": "typhlosion",
+  "base_stats": {
+    "base_hp": 78,
+    "base_attack": 84,
+    "base_defense": 78,
+    "base_speed": 100,
+    "base_sp_attack": 109,
+    "base_sp_defense": 85,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 45,
+    "exp_yield": 209,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 3,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "blaze",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "smokescreen"
+    },
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 6,
+      "move": "smokescreen"
+    },
+    {
+      "level": 12,
+      "move": "ember"
+    },
+    {
+      "level": 21,
+      "move": "quick_attack"
+    },
+    {
+      "level": 31,
+      "move": "flame_wheel"
+    },
+    {
+      "level": 45,
+      "move": "swift"
+    },
+    {
+      "level": 60,
+      "move": "flamethrower"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "species": "beldum",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 55,
+    "base_defense": 80,
+    "base_speed": 30,
+    "base_sp_attack": 35,
+    "base_sp_defense": 60,
+    "type_1": "steel",
+    "type_2": "psychic",
+    "catch_rate": 3,
+    "exp_yield": 103,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "metal_coat",
+    "gender_ratio": -1,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "clear_body",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "metang"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "take_down"
+    }
+  ]
+}

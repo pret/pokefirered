@@ -1,0 +1,87 @@
+{
+  "species": "rattata",
+  "base_stats": {
+    "base_hp": 30,
+    "base_attack": 56,
+    "base_defense": 35,
+    "base_speed": 72,
+    "base_sp_attack": 25,
+    "base_sp_defense": 35,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 255,
+    "exp_yield": 57,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "run_away",
+      "guts"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "screech",
+    "flame_wheel",
+    "fury_swipes",
+    "bite",
+    "counter",
+    "reversal",
+    "uproar",
+    "swagger"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "raticate"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 7,
+      "move": "quick_attack"
+    },
+    {
+      "level": 13,
+      "move": "hyper_fang"
+    },
+    {
+      "level": 20,
+      "move": "focus_energy"
+    },
+    {
+      "level": 27,
+      "move": "pursuit"
+    },
+    {
+      "level": 34,
+      "move": "super_fang"
+    },
+    {
+      "level": 41,
+      "move": "endeavor"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "species": "jolteon",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 65,
+    "base_defense": 60,
+    "base_speed": 130,
+    "base_sp_attack": 110,
+    "base_sp_defense": 95,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 45,
+    "exp_yield": 197,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 35,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "volt_absorb",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "helping_hand"
+    },
+    {
+      "level": 8,
+      "move": "sand_attack"
+    },
+    {
+      "level": 16,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 23,
+      "move": "quick_attack"
+    },
+    {
+      "level": 30,
+      "move": "double_kick"
+    },
+    {
+      "level": 36,
+      "move": "pin_missile"
+    },
+    {
+      "level": 42,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 47,
+      "move": "agility"
+    },
+    {
+      "level": 52,
+      "move": "thunder"
+    }
+  ]
+}

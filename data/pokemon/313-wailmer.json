@@ -1,0 +1,103 @@
+{
+  "species": "wailmer",
+  "base_stats": {
+    "base_hp": 130,
+    "base_attack": 70,
+    "base_defense": 35,
+    "base_speed": 60,
+    "base_sp_attack": 70,
+    "base_sp_defense": 35,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 125,
+    "exp_yield": 137,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "field",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "water_veil",
+      "oblivious"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "double_edge",
+    "thrash",
+    "swagger",
+    "snore",
+    "sleep_talk",
+    "curse",
+    "fissure",
+    "tickle"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 40,
+      "species": "wailord"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "splash"
+    },
+    {
+      "level": 5,
+      "move": "growl"
+    },
+    {
+      "level": 10,
+      "move": "water_gun"
+    },
+    {
+      "level": 14,
+      "move": "rollout"
+    },
+    {
+      "level": 19,
+      "move": "whirlpool"
+    },
+    {
+      "level": 23,
+      "move": "astonish"
+    },
+    {
+      "level": 28,
+      "move": "water_pulse"
+    },
+    {
+      "level": 32,
+      "move": "mist"
+    },
+    {
+      "level": 37,
+      "move": "rest"
+    },
+    {
+      "level": 41,
+      "move": "water_spout"
+    },
+    {
+      "level": 46,
+      "move": "amnesia"
+    },
+    {
+      "level": 50,
+      "move": "hydro_pump"
+    }
+  ]
+}

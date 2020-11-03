@@ -1,0 +1,90 @@
+{
+  "species": "ledyba",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 20,
+    "base_defense": 30,
+    "base_speed": 55,
+    "base_sp_attack": 40,
+    "base_sp_defense": 80,
+    "type_1": "bug",
+    "type_2": "flying",
+    "catch_rate": 255,
+    "exp_yield": 54,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "swarm",
+      "early_bird"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "psybeam",
+    "bide",
+    "silver_wind"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 18,
+      "species": "ledian"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 8,
+      "move": "supersonic"
+    },
+    {
+      "level": 15,
+      "move": "comet_punch"
+    },
+    {
+      "level": 22,
+      "move": "light_screen"
+    },
+    {
+      "level": 22,
+      "move": "reflect"
+    },
+    {
+      "level": 22,
+      "move": "safeguard"
+    },
+    {
+      "level": 29,
+      "move": "baton_pass"
+    },
+    {
+      "level": 36,
+      "move": "swift"
+    },
+    {
+      "level": 43,
+      "move": "agility"
+    },
+    {
+      "level": 50,
+      "move": "double_edge"
+    }
+  ]
+}

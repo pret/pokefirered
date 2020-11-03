@@ -1,0 +1,80 @@
+{
+  "species": "entei",
+  "base_stats": {
+    "base_hp": 115,
+    "base_attack": 115,
+    "base_defense": 85,
+    "base_speed": 100,
+    "base_sp_attack": 90,
+    "base_sp_defense": 75,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 3,
+    "exp_yield": 217,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 80,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 11,
+      "move": "ember"
+    },
+    {
+      "level": 21,
+      "move": "roar"
+    },
+    {
+      "level": 31,
+      "move": "fire_spin"
+    },
+    {
+      "level": 41,
+      "move": "stomp"
+    },
+    {
+      "level": 51,
+      "move": "flamethrower"
+    },
+    {
+      "level": 61,
+      "move": "swagger"
+    },
+    {
+      "level": 71,
+      "move": "fire_blast"
+    },
+    {
+      "level": 81,
+      "move": "calm_mind"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "species": "blissey",
+  "base_stats": {
+    "base_hp": 255,
+    "base_attack": 10,
+    "base_defense": 10,
+    "base_speed": 55,
+    "base_sp_attack": 75,
+    "base_sp_defense": 135,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 30,
+    "exp_yield": 255,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "lucky_egg",
+    "gender_ratio": -3,
+    "egg_cycles": 40,
+    "friendship": 140,
+    "growth_rate": "fast",
+    "egg_group_1": "fairy",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "natural_cure",
+      "serene_grace"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 4,
+      "move": "tail_whip"
+    },
+    {
+      "level": 7,
+      "move": "refresh"
+    },
+    {
+      "level": 10,
+      "move": "soft_boiled"
+    },
+    {
+      "level": 13,
+      "move": "double_slap"
+    },
+    {
+      "level": 18,
+      "move": "minimize"
+    },
+    {
+      "level": 23,
+      "move": "sing"
+    },
+    {
+      "level": 28,
+      "move": "egg_bomb"
+    },
+    {
+      "level": 33,
+      "move": "defense_curl"
+    },
+    {
+      "level": 40,
+      "move": "light_screen"
+    },
+    {
+      "level": 47,
+      "move": "double_edge"
+    }
+  ]
+}

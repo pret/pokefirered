@@ -1,0 +1,97 @@
+{
+  "species": "duskull",
+  "base_stats": {
+    "base_hp": 20,
+    "base_attack": 40,
+    "base_defense": 90,
+    "base_speed": 25,
+    "base_sp_attack": 30,
+    "base_sp_defense": 90,
+    "type_1": "ghost",
+    "type_2": "ghost",
+    "catch_rate": 190,
+    "exp_yield": 97,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "spell_tag",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 35,
+    "growth_rate": "fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "imprison",
+    "destiny_bond",
+    "pain_split",
+    "grudge",
+    "memento",
+    "faint_attack"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 37,
+      "species": "dusclops"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "night_shade"
+    },
+    {
+      "level": 5,
+      "move": "disable"
+    },
+    {
+      "level": 12,
+      "move": "foresight"
+    },
+    {
+      "level": 16,
+      "move": "astonish"
+    },
+    {
+      "level": 23,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 27,
+      "move": "pursuit"
+    },
+    {
+      "level": 34,
+      "move": "curse"
+    },
+    {
+      "level": 38,
+      "move": "will_o_wisp"
+    },
+    {
+      "level": 45,
+      "move": "mean_look"
+    },
+    {
+      "level": 49,
+      "move": "future_sight"
+    }
+  ]
+}

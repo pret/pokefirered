@@ -1,0 +1,84 @@
+{
+  "species": "piloswine",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 100,
+    "base_defense": 80,
+    "base_speed": 50,
+    "base_sp_attack": 60,
+    "base_sp_defense": 60,
+    "type_1": "ice",
+    "type_2": "ground",
+    "catch_rate": 75,
+    "exp_yield": 160,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "aspear_berry",
+    "item_2": "never_melt_ice",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "oblivious",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "horn_attack"
+    },
+    {
+      "level": 1,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 1,
+      "move": "powder_snow"
+    },
+    {
+      "level": 1,
+      "move": "endure"
+    },
+    {
+      "level": 10,
+      "move": "powder_snow"
+    },
+    {
+      "level": 19,
+      "move": "endure"
+    },
+    {
+      "level": 28,
+      "move": "take_down"
+    },
+    {
+      "level": 33,
+      "move": "fury_attack"
+    },
+    {
+      "level": 42,
+      "move": "mist"
+    },
+    {
+      "level": 56,
+      "move": "blizzard"
+    },
+    {
+      "level": 70,
+      "move": "amnesia"
+    }
+  ]
+}

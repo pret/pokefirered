@@ -1,0 +1,90 @@
+{
+  "species": "tropius",
+  "base_stats": {
+    "base_hp": 99,
+    "base_attack": 68,
+    "base_defense": 83,
+    "base_speed": 51,
+    "base_sp_attack": 72,
+    "base_sp_defense": 87,
+    "type_1": "grass",
+    "type_2": "flying",
+    "catch_rate": 200,
+    "exp_yield": 169,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "headbutt",
+    "slam",
+    "razor_wind",
+    "leech_seed",
+    "nature_power"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "gust"
+    },
+    {
+      "level": 7,
+      "move": "growth"
+    },
+    {
+      "level": 11,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 17,
+      "move": "stomp"
+    },
+    {
+      "level": 21,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 27,
+      "move": "whirlwind"
+    },
+    {
+      "level": 31,
+      "move": "magical_leaf"
+    },
+    {
+      "level": 37,
+      "move": "body_slam"
+    },
+    {
+      "level": 41,
+      "move": "solar_beam"
+    },
+    {
+      "level": 47,
+      "move": "synthesis"
+    }
+  ]
+}

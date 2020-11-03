@@ -1,0 +1,88 @@
+{
+  "species": "deoxys",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 150,
+    "base_defense": 50,
+    "base_speed": 150,
+    "base_sp_attack": 150,
+    "base_sp_defense": 50,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 3,
+    "exp_yield": 215,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 120,
+    "friendship": 0,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": true
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 5,
+      "move": "night_shade"
+    },
+    {
+      "level": 10,
+      "move": "teleport"
+    },
+    {
+      "level": 15,
+      "move": "taunt"
+    },
+    {
+      "level": 20,
+      "move": "pursuit"
+    },
+    {
+      "level": 25,
+      "move": "psychic"
+    },
+    {
+      "level": 30,
+      "move": "superpower"
+    },
+    {
+      "level": 35,
+      "move": "cosmic_power"
+    },
+    {
+      "level": 40,
+      "move": "zap_cannon"
+    },
+    {
+      "level": 45,
+      "move": "psycho_boost"
+    },
+    {
+      "level": 50,
+      "move": "hyper_beam"
+    }
+  ]
+}

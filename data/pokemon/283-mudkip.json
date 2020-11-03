@@ -1,0 +1,101 @@
+{
+  "species": "mudkip",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 70,
+    "base_defense": 50,
+    "base_speed": 40,
+    "base_sp_attack": 50,
+    "base_sp_defense": 50,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 45,
+    "exp_yield": 65,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "torrent",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "refresh",
+    "uproar",
+    "curse",
+    "stomp",
+    "ice_ball",
+    "mirror_coat"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "marshtomp"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 6,
+      "move": "mud_slap"
+    },
+    {
+      "level": 10,
+      "move": "water_gun"
+    },
+    {
+      "level": 15,
+      "move": "bide"
+    },
+    {
+      "level": 19,
+      "move": "foresight"
+    },
+    {
+      "level": 24,
+      "move": "mud_sport"
+    },
+    {
+      "level": 28,
+      "move": "take_down"
+    },
+    {
+      "level": 33,
+      "move": "whirlpool"
+    },
+    {
+      "level": 37,
+      "move": "protect"
+    },
+    {
+      "level": 42,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 46,
+      "move": "endeavor"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "species": "igglybuff",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 30,
+    "base_defense": 15,
+    "base_speed": 15,
+    "base_sp_attack": 40,
+    "base_sp_defense": 20,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 170,
+    "exp_yield": 39,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "oran_berry",
+    "item_2": "none",
+    "gender_ratio": 75,
+    "egg_cycles": 10,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "cute_charm",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "perish_song",
+    "present",
+    "faint_attack",
+    "wish",
+    "fake_tears"
+  ],
+  "evolutions": [
+    {
+      "type": "friendship",
+      "value": 0,
+      "species": "jigglypuff"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "sing"
+    },
+    {
+      "level": 1,
+      "move": "charm"
+    },
+    {
+      "level": 4,
+      "move": "defense_curl"
+    },
+    {
+      "level": 9,
+      "move": "pound"
+    },
+    {
+      "level": 14,
+      "move": "sweet_kiss"
+    }
+  ]
+}

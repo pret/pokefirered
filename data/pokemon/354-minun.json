@@ -1,0 +1,87 @@
+{
+  "species": "minun",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 40,
+    "base_defense": 50,
+    "base_speed": 95,
+    "base_sp_attack": 75,
+    "base_sp_defense": 85,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 200,
+    "exp_yield": 120,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "fairy",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "minus",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "substitute",
+    "wish"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 4,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 10,
+      "move": "quick_attack"
+    },
+    {
+      "level": 13,
+      "move": "helping_hand"
+    },
+    {
+      "level": 19,
+      "move": "spark"
+    },
+    {
+      "level": 22,
+      "move": "encore"
+    },
+    {
+      "level": 28,
+      "move": "charm"
+    },
+    {
+      "level": 31,
+      "move": "charge"
+    },
+    {
+      "level": 37,
+      "move": "thunder"
+    },
+    {
+      "level": 40,
+      "move": "baton_pass"
+    },
+    {
+      "level": 47,
+      "move": "agility"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "species": "shuckle",
+  "base_stats": {
+    "base_hp": 20,
+    "base_attack": 10,
+    "base_defense": 230,
+    "base_speed": 5,
+    "base_sp_attack": 10,
+    "base_sp_defense": 230,
+    "type_1": "bug",
+    "type_2": "rock",
+    "catch_rate": 190,
+    "exp_yield": 80,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "berry_juice",
+    "item_2": "berry_juice",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "sturdy",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "sweet_scent"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "constrict"
+    },
+    {
+      "level": 1,
+      "move": "withdraw"
+    },
+    {
+      "level": 9,
+      "move": "wrap"
+    },
+    {
+      "level": 14,
+      "move": "encore"
+    },
+    {
+      "level": 23,
+      "move": "safeguard"
+    },
+    {
+      "level": 28,
+      "move": "bide"
+    },
+    {
+      "level": 37,
+      "move": "rest"
+    }
+  ]
+}

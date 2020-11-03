@@ -1,0 +1,96 @@
+{
+  "species": "whismur",
+  "base_stats": {
+    "base_hp": 64,
+    "base_attack": 51,
+    "base_defense": 23,
+    "base_speed": 28,
+    "base_sp_attack": 51,
+    "base_sp_defense": 23,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 190,
+    "exp_yield": 68,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "chesto_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "soundproof",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "take_down",
+    "snore",
+    "swagger",
+    "extrasensory",
+    "smelling_salt"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "loudred"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 5,
+      "move": "uproar"
+    },
+    {
+      "level": 11,
+      "move": "astonish"
+    },
+    {
+      "level": 15,
+      "move": "howl"
+    },
+    {
+      "level": 21,
+      "move": "supersonic"
+    },
+    {
+      "level": 25,
+      "move": "stomp"
+    },
+    {
+      "level": 31,
+      "move": "screech"
+    },
+    {
+      "level": 35,
+      "move": "roar"
+    },
+    {
+      "level": 41,
+      "move": "rest"
+    },
+    {
+      "level": 41,
+      "move": "sleep_talk"
+    },
+    {
+      "level": 45,
+      "move": "hyper_voice"
+    }
+  ]
+}

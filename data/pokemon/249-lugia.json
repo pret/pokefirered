@@ -1,0 +1,80 @@
+{
+  "species": "lugia",
+  "base_stats": {
+    "base_hp": 106,
+    "base_attack": 90,
+    "base_defense": 130,
+    "base_speed": 110,
+    "base_sp_attack": 90,
+    "base_sp_defense": 154,
+    "type_1": "psychic",
+    "type_2": "flying",
+    "catch_rate": 3,
+    "exp_yield": 220,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 3,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 120,
+    "friendship": 0,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "whirlwind"
+    },
+    {
+      "level": 11,
+      "move": "safeguard"
+    },
+    {
+      "level": 22,
+      "move": "gust"
+    },
+    {
+      "level": 33,
+      "move": "recover"
+    },
+    {
+      "level": 44,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 55,
+      "move": "rain_dance"
+    },
+    {
+      "level": 66,
+      "move": "swift"
+    },
+    {
+      "level": 77,
+      "move": "aeroblast"
+    },
+    {
+      "level": 88,
+      "move": "ancient_power"
+    },
+    {
+      "level": 99,
+      "move": "future_sight"
+    }
+  ]
+}

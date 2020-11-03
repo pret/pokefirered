@@ -1,0 +1,78 @@
+{
+  "species": "flaaffy",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 55,
+    "base_defense": 55,
+    "base_speed": 45,
+    "base_sp_attack": 80,
+    "base_sp_defense": 60,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 120,
+    "exp_yield": 117,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "static",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "ampharos"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 9,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 18,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 27,
+      "move": "cotton_spore"
+    },
+    {
+      "level": 36,
+      "move": "light_screen"
+    },
+    {
+      "level": 45,
+      "move": "thunder"
+    }
+  ]
+}

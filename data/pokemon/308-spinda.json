@@ -1,0 +1,93 @@
+{
+  "species": "spinda",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 60,
+    "base_defense": 60,
+    "base_speed": 60,
+    "base_sp_attack": 60,
+    "base_sp_defense": 60,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 255,
+    "exp_yield": 85,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "chesto_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "field",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "own_tempo",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "encore",
+    "rock_slide",
+    "assist",
+    "disable",
+    "baton_pass",
+    "wish",
+    "trick",
+    "smelling_salt"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 5,
+      "move": "uproar"
+    },
+    {
+      "level": 12,
+      "move": "faint_attack"
+    },
+    {
+      "level": 16,
+      "move": "psybeam"
+    },
+    {
+      "level": 23,
+      "move": "hypnosis"
+    },
+    {
+      "level": 27,
+      "move": "dizzy_punch"
+    },
+    {
+      "level": 34,
+      "move": "teeter_dance"
+    },
+    {
+      "level": 38,
+      "move": "psych_up"
+    },
+    {
+      "level": 45,
+      "move": "double_edge"
+    },
+    {
+      "level": 49,
+      "move": "flail"
+    },
+    {
+      "level": 56,
+      "move": "thrash"
+    }
+  ]
+}

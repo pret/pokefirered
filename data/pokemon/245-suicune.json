@@ -1,0 +1,80 @@
+{
+  "species": "suicune",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 75,
+    "base_defense": 115,
+    "base_speed": 85,
+    "base_sp_attack": 90,
+    "base_sp_defense": 115,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 3,
+    "exp_yield": 215,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 80,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 11,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 21,
+      "move": "rain_dance"
+    },
+    {
+      "level": 31,
+      "move": "gust"
+    },
+    {
+      "level": 41,
+      "move": "aurora_beam"
+    },
+    {
+      "level": 51,
+      "move": "mist"
+    },
+    {
+      "level": 61,
+      "move": "mirror_coat"
+    },
+    {
+      "level": 71,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 81,
+      "move": "calm_mind"
+    }
+  ]
+}

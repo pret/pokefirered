@@ -1,0 +1,93 @@
+{
+  "species": "zubat",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 45,
+    "base_defense": 35,
+    "base_speed": 55,
+    "base_sp_attack": 30,
+    "base_sp_defense": 40,
+    "type_1": "poison",
+    "type_2": "flying",
+    "catch_rate": 255,
+    "exp_yield": 54,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "inner_focus",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "quick_attack",
+    "pursuit",
+    "faint_attack",
+    "gust",
+    "whirlwind",
+    "curse"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 22,
+      "species": "golbat"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leech_life"
+    },
+    {
+      "level": 6,
+      "move": "astonish"
+    },
+    {
+      "level": 11,
+      "move": "supersonic"
+    },
+    {
+      "level": 16,
+      "move": "bite"
+    },
+    {
+      "level": 21,
+      "move": "wing_attack"
+    },
+    {
+      "level": 26,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 31,
+      "move": "air_cutter"
+    },
+    {
+      "level": 36,
+      "move": "mean_look"
+    },
+    {
+      "level": 41,
+      "move": "poison_fang"
+    },
+    {
+      "level": 46,
+      "move": "haze"
+    }
+  ]
+}

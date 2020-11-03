@@ -1,0 +1,91 @@
+{
+  "species": "absol",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 130,
+    "base_defense": 60,
+    "base_speed": 75,
+    "base_sp_attack": 75,
+    "base_sp_defense": 60,
+    "type_1": "dark",
+    "type_2": "dark",
+    "catch_rate": 30,
+    "exp_yield": 174,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 35,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "baton_pass",
+    "faint_attack",
+    "double_edge",
+    "magic_coat",
+    "curse",
+    "substitute"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 5,
+      "move": "leer"
+    },
+    {
+      "level": 9,
+      "move": "taunt"
+    },
+    {
+      "level": 13,
+      "move": "quick_attack"
+    },
+    {
+      "level": 17,
+      "move": "razor_wind"
+    },
+    {
+      "level": 21,
+      "move": "bite"
+    },
+    {
+      "level": 26,
+      "move": "swords_dance"
+    },
+    {
+      "level": 31,
+      "move": "double_team"
+    },
+    {
+      "level": 36,
+      "move": "slash"
+    },
+    {
+      "level": 41,
+      "move": "future_sight"
+    },
+    {
+      "level": 46,
+      "move": "perish_song"
+    }
+  ]
+}

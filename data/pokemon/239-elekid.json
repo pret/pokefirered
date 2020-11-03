@@ -1,0 +1,86 @@
+{
+  "species": "elekid",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 63,
+    "base_defense": 37,
+    "base_speed": 95,
+    "base_sp_attack": 65,
+    "base_sp_defense": 55,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 45,
+    "exp_yield": 106,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 25,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "static",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "karate_chop",
+    "barrier",
+    "rolling_kick",
+    "meditate",
+    "cross_chop",
+    "fire_punch",
+    "ice_punch"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "electabuzz"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "quick_attack"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 9,
+      "move": "thunder_punch"
+    },
+    {
+      "level": 17,
+      "move": "light_screen"
+    },
+    {
+      "level": 25,
+      "move": "swift"
+    },
+    {
+      "level": 33,
+      "move": "screech"
+    },
+    {
+      "level": 41,
+      "move": "thunderbolt"
+    },
+    {
+      "level": 49,
+      "move": "thunder"
+    }
+  ]
+}

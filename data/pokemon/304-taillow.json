@@ -1,0 +1,89 @@
+{
+  "species": "taillow",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 55,
+    "base_defense": 30,
+    "base_speed": 85,
+    "base_sp_attack": 30,
+    "base_sp_defense": 30,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 200,
+    "exp_yield": 59,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "guts",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "pursuit",
+    "supersonic",
+    "refresh",
+    "mirror_move",
+    "rage",
+    "sky_attack"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 22,
+      "species": "swellow"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 4,
+      "move": "focus_energy"
+    },
+    {
+      "level": 8,
+      "move": "quick_attack"
+    },
+    {
+      "level": 13,
+      "move": "wing_attack"
+    },
+    {
+      "level": 19,
+      "move": "double_team"
+    },
+    {
+      "level": 26,
+      "move": "endeavor"
+    },
+    {
+      "level": 34,
+      "move": "aerial_ace"
+    },
+    {
+      "level": 43,
+      "move": "agility"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "species": "kecleon",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 90,
+    "base_defense": 70,
+    "base_speed": 40,
+    "base_sp_attack": 60,
+    "base_sp_defense": 120,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 200,
+    "exp_yield": 132,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "persim_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "color_change",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "disable",
+    "magic_coat",
+    "trick"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "thief"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "astonish"
+    },
+    {
+      "level": 1,
+      "move": "lick"
+    },
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 4,
+      "move": "bind"
+    },
+    {
+      "level": 7,
+      "move": "faint_attack"
+    },
+    {
+      "level": 12,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 17,
+      "move": "psybeam"
+    },
+    {
+      "level": 24,
+      "move": "screech"
+    },
+    {
+      "level": 31,
+      "move": "slash"
+    },
+    {
+      "level": 40,
+      "move": "substitute"
+    },
+    {
+      "level": 49,
+      "move": "ancient_power"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "species": "lombre",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 50,
+    "base_defense": 50,
+    "base_speed": 50,
+    "base_sp_attack": 60,
+    "base_sp_defense": 70,
+    "type_1": "water",
+    "type_2": "grass",
+    "catch_rate": 120,
+    "exp_yield": 141,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "grass",
+    "abilities": [
+      "swift_swim",
+      "rain_dish"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "water_stone",
+      "species": "ludicolo"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "astonish"
+    },
+    {
+      "level": 3,
+      "move": "growl"
+    },
+    {
+      "level": 7,
+      "move": "absorb"
+    },
+    {
+      "level": 13,
+      "move": "nature_power"
+    },
+    {
+      "level": 19,
+      "move": "fake_out"
+    },
+    {
+      "level": 25,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 31,
+      "move": "water_sport"
+    },
+    {
+      "level": 37,
+      "move": "thief"
+    },
+    {
+      "level": 43,
+      "move": "uproar"
+    },
+    {
+      "level": 49,
+      "move": "hydro_pump"
+    }
+  ]
+}

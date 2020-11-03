@@ -1,0 +1,98 @@
+{
+  "species": "sealeo",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 60,
+    "base_defense": 70,
+    "base_speed": 45,
+    "base_sp_attack": 75,
+    "base_sp_defense": 70,
+    "type_1": "ice",
+    "type_2": "water",
+    "catch_rate": 120,
+    "exp_yield": 128,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "field",
+    "abilities": [
+      "thick_fat",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 44,
+      "species": "walrein"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "powder_snow"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "defense_curl"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 7,
+      "move": "encore"
+    },
+    {
+      "level": 13,
+      "move": "ice_ball"
+    },
+    {
+      "level": 19,
+      "move": "body_slam"
+    },
+    {
+      "level": 25,
+      "move": "aurora_beam"
+    },
+    {
+      "level": 31,
+      "move": "hail"
+    },
+    {
+      "level": 39,
+      "move": "rest"
+    },
+    {
+      "level": 39,
+      "move": "snore"
+    },
+    {
+      "level": 47,
+      "move": "blizzard"
+    },
+    {
+      "level": 55,
+      "move": "sheer_cold"
+    }
+  ]
+}

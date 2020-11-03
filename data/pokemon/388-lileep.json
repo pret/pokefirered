@@ -1,0 +1,91 @@
+{
+  "species": "lileep",
+  "base_stats": {
+    "base_hp": 66,
+    "base_attack": 41,
+    "base_defense": 77,
+    "base_speed": 23,
+    "base_sp_attack": 61,
+    "base_sp_defense": 87,
+    "type_1": "rock",
+    "type_2": "grass",
+    "catch_rate": 45,
+    "exp_yield": 121,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 30,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "water_3",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "suction_cups",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "barrier",
+    "recover",
+    "mirror_coat",
+    "rock_slide"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 40,
+      "species": "cradily"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "astonish"
+    },
+    {
+      "level": 8,
+      "move": "constrict"
+    },
+    {
+      "level": 15,
+      "move": "acid"
+    },
+    {
+      "level": 22,
+      "move": "ingrain"
+    },
+    {
+      "level": 29,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 36,
+      "move": "amnesia"
+    },
+    {
+      "level": 43,
+      "move": "ancient_power"
+    },
+    {
+      "level": 50,
+      "move": "stockpile"
+    },
+    {
+      "level": 50,
+      "move": "spit_up"
+    },
+    {
+      "level": 50,
+      "move": "swallow"
+    }
+  ]
+}

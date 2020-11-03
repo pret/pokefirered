@@ -1,0 +1,94 @@
+{
+  "species": "growlithe",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 70,
+    "base_defense": 45,
+    "base_speed": 60,
+    "base_sp_attack": 70,
+    "base_sp_defense": 50,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 190,
+    "exp_yield": 91,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "rawst_berry",
+    "item_2": "none",
+    "gender_ratio": 25,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "intimidate",
+      "flash_fire"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "body_slam",
+    "safeguard",
+    "crunch",
+    "thrash",
+    "fire_spin",
+    "howl",
+    "heat_wave"
+  ],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "fire_stone",
+      "species": "arcanine"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "roar"
+    },
+    {
+      "level": 7,
+      "move": "ember"
+    },
+    {
+      "level": 13,
+      "move": "leer"
+    },
+    {
+      "level": 19,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 25,
+      "move": "take_down"
+    },
+    {
+      "level": 31,
+      "move": "flame_wheel"
+    },
+    {
+      "level": 37,
+      "move": "helping_hand"
+    },
+    {
+      "level": 43,
+      "move": "agility"
+    },
+    {
+      "level": 49,
+      "move": "flamethrower"
+    }
+  ]
+}

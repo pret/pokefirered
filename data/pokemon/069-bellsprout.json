@@ -1,0 +1,94 @@
+{
+  "species": "bellsprout",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 75,
+    "base_defense": 35,
+    "base_speed": 40,
+    "base_sp_attack": 70,
+    "base_sp_defense": 30,
+    "type_1": "grass",
+    "type_2": "poison",
+    "catch_rate": 255,
+    "exp_yield": 84,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "swords_dance",
+    "encore",
+    "reflect",
+    "synthesis",
+    "leech_life",
+    "ingrain",
+    "magical_leaf"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 21,
+      "species": "weepinbell"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "vine_whip"
+    },
+    {
+      "level": 6,
+      "move": "growth"
+    },
+    {
+      "level": 11,
+      "move": "wrap"
+    },
+    {
+      "level": 15,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 17,
+      "move": "poison_powder"
+    },
+    {
+      "level": 19,
+      "move": "stun_spore"
+    },
+    {
+      "level": 23,
+      "move": "acid"
+    },
+    {
+      "level": 30,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 37,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 45,
+      "move": "slam"
+    }
+  ]
+}

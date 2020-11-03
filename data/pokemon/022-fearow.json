@@ -1,0 +1,80 @@
+{
+  "species": "fearow",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 90,
+    "base_defense": 65,
+    "base_speed": 100,
+    "base_sp_attack": 61,
+    "base_sp_defense": 61,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 90,
+    "exp_yield": 162,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "sharp_beak",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "keen_eye",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "fury_attack"
+    },
+    {
+      "level": 7,
+      "move": "leer"
+    },
+    {
+      "level": 13,
+      "move": "fury_attack"
+    },
+    {
+      "level": 26,
+      "move": "pursuit"
+    },
+    {
+      "level": 32,
+      "move": "mirror_move"
+    },
+    {
+      "level": 40,
+      "move": "drill_peck"
+    },
+    {
+      "level": 47,
+      "move": "agility"
+    }
+  ]
+}

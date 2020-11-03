@@ -1,0 +1,84 @@
+{
+  "species": "kingdra",
+  "base_stats": {
+    "base_hp": 75,
+    "base_attack": 95,
+    "base_defense": 95,
+    "base_speed": 85,
+    "base_sp_attack": 95,
+    "base_sp_defense": 95,
+    "type_1": "water",
+    "type_2": "dragon",
+    "catch_rate": 45,
+    "exp_yield": 207,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "dragon_scale",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "swift_swim",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 1,
+      "move": "smokescreen"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 8,
+      "move": "smokescreen"
+    },
+    {
+      "level": 15,
+      "move": "leer"
+    },
+    {
+      "level": 22,
+      "move": "water_gun"
+    },
+    {
+      "level": 29,
+      "move": "twister"
+    },
+    {
+      "level": 40,
+      "move": "agility"
+    },
+    {
+      "level": 51,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 62,
+      "move": "dragon_dance"
+    }
+  ]
+}

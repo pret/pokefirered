@@ -1,0 +1,86 @@
+{
+  "species": "nidorina",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 62,
+    "base_defense": 67,
+    "base_speed": 56,
+    "base_sp_attack": 55,
+    "base_sp_defense": 55,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 120,
+    "exp_yield": 117,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -3,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "poison_point",
+      "none"
+    ],
+    "safari_zone_flee_rate": 75,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "moon_stone",
+      "species": "nidoqueen"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 8,
+      "move": "tail_whip"
+    },
+    {
+      "level": 12,
+      "move": "double_kick"
+    },
+    {
+      "level": 18,
+      "move": "poison_sting"
+    },
+    {
+      "level": 22,
+      "move": "bite"
+    },
+    {
+      "level": 26,
+      "move": "helping_hand"
+    },
+    {
+      "level": 34,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 43,
+      "move": "flatter"
+    },
+    {
+      "level": 53,
+      "move": "crunch"
+    }
+  ]
+}

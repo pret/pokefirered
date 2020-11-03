@@ -1,0 +1,90 @@
+{
+  "species": "jigglypuff",
+  "base_stats": {
+    "base_hp": 115,
+    "base_attack": 45,
+    "base_defense": 20,
+    "base_speed": 20,
+    "base_sp_attack": 45,
+    "base_sp_defense": 25,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 170,
+    "exp_yield": 76,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "oran_berry",
+    "item_2": "none",
+    "gender_ratio": 75,
+    "egg_cycles": 10,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "fairy",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "cute_charm",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "moon_stone",
+      "species": "wigglytuff"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "sing"
+    },
+    {
+      "level": 4,
+      "move": "defense_curl"
+    },
+    {
+      "level": 9,
+      "move": "pound"
+    },
+    {
+      "level": 14,
+      "move": "disable"
+    },
+    {
+      "level": 19,
+      "move": "rollout"
+    },
+    {
+      "level": 24,
+      "move": "double_slap"
+    },
+    {
+      "level": 29,
+      "move": "rest"
+    },
+    {
+      "level": 34,
+      "move": "body_slam"
+    },
+    {
+      "level": 39,
+      "move": "mimic"
+    },
+    {
+      "level": 44,
+      "move": "hyper_voice"
+    },
+    {
+      "level": 49,
+      "move": "double_edge"
+    }
+  ]
+}

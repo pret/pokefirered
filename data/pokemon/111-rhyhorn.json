@@ -1,0 +1,95 @@
+{
+  "species": "rhyhorn",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 85,
+    "base_defense": 95,
+    "base_speed": 25,
+    "base_sp_attack": 30,
+    "base_sp_defense": 30,
+    "type_1": "ground",
+    "type_2": "rock",
+    "catch_rate": 120,
+    "exp_yield": 135,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "lightning_rod",
+      "rock_head"
+    ],
+    "safari_zone_flee_rate": 75,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "crunch",
+    "reversal",
+    "rock_slide",
+    "counter",
+    "magnitude",
+    "swords_dance",
+    "curse",
+    "crush_claw"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 42,
+      "species": "rhydon"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "horn_attack"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 10,
+      "move": "stomp"
+    },
+    {
+      "level": 15,
+      "move": "fury_attack"
+    },
+    {
+      "level": 24,
+      "move": "scary_face"
+    },
+    {
+      "level": 29,
+      "move": "rock_blast"
+    },
+    {
+      "level": 38,
+      "move": "horn_drill"
+    },
+    {
+      "level": 43,
+      "move": "take_down"
+    },
+    {
+      "level": 52,
+      "move": "earthquake"
+    },
+    {
+      "level": 57,
+      "move": "megahorn"
+    }
+  ]
+}

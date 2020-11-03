@@ -1,0 +1,84 @@
+{
+  "species": "surskit",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 30,
+    "base_defense": 32,
+    "base_speed": 65,
+    "base_sp_attack": 50,
+    "base_sp_defense": 52,
+    "type_1": "bug",
+    "type_2": "water",
+    "catch_rate": 200,
+    "exp_yield": 63,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "bug",
+    "abilities": [
+      "swift_swim",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "foresight",
+    "mud_shot",
+    "psybeam",
+    "hydro_pump",
+    "mind_reader"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 22,
+      "species": "masquerain"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 7,
+      "move": "quick_attack"
+    },
+    {
+      "level": 13,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 19,
+      "move": "water_sport"
+    },
+    {
+      "level": 25,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 31,
+      "move": "agility"
+    },
+    {
+      "level": 37,
+      "move": "mist"
+    },
+    {
+      "level": 37,
+      "move": "haze"
+    }
+  ]
+}

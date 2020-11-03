@@ -1,0 +1,95 @@
+{
+  "species": "snubbull",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 80,
+    "base_defense": 50,
+    "base_speed": 30,
+    "base_sp_attack": 40,
+    "base_sp_defense": 40,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 190,
+    "exp_yield": 63,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 75,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "field",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "intimidate",
+      "run_away"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "metronome",
+    "faint_attack",
+    "reflect",
+    "present",
+    "crunch",
+    "heal_bell",
+    "snore",
+    "smelling_salt"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 23,
+      "species": "granbull"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "scary_face"
+    },
+    {
+      "level": 4,
+      "move": "tail_whip"
+    },
+    {
+      "level": 8,
+      "move": "charm"
+    },
+    {
+      "level": 13,
+      "move": "bite"
+    },
+    {
+      "level": 19,
+      "move": "lick"
+    },
+    {
+      "level": 26,
+      "move": "roar"
+    },
+    {
+      "level": 34,
+      "move": "rage"
+    },
+    {
+      "level": 43,
+      "move": "take_down"
+    },
+    {
+      "level": 53,
+      "move": "crunch"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "species": "cacturne",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 115,
+    "base_defense": 60,
+    "base_speed": 55,
+    "base_sp_attack": 115,
+    "base_sp_defense": 60,
+    "type_1": "grass",
+    "type_2": "dark",
+    "catch_rate": 60,
+    "exp_yield": 177,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "poison_barb",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 35,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "sand_veil",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "revenge"
+    },
+    {
+      "level": 1,
+      "move": "poison_sting"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 1,
+      "move": "growth"
+    },
+    {
+      "level": 5,
+      "move": "absorb"
+    },
+    {
+      "level": 9,
+      "move": "growth"
+    },
+    {
+      "level": 13,
+      "move": "leech_seed"
+    },
+    {
+      "level": 17,
+      "move": "sand_attack"
+    },
+    {
+      "level": 21,
+      "move": "pin_missile"
+    },
+    {
+      "level": 25,
+      "move": "ingrain"
+    },
+    {
+      "level": 29,
+      "move": "faint_attack"
+    },
+    {
+      "level": 35,
+      "move": "spikes"
+    },
+    {
+      "level": 41,
+      "move": "needle_arm"
+    },
+    {
+      "level": 47,
+      "move": "cotton_spore"
+    },
+    {
+      "level": 53,
+      "move": "sandstorm"
+    },
+    {
+      "level": 59,
+      "move": "destiny_bond"
+    }
+  ]
+}

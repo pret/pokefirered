@@ -1,0 +1,86 @@
+{
+  "species": "nuzleaf",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 70,
+    "base_defense": 40,
+    "base_speed": 60,
+    "base_sp_attack": 60,
+    "base_sp_defense": 40,
+    "type_1": "grass",
+    "type_2": "dark",
+    "catch_rate": 120,
+    "exp_yield": 141,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "early_bird"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "leaf_stone",
+      "species": "shiftry"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 3,
+      "move": "harden"
+    },
+    {
+      "level": 7,
+      "move": "growth"
+    },
+    {
+      "level": 13,
+      "move": "nature_power"
+    },
+    {
+      "level": 19,
+      "move": "fake_out"
+    },
+    {
+      "level": 25,
+      "move": "torment"
+    },
+    {
+      "level": 31,
+      "move": "faint_attack"
+    },
+    {
+      "level": 37,
+      "move": "razor_wind"
+    },
+    {
+      "level": 43,
+      "move": "swagger"
+    },
+    {
+      "level": 49,
+      "move": "extrasensory"
+    }
+  ]
+}

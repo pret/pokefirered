@@ -1,0 +1,84 @@
+{
+  "species": "espeon",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 65,
+    "base_defense": 60,
+    "base_speed": 110,
+    "base_sp_attack": 130,
+    "base_sp_defense": 95,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 197,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 35,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "synchronize",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "helping_hand"
+    },
+    {
+      "level": 8,
+      "move": "sand_attack"
+    },
+    {
+      "level": 16,
+      "move": "confusion"
+    },
+    {
+      "level": 23,
+      "move": "quick_attack"
+    },
+    {
+      "level": 30,
+      "move": "swift"
+    },
+    {
+      "level": 36,
+      "move": "psybeam"
+    },
+    {
+      "level": 42,
+      "move": "psych_up"
+    },
+    {
+      "level": 47,
+      "move": "psychic"
+    },
+    {
+      "level": 52,
+      "move": "morning_sun"
+    }
+  ]
+}

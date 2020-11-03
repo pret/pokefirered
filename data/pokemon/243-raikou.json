@@ -1,0 +1,80 @@
+{
+  "species": "raikou",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 85,
+    "base_defense": 75,
+    "base_speed": 115,
+    "base_sp_attack": 115,
+    "base_sp_defense": 100,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 3,
+    "exp_yield": 216,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 80,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 11,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 21,
+      "move": "roar"
+    },
+    {
+      "level": 31,
+      "move": "quick_attack"
+    },
+    {
+      "level": 41,
+      "move": "spark"
+    },
+    {
+      "level": 51,
+      "move": "reflect"
+    },
+    {
+      "level": 61,
+      "move": "crunch"
+    },
+    {
+      "level": 71,
+      "move": "thunder"
+    },
+    {
+      "level": 81,
+      "move": "calm_mind"
+    }
+  ]
+}

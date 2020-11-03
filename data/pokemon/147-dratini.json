@@ -1,0 +1,93 @@
+{
+  "species": "dratini",
+  "base_stats": {
+    "base_hp": 41,
+    "base_attack": 64,
+    "base_defense": 45,
+    "base_speed": 50,
+    "base_sp_attack": 50,
+    "base_sp_defense": 50,
+    "type_1": "dragon",
+    "type_2": "dragon",
+    "catch_rate": 45,
+    "exp_yield": 67,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "shed_skin",
+      "none"
+    ],
+    "safari_zone_flee_rate": 100,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "light_screen",
+    "mist",
+    "haze",
+    "supersonic",
+    "dragon_breath",
+    "dragon_dance"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "dragonair"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 8,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 15,
+      "move": "twister"
+    },
+    {
+      "level": 22,
+      "move": "dragon_rage"
+    },
+    {
+      "level": 29,
+      "move": "slam"
+    },
+    {
+      "level": 36,
+      "move": "agility"
+    },
+    {
+      "level": 43,
+      "move": "safeguard"
+    },
+    {
+      "level": 50,
+      "move": "outrage"
+    },
+    {
+      "level": 57,
+      "move": "hyper_beam"
+    }
+  ]
+}

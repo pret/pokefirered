@@ -1,0 +1,76 @@
+{
+  "species": "gyarados",
+  "base_stats": {
+    "base_hp": 95,
+    "base_attack": 125,
+    "base_defense": 79,
+    "base_speed": 81,
+    "base_sp_attack": 60,
+    "base_sp_defense": 100,
+    "type_1": "water",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 214,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 5,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_2",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "intimidate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "thrash"
+    },
+    {
+      "level": 20,
+      "move": "bite"
+    },
+    {
+      "level": 25,
+      "move": "dragon_rage"
+    },
+    {
+      "level": 30,
+      "move": "leer"
+    },
+    {
+      "level": 35,
+      "move": "twister"
+    },
+    {
+      "level": 40,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 45,
+      "move": "rain_dance"
+    },
+    {
+      "level": 50,
+      "move": "dragon_dance"
+    },
+    {
+      "level": 55,
+      "move": "hyper_beam"
+    }
+  ]
+}

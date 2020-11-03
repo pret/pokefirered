@@ -1,0 +1,78 @@
+{
+  "species": "gligar",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 75,
+    "base_defense": 105,
+    "base_speed": 85,
+    "base_sp_attack": 35,
+    "base_sp_defense": 65,
+    "type_1": "ground",
+    "type_2": "flying",
+    "catch_rate": 60,
+    "exp_yield": 108,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "hyper_cutter",
+      "sand_veil"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "metal_claw",
+    "wing_attack",
+    "razor_wind",
+    "counter",
+    "sand_tomb"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "poison_sting"
+    },
+    {
+      "level": 6,
+      "move": "sand_attack"
+    },
+    {
+      "level": 13,
+      "move": "harden"
+    },
+    {
+      "level": 20,
+      "move": "quick_attack"
+    },
+    {
+      "level": 28,
+      "move": "faint_attack"
+    },
+    {
+      "level": 36,
+      "move": "slash"
+    },
+    {
+      "level": 44,
+      "move": "screech"
+    },
+    {
+      "level": 52,
+      "move": "guillotine"
+    }
+  ]
+}

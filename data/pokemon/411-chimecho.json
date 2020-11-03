@@ -1,0 +1,93 @@
+{
+  "species": "chimecho",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 50,
+    "base_defense": 70,
+    "base_speed": 65,
+    "base_sp_attack": 95,
+    "base_sp_defense": 80,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 147,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "disable",
+    "curse",
+    "hypnosis",
+    "dream_eater"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 6,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "astonish"
+    },
+    {
+      "level": 14,
+      "move": "confusion"
+    },
+    {
+      "level": 17,
+      "move": "take_down"
+    },
+    {
+      "level": 22,
+      "move": "uproar"
+    },
+    {
+      "level": 25,
+      "move": "yawn"
+    },
+    {
+      "level": 30,
+      "move": "psywave"
+    },
+    {
+      "level": 33,
+      "move": "double_edge"
+    },
+    {
+      "level": 38,
+      "move": "heal_bell"
+    },
+    {
+      "level": 41,
+      "move": "safeguard"
+    },
+    {
+      "level": 46,
+      "move": "psychic"
+    }
+  ]
+}

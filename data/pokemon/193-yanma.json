@@ -1,0 +1,90 @@
+{
+  "species": "yanma",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 65,
+    "base_defense": 45,
+    "base_speed": 95,
+    "base_sp_attack": 75,
+    "base_sp_defense": 45,
+    "type_1": "bug",
+    "type_2": "flying",
+    "catch_rate": 75,
+    "exp_yield": 147,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "speed_boost",
+      "compound_eyes"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "whirlwind",
+    "reversal",
+    "leech_life",
+    "signal_beam",
+    "silver_wind"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "foresight"
+    },
+    {
+      "level": 6,
+      "move": "quick_attack"
+    },
+    {
+      "level": 12,
+      "move": "double_team"
+    },
+    {
+      "level": 17,
+      "move": "sonic_boom"
+    },
+    {
+      "level": 23,
+      "move": "hypnosis"
+    },
+    {
+      "level": 28,
+      "move": "detect"
+    },
+    {
+      "level": 34,
+      "move": "uproar"
+    },
+    {
+      "level": 39,
+      "move": "wing_attack"
+    },
+    {
+      "level": 45,
+      "move": "supersonic"
+    },
+    {
+      "level": 50,
+      "move": "screech"
+    }
+  ]
+}

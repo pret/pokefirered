@@ -1,0 +1,85 @@
+{
+  "species": "slugma",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 40,
+    "base_defense": 40,
+    "base_speed": 20,
+    "base_sp_attack": 70,
+    "base_sp_defense": 40,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 190,
+    "exp_yield": 78,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "magma_armor",
+      "flame_body"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "acid_armor",
+    "heat_wave"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 38,
+      "species": "magcargo"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "yawn"
+    },
+    {
+      "level": 1,
+      "move": "smog"
+    },
+    {
+      "level": 8,
+      "move": "ember"
+    },
+    {
+      "level": 15,
+      "move": "rock_throw"
+    },
+    {
+      "level": 22,
+      "move": "harden"
+    },
+    {
+      "level": 29,
+      "move": "amnesia"
+    },
+    {
+      "level": 36,
+      "move": "flamethrower"
+    },
+    {
+      "level": 43,
+      "move": "rock_slide"
+    },
+    {
+      "level": 50,
+      "move": "body_slam"
+    }
+  ]
+}

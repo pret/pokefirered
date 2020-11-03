@@ -1,0 +1,80 @@
+{
+  "species": "quagsire",
+  "base_stats": {
+    "base_hp": 95,
+    "base_attack": 85,
+    "base_defense": 85,
+    "base_speed": 35,
+    "base_sp_attack": 65,
+    "base_sp_defense": 65,
+    "type_1": "water",
+    "type_2": "ground",
+    "catch_rate": 90,
+    "exp_yield": 137,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "field",
+    "abilities": [
+      "damp",
+      "water_absorb"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 11,
+      "move": "slam"
+    },
+    {
+      "level": 16,
+      "move": "mud_shot"
+    },
+    {
+      "level": 23,
+      "move": "amnesia"
+    },
+    {
+      "level": 35,
+      "move": "yawn"
+    },
+    {
+      "level": 42,
+      "move": "earthquake"
+    },
+    {
+      "level": 49,
+      "move": "rain_dance"
+    },
+    {
+      "level": 61,
+      "move": "mist"
+    },
+    {
+      "level": 61,
+      "move": "haze"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "species": "chinchou",
+  "base_stats": {
+    "base_hp": 75,
+    "base_attack": 38,
+    "base_defense": 38,
+    "base_speed": 67,
+    "base_sp_attack": 56,
+    "base_sp_defense": 56,
+    "type_1": "water",
+    "type_2": "electric",
+    "catch_rate": 190,
+    "exp_yield": 90,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "yellow_shard",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_2",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "volt_absorb",
+      "illuminate"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "flail",
+    "screech",
+    "amnesia"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 27,
+      "species": "lanturn"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 1,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 5,
+      "move": "supersonic"
+    },
+    {
+      "level": 13,
+      "move": "flail"
+    },
+    {
+      "level": 17,
+      "move": "water_gun"
+    },
+    {
+      "level": 25,
+      "move": "spark"
+    },
+    {
+      "level": 29,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 37,
+      "move": "take_down"
+    },
+    {
+      "level": 41,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 49,
+      "move": "charge"
+    }
+  ]
+}

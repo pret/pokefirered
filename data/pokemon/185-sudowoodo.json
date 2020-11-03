@@ -1,0 +1,78 @@
+{
+  "species": "sudowoodo",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 100,
+    "base_defense": 115,
+    "base_speed": 30,
+    "base_sp_attack": 30,
+    "base_sp_defense": 65,
+    "type_1": "rock",
+    "type_2": "rock",
+    "catch_rate": 65,
+    "exp_yield": 135,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 2,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "sturdy",
+      "rock_head"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "self_destruct"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "rock_throw"
+    },
+    {
+      "level": 1,
+      "move": "mimic"
+    },
+    {
+      "level": 9,
+      "move": "flail"
+    },
+    {
+      "level": 17,
+      "move": "low_kick"
+    },
+    {
+      "level": 25,
+      "move": "rock_slide"
+    },
+    {
+      "level": 33,
+      "move": "block"
+    },
+    {
+      "level": 41,
+      "move": "faint_attack"
+    },
+    {
+      "level": 49,
+      "move": "slam"
+    },
+    {
+      "level": 57,
+      "move": "double_edge"
+    }
+  ]
+}

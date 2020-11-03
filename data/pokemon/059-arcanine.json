@@ -1,0 +1,60 @@
+{
+  "species": "arcanine",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 110,
+    "base_defense": 80,
+    "base_speed": 95,
+    "base_sp_attack": 100,
+    "base_sp_defense": 80,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 75,
+    "exp_yield": 213,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "rawst_berry",
+    "item_2": "none",
+    "gender_ratio": 25,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "intimidate",
+      "flash_fire"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "roar"
+    },
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 1,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 49,
+      "move": "extreme_speed"
+    }
+  ]
+}

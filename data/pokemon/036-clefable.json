@@ -1,0 +1,56 @@
+{
+  "species": "clefable",
+  "base_stats": {
+    "base_hp": 95,
+    "base_attack": 70,
+    "base_defense": 73,
+    "base_speed": 60,
+    "base_sp_attack": 85,
+    "base_sp_defense": 90,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 25,
+    "exp_yield": 129,
+    "ev_yield_hp": 3,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "moon_stone",
+    "gender_ratio": 75,
+    "egg_cycles": 10,
+    "friendship": 140,
+    "growth_rate": "fast",
+    "egg_group_1": "fairy",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "cute_charm",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "sing"
+    },
+    {
+      "level": 1,
+      "move": "double_slap"
+    },
+    {
+      "level": 1,
+      "move": "minimize"
+    },
+    {
+      "level": 1,
+      "move": "metronome"
+    }
+  ]
+}

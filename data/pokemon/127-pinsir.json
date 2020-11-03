@@ -1,0 +1,85 @@
+{
+  "species": "pinsir",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 125,
+    "base_defense": 100,
+    "base_speed": 85,
+    "base_sp_attack": 55,
+    "base_sp_defense": 70,
+    "type_1": "bug",
+    "type_2": "bug",
+    "catch_rate": 45,
+    "exp_yield": 200,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "hyper_cutter",
+      "none"
+    ],
+    "safari_zone_flee_rate": 125,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "fury_attack",
+    "flail",
+    "false_swipe",
+    "faint_attack"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "vice_grip"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 7,
+      "move": "bind"
+    },
+    {
+      "level": 13,
+      "move": "seismic_toss"
+    },
+    {
+      "level": 19,
+      "move": "harden"
+    },
+    {
+      "level": 25,
+      "move": "revenge"
+    },
+    {
+      "level": 31,
+      "move": "brick_break"
+    },
+    {
+      "level": 37,
+      "move": "guillotine"
+    },
+    {
+      "level": 43,
+      "move": "submission"
+    },
+    {
+      "level": 49,
+      "move": "swords_dance"
+    }
+  ]
+}

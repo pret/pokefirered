@@ -1,0 +1,96 @@
+{
+  "species": "whiscash",
+  "base_stats": {
+    "base_hp": 110,
+    "base_attack": 78,
+    "base_defense": 73,
+    "base_speed": 60,
+    "base_sp_attack": 76,
+    "base_sp_defense": 71,
+    "type_1": "water",
+    "type_2": "ground",
+    "catch_rate": 75,
+    "exp_yield": 158,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_2",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "oblivious",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tickle"
+    },
+    {
+      "level": 1,
+      "move": "mud_slap"
+    },
+    {
+      "level": 1,
+      "move": "mud_sport"
+    },
+    {
+      "level": 1,
+      "move": "water_sport"
+    },
+    {
+      "level": 6,
+      "move": "mud_sport"
+    },
+    {
+      "level": 6,
+      "move": "water_sport"
+    },
+    {
+      "level": 11,
+      "move": "water_gun"
+    },
+    {
+      "level": 16,
+      "move": "magnitude"
+    },
+    {
+      "level": 21,
+      "move": "amnesia"
+    },
+    {
+      "level": 26,
+      "move": "rest"
+    },
+    {
+      "level": 26,
+      "move": "snore"
+    },
+    {
+      "level": 36,
+      "move": "earthquake"
+    },
+    {
+      "level": 46,
+      "move": "future_sight"
+    },
+    {
+      "level": 56,
+      "move": "fissure"
+    }
+  ]
+}

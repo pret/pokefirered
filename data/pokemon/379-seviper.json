@@ -1,0 +1,85 @@
+{
+  "species": "seviper",
+  "base_stats": {
+    "base_hp": 73,
+    "base_attack": 100,
+    "base_defense": 60,
+    "base_speed": 65,
+    "base_sp_attack": 100,
+    "base_sp_defense": 60,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 90,
+    "exp_yield": 165,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "field",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "shed_skin",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "stockpile",
+    "swallow",
+    "spit_up",
+    "body_slam"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 7,
+      "move": "lick"
+    },
+    {
+      "level": 10,
+      "move": "bite"
+    },
+    {
+      "level": 16,
+      "move": "poison_tail"
+    },
+    {
+      "level": 19,
+      "move": "screech"
+    },
+    {
+      "level": 25,
+      "move": "glare"
+    },
+    {
+      "level": 28,
+      "move": "crunch"
+    },
+    {
+      "level": 34,
+      "move": "poison_fang"
+    },
+    {
+      "level": 37,
+      "move": "swagger"
+    },
+    {
+      "level": 43,
+      "move": "haze"
+    }
+  ]
+}

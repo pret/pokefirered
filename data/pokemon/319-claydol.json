@@ -1,0 +1,100 @@
+{
+  "species": "claydol",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 70,
+    "base_defense": 105,
+    "base_speed": 75,
+    "base_sp_attack": 70,
+    "base_sp_defense": 120,
+    "type_1": "ground",
+    "type_2": "psychic",
+    "catch_rate": 90,
+    "exp_yield": 189,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "teleport"
+    },
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 1,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 3,
+      "move": "harden"
+    },
+    {
+      "level": 5,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 7,
+      "move": "mud_slap"
+    },
+    {
+      "level": 11,
+      "move": "psybeam"
+    },
+    {
+      "level": 15,
+      "move": "rock_tomb"
+    },
+    {
+      "level": 19,
+      "move": "self_destruct"
+    },
+    {
+      "level": 25,
+      "move": "ancient_power"
+    },
+    {
+      "level": 31,
+      "move": "sandstorm"
+    },
+    {
+      "level": 36,
+      "move": "hyper_beam"
+    },
+    {
+      "level": 42,
+      "move": "cosmic_power"
+    },
+    {
+      "level": 55,
+      "move": "explosion"
+    }
+  ]
+}

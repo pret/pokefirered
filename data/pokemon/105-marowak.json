@@ -1,0 +1,100 @@
+{
+  "species": "marowak",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 80,
+    "base_defense": 110,
+    "base_speed": 45,
+    "base_sp_attack": 50,
+    "base_sp_defense": 80,
+    "type_1": "ground",
+    "type_2": "ground",
+    "catch_rate": 75,
+    "exp_yield": 124,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 2,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "thick_club",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "monster",
+    "egg_group_2": "monster",
+    "abilities": [
+      "rock_head",
+      "lightning_rod"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "bone_club"
+    },
+    {
+      "level": 1,
+      "move": "headbutt"
+    },
+    {
+      "level": 5,
+      "move": "tail_whip"
+    },
+    {
+      "level": 9,
+      "move": "bone_club"
+    },
+    {
+      "level": 13,
+      "move": "headbutt"
+    },
+    {
+      "level": 17,
+      "move": "leer"
+    },
+    {
+      "level": 21,
+      "move": "focus_energy"
+    },
+    {
+      "level": 25,
+      "move": "bonemerang"
+    },
+    {
+      "level": 32,
+      "move": "rage"
+    },
+    {
+      "level": 39,
+      "move": "false_swipe"
+    },
+    {
+      "level": 46,
+      "move": "thrash"
+    },
+    {
+      "level": 53,
+      "move": "bone_rush"
+    },
+    {
+      "level": 61,
+      "move": "double_edge"
+    }
+  ]
+}

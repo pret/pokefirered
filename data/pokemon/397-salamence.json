@@ -1,0 +1,104 @@
+{
+  "species": "salamence",
+  "base_stats": {
+    "base_hp": 95,
+    "base_attack": 135,
+    "base_defense": 80,
+    "base_speed": 100,
+    "base_sp_attack": 110,
+    "base_sp_defense": 80,
+    "type_1": "dragon",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 218,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "dragon_scale",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "dragon",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "intimidate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "rage"
+    },
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "headbutt"
+    },
+    {
+      "level": 5,
+      "move": "bite"
+    },
+    {
+      "level": 9,
+      "move": "leer"
+    },
+    {
+      "level": 17,
+      "move": "headbutt"
+    },
+    {
+      "level": 21,
+      "move": "focus_energy"
+    },
+    {
+      "level": 25,
+      "move": "ember"
+    },
+    {
+      "level": 30,
+      "move": "protect"
+    },
+    {
+      "level": 38,
+      "move": "dragon_breath"
+    },
+    {
+      "level": 47,
+      "move": "scary_face"
+    },
+    {
+      "level": 50,
+      "move": "fly"
+    },
+    {
+      "level": 61,
+      "move": "crunch"
+    },
+    {
+      "level": 79,
+      "move": "dragon_claw"
+    },
+    {
+      "level": 93,
+      "move": "double_edge"
+    }
+  ]
+}

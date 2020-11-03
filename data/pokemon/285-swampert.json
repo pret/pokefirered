@@ -1,0 +1,100 @@
+{
+  "species": "swampert",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 110,
+    "base_defense": 90,
+    "base_speed": 60,
+    "base_sp_attack": 85,
+    "base_sp_defense": 90,
+    "type_1": "water",
+    "type_2": "ground",
+    "catch_rate": 45,
+    "exp_yield": 210,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "torrent",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "mud_slap"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 6,
+      "move": "mud_slap"
+    },
+    {
+      "level": 10,
+      "move": "water_gun"
+    },
+    {
+      "level": 15,
+      "move": "bide"
+    },
+    {
+      "level": 16,
+      "move": "mud_shot"
+    },
+    {
+      "level": 20,
+      "move": "foresight"
+    },
+    {
+      "level": 25,
+      "move": "mud_sport"
+    },
+    {
+      "level": 31,
+      "move": "take_down"
+    },
+    {
+      "level": 39,
+      "move": "muddy_water"
+    },
+    {
+      "level": 46,
+      "move": "protect"
+    },
+    {
+      "level": 52,
+      "move": "earthquake"
+    },
+    {
+      "level": 61,
+      "move": "endeavor"
+    }
+  ]
+}

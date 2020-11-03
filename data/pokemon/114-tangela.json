@@ -1,0 +1,96 @@
+{
+  "species": "tangela",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 55,
+    "base_defense": 115,
+    "base_speed": 60,
+    "base_sp_attack": 100,
+    "base_sp_defense": 40,
+    "type_1": "grass",
+    "type_2": "grass",
+    "catch_rate": 45,
+    "exp_yield": 166,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "flail",
+    "confusion",
+    "mega_drain",
+    "reflect",
+    "amnesia",
+    "leech_seed",
+    "nature_power"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "ingrain"
+    },
+    {
+      "level": 1,
+      "move": "constrict"
+    },
+    {
+      "level": 4,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 10,
+      "move": "absorb"
+    },
+    {
+      "level": 13,
+      "move": "growth"
+    },
+    {
+      "level": 19,
+      "move": "poison_powder"
+    },
+    {
+      "level": 22,
+      "move": "vine_whip"
+    },
+    {
+      "level": 28,
+      "move": "bind"
+    },
+    {
+      "level": 31,
+      "move": "mega_drain"
+    },
+    {
+      "level": 37,
+      "move": "stun_spore"
+    },
+    {
+      "level": 40,
+      "move": "slam"
+    },
+    {
+      "level": 46,
+      "move": "tickle"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "species": "sceptile",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 85,
+    "base_defense": 65,
+    "base_speed": 120,
+    "base_sp_attack": 105,
+    "base_sp_defense": 85,
+    "type_1": "grass",
+    "type_2": "grass",
+    "catch_rate": 45,
+    "exp_yield": 208,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 3,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "overgrow",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 1,
+      "move": "quick_attack"
+    },
+    {
+      "level": 6,
+      "move": "absorb"
+    },
+    {
+      "level": 11,
+      "move": "quick_attack"
+    },
+    {
+      "level": 16,
+      "move": "fury_cutter"
+    },
+    {
+      "level": 17,
+      "move": "pursuit"
+    },
+    {
+      "level": 23,
+      "move": "screech"
+    },
+    {
+      "level": 29,
+      "move": "leaf_blade"
+    },
+    {
+      "level": 35,
+      "move": "agility"
+    },
+    {
+      "level": 43,
+      "move": "slam"
+    },
+    {
+      "level": 51,
+      "move": "detect"
+    },
+    {
+      "level": 59,
+      "move": "false_swipe"
+    }
+  ]
+}

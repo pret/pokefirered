@@ -1,0 +1,87 @@
+{
+  "species": "natu",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 50,
+    "base_defense": 45,
+    "base_speed": 70,
+    "base_sp_attack": 70,
+    "base_sp_defense": 45,
+    "type_1": "psychic",
+    "type_2": "flying",
+    "catch_rate": 190,
+    "exp_yield": 73,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "synchronize",
+      "early_bird"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "haze",
+    "drill_peck",
+    "quick_attack",
+    "faint_attack",
+    "steel_wing",
+    "psych_up",
+    "feather_dance",
+    "refresh"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 25,
+      "species": "xatu"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 10,
+      "move": "night_shade"
+    },
+    {
+      "level": 20,
+      "move": "teleport"
+    },
+    {
+      "level": 30,
+      "move": "wish"
+    },
+    {
+      "level": 30,
+      "move": "future_sight"
+    },
+    {
+      "level": 40,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 50,
+      "move": "psychic"
+    }
+  ]
+}

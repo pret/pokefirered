@@ -1,0 +1,64 @@
+{
+  "species": "bellossom",
+  "base_stats": {
+    "base_hp": 75,
+    "base_attack": 80,
+    "base_defense": 85,
+    "base_speed": 50,
+    "base_sp_attack": 90,
+    "base_sp_defense": 100,
+    "type_1": "grass",
+    "type_2": "grass",
+    "catch_rate": 45,
+    "exp_yield": 184,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 3,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 1,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 1,
+      "move": "stun_spore"
+    },
+    {
+      "level": 1,
+      "move": "magical_leaf"
+    },
+    {
+      "level": 44,
+      "move": "petal_dance"
+    },
+    {
+      "level": 55,
+      "move": "solar_beam"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "species": "venusaur",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 82,
+    "base_defense": 83,
+    "base_speed": 80,
+    "base_sp_attack": 100,
+    "base_sp_defense": 100,
+    "type_1": "grass",
+    "type_2": "poison",
+    "catch_rate": 45,
+    "exp_yield": 208,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "grass",
+    "abilities": [
+      "overgrow",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "leech_seed"
+    },
+    {
+      "level": 1,
+      "move": "vine_whip"
+    },
+    {
+      "level": 4,
+      "move": "growl"
+    },
+    {
+      "level": 7,
+      "move": "leech_seed"
+    },
+    {
+      "level": 10,
+      "move": "vine_whip"
+    },
+    {
+      "level": 15,
+      "move": "poison_powder"
+    },
+    {
+      "level": 15,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 22,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 29,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 41,
+      "move": "growth"
+    },
+    {
+      "level": 53,
+      "move": "synthesis"
+    },
+    {
+      "level": 65,
+      "move": "solar_beam"
+    }
+  ]
+}

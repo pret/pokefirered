@@ -1,0 +1,76 @@
+{
+  "species": "articuno",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 85,
+    "base_defense": 100,
+    "base_speed": 85,
+    "base_sp_attack": 95,
+    "base_sp_defense": 125,
+    "type_1": "ice",
+    "type_2": "flying",
+    "catch_rate": 3,
+    "exp_yield": 215,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 3,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 80,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "gust"
+    },
+    {
+      "level": 1,
+      "move": "powder_snow"
+    },
+    {
+      "level": 13,
+      "move": "mist"
+    },
+    {
+      "level": 25,
+      "move": "agility"
+    },
+    {
+      "level": 37,
+      "move": "mind_reader"
+    },
+    {
+      "level": 49,
+      "move": "ice_beam"
+    },
+    {
+      "level": 61,
+      "move": "reflect"
+    },
+    {
+      "level": 73,
+      "move": "blizzard"
+    },
+    {
+      "level": 85,
+      "move": "sheer_cold"
+    }
+  ]
+}

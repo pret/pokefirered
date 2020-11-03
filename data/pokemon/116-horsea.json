@@ -1,0 +1,86 @@
+{
+  "species": "horsea",
+  "base_stats": {
+    "base_hp": 30,
+    "base_attack": 40,
+    "base_defense": 70,
+    "base_speed": 60,
+    "base_sp_attack": 70,
+    "base_sp_defense": 25,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 225,
+    "exp_yield": 83,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "swift_swim",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "flail",
+    "aurora_beam",
+    "octazooka",
+    "disable",
+    "splash",
+    "dragon_rage",
+    "dragon_breath"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 32,
+      "species": "seadra"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 8,
+      "move": "smokescreen"
+    },
+    {
+      "level": 15,
+      "move": "leer"
+    },
+    {
+      "level": 22,
+      "move": "water_gun"
+    },
+    {
+      "level": 29,
+      "move": "twister"
+    },
+    {
+      "level": 36,
+      "move": "agility"
+    },
+    {
+      "level": 43,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 50,
+      "move": "dragon_dance"
+    }
+  ]
+}

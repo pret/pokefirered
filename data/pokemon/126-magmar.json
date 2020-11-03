@@ -1,0 +1,88 @@
+{
+  "species": "magmar",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 95,
+    "base_defense": 57,
+    "base_speed": 93,
+    "base_sp_attack": 100,
+    "base_sp_defense": 85,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 45,
+    "exp_yield": 167,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 25,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "flame_body",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "smog"
+    },
+    {
+      "level": 1,
+      "move": "fire_punch"
+    },
+    {
+      "level": 7,
+      "move": "leer"
+    },
+    {
+      "level": 13,
+      "move": "smog"
+    },
+    {
+      "level": 19,
+      "move": "fire_punch"
+    },
+    {
+      "level": 25,
+      "move": "smokescreen"
+    },
+    {
+      "level": 33,
+      "move": "sunny_day"
+    },
+    {
+      "level": 41,
+      "move": "flamethrower"
+    },
+    {
+      "level": 49,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 57,
+      "move": "fire_blast"
+    }
+  ]
+}

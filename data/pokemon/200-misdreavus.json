@@ -1,0 +1,85 @@
+{
+  "species": "misdreavus",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 60,
+    "base_defense": 60,
+    "base_speed": 85,
+    "base_sp_attack": 85,
+    "base_sp_defense": 85,
+    "type_1": "ghost",
+    "type_2": "ghost",
+    "catch_rate": 45,
+    "exp_yield": 147,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "spell_tag",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 35,
+    "growth_rate": "fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "screech",
+    "destiny_bond",
+    "psych_up",
+    "imprison"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "psywave"
+    },
+    {
+      "level": 6,
+      "move": "spite"
+    },
+    {
+      "level": 11,
+      "move": "astonish"
+    },
+    {
+      "level": 17,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 23,
+      "move": "mean_look"
+    },
+    {
+      "level": 30,
+      "move": "psybeam"
+    },
+    {
+      "level": 37,
+      "move": "pain_split"
+    },
+    {
+      "level": 45,
+      "move": "perish_song"
+    },
+    {
+      "level": 53,
+      "move": "grudge"
+    }
+  ]
+}

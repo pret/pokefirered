@@ -1,0 +1,84 @@
+{
+  "species": "muk",
+  "base_stats": {
+    "base_hp": 105,
+    "base_attack": 105,
+    "base_defense": 75,
+    "base_speed": 50,
+    "base_sp_attack": 65,
+    "base_sp_defense": 100,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 75,
+    "exp_yield": 157,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "stench",
+      "sticky_hold"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "poison_gas"
+    },
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 4,
+      "move": "harden"
+    },
+    {
+      "level": 8,
+      "move": "disable"
+    },
+    {
+      "level": 13,
+      "move": "sludge"
+    },
+    {
+      "level": 19,
+      "move": "minimize"
+    },
+    {
+      "level": 26,
+      "move": "screech"
+    },
+    {
+      "level": 34,
+      "move": "acid_armor"
+    },
+    {
+      "level": 47,
+      "move": "sludge_bomb"
+    },
+    {
+      "level": 61,
+      "move": "memento"
+    }
+  ]
+}

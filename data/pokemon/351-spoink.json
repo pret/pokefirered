@@ -1,0 +1,95 @@
+{
+  "species": "spoink",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 25,
+    "base_defense": 35,
+    "base_speed": 60,
+    "base_sp_attack": 70,
+    "base_sp_defense": 80,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 255,
+    "exp_yield": 89,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "thick_fat",
+      "own_tempo"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "future_sight",
+    "extrasensory",
+    "substitute",
+    "trick"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 32,
+      "species": "grumpig"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "splash"
+    },
+    {
+      "level": 7,
+      "move": "psywave"
+    },
+    {
+      "level": 10,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 16,
+      "move": "psybeam"
+    },
+    {
+      "level": 19,
+      "move": "psych_up"
+    },
+    {
+      "level": 25,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 28,
+      "move": "magic_coat"
+    },
+    {
+      "level": 34,
+      "move": "psychic"
+    },
+    {
+      "level": 37,
+      "move": "rest"
+    },
+    {
+      "level": 37,
+      "move": "snore"
+    },
+    {
+      "level": 43,
+      "move": "bounce"
+    }
+  ]
+}

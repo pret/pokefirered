@@ -1,0 +1,91 @@
+{
+  "species": "zangoose",
+  "base_stats": {
+    "base_hp": 73,
+    "base_attack": 115,
+    "base_defense": 60,
+    "base_speed": 90,
+    "base_sp_attack": 60,
+    "base_sp_defense": 60,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 90,
+    "exp_yield": 165,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "immunity",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "flail",
+    "double_kick",
+    "razor_wind",
+    "counter",
+    "roar",
+    "curse"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 4,
+      "move": "leer"
+    },
+    {
+      "level": 7,
+      "move": "quick_attack"
+    },
+    {
+      "level": 10,
+      "move": "swords_dance"
+    },
+    {
+      "level": 13,
+      "move": "fury_cutter"
+    },
+    {
+      "level": 19,
+      "move": "slash"
+    },
+    {
+      "level": 25,
+      "move": "pursuit"
+    },
+    {
+      "level": 31,
+      "move": "crush_claw"
+    },
+    {
+      "level": 37,
+      "move": "taunt"
+    },
+    {
+      "level": 46,
+      "move": "detect"
+    },
+    {
+      "level": 55,
+      "move": "false_swipe"
+    }
+  ]
+}

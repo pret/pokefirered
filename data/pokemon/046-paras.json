@@ -1,0 +1,91 @@
+{
+  "species": "paras",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 70,
+    "base_defense": 55,
+    "base_speed": 25,
+    "base_sp_attack": 45,
+    "base_sp_defense": 55,
+    "type_1": "bug",
+    "type_2": "grass",
+    "catch_rate": 190,
+    "exp_yield": 70,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "tiny_mushroom",
+    "item_2": "big_mushroom",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "grass",
+    "abilities": [
+      "effect_spore",
+      "none"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "false_swipe",
+    "screech",
+    "counter",
+    "psybeam",
+    "flail",
+    "sweet_scent",
+    "light_screen",
+    "pursuit"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 24,
+      "species": "parasect"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 7,
+      "move": "stun_spore"
+    },
+    {
+      "level": 13,
+      "move": "poison_powder"
+    },
+    {
+      "level": 19,
+      "move": "leech_life"
+    },
+    {
+      "level": 25,
+      "move": "spore"
+    },
+    {
+      "level": 31,
+      "move": "slash"
+    },
+    {
+      "level": 37,
+      "move": "growth"
+    },
+    {
+      "level": 43,
+      "move": "giga_drain"
+    },
+    {
+      "level": 49,
+      "move": "aromatherapy"
+    }
+  ]
+}

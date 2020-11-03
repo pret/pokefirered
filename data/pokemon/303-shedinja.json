@@ -1,0 +1,80 @@
+{
+  "species": "shedinja",
+  "base_stats": {
+    "base_hp": 1,
+    "base_attack": 90,
+    "base_defense": 45,
+    "base_speed": 40,
+    "base_sp_attack": 30,
+    "base_sp_defense": 30,
+    "type_1": "bug",
+    "type_2": "ghost",
+    "catch_rate": 45,
+    "exp_yield": 95,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "wonder_guard",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 5,
+      "move": "leech_life"
+    },
+    {
+      "level": 9,
+      "move": "sand_attack"
+    },
+    {
+      "level": 14,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 19,
+      "move": "mind_reader"
+    },
+    {
+      "level": 25,
+      "move": "spite"
+    },
+    {
+      "level": 31,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 38,
+      "move": "shadow_ball"
+    },
+    {
+      "level": 45,
+      "move": "grudge"
+    }
+  ]
+}

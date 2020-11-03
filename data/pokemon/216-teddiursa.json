@@ -1,0 +1,95 @@
+{
+  "species": "teddiursa",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 80,
+    "base_defense": 50,
+    "base_speed": 40,
+    "base_sp_attack": 50,
+    "base_sp_defense": 50,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 120,
+    "exp_yield": 124,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "oran_berry",
+    "item_2": "sitrus_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "pickup",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "crunch",
+    "take_down",
+    "seismic_toss",
+    "counter",
+    "metal_claw",
+    "fake_tears",
+    "yawn",
+    "sleep_talk"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "ursaring"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 7,
+      "move": "lick"
+    },
+    {
+      "level": 13,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 19,
+      "move": "fake_tears"
+    },
+    {
+      "level": 25,
+      "move": "faint_attack"
+    },
+    {
+      "level": 31,
+      "move": "rest"
+    },
+    {
+      "level": 37,
+      "move": "slash"
+    },
+    {
+      "level": 43,
+      "move": "snore"
+    },
+    {
+      "level": 49,
+      "move": "thrash"
+    }
+  ]
+}

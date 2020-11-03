@@ -1,0 +1,99 @@
+{
+  "species": "vulpix",
+  "base_stats": {
+    "base_hp": 38,
+    "base_attack": 41,
+    "base_defense": 40,
+    "base_speed": 65,
+    "base_sp_attack": 50,
+    "base_sp_defense": 65,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 190,
+    "exp_yield": 63,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "rawst_berry",
+    "item_2": "none",
+    "gender_ratio": 75,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "flash_fire",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "faint_attack",
+    "hypnosis",
+    "flail",
+    "spite",
+    "disable",
+    "howl",
+    "psych_up",
+    "heat_wave"
+  ],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "fire_stone",
+      "species": "ninetales"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 5,
+      "move": "tail_whip"
+    },
+    {
+      "level": 9,
+      "move": "roar"
+    },
+    {
+      "level": 13,
+      "move": "quick_attack"
+    },
+    {
+      "level": 17,
+      "move": "will_o_wisp"
+    },
+    {
+      "level": 21,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 25,
+      "move": "imprison"
+    },
+    {
+      "level": 29,
+      "move": "flamethrower"
+    },
+    {
+      "level": 33,
+      "move": "safeguard"
+    },
+    {
+      "level": 37,
+      "move": "grudge"
+    },
+    {
+      "level": 41,
+      "move": "fire_spin"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "species": "mantine",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 40,
+    "base_defense": 70,
+    "base_speed": 70,
+    "base_sp_attack": 80,
+    "base_sp_defense": 140,
+    "type_1": "water",
+    "type_2": "flying",
+    "catch_rate": 25,
+    "exp_yield": 168,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "swift_swim",
+      "water_absorb"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "twister",
+    "hydro_pump",
+    "haze",
+    "slam",
+    "mud_sport",
+    "rock_slide"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 8,
+      "move": "supersonic"
+    },
+    {
+      "level": 15,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 22,
+      "move": "take_down"
+    },
+    {
+      "level": 29,
+      "move": "agility"
+    },
+    {
+      "level": 36,
+      "move": "wing_attack"
+    },
+    {
+      "level": 43,
+      "move": "water_pulse"
+    },
+    {
+      "level": 50,
+      "move": "confuse_ray"
+    }
+  ]
+}

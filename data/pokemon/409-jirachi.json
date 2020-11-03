@@ -1,0 +1,88 @@
+{
+  "species": "jirachi",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 100,
+    "base_defense": 100,
+    "base_speed": 100,
+    "base_sp_attack": 100,
+    "base_sp_defense": 100,
+    "type_1": "steel",
+    "type_2": "psychic",
+    "catch_rate": 3,
+    "exp_yield": 215,
+    "ev_yield_hp": 3,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "star_piece",
+    "item_2": "star_piece",
+    "gender_ratio": -1,
+    "egg_cycles": 120,
+    "friendship": 100,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "serene_grace",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wish"
+    },
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 5,
+      "move": "rest"
+    },
+    {
+      "level": 10,
+      "move": "swift"
+    },
+    {
+      "level": 15,
+      "move": "helping_hand"
+    },
+    {
+      "level": 20,
+      "move": "psychic"
+    },
+    {
+      "level": 25,
+      "move": "refresh"
+    },
+    {
+      "level": 30,
+      "move": "rest"
+    },
+    {
+      "level": 35,
+      "move": "double_edge"
+    },
+    {
+      "level": 40,
+      "move": "future_sight"
+    },
+    {
+      "level": 45,
+      "move": "cosmic_power"
+    },
+    {
+      "level": 50,
+      "move": "doom_desire"
+    }
+  ]
+}

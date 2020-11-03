@@ -1,0 +1,74 @@
+{
+  "species": "pichu",
+  "base_stats": {
+    "base_hp": 20,
+    "base_attack": 40,
+    "base_defense": 15,
+    "base_speed": 60,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 190,
+    "exp_yield": 42,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 10,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "static",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "reversal",
+    "bide",
+    "present",
+    "encore",
+    "double_slap",
+    "wish",
+    "charge"
+  ],
+  "evolutions": [
+    {
+      "type": "friendship",
+      "value": 0,
+      "species": "pikachu"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 1,
+      "move": "charm"
+    },
+    {
+      "level": 6,
+      "move": "tail_whip"
+    },
+    {
+      "level": 8,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 11,
+      "move": "sweet_kiss"
+    }
+  ]
+}

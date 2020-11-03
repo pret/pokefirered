@@ -1,0 +1,84 @@
+{
+  "species": "volbeat",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 73,
+    "base_defense": 55,
+    "base_speed": 85,
+    "base_sp_attack": 47,
+    "base_sp_defense": 75,
+    "type_1": "bug",
+    "type_2": "bug",
+    "catch_rate": 150,
+    "exp_yield": 146,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "bug",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "illuminate",
+      "swarm"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "baton_pass",
+    "silver_wind",
+    "trick"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 5,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 9,
+      "move": "double_team"
+    },
+    {
+      "level": 13,
+      "move": "moonlight"
+    },
+    {
+      "level": 17,
+      "move": "quick_attack"
+    },
+    {
+      "level": 21,
+      "move": "tail_glow"
+    },
+    {
+      "level": 25,
+      "move": "signal_beam"
+    },
+    {
+      "level": 29,
+      "move": "protect"
+    },
+    {
+      "level": 33,
+      "move": "helping_hand"
+    },
+    {
+      "level": 37,
+      "move": "double_edge"
+    }
+  ]
+}

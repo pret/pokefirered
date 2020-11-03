@@ -1,0 +1,66 @@
+{
+  "species": "tyrogue",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 35,
+    "base_defense": 35,
+    "base_speed": 35,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 75,
+    "exp_yield": 91,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "guts",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "rapid_spin",
+    "hi_jump_kick",
+    "mach_punch",
+    "mind_reader",
+    "helping_hand"
+  ],
+  "evolutions": [
+    {
+      "type": "level_atk_lt_def",
+      "value": 20,
+      "species": "hitmonchan"
+    },
+    {
+      "type": "level_atk_gt_def",
+      "value": 20,
+      "species": "hitmonlee"
+    },
+    {
+      "type": "level_atk_eq_def",
+      "value": 20,
+      "species": "hitmontop"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "species": "drowzee",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 48,
+    "base_defense": 45,
+    "base_speed": 42,
+    "base_sp_attack": 43,
+    "base_sp_defense": 90,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 190,
+    "exp_yield": 102,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "insomnia",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "barrier",
+    "assist",
+    "role_play",
+    "fire_punch",
+    "thunder_punch",
+    "ice_punch"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 26,
+      "species": "hypno"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "hypnosis"
+    },
+    {
+      "level": 7,
+      "move": "disable"
+    },
+    {
+      "level": 11,
+      "move": "confusion"
+    },
+    {
+      "level": 17,
+      "move": "headbutt"
+    },
+    {
+      "level": 21,
+      "move": "poison_gas"
+    },
+    {
+      "level": 27,
+      "move": "meditate"
+    },
+    {
+      "level": 31,
+      "move": "psychic"
+    },
+    {
+      "level": 37,
+      "move": "psych_up"
+    },
+    {
+      "level": 41,
+      "move": "swagger"
+    },
+    {
+      "level": 47,
+      "move": "future_sight"
+    }
+  ]
+}

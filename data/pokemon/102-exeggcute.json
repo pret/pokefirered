@@ -1,0 +1,94 @@
+{
+  "species": "exeggcute",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 40,
+    "base_defense": 80,
+    "base_speed": 40,
+    "base_sp_attack": 60,
+    "base_sp_defense": 45,
+    "type_1": "grass",
+    "type_2": "psychic",
+    "catch_rate": 90,
+    "exp_yield": 98,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 75,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "synthesis",
+    "moonlight",
+    "reflect",
+    "ancient_power",
+    "psych_up",
+    "ingrain",
+    "curse"
+  ],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "leaf_stone",
+      "species": "exeggutor"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "barrage"
+    },
+    {
+      "level": 1,
+      "move": "uproar"
+    },
+    {
+      "level": 1,
+      "move": "hypnosis"
+    },
+    {
+      "level": 7,
+      "move": "reflect"
+    },
+    {
+      "level": 13,
+      "move": "leech_seed"
+    },
+    {
+      "level": 19,
+      "move": "confusion"
+    },
+    {
+      "level": 25,
+      "move": "stun_spore"
+    },
+    {
+      "level": 31,
+      "move": "poison_powder"
+    },
+    {
+      "level": 37,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 43,
+      "move": "solar_beam"
+    }
+  ]
+}

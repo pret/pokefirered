@@ -1,0 +1,84 @@
+{
+  "species": "hitmontop",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 95,
+    "base_defense": 95,
+    "base_speed": 70,
+    "base_sp_attack": 35,
+    "base_sp_defense": 110,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 45,
+    "exp_yield": 138,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "intimidate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "revenge"
+    },
+    {
+      "level": 1,
+      "move": "rolling_kick"
+    },
+    {
+      "level": 7,
+      "move": "focus_energy"
+    },
+    {
+      "level": 13,
+      "move": "pursuit"
+    },
+    {
+      "level": 19,
+      "move": "quick_attack"
+    },
+    {
+      "level": 20,
+      "move": "triple_kick"
+    },
+    {
+      "level": 25,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 31,
+      "move": "counter"
+    },
+    {
+      "level": 37,
+      "move": "agility"
+    },
+    {
+      "level": 43,
+      "move": "detect"
+    },
+    {
+      "level": 49,
+      "move": "endeavor"
+    }
+  ]
+}

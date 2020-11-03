@@ -1,0 +1,60 @@
+{
+  "species": "starmie",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 75,
+    "base_defense": 85,
+    "base_speed": 115,
+    "base_sp_attack": 100,
+    "base_sp_defense": 85,
+    "type_1": "water",
+    "type_2": "psychic",
+    "catch_rate": 60,
+    "exp_yield": 207,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "stardust",
+    "item_2": "star_piece",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_3",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "illuminate",
+      "natural_cure"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 1,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 1,
+      "move": "recover"
+    },
+    {
+      "level": 1,
+      "move": "swift"
+    },
+    {
+      "level": 33,
+      "move": "confuse_ray"
+    }
+  ]
+}

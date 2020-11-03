@@ -1,0 +1,107 @@
+{
+  "species": "makuhita",
+  "base_stats": {
+    "base_hp": 72,
+    "base_attack": 60,
+    "base_defense": 30,
+    "base_speed": 25,
+    "base_sp_attack": 20,
+    "base_sp_defense": 30,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 180,
+    "exp_yield": 87,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 25,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "thick_fat",
+      "guts"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "faint_attack",
+    "detect",
+    "foresight",
+    "helping_hand",
+    "cross_chop",
+    "revenge",
+    "dynamic_punch",
+    "counter"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 24,
+      "species": "hariyama"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 4,
+      "move": "sand_attack"
+    },
+    {
+      "level": 10,
+      "move": "arm_thrust"
+    },
+    {
+      "level": 13,
+      "move": "vital_throw"
+    },
+    {
+      "level": 19,
+      "move": "fake_out"
+    },
+    {
+      "level": 22,
+      "move": "whirlwind"
+    },
+    {
+      "level": 28,
+      "move": "knock_off"
+    },
+    {
+      "level": 31,
+      "move": "smelling_salt"
+    },
+    {
+      "level": 37,
+      "move": "belly_drum"
+    },
+    {
+      "level": 40,
+      "move": "endure"
+    },
+    {
+      "level": 46,
+      "move": "seismic_toss"
+    },
+    {
+      "level": 49,
+      "move": "reversal"
+    }
+  ]
+}

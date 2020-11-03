@@ -1,0 +1,103 @@
+{
+  "species": "snorlax",
+  "base_stats": {
+    "base_hp": 160,
+    "base_attack": 110,
+    "base_defense": 65,
+    "base_speed": 30,
+    "base_sp_attack": 65,
+    "base_sp_defense": 110,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 25,
+    "exp_yield": 154,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "chesto_berry",
+    "item_2": "chesto_berry",
+    "gender_ratio": 12.5,
+    "egg_cycles": 40,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "monster",
+    "abilities": [
+      "immunity",
+      "thick_fat"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "lick",
+    "charm",
+    "double_edge",
+    "curse",
+    "fissure",
+    "substitute"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 5,
+      "move": "amnesia"
+    },
+    {
+      "level": 9,
+      "move": "defense_curl"
+    },
+    {
+      "level": 13,
+      "move": "belly_drum"
+    },
+    {
+      "level": 17,
+      "move": "headbutt"
+    },
+    {
+      "level": 21,
+      "move": "yawn"
+    },
+    {
+      "level": 25,
+      "move": "rest"
+    },
+    {
+      "level": 29,
+      "move": "snore"
+    },
+    {
+      "level": 33,
+      "move": "body_slam"
+    },
+    {
+      "level": 37,
+      "move": "sleep_talk"
+    },
+    {
+      "level": 41,
+      "move": "block"
+    },
+    {
+      "level": 45,
+      "move": "covet"
+    },
+    {
+      "level": 49,
+      "move": "rollout"
+    },
+    {
+      "level": 53,
+      "move": "hyper_beam"
+    }
+  ]
+}

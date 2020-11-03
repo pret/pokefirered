@@ -1,0 +1,76 @@
+{
+  "species": "donphan",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 120,
+    "base_defense": 120,
+    "base_speed": 50,
+    "base_sp_attack": 60,
+    "base_sp_defense": 60,
+    "type_1": "ground",
+    "type_2": "ground",
+    "catch_rate": 60,
+    "exp_yield": 189,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "sturdy",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 1,
+      "move": "horn_attack"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "defense_curl"
+    },
+    {
+      "level": 17,
+      "move": "flail"
+    },
+    {
+      "level": 25,
+      "move": "fury_attack"
+    },
+    {
+      "level": 33,
+      "move": "rollout"
+    },
+    {
+      "level": 41,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 49,
+      "move": "earthquake"
+    }
+  ]
+}

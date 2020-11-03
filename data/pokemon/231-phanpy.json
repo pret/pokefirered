@@ -1,0 +1,89 @@
+{
+  "species": "phanpy",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 60,
+    "base_defense": 60,
+    "base_speed": 40,
+    "base_sp_attack": 40,
+    "base_sp_defense": 40,
+    "type_1": "ground",
+    "type_2": "ground",
+    "catch_rate": 120,
+    "exp_yield": 124,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "pickup",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "focus_energy",
+    "body_slam",
+    "ancient_power",
+    "snore",
+    "counter",
+    "fissure"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 25,
+      "species": "donphan"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "defense_curl"
+    },
+    {
+      "level": 17,
+      "move": "flail"
+    },
+    {
+      "level": 25,
+      "move": "take_down"
+    },
+    {
+      "level": 33,
+      "move": "rollout"
+    },
+    {
+      "level": 41,
+      "move": "endure"
+    },
+    {
+      "level": 49,
+      "move": "double_edge"
+    }
+  ]
+}

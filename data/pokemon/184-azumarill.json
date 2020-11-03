@@ -1,0 +1,88 @@
+{
+  "species": "azumarill",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 50,
+    "base_defense": 80,
+    "base_speed": 50,
+    "base_sp_attack": 50,
+    "base_sp_defense": 80,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 75,
+    "exp_yield": 153,
+    "ev_yield_hp": 3,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 10,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "thick_fat",
+      "huge_power"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "defense_curl"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 3,
+      "move": "defense_curl"
+    },
+    {
+      "level": 6,
+      "move": "tail_whip"
+    },
+    {
+      "level": 10,
+      "move": "water_gun"
+    },
+    {
+      "level": 15,
+      "move": "rollout"
+    },
+    {
+      "level": 24,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 34,
+      "move": "double_edge"
+    },
+    {
+      "level": 45,
+      "move": "rain_dance"
+    },
+    {
+      "level": 57,
+      "move": "hydro_pump"
+    }
+  ]
+}

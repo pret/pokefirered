@@ -1,0 +1,100 @@
+{
+  "species": "mightyena",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 90,
+    "base_defense": 70,
+    "base_speed": 70,
+    "base_sp_attack": 60,
+    "base_sp_defense": 60,
+    "type_1": "dark",
+    "type_2": "dark",
+    "catch_rate": 127,
+    "exp_yield": 128,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "pecha_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "intimidate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "howl"
+    },
+    {
+      "level": 1,
+      "move": "sand_attack"
+    },
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 5,
+      "move": "howl"
+    },
+    {
+      "level": 9,
+      "move": "sand_attack"
+    },
+    {
+      "level": 13,
+      "move": "bite"
+    },
+    {
+      "level": 17,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 22,
+      "move": "roar"
+    },
+    {
+      "level": 27,
+      "move": "swagger"
+    },
+    {
+      "level": 32,
+      "move": "scary_face"
+    },
+    {
+      "level": 37,
+      "move": "take_down"
+    },
+    {
+      "level": 42,
+      "move": "taunt"
+    },
+    {
+      "level": 47,
+      "move": "crunch"
+    },
+    {
+      "level": 52,
+      "move": "thief"
+    }
+  ]
+}

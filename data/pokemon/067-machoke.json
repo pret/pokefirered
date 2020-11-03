@@ -1,0 +1,98 @@
+{
+  "species": "machoke",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 100,
+    "base_defense": 70,
+    "base_speed": 45,
+    "base_sp_attack": 50,
+    "base_sp_defense": 60,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 90,
+    "exp_yield": 146,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "focus_band",
+    "gender_ratio": 25,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "guts",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "trade",
+      "value": 0,
+      "species": "machamp"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "low_kick"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 7,
+      "move": "focus_energy"
+    },
+    {
+      "level": 13,
+      "move": "karate_chop"
+    },
+    {
+      "level": 19,
+      "move": "seismic_toss"
+    },
+    {
+      "level": 22,
+      "move": "foresight"
+    },
+    {
+      "level": 25,
+      "move": "revenge"
+    },
+    {
+      "level": 33,
+      "move": "vital_throw"
+    },
+    {
+      "level": 41,
+      "move": "submission"
+    },
+    {
+      "level": 46,
+      "move": "cross_chop"
+    },
+    {
+      "level": 51,
+      "move": "scary_face"
+    },
+    {
+      "level": 59,
+      "move": "dynamic_punch"
+    }
+  ]
+}

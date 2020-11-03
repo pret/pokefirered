@@ -1,0 +1,91 @@
+{
+  "species": "gloom",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 65,
+    "base_defense": 70,
+    "base_speed": 40,
+    "base_sp_attack": 85,
+    "base_sp_defense": 75,
+    "type_1": "grass",
+    "type_2": "poison",
+    "catch_rate": 120,
+    "exp_yield": 132,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "leaf_stone",
+      "species": "vileplume"
+    },
+    {
+      "type": "item",
+      "value": "sun_stone",
+      "species": "bellossom"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 1,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 1,
+      "move": "poison_powder"
+    },
+    {
+      "level": 7,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 14,
+      "move": "poison_powder"
+    },
+    {
+      "level": 16,
+      "move": "stun_spore"
+    },
+    {
+      "level": 18,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 24,
+      "move": "acid"
+    },
+    {
+      "level": 35,
+      "move": "moonlight"
+    },
+    {
+      "level": 44,
+      "move": "petal_dance"
+    }
+  ]
+}

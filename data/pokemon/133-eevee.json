@@ -1,0 +1,109 @@
+{
+  "species": "eevee",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 55,
+    "base_defense": 50,
+    "base_speed": 55,
+    "base_sp_attack": 45,
+    "base_sp_defense": 65,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 92,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 35,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "run_away",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "charm",
+    "flail",
+    "endure",
+    "curse",
+    "tickle",
+    "wish"
+  ],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "thunder_stone",
+      "species": "jolteon"
+    },
+    {
+      "type": "item",
+      "value": "water_stone",
+      "species": "vaporeon"
+    },
+    {
+      "type": "item",
+      "value": "fire_stone",
+      "species": "flareon"
+    },
+    {
+      "type": "friendship_day",
+      "value": 0,
+      "species": "espeon"
+    },
+    {
+      "type": "friendship_night",
+      "value": 0,
+      "species": "umbreon"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "helping_hand"
+    },
+    {
+      "level": 8,
+      "move": "sand_attack"
+    },
+    {
+      "level": 16,
+      "move": "growl"
+    },
+    {
+      "level": 23,
+      "move": "quick_attack"
+    },
+    {
+      "level": 30,
+      "move": "bite"
+    },
+    {
+      "level": 36,
+      "move": "baton_pass"
+    },
+    {
+      "level": 42,
+      "move": "take_down"
+    }
+  ]
+}

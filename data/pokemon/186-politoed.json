@@ -1,0 +1,64 @@
+{
+  "species": "politoed",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 75,
+    "base_defense": 75,
+    "base_speed": 70,
+    "base_sp_attack": 90,
+    "base_sp_defense": 100,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 45,
+    "exp_yield": 185,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 3,
+    "item_1": "none",
+    "item_2": "kings_rock",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "water_absorb",
+      "damp"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": true
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 1,
+      "move": "hypnosis"
+    },
+    {
+      "level": 1,
+      "move": "double_slap"
+    },
+    {
+      "level": 1,
+      "move": "perish_song"
+    },
+    {
+      "level": 35,
+      "move": "perish_song"
+    },
+    {
+      "level": 51,
+      "move": "swagger"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "species": "metapod",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 20,
+    "base_defense": 55,
+    "base_speed": 30,
+    "base_sp_attack": 25,
+    "base_sp_defense": 25,
+    "type_1": "bug",
+    "type_2": "bug",
+    "catch_rate": 120,
+    "exp_yield": 72,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 2,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "shed_skin",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 10,
+      "species": "butterfree"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 7,
+      "move": "harden"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "species": "pineco",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 65,
+    "base_defense": 90,
+    "base_speed": 15,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "bug",
+    "type_2": "bug",
+    "catch_rate": 190,
+    "exp_yield": 60,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "sturdy",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "reflect",
+    "pin_missile",
+    "flail",
+    "swift",
+    "counter",
+    "sand_tomb"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 31,
+      "species": "forretress"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "protect"
+    },
+    {
+      "level": 8,
+      "move": "self_destruct"
+    },
+    {
+      "level": 15,
+      "move": "take_down"
+    },
+    {
+      "level": 22,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 29,
+      "move": "bide"
+    },
+    {
+      "level": 36,
+      "move": "explosion"
+    },
+    {
+      "level": 43,
+      "move": "spikes"
+    },
+    {
+      "level": 50,
+      "move": "double_edge"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "species": "bagon",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 75,
+    "base_defense": 60,
+    "base_speed": 50,
+    "base_sp_attack": 40,
+    "base_sp_defense": 30,
+    "type_1": "dragon",
+    "type_2": "dragon",
+    "catch_rate": 45,
+    "exp_yield": 89,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "dragon_scale",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "dragon",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "rock_head",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "hydro_pump",
+    "thrash",
+    "dragon_rage",
+    "twister",
+    "dragon_dance"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "shelgon"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "rage"
+    },
+    {
+      "level": 5,
+      "move": "bite"
+    },
+    {
+      "level": 9,
+      "move": "leer"
+    },
+    {
+      "level": 17,
+      "move": "headbutt"
+    },
+    {
+      "level": 21,
+      "move": "focus_energy"
+    },
+    {
+      "level": 25,
+      "move": "ember"
+    },
+    {
+      "level": 33,
+      "move": "dragon_breath"
+    },
+    {
+      "level": 37,
+      "move": "scary_face"
+    },
+    {
+      "level": 41,
+      "move": "crunch"
+    },
+    {
+      "level": 49,
+      "move": "dragon_claw"
+    },
+    {
+      "level": 53,
+      "move": "double_edge"
+    }
+  ]
+}

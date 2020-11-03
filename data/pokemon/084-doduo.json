@@ -1,0 +1,89 @@
+{
+  "species": "doduo",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 85,
+    "base_defense": 45,
+    "base_speed": 75,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 190,
+    "exp_yield": 96,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "run_away",
+      "early_bird"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "quick_attack",
+    "supersonic",
+    "haze",
+    "faint_attack",
+    "flail",
+    "endeavor"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 31,
+      "species": "dodrio"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "pursuit"
+    },
+    {
+      "level": 13,
+      "move": "fury_attack"
+    },
+    {
+      "level": 21,
+      "move": "tri_attack"
+    },
+    {
+      "level": 25,
+      "move": "rage"
+    },
+    {
+      "level": 33,
+      "move": "uproar"
+    },
+    {
+      "level": 37,
+      "move": "drill_peck"
+    },
+    {
+      "level": 45,
+      "move": "agility"
+    }
+  ]
+}

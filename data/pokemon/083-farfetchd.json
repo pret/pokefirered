@@ -1,0 +1,89 @@
+{
+  "species": "farfetchd",
+  "base_stats": {
+    "base_hp": 52,
+    "base_attack": 65,
+    "base_defense": 55,
+    "base_speed": 60,
+    "base_sp_attack": 58,
+    "base_sp_defense": 62,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 94,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "stick",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "field",
+    "abilities": [
+      "keen_eye",
+      "inner_focus"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "steel_wing",
+    "foresight",
+    "mirror_move",
+    "gust",
+    "quick_attack",
+    "flail",
+    "feather_dance",
+    "curse"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 6,
+      "move": "sand_attack"
+    },
+    {
+      "level": 11,
+      "move": "leer"
+    },
+    {
+      "level": 16,
+      "move": "fury_attack"
+    },
+    {
+      "level": 21,
+      "move": "knock_off"
+    },
+    {
+      "level": 26,
+      "move": "fury_cutter"
+    },
+    {
+      "level": 31,
+      "move": "swords_dance"
+    },
+    {
+      "level": 36,
+      "move": "agility"
+    },
+    {
+      "level": 41,
+      "move": "slash"
+    },
+    {
+      "level": 46,
+      "move": "false_swipe"
+    }
+  ]
+}

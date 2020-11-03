@@ -1,0 +1,95 @@
+{
+  "species": "houndour",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 60,
+    "base_defense": 30,
+    "base_speed": 65,
+    "base_sp_attack": 80,
+    "base_sp_defense": 50,
+    "type_1": "dark",
+    "type_2": "fire",
+    "catch_rate": 120,
+    "exp_yield": 114,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "early_bird",
+      "flash_fire"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "fire_spin",
+    "rage",
+    "pursuit",
+    "counter",
+    "spite",
+    "reversal",
+    "beat_up",
+    "will_o_wisp"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 24,
+      "species": "houndoom"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 7,
+      "move": "howl"
+    },
+    {
+      "level": 13,
+      "move": "smog"
+    },
+    {
+      "level": 19,
+      "move": "roar"
+    },
+    {
+      "level": 25,
+      "move": "bite"
+    },
+    {
+      "level": 31,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 37,
+      "move": "faint_attack"
+    },
+    {
+      "level": 43,
+      "move": "flamethrower"
+    },
+    {
+      "level": 49,
+      "move": "crunch"
+    }
+  ]
+}

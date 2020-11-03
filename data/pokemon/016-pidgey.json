@@ -1,0 +1,88 @@
+{
+  "species": "pidgey",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 45,
+    "base_defense": 40,
+    "base_speed": 56,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 255,
+    "exp_yield": 55,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "keen_eye",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "pursuit",
+    "faint_attack",
+    "foresight",
+    "steel_wing",
+    "air_cutter"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 18,
+      "species": "pidgeotto"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 5,
+      "move": "sand_attack"
+    },
+    {
+      "level": 9,
+      "move": "gust"
+    },
+    {
+      "level": 13,
+      "move": "quick_attack"
+    },
+    {
+      "level": 19,
+      "move": "whirlwind"
+    },
+    {
+      "level": 25,
+      "move": "wing_attack"
+    },
+    {
+      "level": 31,
+      "move": "feather_dance"
+    },
+    {
+      "level": 39,
+      "move": "agility"
+    },
+    {
+      "level": 47,
+      "move": "mirror_move"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "species": "gastly",
+  "base_stats": {
+    "base_hp": 30,
+    "base_attack": 35,
+    "base_defense": 30,
+    "base_speed": 80,
+    "base_sp_attack": 100,
+    "base_sp_defense": 35,
+    "type_1": "ghost",
+    "type_2": "poison",
+    "catch_rate": 190,
+    "exp_yield": 95,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "psywave",
+    "perish_song",
+    "haze",
+    "astonish",
+    "will_o_wisp",
+    "grudge",
+    "explosion"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 25,
+      "species": "haunter"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "hypnosis"
+    },
+    {
+      "level": 1,
+      "move": "lick"
+    },
+    {
+      "level": 8,
+      "move": "spite"
+    },
+    {
+      "level": 13,
+      "move": "curse"
+    },
+    {
+      "level": 16,
+      "move": "night_shade"
+    },
+    {
+      "level": 21,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 28,
+      "move": "dream_eater"
+    },
+    {
+      "level": 33,
+      "move": "destiny_bond"
+    },
+    {
+      "level": 36,
+      "move": "shadow_ball"
+    },
+    {
+      "level": 41,
+      "move": "nightmare"
+    },
+    {
+      "level": 48,
+      "move": "mean_look"
+    }
+  ]
+}

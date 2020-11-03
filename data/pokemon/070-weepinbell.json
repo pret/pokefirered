@@ -1,0 +1,94 @@
+{
+  "species": "weepinbell",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 90,
+    "base_defense": 50,
+    "base_speed": 55,
+    "base_sp_attack": 85,
+    "base_sp_defense": 45,
+    "type_1": "grass",
+    "type_2": "poison",
+    "catch_rate": 120,
+    "exp_yield": 151,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "leaf_stone",
+      "species": "victreebel"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "vine_whip"
+    },
+    {
+      "level": 1,
+      "move": "growth"
+    },
+    {
+      "level": 1,
+      "move": "wrap"
+    },
+    {
+      "level": 6,
+      "move": "growth"
+    },
+    {
+      "level": 11,
+      "move": "wrap"
+    },
+    {
+      "level": 15,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 17,
+      "move": "poison_powder"
+    },
+    {
+      "level": 19,
+      "move": "stun_spore"
+    },
+    {
+      "level": 24,
+      "move": "acid"
+    },
+    {
+      "level": 33,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 42,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 54,
+      "move": "slam"
+    }
+  ]
+}

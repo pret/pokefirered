@@ -1,0 +1,92 @@
+{
+  "species": "hitmonlee",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 120,
+    "base_defense": 53,
+    "base_speed": 87,
+    "base_sp_attack": 35,
+    "base_sp_defense": 110,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 45,
+    "exp_yield": 139,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "limber",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "revenge"
+    },
+    {
+      "level": 1,
+      "move": "double_kick"
+    },
+    {
+      "level": 6,
+      "move": "meditate"
+    },
+    {
+      "level": 11,
+      "move": "rolling_kick"
+    },
+    {
+      "level": 16,
+      "move": "jump_kick"
+    },
+    {
+      "level": 20,
+      "move": "brick_break"
+    },
+    {
+      "level": 21,
+      "move": "focus_energy"
+    },
+    {
+      "level": 26,
+      "move": "hi_jump_kick"
+    },
+    {
+      "level": 31,
+      "move": "mind_reader"
+    },
+    {
+      "level": 36,
+      "move": "foresight"
+    },
+    {
+      "level": 41,
+      "move": "endure"
+    },
+    {
+      "level": 46,
+      "move": "mega_kick"
+    },
+    {
+      "level": 51,
+      "move": "reversal"
+    }
+  ]
+}

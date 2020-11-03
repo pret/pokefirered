@@ -1,0 +1,103 @@
+{
+  "species": "slowpoke",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 65,
+    "base_defense": 65,
+    "base_speed": 15,
+    "base_sp_attack": 40,
+    "base_sp_defense": 40,
+    "type_1": "water",
+    "type_2": "psychic",
+    "catch_rate": 190,
+    "exp_yield": 99,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "monster",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "oblivious",
+      "own_tempo"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "safeguard",
+    "belly_drum",
+    "future_sight",
+    "stomp",
+    "mud_sport",
+    "sleep_talk",
+    "snore"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 37,
+      "species": "slowbro"
+    },
+    {
+      "type": "trade_item",
+      "value": "kings_rock",
+      "species": "slowking"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "curse"
+    },
+    {
+      "level": 1,
+      "move": "yawn"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 6,
+      "move": "growl"
+    },
+    {
+      "level": 13,
+      "move": "water_gun"
+    },
+    {
+      "level": 17,
+      "move": "confusion"
+    },
+    {
+      "level": 24,
+      "move": "disable"
+    },
+    {
+      "level": 29,
+      "move": "headbutt"
+    },
+    {
+      "level": 36,
+      "move": "amnesia"
+    },
+    {
+      "level": 40,
+      "move": "psychic"
+    },
+    {
+      "level": 47,
+      "move": "psych_up"
+    }
+  ]
+}

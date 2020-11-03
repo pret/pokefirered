@@ -1,0 +1,97 @@
+{
+  "species": "lapras",
+  "base_stats": {
+    "base_hp": 130,
+    "base_attack": 85,
+    "base_defense": 80,
+    "base_speed": 60,
+    "base_sp_attack": 85,
+    "base_sp_defense": 95,
+    "type_1": "water",
+    "type_2": "ice",
+    "catch_rate": 45,
+    "exp_yield": 219,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "water_absorb",
+      "shell_armor"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "foresight",
+    "substitute",
+    "tickle",
+    "refresh",
+    "dragon_dance",
+    "curse",
+    "sleep_talk",
+    "horn_drill"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "sing"
+    },
+    {
+      "level": 7,
+      "move": "mist"
+    },
+    {
+      "level": 13,
+      "move": "body_slam"
+    },
+    {
+      "level": 19,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 25,
+      "move": "perish_song"
+    },
+    {
+      "level": 31,
+      "move": "ice_beam"
+    },
+    {
+      "level": 37,
+      "move": "rain_dance"
+    },
+    {
+      "level": 43,
+      "move": "safeguard"
+    },
+    {
+      "level": 49,
+      "move": "hydro_pump"
+    },
+    {
+      "level": 55,
+      "move": "sheer_cold"
+    }
+  ]
+}

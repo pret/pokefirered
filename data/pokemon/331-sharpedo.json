@@ -1,0 +1,96 @@
+{
+  "species": "sharpedo",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 120,
+    "base_defense": 40,
+    "base_speed": 95,
+    "base_sp_attack": 95,
+    "base_sp_defense": 40,
+    "type_1": "water",
+    "type_2": "dark",
+    "catch_rate": 60,
+    "exp_yield": 175,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "water_2",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "rough_skin",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "rage"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 7,
+      "move": "rage"
+    },
+    {
+      "level": 13,
+      "move": "focus_energy"
+    },
+    {
+      "level": 16,
+      "move": "scary_face"
+    },
+    {
+      "level": 22,
+      "move": "crunch"
+    },
+    {
+      "level": 28,
+      "move": "screech"
+    },
+    {
+      "level": 33,
+      "move": "slash"
+    },
+    {
+      "level": 38,
+      "move": "taunt"
+    },
+    {
+      "level": 43,
+      "move": "swagger"
+    },
+    {
+      "level": 48,
+      "move": "skull_bash"
+    },
+    {
+      "level": 53,
+      "move": "agility"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "species": "combusken",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 85,
+    "base_defense": 60,
+    "base_speed": 55,
+    "base_sp_attack": 85,
+    "base_sp_defense": 60,
+    "type_1": "fire",
+    "type_2": "fighting",
+    "catch_rate": 45,
+    "exp_yield": 142,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "blaze",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 36,
+      "species": "blaziken"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 7,
+      "move": "focus_energy"
+    },
+    {
+      "level": 13,
+      "move": "ember"
+    },
+    {
+      "level": 16,
+      "move": "double_kick"
+    },
+    {
+      "level": 17,
+      "move": "peck"
+    },
+    {
+      "level": 21,
+      "move": "sand_attack"
+    },
+    {
+      "level": 28,
+      "move": "bulk_up"
+    },
+    {
+      "level": 32,
+      "move": "quick_attack"
+    },
+    {
+      "level": 39,
+      "move": "slash"
+    },
+    {
+      "level": 43,
+      "move": "mirror_move"
+    },
+    {
+      "level": 50,
+      "move": "sky_uppercut"
+    }
+  ]
+}

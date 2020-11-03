@@ -1,0 +1,96 @@
+{
+  "species": "venomoth",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 65,
+    "base_defense": 60,
+    "base_speed": 90,
+    "base_sp_attack": 90,
+    "base_sp_defense": 75,
+    "type_1": "bug",
+    "type_2": "poison",
+    "catch_rate": 75,
+    "exp_yield": 138,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "silver_powder",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "shield_dust",
+      "none"
+    ],
+    "safari_zone_flee_rate": 75,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "silver_wind"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "disable"
+    },
+    {
+      "level": 1,
+      "move": "foresight"
+    },
+    {
+      "level": 1,
+      "move": "supersonic"
+    },
+    {
+      "level": 9,
+      "move": "supersonic"
+    },
+    {
+      "level": 17,
+      "move": "confusion"
+    },
+    {
+      "level": 20,
+      "move": "poison_powder"
+    },
+    {
+      "level": 25,
+      "move": "leech_life"
+    },
+    {
+      "level": 28,
+      "move": "stun_spore"
+    },
+    {
+      "level": 31,
+      "move": "gust"
+    },
+    {
+      "level": 36,
+      "move": "psybeam"
+    },
+    {
+      "level": 42,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 52,
+      "move": "psychic"
+    }
+  ]
+}

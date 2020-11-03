@@ -1,0 +1,92 @@
+{
+  "species": "jynx",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 50,
+    "base_defense": 35,
+    "base_speed": 95,
+    "base_sp_attack": 115,
+    "base_sp_defense": 95,
+    "type_1": "ice",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 137,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -3,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "oblivious",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "lick"
+    },
+    {
+      "level": 1,
+      "move": "lovely_kiss"
+    },
+    {
+      "level": 1,
+      "move": "powder_snow"
+    },
+    {
+      "level": 9,
+      "move": "lovely_kiss"
+    },
+    {
+      "level": 13,
+      "move": "powder_snow"
+    },
+    {
+      "level": 21,
+      "move": "double_slap"
+    },
+    {
+      "level": 25,
+      "move": "ice_punch"
+    },
+    {
+      "level": 35,
+      "move": "mean_look"
+    },
+    {
+      "level": 41,
+      "move": "fake_tears"
+    },
+    {
+      "level": 51,
+      "move": "body_slam"
+    },
+    {
+      "level": 57,
+      "move": "perish_song"
+    },
+    {
+      "level": 67,
+      "move": "blizzard"
+    }
+  ]
+}

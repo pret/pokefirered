@@ -1,0 +1,92 @@
+{
+  "species": "shuppet",
+  "base_stats": {
+    "base_hp": 44,
+    "base_attack": 75,
+    "base_defense": 35,
+    "base_speed": 45,
+    "base_sp_attack": 63,
+    "base_sp_defense": 33,
+    "type_1": "ghost",
+    "type_2": "ghost",
+    "catch_rate": 225,
+    "exp_yield": 97,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "spell_tag",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 35,
+    "growth_rate": "fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "insomnia",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "disable",
+    "destiny_bond",
+    "foresight",
+    "astonish",
+    "imprison"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 37,
+      "species": "banette"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "knock_off"
+    },
+    {
+      "level": 8,
+      "move": "screech"
+    },
+    {
+      "level": 13,
+      "move": "night_shade"
+    },
+    {
+      "level": 20,
+      "move": "curse"
+    },
+    {
+      "level": 25,
+      "move": "spite"
+    },
+    {
+      "level": 32,
+      "move": "will_o_wisp"
+    },
+    {
+      "level": 37,
+      "move": "faint_attack"
+    },
+    {
+      "level": 44,
+      "move": "shadow_ball"
+    },
+    {
+      "level": 49,
+      "move": "snatch"
+    },
+    {
+      "level": 56,
+      "move": "grudge"
+    }
+  ]
+}

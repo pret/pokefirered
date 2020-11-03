@@ -1,0 +1,84 @@
+{
+  "species": "tentacruel",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 70,
+    "base_defense": 65,
+    "base_speed": 100,
+    "base_sp_attack": 80,
+    "base_sp_defense": 120,
+    "type_1": "water",
+    "type_2": "poison",
+    "catch_rate": 60,
+    "exp_yield": 205,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_3",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "clear_body",
+      "liquid_ooze"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "poison_sting"
+    },
+    {
+      "level": 1,
+      "move": "supersonic"
+    },
+    {
+      "level": 1,
+      "move": "constrict"
+    },
+    {
+      "level": 6,
+      "move": "supersonic"
+    },
+    {
+      "level": 12,
+      "move": "constrict"
+    },
+    {
+      "level": 19,
+      "move": "acid"
+    },
+    {
+      "level": 25,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 30,
+      "move": "wrap"
+    },
+    {
+      "level": 38,
+      "move": "barrier"
+    },
+    {
+      "level": 47,
+      "move": "screech"
+    },
+    {
+      "level": 55,
+      "move": "hydro_pump"
+    }
+  ]
+}

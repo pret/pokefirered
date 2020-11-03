@@ -1,0 +1,100 @@
+{
+  "species": "ninjask",
+  "base_stats": {
+    "base_hp": 61,
+    "base_attack": 90,
+    "base_defense": 45,
+    "base_speed": 160,
+    "base_sp_attack": 50,
+    "base_sp_defense": 50,
+    "type_1": "bug",
+    "type_2": "flying",
+    "catch_rate": 120,
+    "exp_yield": 155,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "speed_boost",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 1,
+      "move": "leech_life"
+    },
+    {
+      "level": 1,
+      "move": "sand_attack"
+    },
+    {
+      "level": 5,
+      "move": "leech_life"
+    },
+    {
+      "level": 9,
+      "move": "sand_attack"
+    },
+    {
+      "level": 14,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 19,
+      "move": "mind_reader"
+    },
+    {
+      "level": 20,
+      "move": "double_team"
+    },
+    {
+      "level": 20,
+      "move": "fury_cutter"
+    },
+    {
+      "level": 20,
+      "move": "screech"
+    },
+    {
+      "level": 25,
+      "move": "swords_dance"
+    },
+    {
+      "level": 31,
+      "move": "slash"
+    },
+    {
+      "level": 38,
+      "move": "agility"
+    },
+    {
+      "level": 45,
+      "move": "baton_pass"
+    }
+  ]
+}

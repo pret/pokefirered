@@ -1,0 +1,80 @@
+{
+  "species": "tauros",
+  "base_stats": {
+    "base_hp": 75,
+    "base_attack": 100,
+    "base_defense": 95,
+    "base_speed": 110,
+    "base_sp_attack": 40,
+    "base_sp_defense": 70,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 211,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "intimidate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 125,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 4,
+      "move": "rage"
+    },
+    {
+      "level": 8,
+      "move": "horn_attack"
+    },
+    {
+      "level": 13,
+      "move": "scary_face"
+    },
+    {
+      "level": 19,
+      "move": "pursuit"
+    },
+    {
+      "level": 26,
+      "move": "swagger"
+    },
+    {
+      "level": 34,
+      "move": "rest"
+    },
+    {
+      "level": 43,
+      "move": "thrash"
+    },
+    {
+      "level": 53,
+      "move": "take_down"
+    }
+  ]
+}

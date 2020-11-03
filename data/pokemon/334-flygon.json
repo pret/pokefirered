@@ -1,0 +1,88 @@
+{
+  "species": "flygon",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 100,
+    "base_defense": 80,
+    "base_speed": 100,
+    "base_sp_attack": 80,
+    "base_sp_defense": 80,
+    "type_1": "ground",
+    "type_2": "dragon",
+    "catch_rate": 45,
+    "exp_yield": 197,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "levitate",
+      "levitate"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "sand_attack"
+    },
+    {
+      "level": 1,
+      "move": "faint_attack"
+    },
+    {
+      "level": 1,
+      "move": "sand_tomb"
+    },
+    {
+      "level": 9,
+      "move": "sand_attack"
+    },
+    {
+      "level": 17,
+      "move": "faint_attack"
+    },
+    {
+      "level": 25,
+      "move": "sand_tomb"
+    },
+    {
+      "level": 33,
+      "move": "crunch"
+    },
+    {
+      "level": 35,
+      "move": "dragon_breath"
+    },
+    {
+      "level": 41,
+      "move": "screech"
+    },
+    {
+      "level": 53,
+      "move": "sandstorm"
+    },
+    {
+      "level": 65,
+      "move": "hyper_beam"
+    }
+  ]
+}

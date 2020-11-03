@@ -1,0 +1,85 @@
+{
+  "species": "sunkern",
+  "base_stats": {
+    "base_hp": 30,
+    "base_attack": 30,
+    "base_defense": 30,
+    "base_speed": 30,
+    "base_sp_attack": 30,
+    "base_sp_defense": 30,
+    "type_1": "grass",
+    "type_2": "grass",
+    "catch_rate": 235,
+    "exp_yield": 52,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "grass",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "grass_whistle",
+    "encore",
+    "leech_seed",
+    "nature_power",
+    "curse",
+    "helping_hand"
+  ],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "sun_stone",
+      "species": "sunflora"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 6,
+      "move": "growth"
+    },
+    {
+      "level": 13,
+      "move": "mega_drain"
+    },
+    {
+      "level": 18,
+      "move": "ingrain"
+    },
+    {
+      "level": 25,
+      "move": "endeavor"
+    },
+    {
+      "level": 30,
+      "move": "sunny_day"
+    },
+    {
+      "level": 37,
+      "move": "synthesis"
+    },
+    {
+      "level": 42,
+      "move": "giga_drain"
+    }
+  ]
+}

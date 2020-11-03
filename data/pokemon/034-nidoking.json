@@ -1,0 +1,64 @@
+{
+  "species": "nidoking",
+  "base_stats": {
+    "base_hp": 81,
+    "base_attack": 92,
+    "base_defense": 77,
+    "base_speed": 85,
+    "base_sp_attack": 85,
+    "base_sp_defense": 75,
+    "type_1": "poison",
+    "type_2": "ground",
+    "catch_rate": 45,
+    "exp_yield": 195,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "poison_point",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 1,
+      "move": "double_kick"
+    },
+    {
+      "level": 1,
+      "move": "poison_sting"
+    },
+    {
+      "level": 22,
+      "move": "thrash"
+    },
+    {
+      "level": 43,
+      "move": "megahorn"
+    }
+  ]
+}

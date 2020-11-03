@@ -1,0 +1,90 @@
+{
+  "species": "porygon",
+  "base_stats": {
+    "base_hp": 65,
+    "base_attack": 60,
+    "base_defense": 70,
+    "base_speed": 40,
+    "base_sp_attack": 85,
+    "base_sp_defense": 75,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 130,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "trace",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "trade_item",
+      "value": "up_grade",
+      "species": "porygon2"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "conversion_2"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "conversion"
+    },
+    {
+      "level": 9,
+      "move": "agility"
+    },
+    {
+      "level": 12,
+      "move": "psybeam"
+    },
+    {
+      "level": 20,
+      "move": "recover"
+    },
+    {
+      "level": 24,
+      "move": "sharpen"
+    },
+    {
+      "level": 32,
+      "move": "lock_on"
+    },
+    {
+      "level": 36,
+      "move": "tri_attack"
+    },
+    {
+      "level": 44,
+      "move": "recycle"
+    },
+    {
+      "level": 48,
+      "move": "zap_cannon"
+    }
+  ]
+}

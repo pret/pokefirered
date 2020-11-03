@@ -1,0 +1,84 @@
+{
+  "species": "latios",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 90,
+    "base_defense": 80,
+    "base_speed": 110,
+    "base_sp_attack": 130,
+    "base_sp_defense": 110,
+    "type_1": "dragon",
+    "type_2": "psychic",
+    "catch_rate": 3,
+    "exp_yield": 211,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 3,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 120,
+    "friendship": 90,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "levitate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "psywave"
+    },
+    {
+      "level": 5,
+      "move": "memento"
+    },
+    {
+      "level": 10,
+      "move": "helping_hand"
+    },
+    {
+      "level": 15,
+      "move": "safeguard"
+    },
+    {
+      "level": 20,
+      "move": "dragon_breath"
+    },
+    {
+      "level": 25,
+      "move": "protect"
+    },
+    {
+      "level": 30,
+      "move": "refresh"
+    },
+    {
+      "level": 35,
+      "move": "luster_purge"
+    },
+    {
+      "level": 40,
+      "move": "psychic"
+    },
+    {
+      "level": 45,
+      "move": "recover"
+    },
+    {
+      "level": 50,
+      "move": "dragon_dance"
+    }
+  ]
+}

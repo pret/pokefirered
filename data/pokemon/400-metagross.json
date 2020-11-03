@@ -1,0 +1,92 @@
+{
+  "species": "metagross",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 135,
+    "base_defense": 130,
+    "base_speed": 70,
+    "base_sp_attack": 95,
+    "base_sp_defense": 90,
+    "type_1": "steel",
+    "type_2": "psychic",
+    "catch_rate": 3,
+    "exp_yield": 210,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 3,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "metal_coat",
+    "gender_ratio": -1,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "clear_body",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "take_down"
+    },
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 1,
+      "move": "metal_claw"
+    },
+    {
+      "level": 1,
+      "move": "scary_face"
+    },
+    {
+      "level": 20,
+      "move": "confusion"
+    },
+    {
+      "level": 20,
+      "move": "metal_claw"
+    },
+    {
+      "level": 26,
+      "move": "scary_face"
+    },
+    {
+      "level": 32,
+      "move": "pursuit"
+    },
+    {
+      "level": 38,
+      "move": "psychic"
+    },
+    {
+      "level": 44,
+      "move": "iron_defense"
+    },
+    {
+      "level": 55,
+      "move": "meteor_mash"
+    },
+    {
+      "level": 66,
+      "move": "agility"
+    },
+    {
+      "level": 77,
+      "move": "hyper_beam"
+    }
+  ]
+}

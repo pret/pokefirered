@@ -1,0 +1,80 @@
+{
+  "species": "dustox",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 50,
+    "base_defense": 70,
+    "base_speed": 65,
+    "base_sp_attack": 50,
+    "base_sp_defense": 90,
+    "type_1": "bug",
+    "type_2": "poison",
+    "catch_rate": 45,
+    "exp_yield": 160,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 3,
+    "item_1": "none",
+    "item_2": "silver_powder",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "shield_dust",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 10,
+      "move": "confusion"
+    },
+    {
+      "level": 13,
+      "move": "gust"
+    },
+    {
+      "level": 17,
+      "move": "protect"
+    },
+    {
+      "level": 20,
+      "move": "moonlight"
+    },
+    {
+      "level": 24,
+      "move": "psybeam"
+    },
+    {
+      "level": 27,
+      "move": "whirlwind"
+    },
+    {
+      "level": 31,
+      "move": "light_screen"
+    },
+    {
+      "level": 34,
+      "move": "silver_wind"
+    },
+    {
+      "level": 38,
+      "move": "toxic"
+    }
+  ]
+}

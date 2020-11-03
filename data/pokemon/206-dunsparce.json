@@ -1,0 +1,92 @@
+{
+  "species": "dunsparce",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 70,
+    "base_defense": 70,
+    "base_speed": 45,
+    "base_sp_attack": 65,
+    "base_sp_defense": 65,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 190,
+    "exp_yield": 75,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "serene_grace",
+      "run_away"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "bide",
+    "ancient_power",
+    "rock_slide",
+    "bite",
+    "headbutt",
+    "astonish",
+    "curse"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "rage"
+    },
+    {
+      "level": 4,
+      "move": "defense_curl"
+    },
+    {
+      "level": 11,
+      "move": "yawn"
+    },
+    {
+      "level": 14,
+      "move": "glare"
+    },
+    {
+      "level": 21,
+      "move": "rollout"
+    },
+    {
+      "level": 24,
+      "move": "spite"
+    },
+    {
+      "level": 31,
+      "move": "pursuit"
+    },
+    {
+      "level": 34,
+      "move": "screech"
+    },
+    {
+      "level": 41,
+      "move": "take_down"
+    },
+    {
+      "level": 44,
+      "move": "flail"
+    },
+    {
+      "level": 51,
+      "move": "endeavor"
+    }
+  ]
+}

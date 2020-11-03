@@ -1,0 +1,92 @@
+{
+  "species": "gardevoir",
+  "base_stats": {
+    "base_hp": 68,
+    "base_attack": 65,
+    "base_defense": 65,
+    "base_speed": 80,
+    "base_sp_attack": 125,
+    "base_sp_defense": 115,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 208,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 3,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "synchronize",
+      "trace"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 1,
+      "move": "double_team"
+    },
+    {
+      "level": 1,
+      "move": "teleport"
+    },
+    {
+      "level": 6,
+      "move": "confusion"
+    },
+    {
+      "level": 11,
+      "move": "double_team"
+    },
+    {
+      "level": 16,
+      "move": "teleport"
+    },
+    {
+      "level": 21,
+      "move": "calm_mind"
+    },
+    {
+      "level": 26,
+      "move": "psychic"
+    },
+    {
+      "level": 33,
+      "move": "imprison"
+    },
+    {
+      "level": 42,
+      "move": "future_sight"
+    },
+    {
+      "level": 51,
+      "move": "hypnosis"
+    },
+    {
+      "level": 60,
+      "move": "dream_eater"
+    }
+  ]
+}

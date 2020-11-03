@@ -1,0 +1,89 @@
+{
+  "species": "corsola",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 55,
+    "base_defense": 85,
+    "base_speed": 35,
+    "base_sp_attack": 65,
+    "base_sp_defense": 85,
+    "type_1": "water",
+    "type_2": "rock",
+    "catch_rate": 60,
+    "exp_yield": 113,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "red_shard",
+    "gender_ratio": 75,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "hustle",
+      "natural_cure"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "rock_slide",
+    "screech",
+    "mist",
+    "amnesia",
+    "barrier",
+    "ingrain",
+    "confuse_ray",
+    "icicle_spear"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 6,
+      "move": "harden"
+    },
+    {
+      "level": 12,
+      "move": "bubble"
+    },
+    {
+      "level": 17,
+      "move": "recover"
+    },
+    {
+      "level": 17,
+      "move": "refresh"
+    },
+    {
+      "level": 23,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 28,
+      "move": "spike_cannon"
+    },
+    {
+      "level": 34,
+      "move": "rock_blast"
+    },
+    {
+      "level": 39,
+      "move": "mirror_coat"
+    },
+    {
+      "level": 45,
+      "move": "ancient_power"
+    }
+  ]
+}

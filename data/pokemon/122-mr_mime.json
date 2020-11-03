@@ -1,0 +1,111 @@
+{
+  "species": "mr_mime",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 45,
+    "base_defense": 65,
+    "base_speed": 90,
+    "base_sp_attack": 100,
+    "base_sp_defense": 120,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 136,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "soundproof",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "future_sight",
+    "hypnosis",
+    "mimic",
+    "psych_up",
+    "fake_out",
+    "trick"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "barrier"
+    },
+    {
+      "level": 5,
+      "move": "confusion"
+    },
+    {
+      "level": 8,
+      "move": "substitute"
+    },
+    {
+      "level": 12,
+      "move": "meditate"
+    },
+    {
+      "level": 15,
+      "move": "double_slap"
+    },
+    {
+      "level": 19,
+      "move": "light_screen"
+    },
+    {
+      "level": 19,
+      "move": "reflect"
+    },
+    {
+      "level": 22,
+      "move": "magical_leaf"
+    },
+    {
+      "level": 26,
+      "move": "encore"
+    },
+    {
+      "level": 29,
+      "move": "psybeam"
+    },
+    {
+      "level": 33,
+      "move": "recycle"
+    },
+    {
+      "level": 36,
+      "move": "trick"
+    },
+    {
+      "level": 40,
+      "move": "role_play"
+    },
+    {
+      "level": 43,
+      "move": "psychic"
+    },
+    {
+      "level": 47,
+      "move": "baton_pass"
+    },
+    {
+      "level": 50,
+      "move": "safeguard"
+    }
+  ]
+}

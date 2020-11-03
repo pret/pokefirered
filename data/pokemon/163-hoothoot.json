@@ -1,0 +1,90 @@
+{
+  "species": "hoothoot",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 30,
+    "base_defense": 30,
+    "base_speed": 50,
+    "base_sp_attack": 36,
+    "base_sp_defense": 56,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 255,
+    "exp_yield": 58,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "insomnia",
+      "keen_eye"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "mirror_move",
+    "supersonic",
+    "faint_attack",
+    "wing_attack",
+    "whirlwind",
+    "sky_attack",
+    "feather_dance"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "noctowl"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 6,
+      "move": "foresight"
+    },
+    {
+      "level": 11,
+      "move": "peck"
+    },
+    {
+      "level": 16,
+      "move": "hypnosis"
+    },
+    {
+      "level": 22,
+      "move": "reflect"
+    },
+    {
+      "level": 28,
+      "move": "take_down"
+    },
+    {
+      "level": 34,
+      "move": "confusion"
+    },
+    {
+      "level": 48,
+      "move": "dream_eater"
+    }
+  ]
+}

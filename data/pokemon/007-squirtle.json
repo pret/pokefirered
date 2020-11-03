@@ -1,0 +1,99 @@
+{
+  "species": "squirtle",
+  "base_stats": {
+    "base_hp": 44,
+    "base_attack": 48,
+    "base_defense": 65,
+    "base_speed": 43,
+    "base_sp_attack": 50,
+    "base_sp_defense": 64,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 45,
+    "exp_yield": 66,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "water_1",
+    "abilities": [
+      "torrent",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "mirror_coat",
+    "haze",
+    "mist",
+    "foresight",
+    "flail",
+    "refresh",
+    "mud_sport",
+    "yawn"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "wartortle"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 4,
+      "move": "tail_whip"
+    },
+    {
+      "level": 7,
+      "move": "bubble"
+    },
+    {
+      "level": 10,
+      "move": "withdraw"
+    },
+    {
+      "level": 13,
+      "move": "water_gun"
+    },
+    {
+      "level": 18,
+      "move": "bite"
+    },
+    {
+      "level": 23,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 28,
+      "move": "protect"
+    },
+    {
+      "level": 33,
+      "move": "rain_dance"
+    },
+    {
+      "level": 40,
+      "move": "skull_bash"
+    },
+    {
+      "level": 47,
+      "move": "hydro_pump"
+    }
+  ]
+}

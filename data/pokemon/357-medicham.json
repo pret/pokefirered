@@ -1,0 +1,112 @@
+{
+  "species": "medicham",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 60,
+    "base_defense": 75,
+    "base_speed": 80,
+    "base_sp_attack": 60,
+    "base_sp_defense": 75,
+    "type_1": "fighting",
+    "type_2": "psychic",
+    "catch_rate": 90,
+    "exp_yield": 153,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "pure_power",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "fire_punch"
+    },
+    {
+      "level": 1,
+      "move": "thunder_punch"
+    },
+    {
+      "level": 1,
+      "move": "ice_punch"
+    },
+    {
+      "level": 1,
+      "move": "bide"
+    },
+    {
+      "level": 1,
+      "move": "meditate"
+    },
+    {
+      "level": 1,
+      "move": "confusion"
+    },
+    {
+      "level": 1,
+      "move": "detect"
+    },
+    {
+      "level": 4,
+      "move": "meditate"
+    },
+    {
+      "level": 9,
+      "move": "confusion"
+    },
+    {
+      "level": 12,
+      "move": "detect"
+    },
+    {
+      "level": 17,
+      "move": "hidden_power"
+    },
+    {
+      "level": 20,
+      "move": "swagger"
+    },
+    {
+      "level": 25,
+      "move": "mind_reader"
+    },
+    {
+      "level": 28,
+      "move": "calm_mind"
+    },
+    {
+      "level": 33,
+      "move": "hi_jump_kick"
+    },
+    {
+      "level": 36,
+      "move": "psych_up"
+    },
+    {
+      "level": 47,
+      "move": "reversal"
+    },
+    {
+      "level": 56,
+      "move": "recover"
+    }
+  ]
+}

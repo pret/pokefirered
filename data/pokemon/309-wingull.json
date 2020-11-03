@@ -1,0 +1,84 @@
+{
+  "species": "wingull",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 30,
+    "base_defense": 30,
+    "base_speed": 85,
+    "base_sp_attack": 55,
+    "base_sp_defense": 30,
+    "type_1": "water",
+    "type_2": "flying",
+    "catch_rate": 190,
+    "exp_yield": 64,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "flying",
+    "abilities": [
+      "keen_eye",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "mist",
+    "twister",
+    "agility",
+    "gust",
+    "water_sport"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 25,
+      "species": "pelipper"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 7,
+      "move": "supersonic"
+    },
+    {
+      "level": 13,
+      "move": "wing_attack"
+    },
+    {
+      "level": 21,
+      "move": "mist"
+    },
+    {
+      "level": 31,
+      "move": "quick_attack"
+    },
+    {
+      "level": 43,
+      "move": "pursuit"
+    },
+    {
+      "level": 55,
+      "move": "agility"
+    }
+  ]
+}

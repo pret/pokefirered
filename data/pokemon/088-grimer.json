@@ -1,0 +1,94 @@
+{
+  "species": "grimer",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 80,
+    "base_defense": 50,
+    "base_speed": 25,
+    "base_sp_attack": 40,
+    "base_sp_defense": 50,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 190,
+    "exp_yield": 90,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "stench",
+      "sticky_hold"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "haze",
+    "mean_look",
+    "lick",
+    "imprison",
+    "curse",
+    "shadow_punch",
+    "explosion"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 38,
+      "species": "muk"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "poison_gas"
+    },
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 4,
+      "move": "harden"
+    },
+    {
+      "level": 8,
+      "move": "disable"
+    },
+    {
+      "level": 13,
+      "move": "sludge"
+    },
+    {
+      "level": 19,
+      "move": "minimize"
+    },
+    {
+      "level": 26,
+      "move": "screech"
+    },
+    {
+      "level": 34,
+      "move": "acid_armor"
+    },
+    {
+      "level": 43,
+      "move": "sludge_bomb"
+    },
+    {
+      "level": 53,
+      "move": "memento"
+    }
+  ]
+}

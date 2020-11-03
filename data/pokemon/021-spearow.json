@@ -1,0 +1,90 @@
+{
+  "species": "spearow",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 60,
+    "base_defense": 30,
+    "base_speed": 70,
+    "base_sp_attack": 31,
+    "base_sp_defense": 31,
+    "type_1": "normal",
+    "type_2": "flying",
+    "catch_rate": 255,
+    "exp_yield": 58,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "keen_eye",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "faint_attack",
+    "false_swipe",
+    "scary_face",
+    "quick_attack",
+    "tri_attack",
+    "astonish",
+    "sky_attack"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "fearow"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 7,
+      "move": "leer"
+    },
+    {
+      "level": 13,
+      "move": "fury_attack"
+    },
+    {
+      "level": 19,
+      "move": "pursuit"
+    },
+    {
+      "level": 25,
+      "move": "aerial_ace"
+    },
+    {
+      "level": 31,
+      "move": "mirror_move"
+    },
+    {
+      "level": 37,
+      "move": "drill_peck"
+    },
+    {
+      "level": 43,
+      "move": "agility"
+    }
+  ]
+}

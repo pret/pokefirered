@@ -1,0 +1,100 @@
+{
+  "species": "exploud",
+  "base_stats": {
+    "base_hp": 104,
+    "base_attack": 91,
+    "base_defense": 63,
+    "base_speed": 68,
+    "base_sp_attack": 91,
+    "base_sp_defense": 63,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 184,
+    "ev_yield_hp": 3,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "chesto_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "soundproof",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "uproar"
+    },
+    {
+      "level": 1,
+      "move": "astonish"
+    },
+    {
+      "level": 1,
+      "move": "howl"
+    },
+    {
+      "level": 5,
+      "move": "uproar"
+    },
+    {
+      "level": 11,
+      "move": "astonish"
+    },
+    {
+      "level": 15,
+      "move": "howl"
+    },
+    {
+      "level": 23,
+      "move": "supersonic"
+    },
+    {
+      "level": 29,
+      "move": "stomp"
+    },
+    {
+      "level": 37,
+      "move": "screech"
+    },
+    {
+      "level": 40,
+      "move": "hyper_beam"
+    },
+    {
+      "level": 45,
+      "move": "roar"
+    },
+    {
+      "level": 55,
+      "move": "rest"
+    },
+    {
+      "level": 55,
+      "move": "sleep_talk"
+    },
+    {
+      "level": 63,
+      "move": "hyper_voice"
+    }
+  ]
+}

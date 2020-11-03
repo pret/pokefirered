@@ -1,0 +1,76 @@
+{
+  "species": "moltres",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 100,
+    "base_defense": 90,
+    "base_speed": 90,
+    "base_sp_attack": 125,
+    "base_sp_defense": 85,
+    "type_1": "fire",
+    "type_2": "flying",
+    "catch_rate": 3,
+    "exp_yield": 217,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 3,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 80,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "pressure",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "wing_attack"
+    },
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 13,
+      "move": "fire_spin"
+    },
+    {
+      "level": 25,
+      "move": "agility"
+    },
+    {
+      "level": 37,
+      "move": "endure"
+    },
+    {
+      "level": 49,
+      "move": "flamethrower"
+    },
+    {
+      "level": 61,
+      "move": "safeguard"
+    },
+    {
+      "level": 73,
+      "move": "heat_wave"
+    },
+    {
+      "level": 85,
+      "move": "sky_attack"
+    }
+  ]
+}

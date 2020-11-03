@@ -1,0 +1,96 @@
+{
+  "species": "breloom",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 130,
+    "base_defense": 80,
+    "base_speed": 70,
+    "base_sp_attack": 60,
+    "base_sp_defense": 60,
+    "type_1": "grass",
+    "type_2": "fighting",
+    "catch_rate": 90,
+    "exp_yield": 165,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "fairy",
+    "egg_group_2": "grass",
+    "abilities": [
+      "effect_spore",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "stun_spore"
+    },
+    {
+      "level": 1,
+      "move": "leech_seed"
+    },
+    {
+      "level": 4,
+      "move": "tackle"
+    },
+    {
+      "level": 7,
+      "move": "stun_spore"
+    },
+    {
+      "level": 10,
+      "move": "leech_seed"
+    },
+    {
+      "level": 16,
+      "move": "mega_drain"
+    },
+    {
+      "level": 22,
+      "move": "headbutt"
+    },
+    {
+      "level": 23,
+      "move": "mach_punch"
+    },
+    {
+      "level": 28,
+      "move": "counter"
+    },
+    {
+      "level": 36,
+      "move": "sky_uppercut"
+    },
+    {
+      "level": 45,
+      "move": "mind_reader"
+    },
+    {
+      "level": 54,
+      "move": "dynamic_punch"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "species": "abra",
+  "base_stats": {
+    "base_hp": 25,
+    "base_attack": 20,
+    "base_defense": 15,
+    "base_speed": 90,
+    "base_sp_attack": 105,
+    "base_sp_defense": 55,
+    "type_1": "psychic",
+    "type_2": "psychic",
+    "catch_rate": 200,
+    "exp_yield": 73,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "twisted_spoon",
+    "gender_ratio": 25,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "synchronize",
+      "inner_focus"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "encore",
+    "barrier",
+    "knock_off",
+    "fire_punch",
+    "thunder_punch",
+    "ice_punch"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "kadabra"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "teleport"
+    }
+  ]
+}

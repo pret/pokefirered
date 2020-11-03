@@ -1,0 +1,95 @@
+{
+  "species": "gulpin",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 43,
+    "base_defense": 53,
+    "base_speed": 40,
+    "base_sp_attack": 43,
+    "base_sp_defense": 53,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 225,
+    "exp_yield": 75,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "big_pearl",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "amorphous",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "liquid_ooze",
+      "sticky_hold"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "dream_eater",
+    "acid_armor",
+    "smog",
+    "pain_split"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 26,
+      "species": "swalot"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 6,
+      "move": "yawn"
+    },
+    {
+      "level": 9,
+      "move": "poison_gas"
+    },
+    {
+      "level": 14,
+      "move": "sludge"
+    },
+    {
+      "level": 17,
+      "move": "amnesia"
+    },
+    {
+      "level": 23,
+      "move": "encore"
+    },
+    {
+      "level": 28,
+      "move": "toxic"
+    },
+    {
+      "level": 34,
+      "move": "stockpile"
+    },
+    {
+      "level": 34,
+      "move": "spit_up"
+    },
+    {
+      "level": 34,
+      "move": "swallow"
+    },
+    {
+      "level": 39,
+      "move": "sludge_bomb"
+    }
+  ]
+}

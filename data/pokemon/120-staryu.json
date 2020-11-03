@@ -1,0 +1,94 @@
+{
+  "species": "staryu",
+  "base_stats": {
+    "base_hp": 30,
+    "base_attack": 45,
+    "base_defense": 55,
+    "base_speed": 85,
+    "base_sp_attack": 70,
+    "base_sp_defense": 55,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 225,
+    "exp_yield": 106,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "stardust",
+    "item_2": "star_piece",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "water_3",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "illuminate",
+      "natural_cure"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "water_stone",
+      "species": "starmie"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 6,
+      "move": "water_gun"
+    },
+    {
+      "level": 10,
+      "move": "rapid_spin"
+    },
+    {
+      "level": 15,
+      "move": "recover"
+    },
+    {
+      "level": 19,
+      "move": "camouflage"
+    },
+    {
+      "level": 24,
+      "move": "swift"
+    },
+    {
+      "level": 28,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 33,
+      "move": "minimize"
+    },
+    {
+      "level": 37,
+      "move": "light_screen"
+    },
+    {
+      "level": 42,
+      "move": "cosmic_power"
+    },
+    {
+      "level": 46,
+      "move": "hydro_pump"
+    }
+  ]
+}

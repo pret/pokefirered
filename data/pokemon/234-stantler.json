@@ -1,0 +1,87 @@
+{
+  "species": "stantler",
+  "base_stats": {
+    "base_hp": 73,
+    "base_attack": 95,
+    "base_defense": 62,
+    "base_speed": 85,
+    "base_sp_attack": 85,
+    "base_sp_defense": 65,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 165,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "intimidate",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "spite",
+    "disable",
+    "bite",
+    "swagger",
+    "psych_up",
+    "extrasensory"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 7,
+      "move": "leer"
+    },
+    {
+      "level": 11,
+      "move": "astonish"
+    },
+    {
+      "level": 17,
+      "move": "hypnosis"
+    },
+    {
+      "level": 21,
+      "move": "stomp"
+    },
+    {
+      "level": 27,
+      "move": "sand_attack"
+    },
+    {
+      "level": 31,
+      "move": "role_play"
+    },
+    {
+      "level": 37,
+      "move": "take_down"
+    },
+    {
+      "level": 41,
+      "move": "confuse_ray"
+    },
+    {
+      "level": 47,
+      "move": "calm_mind"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "species": "torkoal",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 85,
+    "base_defense": 140,
+    "base_speed": 20,
+    "base_sp_attack": 85,
+    "base_sp_defense": 70,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 90,
+    "exp_yield": 161,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 2,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "white_smoke",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "eruption",
+    "endure",
+    "sleep_talk",
+    "yawn"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "ember"
+    },
+    {
+      "level": 4,
+      "move": "smog"
+    },
+    {
+      "level": 7,
+      "move": "curse"
+    },
+    {
+      "level": 14,
+      "move": "smokescreen"
+    },
+    {
+      "level": 17,
+      "move": "fire_spin"
+    },
+    {
+      "level": 20,
+      "move": "body_slam"
+    },
+    {
+      "level": 27,
+      "move": "protect"
+    },
+    {
+      "level": 30,
+      "move": "flamethrower"
+    },
+    {
+      "level": 33,
+      "move": "iron_defense"
+    },
+    {
+      "level": 40,
+      "move": "amnesia"
+    },
+    {
+      "level": 43,
+      "move": "flail"
+    },
+    {
+      "level": 46,
+      "move": "heat_wave"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "species": "smoochum",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 30,
+    "base_defense": 15,
+    "base_speed": 65,
+    "base_sp_attack": 85,
+    "base_sp_defense": 65,
+    "type_1": "ice",
+    "type_2": "psychic",
+    "catch_rate": 45,
+    "exp_yield": 87,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -3,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "oblivious",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "meditate",
+    "psych_up",
+    "fake_out",
+    "wish",
+    "ice_punch"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "jynx"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "lick"
+    },
+    {
+      "level": 9,
+      "move": "sweet_kiss"
+    },
+    {
+      "level": 13,
+      "move": "powder_snow"
+    },
+    {
+      "level": 21,
+      "move": "confusion"
+    },
+    {
+      "level": 25,
+      "move": "sing"
+    },
+    {
+      "level": 33,
+      "move": "mean_look"
+    },
+    {
+      "level": 37,
+      "move": "fake_tears"
+    },
+    {
+      "level": 45,
+      "move": "psychic"
+    },
+    {
+      "level": 49,
+      "move": "perish_song"
+    },
+    {
+      "level": 57,
+      "move": "blizzard"
+    }
+  ]
+}

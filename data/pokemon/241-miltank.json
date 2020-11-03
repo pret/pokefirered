@@ -1,0 +1,85 @@
+{
+  "species": "miltank",
+  "base_stats": {
+    "base_hp": 95,
+    "base_attack": 80,
+    "base_defense": 105,
+    "base_speed": 100,
+    "base_sp_attack": 40,
+    "base_sp_defense": 70,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 200,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 2,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "moomoo_milk",
+    "item_2": "moomoo_milk",
+    "gender_ratio": -3,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "thick_fat",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "present",
+    "reversal",
+    "seismic_toss",
+    "endure",
+    "psych_up",
+    "curse",
+    "helping_hand",
+    "sleep_talk"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 4,
+      "move": "growl"
+    },
+    {
+      "level": 8,
+      "move": "defense_curl"
+    },
+    {
+      "level": 13,
+      "move": "stomp"
+    },
+    {
+      "level": 19,
+      "move": "milk_drink"
+    },
+    {
+      "level": 26,
+      "move": "bide"
+    },
+    {
+      "level": 34,
+      "move": "rollout"
+    },
+    {
+      "level": 43,
+      "move": "body_slam"
+    },
+    {
+      "level": 53,
+      "move": "heal_bell"
+    }
+  ]
+}

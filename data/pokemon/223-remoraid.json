@@ -1,0 +1,86 @@
+{
+  "species": "remoraid",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 65,
+    "base_defense": 35,
+    "base_speed": 65,
+    "base_sp_attack": 65,
+    "base_sp_defense": 35,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 190,
+    "exp_yield": 78,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_2",
+    "abilities": [
+      "hustle",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "aurora_beam",
+    "octazooka",
+    "supersonic",
+    "haze",
+    "screech",
+    "thunder_wave",
+    "rock_blast"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 25,
+      "species": "octillery"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 11,
+      "move": "lock_on"
+    },
+    {
+      "level": 22,
+      "move": "psybeam"
+    },
+    {
+      "level": 22,
+      "move": "aurora_beam"
+    },
+    {
+      "level": 22,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 33,
+      "move": "focus_energy"
+    },
+    {
+      "level": 44,
+      "move": "ice_beam"
+    },
+    {
+      "level": 55,
+      "move": "hyper_beam"
+    }
+  ]
+}

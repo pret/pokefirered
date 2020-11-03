@@ -1,0 +1,99 @@
+{
+  "species": "onix",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 45,
+    "base_defense": 160,
+    "base_speed": 70,
+    "base_sp_attack": 30,
+    "base_sp_defense": 45,
+    "type_1": "rock",
+    "type_2": "ground",
+    "catch_rate": 45,
+    "exp_yield": 108,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "hard_stone",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "rock_head",
+      "sturdy"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "rock_slide",
+    "flail",
+    "explosion",
+    "block"
+  ],
+  "evolutions": [
+    {
+      "type": "trade_item",
+      "value": "metal_coat",
+      "species": "steelix"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "screech"
+    },
+    {
+      "level": 8,
+      "move": "bind"
+    },
+    {
+      "level": 12,
+      "move": "rock_throw"
+    },
+    {
+      "level": 19,
+      "move": "harden"
+    },
+    {
+      "level": 23,
+      "move": "rage"
+    },
+    {
+      "level": 30,
+      "move": "dragon_breath"
+    },
+    {
+      "level": 34,
+      "move": "sandstorm"
+    },
+    {
+      "level": 41,
+      "move": "slam"
+    },
+    {
+      "level": 45,
+      "move": "iron_tail"
+    },
+    {
+      "level": 52,
+      "move": "sand_tomb"
+    },
+    {
+      "level": 56,
+      "move": "double_edge"
+    }
+  ]
+}

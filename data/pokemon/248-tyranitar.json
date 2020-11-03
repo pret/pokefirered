@@ -1,0 +1,88 @@
+{
+  "species": "tyranitar",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 134,
+    "base_defense": 110,
+    "base_speed": 61,
+    "base_sp_attack": 95,
+    "base_sp_defense": 100,
+    "type_1": "rock",
+    "type_2": "dark",
+    "catch_rate": 45,
+    "exp_yield": 218,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 40,
+    "friendship": 35,
+    "growth_rate": "slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "monster",
+    "abilities": [
+      "sand_stream",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bite"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "sandstorm"
+    },
+    {
+      "level": 1,
+      "move": "screech"
+    },
+    {
+      "level": 8,
+      "move": "sandstorm"
+    },
+    {
+      "level": 15,
+      "move": "screech"
+    },
+    {
+      "level": 22,
+      "move": "rock_slide"
+    },
+    {
+      "level": 29,
+      "move": "thrash"
+    },
+    {
+      "level": 38,
+      "move": "scary_face"
+    },
+    {
+      "level": 47,
+      "move": "crunch"
+    },
+    {
+      "level": 61,
+      "move": "earthquake"
+    },
+    {
+      "level": 75,
+      "move": "hyper_beam"
+    }
+  ]
+}

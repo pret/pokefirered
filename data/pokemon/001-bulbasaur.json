@@ -1,0 +1,99 @@
+{
+  "species": "bulbasaur",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 49,
+    "base_defense": 49,
+    "base_speed": 45,
+    "base_sp_attack": 65,
+    "base_sp_defense": 65,
+    "type_1": "grass",
+    "type_2": "poison",
+    "catch_rate": 45,
+    "exp_yield": 64,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "grass",
+    "abilities": [
+      "overgrow",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "light_screen",
+    "skull_bash",
+    "safeguard",
+    "charm",
+    "petal_dance",
+    "magical_leaf",
+    "grass_whistle",
+    "curse"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "ivysaur"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 4,
+      "move": "growl"
+    },
+    {
+      "level": 7,
+      "move": "leech_seed"
+    },
+    {
+      "level": 10,
+      "move": "vine_whip"
+    },
+    {
+      "level": 15,
+      "move": "poison_powder"
+    },
+    {
+      "level": 15,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 20,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 25,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 32,
+      "move": "growth"
+    },
+    {
+      "level": 39,
+      "move": "synthesis"
+    },
+    {
+      "level": 46,
+      "move": "solar_beam"
+    }
+  ]
+}

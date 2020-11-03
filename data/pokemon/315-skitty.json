@@ -1,0 +1,103 @@
+{
+  "species": "skitty",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 45,
+    "base_defense": 45,
+    "base_speed": 50,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 255,
+    "exp_yield": 65,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "leppa_berry",
+    "gender_ratio": 75,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "field",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "cute_charm",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "helping_hand",
+    "psych_up",
+    "uproar",
+    "fake_tears",
+    "wish",
+    "baton_pass",
+    "substitute",
+    "tickle"
+  ],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "moon_stone",
+      "species": "delcatty"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 3,
+      "move": "tail_whip"
+    },
+    {
+      "level": 7,
+      "move": "attract"
+    },
+    {
+      "level": 13,
+      "move": "sing"
+    },
+    {
+      "level": 15,
+      "move": "double_slap"
+    },
+    {
+      "level": 19,
+      "move": "assist"
+    },
+    {
+      "level": 25,
+      "move": "charm"
+    },
+    {
+      "level": 27,
+      "move": "faint_attack"
+    },
+    {
+      "level": 31,
+      "move": "covet"
+    },
+    {
+      "level": 37,
+      "move": "heal_bell"
+    },
+    {
+      "level": 39,
+      "move": "double_edge"
+    }
+  ]
+}

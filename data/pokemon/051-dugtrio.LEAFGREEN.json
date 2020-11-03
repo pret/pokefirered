@@ -1,0 +1,92 @@
+{
+  "species": "dugtrio",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 80,
+    "base_defense": 50,
+    "base_speed": 120,
+    "base_sp_attack": 50,
+    "base_sp_defense": 70,
+    "type_1": "ground",
+    "type_2": "ground",
+    "catch_rate": 50,
+    "exp_yield": 153,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "sand_veil",
+      "arena_trap"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tri_attack"
+    },
+    {
+      "level": 1,
+      "move": "sand_attack"
+    },
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 5,
+      "move": "growl"
+    },
+    {
+      "level": 9,
+      "move": "magnitude"
+    },
+    {
+      "level": 17,
+      "move": "dig"
+    },
+    {
+      "level": 21,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 25,
+      "move": "mud_slap"
+    },
+    {
+      "level": 26,
+      "move": "sand_tomb"
+    },
+    {
+      "level": 38,
+      "move": "slash"
+    },
+    {
+      "level": 51,
+      "move": "earthquake"
+    },
+    {
+      "level": 64,
+      "move": "fissure"
+    }
+  ]
+}

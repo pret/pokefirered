@@ -1,0 +1,94 @@
+{
+  "species": "vigoroth",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 80,
+    "base_defense": 80,
+    "base_speed": 90,
+    "base_sp_attack": 55,
+    "base_sp_defense": 55,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 120,
+    "exp_yield": 126,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "vital_spirit",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 36,
+      "species": "slaking"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "focus_energy"
+    },
+    {
+      "level": 1,
+      "move": "encore"
+    },
+    {
+      "level": 1,
+      "move": "uproar"
+    },
+    {
+      "level": 7,
+      "move": "encore"
+    },
+    {
+      "level": 13,
+      "move": "uproar"
+    },
+    {
+      "level": 19,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 25,
+      "move": "endure"
+    },
+    {
+      "level": 31,
+      "move": "slash"
+    },
+    {
+      "level": 37,
+      "move": "counter"
+    },
+    {
+      "level": 43,
+      "move": "focus_punch"
+    },
+    {
+      "level": 49,
+      "move": "reversal"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "species": "scyther",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 110,
+    "base_defense": 80,
+    "base_speed": 105,
+    "base_sp_attack": 55,
+    "base_sp_defense": 80,
+    "type_1": "bug",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 187,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "swarm",
+      "none"
+    ],
+    "safari_zone_flee_rate": 125,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "counter",
+    "safeguard",
+    "baton_pass",
+    "razor_wind",
+    "reversal",
+    "light_screen",
+    "endure",
+    "silver_wind"
+  ],
+  "evolutions": [
+    {
+      "type": "trade_item",
+      "value": "metal_coat",
+      "species": "scizor"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "quick_attack"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 6,
+      "move": "focus_energy"
+    },
+    {
+      "level": 11,
+      "move": "pursuit"
+    },
+    {
+      "level": 16,
+      "move": "false_swipe"
+    },
+    {
+      "level": 21,
+      "move": "agility"
+    },
+    {
+      "level": 26,
+      "move": "wing_attack"
+    },
+    {
+      "level": 31,
+      "move": "slash"
+    },
+    {
+      "level": 36,
+      "move": "swords_dance"
+    },
+    {
+      "level": 41,
+      "move": "double_team"
+    },
+    {
+      "level": 46,
+      "move": "fury_cutter"
+    }
+  ]
+}

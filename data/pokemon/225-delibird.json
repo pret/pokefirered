@@ -1,0 +1,51 @@
+{
+  "species": "delibird",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 55,
+    "base_defense": 45,
+    "base_speed": 75,
+    "base_sp_attack": 65,
+    "base_sp_defense": 45,
+    "type_1": "ice",
+    "type_2": "flying",
+    "catch_rate": 45,
+    "exp_yield": 183,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "field",
+    "abilities": [
+      "vital_spirit",
+      "hustle"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "aurora_beam",
+    "quick_attack",
+    "future_sight",
+    "splash",
+    "rapid_spin",
+    "ice_ball"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "present"
+    }
+  ]
+}

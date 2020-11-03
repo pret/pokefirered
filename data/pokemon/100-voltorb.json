@@ -1,0 +1,90 @@
+{
+  "species": "voltorb",
+  "base_stats": {
+    "base_hp": 40,
+    "base_attack": 30,
+    "base_defense": 50,
+    "base_speed": 100,
+    "base_sp_attack": 55,
+    "base_sp_defense": 55,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 190,
+    "exp_yield": 103,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "soundproof",
+      "static"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "electrode"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "charge"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 8,
+      "move": "screech"
+    },
+    {
+      "level": 15,
+      "move": "sonic_boom"
+    },
+    {
+      "level": 21,
+      "move": "spark"
+    },
+    {
+      "level": 27,
+      "move": "self_destruct"
+    },
+    {
+      "level": 32,
+      "move": "rollout"
+    },
+    {
+      "level": 37,
+      "move": "light_screen"
+    },
+    {
+      "level": 42,
+      "move": "swift"
+    },
+    {
+      "level": 46,
+      "move": "explosion"
+    },
+    {
+      "level": 49,
+      "move": "mirror_coat"
+    }
+  ]
+}

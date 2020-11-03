@@ -1,0 +1,96 @@
+{
+  "species": "sneasel",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 95,
+    "base_defense": 55,
+    "base_speed": 115,
+    "base_sp_attack": 35,
+    "base_sp_defense": 75,
+    "type_1": "dark",
+    "type_2": "ice",
+    "catch_rate": 60,
+    "exp_yield": 132,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 35,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "inner_focus",
+      "keen_eye"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "counter",
+    "spite",
+    "foresight",
+    "reflect",
+    "bite",
+    "crush_claw",
+    "fake_out"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "taunt"
+    },
+    {
+      "level": 8,
+      "move": "quick_attack"
+    },
+    {
+      "level": 15,
+      "move": "screech"
+    },
+    {
+      "level": 22,
+      "move": "faint_attack"
+    },
+    {
+      "level": 29,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 36,
+      "move": "agility"
+    },
+    {
+      "level": 43,
+      "move": "icy_wind"
+    },
+    {
+      "level": 50,
+      "move": "slash"
+    },
+    {
+      "level": 57,
+      "move": "beat_up"
+    },
+    {
+      "level": 64,
+      "move": "metal_claw"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "species": "nidorino",
+  "base_stats": {
+    "base_hp": 61,
+    "base_attack": 72,
+    "base_defense": 57,
+    "base_speed": 65,
+    "base_sp_attack": 55,
+    "base_sp_defense": 55,
+    "type_1": "poison",
+    "type_2": "poison",
+    "catch_rate": 120,
+    "exp_yield": 118,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "field",
+    "abilities": [
+      "poison_point",
+      "none"
+    ],
+    "safari_zone_flee_rate": 75,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "item",
+      "value": "moon_stone",
+      "species": "nidoking"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 8,
+      "move": "focus_energy"
+    },
+    {
+      "level": 12,
+      "move": "double_kick"
+    },
+    {
+      "level": 18,
+      "move": "poison_sting"
+    },
+    {
+      "level": 22,
+      "move": "horn_attack"
+    },
+    {
+      "level": 26,
+      "move": "helping_hand"
+    },
+    {
+      "level": 34,
+      "move": "fury_attack"
+    },
+    {
+      "level": 43,
+      "move": "flatter"
+    },
+    {
+      "level": 53,
+      "move": "horn_drill"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "species": "groudon",
+  "base_stats": {
+    "base_hp": 100,
+    "base_attack": 150,
+    "base_defense": 140,
+    "base_speed": 90,
+    "base_sp_attack": 100,
+    "base_sp_defense": 90,
+    "type_1": "ground",
+    "type_2": "ground",
+    "catch_rate": 5,
+    "exp_yield": 218,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 120,
+    "friendship": 0,
+    "growth_rate": "slow",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "drought",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "mud_shot"
+    },
+    {
+      "level": 5,
+      "move": "scary_face"
+    },
+    {
+      "level": 15,
+      "move": "ancient_power"
+    },
+    {
+      "level": 20,
+      "move": "slash"
+    },
+    {
+      "level": 30,
+      "move": "bulk_up"
+    },
+    {
+      "level": 35,
+      "move": "earthquake"
+    },
+    {
+      "level": 45,
+      "move": "fire_blast"
+    },
+    {
+      "level": 50,
+      "move": "rest"
+    },
+    {
+      "level": 60,
+      "move": "fissure"
+    },
+    {
+      "level": 65,
+      "move": "solar_beam"
+    },
+    {
+      "level": 75,
+      "move": "eruption"
+    }
+  ]
+}

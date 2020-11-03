@@ -1,0 +1,96 @@
+{
+  "species": "nincada",
+  "base_stats": {
+    "base_hp": 31,
+    "base_attack": 45,
+    "base_defense": 90,
+    "base_speed": 40,
+    "base_sp_attack": 30,
+    "base_sp_defense": 30,
+    "type_1": "bug",
+    "type_2": "ground",
+    "catch_rate": 255,
+    "exp_yield": 65,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "erratic",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "compound_eyes",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "endure",
+    "faint_attack",
+    "gust",
+    "silver_wind"
+  ],
+  "evolutions": [
+    {
+      "type": "level_ninjask",
+      "value": 20,
+      "species": "ninjask"
+    },
+    {
+      "type": "level_shedinja",
+      "value": 20,
+      "species": "shedinja"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 5,
+      "move": "leech_life"
+    },
+    {
+      "level": 9,
+      "move": "sand_attack"
+    },
+    {
+      "level": 14,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 19,
+      "move": "mind_reader"
+    },
+    {
+      "level": 25,
+      "move": "false_swipe"
+    },
+    {
+      "level": 31,
+      "move": "mud_slap"
+    },
+    {
+      "level": 38,
+      "move": "metal_claw"
+    },
+    {
+      "level": 45,
+      "move": "dig"
+    }
+  ]
+}

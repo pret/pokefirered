@@ -1,0 +1,95 @@
+{
+  "species": "mawile",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 85,
+    "base_defense": 85,
+    "base_speed": 50,
+    "base_sp_attack": 55,
+    "base_sp_defense": 55,
+    "type_1": "steel",
+    "type_2": "steel",
+    "catch_rate": 45,
+    "exp_yield": 98,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "field",
+    "egg_group_2": "fairy",
+    "abilities": [
+      "hyper_cutter",
+      "intimidate"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "swords_dance",
+    "false_swipe",
+    "poison_fang",
+    "psych_up",
+    "ancient_power",
+    "tickle"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "astonish"
+    },
+    {
+      "level": 6,
+      "move": "fake_tears"
+    },
+    {
+      "level": 11,
+      "move": "bite"
+    },
+    {
+      "level": 16,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 21,
+      "move": "vice_grip"
+    },
+    {
+      "level": 26,
+      "move": "faint_attack"
+    },
+    {
+      "level": 31,
+      "move": "baton_pass"
+    },
+    {
+      "level": 36,
+      "move": "crunch"
+    },
+    {
+      "level": 41,
+      "move": "iron_defense"
+    },
+    {
+      "level": 46,
+      "move": "stockpile"
+    },
+    {
+      "level": 46,
+      "move": "swallow"
+    },
+    {
+      "level": 46,
+      "move": "spit_up"
+    }
+  ]
+}

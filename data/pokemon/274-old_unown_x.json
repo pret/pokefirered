@@ -1,0 +1,44 @@
+{
+  "species": "old_unown_x",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 150,
+    "base_defense": 50,
+    "base_speed": 150,
+    "base_sp_attack": 150,
+    "base_sp_defense": 50,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 3,
+    "exp_yield": 1,
+    "ev_yield_hp": 2,
+    "ev_yield_attack": 2,
+    "ev_yield_defense": 2,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 120,
+    "friendship": 0,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "none",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    }
+  ]
+}

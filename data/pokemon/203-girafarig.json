@@ -1,0 +1,89 @@
+{
+  "species": "girafarig",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 80,
+    "base_defense": 65,
+    "base_speed": 85,
+    "base_sp_attack": 90,
+    "base_sp_defense": 65,
+    "type_1": "normal",
+    "type_2": "psychic",
+    "catch_rate": 60,
+    "exp_yield": 149,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 2,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "persim_berry",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "inner_focus",
+      "early_bird"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "take_down",
+    "amnesia",
+    "foresight",
+    "future_sight",
+    "beat_up",
+    "psych_up",
+    "wish",
+    "magic_coat"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 7,
+      "move": "astonish"
+    },
+    {
+      "level": 13,
+      "move": "confusion"
+    },
+    {
+      "level": 19,
+      "move": "stomp"
+    },
+    {
+      "level": 25,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 31,
+      "move": "agility"
+    },
+    {
+      "level": 37,
+      "move": "baton_pass"
+    },
+    {
+      "level": 43,
+      "move": "psybeam"
+    },
+    {
+      "level": 49,
+      "move": "crunch"
+    }
+  ]
+}

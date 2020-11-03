@@ -1,0 +1,81 @@
+{
+  "species": "murkrow",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 85,
+    "base_defense": 42,
+    "base_speed": 91,
+    "base_sp_attack": 85,
+    "base_sp_defense": 42,
+    "type_1": "dark",
+    "type_2": "flying",
+    "catch_rate": 30,
+    "exp_yield": 107,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 35,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "flying",
+    "egg_group_2": "flying",
+    "abilities": [
+      "insomnia",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "black",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "whirlwind",
+    "drill_peck",
+    "mirror_move",
+    "wing_attack",
+    "sky_attack",
+    "confuse_ray",
+    "feather_dance",
+    "perish_song"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "peck"
+    },
+    {
+      "level": 9,
+      "move": "astonish"
+    },
+    {
+      "level": 14,
+      "move": "pursuit"
+    },
+    {
+      "level": 22,
+      "move": "haze"
+    },
+    {
+      "level": 27,
+      "move": "night_shade"
+    },
+    {
+      "level": 35,
+      "move": "faint_attack"
+    },
+    {
+      "level": 40,
+      "move": "taunt"
+    },
+    {
+      "level": 48,
+      "move": "mean_look"
+    }
+  ]
+}

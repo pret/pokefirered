@@ -1,0 +1,95 @@
+{
+  "species": "chikorita",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 49,
+    "base_defense": 65,
+    "base_speed": 45,
+    "base_sp_attack": 49,
+    "base_sp_defense": 65,
+    "type_1": "grass",
+    "type_2": "grass",
+    "catch_rate": 45,
+    "exp_yield": 64,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "lum_berry",
+    "item_2": "lum_berry",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "grass",
+    "abilities": [
+      "overgrow",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "vine_whip",
+    "leech_seed",
+    "counter",
+    "ancient_power",
+    "flail",
+    "nature_power",
+    "ingrain",
+    "grass_whistle"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "bayleef"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 8,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 12,
+      "move": "reflect"
+    },
+    {
+      "level": 15,
+      "move": "poison_powder"
+    },
+    {
+      "level": 22,
+      "move": "synthesis"
+    },
+    {
+      "level": 29,
+      "move": "body_slam"
+    },
+    {
+      "level": 36,
+      "move": "light_screen"
+    },
+    {
+      "level": 43,
+      "move": "safeguard"
+    },
+    {
+      "level": 50,
+      "move": "solar_beam"
+    }
+  ]
+}

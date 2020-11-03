@@ -1,0 +1,95 @@
+{
+  "species": "wooper",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 45,
+    "base_defense": 45,
+    "base_speed": 15,
+    "base_sp_attack": 25,
+    "base_sp_defense": 25,
+    "type_1": "water",
+    "type_2": "ground",
+    "catch_rate": 255,
+    "exp_yield": 52,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "field",
+    "abilities": [
+      "damp",
+      "water_absorb"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "blue",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "body_slam",
+    "ancient_power",
+    "safeguard",
+    "curse",
+    "mud_sport",
+    "stockpile",
+    "swallow",
+    "spit_up"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 20,
+      "species": "quagsire"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_gun"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 11,
+      "move": "slam"
+    },
+    {
+      "level": 16,
+      "move": "mud_shot"
+    },
+    {
+      "level": 21,
+      "move": "amnesia"
+    },
+    {
+      "level": 31,
+      "move": "yawn"
+    },
+    {
+      "level": 36,
+      "move": "earthquake"
+    },
+    {
+      "level": 41,
+      "move": "rain_dance"
+    },
+    {
+      "level": 51,
+      "move": "mist"
+    },
+    {
+      "level": 51,
+      "move": "haze"
+    }
+  ]
+}

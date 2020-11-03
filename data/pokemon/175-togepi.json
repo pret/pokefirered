@@ -1,0 +1,102 @@
+{
+  "species": "togepi",
+  "base_stats": {
+    "base_hp": 35,
+    "base_attack": 20,
+    "base_defense": 65,
+    "base_speed": 20,
+    "base_sp_attack": 40,
+    "base_sp_defense": 65,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 190,
+    "exp_yield": 74,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 10,
+    "friendship": 70,
+    "growth_rate": "fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "hustle",
+      "serene_grace"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "present",
+    "mirror_move",
+    "peck",
+    "foresight",
+    "future_sight",
+    "substitute",
+    "psych_up"
+  ],
+  "evolutions": [
+    {
+      "type": "friendship",
+      "value": 0,
+      "species": "togetic"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "charm"
+    },
+    {
+      "level": 4,
+      "move": "metronome"
+    },
+    {
+      "level": 9,
+      "move": "sweet_kiss"
+    },
+    {
+      "level": 13,
+      "move": "yawn"
+    },
+    {
+      "level": 17,
+      "move": "encore"
+    },
+    {
+      "level": 21,
+      "move": "ancient_power"
+    },
+    {
+      "level": 25,
+      "move": "follow_me"
+    },
+    {
+      "level": 29,
+      "move": "wish"
+    },
+    {
+      "level": 33,
+      "move": "safeguard"
+    },
+    {
+      "level": 37,
+      "move": "double_edge"
+    },
+    {
+      "level": 41,
+      "move": "baton_pass"
+    }
+  ]
+}

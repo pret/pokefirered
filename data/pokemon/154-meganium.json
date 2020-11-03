@@ -1,0 +1,88 @@
+{
+  "species": "meganium",
+  "base_stats": {
+    "base_hp": 80,
+    "base_attack": 82,
+    "base_defense": 100,
+    "base_speed": 80,
+    "base_sp_attack": 83,
+    "base_sp_defense": 100,
+    "type_1": "grass",
+    "type_2": "grass",
+    "catch_rate": 45,
+    "exp_yield": 208,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 1,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "grass",
+    "abilities": [
+      "overgrow",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 1,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 1,
+      "move": "reflect"
+    },
+    {
+      "level": 8,
+      "move": "razor_leaf"
+    },
+    {
+      "level": 12,
+      "move": "reflect"
+    },
+    {
+      "level": 15,
+      "move": "poison_powder"
+    },
+    {
+      "level": 23,
+      "move": "synthesis"
+    },
+    {
+      "level": 31,
+      "move": "body_slam"
+    },
+    {
+      "level": 41,
+      "move": "light_screen"
+    },
+    {
+      "level": 51,
+      "move": "safeguard"
+    },
+    {
+      "level": 61,
+      "move": "solar_beam"
+    }
+  ]
+}

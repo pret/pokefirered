@@ -1,0 +1,105 @@
+{
+  "species": "roselia",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 60,
+    "base_defense": 45,
+    "base_speed": 65,
+    "base_sp_attack": 100,
+    "base_sp_defense": 80,
+    "type_1": "grass",
+    "type_2": "poison",
+    "catch_rate": 150,
+    "exp_yield": 152,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "poison_barb",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "fairy",
+    "egg_group_2": "grass",
+    "abilities": [
+      "natural_cure",
+      "poison_point"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": true
+  },
+  "egg_moves": [
+    "spikes",
+    "synthesis",
+    "pin_missile",
+    "cotton_spore"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "absorb"
+    },
+    {
+      "level": 5,
+      "move": "growth"
+    },
+    {
+      "level": 9,
+      "move": "poison_sting"
+    },
+    {
+      "level": 13,
+      "move": "stun_spore"
+    },
+    {
+      "level": 17,
+      "move": "mega_drain"
+    },
+    {
+      "level": 21,
+      "move": "leech_seed"
+    },
+    {
+      "level": 25,
+      "move": "magical_leaf"
+    },
+    {
+      "level": 29,
+      "move": "grass_whistle"
+    },
+    {
+      "level": 33,
+      "move": "giga_drain"
+    },
+    {
+      "level": 37,
+      "move": "sweet_scent"
+    },
+    {
+      "level": 41,
+      "move": "ingrain"
+    },
+    {
+      "level": 45,
+      "move": "toxic"
+    },
+    {
+      "level": 49,
+      "move": "petal_dance"
+    },
+    {
+      "level": 53,
+      "move": "aromatherapy"
+    },
+    {
+      "level": 57,
+      "move": "synthesis"
+    }
+  ]
+}

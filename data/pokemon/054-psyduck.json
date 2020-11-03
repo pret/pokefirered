@@ -1,0 +1,91 @@
+{
+  "species": "psyduck",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 52,
+    "base_defense": 48,
+    "base_speed": 55,
+    "base_sp_attack": 65,
+    "base_sp_defense": 50,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 190,
+    "exp_yield": 80,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_1",
+    "egg_group_2": "field",
+    "abilities": [
+      "damp",
+      "cloud_nine"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "hypnosis",
+    "psybeam",
+    "foresight",
+    "light_screen",
+    "future_sight",
+    "psychic",
+    "cross_chop",
+    "refresh"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 33,
+      "species": "golduck"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "water_sport"
+    },
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 5,
+      "move": "tail_whip"
+    },
+    {
+      "level": 10,
+      "move": "disable"
+    },
+    {
+      "level": 16,
+      "move": "confusion"
+    },
+    {
+      "level": 23,
+      "move": "screech"
+    },
+    {
+      "level": 31,
+      "move": "psych_up"
+    },
+    {
+      "level": 40,
+      "move": "fury_swipes"
+    },
+    {
+      "level": 50,
+      "move": "hydro_pump"
+    }
+  ]
+}

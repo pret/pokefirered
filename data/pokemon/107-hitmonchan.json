@@ -1,0 +1,88 @@
+{
+  "species": "hitmonchan",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 105,
+    "base_defense": 79,
+    "base_speed": 76,
+    "base_sp_attack": 35,
+    "base_sp_defense": 110,
+    "type_1": "fighting",
+    "type_2": "fighting",
+    "catch_rate": 45,
+    "exp_yield": 140,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 2,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -2,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "human_like",
+    "egg_group_2": "human_like",
+    "abilities": [
+      "keen_eye",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "revenge"
+    },
+    {
+      "level": 1,
+      "move": "comet_punch"
+    },
+    {
+      "level": 7,
+      "move": "agility"
+    },
+    {
+      "level": 13,
+      "move": "pursuit"
+    },
+    {
+      "level": 20,
+      "move": "mach_punch"
+    },
+    {
+      "level": 26,
+      "move": "thunder_punch"
+    },
+    {
+      "level": 26,
+      "move": "ice_punch"
+    },
+    {
+      "level": 26,
+      "move": "fire_punch"
+    },
+    {
+      "level": 32,
+      "move": "sky_uppercut"
+    },
+    {
+      "level": 38,
+      "move": "mega_punch"
+    },
+    {
+      "level": 44,
+      "move": "detect"
+    },
+    {
+      "level": 50,
+      "move": "counter"
+    }
+  ]
+}

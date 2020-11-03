@@ -1,0 +1,94 @@
+{
+  "species": "krabby",
+  "base_stats": {
+    "base_hp": 30,
+    "base_attack": 105,
+    "base_defense": 90,
+    "base_speed": 50,
+    "base_sp_attack": 25,
+    "base_sp_defense": 25,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 225,
+    "exp_yield": 115,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "water_3",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "hyper_cutter",
+      "shell_armor"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "dig",
+    "haze",
+    "amnesia",
+    "flail",
+    "slam",
+    "knock_off",
+    "swords_dance"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 28,
+      "species": "kingler"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 5,
+      "move": "leer"
+    },
+    {
+      "level": 12,
+      "move": "vice_grip"
+    },
+    {
+      "level": 16,
+      "move": "harden"
+    },
+    {
+      "level": 23,
+      "move": "mud_shot"
+    },
+    {
+      "level": 27,
+      "move": "stomp"
+    },
+    {
+      "level": 34,
+      "move": "guillotine"
+    },
+    {
+      "level": 38,
+      "move": "protect"
+    },
+    {
+      "level": 45,
+      "move": "crabhammer"
+    },
+    {
+      "level": 49,
+      "move": "flail"
+    }
+  ]
+}

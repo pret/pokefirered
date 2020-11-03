@@ -1,0 +1,79 @@
+{
+  "species": "cleffa",
+  "base_stats": {
+    "base_hp": 50,
+    "base_attack": 25,
+    "base_defense": 28,
+    "base_speed": 15,
+    "base_sp_attack": 45,
+    "base_sp_defense": 55,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 150,
+    "exp_yield": 37,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "moon_stone",
+    "gender_ratio": 75,
+    "egg_cycles": 10,
+    "friendship": 140,
+    "growth_rate": "fast",
+    "egg_group_1": "undiscovered",
+    "egg_group_2": "undiscovered",
+    "abilities": [
+      "cute_charm",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "pink",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "present",
+    "metronome",
+    "amnesia",
+    "belly_drum",
+    "splash",
+    "mimic",
+    "wish",
+    "substitute"
+  ],
+  "evolutions": [
+    {
+      "type": "friendship",
+      "value": 0,
+      "species": "clefairy"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "charm"
+    },
+    {
+      "level": 4,
+      "move": "encore"
+    },
+    {
+      "level": 8,
+      "move": "sing"
+    },
+    {
+      "level": 13,
+      "move": "sweet_kiss"
+    },
+    {
+      "level": 17,
+      "move": "magical_leaf"
+    }
+  ]
+}

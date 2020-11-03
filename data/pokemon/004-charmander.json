@@ -1,0 +1,95 @@
+{
+  "species": "charmander",
+  "base_stats": {
+    "base_hp": 39,
+    "base_attack": 52,
+    "base_defense": 43,
+    "base_speed": 65,
+    "base_sp_attack": 60,
+    "base_sp_defense": 50,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 45,
+    "exp_yield": 65,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "monster",
+    "egg_group_2": "dragon",
+    "abilities": [
+      "blaze",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "belly_drum",
+    "ancient_power",
+    "rock_slide",
+    "bite",
+    "outrage",
+    "beat_up",
+    "swords_dance",
+    "dragon_dance"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 16,
+      "species": "charmeleon"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "growl"
+    },
+    {
+      "level": 7,
+      "move": "ember"
+    },
+    {
+      "level": 13,
+      "move": "metal_claw"
+    },
+    {
+      "level": 19,
+      "move": "smokescreen"
+    },
+    {
+      "level": 25,
+      "move": "scary_face"
+    },
+    {
+      "level": 31,
+      "move": "flamethrower"
+    },
+    {
+      "level": 37,
+      "move": "slash"
+    },
+    {
+      "level": 43,
+      "move": "dragon_rage"
+    },
+    {
+      "level": 49,
+      "move": "fire_spin"
+    }
+  ]
+}

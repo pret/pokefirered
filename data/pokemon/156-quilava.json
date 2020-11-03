@@ -1,0 +1,82 @@
+{
+  "species": "quilava",
+  "base_stats": {
+    "base_hp": 58,
+    "base_attack": 64,
+    "base_defense": 58,
+    "base_speed": 80,
+    "base_sp_attack": 80,
+    "base_sp_defense": 65,
+    "type_1": "fire",
+    "type_2": "fire",
+    "catch_rate": 45,
+    "exp_yield": 142,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 1,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 12.5,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "blaze",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 36,
+      "species": "typhlosion"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "smokescreen"
+    },
+    {
+      "level": 6,
+      "move": "smokescreen"
+    },
+    {
+      "level": 12,
+      "move": "ember"
+    },
+    {
+      "level": 21,
+      "move": "quick_attack"
+    },
+    {
+      "level": 31,
+      "move": "flame_wheel"
+    },
+    {
+      "level": 42,
+      "move": "swift"
+    },
+    {
+      "level": 54,
+      "move": "flamethrower"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "species": "skiploom",
+  "base_stats": {
+    "base_hp": 55,
+    "base_attack": 45,
+    "base_defense": 50,
+    "base_speed": 80,
+    "base_sp_attack": 45,
+    "base_sp_defense": 65,
+    "type_1": "grass",
+    "type_2": "flying",
+    "catch_rate": 120,
+    "exp_yield": 136,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "fairy",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "green",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 27,
+      "species": "jumpluff"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "splash"
+    },
+    {
+      "level": 1,
+      "move": "synthesis"
+    },
+    {
+      "level": 1,
+      "move": "tail_whip"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 5,
+      "move": "synthesis"
+    },
+    {
+      "level": 5,
+      "move": "tail_whip"
+    },
+    {
+      "level": 10,
+      "move": "tackle"
+    },
+    {
+      "level": 13,
+      "move": "poison_powder"
+    },
+    {
+      "level": 15,
+      "move": "stun_spore"
+    },
+    {
+      "level": 17,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 22,
+      "move": "leech_seed"
+    },
+    {
+      "level": 29,
+      "move": "cotton_spore"
+    },
+    {
+      "level": 36,
+      "move": "mega_drain"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "species": "venonat",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 55,
+    "base_defense": 50,
+    "base_speed": 45,
+    "base_sp_attack": 40,
+    "base_sp_defense": 55,
+    "type_1": "bug",
+    "type_2": "poison",
+    "catch_rate": 190,
+    "exp_yield": 75,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 1,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "compound_eyes",
+      "none"
+    ],
+    "safari_zone_flee_rate": 50,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "baton_pass",
+    "screech",
+    "giga_drain",
+    "signal_beam"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 31,
+      "species": "venomoth"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "disable"
+    },
+    {
+      "level": 1,
+      "move": "foresight"
+    },
+    {
+      "level": 9,
+      "move": "supersonic"
+    },
+    {
+      "level": 17,
+      "move": "confusion"
+    },
+    {
+      "level": 20,
+      "move": "poison_powder"
+    },
+    {
+      "level": 25,
+      "move": "leech_life"
+    },
+    {
+      "level": 28,
+      "move": "stun_spore"
+    },
+    {
+      "level": 33,
+      "move": "psybeam"
+    },
+    {
+      "level": 36,
+      "move": "sleep_powder"
+    },
+    {
+      "level": 41,
+      "move": "psychic"
+    }
+  ]
+}

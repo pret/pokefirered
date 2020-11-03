@@ -1,0 +1,75 @@
+{
+  "species": "castform",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 70,
+    "base_defense": 70,
+    "base_speed": 70,
+    "base_sp_attack": 70,
+    "base_sp_defense": 70,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 45,
+    "exp_yield": 145,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "mystic_water",
+    "item_2": "mystic_water",
+    "gender_ratio": 50,
+    "egg_cycles": 25,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "fairy",
+    "egg_group_2": "amorphous",
+    "abilities": [
+      "forecast",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "white",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "future_sight",
+    "psych_up"
+  ],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 10,
+      "move": "water_gun"
+    },
+    {
+      "level": 10,
+      "move": "ember"
+    },
+    {
+      "level": 10,
+      "move": "powder_snow"
+    },
+    {
+      "level": 20,
+      "move": "rain_dance"
+    },
+    {
+      "level": 20,
+      "move": "sunny_day"
+    },
+    {
+      "level": 20,
+      "move": "hail"
+    },
+    {
+      "level": 30,
+      "move": "weather_ball"
+    }
+  ]
+}

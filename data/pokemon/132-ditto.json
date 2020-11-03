@@ -1,0 +1,44 @@
+{
+  "species": "ditto",
+  "base_stats": {
+    "base_hp": 48,
+    "base_attack": 48,
+    "base_defense": 48,
+    "base_speed": 48,
+    "base_sp_attack": 48,
+    "base_sp_defense": 48,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 35,
+    "exp_yield": 61,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "metal_powder",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "ditto",
+    "egg_group_2": "ditto",
+    "abilities": [
+      "limber",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "purple",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "transform"
+    }
+  ]
+}

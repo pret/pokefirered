@@ -1,0 +1,90 @@
+{
+  "species": "magnemite",
+  "base_stats": {
+    "base_hp": 25,
+    "base_attack": 35,
+    "base_defense": 70,
+    "base_speed": 45,
+    "base_sp_attack": 95,
+    "base_sp_defense": 55,
+    "type_1": "electric",
+    "type_2": "steel",
+    "catch_rate": 190,
+    "exp_yield": 89,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 1,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": -1,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "mineral",
+    "egg_group_2": "mineral",
+    "abilities": [
+      "magnet_pull",
+      "sturdy"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "gray",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "magneton"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "metal_sound"
+    },
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 6,
+      "move": "thunder_shock"
+    },
+    {
+      "level": 11,
+      "move": "supersonic"
+    },
+    {
+      "level": 16,
+      "move": "sonic_boom"
+    },
+    {
+      "level": 21,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 26,
+      "move": "spark"
+    },
+    {
+      "level": 32,
+      "move": "lock_on"
+    },
+    {
+      "level": 38,
+      "move": "swift"
+    },
+    {
+      "level": 44,
+      "move": "screech"
+    },
+    {
+      "level": 50,
+      "move": "zap_cannon"
+    }
+  ]
+}

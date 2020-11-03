@@ -1,0 +1,90 @@
+{
+  "species": "slakoth",
+  "base_stats": {
+    "base_hp": 60,
+    "base_attack": 60,
+    "base_defense": 60,
+    "base_speed": 30,
+    "base_sp_attack": 35,
+    "base_sp_defense": 35,
+    "type_1": "normal",
+    "type_2": "normal",
+    "catch_rate": 255,
+    "exp_yield": 83,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "truant",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "pursuit",
+    "slash",
+    "body_slam",
+    "snore",
+    "crush_claw",
+    "curse",
+    "sleep_talk"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 18,
+      "species": "vigoroth"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "scratch"
+    },
+    {
+      "level": 1,
+      "move": "yawn"
+    },
+    {
+      "level": 7,
+      "move": "encore"
+    },
+    {
+      "level": 13,
+      "move": "slack_off"
+    },
+    {
+      "level": 19,
+      "move": "faint_attack"
+    },
+    {
+      "level": 25,
+      "move": "amnesia"
+    },
+    {
+      "level": 31,
+      "move": "covet"
+    },
+    {
+      "level": 37,
+      "move": "counter"
+    },
+    {
+      "level": 43,
+      "move": "flail"
+    }
+  ]
+}

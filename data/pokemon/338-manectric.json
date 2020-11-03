@@ -1,0 +1,96 @@
+{
+  "species": "manectric",
+  "base_stats": {
+    "base_hp": 70,
+    "base_attack": 75,
+    "base_defense": 60,
+    "base_speed": 105,
+    "base_sp_attack": 105,
+    "base_sp_defense": 60,
+    "type_1": "electric",
+    "type_2": "electric",
+    "catch_rate": 45,
+    "exp_yield": 168,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 2,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 20,
+    "friendship": 70,
+    "growth_rate": "slow",
+    "egg_group_1": "field",
+    "egg_group_2": "field",
+    "abilities": [
+      "static",
+      "lightning_rod"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "yellow",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 1,
+      "move": "leer"
+    },
+    {
+      "level": 1,
+      "move": "howl"
+    },
+    {
+      "level": 4,
+      "move": "thunder_wave"
+    },
+    {
+      "level": 9,
+      "move": "leer"
+    },
+    {
+      "level": 12,
+      "move": "howl"
+    },
+    {
+      "level": 17,
+      "move": "quick_attack"
+    },
+    {
+      "level": 20,
+      "move": "spark"
+    },
+    {
+      "level": 25,
+      "move": "odor_sleuth"
+    },
+    {
+      "level": 31,
+      "move": "roar"
+    },
+    {
+      "level": 39,
+      "move": "bite"
+    },
+    {
+      "level": 45,
+      "move": "thunder"
+    },
+    {
+      "level": 53,
+      "move": "charge"
+    }
+  ]
+}

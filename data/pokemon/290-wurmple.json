@@ -1,0 +1,63 @@
+{
+  "species": "wurmple",
+  "base_stats": {
+    "base_hp": 45,
+    "base_attack": 45,
+    "base_defense": 35,
+    "base_speed": 20,
+    "base_sp_attack": 20,
+    "base_sp_defense": 30,
+    "type_1": "bug",
+    "type_2": "bug",
+    "catch_rate": 255,
+    "exp_yield": 54,
+    "ev_yield_hp": 1,
+    "ev_yield_attack": 0,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_fast",
+    "egg_group_1": "bug",
+    "egg_group_2": "bug",
+    "abilities": [
+      "shield_dust",
+      "none"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [
+    {
+      "type": "level_silcoon",
+      "value": 7,
+      "species": "silcoon"
+    },
+    {
+      "type": "level_cascoon",
+      "value": 7,
+      "species": "cascoon"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "tackle"
+    },
+    {
+      "level": 1,
+      "move": "string_shot"
+    },
+    {
+      "level": 5,
+      "move": "poison_sting"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "species": "shiftry",
+  "base_stats": {
+    "base_hp": 90,
+    "base_attack": 100,
+    "base_defense": 60,
+    "base_speed": 80,
+    "base_sp_attack": 90,
+    "base_sp_defense": 60,
+    "type_1": "grass",
+    "type_2": "dark",
+    "catch_rate": 45,
+    "exp_yield": 181,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 3,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "medium_slow",
+    "egg_group_1": "field",
+    "egg_group_2": "grass",
+    "abilities": [
+      "chlorophyll",
+      "early_bird"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "brown",
+    "no_flip": false
+  },
+  "egg_moves": [],
+  "evolutions": [],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "pound"
+    },
+    {
+      "level": 1,
+      "move": "harden"
+    },
+    {
+      "level": 1,
+      "move": "growth"
+    },
+    {
+      "level": 1,
+      "move": "nature_power"
+    }
+  ]
+}

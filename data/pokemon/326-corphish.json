@@ -1,0 +1,99 @@
+{
+  "species": "corphish",
+  "base_stats": {
+    "base_hp": 43,
+    "base_attack": 80,
+    "base_defense": 65,
+    "base_speed": 35,
+    "base_sp_attack": 50,
+    "base_sp_defense": 35,
+    "type_1": "water",
+    "type_2": "water",
+    "catch_rate": 205,
+    "exp_yield": 111,
+    "ev_yield_hp": 0,
+    "ev_yield_attack": 1,
+    "ev_yield_defense": 0,
+    "ev_yield_speed": 0,
+    "ev_yield_sp_attack": 0,
+    "ev_yield_sp_defense": 0,
+    "item_1": "none",
+    "item_2": "none",
+    "gender_ratio": 50,
+    "egg_cycles": 15,
+    "friendship": 70,
+    "growth_rate": "fluctuating",
+    "egg_group_1": "water_1",
+    "egg_group_2": "water_3",
+    "abilities": [
+      "hyper_cutter",
+      "shell_armor"
+    ],
+    "safari_zone_flee_rate": 0,
+    "body_color": "red",
+    "no_flip": false
+  },
+  "egg_moves": [
+    "mud_sport",
+    "endeavor",
+    "body_slam",
+    "ancient_power"
+  ],
+  "evolutions": [
+    {
+      "type": "level",
+      "value": 30,
+      "species": "crawdaunt"
+    }
+  ],
+  "level_up_moves": [
+    {
+      "level": 1,
+      "move": "bubble"
+    },
+    {
+      "level": 7,
+      "move": "harden"
+    },
+    {
+      "level": 10,
+      "move": "vice_grip"
+    },
+    {
+      "level": 13,
+      "move": "leer"
+    },
+    {
+      "level": 19,
+      "move": "bubble_beam"
+    },
+    {
+      "level": 22,
+      "move": "protect"
+    },
+    {
+      "level": 25,
+      "move": "knock_off"
+    },
+    {
+      "level": 31,
+      "move": "taunt"
+    },
+    {
+      "level": 34,
+      "move": "crabhammer"
+    },
+    {
+      "level": 37,
+      "move": "swords_dance"
+    },
+    {
+      "level": 43,
+      "move": "crunch"
+    },
+    {
+      "level": 46,
+      "move": "guillotine"
+    }
+  ]
+}

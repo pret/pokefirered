@@ -82,5 +82,36 @@
       "level": 55,
       "move": "hyper_beam"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm27_return",
+    "tm29_psychic",
+    "tm32_double_team",
+    "tm35_flamethrower",
+    "tm38_fire_blast",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm03_surf",
+    "hm07_waterfall",
+    "hm08_dive"
+  ],
+  "tutor_moves": [
+    "double_edge",
+    "mimic",
+    "thunder_wave",
+    "substitute"
   ]
 }

@@ -76,5 +76,38 @@
       "level": 81,
       "move": "calm_mind"
     }
+  ],
+  "tm_hm_moves": [
+    "tm04_calm_mind",
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm28_dig",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm35_flamethrower",
+    "tm37_sandstorm",
+    "tm38_fire_blast",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "hm01_cut",
+    "hm04_strength",
+    "hm05_flash",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "substitute"
   ]
 }

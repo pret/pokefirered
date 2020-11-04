@@ -77,5 +77,36 @@
       "level": 43,
       "move": "mega_drain"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm06_toxic",
+    "tm07_hail",
+    "tm09_bullet_seed",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm19_giga_drain",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm27_return",
+    "tm32_double_team",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm03_surf",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "swords_dance",
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "substitute"
   ]
 }

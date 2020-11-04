@@ -80,5 +80,37 @@
       "level": 46,
       "move": "lock_on"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm24_thunderbolt",
+    "tm25_thunder",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm37_sandstorm",
+    "tm39_rock_tomb",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "thunder_wave",
+    "explosion",
+    "rock_slide",
+    "substitute"
   ]
 }

@@ -80,5 +80,36 @@
       "level": 60,
       "move": "body_slam"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm35_flamethrower",
+    "tm37_sandstorm",
+    "tm38_fire_blast",
+    "tm39_rock_tomb",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm50_overheat",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "rock_slide",
+    "substitute"
   ]
 }

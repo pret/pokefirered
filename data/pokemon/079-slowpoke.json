@@ -99,5 +99,45 @@
       "level": 47,
       "move": "psych_up"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm04_calm_mind",
+    "tm06_toxic",
+    "tm07_hail",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm20_safeguard",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm35_flamethrower",
+    "tm38_fire_blast",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm48_skill_swap",
+    "hm03_surf",
+    "hm04_strength",
+    "hm05_flash",
+    "hm08_dive"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "dream_eater",
+    "thunder_wave",
+    "substitute"
   ]
 }

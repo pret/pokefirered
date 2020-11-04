@@ -92,5 +92,42 @@
       "level": 57,
       "move": "blizzard"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm04_calm_mind",
+    "tm06_toxic",
+    "tm07_hail",
+    "tm10_hidden_power",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm27_return",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm48_skill_swap",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "metronome",
+    "dream_eater",
+    "substitute"
   ]
 }

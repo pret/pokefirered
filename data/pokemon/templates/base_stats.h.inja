@@ -1,0 +1,56 @@
+{{ doNotModifyHeader }}
+// Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
+// 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
+#define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
+
+const struct BaseStats gBaseStats[] =
+{
+    [SPECIES_NONE] = {0},
+## for pokemon in pokemon_list
+    [SPECIES_{{ upper(pokemon.species) }}] = 
+    {
+        .baseHP = {{ pokemon.base_stats.base_hp }},
+        .baseAttack = {{ pokemon.base_stats.base_attack }},
+        .baseDefense = {{ pokemon.base_stats.base_defense }},
+        .baseSpeed = {{ pokemon.base_stats.base_speed }},
+        .baseSpAttack = {{ pokemon.base_stats.base_sp_attack }},
+        .baseSpDefense = {{ pokemon.base_stats.base_sp_defense }},
+        .type1 = TYPE_{{ upper(pokemon.base_stats.type_1) }},
+        .type2 = TYPE_{{ upper(pokemon.base_stats.type_2) }},
+        .catchRate = {{ pokemon.base_stats.catch_rate }},
+        .expYield = {{ pokemon.base_stats.exp_yield }},
+        .evYield_HP = {{ pokemon.base_stats.ev_yield_hp }},
+        .evYield_Attack = {{ pokemon.base_stats.ev_yield_attack }},
+        .evYield_Defense = {{ pokemon.base_stats.ev_yield_defense }},
+        .evYield_Speed = {{ pokemon.base_stats.ev_yield_speed }},
+        .evYield_SpAttack = {{ pokemon.base_stats.ev_yield_sp_attack }},
+        .evYield_SpDefense = {{ pokemon.base_stats.ev_yield_sp_defense }},
+        .item1 = ITEM_{{ upper(pokemon.base_stats.item_1) }},
+        .item2 = ITEM_{{ upper(pokemon.base_stats.item_2) }},
+        {% if pokemon.base_stats.gender_ratio == -1 %}
+        .genderRatio = MON_GENDERLESS,
+        {% else if pokemon.base_stats.gender_ratio == -2  %}
+        .genderRatio = MON_MALE,
+        {% else if pokemon.base_stats.gender_ratio == -3  %}
+        .genderRatio = MON_FEMALE,
+        {% else %}
+        .genderRatio = PERCENT_FEMALE(
+            {{ pokemon.base_stats.gender_ratio }}{% if not isFloat(pokemon.base_stats.gender_ratio) %}.0{% endif %}
+        ),
+        {% endif %}
+        .eggCycles = {{ pokemon.base_stats.egg_cycles }},
+        .friendship = {{ pokemon.base_stats.friendship }},
+        .growthRate = GROWTH_{{ upper(pokemon.base_stats.growth_rate) }},
+        .eggGroup1 = EGG_GROUP_{{ upper(pokemon.base_stats.egg_group_1) }},
+        .eggGroup2 = EGG_GROUP_{{ upper(pokemon.base_stats.egg_group_2) }},
+        .abilities = {
+## for ability in pokemon.base_stats.abilities
+            ABILITY_{{ upper(ability) }},
+## endfor
+        },
+        .safariZoneFleeRate = {{ pokemon.base_stats.safari_zone_flee_rate }},
+        .bodyColor = BODY_COLOR_{{ upper(pokemon.base_stats.body_color) }},
+        .noFlip = {% if pokemon.base_stats.no_flip %}TRUE{% else %}FALSE{% endif %},
+    },
+## endfor
+};

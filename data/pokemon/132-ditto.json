@@ -40,5 +40,7 @@
       "level": 1,
       "move": "transform"
     }
-  ]
+  ],
+  "tm_hm_moves": [],
+  "tutor_moves": []
 }

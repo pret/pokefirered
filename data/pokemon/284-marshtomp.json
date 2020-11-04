@@ -102,5 +102,42 @@
       "level": 53,
       "move": "endeavor"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm06_toxic",
+    "tm07_hail",
+    "tm10_hidden_power",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm32_double_team",
+    "tm39_rock_tomb",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm03_surf",
+    "hm04_strength",
+    "hm06_rock_smash",
+    "hm07_waterfall",
+    "hm08_dive"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "rock_slide",
+    "substitute"
   ]
 }

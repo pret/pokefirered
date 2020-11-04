@@ -80,5 +80,34 @@
       "level": 57,
       "move": "dream_eater"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm27_return",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm40_aerial_ace",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm47_steel_wing",
+    "hm02_fly",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "double_edge",
+    "mimic",
+    "dream_eater",
+    "substitute"
   ]
 }

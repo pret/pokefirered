@@ -68,5 +68,43 @@
       "level": 14,
       "move": "sweet_kiss"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm20_safeguard",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm27_return",
+    "tm28_dig",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm34_shock_wave",
+    "tm35_flamethrower",
+    "tm38_fire_blast",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "dream_eater",
+    "thunder_wave",
+    "substitute"
   ]
 }

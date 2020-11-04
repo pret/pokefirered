@@ -1,0 +1,41 @@
+{{ doNotModifyHeader }}
+static const u16 sTutorMoves[TUTOR_MOVE_COUNT] =
+{
+    [TUTOR_MOVE_MEGA_PUNCH] = MOVE_MEGA_PUNCH,
+    [TUTOR_MOVE_SWORDS_DANCE] = MOVE_SWORDS_DANCE,
+    [TUTOR_MOVE_MEGA_KICK] = MOVE_MEGA_KICK,
+    [TUTOR_MOVE_BODY_SLAM] = MOVE_BODY_SLAM,
+    [TUTOR_MOVE_DOUBLE_EDGE] = MOVE_DOUBLE_EDGE,
+    [TUTOR_MOVE_COUNTER] = MOVE_COUNTER,
+    [TUTOR_MOVE_SEISMIC_TOSS] = MOVE_SEISMIC_TOSS,
+    [TUTOR_MOVE_MIMIC] = MOVE_MIMIC,
+    [TUTOR_MOVE_METRONOME] = MOVE_METRONOME,
+    [TUTOR_MOVE_SOFT_BOILED] = MOVE_SOFT_BOILED,
+    [TUTOR_MOVE_DREAM_EATER] = MOVE_DREAM_EATER,
+    [TUTOR_MOVE_THUNDER_WAVE] = MOVE_THUNDER_WAVE,
+    [TUTOR_MOVE_EXPLOSION] = MOVE_EXPLOSION,
+    [TUTOR_MOVE_ROCK_SLIDE] = MOVE_ROCK_SLIDE,
+    [TUTOR_MOVE_SUBSTITUTE] = MOVE_SUBSTITUTE,
+};
+
+#define TUTOR(move) (1 << (TUTOR_##move))
+
+static const u16 sTutorLearnsets[] =
+{
+    [SPECIES_NONE] = 0,
+
+## for pokemon in pokemon_list
+{% if existsIn(pokemon, "tutor_moves") %}
+    [SPECIES_{{ upper(pokemon.species) }}] =
+    {% if length(pokemon.tutor_moves) > 0 %}
+## for move in pokemon.tutor_moves
+    {% if not loop.is_first %}|{% endif %}
+      TUTOR(MOVE_{{ upper(move) }})
+    {% if loop.is_last %},{% endif %}
+## endfor
+    {% else %}
+        0,
+    {% endif %}
+{% endif %}
+## endfor
+};

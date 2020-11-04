@@ -85,5 +85,36 @@
       "level": 49,
       "move": "fire_blast"
     }
+  ],
+  "tm_hm_moves": [
+    "tm01_focus_punch",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm29_psychic",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm35_flamethrower",
+    "tm38_fire_blast",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "substitute"
   ]
 }

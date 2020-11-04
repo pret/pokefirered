@@ -95,5 +95,36 @@
       "level": 56,
       "move": "double_edge"
     }
+  ],
+  "tm_hm_moves": [
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm32_double_team",
+    "tm37_sandstorm",
+    "tm39_rock_tomb",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "explosion",
+    "rock_slide",
+    "substitute"
   ]
 }

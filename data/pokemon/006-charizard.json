@@ -92,5 +92,47 @@
       "level": 64,
       "move": "fire_spin"
     }
+  ],
+  "tm_hm_moves": [
+    "tm01_focus_punch",
+    "tm02_dragon_claw",
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm35_flamethrower",
+    "tm38_fire_blast",
+    "tm40_aerial_ace",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm47_steel_wing",
+    "tm50_overheat",
+    "hm01_cut",
+    "hm02_fly",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "swords_dance",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "rock_slide",
+    "substitute"
   ]
 }

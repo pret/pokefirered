@@ -80,5 +80,36 @@
       "level": 52,
       "move": "moonlight"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm28_dig",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm49_snatch",
+    "hm01_cut",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "dream_eater",
+    "substitute"
   ]
 }

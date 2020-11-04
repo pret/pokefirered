@@ -76,5 +76,42 @@
       "level": 49,
       "move": "explosion"
     }
+  ],
+  "tm_hm_moves": [
+    "tm04_calm_mind",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm20_safeguard",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm35_flamethrower",
+    "tm37_sandstorm",
+    "tm38_fire_blast",
+    "tm39_rock_tomb",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm48_skill_swap",
+    "tm50_overheat",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "dream_eater",
+    "explosion",
+    "rock_slide",
+    "substitute"
   ]
 }

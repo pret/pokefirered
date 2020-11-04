@@ -80,5 +80,37 @@
       "level": 52,
       "move": "morning_sun"
     }
+  ],
+  "tm_hm_moves": [
+    "tm04_calm_mind",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm28_dig",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm48_skill_swap",
+    "hm01_cut",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "dream_eater",
+    "substitute"
   ]
 }

@@ -1,0 +1,18 @@
+{{ doNotModifyHeader }}
+
+#define EGG_MOVES_SPECIES_OFFSET 20000
+#define EGG_MOVES_TERMINATOR 0xFFFF
+#define egg_moves(species, moves...) (SPECIES_##species + EGG_MOVES_SPECIES_OFFSET), moves
+
+const u16 gEggMoves[] = {
+## for pokemon in pokemon_list
+{% if length(pokemon.egg_moves) > 0 %}
+    egg_moves({{ upper(pokemon.species) }},
+## for egg_move in pokemon.egg_moves
+              MOVE_{{ upper(egg_move) }}{% if loop.is_last %}){% endif %},
+## endfor
+{% endif %}
+## endfor
+
+    EGG_MOVES_TERMINATOR
+};

@@ -85,5 +85,31 @@
       "level": 46,
       "move": "false_swipe"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm32_double_team",
+    "tm40_aerial_ace",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm47_steel_wing",
+    "hm01_cut",
+    "hm02_fly"
+  ],
+  "tutor_moves": [
+    "swords_dance",
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "substitute"
   ]
 }

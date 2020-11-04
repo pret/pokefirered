@@ -91,5 +91,44 @@
       "level": 57,
       "move": "megahorn"
     }
+  ],
+  "tm_hm_moves": [
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm24_thunderbolt",
+    "tm25_thunder",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm35_flamethrower",
+    "tm37_sandstorm",
+    "tm38_fire_blast",
+    "tm39_rock_tomb",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "swords_dance",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "mimic",
+    "rock_slide",
+    "substitute"
   ]
 }

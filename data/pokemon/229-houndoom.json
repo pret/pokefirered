@@ -80,5 +80,41 @@
       "level": 59,
       "move": "crunch"
     }
+  ],
+  "tm_hm_moves": [
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm35_flamethrower",
+    "tm36_sludge_bomb",
+    "tm38_fire_blast",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm49_snatch",
+    "tm50_overheat",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "counter",
+    "mimic",
+    "dream_eater",
+    "substitute"
   ]
 }

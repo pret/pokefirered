@@ -52,5 +52,42 @@
       "level": 1,
       "move": "thunderbolt"
     }
+  ],
+  "tm_hm_moves": [
+    "tm01_focus_punch",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm15_hyper_beam",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm24_thunderbolt",
+    "tm25_thunder",
+    "tm27_return",
+    "tm28_dig",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm04_strength",
+    "hm05_flash",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "thunder_wave",
+    "substitute"
   ]
 }

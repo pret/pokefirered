@@ -1,0 +1,7 @@
+{{ doNotModifyHeader }}
+const u16 *const gLevelUpLearnsets[NUM_SPECIES] = {
+    [SPECIES_NONE] = s{{ camelToPascalCase(pokemon_list.0.species) }}LevelUpLearnset,
+## for pokemon in pokemon_list
+    [SPECIES_{{ upper(pokemon.species) }}] = s{{ camelToPascalCase(pokemon.species) }}LevelUpLearnset,
+## endfor
+};

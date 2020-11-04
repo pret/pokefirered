@@ -59,5 +59,7 @@
       "level": 5,
       "move": "poison_sting"
     }
-  ]
+  ],
+  "tm_hm_moves": [],
+  "tutor_moves": []
 }

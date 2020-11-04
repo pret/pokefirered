@@ -1,0 +1,27 @@
+{{ doNotModifyHeader }}
+#define TMHM_LEARNSET(moves) {(u32)(moves), ((u64)(moves) >> 32)}
+#define TMHM(tmhm) ((u64)1 << (ITEM_##tmhm - ITEM_TM01_FOCUS_PUNCH))
+
+// This table determines which TMs and HMs a species is capable of learning.
+// Each entry is a 64-bit bit array spread across two 32-bit values, with
+// each bit corresponding to a machine.
+static const u32 sTMHMLearnsets[][2] =
+{
+    [SPECIES_NONE]        = TMHM_LEARNSET(0),
+## for pokemon in pokemon_list
+    [SPECIES_{{ upper(pokemon.species) }}] =
+    {% if length(pokemon.tm_hm_moves) > 0 %}
+## for move in pokemon.tm_hm_moves
+    {% if loop.is_first %}
+        TMHM_LEARNSET(TMHM({{ upper(move) }})
+    {% else %}
+                    | TMHM({{ upper(move) }})
+    {% endif %}
+    {% if loop.is_last %}){% endif %}
+## endfor
+    {% else %}
+        TMHM_LEARNSET(0)
+    {% endif %}
+    {% if not loop.is_last %},{% endif %}
+## endfor
+};

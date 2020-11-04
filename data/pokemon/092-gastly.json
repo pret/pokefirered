@@ -94,5 +94,35 @@
       "level": 48,
       "move": "mean_look"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm19_giga_drain",
+    "tm21_frustration",
+    "tm24_thunderbolt",
+    "tm27_return",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm36_sludge_bomb",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm48_skill_swap",
+    "tm49_snatch"
+  ],
+  "tutor_moves": [
+    "mimic",
+    "dream_eater",
+    "explosion",
+    "substitute"
   ]
 }

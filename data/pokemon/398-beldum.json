@@ -46,5 +46,7 @@
       "level": 1,
       "move": "take_down"
     }
-  ]
+  ],
+  "tm_hm_moves": [],
+  "tutor_moves": []
 }

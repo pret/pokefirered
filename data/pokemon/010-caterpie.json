@@ -50,5 +50,7 @@
       "level": 1,
       "move": "string_shot"
     }
-  ]
+  ],
+  "tm_hm_moves": [],
+  "tutor_moves": []
 }

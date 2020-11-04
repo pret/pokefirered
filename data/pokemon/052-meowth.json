@@ -89,5 +89,40 @@
       "level": 45,
       "move": "swagger"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm24_thunderbolt",
+    "tm25_thunder",
+    "tm27_return",
+    "tm28_dig",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm40_aerial_ace",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm49_snatch",
+    "hm01_cut",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "dream_eater",
+    "substitute"
   ]
 }

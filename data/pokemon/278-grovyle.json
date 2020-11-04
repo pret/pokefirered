@@ -98,5 +98,43 @@
       "level": 53,
       "move": "false_swipe"
     }
+  ],
+  "tm_hm_moves": [
+    "tm01_focus_punch",
+    "tm06_toxic",
+    "tm09_bullet_seed",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm17_protect",
+    "tm19_giga_drain",
+    "tm20_safeguard",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm28_dig",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm39_rock_tomb",
+    "tm40_aerial_ace",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm01_cut",
+    "hm04_strength",
+    "hm05_flash",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "swords_dance",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "substitute"
   ]
 }

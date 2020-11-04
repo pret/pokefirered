@@ -92,5 +92,33 @@
       "level": 41,
       "move": "charge"
     }
+  ],
+  "tm_hm_moves": [
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm24_thunderbolt",
+    "tm25_thunder",
+    "tm27_return",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm04_strength",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "thunder_wave",
+    "substitute"
   ]
 }

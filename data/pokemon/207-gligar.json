@@ -74,5 +74,40 @@
       "level": 52,
       "move": "guillotine"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm32_double_team",
+    "tm36_sludge_bomb",
+    "tm37_sandstorm",
+    "tm39_rock_tomb",
+    "tm40_aerial_ace",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm47_steel_wing",
+    "hm01_cut",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "swords_dance",
+    "double_edge",
+    "counter",
+    "mimic",
+    "dream_eater",
+    "rock_slide",
+    "substitute"
   ]
 }

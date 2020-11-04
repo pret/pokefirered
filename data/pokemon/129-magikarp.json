@@ -54,5 +54,7 @@
       "level": 30,
       "move": "flail"
     }
-  ]
+  ],
+  "tm_hm_moves": [],
+  "tutor_moves": []
 }

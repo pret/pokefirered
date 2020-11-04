@@ -1,0 +1,18 @@
+{{ doNotModifyHeader }}
+
+const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
+{
+## for pokemon in pokemon_list
+{% if length(pokemon.evolutions) > 0 %}
+    [SPECIES_{{ upper(pokemon.species) }}] = {
+## for evolution in pokemon.evolutions
+{% if isNumber(evolution.value) %}
+        {EVO_{{ upper(evolution.type) }}, {{evolution.value}}, SPECIES_{{ upper(evolution.species) }}},
+{% else %}
+        {EVO_{{ upper(evolution.type) }}, ITEM_{{ upper(evolution.value) }}, SPECIES_{{ upper(evolution.species) }}},
+{% endif %}
+## endfor
+    },
+{% endif %}
+## endfor
+};

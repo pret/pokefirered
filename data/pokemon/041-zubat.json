@@ -89,5 +89,33 @@
       "level": 46,
       "move": "haze"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm19_giga_drain",
+    "tm21_frustration",
+    "tm27_return",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm36_sludge_bomb",
+    "tm40_aerial_ace",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm47_steel_wing",
+    "tm49_snatch"
+  ],
+  "tutor_moves": [
+    "double_edge",
+    "mimic",
+    "substitute"
   ]
 }

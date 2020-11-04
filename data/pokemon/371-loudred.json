@@ -98,5 +98,46 @@
       "level": 57,
       "move": "hyper_voice"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm30_shadow_ball",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm35_flamethrower",
+    "tm38_fire_blast",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm50_overheat",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "rock_slide",
+    "substitute"
   ]
 }

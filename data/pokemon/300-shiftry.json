@@ -52,5 +52,42 @@
       "level": 1,
       "move": "nature_power"
     }
+  ],
+  "tm_hm_moves": [
+    "tm06_toxic",
+    "tm09_bullet_seed",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm19_giga_drain",
+    "tm21_frustration",
+    "tm22_solarbeam",
+    "tm27_return",
+    "tm28_dig",
+    "tm30_shadow_ball",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm39_rock_tomb",
+    "tm40_aerial_ace",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "hm01_cut",
+    "hm04_strength",
+    "hm05_flash",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "swords_dance",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "mimic",
+    "explosion",
+    "substitute"
   ]
 }

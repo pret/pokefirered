@@ -72,5 +72,36 @@
       "level": 85,
       "move": "thunder"
     }
+  ],
+  "tm_hm_moves": [
+    "tm05_roar",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm24_thunderbolt",
+    "tm25_thunder",
+    "tm27_return",
+    "tm32_double_team",
+    "tm34_shock_wave",
+    "tm37_sandstorm",
+    "tm40_aerial_ace",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm47_steel_wing",
+    "hm02_fly",
+    "hm05_flash",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "double_edge",
+    "mimic",
+    "thunder_wave",
+    "substitute"
   ]
 }

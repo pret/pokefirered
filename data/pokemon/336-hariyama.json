@@ -96,5 +96,41 @@
       "level": 55,
       "move": "reversal"
     }
+  ],
+  "tm_hm_moves": [
+    "tm01_focus_punch",
+    "tm06_toxic",
+    "tm08_bulk_up",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm26_earthquake",
+    "tm27_return",
+    "tm28_dig",
+    "tm31_brick_break",
+    "tm32_double_team",
+    "tm39_rock_tomb",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm03_surf",
+    "hm04_strength",
+    "hm06_rock_smash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "metronome",
+    "rock_slide",
+    "substitute"
   ]
 }

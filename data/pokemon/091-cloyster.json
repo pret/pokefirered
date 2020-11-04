@@ -60,5 +60,32 @@
       "level": 43,
       "move": "spike_cannon"
     }
+  ],
+  "tm_hm_moves": [
+    "tm03_water_pulse",
+    "tm06_toxic",
+    "tm07_hail",
+    "tm10_hidden_power",
+    "tm13_ice_beam",
+    "tm14_blizzard",
+    "tm15_hyper_beam",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm21_frustration",
+    "tm27_return",
+    "tm32_double_team",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "hm03_surf",
+    "hm08_dive"
+  ],
+  "tutor_moves": [
+    "double_edge",
+    "mimic",
+    "explosion",
+    "substitute"
   ]
 }

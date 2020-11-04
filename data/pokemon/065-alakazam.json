@@ -84,5 +84,48 @@
       "level": 43,
       "move": "trick"
     }
+  ],
+  "tm_hm_moves": [
+    "tm01_focus_punch",
+    "tm04_calm_mind",
+    "tm06_toxic",
+    "tm10_hidden_power",
+    "tm11_sunny_day",
+    "tm12_taunt",
+    "tm15_hyper_beam",
+    "tm16_light_screen",
+    "tm17_protect",
+    "tm18_rain_dance",
+    "tm20_safeguard",
+    "tm21_frustration",
+    "tm23_iron_tail",
+    "tm27_return",
+    "tm29_psychic",
+    "tm30_shadow_ball",
+    "tm32_double_team",
+    "tm33_reflect",
+    "tm34_shock_wave",
+    "tm41_torment",
+    "tm42_facade",
+    "tm43_secret_power",
+    "tm44_rest",
+    "tm45_attract",
+    "tm46_thief",
+    "tm48_skill_swap",
+    "tm49_snatch",
+    "hm05_flash"
+  ],
+  "tutor_moves": [
+    "mega_punch",
+    "mega_kick",
+    "body_slam",
+    "double_edge",
+    "counter",
+    "seismic_toss",
+    "mimic",
+    "metronome",
+    "dream_eater",
+    "thunder_wave",
+    "substitute"
   ]
 }

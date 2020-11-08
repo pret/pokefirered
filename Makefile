@@ -234,7 +234,7 @@ else
 $(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include $(C_SUBDIR)/$*.c)
 endif
 
-$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
+$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep) $$(GENERATED_HEADERS) 
 	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
 	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo -e ".text\n\t.align\t2, 0 @ Don't pad with nop\n" >> $(C_BUILDDIR)/$*.s

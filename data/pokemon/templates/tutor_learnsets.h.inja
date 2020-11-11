@@ -33,8 +33,7 @@ static const u16 sTutorLearnsets[] =
     {% if length(pokemon.tutor_moves) > 0 %}
 ## for move in pokemon.tutor_moves
     {% if not loop.is_first %}|{% endif %}
-      TUTOR(MOVE_{{ upper(move) }})
-    {% if loop.is_last %},{% endif %}
+      TUTOR(MOVE_{{ upper(move) }}){% if loop.is_last %},{% endif %}
 ## endfor
     {% else %}
         0,

@@ -1,4 +1,5 @@
 {
+  "game_variant": "LEAFGREEN",
   "species": "deoxys",
   "base_stats": {
     "base_hp": 50,

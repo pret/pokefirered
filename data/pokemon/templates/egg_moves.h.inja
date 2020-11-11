@@ -6,11 +6,19 @@
 
 const u16 gEggMoves[] = {
 ## for pokemon in pokemon_list
+{% if existsIn(pokemon, "game_variant") %}
+#if defined({{ pokemon.game_variant }})
+{% endif %}
+
 {% if length(pokemon.egg_moves) > 0 %}
     egg_moves({{ upper(pokemon.species) }},
 ## for egg_move in pokemon.egg_moves
               MOVE_{{ upper(egg_move) }}{% if loop.is_last %}){% endif %},
 ## endfor
+{% endif %}
+
+{% if existsIn(pokemon, "game_variant") %}
+#endif
 {% endif %}
 ## endfor
 

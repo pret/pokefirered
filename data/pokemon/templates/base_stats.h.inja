@@ -7,6 +7,10 @@ const struct BaseStats gBaseStats[] =
 {
     [SPECIES_NONE] = {0},
 ## for pokemon in pokemon_list
+{% if existsIn(pokemon, "game_variant") %}
+#if defined({{ pokemon.game_variant }})
+{% endif %}
+
     [SPECIES_{{ upper(pokemon.species) }}] = 
     {
         .baseHP = {{ pokemon.base_stats.base_hp }},
@@ -52,5 +56,8 @@ const struct BaseStats gBaseStats[] =
         .bodyColor = BODY_COLOR_{{ upper(pokemon.base_stats.body_color) }},
         .noFlip = {% if pokemon.base_stats.no_flip %}TRUE{% else %}FALSE{% endif %},
     },
+{% if existsIn(pokemon, "game_variant") %}
+#endif
+{% endif %}
 ## endfor
 };

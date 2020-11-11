@@ -19,12 +19,12 @@ $(C_BUILDDIR)/wild_encounter.o: c_dep += $(DATA_C_SUBDIR)/wild_encounters.h
 
 # Collect a list of all the pokemon json files, including only the files for
 # the current game version
-POKEMON_JSON_DEPS = $(shell find data/pokemon -maxdepth 1 | grep "data/pokemon/[0-9]\+-[a-zA-Z0-9_]\+\.json\|data/pokemon/[0-9]\+-[a-zA-Z0-9_]\+\.${GAME_VERSION}\.json")
+POKEMON_JSON_DEPS := $(sort $(shell find data/pokemon -maxdepth 1 | grep "data/pokemon/[0-9]\+-.*\.json"))
 
 # Generate merged pokemon_list.json file
 AUTO_GEN_TARGETS += $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json
 
-$(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json: $(sort $(POKEMON_JSON_DEPS))
+$(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json: $(POKEMON_JSON_DEPS)
 	cat $^ | jq -s '{pokemon_list: .}' > $@
 
 # Generate level_up_learnset_pointers.h

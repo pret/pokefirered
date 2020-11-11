@@ -3,6 +3,10 @@
 const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 {
 ## for pokemon in pokemon_list
+{% if existsIn(pokemon, "game_variant") %}
+#if defined({{ pokemon.game_variant }})
+{% endif %}
+
 {% if length(pokemon.evolutions) > 0 %}
     [SPECIES_{{ upper(pokemon.species) }}] = {
 ## for evolution in pokemon.evolutions
@@ -13,6 +17,9 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 {% endif %}
 ## endfor
     },
+{% endif %}
+{% if existsIn(pokemon, "game_variant") %}
+#endif
 {% endif %}
 ## endfor
 };

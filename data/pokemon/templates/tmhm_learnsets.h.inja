@@ -9,6 +9,9 @@ static const u32 sTMHMLearnsets[][2] =
 {
     [SPECIES_NONE]        = TMHM_LEARNSET(0),
 ## for pokemon in pokemon_list
+{% if existsIn(pokemon, "game_variant") %}
+#if defined({{ pokemon.game_variant }})
+{% endif %}
     [SPECIES_{{ upper(pokemon.species) }}] =
     {% if length(pokemon.tm_hm_moves) > 0 %}
 ## for move in pokemon.tm_hm_moves
@@ -23,5 +26,8 @@ static const u32 sTMHMLearnsets[][2] =
         TMHM_LEARNSET(0)
     {% endif %}
     {% if not loop.is_last %},{% endif %}
+{% if existsIn(pokemon, "game_variant") %}
+#endif
+{% endif %}
 ## endfor
 };

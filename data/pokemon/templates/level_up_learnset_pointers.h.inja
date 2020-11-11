@@ -2,6 +2,13 @@
 const u16 *const gLevelUpLearnsets[NUM_SPECIES] = {
     [SPECIES_NONE] = s{{ camelToPascalCase(pokemon_list.0.species) }}LevelUpLearnset,
 ## for pokemon in pokemon_list
+{% if existsIn(pokemon, "game_variant") %}
+#if defined({{ pokemon.game_variant }})
+{% endif %}
     [SPECIES_{{ upper(pokemon.species) }}] = s{{ camelToPascalCase(pokemon.species) }}LevelUpLearnset,
+
+{% if existsIn(pokemon, "game_variant") %}
+#endif
+{% endif %}
 ## endfor
 };

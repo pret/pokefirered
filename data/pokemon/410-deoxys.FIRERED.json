@@ -1,4 +1,5 @@
 {
+  "game_variant": "FIRERED",
   "species": "deoxys",
   "base_stats": {
     "base_hp": 50,

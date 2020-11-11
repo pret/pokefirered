@@ -25,6 +25,9 @@ static const u16 sTutorLearnsets[] =
     [SPECIES_NONE] = 0,
 
 ## for pokemon in pokemon_list
+{% if existsIn(pokemon, "game_variant") %}
+#if defined({{ pokemon.game_variant }})
+{% endif %}
 {% if existsIn(pokemon, "tutor_moves") %}
     [SPECIES_{{ upper(pokemon.species) }}] =
     {% if length(pokemon.tutor_moves) > 0 %}
@@ -36,6 +39,9 @@ static const u16 sTutorLearnsets[] =
     {% else %}
         0,
     {% endif %}
+{% endif %}
+{% if existsIn(pokemon, "game_variant") %}
+#endif
 {% endif %}
 ## endfor
 };

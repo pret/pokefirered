@@ -27,51 +27,17 @@ AUTO_GEN_TARGETS += $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json
 $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json: $(POKEMON_JSON_DEPS)
 	cat $^ | jq -s '{pokemon_list: .}' > $@
 
-# Generate level_up_learnset_pointers.h
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/level_up_learnset_pointers.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/level_up_learnset_pointers.h
 
-$(DATA_C_SUBDIR)/pokemon/level_up_learnset_pointers.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/level_up_learnset_pointers.h.inja
-	$(JSONPROC) $^ $@
+POKEMON_JSON_HEADERS := $(DATA_C_SUBDIR)/pokemon/level_up_learnset_pointers.h \
+                        $(DATA_C_SUBDIR)/pokemon/level_up_learnsets.h \
+						$(DATA_C_SUBDIR)/pokemon/egg_moves.h \
+						$(DATA_C_SUBDIR)/pokemon/evolution.h \
+						$(DATA_C_SUBDIR)/pokemon/base_stats.h \
+						$(DATA_C_SUBDIR)/pokemon/tmhm_learnsets.h \
+						$(DATA_C_SUBDIR)/pokemon/tutor_learnsets.h
 
-# Generate level_up_learnsets.h
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/level_up_learnsets.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/level_up_learnsets.h
+AUTO_GEN_TARGETS += $(POKEMON_JSON_HEADERS)
+GENERATED_HEADERS += $(POKEMON_JSON_HEADERS)
 
-$(DATA_C_SUBDIR)/pokemon/level_up_learnsets.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/level_up_learnsets.h.inja
-	$(JSONPROC) $^ $@
-
-# Generate egg_moves.h
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/egg_moves.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/egg_moves.h
-
-$(DATA_C_SUBDIR)/pokemon/egg_moves.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/egg_moves.h.inja
-	$(JSONPROC) $^ $@
-
-# Evolutions
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/evolution.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/evolution.h
-
-$(DATA_C_SUBDIR)/pokemon/evolution.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/evolution.h.inja
-	$(JSONPROC) $^ $@
-
-# Base stats
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/base_stats.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/base_stats.h
-
-$(DATA_C_SUBDIR)/pokemon/base_stats.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/base_stats.h.inja
-	$(JSONPROC) $^ $@
-
-# TMHM Learnsets 
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/tmhm_learnsets.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/tmhm_learnsets.h
-
-$(DATA_C_SUBDIR)/pokemon/tmhm_learnsets.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/tmhm_learnsets.h.inja
-	$(JSONPROC) $^ $@
-
-# Tutor Learnsets 
-AUTO_GEN_TARGETS += $(DATA_C_SUBDIR)/pokemon/tutor_learnsets.h
-GENERATED_HEADERS += $(DATA_C_SUBDIR)/pokemon/tutor_learnsets.h
-
-$(DATA_C_SUBDIR)/pokemon/tutor_learnsets.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/tutor_learnsets.h.inja
+$(POKEMON_JSON_HEADERS): $(DATA_C_SUBDIR)/pokemon/%.h: $(DATA_ASM_SUBDIR)/pokemon/pokemon_list.json $(DATA_ASM_SUBDIR)/pokemon/templates/%.h.inja
 	$(JSONPROC) $^ $@

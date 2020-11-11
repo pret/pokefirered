@@ -9,6 +9,7 @@ addons:
   apt:
     packages:
       - gcc-multilib
+      - jq
       - linux-libc-dev
       - zlib-dev
 cache:

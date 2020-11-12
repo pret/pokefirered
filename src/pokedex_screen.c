@@ -189,7 +189,6 @@ static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 #include "data/pokemon/pokedex_text.h"
 #include "data/pokemon/pokedex_entries.h"
 
-
 static const struct BgTemplate sUnknown_8451EBC[] = {
     {
         .bg = 0,
@@ -305,9 +304,9 @@ static const struct WindowTemplate sUnknown_8451F64 = {
  };
 
 static const struct ListMenuItem sUnknown_8451F6C[] = {
-    {gUnknown_8415EFB, -3},
-    {gUnknown_8415E95, 9},
-    {gUnknown_8415DE0, -3},
+    {gText_PokemonList, -3},
+    {gText_NumericalMode, 9},
+    {gText_PokemonHabitats, -3},
     {gText_DexCategory_GrasslandPkmn, 0},
     {gText_DexCategory_ForestPkmn, 1},
     {gText_DexCategory_WatersEdgePkmn, 2},
@@ -317,13 +316,13 @@ static const struct ListMenuItem sUnknown_8451F6C[] = {
     {gText_DexCategory_RoughTerrainPkmn, 6},
     {gText_DexCategory_UrbanPkmn, 7},
     {gText_DexCategory_RarePkmn, 8},
-    {gUnknown_8415E88, -3},
-    {gUnknown_8415EA4, 10},
-    {gUnknown_8415ED5, 11},
-    {gUnknown_8415EDF, 12},
-    {gUnknown_8415EED, 13},
-    {gUnknown_8415EB0, -3},
-    {gUnknown_8415EC7, -2},
+    {gText_Search, -3},
+    {gText_AToZMode, 10},
+    {gText_TypeMode, 11},
+    {gText_LightestMode, 12},
+    {gText_SmallestMode, 13},
+    {gText_PokedexOther, -3},
+    {gText_ClosePokedex, -2},
 };
 
 static const struct ListMenuTemplate sUnknown_8452004 = {
@@ -348,10 +347,10 @@ static const struct ListMenuTemplate sUnknown_8452004 = {
 };
 
 static const struct ListMenuItem sUnknown_845201C[] = {
-    {gUnknown_8415EFB, -3},
-    {gUnknown_8415F0E, 9},
-    {gUnknown_8415F24, 14},
-    {gUnknown_8415DE0, -3},
+    {gText_PokemonList, -3},
+    {gText_NumericalModeKanto, 9},
+    {gText_NumericalModeNational, 14},
+    {gText_PokemonHabitats, -3},
     {gText_DexCategory_GrasslandPkmn, 0},
     {gText_DexCategory_ForestPkmn, 1},
     {gText_DexCategory_WatersEdgePkmn, 2},
@@ -361,13 +360,13 @@ static const struct ListMenuItem sUnknown_845201C[] = {
     {gText_DexCategory_RoughTerrainPkmn, 6},
     {gText_DexCategory_UrbanPkmn, 7},
     {gText_DexCategory_RarePkmn, 8},
-    {gUnknown_8415E88, -3},
-    {gUnknown_8415EA4, 10},
-    {gUnknown_8415ED5, 11},
-    {gUnknown_8415EDF, 12},
-    {gUnknown_8415EED, 13},
-    {gUnknown_8415EB0, -3},
-    {gUnknown_8415EC7, -2},
+    {gText_Search, -3},
+    {gText_AToZMode, 10},
+    {gText_TypeMode, 11},
+    {gText_LightestMode, 12},
+    {gText_SmallestMode, 13},
+    {gText_PokedexOther, -3},
+    {gText_ClosePokedex, -2},
 };
 
 static const struct ListMenuTemplate sUnknown_84520BC = {
@@ -1090,15 +1089,15 @@ static void sub_8102C28(void)
         listMenuTemplate.windowId = gUnknown_203ACF0->field_14;
         gUnknown_203ACF0->field_17 = ListMenuInit(&listMenuTemplate, gUnknown_203ACF0->field_12, gUnknown_203ACF0->field_10);
         FillWindowPixelBuffer(gUnknown_203ACF0->field_16, PIXEL_FILL(0));
-        sub_81047C8(gUnknown_203ACF0->field_16, 0, gUnknown_8415DC4, 0, 2, 0);
-        sub_81047C8(gUnknown_203ACF0->field_16, 0, gUnknown_8415DD1, 8, 13, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 0, gText_Seen, 0, 2, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 0, gText_Kanto, 8, 13, 0);
         sub_810491C(gUnknown_203ACF0->field_16, 0, gUnknown_203ACF0->field_66, 52, 13, 2);
-        sub_81047C8(gUnknown_203ACF0->field_16, 0, gUnknown_8415DD7, 8, 24, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 0, gText_National, 8, 24, 0);
         sub_810491C(gUnknown_203ACF0->field_16, 0, gUnknown_203ACF0->field_6A, 52, 24, 2);
-        sub_81047C8(gUnknown_203ACF0->field_16, 0, gUnknown_8415DCA, 0, 37, 0);
-        sub_81047C8(gUnknown_203ACF0->field_16, 0, gUnknown_8415DD1, 8, 48, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 0, gText_Owned, 0, 37, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 0, gText_Kanto, 8, 48, 0);
         sub_810491C(gUnknown_203ACF0->field_16, 0, gUnknown_203ACF0->field_68, 52, 48, 2);
-        sub_81047C8(gUnknown_203ACF0->field_16, 0, gUnknown_8415DD7, 8, 59, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 0, gText_National, 8, 59, 0);
         sub_810491C(gUnknown_203ACF0->field_16, 0, gUnknown_203ACF0->field_6C, 52, 59, 2);
     }
     else
@@ -1107,15 +1106,15 @@ static void sub_8102C28(void)
         listMenuTemplate.windowId = gUnknown_203ACF0->field_14;
         gUnknown_203ACF0->field_17 = ListMenuInit(&listMenuTemplate, gUnknown_203ACF0->field_12, gUnknown_203ACF0->field_10);
         FillWindowPixelBuffer(gUnknown_203ACF0->field_16, PIXEL_FILL(0));
-        sub_81047C8(gUnknown_203ACF0->field_16, 1, gUnknown_8415DC4, 0, 9, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 1, gText_Seen, 0, 9, 0);
         sub_810491C(gUnknown_203ACF0->field_16, 1, gUnknown_203ACF0->field_66, 32, 21, 2);
-        sub_81047C8(gUnknown_203ACF0->field_16, 1, gUnknown_8415DCA, 0, 37, 0);
+        sub_81047C8(gUnknown_203ACF0->field_16, 1, gText_Owned, 0, 37, 0);
         sub_810491C(gUnknown_203ACF0->field_16, 1, gUnknown_203ACF0->field_68, 32, 49, 2);
     }
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
-    sub_8106E78(gUnknown_8415D9C, 1);
+    sub_8106E78(gText_PokedexTableOfContents, 1);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
-    sub_8104C2C(gUnknown_8415DB8);
+    sub_8104C2C(gText_PickOK);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
@@ -1230,7 +1229,7 @@ static void sub_810317C(void)
     template.totalItems = gUnknown_203ACF0->field_48;
     sub_8103924(&template, gUnknown_203ACF0->field_42);
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
-    sub_8106E78(gUnknown_8415F3D, 1);
+    sub_8106E78(gText_PokemonListNoColor, 1);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     sub_8104C2C(gText_PickOKExit);
     CopyWindowToVram(0, COPYWIN_GFX);
@@ -1316,7 +1315,7 @@ static void sub_810345C(void)
     template.totalItems = gUnknown_203ACF0->field_48;
     sub_8103924(&template, gUnknown_203ACF0->field_42);
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
-    sub_8106E78(gUnknown_8415F4A, 1);
+    sub_8106E78(gText_SearchNoColor, 1);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     sub_8104C2C(gText_PickOKExit);
     CopyWindowToVram(0, COPYWIN_GFX);
@@ -1348,7 +1347,7 @@ static u16 sub_8103518(u8 a0)
             }
             else
             {
-                gUnknown_203ACF0->field_44[i].label = gUnknown_8415F66;
+                gUnknown_203ACF0->field_44[i].label = gText_5Dashes;
             }
             gUnknown_203ACF0->field_44[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
         }
@@ -1434,7 +1433,7 @@ static u16 sub_8103518(u8 a0)
             }
             else
             {
-                gUnknown_203ACF0->field_44[i].label = gUnknown_8415F66;
+                gUnknown_203ACF0->field_44[i].label = gText_5Dashes;
             }
             gUnknown_203ACF0->field_44[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
         }
@@ -2168,7 +2167,7 @@ void sub_81049FC(u8 windowId, u16 species, u16 paletteOffset)
 void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)
 {
     u16 dexNum = SpeciesToNationalPokedexNum(species);
-    sub_81047C8(windowId, fontId, gUnknown_8415FFF, x, y, 0);
+    sub_81047C8(windowId, fontId, gText_PokedexNo, x, y, 0);
     sub_8104880(windowId, fontId, dexNum, x + 9, y, 0);
 }
 
@@ -2307,7 +2306,7 @@ void sub_8104E90(void)
 void sub_8104EC0(u8 unused, u16 a1, u16 a2, u8 unused2, u8 unused3)
 {
     u8 buffer[30];
-    u8 *ptr = StringCopy(buffer, gUnknown_8416002);
+    u8 *ptr = StringCopy(buffer, gText_Page);
     ptr = ConvertIntToDecimalStringN(ptr, a1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *ptr++ = CHAR_SLASH;
     ptr = ConvertIntToDecimalStringN(ptr, a2, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -2333,7 +2332,7 @@ bool8 sub_8104F0C(bool8 a0)
     CopyWindowToVram(0, COPYWIN_GFX);
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     if (!a0)
-        sub_8104C2C(gUnknown_8415F6C);
+        sub_8104C2C(gText_PickFlipPageCheckCancel);
     CopyWindowToVram(1, COPYWIN_GFX);
     if (gUnknown_203ACF0->field_18[0] != 0xFFFF)
         sub_8104C64(gUnknown_203ACF0->field_18[0], 0, gUnknown_203ACF0->field_2C);

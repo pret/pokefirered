@@ -1516,4 +1516,27 @@ extern const u8 gUnknown_8419AA2[];
 extern const u8 gUnknown_8419ADE[];
 extern const u8 gUnknown_8419B18[];
 
+// pokedex_screen
+extern const u8 gText_DexCategory_GrasslandPkmn[];
+extern const u8 gText_DexCategory_ForestPkmn[];
+extern const u8 gText_DexCategory_WatersEdgePkmn[];
+extern const u8 gText_DexCategory_SeaPkmn[];
+extern const u8 gText_DexCategory_CavePkmn[];
+extern const u8 gText_DexCategory_MountainPkmn[];
+extern const u8 gText_DexCategory_RoughTerrainPkmn[];
+extern const u8 gText_DexCategory_UrbanPkmn[];
+extern const u8 gText_DexCategory_RarePkmn[];
+extern const u8 gUnknown_8415EFB[];
+extern const u8 gUnknown_8415E95[];
+extern const u8 gUnknown_8415DE0[];
+extern const u8 gUnknown_8415E88[];
+extern const u8 gUnknown_8415EA4[];
+extern const u8 gUnknown_8415ED5[];
+extern const u8 gUnknown_8415EDF[];
+extern const u8 gUnknown_8415EED[];
+extern const u8 gUnknown_8415EB0[];
+extern const u8 gUnknown_8415EC7[];
+extern const u8 gUnknown_8415F0E[];
+extern const u8 gUnknown_8415F24[];
+
 #endif //GUARD_STRINGS_H

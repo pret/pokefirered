@@ -540,7 +540,6 @@ SECTIONS {
         src/easy_chat_2.o(.rodata);
         src/easy_chat_3.o(.rodata);
         src/pokedex_screen.o(.rodata);
-        data/pokedex_screen.o(.rodata);
         src/list_menu.o(.rodata);
         src/item_menu.o(.rodata);
         src/save_location.o(.rodata);

@@ -4930,4 +4930,8 @@ extern const u16 gPSSMenu_Pal[];
 extern const u16 gUnknown_8E9C3F8[];
 extern const u16 gUnknown_8E9C418[];
 
+// pokedex_screen
+extern const u16 gUnknown_8E9C14C[];
+extern const u16 gUnknown_8E9C16C[];
+
 #endif //GUARD_GRAPHICS_H

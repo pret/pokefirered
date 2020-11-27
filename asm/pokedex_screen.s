@@ -399,7 +399,7 @@ _08105878:
 	adds r0, r6, r0
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, _081058C0 @ =gUnknown_8415F8F
+	ldr r2, _081058C0 @ =gText_PokedexPokemon
 	str r7, [sp]
 	str r4, [sp, 0x4]
 	mov r0, r8
@@ -413,7 +413,7 @@ _08105878:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081058C0: .4byte gUnknown_8415F8F
+_081058C0: .4byte gText_PokedexPokemon
 	thumb_func_end sub_8105800
 
 	thumb_func_start sub_81058C4
@@ -442,7 +442,7 @@ sub_81058C4: @ 81058C4
 	lsls r1, 2
 	adds r1, r2
 	ldrh r4, [r1, 0xC]
-	ldr r1, _08105978 @ =gUnknown_8415F98
+	ldr r1, _08105978 @ =gText_HT
 	mov r10, r1
 	movs r3, 0
 	add r2, sp, 0x8
@@ -501,7 +501,7 @@ _0810593A:
 	b _08105998
 	.align 2, 0
 _08105974: .4byte gPokedexEntries
-_08105978: .4byte gUnknown_8415F98
+_08105978: .4byte gText_HT
 _0810597C: .4byte 0x00002710
 _08105980:
 	add r1, sp, 0xC
@@ -848,12 +848,12 @@ _08105BE6:
 	adds r5, 0x1E
 	cmp r2, r1
 	bcs _08105C60
-	ldr r3, _08105CA8 @ =gUnknown_8415FA0
+	ldr r3, _08105CA8 @ =gText_Lbs
 	ldrb r0, [r3]
 	cmp r0, 0xFF
 	beq _08105C60
 	adds r3, r1, 0
-	ldr r4, _08105CA8 @ =gUnknown_8415FA0
+	ldr r4, _08105CA8 @ =gText_Lbs
 	adds r1, r7, 0
 	add r1, sp
 	adds r1, 0x8
@@ -881,7 +881,7 @@ _08105C60:
 	str r4, [sp, 0x4]
 	mov r0, r10
 	movs r1, 0
-	ldr r2, _08105CAC @ =gUnknown_8415F9B
+	ldr r2, _08105CAC @ =gText_WT
 	mov r3, r8
 	bl sub_81047C8
 	lsls r0, r5, 24
@@ -904,8 +904,8 @@ _08105C60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08105CA8: .4byte gUnknown_8415FA0
-_08105CAC: .4byte gUnknown_8415F9B
+_08105CA8: .4byte gText_Lbs
+_08105CAC: .4byte gText_WT
 	thumb_func_end sub_8105A3C
 
 	thumb_func_start sub_8105CB0
@@ -1277,7 +1277,7 @@ sub_8105E1C: @ 8105E1C
 	bl FillWindowPixelBuffer
 	cmp r6, 0
 	bne _08105FEC
-	ldr r2, _08105FE4 @ =gUnknown_8415FAD
+	ldr r2, _08105FE4 @ =gText_Cry
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0x4
@@ -1286,7 +1286,7 @@ sub_8105E1C: @ 8105E1C
 	movs r1, 0
 	movs r3, 0x8
 	bl sub_81047C8
-	ldr r0, _08105FE8 @ =gUnknown_8415FB3
+	ldr r0, _08105FE8 @ =gText_NextDataCancel
 	bl sub_8104C2C
 	b _08105FF2
 	.align 2, 0
@@ -1295,10 +1295,10 @@ _08105FD4: .4byte gUnknown_203ACF0
 _08105FD8: .4byte gUnknown_84521DC
 _08105FDC: .4byte gUnknown_84521E4
 _08105FE0: .4byte gSpeciesNames
-_08105FE4: .4byte gUnknown_8415FAD
-_08105FE8: .4byte gUnknown_8415FB3
+_08105FE4: .4byte gText_Cry
+_08105FE8: .4byte gText_NextDataCancel
 _08105FEC:
-	ldr r0, _08106010 @ =gUnknown_8415FC8
+	ldr r0, _08106010 @ =gText_Next
 	bl sub_8104C2C
 _08105FF2:
 	movs r0, 0x1
@@ -1314,7 +1314,7 @@ _08105FF2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08106010: .4byte gUnknown_8415FC8
+_08106010: .4byte gText_Next
 	thumb_func_end sub_8105E1C
 
 	thumb_func_start sub_8106014
@@ -1691,7 +1691,7 @@ _081062B4:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r4, _08106470 @ =gUnknown_8415FED
+	ldr r4, _08106470 @ =gText_Size
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -1728,7 +1728,7 @@ _081062B4:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r4, _08106474 @ =gUnknown_8415FE8
+	ldr r4, _08106474 @ =gText_Area
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -1805,8 +1805,8 @@ _08106460: .4byte gUnknown_84521FC
 _08106464: .4byte gUnknown_8452204
 _08106468: .4byte gUnknown_84521EC
 _0810646C: .4byte gUnknown_845220C
-_08106470: .4byte gUnknown_8415FED
-_08106474: .4byte gUnknown_8415FE8
+_08106470: .4byte gText_Size
+_08106474: .4byte gText_Area
 _08106478:
 	ldr r0, [r7]
 	adds r0, 0x52
@@ -2130,7 +2130,7 @@ _081066E2:
 	movs r2, 0
 	movs r3, 0
 	bl BlitBitmapRectToWindow
-	ldr r4, _081067B4 @ =gUnknown_8415FF2
+	ldr r4, _081067B4 @ =gText_AreaUnknown
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -2161,7 +2161,7 @@ _0810675A:
 	movs r0, 0x1
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
-	ldr r2, _081067B8 @ =gUnknown_8415FAD
+	ldr r2, _081067B8 @ =gText_Cry
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0x4
@@ -2170,7 +2170,7 @@ _0810675A:
 	movs r1, 0
 	movs r3, 0x8
 	bl sub_81047C8
-	ldr r0, _081067BC @ =gUnknown_8415FCF
+	ldr r0, _081067BC @ =gText_CancelPreviousData
 	bl sub_8104C2C
 	movs r0, 0x1
 	bl PutWindowTilemap
@@ -2190,9 +2190,9 @@ _0810675A:
 _081067A8: .4byte 0x000007d1
 _081067AC: .4byte gUnknown_203ACF0
 _081067B0: .4byte gUnknown_8443D00
-_081067B4: .4byte gUnknown_8415FF2
-_081067B8: .4byte gUnknown_8415FAD
-_081067BC: .4byte gUnknown_8415FCF
+_081067B4: .4byte gText_AreaUnknown
+_081067B8: .4byte gText_Cry
+_081067BC: .4byte gText_CancelPreviousData
 	thumb_func_end sub_810603C
 
 	thumb_func_start sub_81067C0

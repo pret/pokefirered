@@ -4486,7 +4486,7 @@ extern const u8 gMonIcon_Slowpoke[];
 extern const u8 gMonIcon_Slowbro[];
 extern const u8 gMonIcon_Magnemite[];
 extern const u8 gMonIcon_Magneton[];
-extern const u8 gMonIcon_Farfetch_d[];
+extern const u8 gMonIcon_Farfetchd[];
 extern const u8 gMonIcon_Doduo[];
 extern const u8 gMonIcon_Dodrio[];
 extern const u8 gMonIcon_Seel[];

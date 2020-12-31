@@ -125,35 +125,22 @@ struct CoordEvent
     u8 *script;
 };
 
-struct HiddenItemStruct
-{
-    u32 itemId:16;
-    u32 hiddenItemId:8; // flag offset to determine flag lookup
-    u32 quantity:7;
-    u32 isUnderfoot:1;
-};
-
-union BgUnion
-{ // carried over from diego's FR/LG work, seems to be the same struct
-    // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
-    u8 *script;
-
-    // hidden item type probably
-    struct HiddenItemStruct hiddenItemStr;
-    u32 hiddenItem;
-
-    // secret base type
-    u32 secretBaseId;
-
-};
-
 struct BgEvent
 {
     u16 x, y;
     u8 elevation;
-    u8 kind;
-    // 0x2 padding for the union beginning.
-    union BgUnion bgUnion;
+    u8 kind; // The "kind" field determines how to access bgUnion union below.
+    union {
+        u8 *script;
+        struct {
+            u32 itemId:16;
+            u32 hiddenItemId:8; // flag offset to determine flag lookup
+            u32 quantity:7;
+            u32 isUnderfoot:1;
+        } hiddenItemStr;
+        u32 hiddenItem;
+        u32 secretBaseId;
+    } bgUnion;
 };
 
 struct MapEvents

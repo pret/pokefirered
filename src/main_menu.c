@@ -508,7 +508,7 @@ static void Task_MysteryGiftError(u8 taskId)
         break;
     case 2:
         RunTextPrinters();
-        if (!IsTextPrinterActive(4))
+        if (!IsTextPrinterActive(MAIN_MENU_WINDOW_ERROR))
             gTasks[taskId].tMGErrorMsgState++;
         break;
     case 3:
@@ -599,7 +599,7 @@ static bool8 HandleMenuInput(u8 taskId)
 static void PrintMessageOnWindow4(const u8 *str)
 {
     FillWindowPixelBuffer(MAIN_MENU_WINDOW_ERROR, PIXEL_FILL(10));
-    MainMenu_DrawWindow(&sWindowTemplate[4]);
+    MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_ERROR, 2, 0, 2, sTextColor1, 2, str);
     PutWindowTilemap(MAIN_MENU_WINDOW_ERROR);
     CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, COPYWIN_GFX);

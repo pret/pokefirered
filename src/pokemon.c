@@ -31,6 +31,7 @@
 #include "constants/abilities.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
+#include "constants/songs.h"
 #include "constants/trainer_classes.h"
 #include "constants/facility_trainer_classes.h"
 #include "constants/hold_effects.h"
@@ -5661,40 +5662,40 @@ void ClearBattleMonForms(void)
         gBattleMonForms[i] = 0;
 }
 
-static u16 GetMUS_ForBattle(void)
+static u16 GetBattleBGM(void)
 {
-    if (gBattleTypeFlags & 0x1000)
-        return 0x12A;
-    if (gBattleTypeFlags & 0x4000)
-        return 0x10A;
-    if (gBattleTypeFlags & 0x2)
-        return 0x10A;
-    if (gBattleTypeFlags & 0x8)
+    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+        return MUS_VS_WILD;
+    if (gBattleTypeFlags & BATTLE_TYPE_REGI)
+        return MUS_RS_VS_TRAINER;
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return MUS_RS_VS_TRAINER;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
-            case 0x5A:
-                return 0x12B;
-            case 0x54:
-            case 0x57:
-                return 0x128;
-            case 0x53:
-            case 0x55:
-            case 0x56:
-            case 0x58:
-            case 0x59:
+            case CLASS_CHAMPION_2:
+                return MUS_VS_CHAMPION;
+            case CLASS_LEADER_2:
+            case CLASS_ELITE_FOUR_2:
+                return MUS_VS_GYM_LEADER;
+            case CLASS_BOSS:
+            case CLASS_TEAM_ROCKET:
+            case CLASS_COOLTRAINER_2:
+            case CLASS_GENTLEMAN_2:
+            case CLASS_RIVAL_2:
             default:
-                return 0x129;
+                return MUS_VS_TRAINER;
         }
     }
-    return 0x12A;
+    return MUS_VS_WILD;
 }
 
 void PlayBattleBGM(void)
 {
     ResetMapMusic();
     m4aMPlayAllStop();
-    PlayBGM(GetMUS_ForBattle());
+    PlayBGM(GetBattleBGM());
 }
 
 void PlayMapChosenOrBattleBGM(u16 songId)
@@ -5704,7 +5705,7 @@ void PlayMapChosenOrBattleBGM(u16 songId)
     if (songId)
         PlayNewMapMusic(songId);
     else
-        PlayNewMapMusic(GetMUS_ForBattle());
+        PlayNewMapMusic(GetBattleBGM());
 }
 
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon)

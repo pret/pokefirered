@@ -652,6 +652,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
 
 bool8 UpdateVsSeekerStepCounter(void)
 {
+    u8 x = 0;
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
     {
         if ((gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) < 100)
@@ -660,11 +661,9 @@ bool8 UpdateVsSeekerStepCounter(void)
 
     if (FlagGet(FLAG_SYS_VS_SEEKER_CHARGING) == TRUE)
     {
-        u8 x;
-
         if (((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF) < 100)
         {
-            x = ((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF) + 1;
+            x = (((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF) + 1);
             gSaveBlock1Ptr->trainerRematchStepCounter = (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) | (x << 8);
         }
 

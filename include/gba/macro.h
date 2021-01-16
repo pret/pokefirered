@@ -146,6 +146,24 @@
 #define DmaFillLarge16(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 16)
 
 #define DmaFillLarge32(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 32)
+#define Dma3CopyLarge_(src, dest, size, bit)               \
+{                                                          \
+    const void *_src = src;                                \
+    void *_dest = (void *)dest;                                    \
+    u32 _size = size;                                      \
+    while (1)                                              \
+    {                                                      \
+        if (_size <= MAX_DMA_BLOCK_SIZE)                   \
+        {                                                  \
+            DmaCopy##bit(3, _src, _dest, _size);           \
+            break;                                         \
+        }                                                  \
+        DmaCopy##bit(3, _src, _dest, MAX_DMA_BLOCK_SIZE);  \
+        _src += MAX_DMA_BLOCK_SIZE;                        \
+        _dest += MAX_DMA_BLOCK_SIZE;                       \
+        _size -= MAX_DMA_BLOCK_SIZE;                       \
+    }                                                      \
+}
 
 #define DmaClearLarge16(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 16)
 #define DmaClearLarge32(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 32)

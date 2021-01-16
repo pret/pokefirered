@@ -146,10 +146,11 @@
 #define DmaFillLarge16(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 16)
 
 #define DmaFillLarge32(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 32)
+
 #define Dma3CopyLarge_(src, dest, size, bit)               \
 {                                                          \
     const void *_src = src;                                \
-    void *_dest = (void *)dest;                                    \
+    void *_dest = (void *)dest;                            \
     u32 _size = size;                                      \
     while (1)                                              \
     {                                                      \

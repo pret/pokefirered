@@ -662,7 +662,7 @@ bool8 UpdateVsSeekerStepCounter(void)
     {
         u8 x;
 
-        if ((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF < 100)
+        if (((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF) < 100)
         {
             x = ((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF) + 1;
             gSaveBlock1Ptr->trainerRematchStepCounter = (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) | (x << 8);

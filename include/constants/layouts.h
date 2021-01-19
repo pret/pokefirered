@@ -1,6 +1,10 @@
 #ifndef GUARD_CONSTANTS_LAYOUTS_H
 #define GUARD_CONSTANTS_LAYOUTS_H
 
+//
+// DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json
+//
+
 #define LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_1F 1
 #define LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_2F 2
 #define LAYOUT_PALLET_TOWN_GARYS_HOUSE 3

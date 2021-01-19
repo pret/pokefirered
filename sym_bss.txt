@@ -57,7 +57,7 @@
 	.align 3
 	.include "src/digit_obj_util.o"
 	.align 3
-	.include "asm/m4a_1.o"
+	.include "src/m4a_1.o"
 	.align 3
 	.include "src/agb_flash.o"
 	.align 3

@@ -37,7 +37,7 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/crt0.o(.text);
         *(.text*);
     } =0
 

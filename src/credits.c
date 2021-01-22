@@ -1271,7 +1271,7 @@ static bool32 DoCopyrightOrTheEndGfxScene(void)
 
 static void Task_MovePlayerAndGroundSprites(u8 taskId)
 {
-    struct CreditsTaskData * data = (void *)gTasks[taskId].data;
+    struct CreditsTaskData * data = (struct CreditsTaskData*)gTasks[taskId].data;
     switch (data->spriteMoveCmd)
     {
     case 0:
@@ -1315,7 +1315,7 @@ static void DestroyPlayerOrRivalSprite(void)
 {
     if (sCreditsMgr->taskId != 0xFF)
     {
-        struct CreditsTaskData * data = (void *)gTasks[sCreditsMgr->taskId].data;
+        struct CreditsTaskData * data = (struct CreditsTaskData *)gTasks[sCreditsMgr->taskId].data;
         FreeSpriteTilesByTag(data->playerTilesTag);
         DestroySprite(&gSprites[data->playerSpriteId]);
         FreeSpriteTilesByTag(data->groundTilesTag);
@@ -1336,7 +1336,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
     if (sCreditsMgr->taskId == 0xFF)
     {
         taskId = CreateTask(Task_MovePlayerAndGroundSprites, 0);
-        data = (void *)gTasks[taskId].data;
+        data = (struct CreditsTaskData *)gTasks[taskId].data;
         sCreditsMgr->taskId = taskId;
         switch (sPlayerRivalSpriteParams[whichScene][2])
         {

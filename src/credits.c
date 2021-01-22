@@ -138,7 +138,7 @@ struct CreditsResources
     u8 taskId;
     u16 timer;
     u16 scrcmdidx;
-    u8 canSpeedThrough;
+    bool8 canSpeedThrough;
     u8 whichMon;
     u8 windowId;
     bool8 windowIsActive;
@@ -875,6 +875,7 @@ static s32 RollCredits(void)
             sCreditsMgr->timer--;
             return sCreditsMgr->canSpeedThrough;
         }
+
         switch (sCreditsScript[sCreditsMgr->scrcmdidx].cmd)
         {
         case CREDITSSCRCMD_PRINT:
@@ -938,7 +939,7 @@ static s32 RollCredits(void)
     case CREDITSSCENE_MAPNEXT_LOADMAP:
         if (DoOverworldMapScrollScene(sCreditsMgr->whichMon))
         {
-            sCreditsMgr->canSpeedThrough = 1;
+            sCreditsMgr->canSpeedThrough = TRUE;
             sCreditsMgr->mainseqno = CREDITSSCENE_EXEC_CMD;
         }
         return 0;
@@ -948,6 +949,7 @@ static s32 RollCredits(void)
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
             while (!DoOverworldMapScrollScene(sCreditsMgr->whichMon)){};
+
             switch (sCreditsMgr->whichMon)
             {
             default:
@@ -965,7 +967,7 @@ static s32 RollCredits(void)
                 break;
             }
             LoadPlayerOrRivalSprite(win0v[0]);
-            sCreditsMgr->canSpeedThrough = 1;
+            sCreditsMgr->canSpeedThrough = TRUE;
             sCreditsMgr->mainseqno = CREDITSSCENE_EXEC_CMD;
         }
         return 0;
@@ -975,7 +977,7 @@ static s32 RollCredits(void)
             DestroyPlayerOrRivalSprite();
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
-            sCreditsMgr->canSpeedThrough = 0;
+            sCreditsMgr->canSpeedThrough = FALSE;
             sCreditsMgr->mainseqno = CREDITSSCENE_MON_SHOW;
         }
         return 0;
@@ -990,7 +992,7 @@ static s32 RollCredits(void)
         {
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
-            sCreditsMgr->canSpeedThrough = 0;
+            sCreditsMgr->canSpeedThrough = FALSE;
             sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_SHOW;
         }
         return 0;

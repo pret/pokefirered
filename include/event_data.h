@@ -3,9 +3,6 @@
 
 #include "global.h"
 
-#include "constants/flags.h"
-#include "constants/vars.h"
-
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
 extern u16 gSpecialVar_0x8002;

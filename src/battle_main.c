@@ -42,8 +42,6 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
-#include "constants/species.h"
-#include "constants/trainers.h"
 #include "constants/trainer_classes.h"
 
 static void sub_80111EC(struct Sprite *sprite);

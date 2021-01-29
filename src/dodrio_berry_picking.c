@@ -15,7 +15,6 @@
 #include "constants/songs.h"
 #include "constants/fanfares.h"
 #include "constants/items.h"
-#include "constants/species.h"
 
 struct DodrioStruct
 {

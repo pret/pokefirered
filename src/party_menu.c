@@ -60,7 +60,6 @@
 #include "constants/battle.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
-#include "constants/flags.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
@@ -68,7 +67,6 @@
 #include "constants/pokemon.h"
 #include "constants/quest_log.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 #define PARTY_PAL_SELECTED     (1 << 0)
 #define PARTY_PAL_FAINTED      (1 << 1)

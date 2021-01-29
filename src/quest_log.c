@@ -27,7 +27,6 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/quest_log.h"
-#include "constants/species.h"
 #include "constants/field_weather.h"
 #include "constants/event_object_movement.h"
 
@@ -348,7 +347,7 @@ static void SetGameStateAtScene(u8 sceneNum)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
 
-    CpuCopy16(gSaveBlock1Ptr->flags, questLog->flags, FLAGS_COUNT * sizeof(u8));
+    CpuCopy16(gSaveBlock1Ptr->flags, questLog->flags, NUM_FLAG_BYTES * sizeof(u8));
     CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, VARS_COUNT * sizeof(u16));
 }
 
@@ -584,7 +583,7 @@ void sub_81113E4(void)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sCurrentSceneNum];
 
-    CpuCopy16(questLog->flags, gSaveBlock1Ptr->flags, FLAGS_COUNT * sizeof(u8));
+    CpuCopy16(questLog->flags, gSaveBlock1Ptr->flags, NUM_FLAG_BYTES * sizeof(u8));
     CpuCopy16(questLog->vars, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
     sub_8111688();
 }

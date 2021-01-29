@@ -13,7 +13,6 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/weather.h"
 
 // Function Declarations

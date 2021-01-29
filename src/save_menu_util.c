@@ -4,7 +4,6 @@
 #include "pokedex.h"
 #include "region_map.h"
 #include "save_menu_util.h"
-#include "constants/flags.h"
 
 void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
 {

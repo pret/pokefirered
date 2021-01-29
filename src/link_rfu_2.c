@@ -9,7 +9,6 @@
 #include "quest_log.h"
 #include "random.h"
 #include "task.h"
-#include "constants/species.h"
 #include "constants/union_room.h"
 
 struct SioInfo

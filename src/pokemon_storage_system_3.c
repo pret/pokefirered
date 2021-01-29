@@ -25,8 +25,6 @@
 #include "constants/items.h"
 #include "constants/help_system.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
-#include "constants/vars.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *gPSSData = NULL;
 static EWRAM_DATA bool8 sInPartyMenu = 0;

@@ -17,10 +17,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
 #include "constants/game_stat.h"
-#include "constants/vars.h"
-#include "constants/species.h"
 #include "constants/facility_trainer_classes.h"
 
 // Trainer Card Strings

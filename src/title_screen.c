@@ -15,7 +15,6 @@
 #include "berry_fix_program.h"
 #include "decompress.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 enum TitleScreenScene
 {

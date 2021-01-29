@@ -8,9 +8,6 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
-#include "constants/species.h"
-#include "constants/vars.h"
-#include "constants/flags.h"
 
 static void sub_8090324(struct Sprite * sprite);
 static void SetBoxSpeciesAndPersonalities(u8 boxId);

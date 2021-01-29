@@ -15,7 +15,6 @@
 #include "overworld.h"
 #include "random.h"
 #include "data.h"
-#include "constants/species.h"
 #include "constants/songs.h"
 
 struct OakSpeechResources

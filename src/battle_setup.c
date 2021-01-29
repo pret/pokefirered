@@ -27,13 +27,10 @@
 #include "battle_transition.h"
 #include "battle_controllers.h"
 #include "constants/battle_setup.h"
-#include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/pokemon.h"
-#include "constants/trainers.h"
 #include "constants/trainer_classes.h"
 
 enum
@@ -671,7 +668,7 @@ static u8 TrainerBattleLoadArg8(const u8 *ptr)
 
 static u16 GetTrainerAFlag(void)
 {
-    return FLAG_TRAINER_FLAG_START + gTrainerBattleOpponent_A;
+    return TRAINER_FLAGS_START + gTrainerBattleOpponent_A;
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -828,7 +825,7 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
 
-    return FlagGet(FLAG_TRAINER_FLAG_START + flag);
+    return FlagGet(TRAINER_FLAGS_START + flag);
 }
 
 void SetUpTrainerMovement(void)
@@ -866,17 +863,17 @@ static void SetBattledTrainerFlag2(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(FLAG_TRAINER_FLAG_START + trainerId);
+    return FlagGet(TRAINER_FLAGS_START + trainerId);
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(FLAG_TRAINER_FLAG_START + trainerId);
+    FlagSet(TRAINER_FLAGS_START + trainerId);
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(FLAG_TRAINER_FLAG_START + trainerId);
+    FlagClear(TRAINER_FLAGS_START + trainerId);
 }
 
 void StartTrainerBattle(void)

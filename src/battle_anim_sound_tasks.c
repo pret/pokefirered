@@ -4,7 +4,6 @@
 #include "battle_anim.h"
 #include "task.h"
 #include "constants/battle_anim.h"
-#include "constants/species.h"
 
 static void sub_80DCE78(u8 taskId);
 static void sub_80DCEE4(u8 taskId);

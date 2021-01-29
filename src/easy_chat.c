@@ -11,8 +11,6 @@
 #include "random.h"
 #include "strings.h"
 #include "constants/easy_chat.h"
-#include "constants/flags.h"
-#include "constants/species.h"
 
 struct Unk203A120
 {

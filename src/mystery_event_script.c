@@ -9,7 +9,6 @@
 #include "pokedex.h"
 #include "pokemon_size_record.h"
 #include "script.h"
-#include "constants/species.h"
 #include "strings.h"
 #include "util.h"
 #include "mystery_event_msg.h"

@@ -1,7 +1,6 @@
 #include "global.h"
 #include "pokedex.h"
 #include "pokedex_screen.h"
-#include "constants/species.h"
 
 const u8 *sub_8088E20(u16 dexNum)
 {

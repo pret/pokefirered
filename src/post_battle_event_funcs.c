@@ -5,7 +5,6 @@
 #include "overworld.h"
 #include "hall_of_fame.h"
 #include "load_save.h"
-#include "constants/flags.h"
 #include "constants/heal_locations.h"
 
 bool8 EnterHallOfFame(void)

@@ -2,7 +2,6 @@
 #include "random.h"
 #include "overworld.h"
 #include "field_specials.h"
-#include "constants/species.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 

@@ -11,7 +11,6 @@
 #include "strings.h"
 #include "new_menu_helpers.h"
 #include "menu.h"
-#include "constants/species.h"
 #include "constants/items.h"
 #include "data.h"
 #include "item.h"

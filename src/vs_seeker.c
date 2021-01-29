@@ -21,7 +21,6 @@
 #include "vs_seeker.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
-#include "constants/trainers.h"
 #include "constants/maps.h"
 #include "constants/items.h"
 #include "constants/quest_log.h"

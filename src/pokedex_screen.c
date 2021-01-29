@@ -16,7 +16,6 @@
 #include "pokedex.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 struct PokedexScreenData
 {

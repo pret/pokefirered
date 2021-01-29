@@ -9,7 +9,6 @@
 #include "pokedex.h"
 #include "script_pokemon_util.h"
 #include "constants/items.h"
-#include "constants/species.h"
 #include "constants/pokemon.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);

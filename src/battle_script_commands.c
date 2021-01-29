@@ -33,11 +33,9 @@
 #include "constants/items.h"
 #include "constants/hold_effects.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
-#include "constants/trainers.h"
 #include "constants/maps.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))

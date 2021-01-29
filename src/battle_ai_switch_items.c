@@ -8,7 +8,6 @@
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 #include "constants/pokemon.h"
 
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);

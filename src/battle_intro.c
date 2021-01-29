@@ -6,7 +6,6 @@
 #include "scanline_effect.h"
 #include "task.h"
 #include "trig.h"
-#include "constants/trainers.h"
 
 static EWRAM_DATA u16 sBgCnt = 0;
 

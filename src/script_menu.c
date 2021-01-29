@@ -11,7 +11,6 @@
 #include "field_effect.h"
 #include "event_scripts.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/seagallop.h"
 #include "constants/menu.h"
 

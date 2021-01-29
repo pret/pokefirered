@@ -6,7 +6,6 @@
 #include "quest_log.h"
 #include "region_map.h"
 #include "strings.h"
-#include "constants/flags.h"
 
 static void Task_MapNamePopup(u8 taskId);
 static u16 MapNamePopupCreateWindow(bool32 palIntoFadedBuffer);

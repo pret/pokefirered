@@ -4,8 +4,6 @@
 #include "event_data.h"
 #include "event_scripts.h"
 #include "random.h"
-#include "constants/vars.h"
-#include "constants/flags.h"
 
 struct TrainerFanClub
 {

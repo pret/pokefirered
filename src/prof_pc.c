@@ -2,7 +2,6 @@
 #include "event_data.h"
 #include "pokedex.h"
 #include "field_message_box.h"
-#include "constants/species.h"
 
 extern const u8 PokedexRating_Text_LessThan10[];
 extern const u8 PokedexRating_Text_LessThan20[];

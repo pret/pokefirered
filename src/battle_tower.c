@@ -19,11 +19,9 @@
 #include "save.h"
 #include "item.h"
 #include "script_pokemon_util.h"
-#include "constants/species.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
-#include "constants/vars.h"
 #include "constants/event_objects.h"
 
 static EWRAM_DATA u16 sSpecialVar_0x8004_Copy = 0;

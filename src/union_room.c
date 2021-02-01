@@ -45,7 +45,6 @@
 #include "constants/maps.h"
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
-#include "constants/species.h"
 #include "constants/trainer_card.h"
 #include "constants/union_room.h"
 

@@ -20,8 +20,6 @@
 #include "constants/battle.h"
 #include "constants/moves.h"
 #include "constants/items.h"
-#include "constants/flags.h"
-#include "constants/species.h"
 #include "constants/weather.h"
 #include "constants/abilities.h"
 #include "constants/pokemon.h"

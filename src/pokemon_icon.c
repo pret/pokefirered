@@ -3,7 +3,6 @@
 #include "mail_data.h"
 #include "pokemon_icon.h"
 #include "graphics.h"
-#include "constants/species.h"
 
 #define POKE_ICON_BASE_PAL_TAG 56000
 

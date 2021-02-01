@@ -20,7 +20,6 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
-#include "constants/trainers.h"
 
 struct Unk_84790E8
 {

@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_VARS_H
 #define GUARD_CONSTANTS_VARS_H
 
-#define VAR_0x3F20                 0x3F20
-
 #define VARS_START 0x4000
 
 // Temporary variables. Reset on map load.
@@ -132,7 +130,7 @@
 #define VAR_MAP_SCENE_PALLET_TOWN_OAK                                          0x4050
 #define VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN                                    0x4051
 #define VAR_MAP_SCENE_CERULEAN_CITY_RIVAL                                      0x4052
-#define VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER                                           0x4053
+#define VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER                                0x4053
 #define VAR_MAP_SCENE_ROUTE22                                                  0x4054
 #define VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB                           0x4055
 #define VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F                             0x4056
@@ -308,6 +306,7 @@
 #define VAR_0x40FF                 0x40FF
 
 #define VARS_END                   0x40FF
+#define VARS_COUNT                 (VARS_END - VARS_START + 1)
 
 #define SPECIAL_VARS_START         0x8000
 

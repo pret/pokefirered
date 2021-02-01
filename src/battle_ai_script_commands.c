@@ -5,7 +5,6 @@
 #include "item.h"
 #include "random.h"
 #include "battle_ai_script_commands.h"
-#include "constants/species.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"

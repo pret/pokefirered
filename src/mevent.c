@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "easy_chat.h"
 #include "task.h"
 #include "decompress.h"

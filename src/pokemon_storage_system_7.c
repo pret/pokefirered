@@ -4,7 +4,6 @@
 #include "pokemon_icon.h"
 #include "pokemon_storage_system_internal.h"
 #include "text_window.h"
-#include "constants/species.h"
 
 struct MoveMons
 {

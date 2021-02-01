@@ -1,6 +1,5 @@
 #include "global.h"
 #include "gflib.h"
-#include "constants/species.h"
 #include "decompress.h"
 #include "menu.h"
 #include "new_menu_helpers.h"

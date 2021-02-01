@@ -33,7 +33,7 @@ extern u16 *const gSpecialVars[];
 
 void InitEventData(void)
 {
-    memset(gSaveBlock1Ptr->flags, 0, FLAGS_COUNT);
+    memset(gSaveBlock1Ptr->flags, 0, NUM_FLAG_BYTES);
     memset(gSaveBlock1Ptr->vars, 0, VARS_COUNT * 2);
     memset(sSpecialFlags, 0, SPECIAL_FLAGS_COUNT);
 }

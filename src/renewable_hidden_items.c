@@ -2,7 +2,6 @@
 #include "event_data.h"
 #include "random.h"
 #include "constants/maps.h"
-#include "constants/flags.h"
 
 struct RenewableHiddenItemData
 {

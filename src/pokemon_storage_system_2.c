@@ -11,7 +11,6 @@
 #include "script.h"
 #include "strings.h"
 #include "task.h"
-#include "constants/species.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 #include "constants/help_system.h"

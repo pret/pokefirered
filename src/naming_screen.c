@@ -21,7 +21,6 @@
 #include "text_window.h"
 #include "trig.h"
 #include "constants/help_system.h"
-#include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/event_objects.h"
 

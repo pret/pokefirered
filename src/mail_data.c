@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "mail.h"
 #include "mail_data.h"
-#include "constants/species.h"
 #include "constants/items.h"
 #include "pokemon_icon.h"
 

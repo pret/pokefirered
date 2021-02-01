@@ -12,10 +12,8 @@
 #include "script.h"
 #include "task.h"
 #include "constants/field_tasks.h"
-#include "constants/flags.h"
 #include "constants/metatile_labels.h"
 #include "constants/songs.h"
-#include "constants/vars.h"
 
 // TODO: Metatile IDs in this file
 

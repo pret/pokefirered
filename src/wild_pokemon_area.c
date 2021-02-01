@@ -5,9 +5,7 @@
 #include "roamer.h"
 #include "overworld.h"
 #include "pokedex_area_markers.h"
-#include "constants/vars.h"
 #include "constants/region_map_sections.h"
-#include "constants/species.h"
 
 struct SeviiDexArea
 {

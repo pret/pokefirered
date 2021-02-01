@@ -34,7 +34,6 @@
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"

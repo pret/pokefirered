@@ -18,7 +18,6 @@
 #include "text_window.h"
 #include "fame_checker.h"
 #include "strings.h"
-#include "constants/trainers.h"
 
 #define SPRITETAG_SELECTOR_CURSOR 1000
 #define SPRITETAG_QUESTION_MARK 1001

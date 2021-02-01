@@ -23,9 +23,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
 #include "constants/metatile_behaviors.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 
 static EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;

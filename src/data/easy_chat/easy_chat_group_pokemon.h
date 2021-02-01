@@ -1,5 +1,3 @@
-#include "constants/species.h"
-
 static const u16 sEasyChatGroup_Pokemon[] = {
     SPECIES_ABRA,
     SPECIES_ABSOL,

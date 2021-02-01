@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "decompress.h"
 #include "pokemon.h"
-#include "constants/species.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];

@@ -5,7 +5,6 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "random.h"
-#include "constants/flags.h"
 
 static EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 

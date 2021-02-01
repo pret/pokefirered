@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "task.h"
 #include "wild_encounter.h"
-#include "constants/species.h"
 
 static void Task_SmoothBlendLayers(u8 taskId);
 

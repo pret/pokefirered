@@ -9,7 +9,6 @@
 #include "task.h"
 #include "pokemon_jump.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 struct PokemonJump1
 {

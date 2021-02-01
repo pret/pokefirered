@@ -24,9 +24,6 @@
 #include "random.h"
 #include "graphics.h"
 #include "constants/songs.h"
-#include "constants/species.h"
-#include "constants/flags.h"
-#include "constants/vars.h"
 #include "constants/maps.h"
 
 struct HallofFameMon

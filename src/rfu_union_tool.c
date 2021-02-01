@@ -6,7 +6,6 @@
 #include "rfu_union_tool.h"
 #include "script.h"
 #include "task.h"
-#include "constants/flags.h"
 #include "constants/event_object_movement.h"
 #include "constants/union_room.h"
 #include "constants/event_objects.h"

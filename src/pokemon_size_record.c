@@ -5,7 +5,6 @@
 #include "pokedex.h"
 #include "text.h"
 #include "strings.h"
-#include "constants/species.h"
 
 #define DEFAULT_MAX_SIZE 0 // was 0x8100 in Ruby/Sapphire, 0x8000 in Emerald
 

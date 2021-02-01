@@ -13,7 +13,6 @@
 #include "task.h"
 #include "util.h"
 #include "constants/abilities.h"
-#include "constants/species.h"
 #include "constants/battle.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;

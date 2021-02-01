@@ -18,7 +18,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "constants/items.h"
-#include "constants/species.h"
 
 enum MailIconParam
 {

@@ -8,7 +8,6 @@
 #include "fldeff.h"
 #include "party_menu.h"
 #include "field_poison.h"
-#include "constants/species.h"
 #include "constants/battle.h"
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)

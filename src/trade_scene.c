@@ -28,7 +28,6 @@
 #include "load_save.h"
 #include "random.h"
 #include "trade_scene.h"
-#include "constants/species.h"
 #include "constants/items.h"
 #include "constants/easy_chat.h"
 #include "constants/songs.h"

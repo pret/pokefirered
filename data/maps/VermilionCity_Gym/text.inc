@@ -23,7 +23,7 @@ VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis:: @ 8194CFA
     .string "You're special, kid!\n"
     .string "Take this!$"
 
-VermilionCity_Gym_Text_ReceivedTM43FromLtSurge:: @ 8194D87
+VermilionCity_Gym_Text_ReceivedTM34FromLtSurge:: @ 8194D87
     .string "{PLAYER} received TM34\n"
     .string "from LT. SURGE.$"
 

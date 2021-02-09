@@ -508,7 +508,7 @@ static void SetUpTrainerTowerDataStruct(void) // fakematching
     const struct TrainerTowerFloor *const * r7;
 
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
-    sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - 42;
+    sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_1F;
     if (ReadTrainerTowerAndValidate() == TRUE)
         CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
     else

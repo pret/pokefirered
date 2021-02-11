@@ -1,3 +1,5 @@
+.set LOCALID_RIVAL, 1
+
 SSAnne_2F_Corridor_MapScripts:: @ 81608DE
 	.byte 0
 
@@ -24,9 +26,9 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger:: @ 8160903
 	playse SE_EXIT
 	delay 5
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	addobject 1
+	addobject LOCALID_RIVAL
 	delay 10
-	applymovement 1, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 20
 	compare VAR_TEMP_1, 0
@@ -36,7 +38,7 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger:: @ 8160903
 	compare VAR_TEMP_1, 2
 	call_if_eq SSAnne_2F_Corridor_EventScript_RivalApproachRight
 	msgbox SSAnne_2F_Corridor_Text_RivalIntro
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_RIVAL
 	compare VAR_STARTER_MON, 2
 	call_if_eq SSAnne_2F_Corridor_EventScript_RivalSquirtle
 	compare VAR_STARTER_MON, 1
@@ -54,25 +56,25 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger:: @ 8160903
 	compare VAR_TEMP_1, 2
 	call_if_eq SSAnne_2F_Corridor_EventScript_RivalExitRight
 	fadedefaultbgm
-	removeobject 1
+	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
 	releaseall
 	end
 
 SSAnne_2F_Corridor_EventScript_RivalApproachLeft:: @ 81609AD
-	applymovement 1, SSAnne_2F_Corridor_Movement_RivalApproachLeft
+	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachLeft
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalApproachMid:: @ 81609B8
-	applymovement 1, SSAnne_2F_Corridor_Movement_RivalApproachMid
+	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachMid
 	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalMid
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalApproachRight:: @ 81609CA
 	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalRight
-	applymovement 1, SSAnne_2F_Corridor_Movement_RivalApproachRight
+	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachRight
 	waitmovement 0
 	return
 
@@ -89,17 +91,17 @@ SSAnne_2F_Corridor_EventScript_RivalCharmander:: @ 81609F2
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalExitLeft:: @ 81609FD
-	applymovement 1, SSAnne_2F_Corridor_Movement_RivalExitLeft
+	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitLeft
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalExitMid:: @ 8160A08
-	applymovement 1, SSAnne_2F_Corridor_Movement_RivalExitMid
+	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitMid
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalExitRight:: @ 8160A13
-	applymovement 1, SSAnne_2F_Corridor_Movement_RivalExitRight
+	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitRight
 	waitmovement 0
 	return
 

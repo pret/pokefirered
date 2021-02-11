@@ -1,3 +1,5 @@
+.set LOCALID_RIVAL, 1
+
 Route22_MapScripts:: @ 816828B
 	.byte 0
 
@@ -10,21 +12,21 @@ Route22_EventScript_EarlyRivalTriggerTop:: @ 816828C
 Route22_EventScript_EarlyRivalTriggerMid:: @ 8168298
 	lockall
 	setvar VAR_TEMP_1, 1
-	setobjectxyperm 1, 25, 5
+	setobjectxyperm LOCALID_RIVAL, 25, 5
 	goto Route22_EventScript_EarlyRival
 	end
 
 Route22_EventScript_EarlyRivalTriggerBottom:: @ 81682AB
 	lockall
 	setvar VAR_TEMP_1, 2
-	setobjectxyperm 1, 25, 5
+	setobjectxyperm LOCALID_RIVAL, 25, 5
 	goto Route22_EventScript_EarlyRival
 	end
 
 Route22_EventScript_EarlyRival:: @ 81682BE
 	textcolor 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	addobject 1
+	addobject LOCALID_RIVAL
 	compare VAR_TEMP_1, 0
 	call_if_eq Route22_EventScript_EarlyRivalApproach
 	compare VAR_TEMP_1, 1
@@ -50,18 +52,18 @@ Route22_EventScript_EarlyRival:: @ 81682BE
 	compare VAR_TEMP_1, 2
 	call_if_eq Route22_EventScript_EarlyRivalExitBottom
 	fadedefaultbgm
-	removeobject 1
+	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_ROUTE22, 2
 	releaseall
 	end
 
 Route22_EventScript_EarlyRivalApproach:: @ 8168350
-	applymovement 1, Route22_Movement_RivalApproach
+	applymovement LOCALID_RIVAL, Route22_Movement_RivalApproach
 	waitmovement 0
 	return
 
 Route22_EventScript_EarlyRivalApproachBottom:: @ 816835B
-	applymovement 1, Route22_Movement_RivalApproachBottom
+	applymovement LOCALID_RIVAL, Route22_Movement_RivalApproachBottom
 	applymovement OBJ_EVENT_ID_PLAYER, Route22_Movement_PlayerFaceRival
 	waitmovement 0
 	return
@@ -79,12 +81,12 @@ Route22_EventScript_EarlyRivalCharmander:: @ 816838B
 	return
 
 Route22_EventScript_EarlyRivalExit:: @ 816839A
-	applymovement 1, Route22_Movement_EarlyRivalExit
+	applymovement LOCALID_RIVAL, Route22_Movement_EarlyRivalExit
 	waitmovement 0
 	return
 
 Route22_EventScript_EarlyRivalExitBottom:: @ 81683A5
-	applymovement 1, Route22_Movement_EarlyRivalExitBottom
+	applymovement LOCALID_RIVAL, Route22_Movement_EarlyRivalExitBottom
 	waitmovement 0
 	return
 
@@ -170,21 +172,21 @@ Route22_EventScript_LateRivalTriggerTop:: @ 81683ED
 Route22_EventScript_LateRivalTriggerMid:: @ 81683F9
 	lockall
 	setvar VAR_TEMP_1, 1
-	setobjectxyperm 1, 25, 5
+	setobjectxyperm LOCALID_RIVAL, 25, 5
 	goto Route22_EventScript_LateRival
 	end
 
 Route22_EventScript_LateRivalTriggerBottom:: @ 816840C
 	lockall
 	setvar VAR_TEMP_1, 2
-	setobjectxyperm 1, 25, 5
+	setobjectxyperm LOCALID_RIVAL, 25, 5
 	goto Route22_EventScript_LateRival
 	end
 
 Route22_EventScript_LateRival:: @ 816841F
 	textcolor 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	addobject 1
+	addobject LOCALID_RIVAL
 	compare VAR_TEMP_1, 0
 	call_if_eq Route22_EventScript_LateRivalApproach
 	compare VAR_TEMP_1, 1
@@ -192,7 +194,7 @@ Route22_EventScript_LateRival:: @ 816841F
 	compare VAR_TEMP_1, 2
 	call_if_eq Route22_EventScript_LateRivalApproachBottom
 	msgbox Route22_Text_LateRivalIntro
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_RIVAL
 	compare VAR_STARTER_MON, 2
 	call_if_eq Route22_EventScript_LateRivalSquirtle
 	compare VAR_STARTER_MON, 1
@@ -203,21 +205,21 @@ Route22_EventScript_LateRival:: @ 816841F
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL_EXIT, 0
-	applymovement 1, Route22_Movement_LateRivalExit
+	applymovement LOCALID_RIVAL, Route22_Movement_LateRivalExit
 	waitmovement 0
 	fadedefaultbgm
-	removeobject 1
+	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_ROUTE22, 4
 	releaseall
 	end
 
 Route22_EventScript_LateRivalApproach:: @ 816849C
-	applymovement 1, Route22_Movement_RivalApproach
+	applymovement LOCALID_RIVAL, Route22_Movement_RivalApproach
 	waitmovement 0
 	return
 
 Route22_EventScript_LateRivalApproachBottom:: @ 81684A7
-	applymovement 1, Route22_Movement_RivalApproachBottom
+	applymovement LOCALID_RIVAL, Route22_Movement_RivalApproachBottom
 	applymovement OBJ_EVENT_ID_PLAYER, Route22_Movement_PlayerFaceRival
 	waitmovement 0
 	return

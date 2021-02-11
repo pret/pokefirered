@@ -1,4 +1,6 @@
-.equ LOCALID_TUTORIAL_MAN, 4
+.set LOCALID_OLD_MAN,      3
+.set LOCALID_TUTORIAL_MAN, 4
+.set LOCALID_WOMAN,        5
 
 ViridianCity_MapScripts:: @ 81658D3
 	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_OnTransition
@@ -91,7 +93,7 @@ ViridianCity_EventScript_OldMan:: @ 81659CA
 	goto_if_eq ViridianCity_EventScript_OldManGymLeaderReturned
 	msgbox ViridianCity_Text_GymClosedWonderWhoLeaderIs
 	closemessage
-	applymovement 3, Movement_FaceOriginalDirection
+	applymovement LOCALID_OLD_MAN, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -190,7 +192,7 @@ ViridianCity_EventScript_Woman:: @ 8165AC4
 ViridianCity_EventScript_WomanRoadBlocked:: @ 8165ADB
 	msgbox ViridianCity_Text_GrandpaHasntHadCoffeeYet
 	closemessage
-	applymovement 5, Movement_FaceOriginalDirection
+	applymovement LOCALID_WOMAN, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

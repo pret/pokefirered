@@ -1,3 +1,5 @@
+.equ LOCALID_MOM, 1
+
 PalletTown_PlayersHouse_1F_MapScripts:: @ 8168C08
 	.byte 0
 
@@ -11,7 +13,7 @@ PalletTown_PlayersHouse_1F_EventScript_Mom:: @ 8168C09
 	compare VAR_RESULT, FEMALE
 	call_if_eq PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
 	closemessage
-	applymovement 1, Movement_FaceOriginalDirection
+	applymovement LOCALID_MOM, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

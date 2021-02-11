@@ -1,3 +1,5 @@
+.set LOCALID_BRUNO, 1
+
 PokemonLeague_BrunosRoom_MapScripts:: @ 8162685
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_BrunosRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_BrunosRoom_OnLoad
@@ -107,16 +109,16 @@ PokemonLeague_BrunosRoom_EventScript_DefeatedBruno:: @ 81627B0
 	end
 
 PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft:: @ 81627EF
-	applymovement 1, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight:: @ 81627FA
-	applymovement 1, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown:: @ 8162805
-	applymovement 1, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return

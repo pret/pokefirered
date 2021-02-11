@@ -1,3 +1,5 @@
+.set LOCALID_GRUNT, 11
+
 CeladonCity_GameCorner_MapScripts:: @ 816C646
 	map_script MAP_SCRIPT_ON_LOAD, CeladonCity_GameCorner_OnLoad
 	.byte 0
@@ -425,17 +427,17 @@ CeladonCity_GameCorner_Text_DefeatedGrunt:: @ 816CB10
 	call_if_eq CeladonCity_GameCorner_Text_GruntExitWest
 	compare VAR_FACING, DIR_WEST
 	call_if_ne CeladonCity_GameCorner_Text_GruntExit
-	removeobject 11
+	removeobject LOCALID_GRUNT
 	release
 	end
 
 CeladonCity_GameCorner_Text_GruntExitWest:: @ 816CB34
-	applymovement 11, CeladonCity_GameCorner_Movement_GruntExitWest
+	applymovement LOCALID_GRUNT, CeladonCity_GameCorner_Movement_GruntExitWest
 	waitmovement 0
 	return
 
 CeladonCity_GameCorner_Text_GruntExit:: @ 816CB3F
-	applymovement 11, CeladonCity_GameCorner_Movement_GruntExit
+	applymovement LOCALID_GRUNT, CeladonCity_GameCorner_Movement_GruntExit
 	waitmovement 0
 	return
 

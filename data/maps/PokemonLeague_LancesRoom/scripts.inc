@@ -1,3 +1,5 @@
+.set LOCALID_LANCE, 1
+
 PokemonLeague_LancesRoom_MapScripts:: @ 816292D
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LancesRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LancesRoom_OnLoad
@@ -146,12 +148,12 @@ PokemonLeague_LancesRoom_EventScript_DefeatedLance:: @ 8162AAB
 	end
 
 PokemonLeague_LancesRoom_EventScript_LanceMoveOutOfWayLeft:: @ 8162AC6
-	applymovement 1, PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayLeft
+	applymovement LOCALID_LANCE, PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayLeft
 	waitmovement 0
 	return
 
 PokemonLeague_LancesRoom_EventScript_LanceMoveOutOfWayRight:: @ 8162AD1
-	applymovement 1, PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayRight
+	applymovement LOCALID_LANCE, PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayRight
 	waitmovement 0
 	return
 

@@ -69,7 +69,7 @@
 #define FLDEFF_USE_VS_SEEKER             65
 #define FLDEFF_DOUBLE_EXCL_MARK_ICON     66
 #define FLDEFF_MOVE_DEOXYS_ROCK          67
-#define FLDEFF_UNK_44                    68 // TODO: related to ???
+#define FLDEFF_DESTROY_DEOXYS_ROCK       68
 #define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos
 
 #endif // GUARD_CONSTANTS_FIELD_EFFECTS_H

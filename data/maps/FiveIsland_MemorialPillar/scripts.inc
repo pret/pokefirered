@@ -1,3 +1,5 @@
+.set LOCALID_MEMORIAL_MAN, 1
+
 FiveIsland_MemorialPillar_MapScripts:: @ 81689D2
 	.byte 0
 
@@ -7,11 +9,11 @@ FiveIsland_MemorialPillar_EventScript_MemorialMan:: @ 81689D3
 	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_ReturnedForTM42
 	msgbox FiveIsland_MemorialPillar_Text_ScrubScrub
 	closemessage
-	applymovement 1, Movement_FacePlayer
+	applymovement LOCALID_MEMORIAL_MAN, Movement_FacePlayer
 	waitmovement 0
 	delay 45
 	msgbox FiveIsland_MemorialPillar_Text_YourMonsLookHealthy
-	applymovement 1, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox FiveIsland_MemorialPillar_Text_ThisIsWhereIBuriedMyOnix
 	release
@@ -55,7 +57,7 @@ FiveIsland_MemorialPillar_EventScript_PlaceLemonade:: @ 8168A9B
 	removeitem ITEM_LEMONADE, 1
 	msgbox FiveIsland_MemorialPillar_Text_PlacedCanOfLemonade
 	closemessage
-	applymovement 1, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 45
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
@@ -71,7 +73,7 @@ FiveIsland_MemorialPillar_EventScript_PlaceLemonade:: @ 8168A9B
 
 FiveIsland_MemorialPillar_EventScript_ReceivedTM42:: @ 8168AE8
 	msgbox FiveIsland_MemorialPillar_Text_BeGoodToYourMonsToo
-	applymovement 1, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	setflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	return

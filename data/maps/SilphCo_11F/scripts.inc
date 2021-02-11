@@ -1,3 +1,7 @@
+.set LOCALID_GIOVANNI, 3
+.set LOCALID_GRUNT1,   4
+.set LOCALID_GRUNT2,   6
+
 SilphCo_11F_MapScripts:: @ 8161DEE
 	map_script MAP_SCRIPT_ON_LOAD, SilphCo_11F_OnLoad
 	.byte 0
@@ -60,7 +64,7 @@ SilphCo_11F_EventScript_GiovanniTriggerRight:: @ 8161E94
 
 SilphCo_11F_EventScript_BattleGiovanni:: @ 8161EA0
 	textcolor 0
-	applymovement 3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_GIOVANNI, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 25
 	msgbox SilphCo_11F_Text_GiovanniIntro
@@ -69,14 +73,14 @@ SilphCo_11F_EventScript_BattleGiovanni:: @ 8161EA0
 	call_if_eq SilphCo_11F_EventScript_GiovanniApproachLeft
 	compare VAR_TEMP_1, 1
 	call_if_eq SilphCo_11F_EventScript_GiovanniApproachRight
-	setvar VAR_LAST_TALKED, 3
+	setvar VAR_LAST_TALKED, LOCALID_GIOVANNI
 	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI_2, SilphCo_11F_Text_GiovanniDefeat
 	msgbox SilphCo_11F_Text_GiovanniPostBattle
 	closemessage
 	fadescreen FADE_TO_BLACK
-	removeobject 3
-	removeobject 4
-	removeobject 6
+	removeobject LOCALID_GIOVANNI
+	removeobject LOCALID_GRUNT1
+	removeobject LOCALID_GRUNT2
 	fadescreen FADE_FROM_BLACK
 	setvar VAR_MAP_SCENE_SILPH_CO_11F, 1
 	setflag FLAG_HIDE_SAFFRON_ROCKETS
@@ -85,13 +89,13 @@ SilphCo_11F_EventScript_BattleGiovanni:: @ 8161EA0
 	end
 
 SilphCo_11F_EventScript_GiovanniApproachLeft:: @ 8161F00
-	applymovement 3, SilphCo_11F_Movement_GiovanniApproachLeft
+	applymovement LOCALID_GIOVANNI, SilphCo_11F_Movement_GiovanniApproachLeft
 	applymovement OBJ_EVENT_ID_PLAYER, SilphCo_11F_Movement_PlayerFaceGiovanni
 	waitmovement 0
 	return
 
 SilphCo_11F_EventScript_GiovanniApproachRight:: @ 8161F12
-	applymovement 3, SilphCo_11F_Movement_GiovanniApproachRight
+	applymovement LOCALID_GIOVANNI, SilphCo_11F_Movement_GiovanniApproachRight
 	waitmovement 0
 	return
 

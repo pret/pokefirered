@@ -1,3 +1,12 @@
+.set LOCALID_BATTLE_GIRL, 1
+.set LOCALID_LITTLE_GIRL, 2
+.set LOCALID_YOUNGSTER,   3
+.set LOCALID_GENTLEMAN,   4
+.set LOCALID_WOMAN,       5
+.set LOCALID_ROCKER,      6
+.set LOCALID_BEAUTY,      7
+.set LOCALID_BLACK_BELT,  8
+
 SaffronCity_PokemonTrainerFanClub_MapScripts:: @ 816F0BF
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SaffronCity_PokemonTrainerFanClub_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_PokemonTrainerFanClub_OnTransition
@@ -10,16 +19,16 @@ SaffronCity_PokemonTrainerFanClub_OnFrame:: @ 816F0CA
 SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans:: @ 816F0D4
 	lockall
 	textcolor 1
-	applymovement 1, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BATTLE_GIRL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Movement_ExclamationMark
+	applymovement LOCALID_BATTLE_GIRL, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_Delay48
+	applymovement LOCALID_BATTLE_GIRL, Movement_Delay48
 	waitmovement 0
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_HuhYou
 	closemessage
-	applymovement 1, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
+	applymovement LOCALID_BATTLE_GIRL, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
@@ -118,43 +127,43 @@ SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions:: @ 816F1
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable:: @ 816F207
-	setobjectxyperm 1, 5, 2
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_BATTLE_GIRL, 5, 2
+	setobjectmovementtype LOCALID_BATTLE_GIRL, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable:: @ 816F213
-	setobjectxyperm 3, 7, 4
-	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_YOUNGSTER, 7, 4
+	setobjectmovementtype LOCALID_YOUNGSTER, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable:: @ 816F21F
-	setobjectxyperm 4, 2, 2
-	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_GENTLEMAN, 2, 2
+	setobjectmovementtype LOCALID_GENTLEMAN, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable:: @ 816F22B
-	setobjectxyperm 2, 3, 4
-	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_LITTLE_GIRL, 3, 4
+	setobjectmovementtype LOCALID_LITTLE_GIRL, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable:: @ 816F237
-	setobjectxyperm 6, 4, 6
-	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_ROCKER, 4, 6
+	setobjectmovementtype LOCALID_ROCKER, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable:: @ 816F243
-	setobjectxyperm 5, 10, 3
-	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_WOMAN, 10, 3
+	setobjectmovementtype LOCALID_WOMAN, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable:: @ 816F24F
-	setobjectxyperm 7, 7, 5
-	setobjectmovementtype 7, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_BEAUTY, 7, 5
+	setobjectmovementtype LOCALID_BEAUTY, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable:: @ 816F25B
-	setobjectxyperm 8, 9, 6
-	setobjectmovementtype 8, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_BLACK_BELT, 9, 6
+	setobjectmovementtype LOCALID_BLACK_BELT, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting:: @ 816F267

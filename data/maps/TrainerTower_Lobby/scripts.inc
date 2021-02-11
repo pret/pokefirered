@@ -1,3 +1,9 @@
+.set LOCALID_NURSE,         1
+.set LOCALID_MART_CLERK,    2
+.set LOCALID_RECEPTIONIST,  3
+.set LOCALID_COOLTRAINER_F, 4
+.set LOCALID_BALDING_MAN,   5
+
 TrainerTower_Lobby_MapScripts:: @ 8164839
 	map_script MAP_SCRIPT_ON_RESUME, TrainerTower_Lobby_OnResume
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, TrainerTower_Lobby_OnReturnToField
@@ -20,11 +26,11 @@ TrainerTower_Lobby_OnResumeEnd:: @ 8164886
 	end
 
 TrainerTower_Lobby_OnReturnToField:: @ 8164887
-	addobject 1
-	addobject 2
-	addobject 3
-	addobject 4
-	addobject 5
+	addobject LOCALID_NURSE
+	addobject LOCALID_MART_CLERK
+	addobject LOCALID_RECEPTIONIST
+	addobject LOCALID_COOLTRAINER_F
+	addobject LOCALID_BALDING_MAN
 	end
 
 TrainerTower_Lobby_OnLoad:: @ 8164897

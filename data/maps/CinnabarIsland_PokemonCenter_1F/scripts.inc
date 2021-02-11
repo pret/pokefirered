@@ -1,3 +1,5 @@
+.set LOCALID_BILL, 7
+
 CinnabarIsland_PokemonCenter_1F_MapScripts:: @ 816E8D7
 	map_script MAP_SCRIPT_ON_TRANSITION, CinnabarIsland_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -45,7 +47,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill:: @ 816E90A
 	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast
 	compare VAR_FACING, DIR_WEST
 	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest
-	removeobject 7
+	removeobject LOCALID_BILL
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL
 	warp MAP_CINNABAR_ISLAND, 255, 14, 11
@@ -54,19 +56,19 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill:: @ 816E90A
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth:: @ 816E96F
-	applymovement 7, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+	applymovement LOCALID_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
 	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth
 	waitmovement 0
 	return
 
 CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast:: @ 816E981
-	applymovement 7, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast
+	applymovement LOCALID_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast
 	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast
 	waitmovement 0
 	return
 
 CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest:: @ 816E993
-	applymovement 7, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+	applymovement LOCALID_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
 	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest
 	waitmovement 0
 	return

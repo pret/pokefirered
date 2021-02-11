@@ -1,3 +1,5 @@
+.set LOCALID_DOOR_GUARD, 4
+
 IndigoPlateau_PokemonCenter_1F_MapScripts:: @ 816EA5A
 	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -12,7 +14,7 @@ IndigoPlateau_PokemonCenter_1F_OnTransition:: @ 816EA65
 
 IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor:: @ 816EA79
 	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_Return
-	setobjectxyperm 4, 4, 2
+	setobjectxyperm LOCALID_DOOR_GUARD, 4, 2
 	return
 
 IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard:: @ 816EA8A

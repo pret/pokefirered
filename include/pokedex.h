@@ -48,6 +48,6 @@ bool16 HasAllHoennMons(void);
 bool16 HasAllKantoMons(void);
 bool16 HasAllMons(void);
 
-u32 sub_8106B60(u16 species);
+u8 sub_8106B60(u16 species);
 
 #endif // GUARD_POKEDEX_H

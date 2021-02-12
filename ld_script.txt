@@ -237,7 +237,6 @@ SECTIONS {
         src/easy_chat_2.o(.text);
         src/easy_chat_3.o(.text);
         src/pokedex_screen.o(.text);
-        asm/pokedex_screen.o(.text);
         src/list_menu.o(.text);
         src/item_menu.o(.text);
         src/save_location.o(.text);

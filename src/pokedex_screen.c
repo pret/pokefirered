@@ -15,7 +15,10 @@
 #include "data.h"
 #include "pokedex.h"
 #include "trainer_pokemon_sprites.h"
+#include "decompress.h"
 #include "constants/songs.h"
+#include "pokedex_area_markers.h"
+#include "field_specials.h"
 
 struct PokedexScreenData
 {
@@ -107,14 +110,14 @@ void sub_8105058(u8 a0);
 void sub_8105178(u8 a0, u8 a1, u8 a2);
 static bool8 sub_81052D0(u8 a0);
 void sub_8105594(u8 a0, u8 a1);
-void sub_8105E1C(u8 a0);
-void sub_8106014(void);
-void sub_810603C(void);
+u8 sub_8105E1C(u8 a0);
+u8 sub_8106014(void);
+u8 sub_810603C(void);
 bool8 sub_8106838(u8 category, u8 a1);
 u8 sub_81068A0(u8 a0);
-void sub_810699C(u8 category);
+u8 sub_810699C(u8 category);
 bool8 sub_8106A20(u16 a0);
-void sub_81067C0(void);
+u8 sub_81067C0(void);
 void sub_81068DC(u8 category, u8 a1);
 u8 sub_8106AF8(u16 a0);
 void sub_8106B34(void);
@@ -122,6 +125,8 @@ void sub_8106E78(const u8 *a0, s32 a1);
 static void sub_8102EC0(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void sub_8102F48(u8 windowId, s32 itemId, u8 y);
 static void sub_8103A40(u8 windowId, s32 itemId, u8 y);
+static void sub_8106BD8(u8 taskId);
+static void sub_8106BE8(u8 taskId);
 
 #include "data/pokemon_graphics/footprint_table.h"
 
@@ -2069,10 +2074,10 @@ static bool32 sub_8104664(u8 a0)
     }
     else
     {
-		*r12 = 0;
-		*r6 = r3;
-	}
-	return TRUE;
+        *r12 = 0;
+        *r6 = r3;
+    }
+    return TRUE;
 }
 
 void sub_81047B0(u8 *windowId_p)
@@ -2540,4 +2545,828 @@ static bool8 sub_81052D0(u8 a0)
         break;
     }
     return FALSE;
+}
+
+void sub_8105594(u8 a0, u8 a1)
+{
+    u8 v0, v1, v2, v3;
+    s16 v4, v5, v6;
+ 
+    if (!gUnknown_203ACF0->field_2C)
+    {
+        v0 = gUnknown_8452334[0][0][2];
+        v1 = gUnknown_8452334[0][0][3];
+    }
+    else
+    {
+        v0 =  gUnknown_8452334[gUnknown_203ACF0->field_2C - 1][gUnknown_203ACF0->field_2D][2];
+        v1 = gUnknown_8452334[gUnknown_203ACF0->field_2C - 1][gUnknown_203ACF0->field_2D][3];
+    }
+ 
+    v2 = 6 + (a1 * 4);
+    v3 = 3 + (a1 * 2);
+    if (v2 >= 28)
+        v2 = 28;
+    if (v3 >= 14)
+        v3 = 14;
+    v4 = v0 - ((a1 * 4) / 2);
+    v5 = v1 - ((a1 * 2) / 2);
+    if ((v4 + v2 + 2) >= 30)
+        v4 -= ((v4 + v2 + 2) - 30);
+    else if (v4 < 0)
+        v4 = 0;
+    if ((v5 + v3 + 2) >= 18)
+        v5 -= ((v5 + v3 + 2) - 18);
+    else if (v5 < 2)
+        v5 = 2;
+    v6 = (v5 + 1) + ((v3 / 2) + 1);
+ 
+    FillBgTilemapBufferRect_Palette0(a0, 4, v4, v5, 1, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 5, v4 + 1, v5, v2, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 1028, v4 + 1 + v2, v5, 1, 1);
+ 
+    FillBgTilemapBufferRect_Palette0(a0, 10, v4, v5 + 1 + v3, 1, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 11, v4 + 1, v5 + 1 + v3, v2, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 1034, v4 + 1 + v2, v5 + 1 + v3, 1, 1);
+ 
+    FillBgTilemapBufferRect_Palette0(a0, 6, v4, v5 + 1, 1, v6 - v5 - 1);
+    FillBgTilemapBufferRect_Palette0(a0, 7, v4, v6, 1, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 9, v4, v6 + 1, 1, v5 + v3 - v6);
+ 
+    FillBgTilemapBufferRect_Palette0(a0, 1030, v4 + 1 + v2, v5 + 1, 1, v6 - v5 - 1);
+    FillBgTilemapBufferRect_Palette0(a0, 1031, v4 + 1 + v2, v6, 1, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 1033, v4 + 1 + v2, v6 + 1, 1, v5 + v3 - v6);
+ 
+    FillBgTilemapBufferRect_Palette0(a0, 1, v4 + 1, v5 + 1, v2, v6 - v5 - 1);
+    FillBgTilemapBufferRect_Palette0(a0, 8, v4 + 1, v6, v2, 1);
+    FillBgTilemapBufferRect_Palette0(a0, 2, v4 + 1, v6 + 1, v2, v5 + v3 - v6);
+}
+
+void sub_8105800(u8 a0, u16 species, u8 a2, u8 a3)
+{
+    u8 * categoryName;
+    u8 index, categoryStr[12];
+
+    species = SpeciesToNationalPokedexNum(species);
+
+    categoryName = (u8 *)gPokedexEntries[species].categoryName;
+    index = 0;
+    if (sub_8104AB0(species, 1, 0))
+    {
+#if REVISION == 0
+        while ((categoryName[index] != CHAR_SPACE) && (index < 11))
+#else
+        while ((categoryName[index] != EOS) && (index < 11))
+#endif
+        {
+            categoryStr[index] = categoryName[index];
+            index++;
+        }
+    }
+    else
+    {
+        while (index < 11)
+        {
+            categoryStr[index] = CHAR_QUESTION_MARK;
+            index++;
+        }
+    }
+    
+    categoryStr[index] = EOS;
+
+    sub_81047C8(a0, 0, categoryStr, a2, a3, 0);
+    a2 += GetStringWidth(0, categoryStr, 0);
+    sub_81047C8(a0, 0, gText_PokedexPokemon, a2, a3, 0);
+}
+
+void sub_81058C4(u8 windowId, u16 species, u8 x, u8 y)
+{
+    u16 height;
+    u32 inches, feet;
+    const u8 *labelText;
+    u8 buffer[32];
+    u8 i;
+
+    species = SpeciesToNationalPokedexNum(species);
+    height = gPokedexEntries[species].height;
+    labelText = gText_HT;
+
+    i = 0;
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+    buffer[i++] = 5;
+    buffer[i++] = CHAR_SPACE;
+
+    if (sub_8104AB0(species, FLAG_GET_CAUGHT, 0))
+    {
+        inches = 10000 * height / 254; // actually tenths of inches here
+        if (inches % 10 >= 5)
+            inches += 10;
+        feet = inches / 120;
+        inches = (inches - (feet * 120)) / 10;
+        if (feet / 10 == 0)
+        {
+            buffer[i++] = 0;
+            buffer[i++] = feet + CHAR_0;
+        }
+
+        else
+        {
+            buffer[i++] = feet / 10 + CHAR_0;
+            buffer[i++] = feet % 10 + CHAR_0;
+        }
+        buffer[i++] = CHAR_SGL_QUOT_RIGHT;
+        buffer[i++] = inches / 10 + CHAR_0;
+        buffer[i++] = inches % 10 + CHAR_0;
+        buffer[i++] = CHAR_DBL_QUOT_RIGHT;
+        buffer[i++] = EOS;
+    }
+
+    else
+    {
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_SGL_QUOT_RIGHT;
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_DBL_QUOT_RIGHT;
+    }
+
+    buffer[i++] = EOS;
+    sub_81047C8(windowId, 0, labelText, x, y, 0);
+    x += 30;
+    sub_81047C8(windowId, 0, buffer, x, y, 0);
+}
+
+void sub_8105A3C(u8 windowId, u16 species, u8 x, u8 y)
+{
+    u16 weight;
+    u32 lbs;
+    bool8 output;
+    const u8 * labelText;
+    const u8 * lbsText;
+    u8 buffer[32];
+    u8 i;
+    u32 j;
+
+    species = SpeciesToNationalPokedexNum(species);
+    weight = gPokedexEntries[species].weight;
+    labelText = gText_WT;
+    lbsText = gText_Lbs;
+
+    i = 0;
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+    buffer[i++] = 5;
+
+    if (sub_8104AB0(species, FLAG_GET_CAUGHT, 0))
+    {
+        lbs = (weight * 100000) / 4536;
+
+        if (lbs % 10 >= 5)
+            lbs += 10;
+
+        output = FALSE;
+
+        if ((buffer[i] = (lbs / 100000) + CHAR_0) == CHAR_0 && !output)
+        {
+            buffer[i++] = CHAR_SPACE;
+        }
+        else
+        {
+            output = TRUE;
+            i++;
+        }
+
+        lbs %= 100000;
+        if ((buffer[i] = (lbs / 10000) + CHAR_0) == CHAR_0 && !output)
+        {
+            buffer[i++] = CHAR_SPACE;
+        }
+        else
+        {
+            output = TRUE;
+            i++;
+        }
+        
+        lbs %= 10000;
+        if ((buffer[i] = (lbs / 1000) + CHAR_0) == CHAR_0 && !output)
+        {
+            buffer[i++] = CHAR_SPACE;
+        }
+        else
+        {
+            output = TRUE;
+            i++;
+        }
+
+        lbs %= 1000;
+        buffer[i++] = (lbs / 100) + CHAR_0;
+        lbs %= 100;
+        buffer[i++] = CHAR_PERIOD;
+        buffer[i++] = (lbs / 10) + CHAR_0;
+    }
+
+    else
+    {
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_QUESTION_MARK;
+        buffer[i++] = CHAR_PERIOD;
+        buffer[i++] = CHAR_QUESTION_MARK;
+    }
+
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+    buffer[i++] = 0;
+
+    for (j = 0; j < 33 - i && lbsText[j] != EOS; j++)
+        buffer[i + j] = lbsText[j];
+
+    buffer[i + j] = EOS;
+    sub_81047C8(windowId, 0, labelText, x, y, 0);
+    x += 30;
+    sub_81047C8(windowId, 0, buffer, x, y, 0);
+}
+
+void sub_8105CB0(u8 a0, u16 species, u8 x, u8 y)
+{
+    struct TextPrinterTemplate printerTemplate;
+    u16 length;
+    s32 v1;
+
+    species = SpeciesToNationalPokedexNum(species);
+
+    if (sub_8104AB0(species, 1, 0))
+    {
+        printerTemplate.currentChar = gPokedexEntries[species].description;
+        printerTemplate.windowId = a0;
+        printerTemplate.fontId = 2;
+        printerTemplate.letterSpacing = 1;
+        printerTemplate.lineSpacing = 0;
+        printerTemplate.unk = 0;
+        printerTemplate.fgColor = 1;
+        printerTemplate.bgColor = 0;
+        printerTemplate.shadowColor = 2;
+
+        length = GetStringWidth(2, gPokedexEntries[species].description, 0);
+        v1 = x + (240 - length) / 2;
+
+        if (v1 > 0)
+            x = v1;
+        else
+            x = 0;
+
+        printerTemplate.x = x;
+        printerTemplate.y = y;
+        printerTemplate.currentX = x;
+        printerTemplate.currentY = y;
+
+        AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    }
+}
+
+void sub_8105D64(u8 a0, u16 species, u8 a2, u8 a3)
+{
+    u16 i, j, unused, v3;
+    u8 v4, v5;
+    u8 * buffer;
+    u8 * footprint;
+
+    if (!(sub_8104AB0(species, 1, 1)))
+        return;
+    footprint = (u8 *)(gMonFootprintTable[species]);
+    buffer = gDecompressionBuffer;
+    unused = 0;
+    v3 = 0;
+
+    for (i = 0; i < 32; i++)
+    {
+        v4 = footprint[i];
+        for (j = 0; j < 4; j++)
+        {
+            v5 = 0;
+            if (v4 & (1 << (j * 2)))
+                v5 |= 1;
+            if (v4 & (2 << (j * 2)))
+                v5 |= 16;
+            buffer[v3] = v5;
+            v3++;
+        }
+    }
+    BlitBitmapRectToWindow(a0, buffer, 0, 0, 16, 16, a2, a3, 16, 16);
+}
+
+u8 sub_8105E1C(u8 a0)
+{
+    sub_8105594(3, 6);
+    FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 30, 16);
+
+    gUnknown_203ACF0->field_4A[0] = AddWindow(&gUnknown_84521D4);
+    gUnknown_203ACF0->field_4A[1] = AddWindow(&gUnknown_84521DC);
+    gUnknown_203ACF0->field_4A[2] = AddWindow(&gUnknown_84521E4);
+
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[0], 0);
+    sub_81049FC(gUnknown_203ACF0->field_4A[0], gUnknown_203ACF0->field_5A, 144);
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[0]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[0], 2);
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[1], 0);
+    sub_8104A34(gUnknown_203ACF0->field_4A[1], 0, gUnknown_203ACF0->field_5A, 0, 8);
+    sub_81047C8(gUnknown_203ACF0->field_4A[1], 2, gSpeciesNames[gUnknown_203ACF0->field_5A], 28, 8, 0);
+    sub_8105800(gUnknown_203ACF0->field_4A[1], gUnknown_203ACF0->field_5A, 0, 24);
+    sub_81058C4(gUnknown_203ACF0->field_4A[1], gUnknown_203ACF0->field_5A, 0, 36);
+    sub_8105A3C(gUnknown_203ACF0->field_4A[1], gUnknown_203ACF0->field_5A, 0, 48);
+    sub_8105D64(gUnknown_203ACF0->field_4A[1], gUnknown_203ACF0->field_5A, 88, 40);
+
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[1]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[1], 2);
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[2], 0);
+    sub_8105CB0(gUnknown_203ACF0->field_4A[2], gUnknown_203ACF0->field_5A, 0, 8);
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[2]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[2], 2);
+    FillWindowPixelBuffer(1, 255);
+    if (!a0)
+    {
+        sub_81047C8(1, 0, gText_Cry, 8, 2, 4);
+        sub_8104C2C(gText_NextDataCancel);
+    }
+    else
+        sub_8104C2C(gText_Next);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 2);
+
+    return 1;
+}
+
+u8 sub_8106014(void)
+{
+    sub_81047B0(&gUnknown_203ACF0->field_4A[0]);
+    sub_81047B0(&gUnknown_203ACF0->field_4A[1]);
+    sub_81047B0(&gUnknown_203ACF0->field_4A[2]);
+
+    return 0;
+}
+
+u8 sub_810603C(void)
+{
+    int i;
+    u8 v1, v2, v3;
+    s16 v4, v5;
+    u16 speciesId, species;
+    u16 v8;
+
+    species = gUnknown_203ACF0->field_5A;
+    speciesId = SpeciesToNationalPokedexNum(species);
+    v3 = sub_8104AB0(species, 1, 1);
+    v1 = 28;
+    v2 = 14;
+    v4 = 0;
+    v5 = 2;
+
+    FillBgTilemapBufferRect_Palette0(3, 4, v4, v5, 1, 1);
+    FillBgTilemapBufferRect_Palette0(3, 1028, v4 + 1 + v1, v5, 1, 1);
+    FillBgTilemapBufferRect_Palette0(3, 2052, v4, v5 + 1 + v2, 1, 1);
+    FillBgTilemapBufferRect_Palette0(3, 3076, v4 + 1 + v1, v5 + 1 + v2, 1, 1);
+    FillBgTilemapBufferRect_Palette0(3, 5, v4 + 1, v5, v1, 1);
+    FillBgTilemapBufferRect_Palette0(3, 2053, v4 + 1, v5 + 1 + v2, v1, 1);
+    FillBgTilemapBufferRect_Palette0(3, 6, v4, v5 + 1, 1, v2);
+    FillBgTilemapBufferRect_Palette0(3, 1030, v4 + 1 + v1, v5 + 1, 1, v2);
+    FillBgTilemapBufferRect_Palette0(3, 1, v4 + 1, v5 + 1, v1, v2);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 30, 16);
+
+    v1 = 10;
+    v2 = 6;
+    v4 = 1;
+    v5 = 9;
+
+    FillBgTilemapBufferRect_Palette0(0, 29, v4, v5, 1, 1);
+    FillBgTilemapBufferRect_Palette0(0, 1053, v4 + 1 + v1, v5, 1, 1);
+    FillBgTilemapBufferRect_Palette0(0, 2077, v4, v5 + 1 + v2, 1, 1);
+    FillBgTilemapBufferRect_Palette0(0, 3101, v4 + 1 + v1, v5 + 1 + v2, 1, 1);
+    FillBgTilemapBufferRect_Palette0(0, 30, v4 + 1, v5, v1, 1);
+    FillBgTilemapBufferRect_Palette0(0, 2078, v4 + 1, v5 + 1 + v2, v1, 1);
+    FillBgTilemapBufferRect_Palette0(0, 31, v4, v5 + 1, 1, v2);
+    FillBgTilemapBufferRect_Palette0(0, 1055, v4 + 1 + v1, v5 + 1, 1, v2);
+    FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
+
+    gUnknown_203ACF0->field_64 = GetUnlockedSeviiAreas();
+    v8 = 4;
+    for (i = 3; i < 7; i++)
+        if ((gUnknown_203ACF0->field_64 >> i) & 1)
+            v8 = 0;
+
+    gUnknown_203ACF0->field_4A[0] = AddWindow(&gUnknown_8452214);
+    CopyToWindowPixelBuffer(gUnknown_203ACF0->field_4A[0], (void *)gUnknown_8443620, 0, 0);
+    SetWindowAttribute(gUnknown_203ACF0->field_4A[0], 2,
+                       GetWindowAttribute(gUnknown_203ACF0->field_4A[0], 2) + v8);
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[0]);
+    for (i = 0; i < 7; i++)
+        if ((gUnknown_203ACF0->field_64 >> i) & 1)
+        {
+            gUnknown_203ACF0->field_4A[i + 1] = AddWindow(gUnknown_8452254[i].window);
+            CopyToWindowPixelBuffer(gUnknown_203ACF0->field_4A[i + 1], gUnknown_8452254[i].tilemap, 0, 0);
+            SetWindowAttribute(gUnknown_203ACF0->field_4A[i + 1], 2, GetWindowAttribute(gUnknown_203ACF0->field_4A[i + 1], 2) + v8);
+            PutWindowTilemap(gUnknown_203ACF0->field_4A[i + 1]);
+            CopyWindowToVram(gUnknown_203ACF0->field_4A[i + 1], 2);
+        }
+    gUnknown_203ACF0->field_4A[8] = AddWindow(&gUnknown_84521F4);
+    gUnknown_203ACF0->field_4A[9] = AddWindow(&gUnknown_84521FC);
+    gUnknown_203ACF0->field_4A[10] = AddWindow(&gUnknown_8452204);
+    gUnknown_203ACF0->field_4A[11] = AddWindow(&gUnknown_84521EC);
+    gUnknown_203ACF0->field_4A[12] = AddWindow(&gUnknown_845220C);
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[11], 0);
+    sub_8107CD8(160, species);
+    sub_8107CF8(gUnknown_203ACF0->field_4A[11], species, sub_81049CC(species), 0, 0);
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[11]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[11], 2);
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[9], 0);
+    {
+        s32 width = GetStringWidth(0, gText_Size, 0);
+        sub_81047C8(gUnknown_203ACF0->field_4A[9], 0, gText_Size, (gUnknown_84521FC.width * 8 - width) / 2, 4, 0);
+    }
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[9]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[9], 2);
+
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[10], 0);
+    {
+        s32 width = GetStringWidth(0, gText_Area, 0);
+        sub_81047C8(gUnknown_203ACF0->field_4A[10], 0, gText_Area, (gUnknown_8452204.width * 8 - width) / 2, 4, 0);
+    }
+    SetWindowAttribute(gUnknown_203ACF0->field_4A[10], 2, GetWindowAttribute(gUnknown_203ACF0->field_4A[10], 2) + v8);
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[10]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[10], 2);
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[8], 0);
+    sub_8104A34(gUnknown_203ACF0->field_4A[8], 0, species, 0, 0);
+    sub_81047C8(gUnknown_203ACF0->field_4A[8], 2, gSpeciesNames[species], 3, 12, 0);
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[8]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[8], 2);
+    FillWindowPixelBuffer(gUnknown_203ACF0->field_4A[12], 0);
+    ListMenuLoadStdPalAt(176, 1);
+
+    if (v3)
+    {
+        BlitMoveInfoIcon(gUnknown_203ACF0->field_4A[12],
+                         1 + gBaseStats[species].type1, 0, 1);
+        if (gBaseStats[species].type1 != gBaseStats[species].type2)
+            BlitMoveInfoIcon(gUnknown_203ACF0->field_4A[12],
+                             1 + gBaseStats[species].type2, 32, 1);
+    }
+    PutWindowTilemap(gUnknown_203ACF0->field_4A[12]);
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[12], 2);
+    ResetAllPicSprites();
+    LoadPalette(gUnknown_8452368, 288, 32);
+
+    if (v3)
+    {
+        gUnknown_203ACF0->field_4A[14] = CreateMonPicSprite_HandleDeoxys(species, 8, sub_81049CC(species), 1, 40, 104, 0, 65535);
+        gSprites[gUnknown_203ACF0->field_4A[14]].oam.paletteNum = 2;
+        gSprites[gUnknown_203ACF0->field_4A[14]].oam.affineMode = 1;
+        gSprites[gUnknown_203ACF0->field_4A[14]].oam.matrixNum = 2;
+        gSprites[gUnknown_203ACF0->field_4A[14]].oam.priority = 1;
+        gSprites[gUnknown_203ACF0->field_4A[14]].pos2.y = gPokedexEntries[speciesId].pokemonOffset;
+        SetOamMatrix(2, gPokedexEntries[speciesId].pokemonScale, 0, 0, gPokedexEntries[speciesId].pokemonScale);
+        gUnknown_203ACF0->field_4A[15] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, 1), 1, 80, 104, 0, 65535);
+        gSprites[gUnknown_203ACF0->field_4A[15]].oam.paletteNum = 2;
+        gSprites[gUnknown_203ACF0->field_4A[15]].oam.affineMode = 1;
+        gSprites[gUnknown_203ACF0->field_4A[15]].oam.matrixNum = 1;
+        gSprites[gUnknown_203ACF0->field_4A[15]].oam.priority = 1;
+        gSprites[gUnknown_203ACF0->field_4A[15]].pos2.y = gPokedexEntries[speciesId].trainerOffset;
+        SetOamMatrix(1, gPokedexEntries[speciesId].trainerScale, 0, 0, gPokedexEntries[speciesId].trainerScale);
+    }
+    else
+    {
+        gUnknown_203ACF0->field_4A[14] = 0xff;
+        gUnknown_203ACF0->field_4A[15] = 0xff;
+    }
+
+    gUnknown_203ACF0->field_02[2] = sub_8134230(species, 2001, 3, v8 * 8);
+    if (!(sub_81344E0(gUnknown_203ACF0->field_02[2])))
+    {
+        BlitBitmapRectToWindow(gUnknown_203ACF0->field_4A[0], (void *)gUnknown_8443D00, 0, 0, 88, 16, 4, 28, 88, 16);
+        {
+            s32 width = GetStringWidth(0, gText_AreaUnknown, 0);
+            sub_81047C8(gUnknown_203ACF0->field_4A[0], 0, gText_AreaUnknown, (96 - width) / 2, 29, 0);
+        }
+    }
+    CopyWindowToVram(gUnknown_203ACF0->field_4A[0], 2);
+    FillWindowPixelBuffer(1, 255);
+    sub_81047C8(1, 0, gText_Cry, 8, 2, 4);
+    sub_8104C2C(gText_CancelPreviousData);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 2);
+
+    return 1;
+}
+
+
+u8 sub_81067C0(void)
+{
+    int i;
+
+    sub_81343F4(gUnknown_203ACF0->field_02[2]);
+
+    for (i = 0; i < 13; i++)
+        sub_81047B0(&gUnknown_203ACF0->field_4A[i]);
+    if (gUnknown_203ACF0->field_4A[15] != 0xff)
+        FreeAndDestroyTrainerPicSprite(gUnknown_203ACF0->field_4A[15]);
+    if (gUnknown_203ACF0->field_4A[14] != 0xff)
+        FreeAndDestroyMonPicSprite(gUnknown_203ACF0->field_4A[14]);
+    return 0;
+}
+
+int sub_8106810(u16 species)
+{
+    if (IsNationalPokedexEnabled() == TRUE)
+        return TRUE;
+    if (SpeciesToNationalPokedexNum(species) <= KANTO_DEX_COUNT)
+        return TRUE;
+    return FALSE;
+}
+
+u8 sub_8106838(u8 categoryNum, u8 pageNum)
+{
+    int i, count;
+    u16 species;
+
+    count = gDexCategories[categoryNum].page[pageNum].count;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (i < count)
+        {
+            species = gDexCategories[categoryNum].page[pageNum].species[i];
+            if (sub_8106810(species) == TRUE)
+                if (sub_8104AB0(species, 0, 1))
+                    return 1;
+        }
+    }
+    return 0;
+}
+
+u8 sub_81068A0(u8 categoryNum)
+{
+    int i;
+    u8 count;
+
+    count = gDexCategories[categoryNum].count;
+
+    for (i = 0; i < count; i++)
+        if (sub_8106838(categoryNum, i))
+            return 1;
+
+    return 0;
+}
+
+void sub_81068DC(u8 categoryNum, u8 pageNum)
+{
+    int i, count;
+    u16 species;
+
+    count = gDexCategories[categoryNum].page[pageNum].count;
+    gUnknown_203ACF0->field_2C = 0;
+
+    for (i = 0; i < 4; i++)
+        gUnknown_203ACF0->field_18[i] = 0xffff;
+    for (i = 0; i < count; i++)
+    {
+        species = gDexCategories[categoryNum].page[pageNum].species[i];
+        if (sub_8106810(species) == TRUE)
+            if (sub_8104AB0(species, 0, 1))
+            {
+                gUnknown_203ACF0->field_18[gUnknown_203ACF0->field_2C]
+                    = gDexCategories[categoryNum].page[pageNum].species[i];
+                gUnknown_203ACF0->field_2C++;
+            }
+    }
+}
+
+u8 sub_810699C(u8 category)
+{
+    int i;
+    u8 count, v2, v3;
+
+    count = gDexCategories[category].count;
+    v2 = 0xff;
+    v3 = 0xff;
+
+    for (i = 0; i < count; i++)
+        if (sub_8106838(category, i))
+        {
+            if (v2 == 0xff)
+                v2 = i;
+            v3 = i;
+        }
+    if (v3 != 0xff)
+    {
+        gUnknown_203ACF0->field_29 = v2;
+        gUnknown_203ACF0->field_2A = v3 + 1;
+        return 0;
+    }
+    else
+    {
+        gUnknown_203ACF0->field_29 = 0;
+        gUnknown_203ACF0->field_2A = 0;
+        return 1;
+    }
+}
+
+u8 sub_8106A20(u16 a0)
+{
+    int i, j, k, categoryCount, categoryPageCount, v5;
+    u16 species;
+
+    for (i = 0; i < DEX_CATEGORY_SIZE; i++)
+    {
+        categoryCount = gDexCategories[i].count;
+        for (j = 0; j < categoryCount; j++)
+        {
+            categoryPageCount = gDexCategories[i].page[j].count;
+            for (k = 0, v5 = 0; k < categoryPageCount; k++)
+            {
+                species = gDexCategories[i].page[j].species[k];
+                if (a0 == species)
+                {
+                    gUnknown_203ACF0->field_28 = i;
+                    gUnknown_203ACF0->field_2B = j;
+                    gUnknown_203ACF0->field_2D = v5;
+                    return 0;
+                }
+                if (sub_8106810(species) == TRUE)
+                    if (sub_8104AB0(species, 0, 1))
+                        v5++;
+            }
+        }
+    }
+    return 1;
+}
+
+u8 sub_8106AF8(u16 a0)
+{
+    int i, v1;
+
+    for (i = 0, v1 = 0; i < a0; i++)
+        if (sub_8106838(gUnknown_203ACF0->field_28, i))
+            v1++;
+
+    return v1 + 1;
+}
+
+void sub_8106B34(void)
+{
+    if (JOY_NEW(START_BUTTON))
+        PlayCry2(gUnknown_203ACF0->field_5A, 0, 125, 10);
+}
+
+u8 sub_8106B60(u16 species)
+{
+    sub_8104AB0(species, 2, 1);
+    sub_8104AB0(species, 3, 1);
+
+    if (!IsNationalPokedexEnabled())
+        if (SpeciesToNationalPokedexNum(species) > KANTO_DEX_COUNT)
+            return CreateTask(sub_8106BD8, 0);
+
+    sub_810250C();
+    gTasks[gUnknown_203ACF0->field_00].func = sub_8106BE8;
+    sub_8106A20(species);
+
+    return gUnknown_203ACF0->field_00;
+}
+
+static void sub_8106BD8(u8 taskId)
+{
+    DestroyTask(taskId);
+}
+
+static void sub_8106BE8(u8 taskId)
+{
+    switch (gUnknown_203ACF0->field_01)
+    {
+    case 0:
+        sub_810699C(gUnknown_203ACF0->field_28);
+        if (gUnknown_203ACF0->field_2B < gUnknown_203ACF0->field_29)
+            gUnknown_203ACF0->field_2B = gUnknown_203ACF0->field_29;
+        gUnknown_203ACF0->field_01 = 3;
+        break;
+    case 1:
+        sub_8106014();
+        sub_8104E90();
+
+        gMain.state = 0;
+        gUnknown_203ACF0->field_01 = 2;
+        break;
+    case 2:
+        if (sub_8102798())
+            DestroyTask(taskId);
+        break;
+    case 3:
+        sub_8104F0C(1);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+
+        sub_8105058(0xff);
+
+        gUnknown_203ACF0->field_01 = 4;
+        break;
+    case 4:
+        gPaletteFade.bufferTransferDisabled = 0;
+        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0xffff);
+        ShowBg(3);
+        ShowBg(2);
+        ShowBg(1);
+        ShowBg(0);
+
+        gUnknown_203ACF0->field_01 = 5;
+        break;
+    case 5:
+        gTasks[taskId].data[0] = 30;
+        gUnknown_203ACF0->field_61 = ListMenuAddCursorObjectInternal(&gUnknown_84524C4, 0);
+        gUnknown_203ACF0->field_01 = 6;
+        break;
+    case 6:
+        sub_8105058(gUnknown_203ACF0->field_2D);
+        sub_8105178(gUnknown_203ACF0->field_61, gUnknown_203ACF0->field_2D, gUnknown_203ACF0->field_2C);
+
+        if (gTasks[taskId].data[0])
+            gTasks[taskId].data[0]--;
+        else
+        {
+            ListMenuRemoveCursorObject(gUnknown_203ACF0->field_61, 0);
+            gUnknown_203ACF0->field_01 = 7;
+        }
+        break;
+    case 7:
+        gUnknown_203ACF0->field_5A = gUnknown_203ACF0->field_18[gUnknown_203ACF0->field_2D];
+        gUnknown_203ACF0->field_01 = 8;
+        break;
+    case 8:
+        sub_8105E1C(1);
+        gUnknown_203ACF0->field_01 = 9;
+        break;
+    case 9:
+        gUnknown_203ACF0->field_02[0] = 0;
+        gUnknown_203ACF0->field_02[1] = 0;
+        gUnknown_203ACF0->field_01++;
+    case 10:
+        if (gUnknown_203ACF0->field_02[1] < 6)
+        {
+            if (gUnknown_203ACF0->field_02[0])
+            {
+                sub_8105594(0, gUnknown_203ACF0->field_02[1]);
+                CopyBgTilemapBufferToVram(0);
+                gUnknown_203ACF0->field_02[0] = 4;
+                gUnknown_203ACF0->field_02[1]++;
+            }
+            else
+                gUnknown_203ACF0->field_02[0]--;
+        }
+        else
+        {
+            FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(3);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(0);
+
+            PlayCry2(gUnknown_203ACF0->field_5A, 0, 125, 10);
+            gUnknown_203ACF0->field_02[0] = 0;
+            gUnknown_203ACF0->field_01 = 11;
+        }
+        break;
+    case 11:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+            gUnknown_203ACF0->field_01 = 2;
+        break;
+    }
+}
+
+void sub_8106E78(const u8 * str, s32 mode)
+{
+    u32 x;
+
+    switch (mode)
+    {
+    case 0:
+        x = 8;
+        break;
+    case 1:
+        x = (u32)(240 - GetStringWidth(2, str, 0)) / 2;
+        break;
+    case 2:
+    default:
+        x = 232 - GetStringWidth(2, str, 0);
+        break;
+    }
+
+    sub_81047C8(0, 2, str, x, 2, 4);
 }

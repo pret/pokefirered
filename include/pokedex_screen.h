@@ -11,10 +11,7 @@
 #define DEX_CATEGORY_URBAN         7
 #define DEX_CATEGORY_RARE          8
 
-#define DEX_CATEGORY_SIZE          (sizeof(gDexCategories)/sizeof(struct {                                      \
-                                                                      const struct PokedexCategoryPage * page;  \
-                                                                      u8 count;                                 \
-                                                                  }))
+#define DEX_CATEGORY_SIZE          NELEMS(gDexCategories)
 
 #include "pokedex.h"
 

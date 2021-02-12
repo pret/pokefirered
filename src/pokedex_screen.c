@@ -2559,7 +2559,7 @@ void sub_8105594(u8 a0, u8 a1)
     }
     else
     {
-        v0 =  gUnknown_8452334[gUnknown_203ACF0->field_2C - 1][gUnknown_203ACF0->field_2D][2];
+        v0 = gUnknown_8452334[gUnknown_203ACF0->field_2C - 1][gUnknown_203ACF0->field_2D][2];
         v1 = gUnknown_8452334[gUnknown_203ACF0->field_2C - 1][gUnknown_203ACF0->field_2D][3];
     }
  
@@ -2669,7 +2669,6 @@ void sub_81058C4(u8 windowId, u16 species, u8 x, u8 y)
             buffer[i++] = 0;
             buffer[i++] = feet + CHAR_0;
         }
-
         else
         {
             buffer[i++] = feet / 10 + CHAR_0;
@@ -2681,7 +2680,6 @@ void sub_81058C4(u8 windowId, u16 species, u8 x, u8 y)
         buffer[i++] = CHAR_DBL_QUOT_RIGHT;
         buffer[i++] = EOS;
     }
-
     else
     {
         buffer[i++] = CHAR_QUESTION_MARK;
@@ -2766,7 +2764,6 @@ void sub_8105A3C(u8 windowId, u16 species, u8 x, u8 y)
         buffer[i++] = CHAR_PERIOD;
         buffer[i++] = (lbs / 10) + CHAR_0;
     }
-
     else
     {
         buffer[i++] = CHAR_QUESTION_MARK;
@@ -2776,7 +2773,6 @@ void sub_8105A3C(u8 windowId, u16 species, u8 x, u8 y)
         buffer[i++] = CHAR_PERIOD;
         buffer[i++] = CHAR_QUESTION_MARK;
     }
-
     buffer[i++] = CHAR_SPACE;
     buffer[i++] = EXT_CTRL_CODE_BEGIN;
     buffer[i++] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
@@ -2859,7 +2855,7 @@ void sub_8105D64(u8 a0, u16 species, u8 a2, u8 a3)
     BlitBitmapRectToWindow(a0, buffer, 0, 0, 16, 16, a2, a3, 16, 16);
 }
 
-u8 sub_8105E1C(u8 a0)
+u8 sub_8105E1C(bool8 a0)
 {
     sub_8105594(3, 6);
     FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
@@ -2889,7 +2885,7 @@ u8 sub_8105E1C(u8 a0)
     PutWindowTilemap(gUnknown_203ACF0->field_4A[2]);
     CopyWindowToVram(gUnknown_203ACF0->field_4A[2], 2);
     FillWindowPixelBuffer(1, 255);
-    if (!a0)
+    if (a0 == FALSE)
     {
         sub_81047C8(1, 0, gText_Cry, 8, 2, 4);
         sub_8104C2C(gText_NextDataCancel);
@@ -2914,7 +2910,8 @@ u8 sub_8106014(void)
 u8 sub_810603C(void)
 {
     int i;
-    u8 v1, v2, v3;
+    u8 v1, v2;
+    bool8 v3;
     s16 v4, v5;
     u16 speciesId, species;
     u16 v8;
@@ -3010,11 +3007,9 @@ u8 sub_810603C(void)
 
     if (v3)
     {
-        BlitMoveInfoIcon(gUnknown_203ACF0->field_4A[12],
-                         1 + gBaseStats[species].type1, 0, 1);
+        BlitMoveInfoIcon(gUnknown_203ACF0->field_4A[12], 1 + gBaseStats[species].type1, 0, 1);
         if (gBaseStats[species].type1 != gBaseStats[species].type2)
-            BlitMoveInfoIcon(gUnknown_203ACF0->field_4A[12],
-                             1 + gBaseStats[species].type2, 32, 1);
+            BlitMoveInfoIcon(gUnknown_203ACF0->field_4A[12], 1 + gBaseStats[species].type2, 32, 1);
     }
     PutWindowTilemap(gUnknown_203ACF0->field_4A[12]);
     CopyWindowToVram(gUnknown_203ACF0->field_4A[12], 2);
@@ -3100,9 +3095,8 @@ u8 sub_8106838(u8 categoryNum, u8 pageNum)
         if (i < count)
         {
             species = gDexCategories[categoryNum].page[pageNum].species[i];
-            if (sub_8106810(species) == TRUE)
-                if (sub_8104AB0(species, 0, 1))
-                    return 1;
+            if (sub_8106810(species) == TRUE && sub_8104AB0(species, 0, 1))
+                return 1;
         }
     }
     return 0;
@@ -3135,13 +3129,11 @@ void sub_81068DC(u8 categoryNum, u8 pageNum)
     for (i = 0; i < count; i++)
     {
         species = gDexCategories[categoryNum].page[pageNum].species[i];
-        if (sub_8106810(species) == TRUE)
-            if (sub_8104AB0(species, 0, 1))
-            {
-                gUnknown_203ACF0->field_18[gUnknown_203ACF0->field_2C]
-                    = gDexCategories[categoryNum].page[pageNum].species[i];
-                gUnknown_203ACF0->field_2C++;
-            }
+        if (sub_8106810(species) == TRUE && sub_8104AB0(species, 0, 1))
+        {
+            gUnknown_203ACF0->field_18[gUnknown_203ACF0->field_2C] = gDexCategories[categoryNum].page[pageNum].species[i];
+            gUnknown_203ACF0->field_2C++;
+        }
     }
 }
 
@@ -3196,9 +3188,8 @@ u8 sub_8106A20(u16 a0)
                     gUnknown_203ACF0->field_2D = v5;
                     return 0;
                 }
-                if (sub_8106810(species) == TRUE)
-                    if (sub_8104AB0(species, 0, 1))
-                        v5++;
+                if (sub_8106810(species) == TRUE && sub_8104AB0(species, 0, 1))
+                    v5++;
             }
         }
     }
@@ -3227,8 +3218,7 @@ u8 sub_8106B60(u16 species)
     sub_8104AB0(species, 2, 1);
     sub_8104AB0(species, 3, 1);
 
-    if (!IsNationalPokedexEnabled())
-        if (SpeciesToNationalPokedexNum(species) > KANTO_DEX_COUNT)
+    if (!IsNationalPokedexEnabled() && SpeciesToNationalPokedexNum(species) > KANTO_DEX_COUNT)
             return CreateTask(sub_8106BD8, 0);
 
     sub_810250C();

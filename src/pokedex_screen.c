@@ -3172,7 +3172,7 @@ u8 sub_8106A20(u16 a0)
     int i, j, k, categoryCount, categoryPageCount, v5;
     u16 species;
 
-    for (i = 0; i < DEX_CATEGORY_SIZE; i++)
+    for (i = 0; i < NELEMS(gDexCategories); i++)
     {
         categoryCount = gDexCategories[i].count;
         for (j = 0; j < categoryCount; j++)
@@ -3219,7 +3219,7 @@ u8 sub_8106B60(u16 species)
     sub_8104AB0(species, 3, 1);
 
     if (!IsNationalPokedexEnabled() && SpeciesToNationalPokedexNum(species) > KANTO_DEX_COUNT)
-            return CreateTask(sub_8106BD8, 0);
+        return CreateTask(sub_8106BD8, 0);
 
     sub_810250C();
     gTasks[gUnknown_203ACF0->field_00].func = sub_8106BE8;

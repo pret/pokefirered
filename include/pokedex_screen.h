@@ -11,8 +11,6 @@
 #define DEX_CATEGORY_URBAN         7
 #define DEX_CATEGORY_RARE          8
 
-#define DEX_CATEGORY_SIZE          NELEMS(gDexCategories)
-
 #include "pokedex.h"
 
 extern const struct PokedexEntry gPokedexEntries[];

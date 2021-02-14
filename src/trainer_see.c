@@ -317,7 +317,7 @@ static bool8 TrainerSeeFunc_WaitExclMark(u8 taskId, struct Task * task, struct O
         task->tFuncId++;
         if (trainerObj->movementType == MOVEMENT_TYPE_TREE_DISGUISE || trainerObj->movementType == MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
             task->tFuncId = 6;
-        if (trainerObj->movementType == MOVEMENT_TYPE_HIDDEN)
+        if (trainerObj->movementType == MOVEMENT_TYPE_BURIED)
             task->tFuncId = 8;
         return TRUE;
     }
@@ -393,7 +393,7 @@ static bool8 TrainerSeeFunc_WaitRemoveDisguise(u8 taskId, struct Task * task, st
     return FALSE;
 }
 
-// Jump here if hidden in ash. Not used in FRLG.
+// Jump here if buried in ash. Not used in FRLG.
 static bool8 TrainerSeeFunc_TrainerInAshFacesPlayer(u8 taskId, struct Task * task, struct ObjectEvent * trainerObj)
 {
     if (!ObjectEventIsMovementOverridden(trainerObj)

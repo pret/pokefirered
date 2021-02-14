@@ -1,3 +1,5 @@
+.set LOCALID_PROSPECTOR, 1
+
 ThreeIsland_DunsparceTunnel_MapScripts:: @ 8164D26
 	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_DunsparceTunnel_OnTransition
 	.byte 0
@@ -17,8 +19,8 @@ ThreeIsland_DunsparceTunnel_EventScript_SetLayoutDugOut:: @ 8164D50
 	return
 
 ThreeIsland_DunsparceTunnel_EventScript_MoveProspectorToWall:: @ 8164D54
-	setobjectxyperm 1, 6, 3
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_PROSPECTOR, 6, 3
+	setobjectmovementtype LOCALID_PROSPECTOR, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 ThreeIsland_DunsparceTunnel_EventScript_Prospector:: @ 8164D60
@@ -30,7 +32,7 @@ ThreeIsland_DunsparceTunnel_EventScript_Prospector:: @ 8164D60
 	goto_if_eq ThreeIsland_DunsparceTunnel_EventScript_ProspectorStruckGold
 	msgbox ThreeIsland_DunsparceTunnel_Text_ProspectingForGold
 	closemessage
-	applymovement 1, Movement_FaceOriginalDirection
+	applymovement LOCALID_PROSPECTOR, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

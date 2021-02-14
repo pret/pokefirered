@@ -1,3 +1,5 @@
+.set LOCALID_WONDER_NEWS_BERRY_MAN, 1
+
 CeruleanCity_House4_MapScripts:: @ 816ACEE
 	.byte 0
 
@@ -47,7 +49,7 @@ CeruleanCity_House4_EventScript_News2:: @ 816AD89
 	end
 
 CeruleanCity_House4_EventScript_NewsNotSpread:: @ 816ADAF
-	applymovement 1, Movement_FacePlayer
+	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_FacePlayer
 	waitmovement 0
 	msgbox CeruleanCity_House4_Text_WishCouldShareNewsWithOthers
 	release
@@ -72,7 +74,7 @@ CeruleanCity_House4_EventScript_NewsSpread2:: @ 816ADE9
 	end
 
 CeruleanCity_House4_EventScript_NewsDone:: @ 816AE0F
-	applymovement 1, Movement_FacePlayer
+	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_FacePlayer
 	waitmovement 0
 	msgbox CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews
 	release
@@ -80,11 +82,11 @@ CeruleanCity_House4_EventScript_NewsDone:: @ 816AE0F
 
 CeruleanCity_House4_EventScript_MovementReactionToNews:: @ 816AE23
 	playse SE_PIN
-	applymovement 1, Movement_ExclamationMark
+	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_FacePlayer
+	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_FacePlayer
 	waitmovement 0
-	applymovement 1, Movement_Delay48
+	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_Delay48
 	waitmovement 0
 	return
 

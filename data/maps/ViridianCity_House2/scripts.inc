@@ -1,3 +1,6 @@
+.set LOCALID_WOMAN, 1
+.set LOCALID_LASS,  2
+
 ViridianCity_House2_MapScripts:: @ 816A07C
 	.byte 0
 
@@ -6,7 +9,7 @@ ViridianCity_House2_EventScript_Lass:: @ 816A07D
 	faceplayer
 	msgbox ViridianCity_House2_Text_TryingToMemorizeNotes
 	closemessage
-	applymovement 2, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_LASS, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -16,7 +19,7 @@ ViridianCity_House2_EventScript_Woman:: @ 816A094
 	faceplayer
 	msgbox ViridianCity_House2_Text_ReadBlackboardCarefully
 	closemessage
-	applymovement 1, Movement_FaceOriginalDirection
+	applymovement LOCALID_WOMAN, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -36,7 +39,7 @@ ViridianCity_House2_EventScript_Notebook:: @ 816A0AB
 	compare VAR_RESULT, NO
 	goto_if_eq ViridianCity_House2_EventScript_StopReadingNotebook
 	msgbox ViridianCity_House2_Text_NotebookFourthPage
-	applymovement 2, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_LASS, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 1
 	msgbox ViridianCity_House2_Text_HeyDontLookAtMyNotes

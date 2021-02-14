@@ -1,8 +1,9 @@
-.equ LOCALID_POLICEMAN, 1
-.equ LOCALID_GRUNT,     2
-.equ LOCALID_SLOWBRO,   5
-.equ LOCALID_LASS,      6
-.equ LOCALID_RIVAL,     8
+.set LOCALID_POLICEMAN, 1
+.set LOCALID_GRUNT,     2
+.set LOCALID_SLOWBRO,   5
+.set LOCALID_LASS,      6
+.set LOCALID_RIVAL,     8
+.set LOCALID_WOMAN,     11
 
 CeruleanCity_MapScripts:: @ 8166471
 	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCity_OnTransition
@@ -276,7 +277,7 @@ CeruleanCity_EventScript_Woman:: @ 8166738
 	faceplayer
 	msgbox CeruleanCity_Text_WantBrightRedBicycle
 	closemessage
-	applymovement 11, Movement_FaceOriginalDirection
+	applymovement LOCALID_WOMAN, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

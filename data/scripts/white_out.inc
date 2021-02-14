@@ -19,10 +19,12 @@ EventScript_AfterWhiteOutHealMsg:: @ 81A8DCF
 	msgbox Text_MonsHealed
 	return
 
+@ LOCALID_MOM set by PalletTown_PlayersHouse_1F
+
 EventScript_AfterWhiteOutMomHeal:: @ 81A8DD8
 	lockall
 	textcolor 1
-	applymovement 1, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_MOM, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Text_HadQuiteAnExperienceTakeRest
 	call EventScript_OutOfCenterPartyHeal

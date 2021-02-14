@@ -1,3 +1,5 @@
+.set LOCALID_EEVEE_POKEBALL, 2
+
 CeladonCity_Condominiums_RoofRoom_MapScripts:: @ 816C463
 	.byte 0
 
@@ -20,7 +22,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall:: @ 816C46D
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty:: @ 816C4A6
-	removeobject 2
+	removeobject LOCALID_EEVEE_POKEBALL
 	playfanfare MUS_LEVEL_UP
 	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
 	waitmessage
@@ -35,7 +37,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty:: @ 816C4A6
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveePC:: @ 816C4DA
-	removeobject 2
+	removeobject LOCALID_EEVEE_POKEBALL
 	playfanfare MUS_LEVEL_UP
 	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
 	waitmessage

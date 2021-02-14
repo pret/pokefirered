@@ -3764,7 +3764,7 @@ u32 FldEff_Unk44(void)
     }
     else
     {
-        FieldEffectActiveListRemove(FLDEFF_UNK_44);
+        FieldEffectActiveListRemove(FLDEFF_DESTROY_DEOXYS_ROCK);
     }
     return FALSE;
 }
@@ -3846,7 +3846,7 @@ static void Unk44Effect_2(s16 *data, u8 taskId)
     {
         InstallCameraPanAheadCallback();
         RemoveObjectEventByLocalIdAndMap(data[6], data[7], data[8]);
-        FieldEffectActiveListRemove(FLDEFF_UNK_44);
+        FieldEffectActiveListRemove(FLDEFF_DESTROY_DEOXYS_ROCK);
         DestroyTask(taskId);
     }
 }

@@ -1,3 +1,7 @@
+.set LOCALID_GRUNT1, 2
+.set LOCALID_GRUNT2, 3
+.set LOCALID_GRUNT3, 4
+
 PokemonTower_7F_MapScripts:: @ 8163559
 	.byte 0
 
@@ -30,25 +34,25 @@ PokemonTower_7F_EventScript_DefeatedGrunt1:: @ 81635A1
 	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitRight
 	compare VAR_0x8004, 9
 	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitLeft
-	applymovement 2, PokemonTower_7F_Movement_Grunt1Exit
+	applymovement LOCALID_GRUNT1, PokemonTower_7F_Movement_Grunt1Exit
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
 PokemonTower_7F_EventScript_Grunt1ExitMid:: @ 81635E0
-	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitMid
+	applymovement LOCALID_GRUNT1, PokemonTower_7F_Movement_Grunt1ExitMid
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
 PokemonTower_7F_EventScript_Grunt1ExitRight:: @ 81635F0
-	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitRight
+	applymovement LOCALID_GRUNT1, PokemonTower_7F_Movement_Grunt1ExitRight
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
 PokemonTower_7F_EventScript_Grunt1ExitLeft:: @ 8163600
-	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitLeft
+	applymovement LOCALID_GRUNT1, PokemonTower_7F_Movement_Grunt1ExitLeft
 	waitmovement 0
 	playse SE_EXIT
 	delay 25
@@ -56,7 +60,7 @@ PokemonTower_7F_EventScript_Grunt1ExitLeft:: @ 8163600
 	end
 
 PokemonTower_7F_EventScript_RemoveGrunt1:: @ 8163616
-	removeobject 2
+	removeobject LOCALID_GRUNT1
 	release
 	end
 
@@ -116,25 +120,25 @@ PokemonTower_7F_EventScript_DefeatedGrunt2:: @ 8163658
 	goto_if_eq PokemonTower_7F_EventScript_Grunt2ExitLeft
 	compare VAR_0x8004, 13
 	goto_if_eq PokemonTower_7F_EventScript_Grunt2ExitRight
-	applymovement 3, PokemonTower_7F_Movement_Grunt2Exit
+	applymovement LOCALID_GRUNT2, PokemonTower_7F_Movement_Grunt2Exit
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt2
 	end
 
 PokemonTower_7F_EventScript_Grunt2ExitLeft:: @ 8163699
-	applymovement 3, PokemonTower_7F_Movement_Grunt2ExitLeft
+	applymovement LOCALID_GRUNT2, PokemonTower_7F_Movement_Grunt2ExitLeft
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt2
 	end
 
 PokemonTower_7F_EventScript_Grunt2ExitRight:: @ 81636A9
-	applymovement 3, PokemonTower_7F_Movement_Grunt2ExitRight
+	applymovement LOCALID_GRUNT2, PokemonTower_7F_Movement_Grunt2ExitRight
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt2
 	end
 
 PokemonTower_7F_EventScript_RemoveGrunt2:: @ 81636B9
-	removeobject 3
+	removeobject LOCALID_GRUNT2
 	release
 	end
 
@@ -181,25 +185,25 @@ PokemonTower_7F_EventScript_DefeatedGrunt3:: @ 81636F1
 	goto_if_eq PokemonTower_7F_EventScript_Grunt3ExitRight
 	compare VAR_0x8004, 9
 	goto_if_eq PokemonTower_7F_EventScript_Grunt3ExitLeft
-	applymovement 4, PokemonTower_7F_Movement_Grunt3Exit
+	applymovement LOCALID_GRUNT3, PokemonTower_7F_Movement_Grunt3Exit
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt3
 	end
 
 PokemonTower_7F_EventScript_Grunt3ExitRight:: @ 8163725
-	applymovement 4, PokemonTower_7F_Movement_Grunt3ExitRight
+	applymovement LOCALID_GRUNT3, PokemonTower_7F_Movement_Grunt3ExitRight
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt3
 	end
 
 PokemonTower_7F_EventScript_Grunt3ExitLeft:: @ 8163735
-	applymovement 4, PokemonTower_7F_Movement_Grunt3ExitLeft
+	applymovement LOCALID_GRUNT3, PokemonTower_7F_Movement_Grunt3ExitLeft
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt3
 	end
 
 PokemonTower_7F_EventScript_RemoveGrunt3:: @ 8163745
-	removeobject 4
+	removeobject LOCALID_GRUNT3
 	release
 	end
 

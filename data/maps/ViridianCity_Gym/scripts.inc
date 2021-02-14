@@ -1,3 +1,5 @@
+.set LOCALID_GIOVANNI, 8
+
 ViridianCity_Gym_MapScripts:: @ 8169EC9
 	.byte 0
 
@@ -8,7 +10,7 @@ ViridianCity_Gym_EventScript_Giovanni:: @ 8169ECA
 	msgbox ViridianCity_Gym_Text_GiovanniPostBattle
 	closemessage
 	fadescreen FADE_TO_BLACK
-	removeobject 8
+	removeobject LOCALID_GIOVANNI
 	fadescreen FADE_FROM_BLACK
 	release
 	end

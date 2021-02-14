@@ -1,3 +1,6 @@
+.set LOCALID_GRUNT1, 2
+.set LOCALID_GRUNT2, 3
+
 MtEmber_Exterior_MapScripts:: @ 8163946
 	map_script MAP_SCRIPT_ON_TRANSITION, MtEmber_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, MtEmber_Exterior_OnLoad
@@ -10,8 +13,8 @@ MtEmber_Exterior_OnTransition:: @ 8163951
 	end
 
 MtEmber_Exterior_EventScript_RocketsFaceDown:: @ 8163960
-	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_DOWN
-	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype LOCALID_GRUNT1, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype LOCALID_GRUNT2, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 MtEmber_Exterior_OnLoad:: @ 8163969
@@ -38,7 +41,7 @@ MtEmber_Exterior_EventScript_Grunt1Defeated:: @ 816399E
 	end
 
 MtEmber_Exterior_EventScript_BattleGrunt1:: @ 81639A8
-	applymovement 2, Movement_FacePlayer
+	applymovement LOCALID_GRUNT1, Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_ROCKET, 0
 	msgbox MtEmber_Exterior_Text_Grunt1Intro
@@ -52,8 +55,8 @@ MtEmber_Exterior_EventScript_DefeatedBothGrunts:: @ 81639DB
 	msgbox MtEmber_Exterior_Text_WellRegroupDontStepInsideThere
 	closemessage
 	fadescreen FADE_TO_BLACK
-	removeobject 2
-	removeobject 3
+	removeobject LOCALID_GRUNT1
+	removeobject LOCALID_GRUNT2
 	fadescreen FADE_FROM_BLACK
 	release
 	end
@@ -66,7 +69,7 @@ MtEmber_Exterior_EventScript_Grunt2:: @ 81639F0
 	goto_if_eq MtEmber_Exterior_EventScript_BattleGrunt2
 	msgbox MtEmber_Exterior_Text_YoureInTheWayGetLost
 	closemessage
-	applymovement 3, Movement_FaceOriginalDirection
+	applymovement LOCALID_GRUNT2, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -92,18 +95,18 @@ MtEmber_Exterior_EventScript_RocketPasswordScene:: @ 8163A4E
 	message MtEmber_Exterior_Text_WhatsPasswordAgain
 	waitmessage
 	playse SE_PIN
-	applymovement 3, Movement_QuestionMark
+	applymovement LOCALID_GRUNT2, Movement_QuestionMark
 	waitmovement 0
 	waitbuttonpress
 	msgbox MtEmber_Exterior_Text_FirstPasswordGoldeen
-	applymovement 2, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_GRUNT1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 2, Movement_ExclamationMark
+	applymovement LOCALID_GRUNT1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_Delay48
+	applymovement LOCALID_GRUNT1, Movement_Delay48
 	waitmovement 0
-	applymovement 3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_GRUNT2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	call MtEmber_Exterior_EventScript_RocketsFaceDown
 	msgbox MtEmber_Exterior_Text_SnoopsBeenListeningIn

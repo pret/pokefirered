@@ -131,7 +131,7 @@ static bool8 CopyablePlayerMovement_Jump(struct ObjectEvent *objectEvent, struct
 static bool8 MovementType_CopyPlayer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_CopyPlayerInGrass_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_CopyPlayer_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_Hidden_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_Buried_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_WalkInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_MoveInPlace_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_WalkSlowlyInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
@@ -571,8 +571,8 @@ u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct 
     MovementType_CopyPlayer_Step2,
 };
 
-u8 (*const gMovementTypeFuncs_Hidden[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_Hidden_Step0,
+u8 (*const gMovementTypeFuncs_Buried[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_Buried_Step0,
 };
 
 u8 (*const gMovementTypeFuncs_WalkInPlace[])(struct ObjectEvent *, struct Sprite *) = {

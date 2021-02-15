@@ -89,7 +89,7 @@ static bool8 sub_805E27C(struct ObjectEventTemplate *, s16, s16);
 static bool8 sub_805E2E8(struct ObjectEventTemplate *, s16, s16);
 static void sub_805E384(struct ObjectEventTemplate *);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementType_Hidden_Callback(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
 static u8 sub_8063304(struct ObjectEvent *, struct Sprite *);
 static u8 sub_8063324(struct ObjectEvent *, struct Sprite *);
 static u8 sub_8063344(struct ObjectEvent *, struct Sprite *);
@@ -142,7 +142,7 @@ static void MovementType_CopyPlayer(struct Sprite *);
 static void MovementType_TreeDisguise(struct Sprite *);
 static void MovementType_MountainDisguise(struct Sprite *);
 static void MovementType_CopyPlayerInGrass(struct Sprite *);
-static void MovementType_Hidden(struct Sprite *);
+static void MovementType_Buried(struct Sprite *);
 static void MovementType_WalkInPlace(struct Sprite *);
 static void MovementType_WalkSlowlyInPlace(struct Sprite *);
 static void MovementType_JogInPlace(struct Sprite *);
@@ -261,7 +261,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
     MovementType_CopyPlayerInGrass,
     MovementType_CopyPlayerInGrass,
     MovementType_CopyPlayerInGrass,
-    MovementType_Hidden,
+    MovementType_Buried,
     MovementType_WalkInPlace,
     MovementType_WalkInPlace,
     MovementType_WalkInPlace,
@@ -345,7 +345,7 @@ const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = TRUE,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = TRUE,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = TRUE,
-    [MOVEMENT_TYPE_HIDDEN] = FALSE,
+    [MOVEMENT_TYPE_BURIED] = FALSE,
     [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = FALSE,
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = FALSE,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = FALSE,
@@ -429,7 +429,7 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = DIR_SOUTH,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = DIR_WEST,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = DIR_EAST,
-    [MOVEMENT_TYPE_HIDDEN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_BURIED] = DIR_SOUTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = DIR_SOUTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = DIR_WEST,
@@ -4739,7 +4739,7 @@ static void MovementType_MountainDisguise(struct Sprite *sprite)
     UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_Disguise_Callback);
 }
 
-static void MovementType_Hidden(struct Sprite *sprite)
+static void MovementType_Buried(struct Sprite *sprite)
 {
     if (!sprite->data[7])
     {
@@ -4748,15 +4748,15 @@ static void MovementType_Hidden(struct Sprite *sprite)
         sprite->oam.priority = 3;
         sprite->data[7]++;
     }
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_Hidden_Callback);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_Buried_Callback);
 }
 
-static bool8 MovementType_Hidden_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_Buried_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return gMovementTypeFuncs_Hidden[sprite->data[1]](objectEvent, sprite);
+    return gMovementTypeFuncs_Buried[sprite->data[1]](objectEvent, sprite);
 }
 
-static bool8 MovementType_Hidden_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_Buried_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
     return FALSE;
@@ -7382,7 +7382,7 @@ static bool8 do_smile_bubble(struct ObjectEvent *objectEvent, struct Sprite *spr
 
 static bool8 MovementAction_RevealTrainer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (objectEvent->movementType == MOVEMENT_TYPE_HIDDEN)
+    if (objectEvent->movementType == MOVEMENT_TYPE_BURIED)
     {
         MovementAction_RevealTrainer_RunTrainerSeeFuncList(objectEvent);
         return FALSE;

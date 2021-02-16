@@ -715,6 +715,52 @@ struct TrainerNameRecord
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
+// For external event data storage. The majority of these may have never been used.
+// In FRLG, the only known used fields are the PokeCoupon and BoxRS ones, but hacking the distribution discs allows FRLG to receive events and set the others
+struct ExternalEventData
+{
+    u8 unknownExternalDataFields1[7]; // if actually used, may be broken up into different fields.
+    u32 unknownExternalDataFields2:8;
+    u32 currentPokeCoupons:24; // PokéCoupons stored by Pokémon Colosseum and XD from Mt. Battle runs. Earned PokéCoupons are also added to totalEarnedPokeCoupons. Colosseum/XD caps this at 9,999,999, but will read up to 16,777,215.
+    u32 gotGoldPokeCouponTitleReward:1; // Master Ball from Jp Colosseum Bonus Disc; for reaching 30,000 totalEarnedPokeCoupons
+    u32 gotSilverPokeCouponTitleReward:1; // Light Ball Pikachu from JP Colosseum Bonus Disc; for reaching 5000 totalEarnedPokeCoupons
+    u32 gotBronzePokeCouponTitleReward:1; // PP Max from JP Colosseum Bonus Disc; for reaching 2500 totalEarnedPokeCoupons
+    u32 receivedAgetoCelebi:1; // from JP Colosseum Bonus Disc
+    u32 unknownExternalDataFields3:4;
+    u32 totalEarnedPokeCoupons:24; // Used by the JP Colosseum bonus disc. Determines PokéCoupon rank to distribute rewards. Unread in International games. Colosseum/XD caps this at 9,999,999.
+    u8 unknownExternalDataFields4[5]; // if actually used, may be broken up into different fields.
+} __attribute__((packed)); /*size = 0x14*/
+
+// For external event flags. The majority of these may have never been used.
+// In FRLG, Jirachi cannot normally be received, but hacking the distribution discs allows FRLG to receive Jirachi and set the flag
+struct ExternalEventFlags
+{
+    u8 usedBoxRS:1; // Set by Pokémon Box: Ruby & Sapphire; denotes whether this save has connected to it and triggered the free False Swipe Swablu Egg giveaway.
+    u8 boxRSEggsUnlocked:2; // Set by Pokémon Box: Ruby & Sapphire; denotes the number of Eggs unlocked from deposits; 1 for ExtremeSpeed Zigzagoon (at 100 deposited), 2 for Pay Day Skitty (at 500 deposited), 3 for Surf Pichu (at 1500 deposited)
+    u8 padding:5;
+    u8 unknownFlag1;
+    u8 receivedGCNJirachi; // Both the US Colosseum Bonus Disc and PAL/AUS Pokémon Channel use this field. One cannot receive a WISHMKR Jirachi and CHANNEL Jirachi with the same savefile.
+    u8 unknownFlag3;
+    u8 unknownFlag4;
+    u8 unknownFlag5;
+    u8 unknownFlag6;
+    u8 unknownFlag7;
+    u8 unknownFlag8;
+    u8 unknownFlag9;
+    u8 unknownFlag10;
+    u8 unknownFlag11;
+    u8 unknownFlag12;
+    u8 unknownFlag13;
+    u8 unknownFlag14;
+    u8 unknownFlag15;
+    u8 unknownFlag16;
+    u8 unknownFlag17;
+    u8 unknownFlag18;
+    u8 unknownFlag19;
+    u8 unknownFlag20;
+
+} __attribute__((packed));/*size = 0x15*/
+
 #define UNION_ROOM_KB_ROW_COUNT 10
 
 struct SaveBlock1
@@ -761,7 +807,9 @@ struct SaveBlock1
     /*0x2F18*/ OldMan oldMan; // unused
     /*0x2F54*/ struct EasyChatPair easyChatPairs[5]; // unused
     /*0x2F80*/ struct DayCare daycare;
-    /*0x309C*/ u8 giftRibbons[52];
+    /*0x309C*/ u8 giftRibbons[11];
+    /*0x30A7*/ struct ExternalEventData externalEventData;
+    /*0x30BB*/ struct ExternalEventFlags externalEventFlags;
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
     /*0x3120*/ struct MEventBuffers mysteryEventBuffers;

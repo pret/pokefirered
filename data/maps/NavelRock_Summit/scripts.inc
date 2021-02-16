@@ -63,7 +63,7 @@ NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 70  @ Level
 	setvar VAR_0x8006, ITEM_NONE
-	special CreateObedientEnemyMon
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate

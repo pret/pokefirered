@@ -206,8 +206,8 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_signmsg
 	.4byte ScrCmd_normalmsg
 	.4byte ScrCmd_comparestattoword
-	.4byte ScrCmd_setmonobedient
-	.4byte ScrCmd_checkmonobedience
+	.4byte ScrCmd_setmoneventlegal
+	.4byte ScrCmd_checkmoneventlegal
 	.4byte ScrCmd_execram
 	.4byte ScrCmd_setworldmapflag
 	.4byte ScrCmd_warpteleport2

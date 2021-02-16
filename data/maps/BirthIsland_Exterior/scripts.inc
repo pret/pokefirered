@@ -87,7 +87,7 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 81652C0
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	setvar VAR_0x8005, 30  @ Level
 	setvar VAR_0x8006, ITEM_NONE
-	special CreateObedientEnemyMon
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate

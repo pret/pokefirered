@@ -4,6 +4,7 @@
 #include "string_util.h"
 #include "window.h"
 #include "text.h"
+#include "blit.h"
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
 static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -210,4 +211,118 @@ u8 GetLastTextColor(u8 colorType)
         default:
             return 0;
     }
+}
+
+#define GLYPH_COPY(widthOffset, heightOffset, width, height, a4, a5, a6, sizeX)                                 \
+{                                                                                                               \
+    int xAdd, v1, yAdd, v3, toOrr, bits;                                                                        \
+    u8 * src, * dst;                                                                                            \
+    u32 v8;                                                                                                     \
+                                                                                                                \
+    src = (gGlyphInfo) + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                  \
+    for (yAdd = 0, v3 = a6 + heightOffset; yAdd < height; yAdd++, v3++)                                         \
+    {                                                                                                           \
+        v8 = *(u32 *)src;                                                                                       \
+        for (xAdd = 0, v1 = a5 + widthOffset; xAdd < width; xAdd++, v1++)                                       \
+        {                                                                                                       \
+            dst = (u8 *)((a4) + (((v1) >> 1) & 3) + (((v1) >> 3) << 5) + ((((v3) >> 3) * (sizeX)) << 5) + ((u32)((v3) << 29) >> 27));                                                                                               \
+            toOrr = (v8 >> (xAdd * 4)) & 0xF;                                                                   \
+            if (toOrr != 0)                                                                                     \
+            {                                                                                                   \
+                bits = (v1 & 1) * 4;                                                                            \
+                *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));                                               \
+            }                                                                                                   \
+        }                                                                                                       \
+        src += 4;                                                                                               \
+    }                                                                                                           \
+}
+
+void CopyGlyphToWindow(struct TextPrinter *textPrinter)
+{
+    int r0, r1;
+    u8 r2;
+    
+    if (gWindows[textPrinter->printerTemplate.windowId].window.width * 8 - textPrinter->printerTemplate.currentX < gGlyphInfo[0x80])
+        r0 = gWindows[textPrinter->printerTemplate.windowId].window.width * 8 - textPrinter->printerTemplate.currentX;
+    else
+        r0 = gGlyphInfo[0x80];
+    if (gWindows[textPrinter->printerTemplate.windowId].window.height * 8 - textPrinter->printerTemplate.currentY < gGlyphInfo[0x81])
+        r1 = gWindows[textPrinter->printerTemplate.windowId].window.height * 8 - textPrinter->printerTemplate.currentY;
+    else
+        r1 = gGlyphInfo[0x81];
+    
+    r2 = 0;
+    if (r0 > 8)
+        r2 |= 1;
+    if (r1 > 8)
+        r2 |= 2;
+    
+    switch (r2)
+    {
+        case 0:
+            GLYPH_COPY(0, 0, r0, r1, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            return;
+        case 1:
+            GLYPH_COPY(0, 0, 8, r1, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            GLYPH_COPY(8, 0, r0 - 8, r1, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            return;
+        case 2:
+            GLYPH_COPY(0, 0, r0, 8, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            GLYPH_COPY(0, 8, r0, r1 - 8, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            return;
+        case 3:
+            GLYPH_COPY(0, 0, 8, 8, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            GLYPH_COPY(8, 0, r0 - 8, 8, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            GLYPH_COPY(0, 8, 8, r1 - 8, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            GLYPH_COPY(8, 8, r0 - 8, r1 - 8, gWindows[textPrinter->printerTemplate.windowId].tileData, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY, ((((gWindows[textPrinter->printerTemplate.windowId].window.width * 8)) + ((gWindows[textPrinter->printerTemplate.windowId].window.width * 8) & 7)) >> 3));
+            return;
+    }
+}
+
+void sub_8003614(void * tileData, u16 currentX, u16 currentY, u16 width, u16 height)
+{
+    int r0, r1;
+    u8 r2;
+    u16 r3;
+    
+    if (width - currentX < gGlyphInfo[0x80])
+        r0 = width - currentX;
+    else
+        r0 = gGlyphInfo[0x80];
+    if (height - currentY < gGlyphInfo[0x81])
+        r1 = height - currentY;
+    else
+        r1 = gGlyphInfo[0x81];
+    
+    r2 = 0;
+    r3  = (((width) + (width & 7)) >> 3);
+    if (r0 > 8)
+        r2 |= 1;
+    if (r1 > 8)
+        r2 |= 2;
+    
+    switch (r2)
+    {
+        case 0:
+            GLYPH_COPY(0, 0, r0, r1, tileData, currentX, currentY, r3);
+            return;
+        case 1:
+            GLYPH_COPY(0, 0, 8, r1, tileData, currentX, currentY, r3);
+            GLYPH_COPY(8, 0, r0 - 8, r1, tileData, currentX, currentY, r3);
+            return;
+        case 2:
+            GLYPH_COPY(0, 0, r0, 8, tileData, currentX, currentY, r3);
+            GLYPH_COPY(0, 8, r0, r1 - 8, tileData, currentX, currentY, r3);
+            return;
+        case 3:
+            GLYPH_COPY(0, 0, 8, 8, tileData, currentX, currentY, r3);
+            GLYPH_COPY(8, 0, r0 - 8, 8, tileData, currentX, currentY, r3);
+            GLYPH_COPY(0, 8, 8, r1 - 8, tileData, currentX, currentY, r3);
+            GLYPH_COPY(8, 8, r0 - 8, r1 - 8, tileData, currentX, currentY, r3);
+            return;
+    }
+}
+
+void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
+{
 }

@@ -51,7 +51,6 @@ SECTIONS {
         src/bg.o(.text);
         src/malloc.o(.text);
         src/text_printer.o(.text);
-        asm/text_printer.o(.text);
         src/window.o(.text);
         src/blit.o(.text);
         src/window_8bpp.o(.text);

@@ -219,7 +219,7 @@ u8 GetLastTextColor(u8 colorType)
     u8 * src, * dst;                                                                                            \
     u32 v8;                                                                                                     \
                                                                                                                 \
-    src = (gGlyphInfo) + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                  \
+    src = gGlyphInfo + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                    \
     for (yAdd = 0, v3 = a6 + heightOffset; yAdd < height; yAdd++, v3++)                                         \
     {                                                                                                           \
         v8 = *(u32 *)src;                                                                                       \

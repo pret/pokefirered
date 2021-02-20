@@ -145,9 +145,16 @@ my $docPct = sprintf("%.4f", 100 * $documented / $total_syms);
 my $partialPct = sprintf("%.4f", 100 * $partial_documented / $total_syms);
 my $undocPct = sprintf("%.4f", 100 * $undocumented / $total_syms);
 
-print "$total total bytes of code\n";
-print "$src bytes of code in src ($srcPct%)\n";
-print "$asm bytes of code in asm ($asmPct%)\n";
+if ($asm == 0)
+{
+    print "Code decompilation is 100% complete\n"
+}
+else
+{
+    print "$total total bytes of code\n";
+    print "$src bytes of code in src ($srcPct%)\n";
+    print "$asm bytes of code in asm ($asmPct%)\n";
+}
 print "\n";
 
 if ($verbose != 0)
@@ -160,12 +167,19 @@ if ($verbose != 0)
     print "\n";
 }
 
-print "$total_syms total symbols\n";
-print "$documented symbols documented ($docPct%)\n";
-print "$partial_documented symbols partially documented ($partialPct%)\n";
-print "$undocumented symbols undocumented ($undocPct%)\n";
-
+if ($partial_documented == 0 && $undocumented == 0)
+{
+    print "Documentation is 100% complete\n"
+}
+else
+{
+    print "$total_syms total symbols\n";
+    print "$documented symbols documented ($docPct%)\n";
+    print "$partial_documented symbols partially documented ($partialPct%)\n";
+    print "$undocumented symbols undocumented ($undocPct%)\n";
+}
 print "\n";
+
 my $dataTotal = $srcdata + $data;
 my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
 my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);

@@ -1322,53 +1322,72 @@ static u8 GetObjectEventIdByLocalId(u8 localId)
     return OBJECT_EVENTS_COUNT;
 }
 
-#ifdef NONMATCHING
 static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup)
 {
     struct ObjectEvent *objectEvent;
-    struct ObjectEventTemplate *template2 = template;
+    const struct MapHeader *template2;
+
     u8 objectEventId;
-    s16 x;
-    s16 y;
-    s16 var;
-    s16 x2;
-    s16 y2;
-    s16 elevation2;
-    
-    if(template->inConnection == 0xFF)
+    s16 x, y;
+    bool8 var;
+    u8 elevation2;
+    s16 x2, y2;
+    s16 tempX, tempY;
+
+	var	= FALSE;
+	elevation2 = 0;
+	x2 = 0;
+	y2 = 0;
+	tempX = 0;
+	tempY = 0;
+	
+	if (template->inConnection == 0xFF)
     {
-        var = 1;
-        mapNum = template2->trainerType;
-        mapGroup = template2->trainerRange_berryTreeId & 0xFF;
-        elevation2 = template2->elevation;
-        x = template2->x;
-        y = template2->y;
-        x2 = template2->x;
-        y2 = template2->y;
-        template = &Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->events->objectEvents[elevation2 - 1];
-    }
-    if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId)
-        && !sub_805E238(template, var, x2, y2))
-        return OBJECT_EVENTS_COUNT;
-    objectEvent = &gObjectEvents[objectEventId];
-    ClearObjectEvent(objectEvent);
-    if (var)
+		var = TRUE;
+		elevation2 = template->elevation;
+		mapNum	= template->trainerType;
+		mapGroup	= template->trainerRange_berryTreeId;
+		x2	= template->x;
+		y2	= template->y;
+		tempX = template->x;
+		tempY = template->y;
+
+		template2 = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+		template = &(template2->events->objectEvents[elevation2 - 1]);
+	}
+
+	if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId))
+	{
+		return OBJECT_EVENTS_COUNT;
+	}
+
+	if (!sub_805E238(template, var, tempX, tempY))
     {
-        x = x2 * 0x10000 + 0x7000;
-        y = y2 * 0x10000 + 0x7000;
-    }
+		return OBJECT_EVENTS_COUNT;
+	}
+
+	objectEvent = &gObjectEvents[objectEventId];
+
+	ClearObjectEvent(objectEvent);
+	
+	if(var)
+    {
+		x = x2 + 7;
+		y = y2 + 7;
+	}
     else
     {
-        x = x2 + 7;
-        y = y2 + 7;
-    }
-    objectEvent->active = TRUE;
+		x = template->x + 7;
+		y = template->y + 7;
+	}
+	
+	objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->graphicsId = template->graphicsId;
     objectEvent->movementType = template->movementType;
     objectEvent->localId = template->localId;
     objectEvent->mapNum = mapNum;
-    // objectEvent++; objectEvent--; is a trick used in pokeruby and pokeemerald here
+
     objectEvent->mapGroup = mapGroup;
     objectEvent->initialCoords.x = x;
     objectEvent->initialCoords.y = y;
@@ -1382,254 +1401,26 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->range.as_nybbles.y = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
+    objectEvent->mapNum = mapNum; // Redundant, since it was already assigned above, but needed to match
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
-    SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
-    SetObjectEventDynamicGraphicsId(objectEvent);
-/*#ifndef NONMATCHING
-    asm("":::"r5", "r6"); is a trick used in pokeruby and pokeemerald here
-#endif*/
-    if (gRangedMovementTypes[objectEvent->movementType])
-    {
-        if (objectEvent->range.as_nybbles.x == 0)
+	SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
+	SetObjectEventDynamicGraphicsId(objectEvent);
+
+	if (gRangedMovementTypes[objectEvent->movementType])
+	{
+		if (objectEvent->range.as_nybbles.x == 0)
         {
             objectEvent->range.as_nybbles.x++;
         }
+
         if (objectEvent->range.as_nybbles.y == 0)
         {
             objectEvent->range.as_nybbles.y++;
         }
-    }
-    return objectEventId;
+	}
+
+	return objectEventId;
 }
-#else
-NAKED
-static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0xC\n\
-        adds r5, r0, 0\n\
-        lsls r1, 24\n\
-        lsrs r7, r1, 24\n\
-        lsls r2, 24\n\
-        lsrs r6, r2, 24\n\
-        movs r0, 0\n\
-        mov r10, r0\n\
-        mov r8, r0\n\
-        mov r9, r0\n\
-        movs r1, 0\n\
-        str r1, [sp, 0x4]\n\
-        str r0, [sp, 0x8]\n\
-        ldrb r0, [r5, 0x2]\n\
-        cmp r0, 0xFF\n\
-        bne _0805E0DA\n\
-        movs r1, 0x1\n\
-        mov r10, r1\n\
-        ldrb r4, [r5, 0x8]\n\
-        ldrb r7, [r5, 0xC]\n\
-        ldrb r6, [r5, 0xE]\n\
-        ldrh r0, [r5, 0x4]\n\
-        mov r8, r0\n\
-        ldrh r5, [r5, 0x6]\n\
-        mov r9, r5\n\
-        mov r1, r8\n\
-        str r1, [sp, 0x4]\n\
-        mov r0, r9\n\
-        str r0, [sp, 0x8]\n\
-        adds r0, r6, 0\n\
-        adds r1, r7, 0\n\
-        bl Overworld_GetMapHeaderByGroupAndId\n\
-        ldr r1, [r0, 0x4]\n\
-        lsls r0, r4, 1\n\
-        adds r0, r4\n\
-        lsls r0, 3\n\
-        subs r0, 0x18\n\
-        ldr r1, [r1, 0x4]\n\
-        adds r5, r1, r0\n\
-    _0805E0DA:\n\
-        ldrb r0, [r5]\n\
-        adds r1, r7, 0\n\
-        adds r2, r6, 0\n\
-        mov r3, sp\n\
-        bl GetAvailableObjectEventId\n\
-        lsls r0, 24\n\
-        cmp r0, 0\n\
-        bne _0805E106\n\
-        ldr r1, [sp, 0x4]\n\
-        lsls r2, r1, 16\n\
-        asrs r2, 16\n\
-        ldr r0, [sp, 0x8]\n\
-        lsls r3, r0, 16\n\
-        asrs r3, 16\n\
-        adds r0, r5, 0\n\
-        mov r1, r10\n\
-        bl sub_805E238\n\
-        lsls r0, 24\n\
-        cmp r0, 0\n\
-        bne _0805E10A\n\
-    _0805E106:\n\
-        movs r0, 0x10\n\
-        b _0805E220\n\
-    _0805E10A:\n\
-        mov r0, sp\n\
-        ldrb r1, [r0]\n\
-        lsls r0, r1, 3\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        ldr r1, _0805E13C @ =gObjectEvents\n\
-        adds r4, r0, r1\n\
-        adds r0, r4, 0\n\
-        bl ClearObjectEvent\n\
-        mov r1, r10\n\
-        cmp r1, 0\n\
-        beq _0805E140\n\
-        mov r1, r8\n\
-        lsls r0, r1, 16\n\
-        movs r1, 0xE0\n\
-        lsls r1, 11\n\
-        adds r0, r1\n\
-        lsrs r3, r0, 16\n\
-        mov r1, r9\n\
-        lsls r0, r1, 16\n\
-        movs r1, 0xE0\n\
-        lsls r1, 11\n\
-        adds r0, r1\n\
-        b _0805E14E\n\
-        .align 2, 0\n\
-    _0805E13C: .4byte gObjectEvents\n\
-    _0805E140:\n\
-        ldrh r0, [r5, 0x4]\n\
-        adds r0, 0x7\n\
-        lsls r0, 16\n\
-        lsrs r3, r0, 16\n\
-        ldrh r0, [r5, 0x6]\n\
-        adds r0, 0x7\n\
-        lsls r0, 16\n\
-    _0805E14E:\n\
-        lsrs r2, r0, 16\n\
-        ldrb r0, [r4]\n\
-        movs r1, 0x1\n\
-        orrs r0, r1\n\
-        movs r1, 0x4\n\
-        orrs r0, r1\n\
-        strb r0, [r4]\n\
-        ldrb r0, [r5, 0x1]\n\
-        strb r0, [r4, 0x5]\n\
-        ldrb r0, [r5, 0x9]\n\
-        strb r0, [r4, 0x6]\n\
-        ldrb r0, [r5]\n\
-        strb r0, [r4, 0x8]\n\
-        strb r7, [r4, 0x9]\n\
-        strb r6, [r4, 0xA]\n\
-        strh r3, [r4, 0xC]\n\
-        strh r2, [r4, 0xE]\n\
-        strh r3, [r4, 0x10]\n\
-        strh r2, [r4, 0x12]\n\
-        strh r3, [r4, 0x14]\n\
-        strh r2, [r4, 0x16]\n\
-        ldrb r0, [r5, 0x8]\n\
-        movs r6, 0xF\n\
-        adds r1, r6, 0\n\
-        ands r1, r0\n\
-        ldrb r2, [r4, 0xB]\n\
-        movs r0, 0x10\n\
-        negs r0, r0\n\
-        mov r8, r0\n\
-        ands r0, r2\n\
-        orrs r0, r1\n\
-        strb r0, [r4, 0xB]\n\
-        ldrb r1, [r5, 0x8]\n\
-        lsls r1, 4\n\
-        ands r0, r6\n\
-        orrs r0, r1\n\
-        strb r0, [r4, 0xB]\n\
-        ldrb r1, [r5, 0xA]\n\
-        lsls r1, 28\n\
-        movs r0, 0xF\n\
-        mov r9, r0\n\
-        lsrs r1, 28\n\
-        ldrb r2, [r4, 0x19]\n\
-        mov r0, r8\n\
-        ands r0, r2\n\
-        orrs r0, r1\n\
-        strb r0, [r4, 0x19]\n\
-        ldrb r1, [r5, 0xA]\n\
-        lsrs r1, 4\n\
-        lsls r1, 4\n\
-        ands r0, r6\n\
-        orrs r0, r1\n\
-        strb r0, [r4, 0x19]\n\
-        ldrh r0, [r5, 0xC]\n\
-        strb r0, [r4, 0x7]\n\
-        ldrh r0, [r5, 0xE]\n\
-        strb r0, [r4, 0x1D]\n\
-        ldr r1, _0805E230 @ =gInitialMovementTypeFacingDirections\n\
-        ldrb r0, [r5, 0x9]\n\
-        adds r0, r1\n\
-        ldrb r1, [r0]\n\
-        adds r0, r4, 0\n\
-        adds r0, 0x20\n\
-        strb r1, [r0]\n\
-        ldrb r1, [r0]\n\
-        adds r0, r4, 0\n\
-        bl SetObjectEventDirection\n\
-        adds r0, r4, 0\n\
-        bl SetObjectEventDynamicGraphicsId\n\
-        ldr r1, _0805E234 @ =gRangedMovementTypes\n\
-        ldrb r0, [r4, 0x6]\n\
-        adds r0, r1\n\
-        ldrb r0, [r0]\n\
-        cmp r0, 0\n\
-        beq _0805E21C\n\
-        ldrb r2, [r4, 0x19]\n\
-        adds r0, r6, 0\n\
-        ands r0, r2\n\
-        cmp r0, 0\n\
-        bne _0805E204\n\
-        lsls r0, r2, 28\n\
-        lsrs r0, 28\n\
-        adds r0, 0x1\n\
-        mov r1, r9\n\
-        ands r0, r1\n\
-        mov r1, r8\n\
-        ands r1, r2\n\
-        orrs r1, r0\n\
-        strb r1, [r4, 0x19]\n\
-    _0805E204:\n\
-        ldrb r2, [r4, 0x19]\n\
-        movs r0, 0xF0\n\
-        ands r0, r2\n\
-        cmp r0, 0\n\
-        bne _0805E21C\n\
-        lsrs r1, r2, 4\n\
-        adds r1, 0x1\n\
-        lsls r1, 4\n\
-        adds r0, r6, 0\n\
-        ands r0, r2\n\
-        orrs r0, r1\n\
-        strb r0, [r4, 0x19]\n\
-    _0805E21C:\n\
-        mov r0, sp\n\
-        ldrb r0, [r0]\n\
-    _0805E220:\n\
-        add sp, 0xC\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r1}\n\
-        bx r1\n\
-        .align 2, 0\n\
-    _0805E230: .4byte gInitialMovementTypeFacingDirections\n\
-    _0805E234: .4byte gRangedMovementTypes\n\
-    ");
-}
-#endif
 
 static bool8 sub_805E238(struct ObjectEventTemplate *template, u8 var, s16 x, s16 y)
 {
@@ -1752,7 +1543,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 // Looks for an empty slot.
 // Returns FALSE and the location of the available slot
 // in *objectEventId.
-// If no slots are available, or if the object is already
+// If objectEventId slots are available, or if the object is already
 // loaded, returns TRUE.
 {
     u8 i = 0;

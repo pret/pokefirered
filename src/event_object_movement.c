@@ -1345,10 +1345,10 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     {
 		var = TRUE;
 		elevation2 = template->elevation;
-		mapNum	= template->trainerType;
-		mapGroup	= template->trainerRange_berryTreeId;
-		x2	= template->x;
-		y2	= template->y;
+		mapNum = template->trainerType;
+		mapGroup = template->trainerRange_berryTreeId;
+		x2 = template->x;
+		y2 = template->y;
 		tempX = template->x;
 		tempY = template->y;
 
@@ -1370,15 +1370,15 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
 
 	ClearObjectEvent(objectEvent);
 	
-	if(var)
+	if (var)
     {
-		x = x2 + 7;
+	    x = x2 + 7;
 		y = y2 + 7;
 	}
     else
     {
-		x = template->x + 7;
-		y = template->y + 7;
+        x = template->x + 7;
+        y = template->y + 7;
 	}
 	
 	objectEvent->active = TRUE;
@@ -1408,7 +1408,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
 
 	if (gRangedMovementTypes[objectEvent->movementType])
 	{
-		if (objectEvent->range.as_nybbles.x == 0)
+	    if (objectEvent->range.as_nybbles.x == 0)
         {
             objectEvent->range.as_nybbles.x++;
         }

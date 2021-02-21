@@ -1038,14 +1038,9 @@ void PSA_UseItem_CleanUpForCancel(void)
 
 static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness)
 {
-    u16 species;
+    u16 species, x, y;
     u32 personality;
-    #ifndef NONMATCHING
-        register int x asm("r4"); // FIXME
-    #else
-        int x;
-    #endif
-    u8 y;
+
     if (closeness == 3)
     {
         sprite->pos1.x = 120;
@@ -1064,18 +1059,25 @@ static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, stru
     {
         x = Menu2_GetMonSpriteAnchorCoord(species, personality, 0);
         y = Menu2_GetMonSpriteAnchorCoord(species, personality, 1);
+        if (x == 0xFF)
+            x = 0;
+        if (y == 0xFF)
+            y = 0;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
     }
     else
     {
         x = Menu2_GetMonSpriteAnchorCoord(species, personality, 3);
         y = Menu2_GetMonSpriteAnchorCoord(species, personality, 4);
+        if (x == 0xFF)
+            x = 0;
+        if (y == 0xFF)
+            y = 0;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
     }
-    if (x == 0xFF)
-        x = 0;
-    if (y == 0xFF)
-        y = 0;
-    sprite->data[6] = x;
-    sprite->data[7] = y;
+
     ItemSpriteZoom_UpdateYPos(sprite, closeness);
 }
 

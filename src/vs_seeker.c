@@ -889,7 +889,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
             {
                StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
 
-               sVsSeeker->trainerDoesNotWantRematch = 1;
+               sVsSeeker->trainerDoesNotWantRematch = TRUE;
 
             }
             else
@@ -903,7 +903,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                if (randNum < 30)
                {
                   StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
-                  sVsSeeker->trainerDoesNotWantRematch = 1;
+                  sVsSeeker->trainerDoesNotWantRematch = TRUE;
                }
                else
                {
@@ -913,7 +913,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                   sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = trainerId;
                   sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
                   sVsSeeker->numRematchableTrainers++;
-                  sVsSeeker->trainerWantsRematch = 1;
+                  sVsSeeker->trainerWantsRematch = TRUE;
                }
             }
         }

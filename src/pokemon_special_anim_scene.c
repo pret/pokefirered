@@ -1256,30 +1256,24 @@ static void StopMakingOutwardSpiralDots(void)
 static void Task_UseItem_OutwardSpiralDots(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    struct Sprite * sprite;
-    int x;
-    #ifndef NONMATCHING
-        register int y asm("r10"); // FIXME
-    #else
-        int y;
-    #endif
-    int x2;
-    int y2;
-    int ampl;
-    u8 spriteId;
+
     switch (tState)
     {
     case 0:
         if (tTimer == 0)
         {
-            sprite = PSA_GetSceneWork()->itemIconSprite;
+            u32 x, y, x2, y2, ampl;
+            u8 spriteId;
+            struct Sprite * sprite = PSA_GetSceneWork()->itemIconSprite;
+
             x = sprite->pos1.x + sprite->pos2.x;
             y = sprite->pos1.y + sprite->pos2.y;
             ampl = (PSAScene_RandomFromTask(taskId) % 21) + 70;
-            x2 = x + ((u32)(gSineTable[tAngle + 0x40] * ampl) >> 8);
-            y2 = y + ((u32)(gSineTable[tAngle       ] * ampl) >> 8);
+            x2 = x + ((gSineTable[tAngle + 0x40] * ampl) >> 8);
+            y2 = y + ((gSineTable[tAngle       ] * ampl) >> 8);
             tAngle += 0x4C;
             tAngle &= 0xFF;
+
             spriteId = CreateSprite(&sSpriteTemplate_UseItem_OutwardSpiralDots, x2, y2, 0);
             if (spriteId != MAX_SPRITES)
             {
@@ -1293,7 +1287,7 @@ static void Task_UseItem_OutwardSpiralDots(u8 taskId)
                 tActiveSprCt++;
             }
             tMadeSprCt++;
-            if (tMadeSprCt > 47)
+            if (tMadeSprCt >= 48)
                 tState++;
         }
         else
@@ -1311,7 +1305,7 @@ static u16 PSAScene_RandomFromTask(u8 taskId)
     u32 state = GetWordTaskArg(taskId, tOff_RngState);
     state = state * 1103515245 + 24691;
     SetWordTaskArg(taskId, tOff_RngState, state);
-    return state >> 16;
+    return (u16)(state >> 16);
 }
 
 static void SpriteCallback_UseItem_OutwardSpiralDots(struct Sprite * sprite)

@@ -198,11 +198,11 @@ bool8 FldEff_CutGrass(void)
     u8 i, j;
     s16 x, y;
 
-    i = 0; // Needed to match
+    i = 0; // Needs to be here to match
     PlaySE(SE_M_CUT);
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
 
-    for (i = 0; i < 3; i++)
+    for (; i < 3; i++)
     {
         y = gPlayerFacingPosition.y - 1 + i;
         for (j = 0; j < 3; j++)

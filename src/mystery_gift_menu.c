@@ -546,12 +546,12 @@ bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
     {
     case 0:
         AddTextPrinterToWindow1(str);
-        goto inc;
+        (*textState)++;
+        break;
     case 1:
         DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            inc:
             (*textState)++;
         }
         break;
@@ -562,7 +562,7 @@ bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
         return TRUE;
     case 0xFF:
         *textState = 2;
-        break;
+        return FALSE; // Does not match if set to break for some reason
     }
     return FALSE;
 }

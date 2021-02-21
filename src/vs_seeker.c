@@ -649,29 +649,27 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
     }
 }
 
+#define BATTERY_COUNTER (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF)
+#define REMATCH_STEP_COUNTER ((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF)
 bool8 UpdateVsSeekerStepCounter(void)
 {
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
     {
-        if ((gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) < 100)
+        if (BATTERY_COUNTER < 100)
             gSaveBlock1Ptr->trainerRematchStepCounter++;
     }
 
     if (FlagGet(FLAG_SYS_VS_SEEKER_CHARGING) == TRUE)
     {
         u8 x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        u32 r4 = 0xFF;
 
-        if (x < 100)
+        if (REMATCH_STEP_COUNTER < 100)
         {
-            x++;
-        #ifndef NONMATCHING // fool the compiler that r4 has been changed
-            asm("":"=r"(r4));
-        #endif
+            x = REMATCH_STEP_COUNTER + 1;
             gSaveBlock1Ptr->trainerRematchStepCounter = (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) | (x << 8);
         }
-        x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & r4;
-        if (x == 100)
+       
+        if (REMATCH_STEP_COUNTER == 100)
         {
             FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
             VsSeekerResetChargingStepCounter();

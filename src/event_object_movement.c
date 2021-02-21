@@ -1356,15 +1356,10 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
 		template = &(template2->events->objectEvents[elevation2 - 1]);
 	}
 
-	if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId))
-	{
-		return OBJECT_EVENTS_COUNT;
-	}
-
-	if (!sub_805E238(template, var, tempX, tempY))
+	if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId) || !sub_805E238(template, var, tempX, tempY))
     {
-		return OBJECT_EVENTS_COUNT;
-	}
+        return OBJECT_EVENTS_COUNT;
+    }
 
 	objectEvent = &gObjectEvents[objectEventId];
 
@@ -1386,8 +1381,8 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->graphicsId = template->graphicsId;
     objectEvent->movementType = template->movementType;
     objectEvent->localId = template->localId;
+    
     objectEvent->mapNum = mapNum;
-
     objectEvent->mapGroup = mapGroup;
     objectEvent->initialCoords.x = x;
     objectEvent->initialCoords.y = y;
@@ -1401,6 +1396,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->range.as_nybbles.y = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
+
     objectEvent->mapNum = mapNum; // Redundant, since it was already assigned above, but needed to match
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
 	SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);

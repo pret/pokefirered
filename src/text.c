@@ -1006,7 +1006,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
     int minGlyphWidth;
-    s32 (*func)(u16 glyphId, bool32 isJapanese);
+    u32 (*func)(u16 glyphId, bool32 isJapanese);
     int localLetterSpacing;
     #ifndef NONMATCHING
         register u32 lineWidth asm("r5");

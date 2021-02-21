@@ -248,7 +248,7 @@ static void SetBgAffineInternal(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispC
                 return;
             break;
         case 2:
-            if (bg < 2 || bg > 3)
+            if (bg != 2 && bg != 3)
                 return;
             break;
         case 0:

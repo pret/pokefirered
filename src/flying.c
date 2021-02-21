@@ -653,7 +653,7 @@ static void sub_80B1F94(struct Sprite *sprite)
         switch (data->unk2 / 64)
         {
         case 0: 
-            if ((u8)data->unk0_1 == 1) // the shifts have to be here
+            if ((u8)data->unk0_1 == 1) // the casts have to be here
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;

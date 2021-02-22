@@ -1333,50 +1333,48 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     u8 elevation2;
     s16 x2, y2;
     s16 tempX, tempY;
-
-	var	= FALSE;
-	elevation2 = 0;
-	x2 = 0;
-	y2 = 0;
-	tempX = 0;
-	tempY = 0;
+    var	= FALSE;
+    elevation2 = 0;
+    x2 = 0;
+    y2 = 0;
+    tempX = 0;
+    tempY = 0;
 	
-	if (template->inConnection == 0xFF)
+    if (template->inConnection == 0xFF)
     {
-		var = TRUE;
-		elevation2 = template->elevation;
-		mapNum = template->trainerType;
-		mapGroup = template->trainerRange_berryTreeId;
-		x2 = template->x;
-		y2 = template->y;
-		tempX = template->x;
-		tempY = template->y;
+	    var = TRUE;
+	    elevation2 = template->elevation;
+	    mapNum = template->trainerType;
+	    mapGroup = template->trainerRange_berryTreeId;
+	    x2 = template->x;
+	    y2 = template->y;
+	    tempX = template->x;
+	    tempY = template->y;
 
-		template2 = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
-		template = &(template2->events->objectEvents[elevation2 - 1]);
-	}
+	    template2 = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+	    template = &(template2->events->objectEvents[elevation2 - 1]);
+    }
 
-	if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId) || !sub_805E238(template, var, tempX, tempY))
+    if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId) || !sub_805E238(template, var, tempX, tempY))
     {
         return OBJECT_EVENTS_COUNT;
     }
-
-	objectEvent = &gObjectEvents[objectEventId];
-
-	ClearObjectEvent(objectEvent);
 	
-	if (var)
+    objectEvent = &gObjectEvents[objectEventId];
+    ClearObjectEvent(objectEvent);
+	
+    if (var)
     {
 	    x = x2 + 7;
-		y = y2 + 7;
-	}
+	    y = y2 + 7;
+    }
     else
     {
         x = template->x + 7;
         y = template->y + 7;
-	}
+    }
 	
-	objectEvent->active = TRUE;
+    objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->graphicsId = template->graphicsId;
     objectEvent->movementType = template->movementType;
@@ -1399,13 +1397,13 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
 
     objectEvent->mapNum = mapNum; // Redundant, since it was already assigned above, but needed to match
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
-	SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
-	SetObjectEventDynamicGraphicsId(objectEvent);
-
-	if (gRangedMovementTypes[objectEvent->movementType])
+    SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
+    SetObjectEventDynamicGraphicsId(objectEvent);
+	
+    if (gRangedMovementTypes[objectEvent->movementType])
+    {
+	if (objectEvent->range.as_nybbles.x == 0)
 	{
-	    if (objectEvent->range.as_nybbles.x == 0)
-        {
             objectEvent->range.as_nybbles.x++;
         }
 
@@ -1413,9 +1411,9 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
         {
             objectEvent->range.as_nybbles.y++;
         }
-	}
+    }
 
-	return objectEventId;
+    return objectEventId;
 }
 
 static bool8 sub_805E238(struct ObjectEventTemplate *template, u8 var, s16 x, s16 y)

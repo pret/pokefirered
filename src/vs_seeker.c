@@ -879,7 +879,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
             {
                 StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerUnfought);
                 sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx += 0;
-                sVsSeeker->trainerHasNotYetBeenFought = 1;
+                sVsSeeker->trainerHasNotYetBeenFought = TRUE;
                 vsSeekerIdx++;
                 continue;
             }

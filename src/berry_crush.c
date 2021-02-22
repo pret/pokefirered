@@ -71,7 +71,7 @@ void StartBerryCrush(MainCallback callback)
         return;
     }
 
-    sBerryCrushGamePtr = AllocZeroed(sizeof(*sBerryCrushGamePtr));
+    sBerryCrushGamePtr = AllocZeroed(sizeof(struct BerryCrushGame));
     if (!sBerryCrushGamePtr)
     {
         SetMainCallback2(callback);
@@ -101,7 +101,7 @@ static void CB2_ReturnToBerryCrushGameFromBerryPouch(void)
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
-    sBerryCrushGamePtr->unk68.as_four_players.others[sBerryCrushGamePtr->localId].berryId = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    sBerryCrushGamePtr->unk98[sBerryCrushGamePtr->localId].berryId = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
     sBerryCrushGamePtr->nextCmd = BCCMD_BeginNormalPaletteFade;
     sBerryCrushGamePtr->afterPalFadeCmd = BCCMD_WaitForOthersToPickBerries;
     BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, FALSE, 0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
@@ -131,10 +131,10 @@ void BerryCrush_UpdateSav2Records(void)
     u32 var0, var1;
 
     // unk0A / (unk04 / 60)
-    var0 = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk04;
+    var0 = sBerryCrushGamePtr->unk68.time;
     var0 <<= 8;
     var0 = MathUtil_Div32(var0, 60 << 8);
-    var1 = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk0A;
+    var1 = sBerryCrushGamePtr->unk68.unk0A;
     var1 <<= 8;
     var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
     sBerryCrushGamePtr->pressingSpeed = var1;
@@ -170,11 +170,9 @@ void BerryCrush_UpdateSav2Records(void)
         break;
     }
 
-    sBerryCrushGamePtr->powder = sBerryCrushGamePtr->unk68.as_four_players.unk00.unk00;
-    if (GiveBerryPowder(sBerryCrushGamePtr->powder))
-        return;
-
-    sBerryCrushGamePtr->unk25_0 = 1;
+    sBerryCrushGamePtr->powder = sBerryCrushGamePtr->unk68.powder;
+    if (!GiveBerryPowder(sBerryCrushGamePtr->powder))
+        sBerryCrushGamePtr->unk25_0 = 1;
 }
 
 static void VBlankCB_BerryCrush(void)
@@ -207,12 +205,12 @@ void BerryCrush_InitPlayerNamesAndTextSpeed(struct BerryCrushGame *game)
     for (i = 0; i < game->playerCount; i++)
     {
         StringCopy(BERRYCRUSH_PLAYER_NAME(game, i), gLinkPlayers[i].name);
-        game->unk68.as_five_players.players[i].unk14[PLAYER_NAME_LENGTH] = EOS;
+        game->unk98[i].name[PLAYER_NAME_LENGTH] = EOS;
     }
     for (; i < 5; i++)
     {
         memset(BERRYCRUSH_PLAYER_NAME(game, i), 1, PLAYER_NAME_LENGTH);
-        game->unk68.as_five_players.players[i].unk14[PLAYER_NAME_LENGTH] = EOS;
+        game->unk98[i].name[PLAYER_NAME_LENGTH] = EOS;
     }
 
     switch (gSaveBlock2Ptr->optionsTextSpeed)

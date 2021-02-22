@@ -113,7 +113,7 @@ static const u8 gUnknown_846E3B4[][4] = {
 
 static const u8 gUnknown_846E3C4[] = {5, 7, 9, 12};
 
-ALIGNED(4) static const u8 sReceivedPlayerBitmasks[] = {0x03, 0x07, 0x0F, 0x1F};
+static const ALIGNED(4) u8 sReceivedPlayerBitmasks[] = {0x03, 0x07, 0x0F, 0x1F}; // TODO: Can we match without ALIGNED?
 
 void BerryCrush_RunOrScheduleCommand(u16 command, u8 runMode, u8 *params)
 {

@@ -1537,7 +1537,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 // Looks for an empty slot.
 // Returns FALSE and the location of the available slot
 // in *objectEventId.
-// If no objectEventId slots are available, or if the object is already
+// If no slots are available, or if the object is already
 // loaded, returns TRUE.
 {
     u8 i = 0;

@@ -4,6 +4,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "constants/pokemon.h"
+#include "pokemon_storage_system.h"
 
 struct PokemonSubstruct0
 {
@@ -125,9 +126,9 @@ struct Pokemon
 struct PokemonStorage
 {
     /*0x0000*/ u8 currentBox;
-    /*0x0001*/ struct BoxPokemon boxes[14][30];
-    /*0x8344*/ u8 boxNames[14][BOX_NAME_LENGTH + 1];
-    /*0x83C2*/ u8 boxWallpapers[14];
+    /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
+    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
+    /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
 };
 
 struct BattleTowerPokemon

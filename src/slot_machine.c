@@ -1878,7 +1878,7 @@ static bool32 CreateSlotMachine(void)
     for (i = 0; i < 8; i++)
         ptr->tasks[i].active = 0;
     ptr->yesNoMenuActive = FALSE;
-    SetWordTaskArg(CreateTask(Task_SlotMachine, 2), 0, (uintptr_t)ptr);
+    SetWordTaskArg(CreateTask(Task_SlotMachine, 2), 0, ptr);
     return FALSE;
 }
 
@@ -1895,7 +1895,7 @@ static void DestroySlotMachine(void)
 
 static void Task_SlotMachine(u8 taskId)
 {
-    struct SlotMachineSetupTaskData * ptr = (void *)GetWordTaskArg(taskId, 0);
+    struct SlotMachineSetupTaskData * ptr = GetWordTaskArg(taskId, 0);
     s32 i;
 
     for (i = 0; i < 8; i++)
@@ -1914,7 +1914,7 @@ static void VBlankCB_SlotMachine(void)
 
 static struct SlotMachineSetupTaskData * GetSlotMachineSetupTaskDataPtr(void)
 {
-    return (void *)GetWordTaskArg(FindTaskIdByFunc(Task_SlotMachine), 0);
+    return GetWordTaskArg(FindTaskIdByFunc(Task_SlotMachine), 0);
 }
 
 static void SetSlotMachineSetupTask(u16 funcno, u8 taskId)

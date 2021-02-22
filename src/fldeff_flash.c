@@ -425,7 +425,7 @@ static void Task_MapPreviewScreen_0(u8 taskId)
     switch (data[0])
     {
     case 0:
-        SetWordTaskArg(taskId, 5, (uintptr_t)gMain.vblankCallback);
+        SetWordTaskArg(taskId, 5, gMain.vblankCallback);
         SetVBlankCallback(NULL);
         MapPreview_InitBgs();
         MapPreview_LoadGfx(data[3]);

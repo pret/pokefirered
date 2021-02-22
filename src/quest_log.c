@@ -839,7 +839,7 @@ bool8 QuestLog_SchedulePlaybackCB(void (*callback)(void))
             taskId = CreateTask(Task_RunPlaybackCB, 80);
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].data[1] = 0;
-            SetWordTaskArg(taskId, 14, (uintptr_t)callback);
+            SetWordTaskArg(taskId, 14, callback);
             return TRUE;
     }
     return FALSE;

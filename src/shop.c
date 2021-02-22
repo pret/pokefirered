@@ -284,14 +284,14 @@ static void Task_ShopMenu(u8 taskId)
 
 static void Task_HandleShopMenuBuy(u8 taskId)
 {
-    SetWordTaskArg(taskId, 0xE, (u32)CB2_InitBuyMenu);
+    SetWordTaskArg(taskId, 0xE, CB2_InitBuyMenu);
     FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
 }
 
 static void Task_HandleShopMenuSell(u8 taskId)
 {
-    SetWordTaskArg(taskId, 0xE, (u32)CB2_GoToSellMenu);
+    SetWordTaskArg(taskId, 0xE, CB2_GoToSellMenu);
     FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;    
 }
@@ -322,7 +322,7 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
     if (gPaletteFade.active)
         return;
     
-    SetMainCallback2((void *)GetWordTaskArg(taskId, 0xE));
+    SetMainCallback2(GetWordTaskArg(taskId, 0xE));
     FreeAllWindowBuffers();
     DestroyTask(taskId);
 }

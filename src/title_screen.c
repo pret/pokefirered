@@ -1113,16 +1113,16 @@ static void Task_FlameOrLeafSpawner(u8 taskId)
 
 static void TitleScreen_srand(u8 taskId, u8 field, u16 seed)
 {
-    SetWordTaskArg(taskId, field, seed);
+    SetWordTaskArg(taskId, field, (void*)(u32)seed);
 }
 
 static u16 TitleScreen_rand(u8 taskId, u8 field)
 {
     u32 rngval;
 
-    rngval = GetWordTaskArg(taskId, field);
+    rngval = (u32)GetWordTaskArg(taskId, field);
     rngval = rngval * 1103515245 + 24691;
-    SetWordTaskArg(taskId, field, rngval);
+    SetWordTaskArg(taskId, field, (const void*)rngval);
     return rngval >> 16;
 }
 

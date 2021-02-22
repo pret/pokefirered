@@ -962,7 +962,7 @@ static void StartIntroSequence(void)
     struct IntroSequenceData * ptr = Alloc(sizeof(struct IntroSequenceData));
     SetIntroCB(ptr, IntroCB_Init);
     ptr->taskId = CreateTask(Task_CallIntroCallback, 3);
-    SetWordTaskArg(ptr->taskId, 0, (uintptr_t)ptr);
+    SetWordTaskArg(ptr->taskId, 0, ptr);
 }
 
 static void SetIntroCB(struct IntroSequenceData * ptr, IntroCallback cb)
@@ -973,7 +973,7 @@ static void SetIntroCB(struct IntroSequenceData * ptr, IntroCallback cb)
 
 static void Task_CallIntroCallback(u8 taskId)
 {
-    struct IntroSequenceData * ptr = (void *)GetWordTaskArg(taskId, 0);
+    struct IntroSequenceData * ptr = GetWordTaskArg(taskId, 0);
     if (JOY_NEW(A_BUTTON | START_BUTTON | SELECT_BUTTON) && ptr->callback != IntroCB_CleanUp)
         SetIntroCB(ptr, IntroCB_CleanUp);
     ptr->callback(ptr);
@@ -1910,7 +1910,7 @@ static void FightScene4_StartGengarAttack(struct IntroSequenceData * this)
     u8 taskId;
     this->gengarAttackLanded = FALSE;
     taskId = CreateTask(Task_FightScene4_GengarAttack, 4);
-    SetWordTaskArg(taskId, 5, (uintptr_t)this);
+    SetWordTaskArg(taskId, 5, this);
     gTasks[taskId].data[3] = 64;
     gTasks[taskId].data[4] = GetBgX(0);
 }

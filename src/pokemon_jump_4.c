@@ -48,7 +48,7 @@ void sub_8149CEC(struct PokemonJump2 *arg0)
     sub_8149D34(gUnknown_203F3D8);
     taskId = CreateTask(sub_8149DA4, 3);
     gUnknown_203F3D8->unk6 = taskId;
-    SetWordTaskArg(gUnknown_203F3D8->unk6, 2, (uintptr_t)gUnknown_203F3D8);
+    SetWordTaskArg(gUnknown_203F3D8->unk6, 2, gUnknown_203F3D8);
     sub_8149D80(sub_8149DC8);
 }
 
@@ -179,7 +179,7 @@ bool32 sub_8149D68(void)
 
 static void sub_8149D80(void (*func)(void))
 {
-    SetWordTaskArg(gUnknown_203F3D8->unk6, 0, (uintptr_t)func);
+    SetWordTaskArg(gUnknown_203F3D8->unk6, 0, func);
     gUnknown_203F3D8->unk4 = 0;
     gUnknown_203F3D8->unk0 = 0;
 }

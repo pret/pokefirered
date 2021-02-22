@@ -922,7 +922,7 @@ void sub_80717A8(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
     }
     if (a4 < a3)
         gTasks[taskId].data[2] *= -1;
-    SetWordTaskArg(taskId, 5, a1);
+    SetWordTaskArg(taskId, 5, (const void*)a1);
     gTasks[taskId].data[7] = a5;
     gTasks[taskId].data[8] = a7;
     gTasks[taskId].func(taskId);
@@ -960,7 +960,7 @@ static void sub_80718B8(u8 taskId)
     s16 temp;
 
     data = gTasks[taskId].data;
-    wordVar = GetWordTaskArg(taskId, 5);
+    wordVar = (u32)GetWordTaskArg(taskId, 5);
     if (++data[4] > data[3])
     {
         data[4] = 0;

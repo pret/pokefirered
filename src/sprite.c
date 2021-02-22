@@ -302,7 +302,7 @@ EWRAM_DATA u8 gSpriteCopyRequestCount = 0;
 EWRAM_DATA struct SpriteCopyRequest gSpriteCopyRequests[MAX_SPRITES] = {0};
 EWRAM_DATA u8 gOamLimit = 0;
 EWRAM_DATA u16 gReservedSpriteTileCount = 0;
-EWRAM_DATA u8 gSpriteTileAllocBitmap[128] = {0};
+EWRAM_DATA u8 sSpriteTileAllocBitmap[128] = {0};
 EWRAM_DATA s16 gSpriteCoordOffsetX = 0;
 EWRAM_DATA s16 gSpriteCoordOffsetY = 0;
 EWRAM_DATA struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT] = {0};
@@ -779,17 +779,17 @@ u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
     if (op == 0)
     {
         val = ~(1 << val);
-        gSpriteTileAllocBitmap[index] &= val;
+        sSpriteTileAllocBitmap[index] &= val;
     }
     else if (op == 1)
     {
         val = (1 << val);
-        gSpriteTileAllocBitmap[index] |= val;
+        sSpriteTileAllocBitmap[index] |= val;
     }
     else
     {
         retVal = 1 << shift;
-        retVal &= gSpriteTileAllocBitmap[index];
+        retVal &= sSpriteTileAllocBitmap[index];
     }
 
     return retVal;
@@ -803,7 +803,7 @@ void sub_80075C0(struct Sprite *sprite)
         int end = (sprite->images[0].size / TILE_SIZE_4BPP) + sprite->oam.tileNum;
 
         for (i = sprite->oam.tileNum; i < end; i++)
-            gSpriteTileAllocBitmap[i >> 3] &= ~(1 << (i & 7));
+            sSpriteTileAllocBitmap[i >> 3] &= ~(1 << (i & 7));
     }
 }
 

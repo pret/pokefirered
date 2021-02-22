@@ -6,8 +6,8 @@
 #include "constants/items.h"
 
 static EWRAM_DATA u8 sItemMenuIconSpriteIds[12] = {0};
-static EWRAM_DATA void * sItemIconTilesBuffer = NULL;
-static EWRAM_DATA void * sItemIconTilesBufferPadded = NULL;
+static EWRAM_DATA u8 * sItemIconTilesBuffer = NULL;
+static EWRAM_DATA u8 * sItemIconTilesBufferPadded = NULL;
 
 static void sub_8098560(struct Sprite * sprite);
 static void sub_80985BC(struct Sprite * sprite);
@@ -642,17 +642,14 @@ void ItemMenuIcons_MoveInsertIndicatorBar(s16 x, u16 y)
 
 static bool8 TryAllocItemIconTilesBuffers(void)
 {
-    void ** ptr1, ** ptr2;
-
-    ptr1 = &sItemIconTilesBuffer;
-    *ptr1 = Alloc(0x120);
-    if (*ptr1 == NULL)
+    sItemIconTilesBuffer = Alloc(0x120);
+    if (sItemIconTilesBuffer == NULL)
         return FALSE;
-    ptr2 = &sItemIconTilesBufferPadded;
-    *ptr2 = AllocZeroed(0x200);
-    if (*ptr2 == NULL)
+
+    sItemIconTilesBufferPadded = AllocZeroed(0x200);
+    if (sItemIconTilesBufferPadded == NULL)
     {
-        Free(*ptr1);
+        Free(sItemIconTilesBuffer);
         return FALSE;
     }
     return TRUE;

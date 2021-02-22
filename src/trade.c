@@ -738,7 +738,7 @@ static void CB2_ReturnFromLinkTrade2(void)
         InitTradeMenuResources();
         sSpriteTextTileBuffer = AllocZeroed(0xE00);
 
-        for (i = 0; i < 14; i++)
+        for (i = 0; i < (int)NELEMS(sSpriteTextTilePtrs); i++)
         {
             sSpriteTextTilePtrs[i] = &sSpriteTextTileBuffer[i * 256];
         }

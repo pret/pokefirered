@@ -3646,7 +3646,7 @@ static u8 SendMonToPC(struct Pokemon* mon)
 
     do
     {
-        for (boxPos = 0; boxPos < 30; boxPos++)
+        for (boxPos = 0; boxPos < IN_BOX_COUNT; boxPos++)
         {
             struct BoxPokemon* checkingMon = GetBoxedMonPtr(boxNo, boxPos);
             if (GetBoxMonData(checkingMon, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
@@ -3663,7 +3663,7 @@ static u8 SendMonToPC(struct Pokemon* mon)
         }
 
         boxNo++;
-        if (boxNo == 14)
+        if (boxNo == TOTAL_BOXES_COUNT)
             boxNo = 0;
     } while (boxNo != StorageGetCurrentBox());
 

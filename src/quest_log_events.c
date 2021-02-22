@@ -399,11 +399,9 @@ void QuestLog_StartRecordingInputsAfterDeferredEvent(void)
 {
     if (sDeferredEvent.id != QL_EVENT_0)
     {
-        u16 *resp;
         sLastDepartedMap = 0;
         StartRecordingQuestLogEntry(sDeferredEvent.id);
-        resp = sQuestLogStorageCBs[sDeferredEvent.id](sEventRecordingPointer, sDeferredEvent.data);
-        sEventRecordingPointer = resp;
+        sEventRecordingPointer = sQuestLogStorageCBs[sDeferredEvent.id](sEventRecordingPointer, sDeferredEvent.data);
         ResetDeferredLinkEvent();
     }
 }
@@ -582,18 +580,17 @@ void sub_8113ABC(const u16 *a0)
 
 bool8 sub_8113AE8(const u16 *a0)
 {
-#ifndef NONMATCHING
-    register const u16 *r0 asm("r0") = a0;
-#else
     const u16 *r0 = a0;
-#endif
 
-    if (r0 == NULL || r0[1] > sQuestLogCursor)
+    if (a0 == NULL)
         return FALSE;
 
-    sQuestLogEventTextBufferCBs[a0[0] & 0xFFF](a0);
-    gUnknown_203B044.id = a0[0];
-    gUnknown_203B044.unk_1 = (a0[0] & 0xF000) >> 12;
+    if (r0[1] > sQuestLogCursor)
+        return FALSE;
+
+    sQuestLogEventTextBufferCBs[r0[0] & 0xFFF](a0);
+    gUnknown_203B044.id = r0[0];
+    gUnknown_203B044.unk_1 = (r0[0] & 0xF000) >> 12;
     if (gUnknown_203B044.unk_1 != 0)
         gUnknown_203B044.unk_2 = 1;
     return TRUE;

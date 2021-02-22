@@ -44,10 +44,10 @@ static u32 BerryCrushCommand_Quit(struct BerryCrushGame * game, u8 *params);
 static void sub_814D4D8(struct BerryCrushGame * game);
 static void BerryCrush_SetShowMessageParams(u8 *params, u8 stringId, u8 flags, u16 waitKeys, u8 followupCmd);
 
-static const u8 gUnknown_846E2E0[] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
-static const u8 gUnknown_846E2E8[] = {0x00, 0x01, 0x02, 0x03, 0x05, 0x00, 0x00, 0x00};
+static const ALIGNED(4) u8 gUnknown_846E2E0[8] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+static const ALIGNED(4) u8 gUnknown_846E2E8[] = {0x00, 0x01, 0x02, 0x03, 0x05};
 
-static const s8 gUnknown_846E2F0[][7] = {
+static const ALIGNED(4) s8 gUnknown_846E2F0[][7] = {
     {0x04, 0x01, 0x00, 0xff, 0x00, 0x00, 0x00},
     {0x04, 0x02, 0x00, 0xff, 0x00, 0x00, 0x00},
     {0x04, 0x02, 0x00, 0xfe, 0x00, 0x00, 0x00},
@@ -55,7 +55,7 @@ static const s8 gUnknown_846E2F0[][7] = {
     {0x06, 0x04, 0x01, 0xfe, 0xfc, 0xfe, 0x00},
 };
 
-ALIGNED(4) const u8 gUnknown_846E314[][4] = {
+static const ALIGNED(4) u8 gUnknown_846E314[][4] = {
     {0x03, 0x02, 0x01, 0x00},
     {0x03, 0x03, 0x01, 0x00},
     {0x03, 0x03, 0x02, 0x00},
@@ -724,17 +724,19 @@ static void BerryCrush_HandlePlayerInput(struct BerryCrushGame * game)
         game->localState.unk02_0 = 1;
     game->localState.unk02_1 = game->unk25_4;
     game->localState.unk0A = game->unk25_5;
-    memcpy(&game->sendCmd[1], &game->localState, sizeof(game->sendCmd) - 2);
-    RfuPrepareSend0x2f00(game->sendCmd + 1);
+    memcpy(game->sendCmd, &game->localState, sizeof(game->sendCmd));
+    RfuPrepareSend0x2f00(game->sendCmd);
 }
 
 static void BerryCrush_UpdateGameState(struct BerryCrushGame * game)
 {
     u8 i = 0;
-    struct BerryCrushGame_4E * j;
+    struct BerryCrushGame_4E * j = NULL;
 
     for (i = 0; i < game->playerCount; ++i)
+    {
         game->unk98[i].unk1C = 0;
+    }
 
     if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
     {
@@ -747,7 +749,7 @@ static void BerryCrush_UpdateGameState(struct BerryCrushGame * game)
         game->unk25_2 = 0;
         return;
     }
-    memcpy(game->recvCmd, gRecvCmds, sizeof(struct BerryCrushGame_4E));
+    memcpy(game->recvCmd, gRecvCmds[0], 14);
     j = (struct BerryCrushGame_4E *)&game->recvCmd;
     game->depth = j->unk6;
     game->vibration = (s16)j->unk5;
@@ -932,7 +934,7 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
         memset(game->sendCmd, 0, 2 * sizeof(u16));
         if (game->unk98[game->localId].unk1A > game->timer)
             game->unk98[game->localId].unk1A = game->timer;
-        game->sendCmd[1] = game->unk98[game->localId].unk1A;
+        game->sendCmd[0] = game->unk98[game->localId].unk1A;
         SendBlock(0, game->sendCmd, 2);
         break;
     case 1:
@@ -960,7 +962,7 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
             sizeof(struct BerryCrushGame_68)
         );
         game->unk68.time = game->timer;
-        game->unk68.time = game->unk18 / (game->timer / 60);
+        game->unk68.speed = game->unk18 / (game->timer / 60);
         // (unk30 * 50 / unk32) + 50
         r2 = MathUtil_Mul32(game->unk30 << 8, 50 << 8);
         r2 = MathUtil_Div32(r2, game->unk32 << 8) + (50 << 8);
@@ -1196,7 +1198,8 @@ static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame * game, u8 *para
         DisplayYesNoMenuDefaultYes();
         break;
     case 2:
-        if ((r4 = Menu_ProcessInputNoWrapClearOnChoose()) != -2)
+        r4 = Menu_ProcessInputNoWrapClearOnChoose();
+        if (r4 != -2)
         {
             memset(game->sendCmd, 0, sizeof(game->sendCmd));
             if (r4 == 0)
@@ -1253,7 +1256,7 @@ static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame
         else
             BerryCrush_RunOrScheduleCommand(BCCMD_FadeOutToPlayAgain, 1, NULL);
         ResetBlockReceivedFlags();
-        game->sendCmd[1] = 0;
+        game->sendCmd[0] = 0;
         game->recvCmd[0] = 0;
         game->unk10 = 0;
         game->cmdState = 0;

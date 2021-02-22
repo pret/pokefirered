@@ -852,7 +852,7 @@ static void PrintBerryCrushResultWindow(struct BerryCrushGame * game, u8 command
         case 0:
             // Number of presses
             linkPlayerId = bcPlayers->unk20[command][i];
-            if (i != 0 && bcPlayers->unk20[command][i] != bcPlayers->unk20[command][i - 1])
+            if (i != 0 && bcPlayers->unk0C[command][i] != bcPlayers->unk0C[command][i - 1])
             {
                 linkIdToPrint = i;
             }

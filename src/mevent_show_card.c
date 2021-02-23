@@ -317,7 +317,7 @@ static void sub_8145A98(void)
             }
             for (i = 0, r6 = 0; i < 40; i++)
             {
-                if (sMEventScreenData->wonderCard.unk_122[i] != CHAR_SPECIAL_F7)
+                if (sMEventScreenData->wonderCard.unk_122[i] != CHAR_DYNAMIC)
                 {
                     sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nameTxt[r6] = sMEventScreenData->wonderCard.unk_122[i];
                     r6++;

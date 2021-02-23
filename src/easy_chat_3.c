@@ -1435,7 +1435,7 @@ static void PrintECFields(void)
                 ecWord++;
                 for (k = 0; k < 7; k++)
                 {
-                    *str++ = CHAR_EXTRA_EMOJI;
+                    *str++ = CHAR_EXTRA_SYMBOL;
                     *str++ = 9;
                 }
 

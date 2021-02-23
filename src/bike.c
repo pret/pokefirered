@@ -62,7 +62,7 @@ static u8 GetBikeMoveCmd_0(u8 *direction_p, u16 newKeys, u16 heldKeys)
         {
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
             gPlayerAvatar.runningState = 2;
-            if (*direction_p < DIR_NORTH)
+            if (*direction_p == DIR_NONE || *direction_p == DIR_SOUTH)
                 return 3;
             else
                 return 4;
@@ -75,35 +75,28 @@ static u8 GetBikeMoveCmd_0(u8 *direction_p, u16 newKeys, u16 heldKeys)
                 gPlayerAvatar.runningState = 2;
                 return 4;
             }
-            else
-            {
-                goto _080BD17E; // for matching purpose
-            }
         }
+    }
+    
+    if (*direction_p == DIR_NONE)
+    {
+        *direction_p = direction;
+        gPlayerAvatar.runningState = 0;
+        return 0;
     }
     else
     {
-        if (*direction_p == DIR_NONE)
+        if (*direction_p != direction && gPlayerAvatar.runningState != 2)
         {
-        _080BD17E:
-            *direction_p = direction;
+            gPlayerAvatar.acroBikeState = ACRO_STATE_TURNING;
+            gPlayerAvatar.newDirBackup = *direction_p;
             gPlayerAvatar.runningState = 0;
-            return 0;
+            return GetMovePlayerOnBikeFuncId(direction_p, newKeys, heldKeys);
         }
         else
         {
-            if (*direction_p != direction && gPlayerAvatar.runningState != 2)
-            {
-                gPlayerAvatar.acroBikeState = ACRO_STATE_TURNING;
-                gPlayerAvatar.newDirBackup = *direction_p;
-                gPlayerAvatar.runningState = 0;
-                return GetMovePlayerOnBikeFuncId(direction_p, newKeys, heldKeys);
-            }
-            else
-            {
-                gPlayerAvatar.runningState = 2;
-                return 2;
-            }
+            gPlayerAvatar.runningState = 2;
+            return 2;
         }
     }
 }
@@ -134,7 +127,7 @@ static u8 GetBikeMoveCmd_2(u8 *direction_p, u16 newKeys, u16 heldKeys)
         {
             gPlayerAvatar.runningState = 2;
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-            if (*direction_p < DIR_NORTH)
+            if (*direction_p == DIR_NONE || *direction_p == DIR_SOUTH)
                 return 3;
             else
                 return 4;

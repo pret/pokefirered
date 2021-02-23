@@ -62,7 +62,7 @@ static u8 GetBikeMoveCmd_0(u8 *direction_p, u16 newKeys, u16 heldKeys)
         {
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
             gPlayerAvatar.runningState = 2;
-            if (*direction_p == DIR_NONE || *direction_p == DIR_SOUTH)
+            if (*direction_p < DIR_NORTH)
                 return 3;
             else
                 return 4;
@@ -127,7 +127,7 @@ static u8 GetBikeMoveCmd_2(u8 *direction_p, u16 newKeys, u16 heldKeys)
         {
             gPlayerAvatar.runningState = 2;
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-            if (*direction_p == DIR_NONE || *direction_p == DIR_SOUTH)
+            if (*direction_p < DIR_NORTH)
                 return 3;
             else
                 return 4;

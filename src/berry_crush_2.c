@@ -44,8 +44,8 @@ static u32 BerryCrushCommand_Quit(struct BerryCrushGame * game, u8 *params);
 static void sub_814D4D8(struct BerryCrushGame * game);
 static void BerryCrush_SetShowMessageParams(u8 *params, u8 stringId, u8 flags, u16 waitKeys, u8 followupCmd);
 
-static const ALIGNED(4) u8 gUnknown_846E2E0[8] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
-static const ALIGNED(4) u8 gUnknown_846E2E8[] = {0x00, 0x01, 0x02, 0x03, 0x05};
+static const u8 gUnknown_846E2E0[] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+static const u8 gUnknown_846E2E8[] = {0x00, 0x01, 0x02, 0x03, 0x05, 0x00, 0x00, 0x00};
 
 static const ALIGNED(4) s8 gUnknown_846E2F0[][7] = {
     {0x04, 0x01, 0x00, 0xff, 0x00, 0x00, 0x00},

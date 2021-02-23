@@ -462,7 +462,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     {
         if (subStruct->downArrowDelay != 0)
         {
-            subStruct->downArrowDelay = ((*(u32*)&textPrinter->subUnion.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
+            subStruct->downArrowDelay--;
         }
         else
         {
@@ -488,7 +488,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
             BlitBitmapRectToWindow(
                 textPrinter->printerTemplate.windowId,
                 arrowTiles,
-                sDownArrowYCoords[*(u32*)subStruct << 17 >> 30], // subStruct->downArrowYPosIdx but again, stupidly retrieved
+                sDownArrowYCoords[subStruct->downArrowYPosIdx],
                 0,
                 0x80,
                 0x10,

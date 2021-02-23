@@ -1482,7 +1482,7 @@ void task00_mystery_gift(u8 taskId)
         break;
     case 21:
     {
-        u32 result;
+        u32 result; // Should be s32 but that doesn't match
         if (data->IsCardOrNews == 0)
         {
             if (WonderCard_Test_Unk_08_6())

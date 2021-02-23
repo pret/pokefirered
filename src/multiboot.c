@@ -413,6 +413,13 @@ static void MultiBootWaitSendDone(void)
 {
     int i;
 
-    for (i = 0; (i < 31069) && (REG_SIOCNT & SIO_START); i++);
+    for (i = 0; i < 31069; i++)
+    {
+        if ((REG_SIOCNT & SIO_START) == 0)
+        {
+            break;
+        }
+    }
+
     MultiBootWaitCycles(600);
 }

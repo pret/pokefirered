@@ -451,7 +451,7 @@ static const u8 *const sBCRankingHeaders[] = {
     gText_PressingPowerRankings
 };
 
-int BerryCrush_InitBgs(void)
+s32 InitBerryCrushDisplay(void)
 {
     struct BerryCrushGame * game = GetBerryCrushGame();
     if (game == NULL)
@@ -549,7 +549,7 @@ int BerryCrush_InitBgs(void)
     return 0;
 }
 
-int BerryCrush_TeardownBgs(void)
+s32 BerryCrush_TeardownBgs(void)
 {
     struct BerryCrushGame * var0 = GetBerryCrushGame();
     if (!var0)
@@ -609,7 +609,7 @@ int BerryCrush_TeardownBgs(void)
     return 0;
 }
 
-int sub_814D9CC(struct BerryCrushGame * game)
+s32 sub_814D9CC(struct BerryCrushGame * game)
 {
     gSpriteCoordOffsetY = game->depth + game->vibration;
     SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
@@ -635,13 +635,13 @@ void BerryCrush_CreateBerrySprites(struct BerryCrushGame * game, struct BerryCru
     u8 spriteId;
     s16 var0, var1;
     s16 *data;
-    int var3;
+    s32 var3;
     s16 var5;
     u32 var6;
 
     for (i = 0; i < game->playerCount; i++)
     {
-        spriteId = AddItemIconObjectWithCustomObjectTemplate(
+        spriteId = AddCustomItemIconSprite(
             &sSpriteTemplate_PlayerBerry,
             sPlayerBerrySpriteTags[i],
             sPlayerBerrySpriteTags[i],
@@ -1283,7 +1283,7 @@ static void sub_814ECE0(struct BerryCrushGame * game)
     DigitObjUtil_CreatePrinter(1, 0, &sDigitObjTemplates[1]);
     DigitObjUtil_CreatePrinter(2, 0, &sDigitObjTemplates[2]);
     if (game->gameState == 1)
-            BerryCrush_HideTimerSprites(&game->spritesManager);
+        BerryCrush_HideTimerSprites(&game->spritesManager);
 }
 
 static void sub_814EF10(struct BerryCrushGame * r5)

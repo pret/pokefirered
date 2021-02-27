@@ -257,7 +257,7 @@ static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame * game, u8 *para
 
 static u32 BerryCrushCommand_InitGfx(struct BerryCrushGame * game, UNUSED u8 *params)
 {
-    if (BerryCrush_InitBgs() != 0)
+    if (InitBerryCrushDisplay() != 0)
         BerryCrush_RunOrScheduleCommand(game->nextCmd, 0, game->commandParams);
     return 0;
 }

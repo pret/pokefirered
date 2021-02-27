@@ -1850,7 +1850,7 @@ static void RfuCheckErrorStatus(void)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
-        SetLinkErrorFromRfu((Rfu.linkman_msg << 16) | (Rfu.linkman_param[0] << 8) | Rfu.linkman_param[1], Rfu.unk_124.count, Rfu.sendQueue.count, RfuGetErrorStatus() == 2);
+        SetLinkErrorFromRfu((Rfu.linkmanMsg << 16) | (Rfu.linkmanCmdId << 8) | Rfu.linkmanCmdResult, Rfu.unk_124.count, Rfu.sendQueue.count, RfuGetErrorStatus() == 2);
         Rfu.errorState = 2;
         CloseLink();
     }
@@ -1983,9 +1983,9 @@ static void GetLinkmanErrorParams(u32 msg)
 {
     if (Rfu.errorState == 0)
     {
-        Rfu.linkman_param[0] = lman.param[0];
-        Rfu.linkman_param[1] = lman.param[1];
-        Rfu.linkman_msg = msg;
+        Rfu.linkmanCmdId = lman.param[0];
+        Rfu.linkmanCmdResult = lman.param[1];
+        Rfu.linkmanMsg = msg;
         Rfu.errorState = 1;
     }
 }
@@ -2361,7 +2361,7 @@ void sub_80FB9D0(void)
 void RfuSetErrorStatus(u8 a0, u16 msg)
 {
     Rfu.unk_f1 = a0;
-    Rfu.linkman_msg = msg;
+    Rfu.linkmanMsg = msg;
 }
 
 u8 RfuGetErrorStatus(void)

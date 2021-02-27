@@ -17,8 +17,8 @@ static EWRAM_DATA struct BerryCrushGame *sBerryCrushGamePtr = NULL;
 
 static void BerryCrush_InitPlayerNamesAndTextSpeed(struct BerryCrushGame *game);
 static void CB2_ReturnToBerryCrushGameFromBerryPouch(void);
-static void VBlankCB_BerryCrush(void);
-static void CB2_BerryCrush(void);
+static void VBlankCB(void);
+static void MainCB(void);
 static void Task_RunBerryCrushGame(u8 taskId);
 
 struct BerryCrushGame *GetBerryCrushGame(void)
@@ -28,10 +28,10 @@ struct BerryCrushGame *GetBerryCrushGame(void)
 
 u32 ExitBerryCrushWithCallback(MainCallback callback)
 {
-    if (sBerryCrushGamePtr == NULL)
+    if (!sBerryCrushGamePtr)
         return 2;
 
-    if (callback == NULL)
+    if (!callback)
         callback = sBerryCrushGamePtr->savedCallback;
 
     DestroyTask(sBerryCrushGamePtr->taskId);
@@ -54,8 +54,8 @@ void StartBerryCrush(MainCallback callback)
     if (!gReceivedRemoteLinkPlayers || gWirelessCommType == 0)
     {
         SetMainCallback2(callback);
-        Rfu.linkman_param[0] = 0;
-        Rfu.linkman_param[1] = 0;
+        Rfu.linkmanCmdId = 0;
+        Rfu.linkmanCmdResult = 0;
         Rfu.errorState = 1;
         return;
     }
@@ -65,8 +65,8 @@ void StartBerryCrush(MainCallback callback)
     if (playerCount < 2 || multiplayerId >= playerCount)
     {
         SetMainCallback2(callback);
-        Rfu.linkman_param[0] = 0;
-        Rfu.linkman_param[1] = 0;
+        Rfu.linkmanCmdId = 0;
+        Rfu.linkmanCmdResult = 0;
         Rfu.errorState = 1;
         return;
     }
@@ -75,8 +75,8 @@ void StartBerryCrush(MainCallback callback)
     if (!sBerryCrushGamePtr)
     {
         SetMainCallback2(callback);
-        Rfu.linkman_param[0] = 0;
-        Rfu.linkman_param[1] = 0;
+        Rfu.linkmanCmdId = 0;
+        Rfu.linkmanCmdResult = 0;
         Rfu.errorState = 1;
         return;
     }
@@ -90,7 +90,7 @@ void StartBerryCrush(MainCallback callback)
     sBerryCrushGamePtr->afterPalFadeCmd = BCCMD_SignalReadyToBegin;
     BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, TRUE, 0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
     BerryCrush_RunOrScheduleCommand(BCCMD_InitGfx, 1, sBerryCrushGamePtr->commandParams);
-    SetMainCallback2(CB2_BerryCrush);
+    SetMainCallback2(MainCB);
     sBerryCrushGamePtr->taskId = CreateTask(Task_RunBerryCrushGame, 8);
 }
 
@@ -107,7 +107,7 @@ static void CB2_ReturnToBerryCrushGameFromBerryPouch(void)
     BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, FALSE, 0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
     BerryCrush_RunOrScheduleCommand(BCCMD_InitGfx, 1, sBerryCrushGamePtr->commandParams);
     sBerryCrushGamePtr->taskId = CreateTask(Task_RunBerryCrushGame, 8);
-    SetMainCallback2(CB2_BerryCrush);
+    SetMainCallback2(MainCB);
 }
 
 void CB2_BerryCrush_GoToBerryPouch(void)
@@ -118,7 +118,7 @@ void CB2_BerryCrush_GoToBerryPouch(void)
 
 void BerryCrush_SetVBlankCallback(void)
 {
-    SetVBlankCallback(VBlankCB_BerryCrush);
+    SetVBlankCallback(VBlankCB);
 }
 
 void BerryCrush_UnsetVBlankCallback(void)
@@ -175,14 +175,14 @@ void BerryCrush_UpdateSav2Records(void)
         sBerryCrushGamePtr->unk25_0 = 1;
 }
 
-static void VBlankCB_BerryCrush(void)
+static void VBlankCB(void)
 {
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
 }
 
-static void CB2_BerryCrush(void)
+static void MainCB(void)
 {
     RunTasks();
     RunTextPrinters();

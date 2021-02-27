@@ -212,11 +212,10 @@ static u32 BerryCrushCommand_WaitPaletteFade(struct BerryCrushGame * game, u8 *p
 
 static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame * game, u8 *params)
 {
-    u16 waitKeys;
+    u16 waitKeys = params[3];
 
-    waitKeys  = params[3];
     waitKeys <<= 8;
-    waitKeys |= params[2] << 0;
+    waitKeys |= params[2];
     switch (game->cmdState)
     {
     case 0:

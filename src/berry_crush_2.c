@@ -34,7 +34,7 @@ static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame * game, u8 *params
 static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame * game, u8 *params);
-static u32 BerryCrushCommand_SaveTheGame(struct BerryCrushGame * game, u8 *params);
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_FadeOutToPlayAgain(struct BerryCrushGame * game, u8 *params);
@@ -95,7 +95,7 @@ static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame * berryCrushGame
     BerryCrushCommand_HandleTimeUp,
     BerryCrushCommand_TabulateResults,
     BerryCrushCommand_ShowResults,
-    BerryCrushCommand_SaveTheGame,
+    BerryCrushCommand_SaveGame,
     BerryCrushCommand_AskPlayAgain,
     BerryCrushCommand_CommunicatePlayAgainResponses,
     BerryCrushCommand_FadeOutToPlayAgain,
@@ -1144,7 +1144,7 @@ static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame * game, u8 *param
     return 0;
 }
 
-static u32 BerryCrushCommand_SaveTheGame(struct BerryCrushGame * game, u8 *params)
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame * game, u8 *params)
 {
     switch (game->cmdState)
     {

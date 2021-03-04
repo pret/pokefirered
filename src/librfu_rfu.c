@@ -1433,7 +1433,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     if (sending || ni_or_uni == 0x40)
     {
         slotStatus_NI = gRfuSlotStatusNI[bm_slot_id];
-        slotStatus_UNI = NULL; // Needed to match. TODO: Is this actually needed
+        slotStatus_UNI = NULL;
         slotStatus_NI->send.errorCode = 0;
         slotStatus_NI->send.now_p[0] = &slotStatus_NI->send.dataType;
         slotStatus_NI->send.remainSize = 7;

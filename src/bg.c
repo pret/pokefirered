@@ -239,7 +239,7 @@ void SetTextModeAndHideBgs(void)
 static void SetBgAffineInternal(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
 {
     struct BgAffineSrcData src;
-    struct BgAffineDstData dest;
+    struct BgAffineDestData dest;
 
     switch (sGpuBgConfigs.bgVisibilityAndMode & 0x7)
     {

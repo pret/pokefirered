@@ -125,7 +125,7 @@ struct BgAffineSrcData
     u16 alpha;
 };
 
-struct BgAffineDstData
+struct BgAffineDestData
 {
     s16 pa;
     s16 pb;

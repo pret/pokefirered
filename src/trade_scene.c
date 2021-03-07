@@ -658,7 +658,7 @@ static void SpriteCB_TradeGBAScreen(struct Sprite * sprite)
 
 static void SetTradeBGAffine(void)
 {
-    struct BgAffineDestData affine;
+    struct BgAffineDstData affine;
     DoBgAffineSet(&affine, sTradeData->bg2texX * 0x100, sTradeData->bg2texY * 0x100, sTradeData->bg2srcX, sTradeData->bg2srcY, sTradeData->sXY, sTradeData->sXY, sTradeData->bg2alpha);
     SetGpuReg(REG_OFFSET_BG2PA, affine.pa);
     SetGpuReg(REG_OFFSET_BG2PB, affine.pb);

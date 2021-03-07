@@ -11,44 +11,44 @@
 #define RESET_REGS       0x80
 #define RESET_ALL        0xFF
 
-extern void SoftReset(u32 ResetFlags);
+extern void SoftReset(u32 resetFlags);
 
-extern void RegisterRamReset(u32 ResetFlags);
+extern void RegisterRamReset(u32 resetFlags);
 
 extern void SoundBiasSet(void);
 extern void SoundBiasReset(void);
 
 extern void VBlankIntrWait(void);
 
-extern s32 Div(s32 Number, s32 Denom);
+extern s32 Div(s32 divisor, s32 dividend);
 
-extern s32 Mod(s32 Number, s32 Denom);
+extern s32 Mod(s32 divisor, s32 dividend);
 
-extern u16 Sqrt(u32 X);
+extern u16 Sqrt(u32 num);
 
-extern u16 ArcTan2(s16 X, s16 Y);
+extern u16 ArcTan2(s16 x, s16 y);
 
-extern void BgAffineSet(const struct BgAffineSrcData *Srcp, struct BgAffineDestData *Destp, s32 Num);
+extern void BgAffineSet(const struct BgAffineSrcData *src, struct BgAffineDstData *dst, s32 count);
 
 #define CPU_SET_SRC_FIXED 0x01000000
 #define CPU_SET_16BIT     0x00000000
 #define CPU_SET_32BIT     0x04000000
 
-extern void CpuSet(const void *Srcp, void *Destp, u32 DmaCntData);
+extern void CpuSet(const void *src, void *dst, u32 control);
 
 #define CPU_FAST_SET_SRC_FIXED 0x01000000
 
-extern void CpuFastSet(const void *Srcp, void *Destp, u32 DmaCntData);
+extern void CpuFastSet(const void *src, void *dst, u32 control);
 
-extern void ObjAffineSet(const struct ObjAffineSrcData *Srcp, void *Destp, s32 Num, s32 Offset);
+extern void ObjAffineSet(const struct ObjAffineSrcData *src, void *dst, s32 count, s32 offset);
 
-extern void LZ77UnCompWram(const void *Srcp, void *Destp);
+extern void LZ77UnCompWram(const void *src, void *dst);
 
-extern void LZ77UnCompVram(const void *Srcp, void *Destp);
+extern void LZ77UnCompVram(const void *src, void *dst);
 
-extern void RLUnCompWram(const void *Srcp, void *Destp);
+extern void RLUnCompWram(const void *src, void *dst);
 
-extern void RLUnCompVram(const void *Srcp, void *Destp);
+extern void RLUnCompVram(const void *src, void *dst);
 
 extern int MultiBoot(struct MultiBootParam *mp);
 

@@ -725,7 +725,7 @@ void SetDefaultFontsPointer(void)
 
 u8 GetFontAttribute(u8 fontId, u8 attributeId)
 {
-    int result = 0;
+    u8 result = 0;
 
     switch (attributeId)
     {

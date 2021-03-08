@@ -9,9 +9,9 @@ struct SendRecvMgr
     u8 xferState;          // EREADER_XFER_*
     u8 checksumResult;     // EREADER_CHECKSUM_*
     u8 cancellationReason; // EREADER_CANCEL_*
-    u32 * dataptr;         // Payload source or destination
-    int cursor;            // Index of the next word
-    int size;              // Last word index
+    u32 *dataptr;          // Payload source or destination
+    s32 cursor;            // Index of the next word
+    s32 size;              // Last word index
     u32 checksum;          // Validation checksum
 };
 
@@ -34,7 +34,7 @@ static u16 sSavedTm3Cnt;
 static u16 sSavedSioCnt;
 static u16 sSavedRCnt;
 
-int EReader_Send(size_t size, const void * src)
+int Unused_EReader_Send(u32 size, const void * src)
 {
     int result;
     EReaderHelper_SaveRegsState();
@@ -68,7 +68,7 @@ int EReader_Send(size_t size, const void * src)
         }
     }
 
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
+    CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
     EReaderHelper_RestoreRegsState();
     return result;
 }
@@ -107,7 +107,7 @@ int EReader_Recv(void * dest)
         }
     }
 
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
+    CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
     EReaderHelper_RestoreRegsState();
     return result;
 }
@@ -134,7 +134,7 @@ static void OpenSerialMulti(void)
     REG_IE |= INTR_FLAG_SERIAL;
     REG_IME = 1;
     if (sSendRecvMgr.state == 0)
-        CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
+        CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
 }
 
 static void OpenSerial32(void)
@@ -147,7 +147,7 @@ static void OpenSerial32(void)
     sCounter2 = 0;
 }
 
-u16 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBuffer)
+u16 EReaderHandleTransfer(u8 mode, u32 size, const void * data, void * recvBuffer)
 {
     switch (sSendRecvMgr.state)
     {
@@ -186,6 +186,7 @@ u16 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
                 sSendRecvMgr.cancellationReason = EREADER_CANCEL_TIMEOUT;
                 sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
             }
+
             if (sSendRecvMgr.xferState != EREADER_XFER_CHK)
             {
                 if (sSendRecvMgr.master_slave != 0 && sCounter1 > 2)
@@ -209,6 +210,7 @@ u16 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
     case EREADER_XFR_STATE_CHECKSUM:
         if (sSendRecvMgr.master_slave == 1 && sCounter1 > 2)
             EnableSio();
+
         if (++sCounter1 > 60)
         {
             sSendRecvMgr.cancellationReason = EREADER_CANCEL_TIMEOUT;
@@ -242,7 +244,7 @@ static bool16 DetermineSendRecvState(u8 mode)
 
 static void SetUpTransferManager(size_t size, const void * data, void * recvBuffer)
 {
-    if (sSendRecvMgr.master_slave)
+    if (sSendRecvMgr.master_slave != 0)
     {
         REG_SIOCNT |= SIO_38400_BPS;
         sSendRecvMgr.dataptr = (void *)data;
@@ -352,7 +354,7 @@ void EReaderHelper_SerialCallback(void)
         if (sSendRecvMgr.master_slave == 0)
             // Clock slave
             REG_SIODATA8 = sSendRecvMgr.checksumResult;
-        *(vu64 *)recv = REG_SIOMLT_RECV;
+        *(u64 *)recv = REG_SIOMLT_RECV;
         if (recv[1] == EREADER_CHECKSUM_OK || recv[1] == EREADER_CHECKSUM_ERR)
         {
             if (sSendRecvMgr.master_slave == 1)
@@ -377,7 +379,7 @@ static void DisableTm3(void)
 
 static void GetKeyInput(void)
 {
-    u16 rawKeys = REG_KEYINPUT ^ 0x3FF;
+    u16 rawKeys = REG_KEYINPUT ^ KEYS_MASK;
     sJoyNew = rawKeys & ~sJoyNewOrRepeated;
     sJoyNewOrRepeated = rawKeys;
 }
@@ -402,5 +404,5 @@ void EReaderHelper_RestoreRegsState(void)
 
 void EReaderHelper_ClearsSendRecvMgr(void)
 {
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
+    CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
 }

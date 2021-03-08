@@ -232,14 +232,19 @@ u16 EReaderHandleTransfer(u8 mode, u32 size, const void * data, void * recvBuffe
       | (sSendRecvMgr.checksumResult << EREADER_CHECKSUM_SHIFT);
 }
 
-static bool16 DetermineSendRecvState(u8 mode)
+static bool16 DetermineSendRecvState(u8 arg0)
 {
-    bool16 resp;
-    if ((*(vu32 *)REG_ADDR_SIOCNT & (SIO_MULTI_SI | SIO_MULTI_SD)) == SIO_MULTI_SD && mode)
-        resp = sSendRecvMgr.master_slave = TRUE;
+    const struct SioMultiCnt sioMultiCnt = *(struct SioMultiCnt *)REG_ADDR_SIOCNT;
+    if (!sioMultiCnt.si && sioMultiCnt.sd && arg0)
+    {
+        sSendRecvMgr.master_slave = TRUE;
+        return TRUE;
+    }
     else
-        resp = sSendRecvMgr.master_slave = FALSE;
-    return resp;
+    {
+        sSendRecvMgr.master_slave = FALSE;
+        return FALSE;
+    }
 }
 
 static void SetUpTransferManager(size_t size, const void * data, void * recvBuffer)

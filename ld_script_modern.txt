@@ -41,6 +41,13 @@ SECTIONS {
         *(.text*);
     } =0
 
+    .text.unlikely :
+    ALIGN(4)
+    {
+        src/crt0.o(.text.unlikely);
+        *(.text.unlikely*);
+    } =0
+
     script_data :
     ALIGN(4)
     {

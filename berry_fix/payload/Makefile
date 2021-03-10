@@ -1,8 +1,29 @@
-include $(DEVKITARM)/base_tools
+TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
-CPP := $(CC) -E
-LD := $(DEVKITARM)/bin/arm-none-eabi-ld
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
+ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
+include $(TOOLCHAIN)/base_tools
+else
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
+PREFIX := arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+export CC := $(PREFIX)gcc
+export AS := $(PREFIX)as
+endif
+export CPP := $(PREFIX)cpp
+export LD := $(PREFIX)ld
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -56,7 +77,7 @@ FIX := ../../tools/gbafix/gbafix$(EXE)
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: rom clean compare tidy
+.PHONY: all rom clean compare tidy
 
 C_SRCS := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
@@ -95,8 +116,7 @@ ifeq ($(COMPARE),1)
 endif
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare:
-	@$(MAKE) COMPARE=1
+compare: ; @$(MAKE) COMPARE=1
 
 clean: tidy
 	rm -f sound/direct_sound_samples/*.bin
@@ -158,7 +178,7 @@ $(OBJ_DIR)/sym_bss.ld: sym_bss.txt
 	$(RAMSCRGEN) .bss $< ENGLISH > $@
 
 $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms,../../tools/agbcc/lib > $@
+	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
 
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
@@ -171,4 +191,3 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
-

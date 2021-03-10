@@ -266,7 +266,7 @@ $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I . $(DATA_ASM_SUBDIR)/
 endif
 
 berry_fix:
-	@$(MAKE) -C berry_fix COMPARE=$(COMPARE)
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE) TOOLCHAIN=$(TOOLCHAIN)
 
 berry_fix/berry_fix.gba: berry_fix
 

@@ -1,8 +1,29 @@
-include $(DEVKITARM)/base_tools
+TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
-CPP := $(CC) -E
-LD := $(DEVKITARM)/bin/arm-none-eabi-ld
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
+ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
+include $(TOOLCHAIN)/base_tools
+else
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
+PREFIX := arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+export CC := $(PREFIX)gcc
+export AS := $(PREFIX)as
+endif
+export CPP := $(PREFIX)cpp
+export LD := $(PREFIX)ld
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -145,7 +166,7 @@ $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
 payload:
-	@$(MAKE) -C payload COMPARE=$(COMPARE)
+	@$(MAKE) -C payload COMPARE=$(COMPARE) TOOLCHAIN=$(TOOLCHAIN)
 
 payload/payload.gba: payload
 
@@ -164,4 +185,3 @@ $(ELF): ld_script.txt $(OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
-

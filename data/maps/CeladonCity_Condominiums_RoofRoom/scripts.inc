@@ -13,15 +13,15 @@ CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall:: @ 816C46D
 	setvar VAR_TEMP_1, SPECIES_EEVEE
 	givemon SPECIES_EEVEE, 25, ITEM_NONE
 	compare VAR_RESULT, 0
-	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty
+	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty
 	compare VAR_RESULT, 1
-	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveePC
+	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_NoMoreRoomForPokemon
 	release
 	end
 
-CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty:: @ 816C4A6
+CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty:: @ 816C4A6
 	removeobject LOCALID_EEVEE_POKEBALL
 	playfanfare MUS_LEVEL_UP
 	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
@@ -36,7 +36,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty:: @ 816C4A6
 	goto CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee
 	end
 
-CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveePC:: @ 816C4DA
+CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC:: @ 816C4DA
 	removeobject LOCALID_EEVEE_POKEBALL
 	playfanfare MUS_LEVEL_UP
 	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee

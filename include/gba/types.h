@@ -28,6 +28,10 @@ typedef u8  bool8;
 typedef u16 bool16;
 typedef u32 bool32;
 
+typedef volatile bool8  vbool8;
+typedef volatile bool16 vbool16;
+typedef volatile bool32 vbool32;
+
 struct BgCnt
 {
     u16 priority:2;

@@ -9,9 +9,9 @@
 
 static u8 sGpuRegBuffer[GPU_REG_BUF_SIZE];
 static u8 sGpuRegWaitingList[GPU_REG_BUF_SIZE];
-static volatile bool8 sGpuRegBufferLocked;
-static volatile bool8 sShouldSyncRegIE;
-static vu16 sRegIE;
+static vbool8 sGpuRegBufferLocked; // This must be volatile to avoid optimizing out this check
+static bool8 sShouldSyncRegIE;
+static u16 sRegIE;
 
 static void CopyBufferedValueToGpuReg(u8 regOffset);
 static void SyncRegIE(void);

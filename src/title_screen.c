@@ -448,7 +448,7 @@ static void SetTitleScreenScene_Init(s16 * data)
     ShowBg(2);
     ShowBg(3);
 
-    params.dmaDest = (volatile void *)REG_ADDR_BLDY;
+    params.dmaDest = (void *)REG_ADDR_BLDY;
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
     params.initState = 1;
     params.unused9 = 0;

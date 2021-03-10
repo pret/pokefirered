@@ -228,7 +228,7 @@ u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
-    &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
+    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
 
 const struct SpriteTemplate gUnknown_824EFF0 =

@@ -36,14 +36,18 @@
 #endif // ENGLISH
 
 // Crashes may occur due to section reordering in the modern build,
-// so we force BUGFIX here.
-#if MODERN
+// so we force BUGFIX and UBFIX here.
+#if MODERN || defined(BUGFIX)
+#ifndef UBFIX
+#define UBFIX
+#endif // UBFIX
 #ifndef BUGFIX
 #define BUGFIX
 #endif // BUGFIX
 #ifndef NONMATCHING
 #define NONMATCHING
 #endif // NONMATCHING
-#endif // MODERN
+#endif // MODERN || defined(BUGFIX)
+
 
 #endif // GUARD_CONFIG_H

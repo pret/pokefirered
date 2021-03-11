@@ -16,10 +16,8 @@
 
 #if defined(FIRERED)
 #define TITLE_TEXT gString_PokemonFireRed_Staff
-asm(".set TITLE_TEXT, gString_PokemonFireRed_Staff");
 #elif defined(LEAFGREEN)
 #define TITLE_TEXT gString_PokemonLeafGreen_Staff
-asm(".set TITLE_TEXT, gString_PokemonLeafGreen_Staff");
 #endif
 
 enum CreditsSceneIdx
@@ -140,7 +138,7 @@ struct CreditsResources
     u8 taskId;
     u16 timer;
     u16 scrcmdidx;
-    u8 canSpeedThrough;
+    bool8 canSpeedThrough;
     u8 whichMon;
     u8 windowId;
     bool8 windowIsActive;
@@ -803,7 +801,6 @@ static bool32 DoOverworldMapScrollScene(UNUSED u8 unused)
     }
 }
 
-#ifdef NONMATCHING
 static s32 RollCredits(void)
 {
     u16 win0v[8];
@@ -836,45 +833,41 @@ static s32 RollCredits(void)
         {
             win0v[0]--;
             win0v[1]++;
-            SetGpuReg(REG_OFFSET_WIN0V, win0v[1] + (win0v[0] << 8));
+            SetGpuReg(REG_OFFSET_WIN0V, (win0v[0] << 8) + win0v[1]);
         }
         return 0;
     case CREDITSSCENE_LOAD_PLAYER_SPRITE_AT_INDIGO:
-        if (sCreditsMgr->timer == 0)
-        {
-            LoadPlayerOrRivalSprite(0);
-            sCreditsMgr->timer = 100;
-            sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_TITLE_STAFF;
-        }
-        else
+        if (sCreditsMgr->timer != 0)
         {
             sCreditsMgr->timer--;
+            return 0;
         }
+        
+        LoadPlayerOrRivalSprite(0);
+        sCreditsMgr->timer = 100;
+        sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_TITLE_STAFF;
         return 0;
     case CREDITSSCENE_PRINT_TITLE_STAFF:
-        if (sCreditsMgr->timer == 0)
-        {
-            sCreditsMgr->timer = 360;
-            AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 0x08, 0x29, 1, 2, sTextColor_Header, 0, TITLE_TEXT);
-            sCreditsMgr->mainseqno = CREDITSSCENE_WAIT_TITLE_STAFF;
-        }
-        else
+        if (sCreditsMgr->timer != 0)
         {
             sCreditsMgr->timer--;
+            return 0;
+            
         }
+        sCreditsMgr->timer = 360;
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 0x08, 0x29, 1, 2, sTextColor_Header, 0, TITLE_TEXT);
+        sCreditsMgr->mainseqno = CREDITSSCENE_WAIT_TITLE_STAFF;
         return 0;
     case CREDITSSCENE_WAIT_TITLE_STAFF:
         if (sCreditsMgr->timer != 0)
         {
             sCreditsMgr->timer--;
+            return 0;
         }
-        else
-        {
-            DestroyCreditsWindow();
-            sCreditsMgr->mainseqno = CREDITSSCENE_EXEC_CMD;
-            sCreditsMgr->timer = 0;
-            sCreditsMgr->scrcmdidx = 0;
-        }
+        DestroyCreditsWindow();
+        sCreditsMgr->mainseqno = CREDITSSCENE_EXEC_CMD;
+        sCreditsMgr->timer = 0;
+        sCreditsMgr->scrcmdidx = 0;
         return 0;
     case CREDITSSCENE_EXEC_CMD:
         if (sCreditsMgr->timer != 0)
@@ -882,53 +875,50 @@ static s32 RollCredits(void)
             sCreditsMgr->timer--;
             return sCreditsMgr->canSpeedThrough;
         }
-        else
+
+        switch (sCreditsScript[sCreditsMgr->scrcmdidx].cmd)
         {
-            switch (sCreditsScript[sCreditsMgr->scrcmdidx].cmd)
-            {
-            case CREDITSSCRCMD_PRINT:
-                BeginNormalPaletteFade(0x00008000, 0, 0, 16, RGB_BLACK);
-                sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER1;
-                FillWindowPixelBuffer(sCreditsMgr->windowId, PIXEL_FILL(0));
-                return sCreditsMgr->canSpeedThrough;
-            case CREDITSSCRCMD_MAPNEXT:
-                sCreditsMgr->mainseqno = CREDITSSCENE_MAPNEXT_DESTROYWINDOW;
-                sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                FadeSelectedPals(1, 0, 0x3FFFFFFF);
-                break;
-            case CREDITSSCRCMD_MAP:
-                sCreditsMgr->mainseqno = CREDITSSCENE_MAP_LOADMAP_CREATESPRITES;
-                sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                break;
-            case CREDITSSCRCMD_MON:
-                sCreditsMgr->mainseqno = CREDITSSCENE_MON_DESTROY_ASSETS;
-                sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                FadeScreen(FADE_TO_BLACK, 0);
-                break;
-            case CREDITSSCRCMD_THEENDGFX:
-                sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_DESTROY_ASSETS;
-                sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 16, RGB_BLACK);
-                break;
-            case CREDITSSCRCMD_WAITBUTTON:
-                sCreditsMgr->mainseqno = CREDITSSCENE_WAITBUTTON;
-                break;
-            }
-            sCreditsMgr->timer = sCreditsScript[sCreditsMgr->scrcmdidx].duration;
-            sCreditsMgr->scrcmdidx++;
-            return 0;
+        case CREDITSSCRCMD_PRINT:
+            BeginNormalPaletteFade(0x00008000, 0, 0, 16, RGB_BLACK);
+            sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER1;
+            FillWindowPixelBuffer(sCreditsMgr->windowId, PIXEL_FILL(0));
+            return sCreditsMgr->canSpeedThrough;
+        case CREDITSSCRCMD_MAPNEXT:
+            sCreditsMgr->mainseqno = CREDITSSCENE_MAPNEXT_DESTROYWINDOW;
+            sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
+            FadeSelectedPals(1, 0, 0x3FFFFFFF);
+            break;
+        case CREDITSSCRCMD_MAP:
+            sCreditsMgr->mainseqno = CREDITSSCENE_MAP_LOADMAP_CREATESPRITES;
+            sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
+            break;
+        case CREDITSSCRCMD_MON:
+            sCreditsMgr->mainseqno = CREDITSSCENE_MON_DESTROY_ASSETS;
+            sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
+            FadeScreen(FADE_TO_BLACK, 0);
+            break;
+        case CREDITSSCRCMD_THEENDGFX:
+            sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_DESTROY_ASSETS;
+            sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
+            BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 16, RGB_BLACK);
+            break;
+        case CREDITSSCRCMD_WAITBUTTON:
+            sCreditsMgr->mainseqno = CREDITSSCENE_WAITBUTTON;
+            break;
         }
+        sCreditsMgr->timer = sCreditsScript[sCreditsMgr->scrcmdidx].duration;
+        sCreditsMgr->scrcmdidx++;
+        return 0;
     case CREDITSSCENE_PRINT_ADDPRINTER1:
-        if (!gPaletteFade.active)
-        {
-            win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8; // unused
-            AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_0);
-            sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER2;
-        }
+        if (gPaletteFade.active)
+            return sCreditsMgr->canSpeedThrough;
+        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8; // unused
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_0);
+        sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER2;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_ADDPRINTER2:
         win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8;
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, 2, 8, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_4);
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, 2, 8, 6, 0, 0, sTextColor_Regular, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_4);
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_DELAY;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_DELAY:
@@ -949,7 +939,7 @@ static s32 RollCredits(void)
     case CREDITSSCENE_MAPNEXT_LOADMAP:
         if (DoOverworldMapScrollScene(sCreditsMgr->whichMon))
         {
-            sCreditsMgr->canSpeedThrough = 1;
+            sCreditsMgr->canSpeedThrough = TRUE;
             sCreditsMgr->mainseqno = CREDITSSCENE_EXEC_CMD;
         }
         return 0;
@@ -958,12 +948,12 @@ static s32 RollCredits(void)
         {
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
-            while (!DoOverworldMapScrollScene(sCreditsMgr->whichMon))
-            {}
+            while (!DoOverworldMapScrollScene(sCreditsMgr->whichMon)){};
+
             switch (sCreditsMgr->whichMon)
             {
-            case 3:
             default:
+            case 3:
                 win0v[0] = 1;
                 break;
             case 6:
@@ -977,7 +967,7 @@ static s32 RollCredits(void)
                 break;
             }
             LoadPlayerOrRivalSprite(win0v[0]);
-            sCreditsMgr->canSpeedThrough = 1;
+            sCreditsMgr->canSpeedThrough = TRUE;
             sCreditsMgr->mainseqno = CREDITSSCENE_EXEC_CMD;
         }
         return 0;
@@ -987,7 +977,7 @@ static s32 RollCredits(void)
             DestroyPlayerOrRivalSprite();
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
-            sCreditsMgr->canSpeedThrough = 0;
+            sCreditsMgr->canSpeedThrough = FALSE;
             sCreditsMgr->mainseqno = CREDITSSCENE_MON_SHOW;
         }
         return 0;
@@ -1002,7 +992,7 @@ static s32 RollCredits(void)
         {
             DestroyCreditsWindow();
             sCreditsMgr->subseqno = 0;
-            sCreditsMgr->canSpeedThrough = 0;
+            sCreditsMgr->canSpeedThrough = FALSE;
             sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_SHOW;
         }
         return 0;
@@ -1017,14 +1007,18 @@ static s32 RollCredits(void)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
             sCreditsMgr->mainseqno = CREDITSSCENE_TERMINATE;
+            return 0;
         }
-        else if (sCreditsMgr->timer == 0)
+        
+        if (sCreditsMgr->timer != 0)
+        {
+            sCreditsMgr->timer--;
+        }
+        else
         {
             sCreditsMgr->mainseqno = CREDITSSCENE_TERMINATE;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
         }
-        else
-            sCreditsMgr->timer--;
         return 0;
     case CREDITSSCENE_TERMINATE:
         if (!gPaletteFade.active)
@@ -1033,714 +1027,6 @@ static s32 RollCredits(void)
     }
     return 2;
 }
-#else
-NAKED
-static s32 RollCredits(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tsub sp, 0x24\n"
-                "\tldr r1, _080F3BEC @ =sCreditsMgr\n"
-                "\tldr r0, [r1]\n"
-                "\tldrb r0, [r0]\n"
-                "\tadds r7, r1, 0\n"
-                "\tcmp r0, 0x12\n"
-                "\tbls _080F3BE2\n"
-                "\tb _080F4180_default_return2\n"
-                "_080F3BE2:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _080F3BF0 @ =_080F3BF4\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_080F3BEC: .4byte sCreditsMgr\n"
-                "_080F3BF0: .4byte _080F3BF4\n"
-                "\t.align 2, 0\n"
-                "_080F3BF4:\n"
-                "\t.4byte _080F3C40_case00\n"
-                "\t.4byte _080F3C64_case01\n"
-                "\t.4byte _080F3C98_case02\n"
-                "\t.4byte _080F3CEE_case03\n"
-                "\t.4byte _080F3D0A_case04\n"
-                "\t.4byte _080F3D48_case05\n"
-                "\t.4byte _080F3D6A_case06\n"
-                "\t.4byte _080F3EB4_case07\n"
-                "\t.4byte _080F3F24_case08\n"
-                "\t.4byte _080F3F84_case09\n"
-                "\t.4byte _080F3FC4_case0A\n"
-                "\t.4byte _080F3FF0_case0B\n"
-                "\t.4byte _080F400A_case0C\n"
-                "\t.4byte _080F4084_case0D\n"
-                "\t.4byte _080F40B8_case0E\n"
-                "\t.4byte _080F40D0_case0F\n"
-                "\t.4byte _080F4100_case10\n"
-                "\t.4byte _080F4118_case11\n"
-                "\t.4byte _080F4170_case12\n"
-                "_080F3C40_case00:\n"
-                "\tbl SwitchWin1OffWin0On\n"
-                "\tmovs r0, 0x40\n"
-                "\tmovs r1, 0xF0\n"
-                "\tbl SetGpuReg\n"
-                "\tldr r1, _080F3C5C @ =0x00004f51\n"
-                "\tmovs r0, 0x44\n"
-                "\tbl SetGpuReg\n"
-                "\tldr r0, _080F3C60 @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x1\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F3C5C: .4byte 0x00004f51\n"
-                "_080F3C60: .4byte sCreditsMgr\n"
-                "_080F3C64_case01:\n"
-                "\tbl InitBgDarkenEffect\n"
-                "\tbl CreateCreditsWindow\n"
-                "\tmovs r0, 0xF0\n"
-                "\tbl Menu_LoadStdPalAt\n"
-                "\tldr r0, _080F3C8C @ =gPlttBufferUnfaded\n"
-                "\tmovs r2, 0xFF\n"
-                "\tlsls r2, 1\n"
-                "\tadds r0, r2\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080F3C90 @ =gPlttBufferFaded\n"
-                "\tadds r0, r2\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080F3C94 @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x2\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F3C8C: .4byte gPlttBufferUnfaded\n"
-                "_080F3C90: .4byte gPlttBufferFaded\n"
-                "_080F3C94: .4byte sCreditsMgr\n"
-                "_080F3C98_case02:\n"
-                "\tmovs r0, 0x44\n"
-                "\tbl GetGpuReg\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 24\n"
-                "\tstrh r0, [r1]\n"
-                "\tmovs r0, 0x44\n"
-                "\tbl GetGpuReg\n"
-                "\tadd r2, sp, 0x14\n"
-                "\tmovs r1, 0xFF\n"
-                "\tands r1, r0\n"
-                "\tstrh r1, [r2, 0x2]\n"
-                "\tadds r0, r2, 0\n"
-                "\tldrh r0, [r0]\n"
-                "\tcmp r0, 0x24\n"
-                "\tbne _080F3CCC\n"
-                "\tldr r0, _080F3CC8 @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tmovs r0, 0x3\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F3CC8: .4byte sCreditsMgr\n"
-                "_080F3CCC:\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tsubs r0, 0x1\n"
-                "\tstrh r0, [r1]\n"
-                "\tadds r2, r1, 0\n"
-                "\tadds r0, r1, 0\n"
-                "\tldrh r1, [r0, 0x2]\n"
-                "\tadds r1, 0x1\n"
-                "\tstrh r1, [r2, 0x2]\n"
-                "\tldrh r0, [r0]\n"
-                "\tlsls r0, 8\n"
-                "\tadds r1, r0\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r1, 16\n"
-                "\tmovs r0, 0x44\n"
-                "\tbl SetGpuReg\n"
-                "\tb _080F3D06_return0\n"
-                "_080F3CEE_case03:\n"
-                "\tldr r1, [r7]\n"
-                "\tldrh r0, [r1, 0x4]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080F3D52_decfield4_return0\n"
-                "\tmovs r0, 0\n"
-                "\tbl LoadPlayerOrRivalSprite\n"
-                "\tldr r0, [r7]\n"
-                "\tmovs r1, 0x64\n"
-                "\tstrh r1, [r0, 0x4]\n"
-                "\tmovs r1, 0x4\n"
-                "\tstrb r1, [r0]\n"
-                "_080F3D06_return0:\n"
-                "\tmovs r0, 0\n"
-                "\tb _080F4182_return\n"
-                "_080F3D0A_case04:\n"
-                "\tldr r1, [r7]\n"
-                "\tldrh r0, [r1, 0x4]\n"
-                "\tadds r2, r0, 0\n"
-                "\tcmp r2, 0\n"
-                "\tbne _080F3D52_decfield4_return0\n"
-                "\tmovs r0, 0xB4\n"
-                "\tlsls r0, 1\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tldrb r0, [r1, 0xA]\n"
-                "\tmovs r1, 0x1\n"
-                "\tstr r1, [sp]\n"
-                "\tmovs r1, 0x2\n"
-                "\tstr r1, [sp, 0x4]\n"
-                "\tldr r1, _080F3D40 @ =sTextColor_Header\n"
-                "\tstr r1, [sp, 0x8]\n"
-                "\tstr r2, [sp, 0xC]\n"
-                "\tldr r1, _080F3D44 @ =TITLE_TEXT\n"
-                "\tstr r1, [sp, 0x10]\n"
-                "\tmovs r1, 0x1\n"
-                "\tmovs r2, 0x8\n"
-                "\tmovs r3, 0x29\n"
-                "\tbl AddTextPrinterParameterized4\n"
-                "\tldr r1, [r7]\n"
-                "\tmovs r0, 0x5\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F3D40: .4byte sTextColor_Header\n"
-                "_080F3D44: .4byte TITLE_TEXT\n"
-                "_080F3D48_case05:\n"
-                "\tldr r1, [r7]\n"
-                "\tldrh r0, [r1, 0x4]\n"
-                "\tadds r4, r0, 0\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _080F3D58\n"
-                "_080F3D52_decfield4_return0:\n"
-                "\tsubs r0, 0x1\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tb _080F3D06_return0\n"
-                "_080F3D58:\n"
-                "\tbl DestroyCreditsWindow\n"
-                "\tldr r0, [r7]\n"
-                "\tmovs r1, 0x6\n"
-                "\tstrb r1, [r0]\n"
-                "\tldr r0, [r7]\n"
-                "\tstrh r4, [r0, 0x4]\n"
-                "\tstrh r4, [r0, 0x6]\n"
-                "\tb _080F3D06_return0\n"
-                "_080F3D6A_case06:\n"
-                "\tldr r2, [r7]\n"
-                "\tldrh r0, [r2, 0x4]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080F3D7A\n"
-                "\tsubs r0, 0x1\n"
-                "\tstrh r0, [r2, 0x4]\n"
-                "\tldrb r0, [r2, 0x8]\n"
-                "\tb _080F4182_return\n"
-                "_080F3D7A:\n"
-                "\tldr r1, _080F3D94 @ =sCreditsScript\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0x5\n"
-                "\tbls _080F3D8A\n"
-                "\tb _080F3E94\n"
-                "_080F3D8A:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _080F3D98 @ =_080F3D9C\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_080F3D94: .4byte sCreditsScript\n"
-                "_080F3D98: .4byte _080F3D9C\n"
-                "\t.align 2, 0\n"
-                "_080F3D9C:\n"
-                "\t.4byte _080F3DB4\n"
-                "\t.4byte _080F3DE0\n"
-                "\t.4byte _080F3E10\n"
-                "\t.4byte _080F3E30\n"
-                "\t.4byte _080F3E58\n"
-                "\t.4byte _080F3E8C\n"
-                "_080F3DB4:\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 8\n"
-                "\tmovs r1, 0\n"
-                "\tstr r1, [sp]\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0x10\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tldr r4, _080F3DDC @ =sCreditsMgr\n"
-                "\tldr r1, [r4]\n"
-                "\tmovs r0, 0x7\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r0, [r4]\n"
-                "\tldrb r0, [r0, 0xA]\n"
-                "\tmovs r1, 0\n"
-                "\tbl FillWindowPixelBuffer\n"
-                "\tldr r0, [r4]\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tb _080F4182_return\n"
-                "\t.align 2, 0\n"
-                "_080F3DDC: .4byte sCreditsMgr\n"
-                "_080F3DE0:\n"
-                "\tldr r2, _080F3E04 @ =sCreditsMgr\n"
-                "\tldr r1, [r2]\n"
-                "\tmovs r0, 0xA\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r2, [r2]\n"
-                "\tldr r1, _080F3E08 @ =sCreditsScript\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0, 0x1]\n"
-                "\tstrb r0, [r2, 0x9]\n"
-                "\tldr r2, _080F3E0C @ =0x3fffffff\n"
-                "\tmovs r0, 0x1\n"
-                "\tmovs r1, 0\n"
-                "\tbl FadeSelectedPals\n"
-                "\tb _080F3E94\n"
-                "\t.align 2, 0\n"
-                "_080F3E04: .4byte sCreditsMgr\n"
-                "_080F3E08: .4byte sCreditsScript\n"
-                "_080F3E0C: .4byte 0x3fffffff\n"
-                "_080F3E10:\n"
-                "\tldr r2, _080F3E28 @ =sCreditsMgr\n"
-                "\tldr r1, [r2]\n"
-                "\tmovs r0, 0xC\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r2, [r2]\n"
-                "\tldr r1, _080F3E2C @ =sCreditsScript\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0, 0x1]\n"
-                "\tstrb r0, [r2, 0x9]\n"
-                "\tb _080F3E94\n"
-                "\t.align 2, 0\n"
-                "_080F3E28: .4byte sCreditsMgr\n"
-                "_080F3E2C: .4byte sCreditsScript\n"
-                "_080F3E30:\n"
-                "\tldr r2, _080F3E50 @ =sCreditsMgr\n"
-                "\tldr r1, [r2]\n"
-                "\tmovs r0, 0xD\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r2, [r2]\n"
-                "\tldr r1, _080F3E54 @ =sCreditsScript\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0, 0x1]\n"
-                "\tstrb r0, [r2, 0x9]\n"
-                "\tmovs r0, 0x1\n"
-                "\tmovs r1, 0\n"
-                "\tbl FadeScreen\n"
-                "\tb _080F3E94\n"
-                "\t.align 2, 0\n"
-                "_080F3E50: .4byte sCreditsMgr\n"
-                "_080F3E54: .4byte sCreditsScript\n"
-                "_080F3E58:\n"
-                "\tldr r2, _080F3E84 @ =sCreditsMgr\n"
-                "\tldr r1, [r2]\n"
-                "\tmovs r3, 0\n"
-                "\tmovs r0, 0xF\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r2, [r2]\n"
-                "\tldr r1, _080F3E88 @ =sCreditsScript\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0, 0x1]\n"
-                "\tstrb r0, [r2, 0x9]\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tstr r3, [sp]\n"
-                "\tmovs r1, 0x4\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0x10\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tb _080F3E94\n"
-                "\t.align 2, 0\n"
-                "_080F3E84: .4byte sCreditsMgr\n"
-                "_080F3E88: .4byte sCreditsScript\n"
-                "_080F3E8C:\n"
-                "\tldr r0, _080F3EAC @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x11\n"
-                "\tstrb r0, [r1]\n"
-                "_080F3E94:\n"
-                "\tldr r0, _080F3EAC @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tldr r2, _080F3EB0 @ =sCreditsScript\n"
-                "\tldrh r0, [r1, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r2\n"
-                "\tldrh r0, [r0, 0x2]\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tldrh r0, [r1, 0x6]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1, 0x6]\n"
-                "\tb _080F3D06_return0\n"
-                "\t.align 2, 0\n"
-                "_080F3EAC: .4byte sCreditsMgr\n"
-                "_080F3EB0: .4byte sCreditsScript\n"
-                "_080F3EB4_case07:\n"
-                "\tldr r0, _080F3F14 @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "\tcmp r6, 0\n"
-                "\tbne _080F3FBA_returnfield8\n"
-                "\tadd r3, sp, 0x14\n"
-                "\tldr r5, _080F3F18 @ =sCreditsTexts\n"
-                "\tldr r4, _080F3F1C @ =sCreditsScript\n"
-                "\tldr r2, [r7]\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r4\n"
-                "\tldrb r1, [r0, 0x1]\n"
-                "\tlsls r0, r1, 1\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tstrh r0, [r3]\n"
-                "\tldrb r0, [r2, 0xA]\n"
-                "\tstr r6, [sp]\n"
-                "\tstr r6, [sp, 0x4]\n"
-                "\tldr r1, _080F3F20 @ =sTextColor_Header\n"
-                "\tstr r1, [sp, 0x8]\n"
-                "\tmovs r1, 0x1\n"
-                "\tnegs r1, r1\n"
-                "\tstr r1, [sp, 0xC]\n"
-                "\tldrh r1, [r2, 0x6]\n"
-                "\tlsls r1, 2\n"
-                "\tadds r1, r4\n"
-                "\tldrb r2, [r1, 0x1]\n"
-                "\tlsls r1, r2, 1\n"
-                "\tadds r1, r2\n"
-                "\tlsls r1, 2\n"
-                "\tadds r1, r5\n"
-                "\tldr r1, [r1]\n"
-                "\tstr r1, [sp, 0x10]\n"
-                "\tmovs r1, 0x1\n"
-                "\tmovs r2, 0x2\n"
-                "\tmovs r3, 0x6\n"
-                "\tbl AddTextPrinterParameterized4\n"
-                "\tldr r1, [r7]\n"
-                "\tmovs r0, 0x8\n"
-                "\tb _080F3FB8_setfield0_returnfield8\n"
-                "\t.align 2, 0\n"
-                "_080F3F14: .4byte gPaletteFade\n"
-                "_080F3F18: .4byte sCreditsTexts\n"
-                "_080F3F1C: .4byte sCreditsScript\n"
-                "_080F3F20: .4byte sTextColor_Header\n"
-                "_080F3F24_case08:\n"
-                "\tadd r4, sp, 0x14\n"
-                "\tldr r3, _080F3F78 @ =sCreditsTexts\n"
-                "\tldr r5, _080F3F7C @ =sCreditsScript\n"
-                "\tldr r2, [r7]\n"
-                "\tldrh r0, [r2, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r5\n"
-                "\tldrb r1, [r0, 0x1]\n"
-                "\tlsls r0, r1, 1\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r3\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r0, [r4]\n"
-                "\tldrb r0, [r2, 0xA]\n"
-                "\tstr r1, [sp]\n"
-                "\tstr r1, [sp, 0x4]\n"
-                "\tldr r1, _080F3F80 @ =sTextColor_Regular\n"
-                "\tstr r1, [sp, 0x8]\n"
-                "\tmovs r1, 0x1\n"
-                "\tnegs r1, r1\n"
-                "\tstr r1, [sp, 0xC]\n"
-                "\tldrh r1, [r2, 0x6]\n"
-                "\tlsls r1, 2\n"
-                "\tadds r1, r5\n"
-                "\tldrb r2, [r1, 0x1]\n"
-                "\tlsls r1, r2, 1\n"
-                "\tadds r1, r2\n"
-                "\tlsls r1, 2\n"
-                "\tadds r3, 0x4\n"
-                "\tadds r1, r3\n"
-                "\tldr r1, [r1]\n"
-                "\tstr r1, [sp, 0x10]\n"
-                "\tmovs r1, 0x2\n"
-                "\tmovs r2, 0x8\n"
-                "\tmovs r3, 0x6\n"
-                "\tbl AddTextPrinterParameterized4\n"
-                "\tldr r1, [r7]\n"
-                "\tmovs r0, 0x9\n"
-                "\tb _080F3FB8_setfield0_returnfield8\n"
-                "\t.align 2, 0\n"
-                "_080F3F78: .4byte sCreditsTexts\n"
-                "_080F3F7C: .4byte sCreditsScript\n"
-                "_080F3F80: .4byte sTextColor_Regular\n"
-                "_080F3F84_case09:\n"
-                "\tldr r0, [r7]\n"
-                "\tldrb r0, [r0, 0xA]\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl CopyWindowToVram\n"
-                "\tldr r1, [r7]\n"
-                "\tldr r2, _080F3FC0 @ =sCreditsScript\n"
-                "\tldrh r0, [r1, 0x6]\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r2\n"
-                "\tldrh r0, [r0, 0x2]\n"
-                "\tmovs r2, 0\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tldrh r0, [r1, 0x6]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1, 0x6]\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 8\n"
-                "\tstr r2, [sp]\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r2, 0x10\n"
-                "\tmovs r3, 0\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tldr r1, [r7]\n"
-                "\tmovs r0, 0x6\n"
-                "_080F3FB8_setfield0_returnfield8:\n"
-                "\tstrb r0, [r1]\n"
-                "_080F3FBA_returnfield8:\n"
-                "\tldr r0, [r7]\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tb _080F4182_return\n"
-                "\t.align 2, 0\n"
-                "_080F3FC0: .4byte sCreditsScript\n"
-                "_080F3FC4_case0A:\n"
-                "\tldr r0, _080F3FE8 @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _080F3FD6\n"
-                "\tb _080F3D06_return0\n"
-                "_080F3FD6:\n"
-                "\tbl DestroyCreditsWindow\n"
-                "\tldr r1, _080F3FEC @ =sCreditsMgr\n"
-                "\tldr r0, [r1]\n"
-                "\tstrb r4, [r0, 0x1]\n"
-                "\tldr r1, [r1]\n"
-                "\tmovs r0, 0xB\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F3FE8: .4byte gPaletteFade\n"
-                "_080F3FEC: .4byte sCreditsMgr\n"
-                "_080F3FF0_case0B:\n"
-                "\tldr r0, [r7]\n"
-                "\tldrb r0, [r0, 0x9]\n"
-                "\tbl DoOverworldMapScrollScene\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080F3FFE\n"
-                "\tb _080F3D06_return0\n"
-                "_080F3FFE:\n"
-                "\tldr r1, [r7]\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrb r0, [r1, 0x8]\n"
-                "\tldr r1, [r7]\n"
-                "\tmovs r0, 0x6\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "_080F400A_case0C:\n"
-                "\tldr r0, _080F4050 @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _080F401C\n"
-                "\tb _080F3D06_return0\n"
-                "_080F401C:\n"
-                "\tbl DestroyCreditsWindow\n"
-                "\tldr r1, _080F4054 @ =sCreditsMgr\n"
-                "\tldr r0, [r1]\n"
-                "\tstrb r4, [r0, 0x1]\n"
-                "\tadds r4, r1, 0\n"
-                "_080F4028:\n"
-                "\tldr r0, [r4]\n"
-                "\tldrb r0, [r0, 0x9]\n"
-                "\tbl DoOverworldMapScrollScene\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080F4028\n"
-                "\tldr r0, _080F4054 @ =sCreditsMgr\n"
-                "\tldr r0, [r0]\n"
-                "\tldrb r0, [r0, 0x9]\n"
-                "\tcmp r0, 0x6\n"
-                "\tbeq _080F4058\n"
-                "\tcmp r0, 0x6\n"
-                "\tble _080F404A\n"
-                "\tcmp r0, 0x9\n"
-                "\tbeq _080F405E\n"
-                "\tcmp r0, 0xC\n"
-                "\tbeq _080F4064\n"
-                "_080F404A:\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tmovs r0, 0x1\n"
-                "\tb _080F4068\n"
-                "\t.align 2, 0\n"
-                "_080F4050: .4byte gPaletteFade\n"
-                "_080F4054: .4byte sCreditsMgr\n"
-                "_080F4058:\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tmovs r0, 0x2\n"
-                "\tb _080F4068\n"
-                "_080F405E:\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tmovs r0, 0x3\n"
-                "\tb _080F4068\n"
-                "_080F4064:\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tmovs r0, 0x4\n"
-                "_080F4068:\n"
-                "\tstrh r0, [r1]\n"
-                "\tadd r0, sp, 0x14\n"
-                "\tldrb r0, [r0]\n"
-                "\tbl LoadPlayerOrRivalSprite\n"
-                "\tldr r2, _080F4080 @ =sCreditsMgr\n"
-                "\tldr r1, [r2]\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrb r0, [r1, 0x8]\n"
-                "\tldr r1, [r2]\n"
-                "\tmovs r0, 0x6\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F4080: .4byte sCreditsMgr\n"
-                "_080F4084_case0D:\n"
-                "\tldr r0, _080F40B0 @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _080F4096\n"
-                "\tb _080F3D06_return0\n"
-                "_080F4096:\n"
-                "\tbl DestroyPlayerOrRivalSprite\n"
-                "\tbl DestroyCreditsWindow\n"
-                "\tldr r1, _080F40B4 @ =sCreditsMgr\n"
-                "\tldr r0, [r1]\n"
-                "\tstrb r4, [r0, 0x1]\n"
-                "\tldr r0, [r1]\n"
-                "\tstrb r4, [r0, 0x8]\n"
-                "\tldr r1, [r1]\n"
-                "\tmovs r0, 0xE\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F40B0: .4byte gPaletteFade\n"
-                "_080F40B4: .4byte sCreditsMgr\n"
-                "_080F40B8_case0E:\n"
-                "\tbl DoCreditsMonScene\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080F40C2\n"
-                "\tb _080F3D06_return0\n"
-                "_080F40C2:\n"
-                "\tldr r0, _080F40CC @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x6\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F40CC: .4byte sCreditsMgr\n"
-                "_080F40D0_case0F:\n"
-                "\tldr r0, _080F40F8 @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0\n"
-                "\tbeq _080F40E2\n"
-                "\tb _080F3D06_return0\n"
-                "_080F40E2:\n"
-                "\tbl DestroyCreditsWindow\n"
-                "\tldr r1, _080F40FC @ =sCreditsMgr\n"
-                "\tldr r0, [r1]\n"
-                "\tstrb r4, [r0, 0x1]\n"
-                "\tldr r0, [r1]\n"
-                "\tstrb r4, [r0, 0x8]\n"
-                "\tldr r1, [r1]\n"
-                "\tmovs r0, 0x10\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F40F8: .4byte gPaletteFade\n"
-                "_080F40FC: .4byte sCreditsMgr\n"
-                "_080F4100_case10:\n"
-                "\tbl DoCopyrightOrTheEndGfxScene\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080F410A\n"
-                "\tb _080F3D06_return0\n"
-                "_080F410A:\n"
-                "\tldr r0, _080F4114 @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x6\n"
-                "\tb _080F413C_setfield0_return0\n"
-                "\t.align 2, 0\n"
-                "_080F4114: .4byte sCreditsMgr\n"
-                "_080F4118_case11:\n"
-                "\tldr r0, _080F4140 @ =gMain\n"
-                "\tldrh r1, [r0, 0x2E]\n"
-                "\tmovs r0, 0x1\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080F414C\n"
-                "\tmovs r0, 0x1\n"
-                "\tnegs r0, r0\n"
-                "\tldr r1, _080F4144 @ =0x00007fff\n"
-                "\tstr r1, [sp]\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0x10\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tldr r0, _080F4148 @ =sCreditsMgr\n"
-                "\tldr r1, [r0]\n"
-                "\tmovs r0, 0x12\n"
-                "_080F413C_setfield0_return0:\n"
-                "\tstrb r0, [r1]\n"
-                "\tb _080F3D06_return0\n"
-                "\t.align 2, 0\n"
-                "_080F4140: .4byte gMain\n"
-                "_080F4144: .4byte 0x00007fff\n"
-                "_080F4148: .4byte sCreditsMgr\n"
-                "_080F414C:\n"
-                "\tldr r1, [r7]\n"
-                "\tldrh r0, [r1, 0x4]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080F4156\n"
-                "\tb _080F3D52_decfield4_return0\n"
-                "_080F4156:\n"
-                "\tmovs r0, 0x12\n"
-                "\tstrb r0, [r1]\n"
-                "\tsubs r0, 0x13\n"
-                "\tldr r1, _080F416C @ =0x00007fff\n"
-                "\tstr r1, [sp]\n"
-                "\tmovs r1, 0\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0x10\n"
-                "\tbl BeginNormalPaletteFade\n"
-                "\tb _080F3D06_return0\n"
-                "\t.align 2, 0\n"
-                "_080F416C: .4byte 0x00007fff\n"
-                "_080F4170_case12:\n"
-                "\tldr r0, _080F418C @ =gPaletteFade\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tmovs r0, 0x80\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080F4180_default_return2\n"
-                "\tbl DestroyCreditsWindow\n"
-                "_080F4180_default_return2:\n"
-                "\tmovs r0, 0x2\n"
-                "_080F4182_return:\n"
-                "\tadd sp, 0x24\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1\n"
-                "\t.align 2, 0\n"
-                "_080F418C: .4byte gPaletteFade");
-}
-#endif //NONMATCHING
 
 static void VBlankCB(void)
 {
@@ -1985,7 +1271,7 @@ static bool32 DoCopyrightOrTheEndGfxScene(void)
 
 static void Task_MovePlayerAndGroundSprites(u8 taskId)
 {
-    struct CreditsTaskData * data = (void *)gTasks[taskId].data;
+    struct CreditsTaskData * data = (struct CreditsTaskData*)gTasks[taskId].data;
     switch (data->spriteMoveCmd)
     {
     case 0:
@@ -2029,7 +1315,7 @@ static void DestroyPlayerOrRivalSprite(void)
 {
     if (sCreditsMgr->taskId != 0xFF)
     {
-        struct CreditsTaskData * data = (void *)gTasks[sCreditsMgr->taskId].data;
+        struct CreditsTaskData * data = (struct CreditsTaskData *)gTasks[sCreditsMgr->taskId].data;
         FreeSpriteTilesByTag(data->playerTilesTag);
         DestroySprite(&gSprites[data->playerSpriteId]);
         FreeSpriteTilesByTag(data->groundTilesTag);
@@ -2050,7 +1336,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
     if (sCreditsMgr->taskId == 0xFF)
     {
         taskId = CreateTask(Task_MovePlayerAndGroundSprites, 0);
-        data = (void *)gTasks[taskId].data;
+        data = (struct CreditsTaskData *)gTasks[taskId].data;
         sCreditsMgr->taskId = taskId;
         switch (sPlayerRivalSpriteParams[whichScene][2])
         {

@@ -649,29 +649,27 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
     }
 }
 
+#define BATTERY_COUNTER (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF)
+#define REMATCH_STEP_COUNTER ((gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF)
 bool8 UpdateVsSeekerStepCounter(void)
 {
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
     {
-        if ((gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) < 100)
+        if (BATTERY_COUNTER < 100)
             gSaveBlock1Ptr->trainerRematchStepCounter++;
     }
 
     if (FlagGet(FLAG_SYS_VS_SEEKER_CHARGING) == TRUE)
     {
         u8 x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        u32 r4 = 0xFF;
 
-        if (x < 100)
+        if (REMATCH_STEP_COUNTER < 100)
         {
-            x++;
-        #ifndef NONMATCHING // fool the compiler that r4 has been changed
-            asm("":"=r"(r4));
-        #endif
+            x = REMATCH_STEP_COUNTER + 1;
             gSaveBlock1Ptr->trainerRematchStepCounter = (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) | (x << 8);
         }
-        x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & r4;
-        if (x == 100)
+       
+        if (REMATCH_STEP_COUNTER == 100)
         {
             FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
             VsSeekerResetChargingStepCounter();
@@ -859,77 +857,67 @@ static u8 CanUseVsSeeker(void)
 
 static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 {
-    u16 r8 = 0;
-    u8 sp0 = 0;
+    u16 trainerId;
+    u8 sp0, r7;
+    u8 retVar;
     s32 vsSeekerIdx;
-    u8 *r2;
-#ifndef NONMATCHING
-    register u32 r3 asm("r3");
-    register s32 r0_ asm("r0");
-    asm("":::"r10", "r8", "r6", "r4");
-#endif
+    u16 randNum;
 
-    for (vsSeekerIdx = 0; sVsSeeker->trainerInfo[vsSeekerIdx].localId != 0xFF; vsSeekerIdx++)
+    retVar = 0;
+    randNum = 0;
+    trainerId = 0;
+    sp0 = 0;
+    r7 = 0;
+    
+    vsSeekerIdx = 0;
+    while (sVsSeeker->trainerInfo[vsSeekerIdx].localId != 0xFF) // There is NO reason why this shouldn't be written as a for loop, except that this does not match
     {
-        if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[vsSeekerIdx]) == 1)
+        if (IsTrainerVisibleOnScreen(&sVsSeeker->trainerInfo[vsSeekerIdx]) == TRUE)
         {
-            r8 = sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx;
-            if (!HasTrainerBeenFought(r8))
+            trainerId = sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx;
+            if (!HasTrainerBeenFought(trainerId))
             {
                 StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerUnfought);
                 sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx += 0;
-                sVsSeeker->trainerHasNotYetBeenFought = 1;
+                sVsSeeker->trainerHasNotYetBeenFought = TRUE;
+                vsSeekerIdx++;
+                continue;
+            }
+
+            r7 = GetNextAvailableRematchTrainer(a0, trainerId, &sp0);
+            if (r7 == 0)
+            {
+               StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
+
+               sVsSeeker->trainerDoesNotWantRematch = TRUE;
+
             }
             else
             {
-                u8 r7 = GetNextAvailableRematchTrainer(a0, r8, &sp0);
-                if (r7 == 0)
-                {
-                    StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
-                #ifdef NONMATCHING
-                    sVsSeeker->trainerDoesNotWantRematch = 1;
-                #else
-                    r2 = (u8 *)sVsSeeker;
-                    r3 = 0x431;
-                    asm("":::"r1");
-                    r2 = &r2[r3];
-                    *(r2) |= 2;
-                #endif
-                }
-                else
-                {
-                    u16 rval = Random() % 100;
-                    u8 r0 = GetCurVsSeekerResponse(vsSeekerIdx, r8);
-                    if (r0 == 2)
-                        rval = 100;
-                    else if (r0 == 1)
-                        rval = 0;
-                    if (rval < 30)
-                    {
-                        StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
-                    #ifdef NONMATCHING
-                        sVsSeeker->trainerDoesNotWantRematch = 1;
-                    #else
-                        r2 = (u8 *)sVsSeeker;
-                        r0_ = 0x431;
-                        asm("":::"r1");
-                        r2 = &r2[r0_];
-                        *(r2) |= 2;
-                    #endif
-                    }
-                    else
-                    {
-                        gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
-                        ShiftStillObjectEventCoords(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
-                        StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerRematch);
-                        sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
-                        sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
-                        sVsSeeker->numRematchableTrainers++;
-                        sVsSeeker->trainerWantsRematch = 1;
-                    }
-                }
+               randNum = Random() % 100;
+               retVar = GetCurVsSeekerResponse(vsSeekerIdx, trainerId);
+               if (retVar == 2)
+                  randNum = 100;
+               else if (retVar == 1)
+                  randNum = 0;
+               if (randNum < 30)
+               {
+                  StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
+                  sVsSeeker->trainerDoesNotWantRematch = TRUE;
+               }
+               else
+               {
+                  gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
+                  ShiftStillObjectEventCoords(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
+                  StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerRematch);
+                  sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = trainerId;
+                  sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
+                  sVsSeeker->numRematchableTrainers++;
+                  sVsSeeker->trainerWantsRematch = TRUE;
+               }
             }
         }
+        vsSeekerIdx++;
     }
 
     if (sVsSeeker->trainerWantsRematch)

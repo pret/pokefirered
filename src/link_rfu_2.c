@@ -887,7 +887,7 @@ static bool32 RfuProcessEnqueuedRecvBlock(void)
 
 static void HandleSendFailure(u8 unused, u32 flags)
 {
-    s32 i, j;
+    s32 i, j, temp;
 
     const u8 *r10 = Rfu.cmd_8800_sendbuf.payload;
     for (i = 0; i < Rfu.cmd_8800_sendbuf.count; i++)
@@ -897,14 +897,14 @@ static void HandleSendFailure(u8 unused, u32 flags)
             sResendBlock16[0] = RFU_COMMAND_0x8900 | i;
             for (j = 0; j < 7; j++)
             {
-                sResendBlock16[j + 1] = (r10[12 * i + (j << 1) + 1] << 8) | r10[12 * i + (j << 1) + 0];
+                temp = j << 1;
+                sResendBlock16[j + 1] = (r10[12 * i + temp + 1] << 8) | r10[12 * i + temp + 0];
             }
             for (j = 0; j < 7; j++)
             {
-                sResendBlock8[2 * j + 1] = sResendBlock16[j] >> 8;
-                sResendBlock8[2 * j + 0] = sResendBlock16[j];
-
-                j++;j--; // Needed to match;
+                temp = j << 1;
+                sResendBlock8[temp + 1] = sResendBlock16[j] >> 8;
+                sResendBlock8[temp + 0] = sResendBlock16[j];
             }
             RFU_queue_40_14_recv(&Rfu.sendQueue, sResendBlock8);
             Rfu.cmd_8800_sendbuf.failedFlags |= (1 << i);
@@ -1850,7 +1850,7 @@ static void RfuCheckErrorStatus(void)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
-        SetLinkErrorFromRfu((Rfu.linkman_msg << 16) | (Rfu.linkman_param[0] << 8) | Rfu.linkman_param[1], Rfu.unk_124.count, Rfu.sendQueue.count, RfuGetErrorStatus() == 2);
+        SetLinkErrorFromRfu((Rfu.linkmanMsg << 16) | (Rfu.linkmanCmdId << 8) | Rfu.linkmanCmdResult, Rfu.unk_124.count, Rfu.sendQueue.count, RfuGetErrorStatus() == 2);
         Rfu.errorState = 2;
         CloseLink();
     }
@@ -1983,9 +1983,9 @@ static void GetLinkmanErrorParams(u32 msg)
 {
     if (Rfu.errorState == 0)
     {
-        Rfu.linkman_param[0] = lman.param[0];
-        Rfu.linkman_param[1] = lman.param[1];
-        Rfu.linkman_msg = msg;
+        Rfu.linkmanCmdId = lman.param[0];
+        Rfu.linkmanCmdResult = lman.param[1];
+        Rfu.linkmanMsg = msg;
         Rfu.errorState = 1;
     }
 }
@@ -2361,7 +2361,7 @@ void sub_80FB9D0(void)
 void RfuSetErrorStatus(u8 a0, u16 msg)
 {
     Rfu.unk_f1 = a0;
-    Rfu.linkman_msg = msg;
+    Rfu.linkmanMsg = msg;
 }
 
 u8 RfuGetErrorStatus(void)

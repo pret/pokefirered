@@ -75,35 +75,28 @@ static u8 GetBikeMoveCmd_0(u8 *direction_p, u16 newKeys, u16 heldKeys)
                 gPlayerAvatar.runningState = 2;
                 return 4;
             }
-            else
-            {
-                goto _080BD17E; // for matching purpose
-            }
         }
+    }
+    
+    if (*direction_p == DIR_NONE)
+    {
+        *direction_p = direction;
+        gPlayerAvatar.runningState = 0;
+        return 0;
     }
     else
     {
-        if (*direction_p == DIR_NONE)
+        if (*direction_p != direction && gPlayerAvatar.runningState != 2)
         {
-        _080BD17E:
-            *direction_p = direction;
+            gPlayerAvatar.acroBikeState = ACRO_STATE_TURNING;
+            gPlayerAvatar.newDirBackup = *direction_p;
             gPlayerAvatar.runningState = 0;
-            return 0;
+            return GetMovePlayerOnBikeFuncId(direction_p, newKeys, heldKeys);
         }
         else
         {
-            if (*direction_p != direction && gPlayerAvatar.runningState != 2)
-            {
-                gPlayerAvatar.acroBikeState = ACRO_STATE_TURNING;
-                gPlayerAvatar.newDirBackup = *direction_p;
-                gPlayerAvatar.runningState = 0;
-                return GetMovePlayerOnBikeFuncId(direction_p, newKeys, heldKeys);
-            }
-            else
-            {
-                gPlayerAvatar.runningState = 2;
-                return 2;
-            }
+            gPlayerAvatar.runningState = 2;
+            return 2;
         }
     }
 }
@@ -260,7 +253,7 @@ bool8 sub_80BD460(u8 r0)
 
 bool32 IsRunningDisallowed(u8 metatileBehavior)
 {
-    if (!(gMapHeader.flags & MAP_ALLOW_RUN))
+    if (!(gMapHeader.runningAllowed))
         return TRUE;
     if (MetatileBehaviorForbidsBiking(metatileBehavior) != TRUE)
         return FALSE;

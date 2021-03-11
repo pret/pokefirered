@@ -371,7 +371,7 @@ void CopyToWindowPixelBuffer(u8 windowId, const void *src, u16 size, u16 tileOff
 
 void FillWindowPixelBuffer(u8 windowId, u8 fillValue)
 {
-    int fillSize = gWindows[windowId].window.width * gWindows[windowId].window.height;
+    u32 fillSize = gWindows[windowId].window.width * gWindows[windowId].window.height;
     CpuFastFill8(fillValue, gWindows[windowId].tileData, 0x20 * fillSize);
 }
 

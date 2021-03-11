@@ -271,7 +271,7 @@ void StartPokemonJump(u16 partyIndex, MainCallback callback)
             gUnknown_203F3D4->unk6 = GetMultiplayerId();
             sub_8147D2C(&gUnknown_203F3D4->unk82A8[gUnknown_203F3D4->unk6], &gPlayerParty[partyIndex]);
             sub_8147B60(gUnknown_203F3D4);
-            SetWordTaskArg(taskId, 2, (uintptr_t)gUnknown_203F3D4);
+            SetWordTaskArg(taskId, 2, gUnknown_203F3D4);
             SetMainCallback2(sub_8147D6C);
             return;
         }
@@ -1391,7 +1391,7 @@ static void sub_8148E80(u8 taskId)
 static void sub_8148F5C(TaskFunc func, u8 taskPriority)
 {
     u8 taskId = CreateTask(func, taskPriority);
-    SetWordTaskArg(taskId, 14, (uintptr_t)gUnknown_203F3D4);
+    SetWordTaskArg(taskId, 14, gUnknown_203F3D4);
 }
 
 static void sub_8148F7C(void)

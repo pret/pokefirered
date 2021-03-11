@@ -5755,7 +5755,12 @@ static void atk70_recordlastability(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     RecordAbilityBattle(gActiveBattler, gLastUsedAbility);
+
+    #ifdef UBFIX
+    gBattlescriptCurrInstr += 2;
+    #else
     gBattlescriptCurrInstr += 1; // UB: Should be + 2, one byte for command and one byte for battlerId argument.
+    #endif
 }
 
 void BufferMoveToLearnIntoBattleTextBuff2(void)

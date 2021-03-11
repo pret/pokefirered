@@ -24,8 +24,8 @@ struct MEventClientHeaderStruct
 struct MEvent_Str_1
 {
     u16 status;
-    size_t size;
-    const void * data;
+    u32 size;
+    const void *data;
 };
 
 struct MEvent_Str_2
@@ -39,9 +39,9 @@ struct UnkStruct_8467FB8
     u8 textPal2:4;
     u8 textPal3:4;
     u8 index:4;
-    const u8 * tiles;
-    const u8 * map;
-    const u16 * pal;
+    const u8 *tiles;
+    const u8 *map;
+    const u16 *pal;
 };
 
 extern const u16 gCard1Pal[];

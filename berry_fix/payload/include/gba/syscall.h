@@ -13,45 +13,48 @@
 #define RESET_REGS       0x80
 #define RESET_ALL        0xFF
 
-void SoftReset(u32 resetFlags);
+struct BitUnPackParam;
+struct SoundInfo;
 
-void RegisterRamReset(u32 resetFlags);
+extern void SoftReset(u32 resetFlags);
 
-void VBlankIntrWait(void);
+extern void RegisterRamReset(u32 resetFlags);
 
-u16 Sqrt(u32 num);
+extern void SoundBiasSet(void);
+extern void SoundBiasReset(void);
 
-u16 ArcTan2(s16 x, s16 y);
+extern void VBlankIntrWait(void);
+
+extern s32 Div(s32 divisor, s32 dividend);
+
+extern s32 Mod(s32 divisor, s32 dividend);
+
+extern u16 Sqrt(u32 num);
+
+extern u16 ArcTan2(s16 x, s16 y);
+
+extern void BgAffineSet(struct BgAffineSrcData *src, struct BgAffineDstData *dest, s32 count);
 
 #define CPU_SET_SRC_FIXED 0x01000000
 #define CPU_SET_16BIT     0x00000000
 #define CPU_SET_32BIT     0x04000000
 
-void CpuSet(const void *src, void *dest, u32 control);
+extern void CpuSet(const void *src, void *dst, u32 control);
 
 #define CPU_FAST_SET_SRC_FIXED 0x01000000
 
-void CpuFastSet(const void *src, void *dest, u32 control);
+extern void CpuFastSet(const void *src, void *dst, u32 control);
 
-void BgAffineSet(struct BgAffineSrcData *src, struct BgAffineDstData *dest, s32 count);
+extern void ObjAffineSet(const struct ObjAffineSrcData *src, void *dst, s32 count, s32 offset);
 
-void ObjAffineSet(struct ObjAffineSrcData *src, void *dest, s32 count, s32 offset);
+extern void LZ77UnCompWram(const void *src, void *dst);
 
-void LZ77UnCompWram(const void *src, void *dest);
+extern void LZ77UnCompVram(const void *src, void *dst);
 
-void LZ77UnCompVram(const void *src, void *dest);
+extern void RLUnCompWram(const void *src, void *dst);
 
-void RLUnCompWram(const void *src, void *dest);
+extern void RLUnCompVram(const void *src, void *dst);
 
-void RLUnCompVram(const void *src, void *dest);
-
-int MultiBoot(struct MultiBootParam *mp);
-
-void SoundBiasReset(void);
-
-void SoundBiasSet(void);
-
-u32 Div(u32 divisor, u32 dividend);
-u32 Mod(u32 divisor, u32 dividend);
+extern int MultiBoot(struct MultiBootParam *mp);
 
 #endif // GUARD_GBA_SYSCALL_H

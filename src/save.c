@@ -631,12 +631,10 @@ void UpdateSaveAddresses(void)
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
     }
 
-    for (i = 5; i < 14; i++)
+    for (; i < 14; i++)
     {
         gRamSaveSectionLocations[i].data = (void*)(gPokemonStoragePtr) + gSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
-
-        i++;i--; // needed to match
     }
 }
 

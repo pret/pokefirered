@@ -698,7 +698,7 @@ void PSA_SetUpZoomAnim(u8 closeness)
     if (closeness != scene->lastCloseness)
     {
         taskId = CreateTask(Task_ZoomAnim, 4);
-        SetWordTaskArg(taskId, tOff_MonSprite, (uintptr_t)scene->monSprite);
+        SetWordTaskArg(taskId, tOff_MonSprite, scene->monSprite);
         gTasks[taskId].tCurrCloseness = scene->lastCloseness;
         gTasks[taskId].tFinalCloseness = closeness;
         gTasks[taskId].tDelay = 6;
@@ -717,13 +717,13 @@ bool8 PSA_IsZoomTaskActive(void)
 static void Task_ZoomAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    struct Sprite * sprite = (void *)GetWordTaskArg(taskId, tOff_MonSprite);
+    struct Sprite * sprite = GetWordTaskArg(taskId, tOff_MonSprite);
     switch (tState)
     {
     case 0:
         SetSpriteWithCloseness(sprite, tCurrCloseness);
         if (tHasItemSprite)
-            SetSpriteWithCloseness((void *)GetWordTaskArg(taskId, tOff_ItemSprite), tCurrCloseness);
+            SetSpriteWithCloseness(GetWordTaskArg(taskId, tOff_ItemSprite), tCurrCloseness);
         tCurrCloseness += tDeltaCloseness;
         tState++;
         break;
@@ -733,7 +733,7 @@ static void Task_ZoomAnim(u8 taskId)
             PlaySE(SE_BALL_TRAY_EXIT);
             MonSpriteZoom_UpdateYPos(sprite, tCurrCloseness);
             if (tHasItemSprite)
-                ItemSpriteZoom_UpdateYPos((void *)GetWordTaskArg(taskId, tOff_ItemSprite), tCurrCloseness);
+                ItemSpriteZoom_UpdateYPos(GetWordTaskArg(taskId, tOff_ItemSprite), tCurrCloseness);
             if (tCurrCloseness == tFinalCloseness)
             {
                 PSA_GetSceneWork()->lastCloseness = tFinalCloseness;
@@ -877,7 +877,7 @@ void PSA_SetUpItemUseOnMonAnim(u16 itemId, u8 closeness, bool32 a2)
         StartSpriteAffineAnim(scene->itemIconSprite, closeness);
         scene->itemIconSprite->invisible = TRUE;
         taskId = CreateTask(Task_ItemUseOnMonAnim, 2);
-        SetWordTaskArg(taskId, tOff_ItemSprite, (uintptr_t)scene->itemIconSprite);
+        SetWordTaskArg(taskId, tOff_ItemSprite, scene->itemIconSprite);
         gTasks[taskId].tCloseness = closeness;
         gTasks[taskId].tYpos = GetYPosByScale(sAffineScales[closeness]);
         gTasks[taskId].tData6 = a2;
@@ -925,7 +925,7 @@ bool8 PSA_IsItemUseOnMonAnimActive(void)
 static void Task_ItemUseOnMonAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    struct Sprite * sprite = (void *)GetWordTaskArg(taskId, tOff_ItemSprite);
+    struct Sprite * sprite = GetWordTaskArg(taskId, tOff_ItemSprite);
     switch (tState)
     {
     case 0:
@@ -1038,14 +1038,9 @@ void PSA_UseItem_CleanUpForCancel(void)
 
 static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness)
 {
-    u16 species;
+    u16 species, x, y;
     u32 personality;
-    #ifndef NONMATCHING
-        register int x asm("r4"); // FIXME
-    #else
-        int x;
-    #endif
-    u8 y;
+
     if (closeness == 3)
     {
         sprite->pos1.x = 120;
@@ -1064,18 +1059,25 @@ static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, stru
     {
         x = Menu2_GetMonSpriteAnchorCoord(species, personality, 0);
         y = Menu2_GetMonSpriteAnchorCoord(species, personality, 1);
+        if (x == 0xFF)
+            x = 0;
+        if (y == 0xFF)
+            y = 0;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
     }
     else
     {
         x = Menu2_GetMonSpriteAnchorCoord(species, personality, 3);
         y = Menu2_GetMonSpriteAnchorCoord(species, personality, 4);
+        if (x == 0xFF)
+            x = 0;
+        if (y == 0xFF)
+            y = 0;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
     }
-    if (x == 0xFF)
-        x = 0;
-    if (y == 0xFF)
-        y = 0;
-    sprite->data[6] = x;
-    sprite->data[7] = y;
+
     ItemSpriteZoom_UpdateYPos(sprite, closeness);
 }
 
@@ -1148,8 +1150,8 @@ static void StartZoomOutAnimForUseTM(u8 closeness)
     if (closeness != scene->lastCloseness)
     {
         taskId = CreateTask(Task_ZoomAnim, 1);
-        SetWordTaskArg(taskId, tOff_MonSprite, (uintptr_t)scene->monSprite);
-        SetWordTaskArg(taskId, tOff_ItemSprite, (uintptr_t)scene->itemIconSprite);
+        SetWordTaskArg(taskId, tOff_MonSprite, scene->monSprite);
+        SetWordTaskArg(taskId, tOff_ItemSprite, scene->itemIconSprite);
         gTasks[taskId].tCurrCloseness = scene->lastCloseness;
         gTasks[taskId].tFinalCloseness = closeness;
         gTasks[taskId].tHasItemSprite = 1;
@@ -1240,7 +1242,7 @@ static void PSAScene_SeedRandomInTask(struct PokemonSpecialAnimScene * scene)
     u8 taskId;
     LoadOutwardSpiralDotsGfx();
     taskId = CreateTask(Task_UseItem_OutwardSpiralDots, 1);
-    SetWordTaskArg(taskId, tOff_RngState, 2022069025);
+    SetWordTaskArg(taskId, tOff_RngState, (void*)0x78865321);
     gTasks[taskId].tAngle = 0xE0;
 }
 
@@ -1254,30 +1256,24 @@ static void StopMakingOutwardSpiralDots(void)
 static void Task_UseItem_OutwardSpiralDots(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    struct Sprite * sprite;
-    int x;
-    #ifndef NONMATCHING
-        register int y asm("r10"); // FIXME
-    #else
-        int y;
-    #endif
-    int x2;
-    int y2;
-    int ampl;
-    u8 spriteId;
+
     switch (tState)
     {
     case 0:
         if (tTimer == 0)
         {
-            sprite = PSA_GetSceneWork()->itemIconSprite;
+            u32 x, y, x2, y2, ampl;
+            u8 spriteId;
+            struct Sprite * sprite = PSA_GetSceneWork()->itemIconSprite;
+
             x = sprite->pos1.x + sprite->pos2.x;
             y = sprite->pos1.y + sprite->pos2.y;
             ampl = (PSAScene_RandomFromTask(taskId) % 21) + 70;
-            x2 = x + ((u32)(gSineTable[tAngle + 0x40] * ampl) >> 8);
-            y2 = y + ((u32)(gSineTable[tAngle       ] * ampl) >> 8);
+            x2 = x + ((gSineTable[tAngle + 0x40] * ampl) >> 8);
+            y2 = y + ((gSineTable[tAngle       ] * ampl) >> 8);
             tAngle += 0x4C;
             tAngle &= 0xFF;
+
             spriteId = CreateSprite(&sSpriteTemplate_UseItem_OutwardSpiralDots, x2, y2, 0);
             if (spriteId != MAX_SPRITES)
             {
@@ -1291,7 +1287,7 @@ static void Task_UseItem_OutwardSpiralDots(u8 taskId)
                 tActiveSprCt++;
             }
             tMadeSprCt++;
-            if (tMadeSprCt > 47)
+            if (tMadeSprCt >= 48)
                 tState++;
         }
         else
@@ -1306,10 +1302,10 @@ static void Task_UseItem_OutwardSpiralDots(u8 taskId)
 
 static u16 PSAScene_RandomFromTask(u8 taskId)
 {
-    u32 state = GetWordTaskArg(taskId, tOff_RngState);
+    u32 state = (u32)GetWordTaskArg(taskId, tOff_RngState);
     state = state * 1103515245 + 24691;
-    SetWordTaskArg(taskId, tOff_RngState, state);
-    return state >> 16;
+    SetWordTaskArg(taskId, tOff_RngState, (const void*)state);
+    return (u16)(state >> 16);
 }
 
 static void SpriteCallback_UseItem_OutwardSpiralDots(struct Sprite * sprite)

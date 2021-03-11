@@ -1007,13 +1007,13 @@ static void BT_VBStopDma0SyncSrcBufferSetLcdRegs(void)
 static void VBCB_BT_Phase2BigPokeball1(void)
 {
     BT_VBStopDma0SyncSrcBufferSetLcdRegs();
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BG0HOFS, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_BG0HOFS, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 static void VBCB_BT_Phase2BigPokeball2(void)
 {
     BT_VBStopDma0SyncSrcBufferSetLcdRegs();
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 #undef tRadius
@@ -1323,7 +1323,7 @@ static void VBCB_BT_Phase2ClockwiseBlackFade(void)
     SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
     SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[1][0]);
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 #undef trStartPtX
@@ -1481,7 +1481,7 @@ static void VBCB_BT_Phase2BlackWaveToRight(void)
     SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
     SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 #undef tOffset
@@ -1744,7 +1744,7 @@ static void VBCB_BT_Phase2AntiClockwiseBlackFade(void)
         SetGpuReg(REG_OFFSET_WIN1V, sTransitionStructPtr->win1V);
         SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[0][0]);
         SetGpuReg(REG_OFFSET_WIN1H, gScanlineEffectRegBuffers[0][1]);
-        DmaSet(0, gScanlineEffectRegBuffers[0], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+        DmaSet(0, gScanlineEffectRegBuffers[0], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_32BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
     }
 }
 
@@ -2016,7 +2016,7 @@ static void VBCB_BT_Phase2Mugshot1_Slide(void)
     SetGpuReg(REG_OFFSET_WININ, sTransitionStructPtr->winIn);
     SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 static void VBCB_BT_Phase2Mugshot2_WhiteFade(void)
@@ -2026,7 +2026,7 @@ static void VBCB_BT_Phase2Mugshot2_WhiteFade(void)
     if (sTransitionStructPtr->vblankDma)
         DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 320);
     SetGpuReg(REG_OFFSET_BLDCNT, sTransitionStructPtr->bldCnt);
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_BLDY, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_BLDY, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 static void HBCB_BT_Phase2Mugshot(void)
@@ -2234,7 +2234,7 @@ static void VBCB_BT_Phase2SlicedScreen(void)
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
     if (sTransitionStructPtr->vblankDma)
         DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 640);
-    DmaSet(0, &gScanlineEffectRegBuffers[1][160], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, &gScanlineEffectRegBuffers[1][160], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 static void HBCB_BT_Phase2SlicedScreen(void)
@@ -2352,7 +2352,7 @@ static void VBCB_BT_Phase2WhiteFadeInStripes1(void)
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0H); // BUG: This should obviously be sTransitionStructPtr->win0V
     if (sTransitionStructPtr->vblankDma)
         DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 640);
-    DmaSet(0, &gScanlineEffectRegBuffers[1][160], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, &gScanlineEffectRegBuffers[1][160], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 static void VBCB_BT_Phase2WhiteFadeInStripes2(void)
@@ -2588,7 +2588,7 @@ static void VBCB_BT_Phase2BlackDoodles(void)
     SetGpuReg(REG_OFFSET_WINOUT, sTransitionStructPtr->winOut);
     SetGpuReg(REG_OFFSET_WIN0V, sTransitionStructPtr->win0V);
     SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[1][0]);
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
+    DmaSet(0, gScanlineEffectRegBuffers[1], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_16BIT | DMA_SRC_INC | DMA_DEST_FIXED) << 16) | 1);
 }
 
 #undef tWhichBrush

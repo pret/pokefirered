@@ -653,13 +653,13 @@ static void sub_80B1F94(struct Sprite *sprite)
         switch (data->unk2 / 64)
         {
         case 0: 
-            if (data->unk0_1 << 24 >> 24 == 1) // the shifts have to be here
+            if ((u8)data->unk0_1 == 1) // the casts have to be here
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 3)
+            else if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -701,18 +701,17 @@ static void sub_80B1F94(struct Sprite *sprite)
                     }
                 }
                 data->unk0_0d = 0;
-                data->unk2;
             }
             data->unk0_1 = 0;
             break;
         case 1:
-            if (data->unk0_1 << 24 >> 24 == 0)
+            if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 2)
+            else if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -757,13 +756,13 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 1;
             break;
         case 2:
-            if (data->unk0_1 << 24 >> 24 == 3)
+            if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 1)
+            else if ((u8)data->unk0_1 == 1)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -808,11 +807,11 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 2;
             break;
         case 3:
-            if (data->unk0_1 << 24 >> 24 == 2)
+            if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0d = 1;
             }
-            else if (data->unk0_1 << 24 >> 24 == 0)
+            else if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -858,9 +857,7 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 3;
             break;
         }
-        #ifndef NONMATCHING
-            asm("":::"r8");
-        #endif
+
         sprite->pos2.x = (data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
         matrixNum = sprite->oam.matrixNum;
         sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
@@ -870,10 +867,12 @@ static void sub_80B1F94(struct Sprite *sprite)
         gOamMatrices[matrixNum].c = -sinVal;
         data->unk8 += data->unk6;
         sprite->pos1.y = data->unk8 >> 8;
+
         if (data->unk4 & 0x8000)
             data->unk2 = (data->unk2 - (data->unk4 & 0x7FFF)) & 0xFF;
         else
             data->unk2 = (data->unk2 + (data->unk4 & 0x7FFF)) & 0xFF;
+
         if (sprite->pos1.y + sprite->pos2.y >= data->unkE_1)
         {
             sprite->data[0] = 0;

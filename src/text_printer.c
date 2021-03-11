@@ -104,7 +104,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
         sTempTextPrinter.textSpeed = 0;
         for (j = 0; j < 0x400; ++j)
         {
-            if ((u32)RenderFont(&sTempTextPrinter) == 1)
+            if (RenderFont(&sTempTextPrinter) == 1)
                 break;
         }
 

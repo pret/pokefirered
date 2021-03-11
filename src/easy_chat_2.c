@@ -111,8 +111,8 @@ void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback)
     ResetTasks();
     taskId = CreateTask(Task_InitEasyChat, 0);
     gTasks[taskId].data[EZCHAT_TASK_TYPE] = type;
-    SetWordTaskArg(taskId, EZCHAT_TASK_WORDS, (uintptr_t)words);
-    SetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK, (uintptr_t)callback);
+    SetWordTaskArg(taskId, EZCHAT_TASK_WORDS, words);
+    SetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK, callback);
     SetMainCallback2(CB2_EasyChatScreen);
 }
 

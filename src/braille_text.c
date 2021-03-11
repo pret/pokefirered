@@ -215,7 +215,7 @@ static void DecompressGlyphFont6(u16 glyph)
     gGlyphInfo[0x81] = 0x10;
 }
 
-s32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese)
+u32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese)
 {
     return 0x10;
 }

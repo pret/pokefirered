@@ -228,7 +228,7 @@ u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
-    &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
+    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
 
 const struct SpriteTemplate gUnknown_824EFF0 =
@@ -3609,12 +3609,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     }
     TryClearRageStatuses();
     gCurrentTurnActionNumber = 0;
-    {
-        // something stupid needed to match
-        u8 zero;
-
-        gCurrentActionFuncId = gActionsByTurnOrder[(zero = 0)];
-    }
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleMainFunc = RunTurnActionsFunctions;

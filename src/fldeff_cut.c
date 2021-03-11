@@ -133,37 +133,27 @@ bool8 SetUpFieldMove_Cut(void)
         gPostMenuFieldCallback = FieldCallback_CutTree;
         return TRUE;
     }
-    else
+
+    PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+
+    for (i = 0; i < 3; i++)
     {
-        // FIXME: this fakematch
-        #ifndef NONMATCHING
-            register s32 neg1 asm("r8");
-        #else
-            s32 neg1;
-        #endif
-        struct MapPosition *pos;
-        PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-
-        for (i = 0, pos = &gPlayerFacingPosition, neg1 = 0xFFFF; i < 3; i++)
+        y = gPlayerFacingPosition.y - 1 + i;
+        for (j = 0; j < 3; j++)
         {
-
-            y = i + neg1 + pos->y;
-            for (j = 0; j < 3; j++)
+            x = gPlayerFacingPosition.x - 1 + j;
+            if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
             {
-                x = j + neg1 + pos->x;
-                if (MapGridGetZCoordAt(x, y) == pos->height)
+                if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
                 {
-                    if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
-                    {
-                        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-                        gPostMenuFieldCallback = FieldCallback_CutGrass;
-                        return TRUE;
-                    }
+                    gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+                    gPostMenuFieldCallback = FieldCallback_CutGrass;
+                    return TRUE;
                 }
             }
         }
-        return FALSE;
     }
+    return FALSE;
 }
 
 static void FieldCallback_CutGrass(void)
@@ -207,26 +197,18 @@ bool8 FldEff_CutGrass(void)
 {
     u8 i, j;
     s16 x, y;
-    // FIXME: this fakematch
-    #ifndef NONMATCHING
-        register s32 neg1 asm("r9");
-    #else
-        s32 neg1;
-    #endif
-    struct MapPosition *pos;
 
-    i = 0;
+    i = 0; // Needs to be here to match
     PlaySE(SE_M_CUT);
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
 
-    for (i = 0, pos = &gPlayerFacingPosition, neg1 = 0xFFFF; i < 3; i++)
+    for (; i < 3; i++)
     {
-
-        y = i + neg1 + pos->y;
+        y = gPlayerFacingPosition.y - 1 + i;
         for (j = 0; j < 3; j++)
         {
-            x = j + neg1 + pos->x;
-            if (MapGridGetZCoordAt(x, y) == pos->height)
+            x = gPlayerFacingPosition.x - 1 + j;
+            if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
             {
                 if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
                 {

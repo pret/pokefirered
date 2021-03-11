@@ -114,17 +114,18 @@ struct UnkRfuStruct_Sub_Unused
     /* 0x203 */ vu8 full;
 };
 
-typedef struct UnkRfuStruct_2
+typedef struct GFRfuManager
 {
     /* 0x000 */ void (*RfuFunc)(void);
     /* 0x004 */ u16 state;
     /* 0x006 */ u8 filler_06[4];
-    /* 0x00a */ u16 linkman_msg;
+    /* 0x00a */ u16 linkmanMsg;
     /* 0x00c */ u8 parent_child;
     /* 0x00d */ u8 playerCount;
-    /* 0x00e */ u8 unk_0e;
+    /* 0x00e */ bool8 unk_0e;
     /* 0x00f */ u8 unk_0f;
-    /* 0x010 */ u16 linkman_param[2];
+    /* 0x010 */ u16 linkmanCmdId;
+    /* 0x012 */ u16 linkmanCmdResult;
     /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 cmdA100_blockRequestType;

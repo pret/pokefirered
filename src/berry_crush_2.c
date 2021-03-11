@@ -34,7 +34,7 @@ static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame * game, u8 *params
 static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame * game, u8 *params);
-static u32 BerryCrushCommand_SaveTheGame(struct BerryCrushGame * game, u8 *params);
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame * game, u8 *params);
 static u32 BerryCrushCommand_FadeOutToPlayAgain(struct BerryCrushGame * game, u8 *params);
@@ -55,7 +55,7 @@ static const s8 gUnknown_846E2F0[][7] = {
     {0x06, 0x04, 0x01, 0xfe, 0xfc, 0xfe, 0x00},
 };
 
-ALIGNED(4) const u8 gUnknown_846E314[][4] = {
+static const ALIGNED(4) u8 gUnknown_846E314[][4] = {
     {0x03, 0x02, 0x01, 0x00},
     {0x03, 0x03, 0x01, 0x00},
     {0x03, 0x03, 0x02, 0x00},
@@ -95,7 +95,7 @@ static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame * berryCrushGame
     BerryCrushCommand_HandleTimeUp,
     BerryCrushCommand_TabulateResults,
     BerryCrushCommand_ShowResults,
-    BerryCrushCommand_SaveTheGame,
+    BerryCrushCommand_SaveGame,
     BerryCrushCommand_AskPlayAgain,
     BerryCrushCommand_CommunicatePlayAgainResponses,
     BerryCrushCommand_FadeOutToPlayAgain,
@@ -149,29 +149,29 @@ static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame * game
     // byte 9: if TRUE, communicate on fade complete
 
     u16 color;
-    u32 selectedPals;
-    selectedPals = ({
-#ifndef NONMATCHING
-        register u32 value asm("r2");
-        register u32 b asm("r3");
-#else
-        u32 value;
-        u32 b;
-#endif //NONMATCHING
-        value  =      params[0] << 0;
-        value |= (b = params[1] << 8);
-        value |= (b = params[2] << 16);
-        value |= (b = params[3] << 24);
-        value;
-    });
+    u32 selectedPals[2];
 
+    selectedPals[0] = (u32)params[0];
+    selectedPals[1] = (u32)params[1];
+    selectedPals[1] <<= 8;
+
+    selectedPals[0] |= selectedPals[1];
+    selectedPals[1] = (u32)params[2];
+    selectedPals[1] <<= 16;
+
+    selectedPals[0] |= selectedPals[1];
+    selectedPals[1] = (u32)params[3];
+    selectedPals[1] <<= 24;
+
+    selectedPals[0] |= selectedPals[1];
     params[0] = params[9];
 
-    color  = params[8] << 8;
-    color |= params[7] << 0;
+    color = params[8];
+    color <<= 8;
+    color |= params[7];
 
     gPaletteFade.bufferTransferDisabled = FALSE;
-    BeginNormalPaletteFade(selectedPals, params[4], params[5], params[6], color);
+    BeginNormalPaletteFade(selectedPals[0], params[4], params[5], params[6], color);
     UpdatePaletteFade();
     game->nextCmd = BCCMD_WaitPaletteFade;
     return 0;
@@ -212,11 +212,10 @@ static u32 BerryCrushCommand_WaitPaletteFade(struct BerryCrushGame * game, u8 *p
 
 static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame * game, u8 *params)
 {
-    u16 waitKeys;
+    u16 waitKeys = params[3];
 
-    waitKeys  = params[3];
     waitKeys <<= 8;
-    waitKeys |= params[2] << 0;
+    waitKeys |= params[2];
     switch (game->cmdState)
     {
     case 0:
@@ -257,7 +256,7 @@ static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame * game, u8 *para
 
 static u32 BerryCrushCommand_InitGfx(struct BerryCrushGame * game, UNUSED u8 *params)
 {
-    if (BerryCrush_InitBgs() != 0)
+    if (InitBerryCrushDisplay() != 0)
         BerryCrush_RunOrScheduleCommand(game->nextCmd, 0, game->commandParams);
     return 0;
 }
@@ -336,9 +335,9 @@ static u32 BerryCrushCommand_WaitForOthersToPickBerries(struct BerryCrushGame * 
     case 2:
         if (!IsLinkTaskFinished())
             return 0;
-        memset(game->sendCmd + 1, 0, sizeof(game->sendCmd) - 2);
-        game->sendCmd[1] = game->unk68.as_four_players.others[game->localId].berryId;
-        SendBlock(0, game->sendCmd + 1, 2);
+        memset(game->sendCmd, 0, sizeof(game->sendCmd));
+        game->sendCmd[0] = game->unk98[game->localId].berryId;
+        SendBlock(0, game->sendCmd, 2);
         break;
     case 3:
         if (!IsLinkTaskFinished())
@@ -350,11 +349,11 @@ static u32 BerryCrushCommand_WaitForOthersToPickBerries(struct BerryCrushGame * 
             return 0;
         for (i = 0; i < game->playerCount; ++i)
         {
-            game->unk68.as_four_players.others[i].berryId = gBlockRecvBuffer[i][0];
-            if (game->unk68.as_four_players.others[i].berryId > 0xB0)
-                game->unk68.as_four_players.others[i].berryId = 0;
-            game->unk18 += gBerryCrushStats[game->unk68.as_four_players.others[i].berryId].unk0;
-            game->powder += gBerryCrushStats[game->unk68.as_four_players.others[i].berryId].powder;
+            game->unk98[i].berryId = gBlockRecvBuffer[i][0];
+            if (game->unk98[i].berryId > 0xB0)
+                game->unk98[i].berryId = 0;
+            game->unk18 += gBerryCrushStats[game->unk98[i].berryId].unk0;
+            game->powder += gBerryCrushStats[game->unk98[i].berryId].powder;
         }
         game->unk10 = 0;
         ResetBlockReceivedFlags();
@@ -514,78 +513,79 @@ static void BerryCrush_ProcessGamePartnerInput(struct BerryCrushGame * game)
 {
     u8 numPressedA = 0;
     u16 r3;
-    u16 *curRecvCmd;
+    struct BerryCrushGame_4E *curRecvCmd;
     u8 i = 0;
     s32 r2_ = 0;
     s32 r0;
 
     for (i = 0; i < game->playerCount; ++i)
     {
-        curRecvCmd = gRecvCmds[i];
-        if ((curRecvCmd[0] & 0xFF00) == 0x2F00
-            && curRecvCmd[1] == 2)
-        {
-            if ((u8)curRecvCmd[2] & 4) // pushedAButton
+        curRecvCmd = (struct BerryCrushGame_4E *)gRecvCmds[i];
+        if ((curRecvCmd->unk0 & 0xFF00) != 0x2F00)
+            continue;
+        if (curRecvCmd->unk2 != 2)
+            continue;
+
+            if (curRecvCmd->unk4_2) // pushedAButton
             {
                 game->localState.unk02_3 |= gUnknown_846E2E0[i];
-                game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] = 1;
-                ++game->unk68.as_four_players.others[i].unk4.as_hwords[3];
+                game->unk98[i].unk1C = 1;
+                ++game->unk98[i].unk16;
                 ++numPressedA;
-                r3 = game->timer - game->unk68.as_four_players.others[i].unk2;
-                if (r3 >= game->unk68.as_four_players.others[i].unk4.as_hwords[1] - 1
-                    && r3 <= game->unk68.as_four_players.others[i].unk4.as_hwords[1] + 1)
+                r3 = game->timer - game->unk98[i].unkE;
+                if (r3 >= game->unk98[i].unk12 - 1
+                    && r3 <= game->unk98[i].unk12 + 1)
                 {
-                    ++game->unk68.as_four_players.others[i].unk4.as_hwords[0];
-                    game->unk68.as_four_players.others[i].unk4.as_hwords[1] = r3;
-                    if (game->unk68.as_four_players.others[i].unk4.as_hwords[0] > game->unk68.as_four_players.others[i].unk4.as_hwords[2])
-                        game->unk68.as_four_players.others[i].unk4.as_hwords[2] = game->unk68.as_four_players.others[i].unk4.as_hwords[0];
+                    ++game->unk98[i].unk10;
+                    game->unk98[i].unk12 = r3;
+                    if (game->unk98[i].unk10 > game->unk98[i].unk14)
+                        game->unk98[i].unk14 = game->unk98[i].unk10;
                 }
                 else
                 {
-                    game->unk68.as_four_players.others[i].unk4.as_hwords[0] = 0;
-                    game->unk68.as_four_players.others[i].unk4.as_hwords[1] = r3;
+                    game->unk98[i].unk10 = 0;
+                    game->unk98[i].unk12 = r3;
                 }
-                game->unk68.as_four_players.others[i].unk2 = game->timer;
-                if (++game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][4] > 2)
-                    game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][4] = 0;
+                game->unk98[i].unkE = game->timer;
+                if (++game->unk98[i].unk1B > 2)
+                    game->unk98[i].unk1B = 0;
             }
             else
             {
-                game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] = 0;
+                game->unk98[i].unk1C = 0;
             }
-        }
     }
     if (numPressedA > 1)
     {
         for (i = 0; i < game->playerCount; ++i)
         {
-            if (game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] != 0)
-            {
-                game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] |= 2;
-                ++game->unk68.as_four_players.others[i].unk4.as_hwords[4];
-            }
+            if (!game->unk98[i].unk1C)
+                continue;
+            game->unk98[i].unk1C |= 2;
+            ++game->unk98[i].unk18;
         }
     }
-    if (numPressedA != 0)
+
+    if (numPressedA == 0)
+        return;
+
+    game->unk2E += numPressedA;
+    numPressedA += gUnknown_846E2E8[numPressedA - 1];
+    game->unk34 += numPressedA;
+    game->unk1A += numPressedA;
+    r0 = game->unk18;
+    r2_ = game->unk1A;
+    if (r0 - r2_ > 0)
     {
-        game->unk2E += numPressedA;
-        numPressedA += gUnknown_846E2E8[numPressedA - 1];
-        game->unk34 += numPressedA;
-        game->unk1A += numPressedA;
-        r0 = game->unk18;
-        r2_ = game->unk1A;
-        if (r0 - r2_ > 0)
-        {
-            r2_ <<= 8;
-            r2_ = MathUtil_Div32(r2_, game->unk20);
-            r2_ >>= 8;
-            game->unk24 = r2_;
-        }
-        else
-        {
-            game->unk24 = 32;
-            game->localState.unk02_0 = 1;
-        }
+        r2_ <<= 8;
+        r2_ = MathUtil_Div32(r2_, game->unk20);
+        r2_ >>= 8;
+        game->unk24 = r2_;
+    }
+    else
+    {
+        game->unk24 = 32;
+        game->localState.unk02_0 = 1;
     }
 }
 
@@ -597,11 +597,11 @@ static void BerryCrush_BuildLocalState(struct BerryCrushGame * game)
 
     for (i = 0; i < game->playerCount; ++i)
     {
-        if (game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] != 0)
+        if (game->unk98[i].unk1C != 0)
         {
             ++count;
-            r1 = game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][4] + 1;
-            if (game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] & 2)
+            r1 = game->unk98[i].unk1B + 1;
+            if (game->unk98[i].unk1C & 2)
                 r1 |= 4;
             r1 <<= 3 * i;
             game->localState.unk08 |= r1;
@@ -667,8 +667,8 @@ static void BerryCrush_HandlePlayerInput(struct BerryCrushGame * game)
         game->localState.pushedAButton = TRUE;
     if (JOY_HELD(A_BUTTON))
     {
-        if (game->unk68.as_four_players.others[game->localId].unk4.as_hwords[5] < game->timer)
-            ++game->unk68.as_four_players.others[game->localId].unk4.as_hwords[5];
+        if (game->unk98[game->localId].unk1A < game->timer)
+            ++game->unk98[game->localId].unk1A;
     }
     if (game->localId != 0 && !game->localState.pushedAButton)
         return;
@@ -723,43 +723,40 @@ static void BerryCrush_HandlePlayerInput(struct BerryCrushGame * game)
         game->localState.unk02_0 = 1;
     game->localState.unk02_1 = game->unk25_4;
     game->localState.unk0A = game->unk25_5;
-    memcpy(&game->sendCmd[1], &game->localState, sizeof(game->sendCmd) - 2);
-    RfuPrepareSend0x2f00(game->sendCmd + 1);
+    memcpy(game->sendCmd, &game->localState, sizeof(game->sendCmd));
+    RfuPrepareSend0x2f00(game->sendCmd);
 }
 
 static void BerryCrush_UpdateGameState(struct BerryCrushGame * game)
 {
-    struct BerryCrushGame_4E * r4_;
-#ifndef NONMATCHING
-    register u32 i asm("r4");
-    register u32 iPlusPlus asm("r0");
-
-    for (i = 0; i < game->playerCount; i = (u8)iPlusPlus)
-    {
-        game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] = 0;
-        iPlusPlus = i + 1;
-    }
-#else
-    u8 i;
+    u8 i = 0;
+    struct BerryCrushGame_4E * j = NULL;
 
     for (i = 0; i < game->playerCount; ++i)
-        game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] = 0;
-#endif
-    if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00
-        || gRecvCmds[0][1] != 2)
+    {
+        game->unk98[i].unk1C = 0;
+    }
+
+    if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
     {
         game->unk25_2 = 0;
+        return;
     }
-    else
+    
+    if (gRecvCmds[0][1] != 2)
     {
-        r4_ = (struct BerryCrushGame_4E *)&game->recvCmd;
-        memcpy(r4_, gRecvCmds, sizeof(struct BerryCrushGame_4E));
-        game->depth = r4_->data.unk04;
-        game->vibration = r4_->data.unk03;
-        game->timer = r4_->data.unk06;
-        sub_814DC5C(game, &game->spritesManager);
-        if (r4_->data.unk02_0)
-            game->unk25_3 = 1;
+        game->unk25_2 = 0;
+        return;
+    }
+    memcpy(game->recvCmd, gRecvCmds[0], 14);
+    j = (struct BerryCrushGame_4E *)&game->recvCmd;
+    game->depth = j->unk6;
+    game->vibration = (s16)j->unk5;
+    game->timer = j->unk8;
+    sub_814DC5C(game, &game->spritesManager);
+    if (j->unk4_0)
+    {
+        game->unk25_3 = 1;
     }
 }
 
@@ -925,19 +922,19 @@ static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame * game, u8 *para
 
 static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *params)
 {
-    u8 i, j;
+    u8 i, j, r3;
     s32 r2;
     s32 r4;
-    u8 r6; // ???
+    u16 r6; // ???
 
     switch (game->cmdState)
     {
     case 0:
-        memset(game->sendCmd + 1, 0, 2 * sizeof(u16));
-        if (game->unk68.as_four_players.others[game->localId].unk4.as_hwords[5] > game->timer)
-            game->unk68.as_four_players.others[game->localId].unk4.as_hwords[5] = game->timer;
-        game->sendCmd[1] = game->unk68.as_four_players.others[game->localId].unk4.as_hwords[5];
-        SendBlock(0, game->sendCmd + 1, 2);
+        memset(game->sendCmd, 0, 2 * sizeof(u16));
+        if (game->unk98[game->localId].unk1A > game->timer)
+            game->unk98[game->localId].unk1A = game->timer;
+        game->sendCmd[0] = game->unk98[game->localId].unk1A;
+        SendBlock(0, game->sendCmd, 2);
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -948,9 +945,9 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
         if (GetBlockReceivedStatus() != sReceivedPlayerBitmasks[game->playerCount - 2])
             return 0;
         for (i = 0; i < game->playerCount; ++i)
-            game->unk68.as_four_players.others[i].unk4.as_hwords[5] = gBlockRecvBuffer[i][0];
+            game->unk98[i].unk1A = gBlockRecvBuffer[i][0];
         game->unk10 = 0;
-        game->sendCmd[1] = 0;
+        game->sendCmd[0] = 0;
         ResetBlockReceivedFlags();
         if (game->localId == 0)
             game->cmdState = 3;
@@ -961,37 +958,37 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
         memset(
             &game->unk68,
             0,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
+            sizeof(struct BerryCrushGame_68)
         );
-        game->unk68.as_four_players.unk00.unk04 = game->timer;
-        game->unk68.as_four_players.unk00.unk06 = game->unk18 / (game->timer / 60);
+        game->unk68.time = game->timer;
+        game->unk68.speed = game->unk18 / (game->timer / 60);
         // (unk30 * 50 / unk32) + 50
         r2 = MathUtil_Mul32(game->unk30 << 8, 50 << 8);
         r2 = MathUtil_Div32(r2, game->unk32 << 8) + (50 << 8);
         r2 >>= 8;
-        game->unk68.as_four_players.unk00.unk08 = r2 & 0x7F;
+        game->unk68.unk08 = r2 & 0x7F;
         // powder + playerCount * (r2 / 100)
         r2 <<= 8;
         r2 = MathUtil_Div32(r2, 100 << 8);
         r4 = (game->powder * game->playerCount) << 8;
         r4 = MathUtil_Mul32(r4, r2);
-        game->unk68.as_four_players.unk00.unk00 = r4 >> 8;
-        game->unk68.as_five_players.players[0].unk4.as_2d_bytes[0][7] = Random() % 3;
-        for (r6 = 0, i = 0; i < game->playerCount; ++i)
+        game->unk68.powder = r4 >> 8;
+        game->unk68.unk20[0][7] = Random() % 3;
+        for (i = 0; i < game->playerCount; ++i)
         {
-            game->unk68.as_five_players.players[0].unk4.as_2d_bytes[0][i] = i;
-            game->unk68.as_five_players.players[0].unk4.as_2d_bytes[1][i] = i;
-            game->unk68.as_four_players.unk00.stats[0][i] = game->unk68.as_four_players.others[i].unk4.as_hwords[3];
-            game->unk68.as_four_players.unk00.unk0A += game->unk68.as_four_players.unk00.stats[0][i];
-            switch (game->unk68.as_five_players.players[0].unk4.as_2d_bytes[0][7])
+            game->unk68.unk20[0][i] = i;
+            game->unk68.unk20[1][i] = i;
+            game->unk68.unk0C[0][i] = game->unk98[i].unk16;
+            game->unk68.unk0A += game->unk68.unk0C[0][i];
+            switch (game->unk68.unk20[0][7])
             {
             case 0:
-                if (game->unk68.as_four_players.others[i].unk4.as_hwords[3] != 0)
+                if (game->unk98[i].unk16 != 0)
                 {
-                    r2 = game->unk68.as_four_players.others[i].unk4.as_hwords[2];
+                    r2 = game->unk98[i].unk14;
                     r2 <<= 8;
                     r2 = MathUtil_Mul32(r2, 0x6400);
-                    r4 = game->unk68.as_four_players.others[i].unk4.as_hwords[3];
+                    r4 = game->unk98[i].unk16;
                     r4 <<= 8;
                     r4 = MathUtil_Div32(r2, r4);
                 }
@@ -1001,12 +998,12 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
                 }
                 break;
             case 1:
-                if (game->unk68.as_four_players.others[i].unk4.as_hwords[3] != 0)
+                if (game->unk98[i].unk16 != 0)
                 {
-                    r2 = game->unk68.as_four_players.others[i].unk4.as_hwords[4];
+                    r2 = game->unk98[i].unk18;
                     r2 <<= 8;
                     r2 = MathUtil_Mul32(r2, 0x6400);
-                    r4 = game->unk68.as_four_players.others[i].unk4.as_hwords[3];
+                    r4 = game->unk98[i].unk16;
                     r4 <<= 8;
                     r4 = MathUtil_Div32(r2, r4);
                 }
@@ -1016,17 +1013,17 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
                 }
                 break;
             case 2:
-                if (game->unk68.as_four_players.others[i].unk4.as_hwords[3] == 0)
+                if (game->unk98[i].unk16 == 0)
                 {
                     r4 = 0;
                 }
-                else if (game->unk68.as_four_players.others[i].unk4.as_hwords[5] >= game->timer)
+                else if (game->unk98[i].unk1A >= game->timer)
                 {
                     r4 = 0x6400;
                 }
                 else
                 {
-                    r2 = game->unk68.as_four_players.others[i].unk4.as_hwords[5];
+                    r2 = game->unk98[i].unk1A;
                     r2 <<= 8;
                     r2 = MathUtil_Mul32(r2, 0x6400);
                     r4 = game->timer;
@@ -1036,50 +1033,38 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
                 break;
             }
             r4 >>= 4;
-            game->unk68.as_four_players.unk00.stats[1][i] = r4;
+            game->unk68.unk0C[1][i] = r4;
         }
         break;
     case 4:
-        for (r6 = 0, i = 0; i < game->playerCount - 1; ++i)
+        for (i = 0; i < game->playerCount - 1; ++i)
         {
             for (j = game->playerCount - 1; j > i; --j)
             {
-                u16 r0;
-                u8 r3;
-                u16 *numPresses_p = game->unk68.as_four_players.unk00.stats[0];
-                u8 *sp04 = game->unk68.as_five_players.players[0].unk4.as_2d_bytes[0];
-                u8 *r10 = game->unk68.as_five_players.players[0].unk4.as_2d_bytes[1];
-                u16 *r9 = game->unk68.as_four_players.unk00.stats[1];
-                s32 r12 = j - 1;
-                u16 *p1 = numPresses_p + r12; // these have to be here
-                u16 *p2 = numPresses_p + j; // to swap operands. macro?
-
-                if (*p1 < *p2)
+                if (game->unk68.unk0C[0][j - 1] < game->unk68.unk0C[0][j])
                 {
-                    r0 = numPresses_p[j];
-                    numPresses_p[j] = numPresses_p[r12];
-                    numPresses_p[r12] = r0;
-                    r3 = sp04[j];
-                    sp04[j] = sp04[r12];
-                    sp04[r12] = r3;
+                    r6 = game->unk68.unk0C[0][j];
+                    game->unk68.unk0C[0][j] = game->unk68.unk0C[0][j - 1];
+                    game->unk68.unk0C[0][j - 1] = r6;
+                    r3 = game->unk68.unk20[0][j];
+                    game->unk68.unk20[0][j] = game->unk68.unk20[0][j - 1];
+                    game->unk68.unk20[0][j - 1] = r3;
                 }
-                p1 = r9 + r12;
-                p2 = r9 + j;
-                if (*p1 < *p2)
+                if (game->unk68.unk0C[1][j - 1] < game->unk68.unk0C[1][j])
                 {
-                    r0 = r9[j];
-                    r9[j] = r9[r12];
-                    r9[r12] = r0;
-                    r3 = r10[j];
-                    r10[j] = r10[r12];
-                    r10[r12] = r3;
+                    r6 = game->unk68.unk0C[1][j];
+                    game->unk68.unk0C[1][j] = game->unk68.unk0C[1][j - 1];
+                    game->unk68.unk0C[1][j - 1] = r6;
+                    r3 = game->unk68.unk20[1][j];
+                    game->unk68.unk20[1][j] = game->unk68.unk20[1][j - 1];
+                    game->unk68.unk20[1][j - 1] = r3;
                 }
             }
         }
         SendBlock(
             0,
             &game->unk68,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
+            sizeof(struct BerryCrushGame_68)
         );
         break;
     case 5:
@@ -1093,12 +1078,12 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame * game, UNUSE
         memset(
             &game->unk68,
             0,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
+            sizeof(struct BerryCrushGame_68)
         );
         memcpy(
             &game->unk68,
             gBlockRecvBuffer,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
+            sizeof(struct BerryCrushGame_68)
         );
         ResetBlockReceivedFlags();
         game->unk10 = 0;
@@ -1159,7 +1144,7 @@ static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame * game, u8 *param
     return 0;
 }
 
-static u32 BerryCrushCommand_SaveTheGame(struct BerryCrushGame * game, u8 *params)
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame * game, u8 *params)
 {
     switch (game->cmdState)
     {
@@ -1198,12 +1183,7 @@ static u32 BerryCrushCommand_SaveTheGame(struct BerryCrushGame * game, u8 *param
 
 static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame * game, u8 *params)
 {
-    s32 r4;
-#ifndef NONMATCHING
-    register s32 r0 asm("r0");
-#else
-    s32 r0;
-#endif
+    s8 r4 = 0;
 
     switch (game->cmdState)
     {
@@ -1211,16 +1191,16 @@ static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame * game, u8 *para
         BerryCrush_SetShowMessageParams(params, BCTEXT_ASKPLAYAGAIN, 0, 0, BCCMD_BeginNormalPaletteFade);
         game->nextCmd = BCCMD_AskPlayAgain;
         BerryCrush_RunOrScheduleCommand(BCCMD_PrintMessage, 1, NULL);
-        r0 = 0;
-        game->cmdState = r0; // dunno what it's doing because it's already in case 0
+        game->cmdState = 0; // dunno what it's doing because it's already in case 0
         return 0;
     case 1:
         DisplayYesNoMenuDefaultYes();
         break;
     case 2:
-        if ((r4 = Menu_ProcessInputNoWrapClearOnChoose()) != -2)
+        r4 = Menu_ProcessInputNoWrapClearOnChoose();
+        if (r4 != -2)
         {
-            memset(game->sendCmd + 1, 0, sizeof(game->sendCmd) - 2);
+            memset(game->sendCmd, 0, sizeof(game->sendCmd));
             if (r4 == 0)
             {
                 if (CheckHasAtLeastOneBerry())
@@ -1256,9 +1236,9 @@ static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        game->sendCmd[1] = game->unk14;
+        game->sendCmd[0] = game->unk14;
         game->recvCmd[0] = 0;
-        SendBlock(0, game->sendCmd + 1, sizeof(u16));
+        SendBlock(0, game->sendCmd, sizeof(u16));
         break;
     case 2:
         if (!IsLinkTaskFinished())
@@ -1275,7 +1255,7 @@ static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame
         else
             BerryCrush_RunOrScheduleCommand(BCCMD_FadeOutToPlayAgain, 1, NULL);
         ResetBlockReceivedFlags();
-        game->sendCmd[1] = 0;
+        game->sendCmd[0] = 0;
         game->recvCmd[0] = 0;
         game->unk10 = 0;
         game->cmdState = 0;
@@ -1402,18 +1382,18 @@ static void sub_814D4D8(struct BerryCrushGame * game)
     game->unk32 = -1;
     game->unk30 = 0;
     game->unk34 = 0;
-    for (; r5 < 5; ++r5) // why is it 5 instead of 4? fillerBC isn't sufficient for one player
+    for (; r5 < 5; ++r5)
     {
-        game->unk68.as_four_players.others[r5].berryId = -1;
-        game->unk68.as_four_players.others[r5].unk2 = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_hwords[0] = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_hwords[1] = 1;
-        game->unk68.as_four_players.others[r5].unk4.as_hwords[2] = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_hwords[3] = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_hwords[4] = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_hwords[5] = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_2d_bytes[1][4] = 0;
-        game->unk68.as_four_players.others[r5].unk4.as_2d_bytes[1][5] = 0;
+        game->unk98[r5].berryId = -1;
+        game->unk98[r5].unkE = 0;
+        game->unk98[r5].unk10 = 0;
+        game->unk98[r5].unk12 = 1;
+        game->unk98[r5].unk14 = 0;
+        game->unk98[r5].unk16 = 0;
+        game->unk98[r5].unk18 = 0;
+        game->unk98[r5].unk1A = 0;
+        game->unk98[r5].unk1B = 0;
+        game->unk98[r5].unk1C = 0;
     }
 }
 

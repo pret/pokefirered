@@ -75,7 +75,7 @@ struct MEvent_Str_1 sMEventSendToEReaderManager;
 
 static EWRAM_DATA bool32 sReceivedWonderCardIsValid = FALSE;
 
-void SendUnknownSerialData_Init(struct MEvent_Str_1 *mgr, size_t size, const void * data)
+static void SendUnknownSerialData_Init(struct MEvent_Str_1 *mgr, u32 size, const void * data)
 {
     vu16 imeBak = REG_IME;
     REG_IME = 0;

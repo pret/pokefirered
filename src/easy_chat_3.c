@@ -1435,7 +1435,7 @@ static void PrintECFields(void)
                 ecWord++;
                 for (k = 0; k < 7; k++)
                 {
-                    *str++ = CHAR_EXTRA_EMOJI;
+                    *str++ = CHAR_EXTRA_SYMBOL;
                     *str++ = 9;
                 }
 
@@ -1631,10 +1631,8 @@ static void UpdateWin2PrintWordsScrollPageUp(void)
 static void PrintECRowsWin2(u8 row, u8 remrow)
 {
     int i, j;
-    u16 easyChatWord;
-    u8 *str;
+    int easyChatWord; // Should be u16, but that doesn't match
     int y;
-    u8 y_;
     int ecWordIdx;
 
     ecWordIdx = row * 2;
@@ -1644,19 +1642,16 @@ static void PrintECRowsWin2(u8 row, u8 remrow)
     {
         for (j = 0; j < 2; j++)
         {
-            // FIXME: Dumb trick needed to match
-            y_ = y << 18 >> 18;
             easyChatWord = GetDisplayedWordByIndex(ecWordIdx++);
             if (easyChatWord != 0xFFFF)
             {
 
                 CopyEasyChatWordPadded(sEasyChatGraphicsResources->ecPaddedWordBuffer, easyChatWord, 0);
 
-                EC_AddTextPrinterParameterized(2, 1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SPEED_FF, NULL);
+                EC_AddTextPrinterParameterized(2, 1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y, TEXT_SPEED_FF, NULL);
             }
         }
         y += 16;
-
     }
 
     CopyWindowToVram(2, COPYWIN_GFX);

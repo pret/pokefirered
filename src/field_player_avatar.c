@@ -1125,7 +1125,7 @@ void StopPlayerAvatar(void)
     }
 }
 
-static const u8 sPlayerAvatarGfxIds[][2] = {
+static const u8 sPlayerAvatarGfxIds[][GENDER_COUNT] = {
     {OBJ_EVENT_GFX_RED_NORMAL,    OBJ_EVENT_GFX_GREEN_NORMAL},
     {OBJ_EVENT_GFX_RED_BIKE,      OBJ_EVENT_GFX_GREEN_BIKE},
     {OBJ_EVENT_GFX_RED_SURF,      OBJ_EVENT_GFX_GREEN_SURF},
@@ -1230,15 +1230,13 @@ void SetPlayerAvatarStateMask(u8 flags)
     gPlayerAvatar.flags |= flags;
 }
 
-static const u8 gUnknown_835B882[][3][2] = {
-    // Male
-    {
+static const u8 sPlayerAvatarGfxToStateFlag[][3][GENDER_COUNT] = {
+    [MALE] = {
         {OBJ_EVENT_GFX_RED_NORMAL, PLAYER_AVATAR_FLAG_ON_FOOT},
         {OBJ_EVENT_GFX_RED_BIKE,   PLAYER_AVATAR_FLAG_MACH_BIKE},
         {OBJ_EVENT_GFX_RED_SURF,   PLAYER_AVATAR_FLAG_SURFING},
     },
-    // Female
-    {
+    [FEMALE] = {
         {OBJ_EVENT_GFX_GREEN_NORMAL, PLAYER_AVATAR_FLAG_ON_FOOT},
         {OBJ_EVENT_GFX_GREEN_BIKE,   PLAYER_AVATAR_FLAG_MACH_BIKE},
         {OBJ_EVENT_GFX_GREEN_SURF,   PLAYER_AVATAR_FLAG_SURFING},
@@ -1249,10 +1247,10 @@ u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
 {
     u8 i;
 
-    for (i = 0; i < NELEMS(*gUnknown_835B882); i++)
+    for (i = 0; i < NELEMS(*sPlayerAvatarGfxToStateFlag); i++)
     {
-        if (gUnknown_835B882[gender][i][0] == graphicsId)
-            return gUnknown_835B882[gender][i][1];
+        if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
+            return sPlayerAvatarGfxToStateFlag[gender][i][1];
     }
     return 1;
 }
@@ -1262,10 +1260,10 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
     u8 i;
     u8 r5 = gPlayerAvatar.flags;
 
-    for (i = 0; i < NELEMS(*gUnknown_835B882); i++)
+    for (i = 0; i < NELEMS(*sPlayerAvatarGfxToStateFlag); i++)
     {
-        if (gUnknown_835B882[gPlayerAvatar.gender][i][1] & r5)
-            return gUnknown_835B882[gPlayerAvatar.gender][i][0];
+        if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & r5)
+            return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][0];
     }
     return 0;
 }

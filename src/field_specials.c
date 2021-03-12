@@ -145,9 +145,9 @@ void BufferBigGuyOrBigGirlString(void)
 void BufferSonOrDaughterString(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        StringCopy(gStringVar1, gText_Son);
-    else
         StringCopy(gStringVar1, gText_Daughter);
+    else
+        StringCopy(gStringVar1, gText_Son);
 }
 
 u8 GetBattleOutcome(void)

@@ -705,34 +705,43 @@ static void CB2_InitBattleInternal(void)
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
 
-static void sub_800FFEC(void)
+#define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)              \
+    for ((i) = 0; (i) < PARTY_SIZE; (i)++)                          \
+    {                                                               \
+        u16 species = GetMonData(&(party)[(i)], MON_DATA_SPECIES2); \
+        u16 hp = GetMonData(&(party)[(i)], MON_DATA_HP);            \
+        u32 status = GetMonData(&(party)[(i)], MON_DATA_STATUS);    \
+                                                                    \
+        if (species == SPECIES_NONE)                                \
+            continue;                                               \
+                                                                    \
+        /* Is healthy mon? */                                       \
+        if (species != SPECIES_EGG && hp != 0 && status == 0)       \
+            (flags) |= 1 << (i) * 2;                                \
+                                                                    \
+        if (species == SPECIES_NONE) /* Redundant */                \
+            continue;                                               \
+                                                                    \
+        /* Is Egg or statused? */                                   \
+        if (hp != 0 && (species == SPECIES_EGG || status != 0))     \
+            (flags) |= 2 << (i) * 2;                                \
+                                                                    \
+        if (species == SPECIES_NONE) /* Redundant */                \
+            continue;                                               \
+                                                                    \
+        /* Is fainted? */                                           \
+        if (species != SPECIES_EGG && hp == 0)                      \
+            (flags) |= 3 << (i) * 2;                                \
+    }
+
+static void BufferPartyVsScreenHealth_AtStart(void)
 {
-    u16 r6 = 0;
-    u16 species = SPECIES_NONE;
-    u16 hp = 0;
-    u32 status = 0;
+    u16 flags = 0;
     s32 i;
 
-    for (i = 0; i < PARTY_SIZE; ++i)
-    {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-        hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
-        if (species == SPECIES_NONE)
-            continue;
-        if (species != SPECIES_EGG && hp != 0 && status == 0)
-            r6 |= 1 << i * 2;
-        if (species == SPECIES_NONE)
-            continue;
-        if (hp != 0 && (species == SPECIES_EGG || status != 0))
-            r6 |= 2 << i * 2;
-        if (species == SPECIES_NONE)
-            continue;
-        if (species != SPECIES_EGG && hp == 0)
-            r6 |= 3 << i * 2;
-    }
-    gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsLo = r6;
-    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi) = r6 >> 8;
+    BUFFER_PARTY_VS_SCREEN_STATUS(gPlayerParty, flags, i);
+    gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsLo = flags;
+    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi) = flags >> 8;
 }
 
 static void SetPlayerBerryDataInBattleStruct(void)
@@ -859,44 +868,47 @@ static void SetAllPlayersBerryData(void)
     }
 }
 
-static void sub_8010414(u8 arg0, u8 arg1)
+static void sub_8010414(u8 numPlayers, u8 multiPlayerId)
 {
-    u8 var = 0;
+    u8 found = 0;
 
-    if (gBlockRecvBuffer[0][0] == 256)
+    // If player 1 is playing the minimum version, player 1 is master.
+    if (gBlockRecvBuffer[0][0] == 0x100)
     {
-        if (arg1 == 0)
+        if (multiPlayerId == 0)
             gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
         else
             gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
-        ++var;
+        ++found;
     }
-    if (var == 0)
+    if (found == 0)
     {
+        // If multiple different versions are being used, player 1 is master.
         s32 i;
 
-        for (i = 0; i < arg0; ++i)
+        for (i = 0; i < numPlayers; ++i)
             if (gBlockRecvBuffer[0][0] != gBlockRecvBuffer[i][0])
                 break;
-        if (i == arg0)
+        if (i == numPlayers)
         {
-            if (arg1 == 0)
+            if (multiPlayerId == 0)
                 gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
             else
                 gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
-            ++var;
+            ++found;
         }
-        if (var == 0)
+        if (found == 0)
         {
-            for (i = 0; i < arg0; ++i)
+            // Lowest index player with the highest game version is master.
+            for (i = 0; i < numPlayers; ++i)
             {
-                if (gBlockRecvBuffer[i][0] == 0x201)
-                    if (i != arg1 && i < arg1)
+                if (gBlockRecvBuffer[i][0] == 0x201 && i != multiPlayerId)
+                    if (i < multiPlayerId)
                         break;
-                if (gBlockRecvBuffer[i][0] > 0x201 && i != arg1)
+                if (gBlockRecvBuffer[i][0] > 0x201 && i != multiPlayerId)
                     break;
             }
-            if (i == arg0)
+            if (i == numPlayers)
                 gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
             else
                 gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
@@ -937,9 +949,10 @@ static void CB2_HandleStartBattle(void)
             {
                 if (IsLinkTaskFinished())
                 {
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.field_0) = 1;
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.field_1) = 2;
-                    sub_800FFEC();
+                    // 0x201
+                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 1;
+                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 2;
+                    BufferPartyVsScreenHealth_AtStart();
                     SetPlayerBerryDataInBattleStruct();
                     SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
@@ -1192,9 +1205,10 @@ static void CB2_HandleStartMultiBattle(void)
         {
             if (IsLinkTaskFinished())
             {
-                *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.field_0) = 1;
-                *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.field_1) = 2;
-                sub_800FFEC();
+                // 0x201
+                *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 1;
+                *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 2;
+                BufferPartyVsScreenHealth_AtStart();
                 SetPlayerBerryDataInBattleStruct();
                 SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
                 ++gBattleCommunication[MULTIUSE_STATE];

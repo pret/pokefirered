@@ -357,6 +357,15 @@ struct BattleResults
 
 extern struct BattleResults gBattleResults;
 
+struct MultiPartnerEnigmaBerry
+{
+    u8 field_0;
+    u8 field_1;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -440,13 +449,12 @@ struct BattleStruct
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     u8 field_182;
-    u8 field_183;
-    u8 field_184;
-    u8 field_185;
-    u8 field_186;
-    u8 field_187;
-    struct BattleEnigmaBerry battleEnigmaBerry;
-    u8 field_1A4[0x5C]; // currently unknown
+    // align 4
+    union {
+        struct MultiPartnerEnigmaBerry multiPartnerEnigmaBerry;
+        struct UnknownPokemonStruct4 multiBattleMons[3];
+    } multiBuffer;
+    u8 padding_1E4[0x1C];
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;

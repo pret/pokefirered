@@ -1220,18 +1220,10 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case  5:
-    {
-        #ifndef NONMATCHING
-            register u8 eos asm("r1");
-            gStringVar1[0] = (eos = EOS);
-            gStringVar2[0] = eos;
-            gStringVar3[0] = eos;
-        #else
-            gStringVar1[0] = EOS;
-            gStringVar2[0] = EOS;
-            gStringVar3[0] = EOS;
-        #endif
-    }
+        *gStringVar1 = EOS;
+        *gStringVar2 = EOS;
+        *gStringVar3 = EOS;
+
         switch (data->IsCardOrNews)
         {
         case 0:
@@ -1622,18 +1614,9 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 31:
-    {
-        #ifndef NONMATCHING
-            register u8 eos asm("r1");
-            gStringVar1[0] = (eos = EOS);
-            gStringVar2[0] = eos;
-            gStringVar3[0] = eos;
-        #else
-            gStringVar1[0] = EOS;
-            gStringVar2[0] = EOS;
-            gStringVar3[0] = EOS;
-        #endif
-    }
+        *gStringVar1 = EOS;
+        *gStringVar2 = EOS;
+        *gStringVar3 = EOS;
         if (data->IsCardOrNews == 0)
         {
             AddTextPrinterToWindow1(gText_SendingWonderCard);

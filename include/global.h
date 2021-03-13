@@ -16,7 +16,7 @@
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 
-#if defined (__APPLE__) || defined (__CYGWIN__)
+#if defined (__APPLE__) || defined (__CYGWIN__) || defined(__CLION_IDE__)
 // Get the IDE to stfu
 
 // We define it this way to fool preproc.

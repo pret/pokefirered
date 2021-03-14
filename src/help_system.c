@@ -9,6 +9,10 @@
 #include "event_data.h"
 #include "constants/songs.h"
 
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
+
 extern u8 gGlyphInfo[];
 
 bool8 gHelpSystemEnabled;

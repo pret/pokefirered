@@ -3,6 +3,10 @@
 #include "text.h"
 #include "constants/items.h"
 
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
+
 static const u8 sBerryDescriptionPart1_Cheri[] = _("とても かわいい はなが さく.");
 static const u8 sBerryDescriptionPart2_Cheri[] = _("まっかな みは とても からい.");
 static const u8 sBerryDescriptionPart1_Chesto[] = _("そとの かわの ぶぶんも なかみも すべてが");

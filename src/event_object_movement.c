@@ -20,6 +20,10 @@
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
 
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
+
 static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
 static bool8 ObjectEventExecSingleMovementAction(struct ObjectEvent *, struct Sprite *);
 static u8 GetCollisionInDirection(struct ObjectEvent *, u8);

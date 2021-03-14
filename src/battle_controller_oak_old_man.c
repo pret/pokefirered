@@ -401,10 +401,10 @@ static void sub_80E7B4C(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_80F1720(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+        TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
-        sub_80F1720(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
+        TryShinyAnimation(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
     {
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
@@ -628,7 +628,7 @@ static void sub_80E835C(void)
     case 0:
         if (!gPaletteFade.active)
         {
-            sub_80EEFC8(&gBattleStruct->field_95, &gBattleStruct->field_97, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+            DoLoadHealthboxPalsForLevelUp(&gBattleStruct->field_95, &gBattleStruct->field_97, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
             BeginNormalPaletteFade(0xFFFFFF7E,
                                    4, 
                                    0, 
@@ -703,7 +703,7 @@ static void sub_80E835C(void)
     case 8:
         if (!gPaletteFade.active)
         {
-            sub_80EF0E0(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+            DoFreeHealthboxPalsForLevelUp(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
             sub_80EB524();
             gBattleStruct->field_94 = 0;
             OakOldManBufferExecCompleted();
@@ -806,7 +806,7 @@ static void sub_80E8704(void)
     case 0:
         if (!gPaletteFade.active)
         {
-            sub_80EEFC8(&gBattleStruct->field_95, &gBattleStruct->field_97, gActiveBattler);
+            DoLoadHealthboxPalsForLevelUp(&gBattleStruct->field_95, &gBattleStruct->field_97, gActiveBattler);
             BeginNormalPaletteFade(0xFFFFFF7E,
                                    4, 
                                    0, 

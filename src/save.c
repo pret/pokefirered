@@ -45,26 +45,24 @@
     min(sizeof(structure) - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE)  \
 }                                                                           \
 
-// TODO: use gSaveblock2, gSaveblock1, gPokemonStorage instead of structs
-// Will be done when load_save is decompiled.
 const struct SaveSectionOffsets gSaveSectionOffsets[] =
 {
-    SAVEBLOCK_CHUNK(struct SaveBlock2, 0),
+    SAVEBLOCK_CHUNK(gSaveBlock2, 0),
 
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 0),
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 1),
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 2),
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 3),
+    SAVEBLOCK_CHUNK(gSaveBlock1, 0),
+    SAVEBLOCK_CHUNK(gSaveBlock1, 1),
+    SAVEBLOCK_CHUNK(gSaveBlock1, 2),
+    SAVEBLOCK_CHUNK(gSaveBlock1, 3),
 
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 0),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 1),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 2),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 3),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 4),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 5),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 6),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 7),
-    SAVEBLOCK_CHUNK(struct PokemonStorage, 8)
+    SAVEBLOCK_CHUNK(gPokemonStorage, 0),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 1),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 2),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 3),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 4),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 5),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 6),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 7),
+    SAVEBLOCK_CHUNK(gPokemonStorage, 8)
 };
 
 // Sector num to begin writing save data. Sectors are rotated each time the game is saved. (possibly to avoid wear on flash memory?)

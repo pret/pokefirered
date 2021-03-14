@@ -23,14 +23,14 @@ struct LoadedSaveData
 };
 
 // EWRAM DATA
-EWRAM_DATA struct SaveBlock2 gSaveBlock2 = {0};
-EWRAM_DATA u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA HERE struct SaveBlock2 gSaveBlock2 = {0};
+EWRAM_DATA HERE u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA struct SaveBlock1 gSaveBlock1 = {0};
-EWRAM_DATA u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA HERE struct SaveBlock1 gSaveBlock1 = {0};
+EWRAM_DATA HERE u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA HERE struct PokemonStorage gPokemonStorage = {0};
+EWRAM_DATA HERE u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;
@@ -70,7 +70,7 @@ void SetSaveBlocksPointers(void)
     struct SaveBlock1** sav1_LocalVar = &gSaveBlock1Ptr;
     void *oldSave = (void *)gSaveBlock1Ptr;
 
-    offset = (Random()) & (SAVEBLOCK_MOVE_RANGE - 4);
+    offset = (Random()) & ((SAVEBLOCK_MOVE_RANGE - 1) & ~3);
 
     gSaveBlock2Ptr = (void*)(&gSaveBlock2) + offset;
     *sav1_LocalVar = (void*)(&gSaveBlock1) + offset;

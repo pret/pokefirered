@@ -3232,7 +3232,7 @@ void AnimTask_HeartsBackground(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBg_AttractTilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBg_AttractGfx, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimBg_AttractPal, animBg.paletteId * 16, 32);
@@ -3282,7 +3282,7 @@ static void HeartsBackground_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80752A0(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         sub_8075358(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
@@ -3313,7 +3313,7 @@ void AnimTask_ScaryFace(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     
     if (IsContest())
         LZDecompressVram(gBattleAnimBgTilemap_ScaryFaceContest, animBg.bgTilemap);
@@ -3370,7 +3370,7 @@ static void ScaryFace_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80752A0(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         sub_8075358(1);
         sub_8075358(2);
         gTasks[taskId].data[12]++;

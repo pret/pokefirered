@@ -598,7 +598,7 @@ static void sub_8156184(void)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80)
         {
-            sub_80F1720(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
+            TryShinyAnimation(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
         }
         else if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1)
         {
@@ -656,7 +656,7 @@ static void sub_81563A8(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_80F1720(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+        TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (gSprites[gUnknown_3004FFC[gActiveBattler]].callback == SpriteCallbackDummy
      && !(gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive))
     {
@@ -750,10 +750,10 @@ static void sub_8156624(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_80F1720(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+        TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
-        sub_80F1720(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
+        TryShinyAnimation(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
     {
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
@@ -2518,7 +2518,7 @@ static void sub_8159D04(void)
     case 0:
         if (!gPaletteFade.active)
         {
-            sub_80EEFC8(&gBattleStruct->field_95,
+            DoLoadHealthboxPalsForLevelUp(&gBattleStruct->field_95,
                         &gBattleStruct->field_94,
                         GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
             BeginNormalPaletteFade(0xFFFFFF7F, 4, 0, 8, RGB_BLACK);
@@ -2576,7 +2576,7 @@ static void sub_8159D04(void)
                 BattleStopLowHpSound();
                 PlayBGM(MUS_VICTORY_WILD);
             }
-            sub_80EF0E0(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
+            DoFreeHealthboxPalsForLevelUp(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
             sub_80EB524();
             sub_8159B78();
         }

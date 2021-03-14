@@ -6,6 +6,7 @@
 extern bool32 gFlashMemoryPresent;
 extern struct SaveBlock1 gSaveBlock1;
 extern struct SaveBlock2 gSaveBlock2;
+extern struct PokemonStorage gPokemonStorage;
 
 void ClearSav2(void);
 void ClearSav1(void);

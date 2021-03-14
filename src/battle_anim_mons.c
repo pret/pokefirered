@@ -695,10 +695,10 @@ void SetAnimSpriteInitialXOffset(struct Sprite *sprite, s16 xOffset)
 
 void InitAnimArcTranslation(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->sTransl_InitX = sprite->pos1.x;
+    sprite->sTransl_InitY = sprite->pos1.y;
     InitAnimLinearTranslation(sprite);
-    sprite->data[6] = 0x8000 / sprite->data[0];
+    sprite->data[6] = 0x8000 / sprite->sTransl_Speed;
     sprite->data[7] = 0;
 }
 
@@ -707,7 +707,7 @@ bool8 TranslateAnimHorizontalArc(struct Sprite *sprite)
     if (AnimTranslateLinear(sprite))
         return TRUE;
     sprite->data[7] += sprite->data[6];
-    sprite->pos2.y += Sin((u8)(sprite->data[7] >> 8), sprite->data[5]);
+    sprite->pos2.y += Sin((u8)(sprite->data[7] >> 8), sprite->sTransl_ArcAmpl);
     return FALSE;
 }
 
@@ -716,7 +716,7 @@ bool8 TranslateAnimVerticalArc(struct Sprite *sprite)
     if (AnimTranslateLinear(sprite))
         return TRUE;
     sprite->data[7] += sprite->data[6];
-    sprite->pos2.x += Sin((u8)(sprite->data[7] >> 8), sprite->data[5]);
+    sprite->pos2.x += Sin((u8)(sprite->data[7] >> 8), sprite->sTransl_ArcAmpl);
     return FALSE;
 }
 
@@ -801,7 +801,7 @@ bool8 IsDoubleBattle(void)
     return IS_DOUBLE_BATTLE();
 }
 
-void sub_80752A0(struct BattleAnimBgData *animBgData)
+void GetBattleAnimBg1Data(struct BattleAnimBgData *animBgData)
 {
     animBgData->bgTiles = gUnknown_2022BB8;
     animBgData->bgTilemap = (u16 *)gUnknown_2022BBC;
@@ -815,7 +815,7 @@ void sub_80752C8(struct BattleAnimBgData *animBgData, u32 arg1)
 {
     if (arg1 == 1)
     {
-        sub_80752A0(animBgData);
+        GetBattleAnimBg1Data(animBgData);
     }
     else
     {
@@ -919,15 +919,15 @@ void InitSpriteDataForLinearTranslation(struct Sprite *sprite)
 
 void InitAnimLinearTranslation(struct Sprite *sprite)
 {
-    s32 x = sprite->data[2] - sprite->data[1];
-    s32 y = sprite->data[4] - sprite->data[3];
+    s32 x = sprite->sTransl_DestX - sprite->sTransl_InitX;
+    s32 y = sprite->sTransl_DestY - sprite->sTransl_InitY;
     bool8 movingLeft = x < 0;
     bool8 movingUp = y < 0;
     u16 xDelta = abs(x) << 8;
     u16 yDelta = abs(y) << 8;
 
-    xDelta = xDelta / sprite->data[0];
-    yDelta = yDelta / sprite->data[0];
+    xDelta = xDelta / sprite->sTransl_Speed;
+    yDelta = yDelta / sprite->sTransl_Speed;
 
     if (movingLeft)
         xDelta |= 1;
@@ -947,17 +947,17 @@ void InitAnimLinearTranslation(struct Sprite *sprite)
 
 void StartAnimLinearTranslation(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->sTransl_InitX = sprite->pos1.x;
+    sprite->sTransl_InitY = sprite->pos1.y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_807563C;
+    sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
     sprite->callback(sprite);
 }
 
 void sub_80755B8(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->sTransl_InitX = sprite->pos1.x;
+    sprite->sTransl_InitY = sprite->pos1.y;
     InitAnimLinearTranslation(sprite);
     sprite->callback = sub_8075658;
     sprite->callback(sprite);
@@ -990,7 +990,7 @@ bool8 AnimTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-void sub_807563C(struct Sprite *sprite)
+void RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
@@ -998,39 +998,39 @@ void sub_807563C(struct Sprite *sprite)
 
 static void sub_8075658(struct Sprite *sprite)
 {
-    sub_801236C(sprite);
+    UpdatePlayerPosInThrowAnim(sprite);
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
 }
 
 void sub_8075678(struct Sprite *sprite)
 {
-    s32 v1 = abs(sprite->data[2] - sprite->data[1]) << 8;
+    s32 v1 = abs(sprite->sTransl_DestX - sprite->sTransl_InitX) << 8;
 
-    sprite->data[0] = v1 / sprite->data[0];
+    sprite->sTransl_Speed = v1 / sprite->sTransl_Duration;
     InitAnimLinearTranslation(sprite);
 }
 
 void sub_80756A4(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->sTransl_InitX = sprite->pos1.x;
+    sprite->sTransl_InitY = sprite->pos1.y;
     sub_8075678(sprite);
-    sprite->callback = sub_807563C;
+    sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
     sprite->callback(sprite);
 }
 
 static void InitAnimFastLinearTranslation(struct Sprite *sprite)
 {
-    s32 xDiff = sprite->data[2] - sprite->data[1];
-    s32 yDiff = sprite->data[4] - sprite->data[3];
+    s32 xDiff = sprite->sTransl_DestX - sprite->sTransl_InitX;
+    s32 yDiff = sprite->sTransl_DestY - sprite->sTransl_InitY;
     bool8 xSign = xDiff < 0;
     bool8 ySign = yDiff < 0;
     u16 x2 = abs(xDiff) << 4;
     u16 y2 = abs(yDiff) << 4;
 
-    x2 /= sprite->data[0];
-    y2 /= sprite->data[0];
+    x2 /= sprite->sTransl_Duration;
+    y2 /= sprite->sTransl_Duration;
     if (xSign)
         x2 |= 1;
     else
@@ -1047,8 +1047,8 @@ static void InitAnimFastLinearTranslation(struct Sprite *sprite)
 
 void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite)
 {
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[3] = sprite->pos1.y;
+    sprite->sTransl_InitX = sprite->pos1.x;
+    sprite->sTransl_InitY = sprite->pos1.y;
     InitAnimFastLinearTranslation(sprite);
     sprite->callback = sub_80757E8;
     sprite->callback(sprite);

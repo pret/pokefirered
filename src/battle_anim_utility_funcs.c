@@ -331,7 +331,7 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_8076E34(gBattleAnimAttacker, spriteId, species);
-    sub_80752A0(&animBgData);
+    GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
     if (IsContest())
         sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
@@ -358,7 +358,7 @@ static void sub_80BAF38(u8 taskId)
         gBattle_BG1_Y += 64;
         if (++gTasks[taskId].data[11] == 4)
         {
-            sub_8073128(0);
+            ResetBattleAnimBg(0);
             gBattle_WIN0H = 0;
             gBattle_WIN0V = 0;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR
@@ -377,7 +377,7 @@ static void sub_80BAF38(u8 taskId)
             sprite = &gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)]; // unused
             sprite = &gSprites[gTasks[taskId].data[0]];
             DestroySprite(sprite);
-            sub_80752A0(&animBgData);
+            GetBattleAnimBg1Data(&animBgData);
             sub_8075358(animBgData.bgId);
             if (gTasks[taskId].data[6] == 1)
                 ++gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority;
@@ -452,7 +452,7 @@ static void sub_80BB2A0(u8 taskId)
         battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
         newSpriteId = sub_8076E34(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
     }
-    sub_80752A0(&animBgData);
+    GetBattleAnimBg1Data(&animBgData);
     if (sAnimStatsChangeData->data[0] == 0)
         AnimLoadCompressedBgTilemap(animBgData.bgId, gBattleStatMask1_Tilemap);
     else
@@ -548,7 +548,7 @@ static void sub_80BB4B8(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
             if (gTasks[taskId].data[12] == 0)
             {
-                sub_8073128(0);
+                ResetBattleAnimBg(0);
                 ++gTasks[taskId].data[15];
             }
         }
@@ -755,7 +755,7 @@ void sub_80BBA20(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
     spriteId = sub_8076E34(battler1, gBattlerSpriteIds[battler1], species);
     if (arg4)
         newSpriteId = sub_8076E34(battler2, gBattlerSpriteIds[battler2], species);
-    sub_80752A0(&animBgData);
+    GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     if (IsContest())
         sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
@@ -805,7 +805,7 @@ static void sub_80BBC2C(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
             if (gTasks[taskId].data[12] == 0)
             {
-                sub_8073128(0);
+                ResetBattleAnimBg(0);
                 gBattle_WIN0H = 0;
                 gBattle_WIN0V = 0;
                 SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR

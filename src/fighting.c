@@ -788,7 +788,7 @@ static void sub_80B111C(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(sprite->data[7], 3);
         InitAnimLinearTranslation(sprite);
         StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-        sprite->callback = sub_807563C;
+        sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
     }
 }
 
@@ -874,7 +874,7 @@ static void AnimSuperpowerFireball(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(battler, 3);
     InitAnimLinearTranslation(sprite);
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = sub_807563C;
+    sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
 }
 
 static void sub_80B13D4(struct Sprite *sprite)

@@ -31,9 +31,7 @@
 #define __(x) (x)
 #endif // __APPLE__
 
-#define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
-// GF's lingo
-#define NELEMS ARRAY_COUNT
+#define NELEMS(array) (sizeof(array) / sizeof((array)[0]))
 
 #define SWAP(a, b, temp)    \
 {                           \
@@ -293,7 +291,7 @@ struct SaveBlock2
     /*0xB10*/ struct BerryPickingResults berryPick;
     /*0xB20*/ u8 filler_B20[0x400];
     /*0xF20*/ u32 encryptionKey;
-};
+}; // size: 0xF24
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -826,7 +824,7 @@ struct SaveBlock1
     /*0x3D24*/ u8 filler3D24[0x10];
     /*0x3D34*/ u32 towerChallengeId;
     /*0x3D38*/ struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
-};
+}; // size: 0x3D68
 
 struct MapPosition
 {

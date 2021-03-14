@@ -407,7 +407,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimSpritePal_FlyingDirt, animBg.paletteId * 16, 32);
@@ -464,7 +464,7 @@ static void sub_80B490C(u8 taskId)
         }
         break;
     case 3:
-        sub_80752A0(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         sub_8075358(animBg.bgId);
         ++gTasks[taskId].data[12];
         break;

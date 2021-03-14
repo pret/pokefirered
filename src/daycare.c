@@ -790,7 +790,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     u8 i;
     u8 selectedIvs[INHERITED_IV_COUNT];
     u8 availableIVs[NUM_STATS];
-    u8 whichParent[ARRAY_COUNT(selectedIvs)];
+    u8 whichParent[NELEMS(selectedIvs)];
     u8 iv;
 
     // Initialize a list of IV indices.
@@ -800,7 +800,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 
     // Select the 3 IVs that will be inherited.
-    for (i = 0; i < ARRAY_COUNT(selectedIvs); i++)
+    for (i = 0; i < NELEMS(selectedIvs); i++)
     {
         // Randomly pick an IV from the available list and stop from being chosen again.
         selectedIvs[i] = availableIVs[Random() % (NUM_STATS - i)];
@@ -808,13 +808,13 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 
     // Determine which parent each of the selected IVs should inherit from.
-    for (i = 0; i < ARRAY_COUNT(selectedIvs); i++)
+    for (i = 0; i < NELEMS(selectedIvs); i++)
     {
         whichParent[i] = Random() % DAYCARE_MON_COUNT;
     }
 
     // Set each of inherited IVs on the egg mon.
-    for (i = 0; i < ARRAY_COUNT(selectedIvs); i++)
+    for (i = 0; i < NELEMS(selectedIvs); i++)
     {
         switch (selectedIvs[i])
         {
@@ -858,7 +858,7 @@ static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
     numEggMoves = 0;
     eggMoveIdx = 0;
     species = GetMonData(pokemon, MON_DATA_SPECIES);
-    for (i = 0; i < ARRAY_COUNT(gEggMoves) - 1; i++)
+    for (i = 0; i < NELEMS(gEggMoves) - 1; i++)
     {
         if (gEggMoves[i] == species + EGG_MOVES_SPECIES_OFFSET)
         {
@@ -1787,7 +1787,7 @@ static void CB2_EggHatch_0(void)
 
         ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
+        InitBgsFromTemplates(0, sBgTemplates_EggHatch, NELEMS(sBgTemplates_EggHatch));
 
         ChangeBgX(1, 0, 0);
         ChangeBgY(1, 0, 0);

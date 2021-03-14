@@ -36,6 +36,15 @@ struct BattleAnimBackground
 
 #define ANIM_ARGS_COUNT 8
 
+// Linear Translation
+#define sTransl_Speed    data[0]
+#define sTransl_Duration data[0] // for Fast
+#define sTransl_InitX    data[1]
+#define sTransl_DestX    data[2]
+#define sTransl_InitY    data[3]
+#define sTransl_DestY    data[4]
+#define sTransl_ArcAmpl  data[5]
+
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;
@@ -129,7 +138,7 @@ extern const struct OamData gOamData_AffineDouble_ObjBlend_32x64;
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 void MoveBattlerSpriteToBG(u8 battlerId, u8);
-void sub_8073128(u8);
+void ResetBattleAnimBg(u8);
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
 void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
@@ -306,12 +315,12 @@ void AnimKnockOffStrike(struct Sprite *);
 void AnimRecycle(struct Sprite *);
 
 // battle_anim_special.c
-void sub_80F1720(u8 battler, struct Pokemon *mon);
+void TryShinyAnimation(u8 battler, struct Pokemon *mon);
 u8 ItemIdToBallId(u16 itemId);
-u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
+u8 LaunchBallStarsTask(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
-void sub_80EEFC8(u8 *, u8 *, u8 battlerId);
-void sub_80EF0E0(u8 batterId);
+void DoLoadHealthboxPalsForLevelUp(u8 *, u8 *, u8 battlerId);
+void DoFreeHealthboxPalsForLevelUp(u8 batterId);
 
 enum
 {
@@ -382,7 +391,7 @@ u8 GetBattlerPosition(u8 battlerId);
 u8 GetBattlerAtPosition(u8 position);
 bool8 IsBattlerSpritePresent(u8 battlerId);
 bool8 IsDoubleBattle(void);
-void sub_80752A0(struct BattleAnimBgData *animBgData);
+void GetBattleAnimBg1Data(struct BattleAnimBgData *animBgData);
 void sub_80752C8(struct BattleAnimBgData *animBgData, u32 arg1);
 void sub_8075300(struct BattleAnimBgData *animBgData, u8 unused);
 void sub_8075358(u32 bgId);
@@ -397,7 +406,7 @@ void InitAnimLinearTranslation(struct Sprite *sprite);
 void StartAnimLinearTranslation(struct Sprite *sprite);
 void sub_80755B8(struct Sprite *sprite);
 bool8 AnimTranslateLinear(struct Sprite *sprite);
-void sub_807563C(struct Sprite *sprite);
+void RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite);
 void sub_8075678(struct Sprite *sprite);
 void sub_80756A4(struct Sprite *sprite);
 void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite);

@@ -1160,7 +1160,7 @@ void AnimTask_BlendBackground(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     BlendPalette(animBg.paletteId * 16, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]);
     DestroyAnimVisualTask(taskId);
 }

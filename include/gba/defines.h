@@ -16,8 +16,10 @@
 
 #if MODERN
 #define NOINLINE __attribute__((noinline))
+#define HERE __attribute__((no_reorder))
 #else
 #define NOINLINE
+#define HERE
 #endif
 
 #define ALIGNED(n) __attribute__((aligned(n)))
@@ -92,7 +94,15 @@
 #define RGB_CYAN RGB(0, 31, 31)
 #define RGB_WHITEALPHA (RGB_WHITE | 0x8000)
 
+// Some functions are strictly inline asm
 #define NAKED __attribute__((naked))
+
+// Silence IDE warnings
+#if __GNUC__ >= 4
+#define USED __attribute__((used))
+#else
+#define USED
+#endif
 #define UNUSED __attribute__((unused))
 
 #endif // GUARD_GBA_DEFINES

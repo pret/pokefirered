@@ -83,7 +83,7 @@ static void sub_8012060(struct Sprite *sprite);
 static void oac_poke_ally_(struct Sprite *sprite);
 static void SpriteCallbackDummy3(struct Sprite *sprite);
 static void SpriteCB_BounceEffect(struct Sprite *sprite);
-static void sub_8012398(struct Sprite *sprite);
+static void SpriteCB_PlayerThrowUpdate(struct Sprite *sprite);
 static void BattleStartClearSetData(void);
 static void BattleIntroGetMonsData(void);
 static void TurnValuesCleanUp(bool8 var0);
@@ -301,7 +301,7 @@ static const union AffineAnimCmd *const gUnknown_824F044[] =
     gUnknown_824F02C,
 };
 
-static const s8 gUnknown_824F048[] = { -32, -16, -16, -32, -32, 0, 0, 0 };
+static const s8 sPlayerThrowXTranslation[] = { -32, -16, -16, -32, -32, 0, 0, 0 };
 
 // format: attacking type, defending type, damage multiplier
 // the multiplier is a (decimal) fixed-point number:
@@ -2153,21 +2153,21 @@ static void SpriteCB_BounceEffect(struct Sprite *sprite)
     sprite->sSinIndex = (sprite->sSinIndex + sprite->sDelta) & 0xFF;
 }
 
-void sub_8012354(struct Sprite *sprite)
+void SpriteCB_PlayerThrowInit(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, 1);
-    sprite->callback = sub_8012398;
+    sprite->callback = SpriteCB_PlayerThrowUpdate;
 }
 
-void sub_801236C(struct Sprite *sprite)
+void UpdatePlayerPosInThrowAnim(struct Sprite *sprite)
 {
     if (sprite->animDelayCounter == 0)
-        sprite->centerToCornerVecX = gUnknown_824F048[sprite->animCmdIndex];
+        sprite->centerToCornerVecX = sPlayerThrowXTranslation[sprite->animCmdIndex];
 }
 
-static void sub_8012398(struct Sprite *sprite)
+static void SpriteCB_PlayerThrowUpdate(struct Sprite *sprite)
 {
-    sub_801236C(sprite);
+    UpdatePlayerPosInThrowAnim(sprite);
     if (sprite->animEnded)
         sprite->callback = SpriteCallbackDummy3;
 }

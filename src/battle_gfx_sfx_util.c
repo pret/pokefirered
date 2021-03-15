@@ -950,9 +950,12 @@ void HideBattlerShadowSprite(u8 battlerId)
     gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].callback = SpriteCB_SetInvisible;
 }
 
-void sub_80357C8(void)
+// Low-level function that sets specific interface tiles' palettes,
+// overwriting any pixel with value 0.
+void BattleInterfaceSetWindowPals(void)
 {
-    u16 *vramPtr = (u16 *)(VRAM + 0x240);
+    // 9 tiles at 0x06000240
+    u16 *vramPtr = (u16 *)(BG_VRAM + 0x240);
     s32 i;
     s32 j;
 
@@ -970,7 +973,9 @@ void sub_80357C8(void)
                 *vramPtr |= 0x000F;
         }
     }
-    vramPtr = (u16 *)(VRAM + 0x600);
+
+    // 18 tiles at 0x06000600
+    vramPtr = (u16 *)(BG_VRAM + 0x600);
     for (i = 0; i < 18; ++i)
     {
         for (j = 0; j < 16; ++vramPtr, ++j)
@@ -1005,7 +1010,7 @@ void AllocateMonSpritesGfx(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
         gMonSpritesGfxPtr->sprites[i] = gMonSpritesGfxPtr->firstDecompressed + (i * 0x2000);
-        *(gMonSpritesGfxPtr->templates + i) = gUnknown_825DEF0[i];
+        *(gMonSpritesGfxPtr->templates + i) = gSpriteTemplates_Battlers[i];
 
         for (j = 0; j < 4; ++j)
         {

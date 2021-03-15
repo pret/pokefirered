@@ -516,14 +516,12 @@ struct BattleScripting
 
 enum
 {
-    BACK_PIC_BRENDAN,
-    BACK_PIC_MAY,
     BACK_PIC_RED,
     BACK_PIC_LEAF,
     BACK_PIC_RS_BRENDAN,
     BACK_PIC_RS_MAY,
-    BACK_PIC_WALLY,
-    BACK_PIC_STEVEN
+    BACK_PIC_POKEDUDE,
+    BACK_PIC_OLDMAN
 };
 
 struct BattleSpriteInfo
@@ -719,7 +717,7 @@ extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct UnknownPokemonStruct4 gMultiPartnerParty[3];
-extern u16 *gUnknown_2022BC0;
+extern u16 *sUnknownDebugSpriteDataBuffer;
 extern u16 gRandomTurnNumber;
 
 #endif // GUARD_BATTLE_H

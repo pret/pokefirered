@@ -1472,101 +1472,101 @@ static const u8 sHoldEffectToType[][2] =
     {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
 };
 
-const struct SpriteTemplate gUnknown_825DEF0[] = 
+const struct SpriteTemplate gSpriteTemplates_Battlers[] = 
 {
-    {
+    [B_POSITION_PLAYER_LEFT] = {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
-        .images = gUnknown_8234698,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .images = gSpriteImages_BattlerPlayerLeft,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
-    {
+    [B_POSITION_OPPONENT_LEFT] = {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F010,
+        .oam = &gOamData_BattlerOpponent,
         .anims = NULL, 
-        .images = gUnknown_82346B8,
-        .affineAnims = gSpriteAffineAnimTable_8234944,
-        .callback = SpriteCB_WildMon,
+        .images = gSpriteImages_BattlerOpponentLeft,
+        .affineAnims = gSpriteAffineAnimTable_BattlerOpponent,
+        .callback = SpriteCB_EnemyMon,
     },
-    {
+    [B_POSITION_PLAYER_RIGHT] = {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
-        .images = gUnknown_82346D8,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .images = gSpriteImages_BattlerPlayerRight,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
-    {
+    [B_POSITION_OPPONENT_RIGHT] = {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F010,
+        .oam = &gOamData_BattlerOpponent,
         .anims = NULL, 
-        .images = gUnknown_82346F8,
-        .affineAnims = gSpriteAffineAnimTable_8234944,
-        .callback = SpriteCB_WildMon,
+        .images = gSpriteImages_BattlerOpponentRight,
+        .affineAnims = gSpriteAffineAnimTable_BattlerOpponent,
+        .callback = SpriteCB_EnemyMon,
     },
 };
 
-const struct SpriteTemplate gUnknown_825DF50[] = 
+const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] = 
 {
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Red,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Leaf,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSBrendan,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSMay,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Pokedude,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
     {
         .tileTag = SPRITE_INVALID_TAG,
         .paletteTag = 0,
-        .oam = &gOamData_824F018,
+        .oam = &gOamData_BattlerPlayer,
         .anims = NULL, 
         .images = gTrainerBackPicTable_OldMan,
-        .affineAnims = gSpriteAffineAnimTable_82348C8,
-        .callback = sub_80120C4,
+        .affineAnims = gSpriteAffineAnimTable_BattlerPlayer,
+        .callback = SpriteCB_AllyMon,
     },
 };
 
@@ -2716,7 +2716,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
             if (battlerPosition >= 4)
                 battlerPosition = 0;
 
-            gMultiuseSpriteTemplate = gUnknown_825DEF0[battlerPosition];
+            gMultiuseSpriteTemplate = gSpriteTemplates_Battlers[battlerPosition];
         }
     }
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
@@ -2728,7 +2728,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
-        gMultiuseSpriteTemplate = gUnknown_825DF50[trainerSpriteId];
+        gMultiuseSpriteTemplate = gSpriteTemplates_TrainerBackpics[trainerSpriteId];
         gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else
@@ -2736,7 +2736,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
         if (gMonSpritesGfxPtr != NULL)
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
-            gMultiuseSpriteTemplate = gUnknown_825DEF0[battlerPosition];
+            gMultiuseSpriteTemplate = gSpriteTemplates_Battlers[battlerPosition];
         gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerSpriteId];
     }
 }
@@ -6081,7 +6081,7 @@ static void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *struc
     {
         for (i = 0; i < (s8)structPtr->spriteCount; ++i)
         {
-            structPtr->templates[i] = gUnknown_825DEF0[i];
+            structPtr->templates[i] = gSpriteTemplates_Battlers[i];
             for (j = 0; j < structPtr->frameCount; ++j)
                 structPtr->frameImages[i * structPtr->frameCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
             structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->frameCount];
@@ -6089,7 +6089,7 @@ static void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *struc
     }
     else
     {
-        const struct SpriteTemplate *template = &gUnknown_825DEF0[battlePosition];
+        const struct SpriteTemplate *template = &gSpriteTemplates_Battlers[battlePosition];
         
         structPtr->templates[0] = *template;
         for (j = 0; j < structPtr->frameCount; ++j)

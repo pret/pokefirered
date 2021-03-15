@@ -226,14 +226,14 @@ static void sub_80D443C(void)
                 UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK],
                                          &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]],
                                          HEALTHBOX_ALL);
-                sub_804BD94(gActiveBattler ^ BIT_FLANK);
+                StartHealthboxSlideIn(gActiveBattler ^ BIT_FLANK);
                 SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK]);
             }
             DestroySprite(&gSprites[gUnknown_3004FFC[gActiveBattler]]);
             UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler],
                                      &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]],
                                      HEALTHBOX_ALL);
-            sub_804BD94(gActiveBattler);
+            StartHealthboxSlideIn(gActiveBattler);
             SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
             gBattleSpritesDataPtr->animationData->field_9_x1 = 0;
             gBattlerControllerFuncs[gActiveBattler] = sub_80D4358;
@@ -338,7 +338,7 @@ static void sub_80D484C(void)
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 0);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
-        sub_804BD94(gActiveBattler);
+        StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
         CopyBattleSpriteInvisibility(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = sub_80D47AC;

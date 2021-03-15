@@ -36,7 +36,7 @@ void LoadAndCreateEnemyShadowSprites(void);
 void SpriteCB_SetInvisible(struct Sprite *sprite);
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);
 void HideBattlerShadowSprite(u8 battlerId);
-void sub_80357C8(void);
+void BattleInterfaceSetWindowPals(void);
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);

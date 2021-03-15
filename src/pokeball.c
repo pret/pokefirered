@@ -1167,7 +1167,7 @@ void DestroySpriteAndFreeResources2(struct Sprite *sprite)
     DestroySpriteAndFreeResources(sprite);
 }
 
-void sub_804BD94(u8 battlerId)
+void StartHealthboxSlideIn(u8 battlerId)
 {
     struct Sprite *healthboxSprite = &gSprites[gHealthboxSpriteIds[battlerId]];
 

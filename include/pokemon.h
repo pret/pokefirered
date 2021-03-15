@@ -327,7 +327,7 @@ extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
-extern const struct SpriteTemplate gUnknown_825DEF0[];
+extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
 extern const u8 gPPUpGetMask[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);

@@ -4791,7 +4791,7 @@ static void atk51_switchhandleorder(void)
             break;
         case 1:
             if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-                sub_8013F6C(gActiveBattler);
+                UpdatePartyOwnerOnSwitch_NonMulti(gActiveBattler);
             break;
         case 2:
             gBattleCommunication[0] = gBattleBufferB[gActiveBattler][1];
@@ -4808,7 +4808,7 @@ static void atk51_switchhandleorder(void)
             }
             else
             {
-                sub_8013F6C(gActiveBattler);
+                UpdatePartyOwnerOnSwitch_NonMulti(gActiveBattler);
             }
             PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
             PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, gActiveBattler, gBattleBufferB[gActiveBattler][1])
@@ -6704,7 +6704,7 @@ static void atk8F_forcerandomswitch(void)
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
             if (!IsMultiBattle())
-                sub_8013F6C(gBattlerTarget);
+                UpdatePartyOwnerOnSwitch_NonMulti(gBattlerTarget);
             SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
             SwitchPartyOrderLinkMulti(gBattlerTarget ^ 2, i, 1);
         }

@@ -664,7 +664,7 @@ static void sub_81563A8(void)
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler],
                                  &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]],
                                  HEALTHBOX_ALL);
-        sub_804BD94(gActiveBattler);
+        StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
         CopyBattleSpriteInvisibility(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = sub_81562F0;
@@ -762,14 +762,14 @@ static void sub_8156624(void)
             UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK],
                                      &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]],
                                      HEALTHBOX_ALL);
-            sub_804BD94(gActiveBattler ^ BIT_FLANK);
+            StartHealthboxSlideIn(gActiveBattler ^ BIT_FLANK);
             SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK]);
         }
         DestroySprite(&gSprites[gUnknown_3004FFC[gActiveBattler]]);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler],
                                  &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]],
                                  HEALTHBOX_ALL);
-        sub_804BD94(gActiveBattler);
+        StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
         gBattleSpritesDataPtr->animationData->field_9_x1 = 0;
         gBattlerControllerFuncs[gActiveBattler] = sub_81567B0;
@@ -1714,11 +1714,11 @@ static void PokedudeHandleDrawTrainerPic(void)
 {
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
-        DecompressTrainerBackPalette(4, gActiveBattler);
-        SetMultiuseSpriteTemplateToTrainerBack(4, GetBattlerPosition(gActiveBattler));
+        DecompressTrainerBackPalette(BACK_PIC_POKEDUDE, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(BACK_PIC_POKEDUDE, GetBattlerPosition(gActiveBattler));
         gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                             80,
-                                            (8 - gTrainerBackPicCoords[4].size) * 4 + 80,
+                                            (8 - gTrainerBackPicCoords[BACK_PIC_POKEDUDE].size) * 4 + 80,
                                             30);
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
@@ -1747,11 +1747,11 @@ static void PokedudeHandleDrawTrainerPic(void)
 
 static void PokedudeHandleTrainerSlide(void)
 {
-    DecompressTrainerBackPalette(4, gActiveBattler);
-    SetMultiuseSpriteTemplateToTrainerBack(4, GetBattlerPosition(gActiveBattler));
+    DecompressTrainerBackPalette(BACK_PIC_POKEDUDE, gActiveBattler);
+    SetMultiuseSpriteTemplateToTrainerBack(BACK_PIC_POKEDUDE, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 
                                                      80, 
-                                                     (8 - gTrainerBackPicCoords[4].size) * 4 + 80, 
+                                                     (8 - gTrainerBackPicCoords[BACK_PIC_POKEDUDE].size) * 4 + 80,
                                                      30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
@@ -2222,7 +2222,7 @@ static void PokedudeHandleIntroTrainerBallThrow(void)
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_80335F8);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[4].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[BACK_PIC_POKEDUDE].data, 0x100 + paletteNum * 16, 32);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
     taskId = CreateTask(sub_81595EC, 5);
     gTasks[taskId].data[0] = gActiveBattler;

@@ -62,7 +62,7 @@ void SetUpBattleVars(void)
     gUnknown_2023DDC = 0;
 }
 
-void sub_800D30C(void)
+void InitBtlControllers(void)
 {
     s32 i;
 

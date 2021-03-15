@@ -22,6 +22,10 @@ asm(".set TITLE_TEXT, gString_PokemonFireRed_Staff");
 asm(".set TITLE_TEXT, gString_PokemonLeafGreen_Staff");
 #endif
 
+#if !defined(NONMATCHING) && MODERN
+#define static
+#endif
+
 enum CreditsSceneIdx
 {
     CREDITSSCENE_INIT_WIN0 = 0,

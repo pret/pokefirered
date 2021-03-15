@@ -1692,48 +1692,10 @@ static void BufferPartyVsScreenHealth_AtEnd(u8 taskId)
         party2 = gEnemyParty;
     }
     r7 = 0;
-    for (i = 0; i < PARTY_SIZE; ++i)
-    {
-        u16 species = GetMonData(&party1[i], MON_DATA_SPECIES2);
-        u16 hp = GetMonData(&party1[i], MON_DATA_HP);
-        u32 status = GetMonData(&party1[i], MON_DATA_STATUS);
-
-        if (species == SPECIES_NONE)
-            continue;
-        if (species != SPECIES_EGG && hp != 0 && status == 0)
-            r7 |= 1 << i * 2;
-
-        if (species == SPECIES_NONE)
-            continue;
-        if (hp != 0 && (species == SPECIES_EGG || status != 0))
-            r7 |= 2 << i * 2;
-
-        if (species == SPECIES_NONE)
-            continue;
-        if (species != SPECIES_EGG && hp == 0)
-            r7 |= 3 << i * 2;
-    }
+    BUFFER_PARTY_VS_SCREEN_STATUS(party1, r7, i);
     gTasks[taskId].data[3] = r7;
     r7 = 0;
-    for (i = 0; i < PARTY_SIZE; ++i)
-    {
-        u16 species = GetMonData(&party2[i], MON_DATA_SPECIES2);
-        u16 hp = GetMonData(&party2[i], MON_DATA_HP);
-        u32 status = GetMonData(&party2[i], MON_DATA_STATUS);
-
-        if (species == SPECIES_NONE)
-            continue;
-        if (species != SPECIES_EGG && hp != 0 && status == 0)
-            r7 |= 1 << i * 2;
-        if (species == SPECIES_NONE)
-            continue;
-        if (hp != 0 && (species == SPECIES_EGG || status != 0))
-            r7 |= 2 << i * 2;
-        if (species == SPECIES_NONE)
-            continue;
-        if (species != SPECIES_EGG && hp == 0)
-            r7 |= 3 << i * 2;
-    }
+    BUFFER_PARTY_VS_SCREEN_STATUS(party2, r7, i);
     gTasks[taskId].data[4] = r7;
 }
 

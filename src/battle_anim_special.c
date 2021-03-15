@@ -377,7 +377,7 @@ static const u16 sBallOpenFadeColors[] =
     RGB(4, 0, 0),
 };
 
-USED const struct SpriteTemplate gSafariBaitSpriteTemplate =
+const struct SpriteTemplate gSafariBaitSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SAFARI_BAIT,
     .paletteTag = ANIM_TAG_SAFARI_BAIT,
@@ -399,7 +399,7 @@ static const union AnimCmd *const sSpriteAnimTable_SafariRock[] =
     sSpriteAnim_SafariRock_0,
 };
 
-USED const struct SpriteTemplate gSafariRockTemplate =
+const struct SpriteTemplate gSafariRockTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
@@ -536,7 +536,7 @@ void DoLoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, u8 battler)
     gSprites[spriteId2].oam.paletteNum = *paletteId2;
 }
 
-USED void AnimTask_LoadHealthboxPalsForLevelUp(u8 taskId)
+void AnimTask_LoadHealthboxPalsForLevelUp(u8 taskId)
 {
     u8 paletteId1, paletteId2;
     
@@ -562,13 +562,13 @@ void DoFreeHealthboxPalsForLevelUp(u8 battler)
     gSprites[spriteId2].oam.paletteNum = paletteId2;
 }
 
-USED void AnimTask_FreeHealthboxPalsForLevelUp(u8 taskId)
+void AnimTask_FreeHealthboxPalsForLevelUp(u8 taskId)
 {
     DoFreeHealthboxPalsForLevelUp(gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_FlashHealthboxOnLevelUp(u8 taskId)
+void AnimTask_FlashHealthboxOnLevelUp(u8 taskId)
 {
     gTasks[taskId].data[10] = gBattleAnimArgs[0];
     gTasks[taskId].data[11] = gBattleAnimArgs[1];
@@ -612,7 +612,7 @@ static void AnimTask_FlashHealthboxOnLevelUp_Step(u8 taskId)
     }
 }
 
-USED void AnimTask_SwitchOutShrinkMon(u8 taskId)
+void AnimTask_SwitchOutShrinkMon(u8 taskId)
 {
     u8 spriteId;
 
@@ -639,7 +639,7 @@ USED void AnimTask_SwitchOutShrinkMon(u8 taskId)
     }
 }
 
-USED void AnimTask_SwitchOutBallEffect(u8 taskId)
+void AnimTask_SwitchOutBallEffect(u8 taskId)
 {
     u8 spriteId;
     u16 ball;
@@ -674,7 +674,7 @@ USED void AnimTask_SwitchOutBallEffect(u8 taskId)
     }
 }
 
-USED void AnimTask_LoadBallGfx(u8 taskId)
+void AnimTask_LoadBallGfx(u8 taskId)
 {
     u8 ballId = ItemIdToBallId(gLastUsedItem);
     
@@ -682,7 +682,7 @@ USED void AnimTask_LoadBallGfx(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_FreeBallGfx(u8 taskId)
+void AnimTask_FreeBallGfx(u8 taskId)
 {
     u8 ballId = ItemIdToBallId(gLastUsedItem);
     
@@ -690,7 +690,7 @@ USED void AnimTask_FreeBallGfx(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_IsBallBlockedByTrainerOrDodged(u8 taskId)
+void AnimTask_IsBallBlockedByTrainerOrDodged(u8 taskId)
 {
     switch (gBattleSpritesDataPtr->animationData->ballThrowCaseId)
     {
@@ -740,7 +740,7 @@ u8 ItemIdToBallId(u16 ballItem)
     }
 }
 
-USED void AnimTask_ThrowBall(u8 taskId)
+void AnimTask_ThrowBall(u8 taskId)
 {
     u8 ballId;
     u8 spriteId;
@@ -764,7 +764,7 @@ static void AnimTask_ThrowBall_WaitAnimObjComplete(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_ThrowBallSpecial(u8 taskId)
+void AnimTask_ThrowBallSpecial(u8 taskId)
 {
     int x, y;
     u8 ballId;
@@ -2262,7 +2262,7 @@ static void SpriteCB_SafariBaitOrRock_Finish(struct Sprite *sprite)
     }
 }
 
-USED void AnimTask_SafariOrGhost_DecideAnimSides(u8 taskId)
+void AnimTask_SafariOrGhost_DecideAnimSides(u8 taskId)
 {
     switch (gBattleAnimArgs[0])
     {
@@ -2279,7 +2279,7 @@ USED void AnimTask_SafariOrGhost_DecideAnimSides(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_SafariGetReaction(u8 taskId)
+void AnimTask_SafariGetReaction(u8 taskId)
 {
     if (gBattleCommunication[MULTISTRING_CHOOSER] > 2)
         gBattleAnimArgs[7] = 0;
@@ -2289,7 +2289,7 @@ USED void AnimTask_SafariGetReaction(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_GetTrappedMoveAnimId(u8 taskId)
+void AnimTask_GetTrappedMoveAnimId(u8 taskId)
 {
     if (gBattleSpritesDataPtr->animationData->animArg == MOVE_FIRE_SPIN)
         gBattleAnimArgs[0] = TRAP_ANIM_FIRE_SPIN;
@@ -2305,7 +2305,7 @@ USED void AnimTask_GetTrappedMoveAnimId(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-USED void AnimTask_GetBattlersFromArg(u8 taskId)
+void AnimTask_GetBattlersFromArg(u8 taskId)
 {
     gBattleAnimAttacker = gBattleSpritesDataPtr->animationData->animArg;
     gBattleAnimTarget = gBattleSpritesDataPtr->animationData->animArg >> 8;

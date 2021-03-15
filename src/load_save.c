@@ -23,14 +23,14 @@ struct LoadedSaveData
 };
 
 // EWRAM DATA
-EWRAM_DATA HERE struct SaveBlock2 gSaveBlock2 = {0};
-EWRAM_DATA HERE u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA struct SaveBlock2 gSaveBlock2 = {0};
+EWRAM_DATA u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA HERE struct SaveBlock1 gSaveBlock1 = {0};
-EWRAM_DATA HERE u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA struct SaveBlock1 gSaveBlock1 = {0};
+EWRAM_DATA u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA HERE struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA HERE u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
+EWRAM_DATA u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;

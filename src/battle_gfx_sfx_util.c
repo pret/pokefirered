@@ -140,14 +140,14 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
         gSprites[spriteId].animPaused = 0;
     else if (gSprites[spriteId].animEnded)
     {
-        gSprites[spriteId].callback = sub_8012100;
+        gSprites[spriteId].callback = SpriteCB_SetToDummy3;
         StartSpriteAffineAnim(&gSprites[spriteId], 0);
         sprite->callback = SpriteCallbackDummy;
     }
 }
 
 // not used
-static void sub_8033EB0(struct Sprite *sprite, bool8 arg1)
+UNUSED static void UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
 {
     sprite->animPaused = 1;
     sprite->callback = SpriteCallbackDummy;
@@ -290,7 +290,7 @@ bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn)
     return FALSE;
 }
 
-bool8 mplay_80342A4(u8 battlerId)
+bool8 IsBattleSEPlaying(u8 battlerId)
 {
     u8 zero = 0;
 
@@ -384,7 +384,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
     otId = GetMonData(mon, MON_DATA_OT_ID);
     position = GetBattlerPosition(battlerId);
-    if (sub_804455C(1, battlerId) == 1 || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
+    if (ShouldIgnoreDeoxysForm(1, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
         HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
                                                   gMonSpritesGfxPtr->sprites[position],
                                                   species, currentPersonality);

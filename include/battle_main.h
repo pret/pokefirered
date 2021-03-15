@@ -76,7 +76,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
 void SpriteCb_ShowAsMoveTarget(struct Sprite *sprite);
 void SpriteCb_HideAsMoveTarget(struct Sprite *sprite);
 void SpriteCB_AllyMon(struct Sprite *sprite);
-void sub_8012100(struct Sprite *sprite);
+void SpriteCB_SetToDummy3(struct Sprite *sprite);
 void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
 void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
 void EndBounceEffect(u8 battler, u8 which);

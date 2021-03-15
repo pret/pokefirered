@@ -2012,7 +2012,7 @@ static void oac_poke_ally_(struct Sprite *sprite)
     }
 }
 
-void sub_8012100(struct Sprite *sprite)
+void SpriteCB_SetToDummy3(struct Sprite *sprite)
 {
     sprite->callback = SpriteCallbackDummy3;
 }

@@ -353,23 +353,23 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId);
 static void Task_MultiPartnerPartySlideIn(u8 taskId);
 static bool8 CB2_FadeFromPartyMenu(void);
 static void Task_PartyMenuWaitForFade(u8 taskId);
-static void Task_OakOldManEnterParty_DarkenScreen(u8 taskId);
-static void Task_OakOldManEnterParty_WaitDarken(u8 taskId);
-static void Task_OakOldManEnterParty_CreatePrinter(u8 taskId);
-static void Task_OakOldManEnterParty_RunPrinterMsg1(u8 taskId);
-static void Task_OakOldManEnterParty_LightenFirstMonIcon(u8 taskId);
-static void Task_OakOldManEnterParty_WaitLightenFirstMonIcon(u8 taskId);
-static void Task_OakOldManEnterParty_StartPrintMsg2(u8 taskId);
-static void Task_OakOldManEnterParty_RunPrinterMsg2(u8 taskId);
-static void Task_OakOldManEnterParty_FadeNormal(u8 taskId);
-static void Task_OakOldManEnterParty_WaitFadeNormal(u8 taskId);
+static void Task_FirstBattleEnterParty_DarkenScreen(u8 taskId);
+static void Task_FirstBattleEnterParty_WaitDarken(u8 taskId);
+static void Task_FirstBattleEnterParty_CreatePrinter(u8 taskId);
+static void Task_FirstBattleEnterParty_RunPrinterMsg1(u8 taskId);
+static void Task_FirstBattleEnterParty_LightenFirstMonIcon(u8 taskId);
+static void Task_FirstBattleEnterParty_WaitLightenFirstMonIcon(u8 taskId);
+static void Task_FirstBattleEnterParty_StartPrintMsg2(u8 taskId);
+static void Task_FirstBattleEnterParty_RunPrinterMsg2(u8 taskId);
+static void Task_FirstBattleEnterParty_FadeNormal(u8 taskId);
+static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId);
 static void Task_PartyMenu_PokedudeStep(u8 taskId);
 static void Task_PartyMenuFromBag_PokedudeStep(u8 taskId);
 static bool8 PartyMenuPokedudeIsCancelled(u8 taskId);
 static void PartyMenuHandlePokedudeCancel(void);
 static void PartyMenu_OakOldMan_PrintText(u8 windowId, const u8 *str);
-static u8 OakOldManEnterParty_CreateWindowAndMsg1Printer(void);
-static void OakOldManEnterParty_DestroyVoiceoverWindow(u8 windowId);
+static u8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void);
+static void FirstBattleEnterParty_DestroyVoiceoverWindow(u8 windowId);
 static void SetSwitchedPartyOrderQuestLogEvent(void);
 static void SetUsedFieldMoveQuestLogEvent(struct Pokemon *mon, u8 fieldMove);
 static void sub_8124DE0(void);
@@ -1957,76 +1957,76 @@ static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 
 // Tutorial battle messages
 
-static void Task_OakOldManEnterParty_WaitFadeIn(u8 taskId)
+static void Task_FirstBattleEnterParty_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_OakOldManEnterParty_DarkenScreen;
+        gTasks[taskId].func = Task_FirstBattleEnterParty_DarkenScreen;
 }
 
-static void Task_OakOldManEnterParty_DarkenScreen(u8 taskId)
+static void Task_FirstBattleEnterParty_DarkenScreen(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFF1FFF, 4, 0, 6, RGB_BLACK);
-    gTasks[taskId].func = Task_OakOldManEnterParty_WaitDarken;
+    gTasks[taskId].func = Task_FirstBattleEnterParty_WaitDarken;
 }
 
-static void Task_OakOldManEnterParty_WaitDarken(u8 taskId)
+static void Task_FirstBattleEnterParty_WaitDarken(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_OakOldManEnterParty_CreatePrinter;
+        gTasks[taskId].func = Task_FirstBattleEnterParty_CreatePrinter;
 }
 
-static void Task_OakOldManEnterParty_CreatePrinter(u8 taskId)
+static void Task_FirstBattleEnterParty_CreatePrinter(u8 taskId)
 {
-    gTasks[taskId].data[0] = OakOldManEnterParty_CreateWindowAndMsg1Printer();
-    gTasks[taskId].func = Task_OakOldManEnterParty_RunPrinterMsg1;
+    gTasks[taskId].data[0] = FirstBattleEnterParty_CreateWindowAndMsg1Printer();
+    gTasks[taskId].func = Task_FirstBattleEnterParty_RunPrinterMsg1;
 }
 
-static void Task_OakOldManEnterParty_RunPrinterMsg1(u8 taskId)
+static void Task_FirstBattleEnterParty_RunPrinterMsg1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     if (RunTextPrinters_CheckActive((u8)data[0]) != TRUE)
-        gTasks[taskId].func = Task_OakOldManEnterParty_LightenFirstMonIcon;
+        gTasks[taskId].func = Task_FirstBattleEnterParty_LightenFirstMonIcon;
 }
 
-static void Task_OakOldManEnterParty_LightenFirstMonIcon(u8 taskId)
+static void Task_FirstBattleEnterParty_LightenFirstMonIcon(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFF0008, 4, 6, 0, RGB_BLACK);
-    gTasks[taskId].func = Task_OakOldManEnterParty_WaitLightenFirstMonIcon;
+    gTasks[taskId].func = Task_FirstBattleEnterParty_WaitLightenFirstMonIcon;
 }
 
-static void Task_OakOldManEnterParty_WaitLightenFirstMonIcon(u8 taskId)
+static void Task_FirstBattleEnterParty_WaitLightenFirstMonIcon(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_OakOldManEnterParty_StartPrintMsg2;
+        gTasks[taskId].func = Task_FirstBattleEnterParty_StartPrintMsg2;
 }
 
-static void Task_OakOldManEnterParty_StartPrintMsg2(u8 taskId)
+static void Task_FirstBattleEnterParty_StartPrintMsg2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     PartyMenu_OakOldMan_PrintText(data[0], gText_OakThisIsListOfPokemon);
-    gTasks[taskId].func = Task_OakOldManEnterParty_RunPrinterMsg2;
+    gTasks[taskId].func = Task_FirstBattleEnterParty_RunPrinterMsg2;
 }
 
-static void Task_OakOldManEnterParty_RunPrinterMsg2(u8 taskId)
+static void Task_FirstBattleEnterParty_RunPrinterMsg2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     if (RunTextPrinters_CheckActive((u8)data[0]) != TRUE)
     {
-        OakOldManEnterParty_DestroyVoiceoverWindow((u8)data[0]);
-        gTasks[taskId].func = Task_OakOldManEnterParty_FadeNormal;
+        FirstBattleEnterParty_DestroyVoiceoverWindow((u8)data[0]);
+        gTasks[taskId].func = Task_FirstBattleEnterParty_FadeNormal;
     }
 }
 
-static void Task_OakOldManEnterParty_FadeNormal(u8 taskId)
+static void Task_FirstBattleEnterParty_FadeNormal(u8 taskId)
 {
     BeginNormalPaletteFade(0x0000FFF7, 4, 6, 0, RGB_BLACK);
-    gTasks[taskId].func = Task_OakOldManEnterParty_WaitFadeNormal;
+    gTasks[taskId].func = Task_FirstBattleEnterParty_WaitFadeNormal;
 }
 
-static void Task_OakOldManEnterParty_WaitFadeNormal(u8 taskId)
+static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2623,7 +2623,7 @@ static void PartyMenu_OakOldMan_PrintText(u8 windowId, const u8 *str)
     AddTextPrinterParameterized2(windowId, 4, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
 }
 
-static bool8 OakOldManEnterParty_CreateWindowAndMsg1Printer(void)
+static bool8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void)
 {
     u8 windowId = AddWindow(&sWindowTemplate_FirstBattleOakVoiceover);
 
@@ -2633,7 +2633,7 @@ static bool8 OakOldManEnterParty_CreateWindowAndMsg1Printer(void)
     return windowId;
 }
 
-static void OakOldManEnterParty_DestroyVoiceoverWindow(u8 windowId)
+static void FirstBattleEnterParty_DestroyVoiceoverWindow(u8 windowId)
 {
     ClearWindowTilemap(windowId);
     ClearDialogWindowAndFrameToTransparent(windowId, FALSE);
@@ -5869,7 +5869,7 @@ void OpenPartyMenuInTutorialBattle(u8 partyAction)
                       partyAction,
                       FALSE,
                       PARTY_MSG_NONE,
-                      Task_OakOldManEnterParty_WaitFadeIn,
+                      Task_FirstBattleEnterParty_WaitFadeIn,
                       SetCB2ToReshowScreenAfterMenu);
         BtlCtrl_OakOldMan_SetState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU);
     }
@@ -5910,7 +5910,7 @@ void EnterPartyFromItemMenuInBattle(void)
                       PARTY_ACTION_USE_ITEM,
                       FALSE,
                       PARTY_MSG_NONE,
-                      Task_OakOldManEnterParty_WaitFadeIn,
+                      Task_FirstBattleEnterParty_WaitFadeIn,
                       CB2_BagMenuFromBattle);
         BtlCtrl_OakOldMan_SetState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU);
     }

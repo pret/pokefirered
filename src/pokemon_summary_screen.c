@@ -4002,7 +4002,7 @@ static void sub_813995C(void)
     }
     else
     {
-        if (sub_804455C(3, sLastViewedMonIndex))
+        if (ShouldIgnoreDeoxysForm(3, sLastViewedMonIndex))
             spriteId = CreateMonPicSprite(species, trainerId, personality, 1, 60, 65, 12, 0xffff, 1);
         else
             spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, 1, 60, 65, 12, 0xffff);
@@ -4130,7 +4130,7 @@ static void sub_8139DBC(void)
     }
     else
     {
-        if (sub_804455C(3, sLastViewedMonIndex))
+        if (ShouldIgnoreDeoxysForm(3, sLastViewedMonIndex))
             sMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 0);
         else
             sMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);

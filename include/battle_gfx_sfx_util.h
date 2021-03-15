@@ -9,7 +9,7 @@ void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status);
 bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 defBattler, u8 tableId, u16 argument);
 void InitAndLaunchSpecialAnimation(u8 activeBattler, u8 atkBattler, u8 defBattler, u8 tableId);
 bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn);
-bool8 mplay_80342A4(u8 battlerId);
+bool8 IsBattleSEPlaying(u8 battlerId);
 void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId);
 void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId);
 void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId);

@@ -461,7 +461,7 @@ void LinkTestProcessKeyInput(void)
     }
     if (JOY_NEW(SELECT_BUTTON))
     {
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
     }
     if (gLinkTestDebugValuesEnabled)
     {
@@ -1322,7 +1322,7 @@ void Link_StartSend5FFFwithParam(u16 a0)
     }
 }
 
-void Link_TryStartSend5FFF(void)
+void SetCloseLinkCallback(void)
 {
     if (gWirelessCommType == 1)
     {
@@ -1377,7 +1377,7 @@ static void LinkCB_WaitAckCommand5FFF(void)
     }
 }
 
-void PrepareSendLinkCmd2FFE_or_RfuCmd6600(void)
+void SetLinkStandbyCallback(void)
 {
     if (gWirelessCommType == 1)
     {

@@ -1469,7 +1469,7 @@ void BufferStringBattle(u16 stringId)
     gLastUsedItem = sBattleMsgDataPtr->lastItem;
     gLastUsedAbility = sBattleMsgDataPtr->lastAbility;
     gBattleScripting.battler = sBattleMsgDataPtr->scrActive;
-    *(&gBattleStruct->field_52) = sBattleMsgDataPtr->unk1605E;
+    *(&gBattleStruct->scriptPartyIdx) = sBattleMsgDataPtr->bakScriptPartyIdx;
     *(&gBattleStruct->hpScale) = sBattleMsgDataPtr->hpScale;
     gPotentialItemEffectBattler = sBattleMsgDataPtr->itemEffectBattler;
     *(&gBattleStruct->stringMoveType) = sBattleMsgDataPtr->moveType;
@@ -2079,7 +2079,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = gStringVar4;
                 break;
             case B_TXT_26: // ?
-                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, *(&gBattleStruct->field_52))
+                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, *(&gBattleStruct->scriptPartyIdx))
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
                 if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC))
@@ -2379,6 +2379,9 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
 
 const u8 gUnknown_83FEC90[] = {0x04, 0x05, 0x02, 0x02};
 
+// windowId: Upper 2 bits are text flags
+//   x40: Use NPC context-defined font
+//   x80: Inhibit window clear
 void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     bool32 copyToVram;
     struct TextPrinterTemplate printerTemplate;
@@ -2457,7 +2460,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     }
 }
 
-bool8 sub_80D89B0(u16 stringId)
+bool8 BattleStringShouldBeColored(u16 stringId)
 {
     if (stringId == STRINGID_TRAINER1LOSETEXT || stringId == STRINGID_TRAINER2CLASS || stringId == STRINGID_TRAINER1WINTEXT || stringId == STRINGID_TRAINER2NAME)
         return TRUE;

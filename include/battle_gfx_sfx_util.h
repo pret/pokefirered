@@ -3,8 +3,8 @@
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
-void sub_8033E3C(struct Sprite *sprite);
-void sub_8033EEC(struct Sprite *sprite);
+void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite);
+void SpriteCB_TrainerSlideIn(struct Sprite *sprite);
 void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status);
 bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 defBattler, u8 tableId, u16 argument);
 void InitAndLaunchSpecialAnimation(u8 activeBattler, u8 atkBattler, u8 defBattler, u8 tableId);
@@ -31,7 +31,7 @@ void ClearBehindSubstituteBit(u8 battlerId);
 void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId);
 void BattleStopLowHpSound(void);
 void HandleBattleLowHpMusicChange(void);
-void sub_8035450(u8 affineMode);
+void SetBattlerSpriteAffineMode(u8 affineMode);
 void LoadAndCreateEnemyShadowSprites(void);
 void SpriteCB_SetInvisible(struct Sprite *sprite);
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);

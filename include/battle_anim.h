@@ -445,6 +445,9 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId);
 void sub_80767F0(void);
 u8 GetBattlerSpriteSubpriority(u8 battlerId);
 u8 GetBattlerSpriteBGPriority(u8 battlerId);
+
+// Returns 2 if player left or opp right
+// Returns 1 if player right or opp left
 u8 GetBattlerSpriteBGPriorityRank(u8 battlerId);
 u8 sub_80768D0(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10);
 void DestroySpriteAndFreeResources_(struct Sprite *sprite);

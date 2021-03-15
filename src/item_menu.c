@@ -2351,7 +2351,7 @@ static void Task_Bag_TeachyTvStatus(u8 taskId)
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             gItemUseCB = ItemUseCB_MedicineStep;
-            ItemMenu_SetExitCallback(ChooseMonForInBattleItem);
+            ItemMenu_SetExitCallback(Pokedude_ChooseMonForInBattleItem);
             gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }

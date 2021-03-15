@@ -235,14 +235,14 @@ void BtlController_EmitCmd55(u8 bufferId, u8 arg1);
 void nullsub_13(void);
 void SetControllerToPlayer(void);
 void PlayerHandleGetRawMonData(void);
-void sub_80335F8(struct Sprite *sprite);
+void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
 void SetCB2ToReshowScreenAfterMenu2(void);
-void c3_0802FDF4(u8 taskId);
+void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(void);
-void sub_802F6A8(void);
+void SetBattleEndCallbacks(void);
 void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPos);
 void HandleInputChooseMove(void);
@@ -260,14 +260,27 @@ void InitPokedudePartyAndOpponent(void);
 
 // oak and old man controller
 void SetControllerToOakOrOldMan(void);
-bool8 sub_80EB2E0(u8);
-void sub_80EB2F4(u8);
-void sub_80E8570(void);
-void sub_80E85C0(void);
-void sub_80E8598(void);
-void sub_80E7988(void);
-void sub_80EB30C(void);
-void sub_80EB524(void);
+
+// These flags are set to signal that the indicated message
+// was already emitted
+
+// Inflicting damage is key
+#define FIRST_BATTLE_MSG_FLAG_INFLICT_DMG    0x1
+// Lowering stats is advantageous
+#define FIRST_BATTLE_MSG_FLAG_STAT_CHG       0x2
+// Keep an eye on your HP
+#define FIRST_BATTLE_MSG_FLAG_HP_RESTORE     0x4
+//
+#define FIRST_BATTLE_MSG_FLAG_PARTY_MENU     0x8
+
+bool8 BtlCtrl_OakOldMan_TestState2Flag(u8 mask);
+void BtlCtrl_OakOldMan_SetState2Flag(u8 mask);
+void PrintOakText_InflictingDamageIsKey(void);
+void PrintOakText_HowDisappointing(void);
+void PrintOakText_OakNoRunningFromATrainer(void);
+void OakOldManHandleInputChooseMove(void);
+void BtlCtrl_DrawVoiceoverMessageFrame(void);
+void BtlCtrl_RemoveVoiceoverMessageFrame(void);
 
 // link opponent controller
 void SetControllerToLinkOpponent(void);

@@ -853,7 +853,7 @@ void Task_SaveGame_UpdatedLinkRecords(u8 taskId)
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         gTasks[taskId].data[0] = 2;
         break;
     case 2:
@@ -887,7 +887,7 @@ void Task_SaveGame_UpdatedLinkRecords(u8 taskId)
         break;
     case 7:
         ClearContinueGameWarpStatus2();
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         gTasks[taskId].data[0] = 8;
         break;
     case 8:
@@ -898,7 +898,7 @@ void Task_SaveGame_UpdatedLinkRecords(u8 taskId)
         }
         break;
     case 9:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         gTasks[taskId].data[0] = 10;
         break;
     case 10:

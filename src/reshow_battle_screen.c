@@ -15,7 +15,7 @@ static bool8 LoadBattlerSpriteGfx(u8 battlerId);
 static void CreateBattlerSprite(u8 battlerId);
 static void CreateHealthboxSprite(u8 battlerId);
 
-void nullsub_44(void)
+void ReshowBattleScreenDummy(void)
 {
 }
 

@@ -301,7 +301,7 @@ static void Task_LinkupSlave_2(u8 taskId)
         {
             if (*res == 3 || *res == 4)
             {
-                Link_TryStartSend5FFF();
+                SetCloseLinkCallback();
                 HideFieldMessageBox();
                 gTasks[taskId].func = Task_Linkup_7;
             }
@@ -346,13 +346,13 @@ static void Task_LinkupMaster_6(u8 taskId)
             if (AnyConnectedPartnersPlayingRS() == TRUE)
                 CloseLink();
             else
-                Link_TryStartSend5FFF();
+                SetCloseLinkCallback();
             HideFieldMessageBox();
             gTasks[taskId].func = Task_Linkup_7;
         }
         else if (gSpecialVar_Result == 3)
         {
-            Link_TryStartSend5FFF();
+            SetCloseLinkCallback();
             HideFieldMessageBox();
             gTasks[taskId].func = Task_Linkup_7;
         }
@@ -410,7 +410,7 @@ static void Task_Linkup_6a(u8 taskId)
         }
         else
         {
-            Link_TryStartSend5FFF();
+            SetCloseLinkCallback();
             gTasks[taskId].func = Task_Linkup_7;
         }
     }
@@ -599,7 +599,7 @@ static void Task_StartWiredCableClubBattle(u8 taskId)
             task->data[0]++;
         break;
     case 3:
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         task->data[0]++;
         break;
     case 4:
@@ -671,7 +671,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             data[0] = 5;
         break;
     case 5:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         data[0] = 6;
         break;
     case 6:
@@ -711,7 +711,7 @@ static void sub_8081624(void)
     switch (gMain.state)
     {
     case 0:
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         gMain.state++;
         break;
     case 1:
@@ -838,7 +838,7 @@ static void Task_StartWiredCableClubTrade(u8 taskId)
         gSelectedTradeMonPositions[0] = 0;
         gSelectedTradeMonPositions[1] = 0;
         m4aMPlayAllStop();
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         task->data[0]++;
         break;
     case 3:
@@ -870,7 +870,7 @@ static void Task_StartWirelessCableClubTrade(u8 taskId)
         gSelectedTradeMonPositions[0] = 0;
         gSelectedTradeMonPositions[1] = 0;
         m4aMPlayAllStop();
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         data[0]++;
         break;
     case 3:
@@ -959,6 +959,6 @@ static void sub_8081AE4(u8 taskId)
 
 static void sub_8081B08(u8 taskId)
 {
-    Link_TryStartSend5FFF();
+    SetCloseLinkCallback();
     gTasks[taskId].func = sub_8081AE4;
 }

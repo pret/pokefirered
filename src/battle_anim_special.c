@@ -2054,7 +2054,7 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
     u8 taskId1, taskId2;
 
     isShiny = FALSE;
-    gBattleSpritesDataPtr->healthBoxesData[battler].flag_x80 = 1;
+    gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = TRUE;
     otId = GetMonData(mon, MON_DATA_OT_ID);
     personality = GetMonData(mon, MON_DATA_PERSONALITY);
 

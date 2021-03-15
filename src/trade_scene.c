@@ -2546,7 +2546,7 @@ static void sub_8053E8C(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         gMain.state = 100;
         sTradeData->timer = 0;
         break;
@@ -2631,7 +2631,7 @@ static void sub_8053E8C(void)
     case 41:
         if (sTradeData->timer == 0)
         {
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
             gMain.state = 42;
         }
         else
@@ -2650,7 +2650,7 @@ static void sub_8053E8C(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
         }
         break;
     case 6:
@@ -2672,11 +2672,11 @@ static void sub_8053E8C(void)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
             {
-                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+                SetLinkStandbyCallback();
             }
             else
             {
-                Link_TryStartSend5FFF();
+                SetCloseLinkCallback();
             }
             gMain.state++;
         }

@@ -370,15 +370,15 @@ struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
-    u8 filler2;
+    u8 filler2; // unused
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 field_11;
+    u8 field_11; // unuused
     u8 wildVictorySong;
     u8 dynamicMoveType;
-    u8 wrappedBy[4];
+    u8 wrappedBy[MAX_BATTLERS_COUNT];
     u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // 6 mons, each of them knowing 4 moves
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
@@ -387,17 +387,17 @@ struct BattleStruct
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
     u8 faintedActionsBattlerId;
-    u8 field_4F;
+    // balign 2
     u16 expValue;
-    u8 field_52;
+    u8 scriptPartyIdx; // for printing the nickname
     u8 sentInPokes;
     bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
-    u8 field_58[4];
+    u8 battlerPartyIndexes[MAX_BATTLERS_COUNT];
     u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    u8 field_60[4][3];
+    u8 battlerPartyOrders[MAX_BATTLERS_COUNT][3];
     u8 runTries;
-    u8 caughtMonNick[11];
-    u8 field_78;
+    u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
+    u8 field_78; // unused
     u8 safariGoNearCounter;
     u8 safariPkblThrowCounter;
     u8 safariEscapeFactor;
@@ -407,21 +407,18 @@ struct BattleStruct
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
-    u8 field_88;
-    u8 field_89;
-    u8 field_8A;
-    u8 field_8B;
-    u8 field_8C;
-    u8 field_8D;
+    u8 field_88; // unused
+    u8 field_89; // unused
+    u8 field_8A; // unused
+    u8 playerPartyIdx;
+    u8 field_8C; // unused
+    u8 field_8D; // unused
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 field_90;
-    u8 field_91;
+    u8 field_90; // unused
+    u8 absentBattlerFlags;
     u8 AI_monToSwitchIntoId[2];
-    u8 field_94;
-    u8 field_95;
-    u8 field_96;
-    u8 field_97;
+    u8 simulatedInputState[4];  // used by Oak/Old Man/Pokedude controllers
     u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // ask gamefreak why they declared it that way
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
@@ -544,7 +541,7 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId;
-    u8 field_9_x1 : 1;
+    u8 healthboxSlideInStarted : 1;
     u8 field_9_x2 : 1;
     u8 field_9_x1C : 3;
     u8 field_9_x20 : 1;
@@ -566,7 +563,7 @@ struct BattleHealthboxInfo
     u8 statusAnimActive : 1; // x10
     u8 animFromTableActive : 1; // x20
     u8 specialAnimActive : 1; //x40
-    u8 flag_x80 : 1;
+    u8 triedShinyMonAnim : 1;
     u8 field_1_x1 : 1;
     u8 field_1_x1E : 5;
     u8 field_1_x40 : 1;
@@ -578,7 +575,7 @@ struct BattleHealthboxInfo
     u8 matrixNum;
     u8 shadowSpriteId;
     u8 field_8;
-    u8 field_9;
+    u8 introEndDelay;
     u8 field_A;
     u8 field_B;
 };
@@ -696,7 +693,7 @@ extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gCurrentActionFuncId;
 extern u8 gCurrMovePos;
 extern u8 gChosenMovePos;
-extern u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u16 gDynamicBasePower;
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];

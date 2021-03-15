@@ -199,7 +199,7 @@ struct BattleMsgData
     u16 lastItem;
     u8 lastAbility;
     u8 scrActive;
-    u8 unk1605E;
+    u8 bakScriptPartyIdx;
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
@@ -213,8 +213,8 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
 void BattleHandleAddTextPrinter(const u8* text, u8 arg1);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
-void BattlePutTextOnWindow(const u8* text, u8 arg1);
-bool8 sub_80D89B0(u16);
+void BattlePutTextOnWindow(const u8* text, u8 windowId_flags);
+bool8 BattleStringShouldBeColored(u16);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 

@@ -128,7 +128,7 @@ void FreeBattleSpritesData(void)
     }
 }
 
-void sub_8033E3C(struct Sprite *sprite)
+void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
 {
     u8 spriteId = sprite->data[1];
 
@@ -158,7 +158,7 @@ static void sub_8033EB0(struct Sprite *sprite, bool8 arg1)
     AnimateSprite(sprite);
 }
 
-void sub_8033EEC(struct Sprite *sprite)
+void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
 {
     if (!(gIntroSlideFlags & 1))
     {
@@ -864,7 +864,7 @@ void HandleBattleLowHpMusicChange(void)
     }
 }
 
-void sub_8035450(u8 affineMode)
+void SetBattlerSpriteAffineMode(u8 affineMode)
 {
     s32 i;
 

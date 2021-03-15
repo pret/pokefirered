@@ -357,7 +357,7 @@ struct BattleResults
 
 extern struct BattleResults gBattleResults;
 
-struct MultiPartnerEnigmaBerry
+struct LinkPartnerHeader
 {
     u8 versionSignatureLo;
     u8 versionSignatureHi;
@@ -375,7 +375,7 @@ struct BattleStruct
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 field_11; // unuused
+    u8 field_11; // unused
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
@@ -448,8 +448,8 @@ struct BattleStruct
     u8 field_182;
     // align 4
     union {
-        struct MultiPartnerEnigmaBerry multiPartnerEnigmaBerry;
-        struct UnknownPokemonStruct4 multiBattleMons[3];
+        struct LinkPartnerHeader linkPartnerHeader;
+        struct MultiBattlePokemonTx multiBattleMons[3];
     } multiBuffer;
     u8 padding_1E4[0x1C];
 }; // size == 0x200 bytes
@@ -713,7 +713,7 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
-extern struct UnknownPokemonStruct4 gMultiPartnerParty[3];
+extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 *sUnknownDebugSpriteDataBuffer;
 extern u16 gRandomTurnNumber;
 

@@ -9,7 +9,7 @@ struct TrainerMoney
     u8 value;
 };
 
-struct UnknownPokemonStruct4
+struct MultiBattlePokemonTx
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;

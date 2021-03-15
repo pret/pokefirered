@@ -129,7 +129,7 @@ static EWRAM_DATA u32 gUnknown_2022AE8[25] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
 EWRAM_DATA u32 gUnknown_2022B54 = 0;
-EWRAM_DATA struct UnknownPokemonStruct4 gMultiPartnerParty[3] = {0};
+EWRAM_DATA struct MultiBattlePokemonTx gMultiPartnerParty[3] = {0};
 EWRAM_DATA u8 *gUnknown_2022BB8 = NULL;
 EWRAM_DATA u8 *gUnknown_2022BBC = NULL;
 EWRAM_DATA u16 *sUnknownDebugSpriteDataBuffer = NULL;
@@ -740,15 +740,15 @@ static void BufferPartyVsScreenHealth_AtStart(void)
     s32 i;
 
     BUFFER_PARTY_VS_SCREEN_STATUS(gPlayerParty, flags, i);
-    gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsLo = flags;
-    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi) = flags >> 8;
+    gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsLo = flags;
+    *(&gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsHi) = flags >> 8;
 }
 
 static void SetPlayerBerryDataInBattleStruct(void)
 {
     s32 i;
     struct BattleStruct *battleStruct = gBattleStruct;
-    struct BattleEnigmaBerry *battleBerry = &battleStruct->multiBuffer.multiPartnerEnigmaBerry.battleEnigmaBerry;
+    struct BattleEnigmaBerry *battleBerry = &battleStruct->multiBuffer.linkPartnerHeader.battleEnigmaBerry;
 
     if (IsEnigmaBerryValid() == TRUE)
     {
@@ -950,11 +950,11 @@ static void CB2_HandleStartBattle(void)
                 if (IsLinkTaskFinished())
                 {
                     // 0x201
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 1;
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 2;
+                    *(&gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureLo) = 1;
+                    *(&gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureHi) = 2;
                     BufferPartyVsScreenHealth_AtStart();
                     SetPlayerBerryDataInBattleStruct();
-                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
+                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkPartnerHeader, sizeof(gBattleStruct->multiBuffer.linkPartnerHeader));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
                 if (gWirelessCommType != 0)
@@ -980,7 +980,7 @@ static void CB2_HandleStartBattle(void)
             gTasks[taskId].data[1] = 270;
             gTasks[taskId].data[2] = 90;
             gTasks[taskId].data[5] = 0;
-            gTasks[taskId].data[3] = gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi << 8);
+            gTasks[taskId].data[3] = gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.linkPartnerHeader.vsScreenHealthFlagsHi << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyMultiplayerId][1];
             SetDeoxysStats();
             ++gBattleCommunication[MULTIUSE_STATE];
@@ -1206,11 +1206,11 @@ static void CB2_HandleStartMultiBattle(void)
             if (IsLinkTaskFinished())
             {
                 // 0x201
-                *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 1;
-                *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 2;
+                *(&gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureLo) = 1;
+                *(&gBattleStruct->multiBuffer.linkPartnerHeader.versionSignatureHi) = 2;
                 BufferPartyVsScreenHealth_AtStart();
                 SetPlayerBerryDataInBattleStruct();
-                SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
+                SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkPartnerHeader, sizeof(gBattleStruct->multiBuffer.linkPartnerHeader));
                 ++gBattleCommunication[MULTIUSE_STATE];
             }
             if (gWirelessCommType)

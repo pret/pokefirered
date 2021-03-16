@@ -1979,7 +1979,7 @@ static void PokedudeHandleCmd55(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
-    BeginFastPaletteFade(3);
+    BeginFastPaletteFade(FAST_FADE_OUT_TO_BLACK);
     PokedudeBufferExecCompleted();
     if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER) && gBattleTypeFlags & BATTLE_TYPE_LINK)
         gBattlerControllerFuncs[gActiveBattler] = Pokedude_SetBattleEndCallbacks;
@@ -1993,7 +1993,7 @@ static void PokedudeCmdEnd(void)
 
 struct PokedudeInputScript
 {
-    // 0-3 for selection, 4 to repeat, 255 to end
+    // 0-3 for selection, 4 to repeat action, 255 to repeat move
     u8 cursorPos[MAX_BATTLERS_COUNT];
     u8 delay[MAX_BATTLERS_COUNT];
 };
@@ -2424,13 +2424,6 @@ static const struct PokedudeBattlePartyInfo *const sPokedudeBattlePartyPointers[
 };
 
 struct PokedudeBattlerState *gPokedudeBattlerStates[MAX_BATTLERS_COUNT];
-
-#define PD_BTL_STATE(battler, idx) gPokedudeBattlerStates[battler]->idx]
-#define PD_BTL_ACTION(battler) PD_BTL_STATE((battler), 0)
-#define PD_BTL_MOVE(battler)   PD_BTL_STATE((battler), 1)
-#define PD_BTL_DELAY(battler)  PD_BTL_STATE((battler), 2)
-#define PD_BTL_MSG(battler)    PD_BTL_STATE((battler), 3)
-#define PD_BTL_BG0Y(battler)   PD_BTL_STATE((battler), 4)
 
 static void PokedudeSimulateInputChooseAction(void)
 {

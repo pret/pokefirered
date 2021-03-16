@@ -291,8 +291,6 @@ SECTIONS {
         src/pokemon_jump_5.o(.text);
         src/pokemon_jump_6.o(.text);
         src/berry_crush.o(.text);
-        src/berry_crush_2.o(.text);
-        src/berry_crush_3.o(.text);
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
         src/text_window.o(.text);
@@ -594,8 +592,7 @@ SECTIONS {
         src/pokemon_jump_4.o(.rodata);
         src/pokemon_jump_5.o(.rodata);
         src/pokemon_jump_6.o(.rodata);
-        src/berry_crush_2.o(.rodata);
-        src/berry_crush_3.o(.rodata);
+        src/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);

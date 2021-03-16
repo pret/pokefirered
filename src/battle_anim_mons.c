@@ -19,7 +19,7 @@
 #define IS_DOUBLE_BATTLE() (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
 
 static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
-static void sub_8075658(struct Sprite *sprite);
+static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite);
 static void sub_80757E8(struct Sprite *sprite);
 static bool8 sub_80758DC(void);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
@@ -954,12 +954,12 @@ void StartAnimLinearTranslation(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_80755B8(struct Sprite *sprite)
+void PlayerThrowBall_StartAnimLinearTranslation(struct Sprite *sprite)
 {
     sprite->sTransl_InitX = sprite->pos1.x;
     sprite->sTransl_InitY = sprite->pos1.y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_8075658;
+    sprite->callback = PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6;
     sprite->callback(sprite);
 }
 
@@ -996,7 +996,7 @@ void RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite)
         SetCallbackToStoredInData6(sprite);
 }
 
-static void sub_8075658(struct Sprite *sprite)
+static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite)
 {
     UpdatePlayerPosInThrowAnim(sprite);
     if (AnimTranslateLinear(sprite))

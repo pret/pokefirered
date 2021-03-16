@@ -404,7 +404,7 @@ void StartSpriteLinearTranslationFromCurrentPos(struct Sprite *sprite);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void StartAnimLinearTranslation(struct Sprite *sprite);
-void sub_80755B8(struct Sprite *sprite);
+void PlayerThrowBall_StartAnimLinearTranslation(struct Sprite *sprite);
 bool8 AnimTranslateLinear(struct Sprite *sprite);
 void RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite);
 void sub_8075678(struct Sprite *sprite);

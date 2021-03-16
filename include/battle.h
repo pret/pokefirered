@@ -607,13 +607,13 @@ extern u8 *gLinkBattleRecvBuffer;
 struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    void* sprites[4];
-    struct SpriteTemplate templates[4];
-    struct SpriteFrameImage field_74[4][4];
-    u8 field_F4[0x80];
+    void* sprites[MAX_BATTLERS_COUNT];
+    struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
+    struct SpriteFrameImage images[MAX_BATTLERS_COUNT][4];
+    u8 field_F4[0x80]; // unused
     u8 *barFontGfx;
-    void *field_178;
-    u16 *field_17C;
+    void *field_178; // freed but never allocated
+    u16 *multiUseBuffer;
 };
 
 extern u16 gBattle_BG0_X;

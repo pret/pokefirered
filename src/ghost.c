@@ -1320,12 +1320,12 @@ static void sub_80B6BE4(u8 taskId)
         break;
     case 3:
         sub_80752C8(&animBgData, 2);
-        gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-        LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->field_17C);
-        sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->field_17C, 256, 0);
-        CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->field_17C, 0, 0, 0x20, 0x20, 0x11);
+        gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
+        LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->multiUseBuffer);
+        sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->multiUseBuffer, 256, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->multiUseBuffer, 0, 0, 0x20, 0x20, 0x11);
         CopyBgTilemapBufferToVram(2);
-        FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+        FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
         break;
     case 4:
         ++task->data[1];

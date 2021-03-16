@@ -15,7 +15,7 @@ void AllocateBattleResources(void)
         s32 i;
 
         for (i = 0; i < 4; ++i)
-            gUnknown_3005EE0[i] = AllocZeroed(8);
+            gPokedudeBattlerStates[i] = AllocZeroed(sizeof(struct PokedudeBattlerState));
     }
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
@@ -45,7 +45,7 @@ void FreeBattleResources(void)
 
         for (i = 0; i < 4; ++i)
         {
-            FREE_AND_SET_NULL(gUnknown_3005EE0[i]);
+            FREE_AND_SET_NULL(gPokedudeBattlerStates[i]);
         }
     }
     if (gBattleResources != NULL)

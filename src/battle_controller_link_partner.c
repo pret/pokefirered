@@ -143,7 +143,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerCmdEnd
 };
 
-static void nullsub_77(void)
+static void LinkPartnerDummy(void)
 {
 }
 
@@ -1464,7 +1464,7 @@ static void LinkPartnerHandleIntroTrainerBallThrow(void)
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_77;
+    gBattlerControllerFuncs[gActiveBattler] = LinkPartnerDummy;
 }
 
 static void Task_StartSendOutAnim(u8 taskId)

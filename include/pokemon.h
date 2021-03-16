@@ -448,7 +448,7 @@ u8 GetPlayerPartyHighestLevel(void);
 u16 FacilityClassToPicIndex(u16 facilityClass);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
 void SetDeoxysStats(void);
-u16 sub_80447AC(void);
+u16 GetUnionRoomTrainerPic(void);
 u16 sub_80447F0(void);
 void CreateEventLegalEnemyMon(void);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);

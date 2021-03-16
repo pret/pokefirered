@@ -153,7 +153,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 // not used
 static const u8 gUnknown_8250B18[] = { 0xB0, 0xB0, 0xC8, 0x98, 0x28, 0x28, 0x28, 0x20 };
 
-static void nullsub_17(void)
+static void OpponentDummy(void)
 {
 }
 
@@ -1638,7 +1638,7 @@ static void OpponentHandleIntroTrainerBallThrow(void)
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_17;
+    gBattlerControllerFuncs[gActiveBattler] = OpponentDummy;
 }
 
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)

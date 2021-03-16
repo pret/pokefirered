@@ -48,7 +48,7 @@ void SetUpBattleVars(void)
     gBattleMainFunc = nullsub_12;
     for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
-        gBattlerControllerFuncs[i] = nullsub_13;
+        gBattlerControllerFuncs[i] = PlayerDummy;
         gBattlerPositions[i] = 0xFF;
         gActionSelectionCursor[i] = 0;
         gMoveSelectionCursor[i] = 0;

@@ -185,12 +185,14 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 // not used
 static const u8 gUnknown_8479000[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
 
-static void nullsub_99(void)
-{
-}
-
+#define pdHealthboxPal1  simulatedInputState[0]
+#define pdHealthboxPal2  simulatedInputState[1]
 #define pdScriptNum      simulatedInputState[2]
 #define pdMessageNo      simulatedInputState[3]
+
+static void PokedudeDummy(void)
+{
+}
 
 void SetControllerToPokedude(void)
 {
@@ -1684,7 +1686,7 @@ static void PokedudeHandleExpUpdate(void)
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
         gTasks[taskId].tExpTask_battler = gActiveBattler;
-        gBattlerControllerFuncs[gActiveBattler] = nullsub_99;
+        gBattlerControllerFuncs[gActiveBattler] = PokedudeDummy;
     }
 }
 
@@ -1864,7 +1866,7 @@ static void PokedudeHandleIntroTrainerBallThrow(void)
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_99;
+    gBattlerControllerFuncs[gActiveBattler] = PokedudeDummy;
 }
 
 static void StartSendOutAnim(u8 battlerId)
@@ -2589,8 +2591,8 @@ static void PokedudeAction_PrintMessageWithHealthboxPals(void)
     case 0:
         if (!gPaletteFade.active)
         {
-            DoLoadHealthboxPalsForLevelUp(&gBattleStruct->simulatedInputState[1],
-                                          &gBattleStruct->simulatedInputState[0],
+            DoLoadHealthboxPalsForLevelUp(&gBattleStruct->pdHealthboxPal2,
+                                          &gBattleStruct->pdHealthboxPal1,
                                           GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
             BeginNormalPaletteFade(0xFFFFFF7F, 4, 0, 8, RGB_BLACK);
             ++gPokedudeBattlerStates[gActiveBattler]->timer;
@@ -2599,7 +2601,7 @@ static void PokedudeAction_PrintMessageWithHealthboxPals(void)
     case 1:
         if (!gPaletteFade.active)
         {
-            u32 mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[0]]) << 16;
+            u32 mask = (gBitTable[gBattleStruct->pdHealthboxPal2] | gBitTable[gBattleStruct->pdHealthboxPal1]) << 16;
 
             ++mask; // It's possible that this is influenced by other functions, as
             --mask; // this also striked in battle_controller_oak_old_man.c but was naturally fixed.
@@ -2625,7 +2627,7 @@ static void PokedudeAction_PrintMessageWithHealthboxPals(void)
             u32 mask;
 
             PlaySE(SE_SELECT);
-            mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[0]]) << 16;
+            mask = (gBitTable[gBattleStruct->pdHealthboxPal2] | gBitTable[gBattleStruct->pdHealthboxPal1]) << 16;
             ++mask;
             --mask;
             BeginNormalPaletteFade(mask, 4, 0, 8, RGB_BLACK);

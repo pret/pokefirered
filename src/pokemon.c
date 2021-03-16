@@ -6009,7 +6009,7 @@ void SetDeoxysStats(void)
     }
 }
 
-u16 sub_80447AC(void)
+u16 GetUnionRoomTrainerPic(void)
 {
     u8 linkId = GetMultiplayerId() ^ 1;
     u32 arrId = gLinkPlayers[linkId].trainerId & 7;

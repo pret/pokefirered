@@ -158,7 +158,7 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OakOldManCmdEnd,
 };
 
-static void nullsub_81(void)
+static void OakOldManDummy(void)
 {
 }
 
@@ -1945,7 +1945,7 @@ static void OakOldManHandleExpUpdate(void)
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
         gTasks[taskId].tExpTask_battler = gActiveBattler;
-        gBattlerControllerFuncs[gActiveBattler] = nullsub_81;
+        gBattlerControllerFuncs[gActiveBattler] = OakOldManDummy;
     }
 }
 
@@ -2094,7 +2094,7 @@ static void OakOldManHandleIntroTrainerBallThrow(void)
         if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
             gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
         gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 1;
-        gBattlerControllerFuncs[gActiveBattler] = nullsub_13;
+        gBattlerControllerFuncs[gActiveBattler] = PlayerDummy;
     }
     else
     {

@@ -232,7 +232,7 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitCmd55(u8 bufferId, u8 arg1);
 
 // player controller
-void nullsub_13(void);
+void PlayerDummy(void);
 void SetControllerToPlayer(void);
 void PlayerHandleGetRawMonData(void);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);

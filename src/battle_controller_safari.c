@@ -139,7 +139,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 };
 
 // not used
-static void SpriteCB_Null4(struct Sprite *sprite)
+static void SafariDummy(void)
 {
 }
 
@@ -242,7 +242,7 @@ static void CompleteOnHealthboxSpriteCallbackDummy(void)
         SafariBufferExecCompleted();
 }
 
-static void sub_80DD7B0(void)
+static void Safari_SetBattleEndCallbacks(void)
 {
     if (!gPaletteFade.active)
     {
@@ -661,7 +661,7 @@ static void SafariHandleCmd55(void)
     BeginFastPaletteFade(3);
     SafariBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-        gBattlerControllerFuncs[gActiveBattler] = sub_80DD7B0;
+        gBattlerControllerFuncs[gActiveBattler] = Safari_SetBattleEndCallbacks;
 }
 
 static void SafariCmdEnd(void)

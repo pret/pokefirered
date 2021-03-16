@@ -200,7 +200,7 @@ struct ProtectStruct
     u32 field3 : 8;
 
     /* field_4 */ u32 physicalDmg;
-    /* field_8 */ u32 specialDmg;
+    /* soundTimer */ u32 specialDmg;
     /* field_C */ u8 physicalBattlerId;
     /* field_D */ u8 specialBattlerId;
     /* field_E */ u16 fieldE;
@@ -556,28 +556,24 @@ struct BattleAnimationInfo
 
 struct BattleHealthboxInfo
 {
-    u8 partyStatusSummaryShown : 1;
-    u8 healthboxIsBouncing : 1;
-    u8 battlerIsBouncing : 1;
+    u8 partyStatusSummaryShown : 1; // x1
+    u8 healthboxIsBouncing : 1; // x2
+    u8 battlerIsBouncing : 1; // x4
     u8 ballAnimActive : 1; // 0x8
     u8 statusAnimActive : 1; // x10
     u8 animFromTableActive : 1; // x20
-    u8 specialAnimActive : 1; //x40
-    u8 triedShinyMonAnim : 1;
-    u8 field_1_x1 : 1;
-    u8 field_1_x1E : 5;
-    u8 field_1_x40 : 1;
-    u8 field_1_x80 : 1;
+    u8 specialAnimActive : 1; // x40
+    u8 triedShinyMonAnim : 1; // x80
+    u8 finishedShinyMonAnim : 1; // x1
+    u8 opponentDrawPartyStatusSummaryDelay : 5; // x2
     u8 healthboxBounceSpriteId;
     u8 battlerBounceSpriteId;
     u8 animationState;
-    u8 field_5;
+    u8 partyStatusDelayTimer;
     u8 matrixNum;
     u8 shadowSpriteId;
-    u8 field_8;
+    u8 soundTimer;
     u8 introEndDelay;
-    u8 field_A;
-    u8 field_B;
 };
 
 struct BattleBarInfo

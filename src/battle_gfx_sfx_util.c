@@ -296,15 +296,18 @@ bool8 IsBattleSEPlaying(u8 battlerId)
 
     if (IsSEPlaying())
     {
-        ++gBattleSpritesDataPtr->healthBoxesData[battlerId].field_8;
-        if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_8 < 30)
+        ++gBattleSpritesDataPtr->healthBoxesData[battlerId].soundTimer;
+        // UB: Uses gActiveBattler instead of battlerId.
+        // In practice, this is never a problem, as this routine
+        // is only ever passed gActiveBattler.
+        if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].soundTimer < 30)
             return TRUE;
         m4aMPlayStop(&gMPlayInfo_SE1);
         m4aMPlayStop(&gMPlayInfo_SE2);
     }
     if (zero == 0)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].field_8 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].soundTimer = 0;
         return FALSE;
     }
     else

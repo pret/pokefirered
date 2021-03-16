@@ -185,7 +185,7 @@ extern struct UnusedControllerStruct gUnknown_2022870;
 void HandleLinkBattleSetup(void);
 void SetUpBattleVars(void);
 void InitBtlControllers(void);
-void sub_800DD28(void);
+void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 
 // emitters

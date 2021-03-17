@@ -4597,7 +4597,7 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                         }
                         if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                             retVal = FALSE;
-                        idx;
+                        idx++;
                         curEffect &= ~(ITEM4_REVIVE >> 2);
                         break;
                     case 3:

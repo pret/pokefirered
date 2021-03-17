@@ -45,7 +45,7 @@ void SetUpBattleVars(void)
 {
     s32 i;
 
-    gBattleMainFunc = nullsub_12;
+    gBattleMainFunc = BattleDummy;
     for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
         gBattlerControllerFuncs[i] = PlayerDummy;

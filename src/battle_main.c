@@ -77,7 +77,7 @@ static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
 static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
-static void sub_8011E3C(struct Sprite *sprite);
+static void SpriteCB_Unused_8011E28_Step(struct Sprite *sprite);
 static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
 static void SpriteCb_BlinkVisible(struct Sprite *sprite);
 static void oac_poke_ally_(struct Sprite *sprite);
@@ -282,7 +282,7 @@ static const union AnimCmd gUnknown_824F020[] =
 };
 
 // not used
-static const union AnimCmd *const gUnknown_824F028[] = 
+static const union AnimCmd *const gUnknown_824F028[] =
 {
     gUnknown_824F020,
 };
@@ -1522,7 +1522,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     u32 personalityValue;
     u8 fixedIV;
     s32 i, j;
-    
+
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
@@ -1615,7 +1615,7 @@ UNUSED static void unused_80116CC(void)
 
 void VBlankCB_Battle(void)
 {
-    // Change gRngSeed every vblank. 
+    // Change gRngSeed every vblank.
     Random();
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
@@ -1881,15 +1881,15 @@ void SpriteCallbackDummy2(struct Sprite *sprite)
 }
 
 // not used
-UNUSED static void sub_8011E28(struct Sprite *sprite)
+UNUSED static void SpriteCB_Unused_8011E28(struct Sprite *sprite)
 {
     sprite->data[3] = 6;
     sprite->data[4] = 1;
-    sprite->callback = sub_8011E3C;
+    sprite->callback = SpriteCB_Unused_8011E28_Step;
 }
 
 // not used
-static void sub_8011E3C(struct Sprite *sprite)
+static void SpriteCB_Unused_8011E28_Step(struct Sprite *sprite)
 {
     --sprite->data[4];
     if (sprite->data[4] == 0)
@@ -2134,7 +2134,7 @@ static void SpriteCB_PlayerThrowUpdate(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy3;
 }
 
-void nullsub_12(void)
+void BattleDummy(void)
 {
 }
 
@@ -2598,8 +2598,8 @@ static void BattleIntroDrawPartySummaryScreens(void)
         else
         {
             // The struct gets set here, but nothing is ever done with it since
-            // wild battles don't show the party summary. 
-            // Still, there's no point in having dead code. 
+            // wild battles don't show the party summary.
+            // Still, there's no point in having dead code.
             for (i = 0; i < PARTY_SIZE; ++i)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
@@ -2691,7 +2691,7 @@ static void BattleIntroRecordMonsToDex(void)
 }
 
 // not used
-static void sub_80136C4(void)
+static void Unused_AutoProgressToIntro(void)
 {
     if (!gBattleControllerExecFlags)
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
@@ -2734,7 +2734,7 @@ static void BattleIntroPlayerSendsOutMonAnimation(void)
 }
 
 // not used
-static void sub_80137D0(void)
+static void Unused_AutoProgressToSwitchInAnims(void)
 {
     if (!gBattleControllerExecFlags)
     {

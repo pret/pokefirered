@@ -84,10 +84,10 @@ void FieldUpdateBgTilemapScroll(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, r4);
 }
 
-void sub_805A658(s16 *a, s16 *b)
+void FieldCameraGetPixelOffsetAtGround(s16 *hofs_p, s16 *vofs_p)
 {
-    *a = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
-    *b = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
+    *hofs_p = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+    *vofs_p = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
 }
 
 void DrawWholeMapView(void)

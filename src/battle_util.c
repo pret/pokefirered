@@ -247,7 +247,7 @@ void sub_8017434(u8 battler)
     }
 }
 
-void sub_80174B8(u8 battler)
+void UpdateSentPokesToOpponentValue(u8 battler)
 {
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {

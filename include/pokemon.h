@@ -449,7 +449,7 @@ u16 FacilityClassToPicIndex(u16 facilityClass);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
 void SetDeoxysStats(void);
 u16 GetUnionRoomTrainerPic(void);
-u16 sub_80447F0(void);
+u16 GetUnionRoomTrainerClass(void);
 void CreateEventLegalEnemyMon(void);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);

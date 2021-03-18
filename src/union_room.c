@@ -4689,7 +4689,7 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
 
     DynamicPlaceholderTextUtil_Reset();
 
-    StringCopy(uroom->trainerCardStrbufs[0], gTrainerClassNames[sub_80447F0()]);
+    StringCopy(uroom->trainerCardStrbufs[0], gTrainerClassNames[GetUnionRoomTrainerClass()]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, uroom->trainerCardStrbufs[0]);
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->rse.playerName);

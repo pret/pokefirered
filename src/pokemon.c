@@ -1587,7 +1587,7 @@ static const u8 sGetMonDataEVConstants[] =
     MON_DATA_SPATK_EV
 };
 
-static const u8 gUnknown_825DFF0[] = 
+static const u8 sStatsToRaise[] = 
 {
     STAT_ATK, STAT_ATK, STAT_SPEED, STAT_DEF, STAT_SPATK, STAT_ACC
 };
@@ -4814,10 +4814,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void sub_8042D50(int stat)
+static void BufferStatRoseMessage(int stat)
 {
     gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_825DFF0[stat]]);
+    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[stat]]);
     StringCopy(gBattleTextBuff2, gBattleText_Rose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
 }
@@ -4848,12 +4848,12 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
     for (i = 0; i < 3; i++)
     {
         if (itemEffect[i] & 0xF)
-            sub_8042D50(i * 2);
+            BufferStatRoseMessage(i * 2);
         if (itemEffect[i] & 0xF0)
         {
             if (i)
             {
-                sub_8042D50(i * 2 + 1);
+                BufferStatRoseMessage(i * 2 + 1);
             }
             else
             {
@@ -5395,9 +5395,14 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
+// This function was stubbed from RS, but it is stubbed badly.
+// This variable is likely the u8 passed to SetMonData in RSE.
+// The pointer reference causes agbcc to reserve it on the stack before even checking
+// whether it's used.
 void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
-    u8 foo[4]; // huh?
+    u8 foo;
+    &foo;
 }
 
 u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
@@ -5456,14 +5461,18 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
     return retVal;
 }
 
-static void sub_8043B38(void)
+// These two functions are stubbed from RS, but they're stubbed badly.
+// See note on RandomlyGivePartyPokerus above.
+static void UpdatePartyPokerusTime(void)
 {
-    u8 foo[4]; // huh?
+    u8 foo;
+    &foo;
 }
 
 void PartySpreadPokerus(struct Pokemon *party)
 {
-    u8 foo[4]; // huh?
+    u8 foo;
+    &foo;
 }
 
 static void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)
@@ -5986,7 +5995,7 @@ u16 GetUnionRoomTrainerPic(void)
     return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
 }
 
-u16 sub_80447F0(void)
+u16 GetUnionRoomTrainerClass(void)
 {
     u8 linkId = GetMultiplayerId() ^ 1;
     u32 arrId = gLinkPlayers[linkId].trainerId & 7;

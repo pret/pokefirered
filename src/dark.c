@@ -840,7 +840,7 @@ static void sub_80B8920(u8 taskId)
                 SetGreyscaleOrOriginalPalette(paletteNum, 1);
             DestroySprite(&gSprites[gTasks[taskId].data[0]]);
             GetBattleAnimBg1Data(&animBg);
-            sub_8075358(animBg.bgId);
+            InitBattleAnimBg(animBg.bgId);
             if (gTasks[taskId].data[6] == 1)
                 gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority++;
         }

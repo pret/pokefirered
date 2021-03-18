@@ -940,7 +940,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_8075458(0);
+        ToggleBg3Mode(0);
         task->data[8] = gBattleAnimArgs[0];
         ++task->data[0];
         break;
@@ -965,7 +965,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        sub_8075458(1);
+        ToggleBg3Mode(1);
         DestroyAnimVisualTask(taskId);
     }
 }

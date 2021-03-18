@@ -993,8 +993,8 @@ static void AnimTask_Haze2(u8 taskId)
         break;
     case 3:
         GetBattleAnimBg1Data(&animBg);
-        sub_8075358(1);
-        sub_8075358(2);
+        InitBattleAnimBg(1);
+        InitBattleAnimBg(2);
         ++gTasks[taskId].data[12];
         // fall through
     case 4:
@@ -1088,8 +1088,8 @@ static void AnimTask_OverlayFogTiles(u8 taskId)
         break;
     case 3:
         GetBattleAnimBg1Data(&animBg);
-        sub_8075358(1);
-        sub_8075358(2);
+        InitBattleAnimBg(1);
+        InitBattleAnimBg(2);
         ++gTasks[taskId].data[12];
         // fall through
     case 4:
@@ -1230,7 +1230,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
                 sprite->data[2] = -0x10;
             ++sprite->data[7];
             sprite->pos2.x = sprite->pos2.y = 0;
-            sub_8075678(sprite);
+            BattleAnim_InitLinearTranslationWithDuration(sprite);
         }
         break;
     case 2:

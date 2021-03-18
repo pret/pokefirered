@@ -2278,13 +2278,14 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], animBg.paletteId * 16, 0x20);
         CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + animBg.paletteId * 32), 0x20);
 
-        sub_80BCEF4(1, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles, animBg.bgTilemap, animBg.tilesOffset);
+        CopyBattlerSpriteToBg(1, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles,
+                              animBg.bgTilemap, animBg.tilesOffset);
     }
     else
     {
         RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(12)), 0x2000, DMA3_32BIT);
         RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, DMA3_32BIT);
-        sub_80752C8(&animBg, 2);
+        GetBattleAnimBgData(&animBg, 2);
         CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
         CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
@@ -2302,7 +2303,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], 0x90, 0x20);
         CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + 0x120), 0x20);
 
-        sub_80BCEF4(2, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles + 0x1000, animBg.bgTilemap + 0x400, animBg.tilesOffset);
+        CopyBattlerSpriteToBg(2, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles + 0x1000,
+                              animBg.bgTilemap + 0x400, animBg.tilesOffset);
     }
 }
 
@@ -2333,13 +2335,13 @@ void ResetBattleAnimBg(bool8 to_BG2)
 
     if (!to_BG2)
     {
-        sub_8075358(1);
+        InitBattleAnimBg(1);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
     }
     else
     {
-        sub_8075358(2);
+        InitBattleAnimBg(2);
         gBattle_BG2_X = 0;
         gBattle_BG2_Y = 0;
     }

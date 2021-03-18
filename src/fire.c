@@ -1016,7 +1016,7 @@ static void AnimWillOWispOrb(struct Sprite *sprite)
             sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
             sprite->data[3] = sprite->pos1.y;
             sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-            sub_8075678(sprite);
+            BattleAnim_InitLinearTranslationWithDuration(sprite);
             sprite->callback = sub_80AD690;
         }
         break;

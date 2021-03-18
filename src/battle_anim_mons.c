@@ -20,8 +20,8 @@
 
 static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
 static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite);
-static void sub_80757E8(struct Sprite *sprite);
-static bool8 sub_80758DC(void);
+static void SpriteCB_RunAnimFastLinearTranslation(struct Sprite *sprite);
+static bool8 Dummy_ReturnFalse(void);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void sub_80760D0(u8 taskId);
 static void AnimTask_BlendMonInAndOutSetup(struct Task *task);
@@ -803,24 +803,24 @@ bool8 IsDoubleBattle(void)
 
 void GetBattleAnimBg1Data(struct BattleAnimBgData *animBgData)
 {
-    animBgData->bgTiles = gUnknown_2022BB8;
-    animBgData->bgTilemap = (u16 *)gUnknown_2022BBC;
+    animBgData->bgTiles = gBattleAnimMons_BgTilesBuffer;
+    animBgData->bgTilemap = (u16 *)gBattleAnimMons_BgTilemapBuffer;
     animBgData->paletteId = 8;
     animBgData->bgId = 1;
     animBgData->tilesOffset = 0x200;
     animBgData->unused = 0;
 }
 
-void sub_80752C8(struct BattleAnimBgData *animBgData, u32 arg1)
+void GetBattleAnimBgData(struct BattleAnimBgData *animBgData, u32 bgId)
 {
-    if (arg1 == 1)
+    if (bgId == 1)
     {
         GetBattleAnimBg1Data(animBgData);
     }
     else
     {
-        animBgData->bgTiles = gUnknown_2022BB8;
-        animBgData->bgTilemap = (u16 *)gUnknown_2022BBC;
+        animBgData->bgTiles = gBattleAnimMons_BgTilesBuffer;
+        animBgData->bgTilemap = (u16 *)gBattleAnimMons_BgTilemapBuffer;
         animBgData->paletteId = 9;
         animBgData->bgId = 2;
         animBgData->tilesOffset = 0x300;
@@ -828,10 +828,10 @@ void sub_80752C8(struct BattleAnimBgData *animBgData, u32 arg1)
     }
 }
 
-void sub_8075300(struct BattleAnimBgData *animBgData, u8 unused)
+void GetBattleAnimBgDataByPriorityRank(struct BattleAnimBgData *animBgData, u8 unused)
 {
-    animBgData->bgTiles = gUnknown_2022BB8;
-    animBgData->bgTilemap = (u16 *)gUnknown_2022BBC;
+    animBgData->bgTiles = gBattleAnimMons_BgTilesBuffer;
+    animBgData->bgTilemap = (u16 *)gBattleAnimMons_BgTilemapBuffer;
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
         animBgData->paletteId = 8;
@@ -848,11 +848,11 @@ void sub_8075300(struct BattleAnimBgData *animBgData, u8 unused)
     }
 }
 
-void sub_8075358(u32 bgId)
+void InitBattleAnimBg(u32 bgId)
 {
     struct BattleAnimBgData animBgData;
 
-    sub_80752C8(&animBgData, bgId);
+    GetBattleAnimBgData(&animBgData, bgId);
     CpuFill32(0, animBgData.bgTiles, 0x2000);
     LoadBgTiles(bgId, animBgData.bgTiles, 0x2000, animBgData.tilesOffset);
     FillBgTilemapBufferRect(bgId, 0, 0, 0, 32, 64, 17);
@@ -861,9 +861,9 @@ void sub_8075358(u32 bgId)
 
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
 {
-    CpuFill32(0, gUnknown_2022BB8, 0x2000);
-    LZDecompressWram(src, gUnknown_2022BB8);
-    LoadBgTiles(bgId, gUnknown_2022BB8, 0x2000, tilesOffset);
+    CpuFill32(0, gBattleAnimMons_BgTilesBuffer, 0x2000);
+    LZDecompressWram(src, gBattleAnimMons_BgTilesBuffer);
+    LoadBgTiles(bgId, gBattleAnimMons_BgTilesBuffer, 0x2000, tilesOffset);
 }
 
 void InitAnimBgTilemapBuffer(u32 bgId, const void *src)
@@ -883,7 +883,7 @@ u8 GetBattleBgPaletteNum(void)
     return 2;
 }
 
-void sub_8075458(bool8 arg0)
+void ToggleBg3Mode(bool8 arg0)
 {
     if (!arg0)
     {
@@ -1003,7 +1003,7 @@ static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(stru
         SetCallbackToStoredInData6(sprite);
 }
 
-void sub_8075678(struct Sprite *sprite)
+void BattleAnim_InitLinearTranslationWithDuration(struct Sprite *sprite)
 {
     s32 v1 = abs(sprite->sTransl_DestX - sprite->sTransl_InitX) << 8;
 
@@ -1011,11 +1011,11 @@ void sub_8075678(struct Sprite *sprite)
     InitAnimLinearTranslation(sprite);
 }
 
-void sub_80756A4(struct Sprite *sprite)
+void BattleAnim_InitAndRunLinearTranslationWithDuration(struct Sprite *sprite)
 {
     sprite->sTransl_InitX = sprite->pos1.x;
     sprite->sTransl_InitY = sprite->pos1.y;
-    sub_8075678(sprite);
+    BattleAnim_InitLinearTranslationWithDuration(sprite);
     sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
     sprite->callback(sprite);
 }
@@ -1050,7 +1050,7 @@ void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite)
     sprite->sTransl_InitX = sprite->pos1.x;
     sprite->sTransl_InitY = sprite->pos1.y;
     InitAnimFastLinearTranslation(sprite);
-    sprite->callback = sub_80757E8;
+    sprite->callback = SpriteCB_RunAnimFastLinearTranslation;
     sprite->callback(sprite);
 }
 
@@ -1080,7 +1080,7 @@ bool8 AnimFastTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-static void sub_80757E8(struct Sprite *sprite)
+static void SpriteCB_RunAnimFastLinearTranslation(struct Sprite *sprite)
 {
     if (AnimFastTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
@@ -1099,7 +1099,7 @@ void sub_8075830(struct Sprite *sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     InitAnimFastLinearTranslationWithSpeed(sprite);
-    sprite->callback = sub_80757E8;
+    sprite->callback = SpriteCB_RunAnimFastLinearTranslation;
     sprite->callback(sprite);
 }
 
@@ -1112,7 +1112,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
     src.xScale = xScale;
     src.yScale = yScale;
     src.rotation = rotation;
-    if (sub_80758DC())
+    if (Dummy_ReturnFalse())
         src.xScale = -src.xScale;
     i = gSprites[spriteId].oam.matrixNum;
     ObjAffineSet(&src, &matrix, 1, 2);
@@ -1122,7 +1122,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
     gOamMatrices[i].d = matrix.d;
 }
 
-static bool8 sub_80758DC(void)
+static bool8 Dummy_ReturnFalse(void)
 {
     return FALSE;
 }
@@ -1177,7 +1177,7 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
         src.xScale = xScale;
         src.yScale = yScale;
         src.rotation = rotation;
-        if (sub_80758DC())
+        if (Dummy_ReturnFalse())
             src.xScale = -src.xScale;
         i = sprite->oam.matrixNum;
         ObjAffineSet(&src, &matrix, 1, 2);

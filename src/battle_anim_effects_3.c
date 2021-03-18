@@ -2216,7 +2216,7 @@ void AnimTask_TransformMon(u8 taskId)
         break;
     case 2:
         HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
-        sub_8075300(&animBg, gBattleAnimAttacker);
+        GetBattleAnimBgDataByPriorityRank(&animBg, gBattleAnimAttacker);
         if (IsContest())
             position = 0;
         else
@@ -2349,7 +2349,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         break;
     case 4:
         GetBattleAnimBg1Data(&animBg);
-        sub_8075358(animBg.bgId);
+        InitBattleAnimBg(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
@@ -2541,7 +2541,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         break;
     case 5:
         GetBattleAnimBg1Data(&animBg);
-        sub_8075358(animBg.bgId);
+        InitBattleAnimBg(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 

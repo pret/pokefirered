@@ -1738,7 +1738,7 @@ void AnimCoinThrow(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
     sprite->data[4] = r7;
-    sprite->callback = sub_80756A4;
+    sprite->callback = BattleAnim_InitAndRunLinearTranslationWithDuration;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -3283,7 +3283,7 @@ static void HeartsBackground_Step(u8 taskId)
         break;
     case 3:
         GetBattleAnimBg1Data(&animBg);
-        sub_8075358(animBg.bgId);
+        InitBattleAnimBg(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
     case 4:
@@ -3371,8 +3371,8 @@ static void ScaryFace_Step(u8 taskId)
         break;
     case 3:
         GetBattleAnimBg1Data(&animBg);
-        sub_8075358(1);
-        sub_8075358(2);
+        InitBattleAnimBg(1);
+        InitBattleAnimBg(2);
         gTasks[taskId].data[12]++;
         // fall through
     case 4:

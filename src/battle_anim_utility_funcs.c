@@ -33,9 +33,9 @@ static void sub_80BC19C(u8 taskId);
 
 static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = NULL;
 
-static const u16 gUnknown_83E7CC8[] = { RGB(31, 31, 31) };
-const u8 gUnknown_83E7CCA[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
-const u8 gUnknown_83E7CCE[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
+static const u16 sRgbWhite[] = { RGB(31, 31, 31) };
+const u8 gBattleAnimRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
+const u8 gBattleIntroRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
 
 // gBattleAnimArgs[0] is a bitfield.
 // Bits 0-10 result in the following palettes being selected:
@@ -336,7 +336,7 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
     if (IsContest())
         sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_sheet, animBgData.tilesOffset);
-    LoadPalette(gUnknown_83E7CC8, animBgData.paletteId * 16 + 1, 2);
+    LoadPalette(sRgbWhite, animBgData.paletteId * 16 + 1, 2);
     gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
     gTasks[taskId].data[0] = newSpriteId;
@@ -378,7 +378,7 @@ static void sub_80BAF38(u8 taskId)
             sprite = &gSprites[gTasks[taskId].data[0]];
             DestroySprite(sprite);
             GetBattleAnimBg1Data(&animBgData);
-            sub_8075358(animBgData.bgId);
+            InitBattleAnimBg(animBgData.bgId);
             if (gTasks[taskId].data[6] == 1)
                 ++gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority;
             gBattle_BG1_Y = 0;
@@ -663,7 +663,7 @@ void AnimTask_StartSlidingBg(u8 taskId)
 {
     u8 newTaskId;
 
-    sub_8075458(0);
+    ToggleBg3Mode(0);
     newTaskId = CreateTask(sub_80BB8A4, 5);
     if (gBattleAnimArgs[2] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -689,7 +689,7 @@ static void sub_80BB8A4(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        sub_8075458(1);
+        ToggleBg3Mode(1);
         DestroyTask(taskId);
     }
 }

@@ -5904,7 +5904,7 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
     case 0:
     default:
         return FALSE;
-    case 1:
+    case DEOXYS_CHECK_BATTLE_SPRITE:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return FALSE;
         if (!gMain.inBattle)
@@ -5914,7 +5914,7 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         break;
     case 2:
         break;
-    case 3:
+    case DEOXYS_CHECK_TRADE_MAIN:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return FALSE;
         if (!gMain.inBattle)
@@ -5924,7 +5924,7 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         return FALSE;
     case 4:
         break;
-    case 5:
+    case DEOXYS_CHECK_BATTLE_ANIM:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             if (!gMain.inBattle)

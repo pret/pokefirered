@@ -5099,96 +5099,63 @@ u16 SpeciesToCryId(u16 species)
     return sHoennSpeciesIdToCryId[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
 }
 
-static void sub_8043338(u16 species, u32 personality, u8 *dest)
+#define DRAW_SPINDA_SPOTS                                                       \
+{                                                                               \
+    int i;                                                                      \
+    for (i = 0; i < 4; i++)                                                     \
+    {                                                                           \
+        int j;                                                                  \
+        u8 x = sSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);           \
+        u8 y = sSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);    \
+                                                                                \
+        for (j = 0; j < 16; j++)                                                \
+        {                                                                       \
+            int k;                                                              \
+            s32 row = sSpindaSpotGraphics[i].image[j];                          \
+                                                                                \
+            for (k = x; k < x + 16; k++)                                        \
+            {                                                                   \
+                u8 *val = dest + ((k / 8) * 32) +                               \
+                                 ((k % 8) / 2) +                                \
+                                 ((y >> 3) << 8) +                              \
+                                 ((y & 7) << 2);                                \
+                                                                                \
+                if (row & 1)                                                    \
+                {                                                               \
+                    if (k & 1)                                                  \
+                    {                                                           \
+                        if ((u8)((*val & 0xF0) - 0x10) <= 0x20)                 \
+                            *val += 0x40;                                       \
+                    }                                                           \
+                    else                                                        \
+                    {                                                           \
+                        if ((u8)((*val & 0xF) - 0x01) <= 0x02)                  \
+                            *val += 0x04;                                       \
+                    }                                                           \
+                }                                                               \
+                                                                                \
+                row >>= 1;                                                      \
+            }                                                                   \
+                                                                                \
+            y++;                                                                \
+        }                                                                       \
+                                                                                \
+        personality >>= 8;                                                      \
+    }                                                                           \
+}
+
+static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites[0]
         && dest != gMonSpritesGfxPtr->sprites[2])
-    {
-        int i;
-        for (i = 0; i < 4; i++)
-        {
-            int j;
-            u8 x = sSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
-            u8 y = sSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
-
-            for (j = 0; j < 16; j++)
-            {
-                int k;
-                s32 row = sSpindaSpotGraphics[i].image[j];
-
-                for (k = x; k < x + 16; k++)
-                {
-                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
-
-                    if (row & 1)
-                    {
-                        if (k & 1)
-                        {
-                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
-                                *val += 0x40;
-                        }
-                        else
-                        {
-                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
-                                *val += 0x04;
-                        }
-                    }
-
-                    row >>= 1;
-                }
-
-                y++;
-            }
-
-            personality >>= 8;
-        }
-    }
+        DRAW_SPINDA_SPOTS;
 }
 
-void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4)
+void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, bool8 isFrontPic)
 {
-    if (species == SPECIES_SPINDA && a4)
-    {
-        int i;
-        for (i = 0; i < 4; i++)
-        {
-            int j;
-            u8 x = sSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
-            u8 y = sSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
-
-            for (j = 0; j < 16; j++)
-            {
-                int k;
-                s32 row = sSpindaSpotGraphics[i].image[j];
-
-                for (k = x; k < x + 16; k++)
-                {
-                    u8 *val = dest + ((k / 8) * 32) + ((k % 8) / 2) + ((y >> 3) << 8) + ((y & 7) << 2);
-
-                    if (row & 1)
-                    {
-                        if (k & 1)
-                        {
-                            if ((u8)((*val & 0xF0) - 0x10) <= 0x20)
-                                *val += 0x40;
-                        }
-                        else
-                        {
-                            if ((u8)((*val & 0xF) - 0x01) <= 0x02)
-                                *val += 0x04;
-                        }
-                    }
-
-                    row >>= 1;
-                }
-
-                y++;
-            }
-
-            personality >>= 8;
-        }
-    }
+    if (species == SPECIES_SPINDA && isFrontPic)
+        DRAW_SPINDA_SPOTS;
 }
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)

@@ -35,7 +35,7 @@ static void (*const gUnknown_8471EDC[])(void) = {
 
 void sub_8150454(u8 a0)
 {
-    if (a0 < ARRAY_COUNT(gUnknown_8471EDC))
+    if (a0 < NELEMS(gUnknown_8471EDC))
         gUnknown_8471EDC[a0]();
 }
 

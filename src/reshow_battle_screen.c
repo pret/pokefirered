@@ -10,12 +10,12 @@
 #include "battle_controllers.h"
 
 static void CB2_ReshowBattleScreenAfterMenu(void);
-static void sub_8077AAC(void);
+static void ReshowBattleScreen_TurnOnDisplay(void);
 static bool8 LoadBattlerSpriteGfx(u8 battlerId);
 static void CreateBattlerSprite(u8 battlerId);
 static void CreateHealthboxSprite(u8 battlerId);
 
-void nullsub_44(void)
+void ReshowBattleScreenDummy(void)
 {
 }
 
@@ -113,35 +113,35 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         if (!LoadBattlerSpriteGfx(2))
             --gBattleScripting.reshowMainState;
         break;
-    case 0xA:
+    case 10:
         if (!LoadBattlerSpriteGfx(3))
             --gBattleScripting.reshowMainState;
         break;
-    case 0xB:
+    case 11:
         CreateBattlerSprite(0);
         break;
-    case 0xC:
+    case 12:
         CreateBattlerSprite(1);
         break;
-    case 0xD:
+    case 13:
         CreateBattlerSprite(2);
         break;
-    case 0xE:
+    case 14:
         CreateBattlerSprite(3);
         break;
-    case 0xF:
+    case 15:
         CreateHealthboxSprite(0);
         break;
-    case 0x10:
+    case 16:
         CreateHealthboxSprite(1);
         break;
-    case 0x11:
+    case 17:
         CreateHealthboxSprite(2);
         break;
-    case 0x12:
+    case 18:
         CreateHealthboxSprite(3);
         break;
-    case 0x13:
+    case 19:
         LoadAndCreateEnemyShadowSprites();
         opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);
@@ -159,13 +159,13 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
         break;
-    case 0x14:
+    case 20:
         SetVBlankCallback(VBlankCB_Battle);
-        sub_8077AAC();
+        ReshowBattleScreen_TurnOnDisplay();
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(BattleMainCB2);
-        sub_80357C8();
+        BattleInterfaceSetWindowPals();
         break;
     default:
         break;
@@ -173,7 +173,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     ++gBattleScripting.reshowMainState;
 }
 
-static void sub_8077AAC(void)
+static void ReshowBattleScreen_TurnOnDisplay(void)
 {
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -202,9 +202,9 @@ static bool8 LoadBattlerSpriteGfx(u8 battler)
                 BattleLoadSubstituteOrMonSpriteGfx(battler, FALSE);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
-            DecompressTrainerBackPalette(gSaveBlock2Ptr->playerGender, battler);
+            DecompressTrainerBackPalette(BACK_PIC_RED + gSaveBlock2Ptr->playerGender, battler);
         else if (gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
-            DecompressTrainerBackPalette(5, battler);
+            DecompressTrainerBackPalette(BACK_PIC_OLDMAN, battler);
         else if (!gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
             BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         else

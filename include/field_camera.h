@@ -26,7 +26,7 @@ extern bool8 gBikeCameraAheadPanback;
 
 void DrawWholeMapView(void);
 void CurrentMapDrawMetatileAt(int x, int y);
-void sub_805A658(s16 *x, s16 *y);
+void FieldCameraGetPixelOffsetAtGround(s16 *x, s16 *y);
 void SetCameraPanningCallback(void (*cb)(void));
 void SetCameraPanning(s16 x, s16 y);
 void UpdateCameraPanning(void);

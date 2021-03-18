@@ -207,7 +207,7 @@ static void sub_807DDF0(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         task->data[0]++;
         break;
     case 1:
@@ -663,7 +663,7 @@ static void Task_ReturnFromLinkRoomWarp(u8 taskId)
     case 1:
         if (!WaitWarpFadeOutScreen() && BGMusicStopped())
         {
-            Link_TryStartSend5FFF();
+            SetCloseLinkCallback();
             data[0]++;
         }
         break;

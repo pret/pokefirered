@@ -196,14 +196,13 @@ struct ProtectStruct
     u32 flag_x20 : 1;           // 0x20
     u32 flag_x40 : 1;           // 0x40
     u32 flag_x80 : 1;           // 0x80
-    /* field_3 */
     u32 field3 : 8;
 
-    /* field_4 */ u32 physicalDmg;
-    /* field_8 */ u32 specialDmg;
-    /* field_C */ u8 physicalBattlerId;
-    /* field_D */ u8 specialBattlerId;
-    /* field_E */ u16 fieldE;
+    u32 physicalDmg;
+    u32 specialDmg;
+    u8 physicalBattlerId;
+    u8 specialBattlerId;
+    u16 fieldE;
 };
 
 extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
@@ -357,19 +356,28 @@ struct BattleResults
 
 extern struct BattleResults gBattleResults;
 
+struct LinkPartnerHeader
+{
+    u8 versionSignatureLo;
+    u8 versionSignatureHi;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi;
+    struct BattleEnigmaBerry battleEnigmaBerry;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
-    u8 filler2;
+    u8 filler2; // unused
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 field_11;
+    u8 field_11; // unused
     u8 wildVictorySong;
     u8 dynamicMoveType;
-    u8 wrappedBy[4];
+    u8 wrappedBy[MAX_BATTLERS_COUNT];
     u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // 6 mons, each of them knowing 4 moves
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
@@ -378,17 +386,17 @@ struct BattleStruct
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
     u8 faintedActionsBattlerId;
-    u8 field_4F;
+    // balign 2
     u16 expValue;
-    u8 field_52;
+    u8 scriptPartyIdx; // for printing the nickname
     u8 sentInPokes;
     bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
-    u8 field_58[4];
+    u8 battlerPartyIndexes[MAX_BATTLERS_COUNT];
     u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    u8 field_60[4][3];
+    u8 battlerPartyOrders[MAX_BATTLERS_COUNT][3];
     u8 runTries;
-    u8 caughtMonNick[11];
-    u8 field_78;
+    u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
+    u8 field_78; // unused
     u8 safariGoNearCounter;
     u8 safariPkblThrowCounter;
     u8 safariEscapeFactor;
@@ -398,21 +406,18 @@ struct BattleStruct
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
-    u8 field_88;
-    u8 field_89;
-    u8 field_8A;
-    u8 field_8B;
-    u8 field_8C;
-    u8 field_8D;
+    u8 field_88; // unused
+    u8 field_89; // unused
+    u8 field_8A; // unused
+    u8 playerPartyIdx;
+    u8 field_8C; // unused
+    u8 field_8D; // unused
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 field_90;
-    u8 field_91;
+    u8 field_90; // unused
+    u8 absentBattlerFlags;
     u8 AI_monToSwitchIntoId[2];
-    u8 field_94;
-    u8 field_95;
-    u8 field_96;
-    u8 field_97;
+    u8 simulatedInputState[4];  // used by Oak/Old Man/Pokedude controllers
     u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // ask gamefreak why they declared it that way
     u16 hpOnSwitchout[2];
     u8 abilityPreventingSwitchout;
@@ -440,13 +445,12 @@ struct BattleStruct
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     u8 field_182;
-    u8 field_183;
-    u8 field_184;
-    u8 field_185;
-    u8 field_186;
-    u8 field_187;
-    struct BattleEnigmaBerry battleEnigmaBerry;
-    u8 field_1A4[0x5C]; // currently unknown
+    // align 4
+    union {
+        struct LinkPartnerHeader linkPartnerHeader;
+        struct MultiBattlePokemonTx multiBattleMons[3];
+    } multiBuffer;
+    u8 padding_1E4[0x1C];
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
@@ -508,14 +512,12 @@ struct BattleScripting
 
 enum
 {
-    BACK_PIC_BRENDAN,
-    BACK_PIC_MAY,
     BACK_PIC_RED,
     BACK_PIC_LEAF,
     BACK_PIC_RS_BRENDAN,
     BACK_PIC_RS_MAY,
-    BACK_PIC_WALLY,
-    BACK_PIC_STEVEN
+    BACK_PIC_POKEDUDE,
+    BACK_PIC_OLDMAN
 };
 
 struct BattleSpriteInfo
@@ -538,7 +540,7 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId;
-    u8 field_9_x1 : 1;
+    u8 healthboxSlideInStarted : 1;
     u8 field_9_x2 : 1;
     u8 field_9_x1C : 3;
     u8 field_9_x20 : 1;
@@ -553,28 +555,24 @@ struct BattleAnimationInfo
 
 struct BattleHealthboxInfo
 {
-    u8 partyStatusSummaryShown : 1;
-    u8 healthboxIsBouncing : 1;
-    u8 battlerIsBouncing : 1;
+    u8 partyStatusSummaryShown : 1; // x1
+    u8 healthboxIsBouncing : 1; // x2
+    u8 battlerIsBouncing : 1; // x4
     u8 ballAnimActive : 1; // 0x8
     u8 statusAnimActive : 1; // x10
     u8 animFromTableActive : 1; // x20
-    u8 specialAnimActive : 1; //x40
-    u8 flag_x80 : 1;
-    u8 field_1_x1 : 1;
-    u8 field_1_x1E : 5;
-    u8 field_1_x40 : 1;
-    u8 field_1_x80 : 1;
+    u8 specialAnimActive : 1; // x40
+    u8 triedShinyMonAnim : 1; // x80
+    u8 finishedShinyMonAnim : 1; // x1
+    u8 opponentDrawPartyStatusSummaryDelay : 5; // x2
     u8 healthboxBounceSpriteId;
     u8 battlerBounceSpriteId;
     u8 animationState;
-    u8 field_5;
+    u8 partyStatusDelayTimer;
     u8 matrixNum;
     u8 shadowSpriteId;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
+    u8 soundTimer;
+    u8 introEndDelay;
 };
 
 struct BattleBarInfo
@@ -608,13 +606,22 @@ extern u8 *gLinkBattleRecvBuffer;
 struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    void* sprites[4];
-    struct SpriteTemplate templates[4];
-    struct SpriteFrameImage field_74[4][4];
-    u8 field_F4[0x80];
+    void* sprites[MAX_BATTLERS_COUNT];
+    struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
+    struct SpriteFrameImage images[MAX_BATTLERS_COUNT][4];
+    u8 field_F4[0x80]; // unused
     u8 *barFontGfx;
-    void *field_178;
-    u16 *field_17C;
+    void *field_178; // freed but never allocated
+    u16 *multiUseBuffer;
+};
+
+struct PokedudeBattlerState
+{
+    u8 action_idx;
+    u8 move_idx;
+    u8 timer;
+    u8 msg_idx;
+    u8 saved_bg0y;
 };
 
 extern u16 gBattle_BG0_X;
@@ -662,9 +669,9 @@ extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern bool8 gDoingBattleAnim;
-extern u8 *gUnknown_3005EE0[MAX_BATTLERS_COUNT];
-extern u8 *gUnknown_2022BB8;
-extern u8 *gUnknown_2022BBC;
+extern struct PokedudeBattlerState *gPokedudeBattlerStates[MAX_BATTLERS_COUNT];
+extern u8 *gBattleAnimMons_BgTilesBuffer;
+extern u8 *gBattleAnimMons_BgTilemapBuffer;
 extern void (*gBattleMainFunc)(void);
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
 extern u32 gUnknown_2022B54;
@@ -690,7 +697,7 @@ extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gCurrentActionFuncId;
 extern u8 gCurrMovePos;
 extern u8 gChosenMovePos;
-extern u8 gUnknown_3004FFC[MAX_BATTLERS_COUNT];
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u16 gDynamicBasePower;
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
@@ -710,8 +717,7 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
-extern struct UnknownPokemonStruct4 gMultiPartnerParty[3];
-extern u16 *gUnknown_2022BC0;
+extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 
 #endif // GUARD_BATTLE_H

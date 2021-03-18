@@ -1044,17 +1044,17 @@ void SwapHpBarsWithHpText(void)
 #define tIsBattleStart          data[10]
 #define tData15                 data[15]
 
-u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart)
+u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, bool8 isSwitchingMons, bool8 isBattleStart)
 {
     bool8 isOpponent;
-    s8 sp14;
+    s8 nValidMons;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
     s32 i;
     u8 summaryBarSpriteId;
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
 
-    if (!arg2 || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
+    if (!isSwitchingMons || GetBattlerPosition(battlerId) != B_POSITION_OPPONENT_RIGHT)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {
@@ -1067,7 +1067,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             isOpponent = TRUE;
 
-            if (!arg2 || !IsDoubleBattle())
+            if (!isSwitchingMons || !IsDoubleBattle())
                 bar_X = 104, bar_Y = 40;
             else
                 bar_X = 104, bar_Y = 16;
@@ -1084,10 +1084,10 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         bar_data0 = 5;
     }
 
-    for (i = 0, sp14 = 0; i < PARTY_SIZE; i++)
+    for (i = 0, nValidMons = 0; i < PARTY_SIZE; i++)
     {
         if (partyInfo[i].hp != 0xFFFF)
-            sp14++;
+            nValidMons++;
     }
 
     LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheets[isOpponent]);
@@ -1163,7 +1163,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             }
             else
             {
-                if (i >= sp14) // empty slot or an egg
+                if (i >= nValidMons) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
@@ -1202,7 +1202,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             else
             {
                 ballIconSpritesIds[5 - i] += 0;
-                if (i >= sp14) // empty slot or an egg
+                if (i >= nValidMons) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[5 - i]].data[7] = 1;

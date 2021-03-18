@@ -92,6 +92,7 @@
 #define RGB_CYAN RGB(0, 31, 31)
 #define RGB_WHITEALPHA (RGB_WHITE | 0x8000)
 
+// Some functions are strictly inline asm
 #define NAKED __attribute__((naked))
 #define UNUSED __attribute__((unused))
 

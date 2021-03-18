@@ -226,7 +226,7 @@ static void AnimConfuseRayBallBounce(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-    sub_8075678(sprite);
+    BattleAnim_InitLinearTranslationWithDuration(sprite);
     sprite->callback = sub_80B52D0;
     sprite->data[6] = 16;
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
@@ -1314,18 +1314,18 @@ static void sub_80B6BE4(u8 taskId)
         gBattle_BG2_Y = 0;
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
-        sub_80752C8(&animBgData, 2);
+        GetBattleAnimBgData(&animBgData, 2);
         AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnim_ScaryFaceGfx, animBgData.tilesOffset);
         LoadCompressedPalette(gBattleAnim_ScaryFacePal, 16 * animBgData.paletteId, 0x20);
         break;
     case 3:
-        sub_80752C8(&animBgData, 2);
-        gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-        LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->field_17C);
-        sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->field_17C, 256, 0);
-        CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->field_17C, 0, 0, 0x20, 0x20, 0x11);
+        GetBattleAnimBgData(&animBgData, 2);
+        gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
+        LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->multiUseBuffer);
+        sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->multiUseBuffer, 256, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->multiUseBuffer, 0, 0, 0x20, 0x20, 0x11);
         CopyBgTilemapBufferToVram(2);
-        FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+        FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
         break;
     case 4:
         ++task->data[1];
@@ -1417,7 +1417,7 @@ static void sub_80B6FC4(u8 taskId)
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
         break;
     case 3:
-        sub_8075358(2);
+        InitBattleAnimBg(2);
         FillPalette(0, 0x90, 0x20);
         SetAnimBgAttribute(2, BG_ANIM_CHAR_BASE_BLOCK, 0);
         task->data[1] = 12;

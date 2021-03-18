@@ -9,7 +9,7 @@ struct TrainerMoney
     u8 value;
 };
 
-struct UnknownPokemonStruct4
+struct MultiBattlePokemonTx
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
@@ -45,9 +45,9 @@ struct UnknownPokemonStruct4
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
 
-extern const struct SpriteTemplate gUnknown_824EFF0;
-extern const struct OamData gOamData_824F010;
-extern const struct OamData gOamData_824F018;
+extern const struct SpriteTemplate gUnknownDebugSprite;
+extern const struct OamData gOamData_BattlerOpponent;
+extern const struct OamData gOamData_BattlerPlayer;
 extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];
@@ -66,29 +66,29 @@ void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void FreeRestoreBattleData(void);
 void VBlankCB_Battle(void);
-void nullsub_9(struct Sprite *sprite);
-void sub_801182C(struct Sprite *sprite);
-void sub_8011A1C(void);
+void SpriteCB_VsLetterDummy(struct Sprite *sprite);
+void SpriteCB_VsLetterInit(struct Sprite *sprite);
+void CB2_InitEndLinkBattle(void);
 u32 GetBattleBgAttribute(u8 arrayId, u8 caseId);
-void SpriteCB_WildMon(struct Sprite *sprite);
+void SpriteCB_EnemyMon(struct Sprite *sprite);
 void SpriteCallbackDummy2(struct Sprite *sprite);
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
-void sub_8012044(struct Sprite *sprite);
-void sub_8012098(struct Sprite *sprite);
-void sub_80120C4(struct Sprite *sprite);
-void sub_8012100(struct Sprite *sprite);
-void sub_8012110(struct Sprite *sprite);
+void SpriteCb_ShowAsMoveTarget(struct Sprite *sprite);
+void SpriteCb_HideAsMoveTarget(struct Sprite *sprite);
+void SpriteCB_AllyMon(struct Sprite *sprite);
+void SpriteCB_SetToDummy3(struct Sprite *sprite);
+void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
 void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
 void EndBounceEffect(u8 battler, u8 which);
-void sub_8012354(struct Sprite *sprite);
-void sub_801236C(struct Sprite *sprite);
-void nullsub_12(void);
+void SpriteCB_PlayerThrowInit(struct Sprite *sprite);
+void UpdatePlayerPosInThrowAnim(struct Sprite *sprite);
+void BattleDummy(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
 void FaintClearSetData(void);
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
-void sub_8013F6C(u8 battler);
+void UpdatePartyOwnerOnSwitch_NonMulti(u8 battler);
 void SwapTurnOrder(u8 id1, u8 id2);
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);

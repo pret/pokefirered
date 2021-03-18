@@ -49,7 +49,7 @@ void QuestLog_CutRecording(void);
 u8 sub_8112CAC(void);
 void ResetDeferredLinkEvent(void);
 void FinishRecordingQuestLogScene(void);
-void sub_81139BC(void);
+void QuestLogEvents_HandleEndTrainerBattle(void);
 void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void SetQuestLogRecordAndPlaybackPointers(void *oldSave);

@@ -409,7 +409,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     task->data[3] = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
     if (task->data[3] == 1)
     {
-        sub_80752A0(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         task->data[10] = gBattle_BG1_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
         FillPalette(0, animBg.paletteId * 16, 32);
@@ -540,7 +540,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
     case 1:
         if (task->data[3] == 1)
         {
-            sub_80752A0(&animBg);
+            GetBattleAnimBg1Data(&animBg);
             task->data[10] = gBattle_BG1_Y;
             FillPalette(0, animBg.paletteId * 16, 32);
         }
@@ -742,9 +742,9 @@ void sub_80B8664(u8 taskId)
 {
     bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
     
-    sub_8073128(toBG2);
+    ResetBattleAnimBg(toBG2);
     if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
-        sub_8073128(toBG2 ^ 1);
+        ResetBattleAnimBg(toBG2 ^ 1);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -800,7 +800,7 @@ void AnimTask_MetallicShine(u8 taskId)
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_8076E34(gBattleAnimAttacker, spriteId, species);
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gMetalShineTilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gMetalShineGfx, animBg.tilesOffset);
     LoadCompressedPalette(gMetalShinePalette, animBg.paletteId * 16, 32);
@@ -839,8 +839,8 @@ static void sub_80B8920(u8 taskId)
             if (gTasks[taskId].data[1] == 0)
                 SetGreyscaleOrOriginalPalette(paletteNum, 1);
             DestroySprite(&gSprites[gTasks[taskId].data[0]]);
-            sub_80752A0(&animBg);
-            sub_8075358(animBg.bgId);
+            GetBattleAnimBg1Data(&animBg);
+            InitBattleAnimBg(animBg.bgId);
             if (gTasks[taskId].data[6] == 1)
                 gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority++;
         }

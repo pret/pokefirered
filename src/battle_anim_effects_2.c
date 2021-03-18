@@ -1738,7 +1738,7 @@ void AnimCoinThrow(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
     sprite->data[4] = r7;
-    sprite->callback = sub_80756A4;
+    sprite->callback = BattleAnim_InitAndRunLinearTranslationWithDuration;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -2992,12 +2992,12 @@ void AnimTask_LoadMusicNotesPals(u8 taskId)
     for (i = 1; i < 3; i++)
         paletteNums[i] = AllocSpritePalette(ANIM_SPRITES_START - i);
 
-    gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->field_17C);
+    gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
+    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->multiUseBuffer);
     for (i = 0; i < 3; i++)
-        LoadPalette(&gMonSpritesGfxPtr->field_17C[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
+        LoadPalette(&gMonSpritesGfxPtr->multiUseBuffer[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
 
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -3232,7 +3232,7 @@ void AnimTask_HeartsBackground(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBg_AttractTilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBg_AttractGfx, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimBg_AttractPal, animBg.paletteId * 16, 32);
@@ -3282,8 +3282,8 @@ static void HeartsBackground_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80752A0(&animBg);
-        sub_8075358(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        InitBattleAnimBg(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
     case 4:
@@ -3313,7 +3313,7 @@ void AnimTask_ScaryFace(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     
     if (IsContest())
         LZDecompressVram(gBattleAnimBgTilemap_ScaryFaceContest, animBg.bgTilemap);
@@ -3370,9 +3370,9 @@ static void ScaryFace_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80752A0(&animBg);
-        sub_8075358(1);
-        sub_8075358(2);
+        GetBattleAnimBg1Data(&animBg);
+        InitBattleAnimBg(1);
+        InitBattleAnimBg(2);
         gTasks[taskId].data[12]++;
         // fall through
     case 4:

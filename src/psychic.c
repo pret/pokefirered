@@ -523,10 +523,10 @@ static void sub_80B3168(struct Sprite *sprite)
         bool8 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
-            sub_8073128(toBG2);
+            ResetBattleAnimBg(toBG2);
         battler = battlerCopy ^ 2;
         if (IsBattlerSpriteVisible(battler))
-            sub_8073128(toBG2 ^ var0);
+            ResetBattleAnimBg(toBG2 ^ var0);
     }
     sprite->callback = DestroyAnimSprite;
 }

@@ -793,12 +793,12 @@ static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
     {
-        BerryPouch_SetExitCallback(sub_81279E0);
+        BerryPouch_SetExitCallback(EnterPartyFromItemMenuInBattle);
         BerryPouch_StartFadeToExitCallback(taskId);
     }
     else
     {
-        ItemMenu_SetExitCallback(sub_81279E0);
+        ItemMenu_SetExitCallback(EnterPartyFromItemMenuInBattle);
         ItemMenu_StartFadeToExitCallback(taskId);
     }
 }

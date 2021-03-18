@@ -2216,7 +2216,7 @@ void AnimTask_TransformMon(u8 taskId)
         break;
     case 2:
         HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
-        sub_8075300(&animBg, gBattleAnimAttacker);
+        GetBattleAnimBgDataByPriorityRank(&animBg, gBattleAnimAttacker);
         if (IsContest())
             position = 0;
         else
@@ -2287,7 +2287,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-        sub_80752A0(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
         LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
@@ -2348,8 +2348,8 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         }
         break;
     case 4:
-        sub_80752A0(&animBg);
-        sub_8075358(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        InitBattleAnimBg(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
@@ -2467,7 +2467,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
         
-        sub_80752A0(&animBg);
+        GetBattleAnimBg1Data(&animBg);
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
         LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
@@ -2540,8 +2540,8 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             gTasks[taskId].data[0] = 1;
         break;
     case 5:
-        sub_80752A0(&animBg);
-        sub_8075358(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        InitBattleAnimBg(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 

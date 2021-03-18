@@ -139,7 +139,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 };
 
 // not used
-static void SpriteCB_Null4(struct Sprite *sprite)
+static void SafariDummy(void)
 {
 }
 
@@ -242,7 +242,7 @@ static void CompleteOnHealthboxSpriteCallbackDummy(void)
         SafariBufferExecCompleted();
 }
 
-static void sub_80DD7B0(void)
+static void Safari_SetBattleEndCallbacks(void)
 {
     if (!gPaletteFade.active)
     {
@@ -348,7 +348,7 @@ static void SafariHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8033EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
@@ -408,7 +408,7 @@ static void SafariHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    if (sub_80D89B0(*stringId))
+    if (BattleStringShouldBeColored(*stringId))
         BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
     else
         BattlePutTextOnWindow(gDisplayedStringBattle, 0);
@@ -608,7 +608,7 @@ static void SafariHandleIntroSlide(void)
 static void SafariHandleIntroTrainerBallThrow(void)
 {
     UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_ALL_TEXT);
-    sub_804BD94(gActiveBattler);
+    StartHealthboxSlideIn(gActiveBattler);
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthboxSpriteCallbackDummy;
 }
@@ -661,7 +661,7 @@ static void SafariHandleCmd55(void)
     BeginFastPaletteFade(3);
     SafariBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-        gBattlerControllerFuncs[gActiveBattler] = sub_80DD7B0;
+        gBattlerControllerFuncs[gActiveBattler] = Safari_SetBattleEndCallbacks;
 }
 
 static void SafariCmdEnd(void)

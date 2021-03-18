@@ -163,7 +163,7 @@ void CB2_UnionRoomBattle(void)
             }
             else
             {
-                Link_TryStartSend5FFF();
+                SetCloseLinkCallback();
                 if (gBlockRecvBuffer[GetMultiplayerId()][0] == (ACTIVITY_DECLINE | 0x40))
                 {
                     gMain.state = 6;
@@ -179,7 +179,7 @@ void CB2_UnionRoomBattle(void)
     case 50:
         if (!UpdatePaletteFade())
         {
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
             gMain.state++;
         }
         break;

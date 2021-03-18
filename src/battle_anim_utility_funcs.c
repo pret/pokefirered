@@ -33,9 +33,9 @@ static void sub_80BC19C(u8 taskId);
 
 static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = NULL;
 
-static const u16 gUnknown_83E7CC8[] = { RGB(31, 31, 31) };
-const u8 gUnknown_83E7CCA[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
-const u8 gUnknown_83E7CCE[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
+static const u16 sRgbWhite[] = { RGB(31, 31, 31) };
+const u8 gBattleAnimRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
+const u8 gBattleIntroRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
 
 // gBattleAnimArgs[0] is a bitfield.
 // Bits 0-10 result in the following palettes being selected:
@@ -331,12 +331,12 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_8076E34(gBattleAnimAttacker, spriteId, species);
-    sub_80752A0(&animBgData);
+    GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
     if (IsContest())
         sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_sheet, animBgData.tilesOffset);
-    LoadPalette(gUnknown_83E7CC8, animBgData.paletteId * 16 + 1, 2);
+    LoadPalette(sRgbWhite, animBgData.paletteId * 16 + 1, 2);
     gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
     gTasks[taskId].data[0] = newSpriteId;
@@ -358,7 +358,7 @@ static void sub_80BAF38(u8 taskId)
         gBattle_BG1_Y += 64;
         if (++gTasks[taskId].data[11] == 4)
         {
-            sub_8073128(0);
+            ResetBattleAnimBg(0);
             gBattle_WIN0H = 0;
             gBattle_WIN0V = 0;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR
@@ -377,8 +377,8 @@ static void sub_80BAF38(u8 taskId)
             sprite = &gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)]; // unused
             sprite = &gSprites[gTasks[taskId].data[0]];
             DestroySprite(sprite);
-            sub_80752A0(&animBgData);
-            sub_8075358(animBgData.bgId);
+            GetBattleAnimBg1Data(&animBgData);
+            InitBattleAnimBg(animBgData.bgId);
             if (gTasks[taskId].data[6] == 1)
                 ++gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority;
             gBattle_BG1_Y = 0;
@@ -452,7 +452,7 @@ static void sub_80BB2A0(u8 taskId)
         battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
         newSpriteId = sub_8076E34(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
     }
-    sub_80752A0(&animBgData);
+    GetBattleAnimBg1Data(&animBgData);
     if (sAnimStatsChangeData->data[0] == 0)
         AnimLoadCompressedBgTilemap(animBgData.bgId, gBattleStatMask1_Tilemap);
     else
@@ -548,7 +548,7 @@ static void sub_80BB4B8(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
             if (gTasks[taskId].data[12] == 0)
             {
-                sub_8073128(0);
+                ResetBattleAnimBg(0);
                 ++gTasks[taskId].data[15];
             }
         }
@@ -663,7 +663,7 @@ void AnimTask_StartSlidingBg(u8 taskId)
 {
     u8 newTaskId;
 
-    sub_8075458(0);
+    ToggleBg3Mode(0);
     newTaskId = CreateTask(sub_80BB8A4, 5);
     if (gBattleAnimArgs[2] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -689,7 +689,7 @@ static void sub_80BB8A4(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        sub_8075458(1);
+        ToggleBg3Mode(1);
         DestroyTask(taskId);
     }
 }
@@ -755,7 +755,7 @@ void sub_80BBA20(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
     spriteId = sub_8076E34(battler1, gBattlerSpriteIds[battler1], species);
     if (arg4)
         newSpriteId = sub_8076E34(battler2, gBattlerSpriteIds[battler2], species);
-    sub_80752A0(&animBgData);
+    GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     if (IsContest())
         sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
@@ -805,7 +805,7 @@ static void sub_80BBC2C(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
             if (gTasks[taskId].data[12] == 0)
             {
-                sub_8073128(0);
+                ResetBattleAnimBg(0);
                 gBattle_WIN0H = 0;
                 gBattle_WIN0V = 0;
                 SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR
@@ -839,13 +839,13 @@ void AnimTask_GetBattleTerrain(u8 taskId)
 
 void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
-    gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
+    gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_FreeBackupPalBuffer(u8 taskId)
 {
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -863,7 +863,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gMonSpritesGfxPtr->field_17C[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[paletteIndex * 16], 32);
+    memcpy(&gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[paletteIndex * 16], 32);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -881,7 +881,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gMonSpritesGfxPtr->field_17C[gBattleAnimArgs[1] * 16], 32);
+    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], 32);
     DestroyAnimVisualTask(taskId);
 }
 

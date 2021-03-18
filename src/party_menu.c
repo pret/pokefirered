@@ -367,7 +367,7 @@ static void Task_PartyMenu_PokedudeStep(u8 taskId);
 static void Task_PartyMenuFromBag_PokedudeStep(u8 taskId);
 static bool8 PartyMenuPokedudeIsCancelled(u8 taskId);
 static void PartyMenuHandlePokedudeCancel(void);
-static void PartyMenu_OakOldMan_PrintText(u8 windowId, const u8 *str);
+static void PartyMenu_Oak_PrintText(u8 windowId, const u8 *str);
 static u8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void);
 static void FirstBattleEnterParty_DestroyVoiceoverWindow(u8 windowId);
 static void SetSwitchedPartyOrderQuestLogEvent(void);
@@ -2005,7 +2005,7 @@ static void Task_FirstBattleEnterParty_StartPrintMsg2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    PartyMenu_OakOldMan_PrintText(data[0], gText_OakThisIsListOfPokemon);
+    PartyMenu_Oak_PrintText(data[0], gText_OakThisIsListOfPokemon);
     gTasks[taskId].func = Task_FirstBattleEnterParty_RunPrinterMsg2;
 }
 
@@ -2616,7 +2616,7 @@ static void RemoveLevelUpStatsWindow(void)
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
 }
 
-static void PartyMenu_OakOldMan_PrintText(u8 windowId, const u8 *str)
+static void PartyMenu_Oak_PrintText(u8 windowId, const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     gTextFlags.canABSpeedUpPrint = TRUE;
@@ -2629,7 +2629,7 @@ static bool8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void)
 
     TextWindow_LoadResourcesStdFrame0(windowId, 0x4F, 0xE0);
     DrawDialogFrameWithCustomTileAndPalette(windowId, 1, 0x4F, 0xE);
-    PartyMenu_OakOldMan_PrintText(windowId, gText_OakImportantToGetToKnowPokemonThroughly);
+    PartyMenu_Oak_PrintText(windowId, gText_OakImportantToGetToKnowPokemonThroughly);
     return windowId;
 }
 

@@ -196,14 +196,13 @@ struct ProtectStruct
     u32 flag_x20 : 1;           // 0x20
     u32 flag_x40 : 1;           // 0x40
     u32 flag_x80 : 1;           // 0x80
-    /* field_3 */
     u32 field3 : 8;
 
-    /* field_4 */ u32 physicalDmg;
-    /* soundTimer */ u32 specialDmg;
-    /* field_C */ u8 physicalBattlerId;
-    /* field_D */ u8 specialBattlerId;
-    /* field_E */ u16 fieldE;
+    u32 physicalDmg;
+    u32 specialDmg;
+    u8 physicalBattlerId;
+    u8 specialBattlerId;
+    u16 fieldE;
 };
 
 extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
@@ -719,7 +718,6 @@ extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
-extern u16 *sUnknownDebugSpriteDataBuffer;
 extern u16 gRandomTurnNumber;
 
 #endif // GUARD_BATTLE_H

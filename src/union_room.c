@@ -3563,7 +3563,7 @@ static u8 HandlePlayerListUpdate(void)
     struct UnkStruct_URoom * structPtr = sUnionRoomMain.uRoom;
     s32 r7 = 0;
 
-    // If someone new joined, register them in soundTimer
+    // If someone new joined, register them in field_8
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (AreGnameUnameDifferent(&structPtr->field_C->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy) == TRUE)

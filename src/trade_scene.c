@@ -1725,7 +1725,7 @@ static bool8 DoTradeAnim_Cable(void)
     case 72: // Only if in-game trade
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_RunTradeAnim_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVOTRIGGER_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVO_MODE_TRADE, ITEM_NONE);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoTarget, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
@@ -2246,7 +2246,7 @@ static bool8 DoTradeAnim_Wireless(void)
     case 72: // Only if in-game trade
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_RunTradeAnim_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVOTRIGGER_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVO_MODE_TRADE, ITEM_NONE);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoTarget, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
@@ -2290,7 +2290,7 @@ static void sub_8053788(void)
         break;
     case 4:
         gCB2_AfterEvolution = sub_8053E8C;
-        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVOTRIGGER_TRADE, 0);
+        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVO_MODE_TRADE, 0);
         if (evoSpecies != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoSpecies, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
         else

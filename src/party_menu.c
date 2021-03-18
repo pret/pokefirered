@@ -855,7 +855,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
             DisplayPartyPokemonDataToTeachMove(slot, item, 0);
             break;
         case 2: // Evolution stone
-            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVOTRIGGER_STONE_2, item) != SPECIES_NONE)
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
             break;
@@ -5197,7 +5197,7 @@ static void Task_TryLearningNextMove(u8 taskId)
 static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVOTRIGGER_LEVEL_UP, 0);
+    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, 0);
 
     if (targetSpecies != SPECIES_NONE)
     {
@@ -5353,7 +5353,7 @@ static void sub_8126BD4(void)
 static bool8 MonCanEvolve(void)
 {
     if (!IsNationalPokedexEnabled()
-     && GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVOTRIGGER_STONE, gSpecialVar_ItemId) > KANTO_DEX_COUNT)
+     && GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVO_MODE_ITEM_USE, gSpecialVar_ItemId) > KANTO_DEX_COUNT)
         return FALSE;
     else
         return TRUE;

@@ -4259,7 +4259,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         break;
                     case 7: // EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVOTRIGGER_STONE, item);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
@@ -4623,7 +4623,7 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                         }
                         break;
                     case 7:
-                        if (GetEvolutionTargetSpecies(mon, EVOTRIGGER_STONE, item) != SPECIES_NONE)
+                        if (GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item) != SPECIES_NONE)
                             return FALSE;
                         break;
                     }
@@ -4905,7 +4905,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 
     switch (type)
     {
-    case EVOTRIGGER_LEVEL_UP:
+    case EVO_MODE_NORMAL:
         level = GetMonData(mon, MON_DATA_LEVEL, 0);
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
 
@@ -4970,7 +4970,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
             }
         }
         break;
-    case EVOTRIGGER_TRADE:
+    case EVO_MODE_TRADE:
         for (i = 0; i < 5; i++)
         {
             switch (gEvolutionTable[species][i].method)
@@ -4993,8 +4993,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
             }
         }
         break;
-    case EVOTRIGGER_STONE:
-    case EVOTRIGGER_STONE_2:
+    case EVO_MODE_ITEM_USE:
+    case EVO_MODE_ITEM_CHECK:
         for (i = 0; i < 5; i++)
         {
             if (gEvolutionTable[species][i].method == EVO_ITEM

@@ -2064,7 +2064,7 @@ void RunMassageCooldownStepCounter(void)
 
 void DaisyMassageServices(void)
 {
-    AdjustFriendship(&gPlayerParty[gSpecialVar_0x8004], 6);
+    AdjustFriendship(&gPlayerParty[gSpecialVar_0x8004], FRIENDSHIP_EVENT_MASSAGE);
     VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 0);
 }
 

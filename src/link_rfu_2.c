@@ -1325,7 +1325,7 @@ static void RfuFunc_WaitAck5F00(void)
     }
     if (count == playerCount)
     {
-        gBattleTypeFlags &= ~(BATTLE_TYPE_20 | 0xFFFF0000);
+        gBattleTypeFlags &= ~(BATTLE_TYPE_LINK_ESTABLISHED | 0xFFFF0000);
         if (Rfu.parent_child == MODE_CHILD)
         {
             Rfu.errorState = 3;

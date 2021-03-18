@@ -723,7 +723,7 @@ static void sub_8081624(void)
 
 void CB2_ReturnFromCableClubBattle(void)
 {
-    gBattleTypeFlags &= (u16)~BATTLE_TYPE_20;
+    gBattleTypeFlags &= (u16)~BATTLE_TYPE_LINK_ESTABLISHED;
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();

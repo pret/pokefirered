@@ -219,4 +219,9 @@
 #define EVO_MODE_ITEM_USE   2
 #define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
 
+// used by ShouldIgnoreDeoxysForm
+#define DEOXYS_CHECK_BATTLE_SPRITE      1
+#define DEOXYS_CHECK_TRADE_MAIN         3
+#define DEOXYS_CHECK_BATTLE_ANIM        5
+
 #endif // GUARD_CONSTANTS_POKEMON_H

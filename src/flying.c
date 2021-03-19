@@ -1158,7 +1158,7 @@ static void AnimDiveWaterSplash(struct Sprite *sprite)
         sprite->pos2.y = t2;
         if (sprite->data[2] == 24)
         {
-            sub_8075AD8(sprite);
+            TryResetSpriteAffineState(sprite);
             DestroyAnimSprite(sprite);
         }
         break;

@@ -330,7 +330,7 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    newSpriteId = sub_8076E34(gBattleAnimAttacker, spriteId, species);
+    newSpriteId = CreateCloneOfSpriteInWindowMode(gBattleAnimAttacker, spriteId, species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
     if (IsContest())
@@ -446,11 +446,11 @@ static void sub_80BB2A0(u8 taskId)
     u8 battlerSpriteId;
 
     battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler1];
-    spriteId = sub_8076E34(sAnimStatsChangeData->battler1, battlerSpriteId, sAnimStatsChangeData->species);
+    spriteId = CreateCloneOfSpriteInWindowMode(sAnimStatsChangeData->battler1, battlerSpriteId, sAnimStatsChangeData->species);
     if (sAnimStatsChangeData->data[3])
     {
         battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
-        newSpriteId = sub_8076E34(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
+        newSpriteId = CreateCloneOfSpriteInWindowMode(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
     }
     GetBattleAnimBg1Data(&animBgData);
     if (sAnimStatsChangeData->data[0] == 0)
@@ -752,9 +752,9 @@ void sub_80BBA20(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
-    spriteId = sub_8076E34(battler1, gBattlerSpriteIds[battler1], species);
+    spriteId = CreateCloneOfSpriteInWindowMode(battler1, gBattlerSpriteIds[battler1], species);
     if (arg4)
-        newSpriteId = sub_8076E34(battler2, gBattlerSpriteIds[battler2], species);
+        newSpriteId = CreateCloneOfSpriteInWindowMode(battler2, gBattlerSpriteIds[battler2], species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     if (IsContest())

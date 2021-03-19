@@ -23,17 +23,17 @@ static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(stru
 static void SpriteCB_RunAnimFastLinearTranslation(struct Sprite *sprite);
 static bool8 Dummy_ReturnFalse(void);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
-static void sub_80760D0(u8 taskId);
+static void AnimTask_AlphaFadeIn_Step(u8 taskId);
 static void AnimTask_BlendMonInAndOutSetup(struct Task *task);
 static void AnimTask_BlendMonInAndOutStep(u8 taskId);
 static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId);
-static void sub_8077118(u8 taskId);
-static void sub_80771E4(struct Task *task, u8 taskId);
-static void sub_8077268(struct Sprite *sprite);
-static void sub_80772F4(struct Sprite *sprite);
+static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId);
+static void PunchAnim_CreateTraceSprite(struct Task *task, u8 taskId);
+static void SpriteCB_PunchTrace(struct Sprite *sprite);
+static void SpriteCB_WeatherBallUp_Step(struct Sprite *sprite);
 
 static EWRAM_DATA union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
-static EWRAM_DATA u32 gUnknown_2037F2C = 0; // not used
+UNUSED static EWRAM_DATA u32 gUnknown_2037F2C = 0; // not used
 
 static const struct UCoords8 sBattlerCoords[][4] =
 {
@@ -77,11 +77,11 @@ static const u8 sCastformBackSpriteYCoords[] =
     0, // HAIL
 };
 
-static const struct SpriteTemplate gUnknown_83AE054[] =
+static const struct SpriteTemplate sSpriteTemplates_AdditionalForAnim[] =
 {
     {
-        .tileTag = 0xD755,
-        .paletteTag = 0xD755,
+        .tileTag = 55125,
+        .paletteTag = 55125,
         .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -89,8 +89,8 @@ static const struct SpriteTemplate gUnknown_83AE054[] =
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = 0xD756,
-        .paletteTag = 0xD756,
+        .tileTag = 55126,
+        .paletteTag = 55126,
         .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -390,6 +390,8 @@ static void SetCallbackToStoredInData6(struct Sprite *sprite)
     sprite->callback = (SpriteCallback)callback;
 }
 
+// x = a * sin(theta0 + dtheta * t)
+// y = a * cos(theta0 + dtheta * t)
 void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
 {
     if (sprite->data[3])
@@ -409,6 +411,8 @@ void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
     }
 }
 
+// x = (a0 + da * t) * sin(theta0 + dtheta * t)
+// y = (a0 + da * t) * cos(theta0 + dtheta * t)
 void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
 {
     if (sprite->data[3])
@@ -430,7 +434,9 @@ void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
 }
 
 // not used
-static void sub_8074B5C(struct Sprite *sprite)
+// x = alpl * sin(alpha0 + dalpha * t)
+// y = ampl * cos(beta0 + dbeta * t)
+static void TranslateSpriteInLissajousCurveOverDuration(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {
@@ -454,6 +460,8 @@ static void sub_8074B5C(struct Sprite *sprite)
     }
 }
 
+// x = a * sin(theta0 + dtheta * t)
+// y = b * cos(theta0 + dtheta * t)
 void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite)
 {
     if (sprite->data[3])
@@ -484,14 +492,14 @@ void WaitAnimForDuration(struct Sprite *sprite)
         SetCallbackToStoredInData6(sprite);
 }
 
-static void sub_8074C64(struct Sprite *sprite)
+static void SetupAndStartSpriteLinearTranslation(struct Sprite *sprite)
 {
-    sub_8074C80(sprite);
+    SetupLinearTranslationWithFixedDuration(sprite);
     sprite->callback = TranslateSpriteLinear;
     sprite->callback(sprite);
 }
 
-void sub_8074C80(struct Sprite *sprite)
+void SetupLinearTranslationWithFixedDuration(struct Sprite *sprite)
 {
     s16 old;
     s32 xDiff;
@@ -554,13 +562,13 @@ static void TranslateSpriteLinearFixedPointIconFrame(struct Sprite *sprite)
 }
 
 // not used
-static void sub_8074D80(struct Sprite *sprite)
+static void SetupAndStartSpriteLinearTranslationToTarget(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x + sprite->pos2.x;
     sprite->data[3] = sprite->pos1.y + sprite->pos2.y;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-    sprite->callback = sub_8074C64;
+    sprite->callback = SetupAndStartSpriteLinearTranslation;
 }
 
 void TranslateMonSpriteLinear(struct Sprite *sprite)
@@ -621,17 +629,17 @@ void DestroySpriteAndMatrix(struct Sprite *sprite)
 }
 
 // not used
-static void sub_8074EF4(struct Sprite *sprite)
+static void SetupAndStartSpriteLinearTranslationToAttacker(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x + sprite->pos2.x;
     sprite->data[3] = sprite->pos1.y + sprite->pos2.y;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    sprite->callback = sub_8074C64;
+    sprite->callback = SetupAndStartSpriteLinearTranslation;
 }
 
 // not used
-static void sub_8074F38(struct Sprite *sprite)
+static void SpriteResetPaletteStructAndDestroy(struct Sprite *sprite)
 {
     ResetPaletteStructByUid(sprite->data[5]);
     DestroySpriteAndMatrix(sprite);
@@ -1094,7 +1102,7 @@ void InitAnimFastLinearTranslationWithSpeed(struct Sprite *sprite)
     InitAnimFastLinearTranslation(sprite);
 }
 
-void sub_8075830(struct Sprite *sprite)
+void InitAndStartAnimFastLinearTranslationWithSpeed(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1188,7 +1196,7 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
     }
 }
 
-void sub_8075AD8(struct Sprite *sprite)
+void TryResetSpriteAffineState(struct Sprite *sprite)
 {
     TrySetSpriteRotScale(sprite, TRUE, 0x100, 0x100, 0);
     sprite->affineAnimPaused = FALSE;
@@ -1487,10 +1495,10 @@ void AnimTask_AlphaFadeIn(u8 taskId)
     gTasks[taskId].data[7] = gBattleAnimArgs[2];
     gTasks[taskId].data[8] = gBattleAnimArgs[3];
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gBattleAnimArgs[0], gBattleAnimArgs[1]));
-    gTasks[taskId].func = sub_80760D0;
+    gTasks[taskId].func = AnimTask_AlphaFadeIn_Step;
 }
 
-static void sub_80760D0(u8 taskId)
+static void AnimTask_AlphaFadeIn_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1750,19 +1758,19 @@ void *LoadPointerFromVars(s16 lo, s16 hi)
     return (void *)((u16)lo | ((u16)hi << 16));
 }
 
-void sub_80765D4(struct Task *task, u8 spriteId, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7)
+void BattleAnimHelper_SetSpriteSquashParams(struct Task *task, u8 spriteId, s16 xScale0, s16 yScale0, s16 xScale1, s16 yScale1, u16 duration)
 {
-    task->data[8] = a7;
+    task->data[8] = duration;
     task->data[15] = spriteId;
-    task->data[9] = a3;
-    task->data[10] = a4;
-    task->data[13] = a5;
-    task->data[14] = a6;
-    task->data[11] = (a5 - a3) / a7;
-    task->data[12] = (a6 - a4) / a7;
+    task->data[9] = xScale0;
+    task->data[10] = yScale0;
+    task->data[13] = xScale1;
+    task->data[14] = yScale1;
+    task->data[11] = (xScale1 - xScale0) / duration;
+    task->data[12] = (yScale1 - yScale0) / duration;
 }
 
-u8 sub_8076640(struct Task *task)
+u8 BattleAnimHelper_RunSpriteSquash(struct Task *task)
 {
     if (!task->data[8])
         return 0;
@@ -1801,7 +1809,7 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId)
 }
 
 // not used
-static void sub_80766EC(u8 priority)
+static void SetOamPriorityOfAllVisibleBattlers(u8 priority)
 {
     if (IsBattlerSpriteVisible(gBattleAnimTarget))
         gSprites[gBattlerSpriteIds[gBattleAnimTarget]].oam.priority = priority;
@@ -1813,7 +1821,7 @@ static void sub_80766EC(u8 priority)
         gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority = priority;
 }
 
-void sub_80767F0(void)
+void ResetSpritePriorityOfAllVisibleBattlers(void)
 {
     s32 i;
 
@@ -1867,7 +1875,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
 {
     u8 spriteId;
     u16 sheet = LoadSpriteSheet(&sMoveAnimAdtlSprSheets[templateId]);
-    u16 palette = AllocSpritePalette(gUnknown_83AE054[templateId].paletteTag);
+    u16 palette = AllocSpritePalette(sSpriteTemplates_AdditionalForAnim[templateId].paletteTag);
 
     if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->multiUseBuffer == NULL)
         gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
@@ -1906,9 +1914,9 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
     RequestDma3Copy(gMonSpritesGfxPtr->multiUseBuffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
     if (!isBackpic)
-        spriteId = CreateSprite(&gUnknown_83AE054[templateId], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sSpriteTemplates_AdditionalForAnim[templateId], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
     else
-        spriteId = CreateSprite(&gUnknown_83AE054[templateId], x, y + gMonBackPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sSpriteTemplates_AdditionalForAnim[templateId], x, y + gMonBackPicCoords[species].y_offset, subpriority);
     return spriteId;
 }
 
@@ -2048,20 +2056,20 @@ void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x
     *y = (battlerY + partnerY) / 2;
 }
 
-u8 sub_8076E34(s32 battlerId, u8 spriteId, s32 species)
+u8 CreateCloneOfSpriteInWindowMode(s32 battlerId, u8 spriteId, s32 species)
 {
     u8 newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
 
     gSprites[newSpriteId] = gSprites[spriteId];
     gSprites[newSpriteId].usingSheet = TRUE;
     gSprites[newSpriteId].oam.priority = 0;
-    gSprites[newSpriteId].oam.objMode = 2;
+    gSprites[newSpriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
     gSprites[newSpriteId].oam.tileNum = gSprites[spriteId].oam.tileNum;
     gSprites[newSpriteId].callback = SpriteCallbackDummy;
     return newSpriteId;
 }
 
-void sub_8076ED8(struct Sprite *sprite)
+void SpriteCB_AnimTranslateSpriteLinearAndFlicker(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -2083,7 +2091,7 @@ void sub_8076ED8(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
-void sub_8076F58(struct Sprite *sprite)
+void SpriteCB_AnimTranslateSpriteLinearAndFlicker2(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -2104,7 +2112,7 @@ void sub_8076F58(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
-void sub_8076FD0(struct Sprite *sprite)
+void SpriteCB_TrackOffsetFromAttackerAndWaitAnim(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -2138,16 +2146,16 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
         task->data[6] = 3;
     CpuCopy32(&gPlttBufferUnfaded[src], &gPlttBufferFaded[dest], 0x20);
     BlendPalette(dest, 16, gBattleAnimArgs[1], gBattleAnimArgs[0]);
-    task->func = sub_8077118;
+    task->func = AnimTask_AttackerPunchWithTrace_Step;
 }
 
-static void sub_8077118(u8 taskId)
+static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[2])
     {
     case 0:
-        sub_80771E4(task, taskId);
+        PunchAnim_CreateTraceSprite(task, taskId);
         gSprites[task->data[0]].pos2.x += task->data[1];
         if (++task->data[3] == 5)
         {
@@ -2156,7 +2164,7 @@ static void sub_8077118(u8 taskId)
         }
         break;
     case 1:
-        sub_80771E4(task, taskId);
+        PunchAnim_CreateTraceSprite(task, taskId);
         gSprites[task->data[0]].pos2.x -= task->data[1];
         if (--task->data[3] == 0)
         {
@@ -2174,7 +2182,7 @@ static void sub_8077118(u8 taskId)
     }
 }
 
-static void sub_80771E4(struct Task *task, u8 taskId)
+static void PunchAnim_CreateTraceSprite(struct Task *task, u8 taskId)
 {
     s16 spriteId = CloneBattlerSpriteWithBlend(0);
 
@@ -2186,12 +2194,12 @@ static void sub_80771E4(struct Task *task, u8 taskId)
         gSprites[spriteId].data[1] = taskId;
         gSprites[spriteId].data[2] = spriteId;
         gSprites[spriteId].pos2.x = gSprites[task->data[0]].pos2.x;
-        gSprites[spriteId].callback = sub_8077268;
+        gSprites[spriteId].callback = SpriteCB_PunchTrace;
         ++task->data[5];
     }
 }
 
-static void sub_8077268(struct Sprite *sprite)
+static void SpriteCB_PunchTrace(struct Sprite *sprite)
 {
     if (--sprite->data[0] == 0)
     {
@@ -2200,7 +2208,7 @@ static void sub_8077268(struct Sprite *sprite)
     }
 }
 
-void sub_807729C(struct Sprite *sprite)
+void SpriteCB_WeatherBallUp(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -2209,10 +2217,10 @@ void sub_807729C(struct Sprite *sprite)
     else
         sprite->data[0] = -10;
     sprite->data[1] = -40;
-    sprite->callback = sub_80772F4;
+    sprite->callback = SpriteCB_WeatherBallUp_Step;
 }
 
-static void sub_80772F4(struct Sprite *sprite)
+static void SpriteCB_WeatherBallUp_Step(struct Sprite *sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];

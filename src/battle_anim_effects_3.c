@@ -3172,7 +3172,7 @@ static void AnimTask_RolePlaySilhouetteStep2(u8 taskId)
     TrySetSpriteRotScale(&gSprites[spriteId], TRUE, gTasks[taskId].data[10], gTasks[taskId].data[11], 0);
     if (++gTasks[taskId].data[12] == 9)
     {
-        sub_8075AD8(&gSprites[spriteId]);
+        TryResetSpriteAffineState(&gSprites[spriteId]);
         DestroySpriteAndFreeResources_(&gSprites[spriteId]);
         gTasks[taskId].func = DestroyAnimVisualTaskAndDisableBlend;
     }

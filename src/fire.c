@@ -29,7 +29,7 @@ static void AnimFireRing_Step3(struct Sprite *sprite);
 static void UpdateFireRingCircleOffset(struct Sprite *sprite);
 static void sub_80ACE28(struct Sprite *sprite);
 static void sub_80ACE50(struct Sprite *sprite);
-static void sub_80ACF14(u8 taskId);
+static void AnimTask_EruptionLaunchRocks_Step(u8 taskId);
 static void sub_80AD1F8(u8 spriteId, u8 taskId, u8 a3);
 static u16 sub_80AD374(u8 spriteId);
 static void sub_80AD3C8(struct Sprite *sprite, s16 x, s16 y);
@@ -741,17 +741,17 @@ void AnimTask_EruptionLaunchRocks(u8 taskId) // initialize animation task for Mo
     task->data[5] = GetBattlerSide(gBattleAnimAttacker);
     task->data[6] = 0;
     PrepareBattlerSpriteForRotScale(task->data[15], ST_OAM_OBJ_NORMAL);
-    task->func = sub_80ACF14;
+    task->func = AnimTask_EruptionLaunchRocks_Step;
 }
 
-static void sub_80ACF14(u8 taskId) // animate Move_ERUPTION?
+static void AnimTask_EruptionLaunchRocks_Step(u8 taskId) // animate Move_ERUPTION?
 {
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
     {
     case 0:
-        sub_80765D4(task, task->data[15], 0x100, 0x100, 0xE0, 0x200, 0x20);
+        BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 0x100, 0x100, 0xE0, 0x200, 0x20);
         ++task->data[0];
         // fall through
     case 1:
@@ -771,7 +771,7 @@ static void sub_80ACF14(u8 taskId) // animate Move_ERUPTION?
                 ++gSprites[task->data[15]].pos1.y;
             }
         }
-        if(!sub_8076640(task))
+        if(!BattleAnimHelper_RunSpriteSquash(task))
         {
             SetBattlerSpriteYOffsetFromYScale(task->data[15]);
             gSprites[task->data[15]].pos2.x = 0;
@@ -785,15 +785,15 @@ static void sub_80ACF14(u8 taskId) // animate Move_ERUPTION?
         if (++task->data[1] > 4)
         {
             if (task->data[5])
-                sub_80765D4(task, task->data[15], 0xE0, 0x200, 0x180, 0xF0, 0x6);
+                BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 0xE0, 0x200, 0x180, 0xF0, 0x6);
             else
-                sub_80765D4(task, task->data[15], 0xE0, 0x200, 0x180, 0xC0, 0x6);
+                BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 0xE0, 0x200, 0x180, 0xC0, 0x6);
             task->data[1] = 0;
             ++task->data[0];
         }
         break;
     case 3:
-        if (!sub_8076640(task))
+        if (!BattleAnimHelper_RunSpriteSquash(task))
         {
             sub_80AD1F8(task->data[15], taskId, 6);
             ++task->data[0];
@@ -811,9 +811,9 @@ static void sub_80ACF14(u8 taskId) // animate Move_ERUPTION?
         if (++task->data[3] > 0x18)
         {
             if (task->data[5])
-                sub_80765D4(task, task->data[15], 0x180, 0xF0, 0x100, 0x100, 0x8);
+                BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 0x180, 0xF0, 0x100, 0x100, 0x8);
             else
-                sub_80765D4(task, task->data[15], 0x180, 0xC0, 0x100, 0x100, 0x8);
+                BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 0x180, 0xC0, 0x100, 0x100, 0x8);
             if (task->data[2] & 1)
                 gSprites[task->data[15]].pos2.y -= 3;
             task->data[1] = 0;
@@ -825,7 +825,7 @@ static void sub_80ACF14(u8 taskId) // animate Move_ERUPTION?
     case 5:
         if (task->data[5])
             --gSprites[task->data[15]].pos1.y;
-        if (!sub_8076640(task))
+        if (!BattleAnimHelper_RunSpriteSquash(task))
         {
             gSprites[task->data[15]].pos1.y = task->data[4];
             ResetSpriteRotScale(task->data[15]);

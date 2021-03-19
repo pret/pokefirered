@@ -1938,9 +1938,7 @@ static void sub_805EE3C(u8 objectEventId, s16 x, s16 y)
 #undef i
 
     objectEvent = &gObjectEvents[objectEventId];
-    #ifndef NONMATCHING
-        asm("":::"r5");
-    #endif
+    objectEvent++;objectEvent--; // fakematch
     subspriteTables = NULL;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     spriteFrameImage.size = graphicsInfo->size;

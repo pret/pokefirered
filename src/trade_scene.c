@@ -156,7 +156,7 @@ static const u8 sTradeGlow1Tiles[] = INCBIN_U8("graphics/trade/glow1.4bpp");
 static const u8 sTradeGlow2Tiles[] = INCBIN_U8("graphics/trade/glow2.4bpp");
 static const u8 sTradeCableEndTiles[] = INCBIN_U8("graphics/trade/cable_end.4bpp");
 static const u8 sTradeGBAScreenTiles[] = INCBIN_U8("graphics/trade/gba_screen.4bpp");
-const u16 gUnknown_826601C[] = INCBIN_U16("graphics/trade/shadow_map.bin");
+const u16 gTradeOrHatchMonShadowTilemap[] = INCBIN_U16("graphics/trade/shadow_map.bin");
 static const u8 gUnknown_826701C[] = INCBIN_U8("graphics/trade/gba_affine.8bpp");
 static const u8 sFiller_08335760[64] = {};
 static const u8 gUnknown_826985C[] = INCBIN_U8("graphics/trade/gba_affine_map_cable.bin");
@@ -1123,7 +1123,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256);
         LoadPalette(gTradeGba2_Pal, 0x10, 0x60);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(1), 0x1420, 0x1000);
-        DmaCopy16Defvars(3, gUnknown_826601C, (void *)BG_SCREEN_ADDR(18), 0x1000);
+        DmaCopy16Defvars(3, gTradeOrHatchMonShadowTilemap, (void *)BG_SCREEN_ADDR(18), 0x1000);
         break;
     case 1:
         sTradeData->bg1hofs = 0;
@@ -1214,7 +1214,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256);
         LoadPalette(gTradeGba2_Pal, 0x10, 0x60);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(1), 0x1420, 0x1000);
-        DmaCopy16Defvars(3, gUnknown_826601C, (void *)BG_SCREEN_ADDR(18), 0x1000);
+        DmaCopy16Defvars(3, gTradeOrHatchMonShadowTilemap, (void *)BG_SCREEN_ADDR(18), 0x1000);
         break;
     }
 }

@@ -12,7 +12,7 @@ extern const u8 gText_MaleSymbol4[];
 extern const u8 gText_FemaleSymbol4[];
 extern const u8 gText_GenderlessSymbol[];
 
-extern const u16 gUnknown_826601C[];
+extern const u16 gTradeOrHatchMonShadowTilemap[];
 void CB2_ReturnFromLinkTrade(void);
 s32 Trade_CalcLinkPlayerCompatibilityParam(void);
 s32 CanRegisterMonForTradingBoard(struct GFtgtGnameSub rfuPlayer, u16 species2, u16 species, u8 isEventLegal);

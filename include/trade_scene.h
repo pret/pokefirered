@@ -11,7 +11,7 @@ void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
 void LoadTradeAnimGfx(void);
 
-extern const u16 gUnknown_826601C[];
+extern const u16 gTradeOrHatchMonShadowTilemap[];
 extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 
 #endif //GUARD_TRADE_SCENE_H

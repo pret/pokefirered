@@ -8,10 +8,11 @@
 
 struct QuestLogEntry
 {
-    u8 localId;
-    u8 mapNum;
-    u8 mapGroup;
-    u8 animId;
+    // When command == 2, these fields have different meanings
+    u8 localId;  // cmd == 2: Pressed A/B, checked wild, held direction, took step
+    u8 mapNum;   // cmd == 2: Always set to 0
+    u8 mapGroup; // cmd == 2: Dpad direction
+    u8 animId;   // cmd == 2: Always set to 0
     u16 duration;
     u8 command;
 };
@@ -32,7 +33,7 @@ extern u16 *gUnknown_203AE04;
 extern u16 *sEventRecordingPointer;
 extern u16 sQuestLogCursor;
 
-void sub_8112720(u8);
+void QuestLogRecordPlayerAvatarGfxTransition(u8);
 void SetQuestLogEvent(u16, const u16 *);
 void SetQLPlayedTheSlots(void);
 void QuestLog_RecordEnteredMap(u16);
@@ -54,15 +55,18 @@ void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void SetQuestLogRecordAndPlaybackPointers(void *oldSave);
 void sub_811246C(struct Sprite *sprite);
-void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3);
+void QuestLogRecordNPCStep(u8 a0, u8 a1, u8 a2, u8 a3);
 bool8 sub_8111C2C(void);
-void sub_81128BC(u8 a0);
-void sub_811278C(u8 movementActionId, u8 duration);
+
+#define QL_ESCALATOR_OUT 1
+#define QL_ESCALATOR_IN  2
+void QuestLog_OnEscalatorWarp(u8 direction);
+void QuestLogRecordPlayerAvatarGfxTransitionWithDuration(u8 movementActionId, u8 duration);
 void Special_UpdateTrainerFansAfterLinkBattle(void);
-void sub_8112628(u8 movementActionId);
-void sub_81126AC(u8 movementActionId, u8 duration);
-void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration);
-void sub_8112C9C(void);
+void QuestLogRecordPlayerStep(u8 movementActionId);
+void QuestLogRecordPlayerStepWithDuration(u8 movementActionId, u8 duration);
+void QuestLogRecordNPCStepWithDuration(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration);
+void QL_AfterRecordFishActionSuccessful(void);
 void sub_8110920(void);
 void sub_8111708(void);
 void sub_81127F8(struct FieldInput * a0);

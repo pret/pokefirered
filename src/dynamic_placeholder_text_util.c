@@ -6,13 +6,13 @@ static EWRAM_DATA const u8 *sStringPointers[8] = {0};
 
 static const u8 sTextColorTable[] =
 {
- // [LOW_NYBBLE / 2]                               = 0xXY, // HIGH_NYBBLE
+ // [LOW_NYBBLE / 2]                            = 0xXY, // HIGH_NYBBLE
     [OBJ_EVENT_GFX_RED_NORMAL / 2]              = 0x00, // OBJ_EVENT_GFX_RED_BIKE
-    [OBJ_EVENT_GFX_RED_SURF / 2]                 = 0x00, // OBJ_EVENT_GFX_RED_ITEM
+    [OBJ_EVENT_GFX_RED_SURF / 2]                = 0x00, // OBJ_EVENT_GFX_RED_FIELD_MOVE
     [OBJ_EVENT_GFX_RED_FISH / 2]                = 0x00, // OBJ_EVENT_GFX_RED_VS_SEEKER
-    [OBJ_EVENT_GFX_RED_VS_SEEKER_BIKE / 2]           = 0x10, // OBJ_EVENT_GFX_GREEN_NORMAL
+    [OBJ_EVENT_GFX_RED_VS_SEEKER_BIKE / 2]      = 0x10, // OBJ_EVENT_GFX_GREEN_NORMAL
     [OBJ_EVENT_GFX_GREEN_BIKE / 2]              = 0x11, // OBJ_EVENT_GFX_GREEN_SURF
-    [OBJ_EVENT_GFX_GREEN_ITEM / 2]              = 0x11, // OBJ_EVENT_GFX_GREEN_FISH
+    [OBJ_EVENT_GFX_GREEN_FIELD_MOVE / 2]        = 0x11, // OBJ_EVENT_GFX_GREEN_FISH
     [OBJ_EVENT_GFX_GREEN_VS_SEEKER / 2]         = 0x11, // OBJ_EVENT_GFX_GREEN_VS_SEEKER_BIKE
     [OBJ_EVENT_GFX_RS_BRENDAN / 2]              = 0x10, // OBJ_EVENT_GFX_RS_MAY
     [OBJ_EVENT_GFX_LITTLE_BOY / 2]              = 0x10, // OBJ_EVENT_GFX_LITTLE_GIRL

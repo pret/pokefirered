@@ -1295,10 +1295,10 @@ void sub_811246C(struct Sprite *sprite)
             ObjectEventSetHeldMovement(objectEvent, sMovementScripts[0][0]);
             sMovementScripts[0][0] = 0xFF;
         }
-        if (sMovementScripts[0][1] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[0][1] != 0xFF)
         {
-            sub_8150454();
-            sMovementScripts[0][1] = OBJ_EVENT_ID_PLAYER;
+            QuestLogUpdatePlayerSprite(sMovementScripts[0][1]);
+            sMovementScripts[0][1] = 0xFF;
         }
         sub_8063E28(objectEvent, sprite);
     }
@@ -1313,7 +1313,7 @@ void sub_811246C(struct Sprite *sprite)
     }
 }
 
-void sub_81124EC(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId)
+void QuestLogRecordNPCStep(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId)
 {
     if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
     {
@@ -1328,7 +1328,7 @@ void sub_81124EC(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId)
     }
 }
 
-void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration)
+void QuestLogRecordNPCStepWithDuration(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
@@ -1343,7 +1343,7 @@ void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 dur
     }
 }
 
-void sub_8112628(u8 movementActionId)
+void QuestLogRecordPlayerStep(u8 movementActionId)
 {
     if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
     {
@@ -1360,7 +1360,7 @@ void sub_8112628(u8 movementActionId)
     }
 }
 
-void sub_81126AC(u8 movementActionId, u8 duration)
+void QuestLogRecordPlayerStepWithDuration(u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
@@ -1374,7 +1374,7 @@ void sub_81126AC(u8 movementActionId, u8 duration)
     }
 }
 
-void sub_8112720(u8 movementActionId)
+void QuestLogRecordPlayerAvatarGfxTransition(u8 movementActionId)
 {
     if (!RecordHeadAtEndOfEntry())
     {
@@ -1387,7 +1387,7 @@ void sub_8112720(u8 movementActionId)
     }
 }
 
-void sub_811278C(u8 movementActionId, u8 duration)
+void QuestLogRecordPlayerAvatarGfxTransitionWithDuration(u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
@@ -1404,13 +1404,21 @@ void sub_81127F8(struct FieldInput * a0)
 {
     if (sQuestLogCursor < sNumEventsInLogEntry)
     {
+        // Retain only the following fields:
+        // - pressedAButton
+        // - checkStandardWildEncounter
+        // - heldDirection
+        // - heldDirection2
+        // - tookStep
+        // - pressedBButton
+        // - dpadDirection
         u32 r2 = *(u32 *)a0 & 0x00FF00F3;
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 2;
         sCurQuestLogEntry[sQuestLogCursor].localId = r2;
-        sCurQuestLogEntry[sQuestLogCursor].mapNum = r2 >> 8;
+        sCurQuestLogEntry[sQuestLogCursor].mapNum = r2 >> 8; // always 0
         sCurQuestLogEntry[sQuestLogCursor].mapGroup = r2 >> 16;
-        sCurQuestLogEntry[sQuestLogCursor].animId = r2 >> 24;
+        sCurQuestLogEntry[sQuestLogCursor].animId = r2 >> 24; // always 0
         sQuestLogCursor++;
         if (ScriptContext2_IsEnabled())
             sNextStepDelay = TRUE;
@@ -1434,13 +1442,13 @@ static void TogglePlaybackStateForOverworldLock(u8 a0)
     }
 }
 
-void sub_81128BC(u8 a0)
+void QuestLog_OnEscalatorWarp(u8 direction)
 {
     u8 r1 = sub_8112CAC();
 
-    switch (a0)
+    switch (direction)
     {
-    case 1:
+    case QL_ESCALATOR_OUT: // warp out
         if (r1 == 1)
             gQuestLogPlaybackState = 3;
         else if (r1 == 2)
@@ -1452,7 +1460,7 @@ void sub_81128BC(u8 a0)
             gQuestLogPlaybackState = 4;
         }
         break;
-    case 2:
+    case QL_ESCALATOR_IN: // warp in
         if (r1 == 1)
             gQuestLogPlaybackState = 1;
         else if (r1 == 2)
@@ -1546,9 +1554,11 @@ void sub_8112B3C(void)
                     switch (sCurQuestLogEntry[sQuestLogCursor].command)
                     {
                     case 0:
+                        // NPC movement action
                         sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].localId][0] = sCurQuestLogEntry[sQuestLogCursor].animId;
                         break;
                     case 1:
+                        // State transition
                         sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].localId][1] = sCurQuestLogEntry[sQuestLogCursor].animId;
                         break;
                     case 2:
@@ -1556,6 +1566,7 @@ void sub_8112B3C(void)
                         *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].animId << 24) | (sCurQuestLogEntry[sQuestLogCursor].mapGroup << 16) | (sCurQuestLogEntry[sQuestLogCursor].mapNum << 8) | (sCurQuestLogEntry[sQuestLogCursor].localId << 0));
                         break;
                     case 3:
+                        // End
                         gQuestLogPlaybackState = 3;
                         break;
                     case 0xFE:
@@ -1596,7 +1607,7 @@ void sub_8112B3C(void)
     }
 }
 
-void sub_8112C9C(void)
+void QL_AfterRecordFishActionSuccessful(void)
 {
     sNextStepDelay++;
 }

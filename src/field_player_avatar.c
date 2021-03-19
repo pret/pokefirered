@@ -581,12 +581,12 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
     return collision;
 }
 
-static const u8 gUnknown_835B820[] = {
-    MOVEMENT_ACTION_FACE_DOWN_FAST,
-    MOVEMENT_ACTION_FACE_DOWN_FAST,
-    MOVEMENT_ACTION_FACE_UP_FAST,
-    MOVEMENT_ACTION_FACE_LEFT_FAST,
-    MOVEMENT_ACTION_FACE_RIGHT_FAST
+static const u8 sQuestLogSurfDismountActionIds[] = {
+    QL_PLAYER_GFX_STOP_SURF_S,
+    QL_PLAYER_GFX_STOP_SURF_S,
+    QL_PLAYER_GFX_STOP_SURF_N,
+    QL_PLAYER_GFX_STOP_SURF_W,
+    QL_PLAYER_GFX_STOP_SURF_E
 };
 
 static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
@@ -595,7 +595,7 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
         && MapGridGetZCoordAt(x, y) == 3
         && GetObjectEventIdByXYZ(x, y, 3) == OBJECT_EVENTS_COUNT)
     {
-        sub_811278C(gUnknown_835B820[direction], 16);
+        QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[direction], 16);
         CreateStopSurfingTask(direction);
         return TRUE;
     }
@@ -711,21 +711,21 @@ static void PlayerAvatarTransition_Dummy(struct ObjectEvent * playerObjEvent)
 
 static void PlayerAvatarTransition_Normal(struct ObjectEvent * playerObjEvent)
 {
-    sub_8150474(0);
-    sub_8150498(0);
+    QuestLogTryRecordPlayerAvatarGfxTransition(QL_PLAYER_GFX_NORMAL);
+    QuestLogCallUpdatePlayerSprite(QL_PLAYER_GFX_NORMAL);
 }
 
 static void PlayerAvatarTransition_Bike(struct ObjectEvent * playerObjEvent)
 {
-    sub_8150474(1);
-    sub_8150498(1);
+    QuestLogTryRecordPlayerAvatarGfxTransition(QL_PLAYER_GFX_BIKE);
+    QuestLogCallUpdatePlayerSprite(QL_PLAYER_GFX_BIKE);
     InitPlayerAvatarBikeState(0, 0);
 }
 
 static void PlayerAvatarTransition_Surfing(struct ObjectEvent * playerObjEvent)
 {
-    sub_8150474(3);
-    sub_8150498(3);
+    QuestLogTryRecordPlayerAvatarGfxTransition(QL_PLAYER_GFX_SURF);
+    QuestLogCallUpdatePlayerSprite(QL_PLAYER_GFX_SURF);
 }
 
 static void PlayerAvatarTransition_Underwater(struct ObjectEvent * playerObjEvent)
@@ -809,20 +809,20 @@ static void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
     {
         PlayerSetCopyableMovement(copyableMovement);
         if (!ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], movementActionId))
-            sub_8112628(movementActionId);
+            QuestLogRecordPlayerStep(movementActionId);
     }
 }
 
 static void sub_805C06C(struct ObjectEvent * objectEvent, u8 movementAction)
 {
     if (!ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], movementAction))
-        sub_81126AC(movementAction, 0);
+        QuestLogRecordPlayerStepWithDuration(movementAction, 0);
 }
 
 static void sub_805C0A4(struct ObjectEvent * objectEvent, u8 movementAction)
 {
     if (!ObjectEventSetHeldMovement(objectEvent, movementAction))
-        sub_8112588(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, movementAction, 32);
+        QuestLogRecordNPCStepWithDuration(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, movementAction, 32);
 }
 
 void sub_805C0D4(u8 direction)
@@ -1126,12 +1126,12 @@ void StopPlayerAvatar(void)
 }
 
 static const u8 sPlayerAvatarGfxIds[][GENDER_COUNT] = {
-    {OBJ_EVENT_GFX_RED_NORMAL,    OBJ_EVENT_GFX_GREEN_NORMAL},
-    {OBJ_EVENT_GFX_RED_BIKE,      OBJ_EVENT_GFX_GREEN_BIKE},
-    {OBJ_EVENT_GFX_RED_SURF,      OBJ_EVENT_GFX_GREEN_SURF},
-    {OBJ_EVENT_GFX_RED_ITEM,      OBJ_EVENT_GFX_GREEN_ITEM},
-    {OBJ_EVENT_GFX_RED_FISH,      OBJ_EVENT_GFX_GREEN_FISH},
-    {OBJ_EVENT_GFX_RED_VS_SEEKER, OBJ_EVENT_GFX_GREEN_VS_SEEKER},
+    [PLAYER_AVATAR_GFX_NORMAL]     = {OBJ_EVENT_GFX_RED_NORMAL,     OBJ_EVENT_GFX_GREEN_NORMAL},
+    [PLAYER_AVATAR_GFX_BIKE]       = {OBJ_EVENT_GFX_RED_BIKE,       OBJ_EVENT_GFX_GREEN_BIKE},
+    [PLAYER_AVATAR_GFX_SURF]       = {OBJ_EVENT_GFX_RED_SURF,       OBJ_EVENT_GFX_GREEN_SURF},
+    [PLAYER_AVATAR_GFX_FIELD_MOVE] = {OBJ_EVENT_GFX_RED_FIELD_MOVE, OBJ_EVENT_GFX_GREEN_FIELD_MOVE},
+    [PLAYER_AVATAR_GFX_FISH]       = {OBJ_EVENT_GFX_RED_FISH,       OBJ_EVENT_GFX_GREEN_FISH},
+    [PLAYER_AVATAR_GFX_VSSEEKER]   = {OBJ_EVENT_GFX_RED_VS_SEEKER,  OBJ_EVENT_GFX_GREEN_VS_SEEKER},
 };
 
 static const u8 sHoennLinkPartnerGfxIds[] = {
@@ -1166,7 +1166,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
     case OBJ_EVENT_GFX_GREEN_NORMAL:
     case OBJ_EVENT_GFX_GREEN_BIKE:
     case OBJ_EVENT_GFX_GREEN_SURF:
-    case OBJ_EVENT_GFX_GREEN_ITEM:
+    case OBJ_EVENT_GFX_GREEN_FIELD_MOVE:
     case OBJ_EVENT_GFX_GREEN_FISH:
         return FEMALE;
     default:
@@ -1283,7 +1283,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     struct ObjectEvent *objectEvent;
 
     playerObjEventTemplate.localId = OBJ_EVENT_ID_PLAYER;
-    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
+    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_GFX_NORMAL, gender);
     playerObjEventTemplate.x = x - 7;
     playerObjEventTemplate.y = y - 7;
     playerObjEventTemplate.elevation = 0;
@@ -1315,34 +1315,34 @@ void SetPlayerInvisibility(bool8 invisible)
         gSprites[gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId].invisible = invisible;
 }
 
-void sub_805CB70(void)
+void StartPlayerAvatarSummonMonForFieldMoveAnim(void)
 {
-    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_FIELD_MOVE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
-static const u8 gUnknown_835B88E[] = {
+static const u8 sPlayerAvatarVsSeekerBikeGfxIds[] = {
     OBJ_EVENT_GFX_RED_VS_SEEKER_BIKE,
     OBJ_EVENT_GFX_GREEN_VS_SEEKER_BIKE
 };
 
-u8 sub_805CBB8(void)
+u8 GetPlayerAvatarVsSeekerGfxId(void)
 {
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
-        return gUnknown_835B88E[gPlayerAvatar.gender];
+        return sPlayerAvatarVsSeekerBikeGfxIds[gPlayerAvatar.gender];
     else
-        return GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE);
+        return GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_VSSEEKER);
 }
 
-void sub_805CBE8(void)
+void StartPlayerAvatarVsSeekerAnim(void)
 {
-    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], sub_805CBB8());
+    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarVsSeekerGfxId());
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
-void sub_805CC2C(u8 direction)
+void StartPlayerAvatarFishAnim(u8 direction)
 {
-    sub_8150498(2);
+    QuestLogCallUpdatePlayerSprite(QL_PLAYER_GFX_FISH);
 }
 
 void nullsub_24(u8 direction)
@@ -1596,7 +1596,7 @@ void SeafoamIslandsB4F_CurrentDumpsPlayerOnLand(void)
 {
     if (gQuestLogPlaybackState != 1 && gQuestLogPlaybackState != 3)
     {
-        sub_811278C(gUnknown_835B820[DIR_NORTH], 16);
+        QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[DIR_NORTH], 16);
         CreateStopSurfingTask(DIR_NORTH);
     }
 }
@@ -1621,7 +1621,7 @@ static void Task_WaitStopSurfing(u8 taskId)
 
     if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
-        ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+        ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_NORMAL));
         sub_805C06C(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
@@ -1674,8 +1674,8 @@ void StartFishing(u8 rod)
 
     gTasks[taskId].tFishingRod = rod;
     Task_Fishing(taskId);
-    if (sub_8150474(2) == TRUE)
-        sub_8112C9C();
+    if (QuestLogTryRecordPlayerAvatarGfxTransition(QL_PLAYER_GFX_FISH) == TRUE)
+        QL_AfterRecordFishActionSuccessful();
 }
 
 
@@ -1705,7 +1705,7 @@ static bool8 Fishing2(struct Task *task)
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     ObjectEventClearHeldMovementIfActive(playerObjEvent);
     playerObjEvent->enableAnim = 1;
-    sub_805CC2C(playerObjEvent->facingDirection);
+    StartPlayerAvatarFishAnim(playerObjEvent->facingDirection);
     task->tStep++;
     return FALSE;
 }

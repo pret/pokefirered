@@ -7,71 +7,72 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "quest_log.h"
+#include "quest_log_player.h"
 
-static void sub_81504A8(void);
-static void sub_81504E8(void);
-static void sub_8150530(void);
-static void sub_81505C4(u8 taskId);
-static void sub_8150708(void);
-static void sub_815077C(void);
-static void sub_8150794(u8 taskId);
-static void sub_81507CC(void);
-static void sub_81507D8(void);
-static void sub_81507E4(void);
-static void sub_81507F0(void);
-static void sub_81507BC(struct ObjectEvent *a0, u8 a1);
+static void QL_GfxTransition_Normal(void);
+static void QL_GfxTransition_Bike(void);
+static void QL_GfxTransition_Fish(void);
+static void Task_QLFishMovement(u8 taskId);
+static void QL_GfxTransition_StartSurf(void);
+static void QL_GfxTransition_VSSeeker(void);
+static void Task_QLVSSeekerMovement(u8 taskId);
+static void QL_GfxTransition_StopSurfSouth(void);
+static void QL_GfxTransition_StopSurfNorth(void);
+static void QL_GfxTransition_StopSurfWest(void);
+static void QL_GfxTransition_StopSurfEast(void);
+static void QL_SetObjectGraphicsId(struct ObjectEvent *object, u8 graphicsId);
 
-static void (*const gUnknown_8471EDC[])(void) = {
-    sub_81504A8,
-    sub_81504E8,
-    sub_8150530,
-    sub_8150708,
-    sub_81507CC,
-    sub_81507D8,
-    sub_81507E4,
-    sub_81507F0,
-    sub_815077C
+static void (*const sQLGfxTransitions[])(void) = {
+    [QL_PLAYER_GFX_NORMAL]      = QL_GfxTransition_Normal,
+    [QL_PLAYER_GFX_BIKE]        = QL_GfxTransition_Bike,
+    [QL_PLAYER_GFX_FISH]        = QL_GfxTransition_Fish,
+    [QL_PLAYER_GFX_SURF]        = QL_GfxTransition_StartSurf,
+    [QL_PLAYER_GFX_STOP_SURF_S] = QL_GfxTransition_StopSurfSouth,
+    [QL_PLAYER_GFX_STOP_SURF_N] = QL_GfxTransition_StopSurfNorth,
+    [QL_PLAYER_GFX_STOP_SURF_W] = QL_GfxTransition_StopSurfWest,
+    [QL_PLAYER_GFX_STOP_SURF_E] = QL_GfxTransition_StopSurfEast,
+    [QL_PLAYER_GFX_VSSEEKER]    = QL_GfxTransition_VSSeeker
 };
 
-void sub_8150454(u8 a0)
+void QuestLogUpdatePlayerSprite(u8 state)
 {
-    if (a0 < NELEMS(gUnknown_8471EDC))
-        gUnknown_8471EDC[a0]();
+    if (state < NELEMS(sQLGfxTransitions))
+        sQLGfxTransitions[state]();
 }
 
-bool32 sub_8150474(u8 a0)
+bool32 QuestLogTryRecordPlayerAvatarGfxTransition(u8 state)
 {
     if (gQuestLogPlaybackState == 2)
     {
-        sub_8112720(a0);
+        QuestLogRecordPlayerAvatarGfxTransition(state);
         return TRUE;
     }
     return FALSE;
 }
 
-void sub_8150498(u8 a0)
+void QuestLogCallUpdatePlayerSprite(u8 state)
 {
-    return sub_8150454(a0);
+    return QuestLogUpdatePlayerSprite(state);
 }
 
-static void sub_81504A8(void)
+static void QL_GfxTransition_Normal(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(0));
+    QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_NORMAL));
     ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
-static void sub_81504E8(void)
+static void QL_GfxTransition_Bike(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(1));
+    QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_BIKE));
     ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     InitPlayerAvatarBikeState(0, 0);
 }
 
-static void sub_8150530(void)
+static void QL_GfxTransition_Fish(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
@@ -81,17 +82,17 @@ static void sub_8150530(void)
         u8 taskId;
         ScriptContext2_Enable();
         gPlayerAvatar.preventStep = TRUE;
-        taskId = CreateTask(sub_81505C4, 0xFF);
+        taskId = CreateTask(Task_QLFishMovement, 0xFF);
         gTasks[taskId].data[0] = 0;
     }
     else
     {
-        sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
+        QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_FISH));
         StartSpriteAnim(sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
     }
 }
 
-static void sub_81505C4(u8 taskId)
+static void Task_QLFishMovement(u8 taskId)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
@@ -101,7 +102,7 @@ static void sub_81505C4(u8 taskId)
         case 0:
             ObjectEventClearHeldMovementIfActive(objectEvent);
             objectEvent->enableAnim = TRUE;
-            sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
+            QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_FISH));
             StartSpriteAnim(sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
@@ -122,9 +123,9 @@ static void sub_81505C4(u8 taskId)
             if (sprite->animEnded)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
-                    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(0));
+                    QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_NORMAL));
                 else
-                    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+                    QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_SURF));
                 ObjectEventTurn(objectEvent, objectEvent->movementDirection);
                 sprite->pos2.x = 0;
                 sprite->pos2.y = 0;
@@ -135,14 +136,14 @@ static void sub_81505C4(u8 taskId)
     }
 }
 
-static void sub_8150708(void)
+static void QL_GfxTransition_StartSurf(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     u8 fieldEffectId;
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
     {
-        sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        QL_SetObjectGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_SURF));
         ObjectEventTurn(objectEvent, objectEvent->movementDirection);
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
         gFieldEffectArguments[0] = objectEvent->currentCoords.x;
@@ -154,13 +155,13 @@ static void sub_8150708(void)
     }
 }
 
-static void sub_815077C(void)
+static void QL_GfxTransition_VSSeeker(void)
 {
     FieldEffectStart(FLDEFF_USE_VS_SEEKER);
-    CreateTask(sub_8150794, 0x00);
+    CreateTask(Task_QLVSSeekerMovement, 0x00);
 }
 
-static void sub_8150794(u8 taskId)
+static void Task_QLVSSeekerMovement(u8 taskId)
 {
     if (!FieldEffectActiveListContains(FLDEFF_USE_VS_SEEKER))
     {
@@ -170,27 +171,27 @@ static void sub_8150794(u8 taskId)
     }
 }
 
-static void sub_81507BC(struct ObjectEvent * a0, u8 a1)
+static void QL_SetObjectGraphicsId(struct ObjectEvent * object, u8 graphicsId)
 {
-    ObjectEventSetGraphicsId(a0, a1);
+    ObjectEventSetGraphicsId(object, graphicsId);
 }
 
-static void sub_81507CC(void)
+static void QL_GfxTransition_StopSurfSouth(void)
 {
-    CreateStopSurfingTask_NoMusicChange(1);
+    CreateStopSurfingTask_NoMusicChange(DIR_SOUTH);
 }
 
-static void sub_81507D8(void)
+static void QL_GfxTransition_StopSurfNorth(void)
 {
-    CreateStopSurfingTask_NoMusicChange(2);
+    CreateStopSurfingTask_NoMusicChange(DIR_NORTH);
 }
 
-static void sub_81507E4(void)
+static void QL_GfxTransition_StopSurfWest(void)
 {
-    CreateStopSurfingTask_NoMusicChange(3);
+    CreateStopSurfingTask_NoMusicChange(DIR_WEST);
 }
 
-static void sub_81507F0(void)
+static void QL_GfxTransition_StopSurfEast(void)
 {
-    CreateStopSurfingTask_NoMusicChange(4);
+    CreateStopSurfingTask_NoMusicChange(DIR_EAST);
 }

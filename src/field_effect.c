@@ -1293,7 +1293,7 @@ static bool8 EscalatorWarpEffect_1(struct Task * task)
     FreezeObjectEvents();
     CameraObjectReset2();
     StartEscalator(task->data[1]);
-    sub_81128BC(1);
+    QuestLog_OnEscalatorWarp(QL_ESCALATOR_OUT);
     task->data[0]++;
     return FALSE;
 }
@@ -1534,7 +1534,7 @@ static bool8 EscalatorWarpInEffect_7(struct Task * task)
         UnfreezeObjectEvents();
         ObjectEventSetHeldMovement(objectEvent, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(Task_EscalatorWarpInFieldEffect));
-        sub_81128BC(2);
+        QuestLog_OnEscalatorWarp(QL_ESCALATOR_IN);
     }
     return FALSE;
 }
@@ -2919,7 +2919,7 @@ static void UseSurfEffect_2(struct Task * task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        sub_805CB70();
+        StartPlayerAvatarSummonMonForFieldMoveAnim();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -2988,7 +2988,7 @@ static void (*const sUseVsSeekerEffectFuncs[])(struct Task * task) = {
 u32 FldEff_UseVsSeeker(void)
 {
     if (gQuestLogState == QL_STATE_RECORDING)
-        sub_811278C(8, 89);
+        QuestLogRecordPlayerAvatarGfxTransitionWithDuration(8, 89);
     CreateTask(Task_FldEffUseVsSeeker, 0xFF);
     return 0;
 }
@@ -3011,7 +3011,7 @@ static void UseVsSeekerEffect_2(struct Task * task)
     struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
     {
-        sub_805CBE8();
+        StartPlayerAvatarVsSeekerAnim();
         ObjectEventSetHeldMovement(playerObj, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -3132,7 +3132,7 @@ static void UseFlyEffect_1(struct Task * task)
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
-        sub_805CB70();
+        StartPlayerAvatarSummonMonForFieldMoveAnim();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -3518,7 +3518,7 @@ static void FlyInEffect_4(struct Task * task)
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = TRUE;
-        sub_805CB70();
+        StartPlayerAvatarSummonMonForFieldMoveAnim();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }

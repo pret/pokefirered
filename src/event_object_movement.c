@@ -5557,7 +5557,7 @@ static void ObjectEventSetSingleMovement(struct ObjectEvent *objectEvent, struct
     
     if (gQuestLogPlaybackState == 2)
     {
-        sub_81124EC(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, animId);
+        QuestLogRecordNPCStep(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, animId);
     }
 }
 

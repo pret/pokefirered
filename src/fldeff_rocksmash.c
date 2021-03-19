@@ -60,7 +60,7 @@ static void Task_FieldEffectShowMon_Init(u8 taskId)
         }
         else
         {
-            sub_805CB70();
+            StartPlayerAvatarSummonMonForFieldMoveAnim();
             ObjectEventSetHeldMovement(&gObjectEvents[mapObjId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
             gTasks[taskId].func = Task_FieldEffectShowMon_WaitPlayerAnim;
         }

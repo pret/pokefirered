@@ -3464,7 +3464,7 @@ void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
 
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
-    sprite->callback = sub_80B1D3C;
+    sprite->callback = DestroyAnimSpriteAfterTimer;
 }
 
 static void sub_80E1990(u8 taskId)

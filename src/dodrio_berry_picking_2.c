@@ -675,7 +675,7 @@ static void sub_81543C4(u8 spriteId)
 #define sKeepPosX data[1]
 #else
 #define sKeepPosX data[10]
-#endif // NONMATCHING
+#endif // BUGFIX
 
 static void sub_81543E8(struct Sprite * sprite)
 {

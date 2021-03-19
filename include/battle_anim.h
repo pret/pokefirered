@@ -525,7 +525,7 @@ void GetIsDoomDesireHitTurn(u8 taskId);
 
 // flying.c
 void AnimTask_AnimateGustTornadoPalette(u8 taskId);
-void sub_80B1D3C(struct Sprite *sprite);
+void DestroyAnimSpriteAfterTimer(struct Sprite *sprite);
 void AnimTask_DrillPeckHitSplats(u8 taskId);
 
 // poison.c

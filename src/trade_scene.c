@@ -1725,7 +1725,7 @@ static bool8 DoTradeAnim_Cable(void)
     case 72: // Only if in-game trade
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_RunTradeAnim_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], TRUE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVO_MODE_TRADE, ITEM_NONE);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoTarget, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
@@ -2246,7 +2246,7 @@ static bool8 DoTradeAnim_Wireless(void)
     case 72: // Only if in-game trade
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_RunTradeAnim_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], TRUE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVO_MODE_TRADE, ITEM_NONE);
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoTarget, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
@@ -2290,7 +2290,7 @@ static void sub_8053788(void)
         break;
     case 4:
         gCB2_AfterEvolution = sub_8053E8C;
-        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], 1, 0);
+        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[0]], EVO_MODE_TRADE, 0);
         if (evoSpecies != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[0]], evoSpecies, sTradeData->pokePicSpriteIdxs[1], gSelectedTradeMonPositions[0]);
         else
@@ -2546,7 +2546,7 @@ static void sub_8053E8C(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         gMain.state = 100;
         sTradeData->timer = 0;
         break;
@@ -2631,7 +2631,7 @@ static void sub_8053E8C(void)
     case 41:
         if (sTradeData->timer == 0)
         {
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
             gMain.state = 42;
         }
         else
@@ -2650,7 +2650,7 @@ static void sub_8053E8C(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
         }
         break;
     case 6:
@@ -2672,11 +2672,11 @@ static void sub_8053E8C(void)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
             {
-                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+                SetLinkStandbyCallback();
             }
             else
             {
-                Link_TryStartSend5FFF();
+                SetCloseLinkCallback();
             }
             gMain.state++;
         }

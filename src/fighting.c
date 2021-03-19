@@ -788,7 +788,7 @@ static void sub_80B111C(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(sprite->data[7], 3);
         InitAnimLinearTranslation(sprite);
         StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-        sprite->callback = sub_807563C;
+        sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
     }
 }
 
@@ -874,7 +874,7 @@ static void AnimSuperpowerFireball(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(battler, 3);
     InitAnimLinearTranslation(sprite);
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = sub_807563C;
+    sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
 }
 
 static void sub_80B13D4(struct Sprite *sprite)
@@ -940,7 +940,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_8075458(0);
+        ToggleBg3Mode(0);
         task->data[8] = gBattleAnimArgs[0];
         ++task->data[0];
         break;
@@ -965,7 +965,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        sub_8075458(1);
+        ToggleBg3Mode(1);
         DestroyAnimVisualTask(taskId);
     }
 }

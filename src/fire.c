@@ -1016,7 +1016,7 @@ static void AnimWillOWispOrb(struct Sprite *sprite)
             sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
             sprite->data[3] = sprite->pos1.y;
             sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-            sub_8075678(sprite);
+            BattleAnim_InitLinearTranslationWithDuration(sprite);
             sprite->callback = sub_80AD690;
         }
         break;
@@ -1160,7 +1160,7 @@ void AnimTask_BlendBackground(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
-    sub_80752A0(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     BlendPalette(animBg.paletteId * 16, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]);
     DestroyAnimVisualTask(taskId);
 }

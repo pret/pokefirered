@@ -9,8 +9,8 @@
 
 static EWRAM_DATA u16 sBgCnt = 0;
 
-extern const u8 gUnknown_83E7CCA[];
-extern const u8 gUnknown_83E7CCE[];
+extern const u8 gBattleAnimRegOffsBgCnt[];
+extern const u8 gBattleIntroRegOffsBgCnt[];
 
 static void BattleIntroSlide1(u8 taskId);
 static void BattleIntroSlide2(u8 taskId);
@@ -35,7 +35,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 {
     if (bgId < 4)
     {
-        sBgCnt = GetGpuReg(gUnknown_83E7CCA[bgId]);
+        sBgCnt = GetGpuReg(gBattleAnimRegOffsBgCnt[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
@@ -60,7 +60,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
             ((struct BgCnt *)&sBgCnt)->screenBaseBlock = value;
             break;
         }
-        SetGpuReg(gUnknown_83E7CCA[bgId], sBgCnt);
+        SetGpuReg(gBattleAnimRegOffsBgCnt[bgId], sBgCnt);
     }
 }
 
@@ -70,7 +70,7 @@ s32 GetAnimBgAttribute(u8 bgId, u8 attributeId)
 
     if (bgId < 4)
     {
-        bgCnt = GetGpuReg(gUnknown_83E7CCE[bgId]);
+        bgCnt = GetGpuReg(gBattleIntroRegOffsBgCnt[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
@@ -422,9 +422,9 @@ static void BattleIntroSlideLink(u8 taskId)
         {
             ++gTasks[taskId].data[0];
             gSprites[gBattleStruct->linkBattleVsSpriteId_V].oam.objMode = ST_OAM_OBJ_WINDOW;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].callback = sub_801182C;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].callback = SpriteCB_VsLetterInit;
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.objMode = ST_OAM_OBJ_WINDOW;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].callback = sub_801182C;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].callback = SpriteCB_VsLetterInit;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2);
         }
@@ -465,18 +465,18 @@ static void BattleIntroSlideLink(u8 taskId)
     }
 }
 
-void sub_80BCEF4(s32 bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *arg5, u16 *arg6, u16 tilesOffset)
+void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u8 *tilesDest, u16 *tilemapDest, u16 tilesOffset)
 {
     s32 i, j;
     u8 battler = GetBattlerAtPosition(battlerPosition);
     s32 offset = tilesOffset;
 
-    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], arg5, BG_SCREEN_SIZE);
-    LoadBgTiles(bgId, arg5, 0x1000, tilesOffset);
-    for (i = arg2; i < arg2 + 8; ++i)
-        for (j = arg1; j < arg1 + 8; ++j)
-            arg6[i * 32 + j] = offset++ | (arg4 << 12);
-    LoadBgTilemap(bgId, arg6, BG_SCREEN_SIZE, 0);
+    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], tilesDest, BG_SCREEN_SIZE);
+    LoadBgTiles(bgId, tilesDest, 0x1000, tilesOffset);
+    for (i = y; i < y + 8; ++i)
+        for (j = x; j < x + 8; ++j)
+            tilemapDest[i * 32 + j] = offset++ | (palno << 12);
+    LoadBgTilemap(bgId, tilemapDest, BG_SCREEN_SIZE, 0);
 }
 
 // not used

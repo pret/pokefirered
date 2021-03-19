@@ -83,11 +83,11 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst);
 static void SetOpponentMonData(u8 monId);
 static void DoSwitchOutAnimation(void);
 static void OpponentDoMoveAnimation(void);
-static void sub_80362E8(void);
-static void sub_8037A28(u8 battlerId, bool8 dontClearSubstituteBit);
-static void sub_8038DC4(u8 taskId);
-static void sub_8038D90(struct Sprite *sprite);
-static void sub_8038FBC(void);
+static void SwitchIn_HandleSoundAndEnd(void);
+static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
+static void Task_StartSendOutAnim(u8 taskId);
+static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
+static void EndDrawPartyStatusSummary(void);
 
 static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -153,7 +153,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 // not used
 static const u8 gUnknown_8250B18[] = { 0xB0, 0xB0, 0xC8, 0x98, 0x28, 0x28, 0x28, 0x20 };
 
-static void nullsub_17(void)
+static void OpponentDummy(void)
 {
 }
 
@@ -185,7 +185,7 @@ static void CompleteOnBattlerSpriteCallbackDummy2(void)
         OpponentBufferExecCompleted();
 }
 
-static void sub_8035B58(void)
+static void FreeTrainerSpriteAfterSlide(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
@@ -197,16 +197,16 @@ static void sub_8035B58(void)
     }
 }
 
-static void sub_8035BE8(void)
+static void Intro_DelayAndEnd(void)
 {
-    if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 == 0xFF)
+    if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay == 0xFF)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay = 0;
         OpponentBufferExecCompleted();
     }
 }
 
-static void sub_8035C30(void)
+static void Intro_WaitForShinyAnimAndHealthbox(void)
 {
     bool8 var = FALSE;
 
@@ -222,68 +222,68 @@ static void sub_8035C30(void)
     }
     if (IsCryPlayingOrClearCrySongs())
         var = FALSE;
-    if (var && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].field_1_x1)
+    if (var && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].field_1_x1 = 0;
-        FreeSpriteTilesByTag(0x27F9);
-        FreeSpritePaletteByTag(0x27F9);
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = 0;
+        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             m4aMPlayContinue(&gMPlayInfo_BGM);
         else
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 = 3;
-        gBattlerControllerFuncs[gActiveBattler] = sub_8035BE8;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay = 3;
+        gBattlerControllerFuncs[gActiveBattler] = Intro_DelayAndEnd;
     }
 }
 
-static void sub_8035DF0(void)
+static void Intro_TryShinyAnimShowHealthbox(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_80F1720(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
-        sub_80F1720(gActiveBattler ^ BIT_FLANK, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
+        TryShinyAnimation(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
+        TryShinyAnimation(gActiveBattler ^ BIT_FLANK, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
     {
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
-            DestroySprite(&gSprites[gUnknown_3004FFC[gActiveBattler ^ BIT_FLANK]]);
+            DestroySprite(&gSprites[gBattleControllerData[gActiveBattler ^ BIT_FLANK]]);
             UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK],
                                      &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]],
                                      HEALTHBOX_ALL);
-            sub_804BD94(gActiveBattler ^ BIT_FLANK);
+            StartHealthboxSlideIn(gActiveBattler ^ BIT_FLANK);
             SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK]);
             SetBattlerShadowSpriteCallback(gActiveBattler ^ BIT_FLANK, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]], MON_DATA_SPECIES));
         }
-        DestroySprite(&gSprites[gUnknown_3004FFC[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattleControllerData[gActiveBattler]]);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler],
                                  &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]],
                                  HEALTHBOX_ALL);
-        sub_804BD94(gActiveBattler);
+        StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
         SetBattlerShadowSpriteCallback(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
-        gBattleSpritesDataPtr->animationData->field_9_x1 = 0;
-        gBattlerControllerFuncs[gActiveBattler] = sub_8035C30;
+        gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = FALSE;
+        gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 }
 
-static void sub_8035FE8(void)
+static void TryShinyAnimAfterMonAnim(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded == TRUE
      && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
     {
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80)
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim)
         {
-            sub_80F1720(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
+            TryShinyAnimation(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
         }
-        else if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1)
+        else if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
         {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
-            FreeSpriteTilesByTag(0x27F9);
-            FreeSpritePaletteByTag(0x27F9);
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 0;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 0;
+            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
+            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
             OpponentBufferExecCompleted();
         }
     }
@@ -300,10 +300,10 @@ static void CompleteOnHealthbarDone(void)
     }
     else
     {
-        if (!sub_80EB2E0(1) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
+        if (!BtlCtrl_OakOldMan_TestState2Flag(1) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
         {
-            sub_80EB2F4(1);
-            gBattlerControllerFuncs[gActiveBattler] = sub_80E8570;
+            BtlCtrl_OakOldMan_SetState2Flag(1);
+            gBattlerControllerFuncs[gActiveBattler] = PrintOakText_InflictingDamageIsKey;
         }
         else
         {
@@ -312,7 +312,7 @@ static void CompleteOnHealthbarDone(void)
     }
 }
 
-static void sub_803612C(void)
+static void HideHealthboxAfterMonFaint(void)
 {
     if (!gSprites[gBattlerSpriteIds[gActiveBattler]].inUse)
     {
@@ -321,7 +321,7 @@ static void sub_803612C(void)
     }
 }
 
-static void sub_8036170(void)
+static void FreeMonSpriteAfterSwitchOutAnim(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
     {
@@ -358,17 +358,17 @@ static void DoHitAnimBlinkSpriteEffect(void)
     }
 }
 
-static void sub_8036278(void)
+static void SwitchIn_ShowSubstitute(void)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
         if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);
-        gBattlerControllerFuncs[gActiveBattler] = sub_80362E8;
+        gBattlerControllerFuncs[gActiveBattler] = SwitchIn_HandleSoundAndEnd;
     }
 }
 
-static void sub_80362E8(void)
+static void SwitchIn_HandleSoundAndEnd(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive && !IsCryPlayingOrClearCrySongs())
     {
@@ -377,33 +377,33 @@ static void sub_80362E8(void)
     }
 }
 
-static void sub_8036334(void)
+static void SwitchIn_ShowHealthbox(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1)
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
-        FreeSpriteTilesByTag(0x27F9);
-        FreeSpritePaletteByTag(0x27F9);
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 0;
+        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 0);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
-        sub_804BD94(gActiveBattler);
+        StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
         CopyBattleSpriteInvisibility(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = sub_8036278;
+        gBattlerControllerFuncs[gActiveBattler] = SwitchIn_ShowSubstitute;
     }
 }
 
-static void sub_8036408(void)
+static void SwitchIn_TryShinyAnim(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_80F1720(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
-    if (gSprites[gUnknown_3004FFC[gActiveBattler]].callback == SpriteCallbackDummy
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
+        TryShinyAnimation(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
+    if (gSprites[gBattleControllerData[gActiveBattler]].callback == SpriteCallbackDummy
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
     {
-        DestroySprite(&gSprites[gUnknown_3004FFC[gActiveBattler]]);
+        DestroySprite(&gSprites[gBattleControllerData[gActiveBattler]]);
         SetBattlerShadowSpriteCallback(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
-        gBattlerControllerFuncs[gActiveBattler] = sub_8036334;
+        gBattlerControllerFuncs[gActiveBattler] = SwitchIn_ShowHealthbox;
     }
 }
 
@@ -1025,8 +1025,8 @@ static void OpponentHandleLoadMonSprite(void)
     {
         DecompressGhostFrontPic(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
         y = GetGhostSpriteDefault_Y(gActiveBattler);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 1;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 1;
     }
     else
     {
@@ -1045,25 +1045,25 @@ static void OpponentHandleLoadMonSprite(void)
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
     if (!(gBattleTypeFlags & BATTLE_TYPE_GHOST))
         SetBattlerShadowSpriteCallback(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
-    gBattlerControllerFuncs[gActiveBattler] = sub_8035FE8;
+    gBattlerControllerFuncs[gActiveBattler] = TryShinyAnimAfterMonAnim;
 }
 
 static void OpponentHandleSwitchInAnim(void)
 {
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = 6;
     gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
-    sub_8037A28(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
-    gBattlerControllerFuncs[gActiveBattler] = sub_8036408;
+    StartSendOutAnim(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
+    gBattlerControllerFuncs[gActiveBattler] = SwitchIn_TryShinyAnim;
 }
 
-static void sub_8037A28(u8 battlerId, bool8 dontClearSubstituteBit)
+static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
 {
     u16 species;
 
     ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
     gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-    gUnknown_3004FFC[battlerId] = CreateInvisibleSpriteWithCallback(sub_8033E3C);
+    gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
@@ -1072,12 +1072,12 @@ static void sub_8037A28(u8 battlerId, bool8 dontClearSubstituteBit)
                                                 GetBattlerSpriteSubpriority(battlerId));
     gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
     gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
-    gSprites[gUnknown_3004FFC[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
+    gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
     gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
     gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
     gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_3004FFC[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_OPPONENT_SENDOUT);
+    gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_OPPONENT_SENDOUT);
 }
 
 static void OpponentHandleReturnMonToBall(void)
@@ -1111,7 +1111,7 @@ static void DoSwitchOutAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_OPPONENT_MON);
-            gBattlerControllerFuncs[gActiveBattler] = sub_8036170;
+            gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterSwitchOutAnim;
         }
         break;
     }
@@ -1143,7 +1143,7 @@ static void OpponentHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicId].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8033EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
@@ -1174,7 +1174,7 @@ static void OpponentHandleTrainerSlide(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicId].tag);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8033EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy2;
 }
 
@@ -1186,7 +1186,7 @@ static void OpponentHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
-    gBattlerControllerFuncs[gActiveBattler] = sub_8035B58;
+    gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
 }
 
 static void OpponentHandleFaintAnimation(void)
@@ -1204,7 +1204,7 @@ static void OpponentHandleFaintAnimation(void)
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             PlaySE12WithPanning(SE_FAINT, SOUND_PAN_TARGET);
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_FaintOpponentMon;
-            gBattlerControllerFuncs[gActiveBattler] = sub_803612C;
+            gBattlerControllerFuncs[gActiveBattler] = HideHealthboxAfterMonFaint;
         }
     }
 }
@@ -1231,7 +1231,7 @@ static void OpponentHandlePause(void)
 
 static void OpponentHandleMoveAnimation(void)
 {
-    if (!mplay_80342A4(gActiveBattler))
+    if (!IsBattleSEPlaying(gActiveBattler))
     {
         u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
 
@@ -1273,7 +1273,7 @@ static void OpponentDoMoveAnimation(void)
     case 1:
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         {
-            sub_8035450(0);
+            SetBattlerSpriteAffineMode(0);
             DoMoveAnim(move);
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 2;
         }
@@ -1282,7 +1282,7 @@ static void OpponentDoMoveAnimation(void)
         gAnimScriptCallback();
         if (!gAnimScriptActive)
         {
-            sub_8035450(1);
+            SetBattlerSpriteAffineMode(1);
             if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute && multihit < 2)
             {
                 InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);
@@ -1311,7 +1311,7 @@ static void OpponentHandlePrintString(void)
     gBattle_BG0_Y = 0;
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
-    if (sub_80D89B0(*stringId))
+    if (BattleStringShouldBeColored(*stringId))
         BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
     else
         BattlePutTextOnWindow(gDisplayedStringBattle, 0);
@@ -1320,10 +1320,10 @@ static void OpponentHandlePrintString(void)
         switch (*stringId)
         {
         case 0x17F:
-            gBattlerControllerFuncs[gActiveBattler] = sub_80E85C0;
+            gBattlerControllerFuncs[gActiveBattler] = PrintOakText_HowDisappointing;
             return;
         case 0xE3:
-            gBattlerControllerFuncs[gActiveBattler] = sub_80E8598;
+            gBattlerControllerFuncs[gActiveBattler] = PrintOakText_OakNoRunningFromATrainer;
             return;
         }
     }
@@ -1479,7 +1479,7 @@ static void OpponentHandleExpUpdate(void)
 
 static void OpponentHandleStatusIconUpdate(void)
 {
-    if (!mplay_80342A4(gActiveBattler))
+    if (!IsBattleSEPlaying(gActiveBattler))
     {
         u8 battlerId;
 
@@ -1492,7 +1492,7 @@ static void OpponentHandleStatusIconUpdate(void)
 
 static void OpponentHandleStatusAnimation(void)
 {
-    if (!mplay_80342A4(gActiveBattler))
+    if (!IsBattleSEPlaying(gActiveBattler))
     {
         InitAndLaunchChosenStatusAnimation(gBattleBufferA[gActiveBattler][1],
                                            gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8) | (gBattleBufferA[gActiveBattler][4] << 16) | (gBattleBufferA[gActiveBattler][5] << 24));
@@ -1632,16 +1632,16 @@ static void OpponentHandleIntroTrainerBallThrow(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_8038D90);
-    taskId = CreateTask(sub_8038DC4, 5);
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreeOpponentSprite);
+    taskId = CreateTask(Task_StartSendOutAnim, 5);
     gTasks[taskId].data[0] = gActiveBattler;
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_17;
+    gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = TRUE;
+    gBattlerControllerFuncs[gActiveBattler] = OpponentDummy;
 }
 
-static void sub_8038D90(struct Sprite *sprite)
+static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
 {
     FreeTrainerFrontPicPaletteAndTile(sprite->oam.affineParam);
     sprite->oam.tileNum = sprite->data[5];
@@ -1649,7 +1649,7 @@ static void sub_8038D90(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-static void sub_8038DC4(u8 taskId)
+static void Task_StartSendOutAnim(u8 taskId)
 {
     u8 savedActiveBattler = gActiveBattler;
 
@@ -1657,18 +1657,18 @@ static void sub_8038DC4(u8 taskId)
     if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        sub_8037A28(gActiveBattler, FALSE);
+        StartSendOutAnim(gActiveBattler, FALSE);
     }
     else
     {
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        sub_8037A28(gActiveBattler, FALSE);
+        StartSendOutAnim(gActiveBattler, FALSE);
         gActiveBattler ^= BIT_FLANK;
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        sub_8037A28(gActiveBattler, FALSE);
+        StartSendOutAnim(gActiveBattler, FALSE);
         gActiveBattler ^= BIT_FLANK;
     }
-    gBattlerControllerFuncs[gActiveBattler] = sub_8035DF0;
+    gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
     gActiveBattler = savedActiveBattler;
     DestroyTask(taskId);
 }
@@ -1684,32 +1684,32 @@ static void OpponentHandleDrawPartyStatusSummary(void)
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown = 1;
         if (gBattleBufferA[gActiveBattler][2])
         {
-            if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1E <= 1)
+            if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay < 2)
             {
-                ++gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1E;
+                ++gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay;
                 return;
             }
             else
             {
-                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1E = 0;
+                gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].opponentDrawPartyStatusSummaryDelay = 0;
             }
         }
         gBattlerStatusSummaryTaskId[gActiveBattler] = CreatePartyStatusSummarySprites(gActiveBattler, 
                                                                                       (struct HpAndStatus *)&gBattleBufferA[gActiveBattler][4], 
                                                                                       gBattleBufferA[gActiveBattler][1], 
                                                                                       gBattleBufferA[gActiveBattler][2]);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
         if (gBattleBufferA[gActiveBattler][2])
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0x5D;
-        gBattlerControllerFuncs[gActiveBattler] = sub_8038FBC;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0x5D;
+        gBattlerControllerFuncs[gActiveBattler] = EndDrawPartyStatusSummary;
     }
 }
 
-static void sub_8038FBC(void)
+static void EndDrawPartyStatusSummary(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5++ > 0x5C)
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer++ > 0x5C)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_5 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
         OpponentBufferExecCompleted();
     }
 }
@@ -1738,7 +1738,7 @@ static void OpponentHandleSpriteInvisibility(void)
 
 static void OpponentHandleBattleAnimation(void)
 {
-    if (!mplay_80342A4(gActiveBattler))
+    if (!IsBattleSEPlaying(gActiveBattler))
     {
         u8 animationId = gBattleBufferA[gActiveBattler][1];
         u16 argument = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);

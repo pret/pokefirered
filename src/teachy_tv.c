@@ -1177,9 +1177,9 @@ static void TeachyTvPrepBattle(u8 taskId)
     InitPokedudePartyAndOpponent();
     PlayMapChosenOrBattleBGM(MUS_DUMMY);
     if (sStaticResources.whichScript == TTVSCR_BATTLE)
-        data[6] = 9;
+        data[6] = B_TRANSITION_WHITEFADE_IN_STRIPES;
     else
-        data[6] = 8;
+        data[6] = B_TRANSITION_SLICED_SCREEN;
     data[7] = 0;
     gTasks[taskId].func = TeachyTvPreBattleAnimAndSetBattleCallback;
 }

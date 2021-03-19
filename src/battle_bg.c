@@ -85,7 +85,7 @@ static const struct SpriteTemplate sVsLetter_V_SpriteTemplate = {
     .oam = &gOamData_82482A0,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gAffineAnimTable_82482E0,
-    .callback = nullsub_9
+    .callback = SpriteCB_VsLetterDummy
 };
 
 static const struct SpriteTemplate sVsLetter_S_SpriteTemplate = {
@@ -94,7 +94,7 @@ static const struct SpriteTemplate sVsLetter_S_SpriteTemplate = {
     .oam = &gOamData_82482A8,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gAffineAnimTable_82482E0,
-    .callback = nullsub_9
+    .callback = SpriteCB_VsLetterDummy
 };
 
 static const struct CompressedSpriteSheet sVsLettersSpriteSheet = {
@@ -584,7 +584,7 @@ UNUSED void CreateUnknownDebugSprite(void)
     u8 spriteId;
 
     ResetSpriteData();
-    spriteId = CreateSprite(&gUnknown_824EFF0, 0, 0, 0);
+    spriteId = CreateSprite(&gUnknownDebugSprite, 0, 0, 0);
     gSprites[spriteId].invisible = TRUE;
     SetMainCallback2(CB2_unused);
 }

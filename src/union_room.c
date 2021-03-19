@@ -2022,7 +2022,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
     case 2:
         if (!gPaletteFade.active)
         {
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
             data[0]++;
         }
         break;
@@ -2246,7 +2246,7 @@ static void Task_MEvent_Leader(u8 taskId)
         Free(data->field_8);
         Free(data->field_0);
         Free(data->field_4);
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         data->state++;
         break;
     case 17:
@@ -2413,7 +2413,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         break;
     case 11:
         data->state++;
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         break;
     case 12:
         if (IsLinkTaskFinished())
@@ -2592,7 +2592,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         break;
     case 13:
         data->state++;
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         break;
     case 14:
         if (IsLinkTaskFinished())
@@ -2935,7 +2935,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case 32:
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         data->state = 36;
         break;
     case 31:
@@ -2984,7 +2984,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (PrintOnTextbox(&data->textState, gStringVar4))
         {
             data->state = 41;
-            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+            SetLinkStandbyCallback();
             data->partnerYesNoResponse = 0;
             data->recvActivityRequest[0] = 0;
         }
@@ -3162,7 +3162,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case 10:
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         data->state = 36;
         break;
     case 36:
@@ -3185,7 +3185,7 @@ static void Task_RunUnionRoom(u8 taskId)
         UnionRoom_ScheduleFieldMessageWithFollowupState(14, gStringVar4);
         break;
     case 14:
-        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        SetLinkStandbyCallback();
         data->state = 15;
         break;
     case 15:
@@ -3447,7 +3447,7 @@ static bool32 UnionRoom_HandleContactFromOtherPlayer(struct UnkStruct_URoom * ur
         else if (var == 2)
         {
             uroom->state = 36;
-            Link_TryStartSend5FFF();
+            SetCloseLinkCallback();
             return FALSE;
         }
     }
@@ -4689,7 +4689,7 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
 
     DynamicPlaceholderTextUtil_Reset();
 
-    StringCopy(uroom->trainerCardStrbufs[0], gTrainerClassNames[sub_80447F0()]);
+    StringCopy(uroom->trainerCardStrbufs[0], gTrainerClassNames[GetUnionRoomTrainerClass()]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, uroom->trainerCardStrbufs[0]);
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->rse.playerName);

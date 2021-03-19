@@ -1567,7 +1567,7 @@ static void sub_8155EA0(void)
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(FALSE);
-    InitBgsFromTemplates(0, sUnknown_847565C, ARRAY_COUNT(sUnknown_847565C));
+    InitBgsFromTemplates(0, sUnknown_847565C, NELEMS(sUnknown_847565C));
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);

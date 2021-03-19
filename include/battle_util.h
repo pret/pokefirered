@@ -64,7 +64,7 @@ bool8 WasUnableToUseMove(u8 battler);
 void PrepareStringBattle(u16 stringId, u8 battler);
 void ResetSentPokesToOpponentValue(void);
 void sub_8017434(u8 battler);
-void sub_80174B8(u8 battler);
+void UpdateSentPokesToOpponentValue(u8 battler);
 void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);

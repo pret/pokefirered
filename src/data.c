@@ -8,7 +8,7 @@
 #include "constants/battle_ai.h"
 #include "constants/trainer_classes.h"
 
-const struct SpriteFrameImage gUnknown_8234698[] =
+const struct SpriteFrameImage gSpriteImages_BattlerPlayerLeft[] =
 {
     gHeap + 0x8000, 0x800,
     gHeap + 0x8800, 0x800,
@@ -16,7 +16,7 @@ const struct SpriteFrameImage gUnknown_8234698[] =
     gHeap + 0x9800, 0x800,
 };
 
-const struct SpriteFrameImage gUnknown_82346B8[] =
+const struct SpriteFrameImage gSpriteImages_BattlerOpponentLeft[] =
 {
     gHeap + 0xA000, 0x800,
     gHeap + 0xA800, 0x800,
@@ -24,7 +24,7 @@ const struct SpriteFrameImage gUnknown_82346B8[] =
     gHeap + 0xB800, 0x800,
 };
 
-const struct SpriteFrameImage gUnknown_82346D8[] =
+const struct SpriteFrameImage gSpriteImages_BattlerPlayerRight[] =
 {
     gHeap + 0xC000, 0x800,
     gHeap + 0xC800, 0x800,
@@ -32,7 +32,7 @@ const struct SpriteFrameImage gUnknown_82346D8[] =
     gHeap + 0xD800, 0x800,
 };
 
-const struct SpriteFrameImage gUnknown_82346F8[] =
+const struct SpriteFrameImage gSpriteImages_BattlerOpponentRight[] =
 {
     gHeap + 0xE000, 0x800,
     gHeap + 0xE800, 0x800,
@@ -168,7 +168,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_82348B0[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_82348C8[] =
+const union AffineAnimCmd *const gSpriteAffineAnimTable_BattlerPlayer[] =
 {
     gSpriteAffineAnim_82347F8,
     gSpriteAffineAnim_8234818,
@@ -208,7 +208,7 @@ static const union AffineAnimCmd gSpriteAffineAnim_8234934[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_8234944[] =
+const union AffineAnimCmd *const gSpriteAffineAnimTable_BattlerOpponent[] =
 {
     gSpriteAffineAnim_82347F8,
     gSpriteAffineAnim_8234818,

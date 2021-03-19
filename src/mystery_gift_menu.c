@@ -375,7 +375,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         ScanlineEffect_Stop();
         ResetBgsAndClearDma3BusyFlags(1);
 
-        InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
+        InitBgsFromTemplates(0, sBGTemplates, NELEMS(sBGTemplates));
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
         ChangeBgX(1, 0, 0);

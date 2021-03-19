@@ -15,7 +15,7 @@ void AllocateBattleResources(void)
         s32 i;
 
         for (i = 0; i < 4; ++i)
-            gUnknown_3005EE0[i] = AllocZeroed(8);
+            gPokedudeBattlerStates[i] = AllocZeroed(sizeof(struct PokedudeBattlerState));
     }
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
@@ -29,10 +29,10 @@ void AllocateBattleResources(void)
     gBattleResources->AI_ScriptsStack = AllocZeroed(sizeof(*gBattleResources->AI_ScriptsStack));
     gLinkBattleSendBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
     gLinkBattleRecvBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
-    gUnknown_2022BB8 = AllocZeroed(0x2000);
-    gUnknown_2022BBC = AllocZeroed(0x1000);
-    SetBgTilemapBuffer(1, gUnknown_2022BBC);
-    SetBgTilemapBuffer(2, gUnknown_2022BBC);
+    gBattleAnimMons_BgTilesBuffer = AllocZeroed(0x2000);
+    gBattleAnimMons_BgTilemapBuffer = AllocZeroed(0x1000);
+    SetBgTilemapBuffer(1, gBattleAnimMons_BgTilemapBuffer);
+    SetBgTilemapBuffer(2, gBattleAnimMons_BgTilemapBuffer);
 }
 
 void FreeBattleResources(void)
@@ -45,7 +45,7 @@ void FreeBattleResources(void)
 
         for (i = 0; i < 4; ++i)
         {
-            FREE_AND_SET_NULL(gUnknown_3005EE0[i]);
+            FREE_AND_SET_NULL(gPokedudeBattlerStates[i]);
         }
     }
     if (gBattleResources != NULL)
@@ -62,8 +62,8 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleResources);
         FREE_AND_SET_NULL(gLinkBattleSendBuffer);
         FREE_AND_SET_NULL(gLinkBattleRecvBuffer);
-        FREE_AND_SET_NULL(gUnknown_2022BB8);
-        FREE_AND_SET_NULL(gUnknown_2022BBC);
+        FREE_AND_SET_NULL(gBattleAnimMons_BgTilesBuffer);
+        FREE_AND_SET_NULL(gBattleAnimMons_BgTilemapBuffer);
     }
 }
 

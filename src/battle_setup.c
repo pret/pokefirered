@@ -76,18 +76,18 @@ static EWRAM_DATA u16 sRivalBattleFlags = 0;
 
 static const u8 sBattleTransitionTable_Wild[][2] =
 {
-    B_TRANSITION_SLICED_SCREEN, B_TRANSITION_WHITEFADE_IN_STRIPES,
-    B_TRANSITION_CLOCKWISE_BLACKFADE, B_TRANSITION_GRID_SQUARES,
-    B_TRANSITION_BLUR, B_TRANSITION_GRID_SQUARES,
-    B_TRANSITION_BLACK_WAVE_TO_RIGHT, B_TRANSITION_FULLSCREEN_WAVE,
+    { B_TRANSITION_SLICED_SCREEN,        B_TRANSITION_WHITEFADE_IN_STRIPES },
+    { B_TRANSITION_CLOCKWISE_BLACKFADE,  B_TRANSITION_GRID_SQUARES         },
+    { B_TRANSITION_BLUR,                 B_TRANSITION_GRID_SQUARES         },
+    { B_TRANSITION_BLACK_WAVE_TO_RIGHT,  B_TRANSITION_FULLSCREEN_WAVE      },
 };
 
 static const u8 sBattleTransitionTable_Trainer[][2] =
 {
-    B_TRANSITION_SLIDING_POKEBALLS, B_TRANSITION_BLACK_DOODLES,
-    B_TRANSITION_HORIZONTAL_CORRUGATE, B_TRANSITION_BIG_POKEBALL,
-    B_TRANSITION_BLUR, B_TRANSITION_GRID_SQUARES,
-    B_TRANSITION_DISTORTED_WAVE, B_TRANSITION_FULLSCREEN_WAVE,
+    { B_TRANSITION_SLIDING_POKEBALLS,    B_TRANSITION_BLACK_DOODLES        },
+    { B_TRANSITION_HORIZONTAL_CORRUGATE, B_TRANSITION_BIG_POKEBALL         },
+    { B_TRANSITION_BLUR,                 B_TRANSITION_GRID_SQUARES         },
+    { B_TRANSITION_DISTORTED_WAVE,       B_TRANSITION_FULLSCREEN_WAVE      },
 };
 
 static const struct TrainerBattleParameter sOrdinaryBattleParams[] =
@@ -646,9 +646,9 @@ u8 BattleSetup_GetBattleTowerBattleTransition(void)
     u8 playerLevel = GetSumOfPlayerPartyLevel(1);
 
     if (enemyLevel < playerLevel)
-        return 4;
+        return B_TRANSITION_SLIDING_POKEBALLS;
     else
-        return 3;
+        return B_TRANSITION_BIG_POKEBALL;
 }
 
 static u32 TrainerBattleLoadArg32(const u8 *ptr)
@@ -904,14 +904,14 @@ static void CB2_EndTrainerBattle(void)
             }
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             SetBattledTrainerFlag();
-            sub_81139BC();
+            QuestLogEvents_HandleEndTrainerBattle();
         }
         else
         {
             gSpecialVar_Result = FALSE;
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             SetBattledTrainerFlag();
-            sub_81139BC();
+            QuestLogEvents_HandleEndTrainerBattle();
         }
 
     }
@@ -929,7 +929,7 @@ static void CB2_EndTrainerBattle(void)
         {
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             SetBattledTrainerFlag();
-            sub_81139BC();
+            QuestLogEvents_HandleEndTrainerBattle();
         }
     }
 }

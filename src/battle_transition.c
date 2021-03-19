@@ -213,24 +213,24 @@ static const TaskFunc sBT_Phase1Tasks[] =
 
 static const TaskFunc sBT_Phase2Tasks[] =
 {
-    BT_Phase2Blur,
-    BT_Phase2DistortedWave,
-    BT_Phase2HorizontalCorrugate,
-    BT_Phase2BigPokeball,
-    BT_Phase2SlidingPokeballs,
-    BT_Phase2ClockwiseBlackFade,
-    BT_Phase2FullScreenWave,
-    BT_Phase2BlackWaveToRight,
-    BT_Phase2SlicedScreen,
-    BT_Phase2WhiteFadeInStripes,
-    BT_Phase2GridSquares,
-    BT_Phase2BlackDoodles,
-    BT_Phase2StartLoreleiMugshot,
-    BT_Phase2StartBrunoMugshot,
-    BT_Phase2StartAgathaMugshot,
-    BT_Phase2StartLanceMugshot,
-    BT_Phase2StartBlueMugshot,
-    BT_Phase2AntiClockwiseSpiral,
+    [B_TRANSITION_BLUR]                  = BT_Phase2Blur,
+    [B_TRANSITION_DISTORTED_WAVE]        = BT_Phase2DistortedWave,
+    [B_TRANSITION_HORIZONTAL_CORRUGATE]  = BT_Phase2HorizontalCorrugate,
+    [B_TRANSITION_BIG_POKEBALL]          = BT_Phase2BigPokeball,
+    [B_TRANSITION_SLIDING_POKEBALLS]     = BT_Phase2SlidingPokeballs,
+    [B_TRANSITION_CLOCKWISE_BLACKFADE]   = BT_Phase2ClockwiseBlackFade,
+    [B_TRANSITION_FULLSCREEN_WAVE]       = BT_Phase2FullScreenWave,
+    [B_TRANSITION_BLACK_WAVE_TO_RIGHT]   = BT_Phase2BlackWaveToRight,
+    [B_TRANSITION_SLICED_SCREEN]         = BT_Phase2SlicedScreen,
+    [B_TRANSITION_WHITEFADE_IN_STRIPES]  = BT_Phase2WhiteFadeInStripes,
+    [B_TRANSITION_GRID_SQUARES]          = BT_Phase2GridSquares,
+    [B_TRANSITION_BLACK_DOODLES]         = BT_Phase2BlackDoodles,
+    [B_TRANSITION_LORELEI]               = BT_Phase2StartLoreleiMugshot,
+    [B_TRANSITION_BRUNO]                 = BT_Phase2StartBrunoMugshot,
+    [B_TRANSITION_AGATHA]                = BT_Phase2StartAgathaMugshot,
+    [B_TRANSITION_LANCE]                 = BT_Phase2StartLanceMugshot,
+    [B_TRANSITION_BLUE]                  = BT_Phase2StartBlueMugshot,
+    [B_TRANSITION_ANTI_CLOCKWISE_SPIRAL] = BT_Phase2AntiClockwiseSpiral,
 };
 
 static const TransitionStateFunc sBT_MainPhases[] =
@@ -1487,174 +1487,176 @@ static void VBCB_BT_Phase2BlackWaveToRight(void)
 #undef tOffset
 #undef tTheta
 
+// Unused
+
 static void BT_Phase2AntiClockwiseSpiral(u8 taskId)
 {
     while (sBT_Phase2AntiClockwiseSpiralFuncs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
+static void BT_AntiClockwiseSpiral_DoUpdateFrame(s16 initRadius, s16 deltaAngleMax, u8 offsetMaybe)
 {
     u8 theta = 0;
-    s16 i, r0, r8;
-    s16 res1, res2, res3, res4;
+    s16 i, amplitude1, amplitude2;
+    s16 y1, x1, y2, x2;
 
     for (i = 320; i < 960; ++i)
         gScanlineEffectRegBuffers[1][i] = 120;
 
-    for (i = 0; i < (a2 * 16); ++i, ++theta)
+    for (i = 0; i < (deltaAngleMax * 16); ++i, ++theta)
     {
-        r0 = a1 + (theta >> 3);
+        amplitude1 = initRadius + (theta >> 3);
         if ((theta >> 3) != ((theta + 1) >> 3))
         {
-            r8 = r0 + 1;
+            amplitude2 = amplitude1 + 1;
         }
         else
         {
-            r8 = r0;
+            amplitude2 = amplitude1;
         }
 
-        res1 = 80 - Sin(theta, r0);
-        res2 = Cos(theta, r0) + 120;
-        res3 = 80 - Sin(theta + 1, r8);
-        res4 = Cos(theta + 1, r8) + 120;
+        y1 = 80 - Sin(theta, amplitude1);
+        x1 = Cos(theta, amplitude1) + 120;
+        y2 = 80 - Sin(theta + 1, amplitude2);
+        x2 = Cos(theta + 1, amplitude2) + 120;
 
-        if (res1 < 0 && res3 < 0)
+        if (y1 < 0 && y2 < 0)
             continue;
-        if (res1 > 159 && res3 > 159)
+        if (y1 > 159 && y2 > 159)
             continue;
 
-        if (res1 < 0)
-            res1 = 0;
-        if (res1 > 159)
-            res1 = 159;
-        if (res2 < 0)
-            res2 = 0;
-        if (res2 > 255)
-            res2 = 255;
-        if (res3 < 0)
-            res3 = 0;
-        if (res3 > 159)
-            res3 = 159;
-        if (res4 < 0)
-            res4 = 0;
-        if (res4 > 255)
-            res4 = 255;
+        if (y1 < 0)
+            y1 = 0;
+        if (y1 > 159)
+            y1 = 159;
+        if (x1 < 0)
+            x1 = 0;
+        if (x1 > 255)
+            x1 = 255;
+        if (y2 < 0)
+            y2 = 0;
+        if (y2 > 159)
+            y2 = 159;
+        if (x2 < 0)
+            x2 = 0;
+        if (x2 > 255)
+            x2 = 255;
 
-        res3 -= res1;
+        y2 -= y1;
 
         if (theta >= 64 && theta < 192)
         {
-            gScanlineEffectRegBuffers[1][res1 + 320] = res2;
+            gScanlineEffectRegBuffers[1][y1 + 320] = x1;
 
-            if (res3 == 0)
+            if (y2 == 0)
                 continue;
 
-            res4 -= res2;
-            if (res4 < -1 && res2 > 1)
-                --res2;
-            else if (res4 > 1 && res2 < 255)
-                ++res2;
+            x2 -= x1;
+            if (x2 < -1 && x1 > 1)
+                --x1;
+            else if (x2 > 1 && x1 < 255)
+                ++x1;
 
-            if (res3 < 0)
-                for (; res3 < 0; res3++)
-                    gScanlineEffectRegBuffers[1][res1 + res3 + 320] = res2;
+            if (y2 < 0)
+                for (; y2 < 0; y2++)
+                    gScanlineEffectRegBuffers[1][y1 + y2 + 320] = x1;
             else
-                for (; res3 > 0; res3--)
-                    gScanlineEffectRegBuffers[1][res1 + res3 + 320] = res2;
+                for (; y2 > 0; y2--)
+                    gScanlineEffectRegBuffers[1][y1 + y2 + 320] = x1;
         }
         else
         {
-            gScanlineEffectRegBuffers[1][res1 + 480] = res2;
+            gScanlineEffectRegBuffers[1][y1 + 480] = x1;
 
-            if (res3 == 0)
+            if (y2 == 0)
                 continue;
 
-            res4 -= res2;
-            if (res4 < -1 && res2 > 1)
-                --res2;
-            else if (res4 > 1 && res2 < 255)
-                ++res2;
+            x2 -= x1;
+            if (x2 < -1 && x1 > 1)
+                --x1;
+            else if (x2 > 1 && x1 < 255)
+                ++x1;
 
-            if (res3 < 0)
-                for (; res3 < 0; res3++)
-                    gScanlineEffectRegBuffers[1][res1 + res3 + 480] = res2;
+            if (y2 < 0)
+                for (; y2 < 0; y2++)
+                    gScanlineEffectRegBuffers[1][y1 + y2 + 480] = x1;
             else
-                for (; res3 > 0; res3--)
-                    gScanlineEffectRegBuffers[1][res1 + res3 + 480] = res2;
+                for (; y2 > 0; y2--)
+                    gScanlineEffectRegBuffers[1][y1 + y2 + 480] = x1;
         }
     }
 
-    if (a3 == 0 || a2 % 4 == 0)
+    if (offsetMaybe == 0 || deltaAngleMax % 4 == 0)
     {
         for (i = 0; i < 160; i++)
         {
-            gScanlineEffectRegBuffers[1][i * 2 + a3] = gScanlineEffectRegBuffers[1][i + 320] << 8 | gScanlineEffectRegBuffers[1][i + 480];
+            gScanlineEffectRegBuffers[1][i * 2 + offsetMaybe] = gScanlineEffectRegBuffers[1][i + 320] << 8 | gScanlineEffectRegBuffers[1][i + 480];
         }
         return;
     }
 
-    res1 = Sin(a2 * 16, a1 + (a2 << 1));
+    y1 = Sin(deltaAngleMax * 16, initRadius + (deltaAngleMax << 1));
 
-    switch (a2 / 4)
+    switch (deltaAngleMax / 4)
     {
     case 0:
-        if (res1 > 80)
-            res1 = 80;
-        for (i = res1; i > 0; i--)
+        if (y1 > 80)
+            y1 = 80;
+        for (i = y1; i > 0; i--)
         {
-            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-            if (res2 < 0 || res2 > 255)
+            sTransitionStructPtr->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + 120;
+            if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionStructPtr->bg123HOfs = 400 - i;
             sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
-            if (gScanlineEffectRegBuffers[1][560 - i] < res2)
+            if (gScanlineEffectRegBuffers[1][560 - i] < x1)
                 gScanlineEffectRegBuffers[1][560 - i] = 120;
-            else if (gScanlineEffectRegBuffers[1][400 - i] < res2)
-                gScanlineEffectRegBuffers[1][400 - i] = res2;
+            else if (gScanlineEffectRegBuffers[1][400 - i] < x1)
+                gScanlineEffectRegBuffers[1][400 - i] = x1;
         }
         break;
     case 1:
-        if (res1 > 80)
-            res1 = 80;
-        for (i = res1; i > 0; i--)
+        if (y1 > 80)
+            y1 = 80;
+        for (i = y1; i > 0; i--)
         {
-            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-            if (res2 < 0 || res2 > 255)
+            sTransitionStructPtr->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + 120;
+            if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionStructPtr->bg123HOfs = 400 - i;
             sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
-            if (gScanlineEffectRegBuffers[1][400 - i] < res2)
-                gScanlineEffectRegBuffers[1][400 - i] = res2;
+            if (gScanlineEffectRegBuffers[1][400 - i] < x1)
+                gScanlineEffectRegBuffers[1][400 - i] = x1;
         }
         break;
     case 2:
-        if (res1 < -79)
-            res1 = -79;
-        for (i = res1; i <= 0; i++)
+        if (y1 < -79)
+            y1 = -79;
+        for (i = y1; i <= 0; i++)
         {
-            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-            if (res2 < 0 || res2 > 255)
+            sTransitionStructPtr->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + 120;
+            if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionStructPtr->bg123HOfs = 560 - i;
             sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
-            if (gScanlineEffectRegBuffers[1][400 - i] >= res2)
+            if (gScanlineEffectRegBuffers[1][400 - i] >= x1)
                 gScanlineEffectRegBuffers[1][400 - i] = 120;
-            else if (gScanlineEffectRegBuffers[1][560 - i] > res2)
-                gScanlineEffectRegBuffers[1][560 - i] = res2;
+            else if (gScanlineEffectRegBuffers[1][560 - i] > x1)
+                gScanlineEffectRegBuffers[1][560 - i] = x1;
         }
         break;
     case 3:
-        if (res1 < -79)
-            res1 = -79;
-        for (i = res1; i <= 0; i++)
+        if (y1 < -79)
+            y1 = -79;
+        for (i = y1; i <= 0; i++)
         {
-            sTransitionStructPtr->data[2] = res2 = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-            if (res2 < 0 || res2 > 255)
+            sTransitionStructPtr->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + 120;
+            if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionStructPtr->bg123HOfs = 560 - i;
             sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][560 - i];
-            if (gScanlineEffectRegBuffers[1][560 - i] > res2)
-                gScanlineEffectRegBuffers[1][560 - i] = res2;
+            if (gScanlineEffectRegBuffers[1][560 - i] > x1)
+                gScanlineEffectRegBuffers[1][560 - i] = x1;
         }
         break;
     default:
@@ -1663,7 +1665,7 @@ static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
 
     for (i = 0; i < 160; i++)
     {
-        gScanlineEffectRegBuffers[1][i * 2 + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
+        gScanlineEffectRegBuffers[1][i * 2 + offsetMaybe] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
     }
 }
 
@@ -1677,8 +1679,8 @@ static bool8 BT_Phase2AntiClockwiseSpiral_Init(struct Task *task)
     sTransitionStructPtr->win0V = WIN_RANGE(0x30, 0x70);
     sTransitionStructPtr->win1V = WIN_RANGE(0x10, 0x90);
     sTransitionStructPtr->counter = 0;
-    sub_80D1F64(0, 0, FALSE);
-    sub_80D1F64(0, 0, TRUE);
+    BT_AntiClockwiseSpiral_DoUpdateFrame(0, 0, 0);
+    BT_AntiClockwiseSpiral_DoUpdateFrame(0, 0, 1);
     DmaCopy16(3, gScanlineEffectRegBuffers[1], gScanlineEffectRegBuffers[0], 640);
     SetVBlankCallback(VBCB_BT_Phase2AntiClockwiseBlackFade);
     ++task->tState;
@@ -1689,30 +1691,30 @@ static bool8 BT_Phase2AntiClockwiseSpiral_Init(struct Task *task)
 
 static bool8 BT_Phase2AntiClockwiseSpiral_Update(struct Task *task)
 {
-    s16 v0, v1;
+    s16 win_top, win_bottom;
 
-    sub_80D1F64(task->data[2], task->data[1], TRUE);
+    BT_AntiClockwiseSpiral_DoUpdateFrame(task->data[2], task->data[1], 1);
     sTransitionStructPtr->vblankDma |= TRUE;
     if (++task->data[1] == 17)
     {
-        sub_80D1F64(task->data[2], 16, FALSE);
-        v0 = 48 - task->data[2];
-        if (v0 < 0)
-            v0 = 0;
-        v1 = task->data[2] + 112;
-        if (v1 > 255)
-            v1 = 255;
-        sTransitionStructPtr->win0V = v0 | v1;
+        BT_AntiClockwiseSpiral_DoUpdateFrame(task->data[2], 16, 0);
+        win_top = 48 - task->data[2];
+        if (win_top < 0)
+            win_top = 0;
+        win_bottom = task->data[2] + 112;
+        if (win_bottom > 255)
+            win_bottom = 255;
+        sTransitionStructPtr->win0V = win_top | win_bottom; // UB: win_top should be shifted
         task->data[2] += 32;
         task->data[1] = 0;
-        sub_80D1F64(task->data[2], 0, TRUE);
-        v0 = 48 - task->data[2];
-        if (v0 < 0)
-            v0 = 0;
-        v1 = task->data[2] + 112;
-        if (v1 > 255)
-            v1 = 255;
-        sTransitionStructPtr->win1V = v0 | v1;
+        BT_AntiClockwiseSpiral_DoUpdateFrame(task->data[2], 0, 1);
+        win_top = 48 - task->data[2];
+        if (win_top < 0)
+            win_top = 0;
+        win_bottom = task->data[2] + 112;
+        if (win_bottom > 255)
+            win_bottom = 255;
+        sTransitionStructPtr->win1V = win_top | win_bottom; // UB: win_top should be shifted
         sTransitionStructPtr->vblankDma |= TRUE;
         if (task->data[2] > 159)
         {
@@ -2684,7 +2686,7 @@ static bool8 BT_Phase1_FadeIn(struct Task *task)
 static void BT_InitCtrlBlk(void)
 {
     memset(sTransitionStructPtr, 0, sizeof(*sTransitionStructPtr));
-    sub_805A658(&sTransitionStructPtr->bg123HOfs, &sTransitionStructPtr->bg123VOfs);
+    FieldCameraGetPixelOffsetAtGround(&sTransitionStructPtr->bg123HOfs, &sTransitionStructPtr->bg123VOfs);
 }
 
 static void BT_VBSyncOamAndPltt(void)

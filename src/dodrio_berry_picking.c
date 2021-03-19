@@ -804,7 +804,7 @@ static void sub_8151488(void)
     switch (gUnknown_203F3E0->unk10)
     {
     case 0:
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         sub_81549D4(7);
         gUnknown_203F3E0->unk10++;
         break;

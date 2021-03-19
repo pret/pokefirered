@@ -1317,7 +1317,7 @@ static bool32 sub_8148D5C(void)
     case 4:
         if (!gPaletteFade.active)
         {
-            Link_TryStartSend5FFF();
+            SetCloseLinkCallback();
             gUnknown_203F3D4->unkA++;
         }
         break;

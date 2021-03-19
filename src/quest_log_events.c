@@ -425,7 +425,7 @@ static bool8 TrySetTrainerBattleQuestLogEvent(u16 eventId, const u16 *eventData)
     return TRUE;
 }
 
-void sub_81139BC(void)
+void QuestLogEvents_HandleEndTrainerBattle(void)
 {
     if (sDeferredEvent.id != QL_EVENT_0)
     {

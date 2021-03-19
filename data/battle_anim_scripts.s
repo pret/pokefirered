@@ -10557,7 +10557,7 @@ General_SubstituteAppear:: @ 81D5C04
 	end
 
 General_BaitThrow:: @ 81D5C0C
-	createvisualtask sub_80F1C8C, 2, 0
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
 	createvisualtask AnimTask_LoadBaitGfx, 2, 
 	delay 0
 	waitplaysewithpan SE_M_JUMP_KICK, 192, 22
@@ -10898,7 +10898,7 @@ General_WishHeal:: @ 81D6250
 	end
 
 General_MonScared:: @ 81D628A
-	createvisualtask sub_80F1C8C, 2, 1
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_SWEAT_BEAD
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, 2, 0, 10, 26336
@@ -10915,7 +10915,7 @@ General_MonScared:: @ 81D628A
 	end
 
 General_GhostGetOut:: @ 81D6301
-	createvisualtask sub_80F1C8C, 2, 1
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
 	waitforvisualfinish
 	fadetobg 2
 	waitbgfadeout
@@ -10950,7 +10950,7 @@ General_SilphScoped:: @ 81D637B
 	end
 
 General_SafariRockThrow:: @ 81D6394
-	createvisualtask sub_80F1C8C, 2, 0
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_ROCKS
 	loadspritegfx ANIM_TAG_IMPACT
@@ -10970,14 +10970,14 @@ General_SafariRockThrow:: @ 81D6394
 	end
 
 General_SafariReaction:: @ 81D63DC
-	createvisualtask sub_80F1CE4, 2, 
+	createvisualtask AnimTask_SafariGetReaction, 2, 
 	waitforvisualfinish
-	jumpargeq 7, 0, gUnknown_81D63FD
-	jumpargeq 7, 1, gUnknown_81D6425
-	jumpargeq 7, 2, gUnknown_81D644E
+	jumpargeq 7, 0, SafariReaction_WatchingCarefully
+	jumpargeq 7, 1, SafariReaction_Angry
+	jumpargeq 7, 2, SafariReaction_Eating
 	end
 
-gUnknown_81D63FD:: @ 81D63FD
+SafariReaction_WatchingCarefully:: @ 81D63FD
 	playsewithpan SE_M_TAKE_DOWN, 63
 	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 96, 0, 2
 	waitforvisualfinish
@@ -10985,7 +10985,7 @@ gUnknown_81D63FD:: @ 81D63FD
 	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, -96, 0, 2
 	end
 
-gUnknown_81D6425:: @ 81D6425
+SafariReaction_Angry:: @ 81D6425
 	loadspritegfx ANIM_TAG_ANGER
 	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, 20, -20
 	playsewithpan SE_M_SWAGGER2, 63
@@ -10995,7 +10995,7 @@ gUnknown_81D6425:: @ 81D6425
 	playsewithpan SE_M_SWAGGER2, 63
 	end
 
-gUnknown_81D644E:: @ 81D644E
+SafariReaction_Eating:: @ 81D644E
 	playsewithpan SE_M_TAKE_DOWN, 63
 	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
 	waitforvisualfinish

@@ -45,10 +45,10 @@ void SetUpBattleVars(void)
 {
     s32 i;
 
-    gBattleMainFunc = nullsub_12;
+    gBattleMainFunc = BattleDummy;
     for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
-        gBattlerControllerFuncs[i] = nullsub_13;
+        gBattlerControllerFuncs[i] = PlayerDummy;
         gBattlerPositions[i] = 0xFF;
         gActionSelectionCursor[i] = 0;
         gMoveSelectionCursor[i] = 0;
@@ -62,7 +62,7 @@ void SetUpBattleVars(void)
     gUnknown_2023DDC = 0;
 }
 
-void sub_800D30C(void)
+void InitBtlControllers(void)
 {
     s32 i;
 
@@ -481,7 +481,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
     }
 }
 
-void sub_800DD28(void)
+void TryReceiveLinkBattleData(void)
 {
     u8 i;
     s32 j;
@@ -748,7 +748,7 @@ void BtlController_EmitPrintString(u8 bufferId, u16 stringID)
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.battler;
-    stringInfo->unk1605E = gBattleStruct->field_52;
+    stringInfo->bakScriptPartyIdx = gBattleStruct->scriptPartyIdx;
     stringInfo->hpScale = gBattleStruct->hpScale;
     stringInfo->itemEffectBattler = gPotentialItemEffectBattler;
     stringInfo->moveType = gBattleMoves[gCurrentMove].type;
@@ -778,7 +778,7 @@ void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringID)
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.battler;
-    stringInfo->unk1605E = gBattleStruct->field_52;
+    stringInfo->bakScriptPartyIdx = gBattleStruct->scriptPartyIdx;
     for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
         stringInfo->abilities[i] = gBattleMons[i].ability;
     for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; ++i)
@@ -1097,13 +1097,13 @@ void BtlController_EmitIntroTrainerBallThrow(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2)
+void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 param)
 {
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
-    sBattleBuffersTransferData[1] = arg2 & 0x7F;
-    sBattleBuffersTransferData[2] = (arg2 & 0x80) >> 7;
+    sBattleBuffersTransferData[1] = param & 0x7F;
+    sBattleBuffersTransferData[2] = (param & 0x80) >> 7;
     sBattleBuffersTransferData[3] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     for (i = 0; i < (s32)(sizeof(struct HpAndStatus) * PARTY_SIZE); ++i)
         sBattleBuffersTransferData[4 + i] = *(i + (u8 *)(hpAndStatus));

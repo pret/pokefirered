@@ -1123,7 +1123,7 @@ void task_add_00_mystery_gift(void)
 void task00_mystery_gift(u8 taskId)
 {
     struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
-    u32 sp0;
+    u32 sp0, flag;
     const u8 * r1;
 
     switch (data->state)
@@ -1291,7 +1291,8 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case  9:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer()))
+        flag = mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer());
+        switch (flag)
         {
         case 0:
             mevent_client_set_param(0);
@@ -1318,7 +1319,8 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 11:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_ThrowAwayWonderCard))
+        flag = mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_ThrowAwayWonderCard);
+        switch (flag)
         {
         case 0:
             if (CheckReceivedGiftFromWonderCard() == TRUE)
@@ -1345,7 +1347,8 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 12:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_HaventReceivedCardsGift))
+        flag = mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_HaventReceivedCardsGift);
+        switch (flag)
         {
         case 0:
             mevent_client_set_param(0);
@@ -1382,12 +1385,6 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 15:
-    {
-        #ifndef NONMATCHING
-            register bool32 flag asm("r1");
-        #else
-            bool32 flag;
-        #endif
         r1 = mevent_message(&sp0, data->IsCardOrNews, data->source, data->prevPromptWindowId);
         if (r1 == NULL)
         {
@@ -1425,7 +1422,6 @@ void task00_mystery_gift(u8 taskId)
             }
         }
         break;
-    }
     case 16:
         if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_CommunicationError))
         {

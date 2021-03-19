@@ -1329,7 +1329,6 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     u8 objectEventId;
     u8 var0;
     u8 elevation;
-    u8 inConnection;
     s16 x;
     s16 y;
     s16 x2;
@@ -1343,9 +1342,8 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     y2 = 0;
     x3 = 0;
     y3 = 0;
-    inConnection = template->inConnection;
     
-    if (inConnection == 0xFF)
+    if (template->inConnection == 0xFF)
     {
         var0 = 1;
         elevation = template->elevation;

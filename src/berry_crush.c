@@ -2171,7 +2171,7 @@ static u32 BerryCrushCommand_GracefulExit(struct BerryCrushGame * game, UNUSED u
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        Link_TryStartSend5FFF();
+        SetCloseLinkCallback();
         break;
     case 2:
         if (gReceivedRemoteLinkPlayers)

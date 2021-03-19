@@ -921,7 +921,7 @@ const struct BerryTree gBlankBerryTree = {};
     berries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX]; \
 })
 
-void sub_809C718(void)
+void InitEnigmaBerry(void)
 {
     s32 i;
 
@@ -933,10 +933,10 @@ void sub_809C718(void)
     gSaveBlock1Ptr->enigmaBerry.checksum = GetEnigmaBerryChecksum(&gSaveBlock1Ptr->enigmaBerry);
 }
 
-void sub_809C794(void)
+void ClearEnigmaBerries(void)
 {
     CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, sizeof(gSaveBlock1Ptr->enigmaBerry));
-    sub_809C718();
+    InitEnigmaBerry();
 }
 
 struct ReceivedEnigmaBerry
@@ -954,7 +954,7 @@ void SetEnigmaBerry(u8 * berry)
     struct ReceivedEnigmaBerry * src2;
     s32 i;
 
-    sub_809C794();
+    ClearEnigmaBerries();
 
     src2 = (struct ReceivedEnigmaBerry *)berry;
     enigmaBerry = &gSaveBlock1Ptr->enigmaBerry;

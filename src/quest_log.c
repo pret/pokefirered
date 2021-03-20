@@ -1074,7 +1074,7 @@ void QuestLog_InitPalettesBackup(void)
 
 void QuestLog_BackUpPalette(u16 offset, u16 size)
 {
-    CpuSet(gPlttBufferUnfaded + offset, sPalettesBackup + offset, size);
+    CpuCopy16(gPlttBufferUnfaded + offset, sPalettesBackup + offset, size * 2);
 }
 
 static bool8 FieldCB2_FinalScene(void)

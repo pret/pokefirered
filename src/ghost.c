@@ -643,7 +643,7 @@ static void sub_80B5AD4(u8 taskId)
         break;
     case 1:
         task->data[14] = (task->data[14] + 16) * 16;
-        CpuSet(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], 0x4000008);
+        CpuCopy32(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], 0x20);
         BlendPalette(task->data[4], 16, 10, RGB(13, 0, 15));
         ++task->data[15];
         break;

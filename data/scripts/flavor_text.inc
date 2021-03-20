@@ -1,99 +1,99 @@
 @ Flavor text for interacting with various background objects
 
-gUnknown_81A7606:: @ 81A7606
-	msgbox gUnknown_81C0DB0, MSGBOX_SIGN
+EventScript_Bookshelf:: @ 81A7606
+	msgbox Text_Bookshelf, MSGBOX_SIGN
 	end
 
-gUnknown_81A760F:: @ 81A760F
-	msgbox gUnknown_81C0DFD, MSGBOX_SIGN
+EventScript_PokeMartShelf:: @ 81A760F
+	msgbox Text_PokeMartShelf, MSGBOX_SIGN
 	end
 
-gUnknown_81A7618:: @ 81A7618
-	msgbox gUnknown_81C0F99, MSGBOX_SIGN
+EventScript_Food:: @ 81A7618
+	msgbox Text_Food, MSGBOX_SIGN
 	end
 
-gUnknown_81A7621:: @ 81A7621
-	msgbox gUnknown_81C12A7, MSGBOX_SIGN
+EventScript_VideoGame:: @ 81A7621
+	msgbox Text_VideoGame, MSGBOX_SIGN
 	end
 
-gUnknown_81A762A:: @ 81A762A
-	msgbox gUnknown_81C10C1, MSGBOX_SIGN
+EventScript_Computer:: @ 81A762A
+	msgbox Text_Computer, MSGBOX_SIGN
 	end
 
-gUnknown_81A7633:: @ 81A7633
-	msgbox gUnknown_81C1273, MSGBOX_SIGN
+EventScript_ImpressiveMachine:: @ 81A7633
+	msgbox Text_ImpressiveMachine, MSGBOX_SIGN
 	end
 
-gUnknown_81A763C:: @ 81A763C
-	msgbox gUnknown_81C0FD8, MSGBOX_SIGN
+EventScript_Blueprints:: @ 81A763C
+	msgbox Text_Blueprints, MSGBOX_SIGN
 	end
 
-gUnknown_81A7645:: @ 81A7645
-	msgbox gUnknown_81C12D6, MSGBOX_SIGN
+EventScript_Burglary:: @ 81A7645
+	msgbox Text_Burglary, MSGBOX_SIGN
 	end
 
-gUnknown_81A764E:: @ 81A764E
-	msgbox gUnknown_81C1300, MSGBOX_SIGN
+EventScript_PlayerFacingTVScreen:: @ 81A764E
+	msgbox Text_PlayerFacingTVScreen, MSGBOX_SIGN
 	end
 
-gUnknown_81A7657:: @ 81A7657
+EventScript_Cabinet:: @ 81A7657
 	msgbox Text_DishesPlatesNeatlyLinedUp, MSGBOX_SIGN
 	end
 
-gUnknown_81A7660:: @ 81A7660
-	msgbox gUnknown_81C0E40, MSGBOX_SIGN
+EventScript_Kitchen:: @ 81A7660
+	msgbox Text_Kitchen, MSGBOX_SIGN
 	end
 
-gUnknown_81A7669:: @ 81A7669
-	msgbox gUnknown_81C0E73, MSGBOX_SIGN
+EventScript_Dresser:: @ 81A7669
+	msgbox Text_Dresser, MSGBOX_SIGN
 	end
 
-gUnknown_81A7672:: @ 81A7672
-	msgbox gUnknown_81C0EAC, MSGBOX_SIGN
+EventScript_Snacks:: @ 81A7672
+	msgbox Text_Snacks, MSGBOX_SIGN
 	end
 
-gUnknown_81A767B:: @ 81A767B
-	msgbox gUnknown_81C101B, MSGBOX_SIGN
+EventScript_Painting:: @ 81A767B
+	msgbox Text_Painting, MSGBOX_SIGN
 	end
 
-gUnknown_81A7684:: @ 81A7684
-	msgbox gUnknown_81C1060, MSGBOX_SIGN
+EventScript_PowerPlantMachine:: @ 81A7684
+	msgbox Text_PowerPlantMachine, MSGBOX_SIGN
 	end
 
-gUnknown_81A768D:: @ 81A768D
-	msgbox gUnknown_81C109C, MSGBOX_SIGN
+EventScript_Telephone:: @ 81A768D
+	msgbox Text_Telephone, MSGBOX_SIGN
 	end
 
-gUnknown_81A7696:: @ 81A7696
-	msgbox gUnknown_81C10FC, MSGBOX_SIGN
+EventScript_AdvertisingPoster:: @ 81A7696
+	msgbox Text_AdvertisingPoster, MSGBOX_SIGN
 	end
 
-gUnknown_81A769F:: @ 81A769F
-	msgbox gUnknown_81C1134, MSGBOX_SIGN
+EventScript_TastyFood:: @ 81A769F
+	msgbox Text_TastyFood, MSGBOX_SIGN
 	end
 
-gUnknown_81A76A8:: @ 81A76A8
-	msgbox gUnknown_81C116E, MSGBOX_SIGN
+EventScript_TrashBin:: @ 81A76A8
+	msgbox Text_TrashBin, MSGBOX_SIGN
 	end
 
-gUnknown_81A76B1:: @ 81A76B1
-	msgbox gUnknown_81C1194, MSGBOX_SIGN
+EventScript_Cup:: @ 81A76B1
+	msgbox Text_Cup, MSGBOX_SIGN
 	end
 
-gUnknown_81A76BA:: @ 81A76BA
-	msgbox gUnknown_81C11BA, MSGBOX_SIGN
+EventScript_PolishedWindow:: @ 81A76BA
+	msgbox Text_PolishedWindow, MSGBOX_SIGN
 	end
 
-gUnknown_81A76C3:: @ 81A76C3
-	msgbox gUnknown_81C11DC, MSGBOX_SIGN
+EventScript_BeautifulSkyWindow:: @ 81A76C3
+	msgbox Text_BeautifulSkyWindow, MSGBOX_SIGN
 	end
 
-gUnknown_81A76CC:: @ 81A76CC
-	msgbox gUnknown_81C1217, MSGBOX_SIGN
+EventScript_BlinkingLights:: @ 81A76CC
+	msgbox Text_BlinkingLights, MSGBOX_SIGN
 	end
 
-gUnknown_81A76D5:: @ 81A76D5
-	msgbox gUnknown_81C124B, MSGBOX_SIGN
+EventScript_NeatlyLinedUpTools:: @ 81A76D5
+	msgbox Text_NeatlyLinedUpTools, MSGBOX_SIGN
 	end
 
 EventScript_PokemartSign:: @ 81A76DE

@@ -1144,7 +1144,7 @@ CableClub_EventScript_EnterWirelessLinkRoom:: @ 81BBF88
 	waitstate
 	end
 
-CableClub_EventScript_81BBFD8:: @ 81BBFD8
+CableClub_EventScript_ShowWirelessCommunicationScreen:: @ 81BBFD8
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_NotReadyYet

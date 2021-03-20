@@ -56,7 +56,7 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior);
 static bool8 TryStartStepCountScript(u16 metatileBehavior);
 static void UpdateHappinessStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
-static bool8 CheckStandardWildEncounter(u32 encounter);
+static bool8 CheckStandardWildEncounter(u32 metatileAttributes);
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection);
 static u8 GetFacingSignpostType(u16 metatileBehvaior, u8 direction);
@@ -195,12 +195,12 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     struct MapPosition position;
     u8 playerDirection;
     u16 metatileBehavior;
-    u32 r8;
+    u32 metatileAttributes;
 
     ResetFacingNpcOrSignPostVars();
     playerDirection = GetPlayerFacingDirection();
     GetPlayerPosition(&position);
-    r8 = MapGridGetMetatileAttributeAt(position.x, position.y, 0xFF);
+    metatileAttributes = MapGridGetMetatileAttributeAt(position.x, position.y, 0xFF);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
     FieldClearPlayerInput(&gInputToStoreInQuestLogMaybe);
@@ -241,7 +241,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
             metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
         }
     }
-    if (input->checkStandardWildEncounter && CheckStandardWildEncounter(r8) == TRUE)
+    if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileAttributes) == TRUE)
     {
         gInputToStoreInQuestLogMaybe.checkStandardWildEncounter = TRUE;
         return TRUE;
@@ -520,57 +520,57 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
         return EventScript_WallTownMap;
     if (MetatileBehavior_IsBookshelf(metatileBehavior) == TRUE)
-        return gUnknown_81A7606;
+        return EventScript_Bookshelf;
     if (MetatileBehavior_IsPokeMartShelf(metatileBehavior) == TRUE)
-        return gUnknown_81A760F;
+        return EventScript_PokeMartShelf;
     if (MetatileBehavior_IsFood(metatileBehavior) == TRUE)
-        return gUnknown_81A7618;
+        return EventScript_Food;
     if (MetatileBehavior_IsImpressiveMachine(metatileBehavior) == TRUE)
-        return gUnknown_81A7633;
+        return EventScript_ImpressiveMachine;
     if (MetatileBehavior_IsBlueprints(metatileBehavior) == TRUE)
-        return gUnknown_81A763C;
+        return EventScript_Blueprints;
     if (MetatileBehavior_IsVideoGame(metatileBehavior) == TRUE)
-        return gUnknown_81A7621;
+        return EventScript_VideoGame;
     if (MetatileBehavior_IsBurglary(metatileBehavior) == TRUE)
-        return gUnknown_81A7645;
+        return EventScript_Burglary;
     if (MetatileBehavior_IsComputer(metatileBehavior) == TRUE)
-        return gUnknown_81A762A;
-    if (MetatileBehavior_IsMBA3(metatileBehavior) == TRUE)
+        return EventScript_Computer;
+    if (MetatileBehavior_IsTrainerTowerMonitor(metatileBehavior) == TRUE)
         return TrainerTower_EventScript_ShowTime;
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
-        return gUnknown_81A764E;
+        return EventScript_PlayerFacingTVScreen;
     if (MetatileBehavior_IsCabinet(metatileBehavior) == TRUE)
-        return gUnknown_81A7657;
+        return EventScript_Cabinet;
     if (MetatileBehavior_IsKitchen(metatileBehavior) == TRUE)
-        return gUnknown_81A7660;
+        return EventScript_Kitchen;
     if (MetatileBehavior_IsDresser(metatileBehavior) == TRUE)
-        return gUnknown_81A7669;
+        return EventScript_Dresser;
     if (MetatileBehavior_IsSnacks(metatileBehavior) == TRUE)
-        return gUnknown_81A7672;
+        return EventScript_Snacks;
     if (MetatileBehavior_IsPainting(metatileBehavior) == TRUE)
-        return gUnknown_81A767B;
+        return EventScript_Painting;
     if (MetatileBehavior_IsPowerPlantMachine(metatileBehavior) == TRUE)
-        return gUnknown_81A7684;
+        return EventScript_PowerPlantMachine;
     if (MetatileBehavior_IsTelephone(metatileBehavior) == TRUE)
-        return gUnknown_81A768D;
+        return EventScript_Telephone;
     if (MetatileBehavior_IsAdvertisingPoster(metatileBehavior) == TRUE)
-        return gUnknown_81A7696;
+        return EventScript_AdvertisingPoster;
     if (MetatileBehavior_IsTastyFood(metatileBehavior) == TRUE)
-        return gUnknown_81A769F;
+        return EventScript_TastyFood;
     if (MetatileBehavior_IsTrashBin(metatileBehavior) == TRUE)
-        return gUnknown_81A76A8;
+        return EventScript_TrashBin;
     if (MetatileBehavior_IsCup(metatileBehavior) == TRUE)
-        return gUnknown_81A76B1;
-    if (MetatileBehavior_ReturnFalse_19(metatileBehavior) == TRUE)
-        return gUnknown_81A76BA;
-    if (MetatileBehavior_ReturnFalse_20(metatileBehavior) == TRUE)
-        return gUnknown_81A76C3;
+        return EventScript_Cup;
+    if (MetatileBehavior_IsPolishedWindow(metatileBehavior) == TRUE)
+        return EventScript_PolishedWindow;
+    if (MetatileBehavior_IsBeautifulSkyWindow(metatileBehavior) == TRUE)
+        return EventScript_BeautifulSkyWindow;
     if (MetatileBehavior_IsBlinkingLights(metatileBehavior) == TRUE)
-        return gUnknown_81A76CC;
-    if (MetatileBehavior_IsMB9F(metatileBehavior) == TRUE)
-        return gUnknown_81A76D5;
-    if (MetatileBehavior_IsPlayerFacingMB_8D(metatileBehavior, direction) == TRUE)
-        return CableClub_EventScript_81BBFD8;
+        return EventScript_BlinkingLights;
+    if (MetatileBehavior_IsIsNeatlyLinedUpTools(metatileBehavior) == TRUE)
+        return EventScript_NeatlyLinedUpTools;
+    if (MetatileBehavior_IsPlayerFacingCableClubWirelessMonitor(metatileBehavior, direction) == TRUE)
+        return CableClub_EventScript_ShowWirelessCommunicationScreen;
     if (MetatileBehavior_IsQuestionnaire(metatileBehavior) == TRUE)
         return EventScript_Questionnaire;
     if (MetatileBehavior_IsPlayerFacingBattleRecords(metatileBehavior, direction) == TRUE)
@@ -737,37 +737,37 @@ void RestartWildEncounterImmunitySteps(void)
     ResetEncounterRateModifiers();
 }
 
-static bool8 CheckStandardWildEncounter(u32 encounter)
+static bool8 CheckStandardWildEncounter(u32 metatileAttributes)
 {
-    return TryStandardWildEncounter(encounter);
+    return TryStandardWildEncounter(metatileAttributes);
 }
 
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection)
 {
-    u8 r4;
+    u8 signpostType;
     const u8 * script;
     if (JOY_HELD(DPAD_LEFT | DPAD_RIGHT))
         return FALSE;
     if (playerDirection == DIR_EAST || playerDirection == DIR_WEST)
         return FALSE;
 
-    r4 = GetFacingSignpostType(metatileBehavior, playerDirection);
-    if (r4 == SIGNPOST_POKECENTER)
+    signpostType = GetFacingSignpostType(metatileBehavior, playerDirection);
+    if (signpostType == SIGNPOST_POKECENTER)
     {
         SetUpWalkIntoSignScript(EventScript_PokecenterSign, playerDirection);
         return TRUE;
     }
-    else if (r4 == SIGNPOST_POKEMART)
+    else if (signpostType == SIGNPOST_POKEMART)
     {
         SetUpWalkIntoSignScript(EventScript_PokemartSign, playerDirection);
         return TRUE;
     }
-    else if (r4 == SIGNPOST_INDIGO_1)
+    else if (signpostType == SIGNPOST_INDIGO_1)
     {
         SetUpWalkIntoSignScript(EventScript_Indigo_UltimateGoal, playerDirection);
         return TRUE;
     }
-    else if (r4 == SIGNPOST_INDIGO_2)
+    else if (signpostType == SIGNPOST_INDIGO_2)
     {
         SetUpWalkIntoSignScript(EventScript_Indigo_HighestAuthority, playerDirection);
         return TRUE;
@@ -777,7 +777,7 @@ static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 m
         script = GetSignpostScriptAtMapPosition(position);
         if (script == NULL)
             return FALSE;
-        if (r4 != SIGNPOST_SCRIPTED)
+        if (signpostType != SIGNPOST_SCRIPTED)
             return FALSE;
         SetUpWalkIntoSignScript(script, playerDirection);
         return TRUE;

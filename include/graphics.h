@@ -4330,7 +4330,7 @@ extern const u32 gSubstituteDollPal[];
 // ice
 extern const u8 gWeatherFogHorizontalTiles[];
 extern const u32 gBattleAnimFogTilemap[];
-extern const u16 gUnknown_83C2CE0[];
+extern const u16 gDefaultWeatherSpritePalette[];
 
 // party_menu
 extern const u32 gPartyMenuPokeball_Gfx[];

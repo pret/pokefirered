@@ -1283,7 +1283,7 @@ static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u1
     if (ts)
     {
         if (!ts->isCompressed)
-            CpuFastSet(ts->tiles, dstBuffer, 8 * size);
+            CpuFastCopy(ts->tiles, dstBuffer, 0x20 * size);
         else
             LZDecompressWram(ts->tiles, dstBuffer);
     }
@@ -1291,7 +1291,7 @@ static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u1
 
 static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapLayout *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
 {
-    u16 * metaTileEntryAddr = mapEntry <= 0x27F ? &((u16*)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16*)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
+    u16 * metaTileEntryAddr = mapEntry < 0x280 ? &((u16*)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16*)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
     buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
     buf1[1] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[1]) << 12) + 4 * offset + 1;
     buf1[32] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[2]) << 12) + 4 * offset + 2;
@@ -1316,7 +1316,7 @@ static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBu
     u8 i, j;
     u8 * buffer = AllocZeroed(0x20);
     u8 * src = AllocZeroed(0x20);
-    CpuFastSet(tileset, buffer, 8);
+    CpuFastCopy(tileset, buffer, 0x20);
     if (metaTile & 1)
     {
         for (i = 0; i < 8; ++i)
@@ -1328,13 +1328,13 @@ static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBu
                 src[(i << 2) + j] = ((value & 0xF) << 4) + ((value & 0xF0) >> 4);
             }
         }
-        CpuFastSet(src, buffer, 8);
+        CpuFastCopy(src, buffer, 0x20);
     }
     if (metaTile & 2)
     {
         for (i = 0; i < 8; ++i)
             memcpy(&src[4 * i], &buffer[4 * (7 - i)], 4);
-        CpuFastSet(src, buffer, 8);
+        CpuFastCopy(src, buffer, 0x20);
     }
     for (i = 0; i < 32; ++i)
     {

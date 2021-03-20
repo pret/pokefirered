@@ -1393,7 +1393,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     struct FieldInput fieldInput;
 
     sub_8112B3C();
-    sub_805BEB8();
+    UpdatePlayerAvatarTransitionState();
     FieldClearPlayerInput(&fieldInput);
     FieldGetPlayerInput(&fieldInput, newKeys, heldKeys);
     FieldInput_HandleCancelSignpost(&fieldInput);
@@ -1419,7 +1419,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     struct FieldInput fieldInput;
 
     sub_8112B3C();
-    sub_805BEB8();
+    UpdatePlayerAvatarTransitionState();
     sub_8111C68();
     FieldClearPlayerInput(&fieldInput);
     fieldInput = gQuestLogFieldInput;

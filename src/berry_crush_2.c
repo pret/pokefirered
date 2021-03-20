@@ -743,7 +743,7 @@ static void BerryCrush_UpdateGameState(struct BerryCrushGame * game)
     u8 i;
 
     for (i = 0; i < game->playerCount; ++i)
-        game->unk68.as_four_players.others[i].unk4.as_2d_bytes[1][5] = 0;
+        game->unk68.as_four_players.others[i].apply.as_2d_bytes[1][5] = 0;
 #endif
     if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00
         || gRecvCmds[0][1] != 2)

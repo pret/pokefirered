@@ -109,9 +109,9 @@ void ResetCyclingRoadChallengeData(void)
 
 u8 GetPlayerAvatarBike(void)
 {
-    if (TestPlayerAvatarFlags(4))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
         return 1;
-    else if (TestPlayerAvatarFlags(2))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
         return 2;
     else
         return 0;

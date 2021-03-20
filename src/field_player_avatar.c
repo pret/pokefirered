@@ -26,13 +26,13 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
 
-static EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;
+static EWRAM_DATA struct ObjectEvent * sPlayerObjectPtr = NULL;
 static EWRAM_DATA u8 sTeleportSavedFacingDirection = DIR_NONE;
 EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
 
 static u8 ObjectEventCB2_NoMovement2(struct ObjectEvent * object, struct Sprite * sprite);
-static bool8 sub_805B528(void);
+static bool8 TryUpdatePlayerSpinDirection(void);
 static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent * playerObjEvent, u8 direction);
 static void npc_clear_strange_bits(struct ObjectEvent * playerObjEvent);
 static bool8 TryDoMetatileBehaviorForcedMovement(void);
@@ -78,17 +78,17 @@ static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent * playerObje
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
 static bool8 player_is_anim_in_certain_ranges(void);
-static bool8 sub_805BF58(void);
+static bool8 player_is_anim_in_certain_ranges__running_state_not_turn(void);
 static void PlayCollisionSoundIfNotFacingWarp(u8 direction);
 static void PlayerGoSpin(u8 direction);
-static void sub_805C2CC(u8 metatileBehavior);
+static void PlayerApplyTileForcedMovement(u8 metatileBehavior);
 static bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y);
-static void sub_805CC40(struct ObjectEvent * playerObjEvent);
+static void HandleWarpArrowSpriteHideShow(struct ObjectEvent * playerObjEvent);
 static void StartStrengthAnim(u8 objectEventId, u8 direction);
 static void Task_BumpBoulder(u8 taskId);
-static bool8 sub_805CD64(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 do_boulder_init(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
 static bool8 do_boulder_dust(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
-static bool8 sub_805CE20(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 do_boulder_finish(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
 static void DoPlayerMatJump(void);
 static void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
 static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task * task, struct ObjectEvent * playerObj);
@@ -136,8 +136,8 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    sub_805CC40(playerObjEvent);
-    if (!gPlayerAvatar.preventStep && !sub_805B528())
+    HandleWarpArrowSpriteHideShow(playerObjEvent);
+    if (!gPlayerAvatar.preventStep && !TryUpdatePlayerSpinDirection())
     {
         if (!TryInterruptObjectEventSpecialAnim(playerObjEvent, direction))
         {
@@ -194,26 +194,26 @@ static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 held
 static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 {
     if (gPlayerAvatar.runningState == MOVING)
-        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FIELD_MOVE;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_CONTROLLABLE;
 }
 
-static bool8 sub_805B528(void)
+static bool8 TryUpdatePlayerSpinDirection(void)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && MetatileBehavior_IsSpinTile(gPlayerAvatar.lastSpinTile))
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED) && MetatileBehavior_IsSpinTile(gPlayerAvatar.lastSpinTile))
     {
-        gUnknown_2036E30 = &gObjectEvents[gPlayerAvatar.objectEventId];
-        if (gUnknown_2036E30->heldMovementFinished)
+        sPlayerObjectPtr = &gObjectEvents[gPlayerAvatar.objectEventId];
+        if (sPlayerObjectPtr->heldMovementFinished)
         {
-            if (MetatileBehavior_IsStopSpinning(gUnknown_2036E30->currentMetatileBehavior))
+            if (MetatileBehavior_IsStopSpinning(sPlayerObjectPtr->currentMetatileBehavior))
             {
                 return FALSE;
             }
-            if (MetatileBehavior_IsSpinTile(gUnknown_2036E30->currentMetatileBehavior))
+            if (MetatileBehavior_IsSpinTile(sPlayerObjectPtr->currentMetatileBehavior))
             {
-                gPlayerAvatar.lastSpinTile = gUnknown_2036E30->currentMetatileBehavior;
+                gPlayerAvatar.lastSpinTile = sPlayerObjectPtr->currentMetatileBehavior;
             }
-            ObjectEventClearHeldMovement(gUnknown_2036E30);
-            sub_805C2CC(gPlayerAvatar.lastSpinTile);
+            ObjectEventClearHeldMovement(sPlayerObjectPtr);
+            PlayerApplyTileForcedMovement(gPlayerAvatar.lastSpinTile);
         }
         return TRUE;
     }
@@ -221,8 +221,8 @@ static bool8 sub_805B528(void)
 }
 
 static const struct {
-    bool8 (*unk0)(u8 metatileBehavior);
-    bool8 (*unk4)(void);
+    bool8 (*check)(u8 metatileBehavior);
+    bool8 (*apply)(void);
 } sForcedMovementFuncs[] = {
     {MetatileBehavior_IsUnknownMovement48, ForcedMovement_Slip},
     {MetatileBehavior_IsIce_2, ForcedMovement_Slip},
@@ -252,37 +252,38 @@ static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
     int i;
     u8 behavior;
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FIELD_MOVE))
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_CONTROLLABLE))
     {
         behavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
-        for (i = 0; sForcedMovementFuncs[i].unk0 != NULL; i++)
+        for (i = 0; sForcedMovementFuncs[i].check != NULL; i++)
         {
-            if (sForcedMovementFuncs[i].unk0(behavior))
+            if (sForcedMovementFuncs[i].check(behavior))
             {
                 gPlayerAvatar.lastSpinTile = behavior;
-                return sForcedMovementFuncs[i].unk4();
+                return sForcedMovementFuncs[i].apply();
             }
         }
-        return sForcedMovementFuncs[i].unk4();
+        return sForcedMovementFuncs[i].apply();
     }
     else
     {
-        for (i = 0; sForcedMovementFuncs[i].unk0 != NULL; i++)
+        // Calls ForcedMovement_None but with extra steps
+        for (i = 0; sForcedMovementFuncs[i].check != NULL; i++)
             ;
-        return sForcedMovementFuncs[i].unk4();
+        return sForcedMovementFuncs[i].apply();
     }
 }
 
 static bool8 ForcedMovement_None(void)
 {
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED)
     {
         struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
         playerObjEvent->facingDirectionLocked = FALSE;
         playerObjEvent->enableAnim = TRUE;
         SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
-        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FISHING;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FORCED;
     }
     return FALSE;
 }
@@ -292,7 +293,7 @@ static u8 DoForcedMovement(u8 direction, MovementAction movementAction)
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u8 collision = CheckForPlayerAvatarCollision(direction);
 
-    playerAvatar->flags |= PLAYER_AVATAR_FLAG_FISHING;
+    playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED;
     if (collision)
     {
         ForcedMovement_None();
@@ -304,7 +305,7 @@ static u8 DoForcedMovement(u8 direction, MovementAction movementAction)
         {
             if (collision == COLLISION_LEDGE_JUMP)
                 PlayerJumpLedge(direction);
-            playerAvatar->flags |= PLAYER_AVATAR_FLAG_FISHING;
+            playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED;
             playerAvatar->runningState = MOVING;
             return 1;
         }
@@ -641,7 +642,7 @@ static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
     }
 }
 
-static bool8 (*const gUnknown_835B828[])(u8) = {
+static bool8 (*const sAcroBikeTrickMetatiles[])(u8) = {
     MetatileBehavior_IsBumpySlope,
     MetatileBehavior_IsIsolatedVerticalRail,
     MetatileBehavior_IsIsolatedHorizontalRail,
@@ -649,7 +650,7 @@ static bool8 (*const gUnknown_835B828[])(u8) = {
     MetatileBehavior_IsHorizontalRail
 };
 
-static const u8 gUnknown_835B83C[] = {
+static const u8 sAcroBikeTrickCollisionTypes[] = {
     COLLISION_WHEELIE_HOP,
     COLLISION_ISOLATED_VERTICAL_RAIL,
     COLLISION_ISOLATED_HORIZONTAL_RAIL,
@@ -661,11 +662,11 @@ static void CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collis
 {
     u8 i;
 
-    for (i = 0; i < NELEMS(gUnknown_835B828); i++)
+    for (i = 0; i < NELEMS(sAcroBikeTrickMetatiles); i++)
     {
-        if (gUnknown_835B828[i](metatileBehavior))
+        if (sAcroBikeTrickMetatiles[i](metatileBehavior))
         {
-            *collision = gUnknown_835B83C[i];
+            *collision = sAcroBikeTrickCollisionTypes[i];
             return;
         }
     }
@@ -677,15 +678,15 @@ void SetPlayerAvatarTransitionFlags(u16 flags)
     DoPlayerAvatarTransition();
 }
 
-static void (*const gUnknown_835B844[])(struct ObjectEvent *) = {
+static void (*const sPlayerAvatarTransitionFuncs[])(struct ObjectEvent *) = {
     [PLAYER_AVATAR_STATE_NORMAL]     = PlayerAvatarTransition_Normal,
     [PLAYER_AVATAR_STATE_MACH_BIKE]  = PlayerAvatarTransition_Bike,
     [PLAYER_AVATAR_STATE_ACRO_BIKE]  = PlayerAvatarTransition_Bike,
     [PLAYER_AVATAR_STATE_SURFING]    = PlayerAvatarTransition_Surfing,
     [PLAYER_AVATAR_STATE_UNDERWATER] = PlayerAvatarTransition_Underwater,
-    [PLAYER_AVATAR_STATE_FIELD_MOVE] = PlayerAvatarTransition_ReturnToField,
-    [PLAYER_AVATAR_STATE_FISHING]    = PlayerAvatarTransition_Dummy,
-    [PLAYER_AVATAR_STATE_WATERING]   = PlayerAvatarTransition_Dummy
+    [PLAYER_AVATAR_STATE_CONTROLLABLE] = PlayerAvatarTransition_ReturnToField,
+    [PLAYER_AVATAR_STATE_FORCED]    = PlayerAvatarTransition_Dummy,
+    [PLAYER_AVATAR_STATE_DASH]   = PlayerAvatarTransition_Dummy
 };
 
 static void DoPlayerAvatarTransition(void)
@@ -695,10 +696,10 @@ static void DoPlayerAvatarTransition(void)
 
     if (flags != 0)
     {
-        for (i = 0; i < NELEMS(gUnknown_835B844); i++, flags >>= 1)
+        for (i = 0; i < NELEMS(sPlayerAvatarTransitionFuncs); i++, flags >>= 1)
         {
             if (flags & 1)
-                gUnknown_835B844[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
+                sPlayerAvatarTransitionFuncs[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
         }
         gPlayerAvatar.transitionFlags = 0;
     }
@@ -735,10 +736,10 @@ static void PlayerAvatarTransition_Underwater(struct ObjectEvent * playerObjEven
 
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent * playerObjEvent)
 {
-    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_FIELD_MOVE;
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_CONTROLLABLE;
 }
 
-void sub_805BEB8(void)
+void UpdatePlayerAvatarTransitionState(void)
 {
     gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
     if (PlayerIsAnimActive())
@@ -750,7 +751,7 @@ void sub_805BEB8(void)
         }
         else
         {
-            if (!sub_805BF58())
+            if (!player_is_anim_in_certain_ranges__running_state_not_turn())
                 gPlayerAvatar.tileTransitionState = T_TILE_CENTER;
         }
     }
@@ -770,7 +771,7 @@ static bool8 player_is_anim_in_certain_ranges(void)
         return FALSE;
 }
 
-static bool8 sub_805BF58(void)
+static bool8 player_is_anim_in_certain_ranges__running_state_not_turn(void)
 {
     if (player_is_anim_in_certain_ranges() && gPlayerAvatar.runningState != TURN_DIRECTION)
         return TRUE;
@@ -813,21 +814,21 @@ static void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
     }
 }
 
-static void sub_805C06C(struct ObjectEvent * objectEvent, u8 movementAction)
+static void QL_TryRecordPlayerStepWithDuration0(struct ObjectEvent * objectEvent, u8 movementAction)
 {
     if (!ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], movementAction))
         QuestLogRecordPlayerStepWithDuration(movementAction, 0);
 }
 
-static void sub_805C0A4(struct ObjectEvent * objectEvent, u8 movementAction)
+static void QL_TryRecordNPCStepWithDuration32(struct ObjectEvent * objectEvent, u8 movementAction)
 {
     if (!ObjectEventSetHeldMovement(objectEvent, movementAction))
         QuestLogRecordNPCStepWithDuration(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, movementAction, 32);
 }
 
-void sub_805C0D4(u8 direction)
+void PlayerGoSlowest(u8 direction)
 {
-    PlayerSetAnimId(sub_8063F2C(direction), 2);
+    PlayerSetAnimId(GetWalkSlowestMovementAction(direction), 2);
 }
 
 void PlayerGoSlow(u8 direction)
@@ -919,17 +920,17 @@ void HandleEnforcedLookDirectionOnPlayerStopMoving(void)
 
 static void PlayerGoSpin(u8 direction)
 {
-    PlayerSetAnimId(sub_80640E4(direction), 3);
+    PlayerSetAnimId(GetSpinMovementAction(direction), 3);
 }
 
-static void sub_805C2CC(u8 metatileBehavior)
+static void PlayerApplyTileForcedMovement(u8 metatileBehavior)
 {
     int i;
 
-    for (i = 0; sForcedMovementFuncs[i].unk0 != NULL; i++)
+    for (i = 0; sForcedMovementFuncs[i].check != NULL; i++)
     {
-        if (sForcedMovementFuncs[i].unk0(metatileBehavior))
-            sForcedMovementFuncs[i].unk4();
+        if (sForcedMovementFuncs[i].check(metatileBehavior))
+            sForcedMovementFuncs[i].apply();
     }
 }
 
@@ -978,12 +979,12 @@ static void PlayerAcroWheelieCollide(u8 direction)
     PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
 }
 
-static void sub_805C408(u8 direction)
+static void PlayerAcroPopWheelie(u8 direction)
 {
     PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-static void sub_805C420(u8 direction)
+static void PlayerAcroWheelieMove(u8 direction)
 {
     PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
 }
@@ -1107,7 +1108,7 @@ u8 GetPlayerAvatarObjectId(void)
     return gPlayerAvatar.spriteId;
 }
 
-void sub_805C774(void)
+void CancelPlayerForcedMovement(void)
 {
     ForcedMovement_None();
 }
@@ -1128,7 +1129,7 @@ void StopPlayerAvatar(void)
 static const u8 sPlayerAvatarGfxIds[][GENDER_COUNT] = {
     [PLAYER_AVATAR_GFX_NORMAL]     = {OBJ_EVENT_GFX_RED_NORMAL,     OBJ_EVENT_GFX_GREEN_NORMAL},
     [PLAYER_AVATAR_GFX_BIKE]       = {OBJ_EVENT_GFX_RED_BIKE,       OBJ_EVENT_GFX_GREEN_BIKE},
-    [PLAYER_AVATAR_GFX_SURF]       = {OBJ_EVENT_GFX_RED_SURF,       OBJ_EVENT_GFX_GREEN_SURF},
+    [PLAYER_AVATAR_GFX_RIDE]       = {OBJ_EVENT_GFX_RED_SURF,       OBJ_EVENT_GFX_GREEN_SURF},
     [PLAYER_AVATAR_GFX_FIELD_MOVE] = {OBJ_EVENT_GFX_RED_FIELD_MOVE, OBJ_EVENT_GFX_GREEN_FIELD_MOVE},
     [PLAYER_AVATAR_GFX_FISH]       = {OBJ_EVENT_GFX_RED_FISH,       OBJ_EVENT_GFX_GREEN_FISH},
     [PLAYER_AVATAR_GFX_VSSEEKER]   = {OBJ_EVENT_GFX_RED_VS_SEEKER,  OBJ_EVENT_GFX_GREEN_VS_SEEKER},
@@ -1226,7 +1227,7 @@ void ClearPlayerAvatarInfo(void)
 
 void SetPlayerAvatarStateMask(u8 flags)
 {
-    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_FISHING | PLAYER_AVATAR_FLAG_FIELD_MOVE);
+    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_FORCED | PLAYER_AVATAR_FLAG_CONTROLLABLE);
     gPlayerAvatar.flags |= flags;
 }
 
@@ -1258,21 +1259,21 @@ u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
 u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
 {
     u8 i;
-    u8 r5 = gPlayerAvatar.flags;
+    u8 flags = gPlayerAvatar.flags;
 
     for (i = 0; i < NELEMS(*sPlayerAvatarGfxToStateFlag); i++)
     {
-        if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & r5)
+        if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & flags)
             return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][0];
     }
     return 0;
 }
 
-void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 b)
+void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 extras)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
 
-    gPlayerAvatar.transitionFlags |= unk | b;
+    gPlayerAvatar.transitionFlags |= unk | extras;
     DoPlayerAvatarTransition();
 }
 
@@ -1305,7 +1306,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = objectEvent->spriteId;
     gPlayerAvatar.gender = gender;
-    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_FIELD_MOVE | PLAYER_AVATAR_FLAG_ON_FOOT);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_CONTROLLABLE | PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
 void SetPlayerInvisibility(bool8 invisible)
@@ -1362,7 +1363,7 @@ static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) = {
     MetatileBehavior_IsEastArrowWarp
 };
 
-static void sub_805CC40(struct ObjectEvent *objectEvent)
+static void HandleWarpArrowSpriteHideShow(struct ObjectEvent *objectEvent)
 {
     s16 x;
     s16 y;
@@ -1383,10 +1384,10 @@ static void sub_805CC40(struct ObjectEvent *objectEvent)
     SetSpriteInvisible(objectEvent->warpArrowSpriteId);
 }
 
-static bool8 (*const gUnknown_835B8A0[])(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj) = {
-    sub_805CD64,
+static bool8 (*const sBoulderTaskSteps[])(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj) = {
+    do_boulder_init,
     do_boulder_dust,
-    sub_805CE20
+    do_boulder_finish
 };
 
 static void StartStrengthAnim(u8 a, u8 b)
@@ -1400,13 +1401,13 @@ static void StartStrengthAnim(u8 a, u8 b)
 
 static void Task_BumpBoulder(u8 taskId)
 {
-    while (gUnknown_835B8A0[gTasks[taskId].data[0]](&gTasks[taskId],
+    while (sBoulderTaskSteps[gTasks[taskId].data[0]](&gTasks[taskId],
                                                      &gObjectEvents[gPlayerAvatar.objectEventId],
                                                      &gObjectEvents[gTasks[taskId].data[1]]))
         ;
 }
 
-static bool8 sub_805CD64(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 do_boulder_init(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
@@ -1421,8 +1422,8 @@ static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject
     {
         ObjectEventClearHeldMovementIfFinished(playerObject);
         ObjectEventClearHeldMovementIfFinished(strengthObject);
-        sub_805C06C(playerObject, GetWalkInPlaceNormalMovementAction((u8)task->data[2]));
-        sub_805C0A4(strengthObject, sub_8063F2C((u8)task->data[2]));
+        QL_TryRecordPlayerStepWithDuration0(playerObject, GetWalkInPlaceNormalMovementAction((u8)task->data[2]));
+        QL_TryRecordNPCStepWithDuration32(strengthObject, GetWalkSlowestMovementAction((u8)task->data[2]));
         gFieldEffectArguments[0] = strengthObject->currentCoords.x;
         gFieldEffectArguments[1] = strengthObject->currentCoords.y;
         gFieldEffectArguments[2] = strengthObject->previousElevation;
@@ -1434,7 +1435,7 @@ static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject
     return FALSE;
 }
 
-static bool8 sub_805CE20(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 do_boulder_finish(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     if (ObjectEventCheckHeldMovementStatus(playerObject)
         && ObjectEventCheckHeldMovementStatus(strengthObject))
@@ -1472,12 +1473,12 @@ static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEv
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         PlaySE(SE_LEDGE);
-        sub_805C06C(objectEvent, GetJumpInPlaceMovementAction(objectEvent->facingDirection));
+        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetJumpInPlaceMovementAction(objectEvent->facingDirection));
         task->data[1]++;
         if (task->data[1] > 1)
         {
             gPlayerAvatar.preventStep = FALSE;
-            gPlayerAvatar.transitionFlags |= PLAYER_AVATAR_FLAG_FIELD_MOVE;
+            gPlayerAvatar.transitionFlags |= PLAYER_AVATAR_FLAG_CONTROLLABLE;
             DestroyTask(FindTaskIdByFunc(DoPlayerAvatarSecretBaseMatJump));
         }
     }
@@ -1522,7 +1523,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct Objec
     {
         u8 direction;
 
-        sub_805C06C(objectEvent, GetFaceDirectionMovementAction(direction = directions[objectEvent->movementDirection - 1]));
+        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetFaceDirectionMovementAction(direction = directions[objectEvent->movementDirection - 1]));
         if (direction == (u8)task->data[1])
             task->data[2]++;
         task->data[0]++;
@@ -1544,7 +1545,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct Objec
 
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        sub_805C06C(objectEvent, actions[task->data[2]]);
+        QL_TryRecordPlayerStepWithDuration0(objectEvent, actions[task->data[2]]);
         task->data[0] = 1;
     }
     return FALSE;
@@ -1554,7 +1555,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct Objec
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        sub_805C06C(objectEvent, sub_8063F2C(GetOppositeDirection(task->data[1])));
+        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetWalkSlowestMovementAction(GetOppositeDirection(task->data[1])));
         ScriptContext2_Disable();
         gPlayerAvatar.preventStep = FALSE;
         DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
@@ -1611,7 +1612,7 @@ static void Task_StopSurfingInit(u8 taskId)
             return;
     }
     sub_80DC44C(playerObjEvent->fieldEffectSpriteId, 2);
-    sub_805C06C(playerObjEvent, sub_80641EC((u8)gTasks[taskId].data[0]));
+    QL_TryRecordPlayerStepWithDuration0(playerObjEvent, sub_80641EC((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
 
@@ -1622,7 +1623,7 @@ static void Task_WaitStopSurfing(u8 taskId)
     if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
         ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_NORMAL));
-        sub_805C06C(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
+        QL_TryRecordPlayerStepWithDuration0(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         UnfreezeObjectEvents();

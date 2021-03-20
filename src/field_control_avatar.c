@@ -105,11 +105,11 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (GetPlayerSpeed() != 4)
         {
-            if ((newKeys & START_BUTTON) && !(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING))
+            if ((newKeys & START_BUTTON) && !(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED))
                 input->pressedStartButton = TRUE;
             if (!QL_IS_PLAYBACK_STATE)
             {
-                if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING))
+                if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED))
                 {
                     if (newKeys & SELECT_BUTTON)
                         input->pressedSelectButton = TRUE;
@@ -625,7 +625,7 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
         return TRUE;
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
         return TRUE;
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
         return TRUE;
     return FALSE;
 }
@@ -655,7 +655,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
 
     UpdateHappinessStepCounter();
 
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
         if (UpdateVsSeekerStepCounter() == TRUE)
         {

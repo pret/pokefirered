@@ -8,6 +8,12 @@
 #define QL_START_NORMAL 1
 #define QL_START_WARP   2
 
+// gGlobalFieldTintMode
+#define QL_TINT_NONE              0
+#define QL_TINT_GRAYSCALE         1
+#define QL_TINT_SEPIA             2
+#define QL_TINT_BACKUP_GRAYSCALE  3
+
 #define QL_IS_PLAYBACK_STATE (gQuestLogState == QL_STATE_PLAYBACK || gQuestLogState == QL_STATE_PLAYBACK_LAST)
 
 #define QL_EVENT_0                              0 // Null

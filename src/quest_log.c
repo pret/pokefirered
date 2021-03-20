@@ -77,7 +77,7 @@ EWRAM_DATA u16 *gUnknown_203AE04 = NULL;
 EWRAM_DATA u16 *sEventRecordingPointer = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE0C[32] = {NULL};
 static EWRAM_DATA void (* sQuestLogCB)(void) = NULL;
-static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
+static EWRAM_DATA u16 *sPalettesBackup = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 sQuestLogCurrentScene = {0};
 static EWRAM_DATA struct QuestLogEntry sQuestLogSceneRecordBuffer[32] = {0};
 EWRAM_DATA u16 sQuestLogCursor = 0;
@@ -121,7 +121,7 @@ static void Task_QuestLogScene_SavedGame(u8);
 static void Task_WaitAtEndOfQuestLog(u8);
 static void Task_EndQuestLog(u8);
 static bool8 sub_81121D8(u8);
-static void sub_811229C(void);
+static void QL_SlightlyDarkenSomePals(void);
 static void TogglePlaybackStateForOverworldLock(u8);
 static void SetUpQuestLogEntry(u8, struct QuestLogEntry *, u16);
 static bool8 RecordHeadAtEndOfEntryOrScriptContext2Enabled(void);
@@ -420,7 +420,7 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
 {
     u8 i;
 
-    sub_811381C();
+    QL_EnableRecordingSteps();
     sNumScenes = 0;
     for (i = 0; i < QUEST_LOG_SCENE_COUNT; i++)
     {
@@ -1066,15 +1066,15 @@ static void QuestLog_WaitFadeAndCancelPlayback(void)
     }
 }
 
-void sub_8111F14(void)
+void QuestLog_InitPalettesBackup(void)
 {
     if (gQuestLogState == QL_STATE_PLAYBACK_LAST)
-        gUnknown_203AE90 = AllocZeroed(0x200 * sizeof(u16));
+        sPalettesBackup = AllocZeroed(PLTT_SIZE);
 }
 
-void sub_8111F38(u16 a0, u16 a1)
+void QuestLog_BackUpPalette(u16 offset, u16 size)
 {
-    CpuSet(gPlttBufferUnfaded + a0, gUnknown_203AE90 + a0, a1);
+    CpuSet(gPlttBufferUnfaded + offset, sPalettesBackup + offset, size);
 }
 
 static bool8 FieldCB2_FinalScene(void)
@@ -1152,7 +1152,7 @@ static void Task_EndQuestLog(u8 taskId)
     case 0:
         gDisableMapMusicChangeOnMapLoad = 0;
         Overworld_PlaySpecialMapMusic();
-        sub_811229C();
+        QL_SlightlyDarkenSomePals();
         FillWindowPixelRect(sQuestLogHeaderWindowIds[0], 0xF, 0, 0, sQuestLogHeaderWindowTemplates[0].width * 8, sQuestLogHeaderWindowTemplates[0].height * 8);
         tState++;
         break;
@@ -1178,13 +1178,13 @@ static void Task_EndQuestLog(u8 taskId)
     default:
         if (sQuestLogCurrentScene.sceneEndMode == 1)
             ShowMapNamePopup(TRUE);
-        CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
-        Free(gUnknown_203AE90);
+        CpuCopy16(sPalettesBackup, gPlttBufferUnfaded, PLTT_SIZE);
+        Free(sPalettesBackup);
         sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
         ClearPlayerHeldMovementAndUnfreezeObjectEvents();
         ScriptContext2_Disable();
         gTextFlags.autoScroll = FALSE;
-        gUnknown_2036E28 = 0;
+        gGlobalFieldTintMode = QL_TINT_NONE;
         DisableWildEncounters(FALSE);
         gHelpSystemEnabled = TRUE;
         DestroyTask(taskId);
@@ -1212,16 +1212,16 @@ static bool8 sub_81121D8(u8 taskId)
     return FALSE;
 }
 
-static void sub_811229C(void)
+static void QL_SlightlyDarkenSomePals(void)
 {
-    u16 *buffer = Alloc(0x400);
-    CpuCopy16(gUnknown_203AE90, buffer, 0x400);
-    sub_807B0C4(gUnknown_203AE90, gUnknown_203AE90, 0xd0);
-    sub_807B0C4(gUnknown_203AE90 + 0x110, gUnknown_203AE90 + 0x110, 0x10);
-    sub_807B0C4(gUnknown_203AE90 + 0x160, gUnknown_203AE90 + 0x160, 0x40);
-    sub_807B0C4(gUnknown_203AE90 + 0x1b0, gUnknown_203AE90 + 0x1b0, 0x50);
-    CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
-    CpuCopy16(buffer, gUnknown_203AE90, 0x400);
+    u16 *buffer = Alloc(PLTT_SIZE);
+    CpuCopy16(sPalettesBackup, buffer, PLTT_SIZE);
+    SlightlyDarkenPalsInWeather(sPalettesBackup, sPalettesBackup, 13 * 16);
+    SlightlyDarkenPalsInWeather(sPalettesBackup + 17 * 16, sPalettesBackup + 17 * 16, 1 * 16);
+    SlightlyDarkenPalsInWeather(sPalettesBackup + 22 * 16, sPalettesBackup + 22 * 16, 4 * 16);
+    SlightlyDarkenPalsInWeather(sPalettesBackup + 27 * 16, sPalettesBackup + 27 * 16, 5 * 16);
+    CpuCopy16(sPalettesBackup, gPlttBufferUnfaded, PLTT_SIZE);
+    CpuCopy16(buffer, sPalettesBackup, PLTT_SIZE);
     Free(buffer);
 }
 

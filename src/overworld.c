@@ -292,8 +292,8 @@ void Overworld_ResetStateAfterFly(void)
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_FLASH_ACTIVE);
-    FlagClear(FLAG_0x808);
-    VarSet(VAR_0x404D, 0);
+    FlagClear(FLAG_QL_DEPARTED);
+    VarSet(VAR_QL_ENTRANCE, 0);
 }
 
 void Overworld_ResetStateAfterTeleport(void)
@@ -306,8 +306,8 @@ void Overworld_ResetStateAfterTeleport(void)
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_FLASH_ACTIVE);
-    FlagClear(FLAG_0x808);
-    VarSet(VAR_0x404D, 0);
+    FlagClear(FLAG_QL_DEPARTED);
+    VarSet(VAR_QL_ENTRANCE, 0);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -320,8 +320,8 @@ void Overworld_ResetStateAfterDigEscRope(void)
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_FLASH_ACTIVE);
-    FlagClear(FLAG_0x808);
-    VarSet(VAR_0x404D, 0);
+    FlagClear(FLAG_QL_DEPARTED);
+    VarSet(VAR_QL_ENTRANCE, 0);
 }
 
 static void Overworld_ResetStateAfterWhitingOut(void)
@@ -334,8 +334,8 @@ static void Overworld_ResetStateAfterWhitingOut(void)
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_FLASH_ACTIVE);
-    FlagClear(FLAG_0x808);
-    VarSet(VAR_0x404D, 0);
+    FlagClear(FLAG_QL_DEPARTED);
+    VarSet(VAR_QL_ENTRANCE, 0);
 }
 
 static void Overworld_ResetStateOnContinue(void)
@@ -1848,7 +1848,7 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
         (*state)++;
         break;
     case 1:
-        sub_8111F14();
+        QuestLog_InitPalettesBackup();
         (*state)++;
         break;
     case 2:
@@ -1865,8 +1865,8 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
         sub_8057114();
         if (gQuestLogState != QL_STATE_PLAYBACK)
         {
-            sub_80CC534();
-            sub_80CC59C();
+            QuestLog_CheckDepartingIndoorsMap();
+            QuestLog_TryRecordDepartedLocation();
         }
         SetHelpContextForMap();
         (*state)++;
@@ -1931,7 +1931,7 @@ static bool32 sub_8056CD8(u8 *state)
     {
     case 0:
         InitOverworldBgs();
-        sub_8111F14();
+        QuestLog_InitPalettesBackup();
         sub_8057024(FALSE);
         sub_8057100();
         sub_8057114();
@@ -1965,7 +1965,7 @@ static bool32 map_loading_iteration_2_link(u8 *state)
         (*state)++;
         break;
     case 1:
-        sub_8111F14();
+        QuestLog_InitPalettesBackup();
         sub_8057024(1);
         (*state)++;
         break;
@@ -2203,7 +2203,7 @@ static void CreateLinkPlayerSprites(void)
 void CB2_SetUpOverworldForQLPlaybackWithWarpExit(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_2036E28 = 1;
+    gGlobalFieldTintMode = QL_TINT_GRAYSCALE;
     ScriptContext1_Init();
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
@@ -2214,7 +2214,7 @@ void CB2_SetUpOverworldForQLPlaybackWithWarpExit(void)
 void CB2_SetUpOverworldForQLPlayback(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gUnknown_2036E28 = 1;
+    gGlobalFieldTintMode = QL_TINT_GRAYSCALE;
     LoadSaveblockMapHeader();
     ScriptContext1_Init();
     ScriptContext2_Disable();
@@ -2243,7 +2243,7 @@ static bool32 LoadMap_QLPlayback(u8 *state)
     case 0:
         InitOverworldBgs();
         FieldClearVBlankHBlankCallbacks();
-        sub_8111F14();
+        QuestLog_InitPalettesBackup();
         sub_81113E4();
         sub_8111438();
         if (GetQuestLogStartType() == QL_START_WARP)
@@ -2316,7 +2316,7 @@ void CB2_EnterFieldFromQuestLog(void)
 {
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
-    gUnknown_2036E28 = 3;
+    gGlobalFieldTintMode = QL_TINT_BACKUP_GRAYSCALE;
     ResetSafariZoneFlag_();
     LoadSaveblockMapHeader();
     LoadSaveblockObjEventScripts();
@@ -2367,10 +2367,10 @@ static bool8 FieldCB2_Credits_WaitFade(void)
         return FALSE;
 }
 
-bool32 Overworld_DoScrollSceneForCredits(u8 *state_p, const struct CreditsOverworldCmd * script, u8 a2)
+bool32 Overworld_DoScrollSceneForCredits(u8 *state_p, const struct CreditsOverworldCmd * script, u8 tintMode)
 {
     sCreditsOverworld_Script = script;
-    gUnknown_2036E28 = a2;
+    gGlobalFieldTintMode = tintMode;
     return SetUpScrollSceneForCredits(state_p, 0);
 }
 

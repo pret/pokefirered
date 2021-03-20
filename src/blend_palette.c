@@ -19,7 +19,7 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor)
     }
 }
 
-void sub_8045314(u16 * palbuff, u16 blend_pal, u32 coefficient, s32 size)
+void BlendPalettesAt(u16 * palbuff, u16 blend_pal, u32 coefficient, s32 size)
 {
     if (coefficient == 16)
     {

@@ -704,7 +704,7 @@ static void Task_OakSpeech5(u8 taskId)
         }
         FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 18);
         CopyBgTilemapBufferToVram(1);
-        sub_8006398(gTasks[taskId].data[5]);
+        DestroyTextCursorSprite(gTasks[taskId].data[5]);
         sOakSpeechResources->unk_0014[0] = RGB_BLACK;
         LoadPalette(sOakSpeechResources->unk_0014, 0, 2);
         gTasks[taskId].data[3] = 32;
@@ -822,7 +822,7 @@ static void Task_OakSpeech7(u8 taskId)
         }
         break;
     case 4:
-        sub_8006398(gTasks[taskId].data[5]);
+        DestroyTextCursorSprite(gTasks[taskId].data[5]);
         PlayBGM(MUS_NEW_GAME_EXIT);
         data[15] = 24;
         gMain.state++;

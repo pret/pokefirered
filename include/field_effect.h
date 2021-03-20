@@ -20,7 +20,7 @@ void FieldCB_FallWarpExit(void);
 void StartEscalatorWarp(u8 metatileBehavior, u8 priority);
 void StartLavaridgeGymB1FWarp(u8 a0);
 void StartLavaridgeGym1FWarp(u8 a0);
-void sub_8083598(u8 a0);
+void ApplyGlobalFieldPaletteTint(u8 paletteIdx);
 void FreeResourcesAndDestroySprite(struct Sprite * sprite, u8 spriteId);
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, bool8 unused);
 void ReturnToFieldFromFlyMapSelect(void);

@@ -147,7 +147,7 @@ void StartWeather(void)
     {
         u8 index = AllocSpritePalette(0x1200);
         CpuCopy32(gUnknown_83C2CE0, &gPlttBufferUnfaded[0x100 + index * 16], 32);
-        sub_8083598(index);
+        ApplyGlobalFieldPaletteTint(index);
         BuildGammaShiftTables();
         gWeatherPtr->altGammaSpritePalIndex = index;
         gWeatherPtr->weatherPicSpritePalIndex = index;
@@ -1154,7 +1154,7 @@ void ResetPreservedPalettesInWeather(void)
     sPaletteGammaTypes = sBasePaletteGammaTypes;
 }
 
-void sub_807B0C4(u16 *palbuf, u16 *unused, u32 size)
+void SlightlyDarkenPalsInWeather(u16 *palbuf, u16 *unused, u32 size)
 {
     switch (gWeatherPtr->currWeather)
     {
@@ -1163,7 +1163,7 @@ void sub_807B0C4(u16 *palbuf, u16 *unused, u32 size)
     case WEATHER_RAIN_THUNDERSTORM:
     case WEATHER_SHADE:
     case WEATHER_DOWNPOUR:
-        sub_8045314(palbuf, RGB_BLACK, 3, size);
+        BlendPalettesAt(palbuf, RGB_BLACK, 3, size);
         break;
     }
 }

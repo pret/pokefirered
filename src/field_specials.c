@@ -1800,10 +1800,10 @@ void SetUsedPkmnCenterQuestLogEvent(void)
 }
 
 static const struct {
-    u16 grp;
-    u16 num;
-    u16 grp2;
-    u16 num2;
+    u16 inside_grp;
+    u16 inside_num;
+    u16 outside_grp;
+    u16 outside_num;
 } sInsideOutsidePairs[51] = {
     [QL_LOCATION_HOME]               = {MAP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP(PALLET_TOWN)},
     [QL_LOCATION_OAKS_LAB]           = {MAP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP(PALLET_TOWN)},
@@ -1858,85 +1858,87 @@ static const struct {
     [QL_LOCATION_CERULEAN_CAVE]      = {MAP(CERULEAN_CAVE_1F),                      MAP(CERULEAN_CITY)}
 };
 
-void sub_80CC534(void)
+void QuestLog_CheckDepartingIndoorsMap(void)
 {
     u8 i;
     for (i = 0; i < NELEMS(sInsideOutsidePairs); i++)
     {
-        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[i].grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[i].num)
+        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[i].inside_grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[i].inside_num)
         {
-            if (VarGet(VAR_0x404D) != QL_LOCATION_ROCKET_HIDEOUT || i != QL_LOCATION_GAME_CORNER)
+            if (VarGet(VAR_QL_ENTRANCE) != QL_LOCATION_ROCKET_HIDEOUT || i != QL_LOCATION_GAME_CORNER)
             {
-                VarSet(VAR_0x404D, i);
-                FlagSet(FLAG_0x808);
+                VarSet(VAR_QL_ENTRANCE, i);
+                FlagSet(FLAG_QL_DEPARTED);
             }
             break;
         }
     }
 }
 
-void sub_80CC59C(void)
+struct QuestLogDepartedData {
+    u8 map_section_id;
+    u8 entrance_id;
+};
+
+void QuestLog_TryRecordDepartedLocation(void)
 {
     s16 x, y;
-    struct {
-        u8 unk0;
-        u8 unk1;
-    } sp0;
-    u16 r5 = VarGet(VAR_0x404D);
-    sp0.unk0 = 0;
-    sp0.unk1 = 0;
-    if (FlagGet(FLAG_0x808))
+    struct QuestLogDepartedData event_buffer;
+    u16 ql_entrance_id = VarGet(VAR_QL_ENTRANCE);
+    event_buffer.map_section_id = 0;
+    event_buffer.entrance_id = 0;
+    if (FlagGet(FLAG_QL_DEPARTED))
     {
-        if (r5 == QL_LOCATION_VIRIDIAN_FOREST_1)
+        if (ql_entrance_id == QL_LOCATION_VIRIDIAN_FOREST_1)
         {
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)))
             {
-                sp0.unk0 = MAPSEC_ROUTE_2;
+                event_buffer.map_section_id = MAPSEC_ROUTE_2;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE))
-                    sp0.unk1 = r5;
+                    event_buffer.entrance_id = ql_entrance_id;
                 else
-                    sp0.unk1 = r5 + 1;
-                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
-                FlagClear(FLAG_0x808);
+                    event_buffer.entrance_id = ql_entrance_id + 1;
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+                FlagClear(FLAG_QL_DEPARTED);
                 return;
             }
         }
-        else if (r5 == QL_LOCATION_LEAGUE_GATE_1)
+        else if (ql_entrance_id == QL_LOCATION_LEAGUE_GATE_1)
         {
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
             {
-                sp0.unk0 = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
+                event_buffer.map_section_id = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[ql_entrance_id].inside_grp, sInsideOutsidePairs[ql_entrance_id].inside_num)->regionMapSectionId;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22))
-                    sp0.unk1 = r5;
+                    event_buffer.entrance_id = ql_entrance_id;
                 else
-                    sp0.unk1 = r5 + 1;
-                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
-                FlagClear(FLAG_0x808);
+                    event_buffer.entrance_id = ql_entrance_id + 1;
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+                FlagClear(FLAG_QL_DEPARTED);
                 return;
             }
         }
-        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[r5].grp2 && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[r5].num2)
+        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[ql_entrance_id].outside_grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[ql_entrance_id].outside_num)
         {
-            sp0.unk0 = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
-            sp0.unk1 = r5;
-            if (r5 == QL_LOCATION_ROCK_TUNNEL_1)
+            event_buffer.map_section_id = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[ql_entrance_id].inside_grp, sInsideOutsidePairs[ql_entrance_id].inside_num)->regionMapSectionId;
+            event_buffer.entrance_id = ql_entrance_id;
+            if (ql_entrance_id == QL_LOCATION_ROCK_TUNNEL_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 15 || y != 26)
-                    sp0.unk1++;
+                    event_buffer.entrance_id++;
             }
-            else if (r5 == QL_LOCATION_SEAFOAM_ISLANDS_1)
+            else if (ql_entrance_id == QL_LOCATION_SEAFOAM_ISLANDS_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 67 || y != 15)
-                    sp0.unk1++;
+                    event_buffer.entrance_id++;
             }
-            SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
-            FlagClear(FLAG_0x808);
-            if (r5 == QL_LOCATION_ROCKET_HIDEOUT)
+            SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+            FlagClear(FLAG_QL_DEPARTED);
+            if (ql_entrance_id == QL_LOCATION_ROCKET_HIDEOUT)
             {
-                VarSet(VAR_0x404D, QL_LOCATION_GAME_CORNER);
-                FlagSet(FLAG_0x808);
+                VarSet(VAR_QL_ENTRANCE, QL_LOCATION_GAME_CORNER);
+                FlagSet(FLAG_QL_DEPARTED);
             }
         }
     }
@@ -2143,7 +2145,7 @@ void DoPokemonLeagueLightingEffect(void)
             LoadPalette(sEliteFourLightingPalettes[0], 0x70, 0x20);
         }
         data[1] = 0;
-        sub_8059948(7, 1);
+        Fieldmap_ApplyGlobalTintToPaletteSlot(7, 1);
     }
 }
 
@@ -2153,7 +2155,7 @@ static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
     if (!gPaletteFade.active
      && FlagGet(FLAG_TEMP_2) != FALSE
      && FlagGet(FLAG_TEMP_5) != TRUE
-     && gUnknown_2036E28 != 3
+     && gGlobalFieldTintMode != QL_TINT_BACKUP_GRAYSCALE
      && --data[0] == 0
     )
     {
@@ -2170,7 +2172,7 @@ static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
             data[0] = sEliteFourLightingTimers[data[1]];
             LoadPalette(sEliteFourLightingPalettes[data[1]], 0x70, 0x20);
         }
-        sub_8059948(7, 1);
+        Fieldmap_ApplyGlobalTintToPaletteSlot(7, 1);
     }
 }
 
@@ -2187,7 +2189,7 @@ static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
         {
             LoadPalette(sEliteFourLightingPalettes[11], 0x70, 0x20);
         }
-        sub_8059948(7, 1);
+        Fieldmap_ApplyGlobalTintToPaletteSlot(7, 1);
         if (gPaletteFade.active)
         {
             BlendPalettes(0x00000080, 16, RGB_BLACK);
@@ -2400,7 +2402,7 @@ static void MoveDeoxysObject(u8 num)
 {
     u8 mapObjId;
     LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
-    sub_8083598(10);
+    ApplyGlobalFieldPaletteTint(10);
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)
         PlaySE(SE_M_CONFUSE_RAY);
@@ -2446,7 +2448,7 @@ void SetDeoxysTrianglePalette(void)
 {
     u8 num = VarGet(VAR_DEOXYS_INTERACTION_NUM);
     LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
-    sub_8083598(10);
+    ApplyGlobalFieldPaletteTint(10);
 }
 
 bool8 IsBadEggInParty(void)
@@ -2481,7 +2483,7 @@ void BrailleCursorToggle(void)
         if (gSpecialVar_0x8006 == 0)
             sBrailleTextCursorSpriteID = CreateTextCursorSpriteForOakSpeech(0, x, gSpecialVar_0x8005, 0, 0);
         else
-            sub_8006398(sBrailleTextCursorSpriteID);
+            DestroyTextCursorSprite(sBrailleTextCursorSpriteID);
     }
 }
 

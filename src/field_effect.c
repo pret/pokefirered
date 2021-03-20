@@ -422,9 +422,9 @@ static void FieldEffectScript_LoadTiles(const u8 **script)
     *script += sizeof(u32);
 }
 
-void sub_8083598(u8 paletteIdx)
+void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 {
-    switch (gUnknown_2036E28)
+    switch (gGlobalFieldTintMode)
     {
     case 0:
         return;
@@ -435,7 +435,7 @@ void sub_8083598(u8 paletteIdx)
         TintPalette_SepiaTone(&gPlttBufferUnfaded[(paletteIdx + 16) * 16], 0x10);
         break;
     case 3:
-        sub_8111F38((paletteIdx + 16) * 16, 0x10);
+        QuestLog_BackUpPalette((paletteIdx + 16) * 16, 0x10);
         TintPalette_GrayScale(&gPlttBufferUnfaded[(paletteIdx + 16) * 16], 0x10);
         break;
     default:
@@ -450,7 +450,7 @@ static void FieldEffectScript_LoadFadedPal(const u8 **script)
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx == 0xFF)
-        sub_8083598(IndexOfSpritePaletteTag(spritePalette->tag));
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(spritePalette->tag));
     *script += sizeof(u32);
 }
@@ -461,7 +461,7 @@ static void FieldEffectScript_LoadPal(const u8 **script)
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx != 0xFF)
-        sub_8083598(IndexOfSpritePaletteTag(spritePalette->tag));
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
     *script += sizeof(u32);
 }
 

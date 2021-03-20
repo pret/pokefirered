@@ -119,7 +119,7 @@ void sub_80AEDBC(void);
 
 void DoCurrentWeather(void);
 void SetSav1WeatherFromCurrMapHeader(void);
-void sub_807B0C4(u16 *, u16 *, u32);
+void SlightlyDarkenPalsInWeather(u16 *, u16 *, u32);
 void PlayRainStoppingSoundEffect(void);
 bool8 IsWeatherNotFadingIn(void);
 void SetWeatherScreenFadeOut(void);

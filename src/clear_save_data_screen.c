@@ -186,24 +186,8 @@ static void CB2_Sub_SaveClearScreen_Init(void)
 static void SaveClearScreen_GpuInit(void)
 {
     DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
-
-#ifndef NONMATCHING
-    asm("":::"ip");
-#endif
-
-    do
-    {
-        void * dest = (void *)OAM;
-        size_t size = OAM_SIZE;
-        DmaClear32(3, dest, size);
-    } while (0);
-
-    do
-    {
-        void * dest = (void *)PLTT;
-        size_t size = PLTT_SIZE;
-        DmaClear16(3, dest, size);
-    } while (0);
+    DmaClear32(3, (void *)OAM, OAM_SIZE);
+    DmaClear16(3, (void *)PLTT, PLTT_SIZE);
 
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);

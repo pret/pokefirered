@@ -127,7 +127,7 @@ static const u8 sBasePaletteGammaTypes[32] = {
     GAMMA_NORMAL,
 };
 
-const u16 gDefaultWeatherSpritePalette[] = INCBIN_U16("graphics/field_effects/unk_83C2CE0.gbapal");
+const u16 gDefaultWeatherSpritePalette[] = INCBIN_U16("graphics/weather/default.gbapal");
 const u16 gCloudsWeatherPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
 const u16 gSandstormWeatherPalette[] = INCBIN_U16("graphics/weather/sandstorm.gbapal");
 const u8 gWeatherFogDiagonalTiles[] = INCBIN_U8("graphics/weather/fog_diagonal.4bpp");
@@ -350,8 +350,8 @@ static void UpdateWeatherGammaShift(void)
 
 static void FadeInScreenWithWeather(void)
 {
-    if (++gWeatherPtr->fade_in_counter > 1)
-        gWeatherPtr->fade_in_active = 0;
+    if (++gWeatherPtr->fadeInCounter > 1)
+        gWeatherPtr->fadeInActive = 0;
 
     switch (gWeatherPtr->currWeather)
     {
@@ -775,8 +775,8 @@ void FadeScreen(u8 mode, s8 delay)
             BeginNormalPaletteFade(0xFFFFFFFF, delay, 16, 0, fadeColor);
 
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
-        gWeatherPtr->fade_in_active = 1;
-        gWeatherPtr->fade_in_counter = 0;
+        gWeatherPtr->fadeInActive = 1;
+        gWeatherPtr->fadeInCounter = 0;
         Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->readyForInit = TRUE;
     }
@@ -843,8 +843,8 @@ void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
             BeginNormalPaletteFade(selectedPalettes, delay, 16, 0, fadeColor);
 
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
-        gWeatherPtr->fade_in_active = 1;
-        gWeatherPtr->fade_in_counter = 0;
+        gWeatherPtr->fadeInActive = 1;
+        gWeatherPtr->fadeInCounter = 0;
         Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->readyForInit = TRUE;
     }
@@ -864,7 +864,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
     switch (gWeatherPtr->palProcessingState)
     {
     case WEATHER_PAL_STATE_SCREEN_FADING_IN:
-        if (gWeatherPtr->fade_in_active != 0)
+        if (gWeatherPtr->fadeInActive != 0)
         {
             if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
                 MarkFogSpritePalToLighten(paletteIndex);
@@ -902,7 +902,7 @@ void ApplyWeatherGammaShiftToPal(u8 paletteIndex)
 static u8 IsWeatherFadingIn(void)
 {
     if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
-        return gWeatherPtr->fade_in_active;
+        return gWeatherPtr->fadeInActive;
     else
         return 0;
 }

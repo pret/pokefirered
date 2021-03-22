@@ -997,9 +997,9 @@ bool8 MetatileBehavior_IsBlinkingLights(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsIsNeatlyLinedUpTools(u8 metatileBehavior)
+bool8 MetatileBehavior_IsNeatlyLinedUpTools(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_9F)
+    if(metatileBehavior == MB_NEATLY_LINED_UP_TOOLS)
         return TRUE;
     else
         return FALSE;
@@ -1031,7 +1031,7 @@ bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_A3)
+    if(metatileBehavior == MB_TRAINER_TOWER_MONITOR)
         return TRUE;
     else
         return FALSE;

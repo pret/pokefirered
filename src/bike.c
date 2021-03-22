@@ -268,11 +268,11 @@ bool32 IsRunningDisallowed(u8 metatileBehavior)
         return TRUE;
 }
 
-static bool8 MetatileBehaviorForbidsBiking(u8 r4)
+static bool8 MetatileBehaviorForbidsBiking(u8 metatileBehavior)
 {
-    if (MetatileBehavior_IsMB0A(r4))
+    if (MetatileBehavior_IsMB0A(metatileBehavior))
         return TRUE;
-    if (!MetatileBehavior_ReturnFalse_9(r4))
+    if (!MetatileBehavior_ReturnFalse_9(metatileBehavior))
         return FALSE;
     if (PlayerGetZCoord() & 1)
         return FALSE;

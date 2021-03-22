@@ -146,7 +146,7 @@ bool8 MetatileBehavior_IsCup(u8 metatileBehavior);
 bool8 MetatileBehavior_IsPolishedWindow(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBeautifulSkyWindow(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBlinkingLights(u8 metatileBehavior);
-bool8 MetatileBehavior_IsIsNeatlyLinedUpTools(u8 metatileBehavior);
+bool8 MetatileBehavior_IsNeatlyLinedUpTools(u8 metatileBehavior);
 bool8 MetatileBehavior_IsImpressiveMachine(u8 metatileBehavior);
 bool8 MetatileBehavior_IsVideoGame(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior);

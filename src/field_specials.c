@@ -1868,7 +1868,7 @@ void QuestLog_CheckDepartingIndoorsMap(void)
             if (VarGet(VAR_QL_ENTRANCE) != QL_LOCATION_ROCKET_HIDEOUT || i != QL_LOCATION_GAME_CORNER)
             {
                 VarSet(VAR_QL_ENTRANCE, i);
-                FlagSet(FLAG_QL_DEPARTED);
+                FlagSet(FLAG_SYS_QL_DEPARTED);
             }
             break;
         }
@@ -1887,7 +1887,7 @@ void QuestLog_TryRecordDepartedLocation(void)
     u16 ql_entrance_id = VarGet(VAR_QL_ENTRANCE);
     event_buffer.map_section_id = 0;
     event_buffer.entrance_id = 0;
-    if (FlagGet(FLAG_QL_DEPARTED))
+    if (FlagGet(FLAG_SYS_QL_DEPARTED))
     {
         if (ql_entrance_id == QL_LOCATION_VIRIDIAN_FOREST_1)
         {
@@ -1899,7 +1899,7 @@ void QuestLog_TryRecordDepartedLocation(void)
                 else
                     event_buffer.entrance_id = ql_entrance_id + 1;
                 SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
-                FlagClear(FLAG_QL_DEPARTED);
+                FlagClear(FLAG_SYS_QL_DEPARTED);
                 return;
             }
         }
@@ -1913,7 +1913,7 @@ void QuestLog_TryRecordDepartedLocation(void)
                 else
                     event_buffer.entrance_id = ql_entrance_id + 1;
                 SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
-                FlagClear(FLAG_QL_DEPARTED);
+                FlagClear(FLAG_SYS_QL_DEPARTED);
                 return;
             }
         }
@@ -1934,11 +1934,11 @@ void QuestLog_TryRecordDepartedLocation(void)
                     event_buffer.entrance_id++;
             }
             SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
-            FlagClear(FLAG_QL_DEPARTED);
+            FlagClear(FLAG_SYS_QL_DEPARTED);
             if (ql_entrance_id == QL_LOCATION_ROCKET_HIDEOUT)
             {
                 VarSet(VAR_QL_ENTRANCE, QL_LOCATION_GAME_CORNER);
-                FlagSet(FLAG_QL_DEPARTED);
+                FlagSet(FLAG_SYS_QL_DEPARTED);
             }
         }
     }

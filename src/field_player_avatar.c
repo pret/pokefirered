@@ -86,9 +86,9 @@ static bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y);
 static void HandleWarpArrowSpriteHideShow(struct ObjectEvent * playerObjEvent);
 static void StartStrengthAnim(u8 objectEventId, u8 direction);
 static void Task_BumpBoulder(u8 taskId);
-static bool8 do_boulder_init(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
-static bool8 do_boulder_dust(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
-static bool8 do_boulder_finish(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 DoBoulderInit(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 DoBoulderDust(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 DoBoulderFinish(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
 static void DoPlayerMatJump(void);
 static void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
 static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task * task, struct ObjectEvent * playerObj);
@@ -679,14 +679,14 @@ void SetPlayerAvatarTransitionFlags(u16 flags)
 }
 
 static void (*const sPlayerAvatarTransitionFuncs[])(struct ObjectEvent *) = {
-    [PLAYER_AVATAR_STATE_NORMAL]     = PlayerAvatarTransition_Normal,
-    [PLAYER_AVATAR_STATE_MACH_BIKE]  = PlayerAvatarTransition_Bike,
-    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = PlayerAvatarTransition_Bike,
-    [PLAYER_AVATAR_STATE_SURFING]    = PlayerAvatarTransition_Surfing,
-    [PLAYER_AVATAR_STATE_UNDERWATER] = PlayerAvatarTransition_Underwater,
+    [PLAYER_AVATAR_STATE_NORMAL]       = PlayerAvatarTransition_Normal,
+    [PLAYER_AVATAR_STATE_MACH_BIKE]    = PlayerAvatarTransition_Bike,
+    [PLAYER_AVATAR_STATE_ACRO_BIKE]    = PlayerAvatarTransition_Bike,
+    [PLAYER_AVATAR_STATE_SURFING]      = PlayerAvatarTransition_Surfing,
+    [PLAYER_AVATAR_STATE_UNDERWATER]   = PlayerAvatarTransition_Underwater,
     [PLAYER_AVATAR_STATE_CONTROLLABLE] = PlayerAvatarTransition_ReturnToField,
-    [PLAYER_AVATAR_STATE_FORCED]    = PlayerAvatarTransition_Dummy,
-    [PLAYER_AVATAR_STATE_DASH]   = PlayerAvatarTransition_Dummy
+    [PLAYER_AVATAR_STATE_FORCED]       = PlayerAvatarTransition_Dummy,
+    [PLAYER_AVATAR_STATE_DASH]         = PlayerAvatarTransition_Dummy
 };
 
 static void DoPlayerAvatarTransition(void)
@@ -1385,9 +1385,9 @@ static void HandleWarpArrowSpriteHideShow(struct ObjectEvent *objectEvent)
 }
 
 static bool8 (*const sBoulderTaskSteps[])(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj) = {
-    do_boulder_init,
-    do_boulder_dust,
-    do_boulder_finish
+    DoBoulderInit,
+    DoBoulderDust,
+    DoBoulderFinish
 };
 
 static void StartStrengthAnim(u8 a, u8 b)
@@ -1407,7 +1407,7 @@ static void Task_BumpBoulder(u8 taskId)
         ;
 }
 
-static bool8 do_boulder_init(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 DoBoulderInit(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
@@ -1415,7 +1415,7 @@ static bool8 do_boulder_init(struct Task *task, struct ObjectEvent *playerObject
     return FALSE;
 }
 
-static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 DoBoulderDust(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     if (!ObjectEventIsMovementOverridden(playerObject)
         && !ObjectEventIsMovementOverridden(strengthObject))
@@ -1435,7 +1435,7 @@ static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject
     return FALSE;
 }
 
-static bool8 do_boulder_finish(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 DoBoulderFinish(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     if (ObjectEventCheckHeldMovementStatus(playerObject)
         && ObjectEventCheckHeldMovementStatus(strengthObject))

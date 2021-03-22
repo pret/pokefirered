@@ -35,8 +35,8 @@ struct Weather
     u8 fadeScreenCounter;
     bool8 readyForInit;
     u8 taskId;
-    u8 fade_in_active;
-    u8 fade_in_counter;
+    u8 fadeInActive;
+    u8 fadeInCounter;
     u16 initStep;
     u16 finishStep;
     u8 currWeather;

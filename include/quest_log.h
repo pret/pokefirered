@@ -6,6 +6,10 @@
 #include "constants/quest_log.h"
 #include "field_control_avatar.h"
 
+// Parameter to QuestLog_OnEscalatorWarp
+#define QL_ESCALATOR_OUT 1
+#define QL_ESCALATOR_IN  2
+
 struct QuestLogEntry
 {
     // When command == 2, these fields have different meanings
@@ -57,9 +61,6 @@ void SetQuestLogRecordAndPlaybackPointers(void *oldSave);
 void sub_811246C(struct Sprite *sprite);
 void QuestLogRecordNPCStep(u8 a0, u8 a1, u8 a2, u8 a3);
 bool8 sub_8111C2C(void);
-
-#define QL_ESCALATOR_OUT 1
-#define QL_ESCALATOR_IN  2
 void QuestLog_OnEscalatorWarp(u8 direction);
 void QuestLogRecordPlayerAvatarGfxTransitionWithDuration(u8 movementActionId, u8 duration);
 void Special_UpdateTrainerFansAfterLinkBattle(void);

@@ -567,7 +567,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_BeautifulSkyWindow;
     if (MetatileBehavior_IsBlinkingLights(metatileBehavior) == TRUE)
         return EventScript_BlinkingLights;
-    if (MetatileBehavior_IsIsNeatlyLinedUpTools(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsNeatlyLinedUpTools(metatileBehavior) == TRUE)
         return EventScript_NeatlyLinedUpTools;
     if (MetatileBehavior_IsPlayerFacingCableClubWirelessMonitor(metatileBehavior, direction) == TRUE)
         return CableClub_EventScript_ShowWirelessCommunicationScreen;

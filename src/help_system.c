@@ -373,10 +373,6 @@ void sub_813C004(u8 a0, u8 mode)
     }
 }
 
-#define HelpSystemHandleRenderGlyph(character) ({\
-    do {DecompressAndRenderGlyph(font, character, &srcBlit, &destBlit, dest, x, y, width, height);} while (0); font;\
-})
-
 #ifdef NONMATCHING
 void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height)
 {
@@ -402,16 +398,20 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             return;
         case PLACEHOLDER_BEGIN:
             curChar = *src++;
-            if (curChar == 1) {
+            if (curChar == PLACEHOLDER_ID_PLAYER) {
                 for (i = 0; i < 10; i++)
                 {
                     if (gSaveBlock2Ptr->playerName[i] == EOS)
                         break;
-                    HelpSystemHandleRenderGlyph(gSaveBlock2Ptr->playerName[i]);
-                    x += gGlyphInfo[0x80];
+                    DecompressAndRenderGlyph(font, gSaveBlock2Ptr->playerName[i], &srcBlit, &destBlit, dest, x, y, width, height);
+                    // This is required to match a dummy [sp+#0x24] read here
+                    if (font == 0)
+                        x += gGlyphInfo[0x80];
+                    else
+                        x += gGlyphInfo[0x80];
                 }
             }
-            else if (curChar == 2)
+            else if (curChar == PLACEHOLDER_ID_STRING_VAR_1)
             {
                 for (i = 0; ; i++)
                 {
@@ -419,15 +419,18 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                     {
                         if (gString_Bill[i] == EOS)
                             break;
-                        HelpSystemHandleRenderGlyph(gString_Bill[i]);
+                        DecompressAndRenderGlyph(font, gString_Bill[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     }
                     else
                     {
                         if (gString_Someone[i] == EOS)
                             break;
-                        HelpSystemHandleRenderGlyph(gString_Someone[i]);
+                        DecompressAndRenderGlyph(font, gString_Someone[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     }
-                    x += gGlyphInfo[0x80];
+                    if (font == 0)
+                        x += gGlyphInfo[0x80];
+                    else
+                        x += gGlyphInfo[0x80];
                 }
             }
             break;
@@ -441,47 +444,47 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             curChar = *src++;
             switch (curChar)
             {
-            case 4:
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 src++;
                 //fallthrough
-            case 11:
-            case 16:
+            case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_SE:
                 src++;
                 //fallthrough
-            case 1:
-            case 2:
-            case 3:
-            case 5:
-            case 6:
-            case 8:
-            case 12:
-            case 13:
-            case 14:
+            case EXT_CTRL_CODE_COLOR:
+            case EXT_CTRL_CODE_HIGHLIGHT:
+            case EXT_CTRL_CODE_SHADOW:
+            case EXT_CTRL_CODE_PALETTE:
+            case EXT_CTRL_CODE_FONT:
+            case EXT_CTRL_CODE_PAUSE:
+            case EXT_CTRL_CODE_ESCAPE:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
                 src++;
                 break;
-            case 19:
+            case EXT_CTRL_CODE_CLEAR_TO:
                 clearPixels = *src + orig_x - x;
                 if (clearPixels > 0)
                 {
                     destBlit.pixels = dest;
                     destBlit.width = width * 8;
                     destBlit.height = height * 8;
-                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, 1), 0);
+                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, FONTATTR_MAX_LETTER_HEIGHT), 0);
                     x += clearPixels;
                 }
                 src++;
                 break;
-            case 17:
-            case 18:
-            case 20:
+            case EXT_CTRL_CODE_CLEAR:
+            case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 src++;
                 break;
-            case 7:
-            case 9:
-            case 10:
-            case 15:
-            case 21:
-            case 22:
+            case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
                 break;
             }
             break;
@@ -509,8 +512,11 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             }
             else
             {
-                HelpSystemHandleRenderGlyph(curChar);
-                x += gGlyphInfo[0x80];
+                DecompressAndRenderGlyph(font, curChar, &srcBlit, &destBlit, dest, x, y, width, height);
+                if (font == 0)
+                    x += gGlyphInfo[0x80];
+                else
+                    x += gGlyphInfo[0x80];
             }
             break;
         }
@@ -1068,7 +1074,7 @@ void sub_813C75C(void)
 
 void PrintListMenuItems(void)
 {
-    u8 glyphHeight = GetFontAttribute(2, 1) + 1;
+    u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     s32 i;
     s32 r5 = gHelpSystemListMenu.itemsAbove;
 
@@ -1083,7 +1089,7 @@ void PrintListMenuItems(void)
 
 void PlaceListMenuCursor(void)
 {
-    u8 glyphHeight = GetFontAttribute(2, 1) + 1;
+    u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
     u8 y = gHelpSystemListMenu.sub.top + glyphHeight * gHelpSystemListMenu.cursorPos;
     HelpSystem_PrintTextAt(gText_SelectorArrow2, x, y);
@@ -1091,7 +1097,7 @@ void PlaceListMenuCursor(void)
 
 void sub_813C860(u8 i)
 {
-    u8 glyphHeight = GetFontAttribute(2, 1) + 1;
+    u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
     u8 y = gHelpSystemListMenu.sub.top + i * glyphHeight;
     HelpSystem_PrintTextAt(gString_HelpSystem_ClearTo8, x, y);

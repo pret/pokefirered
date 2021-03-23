@@ -2399,23 +2399,23 @@ bool8 HelpMenuSubroutine_HelpItemPrint(struct HelpSystemListMenu * helpListMenu,
 
     if (gHelpSystemState.topic == TOPIC_WHAT_TO_DO)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemSpecializedQuestionTextPtrs[gHelpSystemState.scrollSub], sHelpSystemSpecializedAnswerTextPtrs[gHelpSystemState.scrollSub]);
+        HelpSystem_PrintQuestionAndAnswerPair(sHelpSystemSpecializedQuestionTextPtrs[gHelpSystemState.scrollSub], sHelpSystemSpecializedAnswerTextPtrs[gHelpSystemState.scrollSub]);
     }
     else if (gHelpSystemState.topic == TOPIC_HOW_TO_DO)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemMenuTopicTextPtrs[gHelpSystemState.scrollSub], sHelpSystemHowToUseMenuTextPtrs[gHelpSystemState.scrollSub]);
+        HelpSystem_PrintQuestionAndAnswerPair(sHelpSystemMenuTopicTextPtrs[gHelpSystemState.scrollSub], sHelpSystemHowToUseMenuTextPtrs[gHelpSystemState.scrollSub]);
     }
     else if (gHelpSystemState.topic == TOPIC_TERMS)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemTermTextPtrs[gHelpSystemState.scrollSub], sHelpSystemTermDefinitionsTextPtrs[gHelpSystemState.scrollSub]);
+        HelpSystem_PrintQuestionAndAnswerPair(sHelpSystemTermTextPtrs[gHelpSystemState.scrollSub], sHelpSystemTermDefinitionsTextPtrs[gHelpSystemState.scrollSub]);
     }
     else if (gHelpSystemState.topic == TOPIC_ABOUT_GAME)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemGeneralTopicTextPtrs[gHelpSystemState.scrollSub], sHelpSystemGeneralTopicDescriptionTextPtrs[gHelpSystemState.scrollSub]);
+        HelpSystem_PrintQuestionAndAnswerPair(sHelpSystemGeneralTopicTextPtrs[gHelpSystemState.scrollSub], sHelpSystemGeneralTopicDescriptionTextPtrs[gHelpSystemState.scrollSub]);
     }
     else // TOPIC_TYPE_MATCHUP
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemTypeMatchupTextPtrs[gHelpSystemState.scrollSub], sHelpSystemTypeMatchupDescriptionTextPtrs[gHelpSystemState.scrollSub]);
+        HelpSystem_PrintQuestionAndAnswerPair(sHelpSystemTypeMatchupTextPtrs[gHelpSystemState.scrollSub], sHelpSystemTypeMatchupDescriptionTextPtrs[gHelpSystemState.scrollSub]);
     }
     HS_ShowOrHideMainWindowText(1);
     HS_ShowOrHideControlsGuideInTopRight(1);
@@ -2473,8 +2473,8 @@ static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu *
 {
     s32 index = listMenuItemsBuffer[helpListMenu->itemsAbove + helpListMenu->cursorPos].index;
     if (index == -2)
-        HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[5]);
+        HelpSystem_PrintTopicMouseoverDescription(sHelpSystemTopicMouseoverDescriptionPtrs[5]);
     else
-        HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[index]);
+        HelpSystem_PrintTopicMouseoverDescription(sHelpSystemTopicMouseoverDescriptionPtrs[index]);
     HS_ShowOrHideToplevelTooltipWindow(1);
 }

@@ -84,7 +84,7 @@ u8 RunHelpSystemCallback(void)
         HS_BufferFillMapWithTile1FF();
         HelpSystem_FillPanel3();
         HelpSystem_FillPanel2();
-        HelpSystem_PrintText_Row61(gString_Help);
+        HelpSystem_PrintTextInTopLeftCorner(gString_Help);
         HS_ShowOrHideWordHELPinTopLeft(1);
         if (HelpSystem_UpdateHasntSeenIntro() == TRUE)
             HelpSystemSubroutine_PrintWelcomeMessage(&gHelpSystemListMenu, gHelpSystemListMenuItems);
@@ -580,7 +580,7 @@ void DecompressAndRenderGlyph(u8 font, u16 glyph, struct Bitmap *srcBlit, struct
     BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gGlyphInfo.width, gGlyphInfo.height, 0);
 }
 
-void HelpSystem_PrintText_Row61(const u8 * str)
+void HelpSystem_PrintTextInTopLeftCorner(const u8 * str)
 {
     GenerateFontHalfRowLookupTable(1, 15, 2);
     HelpSystemRenderText(5, gDecompressionBuffer + 0x3D00, str, 6, 2, 7, 2);
@@ -599,15 +599,15 @@ void HelpSystem_PrintTextAt(const u8 * str, u8 x, u8 y)
     HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str, x, y, 26, 16);
 }
 
-void HelpSystem_PrintTwoStrings(const u8 * str1, const u8 * str2)
+void HelpSystem_PrintQuestionAndAnswerPair(const u8 * question, const u8 * answer)
 {
     CpuFill16(0xEEEE, gDecompressionBuffer + 0x0000, 0x3400);
     GenerateFontHalfRowLookupTable(1, 14, 2);
-    HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str1, 0, 0, 26, 16);
-    HelpSystemRenderText(2, gDecompressionBuffer + 0x09C0, str2, 0, 0, 26, 13);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, question, 0, 0, 26, 16);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x09C0, answer, 0, 0, 26, 13);
 }
 
-void HelpSystem_PrintText_813C584(const u8 * str)
+void HelpSystem_PrintTopicMouseoverDescription(const u8 * str)
 {
     CpuFill16(0x1111, gDecompressionBuffer + 0x23C0, 0x1040);
     GenerateFontHalfRowLookupTable(2, 1, 3);

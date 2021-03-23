@@ -26,7 +26,7 @@ struct HelpSystemVideoState
 };
 
 static EWRAM_DATA u8 sMapTilesBackup[BG_CHAR_SIZE] = {0};
-EWRAM_DATA u8 gUnknown_203F174 = 0;
+EWRAM_DATA u8 gDisableHelpSystemVolumeReduce = 0;
 EWRAM_DATA bool8 gHelpSystemToggleWithRButtonDisabled = FALSE;
 static EWRAM_DATA u8 sDelayTimer = 0;
 static EWRAM_DATA u8 sInHelpSystem = 0;
@@ -51,7 +51,7 @@ u8 RunHelpSystemCallback(void)
             return 0;
         if (JOY_NEW(L_BUTTON | R_BUTTON))
         {
-            if (!sub_812B45C() || !gHelpSystemEnabled)
+            if (!HelpSystem_IsSinglePlayer() || !gHelpSystemEnabled)
             {
                 PlaySE(SE_HELP_ERROR);
                 return 0;
@@ -59,7 +59,7 @@ u8 RunHelpSystemCallback(void)
             m4aMPlayStop(&gMPlayInfo_SE1);
             m4aMPlayStop(&gMPlayInfo_SE2);
             PlaySE(SE_HELP_OPEN);
-            if (!gUnknown_203F174)
+            if (!gDisableHelpSystemVolumeReduce)
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
             SaveCallbacks();
             sInHelpSystem = 1;
@@ -81,17 +81,17 @@ u8 RunHelpSystemCallback(void)
         sVideoState.state = 3;
         break;
     case 3:
-        sub_813BCF4();
+        HS_BufferFillMapWithTile1FF();
         HelpSystem_FillPanel3();
         HelpSystem_FillPanel2();
         HelpSystem_PrintText_Row61(gString_Help);
-        sub_813BD14(1);
+        HS_ShowOrHideWordHELPinTopLeft(1);
         if (HelpSystem_UpdateHasntSeenIntro() == TRUE)
             HelpSystemSubroutine_PrintWelcomeMessage(&gHelpSystemListMenu, gHelpSystemListMenuItems);
         else
             HelpSystemSubroutine_WelcomeEndGotoMenu(&gHelpSystemListMenu, gHelpSystemListMenuItems);
-        sub_813BE78(1);
-        sub_813BF50(1);
+        HS_ShowOrHideHeaderAndFooterLines_Lighter(1);
+        HS_ShowOrHideVerticalBlackBarsAlongSides(1);
         CommitTilemap();
         sVideoState.state = 4;
         break;
@@ -121,7 +121,7 @@ u8 RunHelpSystemCallback(void)
         sVideoState.state = 7;
         break;
     case 7:
-        if (!gUnknown_203F174)
+        if (!gDisableHelpSystemVolumeReduce)
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         RestoreMapTextColors();
         RestoreGPURegs();
@@ -223,12 +223,12 @@ void HS_DrawBgTilemapRect(u16 baseTile, u8 left, u8 top, u8 width, u8 height, u1
     CommitTilemap();
 }
 
-void sub_813BCF4(void)
+void HS_BufferFillMapWithTile1FF(void)
 {
     HS_DrawBgTilemapRect(0x1FF, 0, 0, 30, 20, 0);
 }
 
-void sub_813BD14(u8 mode)
+void HS_ShowOrHideWordHELPinTopLeft(u8 mode)
 {
     switch (mode)
     {
@@ -241,7 +241,7 @@ void sub_813BD14(u8 mode)
     }
 }
 
-void sub_813BD5C(u8 mode)
+void HS_ShowOrHideControlsGuideInTopRight(u8 mode)
 {
     switch (mode)
     {
@@ -254,7 +254,7 @@ void sub_813BD5C(u8 mode)
     }
 }
 
-void sub_813BDA4(u8 mode)
+void HS_ShowOrHideMainWindowText(u8 mode)
 {
     switch (mode)
     {
@@ -267,20 +267,22 @@ void sub_813BDA4(u8 mode)
     }
 }
 
-void sub_813BDE8(u8 mode)
+void HS_SetMainWindowBgBrightness(u8 mode)
 {
     switch (mode)
     {
     case 0:
+        // Brighter
         HS_DrawBgTilemapRect(0x1FF, 1, 3, 28, 16, 0);
         break;
     case 1:
+        // Darker
         HS_DrawBgTilemapRect(0x1FA, 1, 3, 28, 17, 0);
         break;
     }
 }
 
-void sub_813BE30(u8 mode)
+void HS_ShowOrHideToplevelTooltipWindow(u8 mode)
 {
     switch (mode)
     {
@@ -293,7 +295,7 @@ void sub_813BE30(u8 mode)
     }
 }
 
-void sub_813BE78(u8 mode)
+void HS_ShowOrHideHeaderAndFooterLines_Lighter(u8 mode)
 {
     switch (mode)
     {
@@ -308,7 +310,7 @@ void sub_813BE78(u8 mode)
     }
 }
 
-void sub_813BEE4(u8 mode)
+void HS_ShowOrHideHeaderAndFooterLines_Darker(u8 mode)
 {
     switch (mode)
     {
@@ -323,7 +325,7 @@ void sub_813BEE4(u8 mode)
     }
 }
 
-void sub_813BF50(u8 mode)
+void HS_ShowOrHideVerticalBlackBarsAlongSides(u8 mode)
 {
     switch (mode)
     {
@@ -338,7 +340,7 @@ void sub_813BF50(u8 mode)
     }
 }
 
-void sub_813BFC0(u8 mode)
+void HS_ShowOrHideHeaderLine_Darker_FooterStyle(u8 mode)
 {
     switch (mode)
     {
@@ -351,7 +353,7 @@ void sub_813BFC0(u8 mode)
     }
 }
 
-void sub_813C004(u8 a0, u8 mode)
+void HS_ShowOrHideScrollArrows(u8 which, u8 mode)
 {
     switch (mode)
     {
@@ -360,9 +362,9 @@ void sub_813C004(u8 a0, u8 mode)
         HS_DrawBgTilemapRect(0x1FF, 28, 18, 1, 1, 0);
         break;
     case 1:
-        if (a0 == 0)
+        if (which == 0) // top
             HS_DrawBgTilemapRect(0x1FE, 28,  3, 1, 1, 0);
-        else
+        else // bottom
             HS_DrawBgTilemapRect(0x1FD, 28, 18, 1, 1, 0);
         break;
     }
@@ -635,7 +637,7 @@ void HelpSystem_InitListMenuController(struct HelpSystemListMenu * a0, u8 a1, u8
     gHelpSystemListMenu.state = 0;
     if (gHelpSystemListMenu.sub.totalItems < gHelpSystemListMenu.sub.maxShowed)
         gHelpSystemListMenu.sub.maxShowed = gHelpSystemListMenu.sub.totalItems;
-    sub_813BDA4(0);
+    HS_ShowOrHideMainWindowText(0);
     HelpSystem_FillPanel1();
     PrintListMenuItems();
     PlaceListMenuCursor();
@@ -695,23 +697,24 @@ s32 HelpSystem_GetMenuInput(void)
         return -1;
 }
 
-void sub_813C75C(void)
+void HS_UpdateMenuScrollArrows(void)
 {
-    u8 r6 = gHelpSystemListMenu.sub.totalItems - 7;
+    u8 topItemIdx = gHelpSystemListMenu.sub.totalItems - 7;
     if (gHelpSystemListMenu.sub.totalItems > 7)
     {
-        s32 r4 = gHelpSystemListMenu.itemsAbove + gHelpSystemListMenu.cursorPos;
-        sub_813C004(0, 0);
-        if (r4 == 0)
-            sub_813C004(1, 1);
+        s32 cursorPos = gHelpSystemListMenu.itemsAbove + gHelpSystemListMenu.cursorPos;
+        HS_ShowOrHideScrollArrows(0, 0); // Hide both
+        if (cursorPos == 0)
+            HS_ShowOrHideScrollArrows(1, 1); // Show bottom
         else if (gHelpSystemListMenu.itemsAbove == 0 && gHelpSystemListMenu.cursorPos != 0)
-            sub_813C004(1, 1);
-        else if (gHelpSystemListMenu.itemsAbove == r6)
-            sub_813C004(0, 1);
+            HS_ShowOrHideScrollArrows(1, 1); // Show bottom
+        else if (gHelpSystemListMenu.itemsAbove == topItemIdx)
+            HS_ShowOrHideScrollArrows(0, 1); // Show top
         else if (gHelpSystemListMenu.itemsAbove != 0)
         {
-            sub_813C004(0, 1);
-            sub_813C004(1, 1);
+            // Show both
+            HS_ShowOrHideScrollArrows(0, 1);
+            HS_ShowOrHideScrollArrows(1, 1);
         }
     }
 }
@@ -739,7 +742,7 @@ void PlaceListMenuCursor(void)
     HelpSystem_PrintTextAt(gText_SelectorArrow2, x, y);
 }
 
-void sub_813C860(u8 i)
+void HS_RemoveSelectionCursorAt(u8 i)
 {
     u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
@@ -749,13 +752,13 @@ void sub_813C860(u8 i)
 
 u8 TryMoveCursor1(u8 dirn)
 {
-    u16 r4;
+    u16 midPoint;
     if (dirn == 0)
     {
         if (gHelpSystemListMenu.sub.maxShowed == 1)
-            r4 = 0;
+            midPoint = 0;
         else
-            r4 = gHelpSystemListMenu.sub.maxShowed - (gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1)) - 1;
+            midPoint = gHelpSystemListMenu.sub.maxShowed - (gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1)) - 1;
         if (gHelpSystemListMenu.itemsAbove == 0)
         {
             if (gHelpSystemListMenu.cursorPos != 0)
@@ -766,7 +769,7 @@ u8 TryMoveCursor1(u8 dirn)
             else
                 return 0;
         }
-        if (gHelpSystemListMenu.cursorPos > r4)
+        if (gHelpSystemListMenu.cursorPos > midPoint)
         {
             gHelpSystemListMenu.cursorPos--;
             return 1;
@@ -780,9 +783,9 @@ u8 TryMoveCursor1(u8 dirn)
     else
     {
         if (gHelpSystemListMenu.sub.maxShowed == 1)
-            r4 = 0;
+            midPoint = 0;
         else
-            r4 = gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1);
+            midPoint = gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1);
         if (gHelpSystemListMenu.itemsAbove == gHelpSystemListMenu.sub.totalItems - gHelpSystemListMenu.sub.maxShowed)
         {
             if (gHelpSystemListMenu.cursorPos < gHelpSystemListMenu.sub.maxShowed - 1)
@@ -793,7 +796,7 @@ u8 TryMoveCursor1(u8 dirn)
             else
                 return 0;
         }
-        else if (gHelpSystemListMenu.cursorPos < r4)
+        else if (gHelpSystemListMenu.cursorPos < midPoint)
         {
             gHelpSystemListMenu.cursorPos++;
             return 1;
@@ -822,29 +825,29 @@ bool8 MoveCursor(u8 by, u8 dirn)
         return TRUE;
     case 1:
         // changed cursorPos only
-        sub_813C860(r7);
+        HS_RemoveSelectionCursorAt(r7);
         PlaceListMenuCursor();
         CommitTilemap();
         break;
     case 2:
     case 3:
         // changed itemsAbove
-        if (sub_812BF88() == TRUE)
+        if (GetHelpSystemMenuLevel() == 1)
         {
             HelpSystem_SetInputDelay(2);
             HelpSystem_FillPanel1();
             PrintListMenuItems();
             PlaceListMenuCursor();
             HelpSystem_PrintTopicLabel();
-            sub_813C75C();
+            HS_UpdateMenuScrollArrows();
         }
         else
         {
-            sub_813BDA4(0);
+            HS_ShowOrHideMainWindowText(0);
             HelpSystem_FillPanel1();
             PrintListMenuItems();
             PlaceListMenuCursor();
-            sub_813BDA4(1);
+            HS_ShowOrHideMainWindowText(1);
         }
         CommitTilemap();
         break;

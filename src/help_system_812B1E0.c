@@ -16,10 +16,42 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 
+#define HELP_NONE  0
+#define HELP_END   0xFF
+
+// Help Main Topics
+enum HelpSystemTopics
+{
+    TOPIC_WHAT_TO_DO,
+    TOPIC_HOW_TO_DO,
+    TOPIC_TERMS,
+    TOPIC_ABOUT_GAME,
+    TOPIC_TYPE_MATCHUP,
+    TOPIC_EXIT,
+    TOPIC_COUNT
+};
+
 static EWRAM_DATA u16 sHelpSystemContextId = 0;
 static EWRAM_DATA u8 sSeenHelpSystemIntro = 0;
 
-u8 gHelpSystemState[4];
+struct HelpSystemState
+{
+    // 0: Top level
+    // 1: Submenu
+    // 2: Help content
+    u8 level;
+
+    // enum HelpSystemTopics
+    u8 topic;
+
+    // Where the player's cursor was at top level
+    u8 scrollMain;
+
+    // Where the player's cursor was at submenu
+    u8 scrollSub;
+};
+
+struct HelpSystemState gHelpSystemState;
 u16 gHelpContextIdBackup;
 
 static bool32 IsCurrentMapInArray(const u16 * mapIdxs);
@@ -33,21 +65,6 @@ static void PrintWelcomeMessageOnPanel1(void);
 static void PrintTextOnPanel2Row52RightAlign(const u8 *);
 static void ResetHelpSystemCursor(struct HelpSystemListMenu * a0);
 static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-
-#define HELP_NONE  0
-#define HELP_END   0xFF
-
-// Help Main Topics
-enum
-{
-    TOPIC_WHAT_TO_DO,
-    TOPIC_HOW_TO_DO,
-    TOPIC_TERMS,
-    TOPIC_ABOUT_GAME,
-    TOPIC_TYPE_MATCHUP,
-    TOPIC_EXIT,
-    TOPIC_COUNT
-};
 
 static const u8 *const sHelpSystemTopicPtrs[TOPIC_COUNT] = {
     [TOPIC_WHAT_TO_DO]   = Help_Text_WhatShouldIDo,
@@ -1878,7 +1895,7 @@ bool8 HelpSystem_UpdateHasntSeenIntro(void)
     return TRUE;
 }
 
-bool8 sub_812B45C(void)
+bool8 HelpSystem_IsSinglePlayer(void)
 {
     if (gReceivedRemoteLinkPlayers == TRUE)
         return FALSE;
@@ -1923,10 +1940,10 @@ static void BuildAndPrintMainTopicsListMenu(struct HelpSystemListMenu * helpList
     ResetHelpSystemListMenu(helpListMenu, listMenuItemsBuffer);
     BuildMainTopicsListAndMoveToH00(helpListMenu, listMenuItemsBuffer);
     PrintTextOnPanel2Row52RightAlign(gUnknown_841DFAC);
-    HelpSystem_InitListMenuController(helpListMenu, 0, gHelpSystemState[2]);
+    HelpSystem_InitListMenuController(helpListMenu, 0, gHelpSystemState.scrollMain);
     PrintHelpSystemTopicMouseoverDescription(helpListMenu, listMenuItemsBuffer);
-    sub_813BDA4(1);
-    sub_813BD5C(1);
+    HS_ShowOrHideMainWindowText(1);
+    HS_ShowOrHideControlsGuideInTopRight(1);
 }
 
 static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
@@ -1950,34 +1967,34 @@ static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * helpList
 
 static void BuildAndPrintSubmenuList(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    sub_813BDE8(0);
-    sub_813BFC0(0);
-    sub_813BE78(1);
+    HS_SetMainWindowBgBrightness(0);
+    HS_ShowOrHideHeaderLine_Darker_FooterStyle(0);
+    HS_ShowOrHideHeaderAndFooterLines_Lighter(1);
     ResetHelpSystemListMenu(helpListMenu, listMenuItemsBuffer);
     SetHelpSystemSubmenuItems(helpListMenu, listMenuItemsBuffer);
     PrintTextOnPanel2Row52RightAlign(gUnknown_841DFC9);
     HelpSystem_InitListMenuController(helpListMenu, helpListMenu->itemsAbove, helpListMenu->cursorPos);
-    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[gHelpSystemState[1]], 0, 0);
-    sub_813BDA4(1);
-    sub_813BD5C(1);
+    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[gHelpSystemState.topic], 0, 0);
+    HS_ShowOrHideMainWindowText(1);
+    HS_ShowOrHideControlsGuideInTopRight(1);
 }
 
 static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     u8 totalItems = 0;
-    const u8 * submenuItems = sHelpSystemSubmenuItemLists[sHelpSystemContextId * 5 + gHelpSystemState[1]]; // accessing as 2D array
+    const u8 * submenuItems = sHelpSystemSubmenuItemLists[sHelpSystemContextId * 5 + gHelpSystemState.topic]; // accessing as 2D array
     u8 i;
     for (i = 0; submenuItems[i] != HELP_END; i++)
     {
         if (IsHelpSystemSubmenuEnabled(submenuItems[i]) == TRUE)
         {
-            if (gHelpSystemState[1] == TOPIC_WHAT_TO_DO)
+            if (gHelpSystemState.topic == TOPIC_WHAT_TO_DO)
                 listMenuItemsBuffer[totalItems].label = sHelpSystemSpecializedQuestionTextPtrs[submenuItems[i]];
-            else if (gHelpSystemState[1] == TOPIC_HOW_TO_DO)
+            else if (gHelpSystemState.topic == TOPIC_HOW_TO_DO)
                 listMenuItemsBuffer[totalItems].label = sHelpSystemMenuTopicTextPtrs[submenuItems[i]];
-            else if (gHelpSystemState[1] == TOPIC_TERMS)
+            else if (gHelpSystemState.topic == TOPIC_TERMS)
                 listMenuItemsBuffer[totalItems].label = sHelpSystemTermTextPtrs[submenuItems[i]];
-            else if (gHelpSystemState[1] == TOPIC_ABOUT_GAME)
+            else if (gHelpSystemState.topic == TOPIC_ABOUT_GAME)
                 listMenuItemsBuffer[totalItems].label = sHelpSystemGeneralTopicTextPtrs[submenuItems[i]];
             else // TOPIC_TYPE_MATCHUP
                 listMenuItemsBuffer[totalItems].label = sHelpSystemTypeMatchupTextPtrs[submenuItems[i]];
@@ -2005,7 +2022,7 @@ static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * helpListMenu, 
 
 static bool8 HelpSystem_ShouldShowBasicTerms(void)
 {
-    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gHelpSystemState[1] == TOPIC_TERMS)
+    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gHelpSystemState.topic == TOPIC_TERMS)
         return TRUE;
     return FALSE;
 }
@@ -2014,7 +2031,7 @@ static bool8 IsHelpSystemSubmenuEnabled(u8 id)
 {
     u8 i = 0;
 
-    if (gHelpSystemState[1] == TOPIC_WHAT_TO_DO)
+    if (gHelpSystemState.topic == TOPIC_WHAT_TO_DO)
     {
         switch (id)
         {
@@ -2076,7 +2093,7 @@ static bool8 IsHelpSystemSubmenuEnabled(u8 id)
         }
         return FALSE;
     }
-    if (gHelpSystemState[1] == TOPIC_HOW_TO_DO)
+    if (gHelpSystemState.topic == TOPIC_HOW_TO_DO)
     {
         switch (id)
         {
@@ -2143,7 +2160,7 @@ static bool8 IsHelpSystemSubmenuEnabled(u8 id)
         }
         return FALSE;
     }
-    if (gHelpSystemState[1] == TOPIC_TERMS)
+    if (gHelpSystemState.topic == TOPIC_TERMS)
     {
         if (HelpSystem_ShouldShowBasicTerms() == TRUE)
         {
@@ -2203,7 +2220,7 @@ static bool8 IsHelpSystemSubmenuEnabled(u8 id)
         }
         return TRUE;
     }
-    if (gHelpSystemState[1] == TOPIC_ABOUT_GAME)
+    if (gHelpSystemState.topic == TOPIC_ABOUT_GAME)
     {
         switch (id)
         {
@@ -2214,7 +2231,7 @@ static bool8 IsHelpSystemSubmenuEnabled(u8 id)
         }
         return TRUE;
     }
-    if (gHelpSystemState[1] == TOPIC_TYPE_MATCHUP)
+    if (gHelpSystemState.topic == TOPIC_TYPE_MATCHUP)
     {
         return TRUE;
     }
@@ -2273,8 +2290,8 @@ bool8 HelpSystemSubroutine_PrintWelcomeMessage(struct HelpSystemListMenu * helpL
 {
     PrintTextOnPanel2Row52RightAlign(gUnknown_841DFA5);
     PrintWelcomeMessageOnPanel1();
-    sub_813BDA4(1);
-    sub_813BD5C(1);
+    HS_ShowOrHideMainWindowText(1);
+    HS_ShowOrHideControlsGuideInTopRight(1);
     helpListMenu->state = 9;
     return TRUE;
 }
@@ -2291,7 +2308,7 @@ bool8 HelpSystemSubroutine_WelcomeWaitButton(struct HelpSystemListMenu * helpLis
 
 bool8 HelpSystemSubroutine_WelcomeEndGotoMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gHelpSystemState[2] = 0;
+    gHelpSystemState.scrollMain = 0;
     ResetHelpSystemCursor(helpListMenu);
     BuildAndPrintMainTopicsListMenu(helpListMenu, listMenuItemsBuffer);
     helpListMenu->state = 0;
@@ -2314,7 +2331,7 @@ bool8 HelpSystemSubroutine_MenuInputHandlerMain(struct HelpSystemListMenu * help
     case -1:
         break;
     default:
-        gHelpSystemState[1] = input;
+        gHelpSystemState.topic = input;
         helpListMenu->state = 1;
         break;
     }
@@ -2323,11 +2340,11 @@ bool8 HelpSystemSubroutine_MenuInputHandlerMain(struct HelpSystemListMenu * help
 
 bool8 HelpMenuSubroutine_InitSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gHelpSystemState[0] = 1;
-    gHelpSystemState[2] = helpListMenu->cursorPos;
+    gHelpSystemState.level = 1;
+    gHelpSystemState.scrollMain = helpListMenu->cursorPos;
     ResetHelpSystemCursor(helpListMenu);
     BuildAndPrintSubmenuList(helpListMenu, listMenuItemsBuffer);
-    sub_813C75C();
+    HS_UpdateMenuScrollArrows();
     HelpSystem_SetInputDelay(2);
     helpListMenu->state = 3;
     return TRUE;
@@ -2335,9 +2352,9 @@ bool8 HelpMenuSubroutine_InitSubmenu(struct HelpSystemListMenu * helpListMenu, s
 
 bool8 HelpMenuSubroutine_ReturnFromSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    sub_813C004(0, 0);
-    sub_813C004(1, 0);
-    gHelpSystemState[0] = 0;
+    HS_ShowOrHideScrollArrows(0, 0);
+    HS_ShowOrHideScrollArrows(1, 0);
+    gHelpSystemState.level = 0;
     BuildAndPrintMainTopicsListMenu(helpListMenu, listMenuItemsBuffer);
     helpListMenu->state = 0;
     return TRUE;
@@ -2359,7 +2376,7 @@ bool8 HelpMenuSubroutine_SubmenuInputHandler(struct HelpSystemListMenu * helpLis
     case -1:
         break;
     default:
-        gHelpSystemState[3] = input;
+        gHelpSystemState.scrollSub = input;
         helpListMenu->state = 4;
         break;
     }
@@ -2368,49 +2385,49 @@ bool8 HelpMenuSubroutine_SubmenuInputHandler(struct HelpSystemListMenu * helpLis
 
 void HelpSystem_PrintTopicLabel(void)
 {
-    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[gHelpSystemState[1]], 0, 0);
+    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[gHelpSystemState.topic], 0, 0);
 }
 
 bool8 HelpMenuSubroutine_HelpItemPrint(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gHelpSystemState[0] = 2;
-    sub_813BDA4(0);
+    gHelpSystemState.level = 2;
+    HS_ShowOrHideMainWindowText(0);
     HelpSystem_FillPanel1();
     PrintTextOnPanel2Row52RightAlign(gUnknown_841DFBE);
-    sub_813BDE8(1);
-    sub_813BEE4(1);
+    HS_SetMainWindowBgBrightness(1);
+    HS_ShowOrHideHeaderAndFooterLines_Darker(1);
 
-    if (gHelpSystemState[1] == TOPIC_WHAT_TO_DO)
+    if (gHelpSystemState.topic == TOPIC_WHAT_TO_DO)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemSpecializedQuestionTextPtrs[gHelpSystemState[3]], sHelpSystemSpecializedAnswerTextPtrs[gHelpSystemState[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemSpecializedQuestionTextPtrs[gHelpSystemState.scrollSub], sHelpSystemSpecializedAnswerTextPtrs[gHelpSystemState.scrollSub]);
     }
-    else if (gHelpSystemState[1] == TOPIC_HOW_TO_DO)
+    else if (gHelpSystemState.topic == TOPIC_HOW_TO_DO)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemMenuTopicTextPtrs[gHelpSystemState[3]], sHelpSystemHowToUseMenuTextPtrs[gHelpSystemState[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemMenuTopicTextPtrs[gHelpSystemState.scrollSub], sHelpSystemHowToUseMenuTextPtrs[gHelpSystemState.scrollSub]);
     }
-    else if (gHelpSystemState[1] == TOPIC_TERMS)
+    else if (gHelpSystemState.topic == TOPIC_TERMS)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemTermTextPtrs[gHelpSystemState[3]], sHelpSystemTermDefinitionsTextPtrs[gHelpSystemState[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemTermTextPtrs[gHelpSystemState.scrollSub], sHelpSystemTermDefinitionsTextPtrs[gHelpSystemState.scrollSub]);
     }
-    else if (gHelpSystemState[1] == TOPIC_ABOUT_GAME)
+    else if (gHelpSystemState.topic == TOPIC_ABOUT_GAME)
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemGeneralTopicTextPtrs[gHelpSystemState[3]], sHelpSystemGeneralTopicDescriptionTextPtrs[gHelpSystemState[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemGeneralTopicTextPtrs[gHelpSystemState.scrollSub], sHelpSystemGeneralTopicDescriptionTextPtrs[gHelpSystemState.scrollSub]);
     }
     else // TOPIC_TYPE_MATCHUP
     {
-        HelpSystem_PrintTwoStrings(sHelpSystemTypeMatchupTextPtrs[gHelpSystemState[3]], sHelpSystemTypeMatchupDescriptionTextPtrs[gHelpSystemState[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemTypeMatchupTextPtrs[gHelpSystemState.scrollSub], sHelpSystemTypeMatchupDescriptionTextPtrs[gHelpSystemState.scrollSub]);
     }
-    sub_813BDA4(1);
-    sub_813BD5C(1);
+    HS_ShowOrHideMainWindowText(1);
+    HS_ShowOrHideControlsGuideInTopRight(1);
     helpListMenu->state = 6;
     return TRUE;
 }
 
 bool8 HelpMenuSubroutine_ReturnFromHelpItem(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gHelpSystemState[0] = 1;
+    gHelpSystemState.level = 1;
     BuildAndPrintSubmenuList(helpListMenu, listMenuItemsBuffer);
-    sub_813C75C();
+    HS_UpdateMenuScrollArrows();
     HelpSystem_SetInputDelay(2);
     helpListMenu->state = 3;
     return TRUE;
@@ -2441,9 +2458,9 @@ static void PrintTextOnPanel2Row52RightAlign(const u8 * str)
     HelpSystem_PrintTextRightAlign_Row52(str);
 }
 
-u8 sub_812BF88(void)
+u8 GetHelpSystemMenuLevel(void)
 {
-    return gHelpSystemState[0];
+    return gHelpSystemState.level;
 }
 
 static void ResetHelpSystemCursor(struct HelpSystemListMenu * helpListMenu)
@@ -2459,5 +2476,5 @@ static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu *
         HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[5]);
     else
         HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[index]);
-    sub_813BE30(1);
+    HS_ShowOrHideToplevelTooltipWindow(1);
 }

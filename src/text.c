@@ -6,7 +6,6 @@
 #include "dynamic_placeholder_text_util.h"
 #include "constants/songs.h"
 
-extern u8 gGlyphInfo[0x90];
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 
 static void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese);
@@ -792,8 +791,8 @@ u16 RenderText(struct TextPrinter *textPrinter)
             break;
         case CHAR_KEYPAD_ICON:
             currChar = *textPrinter->printerTemplate.currentChar++;
-            gGlyphInfo[0x80] = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
-            textPrinter->printerTemplate.currentX += gGlyphInfo[0x80] + textPrinter->printerTemplate.letterSpacing;
+            gGlyphInfo.width = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
+            textPrinter->printerTemplate.currentX += gGlyphInfo.width + textPrinter->printerTemplate.letterSpacing;
             return 0;
         case EOS:
             return 1;
@@ -824,8 +823,8 @@ u16 RenderText(struct TextPrinter *textPrinter)
 
         if (textPrinter->minLetterSpacing)
         {
-            textPrinter->printerTemplate.currentX += gGlyphInfo[0x80];
-            width = textPrinter->minLetterSpacing - gGlyphInfo[0x80];
+            textPrinter->printerTemplate.currentX += gGlyphInfo.width;
+            width = textPrinter->minLetterSpacing - gGlyphInfo.width;
             if (width > 0)
             {
                 ClearTextSpan(textPrinter, width);
@@ -835,9 +834,9 @@ u16 RenderText(struct TextPrinter *textPrinter)
         else
         {
             if (textPrinter->japanese)
-                textPrinter->printerTemplate.currentX += (gGlyphInfo[0x80] + textPrinter->printerTemplate.letterSpacing);
+                textPrinter->printerTemplate.currentX += (gGlyphInfo.width + textPrinter->printerTemplate.letterSpacing);
             else
-                textPrinter->printerTemplate.currentX += gGlyphInfo[0x80];
+                textPrinter->printerTemplate.currentX += gGlyphInfo.width;
         }
         return 0;
     case 1:
@@ -1264,8 +1263,8 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a
             break;
         default:
             DecompressGlyphFont9(temp);
-            CpuCopy32(gGlyphInfo, pixels, 0x20);
-            CpuCopy32(gGlyphInfo + 0x40, pixels + 0x20, 0x20);
+            CpuCopy32(gGlyphInfo.pixels, pixels, 0x20);
+            CpuCopy32(gGlyphInfo.pixels + 0x40, pixels + 0x20, 0x20);
             pixels += 0x40;
             break;
         }
@@ -1362,18 +1361,18 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
     if (isJapanese == 1)
     {
         glyphs = sFont0JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
-        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-        DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-        gGlyphInfo[0x80] = 8;
-        gGlyphInfo[0x81] = 12;
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+        DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+        gGlyphInfo.width = 8;
+        gGlyphInfo.height = 12;
     }
     else
     {
         glyphs = sFont0LatinGlyphs + (0x10 * glyphId);
-        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x40));
-        gGlyphInfo[0x80] = sFont0LatinGlyphWidths[glyphId];
-        gGlyphInfo[0x81] = 13;
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x40));
+        gGlyphInfo.width = sFont0LatinGlyphWidths[glyphId];
+        gGlyphInfo.height = 13;
     }
 }
 
@@ -1393,20 +1392,20 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
     {
         int eff;
         glyphs = sFont1JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & (eff = 0xF)));  // shh, no questions, only matching now
-        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-        DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-        gGlyphInfo[0x80] = 8;
-        gGlyphInfo[0x81] = 16;
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+        DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+        gGlyphInfo.width = 8;
+        gGlyphInfo.height = 16;
     }
     else
     {
         glyphs = sFont1LatinGlyphs + (0x20 * glyphId);
-        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-        DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));
-        DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));
-        gGlyphInfo[0x80] = sFont1LatinGlyphWidths[glyphId];
-        gGlyphInfo[0x81] = 14;
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+        DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+        DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo.pixels + 0x60));
+        gGlyphInfo.width = sFont1LatinGlyphWidths[glyphId];
+        gGlyphInfo.height = 14;
     }
 }
 
@@ -1432,21 +1431,21 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // Game Freak, please. writing the same values over and over...
-                gGlyphInfo[0x80] = 10;
-                gGlyphInfo[0x81] = 12;
+                gGlyphInfo.width = 10;
+                gGlyphInfo.height = 12;
             }
         }
         else
         {
             glyphs = sFont2JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = sFont2JapaneseGlyphWidths[glyphId];
-            gGlyphInfo[0x81] = 12;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = sFont2JapaneseGlyphWidths[glyphId];
+            gGlyphInfo.height = 12;
         }
     }
     else
@@ -1457,21 +1456,21 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // but why
-                gGlyphInfo[0x80] = sFont2LatinGlyphWidths[0];
-                gGlyphInfo[0x81] = 14;
+                gGlyphInfo.width = sFont2LatinGlyphWidths[0];
+                gGlyphInfo.height = 14;
             }
         }
         else
         {
             glyphs = sFont2LatinGlyphs + (0x20 * glyphId);
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = sFont2LatinGlyphWidths[glyphId];
-            gGlyphInfo[0x81] = 14;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = sFont2LatinGlyphWidths[glyphId];
+            gGlyphInfo.height = 14;
         }
     }
 }
@@ -1505,21 +1504,21 @@ static void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // Game Freak, please. writing the same values over and over...
-                gGlyphInfo[0x80] = 10;
-                gGlyphInfo[0x81] = 12;
+                gGlyphInfo.width = 10;
+                gGlyphInfo.height = 12;
             }
         }
         else
         {
             glyphs = sFont2JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = 10;
-            gGlyphInfo[0x81] = 12;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = 10;
+            gGlyphInfo.height = 12;
         }
     }
     else
@@ -1548,21 +1547,21 @@ static void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // Game Freak, please. writing the same values over and over...
-                gGlyphInfo[0x80] = 10;
-                gGlyphInfo[0x81] = 12;
+                gGlyphInfo.width = 10;
+                gGlyphInfo.height = 12;
             }
         }
         else
         {
             glyphs = sFont4JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = sFont4JapaneseGlyphWidths[glyphId];
-            gGlyphInfo[0x81] = 12;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = sFont4JapaneseGlyphWidths[glyphId];
+            gGlyphInfo.height = 12;
         }
     }
     else
@@ -1573,21 +1572,21 @@ static void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // but why
-                gGlyphInfo[0x80] = sFont4LatinGlyphWidths[0];
-                gGlyphInfo[0x81] = 14;
+                gGlyphInfo.width = sFont4LatinGlyphWidths[0];
+                gGlyphInfo.height = 14;
             }
         }
         else
         {
             glyphs = sFont4LatinGlyphs + (0x20 * glyphId);
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = sFont4LatinGlyphWidths[glyphId];
-            gGlyphInfo[0x81] = 14;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = sFont4LatinGlyphWidths[glyphId];
+            gGlyphInfo.height = 14;
         }
     }
 }
@@ -1619,21 +1618,21 @@ void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // Game Freak, please. writing the same values over and over...
-                gGlyphInfo[0x80] = 10;
-                gGlyphInfo[0x81] = 12;
+                gGlyphInfo.width = 10;
+                gGlyphInfo.height = 12;
             }
         }
         else
         {
             glyphs = sFont5JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = sFont5JapaneseGlyphWidths[glyphId];
-            gGlyphInfo[0x81] = 12;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = sFont5JapaneseGlyphWidths[glyphId];
+            gGlyphInfo.height = 12;
         }
     }
     else
@@ -1644,21 +1643,21 @@ void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese)
 
             for(i = 0; i < 0x80; i++)
             {
-                gGlyphInfo[i] = lastColor | lastColor << 4;
+                gGlyphInfo.pixels[i] = lastColor | lastColor << 4;
                 // but why
-                gGlyphInfo[0x80] = sFont5LatinGlyphWidths[0];
-                gGlyphInfo[0x81] = 14;
+                gGlyphInfo.width = sFont5LatinGlyphWidths[0];
+                gGlyphInfo.height = 14;
             }
         }
         else
         {
             glyphs = sFont5LatinGlyphs + (0x20 * glyphId);
-            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo + 0x40));
-            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo + 0x60));
-            gGlyphInfo[0x80] = sFont5LatinGlyphWidths[glyphId];
-            gGlyphInfo[0x81] = 14;
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo.pixels + 0x60));
+            gGlyphInfo.width = sFont5LatinGlyphWidths[glyphId];
+            gGlyphInfo.height = 14;
         }
     }
 }
@@ -1679,8 +1678,8 @@ s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese)
 void DecompressGlyphFont9(u16 glyphId)
 {
     const u16* glyphs = sFont9JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
-    DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-    gGlyphInfo[0x80] = 8;
-    gGlyphInfo[0x81] = 12;
+    DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+    gGlyphInfo.width = 8;
+    gGlyphInfo.height = 12;
 }

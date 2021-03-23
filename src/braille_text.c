@@ -4,8 +4,6 @@
 #include "text.h"
 #include "sound.h"
 
-extern u8 gGlyphInfo[];
-
 static const u8 gUnknown_846FB08[] = {1, 2, 4};
 static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("graphics/fonts/font6.fwjpnfont");
 
@@ -136,7 +134,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             }
             DecompressGlyphFont6(char_);
             CopyGlyphToWindow(textPrinter);
-            textPrinter->printerTemplate.currentX += gGlyphInfo[0x80] + textPrinter->printerTemplate.letterSpacing;
+            textPrinter->printerTemplate.currentX += gGlyphInfo.width + textPrinter->printerTemplate.letterSpacing;
             return 0;
         case 1:
             if (TextPrinterWait(textPrinter))
@@ -207,12 +205,12 @@ static void DecompressGlyphFont6(u16 glyph)
     const u16 *glyphs;
 
     glyphs = sFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
-    DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo);
-    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo + 0x20));
-    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo + 0x40));
-    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo + 0x60));
-    gGlyphInfo[0x80] = 0x10;
-    gGlyphInfo[0x81] = 0x10;
+    DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
+    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo.pixels + 0x60));
+    gGlyphInfo.width = 0x10;
+    gGlyphInfo.height = 0x10;
 }
 
 s32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese)

@@ -168,6 +168,15 @@ enum
     FONTATTR_COLOR_SHADOW
 };
 
+struct GlyphInfo
+{
+    u8 pixels[0x80];
+    u8 width;
+    u8 height;
+};
+
+extern struct GlyphInfo gGlyphInfo;
+
 struct TextPrinterSubStruct
 {
     u8 glyphId:4;  // 0x14

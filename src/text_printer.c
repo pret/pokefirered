@@ -1,10 +1,6 @@
 #include "global.h"
-#include "main.h"
-#include "palette.h"
-#include "string_util.h"
 #include "window.h"
 #include "text.h"
-#include "blit.h"
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
 static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -15,7 +11,7 @@ static u16 sLastTextFgColor;
 static u16 sLastTextShadowColor;
 
 const struct FontInfo *gFonts;
-u8 gGlyphInfo[0x90];
+struct GlyphInfo gGlyphInfo;
 
 static const u8 sFontHalfRowOffsets[] =
 {
@@ -219,7 +215,7 @@ u8 GetLastTextColor(u8 colorType)
     u8 * src, * dst;                                                                                            \
     u32 v8;                                                                                                     \
                                                                                                                 \
-    src = gGlyphInfo + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                    \
+    src = gGlyphInfo.pixels + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                    \
     for (yAdd = 0, v3 = a6 + heightOffset; yAdd < height; yAdd++, v3++)                                         \
     {                                                                                                           \
         v8 = *(u32 *)src;                                                                                       \
@@ -242,14 +238,14 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     int r0, r1;
     u8 r2;
     
-    if (gWindows[textPrinter->printerTemplate.windowId].window.width * 8 - textPrinter->printerTemplate.currentX < gGlyphInfo[0x80])
+    if (gWindows[textPrinter->printerTemplate.windowId].window.width * 8 - textPrinter->printerTemplate.currentX < gGlyphInfo.width)
         r0 = gWindows[textPrinter->printerTemplate.windowId].window.width * 8 - textPrinter->printerTemplate.currentX;
     else
-        r0 = gGlyphInfo[0x80];
-    if (gWindows[textPrinter->printerTemplate.windowId].window.height * 8 - textPrinter->printerTemplate.currentY < gGlyphInfo[0x81])
+        r0 = gGlyphInfo.width;
+    if (gWindows[textPrinter->printerTemplate.windowId].window.height * 8 - textPrinter->printerTemplate.currentY < gGlyphInfo.height)
         r1 = gWindows[textPrinter->printerTemplate.windowId].window.height * 8 - textPrinter->printerTemplate.currentY;
     else
-        r1 = gGlyphInfo[0x81];
+        r1 = gGlyphInfo.height;
     
     r2 = 0;
     if (r0 > 8)
@@ -285,14 +281,14 @@ void sub_8003614(void * tileData, u16 currentX, u16 currentY, u16 width, u16 hei
     u8 r2;
     u16 r3;
     
-    if (width - currentX < gGlyphInfo[0x80])
+    if (width - currentX < gGlyphInfo.width)
         r0 = width - currentX;
     else
-        r0 = gGlyphInfo[0x80];
-    if (height - currentY < gGlyphInfo[0x81])
+        r0 = gGlyphInfo.width;
+    if (height - currentY < gGlyphInfo.height)
         r1 = height - currentY;
     else
-        r1 = gGlyphInfo[0x81];
+        r1 = gGlyphInfo.height;
     
     r2 = 0;
     r3  = (width + (width & 7)) >> 3;

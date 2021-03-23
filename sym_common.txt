@@ -4,7 +4,7 @@
 	.include "bg.o"
 	.align 2
 	.include "text_printer.o"
-	.align 2
+	.align 4
 	.include "window.o"
 	.align 2
 	.include "text.o"

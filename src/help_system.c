@@ -6,16 +6,9 @@
 #include "help_system.h"
 #include "list_menu.h"
 #include "strings.h"
-#include "event_data.h"
 #include "constants/songs.h"
 
 #define ZERO 0
-
-struct {
-    u8 pixels[0x80];
-    u8 width;
-    u8 height;
-} extern gGlyphInfo;
 
 bool8 gHelpSystemEnabled;
 

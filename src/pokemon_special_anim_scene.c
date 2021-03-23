@@ -1038,14 +1038,8 @@ void PSA_UseItem_CleanUpForCancel(void)
 
 static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness)
 {
-    u16 species;
+    u16 species, x, y;
     u32 personality;
-    #ifndef NONMATCHING
-        register int x asm("r4"); // FIXME
-    #else
-        int x;
-    #endif
-    u8 y;
     if (closeness == 3)
     {
         sprite->pos1.x = 120;
@@ -1060,22 +1054,33 @@ static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, stru
     sprite->pos1.y += 4;
     species = PSA_GetMonSpecies();
     personality = PSA_GetMonPersonality();
-    if (PSA_GetAnimType() == 4)
+    switch (PSA_GetAnimType())
     {
-        x = Menu2_GetMonSpriteAnchorCoord(species, personality, 0);
-        y = Menu2_GetMonSpriteAnchorCoord(species, personality, 1);
+        case 4:
+        {
+            x = Menu2_GetMonSpriteAnchorCoord(species, personality, 0);
+            y = Menu2_GetMonSpriteAnchorCoord(species, personality, 1);
+            if (x == 0xFF)
+                x = 0;
+            if (y == 0xFF)
+                y = 0;
+            sprite->data[6] = x;
+            sprite->data[7] = y;
+            break;
+        }
+        default:
+        {
+            x = Menu2_GetMonSpriteAnchorCoord(species, personality, 3);
+            y = Menu2_GetMonSpriteAnchorCoord(species, personality, 4);
+            if (x == 0xFF)
+                x = 0;
+            if (y == 0xFF)
+                y = 0;
+            sprite->data[6] = x;
+            sprite->data[7] = y;
+            break;
+        }
     }
-    else
-    {
-        x = Menu2_GetMonSpriteAnchorCoord(species, personality, 3);
-        y = Menu2_GetMonSpriteAnchorCoord(species, personality, 4);
-    }
-    if (x == 0xFF)
-        x = 0;
-    if (y == 0xFF)
-        y = 0;
-    sprite->data[6] = x;
-    sprite->data[7] = y;
     ItemSpriteZoom_UpdateYPos(sprite, closeness);
 }
 

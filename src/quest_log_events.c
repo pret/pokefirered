@@ -582,18 +582,16 @@ void sub_8113ABC(const u16 *a0)
 
 bool8 sub_8113AE8(const u16 *a0)
 {
-#ifndef NONMATCHING
-    register const u16 *r0 asm("r0") = a0;
-#else
     const u16 *r0 = a0;
-#endif
 
-    if (r0 == NULL || r0[1] > sQuestLogCursor)
+    if (a0 == NULL) // checks must be separate to match
+        return FALSE;
+    if (r0[1] > sQuestLogCursor)
         return FALSE;
 
-    sQuestLogEventTextBufferCBs[a0[0] & 0xFFF](a0);
-    gUnknown_203B044.id = a0[0];
-    gUnknown_203B044.unk_1 = (a0[0] & 0xF000) >> 12;
+    sQuestLogEventTextBufferCBs[(r0[0] & 0xFFF)](a0);
+    gUnknown_203B044.id = r0[0];
+    gUnknown_203B044.unk_1 = (r0[0] & 0xF000) >> 12;
     if (gUnknown_203B044.unk_1 != 0)
         gUnknown_203B044.unk_2 = 1;
     return TRUE;

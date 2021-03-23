@@ -223,7 +223,7 @@
 	.align 2
 	.include "src/union_room_chat_objects.o"
 	.align 2
-	.include "src/help_system_812B1E0.o"
+	.include "src/help_system.o"
 	.align 2
 	.include "src/fame_checker.o"
 	.align 2
@@ -235,7 +235,7 @@
 	.align 2
 	.include "src/pokemon_summary_screen.o"
 	.align 2
-	.include "src/help_system.o"
+	.include "src/help_system_util.o"
 	.align 2
 	.include "src/dynamic_placeholder_text_util.o"
 	.align 2

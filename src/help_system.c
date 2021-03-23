@@ -9,11 +9,13 @@
 #include "event_data.h"
 #include "constants/songs.h"
 
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
+#define ZERO 0
 
-extern u8 gGlyphInfo[];
+struct {
+    u8 pixels[0x80];
+    u8 width;
+    u8 height;
+} extern gGlyphInfo;
 
 bool8 gHelpSystemEnabled;
 
@@ -373,7 +375,6 @@ void sub_813C004(u8 a0, u8 mode)
     }
 }
 
-#ifdef NONMATCHING
 void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height)
 {
     // font -> sp+24
@@ -385,30 +386,42 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
     // height -> sp+30
     struct Bitmap srcBlit;
     struct Bitmap destBlit;
-    u8 i;
     u8 orig_x = x;
-    s32 clearPixels;
+    u8 i = 0;
+    s32 clearPixels = 0;
 
     while (1)
     {
-        u16 curChar = *src++;
+        u16 curChar = *src;
+        src++;
         switch (curChar)
         {
         case EOS:
             return;
+        case CHAR_NEWLINE:
+            x = orig_x;
+            y += gGlyphInfo.height + 1;
+            break;
         case PLACEHOLDER_BEGIN:
-            curChar = *src++;
+            curChar = *src;
+            src++;
             if (curChar == PLACEHOLDER_ID_PLAYER) {
                 for (i = 0; i < 10; i++)
                 {
                     if (gSaveBlock2Ptr->playerName[i] == EOS)
+                    {
                         break;
+                    }
                     DecompressAndRenderGlyph(font, gSaveBlock2Ptr->playerName[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     // This is required to match a dummy [sp+#0x24] read here
                     if (font == 0)
-                        x += gGlyphInfo[0x80];
+                    {
+                        x += gGlyphInfo.width;
+                    }
                     else
-                        x += gGlyphInfo[0x80];
+                    {
+                        x += gGlyphInfo.width + ZERO;
+                    }
                 }
             }
             else if (curChar == PLACEHOLDER_ID_STRING_VAR_1)
@@ -418,30 +431,38 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                     if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC) == TRUE)
                     {
                         if (gString_Bill[i] == EOS)
+                        {
                             break;
+                        }
                         DecompressAndRenderGlyph(font, gString_Bill[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     }
                     else
                     {
                         if (gString_Someone[i] == EOS)
+                        {
                             break;
+                        }
                         DecompressAndRenderGlyph(font, gString_Someone[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     }
                     if (font == 0)
-                        x += gGlyphInfo[0x80];
+                    {
+                        x += gGlyphInfo.width;
+                    }
                     else
-                        x += gGlyphInfo[0x80];
+                    {
+                        x += gGlyphInfo.width + ZERO;
+                    }
                 }
             }
             break;
         case CHAR_PROMPT_SCROLL:
         case CHAR_PROMPT_CLEAR:
-        case CHAR_NEWLINE:
             x = orig_x;
-            y += gGlyphInfo[0x81] + 1;
+            y += gGlyphInfo.height + 1;
             break;
         case EXT_CTRL_CODE_BEGIN:
-            curChar = *src++;
+            curChar = *src;
+            src++;
             switch (curChar)
             {
             case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
@@ -463,17 +484,30 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                 src++;
                 break;
             case EXT_CTRL_CODE_CLEAR_TO:
-                clearPixels = *src + orig_x - x;
+            {
+#ifdef NONMATCHING
+                curChar = *src;
+                clearPixels = curChar + orig_x - x;
+#else  // dumb fakematch
+                s32 r0;
+                register const u8 * _src asm("r2") = src;
+                asm("":::"r1");
+                r0 = *_src;
+                r0 += orig_x;
+                clearPixels = r0 - x;
+#endif
                 if (clearPixels > 0)
                 {
                     destBlit.pixels = dest;
                     destBlit.width = width * 8;
                     destBlit.height = height * 8;
-                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, FONTATTR_MAX_LETTER_HEIGHT), 0);
+                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, FONTATTR_MAX_LETTER_HEIGHT),
+                                       0);
                     x += clearPixels;
                 }
                 src++;
                 break;
+            }
             case EXT_CTRL_CODE_CLEAR:
             case EXT_CTRL_CODE_SKIP:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
@@ -483,13 +517,15 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             case EXT_CTRL_CODE_WAIT_BUTTON:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
+                break;
             case EXT_CTRL_CODE_JPN:
             case EXT_CTRL_CODE_ENG:
                 break;
             }
             break;
         case CHAR_KEYPAD_ICON:
-            curChar = *src++;
+            curChar = *src;
+            src++;
             srcBlit.pixels = (u8 *)gKeypadIconTiles + 0x20 * GetKeypadIconTileOffset(curChar);
             srcBlit.width = 0x80;
             srcBlit.height = 0x80;
@@ -500,422 +536,37 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             x += GetKeypadIconWidth(curChar);
             break;
         case CHAR_EXTRA_EMOJI:
-            curChar = 0x100 | *src++;
+            curChar = *src + 0x100;
+            src++;
             //fallthrough
         default:
             if (curChar == CHAR_SPACE)
             {
                 if (font == 0)
+                {
                     x += 5;
+                }
                 else
+                {
                     x += 4;
+                }
             }
             else
             {
                 DecompressAndRenderGlyph(font, curChar, &srcBlit, &destBlit, dest, x, y, width, height);
                 if (font == 0)
-                    x += gGlyphInfo[0x80];
+                {
+                    x += gGlyphInfo.width;
+                }
                 else
-                    x += gGlyphInfo[0x80];
+                {
+                    x += gGlyphInfo.width + ZERO;
+                }
             }
             break;
         }
     }
 }
-#else
-NAKED
-void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x38\n"
-                "\tstr r1, [sp, 0x28]\n"
-                "\tmov r9, r2\n"
-                "\tldr r1, [sp, 0x58]\n"
-                "\tldr r2, [sp, 0x5C]\n"
-                "\tldr r4, [sp, 0x60]\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstr r0, [sp, 0x24]\n"
-                "\tlsls r3, 24\n"
-                "\tlsrs r7, r3, 24\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r1, 24\n"
-                "\tmov r10, r1\n"
-                "\tlsls r2, 24\n"
-                "\tlsrs r2, 24\n"
-                "\tstr r2, [sp, 0x2C]\n"
-                "\tlsls r4, 24\n"
-                "\tlsrs r4, 24\n"
-                "\tstr r4, [sp, 0x30]\n"
-                "\tstr r7, [sp, 0x34]\n"
-                "_0813C0AC_masterLoop:\n"
-                "\tmov r0, r9\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r2, 0x1\n"
-                "\tadd r9, r2\n"
-                "\tadds r0, r1, 0\n"
-                "\tsubs r0, 0xF8\n"
-                "\tcmp r0, 0x7\n"
-                "\tbls _0813C0BE\n"
-                "\tb _0813C358\n"
-                "_0813C0BE:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _0813C0C8 @ =_0813C0CC\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_0813C0C8: .4byte _0813C0CC\n"
-                "\t.align 2, 0\n"
-                "_0813C0CC:\n"
-                "\t.4byte _0813C2D4\n"
-                "\t.4byte _0813C348\n"
-                "\t.4byte _0813C1E4\n"
-                "\t.4byte _0813C1E4\n"
-                "\t.4byte _0813C200\n"
-                "\t.4byte _0813C0EC\n"
-                "\t.4byte _0813C1E4\n"
-                "\t.4byte _0813C39C\n"
-                "_0813C0EC:\n"
-                "\tmov r0, r9\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r2, 0x1\n"
-                "\tadd r9, r2\n"
-                "\tcmp r1, 0x1\n"
-                "\tbne _0813C154\n"
-                "\tmovs r4, 0\n"
-                "\tldr r0, _0813C14C @ =gSaveBlock2Ptr\n"
-                "\tldr r1, [r0]\n"
-                "\tldrb r1, [r1]\n"
-                "\tcmp r1, 0xFF\n"
-                "\tbeq _0813C0AC_masterLoop\n"
-                "\tldr r5, _0813C150 @ =gGlyphInfo + 0x80\n"
-                "_0813C106:\n"
-                "\tldr r0, [r0]\n"
-                "\tadds r0, r4\n"
-                "\tldrb r1, [r0]\n"
-                "\tldr r0, [sp, 0x28]\n"
-                "\tstr r0, [sp]\n"
-                "\tstr r7, [sp, 0x4]\n"
-                "\tmov r2, r10\n"
-                "\tstr r2, [sp, 0x8]\n"
-                "\tldr r0, [sp, 0x2C]\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tldr r2, [sp, 0x30]\n"
-                "\tstr r2, [sp, 0x10]\n"
-                "\tldr r0, [sp, 0x24]\n"
-                "\tadd r2, sp, 0x14\n"
-                "\tadd r3, sp, 0x1C\n"
-                "\tbl DecompressAndRenderGlyph\n"
-                "\tldr r0, [sp, 0x24]\n"
-                "\tldrb r0, [r5]\n"
-                "\tadds r0, r7, r0\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "\tadds r0, r4, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tcmp r4, 0x9\n"
-                "\tbhi _0813C0AC_masterLoop\n"
-                "\tldr r0, _0813C14C @ =gSaveBlock2Ptr\n"
-                "\tldr r1, [r0]\n"
-                "\tadds r1, r4\n"
-                "\tldrb r1, [r1]\n"
-                "\tcmp r1, 0xFF\n"
-                "\tbne _0813C106\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "\t.align 2, 0\n"
-                "_0813C14C: .4byte gSaveBlock2Ptr\n"
-                "_0813C150: .4byte gGlyphInfo + 0x80\n"
-                "_0813C154:\n"
-                "\tcmp r1, 0x2\n"
-                "\tbne _0813C0AC_masterLoop\n"
-                "\tmovs r4, 0\n"
-                "\tldr r5, _0813C160 @ =gGlyphInfo + 0x80\n"
-                "\tb _0813C1BC\n"
-                "\t.align 2, 0\n"
-                "_0813C160: .4byte gGlyphInfo + 0x80\n"
-                "_0813C164:\n"
-                "\tldrb r1, [r1]\n"
-                "\tldr r2, [sp, 0x28]\n"
-                "\tstr r2, [sp]\n"
-                "\tstr r7, [sp, 0x4]\n"
-                "\tmov r0, r10\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tldr r2, [sp, 0x2C]\n"
-                "\tstr r2, [sp, 0xC]\n"
-                "\tldr r0, [sp, 0x30]\n"
-                "\tstr r0, [sp, 0x10]\n"
-                "\tldr r0, [sp, 0x24]\n"
-                "\tadd r2, sp, 0x14\n"
-                "\tadd r3, sp, 0x1C\n"
-                "\tbl DecompressAndRenderGlyph\n"
-                "\tb _0813C1AC\n"
-                "_0813C184:\n"
-                "\tldr r0, _0813C1D8 @ =gString_Someone\n"
-                "\tadds r1, r4, r0\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbeq _0813C0AC_masterLoop\n"
-                "\tadds r1, r0, 0\n"
-                "\tldr r2, [sp, 0x28]\n"
-                "\tstr r2, [sp]\n"
-                "\tstr r7, [sp, 0x4]\n"
-                "\tmov r0, r10\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tldr r2, [sp, 0x2C]\n"
-                "\tstr r2, [sp, 0xC]\n"
-                "\tldr r0, [sp, 0x30]\n"
-                "\tstr r0, [sp, 0x10]\n"
-                "\tldr r0, [sp, 0x24]\n"
-                "\tadd r2, sp, 0x14\n"
-                "\tadd r3, sp, 0x1C\n"
-                "\tbl DecompressAndRenderGlyph\n"
-                "_0813C1AC:\n"
-                "\tldr r1, [sp, 0x24]\n"
-                "\tldrb r0, [r5]\n"
-                "\tadds r0, r7, r0\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "\tadds r0, r4, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "_0813C1BC:\n"
-                "\tldr r0, _0813C1DC @ =0x00000834\n"
-                "\tbl FlagGet\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0813C184\n"
-                "\tldr r0, _0813C1E0 @ =gString_Bill\n"
-                "\tadds r1, r4, r0\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _0813C164\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "\t.align 2, 0\n"
-                "_0813C1D8: .4byte gString_Someone\n"
-                "_0813C1DC: .4byte 0x00000834\n"
-                "_0813C1E0: .4byte gString_Bill\n"
-                "_0813C1E4:\n"
-                "\tldr r7, [sp, 0x34]\n"
-                "\tldr r1, _0813C1FC @ =gGlyphInfo\n"
-                "\tadds r1, 0x81\n"
-                "\tmov r0, r10\n"
-                "\tadds r0, 0x1\n"
-                "\tldrb r1, [r1]\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tmov r10, r0\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "\t.align 2, 0\n"
-                "_0813C1FC: .4byte gGlyphInfo\n"
-                "_0813C200:\n"
-                "\tmov r2, r9\n"
-                "\tldrb r1, [r2]\n"
-                "\tmovs r0, 0x1\n"
-                "\tadd r9, r0\n"
-                "\tsubs r0, r1, 0x1\n"
-                "\tcmp r0, 0x15\n"
-                "\tbls _0813C210\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "_0813C210:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _0813C21C @ =_0813C220\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_0813C21C: .4byte _0813C220\n"
-                "\t.align 2, 0\n"
-                "_0813C220:\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C278\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C0AC_masterLoop\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C0AC_masterLoop\n"
-                "\t.4byte _0813C0AC_masterLoop\n"
-                "\t.4byte _0813C27C\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C2C8\n"
-                "\t.4byte _0813C0AC_masterLoop\n"
-                "\t.4byte _0813C27C\n"
-                "\t.4byte _0813C2CE\n"
-                "\t.4byte _0813C2CE\n"
-                "\t.4byte _0813C282\n"
-                "\t.4byte _0813C2CE\n"
-                "\t.4byte _0813C0AC_masterLoop\n"
-                "\t.4byte _0813C0AC_masterLoop\n"
-                "_0813C278:\n"
-                "\tmovs r1, 0x1\n"
-                "\tadd r9, r1\n"
-                "_0813C27C:\n"
-                "\tmovs r2, 0x1\n"
-                "\tadd r9, r2\n"
-                "\tb _0813C2C8\n"
-                "_0813C282:\n"
-                "\tmov r2, r9\n"
-                "\tldrb r0, [r2]\n"
-                "\tldr r1, [sp, 0x34]\n"
-                "\tadds r0, r1\n"
-                "\tsubs r6, r0, r7\n"
-                "\tcmp r6, 0\n"
-                "\tble _0813C2C8\n"
-                "\tldr r2, [sp, 0x28]\n"
-                "\tstr r2, [sp, 0x1C]\n"
-                "\tldr r1, [sp, 0x2C]\n"
-                "\tlsls r0, r1, 3\n"
-                "\tadd r4, sp, 0x1C\n"
-                "\tmovs r5, 0\n"
-                "\tstrh r0, [r4, 0x4]\n"
-                "\tldr r2, [sp, 0x30]\n"
-                "\tlsls r0, r2, 3\n"
-                "\tstrh r0, [r4, 0x6]\n"
-                "\tldr r0, [sp, 0x24]\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl GetFontAttribute\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tlsls r3, r6, 16\n"
-                "\tlsrs r3, 16\n"
-                "\tstr r0, [sp]\n"
-                "\tstr r5, [sp, 0x4]\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r1, r7, 0\n"
-                "\tmov r2, r10\n"
-                "\tbl FillBitmapRect4Bit\n"
-                "\tadds r0, r7, r6\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "_0813C2C8:\n"
-                "\tmovs r0, 0x1\n"
-                "\tadd r9, r0\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "_0813C2CE:\n"
-                "\tmovs r1, 0x1\n"
-                "\tadd r9, r1\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "_0813C2D4:\n"
-                "\tmov r2, r9\n"
-                "\tldrb r1, [r2]\n"
-                "\tmovs r0, 0x1\n"
-                "\tadd r9, r0\n"
-                "\tadds r6, r1, 0\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl GetKeypadIconTileOffset\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 19\n"
-                "\tldr r1, _0813C344 @ =gKeypadIconTiles\n"
-                "\tadds r0, r1\n"
-                "\tstr r0, [sp, 0x14]\n"
-                "\tadd r1, sp, 0x14\n"
-                "\tmovs r2, 0\n"
-                "\tmov r8, r2\n"
-                "\tmovs r0, 0x80\n"
-                "\tstrh r0, [r1, 0x4]\n"
-                "\tstrh r0, [r1, 0x6]\n"
-                "\tldr r0, [sp, 0x28]\n"
-                "\tstr r0, [sp, 0x1C]\n"
-                "\tldr r1, [sp, 0x2C]\n"
-                "\tlsls r0, r1, 3\n"
-                "\tadd r5, sp, 0x1C\n"
-                "\tstrh r0, [r5, 0x4]\n"
-                "\tldr r2, [sp, 0x30]\n"
-                "\tlsls r0, r2, 3\n"
-                "\tstrh r0, [r5, 0x6]\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl GetKeypadIconWidth\n"
-                "\tadds r4, r0, 0\n"
-                "\tlsls r4, 24\n"
-                "\tlsrs r4, 24\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl GetKeypadIconHeight\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstr r7, [sp]\n"
-                "\tmov r1, r10\n"
-                "\tstr r1, [sp, 0x4]\n"
-                "\tstr r4, [sp, 0x8]\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tmov r2, r8\n"
-                "\tstr r2, [sp, 0x10]\n"
-                "\tadd r0, sp, 0x14\n"
-                "\tadds r1, r5, 0\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0\n"
-                "\tbl BlitBitmapRect4Bit\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl GetKeypadIconWidth\n"
-                "\tb _0813C38E\n"
-                "\t.align 2, 0\n"
-                "_0813C344: .4byte gKeypadIconTiles\n"
-                "_0813C348:\n"
-                "\tmov r0, r9\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r2, 0x80\n"
-                "\tlsls r2, 1\n"
-                "\tadds r0, r2, 0\n"
-                "\torrs r1, r0\n"
-                "\tmovs r0, 0x1\n"
-                "\tadd r9, r0\n"
-                "_0813C358:\n"
-                "\tcmp r1, 0\n"
-                "\tbne _0813C36A\n"
-                "\tldr r1, [sp, 0x24]\n"
-                "\tcmp r1, 0\n"
-                "\tbne _0813C366\n"
-                "\tadds r0, r7, 0x5\n"
-                "\tb _0813C390\n"
-                "_0813C366:\n"
-                "\tadds r0, r7, 0x4\n"
-                "\tb _0813C390\n"
-                "_0813C36A:\n"
-                "\tadd r3, sp, 0x1C\n"
-                "\tldr r2, [sp, 0x28]\n"
-                "\tstr r2, [sp]\n"
-                "\tstr r7, [sp, 0x4]\n"
-                "\tmov r0, r10\n"
-                "\tstr r0, [sp, 0x8]\n"
-                "\tldr r2, [sp, 0x2C]\n"
-                "\tstr r2, [sp, 0xC]\n"
-                "\tldr r0, [sp, 0x30]\n"
-                "\tstr r0, [sp, 0x10]\n"
-                "\tldr r0, [sp, 0x24]\n"
-                "\tadd r2, sp, 0x14\n"
-                "\tbl DecompressAndRenderGlyph\n"
-                "\tldr r1, [sp, 0x24]\n"
-                "\tldr r0, _0813C398 @ =gGlyphInfo\n"
-                "\tadds r0, 0x80\n"
-                "\tldrb r0, [r0]\n"
-                "_0813C38E:\n"
-                "\tadds r0, r7, r0\n"
-                "_0813C390:\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "\tb _0813C0AC_masterLoop\n"
-                "\t.align 2, 0\n"
-                "_0813C398: .4byte gGlyphInfo\n"
-                "_0813C39C:\n"
-                "\tadd sp, 0x38\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
-}
-#endif //NONMATCHING
 
 void DecompressAndRenderGlyph(u8 font, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *destBlit, u8 *destBuffer, u8 x, u8 y, u8 width, u8 height)
 {
@@ -925,13 +576,13 @@ void DecompressAndRenderGlyph(u8 font, u16 glyph, struct Bitmap *srcBlit, struct
         DecompressGlyphFont5(glyph, FALSE);
     else
         DecompressGlyphFont2(glyph, FALSE);
-    srcBlit->pixels = gGlyphInfo;
+    srcBlit->pixels = gGlyphInfo.pixels;
     srcBlit->width = 16;
     srcBlit->height = 16;
     destBlit->pixels = destBuffer;
     destBlit->width = width * 8;
     destBlit->height = height * 8;
-    BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gGlyphInfo[0x80], gGlyphInfo[0x81], 0);
+    BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gGlyphInfo.width, gGlyphInfo.height, 0);
 }
 
 void HelpSystem_PrintText_Row61(const u8 * str)

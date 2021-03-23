@@ -507,8 +507,8 @@ static void sub_812E768(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
 {
     s32 loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     u16 toOrr;
-    const u8 *pixelsSrc;
-    u16 *pixelsDst;
+    u8 *pixelsSrc;
+    u8 *pixelsDst;
 
     if (dst->width - dstX < width)
         xEnd = dst->width - dstX + srcX;
@@ -525,51 +525,49 @@ static void sub_812E768(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
     {
         for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
         {
-            #ifndef NONMATCHING
-                asm("":::"r4");
-            #endif
-            pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B);
-            pixelsDst = (u16 *)(dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)( loopDstY << 0x1d) >> 0x1B));
+            pixelsSrc = (u8 *)(src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B));
+            pixelsDst = (u8 *)(dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)( loopDstY << 0x1d) >> 0x1B));
 
-            if ((uintptr_t)pixelsDst & 0x1)
+            if ((u32)pixelsDst & 0x1)
             {
-                pixelsDst = (void *)pixelsDst - 1;
+                pixelsDst--;
                 if (loopDstX & 0x1)
                 {
-                    toOrr = *pixelsDst & 0x0fff;
+                    toOrr = *(vu16 *)pixelsDst & 0x0fff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 8);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 8);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 12);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 12);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xf0ff;
+                    toOrr = *(vu16 *)pixelsDst & 0xf0ff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 8);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 8);
                 }
             }
             else
             {
                 if (loopDstX & 1)
                 {
-                    toOrr = *pixelsDst & 0xff0f;
+                    toOrr = *(vu16 *)pixelsDst & 0xff0f;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 0);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 0);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 4);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 4);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xfff0;
+                    toOrr = *(vu16 *)pixelsDst & 0xfff0;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) >> 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) >> 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) >> 0);
+                        toOrr |= ((*pixelsSrc & 0x0f) >> 0);
                 }
             }
+            *(vu16 *)pixelsDst = toOrr;
         }
     }
 }

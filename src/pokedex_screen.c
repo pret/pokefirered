@@ -925,7 +925,7 @@ bool8 sub_8102798(void)
         FREE_IF_NOT_NULL(GetBgTilemapBuffer(1));
         FREE_IF_NOT_NULL(GetBgTilemapBuffer(2));
         FREE_IF_NOT_NULL(GetBgTilemapBuffer(3));
-        BGMVolumeMax_EnableHelySystemReduction();
+        BGMVolumeMax_EnableHelpSystemReduction();
         break;
     }
     return TRUE;

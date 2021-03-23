@@ -636,7 +636,7 @@ void SetBGMVolume_SuppressHelpSystemReduction(u16 volume)
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, volume);
 }
 
-void BGMVolumeMax_EnableHelySystemReduction(void)
+void BGMVolumeMax_EnableHelpSystemReduction(void)
 {
     gDisableHelpSystemVolumeReduce = FALSE;
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);

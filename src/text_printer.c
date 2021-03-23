@@ -209,28 +209,28 @@ u8 GetLastTextColor(u8 colorType)
     }
 }
 
-#define GLYPH_COPY(widthOffset, heightOffset, width, height, a4, a5, a6, sizeX)                                 \
-{                                                                                                               \
-    int xAdd, v1, yAdd, v3, toOrr, bits;                                                                        \
-    u8 * src, * dst;                                                                                            \
-    u32 v8;                                                                                                     \
-                                                                                                                \
-    src = gGlyphInfo.pixels + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                    \
-    for (yAdd = 0, v3 = a6 + heightOffset; yAdd < height; yAdd++, v3++)                                         \
-    {                                                                                                           \
-        v8 = *(u32 *)src;                                                                                       \
-        for (xAdd = 0, v1 = a5 + widthOffset; xAdd < width; xAdd++, v1++)                                       \
-        {                                                                                                       \
-            dst = (u8 *)((a4) + ((v1 >> 1) & 3) + ((v1 >> 3) << 5) + (((v3 >> 3) * (sizeX)) << 5) + ((u32)(v3 << 29) >> 27));                                                                                               \
-            toOrr = (v8 >> (xAdd * 4)) & 0xF;                                                                   \
-            if (toOrr != 0)                                                                                     \
-            {                                                                                                   \
-                bits = (v1 & 1) * 4;                                                                            \
-                *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));                                               \
-            }                                                                                                   \
-        }                                                                                                       \
-        src += 4;                                                                                               \
-    }                                                                                                           \
+#define GLYPH_COPY(widthOffset, heightOffset, width, height, a4, a5, a6, sizeX)                                               \
+{                                                                                                                             \
+    int xAdd, v1, yAdd, v3, toOrr, bits;                                                                                      \
+    u8 * src, * dst;                                                                                                          \
+    u32 v8;                                                                                                                   \
+                                                                                                                              \
+    src = gGlyphInfo.pixels + (heightOffset / 8 * 0x40) + (widthOffset / 8 * 0x20);                                           \
+    for (yAdd = 0, v3 = a6 + heightOffset; yAdd < height; yAdd++, v3++)                                                       \
+    {                                                                                                                         \
+        v8 = *(u32 *)src;                                                                                                     \
+        for (xAdd = 0, v1 = a5 + widthOffset; xAdd < width; xAdd++, v1++)                                                     \
+        {                                                                                                                     \
+            dst = (u8 *)((a4) + ((v1 >> 1) & 3) + ((v1 >> 3) << 5) + (((v3 >> 3) * (sizeX)) << 5) + ((u32)(v3 << 29) >> 27)); \
+            toOrr = (v8 >> (xAdd * 4)) & 0xF;                                                                                 \
+            if (toOrr != 0)                                                                                                   \
+            {                                                                                                                 \
+                bits = (v1 & 1) * 4;                                                                                          \
+                *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));                                                             \
+            }                                                                                                                 \
+        }                                                                                                                     \
+        src += 4;                                                                                                             \
+    }                                                                                                                         \
 }
 
 void CopyGlyphToWindow(struct TextPrinter *textPrinter)

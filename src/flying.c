@@ -26,7 +26,7 @@ static void sub_80B198C(u8 taskId);
 static void sub_80B1A9C(struct Sprite *sprite);
 static void sub_80B1BF8(struct Sprite *sprite);
 static void sub_80B1CC0(struct Sprite *sprite);
-static void sub_80B1F94(struct Sprite *sprite);
+static void AnimFallingFeather_Step(struct Sprite *sprite);
 static void sub_80B268C(struct Sprite *sprite);
 static void sub_80B2820(struct Sprite *sprite);
 static void sub_80B2A50(struct Sprite *sprite);
@@ -532,7 +532,7 @@ static void sub_80B1CC0(struct Sprite *sprite)
     }
 }
 
-void sub_80B1D3C(struct Sprite *sprite)
+void DestroyAnimSpriteAfterTimer(struct Sprite *sprite)
 {
     if (sprite->data[0]-- <= 0)
     {
@@ -631,15 +631,14 @@ static void AnimFallingFeather(struct Sprite *sprite)
         gOamMatrices[matrixNum].b = sinVal;
         gOamMatrices[matrixNum].c = -sinVal;
     }
-    sprite->callback = sub_80B1F94;
+    sprite->callback = AnimFallingFeather_Step;
 }
 
-static void sub_80B1F94(struct Sprite *sprite)
+static void AnimFallingFeather_Step(struct Sprite *sprite)
 {
     u8 matrixNum, sinIndex;
     s16 sinVal = 0;
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
-
     if (data->unk0_0a)
     {
         if (data->unk1-- % 256 == 0)
@@ -653,13 +652,13 @@ static void sub_80B1F94(struct Sprite *sprite)
         switch (data->unk2 / 64)
         {
         case 0: 
-            if (data->unk0_1 << 24 >> 24 == 1) // the shifts have to be here
+            if ((u8)data->unk0_1 == 1) //casts to u8 here are necessary for matching
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 3)
+            else if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -706,13 +705,13 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 0;
             break;
         case 1:
-            if (data->unk0_1 << 24 >> 24 == 0)
+            if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 2)
+            else if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -757,13 +756,13 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 1;
             break;
         case 2:
-            if (data->unk0_1 << 24 >> 24 == 3)
+            if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 1)
+            else if ((u8)data->unk0_1 == 1)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -808,11 +807,11 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 2;
             break;
         case 3:
-            if (data->unk0_1 << 24 >> 24 == 2)
+            if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0d = 1;
             }
-            else if (data->unk0_1 << 24 >> 24 == 0)
+            else if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -858,26 +857,28 @@ static void sub_80B1F94(struct Sprite *sprite)
             data->unk0_1 = 3;
             break;
         }
-        #ifndef NONMATCHING
-            asm("":::"r8");
-        #endif
-        sprite->pos2.x = (data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
+
+        sprite->pos2.x = ((s32)data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
         matrixNum = sprite->oam.matrixNum;
+
         sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
         sinVal = gSineTable[sinIndex];
+
         gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
         gOamMatrices[matrixNum].b = sinVal;
         gOamMatrices[matrixNum].c = -sinVal;
+
         data->unk8 += data->unk6;
         sprite->pos1.y = data->unk8 >> 8;
         if (data->unk4 & 0x8000)
             data->unk2 = (data->unk2 - (data->unk4 & 0x7FFF)) & 0xFF;
         else
             data->unk2 = (data->unk2 + (data->unk4 & 0x7FFF)) & 0xFF;
+
         if (sprite->pos1.y + sprite->pos2.y >= data->unkE_1)
         {
             sprite->data[0] = 0;
-            sprite->callback = sub_80B1D3C;
+            sprite->callback = DestroyAnimSpriteAfterTimer;
         }
     }
 }
@@ -983,7 +984,7 @@ static void sub_80B268C(struct Sprite *sprite)
     x = (((u16 *)&fData)[7] << 1);
     y = (((u16 *)tData)[7] & 1);
     ((u16 *)tData)[7] = y | x;
-    sprite->callback = sub_80B1F94;
+    sprite->callback = AnimFallingFeather_Step;
 }
 
 static void AnimWhirlwindLine(struct Sprite *sprite)

@@ -82,14 +82,6 @@ struct BackupMapLayout
     u16 *map;
 };
 
-union __attribute__((packed)) ObjectEventRange {
-    u8 as_byte;
-    struct __attribute__((packed)) {
-        u8 x:4;
-        u8 y:4;
-    } __attribute__((aligned (1))) as_nybbles;
-} __attribute__((aligned (1)));
-
 struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
@@ -239,8 +231,9 @@ struct ObjectEvent
     /*0x10*/        struct Coords16 currentCoords;
     /*0x14*/        struct Coords16 previousCoords;
     /*0x18*/        u8 facingDirection:4;
-    /*0x18*/        u8 movementDirection:4;
-    /*0x19*/        union ObjectEventRange range;
+                    u8 movementDirection:4;
+                    u16 rangeX:4;
+                    u16 rangeY:4;
     /*0x1A*/        u8 fieldEffectSpriteId;
     /*0x1B*/        u8 warpArrowSpriteId;
     /*0x1C*/        u8 movementActionId;

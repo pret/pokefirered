@@ -850,7 +850,7 @@ static void AnimHitSplatPersistent(struct Sprite *sprite)
         InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
-    StoreSpriteCallbackInData6(sprite, sub_80B1D3C);
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSpriteAfterTimer);
 }
 
 static void AnimHitSplatHandleInvert(struct Sprite *sprite)

@@ -77,8 +77,8 @@ static void PlayerAvatarTransition_Underwater(struct ObjectEvent * playerObject)
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent * playerObject);
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
-static bool8 player_is_anim_in_certain_ranges(void);
-static bool8 player_is_anim_in_certain_ranges__running_state_not_turn(void);
+static bool8 PlayerAnimIsMultiFrameStationary(void);
+static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void);
 static void PlayCollisionSoundIfNotFacingWarp(u8 direction);
 static void PlayerGoSpin(u8 direction);
 static void PlayerApplyTileForcedMovement(u8 metatileBehavior);
@@ -746,18 +746,18 @@ void UpdatePlayerAvatarTransitionState(void)
     {
         if (!PlayerCheckIfAnimFinishedOrInactive())
         {
-            if (!player_is_anim_in_certain_ranges())
+            if (!PlayerAnimIsMultiFrameStationary())
                 gPlayerAvatar.tileTransitionState = T_TILE_TRANSITION;
         }
         else
         {
-            if (!player_is_anim_in_certain_ranges__running_state_not_turn())
+            if (!PlayerAnimIsMultiFrameStationaryAndStateNotTurning())
                 gPlayerAvatar.tileTransitionState = T_TILE_CENTER;
         }
     }
 }
 
-static bool8 player_is_anim_in_certain_ranges(void)
+static bool8 PlayerAnimIsMultiFrameStationary(void)
 {
     u8 movementActionId = gObjectEvents[gPlayerAvatar.objectEventId].movementActionId;
 
@@ -771,9 +771,9 @@ static bool8 player_is_anim_in_certain_ranges(void)
         return FALSE;
 }
 
-static bool8 player_is_anim_in_certain_ranges__running_state_not_turn(void)
+static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void)
 {
-    if (player_is_anim_in_certain_ranges() && gPlayerAvatar.runningState != TURN_DIRECTION)
+    if (PlayerAnimIsMultiFrameStationary() && gPlayerAvatar.runningState != TURN_DIRECTION)
         return TRUE;
     else
         return FALSE;

@@ -1412,7 +1412,7 @@ static void LoadMonIconGfx(void)
 {
     u8 i;
 
-    CpuSet(gMonIconPalettes, sTrainerCardDataPtr->monIconPals, NELEMS(sTrainerCardDataPtr->monIconPals));
+    CpuCopy16(gMonIconPalettes, sTrainerCardDataPtr->monIconPals, 2 * NELEMS(sTrainerCardDataPtr->monIconPals));
     switch (sTrainerCardDataPtr->trainerCard.monIconTint)
     {
     case MON_ICON_TINT_NORMAL:

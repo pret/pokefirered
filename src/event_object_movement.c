@@ -2002,7 +2002,7 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = spriteId;
     gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
-    SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, 0x20);
+    SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, PLAYER_AVATAR_FLAG_CONTROLLABLE);
 }
 
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
@@ -2223,7 +2223,7 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, 16 * paletteSlot + 0x100, 0x20);
-    sub_8083598(paletteSlot);
+    ApplyGlobalFieldPaletteTint(paletteSlot);
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
@@ -2787,7 +2787,7 @@ static bool8 MovementType_WanderAround_Step5(struct ObjectEvent *objectEvent, st
 
 static bool8 MovementType_WanderAround_Step5Duplicate(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    ObjectEventSetSingleMovement(objectEvent, sprite, sub_8063F2C(objectEvent->movementDirection));
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowestMovementAction(objectEvent->movementDirection));
     objectEvent->singleMovementActive = TRUE;
     sprite->data[1] = 6;
     return TRUE;
@@ -5222,7 +5222,7 @@ u8 sub_8063F10(u32 idx)
     return gUnknown_83A64F6[direction];
 }
 
-dirn_to_anim(sub_8063F2C, gUnknown_83A64FB);
+dirn_to_anim(GetWalkSlowestMovementAction, gUnknown_83A64FB);
 dirn_to_anim(GetWalkSlowMovementAction, gUnknown_83A6500);
 dirn_to_anim(GetWalkNormalMovementAction, gUnknown_83A6505);
 dirn_to_anim(GetWalkFastMovementAction, gUnknown_83A650A);
@@ -5232,7 +5232,7 @@ dirn_to_anim(GetWalkFastestMovementAction, gUnknown_83A6519);
 dirn_to_anim(GetSlideMovementAction, gUnknown_83A651E);
 dirn_to_anim(GetPlayerRunMovementAction, gUnknown_83A6523);
 dirn_to_anim(GetPlayerRunSlowMovementAction, gUnknown_83A6528);
-dirn_to_anim(sub_80640E4, gUnknown_83A652D);
+dirn_to_anim(GetSpinMovementAction, gUnknown_83A652D);
 dirn_to_anim(GetJump2MovementAction, gUnknown_83A6532);
 dirn_to_anim(GetJumpInPlaceMovementAction, gUnknown_83A6537);
 dirn_to_anim(GetJumpInPlaceTurnAroundMovementAction, gUnknown_83A653C);
@@ -5328,7 +5328,7 @@ static void ObjectEventSetSingleMovement(struct ObjectEvent *objectEvent, struct
     
     if (gQuestLogPlaybackState == 2)
     {
-        sub_81124EC(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, animId);
+        QuestLogRecordNPCStep(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, animId);
     }
 }
 

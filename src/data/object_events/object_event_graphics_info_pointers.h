@@ -1,14 +1,14 @@
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedBike;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedSurf;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedItem;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedFieldMove;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedFish;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedVSSeeker;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedVSSeekerBike;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenNormal;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenBike;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenSurf;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenItem;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenFieldMove;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenFish;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenVSSeeker;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenVSSeekerBike;
@@ -156,14 +156,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_RED_NORMAL]               = &gObjectEventGraphicsInfo_RedNormal,
     [OBJ_EVENT_GFX_RED_BIKE]                 = &gObjectEventGraphicsInfo_RedBike,
     [OBJ_EVENT_GFX_RED_SURF]                 = &gObjectEventGraphicsInfo_RedSurf,
-    [OBJ_EVENT_GFX_RED_ITEM]                 = &gObjectEventGraphicsInfo_RedItem,
+    [OBJ_EVENT_GFX_RED_FIELD_MOVE]           = &gObjectEventGraphicsInfo_RedFieldMove,
     [OBJ_EVENT_GFX_RED_FISH]                 = &gObjectEventGraphicsInfo_RedFish,
     [OBJ_EVENT_GFX_RED_VS_SEEKER]            = &gObjectEventGraphicsInfo_RedVSSeeker,
     [OBJ_EVENT_GFX_RED_VS_SEEKER_BIKE]       = &gObjectEventGraphicsInfo_RedVSSeekerBike,
     [OBJ_EVENT_GFX_GREEN_NORMAL]             = &gObjectEventGraphicsInfo_GreenNormal,
     [OBJ_EVENT_GFX_GREEN_BIKE]               = &gObjectEventGraphicsInfo_GreenBike,
     [OBJ_EVENT_GFX_GREEN_SURF]               = &gObjectEventGraphicsInfo_GreenSurf,
-    [OBJ_EVENT_GFX_GREEN_ITEM]               = &gObjectEventGraphicsInfo_GreenItem,
+    [OBJ_EVENT_GFX_GREEN_FIELD_MOVE]         = &gObjectEventGraphicsInfo_GreenFieldMove,
     [OBJ_EVENT_GFX_GREEN_FISH]               = &gObjectEventGraphicsInfo_GreenFish,
     [OBJ_EVENT_GFX_GREEN_VS_SEEKER]          = &gObjectEventGraphicsInfo_GreenVSSeeker,
     [OBJ_EVENT_GFX_GREEN_VS_SEEKER_BIKE]     = &gObjectEventGraphicsInfo_GreenVSSeekerBike,

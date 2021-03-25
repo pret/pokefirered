@@ -173,10 +173,10 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
 
     if (eventId == QL_EVENT_DEPARTED && sEventShouldNotRecordSteps == 2)
     {
-        sub_811381C();
+        QL_EnableRecordingSteps();
         return;
     }
-    sub_811381C();
+    QL_EnableRecordingSteps();
     if (gQuestLogState == QL_STATE_PLAYBACK)
         return;
 
@@ -348,7 +348,7 @@ static bool8 ShouldRegisterEvent_HandleBeatStoryTrainer(u16 eventId, const u16 *
     return FALSE;
 }
 
-void sub_811381C(void)
+void QL_EnableRecordingSteps(void)
 {
     sEventShouldNotRecordSteps = 0;
 }

@@ -31,7 +31,7 @@ EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
-EWRAM_DATA u8 gUnknown_2036E28 = 0;
+EWRAM_DATA u8 gGlobalFieldTintMode = QL_TINT_NONE;
 
 static const struct ConnectionFlags sDummyConnectionFlags = {};
 
@@ -890,48 +890,48 @@ static void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 nu
     }
 }
 
-static void sub_80598CC(u16 a0, u16 a1)
+static void Fieldmap_ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
-    switch (gUnknown_2036E28)
+    switch (gGlobalFieldTintMode)
     {
-        case 0:
+        case QL_TINT_NONE:
             return;
-        case 1:
-            TintPalette_GrayScale(gPlttBufferUnfaded + a0, a1);
+        case QL_TINT_GRAYSCALE:
+            TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
             break;
-        case 2:
-            TintPalette_SepiaTone(gPlttBufferUnfaded + a0, a1);
+        case QL_TINT_SEPIA:
+            TintPalette_SepiaTone(gPlttBufferUnfaded + offset, size);
             break;
-        case 3:
-            sub_8111F38(a0, a1);
-            TintPalette_GrayScale(gPlttBufferUnfaded + a0, a1);
+        case QL_TINT_BACKUP_GRAYSCALE:
+            QuestLog_BackUpPalette(offset, size);
+            TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
             break;
         default:
             return;
     }
-    CpuCopy16(gPlttBufferUnfaded + a0, gPlttBufferFaded + a0, a1 * sizeof(u16));
+    CpuCopy16(gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, size * sizeof(u16));
 }
 
-void sub_8059948(u8 a0, u8 a1)
+void Fieldmap_ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
-    switch (gUnknown_2036E28)
+    switch (gGlobalFieldTintMode)
     {
-        case 0:
+        case QL_TINT_NONE:
             return;
-        case 1:
-            TintPalette_GrayScale(gPlttBufferUnfaded + a0 * 16, a1 * 16);
+        case QL_TINT_GRAYSCALE:
+            TintPalette_GrayScale(gPlttBufferUnfaded + slot * 16, count * 16);
             break;
-        case 2:
-            TintPalette_SepiaTone(gPlttBufferUnfaded + a0 * 16, a1 * 16);
+        case QL_TINT_SEPIA:
+            TintPalette_SepiaTone(gPlttBufferUnfaded + slot * 16, count * 16);
             break;
-        case 3:
-            sub_8111F38(a0 * 16, a1 * 16);
-            TintPalette_GrayScale(gPlttBufferUnfaded + a0 * 16, a1 * 16);
+        case QL_TINT_BACKUP_GRAYSCALE:
+            QuestLog_BackUpPalette(slot * 16, count * 16);
+            TintPalette_GrayScale(gPlttBufferUnfaded + slot * 16, count * 16);
             break;
         default:
             return;
     }
-    CpuFastCopy(gPlttBufferUnfaded + a0 * 16, gPlttBufferFaded + a0 * 16, a1 * 16 * sizeof(u16));
+    CpuFastCopy(gPlttBufferUnfaded + slot * 16, gPlttBufferFaded + slot * 16, count * 16 * sizeof(u16));
 }
 
 static void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u16 size)
@@ -944,17 +944,17 @@ static void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOff
         {
             LoadPalette(&black, destOffset, 2);
             LoadPalette(((u16*)tileset->palettes) + 1, destOffset + 1, size - 2);
-            sub_80598CC(destOffset + 1, (size - 2) >> 1);
+            Fieldmap_ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
         }
         else if (tileset->isSecondary == TRUE)
         {
             LoadPalette(((u16*)tileset->palettes) + (NUM_PALS_IN_PRIMARY * 16), destOffset, size);
-            sub_80598CC(destOffset, size >> 1);
+            Fieldmap_ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
         else
         {
             LoadCompressedPalette((u32*)tileset->palettes, destOffset, size);
-            sub_80598CC(destOffset, size >> 1);
+            Fieldmap_ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
     }
 }

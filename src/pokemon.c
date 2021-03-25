@@ -1594,16 +1594,16 @@ static const u8 sStatsToRaise[] =
 
 static const s8 sFriendshipEventDeltas[][3] = 
 {
-    { 5,  3,  2 },
-    { 5,  3,  2 },
-    { 1,  1,  0 },
-    { 3,  2,  1 },
-    { 1,  1,  0 },
-    { 1,  1,  1 },
-    { 3,  3,  3 },
-    {-1, -1, -1 },
-    {-5, -5, -10 },
-    {-5, -5, -10 },
+    [FRIENDSHIP_EVENT_GROW_LEVEL]           = { 5,  3,  2 },
+    [FRIENDSHIP_EVENT_VITAMIN]              = { 5,  3,  2 },
+    [FRIENDSHIP_EVENT_BATTLE_ITEM]          = { 1,  1,  0 },
+    [FRIENDSHIP_EVENT_LEAGUE_BATTLE]        = { 3,  2,  1 },
+    [FRIENDSHIP_EVENT_LEARN_TMHM]           = { 1,  1,  0 },
+    [FRIENDSHIP_EVENT_WALKING]              = { 1,  1,  1 },
+    [FRIENDSHIP_EVENT_MASSAGE]              = { 3,  3,  3 },
+    [FRIENDSHIP_EVENT_FAINT_SMALL]          = {-1, -1, -1 },
+    [FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE] = {-5, -5, -10 },
+    [FRIENDSHIP_EVENT_FAINT_LARGE]          = {-5, -5, -10 },
 };
 
 static const u16 sHMMoves[] = 
@@ -1622,7 +1622,7 @@ static const u16 sDeoxysBaseStats[] =
     180, // Sp.Attack
     20, // Sp.Defense
 };
-#elif defined LEAFGREEN
+#elif defined(LEAFGREEN)
 static const u16 sDeoxysBaseStats[] =
 {
     50, // Hp
@@ -4410,7 +4410,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
 static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
-    u32 status = GetMonData(mon, MON_DATA_STATUS, 0);
+    u32 status = GetMonData(mon, MON_DATA_STATUS, NULL);
 
     if (status & healMask)
     {
@@ -4874,7 +4874,7 @@ const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon)
 {
-    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % 25;
+    return GetMonData(mon, MON_DATA_PERSONALITY, NULL) % 25;
 }
 
 static u8 GetNatureFromPersonality(u32 personality)
@@ -4886,12 +4886,12 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 {
     int i;
     u16 targetSpecies = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     u8 level;
     u16 friendship;
-    u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
+    u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, NULL);
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
 
@@ -4906,8 +4906,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     switch (type)
     {
     case EVO_MODE_NORMAL:
-        level = GetMonData(mon, MON_DATA_LEVEL, 0);
-        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
+        level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
 
         for (i = 0; i < 5; i++)
         {
@@ -4938,17 +4938,17 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 break;
             case EVO_LEVEL_ATK_GT_DEF:
                 if (gEvolutionTable[species][i].param <= level)
-                    if (GetMonData(mon, MON_DATA_ATK, 0) > GetMonData(mon, MON_DATA_DEF, 0))
+                    if (GetMonData(mon, MON_DATA_ATK, NULL) > GetMonData(mon, MON_DATA_DEF, NULL))
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_ATK_EQ_DEF:
                 if (gEvolutionTable[species][i].param <= level)
-                    if (GetMonData(mon, MON_DATA_ATK, 0) == GetMonData(mon, MON_DATA_DEF, 0))
+                    if (GetMonData(mon, MON_DATA_ATK, NULL) == GetMonData(mon, MON_DATA_DEF, NULL))
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_ATK_LT_DEF:
                 if (gEvolutionTable[species][i].param <= level)
-                    if (GetMonData(mon, MON_DATA_ATK, 0) < GetMonData(mon, MON_DATA_DEF, 0))
+                    if (GetMonData(mon, MON_DATA_ATK, NULL) < GetMonData(mon, MON_DATA_DEF, NULL))
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_SILCOON:
@@ -5237,15 +5237,10 @@ static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
     return n;
 }
 
-// TODO: Move these to constants/trainers.h
-#define TRAINER_CLASS_ELITE_FOUR     0x54
-#define TRAINER_CLASS_LEADER         0x57
-#define TRAINER_CLASS_CHAMPION       0x5A
-
 void AdjustFriendship(struct Pokemon *mon, u8 event)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     u8 holdEffect;
 
     if (heldItem == ITEM_ENIGMA_BERRY)
@@ -5262,40 +5257,56 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
 
     if (species && species != SPECIES_EGG)
     {
+        s8 delta;
+        // Friendship level refers to the column in sFriendshipEventDeltas.
+        // 0-99: Level 0 (maximum increase, typically)
+        // 100-199: Level 1
+        // 200-255: Level 2
         u8 friendshipLevel = 0;
-        s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
-        if (friendship > 99)
+        s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
+        if (friendship >= 100)
             friendshipLevel++;
-        if (friendship > 199)
+        if (friendship >= 200)
             friendshipLevel++;
 
-        if ((event != FRIENDSHIP_EVENT_WALKING || !(Random() & 1))
-         && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE
-          || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-           && (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
-            || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
-            || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))))
+        if (event == FRIENDSHIP_EVENT_WALKING)
         {
-            s8 delta = sFriendshipEventDeltas[event][friendshipLevel];
-            if (delta > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                delta = (150 * delta) / 100;
-
-            friendship += delta;
-            if (delta > 0)
-            {
-                if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
-                    friendship++;
-                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == GetCurrentRegionMapSectionId())
-                    friendship++;
-            }
-
-            if (friendship < 0)
-                friendship = 0;
-            if (friendship > 255)
-                friendship = 255;
-
-            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+            // 50% chance every 128 steps
+            if (Random() & 1)
+                return;
         }
+        if (event == FRIENDSHIP_EVENT_LEAGUE_BATTLE)
+        {
+            // Only if it's a trainer battle with league progression significance
+            if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+                return;
+            if (!(gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_LEADER_2
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_ELITE_FOUR_2
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION_2))
+                return;
+        }
+
+        delta = sFriendshipEventDeltas[event][friendshipLevel];
+        if (delta > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+            // 50% increase, rounding down
+            delta = (150 * delta) / 100;
+
+        friendship += delta;
+        if (delta > 0)
+        {
+            if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)
+                friendship++;
+            if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
+                friendship++;
+        }
+
+        // Clamp to u8
+        if (friendship < 0)
+            friendship = 0;
+        if (friendship > 255)
+            friendship = 255;
+
+        SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
     }
 }
 
@@ -5310,7 +5321,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 
     for (i = 0; i < NUM_STATS; i++)
     {
-        evs[i] = GetMonData(mon, MON_DATA_HP_EV + i, 0);
+        evs[i] = GetMonData(mon, MON_DATA_HP_EV + i, NULL);
         totalEVs += evs[i];
     }
 
@@ -5351,7 +5362,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
             break;
         }
 
-        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
 
         if (heldItem == ITEM_ENIGMA_BERRY)
         {
@@ -5390,7 +5401,7 @@ u16 GetMonEVCount(struct Pokemon *mon)
     u16 count = 0;
 
     for (i = 0; i < NUM_STATS; i++)
-        count += GetMonData(mon, MON_DATA_HP_EV + i, 0);
+        count += GetMonData(mon, MON_DATA_HP_EV + i, NULL);
 
     return count;
 }
@@ -5417,7 +5428,7 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
     {
         do
         {
-            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0) & 0xF))
+            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, NULL) & 0xF))
                 retVal |= curBit;
             partyIndex++;
             curBit <<= 1;
@@ -5425,7 +5436,7 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
         }
         while (selection);
     }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0) & 0xF)
+    else if (GetMonData(&party[0], MON_DATA_POKERUS, NULL) & 0xF)
     {
         retVal = 1;
     }
@@ -5445,7 +5456,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
     {
         do
         {
-            if ((selection & 1) && GetMonData(&party[partyIndex], MON_DATA_POKERUS, 0))
+            if ((selection & 1) && GetMonData(&party[partyIndex], MON_DATA_POKERUS, NULL))
                 retVal |= curBit;
             partyIndex++;
             curBit <<= 1;
@@ -5453,7 +5464,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
         }
         while (selection);
     }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, 0))
+    else if (GetMonData(&party[0], MON_DATA_POKERUS, NULL))
     {
         retVal = 1;
     }
@@ -5511,7 +5522,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
 
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
     if (species == SPECIES_EGG)
     {
         return 0;
@@ -5532,12 +5543,12 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[4];
     u8 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
     int i, j, k;
 
     for (i = 0; i < 4; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
 
     for (i = 0; i < 20; i++)
     {
@@ -5583,15 +5594,15 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     u16 learnedMoves[4];
     u16 moves[20];
     u8 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
     int i, j, k;
 
     if (species == SPECIES_EGG)
         return 0;
 
     for (i = 0; i < 4; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
 
     for (i = 0; i < 20; i++)
     {
@@ -5685,9 +5696,9 @@ void PlayMapChosenOrBattleBGM(u16 songId)
 
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     return GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
 
@@ -5707,9 +5718,9 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
 
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
 }
 
@@ -5757,7 +5768,7 @@ bool8 IsTradedMon(struct Pokemon *mon)
     u8 otName[PLAYER_NAME_LENGTH];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
-    otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
     return IsOtherTrainer(otId, otName);
 }
 
@@ -5824,7 +5835,7 @@ void SetWildMonHeldItem(void)
     if (!(gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
     {
         u16 rnd = Random() % 100;
-        u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
+        u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
         if (gBaseStats[species].item1 == gBaseStats[species].item2)
         {
             SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
@@ -5843,8 +5854,8 @@ void SetWildMonHeldItem(void)
 
 bool8 IsMonShiny(struct Pokemon *mon)
 {
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     return IsShinyOtIdPersonality(otId, personality);
 }
 
@@ -5893,7 +5904,7 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
     case 0:
     default:
         return FALSE;
-    case 1:
+    case DEOXYS_CHECK_BATTLE_SPRITE:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return FALSE;
         if (!gMain.inBattle)
@@ -5903,7 +5914,7 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         break;
     case 2:
         break;
-    case 3:
+    case DEOXYS_CHECK_TRADE_MAIN:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             return FALSE;
         if (!gMain.inBattle)
@@ -5913,7 +5924,7 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         return FALSE;
     case 4:
         break;
-    case 5:
+    case DEOXYS_CHECK_BATTLE_ANIM:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             if (!gMain.inBattle)
@@ -5948,7 +5959,7 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     u16 statValue;
     u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_20 || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK_ESTABLISHED || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
     {
         return statValue = 0;
     }

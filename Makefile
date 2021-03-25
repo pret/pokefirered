@@ -143,8 +143,9 @@ TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
 ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
+ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) $(ALL_BUILDS:%=%_modern) modern
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) modern
 
 MAKEFLAGS += --no-print-directory
 

@@ -6,12 +6,17 @@
 #include "constants/quest_log.h"
 #include "field_control_avatar.h"
 
+// Parameter to QuestLog_OnEscalatorWarp
+#define QL_ESCALATOR_OUT 1
+#define QL_ESCALATOR_IN  2
+
 struct QuestLogEntry
 {
-    u8 localId;
-    u8 mapNum;
-    u8 mapGroup;
-    u8 animId;
+    // When command == 2, these fields have different meanings
+    u8 localId;  // cmd == 2: Pressed A/B, checked wild, held direction, took step
+    u8 mapNum;   // cmd == 2: Always set to 0
+    u8 mapGroup; // cmd == 2: Dpad direction
+    u8 animId;   // cmd == 2: Always set to 0
     u16 duration;
     u8 command;
 };
@@ -32,13 +37,13 @@ extern u16 *gUnknown_203AE04;
 extern u16 *sEventRecordingPointer;
 extern u16 sQuestLogCursor;
 
-void sub_8112720(u8);
+void QuestLogRecordPlayerAvatarGfxTransition(u8);
 void SetQuestLogEvent(u16, const u16 *);
 void SetQLPlayedTheSlots(void);
 void QuestLog_RecordEnteredMap(u16);
 u8 sub_8112CAC(void);
 bool8 QuestLog_SchedulePlaybackCB(void (*func)(void));
-void sub_8111F38(u16 offset, u16 idx);
+void QuestLog_BackUpPalette(u16 offset, u16 size);
 void CommitQuestLogWindow1(void);
 void QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode(void);
 void ResetQuestLog(void);
@@ -54,15 +59,15 @@ void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void SetQuestLogRecordAndPlaybackPointers(void *oldSave);
 void sub_811246C(struct Sprite *sprite);
-void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3);
+void QuestLogRecordNPCStep(u8 a0, u8 a1, u8 a2, u8 a3);
 bool8 sub_8111C2C(void);
-void sub_81128BC(u8 a0);
-void sub_811278C(u8 movementActionId, u8 duration);
+void QuestLog_OnEscalatorWarp(u8 direction);
+void QuestLogRecordPlayerAvatarGfxTransitionWithDuration(u8 movementActionId, u8 duration);
 void Special_UpdateTrainerFansAfterLinkBattle(void);
-void sub_8112628(u8 movementActionId);
-void sub_81126AC(u8 movementActionId, u8 duration);
-void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration);
-void sub_8112C9C(void);
+void QuestLogRecordPlayerStep(u8 movementActionId);
+void QuestLogRecordPlayerStepWithDuration(u8 movementActionId, u8 duration);
+void QuestLogRecordNPCStepWithDuration(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration);
+void QL_AfterRecordFishActionSuccessful(void);
 void sub_8110920(void);
 void sub_8111708(void);
 void sub_81127F8(struct FieldInput * a0);
@@ -73,7 +78,7 @@ bool8 QuestLogScenePlaybackIsEnding(void);
 void sub_8115798(void);
 bool8 QuestLog_ShouldEndSceneOnMapChange(void);
 void QuestLog_AdvancePlayhead_(void);
-void sub_8111F14(void);
+void QuestLog_InitPalettesBackup(void);
 void sub_8110FCC(void);
 u8 GetQuestLogStartType(void);
 void sub_81113E4(void);
@@ -90,7 +95,7 @@ u16 *sub_8113CC8(u16 *, struct QuestLogEntry *);
 u16 *sub_8113D08(u16 *, struct QuestLogEntry *);
 u16 *sub_8113D48(u16 *, struct QuestLogEntry *);
 u16 *sub_8113D94(u16 *, struct QuestLogEntry *);
-void sub_811381C(void);
+void QL_EnableRecordingSteps(void);
 u16 *QuestLog_SkipCommand(u16 *, u16 **);
 void sub_8113ABC(const u16 *);
 u16 *sub_8113C20(u16 *, struct QuestLogEntry *);

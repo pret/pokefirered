@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "data.h"
 #include "battle.h"
 #include "constants/items.h"
 #include "mail_data.h"
@@ -1682,13 +1683,13 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-static bool8 sub_8046E34(struct DayCare *daycare, u8 daycareId)
+static bool8 BufferDayCareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
 {
     u8 nick[0x20];
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
     DayCare_GetBoxMonNickname(&daycareMon->mon, nick);
-    if (daycareMon->mail.message.itemId != 0
+    if (daycareMon->mail.message.itemId != ITEM_NONE
         && (StringCompare(nick, daycareMon->mail.monName) != 0
             || StringCompare(gSaveBlock2Ptr->playerName, daycareMon->mail.OT_name) != 0))
     {
@@ -1702,7 +1703,7 @@ static bool8 sub_8046E34(struct DayCare *daycare, u8 daycareId)
 
 bool8 DaycareMonReceivedMail(void)
 {
-    return sub_8046E34(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    return BufferDayCareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -1841,7 +1842,7 @@ static void CB2_EggHatch_0(void)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
         LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_826601C, 0x1000, 0);
+        CopyToBgTilemapBuffer(1, gTradeOrHatchMonShadowTilemap, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
         gMain.state++;
         break;
@@ -2040,16 +2041,6 @@ static void SpriteCB_Egg_1(struct Sprite* sprite)
     }
 }
 
-struct UnkStruct_82349CC
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-};
-
-extern const struct UnkStruct_82349CC gMonFrontPicCoords[NUM_SPECIES];
-
 static void SpriteCB_Egg_2(struct Sprite* sprite)
 {
     if (++sprite->data[2] > 30)
@@ -2062,7 +2053,7 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             sprite->data[0] = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gSprites[sEggHatchData->pokeSpriteID].pos2.x = 0;
-            gSprites[sEggHatchData->pokeSpriteID].pos2.y = gMonFrontPicCoords[species].field_1;
+            gSprites[sEggHatchData->pokeSpriteID].pos2.y = gMonFrontPicCoords[species].y_offset;
         }
         else
         {

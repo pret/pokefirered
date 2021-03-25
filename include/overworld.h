@@ -127,7 +127,7 @@ void CleanupOverworldWindowsAndTilemaps(void);
 u32 ComputeWhiteOutMoneyLoss(void);
 
 extern u8 gDisableMapMusicChangeOnMapLoad;
-extern u8 gUnknown_2036E28;
+extern u8 gGlobalFieldTintMode;
 
 extern bool8 (* gFieldCallback2)(void);
 

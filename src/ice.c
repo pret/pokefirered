@@ -533,7 +533,7 @@ static void sub_80AF108(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[2] + targetX;
     sprite->data[3] = gBattleAnimArgs[1] + attackerY;
     sprite->data[4] = gBattleAnimArgs[3] + targetY;
-    sub_8074C80(sprite);
+    SetupLinearTranslationWithFixedDuration(sprite);
     // won't match with while loop
     for (; (targetX >= -32 && targetX <= 272) && (targetY >= -32 && targetY <= 192); targetX += sprite->data[1], targetY += sprite->data[2])
         ;
@@ -548,7 +548,7 @@ static void sub_80AF108(struct Sprite *sprite)
     sprite->data[2] = targetX;
     sprite->data[3] = attackerY;
     sprite->data[4] = targetY;
-    sub_8074C80(sprite);
+    SetupLinearTranslationWithFixedDuration(sprite);
     sprite->data[3] = gBattleAnimArgs[5];
     sprite->data[4] = gBattleAnimArgs[6];
     sprite->callback = sub_80AF28C;
@@ -686,7 +686,7 @@ static void AnimSwirlingSnowball_Step1(struct Sprite *sprite)
     sprite->pos2.x = sprite->pos2.y = 0;
     for (i = 0; i < 8; ++i)
         sprite->data[i] = tempDataHolder[i];
-    sprite->callback = sub_8075830;
+    sprite->callback = InitAndStartAnimFastLinearTranslationWithSpeed;
     StoreSpriteCallbackInData6(sprite, AnimSwirlingSnowball_Step2);
 }
 
@@ -944,7 +944,7 @@ void AnimTask_Haze1(u8 taskId)
     GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
-    LoadPalette(&gUnknown_83C2CE0, animBg.paletteId * 16, 32);
+    LoadPalette(&gDefaultWeatherSpritePalette, animBg.paletteId * 16, 32);
     if (IsContest())
         sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
     gTasks[taskId].func = AnimTask_Haze2;
@@ -1042,7 +1042,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
     GetBattleAnimBg1Data(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
-    LoadPalette(&gUnknown_83C2CE0, animBg.paletteId * 16, 32);
+    LoadPalette(&gDefaultWeatherSpritePalette, animBg.paletteId * 16, 32);
     if (IsContest())
         sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
     gTasks[taskId].data[15] = -1;

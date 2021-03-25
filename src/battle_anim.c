@@ -1823,7 +1823,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 {
     s32 i;
 
-    sub_80767F0();
+    ResetSpritePriorityOfAllVisibleBattlers();
     UpdateOamPriorityInAllHealthboxes(0);
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -2128,7 +2128,7 @@ static void ScriptCmd_end(void)
     if (!continuousAnim)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
-        sub_80767F0();
+        ResetSpritePriorityOfAllVisibleBattlers();
         UpdateOamPriorityInAllHealthboxes(1);
         gAnimScriptActive = FALSE;
     }

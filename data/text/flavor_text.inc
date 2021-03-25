@@ -1,6 +1,6 @@
 @ Flavor text for interacting with various background objects
 
-gUnknown_81C0DB0:: @ 81C0DB0
+Text_Bookshelf:: @ 81C0DB0
 	.string "It's crammed full of POKéMON\n"
 	.string "books.$"
 
@@ -11,7 +11,7 @@ Text_NothingButPokemonBooks:: @ 81C0DD4
 Text_ATownMap:: @ 81C0DF1
 	.string "A TOWN MAP.$"
 
-gUnknown_81C0DFD:: @ 81C0DFD
+Text_PokeMartShelf:: @ 81C0DFD
 	.string "Wow!\n"
 	.string "Tons of POKéMON stuff!$"
 
@@ -19,15 +19,15 @@ Text_DishesPlatesNeatlyLinedUp:: @ 81C0E19
 	.string "Dishes and plates are neatly\n"
 	.string "lined up.$"
 
-gUnknown_81C0E40:: @ 81C0E40
+Text_Kitchen:: @ 81C0E40
 	.string "It smells delicious!\n"
 	.string "Somebody's been cooking here.$"
 
-gUnknown_81C0E73:: @ 81C0E73
+Text_Dresser:: @ 81C0E73
 	.string "It's a nicely made dresser.\n"
 	.string "It will hold a lot of stuff.$"
 
-gUnknown_81C0EAC:: @ 81C0EAC
+Text_Snacks:: @ 81C0EAC
 	.string "There's a pile of snacks here.$"
 
 Text_PokemartSign:: @ 81C0ECB
@@ -48,75 +48,75 @@ Text_Indigo_HighestAuthority:: @ 81C0F59
 	.string "The highest POKéMON authority!\n"
 	.string "POKéMON LEAGUE HQ$"
 
-gUnknown_81C0F99:: @ 81C0F99
+Text_Food:: @ 81C0F99
 	.string "It should be packed with all kinds\n"
 	.string "of delicious things to eat.$"
 
-gUnknown_81C0FD8:: @ 81C0FD8
+Text_Blueprints:: @ 81C0FD8
 	.string "It's a blueprint of some sort.\n"
 	.string "It's filled with diagrams and text.$"
 
-gUnknown_81C101B:: @ 81C101B
+Text_Painting:: @ 81C101B
 	.string "It's a pretty picture of a POKéMON.\n"
 	.string "It looks like it's feeling good.$"
 
-gUnknown_81C1060:: @ 81C1060
+Text_PowerPlantMachine:: @ 81C1060
 	.string "What could this machine be?\n"
 	.string "Better not mess around with it!$"
 
-gUnknown_81C109C:: @ 81C109C
+Text_Telephone:: @ 81C109C
 	.string "It's a telephone.\n"
 	.string "Better not use it.$"
 
-gUnknown_81C10C1:: @ 81C10C1
+Text_Computer:: @ 81C10C1
 	.string "It's all complicated words and\n"
 	.string "numbers that make no sense…$"
 
-gUnknown_81C10FC:: @ 81C10FC
+Text_AdvertisingPoster:: @ 81C10FC
 	.string "It's an advertising poster about\n"
 	.string "all kinds of products.$"
 
-gUnknown_81C1134:: @ 81C1134
+Text_TastyFood:: @ 81C1134
 	.string "Oh, that smells tasty!\n"
 	.string "It might get the stomach growling!$"
 
-gUnknown_81C116E:: @ 81C116E
+Text_TrashBin:: @ 81C116E
 	.string "Inside this…\n"
 	.string "……\p"
 	.string "There's nothing here!$"
 
-gUnknown_81C1194:: @ 81C1194
+Text_Cup:: @ 81C1194
 	.string "It's a cup with a POKéMON mark\n"
 	.string "on it.$"
 
-gUnknown_81C11BA:: @ 81C11BA
+Text_PolishedWindow:: @ 81C11BA
 	.string "The window is very well polished.$"
 
-gUnknown_81C11DC:: @ 81C11DC
+Text_BeautifulSkyWindow:: @ 81C11DC
 	.string "Outside the window…\p"
 	.string "The sky looks fantastically\n"
 	.string "beautiful.$"
 
-gUnknown_81C1217:: @ 81C1217
+Text_BlinkingLights:: @ 81C1217
 	.string "Lights in different colors are\n"
 	.string "flashing on and off.$"
 
-gUnknown_81C124B:: @ 81C124B
+Text_NeatlyLinedUpTools:: @ 81C124B
 	.string "All sorts of tools are lined up\n"
 	.string "neatly.$"
 
-gUnknown_81C1273:: @ 81C1273
+Text_ImpressiveMachine:: @ 81C1273
 	.string "It's a machine of some sort.\n"
 	.string "It sure is impressive.$"
 
-gUnknown_81C12A7:: @ 81C12A7
+Text_VideoGame:: @ 81C12A7
 	.string "It's the latest video game!\n"
 	.string "It sure looks fun!$"
 
-gUnknown_81C12D6:: @ 81C12D6
+Text_Burglary:: @ 81C12D6
 	.string "There are obvious signs of burglary\n"
 	.string "here…$"
 
-gUnknown_81C1300:: @ 81C1300
+Text_PlayerFacingTVScreen:: @ 81C1300
 	.string "There's a POKéMON on TV!\n"
 	.string "It looks like it's having fun.$"

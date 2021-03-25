@@ -81,16 +81,17 @@
 #define CHAR_x              0xEC
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
-#define CHAR_SPECIAL_F7     0xF7
-#define CHAR_KEYPAD_ICON    0xF8
-#define CHAR_EXTRA_EMOJI    0xF9
 #define CHAR_COLON          0xF0
-#define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
-#define CHAR_PROMPT_CLEAR   0xFB // waits for button press and clears dialog
-#define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
-#define PLACEHOLDER_BEGIN   0xFD // string placeholder
-#define CHAR_NEWLINE        0xFE
-#define EOS                 0xFF // end of string
+
+#define CHAR_DYNAMIC_PLACEHOLDER 0xF7
+#define CHAR_KEYPAD_ICON         0xF8
+#define CHAR_EXTRA_EMOJI         0xF9
+#define CHAR_PROMPT_SCROLL       0xFA // waits for button press and scrolls dialog
+#define CHAR_PROMPT_CLEAR        0xFB // waits for button press and clears dialog
+#define EXT_CTRL_CODE_BEGIN      0xFC // extended control code
+#define PLACEHOLDER_BEGIN        0xFD // string placeholder
+#define CHAR_NEWLINE             0xFE
+#define EOS                      0xFF // end of string
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -125,19 +126,30 @@
 #define PLACEHOLDER_ID_KYOGRE        0xD
 
 // battle placeholders are located in battle_message.h
-#define EXT_CTRL_CODE_COLOR     0x1
-#define EXT_CTRL_CODE_HIGHLIGHT 0x2
-#define EXT_CTRL_CODE_SHADOW    0x3
-#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW    0x4
-//
-#define EXT_CTRL_CODE_UNKNOWN_7 0x7
-//
-#define EXT_CTRL_CODE_CLEAR     0x11
-//
-#define EXT_CTRL_CODE_CLEAR_TO  0x13
-#define EXT_CTRL_CODE_MIN_LETTER_SPACING 0x14
-#define EXT_CTRL_CODE_JPN   0x15
-#define EXT_CTRL_CODE_ENG   0x16
+#define EXT_CTRL_CODE_COLOR                   0x1
+#define EXT_CTRL_CODE_HIGHLIGHT               0x2
+#define EXT_CTRL_CODE_SHADOW                  0x3
+#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW  0x4
+#define EXT_CTRL_CODE_PALETTE                 0x5
+#define EXT_CTRL_CODE_FONT                    0x6
+#define EXT_CTRL_CODE_RESET_FONT              0x7
+#define EXT_CTRL_CODE_PAUSE                   0x8
+#define EXT_CTRL_CODE_WAIT_BUTTON             0x9
+#define EXT_CTRL_CODE_WAIT_SE                 0xA
+#define EXT_CTRL_CODE_PLAY_BGM                0xB
+#define EXT_CTRL_CODE_ESCAPE                  0xC
+#define EXT_CTRL_CODE_SHIFT_RIGHT             0xD
+#define EXT_CTRL_CODE_SHIFT_DOWN              0xE
+#define EXT_CTRL_CODE_FILL_WINDOW             0xF
+#define EXT_CTRL_CODE_PLAY_SE                0x10
+#define EXT_CTRL_CODE_CLEAR                  0x11
+#define EXT_CTRL_CODE_SKIP                   0x12
+#define EXT_CTRL_CODE_CLEAR_TO               0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING     0x14
+#define EXT_CTRL_CODE_JPN                    0x15
+#define EXT_CTRL_CODE_ENG                    0x16
+#define EXT_CTRL_CODE_STOP_BGM               0x17
+#define EXT_CTRL_CODE_RESUME_BGM             0x18
 
 #define NUM_TEXT_PRINTERS 32
 
@@ -155,6 +167,15 @@ enum
     FONTATTR_COLOR_BACKGROUND,
     FONTATTR_COLOR_SHADOW
 };
+
+struct GlyphInfo
+{
+    u8 pixels[0x80];
+    u8 width;
+    u8 height;
+};
+
+extern struct GlyphInfo gGlyphInfo;
 
 struct TextPrinterSubStruct
 {
@@ -305,7 +326,7 @@ void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese);
 s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese);
 void sub_80062B0(struct Sprite *sprite);
 u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
-void sub_8006398(u8 spriteId);
+void DestroyTextCursorSprite(u8 spriteId);
 s32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese);
 
 #endif // GUARD_TEXT_H

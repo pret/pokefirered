@@ -702,7 +702,7 @@ OK:
     return 1;
 }
 
-u8 sub_80DA3AC(void)
+u8 SaveGame_AfterLinkTrade(void)
 {
     if (gFlashMemoryPresent != TRUE)
         return 1;
@@ -712,18 +712,18 @@ u8 sub_80DA3AC(void)
     return 0;
 }
 
-bool8 sub_80DA3D8(void) 
+bool8 AfterLinkTradeSaveFailed(void) 
 {
     u8 retVal = sub_80D9AA4(0xE, gRamSaveSectionLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(SAVE_NORMAL);
-    if (retVal == 0xFF)
+    if (retVal == SAVE_STATUS_ERROR)
         return 1;
     else
         return 0;
 }
 
-u8 sub_80DA40C(void)
+u8 ClearSaveAfterLinkTradeSaveFailure(void)
 {
     sub_80D9B04(0xE, gRamSaveSectionLocations);
     if (gDamagedSaveSectors)
@@ -865,7 +865,7 @@ void Task_SaveGame_UpdatedLinkRecords(u8 taskId)
         break;
     case 3:
         SetContinueGameWarpStatusToDynamicWarp();
-        sub_80DA3AC();
+        SaveGame_AfterLinkTrade();
         gTasks[taskId].data[0] = 4;
         break;
     case 4:
@@ -876,13 +876,13 @@ void Task_SaveGame_UpdatedLinkRecords(u8 taskId)
         }
         break;
     case 5:
-        if (sub_80DA3D8())
+        if (AfterLinkTradeSaveFailed())
             gTasks[taskId].data[0] = 6;
         else
             gTasks[taskId].data[0] = 4;
         break;
     case 6:
-        sub_80DA40C();
+        ClearSaveAfterLinkTradeSaveFailure();
         gTasks[taskId].data[0] = 7;
         break;
     case 7:

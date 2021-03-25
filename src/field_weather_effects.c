@@ -239,19 +239,19 @@ void Drought_Main(void)
             gWeatherPtr->initStep++;
         break;
     case 3:
-        sub_807AC60();
+        DroughtStateInit();
         gWeatherPtr->initStep++;
         break;
     case 4:
-        sub_807AC98();
-        if (gWeatherPtr->unknown_73C == 6)
+        DroughtStateRun();
+        if (gWeatherPtr->droughtBrightnessStage == 6)
         {
             gWeatherPtr->weatherGfxLoaded = TRUE;
             gWeatherPtr->initStep++;
         }
         break;
     default:
-        sub_807AC98();
+        DroughtStateRun();
         break;
     }
 }
@@ -1064,7 +1064,7 @@ void Thunderstorm_Main(void)
         gWeatherPtr->initStep++;
         // fall through
     case 8:
-        sub_807A790(19);
+        WeatherShiftGammaIfPalStateIdle(19);
         if (gWeatherPtr->unknown_6EB == 0 && gWeatherPtr->unknown_6EC == 1)
             SetThunderCounter(20);
 
@@ -1074,7 +1074,7 @@ void Thunderstorm_Main(void)
     case 9:
         if (--gWeatherPtr->unknown_6E6 == 0)
         {
-            sub_807A790(3);
+            WeatherShiftGammaIfPalStateIdle(3);
             gWeatherPtr->unknown_6EA = 1;
             if (--gWeatherPtr->unknown_6EC != 0)
             {
@@ -1103,7 +1103,7 @@ void Thunderstorm_Main(void)
         if (--gWeatherPtr->unknown_6E6 == 0)
         {
             SetThunderCounter(100);
-            sub_807A790(19);
+            WeatherShiftGammaIfPalStateIdle(19);
             gWeatherPtr->unknown_6E6 = (Random() & 0xF) + 30;
             gWeatherPtr->initStep++;
         }
@@ -1111,7 +1111,7 @@ void Thunderstorm_Main(void)
     case 13:
         if (--gWeatherPtr->unknown_6E6 == 0)
         {
-            sub_807A7C4(19, 3, 5);
+            WeatherBeginGammaFade(19, 3, 5);
             gWeatherPtr->initStep++;
         }
         break;

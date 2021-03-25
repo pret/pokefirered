@@ -148,10 +148,10 @@ extern const u8 gTeachyTvText_TMsScript2[];
 extern const u8 gTeachyTvText_RegisterScript2[];
 
 // help_system_812B1E0
-extern const u8 gUnknown_841DFA5[];
-extern const u8 gUnknown_841DFAC[];
-extern const u8 gUnknown_841DFBE[];
-extern const u8 gUnknown_841DFC9[];
+extern const u8 gText_HelpSystemControls_A_Next[];
+extern const u8 gText_HelpSystemControls_PickOkEnd[];
+extern const u8 gText_HelpSystemControls_AorBtoCancel[];
+extern const u8 gText_HelpSystemControls_PickOkCancel[];
 
 // help_system
 extern const u8 gString_Bill[];

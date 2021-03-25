@@ -850,7 +850,7 @@ bool8 MetatileBehavior_IsStrengthButton(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPlayerFacingMB_8D(u8 tile, u8 playerDirection)
+bool8 MetatileBehavior_IsPlayerFacingCableClubWirelessMonitor(u8 tile, u8 playerDirection)
 {
     if(playerDirection != DIR_NORTH)
         return FALSE;
@@ -986,8 +986,8 @@ bool8 MetatileBehavior_IsCup(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_ReturnFalse_19(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_20(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsPolishedWindow(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsBeautifulSkyWindow(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsBlinkingLights(u8 metatileBehavior)
 {
@@ -997,9 +997,9 @@ bool8 MetatileBehavior_IsBlinkingLights(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB9F(u8 metatileBehavior)
+bool8 MetatileBehavior_IsNeatlyLinedUpTools(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_9F)
+    if(metatileBehavior == MB_NEATLY_LINED_UP_TOOLS)
         return TRUE;
     else
         return FALSE;
@@ -1029,9 +1029,9 @@ bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMBA3(u8 metatileBehavior)
+bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_A3)
+    if(metatileBehavior == MB_TRAINER_TOWER_MONITOR)
         return TRUE;
     else
         return FALSE;

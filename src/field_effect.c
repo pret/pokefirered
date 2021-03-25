@@ -422,9 +422,9 @@ static void FieldEffectScript_LoadTiles(const u8 **script)
     *script += sizeof(u32);
 }
 
-void sub_8083598(u8 paletteIdx)
+void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 {
-    switch (gUnknown_2036E28)
+    switch (gGlobalFieldTintMode)
     {
     case 0:
         return;
@@ -435,7 +435,7 @@ void sub_8083598(u8 paletteIdx)
         TintPalette_SepiaTone(&gPlttBufferUnfaded[(paletteIdx + 16) * 16], 0x10);
         break;
     case 3:
-        sub_8111F38((paletteIdx + 16) * 16, 0x10);
+        QuestLog_BackUpPalette((paletteIdx + 16) * 16, 0x10);
         TintPalette_GrayScale(&gPlttBufferUnfaded[(paletteIdx + 16) * 16], 0x10);
         break;
     default:
@@ -450,7 +450,7 @@ static void FieldEffectScript_LoadFadedPal(const u8 **script)
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx == 0xFF)
-        sub_8083598(IndexOfSpritePaletteTag(spritePalette->tag));
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(spritePalette->tag));
     *script += sizeof(u32);
 }
@@ -461,7 +461,7 @@ static void FieldEffectScript_LoadPal(const u8 **script)
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx != 0xFF)
-        sub_8083598(IndexOfSpritePaletteTag(spritePalette->tag));
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
     *script += sizeof(u32);
 }
 
@@ -1293,7 +1293,7 @@ static bool8 EscalatorWarpEffect_1(struct Task * task)
     FreezeObjectEvents();
     CameraObjectReset2();
     StartEscalator(task->data[1]);
-    sub_81128BC(1);
+    QuestLog_OnEscalatorWarp(QL_ESCALATOR_OUT);
     task->data[0]++;
     return FALSE;
 }
@@ -1534,7 +1534,7 @@ static bool8 EscalatorWarpInEffect_7(struct Task * task)
         UnfreezeObjectEvents();
         ObjectEventSetHeldMovement(objectEvent, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(Task_EscalatorWarpInFieldEffect));
-        sub_81128BC(2);
+        QuestLog_OnEscalatorWarp(QL_ESCALATOR_IN);
     }
     return FALSE;
 }
@@ -1600,7 +1600,7 @@ static bool8 waterfall_2_wait_anim_finish_probably(struct Task * task, struct Ob
 
 static bool8 waterfall_3_move_player_probably(struct Task * task, struct ObjectEvent * playerObj)
 {
-    ObjectEventSetHeldMovement(playerObj, sub_8063F2C(DIR_NORTH));
+    ObjectEventSetHeldMovement(playerObj, GetWalkSlowestMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }
@@ -2907,7 +2907,7 @@ static void UseSurfEffect_1(struct Task * task)
     ScriptContext2_Enable();
     FreezeObjectEvents();
     gPlayerAvatar.preventStep = TRUE;
-    SetPlayerAvatarStateMask(8);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
     PlayerGetDestCoords(&task->data[1], &task->data[2]);
     MoveCoords(gObjectEvents[gPlayerAvatar.objectEventId].movementDirection, &task->data[1], &task->data[2]);
     task->data[0]++;
@@ -2919,7 +2919,7 @@ static void UseSurfEffect_2(struct Task * task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        sub_805CB70();
+        StartPlayerAvatarSummonMonForFieldMoveAnim();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -2943,7 +2943,7 @@ static void UseSurfEffect_4(struct Task * task)
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
         ObjectEventClearHeldMovementIfFinished(objectEvent);
         ObjectEventSetHeldMovement(objectEvent, sub_80641C0(objectEvent->movementDirection));
         gFieldEffectArguments[0] = task->data[1];
@@ -2961,7 +2961,7 @@ static void UseSurfEffect_5(struct Task * task)
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         gPlayerAvatar.preventStep = FALSE;
-        gPlayerAvatar.flags &= 0xdf;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_CONTROLLABLE;
         ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
         sub_80DC44C(objectEvent->fieldEffectSpriteId, 1);
         UnfreezeObjectEvents();
@@ -2988,7 +2988,7 @@ static void (*const sUseVsSeekerEffectFuncs[])(struct Task * task) = {
 u32 FldEff_UseVsSeeker(void)
 {
     if (gQuestLogState == QL_STATE_RECORDING)
-        sub_811278C(8, 89);
+        QuestLogRecordPlayerAvatarGfxTransitionWithDuration(8, 89);
     CreateTask(Task_FldEffUseVsSeeker, 0xFF);
     return 0;
 }
@@ -3011,7 +3011,7 @@ static void UseVsSeekerEffect_2(struct Task * task)
     struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
     {
-        sub_805CBE8();
+        StartPlayerAvatarVsSeekerAnim();
         ObjectEventSetHeldMovement(playerObj, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -3023,11 +3023,11 @@ static void UseVsSeekerEffect_3(struct Task * task)
     if (ObjectEventClearHeldMovementIfFinished(playerObj))
     {
         if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE))
-            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(1));
+            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_BIKE));
         else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(2));
+            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
         else
-            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(0));
+            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_NORMAL));
         ObjectEventForceSetHeldMovement(playerObj, GetFaceDirectionMovementAction(playerObj->facingDirection));
         task->data[0]++;
     }
@@ -3131,8 +3131,8 @@ static void UseFlyEffect_1(struct Task * task)
     {
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
-        SetPlayerAvatarStateMask(1);
-        sub_805CB70();
+        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
+        StartPlayerAvatarSummonMonForFieldMoveAnim();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -3191,7 +3191,7 @@ static void UseFlyEffect_6(struct Task * task)
     if ((++task->data[2]) >= 8)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
         StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
         objectEvent->inanimate = TRUE;
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
@@ -3437,12 +3437,12 @@ static void FlyInEffect_1(struct Task * task)
         task->data[2] = 33;
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
-        SetPlayerAvatarStateMask(0x01);
-        if (task->data[15] & 0x08)
+        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
+        if (task->data[15] & PLAYER_AVATAR_FLAG_SURFING)
         {
             sub_80DC44C(objectEvent->fieldEffectSpriteId, 0);
         }
-        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
         CameraObjectReset2();
         ObjectEventTurn(objectEvent, DIR_WEST);
         StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
@@ -3518,7 +3518,7 @@ static void FlyInEffect_4(struct Task * task)
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = TRUE;
-        sub_805CB70();
+        StartPlayerAvatarSummonMonForFieldMoveAnim();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
@@ -3550,10 +3550,10 @@ static void FlyInEffect_7(struct Task * task)
     if ((--task->data[1]) == 0)
     {
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        state = 0;
-        if (task->data[15] & 0x08)
+        state = PLAYER_AVATAR_GFX_NORMAL;
+        if (task->data[15] & PLAYER_AVATAR_FLAG_SURFING)
         {
-            state = 2;
+            state = PLAYER_AVATAR_GFX_RIDE;
             sub_80DC44C(objectEvent->fieldEffectSpriteId, 1);
         }
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(state));

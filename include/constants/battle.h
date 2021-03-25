@@ -49,7 +49,7 @@
 #define BATTLE_TYPE_IS_MASTER        0x0004 // In not-link battles, it's always set.
 #define BATTLE_TYPE_TRAINER          0x0008
 #define BATTLE_TYPE_FIRST_BATTLE     0x0010
-#define BATTLE_TYPE_20               0x0020
+#define BATTLE_TYPE_LINK_ESTABLISHED 0x0020 // Set when the link battle setup callback finishes.
 #define BATTLE_TYPE_MULTI            0x0040
 #define BATTLE_TYPE_SAFARI           0x0080
 #define BATTLE_TYPE_BATTLE_TOWER     0x0100

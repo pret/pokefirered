@@ -1033,7 +1033,7 @@ static bool8 BT_Phase2SlidingPokeballs_LoadBgGfx(struct Task *task)
     u16 *tilemapAddr, *tilesetAddr;
 
     BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
-    CpuSet(sSlidingPokeballTilemap, tilesetAddr, 0x20);
+    CpuCopy16(sSlidingPokeballTilemap, tilesetAddr, 0x40);
     CpuFill32(0, tilemapAddr, 0x800);
     LoadPalette(sSlidingPokeballBigPokeballPalette, 0xF0, 0x20);
     ++task->tState;
@@ -1827,7 +1827,7 @@ static bool8 BT_Phase2Mugshot_LoadGfx(struct Task *task)
     const u16 *mugshotsMap = sVsBarTilemap;
     
     BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
-    CpuSet(sVsBarTileset, tilesetAddr, 0xF0);
+    CpuCopy16(sVsBarTileset, tilesetAddr, 0x1E0);
     LoadPalette(sVsBarOpponentPalettes[task->tWhichMugshot], 0xF0, 0x20);
     LoadPalette(sVsBarPlayerPalettes[gSaveBlock2Ptr->playerGender], 0xFA, 0xC);
     for (i = 0; i < 20; ++i)
@@ -2438,7 +2438,7 @@ static bool8 BT_Phase2GridSquares_LoadGfx(struct Task *task)
     u16 *tilemapAddr, *tilesetAddr;
 
     BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
-    CpuSet(sGridSquareTileset, tilesetAddr, 0x10);
+    CpuCopy16(sGridSquareTileset, tilesetAddr, 0x20);
     CpuFill16(0xF000, tilemapAddr, 0x800);
     LoadPalette(sSlidingPokeballBigPokeballPalette, 0xF0, 0x20);
     ++task->tState;
@@ -2454,7 +2454,7 @@ static bool8 BT_Phase2GridSquares_UpdateTileset(struct Task *task)
         BT_GetBg0TilesetBase(&tilesetAddr);
         task->tDelay = 3;
         ++task->tWhichGrid;
-        CpuSet(sGridSquareTileset + (task->tWhichGrid * 8), tilesetAddr, 0x10);
+        CpuCopy16(sGridSquareTileset + (task->tWhichGrid * 8), tilesetAddr, 0x20);
         if (task->tWhichGrid > 0xD)
         {
             ++task->tState;
@@ -2501,7 +2501,7 @@ static bool8 BT_Phase2BlackDoodles_Init(struct Task *task)
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
     for (i = 0; i < 160; ++i)
         gScanlineEffectRegBuffers[0][i] = WIN_RANGE(0, 0xF0);
-    CpuSet(gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 160);
+    CpuCopy16(gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 0x140);
     SetVBlankCallback(VBCB_BT_Phase2BlackDoodles);
     ++task->tState;
     return TRUE;

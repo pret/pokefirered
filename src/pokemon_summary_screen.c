@@ -3996,16 +3996,16 @@ static void sub_813995C(void)
     if (sMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary)
     {
         if (sMonSummaryScreen->isEnemyParty == TRUE)
-            spriteId = CreateMonPicSprite(species, trainerId, personality, 1, 60, 65, 12, 0xffff, 1);
+            spriteId = CreateMonPicSprite(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
         else
-            spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, 1, 60, 65, 12, 0xffff);
+            spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff);
     }
     else
     {
-        if (ShouldIgnoreDeoxysForm(3, sLastViewedMonIndex))
-            spriteId = CreateMonPicSprite(species, trainerId, personality, 1, 60, 65, 12, 0xffff, 1);
+        if (ShouldIgnoreDeoxysForm(DEOXYS_CHECK_TRADE_MAIN, sLastViewedMonIndex))
+            spriteId = CreateMonPicSprite(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
         else
-            spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, 1, 60, 65, 12, 0xffff);
+            spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff);
     }
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
@@ -4130,7 +4130,7 @@ static void sub_8139DBC(void)
     }
     else
     {
-        if (ShouldIgnoreDeoxysForm(3, sLastViewedMonIndex))
+        if (ShouldIgnoreDeoxysForm(DEOXYS_CHECK_TRADE_MAIN, sLastViewedMonIndex))
             sMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 0);
         else
             sMonSummaryScreen->unk3014 = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);

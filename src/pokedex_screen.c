@@ -868,7 +868,7 @@ void sub_810250C(void)
     gUnknown_203ACF0->field_6C = sub_8104BBC(1, 1);
     gUnknown_203ACF0->field_66 = sub_8104BBC(0, 0);
     gUnknown_203ACF0->field_68 = sub_8104BBC(1, 0);
-    sub_8072474(0x80);
+    SetBGMVolume_SuppressHelpSystemReduction(0x80);
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -925,7 +925,7 @@ bool8 sub_8102798(void)
         FREE_IF_NOT_NULL(GetBgTilemapBuffer(1));
         FREE_IF_NOT_NULL(GetBgTilemapBuffer(2));
         FREE_IF_NOT_NULL(GetBgTilemapBuffer(3));
-        sub_807249C();
+        BGMVolumeMax_EnableHelpSystemReduction();
         break;
     }
     return TRUE;

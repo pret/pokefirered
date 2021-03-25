@@ -28,7 +28,7 @@ bool32 CanCameraMoveInDirection(s32);
 u32 GetBehaviorByMetatileIdAndMapLayout(const struct MapLayout *mapLayout, u16 metatile, u8 attr);
 const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * connection);
 struct MapConnection * GetMapConnectionAtPos(s16 x, s16 y);
-void sub_8059948(u8 a0, u8 a1);
+void Fieldmap_ApplyGlobalTintToPaletteSlot(u8 slot, u8 count);
 
 void save_serialize_map(void);
 u32 GetMetatileAttributeFromRawMetatileBehavior(u32 original, u8 bit);

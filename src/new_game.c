@@ -138,7 +138,7 @@ void NewGameInitData(void)
     gSaveBlock1Ptr->registeredItem = 0;
     ClearBag();
     NewGameInitPCItems();
-    sub_809C794();
+    ClearEnigmaBerries();
     InitEasyChatPhrases();
     ResetTrainerFanClub();
     UnionRoomChat_InitializeRegisteredTexts();

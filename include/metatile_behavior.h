@@ -127,7 +127,7 @@ bool8 MetatileBehavior_IsKitchen(u8 metatileBehavior);
 bool8 MetatileBehavior_IsDresser(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSnacks(u8 metatileBehavior);
 bool8 MetatileBehavior_IsStrengthButton(u8 metatileBehavior);
-bool8 MetatileBehavior_IsPlayerFacingMB_8D(u8 tile, u8 playerDirection);
+bool8 MetatileBehavior_IsPlayerFacingCableClubWirelessMonitor(u8 tile, u8 playerDirection);
 bool8 MetatileBehavior_IsPlayerFacingBattleRecords(u8 tile, u8 playerDirection);
 bool8 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior);
 bool8 MetatileBehavior_IsIndigoPlateauMark(u8 metatileBehavior);
@@ -143,13 +143,13 @@ bool8 MetatileBehavior_IsAdvertisingPoster(u8 metatileBehavior);
 bool8 MetatileBehavior_IsTastyFood(u8 metatileBehavior);
 bool8 MetatileBehavior_IsTrashBin(u8 metatileBehavior);
 bool8 MetatileBehavior_IsCup(u8 metatileBehavior);
-bool8 MetatileBehavior_ReturnFalse_19(u8 metatileBehavior);
-bool8 MetatileBehavior_ReturnFalse_20(u8 metatileBehavior);
+bool8 MetatileBehavior_IsPolishedWindow(u8 metatileBehavior);
+bool8 MetatileBehavior_IsBeautifulSkyWindow(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBlinkingLights(u8 metatileBehavior);
-bool8 MetatileBehavior_IsMB9F(u8 metatileBehavior);
+bool8 MetatileBehavior_IsNeatlyLinedUpTools(u8 metatileBehavior);
 bool8 MetatileBehavior_IsImpressiveMachine(u8 metatileBehavior);
 bool8 MetatileBehavior_IsVideoGame(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior);
-bool8 MetatileBehavior_IsMBA3(u8 metatileBehavior);
+bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior);
 
 #endif // GUARD_METATILE_BEHAVIOR

@@ -122,7 +122,7 @@
 #define VAR_EGG_BRAG_STATE                 0x404A
 #define VAR_LINK_WIN_BRAG_STATE            0x404B
 #define VAR_POKELOT_RND2                   0x404C
-#define VAR_0x404D                         0x404D
+#define VAR_QL_ENTRANCE                    0x404D
 #define VAR_0x404E                         0x404E
 #define VAR_LOTAD_SIZE_RECORD              0x404F
 

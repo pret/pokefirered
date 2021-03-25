@@ -701,7 +701,7 @@ static void CB2_InitBattleInternal(void)
     }
     gMain.inBattle = TRUE;
     for (i = 0; i < PARTY_SIZE; ++i)
-        AdjustFriendship(&gPlayerParty[i], 3);
+        AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
     gBattleCommunication[MULTIUSE_STATE] = 0;
 }
 
@@ -1051,7 +1051,7 @@ static void CB2_HandleStartBattle(void)
             SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
-                gBattleTypeFlags |= BATTLE_TYPE_20;
+                gBattleTypeFlags |= BATTLE_TYPE_LINK_ESTABLISHED;
             }
         }
         break;
@@ -1409,7 +1409,7 @@ static void CB2_HandleStartMultiBattle(void)
             gMain.callback1 = BattleMainCB1;
             SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-                gBattleTypeFlags |= BATTLE_TYPE_20;
+                gBattleTypeFlags |= BATTLE_TYPE_LINK_ESTABLISHED;
         }
         break;
     case 5:

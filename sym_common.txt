@@ -4,7 +4,7 @@
 	.include "bg.o"
 	.align 2
 	.include "text_printer.o"
-	.align 2
+	.align 4
 	.include "window.o"
 	.align 2
 	.include "text.o"
@@ -59,11 +59,11 @@
 	.align 2
 	.include "party_menu.o"
 	.align 2
-	.include "help_system_812B1E0.o"
+	.include "help_system.o"
 	.align 4
 	.include "fame_checker.o"
 	.align 2
-	.include "help_system.o"
+	.include "help_system_util.o"
 	.align 4
 	.include "mevent.o"
 	.align 4

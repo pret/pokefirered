@@ -148,7 +148,10 @@ $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
 
 $(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
-    
+
+$(BATINTGFXDIR)/unk_battlebox.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 36
+
 $(BATINTGFXDIR)/window.gbapal: $(BATINTGFXDIR)/window1.gbapal $(BATINTGFXDIR)/window2.gbapal
 	cat $^ > $@
 

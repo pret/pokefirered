@@ -11,7 +11,7 @@
 
 static u8 GetBikeTransitionId(u8 *, u16, u16);
 static void Bike_SetBikeStill(void);
-static u8 CanBikeFaceDIrectionOnRail(u8 direction, u8 metatileBehavior);
+static u8 CanBikeFaceDirectionOnRail(u8 direction, u8 metatileBehavior);
 static u8 GetBikeCollision(u8);
 static u8 GetBikeCollisionAt(struct ObjectEvent *playerObjEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior);
 static bool8 MetatileBehaviorForbidsBiking(u8);
@@ -155,7 +155,7 @@ static void BikeTransition_TurnDirection(u8 direction)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (!CanBikeFaceDIrectionOnRail(direction, playerObjEvent->currentMetatileBehavior))
+    if (!CanBikeFaceDirectionOnRail(direction, playerObjEvent->currentMetatileBehavior))
         direction = playerObjEvent->movementDirection;
     PlayerFaceDirection(direction);
 }
@@ -165,7 +165,7 @@ static void BikeTransition_MoveDirection(u8 direction)
     struct ObjectEvent *playerObjEvent;
     
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    if (!CanBikeFaceDIrectionOnRail(direction, playerObjEvent->currentMetatileBehavior))
+    if (!CanBikeFaceDirectionOnRail(direction, playerObjEvent->currentMetatileBehavior))
     {
         BikeTransition_FaceDirection(playerObjEvent->movementDirection);
     }
@@ -268,7 +268,7 @@ static bool8 MetatileBehaviorForbidsBiking(u8 metatileBehavior)
     return TRUE;
 }
 
-static bool8 CanBikeFaceDIrectionOnRail(u8 direction, u8 metatileBehavior)
+static bool8 CanBikeFaceDirectionOnRail(u8 direction, u8 metatileBehavior)
 {
     if (direction == DIR_EAST || direction == DIR_WEST)
     {
@@ -308,7 +308,7 @@ bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void)
     return TRUE;
 }
 
-void GoOnOffBike(u8 flags)
+void GetOnOffBike(u8 flags)
 {
     gBikeCameraAheadPanback = FALSE;
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))

@@ -30,7 +30,7 @@ static void UpdateObjectEventSpriteAnimPause(struct ObjectEvent *, struct Sprite
 static bool8 IsCoordOutsideObjectEventMovementRange(struct ObjectEvent *, s16, s16);
 static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u8);
 static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
-static void sub_8067A10(struct ObjectEvent *, struct Sprite *);
+static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent*);
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32*);
@@ -90,9 +90,9 @@ static bool8 sub_805E2E8(struct ObjectEventTemplate *, s16, s16);
 static void sub_805E384(struct ObjectEventTemplate *);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
-static u8 sub_8063304(struct ObjectEvent *, struct Sprite *);
-static u8 sub_8063324(struct ObjectEvent *, struct Sprite *);
-static u8 sub_8063344(struct ObjectEvent *, struct Sprite *);
+static u8 MovementType_VsSeeker4D_Callback(struct ObjectEvent *, struct Sprite *);
+static u8 MovementType_VsSeeker4E_Callback(struct ObjectEvent *, struct Sprite *);
+static u8 MovementType_VsSeeker4F_Callback(struct ObjectEvent *, struct Sprite *);
 static void sub_8064544(struct ObjectEvent *, struct Sprite *);
 static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite);
 static void MovementType_None(struct Sprite *);
@@ -147,10 +147,10 @@ static void MovementType_WalkInPlace(struct Sprite *);
 static void MovementType_WalkSlowlyInPlace(struct Sprite *);
 static void MovementType_JogInPlace(struct Sprite *);
 static void MovementType_Invisible(struct Sprite *);
-static void sub_8063298(struct Sprite *);
-static void sub_80632BC(struct Sprite *);
-static void sub_80632E0(struct Sprite *);
-static void MovementType_WanderAroundDuplicate(struct Sprite *);
+static void MovementType_VsSeeker4D(struct Sprite *);
+static void MovementType_VsSeeker4E(struct Sprite *);
+static void MovementType_VsSeeker4F(struct Sprite *);
+static void MovementType_WanderAroundSlowest(struct Sprite *);
 
 #define movement_type_def(setup, table)                                                          \
 static u8 setup##_callback(struct ObjectEvent *, struct Sprite *);                               \
@@ -198,87 +198,87 @@ void (*const gCameraObjectFuncs[])(struct Sprite *) = {
 #include "data/object_events/object_event_graphics.h"
 
 static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
-    MovementType_None,
-    MovementType_LookAround,
-    MovementType_WanderAround,
-    MovementType_WanderUpAndDown,
-    MovementType_WanderUpAndDown,
-    MovementType_WanderLeftAndRight,
-    MovementType_WanderLeftAndRight,
-    MovementType_FaceDirection,
-    MovementType_FaceDirection,
-    MovementType_FaceDirection,
-    MovementType_FaceDirection,
-    MovementType_Player,
-    NULL,
-    MovementType_FaceDownAndUp,
-    MovementType_FaceLeftAndRight,
-    MovementType_FaceUpAndLeft,
-    MovementType_FaceUpAndRight,
-    MovementType_FaceDownAndLeft,
-    MovementType_FaceDownAndRight,
-    MovementType_FaceDownUpAndLeft,
-    MovementType_FaceDownUpAndRight,
-    MovementType_FaceUpRightAndLeft,
-    MovementType_FaceDownRightAndLeft,
-    MovementType_RotateCounterclockwise,
-    MovementType_RotateClockwise,
-    MovementType_WalkBackAndForth,
-    MovementType_WalkBackAndForth,
-    MovementType_WalkBackAndForth,
-    MovementType_WalkBackAndForth,
-    MovementType_WalkSequenceUpRightLeftDown,
-    MovementType_WalkSequenceRightLeftDownUp,
-    MovementType_WalkSequenceDownUpRightLeft,
-    MovementType_WalkSequenceLeftDownUpRight,
-    MovementType_WalkSequenceUpLeftRightDown,
-    MovementType_WalkSequenceLeftRightDownUp,
-    MovementType_WalkSequenceDownUpLeftRight,
-    MovementType_WalkSequenceRightDownUpLeft,
-    MovementType_WalkSequenceLeftUpDownRight,
-    MovementType_WalkSequenceUpDownRightLeft,
-    MovementType_WalkSequenceRightLeftUpDown,
-    MovementType_WalkSequenceDownRightLeftUp,
-    MovementType_WalkSequenceRightUpDownLeft,
-    MovementType_WalkSequenceUpDownLeftRight,
-    MovementType_WalkSequenceLeftRightUpDown,
-    MovementType_WalkSequenceDownLeftRightUp,
-    MovementType_WalkSequenceUpLeftDownRight,
-    MovementType_WalkSequenceDownRightUpLeft,
-    MovementType_WalkSequenceLeftDownRightUp,
-    MovementType_WalkSequenceRightUpLeftDown,
-    MovementType_WalkSequenceUpRightDownLeft,
-    MovementType_WalkSequenceDownLeftUpRight,
-    MovementType_WalkSequenceLeftUpRightDown,
-    MovementType_WalkSequenceRightDownLeftUp,
-    MovementType_CopyPlayer,
-    MovementType_CopyPlayer,
-    MovementType_CopyPlayer,
-    MovementType_CopyPlayer,
-    MovementType_TreeDisguise,
-    MovementType_MountainDisguise,
-    MovementType_CopyPlayerInGrass,
-    MovementType_CopyPlayerInGrass,
-    MovementType_CopyPlayerInGrass,
-    MovementType_CopyPlayerInGrass,
-    MovementType_Buried,
-    MovementType_WalkInPlace,
-    MovementType_WalkInPlace,
-    MovementType_WalkInPlace,
-    MovementType_WalkInPlace,
-    MovementType_WalkSlowlyInPlace,
-    MovementType_WalkSlowlyInPlace,
-    MovementType_WalkSlowlyInPlace,
-    MovementType_WalkSlowlyInPlace,
-    MovementType_JogInPlace,
-    MovementType_JogInPlace,
-    MovementType_JogInPlace,
-    MovementType_JogInPlace,
-    MovementType_Invisible,
-    sub_8063298,
-    sub_80632BC,
-    sub_80632E0,
-    MovementType_WanderAroundDuplicate,
+    [MOVEMENT_TYPE_NONE]                                  = MovementType_None,
+    [MOVEMENT_TYPE_LOOK_AROUND]                           = MovementType_LookAround,
+    [MOVEMENT_TYPE_WANDER_AROUND]                         = MovementType_WanderAround,
+    [MOVEMENT_TYPE_WANDER_UP_AND_DOWN]                    = MovementType_WanderUpAndDown,
+    [MOVEMENT_TYPE_WANDER_DOWN_AND_UP]                    = MovementType_WanderUpAndDown,
+    [MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT]                 = MovementType_WanderLeftAndRight,
+    [MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT]                 = MovementType_WanderLeftAndRight,
+    [MOVEMENT_TYPE_FACE_UP]                               = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_FACE_DOWN]                             = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_FACE_LEFT]                             = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_FACE_RIGHT]                            = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_PLAYER]                                = MovementType_Player,
+    [MOVEMENT_TYPE_BERRY_TREE_GROWTH]                     = NULL,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_UP]                      = MovementType_FaceDownAndUp,
+    [MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT]                   = MovementType_FaceLeftAndRight,
+    [MOVEMENT_TYPE_FACE_UP_AND_LEFT]                      = MovementType_FaceUpAndLeft,
+    [MOVEMENT_TYPE_FACE_UP_AND_RIGHT]                     = MovementType_FaceUpAndRight,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_LEFT]                    = MovementType_FaceDownAndLeft,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT]                   = MovementType_FaceDownAndRight,
+    [MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT]                 = MovementType_FaceDownUpAndLeft,
+    [MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT]                = MovementType_FaceDownUpAndRight,
+    [MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT]                = MovementType_FaceUpRightAndLeft,
+    [MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT]              = MovementType_FaceDownRightAndLeft,
+    [MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE]               = MovementType_RotateCounterclockwise,
+    [MOVEMENT_TYPE_ROTATE_CLOCKWISE]                      = MovementType_RotateClockwise,
+    [MOVEMENT_TYPE_WALK_UP_AND_DOWN]                      = MovementType_WalkBackAndForth,
+    [MOVEMENT_TYPE_WALK_DOWN_AND_UP]                      = MovementType_WalkBackAndForth,
+    [MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT]                   = MovementType_WalkBackAndForth,
+    [MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT]                   = MovementType_WalkBackAndForth,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN]      = MovementType_WalkSequenceUpRightLeftDown,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP]      = MovementType_WalkSequenceRightLeftDownUp,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT]      = MovementType_WalkSequenceDownUpRightLeft,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT]      = MovementType_WalkSequenceLeftDownUpRight,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN]      = MovementType_WalkSequenceUpLeftRightDown,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP]      = MovementType_WalkSequenceLeftRightDownUp,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT]      = MovementType_WalkSequenceDownUpLeftRight,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT]      = MovementType_WalkSequenceRightDownUpLeft,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT]      = MovementType_WalkSequenceLeftUpDownRight,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT]      = MovementType_WalkSequenceUpDownRightLeft,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN]      = MovementType_WalkSequenceRightLeftUpDown,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP]      = MovementType_WalkSequenceDownRightLeftUp,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT]      = MovementType_WalkSequenceRightUpDownLeft,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT]      = MovementType_WalkSequenceUpDownLeftRight,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN]      = MovementType_WalkSequenceLeftRightUpDown,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP]      = MovementType_WalkSequenceDownLeftRightUp,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT]      = MovementType_WalkSequenceUpLeftDownRight,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT]      = MovementType_WalkSequenceDownRightUpLeft,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP]      = MovementType_WalkSequenceLeftDownRightUp,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN]      = MovementType_WalkSequenceRightUpLeftDown,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT]      = MovementType_WalkSequenceUpRightDownLeft,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT]      = MovementType_WalkSequenceDownLeftUpRight,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN]      = MovementType_WalkSequenceLeftUpRightDown,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP]      = MovementType_WalkSequenceRightDownLeftUp,
+    [MOVEMENT_TYPE_COPY_PLAYER]                           = MovementType_CopyPlayer,
+    [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE]                  = MovementType_CopyPlayer,
+    [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE]          = MovementType_CopyPlayer,
+    [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE]                 = MovementType_CopyPlayer,
+    [MOVEMENT_TYPE_TREE_DISGUISE]                         = MovementType_TreeDisguise,
+    [MOVEMENT_TYPE_MOUNTAIN_DISGUISE]                     = MovementType_MountainDisguise,
+    [MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS]                  = MovementType_CopyPlayerInGrass,
+    [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS]         = MovementType_CopyPlayerInGrass,
+    [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = MovementType_CopyPlayerInGrass,
+    [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS]        = MovementType_CopyPlayerInGrass,
+    [MOVEMENT_TYPE_BURIED]                                = MovementType_Buried,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN]                    = MovementType_WalkInPlace,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_UP]                      = MovementType_WalkInPlace,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT]                    = MovementType_WalkInPlace,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT]                   = MovementType_WalkInPlace,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN]             = MovementType_WalkSlowlyInPlace,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP]               = MovementType_WalkSlowlyInPlace,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT]             = MovementType_WalkSlowlyInPlace,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT]            = MovementType_WalkSlowlyInPlace,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN]                     = MovementType_JogInPlace,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_UP]                       = MovementType_JogInPlace,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT]                     = MovementType_JogInPlace,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT]                    = MovementType_JogInPlace,
+    [MOVEMENT_TYPE_INVISIBLE]                             = MovementType_Invisible,
+    [MOVEMENT_TYPE_VS_SEEKER_4D]                          = MovementType_VsSeeker4D,
+    [MOVEMENT_TYPE_VS_SEEKER_4E]                          = MovementType_VsSeeker4E,
+    [MOVEMENT_TYPE_VS_SEEKER_4F]                          = MovementType_VsSeeker4F,
+    [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST]                 = MovementType_WanderAroundSlowest,
 };
 
 const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
@@ -350,19 +350,19 @@ const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = FALSE,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = FALSE,
     [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = FALSE,
     [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN] = FALSE,
     [MOVEMENT_TYPE_JOG_IN_PLACE_UP] = FALSE,
     [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT] = FALSE,
     [MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT] = FALSE,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_DOWN] = FALSE,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_UP] = FALSE,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_LEFT] = FALSE,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT] = FALSE,
     [MOVEMENT_TYPE_INVISIBLE] = FALSE,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = FALSE,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = FALSE,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = FALSE,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_VS_SEEKER_4D] = FALSE,
+    [MOVEMENT_TYPE_VS_SEEKER_4E] = FALSE,
+    [MOVEMENT_TYPE_VS_SEEKER_4F] = FALSE,
+    [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST] = TRUE,
 };
 
 const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
@@ -434,19 +434,19 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_EAST,
     [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN] = DIR_SOUTH,
     [MOVEMENT_TYPE_JOG_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT] = DIR_EAST,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_DOWN] = DIR_SOUTH,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_UP] = DIR_NORTH,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_LEFT] = DIR_WEST,
-    [MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT] = DIR_EAST,
     [MOVEMENT_TYPE_INVISIBLE] = DIR_SOUTH,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = DIR_SOUTH,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = DIR_SOUTH,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_SOUTH,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_VS_SEEKER_4D] = DIR_SOUTH,
+    [MOVEMENT_TYPE_VS_SEEKER_4E] = DIR_SOUTH,
+    [MOVEMENT_TYPE_VS_SEEKER_4F] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST] = DIR_SOUTH,
 };
 
 #define OBJ_EVENT_PAL_TAG_0  0x1103
@@ -2725,7 +2725,7 @@ u16 GetObjectPaletteTag(u8 palSlot)
 
 movement_type_empty_callback(MovementType_None)
 movement_type_def(MovementType_WanderAround, gMovementTypeFuncs_WanderAround)
-movement_type_def(MovementType_WanderAroundDuplicate, gMovementTypeFuncs_WanderAroundDuplicate)
+movement_type_def(MovementType_WanderAroundSlowest, gMovementTypeFuncs_WanderAroundSlowest)
 
 static bool8 MovementType_WanderAround_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
@@ -2785,7 +2785,7 @@ static bool8 MovementType_WanderAround_Step5(struct ObjectEvent *objectEvent, st
     return TRUE;
 }
 
-static bool8 MovementType_WanderAround_Step5Duplicate(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_WanderAround_Step5Slowest(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowestMovementAction(objectEvent->movementDirection));
     objectEvent->singleMovementActive = TRUE;
@@ -4603,45 +4603,45 @@ static bool8 MovementType_Invisible_Step2(struct ObjectEvent *objectEvent, struc
     return FALSE;
 }
 
-void sub_8063298(struct Sprite *sprite)
+void MovementType_VsSeeker4D(struct Sprite *sprite)
 {
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, sub_8063304);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_VsSeeker4D_Callback);
 }
 
-void sub_80632BC(struct Sprite *sprite)
+void MovementType_VsSeeker4E(struct Sprite *sprite)
 {
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, sub_8063324);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_VsSeeker4E_Callback);
 }
 
-void sub_80632E0(struct Sprite *sprite)
+void MovementType_VsSeeker4F(struct Sprite *sprite)
 {
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, sub_8063344);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_VsSeeker4F_Callback);
 }
 
-static u8 sub_8063304(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static u8 MovementType_VsSeeker4D_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return gUnknown_83A63F0[sprite->data[1]](objectEvent, sprite);
+    return gMovementTypeFuncs_VsSeeker4D[sprite->data[1]](objectEvent, sprite);
 }
 
-static u8 sub_8063324(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static u8 MovementType_VsSeeker4E_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return gUnknown_83A63FC[sprite->data[1]](objectEvent, sprite);
+    return gMovementTypeFuncs_VsSeeker4E[sprite->data[1]](objectEvent, sprite);
 }
 
-static u8 sub_8063344(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static u8 MovementType_VsSeeker4F_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return gUnknown_83A6404[sprite->data[1]](objectEvent, sprite);
+    return gMovementTypeFuncs_VsSeeker4F[sprite->data[1]](objectEvent, sprite);
 }
 
-static bool8 sub_8063364(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_VsSeeker4D_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    ObjectEventSetSingleMovement(objectEvent, sprite, 0x98);
+    ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_0x98);
     sprite->data[1] = 1;
     return TRUE;
 }
 
-static bool8 sub_8063384(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_VsSeeker4D_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
     {
@@ -4651,29 +4651,29 @@ static bool8 sub_8063384(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     return FALSE;
 }
 
-static bool8 sub_80633A4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_VsSeeker4D_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     objectEvent->singleMovementActive = FALSE;
     return FALSE;
 }
 
-static bool8 sub_80633B4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_VsSeeker4E_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    ObjectEventSetSingleMovement(objectEvent, sprite, 0x99);
+    ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_0x99);
     sprite->data[1] = 1;
     return FALSE;
 }
 
-static bool8 sub_80633D4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_VsSeeker4F_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    ObjectEventSetSingleMovement(objectEvent, sprite, 0x9A);
+    ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_0x9A);
     sprite->data[1] = 1;
     return FALSE;
 }
 
-static bool8 sub_80633F4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_VsSeeker4E_VsSeeker4F_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
     {
@@ -7892,8 +7892,8 @@ static bool8 MovementActionFunc_x99_1(struct ObjectEvent *objectEvent, struct Sp
             sprite->animPaused = FALSE;
             objectEvent->disableAnim = FALSE;
         }
-        y = -(3 * gSineTable[sprite->data[6]] >> 7);
-        objectEvent->singleMovementActive = (-(sprite->pos2.y = y) | y) >> 31;
+        sprite->pos2.y = -(3 * gSineTable[sprite->data[6]] >> 7);
+        objectEvent->singleMovementActive = sprite->pos2.y != 0;
         return FALSE;
     case 1:
         if (++sprite->data[4] > 16)
@@ -8016,11 +8016,11 @@ static void TryEnableObjectEventAnim(struct ObjectEvent *objectEvent, struct Spr
 
 static void UpdateObjectEventVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8067A10(objectEvent, sprite);
+    CalcWhetherObjectIsOffscreen(objectEvent, sprite);
     UpdateObjEventSpriteVisibility(objectEvent, sprite);
 }
 
-static void sub_8067A10(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u16 x, y;
     u16 x2, y2;

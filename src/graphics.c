@@ -964,7 +964,7 @@ const u32 gFile_graphics_battle_transitions_vs_frame_palette[] = INCBIN_U32("gra
 
 const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
 
-#include "data/graphics/battle_terrain.h"
+#include "data/graphics/battle_terrain_unused.h"
 
 const u32 gBattleAnimSpriteGfx_FlyingDirt[] = INCBIN_U32("graphics/battle_anims/sprites/flying_dirt.4bpp.lz");
 

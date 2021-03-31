@@ -24,7 +24,7 @@ TITLESCREENGFXDIR := graphics/title_screen
 CREDITSGFXDIR := graphics/credits
 ITEMMENUGFXDIR := graphics/item_menu
 INTROGFXDIR := graphics/intro
-BATTLEGFXDIR := graphics/battle
+BATTLETERRAINGFXDIR := graphics/battle_terrain
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -528,44 +528,44 @@ $(INTROGFXDIR)/unk_8406654.4bpp: %.4bpp: %.png
 $(INTROGFXDIR)/unk_8405B28.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 17
 
-$(BATTLEGFXDIR)/terrain_building.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_building.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 
-$(BATTLEGFXDIR)/terrain_cave_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_cave_anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 106
 
-$(BATTLEGFXDIR)/terrain_cave.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_cave.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 84
 
-$(BATTLEGFXDIR)/terrain_grass.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 98
 
-$(BATTLEGFXDIR)/terrain_indoor.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_indoor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 
-$(BATTLEGFXDIR)/terrain_longgrass_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_longgrass_anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 133
 
-$(BATTLEGFXDIR)/terrain_longgrass.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_longgrass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 98
 
-$(BATTLEGFXDIR)/terrain_mountain_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_mountain_anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 47
 
-$(BATTLEGFXDIR)/terrain_pond_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_pond_anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
-$(BATTLEGFXDIR)/terrain_pond.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_pond.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 75
 
-$(BATTLEGFXDIR)/terrain_sand.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_sand.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 83
 
-$(BATTLEGFXDIR)/terrain_underwater_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_underwater_anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 26
 
-$(BATTLEGFXDIR)/terrain_underwater.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_underwater.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 85
 
-$(BATTLEGFXDIR)/terrain_water.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/terrain_water.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 81

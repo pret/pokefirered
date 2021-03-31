@@ -7879,7 +7879,6 @@ static bool8 MovementActionFunc_x98_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x99_1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    s32 y;
     switch (sprite->data[7])
     {
     case 0:

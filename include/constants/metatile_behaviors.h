@@ -6,7 +6,7 @@
 #define MB_01 0x01
 #define MB_TALL_GRASS 0x02
 #define MB_CAVE 0x08
-#define MB_0A 0x0A
+#define MB_RUNNING_DISALLOWED 0x0A
 #define MB_0B 0x0B
 #define MB_0C 0x0C
 #define MB_POND_WATER 0x10

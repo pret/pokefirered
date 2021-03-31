@@ -720,7 +720,7 @@ static void PlayerAvatarTransition_Bike(struct ObjectEvent * playerObjEvent)
 {
     QuestLogTryRecordPlayerAvatarGfxTransition(QL_PLAYER_GFX_BIKE);
     QuestLogCallUpdatePlayerSprite(QL_PLAYER_GFX_BIKE);
-    InitPlayerAvatarBikeState(0, 0);
+    BikeClearState(0, 0);
 }
 
 static void PlayerAvatarTransition_Surfing(struct ObjectEvent * playerObjEvent)
@@ -913,7 +913,7 @@ void HandleEnforcedLookDirectionOnPlayerStopMoving(void)
 {
     if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
     {
-        if (player_should_look_direction_be_enforced_upon_movement())
+        if (IsPlayerNotUsingAcroBikeOnBumpySlope())
             PlayerForceSetHeldMovement(GetFaceDirectionMovementAction(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection));
     }
 }
@@ -1346,12 +1346,13 @@ void StartPlayerAvatarFishAnim(u8 direction)
     QuestLogCallUpdatePlayerSprite(QL_PLAYER_GFX_FISH);
 }
 
-void nullsub_24(u8 direction)
+// Stubbed from R/S
+void PlayerUseAcroBikeOnBumpySlope(u8 direction)
 {
 
 }
 
-static void nullsub_25(void)
+static void SetPlayerAvatarWatering(void)
 {
 
 }

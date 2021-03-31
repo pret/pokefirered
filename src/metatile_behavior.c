@@ -598,7 +598,7 @@ bool8 MetatileBehavior_IsWaterfall(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_ReturnFalse_9(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsFortreeBridge(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse(u8 metatileBehavior){ return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_2(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_3(u8 metatileBehavior) { return FALSE; }
@@ -691,9 +691,9 @@ bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB0A(u8 metatileBehavior)
+bool8 MetatileBehavior_IsRunningDisallowed(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_0A)
+    if(metatileBehavior == MB_RUNNING_DISALLOWED)
         return TRUE;
     else
         return FALSE;

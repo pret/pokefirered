@@ -487,7 +487,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
             BlitBitmapRectToWindow(
                 textPrinter->printerTemplate.windowId,
                 arrowTiles,
-                sDownArrowYCoords[*(u32*)subStruct << 17 >> 30], // subStruct->downArrowYPosIdx but again, stupidly retrieved
+                sDownArrowYCoords[subStruct->downArrowYPosIdx],
                 0,
                 0x80,
                 0x10,

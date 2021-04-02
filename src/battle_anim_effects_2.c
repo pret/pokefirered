@@ -3013,10 +3013,7 @@ void AnimTask_FreeMusicNotesPals(u8 taskId)
 
 static void SetMusicNotePalette(struct Sprite *sprite, u8 a, u8 b)
 {
-    u8 tile;
-    
-    tile = (b & 1);
-    tile = ((-tile | tile) >> 31) & 32;
+    u8 tile = (b & 1) ? 32 : 0;
     sprite->oam.tileNum += tile + (a << 2);
     sprite->oam.paletteNum = IndexOfSpritePaletteTag(gMusicNotePaletteTagsTable[b >> 1]);
 }
@@ -3715,7 +3712,7 @@ void AnimPerishSongMusicNote(struct Sprite *sprite)
     if (!sprite->data[0])
     {
         sprite->pos1.x = 120;
-        sprite->pos1.y = (gBattleAnimArgs[0] + (((u16)gBattleAnimArgs[0]) >> 31)) / 2 - 15;
+        sprite->pos1.y = gBattleAnimArgs[0] / 2 - 15;
 
         StartSpriteAnim(sprite, gBattleAnimArgs[1]);
 
@@ -3725,7 +3722,7 @@ void AnimPerishSongMusicNote(struct Sprite *sprite)
 
     sprite->data[0]++;
 
-    sprite->data[1] = (sprite->data[0] + ((u16)sprite->data[0] >> 31)) / 2;
+    sprite->data[1] = sprite->data[0] / 2;
     index = ((sprite->data[0] * 3) + (u16)sprite->data[3]);
     var2 = 0xFF;
     sprite->data[6] = (sprite->data[6] + 10) & 0xFF;
@@ -3773,8 +3770,7 @@ static void AnimPerishSongMusicNote_Step2(struct Sprite *sprite)
 
     if (sprite->data[4] > 3)
     {
-        int var1 = sprite->data[2];
-        sprite->invisible = var1 - (((s32)(var1 + ((u32)var1 >> 31)) >> 1) << 1);
+        sprite->invisible = sprite->data[2] % 2;
         DestroyAnimSprite(sprite);
     }
 

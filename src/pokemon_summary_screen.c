@@ -37,7 +37,7 @@
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
 
-static void sub_8138B8C(struct Pokemon * mon);
+static void BufferSelectedMonData(struct Pokemon * mon);
 static void CB2_SetUpPSS(void);
 static void PokeSum_TryPlayMonCry(void);
 static void PokeSum_RemoveWindows(u8 curPageIndex);
@@ -625,24 +625,24 @@ static const u32 sUnknown_8463C80[] = INCBIN_U32( "graphics/interface/pokesummar
 
 #include "data/text/nature_names.h"
 
-static const u8 * const sUnknown_8463EC4[] = {
-    gUnknown_8419B44,
-    gUnknown_8419B7B,
-    gUnknown_8419BAE,
-    gUnknown_8419BDB
+static const u8 * const sEggHatchTimeTexts[] = {
+    gText_PokeSum_EggHatch_LongTime,
+    gText_PokeSum_EggHatch_SomeTime,
+    gText_PokeSum_EggHatch_Soon, 
+    gText_PokeSum_EggHatch_AlmostReady
 };
 
 static const u8 * const sEggOriginTexts[] = {
-    gUnknown_8419A3D,
-    gUnknown_8419B18,
-    gUnknown_8419A6E,
-    gUnknown_8419B18,
-    gUnknown_8419AA2,
-    gUnknown_8419ADE,
-    gUnknown_8419B18
+    gText_PokeSum_EggOrigin_DayCare,      
+    gText_PokeSum_EggOrigin_Trade,
+    gText_PokeSum_EggOrigin_TravelingMan, 
+    gText_PokeSum_EggOrigin_Trade,
+    gText_PokeSum_EggOrigin_NicePlace,
+    gText_PokeSum_EggOrigin_Spa,
+    gText_PokeSum_EggOrigin_Trade
 };
 
-static const u8 sUnknown_8463EF0[][3] = {
+static const u8 sPrintMoveTextColors[][3] = {
     {0, 7, 8},
     {0, 1, 2},
     {0, 3, 4},
@@ -710,7 +710,7 @@ static const struct BgTemplate sBgTempaltes[] =
 #define POKESUM_WIN_MOVES_5          5
 #define POKESUM_WIN_MOVES_6          6
 
-static const struct WindowTemplate sWindowTemplates_Permanent[] =
+static const struct WindowTemplate sWindowTemplates_Permanent_Bg1[] =
 {
     [POKESUM_WIN_PAGE_NAME] = {
         .bg = 1,
@@ -741,7 +741,7 @@ static const struct WindowTemplate sWindowTemplates_Permanent[] =
     }
 };
 
-static const struct WindowTemplate sUnknown_8463F24[] = 
+static const struct WindowTemplate sWindowTemplates_Permanent_Bg2[] = 
 {
     {
         .bg = 2,
@@ -1036,7 +1036,7 @@ void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, 
     sMonSummaryScreen->unk3228 = 0;
     sMonSummaryScreen->unk322C = 1;
 
-    sub_8138B8C(&sMonSummaryScreen->currentMon);
+    BufferSelectedMonData(&sMonSummaryScreen->currentMon);
     sMonSummaryScreen->isEgg = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_EGG);
     sMonSummaryScreen->isBadEgg = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SANITY_IS_BAD_EGG);
 
@@ -2492,7 +2492,7 @@ static void PrintInfoPage(void)
         if (sMonSummaryScreen->isBadEgg)
             hatchMsgIndex = 0;
 
-        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 7, 45, sLevelNickTextColors[0], TEXT_SPEED_FF, sUnknown_8463EC4[hatchMsgIndex]);
+        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 7, 45, sLevelNickTextColors[0], TEXT_SPEED_FF, sEggHatchTimeTexts[hatchMsgIndex]);
     }
 }
 
@@ -2508,7 +2508,8 @@ static void PrintSkillsPage(void)
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 15 + sMonSkillsPrinterXpos->toNextLevel, 100, sLevelNickTextColors[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.expToNextLevelStrBuf);
 }
 
-#define GetMoveYpos(x) ((x) * 28 + 5)
+#define GetMoveNamePrinterYpos(x) ((x) * 28 + 5)
+#define GetMovePpPinterYpos(x) ((x) * 28 + 16)
 
 static void PrintMovesPage(void)
 {
@@ -2523,16 +2524,14 @@ static void PrintMovesPage(void)
             PokeSum_PrintMoveName(4);
         else
             AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2,
-                                         3, GetMoveYpos(4),
-                                         sUnknown_8463EF0[0], TEXT_SPEED_FF, gFameCheckerText_Cancel);
+                                         3, GetMoveNamePrinterYpos(4),
+                                         sPrintMoveTextColors[0], TEXT_SPEED_FF, gFameCheckerText_Cancel);
     }
 }
 
-#define MACRO_81372E4(x) ((x) * 28 + 16)
-
 static void PokeSum_PrintMoveName(u8 i)
 {
-    u8 v0 = 0;
+    u8 colorIdx = 0;
     u8 curPP = sub_8138C24(&sMonSummaryScreen->currentMon, i);
     u16 move = sMonSummaryScreen->moveIds[i];
     u8 ppBonuses = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_PP_BONUSES);
@@ -2541,39 +2540,40 @@ static void PokeSum_PrintMoveName(u8 i)
     if (i == 4)
         curPP = maxPP;
 
-    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 3, GetMoveYpos(i), sUnknown_8463EF0[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.moveNameStrBufs[i]);
+    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 3, GetMoveNamePrinterYpos(i), sPrintMoveTextColors[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.moveNameStrBufs[i]);
 
     if (sMonSummaryScreen->moveIds[i] == 0 || (curPP == maxPP))
-        v0 = 0;
+      colorIdx = 0;
     else if (curPP == 0)
-        v0 = 3;
+      colorIdx = 3;
     else if (maxPP == 3)
     {
         if (curPP == 2)
-            v0 = 2;
+          colorIdx = 2;
         else if (curPP == 1)
-            v0 = 1;
+          colorIdx = 1;
     }
     else if (maxPP == 2)
     {
         if (curPP == 1)
-            v0 = 1;
+          colorIdx = 1;
     }
     else
     {
         if (curPP <= (maxPP / 4))
-            v0 = 2;
+          colorIdx = 2;
         else if (curPP <= (maxPP / 2))
-            v0 = 1;
+          colorIdx = 1;
     }
 
-    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 36, MACRO_81372E4(i), sUnknown_8463EF0[v0], TEXT_SPEED_FF, gUnknown_8416238);
-    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 46 + sMonSkillsPrinterXpos->curPp[i], MACRO_81372E4(i), sUnknown_8463EF0[v0], TEXT_SPEED_FF, sMonSummaryScreen->summary.moveCurPpStrBufs[i]);
+    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 36, GetMovePpPinterYpos(i), sPrintMoveTextColors[colorIdx], TEXT_SPEED_FF,
+        gText_PokeSum_PP);
+    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 46 + sMonSkillsPrinterXpos->curPp[i], GetMovePpPinterYpos(i), sPrintMoveTextColors[colorIdx], TEXT_SPEED_FF, sMonSummaryScreen->summary.moveCurPpStrBufs[i]);
 
     if (sMonSummaryScreen->moveIds[i] != MOVE_NONE)
     {
-        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 58, MACRO_81372E4(i), sUnknown_8463EF0[v0], TEXT_SPEED_FF, gText_Slash);
-        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 64 + sMonSkillsPrinterXpos->maxPp[i], MACRO_81372E4(i), sUnknown_8463EF0[v0], TEXT_SPEED_FF, sMonSummaryScreen->summary.moveMaxPpStrBufs[i]);
+        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 58, GetMovePpPinterYpos(i), sPrintMoveTextColors[colorIdx], TEXT_SPEED_FF, gText_Slash);
+        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 64 + sMonSkillsPrinterXpos->maxPp[i], GetMovePpPinterYpos(i), sPrintMoveTextColors[colorIdx], TEXT_SPEED_FF, sMonSummaryScreen->summary.moveMaxPpStrBufs[i]);
     }
 }
 
@@ -2919,11 +2919,11 @@ static void PokeSum_DrawMoveTypeIcons(void)
         if (sMonSummaryScreen->moveIds[i] == MOVE_NONE)
             continue;
 
-        BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[i] + 1, 3, GetMoveYpos(i));
+        BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[i] + 1, 3, GetMoveNamePrinterYpos(i));
     }
 
     if (sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
-        BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[4] + 1, 3, GetMoveYpos(4));
+        BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[4] + 1, 3, GetMoveNamePrinterYpos(4));
 }
 
 static void PokeSum_PrintPageHeaderText(u8 curPageIndex)
@@ -3148,7 +3148,7 @@ static void PokeSum_CreateWindows(void)
     InitWindows(sWindowTemplates_Dummy);
 
     for (i = 0; i < 3; i++)
-        sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent[i]);
+        sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent_Bg1[i]);
 
     for (i = 0; i < 4; i++)
         switch (sMonSummaryScreen->curPageIndex)
@@ -3182,19 +3182,19 @@ static void sub_8138280(u8 curPageIndex)
     {
         if (bgPriority2 > bgPriority1)
             for (i = 0; i < 3; i++)
-                sMonSummaryScreen->windowIds[i] = AddWindow(&sUnknown_8463F24[i]);
+                sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent_Bg2[i]);
         else
             for (i = 0; i < 3; i++)
-                sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent[i]);
+                sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent_Bg1[i]);
     }
     else
     {
         if (bgPriority2 > bgPriority1)
             for (i = 0; i < 3; i++)
-                sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent[i]);
+                sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent_Bg1[i]);
         else
             for (i = 0; i < 3; i++)
-                sMonSummaryScreen->windowIds[i] = AddWindow(&sUnknown_8463F24[i]);
+                sMonSummaryScreen->windowIds[i] = AddWindow(&sWindowTemplates_Permanent_Bg2[i]);
     }
 
     for (i = 0; i < 4; i++)
@@ -3410,7 +3410,7 @@ static bool32 IsMultiBattlePartner(void)
     return FALSE;
 }
 
-static void sub_8138B8C(struct Pokemon * mon)
+static void BufferSelectedMonData(struct Pokemon * mon)
 {
     if (!sMonSummaryScreen->isBoxMon)
     {
@@ -5061,7 +5061,7 @@ static void Task_PokeSum_SwitchDisplayedPokemon(u8 taskId)
         sMonSummaryScreen->switchMonTaskState++;
         break;
     case 2:
-        sub_8138B8C(&sMonSummaryScreen->currentMon);
+        BufferSelectedMonData(&sMonSummaryScreen->currentMon);
 
         sMonSummaryScreen->isEgg = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_EGG);
         sMonSummaryScreen->isBadEgg = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SANITY_IS_BAD_EGG);

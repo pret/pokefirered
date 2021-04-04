@@ -354,7 +354,7 @@ struct PokemonStorageSystemData
     /* 2172 */ u16 field_2176[3];
     /* 2178 */ u8 field_2186;
     /* 2179 */ u8 field_2187;
-    /* 217a */ u8 field_2188;
+    /* 217a */ u8 summaryScreenMode;
     /* 217c */ union
     {
         struct Pokemon *mon;

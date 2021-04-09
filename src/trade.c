@@ -411,7 +411,7 @@ static const u8 gUnknown_8261E92[] = {
 };
 
 const u8 sText_Dummy[] = _("");
-const u8 sText_ClrDkGryHltTranspShdwRed[] = _("{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}{SHADOW RED}");
+const u8 sText_ClrDkGryHltTranspShdwRed[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
 const u8 gText_MaleSymbol4[] = _("♂");
 const u8 gText_FemaleSymbol4[] = _("♀");
 const u8 gText_GenderlessSymbol[] = _("");

@@ -450,21 +450,23 @@ BIG   = FC 06 04
 @ colors
 
 TRANSPARENT = 00
-DARK_GREY = 01
-RED = 02
-GREEN = 03
-BLUE = 04
-YELLOW = 05
-CYAN = 06
-MAGENTA = 07
-LIGHT_GRAY = 08
-BLACK = 09
-BLACK2 = 0A @ duplicate of black?
-SILVER = 0B
-WHITE = 0C
-SKY_BLUE = 0D
-LIGHT_BLUE = 0E
-WHITE2 = 0F @ duplicate of white?
+WHITE = 01
+DARK_GREY = 02
+LIGHT_GREY = 03
+RED = 04
+LIGHT_RED = 05
+GREEN = 06
+LIGHT_GREEN = 07
+BLUE = 08
+LIGHT_BLUE = 09
+@ these next colors can be set to anything arbitrary at runtime
+@ usually though they'll have the textbox border colors as described below
+DYNAMIC_COLOR1 = 0A @ white
+DYNAMIC_COLOR2 = 0B @ white with a tinge of green
+DYNAMIC_COLOR3 = 0C @ white 2
+DYNAMIC_COLOR4 = 0D @ aquamarine
+DYNAMIC_COLOR5 = 0E @ blue-green
+DYNAMIC_COLOR6 = 0F @ cerulean
 
 @ sound
 

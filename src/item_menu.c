@@ -289,9 +289,9 @@ static const struct YesNoFuncTable sYesNoMenu_Sell = {
     Task_SellItem_No
 };
 
-static const u8 sListItemTextColor_RegularItem[] = _("{COLOR_HIGHLIGHT_SHADOW RED TRANSPARENT GREEN}");
+static const u8 sListItemTextColor_RegularItem[] = _("{COLOR_HIGHLIGHT_SHADOW DARK_GREY TRANSPARENT LIGHT_GREY}");
 
-static const u8 sListItemTextColor_TmCase_BerryPouch[] = _("{COLOR_HIGHLIGHT_SHADOW LIGHT_GRAY TRANSPARENT BLACK}");
+static const u8 sListItemTextColor_TmCase_BerryPouch[] = _("{COLOR_HIGHLIGHT_SHADOW BLUE TRANSPARENT LIGHT_BLUE}");
 
 static const struct ScrollArrowsTemplate sPocketSwitchArrowPairTemplate = {
     .firstArrowType = SCROLL_ARROW_LEFT,

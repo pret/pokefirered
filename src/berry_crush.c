@@ -2695,7 +2695,7 @@ static void PrintBerryCrushResultWindow(struct BerryCrushGame * game, u8 command
             break;
         }
         if (linkPlayerId == game->localId)
-            StringCopy(gStringVar3, gText_1_ClrLtGryShdwBlk_Dynamic0);
+            StringCopy(gStringVar3, gText_1_ClrBluShdwLtBlu_Dynamic0);
         else
             StringCopy(gStringVar3, gText_1_Dynamic0);
         gStringVar3[0] = linkIdToPrint + CHAR_1;

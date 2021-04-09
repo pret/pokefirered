@@ -69,7 +69,7 @@ static const u16 sMovingBgPals[] = INCBIN_U16("graphics/evolution_scene/transiti
 
 static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 
-static const u8 unref_83F8445[] = _("{COLOR RED}{HIGHLIGHT DARK_GREY}{SHADOW GREEN}");
+static const u8 unref_83F8445[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}");
 
 static const u8 unref_83F844F[][10] = {
     _("▶\n "),

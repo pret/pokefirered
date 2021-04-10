@@ -906,8 +906,8 @@ static const u8 sTextColorTable[][3] =
 {
     {
         TEXT_COLOR_WHITE,
-        TEXT_COLOR_DARK_GREY,
-        TEXT_COLOR_LIGHT_GREY
+        TEXT_COLOR_DARK_GRAY,
+        TEXT_COLOR_LIGHT_GRAY
     }, {
         TEXT_COLOR_WHITE,
         TEXT_COLOR_RED,
@@ -1421,7 +1421,7 @@ static void sub_8155A78(void)
     {
     case 0:
         DrawDialogueFrame(0, FALSE);
-        AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+        AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         gUnknown_203F440->state++;
         break;
     case 1:

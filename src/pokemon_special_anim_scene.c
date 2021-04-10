@@ -610,13 +610,13 @@ bool8 PSA_LevelUpVerticalSpritesTaskIsRunning(void)
 UNUSED void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
 {
     DrawTextBorderOuter(1, 0x001, 0xE);
-    DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+    DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_BOTH);
 }
 UNUSED void PSA_DrawLevelUpWindowPg2(u16 *currStats)
 {
-    DrawLevelUpWindowPg2(1, currStats, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+    DrawLevelUpWindowPg2(1, currStats, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(1, COPYWIN_GFX);
 }
 

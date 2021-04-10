@@ -461,25 +461,25 @@ const u32 gFile_graphics_unknown_unknown_D17AB8_tilemap[] = INCBIN_U32("graphics
 
 const u32 gContestMiscGfx[] = INCBIN_U32("graphics/contest/misc.4bpp.lz");
 
-const u32 gFile_graphics_contest_audience_sheet[] = INCBIN_U32("graphics/contest/audience.4bpp.lz");
+const u32 gContestAudienceGfx[] = INCBIN_U32("graphics/contest/audience.4bpp.lz");
 
-const u32 gFile_graphics_contest_faces_sheet[] = INCBIN_U32("graphics/contest/faces.4bpp.lz");
+const u32 gContestFacesSheetGfx[] = INCBIN_U32("graphics/contest/faces.4bpp.lz");
 
-const u32 gFile_graphics_contest_judge_symbols_sheet[] = INCBIN_U32("graphics/contest/judge_symbols.4bpp.lz");
-const u32 gFile_graphics_contest_judge_symbols_palette[] = INCBIN_U32("graphics/contest/judge_symbols.gbapal.lz");
+const u32 gContestJudgeSymbolsGfx[] = INCBIN_U32("graphics/contest/judge_symbols.4bpp.lz");
+const u32 gContestJudgeSymbolsPal[] = INCBIN_U32("graphics/contest/judge_symbols.gbapal.lz");
 
-const u8 gFile_graphics_contest_heart[] = INCBIN_U8("graphics/contest/heart.4bpp");
+const u8 gContestHeartGfx[] = INCBIN_U8("graphics/contest/heart.4bpp");
 
 const u32 gFile_graphics_unknown_unknown_D196E4_sheet[] = INCBIN_U32("graphics/unknown/unknown_D196E4.4bpp.lz");
 const u32 gFile_graphics_unknown_unknown_D196E4_palette[] = INCBIN_U32("graphics/unknown/unknown_D196E4.gbapal.lz");
 
-const u32 gUnknown_8D197FC[] = INCBIN_U32("graphics/contest/misc_2.4bpp.lz");
+const u32 gContestMisc2Gfx[] = INCBIN_U32("graphics/contest/misc_2.4bpp.lz");
 
-const u32 gFile_graphics_contest_misc_2_tilemap_1_tilemap[] = INCBIN_U32("graphics/contest/misc_2_tilemap_1.bin.lz");
-const u32 gFile_graphics_contest_misc_2_tilemap_2_tilemap[] = INCBIN_U32("graphics/contest/misc_2_tilemap_2.bin.lz");
-const u32 gFile_graphics_contest_misc_2_tilemap_3_tilemap[] = INCBIN_U32("graphics/contest/misc_2_tilemap_3.bin.lz");
+const u32 gContestMiscTilemap1[] = INCBIN_U32("graphics/contest/misc_2_tilemap_1.bin.lz");
+const u32 gContestMiscTilemap2[] = INCBIN_U32("graphics/contest/misc_2_tilemap_2.bin.lz");
+const u32 gContestMiscTilemap3[] = INCBIN_U32("graphics/contest/misc_2_tilemap_3.bin.lz");
 
-const u32 gFile_graphics_contest_misc_2_palette[] = INCBIN_U32("graphics/contest/misc_2.gbapal.lz");
+const u32 gContestMiscPal[] = INCBIN_U32("graphics/contest/misc.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.4bpp.lz");
 const u32 gBattleAnimSpritePal_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.gbapal.lz");
@@ -582,8 +582,8 @@ const u32 gBattleAnimSpritePal_BlackBall2[] = INCBIN_U32("graphics/battle_anims/
 
 const u32 gBattleAnimSpritePal_PurpleGasCloud[] = INCBIN_U32("graphics/battle_anims/sprites/purple_gas_cloud.gbapal.lz");
 
-const u32 gFile_graphics_contest_judge_sheet[] = INCBIN_U32("graphics/contest/judge.4bpp.lz");
-const u32 gFile_graphics_contest_judge_palette[] = INCBIN_U32("graphics/contest/judge.gbapal.lz");
+const u32 gContestJudgeGfx[] = INCBIN_U32("graphics/contest/judge.4bpp.lz");
+const u32 gContestJudgePal[] = INCBIN_U32("graphics/contest/judge.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_Spark[] = INCBIN_U32("graphics/battle_anims/sprites/spark.4bpp.lz");
 const u32 gBattleAnimSpritePal_Spark[] = INCBIN_U32("graphics/battle_anims/sprites/spark.gbapal.lz");
@@ -984,8 +984,8 @@ const u32 gBattleAnimSpriteGfx_IcicleSpear[] = INCBIN_U32("graphics/battle_anims
 const u32 gBattleAnimSpritePal_IcicleSpear[] = INCBIN_U32("graphics/battle_anims/sprites/icicle_spear.gbapal.lz");
 
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/next_turn.4bpp.lz");
-const u8 gFile_graphics_contest_nextturn_numbers[] = INCBIN_U8("graphics/contest/next_turn_numbers.4bpp");
-const u8 gFile_graphics_contest_nextturn_random[] = INCBIN_U8("graphics/contest/next_turn_random.4bpp");
+const u8 gContestNextTurnNumbersGfx[] = INCBIN_U8("graphics/contest/next_turn_numbers.4bpp");
+const u8 gContestNextTurnRandomGfx[] = INCBIN_U8("graphics/contest/next_turn_random.4bpp");
 
 const u32 gBattleAnimSpriteGfx_GlowyRedOrb[] = INCBIN_U32("graphics/battle_anims/sprites/glowy_red_orb.4bpp.lz");
 const u32 gBattleAnimSpritePal_GlowyRedOrb[] = INCBIN_U32("graphics/battle_anims/sprites/glowy_red_orb.gbapal.lz");
@@ -994,9 +994,9 @@ const u32 gBattleAnimSpritePal_SleepPowder[] = INCBIN_U32("graphics/battle_anims
 const u32 gBattleAnimSpritePal_StunSpore[] = INCBIN_U32("graphics/battle_anims/sprites/stun_spore.gbapal.lz");
 
 const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/applause.4bpp.lz");
-const u8 gFile_graphics_contest_applause_meter[] = INCBIN_U8("graphics/contest/applause_meter.4bpp");
+const u8 gContestApplauseMeterGfx[] = INCBIN_U8("graphics/contest/applause_meter.4bpp");
 
-const u16 gFile_graphics_contest_nextturn[] = INCBIN_U16("graphics/contest/next_turn.gbapal");
+const u16 gContestNextTurnPal[] = INCBIN_U16("graphics/contest/next_turn.gbapal");
 
 const u32 gBattleAnimSpriteGfx_Splash[] = INCBIN_U32("graphics/battle_anims/sprites/splash.4bpp.lz");
 const u32 gBattleAnimSpritePal_Splash[] = INCBIN_U32("graphics/battle_anims/sprites/splash.gbapal.lz");

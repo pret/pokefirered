@@ -29,9 +29,9 @@ static void Task_WaitForExit(u8);
 static void Task_DiplomaInit(u8);
 static void Task_DiplomaReturnToOverworld(u8);
 
-static const u32 gUnknown_84147C0[] = INCBIN_U32("graphics/diploma/unk_84147C0.4bpp.lz");
-static const u32 gUnknown_84154E8[] = INCBIN_U32("graphics/diploma/unk_84154E8.bin.lz");
-static const u16 gUnknown_8415954[] = INCBIN_U16("graphics/diploma/unk_8415954.gbapal");
+static const u32 gDiplomaGfx[] = INCBIN_U32("graphics/diploma/diploma.4bpp.lz");
+static const u32 gDiplomaTilemap[] = INCBIN_U32("graphics/diploma/diploma.bin.lz");
+static const u16 gDiplomaPal[] = INCBIN_U16("graphics/diploma/diploma.gbapal");
 
 static const u8 gUnknown_8415994[] = _("{HIGHLIGHT TRANSPARENT}プレイヤー");
 static const u8 gUnknown_841599D[] = _("{HIGHLIGHT TRANSPARENT}さま");
@@ -118,7 +118,7 @@ static void Task_DiplomaInit(u8 taskId)
         }
         break;
     case 3:
-        CopyToBgTilemapBuffer(1, gUnknown_84154E8, 0, 0);
+        CopyToBgTilemapBuffer(1, gDiplomaTilemap, 0, 0);
         break;
     case 4:
         if (HasAllMons())
@@ -231,7 +231,7 @@ static u8 DiplomaLoadGfx(void)
         ResetTempTileDataBuffers();
         break;
     case 1:
-        DecompressAndCopyTileDataToVram(1, gUnknown_84147C0, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gDiplomaGfx, 0, 0, 0);
         break;
     case 2:
         if (!(FreeTempTileDataBuffersIfPossible() == 1))
@@ -240,7 +240,7 @@ static u8 DiplomaLoadGfx(void)
         }
         return 0;
     case 3:
-        LoadPalette(gUnknown_8415954, 0, 0x40);
+        LoadPalette(gDiplomaPal, 0, 0x40);
     default:
         return 1;
     }

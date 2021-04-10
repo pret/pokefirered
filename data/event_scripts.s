@@ -87,7 +87,7 @@ gStdScriptsEnd::
 
 	.include "data/maps/BattleColosseum_2P/scripts.inc"
 	.include "data/maps/TradeCenter/scripts.inc"
-	.include "data/maps/RecordCenter/scripts.inc"
+	.include "data/maps/RecordCorner/scripts.inc"
 	.include "data/maps/BattleColosseum_4P/scripts.inc"
 	.include "data/maps/UnionRoom/scripts.inc"
 	.include "data/maps/ViridianForest/scripts.inc"

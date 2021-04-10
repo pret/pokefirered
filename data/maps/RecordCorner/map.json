@@ -1,7 +1,7 @@
 {
-  "id": "MAP_RECORD_CENTER",
-  "name": "RecordCenter",
-  "layout": "LAYOUT_RECORD_CENTER",
+  "id": "MAP_RECORD_CORNER",
+  "name": "RecordCorner",
+  "layout": "LAYOUT_RECORD_CORNER",
   "music": "MUS_POKE_CENTER",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
@@ -25,7 +25,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RecordCenter_EventScript_Attendant",
+      "script": "RecordCorner_EventScript_Attendant",
       "flag": "0"
     }
   ],
@@ -67,7 +67,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot0"
+      "script": "RecordCorner_EventScript_Spot0"
     },
     {
       "type": "trigger",
@@ -76,7 +76,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot1"
+      "script": "RecordCorner_EventScript_Spot1"
     },
     {
       "type": "trigger",
@@ -85,7 +85,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot2"
+      "script": "RecordCorner_EventScript_Spot2"
     },
     {
       "type": "trigger",
@@ -94,7 +94,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot3"
+      "script": "RecordCorner_EventScript_Spot3"
     }
   ],
   "bg_events": []

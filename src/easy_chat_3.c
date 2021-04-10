@@ -1321,7 +1321,7 @@ static void PrintTitleText(void)
 
     xOffset = (128 - GetStringWidth(1, titleText, 0)) / 2u;
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+    EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_BOTH);
 }
@@ -1439,7 +1439,7 @@ static void PrintECFields(void)
                     *str++ = 9;
                 }
 
-                str = WriteColorChangeControlCode(str, 0, TEXT_COLOR_DARK_GREY);
+                str = WriteColorChangeControlCode(str, 0, TEXT_COLOR_DARK_GRAY);
             }
 
             str = StringAppend(str, sText_Clear17);

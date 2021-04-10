@@ -55,8 +55,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
 
 static const u8 sTextColor[] = {
     TEXT_COLOR_WHITE,
-    TEXT_COLOR_DARK_GREY,
-    TEXT_COLOR_LIGHT_GREY
+    TEXT_COLOR_DARK_GRAY,
+    TEXT_COLOR_LIGHT_GRAY
 };
 
 static void CB2_RunClearSaveDataScreen(void)

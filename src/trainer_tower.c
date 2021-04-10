@@ -316,7 +316,7 @@ static const struct WindowTemplate sTimeBoardWindowTemplate[] = {
 
 static const u32 sUnused_847A228 = 0x70;
 
-static const u8 sTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+static const u8 sTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static void (*const sTrainerTowerFunctions[])(void) = {
     [TRAINER_TOWER_FUNC_INIT_FLOOR]             = InitTrainerTowerFloor,

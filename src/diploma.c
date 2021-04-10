@@ -38,8 +38,8 @@ static const u8 gUnknown_841599D[] = _("{HIGHLIGHT TRANSPARENT}さま");
 static const u8 gUnknown_84159A3[] = _("{HIGHLIGHT TRANSPARENT}ホウエン");
 static const u8 gUnknown_84159AB[] = _("{HIGHLIGHT TRANSPARENT}ぜんこく");
 static const u8 gUnknown_84159B3[] = _("{HIGHLIGHT TRANSPARENT}　　　　　ポケモンずかんを\nみごと　かんせい　させた\nいだいなこうせきを　たたえ\nここに　しょうめい　します");
-static const u8 gUnknown_84159ED[] = _("{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}ゲームフリーク");
-static const u8 gUnknown_84159FB[] = _("{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}");
+static const u8 gUnknown_84159ED[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}ゲームフリーク");
+static const u8 gUnknown_84159FB[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}");
 
 static const ALIGNED(4) u8 gUnknown_8415A04[3] = {0, 2, 3};
 

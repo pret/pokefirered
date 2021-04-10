@@ -511,9 +511,9 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-ALIGNED(4) const u8 sTextColor_White[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GREY};
-ALIGNED(4) const u8 sTextColor_Green[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREEN, TEXT_COLOR_DARK_GREY};
-ALIGNED(4) const u8 sTextColor_Red[]   = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1,   TEXT_COLOR_DARK_GREY};
+ALIGNED(4) const u8 sTextColor_White[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY};
+ALIGNED(4) const u8 sTextColor_Green[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREEN, TEXT_COLOR_DARK_GRAY};
+ALIGNED(4) const u8 sTextColor_Red[]   = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1,   TEXT_COLOR_DARK_GRAY};
 
 static const u8 *const sTextColorTable[] = {
     [MAPSECTYPE_VISITED - 2]     = sTextColor_Green,
@@ -812,7 +812,7 @@ static const u8 sWinRegs[][2] = {
     {REG_OFFSET_WIN1V, REG_OFFSET_WIN1H}
 };
 
-static const u8 sTextColors[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static const u8 sTextColors[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 
 static const u8 *const sMapNames[] = {
     [MAPSEC_PALLET_TOWN         - MAPSECS_KANTO] = gMapSecName_PalletTown,

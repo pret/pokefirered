@@ -600,7 +600,7 @@ static bool32 DisplaySubtask_UpdateMessageBuffer(u8 *state)
         UnionRoomChat_GetBufferSelectionRegion(&start, &length);
         FillWin1Rect(start, length, PIXEL_FILL(0));
         str = UnionRoomChat_GetMessageEntryBuffer();
-        PrintOnWin1Parameterized(0, str, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY);
+        PrintOnWin1Parameterized(0, str, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY);
         CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:
@@ -670,7 +670,7 @@ static bool32 DisplaySubtask_CancelRegister(u8 *state)
         str = UnionRoomChat_GetEndOfMessageEntryBuffer();
         length = StringLength_Multibyte(str);
         FillWin1Rect(x, length, PIXEL_FILL(0));
-        PrintOnWin1Parameterized(x, str, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY);
+        PrintOnWin1Parameterized(x, str, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY);
         CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 1:

@@ -3117,13 +3117,13 @@ static u16 GetDirectionForEventScript(const u8 *script)
         return FACING_FORCED_RIGHT;
     else if (script == BattleColosseum_4P_EventScript_PlayerSpot3)
         return FACING_FORCED_LEFT;
-    else if (script == RecordCenter_EventScript_Spot0)
+    else if (script == RecordCorner_EventScript_Spot0)
         return FACING_FORCED_RIGHT;
-    else if (script == RecordCenter_EventScript_Spot1)
+    else if (script == RecordCorner_EventScript_Spot1)
         return FACING_FORCED_LEFT;
-    else if (script == RecordCenter_EventScript_Spot2)
+    else if (script == RecordCorner_EventScript_Spot2)
         return FACING_FORCED_RIGHT;
-    else if (script == RecordCenter_EventScript_Spot3)
+    else if (script == RecordCorner_EventScript_Spot3)
         return FACING_FORCED_LEFT;
     else if (script == BattleColosseum_2P_EventScript_PlayerSpot0)
         return FACING_FORCED_RIGHT;

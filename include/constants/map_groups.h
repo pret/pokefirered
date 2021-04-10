@@ -8,7 +8,7 @@
 // Map Group 0
 #define MAP_BATTLE_COLOSSEUM_2P (0 | (0 << 8))
 #define MAP_TRADE_CENTER        (1 | (0 << 8))
-#define MAP_RECORD_CENTER       (2 | (0 << 8))
+#define MAP_RECORD_CORNER       (2 | (0 << 8))
 #define MAP_BATTLE_COLOSSEUM_4P (3 | (0 << 8))
 #define MAP_UNION_ROOM          (4 | (0 << 8))
 

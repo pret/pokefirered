@@ -1136,12 +1136,12 @@ const u8 gItemPcTiles[] = INCBIN_U8("graphics/item_pc/unk_8E85090.4bpp.lz");
 const u32 gItemPcBgPals[] = INCBIN_U32("graphics/item_pc/unk_8E85408.gbapal.lz");
 const u8 gItemPcTilemap[] = INCBIN_U8("graphics/item_pc/unk_8E85458.bin.lz");
 
-const u32 gBerryPouchSpriteTiles[] = INCBIN_U32("graphics/berry_pouch/unk_8E8560C.4bpp.lz");
-const u8 gBerryPouchBgGfx[] = INCBIN_U8("graphics/berry_pouch/unk_8E859D0.4bpp.lz");
-const u32 gBerryPouchBgPals[] = INCBIN_U32("graphics/berry_pouch/unk_8E85BA4.gbapal.lz");
-const u32 gBerryPouchBgPal0FemaleOverride[] = INCBIN_U32("graphics/berry_pouch/unk_8E85BF4.gbapal.lz");
-const u32 gBerryPouchSpritePalette[] = INCBIN_U32("graphics/berry_pouch/unk_8E85C1C.gbapal.lz");
-const u8 gBerryPouchBg1Tilemap[] = INCBIN_U8("graphics/berry_pouch/unk_8E85C44.bin.lz");
+const u32 gBerryPouchSpriteTiles[] = INCBIN_U32("graphics/berry_pouch/berry_pouch.4bpp.lz");
+const u8 gBerryPouchBgGfx[] = INCBIN_U8("graphics/berry_pouch/background.4bpp.lz");
+const u32 gBerryPouchBgPals[] = INCBIN_U32("graphics/berry_pouch/background.gbapal.lz");
+const u32 gBerryPouchBgPal0FemaleOverride[] = INCBIN_U32("graphics/berry_pouch/background_female.gbapal.lz");
+const u32 gBerryPouchSpritePalette[] = INCBIN_U32("graphics/berry_pouch/berry_pouch.gbapal.lz");
+const u8 gBerryPouchBg1Tilemap[] = INCBIN_U8("graphics/berry_pouch/background.bin.lz");
 
 const u32 gBuyMenuFrame_Gfx[] = INCBIN_U32("graphics/shop_menu/shop_menu.4bpp.lz");
 const u32 gBuyMenuFrame_Tilemap[] = INCBIN_U32("graphics/shop_menu/shop_tilemap.bin");

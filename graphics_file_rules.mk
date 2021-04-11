@@ -26,6 +26,7 @@ ITEMMENUGFXDIR := graphics/item_menu
 INTROGFXDIR := graphics/intro
 BATTLETERRAINGFXDIR := graphics/battle_terrain
 BERRYPOUCHGFXDIR := graphics/berry_pouch
+HALLOFFAMEGFXDIR := graphics/hall_of_fame
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -573,3 +574,6 @@ $(BATTLETERRAINGFXDIR)/terrain_water.4bpp: %.4bpp: %.png
 
 $(BERRYPOUCHGFXDIR)/background.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 52
+
+$(HALLOFFAMEGFXDIR)/hall_of_fame.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 29

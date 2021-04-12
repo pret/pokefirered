@@ -342,7 +342,7 @@ static const struct SubspriteTable gUnknown_8260404[] = {
     {NELEMS(gUnknown_82603E4), gUnknown_82603E4}
 };
 
-static const u16 gBattleInterface_Unused[] = INCBIN_U16("graphics/battle_interface/unused.4bpp");
+static const u16 sBattleInterface_Unused[] = INCBIN_U16("graphics/battle_interface/unused.4bpp");
 
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheets[] = {
     {gFile_graphics_battle_interface_ball_status_bar_sheet, 0x0200, 55052},

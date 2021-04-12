@@ -89,7 +89,7 @@ static void sub_8112FD0(void)
     sub_8112F18(sHelpMessageWindowId);
 }
 
-static const u8 sHelpMessageTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_DARK_GREY};
+static const u8 sHelpMessageTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_DARK_GRAY};
 
 static void PrintHelpMessageText(const u8 *text)
 {

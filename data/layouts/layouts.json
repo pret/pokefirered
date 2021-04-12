@@ -457,16 +457,16 @@
       "blockdata_filepath": "data/layouts/TradeCenter/map.bin"
     },
     {
-      "id": "LAYOUT_RECORD_CENTER",
-      "name": "RecordCenter_Layout",
+      "id": "LAYOUT_RECORD_CORNER",
+      "name": "RecordCorner_Layout",
       "width": 20,
       "height": 10,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_CableClub",
-      "border_filepath": "data/layouts/RecordCenter/border.bin",
-      "blockdata_filepath": "data/layouts/RecordCenter/map.bin"
+      "border_filepath": "data/layouts/RecordCorner/border.bin",
+      "blockdata_filepath": "data/layouts/RecordCorner/map.bin"
     },
     {
       "id": "LAYOUT_BATTLE_COLOSSEUM_4P",

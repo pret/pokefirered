@@ -400,15 +400,15 @@ static const struct BgTemplate sBgTemplates[] = {
 static const u8 sBerryCrushTextColorTable[][3] = {
     {
         TEXT_COLOR_WHITE,
-        TEXT_COLOR_DARK_GREY,
-        TEXT_COLOR_LIGHT_GREY
+        TEXT_COLOR_DARK_GRAY,
+        TEXT_COLOR_LIGHT_GRAY
     }, {
         TEXT_COLOR_TRANSPARENT,
         TEXT_COLOR_WHITE,
-        TEXT_COLOR_DARK_GREY
+        TEXT_COLOR_DARK_GRAY
     }, {
         TEXT_COLOR_TRANSPARENT,
-        TEXT_COLOR_LIGHT_GREY,
+        TEXT_COLOR_LIGHT_GRAY,
         TEXT_COLOR_RED
     }, {
         TEXT_COLOR_WHITE,
@@ -1091,11 +1091,11 @@ static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame * game, u8 *para
         if (params[1] & 2)
         {
             StringExpandPlaceholders(gStringVar4, sBerryCrushMessages[params[0]]);
-            AddTextPrinterParameterized2(0, 2, gStringVar4, game->textSpeed, 0, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, gStringVar4, game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         else
         {
-            AddTextPrinterParameterized2(0, 2, sBerryCrushMessages[params[0]], game->textSpeed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sBerryCrushMessages[params[0]], game->textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         CopyWindowToVram(0, COPYWIN_BOTH);
         break;
@@ -2695,7 +2695,7 @@ static void PrintBerryCrushResultWindow(struct BerryCrushGame * game, u8 command
             break;
         }
         if (linkPlayerId == game->localId)
-            StringCopy(gStringVar3, gText_1_ClrLtGryShdwBlk_Dynamic0);
+            StringCopy(gStringVar3, gText_1_ClrBluShdwLtBlu_Dynamic0);
         else
             StringCopy(gStringVar3, gText_1_Dynamic0);
         gStringVar3[0] = linkIdToPrint + CHAR_1;

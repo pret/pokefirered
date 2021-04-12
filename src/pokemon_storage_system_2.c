@@ -245,7 +245,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         LoadStdWindowFrameGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         CopyWindowToVram(0, COPYWIN_BOTH);
         CopyWindowToVram(task->data[15], COPYWIN_BOTH);
         task->data[0]++;
@@ -271,7 +271,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             {
                 task->data[1] = task->data[3];
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+                AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             }
             break;
         case MENU_B_PRESSED:
@@ -286,13 +286,13 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             if (task->data[2] == 0 && CountPartyMons() == PARTY_SIZE)
             {
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+                AddTextPrinterParameterized2(0, 2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->data[0] = 3;
             }
             else if (task->data[2] == 1 && CountPartyMons() == 1)
             {
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+                AddTextPrinterParameterized2(0, 2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->data[0] = 3;
             }
             else
@@ -307,7 +307,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->data[0] = 2;
         }
         else if (JOY_NEW(DPAD_UP))
@@ -317,7 +317,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             Menu_MoveCursor(-1);
             task->data[1] = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->data[0] = 2;
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -327,7 +327,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             Menu_MoveCursor(1);
             task->data[1] = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->data[0] = 2;
         }
         break;

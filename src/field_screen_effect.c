@@ -29,7 +29,7 @@ static const struct WindowTemplate gUnknown_83C68E4 = {
     .baseBlock = 1,
 };
 
-static const u8 gUnknown_83C68EC[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
+static const u8 gUnknown_83C68EC[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
 static void Task_EnableScriptAfterMusicFade(u8 taskId);
 static void Task_BarnDoorWipeChild(u8 taskId);

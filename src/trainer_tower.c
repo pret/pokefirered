@@ -316,7 +316,7 @@ static const struct WindowTemplate sTimeBoardWindowTemplate[] = {
 
 static const u32 sUnused_847A228 = 0x70;
 
-static const u8 sTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
+static const u8 sTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static void (*const sTrainerTowerFunctions[])(void) = {
     [TRAINER_TOWER_FUNC_INIT_FLOOR]             = InitTrainerTowerFloor,
@@ -501,7 +501,7 @@ void GetTrainerTowerOpponentLoseText(u8 *dest, u8 opponentIdx)
         TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechLose2, dest);
 }
 
-static void SetUpTrainerTowerDataStruct(void) // fakematching
+static void SetUpTrainerTowerDataStruct(void)
 {
     u32 challengeType = gSaveBlock1Ptr->towerChallengeId;
     s32 r4;
@@ -519,16 +519,7 @@ static void SetUpTrainerTowerDataStruct(void) // fakematching
         r7 = gUnknown_84827B4[challengeType];
         for (r4 = 0; r4 < MAX_TRAINER_TOWER_FLOORS; r4++)
         {
-        #ifndef NONMATCHING
-            void * r5;
-            register void * r0 asm("r0") = sTrainerTowerState;
-            r5 = (void *)(r4 * sizeof(struct TrainerTowerFloor));
-            r0  = r5 + (uintptr_t)r0;
-            r0 += offsetof(struct UnkStruct_203F458, unk_0004.floors);
-            memcpy(r0, r7[r4], sizeof(struct TrainerTowerFloor));
-        #else
-            memcpy(&sTrainerTowerState->unk_0004.floors[r4], r7[r4], sizeof(struct TrainerTowerFloor));
-        #endif
+            *(sTrainerTowerState->unk_0004.floors + r4) = *(r7[r4]); // manual pointer arithmetic needed to match
         }
         sTrainerTowerState->unk_0004.checksum = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
         ValidateOrResetCurTrainerTowerRecord();

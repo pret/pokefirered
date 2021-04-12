@@ -1190,7 +1190,7 @@ extern const u8 gText_BerryCrush_NoBerries[];
 extern const u8 gText_BerryCrush_MemberDroppedOut[];
 extern const u8 gText_BerryCrush_TimeUp[];
 extern const u8 gText_BerryCrush_CommunicationStandby[];
-extern const u8 gText_1_ClrLtGryShdwBlk_Dynamic0[];
+extern const u8 gText_1_ClrBluShdwLtBlu_Dynamic0[];
 extern const u8 gText_1_Dynamic0[];
 extern const u8 gText_SpaceTimes[];
 extern const u8 gText_XDotY[];

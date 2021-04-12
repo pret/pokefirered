@@ -1991,7 +1991,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         x = 236 - GetStringWidth(0, gString_SlotMachineControls, 0);
         textColor[0] = TEXT_DYNAMIC_COLOR_6;
         textColor[1] = TEXT_COLOR_WHITE;
-        textColor[2] = TEXT_COLOR_DARK_GREY;
+        textColor[2] = TEXT_COLOR_DARK_GRAY;
         AddTextPrinterParameterized3(1, 0, x, 0, textColor, 0, gString_SlotMachineControls);
         CopyBgTilemapBufferToVram(0);
 

@@ -323,13 +323,13 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     {
     case 0:
         textColor[0] = TEXT_COLOR_TRANSPARENT;
-        textColor[1] = TEXT_COLOR_DARK_GREY;
-        textColor[2] = TEXT_COLOR_LIGHT_GREY;
+        textColor[1] = TEXT_COLOR_DARK_GRAY;
+        textColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 1:
         textColor[0] = TEXT_COLOR_TRANSPARENT;
         textColor[1] = TEXT_COLOR_WHITE;
-        textColor[2] = TEXT_COLOR_LIGHT_GREY;
+        textColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 2:
         textColor[0] = TEXT_COLOR_TRANSPARENT;
@@ -344,7 +344,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     case 4:
         textColor[0] = TEXT_COLOR_TRANSPARENT;
         textColor[1] = TEXT_COLOR_WHITE;
-        textColor[2] = TEXT_COLOR_DARK_GREY;
+        textColor[2] = TEXT_COLOR_DARK_GRAY;
         break;
     // default: UB
     }

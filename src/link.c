@@ -1709,7 +1709,7 @@ u32 GetLinkRecvQueueLength(void)
     return gLink.recvQueue.count;
 }
 
-bool32 sub_800B270(void)
+bool32 LinkRecvQueueLengthMoreThan2(void)
 {
     if (GetLinkRecvQueueLength() > 2)
     {

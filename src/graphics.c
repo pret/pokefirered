@@ -1224,20 +1224,20 @@ const u16 gUnknown_8E99F24[] = INCBIN_U16("graphics/link_rfu/unk_8E9A168.gbapal"
 const u32 gEasyChatSelectGroupHelp_Tiles[] = INCBIN_U32("graphics/link_rfu/unk_8E99F44.4bpp.lz");
 const u32 gEasyChatModeIcons_Tiles[] = INCBIN_U32("graphics/link_rfu/unk_8E9A168.4bpp.lz");
 
-const u32 gUnknown_8E9A460[] = INCBIN_U32("graphics/interface/trainer_memo.4bpp.lz");
+const u32 gPokeSumBgTiles[] = INCBIN_U32("graphics/interface/trainer_memo.4bpp.lz");
 const u32 gTrainerMemoPal1[] = INCBIN_U32("graphics/interface/trainer_memo_pal1.gbapal");
 const u32 gUnknown_8E9B3B0[] = INCBIN_U32("graphics/interface/trainer_memo_pal2.gbapal");
 const u32 gUnknown_8E9B3D0[] = INCBIN_U32("graphics/interface/trainer_memo_pal3.gbapal");
 
 const u32 gPokeSummary_ExpBarTiles[] = INCBIN_U32("graphics/interface/summary_exp_bar.4bpp.lz");
-const u32 gUnknown_8E9B4B8[] = INCBIN_U32("graphics/interface/summary_hp_bar.4bpp.lz");
+const u32 gPokeSummary_HpBarTiles[] = INCBIN_U32("graphics/interface/summary_hp_bar.4bpp.lz");
 const u16 gPokeSummary_ExpBarPals[] = INCBIN_U16("graphics/interface/summary_exp_bar.gbapal"); // hp bar uses this too
 
-const u32 gUnknown_8E9B598[] = INCBIN_U32("graphics/interface/trainer_memo.bin.lz");
-const u32 gUnknown_8E9B750[] = INCBIN_U32("graphics/interface/trainer_memo_2.bin.lz");
-const u32 gUnknown_8E9B950[] = INCBIN_U32("graphics/interface/trainer_memo_3.bin.lz");
-const u32 gUnknown_8E9BA9C[] = INCBIN_U32("graphics/interface/trainer_memo_4.bin.lz");
-const u32 gUnknown_8E9BBCC[] = INCBIN_U32("graphics/interface/trainer_memo_5.bin.lz");
+const u32 gBgTilemap_TrainerMemo_Details[] = INCBIN_U32("graphics/interface/trainer_memo.bin.lz");
+const u32 gBgTilemap_TrainerMemo_Stats[] = INCBIN_U32("graphics/interface/trainer_memo_2.bin.lz");
+const u32 gBgTilemap_PokeSum_MovesListForDelete[] = INCBIN_U32("graphics/interface/trainer_memo_3.bin.lz");
+const u32 gBgTilemap_PokeSum_MoveDetailsForDelete[] = INCBIN_U32("graphics/interface/trainer_memo_4.bin.lz");
+const u32 gBgTilemap_TrainerMemo_Egg[] = INCBIN_U32("graphics/interface/trainer_memo_5.bin.lz");
 
 const u16 gUnknown_8E9BD08[] = INCBIN_U16("graphics/unknown/unknown_E9BD08.gbapal"); // might be an alternate unused palette of the link_rfu gfx below.
 

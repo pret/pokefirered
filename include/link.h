@@ -266,7 +266,7 @@ void Link_StartSend5FFFwithParam(u16 a0);
 void sub_80098D8(void);
 void CloseLink(void);
 bool8 IsLinkTaskFinished(void);
-bool32 sub_800B270(void);
+bool32 LinkRecvQueueLengthMoreThan2(void);
 void ResetSerial(void);
 void sub_8054A28(void);
 void SetWirelessCommType1(void);

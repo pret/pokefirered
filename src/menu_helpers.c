@@ -132,7 +132,7 @@ bool8 sub_80BF748(void)
 {
     if (MenuHelpers_CallLinkSomething() == TRUE)
         return TRUE;
-    else if (sub_800B270() != TRUE)
+    else if (LinkRecvQueueLengthMoreThan2() != TRUE)
         return FALSE;
     else
         return TRUE;

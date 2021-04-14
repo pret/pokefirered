@@ -9,7 +9,7 @@ const struct Trainer gTrainers[] = {
         .doubleBattle = FALSE,
         .aiFlags = 0,
         .partySize = 0,
-        .party = NULL
+        .party = {},
     },
     [TRAINER_AQUA_LEADER_1] = {
         .partyFlags = 0,

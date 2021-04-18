@@ -2057,7 +2057,7 @@ static void Cb_ChangeScreen(u8 taskId)
         partyMon = gPSSData->field_218C.mon;
         monIndex = gPSSData->field_2187;
         maxMonIndex = gPSSData->field_2186;
-        mode = gPSSData->field_2188;
+        mode = gPSSData->summaryScreenMode;
         FreePSSData();
         ShowPokemonSummaryScreen(partyMon, monIndex, maxMonIndex, Cb2_ReturnToPSS, mode);
         break;

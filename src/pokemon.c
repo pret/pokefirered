@@ -5416,7 +5416,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
     &foo;
 }
 
-u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
+u8 CheckPartyPokerus(struct Pokemon *party, u8 party_bm)
 {
     u8 retVal;
 
@@ -5424,23 +5424,25 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
     unsigned curBit = 1;
     retVal = 0;
 
-    if (selection)
+    if (party_bm != 0) // Check mons in party based on bitmask, LSB = first mon
     {
         do
         {
-            if ((selection & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, NULL) & 0xF))
+            if ((party_bm & 1) && (GetMonData(&party[partyIndex], MON_DATA_POKERUS, NULL) & 0xF))
                 retVal |= curBit;
             partyIndex++;
             curBit <<= 1;
-            selection >>= 1;
+            party_bm >>= 1;
         }
-        while (selection);
+        while (party_bm);
     }
-    else if (GetMonData(&party[0], MON_DATA_POKERUS, NULL) & 0xF)
+    else // Single Pokemon
     {
-        retVal = 1;
+        if (GetMonData(&party[0], MON_DATA_POKERUS, NULL) & 0xF)
+        {
+            retVal = 1;
+        }
     }
-
     return retVal;
 }
 

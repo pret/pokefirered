@@ -9,7 +9,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static EWRAM_DATA struct Pokemon gUnknown_20397BC = {};
+static EWRAM_DATA struct Pokemon sMonBeingCarried = {};
 static EWRAM_DATA s8 sBoxCursorArea = 0;
 static EWRAM_DATA s8 sBoxCursorPosition = 0;
 static EWRAM_DATA bool8 sIsMonBeingMoved = FALSE;
@@ -76,7 +76,7 @@ void sub_8092340(void)
     gPSSData->inBoxMovingMode = 0;
     if (sIsMonBeingMoved)
     {
-        gPSSData->movingMon = gUnknown_20397BC;
+        gPSSData->movingMon = sMonBeingCarried;
         CreateMovingMonIcon();
     }
 }
@@ -837,7 +837,7 @@ s8 RunCanReleaseMon(void)
 void sub_8093630(void)
 {
     if (sIsMonBeingMoved)
-        gUnknown_20397BC = gPSSData->movingMon;
+        sMonBeingCarried = gPSSData->movingMon;
 }
 
 void sub_8093660(void)
@@ -845,9 +845,9 @@ void sub_8093660(void)
     if (sIsMonBeingMoved)
     {
         if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
-            gPSSData->movingMon = gUnknown_20397BC;
+            gPSSData->movingMon = sMonBeingCarried;
         else
-            gPSSData->movingMon.box = gUnknown_20397BC.box;
+            gPSSData->movingMon.box = sMonBeingCarried.box;
     }
 }
 
@@ -856,24 +856,24 @@ void sub_80936B8(void)
     if (sIsMonBeingMoved)
     {
         sub_8093630();
-        gPSSData->field_218C.mon = &gUnknown_20397BC;
+        gPSSData->field_218C.mon = &sMonBeingCarried;
         gPSSData->field_2187 = 0;
         gPSSData->field_2186 = 0;
-        gPSSData->field_2188 = 0;
+        gPSSData->summaryScreenMode = PSS_MODE_NORMAL;
     }
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
     {
         gPSSData->field_218C.mon = gPlayerParty;
         gPSSData->field_2187 = sBoxCursorPosition;
         gPSSData->field_2186 = CountPartyMons() - 1;
-        gPSSData->field_2188 = 0;
+        gPSSData->summaryScreenMode = PSS_MODE_NORMAL;
     }
     else
     {
         gPSSData->field_218C.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
         gPSSData->field_2187 = sBoxCursorPosition;
         gPSSData->field_2186 = IN_BOX_COUNT - 1;
-        gPSSData->field_2188 = 5;
+        gPSSData->summaryScreenMode = PSS_MODE_BOX;
     }
 }
 
@@ -998,7 +998,7 @@ static void sub_8093A10(void)
 static void sub_8093AAC(void)
 {
     if (sIsMonBeingMoved)
-        SetCursorMonData(&gUnknown_20397BC, MODE_PARTY);
+        SetCursorMonData(&sMonBeingCarried, MODE_PARTY);
     else
         sub_8093A10();
 }

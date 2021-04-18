@@ -26,16 +26,16 @@
       "blockdata_filepath": "data/layouts/PalletTown_PlayersHouse_2F/map.bin"
     },
     {
-      "id": "LAYOUT_PALLET_TOWN_GARYS_HOUSE",
-      "name": "PalletTown_GarysHouse_Layout",
+      "id": "LAYOUT_PALLET_TOWN_RIVALS_HOUSE",
+      "name": "PalletTown_RivalsHouse_Layout",
       "width": 13,
       "height": 10,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding2",
-      "border_filepath": "data/layouts/PalletTown_GarysHouse/border.bin",
-      "blockdata_filepath": "data/layouts/PalletTown_GarysHouse/map.bin"
+      "border_filepath": "data/layouts/PalletTown_RivalsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/PalletTown_RivalsHouse/map.bin"
     },
     {
       "id": "LAYOUT_LITTLEROOT_TOWN_MAYS_HOUSE_2F",

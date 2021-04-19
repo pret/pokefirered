@@ -400,7 +400,8 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
         case PLACEHOLDER_BEGIN:
             curChar = *src;
             src++;
-            if (curChar == PLACEHOLDER_ID_PLAYER) {
+            if (curChar == PLACEHOLDER_ID_PLAYER)
+            {
                 for (i = 0; i < 10; i++)
                 {
                     if (gSaveBlock2Ptr->playerName[i] == EOS)
@@ -477,41 +478,32 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
                 src++;
+            case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
+                break;
+            case EXT_CTRL_CODE_CLEAR:
+            case EXT_CTRL_CODE_SKIP:
+                src++;
                 break;
             case EXT_CTRL_CODE_CLEAR_TO:
             {
-#ifdef NONMATCHING
-                curChar = *src;
-                clearPixels = curChar + orig_x - x;
-#else  // dumb fakematch
-                s32 r0;
-                register const u8 * _src asm("r2") = src;
-                asm("":::"r1");
-                r0 = *_src;
-                r0 += orig_x;
-                clearPixels = r0 - x;
-#endif
+                clearPixels = *src + orig_x - x;
+
                 if (clearPixels > 0)
                 {
                     destBlit.pixels = dest;
                     destBlit.width = width * 8;
                     destBlit.height = height * 8;
-                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, FONTATTR_MAX_LETTER_HEIGHT),
-                                       0);
+                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, FONTATTR_MAX_LETTER_HEIGHT), 0);
                     x += clearPixels;
                 }
                 src++;
                 break;
             }
-            case EXT_CTRL_CODE_CLEAR:
-            case EXT_CTRL_CODE_SKIP:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 src++;
-                break;
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_WAIT_BUTTON:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
                 break;
             case EXT_CTRL_CODE_JPN:
             case EXT_CTRL_CODE_ENG:
@@ -521,7 +513,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
         case CHAR_KEYPAD_ICON:
             curChar = *src;
             src++;
-            srcBlit.pixels = (u8 *)gKeypadIconTiles + 0x20 * GetKeypadIconTileOffset(curChar);
+            srcBlit.pixels = (u8 *)&gKeypadIconTiles[0x20 * GetKeypadIconTileOffset(curChar)];
             srcBlit.width = 0x80;
             srcBlit.height = 0x80;
             destBlit.pixels = dest;

@@ -1245,8 +1245,8 @@ const u32 gEasyChatRedRectangularCursor_Tiles[] = INCBIN_U32("graphics/interface
 const u16 gPokeSummary_StatusAilmentIconPals[] = INCBIN_U16("graphics/interface/link_rfu_frame.gbapal");
 const u32 gPokeSummary_StatusAilmentIconTiles[] = INCBIN_U32("graphics/interface/link_rfu_status.4bpp.lz");
 
-const u16 gDexScreen_TopMenuIconPals_AtoZ[] = INCBIN_U16("graphics/interface/pokedex_abc.gbapal");
-const u32 gDexScreen_TopMenuIconTiles_AtoZ[] = INCBIN_U32("graphics/interface/pokedex_abc.4bpp.lz");
+const u16 gDexScreen_TopMenuIconPals_AtoZ[] = INCBIN_U16("graphics/pokedex/cat_icon_abc.gbapal");
+const u32 gDexScreen_TopMenuIconTiles_AtoZ[] = INCBIN_U32("graphics/pokedex/cat_icon_abc.4bpp.lz");
 
 const u16 gPSSMenu_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal1.gbapal");
 const u16 gUnknown_8E9C3F8[] = INCBIN_U16("graphics/interface/box_tiles_pal2.gbapal");

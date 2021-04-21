@@ -492,7 +492,7 @@ $(TITLESCREENGFXDIR)/leafgreen/box_art_mon.4bpp: %.4bpp: %.png
 $(CREDITSGFXDIR)/unk_8EAE548.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 
-POKEDEXAREAMARKERSDATADIR := graphics/pokedex_area_markers
+POKEDEXAREAMARKERSDATADIR := graphics/pokedex/area_markers
 
 POKEDEXAREAMARKERFILES := \
 	$(POKEDEXAREAMARKERSDATADIR)/marker_0.4bpp \

@@ -5,8 +5,8 @@
 #include "wild_pokemon_area.h"
 #include "pokedex_area_markers.h"
 
-static const u16 sMarkerPal[] = INCBIN_U16("graphics/pokedex_area_markers/marker.gbapal");
-static const u32 sMarkerTiles[] = INCBIN_U32("graphics/pokedex_area_markers/marker.4bpp.lz");
+static const u16 sMarkerPal[] = INCBIN_U16("graphics/pokedex/area_markers/marker.gbapal");
+static const u32 sMarkerTiles[] = INCBIN_U32("graphics/pokedex/area_markers/marker.4bpp.lz");
 
 static const struct Subsprite sSubsprite0 = {
     .size = ST_OAM_SIZE_0,

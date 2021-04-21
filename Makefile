@@ -79,8 +79,10 @@ LDFLAGS = -Map ../../$(MAP)
 
 LIB := $(LIBPATH) -lc -lgcc
 ifneq ($(MODERN),0)
+ifneq ($(DEVKITARM),)
 ifeq ($(TOOLCHAIN),$(DEVKITARM))
 LIB += -lsysbase -lc
+endif
 endif
 LIB += -lnosys
 endif

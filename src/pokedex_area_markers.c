@@ -5,8 +5,8 @@
 #include "wild_pokemon_area.h"
 #include "pokedex_area_markers.h"
 
-static const u16 sMarkerPal[] = INCBIN_U16("graphics/pokedex/area_markers/marker.gbapal");
-static const u32 sMarkerTiles[] = INCBIN_U32("graphics/pokedex/area_markers/marker.4bpp.lz");
+static const u16 sMarkerPal[] = INCBIN_U16("graphics/pokedex_area_markers/marker.gbapal");
+static const u32 sMarkerTiles[] = INCBIN_U32("graphics/pokedex_area_markers/marker.4bpp.lz");
 
 static const struct Subsprite sSubsprite0 = {
     .size = ST_OAM_SIZE_0,
@@ -157,7 +157,7 @@ static void Task_ShowAreaMarkers(u8 taskId)
     gSprites[data->spr_id].invisible = FALSE;
 }
 
-u8 sub_8134230(u16 species, u16 tilesTag, u8 palIdx, u8 y)
+u8 Ctor_PokedexAreaMarkers(u16 species, u16 tilesTag, u8 palIdx, u8 y)
 {
     struct SpriteTemplate spriteTemplate;
     struct CompressedSpriteSheet spriteSheet;
@@ -201,7 +201,7 @@ u8 sub_8134230(u16 species, u16 tilesTag, u8 palIdx, u8 y)
     return taskId;
 }
 
-void sub_81343F4(u8 taskId)
+void Dtor_PokedexAreaMarkers(u8 taskId)
 {
     struct PAM_TaskData * data = (void *)gTasks[taskId].data;
     FreeSpriteTilesByTag(data->tilesTag);
@@ -228,7 +228,7 @@ void SetAreaSubsprite(s32 i, s32 whichArea, struct Subsprite * subsprites)
     subsprites[i].y = sSubspriteLookupTable[whichArea][2];
 }
 
-u8 sub_81344E0(u8 taskId)
+u8 PokedexAreaMarkers_Any(u8 taskId)
 {
     struct PAM_TaskData * data = (void *)gTasks[taskId].data;
     return data->subsprites.subspriteCount;

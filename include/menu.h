@@ -28,8 +28,8 @@ u8 Menu2_GetMonSpriteAnchorCoord(u16 species, u32 personality, u8 a2);
 s8 Menu2_GetMonSpriteAnchorCoordMinusx20(u16 species, u32 personality, u8 a2);
 
 // list_menu
-void sub_8107CD8(u8 palOffset, u16 speciesId);
-void sub_8107CF8(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y);
+void ListMenu_LoadMonIconPalette(u8 palOffset, u16 speciesId);
+void ListMenu_DrawMonIconGraphics(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y);
 void ListMenuLoadStdPalAt(u8 palOffset, u8 palId);
 void BlitMoveInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y);
 

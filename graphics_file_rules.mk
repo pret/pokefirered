@@ -530,46 +530,46 @@ $(INTROGFXDIR)/unk_8406654.4bpp: %.4bpp: %.png
 $(INTROGFXDIR)/unk_8405B28.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 17
 
-$(BATTLETERRAINGFXDIR)/terrain_building.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/building/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 
-$(BATTLETERRAINGFXDIR)/terrain_cave_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/cave/anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 106
 
-$(BATTLETERRAINGFXDIR)/terrain_cave.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/cave/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 84
 
-$(BATTLETERRAINGFXDIR)/terrain_grass.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/grass/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 98
 
-$(BATTLETERRAINGFXDIR)/terrain_indoor.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/indoor/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 
-$(BATTLETERRAINGFXDIR)/terrain_longgrass_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/longgrass/anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 133
 
-$(BATTLETERRAINGFXDIR)/terrain_longgrass.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/longgrass/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 98
 
-$(BATTLETERRAINGFXDIR)/terrain_mountain_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/mountain/anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 47
 
-$(BATTLETERRAINGFXDIR)/terrain_pond_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/pond/anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
-$(BATTLETERRAINGFXDIR)/terrain_pond.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/pond/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 75
 
-$(BATTLETERRAINGFXDIR)/terrain_sand.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/sand/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 83
 
-$(BATTLETERRAINGFXDIR)/terrain_underwater_anim.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/underwater/anim.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 26
 
-$(BATTLETERRAINGFXDIR)/terrain_underwater.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/underwater/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 85
 
-$(BATTLETERRAINGFXDIR)/terrain_water.4bpp: %.4bpp: %.png
+$(BATTLETERRAINGFXDIR)/water/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 81
 
 $(BERRYPOUCHGFXDIR)/background.4bpp: %.4bpp: %.png

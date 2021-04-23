@@ -342,7 +342,7 @@ static const struct SubspriteTable gUnknown_8260404[] = {
     {NELEMS(gUnknown_82603E4), gUnknown_82603E4}
 };
 
-static const u16 gUnknown_26040C[] = INCBIN_U16("graphics/battle_interface/unk_826404C.4bpp");
+static const u16 sBattleInterface_Unused[] = INCBIN_U16("graphics/battle_interface/unused.4bpp");
 
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheets[] = {
     {gFile_graphics_battle_interface_ball_status_bar_sheet, 0x0200, 55052},
@@ -360,8 +360,8 @@ static const struct SpritePalette sStatusSummaryBallsSpritePals[] = {
 };
 
 static const struct SpriteSheet sStatusSummaryBallsSpriteSheets[] = {
-    {gUnknown_8D12404, 0x0080, 55060},
-    {gUnknown_8D12404, 0x0080, 55061}
+    {gBattleInterface_SummaryBallDisplayGfx, 0x0080, 55060},
+    {gBattleInterface_SummaryBallDisplayGfx, 0x0080, 55061}
 };
 
 static const struct OamData gUnknown_82604AC = {

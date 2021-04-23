@@ -24,6 +24,9 @@ TITLESCREENGFXDIR := graphics/title_screen
 CREDITSGFXDIR := graphics/credits
 ITEMMENUGFXDIR := graphics/item_menu
 INTROGFXDIR := graphics/intro
+BATTLETERRAINGFXDIR := graphics/battle_terrain
+BERRYPOUCHGFXDIR := graphics/berry_pouch
+HALLOFFAMEGFXDIR := graphics/hall_of_fame
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -147,7 +150,10 @@ $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
 
 $(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
-    
+
+$(BATINTGFXDIR)/unk_battlebox.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 36
+
 $(BATINTGFXDIR)/window.gbapal: $(BATINTGFXDIR)/window1.gbapal $(BATINTGFXDIR)/window2.gbapal
 	cat $^ > $@
 
@@ -523,3 +529,51 @@ $(INTROGFXDIR)/unk_8406654.4bpp: %.4bpp: %.png
 
 $(INTROGFXDIR)/unk_8405B28.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 17
+
+$(BATTLETERRAINGFXDIR)/building/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 77
+
+$(BATTLETERRAINGFXDIR)/cave/anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 106
+
+$(BATTLETERRAINGFXDIR)/cave/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 84
+
+$(BATTLETERRAINGFXDIR)/grass/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 98
+
+$(BATTLETERRAINGFXDIR)/indoor/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 77
+
+$(BATTLETERRAINGFXDIR)/longgrass/anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 133
+
+$(BATTLETERRAINGFXDIR)/longgrass/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 98
+
+$(BATTLETERRAINGFXDIR)/mountain/anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 47
+
+$(BATTLETERRAINGFXDIR)/pond/anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 36
+
+$(BATTLETERRAINGFXDIR)/pond/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 75
+
+$(BATTLETERRAINGFXDIR)/sand/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 83
+
+$(BATTLETERRAINGFXDIR)/underwater/anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 26
+
+$(BATTLETERRAINGFXDIR)/underwater/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 85
+
+$(BATTLETERRAINGFXDIR)/water/terrain.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 81
+
+$(BERRYPOUCHGFXDIR)/background.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 52
+
+$(HALLOFFAMEGFXDIR)/hall_of_fame.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 29

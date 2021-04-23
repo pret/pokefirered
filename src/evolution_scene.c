@@ -59,12 +59,12 @@ static void Task_MovingBackgroundPos(u8 taskId);
 static void ResetBgRegsAfterMovingBackgroundCancel(void);
 
 // const data
-static const u16 sUnrefPal_83F6C90[] = INCBIN_U16("graphics/evolution_scene/unknown_5B4114.gbapal");
+static const u16 sUnusedPal[] = INCBIN_U16("graphics/evolution_scene/unused.gbapal");
 static const u32 sMovingBackgroundTiles[] = INCBIN_U32("graphics/evolution_scene/bg.4bpp.lz");
 static const u32 sMovingBackgroundMap1[] = INCBIN_U32("graphics/evolution_scene/bg.bin.lz");
 static const u32 sMovingBackgroundMap2[] = INCBIN_U32("graphics/evolution_scene/bg2.bin.lz");
 static const u16 sBlackPalette[] = INCBIN_U16("graphics/evolution_scene/gray_transition_intro.gbapal");
-static const u16 unref_83F7D80[] = INCBIN_U16("graphics/evolution_scene/unref_83F7D80.bin");
+static const u16 sUnusedTilemap[] = INCBIN_U16("graphics/evolution_scene/unused_tilemap.bin");
 static const u16 sMovingBgPals[] = INCBIN_U16("graphics/evolution_scene/transition.gbapal");
 
 static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");

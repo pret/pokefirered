@@ -25,7 +25,7 @@ static void Task_WaitFadeIn(u8 taskId);
 static void Task_WaitButton(u8 taskId);
 static void Task_FadeOut(u8 taskId);
 static void Task_DestroyAndReturnToField(u8 taskId);
-static void ClearWindowCommitAndRemove(u8 winddowId);
+static void ClearWindowCommitAndRemove(u8 windowId);
 static void ResetGpu(void);
 static void StopAllRunningTasks(void);
 static void EnableDisplay(void);
@@ -35,8 +35,8 @@ static void CommitWindow(u8 windowId);
 static void LoadFrameGfxOnBg(u8 bgId);
 
 static const u16 sTiles[] = INCBIN_U16("graphics/battle_records/bg_tiles.4bpp");
-static const u16 sPalette[] = INCBIN_U16("graphics/battle_records/palette.gbapal");
-static const u16 sTilemap[] = INCBIN_U16("graphics/battle_records/tilemap.bin");
+static const u16 sPalette[] = INCBIN_U16("graphics/battle_records/bg_tiles.gbapal");
+static const u16 sTilemap[] = INCBIN_U16("graphics/battle_records/bg_tiles.bin");
 
 static const struct WindowTemplate sWindowTemplates[] = {
     {

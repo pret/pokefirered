@@ -822,7 +822,7 @@ static bool8 TryExitPickMode(u8 taskId)
 
 static void MessageBoxPrintEmptyText(void)
 {
-    AddTextPrinterParameterized2(2, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
 }
 
 static void Task_EnterPickMode(u8 taskId)
@@ -1042,10 +1042,10 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
         Free(sBg2TilemapBuffer);
         Free(sFameCheckerData);
         Free(sListMenuItems);
-        FC_DestroyWindow(0);
-        FC_DestroyWindow(1);
-        FC_DestroyWindow(2);
-        FC_DestroyWindow(3);
+        FC_DestroyWindow(FCWINDOWID_LIST);
+        FC_DestroyWindow(FCWINDOWID_UIHELP);
+        FC_DestroyWindow(FCWINDOWID_MSGBOX);
+        FC_DestroyWindow(FCWINDOWID_ICONDESC);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
     }
@@ -1424,7 +1424,7 @@ static void InitListMenuTemplate(void)
     gFameChecker_ListMenuTemplate.itemPrintFunc = NULL;
     gFameChecker_ListMenuTemplate.totalItems = 1;
     gFameChecker_ListMenuTemplate.maxShowed = 1;
-    gFameChecker_ListMenuTemplate.windowId = 0;
+    gFameChecker_ListMenuTemplate.windowId = FCWINDOWID_LIST;
     gFameChecker_ListMenuTemplate.header_X = 0;
     gFameChecker_ListMenuTemplate.item_X = 8;
     gFameChecker_ListMenuTemplate.cursor_X = 0;

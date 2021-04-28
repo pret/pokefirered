@@ -15,8 +15,6 @@
 
 	@ 847ABAC
 .align 2
-	.include "data/trainer_tower/trainers.inc"
-
 	.include "data/text/move_descriptions.inc"
 
 	.align 2, 0

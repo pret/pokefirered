@@ -8,7 +8,7 @@ struct TrainerTowerTrainer
 {
     /* 0x000 */ u8 name[11];
     /* 0x00B */ u8 facilityClass;
-    /* 0x00C */ u8 gender;
+    /* 0x00C */ u8 textColor;
     /* 0x00E */ u16 speechBefore[6];
     /* 0x01A */ u16 speechWin[6];
     /* 0x026 */ u16 speechLose[6];
@@ -18,7 +18,7 @@ struct TrainerTowerTrainer
 
 struct TrainerTowerFloor
 {
-    /* 0x000 */ u8 unk_000;
+    /* 0x000 */ u8 flags;
     /* 0x001 */ u8 floorIdx;
     /* 0x002 */ u8 challengeType;
     /* 0x003 */ u8 prize;

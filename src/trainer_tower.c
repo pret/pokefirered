@@ -19,13 +19,13 @@
 #include "constants/event_objects.h"
 #include "constants/trainer_tower.h"
 
-#define CURR_FLOOR sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx]
+#define CURR_FLOOR sTrainerTowerState->data.floors[sTrainerTowerState->floorIdx]
 #define TRAINER_TOWER gSaveBlock1Ptr->trainerTower[gSaveBlock1Ptr->towerChallengeId]
 
-struct UnkStruct_203F458
+struct TrainerTowerState
 {
     /* 0x0000 */ u8 floorIdx;
-    /* 0x0004 */ struct EReaderTrainerTowerSet unk_0004;
+    /* 0x0004 */ struct EReaderTrainerTowerSet data;
 };
 
 struct TrainerTowerOpponent
@@ -37,7 +37,7 @@ struct TrainerTowerOpponent
     /* 0x30 */ u16 speechLose2[6];
     /* 0x3C */ u8 battleType;
     /* 0x3D */ u8 facilityClass;
-    /* 0x3E */ u8 gender;
+    /* 0x3E */ u8 textColor;
 };
 
 struct SinglesTrainerInfo
@@ -52,8 +52,8 @@ struct DoublesTrainerInfo
     u8 objGfx1;
     u8 objGfx2;
     u8 facilityClass;
-    bool8 gender1;
-    bool8 gender2;
+    bool8 textColor1;
+    bool8 textColor2;
 };
 
 struct TrainerEncounterMusicPairs
@@ -62,7 +62,7 @@ struct TrainerEncounterMusicPairs
     u8 musicId;
 };
 
-static EWRAM_DATA struct UnkStruct_203F458 * sTrainerTowerState = NULL;
+static EWRAM_DATA struct TrainerTowerState * sTrainerTowerState = NULL;
 static EWRAM_DATA struct TrainerTowerOpponent * sTrainerTowerOpponent = NULL;
 static EWRAM_DATA u8 sUnused_203F460 = 0;
 
@@ -422,8 +422,8 @@ static const u8 sKnockoutChallengeMonIdxs[][3] = {
     {0x01, 0x04, 0x05}
 };
 
-extern const struct EReaderTrainerTowerSetSubstruct gUnknown_84827AC;
-extern const struct TrainerTowerFloor *const gUnknown_84827B4[][MAX_TRAINER_TOWER_FLOORS];
+extern const struct EReaderTrainerTowerSetSubstruct gTrainerTowerLocalHeader;
+extern const struct TrainerTowerFloor *const gTrainerTowerFloors[][MAX_TRAINER_TOWER_FLOORS];
 
 void CallTrainerTowerFunc(void)
 {
@@ -471,7 +471,7 @@ void InitTrainerTowerBattleStruct(void)
 
     sTrainerTowerOpponent->battleType = CURR_FLOOR.challengeType;
     sTrainerTowerOpponent->facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
-    sTrainerTowerOpponent->gender = CURR_FLOOR.trainers[trainerId].gender;
+    sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].textColor;
     SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
     FreeTrainerTowerDataStruct();
 }
@@ -510,18 +510,18 @@ static void SetUpTrainerTowerDataStruct(void)
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
     sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_1F;
     if (ReadTrainerTowerAndValidate() == TRUE)
-        CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
+        CEReaderTool_LoadTrainerTower(&sTrainerTowerState->data);
     else
     {
-        struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
-        const struct EReaderTrainerTowerSetSubstruct * r1 = &gUnknown_84827AC;
-        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerTowerSetSubstruct));
-        r7 = gUnknown_84827B4[challengeType];
+        struct TrainerTowerState * r0_ = sTrainerTowerState;
+        const struct EReaderTrainerTowerSetSubstruct * r1 = &gTrainerTowerLocalHeader;
+        memcpy(&r0_->data, r1, sizeof(struct EReaderTrainerTowerSetSubstruct));
+        r7 = gTrainerTowerFloors[challengeType];
         for (r4 = 0; r4 < MAX_TRAINER_TOWER_FLOORS; r4++)
         {
-            *(sTrainerTowerState->unk_0004.floors + r4) = *(r7[r4]); // manual pointer arithmetic needed to match
+            *(sTrainerTowerState->data.floors + r4) = *(r7[r4]); // manual pointer arithmetic needed to match
         }
-        sTrainerTowerState->unk_0004.checksum = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
+        sTrainerTowerState->data.checksum = CalcByteArraySum((void *)sTrainerTowerState->data.floors, sizeof(sTrainerTowerState->data.floors));
         ValidateOrResetCurTrainerTowerRecord();
     }
 }
@@ -533,7 +533,7 @@ static void FreeTrainerTowerDataStruct(void)
 
 static void InitTrainerTowerFloor(void)
 {
-    if (gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.numFloors)
+    if (gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY > sTrainerTowerState->data.numFloors)
     {
         gSpecialVar_Result = 3; // Skip past usable challenge types
         SetCurrentMapLayout(LAYOUT_TRAINER_TOWER_ROOF);
@@ -667,7 +667,7 @@ static void BufferTowerOpponentSpeech(void)
 
 static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
 {
-    u16 gender = MALE;
+    u16 textColor = MALE;
     int i;
     switch (challengeType)
     {
@@ -679,7 +679,7 @@ static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
                 break;
         }
         if (i != NELEMS(sSingleBattleTrainerInfo))
-            gender = sSingleBattleTrainerInfo[i].gender;
+            textColor = sSingleBattleTrainerInfo[i].gender;
         break;
     case CHALLENGE_TYPE_DOUBLE:
         for (i = 0; i < NELEMS(sDoubleBattleTrainerInfo); i++)
@@ -690,14 +690,14 @@ static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
         if (i != NELEMS(sDoubleBattleTrainerInfo))
         {
             if (VarGet(VAR_TEMP_3))
-                gender = sDoubleBattleTrainerInfo[i].gender2;
+                textColor = sDoubleBattleTrainerInfo[i].textColor2;
             else
-                gender = sDoubleBattleTrainerInfo[i].gender1;
+                textColor = sDoubleBattleTrainerInfo[i].textColor1;
         }
         break;
     }
     gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
-    gSpecialVar_TextColor = gender;
+    gSpecialVar_TextColor = textColor;
 }
 
 static void CB2_EndTrainerTowerBattle(void)
@@ -784,7 +784,7 @@ static void GetOwnerState(void)
 
 static void GiveChallengePrize(void)
 {
-    u16 itemId = sPrizeList[sTrainerTowerState->unk_0004.floors->prize];
+    u16 itemId = sPrizeList[sTrainerTowerState->data.floors->prize];
 
     if (TRAINER_TOWER.receivedPrize)
     {
@@ -922,9 +922,9 @@ static void TrainerTowerGetDoublesEligiblity(void)
 
 static void TrainerTowerGetNumFloors(void)
 {
-    if (sTrainerTowerState->unk_0004.numFloors != sTrainerTowerState->unk_0004.floors[0].floorIdx)
+    if (sTrainerTowerState->data.numFloors != sTrainerTowerState->data.floors[0].floorIdx)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->unk_0004.numFloors, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->data.numFloors, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -1029,9 +1029,9 @@ static s32 GetPartyMaxLevel(void)
 
 static void ValidateOrResetCurTrainerTowerRecord(void)
 {
-    if (TRAINER_TOWER.unk9 != sTrainerTowerState->unk_0004.id)
+    if (TRAINER_TOWER.unk9 != sTrainerTowerState->data.id)
     {
-        TRAINER_TOWER.unk9 = sTrainerTowerState->unk_0004.id;
+        TRAINER_TOWER.unk9 = sTrainerTowerState->data.id;
         SetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime, TRAINER_TOWER_MAX_TIME);
         TRAINER_TOWER.receivedPrize = FALSE;
     }

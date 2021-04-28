@@ -70,7 +70,7 @@ u8 RunHelpSystemCallback(void)
         SaveMapTiles();
         SaveMapGPURegs();
         SaveMapTextColors();
-        (*(vu16 *)PLTT) = sPals[15];
+        (*(u16 *)PLTT) = sPals[15];
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         sVideoState.state = 2;
         break;
@@ -115,8 +115,8 @@ u8 RunHelpSystemCallback(void)
         RestoreMapTiles();
         for (i = 0; i < 0x200; i += 2)
         {
-            *((vu16 *)(PLTT + 0x000 + i)) = sPals[15];
-            *((vu16 *)(PLTT + 0x200 + i)) = sPals[15];
+            *((u16 *)(BG_PLTT + i)) = sPals[15];
+            *((u16 *)(OBJ_PLTT + i)) = sPals[15];
         }
         sVideoState.state = 7;
         break;
@@ -138,16 +138,12 @@ u8 RunHelpSystemCallback(void)
 
 void SaveCallbacks(void)
 {
-    vu16 * dma;
     sVideoState.savedVblankCb = gMain.vblankCallback;
     sVideoState.savedHblankCb = gMain.hblankCallback;
     gMain.vblankCallback = NULL;
     gMain.hblankCallback = NULL;
 
-    dma = (void *)REG_ADDR_DMA0;
-    dma[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT);
-    dma[5] &= ~DMA_ENABLE;
-    dma[5];
+    DmaStop(0);
 }
 
 void SaveMapGPURegs(void)

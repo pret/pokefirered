@@ -52,8 +52,8 @@ struct DoublesTrainerInfo
     u8 objGfx1;
     u8 objGfx2;
     u8 facilityClass;
-    bool8 textColor1;
-    bool8 textColor2;
+    bool8 gender1;
+    bool8 gender2;
 };
 
 struct TrainerEncounterMusicPairs
@@ -310,8 +310,15 @@ static const struct TrainerEncounterMusicPairs sTrainerEncounterMusicLUT[105] = 
 };
 
 static const struct WindowTemplate sTimeBoardWindowTemplate[] = {
-    {0, 3, 1, 27, 18, 15, 0x001},
-    DUMMY_WIN_TEMPLATE
+    {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 1,
+        .width = 27,
+        .height = 18,
+        .paletteNum = 15,
+        .baseBlock = 0x001
+    }, DUMMY_WIN_TEMPLATE
 };
 
 static const u32 sUnused_847A228 = 0x70;
@@ -389,37 +396,40 @@ static const u16 sTrainerTowerEncounterMusic[] = {
     [TRAINER_ENCOUNTER_MUSIC_RICH]        = MUS_ENCOUNTER_BOY
 };
 
-static const u8 sSingleBattleChallengeMonIdxs[][2] = {
-    {0x00, 0x02},
-    {0x01, 0x03},
-    {0x02, 0x04},
-    {0x03, 0x05},
-    {0x04, 0x01},
-    {0x05, 0x02},
-    {0x00, 0x03},
-    {0x01, 0x04}
+// The trainer only uses two Pokemon from the encoded pool, based on the current floor
+static const u8 sSingleBattleChallengeMonIdxs[MAX_TRAINER_TOWER_FLOORS][2] = {
+    {0, 2},
+    {1, 3},
+    {2, 4},
+    {3, 5},
+    {4, 1},
+    {5, 2},
+    {0, 3},
+    {1, 4}
 };
 
-static const u8 sDoubleBattleChallengeMonIdxs[][2] = {
-    {0x00, 0x01},
-    {0x01, 0x03},
-    {0x02, 0x00},
-    {0x03, 0x04},
-    {0x04, 0x02},
-    {0x05, 0x02},
-    {0x00, 0x03},
-    {0x01, 0x05}
+// Each trainer only uses one Pokemon from the encoded pool, based on the current floor
+static const u8 sDoubleBattleChallengeMonIdxs[MAX_TRAINER_TOWER_FLOORS][2] = {
+    {0, 1},
+    {1, 3},
+    {2, 0},
+    {3, 4},
+    {4, 2},
+    {5, 2},
+    {0, 3},
+    {1, 5}
 };
 
-static const u8 sKnockoutChallengeMonIdxs[][3] = {
-    {0x00, 0x02, 0x04},
-    {0x01, 0x03, 0x05},
-    {0x02, 0x03, 0x01},
-    {0x03, 0x04, 0x00},
-    {0x04, 0x01, 0x02},
-    {0x05, 0x00, 0x03},
-    {0x00, 0x05, 0x02},
-    {0x01, 0x04, 0x05}
+// Each trainer only uses one Pokemon from the encoded pool, based on the current floor
+static const u8 sKnockoutChallengeMonIdxs[MAX_TRAINER_TOWER_FLOORS][3] = {
+    {0, 2, 4},
+    {1, 3, 5},
+    {2, 3, 1},
+    {3, 4, 0},
+    {4, 1, 2},
+    {5, 0, 3},
+    {0, 5, 2},
+    {1, 4, 5}
 };
 
 extern const struct EReaderTrainerTowerSetSubstruct gTrainerTowerLocalHeader;
@@ -471,7 +481,7 @@ void InitTrainerTowerBattleStruct(void)
 
     sTrainerTowerOpponent->battleType = CURR_FLOOR.challengeType;
     sTrainerTowerOpponent->facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
-    sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].textColor;
+    sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].unkC;
     SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
     FreeTrainerTowerDataStruct();
 }
@@ -504,8 +514,8 @@ void GetTrainerTowerOpponentLoseText(u8 *dest, u8 opponentIdx)
 static void SetUpTrainerTowerDataStruct(void)
 {
     u32 challengeType = gSaveBlock1Ptr->towerChallengeId;
-    s32 r4;
-    const struct TrainerTowerFloor *const * r7;
+    s32 i;
+    const struct TrainerTowerFloor *const * floors_p;
 
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
     sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_1F;
@@ -513,13 +523,13 @@ static void SetUpTrainerTowerDataStruct(void)
         CEReaderTool_LoadTrainerTower(&sTrainerTowerState->data);
     else
     {
-        struct TrainerTowerState * r0_ = sTrainerTowerState;
-        const struct EReaderTrainerTowerSetSubstruct * r1 = &gTrainerTowerLocalHeader;
-        memcpy(&r0_->data, r1, sizeof(struct EReaderTrainerTowerSetSubstruct));
-        r7 = gTrainerTowerFloors[challengeType];
-        for (r4 = 0; r4 < MAX_TRAINER_TOWER_FLOORS; r4++)
+        struct TrainerTowerState * ttstate_p = sTrainerTowerState;
+        const struct EReaderTrainerTowerSetSubstruct * header_p = &gTrainerTowerLocalHeader;
+        memcpy(&ttstate_p->data, header_p, sizeof(struct EReaderTrainerTowerSetSubstruct));
+        floors_p = gTrainerTowerFloors[challengeType];
+        for (i = 0; i < MAX_TRAINER_TOWER_FLOORS; i++)
         {
-            *(sTrainerTowerState->data.floors + r4) = *(r7[r4]); // manual pointer arithmetic needed to match
+            *(sTrainerTowerState->data.floors + i) = *(floors_p[i]); // manual pointer arithmetic needed to match
         }
         sTrainerTowerState->data.checksum = CalcByteArraySum((void *)sTrainerTowerState->data.floors, sizeof(sTrainerTowerState->data.floors));
         ValidateOrResetCurTrainerTowerRecord();
@@ -620,17 +630,21 @@ static void SetTrainerTowerNPCGraphics(void)
 
 static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest)
 {
-    s32 r1;
+    s32 i;
     ConvertEasyChatWordsToString(dest, ecWords, 3, 2);
     if ((unsigned)GetStringWidth(2, dest, -1) > 196)
     {
+        // Has to be printed 2x3
         ConvertEasyChatWordsToString(dest, ecWords, 2, 3);
-        r1 = 0;
-        while (dest[r1++] != CHAR_NEWLINE)
+        // Skip line 1
+        i = 0;
+        while (dest[i++] != CHAR_NEWLINE)
             ;
-        while (dest[r1] != CHAR_NEWLINE)
-            r1++;
-        dest[r1] = CHAR_PROMPT_SCROLL;
+        // Skip line 2
+        while (dest[i] != CHAR_NEWLINE)
+            i++;
+        // Replace \n with \l at the end of line 2
+        dest[i] = CHAR_PROMPT_SCROLL;
     }
 }
 
@@ -667,7 +681,7 @@ static void BufferTowerOpponentSpeech(void)
 
 static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
 {
-    u16 textColor = MALE;
+    u16 gender = MALE;
     int i;
     switch (challengeType)
     {
@@ -679,7 +693,7 @@ static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
                 break;
         }
         if (i != NELEMS(sSingleBattleTrainerInfo))
-            textColor = sSingleBattleTrainerInfo[i].gender;
+            gender = sSingleBattleTrainerInfo[i].gender;
         break;
     case CHALLENGE_TYPE_DOUBLE:
         for (i = 0; i < NELEMS(sDoubleBattleTrainerInfo); i++)
@@ -690,14 +704,14 @@ static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
         if (i != NELEMS(sDoubleBattleTrainerInfo))
         {
             if (VarGet(VAR_TEMP_3))
-                textColor = sDoubleBattleTrainerInfo[i].textColor2;
+                gender = sDoubleBattleTrainerInfo[i].gender2;
             else
-                textColor = sDoubleBattleTrainerInfo[i].textColor1;
+                gender = sDoubleBattleTrainerInfo[i].gender1;
         }
         break;
     }
     gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
-    gSpecialVar_TextColor = textColor;
+    gSpecialVar_TextColor = gender;
 }
 
 static void CB2_EndTrainerTowerBattle(void)
@@ -891,15 +905,15 @@ static void ShowResultsBoard(void)
     windowId = AddWindow(sTimeBoardWindowTemplate);
     LoadStdWindowFrameGfx();
     DrawStdWindowFrame(windowId, FALSE);
-    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 0x4A, 0, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 74, 0, TEXT_SPEED_FF, NULL);
 
     for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
         PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime));
 
         StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
-        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 0x18, 0x24 + 0x14 * i, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gStringVar4, 0x60, 0x2E + 0x14 * i, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 24, 36 + 20 * i, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gStringVar4, 96, 46 + 20 * i, TEXT_SPEED_FF, NULL);
     }
 
     PutWindowTilemap(windowId);
@@ -1043,7 +1057,7 @@ void PrintTrainerTowerRecords(void)
     u8 windowId = 0;
 
     SetUpTrainerTowerDataStruct();
-    FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
+    FillWindowPixelRect(0, PIXEL_FILL(0), 0, 0, 216, 144);
     ValidateOrResetCurTrainerTowerRecord();
     AddTextPrinterParameterized3(0, 2, 0x4a, 0, sTextColors, 0, gText_TimeBoard);
 

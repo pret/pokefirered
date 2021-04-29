@@ -8,7 +8,7 @@ struct TrainerTowerTrainer
 {
     /* 0x000 */ u8 name[11];
     /* 0x00B */ u8 facilityClass;
-    /* 0x00C */ u8 textColor;
+    /* 0x00C */ u8 unkC;
     /* 0x00E */ u16 speechBefore[6];
     /* 0x01A */ u16 speechWin[6];
     /* 0x026 */ u16 speechLose[6];

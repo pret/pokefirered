@@ -18,7 +18,7 @@ struct TrainerTowerTrainer
 
 struct TrainerTowerFloor
 {
-    /* 0x000 */ u8 flags;
+    /* 0x000 */ u8 id;
     /* 0x001 */ u8 floorIdx;
     /* 0x002 */ u8 challengeType;
     /* 0x003 */ u8 prize;

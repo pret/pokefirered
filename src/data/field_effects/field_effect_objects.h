@@ -17,7 +17,7 @@ const struct SpriteFrameImage gSpriteFrameImage_FieldShadowM[] = {obj_frame_tile
 const struct SpriteFrameImage gSpriteFrameImage_FieldShadowL[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowL) };
 const struct SpriteFrameImage gSpriteFrameImage_FieldShadowXL[] = { obj_frame_tiles(gSpriteImageGfx_FieldShadowXL) };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowS =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -28,7 +28,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowS =
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowM =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -39,7 +39,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowM =
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowL =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -50,7 +50,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowL =
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowXL =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -85,7 +85,7 @@ const union AnimCmd *const gUnknown_83A541C[] =
     gUnknown_83A5404,
 };
 
-const struct SpriteTemplate gUnknown_83A5420 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -123,7 +123,7 @@ const union AnimCmd *const gUnknown_83A5484[] =
     gUnknown_83A5460,
 };
 
-const struct SpriteTemplate gUnknown_83A5488 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_Ripple =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -158,7 +158,7 @@ const union AnimCmd *const gUnknown_83A54E0[] =
     gUnknown_83A54C8,
 };
 
-const struct SpriteTemplate gUnknown_83A54E4 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_Ash =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -215,7 +215,7 @@ const union AnimCmd *const gUnknown_83A555C[] =
     gUnknown_83A5550,
 };
 
-const struct SpriteTemplate gUnknown_83A556C =
+const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -274,7 +274,7 @@ const union AnimCmd *const gUnknown_83A55F4[] =
     gUnknown_83A55E8,
 };
 
-const struct SpriteTemplate gUnknown_83A5604 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_Arrow =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -305,7 +305,7 @@ const union AnimCmd *const gUnknown_83A5644[] =
     gUnknown_83A5634,
 };
 
-const struct SpriteTemplate gUnknown_83A5648 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_GroundImpactDust =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -338,7 +338,7 @@ const union AnimCmd *const gUnknown_83A5694[] =
     gUnknown_83A5680,
 };
 
-const struct SpriteTemplate gUnknown_83A5698 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpTallGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -388,7 +388,7 @@ const union AnimCmd *const gUnknown_83A56E0[] =
     gUnknown_83A56D8,
 };
 
-const struct SpriteTemplate gUnknown_83A56F4 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_SandFootprints =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -438,7 +438,7 @@ const union AnimCmd *const gUnknown_83A573C[] =
     gUnknown_83A5734,
 };
 
-const struct SpriteTemplate gUnknown_83A5750 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_DeepSandFootprints =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -518,7 +518,7 @@ const union AnimCmd *const gUnknown_83A57C8[] =
     gUnknown_83A57C0,
 };
 
-const struct SpriteTemplate gUnknown_83A57EC =
+const struct SpriteTemplate gFieldEffectObjectTemplate_BikeTireTracks =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -551,7 +551,7 @@ const union AnimCmd *const gUnknown_83A5838[] =
     gUnknown_83A5824,
 };
 
-const struct SpriteTemplate gUnknown_83A583C =
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpBigSplash =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -594,7 +594,7 @@ const union AnimCmd *const gUnknown_83A5894[] =
     gUnknown_83A5870,
 };
 
-const struct SpriteTemplate gUnknown_83A589C =
+const struct SpriteTemplate gFieldEffectObjectTemplate_Splash =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -625,7 +625,7 @@ const union AnimCmd *const gUnknown_83A58DC[] =
     gUnknown_83A58CC,
 };
 
-const struct SpriteTemplate gUnknown_83A58E0 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpSmallSplash =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -661,7 +661,7 @@ const union AnimCmd *const gUnknown_83A5938[] =
     gUnknown_83A5918,
 };
 
-const struct SpriteTemplate gUnknown_83A593C =
+const struct SpriteTemplate gFieldEffectObjectTemplate_LongGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -698,7 +698,7 @@ const union AnimCmd *const gUnknown_83A59A0[] =
     gUnknown_83A5984,
 };
 
-const struct SpriteTemplate gUnknown_83A59A4 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -741,7 +741,7 @@ const union AnimCmd *const gUnknown_83A5A2C[] =
     gUnknown_83A5A04,
 };
 
-const struct SpriteTemplate gUnknown_83A5A30 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -776,7 +776,7 @@ const union AnimCmd *const gUnknown_83A5A84[] =
     gUnknown_83A5A68,
 };
 
-const struct SpriteTemplate gUnknown_83A5A88 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2 =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -809,7 +809,7 @@ const union AnimCmd *const gUnknown_83A5AD4[] =
     gUnknown_83A5AC0,
 };
 
-const struct SpriteTemplate gUnknown_83A5AD8 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedSand =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -840,7 +840,7 @@ const union AnimCmd *const gUnknown_83A5B18[] =
     gUnknown_83A5B08,
 };
 
-const struct SpriteTemplate gUnknown_83A5B1C =
+const struct SpriteTemplate gFieldEffectObjectTemplate_SandPile =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -875,7 +875,7 @@ const union AnimCmd *const gUnknown_83A5B70[] =
     gUnknown_83A5B54,
 };
 
-const struct SpriteTemplate gUnknown_83A5B74 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_WaterSurfacing =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -920,7 +920,7 @@ const union AffineAnimCmd *const gUnknown_83A5C2C[] =
     gUnknown_83A5BDC,
 };
 
-const struct SpriteTemplate gUnknown_83A5C34 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion =
 {
     .tileTag = 0x0,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -966,7 +966,7 @@ const union AnimCmd *const gUnknown_83A5CAC[] =
     gUnknown_83A5C8C,
 };
 
-const struct SpriteTemplate gUnknown_83A5CB4 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -1012,7 +1012,7 @@ const union AnimCmd *const gUnknown_83A5D2C[] =
     gUnknown_83A5D0C,
 };
 
-const struct SpriteTemplate gUnknown_83A5D34 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -1034,7 +1034,7 @@ const struct SpriteFrameImage gUnknown_83A5D4C[] =
     overworld_frame(gUnknown_839BE08, 2, 4, 6),
 };
 
-const struct SpriteTemplate gUnknown_83A5D84 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_SandDisguisePlaceholder =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -1093,7 +1093,7 @@ const union AnimCmd *const gUnknown_83A5DEC[] =
     gUnknown_83A5DE4,
 };
 
-const struct SpriteTemplate gUnknown_83A5E00 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_Bird =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
@@ -1122,7 +1122,7 @@ const union AnimCmd *const gUnknown_83A5E34[] =
     gUnknown_83A5E28,
 };
 
-const struct SpriteTemplate gUnknown_83A5E38 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShortGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -1149,7 +1149,7 @@ const union AnimCmd *const gUnknown_83A5E60[] =
     gUnknown_83A5E58,
 };
 
-const struct SpriteTemplate gUnknown_83A5E64 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_HotSpringsWater =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1005,
@@ -1184,7 +1184,7 @@ const union AnimCmd *const gUnknown_83A5EBC[] =
     gUnknown_83A5EA4,
 };
 
-const struct SpriteTemplate gUnknown_83A5EC0 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x100D,
@@ -1221,7 +1221,7 @@ const union AnimCmd *const gUnknown_83A5F20[] =
     gUnknown_83A5F08,
 };
 
-const struct SpriteTemplate gUnknown_83A5F24 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x100D,
@@ -1262,7 +1262,7 @@ const union AnimCmd *const gUnknown_83A5FA0[] =
     gUnknown_83A5F7C,
 };
 
-const struct SpriteTemplate gUnknown_83A5FA4 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1004,
@@ -1292,7 +1292,7 @@ const union AnimCmd *const gUnknown_83A5FDC[] =
     gUnknown_83A5FCC,
 };
 
-const struct SpriteTemplate gUnknown_83A5FE0 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x100F,

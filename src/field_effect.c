@@ -1903,7 +1903,7 @@ u8 FldEff_LavaridgeGymWarp(void)
 {
     u8 spriteId;
     sub_8063BC4((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFGFX_33], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_LAUNCH], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
     return spriteId;
@@ -1996,7 +1996,7 @@ u8 FldEff_PopOutOfAsh(void)
 {
     u8 spriteId;
     sub_8063BC4((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFGFX_32], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_PUFF], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
     return spriteId;
@@ -3048,7 +3048,7 @@ static void sub_8086D94(struct Sprite * sprite);
 
 u8 FldEff_NpcFlyOut(void)
 {
-    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFGFX_FLY_BLOB], 0x78, 0, 1);
+    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0x78, 0, 1);
     struct Sprite * sprite = &gSprites[spriteId];
 
     sprite->oam.paletteNum = 0;
@@ -3239,7 +3239,7 @@ static u8 sub_8087168(void)
 {
     u8 spriteId;
     struct Sprite * sprite;
-    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFGFX_FLY_BLOB], 0xff, 0xb4, 0x1);
+    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0xff, 0xb4, 0x1);
     sprite = &gSprites[spriteId];
     sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;

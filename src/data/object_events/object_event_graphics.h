@@ -199,6 +199,7 @@ const u32 gUnknown_8398928[] = INCBIN_U32("graphics/object_events/pics/unknown/8
 const u32 gUnknown_8398BA8[] = INCBIN_U32("graphics/object_events/pics/unknown/8398BA8.4bpp");
 const u16 gUnknown_8398FA8[] = INCBIN_U16("graphics/object_events/palettes/8398FA8.gbapal");
 const u16 gUnknown_8398FC8[] = INCBIN_U16("graphics/object_events/palettes/8398FC8.gbapal");
+const u16 filler_8398FE8[16] = {0};
 const u32 gUnknown_8399008[] = INCBIN_U32("graphics/object_events/pics/unknown/8399008.4bpp");
 const u32 gUnknown_83990C8[] = INCBIN_U32("graphics/object_events/pics/unknown/83990C8.4bpp");
 const u32 gUnknown_8399188[] = INCBIN_U32("graphics/object_events/pics/unknown/8399188.4bpp");

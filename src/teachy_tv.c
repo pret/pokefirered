@@ -25,6 +25,7 @@
 #include "graphics.h"
 #include "fieldmap.h"
 #include "strings.h"
+#include "constants/field_effects.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -1107,7 +1108,7 @@ static void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, 
 
     if (sResources->grassAnimDisabled != 1 && TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y))
     {
-        spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[4], 0, 0, subpriority);
+        spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], 0, 0, subpriority);
         obj = &gSprites[spriteId];
         obj->pos2.x = x;
         obj->pos2.y = y + 8;

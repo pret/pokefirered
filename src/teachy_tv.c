@@ -531,7 +531,7 @@ static void TeachyTvLoadGraphic(void)
     LZDecompressWram(gUnknown_8E86D6C, sResources->buffer4);
     LoadCompressedPalette(gUnknown_8E86F98, 0, 0x80);
     LoadPalette(&src, 0, sizeof(src));
-    LoadSpritePalette(&gUnknown_83A5348);
+    LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
     TeachyTvLoadBg3Map(sResources->buffer3);
 }
 

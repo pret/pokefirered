@@ -1,29 +1,29 @@
-const struct SpritePalette gUnknown_83A5340 = { .data = gUnknown_8398FA8, .tag = 0x1004 };
-const struct SpritePalette gUnknown_83A5348 = { .data = gUnknown_8398FC8, .tag = 0x1005 };
+const struct SpritePalette gSpritePalette_GeneralFieldEffect0 = { .data = gFieldEffectObjectPalette0, .tag = FLDEFF_PAL_TAG_GENERAL_0 };
+const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = { .data = gFieldEffectObjectPalette1, .tag = FLDEFF_PAL_TAG_GENERAL_1 };
 
-const union AnimCmd gSpriteAnimCmd_FieldShadow0[] =
+static const union AnimCmd sAnim_Shadow[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSpriteAnimTable_FieldShadow[] =
+static const union AnimCmd *const sAnimTable_Shadow[] =
 {
-    gSpriteAnimCmd_FieldShadow0,
+    sAnim_Shadow,
 };
 
-const struct SpriteFrameImage gSpriteFrameImage_FieldShadowS[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowS) };
-const struct SpriteFrameImage gSpriteFrameImage_FieldShadowM[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowM) };
-const struct SpriteFrameImage gSpriteFrameImage_FieldShadowL[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowL) };
-const struct SpriteFrameImage gSpriteFrameImage_FieldShadowXL[] = { obj_frame_tiles(gSpriteImageGfx_FieldShadowXL) };
+static const struct SpriteFrameImage sPicTable_ShadowSmall[] = {obj_frame_tiles(gFieldEffectObjectPic_ShadowSmall) };
+static const struct SpriteFrameImage sPicTable_ShadowMedium[] = {obj_frame_tiles(gFieldEffectObjectPic_ShadowMedium) };
+static const struct SpriteFrameImage sPicTable_ShadowLarge[] = {obj_frame_tiles(gFieldEffectObjectPic_ShadowLarge) };
+static const struct SpriteFrameImage sPicTable_ShadowExtraLarge[] = { obj_frame_tiles(gFieldEffectObjectPic_ShadowExtraLarge) };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_8x8,
-    .anims = gSpriteAnimTable_FieldShadow,
-    .images = gSpriteFrameImage_FieldShadowS,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowSmall,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
@@ -33,8 +33,8 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gSpriteAnimTable_FieldShadow,
-    .images = gSpriteFrameImage_FieldShadowM,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowMedium,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
@@ -44,8 +44,8 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_32x8,
-    .anims = gSpriteAnimTable_FieldShadow,
-    .images = gSpriteFrameImage_FieldShadowL,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowLarge,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
@@ -55,22 +55,22 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_64x32,
-    .anims = gSpriteAnimTable_FieldShadow,
-    .images = gSpriteFrameImage_FieldShadowXL,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowExtraLarge,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A53DC[] =
+static const struct SpriteFrameImage sPicTable_TallGrass[] =
 {
-    overworld_frame(gUnknown_839A008, 2, 2, 0),
-    overworld_frame(gUnknown_839A008, 2, 2, 1),
-    overworld_frame(gUnknown_839A008, 2, 2, 2),
-    overworld_frame(gUnknown_839A008, 2, 2, 3),
-    overworld_frame(gUnknown_839A008, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 4),
 };
 
-const union AnimCmd gUnknown_83A5404[] =
+static const union AnimCmd sAnim_TallGrass[] =
 {
     ANIMCMD_FRAME(1, 10),
     ANIMCMD_FRAME(2, 10),
@@ -80,32 +80,32 @@ const union AnimCmd gUnknown_83A5404[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A541C[] = 
+static const union AnimCmd *const sAnimTable_TallGrass[] =
 {
-    gUnknown_83A5404,
+    sAnim_TallGrass,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A541C,
-    .images = gUnknown_83A53DC,
+    .anims = sAnimTable_TallGrass,
+    .images = sPicTable_TallGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateTallGrassFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5438[] =
+static const struct SpriteFrameImage sPicTable_Ripple[] =
 {
-    overworld_frame(gUnknown_83986A8, 2, 2, 0),
-    overworld_frame(gUnknown_83986A8, 2, 2, 1),
-    overworld_frame(gUnknown_83986A8, 2, 2, 2),
-    overworld_frame(gUnknown_83986A8, 2, 2, 3),
-    overworld_frame(gUnknown_83986A8, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_Ripple, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_Ripple, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_Ripple, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_Ripple, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_Ripple, 2, 2, 4),
 };
 
-const union AnimCmd gUnknown_83A5460[] =
+static const union AnimCmd sAnim_Ripple[] =
 {
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_FRAME(1, 9),
@@ -118,32 +118,32 @@ const union AnimCmd gUnknown_83A5460[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5484[] = 
+static const union AnimCmd *const sAnimTable_Ripple[] =
 {
-    gUnknown_83A5460,
+    sAnim_Ripple,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Ripple =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5484,
-    .images = gUnknown_83A5438,
+    .anims = sAnimTable_Ripple,
+    .images = sPicTable_Ripple,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = WaitFieldEffectSpriteAnim,
 };
 
-const struct SpriteFrameImage gUnknown_83A54A0[] =
+static const struct SpriteFrameImage sPicTable_Ash[] =
 {
-    overworld_frame(gUnknown_8398928, 2, 2, 0),
-    overworld_frame(gUnknown_8398928, 2, 2, 1),
-    overworld_frame(gUnknown_8398928, 2, 2, 2),
-    overworld_frame(gUnknown_8398928, 2, 2, 3),
-    overworld_frame(gUnknown_8398928, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_Ash, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_Ash, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_Ash, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_Ash, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_Ash, 2, 2, 4),
 };
 
-const union AnimCmd gUnknown_83A54C8[] =
+static const union AnimCmd sAnim_Ash[] =
 {
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_FRAME(1, 12),
@@ -153,23 +153,23 @@ const union AnimCmd gUnknown_83A54C8[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A54E0[] = 
+static const union AnimCmd *const sAnimTable_Ash[] =
 {
-    gUnknown_83A54C8,
+    sAnim_Ash,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Ash =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A54E0,
-    .images = gUnknown_83A54A0,
+    .anims = sAnimTable_Ash,
+    .images = sPicTable_Ash,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateAshFieldEffect,
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_SurfBlob[] =
+static const struct SpriteFrameImage gObjectEventPicTable_SurfBlob[] =
 {
     overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 0),
     overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 1),
@@ -179,40 +179,40 @@ const struct SpriteFrameImage gObjectEventPicTable_SurfBlob[] =
     overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 5),
 };
 
-const union AnimCmd gUnknown_83A552C[] =
+static const union AnimCmd sSurfBlobAnim_FaceSouth[] =
 {
     ANIMCMD_FRAME(0, 48),
     ANIMCMD_FRAME(1, 48),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_83A5538[] =
+static const union AnimCmd sSurfBlobAnim_FaceNorth[] =
 {
     ANIMCMD_FRAME(2, 48),
     ANIMCMD_FRAME(3, 48),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_83A5544[] =
+static const union AnimCmd sSurfBlobAnim_FaceWest[] =
 {
     ANIMCMD_FRAME(4, 48),
     ANIMCMD_FRAME(5, 48),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_83A5550[] =
+static const union AnimCmd sSurfBlobAnim_FaceEast[] =
 {
     ANIMCMD_FRAME(4, 48, .hFlip = TRUE),
     ANIMCMD_FRAME(5, 48, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_83A555C[] = 
+static const union AnimCmd *const sAnimTable_SurfBlob[] =
 {
-    gUnknown_83A552C,
-    gUnknown_83A5538,
-    gUnknown_83A5544,
-    gUnknown_83A5550,
+    [DIR_SOUTH - 1] = sSurfBlobAnim_FaceSouth,
+    [DIR_NORTH - 1] = sSurfBlobAnim_FaceNorth,
+    [DIR_WEST  - 1] = sSurfBlobAnim_FaceWest,
+    [DIR_EAST  - 1] = sSurfBlobAnim_FaceEast,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob =
@@ -220,58 +220,58 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_32x32,
-    .anims = gUnknown_83A555C,
+    .anims = sAnimTable_SurfBlob,
     .images = gObjectEventPicTable_SurfBlob,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSurfBlobFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5584[] =
+static const struct SpriteFrameImage sPicTable_Arrow[] =
 {
-    overworld_frame(gUnknown_8398BA8, 2, 2, 0),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 1),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 2),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 3),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 4),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 5),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 6),
-    overworld_frame(gUnknown_8398BA8, 2, 2, 7),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 5),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 6),
+    overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 7),
 };
 
-const union AnimCmd gUnknown_83A55C4[] =
+static const union AnimCmd sArrowAnim_South[] =
 {
     ANIMCMD_FRAME(2, 32),
     ANIMCMD_FRAME(3, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_83A55D0[] =
+static const union AnimCmd sArrowAnim_North[] =
 {
     ANIMCMD_FRAME(0, 32),
     ANIMCMD_FRAME(1, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_83A55DC[] =
+static const union AnimCmd sArrowAnim_West[] =
 {
     ANIMCMD_FRAME(4, 32),
     ANIMCMD_FRAME(5, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_83A55E8[] =
+static const union AnimCmd sArrowAnim_East[] =
 {
     ANIMCMD_FRAME(6, 32),
     ANIMCMD_FRAME(7, 32),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_83A55F4[] = 
+static const union AnimCmd *const sAnimTable_Arrow[] =
 {
-    gUnknown_83A55C4,
-    gUnknown_83A55D0,
-    gUnknown_83A55DC,
-    gUnknown_83A55E8,
+    [DIR_SOUTH - 1] = sArrowAnim_South,
+    [DIR_NORTH - 1] = sArrowAnim_North,
+    [DIR_WEST  - 1] = sArrowAnim_West,
+    [DIR_EAST  - 1] = sArrowAnim_East,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Arrow =
@@ -279,20 +279,20 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Arrow =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A55F4,
-    .images = gUnknown_83A5584,
+    .anims = sAnimTable_Arrow,
+    .images = sPicTable_Arrow,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteFrameImage gUnknown_83A561C[] =
+static const struct SpriteFrameImage sPicTable_GroundImpactDust[] =
 {
-    overworld_frame(gUnknown_8399008, 2, 1, 0),
-    overworld_frame(gUnknown_8399008, 2, 1, 1),
-    overworld_frame(gUnknown_8399008, 2, 1, 2),
+    overworld_frame(gFieldEffectObjectPic_GroundImpactDust, 2, 1, 0),
+    overworld_frame(gFieldEffectObjectPic_GroundImpactDust, 2, 1, 1),
+    overworld_frame(gFieldEffectObjectPic_GroundImpactDust, 2, 1, 2),
 };
 
-const union AnimCmd gUnknown_83A5634[] =
+static const union AnimCmd sAnim_GroundImpactDust[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
@@ -300,31 +300,31 @@ const union AnimCmd gUnknown_83A5634[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5644[] = 
+static const union AnimCmd *const sAnimTable_GroundImpactDust[] =
 {
-    gUnknown_83A5634,
+    sAnim_GroundImpactDust,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_GroundImpactDust =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gUnknown_83A5644,
-    .images = gUnknown_83A561C,
+    .anims = sAnimTable_GroundImpactDust,
+    .images = sPicTable_GroundImpactDust,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DCCE0,
+    .callback = UpdateJumpImpactEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5660[] =
+static const struct SpriteFrameImage sPicTable_JumpTallGrass[] =
 {
-    overworld_frame(gUnknown_8399188, 2, 1, 0),
-    overworld_frame(gUnknown_8399188, 2, 1, 1),
-    overworld_frame(gUnknown_8399188, 2, 1, 2),
-    overworld_frame(gUnknown_8399188, 2, 1, 3),
+    overworld_frame(gFieldEffectObjectPic_JumpTallGrass, 2, 1, 0),
+    overworld_frame(gFieldEffectObjectPic_JumpTallGrass, 2, 1, 1),
+    overworld_frame(gFieldEffectObjectPic_JumpTallGrass, 2, 1, 2),
+    overworld_frame(gFieldEffectObjectPic_JumpTallGrass, 2, 1, 3),
 };
 
-const union AnimCmd gUnknown_83A5680[] =
+static const union AnimCmd sAnim_JumpTallGrass[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
@@ -333,211 +333,211 @@ const union AnimCmd gUnknown_83A5680[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5694[] = 
+static const union AnimCmd *const sAnimTable_JumpTallGrass[] =
 {
-    gUnknown_83A5680,
+    sAnim_JumpTallGrass,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_JumpTallGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gUnknown_83A5694,
-    .images = gUnknown_83A5660,
+    .anims = sAnimTable_JumpTallGrass,
+    .images = sPicTable_JumpTallGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DCCE0,
+    .callback = UpdateJumpImpactEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A56B0[] =
+static const struct SpriteFrameImage sPicTable_SandFootprints[] =
 {
-    overworld_frame(gUnknown_839A388, 2, 2, 0),
-    overworld_frame(gUnknown_839A388, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_SandFootprints, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_SandFootprints, 2, 2, 1),
 };
 
-const union AnimCmd gUnknown_83A56C0[] =
+static const union AnimCmd sSandFootprintsAnim_South[] =
 {
     ANIMCMD_FRAME(0, 1, .vFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A56C8[] =
+static const union AnimCmd sSandFootprintsAnim_North[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A56D0[] =
+static const union AnimCmd sSandFootprintsAnim_West[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A56D8[] =
+static const union AnimCmd sSandFootprintsAnim_East[] =
 {
     ANIMCMD_FRAME(1, 1, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A56E0[] = 
+static const union AnimCmd *const sAnimTable_SandFootprints[] =
 {
-    gUnknown_83A56C0,
-    gUnknown_83A56C0,
-    gUnknown_83A56C8,
-    gUnknown_83A56D0,
-    gUnknown_83A56D8,
+    [DIR_NONE]  = sSandFootprintsAnim_South,
+    [DIR_SOUTH] = sSandFootprintsAnim_South,
+    [DIR_NORTH] = sSandFootprintsAnim_North,
+    [DIR_WEST]  = sSandFootprintsAnim_West,
+    [DIR_EAST]  = sSandFootprintsAnim_East,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_SandFootprints =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A56E0,
-    .images = gUnknown_83A56B0,
+    .anims = sAnimTable_SandFootprints,
+    .images = sPicTable_SandFootprints,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateFootprintsTireTracksFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A570C[] =
+static const struct SpriteFrameImage sPicTable_DeepSandFootprints[] =
 {
-    overworld_frame(gUnknown_839A488, 2, 2, 0),
-    overworld_frame(gUnknown_839A488, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_DeepSandFootprints, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_DeepSandFootprints, 2, 2, 1),
 };
 
-const union AnimCmd gUnknown_83A571C[] =
+static const union AnimCmd sDeepSandFootprintsAnim_South[] =
 {
     ANIMCMD_FRAME(0, 1, .vFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5724[] =
+static const union AnimCmd sDeepSandFootprintsAnim_North[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A572C[] =
+static const union AnimCmd sDeepSandFootprintsAnim_West[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5734[] =
+static const union AnimCmd sDeepSandFootprintsAnim_East[] =
 {
     ANIMCMD_FRAME(1, 1, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A573C[] = 
+static const union AnimCmd *const sAnimTable_DeepSandFootprints[] =
 {
-    gUnknown_83A571C,
-    gUnknown_83A571C,
-    gUnknown_83A5724,
-    gUnknown_83A572C,
-    gUnknown_83A5734,
+    [DIR_NONE]  = sDeepSandFootprintsAnim_South,
+    [DIR_SOUTH] = sDeepSandFootprintsAnim_South,
+    [DIR_NORTH] = sDeepSandFootprintsAnim_North,
+    [DIR_WEST]  = sDeepSandFootprintsAnim_West,
+    [DIR_EAST]  = sDeepSandFootprintsAnim_East,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_DeepSandFootprints =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A573C,
-    .images = gUnknown_83A570C,
+    .anims = sAnimTable_DeepSandFootprints,
+    .images = sPicTable_DeepSandFootprints,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateFootprintsTireTracksFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5768[] =
+static const struct SpriteFrameImage sPicTable_BikeTireTracks[] =
 {
-    overworld_frame(gUnknown_839A588, 2, 2, 0),
-    overworld_frame(gUnknown_839A588, 2, 2, 1),
-    overworld_frame(gUnknown_839A588, 2, 2, 2),
-    overworld_frame(gUnknown_839A588, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_BikeTireTracks, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_BikeTireTracks, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_BikeTireTracks, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_BikeTireTracks, 2, 2, 3),
 };
 
-const union AnimCmd gUnknown_83A5788[] =
-{
-    ANIMCMD_FRAME(2, 1),
-    ANIMCMD_END,
-};
-
-const union AnimCmd gUnknown_83A5790[] =
+static const union AnimCmd sBikeTireTracksAnim_South[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5798[] =
+static const union AnimCmd sBikeTireTracksAnim_North[] =
+{
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBikeTireTracksAnim_West[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A57A0[] =
+static const union AnimCmd sBikeTireTracksAnim_East[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A57A8[] =
+static const union AnimCmd sBikeTireTracksAnim_SECornerTurn[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A57B0[] =
+static const union AnimCmd sBikeTireTracksAnim_SWCornerTurn[] =
 {
     ANIMCMD_FRAME(0, 1, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A57B8[] =
+static const union AnimCmd sBikeTireTracksAnim_NWCornerTurn[] =
 {
     ANIMCMD_FRAME(3, 1, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A57C0[] =
+static const union AnimCmd sBikeTireTracksAnim_NECornerTurn[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A57C8[] = 
+static const union AnimCmd *const sAnimTable_BikeTireTracks[] =
 {
-    gUnknown_83A5788,
-    gUnknown_83A5788,
-    gUnknown_83A5790,
-    gUnknown_83A5798,
-    gUnknown_83A57A0,
-    gUnknown_83A57A8,
-    gUnknown_83A57B0,
-    gUnknown_83A57B8,
-    gUnknown_83A57C0,
+    [DIR_NONE]      = sBikeTireTracksAnim_South,
+    [DIR_SOUTH]     = sBikeTireTracksAnim_South,
+    [DIR_NORTH]     = sBikeTireTracksAnim_North,
+    [DIR_WEST]      = sBikeTireTracksAnim_West,
+    [DIR_EAST]      = sBikeTireTracksAnim_East,
+    [DIR_SOUTHWEST] = sBikeTireTracksAnim_SECornerTurn,
+    [DIR_SOUTHEAST] = sBikeTireTracksAnim_SWCornerTurn,
+    [DIR_NORTHWEST] = sBikeTireTracksAnim_NWCornerTurn,
+    [DIR_NORTHEAST] = sBikeTireTracksAnim_NECornerTurn,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_BikeTireTracks =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A57C8,
-    .images = gUnknown_83A5768,
+    .anims = sAnimTable_BikeTireTracks,
+    .images = sPicTable_BikeTireTracks,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateFootprintsTireTracksFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5804[] =
+static const struct SpriteFrameImage sPicTable_JumpBigSplash[] =
 {
-    overworld_frame(gUnknown_839AA48, 2, 2, 0),
-    overworld_frame(gUnknown_839AA48, 2, 2, 1),
-    overworld_frame(gUnknown_839AA48, 2, 2, 2),
-    overworld_frame(gUnknown_839AA48, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_JumpBigSplash, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_JumpBigSplash, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_JumpBigSplash, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_JumpBigSplash, 2, 2, 3),
 };
 
-const union AnimCmd gUnknown_83A5824[] =
+static const union AnimCmd sAnim_JumpBigSplash[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
@@ -546,36 +546,36 @@ const union AnimCmd gUnknown_83A5824[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5838[] = 
+static const union AnimCmd *const sAnimTable_JumpBigSplash[] =
 {
-    gUnknown_83A5824,
+    sAnim_JumpBigSplash,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_JumpBigSplash =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5838,
-    .images = gUnknown_83A5804,
+    .anims = sAnimTable_JumpBigSplash,
+    .images = sPicTable_JumpBigSplash,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DCCE0,
+    .callback = UpdateJumpImpactEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5854[] =
+static const struct SpriteFrameImage sPicTable_Splash[] =
 {
-    overworld_frame(gUnknown_839AC48, 2, 1, 0),
-    overworld_frame(gUnknown_839AC48, 2, 1, 1),
+    overworld_frame(gFieldEffectObjectPic_Splash, 2, 1, 0),
+    overworld_frame(gFieldEffectObjectPic_Splash, 2, 1, 1),
 };
 
-const union AnimCmd gUnknown_83A5864[] =
+static const union AnimCmd sAnim_Splash_0[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5870[] =
+static const union AnimCmd sAnim_Splash_1[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -588,31 +588,31 @@ const union AnimCmd gUnknown_83A5870[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_83A5894[] = 
+static const union AnimCmd *const sAnimTable_Splash[] =
 {
-    gUnknown_83A5864,
-    gUnknown_83A5870,
+    sAnim_Splash_0,
+    sAnim_Splash_1,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Splash =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gUnknown_83A5894,
-    .images = gUnknown_83A5854,
+    .anims = sAnimTable_Splash,
+    .images = sPicTable_Splash,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSplashFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A58B4[] =
+static const struct SpriteFrameImage sPicTable_JumpSmallSplash[] =
 {
-    overworld_frame(gUnknown_839ACC8, 2, 1, 0),
-    overworld_frame(gUnknown_839ACC8, 2, 1, 1),
-    overworld_frame(gUnknown_839ACC8, 2, 1, 2),
+    overworld_frame(gFieldEffectObjectPic_JumpSmallSplash, 2, 1, 0),
+    overworld_frame(gFieldEffectObjectPic_JumpSmallSplash, 2, 1, 1),
+    overworld_frame(gFieldEffectObjectPic_JumpSmallSplash, 2, 1, 2),
 };
 
-const union AnimCmd gUnknown_83A58CC[] =
+static const union AnimCmd sAnim_JumpSmallSplash[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -620,31 +620,31 @@ const union AnimCmd gUnknown_83A58CC[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A58DC[] = 
+static const union AnimCmd *const sAnimTable_JumpSmallSplash[] =
 {
-    gUnknown_83A58CC,
+    sAnim_JumpSmallSplash,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_JumpSmallSplash =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gUnknown_83A58DC,
-    .images = gUnknown_83A58B4,
+    .anims = sAnimTable_JumpSmallSplash,
+    .images = sPicTable_JumpSmallSplash,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DCCE0,
+    .callback = UpdateJumpImpactEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A58F8[] =
+static const struct SpriteFrameImage sPicTable_LongGrass[] =
 {
-    overworld_frame(gUnknown_8399E08, 2, 2, 0),
-    overworld_frame(gUnknown_8399E08, 2, 2, 1),
-    overworld_frame(gUnknown_8399E08, 2, 2, 2),
-    overworld_frame(gUnknown_8399E08, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_LongGrass, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_LongGrass, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_LongGrass, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_LongGrass, 2, 2, 3),
 };
 
-const union AnimCmd gUnknown_83A5918[] =
+static const union AnimCmd sAnim_LongGrass[] =
 {
     ANIMCMD_FRAME(1, 3),
     ANIMCMD_FRAME(2, 3),
@@ -656,33 +656,33 @@ const union AnimCmd gUnknown_83A5918[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5938[] = 
+static const union AnimCmd *const sAnimTable_LongGrass[] =
 {
-    gUnknown_83A5918,
+    sAnim_LongGrass,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_LongGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5938,
-    .images = gUnknown_83A58F8,
+    .anims = sAnimTable_LongGrass,
+    .images = sPicTable_LongGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateLongGrassFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5954[] =
+static const struct SpriteFrameImage sPicTable_JumpLongGrass[] =
 {
-    overworld_frame(gUnknown_8399488, 2, 2, 0),
-    overworld_frame(gUnknown_8399488, 2, 2, 1),
-    overworld_frame(gUnknown_8399488, 2, 2, 2),
-    overworld_frame(gUnknown_8399488, 2, 2, 3),
-    overworld_frame(gUnknown_8399488, 2, 2, 4),
-    overworld_frame(gUnknown_8399488, 2, 2, 6),
+    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 6),
 };
 
-const union AnimCmd gUnknown_83A5984[] =
+static const union AnimCmd sAnim_JumpLongGrass[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -693,36 +693,36 @@ const union AnimCmd gUnknown_83A5984[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A59A0[] = 
+static const union AnimCmd *const sAnimTable_JumpLongGrass[] =
 {
-    gUnknown_83A5984,
+    sAnim_JumpLongGrass,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A59A0,
-    .images = gUnknown_83A5954,
+    .anims = sAnimTable_JumpLongGrass,
+    .images = sPicTable_JumpLongGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DCCE0,
+    .callback = UpdateJumpImpactEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A59BC[] =
+static const struct SpriteFrameImage sPicTable_UnusedGrass[] =
 {
-    overworld_frame(gUnknown_8399788, 2, 2, 0),
-    overworld_frame(gUnknown_8399788, 2, 2, 1),
-    overworld_frame(gUnknown_8399788, 2, 2, 2),
-    overworld_frame(gUnknown_8399788, 2, 2, 3),
-    overworld_frame(gUnknown_8399788, 2, 2, 4),
-    overworld_frame(gUnknown_8399788, 2, 2, 5),
-    overworld_frame(gUnknown_8399788, 2, 2, 6),
-    overworld_frame(gUnknown_8399788, 2, 2, 7),
-    overworld_frame(gUnknown_8399788, 2, 2, 8),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 5),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 6),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 7),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass, 2, 2, 8),
 };
 
-const union AnimCmd gUnknown_83A5A04[] =
+static const union AnimCmd sAnim_UnusedGrass[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 4),
@@ -736,31 +736,31 @@ const union AnimCmd gUnknown_83A5A04[] =
     ANIMCMD_JUMP(7),
 };
 
-const union AnimCmd *const gUnknown_83A5A2C[] = 
+static const union AnimCmd *const sAnimTable_UnusedGrass[] =
 {
-    gUnknown_83A5A04,
+    sAnim_UnusedGrass,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5A2C,
-    .images = gUnknown_83A59BC,
+    .anims = sAnimTable_UnusedGrass,
+    .images = sPicTable_UnusedGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = WaitFieldEffectSpriteAnim,
 };
 
-const struct SpriteFrameImage gUnknown_83A5A48[] =
+static const struct SpriteFrameImage sPicTable_UnusedGrass2[] =
 {
-    overworld_frame(gUnknown_8399C08, 2, 2, 0),
-    overworld_frame(gUnknown_8399C08, 2, 2, 1),
-    overworld_frame(gUnknown_8399C08, 2, 2, 2),
-    overworld_frame(gUnknown_8399C08, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_UnusedGrass2, 2, 2, 3),
 };
 
-const union AnimCmd gUnknown_83A5A68[] =
+static const union AnimCmd sAnim_UnusedGrass2[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -771,31 +771,31 @@ const union AnimCmd gUnknown_83A5A68[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_83A5A84[] = 
+static const union AnimCmd *const sAnimTable_UnusedGrass2[] =
 {
-    gUnknown_83A5A68,
+    sAnim_UnusedGrass2,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2 =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5A84,
-    .images = gUnknown_83A5A48,
+    .anims = sAnimTable_UnusedGrass2,
+    .images = sPicTable_UnusedGrass2,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = WaitFieldEffectSpriteAnim,
 };
 
-const struct SpriteFrameImage gUnknown_83A5AA0[] =
+static const struct SpriteFrameImage sPicTable_UnusedSand[] =
 {
-    overworld_frame(gUnknown_839A788, 2, 2, 0),
-    overworld_frame(gUnknown_839A788, 2, 2, 1),
-    overworld_frame(gUnknown_839A788, 2, 2, 2),
-    overworld_frame(gUnknown_839A788, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_UnusedSand, 2, 2, 3),
 };
 
-const union AnimCmd gUnknown_83A5AC0[] =
+static const union AnimCmd sAnim_UnusedSand[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -804,30 +804,30 @@ const union AnimCmd gUnknown_83A5AC0[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_83A5AD4[] = 
+static const union AnimCmd *const sAnimTable_UnusedSand[] =
 {
-    gUnknown_83A5AC0,
+    sAnim_UnusedSand,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedSand =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5AD4,
-    .images = gUnknown_83A5AA0,
+    .anims = sAnimTable_UnusedSand,
+    .images = sPicTable_UnusedSand,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = WaitFieldEffectSpriteAnim,
 };
 
-const struct SpriteFrameImage gUnknown_83A5AF0[] =
+static const struct SpriteFrameImage sPicTable_SandPile[] =
 {
-    overworld_frame(gUnknown_839A988, 2, 1, 0),
-    overworld_frame(gUnknown_839A988, 2, 1, 1),
-    overworld_frame(gUnknown_839A988, 2, 1, 2),
+    overworld_frame(gFieldEffectObjectPic_SandPile, 2, 1, 0),
+    overworld_frame(gFieldEffectObjectPic_SandPile, 2, 1, 1),
+    overworld_frame(gFieldEffectObjectPic_SandPile, 2, 1, 2),
 };
 
-const union AnimCmd gUnknown_83A5B08[] =
+static const union AnimCmd sAnim_SandPile[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -835,31 +835,31 @@ const union AnimCmd gUnknown_83A5B08[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5B18[] = 
+static const union AnimCmd *const sAnimTable_SandPile[] =
 {
-    gUnknown_83A5B08,
+    sAnim_SandPile,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_SandPile =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gUnknown_83A5B18,
-    .images = gUnknown_83A5AF0,
+    .anims = sAnimTable_SandPile,
+    .images = sPicTable_SandPile,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSandPileFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5B34[] =
+static const struct SpriteFrameImage sPicTable_WaterSurfacing[] =
 {
-    overworld_frame(gUnknown_839AD88, 2, 2, 0),
-    overworld_frame(gUnknown_839AD88, 2, 2, 1),
-    overworld_frame(gUnknown_839AD88, 2, 2, 2),
-    overworld_frame(gUnknown_839AD88, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_WaterSurfacing, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_WaterSurfacing, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_WaterSurfacing, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_WaterSurfacing, 2, 2, 3),
 };
 
-const union AnimCmd gUnknown_83A5B54[] =
+static const union AnimCmd sAnim_WaterSurfacing[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -870,23 +870,23 @@ const union AnimCmd gUnknown_83A5B54[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_83A5B70[] = 
+static const union AnimCmd *const sAnimTable_WaterSurfacing[] =
 {
-    gUnknown_83A5B54,
+    sAnim_WaterSurfacing,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_WaterSurfacing =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5B70,
-    .images = gUnknown_83A5B34,
+    .anims = sAnimTable_WaterSurfacing,
+    .images = sPicTable_WaterSurfacing,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = WaitFieldEffectSpriteAnim,
 };
 
-const union AffineAnimCmd gUnknown_83A5B8C[] =
+const union AffineAnimCmd sAffineAnim_ReflectionDistortion_0[] =
 {
     AFFINEANIMCMD_FRAME(-256, 256, 128, 0),
     AFFINEANIMCMD_FRAME(1, 0, 0, 4),
@@ -900,7 +900,7 @@ const union AffineAnimCmd gUnknown_83A5B8C[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd gUnknown_83A5BDC[] =
+const union AffineAnimCmd sAffineAnim_ReflectionDistortion_1[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 128, 0),
     AFFINEANIMCMD_FRAME(-1, 0, 0, 4),
@@ -914,10 +914,10 @@ const union AffineAnimCmd gUnknown_83A5BDC[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd *const gUnknown_83A5C2C[] =
+const union AffineAnimCmd *const sAffineAnims_ReflectionDistortion[] =
 {
-    gUnknown_83A5B8C,
-    gUnknown_83A5BDC,
+    sAffineAnim_ReflectionDistortion_0,
+    sAffineAnim_ReflectionDistortion_1,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion =
@@ -927,28 +927,79 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion =
     .oam = &gDummyOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_83A5C2C,
+    .affineAnims = sAffineAnims_ReflectionDistortion,
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteFrameImage gUnknown_83A5C4C[] =
-{
-    overworld_frame(gUnknown_839B008, 2, 4, 0),
-    overworld_frame(gUnknown_839B008, 2, 4, 1),
-    overworld_frame(gUnknown_839B008, 2, 4, 2),
-    overworld_frame(gUnknown_839B008, 2, 4, 3),
-    overworld_frame(gUnknown_839B008, 2, 4, 4),
-    overworld_frame(gUnknown_839B008, 2, 4, 5),
-    overworld_frame(gUnknown_839B008, 2, 4, 6),
+/*
+static const struct SpriteFrameImage sPicTable_Sparkle[] = {
+    overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 5),
 };
 
-const union AnimCmd gUnknown_83A5C84[] =
+static const union AnimCmd sAnim_Sparkle[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_LOOP(0),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_LOOP(3),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnimTable_Sparkle[] =
+{
+    sAnim_Sparkle,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle = {
+    .tileTag = 0xFFFF,
+    .paletteTag = 0xFFFF,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_Sparkle,
+    .images = sPicTable_Sparkle,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = WaitFieldEffectSpriteAnim,
+};
+*/
+
+static const struct SpriteFrameImage sPicTable_TreeDisguise[] =
+{
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 0),
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 1),
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 2),
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 3),
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 4),
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 5),
+    overworld_frame(gFieldEffectObjectPic_TreeDisguise, 2, 4, 6),
+};
+
+static const union AnimCmd sAnim_TreeDisguise[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5C8C[] =
+static const union AnimCmd sAnim_TreeDisguiseReveal[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -960,10 +1011,10 @@ const union AnimCmd gUnknown_83A5C8C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5CAC[] = 
+static const union AnimCmd *const sAnimTable_TreeDisguise[] =
 {
-    gUnknown_83A5C84,
-    gUnknown_83A5C8C,
+    sAnim_TreeDisguise,
+    sAnim_TreeDisguiseReveal,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise =
@@ -971,30 +1022,30 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_16x32,
-    .anims = gUnknown_83A5CAC,
-    .images = gUnknown_83A5C4C,
+    .anims = sAnimTable_TreeDisguise,
+    .images = sPicTable_TreeDisguise,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateDisguiseFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5CCC[] =
+static const struct SpriteFrameImage sPicTable_MountainDisguise[] =
 {
-    overworld_frame(gUnknown_839B708, 2, 4, 0),
-    overworld_frame(gUnknown_839B708, 2, 4, 1),
-    overworld_frame(gUnknown_839B708, 2, 4, 2),
-    overworld_frame(gUnknown_839B708, 2, 4, 3),
-    overworld_frame(gUnknown_839B708, 2, 4, 4),
-    overworld_frame(gUnknown_839B708, 2, 4, 5),
-    overworld_frame(gUnknown_839B708, 2, 4, 6),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 0),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 1),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 2),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 3),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 4),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 5),
+    overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 6),
 };
 
-const union AnimCmd gUnknown_83A5D04[] =
+static const union AnimCmd sAnim_MountainDisguise[] =
 {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5D0C[] =
+static const union AnimCmd sAnim_MountainDisguiseReveal[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -1006,10 +1057,10 @@ const union AnimCmd gUnknown_83A5D0C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5D2C[] = 
+static const union AnimCmd *const sAnimTable_MountainDisguise[] =
 {
-    gUnknown_83A5D04,
-    gUnknown_83A5D0C,
+    sAnim_MountainDisguise,
+    sAnim_MountainDisguiseReveal,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise =
@@ -1017,21 +1068,21 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_16x32,
-    .anims = gUnknown_83A5D2C,
-    .images = gUnknown_83A5CCC,
+    .anims = sAnimTable_MountainDisguise,
+    .images = sPicTable_MountainDisguise,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateDisguiseFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5D4C[] =
+static const struct SpriteFrameImage sPicTable_SandDisguisePlaceholder[] =
 {
-    overworld_frame(gUnknown_839BE08, 2, 4, 0),
-    overworld_frame(gUnknown_839BE08, 2, 4, 1),
-    overworld_frame(gUnknown_839BE08, 2, 4, 2),
-    overworld_frame(gUnknown_839BE08, 2, 4, 3),
-    overworld_frame(gUnknown_839BE08, 2, 4, 4),
-    overworld_frame(gUnknown_839BE08, 2, 4, 5),
-    overworld_frame(gUnknown_839BE08, 2, 4, 6),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 0),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 1),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 2),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 3),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 4),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 5),
+    overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 6),
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_SandDisguisePlaceholder =
@@ -1039,58 +1090,58 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SandDisguisePlaceholder =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_16x32,
-    .anims = gUnknown_83A5CAC,
-    .images = gUnknown_83A5D4C,
+    .anims = sAnimTable_TreeDisguise,
+    .images = sPicTable_SandDisguisePlaceholder,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateDisguiseFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5D9C[] =
+static const struct SpriteFrameImage sPicTable_Bird[] =
 {
-    overworld_frame(gUnknown_839D3C8, 8, 8, 0),
-    overworld_frame(gUnknown_839D3C8, 8, 8, 1),
-    overworld_frame(gUnknown_839D3C8, 8, 8, 2),
-    overworld_frame(gUnknown_839D3C8, 8, 8, 3),
-    overworld_frame(gUnknown_839D3C8, 8, 8, 4),
+    overworld_frame(gFieldEffectObjectPic_Bird, 8, 8, 0),
+    overworld_frame(gFieldEffectObjectPic_Bird, 8, 8, 1),
+    overworld_frame(gFieldEffectObjectPic_Bird, 8, 8, 2),
+    overworld_frame(gFieldEffectObjectPic_Bird, 8, 8, 3),
+    overworld_frame(gFieldEffectObjectPic_Bird, 8, 8, 4),
 };
 
-const union AnimCmd gUnknown_83A5DC4[] =
+static const union AnimCmd sAnim_Bird_0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5DCC[] =
+static const union AnimCmd sAnim_Bird_1[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5DD4[] =
+static const union AnimCmd sAnim_Bird_2[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5DDC[] =
+static const union AnimCmd sAnim_Bird_3[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_83A5DE4[] =
+static const union AnimCmd sAnim_Bird_4[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5DEC[] = 
+static const union AnimCmd *const sAnimTable_Bird[] =
 {
-    gUnknown_83A5DC4,
-    gUnknown_83A5DCC,
-    gUnknown_83A5DD4,
-    gUnknown_83A5DDC,
-    gUnknown_83A5DE4,
+    sAnim_Bird_0,
+    sAnim_Bird_1,
+    sAnim_Bird_2,
+    sAnim_Bird_3,
+    sAnim_Bird_4,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bird =
@@ -1098,78 +1149,78 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Bird =
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_64x64,
-    .anims = gUnknown_83A5DEC,
-    .images = gUnknown_83A5D9C,
+    .anims = sAnimTable_Bird,
+    .images = sPicTable_Bird,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteFrameImage gUnknown_83A5E18[] =
+static const struct SpriteFrameImage sPicTable_ShortGrass[] =
 {
-    overworld_frame(gUnknown_839A288, 2, 2, 0),
-    overworld_frame(gUnknown_839A288, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_ShortGrass, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_ShortGrass, 2, 2, 1),
 };
 
-const union AnimCmd gUnknown_83A5E28[] =
+static const union AnimCmd sAnim_ShortGrass[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5E34[] = 
+static const union AnimCmd *const sAnimTable_ShortGrass[] =
 {
-    gUnknown_83A5E28,
+    sAnim_ShortGrass,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShortGrass =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5E34,
-    .images = gUnknown_83A5E18,
+    .anims = sAnimTable_ShortGrass,
+    .images = sPicTable_ShortGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShortGrassFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5E50[] =
+static const struct SpriteFrameImage sPicTable_HotSpringsWater[] =
 {
-    overworld_frame(gUnknown_839C508, 2, 2, 0),
+    obj_frame_tiles(gFieldEffectObjectPic_HotSpringsWater),
 };
 
-const union AnimCmd gUnknown_83A5E58[] =
+static const union AnimCmd sAnim_HotSpringsWater[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5E60[] = 
+static const union AnimCmd *const sAnimTable_HotSpringsWater[] =
 {
-    gUnknown_83A5E58,
+    sAnim_HotSpringsWater,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_HotSpringsWater =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1005,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5E60,
-    .images = gUnknown_83A5E50,
+    .anims = sAnimTable_HotSpringsWater,
+    .images = sPicTable_HotSpringsWater,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateHotSpringsWaterFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5E7C[] =
+static const struct SpriteFrameImage sPicTable_AshPuff[] =
 {
-    overworld_frame(gUnknown_839C5A8, 2, 2, 0),
-    overworld_frame(gUnknown_839C5A8, 2, 2, 1),
-    overworld_frame(gUnknown_839C5A8, 2, 2, 2),
-    overworld_frame(gUnknown_839C5A8, 2, 2, 3),
-    overworld_frame(gUnknown_839C5A8, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_AshPuff, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_AshPuff, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_AshPuff, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_AshPuff, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_AshPuff, 2, 2, 4),
 };
 
-const union AnimCmd gUnknown_83A5EA4[] =
+static const union AnimCmd sAnim_AshPuff[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
@@ -1179,34 +1230,34 @@ const union AnimCmd gUnknown_83A5EA4[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5EBC[] = 
+static const union AnimCmd *const sAnimTable_AshPuff[] =
 {
-    gUnknown_83A5EA4,
+    sAnim_AshPuff,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x100D,
+    .paletteTag = FLDEFF_PAL_TAG_ASH,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5EBC,
-    .images = gUnknown_83A5E7C,
+    .anims = sAnimTable_AshPuff,
+    .images = sPicTable_AshPuff,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PopOutOfAsh,
 };
 
-const struct SpritePalette gUnknown_83A5ED8 = { .data = gUnknown_839C588, .tag = 0x100D };
+const struct SpritePalette gSpritePalette_Ash = { .data = gFieldEffectPal_Ash, .tag = FLDEFF_PAL_TAG_ASH };
 
-const struct SpriteFrameImage gUnknown_83A5EE0[] =
+static const struct SpriteFrameImage sPicTable_AshLaunch[] =
 {
-    overworld_frame(gUnknown_839C828, 2, 2, 0),
-    overworld_frame(gUnknown_839C828, 2, 2, 1),
-    overworld_frame(gUnknown_839C828, 2, 2, 2),
-    overworld_frame(gUnknown_839C828, 2, 2, 3),
-    overworld_frame(gUnknown_839C828, 2, 2, 4),
+    overworld_frame(gFieldEffectObjectPic_AshLaunch, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_AshLaunch, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_AshLaunch, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_AshLaunch, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_AshLaunch, 2, 2, 4),
 };
 
-const union AnimCmd gUnknown_83A5F08[] =
+static const union AnimCmd sAnim_AshLaunch[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
@@ -1216,35 +1267,35 @@ const union AnimCmd gUnknown_83A5F08[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5F20[] = 
+static const union AnimCmd *const sAnimTable_AshLaunch[] =
 {
-    gUnknown_83A5F08,
+    sAnim_AshLaunch,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x100D,
+    .paletteTag = FLDEFF_PAL_TAG_ASH,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5F20,
-    .images = gUnknown_83A5EE0,
+    .anims = sAnimTable_AshLaunch,
+    .images = sPicTable_AshLaunch,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_LavaridgeGymWarp,
+    .callback = SpriteCB_AshLaunch,
 };
 
-const struct SpriteFrameImage gUnknown_83A5F3C[] =
+static const struct SpriteFrameImage sPicTable_Bubbles[] =
 {
-    overworld_frame(gUnknown_839CAA8, 2, 4, 0),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 1),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 2),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 3),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 4),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 5),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 6),
-    overworld_frame(gUnknown_839CAA8, 2, 4, 7),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 0),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 1),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 2),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 3),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 4),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 5),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 6),
+    overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 7),
 };
 
-const union AnimCmd gUnknown_83A5F7C[] =
+static const union AnimCmd sAnim_Bubbles[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
@@ -1257,29 +1308,29 @@ const union AnimCmd gUnknown_83A5F7C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5FA0[] = 
+static const union AnimCmd *const sAnimTable_Bubbles[] =
 {
-    gUnknown_83A5F7C,
+    sAnim_Bubbles,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x1004,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
     .oam = &gObjectEventBaseOam_16x32,
-    .anims = gUnknown_83A5FA0,
-    .images = gUnknown_83A5F3C,
+    .anims = sAnimTable_Bubbles,
+    .images = sPicTable_Bubbles,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateBubblesFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A5FBC[] =
+static const struct SpriteFrameImage sPicTable_SmallSparkle[] =
 {
-    overworld_frame(gUnknown_839D2A8, 2, 2, 0),
-    overworld_frame(gUnknown_839D2A8, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_SmallSparkle, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_SmallSparkle, 2, 2, 1),
 };
 
-const union AnimCmd gUnknown_83A5FCC[] =
+static const union AnimCmd sAnim_SmallSparkle[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(1, 5),
@@ -1287,20 +1338,20 @@ const union AnimCmd gUnknown_83A5FCC[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5FDC[] = 
+static const union AnimCmd *const sAnimTable_SmallSparkle[] =
 {
-    gUnknown_83A5FCC,
+    sAnim_SmallSparkle,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle =
 {
     .tileTag = SPRITE_INVALID_TAG,
-    .paletteTag = 0x100F,
+    .paletteTag = FLDEFF_PAL_TAG_SMALL_SPARKLE,
     .oam = &gObjectEventBaseOam_16x16,
-    .anims = gUnknown_83A5FDC,
-    .images = gUnknown_83A5FBC,
+    .anims = sAnimTable_SmallSparkle,
+    .images = sPicTable_SmallSparkle,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSparkleFieldEffect,
 };
 
-const struct SpritePalette gUnknown_83A5FF8 = { .data = gUnknown_839D3A8, .tag = 0x100F };
+const struct SpritePalette gSpritePalette_SmallSparkle = { .data = gFieldEffectPal_SmallSparkle, .tag = FLDEFF_PAL_TAG_SMALL_SPARKLE };

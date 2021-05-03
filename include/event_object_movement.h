@@ -196,7 +196,7 @@ u8 GetMoveDirectionAnimNum(u8 direction);
 // Exported data declarations
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
-extern const struct SpritePalette gUnknown_83A5348;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
 extern const struct OamData gObjectEventBaseOam_32x32;
 extern const u16 gUnknown_8398648[];

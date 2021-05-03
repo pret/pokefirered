@@ -1909,7 +1909,7 @@ u8 FldEff_LavaridgeGymWarp(void)
     return spriteId;
 }
 
-void SpriteCB_LavaridgeGymWarp(struct Sprite * sprite)
+void SpriteCB_AshLaunch(struct Sprite * sprite)
 {
     if (sprite->animEnded)
     {

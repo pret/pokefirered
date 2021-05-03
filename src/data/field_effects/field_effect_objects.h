@@ -1,62 +1,62 @@
 const struct SpritePalette gUnknown_83A5340 = { .data = gUnknown_8398FA8, .tag = 0x1004 };
 const struct SpritePalette gUnknown_83A5348 = { .data = gUnknown_8398FC8, .tag = 0x1005 };
 
-const union AnimCmd gUnknown_83A5350[] =
+const union AnimCmd gSpriteAnimCmd_FieldShadow0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_83A5358[] = 
+const union AnimCmd *const gSpriteAnimTable_FieldShadow[] =
 {
-    gUnknown_83A5350,
+    gSpriteAnimCmd_FieldShadow0,
 };
 
-const struct SpriteFrameImage gUnknown_83A535C[] = { obj_frame_tiles(gUnknown_8398048) };
-const struct SpriteFrameImage gUnknown_83A5364[] = { obj_frame_tiles(gUnknown_8398068) };
-const struct SpriteFrameImage gUnknown_83A536C[] = { obj_frame_tiles(gUnknown_83980A8) };
-const struct SpriteFrameImage gUnknown_83A5374[] = { obj_frame_tiles(gUnknown_8398128) };
+const struct SpriteFrameImage gSpriteFrameImage_FieldShadowS[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowS) };
+const struct SpriteFrameImage gSpriteFrameImage_FieldShadowM[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowM) };
+const struct SpriteFrameImage gSpriteFrameImage_FieldShadowL[] = {obj_frame_tiles(gSpriteImageGfx_FieldShadowL) };
+const struct SpriteFrameImage gSpriteFrameImage_FieldShadowXL[] = { obj_frame_tiles(gSpriteImageGfx_FieldShadowXL) };
 
-const struct SpriteTemplate gUnknown_83A537C =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowS =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_8x8,
-    .anims = gUnknown_83A5358,
-    .images = gUnknown_83A535C,
+    .anims = gSpriteAnimTable_FieldShadow,
+    .images = gSpriteFrameImage_FieldShadowS,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteTemplate gUnknown_83A5394 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowM =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_16x8,
-    .anims = gUnknown_83A5358,
-    .images = gUnknown_83A5364,
+    .anims = gSpriteAnimTable_FieldShadow,
+    .images = gSpriteFrameImage_FieldShadowM,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteTemplate gUnknown_83A53AC =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowL =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_32x8,
-    .anims = gUnknown_83A5358,
-    .images = gUnknown_83A536C,
+    .anims = gSpriteAnimTable_FieldShadow,
+    .images = gSpriteFrameImage_FieldShadowL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
-const struct SpriteTemplate gUnknown_83A53C4 =
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowXL =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_64x32,
-    .anims = gUnknown_83A5358,
-    .images = gUnknown_83A5374,
+    .anims = gSpriteAnimTable_FieldShadow,
+    .images = gSpriteFrameImage_FieldShadowXL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };

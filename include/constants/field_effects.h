@@ -72,4 +72,41 @@
 #define FLDEFF_DESTROY_DEOXYS_ROCK       68
 #define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos
 
+#define FLDEFFGFX_SHADOW_SMALL             0
+#define FLDEFFGFX_SHADOW_MEDIUM            1
+#define FLDEFFGFX_SHADOW_LARGE             2
+#define FLDEFFGFX_SHADOW_EXTRA_LARGE       3
+#define FLDEFFGFX_04                       4
+#define FLDEFFGFX_05                       5
+#define FLDEFFGFX_06                       6
+#define FLDEFFGFX_07                       7
+#define FLDEFFGFX_08                       8
+#define FLDEFFGFX_09                       9
+#define FLDEFFGFX_10                      10
+#define FLDEFFGFX_11                      11
+#define FLDEFFGFX_12                      12
+#define FLDEFFGFX_13                      13
+#define FLDEFFGFX_14                      14
+#define FLDEFFGFX_15                      15
+#define FLDEFFGFX_16                      16
+#define FLDEFFGFX_17                      17
+#define FLDEFFGFX_18                      18
+#define FLDEFFGFX_19                      19
+#define FLDEFFGFX_20                      20
+#define FLDEFFGFX_REFLECTION                      21
+#define FLDEFFGFX_22                      22
+#define FLDEFFGFX_23                      23
+#define FLDEFFGFX_24                      24
+#define FLDEFFGFX_25                      25
+#define FLDEFFGFX_FLY_BLOB                      26
+#define FLDEFFGFX_27                      27
+#define FLDEFFGFX_28                      28
+#define FLDEFFGFX_29                      29
+#define FLDEFFGFX_30                      30
+#define FLDEFFGFX_31                      31
+#define FLDEFFGFX_32                      32
+#define FLDEFFGFX_33                      33
+#define FLDEFFGFX_34                      34
+#define FLDEFFGFX_35                      35
+
 #endif // GUARD_CONSTANTS_FIELD_EFFECTS_H

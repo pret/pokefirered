@@ -13,7 +13,7 @@ RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
 PSSGFXDIR := graphics/pokemon_storage
-EVENTOBJGFXDIR := graphics/event_objects
+EVENTOBJGFXDIR := graphics/object_events
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
 SLOTMACHINEGFXDIR := graphics/slot_machine
@@ -431,6 +431,9 @@ $(PSSGFXDIR)/whiscash.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/whisca
 
 $(EVENTOBJGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 11
+
+$(EVENTOBJGFXDIR)/pics/effects/underwater_bubbles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8

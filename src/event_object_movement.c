@@ -495,24 +495,24 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #include "data/object_events/object_event_graphics_info.h"
 
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
-    {gUnknown_836D828, OBJ_EVENT_PAL_TAG_0},
-    {gUnknown_836D848, OBJ_EVENT_PAL_TAG_1},
-    {gUnknown_836D868, OBJ_EVENT_PAL_TAG_2},
-    {gUnknown_836D888, OBJ_EVENT_PAL_TAG_3},
-    {gUnknown_836D8A8, OBJ_EVENT_PAL_TAG_4},
-    {gUnknown_836D8C8, OBJ_EVENT_PAL_TAG_5},
-    {gUnknown_836D8E8, OBJ_EVENT_PAL_TAG_6},
-    {gUnknown_836D908, OBJ_EVENT_PAL_TAG_7},
-    {gUnknown_835B968, OBJ_EVENT_PAL_TAG_8},
-    {gUnknown_835E968, OBJ_EVENT_PAL_TAG_9},
-    {gUnknown_835E988, OBJ_EVENT_PAL_TAG_10},
-    {gUnknown_8398008, OBJ_EVENT_PAL_TAG_12},
-    {gUnknown_8398028, OBJ_EVENT_PAL_TAG_13},
-    {gUnknown_835B968, OBJ_EVENT_PAL_TAG_17},
-    {gUnknown_835E968, OBJ_EVENT_PAL_TAG_18},
-    {gUnknown_8394EA8, OBJ_EVENT_PAL_TAG_20},
-    {gUnknown_8395AE8, OBJ_EVENT_PAL_TAG_11},
-    {gUnknown_83952C8, OBJ_EVENT_PAL_TAG_21},
+    {gObjectEventPal_0,  OBJ_EVENT_PAL_TAG_0},
+    {gObjectEventPal_1,  OBJ_EVENT_PAL_TAG_1},
+    {gObjectEventPal_2,  OBJ_EVENT_PAL_TAG_2},
+    {gObjectEventPal_3,  OBJ_EVENT_PAL_TAG_3},
+    {gObjectEventPal_4,  OBJ_EVENT_PAL_TAG_4},
+    {gObjectEventPal_5,  OBJ_EVENT_PAL_TAG_5},
+    {gObjectEventPal_6,  OBJ_EVENT_PAL_TAG_6},
+    {gObjectEventPal_7,  OBJ_EVENT_PAL_TAG_7},
+    {gObjectEventPal_8,  OBJ_EVENT_PAL_TAG_8},
+    {gObjectEventPal_9,  OBJ_EVENT_PAL_TAG_9},
+    {gObjectEventPal_10, OBJ_EVENT_PAL_TAG_10},
+    {gObjectEventPal_12, OBJ_EVENT_PAL_TAG_12},
+    {gObjectEventPal_13, OBJ_EVENT_PAL_TAG_13},
+    {gObjectEventPal_8,  OBJ_EVENT_PAL_TAG_17},
+    {gObjectEventPal_9,  OBJ_EVENT_PAL_TAG_18},
+    {gObjectEventPal_20, OBJ_EVENT_PAL_TAG_20},
+    {gObjectEventPal_11, OBJ_EVENT_PAL_TAG_11},
+    {gObjectEventPal_21, OBJ_EVENT_PAL_TAG_21},
     {},
 };
 
@@ -521,6 +521,9 @@ const u16 gPlayerReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_9,
     OBJ_EVENT_PAL_TAG_9,
     OBJ_EVENT_PAL_TAG_9,
+};
+
+const u16 gUnusedPlayerReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_18,
     OBJ_EVENT_PAL_TAG_18,
     OBJ_EVENT_PAL_TAG_18,

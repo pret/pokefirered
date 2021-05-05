@@ -14,8 +14,8 @@
 #define RFUCMD_0x8900             0x8900
 #define RFUCMD_SEND_BLOCK_REQ     0xa100
 #define RFUCMD_SEND_HELD_KEYS     0xbe00
-#define RFUCMD_0xED00             0xee00
-#define RFUCMD_0xEE00             0xed00
+#define RFUCMD_0xED00             0xed00
+#define RFUCMD_0xEE00             0xee00
 
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub

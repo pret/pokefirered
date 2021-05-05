@@ -1031,7 +1031,7 @@ static void RfuHandleReceiveCommand(u8 unused)
             if (Rfu.cmd_6600_count == gRecvCmds[i][1])
                 Rfu.cmd_6600_recvd[i] = 1;
             break;
-        case RFUCMD_0xEE00:
+        case RFUCMD_0xED00:
             if (Rfu.parent_child == MODE_CHILD)
             {
                 if (gReceivedRemoteLinkPlayers)
@@ -1048,13 +1048,13 @@ static void RfuHandleReceiveCommand(u8 unused)
             }
             else
             {
-                RfuPrepareSendBuffer(RFUCMD_0xED00);
+                RfuPrepareSendBuffer(RFUCMD_0xEE00);
                 gSendCmd[1] = gRecvCmds[i][1];
                 gSendCmd[2] = gRecvCmds[i][2];
                 gSendCmd[3] = gRecvCmds[i][3];
             }
             break;
-        case RFUCMD_0xED00:
+        case RFUCMD_0xEE00:
             if (Rfu.parent_child == MODE_PARENT)
             {
                 Rfu.bm_DisconnectSlot |= gRecvCmds[i][1];
@@ -1166,9 +1166,9 @@ static void RfuPrepareSendBuffer(u16 command)
     case RFUCMD_SEND_HELD_KEYS:
         gSendCmd[1] = gHeldKeyCodeToSend;
         break;
-    case RFUCMD_0xED00:
-        break;
     case RFUCMD_0xEE00:
+        break;
+    case RFUCMD_0xED00:
         break;
     }
 }
@@ -2561,7 +2561,7 @@ static void sub_80FBDB8(u8 taskId)
 {
     if (gSendCmd[0] == 0 && !Rfu.unk_ce8)
     {
-        RfuPrepareSendBuffer(RFUCMD_0xEE00);
+        RfuPrepareSendBuffer(RFUCMD_0xED00);
         gSendCmd[1] = gTasks[taskId].data[0];
         gSendCmd[2] = gTasks[taskId].data[1];
         Rfu.playerCount -= gUnknown_843EC41[gTasks[taskId].data[0]];

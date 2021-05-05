@@ -93,6 +93,24 @@ enum {
     CMD_CLOSE_LINK,
     CMD_QUIT,
 };
+
+// Args for Cmd_BeginNormalPaletteFade
+#define bSelectedPals(i)  args[0 + i]
+#define bDelay            args[4]
+#define bStartY           args[5]
+#define bTargetY          args[6]
+#define bPalette(i)       args[7 + i]
+#define bCommunicateAfter args[9]
+
+// Args for Cmd_WaitPaletteFade
+#define bWaitFadeCommAfter args[0]
+
+// Args for Cmd_PrintMessage
+#define bMsgId        args[0]
+#define bFlags        args[1]
+#define bKeys(i)      args[2 + i]
+#define bNextCmdState args[4]
+
 #define F_MSG_CLEAR  (1 << 0)
 #define F_MSG_EXPAND (1 << 1)
 
@@ -1181,28 +1199,28 @@ static u32 Cmd_BeginNormalPaletteFade(struct BerryCrushGame * game, u8 *args)
     u16 color;
     u32 selectedPals[2];
 
-    selectedPals[0] = (u32)args[0];
+    selectedPals[0] = (u32)bSelectedPals(0);
 
-    selectedPals[1] = (u32)args[1];
+    selectedPals[1] = (u32)bSelectedPals(1);
     selectedPals[1] <<= 8;
     selectedPals[0] |= selectedPals[1];
 
-    selectedPals[1] = (u32)args[2];
+    selectedPals[1] = (u32)bSelectedPals(2);
     selectedPals[1] <<= 16;
     selectedPals[0] |= selectedPals[1];
 
-    selectedPals[1] = (u32)args[3];
+    selectedPals[1] = (u32)bSelectedPals(3);
     selectedPals[1] <<= 24;
     selectedPals[0] |= selectedPals[1];
 
-    args[0] = args[9];
+    bWaitFadeCommAfter = bCommunicateAfter;
 
-    color = args[8];
+    color = bPalette(1);
     color <<= 8;
-    color |= args[7];
+    color |= bPalette(0);
 
     gPaletteFade.bufferTransferDisabled = FALSE;
-    BeginNormalPaletteFade(selectedPals[0], args[4], args[5], args[6], color);
+    BeginNormalPaletteFade(selectedPals[0], bDelay, bStartY, bTargetY, color);
     UpdatePaletteFade();
     game->nextCmd = CMD_WAIT_FADE;
     return 0;
@@ -1215,7 +1233,7 @@ static u32 Cmd_WaitPaletteFade(struct BerryCrushGame * game, u8 *args)
     case 0:
         if (UpdatePaletteFade())
             return 0;
-        if(args[0] != 0)
+        if (bWaitFadeCommAfter)
             ++game->cmdState;
         else
             game->cmdState = 3;
@@ -1251,22 +1269,22 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame * game, u8 *args)
 
     u16 keys;
 
-    keys  = args[3];
+    keys  = bKeys(1);
     keys <<= 8;
-    keys |= args[2] << 0;
+    keys |= bKeys(0) << 0;
 
     switch (game->cmdState)
     {
     case 0:
         DrawDialogueFrame(0, FALSE);
-        if (args[1] & F_MSG_EXPAND)
+        if (bFlags & F_MSG_EXPAND)
         {
-            StringExpandPlaceholders(gStringVar4, sMessages[args[0]]);
+            StringExpandPlaceholders(gStringVar4, sMessages[bMsgId]);
             AddTextPrinterParameterized2(0, 2, gStringVar4, game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         else
         {
-            AddTextPrinterParameterized2(0, 2, sMessages[args[0]], game->textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, 2, sMessages[bMsgId], game->textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         CopyWindowToVram(0, COPYWIN_BOTH);
         break;
@@ -1283,10 +1301,10 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame * game, u8 *args)
             return 0;
         break;
     case 3:
-        if (args[1] & F_MSG_CLEAR)
+        if (bFlags & F_MSG_CLEAR)
             ClearDialogWindowAndFrame(0, TRUE);
         RunOrScheduleCommand(game->nextCmd, SCHEDULE_CMD, NULL);
-        game->cmdState = args[4];
+        game->cmdState = bNextCmdState;
         return 0;
     }
     ++game->cmdState;
@@ -2458,25 +2476,25 @@ static void ResetGame(struct BerryCrushGame * game)
 
 static void SetPaletteFadeArgs(u8 *args, bool8 communicateAfter, u32 selectedPals, s8 delay, u8 startY, u8 targetY, u16 palette)
 {
-    args[0] = ((u8 *)&selectedPals)[0];
-    args[1] = ((u8 *)&selectedPals)[1];
-    args[2] = ((u8 *)&selectedPals)[2];
-    args[3] = ((u8 *)&selectedPals)[3];
-    args[4] = delay;
-    args[5] = startY;
-    args[6] = targetY;
-    args[7] = ((u8 *)&palette)[0];
-    args[8] = ((u8 *)&palette)[1];
-    args[9] = communicateAfter;
+    bSelectedPals(0) = ((u8 *)&selectedPals)[0];
+    bSelectedPals(1) = ((u8 *)&selectedPals)[1];
+    bSelectedPals(2) = ((u8 *)&selectedPals)[2];
+    bSelectedPals(3) = ((u8 *)&selectedPals)[3];
+    bDelay = delay;
+    bStartY = startY;
+    bTargetY = targetY;
+    bPalette(0) = ((u8 *)&palette)[0];
+    bPalette(1) = ((u8 *)&palette)[1];
+    bCommunicateAfter = communicateAfter;
 }
 
 static void SetPrintMessageArgs(u8 *args, u8 stringId, u8 flags, u16 waitKeys, u8 followupCmd)
 {
-    args[0] = stringId;
-    args[1] = flags;
-    args[2] = ((u8 *)&waitKeys)[0];
-    args[3] = ((u8 *)&waitKeys)[1];
-    args[4] = followupCmd;
+    bMsgId = stringId;
+    bFlags = flags;
+    bKeys(0) = ((u8 *)&waitKeys)[0];
+    bKeys(1) = ((u8 *)&waitKeys)[1];
+    bNextCmdState = followupCmd;
 }
 
 // GF file break

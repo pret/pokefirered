@@ -8,7 +8,7 @@ void sub_815A5BC(s32 a0)
     struct Padded_U8 data[2];
     data[0].value = 1;
     data[1].value = a0;
-    RfuPrepareSend0x2f00(data);
+    Rfu_SendPacket(data);
 }
 
 u8 sub_815A5E8(s32 a0)
@@ -114,7 +114,7 @@ void sub_815A61C(struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0
     packet.unkA_3 = arg6;
     packet.unkB_1 = arg7;
     packet.unkB_0 = arg8;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 u32 sub_815A950(u32 unused, struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0_2C * arg1, struct DodrioSubstruct_31A0_2C * arg2, struct DodrioSubstruct_31A0_2C * arg3, struct DodrioSubstruct_31A0_2C * arg4, struct DodrioSubstruct_31A0_2C * arg5, u8 *arg6, u32 *arg7, u32 *arg8)
@@ -192,7 +192,7 @@ void sub_815AAD8(u8 arg0)
     struct UnkPacket3 packet;
     packet.id = 3;
     packet.unk4 = arg0;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 u32 sub_815AB04(u32 arg0, u8 *arg1)
@@ -223,7 +223,7 @@ void sub_815AB3C(u32 arg0)
     struct UnkPacket4 packet;
     packet.id = 4;
     packet.unk4 = arg0;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 u32 sub_815AB60(u32 arg0)

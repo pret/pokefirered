@@ -1345,7 +1345,7 @@ static void InitOverworldBgs(void)
     SetBgTilemapBuffer(2, gBGTilemapBuffers1);
     SetBgTilemapBuffer(3, gBGTilemapBuffers3);
     InitStandardTextBoxWindows();
-    ResetBg0();
+    InitTextBoxGfxAndPrinters();
     sub_8069348();
 }
 
@@ -1363,7 +1363,7 @@ static void InitOverworldBgs_NoResetHeap(void)
     SetBgTilemapBuffer(2, gBGTilemapBuffers1);
     SetBgTilemapBuffer(3, gBGTilemapBuffers3);
     InitStandardTextBoxWindows();
-    ResetBg0();
+    InitTextBoxGfxAndPrinters();
     sub_8069348();
 }
 

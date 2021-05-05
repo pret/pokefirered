@@ -244,7 +244,7 @@ static void sub_8147A34(u8 taskId)
             memset(packet, 0, sizeof(packet));
             packet[0] = 0x7FFF;
             packet[1] = data[12];
-            RfuPrepareSend0x2f00(packet);
+            Rfu_SendPacket(packet);
         }
     }
     else

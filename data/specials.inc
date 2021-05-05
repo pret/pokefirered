@@ -419,7 +419,7 @@ gSpecials:: @ 815FD60
 	def_special HelpSystem_Disable
 	def_special HelpSystem_Enable
 	def_special SetPostgameFlags
-	def_special CheckHasAtLeastOneBerry
+	def_special HasAtLeastOneBerry
 	def_special DisplayBerryPowderVendorMenu
 	def_special RemoveBerryPowderVendorMenu
 	def_special Script_HasEnoughBerryPowder

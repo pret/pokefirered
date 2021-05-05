@@ -2898,7 +2898,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (var5 == -2 || var5 == IN_UNION_ROOM)
                 {
                     data->playerSendBuffer[0] = IN_UNION_ROOM;
-                    RfuPrepareSend0x2f00(data->playerSendBuffer);
+                    Rfu_SendPacket(data->playerSendBuffer);
                     StringCopy(gStringVar4, gUnknown_845842C[gLinkPlayers[0].gender]);
                     data->state = 32;
                 }
@@ -2913,7 +2913,7 @@ static void Task_RunUnionRoom(u8 taskId)
                     else
                     {
                         data->playerSendBuffer[0] = sPlayerCurrActivity | IN_UNION_ROOM;
-                        RfuPrepareSend0x2f00(data->playerSendBuffer);
+                        Rfu_SendPacket(data->playerSendBuffer);
                         data->state = 27;
                     }
                 }
@@ -2942,7 +2942,7 @@ static void Task_RunUnionRoom(u8 taskId)
         data->playerSendBuffer[0] = ACTIVITY_TRADE | IN_UNION_ROOM;
         data->playerSendBuffer[1] = sUnionRoomTrade.species;
         data->playerSendBuffer[2] = sUnionRoomTrade.level;
-        RfuPrepareSend0x2f00(data->playerSendBuffer);
+        Rfu_SendPacket(data->playerSendBuffer);
         data->state = 29;
         break;
     case 29:
@@ -3130,32 +3130,32 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
                     data->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-                    RfuPrepareSend0x2f00(data->playerSendBuffer);
+                    Rfu_SendPacket(data->playerSendBuffer);
                     data->state = 10;
                     StringCopy(gStringVar4, gUnknown_84584C0);
                 }
                 else
                 {
-                    RfuPrepareSend0x2f00(data->playerSendBuffer);
+                    Rfu_SendPacket(data->playerSendBuffer);
                     data->state = 13;
                 }
             }
             else if (sPlayerCurrActivity == (ACTIVITY_CARD | IN_UNION_ROOM))
             {
-                RfuPrepareSend0x2f00(data->playerSendBuffer);
+                Rfu_SendPacket(data->playerSendBuffer);
                 ViewURoomPartnerTrainerCard(gStringVar4, data, MODE_PARENT);
                 data->state = 40;
             }
             else
             {
-                RfuPrepareSend0x2f00(data->playerSendBuffer);
+                Rfu_SendPacket(data->playerSendBuffer);
                 data->state = 13;
             }
             break;
         case 1:
         case -1:
             data->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-            RfuPrepareSend0x2f00(data->playerSendBuffer);
+            Rfu_SendPacket(data->playerSendBuffer);
             data->state = 10;
             GetYouDeclinedTheOfferMessage(gStringVar4, sPlayerCurrActivity);
             break;
@@ -3418,7 +3418,7 @@ void var_800D_set_xB(void)
 
 static void ReceiveUnionRoomActivityPacket(struct UnkStruct_URoom * uroom)
 {
-    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == RFU_COMMAND_0x2f00)
+    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == RFUCMD_SEND_PACKET)
     {
         uroom->recvActivityRequest[0] = gRecvCmds[1][1];
         if (gRecvCmds[1][1] == (ACTIVITY_TRADE | IN_UNION_ROOM))

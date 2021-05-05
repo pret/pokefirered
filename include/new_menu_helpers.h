@@ -20,7 +20,7 @@ void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8
 void ResetBgPositions(void);
 void InitStandardTextBoxWindows(void);
 void FreeAllOverworldWindowBuffers(void);
-void ResetBg0(void);
+void InitTextBoxGfxAndPrinters(void);
 u16 RunTextPrinters_CheckPrinter0Active(void);
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor);
 void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress);

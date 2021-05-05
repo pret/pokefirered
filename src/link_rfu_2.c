@@ -894,7 +894,7 @@ static void HandleSendFailure(u8 unused, u32 flags)
     {
         if (!(flags & 1))
         {
-            sResendBlock16[0] = RFU_COMMAND_0x8900 | i;
+            sResendBlock16[0] = RFUCMD_0x8900 | i;
             for (j = 0; j < 7; j++)
             {
                 sResendBlock16[j + 1] = (r10[12 * i + (j << 1) + 1] << 8) | r10[12 * i + (j << 1) + 0];
@@ -949,7 +949,7 @@ static void RfuFunc_SendKeysToRfu(void)
     {
         gUnknown_3001188++;
         gHeldKeyCodeToSend |= (gUnknown_3001188 << 8);
-        RfuPrepareSendBuffer(RFU_COMMAND_0xbe00);
+        RfuPrepareSendBuffer(RFUCMD_SEND_HELD_KEYS);
     }
 }
 
@@ -983,18 +983,18 @@ static void RfuHandleReceiveCommand(u8 unused)
     {
         switch (gRecvCmds[i][0] & 0xff00)
         {
-        case RFU_COMMAND_0x7800:
+        case RFUCMD_0x7800:
             if (Rfu.parent_child == MODE_CHILD && gReceivedRemoteLinkPlayers)
                 return;
             // fallthrough
-        case RFU_COMMAND_0x7700:
+        case RFUCMD_0x7700:
             if (gRfuLinkStatus->parentChild == MODE_CHILD)
             {
                 Rfu.playerCount = gRecvCmds[i][1];
                 Rfu.unk_cce = sub_80F9770((u8 *)(gRecvCmds[i] + 2));
             }
             break;
-        case RFU_COMMAND_0x8800:
+        case RFUCMD_0x8800:
             if (Rfu.cmd_8800_recvbuf[i].receiving == 0)
             {
                 Rfu.cmd_8800_recvbuf[i].next = 0;
@@ -1005,7 +1005,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 Rfu.unk_5c[i] = 0;
             }
             break;
-        case RFU_COMMAND_0x8900:
+        case RFUCMD_0x8900:
             if (Rfu.cmd_8800_recvbuf[i].receiving == 1)
             {
                 Rfu.cmd_8800_recvbuf[i].next = gRecvCmds[i][0] & 0xff;
@@ -1021,17 +1021,17 @@ static void RfuHandleReceiveCommand(u8 unused)
                 }
             }
             break;
-        case RFU_COMMAND_0xa100:
+        case RFUCMD_SEND_BLOCK_REQ:
             Rfu_InitBlockSend(gUnknown_843EC64[gRecvCmds[i][1]].buffer, (u16)gUnknown_843EC64[gRecvCmds[i][1]].size);
             break;
-        case RFU_COMMAND_0x5f00:
+        case RFUCMD_READY_CLOSE_LINK:
             Rfu.cmd5f00Ack[i] = 1;
             break;
-        case RFU_COMMAND_0x6600:
+        case RFUCMD_READY_EXIT_STANDBY:
             if (Rfu.cmd_6600_count == gRecvCmds[i][1])
                 Rfu.cmd_6600_recvd[i] = 1;
             break;
-        case RFU_COMMAND_0xed00:
+        case RFUCMD_0xEE00:
             if (Rfu.parent_child == MODE_CHILD)
             {
                 if (gReceivedRemoteLinkPlayers)
@@ -1048,13 +1048,13 @@ static void RfuHandleReceiveCommand(u8 unused)
             }
             else
             {
-                RfuPrepareSendBuffer(RFU_COMMAND_0xee00);
+                RfuPrepareSendBuffer(RFUCMD_0xED00);
                 gSendCmd[1] = gRecvCmds[i][1];
                 gSendCmd[2] = gRecvCmds[i][2];
                 gSendCmd[3] = gRecvCmds[i][3];
             }
             break;
-        case RFU_COMMAND_0xee00:
+        case RFUCMD_0xED00:
             if (Rfu.parent_child == MODE_PARENT)
             {
                 Rfu.bm_DisconnectSlot |= gRecvCmds[i][1];
@@ -1062,7 +1062,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 sub_80FA9D0(gRecvCmds[i][1]);
             }
             break;
-        case RFU_COMMAND_0xbe00:
+        case RFUCMD_SEND_HELD_KEYS:
             gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
             break;
         }
@@ -1138,16 +1138,16 @@ static void RfuPrepareSendBuffer(u16 command)
     gSendCmd[0] = command;
     switch (command)
     {
-    case RFU_COMMAND_0x8800:
+    case RFUCMD_0x8800:
         gSendCmd[1] = Rfu.cmd_8800_sendbuf.count;
         gSendCmd[2] = Rfu.cmd_8800_sendbuf.owner + 0x80;
         break;
-    case RFU_COMMAND_0xa100:
+    case RFUCMD_SEND_BLOCK_REQ:
         if (Cmd8000recvIsFinished())
             gSendCmd[1] = Rfu.cmdA100_blockRequestType;
         break;
-    case RFU_COMMAND_0x7700:
-    case RFU_COMMAND_0x7800:
+    case RFUCMD_0x7700:
+    case RFUCMD_0x7800:
         tmp = Rfu.bm_PartnerFlags ^ Rfu.bm_DisconnectSlot;
         Rfu.playerCount = gUnknown_843EC41[tmp] + 1;
         gSendCmd[1] = Rfu.playerCount;
@@ -1155,30 +1155,30 @@ static void RfuPrepareSendBuffer(u16 command)
         for (i = 0; i < RFU_CHILD_MAX; i++)
             buff[i] = Rfu.linkPlayerIdx[i];
         break;
-    case RFU_COMMAND_0x6600:
-    case RFU_COMMAND_0x5f00:
+    case RFUCMD_READY_EXIT_STANDBY:
+    case RFUCMD_READY_CLOSE_LINK:
         gSendCmd[1] = Rfu.cmd_6600_count;
         break;
-    case RFU_COMMAND_0x2f00:
+    case RFUCMD_SEND_PACKET:
         for (i = 0; i < 6; i++)
             gSendCmd[1 + i] = Rfu.unk_f2[i];
         break;
-    case RFU_COMMAND_0xbe00:
+    case RFUCMD_SEND_HELD_KEYS:
         gSendCmd[1] = gHeldKeyCodeToSend;
         break;
-    case RFU_COMMAND_0xee00:
+    case RFUCMD_0xED00:
         break;
-    case RFU_COMMAND_0xed00:
+    case RFUCMD_0xEE00:
         break;
     }
 }
 
-void RfuPrepareSend0x2f00(void * data)
+void Rfu_SendPacket(void * data)
 {
     if (gSendCmd[0] == 0 && !RfuIsErrorStatus1or2())
     {
         memcpy(Rfu.unk_f2, data, sizeof(Rfu.unk_f2));
-        RfuPrepareSendBuffer(RFU_COMMAND_0x2f00);
+        RfuPrepareSendBuffer(RFUCMD_SEND_PACKET);
     }
 }
 
@@ -1208,7 +1208,7 @@ bool32 Rfu_InitBlockSend(const u8 *src, size_t size)
             memcpy(gBlockSendBuffer, src, size);
         Rfu.cmd_8800_sendbuf.payload = gBlockSendBuffer;
     }
-    RfuPrepareSendBuffer(RFU_COMMAND_0x8800);
+    RfuPrepareSendBuffer(RFUCMD_0x8800);
     Rfu.RfuFunc = RfuFunc_HandleBlockSend;
     Rfu.unk_5b = 0;
     return TRUE;
@@ -1218,7 +1218,7 @@ static void RfuFunc_HandleBlockSend(void)
 {
     if (gSendCmd[0] == 0)
     {
-        RfuPrepareSendBuffer(RFU_COMMAND_0x8800);
+        RfuPrepareSendBuffer(RFUCMD_0x8800);
         if (Rfu.parent_child == MODE_PARENT)
         {
             if (++Rfu.unk_5b > 2)
@@ -1226,7 +1226,7 @@ static void RfuFunc_HandleBlockSend(void)
         }
         else
         {
-            if ((gRecvCmds[GetMultiplayerId()][0] & 0xff00) == RFU_COMMAND_0x8800)
+            if ((gRecvCmds[GetMultiplayerId()][0] & 0xff00) == RFUCMD_0x8800)
                 Rfu.RfuFunc = RfuFunc_SendNextBlock;
         }
     }
@@ -1235,7 +1235,7 @@ static void RfuFunc_SendNextBlock(void)
 {
     s32 i;
     const u8 *src = Rfu.cmd_8800_sendbuf.payload;
-    gSendCmd[0] = RFU_COMMAND_0x8900 | Rfu.cmd_8800_sendbuf.next;
+    gSendCmd[0] = RFUCMD_0x8900 | Rfu.cmd_8800_sendbuf.next;
     for (i = 0; i < 7; i++)
         gSendCmd[i + 1] = (src[(i << 1) + Rfu.cmd_8800_sendbuf.next * 12 + 1] << 8) | src[(i << 1) + Rfu.cmd_8800_sendbuf.next * 12 + 0];
     Rfu.cmd_8800_sendbuf.next++;
@@ -1253,7 +1253,7 @@ static void RfuFunc_SendLastBlock(void)
     s32 i;
     if (Rfu.parent_child == MODE_CHILD)
     {
-        gSendCmd[0] = RFU_COMMAND_0x8900 | (Rfu.cmd_8800_sendbuf.count - 1);
+        gSendCmd[0] = RFUCMD_0x8900 | (Rfu.cmd_8800_sendbuf.count - 1);
         for (i = 0; i < 7; i++)
             gSendCmd[i + 1] = (src[(i << 1) + (Rfu.cmd_8800_sendbuf.count - 1) * 12 + 1] << 8) | src[(i << 1) + (Rfu.cmd_8800_sendbuf.count - 1) * 12 + 0];
         if ((u8)gRecvCmds[mpId][0] == Rfu.cmd_8800_sendbuf.count - 1)
@@ -1274,7 +1274,7 @@ static void RfuFunc_SendLastBlock(void)
 bool8 LinkRfu_PrepareCmd0xA100(u8 blockRequestType)
 {
     Rfu.cmdA100_blockRequestType = blockRequestType;
-    RfuPrepareSendBuffer(RFU_COMMAND_0xa100);
+    RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_REQ);
     return TRUE;
 }
 
@@ -1340,7 +1340,7 @@ static void RfuFunc_BuildCommand5F00(void)
 {
     if (gSendCmd[0] == 0 && !Rfu.unk_ce8)
     {
-        RfuPrepareSendBuffer(RFU_COMMAND_0x5f00);
+        RfuPrepareSendBuffer(RFUCMD_READY_CLOSE_LINK);
         Rfu.RfuFunc = RfuFunc_WaitAck5F00;
     }
 }
@@ -1370,7 +1370,7 @@ static void RfuFunc_Send6600_3(void)
     {
         if (Rfu.unk_124.count == 0 && Rfu.cmd_6600_timer > 60)
         {
-            RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
+            RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
             Rfu.cmd_6600_timer = 0;
         }
     }
@@ -1394,7 +1394,7 @@ static void RfuFunc_Send6600_2(void)
 {
     if (Rfu.unk_124.count == 0 && gSendCmd[0] == 0)
     {
-        RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
+        RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
         Rfu.RfuFunc = RfuFunc_Send6600_3;
     }
 }
@@ -1408,7 +1408,7 @@ static void RfuFunc_Send6600_1(void)
     {
         if (Rfu.unk_124.count == 0 && gSendCmd[0] == 0)
         {
-            RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
+            RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
             Rfu.RfuFunc = RfuFunc_Send6600_3;
         }
     }
@@ -1424,14 +1424,14 @@ static void RfuFunc_Send6600_1(void)
         {
             if (Rfu.unk_124.count == 0 && gSendCmd[0] == 0)
             {
-                RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
+                RfuPrepareSendBuffer(RFUCMD_READY_EXIT_STANDBY);
                 Rfu.RfuFunc = RfuFunc_Send6600_2;
             }
         }
     }
 }
 
-void LinkRfu_SetRfuFuncToSend6600(void)
+void Rfu_SetLinkStandbyCallback(void)
 {
     if (Rfu.RfuFunc == NULL)
     {
@@ -1638,9 +1638,9 @@ static void sub_80FA834(u8 taskId)
         if (Rfu.parent_child == MODE_PARENT)
         {
             if (gReceivedRemoteLinkPlayers)
-                RfuPrepareSendBuffer(RFU_COMMAND_0x7800);
+                RfuPrepareSendBuffer(RFUCMD_0x7800);
             else
-                RfuPrepareSendBuffer(RFU_COMMAND_0x7700);
+                RfuPrepareSendBuffer(RFUCMD_0x7700);
             gTasks[taskId].data[0] = 101;
         }
         else
@@ -1660,7 +1660,7 @@ static void sub_80FA834(u8 taskId)
             if (Cmd8000recvIsFinished())
             {
                 Rfu.cmdA100_blockRequestType = 0;
-                RfuPrepareSendBuffer(RFU_COMMAND_0xa100);
+                RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_REQ);
                 gTasks[taskId].data[0]++;
             }
         }
@@ -1750,7 +1750,7 @@ static void Task_ExchangeLinkPlayers(u8 taskId)
         if (gSendCmd[0] == 0)
         {
             ResetBlockReceivedFlag(r4);
-            RfuPrepareSendBuffer(RFU_COMMAND_0x7800);
+            RfuPrepareSendBuffer(RFUCMD_0x7800);
             gTasks[taskId].data[0]++;
         }
         break;
@@ -2393,7 +2393,7 @@ void RFUVSync(void)
     rfu_LMAN_syncVBlank();
 }
 
-void sub_80FBA44(void)
+void ClearRecvCommands(void)
 {
     CpuFill32(0, gRecvCmds, sizeof(gRecvCmds));
 }
@@ -2561,7 +2561,7 @@ static void sub_80FBDB8(u8 taskId)
 {
     if (gSendCmd[0] == 0 && !Rfu.unk_ce8)
     {
-        RfuPrepareSendBuffer(RFU_COMMAND_0xed00);
+        RfuPrepareSendBuffer(RFUCMD_0xEE00);
         gSendCmd[1] = gTasks[taskId].data[0];
         gSendCmd[2] = gTasks[taskId].data[1];
         Rfu.playerCount -= gUnknown_843EC41[gTasks[taskId].data[0]];

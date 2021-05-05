@@ -4888,9 +4888,9 @@ extern const u32 gFile_graphics_battle_transitions_vs_frame_palette[];
 extern const u32 gFile_graphics_battle_transitions_vs_frame_tilemap[];
 
 // berry_crush
-extern const u16 gUnknown_8EAFEA0[];
-extern const u32 gUnknown_8EAFFC0[];
-extern const u32 gUnknown_8EB0ADC[];
+extern const u16 gBerryCrush_Crusher_Pal[];
+extern const u32 gBerryCrush_Crusher_Gfx[];
+extern const u32 gBerryCrush_Crusher_Tilemap[];
 
 // easy_chat_3
 extern const u32 gEasyChatWindow_Gfx[];

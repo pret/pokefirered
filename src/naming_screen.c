@@ -496,7 +496,7 @@ static void NamingScreen_InitBGs(void)
     ChangeBgY(3, 0, 0);
 
     InitStandardTextBoxWindows();
-    ResetBg0();
+    InitTextBoxGfxAndPrinters();
 
     for (i = 0; i < NELEMS(gUnknown_83E22A0) - 1; i++)
         sNamingScreenData->windows[i] = AddWindow(&gUnknown_83E22A0[i]);

@@ -274,7 +274,7 @@ void LoadWirelessStatusIndicatorSpriteGfx(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_8009FE8(void);
 void ClearLinkCallback_2(void);
-void LinkRfu_SetRfuFuncToSend6600(void);
+void Rfu_SetLinkStandbyCallback(void);
 void IntlConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
 bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType);

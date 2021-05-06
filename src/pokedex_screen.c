@@ -1187,10 +1187,10 @@ static void MoveCursorFunc_DexModeSelect(s32 itemIndex, bool8 onInit, struct Lis
 static void ItemPrintFunc_DexModeSelect(u8 windowId, s32 itemId, u8 y)
 {
     u32 itemId_ = itemId;
-    if (itemId_ > 8 || sPokedexScreenData->unlockedCategories & (1 << itemId_))
-        ListMenuOverrideSetColors(1, 0, 3);
+    if (itemId_ >= DEX_CATEGORY_COUNT || sPokedexScreenData->unlockedCategories & (1 << itemId_))
+        ListMenuOverrideSetColors(TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY);
     else
-        ListMenuOverrideSetColors(10, 0, 11);
+        ListMenuOverrideSetColors(TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_2);
 }
 
 static void Task_DexScreen_NumericalOrder(u8 taskId)

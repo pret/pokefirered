@@ -767,7 +767,7 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
 {
     s16 * data = gTasks[taskId].data;
 
-    ListMenuSetUnkIndicatorsStructField(data[0], 16, 1);
+    ListMenuSetTemplateField(data[0], LISTFIELD_CURSORKIND, 1);
     data[1] = pos;
     sStateDataPtr->moveModeOrigPos = pos;
     StringCopy(gStringVar1, ItemId_GetName(ItemPc_GetItemIdBySlotId(data[1])));

@@ -15,14 +15,12 @@ endif
 
 ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
 include $(TOOLCHAIN)/base_tools
-LIBSUBDIR := thumb
 else
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 export CC := $(PREFIX)gcc
 export AS := $(PREFIX)as
-LIBSUBDIR := thumb/nofp
 endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld

@@ -1,6 +1,7 @@
 #include "global.h"
+#include "math_util.h"
 
-s16 mulfx16(s16 x, s16 y)
+fx16 mulfx16(fx16 x, fx16 y)
 {
     s32 result;
 
@@ -10,7 +11,7 @@ s16 mulfx16(s16 x, s16 y)
     return result;
 }
 
-s16 mulfxn16(u8 s, s16 x, s16 y)
+fxn16 mulfxn16(u8 s, fxn16 x, fxn16 y)
 {
     s32 result;
 
@@ -20,7 +21,7 @@ s16 mulfxn16(u8 s, s16 x, s16 y)
     return result;
 }
 
-s32 mulfx32(s32 x, s32 y)
+fx32 mulfx32(fx32 x, fx32 y)
 {
     s64 result;
 
@@ -30,7 +31,7 @@ s32 mulfx32(s32 x, s32 y)
     return result;
 }
 
-s16 divfx16(s16 x, s16 y)
+fx16 divfx16(fx16 x, fx16 y)
 {
     if (y == 0)
     {
@@ -39,7 +40,7 @@ s16 divfx16(s16 x, s16 y)
     return (x << 8) / y;
 }
 
-s16 divfxn16(u8 s, s16 x, s16 y)
+fxn16 divfxn16(u8 s, fxn16 x, fxn16 y)
 {
     if (y == 0)
     {
@@ -48,7 +49,7 @@ s16 divfxn16(u8 s, s16 x, s16 y)
     return (x << s) / y;
 }
 
-s32 divfx32(s32 x, s32 y)
+fx32 divfx32(fx32 x, fx32 y)
 {
     s64 _x;
 
@@ -61,7 +62,7 @@ s32 divfx32(s32 x, s32 y)
     return _x / y;
 }
 
-s16 invfx16(s16 y)
+fx16 invfx16(fx16 y)
 {
     s32 x;
 
@@ -69,7 +70,7 @@ s16 invfx16(s16 y)
     return x / y;
 }
 
-s16 invfxn16(u8 s, s16 y)
+fxn16 invfxn16(u8 s, fxn16 y)
 {
     s32 x;
 
@@ -77,7 +78,7 @@ s16 invfxn16(u8 s, s16 y)
     return x / y;
 }
 
-s32 invfx32(s32 y)
+fx32 invfx32(fx32 y)
 {
     s64 x;
 

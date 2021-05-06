@@ -209,9 +209,9 @@ struct BerryCrushGame_Player
 struct BerryCrushGame_LocalState
 {
     u16 sendFlag;
-    u8 endGame:1;
-    u8 bigSparkle:1;
-    u8 pushedAButton:1;
+    bool8 endGame:1;
+    bool8 bigSparkle:1;
+    bool8 pushedAButton:1;
     u8 playerPressedAFlags:5;
     s8 vibration;
     u16 depth;
@@ -224,27 +224,15 @@ struct BerryCrushGame_LinkState
 {
     u16 rfuCmd;
     u16 sendFlag;
-    u8 endGame:1;
-    u8 bigSparkle:1;
-    u8 pushedAButton:1;
+    bool8 endGame:1;
+    bool8 bigSparkle:1;
+    bool8 pushedAButton:1;
     u8 playerPressedAFlags:5;
     s8 vibration;
     u16 depth;
     u16 timer;
     u16 inputFlags;
     u16 sparkleAmount;
-};
-
-struct BerryCrushGame_40
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-    s16 unkC;
-    s16 unkE;
 };
 
 // Flags for the inputFlags field
@@ -331,11 +319,11 @@ struct BerryCrushGame
     s32 powder;
     s32 targetDepth;
     u8 newDepth;
-    u8 noRoomForPowder:1; // Never read
-    u8 newRecord:1;
-    u8 playedSound:1;
-    u8 endGame:1;
-    u8 bigSparkle:1;
+    bool8 noRoomForPowder:1; // Never read
+    bool8 newRecord:1;
+    bool8 playedSound:1;
+    bool8 endGame:1;
+    bool8 bigSparkle:1;
     u8 sparkleAmount:3;
     u16 leaderTimer;
     u16 timer;
@@ -640,7 +628,7 @@ static const struct WindowTemplate sWindowTemplates_Results[] = {
 };
 
 static const u8 sResultsWindowHeights[][MAX_RFU_PLAYERS - 1] = {
-    {  6,  8,  9, 11 },  // "Preses" and "Neatness/Cooperative/Power" pages
+    {  6,  8,  9, 11 },  // "Presses" and "Neatness/Cooperative/Power" pages
     { 12, 14, 15, 16 },  // "Crushing" page
 };
 
@@ -1075,28 +1063,28 @@ static void SaveResults(void)
     case 2:
         if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
         {
-            sGame->newRecord = 1;
+            sGame->newRecord = TRUE;
             gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = sGame->pressingSpeed;
         }
         break;
     case 3:
         if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
         {
-            sGame->newRecord = 1;
+            sGame->newRecord = TRUE;
             gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = sGame->pressingSpeed;
         }
         break;
     case 4:
         if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
         {
-            sGame->newRecord = 1;
+            sGame->newRecord = TRUE;
             gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = sGame->pressingSpeed;
         }
         break;
     case 5:
         if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
         {
-            sGame->newRecord = 1;
+            sGame->newRecord = TRUE;
             gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = sGame->pressingSpeed;
         }
         break;

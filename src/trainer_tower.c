@@ -481,7 +481,7 @@ void InitTrainerTowerBattleStruct(void)
 
     sTrainerTowerOpponent->battleType = CURR_FLOOR.challengeType;
     sTrainerTowerOpponent->facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
-    sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].unkC;
+    sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].textColor;
     SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
     FreeTrainerTowerDataStruct();
 }

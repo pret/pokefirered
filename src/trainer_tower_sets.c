@@ -10,7 +10,7 @@
 
 // Dummy strings must be declared explicitly for the sake of modern gcc
 #define DUMMY_TOWER_MON(iv) {.hpIV = iv, .attackIV = iv, .defenseIV = iv, .speedIV = iv, .spAttackIV = iv, .spDefenseIV = iv, .nickname = _("$$$$$$$$$$")}
-#define DUMMY_TOWER_TEAM(iv) {.name = _(""), .unkC = 1, .speechBefore = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .speechWin = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .speechLose = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .speechAfter = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .mons = {DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv)}}
+#define DUMMY_TOWER_TEAM(iv) {.name = _(""), .textColor = 1, .speechBefore = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .speechWin = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .speechLose = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .speechAfter = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF}, .mons = {DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv), DUMMY_TOWER_MON(iv)}}
 
 static const struct TrainerTowerFloor sTrainerTowerFloor_Single_4 = {
 	.id = 1,
@@ -21,7 +21,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_4 = {
 	    {
 			.name = _("COLE"),
 			.facilityClass = FACILITY_CLASS_YOUNGSTER_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_AHAHA, EC_WORD_YOU_RE, EC_WORD_NOT, EC_WORD_GOING, EC_WORD_ANYWHERE, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_ALL_RIGHT, EC_WORD_EXCL, EC_WORD_BYE_BYE, EC_WORD_EXCL, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_HIYAH, EC_WORD_EXCL_EXCL, EC_WORD_DONE, EC_WORD_IN, EC_WORD_TOTALLY, EC_WORD_EXCL_EXCL},
@@ -176,7 +176,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_7 = {
 	    {
 			.name = _("JAC"),
 			.facilityClass = FACILITY_CLASS_BURGLAR,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_A, EC_MOVE2(THIEF), EC_WORD_EXCL, EC_WORD_GIVE_ME, EC_WORD_SOMETHING},
 			.speechWin = {EC_WORD_YOU_VE, EC_WORD_GOT, EC_WORD_NOTHING, EC_WORD_THAT, EC_WORD_I, EC_WORD_WANT},
 			.speechLose = {EC_WORD_EEK, EC_WORD_EXCL_EXCL, EC_WORD_I_AM, EC_WORD_SORRY, EC_WORD_I, EC_WORD_SURRENDER},
@@ -331,7 +331,7 @@ static const struct TrainerTowerFloor gUnknown_847B36C = {
 	    {
 			.name = _("MILY"),
 			.facilityClass = FACILITY_CLASS_PSYCHIC_4,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_LOOK, EC_WORD_AT, EC_WORD_MY, EC_WORD_POKEMON, EC_MOVE2(SUPERPOWER), EC_WORD_EXCL},
 			.speechWin = {EC_WORD_ISN_T, EC_WORD_IT, EC_WORD_INCREDIBLE, EC_WORD_QUES, EC_WORD_POKEMON, EC_WORD_POWER},
 			.speechLose = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_AN, EC_WORD_AWFUL, EC_MOVE(NIGHTMARE), EC_WORD_ELLIPSIS_EXCL},
@@ -486,7 +486,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_5 = {
 	    {
 			.name = _("JOS & ANNE"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_LOSE, EC_WORD_TO, EC_WORD_YOU, EC_WORD_HERE},
 			.speechWin = {EC_WORD_VERY, EC_WORD_WELL, EC_WORD_DONE, EC_WORD_EXCL, EC_WORD_GOOD, EC_WORD_BATTLE},
 			.speechLose = {EC_WORD_UNBELIEVABLE, EC_WORD_ELLIPSIS, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
@@ -629,7 +629,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_5 = {
 		{
 			.name = _("JOS & ANNE"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_HERE_GOES, EC_WORD_EXCL_EXCL, EC_WORD_GET, EC_WORD_READY, EC_WORD_TO, EC_WORD_LOSE},
 			.speechWin = {EC_WORD_PERFECT, EC_WORD_EXCL, EC_WORD_WE, EC_WORD_GET, EC_WORD_THE, EC_WORD_WIN},
 			.speechLose = {EC_WORD_LOST, EC_WORD_QUES_EXCL, EC_WORD_YOU, EC_WORD_MUST_BE, EC_WORD_JOKING, EC_WORD_EXCL},
@@ -783,7 +783,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_6 = {
 	    {
 			.name = _("EMY & ALEK"),
 			.facilityClass = FACILITY_CLASS_YOUNG_COUPLE_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_SO, EC_WORD_LOST, EC_WORD_IN, EC_WORD_LOVEY_DOVEY, EC_WORD_HAPPINESS},
 			.speechWin = {EC_WORD_OH, EC_WORD_OH, EC_WORD_HE, EC_WORD_IS, EC_WORD_REALLY, EC_WORD_AWESOME},
 			.speechLose = {EC_WORD_AIYEEH, EC_WORD_EXCL_EXCL, EC_WORD_YOU_RE, EC_WORD_NOT, EC_WORD_SERIOUS, EC_WORD_QUES},
@@ -926,7 +926,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_6 = {
 		{
 			.name = _("EMY & ALEK"),
 			.facilityClass = FACILITY_CLASS_YOUNG_COUPLE_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_GIDDY, EC_WORD_WITH, EC_WORD_LOVEY_DOVEY, EC_WORD_JOY, EC_WORD_EXCL_EXCL},
 			.speechWin = {EC_WORD_SIGH, EC_WORD_ELLIPSIS, EC_WORD_MY, EC_WORD_GIRL, EC_WORD_IS, EC_WORD_CUTE},
 			.speechLose = {EC_WORD_WAAAH, EC_WORD_EXCL_EXCL, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_BE, EC_WORD_SERIOUS},
@@ -1080,7 +1080,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_2 = {
 	    {
 			.name = _("JO & HALEY"),
 			.facilityClass = FACILITY_CLASS_CRUSH_KIN,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_WE_RE, EC_WORD_USING, EC_WORD_THAT, EC_WORD_STRATEGY, EC_WORD_OKAY, EC_WORD_QUES},
 			.speechWin = {EC_WORD_YAY, EC_WORD_WE, EC_WORD_WON, EC_WORD_EXCL, EC_WORD_SORRY, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_AWW, EC_WORD_EXCL, EC_WORD_THAT_WAS, EC_WORD_REALLY, EC_WORD_TERRIBLE, EC_WORD_EXCL},
@@ -1223,7 +1223,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_2 = {
 		{
 			.name = _("JO & HALEY"),
 			.facilityClass = FACILITY_CLASS_CRUSH_KIN,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_YOU, EC_WORD_YOU, EC_WORD_YOU, EC_WORD_BETTER, EC_WORD_NOT, EC_WORD_WIN},
 			.speechWin = {EC_WORD_YOU_RE, EC_WORD_NOT, EC_WORD_JOKING, EC_WORD_QUES, EC_WORD_WE, EC_WORD_WON},
 			.speechLose = {EC_WORD_WIMPY, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_WERE, EC_WORD_WEAK, EC_WORD_ELLIPSIS},
@@ -1377,7 +1377,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_1 = {
 	    {
 			.name = _("JORDY"),
 			.facilityClass = FACILITY_CLASS_BIKER,
-			.unkC = 3,
+			.textColor = 3,
 			.speechBefore = {EC_WORD_DON_T, EC_WORD_MAKE, EC_WORD_ME, EC_WORD_GIGGLE, EC_WORD_YOU, EC_WORD_PUSHOVER},
 			.speechWin = {EC_WORD_WHAT, EC_WORD_A_LITTLE, EC_WORD_PUSHOVER, EC_WORD_YOU, EC_WORD_ARE, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_YOU, EC_WORD_WERE, EC_WORD_READY, EC_WORD_TO, EC_WORD_ROCK, EC_WORD_EXCL},
@@ -1520,7 +1520,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_1 = {
 		{
 			.name = _("ERNEST"),
 			.facilityClass = FACILITY_CLASS_BIKER,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_IT_S, EC_WORD_SLEEP, EC_WORD_TIME, EC_WORD_FOR, EC_WORD_CHILDREN, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_NOT, EC_WORD_GUTSY, EC_WORD_ENOUGH, 0xFFFF, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_WHY, EC_WORD_DID, EC_WORD_YOU, EC_WORD_CRUSH, EC_WORD_ME, EC_WORD_QUES},
@@ -1663,7 +1663,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_1 = {
 		{
 			.name = _("GABRIEL"),
 			.facilityClass = FACILITY_CLASS_CUE_BALL,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_YAHOO, EC_WORD_EXCL, EC_WORD_HERE_I_COME, EC_WORD_TO, EC_WORD_SWARM, EC_WORD_YOU},
 			.speechWin = {EC_WORD_I_AM, EC_WORD_INVINCIBLE, EC_WORD_YOU, EC_WORD_GOT, EC_WORD_THAT, EC_WORD_QUES},
 			.speechLose = {EC_WORD_WHAT, EC_WORD_WAS, EC_WORD_THAT, EC_WORD_QUES, 0xFFFF, 0xFFFF},
@@ -1816,7 +1816,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_2 = {
 	    {
 			.name = _("MIKE"),
 			.facilityClass = FACILITY_CLASS_HIKER_2,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_FULL, EC_WORD_OF, EC_WORD_POWER},
 			.speechWin = {EC_WORD_WHAT_S_UP_QUES, EC_WORD_WHERE, EC_WORD_IS, EC_WORD_YOUR, EC_WORD_POWER, EC_WORD_QUES},
 			.speechLose = {EC_WORD_YOU, EC_WORD_GOT, EC_WORD_ME, EC_WORD_WITH, EC_WORD_YOUR, EC_MOVE2(FAKE_OUT)},
@@ -1959,7 +1959,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_2 = {
 		{
 			.name = _("REBECCA"),
 			.facilityClass = FACILITY_CLASS_CRUSH_GIRL,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_I, EC_WORD_WILL, EC_WORD_WIN, EC_WORD_EXCL_EXCL, 0xFFFF, 0xFFFF},
 			.speechWin = {EC_WORD_IT_S, EC_WORD_TOO, EC_WORD_BAD, EC_WORD_BUT, EC_WORD_I_AM, EC_WORD_OVERWHELMING},
 			.speechLose = {EC_WORD_ARRGH, EC_WORD_EXCL_EXCL, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
@@ -2102,7 +2102,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_2 = {
 		{
 			.name = _("NICOLAS"),
 			.facilityClass = FACILITY_CLASS_BLACK_BELT_2,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_WHERE, EC_WORD_YOU, EC_WORD_STOP, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_YOU_RE, EC_WORD_TOO_WEAK, EC_WORD_TO, EC_WORD_EVER, EC_WORD_BEAT, EC_WORD_ME},
 			.speechLose = {EC_WORD_WHY, EC_WORD_COULDN_T, EC_WORD_I, EC_WORD_BEAT, EC_WORD_YOU, EC_WORD_QUES},
@@ -2255,7 +2255,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_5 = {
 	    {
 			.name = _("JOEY"),
 			.facilityClass = FACILITY_CLASS_CAMPER_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_SCARY, EC_WORD_STRONG, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_WERE, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_TOO, EC_WORD_MUCH, EC_WORD_QUES},
 			.speechLose = {EC_WORD_YOUR, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_WAY, EC_WORD_TOO_STRONG, EC_WORD_EXCL},
@@ -2410,7 +2410,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_8 = {
 	    {
 			.name = _("LILY"),
 			.facilityClass = FACILITY_CLASS_PKMN_BREEDER_3,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I, EC_WORD_WANT, EC_WORD_SOMETHING, EC_WORD_IN, EC_MOVE(RETURN), EC_WORD_EXCL},
 			.speechWin = {EC_WORD_I, EC_WORD_BELIEVE, EC_WORD_IN, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_I, EC_WORD_NEED, EC_WORD_SOMETHING, EC_WORD_IN, EC_MOVE(RETURN), EC_WORD_ELLIPSIS},
@@ -2565,7 +2565,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_2 = {
 	    {
 			.name = _("BRANDON"),
 			.facilityClass = FACILITY_CLASS_BUG_CATCHER_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_POISON, EC_WORD_IS, EC_WORD_JUST, EC_WORD_SO, EC_WORD_AWFUL, EC_WORD_ISN_T_IT_QUES},
 			.speechWin = {EC_WORD_SEE, EC_WORD_QUES, EC_WORD_ISN_T, EC_WORD_POISON, EC_WORD_TERRIBLE, EC_WORD_QUES},
 			.speechLose = {EC_WORD_HUH_QUES, EC_WORD_OUR, EC_WORD_POISON, EC_WORD_DIDN_T, EC_WORD_WORK, EC_WORD_QUES},
@@ -2720,7 +2720,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_3 = {
 	    {
 			.name = _("RIC & RENE"),
 			.facilityClass = FACILITY_CLASS_CRUSH_KIN,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_MY, EC_WORD_BIG, EC_WORD_BROTHER, EC_WORD_IS, EC_WORD_REALLY, EC_WORD_AWESOME},
 			.speechWin = {EC_WORD_MY, EC_WORD_BIG, EC_WORD_BROTHER, EC_WORD_IS, EC_WORD_TOO, EC_WORD_AWESOME},
 			.speechLose = {EC_WORD_MY, EC_WORD_BIG, EC_WORD_BROTHER, EC_WORD_ISN_T, EC_WORD_AWESOME, EC_WORD_QUES},
@@ -2863,7 +2863,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_3 = {
 		{
 			.name = _("RIC & RENE"),
 			.facilityClass = FACILITY_CLASS_CRUSH_KIN,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_REALLY, EC_WORD_AWESOME, EC_WORD_EXCL, 0xFFFF, 0xFFFF},
 			.speechWin = {EC_WORD_I_AM, EC_WORD_TOO, EC_WORD_AWESOME, EC_WORD_EXCL, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_HUH_QUES, 0xFFFF, EC_WORD_I_AM, EC_WORD_NOT_VERY, EC_WORD_AWESOME, EC_WORD_QUES},
@@ -3017,7 +3017,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_1 = {
 	    {
 			.name = _("JEN & KIRA"),
 			.facilityClass = FACILITY_CLASS_TWINS_2,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_TRY, EC_WORD_HARD, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_EHEHE, EC_WORD_YAY, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_WAAAH, EC_WORD_EXCL, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
@@ -3160,7 +3160,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_1 = {
 		{
 			.name = _("JEN & KIRA"),
 			.facilityClass = FACILITY_CLASS_TWINS_2,
-			.unkC = 3,
+			.textColor = 3,
 			.speechBefore = {EC_WORD_LET_S, EC_WORD_TRY, EC_WORD_HARD, EC_WORD_EXCL, 0xFFFF, 0xFFFF},
 			.speechWin = {EC_WORD_GIGGLE, EC_WORD_ELLIPSIS, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_WAAAH, EC_WORD_EXCL, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
@@ -3314,7 +3314,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_4 = {
 	    {
 			.name = _("ISAC & MAG"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_OUR, EC_MOVE(EARTHQUAKE), EC_WORD_WILL, EC_WORD_MAKE, EC_WORD_YOU, EC_WORD_SHAKY},
 			.speechWin = {EC_WORD_FEELING, EC_WORD_SHAKY, EC_WORD_HUH_QUES, 0xFFFF, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_I_AM, EC_WORD_ALL, EC_WORD_SHAKY, EC_WORD_ELLIPSIS, 0xFFFF, 0xFFFF},
@@ -3457,7 +3457,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_4 = {
 		{
 			.name = _("ISAC & MAG"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_DOESN_T, EC_WORD_GET, EC_WORD_ALL, EC_WORD_SHAKY},
 			.speechWin = {EC_WORD_SEE, EC_WORD_QUES, EC_WORD_I, EC_WORD_DIDN_T, EC_WORD_LIE, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_HUH_QUES, EC_WORD_YOU, EC_WORD_LEFT, EC_WORD_ME, EC_WORD_FEELING, EC_WORD_SHAKY},
@@ -3611,7 +3611,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_8 = {
 	    {
 			.name = _("CHELSEA"),
 			.facilityClass = FACILITY_CLASS_PKMN_RANGER_4,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_THE, EC_WORD_GREEN, EC_WORD_WORLD, EC_WORD_IS, EC_WORD_IMPORTANT, EC_WORD_ISN_T_IT_QUES},
 			.speechWin = {EC_WORD_YOU, EC_WORD_TAKE, EC_WORD_THE, EC_WORD_LOSS, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_BE, EC_WORD_KIND, EC_WORD_TO, EC_WORD_THE, EC_WORD_GREEN, EC_WORD_WORLD},
@@ -3754,7 +3754,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_8 = {
 		{
 			.name = _("TRENTON"),
 			.facilityClass = FACILITY_CLASS_PKMN_RANGER_3,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_I, EC_MOVE2(PROTECT), EC_WORD_THE, EC_WORD_GREAT, EC_WORD_GREEN, EC_WORD_WORLD},
 			.speechWin = {EC_WORD_TAKE_THAT, EC_WORD_EXCL, EC_WORD_THE, EC_WORD_LOSS, EC_WORD_IS, EC_WORD_YOURS},
 			.speechLose = {EC_MOVE2(PROTECT), EC_WORD_THE, EC_WORD_GREEN, EC_WORD_WORLD, 0xFFFF, 0xFFFF},
@@ -3897,7 +3897,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_8 = {
 		{
 			.name = _("ALBERT"),
 			.facilityClass = FACILITY_CLASS_COOLTRAINER_3,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_LET_S, EC_WORD_HAVE, EC_WORD_AN, EC_WORD_EXCITING, EC_WORD_TIME, EC_WORD_HERE},
 			.speechWin = {EC_WORD_YOU_RE, EC_WORD_TOO_WEAK, EC_WORD_TO, EC_WORD_MAKE, EC_WORD_THINGS, EC_WORD_EXCITING},
 			.speechLose = {EC_WORD_YOU_RE, EC_WORD_STRONG, EC_WORD_THAT_WAS, EC_WORD_WILD, EC_WORD_AND, EC_WORD_EXCITING},
@@ -4050,7 +4050,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_3 = {
 	    {
 			.name = _("CAMRYN"),
 			.facilityClass = FACILITY_CLASS_PICNICKER_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_LET_S, EC_WORD_BATTLE, EC_WORD_I, EC_WORD_WON_T, EC_WORD_LOSE, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_I, EC_WORD_SAID, EC_WORD_THAT, EC_WORD_I, EC_WORD_WOULD, EC_WORD_WIN},
 			.speechLose = {EC_WORD_OH_QUES, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS, EC_WORD_DID, EC_WORD_I, EC_WORD_LOSE, EC_WORD_QUES},
@@ -4193,7 +4193,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_3 = {
 		{
 			.name = _("NATALIA"),
 			.facilityClass = FACILITY_CLASS_AROMA_LADY_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_THIS, EC_MOVE(SWEET_SCENT), EC_WORD_YOU, EC_WORD_LIKE, EC_WORD_IT, EC_WORD_QUES},
 			.speechWin = {EC_WORD_WASN_T, EC_WORD_THAT, EC_WORD_NICE, EC_WORD_QUES, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_THAT, EC_WORD_WASN_T, EC_WORD_GOOD, EC_WORD_QUES, 0xFFFF, 0xFFFF},
@@ -4336,7 +4336,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_3 = {
 		{
 			.name = _("KATHLEEN"),
 			.facilityClass = FACILITY_CLASS_COOLTRAINER_4,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_TOO, EC_WORD_BAD, EC_WORD_IT_S, EC_WORD_OVER, EC_WORD_FOR, EC_WORD_YOU},
 			.speechWin = {EC_WORD_SORRY, EC_WORD_ELLIPSIS, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_HARD, EC_WORD_TO, EC_WORD_BELIEVE, EC_WORD_ELLIPSIS},
@@ -4489,7 +4489,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_6 = {
 	    {
 			.name = _("BRADEN"),
 			.facilityClass = FACILITY_CLASS_SWIMMER_MALE_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_PRETTY, EC_WORD_HAPPY, EC_WORD_WITH, EC_WORD_MY, EC_WORD_TOUGHNESS},
 			.speechWin = {EC_WORD_WROOOAAR_EXCL, 0xFFFF, EC_WORD_SERIOUSLY, EC_WORD_I, EC_WORD_WON, EC_WORD_QUES},
 			.speechLose = {EC_WORD_YOU, EC_WORD_SHOCKED, EC_WORD_ME, EC_WORD_OUT, EC_WORD_OF, EC_WORD_HAPPINESS},
@@ -4644,7 +4644,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_1 = {
 	    {
 			.name = _("ALLYSON"),
 			.facilityClass = FACILITY_CLASS_COOLTRAINER_4,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_ABOUT, EC_WORD_TO, EC_WORD_LOSE, EC_WORD_TODAY},
 			.speechWin = {EC_WORD_YES, EC_WORD_EXCL_EXCL, EC_WORD_I, EC_WORD_ADORE, EC_WORD_MYSELF, EC_WORD_TODAY},
 			.speechLose = {EC_WORD_I_WAS, EC_WORD_CONFUSED, EC_WORD_ABOUT, EC_WORD_THINGS, EC_WORD_I, EC_WORD_THINK},
@@ -4799,7 +4799,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_1 = {
 	    {
 			.name = _("ALBERTO"),
 			.facilityClass = FACILITY_CLASS_SAILOR_2,
-			.unkC = 5,
+			.textColor = 5,
 			.speechBefore = {EC_WORD_LET_S, EC_WORD_GET, EC_WORD_WITH, EC_WORD_IT, EC_WORD_RIGHT, EC_WORD_AWAY},
 			.speechWin = {EC_WORD_YO, EC_WORD_EXCL_EXCL, EC_WORD_YOU, EC_WORD_GIVE_UP, EC_WORD_NOW, EC_WORD_EH_QUES},
 			.speechLose = {EC_WORD_IT_S, EC_WORD_ALL, EC_WORD_OVER, EC_WORD_ELLIPSIS, EC_WORD_I, EC_WORD_SURRENDER},
@@ -4954,7 +4954,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_5 = {
 	    {
 			.name = _("KAT & KIPP"),
 			.facilityClass = FACILITY_CLASS_SIS_AND_BRO_2,
-			.unkC = 4,
+			.textColor = 4,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_TRY, EC_WORD_MY, EC_WORD_BEST},
 			.speechWin = {EC_WORD_WAY, EC_WORD_TO, EC_WORD_GO, EC_WORD_MY, EC_WORD_AWESOME, EC_WORD_BROTHER},
 			.speechLose = {EC_WORD_SIGH, EC_WORD_ELLIPSIS, EC_WORD_THAT_S, EC_WORD_HOW, EC_WORD_IT, EC_WORD_GOES},
@@ -5097,7 +5097,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_5 = {
 		{
 			.name = _("KAT & KIPP"),
 			.facilityClass = FACILITY_CLASS_SIS_AND_BRO_2,
-			.unkC = 4,
+			.textColor = 4,
 			.speechBefore = {EC_WORD_FUFUFU, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_NEVER, EC_WORD_LOSE, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_FUFUFU, EC_WORD_ELLIPSIS, EC_WORD_WE_RE, EC_WORD_TOO_STRONG, EC_WORD_TO, EC_WORD_LOSE},
 			.speechLose = {EC_WORD_WHAT, EC_WORD_HUH_QUES, EC_WORD_ARE, EC_WORD_YOU, EC_WORD_JOKING, EC_WORD_QUES},
@@ -5251,7 +5251,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_8 = {
 	    {
 			.name = _("GEB&MEGAN"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_YOU_RE, EC_WORD_OUR, EC_WORD_OPPONENT, EC_WORD_QUES, EC_WORD_PUSHOVER, EC_WORD_HAHAHA},
 			.speechWin = {EC_WORD_HAHAHA, EC_WORD_SORRY, EC_WORD_MY, EC_WORD_FRIEND, EC_WORD_TOUGH, EC_WORD_LOSS},
 			.speechLose = {EC_WORD_YOU_RE, EC_WORD_SERIOUS, EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_FRIEND, EC_WORD_QUES},
@@ -5394,7 +5394,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_8 = {
 		{
 			.name = _("GEB&MEGAN"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 7,
+			.textColor = 7,
 			.speechBefore = {EC_WORD_YOU_RE, EC_WORD_OUR, EC_WORD_FOE, EC_WORD_QUES, EC_WORD_GIGGLE, EC_WORD_ELLIPSIS},
 			.speechWin = {EC_WORD_GIGGLE, EC_WORD_ELLIPSIS, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_SORRY, 0xFFFF},
 			.speechLose = {EC_WORD_MY, EC_WORD_WORD, EC_WORD_THIS, EC_WORD_IS, EC_WORD_JUST, EC_WORD_INCREDIBLE},
@@ -5548,7 +5548,7 @@ static const struct TrainerTowerFloor gUnknown_847FD0C = {
 	    {
 			.name = _("LISA&LEAH"),
 			.facilityClass = FACILITY_CLASS_TWINS_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_WE_RE, EC_WORD_GOING, EC_WORD_TO, EC_WORD_WIN, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_YEAH_YEAH, EC_WORD_EXCL_EXCL, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF},
 			.speechLose = {EC_WORD_AWW, EC_WORD_EXCL, EC_WORD_WAAAH, EC_WORD_EXCL_EXCL, 0xFFFF, 0xFFFF},
@@ -5691,7 +5691,7 @@ static const struct TrainerTowerFloor gUnknown_847FD0C = {
 		{
 			.name = _("LISA&LEAH"),
 			.facilityClass = FACILITY_CLASS_TWINS_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_CAN, EC_WORD_WE, EC_WORD_WIN, EC_WORD_QUES, EC_WORD_IT_S, EC_WORD_EXCITING},
 			.speechWin = {EC_WORD_YEAH_YEAH, EC_WORD_EXCL_EXCL, EC_WORD_YOU, EC_WORD_MAKE, EC_WORD_ME, EC_WORD_HAPPY},
 			.speechLose = {EC_WORD_AWW, EC_WORD_EXCL, EC_WORD_WAAAH, EC_WORD_EXCL_EXCL, 0xFFFF, 0xFFFF},
@@ -5845,7 +5845,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_7 = {
 	    {
 			.name = _("PRISCILLA"),
 			.facilityClass = FACILITY_CLASS_TUBER_3,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_GIRL, EC_WORD_HERE_I_COME, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_WAAAH, EC_WORD_EXCL, EC_WORD_DID, EC_WORD_I, EC_WORD_WIN, EC_WORD_QUES},
 			.speechLose = {EC_WORD_OH_DEAR, EC_WORD_ELLIPSIS, EC_WORD_I, EC_WORD_COULDN_T, EC_WORD_WIN, EC_WORD_ELLIPSIS},
@@ -5988,7 +5988,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_7 = {
 		{
 			.name = _("CHARLOTTE"),
 			.facilityClass = FACILITY_CLASS_LADY_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_HELLO, EC_WORD_THERE, EC_WORD_I_AM, EC_WORD_A, EC_WORD_POKEMON, EC_WORD_LADY},
 			.speechWin = {EC_WORD_OH, EC_WORD_MY, EC_WORD_MY, EC_WORD_ELLIPSIS, EC_WORD_I_AM, EC_WORD_SORRY},
 			.speechLose = {EC_WORD_YOU_RE, EC_WORD_BETTER, EC_WORD_THAN, EC_WORD_A, EC_WORD_POKEMON, EC_WORD_LADY},
@@ -6131,7 +6131,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_7 = {
 		{
 			.name = _("SHANIA"),
 			.facilityClass = FACILITY_CLASS_SWIMMER_FEMALE_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_A, EC_WORD_POKEMON, EC_WORD_HEROINE, EC_WORD_THAT_S, EC_WORD_WHAT, EC_WORD_I_AM},
 			.speechWin = {EC_WORD_AHAHA, EC_WORD_NO, EC_WORD_WAY, EC_WORD_YOU_RE, EC_WORD_TOO_WEAK, EC_WORD_SERIOUSLY},
 			.speechLose = {EC_WORD_WHY, EC_WORD_QUES_EXCL, EC_WORD_YOU, EC_WORD_SHOULD, EC_WORD_NOT, EC_WORD_LIE},
@@ -6284,7 +6284,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_4 = {
 	    {
 			.name = _("BRENNAN"),
 			.facilityClass = FACILITY_CLASS_SAILOR_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_TAKE, EC_WORD_THINGS, EC_WORD_EASY, EC_WORD_ELLIPSIS, EC_WORD_THAT_S, EC_WORD_IMPORTANT},
 			.speechWin = {EC_WORD_YOU, EC_WORD_LOSE, EC_WORD_IF, EC_WORD_YOU, EC_WORD_GIVE_UP, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_OOPS, EC_WORD_YOU, EC_WORD_GOT, EC_WORD_AN, EC_WORD_EASY, EC_WORD_WIN},
@@ -6427,7 +6427,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_4 = {
 		{
 			.name = _("KADEN"),
 			.facilityClass = FACILITY_CLASS_FISHERMAN_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_MY, EC_WORD_FISHING, EC_WORD_FASHION, EC_WORD_APPEAL, EC_WORD_IS, EC_WORD_FANTASTIC},
 			.speechWin = {EC_WORD_MY, EC_WORD_FANTASTIC, EC_WORD_FASHION, EC_WORD_APPEAL, EC_WORD_WINS, EC_WORD_OUT},
 			.speechLose = {EC_WORD_UH_OH, EC_WORD_ELLIPSIS, EC_WORD_I, EC_WORD_SEE, EC_WORD_I, EC_WORD_LOST},
@@ -6570,7 +6570,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_4 = {
 		{
 			.name = _("EMANUEL"),
 			.facilityClass = FACILITY_CLASS_GENTLEMAN_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_HMM, EC_WORD_QUES, EC_WORD_ARE, EC_WORD_YOU, EC_WORD_SKILLED, EC_WORD_QUES},
 			.speechWin = {EC_WORD_I, EC_WORD_SEE, EC_WORD_I, EC_WORD_WASN_T, EC_WORD_RIGHT, EC_WORD_ELLIPSIS},
 			.speechLose = {EC_WORD_YOU, EC_WORD_TRULY, EC_WORD_ARE, EC_WORD_A, EC_WORD_MASTER, EC_WORD_TRAINER},
@@ -6723,7 +6723,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_3 = {
 	    {
 			.name = _("JARRETT"),
 			.facilityClass = FACILITY_CLASS_JUGGLER,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_LET_S, EC_WORD_HAVE, EC_WORD_AN, EC_MOVE2(EXPLOSION), EC_WORD_PARTY, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_CONGRATS, EC_WORD_FOR, EC_WORD_YOUR, EC_WORD_LOSS, EC_WORD_PARTY, EC_WORD_KID},
 			.speechLose = {EC_WORD_NICE, EC_MOVE(SELF_DESTRUCT), EC_WORD_THERE, EC_WORD_EXCL, EC_WORD_YOU_RE, EC_WORD_PERFECT},
@@ -6878,7 +6878,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_3 = {
 	    {
 			.name = _("OWEN"),
 			.facilityClass = FACILITY_CLASS_SUPER_NERD,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_HERE_IT_IS, EC_MOVE2(THUNDER_WAVE), EC_WORD_DON_T, EC_MOVE2(WRAP), EC_WORD_ME, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_ACCEPT, EC_WORD_MY, EC_MOVE2(PRESENT), EC_WORD_OF, EC_MOVE2(THUNDER_WAVE), EC_WORD_EXCL},
 			.speechLose = {EC_MOVE2(WRAP), EC_MOVE(BIND), EC_WORD_ELECTRIC, EC_MOVE2(WHIRLWIND), EC_WORD_SPIRALING, EC_WORD_AROUND},
@@ -7033,7 +7033,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_2 = {
 	    {
 			.name = _("LORENZO"),
 			.facilityClass = FACILITY_CLASS_PSYCHIC_3,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_THIS, EC_WORD_POWER, EC_WORD_IS, EC_WORD_NOW, EC_WORD_COMPLETE, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_NO, EC_WORD_KEEN_EYE, EC_WORD_CAN, EC_WORD_STOP, EC_WORD_MY, EC_WORD_POWER},
 			.speechLose = {EC_WORD_HERE_IT_IS, EC_WORD_EXCL, EC_MOVE(KINESIS), EC_WORD_EXCL, EC_WORD_ELLIPSIS, EC_WORD_WHAT},
@@ -7188,7 +7188,7 @@ static const struct TrainerTowerFloor gUnknown_848144C = {
 		{
 			.name = _("NIA & CARL"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 4,
+			.textColor = 4,
 			.speechBefore = {EC_WORD_HERE_GOES, EC_WORD_MY, EC_WORD_DIGITAL, EC_WORD_ROMANTIC, EC_WORD_HERO, EC_WORD_STRATEGY},
 			.speechWin = {EC_WORD_THAT_S, EC_WORD_THE, EC_WORD_DIGITAL, EC_WORD_HYPER, EC_WORD_MODE, EC_WORD_POWER},
 			.speechLose = {EC_WORD_MY, EC_WORD_PERFECT, EC_WORD_STRATEGY, EC_WORD_WAS, EC_MOVE2(BEAT_UP), EC_WORD_QUES},
@@ -7331,7 +7331,7 @@ static const struct TrainerTowerFloor gUnknown_848144C = {
 		{
 			.name = _("NIA & CARL"),
 			.facilityClass = FACILITY_CLASS_COOL_COUPLE,
-			.unkC = 4,
+			.textColor = 4,
 			.speechBefore = {EC_WORD_MASTER, EC_WORD_COMPLETE, EC_WORD_FASHION, EC_WORD_SYSTEM, EC_WORD_START, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_THAT_S_IT_EXCL, EC_WORD_THE, EC_WORD_POWER, EC_WORD_OF, EC_WORD_OUR, EC_WORD_SYSTEM},
 			.speechLose = {EC_WORD_OKAY, EC_WORD_EXCL, EC_MOVE(THUNDERBOLT), EC_WORD_RUN_AWAY, EC_WORD_SYSTEM, EC_WORD_START},
@@ -7485,7 +7485,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_7 = {
 		{
 			.name = _("AXE & REN"),
 			.facilityClass = FACILITY_CLASS_SIS_AND_BRO_2,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_IT_S, EC_WORD_GOING, EC_WORD_TO, EC_WORD_GET, EC_WORD_AWFULLY, EC_WORD_COLD},
 			.speechWin = {EC_WORD_THAT_S, EC_WORD_THAT, EC_WORD_MAN, EC_WORD_I_AM, EC_WORD_COLD, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_I, EC_WORD_CAN_T_WIN, EC_WORD_IN, EC_WORD_THIS, EC_MOVE(SHEER_COLD), EC_WORD_ELLIPSIS},
@@ -7628,7 +7628,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_7 = {
 		{
 			.name = _("AXE & REN"),
 			.facilityClass = FACILITY_CLASS_SIS_AND_BRO_2,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_OUR, EC_WORD_SWIFT_SWIM, EC_WORD_LEFT, EC_WORD_ME, EC_WORD_FEELING, EC_WORD_COLD},
 			.speechWin = {EC_WORD_I, EC_WORD_WON, EC_WORD_BUT, EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_HOT},
 			.speechLose = {EC_WORD_I_AM, EC_WORD_HUNGRY, EC_WORD_FOR, EC_WORD_ANY, EC_WORD_HOT, EC_WORD_EATS},
@@ -7782,7 +7782,7 @@ static const struct TrainerTowerFloor gUnknown_8481C0C = {
 		{
 			.name = _("KATI & GEB"),
 			.facilityClass = FACILITY_CLASS_YOUNG_COUPLE_2,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_WELCOME, EC_WORD_TO, EC_WORD_OUR, EC_WORD_LOVEY_DOVEY, EC_MOVE2(THUNDER_WAVE), EC_MOVE(SANDSTORM)},
 			.speechWin = {EC_WORD_LALALA, EC_WORD_LALALA, EC_WORD_OUR, EC_WORD_LOVEY_DOVEY, EC_WORD_LALALA, EC_WORD_LIFE},
 			.speechLose = {EC_WORD_I, EC_WORD_NEED, EC_WORD_TO, EC_WORD_LOSE, EC_WORD_MY, EC_MOVE2(FRUSTRATION)},
@@ -7925,7 +7925,7 @@ static const struct TrainerTowerFloor gUnknown_8481C0C = {
 		{
 			.name = _("KATI & GEB"),
 			.facilityClass = FACILITY_CLASS_YOUNG_COUPLE_2,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_PLUS, EC_WORD_YOU_RE, EC_WORD_MINUS, EC_WORD_LOVEY_DOVEY, EC_WORD_MAGNET_PULL},
 			.speechWin = {EC_WORD_DON_T, EC_WORD_STOP, EC_WORD_OUR, EC_WORD_LOVEY_DOVEY, EC_WORD_LOCOMOTIVE, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_HIS, EC_WORD_CRY, EC_WORD_HAS, EC_WORD_CUTE_CHARM, EC_WORD_TOO, EC_WORD_EXCL},
@@ -8079,7 +8079,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_6 = {
 		{
 			.name = _("BEN"),
 			.facilityClass = FACILITY_CLASS_ROCKER,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_LALALA, EC_WORD_LET_S, EC_MOVE(SING), EC_WORD_ABOUT, EC_WORD_ELECTRIC, EC_WORD_POWER},
 			.speechWin = {EC_WORD_STATIC, EC_WORD_IS, EC_WORD_ELECTRIC, EC_WORD_YES, EC_WORD_IT, EC_WORD_IS},
 			.speechLose = {EC_WORD_ELECTRIC, EC_WORD_ABOUT, EC_WORD_MY, EC_WORD_DIGITAL, EC_WORD_TELEVISION, EC_WORD_I_AM},
@@ -8222,7 +8222,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_6 = {
 		{
 			.name = _("CAMDEN"),
 			.facilityClass = FACILITY_CLASS_ENGINEER,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_LALALA, EC_WORD_LET_S, EC_MOVE(SING), EC_WORD_ABOUT, EC_WORD_ELECTRIC, EC_WORD_POWER},
 			.speechWin = {EC_WORD_A, EC_MOVE(THUNDERBOLT), EC_WORD_IS, EC_WORD_ELECTRIC, EC_WORD_TOO, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_ELECTRIC, EC_WORD_EXCL, EC_WORD_IT_S, EC_WORD_ABOUT, EC_WORD_WIRELESS, EC_WORD_LINK},
@@ -8365,7 +8365,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_6 = {
 		{
 			.name = _("ZACKERY"),
 			.facilityClass = FACILITY_CLASS_SCIENTIST,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_LALALA, EC_WORD_LET_S, EC_MOVE(SING), EC_WORD_ABOUT, EC_WORD_ELECTRIC, EC_WORD_POWER},
 			.speechWin = {EC_MOVE2(THUNDER_SHOCK), EC_WORD_IS, EC_WORD_ELECTRIC, EC_WORD_YOU, EC_WORD_KNOW, EC_WORD_QUES},
 			.speechLose = {EC_WORD_ELECTRIC, EC_WORD_EXCL, EC_MOVE2(FLASH), EC_MOVE2(FLASH), EC_MOVE2(FLASH), EC_WORD_EXCL_EXCL},
@@ -8518,7 +8518,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_5 = {
 		{
 			.name = _("MAURA"),
 			.facilityClass = FACILITY_CLASS_BEAUTY_2,
-			.unkC = 2,
+			.textColor = 2,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_THE, EC_WORD_GROUP, EC_WORD_LEADER, EC_WORD_EXCL, 0xFFFF},
 			.speechWin = {EC_WORD_WHAT, EC_WORD_AM, EC_WORD_I, EC_WORD_LEADER, EC_WORD_OF, EC_WORD_QUES},
 			.speechLose = {EC_WORD_I_AM, EC_WORD_NO, EC_WORD_LEADER, EC_WORD_IT_S, EC_WORD_A_LITTLE, EC_WORD_LIE},
@@ -8661,7 +8661,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_5 = {
 		{
 			.name = _("MIKAELA"),
 			.facilityClass = FACILITY_CLASS_LASS_2,
-			.unkC = 1,
+			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_REALLY, EC_WORD_THE, EC_WORD_NO_1, EC_WORD_TRAINER, EC_WORD_HERE},
 			.speechWin = {EC_WORD_NEVER, EC_WORD_SAID, EC_WORD_WHAT, EC_WORD_I_AM, EC_WORD_NO_1, EC_WORD_AT},
 			.speechLose = {EC_WORD_NEXT, EC_WORD_TIME, EC_WORD_I, EC_WORD_WILL, EC_WORD_BE, EC_WORD_OVERWHELMING},
@@ -8804,7 +8804,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_5 = {
 		{
 			.name = _("FLINT"),
 			.facilityClass = FACILITY_CLASS_ENGINEER,
-			.unkC = 4,
+			.textColor = 4,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_THE, EC_MOVE2(MILK_DRINK), EC_WORD_WORLD, EC_WORD_LEADER, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_I_VE, EC_WORD_WON, EC_WORD_THIS, EC_MOVE2(MILK_DRINK), EC_WORD_MATCH, EC_WORD_EXCL},
 			.speechLose = {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_DRINK, EC_WORD_ANY, EC_WORD_MORE, EC_WORD_DRINKS},

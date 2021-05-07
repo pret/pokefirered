@@ -19,13 +19,13 @@
 #include "constants/event_objects.h"
 #include "constants/trainer_tower.h"
 
-#define CURR_FLOOR sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx]
+#define CURR_FLOOR sTrainerTowerState->data.floors[sTrainerTowerState->floorIdx]
 #define TRAINER_TOWER gSaveBlock1Ptr->trainerTower[gSaveBlock1Ptr->towerChallengeId]
 
-struct UnkStruct_203F458
+struct TrainerTowerState
 {
     /* 0x0000 */ u8 floorIdx;
-    /* 0x0004 */ struct EReaderTrainerTowerSet unk_0004;
+    /* 0x0004 */ struct EReaderTrainerTowerSet data;
 };
 
 struct TrainerTowerOpponent
@@ -37,7 +37,7 @@ struct TrainerTowerOpponent
     /* 0x30 */ u16 speechLose2[6];
     /* 0x3C */ u8 battleType;
     /* 0x3D */ u8 facilityClass;
-    /* 0x3E */ u8 gender;
+    /* 0x3E */ u8 textColor;
 };
 
 struct SinglesTrainerInfo
@@ -62,7 +62,7 @@ struct TrainerEncounterMusicPairs
     u8 musicId;
 };
 
-static EWRAM_DATA struct UnkStruct_203F458 * sTrainerTowerState = NULL;
+static EWRAM_DATA struct TrainerTowerState * sTrainerTowerState = NULL;
 static EWRAM_DATA struct TrainerTowerOpponent * sTrainerTowerOpponent = NULL;
 static EWRAM_DATA u8 sUnused_203F460 = 0;
 
@@ -310,8 +310,15 @@ static const struct TrainerEncounterMusicPairs sTrainerEncounterMusicLUT[105] = 
 };
 
 static const struct WindowTemplate sTimeBoardWindowTemplate[] = {
-    {0, 3, 1, 27, 18, 15, 0x001},
-    DUMMY_WIN_TEMPLATE
+    {
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 1,
+        .width = 27,
+        .height = 18,
+        .paletteNum = 15,
+        .baseBlock = 0x001
+    }, DUMMY_WIN_TEMPLATE
 };
 
 static const u32 sUnused_847A228 = 0x70;
@@ -389,41 +396,44 @@ static const u16 sTrainerTowerEncounterMusic[] = {
     [TRAINER_ENCOUNTER_MUSIC_RICH]        = MUS_ENCOUNTER_BOY
 };
 
-static const u8 sSingleBattleChallengeMonIdxs[][2] = {
-    {0x00, 0x02},
-    {0x01, 0x03},
-    {0x02, 0x04},
-    {0x03, 0x05},
-    {0x04, 0x01},
-    {0x05, 0x02},
-    {0x00, 0x03},
-    {0x01, 0x04}
+// The trainer only uses two Pokemon from the encoded pool, based on the current floor
+static const u8 sSingleBattleChallengeMonIdxs[MAX_TRAINER_TOWER_FLOORS][2] = {
+    {0, 2},
+    {1, 3},
+    {2, 4},
+    {3, 5},
+    {4, 1},
+    {5, 2},
+    {0, 3},
+    {1, 4}
 };
 
-static const u8 sDoubleBattleChallengeMonIdxs[][2] = {
-    {0x00, 0x01},
-    {0x01, 0x03},
-    {0x02, 0x00},
-    {0x03, 0x04},
-    {0x04, 0x02},
-    {0x05, 0x02},
-    {0x00, 0x03},
-    {0x01, 0x05}
+// Each trainer only uses one Pokemon from the encoded pool, based on the current floor
+static const u8 sDoubleBattleChallengeMonIdxs[MAX_TRAINER_TOWER_FLOORS][2] = {
+    {0, 1},
+    {1, 3},
+    {2, 0},
+    {3, 4},
+    {4, 2},
+    {5, 2},
+    {0, 3},
+    {1, 5}
 };
 
-static const u8 sKnockoutChallengeMonIdxs[][3] = {
-    {0x00, 0x02, 0x04},
-    {0x01, 0x03, 0x05},
-    {0x02, 0x03, 0x01},
-    {0x03, 0x04, 0x00},
-    {0x04, 0x01, 0x02},
-    {0x05, 0x00, 0x03},
-    {0x00, 0x05, 0x02},
-    {0x01, 0x04, 0x05}
+// Each trainer only uses one Pokemon from the encoded pool, based on the current floor
+static const u8 sKnockoutChallengeMonIdxs[MAX_TRAINER_TOWER_FLOORS][3] = {
+    {0, 2, 4},
+    {1, 3, 5},
+    {2, 3, 1},
+    {3, 4, 0},
+    {4, 1, 2},
+    {5, 0, 3},
+    {0, 5, 2},
+    {1, 4, 5}
 };
 
-extern const struct EReaderTrainerTowerSetSubstruct gUnknown_84827AC;
-extern const struct TrainerTowerFloor *const gUnknown_84827B4[][MAX_TRAINER_TOWER_FLOORS];
+extern const struct EReaderTrainerTowerSetSubstruct gTrainerTowerLocalHeader;
+extern const struct TrainerTowerFloor *const gTrainerTowerFloors[][MAX_TRAINER_TOWER_FLOORS];
 
 void CallTrainerTowerFunc(void)
 {
@@ -471,7 +481,7 @@ void InitTrainerTowerBattleStruct(void)
 
     sTrainerTowerOpponent->battleType = CURR_FLOOR.challengeType;
     sTrainerTowerOpponent->facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
-    sTrainerTowerOpponent->gender = CURR_FLOOR.trainers[trainerId].gender;
+    sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].textColor;
     SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
     FreeTrainerTowerDataStruct();
 }
@@ -504,24 +514,24 @@ void GetTrainerTowerOpponentLoseText(u8 *dest, u8 opponentIdx)
 static void SetUpTrainerTowerDataStruct(void)
 {
     u32 challengeType = gSaveBlock1Ptr->towerChallengeId;
-    s32 r4;
-    const struct TrainerTowerFloor *const * r7;
+    s32 i;
+    const struct TrainerTowerFloor *const * floors_p;
 
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
     sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_1F;
     if (ReadTrainerTowerAndValidate() == TRUE)
-        CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
+        CEReaderTool_LoadTrainerTower(&sTrainerTowerState->data);
     else
     {
-        struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
-        const struct EReaderTrainerTowerSetSubstruct * r1 = &gUnknown_84827AC;
-        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerTowerSetSubstruct));
-        r7 = gUnknown_84827B4[challengeType];
-        for (r4 = 0; r4 < MAX_TRAINER_TOWER_FLOORS; r4++)
+        struct TrainerTowerState * ttstate_p = sTrainerTowerState;
+        const struct EReaderTrainerTowerSetSubstruct * header_p = &gTrainerTowerLocalHeader;
+        memcpy(&ttstate_p->data, header_p, sizeof(struct EReaderTrainerTowerSetSubstruct));
+        floors_p = gTrainerTowerFloors[challengeType];
+        for (i = 0; i < MAX_TRAINER_TOWER_FLOORS; i++)
         {
-            *(sTrainerTowerState->unk_0004.floors + r4) = *(r7[r4]); // manual pointer arithmetic needed to match
+            *(sTrainerTowerState->data.floors + i) = *(floors_p[i]); // manual pointer arithmetic needed to match
         }
-        sTrainerTowerState->unk_0004.checksum = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
+        sTrainerTowerState->data.checksum = CalcByteArraySum((void *)sTrainerTowerState->data.floors, sizeof(sTrainerTowerState->data.floors));
         ValidateOrResetCurTrainerTowerRecord();
     }
 }
@@ -533,7 +543,7 @@ static void FreeTrainerTowerDataStruct(void)
 
 static void InitTrainerTowerFloor(void)
 {
-    if (gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.numFloors)
+    if (gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY > sTrainerTowerState->data.numFloors)
     {
         gSpecialVar_Result = 3; // Skip past usable challenge types
         SetCurrentMapLayout(LAYOUT_TRAINER_TOWER_ROOF);
@@ -620,17 +630,21 @@ static void SetTrainerTowerNPCGraphics(void)
 
 static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest)
 {
-    s32 r1;
+    s32 i;
     ConvertEasyChatWordsToString(dest, ecWords, 3, 2);
     if ((unsigned)GetStringWidth(2, dest, -1) > 196)
     {
+        // Has to be printed 2x3
         ConvertEasyChatWordsToString(dest, ecWords, 2, 3);
-        r1 = 0;
-        while (dest[r1++] != CHAR_NEWLINE)
+        // Skip line 1
+        i = 0;
+        while (dest[i++] != CHAR_NEWLINE)
             ;
-        while (dest[r1] != CHAR_NEWLINE)
-            r1++;
-        dest[r1] = CHAR_PROMPT_SCROLL;
+        // Skip line 2
+        while (dest[i] != CHAR_NEWLINE)
+            i++;
+        // Replace \n with \l at the end of line 2
+        dest[i] = CHAR_PROMPT_SCROLL;
     }
 }
 
@@ -784,7 +798,7 @@ static void GetOwnerState(void)
 
 static void GiveChallengePrize(void)
 {
-    u16 itemId = sPrizeList[sTrainerTowerState->unk_0004.floors->prize];
+    u16 itemId = sPrizeList[sTrainerTowerState->data.floors->prize];
 
     if (TRAINER_TOWER.receivedPrize)
     {
@@ -891,15 +905,15 @@ static void ShowResultsBoard(void)
     windowId = AddWindow(sTimeBoardWindowTemplate);
     LoadStdWindowFrameGfx();
     DrawStdWindowFrame(windowId, FALSE);
-    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 0x4A, 0, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 74, 0, TEXT_SPEED_FF, NULL);
 
     for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
         PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime));
 
         StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
-        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 0x18, 0x24 + 0x14 * i, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gStringVar4, 0x60, 0x2E + 0x14 * i, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 24, 36 + 20 * i, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gStringVar4, 96, 46 + 20 * i, TEXT_SPEED_FF, NULL);
     }
 
     PutWindowTilemap(windowId);
@@ -922,9 +936,9 @@ static void TrainerTowerGetDoublesEligiblity(void)
 
 static void TrainerTowerGetNumFloors(void)
 {
-    if (sTrainerTowerState->unk_0004.numFloors != sTrainerTowerState->unk_0004.floors[0].floorIdx)
+    if (sTrainerTowerState->data.numFloors != sTrainerTowerState->data.floors[0].floorIdx)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->unk_0004.numFloors, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->data.numFloors, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -1029,9 +1043,9 @@ static s32 GetPartyMaxLevel(void)
 
 static void ValidateOrResetCurTrainerTowerRecord(void)
 {
-    if (TRAINER_TOWER.unk9 != sTrainerTowerState->unk_0004.id)
+    if (TRAINER_TOWER.unk9 != sTrainerTowerState->data.id)
     {
-        TRAINER_TOWER.unk9 = sTrainerTowerState->unk_0004.id;
+        TRAINER_TOWER.unk9 = sTrainerTowerState->data.id;
         SetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime, TRAINER_TOWER_MAX_TIME);
         TRAINER_TOWER.receivedPrize = FALSE;
     }
@@ -1043,7 +1057,7 @@ void PrintTrainerTowerRecords(void)
     u8 windowId = 0;
 
     SetUpTrainerTowerDataStruct();
-    FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
+    FillWindowPixelRect(0, PIXEL_FILL(0), 0, 0, 216, 144);
     ValidateOrResetCurTrainerTowerRecord();
     AddTextPrinterParameterized3(0, 2, 0x4a, 0, sTextColors, 0, gText_TimeBoard);
 

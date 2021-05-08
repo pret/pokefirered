@@ -18,8 +18,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 
-#define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
-
 static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
 static bool8 ObjectEventExecSingleMovementAction(struct ObjectEvent *, struct Sprite *);
 static u8 GetCollisionInDirection(struct ObjectEvent *, u8);
@@ -197,7 +195,7 @@ void (*const gCameraObjectFuncs[])(struct Sprite *) = {
 
 #include "data/object_events/object_event_graphics.h"
 
-static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
+static void (*const sMovementTypeCallbacks[MOVEMENT_TYPES_COUNT])(struct Sprite *) = {
     [MOVEMENT_TYPE_NONE]                                  = MovementType_None,
     [MOVEMENT_TYPE_LOOK_AROUND]                           = MovementType_LookAround,
     [MOVEMENT_TYPE_WANDER_AROUND]                         = MovementType_WanderAround,
@@ -281,7 +279,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
     [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST]                 = MovementType_WanderAroundSlowest,
 };
 
-static const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
+static const bool8 gRangedMovementTypes[MOVEMENT_TYPES_COUNT] = {
     [MOVEMENT_TYPE_NONE] = FALSE,
     [MOVEMENT_TYPE_LOOK_AROUND] = FALSE,
     [MOVEMENT_TYPE_WANDER_AROUND] = TRUE,
@@ -365,7 +363,7 @@ static const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
     [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST] = TRUE,
 };
 
-static const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
+static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
     [MOVEMENT_TYPE_NONE] = DIR_SOUTH,
     [MOVEMENT_TYPE_LOOK_AROUND] = DIR_SOUTH,
     [MOVEMENT_TYPE_WANDER_AROUND] = DIR_SOUTH,

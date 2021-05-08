@@ -764,7 +764,7 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
 {
     if (gBattleOutcome == B_OUTCOME_DREW)
     {
-        BattlePutTextOnWindow(gText_Draw, 0x15);
+        BattlePutTextCenteredOnWindow(gText_Draw, 0x15);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -773,20 +773,20 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
             switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 0:
-                BattlePutTextOnWindow(gText_Win, 0x16);
-                BattlePutTextOnWindow(gText_Loss, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x17);
                 break;
             case 1:
-                BattlePutTextOnWindow(gText_Win, 0x17);
-                BattlePutTextOnWindow(gText_Loss, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x16);
                 break;
             case 2:
-                BattlePutTextOnWindow(gText_Win, 0x16);
-                BattlePutTextOnWindow(gText_Loss, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x17);
                 break;
             case 3:
-                BattlePutTextOnWindow(gText_Win, 0x17);
-                BattlePutTextOnWindow(gText_Loss, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x16);
                 break;
             }
         }
@@ -795,20 +795,20 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
             switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 0:
-                BattlePutTextOnWindow(gText_Win, 0x17);
-                BattlePutTextOnWindow(gText_Loss, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x16);
                 break;
             case 1:
-                BattlePutTextOnWindow(gText_Win, 0x16);
-                BattlePutTextOnWindow(gText_Loss, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x17);
                 break;
             case 2:
-                BattlePutTextOnWindow(gText_Win, 0x17);
-                BattlePutTextOnWindow(gText_Loss, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x16);
                 break;
             case 3:
-                BattlePutTextOnWindow(gText_Win, 0x16);
-                BattlePutTextOnWindow(gText_Loss, 0x17);
+                BattlePutTextCenteredOnWindow(gText_Win, 0x16);
+                BattlePutTextCenteredOnWindow(gText_Loss, 0x17);
                 break;
             }
         }
@@ -817,26 +817,26 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     {
         if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
-            BattlePutTextOnWindow(gText_Win, 0x17);
-            BattlePutTextOnWindow(gText_Loss, 0x16);
+            BattlePutTextCenteredOnWindow(gText_Win, 0x17);
+            BattlePutTextCenteredOnWindow(gText_Loss, 0x16);
         }
         else
         {
-            BattlePutTextOnWindow(gText_Win, 0x16);
-            BattlePutTextOnWindow(gText_Loss, 0x17);
+            BattlePutTextCenteredOnWindow(gText_Win, 0x16);
+            BattlePutTextCenteredOnWindow(gText_Loss, 0x17);
         }
     }
     else
     {
         if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
-            BattlePutTextOnWindow(gText_Win, 0x16);
-            BattlePutTextOnWindow(gText_Loss, 0x17);
+            BattlePutTextCenteredOnWindow(gText_Win, 0x16);
+            BattlePutTextCenteredOnWindow(gText_Loss, 0x17);
         }
         else
         {
-            BattlePutTextOnWindow(gText_Win, 0x17);
-            BattlePutTextOnWindow(gText_Loss, 0x16);
+            BattlePutTextCenteredOnWindow(gText_Win, 0x17);
+            BattlePutTextCenteredOnWindow(gText_Loss, 0x16);
         }
     }
 }
@@ -860,19 +860,19 @@ void InitLinkBattleVsScreen(u8 taskId)
                 switch (linkPlayer->id)
                 {
                 case 0:
-                    BattlePutTextOnWindow(name, 0x11);
+                    BattlePutTextCenteredOnWindow(name, 0x11);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 4);
                     break;
                 case 1:
-                    BattlePutTextOnWindow(name, 0x12);
+                    BattlePutTextCenteredOnWindow(name, 0x12);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 4);
                     break;
                 case 2:
-                    BattlePutTextOnWindow(name, 0x13);
+                    BattlePutTextCenteredOnWindow(name, 0x13);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 8);
                     break;
                 case 3:
-                    BattlePutTextOnWindow(name, 0x14);
+                    BattlePutTextCenteredOnWindow(name, 0x14);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 8);
                     break;
                 }
@@ -888,10 +888,10 @@ void InitLinkBattleVsScreen(u8 taskId)
                 opponentId = playerId, playerId = opponentId_copy;
 
             name = gLinkPlayers[playerId].name;
-            BattlePutTextOnWindow(name, 0xF);
+            BattlePutTextCenteredOnWindow(name, 0xF);
 
             name = gLinkPlayers[opponentId].name;
-            BattlePutTextOnWindow(name, 0x10);
+            BattlePutTextCenteredOnWindow(name, 0x10);
 
             DrawLinkBattleParticipantPokeballs(taskId, playerId, 1, 2, 7);
             DrawLinkBattleParticipantPokeballs(taskId, opponentId, 2, 2, 7);

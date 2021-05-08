@@ -207,13 +207,52 @@ struct BattleMsgData
     u8 textBuffs[3][0x10];
 };
 
+enum
+{
+    BTLWIN_0,
+    BTLWIN_1,
+    BTLWIN_2,
+    BTLWIN_3,
+    BTLWIN_4,
+    BTLWIN_5,
+    BTLWIN_6,
+    BTLWIN_7,
+    BTLWIN_8,
+    BTLWIN_9,
+    BTLWIN_10,
+    BTLWIN_11,
+    BTLWIN_12,
+    BTLWIN_13,
+    BTLWIN_14,
+    BTLWIN_15,
+    BTLWIN_16,
+    BTLWIN_17,
+    BTLWIN_18,
+    BTLWIN_19,
+    BTLWIN_20,
+    BTLWIN_21,
+    BTLWIN_22,
+    BTLWIN_23,
+    BTLWIN_24,
+};
+
+#define BTL_PRINT_CTX_F     0x40
+#define BTL_PRINT_NOCLR_F   0x80
+#define BTL_PRINT_WINDOW_BM 0x3F
+#define BTL_PRINT_FLAGS_BM  0xC0
+
+#define PPSTATE_UNDER_HALF    0
+#define PPSTATE_UNDER_QUARTER 1
+#define PPSTATE_DEPLETED      2
+#define PPSTATE_OVER_HALF     3
+
 void BufferStringBattle(u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
 void BattleHandleAddTextPrinter(const u8* text, u8 arg1);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
-void BattlePutTextOnWindow(const u8* text, u8 windowId_flags);
+void BattlePutTextCenteredOnWindow(const u8* text, u8 windowId_flags);
 bool8 BattleStringShouldBeColored(u16);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
@@ -242,11 +281,11 @@ extern const u8 gText_Ice[];
 extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
-extern const u8 gUnknown_83FE859[];
-extern const u8 gUnknown_83FE85E[];
-extern const u8 gUnknown_83FE85C[];
-extern const u8 gUnknown_83FE860[];
-extern const u8 gUnknown_83FE864[];
+extern const u8 gText_BtlTwrBanList_Space[];
+extern const u8 gText_BtlTwrBanList_Newline[];
+extern const u8 gText_BtlTwrBanList_PromptScroll[];
+extern const u8 gText_BtlTwrBanList_Is[];
+extern const u8 gText_BtlTwrBanList_Are[];
 
 extern const u8 gText_SafariBalls[];
 extern const u8 gText_HighlightRed_Left[];

@@ -409,9 +409,9 @@ static void SafariHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0x40);
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -438,13 +438,13 @@ static void SafariHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_EmptyString3, 0);
-    BattlePutTextOnWindow(gUnknown_83FE747, 2);
+    BattlePutTextCenteredOnWindow(gText_EmptyString3, 0);
+    BattlePutTextCenteredOnWindow(gText_SafariBattleMenu, 2);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 1);
 }
 
 static void SafariHandleUnknownYesNoBox(void)

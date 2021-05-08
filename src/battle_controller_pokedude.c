@@ -1533,9 +1533,9 @@ static void PokedudeHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0x40);
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1564,13 +1564,13 @@ static void PokedudeHandleChooseAction(void)
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-        BattlePutTextOnWindow(gText_EmptyString3, 0);
-        BattlePutTextOnWindow(gText_BattleMenu, 2);
+        BattlePutTextCenteredOnWindow(gText_EmptyString3, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleMenu, 2);
         for (i = 0; i < MAX_MON_MOVES; ++i)
             ActionSelectionDestroyCursorAt((u8)i);
         ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 1);
     }
     else
     {
@@ -2557,7 +2557,7 @@ static void PokedudeAction_PrintVoiceoverMessage(void)
     case 2:
         gBattle_BG0_Y = 0;
         BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 24);
         ++gPokedudeBattlerStates[gActiveBattler]->timer;
         break;
     case 3:
@@ -2618,7 +2618,7 @@ static void PokedudeAction_PrintMessageWithHealthboxPals(void)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 24);
         ++gPokedudeBattlerStates[gActiveBattler]->timer;
         break;
     case 4:

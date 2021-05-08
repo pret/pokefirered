@@ -20,6 +20,7 @@
 #include "constants/items.h"
 #include "constants/trainer_classes.h"
 
+// Essentially printer templates for battle windows.
 struct BattleWindowText
 {
     u8 fillValue;
@@ -1224,30 +1225,30 @@ const u8 gText_WhatWillPlayerThrow[] = _("What will {B_PLAYER_NAME}\nthrow?");
 const u8 gText_WhatWillOldManDo[] = _("What will the\nold man do?");
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
 const u8 gText_BattleMenu[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN");
-const u8 gUnknown_83FE747[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BALL{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}RUN");
+const u8 gText_SafariBattleMenu[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BALL{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}RUN");
 const u8 gText_MoveInterfacePP[] = _("PP ");
 const u8 gText_MoveInterfaceType[] = _("TYPE/");
-const u8 gUnknown_83FE770[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}");
-const u8 gUnknown_83FE779[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}どの わざを\nわすれさせたい?");
+const u8 gText_Battle_SetMoveNamePalette[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}");
+const u8 gText_JP_WhichMoveToForget[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}どの わざを\nわすれさせたい?");
 const u8 gText_BattleYesNoChoice[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Yes\nNo");
 const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Switch\nwhich?");
-const u8 gUnknown_83FE7B6[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}");
-const u8 gUnknown_83FE7BF[] = _("{RIGHT_ARROW_2}");
-const u8 gUnknown_83FE7C2[] = _("{PLUS}");
-const u8 gUnknown_83FE7C5[] = _("-");
+UNUSED static const u8 sText_Unused_Pal5_CHS13_14_15[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}");
+UNUSED static const u8 sText_Unused_RightArrow2[] = _("{RIGHT_ARROW_2}");
+UNUSED static const u8 sText_Unused_Plus[] = _("{PLUS}");
+UNUSED static const u8 sText_Unused_Minus[] = _("-");
 
-const u8 gUnknown_83FE7C7[] = _("{SIZE 0}Max{SIZE 2} HP");
-const u8 gUnknown_83FE7D4[] = _("ATTACK ");
-const u8 gUnknown_83FE7DC[] = _("DEFENSE");
-const u8 gUnknown_83FE7E4[] = _("SP. ATK");
-const u8 gUnknown_83FE7EC[] = _("SP. DEF");
+const u8 sText_MaxHP[] = _("{SIZE 0}Max{SIZE 2} HP");
+const u8 sText_Attack3[] = _("ATTACK ");
+const u8 sText_Defense3[] = _("DEFENSE");
+const u8 sText_SpAtk3[] = _("SP. ATK");
+const u8 sText_SpDef3[] = _("SP. DEF");
 
-const u8 *const gUnknown_83FE7F4[] = {
-    gUnknown_83FE7C7,
-    gUnknown_83FE7E4,
-    gUnknown_83FE7D4,
-    gUnknown_83FE7EC,
-    gUnknown_83FE7DC,
+const u8 *const sTextPointers_StatNames3[] = {
+    sText_MaxHP,
+    sText_SpAtk3,
+    sText_Attack3,
+    sText_SpDef3,
+    sText_Defense3,
     sText_Speed
 };
 
@@ -1261,11 +1262,26 @@ const u8 gText_Paralysis[] = _("paralysis");
 const u8 gText_Ice[] = _("ice");
 const u8 gText_Confusion[] = _("confusion");
 const u8 gText_Love[] = _("love");
-const u8 gUnknown_83FE859[] = _("  ");
-const u8 gUnknown_83FE85C[] = _("\n");
-const u8 gUnknown_83FE85E[] = _("\n");
-const u8 gUnknown_83FE860[] = _(" is");
-const u8 gUnknown_83FE864[] = _(" is");
+
+// These strings are used to separate entries in the
+// list of banned species in the battle tower.
+// Some were localized mistakenly.
+// Because FRLG does not have a Battle Tower normally,
+// these strings go unused.
+const u8 gText_BtlTwrBanList_Space[] = _("  ");
+#ifdef BUGFIX
+const u8 gText_BtlTwrBanList_PromptScroll[] = _("\l");
+#else
+const u8 gText_BtlTwrBanList_PromptScroll[] = _("\n");
+#endif
+const u8 gText_BtlTwrBanList_Newline[] = _("\n");
+const u8 gText_BtlTwrBanList_Is[] = _(" is");
+#ifdef BUGFIX
+const u8 gText_BtlTwrBanList_Are[] = _(" are");
+#else
+const u8 gText_BtlTwrBanList_Are[] = _(" is");
+#endif
+
 const u8 gText_BadEgg[] = _("Bad EGG");
 const u8 gUnknown_83FE870[] = _("ミツル");
 const u8 gText_Win[] = _("{HIGHLIGHT 0}Win");
@@ -1273,35 +1289,35 @@ const u8 gText_Loss[] = _("{HIGHLIGHT 0}Loss");
 const u8 gText_Draw[] = _("{HIGHLIGHT 0}Draw");
 static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
-const u8 gUnknown_83FE892[] = _("a NORMAL move");
-const u8 gUnknown_83FE8A0[] = _("a FIGHTING move");
-const u8 gUnknown_83FE8B0[] = _("a FLYING move");
-const u8 gUnknown_83FE8BE[] = _("a POISON move");
-const u8 gUnknown_83FE8CC[] = _("a GROUND move");
-const u8 gUnknown_83FE8DA[] = _("a ROCK move");
-const u8 gUnknown_83FE8E6[] = _("a BUG move");
-const u8 gUnknown_83FE8F1[] = _("a GHOST move");
-const u8 gUnknown_83FE8FE[] = _("a STEEL move");
-const u8 gUnknown_83FE90B[] = _("a ??? move");
-const u8 gUnknown_83FE916[] = _("a FIRE move");
-const u8 gUnknown_83FE922[] = _("a WATER move");
-const u8 gUnknown_83FE92F[] = _("a GRASS move");
-const u8 gUnknown_83FE93C[] = _("an ELECTRIC move");
-const u8 gUnknown_83FE94D[] = _("a PSYCHIC move");
-const u8 gUnknown_83FE95C[] = _("an ICE move");
-const u8 gUnknown_83FE968[] = _("a DRAGON move");
-const u8 gUnknown_83FE976[] = _("a DARK move");
+const u8 sText_ANormalTypeMove[] = _("a NORMAL move");
+const u8 sText_AFightingTypeMove[] = _("a FIGHTING move");
+const u8 sText_AFlyingTypeMove[] = _("a FLYING move");
+const u8 sText_APoisonTypeMove[] = _("a POISON move");
+const u8 sText_AGroundTypeMove[] = _("a GROUND move");
+const u8 sText_ARockTypeMove[] = _("a ROCK move");
+const u8 sText_ABugTypeMove[] = _("a BUG move");
+const u8 sText_AGhostTypeMove[] = _("a GHOST move");
+const u8 sText_ASteelTypeMove[] = _("a STEEL move");
+const u8 sText_AMysteryTypeMove[] = _("a ??? move");
+const u8 sText_AFireTypeMove[] = _("a FIRE move");
+const u8 sText_AWaterTyepMove[] = _("a WATER move");
+const u8 sText_AGrassTypeMove[] = _("a GRASS move");
+const u8 sText_AnElectricTypeMove[] = _("an ELECTRIC move");
+const u8 sText_APsychicTypeMove[] = _("a PSYCHIC move");
+const u8 sText_AnIceTypeMove[] = _("an ICE move");
+const u8 sText_ADragonTypeMove[] = _("a DRAGON move");
+const u8 sText_ADarkTypeMove[] = _("a DARK move");
 const u8 gText_TimeBoard[] = _("TIME BOARD");
 const u8 gText_ClearTime[] = _("CLEAR TIME"); // Unused
 const u8 gText_XMinYZSec[] = _("{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.");
-const u8 gUnknown_83FE9A9[] = _("1F");
-const u8 gUnknown_83FE9AC[] = _("2F");
-const u8 gUnknown_83FE9AF[] = _("3F");
-const u8 gUnknown_83FE9B2[] = _("4F");
-const u8 gUnknown_83FE9B5[] = _("5F");
-const u8 gUnknown_83FE9B8[] = _("6F");
-const u8 gUnknown_83FE9BB[] = _("7F");
-const u8 gUnknown_83FE9BE[] = _("8F");
+const u8 sText_Unused_1F[] = _("1F");
+const u8 sText_Unused_2F[] = _("2F");
+const u8 sText_Unused_3F[] = _("3F");
+const u8 sText_Unused_4F[] = _("4F");
+const u8 sText_Unused_5F[] = _("5F");
+const u8 sText_Unused_6F[] = _("6F");
+const u8 sText_Unused_7F[] = _("7F");
+const u8 sText_Unused_8F[] = _("8F");
 
 const u8 *const gTrainerTowerChallengeTypeTexts[NUM_TOWER_CHALLENGE_TYPES] = {
     gOtherText_Single,
@@ -1315,26 +1331,29 @@ static const u8 sText_PlayerLostAgainstTrainer1[] = _("Player lost against\n{B_T
 static const u8 sText_PlayerBattledToDrawTrainer1[] = _("Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
 
 static const u8 *const sATypeMove_Table[] = {
-    gUnknown_83FE892,
-    gUnknown_83FE8A0,
-    gUnknown_83FE8B0,
-    gUnknown_83FE8BE,
-    gUnknown_83FE8CC,
-    gUnknown_83FE8DA,
-    gUnknown_83FE8E6,
-    gUnknown_83FE8F1,
-    gUnknown_83FE8FE,
-    gUnknown_83FE90B,
-    gUnknown_83FE916,
-    gUnknown_83FE922,
-    gUnknown_83FE92F,
-    gUnknown_83FE93C,
-    gUnknown_83FE94D,
-    gUnknown_83FE95C,
-    gUnknown_83FE968,
-    gUnknown_83FE976
+    [TYPE_NORMAL]   = sText_ANormalTypeMove,
+    [TYPE_FIGHTING] = sText_AFightingTypeMove,
+    [TYPE_FLYING]   = sText_AFlyingTypeMove,
+    [TYPE_POISON]   = sText_APoisonTypeMove,
+    [TYPE_GROUND]   = sText_AGroundTypeMove,
+    [TYPE_ROCK]     = sText_ARockTypeMove,
+    [TYPE_BUG]      = sText_ABugTypeMove,
+    [TYPE_GHOST]    = sText_AGhostTypeMove,
+    [TYPE_STEEL]    = sText_ASteelTypeMove,
+    [TYPE_MYSTERY]  = sText_AMysteryTypeMove,
+    [TYPE_FIRE]     = sText_AFireTypeMove,
+    [TYPE_WATER]    = sText_AWaterTyepMove,
+    [TYPE_GRASS]    = sText_AGrassTypeMove,
+    [TYPE_ELECTRIC] = sText_AnElectricTypeMove,
+    [TYPE_PSYCHIC]  = sText_APsychicTypeMove,
+    [TYPE_ICE]      = sText_AnIceTypeMove,
+    [TYPE_DRAGON]   = sText_ADragonTypeMove,
+    [TYPE_DARK]     = sText_ADarkTypeMove
 };
 
+// Rather than using a pointer table, GameFreak decided
+// to use a linear array wherein grammar types are
+// separated by MOVE_NONE.
 static const u16 sGrammarMoveUsedTable[] = {
     MOVE_SWORDS_DANCE,
     MOVE_STRENGTH,
@@ -2350,63 +2369,344 @@ static void ChooseTypeOfMoveUsedString(u8* dst)
 }
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
-    {PIXEL_FILL(0xf), 2, 0x02, 2, 0, 2, 1, 0x1, 0xf, 0x6},
-    {PIXEL_FILL(0xf), 2, 0x02, 2, 0, 2, 0, 0x1, 0xf, 0x6},
-    {PIXEL_FILL(0xe), 1, 0x00, 2, 0, 2, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 0, 0x00, 1, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 0, 0x00, 1, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 0, 0x00, 1, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 0, 0x00, 1, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 0, 0x00, 2, 0, 0, 0, 0xc, 0xe, 0xb},
-    {PIXEL_FILL(0xe), 0, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 1, 0x0a, 2, 0, 2, 0, 0xc, 0xe, 0xb},
-    {PIXEL_FILL(0xe), 1, 0x00, 2, 0, 2, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 1, 0x00, 2, 0, 2, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 0, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0x0), 0, 0x20, 0, 0, 0, 0, 0x1, 0x0, 0x2},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 1, 2, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0xe), 2, 0x00, 2, 0, 0, 0, 0xd, 0xe, 0xf},
-    {PIXEL_FILL(0x0), 2, 0x00, 2, 0, 0, 0, 0x1, 0x0, 0x6},
-    {PIXEL_FILL(0x0), 2, 0x00, 2, 0, 0, 0, 0x1, 0x0, 0x6},
-    {PIXEL_FILL(0x0), 2, 0x00, 2, 0, 0, 0, 0x1, 0x0, 0x6},
-    {PIXEL_FILL(0x1), 4, 0x00, 1, 0, 1, 1, 0x2, 0x1, 0x3}
+    [BTLWIN_0] = {
+        .fillValue = PIXEL_FILL(15),
+        .fontId = 2,
+        .x = 2,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .speed = 1,
+        .fgColor = 1,
+        .bgColor = 15,
+        .shadowColor = 6
+    },
+    [BTLWIN_1] = {
+        .fillValue = PIXEL_FILL(15),
+        .fontId = 2,
+        .x = 2,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 15,
+        .shadowColor = 6
+    },
+    [BTLWIN_2] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 1,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_3] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 0,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_4] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 0,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_5] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 0,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_6] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 0,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_7] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 0,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 12,
+        .bgColor = 14,
+        .shadowColor = 11
+    },
+    [BTLWIN_8] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 0,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_9] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 1,
+        .x = 10,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .speed = 0,
+        .fgColor = 12,
+        .bgColor = 14,
+        .shadowColor = 11
+    },
+    [BTLWIN_10] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 1,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_11] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 1,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_12] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_13] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = 0,
+        .x = 32,
+        .y = 0,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 0,
+        .shadowColor = 2
+    },
+    [BTLWIN_14] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 1,
+        .lineSpacing = 2,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_15] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_16] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_17] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_18] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_19] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_20] = {
+        .fillValue = PIXEL_FILL(14),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15
+    },
+    [BTLWIN_21] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 0,
+        .shadowColor = 6
+    },
+    [BTLWIN_22] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 0,
+        .shadowColor = 6
+    },
+    [BTLWIN_23] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = 2,
+        .x = 0,
+        .y = 2,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 0,
+        .shadowColor = 6
+    },
+    [BTLWIN_24] = {
+        .fillValue = PIXEL_FILL(1),
+        .fontId = 4,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 1,
+        .speed = 1,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3
+    }
 };
 
-const u8 gUnknown_83FEC90[] = {0x04, 0x05, 0x02, 0x02};
+static const u8 sNpcContextFontIds[] = { 4, 5, 2, 2 };
 
 // windowId: Upper 2 bits are text flags
 //   x40: Use NPC context-defined font
 //   x80: Inhibit window clear
-void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
-    bool32 copyToVram;
+void BattlePutTextCenteredOnWindow(const u8 *text, u8 windowId) {
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
     int x;
     u8 context;
 
-    u8 textFlags = windowId & 0xC0;
-    windowId &= 0x3F;
-    if (!(textFlags & 0x80))
+    u8 textFlags = windowId & BTL_PRINT_FLAGS_BM;
+    windowId &= BTL_PRINT_WINDOW_BM;
+    if (!(textFlags & BTL_PRINT_NOCLR_F))
         FillWindowPixelBuffer(windowId, sTextOnWindowsInfo_Normal[windowId].fillValue);
-    if (textFlags & 0x40) {
+    if (textFlags & BTL_PRINT_CTX_F) {
         context = ContextNpcGetTextColor();
-        printerTemplate.fontId = gUnknown_83FEC90[context];
+        printerTemplate.fontId = sNpcContextFontIds[context];
     }
     else {
         printerTemplate.fontId = sTextOnWindowsInfo_Normal[windowId].fontId;
     }
     switch (windowId)
     {
-    case 15 ... 20:
+    case BTLWIN_15:
+    case BTLWIN_16:
+    case BTLWIN_17:
+    case BTLWIN_18:
+    case BTLWIN_19:
+    case BTLWIN_20:
         x = (48 - GetStringWidth(sTextOnWindowsInfo_Normal[windowId].fontId, text,
                                  sTextOnWindowsInfo_Normal[windowId].letterSpacing)) / 2;
         break;
-    case 21 ... 23:
+    case BTLWIN_21:
+    case BTLWIN_22:
+    case BTLWIN_23:
         x = (64 - GetStringWidth(sTextOnWindowsInfo_Normal[windowId].fontId, text,
                                  sTextOnWindowsInfo_Normal[windowId].letterSpacing)) / 2;
         break;
@@ -2428,17 +2728,17 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     printerTemplate.fgColor = sTextOnWindowsInfo_Normal[windowId].fgColor;
     printerTemplate.bgColor = sTextOnWindowsInfo_Normal[windowId].bgColor;
     printerTemplate.shadowColor = sTextOnWindowsInfo_Normal[windowId].shadowColor;
-    if (windowId == 24)
+    if (windowId == BTLWIN_24)
         gTextFlags.useAlternateDownArrow = FALSE;
     else
         gTextFlags.useAlternateDownArrow = TRUE;
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) || ((gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) && windowId != 24))
+    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) || ((gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) && windowId != BTLWIN_24))
         gTextFlags.autoScroll = TRUE;
     else
         gTextFlags.autoScroll = FALSE;
 
-    if (windowId == 0 || windowId == 24)
+    if (windowId == BTLWIN_0 || windowId == BTLWIN_24)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             speed = 1;
@@ -2453,7 +2753,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     }
 
     AddTextPrinter(&printerTemplate, speed, NULL);
-    if (!(textFlags & 0x80))
+    if (!(textFlags & BTL_PRINT_NOCLR_F))
     {
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_BOTH);
@@ -2470,7 +2770,7 @@ bool8 BattleStringShouldBeColored(u16 stringId)
 void SetPpNumbersPaletteInMoveSelection(void)
 {
     struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
-    const u16 *palPtr = gUnknown_8D2FBB4;
+    const u16 *palPtr = gBattlePpNumbersPals;
     u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBattler]],
                                       chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBattler]]);
 
@@ -2485,31 +2785,31 @@ u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp)
 {
     if (maxPp == currentPp)
     {
-        return 3;
+        return PPSTATE_OVER_HALF;
     }
     else if (maxPp <= 2)
     {
         if (currentPp > 1)
-            return 3;
+            return PPSTATE_OVER_HALF;
         else
-            return 2 - currentPp;
+            return 2 - currentPp; // 1 --> PPSTATE_UNDER_QUARTER; 0 --> PPSTATE_DEPLETED
     }
     else if (maxPp <= 7)
     {
         if (currentPp > 2)
-            return 3;
+            return PPSTATE_OVER_HALF;
         else
-            return 2 - currentPp;
+            return 2 - currentPp; // 2 --> PPSTATE_UNDER_HALF; 1 --> PPSTATE_UNDER_QUARTER; 0 --> PPSTATE_DEPLETED
     }
     else
     {
         if (currentPp == 0)
-            return 2;
+            return PPSTATE_DEPLETED;
         if (currentPp <= maxPp / 4)
-            return 1;
+            return PPSTATE_UNDER_QUARTER;
         if (currentPp > maxPp / 2)
-            return 3;
+            return PPSTATE_OVER_HALF;
     }
 
-    return 0;
+    return PPSTATE_UNDER_HALF;
 }

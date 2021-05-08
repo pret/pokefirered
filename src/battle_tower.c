@@ -714,21 +714,21 @@ static u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 count)
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         if (count == 0)
-            StringAppend(gStringVar1, gUnknown_83FE859);
+            StringAppend(gStringVar1, gText_BtlTwrBanList_Space);
         count++;
         StringAppend(gStringVar1, gSpeciesNames[species]);
         switch (count)
         {
         case 2:
-            StringAppend(gStringVar1, gUnknown_83FE85E);
+            StringAppend(gStringVar1, gText_BtlTwrBanList_Newline);
             break;
         case 5:
         case 8:
         case 11:
-            StringAppend(gStringVar1, gUnknown_83FE85C);
+            StringAppend(gStringVar1, gText_BtlTwrBanList_PromptScroll);
             break;
         default:
-            StringAppend(gStringVar1, gUnknown_83FE859);
+            StringAppend(gStringVar1, gText_BtlTwrBanList_Space);
             break;
         }
     }
@@ -812,9 +812,9 @@ void CheckPartyBattleTowerBanlist(void)
         i = StringLength(gStringVar1);
         gStringVar1[i - 1] = EOS;
         if (counter < 3)
-            StringAppend(gStringVar1, gUnknown_83FE860);
+            StringAppend(gStringVar1, gText_BtlTwrBanList_Is);
         else
-            StringAppend(gStringVar1, gUnknown_83FE864);
+            StringAppend(gStringVar1, gText_BtlTwrBanList_Are);
     }
     else
     {

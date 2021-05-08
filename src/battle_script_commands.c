@@ -4983,7 +4983,7 @@ static void atk5A_yesnoboxlearnmove(void)
     {
     case 0:
         HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
         ++gBattleScripting.learnMoveState;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5093,7 +5093,7 @@ static void atk5B_yesnoboxstoplearningmove(void)
     {
     case 0:
         HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
         ++gBattleScripting.learnMoveState;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5381,7 +5381,7 @@ static void atk67_yesnobox(void)
     {
     case 0:
         HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
         ++gBattleCommunication[0];
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -9298,7 +9298,7 @@ static void atkF3_trygivecaughtmonnick(void)
     {
     case 0:
         HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
         ++gBattleCommunication[MULTIUSE_STATE];
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();

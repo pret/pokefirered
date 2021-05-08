@@ -316,7 +316,7 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         OakOldManBufferExecCompleted();
 }
 
@@ -651,11 +651,11 @@ static void PrintOakText_ForPetesSake(void)
         break;
     case 2:
         BattleStringExpandPlaceholdersToDisplayedString(gText_ForPetesSake);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 3:
-        if (!IsTextPrinterActive(24))
+        if (!IsTextPrinterActive(BTLWIN_24))
         {
             mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[3]]) << 16;
             BeginNormalPaletteFade(mask,
@@ -670,12 +670,12 @@ static void PrintOakText_ForPetesSake(void)
         if (!gPaletteFade.active)
         {
             BattleStringExpandPlaceholdersToDisplayedString(gText_TheTrainerThat);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+            BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
             ++gBattleStruct->simulatedInputState[0];
         }
         break;
     case 5:
-        if (!IsTextPrinterActive(24))
+        if (!IsTextPrinterActive(BTLWIN_24))
         {
             mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[3]]) << 16;
             BeginNormalPaletteFade(mask,
@@ -690,12 +690,12 @@ static void PrintOakText_ForPetesSake(void)
         if (!gPaletteFade.active)
         {
             BattleStringExpandPlaceholdersToDisplayedString(gText_TryBattling);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+            BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
             ++gBattleStruct->simulatedInputState[0];
         }
         break;
     case 7:
-        if (!IsTextPrinterActive(24))
+        if (!IsTextPrinterActive(BTLWIN_24))
         {
             BeginNormalPaletteFade(0xFFFFFF7E,
                                    4,
@@ -748,7 +748,7 @@ static void PrintOakTextWithMainBgDarkened(const u8 *text, u8 delay)
     switch (gBattleStruct->simulatedInputState[0])
     {
     case 0:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActive(BTLWIN_0))
         {
             gBattleStruct->simulatedInputState[3] = delay;
             ++gBattleStruct->simulatedInputState[0];
@@ -774,11 +774,11 @@ static void PrintOakTextWithMainBgDarkened(const u8 *text, u8 delay)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(text);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 4:
-        if (!IsTextPrinterActive(24))
+        if (!IsTextPrinterActive(BTLWIN_24))
         {
             BeginNormalPaletteFade(0xFFFFFF7E,
                                    4,
@@ -842,11 +842,11 @@ static void PrintOakText_KeepAnEyeOnHP(void)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(gText_KeepAnEyeOnHP);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 4:
-        if (!IsTextPrinterActive(24))
+        if (!IsTextPrinterActive(BTLWIN_24))
         {
             mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[3]]) << 16;
             BeginNormalPaletteFade(mask,
@@ -898,7 +898,7 @@ static void CompleteOnHealthbarDone(void)
 
 static void CompleteOnInactiveTextPrinter2(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         OakOldManBufferExecCompleted();
 }
 
@@ -1759,9 +1759,9 @@ static void OakOldManHandlePrintString(void)
     {
         BufferStringBattle(*stringId);
         if (BattleStringShouldBeColored(*stringId))
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+            BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTL_PRINT_CTX_F | BTLWIN_0);
         else
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+            BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
         if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         {
             switch (*stringId)
@@ -1815,8 +1815,8 @@ static void OakOldManHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_EmptyString3, 0);
-    BattlePutTextOnWindow(gText_BattleMenu, 2);
+    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_0);
+    BattlePutTextCenteredOnWindow(gText_BattleMenu, BTLWIN_2);
     for (i = 0; i < MAX_MON_MOVES; ++i)
         ActionSelectionDestroyCursorAt((u8)i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
@@ -1824,7 +1824,7 @@ static void OakOldManHandleChooseAction(void)
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
     else
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillOldManDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_1);
 }
 
 static void OakOldManHandleUnknownYesNoBox(void)

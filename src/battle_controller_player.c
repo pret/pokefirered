@@ -570,7 +570,7 @@ void HandleInputChooseMove(void)
             else
                 gMultiUsePlayerCursor = gMoveSelectionCursor[gActiveBattler] + 1;
             MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 27);
-            BattlePutTextOnWindow(gText_BattleSwitchWhich, 0xB);
+            BattlePutTextCenteredOnWindow(gText_BattleSwitchWhich, BTLWIN_11);
             gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitching;
         }
     }
@@ -1007,7 +1007,7 @@ static void CompleteOnHealthbarDone(void)
 
 void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         PlayerBufferExecCompleted();
 }
 
@@ -1188,7 +1188,7 @@ static void Task_CreateLevelUpVerticalStripes(u8 taskId)
     switch (data[15])
     {
     case 0:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActive(BTLWIN_0))
         {
             if (!isOnBg2)
             {
@@ -1282,7 +1282,7 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
 
 static void CompleteOnInactiveTextPrinter2(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         PlayerBufferExecCompleted();
 }
 
@@ -1368,9 +1368,9 @@ static void MoveSelectionDisplayMoveNames(void)
     for (i = 0; i < MAX_MON_MOVES; ++i)
     {
         MoveSelectionDestroyCursorAt(i);
-        StringCopy(gDisplayedStringBattle, gUnknown_83FE770);
+        StringCopy(gDisplayedStringBattle, gText_Battle_SetMoveNamePalette);
         StringAppend(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
-        BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_3 + i);
         if (moveInfo->moves[i] != MOVE_NONE)
             ++gNumberOfMovesToChoose;
     }
@@ -1379,7 +1379,7 @@ static void MoveSelectionDisplayMoveNames(void)
 static void MoveSelectionDisplayPpString(void)
 {
     StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 7);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_7);
 }
 
 static void MoveSelectionDisplayPpNumber(void)
@@ -1394,7 +1394,7 @@ static void MoveSelectionDisplayPpNumber(void)
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     *txtPtr = CHAR_SLASH;
     ConvertIntToDecimalStringN(++txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 9);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_9);
 }
 
 static void MoveSelectionDisplayMoveType(void)
@@ -1406,9 +1406,9 @@ static void MoveSelectionDisplayMoveType(void)
     *txtPtr++ = EXT_CTRL_CODE_BEGIN;
     *txtPtr++ = 6;
     *txtPtr++ = 1;
-    txtPtr = StringCopy(txtPtr, gUnknown_83FE770);
+    txtPtr = StringCopy(txtPtr, gText_Battle_SetMoveNamePalette);
     StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 8);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_8);
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
@@ -1417,7 +1417,7 @@ void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
 
     src[0] = arg1 + 1;
     src[1] = arg1 + 2;
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 9 * (cursorPosition & 1) + 1, 55 + (cursorPosition & 2), 1, 2, 0x11);
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, 9 * (cursorPosition & 1) + 1, 55 + (cursorPosition & 2), 1, 2, PIXEL_FILL(1));
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1427,7 +1427,7 @@ void MoveSelectionDestroyCursorAt(u8 cursorPosition)
 
     src[0] = 32;
     src[1] = 32;
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 9 * (cursorPosition & 1) + 1, 55 + (cursorPosition & 2), 1, 2, 0x11);
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, 9 * (cursorPosition & 1) + 1, 55 + (cursorPosition & 2), 1, 2,PIXEL_FILL(1));
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1437,7 +1437,7 @@ void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
 
     src[0] = 1;
     src[1] = 2;
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 7 * (cursorPosition & 1) + 16, 35 + (cursorPosition & 2), 1, 2, 0x11);
+    CopyToBgTilemapBufferRect_ChangePalette(0, src, 7 * (cursorPosition & 1) + 16, 35 + (cursorPosition & 2), 1, 2, PIXEL_FILL(1));
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1479,7 +1479,7 @@ static void PrintLinkStandbyMsg(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
-        BattlePutTextOnWindow(gText_LinkStandby, 0);
+        BattlePutTextCenteredOnWindow(gText_LinkStandby, BTLWIN_0);
     }
 }
 
@@ -2377,9 +2377,9 @@ static void PlayerHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0 | BTL_PRINT_CTX_F);
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
 }
 
@@ -2406,13 +2406,13 @@ static void PlayerHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_EmptyString3, 0);
-    BattlePutTextOnWindow(gText_BattleMenu, 2);
+    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_0);
+    BattlePutTextCenteredOnWindow(gText_BattleMenu, BTLWIN_2);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_1);
 }
 
 static void PlayerHandleUnknownYesNoBox(void)

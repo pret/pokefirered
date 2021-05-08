@@ -71,7 +71,7 @@ static void GetObjectEventMovingCameraOffset(s16 *, s16 *);
 static struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8);
 static void LoadObjectEventPalette(u16);
 static void RemoveObjectEventIfOutsideView(struct ObjectEvent *);
-static void sub_805EE3C(u8, s16, s16);
+static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static void sub_805EFF4(struct ObjectEvent *);
 static u8 TryLoadObjectPalette(const struct SpritePalette *spritePalette);
@@ -450,23 +450,23 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 };
 
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED  0x1100
-#define OBJ_EVENT_PAL_TAG_9  0x1101
-#define OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION 0x1102
+#define OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION  0x1101
+#define OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION_DUMMY 0x1102
 #define OBJ_EVENT_PAL_TAG_NPC_BLUE  0x1103
 #define OBJ_EVENT_PAL_TAG_NPC_PINK  0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN  0x1105
 #define OBJ_EVENT_PAL_TAG_NPC_WHITE  0x1106
-#define OBJ_EVENT_PAL_TAG_4  0x1107
-#define OBJ_EVENT_PAL_TAG_5  0x1108
-#define OBJ_EVENT_PAL_TAG_6  0x1109
-#define OBJ_EVENT_PAL_TAG_7  0x110A
+#define OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION  0x1107
+#define OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION  0x1108
+#define OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION  0x1109
+#define OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION  0x110A
 #define OBJ_EVENT_PAL_TAG_12 0x110B
 #define OBJ_EVENT_PAL_TAG_13 0x110C
 #define OBJ_EVENT_PAL_TAG_14 0x110D
 #define OBJ_EVENT_PAL_TAG_15 0x110E
 #define OBJ_EVENT_PAL_TAG_16 0x110F
 #define OBJ_EVENT_PAL_TAG_PLAYER_GREEN 0x1110
-#define OBJ_EVENT_PAL_TAG_18 0x1111
+#define OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION 0x1111
 #define OBJ_EVENT_PAL_TAG_19 0x1112
 #define OBJ_EVENT_PAL_TAG_METEORITE 0x1113
 #define OBJ_EVENT_PAL_TAG_SEAGALLOP 0x1114
@@ -496,39 +496,39 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #include "data/object_events/object_event_graphics_info.h"
 
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
-    {gObjectEventPal_NpcBlue,          OBJ_EVENT_PAL_TAG_NPC_BLUE},
-    {gObjectEventPal_NpcPink,          OBJ_EVENT_PAL_TAG_NPC_PINK},
-    {gObjectEventPal_NpcGreen,         OBJ_EVENT_PAL_TAG_NPC_GREEN},
-    {gObjectEventPal_NpcWhite,         OBJ_EVENT_PAL_TAG_NPC_WHITE},
-    {gObjectEventPal_4,                OBJ_EVENT_PAL_TAG_4},
-    {gObjectEventPal_5,                OBJ_EVENT_PAL_TAG_5},
-    {gObjectEventPal_6,                OBJ_EVENT_PAL_TAG_6},
-    {gObjectEventPal_7,                OBJ_EVENT_PAL_TAG_7},
-    {gObjectEventPal_Player,           OBJ_EVENT_PAL_TAG_PLAYER_RED},
-    {gObjectEventPal_9,                OBJ_EVENT_PAL_TAG_9},
-    {gObjectEventPal_PlayerReflection, OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION},
-    {gObjectEventPal_12,               OBJ_EVENT_PAL_TAG_12},
-    {gObjectEventPal_13,               OBJ_EVENT_PAL_TAG_13},
-    {gObjectEventPal_Player,           OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
-    {gObjectEventPal_9,                OBJ_EVENT_PAL_TAG_18},
-    {gObjectEventPal_Meteorite,        OBJ_EVENT_PAL_TAG_METEORITE},
-    {gObjectEventPal_SSAnne,           OBJ_EVENT_PAL_TAG_SS_ANNE},
-    {gObjectEventPal_Seagallop,        OBJ_EVENT_PAL_TAG_SEAGALLOP},
+    {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
+    {gObjectEventPal_NpcPink,               OBJ_EVENT_PAL_TAG_NPC_PINK},
+    {gObjectEventPal_NpcGreen,              OBJ_EVENT_PAL_TAG_NPC_GREEN},
+    {gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},
+    {gObjectEventPal_NpcBlueReflection,     OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION},
+    {gObjectEventPal_NpcPinkReflection,     OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION},
+    {gObjectEventPal_NpcGreenReflection,    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION},
+    {gObjectEventPal_NpcWhiteReflection,    OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION},
+    {gObjectEventPal_Player,                OBJ_EVENT_PAL_TAG_PLAYER_RED},
+    {gObjectEventPal_PlayerReflection,      OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
+    {gObjectEventPal_PlayerReflectionDummy, OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION_DUMMY},
+    {gObjectEventPal_12,                    OBJ_EVENT_PAL_TAG_12},
+    {gObjectEventPal_13,                    OBJ_EVENT_PAL_TAG_13},
+    {gObjectEventPal_Player,                OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
+    {gObjectEventPal_PlayerReflection,      OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
+    {gObjectEventPal_Meteorite,             OBJ_EVENT_PAL_TAG_METEORITE},
+    {gObjectEventPal_SSAnne,                OBJ_EVENT_PAL_TAG_SS_ANNE},
+    {gObjectEventPal_Seagallop,             OBJ_EVENT_PAL_TAG_SEAGALLOP},
     {},
 };
 
 const u16 gPlayerReflectionPaletteTags[] = {
-    OBJ_EVENT_PAL_TAG_9,
-    OBJ_EVENT_PAL_TAG_9,
-    OBJ_EVENT_PAL_TAG_9,
-    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
 };
 
 const u16 gUnusedPlayerReflectionPaletteTags[] = {
-    OBJ_EVENT_PAL_TAG_18,
-    OBJ_EVENT_PAL_TAG_18,
-    OBJ_EVENT_PAL_TAG_18,
-    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
 };
 
 const u16 gUnknownPaletteTags_83A5200[] = {
@@ -609,10 +609,10 @@ const u16 gUnknownPaletteTags_83A5268[] = {
 };
 
 const u16 gUnknownPaletteTags_83A5270[] = {
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
 };
 
 const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
@@ -633,15 +633,15 @@ const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
 
 const u16 gUnknownPaletteTags_83A52E0[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
-    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
     OBJ_EVENT_PAL_TAG_NPC_PINK,
     OBJ_EVENT_PAL_TAG_NPC_GREEN,
     OBJ_EVENT_PAL_TAG_NPC_WHITE,
-    OBJ_EVENT_PAL_TAG_4,
-    OBJ_EVENT_PAL_TAG_5,
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
 const u16 gUnknownPaletteTags_83A52F4[] = {
@@ -651,36 +651,36 @@ const u16 gUnknownPaletteTags_83A52F4[] = {
     OBJ_EVENT_PAL_TAG_NPC_PINK,
     OBJ_EVENT_PAL_TAG_NPC_GREEN,
     OBJ_EVENT_PAL_TAG_NPC_WHITE,
-    OBJ_EVENT_PAL_TAG_4,
-    OBJ_EVENT_PAL_TAG_5,
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
 const u16 gUnknownPaletteTags_83A5308[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
-    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
     OBJ_EVENT_PAL_TAG_NPC_PINK,
     OBJ_EVENT_PAL_TAG_NPC_GREEN,
     OBJ_EVENT_PAL_TAG_NPC_WHITE,
-    OBJ_EVENT_PAL_TAG_4,
-    OBJ_EVENT_PAL_TAG_5,
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
 const u16 gUnknownPaletteTags_83A531C[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
-    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
     OBJ_EVENT_PAL_TAG_NPC_PINK,
     OBJ_EVENT_PAL_TAG_NPC_GREEN,
     OBJ_EVENT_PAL_TAG_NPC_WHITE,
-    OBJ_EVENT_PAL_TAG_4,
-    OBJ_EVENT_PAL_TAG_5,
-    OBJ_EVENT_PAL_TAG_6,
-    OBJ_EVENT_PAL_TAG_7,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
 const u16 *const gObjectPaletteTagSets[] = {
@@ -1904,7 +1904,7 @@ static void RemoveObjectEventIfOutsideView(struct ObjectEvent *objectEvent)
     RemoveObjectEvent(objectEvent);
 }
 
-void sub_805EDF0(s16 x, s16 y)
+void ReloadMapObjectsWithOffset(s16 x, s16 y)
 {
     u8 i;
 
@@ -1913,13 +1913,13 @@ void sub_805EDF0(s16 x, s16 y)
     {
         if (gObjectEvents[i].active)
         {
-            sub_805EE3C(i, x, y);
+            ReloadMapObjectWithOffset(i, x, y);
         }
     }
     CreateReflectionEffectSprites();
 }
 
-static void sub_805EE3C(u8 objectEventId, s16 x, s16 y)
+static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
 {
     u8 spriteId;
     struct Sprite *sprite;

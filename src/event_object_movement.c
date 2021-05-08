@@ -460,14 +460,14 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #define OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION  0x1108
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION  0x1109
 #define OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION  0x110A
-#define OBJ_EVENT_PAL_TAG_12 0x110B
-#define OBJ_EVENT_PAL_TAG_13 0x110C
-#define OBJ_EVENT_PAL_TAG_14 0x110D
-#define OBJ_EVENT_PAL_TAG_15 0x110E
-#define OBJ_EVENT_PAL_TAG_16 0x110F
+#define OBJ_EVENT_PAL_TAG_11 0x110B
+#define OBJ_EVENT_PAL_TAG_12 0x110C
+#define OBJ_EVENT_PAL_TAG_13 0x110D
+#define OBJ_EVENT_PAL_TAG_14 0x110E
+#define OBJ_EVENT_PAL_TAG_15 0x110F
 #define OBJ_EVENT_PAL_TAG_PLAYER_GREEN 0x1110
 #define OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION 0x1111
-#define OBJ_EVENT_PAL_TAG_19 0x1112
+#define OBJ_EVENT_PAL_TAG_18 0x1112
 #define OBJ_EVENT_PAL_TAG_METEORITE 0x1113
 #define OBJ_EVENT_PAL_TAG_SEAGALLOP 0x1114
 #define OBJ_EVENT_PAL_TAG_SS_ANNE 0x1115
@@ -475,16 +475,16 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #define OBJ_EVENT_PAL_TAG_23 0x1117
 #define OBJ_EVENT_PAL_TAG_24 0x1118
 #define OBJ_EVENT_PAL_TAG_25 0x1119
-#define OBJ_EVENT_PAL_TAG_x011A 0x111A
-#define OBJ_EVENT_PAL_TAG_26 0x111B
-#define OBJ_EVENT_PAL_TAG_27 0x111C
-#define OBJ_EVENT_PAL_TAG_28 0x111D
-#define OBJ_EVENT_PAL_TAG_29 0x111E
-#define OBJ_EVENT_PAL_TAG_30 0x111F
-#define OBJ_EVENT_PAL_TAG_31 0x1120
-#define OBJ_EVENT_PAL_TAG_32 0x1121
-#define OBJ_EVENT_PAL_TAG_33 0x1122
-#define OBJ_EVENT_PAL_TAG_34 0x1123
+#define OBJ_EVENT_PAL_TAG_26 0x111A
+#define OBJ_EVENT_PAL_TAG_27 0x111B
+#define OBJ_EVENT_PAL_TAG_28 0x111C
+#define OBJ_EVENT_PAL_TAG_29 0x111D
+#define OBJ_EVENT_PAL_TAG_30 0x111E
+#define OBJ_EVENT_PAL_TAG_31 0x111F
+#define OBJ_EVENT_PAL_TAG_32 0x1120
+#define OBJ_EVENT_PAL_TAG_33 0x1121
+#define OBJ_EVENT_PAL_TAG_34 0x1122
+#define OBJ_EVENT_PAL_TAG_35 0x1123
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -507,8 +507,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Player,                OBJ_EVENT_PAL_TAG_PLAYER_RED},
     {gObjectEventPal_PlayerReflection,      OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
     {gObjectEventPal_PlayerReflectionDummy, OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION_DUMMY},
+    {gObjectEventPal_11,                    OBJ_EVENT_PAL_TAG_11},
     {gObjectEventPal_12,                    OBJ_EVENT_PAL_TAG_12},
-    {gObjectEventPal_13,                    OBJ_EVENT_PAL_TAG_13},
     {gObjectEventPal_Player,                OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
     {gObjectEventPal_PlayerReflection,      OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
     {gObjectEventPal_Meteorite,             OBJ_EVENT_PAL_TAG_METEORITE},
@@ -546,31 +546,31 @@ const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
 };
 
 const u16 gUnknownPaletteTags_83A5228[] = {
-    OBJ_EVENT_PAL_TAG_13,
-    OBJ_EVENT_PAL_TAG_13,
-    OBJ_EVENT_PAL_TAG_13,
-    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_12,
+    OBJ_EVENT_PAL_TAG_12,
+    OBJ_EVENT_PAL_TAG_12,
+    OBJ_EVENT_PAL_TAG_12,
 };
 
 const u16 gUnknownPaletteTags_83A5230[] = {
-    OBJ_EVENT_PAL_TAG_14,
-    OBJ_EVENT_PAL_TAG_14,
-    OBJ_EVENT_PAL_TAG_14,
-    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
 };
 
 const u16 gUnknownPaletteTags_83A5238[] = {
-    OBJ_EVENT_PAL_TAG_15,
-    OBJ_EVENT_PAL_TAG_15,
-    OBJ_EVENT_PAL_TAG_15,
-    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
 };
 
 const u16 gUnknownPaletteTags_83A5240[] = {
-    OBJ_EVENT_PAL_TAG_19,
-    OBJ_EVENT_PAL_TAG_19,
-    OBJ_EVENT_PAL_TAG_19,
-    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
 };
 
 const u16 gMeteoriteReflectionPaletteTags[] = {
@@ -588,10 +588,10 @@ const u16 gSeagallopReflectionPaletteTags[] = {
 };
 
 const u16 gUnknownPaletteTags_83A5258[] = {
-    OBJ_EVENT_PAL_TAG_26,
-    OBJ_EVENT_PAL_TAG_26,
-    OBJ_EVENT_PAL_TAG_26,
-    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_27,
+    OBJ_EVENT_PAL_TAG_27,
+    OBJ_EVENT_PAL_TAG_27,
+    OBJ_EVENT_PAL_TAG_27,
 };
 
 const u16 gUnknownPaletteTags_83A5260[] = {
@@ -602,10 +602,10 @@ const u16 gUnknownPaletteTags_83A5260[] = {
 };
 
 const u16 gUnknownPaletteTags_83A5268[] = {
-    OBJ_EVENT_PAL_TAG_x011A,
-    OBJ_EVENT_PAL_TAG_x011A,
-    OBJ_EVENT_PAL_TAG_x011A,
-    OBJ_EVENT_PAL_TAG_x011A,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
 };
 
 const u16 gUnknownPaletteTags_83A5270[] = {
@@ -618,16 +618,16 @@ const u16 gUnknownPaletteTags_83A5270[] = {
 const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
     {OBJ_EVENT_PAL_TAG_PLAYER_RED,   gPlayerReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_PLAYER_GREEN, gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_12,           gUnknownPaletteTags_83A5228},
-    {OBJ_EVENT_PAL_TAG_14,           gUnknownPaletteTags_83A5230},
-    {OBJ_EVENT_PAL_TAG_15,           gUnknownPaletteTags_83A5238},
-    {OBJ_EVENT_PAL_TAG_19,           gUnknownPaletteTags_83A5240},
+    {OBJ_EVENT_PAL_TAG_11,           gUnknownPaletteTags_83A5228},
+    {OBJ_EVENT_PAL_TAG_13,           gUnknownPaletteTags_83A5230},
+    {OBJ_EVENT_PAL_TAG_14,           gUnknownPaletteTags_83A5238},
+    {OBJ_EVENT_PAL_TAG_18,           gUnknownPaletteTags_83A5240},
     {OBJ_EVENT_PAL_TAG_METEORITE,    gMeteoriteReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_SEAGALLOP,    gSeagallopReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_23,           gUnknownPaletteTags_83A5260},
     {OBJ_EVENT_PAL_TAG_25,           gUnknownPaletteTags_83A5268},
     {OBJ_EVENT_PAL_TAG_NPC_GREEN,    gUnknownPaletteTags_83A5270},
-    {OBJ_EVENT_PAL_TAG_26,           gUnknownPaletteTags_83A5258},
+    {OBJ_EVENT_PAL_TAG_27,           gUnknownPaletteTags_83A5258},
     {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 

@@ -74,7 +74,7 @@ static void RemoveObjectEventIfOutsideView(struct ObjectEvent *);
 static void sub_805EE3C(u8, s16, s16);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static void sub_805EFF4(struct ObjectEvent *);
-static u8 sub_805F510(const struct SpritePalette *);
+static u8 TryLoadObjectPalette(const struct SpritePalette *spritePalette);
 static u8 FindObjectEventPaletteIndexByTag(u16);
 static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *, u8);
 static void ObjectCB_CameraObject(struct Sprite *);
@@ -449,32 +449,33 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
     [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST] = DIR_SOUTH,
 };
 
-#define OBJ_EVENT_PAL_TAG_0  0x1103
-#define OBJ_EVENT_PAL_TAG_1  0x1104
-#define OBJ_EVENT_PAL_TAG_2  0x1105
-#define OBJ_EVENT_PAL_TAG_3  0x1106
+#define OBJ_EVENT_PAL_TAG_PLAYER_RED  0x1100
+#define OBJ_EVENT_PAL_TAG_9  0x1101
+#define OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION 0x1102
+#define OBJ_EVENT_PAL_TAG_NPC_BLUE  0x1103
+#define OBJ_EVENT_PAL_TAG_NPC_PINK  0x1104
+#define OBJ_EVENT_PAL_TAG_NPC_GREEN  0x1105
+#define OBJ_EVENT_PAL_TAG_NPC_WHITE  0x1106
 #define OBJ_EVENT_PAL_TAG_4  0x1107
 #define OBJ_EVENT_PAL_TAG_5  0x1108
 #define OBJ_EVENT_PAL_TAG_6  0x1109
 #define OBJ_EVENT_PAL_TAG_7  0x110A
-#define OBJ_EVENT_PAL_TAG_8  0x1100
-#define OBJ_EVENT_PAL_TAG_9  0x1101
-#define OBJ_EVENT_PAL_TAG_10 0x1102
-#define OBJ_EVENT_PAL_TAG_11 0x1115
 #define OBJ_EVENT_PAL_TAG_12 0x110B
 #define OBJ_EVENT_PAL_TAG_13 0x110C
 #define OBJ_EVENT_PAL_TAG_14 0x110D
 #define OBJ_EVENT_PAL_TAG_15 0x110E
 #define OBJ_EVENT_PAL_TAG_16 0x110F
-#define OBJ_EVENT_PAL_TAG_17 0x1110
+#define OBJ_EVENT_PAL_TAG_PLAYER_GREEN 0x1110
 #define OBJ_EVENT_PAL_TAG_18 0x1111
 #define OBJ_EVENT_PAL_TAG_19 0x1112
-#define OBJ_EVENT_PAL_TAG_20 0x1113
-#define OBJ_EVENT_PAL_TAG_21 0x1114
+#define OBJ_EVENT_PAL_TAG_METEORITE 0x1113
+#define OBJ_EVENT_PAL_TAG_SEAGALLOP 0x1114
+#define OBJ_EVENT_PAL_TAG_SS_ANNE 0x1115
 #define OBJ_EVENT_PAL_TAG_22 0x1116
 #define OBJ_EVENT_PAL_TAG_23 0x1117
 #define OBJ_EVENT_PAL_TAG_24 0x1118
 #define OBJ_EVENT_PAL_TAG_25 0x1119
+#define OBJ_EVENT_PAL_TAG_x011A 0x111A
 #define OBJ_EVENT_PAL_TAG_26 0x111B
 #define OBJ_EVENT_PAL_TAG_27 0x111C
 #define OBJ_EVENT_PAL_TAG_28 0x111D
@@ -495,24 +496,24 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #include "data/object_events/object_event_graphics_info.h"
 
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
-    {gObjectEventPal_0,  OBJ_EVENT_PAL_TAG_0},
-    {gObjectEventPal_1,  OBJ_EVENT_PAL_TAG_1},
-    {gObjectEventPal_2,  OBJ_EVENT_PAL_TAG_2},
-    {gObjectEventPal_3,  OBJ_EVENT_PAL_TAG_3},
-    {gObjectEventPal_4,  OBJ_EVENT_PAL_TAG_4},
-    {gObjectEventPal_5,  OBJ_EVENT_PAL_TAG_5},
-    {gObjectEventPal_6,  OBJ_EVENT_PAL_TAG_6},
-    {gObjectEventPal_7,  OBJ_EVENT_PAL_TAG_7},
-    {gObjectEventPal_8,  OBJ_EVENT_PAL_TAG_8},
-    {gObjectEventPal_9,  OBJ_EVENT_PAL_TAG_9},
-    {gObjectEventPal_10, OBJ_EVENT_PAL_TAG_10},
-    {gObjectEventPal_12, OBJ_EVENT_PAL_TAG_12},
-    {gObjectEventPal_13, OBJ_EVENT_PAL_TAG_13},
-    {gObjectEventPal_8,  OBJ_EVENT_PAL_TAG_17},
-    {gObjectEventPal_9,  OBJ_EVENT_PAL_TAG_18},
-    {gObjectEventPal_20, OBJ_EVENT_PAL_TAG_20},
-    {gObjectEventPal_11, OBJ_EVENT_PAL_TAG_11},
-    {gObjectEventPal_21, OBJ_EVENT_PAL_TAG_21},
+    {gObjectEventPal_NpcBlue,          OBJ_EVENT_PAL_TAG_NPC_BLUE},
+    {gObjectEventPal_NpcPink,          OBJ_EVENT_PAL_TAG_NPC_PINK},
+    {gObjectEventPal_NpcGreen,         OBJ_EVENT_PAL_TAG_NPC_GREEN},
+    {gObjectEventPal_NpcWhite,         OBJ_EVENT_PAL_TAG_NPC_WHITE},
+    {gObjectEventPal_4,                OBJ_EVENT_PAL_TAG_4},
+    {gObjectEventPal_5,                OBJ_EVENT_PAL_TAG_5},
+    {gObjectEventPal_6,                OBJ_EVENT_PAL_TAG_6},
+    {gObjectEventPal_7,                OBJ_EVENT_PAL_TAG_7},
+    {gObjectEventPal_Player,           OBJ_EVENT_PAL_TAG_PLAYER_RED},
+    {gObjectEventPal_9,                OBJ_EVENT_PAL_TAG_9},
+    {gObjectEventPal_PlayerReflection, OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION},
+    {gObjectEventPal_12,               OBJ_EVENT_PAL_TAG_12},
+    {gObjectEventPal_13,               OBJ_EVENT_PAL_TAG_13},
+    {gObjectEventPal_Player,           OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
+    {gObjectEventPal_9,                OBJ_EVENT_PAL_TAG_18},
+    {gObjectEventPal_Meteorite,        OBJ_EVENT_PAL_TAG_METEORITE},
+    {gObjectEventPal_SSAnne,           OBJ_EVENT_PAL_TAG_SS_ANNE},
+    {gObjectEventPal_Seagallop,        OBJ_EVENT_PAL_TAG_SEAGALLOP},
     {},
 };
 
@@ -538,9 +539,9 @@ const u16 gUnknownPaletteTags_83A5200[] = {
 };
 
 const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
-    {OBJ_EVENT_PAL_TAG_8,    gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_17,   gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_22,   gUnknownPaletteTags_83A5200},
+    {OBJ_EVENT_PAL_TAG_PLAYER_RED,   gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN, gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_22,           gUnknownPaletteTags_83A5200},
     {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 
@@ -572,18 +573,18 @@ const u16 gUnknownPaletteTags_83A5240[] = {
     OBJ_EVENT_PAL_TAG_19,
 };
 
-const u16 gUnknownPaletteTags_83A5248[] = {
-    OBJ_EVENT_PAL_TAG_20,
-    OBJ_EVENT_PAL_TAG_20,
-    OBJ_EVENT_PAL_TAG_20,
-    OBJ_EVENT_PAL_TAG_20,
+const u16 gMeteoriteReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_METEORITE,
+    OBJ_EVENT_PAL_TAG_METEORITE,
+    OBJ_EVENT_PAL_TAG_METEORITE,
+    OBJ_EVENT_PAL_TAG_METEORITE,
 };
 
-const u16 gUnknownPaletteTags_83A5250[] = {
-    OBJ_EVENT_PAL_TAG_21,
-    OBJ_EVENT_PAL_TAG_21,
-    OBJ_EVENT_PAL_TAG_21,
-    OBJ_EVENT_PAL_TAG_21,
+const u16 gSeagallopReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_SEAGALLOP,
+    OBJ_EVENT_PAL_TAG_SEAGALLOP,
+    OBJ_EVENT_PAL_TAG_SEAGALLOP,
+    OBJ_EVENT_PAL_TAG_SEAGALLOP,
 };
 
 const u16 gUnknownPaletteTags_83A5258[] = {
@@ -601,10 +602,10 @@ const u16 gUnknownPaletteTags_83A5260[] = {
 };
 
 const u16 gUnknownPaletteTags_83A5268[] = {
-    0x111a,
-    0x111a,
-    0x111a,
-    0x111a,
+    OBJ_EVENT_PAL_TAG_x011A,
+    OBJ_EVENT_PAL_TAG_x011A,
+    OBJ_EVENT_PAL_TAG_x011A,
+    OBJ_EVENT_PAL_TAG_x011A,
 };
 
 const u16 gUnknownPaletteTags_83A5270[] = {
@@ -615,28 +616,28 @@ const u16 gUnknownPaletteTags_83A5270[] = {
 };
 
 const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
-    {OBJ_EVENT_PAL_TAG_8,    gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_17,   gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_12,   gUnknownPaletteTags_83A5228},
-    {OBJ_EVENT_PAL_TAG_14,   gUnknownPaletteTags_83A5230},
-    {OBJ_EVENT_PAL_TAG_15,   gUnknownPaletteTags_83A5238},
-    {OBJ_EVENT_PAL_TAG_19,   gUnknownPaletteTags_83A5240},
-    {OBJ_EVENT_PAL_TAG_20,   gUnknownPaletteTags_83A5248},
-    {OBJ_EVENT_PAL_TAG_21,   gUnknownPaletteTags_83A5250},
-    {OBJ_EVENT_PAL_TAG_23,   gUnknownPaletteTags_83A5260},
-    {OBJ_EVENT_PAL_TAG_25,   gUnknownPaletteTags_83A5268},
-    {OBJ_EVENT_PAL_TAG_2,    gUnknownPaletteTags_83A5270},
-    {OBJ_EVENT_PAL_TAG_26,   gUnknownPaletteTags_83A5258},
+    {OBJ_EVENT_PAL_TAG_PLAYER_RED,   gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN, gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_12,           gUnknownPaletteTags_83A5228},
+    {OBJ_EVENT_PAL_TAG_14,           gUnknownPaletteTags_83A5230},
+    {OBJ_EVENT_PAL_TAG_15,           gUnknownPaletteTags_83A5238},
+    {OBJ_EVENT_PAL_TAG_19,           gUnknownPaletteTags_83A5240},
+    {OBJ_EVENT_PAL_TAG_METEORITE,    gMeteoriteReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_SEAGALLOP,    gSeagallopReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_23,           gUnknownPaletteTags_83A5260},
+    {OBJ_EVENT_PAL_TAG_25,           gUnknownPaletteTags_83A5268},
+    {OBJ_EVENT_PAL_TAG_NPC_GREEN,    gUnknownPaletteTags_83A5270},
+    {OBJ_EVENT_PAL_TAG_26,           gUnknownPaletteTags_83A5258},
     {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 
 const u16 gUnknownPaletteTags_83A52E0[] = {
-    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_9,
-    OBJ_EVENT_PAL_TAG_0,
-    OBJ_EVENT_PAL_TAG_1,
-    OBJ_EVENT_PAL_TAG_2,
-    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    OBJ_EVENT_PAL_TAG_NPC_PINK,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE,
     OBJ_EVENT_PAL_TAG_4,
     OBJ_EVENT_PAL_TAG_5,
     OBJ_EVENT_PAL_TAG_6,
@@ -644,12 +645,12 @@ const u16 gUnknownPaletteTags_83A52E0[] = {
 };
 
 const u16 gUnknownPaletteTags_83A52F4[] = {
-    OBJ_EVENT_PAL_TAG_8,
-    OBJ_EVENT_PAL_TAG_17,
-    OBJ_EVENT_PAL_TAG_0,
-    OBJ_EVENT_PAL_TAG_1,
-    OBJ_EVENT_PAL_TAG_2,
-    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED,
+    OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    OBJ_EVENT_PAL_TAG_NPC_PINK,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE,
     OBJ_EVENT_PAL_TAG_4,
     OBJ_EVENT_PAL_TAG_5,
     OBJ_EVENT_PAL_TAG_6,
@@ -657,12 +658,12 @@ const u16 gUnknownPaletteTags_83A52F4[] = {
 };
 
 const u16 gUnknownPaletteTags_83A5308[] = {
-    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_9,
-    OBJ_EVENT_PAL_TAG_0,
-    OBJ_EVENT_PAL_TAG_1,
-    OBJ_EVENT_PAL_TAG_2,
-    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    OBJ_EVENT_PAL_TAG_NPC_PINK,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE,
     OBJ_EVENT_PAL_TAG_4,
     OBJ_EVENT_PAL_TAG_5,
     OBJ_EVENT_PAL_TAG_6,
@@ -670,12 +671,12 @@ const u16 gUnknownPaletteTags_83A5308[] = {
 };
 
 const u16 gUnknownPaletteTags_83A531C[] = {
-    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_9,
-    OBJ_EVENT_PAL_TAG_0,
-    OBJ_EVENT_PAL_TAG_1,
-    OBJ_EVENT_PAL_TAG_2,
-    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    OBJ_EVENT_PAL_TAG_NPC_PINK,
+    OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    OBJ_EVENT_PAL_TAG_NPC_WHITE,
     OBJ_EVENT_PAL_TAG_4,
     OBJ_EVENT_PAL_TAG_5,
     OBJ_EVENT_PAL_TAG_6,
@@ -1607,11 +1608,11 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (graphicsInfo->paletteSlot == 0)
     {
-        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
     else if (graphicsInfo->paletteSlot == 10)
     {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
@@ -1714,7 +1715,7 @@ void MakeObjectTemplateFromObjectEventGraphicsInfo(u16 graphicsId, void (*callba
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
 
     spriteTemplate->tileTag = graphicsInfo->tileTag;
-    spriteTemplate->paletteTag = graphicsInfo->paletteTag1;
+    spriteTemplate->paletteTag = graphicsInfo->paletteTag;
     spriteTemplate->oam = graphicsInfo->oam;
     spriteTemplate->anims = graphicsInfo->anims;
     spriteTemplate->images = graphicsInfo->images;
@@ -1788,7 +1789,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
         sprite->data[1] = z;
         if (graphicsInfo->paletteSlot == 10)
         {
-            LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+            LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
         }
 
         if (subspriteTables != NULL)
@@ -1825,7 +1826,7 @@ u8 sub_805EB44(u8 graphicsId, u8 a1, s16 x, s16 y)
         sprite->data[0] = a1;
         if (graphicsInfo->paletteSlot == 10)
         {
-            LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+            LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
         }
 
         if (subspriteTables != NULL)
@@ -1948,11 +1949,11 @@ static void sub_805EE3C(u8 objectEventId, s16 x, s16 y)
     *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
     if (graphicsInfo->paletteSlot == 0)
     {
-        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
     if (graphicsInfo->paletteSlot > 9)
     {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
     *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
@@ -2019,17 +2020,17 @@ void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
     sprite = &gSprites[objectEvent->spriteId];
     if (graphicsInfo->paletteSlot == 0)
     {
-        PatchObjectPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
     if (graphicsInfo->paletteSlot == 10)
     {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
     
     var = sprite->images->size / TILE_SIZE_4BPP;
     if (!sprite->usingSheet)
     {
-        sub_80075C0(sprite);
+        FreeSpriteTilesIfNotUsingSheet(sprite);
     }
     sprite->oam.shape = graphicsInfo->oam->shape;
     sprite->oam.size = graphicsInfo->oam->size;
@@ -2115,7 +2116,7 @@ static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *objectEvent)
     }
 }
 
-void npc_by_local_id_and_map_set_field_1_bit_x20(u8 localId, u8 mapNum, u8 mapGroup, u8 state)
+void ShowOrHideObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 state)
 {
     u8 objectEventId;
 
@@ -2132,7 +2133,7 @@ void ObjectEventGetLocalIdAndMap(struct ObjectEvent *objectEvent, void *localId,
     *(u8*)(mapGroup) = objectEvent->mapGroup;
 }
 
-void sub_805F378(s16 x, s16 y)
+void EnableObjectGroundEffectsByXY(s16 x, s16 y)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -2145,7 +2146,7 @@ void sub_805F378(s16 x, s16 y)
     }
 }
 
-void sub_805F3A8(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
+void SetObjectPriorityByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -2160,7 +2161,7 @@ void sub_805F3A8(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
     }
 }
 
-void sub_805F400(u8 localId, u8 mapNum, u8 mapGroup)
+void UnfixObjectPriorityByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -2173,7 +2174,7 @@ void sub_805F400(u8 localId, u8 mapNum, u8 mapGroup)
     }
 }
 
-void sub_808E82C(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
+void SetObjectPositionByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
     u8 objectEventId;
     struct Sprite *sprite;
@@ -2196,9 +2197,13 @@ static void LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
 
+#ifdef BUGFIX
+    if (sObjectEventSpritePalettes[i].tag != OBJ_EVENT_PAL_TAG_NONE)
+#else
     if (i != OBJ_EVENT_PAL_TAG_NONE) // always true
+#endif
     {
-        sub_805F510(&sObjectEventSpritePalettes[i]);
+        TryLoadObjectPalette(&sObjectEventSpritePalettes[i]);
     }
 }
 
@@ -2212,10 +2217,11 @@ void Unused_LoadObjectEventPaletteSet(u16 *paletteTags)
     }
 }
 
-static u8 sub_805F510(const struct SpritePalette *spritePalette)
+static u8 TryLoadObjectPalette(const struct SpritePalette *spritePalette)
 {
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)
     {
+        // Already loaded
         return 0xFF;
     }
     return LoadSpritePalette(spritePalette);

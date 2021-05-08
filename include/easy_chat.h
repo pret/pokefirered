@@ -31,7 +31,7 @@ struct EasyChatWordsByLetter
 };
 
 u8 *CopyEasyChatWord(u8 *dest, u16 word);
-u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
+u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
 bool8 EC_DoesEasyChatStringFitOnLine(const u16 *easyChatWords, u8 columns, u8 rows, u16 maxLength);
 void EC_ResetMEventProfileMaybe(void);
 void InitEasyChatPhrases(void);

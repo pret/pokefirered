@@ -609,7 +609,8 @@ SECTIONS {
         src/minigame_countdown.o(.rodata);
         src/berry_fix_program.o(.rodata);
         src/keyboard_text.o(.rodata);
-        data/data_8479668.o(.rodata);
+        src/trainer_tower_sets.o(.rodata);
+        src/move_descriptions.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);

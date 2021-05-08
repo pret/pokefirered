@@ -1224,7 +1224,7 @@ static void BeginMovingItemInPocket(u8 taskId, s16 itemIndex)
     u16 cursorPos;
     s16 *data = gTasks[taskId].data;
     ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
-    ListMenuSetUnkIndicatorsStructField(data[0], 0x10, 1);
+    ListMenuSetTemplateField(data[0], LISTFIELD_CURSORKIND, 1);
     data[1] = itemIndex;
     sBagMenuDisplay->itemOriginalLocation = itemIndex;
     StringCopy(gStringVar1, ItemId_GetName(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, data[1])));

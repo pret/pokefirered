@@ -177,11 +177,11 @@ static u8 setup##_callback(struct ObjectEvent *objectEvent, struct Sprite *sprit
 EWRAM_DATA u8 sCurrentReflectionType = 0;
 EWRAM_DATA u16 sCurrentSpecialObjectPaletteTag = 0;
 
-const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
+const u8 gReflectionEffectPaletteMap[16] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
-const struct SpriteTemplate gCameraSpriteTemplate = {
+static const struct SpriteTemplate gCameraSpriteTemplate = {
     .tileTag = 0, 
-    .paletteTag = 0xFFFF, 
+    .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gDummyOamData, 
     .anims = gDummySpriteAnimTable, 
     .images = NULL, 
@@ -281,7 +281,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
     [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST]                 = MovementType_WanderAroundSlowest,
 };
 
-const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
+static const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
     [MOVEMENT_TYPE_NONE] = FALSE,
     [MOVEMENT_TYPE_LOOK_AROUND] = FALSE,
     [MOVEMENT_TYPE_WANDER_AROUND] = TRUE,
@@ -365,7 +365,7 @@ const bool8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
     [MOVEMENT_TYPE_WANDER_AROUND_SLOWEST] = TRUE,
 };
 
-const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
+static const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
     [MOVEMENT_TYPE_NONE] = DIR_SOUTH,
     [MOVEMENT_TYPE_LOOK_AROUND] = DIR_SOUTH,
     [MOVEMENT_TYPE_WANDER_AROUND] = DIR_SOUTH,
@@ -451,7 +451,7 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED  0x1100
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION  0x1101
-#define OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION_DUMMY 0x1102
+#define OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION 0x1102
 #define OBJ_EVENT_PAL_TAG_NPC_BLUE  0x1103
 #define OBJ_EVENT_PAL_TAG_NPC_PINK  0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN  0x1105
@@ -460,31 +460,23 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #define OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION  0x1108
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION  0x1109
 #define OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION  0x110A
-#define OBJ_EVENT_PAL_TAG_11 0x110B
-#define OBJ_EVENT_PAL_TAG_12 0x110C
-#define OBJ_EVENT_PAL_TAG_13 0x110D
-#define OBJ_EVENT_PAL_TAG_14 0x110E
-#define OBJ_EVENT_PAL_TAG_15 0x110F
+#define OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP 0x110B
+#define OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION 0x110C
+#define OBJ_EVENT_PAL_TAG_RS_TRUCK 0x110D
+#define OBJ_EVENT_PAL_TAG_RS_MACHOKE 0x110E
+#define OBJ_EVENT_PAL_TAG_RS_POOCHYENA 0x110F
 #define OBJ_EVENT_PAL_TAG_PLAYER_GREEN 0x1110
 #define OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION 0x1111
-#define OBJ_EVENT_PAL_TAG_18 0x1112
+#define OBJ_EVENT_PAL_TAG_RS_MOVING_BOX 0x1112
 #define OBJ_EVENT_PAL_TAG_METEORITE 0x1113
 #define OBJ_EVENT_PAL_TAG_SEAGALLOP 0x1114
 #define OBJ_EVENT_PAL_TAG_SS_ANNE 0x1115
-#define OBJ_EVENT_PAL_TAG_22 0x1116
-#define OBJ_EVENT_PAL_TAG_23 0x1117
-#define OBJ_EVENT_PAL_TAG_24 0x1118
-#define OBJ_EVENT_PAL_TAG_25 0x1119
-#define OBJ_EVENT_PAL_TAG_26 0x111A
-#define OBJ_EVENT_PAL_TAG_27 0x111B
-#define OBJ_EVENT_PAL_TAG_28 0x111C
-#define OBJ_EVENT_PAL_TAG_29 0x111D
-#define OBJ_EVENT_PAL_TAG_30 0x111E
-#define OBJ_EVENT_PAL_TAG_31 0x111F
-#define OBJ_EVENT_PAL_TAG_32 0x1120
-#define OBJ_EVENT_PAL_TAG_33 0x1121
-#define OBJ_EVENT_PAL_TAG_34 0x1122
-#define OBJ_EVENT_PAL_TAG_35 0x1123
+#define OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER 0x1116
+#define OBJ_EVENT_PAL_TAG_RS_KYOGRE 0x1117
+#define OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION 0x1118
+#define OBJ_EVENT_PAL_TAG_RS_GROUDON 0x1119
+#define OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION 0x111A
+#define OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW 0x111B
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -496,142 +488,142 @@ const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = 
 #include "data/object_events/object_event_graphics_info.h"
 
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
-    {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
-    {gObjectEventPal_NpcPink,               OBJ_EVENT_PAL_TAG_NPC_PINK},
-    {gObjectEventPal_NpcGreen,              OBJ_EVENT_PAL_TAG_NPC_GREEN},
-    {gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},
-    {gObjectEventPal_NpcBlueReflection,     OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION},
-    {gObjectEventPal_NpcPinkReflection,     OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION},
-    {gObjectEventPal_NpcGreenReflection,    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION},
-    {gObjectEventPal_NpcWhiteReflection,    OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION},
-    {gObjectEventPal_Player,                OBJ_EVENT_PAL_TAG_PLAYER_RED},
-    {gObjectEventPal_PlayerReflection,      OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
-    {gObjectEventPal_PlayerReflectionDummy, OBJ_EVENT_PAL_TAG_PLAYER_REFLECTION_DUMMY},
-    {gObjectEventPal_11,                    OBJ_EVENT_PAL_TAG_11},
-    {gObjectEventPal_12,                    OBJ_EVENT_PAL_TAG_12},
-    {gObjectEventPal_Player,                OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
-    {gObjectEventPal_PlayerReflection,      OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
-    {gObjectEventPal_Meteorite,             OBJ_EVENT_PAL_TAG_METEORITE},
-    {gObjectEventPal_SSAnne,                OBJ_EVENT_PAL_TAG_SS_ANNE},
-    {gObjectEventPal_Seagallop,             OBJ_EVENT_PAL_TAG_SEAGALLOP},
+    {gObjectEventPal_NpcBlue,                 OBJ_EVENT_PAL_TAG_NPC_BLUE},
+    {gObjectEventPal_NpcPink,                 OBJ_EVENT_PAL_TAG_NPC_PINK},
+    {gObjectEventPal_NpcGreen,                OBJ_EVENT_PAL_TAG_NPC_GREEN},
+    {gObjectEventPal_NpcWhite,                OBJ_EVENT_PAL_TAG_NPC_WHITE},
+    {gObjectEventPal_NpcBlueReflection,       OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION},
+    {gObjectEventPal_NpcPinkReflection,       OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION},
+    {gObjectEventPal_NpcGreenReflection,      OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION},
+    {gObjectEventPal_NpcWhiteReflection,      OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION},
+    {gObjectEventPal_Player,                  OBJ_EVENT_PAL_TAG_PLAYER_RED},
+    {gObjectEventPal_PlayerReflection,        OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
+    {gObjectEventPal_BridgeReflection,        OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION},
+    {gObjectEventPal_RSQuintyPlump,           OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP},
+    {gObjectEventPal_RSQuintyPlumpReflection, OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION},
+    {gObjectEventPal_Player,                  OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
+    {gObjectEventPal_PlayerReflection,        OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
+    {gObjectEventPal_Meteorite,               OBJ_EVENT_PAL_TAG_METEORITE},
+    {gObjectEventPal_SSAnne,                  OBJ_EVENT_PAL_TAG_SS_ANNE},
+    {gObjectEventPal_Seagallop,               OBJ_EVENT_PAL_TAG_SEAGALLOP},
     {},
 };
 
-const u16 gPlayerReflectionPaletteTags[] = {
+static const u16 sPlayerReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
 };
 
-const u16 gUnusedPlayerReflectionPaletteTags[] = {
+static const u16 sUnusedPlayerReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
     OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
     OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
     OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A5200[] = {
-    OBJ_EVENT_PAL_TAG_22,
-    OBJ_EVENT_PAL_TAG_22,
-    OBJ_EVENT_PAL_TAG_22,
-    OBJ_EVENT_PAL_TAG_22,
+static const u16 sPlayerUnderwaterReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER,
+    OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER,
+    OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER,
+    OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER,
 };
 
-const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
-    {OBJ_EVENT_PAL_TAG_PLAYER_RED,   gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN, gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_22,           gUnknownPaletteTags_83A5200},
+static const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
+    {OBJ_EVENT_PAL_TAG_PLAYER_RED,           sPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN,         sPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER, sPlayerUnderwaterReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 
-const u16 gUnknownPaletteTags_83A5228[] = {
-    OBJ_EVENT_PAL_TAG_12,
-    OBJ_EVENT_PAL_TAG_12,
-    OBJ_EVENT_PAL_TAG_12,
-    OBJ_EVENT_PAL_TAG_12,
+static const u16 sRSQuintyPlumpReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A5230[] = {
-    OBJ_EVENT_PAL_TAG_13,
-    OBJ_EVENT_PAL_TAG_13,
-    OBJ_EVENT_PAL_TAG_13,
-    OBJ_EVENT_PAL_TAG_13,
+static const u16 sRSTruckReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_TRUCK,
+    OBJ_EVENT_PAL_TAG_RS_TRUCK,
+    OBJ_EVENT_PAL_TAG_RS_TRUCK,
+    OBJ_EVENT_PAL_TAG_RS_TRUCK,
 };
 
-const u16 gUnknownPaletteTags_83A5238[] = {
-    OBJ_EVENT_PAL_TAG_14,
-    OBJ_EVENT_PAL_TAG_14,
-    OBJ_EVENT_PAL_TAG_14,
-    OBJ_EVENT_PAL_TAG_14,
+static const u16 sRSMachokeReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_MACHOKE,
+    OBJ_EVENT_PAL_TAG_RS_MACHOKE,
+    OBJ_EVENT_PAL_TAG_RS_MACHOKE,
+    OBJ_EVENT_PAL_TAG_RS_MACHOKE,
 };
 
-const u16 gUnknownPaletteTags_83A5240[] = {
-    OBJ_EVENT_PAL_TAG_18,
-    OBJ_EVENT_PAL_TAG_18,
-    OBJ_EVENT_PAL_TAG_18,
-    OBJ_EVENT_PAL_TAG_18,
+static const u16 sRSMovingBoxReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_MOVING_BOX,
+    OBJ_EVENT_PAL_TAG_RS_MOVING_BOX,
+    OBJ_EVENT_PAL_TAG_RS_MOVING_BOX,
+    OBJ_EVENT_PAL_TAG_RS_MOVING_BOX,
 };
 
-const u16 gMeteoriteReflectionPaletteTags[] = {
+static const u16 sMeteoriteReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_METEORITE,
     OBJ_EVENT_PAL_TAG_METEORITE,
     OBJ_EVENT_PAL_TAG_METEORITE,
     OBJ_EVENT_PAL_TAG_METEORITE,
 };
 
-const u16 gSeagallopReflectionPaletteTags[] = {
+static const u16 sSeagallopReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_SEAGALLOP,
     OBJ_EVENT_PAL_TAG_SEAGALLOP,
     OBJ_EVENT_PAL_TAG_SEAGALLOP,
     OBJ_EVENT_PAL_TAG_SEAGALLOP,
 };
 
-const u16 gUnknownPaletteTags_83A5258[] = {
-    OBJ_EVENT_PAL_TAG_27,
-    OBJ_EVENT_PAL_TAG_27,
-    OBJ_EVENT_PAL_TAG_27,
-    OBJ_EVENT_PAL_TAG_27,
+static const u16 sRSSubmarineShadowReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW,
+    OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW,
+    OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW,
+    OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW,
 };
 
-const u16 gUnknownPaletteTags_83A5260[] = {
-    OBJ_EVENT_PAL_TAG_24,
-    OBJ_EVENT_PAL_TAG_24,
-    OBJ_EVENT_PAL_TAG_24,
-    OBJ_EVENT_PAL_TAG_24,
+static const u16 sRSKyogreReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A5268[] = {
-    OBJ_EVENT_PAL_TAG_26,
-    OBJ_EVENT_PAL_TAG_26,
-    OBJ_EVENT_PAL_TAG_26,
-    OBJ_EVENT_PAL_TAG_26,
+static const u16 sRSGroudonReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A5270[] = {
+static const u16 sGreenNPCReflectionPaletteTags[] = {
     OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION,
 };
 
-const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
-    {OBJ_EVENT_PAL_TAG_PLAYER_RED,   gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN, gPlayerReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_11,           gUnknownPaletteTags_83A5228},
-    {OBJ_EVENT_PAL_TAG_13,           gUnknownPaletteTags_83A5230},
-    {OBJ_EVENT_PAL_TAG_14,           gUnknownPaletteTags_83A5238},
-    {OBJ_EVENT_PAL_TAG_18,           gUnknownPaletteTags_83A5240},
-    {OBJ_EVENT_PAL_TAG_METEORITE,    gMeteoriteReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_SEAGALLOP,    gSeagallopReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_23,           gUnknownPaletteTags_83A5260},
-    {OBJ_EVENT_PAL_TAG_25,           gUnknownPaletteTags_83A5268},
-    {OBJ_EVENT_PAL_TAG_NPC_GREEN,    gUnknownPaletteTags_83A5270},
-    {OBJ_EVENT_PAL_TAG_27,           gUnknownPaletteTags_83A5258},
+static const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
+    {OBJ_EVENT_PAL_TAG_PLAYER_RED,          sPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN,        sPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP,     sRSQuintyPlumpReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_TRUCK,            sRSTruckReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_MACHOKE,          sRSMachokeReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_MOVING_BOX,       sRSMovingBoxReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_METEORITE,           sMeteoriteReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_SEAGALLOP,           sSeagallopReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_KYOGRE,           sRSKyogreReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_GROUDON,          sRSGroudonReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_NPC_GREEN,           sGreenNPCReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW, sRSSubmarineShadowReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_NONE, NULL},
 };
 
-const u16 gUnknownPaletteTags_83A52E0[] = {
+static const u16 sObjectPaletteTags0[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
@@ -644,7 +636,7 @@ const u16 gUnknownPaletteTags_83A52E0[] = {
     OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A52F4[] = {
+static const u16 sObjectPaletteTags1[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
@@ -657,7 +649,7 @@ const u16 gUnknownPaletteTags_83A52F4[] = {
     OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A5308[] = {
+static const u16 sObjectPaletteTags2[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
@@ -670,7 +662,7 @@ const u16 gUnknownPaletteTags_83A5308[] = {
     OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
-const u16 gUnknownPaletteTags_83A531C[] = {
+static const u16 sObjectPaletteTags3[] = {
     OBJ_EVENT_PAL_TAG_PLAYER_RED,
     OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION,
     OBJ_EVENT_PAL_TAG_NPC_BLUE,
@@ -683,23 +675,23 @@ const u16 gUnknownPaletteTags_83A531C[] = {
     OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION,
 };
 
-const u16 *const gObjectPaletteTagSets[] = {
-    gUnknownPaletteTags_83A52E0,
-    gUnknownPaletteTags_83A52F4,
-    gUnknownPaletteTags_83A5308,
-    gUnknownPaletteTags_83A531C,
+static const u16 *const gObjectPaletteTagSets[] = {
+    sObjectPaletteTags0,
+    sObjectPaletteTags1,
+    sObjectPaletteTags2,
+    sObjectPaletteTags3,
 };
 
 //#include "data/object_events/berry_tree_graphics_tables.h"
 #include "data/field_effects/field_effect_objects.h"
 
-const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
-const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
-const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
+static const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
+static const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
+static const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
 
 #include "data/object_events/movement_type_func_tables.h"
 
-const u8 gFaceDirectionAnimNums[] = {
+static const u8 gFaceDirectionAnimNums[] = {
     [DIR_NONE]      = 0x00,
     [DIR_SOUTH]     = 0x00,
     [DIR_NORTH]     = 0x01,
@@ -711,7 +703,7 @@ const u8 gFaceDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x01,
 };
 
-const u8 gMoveDirectionAnimNums[] = {
+static const u8 gMoveDirectionAnimNums[] = {
     [DIR_NONE]      = 0x4,
     [DIR_SOUTH]     = 0x4,
     [DIR_NORTH]     = 0x5,
@@ -723,7 +715,7 @@ const u8 gMoveDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x5,
 };
 
-const u8 gMoveDirectionFastAnimNums[] = {
+static const u8 gMoveDirectionFastAnimNums[] = {
     [DIR_NONE]      = 0x8,
     [DIR_SOUTH]     = 0x8,
     [DIR_NORTH]     = 0x9,
@@ -735,7 +727,7 @@ const u8 gMoveDirectionFastAnimNums[] = {
     [DIR_NORTHEAST] = 0x9,
 };
 
-const u8 gMoveDirectionFasterAnimNums[] = {
+static const u8 gMoveDirectionFasterAnimNums[] = {
     [DIR_NONE]      = 0xC,
     [DIR_SOUTH]     = 0xC,
     [DIR_NORTH]     = 0xD,
@@ -747,7 +739,7 @@ const u8 gMoveDirectionFasterAnimNums[] = {
     [DIR_NORTHEAST] = 0xD,
 };
 
-const u8 gMoveDirectionFastestAnimNums[] = {
+static const u8 gMoveDirectionFastestAnimNums[] = {
     [DIR_NONE]      = 0x10,
     [DIR_SOUTH]     = 0x10,
     [DIR_NORTH]     = 0x11,
@@ -759,7 +751,7 @@ const u8 gMoveDirectionFastestAnimNums[] = {
     [DIR_NORTHEAST] = 0x11,
 };
 
-const u8 gJumpSpecialDirectionAnimNums[] = {
+static const u8 gJumpSpecialDirectionAnimNums[] = {
     [DIR_NONE]      = 0x14,
     [DIR_SOUTH]     = 0x14,
     [DIR_NORTH]     = 0x15,
@@ -771,7 +763,7 @@ const u8 gJumpSpecialDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x15,
 };
 
-const u8 gAcroWheelieDirectionAnimNums[] = {
+static const u8 gAcroWheelieDirectionAnimNums[] = {
     [DIR_NONE]      = 0x14,
     [DIR_SOUTH]     = 0x14,
     [DIR_NORTH]     = 0x15,
@@ -783,7 +775,7 @@ const u8 gAcroWheelieDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x15,
 };
 
-const u8 gUnrefAnimNums_080634A0[] = {
+static const u8 gUnrefAnimNums_080634A0[] = {
     [DIR_NONE]      = 0x18,
     [DIR_SOUTH]     = 0x18,
     [DIR_NORTH]     = 0x19,
@@ -795,7 +787,7 @@ const u8 gUnrefAnimNums_080634A0[] = {
     [DIR_NORTHEAST] = 0x19,
 };
 
-const u8 gAcroEndWheelieDirectionAnimNums[] = {
+static const u8 gAcroEndWheelieDirectionAnimNums[] = {
     [DIR_NONE]      = 0x1C,
     [DIR_SOUTH]     = 0x1C,
     [DIR_NORTH]     = 0x1D,
@@ -807,7 +799,7 @@ const u8 gAcroEndWheelieDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x1D,
 };
 
-const u8 gUnknown_83A6465[] = {
+static const u8 gUnknown_83A6465[] = {
     [DIR_NONE]      = 0x18,
     [DIR_SOUTH]     = 0x18,
     [DIR_NORTH]     = 0x19,
@@ -819,7 +811,7 @@ const u8 gUnknown_83A6465[] = {
     [DIR_NORTHEAST] = 0x1B,
 };
 
-const u8 gAcroUnusedActionDirectionAnimNums[] = {
+static const u8 gAcroUnusedActionDirectionAnimNums[] = {
     [DIR_NONE]      = 0x20,
     [DIR_SOUTH]     = 0x20,
     [DIR_NORTH]     = 0x21,
@@ -831,7 +823,7 @@ const u8 gAcroUnusedActionDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x21,
 };
 
-const u8 gAcroWheeliePedalDirectionAnimNums[] = {
+static const u8 gAcroWheeliePedalDirectionAnimNums[] = {
     [DIR_NONE]      = 0x24,
     [DIR_SOUTH]     = 0x24,
     [DIR_NORTH]     = 0x25,
@@ -843,7 +835,7 @@ const u8 gAcroWheeliePedalDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x25,
 };
 
-const u8 gFishingDirectionAnimNums[] = {
+static const u8 gFishingDirectionAnimNums[] = {
     [DIR_NONE]      = 0x0,
     [DIR_SOUTH]     = 0x0,
     [DIR_NORTH]     = 0x1,
@@ -855,7 +847,7 @@ const u8 gFishingDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x1,
 };
 
-const u8 gFishingNoCatchDirectionAnimNums[] = {
+static const u8 gFishingNoCatchDirectionAnimNums[] = {
     [DIR_NONE]      = 0x4,
     [DIR_SOUTH]     = 0x4,
     [DIR_NORTH]     = 0x5,
@@ -867,7 +859,7 @@ const u8 gFishingNoCatchDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x5,
 };
 
-const u8 gFishingBiteDirectionAnimNums[] = {
+static const u8 gFishingBiteDirectionAnimNums[] = {
     [DIR_NONE]      = 0x8,
     [DIR_SOUTH]     = 0x8,
     [DIR_NORTH]     = 0x9,
@@ -879,7 +871,7 @@ const u8 gFishingBiteDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x9,
 };
 
-const u8 gRunningDirectionAnimNums[] = {
+static const u8 gRunningDirectionAnimNums[] = {
     [DIR_NONE]      = 0x14,
     [DIR_SOUTH]     = 0x14,
     [DIR_NORTH]     = 0x15,
@@ -891,7 +883,7 @@ const u8 gRunningDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x15,
 };
 
-const u8 gTrainerFacingDirectionMovementTypes[] = {
+static const u8 gTrainerFacingDirectionMovementTypes[] = {
     [DIR_NONE]      = 0x08,
     [DIR_SOUTH]     = 0x08,
     [DIR_NORTH]     = 0x07,
@@ -929,7 +921,7 @@ static const struct Coords16 sDirectionToVectors[] = {
     [DIR_NORTHEAST] = { 1, -1},
 };
 
-const u8 gFaceDirectionMovementActions[] = {
+static const u8 gFaceDirectionMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_FACE_UP,
@@ -937,7 +929,7 @@ const u8 gFaceDirectionMovementActions[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_FACE_RIGHT,
 };
 
-const u8 gFaceDirectionFastMovementActions[] = {
+static const u8 gFaceDirectionFastMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_FACE_DOWN_FAST,
     [DIR_SOUTH] = MOVEMENT_ACTION_FACE_DOWN_FAST,
     [DIR_NORTH] = MOVEMENT_ACTION_FACE_UP_FAST,
@@ -945,7 +937,7 @@ const u8 gFaceDirectionFastMovementActions[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_FACE_RIGHT_FAST,
 };
 
-const u8 gUnknown_83A64F6[] = {
+static const u8 gUnknown_83A64F6[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_0x9B,
     [DIR_SOUTH] = MOVEMENT_ACTION_0x9B,
     [DIR_NORTH] = MOVEMENT_ACTION_0x9C,
@@ -953,7 +945,7 @@ const u8 gUnknown_83A64F6[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_0x9E,
 };
 
-const u8 gUnknown_83A64FB[] = {
+static const u8 gUnknown_83A64FB[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_SLOWEST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_SLOWEST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_SLOWEST_UP,
@@ -961,7 +953,7 @@ const u8 gUnknown_83A64FB[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_SLOWEST_RIGHT,
 };
 
-const u8 gUnknown_83A6500[] = {
+static const u8 gUnknown_83A6500[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_SLOW_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_SLOW_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_SLOW_UP,
@@ -969,7 +961,7 @@ const u8 gUnknown_83A6500[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_SLOW_RIGHT,
 };
 
-const u8 gUnknown_83A6505[] = {
+static const u8 gUnknown_83A6505[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_NORMAL_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_NORMAL_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_NORMAL_UP,
@@ -977,7 +969,7 @@ const u8 gUnknown_83A6505[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_NORMAL_RIGHT,
 };
 
-const u8 gUnknown_83A650A[] = {
+static const u8 gUnknown_83A650A[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_FAST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_FAST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_FAST_UP,
@@ -985,7 +977,7 @@ const u8 gUnknown_83A650A[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_FAST_RIGHT,
 };
 
-const u8 gUnknown_83A650F[] = {
+static const u8 gUnknown_83A650F[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_0xA0,
     [DIR_SOUTH] = MOVEMENT_ACTION_0xA0,
     [DIR_NORTH] = MOVEMENT_ACTION_0xA1,
@@ -993,7 +985,7 @@ const u8 gUnknown_83A650F[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_0xA3,
 };
 
-const u8 gUnknown_83A6514[] = {
+static const u8 gUnknown_83A6514[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_FACE_DOWN_SLOW,
     [DIR_SOUTH] = MOVEMENT_ACTION_FACE_DOWN_SLOW,
     [DIR_NORTH] = MOVEMENT_ACTION_FACE_UP_SLOW,
@@ -1001,7 +993,7 @@ const u8 gUnknown_83A6514[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_FACE_RIGHT_SLOW,
 };
 
-const u8 gUnknown_83A6519[] = {
+static const u8 gUnknown_83A6519[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_FASTEST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_FASTEST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_FASTEST_UP,
@@ -1009,7 +1001,7 @@ const u8 gUnknown_83A6519[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_FASTEST_RIGHT,
 };
 
-const u8 gUnknown_83A651E[] = {
+static const u8 gUnknown_83A651E[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_SLIDE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_SLIDE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_SLIDE_UP,
@@ -1017,7 +1009,7 @@ const u8 gUnknown_83A651E[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_SLIDE_RIGHT,
 };
 
-const u8 gUnknown_83A6523[] = {
+static const u8 gUnknown_83A6523[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_PLAYER_RUN_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_PLAYER_RUN_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_PLAYER_RUN_UP,
@@ -1025,7 +1017,7 @@ const u8 gUnknown_83A6523[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_PLAYER_RUN_RIGHT,
 };
 
-const u8 gUnknown_83A6528[] = {
+static const u8 gUnknown_83A6528[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_PLAYER_RUN_DOWN_SLOW,
     [DIR_SOUTH] = MOVEMENT_ACTION_PLAYER_RUN_DOWN_SLOW,
     [DIR_NORTH] = MOVEMENT_ACTION_PLAYER_RUN_UP_SLOW,
@@ -1033,7 +1025,7 @@ const u8 gUnknown_83A6528[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_PLAYER_RUN_RIGHT_SLOW,
 };
 
-const u8 gUnknown_83A652D[] = {
+static const u8 gUnknown_83A652D[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP,
@@ -1041,7 +1033,7 @@ const u8 gUnknown_83A652D[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT,
 };
 
-const u8 gUnknown_83A6532[] = {
+static const u8 gUnknown_83A6532[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_2_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_2_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_2_UP,
@@ -1049,7 +1041,7 @@ const u8 gUnknown_83A6532[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_2_RIGHT,
 };
 
-const u8 gUnknown_83A6537[] = {
+static const u8 gUnknown_83A6537[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
@@ -1057,7 +1049,7 @@ const u8 gUnknown_83A6537[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT,
 };
 
-const u8 gUnknown_83A653C[] = {
+static const u8 gUnknown_83A653C[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN_UP,
@@ -1065,7 +1057,7 @@ const u8 gUnknown_83A653C[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT,
 };
 
-const u8 gUnknown_83A6541[] = {
+static const u8 gUnknown_83A6541[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_UP,
@@ -1073,7 +1065,7 @@ const u8 gUnknown_83A6541[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_RIGHT,
 };
 
-const u8 gUnknown_83A6546[] = {
+static const u8 gUnknown_83A6546[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_SPECIAL_UP,
@@ -1081,7 +1073,7 @@ const u8 gUnknown_83A6546[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
 };
 
-const u8 gUnknown_83A654B[] = {
+static const u8 gUnknown_83A654B[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_0xA6,
     [DIR_SOUTH] = MOVEMENT_ACTION_0xA6,
     [DIR_NORTH] = MOVEMENT_ACTION_0xA7,
@@ -1089,7 +1081,7 @@ const u8 gUnknown_83A654B[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_0xA9,
 };
 
-const u8 gUnknown_83A6550[] = {
+static const u8 gUnknown_83A6550[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,
@@ -1097,7 +1089,7 @@ const u8 gUnknown_83A6550[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_RIGHT,
 };
 
-const u8 gUnknown_83A6555[] = {
+static const u8 gUnknown_83A6555[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_UP,
@@ -1105,7 +1097,7 @@ const u8 gUnknown_83A6555[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_RIGHT,
 };
 
-const u8 gUnknown_83A655A[] = {
+static const u8 gUnknown_83A655A[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_UP,
@@ -1113,7 +1105,7 @@ const u8 gUnknown_83A655A[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
 };
 
-const u8 gUnknown_83A655F[] = {
+static const u8 gUnknown_83A655F[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP,
@@ -1121,7 +1113,7 @@ const u8 gUnknown_83A655F[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
 };
 
-const u8 gUnknown_83A6564[] = {
+static const u8 gUnknown_83A6564[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
@@ -1129,7 +1121,7 @@ const u8 gUnknown_83A6564[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_RIGHT,
 };
 
-const u8 gUnknown_83A6569[] = {
+static const u8 gUnknown_83A6569[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,
@@ -1137,7 +1129,7 @@ const u8 gUnknown_83A6569[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,
 };
 
-const u8 gUnknown_83A656E[] = {
+static const u8 gUnknown_83A656E[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,
@@ -1145,7 +1137,7 @@ const u8 gUnknown_83A656E[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,
 };
 
-const u8 gUnknown_83A6573[] = {
+static const u8 gUnknown_83A6573[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,
@@ -1153,7 +1145,7 @@ const u8 gUnknown_83A6573[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_RIGHT,
 };
 
-const u8 gUnknown_83A6578[] = {
+static const u8 gUnknown_83A6578[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_UP,
@@ -1161,7 +1153,7 @@ const u8 gUnknown_83A6578[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_RIGHT,
 };
 
-const u8 gUnknown_83A657D[] = {
+static const u8 gUnknown_83A657D[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_UP,
@@ -1169,7 +1161,7 @@ const u8 gUnknown_83A657D[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_RIGHT,
 };
 
-const u8 gUnknown_83A6582[] = {
+static const u8 gUnknown_83A6582[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_UP,
@@ -1177,7 +1169,7 @@ const u8 gUnknown_83A6582[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT,
 };
 
-const u8 gUnknown_83A6587[] = {
+static const u8 gUnknown_83A6587[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_UP,
@@ -1185,7 +1177,7 @@ const u8 gUnknown_83A6587[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_RIGHT,
 };
 
-const u8 gUnknown_83A658C[] = {
+static const u8 gUnknown_83A658C[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,
@@ -1193,7 +1185,7 @@ const u8 gUnknown_83A658C[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT,
 };
 
-const u8 gOppositeDirections[] = {
+static const u8 gOppositeDirections[] = {
     DIR_NORTH,
     DIR_SOUTH,
     DIR_EAST,
@@ -1204,14 +1196,14 @@ const u8 gOppositeDirections[] = {
     DIR_SOUTHWEST,
 };
 
-const u8 gUnknown_83A6599[][4] = {
+static const u8 gUnknown_83A6599[][4] = {
     {2, 1, 4, 3},
     {1, 2, 3, 4},
     {3, 4, 2, 1},
     {4, 3, 1, 2}
 };
 
-const u8 gUnknown_83A65A9[][4] = {
+static const u8 gUnknown_83A65A9[][4] = {
     {2, 1, 4, 3},
     {1, 2, 3, 4},
     {4, 3, 1, 2},

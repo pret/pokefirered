@@ -80,8 +80,6 @@ enum
 #define BALL_TRAINER_BLOCK      5
 #define BALL_GHOST_DODGE        6
 
-#define RET_VALUE_LEVELLED_UP   11
-
 #define INSTANT_HP_BAR_DROP     0x7FFF
 
 // Special return values in gBattleBufferB from Battle Controller functions.

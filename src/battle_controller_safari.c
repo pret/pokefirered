@@ -232,7 +232,7 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(BTLWIN_0))
+    if (!IsTextPrinterActive(BTLWIN_MESSAGE))
         SafariBufferExecCompleted();
 }
 
@@ -409,9 +409,9 @@ static void SafariHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0 | BTL_PRINT_CTX_F);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_MESSAGE | BTL_PRINT_CTX_F);
     else
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_MESSAGE);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -438,13 +438,13 @@ static void SafariHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_0);
-    BattlePutTextCenteredOnWindow(gText_SafariBattleMenu, BTLWIN_2);
+    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_MESSAGE);
+    BattlePutTextCenteredOnWindow(gText_SafariBattleMenu, BTLWIN_TURNMENU);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
-    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_1);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_WHATWILLPKMNDO);
 }
 
 static void SafariHandleUnknownYesNoBox(void)

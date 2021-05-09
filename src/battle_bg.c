@@ -30,7 +30,7 @@ static u8 GetBattleTerrainOverride(void);
 
 static const u8 gUnknown_824829C[] = {1, 2};
 
-static const struct OamData gOamData_82482A0 = {
+static const struct OamData sOamData_VsLetter_V = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -46,7 +46,7 @@ static const struct OamData gOamData_82482A0 = {
     .affineParam = 0
 };
 
-static const struct OamData gOamData_82482A8 = {
+static const struct OamData sOamData_VsLetter_S = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -62,38 +62,38 @@ static const struct OamData gOamData_82482A8 = {
     .affineParam = 0
 };
 
-static const union AffineAnimCmd gUnknown_82482B0[] = {
+static const union AffineAnimCmd sAffineAnim_VsLetters_0[] = {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gUnknown_82482C0[] = {
+static const union AffineAnimCmd sAffineAnim_VsLetters_1[] = {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(0x18, 0x18, 0x0, 0x80),
     AFFINEANIMCMD_FRAME(0x18, 0x18, 0x0, 0x80),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gAffineAnimTable_82482E0[] = {
-    gUnknown_82482B0,
-    gUnknown_82482C0
+static const union AffineAnimCmd *const sAffineAnimTable_VsLetters[] = {
+    sAffineAnim_VsLetters_0,
+    sAffineAnim_VsLetters_1
 };
 
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate = {
     .tileTag = TAG_VS_LETTERS,
     .paletteTag = TAG_VS_LETTERS,
-    .oam = &gOamData_82482A0,
+    .oam = &sOamData_VsLetter_V,
     .anims = gDummySpriteAnimTable,
-    .affineAnims = gAffineAnimTable_82482E0,
+    .affineAnims = sAffineAnimTable_VsLetters,
     .callback = SpriteCB_VsLetterDummy
 };
 
 static const struct SpriteTemplate sVsLetter_S_SpriteTemplate = {
     .tileTag = TAG_VS_LETTERS,
     .paletteTag = TAG_VS_LETTERS,
-    .oam = &gOamData_82482A8,
+    .oam = &sOamData_VsLetter_S,
     .anims = gDummySpriteAnimTable,
-    .affineAnims = gAffineAnimTable_82482E0,
+    .affineAnims = sAffineAnimTable_VsLetters,
     .callback = SpriteCB_VsLetterDummy
 };
 
@@ -139,8 +139,8 @@ const struct BgTemplate gBattleBgTemplates[4] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_8248330[] = {
-    {
+static const struct WindowTemplate sBattleWindowTemplates[] = {
+    [BTLWIN_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -148,7 +148,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x090
-    }, {
+    }, 
+    [BTLWIN_WHATWILLPKMNDO] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 35,
@@ -156,7 +157,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x1c0
-    }, {
+    }, 
+    [BTLWIN_TURNMENU] = {
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 35,
@@ -164,7 +166,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x190
-    }, {
+    }, 
+    [BTLWIN_MOVE1] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 55,
@@ -172,7 +175,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x300
-    }, {
+    }, 
+    [BTLWIN_MOVE2] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 55,
@@ -180,7 +184,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x310
-    }, {
+    }, 
+    [BTLWIN_MOVE3] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 57,
@@ -188,7 +193,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x320
-    }, {
+    }, 
+    [BTLWIN_MOVE4] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 57,
@@ -196,7 +202,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x330
-    }, {
+    }, 
+    [BTLWIN_SELMOVEINTERFACEPP] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 55,
@@ -204,7 +211,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x290
-    }, {
+    }, 
+    [BTLWIN_SELMOVETYPE] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 57,
@@ -212,7 +220,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x296
-    }, {
+    }, 
+    [BTLWIN_SELMOVEPPREMAINING] = {
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 55,
@@ -220,7 +229,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x2a6
-    }, {
+    }, 
+    [BTLWIN_10] = {
         .bg = 0,
         .tilemapLeft = 25,
         .tilemapTop = 57,
@@ -228,7 +238,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 0,
         .paletteNum = 5,
         .baseBlock = 0x2b0
-    }, {
+    }, 
+    [BTLWIN_SWITCHWHICH] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 55,
@@ -236,7 +247,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x2b0
-    }, {
+    }, 
+    [BTLWIN_LEVELUPSTATS] = {
         .bg = 1,
         .tilemapLeft = 19,
         .tilemapTop = 8,
@@ -244,7 +256,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 11,
         .paletteNum = 5,
         .baseBlock = 0x100
-    }, {
+    }, 
+    [BTLWIN_LEVELUPBENCHEDMON] = {
         .bg = 2,
         .tilemapLeft = 18,
         .tilemapTop = 0,
@@ -252,7 +265,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 3,
         .paletteNum = 6,
         .baseBlock = 0x16e
-    }, {
+    }, 
+    [BTLWIN_YESNO] = {
         .bg = 0,
         .tilemapLeft = 25,
         .tilemapTop = 9,
@@ -260,7 +274,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x100
-    }, {
+    }, 
+    [BTLWIN_LINKPLAYERNAME] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 3,
@@ -268,7 +283,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x020
-    }, {
+    }, 
+    [BTLWIN_LINKPARTNERNAME] = {
         .bg = 2,
         .tilemapLeft = 2,
         .tilemapTop = 3,
@@ -276,7 +292,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x040
-    }, {
+    }, 
+    [BTLWIN_MULTIPLAYER1NAME] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -284,7 +301,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x020
-    }, {
+    }, 
+    [BTLWIN_MULTIPLAYER2NAME] = {
         .bg = 2,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -292,7 +310,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x040
-    }, {
+    }, 
+    [BTLWIN_MULTIPLAYER3NAME] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 6,
@@ -300,7 +319,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x060
-    }, {
+    }, 
+    [BTLWIN_MULTIPLAYER4NAME] = {
         .bg = 2,
         .tilemapLeft = 2,
         .tilemapTop = 6,
@@ -308,7 +328,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x080
-    }, {
+    }, 
+    [BTLWIN_LINKRESULTDRAW] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 2,
@@ -316,7 +337,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x0a0
-    }, {
+    }, 
+    [BTLWIN_LINKRESULTLEFT] = {
         .bg = 0,
         .tilemapLeft = 4,
         .tilemapTop = 2,
@@ -324,7 +346,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x0a0
-    }, {
+    }, 
+    [BTLWIN_LINKRESULTRIGHT] = {
         .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 2,
@@ -332,7 +355,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x0b0
-    }, {
+    }, 
+    [BTLWIN_TUTORIAL_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -647,7 +671,7 @@ void sub_800F324(void)
 {
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, gBattleBgTemplates, NELEMS(gBattleBgTemplates));
-    InitWindows(gUnknown_8248330);
+    InitWindows(sBattleWindowTemplates);
     DeactivateAllTextPrinters();
 }
 
@@ -663,8 +687,8 @@ void InitBattleBgsVideo(void)
 
 void LoadBattleMenuWindowGfx(void)
 {
-    TextWindow_SetUserSelectedFrame(2, 0x012, 0x10);
-    TextWindow_SetUserSelectedFrame(2, 0x022, 0x10);
+    TextWindow_SetUserSelectedFrame(BTLWIN_TURNMENU, 0x012, 0x10);
+    TextWindow_SetUserSelectedFrame(BTLWIN_TURNMENU, 0x022, 0x10);
     gPlttBufferUnfaded[0x5C] = RGB( 9,  9,  9);
     gPlttBufferUnfaded[0x5D] = RGB( 9,  9,  9);
     gPlttBufferUnfaded[0x5E] = RGB(31, 31, 31);
@@ -673,7 +697,7 @@ void LoadBattleMenuWindowGfx(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_POKEDUDE))
     {
         Menu_LoadStdPalAt(0x70);
-        TextWindow_LoadResourcesStdFrame0(0, 0x030, 0x70);
+        TextWindow_LoadResourcesStdFrame0(BTLWIN_MESSAGE, 0x030, 0x70);
         gPlttBufferUnfaded[0x76] = RGB( 0,  0,  0);
         CpuCopy16(&gPlttBufferUnfaded[0x76], &gPlttBufferFaded[0x76], 2);
     }
@@ -764,7 +788,7 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
 {
     if (gBattleOutcome == B_OUTCOME_DREW)
     {
-        BattlePutTextCenteredOnWindow(gText_Draw, BTLWIN_21);
+        BattlePutTextCenteredOnWindow(gText_Draw, BTLWIN_LINKRESULTDRAW);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -773,20 +797,20 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
             switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 0:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_22);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_23);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTLEFT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTRIGHT);
                 break;
             case 1:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_23);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_22);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTRIGHT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTLEFT);
                 break;
             case 2:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_22);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_23);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTLEFT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTRIGHT);
                 break;
             case 3:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_23);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_22);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTRIGHT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTLEFT);
                 break;
             }
         }
@@ -795,20 +819,20 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
             switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
             {
             case 0:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_23);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_22);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTRIGHT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTLEFT);
                 break;
             case 1:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_22);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_23);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTLEFT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTRIGHT);
                 break;
             case 2:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_23);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_22);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTRIGHT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTLEFT);
                 break;
             case 3:
-                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_22);
-                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_23);
+                BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTLEFT);
+                BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTRIGHT);
                 break;
             }
         }
@@ -817,26 +841,26 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     {
         if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
-            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_23);
-            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_22);
+            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTRIGHT);
+            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTLEFT);
         }
         else
         {
-            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_22);
-            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_23);
+            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTLEFT);
+            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTRIGHT);
         }
     }
     else
     {
         if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
         {
-            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_22);
-            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_23);
+            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTLEFT);
+            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTRIGHT);
         }
         else
         {
-            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_23);
-            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_22);
+            BattlePutTextCenteredOnWindow(gText_Win, BTLWIN_LINKRESULTRIGHT);
+            BattlePutTextCenteredOnWindow(gText_Loss, BTLWIN_LINKRESULTLEFT);
         }
     }
 }
@@ -860,19 +884,19 @@ void InitLinkBattleVsScreen(u8 taskId)
                 switch (linkPlayer->id)
                 {
                 case 0:
-                    BattlePutTextCenteredOnWindow(name, BTLWIN_17);
+                    BattlePutTextCenteredOnWindow(name, BTLWIN_MULTIPLAYER1NAME);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 4);
                     break;
                 case 1:
-                    BattlePutTextCenteredOnWindow(name, BTLWIN_18);
+                    BattlePutTextCenteredOnWindow(name, BTLWIN_MULTIPLAYER2NAME);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 4);
                     break;
                 case 2:
-                    BattlePutTextCenteredOnWindow(name, BTLWIN_19);
+                    BattlePutTextCenteredOnWindow(name, BTLWIN_MULTIPLAYER3NAME);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 8);
                     break;
                 case 3:
-                    BattlePutTextCenteredOnWindow(name, BTLWIN_20);
+                    BattlePutTextCenteredOnWindow(name, BTLWIN_MULTIPLAYER4NAME);
                     DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 8);
                     break;
                 }
@@ -888,10 +912,10 @@ void InitLinkBattleVsScreen(u8 taskId)
                 opponentId = playerId, playerId = opponentId_copy;
 
             name = gLinkPlayers[playerId].name;
-            BattlePutTextCenteredOnWindow(name, BTLWIN_15);
+            BattlePutTextCenteredOnWindow(name, BTLWIN_LINKPLAYERNAME);
 
             name = gLinkPlayers[opponentId].name;
-            BattlePutTextCenteredOnWindow(name, BTLWIN_16);
+            BattlePutTextCenteredOnWindow(name, BTLWIN_LINKPARTNERNAME);
 
             DrawLinkBattleParticipantPokeballs(taskId, playerId, 1, 2, 7);
             DrawLinkBattleParticipantPokeballs(taskId, opponentId, 2, 2, 7);

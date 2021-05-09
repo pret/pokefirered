@@ -570,7 +570,7 @@ void HandleInputChooseMove(void)
             else
                 gMultiUsePlayerCursor = gMoveSelectionCursor[gActiveBattler] + 1;
             MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 27);
-            BattlePutTextCenteredOnWindow(gText_BattleSwitchWhich, BTLWIN_11);
+            BattlePutTextCenteredOnWindow(gText_BattleSwitchWhich, BTLWIN_SWITCHWHICH);
             gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitching;
         }
     }
@@ -1007,7 +1007,7 @@ static void CompleteOnHealthbarDone(void)
 
 void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(BTLWIN_0))
+    if (!IsTextPrinterActive(BTLWIN_MESSAGE))
         PlayerBufferExecCompleted();
 }
 
@@ -1188,7 +1188,7 @@ static void Task_CreateLevelUpVerticalStripes(u8 taskId)
     switch (data[15])
     {
     case 0:
-        if (!IsTextPrinterActive(BTLWIN_0))
+        if (!IsTextPrinterActive(BTLWIN_MESSAGE))
         {
             if (!isOnBg2)
             {
@@ -1282,7 +1282,7 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
 
 static void CompleteOnInactiveTextPrinter2(void)
 {
-    if (!IsTextPrinterActive(BTLWIN_0))
+    if (!IsTextPrinterActive(BTLWIN_MESSAGE))
         PlayerBufferExecCompleted();
 }
 
@@ -1370,7 +1370,7 @@ static void MoveSelectionDisplayMoveNames(void)
         MoveSelectionDestroyCursorAt(i);
         StringCopy(gDisplayedStringBattle, gText_Battle_SetMoveNamePalette);
         StringAppend(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_3 + i);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_MOVE1 + i);
         if (moveInfo->moves[i] != MOVE_NONE)
             ++gNumberOfMovesToChoose;
     }
@@ -1379,7 +1379,7 @@ static void MoveSelectionDisplayMoveNames(void)
 static void MoveSelectionDisplayPpString(void)
 {
     StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
-    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_7);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_SELMOVEINTERFACEPP);
 }
 
 static void MoveSelectionDisplayPpNumber(void)
@@ -1394,7 +1394,7 @@ static void MoveSelectionDisplayPpNumber(void)
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     *txtPtr = CHAR_SLASH;
     ConvertIntToDecimalStringN(++txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_9);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_SELMOVEPPREMAINING);
 }
 
 static void MoveSelectionDisplayMoveType(void)
@@ -1408,7 +1408,7 @@ static void MoveSelectionDisplayMoveType(void)
     *txtPtr++ = 1;
     txtPtr = StringCopy(txtPtr, gText_Battle_SetMoveNamePalette);
     StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
-    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_8);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_SELMOVETYPE);
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
@@ -1479,7 +1479,7 @@ static void PrintLinkStandbyMsg(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
-        BattlePutTextCenteredOnWindow(gText_LinkStandby, BTLWIN_0);
+        BattlePutTextCenteredOnWindow(gText_LinkStandby, BTLWIN_MESSAGE);
     }
 }
 
@@ -2377,9 +2377,9 @@ static void PlayerHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0 | BTL_PRINT_CTX_F);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_MESSAGE | BTL_PRINT_CTX_F);
     else
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_MESSAGE);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
 }
 
@@ -2406,13 +2406,13 @@ static void PlayerHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_0);
-    BattlePutTextCenteredOnWindow(gText_BattleMenu, BTLWIN_2);
+    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_MESSAGE);
+    BattlePutTextCenteredOnWindow(gText_BattleMenu, BTLWIN_TURNMENU);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_1);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_WHATWILLPKMNDO);
 }
 
 static void PlayerHandleUnknownYesNoBox(void)
@@ -2601,7 +2601,7 @@ static void PlayerHandleCmd32(void)
 
 static void PlayerHandleTwoReturnValues(void)
 {
-    BtlController_EmitTwoReturnValues(1, 0, 0);
+    BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);
     PlayerBufferExecCompleted();
 }
 

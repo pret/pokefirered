@@ -2369,7 +2369,7 @@ static void ChooseTypeOfMoveUsedString(u8* dst)
 }
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
-    [BTLWIN_0] = {
+    [BTLWIN_MESSAGE] = {
         .fillValue = PIXEL_FILL(15),
         .fontId = 2,
         .x = 2,
@@ -2381,7 +2381,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 15,
         .shadowColor = 6
     },
-    [BTLWIN_1] = {
+    [BTLWIN_WHATWILLPKMNDO] = {
         .fillValue = PIXEL_FILL(15),
         .fontId = 2,
         .x = 2,
@@ -2393,7 +2393,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 15,
         .shadowColor = 6
     },
-    [BTLWIN_2] = {
+    [BTLWIN_TURNMENU] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 1,
         .x = 0,
@@ -2405,7 +2405,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_3] = {
+    [BTLWIN_MOVE1] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 0,
         .x = 0,
@@ -2417,7 +2417,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_4] = {
+    [BTLWIN_MOVE2] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 0,
         .x = 0,
@@ -2429,7 +2429,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_5] = {
+    [BTLWIN_MOVE3] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 0,
         .x = 0,
@@ -2441,7 +2441,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_6] = {
+    [BTLWIN_MOVE4] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 0,
         .x = 0,
@@ -2453,7 +2453,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_7] = {
+    [BTLWIN_SELMOVEINTERFACEPP] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 0,
         .x = 0,
@@ -2465,7 +2465,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 11
     },
-    [BTLWIN_8] = {
+    [BTLWIN_SELMOVETYPE] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 0,
         .x = 0,
@@ -2477,7 +2477,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_9] = {
+    [BTLWIN_SELMOVEPPREMAINING] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 1,
         .x = 10,
@@ -2501,7 +2501,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_11] = {
+    [BTLWIN_SWITCHWHICH] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 1,
         .x = 0,
@@ -2513,7 +2513,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_12] = {
+    [BTLWIN_LEVELUPSTATS] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2525,7 +2525,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_13] = {
+    [BTLWIN_LEVELUPBENCHEDMON] = {
         .fillValue = PIXEL_FILL(0),
         .fontId = 0,
         .x = 32,
@@ -2537,7 +2537,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 0,
         .shadowColor = 2
     },
-    [BTLWIN_14] = {
+    [BTLWIN_YESNO] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2549,7 +2549,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_15] = {
+    [BTLWIN_LINKPLAYERNAME] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2561,7 +2561,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_16] = {
+    [BTLWIN_LINKPARTNERNAME] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2573,7 +2573,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_17] = {
+    [BTLWIN_MULTIPLAYER1NAME] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2585,7 +2585,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_18] = {
+    [BTLWIN_MULTIPLAYER2NAME] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2597,7 +2597,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_19] = {
+    [BTLWIN_MULTIPLAYER3NAME] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2609,7 +2609,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_20] = {
+    [BTLWIN_MULTIPLAYER4NAME] = {
         .fillValue = PIXEL_FILL(14),
         .fontId = 2,
         .x = 0,
@@ -2621,7 +2621,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 14,
         .shadowColor = 15
     },
-    [BTLWIN_21] = {
+    [BTLWIN_LINKRESULTDRAW] = {
         .fillValue = PIXEL_FILL(0),
         .fontId = 2,
         .x = 0,
@@ -2633,7 +2633,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 0,
         .shadowColor = 6
     },
-    [BTLWIN_22] = {
+    [BTLWIN_LINKRESULTLEFT] = {
         .fillValue = PIXEL_FILL(0),
         .fontId = 2,
         .x = 0,
@@ -2645,7 +2645,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 0,
         .shadowColor = 6
     },
-    [BTLWIN_23] = {
+    [BTLWIN_LINKRESULTRIGHT] = {
         .fillValue = PIXEL_FILL(0),
         .fontId = 2,
         .x = 0,
@@ -2657,7 +2657,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
         .bgColor = 0,
         .shadowColor = 6
     },
-    [BTLWIN_24] = {
+    [BTLWIN_TUTORIAL_MESSAGE] = {
         .fillValue = PIXEL_FILL(1),
         .fontId = 4,
         .x = 0,
@@ -2695,18 +2695,18 @@ void BattlePutTextCenteredOnWindow(const u8 *text, u8 windowId) {
     }
     switch (windowId)
     {
-    case BTLWIN_15:
-    case BTLWIN_16:
-    case BTLWIN_17:
-    case BTLWIN_18:
-    case BTLWIN_19:
-    case BTLWIN_20:
+    case BTLWIN_LINKPLAYERNAME:
+    case BTLWIN_LINKPARTNERNAME:
+    case BTLWIN_MULTIPLAYER1NAME:
+    case BTLWIN_MULTIPLAYER2NAME:
+    case BTLWIN_MULTIPLAYER3NAME:
+    case BTLWIN_MULTIPLAYER4NAME:
         x = (48 - GetStringWidth(sTextOnWindowsInfo_Normal[windowId].fontId, text,
                                  sTextOnWindowsInfo_Normal[windowId].letterSpacing)) / 2;
         break;
-    case BTLWIN_21:
-    case BTLWIN_22:
-    case BTLWIN_23:
+    case BTLWIN_LINKRESULTDRAW:
+    case BTLWIN_LINKRESULTLEFT:
+    case BTLWIN_LINKRESULTRIGHT:
         x = (64 - GetStringWidth(sTextOnWindowsInfo_Normal[windowId].fontId, text,
                                  sTextOnWindowsInfo_Normal[windowId].letterSpacing)) / 2;
         break;
@@ -2728,17 +2728,17 @@ void BattlePutTextCenteredOnWindow(const u8 *text, u8 windowId) {
     printerTemplate.fgColor = sTextOnWindowsInfo_Normal[windowId].fgColor;
     printerTemplate.bgColor = sTextOnWindowsInfo_Normal[windowId].bgColor;
     printerTemplate.shadowColor = sTextOnWindowsInfo_Normal[windowId].shadowColor;
-    if (windowId == BTLWIN_24)
+    if (windowId == BTLWIN_TUTORIAL_MESSAGE)
         gTextFlags.useAlternateDownArrow = FALSE;
     else
         gTextFlags.useAlternateDownArrow = TRUE;
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) || ((gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) && windowId != BTLWIN_24))
+    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) || ((gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) && windowId != BTLWIN_TUTORIAL_MESSAGE))
         gTextFlags.autoScroll = TRUE;
     else
         gTextFlags.autoScroll = FALSE;
 
-    if (windowId == BTLWIN_0 || windowId == BTLWIN_24)
+    if (windowId == BTLWIN_MESSAGE || windowId == BTLWIN_TUTORIAL_MESSAGE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             speed = 1;

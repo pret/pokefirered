@@ -4982,8 +4982,8 @@ static void atk5A_yesnoboxlearnmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_14);
         ++gBattleScripting.learnMoveState;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5008,7 +5008,7 @@ static void atk5A_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
-                HandleBattleWindow(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
+                DrawBattleWindowFrame(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                 ++gBattleScripting.learnMoveState;
             }
@@ -5075,7 +5075,7 @@ static void atk5A_yesnoboxlearnmove(void)
         }
         break;
     case 4:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        DrawBattleWindowFrame(23, 8, 29, 13, WINDOW_CLEAR);
         gBattlescriptCurrInstr += 5;
         break;
     case 5:
@@ -5092,8 +5092,8 @@ static void atk5B_yesnoboxstoplearningmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_14);
         ++gBattleScripting.learnMoveState;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5121,13 +5121,13 @@ static void atk5B_yesnoboxstoplearningmove(void)
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
             else
                 gBattlescriptCurrInstr += 5;
-            HandleBattleWindow(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-            HandleBattleWindow(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
         break;
     }
@@ -5380,8 +5380,8 @@ static void atk67_yesnobox(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_14);
         ++gBattleCommunication[0];
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5405,13 +5405,13 @@ static void atk67_yesnobox(void)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
-            HandleBattleWindow(0x17, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(23, 8, 29, 13, WINDOW_CLEAR);
             ++gBattlescriptCurrInstr;
         }
         else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            HandleBattleWindow(0x17, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(23, 8, 29, 13, WINDOW_CLEAR);
             ++gBattlescriptCurrInstr;
         }
         break;
@@ -5515,7 +5515,7 @@ static void atk6C_drawlvlupbox(void)
         SetBgAttribute(1, BG_ATTR_PRIORITY, 0);
         ShowBg(0);
         ShowBg(1);
-        HandleBattleWindow(18, 7, 0x1D, 0x13, WINDOW_x80);
+        DrawBattleWindowFrame(18, 7, 0x1D, 0x13, WINDOW_x80);
         gBattleScripting.atk6C_state = 4;
         break;
     case 4:
@@ -5545,7 +5545,7 @@ static void atk6C_drawlvlupbox(void)
         if (gMain.newKeys)
         {
             PlaySE(SE_SELECT);
-            HandleBattleWindow(18, 7, 0x1D, 0x13, WINDOW_x80 | WINDOW_CLEAR);
+            DrawBattleWindowFrame(18, 7, 0x1D, 0x13, WINDOW_x80 | WINDOW_CLEAR);
             ++gBattleScripting.atk6C_state;
         }
         break;
@@ -9225,7 +9225,7 @@ static void atkF2_displaydexinfo(void)
     }
 }
 
-void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
+void DrawBattleWindowFrame(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
 {
     s32 destY, destX;
     u16 var = 0;
@@ -9297,8 +9297,8 @@ static void atkF3_trygivecaughtmonnick(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_14);
         ++gBattleCommunication[MULTIUSE_STATE];
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();

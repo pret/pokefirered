@@ -250,7 +250,7 @@ static void CompleteOnBattlerSpritePosX_0(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         PokedudeBufferExecCompleted();
 }
 
@@ -634,7 +634,7 @@ static void CompleteOnHealthbarDone(void)
 
 static void CompleteOnInactiveTextPrinter2(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         PokedudeBufferExecCompleted();
 }
 
@@ -1533,9 +1533,9 @@ static void PokedudeHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0 | BTL_PRINT_CTX_F);
     else
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1564,13 +1564,13 @@ static void PokedudeHandleChooseAction(void)
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-        BattlePutTextCenteredOnWindow(gText_EmptyString3, 0);
-        BattlePutTextCenteredOnWindow(gText_BattleMenu, 2);
+        BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_0);
+        BattlePutTextCenteredOnWindow(gText_BattleMenu, BTLWIN_2);
         for (i = 0; i < MAX_MON_MOVES; ++i)
             ActionSelectionDestroyCursorAt((u8)i);
         ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 1);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_1);
     }
     else
     {
@@ -2557,11 +2557,11 @@ static void PokedudeAction_PrintVoiceoverMessage(void)
     case 2:
         gBattle_BG0_Y = 0;
         BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
         ++gPokedudeBattlerStates[gActiveBattler]->timer;
         break;
     case 3:
-        if (!IsTextPrinterActive(24) && JOY_NEW(A_BUTTON))
+        if (!IsTextPrinterActive(BTLWIN_24) && JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFF7F, 4, 8, 0, RGB_BLACK);
@@ -2618,11 +2618,11 @@ static void PokedudeAction_PrintMessageWithHealthboxPals(void)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_24);
         ++gPokedudeBattlerStates[gActiveBattler]->timer;
         break;
     case 4:
-        if (!IsTextPrinterActive(24) && JOY_NEW(A_BUTTON))
+        if (!IsTextPrinterActive(BTLWIN_24) && JOY_NEW(A_BUTTON))
         {
             u32 mask;
 

@@ -329,7 +329,7 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         LinkOpponentBufferExecCompleted();
 }
 
@@ -1310,9 +1310,9 @@ static void LinkOpponentHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0 | BTL_PRINT_CTX_F);
     else
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 

@@ -1337,10 +1337,10 @@ static void PrintStringTMCaseOnWindow3(void)
 
 static void DrawMoveInfoUIMarkers(void)
 {
-    BlitMoveInfoIcon(4, 19, 0, 0);
-    BlitMoveInfoIcon(4, 20, 0, 12);
-    BlitMoveInfoIcon(4, 21, 0, 24);
-    BlitMoveInfoIcon(4, 22, 0, 36);
+    BlitMoveInfoIcon(4, MOVEICON_TYPEICON, 0, 0);
+    BlitMoveInfoIcon(4, MOVEICON_POWER, 0, 12);
+    BlitMoveInfoIcon(4, MOVEICON_ACCURACY, 0, 24);
+    BlitMoveInfoIcon(4, MOVEICON_PP, 0, 36);
     CopyWindowToVram(4, COPYWIN_GFX);
 }
 
@@ -1362,7 +1362,7 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
     else
     {
         move = ItemIdToBattleMoveId(itemId);
-        BlitMoveInfoIcon(5, gBattleMoves[move].type + 1, 0, 0);
+        BlitMoveInfoIcon(5, MOVEICON_TYPE(gBattleMoves[move].type), 0, 0);
         if (gBattleMoves[move].power < 2)
             str = gText_ThreeHyphens;
         else

@@ -4324,7 +4324,7 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct GFtgtGname * gname
     }
     else
     {
-        BlitMoveInfoIcon(windowId, type + 1, 0x44, y);
+        BlitMoveInfoIcon(windowId, MOVEICON_TYPE(type), 0x44, y);
         UR_AddTextPrinterParameterized(windowId, 2, gSpeciesNames[species], 0x76, y, colorIdx);
         ConvertIntToDecimalStringN(level_t, level, STR_CONV_MODE_LEFT_ALIGN, 3);
         UR_AddTextPrinterParameterized(windowId, 2, level_t, GetStringRightAlignXOffset(2, level_t, 218), y, colorIdx);

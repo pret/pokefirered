@@ -232,7 +232,7 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(BTLWIN_0))
         SafariBufferExecCompleted();
 }
 
@@ -409,9 +409,9 @@ static void SafariHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0 | BTL_PRINT_CTX_F);
     else
-        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -438,13 +438,13 @@ static void SafariHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextCenteredOnWindow(gText_EmptyString3, 0);
-    BattlePutTextCenteredOnWindow(gText_SafariBattleMenu, 2);
+    BattlePutTextCenteredOnWindow(gText_EmptyString3, BTLWIN_0);
+    BattlePutTextCenteredOnWindow(gText_SafariBattleMenu, BTLWIN_2);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
-    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, 1);
+    BattlePutTextCenteredOnWindow(gDisplayedStringBattle, BTLWIN_1);
 }
 
 static void SafariHandleUnknownYesNoBox(void)

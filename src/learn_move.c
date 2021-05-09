@@ -124,24 +124,24 @@ struct MoveTutorMoveInfoHeaders
 struct LearnMoveGfxResources
 {
     u8 state;
-    u8 unk_01;
-    u8 unk_02;
+    u8 unk_01; // unused
+    u8 unk_02; // set but never read
     u8 spriteIds[2];
-    u8 filler_05[0x13];
-    u8 unk_18;
+    u8 filler_05[19]; // unused
+    u8 unk_18; // set but never read
     u8 scrollPositionMaybe;
     u8 numLearnableMoves;
-    u8 unk_1B;
-    u8 unk_1C;
-    u8 unk_1D;
-    u8 unk_1E;
+    u8 unk_1B; // set but never read
+    u8 unk_1C; // set but never read
+    u8 unk_1D; // set but never read
+    u8 unk_1E; // set but never read
     struct ListMenuItem listMenuItems[25];
     u16 learnableMoves[25];
     u8 listMenuStrbufs[25][13];
     bool8 scheduleMoveInfoUpdate;
     u8 selectedPartyMember;
     u8 selectedMoveSlot;
-    u8 unk_262;
+    u8 unk_262; // unused
     u8 listMenuTaskId;
     u8 bg1TilemapBuffer[BG_SCREEN_SIZE]; // 264
     u8 textColor[3]; // A64
@@ -175,6 +175,7 @@ static const u16 sLearnMoveInterfaceSpritesTiles[] = INCBIN_U16("graphics/learn_
 
 static const u8 sMoveTutorMenuWindowFrameDimensions[][4] =
 {
+    // left, top, width, height
     { 0,  0, 19, 13},
     {20,  0, 29, 13},
     { 2, 14, 27, 19}
@@ -251,8 +252,21 @@ static const struct BgTemplate sBgTemplates[2] = {
     }
 };
 
+enum
+{
+    WINID_UITYPEICON,
+    WINID_UIMOVESTATS,
+    WINID_MOVETYPEICON,
+    WINID_MOVEPWRACC,
+    WINID_MOVEPP,
+    WINID_MOVEDESC,
+    WINID_LIST,
+    WINID_MESSAGE,
+    WINID_COUNT,
+};
+
 static const struct WindowTemplate sWindowTemplates[9] = {
-    {
+    [WINID_UITYPEICON] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -261,7 +275,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0d,
         .baseBlock = 0x014
     },
-    {
+    [WINID_UIMOVESTATS] = {
         .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 0,
@@ -270,7 +284,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0d,
         .baseBlock = 0x03e
     },
-    {
+    [WINID_MOVETYPEICON] = {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 0,
@@ -279,7 +293,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0d,
         .baseBlock = 0x057
     },
-    {
+    [WINID_MOVEPWRACC] = {
         .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 0,
@@ -288,7 +302,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x061
     },
-    {
+    [WINID_MOVEPP] = {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 2,
@@ -297,7 +311,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x070
     },
-    {
+    [WINID_MOVEDESC] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 6,
@@ -306,7 +320,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x079
     },
-    {
+    [WINID_LIST] = {
         .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 1,
@@ -315,7 +329,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .paletteNum = 0x0f,
         .baseBlock = 0x0f1
     },
-    {
+    [WINID_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -326,7 +340,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_83FFA8C = {
+static const struct WindowTemplate sWindowTemplate_YesNo = {
     .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 8,
@@ -342,7 +356,7 @@ static const struct ListMenuTemplate sMoveRelearnerListMenuTemplate = {
     .itemPrintFunc = NULL,
     .totalItems = 0,
     .maxShowed = 7,
-    .windowId = 6,
+    .windowId = WINID_LIST,
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -395,14 +409,14 @@ static void MoveRelearnerLoadBgGfx(void)
             ClearWindowTilemap(i);
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
-        FillWindowPixelBuffer(7, PIXEL_FILL(1));
+        FillWindowPixelBuffer(WINID_MESSAGE, PIXEL_FILL(1));
         FillBgTilemapBufferRect(0, 0x000, 0, 0, 30, 20, 0xF);
         SetBgTilemapBuffer(1, sMoveRelearner->bg1TilemapBuffer);
-        TextWindow_SetUserSelectedFrame(0, 1, 0xE0);
+        TextWindow_SetUserSelectedFrame(WINID_UITYPEICON, 1, 0xE0);
         ListMenuLoadStdPalAt(0xD0, 1);
-        LoadPalette(gUnknown_8E97DDC, 0x00, 0x20);
-        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_8E97DFC, 0, 0, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_8E97EC4, 0, 0);
+        LoadPalette(gMoveRelearner_Pals, 0x00, 0x20);
+        DecompressAndLoadBgGfxUsingHeap(1, gMoveRelearner_BgTiles, 0, 0, 0);
+        CopyToBgTilemapBuffer(1, gMoveRelearner_BgMap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);
@@ -453,7 +467,7 @@ static void CB2_MoveRelearner_Resume(void)
 
 static void CB2_MoveRelearner(void)
 {
-    if (!IsTextPrinterActive(7))
+    if (!IsTextPrinterActive(WINID_MESSAGE))
         MoveRelearnerStateMachine();
     if (sMoveRelearner->scheduleMoveInfoUpdate)
     {
@@ -467,10 +481,10 @@ static void CB2_MoveRelearner(void)
     UpdatePaletteFade();
 }
 
-static void StringExpandPlaceholdersAndPrintTextOnWindow7Color2(const u8 *str)
+static void ExpandAndPrintRelearnerMessage(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    PrintTextOnWindow(7, gStringVar4, 0, 2, GetTextSpeedSetting(), 2);
+    PrintTextOnWindow(WINID_MESSAGE, gStringVar4, 0, 2, GetTextSpeedSetting(), 2);
 }
 
 static void MoveRelearnerStateMachine(void)
@@ -492,7 +506,7 @@ static void MoveRelearnerStateMachine(void)
         break;
     case MENU_STATE_WAIT_FOR_FADE:
         if (!gPaletteFade.active)
-            sMoveRelearner->state = 4;
+            sMoveRelearner->state = MENU_STATE_IDLE_BATTLE_MODE;
         break;
     case MENU_STATE_UNREACHABLE:
         sMoveRelearner->state++;
@@ -506,7 +520,7 @@ static void MoveRelearnerStateMachine(void)
         MoveRelearnerMenuHandleInput();
         break;
     case MENU_STATE_PRINT_TEACH_MOVE_PROMPT:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_TEACH_MOVE_CONFIRM :
@@ -515,23 +529,23 @@ static void MoveRelearnerStateMachine(void)
         case 0:
             if (GiveMoveToMon(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]) != 0xFFFF)
             {
-                StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonLearnedMove);
+                ExpandAndPrintRelearnerMessage(gText_MonLearnedMove);
                 gSpecialVar_0x8004 = TRUE;
-                sMoveRelearner->state = 31;
+                sMoveRelearner->state = MENU_STATE_PRINT_TEXT_THEN_FANFARE;
             }
             else
             {
-                sMoveRelearner->state = 16;
+                sMoveRelearner->state = MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT;
             }
             break;
         case 1:
         case -1:
-            sMoveRelearner->state = 3;
+            sMoveRelearner->state = MENU_STATE_SETUP_BATTLE_MODE;
             break;
         }
         break;
     case MENU_STATE_PRINT_GIVE_UP_PROMPT:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_GIVE_UP_CONFIRM:
@@ -539,60 +553,60 @@ static void MoveRelearnerStateMachine(void)
         {
         case 0:
             gSpecialVar_0x8004 = FALSE;
-            sMoveRelearner->state = 14;
+            sMoveRelearner->state = MENU_STATE_FADE_AND_RETURN;
             break;
         case 1:
         case -1:
-            sMoveRelearner->state = 3;
+            sMoveRelearner->state = MENU_STATE_SETUP_BATTLE_MODE;
             break;
         }
         break;
     case MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT:
-        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonIsTryingToLearnMove);
+        ExpandAndPrintRelearnerMessage(gText_MonIsTryingToLearnMove);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_TRYING_TO_LEARN:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
-        sMoveRelearner->state = 18;
+        CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 0x001, 0xE, 0);
+        sMoveRelearner->state = MENU_STATE_CONFIRM_DELETE_OLD_MOVE;
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
         switch (YesNoMenuProcessInput())
         {
         case 0:
-            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_WhichMoveShouldBeForgotten);
-            sMoveRelearner->state = 19;
+            ExpandAndPrintRelearnerMessage(gText_WhichMoveShouldBeForgotten);
+            sMoveRelearner->state = MENU_STATE_PRINT_WHICH_MOVE_PROMPT;
             break;
         case 1:
         case -1:
-            sMoveRelearner->state = 24;
+            sMoveRelearner->state = MENU_STATE_PRINT_STOP_TEACHING;
             break;
         }
         break;
     case MENU_STATE_PRINT_STOP_TEACHING:
-        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_StopLearningMove);
+        ExpandAndPrintRelearnerMessage(gText_StopLearningMove);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_STOP_TEACHING:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
-        sMoveRelearner->state = 26;
+        CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 0x001, 0xE, 0);
+        sMoveRelearner->state = MENU_STATE_CONFIRM_STOP_TEACHING;
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:
         switch (YesNoMenuProcessInput())
         {
         case 0:
-            sMoveRelearner->state = 27;
+            sMoveRelearner->state = MENU_STATE_CHOOSE_SETUP_STATE;
             break;
         case 1:
         case -1:
-            sMoveRelearner->state = 16;
+            sMoveRelearner->state = MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT;
             break;
         }
         break;
     case MENU_STATE_CHOOSE_SETUP_STATE :
-        sMoveRelearner->state = 3;
+        sMoveRelearner->state = MENU_STATE_SETUP_BATTLE_MODE;
         break;
     case MENU_STATE_PRINT_WHICH_MOVE_PROMPT:
-        sMoveRelearner->state = 20;
+        sMoveRelearner->state = MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         break;
     case MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN:
@@ -601,11 +615,11 @@ static void MoveRelearnerStateMachine(void)
             ListMenuGetScrollAndRow(sMoveRelearner->listMenuTaskId, &sMoveRelearner->listMenuScrollPos, &sMoveRelearner->listMenuScrollRow);
             FreeAllWindowBuffers();
             ShowSelectMovePokemonSummaryScreen(gPlayerParty, sMoveRelearner->selectedPartyMember, gPlayerPartyCount - 1, CB2_MoveRelearner_Resume, sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]);
-            sMoveRelearner->state = 28;
+            sMoveRelearner->state = MENU_STATE_FADE_FROM_SUMMARY_SCREEN;
         }
         break;
     case 21:
-        sMoveRelearner->state = 14;
+        sMoveRelearner->state = MENU_STATE_FADE_AND_RETURN;
         break;
     case 22:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
@@ -638,7 +652,7 @@ static void MoveRelearnerStateMachine(void)
         {
             if (sMoveRelearner->selectedMoveSlot == 4)
             {
-                sMoveRelearner->state = 24;
+                sMoveRelearner->state = MENU_STATE_PRINT_STOP_TEACHING;
             }
             else
             {
@@ -647,30 +661,30 @@ static void MoveRelearnerStateMachine(void)
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->selectedMoveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex], sMoveRelearner->selectedMoveSlot);
                 StringCopy(gStringVar2, gMoveNames[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]]);
-                StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_1_2_and_Poof);
-                sMoveRelearner->state = 30;
+                ExpandAndPrintRelearnerMessage(gText_1_2_and_Poof);
+                sMoveRelearner->state = MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE;
                 gSpecialVar_0x8004 = TRUE;
             }
         }
         break;
     case MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE:
-        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_MonForgotOldMoveAndMonLearnedNewMove);
-        sMoveRelearner->state = 31;
+        ExpandAndPrintRelearnerMessage(gText_MonForgotOldMoveAndMonLearnedNewMove);
+        sMoveRelearner->state = MENU_STATE_PRINT_TEXT_THEN_FANFARE;
         PlayFanfare(MUS_LEVEL_UP);
         break;
     case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
         PlayFanfare(MUS_LEVEL_UP);
-        sMoveRelearner->state = 32;
+        sMoveRelearner->state = MENU_STATE_WAIT_FOR_FANFARE;
         break;
     case MENU_STATE_WAIT_FOR_FANFARE:
         if (IsFanfareTaskInactive())
-            sMoveRelearner->state = 33;
+            sMoveRelearner->state = MENU_STATE_WAIT_FOR_A_BUTTON;
         break;
     case MENU_STATE_WAIT_FOR_A_BUTTON:
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            sMoveRelearner->state = 14;
+            sMoveRelearner->state = MENU_STATE_FADE_AND_RETURN;
         }
         break;
     }
@@ -679,7 +693,7 @@ static void MoveRelearnerStateMachine(void)
 static void DrawTextBorderOnWindows6and7(void)
 {
     int i;
-    for (i = 6; i < 8; i++)
+    for (i = WINID_LIST; i < WINID_COUNT; i++)
         DrawTextBorderOuter(i, 0x001, 0xE);
 }
 
@@ -688,9 +702,9 @@ static void PrintTeachWhichMoveToStrVar1(bool8 onInit)
     if (!onInit)
     {
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToMon);
-        PrintTextOnWindow(7, gStringVar4, 0, 2, 0, 2);
-        PutWindowTilemap(7);
-        CopyWindowToVram(7, COPYWIN_BOTH);
+        PrintTextOnWindow(WINID_MESSAGE, gStringVar4, 0, 2, 0, 2);
+        PutWindowTilemap(WINID_MESSAGE);
+        CopyWindowToVram(WINID_MESSAGE, COPYWIN_BOTH);
     }
 }
 
@@ -778,23 +792,23 @@ static void MoveRelearnerMenuHandleInput(void)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (sMoveRelearner->selectedIndex != 0xFE)
+        if (sMoveRelearner->selectedIndex != (u8)LIST_CANCEL)
         {
-            sMoveRelearner->state = 8;
+            sMoveRelearner->state = MENU_STATE_PRINT_TEACH_MOVE_PROMPT;
             StringCopy(gStringVar2, sMoveRelearner->listMenuStrbufs[sMoveRelearner->selectedIndex]);
-            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_TeachMoveQues);
+            ExpandAndPrintRelearnerMessage(gText_TeachMoveQues);
         }
         else
         {
-            StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_GiveUpTryingToTeachNewMove);
-            sMoveRelearner->state = 12;
+            ExpandAndPrintRelearnerMessage(gText_GiveUpTryingToTeachNewMove);
+            sMoveRelearner->state = MENU_STATE_PRINT_GIVE_UP_PROMPT;
         }
     }
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sMoveRelearner->state = 12;
-        StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_GiveUpTryingToTeachNewMove);
+        sMoveRelearner->state = MENU_STATE_PRINT_GIVE_UP_PROMPT;
+        ExpandAndPrintRelearnerMessage(gText_GiveUpTryingToTeachNewMove);
     }
     if (sMoveRelearner->numLearnableMoves > 6)
     {
@@ -810,77 +824,77 @@ static void MoveRelearnerMenuHandleInput(void)
 static void MoveLearnerInitListMenu(void)
 {
     sMoveRelearner->listMenuTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearner->listMenuScrollPos, sMoveRelearner->listMenuScrollRow);
-    CopyWindowToVram(6, COPYWIN_MAP);
+    CopyWindowToVram(WINID_LIST, COPYWIN_MAP);
 }
 
 static void PrintMoveInfo(u16 move)
 {
     u8 buffer[50];
-    BlitMoveInfoIcon(2, gBattleMoves[move].type + 1, 1, 4);
+    BlitMoveInfoIcon(WINID_MOVETYPEICON, MOVEICON_TYPE(gBattleMoves[move].type), 1, 4);
 
     if (gBattleMoves[move].power < 2)
     {
-        PrintTextOnWindow(3, gText_ThreeHyphens, 1, 4, 0, 0);
+        PrintTextOnWindow(WINID_MOVEPWRACC, gText_ThreeHyphens, 1, 4, 0, 0);
     }
     else
     {
         ConvertIntToDecimalStringN(buffer, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintTextOnWindow(3, buffer, 1, 4, 0, 0);
+        PrintTextOnWindow(WINID_MOVEPWRACC, buffer, 1, 4, 0, 0);
     }
 
     if (gBattleMoves[move].accuracy == 0)
     {
-        PrintTextOnWindow(3, gText_ThreeHyphens, 1, 18, 0, 1);
+        PrintTextOnWindow(WINID_MOVEPWRACC, gText_ThreeHyphens, 1, 18, 0, 1);
     }
     else
     {
         ConvertIntToDecimalStringN(buffer, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintTextOnWindow(3, buffer, 1, 18, 0, 1);
+        PrintTextOnWindow(WINID_MOVEPWRACC, buffer, 1, 18, 0, 1);
     }
     ConvertIntToDecimalStringN(buffer, gBattleMoves[move].pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    PrintTextOnWindow(4, buffer, 2, 2, 0, 0);
-    PrintTextOnWindow(5, gMoveDescriptionPointers[move - 1], 1, 0, 0, 0);
+    PrintTextOnWindow(WINID_MOVEPP, buffer, 2, 2, 0, 0);
+    PrintTextOnWindow(WINID_MOVEDESC, gMoveDescriptionPointers[move - 1], 1, 0, 0, 0);
 }
 
 static void LoadMoveInfoUI(void)
 {
-    BlitMoveInfoIcon(0, 19, 1, 4);
-    BlitMoveInfoIcon(1, 20, 0, 4);
-    BlitMoveInfoIcon(1, 21, 0, 19);
-    BlitMoveInfoIcon(0, 22, 1, 19);
-    BlitMoveInfoIcon(0, 23, 1, 34);
-    PutWindowTilemap(0);
-    PutWindowTilemap(1);
-    PutWindowTilemap(4);
-    PutWindowTilemap(3);
-    PutWindowTilemap(5);
-    PutWindowTilemap(2);
-    PutWindowTilemap(7);
-    CopyWindowToVram(0, COPYWIN_GFX);
-    CopyWindowToVram(1, COPYWIN_GFX);
+    BlitMoveInfoIcon(WINID_UITYPEICON, MOVEICON_TYPEICON, 1, 4);
+    BlitMoveInfoIcon(WINID_UIMOVESTATS, MOVEICON_POWER, 0, 4);
+    BlitMoveInfoIcon(WINID_UIMOVESTATS, MOVEICON_ACCURACY, 0, 19);
+    BlitMoveInfoIcon(WINID_UITYPEICON, MOVEICON_PP, 1, 19);
+    BlitMoveInfoIcon(WINID_UITYPEICON, MOVEICON_EFFECT, 1, 34);
+    PutWindowTilemap(WINID_UITYPEICON);
+    PutWindowTilemap(WINID_UIMOVESTATS);
+    PutWindowTilemap(WINID_MOVEPP);
+    PutWindowTilemap(WINID_MOVEPWRACC);
+    PutWindowTilemap(WINID_MOVEDESC);
+    PutWindowTilemap(WINID_MOVETYPEICON);
+    PutWindowTilemap(WINID_MESSAGE);
+    CopyWindowToVram(WINID_UITYPEICON, COPYWIN_GFX);
+    CopyWindowToVram(WINID_UIMOVESTATS, COPYWIN_GFX);
 }
 
 static void PrintMoveInfoHandleCancel_CopyToVram(void)
 {
     int i;
-    if (sMoveRelearner->selectedIndex != 0xFE)
+    if (sMoveRelearner->selectedIndex != (u8)LIST_CANCEL)
     {
         PrintMoveInfo(sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]);
     }
     else
     {
-        for (i = 2; i < 6; i++)
+        for (i = WINID_MOVETYPEICON; i < WINID_LIST; i++)
         {
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
             CopyWindowToVram(i, COPYWIN_GFX);
         }
     }
-    CopyWindowToVram(3, COPYWIN_GFX);
-    CopyWindowToVram(4, COPYWIN_GFX);
-    CopyWindowToVram(2, COPYWIN_GFX);
-    CopyWindowToVram(2, COPYWIN_GFX);
-    CopyWindowToVram(5, COPYWIN_GFX);
-    CopyWindowToVram(7, COPYWIN_BOTH);
+    CopyWindowToVram(WINID_MOVEPWRACC, COPYWIN_GFX);
+    CopyWindowToVram(WINID_MOVEPP, COPYWIN_GFX);
+    CopyWindowToVram(WINID_MOVETYPEICON, COPYWIN_GFX);
+    CopyWindowToVram(WINID_MOVETYPEICON, COPYWIN_GFX);
+    CopyWindowToVram(WINID_MOVEDESC, COPYWIN_GFX);
+    CopyWindowToVram(WINID_MESSAGE, COPYWIN_BOTH);
 }
 
 static void MoveRelearnerMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -896,10 +910,10 @@ static void MoveRelearnerMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct
 static s8 YesNoMenuProcessInput(void)
 {
     s8 input = Menu_ProcessInputNoWrapClearOnChoose();
-    if (input != -2)
+    if (input != LIST_CANCEL)
     {
-        PutWindowTilemap(6);
-        CopyWindowToVram(6, COPYWIN_MAP);
+        PutWindowTilemap(WINID_LIST);
+        CopyWindowToVram(WINID_LIST, COPYWIN_MAP);
     }
     return input;
 }
@@ -917,14 +931,14 @@ static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed,
     {
     case 0:
     case 1:
-        sMoveRelearner->textColor[0] = 0;
-        sMoveRelearner->textColor[1] = 2;
-        sMoveRelearner->textColor[2] = 3;
+        sMoveRelearner->textColor[0] = TEXT_COLOR_TRANSPARENT;
+        sMoveRelearner->textColor[1] = TEXT_COLOR_DARK_GRAY;
+        sMoveRelearner->textColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
     case 2:
-        sMoveRelearner->textColor[0] = 1;
-        sMoveRelearner->textColor[1] = 2;
-        sMoveRelearner->textColor[2] = 3;
+        sMoveRelearner->textColor[0] = TEXT_COLOR_WHITE;
+        sMoveRelearner->textColor[1] = TEXT_COLOR_DARK_GRAY;
+        sMoveRelearner->textColor[2] = TEXT_COLOR_LIGHT_GRAY;
     }
     if (colorIdx != 1)
         FillWindowPixelBuffer(windowId, PIXEL_FILL(sMoveRelearner->textColor[0]));

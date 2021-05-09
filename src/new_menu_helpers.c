@@ -21,7 +21,7 @@ static EWRAM_DATA u8 sStartMenuWindowId = {0};
 
 static const u16 gUnknown_841EF48[] = INCBIN_U16("graphics/unknown/unk_841EF48.4bpp");
 
-const u16 gUnknown_841F1C8[] = INCBIN_U16("graphics/text_window/unk_841F1C8.4bpp");
+const u16 gStdFrame0_Tiles[] = INCBIN_U16("graphics/text_window/unk_841F1C8.4bpp");
 const u16 gTMCaseMainWindowPalette[] = INCBIN_U16("graphics/tm_case/unk_841F408.gbapal");
 
 static const u8 gUnknown_841F428[] = { 8, 4, 1 };
@@ -702,7 +702,7 @@ u16 GetStdWindowBaseTileNum(void)
 
 void DrawHelpMessageWindowWithText(const u8 * text)
 {
-    sub_814FE6C(CreateHelpMessageWindow(), DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
+    TextWindow_LoadHelpMsgWindowGfx(CreateHelpMessageWindow(), DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
     PrintTextOnHelpMessageWindow(text, 2);
 }
 
@@ -714,7 +714,7 @@ void DestroyHelpMessageWindow_(void)
 void LoadSignPostWindowFrameGfx(void)
 {
     Menu_LoadStdPal();
-    sub_814FEEC(0, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
+    TextWindow_SetSignpostFrame_WithPal(0, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
     TextWindow_SetUserSelectedFrame(0, STD_WINDOW_BASE_TILE_NUM, 0x10 * STD_WINDOW_PALETTE_NUM);
 }
 

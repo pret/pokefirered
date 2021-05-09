@@ -471,7 +471,7 @@ graphics/seagallop/water.4bpp: %.4bpp: %.png
 $(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
+$(TEXTWINDOWGFXDIR)/signpost_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
 
 $(SLOTMACHINEGFXDIR)/unk_8466620.4bpp: %.4bpp: %.png

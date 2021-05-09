@@ -7,10 +7,10 @@ struct TextWindowGraphics
     const void * palette;
 };
 
-extern const u16 gUnknown_8470B0C[];
+extern const u16 gSignpostFrame_Tiles[];
 extern const u16 gStdFrame0[];
 extern const u16 gStdFrame1[];
-extern const u16 gUnknown_8471DEC[][16];
+extern const u16 gStdPals[][16];
 
 extern const struct TextWindowGraphics gUserFrames[];
 

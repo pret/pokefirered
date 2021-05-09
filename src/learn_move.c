@@ -173,6 +173,7 @@ static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed,
 static const u16 sLearnMoveInterfaceSpritesPalette[] = INCBIN_U16("graphics/learn_move/interface_sprites.gbapal");
 static const u16 sLearnMoveInterfaceSpritesTiles[] = INCBIN_U16("graphics/learn_move/interface_sprites.4bpp");
 
+// Unused in US
 static const u8 sMoveTutorMenuWindowFrameDimensions[][4] =
 {
     // left, top, width, height
@@ -263,6 +264,13 @@ enum
     WINID_LIST,
     WINID_MESSAGE,
     WINID_COUNT,
+};
+
+enum
+{
+    COLORID_DG_LG_XPAR,
+    COLORID_DG_LG_XPAR_NOCLR,
+    COLORID_DG_LG_WHITE,
 };
 
 static const struct WindowTemplate sWindowTemplates[9] = {
@@ -484,7 +492,7 @@ static void CB2_MoveRelearner(void)
 static void ExpandAndPrintRelearnerMessage(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    PrintTextOnWindow(WINID_MESSAGE, gStringVar4, 0, 2, GetTextSpeedSetting(), 2);
+    PrintTextOnWindow(WINID_MESSAGE, gStringVar4, 0, 2, GetTextSpeedSetting(), COLORID_DG_LG_WHITE);
 }
 
 static void MoveRelearnerStateMachine(void)
@@ -539,7 +547,7 @@ static void MoveRelearnerStateMachine(void)
             }
             break;
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sMoveRelearner->state = MENU_STATE_SETUP_BATTLE_MODE;
             break;
         }
@@ -556,7 +564,7 @@ static void MoveRelearnerStateMachine(void)
             sMoveRelearner->state = MENU_STATE_FADE_AND_RETURN;
             break;
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sMoveRelearner->state = MENU_STATE_SETUP_BATTLE_MODE;
             break;
         }
@@ -577,7 +585,7 @@ static void MoveRelearnerStateMachine(void)
             sMoveRelearner->state = MENU_STATE_PRINT_WHICH_MOVE_PROMPT;
             break;
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sMoveRelearner->state = MENU_STATE_PRINT_STOP_TEACHING;
             break;
         }
@@ -597,7 +605,7 @@ static void MoveRelearnerStateMachine(void)
             sMoveRelearner->state = MENU_STATE_CHOOSE_SETUP_STATE;
             break;
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sMoveRelearner->state = MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT;
             break;
         }
@@ -702,7 +710,7 @@ static void PrintTeachWhichMoveToStrVar1(bool8 onInit)
     if (!onInit)
     {
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToMon);
-        PrintTextOnWindow(WINID_MESSAGE, gStringVar4, 0, 2, 0, 2);
+        PrintTextOnWindow(WINID_MESSAGE, gStringVar4, 0, 2, 0, COLORID_DG_LG_WHITE);
         PutWindowTilemap(WINID_MESSAGE);
         CopyWindowToVram(WINID_MESSAGE, COPYWIN_BOTH);
     }
@@ -747,15 +755,22 @@ static void SpawnListMenuScrollIndicatorSprites(void)
     int i;
     LoadSpriteSheet(&sSpriteSheet_ListMenuScrollIndicators);
     LoadSpritePalette(&sSpritePalette_ListMenuScrollIndicators);
+
     sMoveRelearner->spriteIds[0] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 4, 0);
     StartSpriteAnim(&gSprites[sMoveRelearner->spriteIds[0]], 1);
     gSprites[sMoveRelearner->spriteIds[0]].data[0] = 2;
     gSprites[sMoveRelearner->spriteIds[0]].data[2] = -1;
 
-    // Bug: This should be using the second element of spriteIds.
-    sMoveRelearner->spriteIds[0] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 108, 0);
-    gSprites[sMoveRelearner->spriteIds[0]].data[0] = 2;
-    gSprites[sMoveRelearner->spriteIds[0]].data[2] = 1;
+#ifdef BUGFIX // This should be using the second element of spriteIds.
+#define spriteId 1
+#else
+#define spriteId 0
+#endif //BUGFIX
+    sMoveRelearner->spriteIds[spriteId] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 108, 0);
+    gSprites[sMoveRelearner->spriteIds[spriteId]].data[0] = 2;
+    gSprites[sMoveRelearner->spriteIds[spriteId]].data[2] = 1;
+#undef spriteId
+
     for (i = 0; i < 2; i++)
         gSprites[sMoveRelearner->spriteIds[i]].invisible = TRUE;
 }
@@ -780,7 +795,7 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
         sMoveRelearner->listMenuItems[i].index = i;
     }
     sMoveRelearner->listMenuItems[i].label = gFameCheckerText_Cancel;
-    sMoveRelearner->listMenuItems[i].index = 0xFE;
+    sMoveRelearner->listMenuItems[i].index = (u8)LIST_CANCEL;
     gMultiuseListMenuTemplate = sMoveRelearnerListMenuTemplate;
     gMultiuseListMenuTemplate.items = sMoveRelearner->listMenuItems;
     gMultiuseListMenuTemplate.totalItems = count + 1;
@@ -834,26 +849,26 @@ static void PrintMoveInfo(u16 move)
 
     if (gBattleMoves[move].power < 2)
     {
-        PrintTextOnWindow(WINID_MOVEPWRACC, gText_ThreeHyphens, 1, 4, 0, 0);
+        PrintTextOnWindow(WINID_MOVEPWRACC, gText_ThreeHyphens, 1, 4, 0, COLORID_DG_LG_XPAR);
     }
     else
     {
         ConvertIntToDecimalStringN(buffer, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintTextOnWindow(WINID_MOVEPWRACC, buffer, 1, 4, 0, 0);
+        PrintTextOnWindow(WINID_MOVEPWRACC, buffer, 1, 4, 0, COLORID_DG_LG_XPAR);
     }
 
     if (gBattleMoves[move].accuracy == 0)
     {
-        PrintTextOnWindow(WINID_MOVEPWRACC, gText_ThreeHyphens, 1, 18, 0, 1);
+        PrintTextOnWindow(WINID_MOVEPWRACC, gText_ThreeHyphens, 1, 18, 0, COLORID_DG_LG_XPAR_NOCLR);
     }
     else
     {
         ConvertIntToDecimalStringN(buffer, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintTextOnWindow(WINID_MOVEPWRACC, buffer, 1, 18, 0, 1);
+        PrintTextOnWindow(WINID_MOVEPWRACC, buffer, 1, 18, 0, COLORID_DG_LG_XPAR_NOCLR);
     }
     ConvertIntToDecimalStringN(buffer, gBattleMoves[move].pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    PrintTextOnWindow(WINID_MOVEPP, buffer, 2, 2, 0, 0);
-    PrintTextOnWindow(WINID_MOVEDESC, gMoveDescriptionPointers[move - 1], 1, 0, 0, 0);
+    PrintTextOnWindow(WINID_MOVEPP, buffer, 2, 2, 0, COLORID_DG_LG_XPAR);
+    PrintTextOnWindow(WINID_MOVEDESC, gMoveDescriptionPointers[move - 1], 1, 0, 0, COLORID_DG_LG_XPAR);
 }
 
 static void LoadMoveInfoUI(void)
@@ -922,25 +937,25 @@ static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed,
 {
     s32 letterSpacing = 1;
     s32 lineSpacing = 1;
-    if (colorIdx == 0 || colorIdx == 1)
+    if (colorIdx == COLORID_DG_LG_XPAR || colorIdx == COLORID_DG_LG_XPAR_NOCLR)
     {
         letterSpacing = 0;
         lineSpacing = 0;
     }
     switch (colorIdx)
     {
-    case 0:
-    case 1:
+    case COLORID_DG_LG_XPAR:
+    case COLORID_DG_LG_XPAR_NOCLR:
         sMoveRelearner->textColor[0] = TEXT_COLOR_TRANSPARENT;
         sMoveRelearner->textColor[1] = TEXT_COLOR_DARK_GRAY;
         sMoveRelearner->textColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
-    case 2:
+    case COLORID_DG_LG_WHITE:
         sMoveRelearner->textColor[0] = TEXT_COLOR_WHITE;
         sMoveRelearner->textColor[1] = TEXT_COLOR_DARK_GRAY;
         sMoveRelearner->textColor[2] = TEXT_COLOR_LIGHT_GRAY;
     }
-    if (colorIdx != 1)
+    if (colorIdx != COLORID_DG_LG_XPAR_NOCLR)
         FillWindowPixelBuffer(windowId, PIXEL_FILL(sMoveRelearner->textColor[0]));
     AddTextPrinterParameterized4(windowId, 3, x, y, letterSpacing, lineSpacing, sMoveRelearner->textColor, speed, str);
 }

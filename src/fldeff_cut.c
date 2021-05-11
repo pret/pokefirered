@@ -219,7 +219,7 @@ bool8 FldEff_CutGrass(void)
                 if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
                 {
                     SetCutGrassMetatileAt(x, y);
-                    sub_805F378(x, y);
+                    EnableObjectGroundEffectsByXY(x, y);
                 }
             }
         }

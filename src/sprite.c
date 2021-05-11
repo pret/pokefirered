@@ -11,17 +11,17 @@
     (sSpriteTileRanges + 1)[index * 2] = count;    \
 }
 
-#define ALLOC_SPRITE_TILE(n)                             \
-{                                                        \
-    gSpriteTileAllocBitmap[(n) / 8] |= (1 << ((n) % 8)); \
-}
-
-#define FREE_SPRITE_TILE(n)                               \
+#define ALLOC_SPRITE_TILE(n)                              \
 {                                                         \
-    gSpriteTileAllocBitmap[(n) / 8] &= ~(1 << ((n) % 8)); \
+    gSpriteTileAllocBitmap[(n) >> 3] |= (1 << ((n) & 7)); \
 }
 
-#define SPRITE_TILE_IS_ALLOCATED(n) ((gSpriteTileAllocBitmap[(n) / 8] >> ((n) % 8)) & 1)
+#define FREE_SPRITE_TILE(n)                                \
+{                                                          \
+    gSpriteTileAllocBitmap[(n) >> 3] &= ~(1 << ((n) & 7)); \
+}
+
+#define SPRITE_TILE_IS_ALLOCATED(n) ((gSpriteTileAllocBitmap[(n) >> 3] >> ((n) & 7)) & 1)
 
 
 struct SpriteCopyRequest
@@ -782,17 +782,17 @@ u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
     u8 val = bit % 8;
     u8 retVal = 0;
 
-    if (op == 0)
+    if (op == 0) // clear
     {
         val = ~(1 << val);
         gSpriteTileAllocBitmap[index] &= val;
     }
-    else if (op == 1)
+    else if (op == 1) // set
     {
         val = (1 << val);
         gSpriteTileAllocBitmap[index] |= val;
     }
-    else
+    else // check
     {
         retVal = 1 << shift;
         retVal &= gSpriteTileAllocBitmap[index];
@@ -801,7 +801,7 @@ u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
     return retVal;
 }
 
-void sub_80075C0(struct Sprite *sprite)
+void FreeSpriteTilesIfNotUsingSheet(struct Sprite *sprite)
 {
     if (!sprite->usingSheet)
     {
@@ -809,7 +809,7 @@ void sub_80075C0(struct Sprite *sprite)
         int end = (sprite->images[0].size / TILE_SIZE_4BPP) + sprite->oam.tileNum;
 
         for (i = sprite->oam.tileNum; i < end; i++)
-            gSpriteTileAllocBitmap[i >> 3] &= ~(1 << (i & 7));
+            FREE_SPRITE_TILE(i);
     }
 }
 

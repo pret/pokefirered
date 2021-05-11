@@ -31,6 +31,11 @@
 
 #define FC_NONTRAINER_START 0xFE00
 
+enum FCDisplayState
+{
+
+};
+
 struct FameCheckerData
 {
     MainCallback savedCallback;
@@ -133,9 +138,9 @@ static const u16 sOakSpritePalette[] = INCBIN_U16("graphics/fame_checker/prof_oa
 static const u16 sUnkPalette[] = INCBIN_U16("graphics/fame_checker/unk.gbapal"); // unused?
 static const u16 sSilhouettePalette[] = INCBIN_U16("graphics/fame_checker/silhouette.gbapal");
 
-static const u8 sTextColor_White[3]  = {0, 1, 2};
-static const u8 sTextColor_DkGrey[3] = {0, 2, 3};
-static const u8 sTextColor_Green[3]  = {0, 6, 7};
+static const u8 sTextColor_White[3]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
+static const u8 sTextColor_DkGrey[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+static const u8 sTextColor_Green[3]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN};
 
 #define FAME_CHECKER_PROF_OAK  (FC_NONTRAINER_START + 0)
 #define FAME_CHECKER_DAISY_OAK (FC_NONTRAINER_START + 1)
@@ -548,7 +553,7 @@ static const union AnimCmd *const sQuestionMarkTileAnims[] = {
 };
 
 static const struct SpriteTemplate sQuestionMarkTileSpriteTemplate = {
-    SPRITETAG_QUESTION_MARK, 0xffff, &sQuestionMarkTileOamData, sQuestionMarkTileAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_QUESTION_MARK, SPRITE_INVALID_TAG, &sQuestionMarkTileOamData, sQuestionMarkTileAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const union AnimCmd sSpinningPokeballAnim0[] = {
@@ -566,7 +571,7 @@ static const struct OamData sSpinningPokeballOamData = {
 };
 
 static const union AffineAnimCmd sSpinningPokeballAffineAnim0[] = {
-    AFFINEANIMCMD_FRAME(0, 0, 4, 20),
+    AFFINEANIMCMD_FRAME(Q_8_8(0.0), Q_8_8(0.0), 4, 20),
     AFFINEANIMCMD_JUMP(0)
 };
 
@@ -592,19 +597,19 @@ static const struct OamData sDaisyFujiOakBillOamData = {
 };
 
 static const struct SpriteTemplate sDaisySpriteTemplate = {
-    SPRITETAG_DAISY, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_DAISY, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sFujiSpriteTemplate = {
-    SPRITETAG_FUJI, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_FUJI, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sOakSpriteTemplate = {
-    SPRITETAG_OAK, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_OAK, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sBillSpriteTemplate = {
-    SPRITETAG_BILL, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_BILL, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static void FC_VBlankCallback(void)
@@ -695,19 +700,19 @@ static void MainCB2_LoadFameChecker(void)
             LoadUISpriteSheetsAndPalettes();
             CreateAllFlavorTextIcons(FAMECHECKER_OAK);
             WipeMsgBoxAndTransfer();
-            BeginNormalPaletteFade(0xFFFFFFFF,0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF,0, 16, 0, RGB_BLACK);
             gMain.state++;
             break;
         case 7:
             FCSetup_TurnOnDisplay();
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0x07);
-            SetGpuReg(REG_OFFSET_BLDY, 0x08);
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 0));
+            SetGpuReg(REG_OFFSET_BLDY, 8);
             SetVBlankCallback(FC_VBlankCallback);
             sFameCheckerData->listMenuTopIdx = 0;
             FC_CreateScrollIndicatorArrowPair();
             UpdateInfoBoxTilemap(1, 4);
-            CreateTask(Task_WaitFadeOnInit, 0x08);
+            CreateTask(Task_WaitFadeOnInit, 8);
             SetMainCallback2(MainCB2_FameCheckerMain);
             gMain.state = 0;
             break;
@@ -768,7 +773,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 task->func = Task_StartToCloseFameChecker;
             else if (sFameCheckerData->inPickMode)
             {
-                if (!IsTextPrinterActive(2) && HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
+                if (!IsTextPrinterActive(FCWINDOWID_MSGBOX) && HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
                     GetPickModeText();
             }
             else if (sFameCheckerData->personHasUnlockedPanels)
@@ -864,7 +869,7 @@ static void Task_FlavorTextDisplayHandleInput(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     RunTextPrinters();
-    if (JOY_NEW(A_BUTTON) && !IsTextPrinterActive(2))
+    if (JOY_NEW(A_BUTTON) && !IsTextPrinterActive(FCWINDOWID_MSGBOX))
     {
         u8 spriteId = sFameCheckerData->spriteIds[data[1]];
         if (gSprites[spriteId].data[1] != 0xFF)
@@ -1010,7 +1015,7 @@ static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
 static void Task_StartToCloseFameChecker(u8 taskId)
 {
     PlaySE(SE_M_SWIFT);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_DestroyAssetsAndCloseFameChecker;
 }
 
@@ -1083,7 +1088,7 @@ static void PrintUIHelp(u8 state)
     }
     width = GetStringWidth(0, src, 0);
     FillWindowPixelRect(FCWINDOWID_UIHELP, PIXEL_FILL(0), 0, 0, 0xc0, 0x10);
-    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, sTextColor_White, -1, src);
+    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, sTextColor_White, TEXT_SPEED_FF, src);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_UIHELP);
 }
 
@@ -1364,7 +1369,7 @@ static u8 CreatePersonPicSprite(u8 fcPersonIdx)
     }
     else
     {
-        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
+        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], TRUE, 0x94, 0x42, 6, SPRITE_INVALID_TAG);
     }
     gSprites[spriteId].callback = SpriteCB_FCSpinningPokeball;
     if (gSaveBlock1Ptr->fameChecker[fcPersonIdx].pickState == FCPICKSTATE_SILHOUETTE)
@@ -1396,10 +1401,10 @@ static void UpdateIconDescriptionBox(u8 whichText)
     gIconDescriptionBoxIsOpen = 1;
     FillWindowPixelRect(FCWINDOWID_ICONDESC, PIXEL_FILL(0), 0, 0, 0x58, 0x20);
     width = (0x54 - GetStringWidth(0, sFlavorTextOriginLocationTexts[idx], 0)) / 2;
-    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, sTextColor_DkGrey, TEXT_SPEED_FF, sFlavorTextOriginLocationTexts[idx]);
     StringExpandPlaceholders(gStringVar1, sFlavorTextOriginObjectNameTexts[idx]);
     width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
-    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, sTextColor_DkGrey, -1, gStringVar1);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, sTextColor_DkGrey, TEXT_SPEED_FF, gStringVar1);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
 }
 
@@ -1513,7 +1518,7 @@ static void Task_SwitchToPickMode(u8 taskId)
 static void PrintCancelDescription(void)
 {
     FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
-    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -1593,7 +1598,7 @@ static void FC_CreateScrollIndicatorArrowPair(void)
           0,
           0,
           SPRITETAG_SCROLL_INDICATORS,
-          0xFFFF,
+          SPRITE_INVALID_TAG,
           1,
     };
 

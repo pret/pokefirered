@@ -25,6 +25,7 @@
 #include "graphics.h"
 #include "fieldmap.h"
 #include "strings.h"
+#include "constants/field_effects.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -530,7 +531,7 @@ static void TeachyTvLoadGraphic(void)
     LZDecompressWram(gUnknown_8E86D6C, sResources->buffer4);
     LoadCompressedPalette(gUnknown_8E86F98, 0, 0x80);
     LoadPalette(&src, 0, sizeof(src));
-    LoadSpritePalette(&gUnknown_83A5348);
+    LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
     TeachyTvLoadBg3Map(sResources->buffer3);
 }
 
@@ -1107,7 +1108,7 @@ static void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, 
 
     if (sResources->grassAnimDisabled != 1 && TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y))
     {
-        spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[4], 0, 0, subpriority);
+        spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], 0, 0, subpriority);
         obj = &gSprites[spriteId];
         obj->pos2.x = x;
         obj->pos2.y = y + 8;

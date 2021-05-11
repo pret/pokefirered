@@ -28,6 +28,28 @@ struct ListMenuItem
 
 struct ListMenu;
 
+// For ListMenuGet/SetTemplateField
+enum ListMenuFields
+{
+    LISTFIELD_MOVECURSORFUNC = 0,
+    LISTFIELD_MOVECURSORFUNC2,
+    LISTFIELD_TOTALITEMS,
+    LISTFIELD_MAXSHOWED,
+    LISTFIELD_WINDOWID,
+    LISTFIELD_HEADERX,
+    LISTFIELD_ITEMX,
+    LISTFIELD_CURSORX,
+    LISTFIELD_UPTEXTY,
+    LISTFIELD_CURSORPAL,
+    LISTFIELD_FILLVALUE,
+    LISTFIELD_CURSORSHADOWPAL,
+    LISTFIELD_LETTERSPACING,
+    LISTFIELD_ITEMVERTICALPADDING,
+    LISTFIELD_SCROLLMULTIPLE,
+    LISTFIELD_FONTID,
+    LISTFIELD_CURSORKIND,
+};
+
 struct ListMenuTemplate
 {
     /*0x00*/ const struct ListMenuItem *items;
@@ -82,6 +104,6 @@ void ListMenuGetScrollAndRow(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove);
 u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
 void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value);
+void ListMenuSetTemplateField(u8 taskId, u8 field, s32 value);
 
 #endif //GUARD_LIST_MENU_H

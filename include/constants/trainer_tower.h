@@ -4,11 +4,28 @@
 #define CHALLENGE_TYPE_SINGLE     0
 #define CHALLENGE_TYPE_DOUBLE     1
 #define CHALLENGE_TYPE_KNOCKOUT   2
+#define CHALLENGE_TYPE_MIXED      3
 // Mixed challenges use one of the above 3 for each floor
 
 #define CHALLENGE_STATUS_LOST     0
 #define CHALLENGE_STATUS_UNK      1  // Never set, possibly e-Card related
 #define CHALLENGE_STATUS_NORMAL   2  // Not started or ongoing
+
+#define TTPRIZE_HP_UP               0
+#define TTPRIZE_PROTEIN             1
+#define TTPRIZE_IRON                2
+#define TTPRIZE_CARBOS              3
+#define TTPRIZE_CALCIUM             4
+#define TTPRIZE_ZINC                5
+#define TTPRIZE_BRIGHT_POWDER       6
+#define TTPRIZE_WHITE_HERB          7
+#define TTPRIZE_MENTAL_HERB         8
+#define TTPRIZE_CHOICE_BAND         9
+#define TTPRIZE_KINGS_ROCK         10
+#define TTPRIZE_SCOPE_LENS         11
+#define TTPRIZE_METAL_COAT         12
+#define TTPRIZE_DRAGON_SCALE       13
+#define TTPRIZE_UP_GRADE           14
 
 #define MAX_TRAINER_TOWER_FLOORS 8
 

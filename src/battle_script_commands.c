@@ -703,8 +703,9 @@ static const struct WindowTemplate sUnusedWinTemplate =
     .baseBlock = 0x3F,
 };
 
-static const u16 gUnknown_82506D0[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
-static const u32 gUnknown_82506F0[] = INCBIN_U32("graphics/battle_interface/unk_battlebox.4bpp.lz");
+// not used
+static const u16 sUnknownBattleboxPal[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
+static const u32 sUnknownBattleboxGfx[] = INCBIN_U32("graphics/battle_interface/unk_battlebox.4bpp.lz");
 
 // not used
 static const u8 sRubyLevelUpStatBoxStats[] =
@@ -5593,8 +5594,8 @@ static void sub_8026480(void)
 {
     gBattle_BG2_Y = 0;
     gBattle_BG2_X = 0x1A0;
-    LoadPalette(gUnknown_82506D0, 0x60, 0x20);
-    CopyToWindowPixelBuffer(13, gUnknown_82506F0, 0, 0);
+    LoadPalette(sUnknownBattleboxPal, 0x60, 0x20);
+    CopyToWindowPixelBuffer(13, sUnknownBattleboxGfx, 0, 0);
     PutWindowTilemap(13);
     CopyWindowToVram(13, COPYWIN_BOTH);
     PutMonIconOnLvlUpBox();
@@ -9179,7 +9180,7 @@ static void atkF2_displaydexinfo(void)
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
-            gBattleCommunication[TASK_ID] = sub_8106B60(species);
+            gBattleCommunication[TASK_ID] = DexScreen_RegisterMonToPokedex(species);
             ++gBattleCommunication[0];
         }
         break;

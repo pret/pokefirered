@@ -18,6 +18,7 @@
 #include "text_window.h"
 #include "fame_checker.h"
 #include "strings.h"
+#include "constants/event_objects.h"
 
 #define SPRITETAG_SELECTOR_CURSOR 1000
 #define SPRITETAG_QUESTION_MARK 1001
@@ -136,23 +137,28 @@ static const u8 sTextColor_White[3]  = {0, 1, 2};
 static const u8 sTextColor_DkGrey[3] = {0, 2, 3};
 static const u8 sTextColor_Green[3]  = {0, 6, 7};
 
+#define FAME_CHECKER_PROF_OAK  (FC_NONTRAINER_START + 0)
+#define FAME_CHECKER_DAISY_OAK (FC_NONTRAINER_START + 1)
+#define FAME_CHECKER_BILL      (FC_NONTRAINER_START + 2)
+#define FAME_CHECKER_MR_FUJI   (FC_NONTRAINER_START + 3)
+
 static const u16 sTrainerIdxs[] = {
-    FC_NONTRAINER_START + 0, // OAK
-    FC_NONTRAINER_START + 1, // DAISY
-    0x019e,                  // BROCK
-    0x019f,                  // MISTY
-    0x01a0,                  // LTSURGE
-    0x01a1,                  // ERIKA
-    0x01a2,                  // KOGA
-    0x01a4,                  // SABRINA
-    0x01a3,                  // BLAINE
-    0x019a,                  // LORELEI
-    0x019b,                  // BRUNO
-    0x019c,                  // AGATHA
-    0x019d,                  // LANCE
-    FC_NONTRAINER_START + 2, // BILL
-    FC_NONTRAINER_START + 3, // MRFUJI
-    0x015c                   // GIOVANNI
+    [FAMECHECKER_OAK]      = FAME_CHECKER_PROF_OAK,
+    [FAMECHECKER_DAISY]    = FAME_CHECKER_DAISY_OAK,
+    [FAMECHECKER_BROCK]    = TRAINER_LEADER_BROCK,
+    [FAMECHECKER_MISTY]    = TRAINER_LEADER_MISTY,
+    [FAMECHECKER_LTSURGE]  = TRAINER_LEADER_LT_SURGE,
+    [FAMECHECKER_ERIKA]    = TRAINER_LEADER_ERIKA,
+    [FAMECHECKER_KOGA]     = TRAINER_LEADER_KOGA,
+    [FAMECHECKER_SABRINA]  = TRAINER_LEADER_SABRINA,
+    [FAMECHECKER_BLAINE]   = TRAINER_LEADER_BLAINE,
+    [FAMECHECKER_LORELEI]  = TRAINER_ELITE_FOUR_LORELEI,
+    [FAMECHECKER_BRUNO]    = TRAINER_ELITE_FOUR_BRUNO,
+    [FAMECHECKER_AGATHA]   = TRAINER_ELITE_FOUR_AGATHA,
+    [FAMECHECKER_LANCE]    = TRAINER_ELITE_FOUR_LANCE,
+    [FAMECHECKER_BILL]     = FAME_CHECKER_BILL,
+    [FAMECHECKER_MRFUJI]   = FAME_CHECKER_MR_FUJI,
+    [FAMECHECKER_GIOVANNI] = TRAINER_BOSS_GIOVANNI
 };
 
 static const u8 *const sNonTrainerNamePointers[] = {
@@ -163,13 +169,78 @@ static const u8 *const sNonTrainerNamePointers[] = {
 };
 
 static const u8 sFameCheckerTrainerPicIdxs[] = {
-    0x56, 0x54, 0x74, 0x75, 0x76, 0x77, 0x78, 0x7a, 0x79, 0x70, 0x71, 0x72, 0x73, 0x64, 0x7b, 0x6c,
-    0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00  // these values are unused
+    [FAMECHECKER_OAK]      = TRAINER_PIC_CAMPER,
+    [FAMECHECKER_DAISY]    = TRAINER_PIC_LASS,
+    [FAMECHECKER_BROCK]    = TRAINER_PIC_LEADER_BROCK,
+    [FAMECHECKER_MISTY]    = TRAINER_PIC_LEADER_MISTY,
+    [FAMECHECKER_LTSURGE]  = TRAINER_PIC_LEADER_LT_SURGE,
+    [FAMECHECKER_ERIKA]    = TRAINER_PIC_LEADER_ERIKA,
+    [FAMECHECKER_KOGA]     = TRAINER_PIC_LEADER_KOGA,
+    [FAMECHECKER_SABRINA]  = TRAINER_PIC_LEADER_SABRINA,
+    [FAMECHECKER_BLAINE]   = TRAINER_PIC_LEADER_BLAINE,
+    [FAMECHECKER_LORELEI]  = TRAINER_PIC_ELITE_FOUR_LORELEI,
+    [FAMECHECKER_BRUNO]    = TRAINER_PIC_ELITE_FOUR_BRUNO,
+    [FAMECHECKER_AGATHA]   = TRAINER_PIC_ELITE_FOUR_AGATHA,
+    [FAMECHECKER_LANCE]    = TRAINER_PIC_ELITE_FOUR_LANCE,
+    [FAMECHECKER_BILL]     = TRAINER_PIC_PSYCHIC_M,
+    [FAMECHECKER_MRFUJI]   = TRAINER_PIC_GENTLEMAN,
+    [FAMECHECKER_GIOVANNI] = TRAINER_PIC_LEADER_GIOVANNI,
 };
 
-static const u8 *const sFameCheckerNameAndQuotesPointers[] = {
-    gFameCheckerPersonName_ProfOak, gFameCheckerPersonName_Daisy, gFameCheckerPersonName_Brock, gFameCheckerPersonName_Misty, gFameCheckerPersonName_LtSurge, gFameCheckerPersonName_Erika, gFameCheckerPersonName_Koga, gFameCheckerPersonName_Sabrina, gFameCheckerPersonName_Blaine, gFameCheckerPersonName_Lorelei, gFameCheckerPersonName_Bruno, gFameCheckerPersonName_Agatha, gFameCheckerPersonName_Lance, gFameCheckerPersonName_Bill, gFameCheckerPersonName_MrFuji, gFameCheckerPersonName_Giovanni,
-    gFameCheckerPersonQuote_ProfOak, gFameCheckerPersonQuote_Daisy, gFameCheckerPersonQuote_Brock, gFameCheckerPersonQuote_Misty, gFameCheckerPersonQuote_LtSurge, gFameCheckerPersonQuote_Erika, gFameCheckerPersonQuote_Koga, gFameCheckerPersonQuote_Sabrina, gFameCheckerPersonQuote_Blaine, gFameCheckerPersonQuote_Lorelei, gFameCheckerPersonQuote_Bruno, gFameCheckerPersonQuote_Agatha, gFameCheckerPersonQuote_Lance, gFameCheckerPersonQuote_Bill, gFameCheckerPersonQuote_MrFuji, gFameCheckerPersonQuote_Giovanni
+static const u8 sFameCheckerTrainerGenders_Unused[] = {
+    [FAMECHECKER_OAK]      = MALE,
+    [FAMECHECKER_DAISY]    = FEMALE,
+    [FAMECHECKER_BROCK]    = MALE,
+    [FAMECHECKER_MISTY]    = FEMALE,
+    [FAMECHECKER_LTSURGE]  = MALE,
+    [FAMECHECKER_ERIKA]    = FEMALE,
+    [FAMECHECKER_KOGA]     = MALE,
+    [FAMECHECKER_SABRINA]  = FEMALE,
+    [FAMECHECKER_BLAINE]   = MALE,
+    [FAMECHECKER_LORELEI]  = FEMALE,
+    [FAMECHECKER_BRUNO]    = MALE,
+    [FAMECHECKER_AGATHA]   = FEMALE,
+    [FAMECHECKER_LANCE]    = MALE,
+    [FAMECHECKER_BILL]     = MALE,
+    [FAMECHECKER_MRFUJI]   = MALE,
+    [FAMECHECKER_GIOVANNI] = MALE,
+};
+
+static const u8 *const sFameCheckerNameAndQuotesPointers[2 * NUM_FAMECHECKER_PERSONS] =
+{
+    gFameCheckerPersonName_ProfOak,
+    gFameCheckerPersonName_Daisy,
+    gFameCheckerPersonName_Brock,
+    gFameCheckerPersonName_Misty,
+    gFameCheckerPersonName_LtSurge,
+    gFameCheckerPersonName_Erika,
+    gFameCheckerPersonName_Koga,
+    gFameCheckerPersonName_Sabrina,
+    gFameCheckerPersonName_Blaine,
+    gFameCheckerPersonName_Lorelei,
+    gFameCheckerPersonName_Bruno,
+    gFameCheckerPersonName_Agatha,
+    gFameCheckerPersonName_Lance,
+    gFameCheckerPersonName_Bill,
+    gFameCheckerPersonName_MrFuji,
+    gFameCheckerPersonName_Giovanni,
+
+    gFameCheckerPersonQuote_ProfOak,
+    gFameCheckerPersonQuote_Daisy,
+    gFameCheckerPersonQuote_Brock,
+    gFameCheckerPersonQuote_Misty,
+    gFameCheckerPersonQuote_LtSurge,
+    gFameCheckerPersonQuote_Erika,
+    gFameCheckerPersonQuote_Koga,
+    gFameCheckerPersonQuote_Sabrina,
+    gFameCheckerPersonQuote_Blaine,
+    gFameCheckerPersonQuote_Lorelei,
+    gFameCheckerPersonQuote_Bruno,
+    gFameCheckerPersonQuote_Agatha,
+    gFameCheckerPersonQuote_Lance,
+    gFameCheckerPersonQuote_Bill,
+    gFameCheckerPersonQuote_MrFuji,
+    gFameCheckerPersonQuote_Giovanni
 };
 
 static const u8 *const sFameCheckerFlavorTextPointers[] = {
@@ -192,22 +263,118 @@ static const u8 *const sFameCheckerFlavorTextPointers[] = {
 };
 
 static const u8 sFameCheckerArrayNpcGraphicsIds[] = {
-    0x67, 0x47, 0x30, 0x69, 0x4b, 0x37,
-    0x37, 0x30, 0x3d, 0x69, 0x23, 0x69,
-    0x66, 0x50, 0x1b, 0x13, 0x1e, 0x69,
-    0x66, 0x51, 0x2b, 0x27, 0x1d, 0x69,
-    0x66, 0x52, 0x3d, 0x3d, 0x3e, 0x69,
-    0x66, 0x53, 0x16, 0x1d, 0x53, 0x69,
-    0x66, 0x54, 0x1a, 0x16, 0x69, 0x1e,
-    0x66, 0x19, 0x55, 0x55, 0x69, 0x29,
-    0x66, 0x56, 0x37, 0x1c, 0x69, 0x69,
-    0x4d, 0x4d, 0x20, 0x69, 0x11, 0x23,
-    0x4f, 0x4f, 0x69, 0x36, 0x1d, 0x36,
-    0x4b, 0x36, 0x36, 0x69, 0x4b, 0x23,
-    0x4a, 0x4a, 0x18, 0x17, 0x69, 0x29,
-    0x48, 0x12, 0x20, 0x59, 0x59, 0x59,
-    0x11, 0x31, 0x69, 0x1e, 0x69, 0x69,
-    0x57, 0x37, 0x37, 0x57, 0x5b, 0x37
+    // OAK
+    OBJ_EVENT_GFX_SIGN,
+    OBJ_EVENT_GFX_PROF_OAK,
+    OBJ_EVENT_GFX_WORKER_F,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_AGATHA,
+    OBJ_EVENT_GFX_SCIENTIST,
+    // DAISY
+    OBJ_EVENT_GFX_SCIENTIST,
+    OBJ_EVENT_GFX_WORKER_F,
+    OBJ_EVENT_GFX_GENTLEMAN,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_OLD_WOMAN,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // BROCK
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_BROCK,
+    OBJ_EVENT_GFX_FAT_MAN,
+    OBJ_EVENT_GFX_BOY,
+    OBJ_EVENT_GFX_BALDING_MAN,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // MISTY
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_MISTY,
+    OBJ_EVENT_GFX_SWIMMER_M_WATER,
+    OBJ_EVENT_GFX_CAMPER,
+    OBJ_EVENT_GFX_BEAUTY,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // LTSURGE
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_LT_SURGE,
+    OBJ_EVENT_GFX_GENTLEMAN,
+    OBJ_EVENT_GFX_GENTLEMAN,
+    OBJ_EVENT_GFX_SAILOR,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // ERIKA
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_ERIKA,
+    OBJ_EVENT_GFX_LASS,
+    OBJ_EVENT_GFX_BEAUTY,
+    OBJ_EVENT_GFX_ERIKA,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // KOGA
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_KOGA,
+    OBJ_EVENT_GFX_ROCKER,
+    OBJ_EVENT_GFX_LASS,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_BALDING_MAN,
+    // SABRINA
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_MAN,
+    OBJ_EVENT_GFX_SABRINA,
+    OBJ_EVENT_GFX_SABRINA,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_COOLTRAINER_M,
+    // BLAINE
+    OBJ_EVENT_GFX_GYM_SIGN,
+    OBJ_EVENT_GFX_BLAINE,
+    OBJ_EVENT_GFX_SCIENTIST,
+    OBJ_EVENT_GFX_WOMAN_2,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // LORELEI
+    OBJ_EVENT_GFX_LORELEI,
+    OBJ_EVENT_GFX_LORELEI,
+    OBJ_EVENT_GFX_OLD_MAN_1,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_LITTLE_GIRL,
+    OBJ_EVENT_GFX_OLD_WOMAN,
+    // BRUNO
+    OBJ_EVENT_GFX_BRUNO,
+    OBJ_EVENT_GFX_BRUNO,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_BLACKBELT,
+    OBJ_EVENT_GFX_BEAUTY,
+    OBJ_EVENT_GFX_BLACKBELT,
+    // AGATHA
+    OBJ_EVENT_GFX_AGATHA,
+    OBJ_EVENT_GFX_BLACKBELT,
+    OBJ_EVENT_GFX_BLACKBELT,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_AGATHA,
+    OBJ_EVENT_GFX_OLD_WOMAN,
+    // LANCE
+    OBJ_EVENT_GFX_LANCE,
+    OBJ_EVENT_GFX_LANCE,
+    OBJ_EVENT_GFX_BATTLE_GIRL,
+    OBJ_EVENT_GFX_WOMAN_1,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_COOLTRAINER_M,
+    // BILL
+    OBJ_EVENT_GFX_BLUE,
+    OBJ_EVENT_GFX_YOUNGSTER,
+    OBJ_EVENT_GFX_OLD_MAN_1,
+    OBJ_EVENT_GFX_CELIO,
+    OBJ_EVENT_GFX_CELIO,
+    OBJ_EVENT_GFX_CELIO,
+    // MRFUJI
+    OBJ_EVENT_GFX_LITTLE_GIRL,
+    OBJ_EVENT_GFX_ROCKET_M,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_BALDING_MAN,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    OBJ_EVENT_GFX_CLIPBOARD,
+    // GIOVANNI
+    OBJ_EVENT_GFX_GIOVANNI,
+    OBJ_EVENT_GFX_SCIENTIST,
+    OBJ_EVENT_GFX_SCIENTIST,
+    OBJ_EVENT_GFX_GIOVANNI,
+    OBJ_EVENT_GFX_GYM_GUY,
+    OBJ_EVENT_GFX_SCIENTIST
 };
 
 static const u8 *const sFlavorTextOriginLocationTexts[] = {
@@ -268,43 +435,79 @@ static const struct SpritePalette sUISpritePalettes[] = {
 static const struct BgTemplate sUIBgTemplates[4] = {
     {
         .bg = 3,
-        .charBaseIndex = 0x03,
-        .mapBaseIndex =  0x1e,
+        .charBaseIndex = 3,
+        .mapBaseIndex =  30,
         .screenSize = 0,
         .paletteMode = FALSE,
         .priority = 3,
-        .baseTile = 0x000},
+        .baseTile = 0x000
+    },
     {
         .bg = 2,
-        .charBaseIndex = 0x03,
-        .mapBaseIndex =  0x1b,
+        .charBaseIndex = 3,
+        .mapBaseIndex =  27,
         .screenSize = 0,
         .paletteMode = FALSE,
         .priority = 2,
-        .baseTile = 0x000},
+        .baseTile = 0x000
+    },
     {
         .bg = 1,
-        .charBaseIndex = 0x03,
-        .mapBaseIndex =  0x1c,
+        .charBaseIndex = 3,
+        .mapBaseIndex =  28,
         .screenSize = 1,
         .paletteMode = FALSE,
         .priority = 0,
-        .baseTile = 0x000},
+        .baseTile = 0x000
+    },
     {
         .bg = 0,
-        .charBaseIndex = 0x00,
-        .mapBaseIndex =  0x1f,
+        .charBaseIndex = 0,
+        .mapBaseIndex =  31,
         .screenSize = 0,
         .paletteMode = FALSE,
         .priority = 2,
-        .baseTile = 0x000},
+        .baseTile = 0x000
+    },
 };
 
 static const struct WindowTemplate sUIWindowTemplates[] = {
-    {0,  1,  3,  8, 10, 15, 0x014}, // List Menu
-    {0,  6,  0, 24,  2, 15, 0x064}, // UI across the top
-    {0,  2, 15, 26,  4, 15, 0x094}, // Textbox on the bottom
-    {0, 15, 10, 11,  4, 15, 0x0FC}, // Icon description
+    [FCWINDOWID_LIST] = {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 3,
+        .width = 8,
+        .height = 10,
+        .paletteNum = 15,
+        .baseBlock = 20
+    },
+    [FCWINDOWID_UIHELP] = {
+        .bg = 0,
+        .tilemapLeft = 6,
+        .tilemapTop = 0,
+        .width = 24,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 20 + 8 * 10
+    },
+    [FCWINDOWID_MSGBOX] = {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 20 + 8 * 10 + 24 * 2
+    },
+    [FCWINDOWID_ICONDESC] = {
+        .bg = 0,
+        .tilemapLeft = 15,
+        .tilemapTop = 10,
+        .width = 11,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 20 + 8 * 10 + 24 * 2 + 26 * 4
+    },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -446,9 +649,9 @@ static void MainCB2_LoadFameChecker(void)
             gMain.state++;
             break;
         case 2:
-            sBg3TilemapBuffer = AllocZeroed(0x800);
-            sBg1TilemapBuffer = AllocZeroed(0x1000);
-            sBg2TilemapBuffer = AllocZeroed(0x800);
+            sBg3TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);     // 256x256
+            sBg1TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE * 2); // 512x256
+            sBg2TilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);     // 256x256
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, sUIBgTemplates, NELEMS(sUIBgTemplates));
             SetBgTilemapBuffer(3, sBg3TilemapBuffer);
@@ -544,7 +747,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
             else if (cursorPos != sFameCheckerData->numUnlockedPersons - 1) // anything but CANCEL
             {
                 PlaySE(SE_M_LOCK_ON);
-                FillWindowPixelRect(FCWINDOWID_ICONDESC, 0x00, 0, 0, 88, 32);
+                FillWindowPixelRect(FCWINDOWID_ICONDESC, PIXEL_FILL(0), 0, 0, 88, 32);
                 FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
                 UpdateInfoBoxTilemap(2, 4);
                 UpdateInfoBoxTilemap(1, 5);
@@ -619,7 +822,7 @@ static bool8 TryExitPickMode(u8 taskId)
 
 static void MessageBoxPrintEmptyText(void)
 {
-    AddTextPrinterParameterized2(2, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_ClearTextbox, 0, NULL, 2, 1, 3);
 }
 
 static void Task_EnterPickMode(u8 taskId)
@@ -733,7 +936,7 @@ static void FC_MoveSelectorCursor(u8 taskId, s8 dx, s8 dy)
     gSprites[data[0]].pos1.y += dy;
     for (i = 0; i < 6; i++)
         SetMessageSelectorIconObjMode(sFameCheckerData->spriteIds[i], ST_OAM_OBJ_BLEND);
-    FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
+    FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
     MessageBoxPrintEmptyText();
     if (SetMessageSelectorIconObjMode(sFameCheckerData->spriteIds[data[1]], ST_OAM_OBJ_NORMAL) == TRUE)
     {
@@ -746,7 +949,7 @@ static void FC_MoveSelectorCursor(u8 taskId, s8 dx, s8 dy)
 
 static void GetPickModeText(void)
 {
-    u8 offset = 0;
+    s32 whichText = 0;
     u16 who = FameCheckerGetCursorY();
     if (gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[who]].pickState != FCPICKSTATE_COLORED)
     {
@@ -755,10 +958,10 @@ static void GetPickModeText(void)
     }
     else
     {
-        FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
+        FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
         if (HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
-            offset = NUM_FAMECHECKER_PERSONS;
-        StringExpandPlaceholders(gStringVar4, sFameCheckerNameAndQuotesPointers[sFameCheckerData->unlockedPersons[who] + offset]);
+            whichText = NUM_FAMECHECKER_PERSONS;
+        StringExpandPlaceholders(gStringVar4, sFameCheckerNameAndQuotesPointers[sFameCheckerData->unlockedPersons[who] + whichText]);
         AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
         FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
     }
@@ -768,7 +971,7 @@ static void PrintSelectedNameInBrightGreen(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 cursorPos = FameCheckerGetCursorY();
-    FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
+    FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
     StringExpandPlaceholders(gStringVar4, sFameCheckerFlavorTextPointers[sFameCheckerData->unlockedPersons[cursorPos] * 6 + data[1]]);
     AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
@@ -776,7 +979,7 @@ static void PrintSelectedNameInBrightGreen(u8 taskId)
 
 static void WipeMsgBoxAndTransfer(void)
 {
-    FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
+    FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -839,10 +1042,10 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
         Free(sBg2TilemapBuffer);
         Free(sFameCheckerData);
         Free(sListMenuItems);
-        FC_DestroyWindow(0);
-        FC_DestroyWindow(1);
-        FC_DestroyWindow(2);
-        FC_DestroyWindow(3);
+        FC_DestroyWindow(FCWINDOWID_LIST);
+        FC_DestroyWindow(FCWINDOWID_UIHELP);
+        FC_DestroyWindow(FCWINDOWID_MSGBOX);
+        FC_DestroyWindow(FCWINDOWID_ICONDESC);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
     }
@@ -879,7 +1082,7 @@ static void PrintUIHelp(u8 state)
             src = gFameCheckerText_PickScreenUI;
     }
     width = GetStringWidth(0, src, 0);
-    FillWindowPixelRect(FCWINDOWID_UIHELP, 0x00, 0, 0, 0xc0, 0x10);
+    FillWindowPixelRect(FCWINDOWID_UIHELP, PIXEL_FILL(0), 0, 0, 0xc0, 0x10);
     AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, sTextColor_White, -1, src);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_UIHELP);
 }
@@ -1191,7 +1394,7 @@ static void UpdateIconDescriptionBox(u8 whichText)
     u32 idx = 6 * sFameCheckerData->unlockedPersons[FameCheckerGetCursorY()] + whichText;
     HandleFlavorTextModeSwitch(TRUE);
     gIconDescriptionBoxIsOpen = 1;
-    FillWindowPixelRect(FCWINDOWID_ICONDESC, 0x00, 0, 0, 0x58, 0x20);
+    FillWindowPixelRect(FCWINDOWID_ICONDESC, PIXEL_FILL(0), 0, 0, 0x58, 0x20);
     width = (0x54 - GetStringWidth(0, sFlavorTextOriginLocationTexts[idx], 0)) / 2;
     AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
     StringExpandPlaceholders(gStringVar1, sFlavorTextOriginObjectNameTexts[idx]);
@@ -1221,7 +1424,7 @@ static void InitListMenuTemplate(void)
     gFameChecker_ListMenuTemplate.itemPrintFunc = NULL;
     gFameChecker_ListMenuTemplate.totalItems = 1;
     gFameChecker_ListMenuTemplate.maxShowed = 1;
-    gFameChecker_ListMenuTemplate.windowId = 0;
+    gFameChecker_ListMenuTemplate.windowId = FCWINDOWID_LIST;
     gFameChecker_ListMenuTemplate.header_X = 0;
     gFameChecker_ListMenuTemplate.item_X = 8;
     gFameChecker_ListMenuTemplate.cursor_X = 0;
@@ -1274,7 +1477,7 @@ static void FC_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list
             }
             else
             {
-                FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
+                FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
                 FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
             }
         }
@@ -1309,7 +1512,7 @@ static void Task_SwitchToPickMode(u8 taskId)
 
 static void PrintCancelDescription(void)
 {
-    FillWindowPixelRect(FCWINDOWID_MSGBOX, 0x11, 0, 0, 0xd0, 0x20);
+    FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
     AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }

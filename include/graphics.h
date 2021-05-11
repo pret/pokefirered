@@ -4861,7 +4861,7 @@ extern const u32 gFile_graphics_battle_interface_ball_status_bar_sheet[];
 extern const u8 gHealthboxElementsGfxTable[][32];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
-extern const u16 gUnknown_8D12404[];
+extern const u16 gBattleInterface_SummaryBallDisplayGfx[];
 
 // item_menu
 extern const u32 gUnknown_8E830CC[];
@@ -4931,7 +4931,7 @@ extern const u16 gUnknown_8E9C3F8[];
 extern const u16 gUnknown_8E9C418[];
 
 // pokedex_screen
-extern const u16 gUnknown_8E9C14C[];
-extern const u16 gUnknown_8E9C16C[];
+extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];
+extern const u32 gDexScreen_TopMenuIconTiles_AtoZ[];
 
 #endif //GUARD_GRAPHICS_H

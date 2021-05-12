@@ -33,7 +33,12 @@
 
 enum FCDisplayState
 {
-
+    FCWINMAP_0,
+    FCWINMAP_1,
+    FCWINMAP_2,
+    FCWINMAP_3,
+    FCWINMAP_4,
+    FCWINMAP_5,
 };
 
 struct FameCheckerData
@@ -711,7 +716,7 @@ static void MainCB2_LoadFameChecker(void)
             SetVBlankCallback(FC_VBlankCallback);
             sFameCheckerData->listMenuTopIdx = 0;
             FC_CreateScrollIndicatorArrowPair();
-            UpdateInfoBoxTilemap(1, 4);
+            UpdateInfoBoxTilemap(1, FCWINMAP_4);
             CreateTask(Task_WaitFadeOnInit, 8);
             SetMainCallback2(MainCB2_FameCheckerMain);
             gMain.state = 0;
@@ -754,8 +759,8 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 PlaySE(SE_M_LOCK_ON);
                 FillWindowPixelRect(FCWINDOWID_ICONDESC, PIXEL_FILL(0), 0, 0, 88, 32);
                 FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
-                UpdateInfoBoxTilemap(2, 4);
-                UpdateInfoBoxTilemap(1, 5);
+                UpdateInfoBoxTilemap(2, FCWINMAP_4);
+                UpdateInfoBoxTilemap(1, FCWINMAP_5);
                 PrintUIHelp(1);
                 task->data[2] = CreatePersonPicSprite(sFameCheckerData->unlockedPersons[cursorPos]);
                 gSprites[task->data[2]].pos2.x = 0xF0;
@@ -854,8 +859,8 @@ static void Task_ExitPickMode(u8 taskId)
     {
         if (sFameCheckerData->personHasUnlockedPanels)
             PrintUIHelp(0);
-        UpdateInfoBoxTilemap(1, 4);
-        UpdateInfoBoxTilemap(2, 2);
+        UpdateInfoBoxTilemap(1, FCWINMAP_4);
+        UpdateInfoBoxTilemap(2, FCWINMAP_2);
         sFameCheckerData->inPickMode = FALSE;
         DestroyPersonPicSprite(taskId, FameCheckerGetCursorY());
         task->func = Task_TopMenuHandleInput;
@@ -1634,12 +1639,12 @@ static void HandleFlavorTextModeSwitch(bool8 state)
         gTasks[taskId].data[1] = 4;
         if (state == TRUE)
         {
-            gTasks[taskId].data[2] = 1;
+            gTasks[taskId].data[2] = FCWINMAP_1;
             sFameCheckerData->viewingFlavorText = TRUE;
         }
         else
         {
-            gTasks[taskId].data[2] = 4;
+            gTasks[taskId].data[2] = FCWINMAP_4;
             sFameCheckerData->viewingFlavorText = FALSE;
         }
     }
@@ -1653,7 +1658,7 @@ static void Task_FCOpenOrCloseInfoBox(u8 taskId)
         case 0:
             if (--task->data[1] == 0)
             {
-                UpdateInfoBoxTilemap(1, 0);
+                UpdateInfoBoxTilemap(1, FCWINMAP_0);
                 task->data[1] = 4;
                 task->data[0]++;
             }
@@ -1670,7 +1675,7 @@ static void Task_FCOpenOrCloseInfoBox(u8 taskId)
 
 static void UpdateInfoBoxTilemap(u8 bg, s16 state)
 {
-    if (state == 0 || state == 3)
+    if (state == FCWINMAP_0 || state == FCWINMAP_3)
     {
         FillBgTilemapBufferRect(bg, 0x8C, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0xA1, 15, 10, 10,  1, 1);
@@ -1684,7 +1689,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x92, 25, 12,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x93, 26, 12,  1,  1, 1);
     }
-    else if (state == 1)
+    else if (state == FCWINMAP_1)
     {
         FillBgTilemapBufferRect(bg, 0x9B, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x9C, 15, 10, 11,  1, 1);
@@ -1696,7 +1701,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x9F, 15, 12, 11,  1, 1);
         FillBgTilemapBufferRect(bg, 0x99, 26, 12,  1,  1, 1);
     }
-    else if (state == 2)
+    else if (state == FCWINMAP_2)
     {
         FillBgTilemapBufferRect(bg, 0x94, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x95, 15, 10, 11,  1, 1);
@@ -1708,7 +1713,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x98, 15, 12, 11,  1, 1);
         FillBgTilemapBufferRect(bg, 0x99, 26, 12,  1,  1, 1);
     }
-    else if (state == 4)
+    else if (state == FCWINMAP_4)
     {
         FillBgTilemapBufferRect(bg, 0x83, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0xA0, 15, 10, 10,  1, 1);
@@ -1723,7 +1728,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x84, 25, 12,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x85, 26, 12,  1,  1, 1);
     }
-    else if (state == 5)
+    else if (state == FCWINMAP_5)
     {
         FillBgTilemapBufferRect(bg, 0x00, 14, 10, 13,  3, 1);
     }

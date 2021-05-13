@@ -3770,7 +3770,7 @@ static void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord
         }
     }
     gBattleTypeFlags = 8;
-    gTrainerBattleOpponent_A = 0x400;
+    gTrainerBattleOpponent_A = SECRET_BASE_OPPONENT;
 }
 
 u8 GetSecretBaseTrainerPicIndex(void)

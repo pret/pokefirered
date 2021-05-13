@@ -78,6 +78,10 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
 
     ostringstream text;
 
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
+         << map_data["name"].string_value() 
+         << "/map.json\n@\n\n";
+
     text << map_data["name"].string_value() << "::\n"
          << "\t.4byte " << layout["name"].string_value() << "\n";
 
@@ -514,7 +518,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     int group_num = 0;
 
     for (auto &group : groups_data["group_order"].array_items()) {
-        text << "// Map Group " << group_num << "\n";
+        text << "// " << group.string_value() << "\n";
         vector<Json> map_ids;
         size_t max_length = 0;
 

@@ -1,74 +1,75 @@
-const struct SpriteTemplate gUnknown_83A537C;
-const struct SpriteTemplate gUnknown_83A5394;
-const struct SpriteTemplate gUnknown_83A53AC;
-const struct SpriteTemplate gUnknown_83A53C4;
-const struct SpriteTemplate gUnknown_83A5420;
-const struct SpriteTemplate gUnknown_83A5488;
-const struct SpriteTemplate gUnknown_83A54E4;
-const struct SpriteTemplate gUnknown_83A556C;
-const struct SpriteTemplate gUnknown_83A5604;
-const struct SpriteTemplate gUnknown_83A5648;
-const struct SpriteTemplate gUnknown_83A5698;
-const struct SpriteTemplate gUnknown_83A56F4;
-const struct SpriteTemplate gUnknown_83A583C;
-const struct SpriteTemplate gUnknown_83A589C;
-const struct SpriteTemplate gUnknown_83A58E0;
-const struct SpriteTemplate gUnknown_83A593C;
-const struct SpriteTemplate gUnknown_83A59A4;
-const struct SpriteTemplate gUnknown_83A5A30;
-const struct SpriteTemplate gUnknown_83A5A88;
-const struct SpriteTemplate gUnknown_83A5AD8;
-const struct SpriteTemplate gUnknown_83A5B74;
-const struct SpriteTemplate gUnknown_83A5C34;
-const struct SpriteTemplate gUnknown_83A5750;
-const struct SpriteTemplate gUnknown_83A5CB4;
-const struct SpriteTemplate gUnknown_83A5D34;
-const struct SpriteTemplate gUnknown_83A5E00;
-const struct SpriteTemplate gUnknown_83A57EC;
-const struct SpriteTemplate gUnknown_83A5D84;
-const struct SpriteTemplate gUnknown_83A5B1C;
-const struct SpriteTemplate gUnknown_83A5E38;
-const struct SpriteTemplate gUnknown_83A5E64;
-const struct SpriteTemplate gUnknown_83A5EC0;
-const struct SpriteTemplate gUnknown_83A5F24;
-const struct SpriteTemplate gUnknown_83A5FA4;
-const struct SpriteTemplate gUnknown_83A5FE0;
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall;
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium;
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge;
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge;
+const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_Ripple;
+const struct SpriteTemplate gFieldEffectObjectTemplate_Ash;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob;
+const struct SpriteTemplate gFieldEffectObjectTemplate_Arrow;
+const struct SpriteTemplate gFieldEffectObjectTemplate_GroundImpactDust;
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpTallGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SandFootprints;
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpBigSplash;
+const struct SpriteTemplate gFieldEffectObjectTemplate_Splash;
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpSmallSplash;
+const struct SpriteTemplate gFieldEffectObjectTemplate_LongGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2;
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedSand;
+const struct SpriteTemplate gFieldEffectObjectTemplate_WaterSurfacing;
+const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion;
+const struct SpriteTemplate gFieldEffectObjectTemplate_DeepSandFootprints;
+/*const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle;*/
+const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise;
+const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise;
+const struct SpriteTemplate gFieldEffectObjectTemplate_Bird;
+const struct SpriteTemplate gFieldEffectObjectTemplate_BikeTireTracks;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SandDisguisePlaceholder;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SandPile;
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShortGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_HotSpringsWater;
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff;
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch;
+const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles;
+const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle;
 
 const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
-    &gUnknown_83A537C,
-    &gUnknown_83A5394,
-    &gUnknown_83A53AC,
-    &gUnknown_83A53C4,
-    &gUnknown_83A5420,
-    &gUnknown_83A5488,
-    &gUnknown_83A54E4,
-    &gUnknown_83A556C,
-    &gUnknown_83A5604,
-    &gUnknown_83A5648,
-    &gUnknown_83A5698,
-    &gUnknown_83A56F4,
-    &gUnknown_83A583C,
-    &gUnknown_83A589C,
-    &gUnknown_83A58E0,
-    &gUnknown_83A593C,
-    &gUnknown_83A59A4,
-    &gUnknown_83A5A30,
-    &gUnknown_83A5A88,
-    &gUnknown_83A5AD8,
-    &gUnknown_83A5B74,
-    &gUnknown_83A5C34,
-    NULL,
-    &gUnknown_83A5750,
-    &gUnknown_83A5CB4,
-    &gUnknown_83A5D34,
-    &gUnknown_83A5E00,
-    &gUnknown_83A57EC,
-    &gUnknown_83A5D84,
-    &gUnknown_83A5B1C,
-    &gUnknown_83A5E38,
-    &gUnknown_83A5E64,
-    &gUnknown_83A5EC0,
-    &gUnknown_83A5F24,
-    &gUnknown_83A5FA4,
-    &gUnknown_83A5FE0,
+    [FLDEFFOBJ_SHADOW_S]              = &gFieldEffectObjectTemplate_ShadowSmall,
+    [FLDEFFOBJ_SHADOW_M]              = &gFieldEffectObjectTemplate_ShadowMedium,
+    [FLDEFFOBJ_SHADOW_L]              = &gFieldEffectObjectTemplate_ShadowLarge,
+    [FLDEFFOBJ_SHADOW_XL]             = &gFieldEffectObjectTemplate_ShadowExtraLarge,
+    [FLDEFFOBJ_TALL_GRASS]            = &gFieldEffectObjectTemplate_TallGrass,
+    [FLDEFFOBJ_RIPPLE]                = &gFieldEffectObjectTemplate_Ripple,
+    [FLDEFFOBJ_ASH]                   = &gFieldEffectObjectTemplate_Ash,
+    [FLDEFFOBJ_SURF_BLOB]             = &gFieldEffectObjectTemplate_SurfBlob,
+    [FLDEFFOBJ_ARROW]                 = &gFieldEffectObjectTemplate_Arrow,
+    [FLDEFFOBJ_GROUND_IMPACT_DUST]    = &gFieldEffectObjectTemplate_GroundImpactDust,
+    [FLDEFFOBJ_JUMP_TALL_GRASS]       = &gFieldEffectObjectTemplate_JumpTallGrass,
+    [FLDEFFOBJ_SAND_FOOTPRINTS]       = &gFieldEffectObjectTemplate_SandFootprints,
+    [FLDEFFOBJ_JUMP_BIG_SPLASH]       = &gFieldEffectObjectTemplate_JumpBigSplash,
+    [FLDEFFOBJ_SPLASH]                = &gFieldEffectObjectTemplate_Splash,
+    [FLDEFFOBJ_JUMP_SMALL_SPLASH]     = &gFieldEffectObjectTemplate_JumpSmallSplash,
+    [FLDEFFOBJ_LONG_GRASS]            = &gFieldEffectObjectTemplate_LongGrass,
+    [FLDEFFOBJ_JUMP_LONG_GRASS]       = &gFieldEffectObjectTemplate_JumpLongGrass,
+    [FLDEFFOBJ_UNUSED_GRASS]          = &gFieldEffectObjectTemplate_UnusedGrass,
+    [FLDEFFOBJ_UNUSED_GRASS_2]        = &gFieldEffectObjectTemplate_UnusedGrass2,
+    [FLDEFFOBJ_UNUSED_SAND]           = &gFieldEffectObjectTemplate_UnusedSand,
+    [FLDEFFOBJ_WATER_SURFACING]       = &gFieldEffectObjectTemplate_WaterSurfacing,
+    [FLDEFFOBJ_REFLECTION_DISTORTION] = &gFieldEffectObjectTemplate_ReflectionDistortion,
+    [FLDEFFOBJ_SPARKLE]               = NULL,
+    [FLDEFFOBJ_DEEP_SAND_FOOTPRINTS]  = &gFieldEffectObjectTemplate_DeepSandFootprints,
+    [FLDEFFOBJ_TREE_DISGUISE]         = &gFieldEffectObjectTemplate_TreeDisguise,
+    [FLDEFFOBJ_MOUNTAIN_DISGUISE]     = &gFieldEffectObjectTemplate_MountainDisguise,
+    [FLDEFFOBJ_BIRD]                  = &gFieldEffectObjectTemplate_Bird,
+    [FLDEFFOBJ_BIKE_TIRE_TRACKS]      = &gFieldEffectObjectTemplate_BikeTireTracks,
+    [FLDEFFOBJ_SAND_DISGUISE]         = &gFieldEffectObjectTemplate_SandDisguisePlaceholder,
+    [FLDEFFOBJ_SAND_PILE]             = &gFieldEffectObjectTemplate_SandPile,
+    [FLDEFFOBJ_SHORT_GRASS]           = &gFieldEffectObjectTemplate_ShortGrass,
+    [FLDEFFOBJ_HOT_SPRINGS_WATER]     = &gFieldEffectObjectTemplate_HotSpringsWater,
+    [FLDEFFOBJ_ASH_PUFF]              = &gFieldEffectObjectTemplate_AshPuff,
+    [FLDEFFOBJ_ASH_LAUNCH]            = &gFieldEffectObjectTemplate_AshLaunch,
+    [FLDEFFOBJ_BUBBLES]               = &gFieldEffectObjectTemplate_Bubbles,
+    [FLDEFFOBJ_SMALL_SPARKLE]         = &gFieldEffectObjectTemplate_SmallSparkle,
 };

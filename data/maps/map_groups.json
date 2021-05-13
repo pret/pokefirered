@@ -27,9 +27,9 @@
     "gMapGroup_IndoorRoute15",
     "gMapGroup_IndoorRoute16",
     "gMapGroup_IndoorRoute18",
-    "gMapGroup_IndoorUnused1",
+    "gMapGroup_IndoorRoute19",
     "gMapGroup_IndoorRoute22",
-    "gMapGroup_IndoorUnused2",
+    "gMapGroup_IndoorRoute23",
     "gMapGroup_IndoorRoute25",
     "gMapGroup_IndoorSevenIsland",
     "gMapGroup_IndoorOneIsland",
@@ -436,7 +436,7 @@
   ],
   "gMapGroup_IndoorRoute6": [
     "Route6_NorthEntrance",
-    "UnknownMap_18_01"
+    "Route6_UnusedHouse"
   ],
   "gMapGroup_IndoorRoute7": [
     "Route7_EastEntrance"
@@ -470,14 +470,14 @@
     "Route18_EastEntrance_1F",
     "Route18_EastEntrance_2F"
   ],
-  "gMapGroup_IndoorUnused1": [
-    "UnusedHouse_27_00"
+  "gMapGroup_IndoorRoute19": [
+    "Route19_UnusedHouse"
   ],
   "gMapGroup_IndoorRoute22": [
     "Route22_NorthEntrance"
   ],
-  "gMapGroup_IndoorUnused2": [
-    "UnusedHouse_29_00"
+  "gMapGroup_IndoorRoute23": [
+    "Route23_UnusedHouse"
   ],
   "gMapGroup_IndoorRoute25": [
     "Route25_SeaCottage"
@@ -488,7 +488,7 @@
     "SevenIsland_Mart",
     "SevenIsland_PokemonCenter_1F",
     "SevenIsland_PokemonCenter_2F",
-    "UnusedHouse_31_05",
+    "SevenIsland_UnusedHouse",
     "SevenIsland_Harbor"
   ],
   "gMapGroup_IndoorOneIsland": [

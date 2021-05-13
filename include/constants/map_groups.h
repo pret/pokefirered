@@ -397,7 +397,7 @@
 
 // gMapGroup_IndoorRoute6
 #define MAP_ROUTE6_NORTH_ENTRANCE (0 | (18 << 8))
-#define MAP_UNKNOWN_MAP_18_01     (1 | (18 << 8))
+#define MAP_ROUTE6_UNUSED_HOUSE   (1 | (18 << 8))
 
 // gMapGroup_IndoorRoute7
 #define MAP_ROUTE7_EAST_ENTRANCE (0 | (19 << 8))
@@ -431,14 +431,14 @@
 #define MAP_ROUTE18_EAST_ENTRANCE_1F (0 | (26 << 8))
 #define MAP_ROUTE18_EAST_ENTRANCE_2F (1 | (26 << 8))
 
-// gMapGroup_IndoorUnused1
-#define MAP_UNUSED_HOUSE_27_00 (0 | (27 << 8))
+// gMapGroup_IndoorRoute19
+#define MAP_ROUTE19_UNUSED_HOUSE (0 | (27 << 8))
 
 // gMapGroup_IndoorRoute22
 #define MAP_ROUTE22_NORTH_ENTRANCE (0 | (28 << 8))
 
-// gMapGroup_IndoorUnused2
-#define MAP_UNUSED_HOUSE_29_00 (0 | (29 << 8))
+// gMapGroup_IndoorRoute23
+#define MAP_ROUTE23_UNUSED_HOUSE (0 | (29 << 8))
 
 // gMapGroup_IndoorRoute25
 #define MAP_ROUTE25_SEA_COTTAGE (0 | (30 << 8))
@@ -449,7 +449,7 @@
 #define MAP_SEVEN_ISLAND_MART              (2 | (31 << 8))
 #define MAP_SEVEN_ISLAND_POKEMON_CENTER_1F (3 | (31 << 8))
 #define MAP_SEVEN_ISLAND_POKEMON_CENTER_2F (4 | (31 << 8))
-#define MAP_UNUSED_HOUSE_31_05             (5 | (31 << 8))
+#define MAP_SEVEN_ISLAND_UNUSED_HOUSE      (5 | (31 << 8))
 #define MAP_SEVEN_ISLAND_HARBOR            (6 | (31 << 8))
 
 // gMapGroup_IndoorOneIsland

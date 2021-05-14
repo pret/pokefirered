@@ -1,6 +1,6 @@
 {
-  "id": "MAP_UNUSED_HOUSE_27_00",
-  "name": "UnusedHouse_27_00",
+  "id": "MAP_ROUTE19_UNUSED_HOUSE",
+  "name": "Route19_UnusedHouse",
   "layout": "LAYOUT_HOUSE2",
   "music": "MUS_ROUTE3",
   "region_map_section": "MAPSEC_ROUTE_19",

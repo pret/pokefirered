@@ -31,10 +31,10 @@ MysteryEventScript_StampCard:: @ 8488E28
 	end
 
 sText_MysteryGiftStampCard: @ 8488E55
-	.string "Thank you for using the STAMP CARD\n"
+	.string "Thank you for using the Stamp Card\n"
 	.string "System.\p"
 	.string "You have {STR_VAR_1} more to collect to\n"
-	.string "fill your STAMP CARD.$"
+	.string "fill your Stamp Card.$"
 
 MysteryEventScript_SurfPichu:: @ 8488EB5
 	setvaddress MysteryEventScript_SurfPichu
@@ -103,17 +103,17 @@ SurfPichu_Slot5: @ 8488F50
 	return
 
 sText_MysteryGiftEgg: @ 8488F56
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "From the POKéMON CENTER we\n"
-	.string "have a gift - a POKéMON EGG!\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
+	.string "From the Pokémon Center we\n"
+	.string "have a gift - a Pokémon Egg!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 
 sText_FullParty: @ 8488FE3
 	.string "Oh, your party appears to be full.\p"
 	.string "Please come see me after storing\n"
-	.string "a POKéMON on a PC.$"
+	.string "a Pokémon on a PC.$"
 
 MysteryEventScript_VisitingTrainer:: @ 848903A
 	setvaddress MysteryEventScript_VisitingTrainer
@@ -138,29 +138,29 @@ MysteryEventScript_VisitingTrainerArrived: @ 8489058
 	end
 
 sText_MysteryGiftVisitingTrainer: @ 8489063
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "By holding this WONDER CARD, you\n"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
+	.string "By holding this Wonder Card, you\n"
 	.string "may take part in a survey at a\l"
-	.string "POKéMON MART.\p"
+	.string "Pokémon Mart.\p"
 	.string "Use these surveys to invite\n"
-	.string "TRAINERS to the SEVII ISLANDS.\p"
+	.string "Trainers to the Sevii Islands.\p"
 	.string "…Let me give you a secret\n"
 	.string "password for a survey:\p"
-	.string "“GIVE ME\n"
-	.string "AWESOME TRAINER”\p"
+	.string "“Give Me\n"
+	.string "Awesome Trainer”\p"
 	.string "Write that in on a survey and send\n"
-	.string "it to the WIRELESS\l"
-	.string "COMMUNICATION SYSTEM.$"
+	.string "it to the Wireless\l"
+	.string "Communication System.$"
 
 sText_MysteryGiftVisitingTrainer_2: @ 84891B0
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "A TRAINER has arrived in the SEVII\n"
-	.string "ISLANDS looking for you.\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
+	.string "A Trainer has arrived in the Sevii\n"
+	.string "Islands looking for you.\p"
 	.string "We hope you will enjoy\n"
-	.string "battling the visiting TRAINER.\p"
-	.string "You may invite other TRAINERS by\n"
+	.string "battling the visiting Trainer.\p"
+	.string "You may invite other Trainers by\n"
 	.string "entering other passwords.\p"
 	.string "Try looking for other passwords\n"
 	.string "that may work.$"
@@ -192,20 +192,20 @@ MysteryEventScript_BattleCardInfo: @ 84892F6
 	end
 
 sText_MysteryGiftBattleCountCard: @ 8489301
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "Your BATTLE COUNT CARD keeps\n"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
+	.string "Your Battle Count Card keeps\n"
 	.string "track of your battle record against\l"
-	.string "TRAINERS with the same CARD.\p"
-	.string "Look for and battle TRAINERS who\n"
-	.string "have the same CARD as you.\p"
+	.string "Trainers with the same Card.\p"
+	.string "Look for and battle Trainers who\n"
+	.string "have the same Card as you.\p"
 	.string "You may check the overall rankings\n"
-	.string "by reading the NEWS.\p"
+	.string "by reading the News.\p"
 	.string "Please do give it a try!$"
 
 sText_MysteryGiftBattleCountCard_2: @ 8489419
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
 	.string "Congratulations!\p"
 	.string "You have won a prize for winning\n"
 	.string "three battles!\p"
@@ -251,24 +251,24 @@ AuroraTicket_Obtained: @ 848951D
 	end
 
 sText_AuroraTicket1: @ 8489526
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
 sText_AuroraTicket2: @ 8489583
 	.string "It appears to be for use at the\n"
-	.string "VERMILION CITY port.\p"
+	.string "Vermilion City port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
 
 sText_AuroraTicketGot: @ 84895E8
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.$"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.$"
 
 sText_AuroraTicketNoPlace: @ 8489615
-	.string "Oh, I'm sorry, {PLAYER}. Your BAG's\n"
-	.string "KEY ITEMS POCKET is full.\p"
+	.string "Oh, I'm sorry, {PLAYER}. Your Bag's\n"
+	.string "Key Items Pocket is full.\p"
 	.string "Please store something on your PC,\n"
 	.string "then come back for this.$"
 
@@ -312,24 +312,24 @@ MysticTicket_Obtained: @ 84896F6
 	end
 
 sText_MysticTicket2: @ 84896FF
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
 sText_MysticTicket1: @ 848975C
 	.string "It appears to be for use at the\n"
-	.string "VERMILION CITY port.\p"
+	.string "Vermilion City port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
 
 sText_MysticTicketGot: @ 84897C1
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.$"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.$"
 
 sText_MysticTicketNoPlace: @ 84897EE
-	.string "Oh, I'm sorry, {PLAYER}. Your BAG's\n"
-	.string "KEY ITEMS POCKET is full.\p"
+	.string "Oh, I'm sorry, {PLAYER}. Your Bag's\n"
+	.string "Key Items Pocket is full.\p"
 	.string "Please store something on your PC,\n"
 	.string "then come back for this.$"
 
@@ -349,11 +349,11 @@ MysteryEventScript_AlteringCave_: @ 848987C
 	end
 
 sText_MysteryGiftAlteringCave: @ 8489887
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
+	.string "Thank you for using the Mystery\n"
+	.string "Gift System.\p"
 	.string "Recently, there have been rumors\n"
-	.string "of rare POKéMON appearances.\p"
-	.string "The rumors are about ALTERING\n"
-	.string "CAVE on OUTCAST ISLAND.\p"
+	.string "of rare Pokémon appearances.\p"
+	.string "The rumors are about Altering\n"
+	.string "Cave on Outcast Island.\p"
 	.string "Why not visit there and check if\n"
 	.string "the rumors are indeed true?$"

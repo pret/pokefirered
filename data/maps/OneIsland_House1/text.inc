@@ -5,5 +5,5 @@ OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays:: @ 81A2332
 
 OneIsland_House1_Text_LastTimeMtEmberErupted:: @ 81A2380
     .string "Let me think… When was the last\n"
-    .string "time MT. EMBER erupted?$"
+    .string "time Mt. Ember erupted?$"
 

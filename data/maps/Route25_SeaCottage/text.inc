@@ -1,7 +1,7 @@
 Route25_SeaCottage_Text_ImBillHelpMeOutPal:: @ 819FDFA
     .string "Hiya! I'm a Pokémon…\n"
     .string "…No I'm not!\p"
-    .string "Call me BILL!\n"
+    .string "Call me Bill!\n"
     .string "I'm a true-blue Pokémaniac!\p"
     .string "Hey!\n"
     .string "What's with that skeptical look?\p"

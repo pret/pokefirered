@@ -1,37 +1,37 @@
 Pokedude_Text_SpeedierBattlerGoesFirst::
-	.string "POKé DUDE: The speedier of the\n"
+	.string "Poké Dude: The speedier of the\n"
 	.string "battlers gets to attack first.$"
 
 Pokedude_Text_MyRattataFasterThanPidgey::
-	.string "It looks like my RATTATA was\n"
-	.string "faster than the PIDGEY.$"
+	.string "It looks like my Rattata was\n"
+	.string "faster than the Pidgey.$"
 
 Pokedude_Text_BattlersTakeTurnsAttacking::
 	.string "The battlers take turns attacking\n"
 	.string "and reducing each other's HP.$"
 
 Pokedude_Text_MyRattataWonGetsEXP::
-	.string "My RATTATA reduced the foe's HP\n"
+	.string "My Rattata reduced the foe's HP\n"
 	.string "to zero, so it wins!\p"
-	.string "The POKéMON that took part in the\n"
-	.string "battle get EXP. Points.\p"
-	.string "When a POKéMON collects enough\n"
-	.string "EXP. Points, it levels up.\p"
-	.string "Leveling up makes your POKéMON\n"
+	.string "The Pokémon that took part in the\n"
+	.string "battle get Exp. Points.\p"
+	.string "When a Pokémon collects enough\n"
+	.string "Exp. Points, it levels up.\p"
+	.string "Leveling up makes your Pokémon\n"
 	.string "stronger than before.$"
 
 Pokedude_Text_UhOhRattataPoisoned::
-	.string "POKé DUDE: Uh-oh…\n"
-	.string "My RATTATA has been poisoned…\p"
-	.string "If a POKéMON is poisoned, it loses\n"
+	.string "Poké Dude: Uh-oh…\n"
+	.string "My Rattata has been poisoned…\p"
+	.string "If a Pokémon is poisoned, it loses\n"
 	.string "HP steadily.$"
 
 Pokedude_Text_HealStatusRightAway::
-	.string "If a POKéMON develops a status\n"
+	.string "If a Pokémon develops a status\n"
 	.string "problem, heal it right away.$"
 
 Pokedude_Text_UsingItemTakesTurn::
-	.string "Using an item on a POKéMON uses\n"
+	.string "Using an item on a Pokémon uses\n"
 	.string "up one turn, though.\p"
 	.string "Now, it's the opponent's turn!$"
 
@@ -40,51 +40,51 @@ Pokedude_Text_YayWeManagedToWin::
 	.string "We managed to win!$"
 
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
-	.string "POKé DUDE: The move BUBBLE is\n"
-	.string "a WATER-type attack.\p"
-	.string "The targeted ODDISH is a\n"
-	.string "GRASS/POISON-type POKéMON.\p"
-	.string "The WATER-type attack is absorbed\n"
-	.string "by the GRASS-type POKéMON…\p"
+	.string "Poké Dude: The move Bubble is\n"
+	.string "a Water-type attack.\p"
+	.string "The targeted Oddish is a\n"
+	.string "Grass/Poison-type Pokémon.\p"
+	.string "The Water-type attack is absorbed\n"
+	.string "by the Grass-type Pokémon…\p"
 	.string "As a result, the move becomes not\n"
 	.string "very effective, and inflicts only\l"
 	.string "half the usual damage.$"
 
 Pokedude_Text_GrassEffectiveAgainstWater::
 	.string "Uh-oh, this is not good!\p"
-	.string "The ABSORB attack you just saw\n"
-	.string "is a GRASS-type move.\p"
-	.string "POLIWAG is a WATER-type POKéMON.\p"
-	.string "So, ABSORB becomes super\n"
+	.string "The Absorb attack you just saw\n"
+	.string "is a Grass-type move.\p"
+	.string "Poliwag is a Water-type Pokémon.\p"
+	.string "So, Absorb becomes super\n"
 	.string "effective, doubling the damage.$"
 
 Pokedude_Text_LetsTryShiftingMons::
 	.string "It's not going to be easy to win\n"
 	.string "with this matchup…\p"
-	.string "Let's try shifting POKéMON!$"
+	.string "Let's try shifting Pokémon!$"
 
 Pokedude_Text_ShiftingUsesTurn::
-	.string "Shifting POKéMON in and out uses\n"
+	.string "Shifting Pokémon in and out uses\n"
 	.string "up one turn.\p"
 	.string "Now, it's the opponent's turn.$"
 
 Pokedude_Text_ButterfreeDoubleResistsGrass::
-	.string "BUTTERFREE is a BUG/FLYING-type\n"
-	.string "POKéMON.\p"
-	.string "Against this POKéMON, a GRASS-\n"
+	.string "Butterfree is a Bug/Flying-type\n"
+	.string "Pokémon.\p"
+	.string "Against this Pokémon, a Grass-\n"
 	.string "type attack…\p"
 	.string "…inflicts only half the usual\n"
-	.string "damage on a BUG-type POKéMON…\p"
+	.string "damage on a Bug-type Pokémon…\p"
 	.string "…And, it also causes only half the\n"
-	.string "damage on a FLYING-type POKéMON.\p"
-	.string "Therefore, BUTTERFREE, being a\n"
-	.string "BUG/FLYING POKéMON, only takes\l"
+	.string "damage on a Flying-type Pokémon.\p"
+	.string "Therefore, Butterfree, being a\n"
+	.string "Bug/Flying Pokémon, only takes\l"
 	.string "one quarter of the usual damage.$"
 
 Pokedude_Text_ButterfreeGoodAgainstOddish::
-	.string "ODDISH is a GRASS/POISON-type\n"
-	.string "POKéMON.\p"
-	.string "A FLYING- or PSYCHIC-type attack\n"
+	.string "Oddish is a Grass/Poison-type\n"
+	.string "Pokémon.\p"
+	.string "A Flying- or Psychic-type attack\n"
 	.string "is super effective against it.\p"
 	.string "One of those types of attacks will\n"
 	.string "inflict double the usual damage.\p"
@@ -95,9 +95,9 @@ Pokedude_Text_YeahWeWon::
 	.string "We won!$"
 
 Pokedude_Text_WeakenMonBeforeCatching::
-	.string "POKé DUDE: When you're trying to\n"
-	.string "catch a POKéMON, don't throw any\l"
-	.string "POKé BALLS right away.\p"
+	.string "Poké Dude: When you're trying to\n"
+	.string "catch a Pokémon, don't throw any\l"
+	.string "Poké Balls right away.\p"
 	.string "First, you need to weaken it by\n"
 	.string "reducing its HP.$"
 
@@ -111,20 +111,20 @@ Pokedude_Text_BestIfTargetStatused::
 	.string "paralyzed.$"
 
 Pokedude_Text_CantDoubleUpOnStatus::
-	.string "This will make the POKéMON a lot\n"
+	.string "This will make the Pokémon a lot\n"
 	.string "easier to catch!\p"
 	.string "Oh, yes. If you paralyze a\n"
-	.string "POKéMON, you can't make it fall\l"
+	.string "Pokémon, you can't make it fall\l"
 	.string "asleep on top of paralysis.\p"
 	.string "In other words, you can't double\n"
 	.string "up status problems, okay?$"
 
 Pokedude_Text_LetMeThrowBall::
 	.string "Okay!\n"
-	.string "Let me throw my POKé BALL!$"
+	.string "Let me throw my Poké Ball!$"
 
 Pokedude_Text_PickBestKindOfBall::
-	.string "Before you throw a POKé BALL,\n"
+	.string "Before you throw a Poké Ball,\n"
 	.string "consider the condition and the\l"
-	.string "type of POKéMON, and pick the kind\l"
-	.string "of BALL that would work best.$"
+	.string "type of Pokémon, and pick the kind\l"
+	.string "of Ball that would work best.$"

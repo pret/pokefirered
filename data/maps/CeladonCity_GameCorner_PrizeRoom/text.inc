@@ -1,5 +1,5 @@
 CeladonCity_GameCorner_PrizeRoom_Text_FancyThatPorygon:: @ 8196FC1
-    .string "I sure do fancy that PORYGON!\n"
+    .string "I sure do fancy that Porygon!\n"
     .string "But, it's hard to win at slots!$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_RakedItInToday:: @ 8196FFF
@@ -7,10 +7,10 @@ CeladonCity_GameCorner_PrizeRoom_Text_RakedItInToday:: @ 8196FFF
     .string "If only every day were like this…$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_CoinCaseRequired:: @ 819703E
-    .string "A COIN CASE is required…$"
+    .string "A Coin Case is required…$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes:: @ 8197057
-    .string "We exchange your COINS for prizes.$"
+    .string "We exchange your Coins for prizes.$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize:: @ 819707A
     .string "Which prize would you like?$"
@@ -26,7 +26,7 @@ CeladonCity_GameCorner_PrizeRoom_Text_YouWantTM:: @ 81970B2
     .string "is what you want?$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_NeedMoreCoins:: @ 81970D5
-    .string "Sorry, you'll need more COINS\n"
+    .string "Sorry, you'll need more Coins\n"
     .string "than that.$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_OopsNotEnoughRoom:: @ 81970FE

@@ -2,7 +2,7 @@ Text_ObtainedTheX:: @ 81A51F6
 	.string "Obtained the {STR_VAR_2}!$"
 
 Text_BagIsFull:: @ 81A5207
-	.string "The BAG is full…$"
+	.string "The Bag is full…$"
 
 Text_PutItemAway:: @ 81A5218
 	.string "{PLAYER} put the {STR_VAR_2}\n"
@@ -13,19 +13,19 @@ Text_FoundOneItem:: @ 81A5231
 
 Text_TooBadBagFull:: @ 81A5242
 	.string "Too bad!\n"
-	.string "The BAG is full…$"
+	.string "The Bag is full…$"
 
 Text_FoundXCoins:: @ 81A525C
 	.string "{PLAYER} found\n"
 	.string "{STR_VAR_1} {STR_VAR_2}!$"
 
 Text_PutCoinsAwayInCoinCase:: @ 81A526C
-	.string "{PLAYER} put the COINS away in\n"
-	.string "the COIN CASE.$"
+	.string "{PLAYER} put the Coins away in\n"
+	.string "the Coin Case.$"
 
 Text_CoinCaseIsFull:: @ 81A5294
 	.string "Too bad!\n"
-	.string "The COIN CASE is full…$"
+	.string "The Coin Case is full…$"
 
 Text_NothingToPutThemIn:: @ 81A52B4
 	.string "Too bad!\n"

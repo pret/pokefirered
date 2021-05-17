@@ -8,20 +8,20 @@ CeladonCity_Condominiums_3F_Text_ImTheGraphicArtist:: @ 81962D7
 
 CeladonCity_Condominiums_3F_Text_IWroteTheStory:: @ 81962FB
     .string "I wrote the story!\n"
-    .string "Isn't ERIKA cute?\p"
-    .string "I like MISTY a lot, too!\n"
-    .string "Oh, and SABRINA, I like her!$"
+    .string "Isn't Erika cute?\p"
+    .string "I like Misty a lot, too!\n"
+    .string "Oh, and Sabrina, I like her!$"
 
 CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex:: @ 8196356
     .string "Is that right?\p"
     .string "I'm the game designer!\p"
-    .string "Filling up your POKéDEX is tough,\n"
+    .string "Filling up your Pokédex is tough,\n"
     .string "but don't quit!\p"
     .string "When you finish, come tell me!$"
 
 CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations:: @ 81963CD
     .string "Wow! Excellent!\n"
-    .string "You completed your POKéDEX!\l"
+    .string "You completed your Pokédex!\l"
     .string "Congratulations!\l"
     .string "…$"
 
@@ -38,5 +38,5 @@ CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding:: @ 8196478
     .string "Better not look at the ending!$"
 
 CeladonCity_Condominiums_3F_Text_GameFreakDevelopmentRoom:: @ 81964A8
-    .string "GAME FREAK Development Room$"
+    .string "Game Freak Development Room$"
 

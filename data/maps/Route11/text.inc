@@ -6,7 +6,7 @@ Route11_Text_HugoDefeat:: @ 8184F15
     .string "Didn't go my way!$"
 
 Route11_Text_HugoPostBattle:: @ 8184F2E
-    .string "POKéMON is life!\n"
+    .string "Pokémon is life!\n"
     .string "And to live is to play games!$"
 
 Route11_Text_JasperIntro:: @ 8184F5D
@@ -18,7 +18,7 @@ Route11_Text_JasperDefeat:: @ 8184F7E
 
 Route11_Text_JasperPostBattle:: @ 8184F8E
     .string "You can't be a coward in the world\n"
-    .string "of POKéMON!$"
+    .string "of Pokémon!$"
 
 Route11_Text_EddieIntro:: @ 8184FBD
     .string "Let's go, but don't cheat!$"
@@ -42,11 +42,11 @@ Route11_Text_BraxtonPostBattle:: @ 818504A
     .string "Spread the word to save energy!$"
 
 Route11_Text_DillonIntro:: @ 818506A
-    .string "I just became a TRAINER.\n"
+    .string "I just became a Trainer.\n"
     .string "But, I think I can win.$"
 
 Route11_Text_DillonDefeat:: @ 818509B
-    .string "My POKéMON couldn't win…\n"
+    .string "My Pokémon couldn't win…\n"
     .string "Haven't they grown enough?$"
 
 Route11_Text_DillonPostBattle:: @ 81850CF
@@ -78,10 +78,10 @@ Route11_Text_YasuIntro:: @ 818517B
 
 Route11_Text_YasuDefeat:: @ 81851AC
     .string "Darn!\n"
-    .string "My POKéMON need to be stronger!$"
+    .string "My Pokémon need to be stronger!$"
 
 Route11_Text_YasuPostBattle:: @ 81851D2
-    .string "There's a fat POKéMON that comes\n"
+    .string "There's a fat Pokémon that comes\n"
     .string "down from the mountains.\p"
     .string "I bet it'd be strong if you can\n"
     .string "catch it.$"
@@ -97,7 +97,7 @@ Route11_Text_BerniePostBattle:: @ 8185266
     .string "Well, better get back to work.$"
 
 Route11_Text_DaveIntro:: @ 8185285
-    .string "I raised my POKéMON carefully.\n"
+    .string "I raised my Pokémon carefully.\n"
     .string "They should be ready by now!$"
 
 Route11_Text_DaveDefeat:: @ 81852C1
@@ -109,5 +109,5 @@ Route11_Text_DavePostBattle:: @ 81852E3
     .string "I better go find stronger ones!$"
 
 Route11_Text_DiglettsCave:: @ 8185308
-    .string "DIGLETT'S CAVE$"
+    .string "Diglett's Cave$"
 

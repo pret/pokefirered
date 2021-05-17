@@ -4,7 +4,7 @@ FiveIsland_PokemonCenter_1F_Text_OnMyWayToPrepareMeal:: @ 81A3BBA
 
 FiveIsland_PokemonCenter_1F_Text_YoureOnQuestToCatchEveryMon:: @ 81A3BFD
     .string "You're on a quest to catch every\n"
-    .string "single kind of POKéMON?\p"
+    .string "single kind of Pokémon?\p"
     .string "…How incredible. Please tell me if\n"
     .string "you catch a strong one!$"
 

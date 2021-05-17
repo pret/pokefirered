@@ -1,5 +1,5 @@
 MtMoon_1F_Text_MarcosIntro:: @ 817279D
-    .string "WHOA!\n"
+    .string "Whoa!\n"
     .string "You shocked me!\l"
     .string "…Oh, you're just a kid!$"
 
@@ -40,10 +40,10 @@ MtMoon_1F_Text_JovanIntro:: @ 817290B
     .string "Don't sneak up on me!$"
 
 MtMoon_1F_Text_JovanDefeat:: @ 8172927
-    .string "My POKéMON won't do!$"
+    .string "My Pokémon won't do!$"
 
 MtMoon_1F_Text_JovanPostBattle:: @ 817293C
-    .string "I have to find stronger POKéMON.\n"
+    .string "I have to find stronger Pokémon.\n"
     .string "Where might they be?$"
 
 MtMoon_1F_Text_IrisIntro:: @ 8172972
@@ -67,26 +67,26 @@ MtMoon_1F_Text_KentDefeat:: @ 8172A1A
 
 MtMoon_1F_Text_KentPostBattle:: @ 8172A26
     .string "I saw them!\n"
-    .string "I'm sure they're from TEAM ROCKET!$"
+    .string "I'm sure they're from Team Rocket!$"
 
 MtMoon_1F_Text_RobbyIntro:: @ 8172A55
     .string "You need to go through this cave\n"
-    .string "to get to CERULEAN CITY.$"
+    .string "to get to Cerulean City.$"
 
 MtMoon_1F_Text_RobbyDefeat:: @ 8172A8F
     .string "I lost.$"
 
 MtMoon_1F_Text_RobbyPostBattle:: @ 8172A97
-    .string "ZUBAT is tough!\n"
+    .string "Zubat is tough!\n"
     .string "But if you can catch one, you'll\l"
     .string "be able to count on it.$"
 
 MtMoon_1F_Text_ZubatIsABloodsucker:: @ 8172AE0
     .string "Beware!\n"
-    .string "ZUBAT is a bloodsucker!$"
+    .string "Zubat is a bloodsucker!$"
 
 MtMoon_1F_Text_BrockHelpsExcavateFossils:: @ 8172B00
     .string "Hi, I'm excavating for fossils here\n"
-    .string "under MT. MOON.\p"
-    .string "Sometimes, BROCK of PEWTER GYM\n"
+    .string "under Mt. Moon.\p"
+    .string "Sometimes, Brock of Pewter Gym\n"
     .string "lends me a hand.$"

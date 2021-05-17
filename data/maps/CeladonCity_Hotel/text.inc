@@ -1,12 +1,12 @@
 CeladonCity_Hotel_Text_ThisHotelIsForPeople:: @ 8197B77
-    .string "POKéMON?\n"
+    .string "Pokémon?\n"
     .string "No, this is a hotel for people.\p"
     .string "We're full up, unfortunately.$"
 
 CeladonCity_Hotel_Text_OnVacationWithBrotherAndBoyfriend:: @ 8197BBE
     .string "I'm on vacation with my brother and\n"
     .string "boyfriend.\p"
-    .string "CELADON is such a pretty city!$"
+    .string "Celadon is such a pretty city!$"
 
 CeladonCity_Hotel_Text_WhyDidSheBringBrother:: @ 8197C0C
     .string "Why?\n"

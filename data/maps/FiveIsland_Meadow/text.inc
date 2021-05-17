@@ -5,20 +5,20 @@ FiveIsland_Meadow_Text_DoorNeedsTwoPasswords:: @ 818AB73
 
 FiveIsland_Meadow_Text_EnteredPasswordAnotherNeeded:: @ 818AB8E
     .string "{PLAYER} entered a password.\p"
-    .string "“GOLDEEN need log.”\p"
+    .string "“Goldeen need log.”\p"
     .string "… …  … …  … …\p"
     .string "Another password is needed to\n"
     .string "open the door…$"
 
 FiveIsland_Meadow_Text_EnteredPasswordDoorOpened:: @ 818ABF4
     .string "{PLAYER} entered two passwords.\p"
-    .string "“GOLDEEN need log.”\n"
-    .string "“Yes, nah, CHANSEY.”\p"
+    .string "“Goldeen need log.”\n"
+    .string "“Yes, nah, Chansey.”\p"
     .string "… …  … …  … …\p"
-    .string "The WAREHOUSE's door opened!$"
+    .string "The Warehouse's door opened!$"
 
 FiveIsland_Meadow_Text_WarehouseDoorAlreadyOpen:: @ 818AC62
-    .string "The WAREHOUSE's door is already\n"
+    .string "The Warehouse's door is already\n"
     .string "open.$"
 
 FiveIsland_Meadow_Text_Rocket1Intro:: @ 818AC88
@@ -34,7 +34,7 @@ FiveIsland_Meadow_Text_Rocket1PostBattle:: @ 818ACC5
 
 FiveIsland_Meadow_Text_Rocket2Intro:: @ 818ACF0
     .string "There's nothing past here except\n"
-    .string "our WAREHOUSE.\p"
+    .string "our Warehouse.\p"
     .string "So what brings you here?$"
 
 FiveIsland_Meadow_Text_Rocket2Defeat:: @ 818AD39
@@ -42,7 +42,7 @@ FiveIsland_Meadow_Text_Rocket2Defeat:: @ 818AD39
 
 FiveIsland_Meadow_Text_Rocket2PostBattle:: @ 818AD59
     .string "You're wanting to know what's inside\n"
-    .string "this WAREHOUSE?\p"
+    .string "this Warehouse?\p"
     .string "It's better you didn't know.\n"
     .string "For your own sake, I mean.$"
 

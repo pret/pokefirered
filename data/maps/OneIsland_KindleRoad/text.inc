@@ -20,7 +20,7 @@ OneIsland_KindleRoad_Text_AbigailPostBattle:: @ 81896C1
     .string "Maybe I should wear one, too…$"
 
 OneIsland_KindleRoad_Text_FinnIntro:: @ 81896F9
-    .string "Seen from here, MT. EMBER towers\n"
+    .string "Seen from here, Mt. Ember towers\n"
     .string "into the sky.$"
 
 OneIsland_KindleRoad_Text_FinnDefeat:: @ 8189728
@@ -39,7 +39,7 @@ OneIsland_KindleRoad_Text_GarrettDefeat:: @ 81897A4
     .string "You're good, you!$"
 
 OneIsland_KindleRoad_Text_GarrettPostBattle:: @ 81897C5
-    .string "Instead of using SURF all the time,\n"
+    .string "Instead of using Surf all the time,\n"
     .string "you should swim some.$"
 
 OneIsland_KindleRoad_Text_TommyIntro:: @ 81897FF
@@ -120,45 +120,45 @@ OneIsland_KindleRoad_Text_ClairePostBattle:: @ 8189B24
     .string "I feel famished again.$"
 
 OneIsland_KindleRoad_Text_KiaIntro:: @ 8189B4D
-    .string "KIA: My big brother and I make\n"
+    .string "Kia: My big brother and I make\n"
     .string "an awesome combination!$"
 
 OneIsland_KindleRoad_Text_KiaDefeat:: @ 8189B84
-    .string "KIA: Huh?!\n"
+    .string "Kia: Huh?!\n"
     .string "I can't believe it!$"
 
 OneIsland_KindleRoad_Text_KiaPostBattle:: @ 8189BA3
-    .string "KIA: How could there be anyone\n"
+    .string "Kia: How could there be anyone\n"
     .string "better than my big brother?$"
 
 OneIsland_KindleRoad_Text_KiaNotEnoughMons:: @ 8189BDE
-    .string "KIA: If you want to battle with\n"
+    .string "Kia: If you want to battle with\n"
     .string "us, you have to bring at least two\l"
-    .string "POKéMON with you.$"
+    .string "Pokémon with you.$"
 
 OneIsland_KindleRoad_Text_MikIntro:: @ 8189C33
-    .string "MIK: Together with KIA, I'm afraid\n"
+    .string "Mik: Together with Kia, I'm afraid\n"
     .string "of nothing!$"
 
 OneIsland_KindleRoad_Text_MikDefeat:: @ 8189C62
-    .string "MIK: Whoa!\n"
+    .string "Mik: Whoa!\n"
     .string "That's too much!$"
 
 OneIsland_KindleRoad_Text_MikPostBattle:: @ 8189C7E
-    .string "MIK: How could my combination\n"
-    .string "with KIA fail?$"
+    .string "Mik: How could my combination\n"
+    .string "with Kia fail?$"
 
 OneIsland_KindleRoad_Text_MikNotEnoughMons:: @ 8189CAB
-    .string "MIK: Hey, do you want to battle\n"
+    .string "Mik: Hey, do you want to battle\n"
     .string "with us two?\p"
-    .string "Bring two or more POKéMON with\n"
+    .string "Bring two or more Pokémon with\n"
     .string "you, then.$"
 
 OneIsland_KindleRoad_Text_RouteSign:: @ 8189D02
-    .string "This is KINDLE ROAD.\p"
-    .string "Go straight for MT. EMBER.$"
+    .string "This is Kindle Road.\p"
+    .string "Go straight for Mt. Ember.$"
 
 OneIsland_KindleRoad_Text_EmberSpaSign:: @ 8189D32
     .string "Light the Fire in Your Heart!\n"
-    .string "EMBER SPA$"
+    .string "Ember Spa$"
 

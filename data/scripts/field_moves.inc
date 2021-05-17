@@ -47,15 +47,15 @@ EventScript_DontCutTree:: @ 81BDF91
 	end
 
 Text_CutTreeDown:: @ 81BDF94
-	.string "This tree looks like it can be CUT\n"
+	.string "This tree looks like it can be Cut\n"
 	.string "down!\p"
-	.string "Would you like to CUT it?$"
+	.string "Would you like to Cut it?$"
 
 Text_MonUsedMove:: @ 81BDFD7
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
 Text_TreeCanBeCutDown:: @ 81BDFE3
-	.string "This tree looks like it can be CUT\n"
+	.string "This tree looks like it can be Cut\n"
 	.string "down!$"
 
 EventScript_RockSmash:: @ 81BE00C
@@ -115,10 +115,10 @@ EventScript_DontSmashRock:: @ 81BE09A
 
 Text_UseRockSmash:: @ 81BE09D
 	.string "This rock appears to be breakable.\n"
-	.string "Would you like to use ROCK SMASH?$"
+	.string "Would you like to use Rock Smash?$"
 
 Text_MonMaySmashRock:: @ 81BE0E2
-	.string "It's a rugged rock, but a POKéMON\n"
+	.string "It's a rugged rock, but a Pokémon\n"
 	.string "may be able to smash it.$"
 
 EventScript_StrengthBoulder:: @ 81BE11D
@@ -165,21 +165,21 @@ EventScript_DontUseStrength:: @ 81BE197
 	end
 
 Text_UseStrength:: @ 81BE19A
-	.string "It's a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.\p"
-	.string "Would you like to use STRENGTH?$"
+	.string "Would you like to use Strength?$"
 
 Text_MonUsedStrengthCanMoveBoulders:: @ 81BE1FA
-	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}'s STRENGTH made it\n"
+	.string "{STR_VAR_1} used Strength!\p"
+	.string "{STR_VAR_1}'s Strength made it\n"
 	.string "possible to move boulders around!$"
 
 Text_MonMayPushBoulder:: @ 81BE244
-	.string "It's a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.$"
 
 Text_StrengthMadeMovingBouldersPossible:: @ 81BE284
-	.string "STRENGTH made it possible to move\n"
+	.string "Strength made it possible to move\n"
 	.string "boulders around.$"
 
 EventScript_Waterfall:: @ 81BE2B7
@@ -211,10 +211,10 @@ Text_WallOfWaterCrashingDown:: @ 81BE30A
 
 Text_UseWaterfall:: @ 81BE33F
 	.string "It's a large waterfall.\n"
-	.string "Would you like to use WATERFALL?$"
+	.string "Would you like to use Waterfall?$"
 
 Text_MonUsedWaterfall:: @ 81BE378
-	.string "{STR_VAR_1} used WATERFALL.$"
+	.string "{STR_VAR_1} used Waterfall.$"
 
 @ Unused leftover from R/S
 EventScript_DeepWater:: @ 81BE38B
@@ -268,27 +268,27 @@ EventScript_EndSurface:
 	end
 
 Text_MonMayGoUnderwater:: @ 81BE42B
-	.string "The sea is deep here. A POKéMON\n"
+	.string "The sea is deep here. A Pokémon\n"
 	.string "may be able to go underwater.$"
 
 Text_SeaIsDeepUseDive:: @ 81BE469
 	.string "The sea is deep here.\n"
-	.string "Would you like to use DIVE?$"
+	.string "Would you like to use Dive?$"
 
 Text_MonUsedDive:: @ 81BE49B
-	.string "{STR_VAR_1} used DIVE.$"
+	.string "{STR_VAR_1} used Dive.$"
 
 Text_MonMaySurface:: @ 81BE4A9
 	.string "Light is filtering down from above.\n"
-	.string "A POKéMON may be able to surface.$"
+	.string "A Pokémon may be able to surface.$"
 
 Text_LightFilteringUseDive:: @ 81BE4EF
 	.string "Light is filtering down from above.\n"
-	.string "Would you like to use DIVE?$"
+	.string "Would you like to use Dive?$"
 
 Text_DiveCantBeUsedHere:: @ 81BE52F
 	.string "There is an obstacle above.\n"
-	.string "DIVE can't be used here.$"
+	.string "Dive can't be used here.$"
 
 EventScript_FailSweetScent:: @ 81BE564
 	msgbox Text_LooksLikeNothingHere, MSGBOX_SIGN

@@ -8,9 +8,9 @@
 #include "constants/songs.h"
 
 struct ClearSaveDataStruct {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
+    u8 runState;
+    u8 setupState;
+    u8 teardownState;
 };
 
 static EWRAM_DATA struct ClearSaveDataStruct * sClearSaveDataState = NULL;
@@ -31,6 +31,11 @@ static const struct BgTemplate sBgTemplates[] = {
         .priority = 0,
         .baseTile = 0x000
     }
+};
+
+enum {
+    CLRSVWIN_YESNO,
+    CLRSVWIN_MESSAGE,
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
@@ -77,9 +82,9 @@ static void VBlankCB_WaitYesNo(void)
 void CB2_SaveClearScreen_Init(void)
 {
     sClearSaveDataState = AllocZeroed(sizeof(struct ClearSaveDataStruct));
-    sClearSaveDataState->unk1 = 0;
-    sClearSaveDataState->unk0 = 0;
-    sClearSaveDataState->unk2 = 0;
+    sClearSaveDataState->setupState = 0;
+    sClearSaveDataState->runState = 0;
+    sClearSaveDataState->teardownState = 0;
     CB2_Sub_SaveClearScreen_Init();
     CreateTask(Task_DrawClearSaveDataScreen, 0);
     SetMainCallback2(CB2_RunClearSaveDataScreen);
@@ -87,7 +92,7 @@ void CB2_SaveClearScreen_Init(void)
 
 static void Task_DrawClearSaveDataScreen(u8 taskId)
 {
-    switch (sClearSaveDataState->unk1)
+    switch (sClearSaveDataState->setupState)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -101,16 +106,16 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         SaveClearScreen_GpuInit();
         break;
     case 3:
-        TextWindow_SetStdFrame0_WithPal(0, 0x001, 0xF0);
-        TextWindow_SetStdFrame0_WithPal(1, 0x001, 0xF0);
+        TextWindow_SetStdFrame0_WithPal(CLRSVWIN_YESNO, 0x001, 0xF0);
+        TextWindow_SetStdFrame0_WithPal(CLRSVWIN_MESSAGE, 0x001, 0xF0);
         break;
     case 4:
-        DrawStdFrameWithCustomTileAndPalette(1, TRUE, 0x001, 0xF);
-        AddTextPrinterParameterized4(1, 2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B69E);
-        CopyWindowToVram(1, COPYWIN_GFX);
+        DrawStdFrameWithCustomTileAndPalette(CLRSVWIN_MESSAGE, TRUE, 0x001, 0xF);
+        AddTextPrinterParameterized4(CLRSVWIN_MESSAGE, 2, 0, 3, 1, 1, sTextColor, 0, gText_ClearAllSaveDataAreas);
+        CopyWindowToVram(CLRSVWIN_MESSAGE, COPYWIN_GFX);
         break;
     case 5:
-        CreateYesNoMenu(&sWindowTemplates[0], 2, 0, 2, 0x001, 0xF, 1);
+        CreateYesNoMenu(&sWindowTemplates[CLRSVWIN_YESNO], 2, 0, 2, 0x001, 0xF, 1);
         CopyBgTilemapBufferToVram(0);
         break;
     default:
@@ -119,34 +124,32 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         gTasks[taskId].func = Task_HandleYesNoMenu;
         break;
     }
-    sClearSaveDataState->unk1++;
+    sClearSaveDataState->setupState++;
 }
 
 static void Task_HandleYesNoMenu(u8 taskId)
 {
-    // agbcc refuses to keep &sClearSaveDataState in a register
-    // unless explicitly told to do so as such:
-    struct ClearSaveDataStruct ** r5 = &sClearSaveDataState;
-    if ((*r5)->unk0 == 0)
+    if (sClearSaveDataState->runState == 0)
     {
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case MENU_B_PRESSED:
         case 1:
             PlaySE(SE_SELECT);
+            sClearSaveDataState->runState++;
             break;
         case 0:
             PlaySE(SE_SELECT);
-            FillWindowPixelBuffer(1, PIXEL_FILL(1));
-            AddTextPrinterParameterized4(1, 2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B6B9);
-            CopyWindowToVram(1, COPYWIN_BOTH);
+            FillWindowPixelBuffer(CLRSVWIN_MESSAGE, PIXEL_FILL(1));
+            AddTextPrinterParameterized4(CLRSVWIN_MESSAGE, 2, 0, 3, 1, 1, sTextColor, 0, gText_ClearingDataPleaseWait);
+            CopyWindowToVram(CLRSVWIN_MESSAGE, COPYWIN_BOTH);
             ClearSaveData();
+            sClearSaveDataState->runState++;
             break;
         case MENU_NOTHING_CHOSEN:
         default:
-            return;
+            break;
         }
-        (*r5)->unk0++;
     }
     else
     {
@@ -156,11 +159,11 @@ static void Task_HandleYesNoMenu(u8 taskId)
 
 static void Task_CleanUpAndSoftReset(u8 taskId)
 {
-    switch (sClearSaveDataState->unk2)
+    switch (sClearSaveDataState->teardownState)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFF, 0, 0, 16, RGB_WHITEALPHA);
-        sClearSaveDataState->unk2++;
+        sClearSaveDataState->teardownState++;
         break;
     case 1:
         if (!gPaletteFade.active)

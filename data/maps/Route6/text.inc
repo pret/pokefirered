@@ -30,7 +30,7 @@ Route6_Text_KeigoDefeat:: @ 8183EC0
 
 Route6_Text_KeigoPostBattle:: @ 8183ED4
     .string "I like bugs, so I'm going back to\n"
-    .string "VIRIDIAN FOREST.$"
+    .string "Viridian Forest.$"
 
 Route6_Text_JeffIntro:: @ 8183F07
     .string "Huh?\n"
@@ -41,7 +41,7 @@ Route6_Text_JeffDefeat:: @ 8183F24
     .string "I couldn't beat your challenge…$"
 
 Route6_Text_JeffPostBattle:: @ 8183F51
-    .string "I should bring more POKéMON with\n"
+    .string "I should bring more Pokémon with\n"
     .string "me. I'll feel safer that way.$"
 
 Route6_Text_IsabelleIntro:: @ 8183F90
@@ -63,11 +63,11 @@ Route6_Text_ElijahDefeat:: @ 818401A
     .string "You're too good!$"
 
 Route6_Text_ElijahPostBattle:: @ 818402B
-    .string "Are my POKéMON weak?\n"
+    .string "Are my Pokémon weak?\n"
     .string "Or, am I just bad?\l"
     .string "Which do you think?$"
 
 Route6_Text_UndergroundPathSign:: @ 8184067
-    .string "UNDERGROUND PATH\n"
-    .string "CERULEAN CITY - VERMILION CITY$"
+    .string "Underground Path\n"
+    .string "Cerulean City - Vermilion City$"
 

@@ -18,6 +18,6 @@ SSAnne_B1F_Room4_Text_DuncanDefeat:: @ 81743B3
     .string "Your spirit sank me!$"
 
 SSAnne_B1F_Room4_Text_DuncanPostBattle:: @ 81743C8
-    .string "Did you see the FISHING GURU in\n"
-    .string "VERMILION CITY?$"
+    .string "Did you see the Fishing Guru in\n"
+    .string "Vermilion City?$"
 

@@ -1,9 +1,9 @@
 Route16_NorthEntrance_1F_Text_NoPedestriansOnCyclingRoad:: @ 819F95F
     .string "No pedestrians are allowed on\n"
-    .string "CYCLING ROAD!$"
+    .string "Cycling Road!$"
 
 Route16_NorthEntrance_1F_Text_CyclingRoadIsDownhillCourse:: @ 819F98B
-    .string "CYCLING ROAD is a downhill course\n"
+    .string "Cycling Road is a downhill course\n"
     .string "by the sea. It's a great ride.$"
 
 Route16_NorthEntrance_1F_Text_ExcuseMeWaitUp:: @ 819F9CC

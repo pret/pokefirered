@@ -6,6 +6,6 @@ SSAnne_B1F_Room3_Text_DylanDefeat:: @ 81742C3
     .string "Lost it!$"
 
 SSAnne_B1F_Room3_Text_DylanPostBattle:: @ 81742D2
-    .string "Sea POKéMON live in deep water.\n"
-    .string "You'll need a ROD to fish them up!$"
+    .string "Sea Pokémon live in deep water.\n"
+    .string "You'll need a Rod to fish them up!$"
 

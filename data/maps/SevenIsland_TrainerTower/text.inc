@@ -12,23 +12,23 @@ SevenIsland_TrainerTower_Text_DarioPostBattle:: @ 818C20E
 
 SevenIsland_TrainerTower_Text_RodetteIntro:: @ 818C283
     .string "Somewhere on this island, peculiar\n"
-    .string "POKéMON are sleeping.$"
+    .string "Pokémon are sleeping.$"
 
 SevenIsland_TrainerTower_Text_RodetteDefeat:: @ 818C2BC
-    .string "What an amazing TRAINER!$"
+    .string "What an amazing Trainer!$"
 
 SevenIsland_TrainerTower_Text_RodettePostBattle:: @ 818C2D5
     .string "Somewhere on this island, peculiar\n"
-    .string "POKéMON are sleeping.\p"
+    .string "Pokémon are sleeping.\p"
     .string "Could it be that they're waiting\n"
     .string "for you?$"
 
 SevenIsland_TrainerTower_Text_TrainerTowerSign:: @ 818C338
-    .string "TRAINER TOWER ENTRANCE\n"
-    .string "Rise to the Challenge, TRAINERS!$"
+    .string "Trainer Tower Entrance\n"
+    .string "Rise to the Challenge, Trainers!$"
 
 SevenIsland_TrainerTower_Text_TrainerTowerAhead:: @ 818C370
-    .string "TRAINER TOWER AHEAD$"
+    .string "Trainer Tower Ahead$"
 
 @ Unused text perhaps indicating Trainer Tower was planned to be unlocked by something
 SevenIsland_TrainerTower_Text_LooksLikeTrainerTowerIsClosed:: @ 818C384

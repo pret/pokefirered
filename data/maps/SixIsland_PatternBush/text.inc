@@ -1,19 +1,19 @@
 SixIsland_PatternBush_Text_BethanyIntro:: @ 817BF3A
     .string "I'm curious, how do you raise your\n"
-    .string "POKéMON?$"
+    .string "Pokémon?$"
 
 SixIsland_PatternBush_Text_BethanyDefeat:: @ 817BF66
-    .string "You raise your POKéMON with a\n"
+    .string "You raise your Pokémon with a\n"
     .string "whole lot of love!$"
 
 SixIsland_PatternBush_Text_BethanyPostBattle:: @ 817BF97
     .string "In the same way your mother raised\n"
     .string "you full of love, you should raise\l"
-    .string "your POKéMON.$"
+    .string "your Pokémon.$"
 
 SixIsland_PatternBush_Text_AllisonIntro:: @ 817BFEB
     .string "I'm working to preserve the natural\n"
-    .string "ecology of POKéMON here.$"
+    .string "ecology of Pokémon here.$"
 
 SixIsland_PatternBush_Text_AllisonDefeat:: @ 817C028
     .string "Oh, for someone so young, you are\n"
@@ -21,29 +21,29 @@ SixIsland_PatternBush_Text_AllisonDefeat:: @ 817C028
 
 SixIsland_PatternBush_Text_AllisonPostBattle:: @ 817C056
     .string "I'm not saying that you shouldn't\n"
-    .string "catch POKéMON.\p"
+    .string "catch Pokémon.\p"
     .string "I just want people to raise their\n"
-    .string "POKéMON responsibly.$"
+    .string "Pokémon responsibly.$"
 
 SixIsland_PatternBush_Text_GarretIntro:: @ 817C0BE
-    .string "I caught a BUG POKéMON that lives\n"
+    .string "I caught a Bug Pokémon that lives\n"
     .string "only around here!$"
 
 SixIsland_PatternBush_Text_GarretDefeat:: @ 817C0F2
     .string "Heheh…\n"
-    .string "Isn't my POKéMON awesome?$"
+    .string "Isn't my Pokémon awesome?$"
 
 SixIsland_PatternBush_Text_GarretPostBattle:: @ 817C113
-    .string "There's a girl near the BUSH who\n"
-    .string "measures HERACROSS for TRAINERS.$"
+    .string "There's a girl near the Bush who\n"
+    .string "measures Heracross for Trainers.$"
 
 SixIsland_PatternBush_Text_JonahIntro:: @ 817C155
     .string "You know, it just doesn't feel right\n"
-    .string "if I don't use BUG POKéMON.$"
+    .string "if I don't use Bug Pokémon.$"
 
 SixIsland_PatternBush_Text_JonahDefeat:: @ 817C196
     .string "It's okay, losing is a fun part of\n"
-    .string "POKéMON's appeal, too.$"
+    .string "Pokémon's appeal, too.$"
 
 SixIsland_PatternBush_Text_JonahPostBattle:: @ 817C1D0
     .string "By the way, “appeal” is a weird\n"
@@ -53,7 +53,7 @@ SixIsland_PatternBush_Text_JonahPostBattle:: @ 817C1D0
 
 SixIsland_PatternBush_Text_VanceIntro:: @ 817C246
     .string "Yeah, yeah, yeah!\n"
-    .string "Look at all the BUG POKéMON!$"
+    .string "Look at all the Bug Pokémon!$"
 
 SixIsland_PatternBush_Text_VanceDefeat:: @ 817C275
     .string "I got beat while I was still busy\n"
@@ -104,7 +104,7 @@ SixIsland_PatternBush_Text_DaliaPostBattle:: @ 817C490
     .string "Isn't it refreshing?$"
 
 SixIsland_PatternBush_Text_JoanaIntro:: @ 817C4FE
-    .string "I love BUG POKéMON.\n"
+    .string "I love Bug Pokémon.\n"
     .string "That's why I'm here all the time.\p"
     .string "Am I the only girl like that?$"
 
@@ -114,7 +114,7 @@ SixIsland_PatternBush_Text_JoanaDefeat:: @ 817C552
 
 SixIsland_PatternBush_Text_JoanaPostBattle:: @ 817C590
     .string "I'm going to keep on collecting\n"
-    .string "BUG POKéMON.\p"
+    .string "Bug Pokémon.\p"
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_RileyIntro:: @ 817C5DB
@@ -149,8 +149,8 @@ SixIsland_PatternBush_Text_LaytonDefeat:: @ 817C6FB
     .string "your feet?$"
 
 SixIsland_PatternBush_Text_LaytonPostBattle:: @ 817C728
-    .string "There are places here in PATTERN\n"
-    .string "BUSH where grass won't grow.\p"
+    .string "There are places here in Pattern\n"
+    .string "Bush where grass won't grow.\p"
     .string "What could be the cause of such\n"
     .string "a phenomenon?$"
 

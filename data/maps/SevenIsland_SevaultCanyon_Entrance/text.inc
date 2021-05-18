@@ -22,7 +22,7 @@ SevenIsland_SevaultCanyon_Entrance_Text_MasonDefeat:: @ 818C473
 
 SevenIsland_SevaultCanyon_Entrance_Text_MasonPostBattle:: @ 818C4BA
     .string "Lalalah…\n"
-    .string "My POKéMON, I send them out,\l"
+    .string "My Pokémon, I send them out,\l"
     .string "all the girls scream and shout!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_NicolasIntro:: @ 818C500
@@ -33,61 +33,61 @@ SevenIsland_SevaultCanyon_Entrance_Text_NicolasDefeat:: @ 818C543
     .string "Uh-huh…$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_NicolasPostBattle:: @ 818C54B
-    .string "TRAINERS like you from cities,\n"
+    .string "Trainers like you from cities,\n"
     .string "they sure are tough.\p"
-    .string "You'll be headed for the TOWER,\n"
+    .string "You'll be headed for the Tower,\n"
     .string "won't you?$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelineIntro:: @ 818C5AA
     .string "I punish people who abuse\n"
-    .string "POKéMON!$"
+    .string "Pokémon!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelineDefeat:: @ 818C5CD
     .string "You don't seem to be a problem\n"
-    .string "TRAINER.$"
+    .string "Trainer.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelinePostBattle:: @ 818C5F5
-    .string "If you treat your POKéMON with\n"
+    .string "If you treat your Pokémon with\n"
     .string "kindness, they'll understand.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_EveIntro:: @ 818C632
-    .string "EVE: I'll team up with JON and\n"
+    .string "Eve: I'll team up with Jon and\n"
     .string "battle together.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_EveDefeat:: @ 818C662
-    .string "EVE: Me and JON, we lost.\n"
+    .string "Eve: Me and Jon, we lost.\n"
     .string "Ehehe.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_EvePostBattle:: @ 818C683
-    .string "EVE: I'm going to work harder with\n"
-    .string "JON.$"
+    .string "Eve: I'm going to work harder with\n"
+    .string "Jon.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_EveNotEnoughMons:: @ 818C6AB
-    .string "EVE: I want to team up with JON\n"
+    .string "Eve: I want to team up with Jon\n"
     .string "when I battle you.\p"
-    .string "Come back with two POKéMON, okay?$"
+    .string "Come back with two Pokémon, okay?$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_JonIntro:: @ 818C700
-    .string "JON: When I'm with EVE, it feels\n"
+    .string "Jon: When I'm with Eve, it feels\n"
     .string "like we could never lose.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_JonDefeat:: @ 818C73B
-    .string "JON: When I'm with EVE,\n"
+    .string "Jon: When I'm with Eve,\n"
     .string "it doesn't feel like I've lost!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_JonPostBattle:: @ 818C773
-    .string "JON: When I'm with EVE, I feel\n"
+    .string "Jon: When I'm with Eve, I feel\n"
     .string "giddy whether I win or lose.\p"
     .string "It's magical!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_JonNotEnoughMons:: @ 818C7BD
-    .string "JON: If it's with EVE, I'll be\n"
+    .string "Jon: If it's with Eve, I'll be\n"
     .string "happy to battle with you.\p"
     .string "So, I'd like to make it a\n"
     .string "two-on-two battle, if I may.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_RouteSign:: @ 818C82D
-    .string "SEVAULT CANYON ENTRANCE\p"
-    .string "TRAINERS are asked to refrain from\n"
-    .string "damaging plants in the CANYON.$"
+    .string "Sevault Canyon Entrance\p"
+    .string "Trainers are asked to refrain from\n"
+    .string "damaging plants in the Canyon.$"
 

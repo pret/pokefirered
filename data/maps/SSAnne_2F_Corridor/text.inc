@@ -1,15 +1,15 @@
 SSAnne_2F_Corridor_Text_ThisShipIsLuxuryLiner:: @ 8172FC3
     .string "This ship, she is a luxury liner for\n"
-    .string "TRAINERS of the world!\p"
+    .string "Trainers of the world!\p"
     .string "At every port, we hold parties with\n"
-    .string "invited TRAINERS.$"
+    .string "invited Trainers.$"
 
 SSAnne_2F_Corridor_Text_RivalIntro:: @ 8173035
     .string "{RIVAL}: Bonjour!\n"
     .string "{PLAYER}!\p"
     .string "Imagine seeing you here!\n"
     .string "{PLAYER}, were you really invited?\p"
-    .string "So how's your POKéDEX coming?\p"
+    .string "So how's your Pokédex coming?\p"
     .string "I already caught 40 kinds, pal.\n"
     .string "Different kinds are everywhere.\p"
     .string "Crawl around in grassy areas, and\n"
@@ -18,7 +18,7 @@ SSAnne_2F_Corridor_Text_RivalIntro:: @ 8173035
 SSAnne_2F_Corridor_Text_RivalDefeat:: @ 8173110
     .string "Humph!\p"
     .string "At least you're raising your\n"
-    .string "POKéMON!$"
+    .string "Pokémon!$"
 
 SSAnne_2F_Corridor_Text_RivalVictory:: @ 817313D
     .string "{PLAYER}‥！\n"
@@ -27,10 +27,10 @@ SSAnne_2F_Corridor_Text_RivalVictory:: @ 817313D
     .string "きたえた　ほうが　いいぜ！$"
 
 SSAnne_2F_Corridor_Text_RivalPostBattle:: @ 8173164
-    .string "{RIVAL}: I heard there was a CUT\n"
+    .string "{RIVAL}: I heard there was a Cut\n"
     .string "master on board.\p"
     .string "But he was just a seasick old man!\p"
-    .string "CUT itself is really useful.\n"
+    .string "Cut itself is really useful.\n"
     .string "Yup, it'll be handy.\p"
     .string "You should go see him, too.\n"
     .string "Smell ya!$"

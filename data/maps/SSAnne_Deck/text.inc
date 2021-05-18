@@ -19,7 +19,7 @@ SSAnne_Deck_Text_EdmondDefeat:: @ 817332B
     .string "You're impressive!$"
 
 SSAnne_Deck_Text_EdmondPostBattle:: @ 817333E
-    .string "How many kinds of POKéMON do you\n"
+    .string "How many kinds of Pokémon do you\n"
     .string "think there are in this big world?$"
 
 SSAnne_Deck_Text_TrevorIntro:: @ 8173382
@@ -31,5 +31,5 @@ SSAnne_Deck_Text_TrevorDefeat:: @ 81733A0
 
 SSAnne_Deck_Text_TrevorPostBattle:: @ 81733B5
     .string "My pa said there are 100 kinds of\n"
-    .string "POKéMON. I think there are more.$"
+    .string "Pokémon. I think there are more.$"
 

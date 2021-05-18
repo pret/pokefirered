@@ -4,13 +4,13 @@ Text_SwordsDanceTeach:: @ 8182F01
     .string "I'll get stronger and stronger.\p"
     .string "Yep, stronger and stronger…\p"
     .string "How would you like to learn a move\n"
-    .string "like that? It's SWORDS DANCE.$"
+    .string "like that? It's Swords Dance.$"
 
 Text_SwordsDanceDeclined:: @ 8182FC1
     .string "Well, that's fine, too.$"
 
 Text_SwordsDanceWhichMon:: @ 8182FD9
-    .string "All right, pick which POKéMON\n"
+    .string "All right, pick which Pokémon\n"
     .string "I should teach it to.$"
 
 Text_SwordsDanceTaught:: @ 818300D
@@ -18,12 +18,12 @@ Text_SwordsDanceTaught:: @ 818300D
     .string "stronger and stronger, eh?$"
 
 SevenIsland_Text_IslandSign:: @ 8183046
-    .string "SEVEN ISLAND\n"
+    .string "Seven Island\n"
     .string "Quest Island of Infinity$"
 
 SevenIsland_Text_IslandsMadeInSevenDays:: @ 818306C
-    .string "These islands are called the SEVII\n"
-    .string "ISLANDS because there are seven.\p"
+    .string "These islands are called the Sevii\n"
+    .string "Islands because there are seven.\p"
     .string "…Or at least that's what the young\n"
     .string "people believe.\p"
     .string "The truth is, these islands are so\n"

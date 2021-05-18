@@ -13,7 +13,7 @@ Text_JustMistaken:: @ 81A4737
 
 Text_AllowMeToTeachMonUltimateMove:: @ 81A4751
     .string "Oh! This is the one!\n"
-    .string "This is the POKéMON!\p"
+    .string "This is the Pokémon!\p"
     .string "This {STR_VAR_1} is worthy of\n"
     .string "learning my ultimate move!\p"
     .string "Will you allow it?\p"

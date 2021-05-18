@@ -2,23 +2,23 @@
 
 TrainerTower_Lobby_Text_WelcomeToTrainerTower:: @ 817C794
     .string "Hello!\p"
-    .string "Welcome to TRAINER TOWER where\n"
-    .string "TRAINERS gather from all over!$"
+    .string "Welcome to Trainer Tower where\n"
+    .string "Trainers gather from all over!$"
 
 TrainerTower_Lobby_Text_TrainersUpToFloorNum:: @ 817C7D9
-    .string "TRAINERS from all over the world\n"
+    .string "Trainers from all over the world\n"
     .string "gather here to battle.\p"
     .string "Let me see…\p"
-    .string "Right now, there are TRAINERS only\n"
+    .string "Right now, there are Trainers only\n"
     .string "up to Floor {STR_VAR_1}.$"
 
 TrainerTower_Lobby_Text_TrainersUpEighthFloor:: @ 817C850
-    .string "TRAINERS are awaiting your\n"
+    .string "Trainers are awaiting your\n"
     .string "challenge up to the eighth floor.$"
 
 TrainerTower_Lobby_Text_LikeToChallengeTrainers:: @ 817C88D
     .string "Would you like to challenge the\n"
-    .string "waiting TRAINERS?$"
+    .string "waiting Trainers?$"
 
 TrainerTower_Lobby_Text_StartClockGetSetGo:: @ 817C8BF
     .string "Okay, I'll get the clock started,\n"
@@ -40,7 +40,7 @@ TrainerTower_Lobby_Text_GiveItYourBest:: @ 817C9A2
     .string "I hope you give it your best.$"
 
 TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch:: @ 817C9C0
-    .string "When the TRAINERS switch places,\n"
+    .string "When the Trainers switch places,\n"
     .string "the movement can be hectic.\p"
     .string "To avoid the stampede, we moved\n"
     .string "the reception counter here.\p"
@@ -48,7 +48,7 @@ TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch:: @ 817C9C0
 
 TrainerTower_Roof_Text_ImOwnerBattledPerfectly:: @ 817CA5A
     .string "Hello…\p"
-    .string "I am the owner of this TOWER…\p"
+    .string "I am the owner of this Tower…\p"
     .string "How the sky soars above this\n"
     .string "rooftop…\p"
     .string "The caress of the winds up here…\p"
@@ -88,27 +88,27 @@ TrainerTower_Lobby_Text_HereAreTheResults:: @ 817CC69
 TrainerTower_Lobby_Text_NeedTwoMonsForDouble:: @ 817CC73
     .string "This is a two-on-two battle.\p"
     .string "You may not battle unless you have\n"
-    .string "at least two POKéMON.$"
+    .string "at least two Pokémon.$"
 
 TrainerTower_Lobby_Text_ExplainTrainerTower:: @ 817CCC9
-    .string "Here at TRAINER TOWER, there is an\n"
-    .string "event called TIME ATTACK.\p"
+    .string "Here at Trainer Tower, there is an\n"
+    .string "event called Time Attack.\p"
     .string "You will be timed on how quickly\n"
     .string "you can get from the reception\l"
-    .string "counter to the OWNER on the roof.\p"
+    .string "counter to the Owner on the roof.\p"
     .string "The best times will be recorded on\n"
     .string "the Time Board.\p"
     .string "Try competing with friends to see\n"
     .string "who can beat it the fastest.\p"
-    .string "You will not earn any EXP. Points\n"
-    .string "or money by beating TRAINERS here.$"
+    .string "You will not earn any Exp. Points\n"
+    .string "or money by beating Trainers here.$"
 
 TrainerTower_Lobby_Text_ThanksForCompeting:: @ 817CE1F
     .string "Thank you for competing!$"
 
 TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers:: @ 817CE38
     .string "I'm here to see how good I am.\p"
-    .string "I wonder what kinds of TRAINERS\n"
+    .string "I wonder what kinds of Trainers\n"
     .string "are waiting for me?\p"
     .string "It's nerve-racking!$"
 

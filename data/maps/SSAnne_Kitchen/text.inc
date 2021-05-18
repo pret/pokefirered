@@ -4,7 +4,7 @@ SSAnne_Kitchen_Text_BusyOutOfTheWay:: @ 81733F8
     .string "Out of the way!$"
 
 SSAnne_Kitchen_Text_SawOddBerryInTrash:: @ 8173429
-    .string "I saw an odd BERRY in the trash.\n"
+    .string "I saw an odd Berry in the trash.\n"
     .string "I wonder what that was?$"
 
 SSAnne_Kitchen_Text_SoBusyImDizzy:: @ 8173462
@@ -17,10 +17,10 @@ SSAnne_Kitchen_Text_PeelSpudsEveryDay:: @ 81734A0
     .string "Hum-hum…$"
 
 SSAnne_Kitchen_Text_HearAboutSnorlaxItsAGlutton:: @ 81734D3
-    .string "Did you hear about SNORLAX?\n"
+    .string "Did you hear about Snorlax?\n"
     .string "It's a glutton.\p"
-    .string "No other POKéMON eats and sleeps\n"
-    .string "the way SNORLAX can and does!$"
+    .string "No other Pokémon eats and sleeps\n"
+    .string "the way Snorlax can and does!$"
 
 SSAnne_Kitchen_Text_OnlyGetToPeelOnions:: @ 817353E
     .string "Snivel… Sniff…\p"
@@ -29,7 +29,7 @@ SSAnne_Kitchen_Text_OnlyGetToPeelOnions:: @ 817353E
 
 SSAnne_Kitchen_Text_IAmLeChefMainCourseIs:: @ 8173570
     .string "Er-hem!\n"
-    .string "Indeed I am le CHEF!\p"
+    .string "Indeed I am le Chef!\p"
     .string "Le main course is$"
 
 SSAnne_Kitchen_Text_SalmonDuSalad:: @ 817359F

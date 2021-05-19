@@ -1,5 +1,5 @@
 const u8 gText_QuestLog_PreviouslyOnYourQuest[] = _("Previously on your quest…");
-const u8 gText_QuestLog_SwitchMon1WithMon2[] = _("{PLAYER} switched the POKéMON\n{STR_VAR_1} with {STR_VAR_2}.");
+const u8 gText_QuestLog_SwitchMon1WithMon2[] = _("{PLAYER} switched the Pokémon\n{STR_VAR_1} with {STR_VAR_2}.");
 const u8 gText_QuestLog_SwappedHeldItemsOnMon[] = _("Took the item {STR_VAR_2} from\n{STR_VAR_1} and gave it the item\n{STR_VAR_3} to hold.");
 const u8 gText_QuestLog_TookHeldItemFromMon[] = _("Took the item {STR_VAR_2} from\n{STR_VAR_1}.");
 const u8 gText_QuestLog_UsedItemOnMonAtThisLocation[] = _("Used the item {STR_VAR_1} on {STR_VAR_2}\nat this location.");

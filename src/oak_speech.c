@@ -1418,8 +1418,8 @@ static void Task_OakSpeech39(u8 taskId)
             PlaySE(SE_WARP_IN);
         r0 = data[2];
         data[2] -= 32;
-        x = invfx16(r0 - 8);
-        y = invfx16(data[2] - 16);
+        x = Q_8_8_inv(r0 - 8);
+        y = Q_8_8_inv(data[2] - 16);
         SetBgAffine(2, 0x7800, 0x5400, 0x78, 0x54, x, y, 0);
         if (data[2] <= 96)
         {

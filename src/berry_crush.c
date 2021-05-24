@@ -1052,10 +1052,10 @@ static void SaveResults(void)
 
     time = sGame->results.time;
     time = Q_24_8(time);
-    time = divfx32(time, Q_24_8(60));
+    time = Q_24_8_div(time, Q_24_8(60));
     presses = sGame->results.totalAPresses;
     presses = Q_24_8(presses);
-    presses = divfx32(presses, time) & 0xFFFF;
+    presses = Q_24_8_div(presses, time) & 0xFFFF;
     sGame->pressingSpeed = presses;
 
     switch (sGame->playerCount)
@@ -1402,7 +1402,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame * game, u8 *args
         }
         game->cmdTimer = 0;
         ResetBlockReceivedFlags();
-        game->targetDepth = divfx32(Q_24_8(game->targetAPresses), Q_24_8(32));
+        game->targetDepth = Q_24_8_div(Q_24_8(game->targetAPresses), Q_24_8(32));
         break;
     case 5:
         ClearDialogWindowAndFrame(0, TRUE);
@@ -1630,7 +1630,7 @@ static void HandlePartnerInput(struct BerryCrushGame * game)
     {
         temp = game->totalAPresses;
         temp = Q_24_8(temp);
-        temp = divfx32(temp, game->targetDepth);
+        temp = Q_24_8_div(temp, game->targetDepth);
         temp = Q_24_8_TO_INT(temp);
         game->newDepth = (u8)temp;
         return;
@@ -2030,16 +2030,16 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
         // Silkiness is the percentage of times big sparkles were produced when possible,
         // which itself depends on the number of A presses every 30 frames
         // (numBigSparkles * 50 / numBigSparkleChecks) + 50
-        temp1 = mulfx32(Q_24_8(game->numBigSparkles), Q_24_8(50));
-        temp1 = divfx32(temp1, Q_24_8(game->numBigSparkleChecks)) + Q_24_8(50);
+        temp1 = Q_24_8_mul(Q_24_8(game->numBigSparkles), Q_24_8(50));
+        temp1 = Q_24_8_div(temp1, Q_24_8(game->numBigSparkleChecks)) + Q_24_8(50);
         temp1 = Q_24_8_TO_INT(temp1);
         game->results.silkiness = temp1 & 0x7F;
 
         // Calculate amount of powder
         temp1 = Q_24_8(temp1);
-        temp1 = divfx32(temp1, Q_24_8(100));
+        temp1 = Q_24_8_div(temp1, Q_24_8(100));
         temp2 = Q_24_8(game->powder * game->playerCount);
-        temp2 = mulfx32(temp2, temp1);
+        temp2 = Q_24_8_mul(temp2, temp1);
         game->results.powder = Q_24_8_TO_INT(temp2);
 
         // Choose random second results page
@@ -2061,10 +2061,10 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
                     // "Neat" inputs are those done at a regular interval
                     temp1 = game->players[i].maxNeatInputStreak;
                     temp1 = Q_24_8(temp1);
-                    temp1 = mulfx32(temp1, Q_24_8(100));
+                    temp1 = Q_24_8_mul(temp1, Q_24_8(100));
                     temp2 = game->players[i].numAPresses;
                     temp2 = Q_24_8(temp2);
-                    temp2 = divfx32(temp1, temp2);
+                    temp2 = Q_24_8_div(temp1, temp2);
                 }
                 else
                 {
@@ -2078,10 +2078,10 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
                     // done at the same time as another player
                     temp1 = game->players[i].numSyncedAPresses;
                     temp1 = Q_24_8(temp1);
-                    temp1 = mulfx32(temp1, Q_24_8(100));
+                    temp1 = Q_24_8_mul(temp1, Q_24_8(100));
                     temp2 = game->players[i].numAPresses;
                     temp2 = Q_24_8(temp2);
-                    temp2 = divfx32(temp1, temp2);
+                    temp2 = Q_24_8_div(temp1, temp2);
                 }
                 else
                 {
@@ -2104,10 +2104,10 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
                     // player spent pressing A
                     temp1 = game->players[i].timePressingA;
                     temp1 = Q_24_8(temp1);
-                    temp1 = mulfx32(temp1, Q_24_8(100));
+                    temp1 = Q_24_8_mul(temp1, Q_24_8(100));
                     temp2 = game->timer;
                     temp2 = Q_24_8(temp2);
-                    temp2 = divfx32(temp1, temp2);
+                    temp2 = Q_24_8_div(temp1, temp2);
                 }
                 break;
             }
@@ -2716,12 +2716,12 @@ static void CreateBerrySprites(struct BerryCrushGame * game, struct BerryCrushGa
         distance = Q_N_S(7, distance);
         var2 = speed + Q_8_8(0.125);
         var2 = var2 / 2; // go from Q8.8 to Q9.7
-        var1 = divfxn16(7, Q_N_S(7, 127), var2);
+        var1 = Q_N_S_div(7, Q_N_S(7, 127), var2);
         sX = Q_N_S(7, (u16)spritesManager->berrySprites[i]->pos1.x);
-        sXSpeed = divfxn16(7, distance, var1);
-        var1 = mulfxn16(7, var1, Q_N_S(7, 0.666666667));
+        sXSpeed = Q_N_S_div(7, distance, var1);
+        var1 = Q_N_S_mul(7, var1, Q_N_S(7, 0.666666667));
         sSinIdx = 0;
-        sSinSpeed = divfxn16(7, Q_N_S(7, 127), var1);
+        sSinSpeed = Q_N_S_div(7, Q_N_S(7, 127), var1);
         sBitfield |= F_MOVE_HORIZ;
         if (spritesManager->playerCoords[i]->berryXOffset < 0)
             StartSpriteAffineAnim(spritesManager->berrySprites[i], 1);
@@ -2883,7 +2883,7 @@ static void FramesToMinSec(struct BerryCrushGame_Gfx * gfx, u16 frames)
 
     gfx->minutes = frames / 3600;
     gfx->secondsInt = (frames % 3600) / 60;
-    frac_secs = mulfx16(Q_8_8(frames % 60), Q_8_8(0.016666667));
+    frac_secs = Q_8_8_mul(Q_8_8(frames % 60), Q_8_8(0.016666667));
 
     for (i = 0; i < 8; i++)
     {
@@ -3461,12 +3461,12 @@ static void SpriteCB_Sparkle_Init(struct Sprite * sprite)
     targetY = 168;
     sBitfield = targetY;
     xMult = Q_N_S(7, sprite->pos2.x);
-    var = divfxn16(7, Q_N_S(7, targetY - (u16)sprite->pos1.y), (speed + Q_8_8(0.125)) >> 1);
+    var = Q_N_S_div(7, Q_N_S(7, targetY - (u16) sprite->pos1.y), (speed + Q_8_8(0.125)) >> 1);
     sprite->sX = Q_N_S(7, (u16)sprite->pos1.x);
-    sXSpeed = divfxn16(7, xMult, var);
-    speed = mulfxn16(7, var, Q_N_S(7, 0.666666667));
+    sXSpeed = Q_N_S_div(7, xMult, var);
+    speed = Q_N_S_mul(7, var, Q_N_S(7, 0.666666667));
     sSinIdx = zero;
-    sSinSpeed = divfxn16(7, Q_N_S(7, 127), speed);
+    sSinSpeed = Q_N_S_div(7, Q_N_S(7, 127), speed);
     sAmplitude = sprite->pos2.x / 4;
     sBitfield |= F_MOVE_HORIZ;
     sprite->pos2.y = zero;

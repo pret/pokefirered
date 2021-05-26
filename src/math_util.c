@@ -1,7 +1,7 @@
 #include "global.h"
 #include "math_util.h"
 
-fx16 Q_8_8_mul(fx16 x, fx16 y)
+s16 Q_8_8_mul(s16 x, s16 y)
 {
     s32 result;
 
@@ -11,7 +11,7 @@ fx16 Q_8_8_mul(fx16 x, fx16 y)
     return result;
 }
 
-fxn16 Q_N_S_mul(u8 s, fxn16 x, fxn16 y)
+s16 Q_N_S_mul(u8 s, s16 x, s16 y)
 {
     s32 result;
 
@@ -21,7 +21,7 @@ fxn16 Q_N_S_mul(u8 s, fxn16 x, fxn16 y)
     return result;
 }
 
-fx32 Q_24_8_mul(fx32 x, fx32 y)
+s32 Q_24_8_mul(s32 x, s32 y)
 {
     s64 result;
 
@@ -31,7 +31,7 @@ fx32 Q_24_8_mul(fx32 x, fx32 y)
     return result;
 }
 
-fx16 Q_8_8_div(fx16 x, fx16 y)
+s16 Q_8_8_div(s16 x, s16 y)
 {
     if (y == 0)
     {
@@ -40,7 +40,7 @@ fx16 Q_8_8_div(fx16 x, fx16 y)
     return (x << 8) / y;
 }
 
-fxn16 Q_N_S_div(u8 s, fxn16 x, fxn16 y)
+s16 Q_N_S_div(u8 s, s16 x, s16 y)
 {
     if (y == 0)
     {
@@ -49,7 +49,7 @@ fxn16 Q_N_S_div(u8 s, fxn16 x, fxn16 y)
     return (x << s) / y;
 }
 
-fx32 Q_24_8_div(fx32 x, fx32 y)
+s32 Q_24_8_div(s32 x, s32 y)
 {
     s64 _x;
 
@@ -62,7 +62,7 @@ fx32 Q_24_8_div(fx32 x, fx32 y)
     return _x / y;
 }
 
-fx16 Q_8_8_inv(fx16 y)
+s16 Q_8_8_inv(s16 y)
 {
     s32 x;
 
@@ -70,7 +70,7 @@ fx16 Q_8_8_inv(fx16 y)
     return x / y;
 }
 
-fxn16 Q_N_S_inv(u8 s, fxn16 y)
+s16 Q_N_S_inv(u8 s, s16 y)
 {
     s32 x;
 
@@ -78,7 +78,7 @@ fxn16 Q_N_S_inv(u8 s, fxn16 y)
     return x / y;
 }
 
-fx32 Q_24_8_inv(fx32 y)
+s32 Q_24_8_inv(s32 y)
 {
     s64 x;
 

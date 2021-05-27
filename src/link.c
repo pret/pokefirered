@@ -1381,7 +1381,7 @@ void SetLinkStandbyCallback(void)
 {
     if (gWirelessCommType == 1)
     {
-        LinkRfu_SetRfuFuncToSend6600();
+        Rfu_SetLinkStandbyCallback();
     }
     else
     {

@@ -1414,7 +1414,7 @@ const u32 gTradeGba_Gfx[] = INCBIN_U32("graphics/link/gba.4bpp");
 
 const u16 gUnknown_8EAFE80[] = INCBIN_U16("graphics/interface/blank2.gbapal");
 
-const u16 gUnknown_8EAFEA0[] = INCBIN_U16("graphics/berry_crush/berry_crush.gbapal");
+const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("graphics/berry_crush/berry_crush.gbapal");
 const u16 gUnknown_8EAFF60[] = INCBIN_U16("graphics/unknown/unknown_EAFF60.gbapal");
-const u32 gUnknown_8EAFFC0[] = INCBIN_U32("graphics/berry_crush/berry_crush.4bpp.lz");
-const u32 gUnknown_8EB0ADC[] = INCBIN_U32("graphics/berry_crush/data_EB0ADC.bin.lz");
+const u32 gBerryCrush_Crusher_Gfx[] = INCBIN_U32("graphics/berry_crush/berry_crush.4bpp.lz");
+const u32 gBerryCrush_Crusher_Tilemap[] = INCBIN_U32("graphics/berry_crush/data_EB0ADC.bin.lz");

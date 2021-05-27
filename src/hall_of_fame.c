@@ -1198,7 +1198,7 @@ static bool8 DrawHofBackground(void)
         break;
     case 3:
         InitStandardTextBoxWindows();
-        ResetBg0();
+        InitTextBoxGfxAndPrinters();
         break;
     case 4:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

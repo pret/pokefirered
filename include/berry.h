@@ -68,10 +68,10 @@ const struct Berry * GetBerryInfo(u8 berryIdx);
 extern const struct Berry gBerries[];
 
 struct BerryCrushStats {
-    u8 unk0;
+    u8 difficulty;
     u16 powder;
 };
 
-extern const struct BerryCrushStats gBerryCrushStats[];
+extern const struct BerryCrushStats gBerryCrush_BerryData[];
 
 #endif // GUARD_BERRY_H

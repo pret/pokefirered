@@ -5,17 +5,17 @@
 #include "librfu.h"
 #include "AgbRfu_LinkManager.h"
 
-#define RFU_COMMAND_0x8800 0x8800
-#define RFU_COMMAND_0x8900 0x8900
-#define RFU_COMMAND_0xa100 0xa100
-#define RFU_COMMAND_0x7700 0x7700
-#define RFU_COMMAND_0x7800 0x7800
-#define RFU_COMMAND_0x6600 0x6600
-#define RFU_COMMAND_0x5f00 0x5f00
-#define RFU_COMMAND_0x2f00 0x2f00
-#define RFU_COMMAND_0xbe00 0xbe00
-#define RFU_COMMAND_0xee00 0xee00
-#define RFU_COMMAND_0xed00 0xed00
+#define RFUCMD_SEND_PACKET        0x2F00
+#define RFUCMD_READY_CLOSE_LINK   0x5f00
+#define RFUCMD_READY_EXIT_STANDBY 0x6600
+#define RFUCMD_0x7700             0x7700
+#define RFUCMD_0x7800             0x7800
+#define RFUCMD_0x8800             0x8800
+#define RFUCMD_0x8900             0x8900
+#define RFUCMD_SEND_BLOCK_REQ     0xa100
+#define RFUCMD_SEND_HELD_KEYS     0xbe00
+#define RFUCMD_0xED00             0xed00
+#define RFUCMD_0xEE00             0xee00
 
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub
@@ -196,7 +196,7 @@ void DestroyWirelessStatusIndicatorSprite(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
 void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
 void MEvent_CreateTask_Leader(u32 arg0);
-void RfuPrepareSend0x2f00(void * data);
+void Rfu_SendPacket(void * data);
 u8 CreateTask_ListenToWireless(void);
 void LinkRfu_DestroyIdleTask(void);
 void sub_80F86F4(void);
@@ -275,7 +275,7 @@ bool32 GetRfuUnkCE8(void);
 void sub_80FA4A8(void);
 void sub_80FB9D0(void);
 void sub_80FB030(u32 a0);
-void sub_80FBA44(void);
+void ClearRecvCommands(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

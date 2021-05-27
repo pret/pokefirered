@@ -24,7 +24,7 @@ extern const u32 gUnknown_8479688[];
 extern const u32 gUnknown_8479748[];
 
 bool32 DigitObjUtil_Init(u32 count);
-void DigitObjUtil_Teardown(void);
+void DigitObjUtil_Free(void);
 bool32 DigitObjUtil_CreatePrinter(u32 id, s32 num, const struct DigitObjUtilTemplate *template);
 void DigitObjUtil_PrintNumOn(u32 id, s32 num);
 void DigitObjUtil_DeletePrinter(u32 id);

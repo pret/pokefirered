@@ -1431,12 +1431,12 @@ static void sub_8155A78(void)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateTask(Task_SaveGame_UpdatedLinkRecords, 0);
+            CreateTask(Task_LinkSave, 0);
             gUnknown_203F440->state++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(Task_SaveGame_UpdatedLinkRecords))
+        if (!FuncIsActiveTask(Task_LinkSave))
             gUnknown_203F440->state++;
         break;
     default:
@@ -1577,7 +1577,7 @@ static void sub_8155EA0(void)
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
     InitStandardTextBoxWindows();
-    ResetBg0();
+    InitTextBoxGfxAndPrinters();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetBgTilemapBuffer(3, gUnknown_203F440->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, gUnknown_203F440->tilemapBuffers[1]);

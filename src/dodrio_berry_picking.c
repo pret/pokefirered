@@ -299,7 +299,7 @@ static void sub_8150A84(u8 taskId)
     case 2:
         if (!sub_8155E68())
         {
-            LinkRfu_SetRfuFuncToSend6600();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_203F3E0->unk0C++;
         }
         break;
@@ -412,7 +412,7 @@ static void sub_8150CF4(void)
         gUnknown_203F3E0->unk10++;
         break;
     case 1:
-        LinkRfu_SetRfuFuncToSend6600();
+        Rfu_SetLinkStandbyCallback();
         gUnknown_203F3E0->unk10++;
         break;
     case 2:
@@ -424,7 +424,7 @@ static void sub_8150CF4(void)
     case 3:
         if (!IsMinigameCountdownRunning())
         {
-            LinkRfu_SetRfuFuncToSend6600();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_203F3E0->unk10++;
         }
         break;
@@ -1023,12 +1023,12 @@ static void sub_815184C(void)
     {
         if (gUnknown_203F3E0->unk128 != 0)
         {
-            sub_80FBA44();
+            ClearRecvCommands();
             gUnknown_203F3E0->unk124 = 0;
         }
         else if (gUnknown_203F3E0->unk124 > 70)
         {
-            sub_80FBA44();
+            ClearRecvCommands();
             gUnknown_203F3E0->unk124 = 0;
         }
     }
@@ -1089,12 +1089,12 @@ static void sub_8151A5C(void)
     {
         if (gUnknown_203F3E0->unk128 != 0)
         {
-            sub_80FBA44();
+            ClearRecvCommands();
             gUnknown_203F3E0->unk124 = 0;
         }
         else if (gUnknown_203F3E0->unk124 > 70)
         {
-            sub_80FBA44();
+            ClearRecvCommands();
             gUnknown_203F3E0->unk124 = 0;
         }
     }

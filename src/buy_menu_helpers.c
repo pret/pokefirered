@@ -11,7 +11,7 @@
 
 static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
 {
-    {
+    [BUYWINID_MONEYBOX] = {
         .bg = 0x0,
         .tilemapLeft = 0x1,
         .tilemapTop = 0x1,
@@ -20,7 +20,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
         .paletteNum = 0xF,
         .baseBlock = 0x27,
     },
-    {
+    [BUYWINID_BAGQUANT] = {
         .bg = 0x0,
         .tilemapLeft = 0x1,
         .tilemapTop = 0xB,
@@ -29,7 +29,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
         .paletteNum = 0xF,
         .baseBlock = 0x3F,
     },
-    {
+    [BUYWINID_MSGBOX] = {
         .bg = 0x0,
         .tilemapLeft = 0x2,
         .tilemapTop = 0xF,
@@ -38,7 +38,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
         .paletteNum = 0xE,
         .baseBlock = 0x59,
     },
-    {
+    [BUYWINID_BUYPRICEANDQUANTITY] = {
         .bg = 0x0,
         .tilemapLeft = 0x11,
         .tilemapTop = 0x9,
@@ -47,7 +47,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
         .paletteNum = 0xE,
         .baseBlock = 0xC1,
     },
-    {
+    [BUYWINID_LISTMENU] = {
         .bg = 0x0,
         .tilemapLeft = 0xB,
         .tilemapTop = 0x1,
@@ -56,7 +56,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
         .paletteNum = 0xE,
         .baseBlock = 0xF1,
     },
-    {
+    [BUYWINID_ITEMDESCRIPTION] = {
         .bg = 0x0,
         .tilemapLeft = 0x5,
         .tilemapTop = 0xE,
@@ -71,7 +71,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesNormal[] =
 // firered uses different layout when selling TMs
 static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
 {
-    {
+    [BUYWINID_MONEYBOX] = {
         .bg = 0x0,
         .tilemapLeft = 0x1,
         .tilemapTop = 0x1,
@@ -80,7 +80,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
         .paletteNum = 0xF,
         .baseBlock = 0x27,
     },
-    {
+    [BUYWINID_BAGQUANT] = {
         .bg = 0x0,
         .tilemapLeft = 0x1,
         .tilemapTop = 0xB,
@@ -89,7 +89,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
         .paletteNum = 0xF,
         .baseBlock = 0x3F,
     },
-    {
+    [BUYWINID_MSGBOX] = {
         .bg = 0x0,
         .tilemapLeft = 0x2,
         .tilemapTop = 0xF,
@@ -98,7 +98,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
         .paletteNum = 0xE,
         .baseBlock = 0x59,
     },
-    {
+    [BUYWINID_BUYPRICEANDQUANTITY] = {
         .bg = 0x0,
         .tilemapLeft = 0x11,
         .tilemapTop = 0x9,
@@ -107,7 +107,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
         .paletteNum = 0xE,
         .baseBlock = 0xC1,
     },
-    {
+    [BUYWINID_LISTMENU] = {
         .bg = 0x0,
         .tilemapLeft = 0xB,
         .tilemapTop = 0x1,
@@ -116,7 +116,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
         .paletteNum = 0xE,
         .baseBlock = 0xF1,
     },
-    {
+    [BUYWINID_ITEMDESCRIPTION] = {
         .bg = 0x0,
         .tilemapLeft = 0xC,
         .tilemapTop = 0xC,
@@ -125,7 +125,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplatesTM[] =
         .paletteNum = 0xE,
         .baseBlock = 0x19B,
     },
-    {
+    [BUYWINID_TMHMMOVE] = {
         .bg = 0x0,
         .tilemapLeft = 0x1,
         .tilemapTop = 0xE,
@@ -150,9 +150,9 @@ static const struct WindowTemplate sShopBuyMenuYesNoWindowTemplate =
 
 static const u8 sShopBuyMenuTextColors[][3] =
 {
-    {0, 1, 2},
-    {0, 2, 3},
-    {0, 3, 2}
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY}
 };
 
 void BuyMenuInitWindows(bool32 isSellingTM)
@@ -162,19 +162,19 @@ void BuyMenuInitWindows(bool32 isSellingTM)
     else
         InitWindows(sShopBuyMenuWindowTemplatesTM);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x1, 0xD0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x13, 0xE0);
-    TextWindow_SetStdFrame0_WithPal(0, 0xA, 0xF0);
-    PutWindowTilemap(0);
-    PutWindowTilemap(4);
-    PutWindowTilemap(5);
+    TextWindow_SetUserSelectedFrame(BUYWINID_MONEYBOX, 0x1, 0xD0);
+    TextWindow_LoadResourcesStdFrame0(BUYWINID_MONEYBOX, 0x13, 0xE0);
+    TextWindow_SetStdFrame0_WithPal(BUYWINID_MONEYBOX, 0xA, 0xF0);
+    PutWindowTilemap(BUYWINID_MONEYBOX);
+    PutWindowTilemap(BUYWINID_LISTMENU);
+    PutWindowTilemap(BUYWINID_ITEMDESCRIPTION);
     if (isSellingTM == TRUE)
-        PutWindowTilemap(6);
+        PutWindowTilemap(BUYWINID_TMHMMOVE);
 }
 
 void BuyMenuDrawMoneyBox(void)
 {
-    PrintMoneyAmountInMoneyBoxWithBorder(0, 0xA, 0xF, GetMoney(&gSaveBlock1Ptr->money));
+    PrintMoneyAmountInMoneyBoxWithBorder(BUYWINID_MONEYBOX, 0xA, 0xF, GetMoney(&gSaveBlock1Ptr->money));
 }
 
 void BuyMenuPrint(u8 windowId, u8 font, const u8 *text, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 color)
@@ -184,7 +184,7 @@ void BuyMenuPrint(u8 windowId, u8 font, const u8 *text, u8 x, u8 y, u8 letterSpa
 
 void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)
 {
-    DisplayMessageAndContinueTask(taskId, 2, 0x13, 0xE, GetMartUnk16_4(), GetTextSpeedSetting(), text, callback);
+    DisplayMessageAndContinueTask(taskId, BUYWINID_MSGBOX, 0x13, 0xE, MartGetContextFontId(), GetTextSpeedSetting(), text, callback);
     ScheduleBgCopyTilemapToVram(0);
 }
 

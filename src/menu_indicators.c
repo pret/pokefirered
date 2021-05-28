@@ -423,10 +423,10 @@ u8 ListMenuAddCursorObjectInternal(const struct CursorStruct *cursor, u32 cursor
 {
     switch (cursorKind)
     {
-    case 0:
+    case CURSORKIND_OUTLINE:
     default:
         return ListMenuAddRedOutlineCursorObject(cursor);
-    case 1:
+    case CURSORKIND_ARROW:
         return ListMenuAddRedArrowCursorObject(cursor);
     }
 }
@@ -435,10 +435,10 @@ void ListMenuUpdateCursorObject(u8 taskId, u16 x, u16 y, u32 cursorKind)
 {
     switch (cursorKind)
     {
-    case 0:
+    case CURSORKIND_OUTLINE:
         ListMenuUpdateRedOutlineCursorObject(taskId, x, y);
         break;
-    case 1:
+    case CURSORKIND_ARROW:
         ListMenuUpdateRedArrowCursorObject(taskId, x, y);
         break;
     }
@@ -448,10 +448,10 @@ void ListMenuRemoveCursorObject(u8 taskId, u32 cursorKind)
 {
     switch (cursorKind)
     {
-    case 0:
+    case CURSORKIND_OUTLINE:
         ListMenuRemoveRedOutlineCursorObject(taskId);
         break;
-    case 1:
+    case CURSORKIND_ARROW:
         ListMenuRemoveRedArrowCursorObject(taskId);
         break;
     }

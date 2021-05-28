@@ -3,6 +3,11 @@
 
 #include "global.h"
 
+enum {
+    CURSORKIND_OUTLINE = 0, // Normal selection cursor
+    CURSORKIND_ARROW,       // Used when reorganizing the Bag
+};
+
 struct ScrollArrowsTemplate
 {
     u8 firstArrowType;
@@ -14,8 +19,8 @@ struct ScrollArrowsTemplate
     u16 fullyUpThreshold;
     u16 fullyDownThreshold;
     u16 tileTag;
-    u16 palTag;
-    u8 palNum;
+    u16 palTag; // for dynamic alloc; set to SPRITE_INVALID_TAG to use static alloc
+    u8 palNum; // for static alloc only
 };
 
 struct CursorStruct

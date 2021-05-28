@@ -887,7 +887,7 @@ static bool32 RfuProcessEnqueuedRecvBlock(void)
 
 static void HandleSendFailure(u8 unused, u32 flags)
 {
-    s32 i, j;
+    s32 i, j, temp;
 
     const u8 *r10 = Rfu.cmd_8800_sendbuf.payload;
     for (i = 0; i < Rfu.cmd_8800_sendbuf.count; i++)
@@ -897,12 +897,14 @@ static void HandleSendFailure(u8 unused, u32 flags)
             sResendBlock16[0] = RFUCMD_0x8900 | i;
             for (j = 0; j < 7; j++)
             {
-                sResendBlock16[j + 1] = (r10[12 * i + (j << 1) + 1] << 8) | r10[12 * i + (j << 1) + 0];
+                temp = j << 1;
+                sResendBlock16[j + 1] = (r10[12 * i + temp + 1] << 8) | r10[12 * i + temp + 0];
             }
             for (j = 0; j < 7; j++)
             {
-                sResendBlock8[2 * j + 1] = sResendBlock16[j] >> 8;
-                sResendBlock8[2 * j + 0] = sResendBlock16[j];
+                temp = j << 1;
+                sResendBlock8[temp + 1] = sResendBlock16[j] >> 8;
+                sResendBlock8[temp + 0] = sResendBlock16[j];
 
                 j++;j--; // Needed to match;
             }

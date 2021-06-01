@@ -31,6 +31,9 @@
 #define BACKUP_QUEUE_NUM_SLOTS 2
 #define BACKUP_QUEUE_SLOT_LENGTH 14
 
+#define UNUSED_QUEUE_NUM_SLOTS 2
+#define UNUSED_QUEUE_SLOT_LENGTH 256
+
 #define RFU_PACKET_SIZE 6
 
 #define RFU_STATUS_OK                   0
@@ -57,7 +60,7 @@ struct GFtgtGnameSub
     u16 language:4;
     u16 hasNews:1;
     u16 hasCard:1;
-    u16 unk_00_6:1;
+    u16 unknown:1;
     u16 isChampion:1;
     u16 hasNationalDex:1;
     u16 gameClear:1;
@@ -125,9 +128,9 @@ struct RfuBackupQueue
     /* 0x1e */ vu8 count;
 };
 
-struct UnkRfuStruct_Sub_Unused
+struct RfuUnusedQueue
 {
-    /* 0x000 */ u8 slots[2][256];
+    /* 0x000 */ u8 slots[UNUSED_QUEUE_NUM_SLOTS][UNUSED_QUEUE_SLOT_LENGTH];
     /* 0x200 */ vu8 recv_slot;
     /* 0x201 */ vu8 send_slot;
     /* 0x202 */ vu8 count;
@@ -246,17 +249,17 @@ void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
 bool32 RfuHasErrored(void);
 
-void RfuRecvQueue_Reset(struct RfuRecvQueue *ptr);
-void RfuSendQueue_Reset(struct RfuSendQueue *ptr);
+void RfuRecvQueue_Reset(struct RfuRecvQueue *queue);
+void RfuSendQueue_Reset(struct RfuSendQueue *queue);
 
 void RfuSetStatus(u8 status, u16 msg);
 u8 RfuGetStatus(void);
-void RfuRecvQueue_Enqueue(struct RfuRecvQueue *q1, u8 *q2);
-bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *q1, u8 *q2);
-bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *q1, u8 *q2);
-void RfuBackupQueue_Enqueue(struct RfuBackupQueue *q1, const u8 *q2);
-bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue * a0, u8 *a1);
-void RfuSendQueue_Enqueue(struct RfuSendQueue * a0, u8 *a1);
+void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *src);
+bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *dest);
+bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *dest);
+void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *dest);
+bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue * queue, u8 *dest);
+void RfuSendQueue_Enqueue(struct RfuSendQueue * queue, u8 *src);
 void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders);
 void UpdateGameData_GroupLockedIn(bool8 started);
 bool32 IsRfuSerialNumberValid(u32 serialNo);

@@ -32,7 +32,7 @@
 
 // Combination of RSE's Day-Care (re-used on Four Island), FRLG's Day-Care, and egg_hatch.c
 
-extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 struct EggHatchData
 {

@@ -65,7 +65,7 @@
 #define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
 #define LINKCMD_0xCCCC             0xCCCC
 
-#define LINKTYPE_0x1111              0x1111  // trade
+#define LINKTYPE_TRADE              0x1111  // trade
 #define LINKTYPE_0x1122              0x1122  // trade
 #define LINKTYPE_0x1133              0x1133  // trade
 #define LINKTYPE_0x1144              0x1144  // trade
@@ -84,6 +84,8 @@
 
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
+
+#define IsSendCmdComplete()    (gSendCmd[0] == 0)
 
 enum
 {
@@ -280,9 +282,9 @@ bool8 IsWirelessAdapterConnected(void);
 bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
-void PrepareLocalLinkPlayerBlock(void);
+void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
-void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 isConnectionError);
 u8 sub_800A8D4(void);
 void sub_800AA24(void);
 void sub_800A900(u8 a0);

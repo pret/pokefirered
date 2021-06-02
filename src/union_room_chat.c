@@ -324,7 +324,7 @@ static void ChatEntryRoutine_Join(void)
         sWork->routineState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() && !GetRfuUnkCE8())
+        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader())
         {
             if (SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
                 sWork->routineState++;
@@ -527,14 +527,14 @@ static void ChatEntryRoutine_AskQuitChatting(void)
             sWork->routineState = 3;
             break;
         case 0:
-            sub_80FA4A8();
+            Rfu_UnionRoomChat_StopLinkManager();
             PrepareSendBuffer_Disband(sWork->sendMessageBuffer);
             sWork->routineState = 4;
             break;
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !GetRfuUnkCE8() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
         {
             if (sWork->multiplayerId == 0)
                 sWork->routineState = 6;
@@ -577,15 +577,15 @@ static void ChatEntryRoutine_ExitChat(void)
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !GetRfuUnkCE8() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
             sWork->routineState++;
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 1) && !GetRfuUnkCE8())
+        if ((GetBlockReceivedStatus() & 1) && !RfuHasFoundNewLeader())
             sWork->routineState++;
         break;
     case 5:
-        if (IsLinkTaskFinished() && !GetRfuUnkCE8())
+        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader())
         {
             SetCloseLinkCallback();
             sWork->exitDelayTimer = 0;
@@ -620,7 +620,7 @@ static void ChatEntryRoutine_Drop(void)
         }
         break;
     case 1:
-        if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !GetRfuUnkCE8())
+        if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !RfuHasFoundNewLeader())
         {
             SetCloseLinkCallback();
             sWork->exitDelayTimer = 0;
@@ -666,7 +666,7 @@ static void ChatEntryRoutine_Disbanded(void)
         }
         break;
     case 2:
-        if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !GetRfuUnkCE8())
+        if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !RfuHasFoundNewLeader())
         {
             SetCloseLinkCallback();
             sWork->exitDelayTimer = 0;
@@ -704,7 +704,7 @@ static void ChatEntryRoutine_SendMessage(void)
         sWork->routineState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !GetRfuUnkCE8() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+        if (IsLinkTaskFinished() == TRUE && !RfuHasFoundNewLeader() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
             sWork->routineState++;
         break;
     case 2:
@@ -1355,7 +1355,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         }
 
         tBlockReceivedStatus = GetBlockReceivedStatus();
-        if (!tBlockReceivedStatus && GetRfuUnkCE8())
+        if (!tBlockReceivedStatus && RfuHasFoundNewLeader())
             return;
 
         tI = 0;
@@ -1409,7 +1409,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
             // You're the leader, and the person who left is not you
             if (GetLinkPlayerCount() == 2)
             {
-                sub_80FA4A8();
+                Rfu_UnionRoomChat_StopLinkManager();
                 sWork->exitType = CHATEXIT_LEADER_LAST;
                 DestroyTask(taskId);
                 return;
@@ -1433,7 +1433,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         DestroyTask(taskId);
         break;
     case 2:
-        if (!GetRfuUnkCE8())
+        if (!RfuHasFoundNewLeader())
         {
             if (sWork->multiplayerId == 0)
                 sub_80FB030(sWork->linkPlayerCount);

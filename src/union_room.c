@@ -930,7 +930,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         else if (val == 2)
         {
             // Disconnect
-            RfuSetStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             data->state = 4;
         }
         break;
@@ -1154,7 +1154,7 @@ static bool8 Leader_SetStateIfMemberListChanged(struct UnkStruct_Leader * data, 
         data->state = state1;
         break;
     case UNION_ROOM_SPAWN_OUT:
-        RfuSetStatus(0, 0);
+        RfuSetStatus(RFU_STATUS_OK, 0);
         RedrawListMenu(data->listTaskId);
         data->state = state2;
         return TRUE;
@@ -1389,7 +1389,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         if (gReceivedRemoteLinkPlayers)
         {
             sPlayerCurrActivity = data->field_0->arr[data->leaderId].gname_uname.gname.activity;
-            RfuSetStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             switch (sPlayerCurrActivity)
             {
             case ACTIVITY_BATTLE:
@@ -1423,7 +1423,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             GetGroupLeaderSentAnOKMessage(gStringVar4, sPlayerCurrActivity);
             if (PrintOnTextbox(&data->textState, gStringVar4))
             {
-                RfuSetStatus(7, 0);
+                RfuSetStatus(RFU_STATUS_WAIT_ACK_JOIN_GROUP, 0);
                 StringCopy(gStringVar1, sUnionRoomActivityStringPtrs[sPlayerCurrActivity]);
                 StringExpandPlaceholders(gStringVar4, gUnknown_8457700);
             }
@@ -1434,7 +1434,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             {
                 if (PrintOnTextbox(&data->textState, gStringVar4))
                 {
-                    RfuSetStatus(12, 0);
+                    RfuSetStatus(RFU_STATUS_ACK_JOIN_GROUP, 0);
                     data->delayBeforePrint = 0;
                 }
             }
@@ -2182,7 +2182,7 @@ static void Task_MEvent_Leader(u8 taskId)
         }
         else if (val == 2)
         {
-            RfuSetStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             data->state = 2;
         }
         break;
@@ -2381,7 +2381,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             break;
         case 5:
             AddTextPrinterToWindow1(gUnknown_84576AC);
-            RfuSetStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             break;
         }
         break;
@@ -2546,7 +2546,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
             break;
         case 5:
             AddTextPrinterToWindow1(gUnknown_845777C);
-            RfuSetStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             break;
         }
         break;

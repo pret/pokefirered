@@ -905,11 +905,9 @@ static bool32 RfuProcessEnqueuedRecvBlock(void)
         rfu_REQ_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
         rfu_waitREQComplete();
         status = RfuGetStatus();
-        if (
-            status != RFU_STATUS_FATAL_ERROR
+        if (status != RFU_STATUS_FATAL_ERROR
          && status != RFU_STATUS_JOIN_GROUP_NO
-         && status != RFU_STATUS_LEAVE_GROUP
-        )
+         && status != RFU_STATUS_LEAVE_GROUP)
             RfuSetStatus(RFU_STATUS_CONNECTION_ERROR, 0x9000);
         rfu_clearAllSlot();
         gReceivedRemoteLinkPlayers = FALSE;

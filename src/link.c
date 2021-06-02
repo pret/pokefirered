@@ -226,7 +226,7 @@ bool8 IsWirelessAdapterConnected(void)
         return FALSE;
 
     SetWirelessCommType1();
-    sub_80F86F4();
+    InitRFUAPI();
     sub_80FB128(TRUE);
     if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
     {
@@ -378,7 +378,7 @@ void OpenLink(void)
     }
     else
     {
-        sub_80F86F4();
+        InitRFUAPI();
     }
     gReceivedRemoteLinkPlayers = FALSE;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -749,7 +749,7 @@ void ClearLinkCallback_2(void)
 {
     if (gWirelessCommType)
     {
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
     }
     else
     {
@@ -1003,7 +1003,7 @@ bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType)
 {
     if (gWirelessCommType == 1)
     {
-        return LinkRfu_PrepareCmd0xA100(blockRequestType);
+        return Rfu_SendBlockRequest(blockRequestType);
     }
     if (gLinkCallback == NULL)
     {
@@ -1309,7 +1309,7 @@ void Link_StartSend5FFFwithParam(u16 a0)
 {
     if (gWirelessCommType == 1)
     {
-        Rfu_BeginBuildAndSendCommand5F();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
@@ -1326,7 +1326,7 @@ void SetCloseLinkCallback(void)
 {
     if (gWirelessCommType == 1)
     {
-        Rfu_BeginBuildAndSendCommand5F();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
@@ -1441,12 +1441,12 @@ static void CheckErrorStatus(void)
     }
 }
 
-void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 isConnectionError)
 {
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
     sLinkErrorBuffer.lastRecvQueueCount = lastRecvQueueCount;
-    sLinkErrorBuffer.unk_06 = unk_06;
+    sLinkErrorBuffer.unk_06 = isConnectionError;
 }
 
 void CB2_LinkError(void)
@@ -1619,7 +1619,7 @@ bool8 HasLinkErrorOccurred(void)
     return gLinkErrorOccurred;
 }
 
-void PrepareLocalLinkPlayerBlock(void)
+void LocalLinkPlayerToBlock(void)
 {
     struct LinkPlayerBlock * block;
 

@@ -493,71 +493,71 @@ static const struct MenuAction sScriptMultiChoiceMenu_Exit[] = {
 };
 
 const struct MultichoiceListStruct gScriptMultiChoiceMenus[] = {
-    { sScriptMultiChoiceMenu_YesNo,  NELEMS(sScriptMultiChoiceMenu_YesNo)  },
-    { sScriptMultiChoiceMenu_Eeveelutions,  NELEMS(sScriptMultiChoiceMenu_Eeveelutions)  },
-    { sScriptMultiChoiceMenu_TrainerCardIconTint,  NELEMS(sScriptMultiChoiceMenu_TrainerCardIconTint)  },
-    { sScriptMultiChoiceMenu_HOF_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Quit)  },
-    { sScriptMultiChoiceMenu_Eggs_Quit,  NELEMS(sScriptMultiChoiceMenu_Eggs_Quit)  },
-    { sScriptMultiChoiceMenu_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_Victories_Quit)  },
-    { sScriptMultiChoiceMenu_HOF_Eggs_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Eggs_Quit)  },
-    { sScriptMultiChoiceMenu_HOF_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Victories_Quit)  },
-    { sScriptMultiChoiceMenu_Eggs_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_Eggs_Victories_Quit)  },
-    { sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit)  },
-    { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
-    { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
-    { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
-    { sScriptMultiChoiceMenu_BikeShop, NELEMS(sScriptMultiChoiceMenu_BikeShop) },
-    { sScriptMultiChoiceMenu_GameCornerPokemonPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerPokemonPrizes) },
-    { sScriptMultiChoiceMenu_TrainerSchoolWhiteboard, NELEMS(sScriptMultiChoiceMenu_TrainerSchoolWhiteboard) },
-    { sScriptMultiChoiceMenu_YesNoInfo, NELEMS(sScriptMultiChoiceMenu_YesNoInfo) },
-    { sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit, NELEMS(sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit) },
-    { sScriptMultiChoiceMenu_YesNoInfo2, NELEMS(sScriptMultiChoiceMenu_YesNoInfo2) },
-    { sScriptMultiChoiceMenu_ChallengeInfoExit, NELEMS(sScriptMultiChoiceMenu_ChallengeInfoExit) },
-    { sScriptMultiChoiceMenu_RooftopB1F, NELEMS(sScriptMultiChoiceMenu_RooftopB1F) },
-    { sScriptMultiChoiceMenu_Helix, NELEMS(sScriptMultiChoiceMenu_Helix) },
-    { sScriptMultiChoiceMenu_Dome, NELEMS(sScriptMultiChoiceMenu_Dome) },
-    { sScriptMultiChoiceMenu_Amber, NELEMS(sScriptMultiChoiceMenu_Amber) },
-    { sScriptMultiChoiceMenu_HelixAmber, NELEMS(sScriptMultiChoiceMenu_HelixAmber) },
-    { sScriptMultiChoiceMenu_DomeAmber, NELEMS(sScriptMultiChoiceMenu_DomeAmber) },
-    { sScriptMultiChoiceMenu_CeladonVendingMachine, NELEMS(sScriptMultiChoiceMenu_CeladonVendingMachine) },
-    { sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter, NELEMS(sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter) },
-    { sScriptMultiChoiceMenu_Excellent_NotSoBad, NELEMS(sScriptMultiChoiceMenu_Excellent_NotSoBad) },
-    { sScriptMultiChoiceMenu_RightLeft, NELEMS(sScriptMultiChoiceMenu_RightLeft) },
-    { sScriptMultiChoiceMenu_GameCornerTMPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerTMPrizes) },
-    { sScriptMultiChoiceMenu_DeptStoreElevator, NELEMS(sScriptMultiChoiceMenu_DeptStoreElevator) },
-    { sScriptMultiChoiceMenu_ThirstyGirlFreshWater, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWater) },
-    { sScriptMultiChoiceMenu_ThirstyGirlSodaPop, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlSodaPop) },
-    { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop) },
-    { sScriptMultiChoiceMenu_ThirstyGirlLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlLemonade) },
-    { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade) },
-    { sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade) },
-    { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade) },
-    { sScriptMultiChoiceMenu_TradeCenter_Colosseum, NELEMS(sScriptMultiChoiceMenu_TradeCenter_Colosseum) },
-    { sScriptMultiChoiceMenu_Link_Wireless, NELEMS(sScriptMultiChoiceMenu_Link_Wireless) },
-    { sScriptMultiChoiceMenu_GameCornerBattleItemPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerBattleItemPrizes) },
-    { sScriptMultiChoiceMenu_RocketHideoutElevator, NELEMS(sScriptMultiChoiceMenu_RocketHideoutElevator) },
-    { sScriptMultiChoiceMenu_LinkedDirectUnion, NELEMS(sScriptMultiChoiceMenu_LinkedDirectUnion) },
-    { sScriptMultiChoiceMenu_Island23, NELEMS(sScriptMultiChoiceMenu_Island23) },
-    { sScriptMultiChoiceMenu_Island13, NELEMS(sScriptMultiChoiceMenu_Island13) },
-    { sScriptMultiChoiceMenu_Island12, NELEMS(sScriptMultiChoiceMenu_Island12) },
-    { sScriptMultiChoiceMenu_TradeColosseumCrush, NELEMS(sScriptMultiChoiceMenu_TradeColosseumCrush) },
-    { sScriptMultiChoiceMenu_48, NELEMS(sScriptMultiChoiceMenu_48) },
-    { sScriptMultiChoiceMenu_PokejumpDodrio, NELEMS(sScriptMultiChoiceMenu_PokejumpDodrio) },
-    { sScriptMultiChoiceMenu_TradeColosseum_2, NELEMS(sScriptMultiChoiceMenu_TradeColosseum_2) },
-    { sScriptMultiChoiceMenu_Mushrooms, NELEMS(sScriptMultiChoiceMenu_Mushrooms) },
-    { sScriptMultiChoiceMenu_TradeColosseumBlankCrush, NELEMS(sScriptMultiChoiceMenu_TradeColosseumBlankCrush) },
-    { sScriptMultiChoiceMenu_TradeColosseumBlank, NELEMS(sScriptMultiChoiceMenu_TradeColosseumBlank) },
-    { sScriptMultiChoiceMenu_SeviiNavel, NELEMS(sScriptMultiChoiceMenu_SeviiNavel) },
-    { sScriptMultiChoiceMenu_SeviiBirth, NELEMS(sScriptMultiChoiceMenu_SeviiBirth) },
-    { sScriptMultiChoiceMenu_SeviiNavelBirth, NELEMS(sScriptMultiChoiceMenu_SeviiNavelBirth) },
-    { sScriptMultiChoiceMenu_Seagallop123, NELEMS(sScriptMultiChoiceMenu_Seagallop123) },
-    { sScriptMultiChoiceMenu_SeagallopV23, NELEMS(sScriptMultiChoiceMenu_SeagallopV23) },
-    { sScriptMultiChoiceMenu_SeagallopV13, NELEMS(sScriptMultiChoiceMenu_SeagallopV13) },
-    { sScriptMultiChoiceMenu_SeagallopV12, NELEMS(sScriptMultiChoiceMenu_SeagallopV12) },
-    { sScriptMultiChoiceMenu_SeagallopVermilion, NELEMS(sScriptMultiChoiceMenu_SeagallopVermilion) },
-    { sScriptMultiChoiceMenu_62, NELEMS(sScriptMultiChoiceMenu_62) },
-    { sScriptMultiChoiceMenu_JoinOrLead, NELEMS(sScriptMultiChoiceMenu_JoinOrLead) },
-    { sScriptMultiChoiceMenu_TrainerTowerMode, NELEMS(sScriptMultiChoiceMenu_TrainerTowerMode) }
+    [MULTICHOICE_YES_NO]                                     = { sScriptMultiChoiceMenu_YesNo,  NELEMS(sScriptMultiChoiceMenu_YesNo)  },
+    [MULTICHOICE_EEVEELUTIONS]                               = { sScriptMultiChoiceMenu_Eeveelutions,  NELEMS(sScriptMultiChoiceMenu_Eeveelutions)  },
+    [MULTICHOICE_TRAINER_CARD_ICON_TINT]                     = { sScriptMultiChoiceMenu_TrainerCardIconTint,  NELEMS(sScriptMultiChoiceMenu_TrainerCardIconTint)  },
+    [MULTICHOICE_HOF_QUIT]                                   = { sScriptMultiChoiceMenu_HOF_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Quit)  },
+    [MULTICHOICE_EGGS_QUIT]                                  = { sScriptMultiChoiceMenu_Eggs_Quit,  NELEMS(sScriptMultiChoiceMenu_Eggs_Quit)  },
+    [MULTICHOICE_VICTORIES_QUIT]                             = { sScriptMultiChoiceMenu_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_Victories_Quit)  },
+    [MULTICHOICE_HOF_EGGS_QUIT]                              = { sScriptMultiChoiceMenu_HOF_Eggs_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Eggs_Quit)  },
+    [MULTICHOICE_HOF_VICTORIES_QUIT]                         = { sScriptMultiChoiceMenu_HOF_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Victories_Quit)  },
+    [MULTICHOICE_EGGS_VICTORIES_QUIT]                        = { sScriptMultiChoiceMenu_Eggs_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_Eggs_Victories_Quit)  },
+    [MULTICHOICE_HOF_EGGS_VICTORIES_QUIT]                    = { sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit,  NELEMS(sScriptMultiChoiceMenu_HOF_Eggs_Victories_Quit)  },
+    [MULTICHOICE_EXIT]                                       = { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
+    [MULTICHOICE_EXIT_2]                                     = { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
+    [MULTICHOICE_EXIT_3]                                     = { sScriptMultiChoiceMenu_Exit, NELEMS(sScriptMultiChoiceMenu_Exit) },
+    [MULTICHOICE_BIKE_SHOP]                                  = { sScriptMultiChoiceMenu_BikeShop, NELEMS(sScriptMultiChoiceMenu_BikeShop) },
+    [MULTICHOICE_GAME_CORNER_POKEMON_PRIZES]                 = { sScriptMultiChoiceMenu_GameCornerPokemonPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerPokemonPrizes) },
+    [MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD]                  = { sScriptMultiChoiceMenu_TrainerSchoolWhiteboard, NELEMS(sScriptMultiChoiceMenu_TrainerSchoolWhiteboard) },
+    [MULTICHOICE_YES_NO_INFO]                                = { sScriptMultiChoiceMenu_YesNoInfo, NELEMS(sScriptMultiChoiceMenu_YesNoInfo) },
+    [MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT]              = { sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit, NELEMS(sScriptMultiChoiceMenu_SingleDoubleMultiInfoExit) },
+    [MULTICHOICE_YES_NO_INFO_2]                              = { sScriptMultiChoiceMenu_YesNoInfo2, NELEMS(sScriptMultiChoiceMenu_YesNoInfo2) },
+    [MULTICHOICE_CHALLENGE_INFO_EXIT]                        = { sScriptMultiChoiceMenu_ChallengeInfoExit, NELEMS(sScriptMultiChoiceMenu_ChallengeInfoExit) },
+    [MULTICHOICE_ROOFTOP_B1F]                                = { sScriptMultiChoiceMenu_RooftopB1F, NELEMS(sScriptMultiChoiceMenu_RooftopB1F) },
+    [MULTICHOICE_HELIX]                                      = { sScriptMultiChoiceMenu_Helix, NELEMS(sScriptMultiChoiceMenu_Helix) },
+    [MULTICHOICE_DOME]                                       = { sScriptMultiChoiceMenu_Dome, NELEMS(sScriptMultiChoiceMenu_Dome) },
+    [MULTICHOICE_AMBER]                                      = { sScriptMultiChoiceMenu_Amber, NELEMS(sScriptMultiChoiceMenu_Amber) },
+    [MULTICHOICE_HELIX_AMBER]                                = { sScriptMultiChoiceMenu_HelixAmber, NELEMS(sScriptMultiChoiceMenu_HelixAmber) },
+    [MULTICHOICE_DOME_AMBER]                                 = { sScriptMultiChoiceMenu_DomeAmber, NELEMS(sScriptMultiChoiceMenu_DomeAmber) },
+    [MULTICHOICE_CELADON_VENDING_MACHINE]                    = { sScriptMultiChoiceMenu_CeladonVendingMachine, NELEMS(sScriptMultiChoiceMenu_CeladonVendingMachine) },
+    [MULTICHOICE_GAME_CORNER_COIN_PURCHASE_COUNTER]          = { sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter, NELEMS(sScriptMultiChoiceMenu_GameCornerCoinPurchaseCounter) },
+    [MULTICHOICE_EXCELLENT_NOT_SO_BAD]                       = { sScriptMultiChoiceMenu_Excellent_NotSoBad, NELEMS(sScriptMultiChoiceMenu_Excellent_NotSoBad) },
+    [MULTICHOICE_RIGHT_LEFT]                                 = { sScriptMultiChoiceMenu_RightLeft, NELEMS(sScriptMultiChoiceMenu_RightLeft) },
+    [MULTICHOICE_GAME_CORNER_TMPRIZES]                       = { sScriptMultiChoiceMenu_GameCornerTMPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerTMPrizes) },
+    [MULTICHOICE_DEPT_STORE_ELEVATOR]                        = { sScriptMultiChoiceMenu_DeptStoreElevator, NELEMS(sScriptMultiChoiceMenu_DeptStoreElevator) },
+    [MULTICHOICE_THIRSTY_GIRL_FRESH_WATER]                   = { sScriptMultiChoiceMenu_ThirstyGirlFreshWater, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWater) },
+    [MULTICHOICE_THIRSTY_GIRL_SODA_POP]                      = { sScriptMultiChoiceMenu_ThirstyGirlSodaPop, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlSodaPop) },
+    [MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP]          = { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPop) },
+    [MULTICHOICE_THIRSTY_GIRL_LEMONADE]                      = { sScriptMultiChoiceMenu_ThirstyGirlLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlLemonade) },
+    [MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_LEMONADE]          = { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterLemonade) },
+    [MULTICHOICE_THIRSTY_GIRL_SODA_POP_LEMONADE]             = { sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlSodaPopLemonade) },
+    [MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP_LEMONADE] = { sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade, NELEMS(sScriptMultiChoiceMenu_ThirstyGirlFreshWaterSodaPopLemonade) },
+    [MULTICHOICE_TRADE_CENTER_COLOSSEUM]                     = { sScriptMultiChoiceMenu_TradeCenter_Colosseum, NELEMS(sScriptMultiChoiceMenu_TradeCenter_Colosseum) },
+    [MULTICHOICE_LINK_WIRELESS]                              = { sScriptMultiChoiceMenu_Link_Wireless, NELEMS(sScriptMultiChoiceMenu_Link_Wireless) },
+    [MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES]             = { sScriptMultiChoiceMenu_GameCornerBattleItemPrizes, NELEMS(sScriptMultiChoiceMenu_GameCornerBattleItemPrizes) },
+    [MULTICHOICE_ROCKET_HIDEOUT_ELEVATOR]                    = { sScriptMultiChoiceMenu_RocketHideoutElevator, NELEMS(sScriptMultiChoiceMenu_RocketHideoutElevator) },
+    [MULTICHOICE_LINKED_DIRECT_UNION]                        = { sScriptMultiChoiceMenu_LinkedDirectUnion, NELEMS(sScriptMultiChoiceMenu_LinkedDirectUnion) },
+    [MULTICHOICE_ISLAND_23]                                  = { sScriptMultiChoiceMenu_Island23, NELEMS(sScriptMultiChoiceMenu_Island23) },
+    [MULTICHOICE_ISLAND_13]                                  = { sScriptMultiChoiceMenu_Island13, NELEMS(sScriptMultiChoiceMenu_Island13) },
+    [MULTICHOICE_ISLAND_12]                                  = { sScriptMultiChoiceMenu_Island12, NELEMS(sScriptMultiChoiceMenu_Island12) },
+    [MULTICHOICE_TRADE_COLOSSEUM_CRUSH]                      = { sScriptMultiChoiceMenu_TradeColosseumCrush, NELEMS(sScriptMultiChoiceMenu_TradeColosseumCrush) },
+    [MULTICHOICE_48]                                         = { sScriptMultiChoiceMenu_48, NELEMS(sScriptMultiChoiceMenu_48) },
+    [MULTICHOICE_POKEJUMP_DODRIO]                            = { sScriptMultiChoiceMenu_PokejumpDodrio, NELEMS(sScriptMultiChoiceMenu_PokejumpDodrio) },
+    [MULTICHOICE_TRADE_COLOSSEUM_2]                          = { sScriptMultiChoiceMenu_TradeColosseum_2, NELEMS(sScriptMultiChoiceMenu_TradeColosseum_2) },
+    [MULTICHOICE_MUSHROOMS]                                  = { sScriptMultiChoiceMenu_Mushrooms, NELEMS(sScriptMultiChoiceMenu_Mushrooms) },
+    [MULTICHOICE_TRADE_COLOSSEUM_BLANK_CRUSH]                = { sScriptMultiChoiceMenu_TradeColosseumBlankCrush, NELEMS(sScriptMultiChoiceMenu_TradeColosseumBlankCrush) },
+    [MULTICHOICE_TRADE_COLOSSEUM_BLANK]                      = { sScriptMultiChoiceMenu_TradeColosseumBlank, NELEMS(sScriptMultiChoiceMenu_TradeColosseumBlank) },
+    [MULTICHOICE_SEVII_NAVEL]                                = { sScriptMultiChoiceMenu_SeviiNavel, NELEMS(sScriptMultiChoiceMenu_SeviiNavel) },
+    [MULTICHOICE_SEVII_BIRTH]                                = { sScriptMultiChoiceMenu_SeviiBirth, NELEMS(sScriptMultiChoiceMenu_SeviiBirth) },
+    [MULTICHOICE_SEVII_NAVEL_BIRTH]                          = { sScriptMultiChoiceMenu_SeviiNavelBirth, NELEMS(sScriptMultiChoiceMenu_SeviiNavelBirth) },
+    [MULTICHOICE_SEAGALLOP_123]                              = { sScriptMultiChoiceMenu_Seagallop123, NELEMS(sScriptMultiChoiceMenu_Seagallop123) },
+    [MULTICHOICE_SEAGALLOP_V23]                              = { sScriptMultiChoiceMenu_SeagallopV23, NELEMS(sScriptMultiChoiceMenu_SeagallopV23) },
+    [MULTICHOICE_SEAGALLOP_V13]                              = { sScriptMultiChoiceMenu_SeagallopV13, NELEMS(sScriptMultiChoiceMenu_SeagallopV13) },
+    [MULTICHOICE_SEAGALLOP_V12]                              = { sScriptMultiChoiceMenu_SeagallopV12, NELEMS(sScriptMultiChoiceMenu_SeagallopV12) },
+    [MULTICHOICE_SEAGALLOP_VERMILION]                        = { sScriptMultiChoiceMenu_SeagallopVermilion, NELEMS(sScriptMultiChoiceMenu_SeagallopVermilion) },
+    [MULTICHOICE_62]                                         = { sScriptMultiChoiceMenu_62, NELEMS(sScriptMultiChoiceMenu_62) },
+    [MULTICHOICE_JOIN_OR_LEAD]                               = { sScriptMultiChoiceMenu_JoinOrLead, NELEMS(sScriptMultiChoiceMenu_JoinOrLead) },
+    [MULTICHOICE_TRAINER_TOWER_MODE]                         = { sScriptMultiChoiceMenu_TrainerTowerMode, NELEMS(sScriptMultiChoiceMenu_TrainerTowerMode) }
 };
 
 // From Cool to Berries goes unused
@@ -729,7 +729,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         height = GetMCWindowHeight(count);
         windowId = CreateWindowFromRect(left, top, width, height);
         SetStdWindowBorderStyle(windowId, FALSE);
-        if (mcId == 30 || mcId == 13 || mcId == 41)
+        if (mcId == MULTICHOICE_GAME_CORNER_TMPRIZES || mcId == MULTICHOICE_BIKE_SHOP || mcId == MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES)
             MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
         else
             MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
@@ -766,21 +766,26 @@ static u8 GetMCWindowHeight(u8 count)
     }
 }
 
+#define tIgnoreBPress      data[4]
+#define tWrapsAround       data[5]
+#define tWindowId          data[6]
+#define tMultichoiceId     data[7]
+
 static void CreateMCMenuInputHandlerTask(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
 {
     u8 taskId;
-    if (mcId == 39 || mcId == 47 || mcId == 50)
+    if (mcId == MULTICHOICE_TRADE_CENTER_COLOSSEUM || mcId == MULTICHOICE_TRADE_COLOSSEUM_CRUSH || mcId == MULTICHOICE_TRADE_COLOSSEUM_2)
         sDelay = 12;
     else
         sDelay = 0;
     taskId = CreateTask(Task_MultichoiceMenu_HandleInput, 80);
-    gTasks[taskId].data[4] = ignoreBpress;
+    gTasks[taskId].tIgnoreBPress = ignoreBpress;
     if (count > 3)
-        gTasks[taskId].data[5] = TRUE;
+        gTasks[taskId].tWrapsAround = TRUE;
     else
-        gTasks[taskId].data[5] = FALSE;
-    gTasks[taskId].data[6] = windowId;
-    gTasks[taskId].data[7] = mcId;
+        gTasks[taskId].tWrapsAround = FALSE;
+    gTasks[taskId].tWindowId = windowId;
+    gTasks[taskId].tMultichoiceId = mcId;
     MultiChoicePrintHelpDescription(mcId);
 }
 
@@ -794,18 +799,18 @@ static void Task_MultichoiceMenu_HandleInput(u8 taskId)
             sDelay--;
         else
         {
-            if (data[5] == FALSE)
+            if (tWrapsAround == FALSE)
                 input = Menu_ProcessInputNoWrapAround();
             else
                 input = Menu_ProcessInput();
             if (JOY_NEW(DPAD_UP | DPAD_DOWN))
-                MultiChoicePrintHelpDescription(data[7]);
+                MultiChoicePrintHelpDescription(tMultichoiceId);
             switch (input)
             {
-            case -2:
+            case MENU_NOTHING_CHOSEN:
                 return;
-            case -1:
-                if (data[4])
+            case MENU_B_PRESSED:
+                if (tIgnoreBPress)
                     return;
                 PlaySE(SE_SELECT);
                 gSpecialVar_Result = SCR_MENU_CANCEL;
@@ -814,26 +819,31 @@ static void Task_MultichoiceMenu_HandleInput(u8 taskId)
                 gSpecialVar_Result = input;
                 break;
             }
-            DestroyScriptMenuWindow(data[6]);
+            DestroyScriptMenuWindow(tWindowId);
             DestroyTask(taskId);
             EnableBothScriptContexts();
         }
     }
 }
 
+#undef tIgnoreBPress
+#undef tWrapsAround
+#undef tWindowId
+#undef tMultichoiceId
+
 static void MultiChoicePrintHelpDescription(u8 mcId)
 {
     switch (mcId)
     {
-    case 39:
+    case MULTICHOICE_TRADE_CENTER_COLOSSEUM:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_CableClub_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 47:
+    case MULTICHOICE_TRADE_COLOSSEUM_CRUSH:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
-    case 50:
+    case MULTICHOICE_TRADE_COLOSSEUM_2:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_WirelessCenter_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;

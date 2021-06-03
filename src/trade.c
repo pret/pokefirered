@@ -2623,7 +2623,7 @@ static u32 TestWhetherSelectedMonCanBeTraded(struct Pokemon * party, int partyCo
     if ((player->version & 0xFF) != VERSION_RUBY &&
         (player->version & 0xFF) != VERSION_SAPPHIRE)
     {
-        if ((player->name[10] & 0xF) == 0)
+        if ((player->progressFlagsCopy & 0xF) == 0)
         {
             if (species2[cursorPos] == SPECIES_EGG)
             {
@@ -2697,11 +2697,11 @@ s32 Trade_CalcLinkPlayerCompatibilityParam(void)
 
         if (val > 0)
         {
-            if (gLinkPlayers[GetMultiplayerId()].name[10] & 0xF0)
+            if (gLinkPlayers[GetMultiplayerId()].progressFlagsCopy & 0xF0)
             {
                 if (val == 2)
                 {
-                    if (gLinkPlayers[GetMultiplayerId() ^ 1].name[10] & 0xF0)
+                    if (gLinkPlayers[GetMultiplayerId() ^ 1].progressFlagsCopy & 0xF0)
                     {
                         return 0;
                     }

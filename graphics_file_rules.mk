@@ -590,3 +590,6 @@ $(BERRYPOUCHGFXDIR)/background.4bpp: %.4bpp: %.png
 
 $(HALLOFFAMEGFXDIR)/hall_of_fame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
+
+$(TILESETGFXDIR)/primary/general/anim/water_current_landwatersedge/7.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 47

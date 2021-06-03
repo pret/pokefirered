@@ -18,11 +18,11 @@ static void _InitPrimaryTilesetAnimation(void);
 static void _InitSecondaryTilesetAnimation(void);
 
 // palette: general 00
-static const u16 sTilesetAnims_General_Flower_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_0_0.bin");
-static const u16 sTilesetAnims_General_Flower_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_0_1.bin");
-static const u16 sTilesetAnims_General_Flower_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_0_2.bin");
-static const u16 sTilesetAnims_General_Flower_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_0_3.bin");
-static const u16 sTilesetAnims_General_Flower_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_0_4.bin");
+static const u16 sTilesetAnims_General_Flower_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_general_flower_frame0.4bpp");
+static const u16 sTilesetAnims_General_Flower_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_general_flower_frame1.4bpp");
+static const u16 sTilesetAnims_General_Flower_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_general_flower_frame2.4bpp");
+static const u16 sTilesetAnims_General_Flower_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_general_flower_frame3.4bpp");
+static const u16 sTilesetAnims_General_Flower_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_general_flower_frame4.4bpp");
 
 static const u16 *const sTilesetAnims_General_Flower[] = {
     sTilesetAnims_General_Flower_Frame0,
@@ -33,14 +33,14 @@ static const u16 *const sTilesetAnims_General_Flower[] = {
 };
 
 // palette: general 04
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_1_0.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_1_1.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_1_2.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_1_3.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_1_4.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame5[] = INCBIN_U16("graphics/tileset_anims/anim_1_5.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame6[] = INCBIN_U16("graphics/tileset_anims/anim_1_6.bin");
-static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame7[] = INCBIN_U16("graphics/tileset_anims/anim_1_7.bin");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame0.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame1.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame2.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame3.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame4.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame5[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame5.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame6[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame6.4bpp");
+static const u16 sTilesetAnims_General_Water_Current_LandWatersEdge_Frame7[] = INCBIN_U16("graphics/tileset_anims/anim_general_water_current_landwatersedge_frame7.4bpp");
 
 static const u16 *const sTilesetAnims_General_Water_Current_LandWatersEdge[] = {
     sTilesetAnims_General_Water_Current_LandWatersEdge_Frame0,
@@ -54,14 +54,14 @@ static const u16 *const sTilesetAnims_General_Water_Current_LandWatersEdge[] = {
 };
 
 // palette: general 04
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_2_0.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_2_1.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_2_2.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_2_3.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_2_4.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame5[] = INCBIN_U16("graphics/tileset_anims/anim_2_5.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame6[] = INCBIN_U16("graphics/tileset_anims/anim_2_6.bin");
-static const u16 sTilesetAnims_General_SandWatersEdge_Frame7[] = INCBIN_U16("graphics/tileset_anims/anim_2_7.bin");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame0.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame1.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame2.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame3.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame4.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame5[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame5.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame6[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame6.4bpp");
+static const u16 sTilesetAnims_General_SandWatersEdge_Frame7[] = INCBIN_U16("graphics/tileset_anims/anim_general_sandwatersedge_frame7.4bpp");
 
 static const u16 *const sTilesetAnims_General_SandWatersEdge[] = {
     sTilesetAnims_General_SandWatersEdge_Frame0,
@@ -75,11 +75,11 @@ static const u16 *const sTilesetAnims_General_SandWatersEdge[] = {
 };
 
 // palette: general 00
-static const u16 sTilesetAnims_CeladonCity_Fountain_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_3_0.bin");
-static const u16 sTilesetAnims_CeladonCity_Fountain_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_3_1.bin");
-static const u16 sTilesetAnims_CeladonCity_Fountain_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_3_2.bin");
-static const u16 sTilesetAnims_CeladonCity_Fountain_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_3_3.bin");
-static const u16 sTilesetAnims_CeladonCity_Fountain_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_3_4.bin");
+static const u16 sTilesetAnims_CeladonCity_Fountain_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_celadoncity_fountain_frame0.4bpp");
+static const u16 sTilesetAnims_CeladonCity_Fountain_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_celadoncity_fountain_frame1.4bpp");
+static const u16 sTilesetAnims_CeladonCity_Fountain_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_celadoncity_fountain_frame2.4bpp");
+static const u16 sTilesetAnims_CeladonCity_Fountain_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_celadoncity_fountain_frame3.4bpp");
+static const u16 sTilesetAnims_CeladonCity_Fountain_Frame4[] = INCBIN_U16("graphics/tileset_anims/anim_celadoncity_fountain_frame4.4bpp");
 static const u16 gUnknown_83ABD94[16] = {};
 
 static const u16 *const sTilesetAnims_CeladonCity_Fountain[] = {
@@ -90,10 +90,10 @@ static const u16 *const sTilesetAnims_CeladonCity_Fountain[] = {
     sTilesetAnims_CeladonCity_Fountain_Frame4
 };
 
-static const u16 sTilesetAnims_SilphCo_Fountain_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_4_0.bin");
-static const u16 sTilesetAnims_SilphCo_Fountain_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_4_1.bin");
-static const u16 sTilesetAnims_SilphCo_Fountain_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_4_2.bin");
-static const u16 sTilesetAnims_SilphCo_Fountain_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_4_3.bin");
+static const u16 sTilesetAnims_SilphCo_Fountain_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_silphco_fountain_frame0.4bpp");
+static const u16 sTilesetAnims_SilphCo_Fountain_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_silphco_fountain_frame1.4bpp");
+static const u16 sTilesetAnims_SilphCo_Fountain_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_silphco_fountain_frame2.4bpp");
+static const u16 sTilesetAnims_SilphCo_Fountain_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_silphco_fountain_frame3.4bpp");
 static const u16 gUnknown_83AC1C8[16] = {};
 
 static const u16 *const sTilesetAnims_SilphCo_Fountain[] = {
@@ -103,10 +103,10 @@ static const u16 *const sTilesetAnims_SilphCo_Fountain[] = {
     sTilesetAnims_SilphCo_Fountain_Frame3
 };
 
-static const u16 sTilesetAnims_MtEmber_Steam_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_5_0.bin");
-static const u16 sTilesetAnims_MtEmber_Steam_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_5_1.bin");
-static const u16 sTilesetAnims_MtEmber_Steam_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_5_2.bin");
-static const u16 sTilesetAnims_MtEmber_Steam_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_5_3.bin");
+static const u16 sTilesetAnims_MtEmber_Steam_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_mtember_steam_frame0.4bpp");
+static const u16 sTilesetAnims_MtEmber_Steam_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_mtember_steam_frame1.4bpp");
+static const u16 sTilesetAnims_MtEmber_Steam_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_mtember_steam_frame2.4bpp");
+static const u16 sTilesetAnims_MtEmber_Steam_Frame3[] = INCBIN_U16("graphics/tileset_anims/anim_mtember_steam_frame3.4bpp");
 
 static const u16 *const sTilesetAnims_MtEmber_Steam[] = {
     sTilesetAnims_MtEmber_Steam_Frame0,
@@ -115,17 +115,17 @@ static const u16 *const sTilesetAnims_MtEmber_Steam[] = {
     sTilesetAnims_MtEmber_Steam_Frame3
 };
 
-static const u16 sTilesetAnims_VermilionGym_MotorizedDoor_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_6_0.bin");
-static const u16 sTilesetAnims_VermilionGym_MotorizedDoor_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_6_1.bin");
+static const u16 sTilesetAnims_VermilionGym_MotorizedDoor_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_vermiliongym_motorizeddoor_frame0.4bpp");
+static const u16 sTilesetAnims_VermilionGym_MotorizedDoor_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_vermiliongym_motorizeddoor_frame1.4bpp");
 
 static const u16 *const sTilesetAnims_VermilionGym_MotorizedDoor[] = {
     sTilesetAnims_VermilionGym_MotorizedDoor_Frame0,
     sTilesetAnims_VermilionGym_MotorizedDoor_Frame1
 };
 
-static const u16 sTilesetAnims_CeladonGym_Flowers_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_7_0.bin");
-static const u16 sTilesetAnims_CeladonGym_Flowers_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_7_1.bin");
-static const u16 sTilesetAnims_CeladonGym_Flowers_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_7_2.bin");
+static const u16 sTilesetAnims_CeladonGym_Flowers_Frame0[] = INCBIN_U16("graphics/tileset_anims/anim_celadongym_flowers_frame0.4bpp");
+static const u16 sTilesetAnims_CeladonGym_Flowers_Frame1[] = INCBIN_U16("graphics/tileset_anims/anim_celadongym_flowers_frame1.4bpp");
+static const u16 sTilesetAnims_CeladonGym_Flowers_Frame2[] = INCBIN_U16("graphics/tileset_anims/anim_celadongym_flowers_frame2.4bpp");
 
 static const u16 *const sTilesetAnims_CeladonGym_Flowers[] = {
     sTilesetAnims_CeladonGym_Flowers_Frame0,

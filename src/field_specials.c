@@ -63,7 +63,7 @@ static void Task_ElevatorShake(u8 taskId);
 static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
 static void Task_AnimateElevatorWindowView(u8 taskId);
 static void Task_CreateScriptListMenu(u8 taskId);
-static void CreateScriptListMenu(void);
+static void ResetScriptListMenuTemplate(void);
 static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used);
 static void Task_ListMenuHandleInput(u8 taskId);
 static void Task_DestroyListMenu(u8 taskId);
@@ -528,7 +528,7 @@ u16 GetPartyMonSpecies(void)
 bool8 IsMonOTNameNotPlayers(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
-    
+
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
         return FALSE;
     else
@@ -773,36 +773,36 @@ static const u8 sUnused_83F5B84[] = {
 
 static const u16 sElevatorWindowMetatilesGoingUp[][3] = {
     {
-        METATILE_SilphCo_ElevatorWindow_Top0, 
-        METATILE_SilphCo_ElevatorWindow_Top1, 
+        METATILE_SilphCo_ElevatorWindow_Top0,
+        METATILE_SilphCo_ElevatorWindow_Top1,
         METATILE_SilphCo_ElevatorWindow_Top2
     },
     {
-        METATILE_SilphCo_ElevatorWindow_Mid0, 
-        METATILE_SilphCo_ElevatorWindow_Mid1, 
+        METATILE_SilphCo_ElevatorWindow_Mid0,
+        METATILE_SilphCo_ElevatorWindow_Mid1,
         METATILE_SilphCo_ElevatorWindow_Mid2
     },
     {
-        METATILE_SilphCo_ElevatorWindow_Bottom0, 
-        METATILE_SilphCo_ElevatorWindow_Bottom1, 
+        METATILE_SilphCo_ElevatorWindow_Bottom0,
+        METATILE_SilphCo_ElevatorWindow_Bottom1,
         METATILE_SilphCo_ElevatorWindow_Bottom2
     }
 };
 
 static const u16 sElevatorWindowMetatilesGoingDown[][3] = {
     {
-        METATILE_SilphCo_ElevatorWindow_Top0, 
-        METATILE_SilphCo_ElevatorWindow_Top2, 
+        METATILE_SilphCo_ElevatorWindow_Top0,
+        METATILE_SilphCo_ElevatorWindow_Top2,
         METATILE_SilphCo_ElevatorWindow_Top1
     },
     {
-        METATILE_SilphCo_ElevatorWindow_Mid0, 
-        METATILE_SilphCo_ElevatorWindow_Mid2, 
+        METATILE_SilphCo_ElevatorWindow_Mid0,
+        METATILE_SilphCo_ElevatorWindow_Mid2,
         METATILE_SilphCo_ElevatorWindow_Mid1
     },
     {
-        METATILE_SilphCo_ElevatorWindow_Bottom0, 
-        METATILE_SilphCo_ElevatorWindow_Bottom2, 
+        METATILE_SilphCo_ElevatorWindow_Bottom0,
+        METATILE_SilphCo_ElevatorWindow_Bottom2,
         METATILE_SilphCo_ElevatorWindow_Bottom1
     }
 };
@@ -1162,6 +1162,20 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
     data[1]++;
 }
 
+#define tMaxShowed            data[0]
+#define tNumItems             data[1]
+#define tTilemapLeft          data[2]
+#define tTilemapTop           data[3]
+#define tWidth                data[4]
+#define tHeight               data[5]
+#define tSuspendOnSelect      data[6]
+#define tCursorPos            data[7]
+#define tItemsAbove           data[8]
+#define tScrollArrowsId       data[12]
+#define tWindowId             data[13]
+#define tListMenuId           data[14]
+#define tParentTaskId         data[15]
+
 void ListMenu(void)
 {
     u8 taskId;
@@ -1173,76 +1187,76 @@ void ListMenu(void)
         switch (gSpecialVar_0x8004)
         {
         case LISTMENU_BADGES:
-            task->data[0] = 4;
-            task->data[1] = 9;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 12;
-            task->data[5] = 7;
-            task->data[6] = 1;
-            task->data[15] = taskId;
+            task->tMaxShowed = 4;
+            task->tNumItems = 9;
+            task->tTilemapLeft = 1;
+            task->tTilemapTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 7;
+            task->tSuspendOnSelect = 1;
+            task->tParentTaskId = taskId;
             break;
         case LISTMENU_SILPHCO_FLOORS:
-            task->data[0] = 7;
-            task->data[1] = 12;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            task->data[7] = sElevatorScroll;
-            task->data[8] = sElevatorCursorPos;
+            task->tMaxShowed = 7;
+            task->tNumItems = 12;
+            task->tTilemapLeft = 1;
+            task->tTilemapTop = 1;
+            task->tWidth = 8;
+            task->tHeight = 12;
+            task->tSuspendOnSelect = 0;
+            task->tParentTaskId = taskId;
+            task->tCursorPos = sElevatorScroll;
+            task->tItemsAbove = sElevatorCursorPos;
             break;
         case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+            task->tMaxShowed = 4;
+            task->tNumItems = 4;
+            task->tTilemapLeft = 1;
+            task->tTilemapTop = 1;
+            task->tWidth = 8;
+            task->tHeight = 8;
+            task->tSuspendOnSelect = 0;
+            task->tParentTaskId = taskId;
             break;
         case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 6;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+            task->tMaxShowed = 4;
+            task->tNumItems = 6;
+            task->tTilemapLeft = 1;
+            task->tTilemapTop = 1;
+            task->tWidth = 8;
+            task->tHeight = 8;
+            task->tSuspendOnSelect = 0;
+            task->tParentTaskId = taskId;
             break;
         case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 8;
-            task->data[6] = 1;
-            task->data[15] = taskId;
+            task->tMaxShowed = 4;
+            task->tNumItems = 4;
+            task->tTilemapLeft = 1;
+            task->tTilemapTop = 1;
+            task->tWidth = 17;
+            task->tHeight = 8;
+            task->tSuspendOnSelect = 1;
+            task->tParentTaskId = taskId;
             break;
         case LISTMENU_BERRY_POWDER:
-            task->data[0] = 7;
-            task->data[1] = 12;
-            task->data[2] = 16;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+            task->tMaxShowed = 7;
+            task->tNumItems = 12;
+            task->tTilemapLeft = 16;
+            task->tTilemapTop = 1;
+            task->tWidth = 17;
+            task->tHeight = 12;
+            task->tSuspendOnSelect = 0;
+            task->tParentTaskId = taskId;
             break;
         case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
-            task->data[0] = 3;
-            task->data[1] = 3;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 6;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+            task->tMaxShowed = 3;
+            task->tNumItems = 3;
+            task->tTilemapLeft = 1;
+            task->tTilemapTop = 1;
+            task->tWidth = 8;
+            task->tHeight = 6;
+            task->tSuspendOnSelect = 0;
+            task->tParentTaskId = taskId;
             break;
         case 99:
             break;
@@ -1341,10 +1355,10 @@ static void Task_CreateScriptListMenu(u8 taskId)
         sListMenuLastScrollPosition = sElevatorScroll;
     else
         sListMenuLastScrollPosition = 0;
-    sListMenuItems = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
-    CreateScriptListMenu();
+    sListMenuItems = AllocZeroed(task->tNumItems * sizeof(struct ListMenuItem));
+    ResetScriptListMenuTemplate();
     mwidth = 0;
-    for (i = 0; i < task->data[1]; i++)
+    for (i = 0; i < task->tNumItems; i++)
     {
         sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
         sListMenuItems[i].index = i;
@@ -1352,23 +1366,23 @@ static void Task_CreateScriptListMenu(u8 taskId)
         if (width > mwidth)
             mwidth = width;
     }
-    task->data[4] = (mwidth + 9) / 8 + 1;
-    if (task->data[2] + task->data[4] > 29)
-        task->data[2] = 29 - task->data[4];
-    template = SetWindowTemplateFields(0, task->data[2], task->data[3], task->data[4], task->data[5], 15, 0x038);
-    task->data[13] = windowId = AddWindow(&template);
-    SetStdWindowBorderStyle(task->data[13], 0);
-    sFieldSpecialsListMenuTemplate.totalItems = task->data[1];
-    sFieldSpecialsListMenuTemplate.maxShowed = task->data[0];
-    sFieldSpecialsListMenuTemplate.windowId = task->data[13];
+    task->tWidth = (mwidth + 9) / 8 + 1;
+    if (task->tTilemapLeft + task->tWidth > 29)
+        task->tTilemapLeft = 29 - task->tWidth;
+    template = SetWindowTemplateFields(0, task->tTilemapLeft, task->tTilemapTop, task->tWidth, task->tHeight, 15, 0x038);
+    task->tWindowId = windowId = AddWindow(&template);
+    SetStdWindowBorderStyle(task->tWindowId, FALSE);
+    sFieldSpecialsListMenuTemplate.totalItems = task->tNumItems;
+    sFieldSpecialsListMenuTemplate.maxShowed = task->tMaxShowed;
+    sFieldSpecialsListMenuTemplate.windowId = task->tWindowId;
     Task_CreateMenuRemoveScrollIndicatorArrowPair(taskId);
-    task->data[14] = ListMenuInit(&sFieldSpecialsListMenuTemplate, task->data[7], task->data[8]);
-    PutWindowTilemap(task->data[13]);
-    CopyWindowToVram(task->data[13], COPYWIN_BOTH);
+    task->tListMenuId = ListMenuInit(&sFieldSpecialsListMenuTemplate, task->tCursorPos, task->tItemsAbove);
+    PutWindowTilemap(task->tWindowId);
+    CopyWindowToVram(task->tWindowId, COPYWIN_BOTH);
     gTasks[taskId].func = Task_ListMenuHandleInput;
 }
 
-static void CreateScriptListMenu(void)
+static void ResetScriptListMenuTemplate(void)
 {
     sFieldSpecialsListMenuTemplate.items = sListMenuItems;
     sFieldSpecialsListMenuTemplate.moveCursorFunc = ScriptListMenuMoveCursorFunction;
@@ -1399,7 +1413,7 @@ static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListM
     if (taskId != 0xFF)
     {
         task = &gTasks[taskId];
-        ListMenuGetScrollAndRow(task->data[14], &sFieldSpecialsListMenuScrollBuffer, NULL);
+        ListMenuGetScrollAndRow(task->tListMenuId, &sFieldSpecialsListMenuScrollBuffer, NULL);
         sListMenuLastScrollPosition = sFieldSpecialsListMenuScrollBuffer;
     }
 }
@@ -1411,12 +1425,12 @@ static void Task_ListMenuHandleInput(u8 taskId)
 
     task = &gTasks[taskId];
     task++;task--;
-    input = ListMenu_ProcessInput(task->data[14]);
+    input = ListMenu_ProcessInput(task->tListMenuId);
     switch (input)
     {
-    case -1:
+    case LIST_NOTHING_CHOSEN:
         break;
-    case -2:
+    case LIST_CANCEL:
         gSpecialVar_Result = 0x7F;
         PlaySE(SE_SELECT);
         Task_DestroyListMenu(taskId);
@@ -1424,7 +1438,7 @@ static void Task_ListMenuHandleInput(u8 taskId)
     default:
         gSpecialVar_Result = input;
         PlaySE(SE_SELECT);
-        if (task->data[6] == 0 || input == task->data[1] - 1)
+        if (task->tSuspendOnSelect == 0 || input == task->tNumItems - 1)
         {
             Task_DestroyListMenu(taskId);
         }
@@ -1442,25 +1456,25 @@ static void Task_DestroyListMenu(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     Task_ListMenuRemoveScrollIndicatorArrowPair(taskId);
-    DestroyListMenuTask(task->data[14], NULL, NULL);
+    DestroyListMenuTask(task->tListMenuId, NULL, NULL);
     Free(sListMenuItems);
-    ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
-    FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
-    ClearWindowTilemap(task->data[13]);
-    CopyWindowToVram(task->data[13], COPYWIN_GFX);
-    RemoveWindow(task->data[13]);
+    ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
+    FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
+    ClearWindowTilemap(task->tWindowId);
+    CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+    RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
 
 static void Task_SuspendListMenu(u8 taskId)
 {
-    switch (gTasks[taskId].data[6])
+    switch (gTasks[taskId].tSuspendOnSelect)
     {
     case 1:
         break;
     case 2:
-        gTasks[taskId].data[6] = 1;
+        gTasks[taskId].tSuspendOnSelect = 1;
         gTasks[taskId].func = Task_RedrawScrollArrowsAndWaitInput;
         break;
     }
@@ -1472,7 +1486,7 @@ void ReturnToListMenu(void)
     if (taskId == 0xFF)
         EnableBothScriptContexts();
     else
-        gTasks[taskId].data[6]++;
+        gTasks[taskId].tSuspendOnSelect++;
 }
 
 static void Task_RedrawScrollArrowsAndWaitInput(u8 taskId)
@@ -1491,24 +1505,38 @@ static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
         .tileTag = 2000,
         .palTag = 100
     };
-    if (task->data[0] != task->data[1])
+    if (task->tMaxShowed != task->tNumItems)
     {
-        template.firstX = 4 * task->data[4] + 8 * task->data[2];
+        template.firstX = 4 * task->tWidth + 8 * task->tTilemapLeft;
         template.firstY = 8;
-        template.secondX = 4 * task->data[4] + 8 * task->data[2];
-        template.secondY = 8 * task->data[5] + 10;
+        template.secondX = 4 * task->tWidth + 8 * task->tTilemapLeft;
+        template.secondY = 8 * task->tHeight + 10;
         template.fullyUpThreshold = 0;
-        template.fullyDownThreshold = task->data[1] - task->data[0];
-        task->data[12] = AddScrollIndicatorArrowPair(&template, &sListMenuLastScrollPosition);
+        template.fullyDownThreshold = task->tNumItems - task->tMaxShowed;
+        task->tScrollArrowsId = AddScrollIndicatorArrowPair(&template, &sListMenuLastScrollPosition);
     }
 }
 
 static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
-    if (task->data[0] != task->data[1])
-        RemoveScrollIndicatorArrowPair(task->data[12]);
+    if (task->tMaxShowed != task->tNumItems)
+        RemoveScrollIndicatorArrowPair(task->tScrollArrowsId);
 }
+
+#undef tMaxShowed
+#undef tNumItems
+#undef tTilemapLeft
+#undef tTilemapTop
+#undef tWidth
+#undef tHeight
+#undef tSuspendOnSelect
+#undef tCursorPos
+#undef tItemsAbove
+#undef tScrollArrowsId
+#undef tWindowId
+#undef tListMenuId
+#undef tParentTaskId
 
 void ForcePlayerToStartSurfing(void)
 {

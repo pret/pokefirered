@@ -659,7 +659,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
                 gLinkPlayers[i] = *(struct LinkPlayer *)gBlockRecvBuffer[i];
-                IntlConvertLinkPlayerName(&gLinkPlayers[i]);
+                ConvertLinkPlayerName(&gLinkPlayers[i]);
                 ResetBlockReceivedFlag(i);
             }
             data[0] = 4;

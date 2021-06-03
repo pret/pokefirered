@@ -127,7 +127,10 @@ struct LinkPlayer
     /* 0x00 */ u16 version;
     /* 0x02 */ u16 lp_field_2;
     /* 0x04 */ u32 trainerId;
-    /* 0x08 */ u8 name[11];
+    /* 0x08 */ u8 name[PLAYER_NAME_LENGTH + 1];
+    /* 0x10 */ u8 progressFlags; // (& 0x0F) is hasNationalDex, (& 0xF0) is hasClearedGame
+    /* 0x11 */ u8 neverRead;
+    /* 0x12 */ u8 progressFlagsCopy;
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
     /* 0x18 */ u16 id; // battle bank in battles
@@ -277,7 +280,7 @@ void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_8009FE8(void);
 void ClearLinkCallback_2(void);
 void Rfu_SetLinkStandbyCallback(void);
-void IntlConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
+void ConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
 bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType);
 void LinkVSync(void);

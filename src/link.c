@@ -321,10 +321,10 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
-    gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
+    gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
-        gLocalLinkPlayer.name[8] |= 0x10;
+        gLocalLinkPlayer.progressFlags |= 0x10;
     }
 }
 
@@ -602,11 +602,11 @@ void ProcessRecvCmds(u8 unused)
                     *linkPlayer = block->linkPlayer;
                     if ((linkPlayer->version & 0xFF) == VERSION_RUBY || (linkPlayer->version & 0xFF) == VERSION_SAPPHIRE)
                     {
-                        linkPlayer->name[10] = 0;
-                        linkPlayer->name[9] = 0;
-                        linkPlayer->name[8] = 0;
+                        linkPlayer->progressFlagsCopy = 0;
+                        linkPlayer->neverRead = 0;
+                        linkPlayer->progressFlags = 0;
                     }
-                    IntlConvertLinkPlayerName(linkPlayer);
+                    ConvertLinkPlayerName(linkPlayer);
                     if (strcmp(block->magic1, sASCIIGameFreakInc) != 0
                         || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
                     {
@@ -1640,7 +1640,7 @@ void LinkPlayerFromBlock(u32 who)
     block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
     player = &gLinkPlayers[who_];
     *player = block->linkPlayer;
-    IntlConvertLinkPlayerName(player);
+    ConvertLinkPlayerName(player);
     if (strcmp(block->magic1, sASCIIGameFreakInc) != 0 || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
     {
         SetMainCallback2(CB2_LinkError);
@@ -1718,9 +1718,9 @@ bool32 LinkRecvQueueLengthMoreThan2(void)
     return FALSE;
 }
 
-void IntlConvertLinkPlayerName(struct LinkPlayer * player)
+void ConvertLinkPlayerName(struct LinkPlayer * player)
 {
-    player->name[10] = player->name[8];
+    player->progressFlagsCopy = player->progressFlags; // ? Perhaps relocating for a longer name field
     ConvertInternationalString(player->name, player->language);
 }
 

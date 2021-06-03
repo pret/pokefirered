@@ -28,7 +28,6 @@ INTROGFXDIR := graphics/intro
 BATTLETERRAINGFXDIR := graphics/battle_terrain
 BERRYPOUCHGFXDIR := graphics/berry_pouch
 HALLOFFAMEGFXDIR := graphics/hall_of_fame
-TILESETANIMSGFXDIR := graphics/tileset_anims
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -592,5 +591,5 @@ $(BERRYPOUCHGFXDIR)/background.4bpp: %.4bpp: %.png
 $(HALLOFFAMEGFXDIR)/hall_of_fame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
-$(TILESETANIMSGFXDIR)/anim_general_water_current_landwatersedge_frame7.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/primary/general/anim/water_current_landwatersedge/7.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 47

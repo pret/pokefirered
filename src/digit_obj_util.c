@@ -74,7 +74,7 @@ bool32 DigitObjUtil_Init(u32 count)
     u32 i;
 
     if (sOamWork != NULL)
-        DigitObjUtil_Teardown();
+        DigitObjUtil_Free();
 
     sOamWork = Alloc(sizeof(*sOamWork));
     if (sOamWork == NULL)
@@ -97,7 +97,7 @@ bool32 DigitObjUtil_Init(u32 count)
     return TRUE;
 }
 
-void DigitObjUtil_Teardown(void)
+void DigitObjUtil_Free(void)
 {
     if (sOamWork != NULL)
     {

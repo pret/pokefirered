@@ -17,7 +17,7 @@ void sub_8149A6C(struct PokemonJump1_MonInfo *arg0)
     packet.species = arg0->species;
     packet.otId = arg0->otId;
     packet.personality = arg0->personality;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 bool32 sub_8149A90(int multiplayerId, struct PokemonJump1_MonInfo *arg0)
@@ -51,7 +51,7 @@ void sub_8149AE0(u32 arg0)
     struct UnkPacket2 packet;
     packet.id = 2;
     packet.unk4 = arg0;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 struct UnkPacket3
@@ -79,7 +79,7 @@ void sub_8149AF8(struct PokemonJump1_82E4 *arg0, struct PokemonJump1Sub *arg1)
     packet.unk2 = arg0->unk10;
     packet.unk3_1 = arg0->unk14;
     packet.unk4 = arg0->unkE;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 bool32 sub_8149B7C(struct PokemonJump1_82E4 *arg0, struct PokemonJump1Sub *arg1)
@@ -125,7 +125,7 @@ void sub_8149BF4(struct PokemonJump1_82E4 *arg0, u8 arg1, u16 arg2)
     packet.unk4 = arg0->unkE;
     packet.unk6 = arg1;
     packet.unk8 = arg2;
-    RfuPrepareSend0x2f00(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 bool32 sub_8149C24(struct PokemonJump1_82E4 *arg0, int multiplayerId, u8 *arg2, u16 *arg3)

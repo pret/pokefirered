@@ -977,7 +977,7 @@ CableClub_EventScript_WirelessBerryCrush:: @ 81BBD35
 	msgbox CableClub_Text_UseBerryCrush, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
-	special CheckHasAtLeastOneBerry
+	special HasAtLeastOneBerry
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_NeedBerryForBerryCrush
 	setvar VAR_0x8004, LINK_GROUP_BERRY_CRUSH

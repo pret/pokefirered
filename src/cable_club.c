@@ -516,7 +516,7 @@ u8 CreateTask_ReestablishLinkInCableClubRoom(void)
         gLinkType = LINKTYPE_MULTI_BATTLE;
         break;
     case USING_TRADE_CENTER:
-        gLinkType = LINKTYPE_0x1111;
+        gLinkType = LINKTYPE_TRADE;
         break;
     case USING_RECORD_CORNER:
         gLinkType = LINKTYPE_0x3322;
@@ -659,7 +659,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
                 gLinkPlayers[i] = *(struct LinkPlayer *)gBlockRecvBuffer[i];
-                IntlConvertLinkPlayerName(&gLinkPlayers[i]);
+                ConvertLinkPlayerName(&gLinkPlayers[i]);
                 ResetBlockReceivedFlag(i);
             }
             data[0] = 4;
@@ -859,7 +859,7 @@ static void Task_StartWirelessCableClubTrade(u8 taskId)
     case 0:
         ScriptContext2_Enable();
         FadeScreen(FADE_TO_BLACK, 0);
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
         data[0]++;
         break;
     case 1:

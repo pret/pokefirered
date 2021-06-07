@@ -388,7 +388,7 @@ void FreeAllOverworldWindowBuffers(void)
     FreeAllWindowBuffers();
 }
 
-void ResetBg0(void)
+void InitTextBoxGfxAndPrinters(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);

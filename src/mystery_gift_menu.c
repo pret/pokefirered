@@ -1270,7 +1270,7 @@ void task00_mystery_gift(u8 taskId)
         switch (mevent_client_do_exec(&data->curPromptWindowId))
         {
         case 6: // done
-            Rfu_BeginBuildAndSendCommand5F();
+            Rfu_SetCloseLinkCallback();
             data->prevPromptWindowId = data->curPromptWindowId;
             data->state = 13;
             break;
@@ -1633,7 +1633,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 33:
-        Rfu_BeginBuildAndSendCommand5F();
+        Rfu_SetCloseLinkCallback();
         StringCopy(gStringVar1, gLinkPlayers[1].name);
         data->state = 34;
         break;

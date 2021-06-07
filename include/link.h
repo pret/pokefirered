@@ -65,7 +65,7 @@
 #define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
 #define LINKCMD_0xCCCC             0xCCCC
 
-#define LINKTYPE_0x1111              0x1111  // trade
+#define LINKTYPE_TRADE              0x1111  // trade
 #define LINKTYPE_0x1122              0x1122  // trade
 #define LINKTYPE_0x1133              0x1133  // trade
 #define LINKTYPE_0x1144              0x1144  // trade
@@ -84,6 +84,8 @@
 
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
+
+#define IsSendCmdComplete()    (gSendCmd[0] == 0)
 
 enum
 {
@@ -125,7 +127,10 @@ struct LinkPlayer
     /* 0x00 */ u16 version;
     /* 0x02 */ u16 lp_field_2;
     /* 0x04 */ u32 trainerId;
-    /* 0x08 */ u8 name[11];
+    /* 0x08 */ u8 name[PLAYER_NAME_LENGTH + 1];
+    /* 0x10 */ u8 progressFlags; // (& 0x0F) is hasNationalDex, (& 0xF0) is hasClearedGame
+    /* 0x11 */ u8 neverRead;
+    /* 0x12 */ u8 progressFlagsCopy;
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
     /* 0x18 */ u16 id; // battle bank in battles
@@ -274,15 +279,15 @@ void LoadWirelessStatusIndicatorSpriteGfx(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_8009FE8(void);
 void ClearLinkCallback_2(void);
-void LinkRfu_SetRfuFuncToSend6600(void);
-void IntlConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
+void Rfu_SetLinkStandbyCallback(void);
+void ConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
 bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
-void PrepareLocalLinkPlayerBlock(void);
+void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
-void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 isConnectionError);
 u8 sub_800A8D4(void);
 void sub_800AA24(void);
 void sub_800A900(u8 a0);

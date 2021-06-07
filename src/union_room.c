@@ -861,7 +861,9 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         break;
     case 11:
-        switch (UnionRoomHandleYesNo(&data->textState, TrainerIdAndNameStillInPartnersList(ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname)))
+        switch (UnionRoomHandleYesNo(&data->textState, CheckTrainerHasLeftByIdAndName(
+            ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId),
+            data->field_0->arr[data->playerCount].gname_uname.uname)))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -928,7 +930,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         else if (val == 2)
         {
             // Disconnect
-            RfuSetErrorStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             data->state = 4;
         }
         break;
@@ -1027,7 +1029,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         gSpecialVar_Result = 8;
         break;
     case 26:
-        if (RfuIsErrorStatus1or2())
+        if (RfuHasErrored())
         {
             data->state = 29;
         }
@@ -1152,7 +1154,7 @@ static bool8 Leader_SetStateIfMemberListChanged(struct UnkStruct_Leader * data, 
         data->state = state1;
         break;
     case UNION_ROOM_SPAWN_OUT:
-        RfuSetErrorStatus(0, 0);
+        RfuSetStatus(RFU_STATUS_OK, 0);
         RedrawListMenu(data->listTaskId);
         data->state = state2;
         return TRUE;
@@ -1387,7 +1389,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         if (gReceivedRemoteLinkPlayers)
         {
             sPlayerCurrActivity = data->field_0->arr[data->leaderId].gname_uname.gname.activity;
-            RfuSetErrorStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             switch (sPlayerCurrActivity)
             {
             case ACTIVITY_BATTLE:
@@ -1407,7 +1409,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             }
         }
 
-        switch (RfuGetErrorStatus())
+        switch (RfuGetStatus())
         {
         case 1:
             data->state = 12;
@@ -1421,7 +1423,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             GetGroupLeaderSentAnOKMessage(gStringVar4, sPlayerCurrActivity);
             if (PrintOnTextbox(&data->textState, gStringVar4))
             {
-                RfuSetErrorStatus(7, 0);
+                RfuSetStatus(RFU_STATUS_WAIT_ACK_JOIN_GROUP, 0);
                 StringCopy(gStringVar1, sUnionRoomActivityStringPtrs[sPlayerCurrActivity]);
                 StringExpandPlaceholders(gStringVar4, gUnknown_8457700);
             }
@@ -1432,7 +1434,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             {
                 if (PrintOnTextbox(&data->textState, gStringVar4))
                 {
-                    RfuSetErrorStatus(12, 0);
+                    RfuSetStatus(RFU_STATUS_ACK_JOIN_GROUP, 0);
                     data->delayBeforePrint = 0;
                 }
             }
@@ -1443,7 +1445,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             break;
         }
 
-        if (!RfuGetErrorStatus() && JOY_NEW(B_BUTTON))
+        if (!RfuGetStatus() && JOY_NEW(B_BUTTON))
             data->state = 7;
         break;
     case 7:
@@ -1451,10 +1453,10 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             data->state = 8;
         break;
     case 8:
-        switch (UnionRoomHandleYesNo(&data->textState, RfuGetErrorStatus()))
+        switch (UnionRoomHandleYesNo(&data->textState, RfuGetStatus()))
         {
         case 0:
-            LinkRfuNIsend8();
+            SendLeaveGroupNotice();
             data->state = 9;
             RedrawListMenu(data->listTaskId);
             break;
@@ -1470,7 +1472,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         }
         break;
     case 9:
-        if (RfuGetErrorStatus())
+        if (RfuGetStatus())
             data->state = 6;
         break;
     case 10:
@@ -1494,7 +1496,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         break;
     case 13:
         DestroyWirelessStatusIndicatorSprite();
-        if (PrintOnTextbox(&data->textState, gUnknown_8457754[RfuGetErrorStatus()]))
+        if (PrintOnTextbox(&data->textState, gUnknown_8457754[RfuGetStatus()]))
         {
             gSpecialVar_Result = 6;
             data->state = 23;
@@ -1507,7 +1509,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         break;
     case 15:
         DestroyWirelessStatusIndicatorSprite();
-        if (PrintOnTextbox(&data->textState, gUnknown_8457754[RfuGetErrorStatus()]))
+        if (PrintOnTextbox(&data->textState, gUnknown_8457754[RfuGetStatus()]))
         {
             gSpecialVar_Result = 8;
             data->state = 23;
@@ -2180,7 +2182,7 @@ static void Task_MEvent_Leader(u8 taskId)
         }
         else if (val == 2)
         {
-            RfuSetErrorStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             data->state = 2;
         }
         break;
@@ -2228,7 +2230,7 @@ static void Task_MEvent_Leader(u8 taskId)
         }
         break;
     case 15:
-        if (RfuGetErrorStatus() == 1 || RfuGetErrorStatus() == 2)
+        if (RfuGetStatus() == 1 || RfuGetStatus() == 2)
         {
             data->state = 13;
         }
@@ -2370,7 +2372,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             data->state = 10;
         }
 
-        switch (RfuGetErrorStatus())
+        switch (RfuGetStatus())
         {
         case 1:
         case 2:
@@ -2379,7 +2381,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             break;
         case 5:
             AddTextPrinterToWindow1(gUnknown_84576AC);
-            RfuSetErrorStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             break;
         }
         break;
@@ -2396,7 +2398,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_8457838[RfuGetErrorStatus()]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_8457838[RfuGetStatus()]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2535,7 +2537,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
             data->state = 12;
         }
 
-        switch (RfuGetErrorStatus())
+        switch (RfuGetStatus())
         {
         case 1:
         case 2:
@@ -2544,7 +2546,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
             break;
         case 5:
             AddTextPrinterToWindow1(gUnknown_845777C);
-            RfuSetErrorStatus(0, 0);
+            RfuSetStatus(RFU_STATUS_OK, 0);
             break;
         }
         break;
@@ -2837,7 +2839,7 @@ static void Task_RunUnionRoom(u8 taskId)
         break;
     case 25:
         UR_RunTextPrinters_CheckPrinter0Active();
-        switch (RfuGetErrorStatus())
+        switch (RfuGetStatus())
         {
         case 4:
             HandleCancelTrade(TRUE);
@@ -2898,7 +2900,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (var5 == -2 || var5 == IN_UNION_ROOM)
                 {
                     data->playerSendBuffer[0] = IN_UNION_ROOM;
-                    RfuPrepareSend0x2f00(data->playerSendBuffer);
+                    Rfu_SendPacket(data->playerSendBuffer);
                     StringCopy(gStringVar4, gUnknown_845842C[gLinkPlayers[0].gender]);
                     data->state = 32;
                 }
@@ -2913,7 +2915,7 @@ static void Task_RunUnionRoom(u8 taskId)
                     else
                     {
                         data->playerSendBuffer[0] = sPlayerCurrActivity | IN_UNION_ROOM;
-                        RfuPrepareSend0x2f00(data->playerSendBuffer);
+                        Rfu_SendPacket(data->playerSendBuffer);
                         data->state = 27;
                     }
                 }
@@ -2942,7 +2944,7 @@ static void Task_RunUnionRoom(u8 taskId)
         data->playerSendBuffer[0] = ACTIVITY_TRADE | IN_UNION_ROOM;
         data->playerSendBuffer[1] = sUnionRoomTrade.species;
         data->playerSendBuffer[2] = sUnionRoomTrade.level;
-        RfuPrepareSend0x2f00(data->playerSendBuffer);
+        Rfu_SendPacket(data->playerSendBuffer);
         data->state = 29;
         break;
     case 29:
@@ -3032,7 +3034,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case 21:
-        switch (RfuGetErrorStatus())
+        switch (RfuGetStatus())
         {
         case 4:
             HandleCancelTrade(TRUE);
@@ -3054,7 +3056,7 @@ static void Task_RunUnionRoom(u8 taskId)
         taskData[3]++;
         break;
     case 22:
-        if (RfuIsErrorStatus1or2())
+        if (RfuHasErrored())
         {
             playerGender = GetUnionRoomPlayerGender(taskData[1], data->field_0);
             UpdateGameDataWithActivitySpriteGendersFlag(ACTIVITY_PLYRTALK | IN_UNION_ROOM, 0, TRUE);
@@ -3073,7 +3075,7 @@ static void Task_RunUnionRoom(u8 taskId)
         data->recvActivityRequest[0] = 0;
         break;
     case 12:
-        if (RfuIsErrorStatus1or2())
+        if (RfuHasErrored())
         {
             HandleCancelTrade(FALSE);
             data->state = 2;
@@ -3130,32 +3132,32 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
                     data->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-                    RfuPrepareSend0x2f00(data->playerSendBuffer);
+                    Rfu_SendPacket(data->playerSendBuffer);
                     data->state = 10;
                     StringCopy(gStringVar4, gUnknown_84584C0);
                 }
                 else
                 {
-                    RfuPrepareSend0x2f00(data->playerSendBuffer);
+                    Rfu_SendPacket(data->playerSendBuffer);
                     data->state = 13;
                 }
             }
             else if (sPlayerCurrActivity == (ACTIVITY_CARD | IN_UNION_ROOM))
             {
-                RfuPrepareSend0x2f00(data->playerSendBuffer);
+                Rfu_SendPacket(data->playerSendBuffer);
                 ViewURoomPartnerTrainerCard(gStringVar4, data, MODE_PARENT);
                 data->state = 40;
             }
             else
             {
-                RfuPrepareSend0x2f00(data->playerSendBuffer);
+                Rfu_SendPacket(data->playerSendBuffer);
                 data->state = 13;
             }
             break;
         case 1:
         case -1:
             data->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-            RfuPrepareSend0x2f00(data->playerSendBuffer);
+            Rfu_SendPacket(data->playerSendBuffer);
             data->state = 10;
             GetYouDeclinedTheOfferMessage(gStringVar4, sPlayerCurrActivity);
             break;
@@ -3418,7 +3420,7 @@ void var_800D_set_xB(void)
 
 static void ReceiveUnionRoomActivityPacket(struct UnkStruct_URoom * uroom)
 {
-    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == RFU_COMMAND_0x2f00)
+    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == RFUCMD_SEND_PACKET)
     {
         uroom->recvActivityRequest[0] = gRecvCmds[1][1];
         if (gRecvCmds[1][1] == (ACTIVITY_TRADE | IN_UNION_ROOM))

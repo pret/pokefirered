@@ -1,6 +1,7 @@
 #include "global.h"
+#include "math_util.h"
 
-s16 MathUtil_Mul16(s16 x, s16 y)
+s16 Q_8_8_mul(s16 x, s16 y)
 {
     s32 result;
 
@@ -10,7 +11,7 @@ s16 MathUtil_Mul16(s16 x, s16 y)
     return result;
 }
 
-s16 MathUtil_Mul16Shift(u8 s, s16 x, s16 y)
+s16 Q_N_S_mul(u8 s, s16 x, s16 y)
 {
     s32 result;
 
@@ -20,7 +21,7 @@ s16 MathUtil_Mul16Shift(u8 s, s16 x, s16 y)
     return result;
 }
 
-s32 MathUtil_Mul32(s32 x, s32 y)
+s32 Q_24_8_mul(s32 x, s32 y)
 {
     s64 result;
 
@@ -30,7 +31,7 @@ s32 MathUtil_Mul32(s32 x, s32 y)
     return result;
 }
 
-s16 MathUtil_Div16(s16 x, s16 y)
+s16 Q_8_8_div(s16 x, s16 y)
 {
     if (y == 0)
     {
@@ -39,7 +40,7 @@ s16 MathUtil_Div16(s16 x, s16 y)
     return (x << 8) / y;
 }
 
-s16 MathUtil_Div16Shift(u8 s, s16 x, s16 y)
+s16 Q_N_S_div(u8 s, s16 x, s16 y)
 {
     if (y == 0)
     {
@@ -48,7 +49,7 @@ s16 MathUtil_Div16Shift(u8 s, s16 x, s16 y)
     return (x << s) / y;
 }
 
-s32 MathUtil_Div32(s32 x, s32 y)
+s32 Q_24_8_div(s32 x, s32 y)
 {
     s64 _x;
 
@@ -61,7 +62,7 @@ s32 MathUtil_Div32(s32 x, s32 y)
     return _x / y;
 }
 
-s16 MathUtil_Inv16(s16 y)
+s16 Q_8_8_inv(s16 y)
 {
     s32 x;
 
@@ -69,7 +70,7 @@ s16 MathUtil_Inv16(s16 y)
     return x / y;
 }
 
-s16 MathUtil_Inv16Shift(u8 s, s16 y)
+s16 Q_N_S_inv(u8 s, s16 y)
 {
     s32 x;
 
@@ -77,7 +78,7 @@ s16 MathUtil_Inv16Shift(u8 s, s16 y)
     return x / y;
 }
 
-s32 MathUtil_Inv32(s32 y)
+s32 Q_24_8_inv(s32 y)
 {
     s64 x;
 

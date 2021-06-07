@@ -941,11 +941,11 @@ static void task50_after_link_battle_save(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(Task_SaveGame_UpdatedLinkRecords, 5);
+            CreateTask(Task_LinkSave, 5);
             data[0] = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(Task_SaveGame_UpdatedLinkRecords))
+            if (!FuncIsActiveTask(Task_LinkSave))
                 data[0] = 3;
             break;
         }

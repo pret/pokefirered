@@ -226,7 +226,7 @@ bool8 IsWirelessAdapterConnected(void)
         return FALSE;
 
     SetWirelessCommType1();
-    sub_80F86F4();
+    InitRFUAPI();
     sub_80FB128(TRUE);
     if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
     {
@@ -321,10 +321,10 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
-    gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
+    gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
-        gLocalLinkPlayer.name[8] |= 0x10;
+        gLocalLinkPlayer.progressFlags |= 0x10;
     }
 }
 
@@ -378,7 +378,7 @@ void OpenLink(void)
     }
     else
     {
-        sub_80F86F4();
+        InitRFUAPI();
     }
     gReceivedRemoteLinkPlayers = FALSE;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -602,11 +602,11 @@ void ProcessRecvCmds(u8 unused)
                     *linkPlayer = block->linkPlayer;
                     if ((linkPlayer->version & 0xFF) == VERSION_RUBY || (linkPlayer->version & 0xFF) == VERSION_SAPPHIRE)
                     {
-                        linkPlayer->name[10] = 0;
-                        linkPlayer->name[9] = 0;
-                        linkPlayer->name[8] = 0;
+                        linkPlayer->progressFlagsCopy = 0;
+                        linkPlayer->neverRead = 0;
+                        linkPlayer->progressFlags = 0;
                     }
-                    IntlConvertLinkPlayerName(linkPlayer);
+                    ConvertLinkPlayerName(linkPlayer);
                     if (strcmp(block->magic1, sASCIIGameFreakInc) != 0
                         || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
                     {
@@ -749,7 +749,7 @@ void ClearLinkCallback_2(void)
 {
     if (gWirelessCommType)
     {
-        Rfu_set_zero();
+        ClearLinkRfuCallback();
     }
     else
     {
@@ -1003,7 +1003,7 @@ bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType)
 {
     if (gWirelessCommType == 1)
     {
-        return LinkRfu_PrepareCmd0xA100(blockRequestType);
+        return Rfu_SendBlockRequest(blockRequestType);
     }
     if (gLinkCallback == NULL)
     {
@@ -1309,7 +1309,7 @@ void Link_StartSend5FFFwithParam(u16 a0)
 {
     if (gWirelessCommType == 1)
     {
-        Rfu_BeginBuildAndSendCommand5F();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
@@ -1326,7 +1326,7 @@ void SetCloseLinkCallback(void)
 {
     if (gWirelessCommType == 1)
     {
-        Rfu_BeginBuildAndSendCommand5F();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
@@ -1381,7 +1381,7 @@ void SetLinkStandbyCallback(void)
 {
     if (gWirelessCommType == 1)
     {
-        LinkRfu_SetRfuFuncToSend6600();
+        Rfu_SetLinkStandbyCallback();
     }
     else
     {
@@ -1441,12 +1441,12 @@ static void CheckErrorStatus(void)
     }
 }
 
-void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 isConnectionError)
 {
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
     sLinkErrorBuffer.lastRecvQueueCount = lastRecvQueueCount;
-    sLinkErrorBuffer.unk_06 = unk_06;
+    sLinkErrorBuffer.unk_06 = isConnectionError;
 }
 
 void CB2_LinkError(void)
@@ -1619,7 +1619,7 @@ bool8 HasLinkErrorOccurred(void)
     return gLinkErrorOccurred;
 }
 
-void PrepareLocalLinkPlayerBlock(void)
+void LocalLinkPlayerToBlock(void)
 {
     struct LinkPlayerBlock * block;
 
@@ -1640,7 +1640,7 @@ void LinkPlayerFromBlock(u32 who)
     block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
     player = &gLinkPlayers[who_];
     *player = block->linkPlayer;
-    IntlConvertLinkPlayerName(player);
+    ConvertLinkPlayerName(player);
     if (strcmp(block->magic1, sASCIIGameFreakInc) != 0 || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
     {
         SetMainCallback2(CB2_LinkError);
@@ -1718,9 +1718,9 @@ bool32 LinkRecvQueueLengthMoreThan2(void)
     return FALSE;
 }
 
-void IntlConvertLinkPlayerName(struct LinkPlayer * player)
+void ConvertLinkPlayerName(struct LinkPlayer * player)
 {
-    player->name[10] = player->name[8];
+    player->progressFlagsCopy = player->progressFlags; // ? Perhaps relocating for a longer name field
     ConvertInternationalString(player->name, player->language);
 }
 

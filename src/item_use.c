@@ -18,6 +18,7 @@
 #include "item_use.h"
 #include "itemfinder.h"
 #include "mail.h"
+#include "menu.h"
 #include "event_object_lock.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
@@ -43,8 +44,8 @@ static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 static void FieldCB_FadeInFromBlack(void);
 static void Task_WaitFadeIn_CallItemUseOnFieldCB(u8 taskId);
 static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId);
-static void sub_80A11C0(u8 taskId);
-static bool8 sub_80A1194(void);
+static void Task_FieldCB2_SimpleFadeIn(u8 taskId);
+static bool8 FieldCB2_SimpleFadeIn(void);
 static void sub_80A1208(void);
 static void ItemUseOnFieldCB_Bicycle(u8 taskId);
 static bool8 ItemUseCheckFunc_Rod(void);
@@ -178,13 +179,13 @@ static void Task_WaitFadeIn_CallItemUseOnFieldCB(u8 taskId)
     }
 }
 
-static void DisplayItemMessageInCurrentContext(u8 taskId, bool8 inField, u8 textSpeed, const u8 * str)
+static void DisplayItemMessageInCurrentContext(u8 taskId, bool8 inField, u8 fontId, const u8 * str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (inField == FALSE)
-        DisplayItemMessageInBag(taskId, textSpeed, gStringVar4, Task_ReturnToBagFromContextMenu);
+        DisplayItemMessageInBag(taskId, fontId, gStringVar4, Task_ReturnToBagFromContextMenu);
     else
-        DisplayItemMessageOnField(taskId, textSpeed, gStringVar4, Task_ItemUse_CloseMessageBoxAndReturnToField);
+        DisplayItemMessageOnField(taskId, fontId, gStringVar4, Task_ItemUse_CloseMessageBoxAndReturnToField);
 }
 
 static void PrintNotTheTimeToUseThat(u8 taskId, bool8 inField)
@@ -194,7 +195,7 @@ static void PrintNotTheTimeToUseThat(u8 taskId, bool8 inField)
 
 static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrame(DLG_WINDOW_ID, TRUE);
     DestroyTask(taskId);
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     ScriptContext2_Disable();
@@ -210,22 +211,22 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
         return 0;
 }
 
-static void sub_80A1184(void)
+static void SetFieldCallback2ToSimpleFadeIn(void)
 {
-    gFieldCallback2 = sub_80A1194;
+    gFieldCallback2 = FieldCB2_SimpleFadeIn;
 }
 
-static bool8 sub_80A1194(void)
+static bool8 FieldCB2_SimpleFadeIn(void)
 {
     FreezeObjectEvents();
     ScriptContext2_Enable();
     FadeInFromBlack();
-    CreateTask(sub_80A11C0, 10);
+    CreateTask(Task_FieldCB2_SimpleFadeIn, 10);
     gUnknown_2031DE0 = 0;
     return TRUE;
 }
 
-static void sub_80A11C0(u8 taskId)
+static void Task_FieldCB2_SimpleFadeIn(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
@@ -459,7 +460,7 @@ void FieldUseFunc_TmCase(u8 taskId)
 
 static void InitTMCaseFromBag(void)
 {
-    InitTMCase(0, CB2_BagMenuFromStartMenu, 0);
+    InitTMCase(TMCASE_FROMFIELD, CB2_BagMenuFromStartMenu, 0);
 }
 
 static void Task_InitTMCaseFromField(u8 taskId)
@@ -467,8 +468,8 @@ static void Task_InitTMCaseFromField(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_80A1184();
-        InitTMCase(0, CB2_ReturnToField, 1);
+        SetFieldCallback2ToSimpleFadeIn();
+        InitTMCase(TMCASE_FROMFIELD, CB2_ReturnToField, 1);
         DestroyTask(taskId);
     }
 }
@@ -498,7 +499,7 @@ static void Task_InitBerryPouchFromField(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_80A1184();
+        SetFieldCallback2ToSimpleFadeIn();
         InitBerryPouch(BERRYPOUCH_FROMFIELD, CB2_ReturnToField, 1);
         DestroyTask(taskId);
     }
@@ -541,7 +542,7 @@ static void Task_InitTeachyTvFromField(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_80A1184();
+        SetFieldCallback2ToSimpleFadeIn();
         InitTeachyTvController(0, CB2_ReturnToField);
         DestroyTask(taskId);
     }
@@ -671,7 +672,7 @@ static void sub_80A1CC0(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_80A1184();
+        SetFieldCallback2ToSimpleFadeIn();
         InitRegionMapWithExitCB(REGIONMAP_TYPE_NORMAL, CB2_ReturnToField);
         DestroyTask(taskId);
     }
@@ -703,7 +704,7 @@ static void sub_80A1D68(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        sub_80A1184();
+        SetFieldCallback2ToSimpleFadeIn();
         UseFameChecker(CB2_ReturnToField);
         DestroyTask(taskId);
     }

@@ -3,7 +3,7 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "list_menu.h"
-#include "player_pc.h"
+#include "mailbox_pc.h"
 #include "strings.h"
 #include "menu_indicators.h"
 #include "constants/songs.h"
@@ -14,7 +14,7 @@ static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
 static void MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list);
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [MBPCWIN_HEADER] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -22,7 +22,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x008
-    }, {
+    },
+    [MBPCWIN_LISTMENU] = {
         .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 1,
@@ -30,7 +31,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 18,
         .paletteNum = 15,
         .baseBlock = 0x01c
-    }, {
+    },
+    [MBPCWIN_SUBMENU] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -61,7 +63,7 @@ u8 MailboxPC_GetAddWindow(u8 winIdx)
     if (sWindowIds[winIdx] == 0xFF)
     {
         sWindowIds[winIdx] = AddWindow(&sWindowTemplates[winIdx]);
-        SetStdWindowBorderStyle(sWindowIds[winIdx], 0);
+        SetStdWindowBorderStyle(sWindowIds[winIdx], FALSE);
     }
     return sWindowIds[winIdx];
 }
@@ -82,12 +84,12 @@ u8 MailboxPC_GetWindowId(u8 winIdx)
 static void ItemPrintFunc(u8 windowId, s32 itemId, u8 y)
 {
     u8 strbuf[30];
-    if (itemId != -2)
+    if (itemId != LIST_CANCEL)
     {
         StringCopy(strbuf, gSaveBlock1Ptr->mail[itemId + PARTY_SIZE].playerName);
         if (StringLength(strbuf) <= 5)
             ConvertInternationalString(strbuf, LANGUAGE_JAPANESE);
-        AddTextPrinterParameterized4(windowId, 2, 8, y, 0, 0, sTextColor, -1, strbuf);
+        AddTextPrinterParameterized4(windowId, 2, 8, y, 0, 0, sTextColor, TEXT_SPEED_FF, strbuf);
     }
 }
 
@@ -100,11 +102,11 @@ u8 MailboxPC_InitListMenu(struct PlayerPCItemPageStruct * playerPcStruct)
         sListMenuItems[i].index = i;
     }
     sListMenuItems[i].label = gFameCheckerText_Cancel;
-    sListMenuItems[i].index = -2;
+    sListMenuItems[i].index = LIST_CANCEL;
 
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = playerPcStruct->count + 1;
-    gMultiuseListMenuTemplate.windowId = sWindowIds[1];
+    gMultiuseListMenuTemplate.windowId = sWindowIds[MBPCWIN_LISTMENU];
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = GetMenuCursorDimensionByFont(2, 0);
     gMultiuseListMenuTemplate.cursor_X = 0;

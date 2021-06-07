@@ -451,7 +451,7 @@ $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 $(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 43
 
-graphics/tm_case/unk_8E845D8.4bpp: %.4bpp: %.png
+graphics/tm_case/bgtiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 91
 
 $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png

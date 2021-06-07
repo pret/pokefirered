@@ -22,9 +22,13 @@ static EWRAM_DATA u8 sStartMenuWindowId = {0};
 static const u16 gUnknown_841EF48[] = INCBIN_U16("graphics/unknown/unk_841EF48.4bpp");
 
 const u16 gStdFrame0_Tiles[] = INCBIN_U16("graphics/text_window/unk_841F1C8.4bpp");
-const u16 gTMCaseMainWindowPalette[] = INCBIN_U16("graphics/tm_case/unk_841F408.gbapal");
+const u16 gTMCaseMainWindowPalette[] = INCBIN_U16("graphics/tm_case/main_window.gbapal");
 
-static const u8 gUnknown_841F428[] = { 8, 4, 1 };
+static const u8 sTextSpeedOptToFrameDelay[] = {
+    [OPTIONS_TEXT_SPEED_SLOW] = 8,
+    [OPTIONS_TEXT_SPEED_MID]  = 4,
+    [OPTIONS_TEXT_SPEED_FAST] = 1
+};
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] = 
 {
@@ -312,6 +316,7 @@ void *MallocAndDecompress(const void *src, u32 *size)
     u8 *sizeAsBytes = (u8 *)size;
     const u8 *srcAsBytes = src;
 
+    // LZ77 header: 10 ZZ YY XX --> size = 0x00XXYYZZ
     sizeAsBytes[0] = srcAsBytes[1];
     sizeAsBytes[1] = srcAsBytes[2];
     sizeAsBytes[2] = srcAsBytes[3];
@@ -431,23 +436,23 @@ void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress)
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;    
     result = ContextNpcGetTextColor();
     if (result == 0)
-        AddTextPrinterParameterized2(0, 4, gStringVar4, GetTextSpeedSetting(), nptr, 8, 1, 3);
+        AddTextPrinterParameterized2(DLG_WINDOW_ID, 4, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_BLUE, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     else if (result == 1)
-        AddTextPrinterParameterized2(0, 5, gStringVar4, GetTextSpeedSetting(), nptr, 4, 1, 3);
+        AddTextPrinterParameterized2(DLG_WINDOW_ID, 5, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     else
-        AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), nptr, 2, 1, 3);
+        AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, 2, gStringVar4, speed, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void LoadStdWindowFrameGfx(void)
@@ -455,14 +460,14 @@ void LoadStdWindowFrameGfx(void)
     if (gQuestLogState == QL_STATE_PLAYBACK)
     {
         gTextFlags.autoScroll = 1;
-        TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
+        TextWindow_LoadTilesStdFrame1(DLG_WINDOW_ID, DLG_WINDOW_BASE_TILE_NUM);
     }
     else
     {
         Menu_LoadStdPal();
-        TextWindow_LoadResourcesStdFrame0(0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
+        TextWindow_LoadResourcesStdFrame0(DLG_WINDOW_ID, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM * 0x10);
     }
-    TextWindow_SetUserSelectedFrame(0, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
+    TextWindow_SetUserSelectedFrame(DLG_WINDOW_ID, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM * 0x10);
 }
 
 void DrawDialogueFrame(u8 windowId, bool8 copyToVram)
@@ -604,12 +609,12 @@ void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
     DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
 }
 
-void sub_80F7768(u8 windowId, bool8 copyToVram)
+void SetDlgWindowBorderStyle(u8 windowId, bool8 copyToVram)
 {
     if (gQuestLogState == QL_STATE_PLAYBACK)
     {
-        gTextFlags.autoScroll = 1;
-        TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
+        gTextFlags.autoScroll = TRUE;
+        TextWindow_LoadTilesStdFrame1(DLG_WINDOW_ID, DLG_WINDOW_BASE_TILE_NUM);
     }
     else
     {
@@ -640,11 +645,11 @@ static u16 GetStdPalColor(u8 colorNum)
     return gTMCaseMainWindowPalette[colorNum];
 }
 
-void DisplayItemMessageOnField(u8 taskId, u8 textSpeed, const u8 *string, TaskFunc callback)
+void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *string, TaskFunc callback)
 {
     LoadStdWindowFrameGfx();
-    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, textSpeed, GetTextSpeedSetting(), string, callback);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    DisplayMessageAndContinueTask(taskId, DLG_WINDOW_ID, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, fontId, GetTextSpeedSetting(), string, callback);
+    CopyWindowToVram(DLG_WINDOW_ID, COPYWIN_BOTH);
 }
 
 void DisplayYesNoMenuDefaultYes(void)
@@ -662,7 +667,7 @@ u8 GetTextSpeedSetting(void)
     u32 speed;
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
-    return gUnknown_841F428[gSaveBlock2Ptr->optionsTextSpeed];
+    return sTextSpeedOptToFrameDelay[gSaveBlock2Ptr->optionsTextSpeed];
 }
 
 u8 CreateStartMenuWindow(u8 height)
@@ -714,8 +719,8 @@ void DestroyHelpMessageWindow_(void)
 void LoadSignPostWindowFrameGfx(void)
 {
     Menu_LoadStdPal();
-    TextWindow_SetSignpostFrame_WithPal(0, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
-    TextWindow_SetUserSelectedFrame(0, STD_WINDOW_BASE_TILE_NUM, 0x10 * STD_WINDOW_PALETTE_NUM);
+    TextWindow_SetSignpostFrame_WithPal(DLG_WINDOW_ID, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);
+    TextWindow_SetUserSelectedFrame(DLG_WINDOW_ID, STD_WINDOW_BASE_TILE_NUM, 0x10 * STD_WINDOW_PALETTE_NUM);
 }
 
 void SetDefaultFontsPointer(void)

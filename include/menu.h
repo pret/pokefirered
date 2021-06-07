@@ -8,6 +8,8 @@
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1
 
+#define DLG_WINDOW_ID               0
+
 struct MenuAction
 {
     const u8 *text;

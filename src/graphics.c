@@ -1123,14 +1123,14 @@ const u32 gUnknown_8E84560[] = INCBIN_U32("graphics/interface/unk_8E84560.gbapal
 const u32 gFile_graphics_interface_bag_swap_sheet[] = INCBIN_U32("graphics/interface/bag_swap.4bpp.lz");
 const u32 gFile_graphics_interface_bag_swap_palette[] = INCBIN_U32("graphics/interface/bag_swap.gbapal.lz");
 
-const u32 gUnknown_8E845D8[] = INCBIN_U32("graphics/tm_case/unk_8E845D8.4bpp.lz");
-const u32 gUnknown_8E84A24[] = INCBIN_U32("graphics/tm_case/unk_8E84A24.bin.lz");
-const u32 gUnknown_8E84B70[] = INCBIN_U32("graphics/tm_case/unk_8E84B70.bin.lz");
-const u32 gUnknown_8E84CB0[] = INCBIN_U32("graphics/tm_case/unk_8E84CB0.gbapal.lz");
-const u32 gUnknown_8E84D20[] = INCBIN_U32("graphics/tm_case/unk_8E84D20.gbapal.lz");
-const u32 gTMCase_TMSpriteGfx[] = INCBIN_U32("graphics/tm_case/unk_8E84D90.4bpp.lz");
-const u32 gUnknown_8E84F20[] = INCBIN_U32("graphics/tm_case/unk_8E84F20.gbapal.lz");
-const u32 gUnknown_8E85068[] = INCBIN_U32("graphics/tm_case/unk_8E85068.gbapal.lz");
+const u32 gTmCaseGraphics_Tiles[] = INCBIN_U32("graphics/tm_case/bgtiles.4bpp.lz");
+const u32 gTmCaseGraphics_Bg2Map[] = INCBIN_U32("graphics/tm_case/bg2tilemap.bin.lz");
+const u32 gTmCaseGraphics_Bg1Map[] = INCBIN_U32("graphics/tm_case/bg1tilemap.bin.lz");
+const u32 gTmCaseGraphics_MalePals[] = INCBIN_U32("graphics/tm_case/male.gbapal.lz");
+const u32 gTmCaseGraphics_FemalePals[] = INCBIN_U32("graphics/tm_case/female.gbapal.lz");
+const u32 gTMCase_TMSpriteGfx[] = INCBIN_U32("graphics/tm_case/tm_disc_sprite.4bpp.lz");
+const u32 gTMCase_TMSpritePalsByType1[] = INCBIN_U32("graphics/tm_case/pals_by_type_1.gbapal.lz");
+const u32 gTMCase_TMSpritePalsByType2[] = INCBIN_U32("graphics/tm_case/pals_by_type_2.gbapal.lz");
 
 const u8 gItemPcTiles[] = INCBIN_U8("graphics/item_pc/unk_8E85090.4bpp.lz");
 const u32 gItemPcBgPals[] = INCBIN_U32("graphics/item_pc/unk_8E85408.gbapal.lz");
@@ -1209,7 +1209,7 @@ const u32 gUnknown_8E98FD8[] = INCBIN_U32("graphics/interface/naming_screen_8E98
 const u32 gUnknown_8E990D8[] = INCBIN_U32("graphics/interface/naming_screen_8E990D8.4bpp");
 const u32 gUnknown_8E990F8[] = INCBIN_U32("graphics/interface/naming_screen_8E990F8.4bpp");
 
-const u8 gUnknown_8E99118[] = INCBIN_U8("graphics/tm_case/unk_8E99118.4bpp");
+const u8 gTmCase_HMBitmapIcon[] = INCBIN_U8("graphics/tm_case/hm_bmp.4bpp");
 
 const u16 gKantoTrainerCard_Pal[] = INCBIN_U16("graphics/trainer_card/0star.gbapal");
 const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card.4bpp.lz");

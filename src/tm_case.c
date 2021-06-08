@@ -189,6 +189,7 @@ enum {
     TMCASE_COL_DKGRAY,
     TMCASE_COL_LTGRAY,
     TMCASE_COL_DYNAMIC,
+    TMCASE_COL_HIDE = 0xFF,
 };
 
 enum {
@@ -892,7 +893,7 @@ static void Task_TMCaseMain(u8 taskId)
                     break;
                 default:
                     PlaySE(SE_SELECT);
-                    FillBG2BottomThirdWithLightColor(1);
+                    FillBG2BottomThirdWithLightColor(TMCASE_COL_DKGRAY);
                     RemoveTMCaseScrollIndicatorArrowPair();
                     PrintListMenuCursorByID_WithColorIdx(tListMenuId, TMCASE_COL_LTGRAY);
                     tSelectedTMIdx = input;
@@ -908,7 +909,7 @@ static void Task_TMCaseMain(u8 taskId)
 
 static void Subtask_ReturnToTMCaseMain(u8 taskId)
 {
-    FillBG2BottomThirdWithLightColor(0);
+    FillBG2BottomThirdWithLightColor(TMCASE_COL_WHITE);
     CreateTMCaseScrollIndicatorArrowPair_Main();
     gTasks[taskId].func = Task_TMCaseMain;
 }
@@ -1193,7 +1194,7 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (AdjustQuantityAccordingToDPadInput(&tSaleQuantity, tSelectedTMQuantity) == 1)
+    if (AdjustQuantityAccordingToDPadInput(&tSaleQuantity, tSelectedTMQuantity) == TRUE)
     {
         SellTM_PrintQuantityAndSalePrice(tSaleQuantity, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelectedTMIdx)) / 2 * tSaleQuantity);
     }
@@ -1249,7 +1250,7 @@ static void Task_DoSaleOfTMs(u8 taskId)
     InitTMCaseListMenuItems();
     tListMenuId = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
     PrintListMenuCursorByID_WithColorIdx(tListMenuId, TMCASE_COL_LTGRAY);
-    PrintMoneyAmountInMoneyBox(TMCASE_WIN_PLAYERMONEY, GetMoney(&gSaveBlock1Ptr->money), 0);
+    PrintMoneyAmountInMoneyBox(TMCASE_WIN_PLAYERMONEY, GetMoney(&gSaveBlock1Ptr->money), TEXT_SPEED_INSTANT);
     gTasks[taskId].func = Task_AfterSale_ReturnToList;
 }
 
@@ -1314,7 +1315,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
     {
     case 0:
         BeginNormalPaletteFade(~0x7BFA, 4, 0, 6, RGB_BLACK);
-        FillBG2BottomThirdWithLightColor(1);
+        FillBG2BottomThirdWithLightColor(TMCASE_COL_DKGRAY);
         tDudeState++;
         break;
     case 1:
@@ -1368,7 +1369,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         }
         break;
     case 8:
-        FillBG2BottomThirdWithLightColor(1);
+        FillBG2BottomThirdWithLightColor(TMCASE_COL_DKGRAY);
         TMCase_PrintMessageWithFollowupTask(taskId, 4, gPokedudeText_TMTypes, NULL);
         gTasks[taskId].func = Task_TMCaseDude_Playback;
         tDudeState++;
@@ -1382,7 +1383,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
     case 10:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            FillBG2BottomThirdWithLightColor(0);
+            FillBG2BottomThirdWithLightColor(TMCASE_COL_WHITE);
             BeginNormalPaletteFade(0x00000400, 0, 6, 0, RGB_BLACK);
             ClearDialogWindowAndFrameToTransparent(TMCASE_WIN_MSGBOX, FALSE);
             ScheduleBgCopyTilemapToVram(1);
@@ -1390,7 +1391,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         }
         break;
     case 18:
-        FillBG2BottomThirdWithLightColor(1);
+        FillBG2BottomThirdWithLightColor(TMCASE_COL_DKGRAY);
         TMCase_PrintMessageWithFollowupTask(taskId, 4, gPokedudeText_ReadTMDescription, NULL);
         gTasks[taskId].func = Task_TMCaseDude_Playback; // this function
         tDudeState++;

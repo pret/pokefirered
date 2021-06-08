@@ -243,16 +243,29 @@ void BagPrintTextOnWindow(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8
 
 void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused)
 {
-    u32 x = 0x48 - GetStringWidth(1, str, 0);
-    AddTextPrinterParameterized3(BAG_WINDOW_HEADER, 1, x / 2, 1, sTextColors[BAG_COLOR_WHITE], TEXT_SPEED_INSTANT, str);
+    AddTextPrinterParameterized3(
+        BAG_WINDOW_HEADER,
+        1,
+        PRINT_X_CENTER_ALIGN(str, 0, 72, 1, 0),
+        1,
+        sTextColors[BAG_COLOR_WHITE],
+        TEXT_SPEED_INSTANT,
+        str
+        );
 }
 
 void BagDrawDepositItemTextBox(void)
 {
-    u32 x;
     DrawStdFrameWithCustomTileAndPalette(BAG_WINDOW_HEADER, FALSE, 0x081, 0x0C);
-    x = 0x40 - GetStringWidth(0, gText_DepositItem, 0);
-    AddTextPrinterParameterized(BAG_WINDOW_HEADER, 0, gText_DepositItem, x / 2, 1, TEXT_SPEED_INSTANT, NULL);
+    AddTextPrinterParameterized(
+        BAG_WINDOW_HEADER,
+        0,
+        gText_DepositItem,
+        PRINT_X_CENTER_ALIGN(gText_DepositItem, 0, 64, 0, 0),
+        1,
+        TEXT_SPEED_INSTANT,
+        NULL
+        );
 }
 
 u8 ShowBagWindow(u8 whichWindow, u8 nItems)

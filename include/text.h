@@ -266,6 +266,16 @@ extern u8 gStringVar4[];
 
 extern const u8 gKeypadIconTiles[];
 
+// Get the printing x coordinates for different window alignments
+#define PRINT_X_LEFT_ALIGN(str, left, width, fontId, letterSpacing)   \
+    (left)
+
+#define PRINT_X_CENTER_ALIGN(str, left, width, fontId, letterSpacing) \
+    ((left) + ((unsigned)((width) - GetStringWidth(fontId, str, letterSpacing)) / 2))
+
+#define PRINT_X_RIGHT_ALIGN(str, left, width, fontId, letterSpacing)  \
+    ((left) + (width) - GetStringWidth(fontId, str, letterSpacing))
+
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));

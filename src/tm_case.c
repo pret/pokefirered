@@ -1495,8 +1495,7 @@ static void TMCase_PrintMessageWithFollowupTask(u8 taskId, u8 fontId, const u8 *
 
 static void PrintStringTMCaseOnWindow3(void)
 {
-    u32 distance = 72 - GetStringWidth(1, gText_TMCase, 0);
-    AddTextPrinterParameterized3(TMCASE_WIN_HEADER, 1, distance / 2, 1, sTextColors[TMCASE_COL_WHITE], TEXT_SPEED_INSTANT, gText_TMCase);
+    AddTextPrinterParameterized3(TMCASE_WIN_HEADER, 1, PRINT_X_CENTER_ALIGN(gText_TMCase, 0, 72, 1, 0), 1, sTextColors[TMCASE_COL_WHITE], TEXT_SPEED_INSTANT, gText_TMCase);
 }
 
 static void DrawMoveInfoUIMarkers(void)

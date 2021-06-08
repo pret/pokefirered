@@ -4,7 +4,7 @@
 #include "global.h"
 
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
-void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
+void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon * pokemon, u16 itemId, u16 param);
 
 void FieldUseFunc_OrangeMail(u8 taskId);
 void FieldUseFunc_MachBike(u8 taskId);

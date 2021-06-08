@@ -169,20 +169,41 @@ static void (*const sSelectTMActionTasks[])(u8 taskId) = {
     [TMCASE_FROMPOKEMONSTORAGEPC] = Task_SelectTMAction_FromStoragePC
 };
 
-static const struct MenuAction sMenuActions_UseGiveExit[] = {
-    {gOtherText_Use,  TMHMContextMenuAction_Use },
-    {gOtherText_Give, TMHMContextMenuAction_Give},
-    {gOtherText_Exit, TMHMContextMenuAction_Exit},
+enum
+{
+    TMCASE_ACTION_USE,
+    TMCASE_ACTION_GIVE,
+    TMCASE_ACTION_EXIT,
 };
 
-static const u8 sMenuActionIndices_Field[] = {0, 1, 2};
-static const u8 sMenuActionIndices_UnionRoom[] = {1, 2};
-static const struct YesNoFuncTable sYesNoFuncTable = {Task_PrintSaleConfirmedText, Task_SaleOfTMsCanceled};
+static const struct MenuAction sMenuActions_UseGiveExit[] = {
+    [TMCASE_ACTION_USE]  = {gOtherText_Use,  TMHMContextMenuAction_Use },
+    [TMCASE_ACTION_GIVE] = {gOtherText_Give, TMHMContextMenuAction_Give},
+    [TMCASE_ACTION_EXIT] = {gOtherText_Exit, TMHMContextMenuAction_Exit},
+};
+
+static const u8 sMenuActionIndices_Field[] = {
+    TMCASE_ACTION_USE,
+    TMCASE_ACTION_GIVE,
+    TMCASE_ACTION_EXIT
+};
+
+static const u8 sMenuActionIndices_UnionRoom[] = {
+    TMCASE_ACTION_GIVE,
+    TMCASE_ACTION_EXIT
+};
+
+static const struct YesNoFuncTable sYesNoFuncTable = {
+    Task_PrintSaleConfirmedText,
+    Task_SaleOfTMsCanceled
+};
 
 static const u8 sText_ClearTo18[] = _("{CLEAR_TO 18}");
 static const u8 sText_SingleSpace[] = _(" ");
 
-static ALIGNED(4) const u16 sPal3Override[] = {RGB(8, 8, 8), RGB(30, 16, 6)};
+// Overloads hues 6-7 of bg pal slots 10 and 13
+// Used for the list menu and "TMXX is selected" windows.
+static ALIGNED(4) const u16 sHMIconPals[] = {RGB(8, 8, 8), RGB(30, 16, 6)};
 
 enum {
     TMCASE_COL_WHITE,
@@ -1438,8 +1459,8 @@ static void InitWindowTemplatesAndPals(void)
     TextWindow_SetStdFrame0_WithPal(TMCASE_WIN_LISTMENU, 0x78, 0xD0);
     LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
     LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
-    LoadPalette(sPal3Override, 0xF6, 0x04);
-    LoadPalette(sPal3Override, 0xD6, 0x04);
+    LoadPalette(sHMIconPals, 0xF6, 0x04);
+    LoadPalette(sHMIconPals, 0xD6, 0x04);
     ListMenuLoadStdPalAt(0xc0, 0x01);
     for (i = TMCASE_WIN_LISTMENU; i < TMCASE_WIN_COUNT; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

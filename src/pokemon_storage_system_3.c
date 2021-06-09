@@ -29,10 +29,10 @@
 EWRAM_DATA struct PokemonStorageSystemData *gPSSData = NULL;
 static EWRAM_DATA bool8 sInPartyMenu = 0;
 static EWRAM_DATA u8 sCurrentBoxOption = 0;
-static EWRAM_DATA u8 gUnknown_20397B6 = 0;
+static EWRAM_DATA u8 sDepositingBoxId = 0;
 static EWRAM_DATA u8 sWhichToReshow = 0;
 static EWRAM_DATA u8 sLastUsedBox = 0;
-static EWRAM_DATA u16 gUnknown_20397BA = ITEM_NONE;
+static EWRAM_DATA u16 sMovingItemId = ITEM_NONE;
 
 static void Cb_InitPSS(u8 taskId);
 static void Cb_ShowPSS(u8 taskId);
@@ -101,15 +101,15 @@ static void ClearBottomWindow(void);
 static void AddWallpaperSetsMenu(void);
 static void AddWallpapersMenu(u8 wallpaperSet);
 static void sub_808FDFC(void);
-static void sub_808FE54(u8 species);
+static void sub_808FE54(u8 action);
 static void sub_808FF70(void);
 
 static const u32 sPokemonStorageScrollingBGTileset[] = INCBIN_U32("graphics/interface/pss_unk_83CE438.4bpp.lz");
 static const u32 sPokemonStorageScrollingBGTilemap[] = INCBIN_U32("graphics/interface/pss_unk_83CE4D0.bin.lz");
 static const u16 sPokemonStorageScrollingBGPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CE5DC.gbapal");
-static const u32 gUnknown_83CE5FC[] = INCBIN_U32("graphics/interface/pss_unk_83CE5FC.bin.lz");
+static const u32 gPSS_BG1Tilemap[] = INCBIN_U32("graphics/interface/pss_unk_83CE5FC.bin.lz");
 
-static const u16 gUnknown_83CE6F8[] = {
+static const u16 sBoxPartyPokemonDropdown0_Map2[] = {
     0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108,
     0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118,
     0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108,
@@ -119,7 +119,7 @@ static const u16 gUnknown_83CE6F8[] = {
 static const u16 gUnknown_83CE738[] = INCBIN_U16("graphics/interface/pss_unk_83CE738.gbapal");
 static const u16 gUnknown_83CE758[] = INCBIN_U16("graphics/interface/pss_unk_83CE758.gbapal");
 
-static const u16 gUnknown_83CE778[] = {
+static const u16 sBoxPartyPokemonDropdown2_Map2[] = {
     0x014c, 0x014d, 0x014e, 0x014f, 0x0170, 0x0171, 0x0172, 0x0173, 0x0174,
     0x015c, 0x015d, 0x015e, 0x015f, 0x0180, 0x0181, 0x0182, 0x0183, 0x0184,
     0x0175, 0x0176, 0x0177, 0x0178, 0x0179, 0x017a, 0x017b, 0x017c, 0x017d,
@@ -138,13 +138,25 @@ static const u16 gUnknown_83CE7D8[] = {
     0x1163, 0x1164, 0x1164, 0x1165,
 };
 
-static const u16 gUnknown_83CE7F0[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.gbapal");
-static const u16 gUnknown_83CE810[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.4bpp");
+static const u16 sWaveformSpritePalsData[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.gbapal");
+static const u16 sWaveformSpriteTilesData[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.4bpp");
 static const u16 gUnknown_83CE9D0[] = INCBIN_U16("graphics/interface/pss_unk_83CE9D0.gbapal");
 static const u16 gUnknown_83CEA10[] = INCBIN_U16("graphics/interface/pss_unk_83CEA10.gbapal");
 
-static const struct WindowTemplate gUnknown_83CEA30[] = {
-    {
+enum {
+    PSS_WIN_0,
+    PSS_WIN_1,
+    PSS_WIN_2,
+};
+
+enum {
+    PSS_DROPDOWN_0,
+    PSS_DROPDOWN_1,
+    PSS_DROPDOWN_2,
+};
+
+static const struct WindowTemplate sWindowTemplates[] = {
+    [PSS_WIN_0] = {
         .bg = 1,
         .tilemapLeft = 0,
         .tilemapTop = 11,
@@ -152,7 +164,8 @@ static const struct WindowTemplate gUnknown_83CEA30[] = {
         .height = 7,
         .paletteNum = 3,
         .baseBlock = 0x0c0
-    }, {
+    }, 
+    [PSS_WIN_1] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 17,
@@ -160,7 +173,8 @@ static const struct WindowTemplate gUnknown_83CEA30[] = {
         .height = 2,
         .paletteNum = 13,
         .baseBlock = 0x014
-    }, {
+    }, 
+    [PSS_WIN_2] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 12,
@@ -171,7 +185,7 @@ static const struct WindowTemplate gUnknown_83CEA30[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct BgTemplate gUnknown_83CEA50[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -208,19 +222,19 @@ static const struct BgTemplate gUnknown_83CEA50[] = {
 };
 
 static const struct SpritePalette sWaveformSpritePalette = {
-    gUnknown_83CE7F0, TAG_PAL_WAVEFORM
+    sWaveformSpritePalsData, TAG_PAL_WAVEFORM
 };
 
 static const struct SpriteSheet sWaveformSpriteSheet = {
-    gUnknown_83CE810, 0x01c0, TAG_TILE_WAVEFORM
+    sWaveformSpriteTilesData, 0x01c0, TAG_TILE_WAVEFORM
 };
 
-static const struct OamData gUnknown_83CEB88;
+static const struct OamData sOamData_CursorMon;
 
 static const struct SpriteTemplate sSpriteTemplate_CursorMon = {
     .tileTag = TAG_TILE_2,
     .paletteTag = TAG_PAL_DAC6,
-    .oam = &gUnknown_83CEB88,
+    .oam = &sOamData_CursorMon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -272,7 +286,7 @@ static const struct WindowTemplate sYesNoWindowTemplate = {
     .baseBlock = 0x05c
 };
 
-static const struct OamData gUnknown_83CEB88 = {
+static const struct OamData sOamData_CursorMon = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -289,7 +303,7 @@ static const struct OamData gUnknown_83CEB88 = {
 
 // Waveform
 
-static const struct OamData gUnknown_83CEB90 = {
+static const struct OamData sWaveformSpriteOamData = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -304,42 +318,42 @@ static const struct OamData gUnknown_83CEB90 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gUnknown_83CEB98[] = {
+static const union AnimCmd sWaveformSpriteAnim0[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CEBA0[] = {
+static const union AnimCmd sWaveformSpriteAnim1[] = {
     ANIMCMD_FRAME(2, 8),
     ANIMCMD_FRAME(4, 8),
     ANIMCMD_FRAME(6, 8),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gUnknown_83CEBB0[] = {
+static const union AnimCmd sWaveformSpriteAnim2[] = {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CEBB8[] = {
+static const union AnimCmd sWaveformSpriteAnim3[] = {
     ANIMCMD_FRAME(10, 8),
     ANIMCMD_FRAME(4, 8),
     ANIMCMD_FRAME(12, 8),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gUnknown_83CEBC8[] = {
-    gUnknown_83CEB98,
-    gUnknown_83CEBA0,
-    gUnknown_83CEBB0,
-    gUnknown_83CEBB8
+static const union AnimCmd *const sWaveformSpriteAnimTable[] = {
+    sWaveformSpriteAnim0,
+    sWaveformSpriteAnim1,
+    sWaveformSpriteAnim2,
+    sWaveformSpriteAnim3
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Waveform = {
     .tileTag = TAG_TILE_WAVEFORM,
     .paletteTag = TAG_PAL_WAVEFORM,
-    .oam = &gUnknown_83CEB90,
-    .anims = gUnknown_83CEBC8,
+    .oam = &sWaveformSpriteOamData,
+    .anims = sWaveformSpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -374,8 +388,8 @@ void Cb2_EnterPSS(u8 boxOption)
     else
     {
         gPSSData->boxOption = boxOption;
-        gPSSData->isReshowingPSS = FALSE;
-        gUnknown_20397BA = 0;
+        gPSSData->isReopening = FALSE;
+        sMovingItemId = 0;
         gPSSData->state = 0;
         gPSSData->taskId = CreateTask(Cb_InitPSS, 3);
         SetHelpContext(HELPCONTEXT_BILLS_PC);
@@ -393,7 +407,7 @@ void Cb2_ReturnToPSS(void)
     else
     {
         gPSSData->boxOption = sCurrentBoxOption;
-        gPSSData->isReshowingPSS = TRUE;
+        gPSSData->isReopening = TRUE;
         gPSSData->state = 0;
         gPSSData->taskId = CreateTask(Cb_InitPSS, 3);
         SetHelpContext(HELPCONTEXT_BILLS_PC);
@@ -413,7 +427,7 @@ static void ResetAllBgCoords(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
 }
 
-static void sub_808CF10(void)
+static void ResetGraphics(void)
 {
     ResetPaletteFade();
     ResetSpriteData();
@@ -421,20 +435,20 @@ static void sub_808CF10(void)
     FreeAllSpritePalettes();
     ClearDma3Requests();
     gReservedSpriteTileCount = 0x280;
-    sub_8096BE4(&gPSSData->unk_0020, gPSSData->unk_0028, 8);
+    PSS_InitCopyAndFillManager(&gPSSData->unkUtil, gPSSData->unkUtilData, NELEMS(gPSSData->unkUtilData));
     gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
     AllocBoxPartyPokemonDropdowns(3);
-    SetBoxPartyPokemonDropdownMap2(0, 1, gUnknown_83CE6F8, 8, 4);
-    SetBoxPartyPokemonDropdownMap2Pos(0, 1, 0);
-    gPSSData->unk_02C7 = FALSE;
+    SetBoxPartyPokemonDropdownMap2(PSS_DROPDOWN_0, 1, sBoxPartyPokemonDropdown0_Map2, 8, 4);
+    SetBoxPartyPokemonDropdownMap2Pos(PSS_DROPDOWN_0, 1, 0);
+    gPSSData->closeBoxFlashing = FALSE;
 }
 
 static void sub_808CF94(void)
 {
-    sub_8092B50();
+    ClearSavedCursorPos();
     sInPartyMenu = gPSSData->boxOption == BOX_OPTION_DEPOSIT;
-    gUnknown_20397B6 = 0;
+    sDepositingBoxId = 0;
 }
 
 static void sub_808CFC4(void)
@@ -460,16 +474,16 @@ static void Cb_InitPSS(u8 taskId)
     case 0:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        sub_808CF10();
-        if (gPSSData->isReshowingPSS)
+        ResetGraphics();
+        if (gPSSData->isReopening)
         {
             switch (sWhichToReshow)
             {
             case 1:
-                sub_8093660();
+                LoadSavedMovingMon();
                 break;
             case 0:
-                sub_80937B4();
+                SetSelectionAfterSummaryScreen();
                 break;
             case 2:
                 GiveChosenBagItem();
@@ -487,22 +501,22 @@ static void Cb_InitPSS(u8 taskId)
         }
         break;
     case 2:
-        PutWindowTilemap(0);
-        ClearWindowTilemap(1);
+        PutWindowTilemap(PSS_WIN_0);
+        ClearWindowTilemap(PSS_WIN_1);
         CpuFill32(0, (void *)VRAM, 0x200);
-        TextWindow_SetUserSelectedFrame(1, 0xB, 0xE0);
+        TextWindow_SetUserSelectedFrame(PSS_WIN_1, 0xB, 0xE0);
         break;
     case 3:
         ResetAllBgCoords();
-        if (!gPSSData->isReshowingPSS)
+        if (!gPSSData->isReopening)
             sub_808CF94();
         break;
     case 4:
         sub_808FFAC();
-        if (!gPSSData->isReshowingPSS)
-            sub_80922C0();
+        if (!gPSSData->isReopening)
+            InitCursor();
         else
-            sub_8092340();
+            InitCursorOnReopen();
         break;
     case 5:
         if (!sub_8095050())
@@ -531,9 +545,9 @@ static void Cb_InitPSS(u8 taskId)
 
         if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         {
-            gPSSData->field_DA4.baseTileTag = TAG_TILE_D;
-            gPSSData->field_DA4.basePaletteTag = TAG_PAL_DACE;
-            SetMonMarkingsMenuPointer(&gPSSData->field_DA4);
+            gPSSData->markMenu.baseTileTag = TAG_TILE_D;
+            gPSSData->markMenu.basePaletteTag = TAG_PAL_DACE;
+            SetMonMarkingsMenuPointer(&gPSSData->markMenu);
             LoadMonMarkingsFrameGfx();
         }
         else
@@ -544,7 +558,7 @@ static void Cb_InitPSS(u8 taskId)
         break;
     case 10:
         sub_808CFC4();
-        if (!gPSSData->isReshowingPSS)
+        if (!gPSSData->isReopening)
         {
             BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
             SetPSSCallback(Cb_ShowPSS);
@@ -615,14 +629,14 @@ static void Cb_MainPSS(u8 taskId)
             }
             else
             {
-                sub_8092B50();
+                ClearSavedCursorPos();
                 SetPSSCallback(Cb_ShowPartyPokemon);
             }
             break;
         case 6:
             if (gPSSData->boxOption == BOX_OPTION_MOVE_MONS)
             {
-                if (IsMonBeingMoved() && ItemIsMail(gPSSData->cursorMonItem))
+                if (IsMonBeingMoved() && ItemIsMail(gPSSData->displayMonItemId))
                     gPSSData->state = 5;
                 else
                     SetPSSCallback(Cb_HidePartyPokemon);
@@ -657,7 +671,7 @@ static void Cb_MainPSS(u8 taskId)
             }
             else
             {
-                sub_8094D60();
+                TryHideItemAtCursor();
                 gPSSData->state = 10;
             }
             break;
@@ -673,14 +687,14 @@ static void Cb_MainPSS(u8 taskId)
             }
             else
             {
-                sub_8094D60();
+                TryHideItemAtCursor();
                 gPSSData->state = 10;
             }
             break;
         case 11:
             if (!CanMovePartyMon())
             {
-                if (ItemIsMail(gPSSData->cursorMonItem))
+                if (ItemIsMail(gPSSData->displayMonItemId))
                 {
                     gPSSData->state = 5;
                 }
@@ -772,7 +786,7 @@ static void Cb_MainPSS(u8 taskId)
         }
         break;
     case 1:
-        if (!sub_80924A8())
+        if (!UpdateCursorPos())
         {
             if (IsCursorOnCloseBox())
                 sub_808F948();
@@ -790,13 +804,13 @@ static void Cb_MainPSS(u8 taskId)
             SetCurrentBox(gPSSData->newCurrBoxId);
             if (!sInPartyMenu && !IsMonBeingMoved())
             {
-                sub_8092F54();
+                RefreshDisplayMon();
                 BoxSetMosaic();
             }
 
             if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
             {
-                sub_8094D84();
+                TryShowItemAtCursor();
                 gPSSData->state = 11;
             }
             else
@@ -846,14 +860,14 @@ static void Cb_MainPSS(u8 taskId)
         }
         break;
     case 10:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
         {
             SetUpScrollToBox(gPSSData->newCurrBoxId);
             gPSSData->state = 2;
         }
         break;
     case 11:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
             gPSSData->state = 0;
         break;
     }
@@ -886,12 +900,12 @@ static void Cb_HidePartyPokemon(u8 taskId)
     case 1:
         if (!HidePartyMenu())
         {
-            sub_8092B3C(sub_8092B70());
+            SetCursorBoxPosition(GetSavedCursorPos());
             gPSSData->state++;
         }
         break;
     case 2:
-        if (!sub_80924A8())
+        if (!UpdateCursorPos())
         {
             if (gPSSData->setMosaic)
                 BoxSetMosaic();
@@ -911,7 +925,7 @@ static void Cb_OnSelectedMon(u8 taskId)
             PlaySE(SE_SELECT);
             if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
                 PrintStorageActionText(PC_TEXT_IS_SELECTED);
-            else if (IsActiveItemMoving() || gPSSData->cursorMonItem != 0)
+            else if (IsActiveItemMoving() || gPSSData->displayMonItemId != 0)
                 PrintStorageActionText(PC_TEXT_IS_SELECTED2);
             else
                 PrintStorageActionText(PC_TEXT_GIVE_TO_MON);
@@ -971,7 +985,7 @@ static void Cb_OnSelectedMon(u8 taskId)
             {
                 gPSSData->state = 3;
             }
-            else if (ItemIsMail(gPSSData->cursorMonItem))
+            else if (ItemIsMail(gPSSData->displayMonItemId))
             {
                 gPSSData->state = 4;
             }
@@ -991,7 +1005,7 @@ static void Cb_OnSelectedMon(u8 taskId)
             {
                 gPSSData->state = 5; // Cannot release an Egg.
             }
-            else if (ItemIsMail(gPSSData->cursorMonItem))
+            else if (ItemIsMail(gPSSData->displayMonItemId))
             {
                 gPSSData->state = 4;
             }
@@ -1128,7 +1142,7 @@ static void Cb_WithdrawMon(u8 taskId)
         }
         else
         {
-            sub_8092B5C();
+            SaveCursorPos();
             InitMonPlaceChange(0);
             gPSSData->state = 2;
         }
@@ -1177,8 +1191,8 @@ static void Cb_DepositMenu(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
-        LoadBoxSelectionPopupSpriteGfx(&gPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
-        sub_808C940(gUnknown_20397B6);
+        LoadBoxSelectionPopupSpriteGfx(&gPSSData->chooseBoxMenu, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        sub_808C940(sDepositingBoxId);
         gPSSData->state++;
         break;
     case 1:
@@ -1198,7 +1212,7 @@ static void Cb_DepositMenu(u8 taskId)
         {
             if (TryStorePartyMonInBox(boxId))
             {
-                gUnknown_20397B6 = boxId;
+                sDepositingBoxId = boxId;
                 sub_808FE54(2);
                 ClearBottomWindow();
                 sub_808C950();
@@ -1220,7 +1234,7 @@ static void Cb_DepositMenu(u8 taskId)
     case 3:
         if (!sub_8090A60())
         {
-            sub_8093174();
+            ResetSelectionAfterDeposit();
             BoxSetMosaic();
             sub_808FAA8();
             SetPSSCallback(Cb_MainPSS);
@@ -1256,14 +1270,14 @@ static void Cb_ReleaseMon(u8 taskId)
         case  0:
             ClearBottomWindow();
             InitCanReleaseMonVars();
-            sub_8093194();
+            InitReleaseMon();
             gPSSData->state++;
             break;
         }
         break;
     case 2:
         RunCanReleaseMon();
-        if (!sub_80931EC())
+        if (!TryHideReleaseMon())
         {
             while (1)
             {
@@ -1313,7 +1327,7 @@ static void Cb_ReleaseMon(u8 taskId)
     case 6:
         if (!sub_8090A60())
         {
-            sub_8092F54();
+            RefreshDisplayMon();
             BoxSetMosaic();
             sub_808FAA8();
             gPSSData->state++;
@@ -1344,7 +1358,7 @@ static void Cb_ReleaseMon(u8 taskId)
     case 11:
         if (!sub_8091150())
         {
-            sub_8093264();
+            TrySetCursorFistAnim();
             PrintStorageActionText(PC_TEXT_CAME_BACK);
             gPSSData->state++;
         }
@@ -1372,7 +1386,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_MARK_POKE);
-        gPSSData->field_DA4.markings = gPSSData->cursorMonMarkings;
+        gPSSData->markMenu.markings = gPSSData->cursorMonMarkings;
         DrawMonMarkingsMenu(gPSSData->cursorMonMarkings, 0xb0, 0x10);
         gPSSData->state++;
         break;
@@ -1381,7 +1395,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
         {
             TeardownMonMarkingsMenu();
             ClearBottomWindow();
-            SetMonMarkings(gPSSData->field_DA4.markings);
+            SetMonMarkings(gPSSData->markMenu.markings);
             RefreshCursorMonData();
             SetPSSCallback(Cb_MainPSS);
         }
@@ -1394,7 +1408,7 @@ static void Cb_TakeItemForMoving(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        if (!ItemIsMail(gPSSData->cursorMonItem))
+        if (!ItemIsMail(gPSSData->displayMonItemId))
         {
             ClearBottomWindow();
             gPSSData->state++;
@@ -1405,16 +1419,16 @@ static void Cb_TakeItemForMoving(u8 taskId)
         }
         break;
     case 1:
-        sub_8094D14(2);
+        StartCursorAnim(2);
         Item_FromMonToMoving(sInPartyMenu ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
         gPSSData->state++;
         break;
     case 2:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
         {
-            sub_8094D14(3);
+            StartCursorAnim(3);
             ClearBottomWindow();
-            sub_8092F54();
+            RefreshDisplayMon();
             PrintCursorMonInfo();
             gPSSData->state++;
         }
@@ -1435,15 +1449,15 @@ static void Cb_GiveMovingItemToMon(u8 taskId)
         gPSSData->state++;
         break;
     case 1:
-        sub_8094D14(2);
+        StartCursorAnim(2);
         Item_GiveMovingToMon(sInPartyMenu ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
         gPSSData->state++;
         break;
     case 2:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
         {
-            sub_8094D14(0);
-            sub_8092F54();
+            StartCursorAnim(0);
+            RefreshDisplayMon();
             PrintCursorMonInfo();
             PrintStorageActionText(PC_TEXT_ITEM_IS_HELD);
             gPSSData->state++;
@@ -1468,7 +1482,7 @@ static void Cb_ItemToBag(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        if (!AddBagItem(gPSSData->cursorMonItem, 1))
+        if (!AddBagItem(gPSSData->displayMonItemId, 1))
         {
             PlaySE(SE_FAILURE);
             PrintStorageActionText(PC_TEXT_BAG_FULL);
@@ -1482,7 +1496,7 @@ static void Cb_ItemToBag(u8 taskId)
         }
         break;
     case 1:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
         {
             PrintStorageActionText(PC_TEXT_PLACED_IN_BAG);
             gPSSData->state = 2;
@@ -1492,7 +1506,7 @@ static void Cb_ItemToBag(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
-            sub_8092F54();
+            RefreshDisplayMon();
             PrintCursorMonInfo();
             gPSSData->state = 4;
         }
@@ -1516,7 +1530,7 @@ static void Cb_SwitchSelectedItem(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        if (!ItemIsMail(gPSSData->cursorMonItem))
+        if (!ItemIsMail(gPSSData->displayMonItemId))
         {
             ClearBottomWindow();
             gPSSData->state++;
@@ -1527,15 +1541,15 @@ static void Cb_SwitchSelectedItem(u8 taskId)
         }
         break;
     case 1:
-        sub_8094D14(2);
+        StartCursorAnim(2);
         Item_SwitchMonsWithMoving(sInPartyMenu ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
         gPSSData->state++;
         break;
     case 2:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
         {
-            sub_8094D14(3);
-            sub_8092F54();
+            StartCursorAnim(3);
+            RefreshDisplayMon();
             PrintCursorMonInfo();
             PrintStorageActionText(PC_TEXT_CHANGED_TO_ITEM);
             gPSSData->state++;
@@ -1617,7 +1631,7 @@ static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
             SetPSSCallback(Cb_MainPSS);
             break;
         case 0:
-            if (AddBagItem(gPSSData->movingItem, 1) == TRUE)
+            if (AddBagItem(gPSSData->movingItemId, 1) == TRUE)
             {
                 ClearBottomWindow();
                 gPSSData->state = 3;
@@ -1642,9 +1656,9 @@ static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
         gPSSData->state = 4;
         break;
     case 4:
-        if (!sub_809610C())
+        if (!IsItemIconAnimActive())
         {
-            sub_8094D14(0);
+            StartCursorAnim(0);
             SetPSSCallback(Cb_MainPSS);
         }
         break;
@@ -1718,7 +1732,7 @@ static void Cb_HandleBoxOptions(u8 taskId)
         {
         case -1:
         case  0:
-            sub_80920FC(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
@@ -1759,7 +1773,7 @@ static void Cb_HandleWallpapers(u8 taskId)
         switch (gPSSData->wallpaperSetId)
         {
         case -1:
-            sub_80920FC(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
@@ -1801,7 +1815,7 @@ static void Cb_HandleWallpapers(u8 taskId)
     case 5:
         if (!DoWallpaperGfxChange())
         {
-            sub_80920FC(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             SetPSSCallback(Cb_MainPSS);
         }
         break;
@@ -1814,7 +1828,7 @@ static void Cb_JumpBox(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_JUMP_TO_WHICH_BOX);
-        LoadBoxSelectionPopupSpriteGfx(&gPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        LoadBoxSelectionPopupSpriteGfx(&gPSSData->chooseBoxMenu, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_808C940(StorageGetCurrentBox());
         gPSSData->state++;
         break;
@@ -1830,7 +1844,7 @@ static void Cb_JumpBox(u8 taskId)
             FreeBoxSelectionPopupSpriteGfx();
             if (gPSSData->newCurrBoxId == 201 || gPSSData->newCurrBoxId == StorageGetCurrentBox())
             {
-                sub_80920FC(TRUE);
+                AnimateBoxScrollArrows(TRUE);
                 SetPSSCallback(Cb_MainPSS);
             }
             else
@@ -1859,7 +1873,7 @@ static void Cb_NameBox(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        sub_8093630();
+        SaveMovingMon();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gPSSData->state++;
         break;
@@ -1879,7 +1893,7 @@ static void Cb_ShowMonSummary(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        sub_80936B8();
+        InitSummaryScreenData();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gPSSData->state++;
         break;
@@ -2042,9 +2056,9 @@ static void Cb_ChangeScreen(u8 taskId)
     u8 screenChangeType = gPSSData->screenChangeType;
 
     if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS && IsActiveItemMoving() == TRUE)
-        gUnknown_20397BA = GetMovingItem();
+        sMovingItemId = GetMovingItem();
     else
-        gUnknown_20397BA = ITEM_NONE;
+        sMovingItemId = ITEM_NONE;
 
     switch (screenChangeType)
     {
@@ -2054,9 +2068,9 @@ static void Cb_ChangeScreen(u8 taskId)
         SetMainCallback2(Cb2_ExitPSS);
         break;
     case SCREEN_CHANGE_SUMMARY_SCREEN:
-        partyMon = gPSSData->field_218C.mon;
-        monIndex = gPSSData->field_2187;
-        maxMonIndex = gPSSData->field_2186;
+        partyMon = gPSSData->summaryMon.mon;
+        monIndex = gPSSData->summaryStartPos;
+        maxMonIndex = gPSSData->summaryMaxPos;
         mode = gPSSData->summaryScreenMode;
         FreePSSData();
         ShowPokemonSummaryScreen(partyMon, monIndex, maxMonIndex, Cb2_ReturnToPSS, mode);
@@ -2118,17 +2132,17 @@ static void ScrollBackground(void)
 
 static void LoadPSSMenuGfx(void)
 {
-    InitBgsFromTemplates(0, gUnknown_83CEA50, NELEMS(gUnknown_83CEA50));
+    InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     DecompressAndLoadBgGfxUsingHeap(1, gPSSMenu_Gfx, 0, 0, 0);
-    LZ77UnCompWram(gUnknown_83CE5FC, gPSSData->field_5AC4);
-    SetBgTilemapBuffer(1, gPSSData->field_5AC4);
+    LZ77UnCompWram(gPSS_BG1Tilemap, gPSSData->displayMenuTilemapBuffer);
+    SetBgTilemapBuffer(1, gPSSData->displayMenuTilemapBuffer);
     ShowBg(1);
     ScheduleBgCopyTilemapToVram(1);
 }
 
 static bool8 InitPSSWindows(void)
 {
-    if (!InitWindows(gUnknown_83CEA30))
+    if (!InitWindows(sWindowTemplates))
     {
         return FALSE;
     }
@@ -2163,12 +2177,12 @@ static void sub_808F078(void)
 
 static void PSS_CreateMonMarkingSprite(void)
 {
-    gPSSData->monMarkingSprite = CreateMonMarkingSprite_AllOff(TAG_TILE_10, TAG_PAL_DAC8, NULL);
-    gPSSData->monMarkingSprite->oam.priority = 1;
-    gPSSData->monMarkingSprite->subpriority = 1;
-    gPSSData->monMarkingSprite->pos1.x = 40;
-    gPSSData->monMarkingSprite->pos1.y = 150;
-    gPSSData->monMarkingSpriteTileStart = (void *)OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
+    gPSSData->markingComboSprite = CreateMonMarkingSprite_AllOff(TAG_TILE_10, TAG_PAL_DAC8, NULL);
+    gPSSData->markingComboSprite->oam.priority = 1;
+    gPSSData->markingComboSprite->subpriority = 1;
+    gPSSData->markingComboSprite->pos1.x = 40;
+    gPSSData->markingComboSprite->pos1.y = 150;
+    gPSSData->markingComboTilesPtr = (void *)OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
 }
 
 static void CreateWaveformSprites(void)
@@ -2180,48 +2194,54 @@ static void CreateWaveformSprites(void)
     for (i = 0; i < 2; i++)
     {
         u8 spriteId = CreateSprite(&sSpriteTemplate_Waveform, i * 63 + 8, 9, 2);
-        gPSSData->field_D98[i] = &gSprites[spriteId];
+        gPSSData->waveformSprites[i] = &gSprites[spriteId];
     }
 }
 
 static void RefreshCursorMonData(void)
 {
-    LoadCursorMonGfx(gPSSData->cursorMonSpecies, gPSSData->cursorMonPersonality);
+    LoadCursorMonGfx(gPSSData->displayMonSpecies, gPSSData->displayMonPersonality);
     PrintCursorMonInfo();
     sub_808F5E8();
     ScheduleBgCopyTilemapToVram(0);
 }
 
+#define sMosaicSize      data[0]
+#define sMosaicSpeed     data[1]
+
 static void BoxSetMosaic(void)
 {
     RefreshCursorMonData();
-    if (gPSSData->cursorMonSprite)
+    if (gPSSData->displayMonSprite)
     {
-        gPSSData->cursorMonSprite->oam.mosaic = TRUE;
-        gPSSData->cursorMonSprite->data[0] = 10;
-        gPSSData->cursorMonSprite->data[1] = 1;
-        gPSSData->cursorMonSprite->callback = SpriteCB_CursorMon_Mosaic;
-        SetGpuReg(REG_OFFSET_MOSAIC, (gPSSData->cursorMonSprite->data[0] << 12) | (gPSSData->cursorMonSprite->data[0] << 8));
+        gPSSData->displayMonSprite->oam.mosaic = TRUE;
+        gPSSData->displayMonSprite->sMosaicSize = 10;
+        gPSSData->displayMonSprite->sMosaicSpeed = 1;
+        gPSSData->displayMonSprite->callback = SpriteCB_CursorMon_Mosaic;
+        SetGpuReg(REG_OFFSET_MOSAIC, (gPSSData->displayMonSprite->sMosaicSize << MOSAIC_OBJ_VSIZE_SHIFT) | (gPSSData->displayMonSprite->sMosaicSize << MOSAIC_OBJ_HSIZE_SHIFT));
     }
 }
 
 static u8 BoxGetMosaic(void)
 {
-    return gPSSData->cursorMonSprite->oam.mosaic;
+    return gPSSData->displayMonSprite->oam.mosaic;
 }
 
 static void SpriteCB_CursorMon_Mosaic(struct Sprite *sprite)
 {
-    sprite->data[0] -= sprite->data[1];
-    if (sprite->data[0] < 0)
-        sprite->data[0] = 0;
-    SetGpuReg(REG_OFFSET_MOSAIC, (sprite->data[0] << 12) | (sprite->data[0] << 8));
-    if (sprite->data[0] == 0)
+    sprite->sMosaicSize -= sprite->sMosaicSpeed;
+    if (sprite->sMosaicSize < 0)
+        sprite->sMosaicSize = 0;
+    SetGpuReg(REG_OFFSET_MOSAIC, (sprite->sMosaicSize << MOSAIC_OBJ_VSIZE_SHIFT) | (sprite->sMosaicSize << MOSAIC_OBJ_HSIZE_SHIFT));
+    if (sprite->sMosaicSize == 0)
     {
         sprite->oam.mosaic = FALSE;
         sprite->callback = SpriteCallbackDummy;
     }
 }
+
+#undef sMosaicSize
+#undef sMosaicSpeed
 
 static void LoadCursorMonSprite(void)
 {
@@ -2229,16 +2249,16 @@ static void LoadCursorMonSprite(void)
     u16 tileStart;
     u8 palSlot;
     u8 spriteId;
-    struct SpriteSheet sheet = {gPSSData->field_22C4, 0x800, TAG_TILE_2};
-    struct SpritePalette palette = {gPSSData->field_2244, TAG_PAL_DAC6};
+    struct SpriteSheet sheet = {gPSSData->tileBuffer, 0x800, TAG_TILE_2};
+    struct SpritePalette palette = {gPSSData->displayMonPalBuffer, TAG_PAL_DAC6};
     struct SpriteTemplate template = sSpriteTemplate_CursorMon;
 
     for (i = 0; i < 0x800; i++)
-        gPSSData->field_22C4[i] = 0;
+        gPSSData->tileBuffer[i] = 0;
     for (i = 0; i < 0x10; i++)
-        gPSSData->field_2244[i] = 0;
+        gPSSData->displayMonPalBuffer[i] = 0;
 
-    gPSSData->cursorMonSprite = NULL;
+    gPSSData->displayMonSprite = NULL;
 
     do
     {
@@ -2254,12 +2274,12 @@ static void LoadCursorMonSprite(void)
         if (spriteId == MAX_SPRITES)
             break;
 
-        gPSSData->cursorMonSprite = &gSprites[spriteId];
-        gPSSData->field_223A = palSlot * 16 + 0x100;
-        gPSSData->field_223C = (void *)OBJ_VRAM0 + tileStart * 32;
+        gPSSData->displayMonSprite = &gSprites[spriteId];
+        gPSSData->displayMonPalOffset = palSlot * 16 + 0x100;
+        gPSSData->displayMonTilePtr = (void *)OBJ_VRAM0 + tileStart * 32;
     } while (0);
 
-    if (gPSSData->cursorMonSprite == NULL)
+    if (gPSSData->displayMonSprite == NULL)
     {
         FreeSpriteTilesByTag(TAG_TILE_2);
         FreeSpritePaletteByTag(TAG_PAL_DAC6);
@@ -2268,20 +2288,20 @@ static void LoadCursorMonSprite(void)
 
 static void LoadCursorMonGfx(u16 species, u32 pid)
 {
-    if (gPSSData->cursorMonSprite == NULL)
+    if (gPSSData->displayMonSprite == NULL)
         return;
 
     if (species != SPECIES_NONE)
     {
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gPSSData->field_22C4, species, pid);
-        LZ77UnCompWram(gPSSData->cursorMonPalette, gPSSData->field_2244);
-        CpuCopy32(gPSSData->field_22C4, gPSSData->field_223C, 0x800);
-        LoadPalette(gPSSData->field_2244, gPSSData->field_223A, 0x20);
-        gPSSData->cursorMonSprite->invisible = FALSE;
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gPSSData->tileBuffer, species, pid);
+        LZ77UnCompWram(gPSSData->displayMonPalette, gPSSData->displayMonPalBuffer);
+        CpuCopy32(gPSSData->tileBuffer, gPSSData->displayMonTilePtr, 0x800);
+        LoadPalette(gPSSData->displayMonPalBuffer, gPSSData->displayMonPalOffset, 0x20);
+        gPSSData->displayMonSprite->invisible = FALSE;
     }
     else
     {
-        gPSSData->cursorMonSprite->invisible = TRUE;
+        gPSSData->displayMonSprite->invisible = TRUE;
     }
 }
 
@@ -2289,33 +2309,33 @@ static void PrintCursorMonInfo(void)
 {
     u16 i;
     u16 y;
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    FillWindowPixelBuffer(PSS_WIN_0, PIXEL_FILL(1));
     if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
         for (i = 0, y = 0; i < 3; i++, y += 14)
         {
-            AddTextPrinterParameterized(0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(PSS_WIN_0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SPEED_FF, NULL);
         }
-        AddTextPrinterParameterized(0, 0, gPSSData->cursorMonTexts[3], 6, y + 2, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(PSS_WIN_0, 0, gPSSData->cursorMonTexts[3], 6, y + 2, TEXT_SPEED_FF, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, 0, gPSSData->cursorMonTexts[3], 6, 0, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(PSS_WIN_0, 0, gPSSData->cursorMonTexts[3], 6, 0, TEXT_SPEED_FF, NULL);
         for (i = 0, y = 15; i < 3; i++, y += 14)
         {
-            AddTextPrinterParameterized(0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(PSS_WIN_0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SPEED_FF, NULL);
         }
     }
 
-    CopyWindowToVram(0, COPYWIN_GFX);
-    if (gPSSData->cursorMonSpecies != SPECIES_NONE)
+    CopyWindowToVram(PSS_WIN_0, COPYWIN_GFX);
+    if (gPSSData->displayMonSpecies != SPECIES_NONE)
     {
-        RequestDma3LoadMonMarking(gPSSData->cursorMonMarkings, gPSSData->monMarkingSpriteTileStart);
-        gPSSData->monMarkingSprite->invisible = FALSE;
+        RequestDma3LoadMonMarking(gPSSData->cursorMonMarkings, gPSSData->markingComboTilesPtr);
+        gPSSData->markingComboSprite->invisible = FALSE;
     }
     else
     {
-        gPSSData->monMarkingSprite->invisible = TRUE;
+        gPSSData->markingComboSprite->invisible = TRUE;
     }
 }
 
@@ -2323,71 +2343,71 @@ static void sub_808F5E8(void)
 {
     u16 i;
 
-    if (gPSSData->cursorMonSpecies != SPECIES_NONE)
+    if (gPSSData->displayMonSpecies != SPECIES_NONE)
     {
-        SetBoxPartyPokemonDropdownMap2Rect(0, 0, 0, 8, 2);
+        SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_0, 0, 0, 8, 2);
         for (i = 0; i < 2; i++)
-            StartSpriteAnimIfDifferent(gPSSData->field_D98[i], i * 2 + 1);
+            StartSpriteAnimIfDifferent(gPSSData->waveformSprites[i], i * 2 + 1);
     }
     else
     {
-        SetBoxPartyPokemonDropdownMap2Rect(0, 0, 2, 8, 2);
+        SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_0, 0, 2, 8, 2);
         for (i = 0; i < 2; i++)
-            StartSpriteAnim(gPSSData->field_D98[i], i * 2);
+            StartSpriteAnim(gPSSData->waveformSprites[i], i * 2);
     }
 
-    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(0);
+    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_0);
     ScheduleBgCopyTilemapToVram(1);
 }
 
 static void sub_808F68C(void)
 {
-    LZ77UnCompWram(gUnknown_8E9CAEC, gPSSData->field_B0);
+    LZ77UnCompWram(gUnknown_8E9CAEC, gPSSData->partyMenuTilemapBuffer);
     LoadPalette(gPSSMenu_Pal, 0x10, 0x20);
-    SetBoxPartyPokemonDropdownMap2(1, 1, gPSSData->field_B0, 12, 22);
-    SetBoxPartyPokemonDropdownMap2(2, 1, gUnknown_83CE778, 9, 4);
-    SetBoxPartyPokemonDropdownMap2Pos(1, 10, 0);
-    SetBoxPartyPokemonDropdownMap2Pos(2, 21, 0);
+    SetBoxPartyPokemonDropdownMap2(PSS_DROPDOWN_1, 1, gPSSData->partyMenuTilemapBuffer, 12, 22);
+    SetBoxPartyPokemonDropdownMap2(PSS_DROPDOWN_2, 1, sBoxPartyPokemonDropdown2_Map2, 9, 4);
+    SetBoxPartyPokemonDropdownMap2Pos(PSS_DROPDOWN_1, 10, 0);
+    SetBoxPartyPokemonDropdownMap2Pos(PSS_DROPDOWN_2, 21, 0);
     sub_808F9FC();
     if (sInPartyMenu)
     {
         sub_808F90C(TRUE);
         CreatePartyMonsSprites(TRUE);
-        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(2);
-        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(1);
+        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_2);
+        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_1);
     }
     else
     {
-        SetBoxPartyPokemonDropdownMap2Rect(1, 0, 20, 12, 2);
+        SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_1, 0, 20, 12, 2);
         sub_808F90C(TRUE);
-        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(1);
-        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(2);
+        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_1);
+        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_2);
     }
 
     ScheduleBgCopyTilemapToVram(1);
-    gPSSData->unk_02C7 = FALSE;
+    gPSSData->closeBoxFlashing = FALSE;
 }
 
 static void SetUpShowPartyMenu(void)
 {
-    gPSSData->field_2C0 = 20;
-    gPSSData->field_2C2 = 2;
-    gPSSData->field_2C5 = 0;
+    gPSSData->partyMenuUnused1 = 20;
+    gPSSData->partyMenuY = 2;
+    gPSSData->partyMenuMoveTimer = 0;
     CreatePartyMonsSprites(FALSE);
 }
 
 static bool8 ShowPartyMenu(void)
 {
-    if (gPSSData->field_2C5 == 20)
+    if (gPSSData->partyMenuMoveTimer == 20)
         return FALSE;
 
-    gPSSData->field_2C0--;
-    gPSSData->field_2C2++;
-    AdjustBoxPartyPokemonDropdownPos(1, 3, 1);
-    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(1);
+    gPSSData->partyMenuUnused1--;
+    gPSSData->partyMenuY++;
+    AdjustBoxPartyPokemonDropdownPos(PSS_DROPDOWN_1, BPPD_MOVE_OUTER_TOP, 1);
+    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_1);
     ScheduleBgCopyTilemapToVram(1);
     sub_8090B98(8);
-    if (++gPSSData->field_2C5 == 20)
+    if (++gPSSData->partyMenuMoveTimer == 20)
     {
         sInPartyMenu = TRUE;
         return FALSE;
@@ -2400,24 +2420,24 @@ static bool8 ShowPartyMenu(void)
 
 static void SetUpHidePartyMenu(void)
 {
-    gPSSData->field_2C0 = 0;
-    gPSSData->field_2C2 = 22;
-    gPSSData->field_2C5 = 0;
+    gPSSData->partyMenuUnused1 = 0;
+    gPSSData->partyMenuY = 22;
+    gPSSData->partyMenuMoveTimer = 0;
     if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
         sub_80960C0();
 }
 
 static bool8 HidePartyMenu(void)
 {
-    if (gPSSData->field_2C5 != 20)
+    if (gPSSData->partyMenuMoveTimer != 20)
     {
-        gPSSData->field_2C0++;
-        gPSSData->field_2C2--;
-        AdjustBoxPartyPokemonDropdownPos(1, 3, -1);
-        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(1);
-        FillBgTilemapBufferRect_Palette0(1, 0x100, 10, gPSSData->field_2C2, 12, 1);
+        gPSSData->partyMenuUnused1++;
+        gPSSData->partyMenuY--;
+        AdjustBoxPartyPokemonDropdownPos(PSS_DROPDOWN_1, BPPD_MOVE_OUTER_TOP, -1);
+        CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_1);
+        FillBgTilemapBufferRect_Palette0(1, 0x100, 10, gPSSData->partyMenuY, 12, 1);
         sub_8090B98(-8);
-        if (++gPSSData->field_2C5 != 20)
+        if (++gPSSData->partyMenuMoveTimer != 20)
         {
             ScheduleBgCopyTilemapToVram(1);
             return TRUE;
@@ -2427,8 +2447,8 @@ static bool8 HidePartyMenu(void)
             sInPartyMenu = FALSE;
             DestroyAllPartyMonIcons();
             CompactPartySlots();
-            SetBoxPartyPokemonDropdownMap2Rect(2, 0, 0, 9, 2);
-            CopyBoxPartyPokemonDropdownToBgTilemapBuffer(2);
+            SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_2, 0, 0, 9, 2);
+            CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_2);
             ScheduleBgCopyTilemapToVram(1);
             return FALSE;
         }
@@ -2440,37 +2460,37 @@ static bool8 HidePartyMenu(void)
 static void sub_808F90C(bool8 arg0)
 {
     if (arg0)
-        SetBoxPartyPokemonDropdownMap2Rect(2, 0, 0, 9, 2);
+        SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_2, 0, 0, 9, 2);
     else
-        SetBoxPartyPokemonDropdownMap2Rect(2, 0, 2, 9, 2);
+        SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_2, 0, 2, 9, 2);
 
-    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(2);
+    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_2);
     ScheduleBgCopyTilemapToVram(1);
 }
 
 static void sub_808F948(void)
 {
-    gPSSData->unk_02C7 = TRUE;
-    gPSSData->unk_02C8 = 30;
-    gPSSData->unk_02C9 = TRUE;
+    gPSSData->closeBoxFlashing = TRUE;
+    gPSSData->closeBoxFlashTimer = 30;
+    gPSSData->closeBoxFlashState = TRUE;
 }
 
 static void sub_808F974(void)
 {
-    if (gPSSData->unk_02C7)
+    if (gPSSData->closeBoxFlashing)
     {
-        gPSSData->unk_02C7 = FALSE;
+        gPSSData->closeBoxFlashing = FALSE;
         sub_808F90C(TRUE);
     }
 }
 
 static void sub_808F99C(void)
 {
-    if (gPSSData->unk_02C7 && ++gPSSData->unk_02C8 > 30)
+    if (gPSSData->closeBoxFlashing && ++gPSSData->closeBoxFlashTimer > 30)
     {
-        gPSSData->unk_02C8 = 0;
-        gPSSData->unk_02C9 = (gPSSData->unk_02C9 == FALSE);
-        sub_808F90C(gPSSData->unk_02C9);
+        gPSSData->closeBoxFlashTimer = 0;
+        gPSSData->closeBoxFlashState = (gPSSData->closeBoxFlashState == FALSE);
+        sub_808F90C(gPSSData->closeBoxFlashState);
     }
 }
 
@@ -2502,7 +2522,7 @@ static void sub_808FA30(u8 pos, bool8 isPartyMon)
     {
         for (j = 0; j < 4; j++)
         {
-            gPSSData->field_B0[index + j] = data[j];
+            gPSSData->partyMenuTilemapBuffer[index + j] = data[j];
         }
         data += 4;
         index += 12;
@@ -2512,8 +2532,8 @@ static void sub_808FA30(u8 pos, bool8 isPartyMon)
 static void sub_808FAA8(void)
 {
     sub_808F9FC();
-    SetBoxPartyPokemonDropdownMap2Rect(1, 0, 0, 12, 22);
-    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(1);
+    SetBoxPartyPokemonDropdownMap2Rect(PSS_DROPDOWN_1, 0, 0, 12, 22);
+    CopyBoxPartyPokemonDropdownToBgTilemapBuffer(PSS_DROPDOWN_1);
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -2531,12 +2551,12 @@ static bool8 DoShowPartyMenu(void)
     case 0:
         if (!ShowPartyMenu())
         {
-            sub_8092AE4();
+            SetCursorInParty();
             gPSSData->showPartyMenuState++;
         }
         break;
     case 1:
-        if (!sub_80924A8())
+        if (!UpdateCursorPos())
         {
             if (gPSSData->setMosaic)
                 BoxSetMosaic();
@@ -2552,7 +2572,7 @@ static bool8 DoShowPartyMenu(void)
 static void sub_808FB68(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
-    TextWindow_SetStdFrame0_WithPal(1, 2, 208);
+    TextWindow_SetStdFrame0_WithPal(PSS_WIN_1, 2, 208);
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     CopyBgTilemapBufferToVram(0);
 }
@@ -2574,7 +2594,7 @@ static void PrintStorageActionText(u8 id)
     case PC_TEXT_FMT_MON_NAME_4:
     case PC_TEXT_FMT_MON_NAME_5:
     case PC_TEXT_FMT_MON_NAME_6:
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gPSSData->field_21E0);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gPSSData->releaseMonName);
         break;
     case PC_TEXT_FMT_ITEM_NAME:
         if (IsActiveItemMoving())
@@ -2590,12 +2610,12 @@ static void PrintStorageActionText(u8 id)
         break;
     }
 
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gPSSData->field_2190, sPCStorageActionTexts[id].text);
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, 1, gPSSData->field_2190, 0, 2, TEXT_SPEED_FF, NULL);
-    DrawTextBorderOuter(1, 2, 13);
-    PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_GFX);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gPSSData->messageText, sPCStorageActionTexts[id].text);
+    FillWindowPixelBuffer(PSS_WIN_1, PIXEL_FILL(1));
+    AddTextPrinterParameterized(PSS_WIN_1, 1, gPSSData->messageText, 0, 2, TEXT_SPEED_FF, NULL);
+    DrawTextBorderOuter(PSS_WIN_1, 2, 13);
+    PutWindowTilemap(PSS_WIN_1);
+    CopyWindowToVram(PSS_WIN_1, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -2664,23 +2684,23 @@ static void sub_808FDFC(void)
     if (!IsCursorOnBox())
     {
         if (sInPartyMenu)
-            sub_8095C84(CURSOR_AREA_IN_PARTY, GetBoxCursorPosition());
+            TryLoadItemIconAtPos(CURSOR_AREA_IN_PARTY, GetBoxCursorPosition());
         else
-            sub_8095C84(CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
+            TryLoadItemIconAtPos(CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
     }
 
-    if (gUnknown_20397BA != ITEM_NONE)
+    if (sMovingItemId != ITEM_NONE)
     {
-        sub_8095E2C(gUnknown_20397BA);
-        sub_8094D14(3);
+        sub_8095E2C(sMovingItemId);
+        StartCursorAnim(3);
     }
 }
 
 static void sub_808FE54(u8 action)
 {
     u16 event;
-    u8 fromBox = sub_8094D34();
-    u16 species = gPSSData->cursorMonSpecies;
+    u8 fromBox = PSS_GetMovingMonOrigBoxId();
+    u16 species = gPSSData->displayMonSpecies;
     u16 species2;
     u8 toBox;
     struct PssQuestLogBuffer * qlogBuffer;
@@ -2753,7 +2773,7 @@ static void sub_808FE54(u8 action)
         event = QL_EVENT_DEPOSITED_MON_PC;
         qlogBuffer->species = species;
         qlogBuffer->species2 = SPECIES_NONE;
-        qlogBuffer->fromBox = gUnknown_20397B6;
+        qlogBuffer->fromBox = sDepositingBoxId;
         qlogBuffer->toBox = 0xFF;
         break;
     case 3:

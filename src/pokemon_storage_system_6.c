@@ -73,12 +73,12 @@ void SetMenuText(u8 textId)
     }
 }
 
-s8 sub_8094E50(u8 arg0)
+s8 GetMenuItemTextId(u8 a0)
 {
-    if (arg0 >= gPSSData->menuItemsCount)
+    if (a0 >= gPSSData->menuItemsCount)
         return -1;
     else
-        return gPSSData->menuItems[arg0].textId;
+        return gPSSData->menuItems[a0].textId;
 }
 
 void AddMenu(void)
@@ -87,13 +87,13 @@ void AddMenu(void)
     gPSSData->menuWindow.height = 2 * gPSSData->menuItemsCount;
     gPSSData->menuWindow.tilemapLeft = 29 - gPSSData->menuWindow.width;
     gPSSData->menuWindow.tilemapTop = 15 - gPSSData->menuWindow.height;
-    gPSSData->field_CB0 = AddWindow(&gPSSData->menuWindow);
-    ClearWindowTilemap(gPSSData->field_CB0);
-    DrawStdFrameWithCustomTileAndPalette(gPSSData->field_CB0, FALSE, 0x00b, 14);
-    PrintTextArray(gPSSData->field_CB0, 1, 8, 2, 16, gPSSData->menuItemsCount, (void*)gPSSData->menuItems);
-    Menu_InitCursor(gPSSData->field_CB0, 1, 0, 2, 16, gPSSData->menuItemsCount, 0);
+    gPSSData->menuWindowId = AddWindow(&gPSSData->menuWindow);
+    ClearWindowTilemap(gPSSData->menuWindowId);
+    DrawStdFrameWithCustomTileAndPalette(gPSSData->menuWindowId, FALSE, 0x00b, 14);
+    PrintTextArray(gPSSData->menuWindowId, 1, 8, 2, 16, gPSSData->menuItemsCount, (void*)gPSSData->menuItems);
+    Menu_InitCursor(gPSSData->menuWindowId, 1, 0, 2, 16, gPSSData->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
-    gPSSData->field_CAE = 0;
+    gPSSData->menuUnusedField = 0;
 }
 
 bool8 sub_8094F90(void)
@@ -142,6 +142,6 @@ s16 sub_8094F94(void)
 
 void sub_8095024(void)
 {
-    ClearStdWindowAndFrameToTransparent(gPSSData->field_CB0, TRUE);
-    RemoveWindow(gPSSData->field_CB0);
+    ClearStdWindowAndFrameToTransparent(gPSSData->menuWindowId, TRUE);
+    RemoveWindow(gPSSData->menuWindowId);
 }

@@ -48,14 +48,14 @@
 	.2byte 0 @ padding
 	.endm
 
-	.macro spr_template tile_tag, pal_tag, oam, anims, images, affine_anims, callback
+	.macro spr_template tile_tag, pal_tag, oam, anims, images, affine_anims, func
 	.2byte \tile_tag
 	.2byte \pal_tag
 	.4byte \oam
 	.4byte \anims
 	.4byte \images
 	.4byte \affine_anims
-	.4byte \callback
+	.4byte \func
 	.endm
 
 @ Berry trees have a table defining the palette slot used for each of their 5

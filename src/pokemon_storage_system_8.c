@@ -138,10 +138,10 @@ void sub_8095B5C(void)
             gPSSData->itemIconSprites[i].active = 0;
         }
     }
-    gPSSData->movingItem = ITEM_NONE;
+    gPSSData->movingItemId = ITEM_NONE;
 }
 
-void sub_8095C84(u8 cursorArea, u8 cursorPos)
+void TryLoadItemIconAtPos(u8 cursorArea, u8 cursorPos)
 {
     u16 heldItem;
 
@@ -179,7 +179,7 @@ void sub_8095C84(u8 cursorArea, u8 cursorPos)
     }
 }
 
-void sub_8095D44(u8 cursorArea, u8 cursorPos)
+void TryHideItemIconAtPos(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
@@ -215,7 +215,7 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_BLEND);
     }
 
-    gPSSData->movingItem = gPSSData->cursorMonItem;
+    gPSSData->movingItemId = gPSSData->displayMonItemId;
 }
 
 void sub_8095E2C(u16 item)
@@ -229,7 +229,7 @@ void sub_8095E2C(u16 item)
     sub_80964E8(id, 1, CURSOR_AREA_IN_BOX, 0);
     sub_80962F0(id, CURSOR_AREA_BOX, 0);
     sub_8096624(id, TRUE);
-    gPSSData->movingItem = item;
+    gPSSData->movingItemId = item;
 }
 
 void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
@@ -246,14 +246,14 @@ void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
         item = GetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM);
-        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItem);
-        gPSSData->movingItem = item;
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
+        gPSSData->movingItemId = item;
     }
     else
     {
         item = GetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM);
-        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItem);
-        gPSSData->movingItem = item;
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
+        gPSSData->movingItemId = item;
     }
 
     id = sub_8096258(2, 0);
@@ -273,12 +273,12 @@ void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos)
     sub_80964E8(id, 2, cursorArea, cursorPos);
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
-        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItem);
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
         SetBoxMonIconObjMode(cursorPos, ST_OAM_OBJ_NORMAL);
     }
     else
     {
-        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItem);
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_NORMAL);
     }
 }
@@ -331,7 +331,7 @@ void sub_80960C0(void)
     }
 }
 
-bool8 sub_809610C(void)
+bool8 IsItemIconAnimActive(void)
 {
     s32 i;
 
@@ -367,12 +367,12 @@ bool8 IsActiveItemMoving(void)
 
 const u8 *GetMovingItemName(void)
 {
-    return ItemId_GetName(gPSSData->movingItem);
+    return ItemId_GetName(gPSSData->movingItemId);
 }
 
 u16 GetMovingItem(void)
 {
-    return gPSSData->movingItem;
+    return gPSSData->movingItemId;
 }
 
 static u8 sub_80961D8(void)
@@ -477,14 +477,14 @@ static void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    CpuFastFill(0, gPSSData->field_42C4, 0x200);
-    LZ77UnCompWram(itemTiles, gPSSData->field_22C4);
+    CpuFastFill(0, gPSSData->itemIconBuffer, 0x200);
+    LZ77UnCompWram(itemTiles, gPSSData->tileBuffer);
     for (i = 0; i < 3; i++)
-        CpuFastCopy(gPSSData->field_22C4 + (i * 0x60), gPSSData->field_42C4 + (i * 0x80), 0x60);
+        CpuFastCopy(gPSSData->tileBuffer + (i * 0x60), gPSSData->itemIconBuffer + (i * 0x80), 0x60);
 
-    CpuFastCopy(gPSSData->field_42C4, gPSSData->itemIconSprites[id].tiles, 0x200);
-    LZ77UnCompWram(itemPal, gPSSData->field_42C4);
-    LoadPalette(gPSSData->field_42C4, gPSSData->itemIconSprites[id].palIndex, 0x20);
+    CpuFastCopy(gPSSData->itemIconBuffer, gPSSData->itemIconSprites[id].tiles, 0x200);
+    LZ77UnCompWram(itemPal, gPSSData->itemIconBuffer);
+    LoadPalette(gPSSData->itemIconBuffer, gPSSData->itemIconSprites[id].palIndex, 0x20);
 }
 
 static void sub_80964B8(u8 id, u8 animNum)
@@ -558,9 +558,9 @@ void PrintItemDescription(void)
     const u8 *description;
 
     if (IsActiveItemMoving())
-        description = ItemId_GetDescription(gPSSData->movingItem);
+        description = ItemId_GetDescription(gPSSData->movingItemId);
     else
-        description = ItemId_GetDescription(gPSSData->cursorMonItem);
+        description = ItemId_GetDescription(gPSSData->displayMonItemId);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
     AddTextPrinterParameterized5(2, 2, description, 2, 0, 0, NULL, 0, 0);
@@ -568,7 +568,7 @@ void PrintItemDescription(void)
 
 void sub_80966F4(void)
 {
-    gPSSData->field_2236 = 25;
+    gPSSData->itemInfoWindowOffset = 25;
     LoadBgTiles(0, gUnknown_83D35DC, 0x80, 0x1A4);
     sub_8096898(0);
 }
@@ -577,41 +577,41 @@ bool8 sub_8096728(void)
 {
     s32 i, var;
 
-    if (gPSSData->field_2236 == 0)
+    if (gPSSData->itemInfoWindowOffset == 0)
         return FALSE;
 
-    gPSSData->field_2236--;
-    var = 25 - gPSSData->field_2236;
+    gPSSData->itemInfoWindowOffset--;
+    var = 25 - gPSSData->itemInfoWindowOffset;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->itemInfoWindowOffset + i, i, 12, 1, 8, 15, 25);
     }
 
     sub_8096898(var);
-    return (gPSSData->field_2236 != 0);
+    return (gPSSData->itemInfoWindowOffset != 0);
 }
 
 bool8 sub_80967C0(void)
 {
     s32 i, var;
 
-    if (gPSSData->field_2236 == 25)
+    if (gPSSData->itemInfoWindowOffset == 25)
         return FALSE;
 
-    if (gPSSData->field_2236 == 0)
+    if (gPSSData->itemInfoWindowOffset == 0)
         FillBgTilemapBufferRect(0, 0, 25, 11, 1, 10, 17);
 
-    gPSSData->field_2236++;
-    var = 25 - gPSSData->field_2236;
+    gPSSData->itemInfoWindowOffset++;
+    var = 25 - gPSSData->itemInfoWindowOffset;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->itemInfoWindowOffset + i, i, 12, 1, 8, 15, 25);
     }
 
     sub_8096898(var);
 
     FillBgTilemapBufferRect(0, 0, var, 11, 1, 10, 0x11);
-    return (gPSSData->field_2236 != 25);
+    return (gPSSData->itemInfoWindowOffset != 25);
 }
 
 static void sub_8096898(u32 x)
@@ -660,9 +660,9 @@ static void sub_8096958(struct Sprite *sprite)
 
 static void sub_80969BC(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPSSData->field_CB4->pos1.x + 4;
-    sprite->pos1.y = gPSSData->field_CB4->pos1.y + gPSSData->field_CB4->pos2.y + 8;
-    sprite->oam.priority = gPSSData->field_CB4->oam.priority;
+    sprite->pos1.x = gPSSData->cursorSprite->pos1.x + 4;
+    sprite->pos1.y = gPSSData->cursorSprite->pos1.y + gPSSData->cursorSprite->pos2.y + 8;
+    sprite->oam.priority = gPSSData->cursorSprite->oam.priority;
 }
 
 static void sub_80969F4(struct Sprite *sprite)

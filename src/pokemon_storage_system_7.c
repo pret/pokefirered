@@ -63,10 +63,10 @@ bool8 sub_8095050(void)
     sMoveMonsPtr = Alloc(sizeof(*sMoveMonsPtr));
     if (sMoveMonsPtr != NULL)
     {
-        gPSSData->field_2200 = AddWindow8Bit(&gUnknown_83D35D4);
-        if (gPSSData->field_2200 != 0xFF)
+        gPSSData->multiMoveWindowId = AddWindow8Bit(&gUnknown_83D35D4);
+        if (gPSSData->multiMoveWindowId != 0xFF)
         {
-            FillWindowPixelBuffer(gPSSData->field_2200, PIXEL_FILL(0));
+            FillWindowPixelBuffer(gPSSData->multiMoveWindowId, PIXEL_FILL(0));
             return TRUE;
         }
     }
@@ -117,19 +117,19 @@ static bool8 sub_8095138(void)
         sMoveMonsPtr->state++;
         break;
     case 1:
-        sub_8094CD4(&sMoveMonsPtr->fromRow, &sMoveMonsPtr->fromColumn);
+        GetCursorBoxColumnAndRow(&sMoveMonsPtr->fromRow, &sMoveMonsPtr->fromColumn);
         sMoveMonsPtr->toRow = sMoveMonsPtr->fromRow;
         sMoveMonsPtr->toColumn = sMoveMonsPtr->fromColumn;
         ChangeBgX(0, -1024, 0);
         ChangeBgY(0, -1024, 0);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
-        FillWindowPixelBuffer8Bit(gPSSData->field_2200, PIXEL_FILL(0));
+        FillWindowPixelBuffer8Bit(gPSSData->multiMoveWindowId, PIXEL_FILL(0));
         sub_80956A4(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
-        PutWindowTilemap(gPSSData->field_2200);
-        CopyWindowToVram8Bit(gPSSData->field_2200, COPYWIN_BOTH);
+        PutWindowTilemap(gPSSData->multiMoveWindowId);
+        CopyWindowToVram8Bit(gPSSData->multiMoveWindowId, COPYWIN_BOTH);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
-        sub_8094D14(2);
+        StartCursorAnim(2);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
         sMoveMonsPtr->state++;
         break;
@@ -155,13 +155,13 @@ static bool8 sub_8095234(void)
         break;
     case 1:
         sub_8095A58();
-        sub_8094D14(0);
+        StartCursorAnim(0);
         sMoveMonsPtr->state++;
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8094D40();
+            SetCursorPriorityTo1();
             LoadPalette(stdpal_get(3), 0xD0, 0x20);
             ShowBg(0);
             return FALSE;
@@ -177,13 +177,13 @@ static bool8 sub_80952A0(void)
     switch (sMoveMonsPtr->state)
     {
     case 0:
-        if (!sub_80924A8())
+        if (!UpdateCursorPos())
         {
-            sub_8094CD4(&sMoveMonsPtr->field_6, &sMoveMonsPtr->field_7);
+            GetCursorBoxColumnAndRow(&sMoveMonsPtr->field_6, &sMoveMonsPtr->field_7);
             sub_8095520();
             sMoveMonsPtr->toRow = sMoveMonsPtr->field_6;
             sMoveMonsPtr->toColumn = sMoveMonsPtr->field_7;
-            CopyWindowToVram8Bit(gPSSData->field_2200, COPYWIN_GFX);
+            CopyWindowToVram8Bit(gPSSData->multiMoveWindowId, COPYWIN_GFX);
             sMoveMonsPtr->state++;
         }
         break;
@@ -203,15 +203,15 @@ static bool8 sub_8095314(void)
     case 0:
         sub_80957C8();
         sub_80958A0();
-        sub_8092BAC(FALSE);
+        InitMultiMonPlaceChange(FALSE);
         sMoveMonsPtr->state++;
         break;
     case 1:
         if (!DoMonPlaceChange())
         {
-            sub_8094D14(3);
+            StartCursorAnim(3);
             sub_8095780(0, 256, 8);
-            sub_8092BAC(TRUE);
+            InitMultiMonPlaceChange(TRUE);
             sMoveMonsPtr->state++;
         }
         break;
@@ -228,7 +228,7 @@ static bool8 sub_8095314(void)
 
 static bool8 sub_8095394(void)
 {
-    u8 var1 = sub_80924A8();
+    u8 var1 = UpdateCursorPos();
     u8 var2 = sub_8095790();
 
     if (!var1 && !var2)
@@ -244,15 +244,15 @@ static bool8 sub_80953BC(void)
     case 0:
         sub_80959A8();
         sub_8095780(0, -256, 8);
-        sub_8092BAC(FALSE);
+        InitMultiMonPlaceChange(FALSE);
         sMoveMonsPtr->state++;
         break;
     case 1:
         if (!DoMonPlaceChange() && !sub_8095790())
         {
             sub_8095918();
-            sub_8094D14(2);
-            sub_8092BAC(TRUE);
+            StartCursorAnim(2);
+            InitMultiMonPlaceChange(TRUE);
             HideBg(0);
             sMoveMonsPtr->state++;
         }
@@ -260,7 +260,7 @@ static bool8 sub_80953BC(void)
     case 2:
         if (!DoMonPlaceChange())
         {
-            sub_8094D14(0);
+            StartCursorAnim(0);
             sub_8095A58();
             sMoveMonsPtr->state++;
         }
@@ -269,7 +269,7 @@ static bool8 sub_80953BC(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             LoadPalette(stdpal_get(3), 0xD0, 0x20);
-            sub_8094D40();
+            SetCursorPriorityTo1();
             ShowBg(0);
             return FALSE;
         }
@@ -279,9 +279,9 @@ static bool8 sub_80953BC(void)
     return TRUE;
 }
 
-bool8 sub_8095474(u8 arg0)
+bool8 MultiMove_TryMoveGroup(u8 action)
 {
-    switch (arg0)
+    switch (action)
     {
     case 0: // up
         if (sMoveMonsPtr->minColumn == 0)
@@ -403,7 +403,7 @@ static void sub_80956A4(u8 x, u8 y)
         const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
         u8 index = GetValidMonIconPalIndex(species) + 8;
 
-        BlitBitmapRectToWindow4BitTo8Bit(gPSSData->field_2200,
+        BlitBitmapRectToWindow4BitTo8Bit(gPSSData->multiMoveWindowId,
                                          iconGfx,
                                          0,
                                          0,
@@ -424,7 +424,7 @@ static void sub_809572C(u8 x, u8 y)
 
     if (species != SPECIES_NONE)
     {
-        FillWindowPixelRect8Bit(gPSSData->field_2200,
+        FillWindowPixelRect8Bit(gPSSData->multiMoveWindowId,
                                 PIXEL_FILL(0),
                                 24 * x,
                                 24 * y,
@@ -513,7 +513,7 @@ static void sub_8095918(void)
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             if (GetBoxMonData(&sMoveMonsPtr->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
-                sub_80901EC(boxPosition);
+                CreateBoxMonIconAtPos(boxPosition);
             monArrayId++;
             boxPosition++;
         }
@@ -551,12 +551,12 @@ static void sub_8095A58(void)
     CopyBgTilemapBufferToVram(0);
 }
 
-u8 sub_8095AA0(void)
+u8 MultiMove_GetOrigin(void)
 {
     return (IN_BOX_ROWS * sMoveMonsPtr->fromColumn) + sMoveMonsPtr->fromRow;
 }
 
-bool8 sub_8095ABC(void)
+bool8 MultiMove_CanPlaceSelection(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;

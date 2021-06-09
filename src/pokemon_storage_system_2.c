@@ -22,7 +22,7 @@ struct PSS_MenuStringPtrs
 };
 
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
-static EWRAM_DATA struct UnkPSSStruct_2002370 *sBoxSelectionPopupSpriteManager = NULL;
+static EWRAM_DATA struct ChooseBoxMenu *sBoxSelectionPopupSpriteManager = NULL;
 
 static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
 static void sub_808C9C4(u8 curBox);
@@ -413,7 +413,7 @@ void ResetPokemonStorageSystem(void)
     }
 }
 
-void LoadBoxSelectionPopupSpriteGfx(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
+void LoadBoxSelectionPopupSpriteGfx(struct ChooseBoxMenu *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
 {
     struct SpritePalette palette = {
         sBoxSelectionPopupPalette, palTag

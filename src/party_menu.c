@@ -4600,7 +4600,7 @@ static void ShowMoveSelectWindow(u8 slot)
         if (move != MOVE_NONE)
             ++moveCount;
     }
-    Menu_InitCursor(windowId, fontId, 0, 2, 16, moveCount, FALSE);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, fontId, 0, 2, 16, moveCount, FALSE);
     ScheduleBgCopyTilemapToVram(2);
 }
 

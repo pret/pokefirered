@@ -28,7 +28,7 @@ static void sub_8096A74(struct Sprite * sprite);
 static void sub_8096B10(struct Sprite * sprite);
 static void sub_8096BAC(struct Sprite * sprite);
 
-static const u32 gUnknown_83D35DC[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
+static const u32 gUnknown_83D35DC[] = INCBIN_U32("graphics/pokemon_storage/unk_83D35DC.4bpp");
 
 static const struct OamData gUnknown_83D365C = {
     .y = 0,
@@ -445,8 +445,8 @@ static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
     switch (cursorArea)
     {
     case CURSOR_AREA_IN_BOX:
-        row = cursorPos % IN_BOX_ROWS;
-        column = cursorPos / IN_BOX_ROWS;
+        row = cursorPos % IN_BOX_COLUMNS;
+        column = cursorPos / IN_BOX_COLUMNS;
         sStorage->itemIconSprites[id].sprite->pos1.x = (24 * row) + 112;
         sStorage->itemIconSprites[id].sprite->pos1.y = (24 * column) + 56;
         sStorage->itemIconSprites[id].sprite->oam.priority = 2;

@@ -733,7 +733,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
             MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
         else
             MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
-        Menu_InitCursor(windowId, 2, 0, 2, 14, count, initPos);
+        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 2, 0, 2, 14, count, initPos);
         CreateMCMenuInputHandlerTask(ignoreBpress, count, windowId, mcId);
         ScheduleBgCopyTilemapToVram(0);
     }
@@ -1005,7 +1005,7 @@ static void CreatePCMenuWindow(void)
         AddTextPrinterParameterized(windowId, 2, gText_SomeoneSPc, cursorWidth, 2 , 0xFF, NULL);
     StringExpandPlaceholders(gStringVar4, gText_SPc);
     Menu_PrintFormatIntlPlayerName(windowId, gStringVar4, cursorWidth, 18);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 2, 0, 2, 16, nitems, 0);
     CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
     ScheduleBgCopyTilemapToVram(0);
 }
@@ -1248,7 +1248,7 @@ void DrawSeagallopDestinationMenu(void)
         AddTextPrinterParameterized(windowId, 2, gText_Other, cursorWidth, i * 16 + 2, 0xFF, NULL);
         i++;
         AddTextPrinterParameterized(windowId, 2, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
-        Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
+        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 2, 0, 2, 16, nitems, 0);
         CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
         ScheduleBgCopyTilemapToVram(0);
     }

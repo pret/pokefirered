@@ -4,8 +4,8 @@
 #include "pokemon_storage_system.h"
 #include "mon_markings.h"
 
-#define IN_BOX_COLUMNS 5
-#define IN_BOX_ROWS    6
+#define IN_BOX_ROWS 5
+#define IN_BOX_COLUMNS    6
 
 #define MAX_MON_ICONS 40
 #define MAX_ITEM_ICONS 3
@@ -25,6 +25,7 @@ enum
     BOX_OPTION_MOVE_MONS,
     BOX_OPTION_MOVE_ITEMS,
     BOX_OPTION_EXIT,
+    BOX_OPTION_COUNT,
 };
 
 enum
@@ -173,27 +174,38 @@ enum
     SCREEN_CHANGE_ITEM_FROM_BAG,
 };
 
-#define TAG_PAL_WAVEFORM    0xDACA
-#define TAG_PAL_DAC8        0xDAC8
-#define TAG_PAL_DAC6        0xDAC6
-#define TAG_PAL_DACE        0xDACE
-#define TAG_PAL_DAC7        0xDAC7
-#define TAG_PAL_DAC9        0xDAC9
-#define TAG_PAL_DAC0        0xDAC0
-#define TAG_PAL_DACB        0xDACB
+enum {
+    PSS_WIN_DISPLAY_MON_INFO = 0,
+    PSS_WIN_MESSAGE_BOX,
+    PSS_WIN_2,
+};
 
-#define TAG_TILE_WAVEFORM   0x5
-#define TAG_TILE_10         0x10
-#define TAG_TILE_2          0x2
-#define TAG_TILE_D          0xD
-#define TAG_TILE_A          0xA
-#define TAG_TILE_3          0x3
-#define TAG_TILE_4          0x4
-#define TAG_TILE_12         0x12
-#define TAG_TILE_7          0x7
-#define TAG_TILE_0          0x0
-#define TAG_TILE_1          0x1
-#define TAG_TILE_6          0x6
+#define TAG_PAL_MON_ICON_0  0xDAC0
+#define TAG_PAL_MON_ICON_1  0xDAC1
+#define TAG_PAL_MON_ICON_2  0xDAC2
+#define TAG_PAL_MON_ICON_3  0xDAC3
+#define TAG_PAL_MON_ICON_4  0xDAC4
+#define TAG_PAL_MON_ICON_5  0xDAC5
+#define TAG_PAL_DAC6        0xDAC6
+#define TAG_PAL_DAC7        0xDAC7
+#define TAG_PAL_DAC8        0xDAC8
+#define TAG_PAL_BOX_TITLE   0xDAC9
+#define TAG_PAL_WAVEFORM    0xDACA
+#define TAG_PAL_DACB        0xDACB
+#define TAG_PAL_DACE        0xDACE
+
+#define TAG_TILE_0              0x0
+#define TAG_TILE_1              0x1
+#define TAG_TILE_2              0x2
+#define TAG_TILE_BOX_TITLE      0x3
+#define TAG_TILE_BOX_TITLE_ALT  0x4
+#define TAG_TILE_WAVEFORM       0x5
+#define TAG_TILE_6              0x6
+#define TAG_TILE_7              0x7
+#define TAG_TILE_A              0xA
+#define TAG_TILE_D              0xD
+#define TAG_TILE_10             0x10
+#define TAG_TILE_MON_ICON             0x12
 
 #define BOXID_NONE_CHOSEN   200
 #define BOXID_CANCELED      201
@@ -435,7 +447,7 @@ void SetCurrentBox(u8 boxId);
 void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst);
 void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * src);
 
-void Cb2_ExitPSS(void);
+void CB2_ExitPokeStorage(void);
 void FreeBoxSelectionPopupSpriteGfx(void);
 void CreateChooseBoxMenuSprites(u8 curBox);
 void DestroyChooseBoxMenuSprites(void);
@@ -519,7 +531,7 @@ bool8 IsCursorInBox(void);
 
 void InitMonIconFields(void);
 struct Sprite * CreateMonIconSprite(u16 species, u32 pid, s16 x, s16 y, u8 priority, u8 subpriority);
-void CreatePartyMonsSprites(bool8 species);
+void CreatePartyMonsSprites(bool8 visible);
 void CompactPartySprites(void);
 bool8 GetNumPartySpritesCompacting(void);
 void MovePartySprites(s16 yDelta);
@@ -528,7 +540,7 @@ void ReshowReleaseMon(void);
 bool8 ResetReleaseMonSpritePtr(void);
 void CreateInitBoxTask(u8 box);
 bool8 IsInitBoxActive(void);
-void AnimateBoxScrollArrows(bool8 species);
+void AnimateBoxScrollArrows(bool8 animate);
 void CreateMovingMonIcon(void);
 void SaveMonSpriteAtPos(u8 boxId, u8 cursorPos);
 bool8 MoveShiftingMons(void);

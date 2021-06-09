@@ -206,7 +206,7 @@ static void Task_DrawPlayerPcTopMenu(u8 taskId)
         tWindowId = AddWindow(&sWindowTemplate_TopMenu_4Items);
     SetStdWindowBorderStyle(tWindowId, FALSE);
     AddItemMenuActionTextPrinters(tWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, GetFontAttribute(2, FONTATTR_LETTER_SPACING), 16, sTopMenuItemCount, sMenuActions_TopMenu, sItemOrder);
-    Menu_InitCursor(tWindowId, 2, 0, 2, 16, sTopMenuItemCount, 0);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, 2, 0, 2, 16, sTopMenuItemCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_TopMenuHandleInput;
 }
@@ -297,8 +297,9 @@ static void Task_CreateItemStorageSubmenu(u8 taskId, u8 cursorPos)
         SetHelpContext(HELPCONTEXT_PLAYERS_PC_ITEMS);
     tWindowId = AddWindow(&sWindowTemplate_ItemStorageSubmenu);
     SetStdWindowBorderStyle(tWindowId, FALSE);
-    PrintTextArray(tWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sMenuActions_ItemPc), sMenuActions_ItemPc);
-    Menu_InitCursor(tWindowId, 2, 0, 2, 16, NELEMS(sMenuActions_ItemPc), cursorPos);
+    PrintMenuTable(tWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sMenuActions_ItemPc),
+                   sMenuActions_ItemPc);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(tWindowId, 2, 0, 2, 16, NELEMS(sMenuActions_ItemPc), cursorPos);
     ScheduleBgCopyTilemapToVram(0);
     PrintStringOnWindow0WithDialogueFrame(sItemStorageActionDescriptionPtrs[cursorPos]);
 }
@@ -554,8 +555,9 @@ static void Task_DestroyMailboxPcViewAndCancel(u8 taskId)
 static void Task_DrawMailSubmenu(u8 taskId)
 {
     u8 windowId = MailboxPC_GetAddWindow(MBPCWIN_SUBMENU);
-    PrintTextArray(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sMenuActions_MailSubmenu), sMenuActions_MailSubmenu);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, NELEMS(sMenuActions_MailSubmenu), 0);
+    PrintMenuTable(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sMenuActions_MailSubmenu),
+                   sMenuActions_MailSubmenu);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 2, 0, 2, 16, NELEMS(sMenuActions_MailSubmenu), 0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_MailSubmenuHandleInput;
 }

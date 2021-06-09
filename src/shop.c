@@ -227,8 +227,10 @@ static u8 CreateShopMenu(u8 martType)
     
     sShopMenuWindowId = AddWindow(&sShopMenuWindowTemplate);
     SetStdWindowBorderStyle(sShopMenuWindowId, FALSE);
-    PrintTextArray(sShopMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sShopMenuActions_BuySellQuit), sShopMenuActions_BuySellQuit);
-    Menu_InitCursor(sShopMenuWindowId, 2, 0, 2, 16, NELEMS(sShopMenuActions_BuySellQuit), 0);
+    PrintMenuTable(sShopMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16,
+                   NELEMS(sShopMenuActions_BuySellQuit), sShopMenuActions_BuySellQuit);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sShopMenuWindowId, 2, 0, 2, 16, NELEMS(sShopMenuActions_BuySellQuit),
+                                                   0);
     PutWindowTilemap(sShopMenuWindowId);
     CopyWindowToVram(sShopMenuWindowId, COPYWIN_MAP);
     return CreateTask(Task_ShopMenu, 8);

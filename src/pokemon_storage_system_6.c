@@ -90,8 +90,8 @@ void AddMenu(void)
     sStorage->menuWindowId = AddWindow(&sStorage->menuWindow);
     ClearWindowTilemap(sStorage->menuWindowId);
     DrawStdFrameWithCustomTileAndPalette(sStorage->menuWindowId, FALSE, 0x00b, 14);
-    PrintTextArray(sStorage->menuWindowId, 1, 8, 2, 16, sStorage->menuItemsCount, (void*)sStorage->menuItems);
-    Menu_InitCursor(sStorage->menuWindowId, 1, 0, 2, 16, sStorage->menuItemsCount, 0);
+    PrintMenuTable(sStorage->menuWindowId, 1, 8, 2, 16, sStorage->menuItemsCount, (void *) sStorage->menuItems);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sStorage->menuWindowId, 1, 0, 2, 16, sStorage->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     sStorage->menuUnusedField = 0;
 }

@@ -1449,7 +1449,8 @@ static void OpenContextMenu(u8 taskId)
         sItemMenuContextActions,
         sContextMenuItemsPtr
     );
-    Menu_InitCursor(r6, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumItems, 0);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(r6, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2,
+                                                   sContextMenuNumItems, 0);
     r4 = ShowBagWindow(BAG_WINDOW_DEPOSIT_ITEM_MSG, 0);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);

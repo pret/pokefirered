@@ -394,7 +394,7 @@ static void sub_809566C(u8 arg0, u8 arg1, u8 arg2)
 
 static void sub_80956A4(u8 x, u8 y)
 {
-    u8 position = x + (IN_BOX_ROWS * y);
+    u8 position = x + (IN_BOX_COLUMNS * y);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
     u32 personality = GetCurrentBoxMonData(position, MON_DATA_PERSONALITY);
 
@@ -419,7 +419,7 @@ static void sub_80956A4(u8 x, u8 y)
 
 static void sub_809572C(u8 x, u8 y)
 {
-    u8 position = x + (IN_BOX_ROWS * y);
+    u8 position = x + (IN_BOX_COLUMNS * y);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
 
     if (species != SPECIES_NONE)
@@ -469,7 +469,7 @@ static void sub_80957C8(void)
     columnCount = sMoveMonsPtr->minColumn + sMoveMonsPtr->columsTotal;
     for (i = sMoveMonsPtr->minColumn; i < columnCount; i++)
     {
-        u8 boxPosition = (IN_BOX_ROWS * i) + sMoveMonsPtr->minRow;
+        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMoveMonsPtr->minRow;
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             struct BoxPokemon *boxMon = GetBoxedMonPtr(boxId, boxPosition);
@@ -490,7 +490,7 @@ static void sub_80958A0(void)
 
     for (i = sMoveMonsPtr->minColumn; i < columnCount; i++)
     {
-        u8 boxPosition = (IN_BOX_ROWS * i) + sMoveMonsPtr->minRow;
+        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMoveMonsPtr->minRow;
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             DestroyBoxMonIconAtPosition(boxPosition);
@@ -509,7 +509,7 @@ static void sub_8095918(void)
 
     for (i = sMoveMonsPtr->minColumn; i < columnCount; i++)
     {
-        u8 boxPosition = (IN_BOX_ROWS * i) + sMoveMonsPtr->minRow;
+        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMoveMonsPtr->minRow;
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             if (GetBoxMonData(&sMoveMonsPtr->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
@@ -530,7 +530,7 @@ static void sub_80959A8(void)
 
     for (i = sMoveMonsPtr->minColumn; i < columnCount; i++)
     {
-        u8 boxPosition = (IN_BOX_ROWS * i) + sMoveMonsPtr->minRow;
+        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMoveMonsPtr->minRow;
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             if (GetBoxMonData(&sMoveMonsPtr->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
@@ -553,7 +553,7 @@ static void sub_8095A58(void)
 
 u8 MultiMove_GetOrigin(void)
 {
-    return (IN_BOX_ROWS * sMoveMonsPtr->fromColumn) + sMoveMonsPtr->fromRow;
+    return (IN_BOX_COLUMNS * sMoveMonsPtr->fromColumn) + sMoveMonsPtr->fromRow;
 }
 
 bool8 MultiMove_CanPlaceSelection(void)
@@ -565,7 +565,7 @@ bool8 MultiMove_CanPlaceSelection(void)
 
     for (i = sMoveMonsPtr->minColumn; i < columnCount; i++)
     {
-        u8 boxPosition = (IN_BOX_ROWS * i) + sMoveMonsPtr->minRow;
+        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMoveMonsPtr->minRow;
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             if (GetBoxMonData(&sMoveMonsPtr->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES)

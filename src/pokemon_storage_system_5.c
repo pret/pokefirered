@@ -45,9 +45,9 @@ static bool8 SetMenuTexts_Item(void);
 static void CreateCursorSprites(void);
 static void ToggleCursorAutoAction(void);
 
-static const u16 sHandCursorPalette[] = INCBIN_U16("graphics/interface/pss_unk_83D2BCC.gbapal");
-static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/interface/pss_unk_83D2BEC.4bpp");
-static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/interface/pss_unk_83D33EC.4bpp");
+static const u16 sHandCursorPalette[] = INCBIN_U16("graphics/pokemon_storage/unk_83D2BCC.gbapal");
+static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83D2BEC.4bpp");
+static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83D33EC.4bpp");
 
 //------------------------------------------------------------------------------
 //  SECTION: Cursor movement
@@ -93,8 +93,8 @@ static void GetCursorCoordsByPos(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *
     switch (cursorArea)
     {
     case CURSOR_AREA_IN_BOX:
-        *x = (cursorPosition % IN_BOX_ROWS) * 24 + 100;
-        *y = (cursorPosition / IN_BOX_ROWS) * 24 +  32;
+        *x = (cursorPosition % IN_BOX_COLUMNS) * 24 + 100;
+        *y = (cursorPosition / IN_BOX_COLUMNS) * 24 + 32;
         break;
     case CURSOR_AREA_IN_PARTY:
         if (cursorPosition == 0)
@@ -1186,9 +1186,9 @@ static u8 InBoxInput_Normal(void)
         if (JOY_REPT(DPAD_UP))
         {
             retVal = TRUE;
-            if (sBoxCursorPosition >= IN_BOX_ROWS)
+            if (sBoxCursorPosition >= IN_BOX_COLUMNS)
             {
-                cursorPosition -= IN_BOX_ROWS;
+                cursorPosition -= IN_BOX_COLUMNS;
             }
             else
             {
@@ -1200,7 +1200,7 @@ static u8 InBoxInput_Normal(void)
         else if (JOY_REPT(DPAD_DOWN))
         {
             retVal = TRUE;
-            cursorPosition += IN_BOX_ROWS;
+            cursorPosition += IN_BOX_COLUMNS;
             if (cursorPosition >= IN_BOX_COUNT)
             {
                 cursorArea = CURSOR_AREA_BUTTONS;
@@ -1214,28 +1214,28 @@ static u8 InBoxInput_Normal(void)
         else if (JOY_REPT(DPAD_LEFT))
         {
             retVal = TRUE;
-            if (sBoxCursorPosition % IN_BOX_ROWS != 0)
+            if (sBoxCursorPosition % IN_BOX_COLUMNS != 0)
             {
                 cursorPosition--;
             }
             else
             {
                 sStorage->cursorHorizontalWrap = -1;
-                cursorPosition += (IN_BOX_ROWS - 1);
+                cursorPosition += (IN_BOX_COLUMNS - 1);
             }
             break;
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
             retVal = TRUE;
-            if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
+            if ((sBoxCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
                 cursorPosition++;
             }
             else
             {
                 sStorage->cursorHorizontalWrap = 1;
-                cursorPosition -= (IN_BOX_ROWS - 1);
+                cursorPosition -= (IN_BOX_COLUMNS - 1);
             }
             break;
         }
@@ -1314,9 +1314,9 @@ static u8 InBoxInput_GrabbingMultiple(void)
     {
         if (JOY_REPT(DPAD_UP))
         {
-            if (sBoxCursorPosition / IN_BOX_ROWS != 0)
+            if (sBoxCursorPosition / IN_BOX_COLUMNS != 0)
             {
-                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_ROWS);
+                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_COLUMNS);
                 return 21;
             }
             else
@@ -1326,9 +1326,9 @@ static u8 InBoxInput_GrabbingMultiple(void)
         }
         else if (JOY_REPT(DPAD_DOWN))
         {
-            if (sBoxCursorPosition + IN_BOX_ROWS < IN_BOX_COUNT)
+            if (sBoxCursorPosition + IN_BOX_COLUMNS < IN_BOX_COUNT)
             {
-                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_ROWS);
+                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_COLUMNS);
                 return 21;
             }
             else
@@ -1338,7 +1338,7 @@ static u8 InBoxInput_GrabbingMultiple(void)
         }
         else if (JOY_REPT(DPAD_LEFT))
         {
-            if (sBoxCursorPosition % IN_BOX_ROWS != 0)
+            if (sBoxCursorPosition % IN_BOX_COLUMNS != 0)
             {
                 SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
                 return 21;
@@ -1350,7 +1350,7 @@ static u8 InBoxInput_GrabbingMultiple(void)
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
-            if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
+            if ((sBoxCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
                 SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
                 return 21;
@@ -1389,7 +1389,7 @@ static u8 InBoxInput_MovingMultiple(void)
     {
         if (MultiMove_TryMoveGroup(0))
         {
-            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_ROWS);
+            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_COLUMNS);
             return 25;
         }
         else
@@ -1401,7 +1401,7 @@ static u8 InBoxInput_MovingMultiple(void)
     {
         if (MultiMove_TryMoveGroup(1))
         {
-            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_ROWS);
+            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_COLUMNS);
             return 25;
         }
         else
@@ -2019,8 +2019,8 @@ void GetCursorBoxColumnAndRow(u8 *col_p, u8 *row_p)
 {
     if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
     {
-        *col_p = sBoxCursorPosition % IN_BOX_ROWS;
-        *row_p = sBoxCursorPosition / IN_BOX_ROWS;
+        *col_p = sBoxCursorPosition % IN_BOX_COLUMNS;
+        *row_p = sBoxCursorPosition / IN_BOX_COLUMNS;
     }
     else
     {

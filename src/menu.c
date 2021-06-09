@@ -282,7 +282,7 @@ u8 Menu_InitCursorInternal(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHei
     return sMenu.cursorPos;
 }
 
-u8 Menu_InitCursor(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
+u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
 {
     return Menu_InitCursorInternal(windowId, fontId, left, top, cursorHeight, numChoices, initialCursorPos, 0);
 }
@@ -290,7 +290,9 @@ u8 Menu_InitCursor(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 
 // not used
 static u8 sub_810F818(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initialCursorPos)
 {
-    return Menu_InitCursor(windowId, fontId, left, top, GetMenuCursorDimensionByFont(fontId, 1), numChoices, initialCursorPos);
+    return InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, fontId, left, top,
+                                                          GetMenuCursorDimensionByFont(fontId, 1), numChoices,
+                                                          initialCursorPos);
 }
 
 static void Menu_RedrawCursor(u8 oldPos, u8 newPos)
@@ -451,7 +453,7 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs)
+void PrintMenuTable(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs)
 {
     u8 i;
 
@@ -473,7 +475,7 @@ void UnionRoomAndTradeMenuPrintOptions(u8 windowId, u8 fontId, u8 lineHeight, u8
 {
     u8 left = GetMenuCursorDimensionByFont(fontId, 0);
 
-    PrintTextArray(windowId, fontId, left, 0, lineHeight, itemCount, strs);
+    PrintMenuTable(windowId, fontId, left, 0, lineHeight, itemCount, strs);
 }
 
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *orderArray)
@@ -548,7 +550,9 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8
     textSubPrinter.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     textSubPrinter.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     AddTextPrinter(&textSubPrinter, 0xFF, NULL);
-    Menu_InitCursor(sYesNoWindowId, fontId, left, top, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) + textSubPrinter.lineSpacing, 2, initialCursorPos);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sYesNoWindowId, fontId, left, top,
+                                                   GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) +
+                                                   textSubPrinter.lineSpacing, 2, initialCursorPos);
 }
 
 // not used

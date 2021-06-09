@@ -24,7 +24,7 @@ struct PSS_MenuStringPtrs
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
 static EWRAM_DATA struct ChooseBoxMenu *sChooseBoxMenu = NULL;
 
-static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
+static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr);
 static void ChooseBoxMenu_CreateSprites(u8 curBox);
 static void ChooseBoxMenu_DestroySprites(void);
 static void UpdateBoxNameAndCountSprite_WraparoundRight(void);
@@ -39,7 +39,7 @@ static const u16 sBoxSelectionPopupPalette[];
 static const u16 sBoxSelectionPopupCenterTiles[];
 static const u16 sBoxSelectionPopupSidesTiles[];
 
-static const struct PSS_MenuStringPtrs sUnknown_83CDA20[] = {
+static const struct PSS_MenuStringPtrs sMainMenuTexts[] = {
     {gText_WithdrawPokemon, gText_WithdrawMonDescription},
     {gText_DepositPokemon,  gText_DepositMonDescription },
     {gText_MovePokemon,     gText_MoveMonDescription    },
@@ -261,12 +261,12 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     {
     case 0:
         SetHelpContext(HELPCONTEXT_BILLS_PC);
-        PSS_CreatePCMenu(task->tSelectedOption, &task->tWindowId);
+        CreateMainMenu(task->tSelectedOption, &task->tWindowId);
         LoadStdWindowFrameGfx();
-        DrawDialogueFrame(0, 0);
-        FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        DrawDialogueFrame(DLG_WINDOW_ID, FALSE);
+        FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+        AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        CopyWindowToVram(DLG_WINDOW_ID, COPYWIN_BOTH);
         CopyWindowToVram(task->tWindowId, COPYWIN_BOTH);
         task->tState++;
         break;
@@ -283,36 +283,36 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         case MENU_NOTHING_CHOSEN:
             task->tNextOption = task->tSelectedOption;
             if (JOY_NEW(DPAD_UP) && --task->tNextOption < 0)
-                task->tNextOption = 4;
+                task->tNextOption = BOX_OPTION_COUNT - 1;
 
-            if (JOY_NEW(DPAD_DOWN) && ++task->tNextOption > 4)
-                task->tNextOption = 0;
+            if (JOY_NEW(DPAD_DOWN) && ++task->tNextOption >= BOX_OPTION_COUNT)
+                task->tNextOption = BOX_OPTION_WITHDRAW;
             if (task->tSelectedOption != task->tNextOption)
             {
                 task->tSelectedOption = task->tNextOption;
-                FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+                AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_INSTANT, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             }
             break;
         case MENU_B_PRESSED:
-        case  4:
-            ClearStdWindowAndFrame(0, TRUE);
+        case BOX_OPTION_EXIT:
+            ClearStdWindowAndFrame(DLG_WINDOW_ID, TRUE);
             ClearStdWindowAndFrame(task->tWindowId, TRUE);
             ScriptContext2_Disable();
             EnableBothScriptContexts();
             DestroyTask(taskId);
             break;
         default:
-            if (task->tInput == 0 && CountPartyMons() == PARTY_SIZE)
+            if (task->tInput == BOX_OPTION_WITHDRAW && CountPartyMons() == PARTY_SIZE)
             {
-                FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+                AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, gText_PartyFull, TEXT_SPEED_INSTANT, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->tState = 3;
             }
-            else if (task->tInput == 1 && CountPartyMons() == 1)
+            else if (task->tInput == BOX_OPTION_DEPOSIT && CountPartyMons() == 1)
             {
-                FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+                AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, gText_JustOnePkmn, TEXT_SPEED_INSTANT, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->tState = 3;
             }
             else
@@ -326,28 +326,28 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 3:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+            AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_INSTANT, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->tState = 2;
         }
         else if (JOY_NEW(DPAD_UP))
         {
             if (--task->tSelectedOption < 0)
-                task->tSelectedOption = 4;
+                task->tSelectedOption = BOX_OPTION_EXIT;
             Menu_MoveCursor(-1);
             task->tSelectedOption = Menu_GetCursorPos();
-            FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+            AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_INSTANT, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->tState = 2;
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            if (++task->tSelectedOption > 3)
+            if (++task->tSelectedOption >= BOX_OPTION_EXIT)
                 task->tSelectedOption = 0;
             Menu_MoveCursor(1);
             task->tSelectedOption = Menu_GetCursorPos();
-            FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            FillWindowPixelBuffer(DLG_WINDOW_ID, PIXEL_FILL(1));
+            AddTextPrinterParameterized2(DLG_WINDOW_ID, 2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SPEED_INSTANT, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->tState = 2;
         }
         break;
@@ -366,7 +366,7 @@ void ShowPokemonStorageSystemPC(void)
 {
     u8 taskId = CreateTask(Task_PokemonStorageSystemPC, 80);
     gTasks[taskId].tState = 0;
-    gTasks[taskId].tSelectedOption = 0;
+    gTasks[taskId].tSelectedOption = BOX_OPTION_WITHDRAW;
     ScriptContext2_Enable();
 }
 
@@ -390,7 +390,7 @@ static void FieldCb_ReturnToPcMenu(void)
 #undef tNextOption
 #undef tWindowId
 
-static const struct WindowTemplate sUnknown_83CDA48 = {
+static const struct WindowTemplate sWindowTemplate_MainMenu = {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
@@ -400,18 +400,19 @@ static const struct WindowTemplate sUnknown_83CDA48 = {
     .baseBlock = 0x001
 };
 
-static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
+static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
 {
     s16 windowId;
-    windowId = AddWindow(&sUnknown_83CDA48);
+    windowId = AddWindow(&sWindowTemplate_MainMenu);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintTextArray(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sUnknown_83CDA20), (void *)sUnknown_83CDA20);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, NELEMS(sUnknown_83CDA20), whichMenu);
+    PrintMenuTable(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sMainMenuTexts),
+                   (void *) sMainMenuTexts);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, 2, 0, 2, 16, NELEMS(sMainMenuTexts), whichMenu);
     *windowIdPtr = windowId;
 }
 
-void Cb2_ExitPSS(void)
+void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
     gFieldCallback = FieldCb_ReturnToPcMenu;
@@ -681,6 +682,6 @@ static void SpriteCB_ChooseBoxArrow(struct Sprite *sprite)
 
 // Forward-declared rodata
 
-static const u16 sBoxSelectionPopupPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
-static const u16 sBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CDAB8.4bpp");
-static const u16 sBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CE2B8.4bpp");
+static const u16 sBoxSelectionPopupPalette[] = INCBIN_U16("graphics/pokemon_storage/unk_83CDA98.gbapal");
+static const u16 sBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83CDAB8.4bpp");
+static const u16 sBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE2B8.4bpp");

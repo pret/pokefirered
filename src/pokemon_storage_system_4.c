@@ -174,7 +174,7 @@ static const struct SpriteSheet sSpriteSheet_Arrow = {
     sArrow_Gfx, 0x0080, TAG_TILE_6
 };
 
-static const struct OamData gUnknown_83D2B5C = {
+static const struct OamData sOamData_BoxTitle = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -189,32 +189,32 @@ static const struct OamData gUnknown_83D2B5C = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gUnknown_83D2B64[] = {
+static const union AnimCmd sAnim_BoxTitle_0[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83D2B6C[] = {
+static const union AnimCmd sAnim_BoxTitle_1[] = {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_83D2B74[] = {
-    gUnknown_83D2B64,
-    gUnknown_83D2B6C
+static const union AnimCmd *const sAnimTable_BoxTitle[] = {
+    sAnim_BoxTitle_0,
+    sAnim_BoxTitle_1
 };
 
 static const struct SpriteTemplate sSpriteTemplate_BoxTitle = {
     .tileTag = TAG_TILE_BOX_TITLE,
     .paletteTag = TAG_PAL_BOX_TITLE,
-    .oam = &gUnknown_83D2B5C,
-    .anims = gUnknown_83D2B74,
+    .oam = &sOamData_BoxTitle,
+    .anims = sAnimTable_BoxTitle,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_83D2B94 = {
+static const struct OamData sOamData_Arrow = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -229,26 +229,26 @@ static const struct OamData gUnknown_83D2B94 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gUnknown_83D2B9C[] = {
+static const union AnimCmd sAnim_Arrow_0[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83D2BA4[] = {
+static const union AnimCmd sAnim_Arrow_1[] = {
     ANIMCMD_FRAME(2, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_83D2BAC[] = {
-    gUnknown_83D2B9C,
-    gUnknown_83D2BA4
+static const union AnimCmd *const sAnimTable_Arrow[] = {
+    sAnim_Arrow_0,
+    sAnim_Arrow_1
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Arrow = {
     .tileTag = TAG_TILE_6,
     .paletteTag = TAG_PAL_WAVEFORM,
-    .oam = &gUnknown_83D2B94,
-    .anims = gUnknown_83D2BAC,
+    .oam = &sOamData_Arrow,
+    .anims = sAnimTable_Arrow,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Arrow

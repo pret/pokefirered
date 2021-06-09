@@ -73,12 +73,12 @@ void SetMenuText(u8 textId)
     }
 }
 
-s8 GetMenuItemTextId(u8 a0)
+s8 GetMenuItemTextId(u8 idx)
 {
-    if (a0 >= sStorage->menuItemsCount)
+    if (idx >= sStorage->menuItemsCount)
         return -1;
     else
-        return sStorage->menuItems[a0].textId;
+        return sStorage->menuItems[idx].textId;
 }
 
 void AddMenu(void)
@@ -104,7 +104,7 @@ bool8 IsMenuLoading(void)
 
 s16 PokeStorage_HandleMenuInput(void)
 {
-    s32 textId = -2;
+    s32 textId = MENU_NOTHING_CHOSEN;
 
     do
     {
@@ -116,7 +116,7 @@ s16 PokeStorage_HandleMenuInput(void)
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            textId = -1;
+            textId = MENU_B_PRESSED;
         }
 
         if (JOY_NEW(DPAD_UP))
@@ -131,7 +131,7 @@ s16 PokeStorage_HandleMenuInput(void)
         }
     } while (0);
 
-    if (textId != -2)
+    if (textId != MENU_NOTHING_CHOSEN)
         RemoveMenu();
 
     if (textId >= 0)

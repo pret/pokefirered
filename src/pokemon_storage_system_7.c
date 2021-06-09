@@ -7,48 +7,56 @@
 
 struct MoveMons
 {
-    u8 field_0;
+    u8 funcId;
     u8 state;
     u8 fromRow;
     u8 fromColumn;
-    u8 toRow;
     u8 toColumn;
-    u8 field_6;
-    u8 field_7;
+    u8 toRow;
+    u8 cursorColumn;
+    u8 cursorRow;
     u8 minRow;
     u8 minColumn;
     u8 rowsTotal;
     u8 columsTotal;
     u16 bgX;
     u16 bgY;
-    u16 field_10;
+    u16 bgMoveSteps;
     struct BoxPokemon boxMons[IN_BOX_COUNT];
 };
 
 static EWRAM_DATA struct MoveMons *sMoveMonsPtr = NULL;
 
-static bool8 sub_8095138(void);
-static bool8 sub_8095234(void);
-static bool8 sub_80952A0(void);
-static bool8 sub_8095314(void);
-static bool8 sub_8095394(void);
-static bool8 sub_80953BC(void);
-static void sub_8095520(void);
-static void sub_80955C4(u8 arg0, u8 arg1, u8 arg2);
-static void sub_80955FC(u8 arg0, u8 arg1, u8 arg2);
-static void sub_8095634(u8 arg0, u8 arg1, u8 arg2);
-static void sub_809566C(u8 arg0, u8 arg1, u8 arg2);
-static void sub_80956A4(u8 x, u8 y);
-static void sub_809572C(u8 x, u8 y);
-static void sub_8095780(u16 bgX, u16 bgY, u16 duration);
-static u8 sub_8095790(void);
-static void sub_80957C8(void);
-static void sub_80958A0(void);
-static void sub_8095918(void);
-static void sub_80959A8(void);
-static void sub_8095A58(void);
+static bool8 MultiMove_Start(void);
+static bool8 MultiMove_Cancel(void);
+static bool8 MultiMove_ChangeSelection(void);
+static bool8 MultiMove_GrabSelection(void);
+static bool8 MultiMove_MoveMons(void);
+static bool8 MultiMove_PlaceMons(void);
+static void MultiMove_UpdateSelectedIcons(void);
+static void MultiMove_SelectColumn(u8 x, u8 y1, u8 y2);
+static void MultiMove_SelectRow(u8 y, u8 x1, u8 x2);
+static void MultiMove_DeselectColumn(u8 x, u8 y1, u8 y2);
+static void MultiMove_DeselectRow(u8 y, u8 x1, u8 x2);
+static void MultiMove_SetIconToBg(u8 x, u8 y);
+static void MultiMove_ClearIconFromBg(u8 x, u8 y);
+static void MultiMove_InitMove(u16 bgX, u16 bgY, u16 duration);
+static u8 MultiMove_UpdateMove(void);
+static void MultiMove_GetMonsFromSelection(void);
+static void MultiMove_RemoveMonsFromBox(void);
+static void MultiMove_CreatePlacedMonIcons(void);
+static void MultiMove_SetPlacedMonData(void);
+static void MultiMove_ResetBg(void);
 
-static const struct WindowTemplate gUnknown_83D35D4 = {
+//------------------------------------------------------------------------------
+//  SECTION: MultiMove
+//
+//  The functions below handle moving and selecting multiple Pokémon at once.
+//  The icon sprites are moved to bg 0, and this bg is manipulated to move
+//  them as a group.
+//------------------------------------------------------------------------------
+
+static const struct WindowTemplate sWindowTemplate_MultiMove = {
     .bg = 0,
     .tilemapLeft = 10,
     .tilemapTop = 3,
@@ -63,7 +71,7 @@ bool8 MultiMove_Init(void)
     sMoveMonsPtr = Alloc(sizeof(*sMoveMonsPtr));
     if (sMoveMonsPtr != NULL)
     {
-        sStorage->multiMoveWindowId = AddWindow8Bit(&gUnknown_83D35D4);
+        sStorage->multiMoveWindowId = AddWindow8Bit(&sWindowTemplate_MultiMove);
         if (sStorage->multiMoveWindowId != 0xFF)
         {
             FillWindowPixelBuffer(sStorage->multiMoveWindowId, PIXEL_FILL(0));
@@ -80,34 +88,34 @@ void MultiMove_Free(void)
         Free(sMoveMonsPtr);
 }
 
-void MultiMove_SetFunction(u8 a0)
+void MultiMove_SetFunction(u8 action)
 {
-    sMoveMonsPtr->field_0 = a0;
+    sMoveMonsPtr->funcId = action;
     sMoveMonsPtr->state = 0;
 }
 
 bool8 MultiMove_RunFunction(void)
 {
-    switch (sMoveMonsPtr->field_0)
+    switch (sMoveMonsPtr->funcId)
     {
-    case 0:
-        return sub_8095138();
-    case 1:
-        return sub_8095234();
-    case 2:
-        return sub_80952A0();
-    case 3:
-        return sub_8095314();
-    case 4:
-        return sub_8095394();
-    case 5:
-        return sub_80953BC();
+    case MULTIMOVE_START:
+        return MultiMove_Start();
+    case MULTIMOVE_CANCEL:
+        return MultiMove_Cancel();
+    case MULTIMOVE_CHANGE_SELECTION:
+        return MultiMove_ChangeSelection();
+    case MULTIMOVE_GRAB_SELECTION:
+        return MultiMove_GrabSelection();
+    case MULTIMOVE_MOVE_MONS:
+        return MultiMove_MoveMons();
+    case MULTIMOVE_PLACE_MONS:
+        return MultiMove_PlaceMons();
     }
 
     return FALSE;
 }
 
-static bool8 sub_8095138(void)
+static bool8 MultiMove_Start(void)
 {
     switch (sMoveMonsPtr->state)
     {
@@ -118,13 +126,13 @@ static bool8 sub_8095138(void)
         break;
     case 1:
         GetCursorBoxColumnAndRow(&sMoveMonsPtr->fromRow, &sMoveMonsPtr->fromColumn);
-        sMoveMonsPtr->toRow = sMoveMonsPtr->fromRow;
-        sMoveMonsPtr->toColumn = sMoveMonsPtr->fromColumn;
+        sMoveMonsPtr->toColumn = sMoveMonsPtr->fromRow;
+        sMoveMonsPtr->toRow = sMoveMonsPtr->fromColumn;
         ChangeBgX(0, -1024, 0);
         ChangeBgY(0, -1024, 0);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillWindowPixelBuffer8Bit(sStorage->multiMoveWindowId, PIXEL_FILL(0));
-        sub_80956A4(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
+        MultiMove_SetIconToBg(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sStorage->multiMoveWindowId);
         CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_BOTH);
@@ -145,7 +153,7 @@ static bool8 sub_8095138(void)
     return TRUE;
 }
 
-static bool8 sub_8095234(void)
+static bool8 MultiMove_Cancel(void)
 {
     switch (sMoveMonsPtr->state)
     {
@@ -154,7 +162,7 @@ static bool8 sub_8095234(void)
         sMoveMonsPtr->state++;
         break;
     case 1:
-        sub_8095A58();
+        MultiMove_ResetBg();
         StartCursorAnim(0);
         sMoveMonsPtr->state++;
         break;
@@ -172,17 +180,17 @@ static bool8 sub_8095234(void)
     return TRUE;
 }
 
-static bool8 sub_80952A0(void)
+static bool8 MultiMove_ChangeSelection(void)
 {
     switch (sMoveMonsPtr->state)
     {
     case 0:
         if (!UpdateCursorPos())
         {
-            GetCursorBoxColumnAndRow(&sMoveMonsPtr->field_6, &sMoveMonsPtr->field_7);
-            sub_8095520();
-            sMoveMonsPtr->toRow = sMoveMonsPtr->field_6;
-            sMoveMonsPtr->toColumn = sMoveMonsPtr->field_7;
+            GetCursorBoxColumnAndRow(&sMoveMonsPtr->cursorColumn, &sMoveMonsPtr->cursorRow);
+            MultiMove_UpdateSelectedIcons();
+            sMoveMonsPtr->toColumn = sMoveMonsPtr->cursorColumn;
+            sMoveMonsPtr->toRow = sMoveMonsPtr->cursorRow;
             CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_GFX);
             sMoveMonsPtr->state++;
         }
@@ -194,15 +202,15 @@ static bool8 sub_80952A0(void)
     return TRUE;
 }
 
-static bool8 sub_8095314(void)
+static bool8 MultiMove_GrabSelection(void)
 {
-    u8 var1, var2;
+    u8 movingBg, movingMon;
 
     switch (sMoveMonsPtr->state)
     {
     case 0:
-        sub_80957C8();
-        sub_80958A0();
+        MultiMove_GetMonsFromSelection();
+        MultiMove_RemoveMonsFromBox();
         InitMultiMonPlaceChange(FALSE);
         sMoveMonsPtr->state++;
         break;
@@ -210,15 +218,15 @@ static bool8 sub_8095314(void)
         if (!DoMonPlaceChange())
         {
             StartCursorAnim(3);
-            sub_8095780(0, 256, 8);
+            MultiMove_InitMove(0, 256, 8);
             InitMultiMonPlaceChange(TRUE);
             sMoveMonsPtr->state++;
         }
         break;
     case 2:
-        var1 = sub_8095790();
-        var2 = DoMonPlaceChange();
-        if (!var1 && !var2)
+        movingBg = MultiMove_UpdateMove();
+        movingMon = DoMonPlaceChange();
+        if (!movingBg && !movingMon)
             return FALSE;
         break;
     }
@@ -226,32 +234,32 @@ static bool8 sub_8095314(void)
     return TRUE;
 }
 
-static bool8 sub_8095394(void)
+static bool8 MultiMove_MoveMons(void)
 {
-    u8 var1 = UpdateCursorPos();
-    u8 var2 = sub_8095790();
+    u8 movingCursor = UpdateCursorPos();
+    u8 movingBg = MultiMove_UpdateMove();
 
-    if (!var1 && !var2)
+    if (!movingCursor && !movingBg)
         return FALSE;
     else
         return TRUE;
 }
 
-static bool8 sub_80953BC(void)
+static bool8 MultiMove_PlaceMons(void)
 {
     switch (sMoveMonsPtr->state)
     {
     case 0:
-        sub_80959A8();
-        sub_8095780(0, -256, 8);
+        MultiMove_SetPlacedMonData();
+        MultiMove_InitMove(0, -256, 8);
         InitMultiMonPlaceChange(FALSE);
         sMoveMonsPtr->state++;
         break;
     case 1:
-        if (!DoMonPlaceChange() && !sub_8095790())
+        if (!DoMonPlaceChange() && !MultiMove_UpdateMove())
         {
-            sub_8095918();
-            StartCursorAnim(2);
+            MultiMove_CreatePlacedMonIcons();
+            StartCursorAnim(CURSOR_ANIM_OPEN);
             InitMultiMonPlaceChange(TRUE);
             HideBg(0);
             sMoveMonsPtr->state++;
@@ -260,8 +268,8 @@ static bool8 sub_80953BC(void)
     case 2:
         if (!DoMonPlaceChange())
         {
-            StartCursorAnim(0);
-            sub_8095A58();
+            StartCursorAnim(CURSOR_ANIM_BOUNCE);
+            MultiMove_ResetBg();
             sMoveMonsPtr->state++;
         }
         break;
@@ -279,120 +287,112 @@ static bool8 sub_80953BC(void)
     return TRUE;
 }
 
-bool8 MultiMove_TryMoveGroup(u8 action)
+bool8 MultiMove_TryMoveGroup(u8 dir)
 {
-    switch (action)
+    switch (dir)
     {
     case 0: // up
         if (sMoveMonsPtr->minColumn == 0)
             return FALSE;
         sMoveMonsPtr->minColumn--;
-        sub_8095780(0, 1024, 6);
+        MultiMove_InitMove(0, 1024, 6);
         break;
     case 1: // down
         if (sMoveMonsPtr->minColumn + sMoveMonsPtr->columsTotal >= 5)
             return FALSE;
         sMoveMonsPtr->minColumn++;
-        sub_8095780(0, -1024, 6);
+        MultiMove_InitMove(0, -1024, 6);
         break;
     case 2: // left
         if (sMoveMonsPtr->minRow == 0)
             return FALSE;
         sMoveMonsPtr->minRow--;
-        sub_8095780(1024, 0, 6);
+        MultiMove_InitMove(1024, 0, 6);
         break;
     case 3: // right
         if (sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal > 5)
             return FALSE;
         sMoveMonsPtr->minRow++;
-        sub_8095780(-1024, 0, 6);
+        MultiMove_InitMove(-1024, 0, 6);
         break;
     }
 
     return TRUE;
 }
 
-static void sub_8095520(void)
+static void MultiMove_UpdateSelectedIcons(void)
 {
-    s16 var = (abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->field_6)) - (abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->toRow));
-    s16 var2 = (abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->field_7)) - (abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->toColumn));
+    s16 columnChange = (abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->cursorColumn)) - (abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->toColumn));
+    s16 rowChange = (abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->cursorRow)) - (abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->toRow));
 
-    if (var > 0)
-        sub_80955C4(sMoveMonsPtr->field_6, sMoveMonsPtr->fromColumn, sMoveMonsPtr->toColumn);
+    if (columnChange > 0)
+        MultiMove_SelectColumn(sMoveMonsPtr->cursorColumn, sMoveMonsPtr->fromColumn, sMoveMonsPtr->toRow);
 
-    if (var < 0)
+    if (columnChange < 0)
     {
-        sub_8095634(sMoveMonsPtr->toRow, sMoveMonsPtr->fromColumn, sMoveMonsPtr->toColumn);
-        sub_80955C4(sMoveMonsPtr->field_6, sMoveMonsPtr->fromColumn, sMoveMonsPtr->toColumn);
+        MultiMove_DeselectColumn(sMoveMonsPtr->toColumn, sMoveMonsPtr->fromColumn, sMoveMonsPtr->toRow);
+        MultiMove_SelectColumn(sMoveMonsPtr->cursorColumn, sMoveMonsPtr->fromColumn, sMoveMonsPtr->toRow);
     }
 
-    if (var2 > 0)
-        sub_80955FC(sMoveMonsPtr->field_7, sMoveMonsPtr->fromRow, sMoveMonsPtr->toRow);
+    if (rowChange > 0)
+        MultiMove_SelectRow(sMoveMonsPtr->cursorRow, sMoveMonsPtr->fromRow, sMoveMonsPtr->toColumn);
 
-    if (var2 < 0)
+    if (rowChange < 0)
     {
-        sub_809566C(sMoveMonsPtr->toColumn, sMoveMonsPtr->fromRow, sMoveMonsPtr->toRow);
-        sub_80955FC(sMoveMonsPtr->field_7, sMoveMonsPtr->fromRow, sMoveMonsPtr->toRow);
+        MultiMove_DeselectRow(sMoveMonsPtr->toRow, sMoveMonsPtr->fromRow, sMoveMonsPtr->toColumn);
+        MultiMove_SelectRow(sMoveMonsPtr->cursorRow, sMoveMonsPtr->fromRow, sMoveMonsPtr->toColumn);
     }
 }
 
-static void sub_80955C4(u8 arg0, u8 arg1, u8 arg2)
+static void MultiMove_SelectColumn(u8 x, u8 y1, u8 y2)
 {
-    u8 var1 = arg1;
-
-    if (arg1 > arg2)
+    if (y1 > y2)
     {
-        arg1 = arg2;
-        arg2 = var1;
+        u8 temp;
+        SWAP(y1, y2, temp);
     }
 
-    while (arg1 <= arg2)
-        sub_80956A4(arg0, arg1++);
+    while (y1 <= y2)
+        MultiMove_SetIconToBg(x, y1++);
 }
 
-static void sub_80955FC(u8 arg0, u8 arg1, u8 arg2)
+static void MultiMove_SelectRow(u8 y, u8 x1, u8 x2)
 {
-    u8 var1 = arg1;
-
-    if (arg1 > arg2)
+    if (x1 > x2)
     {
-        arg1 = arg2;
-        arg2 = var1;
+        u8 temp;
+        SWAP(x1, x2, temp);
     }
 
-    while (arg1 <= arg2)
-        sub_80956A4(arg1++, arg0);
+    while (x1 <= x2)
+        MultiMove_SetIconToBg(x1++, y);
 }
 
-static void sub_8095634(u8 arg0, u8 arg1, u8 arg2)
+static void MultiMove_DeselectColumn(u8 x, u8 y1, u8 y2)
 {
-    u8 var1 = arg1;
-
-    if (arg1 > arg2)
+    if (y1 > y2)
     {
-        arg1 = arg2;
-        arg2 = var1;
+        u8 temp;
+        SWAP(y1, y2, temp);
     }
 
-    while (arg1 <= arg2)
-        sub_809572C(arg0, arg1++);
+    while (y1 <= y2)
+        MultiMove_ClearIconFromBg(x, y1++);
 }
 
-static void sub_809566C(u8 arg0, u8 arg1, u8 arg2)
+static void MultiMove_DeselectRow(u8 y, u8 x1, u8 x2)
 {
-    u8 var1 = arg1;
-
-    if (arg1 > arg2)
+    if (x1 > x2)
     {
-        arg1 = arg2;
-        arg2 = var1;
+        u8 temp;
+        SWAP(x1, x2, temp);
     }
 
-    while (arg1 <= arg2)
-        sub_809572C(arg1++, arg0);
+    while (x1 <= x2)
+        MultiMove_ClearIconFromBg(x1++, y);
 }
 
-static void sub_80956A4(u8 x, u8 y)
+static void MultiMove_SetIconToBg(u8 x, u8 y)
 {
     u8 position = x + (IN_BOX_COLUMNS * y);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
@@ -417,7 +417,7 @@ static void sub_80956A4(u8 x, u8 y)
     }
 }
 
-static void sub_809572C(u8 x, u8 y)
+static void MultiMove_ClearIconFromBg(u8 x, u8 y)
 {
     u8 position = x + (IN_BOX_COLUMNS * y);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
@@ -433,36 +433,36 @@ static void sub_809572C(u8 x, u8 y)
     }
 }
 
-static void sub_8095780(u16 bgX, u16 bgY, u16 duration)
+static void MultiMove_InitMove(u16 bgX, u16 bgY, u16 duration)
 {
     sMoveMonsPtr->bgX = bgX;
     sMoveMonsPtr->bgY = bgY;
-    sMoveMonsPtr->field_10 = duration;
+    sMoveMonsPtr->bgMoveSteps = duration;
 }
 
-static u8 sub_8095790(void)
+static u8 MultiMove_UpdateMove(void)
 {
-    if (sMoveMonsPtr->field_10 != 0)
+    if (sMoveMonsPtr->bgMoveSteps != 0)
     {
         ChangeBgX(0, sMoveMonsPtr->bgX, 1);
         ChangeBgY(0, sMoveMonsPtr->bgY, 1);
-        sMoveMonsPtr->field_10--;
+        sMoveMonsPtr->bgMoveSteps--;
     }
 
-    return sMoveMonsPtr->field_10;
+    return sMoveMonsPtr->bgMoveSteps;
 }
 
-static void sub_80957C8(void)
+static void MultiMove_GetMonsFromSelection(void)
 {
     s32 i, j;
     s32 rowCount, columnCount;
     u8 boxId;
     u8 monArrayId;
 
-    sMoveMonsPtr->minRow = min(sMoveMonsPtr->fromRow, sMoveMonsPtr->toRow);
-    sMoveMonsPtr->minColumn = min(sMoveMonsPtr->fromColumn, sMoveMonsPtr->toColumn);
-    sMoveMonsPtr->rowsTotal = abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->toRow) + 1;
-    sMoveMonsPtr->columsTotal = abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->toColumn) + 1;
+    sMoveMonsPtr->minRow = min(sMoveMonsPtr->fromRow, sMoveMonsPtr->toColumn);
+    sMoveMonsPtr->minColumn = min(sMoveMonsPtr->fromColumn, sMoveMonsPtr->toRow);
+    sMoveMonsPtr->rowsTotal = abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->toColumn) + 1;
+    sMoveMonsPtr->columsTotal = abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->toRow) + 1;
     boxId = StorageGetCurrentBox();
     monArrayId = 0;
     rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -481,7 +481,7 @@ static void sub_80957C8(void)
     }
 }
 
-static void sub_80958A0(void)
+static void MultiMove_RemoveMonsFromBox(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -500,7 +500,7 @@ static void sub_80958A0(void)
     }
 }
 
-static void sub_8095918(void)
+static void MultiMove_CreatePlacedMonIcons(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -520,7 +520,7 @@ static void sub_8095918(void)
     }
 }
 
-static void sub_80959A8(void)
+static void MultiMove_SetPlacedMonData(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -541,7 +541,7 @@ static void sub_80959A8(void)
     }
 }
 
-static void sub_8095A58(void)
+static void MultiMove_ResetBg(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);

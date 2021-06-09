@@ -71,7 +71,7 @@ void InitCursor(void)
     ClearSavedCursorPos();
     CreateCursorSprites();
     sStorage->cursorPrevHorizPos = 1;
-    sStorage->inBoxMovingMode = 0;
+    sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
     TryRefreshDisplayMon();
 }
 
@@ -80,7 +80,7 @@ void InitCursorOnReopen(void)
     CreateCursorSprites();
     ReshowDisplayMon();
     sStorage->cursorPrevHorizPos = 1;
-    sStorage->inBoxMovingMode = 0;
+    sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
     if (sIsMonBeingMoved)
     {
         sStorage->movingMon = sMonBeingCarried;
@@ -254,7 +254,7 @@ static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
     InitCursorMove();
     if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
-        if (sStorage->inBoxMovingMode == 0 && !sIsMonBeingMoved)
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL && !sIsMonBeingMoved)
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
@@ -292,7 +292,7 @@ static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
         sStorage->cursorShadowSprite->oam.priority = 1;
         break;
     case CURSOR_AREA_IN_BOX:
-        if (sStorage->inBoxMovingMode != 0)
+        if (sStorage->inBoxMovingMode != MOVE_MODE_NORMAL)
         {
             sStorage->cursorSprite->oam.priority = 0;
             sStorage->cursorShadowSprite->invisible = TRUE;
@@ -313,7 +313,7 @@ static void DoCursorNewPosUpdate(void)
     sBoxCursorPosition = sStorage->newCursorPosition;
     if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
-        if (sStorage->inBoxMovingMode == 0 && !sIsMonBeingMoved)
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL && !sIsMonBeingMoved)
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
@@ -336,7 +336,7 @@ static void DoCursorNewPosUpdate(void)
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (sStorage->inBoxMovingMode == 0)
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
         {
             sStorage->cursorSprite->oam.priority = 1;
             sStorage->cursorShadowSprite->oam.priority = 2;
@@ -562,7 +562,7 @@ static void MoveMon(void)
         SetMovingMonSprite(MODE_PARTY, sBoxCursorPosition);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (sStorage->inBoxMovingMode == 0)
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
         {
             SetMovingMonData(StorageGetCurrentBox(), sBoxCursorPosition);
             SetMovingMonSprite(MODE_BOX, sBoxCursorPosition);
@@ -1160,12 +1160,12 @@ static u8 HandleInput_InBox(void)
 {
     switch (sStorage->inBoxMovingMode)
     {
-    case 0:
+    case MOVE_MODE_NORMAL:
     default:
         return InBoxInput_Normal();
-    case 1:
+    case MOVE_MODE_MULTIPLE_SELECTING:
         return InBoxInput_GrabbingMultiple();
-    case 2:
+    case MOVE_MODE_MULTIPLE_MOVING:
         return InBoxInput_MovingMultiple();
     }
 }
@@ -1185,7 +1185,7 @@ static u8 InBoxInput_Normal(void)
         sStorage->cursorFlipTimer = 0;
         if (JOY_REPT(DPAD_UP))
         {
-            retVal = TRUE;
+            retVal = INPUT_MOVE_CURSOR;
             if (sBoxCursorPosition >= IN_BOX_COLUMNS)
             {
                 cursorPosition -= IN_BOX_COLUMNS;
@@ -1199,7 +1199,7 @@ static u8 InBoxInput_Normal(void)
         }
         else if (JOY_REPT(DPAD_DOWN))
         {
-            retVal = TRUE;
+            retVal = INPUT_MOVE_CURSOR;
             cursorPosition += IN_BOX_COLUMNS;
             if (cursorPosition >= IN_BOX_COUNT)
             {
@@ -1213,7 +1213,7 @@ static u8 InBoxInput_Normal(void)
         }
         else if (JOY_REPT(DPAD_LEFT))
         {
-            retVal = TRUE;
+            retVal = INPUT_MOVE_CURSOR;
             if (sBoxCursorPosition % IN_BOX_COLUMNS != 0)
             {
                 cursorPosition--;
@@ -1227,7 +1227,7 @@ static u8 InBoxInput_Normal(void)
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
-            retVal = TRUE;
+            retVal = INPUT_MOVE_CURSOR;
             if ((sBoxCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
                 cursorPosition++;
@@ -1241,7 +1241,7 @@ static u8 InBoxInput_Normal(void)
         }
         else if (JOY_NEW(START_BUTTON))
         {
-            retVal = TRUE;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BOX;
             cursorPosition = 0;
             break;
@@ -1250,55 +1250,55 @@ static u8 InBoxInput_Normal(void)
         if ((JOY_NEW(A_BUTTON)) && SetSelectionMenuTexts())
         {
             if (!sCanOnlyMove)
-                return 8;
+                return INPUT_IN_MENU;
 
             if (sStorage->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
             {
                 switch (GetMenuItemTextId(0))
                 {
                 case MENU_STORE:
-                    return 11;
+                    return INPUT_DEPOSIT;
                 case MENU_WITHDRAW:
-                    return 12;
+                    return INPUT_WITHDRAW;
                 case MENU_MOVE:
-                    return 13;
+                    return INPUT_MOVE_MON;
                 case MENU_SHIFT:
-                    return 14;
+                    return INPUT_SHIFT_MON;
                 case MENU_PLACE:
-                    return 15;
+                    return INPUT_PLACE_MON;
                 case MENU_TAKE:
-                    return 16;
+                    return INPUT_TAKE_ITEM;
                 case MENU_GIVE:
-                    return 17;
+                    return INPUT_GIVE_ITEM;
                 case MENU_SWITCH:
-                    return 18;
+                    return INPUT_SWITCH_ITEMS;
                 }
             }
             else
             {
-                sStorage->inBoxMovingMode = 1;
-                return 20;
+                sStorage->inBoxMovingMode = MOVE_MODE_MULTIPLE_SELECTING;
+                return INPUT_MULTIMOVE_START;
             }
         }
 
         if (JOY_NEW(B_BUTTON))
-            return 19;
+            return INPUT_PRESSED_B;
 
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
             if (JOY_HELD(L_BUTTON))
-                return 10;
+                return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
-                return 9;
+                return INPUT_SCROLL_RIGHT;
         }
 
         if (JOY_NEW(SELECT_BUTTON))
         {
             ToggleCursorAutoAction();
-            return 0;
+            return INPUT_NONE;
         }
 
-        retVal = 0;
+        retVal = INPUT_NONE;
 
     } while (0);
 
@@ -1317,11 +1317,11 @@ static u8 InBoxInput_GrabbingMultiple(void)
             if (sBoxCursorPosition / IN_BOX_COLUMNS != 0)
             {
                 SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_COLUMNS);
-                return 21;
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else if (JOY_REPT(DPAD_DOWN))
@@ -1329,11 +1329,11 @@ static u8 InBoxInput_GrabbingMultiple(void)
             if (sBoxCursorPosition + IN_BOX_COLUMNS < IN_BOX_COUNT)
             {
                 SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_COLUMNS);
-                return 21;
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else if (JOY_REPT(DPAD_LEFT))
@@ -1341,11 +1341,11 @@ static u8 InBoxInput_GrabbingMultiple(void)
             if (sBoxCursorPosition % IN_BOX_COLUMNS != 0)
             {
                 SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
-                return 21;
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else if (JOY_REPT(DPAD_RIGHT))
@@ -1353,32 +1353,32 @@ static u8 InBoxInput_GrabbingMultiple(void)
             if ((sBoxCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
                 SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
-                return 21;
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else
         {
-            return 0;
+            return INPUT_NONE;
         }
     }
     else
     {
         if (MultiMove_GetOrigin() == sBoxCursorPosition)
         {
-            sStorage->inBoxMovingMode = 0;
+            sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
             sStorage->cursorShadowSprite->invisible = FALSE;
-            return 22;
+            return INPUT_MULTIMOVE_SINGLE;
         }
         else
         {
             sIsMonBeingMoved = (sStorage->displayMonSpecies != SPECIES_NONE);
-            sStorage->inBoxMovingMode = 2;
+            sStorage->inBoxMovingMode = MOVE_MODE_MULTIPLE_MOVING;
             sMovingMonOrigBoxId = StorageGetCurrentBox();
-            return 23;
+            return INPUT_MULTIMOVE_GRAB_SELECTION;
         }
     }
 }
@@ -1390,11 +1390,11 @@ static u8 InBoxInput_MovingMultiple(void)
         if (MultiMove_TryMoveGroup(0))
         {
             SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_COLUMNS);
-            return 25;
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 24;
+            return INPUT_MULTIMOVE_UNABLE;
         }
     }
     else if (JOY_REPT(DPAD_DOWN))
@@ -1402,11 +1402,11 @@ static u8 InBoxInput_MovingMultiple(void)
         if (MultiMove_TryMoveGroup(1))
         {
             SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_COLUMNS);
-            return 25;
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 24;
+            return INPUT_MULTIMOVE_UNABLE;
         }
     }
     else if (JOY_REPT(DPAD_LEFT))
@@ -1414,11 +1414,11 @@ static u8 InBoxInput_MovingMultiple(void)
         if (MultiMove_TryMoveGroup(2))
         {
             SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
-            return 25;
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 10;
+            return INPUT_SCROLL_LEFT;
         }
     }
     else if (JOY_REPT(DPAD_RIGHT))
@@ -1426,11 +1426,11 @@ static u8 InBoxInput_MovingMultiple(void)
         if (MultiMove_TryMoveGroup(3))
         {
             SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
-            return 25;
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 9;
+            return INPUT_SCROLL_RIGHT;
         }
     }
     else if (JOY_NEW(A_BUTTON))
@@ -1438,29 +1438,29 @@ static u8 InBoxInput_MovingMultiple(void)
         if (MultiMove_CanPlaceSelection())
         {
             sIsMonBeingMoved = FALSE;
-            sStorage->inBoxMovingMode = 0;
-            return 26;
+            sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
+            return INPUT_MULTIMOVE_PLACE_MONS;
         }
         else
         {
-            return 24;
+            return INPUT_MULTIMOVE_UNABLE;
         }
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        return 24;
+        return INPUT_MULTIMOVE_UNABLE;
     }
     else
     {
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
             if (JOY_HELD(L_BUTTON))
-                return 10;
+                return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
-                return 9;
+                return INPUT_SCROLL_RIGHT;
         }
 
-        return 0;
+        return INPUT_NONE;
     }
 }
 
@@ -1479,14 +1479,14 @@ static u8 HandleInput_InParty(void)
         sStorage->cursorVerticalWrap = 0;
         sStorage->cursorFlipTimer = 0;
         gotoBox = FALSE;
-        retVal = 0;
+        retVal = INPUT_NONE;
 
         if (JOY_REPT(DPAD_UP))
         {
             if (--cursorPosition < 0)
                 cursorPosition = PARTY_SIZE;
             if (cursorPosition != sBoxCursorPosition)
-                retVal = 1;
+                retVal = INPUT_MOVE_CURSOR;
             break;
         }
         else if (JOY_REPT(DPAD_DOWN))
@@ -1494,12 +1494,12 @@ static u8 HandleInput_InParty(void)
             if (++cursorPosition > PARTY_SIZE)
                 cursorPosition = 0;
             if (cursorPosition != sBoxCursorPosition)
-                retVal = 1;
+                retVal = INPUT_MOVE_CURSOR;
             break;
         }
         else if (JOY_REPT(DPAD_LEFT) && sBoxCursorPosition != 0)
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             sStorage->cursorPrevHorizPos = sBoxCursorPosition;
             cursorPosition = 0;
             break;
@@ -1508,12 +1508,12 @@ static u8 HandleInput_InParty(void)
         {
             if (sBoxCursorPosition == 0)
             {
-                retVal = 1;
+                retVal = INPUT_MOVE_CURSOR;
                 cursorPosition = sStorage->cursorPrevHorizPos;
             }
             else
             {
-                retVal = 6;
+                retVal = INPUT_HIDE_PARTY;
                 cursorArea = CURSOR_AREA_IN_BOX;
                 cursorPosition = 0;
             }
@@ -1525,33 +1525,33 @@ static u8 HandleInput_InParty(void)
             if (sBoxCursorPosition == PARTY_SIZE)
             {
                 if (sStorage->boxOption == BOX_OPTION_DEPOSIT)
-                    return 4;
+                    return INPUT_CLOSE_BOX;
 
                 gotoBox = TRUE;
             }
             else if (SetSelectionMenuTexts())
             {
                 if (!sCanOnlyMove)
-                    return 8;
+                    return INPUT_IN_MENU;
 
                 switch (GetMenuItemTextId(0))
                 {
                 case MENU_STORE:
-                    return 11;
+                    return INPUT_DEPOSIT;
                 case MENU_WITHDRAW:
-                    return 12;
+                    return INPUT_WITHDRAW;
                 case MENU_MOVE:
-                    return 13;
+                    return INPUT_MOVE_MON;
                 case MENU_SHIFT:
-                    return 14;
+                    return INPUT_SHIFT_MON;
                 case MENU_PLACE:
-                    return 15;
+                    return INPUT_PLACE_MON;
                 case MENU_TAKE:
-                    return 16;
+                    return INPUT_TAKE_ITEM;
                 case MENU_GIVE:
-                    return 17;
+                    return INPUT_GIVE_ITEM;
                 case MENU_SWITCH:
-                    return 18;
+                    return INPUT_SWITCH_ITEMS;
                 }
             }
         }
@@ -1559,28 +1559,28 @@ static u8 HandleInput_InParty(void)
         if (JOY_NEW(B_BUTTON))
         {
             if (sStorage->boxOption == BOX_OPTION_DEPOSIT)
-                return 19;
+                return INPUT_PRESSED_B;
 
             gotoBox = TRUE;
         }
 
         if (gotoBox)
         {
-            retVal = 6;
+            retVal = INPUT_HIDE_PARTY;
             cursorArea = CURSOR_AREA_IN_BOX;
             cursorPosition = 0;
         }
         else if (JOY_NEW(SELECT_BUTTON))
         {
             ToggleCursorAutoAction();
-            return 0;
+            return INPUT_NONE;
         }
 
     } while (0);
 
-    if (retVal != 0)
+    if (retVal != INPUT_NONE)
     {
-        if (retVal != 6)
+        if (retVal != INPUT_HIDE_PARTY)
             SetCursorPosition(cursorArea, cursorPosition);
     }
 
@@ -1601,7 +1601,7 @@ static u8 HandleInput_OnBox(void)
 
         if (JOY_REPT(DPAD_UP))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BUTTONS;
             cursorPosition = 0;
             sStorage->cursorFlipTimer = 1;
@@ -1609,42 +1609,42 @@ static u8 HandleInput_OnBox(void)
         }
         else if (JOY_REPT(DPAD_DOWN))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_IN_BOX;
             cursorPosition = 2;
             break;
         }
 
         if (JOY_HELD(DPAD_LEFT))
-            return 10;
+            return INPUT_SCROLL_LEFT;
         if (JOY_HELD(DPAD_RIGHT))
-            return 9;
+            return INPUT_SCROLL_RIGHT;
 
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
             if (JOY_HELD(L_BUTTON))
-                return 10;
+                return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
-                return 9;
+                return INPUT_SCROLL_RIGHT;
         }
 
         if (JOY_NEW(A_BUTTON))
         {
             AnimateBoxScrollArrows(FALSE);
             AddBoxMenu();
-            return 7;
+            return INPUT_BOX_OPTIONS;
         }
 
         if (JOY_NEW(B_BUTTON))
-            return 19;
+            return INPUT_PRESSED_B;
 
         if (JOY_NEW(SELECT_BUTTON))
         {
             ToggleCursorAutoAction();
-            return 0;
+            return INPUT_NONE;
         }
 
-        retVal = 0;
+        retVal = INPUT_NONE;
 
     } while (0);
 
@@ -1675,7 +1675,7 @@ static u8 HandleInput_OnButtons(void)
 
         if (JOY_REPT(DPAD_UP))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_IN_BOX;
             sStorage->cursorVerticalWrap = -1;
             if (sBoxCursorPosition == 0)
@@ -1687,7 +1687,7 @@ static u8 HandleInput_OnButtons(void)
         }
         else if (JOY_REPT(DPAD_DOWN | START_BUTTON))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BOX;
             cursorPosition = 0;
             sStorage->cursorFlipTimer = 1;
@@ -1696,14 +1696,14 @@ static u8 HandleInput_OnButtons(void)
 
         if (JOY_REPT(DPAD_LEFT))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             if (--cursorPosition < 0)
                 cursorPosition = 1;
             break;
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             if (++cursorPosition > 1)
                 cursorPosition = 0;
             break;
@@ -1711,21 +1711,21 @@ static u8 HandleInput_OnButtons(void)
 
         if (JOY_NEW(A_BUTTON))
         {
-            return cursorPosition == 0 ? 5 : 4;
+            return cursorPosition == 0 ? INPUT_SHOW_PARTY : INPUT_CLOSE_BOX;
         }
         if (JOY_NEW(B_BUTTON))
-            return 19;
+            return INPUT_PRESSED_B;
 
         if (JOY_NEW(SELECT_BUTTON))
         {
             ToggleCursorAutoAction();
-            return 0;
+            return INPUT_NONE;
         }
 
-        retVal = 0;
+        retVal = INPUT_NONE;
     } while (0);
 
-    if (retVal != 0)
+    if (retVal != INPUT_NONE)
         SetCursorPosition(cursorArea, cursorPosition);
 
     return retVal;
@@ -1754,7 +1754,7 @@ u8 HandleInput(void)
         i++;
     }
 
-    return 0;
+    return INPUT_NONE;
 }
 
 static void AddBoxMenu(void)
@@ -1893,66 +1893,66 @@ static void CreateCursorSprites(void)
     u8 spriteId;
     u8 priority, subpriority;
     struct SpriteSheet spriteSheets[] = {
-        {sHandCursorTiles, 0x800, TAG_TILE_0},
-        {sHandCursorShadowTiles, 0x80, TAG_TILE_1},
+        {sHandCursorTiles, 0x800,      TAG_TILE_HAND_CURSOR},
+        {sHandCursorShadowTiles, 0x80, TAG_TILE_HAND_SHADOW},
         {}
     };
 
     struct SpritePalette spritePalettes[] = {
-        {sHandCursorPalette, TAG_PAL_DAC7},
+        {sHandCursorPalette, TAG_PAL_HAND_CURSOR},
         {}
     };
 
-    static const struct OamData sOamData_857BA0C = {
+    static const struct OamData oamData_HandCursor = {
         .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
         .priority = 1,
     };
-    static const struct OamData sOamData_857BA14 = {
+    static const struct OamData oamData_HandCursorShadow = {
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SIZE(16x16),
         .priority = 1,
     };
 
-    static const union AnimCmd sSpriteAnim_857BA1C[] = {
+    static const union AnimCmd anim_HandCursor_Bounce[] = {
         ANIMCMD_FRAME(0, 30),
         ANIMCMD_FRAME(16, 30),
         ANIMCMD_JUMP(0)
     };
-    static const union AnimCmd sSpriteAnim_857BA28[] = {
+    static const union AnimCmd anim_HandCursor_Still[] = {
         ANIMCMD_FRAME(0, 5),
         ANIMCMD_END
     };
-    static const union AnimCmd sSpriteAnim_857BA30[] = {
+    static const union AnimCmd anim_HandCursor_Open[] = {
         ANIMCMD_FRAME(32, 5),
         ANIMCMD_END
     };
-    static const union AnimCmd sSpriteAnim_857BA38[] = {
+    static const union AnimCmd anim_HandCursor_Fist[] = {
         ANIMCMD_FRAME(48, 5),
         ANIMCMD_END
     };
 
-    static const union AnimCmd *const sSpriteAnimTable_857BA40[] = {
-        sSpriteAnim_857BA1C,
-        sSpriteAnim_857BA28,
-        sSpriteAnim_857BA30,
-        sSpriteAnim_857BA38
+    static const union AnimCmd *const animTable_HandCursor[] = {
+        anim_HandCursor_Bounce,
+        anim_HandCursor_Still,
+        anim_HandCursor_Open,
+        anim_HandCursor_Fist
     };
 
-    static const struct SpriteTemplate gSpriteTemplate_857BA50 = {
-        .tileTag = TAG_TILE_0,
+    static const struct SpriteTemplate sprTemplate_HandCursor = {
+        .tileTag = TAG_TILE_HAND_CURSOR,
         .paletteTag = TAG_PAL_WAVEFORM,
-        .oam = &sOamData_857BA0C,
-        .anims = sSpriteAnimTable_857BA40,
+        .oam = &oamData_HandCursor,
+        .anims = animTable_HandCursor,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     };
 
-    static const struct SpriteTemplate gSpriteTemplate_857BA68 = {
-        .tileTag = TAG_TILE_1,
+    static const struct SpriteTemplate sprTemplate_HandCursorShadow = {
+        .tileTag = TAG_TILE_HAND_SHADOW,
         .paletteTag = TAG_PAL_WAVEFORM,
-        .oam = &sOamData_857BA14,
+        .oam = &oamData_HandCursorShadow,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -1962,10 +1962,10 @@ static void CreateCursorSprites(void)
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
     sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
-    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(TAG_PAL_DAC7);
+    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(TAG_PAL_HAND_CURSOR);
 
     GetCursorCoordsByPos(sBoxCursorArea, sBoxCursorPosition, &x, &y);
-    spriteId = CreateSprite(&gSpriteTemplate_857BA50, x, y, 6);
+    spriteId = CreateSprite(&sprTemplate_HandCursor, x, y, 6);
     if (spriteId != MAX_SPRITES)
     {
         sStorage->cursorSprite = &gSprites[spriteId];
@@ -1990,7 +1990,7 @@ static void CreateCursorSprites(void)
         priority = 2;
     }
 
-    spriteId = CreateSprite(&gSpriteTemplate_857BA68, 0, 0, subpriority);
+    spriteId = CreateSprite(&sprTemplate_HandCursorShadow, 0, 0, subpriority);
     if (spriteId != MAX_SPRITES)
     {
         sStorage->cursorShadowSprite = &gSprites[spriteId];

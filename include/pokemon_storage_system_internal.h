@@ -17,6 +17,37 @@ enum
     MODE_BOX,
     MODE_MOVE,
 };
+// IDs for InitMonPlaceChange
+enum {
+    CHANGE_GRAB,
+    CHANGE_PLACE,
+    CHANGE_SHIFT,
+};
+
+// Modes for selecting and moving Pokémon in the box.
+// "MULTIPLE" mode allows up to an entire box to be
+// picked up at once by pressing Select then holding
+// down the A button. While holding A down, the player
+// may move the cursor around to select multiple Pokémon.
+// This is MOVE_MODE_MULTIPLE_SELECTING. After releasing A
+// those Pokémon will be picked up and can be moved around
+// as a single unit. This is MOVE_MODE_MULTIPLE_MOVING
+enum {
+    MOVE_MODE_NORMAL,
+    MOVE_MODE_MULTIPLE_SELECTING,
+    MOVE_MODE_MULTIPLE_MOVING,
+};
+
+// IDs for the main functions for moving multiple Pokémon.
+// Given as arguments to MultiMove_SetFunction
+enum {
+    MULTIMOVE_START,
+    MULTIMOVE_CANCEL, // If only 1 Pokémon is grabbed
+    MULTIMOVE_CHANGE_SELECTION,
+    MULTIMOVE_GRAB_SELECTION,
+    MULTIMOVE_MOVE_MONS,
+    MULTIMOVE_PLACE_MONS,
+};
 
 enum
 {
@@ -187,15 +218,15 @@ enum {
 #define TAG_PAL_MON_ICON_4  0xDAC4
 #define TAG_PAL_MON_ICON_5  0xDAC5
 #define TAG_PAL_DAC6        0xDAC6
-#define TAG_PAL_DAC7        0xDAC7
+#define TAG_PAL_HAND_CURSOR 0xDAC7
 #define TAG_PAL_DAC8        0xDAC8
 #define TAG_PAL_BOX_TITLE   0xDAC9
 #define TAG_PAL_WAVEFORM    0xDACA
 #define TAG_PAL_DACB        0xDACB
 #define TAG_PAL_DACE        0xDACE
 
-#define TAG_TILE_0              0x0
-#define TAG_TILE_1              0x1
+#define TAG_TILE_HAND_CURSOR    0x0
+#define TAG_TILE_HAND_SHADOW    0x1
 #define TAG_TILE_2              0x2
 #define TAG_TILE_BOX_TITLE      0x3
 #define TAG_TILE_BOX_TITLE_ALT  0x4
@@ -205,7 +236,7 @@ enum {
 #define TAG_TILE_A              0xA
 #define TAG_TILE_D              0xD
 #define TAG_TILE_10             0x10
-#define TAG_TILE_MON_ICON             0x12
+#define TAG_TILE_MON_ICON       0x12
 
 #define BOXID_NONE_CHOSEN   200
 #define BOXID_CANCELED      201
@@ -483,7 +514,7 @@ s16 PokeStorage_HandleMenuInput(void);
 void RemoveMenu(void);
 bool8 MultiMove_Init(void);
 void MultiMove_Free(void);
-void MultiMove_SetFunction(u8 a0);
+void MultiMove_SetFunction(u8 action);
 bool8 MultiMove_RunFunction(void);
 void CreateItemIconSprites(void);
 void MoveItemFromCursorToBag(void);
@@ -556,8 +587,8 @@ void DestroyReleaseMonIcon(void);
 u8 CountPartyMons(void);
 u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore);
 
-s8 GetMenuItemTextId(u8 a0);
-bool8 MultiMove_TryMoveGroup(u8 action);
+s8 GetMenuItemTextId(u8 idx);
+bool8 MultiMove_TryMoveGroup(u8 dir);
 u8 MultiMove_GetOrigin(void);
 bool8 MultiMove_CanPlaceSelection(void);
 void TryHideItemIconAtPos(u8 cursorArea, u8 cursorPos);

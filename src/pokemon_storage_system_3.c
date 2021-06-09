@@ -781,31 +781,31 @@ static void Task_PokeStorageMain(u8 taskId)
             break;
         case INPUT_MULTIMOVE_START:
             PlaySE(SE_SELECT);
-            MultiMove_SetFunction(0);
+            MultiMove_SetFunction(MULTIMOVE_START);
             sStorage->state = MSTATE_MULTIMOVE_RUN;
             break;
         case INPUT_MULTIMOVE_SINGLE:
-            MultiMove_SetFunction(1);
+            MultiMove_SetFunction(MULTIMOVE_CANCEL);
             sStorage->state = MSTATE_MULTIMOVE_RUN_CANCEL;
             break;
         case INPUT_MULTIMOVE_CHANGE_SELECTION:
             PlaySE(SE_SELECT);
-            MultiMove_SetFunction(2);
+            MultiMove_SetFunction(MULTIMOVE_CHANGE_SELECTION);
             sStorage->state = MSTATE_MULTIMOVE_RUN_MOVED;
             break;
         case INPUT_MULTIMOVE_GRAB_SELECTION:
-            MultiMove_SetFunction(3);
+            MultiMove_SetFunction(MULTIMOVE_GRAB_SELECTION);
             sStorage->state = MSTATE_MULTIMOVE_RUN;
             break;
         case INPUT_MULTIMOVE_MOVE_MONS:
             PlaySE(SE_SELECT);
-            MultiMove_SetFunction(4);
+            MultiMove_SetFunction(MULTIMOVE_MOVE_MONS);
             sStorage->state = MSTATE_MULTIMOVE_RUN_MOVED;
             break;
         case INPUT_MULTIMOVE_PLACE_MONS:
             PlaySE(SE_SELECT);
             PokeStorage_AppendActionToQuestLogBuffer(PSS_QL_MULTIMOVE);
-            MultiMove_SetFunction(5);
+            MultiMove_SetFunction(MULTIMOVE_PLACE_MONS);
             sStorage->state = MSTATE_MULTIMOVE_RUN;
             break;
         case INPUT_MULTIMOVE_UNABLE:
@@ -1225,7 +1225,7 @@ static void Task_DepositMenu(u8 taskId)
     {
     case 0:
         PrintMessage(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
-        LoadBoxSelectionPopupSpriteGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        LoadBoxSelectionPopupSpriteGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_HAND_CURSOR, 3, FALSE);
         CreateChooseBoxMenuSprites(sDepositingBoxId);
         sStorage->state++;
         break;
@@ -1865,7 +1865,7 @@ static void Task_JumpBox(u8 taskId)
     {
     case 0:
         PrintMessage(PC_TEXT_JUMP_TO_WHICH_BOX);
-        LoadBoxSelectionPopupSpriteGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        LoadBoxSelectionPopupSpriteGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_HAND_CURSOR, 3, FALSE);
         CreateChooseBoxMenuSprites(StorageGetCurrentBox());
         sStorage->state++;
         break;

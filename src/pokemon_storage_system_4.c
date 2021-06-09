@@ -1472,7 +1472,7 @@ static void sub_8092164(struct Sprite *sprite)
     }
 }
 
-struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
+struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
 {
     u8 spriteId = CreateSprite(&gUnknown_83D2BB4, x, y, subpriority);
     if (spriteId == MAX_SPRITES)

@@ -161,6 +161,9 @@ enum
 #define TAG_TILE_1          0x1
 #define TAG_TILE_6          0x6
 
+#define BOXID_NONE_CHOSEN   200
+#define BOXID_CANCELED      201
+
 struct WallpaperTable
 {
     const u32 *tiles;
@@ -176,13 +179,13 @@ struct StorageAction
 
 struct ChooseBoxMenu
 {
-    struct Sprite *unk_0000;
-    struct Sprite *unk_0004[4];
+    struct Sprite *menuSprite;
+    struct Sprite *menuSideSprites[4];
     u32 unused1[3]; // unused
-    struct Sprite *unk_0020[2];
+    struct Sprite *arrowSprites[2];
     u8 buffer[0x200]; // passed but not used
     u8 strbuf[20];
-    bool32 loadPal;
+    bool32 loadedPalette;
     u16 tilesTag;
     u16 paletteTag;
     u8 curBox;
@@ -392,7 +395,7 @@ extern struct PokemonStorageSystemData *gPSSData;
 
 void Cb2_EnterPSS(u8 a0);
 u8 GetCurrentBoxOption(void);
-struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
+struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
 void SetCurrentBox(u8 boxId);
 void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst);
@@ -403,7 +406,7 @@ void FreeBoxSelectionPopupSpriteGfx(void);
 void sub_808C940(u8 curBox);
 void sub_808C950(void);
 u8 HandleBoxChooseSelectionInput(void);
-void LoadBoxSelectionPopupSpriteGfx(struct ChooseBoxMenu *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
+void LoadBoxSelectionPopupSpriteGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
 u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
 u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst);

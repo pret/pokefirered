@@ -176,7 +176,7 @@ static const u16 sLearnMoveInterfaceSpritesTiles[] = INCBIN_U16("graphics/learn_
 // Unused in US
 static const u8 sMoveTutorMenuWindowFrameDimensions[][4] =
 {
-    // left, top, width, height
+    // left, top, height, width
     { 0,  0, 19, 13},
     {20,  0, 29, 13},
     { 2, 14, 27, 19}

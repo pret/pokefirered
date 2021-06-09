@@ -58,7 +58,7 @@ static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/interface/pss_u
 
 void InitCursor(void)
 {
-    if (gPSSData->boxOption != BOX_OPTION_DEPOSIT)
+    if (sStorage->boxOption != BOX_OPTION_DEPOSIT)
         sBoxCursorArea = CURSOR_AREA_IN_BOX;
     else
         sBoxCursorArea = CURSOR_AREA_IN_PARTY;
@@ -70,8 +70,8 @@ void InitCursor(void)
     sCanOnlyMove = FALSE;
     ClearSavedCursorPos();
     CreateCursorSprites();
-    gPSSData->cursorPrevHorizPos = 1;
-    gPSSData->inBoxMovingMode = 0;
+    sStorage->cursorPrevHorizPos = 1;
+    sStorage->inBoxMovingMode = 0;
     TryRefreshDisplayMon();
 }
 
@@ -79,11 +79,11 @@ void InitCursorOnReopen(void)
 {
     CreateCursorSprites();
     ReshowDisplayMon();
-    gPSSData->cursorPrevHorizPos = 1;
-    gPSSData->inBoxMovingMode = 0;
+    sStorage->cursorPrevHorizPos = 1;
+    sStorage->inBoxMovingMode = 0;
     if (sIsMonBeingMoved)
     {
-        gPSSData->movingMon = sMonBeingCarried;
+        sStorage->movingMon = sMonBeingCarried;
         CreateMovingMonIcon();
     }
 }
@@ -145,46 +145,46 @@ bool8 UpdateCursorPos(void)
 {
     s16 tmp;
 
-    if (gPSSData->cursorMoveSteps == 0)
+    if (sStorage->cursorMoveSteps == 0)
     {
-        if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+        if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
             return FALSE;
         else
             return IsItemIconAnimActive();
     }
-    else if (--gPSSData->cursorMoveSteps != 0)
+    else if (--sStorage->cursorMoveSteps != 0)
     {
-        gPSSData->cursorNewX += gPSSData->cursorSpeedX;
-        gPSSData->cursorNewY += gPSSData->cursorSpeedY;
-        gPSSData->cursorSprite->pos1.x = gPSSData->cursorNewX >> 8;
-        gPSSData->cursorSprite->pos1.y = gPSSData->cursorNewY >> 8;
-        if (gPSSData->cursorSprite->pos1.x > 0x100)
+        sStorage->cursorNewX += sStorage->cursorSpeedX;
+        sStorage->cursorNewY += sStorage->cursorSpeedY;
+        sStorage->cursorSprite->pos1.x = sStorage->cursorNewX >> 8;
+        sStorage->cursorSprite->pos1.y = sStorage->cursorNewY >> 8;
+        if (sStorage->cursorSprite->pos1.x > 0x100)
         {
-            tmp = gPSSData->cursorSprite->pos1.x - 0x100;
-            gPSSData->cursorSprite->pos1.x = tmp + 0x40;
+            tmp = sStorage->cursorSprite->pos1.x - 0x100;
+            sStorage->cursorSprite->pos1.x = tmp + 0x40;
         }
-        if (gPSSData->cursorSprite->pos1.x < 0x40)
+        if (sStorage->cursorSprite->pos1.x < 0x40)
         {
-            tmp = 0x40 - gPSSData->cursorSprite->pos1.x;
-            gPSSData->cursorSprite->pos1.x = 0x100 - tmp;
+            tmp = 0x40 - sStorage->cursorSprite->pos1.x;
+            sStorage->cursorSprite->pos1.x = 0x100 - tmp;
         }
-        if (gPSSData->cursorSprite->pos1.y > 0xb0)
+        if (sStorage->cursorSprite->pos1.y > 0xb0)
         {
-            tmp = gPSSData->cursorSprite->pos1.y - 0xb0;
-            gPSSData->cursorSprite->pos1.y = tmp - 0x10;
+            tmp = sStorage->cursorSprite->pos1.y - 0xb0;
+            sStorage->cursorSprite->pos1.y = tmp - 0x10;
         }
-        if (gPSSData->cursorSprite->pos1.y < -0x10)
+        if (sStorage->cursorSprite->pos1.y < -0x10)
         {
-            tmp = -0x10 - gPSSData->cursorSprite->pos1.y;
-            gPSSData->cursorSprite->pos1.y = 0xb0 - tmp;
+            tmp = -0x10 - sStorage->cursorSprite->pos1.y;
+            sStorage->cursorSprite->pos1.y = 0xb0 - tmp;
         }
-        if (gPSSData->cursorFlipTimer && --gPSSData->cursorFlipTimer == 0)
-            gPSSData->cursorSprite->vFlip = (gPSSData->cursorSprite->vFlip == FALSE);
+        if (sStorage->cursorFlipTimer && --sStorage->cursorFlipTimer == 0)
+            sStorage->cursorSprite->vFlip = (sStorage->cursorSprite->vFlip == FALSE);
     }
     else
     {
-        gPSSData->cursorSprite->pos1.x = gPSSData->cursorTargetX;
-        gPSSData->cursorSprite->pos1.y = gPSSData->cursorTargetY;
+        sStorage->cursorSprite->pos1.x = sStorage->cursorTargetX;
+        sStorage->cursorSprite->pos1.y = sStorage->cursorTargetY;
         DoCursorNewPosUpdate();
     }
 
@@ -196,74 +196,74 @@ static void InitNewCursorPos(u8 newCurosrArea, u8 newCursorPosition)
     u16 x, y;
 
     GetCursorCoordsByPos(newCurosrArea, newCursorPosition, &x, &y);
-    gPSSData->newCursorArea = newCurosrArea;
-    gPSSData->newCursorPosition = newCursorPosition;
-    gPSSData->cursorTargetX = x;
-    gPSSData->cursorTargetY = y;
+    sStorage->newCursorArea = newCurosrArea;
+    sStorage->newCursorPosition = newCursorPosition;
+    sStorage->cursorTargetX = x;
+    sStorage->cursorTargetY = y;
 }
 
 static void InitCursorMove(void)
 {
     int yDistance, xDistance;
 
-    if (gPSSData->cursorVerticalWrap != 0 || gPSSData->cursorHorizontalWrap != 0)
-        gPSSData->cursorMoveSteps = 12;
+    if (sStorage->cursorVerticalWrap != 0 || sStorage->cursorHorizontalWrap != 0)
+        sStorage->cursorMoveSteps = 12;
     else
-        gPSSData->cursorMoveSteps = 6;
+        sStorage->cursorMoveSteps = 6;
 
-    if (gPSSData->cursorFlipTimer)
-        gPSSData->cursorFlipTimer = gPSSData->cursorMoveSteps >> 1;
+    if (sStorage->cursorFlipTimer)
+        sStorage->cursorFlipTimer = sStorage->cursorMoveSteps >> 1;
 
-    switch (gPSSData->cursorVerticalWrap)
+    switch (sStorage->cursorVerticalWrap)
     {
     default:
-        yDistance = gPSSData->cursorTargetY - gPSSData->cursorSprite->pos1.y;
+        yDistance = sStorage->cursorTargetY - sStorage->cursorSprite->pos1.y;
         break;
     case -1:
-        yDistance = gPSSData->cursorTargetY - 0xc0 - gPSSData->cursorSprite->pos1.y;
+        yDistance = sStorage->cursorTargetY - 0xc0 - sStorage->cursorSprite->pos1.y;
         break;
     case 1:
-        yDistance = gPSSData->cursorTargetY + 0xc0 - gPSSData->cursorSprite->pos1.y;
+        yDistance = sStorage->cursorTargetY + 0xc0 - sStorage->cursorSprite->pos1.y;
         break;
     }
 
-    switch (gPSSData->cursorHorizontalWrap)
+    switch (sStorage->cursorHorizontalWrap)
     {
     default:
-        xDistance = gPSSData->cursorTargetX - gPSSData->cursorSprite->pos1.x;
+        xDistance = sStorage->cursorTargetX - sStorage->cursorSprite->pos1.x;
         break;
     case -1:
-        xDistance = gPSSData->cursorTargetX - 0xc0 - gPSSData->cursorSprite->pos1.x;
+        xDistance = sStorage->cursorTargetX - 0xc0 - sStorage->cursorSprite->pos1.x;
         break;
     case 1:
-        xDistance = gPSSData->cursorTargetX + 0xc0 - gPSSData->cursorSprite->pos1.x;
+        xDistance = sStorage->cursorTargetX + 0xc0 - sStorage->cursorSprite->pos1.x;
         break;
     }
 
     yDistance = Q_24_8(yDistance);
     xDistance = Q_24_8(xDistance);
-    gPSSData->cursorSpeedX = xDistance / gPSSData->cursorMoveSteps;
-    gPSSData->cursorSpeedY = yDistance / gPSSData->cursorMoveSteps;
-    gPSSData->cursorNewX = Q_24_8(gPSSData->cursorSprite->pos1.x);
-    gPSSData->cursorNewY = Q_24_8(gPSSData->cursorSprite->pos1.y);
+    sStorage->cursorSpeedX = xDistance / sStorage->cursorMoveSteps;
+    sStorage->cursorSpeedY = yDistance / sStorage->cursorMoveSteps;
+    sStorage->cursorNewX = Q_24_8(sStorage->cursorSprite->pos1.x);
+    sStorage->cursorNewY = Q_24_8(sStorage->cursorSprite->pos1.y);
 }
 
 static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
 {
     InitNewCursorPos(newCurosrArea, newCursorPosition);
     InitCursorMove();
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
-        if (gPSSData->inBoxMovingMode == 0 && !sIsMonBeingMoved)
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_STILL);
+        if (sStorage->inBoxMovingMode == 0 && !sIsMonBeingMoved)
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
     {
         if (!IsActiveItemMoving())
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_STILL);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
             TryHideItemIconAtPos(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
@@ -278,8 +278,8 @@ static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
 
     if (newCurosrArea == CURSOR_AREA_IN_PARTY && sBoxCursorArea != CURSOR_AREA_IN_PARTY)
     {
-        gPSSData->cursorPrevHorizPos = newCurosrArea;
-        gPSSData->cursorShadowSprite->invisible = TRUE;
+        sStorage->cursorPrevHorizPos = newCurosrArea;
+        sStorage->cursorShadowSprite->invisible = TRUE;
     }
 
     switch (newCurosrArea)
@@ -287,19 +287,19 @@ static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
     case CURSOR_AREA_IN_PARTY:
     case CURSOR_AREA_BOX:
     case CURSOR_AREA_BUTTONS:
-        gPSSData->cursorSprite->oam.priority = 1;
-        gPSSData->cursorShadowSprite->invisible = TRUE;
-        gPSSData->cursorShadowSprite->oam.priority = 1;
+        sStorage->cursorSprite->oam.priority = 1;
+        sStorage->cursorShadowSprite->invisible = TRUE;
+        sStorage->cursorShadowSprite->oam.priority = 1;
         break;
     case CURSOR_AREA_IN_BOX:
-        if (gPSSData->inBoxMovingMode != 0)
+        if (sStorage->inBoxMovingMode != 0)
         {
-            gPSSData->cursorSprite->oam.priority = 0;
-            gPSSData->cursorShadowSprite->invisible = TRUE;
+            sStorage->cursorSprite->oam.priority = 0;
+            sStorage->cursorShadowSprite->invisible = TRUE;
         }
         else
         {
-            gPSSData->cursorSprite->oam.priority = 2;
+            sStorage->cursorSprite->oam.priority = 2;
             if (sBoxCursorArea == CURSOR_AREA_IN_BOX && sIsMonBeingMoved)
                 SetMovingMonPriority(2);
         }
@@ -309,17 +309,17 @@ static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
 
 static void DoCursorNewPosUpdate(void)
 {
-    sBoxCursorArea = gPSSData->newCursorArea;
-    sBoxCursorPosition = gPSSData->newCursorPosition;
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    sBoxCursorArea = sStorage->newCursorArea;
+    sBoxCursorPosition = sStorage->newCursorPosition;
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
-        if (gPSSData->inBoxMovingMode == 0 && !sIsMonBeingMoved)
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_STILL);
+        if (sStorage->inBoxMovingMode == 0 && !sIsMonBeingMoved)
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
     {
         if (!IsActiveItemMoving())
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_STILL);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
 
     TryRefreshDisplayMon();
@@ -332,16 +332,16 @@ static void DoCursorNewPosUpdate(void)
         AnimateBoxScrollArrows(TRUE);
         break;
     case CURSOR_AREA_IN_PARTY:
-        gPSSData->cursorShadowSprite->subpriority = 13;
+        sStorage->cursorShadowSprite->subpriority = 13;
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (gPSSData->inBoxMovingMode == 0)
+        if (sStorage->inBoxMovingMode == 0)
         {
-            gPSSData->cursorSprite->oam.priority = 1;
-            gPSSData->cursorShadowSprite->oam.priority = 2;
-            gPSSData->cursorShadowSprite->subpriority = 21;
-            gPSSData->cursorShadowSprite->invisible = FALSE;
+            sStorage->cursorSprite->oam.priority = 1;
+            sStorage->cursorShadowSprite->oam.priority = 2;
+            sStorage->cursorShadowSprite->subpriority = 21;
+            sStorage->cursorShadowSprite->invisible = FALSE;
             SetMovingMonPriority(2);
         }
         break;
@@ -362,8 +362,8 @@ void SetCursorInParty(void)
         if (partyCount >= PARTY_SIZE)
             partyCount = PARTY_SIZE - 1;
     }
-    if (gPSSData->cursorSprite->vFlip)
-        gPSSData->cursorFlipTimer = 1;
+    if (sStorage->cursorSprite->vFlip)
+        sStorage->cursorFlipTimer = 1;
     SetCursorPosition(CURSOR_AREA_IN_PARTY, partyCount);
 }
 
@@ -395,46 +395,46 @@ void InitMonPlaceChange(u8 a0)
         MonPlaceChange_Shift,
     };
 
-    gPSSData->monPlaceChangeFunc = placeChangeFuncs[a0];
-    gPSSData->monPlaceChangeState = 0;
+    sStorage->monPlaceChangeFunc = placeChangeFuncs[a0];
+    sStorage->monPlaceChangeState = 0;
 }
 
 void InitMultiMonPlaceChange(bool8 up)
 {
     if (!up)
-        gPSSData->monPlaceChangeFunc = MultiMonPlaceChange_Down;
+        sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Down;
     else
-        gPSSData->monPlaceChangeFunc = MultiMonPlaceChange_Up;
+        sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Up;
 
-    gPSSData->monPlaceChangeState = 0;
+    sStorage->monPlaceChangeState = 0;
 }
 
 bool8 DoMonPlaceChange(void)
 {
-    return gPSSData->monPlaceChangeFunc();
+    return sStorage->monPlaceChangeFunc();
 }
 
 static bool8 MonPlaceChange_Move(void)
 {
-    switch (gPSSData->monPlaceChangeState)
+    switch (sStorage->monPlaceChangeState)
     {
     case 0:
         if (sIsMonBeingMoved)
             return FALSE;
-        StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_OPEN);
-        gPSSData->monPlaceChangeState++;
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
+        sStorage->monPlaceChangeState++;
         break;
     case 1:
         if (!MonPlaceChange_CursorDown())
         {
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_FIST);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
             MoveMon();
-            gPSSData->monPlaceChangeState++;
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 2:
         if (!MonPlaceChange_CursorUp())
-            gPSSData->monPlaceChangeState++;
+            sStorage->monPlaceChangeState++;
         break;
     case 3:
         return FALSE;
@@ -445,21 +445,21 @@ static bool8 MonPlaceChange_Move(void)
 
 static bool8 MonPlaceChange_Place(void)
 {
-    switch (gPSSData->monPlaceChangeState)
+    switch (sStorage->monPlaceChangeState)
     {
     case 0:
         if (!MonPlaceChange_CursorDown())
         {
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_OPEN);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
             PlaceMon();
-            gPSSData->monPlaceChangeState++;
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 1:
         if (!MonPlaceChange_CursorUp())
         {
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_BOUNCE);
-            gPSSData->monPlaceChangeState++;
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 2:
@@ -471,30 +471,30 @@ static bool8 MonPlaceChange_Place(void)
 
 static bool8 MonPlaceChange_Shift(void)
 {
-    switch (gPSSData->monPlaceChangeState)
+    switch (sStorage->monPlaceChangeState)
     {
     case 0:
         switch (sBoxCursorArea)
         {
         case CURSOR_AREA_IN_PARTY:
-            gPSSData->shiftBoxId = TOTAL_BOXES_COUNT;
+            sStorage->shiftBoxId = TOTAL_BOXES_COUNT;
             break;
         case CURSOR_AREA_IN_BOX:
-            gPSSData->shiftBoxId = StorageGetCurrentBox();
+            sStorage->shiftBoxId = StorageGetCurrentBox();
             break;
         default:
             return FALSE;
         }
-        StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_OPEN);
-        SaveMonSpriteAtPos(gPSSData->shiftBoxId, sBoxCursorPosition);
-        gPSSData->monPlaceChangeState++;
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
+        SaveMonSpriteAtPos(sStorage->shiftBoxId, sBoxCursorPosition);
+        sStorage->monPlaceChangeState++;
         break;
     case 1:
         if (!MoveShiftingMons())
         {
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_FIST);
-            SetShiftedMonData(gPSSData->shiftBoxId, sBoxCursorPosition);
-            gPSSData->monPlaceChangeState++;
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
+            SetShiftedMonData(sStorage->shiftBoxId, sBoxCursorPosition);
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 2:
@@ -516,13 +516,13 @@ static bool8 MultiMonPlaceChange_Up(void)
 
 static bool8 MonPlaceChange_CursorDown(void)
 {
-    switch (gPSSData->cursorSprite->pos2.y)
+    switch (sStorage->cursorSprite->pos2.y)
     {
     default:
-        gPSSData->cursorSprite->pos2.y++;
+        sStorage->cursorSprite->pos2.y++;
         break;
     case 0:
-        gPSSData->cursorSprite->pos2.y++;
+        sStorage->cursorSprite->pos2.y++;
         break;
     case 8: // Cursor has reched the bottom
         return FALSE;
@@ -533,12 +533,12 @@ static bool8 MonPlaceChange_CursorDown(void)
 
 static bool8 MonPlaceChange_CursorUp(void)
 {
-    switch (gPSSData->cursorSprite->pos2.y)
+    switch (sStorage->cursorSprite->pos2.y)
     {
     case 0: // Cursor has reached the top
         return FALSE;
     default:
-        gPSSData->cursorSprite->pos2.y--;
+        sStorage->cursorSprite->pos2.y--;
         break;
     }
 
@@ -562,7 +562,7 @@ static void MoveMon(void)
         SetMovingMonSprite(MODE_PARTY, sBoxCursorPosition);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (gPSSData->inBoxMovingMode == 0)
+        if (sStorage->inBoxMovingMode == 0)
         {
             SetMovingMonData(StorageGetCurrentBox(), sBoxCursorPosition);
             SetMovingMonSprite(MODE_BOX, sBoxCursorPosition);
@@ -605,9 +605,9 @@ void RefreshDisplayMon(void)
 static void SetMovingMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
-        gPSSData->movingMon = gPlayerParty[sBoxCursorPosition];
+        sStorage->movingMon = gPlayerParty[sBoxCursorPosition];
     else
-        BoxMonAtToMon(boxId, position, &gPSSData->movingMon);
+        BoxMonAtToMon(boxId, position, &sStorage->movingMon);
 
     PurgeMonOrBoxMon(boxId, position);
     sMovingMonOrigBoxId = boxId;
@@ -618,12 +618,12 @@ static void SetPlacedMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
     {
-        gPlayerParty[position] = gPSSData->movingMon;
+        gPlayerParty[position] = sStorage->movingMon;
     }
     else
     {
-        BoxMonRestorePP(&gPSSData->movingMon.box);
-        SetBoxMonAt(boxId, position, &gPSSData->movingMon.box);
+        BoxMonRestorePP(&sStorage->movingMon.box);
+        SetBoxMonAt(boxId, position, &sStorage->movingMon.box);
     }
 }
 
@@ -638,13 +638,13 @@ static void PurgeMonOrBoxMon(u8 boxId, u8 position)
 static void SetShiftedMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
-        gPSSData->tempMon = gPlayerParty[position];
+        sStorage->tempMon = gPlayerParty[position];
     else
-        BoxMonAtToMon(boxId, position, &gPSSData->tempMon);
+        BoxMonAtToMon(boxId, position, &sStorage->tempMon);
 
     SetPlacedMonData(boxId, position);
-    gPSSData->movingMon = gPSSData->tempMon;
-    SetCursorMonData(&gPSSData->movingMon, MODE_PARTY);
+    sStorage->movingMon = sStorage->tempMon;
+    SetCursorMonData(&sStorage->movingMon, MODE_PARTY);
     sMovingMonOrigBoxId = boxId;
     sMovingMonOrigBoxPos = position;
 }
@@ -671,13 +671,13 @@ bool8 TryStorePartyMonInBox(u8 boxId)
     if (boxId == StorageGetCurrentBox())
         CreateBoxMonIconAtPos(boxPosition);
 
-    StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_STILL);
+    StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     return TRUE;
 }
 
 void ResetSelectionAfterDeposit(void)
 {
-    StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_BOUNCE);
+    StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
     TryRefreshDisplayMon();
 }
 
@@ -693,14 +693,14 @@ void InitReleaseMon(void)
         mode = MODE_BOX;
 
     SetReleaseMon(mode, sBoxCursorPosition);
-    StringCopy(gPSSData->releaseMonName, gPSSData->cursorMonNick);
+    StringCopy(sStorage->releaseMonName, sStorage->cursorMonNick);
 }
 
 bool8 TryHideReleaseMon(void)
 {
     if (!TryHideReleaseMonSprite())
     {
-        StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_BOUNCE);
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
         return FALSE;
     }
     else
@@ -733,7 +733,7 @@ void ReleaseMon(void)
 void TrySetCursorFistAnim(void)
 {
     if (sIsMonBeingMoved)
-        StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_FIST);
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
 }
 
 void InitCanReleaseMonVars(void)
@@ -741,44 +741,44 @@ void InitCanReleaseMonVars(void)
     u16 knownIdx;
     if (sIsMonBeingMoved)
     {
-        gPSSData->tempMon = gPSSData->movingMon;
-        gPSSData->releaseBoxId = -1;
-        gPSSData->releaseBoxPos = -1;
+        sStorage->tempMon = sStorage->movingMon;
+        sStorage->releaseBoxId = -1;
+        sStorage->releaseBoxPos = -1;
     }
     else
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
         {
-            gPSSData->tempMon = gPlayerParty[sBoxCursorPosition];
-            gPSSData->releaseBoxId = TOTAL_BOXES_COUNT;
+            sStorage->tempMon = gPlayerParty[sBoxCursorPosition];
+            sStorage->releaseBoxId = TOTAL_BOXES_COUNT;
         }
         else
         {
-            BoxMonAtToMon(StorageGetCurrentBox(), sBoxCursorPosition, &gPSSData->tempMon);
-            gPSSData->releaseBoxId = StorageGetCurrentBox();
+            BoxMonAtToMon(StorageGetCurrentBox(), sBoxCursorPosition, &sStorage->tempMon);
+            sStorage->releaseBoxId = StorageGetCurrentBox();
         }
-        gPSSData->releaseBoxPos = sBoxCursorPosition;
+        sStorage->releaseBoxPos = sBoxCursorPosition;
     }
 
-    gPSSData->isSurfMon = FALSE;
-    gPSSData->isDiveMon = FALSE;
-    gPSSData->restrictedMoveList[0] = MOVE_SURF;
-    gPSSData->restrictedMoveList[1] = MOVE_DIVE;
-    gPSSData->restrictedMoveList[2] = MOVES_COUNT;
-    knownIdx = GetMonData(&gPSSData->tempMon, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->restrictedMoveList);
-    gPSSData->isSurfMon = knownIdx & 1;
-    gPSSData->isDiveMon = (knownIdx >> 1) & 1;
-    if (gPSSData->isSurfMon || gPSSData->isDiveMon)
+    sStorage->isSurfMon = FALSE;
+    sStorage->isDiveMon = FALSE;
+    sStorage->restrictedMoveList[0] = MOVE_SURF;
+    sStorage->restrictedMoveList[1] = MOVE_DIVE;
+    sStorage->restrictedMoveList[2] = MOVES_COUNT;
+    knownIdx = GetMonData(&sStorage->tempMon, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
+    sStorage->isSurfMon = knownIdx & 1;
+    sStorage->isDiveMon = (knownIdx >> 1) & 1;
+    if (sStorage->isSurfMon || sStorage->isDiveMon)
     {
-        gPSSData->releaseStatusResolved = FALSE;
+        sStorage->releaseStatusResolved = FALSE;
     }
     else
     {
-        gPSSData->releaseStatusResolved = TRUE;
-        gPSSData->canReleaseMon = TRUE;
+        sStorage->releaseStatusResolved = TRUE;
+        sStorage->canReleaseMon = TRUE;
     }
 
-    gPSSData->releaseCheckState = 0;
+    sStorage->releaseCheckState = 0;
 }
 
 s8 RunCanReleaseMon(void)
@@ -786,62 +786,62 @@ s8 RunCanReleaseMon(void)
     u16 i;
     u16 knownMoves;
 
-    if (gPSSData->releaseStatusResolved)
-        return gPSSData->canReleaseMon;
+    if (sStorage->releaseStatusResolved)
+        return sStorage->canReleaseMon;
 
-    switch (gPSSData->releaseCheckState)
+    switch (sStorage->releaseCheckState)
     {
     case 0:
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (gPSSData->releaseBoxId != TOTAL_BOXES_COUNT || gPSSData->releaseBoxPos != i)
+            if (sStorage->releaseBoxId != TOTAL_BOXES_COUNT || sStorage->releaseBoxPos != i)
             {
-                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->restrictedMoveList);
+                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
                 if (knownMoves & 1)
-                    gPSSData->isSurfMon = FALSE;
+                    sStorage->isSurfMon = FALSE;
                 if (knownMoves & 2)
-                    gPSSData->isDiveMon = FALSE;
+                    sStorage->isDiveMon = FALSE;
             }
         }
-        if (!(gPSSData->isSurfMon || gPSSData->isDiveMon))
+        if (!(sStorage->isSurfMon || sStorage->isDiveMon))
         {
-            gPSSData->releaseStatusResolved = TRUE;
-            gPSSData->canReleaseMon = TRUE;
+            sStorage->releaseStatusResolved = TRUE;
+            sStorage->canReleaseMon = TRUE;
         }
         else
         {
-            gPSSData->releaseCheckBoxId = 0;
-            gPSSData->releaseCheckBoxPos = 0;
-            gPSSData->releaseCheckState++;
+            sStorage->releaseCheckBoxId = 0;
+            sStorage->releaseCheckBoxPos = 0;
+            sStorage->releaseCheckState++;
         }
         break;
     case 1:
         for (i = 0; i < 5; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(gPSSData->releaseCheckBoxId, gPSSData->releaseCheckBoxPos, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->restrictedMoveList);
+            knownMoves = GetAndCopyBoxMonDataAt(sStorage->releaseCheckBoxId, sStorage->releaseCheckBoxPos, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
             if (knownMoves != 0
-                && !(gPSSData->releaseBoxId == gPSSData->releaseCheckBoxId && gPSSData->releaseBoxPos == gPSSData->releaseCheckBoxPos))
+                && !(sStorage->releaseBoxId == sStorage->releaseCheckBoxId && sStorage->releaseBoxPos == sStorage->releaseCheckBoxPos))
             {
                 if (knownMoves & 1)
-                    gPSSData->isSurfMon = FALSE;
+                    sStorage->isSurfMon = FALSE;
                 if (knownMoves & 2)
-                    gPSSData->isDiveMon = FALSE;
+                    sStorage->isDiveMon = FALSE;
             }
-            if (++gPSSData->releaseCheckBoxPos >= IN_BOX_COUNT)
+            if (++sStorage->releaseCheckBoxPos >= IN_BOX_COUNT)
             {
-                gPSSData->releaseCheckBoxPos = 0;
-                if (++gPSSData->releaseCheckBoxId >= TOTAL_BOXES_COUNT)
+                sStorage->releaseCheckBoxPos = 0;
+                if (++sStorage->releaseCheckBoxId >= TOTAL_BOXES_COUNT)
                 {
-                    gPSSData->releaseStatusResolved = TRUE;
-                    gPSSData->canReleaseMon = FALSE;
+                    sStorage->releaseStatusResolved = TRUE;
+                    sStorage->canReleaseMon = FALSE;
                     break;
                 }
             }
         }
-        if (!(gPSSData->isSurfMon || gPSSData->isDiveMon))
+        if (!(sStorage->isSurfMon || sStorage->isDiveMon))
         {
-            gPSSData->releaseStatusResolved = TRUE;
-            gPSSData->canReleaseMon = TRUE;
+            sStorage->releaseStatusResolved = TRUE;
+            sStorage->canReleaseMon = TRUE;
         }
         break;
     }
@@ -852,7 +852,7 @@ s8 RunCanReleaseMon(void)
 void SaveMovingMon(void)
 {
     if (sIsMonBeingMoved)
-        sMonBeingCarried = gPSSData->movingMon;
+        sMonBeingCarried = sStorage->movingMon;
 }
 
 void LoadSavedMovingMon(void)
@@ -860,9 +860,9 @@ void LoadSavedMovingMon(void)
     if (sIsMonBeingMoved)
     {
         if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
-            gPSSData->movingMon = sMonBeingCarried;
+            sStorage->movingMon = sMonBeingCarried;
         else
-            gPSSData->movingMon.box = sMonBeingCarried.box;
+            sStorage->movingMon.box = sMonBeingCarried.box;
     }
 }
 
@@ -871,24 +871,24 @@ void InitSummaryScreenData(void)
     if (sIsMonBeingMoved)
     {
         SaveMovingMon();
-        gPSSData->summaryMon.mon = &sMonBeingCarried;
-        gPSSData->summaryStartPos = 0;
-        gPSSData->summaryMaxPos = 0;
-        gPSSData->summaryScreenMode = PSS_MODE_NORMAL;
+        sStorage->summaryMon.mon = &sMonBeingCarried;
+        sStorage->summaryStartPos = 0;
+        sStorage->summaryMaxPos = 0;
+        sStorage->summaryScreenMode = PSS_MODE_NORMAL;
     }
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
     {
-        gPSSData->summaryMon.mon = gPlayerParty;
-        gPSSData->summaryStartPos = sBoxCursorPosition;
-        gPSSData->summaryMaxPos = CountPartyMons() - 1;
-        gPSSData->summaryScreenMode = PSS_MODE_NORMAL;
+        sStorage->summaryMon.mon = gPlayerParty;
+        sStorage->summaryStartPos = sBoxCursorPosition;
+        sStorage->summaryMaxPos = CountPartyMons() - 1;
+        sStorage->summaryScreenMode = PSS_MODE_NORMAL;
     }
     else
     {
-        gPSSData->summaryMon.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
-        gPSSData->summaryStartPos = sBoxCursorPosition;
-        gPSSData->summaryMaxPos = IN_BOX_COUNT - 1;
-        gPSSData->summaryScreenMode = PSS_MODE_BOX;
+        sStorage->summaryMon.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
+        sStorage->summaryStartPos = sBoxCursorPosition;
+        sStorage->summaryMaxPos = IN_BOX_COUNT - 1;
+        sStorage->summaryScreenMode = PSS_MODE_BOX;
     }
 }
 
@@ -929,10 +929,10 @@ s16 CompactPartySlots(void)
 
 void SetMonMarkings(u8 markings)
 {
-    gPSSData->cursorMonMarkings = markings;
+    sStorage->cursorMonMarkings = markings;
     if (sIsMonBeingMoved)
     {
-        SetMonData(&gPSSData->movingMon, MON_DATA_MARKINGS, &markings);
+        SetMonData(&sStorage->movingMon, MON_DATA_MARKINGS, &markings);
     }
     else
     {
@@ -957,7 +957,7 @@ bool8 CanShiftMon(void)
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_PARTY && CountPartyAliveNonEggMonsExcept(sBoxCursorPosition) == 0)
         {
-            if (gPSSData->cursorMonIsEgg || GetMonData(&gPSSData->movingMon, MON_DATA_HP) == 0)
+            if (sStorage->cursorMonIsEgg || GetMonData(&sStorage->movingMon, MON_DATA_HP) == 0)
                 return FALSE;
         }
         return TRUE;
@@ -987,7 +987,7 @@ bool8 IsCursorInBox(void)
 
 static void TryRefreshDisplayMon(void)
 {
-    gPSSData->setMosaic = (sIsMonBeingMoved == FALSE);
+    sStorage->setMosaic = (sIsMonBeingMoved == FALSE);
     if (!sIsMonBeingMoved)
     {
         switch (sBoxCursorArea)
@@ -1024,94 +1024,94 @@ static void SetCursorMonData(void *pokemon, u8 mode)
     u16 gender;
     bool8 sanityIsBagEgg;
 
-    gPSSData->displayMonItemId = 0;
+    sStorage->displayMonItemId = 0;
     gender = MON_MALE;
     sanityIsBagEgg = FALSE;
     if (mode == MODE_PARTY)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
-        gPSSData->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
-        if (gPSSData->displayMonSpecies != SPECIES_NONE)
+        sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
+        if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             sanityIsBagEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBagEgg)
-                gPSSData->cursorMonIsEgg = TRUE;
+                sStorage->cursorMonIsEgg = TRUE;
             else
-                gPSSData->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
+                sStorage->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
 
-            GetMonData(mon, MON_DATA_NICKNAME, gPSSData->cursorMonNick);
-            StringGetEnd10(gPSSData->cursorMonNick);
-            gPSSData->cursorMonLevel = GetMonData(mon, MON_DATA_LEVEL);
-            gPSSData->cursorMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
-            gPSSData->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
-            gPSSData->displayMonPalette = GetMonFrontSpritePal(mon);
+            GetMonData(mon, MON_DATA_NICKNAME, sStorage->cursorMonNick);
+            StringGetEnd10(sStorage->cursorMonNick);
+            sStorage->cursorMonLevel = GetMonData(mon, MON_DATA_LEVEL);
+            sStorage->cursorMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
+            sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+            sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
-            gPSSData->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+            sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
         }
     }
     else if (mode == MODE_BOX)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
-        gPSSData->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
-        if (gPSSData->displayMonSpecies != SPECIES_NONE)
+        sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
+        if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
             sanityIsBagEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBagEgg)
-                gPSSData->cursorMonIsEgg = TRUE;
+                sStorage->cursorMonIsEgg = TRUE;
             else
-                gPSSData->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
+                sStorage->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
 
 
-            GetBoxMonData(boxMon, MON_DATA_NICKNAME, gPSSData->cursorMonNick);
-            StringGetEnd10(gPSSData->cursorMonNick);
-            gPSSData->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
-            gPSSData->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
-            gPSSData->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            gPSSData->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gPSSData->displayMonSpecies, otId, gPSSData->displayMonPersonality);
-            gender = GetGenderFromSpeciesAndPersonality(gPSSData->displayMonSpecies, gPSSData->displayMonPersonality);
-            gPSSData->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+            GetBoxMonData(boxMon, MON_DATA_NICKNAME, sStorage->cursorMonNick);
+            StringGetEnd10(sStorage->cursorMonNick);
+            sStorage->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
+            sStorage->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
+            sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
+            sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, otId, sStorage->displayMonPersonality);
+            gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
+            sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
     }
     else
     {
-        gPSSData->displayMonSpecies = SPECIES_NONE;
-        gPSSData->displayMonItemId = 0;
+        sStorage->displayMonSpecies = SPECIES_NONE;
+        sStorage->displayMonItemId = 0;
     }
 
-    if (gPSSData->displayMonSpecies == SPECIES_NONE)
+    if (sStorage->displayMonSpecies == SPECIES_NONE)
     {
-        StringFill(gPSSData->cursorMonNick, CHAR_SPACE, 5);
-        StringFill(gPSSData->cursorMonTexts[0], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[1], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[2], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonNick, CHAR_SPACE, 5);
+        StringFill(sStorage->cursorMonTexts[0], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[1], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[2], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[3], CHAR_SPACE, 8);
     }
-    else if (gPSSData->cursorMonIsEgg)
+    else if (sStorage->cursorMonIsEgg)
     {
         if (sanityIsBagEgg)
-            StringCopyPadded(gPSSData->cursorMonTexts[0], gPSSData->cursorMonNick, CHAR_SPACE, 5);
+            StringCopyPadded(sStorage->cursorMonTexts[0], sStorage->cursorMonNick, CHAR_SPACE, 5);
         else
-            StringCopyPadded(gPSSData->cursorMonTexts[0], gText_EggNickname, CHAR_SPACE, 8);
+            StringCopyPadded(sStorage->cursorMonTexts[0], gText_EggNickname, CHAR_SPACE, 8);
 
-        StringFill(gPSSData->cursorMonTexts[1], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[2], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[1], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[2], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[3], CHAR_SPACE, 8);
     }
     else
     {
-        if (gPSSData->displayMonSpecies == SPECIES_NIDORAN_F || gPSSData->displayMonSpecies == SPECIES_NIDORAN_M)
+        if (sStorage->displayMonSpecies == SPECIES_NIDORAN_F || sStorage->displayMonSpecies == SPECIES_NIDORAN_M)
             gender = MON_GENDERLESS;
 
-        StringCopyPadded(gPSSData->cursorMonTexts[0], gPSSData->cursorMonNick, CHAR_SPACE, 5);
+        StringCopyPadded(sStorage->cursorMonTexts[0], sStorage->cursorMonNick, CHAR_SPACE, 5);
 
-        txtPtr = gPSSData->cursorMonTexts[1];
+        txtPtr = sStorage->cursorMonTexts[1];
         *(txtPtr)++ = CHAR_SLASH;
-        StringCopyPadded(txtPtr, gSpeciesNames[gPSSData->displayMonSpecies], CHAR_SPACE, 5);
+        StringCopyPadded(txtPtr, gSpeciesNames[sStorage->displayMonSpecies], CHAR_SPACE, 5);
 
-        txtPtr = gPSSData->cursorMonTexts[2];
+        txtPtr = sStorage->cursorMonTexts[2];
         *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
         *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         switch (gender)
@@ -1145,20 +1145,20 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         *(txtPtr++) = CHAR_EXTRA_EMOJI;
         *(txtPtr++) = 5; // LV_2
 
-        txtPtr = ConvertIntToDecimalStringN(txtPtr, gPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        txtPtr = ConvertIntToDecimalStringN(txtPtr, sStorage->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
         txtPtr[0] = CHAR_SPACE;
         txtPtr[1] = EOS;
 
-        if (gPSSData->displayMonItemId != 0)
-            StringCopyPadded(gPSSData->cursorMonTexts[3], ItemId_GetName(gPSSData->displayMonItemId), CHAR_SPACE, 8);
+        if (sStorage->displayMonItemId != 0)
+            StringCopyPadded(sStorage->cursorMonTexts[3], ItemId_GetName(sStorage->displayMonItemId), CHAR_SPACE, 8);
         else
-            StringFill(gPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+            StringFill(sStorage->cursorMonTexts[3], CHAR_SPACE, 8);
     }
 }
 
 static u8 HandleInput_InBox(void)
 {
-    switch (gPSSData->inBoxMovingMode)
+    switch (sStorage->inBoxMovingMode)
     {
     case 0:
     default:
@@ -1180,9 +1180,9 @@ static u8 InBoxInput_Normal(void)
     {
         cursorArea = sBoxCursorArea;
         cursorPosition = sBoxCursorPosition;
-        gPSSData->cursorVerticalWrap = 0;
-        gPSSData->cursorHorizontalWrap = 0;
-        gPSSData->cursorFlipTimer = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
         if (JOY_REPT(DPAD_UP))
         {
             retVal = TRUE;
@@ -1206,8 +1206,8 @@ static u8 InBoxInput_Normal(void)
                 cursorArea = CURSOR_AREA_BUTTONS;
                 cursorPosition -= IN_BOX_COUNT;
                 cursorPosition /= 3;
-                gPSSData->cursorVerticalWrap = 1;
-                gPSSData->cursorFlipTimer = 1;
+                sStorage->cursorVerticalWrap = 1;
+                sStorage->cursorFlipTimer = 1;
             }
             break;
         }
@@ -1220,7 +1220,7 @@ static u8 InBoxInput_Normal(void)
             }
             else
             {
-                gPSSData->cursorHorizontalWrap = -1;
+                sStorage->cursorHorizontalWrap = -1;
                 cursorPosition += (IN_BOX_ROWS - 1);
             }
             break;
@@ -1234,7 +1234,7 @@ static u8 InBoxInput_Normal(void)
             }
             else
             {
-                gPSSData->cursorHorizontalWrap = 1;
+                sStorage->cursorHorizontalWrap = 1;
                 cursorPosition -= (IN_BOX_ROWS - 1);
             }
             break;
@@ -1252,31 +1252,31 @@ static u8 InBoxInput_Normal(void)
             if (!sCanOnlyMove)
                 return 8;
 
-            if (gPSSData->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
+            if (sStorage->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
             {
                 switch (GetMenuItemTextId(0))
                 {
-                case PC_TEXT_STORE:
+                case MENU_STORE:
                     return 11;
-                case PC_TEXT_WITHDRAW:
+                case MENU_WITHDRAW:
                     return 12;
-                case PC_TEXT_MOVE:
+                case MENU_MOVE:
                     return 13;
-                case PC_TEXT_SHIFT:
+                case MENU_SHIFT:
                     return 14;
-                case PC_TEXT_PLACE:
+                case MENU_PLACE:
                     return 15;
-                case PC_TEXT_TAKE:
+                case MENU_TAKE:
                     return 16;
-                case PC_TEXT_GIVE:
+                case MENU_GIVE:
                     return 17;
-                case PC_TEXT_SWITCH:
+                case MENU_SWITCH:
                     return 18;
                 }
             }
             else
             {
-                gPSSData->inBoxMovingMode = 1;
+                sStorage->inBoxMovingMode = 1;
                 return 20;
             }
         }
@@ -1369,14 +1369,14 @@ static u8 InBoxInput_GrabbingMultiple(void)
     {
         if (MultiMove_GetOrigin() == sBoxCursorPosition)
         {
-            gPSSData->inBoxMovingMode = 0;
-            gPSSData->cursorShadowSprite->invisible = FALSE;
+            sStorage->inBoxMovingMode = 0;
+            sStorage->cursorShadowSprite->invisible = FALSE;
             return 22;
         }
         else
         {
-            sIsMonBeingMoved = (gPSSData->displayMonSpecies != SPECIES_NONE);
-            gPSSData->inBoxMovingMode = 2;
+            sIsMonBeingMoved = (sStorage->displayMonSpecies != SPECIES_NONE);
+            sStorage->inBoxMovingMode = 2;
             sMovingMonOrigBoxId = StorageGetCurrentBox();
             return 23;
         }
@@ -1438,7 +1438,7 @@ static u8 InBoxInput_MovingMultiple(void)
         if (MultiMove_CanPlaceSelection())
         {
             sIsMonBeingMoved = FALSE;
-            gPSSData->inBoxMovingMode = 0;
+            sStorage->inBoxMovingMode = 0;
             return 26;
         }
         else
@@ -1475,9 +1475,9 @@ static u8 HandleInput_InParty(void)
     {
         cursorArea = sBoxCursorArea;
         cursorPosition = sBoxCursorPosition;
-        gPSSData->cursorHorizontalWrap = 0;
-        gPSSData->cursorVerticalWrap = 0;
-        gPSSData->cursorFlipTimer = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
         gotoBox = FALSE;
         retVal = 0;
 
@@ -1500,7 +1500,7 @@ static u8 HandleInput_InParty(void)
         else if (JOY_REPT(DPAD_LEFT) && sBoxCursorPosition != 0)
         {
             retVal = 1;
-            gPSSData->cursorPrevHorizPos = sBoxCursorPosition;
+            sStorage->cursorPrevHorizPos = sBoxCursorPosition;
             cursorPosition = 0;
             break;
         }
@@ -1509,7 +1509,7 @@ static u8 HandleInput_InParty(void)
             if (sBoxCursorPosition == 0)
             {
                 retVal = 1;
-                cursorPosition = gPSSData->cursorPrevHorizPos;
+                cursorPosition = sStorage->cursorPrevHorizPos;
             }
             else
             {
@@ -1524,7 +1524,7 @@ static u8 HandleInput_InParty(void)
         {
             if (sBoxCursorPosition == PARTY_SIZE)
             {
-                if (gPSSData->boxOption == BOX_OPTION_DEPOSIT)
+                if (sStorage->boxOption == BOX_OPTION_DEPOSIT)
                     return 4;
 
                 gotoBox = TRUE;
@@ -1536,21 +1536,21 @@ static u8 HandleInput_InParty(void)
 
                 switch (GetMenuItemTextId(0))
                 {
-                case PC_TEXT_STORE:
+                case MENU_STORE:
                     return 11;
-                case PC_TEXT_WITHDRAW:
+                case MENU_WITHDRAW:
                     return 12;
-                case PC_TEXT_MOVE:
+                case MENU_MOVE:
                     return 13;
-                case PC_TEXT_SHIFT:
+                case MENU_SHIFT:
                     return 14;
-                case PC_TEXT_PLACE:
+                case MENU_PLACE:
                     return 15;
-                case PC_TEXT_TAKE:
+                case MENU_TAKE:
                     return 16;
-                case PC_TEXT_GIVE:
+                case MENU_GIVE:
                     return 17;
-                case PC_TEXT_SWITCH:
+                case MENU_SWITCH:
                     return 18;
                 }
             }
@@ -1558,7 +1558,7 @@ static u8 HandleInput_InParty(void)
 
         if (JOY_NEW(B_BUTTON))
         {
-            if (gPSSData->boxOption == BOX_OPTION_DEPOSIT)
+            if (sStorage->boxOption == BOX_OPTION_DEPOSIT)
                 return 19;
 
             gotoBox = TRUE;
@@ -1595,16 +1595,16 @@ static u8 HandleInput_OnBox(void)
 
     do
     {
-        gPSSData->cursorHorizontalWrap = 0;
-        gPSSData->cursorVerticalWrap = 0;
-        gPSSData->cursorFlipTimer = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
 
         if (JOY_REPT(DPAD_UP))
         {
             retVal = 1;
             cursorArea = CURSOR_AREA_BUTTONS;
             cursorPosition = 0;
-            gPSSData->cursorFlipTimer = 1;
+            sStorage->cursorFlipTimer = 1;
             break;
         }
         else if (JOY_REPT(DPAD_DOWN))
@@ -1669,20 +1669,20 @@ static u8 HandleInput_OnButtons(void)
     {
         cursorArea = sBoxCursorArea;
         cursorPosition = sBoxCursorPosition;
-        gPSSData->cursorHorizontalWrap = 0;
-        gPSSData->cursorVerticalWrap = 0;
-        gPSSData->cursorFlipTimer = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
 
         if (JOY_REPT(DPAD_UP))
         {
             retVal = 1;
             cursorArea = CURSOR_AREA_IN_BOX;
-            gPSSData->cursorVerticalWrap = -1;
+            sStorage->cursorVerticalWrap = -1;
             if (sBoxCursorPosition == 0)
                 cursorPosition = IN_BOX_COUNT - 1 - 5;
             else
                 cursorPosition = IN_BOX_COUNT - 1;
-            gPSSData->cursorFlipTimer = 1;
+            sStorage->cursorFlipTimer = 1;
             break;
         }
         else if (JOY_REPT(DPAD_DOWN | START_BUTTON))
@@ -1690,7 +1690,7 @@ static u8 HandleInput_OnButtons(void)
             retVal = 1;
             cursorArea = CURSOR_AREA_BOX;
             cursorPosition = 0;
-            gPSSData->cursorFlipTimer = 1;
+            sStorage->cursorFlipTimer = 1;
             break;
         }
 
@@ -1760,16 +1760,16 @@ u8 HandleInput(void)
 static void AddBoxMenu(void)
 {
     InitMenu();
-    SetMenuText(PC_TEXT_JUMP);
-    SetMenuText(PC_TEXT_WALLPAPER);
-    SetMenuText(PC_TEXT_NAME);
-    SetMenuText(PC_TEXT_CANCEL);
+    SetMenuText(MENU_JUMP);
+    SetMenuText(MENU_WALLPAPER);
+    SetMenuText(MENU_NAME);
+    SetMenuText(MENU_CANCEL);
 }
 
 static bool8 SetSelectionMenuTexts(void)
 {
     InitMenu();
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
         return SetMenuTexts_Mon();
     else
         return SetMenuTexts_Item();
@@ -1779,17 +1779,17 @@ static bool8 SetMenuTexts_Mon(void)
 {
     u16 var0 = GetSpeciesAtCursorPosition();
 
-    switch (gPSSData->boxOption)
+    switch (sStorage->boxOption)
     {
     case BOX_OPTION_DEPOSIT:
         if (var0)
-            SetMenuText(PC_TEXT_STORE);
+            SetMenuText(MENU_STORE);
         else
             return FALSE;
         break;
     case BOX_OPTION_WITHDRAW:
         if (var0)
-            SetMenuText(PC_TEXT_WITHDRAW);
+            SetMenuText(MENU_WITHDRAW);
         else
             return FALSE;
         break;
@@ -1797,14 +1797,14 @@ static bool8 SetMenuTexts_Mon(void)
         if (sIsMonBeingMoved)
         {
             if (var0)
-                SetMenuText(PC_TEXT_SHIFT);
+                SetMenuText(MENU_SHIFT);
             else
-                SetMenuText(PC_TEXT_PLACE);
+                SetMenuText(MENU_PLACE);
         }
         else
         {
             if (var0)
-                SetMenuText(PC_TEXT_MOVE);
+                SetMenuText(MENU_MOVE);
             else
                 return FALSE;
         }
@@ -1814,64 +1814,64 @@ static bool8 SetMenuTexts_Mon(void)
         return FALSE;
     }
 
-    SetMenuText(PC_TEXT_SUMMARY);
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_MONS)
+    SetMenuText(MENU_SUMMARY);
+    if (sStorage->boxOption == BOX_OPTION_MOVE_MONS)
     {
         if (!sBoxCursorArea)
-            SetMenuText(PC_TEXT_WITHDRAW);
+            SetMenuText(MENU_WITHDRAW);
         else
-            SetMenuText(PC_TEXT_STORE);
+            SetMenuText(MENU_STORE);
     }
 
-    SetMenuText(PC_TEXT_MARK);
-    SetMenuText(PC_TEXT_RELEASE);
-    SetMenuText(PC_TEXT_CANCEL);
+    SetMenuText(MENU_MARK);
+    SetMenuText(MENU_RELEASE);
+    SetMenuText(MENU_CANCEL);
     return TRUE;
 }
 
 static bool8 SetMenuTexts_Item(void)
 {
-    if (gPSSData->displayMonSpecies == SPECIES_EGG)
+    if (sStorage->displayMonSpecies == SPECIES_EGG)
         return FALSE;
 
     if (!IsActiveItemMoving())
     {
-        if (gPSSData->displayMonItemId == ITEM_NONE)
+        if (sStorage->displayMonItemId == ITEM_NONE)
         {
-            if (gPSSData->displayMonSpecies == SPECIES_NONE)
+            if (sStorage->displayMonSpecies == SPECIES_NONE)
                 return FALSE;
 
-            SetMenuText(PC_TEXT_GIVE2);
+            SetMenuText(MENU_GIVE_2);
         }
         else
         {
-            if (!ItemIsMail(gPSSData->displayMonItemId))
+            if (!ItemIsMail(sStorage->displayMonItemId))
             {
-                SetMenuText(PC_TEXT_TAKE);
-                SetMenuText(PC_TEXT_BAG);
+                SetMenuText(MENU_TAKE);
+                SetMenuText(MENU_BAG);
             }
-            SetMenuText(PC_TEXT_INFO);
+            SetMenuText(MENU_INFO);
         }
     }
     else
     {
-        if (gPSSData->displayMonItemId == ITEM_NONE)
+        if (sStorage->displayMonItemId == ITEM_NONE)
         {
-            if (gPSSData->displayMonSpecies == SPECIES_NONE)
+            if (sStorage->displayMonSpecies == SPECIES_NONE)
                 return FALSE;
 
-            SetMenuText(PC_TEXT_GIVE);
+            SetMenuText(MENU_GIVE);
         }
         else
         {
-            if (ItemIsMail(gPSSData->displayMonItemId) == TRUE)
+            if (ItemIsMail(sStorage->displayMonItemId) == TRUE)
                 return FALSE;
 
-            SetMenuText(PC_TEXT_SWITCH);
+            SetMenuText(MENU_SWITCH);
         }
     }
 
-    SetMenuText(PC_TEXT_CANCEL);
+    SetMenuText(MENU_CANCEL);
     return TRUE;
 }
 
@@ -1883,8 +1883,8 @@ static bool8 SetMenuTexts_Item(void)
 
 static void SpriteCB_CursorShadow(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPSSData->cursorSprite->pos1.x;
-    sprite->pos1.y = gPSSData->cursorSprite->pos1.y + 20;
+    sprite->pos1.x = sStorage->cursorSprite->pos1.x;
+    sprite->pos1.y = sStorage->cursorSprite->pos1.y + 20;
 }
 
 static void CreateCursorSprites(void)
@@ -1961,22 +1961,22 @@ static void CreateCursorSprites(void)
 
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
-    gPSSData->cursorPalNums[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
-    gPSSData->cursorPalNums[1] = IndexOfSpritePaletteTag(TAG_PAL_DAC7);
+    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
+    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(TAG_PAL_DAC7);
 
     GetCursorCoordsByPos(sBoxCursorArea, sBoxCursorPosition, &x, &y);
     spriteId = CreateSprite(&gSpriteTemplate_857BA50, x, y, 6);
     if (spriteId != MAX_SPRITES)
     {
-        gPSSData->cursorSprite = &gSprites[spriteId];
-        gPSSData->cursorSprite->oam.paletteNum = gPSSData->cursorPalNums[sCanOnlyMove];
-        gPSSData->cursorSprite->oam.priority = 1;
+        sStorage->cursorSprite = &gSprites[spriteId];
+        sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sCanOnlyMove];
+        sStorage->cursorSprite->oam.priority = 1;
         if (sIsMonBeingMoved)
-            StartSpriteAnim(gPSSData->cursorSprite, CURSOR_ANIM_FIST);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
     }
     else
     {
-        gPSSData->cursorSprite = NULL;
+        sStorage->cursorSprite = NULL;
     }
 
     if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
@@ -1993,21 +1993,21 @@ static void CreateCursorSprites(void)
     spriteId = CreateSprite(&gSpriteTemplate_857BA68, 0, 0, subpriority);
     if (spriteId != MAX_SPRITES)
     {
-        gPSSData->cursorShadowSprite = &gSprites[spriteId];
-        gPSSData->cursorShadowSprite->oam.priority = priority;
+        sStorage->cursorShadowSprite = &gSprites[spriteId];
+        sStorage->cursorShadowSprite->oam.priority = priority;
         if (sBoxCursorArea)
-            gPSSData->cursorShadowSprite->invisible = 1;
+            sStorage->cursorShadowSprite->invisible = 1;
     }
     else
     {
-        gPSSData->cursorShadowSprite = NULL;
+        sStorage->cursorShadowSprite = NULL;
     }
 }
 
 static void ToggleCursorAutoAction(void)
 {
     sCanOnlyMove = !sCanOnlyMove;
-    gPSSData->cursorSprite->oam.paletteNum = gPSSData->cursorPalNums[sCanOnlyMove];
+    sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sCanOnlyMove];
 }
 
 u8 GetBoxCursorPosition(void)
@@ -2031,7 +2031,7 @@ void GetCursorBoxColumnAndRow(u8 *col_p, u8 *row_p)
 
 void StartCursorAnim(u8 animNum)
 {
-    StartSpriteAnim(gPSSData->cursorSprite, animNum);
+    StartSpriteAnim(sStorage->cursorSprite, animNum);
 }
 
 u8 PSS_GetMovingMonOrigBoxId(void)
@@ -2041,7 +2041,7 @@ u8 PSS_GetMovingMonOrigBoxId(void)
 
 void SetCursorPriorityTo1(void)
 {
-    gPSSData->cursorSprite->oam.priority = 1;
+    sStorage->cursorSprite->oam.priority = 1;
 }
 
 void TryHideItemAtCursor(void)

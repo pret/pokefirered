@@ -74,46 +74,80 @@ enum
     PC_TEXT_FMT_ITEM_NAME,
 };
 
+// IDs for menu selection items. See SetMenuText, PokeStorage_HandleMenuInput, etc
 enum
 {
-    PC_TEXT_CANCEL,
-    PC_TEXT_STORE,
-    PC_TEXT_WITHDRAW,
-    PC_TEXT_MOVE,
-    PC_TEXT_SHIFT,
-    PC_TEXT_PLACE,
-    PC_TEXT_SUMMARY,
-    PC_TEXT_RELEASE,
-    PC_TEXT_MARK,
-    PC_TEXT_JUMP,
-    PC_TEXT_WALLPAPER,
-    PC_TEXT_NAME,
-    PC_TEXT_TAKE,
-    PC_TEXT_GIVE,
-    PC_TEXT_GIVE2,
-    PC_TEXT_SWITCH,
-    PC_TEXT_BAG,
-    PC_TEXT_INFO,
-    PC_TEXT_SCENERY1,
-    PC_TEXT_SCENERY2,
-    PC_TEXT_SCENERY3,
-    PC_TEXT_ETCETERA,
-    PC_TEXT_FOREST,
-    PC_TEXT_CITY,
-    PC_TEXT_DESERT,
-    PC_TEXT_SAVANNA,
-    PC_TEXT_CRAG,
-    PC_TEXT_VOLCANO,
-    PC_TEXT_SNOW,
-    PC_TEXT_CAVE,
-    PC_TEXT_BEACH,
-    PC_TEXT_SEAFLOOR,
-    PC_TEXT_RIVER,
-    PC_TEXT_SKY,
-    PC_TEXT_POLKADOT,
-    PC_TEXT_POKECENTER,
-    PC_TEXT_MACHINE,
-    PC_TEXT_SIMPLE,
+    MENU_CANCEL,
+    MENU_STORE,
+    MENU_WITHDRAW,
+    MENU_MOVE,
+    MENU_SHIFT,
+    MENU_PLACE,
+    MENU_SUMMARY,
+    MENU_RELEASE,
+    MENU_MARK,
+    MENU_JUMP,
+    MENU_WALLPAPER,
+    MENU_NAME,
+    MENU_TAKE,
+    MENU_GIVE,
+    MENU_GIVE_2,
+    MENU_SWITCH,
+    MENU_BAG,
+    MENU_INFO,
+    MENU_SCENERY_1,
+    MENU_SCENERY_2,
+    MENU_SCENERY_3,
+    MENU_ETCETERA,
+    MENU_FOREST,
+    MENU_CITY,
+    MENU_DESERT,
+    MENU_SAVANNA,
+    MENU_CRAG,
+    MENU_VOLCANO,
+    MENU_SNOW,
+    MENU_CAVE,
+    MENU_BEACH,
+    MENU_SEAFLOOR,
+    MENU_RIVER,
+    MENU_SKY,
+    MENU_POLKADOT,
+    MENU_POKECENTER,
+    MENU_MACHINE,
+    MENU_SIMPLE,
+};
+#define MENU_WALLPAPER_SETS_START MENU_SCENERY_1
+#define MENU_WALLPAPERS_START MENU_FOREST
+
+// Return IDs for input handlers
+enum {
+    INPUT_NONE,
+    INPUT_MOVE_CURSOR,
+    INPUT_2, // Unused
+    INPUT_3, // Unused
+    INPUT_CLOSE_BOX,
+    INPUT_SHOW_PARTY,
+    INPUT_HIDE_PARTY,
+    INPUT_BOX_OPTIONS,
+    INPUT_IN_MENU,
+    INPUT_SCROLL_RIGHT,
+    INPUT_SCROLL_LEFT,
+    INPUT_DEPOSIT,
+    INPUT_WITHDRAW,
+    INPUT_MOVE_MON,
+    INPUT_SHIFT_MON,
+    INPUT_PLACE_MON,
+    INPUT_TAKE_ITEM,
+    INPUT_GIVE_ITEM,
+    INPUT_SWITCH_ITEMS,
+    INPUT_PRESSED_B,
+    INPUT_MULTIMOVE_START,
+    INPUT_MULTIMOVE_CHANGE_SELECTION,
+    INPUT_MULTIMOVE_SINGLE,
+    INPUT_MULTIMOVE_GRAB_SELECTION,
+    INPUT_MULTIMOVE_UNABLE,
+    INPUT_MULTIMOVE_MOVE_MONS,
+    INPUT_MULTIMOVE_PLACE_MONS,
 };
 
 enum
@@ -391,9 +425,9 @@ struct PokemonStorageSystemData
     /* 5abc */ u8 displayMenuTilemapBuffer[BG_SCREEN_SIZE];
 }; // size=62bc
 
-extern struct PokemonStorageSystemData *gPSSData;
+extern struct PokemonStorageSystemData *sStorage;
 
-void Cb2_EnterPSS(u8 a0);
+void CB2_EnterPokeStorage(u8 boxOption);
 u8 GetCurrentBoxOption(void);
 struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
@@ -403,8 +437,8 @@ void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * src);
 
 void Cb2_ExitPSS(void);
 void FreeBoxSelectionPopupSpriteGfx(void);
-void sub_808C940(u8 curBox);
-void sub_808C950(void);
+void CreateChooseBoxMenuSprites(u8 curBox);
+void DestroyChooseBoxMenuSprites(void);
 u8 HandleBoxChooseSelectionInput(void);
 void LoadBoxSelectionPopupSpriteGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
@@ -432,23 +466,23 @@ void StartCursorAnim(u8 animNum);
 u8 PSS_GetMovingMonOrigBoxId(void);
 void TryHideItemAtCursor(void);
 void TryShowItemAtCursor(void);
-bool8 sub_8094F90(void);
-s16 sub_8094F94(void);
-void sub_8095024(void);
-bool8 sub_8095050(void);
-void sub_80950A4(void);
-void sub_80950BC(u8 a0);
-bool8 sub_80950D0(void);
-void sub_8095B5C(void);
-void sub_8096088(void);
-void sub_80960C0(void);
+bool8 IsMenuLoading(void);
+s16 PokeStorage_HandleMenuInput(void);
+void RemoveMenu(void);
+bool8 MultiMove_Init(void);
+void MultiMove_Free(void);
+void MultiMove_SetFunction(u8 a0);
+bool8 MultiMove_RunFunction(void);
+void CreateItemIconSprites(void);
+void MoveItemFromCursorToBag(void);
+void MoveHeldItemWithPartyMenu(void);
 bool8 IsItemIconAnimActive(void);
 const u8 *GetMovingItemName(void);
-void sub_80966F4(void);
-bool8 sub_8096728(void);
-bool8 sub_80967C0(void);
+void InitItemInfoWindow(void);
+bool8 UpdateItemInfoWindowSlideIn(void);
+bool8 UpdateItemInfoWindowSlideOut(void);
 void PSS_InitCopyAndFillManager(struct UnkUtil *manager, struct UnkUtilData *specs, u32 count);
-void sub_8096BF8(void);
+void UnkUtil_Run(void);
 void AddMenu(void);
 bool8 CanMovePartyMon(void);
 bool8 CanShiftMon(void);
@@ -478,22 +512,22 @@ bool8 TryStorePartyMonInBox(u8 boxId);
 void InitMenu(void);
 void SetMenuText(u8 textId);
 void TryLoadItemIconAtPos(u8 cursorArea, u8 cursorPos);
-void sub_8095E2C(u16 itemId);
+void InitItemIconInCursor(u16 itemId);
 u8 GetBoxWallpaper(u8 boxId);
 bool8 IsCursorOnBox(void);
 bool8 IsCursorInBox(void);
 
-void sub_808FFAC(void);
+void InitMonIconFields(void);
 struct Sprite * CreateMonIconSprite(u16 species, u32 pid, s16 x, s16 y, u8 priority, u8 subpriority);
 void CreatePartyMonsSprites(bool8 species);
-void sub_80909F4(void);
-bool8 sub_8090A60(void);
-void sub_8090B98(s16 yDelta);
+void CompactPartySprites(void);
+bool8 GetNumPartySpritesCompacting(void);
+void MovePartySprites(s16 yDelta);
 void DestroyAllPartyMonIcons(void);
-void sub_8091114(void);
-bool8 sub_8091150(void);
-void sub_80913DC(u8 box);
-bool8 sub_809140C(void);
+void ReshowReleaseMon(void);
+bool8 ResetReleaseMonSpritePtr(void);
+void CreateInitBoxTask(u8 box);
+bool8 IsInitBoxActive(void);
 void AnimateBoxScrollArrows(bool8 species);
 void CreateMovingMonIcon(void);
 void SaveMonSpriteAtPos(u8 boxId, u8 cursorPos);

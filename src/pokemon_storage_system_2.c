@@ -355,7 +355,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         if (!gPaletteFade.active)
         {
             CleanupOverworldWindowsAndTilemaps();
-            Cb2_EnterPSS(task->tInput);
+            CB2_EnterPokeStorage(task->tInput);
             DestroyTask(taskId);
         }
         break;
@@ -477,12 +477,12 @@ void FreeBoxSelectionPopupSpriteGfx(void)
     FreeSpriteTilesByTag(sChooseBoxMenu->tilesTag + 1);
 }
 
-void sub_808C940(u8 curBox)
+void CreateChooseBoxMenuSprites(u8 curBox)
 {
     ChooseBoxMenu_CreateSprites(curBox);
 }
 
-void sub_808C950(void)
+void DestroyChooseBoxMenuSprites(void)
 {
     ChooseBoxMenu_DestroySprites();
 }

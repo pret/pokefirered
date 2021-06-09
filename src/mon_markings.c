@@ -473,7 +473,7 @@ struct Sprite * CreateMonMarkingSprite_SelectCombo(u16 tileTag, u16 paletteTag, 
     return CreateMonMarkingSprite(tileTag, paletteTag, palette, 16);
 }
 
-struct Sprite * CreateMonMarkingSprite_AllOff(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite * CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (palette == NULL)
         palette = sMonMarkingsPal;

@@ -1403,7 +1403,7 @@ static void AnimHailContinue(struct Sprite *sprite)
 // arg 2: target x offset
 // arg 3: target y offset
 // arg 4: duration
-// arg 5: arc height (negative)
+// arg 5: arc width (negative)
 static void InitIceBallAnim(struct Sprite *sprite)
 {
     u8 animNum = gAnimDisableStructPtr->rolloutTimerStartValue - gAnimDisableStructPtr->rolloutTimer - 1;

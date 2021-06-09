@@ -253,22 +253,22 @@ static const struct SpriteTemplate gUnknown_83D2BB4 = {
     .callback = sub_8092164
 };
 
-void sub_808FFAC(void)
+void InitMonIconFields(void)
 {
     u16 i;
 
     LoadMonIconPalettes();
     for (i = 0; i < MAX_MON_ICONS; i++)
-        gPSSData->numIconsPerSpecies[i] = 0;
+        sStorage->numIconsPerSpecies[i] = 0;
     for (i = 0; i < MAX_MON_ICONS; i++)
-        gPSSData->iconSpeciesList[i] = 0;
+        sStorage->iconSpeciesList[i] = 0;
     for (i = 0; i < PARTY_SIZE; i++)
-        gPSSData->partySprites[i] = NULL;
+        sStorage->partySprites[i] = NULL;
     for (i = 0; i < IN_BOX_COUNT; i++)
-        gPSSData->boxMonsSprites[i] = NULL;
+        sStorage->boxMonsSprites[i] = NULL;
 
-    gPSSData->movingMonSprite = NULL;
-    gPSSData->unkUnused1 = 0;
+    sStorage->movingMonSprite = NULL;
+    sStorage->unkUnused1 = 0;
 }
 
 static u8 sub_8090058(void)
@@ -278,12 +278,12 @@ static u8 sub_8090058(void)
 
 void CreateMovingMonIcon(void)
 {
-    u32 personality = GetMonData(&gPSSData->movingMon, MON_DATA_PERSONALITY);
-    u16 species = GetMonData(&gPSSData->movingMon, MON_DATA_SPECIES2);
+    u32 personality = GetMonData(&sStorage->movingMon, MON_DATA_PERSONALITY);
+    u16 species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES2);
     u8 priority = sub_8090058();
 
-    gPSSData->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
-    gPSSData->movingMonSprite->callback = sub_80911B0;
+    sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
+    sStorage->movingMonSprite->callback = sub_80911B0;
 }
 
 static void sub_80900D4(u8 boxId)
@@ -303,23 +303,23 @@ static void sub_80900D4(u8 boxId)
             if (species != SPECIES_NONE)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
-                gPSSData->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
+                sStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
             }
             else
             {
-                gPSSData->boxMonsSprites[count] = NULL;
+                sStorage->boxMonsSprites[count] = NULL;
             }
             boxPosition++;
             count++;
         }
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
-                gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
 }
@@ -334,9 +334,9 @@ void CreateBoxMonIconAtPos(u8 boxPosition)
         s16 y = 8 * (3 * (boxPosition / IN_BOX_ROWS)) + 44;
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
-        gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
-        if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
-            gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+        sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
+        if (sStorage->boxOption == BOX_OPTION_MOVE_ITEMS)
+            sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
 
@@ -346,11 +346,11 @@ static void sub_809029C(s16 arg0)
 
     for (i = 0; i < IN_BOX_COUNT; i++)
     {
-        if (gPSSData->boxMonsSprites[i] != NULL)
+        if (sStorage->boxMonsSprites[i] != NULL)
         {
-            gPSSData->boxMonsSprites[i]->data[2] = arg0;
-            gPSSData->boxMonsSprites[i]->data[4] = 1;
-            gPSSData->boxMonsSprites[i]->callback = sub_8090324;
+            sStorage->boxMonsSprites[i]->data[2] = arg0;
+            sStorage->boxMonsSprites[i]->data[4] = 1;
+            sStorage->boxMonsSprites[i]->callback = sub_8090324;
         }
     }
 }
@@ -364,7 +364,7 @@ static void sub_80902E0(struct Sprite *sprite)
     }
     else
     {
-        gPSSData->iconScrollNumIncoming--;
+        sStorage->iconScrollNumIncoming--;
         sprite->pos1.x = sprite->data[3];
         sprite->callback = SpriteCallbackDummy;
     }
@@ -392,10 +392,10 @@ static void DestroyAllIconsInRow(u8 row)
 
     for (column = 0; column < IN_BOX_COLUMNS; column++)
     {
-        if (gPSSData->boxMonsSprites[boxPosition] != NULL)
+        if (sStorage->boxMonsSprites[boxPosition] != NULL)
         {
-            DestroyBoxMonIcon(gPSSData->boxMonsSprites[boxPosition]);
-            gPSSData->boxMonsSprites[boxPosition] = NULL;
+            DestroyBoxMonIcon(sStorage->boxMonsSprites[boxPosition]);
+            sStorage->boxMonsSprites[boxPosition] = NULL;
         }
         boxPosition += IN_BOX_ROWS;
     }
@@ -411,21 +411,21 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
     u8 count = 0;
     u8 boxPosition = row;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < IN_BOX_COLUMNS; i++)
         {
-            if (gPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
             {
-                gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(gPSSData->boxSpecies[boxPosition],
-                                                                            gPSSData->boxPersonalities[boxPosition],
+                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
+                                                                            sStorage->boxPersonalities[boxPosition],
                                                                             x, y, 2, subpriority);
-                if (gPSSData->boxMonsSprites[boxPosition] != NULL)
+                if (sStorage->boxMonsSprites[boxPosition] != NULL)
                 {
-                    gPSSData->boxMonsSprites[boxPosition]->data[1] = times;
-                    gPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
-                    gPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
-                    gPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
+                    sStorage->boxMonsSprites[boxPosition]->data[1] = times;
+                    sStorage->boxMonsSprites[boxPosition]->data[2] = xDelta;
+                    sStorage->boxMonsSprites[boxPosition]->data[3] = xDest;
+                    sStorage->boxMonsSprites[boxPosition]->callback = sub_80902E0;
                     count++;
                 }
             }
@@ -437,19 +437,19 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
     {
         for (i = 0; i < IN_BOX_COLUMNS; i++)
         {
-            if (gPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
             {
-                gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(gPSSData->boxSpecies[boxPosition],
-                                                                            gPSSData->boxPersonalities[boxPosition],
+                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
+                                                                            sStorage->boxPersonalities[boxPosition],
                                                                             x, y, 2, subpriority);
-                if (gPSSData->boxMonsSprites[boxPosition] != NULL)
+                if (sStorage->boxMonsSprites[boxPosition] != NULL)
                 {
-                    gPSSData->boxMonsSprites[boxPosition]->data[1] = times;
-                    gPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
-                    gPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
-                    gPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
-                    if (GetBoxMonDataAt(gPSSData->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
-                        gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                    sStorage->boxMonsSprites[boxPosition]->data[1] = times;
+                    sStorage->boxMonsSprites[boxPosition]->data[2] = xDelta;
+                    sStorage->boxMonsSprites[boxPosition]->data[3] = xDest;
+                    sStorage->boxMonsSprites[boxPosition]->callback = sub_80902E0;
+                    if (GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
+                        sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
                     count++;
                 }
             }
@@ -463,56 +463,56 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
 
 static void sub_8090574(u8 boxId, s8 direction)
 {
-    gPSSData->iconScrollState = 0;
-    gPSSData->iconScrollToBoxId = boxId;
-    gPSSData->iconScrollDirection = direction;
-    gPSSData->iconScrollDistance = 32;
-    gPSSData->iconScrollSpeed = -(6 * direction);
-    gPSSData->iconScrollNumIncoming = 0;
+    sStorage->iconScrollState = 0;
+    sStorage->iconScrollToBoxId = boxId;
+    sStorage->iconScrollDirection = direction;
+    sStorage->iconScrollDistance = 32;
+    sStorage->iconScrollSpeed = -(6 * direction);
+    sStorage->iconScrollNumIncoming = 0;
     SetBoxSpeciesAndPersonalities(boxId);
     if (direction > 0)
-        gPSSData->iconScrollCurColumn = 0;
+        sStorage->iconScrollCurColumn = 0;
     else
-        gPSSData->iconScrollCurColumn = IN_BOX_ROWS - 1;
+        sStorage->iconScrollCurColumn = IN_BOX_ROWS - 1;
 
-    gPSSData->iconScrollPos = (24 * gPSSData->iconScrollCurColumn) + 100;
-    sub_809029C(gPSSData->iconScrollSpeed);
+    sStorage->iconScrollPos = (24 * sStorage->iconScrollCurColumn) + 100;
+    sub_809029C(sStorage->iconScrollSpeed);
 }
 
 static bool8 sub_809062C(void)
 {
-    if (gPSSData->iconScrollDistance != 0)
-        gPSSData->iconScrollDistance--;
+    if (sStorage->iconScrollDistance != 0)
+        sStorage->iconScrollDistance--;
 
-    switch (gPSSData->iconScrollState)
+    switch (sStorage->iconScrollState)
     {
     case 0:
-        gPSSData->iconScrollPos += gPSSData->iconScrollSpeed;
-        if (gPSSData->iconScrollPos <= 64 || gPSSData->iconScrollPos >= 252)
+        sStorage->iconScrollPos += sStorage->iconScrollSpeed;
+        if (sStorage->iconScrollPos <= 64 || sStorage->iconScrollPos >= 252)
         {
-            DestroyAllIconsInRow(gPSSData->iconScrollCurColumn);
-            gPSSData->iconScrollPos += gPSSData->iconScrollDirection * 24;
-            gPSSData->iconScrollState++;
+            DestroyAllIconsInRow(sStorage->iconScrollCurColumn);
+            sStorage->iconScrollPos += sStorage->iconScrollDirection * 24;
+            sStorage->iconScrollState++;
         }
         break;
     case 1:
-        gPSSData->iconScrollPos += gPSSData->iconScrollSpeed;
-        gPSSData->iconScrollNumIncoming += sub_80903A4(gPSSData->iconScrollCurColumn, gPSSData->iconScrollDistance, gPSSData->iconScrollSpeed);
-        if ((gPSSData->iconScrollDirection > 0 && gPSSData->iconScrollCurColumn == IN_BOX_ROWS - 1)
-            || (gPSSData->iconScrollDirection < 0 && gPSSData->iconScrollCurColumn == 0))
+        sStorage->iconScrollPos += sStorage->iconScrollSpeed;
+        sStorage->iconScrollNumIncoming += sub_80903A4(sStorage->iconScrollCurColumn, sStorage->iconScrollDistance, sStorage->iconScrollSpeed);
+        if ((sStorage->iconScrollDirection > 0 && sStorage->iconScrollCurColumn == IN_BOX_ROWS - 1)
+            || (sStorage->iconScrollDirection < 0 && sStorage->iconScrollCurColumn == 0))
         {
-            gPSSData->iconScrollState++;
+            sStorage->iconScrollState++;
         }
         else
         {
-            gPSSData->iconScrollCurColumn += gPSSData->iconScrollDirection;
-            gPSSData->iconScrollState = 0;
+            sStorage->iconScrollCurColumn += sStorage->iconScrollDirection;
+            sStorage->iconScrollState = 0;
         }
         break;
     case 2:
-        if (gPSSData->iconScrollNumIncoming == 0)
+        if (sStorage->iconScrollNumIncoming == 0)
         {
-            gPSSData->iconScrollDistance++;
+            sStorage->iconScrollDistance++;
             return FALSE;
         }
         break;
@@ -532,30 +532,30 @@ static void SetBoxSpeciesAndPersonalities(u8 boxId)
     {
         for (j = 0; j < IN_BOX_ROWS; j++)
         {
-            gPSSData->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
-            if (gPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
-                gPSSData->boxPersonalities[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
+            sStorage->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
+                sStorage->boxPersonalities[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
             boxPosition++;
         }
     }
 
-    gPSSData->incomingBoxId = boxId;
+    sStorage->incomingBoxId = boxId;
 }
 
 void DestroyBoxMonIconAtPosition(u8 boxPosition)
 {
-    if (gPSSData->boxMonsSprites[boxPosition] != NULL)
+    if (sStorage->boxMonsSprites[boxPosition] != NULL)
     {
-        DestroyBoxMonIcon(gPSSData->boxMonsSprites[boxPosition]);
-        gPSSData->boxMonsSprites[boxPosition] = NULL;
+        DestroyBoxMonIcon(sStorage->boxMonsSprites[boxPosition]);
+        sStorage->boxMonsSprites[boxPosition] = NULL;
     }
 }
 
 void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
 {
-    if (gPSSData->boxMonsSprites[boxPosition] != NULL)
+    if (sStorage->boxMonsSprites[boxPosition] != NULL)
     {
-        gPSSData->boxMonsSprites[boxPosition]->oam.objMode = objMode;
+        sStorage->boxMonsSprites[boxPosition]->oam.objMode = objMode;
     }
 }
 
@@ -565,7 +565,7 @@ void CreatePartyMonsSprites(bool8 arg0)
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
 
-    gPSSData->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
@@ -573,12 +573,12 @@ void CreatePartyMonsSprites(bool8 arg0)
         if (species != SPECIES_NONE)
         {
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            gPSSData->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+            sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152, 8 * (3 * (i - 1)) + 16, 1, 12);
             count++;
         }
         else
         {
-            gPSSData->partySprites[i] = NULL;
+            sStorage->partySprites[i] = NULL;
         }
     }
 
@@ -586,44 +586,44 @@ void CreatePartyMonsSprites(bool8 arg0)
     {
         for (i = 0; i < count; i++)
         {
-            gPSSData->partySprites[i]->pos1.y -= 160;
-            gPSSData->partySprites[i]->invisible = TRUE;
+            sStorage->partySprites[i]->pos1.y -= 160;
+            sStorage->partySprites[i]->invisible = TRUE;
         }
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (gPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
-                gPSSData->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
+            if (sStorage->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
+                sStorage->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
 }
 
-void sub_80909F4(void)
+void CompactPartySprites(void)
 {
     u16 i, count;
 
-    gPSSData->numPartyToCompact = 0;
+    sStorage->numPartyToCompact = 0;
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
-        if (gPSSData->partySprites[i] != NULL)
+        if (sStorage->partySprites[i] != NULL)
         {
             if (i != count)
             {
-                sub_8090A74(gPSSData->partySprites[i], count);
-                gPSSData->partySprites[i] = NULL;
-                gPSSData->numPartyToCompact++;
+                sub_8090A74(sStorage->partySprites[i], count);
+                sStorage->partySprites[i] = NULL;
+                sStorage->numPartyToCompact++;
             }
             count++;
         }
     }
 }
 
-u8 sub_8090A60(void)
+u8 GetNumPartySpritesCompacting(void)
 {
-    return gPSSData->numPartyToCompact;
+    return sStorage->numPartyToCompact;
 }
 
 static void sub_8090A74(struct Sprite *sprite, u16 partyId)
@@ -667,45 +667,45 @@ static void sub_8090AE0(struct Sprite *sprite)
             sprite->pos1.y = 8 * (3 * (sprite->data[1] - 1)) + 16;
         }
         sprite->callback = SpriteCallbackDummy;
-        gPSSData->partySprites[sprite->data[1]] = sprite;
-        gPSSData->numPartyToCompact--;
+        sStorage->partySprites[sprite->data[1]] = sprite;
+        sStorage->numPartyToCompact--;
     }
 }
 
 void DestroyMovingMonIcon(void)
 {
-    if (gPSSData->movingMonSprite != NULL)
+    if (sStorage->movingMonSprite != NULL)
     {
-        DestroyBoxMonIcon(gPSSData->movingMonSprite);
-        gPSSData->movingMonSprite = NULL;
+        DestroyBoxMonIcon(sStorage->movingMonSprite);
+        sStorage->movingMonSprite = NULL;
     }
 }
 
-void sub_8090B98(s16 yDelta)
+void MovePartySprites(s16 yDelta)
 {
     u16 i, posY;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gPSSData->partySprites[i] != NULL)
+        if (sStorage->partySprites[i] != NULL)
         {
-            gPSSData->partySprites[i]->pos1.y += yDelta;
-            posY = gPSSData->partySprites[i]->pos1.y + gPSSData->partySprites[i]->pos2.y + gPSSData->partySprites[i]->centerToCornerVecY;
+            sStorage->partySprites[i]->pos1.y += yDelta;
+            posY = sStorage->partySprites[i]->pos1.y + sStorage->partySprites[i]->pos2.y + sStorage->partySprites[i]->centerToCornerVecY;
             posY += 16;
             if (posY > 192)
-                gPSSData->partySprites[i]->invisible = TRUE;
+                sStorage->partySprites[i]->invisible = TRUE;
             else
-                gPSSData->partySprites[i]->invisible = FALSE;
+                sStorage->partySprites[i]->invisible = FALSE;
         }
     }
 }
 
 void DestroyPartyMonIcon(u8 partyId)
 {
-    if (gPSSData->partySprites[partyId] != NULL)
+    if (sStorage->partySprites[partyId] != NULL)
     {
-        DestroyBoxMonIcon(gPSSData->partySprites[partyId]);
-        gPSSData->partySprites[partyId] = NULL;
+        DestroyBoxMonIcon(sStorage->partySprites[partyId]);
+        sStorage->partySprites[partyId] = NULL;
     }
 }
 
@@ -715,19 +715,19 @@ void DestroyAllPartyMonIcons(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gPSSData->partySprites[i] != NULL)
+        if (sStorage->partySprites[i] != NULL)
         {
-            DestroyBoxMonIcon(gPSSData->partySprites[i]);
-            gPSSData->partySprites[i] = NULL;
+            DestroyBoxMonIcon(sStorage->partySprites[i]);
+            sStorage->partySprites[i] = NULL;
         }
     }
 }
 
 void SetPartyMonIconObjMode(u8 partyId, u8 objMode)
 {
-    if (gPSSData->partySprites[partyId] != NULL)
+    if (sStorage->partySprites[partyId] != NULL)
     {
-        gPSSData->partySprites[partyId]->oam.objMode = objMode;
+        sStorage->partySprites[partyId]->oam.objMode = objMode;
     }
 }
 
@@ -735,83 +735,83 @@ void SetMovingMonSprite(u8 cursorArea, u8 cursorPos)
 {
     if (cursorArea == MODE_PARTY)
     {
-        gPSSData->movingMonSprite = gPSSData->partySprites[cursorPos];
-        gPSSData->partySprites[cursorPos] = NULL;
+        sStorage->movingMonSprite = sStorage->partySprites[cursorPos];
+        sStorage->partySprites[cursorPos] = NULL;
     }
     else if (cursorArea == MODE_BOX)
     {
-        gPSSData->movingMonSprite = gPSSData->boxMonsSprites[cursorPos];
-        gPSSData->boxMonsSprites[cursorPos] = NULL;
+        sStorage->movingMonSprite = sStorage->boxMonsSprites[cursorPos];
+        sStorage->boxMonsSprites[cursorPos] = NULL;
     }
     else
     {
         return;
     }
 
-    gPSSData->movingMonSprite->callback = sub_80911B0;
-    gPSSData->movingMonSprite->oam.priority = sub_8090058();
-    gPSSData->movingMonSprite->subpriority = 7;
+    sStorage->movingMonSprite->callback = sub_80911B0;
+    sStorage->movingMonSprite->oam.priority = sub_8090058();
+    sStorage->movingMonSprite->subpriority = 7;
 }
 
 void SetPlacedMonSprite(u8 cursorArea, u8 cursorPos)
 {
     if (cursorArea == TOTAL_BOXES_COUNT) // party mon
     {
-        gPSSData->partySprites[cursorPos] = gPSSData->movingMonSprite;
-        gPSSData->partySprites[cursorPos]->oam.priority = 1;
-        gPSSData->partySprites[cursorPos]->subpriority = 12;
+        sStorage->partySprites[cursorPos] = sStorage->movingMonSprite;
+        sStorage->partySprites[cursorPos]->oam.priority = 1;
+        sStorage->partySprites[cursorPos]->subpriority = 12;
     }
     else
     {
-        gPSSData->boxMonsSprites[cursorPos] = gPSSData->movingMonSprite;
-        gPSSData->boxMonsSprites[cursorPos]->oam.priority = 2;
-        gPSSData->boxMonsSprites[cursorPos]->subpriority = 19 - (cursorPos % IN_BOX_ROWS);
+        sStorage->boxMonsSprites[cursorPos] = sStorage->movingMonSprite;
+        sStorage->boxMonsSprites[cursorPos]->oam.priority = 2;
+        sStorage->boxMonsSprites[cursorPos]->subpriority = 19 - (cursorPos % IN_BOX_ROWS);
     }
-    gPSSData->movingMonSprite->callback = SpriteCallbackDummy;
-    gPSSData->movingMonSprite = NULL;
+    sStorage->movingMonSprite->callback = SpriteCallbackDummy;
+    sStorage->movingMonSprite = NULL;
 }
 
 void SaveMonSpriteAtPos(u8 boxId, u8 cursorPos)
 {
     if (boxId == TOTAL_BOXES_COUNT) // party mon
-        gPSSData->shiftMonSpritePtr = &gPSSData->partySprites[cursorPos];
+        sStorage->shiftMonSpritePtr = &sStorage->partySprites[cursorPos];
     else
-        gPSSData->shiftMonSpritePtr = &gPSSData->boxMonsSprites[cursorPos];
+        sStorage->shiftMonSpritePtr = &sStorage->boxMonsSprites[cursorPos];
 
-    gPSSData->movingMonSprite->callback = SpriteCallbackDummy;
-    gPSSData->shiftTimer = 0;
+    sStorage->movingMonSprite->callback = SpriteCallbackDummy;
+    sStorage->shiftTimer = 0;
 }
 
 bool8 MoveShiftingMons(void)
 {
-    if (gPSSData->shiftTimer == 16)
+    if (sStorage->shiftTimer == 16)
         return FALSE;
 
-    gPSSData->shiftTimer++;
-    if (gPSSData->shiftTimer & 1)
+    sStorage->shiftTimer++;
+    if (sStorage->shiftTimer & 1)
     {
-        (*gPSSData->shiftMonSpritePtr)->pos1.y--;
-        gPSSData->movingMonSprite->pos1.y++;
+        (*sStorage->shiftMonSpritePtr)->pos1.y--;
+        sStorage->movingMonSprite->pos1.y++;
     }
 
-    (*gPSSData->shiftMonSpritePtr)->pos2.x = gSineTable[gPSSData->shiftTimer * 8] / 16;
-    gPSSData->movingMonSprite->pos2.x = -(gSineTable[gPSSData->shiftTimer * 8] / 16);
-    if (gPSSData->shiftTimer == 8)
+    (*sStorage->shiftMonSpritePtr)->pos2.x = gSineTable[sStorage->shiftTimer * 8] / 16;
+    sStorage->movingMonSprite->pos2.x = -(gSineTable[sStorage->shiftTimer * 8] / 16);
+    if (sStorage->shiftTimer == 8)
     {
-        gPSSData->movingMonSprite->oam.priority = (*gPSSData->shiftMonSpritePtr)->oam.priority;
-        gPSSData->movingMonSprite->subpriority = (*gPSSData->shiftMonSpritePtr)->subpriority;
-        (*gPSSData->shiftMonSpritePtr)->oam.priority = sub_8090058();
-        (*gPSSData->shiftMonSpritePtr)->subpriority = 7;
+        sStorage->movingMonSprite->oam.priority = (*sStorage->shiftMonSpritePtr)->oam.priority;
+        sStorage->movingMonSprite->subpriority = (*sStorage->shiftMonSpritePtr)->subpriority;
+        (*sStorage->shiftMonSpritePtr)->oam.priority = sub_8090058();
+        (*sStorage->shiftMonSpritePtr)->subpriority = 7;
     }
 
-    if (gPSSData->shiftTimer == 16)
+    if (sStorage->shiftTimer == 16)
     {
-        struct Sprite *sprite = gPSSData->movingMonSprite;
-        gPSSData->movingMonSprite = (*gPSSData->shiftMonSpritePtr);
-        *gPSSData->shiftMonSpritePtr = sprite;
+        struct Sprite *sprite = sStorage->movingMonSprite;
+        sStorage->movingMonSprite = (*sStorage->shiftMonSpritePtr);
+        *sStorage->shiftMonSpritePtr = sprite;
 
-        gPSSData->movingMonSprite->callback = sub_80911B0;
-        (*gPSSData->shiftMonSpritePtr)->callback = SpriteCallbackDummy;
+        sStorage->movingMonSprite->callback = sub_80911B0;
+        (*sStorage->shiftMonSpritePtr)->callback = SpriteCallbackDummy;
     }
 
     return TRUE;
@@ -822,77 +822,77 @@ void SetReleaseMon(u8 mode, u8 position)
     switch (mode)
     {
     case MODE_PARTY:
-        gPSSData->releaseMonSpritePtr = &gPSSData->partySprites[position];
+        sStorage->releaseMonSpritePtr = &sStorage->partySprites[position];
         break;
     case MODE_BOX:
-        gPSSData->releaseMonSpritePtr = &gPSSData->boxMonsSprites[position];
+        sStorage->releaseMonSpritePtr = &sStorage->boxMonsSprites[position];
         break;
     case MODE_MOVE:
-        gPSSData->releaseMonSpritePtr = &gPSSData->movingMonSprite;
+        sStorage->releaseMonSpritePtr = &sStorage->movingMonSprite;
         break;
     default:
         return;
     }
 
-    if (*gPSSData->releaseMonSpritePtr != NULL)
+    if (*sStorage->releaseMonSpritePtr != NULL)
     {
-        InitSpriteAffineAnim(*gPSSData->releaseMonSpritePtr);
-        (*gPSSData->releaseMonSpritePtr)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        (*gPSSData->releaseMonSpritePtr)->affineAnims = gUnknown_83CEC38;
-        StartSpriteAffineAnim(*gPSSData->releaseMonSpritePtr, 0);
+        InitSpriteAffineAnim(*sStorage->releaseMonSpritePtr);
+        (*sStorage->releaseMonSpritePtr)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+        (*sStorage->releaseMonSpritePtr)->affineAnims = gUnknown_83CEC38;
+        StartSpriteAffineAnim(*sStorage->releaseMonSpritePtr, 0);
     }
 }
 
 bool8 TryHideReleaseMonSprite(void)
 {
-    if (*gPSSData->releaseMonSpritePtr == NULL || (*gPSSData->releaseMonSpritePtr)->invisible)
+    if (*sStorage->releaseMonSpritePtr == NULL || (*sStorage->releaseMonSpritePtr)->invisible)
         return FALSE;
 
-    if ((*gPSSData->releaseMonSpritePtr)->affineAnimEnded)
-        (*gPSSData->releaseMonSpritePtr)->invisible = TRUE;
+    if ((*sStorage->releaseMonSpritePtr)->affineAnimEnded)
+        (*sStorage->releaseMonSpritePtr)->invisible = TRUE;
 
     return TRUE;
 }
 
 void DestroyReleaseMonIcon(void)
 {
-    if (*gPSSData->releaseMonSpritePtr != NULL)
+    if (*sStorage->releaseMonSpritePtr != NULL)
     {
-        FreeOamMatrix((*gPSSData->releaseMonSpritePtr)->oam.matrixNum);
-        DestroyBoxMonIcon(*gPSSData->releaseMonSpritePtr);
-        *gPSSData->releaseMonSpritePtr = NULL;
+        FreeOamMatrix((*sStorage->releaseMonSpritePtr)->oam.matrixNum);
+        DestroyBoxMonIcon(*sStorage->releaseMonSpritePtr);
+        *sStorage->releaseMonSpritePtr = NULL;
     }
 }
 
-void sub_8091114(void)
+void ReshowReleaseMon(void)
 {
-    if (*gPSSData->releaseMonSpritePtr != NULL)
+    if (*sStorage->releaseMonSpritePtr != NULL)
     {
-        (*gPSSData->releaseMonSpritePtr)->invisible = FALSE;
-        StartSpriteAffineAnim(*gPSSData->releaseMonSpritePtr, 1);
+        (*sStorage->releaseMonSpritePtr)->invisible = FALSE;
+        StartSpriteAffineAnim(*sStorage->releaseMonSpritePtr, 1);
     }
 }
 
-bool8 sub_8091150(void)
+bool8 ResetReleaseMonSpritePtr(void)
 {
-    if (gPSSData->releaseMonSpritePtr == NULL)
+    if (sStorage->releaseMonSpritePtr == NULL)
         return FALSE;
 
-    if ((*gPSSData->releaseMonSpritePtr)->affineAnimEnded)
-        gPSSData->releaseMonSpritePtr = NULL;
+    if ((*sStorage->releaseMonSpritePtr)->affineAnimEnded)
+        sStorage->releaseMonSpritePtr = NULL;
 
     return TRUE;
 }
 
 void SetMovingMonPriority(u8 priority)
 {
-    gPSSData->movingMonSprite->oam.priority = priority;
+    sStorage->movingMonSprite->oam.priority = priority;
 }
 
 static void sub_80911B0(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPSSData->cursorSprite->pos1.x;
-    sprite->pos1.y = gPSSData->cursorSprite->pos1.y + gPSSData->cursorSprite->pos2.y + 4;
+    sprite->pos1.x = sStorage->cursorSprite->pos1.x;
+    sprite->pos1.y = sStorage->cursorSprite->pos1.y + sStorage->cursorSprite->pos2.y + 4;
 }
 
 static u16 sub_80911D4(u16 species)
@@ -902,7 +902,7 @@ static u16 sub_80911D4(u16 species)
     // Find the currently-allocated slot
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        if (gPSSData->iconSpeciesList[i] == species)
+        if (sStorage->iconSpeciesList[i] == species)
             break;
     }
 
@@ -911,15 +911,15 @@ static u16 sub_80911D4(u16 species)
         // Find the first empty slot
         for (i = 0; i < MAX_MON_ICONS; i++)
         {
-            if (gPSSData->iconSpeciesList[i] == SPECIES_NONE)
+            if (sStorage->iconSpeciesList[i] == SPECIES_NONE)
                 break;
         }
         if (i == MAX_MON_ICONS)
             return 0xFFFF;
     }
 
-    gPSSData->iconSpeciesList[i] = species;
-    gPSSData->numIconsPerSpecies[i]++;
+    sStorage->iconSpeciesList[i] = species;
+    sStorage->numIconsPerSpecies[i]++;
     var = 16 * i;
     CpuCopy32(GetMonIconTiles(species, TRUE), (void*)(OBJ_VRAM0) + var * 32, 0x200);
 
@@ -932,10 +932,10 @@ static void sub_8091290(u16 species)
 
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        if (gPSSData->iconSpeciesList[i] == species)
+        if (sStorage->iconSpeciesList[i] == species)
         {
-            if (--gPSSData->numIconsPerSpecies[i] == 0)
-                gPSSData->iconSpeciesList[i] = 0;
+            if (--sStorage->numIconsPerSpecies[i] == 0)
+                sStorage->iconSpeciesList[i] = 0;
             break;
         }
     }
@@ -972,14 +972,14 @@ static void DestroyBoxMonIcon(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_80913DC(u8 boxId)
+void CreateInitBoxTask(u8 box)
 {
     u8 taskId = CreateTask(sub_8091420, 2);
 
-    gTasks[taskId].data[2] = boxId;
+    gTasks[taskId].data[2] = box;
 }
 
-bool8 sub_809140C(void)
+bool8 IsInitBoxActive(void)
 {
     return FuncIsActiveTask(sub_8091420);
 }
@@ -991,15 +991,15 @@ static void sub_8091420(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        gPSSData->wallpaperOffset = 0;
-        gPSSData->bg2_X = 0;
-        task->data[1] = RequestDma3Fill(0, gPSSData->wallpaperBgTilemapBuffer, 0x1000, DMA3_32BIT);
+        sStorage->wallpaperOffset = 0;
+        sStorage->bg2_X = 0;
+        task->data[1] = RequestDma3Fill(0, sStorage->wallpaperBgTilemapBuffer, 0x1000, DMA3_32BIT);
         break;
     case 1:
         if (WaitDma3Request(task->data[1]) == -1)
             return;
 
-        SetBgTilemapBuffer(2, gPSSData->wallpaperBgTilemapBuffer);
+        SetBgTilemapBuffer(2, sStorage->wallpaperBgTilemapBuffer);
         ShowBg(2);
         break;
     case 2:
@@ -1029,44 +1029,44 @@ void SetUpScrollToBox(u8 boxId)
 {
     s8 direction = sub_80916F4(boxId);
 
-    gPSSData->scrollSpeed = (direction > 0) ? 6 : -6;
-    gPSSData->scrollUnused1 = (direction > 0) ? 1 : 2;
-    gPSSData->scrollTimer = 32;
-    gPSSData->scrollToBoxIdUnused = boxId;
-    gPSSData->scrollUnused2 = (direction <= 0) ? 5 : 0;
-    gPSSData->scrollDirectionUnused = direction;
-    gPSSData->scrollUnused3 = (direction > 0) ? 264 : 56;
-    gPSSData->scrollUnused4 = (direction <= 0) ? 5 : 0;
-    gPSSData->scrollUnused5 = 0;
-    gPSSData->scrollUnused6 = 2;
-    gPSSData->scrollToBoxId = boxId;
-    gPSSData->scrollDirection = direction;
-    gPSSData->scrollState = 0;
+    sStorage->scrollSpeed = (direction > 0) ? 6 : -6;
+    sStorage->scrollUnused1 = (direction > 0) ? 1 : 2;
+    sStorage->scrollTimer = 32;
+    sStorage->scrollToBoxIdUnused = boxId;
+    sStorage->scrollUnused2 = (direction <= 0) ? 5 : 0;
+    sStorage->scrollDirectionUnused = direction;
+    sStorage->scrollUnused3 = (direction > 0) ? 264 : 56;
+    sStorage->scrollUnused4 = (direction <= 0) ? 5 : 0;
+    sStorage->scrollUnused5 = 0;
+    sStorage->scrollUnused6 = 2;
+    sStorage->scrollToBoxId = boxId;
+    sStorage->scrollDirection = direction;
+    sStorage->scrollState = 0;
 }
 
 bool8 ScrollToBox(void)
 {
     bool8 var;
 
-    switch (gPSSData->scrollState)
+    switch (sStorage->scrollState)
     {
     case 0:
-        LoadWallpaperGfx(gPSSData->scrollToBoxId, gPSSData->scrollDirection);
-        gPSSData->scrollState++;
+        LoadWallpaperGfx(sStorage->scrollToBoxId, sStorage->scrollDirection);
+        sStorage->scrollState++;
     case 1:
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_8090574(gPSSData->scrollToBoxId, gPSSData->scrollDirection);
-        sub_8091C48(gPSSData->scrollToBoxId, gPSSData->scrollDirection);
-        sub_809200C(gPSSData->scrollDirection);
+        sub_8090574(sStorage->scrollToBoxId, sStorage->scrollDirection);
+        sub_8091C48(sStorage->scrollToBoxId, sStorage->scrollDirection);
+        sub_809200C(sStorage->scrollDirection);
         break;
     case 2:
         var = sub_809062C();
-        if (gPSSData->scrollTimer != 0)
+        if (sStorage->scrollTimer != 0)
         {
-            gPSSData->bg2_X += gPSSData->scrollSpeed;
-            if (--gPSSData->scrollTimer != 0)
+            sStorage->bg2_X += sStorage->scrollSpeed;
+            if (--sStorage->scrollTimer != 0)
                 return TRUE;
             sub_8091E34();
             sub_80920AC();
@@ -1074,7 +1074,7 @@ bool8 ScrollToBox(void)
         return var;
     }
 
-    gPSSData->scrollState++;
+    sStorage->scrollState++;
     return TRUE;
 }
 
@@ -1097,36 +1097,36 @@ void SetWallpaperForCurrentBox(u8 wallpaperId)
 {
     u8 boxId = StorageGetCurrentBox();
     SetBoxWallpaper(boxId, wallpaperId);
-    gPSSData->wallpaperChangeState = 0;
+    sStorage->wallpaperChangeState = 0;
 }
 
 bool8 DoWallpaperGfxChange(void)
 {
-    switch (gPSSData->wallpaperChangeState)
+    switch (sStorage->wallpaperChangeState)
     {
     case 0:
-        BeginNormalPaletteFade(gPSSData->wallpaperPalBits, 1, 0, 16, RGB_WHITEALPHA);
-        gPSSData->wallpaperChangeState++;
+        BeginNormalPaletteFade(sStorage->wallpaperPalBits, 1, 0, 16, RGB_WHITEALPHA);
+        sStorage->wallpaperChangeState++;
         break;
     case 1:
         if (!UpdatePaletteFade())
         {
             u8 curBox = StorageGetCurrentBox();
             LoadWallpaperGfx(curBox, 0);
-            gPSSData->wallpaperChangeState++;
+            sStorage->wallpaperChangeState++;
         }
         break;
     case 2:
         if (WaitForWallpaperGfxLoad() == TRUE)
         {
             sub_8091EF0();
-            BeginNormalPaletteFade(gPSSData->wallpaperPalBits, 1, 16, 0, RGB_WHITEALPHA);
-            gPSSData->wallpaperChangeState++;
+            BeginNormalPaletteFade(sStorage->wallpaperPalBits, 1, 16, 0, RGB_WHITEALPHA);
+            sStorage->wallpaperChangeState++;
         }
         break;
     case 3:
         if (!UpdatePaletteFade())
-            gPSSData->wallpaperChangeState++;
+            sStorage->wallpaperChangeState++;
         break;
     case 4:
         return FALSE;
@@ -1142,26 +1142,26 @@ static void LoadWallpaperGfx(u8 boxId, s8 direction)
     void *iconGfx;
     u32 size1, size2;
 
-    gPSSData->wallpaperLoadState = 0;
-    gPSSData->wallpaperLoadBoxId = boxId;
-    gPSSData->wallpaperLoadDir = direction;
-    if (gPSSData->wallpaperLoadDir != 0)
+    sStorage->wallpaperLoadState = 0;
+    sStorage->wallpaperLoadBoxId = boxId;
+    sStorage->wallpaperLoadDir = direction;
+    if (sStorage->wallpaperLoadDir != 0)
     {
-        gPSSData->wallpaperOffset = (gPSSData->wallpaperOffset == 0);
-        sub_8091A24(gPSSData->wallpaperBgTilemapBuffer);
+        sStorage->wallpaperOffset = (sStorage->wallpaperOffset == 0);
+        sub_8091A24(sStorage->wallpaperBgTilemapBuffer);
     }
 
-    wallpaperId = GetBoxWallpaper(gPSSData->wallpaperLoadBoxId);
+    wallpaperId = GetBoxWallpaper(sStorage->wallpaperLoadBoxId);
     wallpaperGfx = &sWallpaperTable[wallpaperId];
-    LZ77UnCompWram(wallpaperGfx->tileMap, gPSSData->wallpaperTilemap);
-    sub_8091984(gPSSData->wallpaperBgTilemapBuffer, gPSSData->wallpaperTilemap, gPSSData->wallpaperLoadDir, gPSSData->wallpaperOffset);
+    LZ77UnCompWram(wallpaperGfx->tileMap, sStorage->wallpaperTilemap);
+    sub_8091984(sStorage->wallpaperBgTilemapBuffer, sStorage->wallpaperTilemap, sStorage->wallpaperLoadDir, sStorage->wallpaperOffset);
 
-    if (gPSSData->wallpaperLoadDir != 0)
-        LoadPalette(wallpaperGfx->palettes, (gPSSData->wallpaperOffset * 32) + 0x40, 0x40);
+    if (sStorage->wallpaperLoadDir != 0)
+        LoadPalette(wallpaperGfx->palettes, (sStorage->wallpaperOffset * 32) + 0x40, 0x40);
     else
-        CpuCopy16(wallpaperGfx->palettes, &gPlttBufferUnfaded[(gPSSData->wallpaperOffset * 32) + 0x40], 0x40);
+        CpuCopy16(wallpaperGfx->palettes, &gPlttBufferUnfaded[(sStorage->wallpaperOffset * 32) + 0x40], 0x40);
 
-    DecompressAndLoadBgGfxUsingHeap(2, wallpaperGfx->tiles, 0, 256 * gPSSData->wallpaperOffset, 0);
+    DecompressAndLoadBgGfxUsingHeap(2, wallpaperGfx->tiles, 0, 256 * sStorage->wallpaperOffset, 0);
 
     CopyBgTilemapBufferToVram(2);
 }
@@ -1177,7 +1177,7 @@ static bool32 WaitForWallpaperGfxLoad(void)
 static void sub_8091984(void *buffer, const void *tilemap, s8 direction, u8 arg2)
 {
     s16 var = (arg2 * 2) + 3;
-    s16 x = ((gPSSData->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
+    s16 x = ((sStorage->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
 
     CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, arg2 << 8, var);
 
@@ -1195,7 +1195,7 @@ static void sub_8091A24(void *arg0)
 {
     u16 i;
     u16 *dest = arg0;
-    s16 r3 = ((gPSSData->bg2_X / 8) + 30) & 0x3F;
+    s16 r3 = ((sStorage->bg2_X / 8) + 30) & 0x3F;
 
     if (r3 <= 31)
         dest += r3 + 0x260;
@@ -1219,39 +1219,39 @@ static void sub_8091A94(u8 boxId)
     s16 r6;
     u16 i;
 
-    struct SpriteSheet spriteSheet = {gPSSData->boxTitleTiles, 0x200, TAG_TILE_3};
+    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, TAG_TILE_3};
     struct SpritePalette palettes[] = {
-        {gPSSData->boxTitlePal, TAG_PAL_DAC9},
+        {sStorage->boxTitlePal, TAG_PAL_DAC9},
         {}
     };
 
     u16 wallpaperId = GetBoxWallpaper(boxId);
 
-    gPSSData->boxTitlePal[14] = gUnknown_83D29D0[wallpaperId][0];
-    gPSSData->boxTitlePal[15] = gUnknown_83D29D0[wallpaperId][1];
+    sStorage->boxTitlePal[14] = gUnknown_83D29D0[wallpaperId][0];
+    sStorage->boxTitlePal[15] = gUnknown_83D29D0[wallpaperId][1];
     LoadSpritePalettes(palettes);
-    gPSSData->wallpaperPalBits = 0x3f0;
+    sStorage->wallpaperPalBits = 0x3f0;
 
     tagIndex = IndexOfSpritePaletteTag(TAG_PAL_DAC9);
-    gPSSData->boxTitlePalOffset = 0x10e + 16 * tagIndex;
-    gPSSData->wallpaperPalBits |= 0x10000 << tagIndex;
+    sStorage->boxTitlePalOffset = 0x10e + 16 * tagIndex;
+    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
 
     tagIndex = IndexOfSpritePaletteTag(TAG_PAL_DAC9);
-    gPSSData->boxTitleAltPalOffset = 0x10e + 16 * tagIndex;
-    gPSSData->wallpaperPalBits |= 0x10000 << tagIndex;
+    sStorage->boxTitleAltPalOffset = 0x10e + 16 * tagIndex;
+    sStorage->wallpaperPalBits |= 0x10000 << tagIndex;
 
-    StringCopyPadded(gPSSData->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
-    DrawTextWindowAndBufferTiles(gPSSData->boxTitleText, gPSSData->boxTitleTiles, 0, 0, gPSSData->boxTitleTileBuffer, 2);
+    StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
+    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, sStorage->boxTitleTileBuffer, 2);
     LoadSpriteSheet(&spriteSheet);
     r6 = sub_8091F60(GetBoxNamePtr(boxId));
 
     for (i = 0; i < 2; i++)
     {
         u8 spriteId = CreateSprite(&gUnknown_83D2B7C, r6 + i * 32, 28, 24);
-        gPSSData->curBoxTitleSprites[i] = &gSprites[spriteId];
-        StartSpriteAnim(gPSSData->curBoxTitleSprites[i], i);
+        sStorage->curBoxTitleSprites[i] = &gSprites[spriteId];
+        StartSpriteAnim(sStorage->curBoxTitleSprites[i], i);
     }
-    gPSSData->boxTitleCycleId = 0;
+    sStorage->boxTitleCycleId = 0;
 }
 
 static void sub_8091C48(u8 boxId, s8 direction)
@@ -1259,25 +1259,25 @@ static void sub_8091C48(u8 boxId, s8 direction)
     u16 r8;
     s16 x, x2;
     u16 i;
-    struct SpriteSheet spriteSheet = {gPSSData->boxTitleTiles, 0x200, TAG_TILE_3};
+    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, TAG_TILE_3};
     struct SpriteTemplate template = gUnknown_83D2B7C;
 
-    gPSSData->boxTitleCycleId = (gPSSData->boxTitleCycleId == 0);
-    if (gPSSData->boxTitleCycleId == 0)
+    sStorage->boxTitleCycleId = (sStorage->boxTitleCycleId == 0);
+    if (sStorage->boxTitleCycleId == 0)
     {
         spriteSheet.tag = TAG_TILE_3;
-        r8 = gPSSData->boxTitlePalOffset;
+        r8 = sStorage->boxTitlePalOffset;
     }
     else
     {
         spriteSheet.tag = TAG_TILE_4;
-        r8 = gPSSData->boxTitlePalOffset;
+        r8 = sStorage->boxTitlePalOffset;
         template.tileTag = TAG_TILE_4;
         template.paletteTag = TAG_PAL_DAC9;
     }
 
-    StringCopyPadded(gPSSData->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
-    DrawTextWindowAndBufferTiles(gPSSData->boxTitleText, gPSSData->boxTitleTiles, 0, 0, gPSSData->boxTitleTileBuffer, 2);
+    StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
+    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, sStorage->boxTitleTileBuffer, 2);
     LoadSpriteSheet(&spriteSheet);
     LoadPalette(gUnknown_83D29D0[GetBoxWallpaper(boxId)], r8, 4);
     x = sub_8091F60(GetBoxNamePtr(boxId));
@@ -1288,28 +1288,28 @@ static void sub_8091C48(u8 boxId, s8 direction)
     {
         u8 spriteId = CreateSprite(&template, i * 32 + x2, 28, 24);
 
-        gPSSData->nextBoxTitleSprites[i] = &gSprites[spriteId];
-        gPSSData->nextBoxTitleSprites[i]->data[0] = (-direction) * 6;
-        gPSSData->nextBoxTitleSprites[i]->data[1] = i * 32 + x;
-        gPSSData->nextBoxTitleSprites[i]->data[2] = 0;
-        gPSSData->nextBoxTitleSprites[i]->callback = sub_8091E84;
-        StartSpriteAnim(gPSSData->nextBoxTitleSprites[i], i);
+        sStorage->nextBoxTitleSprites[i] = &gSprites[spriteId];
+        sStorage->nextBoxTitleSprites[i]->data[0] = (-direction) * 6;
+        sStorage->nextBoxTitleSprites[i]->data[1] = i * 32 + x;
+        sStorage->nextBoxTitleSprites[i]->data[2] = 0;
+        sStorage->nextBoxTitleSprites[i]->callback = sub_8091E84;
+        StartSpriteAnim(sStorage->nextBoxTitleSprites[i], i);
 
-        gPSSData->curBoxTitleSprites[i]->data[0] = (-direction) * 6;
-        gPSSData->curBoxTitleSprites[i]->data[1] = 1;
-        gPSSData->curBoxTitleSprites[i]->callback = sub_8091EB8;
+        sStorage->curBoxTitleSprites[i]->data[0] = (-direction) * 6;
+        sStorage->curBoxTitleSprites[i]->data[1] = 1;
+        sStorage->curBoxTitleSprites[i]->callback = sub_8091EB8;
     }
 }
 
 static void sub_8091E34(void)
 {
-    if (gPSSData->boxTitleCycleId == 0)
+    if (sStorage->boxTitleCycleId == 0)
         FreeSpriteTilesByTag(TAG_TILE_4);
     else
         FreeSpriteTilesByTag(TAG_TILE_3);
 
-    gPSSData->curBoxTitleSprites[0] = gPSSData->nextBoxTitleSprites[0];
-    gPSSData->curBoxTitleSprites[1] = gPSSData->nextBoxTitleSprites[1];
+    sStorage->curBoxTitleSprites[0] = sStorage->nextBoxTitleSprites[0];
+    sStorage->curBoxTitleSprites[1] = sStorage->nextBoxTitleSprites[1];
 }
 
 static void sub_8091E84(struct Sprite *sprite)
@@ -1339,10 +1339,10 @@ static void sub_8091EF0(void)
 {
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
-    if (gPSSData->boxTitleCycleId == 0)
-        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitlePalOffset, 4);
+    if (sStorage->boxTitleCycleId == 0)
+        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + sStorage->boxTitlePalOffset, 4);
     else
-        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitleAltPalOffset, 4);
+        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + sStorage->boxTitleAltPalOffset, 4);
 }
 
 static s16 sub_8091F60(const u8 *string)
@@ -1363,7 +1363,7 @@ static void sub_8091F80(void)
             struct Sprite *sprite = &gSprites[spriteId];
             StartSpriteAnim(sprite, i);
             sprite->data[3] = (i == 0) ? -1 : 1;
-            gPSSData->arrowSprites[i] = sprite;
+            sStorage->arrowSprites[i] = sprite;
         }
     }
     if (IsCursorOnBox())
@@ -1376,25 +1376,25 @@ static void sub_809200C(s8 direction)
 
     for (i = 0; i < 2; i++)
     {
-        gPSSData->arrowSprites[i]->pos2.x = 0;
-        gPSSData->arrowSprites[i]->data[0] = 2;
+        sStorage->arrowSprites[i]->pos2.x = 0;
+        sStorage->arrowSprites[i]->data[0] = 2;
     }
     if (direction < 0)
     {
-        gPSSData->arrowSprites[0]->data[1] = 29;
-        gPSSData->arrowSprites[1]->data[1] = 5;
-        gPSSData->arrowSprites[0]->data[2] = 0x48;
-        gPSSData->arrowSprites[1]->data[2] = 0x48;
+        sStorage->arrowSprites[0]->data[1] = 29;
+        sStorage->arrowSprites[1]->data[1] = 5;
+        sStorage->arrowSprites[0]->data[2] = 0x48;
+        sStorage->arrowSprites[1]->data[2] = 0x48;
     }
     else
     {
-        gPSSData->arrowSprites[0]->data[1] = 5;
-        gPSSData->arrowSprites[1]->data[1] = 29;
-        gPSSData->arrowSprites[0]->data[2] = 0xF8;
-        gPSSData->arrowSprites[1]->data[2] = 0xF8;
+        sStorage->arrowSprites[0]->data[1] = 5;
+        sStorage->arrowSprites[1]->data[1] = 29;
+        sStorage->arrowSprites[0]->data[2] = 0xF8;
+        sStorage->arrowSprites[1]->data[2] = 0xF8;
     }
-    gPSSData->arrowSprites[0]->data[7] = 0;
-    gPSSData->arrowSprites[1]->data[7] = 1;
+    sStorage->arrowSprites[0]->data[7] = 0;
+    sStorage->arrowSprites[1]->data[7] = 1;
 }
 
 static void sub_80920AC(void)
@@ -1403,9 +1403,9 @@ static void sub_80920AC(void)
 
     for (i = 0; i < 2; i++)
     {
-        gPSSData->arrowSprites[i]->pos1.x = 0x88 * i + 0x5c;
-        gPSSData->arrowSprites[i]->pos2.x = 0;
-        gPSSData->arrowSprites[i]->invisible = FALSE;
+        sStorage->arrowSprites[i]->pos1.x = 0x88 * i + 0x5c;
+        sStorage->arrowSprites[i]->pos2.x = 0;
+        sStorage->arrowSprites[i]->invisible = FALSE;
     }
     AnimateBoxScrollArrows(TRUE);
 }
@@ -1418,17 +1418,17 @@ void AnimateBoxScrollArrows(bool8 species)
     {
         for (i = 0; i < 2; i++)
         {
-            gPSSData->arrowSprites[i]->data[0] = 1;
-            gPSSData->arrowSprites[i]->data[1] = 0;
-            gPSSData->arrowSprites[i]->data[2] = 0;
-            gPSSData->arrowSprites[i]->data[4] = 0;
+            sStorage->arrowSprites[i]->data[0] = 1;
+            sStorage->arrowSprites[i]->data[1] = 0;
+            sStorage->arrowSprites[i]->data[2] = 0;
+            sStorage->arrowSprites[i]->data[4] = 0;
         }
     }
     else
     {
         for (i = 0; i < 2; i++)
         {
-            gPSSData->arrowSprites[i]->data[0] = 0;
+            sStorage->arrowSprites[i]->data[0] = 0;
         }
     }
 }
@@ -1456,7 +1456,7 @@ static void sub_8092164(struct Sprite *sprite)
         sprite->data[0] = 3;
         break;
     case 3:
-        sprite->pos1.x -= gPSSData->scrollSpeed;
+        sprite->pos1.x -= sStorage->scrollSpeed;
         if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
             sprite->invisible = TRUE;
         if (--sprite->data[1] == 0)
@@ -1467,7 +1467,7 @@ static void sub_8092164(struct Sprite *sprite)
         }
         break;
     case 4:
-        sprite->pos1.x -= gPSSData->scrollSpeed;
+        sprite->pos1.x -= sStorage->scrollSpeed;
         break;
     }
 }

@@ -11,14 +11,14 @@ enum
     BPPD_MOVE_INNER_Y
 };
 
-void AllocBoxPartyPokemonDropdowns(u8 num);
-void FreeBoxPartyPokemonDropdowns(void);
-void CopyAllBoxPartyPokemonDropdownsToVram(void);
-void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void * src, u16 width, u16 height);
-void SetBoxPartyPokemonDropdownMap1Tiles(u8 idx, const void * src);
-void SetBoxPartyPokemonDropdownMap2Pos(u8 idx, u16 x, u16 y);
-void SetBoxPartyPokemonDropdownMap2Rect(u8 idx, u16 x, u16 y, u16 width, u16 height);
-void AdjustBoxPartyPokemonDropdownPos(u8 idx, u8 op, s8 param);
-void CopyBoxPartyPokemonDropdownToBgTilemapBuffer(u8 idx);
+void TilemapUtil_Init(u8 num);
+void TilemapUtil_Free(void);
+void TilemapUtil_UpdateAll(void);
+void TilemapUtil_SetMap(u8 idx, u8 bgId, const void * src, u16 width, u16 height);
+void TilemapUtil_SetSavedMap(u8 idx, const void * src);
+void TilemapUtil_SetPos(u8 idx, u16 x, u16 y);
+void TilemapUtil_SetRect(u8 idx, u16 x, u16 y, u16 width, u16 height);
+void TilemapUtil_Move(u8 idx, u8 op, s8 param);
+void TilemapUtil_Update(u8 idx);
 
 #endif //GUARD_BOX_PARTY_POKEMON_DROPDOWN_H

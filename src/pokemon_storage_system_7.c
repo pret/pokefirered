@@ -58,15 +58,15 @@ static const struct WindowTemplate gUnknown_83D35D4 = {
     .baseBlock = 0x00a
 };
 
-bool8 sub_8095050(void)
+bool8 MultiMove_Init(void)
 {
     sMoveMonsPtr = Alloc(sizeof(*sMoveMonsPtr));
     if (sMoveMonsPtr != NULL)
     {
-        gPSSData->multiMoveWindowId = AddWindow8Bit(&gUnknown_83D35D4);
-        if (gPSSData->multiMoveWindowId != 0xFF)
+        sStorage->multiMoveWindowId = AddWindow8Bit(&gUnknown_83D35D4);
+        if (sStorage->multiMoveWindowId != 0xFF)
         {
-            FillWindowPixelBuffer(gPSSData->multiMoveWindowId, PIXEL_FILL(0));
+            FillWindowPixelBuffer(sStorage->multiMoveWindowId, PIXEL_FILL(0));
             return TRUE;
         }
     }
@@ -74,19 +74,19 @@ bool8 sub_8095050(void)
     return FALSE;
 }
 
-void sub_80950A4(void)
+void MultiMove_Free(void)
 {
     if (sMoveMonsPtr != NULL)
         Free(sMoveMonsPtr);
 }
 
-void sub_80950BC(u8 arg0)
+void MultiMove_SetFunction(u8 a0)
 {
-    sMoveMonsPtr->field_0 = arg0;
+    sMoveMonsPtr->field_0 = a0;
     sMoveMonsPtr->state = 0;
 }
 
-bool8 sub_80950D0(void)
+bool8 MultiMove_RunFunction(void)
 {
     switch (sMoveMonsPtr->field_0)
     {
@@ -123,11 +123,11 @@ static bool8 sub_8095138(void)
         ChangeBgX(0, -1024, 0);
         ChangeBgY(0, -1024, 0);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
-        FillWindowPixelBuffer8Bit(gPSSData->multiMoveWindowId, PIXEL_FILL(0));
+        FillWindowPixelBuffer8Bit(sStorage->multiMoveWindowId, PIXEL_FILL(0));
         sub_80956A4(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
-        PutWindowTilemap(gPSSData->multiMoveWindowId);
-        CopyWindowToVram8Bit(gPSSData->multiMoveWindowId, COPYWIN_BOTH);
+        PutWindowTilemap(sStorage->multiMoveWindowId);
+        CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_BOTH);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
         StartCursorAnim(2);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
@@ -183,7 +183,7 @@ static bool8 sub_80952A0(void)
             sub_8095520();
             sMoveMonsPtr->toRow = sMoveMonsPtr->field_6;
             sMoveMonsPtr->toColumn = sMoveMonsPtr->field_7;
-            CopyWindowToVram8Bit(gPSSData->multiMoveWindowId, COPYWIN_GFX);
+            CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_GFX);
             sMoveMonsPtr->state++;
         }
         break;
@@ -403,7 +403,7 @@ static void sub_80956A4(u8 x, u8 y)
         const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
         u8 index = GetValidMonIconPalIndex(species) + 8;
 
-        BlitBitmapRectToWindow4BitTo8Bit(gPSSData->multiMoveWindowId,
+        BlitBitmapRectToWindow4BitTo8Bit(sStorage->multiMoveWindowId,
                                          iconGfx,
                                          0,
                                          0,
@@ -424,7 +424,7 @@ static void sub_809572C(u8 x, u8 y)
 
     if (species != SPECIES_NONE)
     {
-        FillWindowPixelRect8Bit(gPSSData->multiMoveWindowId,
+        FillWindowPixelRect8Bit(sStorage->multiMoveWindowId,
                                 PIXEL_FILL(0),
                                 24 * x,
                                 24 * y,

@@ -8305,7 +8305,7 @@ static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
-    // ceil div by tile width?
+    // ceil div by tile height?
     s16 width = 1;
     s16 height = 2;
     s16 i;

@@ -7,11 +7,11 @@
 	.include "asm/macros/m4a.inc"
 	.include "asm/macros/trainer_tower.inc"
 
-	.macro region_map_location x, y, width, height, name
+	.macro region_map_location x, y, height, width, name
 	.byte \x
 	.byte \y
-	.byte \width
 	.byte \height
+	.byte \width
 	.4byte gMapName_\name
 	.endm
 
@@ -120,9 +120,9 @@
 	.fill 4 @ padding
 	.endm
 
-	.macro overworld_frame ptr:req, width:req, height:req, frame:req
-	.4byte (\ptr + (\width * \height * \frame * 64) / 2)
-	.2byte (\width * \height * 64) / 2
+	.macro overworld_frame ptr:req, height:req, width:req, frame:req
+	.4byte (\ptr + (\height * \width * \frame * 64) / 2)
+	.2byte (\height * \width * 64) / 2
 	.2byte 0 @ padding
 	.endm
 
@@ -155,8 +155,8 @@
 	.space 2
 	.endm
 
-	.macro window_template bg, top, left, height, width, palno, baseBlock
-	.byte \bg, \top, \left, \height, \width, \palno
+	.macro window_template bg, top, left, width, height, palno, baseBlock
+	.byte \bg, \top, \left, \width, \height, \palno
 	.2byte \baseBlock
 	.endm
 

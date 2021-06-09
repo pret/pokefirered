@@ -15,7 +15,7 @@ void PSS_InitCopyAndFillManager(struct UnkUtil *manager, struct UnkUtilData *spe
     manager->numActive = 0;
 }
 
-void sub_8096BF8(void)
+void UnkUtil_Run(void)
 {
     u16 i;
 

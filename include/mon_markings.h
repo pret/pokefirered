@@ -27,7 +27,7 @@ void DrawMonMarkingsMenu(u8 markings, s16 x, s16 y);
 void TeardownMonMarkingsMenu(void);
 bool8 MonMarkingsHandleInput(void);
 struct Sprite * CreateMonMarkingSprite_SelectCombo(u16 tileTag, u16 paletteTag, const u16 *palette);
-struct Sprite * CreateMonMarkingSprite_AllOff(u16 tileTag, u16 paletteTag, const u16 *palette);
+struct Sprite * CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette);
 void RequestDma3LoadMonMarking(u8 markings, void * dest);
 
 #endif //GUARD_MON_MARKINGS_H

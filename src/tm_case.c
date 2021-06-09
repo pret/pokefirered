@@ -1117,7 +1117,7 @@ static void Task_SelectTMAction_FromStoragePC(u8 taskId)
 
     if (!itemid_is_unique(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelectedTMIdx)))
     {
-        sTMCaseDynamicResources->savedCallback = Cb2_ReturnToPSS;
+        sTMCaseDynamicResources->savedCallback = CB2_ReturnToPokeStorage;
         Task_BeginFadeOutFromTMCase(taskId);
     }
     else

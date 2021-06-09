@@ -4925,10 +4925,10 @@ extern const u16 gUnknown_8E990F8[];
 
 // pokemon_storage_system
 extern const u32 gPSSMenu_Gfx[];
-extern const u32 gUnknown_8E9CAEC[];
+extern const u32 gStorageSystemPartyMenu_Tilemap[];
 extern const u16 gPSSMenu_Pal[];
-extern const u16 gUnknown_8E9C3F8[];
-extern const u16 gUnknown_8E9C418[];
+extern const u16 gPokeStorage_Interface_Pal[];
+extern const u16 gPokeStorage_PkmnDataGray_Pal[];
 
 // pokedex_screen
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];

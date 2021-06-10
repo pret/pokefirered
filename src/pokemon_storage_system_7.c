@@ -349,7 +349,7 @@ static void MultiMove_SelectColumn(u8 x, u8 y1, u8 y2)
     if (y1 > y2)
     {
         u8 temp;
-        SWAP(y1, y2, temp);
+        SWAP(y1, y2, temp)
     }
 
     while (y1 <= y2)
@@ -361,7 +361,7 @@ static void MultiMove_SelectRow(u8 y, u8 x1, u8 x2)
     if (x1 > x2)
     {
         u8 temp;
-        SWAP(x1, x2, temp);
+        SWAP(x1, x2, temp)
     }
 
     while (x1 <= x2)
@@ -373,7 +373,7 @@ static void MultiMove_DeselectColumn(u8 x, u8 y1, u8 y2)
     if (y1 > y2)
     {
         u8 temp;
-        SWAP(y1, y2, temp);
+        SWAP(y1, y2, temp)
     }
 
     while (y1 <= y2)
@@ -385,7 +385,7 @@ static void MultiMove_DeselectRow(u8 y, u8 x1, u8 x2)
     if (x1 > x2)
     {
         u8 temp;
-        SWAP(x1, x2, temp);
+        SWAP(x1, x2, temp)
     }
 
     while (x1 <= x2)

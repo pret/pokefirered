@@ -170,7 +170,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 13,
         .baseBlock = 0x014
     }, 
-    [PSS_WIN_2] = {
+    [PSS_WIN_ITEM_DESC] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 12,

@@ -208,7 +208,30 @@ enum
 enum {
     PSS_WIN_DISPLAY_MON_INFO = 0,
     PSS_WIN_MESSAGE_BOX,
-    PSS_WIN_2,
+    PSS_WIN_ITEM_DESC,
+};
+
+// IDs for the item icons affine anims
+enum {
+    ITEM_ANIM_NONE,
+    ITEM_ANIM_APPEAR,
+    ITEM_ANIM_DISAPPEAR,
+    ITEM_ANIM_PICK_UP,
+    ITEM_ANIM_PUT_DOWN,
+    ITEM_ANIM_PUT_AWAY,
+    ITEM_ANIM_LARGE,
+};
+
+// IDs for the item icon sprite callbacks
+enum {
+    ITEM_CB_WAIT_ANIM,
+    ITEM_CB_TO_HAND,
+    ITEM_CB_TO_MON,
+    ITEM_CB_SWAP_TO_HAND,
+    ITEM_CB_SWAP_TO_MON,
+    ITEM_CB_UNUSED_1,
+    ITEM_CB_UNUSED_2,
+    ITEM_CB_HIDE_PARTY,
 };
 
 #define TAG_PAL_MON_ICON_0  0xDAC0
@@ -222,7 +245,9 @@ enum {
 #define TAG_PAL_DAC8        0xDAC8
 #define TAG_PAL_BOX_TITLE   0xDAC9
 #define TAG_PAL_WAVEFORM    0xDACA
-#define TAG_PAL_DACB        0xDACB
+#define TAG_PAL_ITEM_ICON_0 0xDACB
+#define TAG_PAL_ITEM_ICON_1 0xDACC
+#define TAG_PAL_ITEM_ICON_2 0xDACD
 #define TAG_PAL_DACE        0xDACE
 
 #define TAG_TILE_HAND_CURSOR    0x0
@@ -232,7 +257,9 @@ enum {
 #define TAG_TILE_BOX_TITLE_ALT  0x4
 #define TAG_TILE_WAVEFORM       0x5
 #define TAG_TILE_6              0x6
-#define TAG_TILE_7              0x7
+#define TAG_TILE_ITEM_ICON_0    0x7
+#define TAG_TILE_ITEM_ICON_1    0x8
+#define TAG_TILE_ITEM_ICON_2    0x9
 #define TAG_TILE_A              0xA
 #define TAG_TILE_D              0xD
 #define TAG_TILE_10             0x10
@@ -452,7 +479,7 @@ struct PokemonStorageSystemData
     /* 21db */ u8 itemName[20];
     /* 21ef */ u8 inBoxMovingMode;
     /* 21f0 */ u16 multiMoveWindowId;
-    /* 21f4 */ struct ItemIcon itemIconSprites[MAX_ITEM_ICONS];
+    /* 21f4 */ struct ItemIcon itemIcons[MAX_ITEM_ICONS];
     /* 2224 */ u16 movingItemId;
     /* 2226 */ u16 itemInfoWindowOffset;
     /* 2228 */ struct PssQuestLogBuffer qlogBuffer;

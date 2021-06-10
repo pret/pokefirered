@@ -767,7 +767,7 @@ const void * GetItemIconGfxPtr(u16 itemId, u8 attrId)
     return sItemIconGfxPtrs[itemId][attrId];
 }
 
-void sub_80989A0(u16 itemId, u8 idx)
+void AddItemMenuIcon(u16 itemId, u8 idx)
 {
     u8 * ptr = &sItemMenuIconSpriteIds[10];
     u8 spriteId;

@@ -511,40 +511,40 @@ u8 HandleBoxChooseSelectionInput(void)
     return BOXID_NONE_CHOSEN;
 }
 
-static const union AnimCmd gUnknown_83CDA50[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_TopLeft[] = {
     ANIMCMD_FRAME( 0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CDA58[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_BottomLeft[] = {
     ANIMCMD_FRAME( 4, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CDA60[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_TopRight[] = {
     ANIMCMD_FRAME( 6, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CDA68[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_BottomRight[] = {
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_83CDA70[] = {
-    gUnknown_83CDA50,
-    gUnknown_83CDA58,
-    gUnknown_83CDA60,
-    gUnknown_83CDA68
+static const union AnimCmd *const sAnims_ChooseBoxMenu[] = {
+    sAnim_ChooseBoxMenu_TopLeft,
+    sAnim_ChooseBoxMenu_BottomLeft,
+    sAnim_ChooseBoxMenu_TopRight,
+    sAnim_ChooseBoxMenu_BottomRight
 };
 
-static const union AffineAnimCmd gUnknown_83CDA80[] = {
+static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] = {
     AFFINEANIMCMD_FRAME(224, 224, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gUnknown_83CDA90[] = {
-    gUnknown_83CDA80
+static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] = {
+    sAffineAnim_ChooseBoxMenu
 };
 
 static void ChooseBoxMenu_CreateSprites(u8 curBox)
@@ -572,7 +572,7 @@ static void ChooseBoxMenu_CreateSprites(u8 curBox)
     oamData.shape = SPRITE_SHAPE(8x32);
     oamData.size = SPRITE_SIZE(8x32);
     template.tileTag = sChooseBoxMenu->tilesTag + 1;
-    template.anims = gUnknown_83CDA70;
+    template.anims = sAnims_ChooseBoxMenu;
     for (i = 0; i < 4; i++)
     {
         u16 anim;

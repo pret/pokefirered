@@ -551,7 +551,7 @@ const u8 *GetMovingItemName(void);
 void InitItemInfoWindow(void);
 bool8 UpdateItemInfoWindowSlideIn(void);
 bool8 UpdateItemInfoWindowSlideOut(void);
-void PSS_InitCopyAndFillManager(struct UnkUtil *manager, struct UnkUtilData *specs, u32 count);
+void PSS_InitCopyAndFillManager(struct UnkUtil *util, struct UnkUtilData *data, u32 max);
 void UnkUtil_Run(void);
 void AddMenu(void);
 bool8 CanMovePartyMon(void);

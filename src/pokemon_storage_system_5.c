@@ -156,8 +156,8 @@ bool8 UpdateCursorPos(void)
     {
         sStorage->cursorNewX += sStorage->cursorSpeedX;
         sStorage->cursorNewY += sStorage->cursorSpeedY;
-        sStorage->cursorSprite->pos1.x = sStorage->cursorNewX >> 8;
-        sStorage->cursorSprite->pos1.y = sStorage->cursorNewY >> 8;
+        sStorage->cursorSprite->pos1.x = Q_24_8_TO_INT(sStorage->cursorNewX);
+        sStorage->cursorSprite->pos1.y = Q_24_8_TO_INT(sStorage->cursorNewY);
         if (sStorage->cursorSprite->pos1.x > 0x100)
         {
             tmp = sStorage->cursorSprite->pos1.x - 0x100;
@@ -387,15 +387,15 @@ u8 GetSavedCursorPos(void)
     return sSavedCursorPosition;
 }
 
-void InitMonPlaceChange(u8 a0)
+void InitMonPlaceChange(u8 funcId)
 {
     static bool8 (*const placeChangeFuncs[])(void) = {
-        MonPlaceChange_Move,
-        MonPlaceChange_Place,
-        MonPlaceChange_Shift,
+        [CHANGE_GRAB]  = MonPlaceChange_Move,
+        [CHANGE_PLACE] = MonPlaceChange_Place,
+        [CHANGE_SHIFT] = MonPlaceChange_Shift,
     };
 
-    sStorage->monPlaceChangeFunc = placeChangeFuncs[a0];
+    sStorage->monPlaceChangeFunc = placeChangeFuncs[funcId];
     sStorage->monPlaceChangeState = 0;
 }
 

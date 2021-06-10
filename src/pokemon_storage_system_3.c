@@ -21,7 +21,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "constants/items.h"
-#include "constants/help_system.h"
 #include "constants/songs.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *sStorage = NULL;
@@ -1109,7 +1108,7 @@ static void Task_MoveMon(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        InitMonPlaceChange(0);
+        InitMonPlaceChange(CHANGE_GRAB);
         sStorage->state++;
         break;
     case 1:
@@ -1130,7 +1129,7 @@ static void Task_PlaceMon(u8 taskId)
     {
     case 0:
         PokeStorage_AppendActionToQuestLogBuffer(PSS_QL_PLACE_MON);
-        InitMonPlaceChange(1);
+        InitMonPlaceChange(CHANGE_PLACE);
         sStorage->state++;
         break;
     case 1:
@@ -1151,7 +1150,7 @@ static void Task_ShiftMon(u8 taskId)
     {
     case 0:
         PokeStorage_AppendActionToQuestLogBuffer(PSS_QL_SHIFT_MON);
-        InitMonPlaceChange(2);
+        InitMonPlaceChange(CHANGE_SHIFT);
         sStorage->state++;
         break;
     case 1:
@@ -1177,7 +1176,7 @@ static void Task_WithdrawMon(u8 taskId)
         else
         {
             SaveCursorPos();
-            InitMonPlaceChange(0);
+            InitMonPlaceChange(CHANGE_GRAB);
             sStorage->state = 2;
         }
         break;
@@ -1200,7 +1199,7 @@ static void Task_WithdrawMon(u8 taskId)
         if (!DoShowPartyMenu())
         {
             PokeStorage_AppendActionToQuestLogBuffer(PSS_QL_PLACE_MON);
-            InitMonPlaceChange(1);
+            InitMonPlaceChange(CHANGE_PLACE);
             sStorage->state++;
         }
         break;
@@ -1297,11 +1296,11 @@ static void Task_ReleaseMon(u8 taskId)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case MENU_B_PRESSED:
-        case  1:
+        case  1: // No
             ClearBottomWindow();
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
-        case  0:
+        case  0: // Yes
             ClearBottomWindow();
             InitCanReleaseMonVars();
             InitReleaseMon();
@@ -1998,11 +1997,11 @@ static void Task_OnCloseBoxPressed(u8 taskId)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case MENU_B_PRESSED:
-        case 1:
+        case 1: // No
             ClearBottomWindow();
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
-        case 0:
+        case 0: // Yes
             PlaySE(SE_PC_OFF);
             ClearBottomWindow();
             sStorage->state++;
@@ -2058,11 +2057,11 @@ static void Task_OnBPressed(u8 taskId)
     case 2:
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
-        case 0:
+        case 0: // Yes
             ClearBottomWindow();
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
-        case 1:
+        case 1: // No
         case MENU_B_PRESSED:
             PlaySE(SE_PC_OFF);
             ClearBottomWindow();

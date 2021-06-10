@@ -562,7 +562,7 @@ u8 GetBoxCursorPosition(void);
 u16 GetMovingItem(void);
 u8 HandleInput(void);
 void InitCanReleaseMonVars(void);
-void InitMonPlaceChange(u8 a0);
+void InitMonPlaceChange(u8 funcId);
 bool8 IsActiveItemMoving(void);
 bool8 IsCursorOnCloseBox(void);
 bool8 IsMonBeingMoved(void);

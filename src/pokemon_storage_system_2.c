@@ -12,8 +12,6 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/songs.h"
-#include "constants/field_weather.h"
-#include "constants/help_system.h"
 
 struct PSS_MenuStringPtrs
 {
@@ -35,9 +33,9 @@ static void SpriteCB_ChooseBoxArrow(struct Sprite * sprite);
 
 // Forward declarations
 
-static const u16 sBoxSelectionPopupPalette[];
-static const u16 sBoxSelectionPopupCenterTiles[];
-static const u16 sBoxSelectionPopupSidesTiles[];
+static const u16 sChooseBoxMenu_Pal[];
+static const u16 sChooseBoxMenuCenter_Gfx[];
+static const u16 sChooseBoxMenuSides_Gfx[];
 
 static const struct PSS_MenuStringPtrs sMainMenuTexts[] = {
     {gText_WithdrawPokemon, gText_WithdrawMonDescription},
@@ -448,14 +446,14 @@ void ResetPokemonStorageSystem(void)
 //  and for the Jump feature.
 //------------------------------------------------------------------------------
 
-void LoadBoxSelectionPopupSpriteGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal)
+void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal)
 {
     struct SpritePalette palette = {
-        sBoxSelectionPopupPalette, palTag
+        sChooseBoxMenu_Pal, palTag
     };
     struct SpriteSheet sheets[] = {
-        {sBoxSelectionPopupCenterTiles, 0x800, tileTag},
-        {sBoxSelectionPopupSidesTiles,  0x180, tileTag + 1},
+        {sChooseBoxMenuCenter_Gfx, 0x800, tileTag},
+        {sChooseBoxMenuSides_Gfx,  0x180, tileTag + 1},
         {}
     };
 
@@ -682,6 +680,6 @@ static void SpriteCB_ChooseBoxArrow(struct Sprite *sprite)
 
 // Forward-declared rodata
 
-static const u16 sBoxSelectionPopupPalette[] = INCBIN_U16("graphics/pokemon_storage/unk_83CDA98.gbapal");
-static const u16 sBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83CDAB8.4bpp");
-static const u16 sBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE2B8.4bpp");
+static const u16 sChooseBoxMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
+static const u16 sChooseBoxMenuCenter_Gfx[] = INCBIN_U16("graphics/pokemon_storage/box_selection_popup_center.4bpp");
+static const u16 sChooseBoxMenuSides_Gfx[] = INCBIN_U16("graphics/pokemon_storage/box_selection_popup_sides.4bpp");

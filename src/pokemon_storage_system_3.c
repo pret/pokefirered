@@ -102,10 +102,10 @@ static void InitCursorItemIcon(void);
 static void PokeStorage_AppendActionToQuestLogBuffer(u8 action);
 static void UpdateBoxToSendMons(void);
 
-static const u32 sScrollingBg_Gfx[] = INCBIN_U32("graphics/pokemon_storage/unk_83CE438.4bpp.lz");
-static const u32 sScrollingBg_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/unk_83CE4D0.bin.lz");
-static const u16 sDisplayMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE5DC.gbapal");
-static const u32 sDisplayMenu_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/unk_83CE5FC.bin.lz");
+static const u32 sScrollingBg_Gfx[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
+static const u32 sScrollingBg_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
+static const u16 sDisplayMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal");
+static const u32 sDisplayMenu_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
 
 enum {
     TILEMAPID_PKMN_DATA,
@@ -122,8 +122,8 @@ static const u16 sPkmnData_Tilemap[] = {
     0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118,
 };
 
-static const u16 sBg_Pal[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE738.gbapal");
-static const u16 sBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE758.gbapal");
+static const u16 sBg_Pal[] = INCBIN_U16("graphics/pokemon_storage/bg.gbapal");
+static const u16 sBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/bg_move_items.gbapal");
 
 static const u16 sCloseBoxButton_Tilemap[] = {
     // Blink 1
@@ -146,10 +146,10 @@ static const u16 sPartySlotEmpty_Tilemap[] = {
     0x1163, 0x1164, 0x1164, 0x1165,
 };
 
-static const u16 sWaveform_Pal[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE810.gbapal");
-static const u16 sWaveform_Gfx[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE810.4bpp");
-static const u16 sUnused_Pal[] = INCBIN_U16("graphics/pokemon_storage/unk_83CE9D0.gbapal");
-static const u16 sUnknown_Pal[] = INCBIN_U16("graphics/pokemon_storage/unk_83CEA10.gbapal");
+static const u16 sWaveform_Pal[] = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
+static const u16 sWaveform_Gfx[] = INCBIN_U16("graphics/pokemon_storage/waveform.4bpp");
+static const u16 sUnused_Pal[] = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
+static const u16 sUnknown_Pal[] = INCBIN_U16("graphics/pokemon_storage/unknown.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] = {
     [PSS_WIN_DISPLAY_MON_INFO] = {
@@ -1225,7 +1225,7 @@ static void Task_DepositMenu(u8 taskId)
     {
     case 0:
         PrintMessage(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
-        LoadBoxSelectionPopupSpriteGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_HAND_CURSOR, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_HAND_CURSOR, 3, FALSE);
         CreateChooseBoxMenuSprites(sDepositingBoxId);
         sStorage->state++;
         break;
@@ -1865,7 +1865,7 @@ static void Task_JumpBox(u8 taskId)
     {
     case 0:
         PrintMessage(PC_TEXT_JUMP_TO_WHICH_BOX);
-        LoadBoxSelectionPopupSpriteGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_HAND_CURSOR, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, TAG_TILE_A, TAG_PAL_HAND_CURSOR, 3, FALSE);
         CreateChooseBoxMenuSprites(StorageGetCurrentBox());
         sStorage->state++;
         break;

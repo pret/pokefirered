@@ -510,7 +510,7 @@ void FreeBoxSelectionPopupSpriteGfx(void);
 void CreateChooseBoxMenuSprites(u8 curBox);
 void DestroyChooseBoxMenuSprites(void);
 u8 HandleBoxChooseSelectionInput(void);
-void LoadBoxSelectionPopupSpriteGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal);
+void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
 u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
 u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst);

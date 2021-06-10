@@ -45,9 +45,9 @@ static bool8 SetMenuTexts_Item(void);
 static void CreateCursorSprites(void);
 static void ToggleCursorAutoAction(void);
 
-static const u16 sHandCursorPalette[] = INCBIN_U16("graphics/pokemon_storage/unk_83D2BCC.gbapal");
-static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83D2BEC.4bpp");
-static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/pokemon_storage/unk_83D33EC.4bpp");
+static const u16 sHandCursorPalette[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
+static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.4bpp");
+static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 //------------------------------------------------------------------------------
 //  SECTION: Cursor movement

@@ -157,7 +157,7 @@ static void PrintWordSelectNextRowUp(void);
 static void PrintWordSelectRowsPageDown(void);
 static void PrintWordSelectRowsPageUp(void);
 static void PrintWordSelectText(u8 scrollOffset, u8 numRows);
-static void EraseWordSelectRows(u8 row, u8 remrow);
+static void EraseWordSelectRows(u8 scrollOffset, u8 numRows);
 static void ClearWordSelectWindow(void);
 static void InitLowerWindowAnim(int anims);
 static bool8 UpdateLowerWindowAnim(void);
@@ -1673,7 +1673,7 @@ static void PrintECGroupsMenu(void)
                 return;
             }
 
-            PrintEasyChatText(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
+            PrintEasyChatText(ECWIN_LOWER, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
         }
 
         y += 16;
@@ -1770,15 +1770,15 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
     CopyWindowToVram(ECWIN_LOWER, COPYWIN_GFX);
 }
 
-static void EraseWordSelectRows(u8 row, u8 remrow)
+static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
 {
     int y;
     int totalHeight;
     int heightWrappedAround;
     int heightToBottom;
 
-    y = (row * 16 + 96) & 0xFF;
-    heightToBottom = remrow * 16;
+    y = (scrollOffset * 16 + 96) & 0xFF;
+    heightToBottom = numRows * 16;
     totalHeight = y + heightToBottom;
     if (totalHeight > 255)
     {
@@ -2404,6 +2404,6 @@ static void AddMainScreenButtonWindow(void)
     template.baseBlock = 0x030;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    PrintEasyChatText(windowId, 1, gText_DelAll_Cancel_OK, 0, 0, 0, NULL);
+    PrintEasyChatText(windowId, 1, gText_DelAll_Cancel_OK, 0, 0, TEXT_SPEED_INSTANT, NULL);
     PutWindowTilemap(windowId);
 }

@@ -634,11 +634,11 @@ static void rfu_STC_readChildList(void)
             gRfuLinkStatus->strength[bm_slot_id] = 16;
             gRfuLinkStatus->connSlotFlag |= 1 << bm_slot_id;
             ++gRfuLinkStatus->connCount;
-            gRfuLinkStatus->partner[bm_slot_id].id = *(u16 *)data_p;
+            gRfuLinkStatus->partner[bm_slot_id].currentFuncId = *(u16 *)data_p;
             gRfuLinkStatus->partner[bm_slot_id].slot = bm_slot_id;
             gRfuLinkStatus->parentChild = MODE_PARENT;
             gRfuStatic->flags &= 0x7F;
-            gRfuStatic->cidBak[bm_slot_id] = gRfuLinkStatus->partner[bm_slot_id].id;
+            gRfuStatic->cidBak[bm_slot_id] = gRfuLinkStatus->partner[bm_slot_id].currentFuncId;
         #endif
         }
         --numSlots;
@@ -1148,7 +1148,7 @@ void rfu_REQ_CHILD_startConnectRecovery(u8 bmRecoverySlot)
     for (i = 0; i < RFU_CHILD_MAX && !((bmRecoverySlot >> i) & 1); ++i)
         ;
     STWI_set_Callback_M(rfu_STC_REQ_callback);
-    // if i == 4, gRfuLinkStatus->partner[i].id becomes gRfuLinkStatus->my.id
+    // if i == 4, gRfuLinkStatus->partner[i].currentFuncId becomes gRfuLinkStatus->my.currentFuncId
     STWI_send_CPR_StartREQ(gRfuLinkStatus->partner[i].id, gRfuLinkStatus->my.id, bmRecoverySlot);
 }
 

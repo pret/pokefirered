@@ -613,7 +613,7 @@ void GetUnlockedECWords(bool32 isAlphabetical, u16 groupId)
         sEasyChatSelectionData->totalWords = GetUnlockedWordsInAlphabeticalGroup(groupId);
 }
 
-u16 GetDisplayedWordByIndex(u16 index)
+u16 GetWordFromSelectedGroup(u16 index)
 {
     if (index >= sEasyChatSelectionData->totalWords)
         return EC_WORD_UNDEFINED;

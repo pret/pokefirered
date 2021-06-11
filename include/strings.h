@@ -1380,7 +1380,7 @@ extern const u8 gUnknown_8418A77[];
 extern const u8 gUnknown_8418A87[];
 extern const u8 gUnknown_8418AA1[];
 extern const u8 gUnknown_8418AB2[];
-extern const u8 gUnknown_841EE2B[];
+extern const u8 gText_DelAll_Cancel_OK[];
 
 // naming_screen
 extern const u8 gText_MoveOkBack[];

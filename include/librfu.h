@@ -177,7 +177,7 @@
 #define ERR_REQ_CMD_CLOCK_SLAVE        (ERR_REQ_CMD | 0x0004) // Issuing the REQ command was attempted but failed because the AGB is the clock slave
 #define ERR_REQ_CMD_IME_DISABLE        (ERR_REQ_CMD | 0x0006) // Issuing the REQ command was attempted but failed because the IME register is 0
 
-#define ERR_PID_NOT_FOUND               0x0100                // The specified PID does not exist in the gRfuLinkStatus->partner[0-3].id list
+#define ERR_PID_NOT_FOUND               0x0100                // The specified PID does not exist in the gRfuLinkStatus->partner[0-3].currentFuncId list
 
 // Error code returned by the return value of rfu_initializeAPI
 #define ERR_RFU_API_BUFF_SIZE           0x0001

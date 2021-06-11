@@ -4896,10 +4896,10 @@ extern const u32 gBerryCrush_Crusher_Tilemap[];
 extern const u32 gEasyChatWindow_Gfx[];
 extern const u32 gEasyChatWindow_Tilemap[];
 extern const u32 gEasyChatMode_Pal[];
-extern const u16 gUnknown_8E99F24[];
-extern const u32 gEasyChatRedRectangularCursor_Tiles[];
-extern const u32 gEasyChatSelectGroupHelp_Tiles[];
-extern const u32 gEasyChatModeIcons_Tiles[];
+extern const u16 gEasyChatButtonWindow_Pal[];
+extern const u32 gEasyChatRectangleCursor_Gfx[];
+extern const u32 gEasyChatButtonWindow_Gfx[];
+extern const u32 gEasyChatMode_Gfx[];
 
 // naming_screen
 extern const u32 gUnknown_8E982BC[];

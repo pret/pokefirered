@@ -4,7 +4,7 @@
 
 struct MonInfoPacket
 {
-    u8 id; // packet id
+    u8 id; // packet currentFuncId
     u16 species;
     u32 personality;
     u32 otId;
@@ -41,7 +41,7 @@ bool32 sub_8149A90(int multiplayerId, struct PokemonJump1_MonInfo *arg0)
 
 struct UnkPacket2
 {
-    u8 id; // packet id
+    u8 id; // packet currentFuncId
     u32 unk4;
     u32 unk8;
 };
@@ -56,7 +56,7 @@ void sub_8149AE0(u32 arg0)
 
 struct UnkPacket3
 {
-    u8 id; // packet id
+    u8 id; // packet currentFuncId
     u8 unk1;
     u8 unk2;
     u8 unk3_0:5;
@@ -106,7 +106,7 @@ bool32 sub_8149B7C(struct PokemonJump1_82E4 *arg0, struct PokemonJump1Sub *arg1)
 
 struct UnkPacket4
 {
-    u8 id; // packet id
+    u8 id; // packet currentFuncId
     u8 unk1;
     u8 unk2;
     u8 unk3;

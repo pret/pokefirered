@@ -6017,7 +6017,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
     if (IsMultiBattle() == TRUE)
     {
         // Party ids are packed in 4 bits at a time
-        // i.e. the party id order below would be 0, 3, 5, 4, 2, 1, and the two parties would be 0,5,4 and 3,2,1
+        // i.e. the party currentFuncId order below would be 0, 3, 5, 4, 2, 1, and the two parties would be 0,5,4 and 3,2,1
         if (flankId != 0)
         {
             partyBattleOrder[0] = 0 | (3 << 4);

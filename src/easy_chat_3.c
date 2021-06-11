@@ -9,30 +9,96 @@
 #include "strings.h"
 #include "text_window.h"
 
-struct ECWork
+#define GFXTAG_TRIANGLE_CURSOR               0
+#define GFXTAG_RECTANGLE_CURSOR              1
+#define GFXTAG_SCROLL_INDICATOR              2
+#define GFXTAG_START_SELECT_BUTTONS          3
+#define GFXTAG_MODE_WINDOW                   4
+#define GFXTAG_RS_INTERVIEW_FRAME            5
+#define GFXTAG_BUTTON_WINDOW                 6
+
+#define PALTAG_TRIANGLE_CURSOR               0
+#define PALTAG_RECTANGLE_CURSOR              1
+#define PALTAG_MISC_UI                       2
+#define PALTAG_RS_INTERVIEW_FRAME            3
+
+enum {
+    ECWIN_TITLE,
+    ECWIN_INSTRUCTIONS,
+    ECWIN_LOWER,
+};
+
+enum {
+    MSG_INSTRUCTIONS,
+    MSG_CONFIRM_DELETE,
+    MSG_CONFIRM_EXIT,
+    MSG_CONFIRM,
+};
+
+// Types of animations for the lower window (keyboard/word select), given to InitLowerWindowAnim
+enum {
+    WINANIM_OPEN_KEYBOARD,
+    WINANIM_CLOSE_KEYBOARD,
+    WINANIM_OPEN_WORD_SELECT,
+    WINANIM_CLOSE_WORD_SELECT,
+    WINANIM_RETURN_TO_KEYBOARD,
+    WINANIM_KEYBOARD_SWITCH_OUT,
+    WINANIM_KEYBOARD_SWITCH_IN,
+};
+
+// IDs for supplementary Easy Chat functions
+// Returned by the input handler functions, and run
+// in the main task (MAINSTATE_RUN_FUNC)
+enum {
+    ECFUNC_NONE,
+    ECFUNC_REPRINT_PHRASE,
+    ECFUNC_UPDATE_MAIN_CURSOR,
+    ECFUNC_UPDATE_MAIN_CURSOR_ON_BUTTONS,
+    ECFUNC_PROMPT_DELETE_ALL,
+    ECFUNC_PROMPT_EXIT,
+    ECFUNC_PROMPT_CONFIRM,
+    ECFUNC_CLOSE_PROMPT,
+    ECFUNC_CLOSE_PROMPT_AFTER_DELETE,
+    ECFUNC_OPEN_KEYBOARD,
+    ECFUNC_CLOSE_KEYBOARD,
+    ECFUNC_OPEN_WORD_SELECT,
+    ECFUNC_CLOSE_WORD_SELECT,
+    ECFUNC_RETURN_TO_KEYBOARD,
+    ECFUNC_UPDATE_KEYBOARD_CURSOR,
+    ECFUNC_GROUP_NAMES_SCROLL_DOWN,
+    ECFUNC_GROUP_NAMES_SCROLL_UP,
+    ECFUNC_UPDATE_WORD_SELECT_CURSOR,
+    ECFUNC_WORD_SELECT_SCROLL_UP,
+    ECFUNC_WORD_SELECT_SCROLL_DOWN,
+    ECFUNC_WORD_SELECT_PAGE_UP,
+    ECFUNC_WORD_SELECT_PAGE_DOWN,
+    ECFUNC_SWITCH_KEYBOARD_MODE,
+};
+
+struct EasyChatScreenControl
 {
-    u16 state;
+    u16 funcState;
     u16 windowId;
-    u16 id;
-    u8 frameAnimIdx;
-    u8 frameAnimTarget;
-    s8 frameAnimDelta;
-    u8 modeIconState;
-    u8 ecPrintBuffer[0xC1];
-    u8 ecPaddedWordBuffer[0x200];
-    u16 bg2ScrollRow;
-    int tgtBgY;
-    int deltaBgY;
-    struct Sprite * selectDestFieldCursorSprite;
-    struct Sprite * rectCursorSpriteRight;
-    struct Sprite * rectCursorSpriteLeft;
-    struct Sprite * selectWordCursorSprite;
-    struct Sprite * selectGroupHelpSprite;
-    struct Sprite * modeIconsSprite;
-    struct Sprite * upTriangleCursorSprite;
-    struct Sprite * downTriangleCursorSprite;
-    struct Sprite * startPgUpButtonSprite;
-    struct Sprite * selectPgDnButtonSprite;
+    u16 currentFuncId;
+    u8 curWindowAnimState;
+    u8 destWindowAnimState;
+    s8 windowAnimStateDir;
+    u8 modeWindowState;
+    u8 phrasePrintBuffer[193];
+    u8 wordSelectPrintBuffer[512];
+    u16 scrollOffset;
+    int scrollDest;
+    int scrollSpeed;
+    struct Sprite * mainCursorSprite;
+    struct Sprite * rectangleCursorSpriteRight;
+    struct Sprite * rectangleCursorSpriteLeft;
+    struct Sprite * wordSelectCursorSprite;
+    struct Sprite * buttonWindowSprite;
+    struct Sprite * modeWindowSprite;
+    struct Sprite * scrollIndicatorUpSprite;
+    struct Sprite * scrollIndicatorDownSprite;
+    struct Sprite * startButtonSprite;
+    struct Sprite * selectButtonSprite;
     u16 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
     u16 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
 };
@@ -45,114 +111,114 @@ struct EasyChatPhraseFrameDimensions
     u8 height;
 };
 
-static EWRAM_DATA struct ECWork * sEasyChatGraphicsResources = NULL;
+static EWRAM_DATA struct EasyChatScreenControl * sScreenControl = NULL;
 
-static bool8 ECInterfaceCmd_01(void);
-static bool8 ECInterfaceCmd_02(void);
-static bool8 ECInterfaceCmd_03(void);
-static bool8 ECInterfaceCmd_05(void);
-static bool8 ECInterfaceCmd_06(void);
-static bool8 ECInterfaceCmd_04(void);
-static bool8 ECInterfaceCmd_07(void);
-static bool8 ECInterfaceCmd_08(void);
-static bool8 ECInterfaceCmd_09(void);
-static bool8 ECInterfaceCmd_10(void);
-static bool8 ECInterfaceCmd_22(void);
-static bool8 ECInterfaceCmd_14(void);
-static bool8 ECInterfaceCmd_15(void);
-static bool8 ECInterfaceCmd_16(void);
-static bool8 ECInterfaceCmd_11(void);
-static bool8 ECInterfaceCmd_12(void);
-static bool8 ECInterfaceCmd_13(void);
-static bool8 ECInterfaceCmd_17(void);
-static bool8 ECInterfaceCmd_19(void);
-static bool8 ECInterfaceCmd_18(void);
-static bool8 ECInterfaceCmd_21(void);
-static bool8 ECInterfaceCmd_20(void);
-static bool8 InitEasyChatGraphicsWork_Internal(void);
+static bool8 ECCmd_ReprintPhrase(void);
+static bool8 ECCmd_UpdateMainCursor(void);
+static bool8 ECCmd_UpdateMainCursorOnButtons(void);
+static bool8 ECCmd_ShowConfirmExitPrompt(void);
+static bool8 ECCmd_ShowConfirmPrompt(void);
+static bool8 ECCmd_ShowConfirmDeleteAllPrompt(void);
+static bool8 ECCmd_ClosePrompt(void);
+static bool8 ECCmd_ClosePromptAfterDeleteAll(void);
+static bool8 ECCmd_OpenKeyboard(void);
+static bool8 ECCmd_CloseKeyboard(void);
+static bool8 ECCmd_SwitchKeyboardMode(void);
+static bool8 ECCmd_UpdateKeyboardCursor(void);
+static bool8 ECCmd_GroupNamesScrollDown(void);
+static bool8 ECCmd_GroupNamesScrollUp(void);
+static bool8 ECCmd_OpenWordSelect(void);
+static bool8 ECCmd_CloseWordSelect(void);
+static bool8 ECCmd_ReturnToKeyboard(void);
+static bool8 ECCmd_UpdateWordSelectCursor(void);
+static bool8 ECCmd_WordSelectScrollDown(void);
+static bool8 ECCmd_WordSelectScrollUp(void);
+static bool8 ECCmd_WordSelectPageScrollDown(void);
+static bool8 ECCmd_WordSelectPageScrollUp(void);
+static bool8 InitEasyChatScreenControl_(void);
 static void SetGpuRegsForEasyChatInit(void);
 static void LoadEasyChatPals(void);
-static void PrintTitleText(void);
-static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 bg, u8 fg, u8 shadow);
-static void PrintECInstructionsText(void);
-static void PrintECInterfaceTextById(u8 a0);
-static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos);
-static void CreatePhraseFrameWindow(void);
-static void PrintECFields(void);
-static void DrawECFrameInTilemapBuffer(u16 *buffer);
-static void PutWin2TilemapAndCopyToVram(void);
-static void PrintECMenuById(u32 a0);
-static void PrintECGroupOrAlphaMenu(void);
+static void EC_PrintTitle(void);
+static void PrintEasyChatTextWithColors(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8 bg, u8 fg, u8 shadow);
+static void EC_PrintInitialInstructions(void);
+static void PrintEasyChatStdMessage(u8 message);
+static void CreateEasyChatYesNoMenu(u8 initialCursorPos);
+static void AddPhraseWindow(void);
+static void EC_PrintCurrentPhrase(void);
+static void BufferFrameTilemap(u16 *tilemap);
+static void EC_DrawLowerWindow(void);
+static void InitLowerWindowText(u32 id);
+static void PrintKeyboardText(void);
 static void PrintECGroupsMenu(void);
 static void PrintEasyChatKeyboardText(void);
 static void PrintECWordsMenu(void);
-static void UpdateWin2PrintWordsScrollDown(void);
-static void UpdateWin2PrintWordsScrollUp(void);
-static void UpdateWin2PrintWordsScrollPageDown(void);
-static void UpdateWin2PrintWordsScrollPageUp(void);
-static void PrintECRowsWin2(u8 row, u8 remrow);
-static void ClearECRowsWin2(u8 row, u8 remrow);
-static void ClearWin2AndCopyToVram(void);
-static void StartWin2FrameAnim(int a0);
-static bool8 AnimateFrameResize(void);
-static void RedrawFrameByIndex(u8 a0);
-static void RedrawFrameByRect(int left, int top, int width, int height);
-static void InitBg2Scroll(void);
-static void ScheduleBg2VerticalScroll(s16 direction, u8 speed);
-static bool8 AnimateBg2VerticalScroll(void);
-static int GetBg2ScrollRow(void);
-static void SetRegWin0Coords(u8 left, u8 top, u8 right, u8 bottom);
-static void LoadSpriteGfx(void);
-static void CreateSelectDestFieldCursorSprite(void);
+static void PrintWordSelectNextRowDown(void);
+static void PrintWordSelectNextRowUp(void);
+static void PrintWordSelectRowsPageDown(void);
+static void PrintWordSelectRowsPageUp(void);
+static void PrintWordSelectText(u8 scrollOffset, u8 numRows);
+static void EraseWordSelectRows(u8 row, u8 remrow);
+static void ClearWordSelectWindow(void);
+static void InitLowerWindowAnim(int anims);
+static bool8 UpdateLowerWindowAnim(void);
+static void DrawLowerWindowFrame(u8 direction);
+static void BufferLowerWindowFrame(int left, int top, int width, int height);
+static void ResetLowerWindowScroll(void);
+static void InitLowerWindowScroll(s16 direction, u8 speed);
+static bool8 UpdateLowerWindowScroll(void);
+static int GetLowerWindowScrollOffset(void);
+static void SetWindowDimensions(u8 left, u8 top, u8 width, u8 height);
+static void LoadEasyChatGfx(void);
+static void EC_CreateMainCursorSprite(void);
 static void SpriteCB_BounceCursor(struct Sprite * sprite);
-static void SetSelectDestFieldCursorSpritePosAndResetAnim(u8 x, u8 y);
-static void FreezeSelectDestFieldCursorSprite(void);
-static void UnfreezeSelectDestFieldCursorSprite(void);
-static void CreateRedRectangularCursorSpritePair(void);
-static void DestroyRedRectangularCursor(void);
-static void EC_MoveCursor(void);
-static void MoveCursor_Group(s8 a0, s8 a1);
-static void MoveCursor_Alpha(s8 a0, s8 a1);
+static void EC_SetMainCursorPos(u8 x, u8 y);
+static void StopMainCursorAnim(void);
+static void StartMainCursorAnim(void);
+static void CreateRectangleCursorSprites(void);
+static void DestroyRectangleCursorSprites(void);
+static void UpdateRectangleCursorPos(void);
+static void MoveCursor_Group(s8 x, s8 y);
+static void MoveCursor_Alpha(s8 x, s8 y);
 static void CreateSelectWordCursorSprite(void);
 static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite);
-static void SetSelectWordCursorSpritePos(void);
+static void UpdateWordSelectCursorPos(void);
 static void SetSelectWordCursorSpritePosExplicit(u8 x, u8 y);
 static void DestroySelectWordCursorSprite(void);
-static void CreateSelectGroupHelpSprite(void);
-static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void);
-static void StartModeIconHidingAnimation(void);
+static void CreateSideWindowSprites(void);
+static bool8 ShowSideWindow(void);
+static void HideModeWindow(void);
 static bool8 RunModeIconHidingAnimation(void);
-static void ShrinkModeIconsSprite(void);
-static void ShowModeIconsSprite(void);
-static bool8 ModeIconsSpriteAnimIsEnded(void);
-static void CreateVerticalScrollArrowSprites(void);
-static void UpdateVerticalScrollArrowVisibility(void);
-static void HideVerticalScrollArrowSprites(void);
-static void UpdateVerticalScrollArrowSpriteXPos(int a0);
+static void SetModeWindowToTransition(void);
+static void UpdateModeWindowAnim(void);
+static bool8 IsModeWindowAnimActive(void);
+static void CreateScrollIndicatorSprites(void);
+static void UpdateScrollIndicatorsVisibility(void);
+static void HideScrollIndicators(void);
+static void SetScrollIndicatorXPos(int direction);
 static void CreateStartSelectButtonsSprites(void);
-static void UpdateStartSelectButtonSpriteVisibility(void);
-static void HideStartSelectButtonSprites(void);
-static void CreateFooterWindow(void);
+static void UpdateStartSelectButtonsVisibility(void);
+static void HideStartSelectButtons(void);
+static void AddMainScreenButtonWindow(void);
 
-static const u16 gUnknown_843F3B8[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.gbapal");
-static const u16 gUnknown_843F3D8[] = INCBIN_U16("graphics/link_rfu/unk_8E9BD28.gbapal");
-static const u16 sRightTriangleCursor_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.4bpp");
-static const u16 sUpTriangleCursor_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F418.4bpp");
-static const u16 sStartSelectButtons_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F518.4bpp");
-static const u16 gUnknown_843F618[] = INCBIN_U16("graphics/link_rfu/unk_843F638.gbapal");
-static const u32 gUnknown_843F638[] = INCBIN_U32("graphics/link_rfu/unk_843F638.4bpp.lz");
-static const u16 gUnknown_843F76C[] = INCBIN_U16("graphics/link_rfu/unk_843F76C.gbapal");
-static const u16 gUnknown_843F78C[] = INCBIN_U16("graphics/link_rfu/unk_843F78C.gbapal");
-static const u32 gUnknown_843F7AC[] = INCBIN_U32("graphics/link_rfu/unk_843F7AC.4bpp.lz");
+static const u16 sTriangleCursor_Pal[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.gbapal");
+static const u16 gEasyChatRectangleCursor_Pal[] = INCBIN_U16("graphics/link_rfu/unk_8E9BD28.gbapal");
+static const u16 sTriangleCursor_Gfx[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.4bpp");
+static const u16 sScrollIndicator_Gfx[] = INCBIN_U16("graphics/link_rfu/unk_843F418.4bpp");
+static const u16 sStartSelectButtons_Gfx[] = INCBIN_U16("graphics/link_rfu/unk_843F518.4bpp");
+static const u16 sRSInterviewFrame_Pal[] = INCBIN_U16("graphics/link_rfu/unk_843F638.gbapal");
+static const u32 sRSInterviewFrame_Gfx[] = INCBIN_U32("graphics/link_rfu/unk_843F638.4bpp.lz");
+static const u16 sTextInputFrameOrange_Pal[] = INCBIN_U16("graphics/link_rfu/unk_843F76C.gbapal");
+static const u16 sTextInputFrameGreen_Pal[] = INCBIN_U16("graphics/link_rfu/unk_843F78C.gbapal");
+static const u32 sTextInputFrame_Gfx[] = INCBIN_U32("graphics/link_rfu/unk_843F7AC.4bpp.lz");
 
-static const u16 gUnknown_843F874[] = {
+static const u16 sTitleText_Pal[] = {
     RGB( 0,  0,  0),
     RGB( 0,  0,  0),
     RGB( 7, 25, 31),
     RGB(21, 21, 29)
 };
 
-static const u16 gUnknown_843F87C[] = {
+static const u16 sText_Pal[] = {
     RGB( 0,  0,  0),
     RGB(31, 31, 31),
     RGB(12, 12, 12),
@@ -231,7 +297,7 @@ static const struct BgTemplate sEasyChatBgTemplates[] = {
 };
 
 static const struct WindowTemplate sEasyChatWindowTemplates[] = {
-    {
+    [ECWIN_TITLE] = {
         .bg = 1,
         .tilemapLeft = 7,
         .tilemapTop = 0,
@@ -240,7 +306,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .paletteNum = 10,
         .baseBlock = 0x10,
     },
-    {
+    [ECWIN_INSTRUCTIONS] = {
         .bg = 0,
         .tilemapLeft = 4,
         .tilemapTop = 15,
@@ -249,7 +315,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0xA,
     },
-    {
+    [ECWIN_LOWER] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 0,
@@ -271,36 +337,76 @@ static const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
     .baseBlock = 0x062
 };
 
-static const u8 gUnknown_843F8D8[] = _("{UNDERSCORE}");
+static const u8 sDummyECWord[] = _("{UNDERSCORE}");
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
 static const u8 *const sEasyChatKeyboardText[] = {
-    gUnknown_847A8D8,
-    gUnknown_847A8FA,
-    gUnknown_847A913,
-    gUnknown_847A934
+    gText_EasyChatKeyboard_ABCDEFothers,
+    gText_EasyChatKeyboard_GHIJKL,
+    gText_EasyChatKeyboard_MNOPQRS,
+    gText_EasyChatKeyboard_TUVWXYZ
 };
 
 static const struct SpriteSheet sEasyChatSpriteSheets[] = {
-    {sRightTriangleCursor_Tiles, 0x0020, 0},
-    {sUpTriangleCursor_Tiles, 0x0100, 2},
-    {sStartSelectButtons_Tiles, 0x0100, 3},
-    {}
+    {
+        .data = sTriangleCursor_Gfx,
+        .size = 0x0020,
+        .tag = GFXTAG_TRIANGLE_CURSOR
+    },
+    {
+        .data = sScrollIndicator_Gfx,
+        .size = 0x0100,
+        .tag = GFXTAG_SCROLL_INDICATOR
+    },
+    {
+        .data = sStartSelectButtons_Gfx,
+        .size = 0x0100,
+        .tag = GFXTAG_START_SELECT_BUTTONS
+    },
+    {0}
 };
 
-static const struct SpritePalette sEasyChatSpritePalettes[] = {
-    {gUnknown_843F3B8, 0},
-    {gUnknown_843F3D8, 1},
-    {gUnknown_8E99F24, 2},
-    {gUnknown_843F618, 3},
-    {}
+static const struct SpritePalette sSpritePalettes[] = {
+    {
+        .data = sTriangleCursor_Pal,
+        .tag = PALTAG_TRIANGLE_CURSOR
+    },
+    {
+        .data = gEasyChatRectangleCursor_Pal,
+        .tag = PALTAG_RECTANGLE_CURSOR
+    },
+    {
+        .data = gEasyChatButtonWindow_Pal,
+        .tag = PALTAG_MISC_UI
+    },
+    {
+        .data = sRSInterviewFrame_Pal,
+        .tag = PALTAG_RS_INTERVIEW_FRAME
+    },
+    {0}
 };
 
-static const struct CompressedSpriteSheet sEasyChatCompressedSpriteSheets[] = {
-    {gUnknown_843F638, 0x0800, 5},
-    {gEasyChatRedRectangularCursor_Tiles, 0x1000, 1},
-    {gEasyChatSelectGroupHelp_Tiles, 0x0800, 6},
-    {gEasyChatModeIcons_Tiles, 0x1000, 4}
+static const struct CompressedSpriteSheet sCompressedSpriteSheets[] = {
+    {
+        .data = sRSInterviewFrame_Gfx,
+        .size = 0x0800,
+        .tag = GFXTAG_RS_INTERVIEW_FRAME
+    },
+    {
+        .data = gEasyChatRectangleCursor_Gfx,
+        .size = 0x1000,
+        .tag = GFXTAG_RECTANGLE_CURSOR
+    },
+    {
+        .data = gEasyChatButtonWindow_Gfx,
+        .size = 0x0800,
+        .tag = GFXTAG_BUTTON_WINDOW
+    },
+    {
+        .data = gEasyChatMode_Gfx,
+        .size = 0x1000,
+        .tag = GFXTAG_MODE_WINDOW
+    }
 };
 
 static const u8 sECDisplay_AlphaModeXCoords[] = {
@@ -328,9 +434,9 @@ static const struct OamData sOamData_RightTriangleCursor = {
     .paletteNum = 0
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RightTriangleCursor = {
-    .tileTag = 0,
-    .paletteTag = 0,
+static const struct SpriteTemplate sSpriteTemplate_TriangleCursor = {
+    .tileTag = GFXTAG_TRIANGLE_CURSOR,
+    .paletteTag = PALTAG_TRIANGLE_CURSOR,
     .oam = &sOamData_RightTriangleCursor,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -381,8 +487,8 @@ static const union AnimCmd *const sAnimTable_RedRectangularCursor[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_RedRectangularCursor = {
-    .tileTag = 1,
-    .paletteTag = 1,
+    .tileTag = GFXTAG_RECTANGLE_CURSOR,
+    .paletteTag = PALTAG_RECTANGLE_CURSOR,
     .oam = &sOamData_RedRectangularCursor,
     .anims = sAnimTable_RedRectangularCursor,
     .images = NULL,
@@ -442,8 +548,8 @@ static const union AnimCmd *const sAnimTable_EasyChatModeIcons[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_EasyChatModeIcons = {
-    .tileTag = 4,
-    .paletteTag = 2,
+    .tileTag = GFXTAG_MODE_WINDOW,
+    .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_EasyChatModeIcons,
     .anims = sAnimTable_EasyChatModeIcons,
     .images = NULL,
@@ -467,8 +573,8 @@ static const struct OamData sOamData_SelectGroupHelp = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_SelectGroupHelp = {
-    .tileTag = 6,
-    .paletteTag = 2,
+    .tileTag = GFXTAG_BUTTON_WINDOW,
+    .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_SelectGroupHelp,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -476,7 +582,7 @@ static const struct SpriteTemplate sSpriteTemplate_SelectGroupHelp = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_843FA58 = {
+static const struct OamData sOamData_StartSelectButton = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -491,7 +597,7 @@ static const struct OamData gUnknown_843FA58 = {
     .paletteNum = 0
 };
 
-static const struct OamData sOamData_UpTriangleCursor = {
+static const struct OamData sOamData_ScrollIndicator = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -506,85 +612,85 @@ static const struct OamData sOamData_UpTriangleCursor = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gUnknown_843FA68[] = {
+static const union AnimCmd sAnim_Frame0[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_843FA70[] = {
+static const union AnimCmd sAnim_Frame1[] = {
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gUnknown_843FA78[] = {
-    gUnknown_843FA68,
-    gUnknown_843FA70,
+static const union AnimCmd *const sAnims_TwoFrame[] = {
+    sAnim_Frame0,
+    sAnim_Frame1,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StartSelectButtons = {
-    .tileTag = 3,
-    .paletteTag = 2,
-    .oam = &gUnknown_843FA58,
-    .anims = gUnknown_843FA78,
+    .tileTag = GFXTAG_START_SELECT_BUTTONS,
+    .paletteTag = PALTAG_MISC_UI,
+    .oam = &sOamData_StartSelectButton,
+    .anims = sAnims_TwoFrame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_UpTriangleCursor = {
-    .tileTag = 2,
-    .paletteTag = 2,
-    .oam = &sOamData_UpTriangleCursor,
-    .anims = gUnknown_843FA78,
+static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator = {
+    .tileTag = GFXTAG_SCROLL_INDICATOR,
+    .paletteTag = PALTAG_MISC_UI,
+    .oam = &sOamData_ScrollIndicator,
+    .anims = sAnims_TwoFrame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-bool8 InitEasyChatGraphicsWork(void)
+bool8 InitEasyChatScreenControl(void)
 {
-    if (!InitEasyChatGraphicsWork_Internal())
+    if (!InitEasyChatScreenControl_())
         return FALSE;
     else
         return TRUE;
 }
 
-bool8 LoadEasyChatGraphics(void)
+bool8 LoadEasyChatScreen(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, sEasyChatBgTemplates, NELEMS(sEasyChatBgTemplates));
-        SetBgTilemapBuffer(3, sEasyChatGraphicsResources->bg3TilemapBuffer);
-        SetBgTilemapBuffer(1, sEasyChatGraphicsResources->bg1TilemapBuffer);
+        SetBgTilemapBuffer(3, sScreenControl->bg3TilemapBuffer);
+        SetBgTilemapBuffer(1, sScreenControl->bg1TilemapBuffer);
         InitWindows(sEasyChatWindowTemplates);
         DeactivateAllTextPrinters();
         LoadEasyChatPals();
         SetGpuRegsForEasyChatInit();
-        CpuFastFill(0, (void *)VRAM + 0x1000000, 0x400);
+        CpuFastFill(0, (void *)OAM, 0x400);
         break;
     case 1:
         DecompressAndLoadBgGfxUsingHeap(3, gEasyChatWindow_Gfx, 0, 0, 0);
         CopyToBgTilemapBuffer(3, gEasyChatWindow_Tilemap, 0, 0);
-        CreatePhraseFrameWindow();
-        CreateFooterWindow();
+        AddPhraseWindow();
+        AddMainScreenButtonWindow();
         CopyBgTilemapBufferToVram(3);
         break;
     case 2:
-        DrawECFrameInTilemapBuffer(sEasyChatGraphicsResources->bg1TilemapBuffer);
-        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_843F7AC, 0, 0, 0);
+        BufferFrameTilemap(sScreenControl->bg1TilemapBuffer);
+        DecompressAndLoadBgGfxUsingHeap(1, sTextInputFrame_Gfx, 0, 0, 0);
         CopyBgTilemapBufferToVram(1);
         break;
     case 3:
-        PrintTitleText();
-        PrintECInstructionsText();
-        PrintECFields();
-        PutWin2TilemapAndCopyToVram();
+        EC_PrintTitle();
+        EC_PrintInitialInstructions();
+        EC_PrintCurrentPhrase();
+        EC_DrawLowerWindow();
         break;
     case 4:
-        LoadSpriteGfx();
-        CreateSelectDestFieldCursorSprite();
+        LoadEasyChatGfx();
+        EC_CreateMainCursorSprite();
         break;
     case 5:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -593,14 +699,14 @@ bool8 LoadEasyChatGraphics(void)
         }
         else
         {
-            SetRegWin0Coords(0, 0, 0, 0);
+            SetWindowDimensions(0, 0, 0, 0);
             SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(0, 63));
             SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0, 59));
             ShowBg(3);
             ShowBg(1);
             ShowBg(2);
             ShowBg(0);
-            CreateVerticalScrollArrowSprites();
+            CreateScrollIndicatorSprites();
             CreateStartSelectButtonsSprites();
         }
         break;
@@ -608,61 +714,61 @@ bool8 LoadEasyChatGraphics(void)
         return FALSE;
     }
 
-    sEasyChatGraphicsResources->state++;
+    sScreenControl->funcState++;
     return TRUE;
 }
 
-void DestroyEasyChatGraphicsResources(void)
+void FreeEasyChatScreenControl(void)
 {
-    if (sEasyChatGraphicsResources)
-        Free(sEasyChatGraphicsResources);
+    if (sScreenControl)
+        Free(sScreenControl);
 }
 
-void EasyChatInterfaceCommand_Setup(u16 id)
+void StartEasyChatFunction(u16 funcId)
 {
-    sEasyChatGraphicsResources->id = id;
-    sEasyChatGraphicsResources->state = 0;
-    EasyChatInterfaceCommand_Run();
+    sScreenControl->currentFuncId = funcId;
+    sScreenControl->funcState = 0;
+    RunEasyChatFunction();
 }
 
-bool8 EasyChatInterfaceCommand_Run(void)
+bool8 RunEasyChatFunction(void)
 {
-    switch (sEasyChatGraphicsResources->id)
+    switch (sScreenControl->currentFuncId)
     {
-    case 0:  return FALSE;
-    case 1:  return ECInterfaceCmd_01();
-    case 2:  return ECInterfaceCmd_02();
-    case 3:  return ECInterfaceCmd_03();
-    case 4:  return ECInterfaceCmd_04();
-    case 5:  return ECInterfaceCmd_05();
-    case 6:  return ECInterfaceCmd_06();
-    case 7:  return ECInterfaceCmd_07();
-    case 8:  return ECInterfaceCmd_08();
-    case 9:  return ECInterfaceCmd_09();
-    case 10: return ECInterfaceCmd_10();
-    case 11: return ECInterfaceCmd_11();
-    case 12: return ECInterfaceCmd_12();
-    case 13: return ECInterfaceCmd_13();
-    case 14: return ECInterfaceCmd_14();
-    case 15: return ECInterfaceCmd_15();
-    case 16: return ECInterfaceCmd_16();
-    case 17: return ECInterfaceCmd_17();
-    case 18: return ECInterfaceCmd_18();
-    case 19: return ECInterfaceCmd_19();
-    case 20: return ECInterfaceCmd_20();
-    case 21: return ECInterfaceCmd_21();
-    case 22: return ECInterfaceCmd_22();
+    case ECFUNC_NONE:  return FALSE;
+    case ECFUNC_REPRINT_PHRASE:  return ECCmd_ReprintPhrase();
+    case ECFUNC_UPDATE_MAIN_CURSOR:  return ECCmd_UpdateMainCursor();
+    case ECFUNC_UPDATE_MAIN_CURSOR_ON_BUTTONS:  return ECCmd_UpdateMainCursorOnButtons();
+    case ECFUNC_PROMPT_DELETE_ALL:  return ECCmd_ShowConfirmDeleteAllPrompt();
+    case ECFUNC_PROMPT_EXIT:  return ECCmd_ShowConfirmExitPrompt();
+    case ECFUNC_PROMPT_CONFIRM:  return ECCmd_ShowConfirmPrompt();
+    case ECFUNC_CLOSE_PROMPT:  return ECCmd_ClosePrompt();
+    case ECFUNC_CLOSE_PROMPT_AFTER_DELETE:  return ECCmd_ClosePromptAfterDeleteAll();
+    case ECFUNC_OPEN_KEYBOARD:  return ECCmd_OpenKeyboard();
+    case ECFUNC_CLOSE_KEYBOARD: return ECCmd_CloseKeyboard();
+    case ECFUNC_OPEN_WORD_SELECT: return ECCmd_OpenWordSelect();
+    case ECFUNC_CLOSE_WORD_SELECT: return ECCmd_CloseWordSelect();
+    case ECFUNC_RETURN_TO_KEYBOARD: return ECCmd_ReturnToKeyboard();
+    case ECFUNC_UPDATE_KEYBOARD_CURSOR: return ECCmd_UpdateKeyboardCursor();
+    case ECFUNC_GROUP_NAMES_SCROLL_DOWN: return ECCmd_GroupNamesScrollDown();
+    case ECFUNC_GROUP_NAMES_SCROLL_UP: return ECCmd_GroupNamesScrollUp();
+    case ECFUNC_UPDATE_WORD_SELECT_CURSOR: return ECCmd_UpdateWordSelectCursor();
+    case ECFUNC_WORD_SELECT_SCROLL_UP: return ECCmd_WordSelectScrollUp();
+    case ECFUNC_WORD_SELECT_SCROLL_DOWN: return ECCmd_WordSelectScrollDown();
+    case ECFUNC_WORD_SELECT_PAGE_UP: return ECCmd_WordSelectPageScrollUp();
+    case ECFUNC_WORD_SELECT_PAGE_DOWN: return ECCmd_WordSelectPageScrollDown();
+    case ECFUNC_SWITCH_KEYBOARD_MODE: return ECCmd_SwitchKeyboardMode();
     default: return FALSE;
     }
 }
 
-static bool8 ECInterfaceCmd_01(void)
+static bool8 ECCmd_ReprintPhrase(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        PrintECFields();
-        sEasyChatGraphicsResources->state++;
+        EC_PrintCurrentPhrase();
+        sScreenControl->funcState++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -671,31 +777,31 @@ static bool8 ECInterfaceCmd_01(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_02(void)
+static bool8 ECCmd_UpdateMainCursor(void)
 {
     u8 i;
-    u16 *ecWordBuffer;
+    u16 *currentPhrase;
     u16 *ecWord;
     u8 frameId;
     u8 cursorColumn, cursorRow, numColumns;
-    s16 var1;
+    s16 x;
     int stringWidth;
     int trueStringWidth;
-    int var2;
+    int y;
     u8 str[64];
 
-    ecWordBuffer = GetEasyChatWordBuffer();
+    currentPhrase = GetEasyChatWordBuffer();
     frameId = GetEasyChatScreenFrameId();
     cursorColumn = GetMainCursorColumn();
     cursorRow = GetMainCursorRow();
     numColumns = GetNumColumns();
-    ecWord = &ecWordBuffer[cursorRow * numColumns];
-    var1 = 8 * sPhraseFrameDimensions[frameId].left + 13;
+    ecWord = &currentPhrase[cursorRow * numColumns];
+    x = 8 * sPhraseFrameDimensions[frameId].left + 13;
     for (i = 0; i < cursorColumn; i++)
     {
         if (*ecWord == 0xFFFF)
         {
-            stringWidth = GetStringWidth(1, gUnknown_843F8D8, 0) * 7;
+            stringWidth = GetStringWidth(1, sDummyECWord, 0) * 7;
         }
         else
         {
@@ -704,16 +810,16 @@ static bool8 ECInterfaceCmd_02(void)
         }
 
         trueStringWidth = stringWidth + 17;
-        var1 += trueStringWidth;
+        x += trueStringWidth;
         ecWord++;
     }
 
-    var2 = 8 * (sPhraseFrameDimensions[frameId].top + cursorRow * 2 + 1) + 1;
-    SetSelectDestFieldCursorSpritePosAndResetAnim(var1, var2);
+    y = 8 * (sPhraseFrameDimensions[frameId].top + cursorRow * 2 + 1) + 1;
+    EC_SetMainCursorPos(x, y);
     return FALSE;
 }
 
-static bool8 ECInterfaceCmd_03(void)
+static bool8 ECCmd_UpdateMainCursorOnButtons(void)
 {
     u8 xOffset;
     switch (GetMainCursorColumn())
@@ -730,19 +836,19 @@ static bool8 ECInterfaceCmd_03(void)
     default:
         return FALSE;
     }
-    SetSelectDestFieldCursorSpritePosAndResetAnim(xOffset, 97);
+    EC_SetMainCursorPos(xOffset, 97);
     return FALSE;
 }
 
-static bool8 ECInterfaceCmd_05(void)
+static bool8 ECCmd_ShowConfirmExitPrompt(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        FreezeSelectDestFieldCursorSprite();
-        PrintECInterfaceTextById(2);
-        EC_CreateYesNoMenuWithInitialCursorPos(1);
-        sEasyChatGraphicsResources->state++;
+        StopMainCursorAnim();
+        PrintEasyChatStdMessage(MSG_CONFIRM_EXIT);
+        CreateEasyChatYesNoMenu(1);
+        sScreenControl->funcState++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -751,15 +857,15 @@ static bool8 ECInterfaceCmd_05(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_06(void)
+static bool8 ECCmd_ShowConfirmPrompt(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        FreezeSelectDestFieldCursorSprite();
-        PrintECInterfaceTextById(3);
-        EC_CreateYesNoMenuWithInitialCursorPos(0);
-        sEasyChatGraphicsResources->state++;
+        StopMainCursorAnim();
+        PrintEasyChatStdMessage(MSG_CONFIRM);
+        CreateEasyChatYesNoMenu(0);
+        sScreenControl->funcState++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -768,15 +874,15 @@ static bool8 ECInterfaceCmd_06(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_04(void)
+static bool8 ECCmd_ShowConfirmDeleteAllPrompt(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        FreezeSelectDestFieldCursorSprite();
-        PrintECInterfaceTextById(1);
-        EC_CreateYesNoMenuWithInitialCursorPos(1);
-        sEasyChatGraphicsResources->state++;
+        StopMainCursorAnim();
+        PrintEasyChatStdMessage(MSG_CONFIRM_DELETE);
+        CreateEasyChatYesNoMenu(1);
+        sScreenControl->funcState++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -785,15 +891,15 @@ static bool8 ECInterfaceCmd_04(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_07(void)
+static bool8 ECCmd_ClosePrompt(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        UnfreezeSelectDestFieldCursorSprite();
-        PrintECInterfaceTextById(0);
+        StartMainCursorAnim();
+        PrintEasyChatStdMessage(MSG_INSTRUCTIONS);
         ShowBg(0);
-        sEasyChatGraphicsResources->state++;
+        sScreenControl->funcState++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -802,15 +908,15 @@ static bool8 ECInterfaceCmd_07(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_08(void)
+static bool8 ECCmd_ClosePromptAfterDeleteAll(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        UnfreezeSelectDestFieldCursorSprite();
-        PrintECInterfaceTextById(0);
-        PrintECFields();
-        sEasyChatGraphicsResources->state++;
+        StartMainCursorAnim();
+        PrintEasyChatStdMessage(MSG_INSTRUCTIONS);
+        EC_PrintCurrentPhrase();
+        sScreenControl->funcState++;
         // Fall through
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -819,42 +925,42 @@ static bool8 ECInterfaceCmd_08(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_09(void)
+static bool8 ECCmd_OpenKeyboard(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        FreezeSelectDestFieldCursorSprite();
+        StopMainCursorAnim();
         HideBg(0);
-        SetRegWin0Coords(0, 0, 0, 0);
-        PrintECGroupOrAlphaMenu();
-        sEasyChatGraphicsResources->state++;
+        SetWindowDimensions(0, 0, 0, 0);
+        PrintKeyboardText();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            StartWin2FrameAnim(0);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowAnim(WINANIM_OPEN_KEYBOARD);
+            sScreenControl->funcState++;
         }
         break;
     case 2:
-        if (!IsDma3ManagerBusyWithBgCopy() && !AnimateFrameResize())
-            sEasyChatGraphicsResources->state++;
+        if (!IsDma3ManagerBusyWithBgCopy() && !UpdateLowerWindowAnim())
+            sScreenControl->funcState++;
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateSelectGroupHelpSprite();
-            sEasyChatGraphicsResources->state++;
+            CreateSideWindowSprites();
+            sScreenControl->funcState++;
         }
         break;
     case 4:
-        if (!AnimateSeletGroupModeAndHelpSpriteEnter())
+        if (!ShowSideWindow())
         {
-            CreateRedRectangularCursorSpritePair();
-            UpdateVerticalScrollArrowSpriteXPos(0);
-            UpdateVerticalScrollArrowVisibility();
-            sEasyChatGraphicsResources->state++;
+            CreateRectangleCursorSprites();
+            SetScrollIndicatorXPos(0);
+            UpdateScrollIndicatorsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -865,33 +971,33 @@ static bool8 ECInterfaceCmd_09(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_10(void)
+static bool8 ECCmd_CloseKeyboard(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        DestroyRedRectangularCursor();
-        StartModeIconHidingAnimation();
-        HideVerticalScrollArrowSprites();
-        sEasyChatGraphicsResources->state++;
+        DestroyRectangleCursorSprites();
+        HideModeWindow();
+        HideScrollIndicators();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (RunModeIconHidingAnimation() == TRUE)
             break;
 
-        StartWin2FrameAnim(1);
-        sEasyChatGraphicsResources->state++;
+        InitLowerWindowAnim(WINANIM_CLOSE_KEYBOARD);
+        sScreenControl->funcState++;
         // Fall through
     case 2:
-        if (!AnimateFrameResize())
-            sEasyChatGraphicsResources->state++;
+        if (!UpdateLowerWindowAnim())
+            sScreenControl->funcState++;
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            UnfreezeSelectDestFieldCursorSprite();
+            StartMainCursorAnim();
             ShowBg(0);
-            sEasyChatGraphicsResources->state++;
+            sScreenControl->funcState++;
         }
         break;
     case 4:
@@ -901,38 +1007,38 @@ static bool8 ECInterfaceCmd_10(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_22(void)
+static bool8 ECCmd_SwitchKeyboardMode(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        DestroyRedRectangularCursor();
-        HideVerticalScrollArrowSprites();
-        ShrinkModeIconsSprite();
-        StartWin2FrameAnim(5);
-        sEasyChatGraphicsResources->state++;
+        DestroyRectangleCursorSprites();
+        HideScrollIndicators();
+        SetModeWindowToTransition();
+        InitLowerWindowAnim(WINANIM_KEYBOARD_SWITCH_OUT);
+        sScreenControl->funcState++;
         break;
     case 1:
-        if (!AnimateFrameResize() && !ModeIconsSpriteAnimIsEnded())
+        if (!UpdateLowerWindowAnim() && !IsModeWindowAnimActive())
         {
-            PrintECGroupOrAlphaMenu();
-            sEasyChatGraphicsResources->state++;
+            PrintKeyboardText();
+            sScreenControl->funcState++;
         }
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            StartWin2FrameAnim(6);
-            ShowModeIconsSprite();
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowAnim(WINANIM_KEYBOARD_SWITCH_IN);
+            UpdateModeWindowAnim();
+            sScreenControl->funcState++;
         }
         break;
     case 3:
-        if (!AnimateFrameResize() && !ModeIconsSpriteAnimIsEnded())
+        if (!UpdateLowerWindowAnim() && !IsModeWindowAnimActive())
         {
-            UpdateVerticalScrollArrowVisibility();
-            CreateRedRectangularCursorSpritePair();
-            sEasyChatGraphicsResources->state++;
+            UpdateScrollIndicatorsVisibility();
+            CreateRectangleCursorSprites();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -943,25 +1049,25 @@ static bool8 ECInterfaceCmd_22(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_14(void)
+static bool8 ECCmd_UpdateKeyboardCursor(void)
 {
-    EC_MoveCursor();
+    UpdateRectangleCursorPos();
     return FALSE;
 }
 
-static bool8 ECInterfaceCmd_15(void)
+static bool8 ECCmd_GroupNamesScrollDown(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        ScheduleBg2VerticalScroll(1, 2);
-        sEasyChatGraphicsResources->state++;
+        InitLowerWindowScroll(1, 2);
+        sScreenControl->funcState++;
         // Fall through
     case 1:
-        if (!AnimateBg2VerticalScroll())
+        if (!UpdateLowerWindowScroll())
         {
-            EC_MoveCursor();
-            UpdateVerticalScrollArrowVisibility();
+            UpdateRectangleCursorPos();
+            UpdateScrollIndicatorsVisibility();
             return FALSE;
         }
         break;
@@ -970,19 +1076,19 @@ static bool8 ECInterfaceCmd_15(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_16(void)
+static bool8 ECCmd_GroupNamesScrollUp(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        ScheduleBg2VerticalScroll(-1, 2);
-        sEasyChatGraphicsResources->state++;
+        InitLowerWindowScroll(-1, 2);
+        sScreenControl->funcState++;
         // Fall through
     case 1:
-        if (!AnimateBg2VerticalScroll())
+        if (!UpdateLowerWindowScroll())
         {
-            UpdateVerticalScrollArrowVisibility();
-            sEasyChatGraphicsResources->state++;
+            UpdateScrollIndicatorsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -993,45 +1099,45 @@ static bool8 ECInterfaceCmd_16(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_11(void)
+static bool8 ECCmd_OpenWordSelect(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        DestroyRedRectangularCursor();
-        StartModeIconHidingAnimation();
-        HideVerticalScrollArrowSprites();
-        sEasyChatGraphicsResources->state++;
+        DestroyRectangleCursorSprites();
+        HideModeWindow();
+        HideScrollIndicators();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!RunModeIconHidingAnimation())
         {
-            ClearWin2AndCopyToVram();
-            sEasyChatGraphicsResources->state++;
+            ClearWordSelectWindow();
+            sScreenControl->funcState++;
         }
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            StartWin2FrameAnim(2);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowAnim(WINANIM_OPEN_WORD_SELECT);
+            sScreenControl->funcState++;
         }
         break;
     case 3:
-        if (!AnimateFrameResize())
+        if (!UpdateLowerWindowAnim())
         {
-            PrintECMenuById(2);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowText(2);
+            sScreenControl->funcState++;
         }
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             CreateSelectWordCursorSprite();
-            UpdateVerticalScrollArrowSpriteXPos(1);
-            UpdateVerticalScrollArrowVisibility();
-            UpdateStartSelectButtonSpriteVisibility();
-            sEasyChatGraphicsResources->state++;
+            SetScrollIndicatorXPos(1);
+            UpdateScrollIndicatorsVisibility();
+            UpdateStartSelectButtonsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1042,40 +1148,40 @@ static bool8 ECInterfaceCmd_11(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_12(void)
+static bool8 ECCmd_CloseWordSelect(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        PrintECFields();
-        sEasyChatGraphicsResources->state++;
+        EC_PrintCurrentPhrase();
+        sScreenControl->funcState++;
         break;
     case 1:
         DestroySelectWordCursorSprite();
-        HideVerticalScrollArrowSprites();
-        HideStartSelectButtonSprites();
-        ClearWin2AndCopyToVram();
-        sEasyChatGraphicsResources->state++;
+        HideScrollIndicators();
+        HideStartSelectButtons();
+        ClearWordSelectWindow();
+        sScreenControl->funcState++;
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            StartWin2FrameAnim(3);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowAnim(WINANIM_CLOSE_WORD_SELECT);
+            sScreenControl->funcState++;
         }
         break;
     case 3:
-        if (!AnimateFrameResize())
+        if (!UpdateLowerWindowAnim())
         {
             ShowBg(0);
-            sEasyChatGraphicsResources->state++;
+            sScreenControl->funcState++;
         }
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            UnfreezeSelectDestFieldCursorSprite();
-            sEasyChatGraphicsResources->state++;
+            StartMainCursorAnim();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1086,45 +1192,45 @@ static bool8 ECInterfaceCmd_12(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_13(void)
+static bool8 ECCmd_ReturnToKeyboard(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
         DestroySelectWordCursorSprite();
-        HideVerticalScrollArrowSprites();
-        HideStartSelectButtonSprites();
-        ClearWin2AndCopyToVram();
-        sEasyChatGraphicsResources->state++;
+        HideScrollIndicators();
+        HideStartSelectButtons();
+        ClearWordSelectWindow();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            StartWin2FrameAnim(4);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowAnim(WINANIM_RETURN_TO_KEYBOARD);
+            sScreenControl->funcState++;
         }
         break;
     case 2:
-        if (!AnimateFrameResize())
+        if (!UpdateLowerWindowAnim())
         {
-            PrintECGroupOrAlphaMenu();
-            sEasyChatGraphicsResources->state++;
+            PrintKeyboardText();
+            sScreenControl->funcState++;
         }
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateSelectGroupHelpSprite();
-            sEasyChatGraphicsResources->state++;
+            CreateSideWindowSprites();
+            sScreenControl->funcState++;
         }
         break;
     case 4:
-        if (!AnimateSeletGroupModeAndHelpSpriteEnter())
+        if (!ShowSideWindow())
         {
-            CreateRedRectangularCursorSpritePair();
-            UpdateVerticalScrollArrowSpriteXPos(0);
-            UpdateVerticalScrollArrowVisibility();
-            sEasyChatGraphicsResources->state++;
+            CreateRectangleCursorSprites();
+            SetScrollIndicatorXPos(0);
+            UpdateScrollIndicatorsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1133,34 +1239,34 @@ static bool8 ECInterfaceCmd_13(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_17(void)
+static bool8 ECCmd_UpdateWordSelectCursor(void)
 {
-    SetSelectWordCursorSpritePos();
+    UpdateWordSelectCursorPos();
     return FALSE;
 }
 
-static bool8 ECInterfaceCmd_19(void)
+static bool8 ECCmd_WordSelectScrollDown(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        UpdateWin2PrintWordsScrollDown();
-        sEasyChatGraphicsResources->state++;
+        PrintWordSelectNextRowDown();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            ScheduleBg2VerticalScroll(1, 2);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowScroll(1, 2);
+            sScreenControl->funcState++;
         }
         break;
     case 2:
-        if (!AnimateBg2VerticalScroll())
+        if (!UpdateLowerWindowScroll())
         {
-            SetSelectWordCursorSpritePos();
-            UpdateVerticalScrollArrowVisibility();
-            UpdateStartSelectButtonSpriteVisibility();
-            sEasyChatGraphicsResources->state++;
+            UpdateWordSelectCursorPos();
+            UpdateScrollIndicatorsVisibility();
+            UpdateStartSelectButtonsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1171,27 +1277,27 @@ static bool8 ECInterfaceCmd_19(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_18(void)
+static bool8 ECCmd_WordSelectScrollUp(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        UpdateWin2PrintWordsScrollUp();
-        sEasyChatGraphicsResources->state++;
+        PrintWordSelectNextRowUp();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            ScheduleBg2VerticalScroll(-1, 2);
-            sEasyChatGraphicsResources->state++;
+            InitLowerWindowScroll(-1, 2);
+            sScreenControl->funcState++;
         }
         break;
     case 2:
-        if (!AnimateBg2VerticalScroll())
+        if (!UpdateLowerWindowScroll())
         {
-            UpdateVerticalScrollArrowVisibility();
-            UpdateStartSelectButtonSpriteVisibility();
-            sEasyChatGraphicsResources->state++;
+            UpdateScrollIndicatorsVisibility();
+            UpdateStartSelectButtonsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1202,29 +1308,29 @@ static bool8 ECInterfaceCmd_18(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_21(void)
+static bool8 ECCmd_WordSelectPageScrollDown(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        UpdateWin2PrintWordsScrollPageDown();
-        sEasyChatGraphicsResources->state++;
+        PrintWordSelectRowsPageDown();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            s16 direction = GetECSelectWordRowsAbove() - GetBg2ScrollRow();
-            ScheduleBg2VerticalScroll(direction, 4);
-            sEasyChatGraphicsResources->state++;
+            s16 direction = GetWordSelectScrollOffset() - GetLowerWindowScrollOffset();
+            InitLowerWindowScroll(direction, 4);
+            sScreenControl->funcState++;
         }
         break;
     case 2:
-        if (!AnimateBg2VerticalScroll())
+        if (!UpdateLowerWindowScroll())
         {
-            SetSelectWordCursorSpritePos();
-            UpdateVerticalScrollArrowVisibility();
-            UpdateStartSelectButtonSpriteVisibility();
-            sEasyChatGraphicsResources->state++;
+            UpdateWordSelectCursorPos();
+            UpdateScrollIndicatorsVisibility();
+            UpdateStartSelectButtonsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1235,28 +1341,28 @@ static bool8 ECInterfaceCmd_21(void)
     return TRUE;
 }
 
-static bool8 ECInterfaceCmd_20(void)
+static bool8 ECCmd_WordSelectPageScrollUp(void)
 {
-    switch (sEasyChatGraphicsResources->state)
+    switch (sScreenControl->funcState)
     {
     case 0:
-        UpdateWin2PrintWordsScrollPageUp();
-        sEasyChatGraphicsResources->state++;
+        PrintWordSelectRowsPageUp();
+        sScreenControl->funcState++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            s16 direction = GetECSelectWordRowsAbove() - GetBg2ScrollRow();
-            ScheduleBg2VerticalScroll(direction, 4);
-            sEasyChatGraphicsResources->state++;
+            s16 direction = GetWordSelectScrollOffset() - GetLowerWindowScrollOffset();
+            InitLowerWindowScroll(direction, 4);
+            sScreenControl->funcState++;
         }
         break;
     case 2:
-        if (!AnimateBg2VerticalScroll())
+        if (!UpdateLowerWindowScroll())
         {
-            UpdateVerticalScrollArrowVisibility();
-            UpdateStartSelectButtonSpriteVisibility();
-            sEasyChatGraphicsResources->state++;
+            UpdateScrollIndicatorsVisibility();
+            UpdateStartSelectButtonsVisibility();
+            sScreenControl->funcState++;
             return FALSE;
         }
         break;
@@ -1267,23 +1373,23 @@ static bool8 ECInterfaceCmd_20(void)
     return TRUE;
 }
 
-static bool8 InitEasyChatGraphicsWork_Internal(void)
+static bool8 InitEasyChatScreenControl_(void)
 {
-    sEasyChatGraphicsResources = Alloc(sizeof(*sEasyChatGraphicsResources));
-    if (sEasyChatGraphicsResources == NULL)
+    sScreenControl = Alloc(sizeof(*sScreenControl));
+    if (sScreenControl == NULL)
         return FALSE;
 
-    sEasyChatGraphicsResources->state = 0;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite = NULL;
-    sEasyChatGraphicsResources->rectCursorSpriteRight = NULL;
-    sEasyChatGraphicsResources->rectCursorSpriteLeft = NULL;
-    sEasyChatGraphicsResources->selectWordCursorSprite = NULL;
-    sEasyChatGraphicsResources->selectGroupHelpSprite = NULL;
-    sEasyChatGraphicsResources->modeIconsSprite = NULL;
-    sEasyChatGraphicsResources->upTriangleCursorSprite = NULL;
-    sEasyChatGraphicsResources->downTriangleCursorSprite = NULL;
-    sEasyChatGraphicsResources->startPgUpButtonSprite = NULL;
-    sEasyChatGraphicsResources->selectPgDnButtonSprite = NULL;
+    sScreenControl->funcState = 0;
+    sScreenControl->mainCursorSprite = NULL;
+    sScreenControl->rectangleCursorSpriteRight = NULL;
+    sScreenControl->rectangleCursorSpriteLeft = NULL;
+    sScreenControl->wordSelectCursorSprite = NULL;
+    sScreenControl->buttonWindowSprite = NULL;
+    sScreenControl->modeWindowSprite = NULL;
+    sScreenControl->scrollIndicatorUpSprite = NULL;
+    sScreenControl->scrollIndicatorDownSprite = NULL;
+    sScreenControl->startButtonSprite = NULL;
+    sScreenControl->selectButtonSprite = NULL;
     return TRUE;
 }
 
@@ -1304,35 +1410,35 @@ static void LoadEasyChatPals(void)
 {
     ResetPaletteFade();
     LoadPalette(gEasyChatMode_Pal, 0, 32);
-    LoadPalette(gUnknown_843F76C,  1 * 16, 32);
-    LoadPalette(gUnknown_843F78C,  4 * 16, 32);
-    LoadPalette(gUnknown_843F874, 10 * 16, 8);
-    LoadPalette(gUnknown_843F87C, 11 * 16, 10);
-    LoadPalette(gUnknown_843F87C, 15 * 16, 10);
-    LoadPalette(gUnknown_843F87C,  3 * 16, 10);
+    LoadPalette(sTextInputFrameOrange_Pal, 1 * 16, 32);
+    LoadPalette(sTextInputFrameGreen_Pal, 4 * 16, 32);
+    LoadPalette(sTitleText_Pal, 10 * 16, 8);
+    LoadPalette(sText_Pal, 11 * 16, 10);
+    LoadPalette(sText_Pal, 15 * 16, 10);
+    LoadPalette(sText_Pal, 3 * 16, 10);
 }
 
-static void PrintTitleText(void)
+static void EC_PrintTitle(void)
 {
     int xOffset;
     const u8 *titleText = GetTitleText();
     if (titleText == NULL)
         return;
 
-    xOffset = (128 - GetStringWidth(1, titleText, 0)) / 2u;
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    xOffset = PRINT_X_CENTER_ALIGN(titleText, 0, 128, 1, 0);
+    FillWindowPixelBuffer(ECWIN_TITLE, PIXEL_FILL(0));
+    PrintEasyChatTextWithColors(ECWIN_TITLE, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    PutWindowTilemap(ECWIN_TITLE);
+    CopyWindowToVram(ECWIN_TITLE, COPYWIN_BOTH);
 }
 
-static void EC_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+static void PrintEasyChatText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     if (fontId == 1) y += 2;
     AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
 }
 
-static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8 bg, u8 fg, u8 shadow)
+static void PrintEasyChatTextWithColors(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8 bg, u8 fg, u8 shadow)
 {
     u8 color[3];
     if (fontId == 1) y += 2;
@@ -1342,52 +1448,52 @@ static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *st
     AddTextPrinterParameterized3(windowId, fontId, x, y, color, speed, str);
 }
 
-static void PrintECInstructionsText(void)
+static void EC_PrintInitialInstructions(void)
 {
-    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    TextWindow_SetUserSelectedFrame(1, 1, 0xE0);
-    DrawTextBorderOuter(1, 1, 14);
-    PrintECInterfaceTextById(0);
-    PutWindowTilemap(1);
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 0x11);
+    TextWindow_SetUserSelectedFrame(ECWIN_INSTRUCTIONS, 1, 0xE0);
+    DrawTextBorderOuter(ECWIN_INSTRUCTIONS, 1, 0xE);
+    PrintEasyChatStdMessage(MSG_INSTRUCTIONS);
+    PutWindowTilemap(ECWIN_INSTRUCTIONS);
     CopyBgTilemapBufferToVram(0);
 }
 
-static void PrintECInterfaceTextById(u8 direction)
+static void PrintEasyChatStdMessage(u8 message)
 {
     const u8 *text2 = NULL;
     const u8 *text1 = NULL;
-    switch (direction)
+    switch (message)
     {
-    case 0:
+    case MSG_INSTRUCTIONS:
         GetEasyChatInstructionsText(&text1, &text2);
         break;
-    case 2:
+    case MSG_CONFIRM_EXIT:
         GetEasyChatConfirmCancelText(&text1, &text2);
         break;
-    case 3:
+    case MSG_CONFIRM:
         GetEasyChatConfirmText(&text1, &text2);
         break;
-    case 1:
+    case MSG_CONFIRM_DELETE:
         GetEasyChatConfirmDeletionText(&text1, &text2);
         break;
     }
 
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
+    FillWindowPixelBuffer(ECWIN_INSTRUCTIONS, PIXEL_FILL(1));
     if (text1)
-        EC_AddTextPrinterParameterized(1, 1, text1, 0, 0, TEXT_SPEED_FF, NULL);
+        PrintEasyChatText(ECWIN_INSTRUCTIONS, 1, text1, 0, 0, TEXT_SPEED_FF, NULL);
 
     if (text2)
-        EC_AddTextPrinterParameterized(1, 1, text2, 0, 16, TEXT_SPEED_FF, NULL);
+        PrintEasyChatText(ECWIN_INSTRUCTIONS, 1, text2, 0, 16, TEXT_SPEED_FF, NULL);
 
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    CopyWindowToVram(ECWIN_INSTRUCTIONS, COPYWIN_BOTH);
 }
 
-static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos)
+static void CreateEasyChatYesNoMenu(u8 initialCursorPos)
 {
-    CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, 1, 0, 2, 0x001, 14, initialCursorPos);
+    CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, 1, 0, 2, 0x001, 0xE, initialCursorPos);
 }
 
-static void CreatePhraseFrameWindow(void)
+static void AddPhraseWindow(void)
 {
     u8 frameId;
     struct WindowTemplate template;
@@ -1398,13 +1504,13 @@ static void CreatePhraseFrameWindow(void)
     template.tilemapTop = sPhraseFrameDimensions[frameId].top;
     template.width = sPhraseFrameDimensions[frameId].width;
     template.height = sPhraseFrameDimensions[frameId].height;
-    template.paletteNum = 11;
+    template.paletteNum = 0xB;
     template.baseBlock = 0x060;
-    sEasyChatGraphicsResources->windowId = AddWindow(&template);
-    PutWindowTilemap(sEasyChatGraphicsResources->windowId);
+    sScreenControl->windowId = AddWindow(&template);
+    PutWindowTilemap(sScreenControl->windowId);
 }
 
-static void PrintECFields(void)
+static void EC_PrintCurrentPhrase(void)
 {
     u16 *ecWord;
     u8 numColumns, numRows;
@@ -1416,10 +1522,10 @@ static void PrintECFields(void)
     numColumns = GetNumColumns();
     numRows = GetNumRows();
     frameId = GetEasyChatScreenFrameId();
-    FillWindowPixelBuffer(sEasyChatGraphicsResources->windowId, PIXEL_FILL(1));
+    FillWindowPixelBuffer(sScreenControl->windowId, PIXEL_FILL(1));
     for (i = 0; i < numRows; i++)
     {
-        str = sEasyChatGraphicsResources->ecPrintBuffer;
+        str = sScreenControl->phrasePrintBuffer;
         str[0] = EOS;
         str = StringAppend(str, sText_Clear17);
         for (j = 0; j < numColumns; j++)
@@ -1451,13 +1557,14 @@ static void PrintECFields(void)
         }
 
         *str = EOS;
-        EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, 1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SPEED_FF, NULL);
+        PrintEasyChatText(sScreenControl->windowId, 1, sScreenControl->phrasePrintBuffer, 0, i * 16, TEXT_SPEED_FF,
+                          NULL);
     }
 
-    CopyWindowToVram(sEasyChatGraphicsResources->windowId, COPYWIN_BOTH);
+    CopyWindowToVram(sScreenControl->windowId, COPYWIN_BOTH);
 }
 
-static void DrawECFrameInTilemapBuffer(u16 *tilemap)
+static void BufferFrameTilemap(u16 *tilemap)
 {
     u8 frameId;
     int right, bottom;
@@ -1514,16 +1621,16 @@ static void DrawECFrameInTilemapBuffer(u16 *tilemap)
     }
 }
 
-static void PutWin2TilemapAndCopyToVram(void)
+static void EC_DrawLowerWindow(void)
 {
-    PutWindowTilemap(2);
+    PutWindowTilemap(ECWIN_LOWER);
     CopyBgTilemapBufferToVram(2);
 }
 
-static void PrintECMenuById(u32 id)
+static void InitLowerWindowText(u32 id)
 {
-    InitBg2Scroll();
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
+    ResetLowerWindowScroll();
+    FillWindowPixelBuffer(ECWIN_LOWER, PIXEL_FILL(1));
     switch (id)
     {
     case 0:
@@ -1537,15 +1644,15 @@ static void PrintECMenuById(u32 id)
         break;
     }
 
-    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(ECWIN_LOWER, COPYWIN_GFX);
 }
 
-static void PrintECGroupOrAlphaMenu(void)
+static void PrintKeyboardText(void)
 {
     if (!IsEasyChatAlphaMode())
-        PrintECMenuById(0);
+        InitLowerWindowText(0);
     else
-        PrintECMenuById(1);
+        InitLowerWindowText(1);
 }
 
 static void PrintECGroupsMenu(void)
@@ -1562,11 +1669,11 @@ static void PrintECGroupsMenu(void)
             u8 groupId = GetSelectedGroupByIndex(i++);
             if (groupId == EC_NUM_GROUPS)
             {
-                ScheduleBg2VerticalScroll(GetECSelectGroupRowsAbove(), 0);
+                InitLowerWindowScroll(GetECSelectGroupRowsAbove(), 0);
                 return;
             }
 
-            EC_AddTextPrinterParameterized(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
+            PrintEasyChatText(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
         }
 
         y += 16;
@@ -1578,31 +1685,31 @@ static void PrintEasyChatKeyboardText(void)
     u32 i;
 
     for (i = 0; i < NELEMS(sEasyChatKeyboardText); i++)
-        EC_AddTextPrinterParameterized(2, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SPEED_FF, NULL);
+        PrintEasyChatText(ECWIN_LOWER, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SPEED_FF, NULL);
 }
 
 static void PrintECWordsMenu(void)
 {
-    PrintECRowsWin2(0, 4);
+    PrintWordSelectText(0, 4);
 }
 
-static void UpdateWin2PrintWordsScrollDown(void)
+static void PrintWordSelectNextRowDown(void)
 {
-    u8 rowsAbove = GetECSelectWordRowsAbove() + 3;
-    ClearECRowsWin2(rowsAbove, 1);
-    PrintECRowsWin2(rowsAbove, 1);
+    u8 rowsAbove = GetWordSelectScrollOffset() + 3;
+    EraseWordSelectRows(rowsAbove, 1);
+    PrintWordSelectText(rowsAbove, 1);
 }
 
-static void UpdateWin2PrintWordsScrollUp(void)
+static void PrintWordSelectNextRowUp(void)
 {
-    u8 rowsAbove = GetECSelectWordRowsAbove();
-    ClearECRowsWin2(rowsAbove, 1);
-    PrintECRowsWin2(rowsAbove, 1);
+    u8 rowsAbove = GetWordSelectScrollOffset();
+    EraseWordSelectRows(rowsAbove, 1);
+    PrintWordSelectText(rowsAbove, 1);
 }
 
-static void UpdateWin2PrintWordsScrollPageDown(void)
+static void PrintWordSelectRowsPageDown(void)
 {
-    u8 row = GetECSelectWordRowsAbove();
+    u8 row = GetWordSelectScrollOffset();
     u8 maxrow = row + 4;
     u8 numrowsplus1 = GetECSelectWordNumRows() + 1;
     if (maxrow > numrowsplus1)
@@ -1611,58 +1718,59 @@ static void UpdateWin2PrintWordsScrollPageDown(void)
     if (row < maxrow)
     {
         u8 remrow = maxrow - row;
-        ClearECRowsWin2(row, remrow);
-        PrintECRowsWin2(row, remrow);
+        EraseWordSelectRows(row, remrow);
+        PrintWordSelectText(row, remrow);
     }
 }
 
-static void UpdateWin2PrintWordsScrollPageUp(void)
+static void PrintWordSelectRowsPageUp(void)
 {
-    u8 row = GetECSelectWordRowsAbove();
-    u8 maxrow = GetBg2ScrollRow();
-    if (row < maxrow)
+    u8 wordScroll = GetWordSelectScrollOffset();
+    u8 windowScroll = GetLowerWindowScrollOffset();
+    if (wordScroll < windowScroll)
     {
-        u8 remrow = maxrow - row;
-        ClearECRowsWin2(row, remrow);
-        PrintECRowsWin2(row, remrow);
+        u8 numRows = windowScroll - wordScroll;
+        EraseWordSelectRows(wordScroll, numRows);
+        PrintWordSelectText(wordScroll, numRows);
     }
 }
 
-static void PrintECRowsWin2(u8 row, u8 remrow)
+// Print the easy chat words available for selection in
+// the currently selected group and at the given offset and row
+static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
 {
     int i, j;
     u16 easyChatWord;
-    u8 *str;
     int y;
     u8 y_;
-    int ecWordIdx;
+    int wordIndex;
 
-    ecWordIdx = row * 2;
-    y = (row * 16 + 96) & 0xFF;
+    wordIndex = scrollOffset * 2;
+    y = (scrollOffset * 16 + 96) & 0xFF;
 
-    for (i = 0; i < remrow; i++)
+    for (i = 0; i < numRows; i++)
     {
         for (j = 0; j < 2; j++)
         {
             // FIXME: Dumb trick needed to match
             y_ = y << 18 >> 18;
-            easyChatWord = GetDisplayedWordByIndex(ecWordIdx++);
+            easyChatWord = GetWordFromSelectedGroup(wordIndex++);
             if (easyChatWord != 0xFFFF)
             {
 
-                CopyEasyChatWordPadded(sEasyChatGraphicsResources->ecPaddedWordBuffer, easyChatWord, 0);
+                CopyEasyChatWordPadded(sScreenControl->wordSelectPrintBuffer, easyChatWord, 0);
 
-                EC_AddTextPrinterParameterized(2, 1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SPEED_FF, NULL);
+                PrintEasyChatText(ECWIN_LOWER, 1, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y_, TEXT_SPEED_FF, NULL);
             }
         }
-        y += 16;
 
+        y += 16;
     }
 
-    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(ECWIN_LOWER, COPYWIN_GFX);
 }
 
-static void ClearECRowsWin2(u8 row, u8 remrow)
+static void EraseWordSelectRows(u8 row, u8 remrow)
 {
     int y;
     int totalHeight;
@@ -1682,65 +1790,65 @@ static void ClearECRowsWin2(u8 row, u8 remrow)
         heightWrappedAround = 0;
     }
 
-    FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, heightToBottom);
+    FillWindowPixelRect(ECWIN_LOWER, PIXEL_FILL(1), 0, y, 224, heightToBottom);
     if (heightWrappedAround)
-        FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, heightWrappedAround);
+        FillWindowPixelRect(ECWIN_LOWER, PIXEL_FILL(1), 0, 0, 224, heightWrappedAround);
 }
 
-static void ClearWin2AndCopyToVram(void)
+static void ClearWordSelectWindow(void)
 {
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    CopyWindowToVram(2, COPYWIN_GFX);
+    FillWindowPixelBuffer(ECWIN_LOWER, PIXEL_FILL(1));
+    CopyWindowToVram(ECWIN_LOWER, COPYWIN_GFX);
 }
 
-static void StartWin2FrameAnim(int animNo)
+static void InitLowerWindowAnim(int animNo)
 {
     switch (animNo)
     {
-    case 0:
-        sEasyChatGraphicsResources->frameAnimIdx = 0;
-        sEasyChatGraphicsResources->frameAnimTarget = 10;
+    case WINANIM_OPEN_KEYBOARD:
+        sScreenControl->curWindowAnimState = 0;
+        sScreenControl->destWindowAnimState = 10;
         break;
-    case 1:
-        sEasyChatGraphicsResources->frameAnimIdx = 9;
-        sEasyChatGraphicsResources->frameAnimTarget = 0;
+    case WINANIM_CLOSE_KEYBOARD:
+        sScreenControl->curWindowAnimState = 9;
+        sScreenControl->destWindowAnimState = 0;
         break;
-    case 2:
-        sEasyChatGraphicsResources->frameAnimIdx = 11;
-        sEasyChatGraphicsResources->frameAnimTarget = 17;
+    case WINANIM_OPEN_WORD_SELECT:
+        sScreenControl->curWindowAnimState = 11;
+        sScreenControl->destWindowAnimState = 17;
         break;
-    case 3:
-        sEasyChatGraphicsResources->frameAnimIdx = 17;
-        sEasyChatGraphicsResources->frameAnimTarget = 0;
+    case WINANIM_CLOSE_WORD_SELECT:
+        sScreenControl->curWindowAnimState = 17;
+        sScreenControl->destWindowAnimState = 0;
         break;
-    case 4:
-        sEasyChatGraphicsResources->frameAnimIdx = 17;
-        sEasyChatGraphicsResources->frameAnimTarget = 10;
+    case WINANIM_RETURN_TO_KEYBOARD:
+        sScreenControl->curWindowAnimState = 17;
+        sScreenControl->destWindowAnimState = 10;
         break;
-    case 5:
-        sEasyChatGraphicsResources->frameAnimIdx = 18;
-        sEasyChatGraphicsResources->frameAnimTarget = 22;
+    case WINANIM_KEYBOARD_SWITCH_OUT:
+        sScreenControl->curWindowAnimState = 18;
+        sScreenControl->destWindowAnimState = 22;
         break;
-    case 6:
-        sEasyChatGraphicsResources->frameAnimIdx = 22;
-        sEasyChatGraphicsResources->frameAnimTarget = 18;
+    case WINANIM_KEYBOARD_SWITCH_IN:
+        sScreenControl->curWindowAnimState = 22;
+        sScreenControl->destWindowAnimState = 18;
         break;
     }
 
-    sEasyChatGraphicsResources->frameAnimDelta = sEasyChatGraphicsResources->frameAnimIdx < sEasyChatGraphicsResources->frameAnimTarget ? 1 : -1;
+    sScreenControl->windowAnimStateDir = sScreenControl->curWindowAnimState < sScreenControl->destWindowAnimState ? 1 : -1;
 }
 
-static bool8 AnimateFrameResize(void)
+static bool8 UpdateLowerWindowAnim(void)
 {
-    if (sEasyChatGraphicsResources->frameAnimIdx == sEasyChatGraphicsResources->frameAnimTarget)
+    if (sScreenControl->curWindowAnimState == sScreenControl->destWindowAnimState)
         return FALSE;
 
-    sEasyChatGraphicsResources->frameAnimIdx += sEasyChatGraphicsResources->frameAnimDelta;
-    RedrawFrameByIndex(sEasyChatGraphicsResources->frameAnimIdx);
-    return sEasyChatGraphicsResources->frameAnimIdx != sEasyChatGraphicsResources->frameAnimTarget;
+    sScreenControl->curWindowAnimState += sScreenControl->windowAnimStateDir;
+    DrawLowerWindowFrame(sScreenControl->curWindowAnimState);
+    return sScreenControl->curWindowAnimState != sScreenControl->destWindowAnimState;
 }
 
-static void RedrawFrameByIndex(u8 direction)
+static void DrawLowerWindowFrame(u8 direction)
 {
     FillBgTilemapBufferRect_Palette0(1, 0, 0, 10, 30, 10);
     switch (direction)
@@ -1748,84 +1856,84 @@ static void RedrawFrameByIndex(u8 direction)
     case 0:
         break;
     case 1:
-        RedrawFrameByRect(11, 14, 3, 2);
+        BufferLowerWindowFrame(11, 14, 3, 2);
         break;
     case 2:
-        RedrawFrameByRect(9, 14, 7, 2);
+        BufferLowerWindowFrame(9, 14, 7, 2);
         break;
     case 3:
-        RedrawFrameByRect(7, 14, 11, 2);
+        BufferLowerWindowFrame(7, 14, 11, 2);
         break;
     case 4:
-        RedrawFrameByRect(5, 14, 15, 2);
+        BufferLowerWindowFrame(5, 14, 15, 2);
         break;
     case 5:
-        RedrawFrameByRect(3, 14, 19, 2);
+        BufferLowerWindowFrame(3, 14, 19, 2);
         break;
     case 6:
-        RedrawFrameByRect(1, 14, 23, 2);
+        BufferLowerWindowFrame(1, 14, 23, 2);
         break;
     case 7:
-        RedrawFrameByRect(1, 13, 23, 4);
+        BufferLowerWindowFrame(1, 13, 23, 4);
         break;
     case 8:
-        RedrawFrameByRect(1, 12, 23, 6);
+        BufferLowerWindowFrame(1, 12, 23, 6);
         break;
     case 9:
-        RedrawFrameByRect(1, 11, 23, 8);
+        BufferLowerWindowFrame(1, 11, 23, 8);
         break;
     case 10:
-        RedrawFrameByRect(1, 10, 23, 10);
+        BufferLowerWindowFrame(1, 10, 23, 10);
         break;
     case 11:
-        RedrawFrameByRect(1, 10, 24, 10);
+        BufferLowerWindowFrame(1, 10, 24, 10);
         break;
     case 12:
-        RedrawFrameByRect(1, 10, 25, 10);
+        BufferLowerWindowFrame(1, 10, 25, 10);
         break;
     case 13:
-        RedrawFrameByRect(1, 10, 26, 10);
+        BufferLowerWindowFrame(1, 10, 26, 10);
         break;
     case 14:
-        RedrawFrameByRect(1, 10, 27, 10);
+        BufferLowerWindowFrame(1, 10, 27, 10);
         break;
     case 15:
-        RedrawFrameByRect(1, 10, 28, 10);
+        BufferLowerWindowFrame(1, 10, 28, 10);
         break;
     case 16:
-        RedrawFrameByRect(1, 10, 29, 10);
+        BufferLowerWindowFrame(1, 10, 29, 10);
         break;
     case 17:
-        RedrawFrameByRect(0, 10, 30, 10);
+        BufferLowerWindowFrame(0, 10, 30, 10);
         break;
     case 18:
-        RedrawFrameByRect(1, 10, 23, 10);
+        BufferLowerWindowFrame(1, 10, 23, 10);
         break;
     case 19:
-        RedrawFrameByRect(1, 11, 23, 8);
+        BufferLowerWindowFrame(1, 11, 23, 8);
         break;
     case 20:
-        RedrawFrameByRect(1, 12, 23, 6);
+        BufferLowerWindowFrame(1, 12, 23, 6);
         break;
     case 21:
-        RedrawFrameByRect(1, 13, 23, 4);
+        BufferLowerWindowFrame(1, 13, 23, 4);
         break;
     case 22:
-        RedrawFrameByRect(1, 14, 23, 2);
+        BufferLowerWindowFrame(1, 14, 23, 2);
         break;
     }
 
     CopyBgTilemapBufferToVram(1);
 }
 
-static void RedrawFrameByRect(int left, int top, int width, int height)
+static void BufferLowerWindowFrame(int left, int top, int width, int height)
 {
     u16 *tilemap;
     int right;
     int bottom;
     int x, y;
 
-    tilemap = sEasyChatGraphicsResources->bg1TilemapBuffer;
+    tilemap = sScreenControl->bg1TilemapBuffer;
     right = left + width - 1;
     bottom = top + height - 1;
     x = left;
@@ -1853,30 +1961,30 @@ static void RedrawFrameByRect(int left, int top, int width, int height)
         tilemap[y * 32 + x] = 0x400A;
 
     tilemap[y * 32 + x] = 0x400B;
-    SetRegWin0Coords((left + 1) * 8, (top + 1) * 8, (width - 2) * 8, (height - 2) * 8);
+    SetWindowDimensions((left + 1) * 8, (top + 1) * 8, (width - 2) * 8, (height - 2) * 8);
 }
 
-static void InitBg2Scroll(void)
+static void ResetLowerWindowScroll(void)
 {
     ChangeBgY(2, 0x800, 0);
-    sEasyChatGraphicsResources->bg2ScrollRow = 0;
+    sScreenControl->scrollOffset = 0;
 }
 
-static void ScheduleBg2VerticalScroll(s16 direction, u8 speed)
+static void InitLowerWindowScroll(s16 direction, u8 speed)
 {
     int bgY;
     s16 totalDelta;
 
     bgY = GetBgY(2);
-    sEasyChatGraphicsResources->bg2ScrollRow += direction;
+    sScreenControl->scrollOffset += direction;
     totalDelta = direction * 16;
     bgY += totalDelta << 8;
     if (speed)
     {
-        sEasyChatGraphicsResources->tgtBgY = bgY;
-        sEasyChatGraphicsResources->deltaBgY = speed * 256;
+        sScreenControl->scrollDest = bgY;
+        sScreenControl->scrollSpeed = speed * 256;
         if (totalDelta < 0)
-            sEasyChatGraphicsResources->deltaBgY = -sEasyChatGraphicsResources->deltaBgY;
+            sScreenControl->scrollSpeed = -sScreenControl->scrollSpeed;
     }
     else
     {
@@ -1884,28 +1992,28 @@ static void ScheduleBg2VerticalScroll(s16 direction, u8 speed)
     }
 }
 
-static bool8 AnimateBg2VerticalScroll(void)
+static bool8 UpdateLowerWindowScroll(void)
 {
     int bgY;
 
     bgY = GetBgY(2);
-    if (bgY == sEasyChatGraphicsResources->tgtBgY)
+    if (bgY == sScreenControl->scrollDest)
     {
         return FALSE;
     }
     else
     {
-        ChangeBgY(2, sEasyChatGraphicsResources->deltaBgY, 1);
+        ChangeBgY(2, sScreenControl->scrollSpeed, 1);
         return TRUE;
     }
 }
 
-static int GetBg2ScrollRow(void)
+static int GetLowerWindowScrollOffset(void)
 {
-    return sEasyChatGraphicsResources->bg2ScrollRow;
+    return sScreenControl->scrollOffset;
 }
 
-static void SetRegWin0Coords(u8 left, u8 top, u8 width, u8 height)
+static void SetWindowDimensions(u8 left, u8 top, u8 width, u8 height)
 {
     u16 horizontalDimensions = WIN_RANGE(left, left + width);
     u16 verticalDimensions = WIN_RANGE(top, top + height);
@@ -1913,87 +2021,90 @@ static void SetRegWin0Coords(u8 left, u8 top, u8 width, u8 height)
     SetGpuReg(REG_OFFSET_WIN0V, verticalDimensions);
 }
 
-static void LoadSpriteGfx(void)
+static void LoadEasyChatGfx(void)
 {
     u32 i;
 
     LoadSpriteSheets(sEasyChatSpriteSheets);
-    LoadSpritePalettes(sEasyChatSpritePalettes);
-    for (i = 0; i < NELEMS(sEasyChatCompressedSpriteSheets); i++)
-        LoadCompressedSpriteSheet(&sEasyChatCompressedSpriteSheets[i]);
+    LoadSpritePalettes(sSpritePalettes);
+    for (i = 0; i < NELEMS(sCompressedSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sCompressedSpriteSheets[i]);
 }
 
-static void CreateSelectDestFieldCursorSprite(void)
+#define sDelayTimer    data[0]
+#define sAnimateCursor data[1]
+
+static void EC_CreateMainCursorSprite(void)
 {
     u8 frameId = GetEasyChatScreenFrameId();
     s16 x = sPhraseFrameDimensions[frameId].left * 8 + 13;
     s16 y = (sPhraseFrameDimensions[frameId].top + 1) * 8 + 1;
-    u8 spriteId = CreateSprite(&sSpriteTemplate_RightTriangleCursor, x, y, 2);
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite = &gSprites[spriteId];
-    gSprites[spriteId].data[1] = 1;
+    u8 spriteId = CreateSprite(&sSpriteTemplate_TriangleCursor, x, y, 2);
+    sScreenControl->mainCursorSprite = &gSprites[spriteId];
+    gSprites[spriteId].sAnimateCursor = TRUE;
 }
 
 static void SpriteCB_BounceCursor(struct Sprite * sprite)
 {
-    if (sprite->data[1])
+    if (sprite->sAnimateCursor)
     {
-        if (++sprite->data[0] > 2)
+        if (++sprite->sDelayTimer > 2)
         {
-            sprite->data[0] = 0;
+            sprite->sDelayTimer = 0;
             if (++sprite->pos2.x > 0)
                 sprite->pos2.x = -6;
         }
     }
 }
 
-static void SetSelectDestFieldCursorSpritePosAndResetAnim(u8 x, u8 y)
+static void EC_SetMainCursorPos(u8 x, u8 y)
 {
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos1.x = x;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos1.y = y;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos2.x = 0;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[0] = 0;
+    sScreenControl->mainCursorSprite->pos1.x = x;
+    sScreenControl->mainCursorSprite->pos1.y = y;
+    sScreenControl->mainCursorSprite->pos2.x = 0;
+    sScreenControl->mainCursorSprite->sDelayTimer = 0;
 }
 
-static void FreezeSelectDestFieldCursorSprite(void)
+static void StopMainCursorAnim(void)
 {
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[0] = 0;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[1] = 0;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos2.x = 0;
+    sScreenControl->mainCursorSprite->sDelayTimer = 0;
+    sScreenControl->mainCursorSprite->sAnimateCursor = FALSE;
+    sScreenControl->mainCursorSprite->pos2.x = 0;
 }
 
-static void UnfreezeSelectDestFieldCursorSprite(void)
+static void StartMainCursorAnim(void)
 {
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[1] = 1;
+    sScreenControl->mainCursorSprite->sAnimateCursor = TRUE;
 }
 
-static void CreateRedRectangularCursorSpritePair(void)
+static void CreateRectangleCursorSprites(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
-    sEasyChatGraphicsResources->rectCursorSpriteRight = &gSprites[spriteId];
-    sEasyChatGraphicsResources->rectCursorSpriteRight->pos2.x = 32;
+    sScreenControl->rectangleCursorSpriteRight = &gSprites[spriteId];
+    sScreenControl->rectangleCursorSpriteRight->pos2.x = 32;
 
     spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
-    sEasyChatGraphicsResources->rectCursorSpriteLeft = &gSprites[spriteId];
-    sEasyChatGraphicsResources->rectCursorSpriteLeft->pos2.x = -32;
+    sScreenControl->rectangleCursorSpriteLeft = &gSprites[spriteId];
+    sScreenControl->rectangleCursorSpriteLeft->pos2.x = -32;
 
-    sEasyChatGraphicsResources->rectCursorSpriteRight->hFlip = TRUE;
-    EC_MoveCursor();
+    sScreenControl->rectangleCursorSpriteRight->hFlip = TRUE;
+    UpdateRectangleCursorPos();
 }
 
-static void DestroyRedRectangularCursor(void)
+static void DestroyRectangleCursorSprites(void)
 {
-    DestroySprite(sEasyChatGraphicsResources->rectCursorSpriteRight);
-    sEasyChatGraphicsResources->rectCursorSpriteRight = NULL;
-    DestroySprite(sEasyChatGraphicsResources->rectCursorSpriteLeft);
-    sEasyChatGraphicsResources->rectCursorSpriteLeft = NULL;
+    DestroySprite(sScreenControl->rectangleCursorSpriteRight);
+    sScreenControl->rectangleCursorSpriteRight = NULL;
+    DestroySprite(sScreenControl->rectangleCursorSpriteLeft);
+    sScreenControl->rectangleCursorSpriteLeft = NULL;
 }
 
-static void EC_MoveCursor(void)
+static void UpdateRectangleCursorPos(void)
 {
     u8 x;
     u8 y;
 
-    if (sEasyChatGraphicsResources->rectCursorSpriteRight && sEasyChatGraphicsResources->rectCursorSpriteLeft)
+    if (sScreenControl->rectangleCursorSpriteRight && sScreenControl->rectangleCursorSpriteLeft)
     {
         GetECSelectGroupCursorCoords(&x, &y);
         if (!IsEasyChatAlphaMode())
@@ -2007,23 +2118,23 @@ static void MoveCursor_Group(s8 x, s8 y)
 {
     if (x != -1)
     {
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 0);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = x * 84 + 58;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y * 16 + 96;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, 0);
+        sScreenControl->rectangleCursorSpriteRight->pos1.x = x * 84 + 58;
+        sScreenControl->rectangleCursorSpriteRight->pos1.y = y * 16 + 96;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 0);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = x * 84 + 58;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y * 16 + 96;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, 0);
+        sScreenControl->rectangleCursorSpriteLeft->pos1.x = x * 84 + 58;
+        sScreenControl->rectangleCursorSpriteLeft->pos1.y = y * 16 + 96;
     }
     else
     {
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y * 16 + 112;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, 1);
+        sScreenControl->rectangleCursorSpriteRight->pos1.x = 216;
+        sScreenControl->rectangleCursorSpriteRight->pos1.y = y * 16 + 112;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y * 16 + 112;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, 1);
+        sScreenControl->rectangleCursorSpriteLeft->pos1.x = 216;
+        sScreenControl->rectangleCursorSpriteLeft->pos1.y = y * 16 + 112;
     }
 }
 
@@ -2047,46 +2158,46 @@ static void MoveCursor_Alpha(s8 cursorX, s8 cursorY)
             anim = 3;
         }
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, anim);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = x;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, anim);
+        sScreenControl->rectangleCursorSpriteRight->pos1.x = x;
+        sScreenControl->rectangleCursorSpriteRight->pos1.y = y;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, anim);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = x;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, anim);
+        sScreenControl->rectangleCursorSpriteLeft->pos1.x = x;
+        sScreenControl->rectangleCursorSpriteLeft->pos1.y = y;
     }
     else
     {
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = cursorY * 16 + 112;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteRight, 1);
+        sScreenControl->rectangleCursorSpriteRight->pos1.x = 216;
+        sScreenControl->rectangleCursorSpriteRight->pos1.y = cursorY * 16 + 112;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = cursorY * 16 + 112;
+        StartSpriteAnim(sScreenControl->rectangleCursorSpriteLeft, 1);
+        sScreenControl->rectangleCursorSpriteLeft->pos1.x = 216;
+        sScreenControl->rectangleCursorSpriteLeft->pos1.y = cursorY * 16 + 112;
     }
 }
 
 static void CreateSelectWordCursorSprite(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_RightTriangleCursor, 0, 0, 4);
-    sEasyChatGraphicsResources->selectWordCursorSprite = &gSprites[spriteId];
-    sEasyChatGraphicsResources->selectWordCursorSprite->callback = SpriteCB_SelectWordCursorSprite;
-    sEasyChatGraphicsResources->selectWordCursorSprite->oam.priority = 2;
-    SetSelectWordCursorSpritePos();
+    u8 spriteId = CreateSprite(&sSpriteTemplate_TriangleCursor, 0, 0, 4);
+    sScreenControl->wordSelectCursorSprite = &gSprites[spriteId];
+    sScreenControl->wordSelectCursorSprite->callback = SpriteCB_SelectWordCursorSprite;
+    sScreenControl->wordSelectCursorSprite->oam.priority = 2;
+    UpdateWordSelectCursorPos();
 }
 
 static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite)
 {
-    if (++sprite->data[0] > 2)
+    if (++sprite->sDelayTimer > 2)
     {
-        sprite->data[0] = 0;
+        sprite->sDelayTimer = 0;
         if (++sprite->pos2.x > 0)
             sprite->pos2.x = -6;
     }
 }
 
-static void SetSelectWordCursorSpritePos(void)
+static void UpdateWordSelectCursorPos(void)
 {
     s8 cursorX, cursorY;
     u8 x, y;
@@ -2099,58 +2210,58 @@ static void SetSelectWordCursorSpritePos(void)
 
 static void SetSelectWordCursorSpritePosExplicit(u8 x, u8 y)
 {
-    if (sEasyChatGraphicsResources->selectWordCursorSprite)
+    if (sScreenControl->wordSelectCursorSprite)
     {
-        sEasyChatGraphicsResources->selectWordCursorSprite->pos1.x = x * 8 + 4;
-        sEasyChatGraphicsResources->selectWordCursorSprite->pos1.y = (y + 1) * 8 + 1;
-        sEasyChatGraphicsResources->selectWordCursorSprite->pos2.x = 0;
-        sEasyChatGraphicsResources->selectWordCursorSprite->data[0] = 0;
+        sScreenControl->wordSelectCursorSprite->pos1.x = x * 8 + 4;
+        sScreenControl->wordSelectCursorSprite->pos1.y = (y + 1) * 8 + 1;
+        sScreenControl->wordSelectCursorSprite->pos2.x = 0;
+        sScreenControl->wordSelectCursorSprite->sDelayTimer = 0;
     }
 }
 
 static void DestroySelectWordCursorSprite(void)
 {
-    if (sEasyChatGraphicsResources->selectWordCursorSprite)
+    if (sScreenControl->wordSelectCursorSprite)
     {
-        DestroySprite(sEasyChatGraphicsResources->selectWordCursorSprite);
-        sEasyChatGraphicsResources->selectWordCursorSprite = NULL;
+        DestroySprite(sScreenControl->wordSelectCursorSprite);
+        sScreenControl->wordSelectCursorSprite = NULL;
     }
 }
 
-static void CreateSelectGroupHelpSprite(void)
+static void CreateSideWindowSprites(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_SelectGroupHelp, 208, 128, 6);
-    sEasyChatGraphicsResources->selectGroupHelpSprite = &gSprites[spriteId];
-    sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x = -64;
+    sScreenControl->buttonWindowSprite = &gSprites[spriteId];
+    sScreenControl->buttonWindowSprite->pos2.x = -64;
 
     spriteId = CreateSprite(&sSpriteTemplate_EasyChatModeIcons, 208, 80, 5);
-    sEasyChatGraphicsResources->modeIconsSprite = &gSprites[spriteId];
-    sEasyChatGraphicsResources->modeIconState = 0;
+    sScreenControl->modeWindowSprite = &gSprites[spriteId];
+    sScreenControl->modeWindowState = 0;
 }
 
-static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void)
+static bool8 ShowSideWindow(void)
 {
-    switch (sEasyChatGraphicsResources->modeIconState)
+    switch (sScreenControl->modeWindowState)
     {
     default:
         return FALSE;
     case 0:
-        sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x += 8;
-        if (sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x >= 0)
+        sScreenControl->buttonWindowSprite->pos2.x += 8;
+        if (sScreenControl->buttonWindowSprite->pos2.x >= 0)
         {
-            sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x = 0;
+            sScreenControl->buttonWindowSprite->pos2.x = 0;
             if (!IsEasyChatAlphaMode())
-                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
+                StartSpriteAnim(sScreenControl->modeWindowSprite, 1);
             else
-                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 2);
+                StartSpriteAnim(sScreenControl->modeWindowSprite, 2);
 
-            sEasyChatGraphicsResources->modeIconState++;
+            sScreenControl->modeWindowState++;
         }
         break;
     case 1:
-        if (sEasyChatGraphicsResources->modeIconsSprite->animEnded)
+        if (sScreenControl->modeWindowSprite->animEnded)
         {
-            sEasyChatGraphicsResources->modeIconState = 2;
+            sScreenControl->modeWindowState = 2;
             return FALSE;
         }
     }
@@ -2158,31 +2269,31 @@ static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void)
     return TRUE;
 }
 
-static void StartModeIconHidingAnimation(void)
+static void HideModeWindow(void)
 {
-    sEasyChatGraphicsResources->modeIconState = 0;
-    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 3);
+    sScreenControl->modeWindowState = 0;
+    StartSpriteAnim(sScreenControl->modeWindowSprite, 3);
 }
 
 static bool8 RunModeIconHidingAnimation(void)
 {
-    switch (sEasyChatGraphicsResources->modeIconState)
+    switch (sScreenControl->modeWindowState)
     {
     default:
         return FALSE;
     case 0:
-        if (sEasyChatGraphicsResources->modeIconsSprite->animEnded)
-            sEasyChatGraphicsResources->modeIconState = 1;
+        if (sScreenControl->modeWindowSprite->animEnded)
+            sScreenControl->modeWindowState = 1;
         break;
     case 1:
-        sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x -= 8;
-        if (sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x <= -64)
+        sScreenControl->buttonWindowSprite->pos2.x -= 8;
+        if (sScreenControl->buttonWindowSprite->pos2.x <= -64)
         {
-            DestroySprite(sEasyChatGraphicsResources->modeIconsSprite);
-            DestroySprite(sEasyChatGraphicsResources->selectGroupHelpSprite);
-            sEasyChatGraphicsResources->modeIconsSprite = NULL;
-            sEasyChatGraphicsResources->selectGroupHelpSprite = NULL;
-            sEasyChatGraphicsResources->modeIconState++;
+            DestroySprite(sScreenControl->modeWindowSprite);
+            DestroySprite(sScreenControl->buttonWindowSprite);
+            sScreenControl->modeWindowSprite = NULL;
+            sScreenControl->buttonWindowSprite = NULL;
+            sScreenControl->modeWindowState++;
             return FALSE;
         }
     }
@@ -2190,65 +2301,65 @@ static bool8 RunModeIconHidingAnimation(void)
     return TRUE;
 }
 
-static void ShrinkModeIconsSprite(void)
+static void SetModeWindowToTransition(void)
 {
-    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 4);
+    StartSpriteAnim(sScreenControl->modeWindowSprite, 4);
 }
 
-static void ShowModeIconsSprite(void)
+static void UpdateModeWindowAnim(void)
 {
     if (!IsEasyChatAlphaMode())
-        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
+        StartSpriteAnim(sScreenControl->modeWindowSprite, 1);
     else
-        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 2);
+        StartSpriteAnim(sScreenControl->modeWindowSprite, 2);
 }
 
-static bool8 ModeIconsSpriteAnimIsEnded(void)
+static bool8 IsModeWindowAnimActive(void)
 {
-    return !sEasyChatGraphicsResources->modeIconsSprite->animEnded;
+    return !sScreenControl->modeWindowSprite->animEnded;
 }
 
-static void CreateVerticalScrollArrowSprites(void)
+static void CreateScrollIndicatorSprites(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_UpTriangleCursor, 96, 80, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_ScrollIndicator, 96, 80, 0);
     if (spriteId != MAX_SPRITES)
-        sEasyChatGraphicsResources->upTriangleCursorSprite = &gSprites[spriteId];
+        sScreenControl->scrollIndicatorUpSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&sSpriteTemplate_UpTriangleCursor, 96, 156, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_ScrollIndicator, 96, 156, 0);
     if (spriteId != MAX_SPRITES)
     {
-        sEasyChatGraphicsResources->downTriangleCursorSprite = &gSprites[spriteId];
-        sEasyChatGraphicsResources->downTriangleCursorSprite->vFlip = TRUE;
+        sScreenControl->scrollIndicatorDownSprite = &gSprites[spriteId];
+        sScreenControl->scrollIndicatorDownSprite->vFlip = TRUE;
     }
 
-    HideVerticalScrollArrowSprites();
+    HideScrollIndicators();
 }
 
-static void UpdateVerticalScrollArrowVisibility(void)
+static void UpdateScrollIndicatorsVisibility(void)
 {
-    sEasyChatGraphicsResources->upTriangleCursorSprite->invisible = !ShouldDrawECUpArrow();
-    sEasyChatGraphicsResources->downTriangleCursorSprite->invisible = !ShouldDrawECDownArrow();
+    sScreenControl->scrollIndicatorUpSprite->invisible = !ShouldDrawECUpArrow();
+    sScreenControl->scrollIndicatorDownSprite->invisible = !ShouldDrawECDownArrow();
 }
 
-static void HideVerticalScrollArrowSprites(void)
+static void HideScrollIndicators(void)
 {
-    sEasyChatGraphicsResources->upTriangleCursorSprite->invisible = TRUE;
-    sEasyChatGraphicsResources->downTriangleCursorSprite->invisible = TRUE;
+    sScreenControl->scrollIndicatorUpSprite->invisible = TRUE;
+    sScreenControl->scrollIndicatorDownSprite->invisible = TRUE;
 }
 
-static void UpdateVerticalScrollArrowSpriteXPos(int direction)
+static void SetScrollIndicatorXPos(int direction)
 {
     if (!direction)
     {
         // Group select
-        sEasyChatGraphicsResources->upTriangleCursorSprite->pos1.x = 96;
-        sEasyChatGraphicsResources->downTriangleCursorSprite->pos1.x = 96;
+        sScreenControl->scrollIndicatorUpSprite->pos1.x = 96;
+        sScreenControl->scrollIndicatorDownSprite->pos1.x = 96;
     }
     else
     {
         // Word select
-        sEasyChatGraphicsResources->upTriangleCursorSprite->pos1.x = 120;
-        sEasyChatGraphicsResources->downTriangleCursorSprite->pos1.x = 120;
+        sScreenControl->scrollIndicatorUpSprite->pos1.x = 120;
+        sScreenControl->scrollIndicatorDownSprite->pos1.x = 120;
     }
 }
 
@@ -2256,31 +2367,31 @@ static void CreateStartSelectButtonsSprites(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_StartSelectButtons, 220, 84, 1);
     if (spriteId != MAX_SPRITES)
-        sEasyChatGraphicsResources->startPgUpButtonSprite = &gSprites[spriteId];
+        sScreenControl->startButtonSprite = &gSprites[spriteId];
 
     spriteId = CreateSprite(&sSpriteTemplate_StartSelectButtons, 220, 156, 1);
     if (spriteId != MAX_SPRITES)
     {
-        sEasyChatGraphicsResources->selectPgDnButtonSprite = &gSprites[spriteId];
-        StartSpriteAnim(sEasyChatGraphicsResources->selectPgDnButtonSprite, 1);
+        sScreenControl->selectButtonSprite = &gSprites[spriteId];
+        StartSpriteAnim(sScreenControl->selectButtonSprite, 1);
     }
 
-    HideStartSelectButtonSprites();
+    HideStartSelectButtons();
 }
 
-static void UpdateStartSelectButtonSpriteVisibility(void)
+static void UpdateStartSelectButtonsVisibility(void)
 {
-    sEasyChatGraphicsResources->startPgUpButtonSprite->invisible = !ShouldDrawECUpArrow();
-    sEasyChatGraphicsResources->selectPgDnButtonSprite->invisible = !ShouldDrawECDownArrow();
+    sScreenControl->startButtonSprite->invisible = !ShouldDrawECUpArrow();
+    sScreenControl->selectButtonSprite->invisible = !ShouldDrawECDownArrow();
 }
 
-static void HideStartSelectButtonSprites(void)
+static void HideStartSelectButtons(void)
 {
-    sEasyChatGraphicsResources->startPgUpButtonSprite->invisible = TRUE;
-    sEasyChatGraphicsResources->selectPgDnButtonSprite->invisible = TRUE;
+    sScreenControl->startButtonSprite->invisible = TRUE;
+    sScreenControl->selectButtonSprite->invisible = TRUE;
 }
 
-static void CreateFooterWindow(void)
+static void AddMainScreenButtonWindow(void)
 {
     u16 windowId;
     struct WindowTemplate template;
@@ -2293,6 +2404,6 @@ static void CreateFooterWindow(void)
     template.baseBlock = 0x030;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    EC_AddTextPrinterParameterized(windowId, 1, gUnknown_841EE2B, 0, 0, 0, NULL);
+    PrintEasyChatText(windowId, 1, gText_DelAll_Cancel_OK, 0, 0, 0, NULL);
     PutWindowTilemap(windowId);
 }

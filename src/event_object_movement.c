@@ -8582,7 +8582,7 @@ static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprit
 
 static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
 {
-    // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
+    // First half-word is a Field Effect script currentFuncId. (gFieldEffectScriptPointers)
     u16 sandFootprints_FieldEffectData[2] = {
         FLDEFF_SAND_FOOTPRINTS,
         FLDEFF_DEEP_SAND_FOOTPRINTS

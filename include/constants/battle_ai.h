@@ -33,7 +33,7 @@
 #define MOVE_NOT_MOST_POWERFUL  1
 #define MOVE_MOST_POWERFUL      2
 
-// script's table id to bit
+// script's table currentFuncId to bit
 #define AI_SCRIPT_CHECK_BAD_MOVE (1 << 0)
 #define AI_SCRIPT_CHECK_VIABILITY (1 << 1)
 #define AI_SCRIPT_TRY_TO_FAINT (1 << 2)

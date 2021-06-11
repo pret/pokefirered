@@ -2477,14 +2477,14 @@ static void DisplayPartyPokemonDescriptionText(u8 stringId, struct PartyMenuBox 
     if (c != 0)
         menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->descTextLeft >> 3, menuBox->infoRects->descTextTop >> 3, menuBox->infoRects->descTextWidth >> 3, menuBox->infoRects->descTextHeight >> 3, TRUE);
     if (c != 2)
-        AddTextPrinterParameterized3(menuBox->windowId, 1, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], 0, sDescriptionStringTable[stringId]);
+        AddTextPrinterParameterized3(menuBox->windowId, 1, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], TEXT_SPEED_INSTANT, sDescriptionStringTable[stringId]);
 }
 
 static void PartyMenuRemoveWindow(u8 *ptr)
 {
     if (*ptr != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         RemoveWindow(*ptr);
         *ptr = 0xFF;
         ScheduleBgCopyTilemapToVram(2);

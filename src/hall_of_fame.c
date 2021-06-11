@@ -43,6 +43,17 @@
 #define tHofPc_NumMons            data[4] // Number of valid Pokemon in set
 #define tHofPc_MonSpriteIdOffs    5
 
+// Mon sprite data
+#define sSlideInAnimFinished      data[0]
+#define sSlideInAnimXDest         data[1]
+#define sSlideInAnimYDest         data[2]
+
+// ConfettiSpriteData
+#define sConfettiAngle            data[0]
+#define sConfettiYSpeed           data[1]
+
+#define GFXTAG_CONFETTI           1001
+
 #define WINID_TRAINER_INFO        1
 
 #define HOF_TXCOL_WHITE           0
@@ -161,12 +172,12 @@ static const u8 sTextColors[][4] = {
 };
 
 static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet[] = {
-    {gFile_graphics_misc_confetti_sheet, 0x220, 1001},
+    {gFile_graphics_misc_confetti_sheet, 0x220, GFXTAG_CONFETTI},
     {}
 };
 
 static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette[] = {
-    {gFile_graphics_misc_confetti_palette, 1001},
+    {gFile_graphics_misc_confetti_palette, GFXTAG_CONFETTI},
     {}
 };
 
@@ -298,8 +309,8 @@ static const union AnimCmd *const sSpriteAnimTable_Confetti[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Confetti = {
-    .tileTag = 1001,
-    .paletteTag = 1001,
+    .tileTag = GFXTAG_CONFETTI,
+    .paletteTag = GFXTAG_CONFETTI,
     .oam = &sOamData_Confetti,
     .anims = sSpriteAnimTable_Confetti,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -309,13 +320,13 @@ static const struct SpriteTemplate sSpriteTemplate_Confetti = {
 static const u16 sHallOfFame_Pal[] = INCBIN_U16("graphics/hall_of_fame/hall_of_fame.gbapal");
 static const u32 sHallOfFame_Gfx[] = INCBIN_U32("graphics/hall_of_fame/hall_of_fame.4bpp.lz");
 
-static const struct HallofFameMon sDummyHofMon = {
-    .tid = 0x03EA03EA, // (u16[]){1002, 1002} corrupted sprite template?
-    .personality = 0,
-    .species = SPECIES_NONE,
-    .lvl = 0,
-    .nick = __("          ")
+// Probably a corrupted sprite template.
+static const u16 sUnusedTags[2] = {
+    1002,
+    1002,
 };
+
+static const u8 sFiller[16] = {0};
 
 static const u8 sUnused[] = {2, 1, 3, 6, 4, 5};
 
@@ -411,22 +422,22 @@ static void Task_Hof_InitMonData(u8 taskId)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
         {
-            sHofMonPtr[0].mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-            sHofMonPtr[0].mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
-            sHofMonPtr[0].mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            sHofMonPtr[0].mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            sHofMonPtr->mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            sHofMonPtr->mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
+            sHofMonPtr->mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+            sHofMonPtr->mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
             GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
             for (j = 0; j < 10; j++)
-                sHofMonPtr[0].mon[i].nick[j] = nick[j];
+                sHofMonPtr->mon[i].nick[j] = nick[j];
             gTasks[taskId].tHof_NumMons++;
         }
         else
         {
-            sHofMonPtr[0].mon[i].species = SPECIES_NONE;
-            sHofMonPtr[0].mon[i].tid = 0;
-            sHofMonPtr[0].mon[i].personality = 0;
-            sHofMonPtr[0].mon[i].lvl = 0;
-            sHofMonPtr[0].mon[i].nick[0] = EOS;
+            sHofMonPtr->mon[i].species = SPECIES_NONE;
+            sHofMonPtr->mon[i].tid = 0;
+            sHofMonPtr->mon[i].personality = 0;
+            sHofMonPtr->mon[i].lvl = 0;
+            sHofMonPtr->mon[i].nick[0] = EOS;
         }
     }
     sSelectedPaletteIndices = 0;
@@ -511,7 +522,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     s16 dstY;
 
     u16 currMonId = gTasks[taskId].tHof_MonIdx;
-    struct HallofFameMon* currMon = &sHofMonPtr[0].mon[currMonId];
+    struct HallofFameMon* currMon = &sHofMonPtr->mon[currMonId];
 
 
     if (gTasks[taskId].tHof_NumMons > 3)
@@ -529,10 +540,10 @@ static void Task_Hof_DisplayMon(u8 taskId)
         dstY = sHallOfFame_MonHalfTeamPositions[currMonId][3];
     }
 
-    spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, 1, srcX, srcY, currMonId, 0xFFFF);
-    gSprites[spriteId].data[1] = dstX;
-    gSprites[spriteId].data[2] = dstY;
-    gSprites[spriteId].data[0] = 0;
+    spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, TRUE, srcX, srcY, currMonId, SPRITE_INVALID_TAG);
+    gSprites[spriteId].sSlideInAnimXDest = dstX;
+    gSprites[spriteId].sSlideInAnimYDest = dstY;
+    gSprites[spriteId].sSlideInAnimFinished = FALSE;
     gSprites[spriteId].callback = SpriteCB_GetOnScreen;
     gTasks[taskId].data[tHof_MonSpriteIdOffs + currMonId] = spriteId;
     ClearDialogWindowAndFrame(DLG_WINDOW_ID, TRUE);
@@ -542,8 +553,8 @@ static void Task_Hof_DisplayMon(u8 taskId)
 static void Task_Hof_PlayMonCryAndPrintInfo(u8 taskId)
 {
     u16 currMonId = gTasks[taskId].tHof_MonIdx;
-    struct HallofFameMon* currMon = &sHofMonPtr[0].mon[currMonId];
-    if (gSprites[gTasks[taskId].data[tHof_MonSpriteIdOffs + currMonId]].data[0])
+    struct HallofFameMon* currMon = &sHofMonPtr->mon[currMonId];
+    if (gSprites[gTasks[taskId].data[tHof_MonSpriteIdOffs + currMonId]].sSlideInAnimFinished)
     {
         if (currMon->species != SPECIES_EGG)
             PlayCry1(currMon->species, 0);
@@ -556,7 +567,7 @@ static void Task_Hof_PlayMonCryAndPrintInfo(u8 taskId)
 static void Task_Hof_TryDisplayAnotherMon(u8 taskId)
 {
     u16 currPokeId = gTasks[taskId].tHof_MonIdx;
-    struct HallofFameMon* currMon = &sHofMonPtr[0].mon[currPokeId];
+    struct HallofFameMon* currMon = &sHofMonPtr->mon[currPokeId];
 
     if (gTasks[taskId].tHof_DelayTimer != 0)
     {
@@ -1242,22 +1253,22 @@ static void SpriteCB_EndGetOnScreen(struct Sprite * sprite)
 
 static void SpriteCB_GetOnScreen(struct Sprite * sprite)
 {
-    if (sprite->pos1.x != sprite->data[1]
-        || sprite->pos1.y != sprite->data[2])
+    if (sprite->pos1.x != sprite->sSlideInAnimXDest
+        || sprite->pos1.y != sprite->sSlideInAnimYDest)
     {
-        if (sprite->pos1.x < sprite->data[1])
+        if (sprite->pos1.x < sprite->sSlideInAnimXDest)
             sprite->pos1.x += 15;
-        if (sprite->pos1.x > sprite->data[1])
+        if (sprite->pos1.x > sprite->sSlideInAnimXDest)
             sprite->pos1.x -= 15;
 
-        if (sprite->pos1.y < sprite->data[2])
+        if (sprite->pos1.y < sprite->sSlideInAnimYDest)
             sprite->pos1.y += 10;
-        if (sprite->pos1.y > sprite->data[2])
+        if (sprite->pos1.y > sprite->sSlideInAnimYDest)
             sprite->pos1.y -= 10;
     }
     else
     {
-        sprite->data[0] = 1;
+        sprite->sSlideInAnimFinished = TRUE;
         sprite->callback = SpriteCB_EndGetOnScreen;
     }
 }
@@ -1274,13 +1285,13 @@ static void SpriteCB_Confetti(struct Sprite* sprite)
         u8 tableID;
 
         sprite->pos2.y++;
-        sprite->pos2.y += sprite->data[1];
+        sprite->pos2.y += sprite->sConfettiYSpeed;
 
-        tableID = sprite->data[0];
+        tableID = sprite->sConfettiAngle;
         rand = (Random() % 4) + 8;
         sprite->pos2.x = rand * gSineTable[tableID] / 256;
 
-        sprite->data[0] += 4;
+        sprite->sConfettiAngle += 4;
     }
 }
 
@@ -1298,9 +1309,9 @@ static bool8 Hof_SpawnConfetti(void)
     StartSpriteAnim(sprite, Random() % 17);
 
     if (Random() & 3)
-        sprite->data[1] = 0;
+        sprite->sConfettiYSpeed = 0;
     else
-        sprite->data[1] = 1;
+        sprite->sConfettiYSpeed = 1;
 
     return FALSE;
 }

@@ -4,6 +4,10 @@
 #include "global.h"
 #include "window.h"
 
+#define MGLISTMENU_FRAME_NONE          0
+#define MGLISTMENU_FRAME_PRELOADED     1
+#define MGLISTMENU_FRAME_USER          2
+
 #define LIST_NOTHING_CHOSEN -1
 #define LIST_CANCEL -2
 #define LIST_HEADER -3
@@ -102,7 +106,7 @@ struct ListMenuWindowRect
 
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
-u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
+u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 frameType, u16 tileNum, u16 palNum);
 u8 ListMenuInit(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
 u8 ListMenuInitInRect(const struct ListMenuTemplate *listMenuTemplate, const struct ListMenuWindowRect *rect, u16 cursorPos, u16 itemsAbove);
 s32 ListMenu_ProcessInput(u8 listTaskId);

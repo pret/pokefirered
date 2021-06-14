@@ -81,18 +81,18 @@ static void ListMenuDummyTask(u8 taskId)
 {
 }
 
-u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum)
+u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 frameType, u16 tileNum, u16 palNum)
 {
     switch (sMysteryGiftLinkMenu.state)
     {
     case 0:
     default:
         sMysteryGiftLinkMenu.windowId = AddWindow(windowTemplate);
-        switch (arg2)
+        switch (frameType)
         {
-        case 2:
+        case MGLISTMENU_FRAME_USER: // Never used
             TextWindow_SetUserSelectedFrame(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
-        case 1:
+        case MGLISTMENU_FRAME_PRELOADED: // Only ever used
             DrawTextBorderOuter(sMysteryGiftLinkMenu.windowId, tileNum, palNum / 16);
             break;
         }
@@ -115,19 +115,19 @@ u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         }
         if (sMysteryGiftLinkMenu.state == 2)
         {
-            if (!arg2)
+            if (!frameType)
             {
                 ClearWindowTilemap(sMysteryGiftLinkMenu.windowId);
             }
             else
             {
-                switch (arg2)
+                switch (frameType)
                 {
-                case 0: // can never be reached, because of the if statement above
+                case MGLISTMENU_FRAME_NONE: // can never be reached, because of the if statement above
                     ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
-                case 2:
-                case 1:
+                case MGLISTMENU_FRAME_USER:
+                case MGLISTMENU_FRAME_PRELOADED:
                     ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
                 }

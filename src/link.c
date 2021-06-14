@@ -114,7 +114,7 @@ EWRAM_DATA struct {
     u32 status;
     u8 lastRecvQueueCount;
     u8 lastSendQueueCount;
-    u8 unk_06;
+    u8 isWirelessSignalError;
 } sLinkErrorBuffer = {};
 static EWRAM_DATA u16 sStartSend5FFFfailures = 0;
 static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
@@ -190,8 +190,14 @@ static const struct BgTemplate sLinkErrorBgTemplates[] = {
     }
 };
 
+enum {
+    LINKERRORWIN_0,
+    LINKERRORWIN_1,
+    LINKERRORWIN_2,
+};
+
 static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
-    {
+    [LINKERRORWIN_0] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -199,7 +205,8 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .height = 5,
         .paletteNum = 15,
         .baseBlock = 0x002
-    }, {
+    },
+    [LINKERRORWIN_1] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 6,
@@ -207,7 +214,8 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
         .height = 7,
         .paletteNum = 15,
         .baseBlock = 0x098
-    }, {
+    },
+    [LINKERRORWIN_2] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
@@ -242,6 +250,7 @@ bool8 IsWirelessAdapterConnected(void)
 
 void Task_DestroySelf(u8 taskId)
 {
+    // A useless machine
     DestroyTask(taskId);
 }
 
@@ -1446,7 +1455,7 @@ void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCoun
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
     sLinkErrorBuffer.lastRecvQueueCount = lastRecvQueueCount;
-    sLinkErrorBuffer.unk_06 = isConnectionError;
+    sLinkErrorBuffer.isWirelessSignalError = isConnectionError;
 }
 
 void CB2_LinkError(void)
@@ -1466,7 +1475,7 @@ void CB2_LinkError(void)
     ScanlineEffect_Stop();
     if (gWirelessCommType)
     {
-        if (!sLinkErrorBuffer.unk_06)
+        if (!sLinkErrorBuffer.isWirelessSignalError)
         {
             gWirelessCommType = 3;
         }
@@ -1474,7 +1483,7 @@ void CB2_LinkError(void)
     }
     SetVBlankCallback(sub_800978C);
     ResetBgsAndClearDma3BusyFlags(FALSE);
-    InitBgsFromTemplates(0, sLinkErrorBgTemplates, 2);
+    InitBgsFromTemplates(0, sLinkErrorBgTemplates, NELEMS(sLinkErrorBgTemplates));
     sLinkErrorBgTilemapBuffer = tilemapBuffer = malloc(0x800);
     SetBgTilemapBuffer(1, tilemapBuffer);
     if (InitWindows(sLinkErrorWindowTemplates))
@@ -1500,33 +1509,33 @@ void CB2_LinkError(void)
     }
 }
 
-void sub_800AE1C(void)
+void LinkErrorPrint_OutOfRange(void)
 {
     DecompressAndLoadBgGfxUsingHeap(1, sWirelessLinkDisplay4bpp, FALSE, 0, 0);
     CopyToBgTilemapBuffer(1, sWirelessLinkDisplayBin, 0, 0);
     CopyBgTilemapBufferToVram(1);
     LoadPalette(sWirelessLinkDisplayPal, 0, 0x20);
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(0, 3, 2, 5, sLinkErrorTextColor, 0, gText_CommErrorEllipsis);
-    AddTextPrinterParameterized3(2, 3, 2, 2, sLinkErrorTextColor, 0, gText_MoveCloserToLinkPartner);
-    PutWindowTilemap(0);
-    PutWindowTilemap(2);
-    CopyWindowToVram(0, 0);
-    CopyWindowToVram(2, COPYWIN_BOTH);
+    FillWindowPixelBuffer(LINKERRORWIN_0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(LINKERRORWIN_2, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(LINKERRORWIN_0, 3, 2, 5, sLinkErrorTextColor, TEXT_SPEED_INSTANT, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(LINKERRORWIN_2, 3, 2, 2, sLinkErrorTextColor, TEXT_SPEED_INSTANT, gText_MoveCloserToLinkPartner);
+    PutWindowTilemap(LINKERRORWIN_0);
+    PutWindowTilemap(LINKERRORWIN_2);
+    CopyWindowToVram(LINKERRORWIN_0, 0);
+    CopyWindowToVram(LINKERRORWIN_2, COPYWIN_BOTH);
     ShowBg(0);
     ShowBg(1);
 }
 
-void sub_800AED0(void)
+void LinkErrorPrint_CheckCableConnection(void)
 {
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(1, 3, 2, 0, sLinkErrorTextColor, 0, gText_CommErrorCheckConnections);
-    PutWindowTilemap(1);
-    PutWindowTilemap(2);
-    CopyWindowToVram(1, 0);
-    CopyWindowToVram(2, COPYWIN_BOTH);
+    FillWindowPixelBuffer(LINKERRORWIN_1, PIXEL_FILL(0));
+    FillWindowPixelBuffer(LINKERRORWIN_2, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(LINKERRORWIN_1, 3, 2, 0, sLinkErrorTextColor, TEXT_SPEED_INSTANT, gText_CommErrorCheckConnections);
+    PutWindowTilemap(LINKERRORWIN_1);
+    PutWindowTilemap(LINKERRORWIN_2);
+    CopyWindowToVram(LINKERRORWIN_1, 0);
+    CopyWindowToVram(LINKERRORWIN_2, COPYWIN_BOTH);
     ShowBg(0);
 }
 
@@ -1535,13 +1544,13 @@ static void CB2_PrintErrorMessage(void)
     switch (gMain.state)
     {
     case  00:
-        if (sLinkErrorBuffer.unk_06)
+        if (sLinkErrorBuffer.isWirelessSignalError)
         {
-            sub_800AE1C();
+            LinkErrorPrint_OutOfRange();
         }
         else
         {
-            sub_800AED0();
+            LinkErrorPrint_CheckCableConnection();
         }
         break;
     case  30:
@@ -1556,11 +1565,11 @@ static void CB2_PrintErrorMessage(void)
     case 130:
         if (gWirelessCommType == 2)
         {
-            AddTextPrinterParameterized3(0, 3, 2, 20, sLinkErrorTextColor, 0, gText_ABtnTitleScreen);
+            AddTextPrinterParameterized3(LINKERRORWIN_0, 3, 2, 20, sLinkErrorTextColor, TEXT_SPEED_INSTANT, gText_ABtnTitleScreen);
         }
         else if (gWirelessCommType == 1)
         {
-            AddTextPrinterParameterized3(0, 3, 2, 20, sLinkErrorTextColor, 0, gText_ABtnRegistrationCounter);
+            AddTextPrinterParameterized3(LINKERRORWIN_0, 3, 2, 20, sLinkErrorTextColor, TEXT_SPEED_INSTANT, gText_ABtnRegistrationCounter);
         }
         break;
     }
@@ -1573,7 +1582,7 @@ static void CB2_PrintErrorMessage(void)
                 HelpSystem_Enable();
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
-                sLinkErrorBuffer.unk_06 = 0;
+                sLinkErrorBuffer.isWirelessSignalError = 0;
                 ResetSaveHeap();
             }
         }

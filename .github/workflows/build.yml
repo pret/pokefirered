@@ -7,10 +7,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
+      - name: Checkout agbcc
+        uses: actions/checkout@master
+        with:
+          path: 'agbcc'
+          repository: 'pret/agbcc'
+
+      - name: Checkout symbols
+        uses: actions/checkout@master
+        with:
+          path: 'symbols'
+          ref: 'symbols'
 
       - name: Install binutils
         run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
@@ -20,10 +32,9 @@ jobs:
 
       - name: Install agbcc
         run: |
-          git clone https://github.com/pret/agbcc.git
-          cd agbcc 
           ./build.sh
           ./install.sh ../
+        working-directory: ./agbcc
 
       - name: Compare FireRed
         run: |
@@ -45,3 +56,17 @@ jobs:
           CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
           CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
         run: sh .github/calcrom/webhook.sh pokefirered
+
+      - name: Move symfiles
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          cp *.sym symbols/
+
+      - name: Update symfiles
+        if: ${{ github.event_name == 'push' }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          branch: symbols
+          cwd: "./symbols"
+          add: "*.sym"
+          message: ${{ github.event.commits[0].message }}

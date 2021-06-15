@@ -620,7 +620,7 @@ bool32 PrintStringAndWait2Seconds(u8 * counter, const u8 * str)
     }
 }
 
-u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whichMenu)
+u32 MysteryGift_HandleThreeOptionMenu(UNUSED u8 * textState, UNUSED u16 * windowId, u8 whichMenu)
 {
     struct ListMenuTemplate listMenuTemplate = sListMenuTemplate_ThreeOptions;
     struct WindowTemplate windowTemplate = sWindowTemplate_ThreeOptions;

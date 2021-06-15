@@ -8,6 +8,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GAME_VERSION: FIRERED
+      GAME_LANGUAGE: ENGLISH
+      GAME_REVISION: 0
+      MODERN: 0
+      COMPARE: 1
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -38,16 +44,33 @@ jobs:
 
       - name: Compare FireRed
         run: |
-          make -j${nproc} compare_firered
-          make -j${nproc} compare_firered_rev1
+          make -j${nproc} all syms
+
+      - name: Compare FireRed rev1
+        env:
+          GAME_REVISION: 1
+        run: |
+          make -j${nproc} all syms
 
       - name: Compare LeafGreen
+        env:
+          GAME_VERSION: LEAFGREEN
         run: |
-          make -j${nproc} compare_leafgreen
-          make -j${nproc} compare_leafgreen_rev1
+          make -j${nproc} all syms
+
+      - name: Compare LeafGreen
+        env:
+          GAME_VERSION: LEAFGREEN
+          GAME_REVISION: 1
+        run: |
+          make -j${nproc} all syms
 
       - name: Modern
-        run: make -j${nproc} modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+        run: |
+          make -j${nproc} all
 
       - name: Webhook
         if: ${{ github.event_name == 'push' }}

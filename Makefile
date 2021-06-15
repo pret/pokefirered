@@ -157,7 +157,7 @@ MAKEFLAGS += --no-print-directory
 
 AUTO_GEN_TARGETS :=
 
-all: tools rom syms
+all: tools rom
 
 syms: $(SYM)
 

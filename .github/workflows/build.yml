@@ -58,14 +58,14 @@ jobs:
         run: |
           make -j${nproc} all syms
 
-      - name: Compare LeafGreen
+      - name: Compare LeafGreen rev1
         env:
           GAME_VERSION: LEAFGREEN
           GAME_REVISION: 1
         run: |
           make -j${nproc} all syms
 
-      - name: Modern
+      - name: Build Modern
         env:
           MODERN: 1
           COMPARE: 0

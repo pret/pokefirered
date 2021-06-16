@@ -98,6 +98,8 @@ FIX := tools/gbafix/gbafix
 MAPJSON := tools/mapjson/mapjson
 JSONPROC := tools/jsonproc/jsonproc
 
+PERL := perl
+
 # Clear the default suffixes
 .SUFFIXES:
 # Don't delete intermediate files
@@ -354,4 +356,4 @@ modern: ; @$(MAKE) MODERN=1
 ###################
 
 $(SYM): $(ELF)
-	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" > $@
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\w+)$$/\1 \2 \3 \4/g' > $@

@@ -24,6 +24,7 @@ export AS := $(PREFIX)as
 endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
+OBJDUMP := $(PREFIX)objdump
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -57,6 +58,7 @@ OBJ_DIR := build/$(BUILD_NAME)
 
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
+SYM = $(ROM:.gba=.sym)
 
 C_SUBDIR = src
 DATA_C_SUBDIR = src/data
@@ -112,7 +114,7 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all compare,$(MAKECMDGOALS)))
+ifeq (,$(filter-out all compare syms modern,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) tools)
 else
 NODEP := 1
@@ -149,13 +151,15 @@ TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
 ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) modern
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix syms $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) modern
 
 MAKEFLAGS += --no-print-directory
 
 AUTO_GEN_TARGETS :=
 
 all: tools rom
+
+syms: $(SYM)
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
@@ -344,3 +348,10 @@ leafgreen_modern:      ; @$(MAKE) GAME_VERSION=LEAFGREEN MODERN=1
 leafgreen_rev1_modern: ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1 MODERN=1
 
 modern: ; @$(MAKE) MODERN=1
+
+###################
+### Symbol file ###
+###################
+
+$(SYM): $(ELF)
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" > $@

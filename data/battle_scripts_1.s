@@ -1165,7 +1165,8 @@ BattleScript_EffectLeechSeed::
 	pause 0x20
 	ppreduce
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	accuracycheck .+6, ACC_CURR_MOVE
+	accuracycheck BattleScript_DoLeechSeed, ACC_CURR_MOVE
+BattleScript_DoLeechSeed::
 	setseeded
 	attackanimation
 	waitanimation
@@ -1605,10 +1606,11 @@ BattleScript_EffectSandstorm::
 BattleScript_EffectRollout::
 	attackcanceler
 	attackstring
-	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_RolloutHit
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_RolloutCheckAccuracy
 	ppreduce
+BattleScript_RolloutCheckAccuracy::
+	accuracycheck BattleScript_RolloutHit, ACC_CURR_MOVE
 BattleScript_RolloutHit::
-	accuracycheck .+6, ACC_CURR_MOVE
 	typecalc2
 	rolloutdamagecalculation
 	goto BattleScript_HitFromCritCalc
@@ -1640,7 +1642,7 @@ BattleScript_EffectFuryCutter::
 	attackcanceler
 	attackstring
 	ppreduce
-	accuracycheck .+6, ACC_CURR_MOVE
+	accuracycheck BattleScript_FuryCutterHit, ACC_CURR_MOVE
 BattleScript_FuryCutterHit::
 	furycuttercalc
 	critcalc
@@ -2247,7 +2249,8 @@ BattleScript_MementoSubstituteInvulnerable::
 BattleScript_MementoNoReduceStats::
 	attackstring
 	ppreduce
-	jumpifattackandspecialattackcannotfall .+4
+	jumpifattackandspecialattackcannotfall BattleScript_MementoNoReduceStatsEnd
+BattleScript_MementoNoReduceStatsEnd::
 	setatkhptozero
 	pause 0x40
 	effectivenesssound
@@ -2897,7 +2900,8 @@ BattleScript_FaintedMonEnd::
 	end2
 
 BattleScript_LinkBattleHandleFaint::
-	openpartyscreen BS_UNKNOWN_5, .+4
+	openpartyscreen BS_UNKNOWN_5, BattleScript_LinkBattleHandleFaintStart
+BattleScript_LinkBattleHandleFaintStart::
 	switchhandleorder BS_FAINTED, 0
 	openpartyscreen BS_UNKNOWN_6, BattleScript_LinkBattleFaintedMonEnd
 	switchhandleorder BS_FAINTED, 0
@@ -2921,7 +2925,8 @@ BattleScript_LocalTrainerBattleWon::
 	trainerslidein BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
-	getmoneyreward .+4
+	getmoneyreward BattleScript_LocalTrainerBattleWonGotMoney
+BattleScript_LocalTrainerBattleWonGotMoney::
 	printstring STRINGID_PLAYERGOTMONEY
 	waitmessage 0x40
 BattleScript_PayDayMoneyAndPickUpItems::
@@ -3183,7 +3188,7 @@ BattleScript_DamagingWeatherLoop::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, 0, NULL
-	atk24 .+4
+	atk24 BattleScript_DamagingWeatherContinuesEnd
 BattleScript_DamagingWeatherContinuesEnd::
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_WeatherDamageEndedBattle
 	addbyte gBattleCommunication, 1
@@ -3494,7 +3499,8 @@ BattleScript_DoFutureAttackHit::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, 0, NULL
-	atk24 .+4
+	atk24 BattleScript_FutureAttackEnd
+BattleScript_FutureAttackEnd::
 	moveendcase 0
 	moveendfromto 11, 14
 	setbyte gMoveResultFlags, 0
@@ -3694,7 +3700,8 @@ BattleScript_DoTurnDmg::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, 0, NULL
-	atk24 .+4
+	atk24 BattleScript_DoTurnDmgEnd
+BattleScript_DoTurnDmgEnd::
 	end2
 
 BattleScript_BurnTurnDmg::
@@ -4370,7 +4377,8 @@ BattleScript_BerryConfuseHealEnd2::
 
 BattleScript_BerryStatRaiseEnd2::
 	playanimation BS_ATTACKER, B_ANIM_ITEM_EFFECT, NULL
-	statbuffchange STAT_CHANGE_BS_PTR | MOVE_EFFECT_AFFECTS_USER, .+4
+	statbuffchange STAT_CHANGE_BS_PTR | MOVE_EFFECT_AFFECTS_USER, BattleScript_BerryStatRaiseDoStatUp
+BattleScript_BerryStatRaiseDoStatUp::
 	setbyte cMULTISTRING_CHOOSER, 4
 	call BattleScript_StatUp
 	removeitem BS_ATTACKER

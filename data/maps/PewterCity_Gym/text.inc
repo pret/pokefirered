@@ -14,6 +14,9 @@ PewterCity_Gym_Text_BrockIntro:: @ 8190CD4
     .string "Fine, then!\n"
     .string "Show me your best!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
+@ NOTE: This defeat text actually causes a buffer overflow. It's too long for the gDisplayedStringBattle
+@ buffer that it's put into, and it stomps all over the gBattleTextBuffs after, as well as the otherwise
+@ unused array after that, gUnknown_2022AE8. Perhaps that's the reason why said array exists.
 PewterCity_Gym_Text_BrockDefeat:: @ 8190E4F
     .string "I took you for granted, and so\n"
     .string "I lost.\p"

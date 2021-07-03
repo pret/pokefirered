@@ -129,8 +129,8 @@ static u8 DexScreen_PageNumberToRenderablePages(u16 page);
 void DexScreen_InputHandler_StartToCry(void);
 void DexScreen_PrintStringWithAlignment(const u8 *str, s32 mode);
 static void MoveCursorFunc_DexModeSelect(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void ItemPrintFunc_DexModeSelect(u8 windowId, s32 itemId, u8 y);
-static void ItemPrintFunc_OrderedListMenu(u8 windowId, s32 itemId, u8 y);
+static void ItemPrintFunc_DexModeSelect(u8 windowId, u32 itemId, u8 y);
+static void ItemPrintFunc_OrderedListMenu(u8 windowId, u32 itemId, u8 y);
 static void Task_DexScreen_RegisterNonKantoMonBeforeNationalDex(u8 taskId);
 static void Task_DexScreen_RegisterMonToPokedex(u8 taskId);
 
@@ -1184,10 +1184,9 @@ static void MoveCursorFunc_DexModeSelect(s32 itemIndex, bool8 onInit, struct Lis
     CopyWindowToVram(sPokedexScreenData->selectionIconWindowId, COPYWIN_GFX);
 }
 
-static void ItemPrintFunc_DexModeSelect(u8 windowId, s32 itemId, u8 y)
+static void ItemPrintFunc_DexModeSelect(u8 windowId, u32 itemId, u8 y)
 {
-    u32 itemId_ = itemId;
-    if (itemId_ >= DEX_CATEGORY_COUNT || sPokedexScreenData->unlockedCategories & (1 << itemId_))
+    if (itemId >= DEX_CATEGORY_COUNT || sPokedexScreenData->unlockedCategories & (1 << itemId))
         ListMenuOverrideSetColors(TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY);
     else
         ListMenuOverrideSetColors(TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_2);
@@ -1542,11 +1541,11 @@ struct PokedexListItem
     bool8 caught:1;
 };
 
-static void ItemPrintFunc_OrderedListMenu(u8 windowId, s32 itemId, u8 y)
+static void ItemPrintFunc_OrderedListMenu(u8 windowId, u32 itemId, u8 y)
 {
-    u16 species = (u32)itemId;
-    bool8 seen = ((u32)itemId >> 16) & 1;  // not used but required to match
-    bool8 caught = ((u32)itemId >> 17) & 1;
+    u16 species = itemId;
+    bool8 seen = (itemId >> 16) & 1;  // not used but required to match
+    bool8 caught = (itemId >> 17) & 1;
     u8 type1;
     DexScreen_PrintMonDexNo(sPokedexScreenData->numericalOrderWindowId, 0, species, 12, y);
     if (caught)

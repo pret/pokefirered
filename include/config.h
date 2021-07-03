@@ -41,6 +41,9 @@
 #ifndef BUGFIX
 #define BUGFIX
 #endif // BUGFIX
+#ifndef UBFIX
+#define UBFIX
+#endif // UBFIX
 #endif // MODERN
 
 #endif // GUARD_CONFIG_H

@@ -528,10 +528,14 @@ static bool32 SavedMapViewIsEmpty(void)
     u16 i;
     u32 marker = 0;
 
+#ifndef UBFIX
     // BUG: This loop extends past the bounds of the mapView array. Its size is only 0x100.
     for (i = 0; i < 0x200; i++)
         marker |= gSaveBlock2Ptr->mapView[i];
-
+#else
+    for (i = 0; i < NELEMS(gSaveBlock2Ptr->mapView); i++)
+        marker |= gSaveBlock2Ptr->mapView[i];
+#endif
     if (marker == 0)
         return TRUE;
     else
@@ -746,14 +750,32 @@ struct MapConnection *sub_8059600(u8 direction, s32 x, s32 y)
 {
     s32 count;
     struct MapConnection *connection;
+    const struct MapConnections *connections = gMapHeader.connections;
     s32 i;
-    count = gMapHeader.connections->count;
-    connection = gMapHeader.connections->connections;
+    // UB: Multiple possible null dereferences
+#ifdef UBFIX
+    if (connections != NULL)
+    {
+        count = connections->count;
+        connection = connections->connections;
+        if (connection != NULL)
+        {
+            for (i = 0; i < count; i++, connection++)
+            {
+                if (connection->direction == direction && sub_8059658(direction, x, y, connection) == TRUE)
+                    return connection;
+            }
+        }
+    }
+#else
+    count = connections->count;
+    connection = connections->connections;
     for (i = 0; i < count; i++, connection++)
     {
         if (connection->direction == direction && sub_8059658(direction, x, y, connection) == TRUE)
             return connection;
     }
+#endif
     return NULL;
 
 }

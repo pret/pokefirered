@@ -1,52 +1,31 @@
-	.align 2
 	.include "main.o"
-	.align 2
 	.include "bg.o"
-	.align 2
 	.include "text_printer.o"
 	.align 4
 	.include "window.o"
-	.align 2
 	.include "text.o"
-	.align 2
 	.include "sprite.o"
-	.align 2
 	.include "link.o"
 	.align 4
 	.include "battle_main.o"
-	.align 2
 	.include "random.o"
-	.align 2
 	.include "load_save.o"
-	.align 2
 	.include "overworld.o"
 	.align 4
 	.include "fieldmap.o"
 	.align 4
 	.include "field_camera.o"
-	.align 2
 	.include "scrcmd.o"
-	.align 2
 	.include "field_control_avatar.o"
-	.align 2
 	.include "event_data.o"
-	.align 2
 	.include "sound.o"
-	.align 2
 	.include "task.o"
-	.align 2
 	.include "cable_club.o"
-	.align 2
 	.include "image_processing_effects.o"
-	.align 2
 	.include "field_specials.o"
-	.align 2
 	.include "evolution_scene.o"
-	.align 2
 	.include "save.o"
-	.align 2
 	.include "battle_anim_special.o"
-	.align 2
 	.include "save_failed_screen.o"
 	.align 4
 	.include "link_rfu_2.o"
@@ -54,15 +33,11 @@
 	.include "AgbRfu_LinkManager.o"
 	.align 4
 	.include "list_menu.o"
-	.align 2
 	.include "quest_log.o"
-	.align 2
 	.include "party_menu.o"
-	.align 2
 	.include "help_system.o"
 	.align 4
 	.include "fame_checker.o"
-	.align 2
 	.include "help_system_util.o"
 	.align 4
 	.include "mevent.o"
@@ -70,11 +45,8 @@
 	.include "battle_controller_pokedude.o"
 	.align 4
 	.include "berry_fix_program.o"
-	.align 2
 	.include "m4a.o"
-	.align 2
 	.include "agb_flash.o"
-	.align 2
 	.include "librfu_stwi.o"
 	.align 4
 	.include "librfu_rfu.o"

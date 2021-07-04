@@ -1,280 +1,140 @@
-
-	.align 2
 	.include "src/main.o"
-	.align 2
 	.include "src/malloc.o"
-	.align 2
 	.include "src/text_printer.o"
-	.align 2
 	.include "src/window.o"
-	.align 2
 	.include "src/window_8bpp.o"
-	.align 2
 	.include "src/sprite.o"
-	.align 2
 	.include "src/string_util.o"
-	.align 2
 	.include "src/link.o"
 	.space 8
-	.align 2
 	.include "src/battle_controllers.o"
-	.align 2
 	.include "src/battle_main.o"
-	.align 2
 	.include "src/pokemon.o"
-	.align 2
 	.include "src/daycare.o"
-	.align 2
 	.include "src/load_save.o"
-	.align 2
 	.include "src/trade.o"
-	.align 2
 	.include "src/trade_scene.o"
-	.align 2
 	.include "src/new_game.o"
-	.align 2
 	.include "src/overworld.o"
-	.align 2
 	.include "src/fieldmap.o"
-	.align 2
 	.include "src/field_camera.o"
-	.align 2
 	.include "src/field_player_avatar.o"
-	.align 2
 	.include "src/event_object_movement.o"
-	.align 2
 	.include "src/field_message_box.o"
-	.align 2
 	.include "src/script.o"
-	.align 2
 	.include "src/scrcmd.o"
-	.align 2
 	.include "src/event_data.o"
-	.align 2
 	.include "src/start_menu.o"
-	.align 2
 	.include "src/tileset_anims.o"
-	.align 2
 	.include "src/palette.o"
-	.align 2
 	.include "src/sound.o"
-	.align 2
 	.include "src/battle_anim.o"
-	.align 2
 	.include "src/battle_anim_mons.o"
-	.align 2
 	.include "src/title_screen.o"
-	.align 2
 	.include "src/field_weather.o"
-	.align 2
 	.include "src/battle_setup.o"
-	.align 2
 	.include "src/wild_encounter.o"
-	.align 2
 	.include "src/field_effect.o"
-	.align 2
 	.include "src/scanline_effect.o"
-	.align 2
 	.include "src/option_menu.o"
-	.align 2
 	.include "src/trainer_card.o"
-	.align 2
 	.include "src/pokemon_storage_system_2.o"
-	.align 2
 	.include "src/pokemon_storage_system_3.o"
-	.align 2
 	.include "src/pokemon_storage_system_5.o"
-	.align 2
 	.include "src/pokemon_storage_system_7.o"
-	.align 2
 	.include "src/pokemon_storage_system_9.o"
-	.align 2
 	.include "src/script_movement.o"
-	.align 2
 	.include "src/fldeff_cut.o"
-	.align 2
 	.include "src/item_menu_icons.o"
-	.align 2
 	.include "src/item.o"
-	.align 2
 	.include "src/shop.o"
-	.align 2
 	.include "src/special_field_anim.o"
-	.align 2
 	.include "src/script_menu.o"
-	.align 2
 	.include "src/naming_screen.o"
-	.align 2
 	.include "src/money.o"
-	.align 2
 	.include "src/safari_zone.o"
-	.align 2
 	.include "src/item_use.o"
-	.align 2
 	.include "src/battle_anim_effects_1.o"
-	.align 2
 	.include "src/dragon.o"
-	.align 2
 	.include "src/battle_anim_utility_funcs.o"
-	.align 2
 	.include "src/battle_intro.o"
-	.align 2
 	.include "src/easy_chat.o"
-	.align 2
 	.include "src/mon_markings.o"
-	.align 2
 	.include "src/mail.o"
-	.align 2
 	.include "src/menu_helpers.o"
-	.align 2
 	.include "src/region_map.o"
-	.align 2
 	.include "src/battle_ai_script_commands.o"
-	.align 2
 	.include "src/fldeff_rocksmash.o"
-	.align 2
 	.include "src/field_specials.o"
-	.align 2
 	.include "src/battle_records.o"
-	.align 2
 	.include "src/evolution_scene.o"
-	.align 2
 	.include "src/coins.o"
-	.align 2
 	.include "src/battle_transition.o"
-	.align 2
 	.include "src/battle_message.o"
-	.align 2
 	.include "src/save.o"
-	.align 2
 	.include "src/mystery_event_script.o"
-	.align 2
 	.include "src/fldeff_sweetscent.o"
-	.align 2
 	.include "src/learn_move.o"
-	.align 2
 	.include "src/battle_tower.o"
-	.align 2
 	.include "src/player_pc.o"
-	.align 2
 	.include "src/intro.o"
-	.align 2
 	.include "src/hall_of_fame.o"
-	.align 2
 	.include "src/credits.o"
-	.align 2
 	.include "src/diploma.o"
-	.align 2
 	.include "src/save_failed_screen.o"
-	.align 2
 	.include "src/clear_save_data_screen.o"
-	.align 2
 	.include "src/new_menu_helpers.o"
-	.align 2
 	.include "src/box_party_pokemon_dropdown.o"
-	.align 2
 	.include "src/map_preview_screen.o"
-	.align 2
 	.include "src/link_rfu_2.o"
-	.align 2
 	.include "src/link_rfu_3.o"
-	.align 2
 	.include "src/easy_chat_2.o"
-	.align 2
 	.include "src/easy_chat_3.o"
-	.align 2
 	.include "src/pokedex_screen.o"
-	.align 2
 	.include "src/list_menu.o"
-	.align 2
 	.include "src/item_menu.o"
-	.align 2
 	.include "src/bag.o"
-	.align 2
 	.include "src/trainer_pokemon_sprites.o"
-	.align 2
 	.include "src/vs_seeker.o"
-	.align 2
 	.include "src/item_pc.o"
-	.align 2
 	.include "src/mailbox_pc.o"
-	.align 2
 	.include "src/menu.o"
-	.align 2
 	.include "src/quest_log.o"
-	.align 2
 	.include "src/help_message.o"
-	.align 2
 	.include "src/quest_log_events.o"
-	.align 2
 	.include "src/union_room.o"
-	.align 2
 	.include "src/rfu_union_tool.o"
-	.align 2
 	.include "src/union_room_battle.o"
-	.align 2
 	.include "src/pokemon_special_anim.o"
-	.align 2
 	.include "src/party_menu.o"
-	.align 2
 	.include "src/union_room_chat.o"
-	.align 2
 	.include "src/union_room_chat_display.o"
-	.align 2
 	.include "src/union_room_chat_objects.o"
-	.align 2
 	.include "src/help_system.o"
-	.align 2
 	.include "src/fame_checker.o"
-	.align 2
 	.include "src/oak_speech.o"
-	.align 2
 	.include "src/tm_case.o"
-	.align 2
 	.include "src/menu_indicators.o"
-	.align 2
 	.include "src/pokemon_summary_screen.o"
-	.align 2
 	.include "src/help_system_util.o"
-	.align 2
 	.include "src/dynamic_placeholder_text_util.o"
-	.align 2
 	.include "src/berry_pouch.o"
-	.align 2
 	.include "src/slot_machine.o"
-	.align 2
 	.include "src/roamer.o"
-	.align 2
 	.include "src/mystery_gift_menu.o"
-	.align 2
 	.include "src/mevent.o"
-	.align 2
 	.include "src/mevent_server_helpers.o"
-	.align 2
 	.include "src/mevent_client.o"
-	.align 2
 	.include "src/mevent_server.o"
-	.align 2
 	.include "src/mevent_show_card.o"
-	.align 2
 	.include "src/mevent_show_news.o"
-	.align 2
 	.include "src/seagallop.o"
-	.align 2
 	.include "src/pokemon_jump_2.o"
-	.align 2
 	.include "src/pokemon_jump_4.o"
-	.align 2
 	.include "src/berry_crush.o"
-	.align 2
 	.include "src/dodrio_berry_picking.o"
-	.align 2
 	.include "src/dodrio_berry_picking_2.o"
-	.align 2
 	.include "src/teachy_tv.o"
-	.align 2
 	.include "src/digit_obj_util.o"
-	.align 2
 	.include "src/trainer_tower.o"
-	.align 2
 	.include "src/berry_powder.o"

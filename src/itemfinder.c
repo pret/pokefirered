@@ -597,12 +597,12 @@ static void SpriteCallback_Arrow(struct Sprite * sprite)
     s16 x, y;
     sprite->spCurX += sprite->spDeltaX;
     sprite->spCurY += sprite->spDeltaY;
-    sprite->pos1.x = sprite->spCenterX + (sprite->spCurX >> 8);
-    sprite->pos1.y = sprite->spCenterY + (sprite->spCurY >> 8);
-    if (sprite->pos1.x <= 104
-     || sprite->pos1.x > 132
-     || sprite->pos1.y <= 60
-     || sprite->pos1.y > 88)
+    sprite->x = sprite->spCenterX + (sprite->spCurX >> 8);
+    sprite->y = sprite->spCenterY + (sprite->spCurY >> 8);
+    if (sprite->x <= 104
+     || sprite->x > 132
+     || sprite->y <= 60
+     || sprite->y > 88)
         sprite->callback = SpriteCallback_DestroyArrow;
 }
 
@@ -634,12 +634,12 @@ static void SpriteCallback_Star(struct Sprite * sprite)
     s16 x, y;
     sprite->spCurX += sprite->spDeltaX;
     sprite->spCurY += sprite->spDeltaY;
-    sprite->pos1.x = sprite->spCenterX + (sprite->spCurX >> 8);
-    sprite->pos1.y = sprite->spCenterY + (sprite->spCurY >> 8);
-    if (sprite->pos1.x <= 104
-        || sprite->pos1.x > 132
-        || sprite->pos1.y <= 60
-        || sprite->pos1.y > 88)
+    sprite->x = sprite->spCenterX + (sprite->spCurX >> 8);
+    sprite->y = sprite->spCenterY + (sprite->spCurY >> 8);
+    if (sprite->x <= 104
+        || sprite->x > 132
+        || sprite->y <= 60
+        || sprite->y > 88)
         sprite->callback = SpriteCallback_DestroyStar;
 }
 

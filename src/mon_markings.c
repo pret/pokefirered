@@ -392,7 +392,7 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 tilesTag, u16 palette
         }
     }
 
-    sMenu->menuWindowSprites[1]->pos1.y = y + 96;
+    sMenu->menuWindowSprites[1]->y = y + 96;
 
     sprTemplate.tileTag++;
     sprTemplate.paletteTag++;
@@ -425,8 +425,8 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 tilesTag, u16 palette
         sMenu->menuTextSprite->oam.shape = ST_OAM_SQUARE;
         sMenu->menuTextSprite->oam.size = 2;
         StartSpriteAnim(sMenu->menuTextSprite, 9);
-        sMenu->menuTextSprite->pos1.x = x + 32;
-        sMenu->menuTextSprite->pos1.y = y + 80;
+        sMenu->menuTextSprite->x = x + 32;
+        sMenu->menuTextSprite->y = y + 80;
         CalcCenterToCornerVec(sMenu->menuTextSprite, 1, 2, 0);
     }
     else
@@ -463,7 +463,7 @@ static void SpriteCB_MarkingIcon(struct Sprite * sprite)
 
 static void SpriteCB_Cursor(struct Sprite * sprite)
 {
-    sprite->pos1.y = 16 * sMenu->cursorPos + sprite->data[0];
+    sprite->y = 16 * sMenu->cursorPos + sprite->data[0];
 }
 
 struct Sprite * CreateMonMarkingSprite_SelectCombo(u16 tileTag, u16 paletteTag, const u16 *palette)

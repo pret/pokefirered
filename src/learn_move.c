@@ -719,10 +719,10 @@ static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite)
     case 0:
         break;
     case 1:
-        sprite->pos2.x = Sin(abcissa, 3) * sprite->data[2];
+        sprite->x2 = Sin(abcissa, 3) * sprite->data[2];
         break;
     case 2:
-        sprite->pos2.y = Sin(abcissa, 1) * sprite->data[2];
+        sprite->y2 = Sin(abcissa, 1) * sprite->data[2];
         break;
     }
     sprite->data[1]++;

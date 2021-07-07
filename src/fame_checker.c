@@ -753,10 +753,10 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 UpdateInfoBoxTilemap(1, 5);
                 PrintUIHelp(1);
                 task->data[2] = CreatePersonPicSprite(sFameCheckerData->unlockedPersons[cursorPos]);
-                gSprites[task->data[2]].pos2.x = 0xF0;
+                gSprites[task->data[2]].x2 = 0xF0;
                 gSprites[task->data[2]].data[0] = 1;
                 task->data[3] = CreateSpinningPokeballSprite();
-                gSprites[task->data[3]].pos2.x = 0xF0;
+                gSprites[task->data[3]].x2 = 0xF0;
                 gSprites[task->data[3]].data[0] = 1;
                 task->func = Task_EnterPickMode;
             }
@@ -808,9 +808,9 @@ static bool8 TryExitPickMode(u8 taskId)
     if (sFameCheckerData->inPickMode)
     {
         gSprites[task->data[2]].data[0] = 2;
-        gSprites[task->data[2]].pos2.x += 10;
+        gSprites[task->data[2]].x2 += 10;
         gSprites[task->data[3]].data[0] = 2;
-        gSprites[task->data[3]].pos2.x += 10;
+        gSprites[task->data[3]].x2 += 10;
         WipeMsgBoxAndTransfer();
         task->func = Task_ExitPickMode;
         MessageBoxPrintEmptyText();
@@ -932,8 +932,8 @@ static void FC_MoveSelectorCursor(u8 taskId, s8 dx, s8 dy)
     u8 i;
     s16 *data = gTasks[taskId].data;
     PlaySE(SE_M_SWAGGER2);
-    gSprites[data[0]].pos1.x += dx;
-    gSprites[data[0]].pos1.y += dy;
+    gSprites[data[0]].x += dx;
+    gSprites[data[0]].y += dy;
     for (i = 0; i < 6; i++)
         SetMessageSelectorIconObjMode(sFameCheckerData->spriteIds[i], ST_OAM_OBJ_BLEND);
     FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
@@ -1315,23 +1315,23 @@ static void SpriteCB_FCSpinningPokeball(struct Sprite * sprite)
 {
     if (sprite->data[0] == 1)
     {
-        if (sprite->pos2.x - 10 < 0)
+        if (sprite->x2 - 10 < 0)
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sprite->data[0] = 0;
         }
         else
-            sprite->pos2.x -= 10;
+            sprite->x2 -= 10;
     }
     else if (sprite->data[0] == 2)
     {
-        if (sprite->pos2.x > 240)
+        if (sprite->x2 > 240)
         {
-            sprite->pos2.x = 240;
+            sprite->x2 = 240;
             sprite->data[0] = 0;
         }
         else
-            sprite->pos2.x += 10;
+            sprite->x2 += 10;
     }
 }
 

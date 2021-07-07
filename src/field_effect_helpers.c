@@ -33,7 +33,7 @@ void SetUpReflection(struct ObjectEvent * objectEvent, struct Sprite * sprite, b
 {
     struct Sprite * reflectionSprite;
 
-    reflectionSprite = &gSprites[CreateCopySpriteAt(sprite, sprite->pos1.x, sprite->pos1.y, 0x98)];
+    reflectionSprite = &gSprites[CreateCopySpriteAt(sprite, sprite->x, sprite->y, 0x98)];
     reflectionSprite->callback = UpdateObjectReflectionSprite;
     reflectionSprite->oam.priority = 3;
     reflectionSprite->oam.paletteNum = gReflectionEffectPaletteMap[reflectionSprite->oam.paletteNum];
@@ -131,13 +131,13 @@ static void UpdateObjectReflectionSprite(struct Sprite * reflectionSprite)
         reflectionSprite->subspriteTables = mainSprite->subspriteTables;
         reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;
         reflectionSprite->invisible = mainSprite->invisible;
-        reflectionSprite->pos1.x = mainSprite->pos1.x;
+        reflectionSprite->x = mainSprite->x;
         // reflectionSprite->data[2] holds an additional vertical offset, used by the high bridges on Route 120
-        reflectionSprite->pos1.y = mainSprite->pos1.y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->data[2];
+        reflectionSprite->y = mainSprite->y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->data[2];
         reflectionSprite->centerToCornerVecX = mainSprite->centerToCornerVecX;
         reflectionSprite->centerToCornerVecY = mainSprite->centerToCornerVecY;
-        reflectionSprite->pos2.x = mainSprite->pos2.x;
-        reflectionSprite->pos2.y = -mainSprite->pos2.y;
+        reflectionSprite->x2 = mainSprite->x2;
+        reflectionSprite->y2 = -mainSprite->y2;
         reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
 
 /*
@@ -192,8 +192,8 @@ void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y)
     {
         SetSpritePosToMapCoords(x, y, &x2, &y2);
         sprite = &gSprites[spriteId];
-        sprite->pos1.x = x2 + 8;
-        sprite->pos1.y = y2 + 8;
+        sprite->x = x2 + 8;
+        sprite->y = y2 + 8;
         sprite->invisible = FALSE;
         sprite->data[0] = x;
         sprite->data[1] = y;
@@ -250,8 +250,8 @@ void UpdateShadowFieldEffect(struct Sprite * sprite)
         objectEvent = &gObjectEvents[objectEventId];
         linkedSprite = &gSprites[objectEvent->spriteId];
         sprite->oam.priority = linkedSprite->oam.priority;
-        sprite->pos1.x = linkedSprite->pos1.x;
-        sprite->pos1.y = linkedSprite->pos1.y + sprite->data[3];
+        sprite->x = linkedSprite->x;
+        sprite->y = linkedSprite->y + sprite->data[3];
         if (!objectEvent->active || !objectEvent->hasShadow
          || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfable(objectEvent->currentMetatileBehavior)
@@ -474,8 +474,8 @@ u32 FldEff_ShortGrass(void)
         sprite->data[0] = gFieldEffectArguments[0];
         sprite->data[1] = gFieldEffectArguments[1];
         sprite->data[2] = gFieldEffectArguments[2];
-        sprite->data[3] = gSprites[objectEvent->spriteId].pos1.x;
-        sprite->data[4] = gSprites[objectEvent->spriteId].pos1.y;
+        sprite->data[3] = gSprites[objectEvent->spriteId].x;
+        sprite->data[4] = gSprites[objectEvent->spriteId].y;
     }
     return 0;
 }
@@ -496,8 +496,8 @@ void UpdateShortGrassFieldEffect(struct Sprite * sprite)
     {
         graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
         linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
-        y = linkedSprite->pos1.y;
-        x = linkedSprite->pos1.x;
+        y = linkedSprite->y;
+        x = linkedSprite->x;
         if (x != sprite->data[3] || y != sprite->data[4])
         {
             sprite->data[3] = x;
@@ -507,9 +507,9 @@ void UpdateShortGrassFieldEffect(struct Sprite * sprite)
                 StartSpriteAnim(sprite, 0);
             }
         }
-        sprite->pos1.x = x;
-        sprite->pos1.y = y;
-        sprite->pos2.y = (graphicsInfo->height >> 1) - 8;
+        sprite->x = x;
+        sprite->y = y;
+        sprite->y2 = (graphicsInfo->height >> 1) - 8;
         sprite->subpriority = linkedSprite->subpriority - 1;
         sprite->oam.priority = linkedSprite->oam.priority;
         UpdateObjectEventSpriteVisibility(sprite, linkedSprite->invisible);
@@ -622,7 +622,7 @@ u32 FldEff_Splash(void)
         sprite->data[0] = gFieldEffectArguments[0];
         sprite->data[1] = gFieldEffectArguments[1];
         sprite->data[2] = gFieldEffectArguments[2];
-        sprite->pos2.y = (graphicsInfo->height >> 1) - 4;
+        sprite->y2 = (graphicsInfo->height >> 1) - 4;
         PlaySE(SE_PUDDLE);
     }
     return 0;
@@ -638,8 +638,8 @@ void UpdateSplashFieldEffect(struct Sprite * sprite)
     }
     else
     {
-        sprite->pos1.x = gSprites[gObjectEvents[objectEventId].spriteId].pos1.x;
-        sprite->pos1.y = gSprites[gObjectEvents[objectEventId].spriteId].pos1.y;
+        sprite->x = gSprites[gObjectEvents[objectEventId].spriteId].x;
+        sprite->y = gSprites[gObjectEvents[objectEventId].spriteId].y;
         UpdateObjectEventSpriteVisibility(sprite, FALSE);
     }
 }
@@ -703,7 +703,7 @@ u32 FldEff_FeetInFlowingWater(void)
         sprite->data[2] = gFieldEffectArguments[2];
         sprite->data[3] = -1;
         sprite->data[4] = -1;
-        sprite->pos2.y = (graphicsInfo->height >> 1) - 4;
+        sprite->y2 = (graphicsInfo->height >> 1) - 4;
         StartSpriteAnim(sprite, 1);
     }
     return 0;
@@ -723,8 +723,8 @@ static void UpdateFeetInFlowingWaterFieldEffect(struct Sprite * sprite)
     {
         objectEvent = &gObjectEvents[objectEventId];
         linkedSprite = &gSprites[objectEvent->spriteId];
-        sprite->pos1.x = linkedSprite->pos1.x;
-        sprite->pos1.y = linkedSprite->pos1.y;
+        sprite->x = linkedSprite->x;
+        sprite->y = linkedSprite->y;
         sprite->subpriority = linkedSprite->subpriority;
         UpdateObjectEventSpriteVisibility(sprite, FALSE);
         if (objectEvent->currentCoords.x != sprite->data[3] || objectEvent->currentCoords.y != sprite->data[4])
@@ -773,8 +773,8 @@ u32 FldEff_HotSpringsWater(void)
         sprite->data[0] = gFieldEffectArguments[0];
         sprite->data[1] = gFieldEffectArguments[1];
         sprite->data[2] = gFieldEffectArguments[2];
-        sprite->data[3] = gSprites[objectEvent->spriteId].pos1.x;
-        sprite->data[4] = gSprites[objectEvent->spriteId].pos1.y;
+        sprite->data[3] = gSprites[objectEvent->spriteId].x;
+        sprite->data[4] = gSprites[objectEvent->spriteId].y;
     }
     return 0;
 }
@@ -793,8 +793,8 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite * sprite)
     {
         graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
         linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
-        sprite->pos1.x = linkedSprite->pos1.x;
-        sprite->pos1.y = (graphicsInfo->height >> 1) + linkedSprite->pos1.y - 8;
+        sprite->x = linkedSprite->x;
+        sprite->y = (graphicsInfo->height >> 1) + linkedSprite->y - 8;
         sprite->subpriority = linkedSprite->subpriority - 1;
         UpdateObjectEventSpriteVisibility(sprite, FALSE);
     }
@@ -1023,7 +1023,7 @@ void sub_80DC588(struct ObjectEvent * objectEvent, struct Sprite * sprite)
     u8 i;
     s16 x = objectEvent->currentCoords.x;
     s16 y = objectEvent->currentCoords.y;
-    s32 spriteY = sprite->pos2.y;
+    s32 spriteY = sprite->y2;
 
     if (spriteY == 0 && (x != sprite->data[6] || y != sprite->data[7]))
     {
@@ -1050,7 +1050,7 @@ static void CreateBobbingEffect(struct ObjectEvent * objectEvent, struct Sprite 
     {
         if (((u16)(++ sprite->data[4]) & unk_83FECFA[sprite->data[5]]) == 0)
         {
-            sprite->pos2.y += sprite->data[3];
+            sprite->y2 += sprite->data[3];
         }
         if ((sprite->data[4] & 0x1F) == 0)
         {
@@ -1059,13 +1059,13 @@ static void CreateBobbingEffect(struct ObjectEvent * objectEvent, struct Sprite 
         if (v0 != 2)
         {
             if (sub_80DC4EC(sprite) == 0)
-                linkedSprite->pos2.y = sprite->pos2.y;
+                linkedSprite->y2 = sprite->y2;
             else
-                linkedSprite->pos2.y = sprite->data[1] + sprite->pos2.y;
+                linkedSprite->y2 = sprite->data[1] + sprite->y2;
             if (sprite->animCmdIndex != 0)
-                linkedSprite->pos2.y++;
-            sprite->pos1.x = linkedSprite->pos1.x;
-            sprite->pos1.y = linkedSprite->pos1.y + 8;
+                linkedSprite->y2++;
+            sprite->x = linkedSprite->x;
+            sprite->y = linkedSprite->y + 8;
         }
     }
 }
@@ -1091,7 +1091,7 @@ static void sub_80DC700(struct Sprite * sprite)
     oldSprite = &gSprites[sprite->data[0]];
     if (((sprite->data[2]++) & 0x03) == 0)
     {
-        oldSprite->pos2.y += sprite->data[1];
+        oldSprite->y2 += sprite->data[1];
     }
     if ((sprite->data[2] & 0x0F) == 0)
     {
@@ -1137,9 +1137,9 @@ u32 FldEff_SandPile(void)
         sprite->data[0] = gFieldEffectArguments[0];
         sprite->data[1] = gFieldEffectArguments[1];
         sprite->data[2] = gFieldEffectArguments[2];
-        sprite->data[3] = gSprites[objectEvent->spriteId].pos1.x;
-        sprite->data[4] = gSprites[objectEvent->spriteId].pos1.y;
-        sprite->pos2.y = (graphicsInfo->height >> 1) - 2;
+        sprite->data[3] = gSprites[objectEvent->spriteId].x;
+        sprite->data[4] = gSprites[objectEvent->spriteId].y;
+        sprite->y2 = (graphicsInfo->height >> 1) - 2;
         SeekSpriteAnim(sprite, 2);
     }
     return 0;
@@ -1157,8 +1157,8 @@ void UpdateSandPileFieldEffect(struct Sprite * sprite)
     }
     else
     {
-        y = gSprites[gObjectEvents[objectEventId].spriteId].pos1.y;
-        x = gSprites[gObjectEvents[objectEventId].spriteId].pos1.x;
+        y = gSprites[gObjectEvents[objectEventId].spriteId].y;
+        x = gSprites[gObjectEvents[objectEventId].spriteId].x;
         if (x != sprite->data[3] || y != sprite->data[4])
         {
             sprite->data[3] = x;
@@ -1168,8 +1168,8 @@ void UpdateSandPileFieldEffect(struct Sprite * sprite)
                 StartSpriteAnim(sprite, 0);
             }
         }
-        sprite->pos1.x = x;
-        sprite->pos1.y = y;
+        sprite->x = x;
+        sprite->y = y;
         sprite->subpriority = gSprites[gObjectEvents[objectEventId].spriteId].subpriority;
         UpdateObjectEventSpriteVisibility(sprite, FALSE);
     }
@@ -1195,7 +1195,7 @@ void UpdateBubblesFieldEffect(struct Sprite * sprite)
 {
     sprite->data[0] += 0x80;
     sprite->data[0] &= 0x100;
-    sprite->pos1.y -= sprite->data[0] >> 8;
+    sprite->y -= sprite->data[0] >> 8;
     UpdateObjectEventSpriteVisibility(sprite, FALSE);
     if (sprite->invisible || sprite->animEnded)
     {
@@ -1274,8 +1274,8 @@ void UpdateDisguiseFieldEffect(struct Sprite * sprite)
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
     linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
     sprite->invisible = linkedSprite->invisible;
-    sprite->pos1.x = linkedSprite->pos1.x;
-    sprite->pos1.y = (graphicsInfo->height >> 1) + linkedSprite->pos1.y - 16;
+    sprite->x = linkedSprite->x;
+    sprite->y = (graphicsInfo->height >> 1) + linkedSprite->y - 16;
     sprite->subpriority = linkedSprite->subpriority - 1;
     if (sprite->data[0] == 1)
     {
@@ -1392,13 +1392,13 @@ static void sub_80DCD48(struct Sprite * sprite, u8 z, u8 offset)
         {
             graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
             linkedSprite = &gSprites[objectEvent->spriteId];
-            xhi = sprite->pos1.x + sprite->centerToCornerVecX;
-            var = sprite->pos1.x - sprite->centerToCornerVecX;
-            if (xhi < linkedSprite->pos1.x && var > linkedSprite->pos1.x)
+            xhi = sprite->x + sprite->centerToCornerVecX;
+            var = sprite->x - sprite->centerToCornerVecX;
+            if (xhi < linkedSprite->x && var > linkedSprite->x)
             {
-                lyhi = linkedSprite->pos1.y + linkedSprite->centerToCornerVecY;
-                var = linkedSprite->pos1.y;
-                ylo = sprite->pos1.y - sprite->centerToCornerVecY;
+                lyhi = linkedSprite->y + linkedSprite->centerToCornerVecY;
+                var = linkedSprite->y;
+                ylo = sprite->y - sprite->centerToCornerVecY;
                 yhi = ylo + linkedSprite->centerToCornerVecY;
                 if ((lyhi < yhi || lyhi < ylo) && var > yhi && sprite->subpriority <= linkedSprite->subpriority)
                 {

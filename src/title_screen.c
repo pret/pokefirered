@@ -913,15 +913,15 @@ static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
     sprite->data[0] -= data[1];
-    sprite->pos1.x = sprite->data[0] >> 4;
-    if (sprite->pos1.x < -8)
+    sprite->x = sprite->data[0] >> 4;
+    if (sprite->x < -8)
     {
         DestroySprite(sprite);
         return;
     }
     data[2] += data[3];
-    sprite->pos1.y = data[2] >> 4;
-    if (sprite->pos1.y < 0x10 || sprite->pos1.y > 0xc8)
+    sprite->y = data[2] >> 4;
+    if (sprite->y < 0x10 || sprite->y > 0xc8)
     {
         DestroySprite(sprite);
         return;
@@ -1046,14 +1046,14 @@ static void CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
 
 static void SpriteCallback_LG_8079800(struct Sprite * sprite)
 {
-    sprite->pos1.x -= 7;
-    if (sprite->pos1.x < -16)
+    sprite->x -= 7;
+    if (sprite->x < -16)
     {
-        sprite->pos1.x = 0x100;
+        sprite->x = 0x100;
         sprite->data[7]++;
         if (sprite->data[7] >= NELEMS(gUnknown_LG_83BFA10))
             sprite->data[7] = 0;
-        sprite->pos1.y = gUnknown_LG_83BFA10[sprite->data[7]];
+        sprite->y = gUnknown_LG_83BFA10[sprite->data[7]];
     }
 }
 
@@ -1188,23 +1188,23 @@ static void SpriteCallback_Slash(struct Sprite * sprite)
         }
         break;
     case 1:
-        sprite->pos1.x += 9;
-        if (sprite->pos1.x == 67)
+        sprite->x += 9;
+        if (sprite->x == 67)
         {
-            sprite->pos1.y -= 7;
+            sprite->y -= 7;
         }
-        if (sprite->pos1.x == 148)
+        if (sprite->x == 148)
         {
-            sprite->pos1.y += 7;
+            sprite->y += 7;
         }
-        if (sprite->pos1.x > 272)
+        if (sprite->x > 272)
         {
             sprite->invisible = TRUE;
             if (sprite->data[2])
                 sprite->data[0] = 2;
             else
             {
-                sprite->pos1.x = -0x20;
+                sprite->x = -0x20;
                 sprite->data[1] = 540;
                 sprite->data[0] = 0;
             }

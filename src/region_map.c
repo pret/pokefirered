@@ -2279,7 +2279,7 @@ static bool8 HandleSwitchMapInput(void)
 
 static void SpriteCB_SwitchMapCursor(struct Sprite * sprite)
 {
-    sprite->pos1.y = sSwitchMapMenu->highlight.top + 16;
+    sprite->y = sSwitchMapMenu->highlight.top + 16;
 }
 
 static bool8 CreateSwitchMapCursor(void)
@@ -2781,8 +2781,8 @@ static void FreeMapEdgeSprites(void)
     u8 i;
     for (i = 0; i < NELEMS(sMapOpenCloseAnim->mapEdges); i++)
     {
-        sMapOpenCloseAnim->mapEdges[i]->x = sMapOpenCloseAnim->mapEdges[i]->sprite->pos1.x;
-        sMapOpenCloseAnim->mapEdges[i]->y = sMapOpenCloseAnim->mapEdges[i]->sprite->pos1.y;
+        sMapOpenCloseAnim->mapEdges[i]->x = sMapOpenCloseAnim->mapEdges[i]->sprite->x;
+        sMapOpenCloseAnim->mapEdges[i]->y = sMapOpenCloseAnim->mapEdges[i]->sprite->y;
         if (sMapOpenCloseAnim->mapEdges[i]->sprite != NULL)
         {
             DestroySprite(sMapOpenCloseAnim->mapEdges[i]->sprite);
@@ -2903,54 +2903,54 @@ static void Task_MapOpenAnim(u8 taskId)
 static bool8 MoveMapEdgesOutward(void)
 {
     sub_80C2B48();
-    if (sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x == 0)
+    if (sMapOpenCloseAnim->mapEdges[0]->sprite->x == 0)
     {
         return TRUE;
     }
     else if (sMapOpenCloseAnim->moveState > 17)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x -= 1;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x -= 1;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x -= 1;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x += 1;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x += 1;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x += 1;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x -= 1;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x -= 1;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x -= 1;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x += 1;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x += 1;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x += 1;
     }
     else if (sMapOpenCloseAnim->moveState > 14)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x -= 2;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x -= 2;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x -= 2;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x += 2;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x += 2;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x += 2;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x -= 2;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x -= 2;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x -= 2;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x += 2;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x += 2;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x += 2;
     }
     else if (sMapOpenCloseAnim->moveState > 10)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x -= 3;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x -= 3;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x -= 3;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x += 3;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x += 3;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x += 3;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x -= 3;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x -= 3;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x -= 3;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x += 3;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x += 3;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x += 3;
     }
     else if (sMapOpenCloseAnim->moveState > 6)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x -= 5;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x -= 5;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x -= 5;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x += 5;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x += 5;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x += 5;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x -= 5;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x -= 5;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x -= 5;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x += 5;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x += 5;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x += 5;
     }
     else
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x -= 8;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x -= 8;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x -= 8;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x += 8;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x += 8;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x += 8;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x -= 8;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x -= 8;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x -= 8;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x += 8;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x += 8;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x += 8;
     }
     sMapOpenCloseAnim->moveState++;
     return FALSE;
@@ -2959,9 +2959,9 @@ static bool8 MoveMapEdgesOutward(void)
 static void sub_80C2B48(void)
 {
     struct GpuWindowParams data;
-    data.left = sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x;
+    data.left = sMapOpenCloseAnim->mapEdges[0]->sprite->x;
     data.top = 16;
-    data.right = sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x;
+    data.right = sMapOpenCloseAnim->mapEdges[3]->sprite->x;
     data.bottom = 160;
     SetGpuWindowDims(0, &data);
 }
@@ -3059,54 +3059,54 @@ static void Task_MapCloseAnim(u8 taskId)
 static bool8 MoveMapEdgesInward(void)
 {
     sub_80C2B48();
-    if (sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x == 104)
+    if (sMapOpenCloseAnim->mapEdges[0]->sprite->x == 104)
     {
         return TRUE;
     }
     else if (sMapOpenCloseAnim->moveState > 17)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x += 1;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x += 1;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x += 1;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x -= 1;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x -= 1;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x -= 1;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x += 1;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x += 1;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x += 1;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x -= 1;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x -= 1;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x -= 1;
     }
     else if (sMapOpenCloseAnim->moveState > 14)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x += 2;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x += 2;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x += 2;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x -= 2;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x -= 2;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x -= 2;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x += 2;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x += 2;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x += 2;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x -= 2;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x -= 2;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x -= 2;
     }
     else if (sMapOpenCloseAnim->moveState > 10)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x += 3;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x += 3;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x += 3;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x -= 3;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x -= 3;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x -= 3;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x += 3;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x += 3;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x += 3;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x -= 3;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x -= 3;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x -= 3;
     }
     else if (sMapOpenCloseAnim->moveState > 6)
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x += 5;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x += 5;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x += 5;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x -= 5;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x -= 5;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x -= 5;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x += 5;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x += 5;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x += 5;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x -= 5;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x -= 5;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x -= 5;
     }
     else
     {
-        sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x += 8;
-        sMapOpenCloseAnim->mapEdges[1]->sprite->pos1.x += 8;
-        sMapOpenCloseAnim->mapEdges[2]->sprite->pos1.x += 8;
-        sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x -= 8;
-        sMapOpenCloseAnim->mapEdges[4]->sprite->pos1.x -= 8;
-        sMapOpenCloseAnim->mapEdges[5]->sprite->pos1.x -= 8;
+        sMapOpenCloseAnim->mapEdges[0]->sprite->x += 8;
+        sMapOpenCloseAnim->mapEdges[1]->sprite->x += 8;
+        sMapOpenCloseAnim->mapEdges[2]->sprite->x += 8;
+        sMapOpenCloseAnim->mapEdges[3]->sprite->x -= 8;
+        sMapOpenCloseAnim->mapEdges[4]->sprite->x -= 8;
+        sMapOpenCloseAnim->mapEdges[5]->sprite->x -= 8;
     }
     sMapOpenCloseAnim->moveState++;
     return FALSE;
@@ -3116,14 +3116,14 @@ static void SpriteCB_MapCursor(struct Sprite * sprite)
 {
     if (sMapCursor->moveCounter != 0)
     {
-        sprite->pos1.x += sMapCursor->horizontalMove;
-        sprite->pos1.y += sMapCursor->verticalMove;
+        sprite->x += sMapCursor->horizontalMove;
+        sprite->y += sMapCursor->verticalMove;
         sMapCursor->moveCounter--;
     }
     else
     {
-        sMapCursor->sprite->pos1.x = 8 * sMapCursor->x + 36;
-        sMapCursor->sprite->pos1.y = 8 * sMapCursor->y + 36;
+        sMapCursor->sprite->x = 8 * sMapCursor->x + 36;
+        sMapCursor->sprite->y = 8 * sMapCursor->y + 36;
     }
 }
 
@@ -3345,8 +3345,8 @@ static void SnapToIconOrButton(void)
             break;
         }
     }
-    sMapCursor->sprite->pos1.x = 8 * sMapCursor->x + 36;
-    sMapCursor->sprite->pos1.y = 8 * sMapCursor->y + 36;
+    sMapCursor->sprite->x = 8 * sMapCursor->x + 36;
+    sMapCursor->sprite->y = 8 * sMapCursor->y + 36;
     sMapCursor->selectedMapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
 }
 

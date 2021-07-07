@@ -357,11 +357,11 @@ static u32 sub_8153C30(struct Sprite * sprite)
             break;
         }
 
-        sprite->pos1.x += var;
+        sprite->x += var;
         if (++sprite->data[1] >= 40)
         {
             sprite->data[0] = 0;
-            sprite->pos1.x = sub_8154608(0, sub_81533B4());
+            sprite->x = sub_8154608(0, sub_81533B4());
         }
     }
 
@@ -423,8 +423,8 @@ void sub_8153DD8(void)
     for (i = 0; i < 10; i++)
     {
         struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
-        sprite->pos1.x = (i * 16) + 48;
-        sprite->pos1.y = -8 - (i * 8);
+        sprite->x = (i * 16) + 48;
+        sprite->y = -8 - (i * 8);
         gUnknown_203F43C->unkC[i] = 0;
     }
 }
@@ -481,10 +481,10 @@ bool32 sub_8153F1C(void)
     {
         struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         gUnknown_203F43C->unk16[i] = 2;
-        if (gUnknown_203F43C->unkC[i] != 0 && sprite->pos1.y == 8)
+        if (gUnknown_203F43C->unkC[i] != 0 && sprite->y == 8)
             continue;
         r3 = TRUE;
-        if (sprite->pos1.y == 8)
+        if (sprite->y == 8)
         {
             if (gUnknown_203F43C->unkC[i] != 0)
                 continue;
@@ -492,7 +492,7 @@ bool32 sub_8153F1C(void)
             gUnknown_203F43C->unk16[i] = -16;
             PlaySE(SE_CLICK);
         }
-        sprite->pos1.y += gUnknown_203F43C->unk16[i];
+        sprite->y += gUnknown_203F43C->unk16[i];
     }
 
     if (r3)
@@ -654,7 +654,7 @@ static void sub_8154324(bool8 invisible)
 
 void sub_8154370(u8 id, u8 y)
 {
-    gSprites[*gUnknown_203F400[id]].pos1.y = y * 8;
+    gSprites[*gUnknown_203F400[id]].y = y * 8;
 }
 
 void sub_8154398(u16 id, u8 frameNum)
@@ -665,8 +665,8 @@ void sub_8154398(u16 id, u8 frameNum)
 // Unused
 static void sub_81543C4(u8 spriteId)
 {
-    gSprites[spriteId].pos1.x = 20 * spriteId + 50;
-    gSprites[spriteId].pos1.y = 50;
+    gSprites[spriteId].x = 20 * spriteId + 50;
+    gSprites[spriteId].y = 50;
 }
 
 // Gamefreak made a mistake there and goes out of bounds for the data array as it holds 8 elements
@@ -688,7 +688,7 @@ static void sub_81543E8(struct Sprite * sprite)
         {
             if (++gUnknown_203F3F8[i][1] > array[i])
             {
-                sprite->pos1.x--;
+                sprite->x--;
                 gUnknown_203F3F8[i][1] = 0;
             }
         }
@@ -737,8 +737,8 @@ void sub_81544F0(void)
     {
         struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
         sprite->sKeepPosX = TRUE;
-        sprite->pos1.x = gUnknown_8478E0E[i][0];
-        sprite->pos1.y = gUnknown_8478E0E[i][1];
+        sprite->x = gUnknown_8478E0E[i][0];
+        sprite->y = gUnknown_8478E0E[i][1];
     }
 }
 

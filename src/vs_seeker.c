@@ -708,8 +708,8 @@ static void ResetMovementOfRematchableTrainers(void)
             u8 movementType = GetRandomFaceDirectionMovementType();
             if (objectEvent->active && gSprites[objectEvent->spriteId].data[0] == i)
             {
-                gSprites[objectEvent->spriteId].pos2.x = 0;
-                gSprites[objectEvent->spriteId].pos2.y = 0;
+                gSprites[objectEvent->spriteId].x2 = 0;
+                gSprites[objectEvent->spriteId].y2 = 0;
                 SetTrainerMovementType(objectEvent, movementType);
             }
         }

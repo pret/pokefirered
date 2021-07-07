@@ -405,7 +405,7 @@ static void CreateFerrySprite(void)
     }
     else
     {
-        gSprites[spriteId].pos1.x = 240;
+        gSprites[spriteId].x = 240;
         gSprites[spriteId].data[0] *= -1;
     }
 }
@@ -413,13 +413,13 @@ static void CreateFerrySprite(void)
 static void SpriteCB_Ferry(struct Sprite * sprite)
 {
     sprite->data[1] += sprite->data[0];
-    sprite->pos2.x = sprite->data[1] >> 4;
+    sprite->x2 = sprite->data[1] >> 4;
     if (sprite->data[2] % 5 == 0)
     {
-        CreateWakeSprite(sprite->pos1.x + sprite->pos2.x);
+        CreateWakeSprite(sprite->x + sprite->x2);
     }
     sprite->data[2]++;
-    if ((u16)(300 + sprite->pos2.x) > 600)
+    if ((u16)(300 + sprite->x2) > 600)
     {
         DestroySprite(sprite);
     }

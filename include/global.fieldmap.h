@@ -232,7 +232,6 @@ struct ObjectEvent
     /*0x14*/        struct Coords16 previousCoords;
     /*0x18*/        u8 facingDirection:4;
                     u8 movementDirection:4;
-    // problem
                     u8 rangeX:4;
                     u8 rangeY:4;
     /*0x1A*/        u8 fieldEffectSpriteId;

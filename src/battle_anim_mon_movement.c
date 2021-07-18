@@ -324,8 +324,8 @@ static void AnimTask_ShakeAndSinkMonStep(u8 taskId)
 // Moves a mon bg picture along an elliptical path that begins
 // and ends at the mon's origin location.
 // arg 0: battler
-// arg 1: ellipse width
-// arg 2: ellipse height
+// arg 1: ellipse height
+// arg 2: ellipse width
 // arg 3: num loops
 // arg 4: speed (valid values are 0-5)
 void AnimTask_TranslateMonElliptical(u8 taskId)
@@ -368,8 +368,8 @@ static void AnimTask_TranslateMonEllipticalStep(u8 taskId)
 // and ends at the mon's origin location. Reverses the direction
 // of the path if it's not on the player's side of the battle.
 // arg 0: battler
-// arg 1: ellipse width
-// arg 2: ellipse height
+// arg 1: ellipse height
+// arg 2: ellipse width
 // arg 3: num loops
 // arg 4: speed (valid values are 0-5)
 void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)

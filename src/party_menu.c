@@ -2477,14 +2477,14 @@ static void DisplayPartyPokemonDescriptionText(u8 stringId, struct PartyMenuBox 
     if (c != 0)
         menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->descTextLeft >> 3, menuBox->infoRects->descTextTop >> 3, menuBox->infoRects->descTextWidth >> 3, menuBox->infoRects->descTextHeight >> 3, TRUE);
     if (c != 2)
-        AddTextPrinterParameterized3(menuBox->windowId, 1, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], 0, sDescriptionStringTable[stringId]);
+        AddTextPrinterParameterized3(menuBox->windowId, 1, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], TEXT_SPEED_INSTANT, sDescriptionStringTable[stringId]);
 }
 
 static void PartyMenuRemoveWindow(u8 *ptr)
 {
     if (*ptr != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         RemoveWindow(*ptr);
         *ptr = 0xFF;
         ScheduleBgCopyTilemapToVram(2);
@@ -2660,7 +2660,7 @@ static void sub_8122138(u8 action)
     {
         if (ptr->windowId[2] == 0xFF)
             ptr->windowId[2] = AddWindow(&gUnknown_845A178);
-        sub_8112F18(ptr->windowId[2]);
+        HelpMsg_DrawBgOnWindow(ptr->windowId[2]);
         attr = GetFontAttribute(2, FONTATTR_LETTER_SPACING);
         AddTextPrinterParameterized4(ptr->windowId[2], 2, 3, 6, attr, 0, sFontColorTable[5], 0, sHMDescriptionTable[action - MENU_FIELD_MOVES]);
         PutWindowTilemap(ptr->windowId[2]);
@@ -3235,7 +3235,7 @@ static bool8 TryMovePartySlot(s16 x, s16 width, u8 *leftMove, u8 *newX, u8 *newW
 static void MoveAndBufferPartySlot(const void *rectSrc, s16 x, s16 y, s16 width, s16 height, s16 dir)
 {
     // The use of the dimension parameters here is a mess
-    u8 leftMove, newX, newWidth; // leftMove is used as a srcX, newX is used as both x and srcHeight, newWidth is used as both width and destY
+    u8 leftMove, newX, newWidth; // leftMove is used as a srcX, newX is used as both x and srcHeight, newWidth is used as both height and y
 
     if (TryMovePartySlot(x, width, &leftMove, &newX, &newWidth))
     {
@@ -4600,7 +4600,7 @@ static void ShowMoveSelectWindow(u8 slot)
         if (move != MOVE_NONE)
             ++moveCount;
     }
-    Menu_InitCursor(windowId, fontId, 0, 2, 16, moveCount, FALSE);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, fontId, 0, 2, 16, moveCount, FALSE);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -6017,7 +6017,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
     if (IsMultiBattle() == TRUE)
     {
         // Party ids are packed in 4 bits at a time
-        // i.e. the party id order below would be 0, 3, 5, 4, 2, 1, and the two parties would be 0,5,4 and 3,2,1
+        // i.e. the party currentFuncId order below would be 0, 3, 5, 4, 2, 1, and the two parties would be 0,5,4 and 3,2,1
         if (flankId != 0)
         {
             partyBattleOrder[0] = 0 | (3 << 4);

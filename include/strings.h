@@ -97,7 +97,7 @@ extern const u8 gOtherText_Give[];
 extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
 extern const u8 gText_SevenHyphens[];
-extern const u8 gOtherText_UnkF9_08_Clear_01[];
+extern const u8 gText_TMShop_No[];
 extern const u8 gText_TimesStrVar1[];
 extern const u8 gText_IsSelected[];
 extern const u8 gText_ThereIsNoPokemon[];
@@ -216,12 +216,12 @@ extern const u8 gString_SlotMachineControls[];
 
 // battle_controller_safari
 extern const u8 gText_EmptyString3[];
-extern const u8 gUnknown_83FE747[];
+extern const u8 gText_SafariBattleMenu[];
 extern const u8 gText_WhatWillPlayerThrow[];
 
 // battle_controller_player
 extern const u8 gText_BattleSwitchWhich[];
-extern const u8 gUnknown_83FE770[];
+extern const u8 gText_Battle_SetMoveNamePalette[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
 extern const u8 gText_LinkStandby[];
@@ -1342,8 +1342,8 @@ extern const u8 gText_QuestLog_PokemonLeague[];
 extern const u8 gText_QuestLog_CeruleanCave[];
 
 // clear_save_data_screen
-extern const u8 gUnknown_841B69E[];
-extern const u8 gUnknown_841B6B9[];
+extern const u8 gText_ClearAllSaveDataAreas[];
+extern const u8 gText_ClearingDataPleaseWait[];
 
 // easy_chat_2
 extern const u8 gUnknown_84186D1[];
@@ -1380,7 +1380,7 @@ extern const u8 gUnknown_8418A77[];
 extern const u8 gUnknown_8418A87[];
 extern const u8 gUnknown_8418AA1[];
 extern const u8 gUnknown_8418AB2[];
-extern const u8 gUnknown_841EE2B[];
+extern const u8 gText_DelAll_Cancel_OK[];
 
 // naming_screen
 extern const u8 gText_MoveOkBack[];

@@ -1,11 +1,11 @@
-	.macro loadsprite id
+	.macro loadsprite currentFuncId
 	.byte 0x00
-	.2byte \id
+	.2byte \currentFuncId
 	.endm
 
-	.macro unloadsprite id
+	.macro unloadsprite currentFuncId
 	.byte 0x01
-	.2byte \id
+	.2byte \currentFuncId
 	.endm
 
 	.macro sprite template, priority, argv:vararg
@@ -49,9 +49,9 @@
 	.byte 0x08
 	.endm
 
-	.macro playse id
+	.macro playse currentFuncId
 	.byte 0x09
-	.2byte \id
+	.2byte \currentFuncId
 	.endm
 
 	.macro monbg which
@@ -105,9 +105,9 @@
 	.4byte \addr
 	.endm
 
-	.macro fadetobg id
+	.macro fadetobg currentFuncId
 	.byte 0x14
-	.byte \id
+	.byte \currentFuncId
 	.endm
 
 	.macro restorebg
@@ -122,14 +122,14 @@
 	.byte 0x17
 	.endm
 
-	.macro changebg id
+	.macro changebg currentFuncId
 	.byte 0x18
-	.byte \id
+	.byte \currentFuncId
 	.endm
 
-	.macro panse_19 id, pan
+	.macro panse_19 currentFuncId, pan
 	.byte 0x19
-	.2byte \id
+	.2byte \currentFuncId
 	.byte \pan
 	.endm
 
@@ -138,26 +138,26 @@
 	.byte \pan
 	.endm
 
-	.macro panse_1B id, pan_start, pan_end, step, delay
+	.macro panse_1B currentFuncId, pan_start, pan_end, step, delay
 	.byte 0x1B
-	.2byte \id
+	.2byte \currentFuncId
 	.byte \pan_start
 	.byte \pan_end
 	.byte \step
 	.byte \delay
 	.endm
 
-	.macro panse_1C id, pan, delay, count
+	.macro panse_1C currentFuncId, pan, delay, count
 	.byte 0x1C
-	.2byte \id
+	.2byte \currentFuncId
 	.byte \pan
 	.byte \delay
 	.byte \count
 	.endm
 
-	.macro panse_1D id, pan, count
+	.macro panse_1D currentFuncId, pan, count
 	.byte 0x1D
-	.2byte \id
+	.2byte \currentFuncId
 	.byte \pan
 	.byte \count
 	.endm
@@ -209,18 +209,18 @@
 	.byte \c
 	.endm
 
-	.macro panse_26 id, pan_start, pan_end, step, delay
+	.macro panse_26 currentFuncId, pan_start, pan_end, step, delay
 	.byte 0x26
-	.2byte \id
+	.2byte \currentFuncId
 	.byte \pan_start
 	.byte \pan_end
 	.byte \step
 	.byte \delay
 	.endm
 
-	.macro panse_27 id, pan_start, pan_end, step, delay
+	.macro panse_27 currentFuncId, pan_start, pan_end, step, delay
 	.byte 0x27
-	.2byte \id
+	.2byte \currentFuncId
 	.byte \pan_start
 	.byte \pan_end
 	.byte \step

@@ -4,6 +4,10 @@
 #include "global.h"
 #include "window.h"
 
+#define MGLISTMENU_FRAME_NONE          0
+#define MGLISTMENU_FRAME_PRELOADED     1
+#define MGLISTMENU_FRAME_USER          2
+
 #define LIST_NOTHING_CHOSEN -1
 #define LIST_CANCEL -2
 #define LIST_HEADER -3
@@ -11,6 +15,14 @@
 #define LIST_NO_MULTIPLE_SCROLL     0
 #define LIST_MULTIPLE_SCROLL_DPAD   1
 #define LIST_MULTIPLE_SCROLL_L_R    2
+
+#define MOVEICON_CAUGHTBALL 0
+#define MOVEICON_TYPE(type) ((type) + 1)
+#define MOVEICON_TYPEICON   NUMBER_OF_MON_TYPES + 1
+#define MOVEICON_POWER      NUMBER_OF_MON_TYPES + 2
+#define MOVEICON_ACCURACY   NUMBER_OF_MON_TYPES + 3
+#define MOVEICON_PP         NUMBER_OF_MON_TYPES + 4
+#define MOVEICON_EFFECT     NUMBER_OF_MON_TYPES + 5
 
 enum
 {
@@ -94,7 +106,7 @@ struct ListMenuWindowRect
 
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
-u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
+u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 frameType, u16 tileNum, u16 palNum);
 u8 ListMenuInit(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
 u8 ListMenuInitInRect(const struct ListMenuTemplate *listMenuTemplate, const struct ListMenuWindowRect *rect, u16 cursorPos, u16 itemsAbove);
 s32 ListMenu_ProcessInput(u8 listTaskId);

@@ -2860,21 +2860,21 @@ extern const u8 gUnknown_08DDB2C4[];
 extern const u16 gUnknown_08DDAFE0[];
 
 // fame_checker
-extern const u16 gFameCheckerBgPals[0x30];
+extern const u16 gFameCheckerBgPals[0x20];
 extern const u16 gFameCheckerBgTiles[0xa50];
 extern const u16 gFameCheckerBg3Tilemap[0x400];
 extern const u16 gFameCheckerBg2Tilemap[0x400];
 
 // tm_case
-extern const u32 gUnknown_8E845D8[];
-extern const u32 gUnknown_8E84A24[];
-extern const u32 gUnknown_8E84B70[];
-extern const u32 gUnknown_8E84CB0[];
-extern const u32 gUnknown_8E84D20[];
+extern const u32 gTmCaseGraphics_Tiles[];
+extern const u32 gTmCaseGraphics_Bg2Map[];
+extern const u32 gTmCaseGraphics_Bg1Map[];
+extern const u32 gTmCaseGraphics_MalePals[];
+extern const u32 gTmCaseGraphics_FemalePals[];
 extern const u32 gTMCase_TMSpriteGfx[];
-extern const u32 gUnknown_8E84F20[];
-extern const u32 gUnknown_8E85068[];
-extern const u8 gUnknown_8E99118[];
+extern const u32 gTMCase_TMSpritePalsByType1[];
+extern const u32 gTMCase_TMSpritePalsByType2[];
+extern const u8 gTmCase_HMBitmapIcon[];
 extern const u16 gTMCaseMainWindowPalette[];
 
 // egg_hatch
@@ -4837,9 +4837,9 @@ extern const u32 gFile_graphics_misc_confetti_sheet[];
 extern const u32 gFile_graphics_misc_confetti_palette[];
 
 // learn_move
-extern const u16 gUnknown_8E97DDC[];
-extern const u32 gUnknown_8E97DFC[];
-extern const u32 gUnknown_8E97EC4[];
+extern const u16 gMoveRelearner_Pals[];
+extern const u32 gMoveRelearner_BgTiles[];
+extern const u32 gMoveRelearner_BgMap[];
 
 // shop menu
 extern const u32 gBuyMenuFrame_Gfx[];
@@ -4848,7 +4848,7 @@ extern const u32 gBuyMenuFrame_TmHmTilemap[];
 extern const u32 gBuyMenuFrame_Pal[];
 
 // battle_message
-extern const u16 gUnknown_8D2FBB4[];
+extern const u16 gBattlePpNumbersPals[];
 
 // trainer card
 extern const u16 gKantoTrainerCard_Pal[];
@@ -4896,10 +4896,10 @@ extern const u32 gBerryCrush_Crusher_Tilemap[];
 extern const u32 gEasyChatWindow_Gfx[];
 extern const u32 gEasyChatWindow_Tilemap[];
 extern const u32 gEasyChatMode_Pal[];
-extern const u16 gUnknown_8E99F24[];
-extern const u32 gEasyChatRedRectangularCursor_Tiles[];
-extern const u32 gEasyChatSelectGroupHelp_Tiles[];
-extern const u32 gEasyChatModeIcons_Tiles[];
+extern const u16 gEasyChatButtonWindow_Pal[];
+extern const u32 gEasyChatRectangleCursor_Gfx[];
+extern const u32 gEasyChatButtonWindow_Gfx[];
+extern const u32 gEasyChatMode_Gfx[];
 
 // naming_screen
 extern const u32 gUnknown_8E982BC[];
@@ -4925,10 +4925,10 @@ extern const u16 gUnknown_8E990F8[];
 
 // pokemon_storage_system
 extern const u32 gPSSMenu_Gfx[];
-extern const u32 gUnknown_8E9CAEC[];
+extern const u32 gStorageSystemPartyMenu_Tilemap[];
 extern const u16 gPSSMenu_Pal[];
-extern const u16 gUnknown_8E9C3F8[];
-extern const u16 gUnknown_8E9C418[];
+extern const u16 gPokeStorage_Interface_Pal[];
+extern const u16 gPokeStorage_PkmnDataGray_Pal[];
 
 // pokedex_screen
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];

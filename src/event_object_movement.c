@@ -8311,7 +8311,7 @@ static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
-    // ceil div by tile width?
+    // ceil div by tile height?
     s16 width = 1;
     s16 height = 2;
     s16 i;
@@ -8588,7 +8588,7 @@ static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprit
 
 static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
 {
-    // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
+    // First half-word is a Field Effect script currentFuncId. (gFieldEffectScriptPointers)
     u16 sandFootprints_FieldEffectData[2] = {
         FLDEFF_SAND_FOOTPRINTS,
         FLDEFF_DEEP_SAND_FOOTPRINTS

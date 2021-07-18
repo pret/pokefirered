@@ -2,86 +2,86 @@
 #include "gflib.h"
 #include "pokemon_storage_system_internal.h"
 
-static EWRAM_DATA struct UnkStruct_2000020 *gUnknown_203982C = NULL;
+static EWRAM_DATA struct UnkUtil *sUnkUtil = NULL;
 
-static void sub_8096CDC(struct UnkStruct_2000028 *unkStruct);
-static void sub_8096D70(struct UnkStruct_2000028 *unkStruct);
+static void UnkUtil_CpuRun(struct UnkUtilData *utilData);
+static void UnkUtil_DmaRun(struct UnkUtilData *utilData);
 
-void sub_8096BE4(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u32 arg2)
+void PSS_InitCopyAndFillManager(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
 {
-    gUnknown_203982C = arg0;
-    arg0->unk_00 = arg1;
-    arg0->unk_05 = arg2;
-    arg0->unk_04 = 0;
+    sUnkUtil = util;
+    util->data = data;
+    util->max = max;
+    util->numActive = 0;
 }
 
-void sub_8096BF8(void)
+void UnkUtil_Run(void)
 {
     u16 i;
 
-    if (gUnknown_203982C->unk_04)
+    if (sUnkUtil->numActive)
     {
-        for (i = 0; i < gUnknown_203982C->unk_04; i++)
+        for (i = 0; i < sUnkUtil->numActive; i++)
         {
-            struct UnkStruct_2000028 *unkStruct = &gUnknown_203982C->unk_00[i];
-            unkStruct->unk_0c(unkStruct);
+            struct UnkUtilData *data = &sUnkUtil->data[i];
+            data->func(data);
         }
 
-        gUnknown_203982C->unk_04 = 0;
+        sUnkUtil->numActive = 0;
     }
 }
 
-static bool8 sub_8096C40(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
+static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
 {
-    struct UnkStruct_2000028 *unkStruct;
+    struct UnkUtilData *unkStruct;
 
-    if (gUnknown_203982C->unk_04 >= gUnknown_203982C->unk_05)
+    if (sUnkUtil->numActive >= sUnkUtil->max)
         return FALSE;
 
-    unkStruct = &gUnknown_203982C->unk_00[gUnknown_203982C->unk_04++];
-    unkStruct->unk_08 = width * 2;
-    unkStruct->unk_04 = dest + 2 * (dTop * 32 + dLeft);
-    unkStruct->unk_00 = src + 2 * (sTop * unkArg + sLeft);
-    unkStruct->newField = height;
-    unkStruct->unk_0a = unkArg;
-    unkStruct->unk_0c = sub_8096CDC;
+    unkStruct = &sUnkUtil->data[sUnkUtil->numActive++];
+    unkStruct->copySize = width * 2;
+    unkStruct->dest = dest + 2 * (dTop * 32 + dLeft);
+    unkStruct->src = src + 2 * (sTop * unkArg + sLeft);
+    unkStruct->height = height;
+    unkStruct->width = unkArg;
+    unkStruct->func = UnkUtil_CpuRun;
     return TRUE;
 }
 
-static void sub_8096CDC(struct UnkStruct_2000028 *unkStruct)
+static void UnkUtil_CpuRun(struct UnkUtilData *utilData)
 {
     u16 i;
 
-    for (i = 0; i < unkStruct->newField; i++)
+    for (i = 0; i < utilData->height; i++)
     {
-        CpuCopy16(unkStruct->unk_00, unkStruct->unk_04, unkStruct->unk_08);
-        unkStruct->unk_04 += 64;
-        unkStruct->unk_00 += (unkStruct->unk_0a * 2);
+        CpuCopy16(utilData->src, utilData->dest, utilData->copySize);
+        utilData->dest += 64;
+        utilData->src += (utilData->width * 2);
     }
 }
 
-static bool8 sub_8096D14(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
+static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
 {
-    struct UnkStruct_2000028 *unkStruct;
+    struct UnkUtilData *unkStruct;
 
-    if (gUnknown_203982C->unk_04 >= gUnknown_203982C->unk_05)
+    if (sUnkUtil->numActive >= sUnkUtil->max)
         return FALSE;
 
-    unkStruct = &gUnknown_203982C->unk_00[gUnknown_203982C->unk_04++];
-    unkStruct->unk_08 = width * 2;
-    unkStruct->unk_04 = dest + ((dTop * 32) + dLeft) * 2;
-    unkStruct->newField = height;
-    unkStruct->unk_0c = sub_8096D70;
+    unkStruct = &sUnkUtil->data[sUnkUtil->numActive++];
+    unkStruct->copySize = width * 2;
+    unkStruct->dest = dest + ((dTop * 32) + dLeft) * 2;
+    unkStruct->height = height;
+    unkStruct->func = UnkUtil_DmaRun;
     return TRUE;
 }
 
-static void sub_8096D70(struct UnkStruct_2000028 *unkStruct)
+static void UnkUtil_DmaRun(struct UnkUtilData *utilData)
 {
     u16 i;
 
-    for (i = 0; i < unkStruct->newField; i++)
+    for (i = 0; i < utilData->height; i++)
     {
-        Dma3FillLarge_(0, unkStruct->unk_04, unkStruct->unk_08, 16);
-        unkStruct->unk_04 += 64;
+        Dma3FillLarge16_(0, utilData->dest, utilData->copySize);
+        utilData->dest += 64;
     }
 }

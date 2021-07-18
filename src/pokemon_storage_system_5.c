@@ -16,42 +16,49 @@ static EWRAM_DATA bool8 sIsMonBeingMoved = FALSE;
 static EWRAM_DATA u8 sMovingMonOrigBoxId = 0;
 static EWRAM_DATA u8 sMovingMonOrigBoxPos = 0;
 static EWRAM_DATA bool8 sCanOnlyMove = FALSE;
-static EWRAM_DATA u8 gUnknown_2039826 = 0;
+static EWRAM_DATA u8 sSavedCursorPosition = 0;
 
-static void sub_80929B0(void);
+static void DoCursorNewPosUpdate(void);
 static bool8 MonPlaceChange_Move(void);
 static bool8 MonPlaceChange_Place(void);
 static bool8 MonPlaceChange_Shift(void);
-static bool8 sub_8092E00(void);
-static bool8 sub_8092E10(void);
-static bool8 sub_8092E20(void);
-static bool8 sub_8092E54(void);
+static bool8 MultiMonPlaceChange_Down(void);
+static bool8 MultiMonPlaceChange_Up(void);
+static bool8 MonPlaceChange_CursorDown(void);
+static bool8 MonPlaceChange_CursorUp(void);
 static void MoveMon(void);
 static void PlaceMon(void);
-static void SetMovedMonData(u8 boxId, u8 cursorPos);
+static void SetMovingMonData(u8 boxId, u8 position);
 static void SetPlacedMonData(u8 boxId, u8 cursorPos);
 static void PurgeMonOrBoxMon(u8 boxId, u8 cursorPos);
 static void SetShiftedMonData(u8 boxId, u8 cursorPos);
-static void sub_8093A10(void);
+static void TryRefreshDisplayMon(void);
 static void SetCursorMonData(void * cursorMon, u8 mode);
-static void sub_8093AAC(void);
+static void ReshowDisplayMon(void);
 static u8 InBoxInput_Normal(void);
 static u8 InBoxInput_GrabbingMultiple(void);
 static u8 InBoxInput_MovingMultiple(void);
 static void AddBoxMenu(void);
-static bool8 sub_8094924(void);
-static bool8 sub_809494C(void);
-static bool8 sub_8094A0C(void);
-static void sub_8094AD8(void);
-static void sub_8094C84(void);
+static bool8 SetSelectionMenuTexts(void);
+static bool8 SetMenuTexts_Mon(void);
+static bool8 SetMenuTexts_Item(void);
+static void CreateCursorSprites(void);
+static void ToggleCursorAutoAction(void);
 
-static const u16 sHandCursorPalette[] = INCBIN_U16("graphics/interface/pss_unk_83D2BCC.gbapal");
-static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/interface/pss_unk_83D2BEC.4bpp");
-static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/interface/pss_unk_83D33EC.4bpp");
+static const u16 sHandCursorPalette[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
+static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.4bpp");
+static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
-void sub_80922C0(void)
+//------------------------------------------------------------------------------
+//  SECTION: Cursor movement
+//
+//  The functions below generally handle the cursor's movement, including
+//  moving around the box and picking up/putting down Pokémon.
+//------------------------------------------------------------------------------
+
+void InitCursor(void)
 {
-    if (gPSSData->boxOption != BOX_OPTION_DEPOSIT)
+    if (sStorage->boxOption != BOX_OPTION_DEPOSIT)
         sBoxCursorArea = CURSOR_AREA_IN_BOX;
     else
         sBoxCursorArea = CURSOR_AREA_IN_PARTY;
@@ -61,33 +68,33 @@ void sub_80922C0(void)
     sMovingMonOrigBoxId = 0;
     sMovingMonOrigBoxPos = 0;
     sCanOnlyMove = FALSE;
-    sub_8092B50();
-    sub_8094AD8();
-    gPSSData->field_CD6 = 1;
-    gPSSData->inBoxMovingMode = 0;
-    sub_8093A10();
+    ClearSavedCursorPos();
+    CreateCursorSprites();
+    sStorage->cursorPrevHorizPos = 1;
+    sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
+    TryRefreshDisplayMon();
 }
 
-void sub_8092340(void)
+void InitCursorOnReopen(void)
 {
-    sub_8094AD8();
-    sub_8093AAC();
-    gPSSData->field_CD6 = 1;
-    gPSSData->inBoxMovingMode = 0;
+    CreateCursorSprites();
+    ReshowDisplayMon();
+    sStorage->cursorPrevHorizPos = 1;
+    sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
     if (sIsMonBeingMoved)
     {
-        gPSSData->movingMon = sMonBeingCarried;
+        sStorage->movingMon = sMonBeingCarried;
         CreateMovingMonIcon();
     }
 }
 
-static void sub_8092398(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *y)
+static void GetCursorCoordsByPos(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *y)
 {
     switch (cursorArea)
     {
     case CURSOR_AREA_IN_BOX:
-        *x = (cursorPosition % IN_BOX_ROWS) * 24 + 100;
-        *y = (cursorPosition / IN_BOX_ROWS) * 24 +  32;
+        *x = (cursorPosition % IN_BOX_COLUMNS) * 24 + 100;
+        *y = (cursorPosition / IN_BOX_COLUMNS) * 24 + 32;
         break;
     case CURSOR_AREA_IN_PARTY:
         if (cursorPosition == 0)
@@ -121,7 +128,7 @@ static void sub_8092398(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *y)
     }
 }
 
-static u16 sub_8092458(void)
+static u16 GetSpeciesAtCursorPosition(void)
 {
     switch (sBoxCursorArea)
     {
@@ -134,145 +141,145 @@ static u16 sub_8092458(void)
     }
 }
 
-bool8 sub_80924A8(void)
+bool8 UpdateCursorPos(void)
 {
     s16 tmp;
 
-    if (gPSSData->field_CD0 == 0)
+    if (sStorage->cursorMoveSteps == 0)
     {
-        if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+        if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
             return FALSE;
         else
-            return sub_809610C();
+            return IsItemIconAnimActive();
     }
-    else if (--gPSSData->field_CD0 != 0)
+    else if (--sStorage->cursorMoveSteps != 0)
     {
-        gPSSData->field_CBC += gPSSData->field_CC4;
-        gPSSData->field_CC0 += gPSSData->field_CC8;
-        gPSSData->field_CB4->pos1.x = gPSSData->field_CBC >> 8;
-        gPSSData->field_CB4->pos1.y = gPSSData->field_CC0 >> 8;
-        if (gPSSData->field_CB4->pos1.x > 0x100)
+        sStorage->cursorNewX += sStorage->cursorSpeedX;
+        sStorage->cursorNewY += sStorage->cursorSpeedY;
+        sStorage->cursorSprite->pos1.x = Q_24_8_TO_INT(sStorage->cursorNewX);
+        sStorage->cursorSprite->pos1.y = Q_24_8_TO_INT(sStorage->cursorNewY);
+        if (sStorage->cursorSprite->pos1.x > 0x100)
         {
-            tmp = gPSSData->field_CB4->pos1.x - 0x100;
-            gPSSData->field_CB4->pos1.x = tmp + 0x40;
+            tmp = sStorage->cursorSprite->pos1.x - 0x100;
+            sStorage->cursorSprite->pos1.x = tmp + 0x40;
         }
-        if (gPSSData->field_CB4->pos1.x < 0x40)
+        if (sStorage->cursorSprite->pos1.x < 0x40)
         {
-            tmp = 0x40 - gPSSData->field_CB4->pos1.x;
-            gPSSData->field_CB4->pos1.x = 0x100 - tmp;
+            tmp = 0x40 - sStorage->cursorSprite->pos1.x;
+            sStorage->cursorSprite->pos1.x = 0x100 - tmp;
         }
-        if (gPSSData->field_CB4->pos1.y > 0xb0)
+        if (sStorage->cursorSprite->pos1.y > 0xb0)
         {
-            tmp = gPSSData->field_CB4->pos1.y - 0xb0;
-            gPSSData->field_CB4->pos1.y = tmp - 0x10;
+            tmp = sStorage->cursorSprite->pos1.y - 0xb0;
+            sStorage->cursorSprite->pos1.y = tmp - 0x10;
         }
-        if (gPSSData->field_CB4->pos1.y < -0x10)
+        if (sStorage->cursorSprite->pos1.y < -0x10)
         {
-            tmp = -0x10 - gPSSData->field_CB4->pos1.y;
-            gPSSData->field_CB4->pos1.y = 0xb0 - tmp;
+            tmp = -0x10 - sStorage->cursorSprite->pos1.y;
+            sStorage->cursorSprite->pos1.y = 0xb0 - tmp;
         }
-        if (gPSSData->field_CD7 && --gPSSData->field_CD7 == 0)
-            gPSSData->field_CB4->vFlip = (gPSSData->field_CB4->vFlip == FALSE);
+        if (sStorage->cursorFlipTimer && --sStorage->cursorFlipTimer == 0)
+            sStorage->cursorSprite->vFlip = (sStorage->cursorSprite->vFlip == FALSE);
     }
     else
     {
-        gPSSData->field_CB4->pos1.x = gPSSData->field_CCC;
-        gPSSData->field_CB4->pos1.y = gPSSData->field_CCE;
-        sub_80929B0();
+        sStorage->cursorSprite->pos1.x = sStorage->cursorTargetX;
+        sStorage->cursorSprite->pos1.y = sStorage->cursorTargetY;
+        DoCursorNewPosUpdate();
     }
 
     return TRUE;
 }
 
-static void sub_8092604(u8 newCurosrArea, u8 newCursorPosition)
+static void InitNewCursorPos(u8 newCurosrArea, u8 newCursorPosition)
 {
     u16 x, y;
 
-    sub_8092398(newCurosrArea, newCursorPosition, &x, &y);
-    gPSSData->field_CD4 = newCurosrArea;
-    gPSSData->field_CD5 = newCursorPosition;
-    gPSSData->field_CCC = x;
-    gPSSData->field_CCE = y;
+    GetCursorCoordsByPos(newCurosrArea, newCursorPosition, &x, &y);
+    sStorage->newCursorArea = newCurosrArea;
+    sStorage->newCursorPosition = newCursorPosition;
+    sStorage->cursorTargetX = x;
+    sStorage->cursorTargetY = y;
 }
 
-static void sub_8092660(void)
+static void InitCursorMove(void)
 {
-    int r7, r0;
+    int yDistance, xDistance;
 
-    if (gPSSData->field_CD2 != 0 || gPSSData->field_CD3 != 0)
-        gPSSData->field_CD0 = 12;
+    if (sStorage->cursorVerticalWrap != 0 || sStorage->cursorHorizontalWrap != 0)
+        sStorage->cursorMoveSteps = 12;
     else
-        gPSSData->field_CD0 = 6;
+        sStorage->cursorMoveSteps = 6;
 
-    if (gPSSData->field_CD7)
-        gPSSData->field_CD7 = gPSSData->field_CD0 >> 1;
+    if (sStorage->cursorFlipTimer)
+        sStorage->cursorFlipTimer = sStorage->cursorMoveSteps >> 1;
 
-    switch (gPSSData->field_CD2)
+    switch (sStorage->cursorVerticalWrap)
     {
     default:
-        r7 = gPSSData->field_CCE - gPSSData->field_CB4->pos1.y;
+        yDistance = sStorage->cursorTargetY - sStorage->cursorSprite->pos1.y;
         break;
     case -1:
-        r7 = gPSSData->field_CCE - 0xc0 - gPSSData->field_CB4->pos1.y;
+        yDistance = sStorage->cursorTargetY - 0xc0 - sStorage->cursorSprite->pos1.y;
         break;
     case 1:
-        r7 = gPSSData->field_CCE + 0xc0 - gPSSData->field_CB4->pos1.y;
+        yDistance = sStorage->cursorTargetY + 0xc0 - sStorage->cursorSprite->pos1.y;
         break;
     }
 
-    switch (gPSSData->field_CD3)
+    switch (sStorage->cursorHorizontalWrap)
     {
     default:
-        r0 = gPSSData->field_CCC - gPSSData->field_CB4->pos1.x;
+        xDistance = sStorage->cursorTargetX - sStorage->cursorSprite->pos1.x;
         break;
     case -1:
-        r0 = gPSSData->field_CCC - 0xc0 - gPSSData->field_CB4->pos1.x;
+        xDistance = sStorage->cursorTargetX - 0xc0 - sStorage->cursorSprite->pos1.x;
         break;
     case 1:
-        r0 = gPSSData->field_CCC + 0xc0 - gPSSData->field_CB4->pos1.x;
+        xDistance = sStorage->cursorTargetX + 0xc0 - sStorage->cursorSprite->pos1.x;
         break;
     }
 
-    r7 <<= 8;
-    r0 <<= 8;
-    gPSSData->field_CC4 = r0 / gPSSData->field_CD0;
-    gPSSData->field_CC8 = r7 / gPSSData->field_CD0;
-    gPSSData->field_CBC = gPSSData->field_CB4->pos1.x << 8;
-    gPSSData->field_CC0 = gPSSData->field_CB4->pos1.y << 8;
+    yDistance = Q_24_8(yDistance);
+    xDistance = Q_24_8(xDistance);
+    sStorage->cursorSpeedX = xDistance / sStorage->cursorMoveSteps;
+    sStorage->cursorSpeedY = yDistance / sStorage->cursorMoveSteps;
+    sStorage->cursorNewX = Q_24_8(sStorage->cursorSprite->pos1.x);
+    sStorage->cursorNewY = Q_24_8(sStorage->cursorSprite->pos1.y);
 }
 
-static void sub_80927E8(u8 newCurosrArea, u8 newCursorPosition)
+static void SetCursorPosition(u8 newCurosrArea, u8 newCursorPosition)
 {
-    sub_8092604(newCurosrArea, newCursorPosition);
-    sub_8092660();
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    InitNewCursorPos(newCurosrArea, newCursorPosition);
+    InitCursorMove();
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
-        if (gPSSData->inBoxMovingMode == 0 && !sIsMonBeingMoved)
-            StartSpriteAnim(gPSSData->field_CB4, 1);
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL && !sIsMonBeingMoved)
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
     {
         if (!IsActiveItemMoving())
-            StartSpriteAnim(gPSSData->field_CB4, 1);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (sStorage->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
-            sub_8095D44(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
+            TryHideItemIconAtPos(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
         else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
-            sub_8095D44(CURSOR_AREA_IN_PARTY, sBoxCursorPosition);
+            TryHideItemIconAtPos(CURSOR_AREA_IN_PARTY, sBoxCursorPosition);
 
         if (newCurosrArea == CURSOR_AREA_IN_BOX)
-            sub_8095C84(newCurosrArea, newCursorPosition);
+            TryLoadItemIconAtPos(newCurosrArea, newCursorPosition);
         else if (newCurosrArea == CURSOR_AREA_IN_PARTY)
-            sub_8095C84(newCurosrArea, newCursorPosition);
+            TryLoadItemIconAtPos(newCurosrArea, newCursorPosition);
     }
 
     if (newCurosrArea == CURSOR_AREA_IN_PARTY && sBoxCursorArea != CURSOR_AREA_IN_PARTY)
     {
-        gPSSData->field_CD6 = newCurosrArea;
-        gPSSData->field_CB8->invisible = TRUE;
+        sStorage->cursorPrevHorizPos = newCurosrArea;
+        sStorage->cursorShadowSprite->invisible = TRUE;
     }
 
     switch (newCurosrArea)
@@ -280,19 +287,19 @@ static void sub_80927E8(u8 newCurosrArea, u8 newCursorPosition)
     case CURSOR_AREA_IN_PARTY:
     case CURSOR_AREA_BOX:
     case CURSOR_AREA_BUTTONS:
-        gPSSData->field_CB4->oam.priority = 1;
-        gPSSData->field_CB8->invisible = TRUE;
-        gPSSData->field_CB8->oam.priority = 1;
+        sStorage->cursorSprite->oam.priority = 1;
+        sStorage->cursorShadowSprite->invisible = TRUE;
+        sStorage->cursorShadowSprite->oam.priority = 1;
         break;
     case CURSOR_AREA_IN_BOX:
-        if (gPSSData->inBoxMovingMode != 0)
+        if (sStorage->inBoxMovingMode != MOVE_MODE_NORMAL)
         {
-            gPSSData->field_CB4->oam.priority = 0;
-            gPSSData->field_CB8->invisible = TRUE;
+            sStorage->cursorSprite->oam.priority = 0;
+            sStorage->cursorShadowSprite->invisible = TRUE;
         }
         else
         {
-            gPSSData->field_CB4->oam.priority = 2;
+            sStorage->cursorSprite->oam.priority = 2;
             if (sBoxCursorArea == CURSOR_AREA_IN_BOX && sIsMonBeingMoved)
                 SetMovingMonPriority(2);
         }
@@ -300,48 +307,48 @@ static void sub_80927E8(u8 newCurosrArea, u8 newCursorPosition)
     }
 }
 
-static void sub_80929B0(void)
+static void DoCursorNewPosUpdate(void)
 {
-    sBoxCursorArea = gPSSData->field_CD4;
-    sBoxCursorPosition = gPSSData->field_CD5;
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    sBoxCursorArea = sStorage->newCursorArea;
+    sBoxCursorPosition = sStorage->newCursorPosition;
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
-        if (gPSSData->inBoxMovingMode == 0 && !sIsMonBeingMoved)
-            StartSpriteAnim(gPSSData->field_CB4, 1);
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL && !sIsMonBeingMoved)
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
     {
         if (!IsActiveItemMoving())
-            StartSpriteAnim(gPSSData->field_CB4, 1);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
 
-    sub_8093A10();
+    TryRefreshDisplayMon();
     switch (sBoxCursorArea)
     {
     case CURSOR_AREA_BUTTONS:
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_BOX:
-        sub_80920FC(TRUE);
+        AnimateBoxScrollArrows(TRUE);
         break;
     case CURSOR_AREA_IN_PARTY:
-        gPSSData->field_CB8->subpriority = 13;
+        sStorage->cursorShadowSprite->subpriority = 13;
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (gPSSData->inBoxMovingMode == 0)
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
         {
-            gPSSData->field_CB4->oam.priority = 1;
-            gPSSData->field_CB8->oam.priority = 2;
-            gPSSData->field_CB8->subpriority = 21;
-            gPSSData->field_CB8->invisible = FALSE;
+            sStorage->cursorSprite->oam.priority = 1;
+            sStorage->cursorShadowSprite->oam.priority = 2;
+            sStorage->cursorShadowSprite->subpriority = 21;
+            sStorage->cursorShadowSprite->invisible = FALSE;
             SetMovingMonPriority(2);
         }
         break;
     }
 }
 
-void sub_8092AE4(void)
+void SetCursorInParty(void)
 {
     u8 partyCount;
 
@@ -355,79 +362,79 @@ void sub_8092AE4(void)
         if (partyCount >= PARTY_SIZE)
             partyCount = PARTY_SIZE - 1;
     }
-    if (gPSSData->field_CB4->vFlip)
-        gPSSData->field_CD7 = 1;
-    sub_80927E8(CURSOR_AREA_IN_PARTY, partyCount);
+    if (sStorage->cursorSprite->vFlip)
+        sStorage->cursorFlipTimer = 1;
+    SetCursorPosition(CURSOR_AREA_IN_PARTY, partyCount);
 }
 
-void sub_8092B3C(u8 cursorBoxPosition)
+void SetCursorBoxPosition(u8 cursorBoxPosition)
 {
-    sub_80927E8(CURSOR_AREA_IN_BOX, cursorBoxPosition);
+    SetCursorPosition(CURSOR_AREA_IN_BOX, cursorBoxPosition);
 }
 
-void sub_8092B50(void)
+void ClearSavedCursorPos(void)
 {
-    gUnknown_2039826 = 0;
+    sSavedCursorPosition = 0;
 }
 
-void sub_8092B5C(void)
+void SaveCursorPos(void)
 {
-    gUnknown_2039826 = sBoxCursorPosition;
+    sSavedCursorPosition = sBoxCursorPosition;
 }
 
-u8 sub_8092B70(void)
+u8 GetSavedCursorPos(void)
 {
-    return gUnknown_2039826;
+    return sSavedCursorPosition;
 }
 
-void InitMonPlaceChange(u8 a0)
+void InitMonPlaceChange(u8 funcId)
 {
     static bool8 (*const placeChangeFuncs[])(void) = {
-        MonPlaceChange_Move,
-        MonPlaceChange_Place,
-        MonPlaceChange_Shift,
+        [CHANGE_GRAB]  = MonPlaceChange_Move,
+        [CHANGE_PLACE] = MonPlaceChange_Place,
+        [CHANGE_SHIFT] = MonPlaceChange_Shift,
     };
 
-    gPSSData->monPlaceChangeFunc = placeChangeFuncs[a0];
-    gPSSData->monPlaceChangeState = 0;
+    sStorage->monPlaceChangeFunc = placeChangeFuncs[funcId];
+    sStorage->monPlaceChangeState = 0;
 }
 
-void sub_8092BAC(bool8 arg0)
+void InitMultiMonPlaceChange(bool8 up)
 {
-    if (!arg0)
-        gPSSData->monPlaceChangeFunc = sub_8092E00;
+    if (!up)
+        sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Down;
     else
-        gPSSData->monPlaceChangeFunc = sub_8092E10;
+        sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Up;
 
-    gPSSData->monPlaceChangeState = 0;
+    sStorage->monPlaceChangeState = 0;
 }
 
 bool8 DoMonPlaceChange(void)
 {
-    return gPSSData->monPlaceChangeFunc();
+    return sStorage->monPlaceChangeFunc();
 }
 
 static bool8 MonPlaceChange_Move(void)
 {
-    switch (gPSSData->monPlaceChangeState)
+    switch (sStorage->monPlaceChangeState)
     {
     case 0:
         if (sIsMonBeingMoved)
             return FALSE;
-        StartSpriteAnim(gPSSData->field_CB4, 2);
-        gPSSData->monPlaceChangeState++;
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
+        sStorage->monPlaceChangeState++;
         break;
     case 1:
-        if (!sub_8092E20())
+        if (!MonPlaceChange_CursorDown())
         {
-            StartSpriteAnim(gPSSData->field_CB4, 3);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
             MoveMon();
-            gPSSData->monPlaceChangeState++;
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 2:
-        if (!sub_8092E54())
-            gPSSData->monPlaceChangeState++;
+        if (!MonPlaceChange_CursorUp())
+            sStorage->monPlaceChangeState++;
         break;
     case 3:
         return FALSE;
@@ -438,21 +445,21 @@ static bool8 MonPlaceChange_Move(void)
 
 static bool8 MonPlaceChange_Place(void)
 {
-    switch (gPSSData->monPlaceChangeState)
+    switch (sStorage->monPlaceChangeState)
     {
     case 0:
-        if (!sub_8092E20())
+        if (!MonPlaceChange_CursorDown())
         {
-            StartSpriteAnim(gPSSData->field_CB4, 2);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
             PlaceMon();
-            gPSSData->monPlaceChangeState++;
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 1:
-        if (!sub_8092E54())
+        if (!MonPlaceChange_CursorUp())
         {
-            StartSpriteAnim(gPSSData->field_CB4, 0);
-            gPSSData->monPlaceChangeState++;
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 2:
@@ -464,30 +471,30 @@ static bool8 MonPlaceChange_Place(void)
 
 static bool8 MonPlaceChange_Shift(void)
 {
-    switch (gPSSData->monPlaceChangeState)
+    switch (sStorage->monPlaceChangeState)
     {
     case 0:
         switch (sBoxCursorArea)
         {
         case CURSOR_AREA_IN_PARTY:
-            gPSSData->field_D91 = TOTAL_BOXES_COUNT;
+            sStorage->shiftBoxId = TOTAL_BOXES_COUNT;
             break;
         case CURSOR_AREA_IN_BOX:
-            gPSSData->field_D91 = StorageGetCurrentBox();
+            sStorage->shiftBoxId = StorageGetCurrentBox();
             break;
         default:
             return FALSE;
         }
-        StartSpriteAnim(gPSSData->field_CB4, 2);
-        sub_8090E08(gPSSData->field_D91, sBoxCursorPosition);
-        gPSSData->monPlaceChangeState++;
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_OPEN);
+        SaveMonSpriteAtPos(sStorage->shiftBoxId, sBoxCursorPosition);
+        sStorage->monPlaceChangeState++;
         break;
     case 1:
-        if (!sub_8090E74())
+        if (!MoveShiftingMons())
         {
-            StartSpriteAnim(gPSSData->field_CB4, 3);
-            SetShiftedMonData(gPSSData->field_D91, sBoxCursorPosition);
-            gPSSData->monPlaceChangeState++;
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
+            SetShiftedMonData(sStorage->shiftBoxId, sBoxCursorPosition);
+            sStorage->monPlaceChangeState++;
         }
         break;
     case 2:
@@ -497,60 +504,68 @@ static bool8 MonPlaceChange_Shift(void)
     return TRUE;
 }
 
-static bool8 sub_8092E00(void)
+static bool8 MultiMonPlaceChange_Down(void)
 {
-    return sub_8092E20();
+    return MonPlaceChange_CursorDown();
 }
 
-static bool8 sub_8092E10(void)
+static bool8 MultiMonPlaceChange_Up(void)
 {
-    return sub_8092E54();
+    return MonPlaceChange_CursorUp();
 }
 
-static bool8 sub_8092E20(void)
+static bool8 MonPlaceChange_CursorDown(void)
 {
-    switch (gPSSData->field_CB4->pos2.y)
+    switch (sStorage->cursorSprite->pos2.y)
     {
     default:
-        gPSSData->field_CB4->pos2.y++;
+        sStorage->cursorSprite->pos2.y++;
         break;
     case 0:
-        gPSSData->field_CB4->pos2.y++;
+        sStorage->cursorSprite->pos2.y++;
         break;
-    case 8:
+    case 8: // Cursor has reched the bottom
         return FALSE;
     }
 
     return TRUE;
 }
 
-static bool8 sub_8092E54(void)
+static bool8 MonPlaceChange_CursorUp(void)
 {
-    switch (gPSSData->field_CB4->pos2.y)
+    switch (sStorage->cursorSprite->pos2.y)
     {
-    case 0:
+    case 0: // Cursor has reached the top
         return FALSE;
     default:
-        gPSSData->field_CB4->pos2.y--;
+        sStorage->cursorSprite->pos2.y--;
         break;
     }
 
     return TRUE;
 }
+
+//------------------------------------------------------------------------------
+//  SECTION: Pokémon data
+//
+//  The functions below handle moving Pokémon data around while using the PC,
+//  including changing the positions of Pokémon, releasing Pokémon, viewing the
+//  summary screen, and updating the display of the currently selected Pokémon.
+//------------------------------------------------------------------------------
 
 static void MoveMon(void)
 {
     switch (sBoxCursorArea)
     {
     case CURSOR_AREA_IN_PARTY:
-        SetMovedMonData(TOTAL_BOXES_COUNT, sBoxCursorPosition);
-        sub_8090CC0(MODE_PARTY, sBoxCursorPosition);
+        SetMovingMonData(TOTAL_BOXES_COUNT, sBoxCursorPosition);
+        SetMovingMonSprite(MODE_PARTY, sBoxCursorPosition);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (gPSSData->inBoxMovingMode == 0)
+        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
         {
-            SetMovedMonData(StorageGetCurrentBox(), sBoxCursorPosition);
-            sub_8090CC0(MODE_BOX, sBoxCursorPosition);
+            SetMovingMonData(StorageGetCurrentBox(), sBoxCursorPosition);
+            SetMovingMonSprite(MODE_BOX, sBoxCursorPosition);
         }
         break;
     default:
@@ -568,12 +583,12 @@ static void PlaceMon(void)
     {
     case CURSOR_AREA_IN_PARTY:
         SetPlacedMonData(TOTAL_BOXES_COUNT, sBoxCursorPosition);
-        sub_8090D58(TOTAL_BOXES_COUNT, sBoxCursorPosition);
+        SetPlacedMonSprite(TOTAL_BOXES_COUNT, sBoxCursorPosition);
         break;
     case CURSOR_AREA_IN_BOX:
         boxId = StorageGetCurrentBox();
         SetPlacedMonData(boxId, sBoxCursorPosition);
-        sub_8090D58(boxId, sBoxCursorPosition);
+        SetPlacedMonSprite(boxId, sBoxCursorPosition);
         break;
     default:
         return;
@@ -582,17 +597,17 @@ static void PlaceMon(void)
     sIsMonBeingMoved = FALSE;
 }
 
-void sub_8092F54(void)
+void RefreshDisplayMon(void)
 {
-    sub_8093A10();
+    TryRefreshDisplayMon();
 }
 
-static void SetMovedMonData(u8 boxId, u8 position)
+static void SetMovingMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
-        gPSSData->movingMon = gPlayerParty[sBoxCursorPosition];
+        sStorage->movingMon = gPlayerParty[sBoxCursorPosition];
     else
-        BoxMonAtToMon(boxId, position, &gPSSData->movingMon);
+        BoxMonAtToMon(boxId, position, &sStorage->movingMon);
 
     PurgeMonOrBoxMon(boxId, position);
     sMovingMonOrigBoxId = boxId;
@@ -603,12 +618,12 @@ static void SetPlacedMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
     {
-        gPlayerParty[position] = gPSSData->movingMon;
+        gPlayerParty[position] = sStorage->movingMon;
     }
     else
     {
-        BoxMonRestorePP(&gPSSData->movingMon.box);
-        SetBoxMonAt(boxId, position, &gPSSData->movingMon.box);
+        BoxMonRestorePP(&sStorage->movingMon.box);
+        SetBoxMonAt(boxId, position, &sStorage->movingMon.box);
     }
 }
 
@@ -623,13 +638,13 @@ static void PurgeMonOrBoxMon(u8 boxId, u8 position)
 static void SetShiftedMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
-        gPSSData->field_2108 = gPlayerParty[position];
+        sStorage->tempMon = gPlayerParty[position];
     else
-        BoxMonAtToMon(boxId, position, &gPSSData->field_2108);
+        BoxMonAtToMon(boxId, position, &sStorage->tempMon);
 
     SetPlacedMonData(boxId, position);
-    gPSSData->movingMon = gPSSData->field_2108;
-    SetCursorMonData(&gPSSData->movingMon, MODE_PARTY);
+    sStorage->movingMon = sStorage->tempMon;
+    SetCursorMonData(&sStorage->movingMon, MODE_PARTY);
     sMovingMonOrigBoxId = boxId;
     sMovingMonOrigBoxPos = position;
 }
@@ -648,44 +663,44 @@ bool8 TryStorePartyMonInBox(u8 boxId)
     }
     else
     {
-        SetMovedMonData(TOTAL_BOXES_COUNT, sBoxCursorPosition);
+        SetMovingMonData(TOTAL_BOXES_COUNT, sBoxCursorPosition);
         SetPlacedMonData(boxId, boxPosition);
         DestroyPartyMonIcon(sBoxCursorPosition);
     }
 
     if (boxId == StorageGetCurrentBox())
-        sub_80901EC(boxPosition);
+        CreateBoxMonIconAtPos(boxPosition);
 
-    StartSpriteAnim(gPSSData->field_CB4, 1);
+    StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     return TRUE;
 }
 
-void sub_8093174(void)
+void ResetSelectionAfterDeposit(void)
 {
-    StartSpriteAnim(gPSSData->field_CB4, 0);
-    sub_8093A10();
+    StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
+    TryRefreshDisplayMon();
 }
 
-void sub_8093194(void)
+void InitReleaseMon(void)
 {
     u8 mode;
 
     if (sIsMonBeingMoved)
-        mode = MODE_2;
+        mode = MODE_MOVE;
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
         mode = MODE_PARTY;
     else
         mode = MODE_BOX;
 
-    sub_8090FC4(mode, sBoxCursorPosition);
-    StringCopy(gPSSData->field_21E0, gPSSData->cursorMonNick);
+    SetReleaseMon(mode, sBoxCursorPosition);
+    StringCopy(sStorage->releaseMonName, sStorage->cursorMonNick);
 }
 
-bool8 sub_80931EC(void)
+bool8 TryHideReleaseMon(void)
 {
-    if (!sub_8091084())
+    if (!TryHideReleaseMonSprite())
     {
-        StartSpriteAnim(gPSSData->field_CB4, 0);
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
         return FALSE;
     }
     else
@@ -698,7 +713,7 @@ void ReleaseMon(void)
 {
     u8 boxId;
 
-    sub_80910CC();
+    DestroyReleaseMonIcon();
     if (sIsMonBeingMoved)
     {
         sIsMonBeingMoved = FALSE;
@@ -712,13 +727,13 @@ void ReleaseMon(void)
 
         PurgeMonOrBoxMon(boxId, sBoxCursorPosition);
     }
-    sub_8093A10();
+    TryRefreshDisplayMon();
 }
 
-void sub_8093264(void)
+void TrySetCursorFistAnim(void)
 {
     if (sIsMonBeingMoved)
-        StartSpriteAnim(gPSSData->field_CB4, 3);
+        StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
 }
 
 void InitCanReleaseMonVars(void)
@@ -726,44 +741,44 @@ void InitCanReleaseMonVars(void)
     u16 knownIdx;
     if (sIsMonBeingMoved)
     {
-        gPSSData->field_2108 = gPSSData->movingMon;
-        gPSSData->field_2170 = -1;
-        gPSSData->field_2171 = -1;
+        sStorage->tempMon = sStorage->movingMon;
+        sStorage->releaseBoxId = -1;
+        sStorage->releaseBoxPos = -1;
     }
     else
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
         {
-            gPSSData->field_2108 = gPlayerParty[sBoxCursorPosition];
-            gPSSData->field_2170 = TOTAL_BOXES_COUNT;
+            sStorage->tempMon = gPlayerParty[sBoxCursorPosition];
+            sStorage->releaseBoxId = TOTAL_BOXES_COUNT;
         }
         else
         {
-            BoxMonAtToMon(StorageGetCurrentBox(), sBoxCursorPosition, &gPSSData->field_2108);
-            gPSSData->field_2170 = StorageGetCurrentBox();
+            BoxMonAtToMon(StorageGetCurrentBox(), sBoxCursorPosition, &sStorage->tempMon);
+            sStorage->releaseBoxId = StorageGetCurrentBox();
         }
-        gPSSData->field_2171 = sBoxCursorPosition;
+        sStorage->releaseBoxPos = sBoxCursorPosition;
     }
 
-    gPSSData->isSurfMon = FALSE;
-    gPSSData->isDiveMon = FALSE;
-    gPSSData->field_2176[0] = MOVE_SURF;
-    gPSSData->field_2176[1] = MOVE_DIVE;
-    gPSSData->field_2176[2] = MOVES_COUNT;
-    knownIdx = GetMonData(&gPSSData->field_2108, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->field_2176);
-    gPSSData->isSurfMon = knownIdx & 1;
-    gPSSData->isDiveMon = (knownIdx >> 1) & 1;
-    if (gPSSData->isSurfMon || gPSSData->isDiveMon)
+    sStorage->isSurfMon = FALSE;
+    sStorage->isDiveMon = FALSE;
+    sStorage->restrictedMoveList[0] = MOVE_SURF;
+    sStorage->restrictedMoveList[1] = MOVE_DIVE;
+    sStorage->restrictedMoveList[2] = MOVES_COUNT;
+    knownIdx = GetMonData(&sStorage->tempMon, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
+    sStorage->isSurfMon = knownIdx & 1;
+    sStorage->isDiveMon = (knownIdx >> 1) & 1;
+    if (sStorage->isSurfMon || sStorage->isDiveMon)
     {
-        gPSSData->field_216D = 0;
+        sStorage->releaseStatusResolved = FALSE;
     }
     else
     {
-        gPSSData->field_216D = 1;
-        gPSSData->field_216C = 1;
+        sStorage->releaseStatusResolved = TRUE;
+        sStorage->canReleaseMon = TRUE;
     }
 
-    gPSSData->field_2172 = 0;
+    sStorage->releaseCheckState = 0;
 }
 
 s8 RunCanReleaseMon(void)
@@ -771,62 +786,62 @@ s8 RunCanReleaseMon(void)
     u16 i;
     u16 knownMoves;
 
-    if (gPSSData->field_216D)
-        return gPSSData->field_216C;
+    if (sStorage->releaseStatusResolved)
+        return sStorage->canReleaseMon;
 
-    switch (gPSSData->field_2172)
+    switch (sStorage->releaseCheckState)
     {
     case 0:
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (gPSSData->field_2170 != TOTAL_BOXES_COUNT || gPSSData->field_2171 != i)
+            if (sStorage->releaseBoxId != TOTAL_BOXES_COUNT || sStorage->releaseBoxPos != i)
             {
-                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->field_2176);
+                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
                 if (knownMoves & 1)
-                    gPSSData->isSurfMon = FALSE;
+                    sStorage->isSurfMon = FALSE;
                 if (knownMoves & 2)
-                    gPSSData->isDiveMon = FALSE;
+                    sStorage->isDiveMon = FALSE;
             }
         }
-        if (!(gPSSData->isSurfMon || gPSSData->isDiveMon))
+        if (!(sStorage->isSurfMon || sStorage->isDiveMon))
         {
-            gPSSData->field_216D = 1;
-            gPSSData->field_216C = 1;
+            sStorage->releaseStatusResolved = TRUE;
+            sStorage->canReleaseMon = TRUE;
         }
         else
         {
-            gPSSData->field_216E = 0;
-            gPSSData->field_216F = 0;
-            gPSSData->field_2172++;
+            sStorage->releaseCheckBoxId = 0;
+            sStorage->releaseCheckBoxPos = 0;
+            sStorage->releaseCheckState++;
         }
         break;
     case 1:
         for (i = 0; i < 5; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(gPSSData->field_216E, gPSSData->field_216F, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->field_2176);
+            knownMoves = GetAndCopyBoxMonDataAt(sStorage->releaseCheckBoxId, sStorage->releaseCheckBoxPos, MON_DATA_KNOWN_MOVES, (u8*)sStorage->restrictedMoveList);
             if (knownMoves != 0
-                && !(gPSSData->field_2170 == gPSSData->field_216E && gPSSData->field_2171 == gPSSData->field_216F))
+                && !(sStorage->releaseBoxId == sStorage->releaseCheckBoxId && sStorage->releaseBoxPos == sStorage->releaseCheckBoxPos))
             {
                 if (knownMoves & 1)
-                    gPSSData->isSurfMon = FALSE;
+                    sStorage->isSurfMon = FALSE;
                 if (knownMoves & 2)
-                    gPSSData->isDiveMon = FALSE;
+                    sStorage->isDiveMon = FALSE;
             }
-            if (++gPSSData->field_216F >= IN_BOX_COUNT)
+            if (++sStorage->releaseCheckBoxPos >= IN_BOX_COUNT)
             {
-                gPSSData->field_216F = 0;
-                if (++gPSSData->field_216E >= TOTAL_BOXES_COUNT)
+                sStorage->releaseCheckBoxPos = 0;
+                if (++sStorage->releaseCheckBoxId >= TOTAL_BOXES_COUNT)
                 {
-                    gPSSData->field_216D = 1;
-                    gPSSData->field_216C = 0;
+                    sStorage->releaseStatusResolved = TRUE;
+                    sStorage->canReleaseMon = FALSE;
                     break;
                 }
             }
         }
-        if (!(gPSSData->isSurfMon || gPSSData->isDiveMon))
+        if (!(sStorage->isSurfMon || sStorage->isDiveMon))
         {
-            gPSSData->field_216D = 1;
-            gPSSData->field_216C = 1;
+            sStorage->releaseStatusResolved = TRUE;
+            sStorage->canReleaseMon = TRUE;
         }
         break;
     }
@@ -834,53 +849,53 @@ s8 RunCanReleaseMon(void)
     return -1;
 }
 
-void sub_8093630(void)
+void SaveMovingMon(void)
 {
     if (sIsMonBeingMoved)
-        sMonBeingCarried = gPSSData->movingMon;
+        sMonBeingCarried = sStorage->movingMon;
 }
 
-void sub_8093660(void)
+void LoadSavedMovingMon(void)
 {
     if (sIsMonBeingMoved)
     {
         if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
-            gPSSData->movingMon = sMonBeingCarried;
+            sStorage->movingMon = sMonBeingCarried;
         else
-            gPSSData->movingMon.box = sMonBeingCarried.box;
+            sStorage->movingMon.box = sMonBeingCarried.box;
     }
 }
 
-void sub_80936B8(void)
+void InitSummaryScreenData(void)
 {
     if (sIsMonBeingMoved)
     {
-        sub_8093630();
-        gPSSData->field_218C.mon = &sMonBeingCarried;
-        gPSSData->field_2187 = 0;
-        gPSSData->field_2186 = 0;
-        gPSSData->summaryScreenMode = PSS_MODE_NORMAL;
+        SaveMovingMon();
+        sStorage->summaryMon.mon = &sMonBeingCarried;
+        sStorage->summaryStartPos = 0;
+        sStorage->summaryMaxPos = 0;
+        sStorage->summaryScreenMode = PSS_MODE_NORMAL;
     }
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
     {
-        gPSSData->field_218C.mon = gPlayerParty;
-        gPSSData->field_2187 = sBoxCursorPosition;
-        gPSSData->field_2186 = CountPartyMons() - 1;
-        gPSSData->summaryScreenMode = PSS_MODE_NORMAL;
+        sStorage->summaryMon.mon = gPlayerParty;
+        sStorage->summaryStartPos = sBoxCursorPosition;
+        sStorage->summaryMaxPos = CountPartyMons() - 1;
+        sStorage->summaryScreenMode = PSS_MODE_NORMAL;
     }
     else
     {
-        gPSSData->field_218C.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
-        gPSSData->field_2187 = sBoxCursorPosition;
-        gPSSData->field_2186 = IN_BOX_COUNT - 1;
-        gPSSData->summaryScreenMode = PSS_MODE_BOX;
+        sStorage->summaryMon.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
+        sStorage->summaryStartPos = sBoxCursorPosition;
+        sStorage->summaryMaxPos = IN_BOX_COUNT - 1;
+        sStorage->summaryScreenMode = PSS_MODE_BOX;
     }
 }
 
-void sub_80937B4(void)
+void SetSelectionAfterSummaryScreen(void)
 {
     if (sIsMonBeingMoved)
-        sub_8093660();
+        LoadSavedMovingMon();
     else
         sBoxCursorPosition = GetLastViewedMonIndex();
 }
@@ -914,10 +929,10 @@ s16 CompactPartySlots(void)
 
 void SetMonMarkings(u8 markings)
 {
-    gPSSData->cursorMonMarkings = markings;
+    sStorage->cursorMonMarkings = markings;
     if (sIsMonBeingMoved)
     {
-        SetMonData(&gPSSData->movingMon, MON_DATA_MARKINGS, &markings);
+        SetMonData(&sStorage->movingMon, MON_DATA_MARKINGS, &markings);
     }
     else
     {
@@ -942,7 +957,7 @@ bool8 CanShiftMon(void)
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_PARTY && CountPartyAliveNonEggMonsExcept(sBoxCursorPosition) == 0)
         {
-            if (gPSSData->cursorMonIsEgg || GetMonData(&gPSSData->movingMon, MON_DATA_HP) == 0)
+            if (sStorage->cursorMonIsEgg || GetMonData(&sStorage->movingMon, MON_DATA_HP) == 0)
                 return FALSE;
         }
         return TRUE;
@@ -970,9 +985,9 @@ bool8 IsCursorInBox(void)
     return (sBoxCursorArea == CURSOR_AREA_IN_BOX);
 }
 
-static void sub_8093A10(void)
+static void TryRefreshDisplayMon(void)
 {
-    gPSSData->setMosaic = (sIsMonBeingMoved == FALSE);
+    sStorage->setMosaic = (sIsMonBeingMoved == FALSE);
     if (!sIsMonBeingMoved)
     {
         switch (sBoxCursorArea)
@@ -986,7 +1001,7 @@ static void sub_8093A10(void)
             // fallthrough
         case CURSOR_AREA_BUTTONS:
         case CURSOR_AREA_BOX:
-            SetCursorMonData(NULL, MODE_2);
+            SetCursorMonData(NULL, MODE_MOVE);
             break;
         case CURSOR_AREA_IN_BOX:
             SetCursorMonData(GetBoxedMonPtr(StorageGetCurrentBox(), sBoxCursorPosition), MODE_BOX);
@@ -995,12 +1010,12 @@ static void sub_8093A10(void)
     }
 }
 
-static void sub_8093AAC(void)
+static void ReshowDisplayMon(void)
 {
     if (sIsMonBeingMoved)
         SetCursorMonData(&sMonBeingCarried, MODE_PARTY);
     else
-        sub_8093A10();
+        TryRefreshDisplayMon();
 }
 
 static void SetCursorMonData(void *pokemon, u8 mode)
@@ -1009,94 +1024,94 @@ static void SetCursorMonData(void *pokemon, u8 mode)
     u16 gender;
     bool8 sanityIsBagEgg;
 
-    gPSSData->cursorMonItem = 0;
+    sStorage->displayMonItemId = 0;
     gender = MON_MALE;
     sanityIsBagEgg = FALSE;
     if (mode == MODE_PARTY)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
-        gPSSData->cursorMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
-        if (gPSSData->cursorMonSpecies != SPECIES_NONE)
+        sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
+        if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             sanityIsBagEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBagEgg)
-                gPSSData->cursorMonIsEgg = TRUE;
+                sStorage->cursorMonIsEgg = TRUE;
             else
-                gPSSData->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
+                sStorage->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
 
-            GetMonData(mon, MON_DATA_NICKNAME, gPSSData->cursorMonNick);
-            StringGetEnd10(gPSSData->cursorMonNick);
-            gPSSData->cursorMonLevel = GetMonData(mon, MON_DATA_LEVEL);
-            gPSSData->cursorMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
-            gPSSData->cursorMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
-            gPSSData->cursorMonPalette = GetMonFrontSpritePal(mon);
+            GetMonData(mon, MON_DATA_NICKNAME, sStorage->cursorMonNick);
+            StringGetEnd10(sStorage->cursorMonNick);
+            sStorage->cursorMonLevel = GetMonData(mon, MON_DATA_LEVEL);
+            sStorage->cursorMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
+            sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+            sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
-            gPSSData->cursorMonItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+            sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
         }
     }
     else if (mode == MODE_BOX)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
-        gPSSData->cursorMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
-        if (gPSSData->cursorMonSpecies != SPECIES_NONE)
+        sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
+        if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
             sanityIsBagEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBagEgg)
-                gPSSData->cursorMonIsEgg = TRUE;
+                sStorage->cursorMonIsEgg = TRUE;
             else
-                gPSSData->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
+                sStorage->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
 
 
-            GetBoxMonData(boxMon, MON_DATA_NICKNAME, gPSSData->cursorMonNick);
-            StringGetEnd10(gPSSData->cursorMonNick);
-            gPSSData->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
-            gPSSData->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
-            gPSSData->cursorMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            gPSSData->cursorMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gPSSData->cursorMonSpecies, otId, gPSSData->cursorMonPersonality);
-            gender = GetGenderFromSpeciesAndPersonality(gPSSData->cursorMonSpecies, gPSSData->cursorMonPersonality);
-            gPSSData->cursorMonItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+            GetBoxMonData(boxMon, MON_DATA_NICKNAME, sStorage->cursorMonNick);
+            StringGetEnd10(sStorage->cursorMonNick);
+            sStorage->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
+            sStorage->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
+            sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
+            sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, otId, sStorage->displayMonPersonality);
+            gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
+            sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
     }
     else
     {
-        gPSSData->cursorMonSpecies = SPECIES_NONE;
-        gPSSData->cursorMonItem = 0;
+        sStorage->displayMonSpecies = SPECIES_NONE;
+        sStorage->displayMonItemId = 0;
     }
 
-    if (gPSSData->cursorMonSpecies == SPECIES_NONE)
+    if (sStorage->displayMonSpecies == SPECIES_NONE)
     {
-        StringFill(gPSSData->cursorMonNick, CHAR_SPACE, 5);
-        StringFill(gPSSData->cursorMonTexts[0], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[1], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[2], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonNick, CHAR_SPACE, 5);
+        StringFill(sStorage->cursorMonTexts[0], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[1], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[2], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[3], CHAR_SPACE, 8);
     }
-    else if (gPSSData->cursorMonIsEgg)
+    else if (sStorage->cursorMonIsEgg)
     {
         if (sanityIsBagEgg)
-            StringCopyPadded(gPSSData->cursorMonTexts[0], gPSSData->cursorMonNick, CHAR_SPACE, 5);
+            StringCopyPadded(sStorage->cursorMonTexts[0], sStorage->cursorMonNick, CHAR_SPACE, 5);
         else
-            StringCopyPadded(gPSSData->cursorMonTexts[0], gText_EggNickname, CHAR_SPACE, 8);
+            StringCopyPadded(sStorage->cursorMonTexts[0], gText_EggNickname, CHAR_SPACE, 8);
 
-        StringFill(gPSSData->cursorMonTexts[1], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[2], CHAR_SPACE, 8);
-        StringFill(gPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[1], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[2], CHAR_SPACE, 8);
+        StringFill(sStorage->cursorMonTexts[3], CHAR_SPACE, 8);
     }
     else
     {
-        if (gPSSData->cursorMonSpecies == SPECIES_NIDORAN_F || gPSSData->cursorMonSpecies == SPECIES_NIDORAN_M)
+        if (sStorage->displayMonSpecies == SPECIES_NIDORAN_F || sStorage->displayMonSpecies == SPECIES_NIDORAN_M)
             gender = MON_GENDERLESS;
 
-        StringCopyPadded(gPSSData->cursorMonTexts[0], gPSSData->cursorMonNick, CHAR_SPACE, 5);
+        StringCopyPadded(sStorage->cursorMonTexts[0], sStorage->cursorMonNick, CHAR_SPACE, 5);
 
-        txtPtr = gPSSData->cursorMonTexts[1];
+        txtPtr = sStorage->cursorMonTexts[1];
         *(txtPtr)++ = CHAR_SLASH;
-        StringCopyPadded(txtPtr, gSpeciesNames[gPSSData->cursorMonSpecies], CHAR_SPACE, 5);
+        StringCopyPadded(txtPtr, gSpeciesNames[sStorage->displayMonSpecies], CHAR_SPACE, 5);
 
-        txtPtr = gPSSData->cursorMonTexts[2];
+        txtPtr = sStorage->cursorMonTexts[2];
         *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
         *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         switch (gender)
@@ -1130,27 +1145,27 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         *(txtPtr++) = CHAR_EXTRA_EMOJI;
         *(txtPtr++) = 5; // LV_2
 
-        txtPtr = ConvertIntToDecimalStringN(txtPtr, gPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        txtPtr = ConvertIntToDecimalStringN(txtPtr, sStorage->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
         txtPtr[0] = CHAR_SPACE;
         txtPtr[1] = EOS;
 
-        if (gPSSData->cursorMonItem != 0)
-            StringCopyPadded(gPSSData->cursorMonTexts[3], ItemId_GetName(gPSSData->cursorMonItem), CHAR_SPACE, 8);
+        if (sStorage->displayMonItemId != 0)
+            StringCopyPadded(sStorage->cursorMonTexts[3], ItemId_GetName(sStorage->displayMonItemId), CHAR_SPACE, 8);
         else
-            StringFill(gPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+            StringFill(sStorage->cursorMonTexts[3], CHAR_SPACE, 8);
     }
 }
 
 static u8 HandleInput_InBox(void)
 {
-    switch (gPSSData->inBoxMovingMode)
+    switch (sStorage->inBoxMovingMode)
     {
-    case 0:
+    case MOVE_MODE_NORMAL:
     default:
         return InBoxInput_Normal();
-    case 1:
+    case MOVE_MODE_MULTIPLE_SELECTING:
         return InBoxInput_GrabbingMultiple();
-    case 2:
+    case MOVE_MODE_MULTIPLE_MOVING:
         return InBoxInput_MovingMultiple();
     }
 }
@@ -1165,15 +1180,15 @@ static u8 InBoxInput_Normal(void)
     {
         cursorArea = sBoxCursorArea;
         cursorPosition = sBoxCursorPosition;
-        gPSSData->field_CD2 = 0;
-        gPSSData->field_CD3 = 0;
-        gPSSData->field_CD7 = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
         if (JOY_REPT(DPAD_UP))
         {
-            retVal = TRUE;
-            if (sBoxCursorPosition >= IN_BOX_ROWS)
+            retVal = INPUT_MOVE_CURSOR;
+            if (sBoxCursorPosition >= IN_BOX_COLUMNS)
             {
-                cursorPosition -= IN_BOX_ROWS;
+                cursorPosition -= IN_BOX_COLUMNS;
             }
             else
             {
@@ -1184,111 +1199,111 @@ static u8 InBoxInput_Normal(void)
         }
         else if (JOY_REPT(DPAD_DOWN))
         {
-            retVal = TRUE;
-            cursorPosition += IN_BOX_ROWS;
+            retVal = INPUT_MOVE_CURSOR;
+            cursorPosition += IN_BOX_COLUMNS;
             if (cursorPosition >= IN_BOX_COUNT)
             {
                 cursorArea = CURSOR_AREA_BUTTONS;
                 cursorPosition -= IN_BOX_COUNT;
                 cursorPosition /= 3;
-                gPSSData->field_CD2 = 1;
-                gPSSData->field_CD7 = 1;
+                sStorage->cursorVerticalWrap = 1;
+                sStorage->cursorFlipTimer = 1;
             }
             break;
         }
         else if (JOY_REPT(DPAD_LEFT))
         {
-            retVal = TRUE;
-            if (sBoxCursorPosition % IN_BOX_ROWS != 0)
+            retVal = INPUT_MOVE_CURSOR;
+            if (sBoxCursorPosition % IN_BOX_COLUMNS != 0)
             {
                 cursorPosition--;
             }
             else
             {
-                gPSSData->field_CD3 = -1;
-                cursorPosition += (IN_BOX_ROWS - 1);
+                sStorage->cursorHorizontalWrap = -1;
+                cursorPosition += (IN_BOX_COLUMNS - 1);
             }
             break;
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
-            retVal = TRUE;
-            if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
+            retVal = INPUT_MOVE_CURSOR;
+            if ((sBoxCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
                 cursorPosition++;
             }
             else
             {
-                gPSSData->field_CD3 = 1;
-                cursorPosition -= (IN_BOX_ROWS - 1);
+                sStorage->cursorHorizontalWrap = 1;
+                cursorPosition -= (IN_BOX_COLUMNS - 1);
             }
             break;
         }
         else if (JOY_NEW(START_BUTTON))
         {
-            retVal = TRUE;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BOX;
             cursorPosition = 0;
             break;
         }
 
-        if ((JOY_NEW(A_BUTTON)) && sub_8094924())
+        if ((JOY_NEW(A_BUTTON)) && SetSelectionMenuTexts())
         {
             if (!sCanOnlyMove)
-                return 8;
+                return INPUT_IN_MENU;
 
-            if (gPSSData->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
+            if (sStorage->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
             {
-                switch (sub_8094E50(0))
+                switch (GetMenuItemTextId(0))
                 {
-                case PC_TEXT_STORE:
-                    return 11;
-                case PC_TEXT_WITHDRAW:
-                    return 12;
-                case PC_TEXT_MOVE:
-                    return 13;
-                case PC_TEXT_SHIFT:
-                    return 14;
-                case PC_TEXT_PLACE:
-                    return 15;
-                case PC_TEXT_TAKE:
-                    return 16;
-                case PC_TEXT_GIVE:
-                    return 17;
-                case PC_TEXT_SWITCH:
-                    return 18;
+                case MENU_STORE:
+                    return INPUT_DEPOSIT;
+                case MENU_WITHDRAW:
+                    return INPUT_WITHDRAW;
+                case MENU_MOVE:
+                    return INPUT_MOVE_MON;
+                case MENU_SHIFT:
+                    return INPUT_SHIFT_MON;
+                case MENU_PLACE:
+                    return INPUT_PLACE_MON;
+                case MENU_TAKE:
+                    return INPUT_TAKE_ITEM;
+                case MENU_GIVE:
+                    return INPUT_GIVE_ITEM;
+                case MENU_SWITCH:
+                    return INPUT_SWITCH_ITEMS;
                 }
             }
             else
             {
-                gPSSData->inBoxMovingMode = 1;
-                return 20;
+                sStorage->inBoxMovingMode = MOVE_MODE_MULTIPLE_SELECTING;
+                return INPUT_MULTIMOVE_START;
             }
         }
 
         if (JOY_NEW(B_BUTTON))
-            return 19;
+            return INPUT_PRESSED_B;
 
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
             if (JOY_HELD(L_BUTTON))
-                return 10;
+                return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
-                return 9;
+                return INPUT_SCROLL_RIGHT;
         }
 
         if (JOY_NEW(SELECT_BUTTON))
         {
-            sub_8094C84();
-            return 0;
+            ToggleCursorAutoAction();
+            return INPUT_NONE;
         }
 
-        retVal = 0;
+        retVal = INPUT_NONE;
 
     } while (0);
 
     if (retVal)
-        sub_80927E8(cursorArea, cursorPosition);
+        SetCursorPosition(cursorArea, cursorPosition);
 
     return retVal;
 }
@@ -1299,71 +1314,71 @@ static u8 InBoxInput_GrabbingMultiple(void)
     {
         if (JOY_REPT(DPAD_UP))
         {
-            if (sBoxCursorPosition / IN_BOX_ROWS != 0)
+            if (sBoxCursorPosition / IN_BOX_COLUMNS != 0)
             {
-                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_ROWS);
-                return 21;
+                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_COLUMNS);
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else if (JOY_REPT(DPAD_DOWN))
         {
-            if (sBoxCursorPosition + IN_BOX_ROWS < IN_BOX_COUNT)
+            if (sBoxCursorPosition + IN_BOX_COLUMNS < IN_BOX_COUNT)
             {
-                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_ROWS);
-                return 21;
+                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_COLUMNS);
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else if (JOY_REPT(DPAD_LEFT))
         {
-            if (sBoxCursorPosition % IN_BOX_ROWS != 0)
+            if (sBoxCursorPosition % IN_BOX_COLUMNS != 0)
             {
-                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
-                return 21;
+                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
-            if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
+            if ((sBoxCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
-                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
-                return 21;
+                SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
+                return INPUT_MULTIMOVE_CHANGE_SELECTION;
             }
             else
             {
-                return 24;
+                return INPUT_MULTIMOVE_UNABLE;
             }
         }
         else
         {
-            return 0;
+            return INPUT_NONE;
         }
     }
     else
     {
-        if (sub_8095AA0() == sBoxCursorPosition)
+        if (MultiMove_GetOrigin() == sBoxCursorPosition)
         {
-            gPSSData->inBoxMovingMode = 0;
-            gPSSData->field_CB8->invisible = FALSE;
-            return 22;
+            sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
+            sStorage->cursorShadowSprite->invisible = FALSE;
+            return INPUT_MULTIMOVE_SINGLE;
         }
         else
         {
-            sIsMonBeingMoved = (gPSSData->cursorMonSpecies != SPECIES_NONE);
-            gPSSData->inBoxMovingMode = 2;
+            sIsMonBeingMoved = (sStorage->displayMonSpecies != SPECIES_NONE);
+            sStorage->inBoxMovingMode = MOVE_MODE_MULTIPLE_MOVING;
             sMovingMonOrigBoxId = StorageGetCurrentBox();
-            return 23;
+            return INPUT_MULTIMOVE_GRAB_SELECTION;
         }
     }
 }
@@ -1372,80 +1387,80 @@ static u8 InBoxInput_MovingMultiple(void)
 {
     if (JOY_REPT(DPAD_UP))
     {
-        if (sub_8095474(0))
+        if (MultiMove_TryMoveGroup(0))
         {
-            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_ROWS);
-            return 25;
+            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_COLUMNS);
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 24;
+            return INPUT_MULTIMOVE_UNABLE;
         }
     }
     else if (JOY_REPT(DPAD_DOWN))
     {
-        if (sub_8095474(1))
+        if (MultiMove_TryMoveGroup(1))
         {
-            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_ROWS);
-            return 25;
+            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_COLUMNS);
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 24;
+            return INPUT_MULTIMOVE_UNABLE;
         }
     }
     else if (JOY_REPT(DPAD_LEFT))
     {
-        if (sub_8095474(2))
+        if (MultiMove_TryMoveGroup(2))
         {
-            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
-            return 25;
+            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 10;
+            return INPUT_SCROLL_LEFT;
         }
     }
     else if (JOY_REPT(DPAD_RIGHT))
     {
-        if (sub_8095474(3))
+        if (MultiMove_TryMoveGroup(3))
         {
-            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
-            return 25;
+            SetCursorPosition(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
+            return INPUT_MULTIMOVE_MOVE_MONS;
         }
         else
         {
-            return 9;
+            return INPUT_SCROLL_RIGHT;
         }
     }
     else if (JOY_NEW(A_BUTTON))
     {
-        if (sub_8095ABC())
+        if (MultiMove_CanPlaceSelection())
         {
             sIsMonBeingMoved = FALSE;
-            gPSSData->inBoxMovingMode = 0;
-            return 26;
+            sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
+            return INPUT_MULTIMOVE_PLACE_MONS;
         }
         else
         {
-            return 24;
+            return INPUT_MULTIMOVE_UNABLE;
         }
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        return 24;
+        return INPUT_MULTIMOVE_UNABLE;
     }
     else
     {
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
             if (JOY_HELD(L_BUTTON))
-                return 10;
+                return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
-                return 9;
+                return INPUT_SCROLL_RIGHT;
         }
 
-        return 0;
+        return INPUT_NONE;
     }
 }
 
@@ -1460,18 +1475,18 @@ static u8 HandleInput_InParty(void)
     {
         cursorArea = sBoxCursorArea;
         cursorPosition = sBoxCursorPosition;
-        gPSSData->field_CD3 = 0;
-        gPSSData->field_CD2 = 0;
-        gPSSData->field_CD7 = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
         gotoBox = FALSE;
-        retVal = 0;
+        retVal = INPUT_NONE;
 
         if (JOY_REPT(DPAD_UP))
         {
             if (--cursorPosition < 0)
                 cursorPosition = PARTY_SIZE;
             if (cursorPosition != sBoxCursorPosition)
-                retVal = 1;
+                retVal = INPUT_MOVE_CURSOR;
             break;
         }
         else if (JOY_REPT(DPAD_DOWN))
@@ -1479,13 +1494,13 @@ static u8 HandleInput_InParty(void)
             if (++cursorPosition > PARTY_SIZE)
                 cursorPosition = 0;
             if (cursorPosition != sBoxCursorPosition)
-                retVal = 1;
+                retVal = INPUT_MOVE_CURSOR;
             break;
         }
         else if (JOY_REPT(DPAD_LEFT) && sBoxCursorPosition != 0)
         {
-            retVal = 1;
-            gPSSData->field_CD6 = sBoxCursorPosition;
+            retVal = INPUT_MOVE_CURSOR;
+            sStorage->cursorPrevHorizPos = sBoxCursorPosition;
             cursorPosition = 0;
             break;
         }
@@ -1493,12 +1508,12 @@ static u8 HandleInput_InParty(void)
         {
             if (sBoxCursorPosition == 0)
             {
-                retVal = 1;
-                cursorPosition = gPSSData->field_CD6;
+                retVal = INPUT_MOVE_CURSOR;
+                cursorPosition = sStorage->cursorPrevHorizPos;
             }
             else
             {
-                retVal = 6;
+                retVal = INPUT_HIDE_PARTY;
                 cursorArea = CURSOR_AREA_IN_BOX;
                 cursorPosition = 0;
             }
@@ -1509,64 +1524,64 @@ static u8 HandleInput_InParty(void)
         {
             if (sBoxCursorPosition == PARTY_SIZE)
             {
-                if (gPSSData->boxOption == BOX_OPTION_DEPOSIT)
-                    return 4;
+                if (sStorage->boxOption == BOX_OPTION_DEPOSIT)
+                    return INPUT_CLOSE_BOX;
 
                 gotoBox = TRUE;
             }
-            else if (sub_8094924())
+            else if (SetSelectionMenuTexts())
             {
                 if (!sCanOnlyMove)
-                    return 8;
+                    return INPUT_IN_MENU;
 
-                switch (sub_8094E50(0))
+                switch (GetMenuItemTextId(0))
                 {
-                case PC_TEXT_STORE:
-                    return 11;
-                case PC_TEXT_WITHDRAW:
-                    return 12;
-                case PC_TEXT_MOVE:
-                    return 13;
-                case PC_TEXT_SHIFT:
-                    return 14;
-                case PC_TEXT_PLACE:
-                    return 15;
-                case PC_TEXT_TAKE:
-                    return 16;
-                case PC_TEXT_GIVE:
-                    return 17;
-                case PC_TEXT_SWITCH:
-                    return 18;
+                case MENU_STORE:
+                    return INPUT_DEPOSIT;
+                case MENU_WITHDRAW:
+                    return INPUT_WITHDRAW;
+                case MENU_MOVE:
+                    return INPUT_MOVE_MON;
+                case MENU_SHIFT:
+                    return INPUT_SHIFT_MON;
+                case MENU_PLACE:
+                    return INPUT_PLACE_MON;
+                case MENU_TAKE:
+                    return INPUT_TAKE_ITEM;
+                case MENU_GIVE:
+                    return INPUT_GIVE_ITEM;
+                case MENU_SWITCH:
+                    return INPUT_SWITCH_ITEMS;
                 }
             }
         }
 
         if (JOY_NEW(B_BUTTON))
         {
-            if (gPSSData->boxOption == BOX_OPTION_DEPOSIT)
-                return 19;
+            if (sStorage->boxOption == BOX_OPTION_DEPOSIT)
+                return INPUT_PRESSED_B;
 
             gotoBox = TRUE;
         }
 
         if (gotoBox)
         {
-            retVal = 6;
+            retVal = INPUT_HIDE_PARTY;
             cursorArea = CURSOR_AREA_IN_BOX;
             cursorPosition = 0;
         }
         else if (JOY_NEW(SELECT_BUTTON))
         {
-            sub_8094C84();
-            return 0;
+            ToggleCursorAutoAction();
+            return INPUT_NONE;
         }
 
     } while (0);
 
-    if (retVal != 0)
+    if (retVal != INPUT_NONE)
     {
-        if (retVal != 6)
-            sub_80927E8(cursorArea, cursorPosition);
+        if (retVal != INPUT_HIDE_PARTY)
+            SetCursorPosition(cursorArea, cursorPosition);
     }
 
     return retVal;
@@ -1580,64 +1595,64 @@ static u8 HandleInput_OnBox(void)
 
     do
     {
-        gPSSData->field_CD3 = 0;
-        gPSSData->field_CD2 = 0;
-        gPSSData->field_CD7 = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
 
         if (JOY_REPT(DPAD_UP))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BUTTONS;
             cursorPosition = 0;
-            gPSSData->field_CD7 = 1;
+            sStorage->cursorFlipTimer = 1;
             break;
         }
         else if (JOY_REPT(DPAD_DOWN))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_IN_BOX;
             cursorPosition = 2;
             break;
         }
 
         if (JOY_HELD(DPAD_LEFT))
-            return 10;
+            return INPUT_SCROLL_LEFT;
         if (JOY_HELD(DPAD_RIGHT))
-            return 9;
+            return INPUT_SCROLL_RIGHT;
 
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
             if (JOY_HELD(L_BUTTON))
-                return 10;
+                return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
-                return 9;
+                return INPUT_SCROLL_RIGHT;
         }
 
         if (JOY_NEW(A_BUTTON))
         {
-            sub_80920FC(FALSE);
+            AnimateBoxScrollArrows(FALSE);
             AddBoxMenu();
-            return 7;
+            return INPUT_BOX_OPTIONS;
         }
 
         if (JOY_NEW(B_BUTTON))
-            return 19;
+            return INPUT_PRESSED_B;
 
         if (JOY_NEW(SELECT_BUTTON))
         {
-            sub_8094C84();
-            return 0;
+            ToggleCursorAutoAction();
+            return INPUT_NONE;
         }
 
-        retVal = 0;
+        retVal = INPUT_NONE;
 
     } while (0);
 
     if (retVal)
     {
         if (cursorArea != CURSOR_AREA_BOX)
-            sub_80920FC(FALSE);
-        sub_80927E8(cursorArea, cursorPosition);
+            AnimateBoxScrollArrows(FALSE);
+        SetCursorPosition(cursorArea, cursorPosition);
     }
 
     return retVal;
@@ -1654,41 +1669,41 @@ static u8 HandleInput_OnButtons(void)
     {
         cursorArea = sBoxCursorArea;
         cursorPosition = sBoxCursorPosition;
-        gPSSData->field_CD3 = 0;
-        gPSSData->field_CD2 = 0;
-        gPSSData->field_CD7 = 0;
+        sStorage->cursorHorizontalWrap = 0;
+        sStorage->cursorVerticalWrap = 0;
+        sStorage->cursorFlipTimer = 0;
 
         if (JOY_REPT(DPAD_UP))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_IN_BOX;
-            gPSSData->field_CD2 = -1;
+            sStorage->cursorVerticalWrap = -1;
             if (sBoxCursorPosition == 0)
                 cursorPosition = IN_BOX_COUNT - 1 - 5;
             else
                 cursorPosition = IN_BOX_COUNT - 1;
-            gPSSData->field_CD7 = 1;
+            sStorage->cursorFlipTimer = 1;
             break;
         }
         else if (JOY_REPT(DPAD_DOWN | START_BUTTON))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BOX;
             cursorPosition = 0;
-            gPSSData->field_CD7 = 1;
+            sStorage->cursorFlipTimer = 1;
             break;
         }
 
         if (JOY_REPT(DPAD_LEFT))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             if (--cursorPosition < 0)
                 cursorPosition = 1;
             break;
         }
         else if (JOY_REPT(DPAD_RIGHT))
         {
-            retVal = 1;
+            retVal = INPUT_MOVE_CURSOR;
             if (++cursorPosition > 1)
                 cursorPosition = 0;
             break;
@@ -1696,22 +1711,22 @@ static u8 HandleInput_OnButtons(void)
 
         if (JOY_NEW(A_BUTTON))
         {
-            return cursorPosition == 0 ? 5 : 4;
+            return cursorPosition == 0 ? INPUT_SHOW_PARTY : INPUT_CLOSE_BOX;
         }
         if (JOY_NEW(B_BUTTON))
-            return 19;
+            return INPUT_PRESSED_B;
 
         if (JOY_NEW(SELECT_BUTTON))
         {
-            sub_8094C84();
-            return 0;
+            ToggleCursorAutoAction();
+            return INPUT_NONE;
         }
 
-        retVal = 0;
+        retVal = INPUT_NONE;
     } while (0);
 
-    if (retVal != 0)
-        sub_80927E8(cursorArea, cursorPosition);
+    if (retVal != INPUT_NONE)
+        SetCursorPosition(cursorArea, cursorPosition);
 
     return retVal;
 }
@@ -1739,42 +1754,42 @@ u8 HandleInput(void)
         i++;
     }
 
-    return 0;
+    return INPUT_NONE;
 }
 
 static void AddBoxMenu(void)
 {
     InitMenu();
-    SetMenuText(PC_TEXT_JUMP);
-    SetMenuText(PC_TEXT_WALLPAPER);
-    SetMenuText(PC_TEXT_NAME);
-    SetMenuText(PC_TEXT_CANCEL);
+    SetMenuText(MENU_JUMP);
+    SetMenuText(MENU_WALLPAPER);
+    SetMenuText(MENU_NAME);
+    SetMenuText(MENU_CANCEL);
 }
 
-static bool8 sub_8094924(void)
+static bool8 SetSelectionMenuTexts(void)
 {
     InitMenu();
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
-        return sub_809494C();
+    if (sStorage->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return SetMenuTexts_Mon();
     else
-        return sub_8094A0C();
+        return SetMenuTexts_Item();
 }
 
-static bool8 sub_809494C(void)
+static bool8 SetMenuTexts_Mon(void)
 {
-    u16 var0 = sub_8092458();
+    u16 var0 = GetSpeciesAtCursorPosition();
 
-    switch (gPSSData->boxOption)
+    switch (sStorage->boxOption)
     {
     case BOX_OPTION_DEPOSIT:
         if (var0)
-            SetMenuText(PC_TEXT_STORE);
+            SetMenuText(MENU_STORE);
         else
             return FALSE;
         break;
     case BOX_OPTION_WITHDRAW:
         if (var0)
-            SetMenuText(PC_TEXT_WITHDRAW);
+            SetMenuText(MENU_WITHDRAW);
         else
             return FALSE;
         break;
@@ -1782,14 +1797,14 @@ static bool8 sub_809494C(void)
         if (sIsMonBeingMoved)
         {
             if (var0)
-                SetMenuText(PC_TEXT_SHIFT);
+                SetMenuText(MENU_SHIFT);
             else
-                SetMenuText(PC_TEXT_PLACE);
+                SetMenuText(MENU_PLACE);
         }
         else
         {
             if (var0)
-                SetMenuText(PC_TEXT_MOVE);
+                SetMenuText(MENU_MOVE);
             else
                 return FALSE;
         }
@@ -1799,163 +1814,169 @@ static bool8 sub_809494C(void)
         return FALSE;
     }
 
-    SetMenuText(PC_TEXT_SUMMARY);
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_MONS)
+    SetMenuText(MENU_SUMMARY);
+    if (sStorage->boxOption == BOX_OPTION_MOVE_MONS)
     {
         if (!sBoxCursorArea)
-            SetMenuText(PC_TEXT_WITHDRAW);
+            SetMenuText(MENU_WITHDRAW);
         else
-            SetMenuText(PC_TEXT_STORE);
+            SetMenuText(MENU_STORE);
     }
 
-    SetMenuText(PC_TEXT_MARK);
-    SetMenuText(PC_TEXT_RELEASE);
-    SetMenuText(PC_TEXT_CANCEL);
+    SetMenuText(MENU_MARK);
+    SetMenuText(MENU_RELEASE);
+    SetMenuText(MENU_CANCEL);
     return TRUE;
 }
 
-static bool8 sub_8094A0C(void)
+static bool8 SetMenuTexts_Item(void)
 {
-    if (gPSSData->cursorMonSpecies == SPECIES_EGG)
+    if (sStorage->displayMonSpecies == SPECIES_EGG)
         return FALSE;
 
     if (!IsActiveItemMoving())
     {
-        if (gPSSData->cursorMonItem == ITEM_NONE)
+        if (sStorage->displayMonItemId == ITEM_NONE)
         {
-            if (gPSSData->cursorMonSpecies == SPECIES_NONE)
+            if (sStorage->displayMonSpecies == SPECIES_NONE)
                 return FALSE;
 
-            SetMenuText(PC_TEXT_GIVE2);
+            SetMenuText(MENU_GIVE_2);
         }
         else
         {
-            if (!ItemIsMail(gPSSData->cursorMonItem))
+            if (!ItemIsMail(sStorage->displayMonItemId))
             {
-                SetMenuText(PC_TEXT_TAKE);
-                SetMenuText(PC_TEXT_BAG);
+                SetMenuText(MENU_TAKE);
+                SetMenuText(MENU_BAG);
             }
-            SetMenuText(PC_TEXT_INFO);
+            SetMenuText(MENU_INFO);
         }
     }
     else
     {
-        if (gPSSData->cursorMonItem == ITEM_NONE)
+        if (sStorage->displayMonItemId == ITEM_NONE)
         {
-            if (gPSSData->cursorMonSpecies == SPECIES_NONE)
+            if (sStorage->displayMonSpecies == SPECIES_NONE)
                 return FALSE;
 
-            SetMenuText(PC_TEXT_GIVE);
+            SetMenuText(MENU_GIVE);
         }
         else
         {
-            if (ItemIsMail(gPSSData->cursorMonItem) == TRUE)
+            if (ItemIsMail(sStorage->displayMonItemId) == TRUE)
                 return FALSE;
 
-            SetMenuText(PC_TEXT_SWITCH);
+            SetMenuText(MENU_SWITCH);
         }
     }
 
-    SetMenuText(PC_TEXT_CANCEL);
+    SetMenuText(MENU_CANCEL);
     return TRUE;
 }
 
-static void sub_8094AB8(struct Sprite *sprite)
+//------------------------------------------------------------------------------
+//  SECTION: Cursor
+//
+//  The functions below handle a few of the generic cursor features.
+//------------------------------------------------------------------------------
+
+static void SpriteCB_CursorShadow(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPSSData->field_CB4->pos1.x;
-    sprite->pos1.y = gPSSData->field_CB4->pos1.y + 20;
+    sprite->pos1.x = sStorage->cursorSprite->pos1.x;
+    sprite->pos1.y = sStorage->cursorSprite->pos1.y + 20;
 }
 
-static void sub_8094AD8(void)
+static void CreateCursorSprites(void)
 {
     u16 x, y;
     u8 spriteId;
     u8 priority, subpriority;
     struct SpriteSheet spriteSheets[] = {
-        {sHandCursorTiles, 0x800, TAG_TILE_0},
-        {sHandCursorShadowTiles, 0x80, TAG_TILE_1},
+        {sHandCursorTiles, 0x800,      TAG_TILE_HAND_CURSOR},
+        {sHandCursorShadowTiles, 0x80, TAG_TILE_HAND_SHADOW},
         {}
     };
 
     struct SpritePalette spritePalettes[] = {
-        {sHandCursorPalette, TAG_PAL_DAC7},
+        {sHandCursorPalette, TAG_PAL_HAND_CURSOR},
         {}
     };
 
-    static const struct OamData sOamData_857BA0C = {
+    static const struct OamData oamData_HandCursor = {
         .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
         .priority = 1,
     };
-    static const struct OamData sOamData_857BA14 = {
+    static const struct OamData oamData_HandCursorShadow = {
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SIZE(16x16),
         .priority = 1,
     };
 
-    static const union AnimCmd sSpriteAnim_857BA1C[] = {
+    static const union AnimCmd anim_HandCursor_Bounce[] = {
         ANIMCMD_FRAME(0, 30),
         ANIMCMD_FRAME(16, 30),
         ANIMCMD_JUMP(0)
     };
-    static const union AnimCmd sSpriteAnim_857BA28[] = {
+    static const union AnimCmd anim_HandCursor_Still[] = {
         ANIMCMD_FRAME(0, 5),
         ANIMCMD_END
     };
-    static const union AnimCmd sSpriteAnim_857BA30[] = {
+    static const union AnimCmd anim_HandCursor_Open[] = {
         ANIMCMD_FRAME(32, 5),
         ANIMCMD_END
     };
-    static const union AnimCmd sSpriteAnim_857BA38[] = {
+    static const union AnimCmd anim_HandCursor_Fist[] = {
         ANIMCMD_FRAME(48, 5),
         ANIMCMD_END
     };
 
-    static const union AnimCmd *const sSpriteAnimTable_857BA40[] = {
-        sSpriteAnim_857BA1C,
-        sSpriteAnim_857BA28,
-        sSpriteAnim_857BA30,
-        sSpriteAnim_857BA38
+    static const union AnimCmd *const animTable_HandCursor[] = {
+        anim_HandCursor_Bounce,
+        anim_HandCursor_Still,
+        anim_HandCursor_Open,
+        anim_HandCursor_Fist
     };
 
-    static const struct SpriteTemplate gSpriteTemplate_857BA50 = {
-        .tileTag = TAG_TILE_0,
+    static const struct SpriteTemplate sprTemplate_HandCursor = {
+        .tileTag = TAG_TILE_HAND_CURSOR,
         .paletteTag = TAG_PAL_WAVEFORM,
-        .oam = &sOamData_857BA0C,
-        .anims = sSpriteAnimTable_857BA40,
+        .oam = &oamData_HandCursor,
+        .anims = animTable_HandCursor,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     };
 
-    static const struct SpriteTemplate gSpriteTemplate_857BA68 = {
-        .tileTag = TAG_TILE_1,
+    static const struct SpriteTemplate sprTemplate_HandCursorShadow = {
+        .tileTag = TAG_TILE_HAND_SHADOW,
         .paletteTag = TAG_PAL_WAVEFORM,
-        .oam = &sOamData_857BA14,
+        .oam = &oamData_HandCursorShadow,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = sub_8094AB8,
+        .callback = SpriteCB_CursorShadow,
     };
 
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
-    gPSSData->field_CD8[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
-    gPSSData->field_CD8[1] = IndexOfSpritePaletteTag(TAG_PAL_DAC7);
+    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
+    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(TAG_PAL_HAND_CURSOR);
 
-    sub_8092398(sBoxCursorArea, sBoxCursorPosition, &x, &y);
-    spriteId = CreateSprite(&gSpriteTemplate_857BA50, x, y, 6);
+    GetCursorCoordsByPos(sBoxCursorArea, sBoxCursorPosition, &x, &y);
+    spriteId = CreateSprite(&sprTemplate_HandCursor, x, y, 6);
     if (spriteId != MAX_SPRITES)
     {
-        gPSSData->field_CB4 = &gSprites[spriteId];
-        gPSSData->field_CB4->oam.paletteNum = gPSSData->field_CD8[sCanOnlyMove];
-        gPSSData->field_CB4->oam.priority = 1;
+        sStorage->cursorSprite = &gSprites[spriteId];
+        sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sCanOnlyMove];
+        sStorage->cursorSprite->oam.priority = 1;
         if (sIsMonBeingMoved)
-            StartSpriteAnim(gPSSData->field_CB4, 3);
+            StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
     }
     else
     {
-        gPSSData->field_CB4 = NULL;
+        sStorage->cursorSprite = NULL;
     }
 
     if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
@@ -1969,24 +1990,24 @@ static void sub_8094AD8(void)
         priority = 2;
     }
 
-    spriteId = CreateSprite(&gSpriteTemplate_857BA68, 0, 0, subpriority);
+    spriteId = CreateSprite(&sprTemplate_HandCursorShadow, 0, 0, subpriority);
     if (spriteId != MAX_SPRITES)
     {
-        gPSSData->field_CB8 = &gSprites[spriteId];
-        gPSSData->field_CB8->oam.priority = priority;
+        sStorage->cursorShadowSprite = &gSprites[spriteId];
+        sStorage->cursorShadowSprite->oam.priority = priority;
         if (sBoxCursorArea)
-            gPSSData->field_CB8->invisible = 1;
+            sStorage->cursorShadowSprite->invisible = 1;
     }
     else
     {
-        gPSSData->field_CB8 = NULL;
+        sStorage->cursorShadowSprite = NULL;
     }
 }
 
-static void sub_8094C84(void)
+static void ToggleCursorAutoAction(void)
 {
     sCanOnlyMove = !sCanOnlyMove;
-    gPSSData->field_CB4->oam.paletteNum = gPSSData->field_CD8[sCanOnlyMove];
+    sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sCanOnlyMove];
 }
 
 u8 GetBoxCursorPosition(void)
@@ -1994,43 +2015,43 @@ u8 GetBoxCursorPosition(void)
     return sBoxCursorPosition;
 }
 
-void sub_8094CD4(u8 *arg0, u8 *arg1)
+void GetCursorBoxColumnAndRow(u8 *col_p, u8 *row_p)
 {
     if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
     {
-        *arg0 = sBoxCursorPosition % IN_BOX_ROWS;
-        *arg1 = sBoxCursorPosition / IN_BOX_ROWS;
+        *col_p = sBoxCursorPosition % IN_BOX_COLUMNS;
+        *row_p = sBoxCursorPosition / IN_BOX_COLUMNS;
     }
     else
     {
-        *arg0 = 0;
-        *arg1 = 0;
+        *col_p = 0;
+        *row_p = 0;
     }
 }
 
-void sub_8094D14(u8 animNum)
+void StartCursorAnim(u8 animNum)
 {
-    StartSpriteAnim(gPSSData->field_CB4, animNum);
+    StartSpriteAnim(sStorage->cursorSprite, animNum);
 }
 
-u8 sub_8094D34(void)
+u8 PSS_GetMovingMonOrigBoxId(void)
 {
     return sMovingMonOrigBoxId;
 }
 
-void sub_8094D40(void)
+void SetCursorPriorityTo1(void)
 {
-    gPSSData->field_CB4->oam.priority = 1;
+    sStorage->cursorSprite->oam.priority = 1;
 }
 
-void sub_8094D60(void)
+void TryHideItemAtCursor(void)
 {
     if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
-        sub_8095D44(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
+        TryHideItemIconAtPos(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
 }
 
-void sub_8094D84(void)
+void TryShowItemAtCursor(void)
 {
     if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
-        sub_8095C84(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
+        TryLoadItemIconAtPos(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
 }

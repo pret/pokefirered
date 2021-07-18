@@ -1730,7 +1730,7 @@ static void TradeMenuCB_0(void)
             DrawTextBorderOuter(1, 1, 14);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
             UnionRoomAndTradeMenuPrintOptions(1, 3, 16, 2, sMenuAction_SummaryTrade);
-            Menu_InitCursor(1, 3, 0, 0, 16, 2, 0);
+            InitMenuInUpperLeftCornerPlaySoundWhenAPressed(1, 3, 0, 0, 16, 2, 0);
             PutWindowTilemap(1);
             CopyWindowToVram(1, COPYWIN_BOTH);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 1;

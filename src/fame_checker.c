@@ -31,6 +31,16 @@
 
 #define FC_NONTRAINER_START 0xFE00
 
+enum FCDisplayState
+{
+    FCWINMAP_HALFOPEN,
+    FCWINMAP_FULLOPEN,
+    FCWINMAP_BG2_WHITE,
+    FCWINMAP_3_UNUSED,
+    FCWINMAP_CLOSED,
+    FCWINMAP_HIDDEN,
+};
+
 struct FameCheckerData
 {
     MainCallback savedCallback;
@@ -133,9 +143,9 @@ static const u16 sOakSpritePalette[] = INCBIN_U16("graphics/fame_checker/prof_oa
 static const u16 sUnkPalette[] = INCBIN_U16("graphics/fame_checker/unk.gbapal"); // unused?
 static const u16 sSilhouettePalette[] = INCBIN_U16("graphics/fame_checker/silhouette.gbapal");
 
-static const u8 sTextColor_White[3]  = {0, 1, 2};
-static const u8 sTextColor_DkGrey[3] = {0, 2, 3};
-static const u8 sTextColor_Green[3]  = {0, 6, 7};
+static const u8 sTextColor_White[3]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
+static const u8 sTextColor_DkGrey[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+static const u8 sTextColor_Green[3]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN};
 
 #define FAME_CHECKER_PROF_OAK  (FC_NONTRAINER_START + 0)
 #define FAME_CHECKER_DAISY_OAK (FC_NONTRAINER_START + 1)
@@ -548,7 +558,7 @@ static const union AnimCmd *const sQuestionMarkTileAnims[] = {
 };
 
 static const struct SpriteTemplate sQuestionMarkTileSpriteTemplate = {
-    SPRITETAG_QUESTION_MARK, 0xffff, &sQuestionMarkTileOamData, sQuestionMarkTileAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_QUESTION_MARK, SPRITE_INVALID_TAG, &sQuestionMarkTileOamData, sQuestionMarkTileAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const union AnimCmd sSpinningPokeballAnim0[] = {
@@ -566,7 +576,7 @@ static const struct OamData sSpinningPokeballOamData = {
 };
 
 static const union AffineAnimCmd sSpinningPokeballAffineAnim0[] = {
-    AFFINEANIMCMD_FRAME(0, 0, 4, 20),
+    AFFINEANIMCMD_FRAME(Q_8_8(0.0), Q_8_8(0.0), 4, 20),
     AFFINEANIMCMD_JUMP(0)
 };
 
@@ -592,19 +602,19 @@ static const struct OamData sDaisyFujiOakBillOamData = {
 };
 
 static const struct SpriteTemplate sDaisySpriteTemplate = {
-    SPRITETAG_DAISY, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_DAISY, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sFujiSpriteTemplate = {
-    SPRITETAG_FUJI, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_FUJI, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sOakSpriteTemplate = {
-    SPRITETAG_OAK, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_OAK, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sBillSpriteTemplate = {
-    SPRITETAG_BILL, 0xffff, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    SPRITETAG_BILL, SPRITE_INVALID_TAG, &sDaisyFujiOakBillOamData, sDaisyFujiOakBillAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
 static void FC_VBlankCallback(void)
@@ -664,9 +674,9 @@ static void MainCB2_LoadFameChecker(void)
             LoadBgTiles(3, gFameCheckerBgTiles, sizeof(gFameCheckerBgTiles), 0);
             CopyToBgTilemapBufferRect(3, gFameCheckerBg3Tilemap, 0, 0, 32, 32);
             LoadPalette(gFameCheckerBgPals + 0x00, 0x00, 0x40);
-            LoadPalette(gFameCheckerBgPals + 0x10, 0x10, 0x20);
+            LoadPalette(gFameCheckerBgPals + 0x10, 0x10, 0x20); // ???
             CopyToBgTilemapBufferRect(2, gFameCheckerBg2Tilemap, 0, 0, 32, 32);
-            CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11);
+            CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11); // basically shift the whole cabal 2 tiles left
             LoadPalette(stdpal_get(2), 0xF0, 0x20);
             gMain.state++;
             break;
@@ -695,19 +705,19 @@ static void MainCB2_LoadFameChecker(void)
             LoadUISpriteSheetsAndPalettes();
             CreateAllFlavorTextIcons(FAMECHECKER_OAK);
             WipeMsgBoxAndTransfer();
-            BeginNormalPaletteFade(0xFFFFFFFF,0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF,0, 16, 0, RGB_BLACK);
             gMain.state++;
             break;
         case 7:
             FCSetup_TurnOnDisplay();
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0x07);
-            SetGpuReg(REG_OFFSET_BLDY, 0x08);
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 0));
+            SetGpuReg(REG_OFFSET_BLDY, 8);
             SetVBlankCallback(FC_VBlankCallback);
             sFameCheckerData->listMenuTopIdx = 0;
             FC_CreateScrollIndicatorArrowPair();
-            UpdateInfoBoxTilemap(1, 4);
-            CreateTask(Task_WaitFadeOnInit, 0x08);
+            UpdateInfoBoxTilemap(1, FCWINMAP_CLOSED);
+            CreateTask(Task_WaitFadeOnInit, 8);
             SetMainCallback2(MainCB2_FameCheckerMain);
             gMain.state = 0;
             break;
@@ -749,8 +759,8 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 PlaySE(SE_M_LOCK_ON);
                 FillWindowPixelRect(FCWINDOWID_ICONDESC, PIXEL_FILL(0), 0, 0, 88, 32);
                 FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
-                UpdateInfoBoxTilemap(2, 4);
-                UpdateInfoBoxTilemap(1, 5);
+                UpdateInfoBoxTilemap(2, FCWINMAP_CLOSED);
+                UpdateInfoBoxTilemap(1, FCWINMAP_HIDDEN);
                 PrintUIHelp(1);
                 task->data[2] = CreatePersonPicSprite(sFameCheckerData->unlockedPersons[cursorPos]);
                 gSprites[task->data[2]].pos2.x = 0xF0;
@@ -768,7 +778,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 task->func = Task_StartToCloseFameChecker;
             else if (sFameCheckerData->inPickMode)
             {
-                if (!IsTextPrinterActive(2) && HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
+                if (!IsTextPrinterActive(FCWINDOWID_MSGBOX) && HasUnlockedAllFlavorTextsForCurrentPerson() == TRUE)
                     GetPickModeText();
             }
             else if (sFameCheckerData->personHasUnlockedPanels)
@@ -849,8 +859,8 @@ static void Task_ExitPickMode(u8 taskId)
     {
         if (sFameCheckerData->personHasUnlockedPanels)
             PrintUIHelp(0);
-        UpdateInfoBoxTilemap(1, 4);
-        UpdateInfoBoxTilemap(2, 2);
+        UpdateInfoBoxTilemap(1, FCWINMAP_CLOSED);
+        UpdateInfoBoxTilemap(2, FCWINMAP_BG2_WHITE);
         sFameCheckerData->inPickMode = FALSE;
         DestroyPersonPicSprite(taskId, FameCheckerGetCursorY());
         task->func = Task_TopMenuHandleInput;
@@ -864,7 +874,7 @@ static void Task_FlavorTextDisplayHandleInput(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     RunTextPrinters();
-    if (JOY_NEW(A_BUTTON) && !IsTextPrinterActive(2))
+    if (JOY_NEW(A_BUTTON) && !IsTextPrinterActive(FCWINDOWID_MSGBOX))
     {
         u8 spriteId = sFameCheckerData->spriteIds[data[1]];
         if (gSprites[spriteId].data[1] != 0xFF)
@@ -1010,7 +1020,7 @@ static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
 static void Task_StartToCloseFameChecker(u8 taskId)
 {
     PlaySE(SE_M_SWIFT);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_DestroyAssetsAndCloseFameChecker;
 }
 
@@ -1083,7 +1093,7 @@ static void PrintUIHelp(u8 state)
     }
     width = GetStringWidth(0, src, 0);
     FillWindowPixelRect(FCWINDOWID_UIHELP, PIXEL_FILL(0), 0, 0, 0xc0, 0x10);
-    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, sTextColor_White, -1, src);
+    AddTextPrinterParameterized4(FCWINDOWID_UIHELP, 0, 188 - width, 0, 0, 2, sTextColor_White, TEXT_SPEED_FF, src);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_UIHELP);
 }
 
@@ -1364,7 +1374,7 @@ static u8 CreatePersonPicSprite(u8 fcPersonIdx)
     }
     else
     {
-        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
+        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], TRUE, 0x94, 0x42, 6, SPRITE_INVALID_TAG);
     }
     gSprites[spriteId].callback = SpriteCB_FCSpinningPokeball;
     if (gSaveBlock1Ptr->fameChecker[fcPersonIdx].pickState == FCPICKSTATE_SILHOUETTE)
@@ -1396,10 +1406,10 @@ static void UpdateIconDescriptionBox(u8 whichText)
     gIconDescriptionBoxIsOpen = 1;
     FillWindowPixelRect(FCWINDOWID_ICONDESC, PIXEL_FILL(0), 0, 0, 0x58, 0x20);
     width = (0x54 - GetStringWidth(0, sFlavorTextOriginLocationTexts[idx], 0)) / 2;
-    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, sTextColor_DkGrey, -1, sFlavorTextOriginLocationTexts[idx]);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 0, 0, 2, sTextColor_DkGrey, TEXT_SPEED_FF, sFlavorTextOriginLocationTexts[idx]);
     StringExpandPlaceholders(gStringVar1, sFlavorTextOriginObjectNameTexts[idx]);
     width = (0x54 - GetStringWidth(0, gStringVar1, 0)) / 2;
-    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, sTextColor_DkGrey, -1, gStringVar1);
+    AddTextPrinterParameterized4(FCWINDOWID_ICONDESC, 0, width, 10, 0, 2, sTextColor_DkGrey, TEXT_SPEED_FF, gStringVar1);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_ICONDESC);
 }
 
@@ -1513,7 +1523,7 @@ static void Task_SwitchToPickMode(u8 taskId)
 static void PrintCancelDescription(void)
 {
     FillWindowPixelRect(FCWINDOWID_MSGBOX, PIXEL_FILL(1), 0, 0, 0xd0, 0x20);
-    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(FCWINDOWID_MSGBOX, 2, gFameCheckerText_FameCheckerWillBeClosed, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     FC_PutWindowTilemapAndCopyWindowToVramMode3(FCWINDOWID_MSGBOX);
 }
 
@@ -1593,7 +1603,7 @@ static void FC_CreateScrollIndicatorArrowPair(void)
           0,
           0,
           SPRITETAG_SCROLL_INDICATORS,
-          0xFFFF,
+          SPRITE_INVALID_TAG,
           1,
     };
 
@@ -1629,12 +1639,12 @@ static void HandleFlavorTextModeSwitch(bool8 state)
         gTasks[taskId].data[1] = 4;
         if (state == TRUE)
         {
-            gTasks[taskId].data[2] = 1;
+            gTasks[taskId].data[2] = FCWINMAP_FULLOPEN;
             sFameCheckerData->viewingFlavorText = TRUE;
         }
         else
         {
-            gTasks[taskId].data[2] = 4;
+            gTasks[taskId].data[2] = FCWINMAP_CLOSED;
             sFameCheckerData->viewingFlavorText = FALSE;
         }
     }
@@ -1648,7 +1658,7 @@ static void Task_FCOpenOrCloseInfoBox(u8 taskId)
         case 0:
             if (--task->data[1] == 0)
             {
-                UpdateInfoBoxTilemap(1, 0);
+                UpdateInfoBoxTilemap(1, FCWINMAP_HALFOPEN);
                 task->data[1] = 4;
                 task->data[0]++;
             }
@@ -1665,7 +1675,7 @@ static void Task_FCOpenOrCloseInfoBox(u8 taskId)
 
 static void UpdateInfoBoxTilemap(u8 bg, s16 state)
 {
-    if (state == 0 || state == 3)
+    if (state == FCWINMAP_HALFOPEN || state == FCWINMAP_3_UNUSED)
     {
         FillBgTilemapBufferRect(bg, 0x8C, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0xA1, 15, 10, 10,  1, 1);
@@ -1679,7 +1689,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x92, 25, 12,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x93, 26, 12,  1,  1, 1);
     }
-    else if (state == 1)
+    else if (state == FCWINMAP_FULLOPEN)
     {
         FillBgTilemapBufferRect(bg, 0x9B, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x9C, 15, 10, 11,  1, 1);
@@ -1691,7 +1701,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x9F, 15, 12, 11,  1, 1);
         FillBgTilemapBufferRect(bg, 0x99, 26, 12,  1,  1, 1);
     }
-    else if (state == 2)
+    else if (state == FCWINMAP_BG2_WHITE)
     {
         FillBgTilemapBufferRect(bg, 0x94, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x95, 15, 10, 11,  1, 1);
@@ -1703,7 +1713,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x98, 15, 12, 11,  1, 1);
         FillBgTilemapBufferRect(bg, 0x99, 26, 12,  1,  1, 1);
     }
-    else if (state == 4)
+    else if (state == FCWINMAP_CLOSED)
     {
         FillBgTilemapBufferRect(bg, 0x83, 14, 10,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0xA0, 15, 10, 10,  1, 1);
@@ -1718,7 +1728,7 @@ static void UpdateInfoBoxTilemap(u8 bg, s16 state)
         FillBgTilemapBufferRect(bg, 0x84, 25, 12,  1,  1, 1);
         FillBgTilemapBufferRect(bg, 0x85, 26, 12,  1,  1, 1);
     }
-    else if (state == 5)
+    else if (state == FCWINMAP_HIDDEN)
     {
         FillBgTilemapBufferRect(bg, 0x00, 14, 10, 13,  3, 1);
     }

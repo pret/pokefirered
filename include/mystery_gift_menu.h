@@ -1,6 +1,12 @@
 #ifndef GUARD_MYSTERY_GIFT_MENU_H
 #define GUARD_MYSTERY_GIFT_MENU_H
 
+enum {
+    MGMWIN_0,
+    MGMWIN_1,
+    MGMWIN_2,
+};
+
 extern bool8 gGiftIsFromEReader;
 
 void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void);

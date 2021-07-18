@@ -1070,7 +1070,8 @@ static void Task_OakSpeech19(u8 taskId)
         sOakSpeechResources->textColor[1] = 2;
         sOakSpeechResources->textColor[2] = 3;
         AddTextPrinterParameterized3(gTasks[taskId].data[13], 2, 8, 17, sOakSpeechResources->textColor, 0, gText_Girl);
-        Menu_InitCursor(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2, 0);
+        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gTasks[taskId].data[13], 2, 0, 1, GetFontAttribute(2, 1) + 2, 2,
+                                                       0);
         CopyWindowToVram(gTasks[taskId].data[13], COPYWIN_BOTH);
         gTasks[taskId].func = Task_OakSpeech20;
     }
@@ -1867,7 +1868,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 state)
     {
         AddTextPrinterParameterized(data[13], 2, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
     }
-    Menu_InitCursor(data[13], 2, 0, 1, 16, 5, 0);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[13], 2, 0, 1, 16, 5, 0);
     CopyWindowToVram(data[13], COPYWIN_BOTH);
 }
 

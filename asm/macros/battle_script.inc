@@ -67,14 +67,14 @@
 	.byte 0xf
 	.endm
 
-	.macro printstring id:req
+	.macro printstring currentFuncId:req
 	.byte 0x10
-	.2byte \id
+	.2byte \currentFuncId
 	.endm
 
-	.macro printselectionstring id:req
+	.macro printselectionstring currentFuncId:req
 	.byte 0x11
-	.2byte \id
+	.2byte \currentFuncId
 	.endm
 
 	.macro waitmessage param0:req

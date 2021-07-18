@@ -4,15 +4,35 @@
 #include "global.h"
 #include "menu_helpers.h"
 
-#define INDEX_CANCEL -2
+enum {
+    SHOP_TEXTCOLOR_WHITE,
+    SHOP_TEXTCOLOR_DARKGRAY,
+    SHOP_TEXTCOLOR_LIGHTGRAY,
+};
 
-extern EWRAM_DATA struct ItemSlot gUnknown_02039F80[3];
+enum {
+    QL_SHOPACTION_NULL,
+    QL_SHOPACTION_BUY,
+    QL_SHOPACTION_SELL,
+};
+
+enum {
+    BUYWINID_MONEYBOX,
+    BUYWINID_BAGQUANT,
+    BUYWINID_MSGBOX,
+    BUYWINID_BUYPRICEANDQUANTITY,
+    BUYWINID_LISTMENU,
+    BUYWINID_ITEMDESCRIPTION,
+    BUYWINID_TMHMMOVE,
+};
 
 void CreatePokemartMenu(const u16 *itemsForSale);
 void CreateDecorationShop1Menu(const u16 *);
 void CreateDecorationShop2Menu(const u16 *);
-u8 GetMartUnk16_4(void);
-void RecordItemPurchase(u16 a0, u16 a1, u8 a2);
+u8 MartGetContextFontId(void);
+
+// mode: 0 = inactive, 1 = buy, 2 = sell
+void RecordItemPurchase(u16 item, u16 quantity, u8 mode);
 
 // buy_menu_helper
 void BuyMenuInitWindows(bool32 isSellingTM);

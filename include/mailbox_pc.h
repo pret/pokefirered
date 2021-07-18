@@ -3,6 +3,13 @@
 
 #include "player_pc.h"
 
+enum
+{
+    MBPCWIN_HEADER = 0,
+    MBPCWIN_LISTMENU,
+    MBPCWIN_SUBMENU,
+};
+
 bool8 MailboxPC_InitBuffers(u8 num);
 u8 MailboxPC_GetAddWindow(u8 winIdx);
 void MailboxPC_RemoveWindow(u8 winIdx);

@@ -24,9 +24,9 @@
 #define VAR_TEMP_E                 0x400E
 #define VAR_TEMP_F                 0x400F
 
-// object gfx id vars
+// object gfx currentFuncId vars
 // These 0x10 vars are used to dynamically control a event object's sprite.
-// For example, the rival's sprite id is dynamically set based on the player's gender.
+// For example, the rival's sprite currentFuncId is dynamically set based on the player's gender.
 // See VarGetObjectEventGraphicsId().
 #define VAR_OBJ_GFX_ID_0           0x4010
 #define VAR_OBJ_GFX_ID_1           0x4011

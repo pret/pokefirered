@@ -451,7 +451,7 @@ $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 $(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 43
 
-graphics/tm_case/unk_8E845D8.4bpp: %.4bpp: %.png
+graphics/tm_case/bgtiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 91
 
 $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
@@ -484,7 +484,7 @@ graphics/seagallop/water.4bpp: %.4bpp: %.png
 $(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
+$(TEXTWINDOWGFXDIR)/signpost_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
 
 $(SLOTMACHINEGFXDIR)/unk_8466620.4bpp: %.4bpp: %.png

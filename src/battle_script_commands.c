@@ -47,11 +47,11 @@ static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static void CheckWonderGuardAndLevitate(void);
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8, const u8 *BS_ptr);
-static void sub_8026480(void);
-static bool8 sub_80264D0(void);
+static void DrawBenchedMonLvlUpWindow(void);
+static bool8 SlideInLvlUpBox(void);
 static void DrawLevelUpWindow1(void);
 static void DrawLevelUpWindow2(void);
-static bool8 sub_8026648(void);
+static bool8 SlideOutLvlUpBox(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 
@@ -703,9 +703,8 @@ static const struct WindowTemplate sUnusedWinTemplate =
     .baseBlock = 0x3F,
 };
 
-// not used
-static const u16 sUnknownBattleboxPal[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
-static const u32 sUnknownBattleboxGfx[] = INCBIN_U32("graphics/battle_interface/unk_battlebox.4bpp.lz");
+static const u16 sLvlUpBoxPal[] = INCBIN_U16("graphics/battle_interface/lvl_up_box.gbapal");
+static const u32 sLvlUpBoxGfx[] = INCBIN_U32("graphics/battle_interface/lvl_up_box.4bpp.lz");
 
 // not used
 static const u8 sRubyLevelUpStatBoxStats[] =
@@ -4982,8 +4981,8 @@ static void atk5A_yesnoboxlearnmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_YESNO);
         ++gBattleScripting.learnMoveState;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5008,7 +5007,7 @@ static void atk5A_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
-                HandleBattleWindow(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
+                DrawBattleWindowFrame(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                 ++gBattleScripting.learnMoveState;
             }
@@ -5075,7 +5074,7 @@ static void atk5A_yesnoboxlearnmove(void)
         }
         break;
     case 4:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, WINDOW_CLEAR);
+        DrawBattleWindowFrame(23, 8, 29, 13, WINDOW_CLEAR);
         gBattlescriptCurrInstr += 5;
         break;
     case 5:
@@ -5092,8 +5091,8 @@ static void atk5B_yesnoboxstoplearningmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_YESNO);
         ++gBattleScripting.learnMoveState;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5121,13 +5120,13 @@ static void atk5B_yesnoboxstoplearningmove(void)
                 gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
             else
                 gBattlescriptCurrInstr += 5;
-            HandleBattleWindow(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-            HandleBattleWindow(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(0x17, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
         break;
     }
@@ -5380,8 +5379,8 @@ static void atk67_yesnobox(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_YESNO);
         ++gBattleCommunication[0];
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();
@@ -5405,13 +5404,13 @@ static void atk67_yesnobox(void)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
-            HandleBattleWindow(0x17, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(23, 8, 29, 13, WINDOW_CLEAR);
             ++gBattlescriptCurrInstr;
         }
         else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            HandleBattleWindow(0x17, 8, 0x1D, 0xD, WINDOW_CLEAR);
+            DrawBattleWindowFrame(23, 8, 29, 13, WINDOW_CLEAR);
             ++gBattlescriptCurrInstr;
         }
         break;
@@ -5501,11 +5500,11 @@ static void atk6C_drawlvlupbox(void)
         gBattle_BG2_Y = 0x60;
         SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
         ShowBg(2);
-        sub_8026480();
+        DrawBenchedMonLvlUpWindow();
         gBattleScripting.atk6C_state = 2;
         break;
     case 2:
-        if (!sub_80264D0())
+        if (!SlideInLvlUpBox())
             gBattleScripting.atk6C_state = 3;
         break;
     case 3:
@@ -5515,13 +5514,13 @@ static void atk6C_drawlvlupbox(void)
         SetBgAttribute(1, BG_ATTR_PRIORITY, 0);
         ShowBg(0);
         ShowBg(1);
-        HandleBattleWindow(18, 7, 0x1D, 0x13, WINDOW_x80);
+        DrawBattleWindowFrame(18, 7, 0x1D, 0x13, WINDOW_x80);
         gBattleScripting.atk6C_state = 4;
         break;
     case 4:
         DrawLevelUpWindow1();
-        PutWindowTilemap(12);
-        CopyWindowToVram(12, COPYWIN_BOTH);
+        PutWindowTilemap(BTLWIN_LEVELUPSTATS);
+        CopyWindowToVram(BTLWIN_LEVELUPSTATS, COPYWIN_BOTH);
         ++gBattleScripting.atk6C_state;
         break;
     case 5:
@@ -5537,7 +5536,7 @@ static void atk6C_drawlvlupbox(void)
         {
             PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
-            CopyWindowToVram(12, COPYWIN_GFX);
+            CopyWindowToVram(BTLWIN_LEVELUPSTATS, COPYWIN_GFX);
             ++gBattleScripting.atk6C_state;
         }
         break;
@@ -5545,17 +5544,17 @@ static void atk6C_drawlvlupbox(void)
         if (gMain.newKeys)
         {
             PlaySE(SE_SELECT);
-            HandleBattleWindow(18, 7, 0x1D, 0x13, WINDOW_x80 | WINDOW_CLEAR);
+            DrawBattleWindowFrame(18, 7, 0x1D, 0x13, WINDOW_x80 | WINDOW_CLEAR);
             ++gBattleScripting.atk6C_state;
         }
         break;
     case 9:
-        if (!sub_8026648())
+        if (!SlideOutLvlUpBox())
         {
-            ClearWindowTilemap(13);
-            CopyWindowToVram(13, COPYWIN_MAP);
-            ClearWindowTilemap(12);
-            CopyWindowToVram(12, COPYWIN_MAP);
+            ClearWindowTilemap(BTLWIN_LEVELUPBENCHEDMON);
+            CopyWindowToVram(BTLWIN_LEVELUPBENCHEDMON, COPYWIN_MAP);
+            ClearWindowTilemap(BTLWIN_LEVELUPSTATS);
+            CopyWindowToVram(BTLWIN_LEVELUPSTATS, COPYWIN_MAP);
             SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             ShowBg(2);
             gBattleScripting.atk6C_state = 10;
@@ -5579,7 +5578,7 @@ static void DrawLevelUpWindow1(void)
     u16 currStats[NUM_STATS];
 
     GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
-    DrawLevelUpWindowPg1(12, gBattleResources->beforeLvlUp->stats, currStats, 0xE, 0xD, 0xF);
+    DrawLevelUpWindowPg1(BTLWIN_LEVELUPSTATS, gBattleResources->beforeLvlUp->stats, currStats, 0xE, 0xD, 0xF);
 }
 
 static void DrawLevelUpWindow2(void)
@@ -5587,21 +5586,21 @@ static void DrawLevelUpWindow2(void)
     u16 currStats[NUM_STATS];
 
     GetMonLevelUpWindowStats(&gPlayerParty[gBattleStruct->expGetterMonId], currStats);
-    DrawLevelUpWindowPg2(12, currStats, 0xE, 0xD, 0xF);
+    DrawLevelUpWindowPg2(BTLWIN_LEVELUPSTATS, currStats, 0xE, 0xD, 0xF);
 }
 
-static void sub_8026480(void)
+static void DrawBenchedMonLvlUpWindow(void)
 {
     gBattle_BG2_Y = 0;
     gBattle_BG2_X = 0x1A0;
-    LoadPalette(sUnknownBattleboxPal, 0x60, 0x20);
-    CopyToWindowPixelBuffer(13, sUnknownBattleboxGfx, 0, 0);
-    PutWindowTilemap(13);
-    CopyWindowToVram(13, COPYWIN_BOTH);
+    LoadPalette(sLvlUpBoxPal, 0x60, 0x20);
+    CopyToWindowPixelBuffer(BTLWIN_LEVELUPBENCHEDMON, sLvlUpBoxGfx, 0, 0);
+    PutWindowTilemap(BTLWIN_LEVELUPBENCHEDMON);
+    CopyWindowToVram(BTLWIN_LEVELUPBENCHEDMON, COPYWIN_BOTH);
     PutMonIconOnLvlUpBox();
 }
 
-static bool8 sub_80264D0(void)
+static bool8 SlideInLvlUpBox(void)
 {
     if (IsDma3ManagerBusyWithBgCopy())
         return TRUE;
@@ -5667,10 +5666,10 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     printerTemplate.y = 10;
     printerTemplate.currentY = 10;
     AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(13, COPYWIN_GFX);
+    CopyWindowToVram(BTLWIN_LEVELUPBENCHEDMON, COPYWIN_GFX);
 }
 
-static bool8 sub_8026648(void)
+static bool8 SlideOutLvlUpBox(void)
 {
     if (gBattle_BG2_X == 0x1A0)
         return FALSE;
@@ -9225,7 +9224,7 @@ static void atkF2_displaydexinfo(void)
     }
 }
 
-void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
+void DrawBattleWindowFrame(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
 {
     s32 destY, destX;
     u16 var = 0;
@@ -9297,8 +9296,8 @@ static void atkF3_trygivecaughtmonnick(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, 0xE);
+        DrawBattleWindowFrame(23, 8, 29, 13, 0);
+        BattlePutTextCenteredOnWindow(gText_BattleYesNoChoice, BTLWIN_YESNO);
         ++gBattleCommunication[MULTIUSE_STATE];
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt();

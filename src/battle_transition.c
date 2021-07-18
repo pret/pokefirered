@@ -1825,7 +1825,7 @@ static bool8 BT_Phase2Mugshot_LoadGfx(struct Task *task)
     s16 i, j;
     u16 *tilemapAddr, *tilesetAddr;
     const u16 *mugshotsMap = sVsBarTilemap;
-    
+
     BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
     CpuCopy16(sVsBarTileset, tilesetAddr, 0x1E0);
     LoadPalette(sVsBarOpponentPalettes[task->tWhichMugshot], 0xF0, 0x20);

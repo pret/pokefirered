@@ -955,7 +955,7 @@ static void PlaceYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
         AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_Yes, 8, 2, TEXT_SPEED_FF, NULL);
         AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_No, 8, 16, TEXT_SPEED_FF, NULL);
         DrawTextBorderOuter(sWork->yesNoMenuWinId, 1, 13);
-        Menu_InitCursor(sWork->yesNoMenuWinId, 2, 0, 2, 14, 2, initialCursorPos);
+        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sWork->yesNoMenuWinId, 2, 0, 2, 14, 2, initialCursorPos);
     }
 }
 
@@ -1196,7 +1196,7 @@ static void PrintKeyboardSwapTextsOnWin3(void)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
     UnionRoomAndTradeMenuPrintOptions(3, 2, 14, 5, sKeyboardSwapTexts);
-    Menu_InitCursor(3, 2, 0, 0, 14, 5, GetCurrentKeyboardPage());
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(3, 2, 0, 0, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 

@@ -377,8 +377,8 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
     // src -> r9
     // x -> sp+34
     // y -> r10
-    // width -> sp+2C
-    // height -> sp+30
+    // height -> sp+2C
+    // width -> sp+30
     struct Bitmap srcBlit;
     struct Bitmap destBlit;
     u8 orig_x = x;

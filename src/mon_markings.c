@@ -5,7 +5,7 @@
 #include "graphics.h"
 #include "constants/songs.h"
 
-static EWRAM_DATA struct PokemonMarkMenu * sMenu = NULL;
+static EWRAM_DATA struct MonMarkingsMenu * sMenu = NULL;
 
 static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 tilesTag, u16 paletteTag);
 static void nullsub_62(struct Sprite * sprite);
@@ -209,7 +209,7 @@ static const union AnimCmd *const sSpriteAnimTable_MonMarkSet[] = {
     sAnimCmd_MonMark_1111
 };
 
-void SetMonMarkingsMenuPointer(struct PokemonMarkMenu * markMenu)
+void SetMonMarkingsMenuPointer(struct MonMarkingsMenu * markMenu)
 {
     sMenu = markMenu;
 }
@@ -473,7 +473,7 @@ struct Sprite * CreateMonMarkingSprite_SelectCombo(u16 tileTag, u16 paletteTag, 
     return CreateMonMarkingSprite(tileTag, paletteTag, palette, 16);
 }
 
-struct Sprite * CreateMonMarkingSprite_AllOff(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite * CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (palette == NULL)
         palette = sMonMarkingsPal;

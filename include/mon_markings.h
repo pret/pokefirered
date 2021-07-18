@@ -1,7 +1,7 @@
 #ifndef GUARD_MON_MARKINGS_H
 #define GUARD_MON_MARKINGS_H
 
-struct PokemonMarkMenu
+struct MonMarkingsMenu
 {
     /*0x0000*/ u16 baseTileTag;
     /*0x0002*/ u16 basePaletteTag;
@@ -21,13 +21,13 @@ struct PokemonMarkMenu
     /*0x10B4*/ u8 tileLoadState;
 }; // 10b8
 
-void SetMonMarkingsMenuPointer(struct PokemonMarkMenu * markMenu);
+void SetMonMarkingsMenuPointer(struct MonMarkingsMenu * markMenu);
 void LoadMonMarkingsFrameGfx(void);
 void DrawMonMarkingsMenu(u8 markings, s16 x, s16 y);
 void TeardownMonMarkingsMenu(void);
 bool8 MonMarkingsHandleInput(void);
 struct Sprite * CreateMonMarkingSprite_SelectCombo(u16 tileTag, u16 paletteTag, const u16 *palette);
-struct Sprite * CreateMonMarkingSprite_AllOff(u16 tileTag, u16 paletteTag, const u16 *palette);
+struct Sprite * CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette);
 void RequestDma3LoadMonMarking(u8 markings, void * dest);
 
 #endif //GUARD_MON_MARKINGS_H

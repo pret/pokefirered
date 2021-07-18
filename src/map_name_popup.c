@@ -178,7 +178,7 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     {
         CpuCopy16(stdpal_get(3), &gPlttBufferUnfaded[0xd0], 0x20);
     }
-    sub_814FF6C(windowId, r6);
+    TextWindow_LoadTilesStdFrame0(windowId, r6);
     DrawTextBorderOuter(windowId, r6, 0xD);
     PutWindowTilemap(windowId);
     MapNamePopupPrintMapNameOnWindow(windowId);

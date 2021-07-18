@@ -51,48 +51,48 @@ static u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind);
 
 const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
 {
-    { 12, 12, 0x00 },       // Unused
-    { 32, 12, 0x20 },       // Normal icon
-    { 32, 12, 0x64 },       // Fight icon
-    { 32, 12, 0x60 },       // Flying icon
-    { 32, 12, 0x80 },       // Poison icon
-    { 32, 12, 0x48 },       // Ground icon
-    { 32, 12, 0x44 },       // Rock icon
-    { 32, 12, 0x6C },       // Bug icon
-    { 32, 12, 0x68 },       // Ghost icon
-    { 32, 12, 0x88 },       // Steel icon
-    { 32, 12, 0xA4 },       // ??? (Mystery) icon
-    { 32, 12, 0x24 },       // Fire icon
-    { 32, 12, 0x28 },       // Water icon
-    { 32, 12, 0x2C },       // Grass icon
-    { 32, 12, 0x40 },       // Electric icon
-    { 32, 12, 0x84 },       // Psychic icon
-    { 32, 12, 0x4C },       // Ice icon
-    { 32, 12, 0xA0 },       // Dragon icon
-    { 32, 12, 0x8C },       // Dark icon
-    { 40, 12, 0xA8 },       // -Type- icon
-    { 40, 12, 0xC0 },       // -Power- icon
-    { 40, 12, 0xC8 },       // -Accuracy- icon
-    { 40, 12, 0xE0 },       // -PP- icon
-    { 40, 12, 0xE8 },       // -Effect- icon
+    [0]                            = { 12, 12, 0x00 },       // Dex caught Pokeball
+    [MOVEICON_TYPE(TYPE_NORMAL)]   = { 32, 12, 0x20 },       // Normal icon
+    [MOVEICON_TYPE(TYPE_FIGHTING)] = { 32, 12, 0x64 },       // Fight icon
+    [MOVEICON_TYPE(TYPE_FLYING)]   = { 32, 12, 0x60 },       // Flying icon
+    [MOVEICON_TYPE(TYPE_POISON)]   = { 32, 12, 0x80 },       // Poison icon
+    [MOVEICON_TYPE(TYPE_GROUND)]   = { 32, 12, 0x48 },       // Ground icon
+    [MOVEICON_TYPE(TYPE_ROCK)]     = { 32, 12, 0x44 },       // Rock icon
+    [MOVEICON_TYPE(TYPE_BUG)]      = { 32, 12, 0x6C },       // Bug icon
+    [MOVEICON_TYPE(TYPE_GHOST)]    = { 32, 12, 0x68 },       // Ghost icon
+    [MOVEICON_TYPE(TYPE_STEEL)]    = { 32, 12, 0x88 },       // Steel icon
+    [MOVEICON_TYPE(TYPE_MYSTERY)]  = { 32, 12, 0xA4 },       // ??? (Mystery) icon
+    [MOVEICON_TYPE(TYPE_FIRE)]     = { 32, 12, 0x24 },       // Fire icon
+    [MOVEICON_TYPE(TYPE_WATER)]    = { 32, 12, 0x28 },       // Water icon
+    [MOVEICON_TYPE(TYPE_GRASS)]    = { 32, 12, 0x2C },       // Grass icon
+    [MOVEICON_TYPE(TYPE_ELECTRIC)] = { 32, 12, 0x40 },       // Electric icon
+    [MOVEICON_TYPE(TYPE_PSYCHIC)]  = { 32, 12, 0x84 },       // Psychic icon
+    [MOVEICON_TYPE(TYPE_ICE)]      = { 32, 12, 0x4C },       // Ice icon
+    [MOVEICON_TYPE(TYPE_DRAGON)]   = { 32, 12, 0xA0 },       // Dragon icon
+    [MOVEICON_TYPE(TYPE_DARK)]     = { 32, 12, 0x8C },       // Dark icon
+    [MOVEICON_TYPEICON]            = { 40, 12, 0xA8 },       // -Type- icon
+    [MOVEICON_POWER]               = { 40, 12, 0xC0 },       // -Power- icon
+    [MOVEICON_ACCURACY]            = { 40, 12, 0xC8 },       // -Accuracy- icon
+    [MOVEICON_PP]                  = { 40, 12, 0xE0 },       // -PP- icon
+    [MOVEICON_EFFECT]              = { 40, 12, 0xE8 },       // -Effect- icon
 };
 
 static void ListMenuDummyTask(u8 taskId)
 {
 }
 
-u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum)
+u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 frameType, u16 tileNum, u16 palNum)
 {
     switch (sMysteryGiftLinkMenu.state)
     {
     case 0:
     default:
         sMysteryGiftLinkMenu.windowId = AddWindow(windowTemplate);
-        switch (arg2)
+        switch (frameType)
         {
-        case 2:
+        case MGLISTMENU_FRAME_USER: // Never used
             TextWindow_SetUserSelectedFrame(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
-        case 1:
+        case MGLISTMENU_FRAME_PRELOADED: // Only ever used
             DrawTextBorderOuter(sMysteryGiftLinkMenu.windowId, tileNum, palNum / 16);
             break;
         }
@@ -115,19 +115,19 @@ u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         }
         if (sMysteryGiftLinkMenu.state == 2)
         {
-            if (!arg2)
+            if (!frameType)
             {
                 ClearWindowTilemap(sMysteryGiftLinkMenu.windowId);
             }
             else
             {
-                switch (arg2)
+                switch (frameType)
                 {
-                case 0: // can never be reached, because of the if statement above
+                case MGLISTMENU_FRAME_NONE: // can never be reached, because of the if statement above
                     ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
-                case 2:
-                case 1:
+                case MGLISTMENU_FRAME_USER:
+                case MGLISTMENU_FRAME_PRELOADED:
                     ClearStdWindowAndFrame(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
                 }

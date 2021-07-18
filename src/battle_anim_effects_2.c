@@ -1877,7 +1877,7 @@ static void AnimViceGripPincerStep(struct Sprite *sprite)
 }
 
 // Animates a single pincer line that extends towards the center of the target mon, and then back out.
-// arg 0: animation id
+// arg 0: animation currentFuncId
 void AnimGuillotinePincer(struct Sprite *sprite)
 {
     s16 startXOffset = 32;

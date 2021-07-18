@@ -11,6 +11,7 @@
 #include "field_player_avatar.h"
 #include "help_system.h"
 #include "metatile_behavior.h"
+#include "menu.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -1727,7 +1728,7 @@ static bool8 Fishing4(struct Task *task)
 {
     u32 randVal;
 
-    sub_80F7768(0, TRUE);
+    SetDlgWindowBorderStyle(DLG_WINDOW_ID, TRUE);
     task->tStep++;
     task->tFrameCounter = 0;
     task->tNumDots = 0;

@@ -257,7 +257,7 @@ struct BerryCrushGame_Results
 };
 
 // playerIdsRanked above has 3 additional elements after the players.
-// Only 1 of these 2*3 is ever used, and it stores the id for which
+// Only 1 of these 2*3 is ever used, and it stores the currentFuncId for which
 // random results page to show. Its define below is for readability.
 #define randomPageId playerIdsRanked[0][7]
 
@@ -657,7 +657,7 @@ static const u32 sCrusherTop_Tilemap[] = INCBIN_U32("graphics/berry_crush/crushe
 static const u32 sContainerCap_Tilemap[] = INCBIN_U32("graphics/berry_crush/container_cap.bin.lz");
 static const u32 sBg_Tilemap[] = INCBIN_U32("graphics/berry_crush/bg.bin.lz");
 
-// Takes the number of players - 2 and a player id and returns the
+// Takes the number of players - 2 and a player currentFuncId and returns the
 // index into sPlayerCoords where that player should be seated
 static const u8 gUnknown_846F280[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] = {
     {1, 3},
@@ -1249,7 +1249,7 @@ static u32 Cmd_WaitPaletteFade(struct BerryCrushGame * game, u8 *args)
 
 static u32 Cmd_PrintMessage(struct BerryCrushGame * game, u8 *args)
 {
-    // args[0]: msg id
+    // args[0]: msg currentFuncId
     // args[1]: flags
     // args[2]: keys lo
     // args[3]: keys hi

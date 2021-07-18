@@ -11,23 +11,23 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 
-static EWRAM_DATA const struct YesNoFuncTable *gUnknown_20399C8 = NULL;
-static EWRAM_DATA TaskFunc gUnknown_20399CC = NULL;
-static EWRAM_DATA u8 gUnknown_20399D0 = {0};
+static EWRAM_DATA const struct YesNoFuncTable *sYesNoFuncTable = NULL;
+static EWRAM_DATA TaskFunc sFollowupTaskFunc = NULL;
+static EWRAM_DATA u8 sWindowId = 0;
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 
-void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
+void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, TaskFunc taskFunc)
 {
-    gUnknown_20399D0 = windowId;
+    sWindowId = windowId;
     DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, tileNum, paletteNum);
 
     if (string != gStringVar4)
         StringExpandPlaceholders(gStringVar4, string);
 
-    gTextFlags.canABSpeedUpPrint = 1;
-    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
-    gUnknown_20399CC = taskFunc;
+    gTextFlags.canABSpeedUpPrint = TRUE;
+    AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    sFollowupTaskFunc = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
@@ -39,8 +39,8 @@ bool16 RunTextPrinters_CheckActive(u8 textPrinterId)
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
 {
-    if (!RunTextPrinters_CheckActive(gUnknown_20399D0))
-        gUnknown_20399CC(taskId);
+    if (!RunTextPrinters_CheckActive(sWindowId))
+        sFollowupTaskFunc(taskId);
 }
 
 static void Task_CallYesOrNoCallback(u8 taskId)
@@ -49,12 +49,12 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     {
     case 0:
         PlaySE(SE_SELECT);
-        gTasks[taskId].func = gUnknown_20399C8->yesFunc;
+        gTasks[taskId].func = sYesNoFuncTable->yesFunc;
         break;
     case 1:
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        gTasks[taskId].func = gUnknown_20399C8->noFunc;
+        gTasks[taskId].func = sYesNoFuncTable->noFunc;
         break;
     }
 }
@@ -62,7 +62,7 @@ static void Task_CallYesOrNoCallback(u8 taskId)
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, fontId, left, top, tileStart, palette, 0);
-    gUnknown_20399C8 = yesNo;
+    sYesNoFuncTable = yesNo;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 

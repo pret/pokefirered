@@ -5,7 +5,7 @@
 
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;
 
-const u8 gUnknown_84566A8[] = INCBIN_U8("graphics/unknown/unknown_84566a8.bin");
+const u16 gHelpMsgWindowGfx_Tiles[] = INCBIN_U16("graphics/text_window/help_message.4bpp");
 
 static const struct WindowTemplate sHelpMessageWindowTemplate = {
     .bg = 0,
@@ -47,9 +47,9 @@ void DestroyHelpMessageWindow(u8 a0)
     }
 }
 
-void sub_8112F18(u8 windowId)
+void HelpMsg_DrawBgOnWindow(u8 windowId)
 {
-    const u8* ptr = gUnknown_84566A8;
+    const u8* ptr = (const u8 *)gHelpMsgWindowGfx_Tiles;
     u8* buffer;
     u8 i, j;
     u8 width, height;
@@ -67,11 +67,11 @@ void sub_8112F18(u8 windowId)
             for (j = 0; j < width; j++)
             {
                 if (i == 0)
-                    k = 0;
+                    k = 0; // top row
                 else if (i == height - 1)
-                    k = 14;
+                    k = 14; // bottom row
                 else
-                    k = 5;
+                    k = 5; // body
                 CpuCopy32(
                     &ptr[k * 0x20],
                     &buffer[(i * width + j) * 0x20],
@@ -84,9 +84,9 @@ void sub_8112F18(u8 windowId)
     }
 }
 
-static void sub_8112FD0(void)
+static void DrawBgOnHelpMsgWindow(void)
 {
-    sub_8112F18(sHelpMessageWindowId);
+    HelpMsg_DrawBgOnWindow(sHelpMessageWindowId);
 }
 
 static const u8 sHelpMessageTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_DARK_GRAY};
@@ -98,7 +98,7 @@ static void PrintHelpMessageText(const u8 *text)
 
 void PrintTextOnHelpMessageWindow(const u8 *text, u8 mode)
 {
-    sub_8112FD0();
+    DrawBgOnHelpMsgWindow();
     PrintHelpMessageText(text);
     if (mode)
         CopyWindowToVram(sHelpMessageWindowId, mode);

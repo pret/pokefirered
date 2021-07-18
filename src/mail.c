@@ -111,8 +111,14 @@ static const struct BgTemplate sBgTemplates[] = {
     }
 };
 
+enum 
+{
+    MAILWIN_MESSAGE = 0,
+    MAILWIN_AUTHOR,
+};
+
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [MAILWIN_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 4,
@@ -120,7 +126,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 10,
         .paletteNum = 15,
         .baseBlock = 0x001
-    }, {
+    }, 
+    [MAILWIN_AUTHOR] = {
         .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 15,
@@ -131,7 +138,11 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sTextColor[] = { 0, 10, 11 };
+static const u8 sTextColor[] = { 
+    TEXT_COLOR_TRANSPARENT, 
+    TEXT_DYNAMIC_COLOR_1,
+    TEXT_DYNAMIC_COLOR_2
+};
 
 static const u16 sGenderPals[][2] = {
     { RGB(13, 22, 26), RGB(05, 13, 20) },
@@ -661,23 +672,27 @@ static void AddMailMessagePrinters(void)
     u16 i;
     u32 width;
 
-    PutWindowTilemap(0);
-    PutWindowTilemap(1);
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    PutWindowTilemap(MAILWIN_MESSAGE);
+    PutWindowTilemap(MAILWIN_AUTHOR);
+
+    FillWindowPixelBuffer(MAILWIN_MESSAGE, PIXEL_FILL(0));
+    FillWindowPixelBuffer(MAILWIN_AUTHOR, PIXEL_FILL(0));
+
     for (i = 0; i < sMailViewResources->messageLayout->numRows; i++)
     {
         if (sMailViewResources->messageLinesBuffer[i][0] != EOS && sMailViewResources->messageLinesBuffer[i][0] != CHAR_SPACE)
         {
-            AddTextPrinterParameterized3(0, 1, sMailViewResources->messageLayout->linesLayout[i].lineXoffset + sMailViewResources->messageLayout->messageLeft, y + sMailViewResources->messageLayout->messageTop, sTextColor, 0, sMailViewResources->messageLinesBuffer[i]);
+            AddTextPrinterParameterized3(MAILWIN_MESSAGE, 1, sMailViewResources->messageLayout->linesLayout[i].lineXoffset + sMailViewResources->messageLayout->messageLeft, y + sMailViewResources->messageLayout->messageTop, sTextColor, 0, sMailViewResources->messageLinesBuffer[i]);
             y += sMailViewResources->messageLayout->linesLayout[i].lineHeight;
         }
     }
+
     width = GetStringWidth(1, gText_From, 0);
-    AddTextPrinterParameterized3(1, 1, sMailViewResources->nameX, sMailViewResources->messageLayout->nameY, sTextColor, 0, gText_From);
-    AddTextPrinterParameterized3(1, 1, sMailViewResources->nameX + width, sMailViewResources->messageLayout->nameY, sTextColor, 0, sMailViewResources->authorNameBuffer);
-    CopyWindowToVram(0, COPYWIN_BOTH);
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    AddTextPrinterParameterized3(MAILWIN_AUTHOR, 1, sMailViewResources->nameX, sMailViewResources->messageLayout->nameY, sTextColor, 0, gText_From);
+    AddTextPrinterParameterized3(MAILWIN_AUTHOR, 1, sMailViewResources->nameX + width, sMailViewResources->messageLayout->nameY, sTextColor, 0, sMailViewResources->authorNameBuffer);
+
+    CopyWindowToVram(MAILWIN_MESSAGE, COPYWIN_BOTH);
+    CopyWindowToVram(MAILWIN_AUTHOR, COPYWIN_BOTH);
 }
 
 static void VBlankCB_ShowMail(void)

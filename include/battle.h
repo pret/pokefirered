@@ -16,7 +16,7 @@
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
     Each bank has a value consisting of two bits.
     0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
-    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
+    0x2 bit is responsible for the currentFuncId of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
 */
 
 #define GET_BATTLER_POSITION(battler)((gBattlerPositions[battler]))

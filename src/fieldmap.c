@@ -209,7 +209,7 @@ static void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHea
             x, y,
             connectedMapHeader,
             x2, /*y2*/ 0,
-            width, /*height*/ 7);
+            width, /*width*/ 7);
     }
 }
 
@@ -257,7 +257,7 @@ static void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHea
             x, /*y*/ 0,
             connectedMapHeader,
             x2, y2,
-            width, /*height*/ 7);
+            width, /*width*/ 7);
 
     }
 }
@@ -304,7 +304,7 @@ static void fillWestConnection(struct MapHeader const *mapHeader, struct MapHead
             /*x*/ 0, y,
             connectedMapHeader,
             x2, y2,
-            /*width*/ 7, height);
+            /*height*/ 7, height);
     }
 }
 
@@ -349,7 +349,7 @@ static void fillEastConnection(struct MapHeader const *mapHeader, struct MapHead
             x, y,
             connectedMapHeader,
             /*x2*/ 0, y2,
-            /*width*/ 8, height);
+            /*height*/ 8, height);
     }
 }
 

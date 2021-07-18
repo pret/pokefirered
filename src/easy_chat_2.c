@@ -176,12 +176,12 @@ static void Task_RunEasyChat(u8 taskId)
         else if (action != 0)
         {
             PlaySE(SE_SELECT);
-            EasyChatInterfaceCommand_Setup(action);
+            StartEasyChatFunction(action);
             data[EZCHAT_TASK_STATE]++;
         }
         break;
     case 2:
-        if (!EasyChatInterfaceCommand_Run())
+        if (!RunEasyChatFunction())
             data[EZCHAT_TASK_STATE] = 1;
         break;
     case 3:
@@ -226,13 +226,13 @@ static bool8 Task_InitEasyChatInternal(u8 taskId)
         }
         break;
     case 3:
-        if (!InitEasyChatGraphicsWork())
+        if (!InitEasyChatScreenControl())
         {
             DismantleEasyChat((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
         }
         break;
     case 4:
-        if (LoadEasyChatGraphics())
+        if (LoadEasyChatScreen())
         {
             return TRUE;
         }
@@ -248,7 +248,7 @@ static void DismantleEasyChat(MainCallback callback)
 {
     DestroyEasyChatSelectionData();
     EasyChat_FreeResources();
-    DestroyEasyChatGraphicsResources();
+    FreeEasyChatScreenControl();
     FreeAllWindowBuffers();
     SetMainCallback2(callback);
 }
@@ -816,7 +816,7 @@ static int DeleteSelectedWord(void)
 
 static int PlaceSelectedWord(void)
 {
-    u16 easyChatWord = GetDisplayedWordByIndex(GetSelectWordCursorPos());
+    u16 easyChatWord = GetWordFromSelectedGroup(GetSelectWordCursorPos());
     SetEasyChatWordToField(easyChatWord);
     sEasyChatScreen->state = 0;
     return 12;
@@ -1274,7 +1274,7 @@ void GetECSelectWordCursorCoords(s8 *Xp, s8 *Yp)
     *Yp = sEasyChatScreen->selectWordCursorY;
 }
 
-u8 GetECSelectWordRowsAbove(void)
+u8 GetWordSelectScrollOffset(void)
 {
     return sEasyChatScreen->selectWordRowsAbove;
 }

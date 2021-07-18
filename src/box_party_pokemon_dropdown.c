@@ -3,210 +3,239 @@
 #include "box_party_pokemon_dropdown.h"
 #include "malloc.h"
 
-struct BPPD_MapRect
+//------------------------------------------------------------------------------
+//  SECTION: TilemapUtil
+//
+//  Handles 3 particular tilemaps in a somewhat unusual way.
+//  For example, while the cursor is on the Close Box button it flashes between
+//  two states alternately. Both these states are their own part of the same
+//  tilemap that's always present. The utility shifts the tilemap up and down
+//  to show/hide the states, and limits the view with a rectangle that only
+//  reveals one at a time.
+//  Each tilemap is tracked with a TILEMAPID that can be used to reference it.
+//------------------------------------------------------------------------------
+
+struct TilemapUtil_RectData
 {
+    s16 x;
+    s16 y;
+    u16 width;
+    u16 height;
     s16 destX;
     s16 destY;
-    u16 width;
-    u16 height;
-    s16 destX2;
-    s16 destY2;
 };
 
-struct BPPD_Struct
+struct TilemapUtil
 {
-    struct BPPD_MapRect map1Rect;
-    struct BPPD_MapRect map2Rect;
-    const void * src1;
-    const void * src2;
-    u16 src1Height;
-    u16 src1Width;
-    u16 src2Width;
-    u16 src2Height;
-    u16 bytesPerRow;
-    u8 mapSize;
-    u8 bgId;
-    bool8 bgUpdateScheduled;
+    struct TilemapUtil_RectData prev; // Only read in unused function
+    struct TilemapUtil_RectData cur;
+    const void * savedTilemap; // Only written in unused function
+    const void * tilemap;
+    u16 altWidth;
+    u16 altHeight; // Never read
+
+    u16 width;
+    u16 height; // Never read
+
+    u16 rowSize; // Never read
+
+    u8 tileSize;
+    u8 bg;
+    bool8 active;
 };
 
-static EWRAM_DATA struct BPPD_Struct * sBoxPartyPokemonDropdownPtr = NULL;
-static EWRAM_DATA u16 sBoxPartyPokemonDropdownCount = 0;
+static EWRAM_DATA struct TilemapUtil * sTilemapUtil = NULL;
+static EWRAM_DATA u16 sTilemapUtilCount = 0;
 
-static void PushMap1(u8 idx);
-static void PushMap2(u8 idx);
+static void TilemapUtil_DrawPrev(u8 idx);
+static void TilemapUtil_Draw(u8 idx);
 
 static const struct {
-    u16 height;
     u16 width;
+    u16 height;
 } sBGdims[2][4] = {
-    {
-        {0x0100, 0x0100},
-        {0x0200, 0x0100},
-        {0x0100, 0x0200},
-        {0x0200, 0x0200}
-    }, {
-        {0x0080, 0x0080},
-        {0x0100, 0x0100},
-        {0x0200, 0x0200},
-        {0x0400, 0x0400}
+    {    // TEXT
+        { 256,  256},
+        { 512,  256},
+        { 256,  512},
+        { 512,  512},
+    }, { // AFFINE
+        { 128,  128},
+        { 256,  256},
+        { 512,  512},
+        {1024, 1024},
     }
 };
 
-void AllocBoxPartyPokemonDropdowns(u8 num)
+void TilemapUtil_Init(u8 num)
 {
     u16 i;
-    sBoxPartyPokemonDropdownPtr = Alloc(num * sizeof(struct BPPD_Struct));
-    sBoxPartyPokemonDropdownCount = sBoxPartyPokemonDropdownPtr == NULL ? 0 : num;
-    for (i = 0; i < sBoxPartyPokemonDropdownCount; i++)
+    sTilemapUtil = Alloc(num * sizeof(struct TilemapUtil));
+    sTilemapUtilCount = sTilemapUtil == NULL ? 0 : num;
+    for (i = 0; i < sTilemapUtilCount; i++)
     {
-        sBoxPartyPokemonDropdownPtr[i].src1 = NULL;
-        sBoxPartyPokemonDropdownPtr[i].bgUpdateScheduled = FALSE;
+        sTilemapUtil[i].savedTilemap = NULL;
+        sTilemapUtil[i].active = FALSE;
     }
 }
 
-void FreeBoxPartyPokemonDropdowns(void)
+void TilemapUtil_Free(void)
 {
-    Free(sBoxPartyPokemonDropdownPtr);
+    Free(sTilemapUtil);
 }
 
-void CopyAllBoxPartyPokemonDropdownsToVram(void)
+void TilemapUtil_UpdateAll(void)
 {
     int i;
 
-    for (i = 0; i < sBoxPartyPokemonDropdownCount; i++)
+    for (i = 0; i < sTilemapUtilCount; i++)
     {
-        if (sBoxPartyPokemonDropdownPtr[i].bgUpdateScheduled == TRUE)
-            CopyBoxPartyPokemonDropdownToBgTilemapBuffer(i);
+        if (sTilemapUtil[i].active == TRUE)
+            TilemapUtil_Update(i);
     }
 }
 
-void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void * src, u16 width, u16 height)
+void TilemapUtil_SetMap(u8 idx, u8 bgId, const void * src, u16 width, u16 height)
 {
     u16 screenSize;
     u16 bgType;
 
-    if (idx < sBoxPartyPokemonDropdownCount)
+    if (idx < sTilemapUtilCount)
     {
-        sBoxPartyPokemonDropdownPtr[idx].src1 = NULL;
-        sBoxPartyPokemonDropdownPtr[idx].src2 = src;
-        sBoxPartyPokemonDropdownPtr[idx].bgId = bgId;
-        sBoxPartyPokemonDropdownPtr[idx].src2Width = width;
-        sBoxPartyPokemonDropdownPtr[idx].src2Height = height;
+        sTilemapUtil[idx].savedTilemap = NULL;
+        sTilemapUtil[idx].tilemap = src;
+        sTilemapUtil[idx].bg = bgId;
+        sTilemapUtil[idx].width = width;
+        sTilemapUtil[idx].height = height;
         screenSize = GetBgAttribute(bgId, BG_ATTR_SCREENSIZE);
         bgType = GetBgAttribute(bgId, BG_ATTR_BGTYPE);
-        sBoxPartyPokemonDropdownPtr[idx].src1Height = sBGdims[bgType][screenSize].height;
-        sBoxPartyPokemonDropdownPtr[idx].src1Width = sBGdims[bgType][screenSize].width;
+        sTilemapUtil[idx].altWidth = sBGdims[bgType][screenSize].width;
+        sTilemapUtil[idx].altHeight = sBGdims[bgType][screenSize].height;
         if (bgType != 0)
-            sBoxPartyPokemonDropdownPtr[idx].mapSize = 1;
+            sTilemapUtil[idx].tileSize = 1; // AFFINE
         else
-            sBoxPartyPokemonDropdownPtr[idx].mapSize = 2;
-        sBoxPartyPokemonDropdownPtr[idx].bytesPerRow = width * sBoxPartyPokemonDropdownPtr[idx].mapSize;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.width = width;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.height = height;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX = 0;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY = 0;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2 = 0;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 = 0;
-        sBoxPartyPokemonDropdownPtr[idx].map1Rect = sBoxPartyPokemonDropdownPtr[idx].map2Rect;
-        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
+            sTilemapUtil[idx].tileSize = 2; // TEXT
+        sTilemapUtil[idx].rowSize = width * sTilemapUtil[idx].tileSize;
+        sTilemapUtil[idx].cur.width = width;
+        sTilemapUtil[idx].cur.height = height;
+        sTilemapUtil[idx].cur.x = 0;
+        sTilemapUtil[idx].cur.y = 0;
+        sTilemapUtil[idx].cur.destX = 0;
+        sTilemapUtil[idx].cur.destY = 0;
+        sTilemapUtil[idx].prev = sTilemapUtil[idx].cur;
+        sTilemapUtil[idx].active = TRUE;
     }
 }
 
-void SetBoxPartyPokemonDropdownMap1Tiles(u8 idx, const void * src)
+void TilemapUtil_SetSavedMap(u8 idx, const void * src)
 {
-    if (idx < sBoxPartyPokemonDropdownCount)
+    if (idx < sTilemapUtilCount)
     {
-        sBoxPartyPokemonDropdownPtr[idx].src1 = src;
-        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
+        sTilemapUtil[idx].savedTilemap = src;
+        sTilemapUtil[idx].active = TRUE;
     }
 }
 
-void SetBoxPartyPokemonDropdownMap2Pos(u8 idx, u16 x, u16 y)
+void TilemapUtil_SetPos(u8 idx, u16 x, u16 y)
 {
-    if (idx < sBoxPartyPokemonDropdownCount)
+    if (idx < sTilemapUtilCount)
     {
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2 = x;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 = y;
-        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
+        sTilemapUtil[idx].cur.destX = x;
+        sTilemapUtil[idx].cur.destY = y;
+        sTilemapUtil[idx].active = TRUE;
     }
 }
 
-void SetBoxPartyPokemonDropdownMap2Rect(u8 idx, u16 x, u16 y, u16 width, u16 height)
+void TilemapUtil_SetRect(u8 idx, u16 x, u16 y, u16 width, u16 height)
 {
-    if (idx < sBoxPartyPokemonDropdownCount)
+    if (idx < sTilemapUtilCount)
     {
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX = x;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY = y;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.width = width;
-        sBoxPartyPokemonDropdownPtr[idx].map2Rect.height = height;
-        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
+        sTilemapUtil[idx].cur.x = x;
+        sTilemapUtil[idx].cur.y = y;
+        sTilemapUtil[idx].cur.width = width;
+        sTilemapUtil[idx].cur.height = height;
+        sTilemapUtil[idx].active = TRUE;
     }
 }
 
-void AdjustBoxPartyPokemonDropdownPos(u8 idx, u8 op, s8 param)
+void TilemapUtil_Move(u8 idx, u8 op, s8 param)
 {
-    if (idx < sBoxPartyPokemonDropdownCount)
+    if (idx < sTilemapUtilCount)
     {
         switch (op)
         {
         case BPPD_MOVE_INNER_LEFT:
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2 += param;
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.width -= param;
+            sTilemapUtil[idx].cur.destX += param;
+            sTilemapUtil[idx].cur.width -= param;
             break;
         case BPPD_MOVE_OUTER_LEFT:
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX += param;
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.width += param;
+            sTilemapUtil[idx].cur.x += param;
+            sTilemapUtil[idx].cur.width += param;
             break;
         case BPPD_MOVE_INNER_TOP:
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 += param;
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.height -= param;
+            sTilemapUtil[idx].cur.destY += param;
+            sTilemapUtil[idx].cur.height -= param;
             break;
         case BPPD_MOVE_OUTER_TOP:
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY -= param;
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.height += param;
+            sTilemapUtil[idx].cur.y -= param;
+            sTilemapUtil[idx].cur.height += param;
             break;
         case BPPD_MOVE_INNER_X:
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2 += param;
+            sTilemapUtil[idx].cur.destX += param;
             break;
         case BPPD_MOVE_INNER_Y:
-            sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 += param;
+            sTilemapUtil[idx].cur.destY += param;
             break;
         }
-        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
+        sTilemapUtil[idx].active = TRUE;
     }
 }
 
-void CopyBoxPartyPokemonDropdownToBgTilemapBuffer(u8 idx)
+void TilemapUtil_Update(u8 idx)
 {
-    if (idx < sBoxPartyPokemonDropdownCount)
+    if (idx < sTilemapUtilCount)
     {
-        if (sBoxPartyPokemonDropdownPtr[idx].src1 != NULL)
-            PushMap1(idx);
-        PushMap2(idx);
-        sBoxPartyPokemonDropdownPtr[idx].map1Rect = sBoxPartyPokemonDropdownPtr[idx].map2Rect;
+        if (sTilemapUtil[idx].savedTilemap != NULL)
+            TilemapUtil_DrawPrev(idx);
+        TilemapUtil_Draw(idx);
+        sTilemapUtil[idx].prev = sTilemapUtil[idx].cur;
     }
 }
 
-static void PushMap1(u8 idx)
-{
-    int i;
-    int run = sBoxPartyPokemonDropdownPtr[idx].mapSize * sBoxPartyPokemonDropdownPtr[idx].src1Height;
-    const void * addr = sBoxPartyPokemonDropdownPtr[idx].src1 + run * sBoxPartyPokemonDropdownPtr[idx].map1Rect.destY2 + sBoxPartyPokemonDropdownPtr[idx].map1Rect.destX2 * sBoxPartyPokemonDropdownPtr[idx].mapSize;
-    for (i = 0; i < sBoxPartyPokemonDropdownPtr[idx].map1Rect.height; i++)
-    {
-        CopyToBgTilemapBufferRect(sBoxPartyPokemonDropdownPtr[idx].bgId, addr, sBoxPartyPokemonDropdownPtr[idx].map1Rect.destX2, sBoxPartyPokemonDropdownPtr[idx].map1Rect.destY2 + i, sBoxPartyPokemonDropdownPtr[idx].map1Rect.width, 1);
-        addr += run;
-    }
-}
-
-static void PushMap2(u8 idx)
+static void TilemapUtil_DrawPrev(u8 idx)
 {
     int i;
-    int run = sBoxPartyPokemonDropdownPtr[idx].mapSize * sBoxPartyPokemonDropdownPtr[idx].src2Width;
-    const void * addr = sBoxPartyPokemonDropdownPtr[idx].src2 + run * sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY + sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX * sBoxPartyPokemonDropdownPtr[idx].mapSize;
-    for (i = 0; i < sBoxPartyPokemonDropdownPtr[idx].map2Rect.height; i++)
+    int adder = sTilemapUtil[idx].tileSize * sTilemapUtil[idx].altWidth;
+    const void * tiles = sTilemapUtil[idx].savedTilemap + adder * sTilemapUtil[idx].prev.destY + sTilemapUtil[idx].prev.destX * sTilemapUtil[idx].tileSize;
+    for (i = 0; i < sTilemapUtil[idx].prev.height; i++)
     {
-        CopyToBgTilemapBufferRect(sBoxPartyPokemonDropdownPtr[idx].bgId, addr, sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2, sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 + i, sBoxPartyPokemonDropdownPtr[idx].map2Rect.width, 1);
-        addr += run;
+        CopyToBgTilemapBufferRect(
+            sTilemapUtil[idx].bg,
+            tiles,
+            sTilemapUtil[idx].prev.destX,
+            sTilemapUtil[idx].prev.destY + i,
+            sTilemapUtil[idx].prev.width,
+            1
+        );
+        tiles += adder;
+    }
+}
+
+static void TilemapUtil_Draw(u8 idx)
+{
+    int i;
+    int adder = sTilemapUtil[idx].tileSize * sTilemapUtil[idx].width;
+    const void * tiles = sTilemapUtil[idx].tilemap + adder * sTilemapUtil[idx].cur.y + sTilemapUtil[idx].cur.x * sTilemapUtil[idx].tileSize;
+    for (i = 0; i < sTilemapUtil[idx].cur.height; i++)
+    {
+        CopyToBgTilemapBufferRect(
+            sTilemapUtil[idx].bg,
+            tiles,
+            sTilemapUtil[idx].cur.destX,
+            sTilemapUtil[idx].cur.destY + i,
+            sTilemapUtil[idx].cur.width,
+            1
+        );
+        tiles += adder;
     }
 }

@@ -1,5 +1,5 @@
-	.macro pokedex_entry pokemon_name, height, weight, pokemon_scale, pokemon_offset, trainer_scale, trainer_offset
-	.2byte \height @ in decimeters
+	.macro pokedex_entry pokemon_name, width, weight, pokemon_scale, pokemon_offset, trainer_scale, trainer_offset
+	.2byte \width @ in decimeters
 	.2byte \weight @ in hectograms
 	.4byte DexDescription_\pokemon_name\()_1
 	.4byte DexDescription_\pokemon_name\()_2

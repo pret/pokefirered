@@ -422,7 +422,7 @@ struct MailStruct
     /*0x1A*/ u8 trainerId[4];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
-    u8 filler[2];
+    /*0x22*/ u8 filler[2];
 };
 
 struct MauvilleManCommon
@@ -618,7 +618,7 @@ struct QuestLogObjectEvent
     /*0x0f*/ u8 previousMetatileBehavior;
     /*0x10*/ u8 directionSequenceIndex;
     /*0x11*/ u8 animId;
-    u8 filler[2];
+    /*0x12*/ u8 filler[2];
 };
 
 struct QuestLog

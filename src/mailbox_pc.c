@@ -120,7 +120,7 @@ u8 MailboxPC_InitListMenu(struct PlayerPCItemPageStruct * playerPcStruct)
     gMultiuseListMenuTemplate.itemPrintFunc = ItemPrintFunc;
     gMultiuseListMenuTemplate.cursorKind = 0;
     gMultiuseListMenuTemplate.scrollMultiple = 0;
-    return ListMenuInit(&gMultiuseListMenuTemplate, playerPcStruct->itemsAbove, playerPcStruct->cursorPos);
+    return ListMenuInit(&gMultiuseListMenuTemplate, playerPcStruct->cursorPos, playerPcStruct->itemsAbove);
 }
 
 static void MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list)
@@ -131,7 +131,7 @@ static void MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list)
 
 void MailboxPC_AddScrollIndicatorArrows(struct PlayerPCItemPageStruct * playerPcStruct)
 {
-    playerPcStruct->scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(2, 0xC2, 0xC, 0x94, playerPcStruct->count - playerPcStruct->pageItems + 1, 110, 110, &playerPcStruct->itemsAbove);
+    playerPcStruct->scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(2, 0xC2, 0xC, 0x94, playerPcStruct->count - playerPcStruct->pageItems + 1, 110, 110, &playerPcStruct->cursorPos);
 }
 
 void MailboxPC_DestroyListMenuBuffer(void)

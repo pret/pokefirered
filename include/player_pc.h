@@ -8,8 +8,8 @@
 
 struct PlayerPCItemPageStruct
 {
-    u16 cursorPos;
     u16 itemsAbove;
+    u16 cursorPos;
     u8 pageItems;
     u8 count;
     u8 filler_6[3];

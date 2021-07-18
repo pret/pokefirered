@@ -66,7 +66,7 @@ struct ListMenuTemplate
 {
     /*0x00*/ const struct ListMenuItem *items;
     /*0x04*/ void (* moveCursorFunc)(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-    /*0x08*/ void (* itemPrintFunc)(u8 windowId, s32 itemId, u8 y);
+    /*0x08*/ void (* itemPrintFunc)(u8 windowId, u32 itemId, u8 y);
     /*0x0C*/ u16 totalItems;
     /*0x0E*/ u16 maxShowed;
     /*0x10*/ u8 windowId;

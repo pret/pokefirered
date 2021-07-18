@@ -3666,8 +3666,10 @@ static void Task_MoveDeoxysRock_Step(u8 taskId)
     case 0:
         data[4] = sprite->pos1.x << 4;
         data[5] = sprite->pos1.y << 4;
-        data[6] = ((data[2] << 4) - data[4]) / data[8];
-        data[7] = ((data[3] << 4) - data[5]) / data[8];
+
+        // UB: Possible divide by zero
+        data[6] = SAFE_DIV(((data[2] << 4) - data[4]), data[8]);
+        data[7] = SAFE_DIV(((data[3] << 4) - data[5]), data[8]);
         data[0]++;
         // fallthrough
     case 1:

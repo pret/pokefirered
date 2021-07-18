@@ -81,7 +81,7 @@ static void CreateTMCaseListMenuBuffers(void);
 static void InitTMCaseListMenuItems(void);
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId);
 static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void TMCase_ItemPrintFunc(u8 windowId, s32 itemId, u8 y);
+static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y);
 static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex);
 static void PrintListMenuCursorAt_WithColorIdx(u8 y, u8 colorIdx);
 static void CreateTMCaseScrollIndicatorArrowPair_Main(void);
@@ -719,7 +719,7 @@ static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
     TMCase_MoveCursor_UpdatePrintedTMInfo(itemId);
 }
 
-static void TMCase_ItemPrintFunc(u8 windowId, s32 itemId, u8 y)
+static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     if (itemId != LIST_CANCEL)
     {

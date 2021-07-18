@@ -117,7 +117,7 @@ static bool8 AllocateListMenuBuffers(void);
 static void SetUpListMenuTemplate(void);
 static void GetBerryNameAndIndexForMenu(u8 * dest, u16 itemId);
 static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void BerryPouchItemPrintFunc(u8 windowId, s32 itemId, u8 y);
+static void BerryPouchItemPrintFunc(u8 windowId, u32 itemId, u8 y);
 static void BerryPouchSetArrowCursorAt(u8 y, u8 colorIdx);
 static void PrintSelectedBerryDescription(s32 itemIndex);
 static void CreateScrollIndicatorArrows_BerryPouchList(void);
@@ -769,7 +769,7 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
     PrintSelectedBerryDescription(itemIndex);
 }
 
-static void BerryPouchItemPrintFunc(u8 windowId, s32 itemId, u8 y)
+static void BerryPouchItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     u16 unused;
     u16 itemQuantity;

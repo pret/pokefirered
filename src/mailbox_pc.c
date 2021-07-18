@@ -81,7 +81,7 @@ u8 MailboxPC_GetWindowId(u8 winIdx)
     return sWindowIds[winIdx];
 }
 
-static void ItemPrintFunc(u8 windowId, s32 itemId, u8 y)
+static void ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     u8 strbuf[30];
     if (itemId != LIST_CANCEL)

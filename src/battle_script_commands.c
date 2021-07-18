@@ -3107,7 +3107,7 @@ static void atk23_getexp(void)
             calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
             if (viaExpShare) // at least one mon is getting exp via exp share
             {
-                *exp = calculatedExp / 2 / viaSentIn;
+                *exp = SAFE_DIV(calculatedExp / 2, viaSentIn);
                 if (*exp == 0)
                     *exp = 1;
                 gExpShareExp = calculatedExp / 2 / viaExpShare;
@@ -3116,7 +3116,7 @@ static void atk23_getexp(void)
             }
             else
             {
-                *exp = calculatedExp / viaSentIn;
+                *exp = SAFE_DIV(calculatedExp, viaSentIn);
                 if (*exp == 0)
                     *exp = 1;
                 gExpShareExp = 0;

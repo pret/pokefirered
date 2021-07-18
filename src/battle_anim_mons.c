@@ -1706,7 +1706,7 @@ void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId)
 {
     s32 var = 64 - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
-    s32 var2 = (var << 8) / gOamMatrices[matrix].d;
+    s32 var2 = SAFE_DIV((var << 8), gOamMatrices[matrix].d);
 
     if (var2 > 128)
         var2 = 128;

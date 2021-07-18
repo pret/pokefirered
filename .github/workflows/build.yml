@@ -84,6 +84,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           cp *.sym symbols/
+          export GITHUB_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )
 
       - name: Update symfiles
         if: ${{ github.event_name == 'push' }}
@@ -92,4 +93,4 @@ jobs:
           branch: symbols
           cwd: "./symbols"
           add: "*.sym"
-          message: ${{ github.event.commits[0].message }}
+          message: $GITHUB_COMMIT_MSG

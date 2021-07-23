@@ -1000,7 +1000,7 @@ static void Task_OakSpeech16(u8 taskId)
     {
         if (data[0] < 24)
         {
-            gSprites[data[4]].pos1.y--;
+            gSprites[data[4]].y--;
         }
         data[0]--;
     }
@@ -1630,7 +1630,7 @@ static void CreateNidoranFSprite(u8 taskId)
 
 static void SpriteCB_PikaSync(struct Sprite * sprite)
 {
-    sprite->pos2.y = gSprites[sprite->data[0]].animCmdIndex;
+    sprite->y2 = gSprites[sprite->data[0]].animCmdIndex;
 }
 
 static void CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(u8 taskId, u8 state)

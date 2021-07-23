@@ -1102,10 +1102,10 @@ static void SpriteCB_BT_Phase2SlidingPokeballs(struct Sprite *sprite)
     }
     else
     {
-        if ((u16)sprite->pos1.x <= 240)
+        if ((u16)sprite->x <= 240)
         {
-            s16 posX = sprite->pos1.x >> 3;
-            s16 posY = sprite->pos1.y >> 3;
+            s16 posX = sprite->x >> 3;
+            s16 posY = sprite->y >> 3;
 
             if (posX != sprite->data[2])
             {
@@ -1119,8 +1119,8 @@ static void SpriteCB_BT_Phase2SlidingPokeballs(struct Sprite *sprite)
                 SOME_VRAM_STORE(ptr, posY + 1, posX, 0xF001);
             }
         }
-        sprite->pos1.x += arr0[sprite->data[0]];
-        if (sprite->pos1.x < -15 || sprite->pos1.x > 255)
+        sprite->x += arr0[sprite->data[0]];
+        if (sprite->x < -15 || sprite->x > 255)
             FieldEffectStop(sprite, FLDEFF_POKEBALL);
     }
 }
@@ -2093,10 +2093,10 @@ static bool8 BT_Phase2MugshotsSpriteFuncs_InitParams(struct Sprite *sprite)
 
 static bool8 BT_Phase2MugshotsSpriteFuncs_SlideSpriteIn(struct Sprite *sprite)
 {
-    sprite->pos1.x += sprite->spSpeed;
-    if (sprite->spOpponentOrPlayer && sprite->pos1.x < 133)
+    sprite->x += sprite->spSpeed;
+    if (sprite->spOpponentOrPlayer && sprite->x < 133)
         ++sprite->spState;
-    else if (!sprite->spOpponentOrPlayer && sprite->pos1.x > 103)
+    else if (!sprite->spOpponentOrPlayer && sprite->x > 103)
         ++sprite->spState;
     return FALSE;
 }
@@ -2104,7 +2104,7 @@ static bool8 BT_Phase2MugshotsSpriteFuncs_SlideSpriteIn(struct Sprite *sprite)
 static bool8 BT_Phase2MugshotsSpriteFuncs_DecelerateSprite(struct Sprite *sprite)
 {
     sprite->spSpeed += sprite->spAbsAcc;
-    sprite->pos1.x += sprite->spSpeed;
+    sprite->x += sprite->spSpeed;
     if (sprite->spSpeed == 0)
     {
         ++sprite->spState;
@@ -2118,8 +2118,8 @@ static bool8 BT_Phase2MugshotsSpriteFuncs_DecelerateSprite(struct Sprite *sprite
 static bool8 BT_Phase2MugshotsSpriteFuncs_DecelerateSprite2(struct Sprite *sprite)
 {
     sprite->spSpeed += sprite->spAbsAcc;
-    sprite->pos1.x += sprite->spSpeed;
-    if (sprite->pos1.x < -31 || sprite->pos1.x > 271)
+    sprite->x += sprite->spSpeed;
+    if (sprite->x < -31 || sprite->x > 271)
         ++sprite->spState;
     return FALSE;
 }
@@ -2296,8 +2296,8 @@ static bool8 BT_Phase2WhiteFadeInStripes_SetupSprites(struct Task *task)
     for (i = 0, posY = 0; i < 6; ++i, posY += 0x1B)
     {
         sprite = &gSprites[CreateInvisibleSprite(SpriteCB_BT_Phase2WhiteFadeInStripes)];
-        sprite->pos1.x = 0xF0;
-        sprite->pos1.y = posY;
+        sprite->x = 0xF0;
+        sprite->y = posY;
         sprite->spDelay = buffer[i];
     }
     ++sprite->spLastSprite;
@@ -2389,21 +2389,21 @@ static void SpriteCB_BT_Phase2WhiteFadeInStripes(struct Sprite *sprite)
     else
     {
         u16 i;
-        u16 *bldY = &gScanlineEffectRegBuffers[0][sprite->pos1.y];
-        u16 *win0H = &gScanlineEffectRegBuffers[0][sprite->pos1.y + 160];
+        u16 *bldY = &gScanlineEffectRegBuffers[0][sprite->y];
+        u16 *win0H = &gScanlineEffectRegBuffers[0][sprite->y + 160];
         u32 stripeWidth = sprite->spLastSprite ? 0x19 : 0x1B;
         
         for (i = 0; i < stripeWidth; ++i)
         {
             bldY[i] = sprite->spBldyCounter >> 8;
-            win0H[i] = (u8)(sprite->pos1.x);
+            win0H[i] = (u8)(sprite->x);
         }
-        if (sprite->pos1.x == 0 && sprite->spBldyCounter == 0x1000)
+        if (sprite->x == 0 && sprite->spBldyCounter == 0x1000)
             sprite->spFinished = 1;
-        sprite->pos1.x -= 24;
+        sprite->x -= 24;
         sprite->spBldyCounter += 192;
-        if (sprite->pos1.x < 0)
-            sprite->pos1.x = 0;
+        if (sprite->x < 0)
+            sprite->x = 0;
         if (sprite->spBldyCounter > 0x1000)
             sprite->spBldyCounter = 0x1000;
         if (sprite->spLastSprite)

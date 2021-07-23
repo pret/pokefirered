@@ -99,8 +99,8 @@ void AnimTask_ShakeMon(u8 taskId)
         DestroyAnimVisualTask(taskId);
     else
     {
-        gSprites[spriteId].pos2.x = gBattleAnimArgs[1];
-        gSprites[spriteId].pos2.y = gBattleAnimArgs[2];
+        gSprites[spriteId].x2 = gBattleAnimArgs[1];
+        gSprites[spriteId].y2 = gBattleAnimArgs[2];
         gTasks[taskId].data[0] = spriteId;
         gTasks[taskId].data[1] = gBattleAnimArgs[3];
         gTasks[taskId].data[2] = gBattleAnimArgs[4];
@@ -116,19 +116,19 @@ static void AnimTask_ShakeMonStep(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
-        if (gSprites[gTasks[taskId].data[0]].pos2.x == 0)
-            gSprites[gTasks[taskId].data[0]].pos2.x = gTasks[taskId].data[4];
+        if (gSprites[gTasks[taskId].data[0]].x2 == 0)
+            gSprites[gTasks[taskId].data[0]].x2 = gTasks[taskId].data[4];
         else
-            gSprites[gTasks[taskId].data[0]].pos2.x = 0;
-        if (gSprites[gTasks[taskId].data[0]].pos2.y == 0)
-            gSprites[gTasks[taskId].data[0]].pos2.y = gTasks[taskId].data[5];
+            gSprites[gTasks[taskId].data[0]].x2 = 0;
+        if (gSprites[gTasks[taskId].data[0]].y2 == 0)
+            gSprites[gTasks[taskId].data[0]].y2 = gTasks[taskId].data[5];
         else
-            gSprites[gTasks[taskId].data[0]].pos2.y = 0;
+            gSprites[gTasks[taskId].data[0]].y2 = 0;
         gTasks[taskId].data[3] = gTasks[taskId].data[2];
         if (--gTasks[taskId].data[1] == 0)
         {
-            gSprites[gTasks[taskId].data[0]].pos2.x = 0;
-            gSprites[gTasks[taskId].data[0]].pos2.y = 0;
+            gSprites[gTasks[taskId].data[0]].x2 = 0;
+            gSprites[gTasks[taskId].data[0]].y2 = 0;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -182,8 +182,8 @@ void AnimTask_ShakeMon2(u8 taskId)
         DestroyAnimVisualTask(taskId);
     else
     {
-        gSprites[spriteId].pos2.x = gBattleAnimArgs[1];
-        gSprites[spriteId].pos2.y = gBattleAnimArgs[2];
+        gSprites[spriteId].x2 = gBattleAnimArgs[1];
+        gSprites[spriteId].y2 = gBattleAnimArgs[2];
         gTasks[taskId].data[0] = spriteId;
         gTasks[taskId].data[1] = gBattleAnimArgs[3];
         gTasks[taskId].data[2] = gBattleAnimArgs[4];
@@ -199,19 +199,19 @@ static void AnimTask_ShakeMon2Step(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
-        if (gSprites[gTasks[taskId].data[0]].pos2.x == gTasks[taskId].data[4])
-            gSprites[gTasks[taskId].data[0]].pos2.x = -gTasks[taskId].data[4];
+        if (gSprites[gTasks[taskId].data[0]].x2 == gTasks[taskId].data[4])
+            gSprites[gTasks[taskId].data[0]].x2 = -gTasks[taskId].data[4];
         else
-            gSprites[gTasks[taskId].data[0]].pos2.x = gTasks[taskId].data[4];
-        if (gSprites[gTasks[taskId].data[0]].pos2.y == gTasks[taskId].data[5])
-            gSprites[gTasks[taskId].data[0]].pos2.y = -gTasks[taskId].data[5];
+            gSprites[gTasks[taskId].data[0]].x2 = gTasks[taskId].data[4];
+        if (gSprites[gTasks[taskId].data[0]].y2 == gTasks[taskId].data[5])
+            gSprites[gTasks[taskId].data[0]].y2 = -gTasks[taskId].data[5];
         else
-            gSprites[gTasks[taskId].data[0]].pos2.y = gTasks[taskId].data[5];
+            gSprites[gTasks[taskId].data[0]].y2 = gTasks[taskId].data[5];
         gTasks[taskId].data[3] = gTasks[taskId].data[2];
         if (--gTasks[taskId].data[1] == 0)
         {
-            gSprites[gTasks[taskId].data[0]].pos2.x = 0;
-            gSprites[gTasks[taskId].data[0]].pos2.y = 0;
+            gSprites[gTasks[taskId].data[0]].x2 = 0;
+            gSprites[gTasks[taskId].data[0]].y2 = 0;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -235,8 +235,8 @@ void AnimTask_ShakeMonInPlace(u8 taskId)
         DestroyAnimVisualTask(taskId);
     else
     {
-        gSprites[spriteId].pos2.x += gBattleAnimArgs[1];
-        gSprites[spriteId].pos2.y += gBattleAnimArgs[2];
+        gSprites[spriteId].x2 += gBattleAnimArgs[1];
+        gSprites[spriteId].y2 += gBattleAnimArgs[2];
         gTasks[taskId].data[0] = spriteId;
         gTasks[taskId].data[1] = 0;
         gTasks[taskId].data[2] = gBattleAnimArgs[3];
@@ -255,26 +255,26 @@ static void AnimTask_ShakeMonInPlaceStep(u8 taskId)
     {
         if (gTasks[taskId].data[1] & 1)
         {
-            gSprites[gTasks[taskId].data[0]].pos2.x += gTasks[taskId].data[5];
-            gSprites[gTasks[taskId].data[0]].pos2.y += gTasks[taskId].data[6];
+            gSprites[gTasks[taskId].data[0]].x2 += gTasks[taskId].data[5];
+            gSprites[gTasks[taskId].data[0]].y2 += gTasks[taskId].data[6];
         }
         else
         {
-            gSprites[gTasks[taskId].data[0]].pos2.x -= gTasks[taskId].data[5];
-            gSprites[gTasks[taskId].data[0]].pos2.y -= gTasks[taskId].data[6];
+            gSprites[gTasks[taskId].data[0]].x2 -= gTasks[taskId].data[5];
+            gSprites[gTasks[taskId].data[0]].y2 -= gTasks[taskId].data[6];
         }
         gTasks[taskId].data[3] = gTasks[taskId].data[4];
         if (++gTasks[taskId].data[1] >= gTasks[taskId].data[2])
         {
             if (gTasks[taskId].data[1] & 1)
             {
-                gSprites[gTasks[taskId].data[0]].pos2.x += gTasks[taskId].data[5] / 2;
-                gSprites[gTasks[taskId].data[0]].pos2.y += gTasks[taskId].data[6] / 2;
+                gSprites[gTasks[taskId].data[0]].x2 += gTasks[taskId].data[5] / 2;
+                gSprites[gTasks[taskId].data[0]].y2 += gTasks[taskId].data[6] / 2;
             }
             else
             {
-                gSprites[gTasks[taskId].data[0]].pos2.x -= gTasks[taskId].data[5] / 2;
-                gSprites[gTasks[taskId].data[0]].pos2.y -= gTasks[taskId].data[6] / 2;
+                gSprites[gTasks[taskId].data[0]].x2 -= gTasks[taskId].data[5] / 2;
+                gSprites[gTasks[taskId].data[0]].y2 -= gTasks[taskId].data[6] / 2;
             }
             DestroyAnimVisualTask(taskId);
         }
@@ -293,7 +293,7 @@ void AnimTask_ShakeAndSinkMon(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
 
-    gSprites[spriteId].pos2.x = gBattleAnimArgs[1];
+    gSprites[spriteId].x2 = gBattleAnimArgs[1];
     gTasks[taskId].data[0] = spriteId;
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
@@ -310,13 +310,13 @@ static void AnimTask_ShakeAndSinkMonStep(u8 taskId)
     if (gTasks[taskId].data[2] == gTasks[taskId].data[8]++)
     {
         gTasks[taskId].data[8] = 0;
-        if (gSprites[spriteId].pos2.x == data1)
+        if (gSprites[spriteId].x2 == data1)
             data1 = -data1;
-        gSprites[spriteId].pos2.x += data1;
+        gSprites[spriteId].x2 += data1;
     }
     gTasks[taskId].data[1] = data1;
     gTasks[taskId].data[9] += gTasks[taskId].data[3];
-    gSprites[spriteId].pos2.y = gTasks[taskId].data[9] >> 8;
+    gSprites[spriteId].y2 = gTasks[taskId].data[9] >> 8;
     if (--gTasks[taskId].data[4] == 0)
         DestroyAnimVisualTask(taskId);
 }
@@ -349,17 +349,17 @@ void AnimTask_TranslateMonElliptical(u8 taskId)
 static void AnimTask_TranslateMonEllipticalStep(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
-    gSprites[spriteId].pos2.x = Sin(gTasks[taskId].data[5], gTasks[taskId].data[1]);
-    gSprites[spriteId].pos2.y = -Cos(gTasks[taskId].data[5], gTasks[taskId].data[2]);
-    gSprites[spriteId].pos2.y += gTasks[taskId].data[2];
+    gSprites[spriteId].x2 = Sin(gTasks[taskId].data[5], gTasks[taskId].data[1]);
+    gSprites[spriteId].y2 = -Cos(gTasks[taskId].data[5], gTasks[taskId].data[2]);
+    gSprites[spriteId].y2 += gTasks[taskId].data[2];
     gTasks[taskId].data[5] += gTasks[taskId].data[4];
     gTasks[taskId].data[5] &= 0xFF;
     if (gTasks[taskId].data[5] == 0)
         gTasks[taskId].data[3]--;
     if (gTasks[taskId].data[3] == 0)
     {
-        gSprites[spriteId].pos2.x = 0;
-        gSprites[spriteId].pos2.y = 0;
+        gSprites[spriteId].x2 = 0;
+        gSprites[spriteId].y2 = 0;
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -446,15 +446,15 @@ static void SlideMonToOriginalPos(struct Sprite * sprite)
     else
         spriteId = gBattlerSpriteIds[gBattleAnimTarget];
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-    sprite->data[2] = gSprites[spriteId].pos1.x;
-    sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
-    sprite->data[4] = gSprites[spriteId].pos1.y;
+    sprite->data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+    sprite->data[2] = gSprites[spriteId].x;
+    sprite->data[3] = gSprites[spriteId].y + gSprites[spriteId].y2;
+    sprite->data[4] = gSprites[spriteId].y;
     InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
-    sprite->data[5] = gSprites[spriteId].pos2.x;
-    sprite->data[6] = gSprites[spriteId].pos2.y;
+    sprite->data[5] = gSprites[spriteId].x2;
+    sprite->data[6] = gSprites[spriteId].y2;
     sprite->invisible = TRUE;
     if (gBattleAnimArgs[1] == 1)
         sprite->data[2] = 0;
@@ -472,9 +472,9 @@ static void SlideMonToOriginalPosStep(struct Sprite * sprite)
     if (sprite->data[0] == 0)
     {
         if (data7 == 1 || data7 == 0)
-            otherSprite->pos2.x = 0;
+            otherSprite->x2 = 0;
         if (data7 == 2 || data7 == 0)
-            otherSprite->pos2.y = 0;
+            otherSprite->y2 = 0;
         DestroyAnimSprite(sprite);
     }
     else
@@ -482,8 +482,8 @@ static void SlideMonToOriginalPosStep(struct Sprite * sprite)
         sprite->data[0]--;
         sprite->data[3] += sprite->data[1];
         sprite->data[4] += sprite->data[2];
-        otherSprite->pos2.x = (sprite->data[3] >> 8) + sprite->data[5];
-        otherSprite->pos2.y = (sprite->data[4] >> 8) + sprite->data[6];
+        otherSprite->x2 = (sprite->data[3] >> 8) + sprite->data[5];
+        otherSprite->y2 = (sprite->data[4] >> 8) + sprite->data[6];
     }
 }
 
@@ -511,10 +511,10 @@ static void SlideMonToOffset(struct Sprite * sprite)
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = gSprites[spriteId].pos1.x;
-    sprite->data[2] = gSprites[spriteId].pos1.x + gBattleAnimArgs[1];
-    sprite->data[3] = gSprites[spriteId].pos1.y;
-    sprite->data[4] = gSprites[spriteId].pos1.y + gBattleAnimArgs[2];
+    sprite->data[1] = gSprites[spriteId].x;
+    sprite->data[2] = gSprites[spriteId].x + gBattleAnimArgs[1];
+    sprite->data[3] = gSprites[spriteId].y;
+    sprite->data[4] = gSprites[spriteId].y + gBattleAnimArgs[2];
     InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
@@ -541,13 +541,13 @@ static void sub_8099394(struct Sprite * sprite)
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+    sprite->data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
     sprite->data[2] = sprite->data[1] + gBattleAnimArgs[1];
-    sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+    sprite->data[3] = gSprites[spriteId].y + gSprites[spriteId].y2;
     sprite->data[4] = sprite->data[3] + gBattleAnimArgs[2];
     InitSpriteDataForLinearTranslation(sprite);
-    sprite->data[3] = gSprites[spriteId].pos2.x << 8;
-    sprite->data[4] = gSprites[spriteId].pos2.y << 8;
+    sprite->data[3] = gSprites[spriteId].x2 << 8;
+    sprite->data[4] = gSprites[spriteId].y2 << 8;
     sprite->data[5] = spriteId;
     sprite->data[6] = gBattleAnimArgs[5];
     if (gBattleAnimArgs[5] == 0)
@@ -559,8 +559,8 @@ static void sub_8099394(struct Sprite * sprite)
 
 static void sub_809946C(struct Sprite * sprite)
 {
-    gSprites[sprite->data[5]].pos2.x = 0;
-    gSprites[sprite->data[5]].pos2.y = 0;
+    gSprites[sprite->data[5]].x2 = 0;
+    gSprites[sprite->data[5]].y2 = 0;
     DestroyAnimSprite(sprite);
 }
 
@@ -597,8 +597,8 @@ static void AnimTask_WindUpLungePart1(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
     gTasks[taskId].data[11] += gTasks[taskId].data[1];
-    gSprites[spriteId].pos2.x = gTasks[taskId].data[11] >> 8;
-    gSprites[spriteId].pos2.y = Sin((u8)(gTasks[taskId].data[10] >> 8), gTasks[taskId].data[2]);
+    gSprites[spriteId].x2 = gTasks[taskId].data[11] >> 8;
+    gSprites[spriteId].y2 = Sin((u8)(gTasks[taskId].data[10] >> 8), gTasks[taskId].data[2]);
     gTasks[taskId].data[10] += gTasks[taskId].data[7];
     if (--gTasks[taskId].data[3] == 0)
         gTasks[taskId].func = AnimTask_WindUpLungePart2;
@@ -614,7 +614,7 @@ static void AnimTask_WindUpLungePart2(u8 taskId)
     {
         spriteId = gTasks[taskId].data[0];
         gTasks[taskId].data[12] += gTasks[taskId].data[5];
-        gSprites[spriteId].pos2.x = (gTasks[taskId].data[12] >> 8) + (gTasks[taskId].data[11] >> 8);
+        gSprites[spriteId].x2 = (gTasks[taskId].data[12] >> 8) + (gTasks[taskId].data[11] >> 8);
         if (--gTasks[taskId].data[6] == 0)
             DestroyAnimVisualTask(taskId);
     }
@@ -661,8 +661,8 @@ void AnimTask_SlideOffScreen(u8 taskId)
 static void sub_80996B8(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
-    gSprites[spriteId].pos2.x += gTasks[taskId].data[1];
-    if (gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x < -0x20 || gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x > 0x110)
+    gSprites[spriteId].x2 += gTasks[taskId].data[1];
+    if (gSprites[spriteId].x2 + gSprites[spriteId].x < -0x20 || gSprites[spriteId].x2 + gSprites[spriteId].x > 0x110)
         DestroyAnimVisualTask(taskId);
 }
 
@@ -707,22 +707,22 @@ static void AnimTask_SwayMonStep(u8 taskId)
     sineValue = Sin(waveIndex, gTasks[taskId].data[1]);
     if (gTasks[taskId].data[0] == 0)
     {
-        gSprites[spriteId].pos2.x = sineValue;
+        gSprites[spriteId].x2 = sineValue;
     }
     else if (GetBattlerSide(gTasks[taskId].data[5]) == B_SIDE_PLAYER)
     {
-        gSprites[spriteId].pos2.y = abs(sineValue);
+        gSprites[spriteId].y2 = abs(sineValue);
     }
     else
-        gSprites[spriteId].pos2.y = -abs(sineValue);
+        gSprites[spriteId].y2 = -abs(sineValue);
     if ((waveIndex > 0x7F && gTasks[taskId].data[11] == 0 && gTasks[taskId].data[12] == 1) || (waveIndex < 0x7F && gTasks[taskId].data[11] == 1 && gTasks[taskId].data[12] == 0))
     {
         gTasks[taskId].data[11] ^= 1;
         gTasks[taskId].data[12] ^= 1;
         if (--gTasks[taskId].data[3] == 0)
         {
-            gSprites[spriteId].pos2.x = 0;
-            gSprites[spriteId].pos2.y = 0;
+            gSprites[spriteId].x2 = 0;
+            gSprites[spriteId].y2 = 0;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -890,8 +890,8 @@ void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
     gTasks[taskId].data[10] = gBattleAnimArgs[3];
     gTasks[taskId].data[11] = gBattleAnimArgs[4];
     gTasks[taskId].data[7] = GetAnimBattlerSpriteId(ANIM_TARGET);
-    gTasks[taskId].data[8] = gSprites[gTasks[taskId].data[7]].pos2.x;
-    gTasks[taskId].data[9] = gSprites[gTasks[taskId].data[7]].pos2.y;
+    gTasks[taskId].data[8] = gSprites[gTasks[taskId].data[7]].x2;
+    gTasks[taskId].data[9] = gSprites[gTasks[taskId].data[7]].y2;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
@@ -909,28 +909,28 @@ static void sub_8099CB8(u8 taskId)
         {
             if (task->data[12])
             {
-                gSprites[task->data[7]].pos2.x = task->data[8] + task->data[13];
+                gSprites[task->data[7]].x2 = task->data[8] + task->data[13];
             }
             else
             {
-                gSprites[task->data[7]].pos2.x = task->data[8] - task->data[14];
+                gSprites[task->data[7]].x2 = task->data[8] - task->data[14];
             }
         }
         if (task->data[11])
         {
             if (task->data[12])
             {
-                gSprites[task->data[7]].pos2.y = task->data[15];
+                gSprites[task->data[7]].y2 = task->data[15];
             }
             else
             {
-                gSprites[task->data[7]].pos2.y = 0;
+                gSprites[task->data[7]].y2 = 0;
             }
         }
         if (!--task->data[2])
         {
-            gSprites[task->data[7]].pos2.x = 0;
-            gSprites[task->data[7]].pos2.y = 0;
+            gSprites[task->data[7]].x2 = 0;
+            gSprites[task->data[7]].y2 = 0;
             DestroyAnimVisualTask(taskId);
             return;
         }

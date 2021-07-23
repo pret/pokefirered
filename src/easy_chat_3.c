@@ -1940,17 +1940,17 @@ static void SpriteCB_BounceCursor(struct Sprite * sprite)
         if (++sprite->data[0] > 2)
         {
             sprite->data[0] = 0;
-            if (++sprite->pos2.x > 0)
-                sprite->pos2.x = -6;
+            if (++sprite->x2 > 0)
+                sprite->x2 = -6;
         }
     }
 }
 
 static void SetSelectDestFieldCursorSpritePosAndResetAnim(u8 x, u8 y)
 {
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos1.x = x;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos1.y = y;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos2.x = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->x = x;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->y = y;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->x2 = 0;
     sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[0] = 0;
 }
 
@@ -1958,7 +1958,7 @@ static void FreezeSelectDestFieldCursorSprite(void)
 {
     sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[0] = 0;
     sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[1] = 0;
-    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos2.x = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->x2 = 0;
 }
 
 static void UnfreezeSelectDestFieldCursorSprite(void)
@@ -1970,11 +1970,11 @@ static void CreateRedRectangularCursorSpritePair(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
     sEasyChatGraphicsResources->rectCursorSpriteRight = &gSprites[spriteId];
-    sEasyChatGraphicsResources->rectCursorSpriteRight->pos2.x = 32;
+    sEasyChatGraphicsResources->rectCursorSpriteRight->x2 = 32;
 
     spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
     sEasyChatGraphicsResources->rectCursorSpriteLeft = &gSprites[spriteId];
-    sEasyChatGraphicsResources->rectCursorSpriteLeft->pos2.x = -32;
+    sEasyChatGraphicsResources->rectCursorSpriteLeft->x2 = -32;
 
     sEasyChatGraphicsResources->rectCursorSpriteRight->hFlip = TRUE;
     EC_MoveCursor();
@@ -2008,22 +2008,22 @@ static void MoveCursor_Group(s8 x, s8 y)
     if (x != -1)
     {
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 0);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = x * 84 + 58;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y * 16 + 96;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->x = x * 84 + 58;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->y = y * 16 + 96;
 
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 0);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = x * 84 + 58;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y * 16 + 96;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->x = x * 84 + 58;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->y = y * 16 + 96;
     }
     else
     {
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y * 16 + 112;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->y = y * 16 + 112;
 
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y * 16 + 112;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->y = y * 16 + 112;
     }
 }
 
@@ -2048,22 +2048,22 @@ static void MoveCursor_Alpha(s8 cursorX, s8 cursorY)
         }
 
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, anim);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = x;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->x = x;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->y = y;
 
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, anim);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = x;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->x = x;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->y = y;
     }
     else
     {
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = cursorY * 16 + 112;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->y = cursorY * 16 + 112;
 
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = 216;
-        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = cursorY * 16 + 112;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->y = cursorY * 16 + 112;
     }
 }
 
@@ -2081,8 +2081,8 @@ static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite)
     if (++sprite->data[0] > 2)
     {
         sprite->data[0] = 0;
-        if (++sprite->pos2.x > 0)
-            sprite->pos2.x = -6;
+        if (++sprite->x2 > 0)
+            sprite->x2 = -6;
     }
 }
 
@@ -2101,9 +2101,9 @@ static void SetSelectWordCursorSpritePosExplicit(u8 x, u8 y)
 {
     if (sEasyChatGraphicsResources->selectWordCursorSprite)
     {
-        sEasyChatGraphicsResources->selectWordCursorSprite->pos1.x = x * 8 + 4;
-        sEasyChatGraphicsResources->selectWordCursorSprite->pos1.y = (y + 1) * 8 + 1;
-        sEasyChatGraphicsResources->selectWordCursorSprite->pos2.x = 0;
+        sEasyChatGraphicsResources->selectWordCursorSprite->x = x * 8 + 4;
+        sEasyChatGraphicsResources->selectWordCursorSprite->y = (y + 1) * 8 + 1;
+        sEasyChatGraphicsResources->selectWordCursorSprite->x2 = 0;
         sEasyChatGraphicsResources->selectWordCursorSprite->data[0] = 0;
     }
 }
@@ -2121,7 +2121,7 @@ static void CreateSelectGroupHelpSprite(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_SelectGroupHelp, 208, 128, 6);
     sEasyChatGraphicsResources->selectGroupHelpSprite = &gSprites[spriteId];
-    sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x = -64;
+    sEasyChatGraphicsResources->selectGroupHelpSprite->x2 = -64;
 
     spriteId = CreateSprite(&sSpriteTemplate_EasyChatModeIcons, 208, 80, 5);
     sEasyChatGraphicsResources->modeIconsSprite = &gSprites[spriteId];
@@ -2135,10 +2135,10 @@ static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void)
     default:
         return FALSE;
     case 0:
-        sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x += 8;
-        if (sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x >= 0)
+        sEasyChatGraphicsResources->selectGroupHelpSprite->x2 += 8;
+        if (sEasyChatGraphicsResources->selectGroupHelpSprite->x2 >= 0)
         {
-            sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x = 0;
+            sEasyChatGraphicsResources->selectGroupHelpSprite->x2 = 0;
             if (!IsEasyChatAlphaMode())
                 StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
             else
@@ -2175,8 +2175,8 @@ static bool8 RunModeIconHidingAnimation(void)
             sEasyChatGraphicsResources->modeIconState = 1;
         break;
     case 1:
-        sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x -= 8;
-        if (sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x <= -64)
+        sEasyChatGraphicsResources->selectGroupHelpSprite->x2 -= 8;
+        if (sEasyChatGraphicsResources->selectGroupHelpSprite->x2 <= -64)
         {
             DestroySprite(sEasyChatGraphicsResources->modeIconsSprite);
             DestroySprite(sEasyChatGraphicsResources->selectGroupHelpSprite);
@@ -2241,14 +2241,14 @@ static void UpdateVerticalScrollArrowSpriteXPos(int direction)
     if (!direction)
     {
         // Group select
-        sEasyChatGraphicsResources->upTriangleCursorSprite->pos1.x = 96;
-        sEasyChatGraphicsResources->downTriangleCursorSprite->pos1.x = 96;
+        sEasyChatGraphicsResources->upTriangleCursorSprite->x = 96;
+        sEasyChatGraphicsResources->downTriangleCursorSprite->x = 96;
     }
     else
     {
         // Word select
-        sEasyChatGraphicsResources->upTriangleCursorSprite->pos1.x = 120;
-        sEasyChatGraphicsResources->downTriangleCursorSprite->pos1.x = 120;
+        sEasyChatGraphicsResources->upTriangleCursorSprite->x = 120;
+        sEasyChatGraphicsResources->downTriangleCursorSprite->x = 120;
     }
 }
 

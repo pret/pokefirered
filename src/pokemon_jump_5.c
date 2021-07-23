@@ -406,7 +406,7 @@ void sub_814AF0C(struct PokemonJump2 *arg0, int multiplayerId)
     sub_814ADB4(arg0->unk81BC[multiplayerId]);
     arg0->unk81BC[multiplayerId]->data[7] = arg0->unk81A8[multiplayerId] - gSprites;
     arg0->unk81BC[multiplayerId]->invisible = FALSE;
-    arg0->unk81BC[multiplayerId]->pos1.y = 96;
+    arg0->unk81BC[multiplayerId]->y = 96;
     arg0->unk81BC[multiplayerId]->callback = sub_814AF74;
     StartSpriteAnim(arg0->unk81BC[multiplayerId], 1);
 }
@@ -423,11 +423,11 @@ static void sub_814AF74(struct Sprite *sprite)
         }
         break;
     case 1:
-        sprite->pos1.y--;
+        sprite->y--;
         sprite->data[1]++;
-        if (sprite->pos1.y <= 72)
+        if (sprite->y <= 72)
         {
-            sprite->pos1.y = 72;
+            sprite->y = 72;
             sprite->data[0]++;
         }
         break;
@@ -444,7 +444,7 @@ static void sub_814AF74(struct Sprite *sprite)
 void sub_814AFE8(struct PokemonJump2 *arg0, int multiplayerId)
 {
     arg0->unk81A8[multiplayerId]->callback = sub_814B038;
-    arg0->unk81A8[multiplayerId]->pos2.y = 0;
+    arg0->unk81A8[multiplayerId]->y2 = 0;
     sub_814ADB4(arg0->unk81A8[multiplayerId]);
 }
 
@@ -458,16 +458,16 @@ static void sub_814B038(struct Sprite *sprite)
     if (++sprite->data[1] > 1)
     {
         if (++sprite->data[2] & 1)
-            sprite->pos2.y = 2;
+            sprite->y2 = 2;
         else
-            sprite->pos2.y = -2;
+            sprite->y2 = -2;
 
         sprite->data[1] = 0;
     }
 
     if (sprite->data[2] > 12)
     {
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -543,7 +543,7 @@ static void sub_814B1CC(struct Sprite *sprite)
         if (sprite->data[1] > 0x7F)
             sprite->data[1] = 0;
 
-        sprite->pos2.y = -(gSineTable[sprite->data[1]] >> 3);
+        sprite->y2 = -(gSineTable[sprite->data[1]] >> 3);
         if (sprite->data[1] == 0)
         {
             if (++sprite->data[2] < 2)
@@ -608,7 +608,7 @@ void sub_814B348(struct PokemonJump2 *arg0, int arg1)
     count = 0;
     for (i = 0; i < 4; i++)
     {
-        arg0->unk81D0[count]->pos1.y = gUnknown_846E100[i][arg1];
+        arg0->unk81D0[count]->y = gUnknown_846E100[i][arg1];
         arg0->unk81D0[count]->oam.priority = priority;
         arg0->unk81D0[count]->oam.paletteNum = palNum;
         StartSpriteAnim(arg0->unk81D0[count], arg1);
@@ -617,7 +617,7 @@ void sub_814B348(struct PokemonJump2 *arg0, int arg1)
 
     for (i = 3; i >= 0; i--)
     {
-        arg0->unk81D0[count]->pos1.y = gUnknown_846E100[i][arg1];
+        arg0->unk81D0[count]->y = gUnknown_846E100[i][arg1];
         arg0->unk81D0[count]->oam.priority = priority;
         arg0->unk81D0[count]->oam.paletteNum = palNum;
         StartSpriteAnim(arg0->unk81D0[count], arg1);

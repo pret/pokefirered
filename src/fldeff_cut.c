@@ -261,8 +261,8 @@ static void SpriteCallback_CutGrass_Init(struct Sprite * sprite)
 
 static void SpriteCallback_CutGrass_Run(struct Sprite * sprite)
 {
-    sprite->pos2.x = Sin(sprite->data[2], sprite->data[0]);
-    sprite->pos2.y = Cos(sprite->data[2], sprite->data[0]);
+    sprite->x2 = Sin(sprite->data[2], sprite->data[0]);
+    sprite->y2 = Cos(sprite->data[2], sprite->data[0]);
     sprite->data[2] += 8;
     sprite->data[2] &= 0xFF;
     sprite->data[0]++;

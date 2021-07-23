@@ -1530,14 +1530,14 @@ static void SpriteCB_Grass(struct Sprite * sprite)
     switch (data[0])
     {
     case 0:
-        data[1] = sprite->pos1.x << 5;
+        data[1] = sprite->x << 5;
         data[2] = 160;
         data[0]++;
         // fallthrough
     case 1:
         data[1] -= data[2];
-        sprite->pos1.x = data[1] >> 5;
-        if (sprite->pos1.x <= 52)
+        sprite->x = data[1] >> 5;
+        if (sprite->x <= 52)
         {
             FightScene3_SlowBg1Scroll();
             data[0]++;
@@ -1545,8 +1545,8 @@ static void SpriteCB_Grass(struct Sprite * sprite)
         break;
     case 2:
         data[1] -= 32;
-        sprite->pos1.x = data[1] >> 5;
-        if (sprite->pos1.x <= -32)
+        sprite->x = data[1] >> 5;
+        if (sprite->x <= -32)
         {
             sprite->invisible = TRUE;
             sprite->data[0]++;
@@ -1685,8 +1685,8 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         if (JOY_NEW(R_BUTTON))
         {
             BlendPalettes(0xFFFF0064, 0, RGB_WHITE);
-            this->nidorinoAnimSprite->pos2.x = 0;
-            this->nidorinoAnimSprite->pos1.x = 0xB4;
+            this->nidorinoAnimSprite->x2 = 0;
+            this->nidorinoAnimSprite->x = 0xB4;
             this->state = 1;
             this->data[5] = 30;
         }
@@ -1722,8 +1722,8 @@ static void CreateGengarBackSprite(struct IntroSequenceData * this)
 
 static void FightScene4_StartNidorinoAffineAnim(struct IntroSequenceData * this)
 {
-    this->nidorinoAnimSprite->pos1.x += this->nidorinoAnimSprite->pos2.x;
-    this->nidorinoAnimSprite->pos1.y += this->nidorinoAnimSprite->pos2.y;
+    this->nidorinoAnimSprite->x += this->nidorinoAnimSprite->x2;
+    this->nidorinoAnimSprite->y += this->nidorinoAnimSprite->y2;
     obj_pos2_update_enable(this->nidorinoAnimSprite, 0, 0x2A);
     this->nidorinoAnimSprite->callback = SpriteCallbackDummy;
     StartSpriteAffineAnim(this->nidorinoAnimSprite, 1);
@@ -2048,9 +2048,9 @@ static void SpriteCB_LargeStar(struct Sprite * sprite)
     sprite->data[0] -= sprite->data[2];
     sprite->data[1] += sprite->data[3];
     sprite->data[4] += 48;
-    sprite->pos1.x = sprite->data[0] >> 4;
-    sprite->pos1.y = sprite->data[1] >> 4;
-    sprite->pos2.y = gSineTable[(sprite->data[4] >> 4) + 0x40] >> 5;
+    sprite->x = sprite->data[0] >> 4;
+    sprite->y = sprite->data[1] >> 4;
+    sprite->y2 = gSineTable[(sprite->data[4] >> 4) + 0x40] >> 5;
     sprite->data[5]++;
     if (sprite->data[5] % sTrailingSparklesSpawnRate)
     {
@@ -2058,9 +2058,9 @@ static void SpriteCB_LargeStar(struct Sprite * sprite)
         v = v * 1103515245 + 24691;
         StoreWordInTwoHalfwords(&sprite->data[6], v);
         v >>= 16;
-        GameFreakScene_TrailingSparklesGen(sprite->pos1.x, sprite->pos1.y + sprite->pos2.y, v);
+        GameFreakScene_TrailingSparklesGen(sprite->x, sprite->y + sprite->y2, v);
     }
-    if (sprite->pos1.x < -8)
+    if (sprite->x < -8)
         DestroySprite(sprite);
 }
 
@@ -2073,17 +2073,17 @@ static void SpriteCB_TrailingSparkles(struct Sprite * sprite)
     sprite->data[4]++;
     sprite->data[5] += sprite->data[4];
     sprite->data[7]++;
-    sprite->pos1.x = (u16)sprite->data[0] >> sTrailingSparklesXprecision;
-    sprite->pos1.y = sprite->data[1] >> sTrailingSparklesYprecision;
+    sprite->x = (u16)sprite->data[0] >> sTrailingSparklesXprecision;
+    sprite->y = sprite->data[1] >> sTrailingSparklesYprecision;
     if (sTrailingSparklesGravityShift && sprite->data[3] < 0)
-        sprite->pos2.y = sprite->data[5] >> sTrailingSparklesGravityShift;
+        sprite->y2 = sprite->data[5] >> sTrailingSparklesGravityShift;
     if (sprite->data[7] > sTrailingSparklesFlickerStartTime)
     {
         sprite->invisible = !sprite->invisible;
         if (sprite->data[7] > sTrailingSparklesDestroySpriteTime)
             DestroySprite(sprite);
     }
-    if (sprite->pos1.y + sprite->pos2.y < 0 || sprite->pos1.y + sprite->pos2.y > 160)
+    if (sprite->y + sprite->y2 < 0 || sprite->y + sprite->y2 > 160)
         DestroySprite(sprite);
 }
 
@@ -2093,29 +2093,29 @@ static void SpriteCB_TrailingSparkles2(struct Sprite * sprite)
     {
         sprite->data[2]--;
         sprite->data[1]++;
-        sprite->pos1.y = sprite->data[1] >> 4;
-        if (sprite->pos1.y > 0x56)
+        sprite->y = sprite->data[1] >> 4;
+        if (sprite->y > 0x56)
         {
-            sprite->pos1.y = 0x4A;
+            sprite->y = 0x4A;
             sprite->data[1] = 0x4A0;
         }
         if (sprite->animEnded)
         {
             if (sprite->data[0] == 0)
             {
-                sprite->pos1.x += 26;
-                if (sprite->pos1.x > 188)
+                sprite->x += 26;
+                if (sprite->x > 188)
                 {
-                    sprite->pos1.x = 376 - sprite->pos1.x;
+                    sprite->x = 376 - sprite->x;
                     sprite->data[0] = 1;
                 }
             }
             else
             {
-                sprite->pos1.x -= 26;
-                if (sprite->pos1.x < 52)
+                sprite->x -= 26;
+                if (sprite->x < 52)
                 {
-                    sprite->pos1.x = 104 - sprite->pos1.x;
+                    sprite->x = 104 - sprite->x;
                     sprite->data[0] = 0;
                 }
             }
@@ -2129,7 +2129,7 @@ static void SpriteCB_TrailingSparkles2(struct Sprite * sprite)
         if (sprite->animEnded)
             StartSpriteAnim(sprite, 0);
         sprite->data[1] += 4;
-        sprite->pos1.y = sprite->data[1] >> 4;
+        sprite->y = sprite->data[1] >> 4;
         sprite->data[4]++;
         if (sprite->data[4] > 50)
             DestroySprite(sprite);
@@ -2155,8 +2155,8 @@ static void StartNidorinoAnimSpriteSlideIn(struct Sprite * sprite, s16 x0, s16 x
     sprite->data[2] = speed;
     sprite->data[3] = x1;
     sprite->data[4] = 0;
-    sprite->pos1.x = x0;
-    sprite->pos1.y = 100;
+    sprite->x = x0;
+    sprite->y = 100;
     sprite->callback = SpriteCB_NidorinoAnimSpriteSlideIn;
 }
 
@@ -2169,10 +2169,10 @@ static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite * sprite)
             sprite->data[1]--;
     }
     sprite->data[0] += sprite->data[1];
-    sprite->pos1.x = sprite->data[0] >> 4;
-    if (sprite->pos1.x >= sprite->data[3])
+    sprite->x = sprite->data[0] >> 4;
+    if (sprite->x >= sprite->data[3])
     {
-        sprite->pos1.x = sprite->data[3];
+        sprite->x = sprite->data[3];
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -2187,7 +2187,7 @@ static void FightScene4_NidorinoRearsUp(struct IntroSequenceData * ptr)
     StartSpriteAnim(ptr->nidorinoAnimSprite, 2);
     ptr->nidorinoAnimSprite->data[0] = 0;
     ptr->nidorinoAnimSprite->data[1] = 0;
-    ptr->nidorinoAnimSprite->pos2.y = 3;
+    ptr->nidorinoAnimSprite->y2 = 3;
     ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoRearsUp;
 }
 
@@ -2200,7 +2200,7 @@ static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite)
         if (sprite->data[1] > 8)
         {
             StartSpriteAnim(sprite, 1);
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             sprite->data[0]++;
         }
         break;
@@ -2214,13 +2214,13 @@ static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite)
         if (sprite->data[2] > 1)
         {
             sprite->data[2] = 0;
-            sprite->pos2.y = sprite->pos2.y == 0 ? 1 : 0;
+            sprite->y2 = sprite->y2 == 0 ? 1 : 0;
         }
         sprite->data[1]++;
         if (sprite->data[1] > 48)
         {
             StartSpriteAnim(sprite, 0);
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             sprite->callback = SpriteCallbackDummy;
         }
         break;
@@ -2258,8 +2258,8 @@ static void SpriteCB_NidorinoRecoil(struct Sprite * sprite)
     case 1:
         sprite->data[2] += sprite->data[7];
         sprite->data[3] += 8;
-        sprite->pos2.x = sprite->data[2] >> 4;
-        sprite->pos2.y = -((gSineTable[sprite->data[3]] * gUnknown_203AB04) >> gUnknown_203AB08);
+        sprite->x2 = sprite->data[2] >> 4;
+        sprite->y2 = -((gSineTable[sprite->data[3]] * gUnknown_203AB04) >> gUnknown_203AB08);
         sprite->data[5]++;
         if (sprite->data[5] > gUnknown_203AB06)
         {
@@ -2278,11 +2278,11 @@ static void SpriteCB_NidorinoRecoil(struct Sprite * sprite)
         break;
     case 2:
         sprite->data[2] += sprite->data[7];
-        sprite->pos2.x = sprite->data[2] >> 4;
+        sprite->x2 = sprite->data[2] >> 4;
         sprite->data[1]++;
         if (sprite->data[1] > 6)
         {
-            CreateNidorinoRecoilDustSprites(sprite->pos1.x + sprite->pos2.x, sprite->pos1.y + sprite->pos2.y, sprite->data[6]);
+            CreateNidorinoRecoilDustSprites(sprite->x + sprite->x2, sprite->y + sprite->y2, sprite->data[6]);
             sprite->data[6] *= 1103515245;
         }
         if (sprite->data[1] > 12)
@@ -2296,7 +2296,7 @@ static void SpriteCB_NidorinoRecoil(struct Sprite * sprite)
         sprite->data[1]++;
         if (sprite->data[1] > 16)
         {
-            StartSpriteHopToPosAnim(sprite, gUnknown_203AB0A, -sprite->pos2.x, 4);
+            StartSpriteHopToPosAnim(sprite, gUnknown_203AB0A, -sprite->x2, 4);
         }
         break;
     }
@@ -2332,15 +2332,15 @@ static void SpriteCB_NidorinoRecoilDust(struct Sprite * sprite)
     switch (sprite->data[0])
     {
     case 0:
-        data[1] = sprite->pos1.x << 4;
-        data[2] = sprite->pos1.y << 4;
+        data[1] = sprite->x << 4;
+        data[2] = sprite->y << 4;
         sprite->data[0]++;
         // fallthrough
     case 1:
         data[1] -= data[3];
         data[2] += data[4];
-        sprite->pos1.x = data[1] >> 4;
-        sprite->pos1.y = data[2] >> 4;
+        sprite->x = data[1] >> 4;
+        sprite->y = data[2] >> 4;
         if (sprite->animEnded)
             DestroySprite(sprite);
         break;
@@ -2357,7 +2357,7 @@ static void StartSpriteHopToPosAnim(struct Sprite * sprite, u16 a1, s16 a2, u8 a
 {
     sprite->data[0] = 0;
     sprite->data[1] = a1;
-    sprite->data[2] = sprite->pos2.x << 4;
+    sprite->data[2] = sprite->x2 << 4;
     sprite->data[3] = (a2 << 4) / a1;
     sprite->data[4] = 0;
     sprite->data[5] = 0x800 / a1;
@@ -2386,13 +2386,13 @@ static void SpriteCB_HopToPos(struct Sprite * sprite)
         {
             sprite->data[2] += sprite->data[3];
             sprite->data[4] += sprite->data[5];
-            sprite->pos2.x = sprite->data[2] >> 4;
-            sprite->pos2.y = -(gSineTable[sprite->data[4] >> 4] >> sprite->data[7]);
+            sprite->x2 = sprite->data[2] >> 4;
+            sprite->y2 = -(gSineTable[sprite->data[4] >> 4] >> sprite->data[7]);
         }
         else
         {
-            sprite->pos2.x = (u16)sprite->data[2] >> 4;
-            sprite->pos2.y = 0;
+            sprite->x2 = (u16)sprite->data[2] >> 4;
+            sprite->y2 = 0;
             StartSpriteAnim(sprite, 2);
             if (sprite->data[7] == 5)
                 sprite->callback = SpriteCallbackDummy;
@@ -2422,8 +2422,8 @@ static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * 
     ptr->nidorinoAnimSprite->data[3] = 0;
     ptr->nidorinoAnimSprite->data[4] = 0;
     ptr->nidorinoAnimSprite->data[5] = 0;
-    ptr->nidorinoAnimSprite->pos1.x += ptr->nidorinoAnimSprite->pos2.x;
-    ptr->nidorinoAnimSprite->pos2.x = 0;
+    ptr->nidorinoAnimSprite->x += ptr->nidorinoAnimSprite->x2;
+    ptr->nidorinoAnimSprite->x2 = 0;
     gUnknown_203AB0C = 0x24;
     gUnknown_203AB06 = 0x28;
     gUnknown_203AB04 = 0x03;
@@ -2443,9 +2443,9 @@ static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite)
         {
             sprite->data[2]++;
             if (sprite->data[2] & 1)
-                sprite->pos2.x++;
+                sprite->x2++;
             else
-                sprite->pos2.x--;
+                sprite->x2--;
         }
         if (sprite->data[1] > 17)
         {
@@ -2464,8 +2464,8 @@ static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite)
         break;
     case 2:
         sprite->data[1] += sprite->data[7];
-        sprite->pos2.x = -(sprite->data[1] >> 4);
-        sprite->pos2.y = -((gSineTable[sprite->data[1] >> 4] * gUnknown_203AB04) >> gUnknown_203AB08);
+        sprite->x2 = -(sprite->data[1] >> 4);
+        sprite->y2 = -((gSineTable[sprite->data[1] >> 4] * gUnknown_203AB04) >> gUnknown_203AB08);
         sprite->data[2]++;
         if (sprite->data[7] > 12)
             sprite->data[7]--;

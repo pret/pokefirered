@@ -548,12 +548,12 @@ static void sub_808C9C4(u8 curBox)
         r5 = 0;
         if (i & 2)
         {
-            sBoxSelectionPopupSpriteManager->unk_0004[i]->pos1.x = 196;
+            sBoxSelectionPopupSpriteManager->unk_0004[i]->x = 196;
             r5 = 2;
         }
         if (i & 1)
         {
-            sBoxSelectionPopupSpriteManager->unk_0004[i]->pos1.y = 112;
+            sBoxSelectionPopupSpriteManager->unk_0004[i]->y = 112;
             sBoxSelectionPopupSpriteManager->unk_0004[i]->oam.size = SPRITE_SIZE(8x16);
             r5++;
         }
@@ -636,11 +636,11 @@ static void sub_808CD64(struct Sprite *sprite)
     if (++sprite->data[1] > 3)
     {
         sprite->data[1] = 0;
-        sprite->pos2.x += sprite->data[0];
+        sprite->x2 += sprite->data[0];
         if (++sprite->data[2] > 5)
         {
             sprite->data[2] = 0;
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
         }
     }
 }

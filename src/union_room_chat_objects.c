@@ -199,14 +199,14 @@ void UnionRoomChat_MoveSelectorCursorObj(void)
     if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
         StartSpriteAnim(sWork->selectorCursorSprite, 0);
-        sWork->selectorCursorSprite->pos1.x = x * 8 + 10;
-        sWork->selectorCursorSprite->pos1.y = y * 12 + 24;
+        sWork->selectorCursorSprite->x = x * 8 + 10;
+        sWork->selectorCursorSprite->y = y * 12 + 24;
     }
     else
     {
         StartSpriteAnim(sWork->selectorCursorSprite, 2);
-        sWork->selectorCursorSprite->pos1.x = 24;
-        sWork->selectorCursorSprite->pos1.y = y * 12 + 24;
+        sWork->selectorCursorSprite->x = 24;
+        sWork->selectorCursorSprite->y = y * 12 + 24;
     }
 }
 
@@ -263,7 +263,7 @@ static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos1.x = var0 * 8 + 76;
+        sprite->x = var0 * 8 + 76;
     }
 }
 
@@ -272,8 +272,8 @@ static void SpriteCB_CharacterSelectCursor(struct Sprite *sprite)
     if (++sprite->data[0] > 4)
     {
         sprite->data[0] = 0;
-        if (++sprite->pos2.x > 4)
-            sprite->pos2.x = 0;
+        if (++sprite->x2 > 4)
+            sprite->x2 = 0;
     }
 }
 

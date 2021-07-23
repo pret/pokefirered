@@ -168,10 +168,10 @@ static void sub_81477C0(u8 taskId)
     sub_81476E0(taskId, data);
 
     StartSpriteAnim(&gSprites[data[14]], 4);
-    gSprites[data[14]].pos2.x = -32;
+    gSprites[data[14]].x2 = -32;
 
     StartSpriteAnim(&gSprites[data[15]], 5);
-    gSprites[data[15]].pos2.x = 32;
+    gSprites[data[15]].x2 = 32;
 }
 
 static void sub_814784C(u8 taskId)

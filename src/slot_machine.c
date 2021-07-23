@@ -1778,7 +1778,7 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
         ypos = *yposPtr * 8;
         for (j = 0; j < 5; j++)
         {
-            sSlotMachineGfxManager->reelIconSprites[i][j]->pos2.y = ypos;
+            sSlotMachineGfxManager->reelIconSprites[i][j]->y2 = ypos;
             {
                 s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
                 struct Sprite * sprite = sSlotMachineGfxManager->reelIconSprites[i][j];

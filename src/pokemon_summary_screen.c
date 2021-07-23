@@ -1532,12 +1532,12 @@ static void PokeSum_SetHpExpBarCoordsFullRight(void)
     for (i = 0; i < 11; i++)
     {
         sExpBarObjs->xpos[i] = (8 * i) + 396;
-        sExpBarObjs->sprites[i]->pos1.x = sExpBarObjs->xpos[i];
+        sExpBarObjs->sprites[i]->x = sExpBarObjs->xpos[i];
         if (i >= 9)
             continue;
 
         sHpBarObjs->xpos[i] = (8 * i) + 412;
-        sHpBarObjs->sprites[i]->pos1.x = sHpBarObjs->xpos[i];
+        sHpBarObjs->sprites[i]->x = sHpBarObjs->xpos[i];
     }
 }
 
@@ -1547,11 +1547,11 @@ static void PokeSum_SetHpExpBarCoordsFullLeft(void)
     for (i = 0; i < 11; i++)
     {
         sExpBarObjs->xpos[i] = (8 * i) + 156;
-        sExpBarObjs->sprites[i]->pos1.x = sExpBarObjs->xpos[i];
+        sExpBarObjs->sprites[i]->x = sExpBarObjs->xpos[i];
         if (i >= 9)
             continue;
         sHpBarObjs->xpos[i] = (8 * i) + 172;
-        sHpBarObjs->sprites[i]->pos1.x = sHpBarObjs->xpos[i];
+        sHpBarObjs->sprites[i]->x = sHpBarObjs->xpos[i];
     }
 }
 
@@ -3010,7 +3010,7 @@ static void PokeSum_FlipPages_SlideHpExpBarsOut(void)
         if (sExpBarObjs->xpos[i] < 240)
         {
             sExpBarObjs->xpos[i] += 60;
-            sExpBarObjs->sprites[i]->pos1.x = sExpBarObjs->xpos[i] + 60;
+            sExpBarObjs->sprites[i]->x = sExpBarObjs->xpos[i] + 60;
         }
 
         if (i >= 9)
@@ -3019,7 +3019,7 @@ static void PokeSum_FlipPages_SlideHpExpBarsOut(void)
         if (sHpBarObjs->xpos[i] < 240)
         {
             sHpBarObjs->xpos[i] += 60;
-            sHpBarObjs->sprites[i]->pos1.x = sHpBarObjs->xpos[i] + 60;
+            sHpBarObjs->sprites[i]->x = sHpBarObjs->xpos[i] + 60;
         }
     }
 }
@@ -3037,7 +3037,7 @@ static void PokeSum_FlipPages_SlideHpExpBarsIn(void)
             if (sExpBarObjs->xpos[i] < 156 + (8 * i))
                 sExpBarObjs->xpos[i] = 156 + (8 * i);
 
-            sExpBarObjs->sprites[i]->pos1.x = sExpBarObjs->xpos[i];
+            sExpBarObjs->sprites[i]->x = sExpBarObjs->xpos[i];
         }
 
         if (i >= 9)
@@ -3050,7 +3050,7 @@ static void PokeSum_FlipPages_SlideHpExpBarsIn(void)
             if (sHpBarObjs->xpos[i] < 172 + (8 * i))
                 sHpBarObjs->xpos[i] = 172 + (8 * i);
 
-            sHpBarObjs->sprites[i]->pos1.x = sHpBarObjs->xpos[i];
+            sHpBarObjs->sprites[i]->x = sHpBarObjs->xpos[i];
         }
     }
 }
@@ -3925,20 +3925,20 @@ static void SpriteCB_PokeSum_MonPicSprite(struct Sprite * sprite)
         switch (sMonPicBounceState->vigor)
         {
         case 0:
-            sprite->pos1.y += sMonPicBounceYDelta_Under60[sMonPicBounceState->animFrame++];
+            sprite->y += sMonPicBounceYDelta_Under60[sMonPicBounceState->animFrame++];
             arrayLen = NELEMS(sMonPicBounceYDelta_Under60);
             break;
         case 1:
-            sprite->pos1.y += sMonPicBounceYDelta_60to80[sMonPicBounceState->animFrame++];
+            sprite->y += sMonPicBounceYDelta_60to80[sMonPicBounceState->animFrame++];
             arrayLen = NELEMS(sMonPicBounceYDelta_60to80);
             break;
         case 2:
-            sprite->pos1.y += sMonPicBounceYDelta_80to99[sMonPicBounceState->animFrame++];
+            sprite->y += sMonPicBounceYDelta_80to99[sMonPicBounceState->animFrame++];
             arrayLen = NELEMS(sMonPicBounceYDelta_80to99);
             break;
         case 3:
         default:
-            sprite->pos1.y += sMonPicBounceYDelta_Full[sMonPicBounceState->animFrame++];
+            sprite->y += sMonPicBounceYDelta_Full[sMonPicBounceState->animFrame++];
             arrayLen = NELEMS(sMonPicBounceYDelta_Full);
             break;
         }
@@ -3964,7 +3964,7 @@ static void SpriteCB_PokeSum_EggPicShake(struct Sprite * sprite)
     default:
         if (sMonPicBounceState->initDelay++ >= 120)
         {
-            sprite->pos1.x += sEggPicShakeXDelta_ItWillTakeSomeTime[sMonPicBounceState->animFrame];
+            sprite->x += sEggPicShakeXDelta_ItWillTakeSomeTime[sMonPicBounceState->animFrame];
             if (++sMonPicBounceState->animFrame >= NELEMS(sEggPicShakeXDelta_ItWillTakeSomeTime))
             {
                 sMonPicBounceState->animFrame = 0;
@@ -3976,7 +3976,7 @@ static void SpriteCB_PokeSum_EggPicShake(struct Sprite * sprite)
     case 1:
         if (sMonPicBounceState->initDelay++ >= 90)
         {
-            sprite->pos1.x += sEggPicShakeXDelta_OccasionallyMoves[sMonPicBounceState->animFrame];
+            sprite->x += sEggPicShakeXDelta_OccasionallyMoves[sMonPicBounceState->animFrame];
             if (++sMonPicBounceState->animFrame >= NELEMS(sEggPicShakeXDelta_OccasionallyMoves))
             {
                 sMonPicBounceState->animFrame = 0;
@@ -3988,7 +3988,7 @@ static void SpriteCB_PokeSum_EggPicShake(struct Sprite * sprite)
     case 2:
         if (sMonPicBounceState->initDelay++ >= 60)
         {
-            sprite->pos1.x += sEggPicShakeXDelta_AlmostReadyToHatch[sMonPicBounceState->animFrame];
+            sprite->x += sEggPicShakeXDelta_AlmostReadyToHatch[sMonPicBounceState->animFrame];
             if (++sMonPicBounceState->animFrame >= NELEMS(sEggPicShakeXDelta_AlmostReadyToHatch))
             {
                 sMonPicBounceState->animFrame = 0;
@@ -4252,7 +4252,7 @@ static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)
         if (sMonSummaryScreen->isSwappingMoves == TRUE && i > 1)
             continue;
 
-        sMoveSelectionCursorObjs[i]->sprite->pos1.y = sMoveSelectionCursorPos * 28 + 34;
+        sMoveSelectionCursorObjs[i]->sprite->y = sMoveSelectionCursorPos * 28 + 34;
     }
 
     if (sMonSummaryScreen->isSwappingMoves != TRUE)
@@ -4373,17 +4373,17 @@ static void ShowOrHideStatusIcon(u8 invisible)
 
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
     {
-        if (sStatusIcon->sprite->pos1.y != 45)
+        if (sStatusIcon->sprite->y != 45)
         {
-            sStatusIcon->sprite->pos1.x = 16;
-            sStatusIcon->sprite->pos1.y = 45;
+            sStatusIcon->sprite->x = 16;
+            sStatusIcon->sprite->y = 45;
             return;
         }
     }
-    else if (sStatusIcon->sprite->pos1.y != 38)
+    else if (sStatusIcon->sprite->y != 38)
     {
-        sStatusIcon->sprite->pos1.x = 16;
-        sStatusIcon->sprite->pos1.y = 38;
+        sStatusIcon->sprite->x = 16;
+        sStatusIcon->sprite->y = 38;
         return;
     }
 }
@@ -4755,13 +4755,13 @@ static void HideShowPokerusIcon(bool8 invisible)
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
     {
         sPokerusIconObj->sprite->invisible = TRUE;
-        sPokerusIconObj->sprite->pos1.x = 16;
-        sPokerusIconObj->sprite->pos1.y = 44;
+        sPokerusIconObj->sprite->x = 16;
+        sPokerusIconObj->sprite->y = 44;
     }
     else
     {
-        sPokerusIconObj->sprite->pos1.x = 114;
-        sPokerusIconObj->sprite->pos1.y = 92;
+        sPokerusIconObj->sprite->x = 114;
+        sPokerusIconObj->sprite->y = 92;
     }
 }
 
@@ -4826,13 +4826,13 @@ static void HideShowShinyStar(bool8 invisible)
 
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
     {
-        sShinyStarObjData->sprite->pos1.x = 8;
-        sShinyStarObjData->sprite->pos1.y = 24;
+        sShinyStarObjData->sprite->x = 8;
+        sShinyStarObjData->sprite->y = 24;
     }
     else
     {
-        sShinyStarObjData->sprite->pos1.x = 106;
-        sShinyStarObjData->sprite->pos1.y = 40;
+        sShinyStarObjData->sprite->x = 106;
+        sShinyStarObjData->sprite->y = 40;
     }
 }
 
@@ -4884,8 +4884,8 @@ static void PokeSum_CreateMonMarkingsSprite(void)
     if (sMonSummaryScreen->markingSprite != NULL)
     {
         StartSpriteAnim(sMonSummaryScreen->markingSprite, markings);
-        sMonSummaryScreen->markingSprite->pos1.x = 20;
-        sMonSummaryScreen->markingSprite->pos1.y = 91;
+        sMonSummaryScreen->markingSprite->x = 20;
+        sMonSummaryScreen->markingSprite->y = 91;
     }
 
     PokeSum_ShowOrHideMonMarkingsSprite(TRUE);

@@ -1276,16 +1276,16 @@ void sub_80062B0(struct Sprite *sprite)
         switch(sprite->data[1])
         {
             case 0:
-                sprite->pos2.y = 0;
+                sprite->y2 = 0;
                 break;
             case 1:
-                sprite->pos2.y = 1;
+                sprite->y2 = 1;
                 break;
             case 2:
-                sprite->pos2.y = 2;
+                sprite->y2 = 2;
                 break;
             case 3:
-                sprite->pos2.y = 1;
+                sprite->y2 = 1;
                 sprite->data[1] = 0;
                 return;
         }

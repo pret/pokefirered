@@ -1665,14 +1665,14 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     if (newPosition == 12) // CANCEL
     {
         StartSpriteAnim(&gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx], 1);
-        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.x = 224;
-        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.y = 160;
+        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].x = 224;
+        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].y = 160;
     }
     else
     {
         StartSpriteAnim(&gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx], 0);
-        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.x = sTradeMonSpriteCoords[newPosition][0] * 8 + 32;
-        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].pos1.y = sTradeMonSpriteCoords[newPosition][1] * 8;
+        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].x = sTradeMonSpriteCoords[newPosition][0] * 8 + 32;
+        gSprites[sTradeMenuResourcesPtr->tradeMenuCursorSpriteIdx].y = sTradeMonSpriteCoords[newPosition][1] * 8;
     }
 
     if (*tradeMenuCursorPosition != newPosition)
@@ -2155,10 +2155,10 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
     case 3:
         CopyToBgTilemapBufferRect_ChangePalette(1, sTradeMovesBoxTilemap, whichParty * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.x = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + sTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.y = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.x = 0;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.y = 0;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].x = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + sTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].y = (sTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].x2 = 0;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].y2 = 0;
         nameStringWidth = GetNicknameStringWidthByPartyAndMonIdx(nickname, whichParty, partyIdx);
         AddTextPrinterParameterized3((side * 2) + 14, 0, (80 - nameStringWidth) / 2, 4, sTextColor_PartyMonNickname, 0, nickname);
         BuildMovesString(movesString, whichParty, partyIdx);
@@ -2342,10 +2342,10 @@ static void ShowTradePartyMonIcons(u8 whichParty)
     for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[whichParty]; i++)
     {
         gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].invisible = FALSE;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos1.x = sTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][0] * 8 + 14;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos1.y = sTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][1] * 8 - 12;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos2.x = 0;
-        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].pos2.y = 0;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].x = sTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][0] * 8 + 14;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].y = sTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][1] * 8 - 12;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].x2 = 0;
+        gSprites[sTradeMenuResourcesPtr->partyIcons[whichParty][i]].y2 = 0;
     }
 }
 

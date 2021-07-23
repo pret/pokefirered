@@ -1464,7 +1464,7 @@ static void UpdateTMSpritePosition(struct Sprite * sprite, u8 var)
     {
         x = 0x1B;
         y = 0x36;
-        sprite->pos2.y = 0x14;
+        sprite->y2 = 0x14;
     }
     else
     {
@@ -1475,8 +1475,8 @@ static void UpdateTMSpritePosition(struct Sprite * sprite, u8 var)
         x = 0x29 - (((0xE00 * var) / 58) >> 8);
         y = 0x2E + (((0x800 * var) / 58) >> 8);
     }
-    sprite->pos1.x = x;
-    sprite->pos1.y = y;
+    sprite->x = x;
+    sprite->y = y;
 }
 
 static void InitSelectedTMSpriteData(u8 spriteId, u16 itemId)
@@ -1491,7 +1491,7 @@ static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite)
     switch (sprite->data[1])
     {
     case 0:
-        if (sprite->pos2.y >= 20)
+        if (sprite->y2 >= 20)
         {
             if (sprite->data[0] != ITEM_NONE)
             {
@@ -1506,14 +1506,14 @@ static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite)
         }
         else
         {
-            sprite->pos2.y += 10;
+            sprite->y2 += 10;
         }
         break;
     case 1:
-        if (sprite->pos2.y <= 0)
+        if (sprite->y2 <= 0)
             sprite->callback = SpriteCallbackDummy;
         else
-            sprite->pos2.y -= 10;
+            sprite->y2 -= 10;
     }
 }
 

@@ -1275,10 +1275,10 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
     case 0:
         break;
     case 1:
-        if (gSprites[data->playerSpriteId].pos1.x != 0xD0)
+        if (gSprites[data->playerSpriteId].x != 0xD0)
         {
-            gSprites[data->playerSpriteId].pos1.x--;
-            gSprites[data->groundSpriteId].pos1.x--;
+            gSprites[data->playerSpriteId].x--;
+            gSprites[data->groundSpriteId].x--;
         }
         else
         {
@@ -1288,10 +1288,10 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
     case 2:
         if (sCreditsMgr->unk_1D & 1)
         {
-            if (gSprites[data->playerSpriteId].pos1.y != 0x50)
+            if (gSprites[data->playerSpriteId].y != 0x50)
             {
-                gSprites[data->playerSpriteId].pos1.y--;
-                gSprites[data->groundSpriteId].pos1.y--;
+                gSprites[data->playerSpriteId].y--;
+                gSprites[data->groundSpriteId].y--;
             }
             else
             {
@@ -1302,8 +1302,8 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
     case 3:
         if (sCreditsMgr->mainseqno == 15)
         {
-            gSprites[data->playerSpriteId].pos1.x--;
-            gSprites[data->groundSpriteId].pos1.x--;
+            gSprites[data->playerSpriteId].x--;
+            gSprites[data->groundSpriteId].x--;
         }
         break;
     }

@@ -107,7 +107,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         }
         break;
     case 4:
-        sprite->pos1.y -= 4;
+        sprite->y -= 4;
         if (++sprite->data[2] >= 8)
         {
             if (sprite->data[4] < 2)
@@ -124,7 +124,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         }
         break;
     case 5:
-        sprite->pos1.y += 4;
+        sprite->y += 4;
         if (++sprite->data[2] >= 8)
         {
             sprite->data[2] = 0;
@@ -147,8 +147,8 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
 
 static void StartStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3)
 {
-    gSprites[spriteId2].pos2.y = -40;
-    gSprites[spriteId3].pos2.y = -40;
+    gSprites[spriteId2].y2 = -40;
+    gSprites[spriteId3].y2 = -40;
     gSprites[spriteId2].invisible = FALSE;
     gSprites[spriteId3].invisible = FALSE;
     gSprites[spriteId2].callback = SpriteCB_Start;
@@ -169,17 +169,17 @@ static void SpriteCB_Start(struct Sprite * sprite)
     {
     case 0:
         data[4] = 64;
-        data[5] = sprite->pos2.y << 4;
+        data[5] = sprite->y2 << 4;
         data[0]++;
         //fallthrough
     case 1:
         data[5] += data[4];
         data[4]++;
-        sprite->pos2.y = data[5] >> 4;
-        if (sprite->pos2.y >= 0)
+        sprite->y2 = data[5] >> 4;
+        if (sprite->y2 >= 0)
         {
             PlaySE(SE_BALL_BOUNCE_2);
-            sprite->pos2.y = 0;
+            sprite->y2 = 0;
             data[0]++;
         }
         break;
@@ -192,7 +192,7 @@ static void SpriteCB_Start(struct Sprite * sprite)
             data[0]++;
         }
         y = gSineTable[data[1]];
-        sprite->pos2.y = -(y >> 4);
+        sprite->y2 = -(y >> 4);
         break;
     case 3:
         data[1] += 16;
@@ -202,7 +202,7 @@ static void SpriteCB_Start(struct Sprite * sprite)
             data[1] = 0;
             data[0]++;
         }
-        sprite->pos2.y = -(gSineTable[data[1]] >> 5);
+        sprite->y2 = -(gSineTable[data[1]] >> 5);
         break;
     case 4:
         if (++data[1] > 40)

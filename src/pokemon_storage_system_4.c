@@ -360,12 +360,12 @@ static void sub_80902E0(struct Sprite *sprite)
     if (sprite->data[1] != 0)
     {
         sprite->data[1]--;
-        sprite->pos1.x += sprite->data[2];
+        sprite->x += sprite->data[2];
     }
     else
     {
         gPSSData->field_C66--;
-        sprite->pos1.x = sprite->data[3];
+        sprite->x = sprite->data[3];
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -378,8 +378,8 @@ static void sub_8090324(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.x += sprite->data[2];
-        sprite->data[5] = sprite->pos1.x + sprite->pos2.x;
+        sprite->x += sprite->data[2];
+        sprite->data[5] = sprite->x + sprite->x2;
         if (sprite->data[5] <= 68 || sprite->data[5] >= 252)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -586,7 +586,7 @@ void CreatePartyMonsSprites(bool8 arg0)
     {
         for (i = 0; i < count; i++)
         {
-            gPSSData->partySprites[i]->pos1.y -= 160;
+            gPSSData->partySprites[i]->y -= 160;
             gPSSData->partySprites[i]->invisible = TRUE;
         }
     }
@@ -636,8 +636,8 @@ static void sub_8090A74(struct Sprite *sprite, u16 partyId)
     else
         x = 152, y = 8 * (3 * (partyId - 1)) + 16;
 
-    sprite->data[2] = (u16)(sprite->pos1.x) * 8;
-    sprite->data[3] = (u16)(sprite->pos1.y) * 8;
+    sprite->data[2] = (u16)(sprite->x) * 8;
+    sprite->data[3] = (u16)(sprite->y) * 8;
     sprite->data[4] = ((x * 8) - sprite->data[2]) / 8;
     sprite->data[5] = ((y * 8) - sprite->data[3]) / 8;
     sprite->data[6] = 8;
@@ -650,21 +650,21 @@ static void sub_8090AE0(struct Sprite *sprite)
     {
         s16 x = sprite->data[2] += sprite->data[4];
         s16 y = sprite->data[3] += sprite->data[5];
-        sprite->pos1.x = x / 8u;
-        sprite->pos1.y = y / 8u;
+        sprite->x = x / 8u;
+        sprite->y = y / 8u;
         sprite->data[6]--;
     }
     else
     {
         if (sprite->data[1] == 0)
         {
-            sprite->pos1.x = 104;
-            sprite->pos1.y = 64;
+            sprite->x = 104;
+            sprite->y = 64;
         }
         else
         {
-            sprite->pos1.x = 152;
-            sprite->pos1.y = 8 * (3 * (sprite->data[1] - 1)) + 16;
+            sprite->x = 152;
+            sprite->y = 8 * (3 * (sprite->data[1] - 1)) + 16;
         }
         sprite->callback = SpriteCallbackDummy;
         gPSSData->partySprites[sprite->data[1]] = sprite;
@@ -689,8 +689,8 @@ void sub_8090B98(s16 yDelta)
     {
         if (gPSSData->partySprites[i] != NULL)
         {
-            gPSSData->partySprites[i]->pos1.y += yDelta;
-            posY = gPSSData->partySprites[i]->pos1.y + gPSSData->partySprites[i]->pos2.y + gPSSData->partySprites[i]->centerToCornerVecY;
+            gPSSData->partySprites[i]->y += yDelta;
+            posY = gPSSData->partySprites[i]->y + gPSSData->partySprites[i]->y2 + gPSSData->partySprites[i]->centerToCornerVecY;
             posY += 16;
             if (posY > 192)
                 gPSSData->partySprites[i]->invisible = TRUE;
@@ -790,12 +790,12 @@ bool8 sub_8090E74(void)
     gPSSData->field_C5D++;
     if (gPSSData->field_C5D & 1)
     {
-        (*gPSSData->field_B00)->pos1.y--;
-        gPSSData->movingMonSprite->pos1.y++;
+        (*gPSSData->field_B00)->y--;
+        gPSSData->movingMonSprite->y++;
     }
 
-    (*gPSSData->field_B00)->pos2.x = gSineTable[gPSSData->field_C5D * 8] / 16;
-    gPSSData->movingMonSprite->pos2.x = -(gSineTable[gPSSData->field_C5D * 8] / 16);
+    (*gPSSData->field_B00)->x2 = gSineTable[gPSSData->field_C5D * 8] / 16;
+    gPSSData->movingMonSprite->x2 = -(gSineTable[gPSSData->field_C5D * 8] / 16);
     if (gPSSData->field_C5D == 8)
     {
         gPSSData->movingMonSprite->oam.priority = (*gPSSData->field_B00)->oam.priority;
@@ -891,8 +891,8 @@ void SetMovingMonPriority(u8 priority)
 
 static void sub_80911B0(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPSSData->field_CB4->pos1.x;
-    sprite->pos1.y = gPSSData->field_CB4->pos1.y + gPSSData->field_CB4->pos2.y + 4;
+    sprite->x = gPSSData->field_CB4->x;
+    sprite->y = gPSSData->field_CB4->y + gPSSData->field_CB4->y2 + 4;
 }
 
 static u16 sub_80911D4(u16 species)
@@ -1316,7 +1316,7 @@ static void sub_8091E84(struct Sprite *sprite)
 {
     if (sprite->data[2] != 0)
         sprite->data[2]--;
-    else if ((sprite->pos1.x += sprite->data[0]) == sprite->data[1])
+    else if ((sprite->x += sprite->data[0]) == sprite->data[1])
         sprite->callback = SpriteCallbackDummy;
 }
 
@@ -1328,8 +1328,8 @@ static void sub_8091EB8(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.x += sprite->data[0];
-        sprite->data[2] = sprite->pos1.x + sprite->pos2.x;
+        sprite->x += sprite->data[0];
+        sprite->data[2] = sprite->x + sprite->x2;
         if (sprite->data[2] < 0x40 || sprite->data[2] > 0x100)
             DestroySprite(sprite);
     }
@@ -1376,7 +1376,7 @@ static void sub_809200C(s8 direction)
 
     for (i = 0; i < 2; i++)
     {
-        gPSSData->field_730[i]->pos2.x = 0;
+        gPSSData->field_730[i]->x2 = 0;
         gPSSData->field_730[i]->data[0] = 2;
     }
     if (direction < 0)
@@ -1403,8 +1403,8 @@ static void sub_80920AC(void)
 
     for (i = 0; i < 2; i++)
     {
-        gPSSData->field_730[i]->pos1.x = 0x88 * i + 0x5c;
-        gPSSData->field_730[i]->pos2.x = 0;
+        gPSSData->field_730[i]->x = 0x88 * i + 0x5c;
+        gPSSData->field_730[i]->x2 = 0;
         gPSSData->field_730[i]->invisible = FALSE;
     }
     sub_80920FC(TRUE);
@@ -1438,17 +1438,17 @@ static void sub_8092164(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos2.x = 0;
+        sprite->x2 = 0;
         break;
     case 1:
         if (++sprite->data[1] > 3)
         {
             sprite->data[1] = 0;
-            sprite->pos2.x += sprite->data[3];
+            sprite->x2 += sprite->data[3];
             if (++sprite->data[2] > 5)
             {
                 sprite->data[2] = 0;
-                sprite->pos2.x = 0;
+                sprite->x2 = 0;
             }
         }
         break;
@@ -1456,18 +1456,18 @@ static void sub_8092164(struct Sprite *sprite)
         sprite->data[0] = 3;
         break;
     case 3:
-        sprite->pos1.x -= gPSSData->field_2CE;
-        if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
+        sprite->x -= gPSSData->field_2CE;
+        if (sprite->x < 73 || sprite->x > 247)
             sprite->invisible = TRUE;
         if (--sprite->data[1] == 0)
         {
-            sprite->pos1.x = sprite->data[2];
+            sprite->x = sprite->data[2];
             sprite->invisible = FALSE;
             sprite->data[0] = 4;
         }
         break;
     case 4:
-        sprite->pos1.x -= gPSSData->field_2CE;
+        sprite->x -= gPSSData->field_2CE;
         break;
     }
 }

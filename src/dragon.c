@@ -188,19 +188,19 @@ const struct SpriteTemplate gOverheatFlameSpriteTemplate =
 
 static void sub_80B725C(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
         gBattleAnimArgs[4] = -gBattleAnimArgs[4];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
+        sprite->x += gBattleAnimArgs[0];
     }
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
@@ -217,15 +217,15 @@ static void sub_80B72F8(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
-        sprite->pos1.x -= gBattleAnimArgs[1];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x -= gBattleAnimArgs[1];
+        sprite->y += gBattleAnimArgs[1];
         sprite->data[2] -= gBattleAnimArgs[2];
         sprite->data[4] += gBattleAnimArgs[3];
     }
     else
     {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
         sprite->data[2] += gBattleAnimArgs[2];
         sprite->data[4] += gBattleAnimArgs[3];
         StartSpriteAnim(sprite, 1);
@@ -239,16 +239,16 @@ static void AnimDragonRageFirePlume(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
     }
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[1]);
-    sprite->pos1.y += gBattleAnimArgs[2];
+    sprite->y += gBattleAnimArgs[2];
     sprite->callback = RunStoredCallbackWhenAnimEnds;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
@@ -265,8 +265,8 @@ static void AnimDragonDanceOrb(struct Sprite *sprite)
     u16 r5;
     u16 r0;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     sprite->data[4] = 0;
     sprite->data[5] = 1;
     sprite->data[6] = gBattleAnimArgs[0];
@@ -276,8 +276,8 @@ static void AnimDragonDanceOrb(struct Sprite *sprite)
         sprite->data[7] = r5 / 2;
     else
         sprite->data[7] = r0 / 2;
-    sprite->pos2.x = Cos(sprite->data[6], sprite->data[7]);
-    sprite->pos2.y = Sin(sprite->data[6], sprite->data[7]);
+    sprite->x2 = Cos(sprite->data[6], sprite->data[7]);
+    sprite->y2 = Sin(sprite->data[6], sprite->data[7]);
     sprite->callback = sub_80B74D8;
 }
 
@@ -287,8 +287,8 @@ static void sub_80B74D8(struct Sprite *sprite)
     {
     case 0:
         sprite->data[6] = (sprite->data[6] - sprite->data[5]) & 0xFF;
-        sprite->pos2.x = Cos(sprite->data[6], sprite->data[7]);
-        sprite->pos2.y = Sin(sprite->data[6], sprite->data[7]);
+        sprite->x2 = Cos(sprite->data[6], sprite->data[7]);
+        sprite->y2 = Sin(sprite->data[6], sprite->data[7]);
         if (++sprite->data[4] > 5)
         {
             sprite->data[4] = 0;
@@ -305,8 +305,8 @@ static void sub_80B74D8(struct Sprite *sprite)
         sprite->data[6] = (sprite->data[6] - sprite->data[5]) & 0xFF;
         if (sprite->data[7] <= 0x95 && (sprite->data[7] += 8) > 0x95)
             sprite->data[7] = 0x96;
-        sprite->pos2.x = Cos(sprite->data[6], sprite->data[7]);
-        sprite->pos2.y = Sin(sprite->data[6], sprite->data[7]);
+        sprite->x2 = Cos(sprite->data[6], sprite->data[7]);
+        sprite->y2 = Sin(sprite->data[6], sprite->data[7]);
         if (++sprite->data[4] > 5)
         {
             sprite->data[4] = 0;
@@ -408,12 +408,12 @@ static void AnimOverheatFlame(struct Sprite *sprite)
 {
     s32 i, r6 = (gBattleAnimArgs[2] * 3) / 5;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[4];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[4];
     sprite->data[1] = Cos(gBattleAnimArgs[1], gBattleAnimArgs[2]);
     sprite->data[2] = Sin(gBattleAnimArgs[1], r6);
-    sprite->pos1.x += sprite->data[1] * gBattleAnimArgs[0];
-    sprite->pos1.y += sprite->data[2] * gBattleAnimArgs[0];
+    sprite->x += sprite->data[1] * gBattleAnimArgs[0];
+    sprite->y += sprite->data[2] * gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[3];
     sprite->callback = sub_80B7894;
     for (i = 0; i < 7; ++i)
@@ -424,8 +424,8 @@ static void sub_80B7894(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[1];
     sprite->data[5] += sprite->data[2];
-    sprite->pos2.x = sprite->data[4] / 10;
-    sprite->pos2.y = sprite->data[5] / 10;
+    sprite->x2 = sprite->data[4] / 10;
+    sprite->y2 = sprite->data[5] / 10;
     if (++sprite->data[0] > sprite->data[3])
         DestroyAnimSprite(sprite);
 }

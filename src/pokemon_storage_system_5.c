@@ -149,35 +149,35 @@ bool8 sub_80924A8(void)
     {
         gPSSData->field_CBC += gPSSData->field_CC4;
         gPSSData->field_CC0 += gPSSData->field_CC8;
-        gPSSData->field_CB4->pos1.x = gPSSData->field_CBC >> 8;
-        gPSSData->field_CB4->pos1.y = gPSSData->field_CC0 >> 8;
-        if (gPSSData->field_CB4->pos1.x > 0x100)
+        gPSSData->field_CB4->x = gPSSData->field_CBC >> 8;
+        gPSSData->field_CB4->y = gPSSData->field_CC0 >> 8;
+        if (gPSSData->field_CB4->x > 0x100)
         {
-            tmp = gPSSData->field_CB4->pos1.x - 0x100;
-            gPSSData->field_CB4->pos1.x = tmp + 0x40;
+            tmp = gPSSData->field_CB4->x - 0x100;
+            gPSSData->field_CB4->x = tmp + 0x40;
         }
-        if (gPSSData->field_CB4->pos1.x < 0x40)
+        if (gPSSData->field_CB4->x < 0x40)
         {
-            tmp = 0x40 - gPSSData->field_CB4->pos1.x;
-            gPSSData->field_CB4->pos1.x = 0x100 - tmp;
+            tmp = 0x40 - gPSSData->field_CB4->x;
+            gPSSData->field_CB4->x = 0x100 - tmp;
         }
-        if (gPSSData->field_CB4->pos1.y > 0xb0)
+        if (gPSSData->field_CB4->y > 0xb0)
         {
-            tmp = gPSSData->field_CB4->pos1.y - 0xb0;
-            gPSSData->field_CB4->pos1.y = tmp - 0x10;
+            tmp = gPSSData->field_CB4->y - 0xb0;
+            gPSSData->field_CB4->y = tmp - 0x10;
         }
-        if (gPSSData->field_CB4->pos1.y < -0x10)
+        if (gPSSData->field_CB4->y < -0x10)
         {
-            tmp = -0x10 - gPSSData->field_CB4->pos1.y;
-            gPSSData->field_CB4->pos1.y = 0xb0 - tmp;
+            tmp = -0x10 - gPSSData->field_CB4->y;
+            gPSSData->field_CB4->y = 0xb0 - tmp;
         }
         if (gPSSData->field_CD7 && --gPSSData->field_CD7 == 0)
             gPSSData->field_CB4->vFlip = (gPSSData->field_CB4->vFlip == FALSE);
     }
     else
     {
-        gPSSData->field_CB4->pos1.x = gPSSData->field_CCC;
-        gPSSData->field_CB4->pos1.y = gPSSData->field_CCE;
+        gPSSData->field_CB4->x = gPSSData->field_CCC;
+        gPSSData->field_CB4->y = gPSSData->field_CCE;
         sub_80929B0();
     }
 
@@ -210,26 +210,26 @@ static void sub_8092660(void)
     switch (gPSSData->field_CD2)
     {
     default:
-        r7 = gPSSData->field_CCE - gPSSData->field_CB4->pos1.y;
+        r7 = gPSSData->field_CCE - gPSSData->field_CB4->y;
         break;
     case -1:
-        r7 = gPSSData->field_CCE - 0xc0 - gPSSData->field_CB4->pos1.y;
+        r7 = gPSSData->field_CCE - 0xc0 - gPSSData->field_CB4->y;
         break;
     case 1:
-        r7 = gPSSData->field_CCE + 0xc0 - gPSSData->field_CB4->pos1.y;
+        r7 = gPSSData->field_CCE + 0xc0 - gPSSData->field_CB4->y;
         break;
     }
 
     switch (gPSSData->field_CD3)
     {
     default:
-        r0 = gPSSData->field_CCC - gPSSData->field_CB4->pos1.x;
+        r0 = gPSSData->field_CCC - gPSSData->field_CB4->x;
         break;
     case -1:
-        r0 = gPSSData->field_CCC - 0xc0 - gPSSData->field_CB4->pos1.x;
+        r0 = gPSSData->field_CCC - 0xc0 - gPSSData->field_CB4->x;
         break;
     case 1:
-        r0 = gPSSData->field_CCC + 0xc0 - gPSSData->field_CB4->pos1.x;
+        r0 = gPSSData->field_CCC + 0xc0 - gPSSData->field_CB4->x;
         break;
     }
 
@@ -237,8 +237,8 @@ static void sub_8092660(void)
     r0 <<= 8;
     gPSSData->field_CC4 = r0 / gPSSData->field_CD0;
     gPSSData->field_CC8 = r7 / gPSSData->field_CD0;
-    gPSSData->field_CBC = gPSSData->field_CB4->pos1.x << 8;
-    gPSSData->field_CC0 = gPSSData->field_CB4->pos1.y << 8;
+    gPSSData->field_CBC = gPSSData->field_CB4->x << 8;
+    gPSSData->field_CC0 = gPSSData->field_CB4->y << 8;
 }
 
 static void sub_80927E8(u8 newCurosrArea, u8 newCursorPosition)
@@ -509,13 +509,13 @@ static bool8 sub_8092E10(void)
 
 static bool8 sub_8092E20(void)
 {
-    switch (gPSSData->field_CB4->pos2.y)
+    switch (gPSSData->field_CB4->y2)
     {
     default:
-        gPSSData->field_CB4->pos2.y++;
+        gPSSData->field_CB4->y2++;
         break;
     case 0:
-        gPSSData->field_CB4->pos2.y++;
+        gPSSData->field_CB4->y2++;
         break;
     case 8:
         return FALSE;
@@ -526,12 +526,12 @@ static bool8 sub_8092E20(void)
 
 static bool8 sub_8092E54(void)
 {
-    switch (gPSSData->field_CB4->pos2.y)
+    switch (gPSSData->field_CB4->y2)
     {
     case 0:
         return FALSE;
     default:
-        gPSSData->field_CB4->pos2.y--;
+        gPSSData->field_CB4->y2--;
         break;
     }
 
@@ -1862,8 +1862,8 @@ static bool8 sub_8094A0C(void)
 
 static void sub_8094AB8(struct Sprite *sprite)
 {
-    sprite->pos1.x = gPSSData->field_CB4->pos1.x;
-    sprite->pos1.y = gPSSData->field_CB4->pos1.y + 20;
+    sprite->x = gPSSData->field_CB4->x;
+    sprite->y = gPSSData->field_CB4->y + 20;
 }
 
 static void sub_8094AD8(void)

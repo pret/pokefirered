@@ -316,9 +316,9 @@ const struct SpriteTemplate gWeatherBallRockDownSpriteTemplate =
 static void AnimFallingRock(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
-        SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += 14;
+        SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += 14;
     StartSpriteAnim(sprite, gBattleAnimArgs[1]);
     AnimateSprite(sprite);
     sprite->data[0] = 0;
@@ -334,7 +334,7 @@ static void AnimFallingRock(struct Sprite *sprite)
 
 static void sub_80B46B4(struct Sprite *sprite)
 {
-    sprite->pos1.x += sprite->data[5];
+    sprite->x += sprite->data[5];
     sprite->data[0] = 192;
     sprite->data[1] = sprite->data[5];
     sprite->data[2] = 4;
@@ -350,15 +350,15 @@ static void AnimRockFragment(struct Sprite *sprite)
     StartSpriteAnim(sprite, gBattleAnimArgs[5]);
     AnimateSprite(sprite);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-        sprite->pos1.x -= gBattleAnimArgs[0];
+        sprite->x -= gBattleAnimArgs[0];
     else
-        sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+        sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
-    sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = sprite->y + gBattleAnimArgs[3];
     InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
@@ -382,8 +382,8 @@ static void AnimParticleInVortex(struct Sprite *sprite)
 static void sub_80B47C4(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[1];
-    sprite->pos2.y = -(sprite->data[4] >> 8);
-    sprite->pos2.x = Sin(sprite->data[5], sprite->data[3]);
+    sprite->y2 = -(sprite->data[4] >> 8);
+    sprite->x2 = Sin(sprite->data[5], sprite->data[3]);
     sprite->data[5] = (sprite->data[5] + sprite->data[2]) & 0xFF;
     if (--sprite->data[0] == -1)
     {
@@ -493,16 +493,16 @@ static void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[3] != 0 && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         {
-            sprite->pos1.x = 304;
+            sprite->x = 304;
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
             sprite->data[5] = 1;
             sprite->oam.matrixNum = ST_OAM_HFLIP;
         }
         else
         {
-            sprite->pos1.x = -64;
+            sprite->x = -64;
         }
-        sprite->pos1.y = gBattleAnimArgs[0];
+        sprite->y = gBattleAnimArgs[0];
         SetSubspriteTables(sprite, sFlyingSandSubspriteTable);
         sprite->data[1] = gBattleAnimArgs[1];
         sprite->data[2] = gBattleAnimArgs[2];
@@ -512,18 +512,18 @@ static void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
     {
         sprite->data[3] += sprite->data[1];
         sprite->data[4] += sprite->data[2];
-        sprite->pos2.x += (sprite->data[3] >> 8);
-        sprite->pos2.y += (sprite->data[4] >> 8);
+        sprite->x2 += (sprite->data[3] >> 8);
+        sprite->y2 += (sprite->data[4] >> 8);
         sprite->data[3] &= 0xFF;
         sprite->data[4] &= 0xFF;
         if (sprite->data[5] == 0)
         {
-            if (sprite->pos1.x + sprite->pos2.x > 272)
+            if (sprite->x + sprite->x2 > 272)
             {
                 sprite->callback = DestroyAnimSprite;
             }
         }
-        else if (sprite->pos1.x + sprite->pos2.x < -32)
+        else if (sprite->x + sprite->x2 < -32)
         {
             sprite->callback = DestroyAnimSprite;
         }
@@ -541,8 +541,8 @@ static void AnimRaiseSprite(struct Sprite *sprite)
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
     InitSpritePosToAnimAttacker(sprite, 0);
     sprite->data[0] = gBattleAnimArgs[3];
-    sprite->data[2] = sprite->pos1.x;
-    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[2];
+    sprite->data[2] = sprite->x;
+    sprite->data[4] = sprite->y + gBattleAnimArgs[2];
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
@@ -600,8 +600,8 @@ static void sub_80B4D00(u8 taskId)
     case 0:
         task->data[6] -= task->data[4];
         task->data[7] -= task->data[5];
-        gSprites[task->data[15]].pos2.x = task->data[6] >> 3;
-        gSprites[task->data[15]].pos2.y = task->data[7] >> 3;
+        gSprites[task->data[15]].x2 = task->data[6] >> 3;
+        gSprites[task->data[15]].y2 = task->data[7] >> 3;
         if (++task->data[9] == 10)
         {
             task->data[11] = 20;
@@ -625,8 +625,8 @@ static void sub_80B4D00(u8 taskId)
             task->data[7] = 0;
             ++task->data[0];
         }
-        gSprites[task->data[15]].pos2.x = task->data[6] >> 3;
-        gSprites[task->data[15]].pos2.y = task->data[7] >> 3;
+        gSprites[task->data[15]].x2 = task->data[6] >> 3;
+        gSprites[task->data[15]].y2 = task->data[7] >> 3;
         break;
     case 3:
         task->data[2] += task->data[4];
@@ -721,7 +721,7 @@ static u8 sub_80B4FB8(void)
 static void AnimRockTomb(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
-    sprite->pos2.x = gBattleAnimArgs[0];
+    sprite->x2 = gBattleAnimArgs[0];
     sprite->data[2] = gBattleAnimArgs[1];
     sprite->data[3] -= gBattleAnimArgs[2];
     sprite->data[0] = 3;
@@ -735,7 +735,7 @@ static void sub_80B5024(struct Sprite *sprite)
     sprite->invisible = FALSE;
     if (sprite->data[3] != 0)
     {
-        sprite->pos2.y = sprite->data[2] + sprite->data[3];
+        sprite->y2 = sprite->data[2] + sprite->data[3];
         sprite->data[3] += sprite->data[0];
         ++sprite->data[0];
         if (sprite->data[3] > 0)
@@ -758,10 +758,10 @@ static void AnimRockBlastRock(struct Sprite *sprite)
 
 static void AnimRockScatter(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
-    sprite->pos1.x += gBattleAnimArgs[0];
-    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
     sprite->data[1] = gBattleAnimArgs[0];
     sprite->data[2] = gBattleAnimArgs[1];
     sprite->data[5] = gBattleAnimArgs[2];
@@ -774,8 +774,8 @@ static void sub_80B50F8(struct Sprite *sprite)
     sprite->data[0] += 8;
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
-    sprite->pos2.x += sprite->data[3] / 40;
-    sprite->pos2.y -= Sin(sprite->data[0], sprite->data[5]);
+    sprite->x2 += sprite->data[3] / 40;
+    sprite->y2 -= Sin(sprite->data[0], sprite->data[5]);
     if (sprite->data[0] > 140)
         DestroyAnimSprite(sprite);
 }

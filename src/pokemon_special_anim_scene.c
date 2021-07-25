@@ -785,14 +785,14 @@ static void MonSpriteZoom_UpdateYPos(struct Sprite * sprite, u8 closeness)
         closeness = 3;
     PSA_GetSceneWork(); // return value not used
     StartSpriteAffineAnim(sprite, closeness);
-    sprite->pos1.y = GetYPosByScale(sAffineScales[closeness]);
+    sprite->y = GetYPosByScale(sAffineScales[closeness]);
 }
 
 static void ItemSpriteZoom_UpdateYPos(struct Sprite * sprite, u8 closeness)
 {
     MonSpriteZoom_UpdateYPos(sprite, closeness);
-    sprite->pos2.x = GetSpriteOffsetByScale(sprite->data[6] - 32, closeness);
-    sprite->pos2.y = GetSpriteOffsetByScale(sprite->data[7] - 32, closeness);
+    sprite->x2 = GetSpriteOffsetByScale(sprite->data[6] - 32, closeness);
+    sprite->y2 = GetSpriteOffsetByScale(sprite->data[7] - 32, closeness);
 }
 
 static void StartMonWiggleAnim(struct PokemonSpecialAnimScene * scene, u8 frameLen, u8 niter, u8 amplitude)
@@ -807,7 +807,7 @@ static void StartMonWiggleAnim(struct PokemonSpecialAnimScene * scene, u8 frameL
 
 static void StopMonWiggleAnim(struct PokemonSpecialAnimScene * scene)
 {
-    scene->monSprite->pos2.x = 0;
+    scene->monSprite->x2 = 0;
     scene->monSprite->callback = SpriteCallbackDummy;
 }
 
@@ -820,13 +820,13 @@ static void SpriteCallback_MonSpriteWiggle(struct Sprite * sprite)
         sprite->data[6]++;
         if (sprite->data[1] != 0 && sprite->data[6] >= sprite->data[1])
         {
-            sprite->pos2.x = 0;
+            sprite->x2 = 0;
             sprite->callback = SpriteCallbackDummy;
         }
         else if (sprite->data[6] & 1)
-            sprite->pos2.x = sprite->data[2];
+            sprite->x2 = sprite->data[2];
         else
-            sprite->pos2.x = -sprite->data[2];
+            sprite->x2 = -sprite->data[2];
     }
 }
 
@@ -989,8 +989,8 @@ static void Task_ItemUseOnMonAnim(u8 taskId)
 
 static void CreateSprites_UseItem_OutwardSpiralDots(u8 taskId, s16 *data, struct Sprite * sprite)
 {
-    int x = sprite->pos1.x + sprite->pos2.x - 4;
-    int y = sprite->pos1.y + sprite->pos2.y - 4;
+    int x = sprite->x + sprite->x2 - 4;
+    int y = sprite->y + sprite->y2 - 4;
     u8 spriteId;
     int i;
     BlendPalettes(0x10000 << IndexOfSpritePaletteTag(5), 16, tBlendColor);
@@ -1017,8 +1017,8 @@ static void SpriteCB_OutwardSpiralDots(struct Sprite * sprite)
         data[1] += 7;
         data[1] &= 0xFF;
         data[2] += 4;
-        sprite->pos2.x = (data[2] * gSineTable[data[1] + 0x40]) >> 8;
-        sprite->pos2.y = (data[2] * gSineTable[data[1]])        >> 8;
+        sprite->x2 = (data[2] * gSineTable[data[1] + 0x40]) >> 8;
+        sprite->y2 = (data[2] * gSineTable[data[1]])        >> 8;
     }
     else
     {
@@ -1042,16 +1042,16 @@ static void InitItemIconSpriteState(struct PokemonSpecialAnimScene * scene, stru
     u32 personality;
     if (closeness == 3)
     {
-        sprite->pos1.x = 120;
-        sprite->pos1.y = scene->monSpriteY2;
+        sprite->x = 120;
+        sprite->y = scene->monSpriteY2;
     }
     else
     {
-        sprite->pos1.x = 120;
-        sprite->pos1.y = scene->monSpriteY1;
+        sprite->x = 120;
+        sprite->y = scene->monSpriteY1;
     }
-    sprite->pos1.x += 4;
-    sprite->pos1.y += 4;
+    sprite->x += 4;
+    sprite->y += 4;
     species = PSA_GetMonSpecies();
     personality = PSA_GetMonPersonality();
     switch (PSA_GetAnimType())
@@ -1121,14 +1121,14 @@ static void SpriteCB_MachineSetWobble(struct Sprite * sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.x += 3;
+        sprite->x += 3;
         sprite->data[0]++;
         break;
     case 1:
         sprite->data[1]++;
         if (sprite->data[1] > 30)
         {
-            sprite->pos1.x -= 3;
+            sprite->x -= 3;
             sprite->callback = SpriteCallbackDummy;
         }
         break;
@@ -1194,8 +1194,8 @@ static void CreateStarSprites(struct PokemonSpecialAnimScene * scene)
             personality = PSA_GetMonPersonality();
             gSprites[spriteId].data[3] = sStarCoordOffsets[i][0] * 8;
             gSprites[spriteId].data[4] = sStarCoordOffsets[i][1] * 8;
-            gSprites[spriteId].pos1.x += GetSpriteOffsetByScale(Menu2_GetMonSpriteAnchorCoordMinusx20(species, personality, 0), 3);
-            gSprites[spriteId].pos1.y += GetSpriteOffsetByScale(Menu2_GetMonSpriteAnchorCoordMinusx20(species, personality, 1), 3);
+            gSprites[spriteId].x += GetSpriteOffsetByScale(Menu2_GetMonSpriteAnchorCoordMinusx20(species, personality, 0), 3);
+            gSprites[spriteId].y += GetSpriteOffsetByScale(Menu2_GetMonSpriteAnchorCoordMinusx20(species, personality, 1), 3);
             scene->field_0002++;
         }
     }
@@ -1213,8 +1213,8 @@ static void SpriteCB_Star(struct Sprite * sprite)
     {
         sprite->data[1] += sprite->data[3];
         sprite->data[2] += sprite->data[4];
-        sprite->pos2.x = sprite->data[1] >> 4;
-        sprite->pos2.y = sprite->data[2] >> 4;
+        sprite->x2 = sprite->data[1] >> 4;
+        sprite->y2 = sprite->data[2] >> 4;
     }
     else
     {
@@ -1267,8 +1267,8 @@ static void Task_UseItem_OutwardSpiralDots(u8 taskId)
         {
             u32 spriteId, x, y, x2, y2, ampl;
             struct Sprite * sprite = PSA_GetSceneWork()->itemIconSprite;
-            x = sprite->pos1.x + sprite->pos2.x;
-            y = sprite->pos1.y + sprite->pos2.y;
+            x = sprite->x + sprite->x2;
+            y = sprite->y + sprite->y2;
             ampl = (PSAScene_RandomFromTask(taskId) % 21) + 70;
             x2 = x + ((u32)(gSineTable[tAngle + 0x40] * ampl) >> 8);
             y2 = y + ((u32)(gSineTable[tAngle       ] * ampl) >> 8);
@@ -1322,8 +1322,8 @@ static void SpriteCallback_UseItem_OutwardSpiralDots(struct Sprite * sprite)
     {
         x = (sprite->tsXorig - sprite->tsXinit) * sprite->tsRadius;
         y = (sprite->tsYorig - sprite->tsYinit) * sprite->tsRadius;
-        sprite->pos1.x = (x >> 8) + sprite->tsXinit;
-        sprite->pos1.y = (y >> 8) + sprite->tsYinit;
+        sprite->x = (x >> 8) + sprite->tsXinit;
+        sprite->y = (y >> 8) + sprite->tsYinit;
     }
 }
 
@@ -1451,8 +1451,8 @@ static void CreateLevelUpVerticalSprite(u8 taskId, s16 *data)
 static void SpriteCB_LevelUpVertical(struct Sprite * sprite)
 {
     sprite->tsYsubpixel -= sprite->tsSpeed;
-    sprite->pos2.y = sprite->tsYsubpixel >> 4;
-    if (sprite->pos2.y < -0x40)
+    sprite->y2 = sprite->tsYsubpixel >> 4;
+    if (sprite->y2 < -0x40)
     {
         gTasks[sprite->tsTaskId].tActiveSprCt--;
         DestroySprite(sprite);

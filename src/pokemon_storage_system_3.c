@@ -2166,8 +2166,8 @@ static void PSS_CreateMonMarkingSprite(void)
     gPSSData->monMarkingSprite = CreateMonMarkingSprite_AllOff(TAG_TILE_10, TAG_PAL_DAC8, NULL);
     gPSSData->monMarkingSprite->oam.priority = 1;
     gPSSData->monMarkingSprite->subpriority = 1;
-    gPSSData->monMarkingSprite->pos1.x = 40;
-    gPSSData->monMarkingSprite->pos1.y = 150;
+    gPSSData->monMarkingSprite->x = 40;
+    gPSSData->monMarkingSprite->y = 150;
     gPSSData->monMarkingSpriteTileStart = (void *)OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
 }
 

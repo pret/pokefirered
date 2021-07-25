@@ -2183,8 +2183,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[battlerId];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[t1_MONBG_BATTLER] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+        gTasks[taskId].data[2] = gSprites[spriteId].y + gSprites[spriteId].y2;
         if (!toBG_2)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -2214,8 +2214,8 @@ static void ScriptCmd_monbg(void)
         spriteId = gBattlerSpriteIds[battlerId];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
         gTasks[taskId].data[t1_MONBG_BATTLER] = spriteId;
-        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+        gTasks[taskId].data[1] = gSprites[spriteId].x + gSprites[spriteId].x2;
+        gTasks[taskId].data[2] = gSprites[spriteId].y + gSprites[spriteId].y2;
         if (!toBG_2)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -2268,8 +2268,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         SetAnimBgAttribute(1, BG_ANIM_AREA_OVERFLOW_MODE, 0);
 
         battlerSpriteId = gBattlerSpriteIds[battlerId];
-        gBattle_BG1_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
-        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
+        gBattle_BG1_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
+        gBattle_BG1_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
         gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
 
         SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
@@ -2293,8 +2293,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         SetAnimBgAttribute(2, BG_ANIM_AREA_OVERFLOW_MODE, 0);
 
         battlerSpriteId = gBattlerSpriteIds[battlerId];
-        gBattle_BG2_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
-        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
+        gBattle_BG2_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
+        gBattle_BG2_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
         gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
 
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
@@ -2356,8 +2356,8 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
     GetBattleAnimBg1Data(&animBg);
-    x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
-    y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
+    x = gTasks[taskId].data[1] - (gSprites[spriteId].x + gSprites[spriteId].x2);
+    y = gTasks[taskId].data[2] - (gSprites[spriteId].y + gSprites[spriteId].y2);
 
     if (gTasks[taskId].data[5] == 0)
     {

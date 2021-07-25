@@ -337,8 +337,8 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
         sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_sheet, animBgData.tilesOffset);
     LoadPalette(sRgbWhite, animBgData.paletteId * 16 + 1, 2);
-    gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
-    gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
+    gBattle_BG1_X = -gSprites[spriteId].x + 32;
+    gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     gTasks[taskId].data[0] = newSpriteId;
     gTasks[taskId].data[6] = var0;
     gTasks[taskId].func = sub_80BAF38;

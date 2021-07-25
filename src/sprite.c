@@ -166,8 +166,8 @@ static const struct Sprite sDummySprite =
     .template = &gDummySpriteTemplate,
     .subspriteTables = NULL,
     .callback = SpriteCallbackDummy,
-    .pos1 = { 304, 160 },
-    .pos2 = {   0,   0 },
+    .x = 304, .y = 160,
+    .x2 =  0, .y2 =  0,
     .centerToCornerVecX = 0,
     .centerToCornerVecY = 0,
     .animNum = 0,
@@ -369,13 +369,13 @@ void UpdateOamCoords(void)
         {
             if (sprite->coordOffsetEnabled)
             {
-                sprite->oam.x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
-                sprite->oam.y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+                sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+                sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
             }
             else
             {
-                sprite->oam.x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
-                sprite->oam.y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+                sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
+                sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
             }
         }
     }
@@ -573,8 +573,8 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
     sprite->affineAnims = template->affineAnims;
     sprite->template = template;
     sprite->callback = template->callback;
-    sprite->pos1.x = x;
-    sprite->pos1.y = y;
+    sprite->x = x;
+    sprite->y = y;
 
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 
@@ -1249,14 +1249,14 @@ static void obj_update_pos2(struct Sprite *sprite, s32 xmod, s32 ymod)
         dim = sOamDimensionsCopy[sprite->oam.shape][sprite->oam.size][0];
         baseDim = dim << 8;
         xFormed = (dim << 16) / gOamMatrices[matrixNum].a;
-        sprite->pos2.x = affine_get_new_pos2(baseDim, xFormed, xmod);
+        sprite->x2 = affine_get_new_pos2(baseDim, xFormed, xmod);
     }
     if (ymod != 0x800)
     {
         dim = sOamDimensionsCopy[sprite->oam.shape][sprite->oam.size][1];
         baseDim = dim << 8;
         xFormed = (dim << 16) / gOamMatrices[matrixNum].d;
-        sprite->pos2.y = affine_get_new_pos2(baseDim, xFormed, ymod);
+        sprite->y2 = affine_get_new_pos2(baseDim, xFormed, ymod);
     }
 }
 

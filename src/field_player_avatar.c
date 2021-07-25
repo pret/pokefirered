@@ -1862,8 +1862,8 @@ static bool8 Fishing11(struct Task *task)
             ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
             if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
                 sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
-            gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
-            gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+            gSprites[gPlayerAvatar.spriteId].x2 = 0;
+            gSprites[gPlayerAvatar.spriteId].y2 = 0;
             ClearDialogWindowAndFrame(0, TRUE);
             task->tFrameCounter++;
             return FALSE;
@@ -1920,8 +1920,8 @@ static bool8 Fishing15(struct Task *task)
         ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
             sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
-        gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
-        gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+        gSprites[gPlayerAvatar.spriteId].x2 = 0;
+        gSprites[gPlayerAvatar.spriteId].y2 = 0;
         task->tStep++;
     }
     return FALSE;
@@ -1951,8 +1951,8 @@ void AlignFishingAnimationFrames(struct Sprite * playerSprite)
     u8 animType;
 
     AnimateSprite(playerSprite);
-    playerSprite->pos2.x = 0;
-    playerSprite->pos2.y = 0;
+    playerSprite->x2 = 0;
+    playerSprite->y2 = 0;
     animCmdIndex = playerSprite->animCmdIndex;
     if (playerSprite->anims[playerSprite->animNum][animCmdIndex].type == -1)
     {
@@ -1967,16 +1967,16 @@ void AlignFishingAnimationFrames(struct Sprite * playerSprite)
     animType = playerSprite->anims[playerSprite->animNum][animCmdIndex].type;
     if (animType == 1 || animType == 2 || animType == 3)
     {
-        playerSprite->pos2.x = 8;
+        playerSprite->x2 = 8;
         if (GetPlayerFacingDirection() == 3)
-            playerSprite->pos2.x = -8;
+            playerSprite->x2 = -8;
     }
     if (animType == 5)
-        playerSprite->pos2.y = -8;
+        playerSprite->y2 = -8;
     if (animType == 10 || animType == 11)
-        playerSprite->pos2.y = 8;
+        playerSprite->y2 = 8;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-        sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
+        sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->y2);
 }
 
 #define tState data[0]
@@ -2038,8 +2038,8 @@ static void Task_TeleportWarpOutPlayerAnim(u8 taskId)
         SavePlayerFacingDirectionForTeleport(object->facingDirection);
         tRotationTimer = 0;
         tDeltaY = 1;
-        tYdeflection = (u16)(sprite->pos1.y + sprite->pos2.y) * 16;
-        sprite->pos2.y = 0;
+        tYdeflection = (u16)(sprite->y + sprite->y2) * 16;
+        sprite->y2 = 0;
         CameraObjectReset2();
         object->fixedPriority = TRUE;
         sprite->oam.priority = 0;
@@ -2050,8 +2050,8 @@ static void Task_TeleportWarpOutPlayerAnim(u8 taskId)
         TeleportAnim_RotatePlayer(object, &tRotationTimer);
         tYdeflection -= tDeltaY;
         tDeltaY += 3;
-        sprite->pos1.y = tYdeflection >> 4;
-        if (sprite->pos1.y + (s16)gTotalCameraPixelOffsetY < -32)
+        sprite->y = tYdeflection >> 4;
+        if (sprite->y + (s16)gTotalCameraPixelOffsetY < -32)
         {
             tState++;
         }
@@ -2086,11 +2086,11 @@ static void Task_TeleportWarpInPlayerAnim(u8 taskId)
         ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(sTeleportFacingDirectionSequence[tFinalFacingDirection]));
         tRotationTimer = 0;
         tDeltaY = 116;
-        tYpos = sprite->pos1.y;
+        tYpos = sprite->y;
         tPriority = sprite->oam.priority;
         tSubpriority = sprite->subpriority;
-        tYdeflection = -((u16)sprite->pos2.y + 32) * 16;
-        sprite->pos2.y = 0;
+        tYdeflection = -((u16)sprite->y2 + 32) * 16;
+        sprite->y2 = 0;
         CameraObjectReset2();
         object->fixedPriority = TRUE;
         sprite->oam.priority = 1;
@@ -2105,10 +2105,10 @@ static void Task_TeleportWarpInPlayerAnim(u8 taskId)
         {
             tDeltaY = 4;
         }
-        sprite->pos1.y = tYdeflection >> 4;
-        if (sprite->pos1.y >= tYpos)
+        sprite->y = tYdeflection >> 4;
+        if (sprite->y >= tYpos)
         {
-            sprite->pos1.y = tYpos;
+            sprite->y = tYpos;
             tLandingDelay = 0;
             tState++;
         }

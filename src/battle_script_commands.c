@@ -5709,8 +5709,8 @@ static void PutMonIconOnLvlUpBox(void)
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite)
 {
-    sprite->pos2.x = sprite->sSavedLvlUpBoxXPosition - gBattle_BG2_X;
-    if (sprite->pos2.x != 0)
+    sprite->x2 = sprite->sSavedLvlUpBoxXPosition - gBattle_BG2_X;
+    if (sprite->x2 != 0)
     {
         sprite->sDestroy = TRUE;
     }

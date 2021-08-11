@@ -1811,9 +1811,9 @@ static void atk0C_datahpupdate(void)
                         gHpDealt = gBattleMons[gActiveBattler].hp;
                         gBattleMons[gActiveBattler].hp = 0;
                     }
-                    if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_x100000))
+                    if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                         gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
-                    if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_x100000) && gCurrentMove != MOVE_PAIN_SPLIT)
+                    if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                     {
                         gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                         gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -1828,7 +1828,7 @@ static void atk0C_datahpupdate(void)
                             gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                         }
                     }
-                    else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_x100000))
+                    else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     {
                         gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                         gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;
@@ -1844,7 +1844,7 @@ static void atk0C_datahpupdate(void)
                         }
                     }
                 }
-                gHitMarker &= ~(HITMARKER_x100000);
+                gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
                 BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, 0, 2, &gBattleMons[gActiveBattler].hp);
                 MarkBattlerForControllerExec(gActiveBattler);
             }

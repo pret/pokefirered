@@ -25,6 +25,7 @@ jobs:
           repository: 'pret/agbcc'
 
       - name: Checkout symbols
+        if: ${{ github.event_name == 'push' }}
         uses: actions/checkout@master
         with:
           path: 'symbols'
@@ -73,7 +74,7 @@ jobs:
           make -j${nproc} all
 
       - name: Webhook
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
         env:
           CALCROM_DISCORD_WEBHOOK_USERNAME: OK
           CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
@@ -84,7 +85,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           cp *.sym symbols/
-          export GITHUB_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )
+          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
 
       - name: Update symfiles
         if: ${{ github.event_name == 'push' }}
@@ -93,4 +94,4 @@ jobs:
           branch: symbols
           cwd: "./symbols"
           add: "*.sym"
-          message: $GITHUB_COMMIT_MSG
+          message: ${{ env.SYMBOLS_COMMIT_MSG }}

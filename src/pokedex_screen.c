@@ -3100,7 +3100,7 @@ u8 DexScreen_DrawMonAreaPage(void)
 
     if (monIsCaught)
     {
-        sPokedexScreenData->windowIds[14] = CreateMonPicSprite_HandleDeoxys(species, 8, DexScreen_GetDefaultPersonality(species), TRUE, 40, 104, 0, 0xFFFF);
+        sPokedexScreenData->windowIds[14] = CreateMonPicSprite_HandleDeoxys(species, SHINY_ODDS, DexScreen_GetDefaultPersonality(species), TRUE, 40, 104, 0, 0xFFFF);
         gSprites[sPokedexScreenData->windowIds[14]].oam.paletteNum = 2;
         gSprites[sPokedexScreenData->windowIds[14]].oam.affineMode = 1;
         gSprites[sPokedexScreenData->windowIds[14]].oam.matrixNum = 2;

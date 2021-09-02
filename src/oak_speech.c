@@ -1751,12 +1751,14 @@ static void DestroyOaksSpeechTrainerPic(void)
     CopyBgTilemapBufferToVram(2);
 }
 
+#define tParentTaskId data[0]
+
 static void Task_SlowFadeIn(u8 taskId)
 {
     u8 i = 0;
-    if (gTasks[taskId].tTrainerPicPosX == 0)
+    if (gTasks[taskId].data[1] == 0)
     {
-        gTasks[gTasks[taskId].data[0]].tTrainerPicFadeState = 1;
+        gTasks[gTasks[taskId].tParentTaskId].tTrainerPicFadeState = 1;
         DestroyTask(taskId);
         for (i = 0; i < 3; i++)
         {
@@ -1770,16 +1772,16 @@ static void Task_SlowFadeIn(u8 taskId)
         else
         {
             gTasks[taskId].data[4] = gTasks[taskId].data[3];
-            gTasks[taskId].tTrainerPicPosX--;
-            gTasks[taskId].tTrainerPicFadeState++;
-            if (gTasks[taskId].tTrainerPicPosX == 8)
+            gTasks[taskId].data[1]--;
+            gTasks[taskId].data[2]++;
+            if (gTasks[taskId].data[1] == 8)
             {
                 for (i = 0; i < 3; i++)
                 {
                     gSprites[gTasks[taskId].data[7 + i]].invisible ^= TRUE;
                 }
             }
-            SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].tTrainerPicFadeState * 256) + gTasks[taskId].tTrainerPicPosX);
+            SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[2] * 256) + gTasks[taskId].data[1]);
         }
     }
 }
@@ -1794,9 +1796,9 @@ static void CreateFadeInTask(u8 taskId, u8 state)
     SetGpuReg(REG_OFFSET_BLDY, 0);
     gTasks[taskId].tTrainerPicFadeState = 0;
     taskId2 = CreateTask(Task_SlowFadeIn, 0);
-    gTasks[taskId2].data[0] = taskId;
-    gTasks[taskId2].tTrainerPicPosX = 16;
-    gTasks[taskId2].tTrainerPicFadeState = 0;
+    gTasks[taskId2].tParentTaskId = taskId;
+    gTasks[taskId2].data[1] = 16;
+    gTasks[taskId2].data[2] = 0;
     gTasks[taskId2].data[3] = state;
     gTasks[taskId2].data[4] = state;
     for (i = 0; i < 3; i++)
@@ -1809,11 +1811,11 @@ static void Task_SlowFadeOut(u8 taskId)
 {
     u8 i = 0;
 
-    if (gTasks[taskId].tTrainerPicPosX == 16)
+    if (gTasks[taskId].data[1] == 16)
     {
         if (!gPaletteFade.active)
         {
-            gTasks[gTasks[taskId].data[0]].tTrainerPicFadeState = 1;
+            gTasks[gTasks[taskId].tParentTaskId].tTrainerPicFadeState = 1;
             DestroyTask(taskId);
         }
     }
@@ -1824,8 +1826,8 @@ static void Task_SlowFadeOut(u8 taskId)
         else
         {
             gTasks[taskId].data[4] = gTasks[taskId].data[3];
-            gTasks[taskId].tTrainerPicPosX += 2;
-            gTasks[taskId].tTrainerPicFadeState -= 2;
+            gTasks[taskId].data[1] += 2;
+            gTasks[taskId].data[2] -= 2;
             if (gTasks[taskId].tTrainerPicPosX == 8)
             {
                 for (i = 0; i < 3; i++)
@@ -1833,7 +1835,7 @@ static void Task_SlowFadeOut(u8 taskId)
                     gSprites[gTasks[taskId].data[7 + i]].invisible ^= TRUE;
                 }
             }
-            SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].tTrainerPicFadeState * 256) + gTasks[taskId].tTrainerPicPosX);
+            SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[2] * 256) + gTasks[taskId].data[1]);
         }
     }
 }
@@ -1848,9 +1850,9 @@ static void CreateFadeOutTask(u8 taskId, u8 state)
     SetGpuReg(REG_OFFSET_BLDY, 0);
     gTasks[taskId].tTrainerPicFadeState = 0;
     taskId2 = CreateTask(Task_SlowFadeOut, 0);
-    gTasks[taskId2].data[0] = taskId;
-    gTasks[taskId2].tTrainerPicPosX = 0;
-    gTasks[taskId2].tTrainerPicFadeState = 16;
+    gTasks[taskId2].tParentTaskId = taskId;
+    gTasks[taskId2].data[1] = 0;
+    gTasks[taskId2].data[2] = 16;
     gTasks[taskId2].data[3] = state;
     gTasks[taskId2].data[4] = state;
     for (i = 0; i < 3; i++)

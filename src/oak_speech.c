@@ -1828,7 +1828,7 @@ static void Task_SlowFadeOut(u8 taskId)
             gTasks[taskId].data[4] = gTasks[taskId].data[3];
             gTasks[taskId].data[1] += 2;
             gTasks[taskId].data[2] -= 2;
-            if (gTasks[taskId].tTrainerPicPosX == 8)
+            if (gTasks[taskId].data[1] == 8)
             {
                 for (i = 0; i < 3; i++)
                 {

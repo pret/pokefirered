@@ -1446,8 +1446,8 @@ static void Task_OakSpeech38_1(u8 taskId)
     u8 taskId2 = CreateTask(Task_OakSpeech38_sub1, 1);
     s16 * data = gTasks[taskId2].data;
     data[0] = 0;
-    tTrainerPicPosX = 0;
-    tTrainerPicFadeState = 0;
+    data[1] = 0;
+    data[2] = 0;
     data[15] = 0;
     BeginNormalPaletteFade(0xFFFF0FCF, 4, 0, 16, RGB_BLACK);
 }
@@ -1457,14 +1457,14 @@ static void Task_OakSpeech38_sub1(u8 taskId)
     s16 * data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        if (tTrainerPicPosX != 0)
+        if (data[1] != 0)
         {
             DestroyTask(taskId);
             DestroyLinkedPikaOrGrassPlatformSprites(taskId, 1);
         }
         else
         {
-            tTrainerPicPosX++;
+            data[1]++;
             BeginNormalPaletteFade(0x0000F000, 0, 0, 16, RGB_BLACK);
         }
     }
@@ -1475,8 +1475,8 @@ static void Task_OakSpeech38_2(u8 taskId)
     u8 taskId2 = CreateTask(Task_OakSpeech38_sub2, 2);
     s16 * data = gTasks[taskId2].data;
     data[0] = 8;
-    tTrainerPicPosX = 0;
-    tTrainerPicFadeState = 8;
+    data[1] = 0;
+    data[2] = 8;
     data[14] = 0;
     data[15] = 0;
 }
@@ -1490,12 +1490,12 @@ static void Task_OakSpeech38_sub2(u8 taskId)
         data[0]--;
     else
     {
-        if (tTrainerPicPosX <= 0 && tTrainerPicFadeState != 0)
-            tTrainerPicFadeState--;
+        if (data[1] <= 0 && data[2] != 0)
+            data[2]--;
         BlendPalette(0x40, 0x20, data[14], RGB_WHITE);
         data[14]++;
-        tTrainerPicPosX--;
-        data[0] = tTrainerPicFadeState;
+        data[1]--;
+        data[0] = data[2];
         if (data[14] > 14)
         {
             for (i = 0; i < 32; i++)

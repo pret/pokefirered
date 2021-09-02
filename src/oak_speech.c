@@ -465,10 +465,10 @@ static const u8 *const sRivalNameChoices[] = {
 
 enum
 {
-    MALE_PLAYER_ID,
-    FEMALE_PLAYER_ID,
-    RIVAL_ID,
-    OAK_ID
+    MALE_PLAYER_PIC,
+    FEMALE_PLAYER_PIC,
+    RIVAL_PIC,
+    OAK_PIC
 };
 
 static void VBlankCB_NewGameOaksSpeech(void)
@@ -891,7 +891,7 @@ static void Task_OakSpeech9(u8 taskId)
         CopyToBgTilemapBuffer(1, sOakSpeech_BackgroundTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CreateNidoranFSprite(taskId);
-        LoadOaksSpeechTrainerPic(OAK_ID, 0);
+        LoadOaksSpeechTrainerPic(OAK_PIC, 0);
         CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 1);
         PlayBGM(MUS_ROUTE24);
         BeginNormalPaletteFade(0xFFFFFFFF, 5, 16, 0, RGB_BLACK);
@@ -1121,9 +1121,9 @@ static void Task_OakSpeech21(u8 taskId)
 static void Task_OakSpeech22(u8 taskId)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        LoadOaksSpeechTrainerPic(MALE_PLAYER_ID, 0);
+        LoadOaksSpeechTrainerPic(MALE_PLAYER_PIC, 0);
     else
-        LoadOaksSpeechTrainerPic(FEMALE_PLAYER_ID, 0);
+        LoadOaksSpeechTrainerPic(FEMALE_PLAYER_PIC, 0);
     CreateFadeOutTask(taskId, 2);
     gTasks[taskId].data[3] = 32;
     gTasks[taskId].func = Task_OakSpeech23;
@@ -1331,7 +1331,7 @@ static void Task_OakSpeech32(u8 taskId)
     ChangeBgX(2, 0, 0);
     gTasks[taskId].tTrainerPicPosX = 0;
     gSpriteCoordOffsetX = 0;
-    LoadOaksSpeechTrainerPic(RIVAL_ID, 0);
+    LoadOaksSpeechTrainerPic(RIVAL_PIC, 0);
     CreateFadeOutTask(taskId, 2);
     gTasks[taskId].func = Task_OakSpeech34;
 }
@@ -1360,9 +1360,9 @@ static void Task_OakSpeech33(u8 taskId)
         else
         {
             if (gSaveBlock2Ptr->playerGender == MALE)
-                LoadOaksSpeechTrainerPic(MALE_PLAYER_ID, 0);
+                LoadOaksSpeechTrainerPic(MALE_PLAYER_PIC, 0);
             else
-                LoadOaksSpeechTrainerPic(FEMALE_PLAYER_ID, 0);
+                LoadOaksSpeechTrainerPic(FEMALE_PLAYER_PIC, 0);
             gTasks[taskId].tTrainerPicPosX = 0;
             gSpriteCoordOffsetX = 0;
             ChangeBgX(2, 0, 0);
@@ -1597,12 +1597,12 @@ static void CB2_ReturnFromNamingScreen(void)
         if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
         {
             if (gSaveBlock2Ptr->playerGender == MALE)
-                LoadOaksSpeechTrainerPic(MALE_PLAYER_ID, 0);
+                LoadOaksSpeechTrainerPic(MALE_PLAYER_PIC, 0);
             else
-                LoadOaksSpeechTrainerPic(FEMALE_PLAYER_ID, 0);
+                LoadOaksSpeechTrainerPic(FEMALE_PLAYER_PIC, 0);
         }
         else
-            LoadOaksSpeechTrainerPic(RIVAL_ID, 0);
+            LoadOaksSpeechTrainerPic(RIVAL_PIC, 0);
         gTasks[taskId].tTrainerPicPosX = -60;
         gSpriteCoordOffsetX += 60;
         ChangeBgX(2, -0x3C00, 0);
@@ -1715,19 +1715,19 @@ static void LoadOaksSpeechTrainerPic(u16 whichPic, u16 tileOffset)
 
     switch (whichPic)
     {
-    case MALE_PLAYER_ID:
+    case MALE_PLAYER_PIC:
         LoadPalette(sOakSpeechGfx_RedPal, 0x40, 0x40);
         LZ77UnCompVram(sOakSpeechGfx_RedPic, (void *)0x06000600 + tileOffset);
         break;
-    case FEMALE_PLAYER_ID:
+    case FEMALE_PLAYER_PIC:
         LoadPalette(sOakSpeechGfx_LeafPal, 0x40, 0x40);
         LZ77UnCompVram(sOakSpeechGfx_LeafPic, (void *)0x06000600 + tileOffset);
         break;
-    case RIVAL_ID:
+    case RIVAL_PIC:
         LoadPalette(sOakSpeechGfx_RivalPal, 0x60, 0x40);
         LZ77UnCompVram(sOakSpeechGfx_RivalPic, (void *)0x06000600 + tileOffset);
         break;
-    case OAK_ID:
+    case OAK_PIC:
         LoadPalette(sOakSpeechGfx_OakPal, 0x60, 0x40);
         LZ77UnCompVram(sOakSpeechGfx_OakPic, (void *)0x06000600 + tileOffset);
         break;

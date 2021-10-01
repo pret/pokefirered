@@ -859,7 +859,7 @@ void Task_LinkSave(u8 taskId)
     case 2:
         if (IsLinkTaskFinished())
         {
-            save_serialize_map();
+            SaveMapView();
             gTasks[taskId].data[0] = 3;
         }
         break;

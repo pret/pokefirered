@@ -477,8 +477,8 @@ void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 static void mapdata_load_assets_to_gpu_and_full_redraw(void)
 {
     move_tilemap_camera_to_upper_left_corner();
-    copy_map_tileset1_tileset2_to_vram(gMapHeader.mapLayout);
-    apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+    CopyMapTilesetsToVram(gMapHeader.mapLayout);
+    LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
     InitTilesetAnimations();
 }
@@ -766,8 +766,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     InitMap();
-    copy_map_tileset2_to_vram_2(gMapHeader.mapLayout);
-    apply_map_tileset2_palette(gMapHeader.mapLayout);
+    CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
+    LoadSecondaryTilesetPalette(gMapHeader.mapLayout);
     for (paletteIndex = 7; paletteIndex < 13; paletteIndex++)
         ApplyWeatherGammaShiftToPal(paletteIndex);
     InitSecondaryTilesetAnimation();
@@ -1796,17 +1796,17 @@ static bool32 map_loading_iteration_3(u8 *state)
         (*state)++;
         break;
     case 6:
-        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            LoadMapTilesetPalettes(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
@@ -1881,17 +1881,17 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
         (*state)++;
         break;
     case 7:
-        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
-        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 9:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            LoadMapTilesetPalettes(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
@@ -1986,17 +1986,17 @@ static bool32 map_loading_iteration_2_link(u8 *state)
         (*state)++;
         break;
     case 5:
-        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 6:
-        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            LoadMapTilesetPalettes(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
@@ -2281,17 +2281,17 @@ static bool32 LoadMap_QLPlayback(u8 *state)
         (*state)++;
         break;
     case 6:
-        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            LoadMapTilesetPalettes(gMapHeader.mapLayout);
             (*state)++;
         }
         break;
@@ -2450,17 +2450,17 @@ static bool8 MapLdr_Credits(void)
         (*state)++;
         break;
     case 4:
-        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 5:
-        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 6:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            LoadMapTilesetPalettes(gMapHeader.mapLayout);
             (*state)++;
         }
         break;

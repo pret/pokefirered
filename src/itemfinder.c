@@ -316,30 +316,30 @@ static bool8 HiddenItemInConnectedMapAtPos(struct MapConnection * connection, s3
     u32 localOffset;
     s32 localLength;
 
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
 
     switch (connection->direction)
     {
     // same weird temp variable behavior seen in HiddenItemAtPos
-    case 2:
+    case CONNECTION_NORTH:
         localOffset = connection->offset + 7;
         localX = x - localOffset;
         localLength = mapHeader->mapLayout->height - 7;
         localY = localLength + y; // additions are reversed for some reason
         break;
-    case 1:
+    case CONNECTION_SOUTH:
         localOffset = connection->offset + 7;
         localX = x - localOffset;
         localLength = gMapHeader.mapLayout->height + 7;
         localY = y - localLength;
         break;
-    case 3:
+    case CONNECTION_WEST:
         localLength = mapHeader->mapLayout->width - 7;
         localX = localLength + x; // additions are reversed for some reason
         localOffset = connection->offset + 7;
         localY = y - localOffset;
         break;
-    case 4:
+    case CONNECTION_EAST:
         localLength = gMapHeader.mapLayout->width + 7;
         localX = x - localLength;
         localOffset = connection->offset + 7;

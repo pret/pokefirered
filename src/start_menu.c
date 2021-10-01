@@ -596,7 +596,7 @@ static bool8 StartCB_Save2(void)
 
 static void StartMenu_PrepareForSave(void)
 {
-    save_serialize_map();
+    SaveMapView();
     sSaveDialogCB = SaveDialogCB_PrintAskSaveText;
     sSaveDialogIsPrinting = FALSE;
 }

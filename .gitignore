@@ -35,6 +35,7 @@
 *.swo
 *.swp
 *.til
+*.pory
 .fuse*
 .idea/
 Thumbs.db
@@ -49,6 +50,7 @@ src/data/wild_encounters.h
 tags
 tools/agbcc
 tools/binutils
+tools/poryscript
 types_*.taghl
 !.github/calcrom/calcrom.pl
 !sound/programmable_wave_samples/*.pcm

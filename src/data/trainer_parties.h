@@ -11555,3 +11555,28 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_CueBallPaxton[] = 
         .species = SPECIES_MUK,
     },
 };
+
+static const struct TrainerMonNoItemCustomMoves sTrainerMons_LadyRina[] = {
+    {
+        .iv = 100,
+        .lvl = 8,
+        .species = SPECIES_CLEFAIRY,
+        .moves = {
+            MOVE_WISH,
+            MOVE_HEAL_BELL,
+            MOVE_DOUBLE_SLAP,
+            MOVE_BULK_UP,
+        }
+    },
+    {
+        .iv = 100,
+        .lvl = 7,
+        .species = SPECIES_PIKACHU,
+        .moves = {
+            MOVE_FIRE_PUNCH,
+            MOVE_THUNDERBOLT,
+            MOVE_DOUBLE_TEAM,
+            MOVE_CALM_MIND,
+        }
+    },
+};

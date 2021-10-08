@@ -15,19 +15,20 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE23",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE23"
     },
     {
-      "map": "MAP_VIRIDIAN_CITY",
+      "direction": "right",
       "offset": -10,
-      "direction": "right"
+      "map": "MAP_VIRIDIAN_CITY"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
+      "in_connection": false,
       "x": 25,
       "y": 4,
       "elevation": 3,

@@ -2,7 +2,7 @@
 #define GUARD_CONSTANTS_OPPONENTS_H
 
 #define TRAINER_NONE                               0
-#define TRAINER_AQUA_LEADER_1                      1
+#define TRAINER_RINA                               1
 #define TRAINER_TEAM_AQUA_1                        2
 #define TRAINER_TEAM_AQUA_2                        3
 #define TRAINER_AROMA_LADY_1                       4

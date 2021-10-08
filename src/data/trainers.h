@@ -11,18 +11,6 @@ const struct Trainer gTrainers[] = {
         .partySize = 0,
         .party = {},
     },
-    [TRAINER_AQUA_LEADER_1] = {
-        .partyFlags = 0,
-        .trainerClass = CLASS_AQUA_LEADER,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
-        .trainerName = _(""),
-        .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = NELEMS(sTrainerMons_AquaLeader1),
-        .party = {.NoItemDefaultMoves = sTrainerMons_AquaLeader1}
-    },
     [TRAINER_TEAM_AQUA_1] = {
         .partyFlags = 0,
         .trainerClass = CLASS_TEAM_AQUA,
@@ -8914,5 +8902,17 @@ const struct Trainer gTrainers[] = {
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .partySize = NELEMS(sTrainerMons_CueBallPaxton),
         .party = {.NoItemDefaultMoves = sTrainerMons_CueBallPaxton}
+    },
+    [TRAINER_RINA] = {
+        .partyFlags             = F_TRAINER_PARTY_CUSTOM_MOVESET,
+        .trainerClass           = CLASS_LADY,
+        .encounterMusic_gender  = TRAINER_ENCOUNTER_MUSIC_FEMALE,
+        .trainerPic             = TRAINER_PIC_LADY,
+        .trainerName            = _("RINA"),
+        .items                  = {},
+        .doubleBattle           = FALSE,
+        .aiFlags                = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY,
+        .partySize              = NELEMS(sTrainerMons_LadyRina),
+        .party                  = {.NoItemCustomMoves = sTrainerMons_LadyRina},
     },
 };

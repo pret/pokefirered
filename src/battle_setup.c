@@ -116,6 +116,20 @@ static const struct TrainerBattleParameter sContinueScriptBattleParams[] =
     {&sTrainerBattleEndScript,      TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
 
+static const struct TrainerBattleParameter sContinueScriptCustomMusicBattleParams[] =
+{
+    {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
+    {&gTrainerBattleOpponent_A,     TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerObjectEventLocalId,   TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sRivalBattleFlags,            TRAINER_PARAM_LOAD_VAL_16BIT},  // Used for music
+    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerVictorySpeech,        TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerBattleEndScript,      TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
+};
+
 static const struct TrainerBattleParameter sDoubleBattleParams[] =
 {
     {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
@@ -275,11 +289,15 @@ static void DoGhostBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-static void DoTrainerBattle(void)
-{
-    CreateBattleStartTask(GetTrainerBattleTransition(), 0);
+static void DoTrainerBattleEx(u16 song) {
+    CreateBattleStartTask(GetTrainerBattleTransition(), song);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
+}
+
+static void DoTrainerBattle(void)
+{
+    DoTrainerBattleEx(0);
 }
 
 void StartOldManTutorialBattle(void)
@@ -805,6 +823,10 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     case TRAINER_BATTLE_EARLY_RIVAL:
         TrainerBattleLoadArgs(sEarlyRivalBattleParams, data);
         return EventScript_DoNoIntroTrainerBattle;
+    case TRAINER_BATTLE_CONTINUE_SCRIPT_CUSTOM_MUSIC:
+        TrainerBattleLoadArgs(sContinueScriptCustomMusicBattleParams, data);
+        SetMapVarsToTrainer();
+        return EventScript_TryDoNormalTrainerBattle;
     default:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
@@ -882,7 +904,10 @@ void StartTrainerBattle(void)
     if (GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
     gMain.savedCallback = CB2_EndTrainerBattle;
-    DoTrainerBattle();
+    if (GetTrainerBattleMode() == TRAINER_BATTLE_CONTINUE_SCRIPT_CUSTOM_MUSIC)
+        DoTrainerBattleEx(sRivalBattleFlags);
+    else
+        DoTrainerBattle();
     ScriptContext1_Stop();
 }
 

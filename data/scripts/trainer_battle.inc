@@ -125,6 +125,8 @@ EventScript_DoTrainerBattle:: @ 81A4FC7
 	goto_if_eq EventScript_EndTrainerBattleContinueScript
 	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
 	goto_if_eq EventScript_EndTrainerBattleContinueScript
+	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_CUSTOM_MUSIC
+	goto_if_eq EventScript_EndTrainerBattleContinueScript
 	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE
 	goto_if_eq EventScript_EndTrainerBattleContinueScript
 	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC

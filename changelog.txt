@@ -1,0 +1,23 @@
+Changelog:
+
+v0.2
+- Running Shoes are now added at the start of the game
+- Running Shoes Aide removed from Pewter City.
+- Running Shoes may now function indoors.
+- Added a new trainerbattle macro that can play custom music.
+
+Map:
+- Route 23:
+    - Replaced Rattata with Poliwag
+
+- Viridian Forest
+    - Added Oddish as a wild pokemon encounter.
+    - Pikachu's encounter rate increased.
+    - First bug trainer is unavoidable.
+    - New Trainer introduced: {Trainer Rina}
+        - Has the following pokemon:
+            - Clefairy
+            - Caterpie
+        - Heals your POKeMON after you beat her.
+            - Healing activates when you talk to her afterwards.
+

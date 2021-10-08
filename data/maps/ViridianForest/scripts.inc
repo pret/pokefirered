@@ -62,3 +62,18 @@ ViridianForest_EventScript_Charlie:: @ 81605CD
 	trainerbattle_single TRAINER_BUG_CATCHER_CHARLIE, ViridianForest_Text_CharlieIntro, ViridianForest_Text_CharlieDefeat
 	msgbox ViridianForest_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
 	end
+
+ViridianForest_EventScript_LadyRina:: @ 81605CD
+	trainerbattle_custommusic TRAINER_RINA, MUS_VS_GYM_LEADER, ViridianForest_Text_LadyRinaIntro, ViridianForest_Text_LadyRinaDefeat, ViridianForest_EventScript_LadyRinaHeal
+	goto ViridianForest_EventScript_LadyRinaHeal
+
+ViridianForest_EventScript_LadyRinaEnd:: @ 81605CD
+	msgbox ViridianForest_Text_LadyRinaHealOutro, MSGBOX_AUTOCLOSE
+	end
+
+ViridianForest_EventScript_LadyRinaHeal:: @ 81605CD
+    msgbox ViridianForest_Text_LadyRinaHealIntro, MSGBOX_AUTOCLOSE
+    playfanfare MUS_HEAL
+    special HealPlayerParty
+    waitfanfare
+    goto ViridianForest_EventScript_LadyRinaEnd

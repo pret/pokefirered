@@ -57,6 +57,31 @@ ViridianForest_Text_AnthonyPostBattle:: @ 81724DC
 ViridianForest_Text_CharlieIntro:: @ 81724F9
     .string "Did you know that POKéMON evolve?$"
 
+ViridianForest_Text_LadyRinaIntro:: @ 81724F9
+    .string "{PLAY_BGM}{MUS_ENCOUNTER_GIRL}Viridian Forest is known for its bugs.\n"
+    .string "I'm here to watch over these BUG\l"
+    .string "TRAINERS so that no one gets hurt.\l"
+    .string "{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}"
+    .string "..Huh? You fancy a battle?$"
+
+ViridianForest_Text_LadyRinaDefeat:: @ 81724F9
+    .string "..Woah! That performance blew me\n"
+    .string "away! Good show!\l"
+    .string "By the way, who are you?\l"
+    .string "...\l"
+    .string "Oh, I see. You're {PLAYER}.\l"
+    .string "Well played!$"
+
+ViridianForest_Text_LadyRinaHealIntro:: @ 81724F9
+    .string "Ah, {PLAYER}! How are you?\n"
+    .string "I guess your POKéMON are hurt.\l"
+    .string "Leave their pain to me.$"
+
+ViridianForest_Text_LadyRinaHealOutro:: @ 81724F9
+    .string "If you need healing, rest assured\n"
+    .string "that your POKéMON are in good\l"
+    .string "hands.$"
+
 ViridianForest_Text_CharlieDefeat:: @ 817251B
     .string "Oh!\n"
     .string "I lost!$"

@@ -19,6 +19,7 @@ PalletTown_PlayersHouse_2F_OnWarp:: @ 8168CBE
 PalletTown_PlayersHouse_2F_FirstWarpIn:: @ 8168CC8
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 1
+    setflag FLAG_SYS_B_DASH
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_NES:: @ 8168CD2

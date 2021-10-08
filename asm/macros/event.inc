@@ -613,7 +613,7 @@
 	.endm
 
 	@ If the Trainer flag for Trainer index is not set, this command does absolutely nothing.
-	.macro trainerbattle type:req, trainer:req, word:req, pointer1:req, pointer2, pointer3, pointer4
+	.macro trainerbattle type:req, trainer:req, word:req, pointer1:req, pointer2, pointer3, pointer4, pointer5
 		.byte 0x5c
 		.byte \type
 		.2byte \trainer
@@ -655,6 +655,11 @@
 		.elseif \type == TRAINER_BATTLE_EARLY_RIVAL
 			.4byte \pointer1 @ text
 			.4byte \pointer2 @ text
+        .elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_CUSTOM_MUSIC
+            .2byte \pointer4 @ song
+            .4byte \pointer1 @ text
+            .4byte \pointer2 @ text
+            .4byte \pointer3 @ event script
 		.endif
 	.endm
 
@@ -671,6 +676,11 @@
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, \trainer, 0, \intro_text, \lose_text, \event_script
 	.endif
 	.endm
+
+	@ Starts a single trainer battle, takes a trainer, song index, intro text, loss text, and an optional event script
+    .macro trainerbattle_custommusic trainer:req, word:req, intro_text:req, lose_text:req, event_script=FALSE
+    trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_CUSTOM_MUSIC, \trainer, 0, \intro_text, \lose_text, \event_script, \word
+    .endm
 
 	@ Starts a double trainer battle, takes a trainer, intro text, loss text, text for when you have too few pokemon
 	@ and an optional event script, when used with an event script you can pass in an optional flag to disable music

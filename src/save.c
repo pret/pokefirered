@@ -39,11 +39,12 @@
 // (u8 *)structure was removed from the first statement of the macro in Emerald
 // and Fire Red/Leaf Green. This is because malloc is used to allocate addresses
 // so storing the raw addresses should not be done in the offsets information.
-#define SAVEBLOCK_CHUNK(structure, chunkNum)                                \
-{                                                                           \
-    chunkNum * SECTOR_DATA_SIZE,                                            \
-    min(sizeof(structure) - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE)  \
-}                                                                           \
+#define SAVEBLOCK_CHUNK(structure, chunkNum)                                   \
+{                                                                              \
+    chunkNum * SECTOR_DATA_SIZE,                                               \
+    sizeof(structure) >= chunkNum * SECTOR_DATA_SIZE ?                         \
+    min(sizeof(structure) - chunkNum * SECTOR_DATA_SIZE, SECTOR_DATA_SIZE) : 0 \
+}
 
 const struct SaveSectionOffsets gSaveSectionOffsets[] =
 {

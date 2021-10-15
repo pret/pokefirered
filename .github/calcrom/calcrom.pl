@@ -1,19 +1,22 @@
 #!/usr/bin/perl
 
 # Usage:
-#   calcrom.pl <mapfile> [--verbose]
+#   calcrom.pl <mapfile> [--verbose][--data]
 #
 #   mapfile: path to .map file output by LD
 #   verbose: set to get more detailed output
+#   data: set to output % breakdown of data
 
 use IPC::Cmd qw[ run ];
 use Getopt::Long;
 
+my $usage = "Usage: calcrom.pl file.map [--verbose][--data]\n";
 my $verbose = "";
+my $showData;
 
-GetOptions("verbose" => \$verbose);
+GetOptions("verbose" => \$verbose, "data" => \$showData) or die $usage;
 (@ARGV == 1)
-    or die "ERROR: no map file specified.\n";
+    or die $usage;
 open(my $file, $ARGV[0])
     or die "ERROR: could not open file '$ARGV[0]'.\n";
 
@@ -178,11 +181,15 @@ else
     print "$partial_documented symbols partially documented ($partialPct%)\n";
     print "$undocumented symbols undocumented ($undocPct%)\n";
 }
-print "\n";
 
-my $dataTotal = $srcdata + $data;
-my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
-my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
-print "$dataTotal total bytes of data\n";
-print "$srcdata bytes of data in src ($srcDataPct%)\n";
-print "$data bytes of data in data ($dataPct%)\n";
+if ($showData)
+{
+    print "\n";
+
+    my $dataTotal = $srcdata + $data;
+    my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
+    my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
+    print "$dataTotal total bytes of data\n";
+    print "$srcdata bytes of data in src ($srcDataPct%)\n";
+    print "$data bytes of data in data ($dataPct%)\n";
+}

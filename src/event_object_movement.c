@@ -1617,7 +1617,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     }
 
     sprite = &gSprites[spriteId];
-    sub_8063AD4(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
+    GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->x += 8;
@@ -1765,7 +1765,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
     *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
     x += 7;
     y += 7;
-    sub_8063BC4(&x, &y, 8, 16);
+    SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -1950,7 +1950,7 @@ static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
-        sub_8063AD4(x + objectEvent->currentCoords.x, y + objectEvent->currentCoords.y, &sprite->x, &sprite->y);
+        GetMapCoordsFromSpritePos(x + objectEvent->currentCoords.x, y + objectEvent->currentCoords.y, &sprite->x, &sprite->y);
         sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
         sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
         sprite->x += 8;
@@ -5019,7 +5019,7 @@ static void MoveCoordsInDirection(u32 dir, s16 *x, s16 *y, s16 deltaX, s16 delta
         *y -= dy2;
 }
 
-void sub_8063AD4(s16 x, s16 y, s16 *destX, s16 *destY)
+void GetMapCoordsFromSpritePos(s16 x, s16 y, s16 *destX, s16 *destY)
 {
     *destX = (x - gSaveBlock1Ptr->pos.x) << 4;
     *destY = (y - gSaveBlock1Ptr->pos.y) << 4;
@@ -5047,7 +5047,7 @@ void SetSpritePosToMapCoords(s16 mapX, s16 mapY, s16 *destX, s16 *destY)
     *destY = ((mapY - gSaveBlock1Ptr->pos.y) << 4) + dy;
 }
 
-void sub_8063BC4(s16 *x, s16 *y, s16 dx, s16 dy)
+void SetSpritePosToOffsetMapCoords(s16 *x, s16 *y, s16 dx, s16 dy)
 {
     SetSpritePosToMapCoords(*x, *y, x, y);
     *x += dx;
@@ -5413,7 +5413,7 @@ bool8 npc_obj_ministep_stop_on_arrival(struct ObjectEvent *objectEvent, struct S
     return FALSE;
 }
 
-void sub_80647C0(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
+void InitNpcForWalkSlow(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
     s16 x;
     s16 y;
@@ -5423,21 +5423,21 @@ void sub_80647C0(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
     SetObjectEventDirection(objectEvent, direction);
     MoveCoords(direction, &x, &y);
     ShiftObjectEventCoords(objectEvent, x, y);
-    sub_8068BBC(sprite, direction);
+    SetSpriteDataForNormalStep(sprite, direction);
     sprite->animPaused = FALSE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     sprite->data[2] = 1;
 }
 
-void sub_8064830(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
+void InitWalkSlow(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
-    sub_80647C0(objectEvent, sprite, direction);
+    InitNpcForWalkSlow(objectEvent, sprite, direction);
     npc_apply_anim_looping(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
 }
 
 bool8 an_walk_any_2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8068BCC(sprite))
+    if (NpcTakeStep(sprite))
     {
         ShiftStillObjectEventCoords(objectEvent);
         objectEvent->triggerGroundEffectsOnStop = TRUE;
@@ -5447,7 +5447,7 @@ bool8 an_walk_any_2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     return FALSE;
 }
 
-void sub_8064894(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
+void InitNpcForWalkSlow2(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
     s16 x;
     s16 y;
@@ -5457,21 +5457,21 @@ void sub_8064894(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
     SetObjectEventDirection(objectEvent, direction);
     MoveCoords(direction, &x, &y);
     ShiftObjectEventCoords(objectEvent, x, y);
-    sub_8068C58(sprite, direction);
+    SetSpriteDataForNormalStep2(sprite, direction);
     sprite->animPaused = FALSE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     sprite->data[2] = 1;
 }
 
-void sub_8064904(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
+void InitWalkSlow2(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
-    sub_8064894(objectEvent, sprite, direction);
+    InitNpcForWalkSlow2(objectEvent, sprite, direction);
     npc_apply_anim_looping(objectEvent, sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
 }
 
-bool8 sub_8064930(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 UpdateWalkSlow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8068C68(sprite))
+    if (UpdateWalkSlowAnim(sprite))
     {
         ShiftStillObjectEventCoords(objectEvent);
         objectEvent->triggerGroundEffectsOnStop = TRUE;
@@ -5483,13 +5483,13 @@ bool8 sub_8064930(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 
 static bool8 MovementActionFunc_x9B_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064904(objectEvent, sprite, DIR_SOUTH);
+    InitWalkSlow2(objectEvent, sprite, DIR_SOUTH);
     return MovementActionFunc_x9B_1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x9B_1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8064930(objectEvent, sprite))
+    if (UpdateWalkSlow(objectEvent, sprite))
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -5499,13 +5499,13 @@ static bool8 MovementActionFunc_x9B_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x9C_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064904(objectEvent, sprite, DIR_NORTH);
+    InitWalkSlow2(objectEvent, sprite, DIR_NORTH);
     return MovementActionFunc_x9C_1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x9C_1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8064930(objectEvent, sprite))
+    if (UpdateWalkSlow(objectEvent, sprite))
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -5515,13 +5515,13 @@ static bool8 MovementActionFunc_x9C_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x9D_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064904(objectEvent, sprite, DIR_WEST);
+    InitWalkSlow2(objectEvent, sprite, DIR_WEST);
     return MovementActionFunc_x9D_1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x9D_1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8064930(objectEvent, sprite))
+    if (UpdateWalkSlow(objectEvent, sprite))
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -5531,13 +5531,13 @@ static bool8 MovementActionFunc_x9D_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x9E_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064904(objectEvent, sprite, DIR_EAST);
+    InitWalkSlow2(objectEvent, sprite, DIR_EAST);
     return MovementActionFunc_x9E_1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x9E_1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8064930(objectEvent, sprite))
+    if (UpdateWalkSlow(objectEvent, sprite))
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -5547,7 +5547,7 @@ static bool8 MovementActionFunc_x9E_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x08_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064830(objectEvent, sprite, DIR_SOUTH);
+    InitWalkSlow(objectEvent, sprite, DIR_SOUTH);
     return MovementActionFunc_x08_1(objectEvent, sprite);
 }
 
@@ -5563,7 +5563,7 @@ static bool8 MovementActionFunc_x08_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x09_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064830(objectEvent, sprite, DIR_NORTH);
+    InitWalkSlow(objectEvent, sprite, DIR_NORTH);
     return MovementActionFunc_x09_1(objectEvent, sprite);
 }
 
@@ -5579,7 +5579,7 @@ static bool8 MovementActionFunc_x09_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x0A_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064830(objectEvent, sprite, DIR_WEST);
+    InitWalkSlow(objectEvent, sprite, DIR_WEST);
     return MovementActionFunc_x0A_1(objectEvent, sprite);
 }
 
@@ -5595,7 +5595,7 @@ static bool8 MovementActionFunc_x0A_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x0B_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064830(objectEvent, sprite, DIR_EAST);
+    InitWalkSlow(objectEvent, sprite, DIR_EAST);
     return MovementActionFunc_x0B_1(objectEvent, sprite);
 }
 
@@ -5619,7 +5619,7 @@ void sub_8064B68(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
     SetObjectEventDirection(objectEvent, direction);
     MoveCoords(direction, &x, &y);
     ShiftObjectEventCoords(objectEvent, x, y);
-    sub_8068C08(sprite, direction);
+    SetSpriteDataForNormalStep3(sprite, direction);
     sprite->animPaused = FALSE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     sprite->data[2] = 1;
@@ -5783,7 +5783,7 @@ void sub_8064E3C(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
     SetObjectEventDirection(objectEvent, direction);
     MoveCoordsInDirection(direction, &x, &y, displacements[speed], displacements[speed]);
     ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
-    sub_8068D1C(sprite, direction, speed, a5);
+    SetJumpSpriteData(sprite, direction, speed, a5);
     sprite->data[2] = 1;
     sprite->animPaused = 0;
     objectEvent->triggerGroundEffectsOnMove = 1;
@@ -6565,7 +6565,7 @@ static bool8 MovementAction_PlayerRunRight_Step1(struct ObjectEvent *objectEvent
     return FALSE;
 }
 
-void sub_8065EF0(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
+void InitNpcForWalkSlow3(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
     s16 x;
     s16 y;
@@ -6575,7 +6575,7 @@ void sub_8065EF0(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
     SetObjectEventDirection(objectEvent, direction);
     MoveCoords(direction, &x, &y);
     ShiftObjectEventCoords(objectEvent, x, y);
-    sub_8068CA4(sprite, direction);
+    SetSpriteDataForNormalStep4(sprite, direction);
     sprite->animPaused = FALSE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     sprite->data[2] = 1;
@@ -6583,7 +6583,7 @@ void sub_8065EF0(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
 
 void sub_8065F60(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
-    sub_8065EF0(objectEvent, sprite, direction);
+    InitNpcForWalkSlow3(objectEvent, sprite, direction);
     npc_apply_anim_looping(objectEvent, sprite, GetRunningDirectionAnimNum(objectEvent->facingDirection));
 }
 
@@ -7276,7 +7276,7 @@ static bool8 MovementAction_ClearAffineAnim_Step0(struct ObjectEvent *objectEven
 
 static bool8 MovementAction_WalkDownStartAffine_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064830(objectEvent, sprite, DIR_SOUTH);
+    InitWalkSlow(objectEvent, sprite, DIR_SOUTH);
     sprite->affineAnimPaused = FALSE;
     StartSpriteAffineAnimIfDifferent(sprite, 0);
     return MovementAction_WalkDownStartAffine_Step1(objectEvent, sprite);
@@ -7295,7 +7295,7 @@ static bool8 MovementAction_WalkDownStartAffine_Step1(struct ObjectEvent *object
 
 static bool8 MovementAction_WalkDownAffine_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8064830(objectEvent, sprite, DIR_SOUTH);
+    InitWalkSlow(objectEvent, sprite, DIR_SOUTH);
     sprite->affineAnimPaused = FALSE;
     ChangeSpriteAffineAnimIfDifferent(sprite, 1);
     return MovementAction_WalkDownAffine_Step1(objectEvent, sprite);
@@ -9014,7 +9014,7 @@ bool8 obj_npc_ministep(struct Sprite *sprite)
 #define tDelay     data[4]
 #define tStepNo    data[5]
 
-void sub_8068BBC(struct Sprite *sprite, u8 direction)
+void SetSpriteDataForNormalStep(struct Sprite *sprite, u8 direction)
 {
     sprite->tDirection = direction;
     sprite->tDelay = 0;
@@ -9022,7 +9022,7 @@ void sub_8068BBC(struct Sprite *sprite, u8 direction)
 }
 
 // used by an_walk_any_2
-bool8 sub_8068BCC(struct Sprite *sprite)
+bool8 NpcTakeStep(struct Sprite *sprite)
 {
     if (!(sprite->tDelay & 1))
     {
@@ -9038,7 +9038,7 @@ bool8 sub_8068BCC(struct Sprite *sprite)
         return FALSE;
 }
 
-void sub_8068C08(struct Sprite *sprite, u8 direction)
+void SetSpriteDataForNormalStep3(struct Sprite *sprite, u8 direction)
 {
     sprite->tDirection = direction;
     sprite->tDelay = 0;
@@ -9061,14 +9061,14 @@ bool8 sub_8068C18(struct Sprite *sprite)
         return FALSE;
 }
 
-void sub_8068C58(struct Sprite *sprite, u8 direction)
+void SetSpriteDataForNormalStep2(struct Sprite *sprite, u8 direction)
 {
     sprite->tDirection = direction;
     sprite->tDelay = 0;
     sprite->tStepNo = 0;
 }
 
-bool8 sub_8068C68(struct Sprite *sprite)
+bool8 UpdateWalkSlowAnim(struct Sprite *sprite)
 {
     if (++sprite->tDelay > 9)
     {
@@ -9083,7 +9083,7 @@ bool8 sub_8068C68(struct Sprite *sprite)
         return FALSE;
 }
 
-void sub_8068CA4(struct Sprite *sprite, u8 direction)
+void SetSpriteDataForNormalStep4(struct Sprite *sprite, u8 direction)
 {
     sprite->tDirection = direction;
     sprite->tDelay = 0;
@@ -9141,7 +9141,7 @@ static s16 GetJumpYDisplacement(s16 stepno, u8 jumpno)
     return sYDisplacementPtrs[jumpno][stepno];
 }
 
-void sub_8068D1C(struct Sprite *sprite, u8 direction, u8 speed, u8 height)
+void SetJumpSpriteData(struct Sprite *sprite, u8 direction, u8 speed, u8 height)
 {
     sprite->tDirection = direction;
     sprite->tJumpSpeed = speed;

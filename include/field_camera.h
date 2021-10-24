@@ -37,6 +37,6 @@ void CameraUpdate(void);
 void FieldUpdateBgTilemapScroll(void);
 void ResetCameraUpdateInfo(void);
 u32 InitCameraUpdateCallback(u8 trackedSpriteId);
-void sub_805ACF0(void);
+void CameraUpdateNoObjectRefresh(void);
 
 #endif //GUARD_FIELD_CAMERA_H

@@ -174,13 +174,14 @@ void MarkBattlerForControllerExec(u8 battlerId)
         gBattleControllerExecFlags |= gBitTable[battlerId];
 }
 
-void sub_8017298(u8 arg0)
+void MarkBattlerReceivedLinkData(u8 battlerId)
 {
     s32 i;
 
     for (i = 0; i < GetLinkPlayerCount(); ++i)
-        gBattleControllerExecFlags |= gBitTable[arg0] << (i << 2);
-    gBattleControllerExecFlags &= ~(0x10000000 << arg0);
+        gBattleControllerExecFlags |= gBitTable[battlerId] << (i << 2);
+
+    gBattleControllerExecFlags &= ~(0x10000000 << battlerId);
 }
 
 void CancelMultiTurnMoves(u8 battler)
@@ -230,7 +231,7 @@ void ResetSentPokesToOpponentValue(void)
         gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
 }
 
-void sub_8017434(u8 battler)
+void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler)
 {
     s32 i = 0;
     u32 bits = 0;
@@ -238,8 +239,8 @@ void sub_8017434(u8 battler)
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
         u8 flank = ((battler & BIT_FLANK) >> 1);
-
         gSentPokesToOpponent[flank] = 0;
+
         for (i = 0; i < gBattlersCount; i += 2)
             if (!(gAbsentBattlerFlags & gBitTable[i]))
                 bits |= gBitTable[gBattlerPartyIndexes[i]];
@@ -251,7 +252,7 @@ void UpdateSentPokesToOpponentValue(u8 battler)
 {
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
-        sub_8017434(battler);
+        OpponentSwitchInResetSentPokesToOpponentValue(battler);
     }
     else
     {
@@ -1112,7 +1113,7 @@ bool8 HandleFaintedMonActions(void)
             gBattleStruct->faintedActionsState = 3;
             break;
         case 2:
-            sub_8017434(gBattlerFainted);
+            OpponentSwitchInResetSentPokesToOpponentValue(gBattlerFainted);
             if (++gBattleStruct->faintedActionsBattlerId == gBattlersCount)
                 gBattleStruct->faintedActionsState = 3;
             else

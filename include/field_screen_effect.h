@@ -3,9 +3,7 @@
 
 #include "global.h"
 
-void sub_80AF79C(void);
 void AnimateFlash(u8);
-void sub_80B0244(void);
 void FieldCB_SafariZoneRanOutOfBalls(void);
 void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);

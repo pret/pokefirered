@@ -503,8 +503,8 @@ void AnimTask_StatsChange(u8 taskId)
     gBattleAnimArgs[2] = 0;
     gBattleAnimArgs[3] = 0;
     gBattleAnimArgs[4] = sharply;
-    gTasks[taskId].func = sub_80BB088;
-    sub_80BB088(taskId);
+    gTasks[taskId].func = InitStatsChangeAnimation;
+    InitStatsChangeAnimation(taskId);
 }
 
 #undef CASE

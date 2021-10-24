@@ -960,33 +960,33 @@ u32 FldEff_SurfBlob(void)
     return spriteId;
 }
 
-void sub_80DC44C(u8 spriteId, u8 value)
+void SetSurfBlob_BobState(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF) | (value & 0xF);
 }
 
-void sub_80DC478(u8 spriteId, u8 value)
+void SetSurfBlob_DontSyncAnim(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF0) | ((value & 0xF) << 4);
 }
 
-void sub_80DC4A4(u8 spriteId, u8 value, s16 data1)
+void SetSurfBlob_PlayerOffset(u8 spriteId, u8 hasOffset, s16 offset)
 {
-    gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF00) | ((value & 0xF) << 8);
-    gSprites[spriteId].data[1] = data1;
+    gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF00) | ((hasOffset & 0xF) << 8);
+    gSprites[spriteId].data[1] = offset;
 }
 
-static u8 sub_80DC4D8(struct Sprite * sprite)
+static u8 GetSurfBlob_BobState(struct Sprite * sprite)
 {
     return sprite->data[0] & 0xF;
 }
 
-static u8 sub_80DC4E0(struct Sprite * sprite)
+static u8 GetSurfBlob_DontSyncAnim(struct Sprite * sprite)
 {
     return (sprite->data[0] & 0xF0) >> 4;
 }
 
-static u8 sub_80DC4EC(struct Sprite * sprite)
+static u8 GetSurfBlob_HasPlayerOffset(struct Sprite * sprite)
 {
     return (sprite->data[0] & 0xF00) >> 8;
 }
@@ -1014,7 +1014,7 @@ static void SynchroniseSurfAnim(struct ObjectEvent * objectEvent, struct Sprite 
         [DIR_EAST] = 3
     };
 
-    if (sub_80DC4E0(sprite) == 0)
+    if (GetSurfBlob_DontSyncAnim(sprite) == 0)
         StartSpriteAnimIfDifferent(sprite, surfBlobDirectionAnims[objectEvent->movementDirection]);
 }
 
@@ -1045,7 +1045,7 @@ void SynchroniseSurfPosition(struct ObjectEvent * objectEvent, struct Sprite * s
 static void CreateBobbingEffect(struct ObjectEvent * objectEvent, struct Sprite * linkedSprite, struct Sprite * sprite)
 {
     u16 unk_83FECFA[] = {7, 15};
-    u8 v0 = sub_80DC4D8(sprite);
+    u8 v0 = GetSurfBlob_BobState(sprite);
     if (v0 != 0)
     {
         if (((u16)(++ sprite->data[4]) & unk_83FECFA[sprite->data[5]]) == 0)
@@ -1058,7 +1058,7 @@ static void CreateBobbingEffect(struct ObjectEvent * objectEvent, struct Sprite 
         }
         if (v0 != 2)
         {
-            if (sub_80DC4EC(sprite) == 0)
+            if (GetSurfBlob_HasPlayerOffset(sprite) == 0)
                 linkedSprite->y2 = sprite->y2;
             else
                 linkedSprite->y2 = sprite->data[1] + sprite->y2;
@@ -1292,7 +1292,7 @@ void UpdateDisguiseFieldEffect(struct Sprite * sprite)
     }
 }
 
-void sub_80DCBB8(struct ObjectEvent * objectEvent)
+void StartRevealDisguise(struct ObjectEvent * objectEvent)
 {
     if (objectEvent->directionSequenceIndex == 1)
     {
@@ -1300,7 +1300,7 @@ void sub_80DCBB8(struct ObjectEvent * objectEvent)
     }
 }
 
-bool8 sub_80DCBE0(struct ObjectEvent * objectEvent)
+bool8 UpdateRevealDisguise(struct ObjectEvent * objectEvent)
 {
     struct Sprite * sprite;
 

@@ -47,7 +47,7 @@ void PlayerGoSpeed1(u8 direction);
 void PlayerGoSpeed2(u8 direction);
 void sub_805C134(u8 direction);
 void PlayerRideWaterCurrent(u8 direction);
-void sub_805C164(u8 direction);
+void PlayerGoSpeed4(u8 direction);
 void PlayerRun(u8 direction);
 void PlayerRunSlow(u8 direction);
 void PlayerOnBikeCollide(u8 direction);

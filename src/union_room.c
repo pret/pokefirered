@@ -3276,7 +3276,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (!gPaletteFade.active)
         {
             sUnionRoomTrade.field_0 = 1;
-            gFieldCallback = sub_807DCE4;
+            gFieldCallback = FieldCB_ContinueScriptUnionRoom;
             ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_REGISTER, CB2_ReturnToField);
         }
         break;
@@ -3388,7 +3388,7 @@ static void Task_RunUnionRoom(u8 taskId)
             memcpy(&gPartnerTgtGnameSub, &data->field_0->arr[taskData[1]].gname_uname.gname.unk_00, sizeof(gPartnerTgtGnameSub));
             gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].gname_uname.gname.type;
             gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].gname_uname.gname.species;
-            gFieldCallback = sub_807DCE4;
+            gFieldCallback = FieldCB_ContinueScriptUnionRoom;
             ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_TRADE, CB2_ReturnToField);
             BackUpURoomField0ToDecompressionBuffer(data);
             sUnionRoomTrade.field_8 = taskData[1];

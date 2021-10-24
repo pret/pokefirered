@@ -431,7 +431,7 @@ void MoveCameraAndRedrawMap(int deltaX, int deltaY) // unused
     gTotalCameraPixelOffsetY -= deltaY * 16;
 }
 
-void sub_805ACF0(void)
+void CameraUpdateNoObjectRefresh(void)
 {
     int deltaX;
     int deltaY;

@@ -825,7 +825,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     {
         // Changed from Emerald
         LZDecompressVram(gBattleAnimBgTilemap_SurfContest, animBg.bgTilemap);
-        sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 1);
+        RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 1);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)

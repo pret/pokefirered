@@ -115,7 +115,6 @@ void FadeScreen(u8 mode, s8 delay);
 
 void SetSav1Weather(u32);
 u8 GetSav1Weather(void);
-void sub_80AEDBC(void);
 
 void DoCurrentWeather(void);
 void SetSav1WeatherFromCurrMapHeader(void);

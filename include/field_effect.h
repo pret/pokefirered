@@ -10,7 +10,6 @@ extern bool8 (*gFieldCallback2)(void);
 
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
-void sub_80B69DC(void);
 void CreateTeleportFieldEffectTask(void);
 void FieldEffectActiveListRemove(u8 id);
 void StartEscapeRopeFieldEffect(void);

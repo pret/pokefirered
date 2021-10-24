@@ -123,7 +123,7 @@
 #define VAR_LINK_WIN_BRAG_STATE            0x404B
 #define VAR_POKELOT_RND2                   0x404C
 #define VAR_QL_ENTRANCE                    0x404D
-#define VAR_0x404E                         0x404E
+#define VAR_NATIONAL_DEX                   0x404E
 #define VAR_LOTAD_SIZE_RECORD              0x404F
 
 // Map Scene

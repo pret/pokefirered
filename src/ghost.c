@@ -1322,7 +1322,7 @@ static void sub_80B6BE4(u8 taskId)
         GetBattleAnimBgData(&animBgData, 2);
         gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
         LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->multiUseBuffer);
-        sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->multiUseBuffer, 256, 0);
+        RelocateBattleBgPal(animBgData.paletteId, gMonSpritesGfxPtr->multiUseBuffer, 256, 0);
         CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->multiUseBuffer, 0, 0, 0x20, 0x20, 0x11);
         CopyBgTilemapBufferToVram(2);
         FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);

@@ -643,7 +643,7 @@ UNUSED void GetBattleTerrainGfxPtrs(u8 terrain, const u32 **tilesPtr, const u32 
     *palPtr = sBattleTerrainTable[terrain].palette;
 }
 
-void sub_800F324(void)
+void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, gBattleBgTemplates, NELEMS(gBattleBgTemplates));
@@ -654,7 +654,7 @@ void sub_800F324(void)
 void InitBattleBgsVideo(void)
 {
     EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
-    sub_800F324();
+    BattleInitBgsAndWindows();
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);

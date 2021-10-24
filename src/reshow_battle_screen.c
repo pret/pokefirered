@@ -60,7 +60,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     case 1:
         SetVBlankCallback(NULL);
         ScanlineEffect_Clear();
-        sub_800F324();
+        BattleInitBgsAndWindows();
         SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
         SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
         ShowBg(0);

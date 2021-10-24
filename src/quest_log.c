@@ -138,9 +138,6 @@ static void UpdateTrainerFansAfterLinkBattle(struct TrainerFanClub *);
 static bool8 DidPlayerGetFirstFans(struct TrainerFanClub * );
 static void SetPlayerGotFirstFans(struct TrainerFanClub *);
 static bool8 InQuestLogDisabledLocation(void);
-static bool8 sub_8113778(u16, const u16 *);
-static bool8 sub_81137E4(u16, const u16 *);
-static u16 *sub_8113828(u16, const u16 *);
 static bool8 TrySetLinkQuestLogEvent(u16, const u16 *);
 static bool8 TrySetTrainerBattleQuestLogEvent(u16, const u16 *);
 

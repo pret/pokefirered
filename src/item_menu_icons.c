@@ -9,8 +9,8 @@ static EWRAM_DATA u8 sItemMenuIconSpriteIds[12] = {0};
 static EWRAM_DATA void * sItemIconTilesBuffer = NULL;
 static EWRAM_DATA void * sItemIconTilesBufferPadded = NULL;
 
-static void sub_8098560(struct Sprite * sprite);
-static void sub_80985BC(struct Sprite * sprite);
+static void SpriteCB_BagVisualSwitchingPockets(struct Sprite * sprite);
+static void SpriteCB_ShakeBagSprite(struct Sprite * sprite);
 
 static const struct OamData sOamData_BagOrSatchel = {
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -556,18 +556,18 @@ void ResetItemMenuIconState(void)
 void CreateBagOrSatchelSprite(u8 animNum)
 {
     sItemMenuIconSpriteIds[0] = CreateSprite(&sSpriteTemplate_BagOrSatchel, 40, 68, 0);
-    sub_8098528(animNum);
+    SetBagVisualPocketId(animNum);
 }
 
-void sub_8098528(u8 animNum)
+void SetBagVisualPocketId(u8 animNum)
 {
     struct Sprite * sprite = &gSprites[sItemMenuIconSpriteIds[0]];
     sprite->y2 = -5;
-    sprite->callback = sub_8098560;
+    sprite->callback = SpriteCB_BagVisualSwitchingPockets;
     StartSpriteAnim(sprite, animNum);
 }
 
-static void sub_8098560(struct Sprite * sprite)
+static void SpriteCB_BagVisualSwitchingPockets(struct Sprite * sprite)
 {
     if (sprite->y2 != 0)
         sprite->y2++;
@@ -575,17 +575,17 @@ static void sub_8098560(struct Sprite * sprite)
         sprite->callback = SpriteCallbackDummy;
 }
 
-void sub_8098580(void)
+void ShakeBagSprite(void)
 {
     struct Sprite * sprite = &gSprites[sItemMenuIconSpriteIds[0]];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, 1);
-        sprite->callback = sub_80985BC;
+        sprite->callback = SpriteCB_ShakeBagSprite;
     }
 }
 
-static void sub_80985BC(struct Sprite * sprite)
+static void SpriteCB_ShakeBagSprite(struct Sprite * sprite)
 {
     if (sprite->affineAnimEnded)
     {

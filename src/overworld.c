@@ -1346,7 +1346,7 @@ static void InitOverworldBgs(void)
     SetBgTilemapBuffer(3, gBGTilemapBuffers3);
     InitStandardTextBoxWindows();
     InitTextBoxGfxAndPrinters();
-    sub_8069348();
+    InitFieldMessageBox();
 }
 
 static void InitOverworldBgs_NoResetHeap(void)
@@ -1364,7 +1364,7 @@ static void InitOverworldBgs_NoResetHeap(void)
     SetBgTilemapBuffer(3, gBGTilemapBuffers3);
     InitStandardTextBoxWindows();
     InitTextBoxGfxAndPrinters();
-    sub_8069348();
+    InitFieldMessageBox();
 }
 
 void CleanupOverworldWindowsAndTilemaps(void)
@@ -2349,7 +2349,7 @@ void Overworld_CreditsMainCB(void)
         SetVBlankCallback(NULL);
     RunTasks();
     AnimateSprites();
-    sub_805ACF0();
+    CameraUpdateNoObjectRefresh();
     UpdateCameraPanning();
     BuildOamBuffer();
     UpdatePaletteFade();

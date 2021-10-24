@@ -49,7 +49,7 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER);
 }
 
-void sub_806E168(void)
+void sub_806E168(void) // Unused
 {
     u16 *ptr = GetVarPointer(VAR_0x403C);
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
@@ -65,7 +65,7 @@ void sub_806E190(void)
     FlagSet(FLAG_0x838);
 }
 
-bool32 sub_806E1C0(void)
+bool32 sub_806E1C0(void) // Unused
 {
     if (gSaveBlock2Ptr->pokedex.nationalMagic != 0xDA)
         return FALSE;
@@ -76,19 +76,19 @@ bool32 sub_806E1C0(void)
     return TRUE;
 }
 
-void sub_806E204(void)
+void DisableNationalPokedex(void)
 {
-    u16 *ptr = GetVarPointer(VAR_0x404E);
+    u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.unknown2 = 0;
-    *ptr = 0;
+    *nationalDexVar = 0;
     FlagClear(FLAG_SYS_NATIONAL_DEX);
 }
 
 void EnableNationalPokedex(void)
 {
-    u16 *ptr = GetVarPointer(VAR_0x404E);
+    u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.unknown2 = 0xB9;
-    *ptr = 0x6258;
+    *nationalDexVar = 0x6258;
     FlagSet(FLAG_SYS_NATIONAL_DEX);
 }
 
@@ -96,7 +96,7 @@ bool32 IsNationalPokedexEnabled(void)
 {
     if (gSaveBlock2Ptr->pokedex.unknown2 != 0xB9)
         return FALSE;
-    if (VarGet(VAR_0x404E) != 0x6258)
+    if (VarGet(VAR_NATIONAL_DEX) != 0x6258)
         return FALSE;
     if (!FlagGet(FLAG_SYS_NATIONAL_DEX))
         return FALSE;
@@ -120,22 +120,22 @@ bool32 IsMysteryGiftEnabled(void)
 
 void ResetMysteryEventFlags(void)
 {
-    FlagClear(FLAG_MYSTERY_EVENT_DONE);
-    FlagClear(FLAG_0x3D9);
-    FlagClear(FLAG_0x3DA);
-    FlagClear(FLAG_0x3DB);
-    FlagClear(FLAG_0x3DC);
-    FlagClear(FLAG_0x3DD);
-    FlagClear(FLAG_0x3DE);
-    FlagClear(FLAG_0x3DF);
-    FlagClear(FLAG_0x3E0);
-    FlagClear(FLAG_0x3E1);
-    FlagClear(FLAG_0x3E2);
-    FlagClear(FLAG_0x3E3);
-    FlagClear(FLAG_0x3E4);
-    FlagClear(FLAG_0x3E5);
-    FlagClear(FLAG_0x3E6);
-    FlagClear(FLAG_0x3E7);
+    FlagClear(FLAG_MYSTERY_GIFT_DONE);
+    FlagClear(FLAG_MYSTERY_GIFT_1);
+    FlagClear(FLAG_MYSTERY_GIFT_2);
+    FlagClear(FLAG_MYSTERY_GIFT_3);
+    FlagClear(FLAG_MYSTERY_GIFT_4);
+    FlagClear(FLAG_MYSTERY_GIFT_5);
+    FlagClear(FLAG_MYSTERY_GIFT_6);
+    FlagClear(FLAG_MYSTERY_GIFT_7);
+    FlagClear(FLAG_MYSTERY_GIFT_8);
+    FlagClear(FLAG_MYSTERY_GIFT_9);
+    FlagClear(FLAG_MYSTERY_GIFT_10);
+    FlagClear(FLAG_MYSTERY_GIFT_11);
+    FlagClear(FLAG_MYSTERY_GIFT_12);
+    FlagClear(FLAG_MYSTERY_GIFT_13);
+    FlagClear(FLAG_MYSTERY_GIFT_14);
+    FlagClear(FLAG_MYSTERY_GIFT_15);
 }
 
 void ResetMysteryEventVars(void)

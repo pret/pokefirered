@@ -10,7 +10,7 @@ void DrawBattleEntryBackground(void);
 void InitLinkBattleVsScreen(u8 taskId);
 void LoadBattleMenuWindowGfx(void);
 void LoadBattleTextboxAndBackground(void);
-void sub_800F324(void);
+void BattleInitBgsAndWindows(void);
 void DrawMainBattleBackground(void);
 
 #endif // GUARD_BATTLE_BG_H

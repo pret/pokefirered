@@ -123,7 +123,7 @@ static void InitLocalLinkPlayer(void);
 static void sub_800978C(void);
 static void CB2_LinkTest(void);
 static void ProcessRecvCmds(u8 id);
-static void sub_800A040(void);
+static void LinkCB_SendHeldKeys(void);
 static void ResetBlockSend(void);
 static bool32 InitBlockSend(const void *src, size_t size);
 static void LinkCB_BlockSendBegin(void);
@@ -710,13 +710,13 @@ void BuildSendCmd(u16 command)
     }
 }
 
-void sub_8009FE8(void)
+void StartSendingKeysToLink(void)
 {
     if (gWirelessCommType)
     {
         StartSendingKeysToRfu();
     }
-    gLinkCallback = sub_800A040;
+    gLinkCallback = LinkCB_SendHeldKeys;
 }
 
 bool32 IsSendingKeysToLink(void)
@@ -725,14 +725,14 @@ bool32 IsSendingKeysToLink(void)
     {
         return IsSendingKeysToRfu();
     }
-    if (gLinkCallback == sub_800A040)
+    if (gLinkCallback == LinkCB_SendHeldKeys)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-static void sub_800A040(void)
+static void LinkCB_SendHeldKeys(void)
 {
     if (gReceivedRemoteLinkPlayers == TRUE)
     {

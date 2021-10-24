@@ -10,7 +10,7 @@ static EWRAM_DATA u8 sMessageBoxType = 0;
 static void textbox_fdecode_auto_and_task_add(const u8 *str);
 static void textbox_auto_and_task_add(void);
 
-void sub_8069348(void)
+void InitFieldMessageBox(void)
 {
     sMessageBoxType = 0;
     gTextFlags.canABSpeedUpPrint = FALSE;

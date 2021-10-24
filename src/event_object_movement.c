@@ -5232,7 +5232,7 @@ dirn_to_anim(GetWalkSlowMovementAction, gUnknown_83A6500);
 dirn_to_anim(GetWalkNormalMovementAction, gUnknown_83A6505);
 dirn_to_anim(GetWalkFastMovementAction, gUnknown_83A650A);
 dirn_to_anim(sub_8063FDC, gUnknown_83A650F);
-dirn_to_anim(sub_8064008, gUnknown_83A6514);
+dirn_to_anim(GetRideWaterCurrentMovementAction, gUnknown_83A6514);
 dirn_to_anim(GetWalkFastestMovementAction, gUnknown_83A6519);
 dirn_to_anim(GetSlideMovementAction, gUnknown_83A651E);
 dirn_to_anim(GetPlayerRunMovementAction, gUnknown_83A6523);
@@ -5242,7 +5242,7 @@ dirn_to_anim(GetJump2MovementAction, gUnknown_83A6532);
 dirn_to_anim(GetJumpInPlaceMovementAction, gUnknown_83A6537);
 dirn_to_anim(GetJumpInPlaceTurnAroundMovementAction, gUnknown_83A653C);
 dirn_to_anim(GetJumpMovementAction, gUnknown_83A6541);
-dirn_to_anim(sub_80641C0, gUnknown_83A6546);
+dirn_to_anim(GetJumpSpecialMovementAction, gUnknown_83A6546);
 dirn_to_anim(sub_80641EC, gUnknown_83A654B);
 dirn_to_anim(GetStepInPlaceDelay32AnimId, gUnknown_83A6550);
 dirn_to_anim(GetWalkInPlaceNormalMovementAction, gUnknown_83A6555);
@@ -5827,12 +5827,12 @@ u8 sub_8064F3C(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 callba
 
 u8 sub_8065000(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return sub_8064F3C(objectEvent, sprite, sub_8068D3C);
+    return sub_8064F3C(objectEvent, sprite, DoJumpSpriteMovement);
 }
 
 u8 sub_8065014(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return sub_8064F3C(objectEvent, sprite, sub_8068DC4);
+    return sub_8064F3C(objectEvent, sprite, DoJumpSpecialSpriteMovement);
 }
 
 bool8 sub_8065028(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -7172,14 +7172,14 @@ static bool8 MovementAction_RevealTrainer_Step0(struct ObjectEvent *objectEvent,
         sprite->data[2] = 2;
         return TRUE;
     }
-    sub_80DCBB8(objectEvent);
+    StartRevealDisguise(objectEvent);
     sprite->data[2] = 1;
     return MovementAction_RevealTrainer_Step1(objectEvent, sprite);
 }
 
 static bool8 MovementAction_RevealTrainer_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_80DCBE0(objectEvent))
+    if (UpdateRevealDisguise(objectEvent))
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -9149,7 +9149,7 @@ void SetJumpSpriteData(struct Sprite *sprite, u8 direction, u8 speed, u8 height)
     sprite->tStepNo = 0;
 }
 
-u8 sub_8068D3C(struct Sprite *sprite)
+u8 DoJumpSpriteMovement(struct Sprite *sprite)
 {
     s16 duration[3] = {0x10, 0x10, 0x20};
     u8 shifts[3] = {0, 0, 1};
@@ -9174,7 +9174,7 @@ u8 sub_8068D3C(struct Sprite *sprite)
     return jumpPhase;
 }
 
-u8 sub_8068DC4(struct Sprite *sprite)
+u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite)
 {
     s16 duration[3] = {0x20, 0x20, 0x40};
     u8 shifts[3] = {1, 1, 2};

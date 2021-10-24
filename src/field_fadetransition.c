@@ -68,7 +68,7 @@ void WarpFadeInScreen(void)
     }
 }
 
-static void sub_807DBAC(void)
+static void WarpFadeInScreenWithDelay(void)
 {
     switch (MapTransitionIsExit(GetLastUsedWarpMapType(), GetCurrentMapType()))
     {
@@ -111,7 +111,7 @@ void WarpFadeOutScreen(void)
     }
 }
 
-static void sub_807DC70(void)
+static void sub_807DC70(void) // Unused
 {
     switch (MapTransitionIsEnter(GetCurrentMapType(), GetDestinationWarpMapHeader()->mapType))
     {
@@ -124,9 +124,9 @@ static void sub_807DC70(void)
     }
 }
 
-static void sub_807DCB0(bool8 arg)
+static void SetPlayerVisibility(bool8 visible)
 {
-    SetPlayerInvisibility(!arg);
+    SetPlayerInvisibility(!visible);
 }
 
 static void task0A_nop_for_a_while(u8 taskId)
@@ -135,7 +135,7 @@ static void task0A_nop_for_a_while(u8 taskId)
         DestroyTask(taskId);
 }
 
-void sub_807DCE4(void)
+void FieldCB_ContinueScriptUnionRoom(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
@@ -201,7 +201,7 @@ void FieldCB_ReturnToFieldCableLink(void)
     CreateTask(task_mpl_807DD60, 10);
 }
 
-static void sub_807DDF0(u8 taskId)
+static void Task_ReturnToFieldRecordMixing(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -220,7 +220,7 @@ static void sub_807DDF0(u8 taskId)
     case 2:
         if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
-            sub_8009FE8();
+            StartSendingKeysToLink();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -233,7 +233,7 @@ void FieldCB_ReturnToFieldWirelessLink(void)
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
     palette_bg_faded_fill_black();
-    CreateTask(sub_807DDF0, 10);
+    CreateTask(Task_ReturnToFieldRecordMixing, 10);
 }
 
 static void sub_807DE78(bool8 a0)
@@ -322,17 +322,17 @@ static void sub_807DFBC(u8 taskId)
     switch (task->data[0])
     {
     case 0: // Never reached
-        sub_807DCB0(0);
+        SetPlayerVisibility(0);
         FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         FieldSetDoorOpened(*x, *y);
         task->data[0] = 1;
         break;
     case 5:
-        sub_807DCB0(0);
+        SetPlayerVisibility(0);
         FreezeObjectEvents();
         DoOutwardBarnDoorWipe();
-        sub_807DBAC();
+        WarpFadeInScreenWithDelay();
         task->data[0] = 6;
         break;
     case 6:
@@ -349,7 +349,7 @@ static void sub_807DFBC(u8 taskId)
         if (!FieldIsDoorAnimationRunning())
         {
             PlayerGetDestCoords(&task->data[12], &task->data[13]);
-            sub_807DCB0(TRUE);
+            SetPlayerVisibility(TRUE);
             ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 8;
         }
@@ -373,7 +373,7 @@ static void sub_807DFBC(u8 taskId)
     case 1:
         if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
-            sub_807DCB0(TRUE);
+            SetPlayerVisibility(TRUE);
             ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 2;
         }
@@ -407,7 +407,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_807DCB0(0);
+        SetPlayerVisibility(0);
         FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         task->data[0] = 1;
@@ -415,7 +415,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
     case 1:
         if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
-            sub_807DCB0(TRUE);
+            SetPlayerVisibility(TRUE);
             ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
@@ -763,7 +763,7 @@ static void Task_DoorWarp(u8 taskId)
         {
             task->data[1] = FieldAnimateDoorClose(*xp, *yp - 1);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
-            sub_807DCB0(FALSE);
+            SetPlayerVisibility(FALSE);
             task->data[0] = 3;
         }
         break;

@@ -412,7 +412,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     AnimLoadCompressedBgGfx(animBg.bgId, gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimSpritePal_FlyingDirt, animBg.paletteId * 16, 32);
     if (IsContest())
-        sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+        RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
     if (gBattleAnimArgs[0] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         var0 = 1;
     gTasks[taskId].data[0] = var0;

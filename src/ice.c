@@ -946,7 +946,7 @@ void AnimTask_Haze1(u8 taskId)
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
     LoadPalette(&gDefaultWeatherSpritePalette, animBg.paletteId * 16, 32);
     if (IsContest())
-        sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+        RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
     gTasks[taskId].func = AnimTask_Haze2;
 }
 
@@ -1044,7 +1044,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
     LoadPalette(&gDefaultWeatherSpritePalette, animBg.paletteId * 16, 32);
     if (IsContest())
-        sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+        RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
     gTasks[taskId].data[15] = -1;
     gTasks[taskId].func = AnimTask_OverlayFogTiles;
 }

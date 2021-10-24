@@ -853,10 +853,11 @@ void sub_805C134(u8 direction)
 
 void PlayerRideWaterCurrent(u8 direction)
 {
-    PlayerSetAnimId(sub_8064008(direction), 2);
+    PlayerSetAnimId(GetRideWaterCurrentMovementAction(direction), 2);
 }
 
-void sub_805C164(u8 direction)
+// fastest speed (4 speed)
+void PlayerGoSpeed4(u8 direction)
 {
     PlayerSetAnimId(GetWalkFastestMovementAction(direction), 2);
 }
@@ -1612,7 +1613,7 @@ static void Task_StopSurfingInit(u8 taskId)
         if (!ObjectEventClearHeldMovementIfFinished(playerObjEvent))
             return;
     }
-    sub_80DC44C(playerObjEvent->fieldEffectSpriteId, 2);
+    SetSurfBlob_BobState(playerObjEvent->fieldEffectSpriteId, 2);
     QL_TryRecordPlayerStepWithDuration0(playerObjEvent, sub_80641EC((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
@@ -1861,7 +1862,7 @@ static bool8 Fishing11(struct Task *task)
             ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
             ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
             if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-                sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
+                SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
             gSprites[gPlayerAvatar.spriteId].x2 = 0;
             gSprites[gPlayerAvatar.spriteId].y2 = 0;
             ClearDialogWindowAndFrame(0, TRUE);
@@ -1919,7 +1920,7 @@ static bool8 Fishing15(struct Task *task)
         ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
         ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-            sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
+            SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
         gSprites[gPlayerAvatar.spriteId].x2 = 0;
         gSprites[gPlayerAvatar.spriteId].y2 = 0;
         task->tStep++;
@@ -1976,7 +1977,7 @@ void AlignFishingAnimationFrames(struct Sprite * playerSprite)
     if (animType == 10 || animType == 11)
         playerSprite->y2 = 8;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-        sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->y2);
+        SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->y2);
 }
 
 #define tState data[0]

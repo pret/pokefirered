@@ -568,7 +568,7 @@ static void Task_ReestablishLinkInCableClubRoom_2(u8 taskId)
     if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
     {
         sub_800A9A4();
-        sub_8009FE8();
+        StartSendingKeysToLink();
         DestroyTask(taskId);
     }
 }

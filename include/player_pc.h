@@ -23,7 +23,6 @@ extern struct PlayerPCItemPageStruct gPlayerPcMenuManager;
 
 // Exported ROM declarations
 
-void sub_816B060(u8 taskId);
 void NewGameInitPCItems(void);
 void Mailbox_ReturnToMailListAfterDeposit(void);
 

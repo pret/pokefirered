@@ -538,7 +538,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             if (gBattleControllerExecFlags & gBitTable[battlerId])
                 return;
             memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
-            sub_8017298(battlerId);
+            MarkBattlerReceivedLinkData(battlerId);
             if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
             {
                 gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ATTACKER];

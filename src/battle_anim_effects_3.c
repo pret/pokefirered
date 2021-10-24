@@ -1053,7 +1053,7 @@ const struct SpriteTemplate gUnknown_83FF704 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E3E84,
+    .callback = AnimUnusedItemBagSteal,
 };
 
 static const union AnimCmd sKnockOffStrikeAnimCmds[] =    
@@ -2293,7 +2293,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
         if (IsContest())
         {
-            sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+            RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
             gBattle_BG1_X = -56;
             gBattle_BG1_Y = 0;
         }
@@ -2474,7 +2474,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
                 
         if (IsContest())
         {
-            sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+            RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
             gBattle_BG1_X = -56;
             gBattle_BG1_Y = 0;
         }
@@ -3752,7 +3752,7 @@ static void AnimTask_FacadeColorBlendStep(u8 taskId)
 
 void AnimTask_StatusClearedEffect(u8 taskId)
 {
-    sub_80BBA20(taskId, 0, 0x1A0, gBattleAnimAttacker, gBattleAnimArgs[0], 10, 2, 30, gCureBubblesGfx, gCureBubblesTilemap, gCureBubblesPal);
+    StartMonScrollingBgMask(taskId, 0, 0x1A0, gBattleAnimAttacker, gBattleAnimArgs[0], 10, 2, 30, gCureBubblesGfx, gCureBubblesTilemap, gCureBubblesPal);
 }
 
 // Moves a noise line from the mon.
@@ -4983,7 +4983,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     }
 }
 
-void sub_80E3E84(struct Sprite *sprite)
+void AnimUnusedItemBagSteal(struct Sprite *sprite)
 {
     switch (sprite->data[7])
     {

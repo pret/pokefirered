@@ -6,7 +6,7 @@
 
 extern const u16 gUnknown_841F1C8[];
 
-void sub_814FFC4(u8 windowId, u8 frameType, u16 destOffset, u8 palIdx);
+void LoadWindowGfx(u8 windowId, u8 frameType, u16 destOffset, u8 palIdx);
 
 void sub_814FD04(u8 bgId, u16 destOffset, u8 palIdx)
 {
@@ -45,7 +45,7 @@ void sub_814FDF4(u8 bgId, u8 frameType, u16 destOffset, u8 palIdx)
 
 void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palIdx)
 {
-    sub_814FFC4(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palIdx);
+    LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palIdx);
 }
 
 void sub_814FE6C(u8 windowId, u16 destOffset, u8 palIdx)
@@ -82,7 +82,7 @@ void TextWindow_LoadTilesStdFrame1(u8 windowId, u16 destOffset)
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gStdFrame1, 0x280, destOffset);
 }
 
-void sub_814FFC4(u8 windowId, u8 frameType, u16 destOffset, u8 palIdx)
+void LoadWindowGfx(u8 windowId, u8 frameType, u16 destOffset, u8 palIdx)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gUserFrames[frameType].tiles, 0x120, destOffset);
     LoadPalette(gUserFrames[frameType].palette, palIdx, 32);
@@ -90,7 +90,7 @@ void sub_814FFC4(u8 windowId, u8 frameType, u16 destOffset, u8 palIdx)
 
 void TextWindow_SetUserSelectedFrame(u8 windowId, u16 destOffset, u8 palIdx)
 {
-    sub_814FFC4(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palIdx);
+    LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palIdx);
 }
 
 void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum)

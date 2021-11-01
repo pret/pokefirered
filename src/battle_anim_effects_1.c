@@ -40,11 +40,11 @@ static void AnimTask_LeafBladeStep2_Callback(struct Sprite *);
 static void AnimFlyingParticleStep(struct Sprite *);
 static void AnimNeedleArmSpikeStep(struct Sprite *);
 static void AnimSliceStep(struct Sprite *);
-static void sub_80A4880(struct Sprite *);
+static void AnimCirclingMusicNote_Step(struct Sprite *);
 static void AnimProtectStep(struct Sprite *);
 static void AnimMilkBottleStep1(struct Sprite *);
 static void AnimMilkBottleStep2(struct Sprite *, int, int);
-static void sub_80A4EA0(struct Sprite *);
+static void AnimBubbleBurst_Step(struct Sprite *);
 static void AnimSleepLetterZStep(struct Sprite *);
 static void AnimLockOnTargetStep1(struct Sprite *);
 static void AnimLockOnTargetStep2(struct Sprite *);
@@ -58,7 +58,7 @@ static void AnimBowMonStep2(struct Sprite *);
 static void AnimBowMonStep3(struct Sprite *);
 static void AnimBowMonStep4(struct Sprite *);
 static void AnimBowMonStep3_Callback(struct Sprite *);
-static void sub_80A55A0(struct Sprite *);
+static void AnimTipMon_Step(struct Sprite *);
 static void AnimTask_SkullBashPositionSet(u8);
 static void AnimTask_SkullBashPositionReset(u8);
 static void AnimFalseSwipeSliceStep1(struct Sprite *);
@@ -1093,7 +1093,7 @@ static const struct SpriteTemplate sUnknown_83E3194 =
     .anims = sUnknown_83E3190,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A43F8,
+    .callback = AnimSlidingHit,
 };
 
 // Unused
@@ -1105,7 +1105,7 @@ static const struct SpriteTemplate sUnknown_83E31AC =
     .anims = sUnknown_83E3190,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A43F8,
+    .callback = AnimSlidingHit,
 };
 
 static const union AffineAnimCmd sUnknown_83E31C4[] =
@@ -1177,7 +1177,7 @@ static const struct SpriteTemplate sUnknown_83E3264 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = sUnknown_83E3244,
-    .callback = sub_80A4494,
+    .callback = AnimFlickeringPunch,
 };
 
 static const union AnimCmd sCuttingSliceAnimCmds[] =
@@ -1299,7 +1299,7 @@ static const struct SpriteTemplate sUnknown_83E333C =
     .anims = sUnknown_83E3314,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A481C,
+    .callback = AnimCirclingMusicNote,
 };
 
 const struct SpriteTemplate gProtectWallSpriteTemplate =
@@ -1427,7 +1427,7 @@ static const struct SpriteTemplate sUnknown_83E3474 =
     .anims = sUnknown_83E346C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A4E40,
+    .callback = AnimBubbleBurst,
 };
 
 static const union AnimCmd sSleepLetterZAnimCmds[] =
@@ -1536,7 +1536,7 @@ static const struct SpriteTemplate sUnknown_83E3568 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A5590,
+    .callback = AnimTipMon,
 };
 
 static const union AnimCmd sSlashSliceAnimCmds1[] =
@@ -3714,7 +3714,7 @@ static void sub_80A43DC(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_80A43F8(struct Sprite* sprite)
+void AnimSlidingHit(struct Sprite* sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -3741,7 +3741,7 @@ void AnimWhipHit(struct Sprite* sprite)
     sprite->y += gBattleAnimArgs[1];
 }
 
-void sub_80A4494(struct Sprite* sprite)
+void AnimFlickeringPunch(struct Sprite* sprite)
 {
     sprite->x += gBattleAnimArgs[0];
     sprite->y += gBattleAnimArgs[1];
@@ -3890,7 +3890,7 @@ void sub_80A4738(struct Sprite* sprite)
     }
 }
 
-void sub_80A481C(struct Sprite* sprite)
+void AnimCirclingMusicNote(struct Sprite* sprite)
 {
     sprite->data[0] = gBattleAnimArgs[2];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -3902,11 +3902,11 @@ void sub_80A481C(struct Sprite* sprite)
     sprite->data[1] = -gBattleAnimArgs[3];
     sprite->y += gBattleAnimArgs[1];
     sprite->data[3] = gBattleAnimArgs[4];
-    sprite->callback = sub_80A4880;
+    sprite->callback = AnimCirclingMusicNote_Step;
     sprite->callback(sprite);
 }
 
-static void sub_80A4880(struct Sprite* sprite)
+static void AnimCirclingMusicNote_Step(struct Sprite* sprite)
 {
     sprite->x2 = Cos(sprite->data[0], 100);
     sprite->y2 = Sin(sprite->data[0], 20);
@@ -4148,7 +4148,7 @@ void AnimSparkingStars(struct Sprite* sprite)
     sprite->callback = TranslateSpriteLinearFixedPoint;
 }
 
-void sub_80A4E40(struct Sprite* sprite)
+void AnimBubbleBurst(struct Sprite* sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
@@ -4163,10 +4163,10 @@ void sub_80A4E40(struct Sprite* sprite)
         StartSpriteAnim(sprite, 1);
     }
 
-    sprite->callback = sub_80A4EA0;
+    sprite->callback = AnimBubbleBurst_Step;
 }
 
-static void sub_80A4EA0(struct Sprite* sprite)
+static void AnimBubbleBurst_Step(struct Sprite* sprite)
 {
     if (++sprite->data[0] > 30)
     {
@@ -4491,13 +4491,13 @@ static void AnimBowMonStep4(struct Sprite* sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_80A5590(struct Sprite *sprite)
+void AnimTipMon(struct Sprite *sprite)
 {
     sprite->data[0] = 0;
-    sprite->callback = sub_80A55A0;
+    sprite->callback = AnimTipMon_Step;
 }
 
-static void sub_80A55A0(struct Sprite *sprite)
+static void AnimTipMon_Step(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

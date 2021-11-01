@@ -1000,22 +1000,22 @@
 #define FLAG_0x3D5               0x3D5
 #define FLAG_0x3D6               0x3D6
 #define FLAG_0x3D7               0x3D7
-#define FLAG_MYSTERY_EVENT_DONE  0x3D8
-#define FLAG_0x3D9               0x3D9
-#define FLAG_0x3DA               0x3DA
-#define FLAG_0x3DB               0x3DB
-#define FLAG_0x3DC               0x3DC
-#define FLAG_0x3DD               0x3DD
-#define FLAG_0x3DE               0x3DE
-#define FLAG_0x3DF               0x3DF
-#define FLAG_0x3E0               0x3E0
-#define FLAG_0x3E1               0x3E1
-#define FLAG_0x3E2               0x3E2
-#define FLAG_0x3E3               0x3E3
-#define FLAG_0x3E4               0x3E4
-#define FLAG_0x3E5               0x3E5
-#define FLAG_0x3E6               0x3E6
-#define FLAG_0x3E7               0x3E7
+#define FLAG_MYSTERY_GIFT_DONE   0x3D8
+#define FLAG_MYSTERY_GIFT_1      0x3D9
+#define FLAG_MYSTERY_GIFT_2      0x3DA
+#define FLAG_MYSTERY_GIFT_3      0x3DB
+#define FLAG_MYSTERY_GIFT_4      0x3DC
+#define FLAG_MYSTERY_GIFT_5      0x3DD
+#define FLAG_MYSTERY_GIFT_6      0x3DE
+#define FLAG_MYSTERY_GIFT_7      0x3DF
+#define FLAG_MYSTERY_GIFT_8      0x3E0
+#define FLAG_MYSTERY_GIFT_9      0x3E1
+#define FLAG_MYSTERY_GIFT_10     0x3E2
+#define FLAG_MYSTERY_GIFT_11     0x3E3
+#define FLAG_MYSTERY_GIFT_12     0x3E4
+#define FLAG_MYSTERY_GIFT_13     0x3E5
+#define FLAG_MYSTERY_GIFT_14     0x3E6
+#define FLAG_MYSTERY_GIFT_15     0x3E7
 
 #define FLAG_HIDDEN_ITEMS_START 1000 // 0x3E8
 #define FLAG_HIDDEN_ITEM(map, item) (FLAG_HIDDEN_ITEMS_START + HIDDEN_ITEM_##map##_##item)

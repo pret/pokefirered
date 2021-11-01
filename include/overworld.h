@@ -122,7 +122,6 @@ void SetCurrentMapLayout(u16 mapLayoutId);
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 
 void ResetInitialPlayerAvatarState(void);
-void sub_8055D40(u16 mapLayoutId);
 void CleanupOverworldWindowsAndTilemaps(void);
 u32 ComputeWhiteOutMoneyLoss(void);
 

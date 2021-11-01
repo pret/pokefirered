@@ -18,7 +18,7 @@ void FadeInFromBlack(void);
 void FadeTransition_FadeInOnReturnToStartMenu(void);
 void WarpFadeInScreen(void);
 
-void sub_807DCE4(void);
+void FieldCB_ContinueScriptUnionRoom(void);
 
 bool32 FieldFadeTransitionBackgroundEffectIsFinished(void);
 void palette_bg_faded_fill_black(void);

@@ -38,14 +38,14 @@ sText_MysteryGiftStampCard: @ 8488E55
 
 MysteryEventScript_SurfPichu:: @ 8488EB5
 	setvaddress MysteryEventScript_SurfPichu
-	vgoto_if_unset FLAG_MYSTERY_EVENT_DONE, SurfPichu_GiveIfPossible
+	vgoto_if_unset FLAG_MYSTERY_GIFT_DONE, SurfPichu_GiveIfPossible
 	gotoram
 
 SurfPichu_GiveIfPossible: @ 8488EC4
 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
 	compare VAR_EVENT_PICHU_SLOT, PARTY_SIZE
 	vgoto_if_eq SurfPichu_FullParty
-	setflag FLAG_MYSTERY_EVENT_DONE
+	setflag FLAG_MYSTERY_GIFT_DONE
 	vcall SurfPichu_GiveEgg
 	lock
 	faceplayer
@@ -167,7 +167,7 @@ sText_MysteryGiftVisitingTrainer_2: @ 84891B0
 
 MysteryEventScript_BattleCard:: @ 84892B9
 	setvaddress MysteryEventScript_BattleCard
-	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
+	vgoto_if_set FLAG_MYSTERY_GIFT_DONE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, 2
 	specialvar VAR_0x8008, BattleCardAction
 	compare VAR_0x8008, 3
@@ -179,7 +179,7 @@ MysteryEventScript_BattleCard:: @ 84892B9
 	waitbuttonpress
 	giveitem ITEM_POTION
 	release
-	setflag FLAG_MYSTERY_EVENT_DONE
+	setflag FLAG_MYSTERY_GIFT_DONE
 	end
 
 MysteryEventScript_BattleCardInfo: @ 84892F6

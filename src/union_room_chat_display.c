@@ -115,7 +115,7 @@ static void LoadWin0(void);
 static void LoadWin2(void);
 static void LoadWin1(void);
 static void LoadWin3(void);
-static void sub_812AD50(void);
+static void InitScanlineEffect(void);
 static void FillScanlineEffectWithValue1col(s16 a0);
 static void FillScanlineEffectWithValue2col(s16 a0);
 
@@ -352,7 +352,7 @@ bool8 UnionRoomChat_TryAllocGraphicsWork(void)
         InitBgsFromTemplates(0, gUnknown_845AA84, NELEMS(gUnknown_845AA84));
         InitWindows(gUnknown_845AA94);
         ResetTempTileDataBuffers();
-        sub_812AD50();
+        InitScanlineEffect();
         InitWork(sWork);
         UnionRoomChat_ResetDisplaySubtasks();
         UnionRoomChat_StartDisplaySubtask(0, 0);
@@ -1312,7 +1312,7 @@ static void LoadWin3(void)
     LoadPalette(gTMCaseMainWindowPalette, 0xE0,  0x20);
 }
 
-static void sub_812AD50(void)
+static void InitScanlineEffect(void)
 {
     struct ScanlineEffectParams params;
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;

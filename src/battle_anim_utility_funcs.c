@@ -21,10 +21,10 @@ static void AnimTask_BlendSpriteColor_Step2(u8 taskId);
 static void Task_WaitHardwarePaletteFade(u8 taskId);
 static void Task_DoCloneBattlerSpriteWithBlend(u8 taskId);
 static void Task_FinishCloneBattlerSpriteWithBlend(struct Sprite *sprite);
-static void sub_80BAF38(u8 taskId);
-static void sub_80BB0D8(u8 taskId);
-static void sub_80BB2A0(u8 taskId);
-static void sub_80BB4B8(u8 taskId);
+static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId);
+static void StatsChangeAnimation_Step1(u8 taskId);
+static void StatsChangeAnimation_Step2(u8 taskId);
+static void StatsChangeAnimation_Step3(u8 taskId);
 static void sub_80BB6CC(u8 taskId);
 static void sub_80BB790(u32 selectedPalettes, u16 color);
 static void sub_80BB8A4(u8 taskId);
@@ -334,17 +334,17 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
     if (IsContest())
-        sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
+        RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_sheet, animBgData.tilesOffset);
     LoadPalette(sRgbWhite, animBgData.paletteId * 16 + 1, 2);
     gBattle_BG1_X = -gSprites[spriteId].x + 32;
     gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     gTasks[taskId].data[0] = newSpriteId;
     gTasks[taskId].data[6] = var0;
-    gTasks[taskId].func = sub_80BAF38;
+    gTasks[taskId].func = AnimTask_DrawFallingWhiteLinesOnAttacker_Step;
 }
 
-static void sub_80BAF38(u8 taskId)
+static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     struct Sprite *sprite;
@@ -387,17 +387,17 @@ static void sub_80BAF38(u8 taskId)
     }
 }
 
-void sub_80BB088(u8 taskId)
+void InitStatsChangeAnimation(u8 taskId)
 {
     u8 i;
 
     sAnimStatsChangeData = AllocZeroed(sizeof(struct AnimStatsChangeData));
     for (i = 0; i < 8; ++i)
         sAnimStatsChangeData->data[i] = gBattleAnimArgs[i];
-    gTasks[taskId].func = sub_80BB0D8;
+    gTasks[taskId].func = StatsChangeAnimation_Step1;
 }
 
-static void sub_80BB0D8(u8 taskId)
+static void StatsChangeAnimation_Step1(u8 taskId)
 {
     if (sAnimStatsChangeData->data[2] == 0)
         sAnimStatsChangeData->battler1 = gBattleAnimAttacker;
@@ -436,10 +436,10 @@ static void sub_80BB0D8(u8 taskId)
         sAnimStatsChangeData->species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
     else
         sAnimStatsChangeData->species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
-    gTasks[taskId].func = sub_80BB2A0;
+    gTasks[taskId].func = StatsChangeAnimation_Step2;
 }
 
-static void sub_80BB2A0(u8 taskId)
+static void StatsChangeAnimation_Step2(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     u8 spriteId, newSpriteId = 0;
@@ -458,7 +458,7 @@ static void sub_80BB2A0(u8 taskId)
     else
         AnimLoadCompressedBgTilemap(animBgData.bgId, gBattleStatMask2_Tilemap);
     if (IsContest())
-        sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
+        RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gBattleStatMask_Gfx, animBgData.tilesOffset);
     switch (sAnimStatsChangeData->data[1])
     {
@@ -514,16 +514,17 @@ static void sub_80BB2A0(u8 taskId)
     gTasks[taskId].data[3] = newSpriteId;
     gTasks[taskId].data[6] = sAnimStatsChangeData->higherPriority;
     gTasks[taskId].data[7] = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
-    gTasks[taskId].func = sub_80BB4B8;
+    gTasks[taskId].func = StatsChangeAnimation_Step3;
     if (sAnimStatsChangeData->data[0] == 0)
         PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
     else
         PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
 }
 
-static void sub_80BB4B8(u8 taskId)
+static void StatsChangeAnimation_Step3(u8 taskId)
 {
     gBattle_BG1_Y += gTasks[taskId].data[1];
+
     switch (gTasks[taskId].data[15])
     {
     case 0:
@@ -722,7 +723,7 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BBA20(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
     u16 species;
     u8 spriteId, newSpriteId = 0;
@@ -758,7 +759,7 @@ void sub_80BBA20(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     if (IsContest())
-        sub_80730C0(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
+        RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gfx, animBgData.tilesOffset);
     LoadCompressedPalette(palette, animBgData.paletteId * 16, 32);
     gBattle_BG1_X = 0;

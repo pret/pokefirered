@@ -2308,22 +2308,21 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
     }
 }
 
-void sub_80730C0(u16 a, u16 *b, s32 c, u8 d)
+void RelocateBattleBgPal(u16 paletteNum, u16 *dest, s32 offset, u8 largeScreen)
 {
-    u8 i, j;   
-    u32 var;
+    u8 i, j;
+    u32 size;
 
-    if (d == 0)
-        var = 32;
+    if (!largeScreen)
+        size = 32;
     else
-        var = 64;
-    
-    a <<= 12;
-    for (i = 0; i < var; i++)
+        size = 64;
+    paletteNum <<= 12;
+    for (i = 0; i < size; i++)
     {
         for (j = 0; j < 32; j++)
         {
-            b[32 * i + j] = ((b[32 * i + j] & 0xFFF) | a) + c;
+            dest[j + i * 32] = ((dest[j + i * 32] & 0xFFF) | paletteNum) + offset;
         }
     }
 }

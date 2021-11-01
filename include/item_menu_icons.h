@@ -20,8 +20,8 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
 void sub_80989A0(u16 itemId, u8 idx);
 void ItemMenuIcons_MoveInsertIndicatorBar(s16 x, u16 y);
 void ItemMenuIcons_ToggleInsertIndicatorBarVisibility(bool8 invisible);
-void sub_8098528(u8);
-void sub_8098580(void);
+void SetBagVisualPocketId(u8);
+void ShakeBagSprite(void);
 const void * GetItemIconGfxPtr(u16 itemId, u8 ptrId);
 void CreateBagOrSatchelSprite(u8 animNum);
 

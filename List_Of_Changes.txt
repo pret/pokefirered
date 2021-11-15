@@ -1,2 +1,6 @@
+// REVISION =1
 Game Freak Presents Intro Fix
+Pokedex Glitch Fix 
+
+// Others
 Constant Hidden Power - Power: 60

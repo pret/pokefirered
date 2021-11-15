@@ -8098,21 +8098,12 @@ static void atkC0_recoverbasedonsunlight(void)
 
 static void atkC1_hiddenpowercalc(void)
 {
-    s32 powerBits, typeBits;
-
-    powerBits = ((gBattleMons[gBattlerAttacker].hpIV & 2) >> 1)
-              | ((gBattleMons[gBattlerAttacker].attackIV & 2) << 0)
-              | ((gBattleMons[gBattlerAttacker].defenseIV & 2) << 1)
-              | ((gBattleMons[gBattlerAttacker].speedIV & 2) << 2)
-              | ((gBattleMons[gBattlerAttacker].spAttackIV & 2) << 3)
-              | ((gBattleMons[gBattlerAttacker].spDefenseIV & 2) << 4);
-    typeBits  = ((gBattleMons[gBattlerAttacker].hpIV & 1) << 0)
+    s32 typeBits = ((gBattleMons[gBattlerAttacker].hpIV & 1) << 0)
               | ((gBattleMons[gBattlerAttacker].attackIV & 1) << 1)
               | ((gBattleMons[gBattlerAttacker].defenseIV & 1) << 2)
               | ((gBattleMons[gBattlerAttacker].speedIV & 1) << 3)
               | ((gBattleMons[gBattlerAttacker].spAttackIV & 1) << 4)
               | ((gBattleMons[gBattlerAttacker].spDefenseIV & 1) << 5);
-    gDynamicBasePower = (40 * powerBits) / 63 + 30;
     gBattleStruct->dynamicMoveType = (15 * typeBits) / 63 + 1;
     if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
         ++gBattleStruct->dynamicMoveType;

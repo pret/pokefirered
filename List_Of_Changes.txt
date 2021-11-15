@@ -4,6 +4,7 @@ Pokedex Glitch Fix
 
 // Others
 Constant Hidden Power - Power: 60: src/ battle_script_commands.c > static void atkC1_hiddenpowercalc(void)
+Running Indoors: src/ bike.c > bool32 IsRunningDisallowed(u8 metatileBehavior)
 
 // Needing put in
 physical/special/status split
@@ -13,7 +14,6 @@ bw repel system
 poison survival
 evolve without national dex
 evolution via happiness
-running indoors @next
 evs cap to 252 @next
 vitamins cap to 252
 metric system update

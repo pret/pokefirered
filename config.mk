@@ -1,7 +1,7 @@
 # Default variables
 
 GAME_VERSION  ?= FIRERED
-GAME_REVISION ?= 0
+GAME_REVISION ?= 1
 GAME_LANGUAGE ?= ENGLISH
 MODERN        ?= 0
 COMPARE       ?= 0

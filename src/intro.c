@@ -122,7 +122,7 @@ static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * 
 static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite);
 static void LoadFightSceneSpriteTilesAndPals(void);
 #if REVISION >= 1
-static void Rev1_GameFreakScene_CreatePresentsText(void); @Game Freak Presents Fix
+static void Rev1_GameFreakScene_CreatePresentsText(void);
 #else
 #define Rev1_GameFreakScene_CreatePresentsText()
 #endif

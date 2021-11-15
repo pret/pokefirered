@@ -4,3 +4,56 @@ Pokedex Glitch Fix
 
 // Others
 Constant Hidden Power - Power: 60
+
+// Needing put in
+physical/special/status split
+unhidden power
+nature colors
+bw repel system
+poison survival
+evolve without national dex
+evolution via happiness
+running indoors @next
+evs cap to 252 @next
+vitamins cap to 252
+metric system update
+emerald style gender select intro
+critical hit probability
+sleep update
+paralysis update
+burn update @next
+save fix
+text speed - fast / sound - stereo
+remove flashbacks @next
+mew obey fix @next
+roaming pokemon iv fix
+really tall grass e micro grass fix
+wild pokemon use AI scripts @next
+binding moves update @next
+disable update @next
+spite update @next
+protection moves fix/update @next
+encore update @next
+taunt update @next
+blizzard update @next
+effects update
+volt tackle by breeding
+light ball update
+altering cave
+hail weather fix
+movement type hidden (0C) fix @next
+exp on catch a mon
+tm's reusaveis
+hm's deletabeis @next
+trainers with evs
+ev reducing berries
+replaces weight comparison screen
+exp block by badge @next
+full exp for participating in a battle
+no healing eggs @next
+pc boxes use more wallpapers @next
+gen 6 shiny base rate
+mart price lenght increase
+eggs hatck at level 1 @next
+safari ball like in the classic anime
+ability pill

@@ -3,7 +3,7 @@ Game Freak Presents Intro Fix
 Pokedex Glitch Fix 
 
 // Others
-Constant Hidden Power - Power: 60
+Constant Hidden Power - Power: 60: src/ battle_script_commands.c > static void atkC1_hiddenpowercalc(void)
 
 // Needing put in
 physical/special/status split

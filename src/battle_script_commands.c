@@ -780,6 +780,18 @@ static const u16 sMovesForbiddenToCopy[] =
     METRONOME_FORBIDDEN_END
 };
 
+static const u8 sExpBlockLevels[] =
+{
+    100, 
+    20,
+    250, 
+    40,
+    500, 
+    60,
+    1000,
+    80,
+};
+
 static const u8 sFlailHpScaleToPowerTable[] =
 {
     1, 200,
@@ -3145,7 +3157,7 @@ static void atk23_getexp(void)
                 for(i=0;FlagGet(FLAG_BADGE01_GET+i) && i!=8;i++) {
                 }
                 if (i!=8)
-                viaExpShare=gExpBlockLevels(i);
+                viaExpShare=sExpBlockLevels(i);
                 
                 if (i!=8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare) {
                     

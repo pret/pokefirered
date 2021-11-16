@@ -3157,7 +3157,7 @@ static void atk23_getexp(void)
                 for(i=0;FlagGet(FLAG_BADGE01_GET+i) && i!=8;i++) {
                 }
                 if (i!=8)
-                viaExpShare=sExpBlockLevels(i);
+                viaExpShare=sExpBlockLevels[i];
                 
                 if (i!=8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare) {
                     

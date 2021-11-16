@@ -782,14 +782,14 @@ static const u16 sMovesForbiddenToCopy[] =
 
 static const u8 sExpBlockLevels[] =
 {
-    100, 
-    20,
-    250, 
-    40,
-    500, 
-    60,
-    1000,
-    80,
+    16, //badge 1
+    20, //badge 2
+    25, //badge 3
+    30, //badge 4
+    35, //badge 5
+    40, //badge 6
+    45, //badge 7
+    50, //badge 8
 };
 
 static const u8 sFlailHpScaleToPowerTable[] =

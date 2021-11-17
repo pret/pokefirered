@@ -3158,11 +3158,8 @@ static void atk23_getexp(void)
             else 
                 for(i=0;FlagGet(FLAG_BADGE01_GET+i) && i!=8;i++) {
                 }
-                if (i!=8)
-                viaExpShare=sExpBlockLevels[i];
-                
                 if (i!=8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare) {
-                    
+                    viaExpShare=sExpBlockLevels[i];
                   *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0;

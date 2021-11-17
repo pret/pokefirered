@@ -1,2 +1,1 @@
-#define EXP_BLOCK TRUE
-#define 
+#define EXP_BLOCK TRUE //if true go to src/ battle_script_commands.c and edit 

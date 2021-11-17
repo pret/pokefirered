@@ -5,6 +5,7 @@ Pokedex Glitch Fix
 // Others
 Constant Hidden Power - Power: 60: src/ battle_script_commands.c > static void atkC1_hiddenpowercalc(void)
 Running Indoors: src/ bike.c > bool32 IsRunningDisallowed(u8 metatileBehavior)
+Exp Block By Badge: src/ battle_script_commands.c > 
 
 // Needing put in
 physical/special/status split
@@ -48,7 +49,6 @@ hm's deletabeis @next
 trainers with evs
 ev reducing berries
 replaces weight comparison screen
-exp block by badge @next
 full exp for participating in a battle
 no healing eggs @next
 pc boxes use more wallpapers @next

@@ -3154,7 +3154,7 @@ static void atk23_getexp(void)
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
- #if EXP_BLOCK == TRUE
+ #if EXP_BLOCK
             else 
                 for(i=0;FlagGet(FLAG_BADGE01_GET+i) && i!=8;i++) {
                 }

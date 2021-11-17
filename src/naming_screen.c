@@ -1405,7 +1405,7 @@ static bool8 KeyboardKeyHandler_Character(u8 event)
             sNamingScreenData->state = MAIN_STATE_MOVE_TO_OK_BUTTON;
         }
 #if PAGE_SWAP
-        else if (GetPreviousTextCaretPosition() == 0 && sNamingScreenData->currentPage == KBPAGE_LETTERS_LOWER) {
+        else if (GetTextCaretPosition() == 1 && sNamingScreenData->currentPage == KBPAGE_LETTERS_LOWER) {
             sNamingScreenData->state = MAIN_STATE_START_PAGE_SWAP;
         }
 #endif

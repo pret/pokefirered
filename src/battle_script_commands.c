@@ -37,6 +37,7 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/maps.h"
+#include "constants/inserts.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -3153,6 +3154,7 @@ static void atk23_getexp(void)
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
+ #if EXP_BLOCK == TRUE
             else 
                 for(i=0;FlagGet(FLAG_BADGE01_GET+i) && i!=8;i++) {
                 }
@@ -3164,8 +3166,9 @@ static void atk23_getexp(void)
                   *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0;
-                
-                } else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+                }
+  #endif           
+                 else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;

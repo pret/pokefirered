@@ -23,7 +23,7 @@
 #include "constants/help_system.h"
 #include "constants/songs.h"
 #include "constants/event_objects.h"
-#include "constants/inserts"
+#include "constants/inserts.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 

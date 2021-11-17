@@ -5,7 +5,7 @@ Pokedex Glitch Fix
 // Others
 Constant Hidden Power - Power: 60: src/ battle_script_commands.c > static void atkC1_hiddenpowercalc(void)
 Running Indoors: src/ bike.c > bool32 IsRunningDisallowed(u8 metatileBehavior)
-Exp Block By Badge: src/ battle_script_commands.c > 
+Exp Block By Badge: src/ battle_script_commands.c > static void atk23_getexp(void)
 
 // Needing put in
 physical/special/status split

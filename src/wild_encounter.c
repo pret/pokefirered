@@ -593,6 +593,7 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
+            gSpecialVar_ItemId = steps;
             ScriptContext1_SetupScript(EventScript_RepelWoreOff);
             return TRUE;
         }

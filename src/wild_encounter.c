@@ -15,6 +15,7 @@
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
+#include "constants/inserts.h"
 
 struct WildEncounterData
 {
@@ -593,7 +594,9 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
+ #if BW_REPEL_SYSTEM
             gSpecialVar_ItemId = steps;
+ #endif
             ScriptContext1_SetupScript(EventScript_RepelWoreOff);
             return TRUE;
         }

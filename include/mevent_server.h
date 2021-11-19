@@ -100,8 +100,8 @@ struct mevent_srv_common
     u32 cmdidx;
     const struct mevent_server_cmd * cmdBuffer;
     void * recvBuffer;
-    struct MEWonderCardData * card;
-    struct MEWonderNewsData * news;
+    struct WonderCard * card;
+    struct WonderNews * news;
     struct MEventClientHeaderStruct * mevent_unk1442cc;
     void * sendBuffer1;
     u32 sendBuffer1Size;

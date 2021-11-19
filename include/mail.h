@@ -22,6 +22,6 @@
 
 #define ITEM_TO_MAIL(itemId) (itemId - FIRST_MAIL_IDX)
 
-void ReadMail(struct MailStruct * mail, void (*savedCallback)(void), bool8 messageExists);
+void ReadMail(struct Mail * mail, void (*savedCallback)(void), bool8 messageExists);
 
 #endif // GUARD_MAIL_H

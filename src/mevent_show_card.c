@@ -17,8 +17,8 @@ struct MEventScreenMgr_02DC
 
 struct MEventScreenMgr
 {
-    /*0000*/ struct MEWonderCardData wonderCard;
-    /*014c*/ struct MEventBuffer_3430_Sub buff3430Sub;
+    /*0000*/ struct WonderCard wonderCard;
+    /*014c*/ struct WonderCardMetadata buff3430Sub;
     /*0170*/ const struct UnkStruct_8467FB8 * bgSpec;
     /*0174*/ u8 state;
     /*0175*/ u8 recordIdx;
@@ -134,7 +134,7 @@ static const struct UnkStruct_8467FB8 sCardGfxPtrs[8] = {
     {1, 0, 0, 7, sCard7Gfx, sCard7Map, sCard7Pal}
 };
 
-bool32 InitWonderCardResources(struct MEWonderCardData * card, struct MEventBuffer_3430_Sub * b3430sub)
+bool32 InitWonderCardResources(struct WonderCard * card, struct WonderCardMetadata * b3430sub)
 {
     if (card == NULL || b3430sub == NULL)
         return FALSE;
@@ -143,13 +143,13 @@ bool32 InitWonderCardResources(struct MEWonderCardData * card, struct MEventBuff
         return FALSE;
     sMEventScreenData->wonderCard = *card;
     sMEventScreenData->buff3430Sub = *b3430sub;
-    if (sMEventScreenData->wonderCard.unk_08_2 >= NELEMS(sCardGfxPtrs))
-        sMEventScreenData->wonderCard.unk_08_2 = 0;
-    if (sMEventScreenData->wonderCard.unk_08_0 >= NELEMS(sTextYCoords))
-        sMEventScreenData->wonderCard.unk_08_0 = 0;
-    if (sMEventScreenData->wonderCard.recvMonCapacity > NELEMS(sMEventScreenData->cardIconAndShadowSprites))
-        sMEventScreenData->wonderCard.recvMonCapacity = 0;
-    sMEventScreenData->bgSpec = &sCardGfxPtrs[sMEventScreenData->wonderCard.unk_08_2];
+    if (sMEventScreenData->wonderCard.bgType >= NELEMS(sCardGfxPtrs))
+        sMEventScreenData->wonderCard.bgType = 0;
+    if (sMEventScreenData->wonderCard.type >= NELEMS(sTextYCoords))
+        sMEventScreenData->wonderCard.type = 0;
+    if (sMEventScreenData->wonderCard.maxStamps > NELEMS(sMEventScreenData->cardIconAndShadowSprites))
+        sMEventScreenData->wonderCard.maxStamps = 0;
+    sMEventScreenData->bgSpec = &sCardGfxPtrs[sMEventScreenData->wonderCard.bgType];
     return TRUE;
 }
 
@@ -282,24 +282,24 @@ static void sub_8145A98(void)
     u16 r6;
     u16 sp0[3] = {0, 0, 0};
 
-    memcpy(sMEventScreenData->title, sMEventScreenData->wonderCard.unk_0A, 40);
+    memcpy(sMEventScreenData->title, sMEventScreenData->wonderCard.titleText, 40);
     sMEventScreenData->title[40] = EOS;
-    memcpy(sMEventScreenData->subtitle, sMEventScreenData->wonderCard.unk_32, 40);
+    memcpy(sMEventScreenData->subtitle, sMEventScreenData->wonderCard.subtitleText, 40);
     sMEventScreenData->subtitle[40] = EOS;
-    if (sMEventScreenData->wonderCard.unk_04 > 999999)
-        sMEventScreenData->wonderCard.unk_04 = 999999;
-    ConvertIntToDecimalStringN(sMEventScreenData->unk_01DD, sMEventScreenData->wonderCard.unk_04, STR_CONV_MODE_LEFT_ALIGN, 6);
+    if (sMEventScreenData->wonderCard.idNumber > 999999)
+        sMEventScreenData->wonderCard.idNumber = 999999;
+    ConvertIntToDecimalStringN(sMEventScreenData->unk_01DD, sMEventScreenData->wonderCard.idNumber, STR_CONV_MODE_LEFT_ALIGN, 6);
     for (i = 0; i < 4; i++)
     {
-        memcpy(sMEventScreenData->mainMessageLines[i], sMEventScreenData->wonderCard.unk_5A[i], 40);
+        memcpy(sMEventScreenData->mainMessageLines[i], sMEventScreenData->wonderCard.bodyText[i], 40);
         sMEventScreenData->mainMessageLines[i][40] = EOS;
     }
-    memcpy(sMEventScreenData->instructionsLine1, sMEventScreenData->wonderCard.unk_FA, 40);
+    memcpy(sMEventScreenData->instructionsLine1, sMEventScreenData->wonderCard.footerLine1Text, 40);
     sMEventScreenData->instructionsLine1[40] = EOS;
-    switch (sMEventScreenData->wonderCard.unk_08_0)
+    switch (sMEventScreenData->wonderCard.type)
     {
         case 0:
-            memcpy(sMEventScreenData->instructionsLine2, sMEventScreenData->wonderCard.unk_122, 40);
+            memcpy(sMEventScreenData->instructionsLine2, sMEventScreenData->wonderCard.footerLine2Text, 40);
             sMEventScreenData->instructionsLine2[40] = EOS;
             break;
         case 1:
@@ -307,9 +307,9 @@ static void sub_8145A98(void)
             break;
         case 2:
             sMEventScreenData->instructionsLine2[00] = EOS;
-            sp0[0] = sMEventScreenData->buff3430Sub.linkWins < 999 ? sMEventScreenData->buff3430Sub.linkWins : 999;
-            sp0[1] = sMEventScreenData->buff3430Sub.linkLosses < 999 ? sMEventScreenData->buff3430Sub.linkLosses : 999;
-            sp0[2] = sMEventScreenData->buff3430Sub.linkTrades < 999 ? sMEventScreenData->buff3430Sub.linkTrades : 999;
+            sp0[0] = sMEventScreenData->buff3430Sub.battlesWon < 999 ? sMEventScreenData->buff3430Sub.battlesWon : 999;
+            sp0[1] = sMEventScreenData->buff3430Sub.battlesLost < 999 ? sMEventScreenData->buff3430Sub.battlesLost : 999;
+            sp0[2] = sMEventScreenData->buff3430Sub.numTrades < 999 ? sMEventScreenData->buff3430Sub.numTrades : 999;
             for (i = 0; i < 8; i++)
             {
                 memset(sMEventScreenData->recordStrings[i].numberTxt, EOS, 4);
@@ -317,14 +317,14 @@ static void sub_8145A98(void)
             }
             for (i = 0, r6 = 0; i < 40; i++)
             {
-                if (sMEventScreenData->wonderCard.unk_122[i] != CHAR_DYNAMIC_PLACEHOLDER)
+                if (sMEventScreenData->wonderCard.footerLine2Text[i] != CHAR_DYNAMIC_PLACEHOLDER)
                 {
-                    sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nameTxt[r6] = sMEventScreenData->wonderCard.unk_122[i];
+                    sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nameTxt[r6] = sMEventScreenData->wonderCard.footerLine2Text[i];
                     r6++;
                 }
                 else
                 {
-                    u8 r3 = sMEventScreenData->wonderCard.unk_122[i + 1];
+                    u8 r3 = sMEventScreenData->wonderCard.footerLine2Text[i + 1];
                     if (r3 > 2)
                     {
                         i += 2;
@@ -332,7 +332,7 @@ static void sub_8145A98(void)
                     else
                     {
                         ConvertIntToDecimalStringN(sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].numberTxt, sp0[r3], STR_CONV_MODE_LEADING_ZEROS, 3);
-                        sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nDigits = sMEventScreenData->wonderCard.unk_122[i + 2];
+                        sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nDigits = sMEventScreenData->wonderCard.footerLine2Text[i + 2];
                         sMEventScreenData->recordIdx++;
                         if (sMEventScreenData->recordIdx > 7)
                             break;
@@ -360,7 +360,7 @@ static void sub_8145D18(u8 whichWindow)
             if (x < 0)
                 x = 0;
             AddTextPrinterParameterized3(windowId, 3, x, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->subtitle);
-            if (sMEventScreenData->wonderCard.unk_04 != 0)
+            if (sMEventScreenData->wonderCard.idNumber != 0)
             {
                 AddTextPrinterParameterized3(windowId, 2, 166, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->unk_01DD);
             }
@@ -373,15 +373,15 @@ static void sub_8145D18(u8 whichWindow)
             }
             break;
         case 2:
-            AddTextPrinterParameterized3(windowId, 3, 0, sTextYCoords[sMEventScreenData->wonderCard.unk_08_0], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine1);
-            if (sMEventScreenData->wonderCard.unk_08_0 != 2)
+            AddTextPrinterParameterized3(windowId, 3, 0, sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine1);
+            if (sMEventScreenData->wonderCard.type != 2)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 + sTextYCoords[sMEventScreenData->wonderCard.unk_08_0], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine2);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 + sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine2);
             }
             else
             {
                 s32 x = 0;
-                s32 y = sTextYCoords[sMEventScreenData->wonderCard.unk_08_0] + 16;
+                s32 y = sTextYCoords[sMEventScreenData->wonderCard.type] + 16;
                 s32 spacing = GetFontAttribute(3, 2);
                 for (; sp0C < sMEventScreenData->recordIdx; sp0C++)
                 {
@@ -403,23 +403,23 @@ static void sub_8146060(void)
 {
     u8 r7 = 0;
     sMEventScreenData->monIconId = 0xFF;
-    if (sMEventScreenData->buff3430Sub.unk_06 != SPECIES_NONE)
+    if (sMEventScreenData->buff3430Sub.iconSpecies != SPECIES_NONE)
     {
-        sMEventScreenData->monIconId = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sMEventScreenData->buff3430Sub.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
+        sMEventScreenData->monIconId = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sMEventScreenData->buff3430Sub.iconSpecies), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
         gSprites[sMEventScreenData->monIconId].oam.priority = 2;
     }
-    if (sMEventScreenData->wonderCard.recvMonCapacity != 0 && sMEventScreenData->wonderCard.unk_08_0 == 1)
+    if (sMEventScreenData->wonderCard.maxStamps != 0 && sMEventScreenData->wonderCard.type == 1)
     {
         LoadCompressedSpriteSheetUsingHeap(&sShadowSpriteSheet);
         LoadSpritePalette(&sShadowSpritePalettes[sMEventScreenData->bgSpec->index]);
-        for (; r7 < sMEventScreenData->wonderCard.recvMonCapacity; r7++)
+        for (; r7 < sMEventScreenData->wonderCard.maxStamps; r7++)
         {
             sMEventScreenData->cardIconAndShadowSprites[r7][0] = 0xFF;
             sMEventScreenData->cardIconAndShadowSprites[r7][1] = 0xFF;
             sMEventScreenData->cardIconAndShadowSprites[r7][0] = CreateSprite(&sShadowSpriteTemplate, 0xd8 - 32 * r7, 0x90, 8);
-            if (sMEventScreenData->buff3430Sub.distributedMons[0][r7] != 0)
+            if (sMEventScreenData->buff3430Sub.stampData[0][r7] != 0)
             {
-                sMEventScreenData->cardIconAndShadowSprites[r7][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sMEventScreenData->buff3430Sub.distributedMons[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
+                sMEventScreenData->cardIconAndShadowSprites[r7][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sMEventScreenData->buff3430Sub.stampData[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
                 gSprites[sMEventScreenData->cardIconAndShadowSprites[r7][1]].oam.priority = 2;
             }
         }
@@ -431,9 +431,9 @@ static void sub_81461D8(void)
     u8 r6 = 0;
     if (sMEventScreenData->monIconId != 0xFF)
         DestroyMonIcon(&gSprites[sMEventScreenData->monIconId]);
-    if (sMEventScreenData->wonderCard.recvMonCapacity != 0 && sMEventScreenData->wonderCard.unk_08_0 == 1)
+    if (sMEventScreenData->wonderCard.maxStamps != 0 && sMEventScreenData->wonderCard.type == 1)
     {
-        for (; r6 < sMEventScreenData->wonderCard.recvMonCapacity; r6++)
+        for (; r6 < sMEventScreenData->wonderCard.maxStamps; r6++)
         {
             if (sMEventScreenData->cardIconAndShadowSprites[r6][0] != 0xFF)
             {

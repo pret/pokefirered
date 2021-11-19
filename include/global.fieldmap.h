@@ -1,8 +1,6 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#define OBJECT_EVENTS_COUNT 16
-
 #define METATILE_BEHAVIOR_MASK 0x00FF
 #define METATILE_COLLISION_MASK 0x0C00
 #define METATILE_ID_MASK 0x03FF
@@ -63,7 +61,7 @@ struct Tileset
     /*0x08*/ void *palettes;
     /*0x0c*/ void *metatiles;
     /*0x10*/ TilesetCB callback;
-    /*0x14*/ void *metatileAttributes;
+    /*0x14*/ u32 *metatileAttributes;
 };
 
 struct MapLayout
@@ -134,7 +132,6 @@ struct BgEvent
             u32 isUnderfoot:1;
         } hiddenItemStr;
         u32 hiddenItem;
-        u32 secretBaseId;
     } bgUnion;
 };
 
@@ -144,7 +141,6 @@ struct MapEvents
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
-
     struct ObjectEventTemplate *objectEvents;
     struct WarpEvent *warps;
     struct CoordEvent *coordEvents;
@@ -177,19 +173,14 @@ struct MapHeader
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
+               // fields correspond to the arguments in the map_header_flags macro
     /* 0x18 */ bool8 bikingAllowed;
-    /* 0x19 */ u8 flags;
+    /* 0x19 */ bool8 allowEscaping:1; // Escape Rope and Dig
+               bool8 allowRunning:1;
+               bool8 showMapName:6; // the last 5 bits are unused
     /* 0x1A */ s8 floorNum;
     /* 0x1B */ u8 battleType;
 };
-
-// Flags for gMapHeader.flags, as defined in the map_header_flags macro
-#define MAP_ALLOW_ESCAPE_ROPE  (1 << 0)
-#define MAP_ALLOW_RUN          (1 << 1)
-#define MAP_SHOW_MAP_NAME      (1 << 2)
-#define UNUSED_MAP_FLAGS       (1 << 3 | 1 << 4 | 1 << 5 | 1 << 6 | 1 << 7)
-
-#define SHOW_MAP_NAME_ENABLED  ((gMapHeader.flags & (MAP_SHOW_MAP_NAME | UNUSED_MAP_FLAGS)) == MAP_SHOW_MAP_NAME)
 
 struct ObjectEvent
 {
@@ -319,7 +310,7 @@ enum
     COLLISION_STOP_SURFING,
     COLLISION_LEDGE_JUMP,
     COLLISION_PUSHED_BOULDER,
-    COLLISION_UNKNOWN_WARP_6C_6D_6E_6F,
+    COLLISION_ROTATING_GATE,
     COLLISION_WHEELIE_HOP,
     COLLISION_ISOLATED_VERTICAL_RAIL,
     COLLISION_ISOLATED_HORIZONTAL_RAIL,
@@ -344,7 +335,7 @@ enum
     T_TILE_CENTER, // player is on a frame in which they are centered on a tile during which the player either stops or keeps their momentum and keeps going, changing direction if necessary.
 };
 
-struct PlayerAvatar /* 0x202E858 */
+struct PlayerAvatar
 {
     /*0x00*/ u8 flags;
     /*0x01*/ u8 transitionFlags; // used to be bike, but it's not that in Emerald and probably isn't here either. maybe transition flags?

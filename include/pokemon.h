@@ -254,6 +254,9 @@ extern const struct BattleMove gBattleMoves[];
 #define FLAG_SNATCH_AFFECTED        0x8
 #define FLAG_MIRROR_MOVE_AFFECTED   0x10
 #define FLAG_KINGSROCK_AFFECTED     0x20
+#define MOVE_PHYSICAL               0x0
+#define MOVE_SPECIAL                0x1
+#define MOVE_STATUS                 0x2
 
 struct SpindaSpot
 {

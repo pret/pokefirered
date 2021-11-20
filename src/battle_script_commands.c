@@ -1083,7 +1083,10 @@ static void atk01_accuracycheck(void)
 
         if (move == MOVE_NONE)
             move = gCurrentMove;
-        GET_MOVE_TYPE(move, type);
+        if (gBattleStruct->dynamicMoveType)                     
+        type = gBattleStruct->dynamicMoveType & 0x3F;    
+    else                                                   
+        type = gBattleMoves[move].split; 
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))
             return;
         if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)

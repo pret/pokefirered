@@ -241,6 +241,9 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
+    u8 unused1;
+    u8 split;
+    u8 unused2;
 };
 
 extern const struct BattleMove gBattleMoves[];

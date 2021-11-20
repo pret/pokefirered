@@ -1763,7 +1763,7 @@ static void atk0C_datahpupdate(void)
         else if (!(gBattleStruct->dynamicMoveType & 0x40))
             moveType = gBattleStruct->dynamicMoveType & 0x3F;
         else
-            moveType = gBattleMoves[gCurrentMove].type;
+            moveType = gBattleMoves[gCurrentMove].split;
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);

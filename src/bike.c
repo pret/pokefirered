@@ -180,7 +180,7 @@ static void BikeTransition_MoveDirection(u8 direction)
             else if (collision != COLLISION_STOP_SURFING
                   && collision != COLLISION_LEDGE_JUMP
                   && collision != COLLISION_PUSHED_BOULDER
-                  && collision != COLLISION_ROTATING_GATE)
+                  && collision != COLLISION_DIRECTIONAL_STAIR_WARP)
                 PlayerOnBikeCollide(direction);
         }
         else

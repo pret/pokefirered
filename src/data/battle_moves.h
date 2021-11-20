@@ -11,6 +11,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = 0,
+        .unused1 = 0;
+        .split = MOVE_PHYSICAL
+        .unused2 = 0;
     },
 
     [MOVE_POUND] =

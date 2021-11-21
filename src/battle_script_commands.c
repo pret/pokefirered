@@ -1077,7 +1077,7 @@ static void atk01_accuracycheck(void)
     }
     else
     {
-        u8 type, moveAcc, holdEffect, param;
+        u8 type, moveAcc, holdEffect, param, movesplit;
         s8 buff;
         u16 calc;
 
@@ -1086,7 +1086,8 @@ static void atk01_accuracycheck(void)
         if (gBattleStruct->dynamicMoveType)                     
         type = gBattleStruct->dynamicMoveType & 0x3F;    
     else                                                   
-        type = gBattleMoves[move].split; 
+        type = gBattleMoves[move].type; 
+        movesplit = gBattleMoves[move].split;
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))
             return;
         if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
@@ -1115,7 +1116,7 @@ static void atk01_accuracycheck(void)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & WEATHER_SANDSTORM_ANY)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(movesplit))
             calc = (calc * 80) / 100; // 1.2 hustle loss
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
         {

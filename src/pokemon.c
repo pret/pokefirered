@@ -2532,7 +2532,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             damage = (damage / damageHelper);
             damage /= 50;
     }
-        if ((sideStatus & split+1) && gCritMultiplier == 1) {
+        if (sideStatus & (split+1) && gCritMultiplier == 1) {
             if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
              damage = 2 * (damage / 3);
             else

@@ -1756,7 +1756,8 @@ static void atk0B_healthbarupdate(void)
 static void atk0C_datahpupdate(void)
 {
     u32 moveType;
-
+    u8 movesplit;
+    
     if (!gBattleControllerExecFlags)
     {
         if (gBattleStruct->dynamicMoveType == 0)
@@ -1764,7 +1765,8 @@ static void atk0C_datahpupdate(void)
         else if (!(gBattleStruct->dynamicMoveType & 0x40))
             moveType = gBattleStruct->dynamicMoveType & 0x3F;
         else
-            moveType = gBattleMoves[gCurrentMove].split;
+            moveType = gBattleMoves[gCurrentMove].type;
+            movesplit = gBattleMoves[gCurrentMove].split;
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
@@ -1830,7 +1832,7 @@ static void atk0C_datahpupdate(void)
                     }
                     if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                         gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
-                    if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                    if (IS_TYPE_PHYSICAL(movesplit) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                     {
                         gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                         gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -1845,7 +1847,7 @@ static void atk0C_datahpupdate(void)
                             gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                         }
                     }
-                    else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                    else if (!IS_TYPE_PHYSICAL(movesplit) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     {
                         gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                         gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;

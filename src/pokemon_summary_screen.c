@@ -139,6 +139,8 @@ static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 
+static const u32 sSplitIconGfx[] = INCBIN_U32("graphics/new/PssSplit.4bpp.lz");
+
 struct PokemonSummaryScreenData
 {
     u16 bg1TilemapBuffer[0x800];
@@ -4243,6 +4245,20 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
         sMoveSelectionCursorObjs[i]->sprite->invisible = invisible;
 }
 
+static void DisplayMoveSplitIcon(void)
+{
+    u8 split;
+	
+if (sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] != MOVE_NONE)
+{
+	
+   split = gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].split;
+CpuSet(sSplitIconGfx + (split * 64), 0x06001800, 48);
+CpuSet(sSplitIconGfx + (split * 64) + 96, 0x06001800 + 0x1E0, 48);
+	
+}
+}
+
 static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)
 {
     u8 i;
@@ -4259,6 +4275,7 @@ static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)
     {
         if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
         {
+	    DisplayMoveSplitIcon();
             sMoveSelectionCursorObjs[0]->sprite->invisible = FALSE;
             sMoveSelectionCursorObjs[1]->sprite->invisible = FALSE;
         }

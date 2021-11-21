@@ -34,6 +34,8 @@
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
 #include "berry_fix/payload/asm/libagbsyscall.s"
+#include "graphics.h"
+#include "gpu_regs.h"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
@@ -141,7 +143,7 @@ static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 static void DisplayMoveSplitIcon(void);
 
-static const u32 sSplitIconGfx[] = INCBIN_U32("graphics/new/PssSplit.4bpp.lz");
+static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplit.4bpp");
 
 struct PokemonSummaryScreenData
 {

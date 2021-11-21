@@ -33,7 +33,6 @@
 #include "battle_interface.h"
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
-#include "berry_fix/payload/asm/libagbsyscall.s"
 #include "graphics.h"
 #include "gpu_regs.h"
 

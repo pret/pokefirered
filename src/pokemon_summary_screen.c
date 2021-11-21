@@ -138,6 +138,7 @@ static void PokeSum_DestroyMonMarkingsSprite(void);
 static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
+static void DisplayMoveSplitIcon(void);
 
 static const u32 sSplitIconGfx[] = INCBIN_U32("graphics/new/PssSplit.4bpp.lz");
 

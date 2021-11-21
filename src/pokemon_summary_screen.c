@@ -4252,13 +4252,14 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
 static void DisplayMoveSplitIcon(void)
 {
     u8 split;
+    u32 arg2 = 0x06001800;
 	
 if (sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] != MOVE_NONE)
 {
 	
    split = gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].split;
-CpuSet(sSplitIconGfx + (split * 64), 0x06001800, 48);
-CpuSet(sSplitIconGfx + (split * 64) + 96, 0x06001800 + 0x1E0, 48);
+CpuSet(sSplitIconGfx + (split * 64), arg2, 48);
+CpuSet(sSplitIconGfx + (split * 64) + 96, arg2 + 0x1E0, 48);
 	
 }
 }

@@ -2472,9 +2472,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;             
-    if (WEATHER_HAS_EFFECT && (gBattleWeather & (WEATHER_SANDSTORM_ANY)) && gBattleMons[defender].type1 == TYPE_ROCK || gBattleMons[defender].type2 == TYPE_ROCK)
+    if (WEATHER_HAS_EFFECT && (gBattleWeather & (WEATHER_SANDSTORM_ANY)) && IS_BATTLER_OF_TYPE(battlerIdDef, TYPE_ROCK))
         spDefense += spDefense / 2;
-    if ((gBattleWeather & (WEATHER_SANDSTORM_ANY)) && gBattleMons[defender].type1 == TYPE_ROCK || gBattleMons[defender].type2 == TYPE_ROCK)    
+    if ((gBattleWeather & (WEATHER_SANDSTORM_ANY)) && IS_BATTLER_OF_TYPE(battlerIdDef, TYPE_ROCK))    
             spAttack = (100 * spAttack) / 150;
     if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             damage /= 2;

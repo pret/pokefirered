@@ -2344,7 +2344,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 split;
     u16 attack, defense;
     u16 spAttack, spDefense;
-    u16 final;
     u8 defenderHoldEffect;
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;

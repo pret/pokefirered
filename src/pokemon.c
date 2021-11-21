@@ -2498,90 +2498,64 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     {
         if (gCritMultiplier == 2)
         {
-            if (defender->statStages[STAT_ATK] > 6)
-                APPLY_STAT_MOD(damage, defender, attack, STAT_ATK)
-        }
-        else
-            APPLY_STAT_MOD(damage, defender, attack, STAT_ATK)
-
-        damage = damage * gBattleMovePower;
-        damage *= (2 * attacker->level / 5 + 2);
-    }
-    
-    //3f3f8
-    if () 
-        if (IS_TYPE_SPECIAL(type))
-    {
-        if (gCritMultiplier == 2)
-        {
             if (attacker->statStages[STAT_SPATK] > 6)
                 APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-            else
-                damage = spAttack;
         }
         else
             APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
-
+    }
+    if (split == MOVE_SPECIAL) 
+    {
         if (gCritMultiplier == 2)
         {
             if (defender->statStages[STAT_SPDEF] < 6)
                 APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-            else
-                damageHelper = spDefense;
         }
         else
             APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-
-        damage = (damage / damageHelper);
-        damage /= 50;
-
-        if ((sideStatus & SIDE_STATUS_LIGHTSCREEN) && gCritMultiplier == 1)
-        {
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-                damage = 2 * (damage / 3);
-            else
-                damage /= 2;
+            
+            damage = (damage / damageHelper);
+            damage /= 50;
         }
-
-    
-    
-    
-    
+    if (split == MOVE_PHYSICAL) 
+    {
     if (gCritMultiplier == 2)
         {
-            if (attacker->statStages[STAT_SPATK] > 6)
-                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-        
-    if (split != MOVE_PHYSICAL)
-        APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK
-    else
-        if ((sideStatus & SIDE_STATUS_REFLECT) && gCritMultiplier == 1)
-        {
+            if (defender->statStages[STAT_DEF] < 6)
+                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+        }
+        else
+            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+            
+            damage = (damage / damageHelper);
+            damage /= 50;
+    }
+        if ((sideStatus & split+1) && gCritMultiplier == 1) {
             if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-                damage = 2 * (damage / 3);
+             damage = 2 * (damage / 3);
             else
                 damage /= 2;
-        }
-
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-            damage /= 2;
-
-        // moves always do at least 1 damage.
-        if (damage == 0)
-            damage = 1;
-    }
-
-    if (type == TYPE_MYSTERY)
-        damage = 0; // is ??? type. does 0 damage.
-
-
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-            damage /= 2;
-
-        // are effects of weather negated with cloud nine or air lock
+            }
+          i = 1;
+          if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) {
+             if (gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) > i)
+                damage -= damage / 4;
+             if (gBattleMoves[move].target == 50) {
+                 i = 2;
+                if (gBattleMoves[move].effect != EFFECT_EXPLOSION) {
+                    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > i)
+                        damage -= damage / 4;
+                } else {
+                  i =3;
+                    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > i)
+                        damage -= damage / 4;
+                 }    
+              }
+          }
+    // are effects of weather negated with cloud nine or air lock
         if (WEATHER_HAS_EFFECT2)
         {
             if (gBattleWeather & WEATHER_RAIN_TEMPORARY)
@@ -2598,7 +2572,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
 
             // any weather except sun weakens solar beam
-            if ((gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            if ((gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL)) && 
+                gCurrentMove == MOVE_SOLAR_BEAM)
                 damage /= 2;
 
             // sunny
@@ -2615,15 +2590,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 }
             }
         }
-
-        // flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+    // flash fire triggered
+        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && 
+            type == TYPE_FIRE)
             damage = (15 * damage) / 10;
-    }
-
-    return damage + 2;
-}
-
+    
+    return damage + 2;     
+}   
+ 
 u8 CountAliveMonsInBattle(u8 caseId)
 {
     s32 i;

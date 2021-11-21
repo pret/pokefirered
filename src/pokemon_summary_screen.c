@@ -33,6 +33,7 @@
 #include "battle_interface.h"
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
+#berry_fix "payload/asm/libagbsyscall.s"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);

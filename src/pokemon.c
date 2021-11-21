@@ -2341,8 +2341,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     s32 damage = 0;
     s32 damageHelper;
     u8 type;
+    u8 split;
     u16 attack, defense;
     u16 spAttack, spDefense;
+    u16 final;
     u8 defenderHoldEffect;
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
@@ -2353,6 +2355,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     else
         gBattleMovePower = powerOverride;
 
+    split = gBattleMoves[move].split;
+    
     if (!typeOverride)
         type = gBattleMoves[move].type;
     else
@@ -2419,7 +2423,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
         {
-            if (IS_TYPE_PHYSICAL(type))
+            if (split == MOVE_PHYSICAL)
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
             else
                 spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
@@ -2443,8 +2447,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defense *= 2;
     if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
-    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
+    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE)) {
         spAttack /= 2;
+        attack /= 2;
+    }
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -2466,61 +2472,45 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_WATER && attacker->ability == ABILITY_TORRENT && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
-        defense /= 2;
-
-    if (IS_TYPE_PHYSICAL(type))
+        gBattleMovePower = (150 * gBattleMovePower) / 100;             
+    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY && IS_BATTLER_OF_TYPE(defender, TYPE_ROCK))
+        spDefense += spDefense / 2;
+    if (gBattleWeather & WEATHER_SANDSTORM_ANY && IS_BATTLER_OF_TYPE(defender, TYPE_ROCK)) 
+        spAttack = (100 * spAttack) / 150;
+    if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
+            damage /= 2;
+   
+        if (split == MOVE_PHYSICAL)
     {
         if (gCritMultiplier == 2)
         {
             if (attacker->statStages[STAT_ATK] > 6)
                 APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-            else
-                damage = attack;
         }
         else
             APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
 
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
-
+            
+        }
+    if (split == MOVE_SPECIAL) 
+    {
         if (gCritMultiplier == 2)
         {
-            if (defender->statStages[STAT_DEF] < 6)
-                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-            else
-                damageHelper = defense;
+            if (defender->statStages[STAT_ATK] > 6)
+                APPLY_STAT_MOD(damage, defender, attack, STAT_ATK)
         }
         else
-            APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+            APPLY_STAT_MOD(damage, defender, attack, STAT_ATK)
 
-        damage = damage / damageHelper;
-        damage /= 50;
-
-        if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
-            damage /= 2;
-
-        if ((sideStatus & SIDE_STATUS_REFLECT) && gCritMultiplier == 1)
-        {
-            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-                damage = 2 * (damage / 3);
-            else
-                damage /= 2;
-        }
-
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
-            damage /= 2;
-
-        // moves always do at least 1 damage.
-        if (damage == 0)
-            damage = 1;
+        damage = damage * gBattleMovePower;
+        damage *= (2 * attacker->level / 5 + 2);
     }
-
-    if (type == TYPE_MYSTERY)
-        damage = 0; // is ??? type. does 0 damage.
-
-    if (IS_TYPE_SPECIAL(type))
+    
+    //3f3f8
+    if () 
+        if (IS_TYPE_SPECIAL(type))
     {
         if (gCritMultiplier == 2)
         {
@@ -2555,6 +2545,38 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             else
                 damage /= 2;
         }
+
+    
+    
+    
+    
+    if (gCritMultiplier == 2)
+        {
+            if (attacker->statStages[STAT_SPATK] > 6)
+                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
+        
+    if (split != MOVE_PHYSICAL)
+        APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK
+    else
+        if ((sideStatus & SIDE_STATUS_REFLECT) && gCritMultiplier == 1)
+        {
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
+                damage = 2 * (damage / 3);
+            else
+                damage /= 2;
+        }
+
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
+            damage /= 2;
+
+        // moves always do at least 1 damage.
+        if (damage == 0)
+            damage = 1;
+    }
+
+    if (type == TYPE_MYSTERY)
+        damage = 0; // is ??? type. does 0 damage.
+
 
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;

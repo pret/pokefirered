@@ -24,10 +24,13 @@ CpuFastSet: @ 81E3B60
 	thumb_func_end CpuFastSet
 
 	thumb_func_start CpuSet
+	thumb_func_start CpuSet2
 CpuSet: @ 81E3B64
+CpuSet2:
 	svc 0xB
 	bx lr
 	thumb_func_end CpuSet
+        thumb_func_end CpuSet2
 
 	thumb_func_start Div
 Div: @ 81E3B68

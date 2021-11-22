@@ -33,8 +33,6 @@
 #include "battle_interface.h"
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
-#include "graphics.h"
-#include "gpu_regs.h"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
@@ -4247,19 +4245,20 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
     for (i = 0; i < 4; i++)
         sMoveSelectionCursorObjs[i]->sprite->invisible = invisible;
 }
-
+//Pss Split Icon Loader Function
 static void DisplayMoveSplitIcon(void)
 {
-    u8 split;
+    u16 split;
     u32 arg2 = 0x06001800;
 	
 if (sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] != MOVE_NONE)
 {
 	
    split = gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].split;
-CpuSet(sSplitIconGfx + (split * 64), arg2, 48);
-CpuSet(sSplitIconGfx + (split * 64) + 96, arg2 + 0x1E0, 48);
-	
+	split = (split * 3) * 64;
+	CpuSet2(sSplitIconGfx + split, arg2, 48);
+        CpuSet2(sSplitIconGfx + split + 96, arg2 + 0x1E0, 48);
+
 }
 }
 

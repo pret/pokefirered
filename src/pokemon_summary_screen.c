@@ -140,7 +140,7 @@ static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 static void DisplayMoveSplitIcon(void);
 
-static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplit.4bpp");
+static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplitIcon.4bpp");
 
 struct PokemonSummaryScreenData
 {

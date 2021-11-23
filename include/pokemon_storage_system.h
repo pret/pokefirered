@@ -37,5 +37,6 @@ void Cb2_ReturnToPSS(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer);
+u8 CountPartyNonEggMons(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

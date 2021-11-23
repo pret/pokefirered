@@ -8,6 +8,7 @@ Running Indoors: src/ bike.c > bool32 IsRunningDisallowed(u8 metatileBehavior)
 Exp Block By Badge: src/ battle_script_commands.c > static void atk23_getexp(void)
 Automatic Swap Page On Naming Screen: src/ naming_screen.c > static bool8 KeyboardKeyHandler_Character(u8 event)
 Physical/Special/Status Split: src/ 
+No Healing Eggs: src/ 
 
 // Needing put in
 unhidden power
@@ -51,7 +52,6 @@ trainers with evs
 ev reducing berries
 replaces weight comparison screen
 full exp for participating in a battle
-no healing eggs @next
 pc boxes use more wallpapers @next
 gen 6 shiny base rate
 mart price lenght increase

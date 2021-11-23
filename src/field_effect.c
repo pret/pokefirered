@@ -27,6 +27,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
+#include "pokemon_storage_system.h"
 
 extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -715,7 +716,11 @@ bool8 FldEff_PokecenterHeal(void)
     u8 nPokemon;
     struct Task * task;
 
+#if NO_HEAL_EGGS
+    nPokemon = CountPartyNonEggMons();
+#else
     nPokemon = CalculatePlayerPartyCount();
+#endif
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
     task->data[1] = nPokemon;
     task->data[2] = 0x5d;

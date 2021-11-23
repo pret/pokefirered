@@ -28,6 +28,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "pokemon_storage_system.h"
+#include "constants/inserts.h"
 
 extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];

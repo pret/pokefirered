@@ -3,12 +3,17 @@ Game Freak Presents Intro Fix
 Pokedex Glitch Fix 
 
 // Others
-Constant Hidden Power - Power: 60: src/ battle_script_commands.c > static void atkC1_hiddenpowercalc(void)
-Running Indoors: src/ bike.c > bool32 IsRunningDisallowed(u8 metatileBehavior)
-Exp Block By Badge: src/ battle_script_commands.c > static void atk23_getexp(void)
-Automatic Swap Page On Naming Screen: src/ naming_screen.c > static bool8 KeyboardKeyHandler_Character(u8 event)
-Physical/Special/Status Split: src/ 
-No Healing Eggs: src/ 
+// Can't Be Turned On/Off
+Constant Hidden Power - Power: 60
+Running Indoors
+Physical/Special/Status Split
+
+// Can Be Turned On/Off
+// To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h
+Exp Block By Badge
+Automatic Swap Page On Naming Screen
+No Healing Eggs
+Eggs Hatch At Level 1
 
 // Needing put in
 unhidden power
@@ -55,6 +60,5 @@ full exp for participating in a battle
 pc boxes use more wallpapers @next
 gen 6 shiny base rate
 mart price lenght increase
-eggs hatck at level 1 @next
 safari ball like in the classic anime
 ability pill

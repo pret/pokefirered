@@ -5195,7 +5195,7 @@ static void atk5C_hitanimation(void)
         gBattlescriptCurrInstr += 2;
     }
     else if (!(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE)
-          || !(gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE)
+          || !SubsBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove)
           || gDisableStructs[gActiveBattler].substituteHP == 0)
     {
         BtlController_EmitHitAnimation(0);

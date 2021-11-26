@@ -1242,6 +1242,12 @@
 	.byte 0xf7
 	.endm
 
+@new commands
+        .macro jumpifsubstituteblocks ptr:req
+	.byte 0xfb
+	.4byte \ptr
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES

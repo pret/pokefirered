@@ -38,6 +38,7 @@
 #include "constants/pokemon.h"
 #include "constants/maps.h"
 #include "constants/inserts.h"
+#include "constants/sound_moves_table.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -1601,8 +1602,9 @@ static void Unused_ApplyRandomDmgMultiplier(void)
 
 static bool8 MakesSound(u16 move)
 {
-    for (u16* currmove = gSoundMovesTable; *currmove != 0xFFFF; ++currmove) {
-        if (*currmove == move) 
+    s32 i;
+    for (i = 0; gSoundMovesTable[i] != 0xFFFF; ++i) {
+        if (gSoundMovesTable[i] == move) 
             return TRUE;
     }
     return FALSE;
@@ -1612,7 +1614,7 @@ static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move)
 {
 if (!(gBattleMons[defender].status2 & STATUS2_SUBSTITUTE))
         return FALSE;
-else if (MakesSound(move))
+else if (!MakesSound(move))
         return FALSE;
 //add check for infiltrator here
 else

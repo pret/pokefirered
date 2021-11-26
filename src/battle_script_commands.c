@@ -9441,5 +9441,5 @@ static void atkFB_jumpifsubstituteblocks(void)
 if (SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)) 
     gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 else
-    gBattlescriptCurrInstr +=5;
+    gBattlescriptCurrInstr += 5;
 }

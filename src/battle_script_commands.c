@@ -56,6 +56,7 @@ static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
+static bool8 MakesSound(u16 move);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -1598,9 +1599,24 @@ static void Unused_ApplyRandomDmgMultiplier(void)
     ApplyRandomDmgMultiplier();
 }
 
+static bool8 MakesSound(u16 move)
+{
+    for (u16* curr_move = sSoundMovesTable; *curr_move != 0xFFFF; ++curr_move) {
+        if (*curr_move == move) 
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move) 
 {
-
+if (!(gBattleMons[defender].status2 & STATUS2_SUBSTITUTE))
+        return FALSE;
+else if (MakesSound(move))
+        return FALSE;
+//add check for infiltrator here
+else
+        return TRUE;
 }
 
 static void atk07_adjustnormaldamage(void)

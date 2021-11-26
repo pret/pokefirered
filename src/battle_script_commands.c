@@ -1601,8 +1601,8 @@ static void Unused_ApplyRandomDmgMultiplier(void)
 
 static bool8 MakesSound(u16 move)
 {
-    for (u16* curr_move = sSoundMovesTable; *curr_move != 0xFFFF; ++curr_move) {
-        if (*curr_move == move) 
+    for (u16* currmove = gSoundMovesTable; *currmove != 0xFFFF; ++currmove) {
+        if (*currmove == move) 
             return TRUE;
     }
     return FALSE;

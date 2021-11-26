@@ -309,6 +309,7 @@ static void atkF4_subattackerhpbydmg(void);
 static void atkF5_removeattackerstatus1(void);
 static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
+static void atkFB_jumpifsubstituteblocks(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -560,6 +561,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF5_removeattackerstatus1,
     atkF6_finishaction,
     atkF7_finishturn,
+    atkFB_jumpifsubstituteblocks,
 };
 
 struct StatFractions
@@ -9432,4 +9434,14 @@ static void atkF7_finishturn(void)
 {
     gCurrentActionFuncId = B_ACTION_FINISHED;
     gCurrentTurnActionNumber = gBattlersCount;
+}
+
+static void atkFB_jumpifsubstituteblocks(void)
+{
+if () 
+
+
+
+
+
 }

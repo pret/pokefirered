@@ -26,6 +26,7 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
+#include "constants/sound_moves_table.h"
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {

@@ -7400,7 +7400,7 @@ static void atkA4_trysetencore(void)
 
 static void atkA5_painsplitdmgcalc(void)
 {
-    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE))
+    if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
     {
         s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
         s32 painSplitHp = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hpDiff;

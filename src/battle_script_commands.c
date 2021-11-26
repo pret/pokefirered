@@ -1623,7 +1623,7 @@ static void atk07_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (!SubsBlockMove(gBattlerTarget, gBattlerAttacker, gCurrentMove)
+    if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)
      && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
      && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {

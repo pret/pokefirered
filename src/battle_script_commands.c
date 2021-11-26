@@ -55,6 +55,7 @@ static void DrawLevelUpWindow2(void);
 static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
+static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 

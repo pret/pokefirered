@@ -1787,10 +1787,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_MOVES_BLOCK: // 2
             if (gLastUsedAbility == ABILITY_SOUNDPROOF)
             {
-                for (i = 0; sSoundMovesTable[i] != 0xFFFF; ++i)
-                    if (sSoundMovesTable[i] == moveArg)
+                for (i = 0; gSoundMovesTable[i] != 0xFFFF; ++i)
+                    if (gSoundMovesTable[i] == moveArg)
                         break;
-                if (sSoundMovesTable[i] != 0xFFFF)
+                if (gSoundMovesTable[i] != 0xFFFF)
                 {
                     if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
                         gHitMarker |= HITMARKER_NO_PPDEDUCT;

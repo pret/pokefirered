@@ -1753,7 +1753,7 @@ static void atk0B_healthbarupdate(void)
         {
             gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
-            if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+            if (SubsBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove) && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
             {
                 PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, gActiveBattler);
             }
@@ -1794,7 +1794,7 @@ static void atk0C_datahpupdate(void)
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-            if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+            if (SubsBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove) && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
             {
                 if (gDisableStructs[gActiveBattler].substituteHP >= gBattleMoveDamage)
                 {

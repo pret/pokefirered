@@ -7,6 +7,7 @@ Pokedex Glitch Fix
 Constant Hidden Power - Power: 60
 Running Indoors
 Physical/Special/Status Split
+Sound Moves Bypass Substitute
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h

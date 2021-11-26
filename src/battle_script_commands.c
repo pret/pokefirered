@@ -1597,6 +1597,11 @@ static void Unused_ApplyRandomDmgMultiplier(void)
     ApplyRandomDmgMultiplier();
 }
 
+static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move) 
+{
+
+}
+
 static void atk07_adjustnormaldamage(void)
 {
     u8 holdEffect, param;
@@ -1618,7 +1623,7 @@ static void atk07_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+    if (!SubsBlockMove(gBattlerTarget, gBattlerAttacker, gCurrentMove)
      && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
      && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {

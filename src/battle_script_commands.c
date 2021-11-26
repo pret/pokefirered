@@ -2176,7 +2176,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
         ++gBattlescriptCurrInstr;
         return;
     }
-    if (gBattleMons[gEffectBattler].status2 & STATUS2_SUBSTITUTE
+    if (SubsBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove)
      && affectsUser != MOVE_EFFECT_AFFECTS_USER)
     {
         ++gBattlescriptCurrInstr;

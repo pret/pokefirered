@@ -9438,10 +9438,8 @@ static void atkF7_finishturn(void)
 
 static void atkFB_jumpifsubstituteblocks(void)
 {
-if () 
-
-
-
-
-
+if (SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)) 
+    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+else
+    gBattlescriptCurrInstr +=5;
 }

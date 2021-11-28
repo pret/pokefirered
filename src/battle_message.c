@@ -1704,8 +1704,11 @@ void BufferStringBattle(u16 stringId)
         if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_ID_ADDER)
         {
             if (stringId == STRINGID_SETWORDSTRING) {
-                
-            
+                stringPtr = gSetWordLoc;
+                if (stringPtr == 0 || stringPtr >= 0xA000000 || stringPtr < 0x8000000) {
+                    stringId = STRINGID_TRAINER1LOSETEXT;
+                    stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_ID_ADDER];
+                }
             }
             else
             {

@@ -309,6 +309,7 @@ static void atkF4_subattackerhpbydmg(void);
 static void atkF5_removeattackerstatus1(void);
 static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
+static void atkF8_callasm(void);
 static void atkFB_jumpifsubstituteblocks(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
@@ -561,6 +562,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF5_removeattackerstatus1,
     atkF6_finishaction,
     atkF7_finishturn,
+    atkF8_callasm,
     atkFB_jumpifsubstituteblocks,
 };
 
@@ -9441,6 +9443,17 @@ static void atkF7_finishturn(void)
 {
     gCurrentActionFuncId = B_ACTION_FINISHED;
     gCurrentTurnActionNumber = gBattlersCount;
+}
+
+static void atkF8_callasm(void)
+{
+	u32 ptr = (u32) T1_READ_PTR(gBattlescriptCurrInstr + 1);
+	ptr |= 1;
+
+	void (*func)(void) = (void (*)(void)) ptr;
+	func();
+
+	gBattlescriptCurrInstr += 5;
 }
 
 static void atkFB_jumpifsubstituteblocks(void)

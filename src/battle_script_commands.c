@@ -9455,10 +9455,9 @@ static void atkF7_finishturn(void)
 static void atkF8_callasm(void)
 {
 	u32 ptr = (u32) gCallAsmCommandTablePointers[T2_READ_PTR(gBattlescriptCurrInstr + 1)];
+	gBattlescriptCurrInstr += 3;
 	
         ExecuteFunc(ptr);
-
-	gBattlescriptCurrInstr += 3;
 }
 
 static void atkFB_jumpifsubstituteblocks(void)
@@ -9468,3 +9467,23 @@ if (SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
 else
     gBattlescriptCurrInstr += 5;
 }
+
+static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
+
+//callasm command asm's
+static void DoAftermathDamageAsm(void)
+{
+	if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
+  {
+    gSetWordLoc = sAftermathString;
+    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+    if (gBattleMoveDamage == 0)
+      gBattleMoveDamage = 1;
+  }
+	else
+	gBattlescriptCurrInstr = BattleScript_FaintTargetReturn;	
+}
+
+
+
+

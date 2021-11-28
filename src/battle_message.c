@@ -1703,8 +1703,15 @@ void BufferStringBattle(u16 stringId)
     default: // load a string from the table
         if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_ID_ADDER)
         {
+            if (stringId == STRINGID_SETWORDSTRING) {
+                
+            
+            }
+            else
+            {
             gDisplayedStringBattle[0] = EOS;
             return;
+            }
         }
         else
         {

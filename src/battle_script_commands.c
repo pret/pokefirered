@@ -43,7 +43,11 @@
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
-static const u8 
+
+static const u8 *const gCallAsmCommandTablePointers[] =
+{
+    [DoAftermathDamage] = DoAftermathDamageAsm,
+};
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -59,6 +63,7 @@ static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 static bool8 MakesSound(u16 move);
+static void DoAftermathDamageAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -9448,13 +9453,11 @@ static void atkF7_finishturn(void)
 
 static void atkF8_callasm(void)
 {
-	u32 ptr = (u32) T1_READ_PTR(gBattlescriptCurrInstr + 1);
-	ptr |= 1;
+	u32 ptr = (u32) gCallAsmCommandTablePointers[T1_READ_PTR(gBattlescriptCurrInstr + 1)];
+	
+        ExecuteFunc(ptr);
 
-	void (*func)(void) = (void (*)(void)) ptr;
-	func();
-
-	gBattlescriptCurrInstr += 5;
+	gBattlescriptCurrInstr += 3;
 }
 
 static void atkFB_jumpifsubstituteblocks(void)

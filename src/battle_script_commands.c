@@ -1614,11 +1614,8 @@ static bool8 MakesSound(u16 move)
 
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move) 
 {
-if (!(gBattleMons[defender].status2 & STATUS2_SUBSTITUTE))
+if (!(gBattleMons[defender].status2 & STATUS2_SUBSTITUTE) || MakesSound(move)) //add check for infiltrator here
         return FALSE;
-else if (MakesSound(move))
-        return FALSE;
-//add check for infiltrator here
 else
         return TRUE;
 }

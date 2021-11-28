@@ -2829,8 +2829,21 @@ BattleScript_FaintTarget::
 	cleareffectsonfaint BS_TARGET
 	printstring STRINGID_TARGETFAINTED
 	printstring STRINGID_EMPTYSTRING3
+	jumpifhasnohp BS_ATTACKER, BattleScript_FaintTargetReturn
+        jumpifability BS_TARGET, ABILITY_AFTERMATH, BattleScript_TryAftermathDamage
+BattleScript_FaintTargetReturn::
 	return
 
+BattleScript_TryAftermathDamage::
+        jumpifabilitypresent ABILITY_DAMP, BattleScript_FaintTargetReturn
+	callasm DoAftermathDamage
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+        tryfaintmon BS_ATTACKER, 0, NULL
+	return
+	
 BattleScript_GiveExp::
 	setbyte sGIVEEXP_STATE, 0
 	getexp BS_TARGET

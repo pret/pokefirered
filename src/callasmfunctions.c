@@ -43,5 +43,15 @@
 
 void DoAftermathDamage(void)
 {
-
+  if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
+  {
+    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+    if (gBattleMoveDamage == 0)
+      gBattleMoveDamage = 1;
+  }
+  else
+  gBattlescriptCurrInstr = BattleScript_FaintTargetReturn - 5;
 }
+
+
+

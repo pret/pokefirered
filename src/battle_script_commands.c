@@ -9453,7 +9453,7 @@ static void atkF7_finishturn(void)
 
 static void atkF8_callasm(void)
 {
-	u32 ptr = (u32) gCallAsmCommandTablePointers[T1_READ_PTR(gBattlescriptCurrInstr + 1)];
+	u32 ptr = (u32) gCallAsmCommandTablePointers[T2_READ_PTR(gBattlescriptCurrInstr + 1)];
 	
         ExecuteFunc(ptr);
 

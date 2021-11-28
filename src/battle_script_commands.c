@@ -39,6 +39,7 @@
 #include "constants/maps.h"
 #include "constants/inserts.h"
 #include "constants/sound_moves_table.h"
+#include "constants/callasm_functions.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 

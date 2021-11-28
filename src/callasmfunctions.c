@@ -41,11 +41,14 @@
 #include "constants/sound_moves_table.h"
 #include "constants/callasmfunctions.h"
 
+static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
+
 void DoAftermathDamage(void)
 {
   if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
   {
     gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+    gSetWordLoc = sAftermathString;
     if (gBattleMoveDamage == 0)
       gBattleMoveDamage = 1;
   }

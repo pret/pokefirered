@@ -1243,6 +1243,11 @@
 	.endm
 
 @new commands
+        .macro callasm ptr:req
+	.byte 0xf8
+	.4byte \ptr
+	.endm
+	 
         .macro jumpifsubstituteblocks ptr:req
 	.byte 0xfb
 	.4byte \ptr

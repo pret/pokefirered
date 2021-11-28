@@ -719,5 +719,6 @@ extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
+extern const u8 *gSetWordLoc;
 
 #endif // GUARD_BATTLE_H

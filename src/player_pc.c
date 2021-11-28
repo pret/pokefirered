@@ -442,7 +442,7 @@ static void PCMailCompaction(void)
         {
             if (gSaveBlock1Ptr->mail[i].itemId == ITEM_NONE)
             {
-                struct MailStruct mail = gSaveBlock1Ptr->mail[i];
+                struct Mail mail = gSaveBlock1Ptr->mail[i];
                 gSaveBlock1Ptr->mail[i] = gSaveBlock1Ptr->mail[j];
                 gSaveBlock1Ptr->mail[j] = mail;
             }
@@ -629,7 +629,7 @@ static void Task_MoveToBagYesNoMenuHandleInput(u8 taskId)
 
 static void Task_TryPutMailInBag_DestroyMsgIfSuccessful(u8 taskId)
 {
-    struct MailStruct * mail = &SELECTED_MAIL;
+    struct Mail * mail = &SELECTED_MAIL;
     if (!AddBagItem(mail->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, 2, gText_BagIsFull, Task_PlayerPcExitMailSubmenu);

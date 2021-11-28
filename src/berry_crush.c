@@ -1061,31 +1061,31 @@ static void SaveResults(void)
     switch (sGame->playerCount)
     {
     case 2:
-        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
+        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.pressingSpeeds[0])
         {
             sGame->newRecord = TRUE;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = sGame->pressingSpeed;
+            gSaveBlock2Ptr->berryCrush.pressingSpeeds[0] = sGame->pressingSpeed;
         }
         break;
     case 3:
-        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
+        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.pressingSpeeds[1])
         {
             sGame->newRecord = TRUE;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = sGame->pressingSpeed;
+            gSaveBlock2Ptr->berryCrush.pressingSpeeds[1] = sGame->pressingSpeed;
         }
         break;
     case 4:
-        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
+        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.pressingSpeeds[2])
         {
             sGame->newRecord = TRUE;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = sGame->pressingSpeed;
+            gSaveBlock2Ptr->berryCrush.pressingSpeeds[2] = sGame->pressingSpeed;
         }
         break;
     case 5:
-        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
+        if (sGame->pressingSpeed > gSaveBlock2Ptr->berryCrush.pressingSpeeds[3])
         {
             sGame->newRecord = TRUE;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = sGame->pressingSpeed;
+            gSaveBlock2Ptr->berryCrush.pressingSpeeds[3] = sGame->pressingSpeed;
         }
         break;
     }
@@ -3192,10 +3192,10 @@ void ShowBerryCrushRankings(void)
 
     ScriptContext2_Enable();
     taskId = CreateTask(Task_ShowBerryCrushRankings, 0);
-    gTasks[taskId].tPressingSpeeds(0) = gSaveBlock2Ptr->berryCrush.berryCrushResults[0];
-    gTasks[taskId].tPressingSpeeds(1) = gSaveBlock2Ptr->berryCrush.berryCrushResults[1];
-    gTasks[taskId].tPressingSpeeds(2) = gSaveBlock2Ptr->berryCrush.berryCrushResults[2];
-    gTasks[taskId].tPressingSpeeds(3) = gSaveBlock2Ptr->berryCrush.berryCrushResults[3];
+    gTasks[taskId].tPressingSpeeds(0) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[0];
+    gTasks[taskId].tPressingSpeeds(1) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[1];
+    gTasks[taskId].tPressingSpeeds(2) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[2];
+    gTasks[taskId].tPressingSpeeds(3) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[3];
 }
 
 static void PrintTimer(struct BerryCrushGame_Gfx * gfx, u16 frames)

@@ -12,7 +12,7 @@ struct MEventClientHeaderStruct
     u32 unk_10;
     u16 id;
     u16 unk_16[4];
-    struct MEventBuffer_3430_Sub unk_20;
+    struct WonderCardMetadata unk_20;
     u8 maxDistributionMons;
     u8 playerName[7];
     u8 playerTrainerId[4];
@@ -50,16 +50,16 @@ extern const u16 gCard3Pal[];
 extern const u16 gCard4Pal[];
 extern const u16 gCard5Pal[];
 
-struct MEWonderNewsData * GetSavedWonderNews(void);
-struct MEWonderCardData * GetSavedWonderCard(void);
-struct MEventBuffer_3430_Sub * sav1_get_mevent_buffer_2(void);
-struct MENewsJisanStruct * GetMENewsJisanStructPtr(void);
-bool32 OverwriteSavedWonderNewsWithReceivedNews(const struct MEWonderNewsData * src);
+struct WonderNews * GetSavedWonderNews(void);
+struct WonderCard * GetSavedWonderCard(void);
+struct WonderCardMetadata * sav1_get_mevent_buffer_2(void);
+struct WonderNewsMetadata * GetMENewsJisanStructPtr(void);
+bool32 OverwriteSavedWonderNewsWithReceivedNews(const struct WonderNews * src);
 bool32 ValidateReceivedWonderNews(void);
 bool32 ValidateReceivedWonderCard(void);
 bool32 MEvent_HaveAlreadyReceivedWonderNews(const u8 * src);
-bool32 OverwriteSavedWonderCardWithReceivedCard(const struct MEWonderCardData * data);
-void MEvent_WonderCardResetUnk08_6(struct MEWonderCardData * buffer);
+bool32 OverwriteSavedWonderCardWithReceivedCard(const struct WonderCard * data);
+void MEvent_WonderCardResetUnk08_6(struct WonderCard * buffer);
 bool32 MEvent_ReceiveDistributionMon(const u16 * data);
 void BuildMEventClientHeader(struct MEventClientHeaderStruct * data);
 bool32 ValidateMEventClientHeader(const struct MEventClientHeaderStruct * data);
@@ -67,8 +67,8 @@ u32 sub_8144418(const u16 * a0, const struct MEventClientHeaderStruct * a1, void
 u32 MEvent_CanPlayerReceiveDistributionMon(const u16 * a0, const struct MEventClientHeaderStruct * a1, void * unused);
 bool32 sub_8144474(const struct MEventClientHeaderStruct * a0, const u16 * a1);
 u16 sub_81444B0(const struct MEventClientHeaderStruct * a0, u32 command);
-bool32 InitWonderCardResources(struct MEWonderCardData * r5, struct MEventBuffer_3430_Sub * r6);
-bool32 InitWonderNewsResources(const struct MEWonderNewsData * a0);
+bool32 InitWonderCardResources(struct WonderCard * r5, struct WonderCardMetadata * r6);
+bool32 InitWonderNewsResources(const struct WonderNews * a0);
 s32 FadeToWonderCardMenu(void);
 s32 FadeToWonderNewsMenu(void);
 void DestroyWonderCard(void);
@@ -88,7 +88,7 @@ u16 MEvent_GetBattleCardCount(u32 command);
 void MEvent_RecordIdOfWonderCardSenderByEventType(u32 eventId, u32 trainerId);
 u16 *GetMEventProfileECWordsMaybe(void);
 void ResetReceivedWonderCardFlag(void);
-bool32 MEventHandleReceivedWonderCard(u16 cardId);
+bool32 MEventHandleReceivedWonderCard(u16 flagId);
 u16 GetWonderCardFlagId(void);
 
 #endif //GUARD_MEVENT_H

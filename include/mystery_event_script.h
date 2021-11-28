@@ -5,7 +5,6 @@
 
 u32 RunMysteryEventScript(u8 *);
 void SetMysteryEventScriptStatus(u32 val);
-u16 GetRecordMixingGift(void);
 
 void MEventScript_InitContext(u8 *);
 bool32 MEventScript_Run(u32 *);

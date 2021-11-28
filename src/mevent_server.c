@@ -45,8 +45,8 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * 
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
-    svr->card = AllocZeroed(sizeof(struct MEWonderCardData));
-    svr->news = AllocZeroed(sizeof(struct MEWonderNewsData));
+    svr->card = AllocZeroed(sizeof(struct WonderCard));
+    svr->news = AllocZeroed(sizeof(struct WonderNews));
     svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MEventClientHeaderStruct));
     svr->cmdBuffer = cmdBuffer;
@@ -188,11 +188,11 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 14:
             AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 432);
-            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->news), sizeof(struct MEWonderNewsData));
+            mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->news), sizeof(struct WonderNews));
             break;
         case 13:
             AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 438);
-            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->card), sizeof(struct MEWonderCardData));
+            mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->card), sizeof(struct WonderCard));
             break;
         case 16:
             AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 444);

@@ -57,7 +57,7 @@ struct MailViewResources {
     u8 authorNameBuffer[12];
     void (*savedCallback)(void);
     void (*showMailCallback)(void);
-    struct MailStruct * mail;
+    struct Mail * mail;
     bool8 messageExists;
     u8 nameX;
     u8 mailType;
@@ -437,7 +437,7 @@ static const struct MailAttrStruct sMessageLayouts_5x2[] = {
     },
 };
 
-void ReadMail(struct MailStruct * mail, void (*savedCallback)(void), bool8 messageExists)
+void ReadMail(struct Mail * mail, void (*savedCallback)(void), bool8 messageExists)
 {
     u16 sp0;
     u16 species;

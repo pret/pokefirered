@@ -45,5 +45,10 @@ VBlankIntrWait: @ 81E3BA0
 	svc 0x5
 	bx lr
 	thumb_func_end VBlankIntrWait
+	
+thumb_func_start ExecuteFunc
+ExecuteFunc:
+    bx r0
+    thumb_func_end ExecuteFunc
 
 	.align 2, 0 @ Don't pad with nop.

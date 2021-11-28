@@ -1243,9 +1243,9 @@
 	.endm
 
 @new commands
-        .macro callasm ptr:req
+        .macro callasm id:req
 	.byte 0xf8
-	.2byte \ptr
+	.2byte \id
 	.endm
 	 
         .macro jumpifsubstituteblocks ptr:req

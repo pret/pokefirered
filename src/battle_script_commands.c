@@ -45,11 +45,6 @@
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
-static const u8 *const gCallAsmCommandTablePointers[] =
-{
-    [DoAftermathDamage] = DoAftermathDamageAsm,
-};
-
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
@@ -571,6 +566,11 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF7_finishturn,
     atkF8_callasm,
     atkFB_jumpifsubstituteblocks,
+};
+
+void (* const gCallAsmCommandTablePointers[])(void) =
+{
+	[DoAftermathDamage] = DoAftermathDamageAsm,
 };
 
 struct StatFractions
@@ -9454,7 +9454,7 @@ static void atkF7_finishturn(void)
 
 static void atkF8_callasm(void)
 {
-	u32 ptr = (u32) gCallAsmCommandTablePointers[T2_READ_PTR(gBattlescriptCurrInstr + 1)];
+	u32 ptr = (u32) gCallAsmCommandTablePointers[T2_READ_16(gBattlescriptCurrInstr + 1)];
 	gBattlescriptCurrInstr += 3;
 	
         ExecuteFunc(ptr);

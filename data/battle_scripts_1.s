@@ -2838,6 +2838,7 @@ BattleScript_FaintTargetReturn::
 BattleScript_TryAftermathDamage::
         jumpifabilitypresent ABILITY_DAMP, BattleScript_FaintTargetReturn
 	callasm DoAftermathDamage
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_SETWORDSTRING

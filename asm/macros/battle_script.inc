@@ -1249,8 +1249,15 @@
 	.endm
 	 
 	.macro cureprimarystatus battler:req, ptr:req
+	.byte 0xf9
 	.byte \battler
 	.4byte \ptr
+	.endm
+	 
+	.macro setword dst:req, value:req
+	.byte 0xfa 
+	.4byte \dst
+	.4byte \value
 	.endm
 	 
         .macro jumpifsubstituteblocks ptr:req
@@ -1331,13 +1338,6 @@
 	.macro sethword dst:req, value:req
 	setbyte \dst, (\value) & 0xFF
 	setbyte \dst + 1, ((\value) >> 8) & 0xFF
-	.endm
-
-	.macro setword dst:req, value:req
-	setbyte \dst, (\value) & 0xFF
-	setbyte \dst + 1, ((\value) >> 8) & 0xFF
-	setbyte \dst + 2, ((\value) >> 16) & 0xFF
-	setbyte \dst + 3, ((\value) >> 24) & 0xFF
 	.endm
 
 	.macro copybyte dst:req, src:req

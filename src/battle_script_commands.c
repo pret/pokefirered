@@ -313,6 +313,7 @@ static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
 static void atkF8_callasm(void);
 static void atkF9_cureprimarystatus(void);
+static void atkFA_setword(void);
 static void atkFB_jumpifsubstituteblocks(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
@@ -567,6 +568,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF7_finishturn,
     atkF8_callasm,
     atkF9_cureprimarystatus,
+    atkFA_setword,
     atkFB_jumpifsubstituteblocks,
 };
 
@@ -9476,6 +9478,14 @@ static void atkF9_cureprimarystatus(void)
 	{
 		gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
 	}
+}
+
+static void atkFA_setword(void)
+{
+	u32* dest = (u32) T1_READ_PTR(gBattlescriptCurrInstr + 1);
+	u32 word = T2_READ_32(gBattlescriptCurrInstr + 5);
+	*dest = word;
+	gBattlescriptCurrInstr += 9;
 }
 
 static void atkFB_jumpifsubstituteblocks(void)

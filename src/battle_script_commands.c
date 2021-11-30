@@ -312,6 +312,7 @@ static void atkF5_removeattackerstatus1(void);
 static void atkF6_finishaction(void);
 static void atkF7_finishturn(void);
 static void atkF8_callasm(void);
+static void atkF9_cureprimarystatus(void);
 static void atkFB_jumpifsubstituteblocks(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
@@ -565,6 +566,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF6_finishaction,
     atkF7_finishturn,
     atkF8_callasm,
+    atkF9_cureprimarystatus,
     atkFB_jumpifsubstituteblocks,
 };
 
@@ -9458,6 +9460,22 @@ static void atkF8_callasm(void)
 	gBattlescriptCurrInstr += 3;
 	
         ExecuteFunc(ptr);
+}
+
+static void atkF9_cureprimarystatus(void)
+{
+	u8 bank = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+	if (gBattleMons[bank].status1) {
+		gBattleMons[bank].status1 = 0;
+		gBattlescriptCurrInstr += 6;
+		gActiveBattler = bank;
+		BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                MarkBattlerForControllerExec(gActiveBattler);
+	}
+	else
+	{
+		gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+	}
 }
 
 static void atkFB_jumpifsubstituteblocks(void)

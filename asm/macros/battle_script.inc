@@ -1248,6 +1248,11 @@
 	.2byte \id
 	.endm
 	 
+	.macro cureprimarystatus battler:req, ptr:req
+	.byte \battler
+	.4byte \ptr
+	.endm
+	 
         .macro jumpifsubstituteblocks ptr:req
 	.byte 0xfb
 	.4byte \ptr

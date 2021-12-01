@@ -16,6 +16,11 @@ Automatic Swap Page On Naming Screen
 No Healing Eggs
 Eggs Hatch At Level 1
 
+//Abilities Added
+Adaptability
+Aftermath
+Anger Point
+
 // Needing put in
 unhidden power
 nature colors

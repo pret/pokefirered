@@ -45,6 +45,10 @@
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
+//used strings
+static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
+static const u8 sAngerPointString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
+
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
@@ -9506,8 +9510,6 @@ if (SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
 else
     gBattlescriptCurrInstr += 5;
 }
-
-static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 
 //callasm command asm's
 static void DoAftermathDamageAsm(void)

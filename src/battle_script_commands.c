@@ -1996,7 +1996,7 @@ static void atk0F_resultmessage(void)
 
     if (!gBattleControllerExecFlags)
     {
-	if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT && gCritMultiplier == 2 && gBattleMons[gBattlerTarget].ability == ABILITY_ANGER_POINT &&
+	if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && gCritMultiplier == 2 && gBattleMons[gBattlerTarget].ability == ABILITY_ANGER_POINT &&
 	   gBattleMons[gBattlerTarget].hp != 0 && !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE) && 
 	   gBattleMons[gBattlerTarget].statStages[STAT_ATK] != 0xC) 
 	{

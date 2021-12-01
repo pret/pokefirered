@@ -4415,4 +4415,8 @@ BattleScript_FlushMessageBox::
 	return
 	
 BattleScript_AngerPointActivation::
-        
+        setstatchanger STAT_ATK, 2, FALSE
+        callasm MaxAttackAngerPoint
+        printstring STRINGID_SETWORDSTRING
+        waitmessage 0x40
+        return

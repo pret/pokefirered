@@ -77,7 +77,7 @@ static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
 static const u8 sAdaptabilityDescription[] = _("Ups same type moves.");
 static const u8 sAftermathDescription[] = _("Damages on the finish hit.");
-static const u8 sAngerPointDescription[] = _("Max ATTACK on a critical-hit.");
+static const u8 sAngerPointDescription[] = _("Max ATTACK on a critical hit.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {

@@ -4413,3 +4413,6 @@ BattleScript_ActionSelectionItemsCantBeUsed::
 BattleScript_FlushMessageBox::
 	printstring STRINGID_EMPTYSTRING3
 	return
+	
+BattleScript_AngerPointActivation::
+        

@@ -9525,7 +9525,7 @@ static void DoAftermathDamageAsm(void)
 
 static void MaxAttackAngerPointAsm(void)
 {
-	
+	gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
 }
 
 

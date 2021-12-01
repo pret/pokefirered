@@ -60,6 +60,7 @@ static void PutLevelAndGenderOnLvlUpBox(void);
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
+static void MaxAttackAngerPointAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -575,6 +576,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
 void (* const gCallAsmCommandTablePointers[])(void) =
 {
 	[DoAftermathDamage] = DoAftermathDamageAsm,
+	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
 };
 
 struct StatFractions

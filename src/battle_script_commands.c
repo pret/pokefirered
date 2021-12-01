@@ -2003,7 +2003,7 @@ static void atk0F_resultmessage(void)
 		gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xB;
 		BattleScriptPushCursor();
 		gSetWordLoc = sAngerPointString;
-		gBattlescriptCurrInstr = BattleScript_AngerPointActivation;
+		gBattlescriptCurrInstr = BattleScript_AngerPointActivation - 1;
 	}
         else if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[6] > 2))
         {

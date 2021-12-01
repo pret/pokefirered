@@ -9523,6 +9523,9 @@ static void DoAftermathDamageAsm(void)
 	gBattlescriptCurrInstr = BattleScript_FaintTargetReturn;	
 }
 
-
+static void MaxAttackAngerPointAsm(void)
+{
+	
+}
 
 

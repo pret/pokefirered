@@ -1990,7 +1990,16 @@ static void atk0F_resultmessage(void)
 
     if (!gBattleControllerExecFlags)
     {
-        if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[6] > 2))
+	if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT && gCritMultiplier == 2 && gBattleMons[gBattlerTarget].ability == ABILITY_ANGER_POINT &&
+	   gBattleMons[gBattlerTarget].hp != 0 && !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE) && 
+	   gBattleMons[gBattlerTarget].statStages[STAT_ATK] != 0xC) 
+	{
+		gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xB;
+		BattleScriptPushCursor();
+		gSetWordLoc = sAngerPointString;
+		gBattlescriptCurrInstr = BattleScript_AngerPointActivation;
+	}
+        else if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[6] > 2))
         {
             stringId = gMissStringIds[gBattleCommunication[6]];
             gBattleCommunication[MSG_DISPLAY] = 1;

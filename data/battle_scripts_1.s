@@ -4417,6 +4417,21 @@ BattleScript_FlushMessageBox::
 BattleScript_AngerPointActivation::
         playstatchangeanimation BS_TARGET, BIT_ATK, 0
         callasm MaxAttackAngerPoint
+	
+BattleScript_PrintStringAndReturn::
         printstring STRINGID_SETWORDSTRING
         waitmessage 0x40
         return
+	
+BattleScript_Anticipation::
+        call BattleScript_AnticipationActivation
+	end3
+BattleScript_AnticipationReturn::
+	return
+	
+BattleScript_AnticipationActivation::
+        pause 0x20
+	setbyte gBattlerTarget, 0
+	trygetintimidatetarget BattleScript_AnticipationReturn
+        callasm TryDoAnticipationShudder
+	goto BattleScript_PrintStringAndReturn

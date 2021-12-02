@@ -48,7 +48,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 //used strings
 static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its/nATTACK!");
-static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shudered!");
+static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!");
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);

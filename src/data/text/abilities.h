@@ -78,6 +78,7 @@ static const u8 sAirLockDescription[] = _("Negates weather effects.");
 static const u8 sAdaptabilityDescription[] = _("Ups same type moves.");
 static const u8 sAftermathDescription[] = _("Damages on the finish hit.");
 static const u8 sAngerPointDescription[] = _("Max ATTACK on a critical hit.");
+static const u8 sAnticipationDescription[] = _("Senses an dangerous move.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -161,6 +162,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_ADAPTABILITY] = sAdaptabilityDescription,
     [ABILITY_AFTERMATH] = sAftermathDescription,
     [ABILITY_ANGER_POINT] = sAngerPointDescription,
+    [ABILITY_ANTICIPATION] = sAnticipationDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -245,4 +247,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_ADAPTABILITY] = _("ADAPTABILITY"),
     [ABILITY_AFTERMATH] = _("AFTERMATH"),
     [ABILITY_ANGER_POINT] = _("ANGER POINT"),
+    [ABILITY_ANTICIPATION] = _("ANTICIPATION"),
 };

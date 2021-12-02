@@ -2146,7 +2146,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 else
                 {
-                    u32 i2;
+                    u16 i2;
                     
                     for (i2 = 0; i2 != 0xFF; i2++)
                     {

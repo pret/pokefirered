@@ -9552,8 +9552,8 @@ static bool8 AnticipationTypeCalc(u8 battler)
 		{
 			while (TYPE_EFFECT_ATK_TYPE(i2) != TYPE_ENDTABLE)
 			{
-				if (TYPE_EFFECT_ATK_TYPE(i2) == movetype && TYPE_EFFECT_DEF_TYPE(i2) == gBattleMons[gBattlerAttacker].type1 
-				    || gBattleMons[gBattlerAttacker].type2 && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
+				if (TYPE_EFFECT_ATK_TYPE(i2) == movetype && (TYPE_EFFECT_DEF_TYPE(i2) == gBattleMons[gBattlerAttacker].type1 
+				    || TYPE_EFFECT_DEF_TYPE(i2) == gBattleMons[gBattlerAttacker].type2) && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
 					iseffectivemove = TRUE;
 				
 				        i2 += 3;

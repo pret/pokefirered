@@ -31,12 +31,13 @@
 struct SwitchAbilities
 {
     u32 ability;
-    u32 script;
+const u8* script;
 };
 
 static const struct SwitchAbilities gSwitchInAbilitiesTable[] = 
 {
-    [ABILITY_ANTICIPATION] = BattleScript_Anticipation,
+    {ABILITY_ANTICIPATION, BattleScript_Anticipation},
+    {0xffffffff},
 };
 
 u8 GetBattlerForBattleScript(u8 caseId)

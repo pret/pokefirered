@@ -67,6 +67,7 @@ static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
 static void MaxAttackAngerPointAsm(void);
 static void TryDoAnticipationShudderAsm(void);
+static bool8 AnticipationTypeCalc(u8 battler);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -9533,7 +9534,7 @@ static void MaxAttackAngerPointAsm(void)
 	gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
 }
 
-static void TryDoAnticipationShudderAsm(void)
+static bool8 AnticipationTypeCalc(u8 battler)
 {
 	bool8 iseffectivemove = FALSE;
 	u8 i, movetype;
@@ -9542,7 +9543,7 @@ static void TryDoAnticipationShudderAsm(void)
 	
 	for (i = 0; i < MAX_MON_MOVES || !(iseffectivemove); i++)
 	{
-		moveid = gBattleMons[gBattlerTarget].moves[i];
+		moveid = gBattleMons[battler].moves[i];
 		movetype = gBattleMoves[moveid].type;
 		
 		if (gBattleMoves[moveid].power)
@@ -9557,6 +9558,18 @@ static void TryDoAnticipationShudderAsm(void)
 			}
 		}
 	}
-	if (iseffectivemove)
+	return iseffectivemove;
+}
+
+static void TryDoAnticipationShudderAsm(void)
+{
+	if (!(AnticipationTypeCalc(gBattlerTarget)))
+	{
+		gBattlerTarget ^= BIT_FLANK;
 		
+		if (!(AnticipationTypeCalc(gBattlerTarget)))
+			gBattlescriptCurrInstr = 
+	}
+	else
+		gSetWordLoc = sAnticipationString;
 }

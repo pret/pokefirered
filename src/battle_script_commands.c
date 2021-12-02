@@ -9571,6 +9571,8 @@ static void TryDoAnticipationShudderAsm(void)
 		
 		if (!(AnticipationTypeCalc(gBattlerTarget)))
 			gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
+		else
+			gSetWordLoc = sAnticipationString;
 	}
 	else
 		gSetWordLoc = sAnticipationString;

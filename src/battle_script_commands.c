@@ -48,6 +48,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 //used strings
 static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its/nATTACK!");
+static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shudered!");
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -65,6 +66,7 @@ static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
 static void MaxAttackAngerPointAsm(void);
+static void TryDoAnticipationShudderAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -581,6 +583,7 @@ void (* const gCallAsmCommandTablePointers[])(void) =
 {
 	[DoAftermathDamage] = DoAftermathDamageAsm,
 	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
+	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
 };
 
 struct StatFractions
@@ -9530,4 +9533,30 @@ static void MaxAttackAngerPointAsm(void)
 	gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
 }
 
-
+static void TryDoAnticipationShudderAsm(void)
+{
+	bool8 iseffectivemove = FALSE;
+	u8 i, movetype;
+	u16 moveid;
+	s32 i2 = 0;
+	
+	for (i = 0; i < MAX_MON_MOVES || !(iseffectivemove); i++)
+	{
+		moveid = gBattleMons[gBattlerTarget].moves[i];
+		movetype = gBattleMoves[moveid].type;
+		
+		if (gBattleMoves[moveid].power)
+		{
+			while (TYPE_EFFECT_ATK_TYPE(i2) != TYPE_ENDTABLE)
+			{
+				if (TYPE_EFFECT_ATK_TYPE(i2) == movetype && TYPE_EFFECT_DEF_TYPE(i2) == gBattleMons[gBattlerAttacker].type1 
+				    || gBattleMons[gBattlerAttacker].type2 && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
+					iseffectivemove = TRUE;
+				
+				        i2 += 3;
+			}
+		}
+	}
+	if (iseffectivemove)
+		
+}

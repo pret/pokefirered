@@ -9541,7 +9541,9 @@ static bool8 AnticipationTypeCalc(u8 battler)
 	u16 moveid;
 	s32 i2 = 0;
 	
-	for (i = 0; i < MAX_MON_MOVES || !(iseffectivemove); i++)
+	//need hidden power check and probabily inverse battle
+	
+	for (i = 0; i < MAX_MON_MOVES; i++)
 	{
 		moveid = gBattleMons[battler].moves[i];
 		movetype = gBattleMoves[moveid].type;
@@ -9568,7 +9570,7 @@ static void TryDoAnticipationShudderAsm(void)
 		gBattlerTarget ^= BIT_FLANK;
 		
 		if (!(AnticipationTypeCalc(gBattlerTarget)))
-			gBattlescriptCurrInstr = 
+			gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
 	}
 	else
 		gSetWordLoc = sAnticipationString;

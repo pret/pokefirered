@@ -28,6 +28,17 @@
 #include "constants/battle_script_commands.h"
 #include "constants/sound_moves_table.h"
 
+struct SwitchAbilities
+{
+    u32 ability;
+    u32 script;
+};
+
+static const struct SwitchAbilities gSwitchInAbilitiesTable[] = 
+{
+    [ABILITY_ANTICIPATION] = BattleScript_Anticipation,
+};
+
 u8 GetBattlerForBattleScript(u8 caseId)
 {
     u32 ret = 0;
@@ -2121,14 +2132,33 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_INTIMIDATE1: // 9
             for (i = 0; i < gBattlersCount; ++i)
             {
-                if (gBattleMons[i].ability == ABILITY_INTIMIDATE && gStatuses3[i] & STATUS3_INTIMIDATE_POKES)
+                if (gBattleMons[i].ability == ABILITY_INTIMIDATE)
                 {
+                    if (!(gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
+                        continue;
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
                     BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
                     gBattleStruct->intimidateBattler = i;
                     ++effect;
                     break;
+                }
+                else
+                {
+                    u8 i2;
+                    
+                    for (i2 = 0; i2 != 0xFF; i2++)
+                    {
+                        if (gSwitchInAbilitiesTable[i2].ability == gBattleMons[i].ability && !(gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
+                        {
+                            gLastUsedAbility = gSwitchInAbilitiesTable[i2].ability;
+                            gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
+                            BattleScriptPushCursorAndCallback(gSwitchInAbilitiesTable[i2].script);
+                            gBattleStruct->intimidateBattler = i;
+                            ++effect;
+                            break;
+                        }
+                    }
                 }
             }
             break;

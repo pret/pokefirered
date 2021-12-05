@@ -726,6 +726,31 @@ u8 DoBattlerEndTurnEffects(void)
                     ++effect;
                 ++gBattleStruct->turnEffectsTracker;
                 break;
+            case ENDTURN_BAD_DREAMS:
+                if ((gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP) && gBattleMons[gActiveBattler].hp != 0 
+				    && ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_BAD_DREAMS))
+                {
+                    u8 i, side = GetBattlerSide(gActiveBattler);
+					bool8 hasability = FALSE;
+					
+                    for (i = 0; i < gBattlersCount; ++i)
+                    {
+                        if (!(hasability) && GetBattlerSide(i) != side && gBattleMons[i].ability == ABILITY_BAD_DREAMS)
+                        {
+                            gBattlerTarget = i;
+						    gLastUsedAbility = ABILITY_BAD_DREAMS;
+							gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+							if (gBattleMoveDamage == 0)
+                                gBattleMoveDamage = 1;
+							hasability = TRUE;
+							BattleScriptExecute(BattleScript_BadDreamsTurnDmg);
+                        }
+                    }    
+                    if (hasability)
+                        ++effect;
+                }
+                    ++gBattleStruct->turnEffectsTracker;
+                    break;
             case ENDTURN_ITEMS1:  // item effects
                 if (ItemBattleEffects(1, gActiveBattler, FALSE))
                     ++effect;

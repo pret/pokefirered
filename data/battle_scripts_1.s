@@ -4458,6 +4458,17 @@ BattleScript_DownloadActivation::
 	setbyte gBattlerTarget, 0
 	trygetintimidatetarget BattleScript_AnticipationReturn
         callasm GetStatRaiseDownload
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, 12, BattleScript_AnticipationReturn
+	playstatchangeanimation BS_ATTACKER, BIT_ATK, 0
+	setstatchanger STAT_ATK, 1, FALSE
+	goto BattleScript_DownloadRaiseStat
+	
+BattleScript_DownloadRaiseSpAttack::
+        jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, 12, BattleScript_AnticipationReturn
+	playstatchangeanimation BS_ATTACKER, BIT_SPATK, 0
+	setstatchanger STAT_SPATK, 1, FALSE
+BattleScript_DownloadRaiseStat::
+	statbuffchange STAT_CHANGE_BS_PTR | MOVE_EFFECT_AFFECTS_USER, BattleScript_AnticipationReturn
 	
 
 sBadDreamsString::

@@ -9543,7 +9543,7 @@ static bool8 AnticipationTypeCalc(u8 battler)
 	
 	//need hidden power check and probabily inverse battle
 	
-	for (i = 0; i < MAX_MON_MOVES; i++)
+	for (i = 0; i < MAX_MON_MOVES; i++, i2 = 0)
 	{
 		moveid = gBattleMons[battler].moves[i];
 		movetype = gBattleMoves[moveid].type;
@@ -9560,7 +9560,6 @@ static bool8 AnticipationTypeCalc(u8 battler)
 				i2 += 3;
 			}
 		}
-		i2 = 0;
 	}
 	return FALSE;
 }

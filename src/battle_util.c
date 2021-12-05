@@ -1794,8 +1794,28 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
-                }
-            }
+                case ABILITY_BAD_DREAMS:
+                        if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP) && ABILITY_ON_OPPOSING_FIELD(gBattlerAttacker, ABILITY_BAD_DREAMS))
+                        {
+                            u8 side = GetBattlerSide(gBattlerAttacker);
+					        bool8 hasability = FALSE;
+                            
+                            for (i = 0; i < gBattlersCount; ++i)
+                            {
+                                if (!(hasability) && GetBattlerSide(i) != side && gBattleMons[i].ability == ABILITY_BAD_DREAMS)
+						        {
+                                    gBattlerTarget = i;
+								    gLastUsedAbility = ABILITY_BAD_DREAMS;
+							        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                                    if (gBattleMoveDamage == 0)
+                                        gBattleMoveDamage = 1;
+							        hasability = TRUE;
+							        BattleScriptExecute(BattleScript_BadDreamsTurnDmg);
+						         }
+                            }
+                            if (hasability)
+                                ++effect;
+                        }
             break;
         case ABILITYEFFECT_MOVES_BLOCK: // 2
             if (gLastUsedAbility == ABILITY_SOUNDPROOF)

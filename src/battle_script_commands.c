@@ -50,6 +50,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its/nATTACK!");
 static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!");
+static const u9 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}/Nraised its {B_BUFF1}!");
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -70,6 +71,7 @@ static void MaxAttackAngerPointAsm(void);
 static void TryDoAnticipationShudderAsm(void);
 static bool8 AnticipationTypeCalc(u8 battler);
 static void TryBadDreamsSecondDamageAsm(void);
+static void GetStatRaiseDownloadAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -588,6 +590,7 @@ void (* const gCallAsmCommandTablePointers[])(void) =
 	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
 	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
 	[TryBadDreamsSecondDamage] = TryBadDreamsSecondDamageAsm,
+	[GetStatRaiseDownload] = GetStatRaiseDownloadAsm,
 };
 
 struct StatFractions
@@ -9596,7 +9599,33 @@ static void TryBadDreamsSecondDamageAsm(void)
 		gBattlescriptCurrInstr = BattleScript_DoTurnDmgEnd;
 }
 
-
+static void GetStatRaiseDownloadAsm(void)
+{
+	u32 def, spdef, def2, spdef2;
+	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
+	
+	gBattlerAttacker = gBattleScripting.battler;
+	
+	def = gBattleMons[gBattlerTarget].statStages[STAT_DEF] * gBattleMons[gBattlerTarget].defense;
+	spdef = gBattleMons[gBattlerTarget].statStages[STAT_SPDEF] * gBattleMons[gBattlerTarget].spDefense;
+	
+	if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0)
+	{
+		def2 = gBattleMons[bank2].statStages[STAT_DEF] * gBattleMons[bank2].defense;
+		def = (def + def2) / 2;
+		spdef2 = gBattleMons[bank2].statStages[STAT_SPDEF] * gBattleMons[bank2].spDefense;
+		spdef = (spdef + spdef2) / 2;
+	}
+	def /= 100;
+	spdef /= 100;
+	
+	gSetWordLoc = sDownloadString;
+	
+	if (def < spdef)
+		gBattlescriptCurrInstr = BattleScript_DownloadRaiseAttack;
+	else
+		gBattlescriptCurrInstr = BattleScript_DownloadRaiseSpAttack;
+}
 
 
 

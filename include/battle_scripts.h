@@ -236,6 +236,8 @@ extern const u8 BattleScript_AnticipationReturn[];
 extern const u8 BattleScript_BadDreamsTurnDmg[];
 extern const u8 BattleScript_DoTurnDmgEnd[];
 extern const u8 BattleScript_Download[];
+extern const u8 BattleScript_DownloadRaiseAttack[];
+extern const u8 BattleScript_DownloadRaiseSpAttack[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

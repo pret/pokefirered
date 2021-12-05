@@ -69,6 +69,7 @@ static void DoAftermathDamageAsm(void);
 static void MaxAttackAngerPointAsm(void);
 static void TryDoAnticipationShudderAsm(void);
 static bool8 AnticipationTypeCalc(u8 battler);
+static void TryBadDreamsSecondDamageAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -586,6 +587,7 @@ void (* const gCallAsmCommandTablePointers[])(void) =
 	[DoAftermathDamage] = DoAftermathDamageAsm,
 	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
 	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
+	[TryBadDreamsSecondDamage] = TryBadDreamsSecondDamageAsm,
 };
 
 struct StatFractions
@@ -9577,3 +9579,27 @@ static void TryDoAnticipationShudderAsm(void)
 	else
 		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
 }
+
+static void TryBadDreamsSecondDamageAsm(void)
+{
+	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
+	
+	if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0 && gBattleMons[bank2].ability == ABILITY_BAD_DREAMS)
+	{
+		gLastUsedAbility = ABILITY_BAD_DREAMS;
+                gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                if (gBattleMoveDamage == 0)
+			gBattleMoveDamage = 1;
+		gBattlerTarget = bank2;
+	}
+	else
+		gBattlescriptCurrInstr = BattleScript_DoTurnDmgEnd;
+}
+
+
+
+
+
+
+
+

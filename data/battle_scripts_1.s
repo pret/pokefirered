@@ -4458,18 +4458,22 @@ BattleScript_DownloadActivation::
 	setbyte gBattlerTarget, 0
 	trygetintimidatetarget BattleScript_AnticipationReturn
         callasm GetStatRaiseDownload
-	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, 12, BattleScript_AnticipationReturn
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, 12, BattleScript_DownloadReturn
 	playstatchangeanimation BS_ATTACKER, BIT_ATK, 0
 	setstatchanger STAT_ATK, 1, FALSE
 	goto BattleScript_DownloadRaiseStat
 	
 BattleScript_DownloadRaiseSpAttack::
-        jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, 12, BattleScript_AnticipationReturn
+        jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, 12, BattleScript_DownloadReturn
 	playstatchangeanimation BS_ATTACKER, BIT_SPATK, 0
 	setstatchanger STAT_SPATK, 1, FALSE
 BattleScript_DownloadRaiseStat::
-	statbuffchange STAT_CHANGE_BS_PTR | MOVE_EFFECT_AFFECTS_USER, BattleScript_AnticipationReturn
-	
+	statbuffchange STAT_CHANGE_BS_PTR | MOVE_EFFECT_AFFECTS_USER, BattleScript_DownloadReturn
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 2, BattleScript_DownloadReturn
+	printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+BattleScript_DownloadReturn::
+	return
 
 sBadDreamsString::
     .byte 0xFD, 0xF, 0x0, 0xDD, 0xE7, 0xFE, 0xE8, 0xE3, 0xE6, 0xE1, 0xD9, 0xE2, 0xE8, 0xD9, 0xD8, 0xAB, 0xFF

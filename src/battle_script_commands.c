@@ -9536,7 +9536,6 @@ static void MaxAttackAngerPointAsm(void)
 
 static bool8 AnticipationTypeCalc(u8 battler)
 {
-	bool8 iseffectivemove = FALSE;
 	u8 i, movetype;
 	u16 moveid;
 	s32 i2 = 0;
@@ -9548,32 +9547,31 @@ static bool8 AnticipationTypeCalc(u8 battler)
 		moveid = gBattleMons[battler].moves[i];
 		movetype = gBattleMoves[moveid].type;
 		
-		if (gBattleMoves[moveid].power)
+		if (moveid != MOVE_NONE && gBattleMoves[moveid].power)
 		{
 			while (TYPE_EFFECT_ATK_TYPE(i2) != TYPE_ENDTABLE)
 			{
-				if (TYPE_EFFECT_ATK_TYPE(i2) == movetype && (TYPE_EFFECT_DEF_TYPE(i2) == gBattleMons[gBattlerAttacker].type1 
-				    || TYPE_EFFECT_DEF_TYPE(i2) == gBattleMons[gBattlerAttacker].type2) && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
-					iseffectivemove = TRUE;
-				
-				        i2 += 3;
+				if (TYPE_EFFECT_ATK_TYPE(i2) == movetype && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i2)) && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
+						return TRUE;
+					
+				i2 += 3;
 			}
 		}
+		i2 = 0;
 	}
-	return iseffectivemove;
+	return FALSE;
 }
 
 static void TryDoAnticipationShudderAsm(void)
 {
-	if (!(AnticipationTypeCalc(gBattlerTarget)))
-	{
-		gBattlerTarget ^= BIT_FLANK;
-		
-		if (!(AnticipationTypeCalc(gBattlerTarget)))
-			gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
-		else
-			gSetWordLoc = sAnticipationString;
-	}
-	else
+	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
+	
+	gBattlerAttacker = gBattleScripting.battler;
+	
+	if (gBattleMons[gBattlerTarget].hp != 0 && AnticipationTypeCalc(gBattlerTarget))
 		gSetWordLoc = sAnticipationString;
+	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0 && AnticipationTypeCalc(bank2))
+		gSetWordLoc = sAnticipationString;
+	else
+		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
 }

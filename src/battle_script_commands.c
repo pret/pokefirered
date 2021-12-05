@@ -9621,10 +9621,8 @@ static void GetStatRaiseDownloadAsm(void)
 	
 	gSetWordLoc = sDownloadString;
 	
-	if (def < spdef)
-		gBattlescriptCurrInstr = BattleScript_DownloadRaiseAttack;
-	else
-		gBattlescriptCurrInstr = BattleScript_DownloadRaiseSpAttack;
+	if (def >= spdef)
+		gBattlescriptCurrInstr = BattleScript_DownloadRaiseSpAttack
 }
 
 

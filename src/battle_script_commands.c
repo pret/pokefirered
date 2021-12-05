@@ -40,6 +40,7 @@
 #include "constants/inserts.h"
 #include "constants/sound_moves_table.h"
 #include "constants/callasm_functions.h"
+#include "constants/battle_move_effects.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -9551,7 +9552,7 @@ static bool8 AnticipationTypeCalc(u8 battler)
 		{
 			while (TYPE_EFFECT_ATK_TYPE(i2) != TYPE_ENDTABLE)
 			{
-				if (TYPE_EFFECT_ATK_TYPE(i2) == movetype && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i2)) && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
+				if ((gBattleMoves[moveid].effect == EFFECT_OHKO || TYPE_EFFECT_ATK_TYPE(i2) == movetype) && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i2)) && TYPE_EFFECT_MULTIPLIER(i2) == TYPE_MUL_SUPER_EFFECTIVE)
 						return TRUE;
 					
 				i2 += 3;

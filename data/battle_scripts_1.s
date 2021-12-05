@@ -4450,6 +4450,15 @@ BattleScript_BadDreamsTurnDmg::
         goto BattleScript_DoTurnDmg
 
 BattleScript_Download::
+        call BattleScript_DownloadActivation
+	end3
+	
+BattleScript_DownloadActivation::
+        pause 0x20
+	setbyte gBattlerTarget, 0
+	trygetintimidatetarget BattleScript_AnticipationReturn
+        callasm GetStatRaiseDownload
+	
 
 sBadDreamsString::
     .byte 0xFD, 0xF, 0x0, 0xDD, 0xE7, 0xFE, 0xE8, 0xE3, 0xE6, 0xE1, 0xD9, 0xE2, 0xE8, 0xD9, 0xD8, 0xAB, 0xFF

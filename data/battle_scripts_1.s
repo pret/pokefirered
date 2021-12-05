@@ -4435,3 +4435,19 @@ BattleScript_AnticipationActivation::
 	trygetintimidatetarget BattleScript_AnticipationReturn
         callasm TryDoAnticipationShudder
 	goto BattleScript_PrintStringAndReturn
+	
+BattleScript_BadDreamsTurnDmg::
+        setword gSetWordLoc, sBadDreamsString
+	printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	tryfaintmon BS_ATTACKER, 0, NULL
+	callasm TryBadDreamsSecondDamage
+	printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+        goto BattleScript_DoTurnDmg
+
+sBadDreamsString::
+    .byte 0xFD, 0xF, 0x0, 0xDD, 0xE7, 0xFE, 0xE8, 0xE3, 0xE6, 0xE1, 0xD9, 0xE2, 0xE8, 0xD9, 0xD8, 0xAB, 0xFF

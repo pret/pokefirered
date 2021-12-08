@@ -9573,8 +9573,6 @@ static void TryDoAnticipationShudderAsm(void)
 {
 	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
 	
-	gBattlerAttacker = gBattleScripting.battler;
-	
 	if (gBattleMons[gBattlerTarget].hp != 0 && AnticipationTypeCalc(gBattlerTarget))
 		gSetWordLoc = sAnticipationString;
 	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0 && AnticipationTypeCalc(bank2))
@@ -9603,8 +9601,6 @@ static void GetStatRaiseDownloadAsm(void)
 {
 	u32 def, spdef, def2, spdef2;
 	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
-	
-	gBattlerAttacker = gBattleScripting.battler;
 	
 	def = gBattleMons[gBattlerTarget].statStages[STAT_DEF] * gBattleMons[gBattlerTarget].defense;
 	spdef = gBattleMons[gBattlerTarget].statStages[STAT_SPDEF] * gBattleMons[gBattlerTarget].spDefense;

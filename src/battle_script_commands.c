@@ -1419,7 +1419,7 @@ static void atk06_typecalc(void)
 	    {
 		    if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE && gBattleMons[gBattlerTarget].ability == ABILITY_FILTER)
 		    {
-			    gBattleMoveDamage -= gBattleMoveDamage / 4;
+			    gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
 			    if (gBattleMoveDamage == 0)
 				    gBattleMoveDamage = 1;
 		    }  

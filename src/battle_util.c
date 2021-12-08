@@ -1879,6 +1879,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
                 case ABILITY_WATER_ABSORB:
+		case ABILITY_DRY_SKIN:
                     if (moveType == TYPE_WATER && gBattleMoves[moveArg].power != 0)
                     {
                         if (gProtectStructs[gBattlerAttacker].notFirstStrike)

@@ -2329,12 +2329,6 @@ static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 mo
     SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-#define APPLY_STAT_MOD(var, mon, stat, statIndex)                                   \
-{                                                                                   \
-    (var) = (stat) * (gStatStageRatios)[(mon)->statStages[(statIndex)]][0];         \
-    (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
-}
-
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;

@@ -28,6 +28,8 @@
 #include "constants/battle_script_commands.h"
 #include "constants/sound_moves_table.h"
 
+#define MAX_SWITCH_IN_ABILITIES 2
+
 struct SwitchAbilities
 {
     u32 ability;
@@ -2175,15 +2177,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     u8 i2;
                     
-                    for (i2 = 0; i2 != 0xFF; i2++)
+                    for (i2 = 0; i2 < MAX_SWITCH_IN_ABILITIES; i2++)
                     {
                         if (gSwitchInAbilitiesTable[i2].ability == gBattleMons[i].ability && !(gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
                         {
-                            gLastUsedAbility = gSwitchInAbilitiesTable[i2].ability;
+                            gLastUsedAbility = gBattleMons[i].ability;
                             gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
 			    gBattlerAttacker = i;
                             BattleScriptPushCursorAndCallback(gSwitchInAbilitiesTable[i2].script);
                             gBattleStruct->intimidateBattler = i;
+			    i = gBattlersCount;
                             ++effect;
                             break;
                         }

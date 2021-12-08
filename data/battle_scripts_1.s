@@ -3971,6 +3971,7 @@ BattleScript_TraceActivates::
 BattleScript_RainDishActivates::
 	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
 	waitmessage 0x40
+BattleScript_RainDishActivatesEnd::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
@@ -4479,7 +4480,7 @@ BattleScript_DrySkinRainActivates::
         setword gSetWordLoc, sDrySkinRainString 
         printstring STRINGID_SETWORDSTRING
 	waitmessage 0x40
-	goto 
+	goto BattleScript_RainDishActivatesEnd
 	
 BattleScript_DrySkinSunActivates::
         setword gSetWordLoc, sDrySkinSunString 
@@ -4497,6 +4498,6 @@ sBadDreamsString::
 sDrySkinRainString::
     .byte 0xFD, 0xF, 0x0, 0xDB, 0xD5, 0xDD, 0xE2, 0x0, 0xE7, 0xE3, 0xE1, 0xD9, 0x0, 0xE3, 0xDA, 0x0, 0xDD, 0xE8, 0xE7, 0x0, 0xC2, 0xCA, 0xAB, 0xFF
     
-    
-    
+sDrySkinSunString::
+    .byte 0xFD, 0xF, 0x0, 0xE0, 0xE3, 0xE7, 0xE8, 0x0, 0xE7, 0xE3, 0xE1, 0xD9, 0x0, 0xE3, 0xDA, 0x0, 0xDD, 0xE8, 0xE7, 0x0, 0xC2, 0xCA, 0xAB, 0xFF
     

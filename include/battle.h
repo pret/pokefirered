@@ -463,6 +463,12 @@ extern struct BattleStruct *gBattleStruct;
         typeArg = gBattleMoves[move].type;                  \
 }
 
+#define APPLY_STAT_MOD(var, mon, stat, statIndex)                                   \
+{                                                                                   \
+    (var) = (stat) * (gStatStageRatios)[(mon)->statStages[(statIndex)]][0];         \
+    (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
+}
+
 #define IS_TYPE_PHYSICAL(moveType)(moveType == MOVE_PHYSICAL)
 #define IS_TYPE_SPECIAL(moveType)(moveType == MOVE_SPECIAL)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))

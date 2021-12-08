@@ -50,7 +50,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its/nATTACK!");
 static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!");
-static const u8 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}/Nraised its {B_BUFF1}!");
+static const u8 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}/nraised its {B_BUFF1}!");
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);

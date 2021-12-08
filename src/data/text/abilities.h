@@ -82,6 +82,7 @@ static const u8 sAnticipationDescription[] = _("Senses an dangerous move.");
 static const u8 sBadDreamsDescription[] = _("Damage sleeping foe's.");
 static const u8 sDownloadDescription[] = _("Adjust power based on foe's stats.");
 static const u8 sDrySkinDescription[] = _("Lost HP in sunny, gain HP in rain.");
+static const u8 sFilterDescription[] = _("Powers down “Super effective” hits.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -169,6 +170,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_BAD_DREAMS] = sBadDreamsDescription,
     [ABILITY_DOWNLOAD] = sDownloadDescription,
     [ABILITY_DRY_SKIN] = sDrySkinDescription,
+    [ABILITY_FILTER] = sFilterDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -257,4 +259,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_BAD_DREAMS] = _("BAD DREAMS"),
     [ABILITY_DOWNLOAD] = _("DOWNLOAD"),
     [ABILITY_DRY_SKIN] = _("DRY SKIN"),
+    [ABILITY_FILTER] = _("FILTER"),
 };

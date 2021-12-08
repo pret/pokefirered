@@ -2182,7 +2182,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             gLastUsedAbility = gSwitchInAbilitiesTable[i2].ability;
                             gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
                             BattleScriptPushCursorAndCallback(gSwitchInAbilitiesTable[i2].script);
-                            gBattleStruct->intimidateBattler = i;
+                            gBattlerAttacker = i;
                             ++effect;
                             break;
                         }

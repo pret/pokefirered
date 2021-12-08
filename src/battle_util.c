@@ -1788,9 +1788,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
 		case ABILITY_DRY_SKIN:
-		    if (WEATHER_HAS_EFFECT && gBattleMons[battler].maxHP > gBattleMons[battler].hp)
+		    if (WEATHER_HAS_EFFECT)
 		    {
-			    if (gBattleWeather & WEATHER_RAIN_ANY)
+			    if (gBattleWeather & WEATHER_RAIN_ANY && gBattleMons[battler].maxHP > gBattleMons[battler].hp)
 			    {
 				    BattleScriptPushCursorAndCallback(BattleScript_DrySkinRainActivates);
 				    gBattleMoveDamage = gBattleMons[battler].maxHP / 8;

@@ -38,7 +38,7 @@ static const struct SwitchAbilities gSwitchInAbilitiesTable[] =
 {
     {ABILITY_ANTICIPATION, BattleScript_Anticipation},
     {ABILITY_DOWNLOAD, BattleScript_Download},
-    {0xffffffff},
+    {0xFFFFFFFF},
 };
 
 u8 GetBattlerForBattleScript(u8 caseId)

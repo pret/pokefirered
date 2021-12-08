@@ -9602,18 +9602,21 @@ static void GetStatRaiseDownloadAsm(void)
 	u32 def, spdef, def2, spdef2;
 	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
 	
-	def = gBattleMons[gBattlerTarget].statStages[STAT_DEF] * gBattleMons[gBattlerTarget].defense;
-	spdef = gBattleMons[gBattlerTarget].statStages[STAT_SPDEF] * gBattleMons[gBattlerTarget].spDefense;
+	def = gBattleMons[gBattlerTarget].defense;
+	APPLY_STAT_MOD(def, &gBattleMons[gBattlerTarget], def, STAT_DEF);
+	spdef = gBattleMons[gBattlerTarget].spDefense;
+	APPLY_STAT_MOD(spdef, &gBattleMons[gBattlerTarget], spdef, STAT_SPDEF);
 	
 	if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0)
 	{
-		def2 = gBattleMons[bank2].statStages[STAT_DEF] * gBattleMons[bank2].defense;
-		def = (def + def2) / 2;
-		spdef2 = gBattleMons[bank2].statStages[STAT_SPDEF] * gBattleMons[bank2].spDefense;
-		spdef = (spdef + spdef2) / 2;
+		def2 = gBattleMons[bank2].defense;
+		APPLY_STAT_MOD(def2, &gBattleMons[bank2], def2, STAT_DEF);
+		spdef2 = gBattleMons[bank2].spDefense;
+		APPLY_STAT_MOD(spdef2, &gBattleMons[bank2], spdef2, STAT_SPDEF);
+		
+		def += def2;
+		spdef += spdef2;
 	}
-	def /= 100;
-	spdef /= 100;
 	
 	gSetWordLoc = sDownloadString;
 	

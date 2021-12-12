@@ -2229,22 +2229,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     target2 = GetBattlerAtPosition(side + BIT_FLANK);
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                     {
-                        if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
-                         && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
+                        if (gBattleMons[target1].hp != 0 && gBattleMons[target1].ability != 0 && gBattleMons[target1].ability != ABILITY_FLOWER_GIFT
+                         && gBattleMons[target2].hp != 0 && gBattleMons[target2].ability != 0 && gBattleMons[target2].ability != ABILITY_FLOWER_GIFT)
                         {
                             gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
                             gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
                             gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                             ++effect;
                         }
-                        else if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0)
+                        else if (gBattleMons[target1].ability != 0 && gBattleMons[target1].ability != ABILITY_FLOWER_GIFT && gBattleMons[target1].hp != 0)
                         {
                             gActiveBattler = target1;
                             gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
                             gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                             ++effect;
                         }
-                        else if (gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
+                        else if (gBattleMons[target2].ability != 0 && gBattleMons[target2].ability != ABILITY_FLOWER_GIFT && gBattleMons[target2].hp != 0)
                         {
                             gActiveBattler = target2;
                             gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
@@ -2255,7 +2255,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     else
                     {
                         gActiveBattler = target1;
-                        if (gBattleMons[target1].ability && gBattleMons[target1].hp)
+                        if (gBattleMons[target1].ability && gBattleMons[target1].ability != ABILITY_FLOWER_GIFT && gBattleMons[target1].hp)
                         {
                             gBattleMons[i].ability = gBattleMons[target1].ability;
                             gLastUsedAbility = gBattleMons[target1].ability;

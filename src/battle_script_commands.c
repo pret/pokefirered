@@ -8550,7 +8550,9 @@ static void atkD2_tryswapitems(void) // trick
 
 static void atkD3_trycopyability(void) // role play
 {
-    if (gBattleMons[gBattlerTarget].ability != ABILITY_NONE && gBattleMons[gBattlerTarget].ability != ABILITY_WONDER_GUARD)
+    if (gBattleMons[gBattlerTarget].ability != ABILITY_NONE && 
+	gBattleMons[gBattlerTarget].ability != ABILITY_WONDER_GUARD && 
+	gBattleMons[gBattlerTarget].ability != ABILITY_FLOWER_GIFT)
     {
         gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;

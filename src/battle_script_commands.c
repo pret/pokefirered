@@ -9595,8 +9595,8 @@ static void atkFC_loadabilitypopup(void)
 		else if (ability == LOAD_ABILITY_FROM_BUFFER)
 			ability = gLastUsedAbility;
 		printerTemplate.currentChar = gAbilityNames[ability];
-		printerTemplate.x = 10;
-		printerTemplate.currentX = 10;
+		printerTemplate.y = 10;
+		printerTemplate.currentY = 10;
 		AddTextPrinter(&printerTemplate, 0xFF, NULL);
 		CopyWindowToVram(13, COPYWIN_GFX);
 		PutMonIconOnPopUpBox();

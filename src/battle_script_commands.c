@@ -9587,7 +9587,7 @@ static void atkFC_loadabilitypopup(void)
 		printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
 		printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
 		AddTextPrinter(&printerTemplate, 0xFF, NULL);
-		ability = GetBattlerForBattleScript(gBattlescriptCurrInstr[3]);
+		ability = gBattlescriptCurrInstr[3];
 		if (func == LOAD_ABILITY_FROM_SECOND_BANK)
 			ability = gBattleMons[GetBattlerForBattleScript(gBattlescriptCurrInstr[3])].ability;
 		else if (func == LOAD_ABILITY_FROM_NEW_BUFFER)

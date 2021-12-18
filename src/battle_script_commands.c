@@ -9632,7 +9632,9 @@ static void PutMonIconOnPopUpBox(void)
 
 static void AnimAbilityPopUpBoxAsm(void)
 {
-	u8 side = GetBattlerSide(gBattleScripting.battler - 0x80);
+	u8 bank = gBattleScripting.battler;
+	bank -= 0x80;
+	u8 side = GetBattlerSide(bank);
 	u8 speed = 5;
 	u16 pos = gBattle_BG2_X;
 	

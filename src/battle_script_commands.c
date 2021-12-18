@@ -9576,9 +9576,9 @@ static void atkFC_loadabilitypopup(void)
 		printerTemplate.currentChar = gStringVar4;
 		printerTemplate.windowId = 13;
 		printerTemplate.fontId = 0;
-                printerTemplate.x = 32;
+                printerTemplate.x = 15;
 		printerTemplate.y = 0;
-		printerTemplate.currentX = 32;
+		printerTemplate.currentX = 15;
 		printerTemplate.currentY = 0;
 		printerTemplate.letterSpacing = 0;
 		printerTemplate.lineSpacing = 0;

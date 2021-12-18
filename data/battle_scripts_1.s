@@ -4414,7 +4414,11 @@ BattleScript_ActionSelectionItemsCantBeUsed::
 BattleScript_FlushMessageBox::
 	printstring STRINGID_EMPTYSTRING3
 	return
-	
+
+BattleScript_AnimPopUpBoxScript::
+        callasm AnimAbilityPopUpBox
+	return
+
 BattleScript_AngerPointActivation::
         playstatchangeanimation BS_TARGET, BIT_ATK, 0
         callasm MaxAttackAngerPoint

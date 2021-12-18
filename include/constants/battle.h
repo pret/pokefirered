@@ -34,6 +34,13 @@
 #define BATTLE_OPPOSITE(id) ((id) ^ 1)
 #define BATTLE_PARTNER(id) ((id) ^ 2)
 
+// Macros for loadabilitypopupcommand
+#define REMOVE_POP_UP 0
+#define LOAD_ABILITY_FROM_BUFFER 0
+#define LOAD_ABILITY_NORMAL 1
+#define LOAD_ABILITY_FROM_SECOND_BANK 2
+#define LOAD_ABILITY_FROM_NEW_BUFFER 3
+
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
 

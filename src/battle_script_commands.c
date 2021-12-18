@@ -9657,7 +9657,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 				if (pos >= 0x2FC)
 					pos = 0x2FC;
 				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 5;
+				gBattlescriptCurrInstr -= 3;
 			}
 		}
 		else
@@ -9677,7 +9677,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 				if (pos < 0x18E)
 					pos = 0x18E;
 				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 5;
+				gBattlescriptCurrInstr -= 3;
 			}
 		}
 	}
@@ -9691,7 +9691,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 				if (pos < 0x298)
 					pos = 0x298;
 				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 5;
+				gBattlescriptCurrInstr -= 3;
 			}
 		}
 		else
@@ -9702,7 +9702,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 				if (pos > 0x1F8)
 					pos = 0x1F8;
 				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 5;
+				gBattlescriptCurrInstr -= 3;
 			}
 		}
 	}

@@ -9540,12 +9540,6 @@ else
     gBattlescriptCurrInstr += 5;
 }
 
-#define REMOVE_POP_UP 0
-#define LOAD_ABILITY_FROM_BUFFER 0
-#define LOAD_ABILITY_NORMAL 1
-#define LOAD_ABILITY_FROM_SECOND_BANK 2
-#define LOAD_ABILITY_FROM_NEW_BUFFER 3
-
 static void atkFC_loadabilitypopup(void)
 {
 	struct TextPrinterTemplate printerTemplate;

@@ -9632,18 +9632,19 @@ static void PutMonIconOnPopUpBox(void)
 
 static void AnimAbilityPopUpBoxAsm(void)
 {
-	u8 bank = gBattleScripting.battler - 0x80;
+	u16 bank = gBattleScripting.battler - 0x80;
+	u16 check = gBattleScripting.battler;
 	u8 side = GetBattlerSide(bank);
 	u8 speed = 5;
 	u16 pos = gBattle_BG2_X;
 	
-	if (gBattleScripting.battler >= 0x80)
+	if (check >= 0x80)
 	{
 		if (side == B_SIDE_PLAYER)
 		{
 			if (pos == 0x2FC)
 			{
-				gBattleScripting.battler -= 0x80;
+				gBattleScripting.battler = bank;
 				ClearWindowTilemap(13);
 				CopyWindowToVram(13, COPYWIN_MAP);
 				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
@@ -9663,7 +9664,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 		{
 			if (pos == 0x18E)
 			{
-				gBattleScripting.battler -= 0x80;
+				gBattleScripting.battler = bank;
 				ClearWindowTilemap(13);
 				CopyWindowToVram(13, COPYWIN_MAP);
 				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);

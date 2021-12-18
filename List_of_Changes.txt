@@ -16,12 +16,20 @@ Automatic Swap Page On Naming Screen
 No Healing Eggs
 Eggs Hatch At Level 1
 
-//Abilities Added
+//Abilities Added and completed
 Adaptability
 Aftermath
 Anger Point
+Anticipation
+Bad Dreams
+Download
+Dry Skin
+Filter
 
 // Needing put in
+flower gift form change
+ability pop up scripts and asms
+
 unhidden power
 nature colors
 bw repel system

@@ -229,6 +229,7 @@ extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
 extern const u8 BattleScript_SilphScopeUnveiled[];
 extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
+extern const u8 
 extern const u8 BattleScript_FaintTargetReturn[];
 extern const u8 BattleScript_AngerPointActivation[];
 extern const u8 BattleScript_Anticipation[];

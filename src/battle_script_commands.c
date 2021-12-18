@@ -63,6 +63,7 @@ static void DrawLevelUpWindow1(void);
 static void DrawLevelUpWindow2(void);
 static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
+static void PutMonIconOnPopUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 static bool8 MakesSound(u16 move);
@@ -327,6 +328,7 @@ static void atkF8_callasm(void);
 static void atkF9_cureprimarystatus(void);
 static void atkFA_setword(void);
 static void atkFB_jumpifsubstituteblocks(void);
+static void atkFC_loadabilitypopup(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -582,6 +584,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF9_cureprimarystatus,
     atkFA_setword,
     atkFB_jumpifsubstituteblocks,
+    atkFC_loadabilitypopup,
 };
 
 void (* const gCallAsmCommandTablePointers[])(void) =
@@ -9533,6 +9536,102 @@ if (SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
     gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 else
     gBattlescriptCurrInstr += 5;
+}
+
+#define REMOVE_POP_UP 0
+#define LOAD_ABILITY_FROM_BUFFER 0
+#define LOAD_ABILITY_NORMAL 1
+#define LOAD_ABILITY_FROM_SECOND_BANK 2
+#define LOAD_ABILITY_FROM_NEW_BUFFER 3
+
+static void atkFC_loadabilitypopup(void)
+{
+	struct TextPrinterTemplate printerTemplate;
+	u8 i, ability, bank = GetBattlerForBattleScript(gBattlescriptCurrInstr[2]);
+	u8 func = gBattlescriptCurrInstr[1];
+	gBattleScripting.battler = bank;
+	
+	if (func == REMOVE_POP_UP)
+		gBattleScripting.battler += 0x80;
+	else
+	{
+		gBattle_BG2_Y = 0x60;
+		SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
+		ShowBg(2);
+		if (GetBattlerSide(bank) == B_SIDE_PLAYER)
+		{
+			gBattle_BG2_X = 0x2F0;
+			gBattle_BG2_Y = 0xB0;
+		}
+		else
+		{
+			gBattle_BG2_X = 0x1A0;
+			gBattle_BG2_Y = -0x8;
+		}
+		LoadPalette(sUnknownBattleboxPal, 0x60, 0x20);
+		CopyToWindowPixelBuffer(13, sUnknownBattleboxGfx, 0, 0);
+		PutWindowTilemap(13);
+                CopyWindowToVram(13, COPYWIN_BOTH);
+		for (i = 0; gBattleMons[bank].nickname[i] != EOS; i++)
+			gStringVar4[i] = gBattleMons[bank].nickname[i];
+		gStringVar4[i] = CHAR_SGL_QUOT_RIGHT;
+		gStringVar4[i + 1] = CHAR_s;
+		gStringVar4[i + 2] = EOS;
+		printerTemplate.currentChar = gStringVar4;
+		printerTemplate.windowId = 13;
+		printerTemplate.fontId = 0;
+                printerTemplate.x = 32;
+		printerTemplate.y = 0;
+		printerTemplate.currentX = 32;
+		printerTemplate.currentY = 0;
+		printerTemplate.letterSpacing = 0;
+		printerTemplate.lineSpacing = 0;
+		printerTemplate.unk = 0;
+		printerTemplate.fgColor = TEXT_COLOR_WHITE;
+		printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
+		printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
+		AddTextPrinter(&printerTemplate, 0xFF, NULL);
+		ability = GetBattlerForBattleScript(gBattlescriptCurrInstr[3]);
+		if (func == LOAD_ABILITY_FROM_SECOND_BANK)
+			ability = gBattleMons[GetBattlerForBattleScript(gBattlescriptCurrInstr[3])].ability;
+		else if (func == LOAD_ABILITY_FROM_NEW_BUFFER)
+			ability = gAbilityIdBackup;
+		else if (ability == LOAD_ABILITY_FROM_BUFFER)
+			ability = gLastUsedAbility;
+		printerTemplate.currentChar = gAbilityNames[ability];
+		printerTemplate.x = 10;
+		printerTemplate.currentX = 10;
+		AddTextPrinter(&printerTemplate, 0xFF, NULL);
+		CopyWindowToVram(13, COPYWIN_GFX);
+		PutMonIconOnPopUpBox();
+	}
+	BattleScriptPush(gBattlescriptCurrInstr + 4);
+	gBattlescriptCurrInstr = BattleScript_AnimPopUpBoxScript;
+}
+
+static void PutMonIconOnPopUpBox(void)
+{
+	struct SpriteSheet iconSheet;
+        struct SpritePalette iconPalSheet;
+	u8 spriteId, bank = gBattleScripting.battler;
+	u16 species = gBattleMons[bank].species;
+	u32 personality = gBattleMons[bank].personality;
+	const u8 *iconPtr = GetMonIconPtr(species, personality, 1);
+	const u16 *iconPal;
+	
+	iconSheet.data = iconPtr;
+	iconSheet.size = 0x200;
+	iconSheet.tag = MON_ICON_LVLUP_BOX_TAG;
+	iconPal = GetValidMonIconPalettePtr(species);
+	iconPalSheet.data = iconPal;
+	iconPalSheet.tag = MON_ICON_LVLUP_BOX_TAG;
+	LoadSpriteSheet(&iconSheet);
+	LoadSpritePalette(&iconPalSheet);
+	if (GetBattlerSide(bank) == B_SIDE_PLAYER)
+		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, 235, 88, 0);
+	else
+		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, 143, 16, 0);
+	gSprites[spriteId].sDestroy = FALSE;
 }
 
 //callasm command asm's

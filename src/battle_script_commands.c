@@ -65,6 +65,7 @@ static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutMonIconOnPopUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
+static void AnimAbilityPopUpBoxAsm(void);
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
@@ -589,6 +590,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
 
 void (* const gCallAsmCommandTablePointers[])(void) =
 {
+	[AnimAbilityPopUpBox] = AnimAbilityPopUpBoxAsm,
 	[DoAftermathDamage] = DoAftermathDamageAsm,
 	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
 	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
@@ -9632,6 +9634,82 @@ static void PutMonIconOnPopUpBox(void)
 	else
 		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, 143, 16, 0);
 	gSprites[spriteId].sDestroy = FALSE;
+}
+
+static void AnimAbilityPopUpBoxAsm(void)
+{
+	u8 side = GetBattlerSide(gBattleScripting.battler - 0x80);
+	u8 speed = 5;
+	u16 pos = gBattle_BG2_X;
+	
+	if (gBattleScripting.battler >= 0x80)
+	{
+		if (side == B_SIDE_PLAYER)
+		{
+			if (pos == 0x2FC)
+			{
+				gBattleScripting.battler -= 0x80;
+				ClearWindowTilemap(13);
+				CopyWindowToVram(13, COPYWIN_MAP);
+				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
+				ShowBg(2);
+				gBattle_BG2_X = 0;
+			}
+			else
+			{
+				pos += speed;
+				if (pos >= 0x2FC)
+					pos = 0x2FC;
+				gBattle_BG2_X = pos;
+				gBattlescriptCurrInstr -= 5;
+			}
+		}
+		else
+		{
+			if (pos == 0x18E)
+			{
+				gBattleScripting.battler -= 0x80;
+				ClearWindowTilemap(13);
+				CopyWindowToVram(13, COPYWIN_MAP);
+				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
+				ShowBg(2);
+				gBattle_BG2_X = 0;
+			}
+			else
+			{
+				pos -= speed;
+				if (pos < 0x18E)
+					pos = 0x18E;
+				gBattle_BG2_X = pos;
+				gBattlescriptCurrInstr -= 5;
+			}
+		}
+	}
+	else
+	{
+		if (side == B_SIDE_PLAYER)
+		{
+			if (pos > 0x298)
+			{
+				pos -= speed;
+				if (pos < 0x298)
+					pos = 0x298;
+				gBattle_BG2_X = pos;
+				gBattlescriptCurrInstr -= 5;
+			}
+		}
+		else
+		{
+			if (pos < 0x1F8)
+			{
+				pos += speed;
+				if (pos > 0x1F8)
+					pos = 0x1F8;
+				gBattle_BG2_X = pos;
+				gBattlescriptCurrInstr -= 5;
+			}
+		}
+	}
 }
 
 //callasm command asm's

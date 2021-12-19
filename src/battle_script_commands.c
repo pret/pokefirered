@@ -3250,13 +3250,14 @@ static void atk23_getexp(void)
             }
  #if EXP_BLOCK
             else 
-                for(i=0;FlagGet(FLAG_BADGE01_GET+i) && i!=8;i++) {
+                for(i = 0; FlagGet(FLAG_BADGE01_GET + i) && i != 8; i++) {
                 }
-                if (i!=8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare) {
-                    viaExpShare=sExpBlockLevels[i];
-                  *(&gBattleStruct->sentInPokes) >>= 1;
-                gBattleScripting.atk23_state = 5;
-                gBattleMoveDamage = 0;
+                if (i != 8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare)
+		{
+			viaExpShare=sExpBlockLevels[i];
+			*(&gBattleStruct->sentInPokes) >>= 1;
+			gBattleScripting.atk23_state = 5;
+			gBattleMoveDamage = 0;
                 }
   #endif         
                  else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
@@ -9599,7 +9600,9 @@ static void atkFC_loadabilitypopup(void)
 		printerTemplate.currentY = 10;
 		AddTextPrinter(&printerTemplate, 0xFF, NULL);
 		CopyWindowToVram(13, COPYWIN_GFX);
+#if MON_ICON_ON_ABILITY_POP_UP_BOX
 		PutMonIconOnPopUpBox();
+#endif
 	}
 	BattleScriptPush(gBattlescriptCurrInstr + 4);
 	gBattlescriptCurrInstr = BattleScript_AnimPopUpBoxScript;
@@ -9610,6 +9613,7 @@ static void PutMonIconOnPopUpBox(void)
 	struct SpriteSheet iconSheet;
         struct SpritePalette iconPalSheet;
 	u8 spriteId, bank = gBattleScripting.battler;
+	u16 posX, posY;
 	u16 species = gBattleMons[bank].species;
 	u32 personality = gBattleMons[bank].personality;
 	const u8 *iconPtr = GetMonIconPtr(species, personality, 1);
@@ -9624,22 +9628,58 @@ static void PutMonIconOnPopUpBox(void)
 	LoadSpriteSheet(&iconSheet);
 	LoadSpritePalette(&iconPalSheet);
 	if (GetBattlerSide(bank) == B_SIDE_PLAYER)
-		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, 235, 88, 0);
+		posX = 235; //player icon pos X and Y
+	        posY = 88;
+		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
 	else
-		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, 143, 16, 0);
+		posX = 143; //target icon pos X and Y
+	        posY = 16;
+		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
 	gSprites[spriteId].sDestroy = FALSE;
 }
 
 static void AnimAbilityPopUpBoxAsm(void)
 {
-	u16 bank = gBattleScripting.battler - 0x80;
-	u16 check = gBattleScripting.battler;
-	u8 side = GetBattlerSide(bank);
-	u8 speed = 5;
+	u8 speed = 5; //how greater this more fast the ability pop up make it's anim
+	u8 side;
+	u16 bank, check = gBattleScripting.battler;
 	u16 pos = gBattle_BG2_X;
 	
-	if (check >= 0x80)
+	if (check < 0x80)
 	{
+		//load ability pop up anim
+		bank = gBattleScripting.battler;
+		side = GetBattlerSide(bank);
+		
+		if (side == B_SIDE_PLAYER)
+		{
+			if (pos > 0x298)
+			{
+				pos -= speed;
+				if (pos < 0x298)
+					pos = 0x298;
+				gBattle_BG2_X = pos;
+				gBattlescriptCurrInstr -= 3;
+			}
+		}
+		else
+		{
+			if (pos < 0x1F8)
+			{
+				pos += speed;
+				if (pos > 0x1F8)
+					pos = 0x1F8;
+				gBattle_BG2_X = pos;
+				gBattlescriptCurrInstr -= 3;
+			}
+		}
+	}
+	else
+	{
+		//remove ability pop up anim
+		bank = gBattleScripting.battler - 0x80;
+		side = GetBattlerSide(bank);
+		
 		if (side == B_SIDE_PLAYER)
 		{
 			if (pos == 0x2FC)
@@ -9676,31 +9716,6 @@ static void AnimAbilityPopUpBoxAsm(void)
 				pos -= speed;
 				if (pos < 0x18E)
 					pos = 0x18E;
-				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 3;
-			}
-		}
-	}
-	else
-	{
-		if (side == B_SIDE_PLAYER)
-		{
-			if (pos > 0x298)
-			{
-				pos -= speed;
-				if (pos < 0x298)
-					pos = 0x298;
-				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 3;
-			}
-		}
-		else
-		{
-			if (pos < 0x1F8)
-			{
-				pos += speed;
-				if (pos > 0x1F8)
-					pos = 0x1F8;
 				gBattle_BG2_X = pos;
 				gBattlescriptCurrInstr -= 3;
 			}

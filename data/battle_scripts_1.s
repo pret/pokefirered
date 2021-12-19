@@ -4012,8 +4012,10 @@ BattleScript_CastformChange::
 BattleScript_DoCastformChangeAnim::
 	docastformchangeanimation
 	waitstate
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, ABILITY_FORECAST
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_IntimidateActivatesEnd3::

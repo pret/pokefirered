@@ -3952,8 +3952,10 @@ BattleScript_ItemSteal::
 
 BattleScript_DrizzleActivates::
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNMADEITRAIN
 	waitstate
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES, NULL
 	call BattleScript_HandleWeatherFormChanges
 	end3
@@ -4048,8 +4050,10 @@ BattleScript_IntimidateAbilityFail::
 
 BattleScript_DroughtActivates::
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
 	waitstate
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES, NULL
 	call BattleScript_HandleWeatherFormChanges
 	end3
@@ -4070,8 +4074,10 @@ BattleScript_SturdyPreventsOHKO::
 
 BattleScript_DampStopsExplosion::
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNPREVENTSUSAGE
 	pause 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	goto BattleScript_MoveEnd
 
 BattleScript_MoveHPDrain_PPLoss::

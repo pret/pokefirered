@@ -84,6 +84,7 @@ static const u8 sDownloadDescription[] =     _("Adjust power based on foe's stat
 static const u8 sDrySkinDescription[] =      _("Lost HP in sunny, gain HP in rain.");
 static const u8 sFilterDescription[] =       _("Powers down “Super effective” hits.");
 static const u8 sFlowerGiftDescription[] =   _("Ups party stats in sunlight.");
+static const u8 sForewarnDescription[] =     _("Tell the strongest move the foe has.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -173,6 +174,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_DRY_SKIN] = sDrySkinDescription,
     [ABILITY_FILTER] = sFilterDescription,
     [ABILITY_FLOWER_GIFT] = sFlowerGiftDescription,
+    [ABILITY_FOREWARN] = sForewarnDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -263,4 +265,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_DRY_SKIN] = _("DRY SKIN"),
     [ABILITY_FILTER] = _("FILTER"),
     [ABILITY_FLOWER_GIFT] = _("FLOWER GIFT"),
+    [ABILITY_FOREWARN] = _("FOREWARN"),
 };

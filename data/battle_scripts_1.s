@@ -4176,8 +4176,10 @@ BattleScript_StickyHoldActivates::
 	goto BattleScript_MoveEnd
 
 BattleScript_ColorChangeActivates::
+        loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNCHANGEDTYPEWITH
 	waitmessage 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_RoughSkinActivates::
@@ -4191,8 +4193,10 @@ BattleScript_RoughSkinActivates::
 
 BattleScript_CuteCharmActivates::
 	status2animation BS_ATTACKER, STATUS2_INFATUATION
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNSXINFATUATEDY
 	waitmessage 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_ApplySecondaryEffect::

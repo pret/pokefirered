@@ -4,3 +4,4 @@
 #define TryDoAnticipationShudder 3
 #define TryBadDreamsSecondDamage 4
 #define GetStatRaiseDownload 5
+#define GetStrongestMoveForewarn 6

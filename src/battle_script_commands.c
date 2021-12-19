@@ -51,6 +51,7 @@ static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its\nATTACK!");
 static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!");
 static const u8 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sForewarnString[] = _("It was alerted to\n{B_DEF_NAME_WITH_PREFIX}'s\l{B_BUFF1}!");
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -74,6 +75,8 @@ static void TryDoAnticipationShudderAsm(void);
 static bool8 AnticipationTypeCalc(u8 battler);
 static void TryBadDreamsSecondDamageAsm(void);
 static void GetStatRaiseDownloadAsm(void);
+static void GetStrongestMoveForewarnAsm(void);
+static u8 GetForewarnMovePower(u16 move);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -596,6 +599,7 @@ void (* const gCallAsmCommandTablePointers[])(void) =
 	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
 	[TryBadDreamsSecondDamage] = TryBadDreamsSecondDamageAsm,
 	[GetStatRaiseDownload] = GetStatRaiseDownloadAsm,
+	[GetStrongestMoveForewarn] = GetStrongestMoveForewarnAsm,
 };
 
 struct StatFractions
@@ -9833,8 +9837,86 @@ static void GetStatRaiseDownloadAsm(void)
 		gBattlescriptCurrInstr = BattleScript_DownloadRaiseSpAttack;
 }
 
+static u8 GetForewarnMovePower(u16 move)
+{
+	if (gBattleMoves[move].effect == EFFECT_0HKO)
+		return 150;
+	switch (move)
+	{
+		case MOVE_ERUPTION:
+		case MOVE_WATER_SPOUT:
+			return 150;
+		case MOVE_COUNTER: //need metal burst add
+		case MOVE_MIRROR_COAT:
+			return 120;
+		case MOVE_DRAGON_RAGE: //need crush grip, electro ball, final gambit, fling, grass knot, gyro ball, heat crash, heavy slam, natural gift, punishment, trump card and wring out add 
+		case MOVE_ENDEAVOR:
+		case MOVE_FLAIL:
+		case MOVE_FRUSTRATION:
+		case MOVE_HIDDEN_POWER:
+		case MOVE_LOW_KICK:
+		case MOVE_NIGHT_SHADE:
+		case MOVE_PRESENT:
+		case MOVE_PSYWAVE:
+		case MOVE_RETURN:
+		case MOVE_REVERSAL:
+		case MOVE_SEISMIC_TOSS:
+		case MOVE_SONIC_BOOM:
+		case MOVE_SPIT_UP:
+		case MOVE_SUPER_FANG:
+			return 80;
+			//need stored power and power trip add
+	}
+	return gBattleMoves[move].power;
+}
 
-
-
-
+static void GetStrongestMoveForewarnAsm(void)
+{
+	u16 move, strongestmove = MOVE_NONE;
+	u8 power, strongesttarget, i, maxpower = 0;
+	
+	for (i = 0; i < MAX_MON_MOVES; i++)
+	{
+		if (gBattleMons[gBattlerTarget].hp != 0)
+		{
+			move = gBattleMons[gBattlerTarget].moves[i];
+			power = GetForewarnMovePower(move);
+			if (strongestmove == MOVE_NONE)
+			{
+				strongestmove = move;
+				maxpower = power;
+				strongesttarget = gBattlerTarget;
+			}
+			else if (power > maxpower || power == maxpower && Random() & 1)
+			{
+				strongestmove = move;
+				maxpower = power;
+				strongesttarget = gBattlerTarget;
+			}
+		}
+		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0)
+		{
+			move = gBattleMons[gBattlerTarget ^ BIT_FLANK].moves[i];
+			if (move != MOVE_NONE)
+			{
+				power = GetForewarnMovePower(move);
+				if (strongestmove == MOVE_NONE)
+				{
+					strongestmove = move;
+					maxpower = power;
+					strongesttarget = gBattlerTarget ^ BIT_FLANK;
+				}
+				else if (power > maxpower || power == maxpower && Random() & 1)
+				{
+					strongestmove = move;
+					maxpower = power;
+					strongesttarget = gBattlerTarget ^ BIT_FLANK;
+				}
+			}
+		}
+		gBattlerTarget = strongesttarget;
+		PREPARE_MOVE_BUFFER(gBattleTextBuff1, strongestmove);
+		gSetWordLoc = sForewarnString;
+	}
+}
 

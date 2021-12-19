@@ -1266,6 +1266,7 @@
 	.endm
 	
 	.macro loadabilitypopup value:req, battler:req, ability:req
+	.byte 0xfc
 	.byte \value
 	.byte \battler
 	.byte \ability

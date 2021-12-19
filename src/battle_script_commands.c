@@ -9567,8 +9567,13 @@ static void atkFC_loadabilitypopup(void)
 			gBattle_BG2_X = 0x1A0;
 			gBattle_BG2_Y = -0x8;
 		}
+#if LOAD_CUSTOM_ABILITY_POP_UP_IMG
+		LoadPalette(sAbilityPopUpboxPal, 0x60, 0x20);
+		CopyToWindowPixelBuffer(13, sAbilityPopUpboxGfx, 0, 0);
+#else
 		LoadPalette(sUnknownBattleboxPal, 0x60, 0x20);
 		CopyToWindowPixelBuffer(13, sUnknownBattleboxGfx, 0, 0);
+#endif
 		PutWindowTilemap(13);
                 CopyWindowToVram(13, COPYWIN_BOTH);
 		for (i = 0; gBattleMons[bank].nickname[i] != EOS; i++)

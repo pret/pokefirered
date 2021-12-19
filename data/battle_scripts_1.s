@@ -4178,8 +4178,10 @@ BattleScript_SoundproofProtected::
 
 BattleScript_AbilityNoSpecificStatLoss::
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNSXPREVENTSYLOSS
 	waitmessage 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	setbyte cMULTISTRING_CHOOSER, 3
 	return
 

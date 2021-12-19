@@ -4110,8 +4110,10 @@ BattleScript_FlashFireBoost_PPLoss::
 BattleScript_FlashFireBoost::
 	attackstring
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, ABILITY_FLASH_FIRE
 	printfromtable gFlashFireStringIds
 	waitmessage 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	goto BattleScript_MoveEnd
 
 BattleScript_AbilityPreventsPhasingOut::

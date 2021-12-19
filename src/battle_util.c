@@ -40,6 +40,7 @@ static const struct SwitchAbilities gSwitchInAbilitiesTable[] =
 {
     {ABILITY_ANTICIPATION, BattleScript_Anticipation},
     {ABILITY_DOWNLOAD, BattleScript_Download},
+    {ABILITY_FOREWARN, BattleScript_Forewarn},
     {0xFFFFFFFF},
 };
 

@@ -3983,8 +3983,10 @@ BattleScript_RainDishActivatesEnd::
 
 BattleScript_SandstreamActivates::
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNSXWHIPPEDUPSANDSTORM
 	waitstate
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES, NULL
 	call BattleScript_HandleWeatherFormChanges
 	end3
@@ -4120,8 +4122,10 @@ BattleScript_AbilityPreventsPhasingOut::
 
 BattleScript_AbilityNoStatLoss::
 	pause 0x20
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNPREVENTSSTATLOSSWITH
 	waitmessage 0x40
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_BRNPrevention::

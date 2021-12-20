@@ -34,6 +34,7 @@
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
 #include "battle_util.h"
+#include "constants/battle_move_effects.h"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
@@ -2273,7 +2274,10 @@ static void BufferMonMoveI(u8 i)
     }
 
     sMonSummaryScreen->numMoves++;
-    sMonSummaryScreen->moveTypes[i] = gBattleMoves[sMonSummaryScreen->moveIds[i]].type;
+	if (gBattleMoves[sMonSummaryScreen->moveIds[i]].effect != EFFECT_HIDDEN_POWER)
+		sMonSummaryScreen->moveTypes[i] = gBattleMoves[sMonSummaryScreen->moveIds[i]].type;
+	else
+		sMonSummaryScreen->moveTypes[i] = GetHiddenPowerType(sMonSummaryScreen->currentMon);
     StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMoveNames[sMonSummaryScreen->moveIds[i]]);
 
     if (i >= 4 && sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)

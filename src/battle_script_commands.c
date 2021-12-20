@@ -9734,14 +9734,14 @@ static void AnimAbilityPopUpBoxAsm(void)
 static void DoAftermathDamageAsm(void)
 {
 	if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
-  {
-    gSetWordLoc = sAftermathString;
-    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-    if (gBattleMoveDamage == 0)
-      gBattleMoveDamage = 1;
-  }
+	{
+		gSetWordLoc = sAftermathString;
+		gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+		if (gBattleMoveDamage == 0)
+			gBattleMoveDamage = 1;
+	}
 	else
-	gBattlescriptCurrInstr = BattleScript_FaintTargetReturn;	
+		gBattlescriptCurrInstr = BattleScript_FaintTargetReturn;	
 }
 
 static void MaxAttackAngerPointAsm(void)
@@ -9783,11 +9783,9 @@ static bool8 AnticipationTypeCalc(u8 battler)
 
 static void TryDoAnticipationShudderAsm(void)
 {
-	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
-	
-	if (gBattleMons[gBattlerTarget].hp != 0 && AnticipationTypeCalc(gBattlerTarget))
+	if (AnticipationTypeCalc(gBattlerTarget))
 		gSetWordLoc = sAnticipationString;
-	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0 && AnticipationTypeCalc(bank2))
+	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 && AnticipationTypeCalc(bank2))
 		gSetWordLoc = sAnticipationString;
 	else
 		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
@@ -9877,22 +9875,19 @@ static void GetStrongestMoveForewarnAsm(void)
 	
 	for (i = 0; i < MAX_MON_MOVES; i++)
 	{
-		if (gBattleMons[gBattlerTarget].hp != 0)
+		move = gBattleMons[gBattlerTarget].moves[i];
+		power = GetForewarnMovePower(move);
+		if (strongestmove == MOVE_NONE)
 		{
-			move = gBattleMons[gBattlerTarget].moves[i];
-			power = GetForewarnMovePower(move);
-			if (strongestmove == MOVE_NONE)
-			{
-				strongestmove = move;
-				maxpower = power;
-				strongesttarget = gBattlerTarget;
-			}
-			else if (power > maxpower || (power == maxpower && Random() & 1))
-			{
-				strongestmove = move;
-				maxpower = power;
-				strongesttarget = gBattlerTarget;
-			}
+			strongestmove = move;
+			maxpower = power;
+			strongesttarget = gBattlerTarget;
+		}
+		else if (power > maxpower || (power == maxpower && Random() & 1))
+		{
+			strongestmove = move;
+			maxpower = power;
+			strongesttarget = gBattlerTarget;
 		}
 		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0)
 		{

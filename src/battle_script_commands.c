@@ -8223,17 +8223,9 @@ static void atkC0_recoverbasedonsunlight(void)
 
 static void atkC1_hiddenpowercalc(void)
 {
-    s32 typeBits = ((gBattleMons[gBattlerAttacker].hpIV & 1) << 0)
-              | ((gBattleMons[gBattlerAttacker].attackIV & 1) << 1)
-              | ((gBattleMons[gBattlerAttacker].defenseIV & 1) << 2)
-              | ((gBattleMons[gBattlerAttacker].speedIV & 1) << 3)
-              | ((gBattleMons[gBattlerAttacker].spAttackIV & 1) << 4)
-              | ((gBattleMons[gBattlerAttacker].spDefenseIV & 1) << 5);
-    gBattleStruct->dynamicMoveType = (15 * typeBits) / 63 + 1;
-    if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
-        ++gBattleStruct->dynamicMoveType;
-    gBattleStruct->dynamicMoveType |= 0xC0;
-    ++gBattlescriptCurrInstr;
+	gBattleStruct->dynamicMoveType = GetHiddenPowerType(gBattlerAttacker);
+        gBattleStruct->dynamicMoveType |= 0xC0;
+        ++gBattlescriptCurrInstr;
 }
 
 static void atkC2_selectfirstvalidtarget(void)

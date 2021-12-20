@@ -9785,7 +9785,7 @@ static void TryDoAnticipationShudderAsm(void)
 {
 	if (AnticipationTypeCalc(gBattlerTarget))
 		gSetWordLoc = sAnticipationString;
-	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 && AnticipationTypeCalc(bank2))
+	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 && AnticipationTypeCalc(gBattlerTarget ^ BIT_FLANK))
 		gSetWordLoc = sAnticipationString;
 	else
 		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;

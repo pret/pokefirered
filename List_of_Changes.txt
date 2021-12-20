@@ -5,6 +5,7 @@ Pokedex Glitch Fix
 // Others
 // Can't Be Turned On/Off
 Constant Hidden Power - Power: 60
+UnHidden Power
 Running Indoors
 Physical/Special/Status Split
 Sound Moves Bypass Substitute
@@ -29,12 +30,11 @@ Filter
 // Needing put in
 flower gift form change
 ability pop up scripts and asms
-hidden power check and probabily inverse battle in anticipation type calc
+probabily inverse battle check in anticipation type calc
 end moves data table update
 end forewarn script
 add new moves in get forewarn move power
 
-unhidden power @next
 nature colors
 bw repel system
 poison survival

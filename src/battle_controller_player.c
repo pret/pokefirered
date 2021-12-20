@@ -1410,7 +1410,7 @@ static void MoveSelectionDisplayMoveType(void)
     if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].effect != EFFECT_HIDDEN_POWER)
         type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
     else
-        type = GetHiddenPowerType(gBattlerPartyIndexes[gActiveBattler]);
+        type = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     StringCopy(txtPtr, gTypeNames[type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, 8);
 }

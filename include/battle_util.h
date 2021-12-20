@@ -88,5 +88,6 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
+u8 GetHiddenPowerType(u8 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

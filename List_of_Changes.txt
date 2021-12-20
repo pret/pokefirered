@@ -31,9 +31,10 @@ flower gift form change
 ability pop up scripts and asms
 hidden power check and probabily inverse battle in anticipation type calc
 end moves data table update
+end forewarn script
 add new moves in get forewarn move power
 
-unhidden power
+unhidden power @next
 nature colors
 bw repel system
 poison survival

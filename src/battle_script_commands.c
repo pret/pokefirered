@@ -9873,6 +9873,7 @@ static void GetStrongestMoveForewarnAsm(void)
 {
 	u16 move, strongestmove = MOVE_NONE;
 	u8 power, strongesttarget, i, maxpower = 0;
+	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
 	
 	for (i = 0; i < MAX_MON_MOVES; i++)
 	{
@@ -9893,9 +9894,9 @@ static void GetStrongestMoveForewarnAsm(void)
 				strongesttarget = gBattlerTarget;
 			}
 		}
-		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0)
+		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0)
 		{
-			move = gBattleMons[gBattlerTarget ^ BIT_FLANK].moves[i];
+			move = gBattleMons[bank2].moves[i];
 			if (move != MOVE_NONE)
 			{
 				power = GetForewarnMovePower(move);
@@ -9903,19 +9904,19 @@ static void GetStrongestMoveForewarnAsm(void)
 				{
 					strongestmove = move;
 					maxpower = power;
-					strongesttarget = gBattlerTarget ^ BIT_FLANK;
+					strongesttarget = bank2;
 				}
 				else if (power > maxpower || (power == maxpower && Random() & 1))
 				{
 					strongestmove = move;
 					maxpower = power;
-					strongesttarget = gBattlerTarget ^ BIT_FLANK;
+					strongesttarget = bank2;
 				}
 			}
 		}
-		gBattlerTarget = strongesttarget;
-		PREPARE_MOVE_BUFFER(gBattleTextBuff1, strongestmove);
-		gSetWordLoc = sForewarnString;
 	}
+	gBattlerTarget = strongesttarget;
+	PREPARE_MOVE_BUFFER(gBattleTextBuff1, strongestmove);
+	gSetWordLoc = sForewarnString;
 }
 

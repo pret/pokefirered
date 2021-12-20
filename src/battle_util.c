@@ -28,21 +28,9 @@
 #include "constants/battle_script_commands.h"
 #include "constants/sound_moves_table.h"
 
-#define MAX_SWITCH_IN_ABILITIES 2
-
-struct SwitchAbilities
-{
-    u32 ability;
-const u8* script;
-};
-
-static const struct SwitchAbilities gSwitchInAbilitiesTable[] = 
-{
-    {ABILITY_ANTICIPATION, BattleScript_Anticipation},
-    {ABILITY_DOWNLOAD, BattleScript_Download},
-    {ABILITY_FOREWARN, BattleScript_Forewarn},
-    {0xFFFFFFFF},
-};
+ABILITY_ANTICIPATION, BattleScript_Anticipation
+ABILITY_DOWNLOAD, BattleScript_Download
+ABILITY_FOREWARN, BattleScript_Forewarn
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {

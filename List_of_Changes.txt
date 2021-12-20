@@ -29,11 +29,10 @@ Filter
 
 // Needing put in
 flower gift form change
-ability pop up scripts and asms
-probabily inverse battle check in anticipation type calc
-end moves data table update
-end forewarn script
-add new moves in get forewarn move power
+end's ability pop up scripts and asms
+probabily add an inverse battle check in anticipation type calc
+end's moves data table update
+add the new moves in get forewarn move power
 
 nature colors
 bw repel system

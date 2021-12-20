@@ -2171,9 +2171,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 ++effect;
             }
             break;
-        case ABILITYEFFECT_INTIMIDATE1: // 9	
-	    bool8 hasability = FALSE;
-			
+        case ABILITYEFFECT_INTIMIDATE1: // 9		
             for (i = 0; i < gBattlersCount; ++i)
             {
                 if (gBattleMons[i].ability == ABILITY_INTIMIDATE)
@@ -2191,21 +2189,27 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		{
 			if (gBattleMons[i].ability == ABILITY_ANTICIPATION)
 			{
-				hasability = TRUE;
 				BattleScriptPushCursorAndCallback(BattleScript_Anticipation);
+				gLastUsedAbility = gBattleMons[i].ability;
+				gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
+				gBattlerAttacker = i;
+				gBattleStruct->intimidateBattler = i;
+				++effect;
+				break;
 			}
 			else if (gBattleMons[i].ability == ABILITY_DOWNLOAD)
 			{
-				hasability = TRUE;
 				BattleScriptPushCursorAndCallback(BattleScript_Download);
+				gLastUsedAbility = gBattleMons[i].ability;
+				gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
+				gBattlerAttacker = i;
+				gBattleStruct->intimidateBattler = i;
+				++effect;
+				break;
 			}
 			else if (gBattleMons[i].ability == ABILITY_FOREWARN)
 			{
-				hasability = TRUE;
 				BattleScriptPushCursorAndCallback(BattleScript_Forewarn);
-			}
-			if (hasability)
-			{
 				gLastUsedAbility = gBattleMons[i].ability;
 				gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
 				gBattlerAttacker = i;

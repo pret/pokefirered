@@ -9616,7 +9616,7 @@ static void PutMonIconOnPopUpBox(void)
 	struct SpriteSheet iconSheet;
         struct SpritePalette iconPalSheet;
 	u8 spriteId, bank = gBattleScripting.battler;
-	u16 posX, posY;
+	s16 posX, posY;
 	u16 species = gBattleMons[bank].species;
 	u32 personality = gBattleMons[bank].personality;
 	const u8 *iconPtr = GetMonIconPtr(species, personality, 1);
@@ -9631,13 +9631,17 @@ static void PutMonIconOnPopUpBox(void)
 	LoadSpriteSheet(&iconSheet);
 	LoadSpritePalette(&iconPalSheet);
 	if (GetBattlerSide(bank) == B_SIDE_PLAYER)
+	{
 		posX = 235; //player icon pos X and Y
 	        posY = 88;
 		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
+	}
 	else
+	{
 		posX = 143; //target icon pos X and Y
 	        posY = 16;
 		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
+	}
 	gSprites[spriteId].sDestroy = FALSE;
 }
 
@@ -9834,7 +9838,7 @@ static void GetStatRaiseDownloadAsm(void)
 
 static u8 GetForewarnMovePower(u16 move)
 {
-	if (gBattleMoves[move].effect == EFFECT_0HKO)
+	if (gBattleMoves[move].effect == EFFECT_OHKO)
 		return 150;
 	switch (move)
 	{

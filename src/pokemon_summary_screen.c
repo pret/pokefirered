@@ -2277,7 +2277,7 @@ static void BufferMonMoveI(u8 i)
 	if (gBattleMoves[sMonSummaryScreen->moveIds[i]].effect != EFFECT_HIDDEN_POWER)
 		sMonSummaryScreen->moveTypes[i] = gBattleMoves[sMonSummaryScreen->moveIds[i]].type;
 	else
-		sMonSummaryScreen->moveTypes[i] = GetHiddenPowerType(sMonSummaryScreen->currentMon);
+		sMonSummaryScreen->moveTypes[i] = GetHiddenPowerType(&sMonSummaryScreen->currentMon);
     StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMoveNames[sMonSummaryScreen->moveIds[i]]);
 
     if (i >= 4 && sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)

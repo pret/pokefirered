@@ -3282,12 +3282,12 @@ u8 IsMonDisobedient(void)
 u8 GetHiddenPowerType(u8 battler)
 {
 	u8 type;
-	s32 typeBits = ((gBattleMons[battler].hpIV & 1) << 0)
-              | ((gBattleMons[battler].attackIV & 1) << 1)
-              | ((gBattleMons[battler].defenseIV & 1) << 2)
-              | ((gBattleMons[battler].speedIV & 1) << 3)
-              | ((gBattleMons[battler].spAttackIV & 1) << 4)
-              | ((gBattleMons[battler].spDefenseIV & 1) << 5);
+	s32 typeBits = ((GetMonData(&gPlayerParty[battler], MON_DATA_HP_IV) & 1) << 0)
+              | ((GetMonData(&gPlayerParty[battler], MON_DATA_ATK_IV) & 1) << 1)
+              | ((GetMonData(&gPlayerParty[battler], MON_DATA_DEF_IV) & 1) << 2)
+              | ((GetMonData(&gPlayerParty[battler], MON_DATA_SPEED_IV) & 1) << 3)
+              | ((GetMonData(&gPlayerParty[battler], MON_DATA_SPATK_IV) & 1) << 4)
+              | ((GetMonData(&gPlayerParty[battler], MON_DATA_SPDEF_IV) & 1) << 5);
 	
 	type = (15 * typeBits) / 63 + 1;
 	if (type >= TYPE_MYSTERY)

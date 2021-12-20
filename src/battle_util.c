@@ -28,10 +28,6 @@
 #include "constants/battle_script_commands.h"
 #include "constants/sound_moves_table.h"
 
-ABILITY_ANTICIPATION, BattleScript_Anticipation
-ABILITY_DOWNLOAD, BattleScript_Download
-ABILITY_FOREWARN, BattleScript_Forewarn
-
 u8 GetBattlerForBattleScript(u8 caseId)
 {
     u32 ret = 0;
@@ -1641,7 +1637,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             moveArg = gCurrentMove;
         GET_MOVE_TYPE(moveArg, moveType);
         if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
-         && (gLastUsedAbility == ABILITY_INTIMIDATE || gLastUsedAbility == ABILITY_TRACE))
+         && (gLastUsedAbility == ABILITY_INTIMIDATE 
+	  || gLastUsedAbility == ABILITY_TRACE
+	  || gLastUsedAbility == ABILITY_ANTICIPATION
+	  || gLastUsedAbility == ABILITY_DOWNLOAD
+	  || gLastUsedAbility == ABILITY_FOREWARN))
             return effect;
         switch (caseID)
         {

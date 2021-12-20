@@ -3278,3 +3278,24 @@ u8 IsMonDisobedient(void)
         }
     }
 }
+
+u8 GetHiddenPowerType(u8 battler)
+{
+	u8 type = ((gBattleMons[battler].hpIV & 1) << 0)
+              | ((gBattleMons[battler].attackIV & 1) << 1)
+              | ((gBattleMons[battler].defenseIV & 1) << 2)
+              | ((gBattleMons[battler].speedIV & 1) << 3)
+              | ((gBattleMons[battler].spAttackIV & 1) << 4)
+              | ((gBattleMons[battler].spDefenseIV & 1) << 5);
+	
+	type = (15 * type) / 63 + 1;
+	if (type >= TYPE_MYSTERY)
+		++type;
+	return type;
+}
+	
+
+	
+	
+	
+	

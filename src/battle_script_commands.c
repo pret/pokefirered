@@ -9751,12 +9751,15 @@ static bool8 AnticipationTypeCalc(u8 battler)
 	u16 moveid;
 	s32 i2 = 0;
 	
-	//need hidden power check and probabily inverse battle
+	//probabily need inverse battle check
 	
 	for (i = 0; i < MAX_MON_MOVES; i++, i2 = 0)
 	{
 		moveid = gBattleMons[battler].moves[i];
-		movetype = gBattleMoves[moveid].type;
+		if (gBattleMoves[moveid].effect == EFFECT_HIDDEN_POWER)
+			movetype = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[i]]);
+		else
+			movetype = gBattleMoves[moveid].type;
 		
 		if (moveid != MOVE_NONE && gBattleMoves[moveid].power)
 		{

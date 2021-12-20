@@ -9886,7 +9886,7 @@ static void GetStrongestMoveForewarnAsm(void)
 				maxpower = power;
 				strongesttarget = gBattlerTarget;
 			}
-			else if (power > maxpower || power == maxpower && Random() & 1)
+			else if (power > maxpower || (power == maxpower && Random() & 1))
 			{
 				strongestmove = move;
 				maxpower = power;
@@ -9905,7 +9905,7 @@ static void GetStrongestMoveForewarnAsm(void)
 					maxpower = power;
 					strongesttarget = gBattlerTarget ^ BIT_FLANK;
 				}
-				else if (power > maxpower || power == maxpower && Random() & 1)
+				else if (power > maxpower || (power == maxpower && Random() & 1))
 				{
 					strongestmove = move;
 					maxpower = power;

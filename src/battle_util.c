@@ -2448,7 +2448,7 @@ enum
     ITEM_STATS_CHANGE,
 };
 
-static bool8 IsItemAffectedByGluttony(u16 Item)
+bool8 IsItemAffectedByGluttony(u16 Item)
 {
 	switch (Item)
 	{

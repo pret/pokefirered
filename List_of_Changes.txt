@@ -30,7 +30,7 @@ Frisk
 Heatproof
 
 // Needing put in
-check calculate base damage asm
+check and update calculate base damage asm
 flower gift form change
 end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc

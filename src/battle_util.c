@@ -1641,7 +1641,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 	  || gLastUsedAbility == ABILITY_TRACE
 	  || gLastUsedAbility == ABILITY_ANTICIPATION
 	  || gLastUsedAbility == ABILITY_DOWNLOAD
-	  || gLastUsedAbility == ABILITY_FOREWARN))
+	  || gLastUsedAbility == ABILITY_FOREWARN
+	  || gLastUsedAbility == ABILITY_FRISK))
             return effect;
         switch (caseID)
         {
@@ -2210,6 +2211,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 			else if (gBattleMons[i].ability == ABILITY_FOREWARN)
 			{
 				BattleScriptPushCursorAndCallback(BattleScript_Forewarn);
+				gLastUsedAbility = gBattleMons[i].ability;
+				gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
+				gBattlerAttacker = i;
+				gBattleStruct->intimidateBattler = i;
+				++effect;
+				break;
+			}
+			else if (gBattleMons[i].ability == ABILITY_FRISK)
+			{
+				BattleScriptPushCursorAndCallback(BattleScript_Frisk);
 				gLastUsedAbility = gBattleMons[i].ability;
 				gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
 				gBattlerAttacker = i;

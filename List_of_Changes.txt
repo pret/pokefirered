@@ -26,6 +26,7 @@ Bad Dreams
 Download
 Dry Skin
 Filter
+Frisk
 
 // Needing put in
 flower gift form change
@@ -33,6 +34,7 @@ end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc
 end's moves data table update
 add the new moves in get forewarn move power
+add berries in is item affected by gluttony
 
 nature colors
 bw repel system

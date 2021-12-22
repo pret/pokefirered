@@ -2448,6 +2448,23 @@ enum
     ITEM_STATS_CHANGE,
 };
 
+static bool8 IsItemAffectedByGluttony(u16 Item)
+{
+	switch (Item)
+	{
+		case ITEM_LIECHI_BERRY:
+		case ITEM_GANLON_BERRY:
+		case ITEM_SALAC_BERRY:
+		case ITEM_PETAYA_BERRY:
+		case ITEM_APICOT_BERRY:
+		case ITEM_LANSAT_BERRY:
+		case ITEM_STARF_BERRY:
+			return TRUE;
+		default:
+			return FALSE;
+	}
+}
+
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
     int i = 0;
@@ -2468,7 +2485,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         battlerHoldEffect = ItemId_GetHoldEffect(gLastUsedItem);
         battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
     }
-
+    if (gBattleMons[battlerId].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(gBattleMons[battlerId].item))
+	battlerHoldEffectParam /= 2;
     atkItem = gBattleMons[gBattlerAttacker].item;
     if (atkItem == ITEM_ENIGMA_BERRY)
     {

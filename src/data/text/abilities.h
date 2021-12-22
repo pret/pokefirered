@@ -23,7 +23,7 @@ static const u8 sSuctionCupsDescription[] =  _("Firmly anchors the body.");
 static const u8 sIntimidateDescription[] =   _("Lowers the foe's ATTACK.");
 static const u8 sShadowTagDescription[] =    _("Prevents the foe's escape.");
 static const u8 sRoughSkinDescription[] =    _("Hurts to touch.");
-static const u8 sWonderGuardDescription[] =  _("“Super effective” hits.");
+static const u8 sWonderGuardDescription[] =  _("Prevents “super effective” hits.");
 static const u8 sLevitateDescription[] =     _("Not hit by GROUND attacks.");
 static const u8 sEffectSporeDescription[] =  _("Leaves spores on contact.");
 static const u8 sSynchronizeDescription[] =  _("Passes on status problems.");
@@ -82,11 +82,12 @@ static const u8 sAnticipationDescription[] = _("Senses an dangerous move.");
 static const u8 sBadDreamsDescription[] =    _("Damage sleeping foe's.");
 static const u8 sDownloadDescription[] =     _("Adjust power based on foe's stats.");
 static const u8 sDrySkinDescription[] =      _("Lost HP in sunny, gain HP in rain.");
-static const u8 sFilterDescription[] =       _("Powers down “Super effective” hits.");
+static const u8 sFilterDescription[] =       _("Powers down “super effective” hits.");
 static const u8 sFlowerGiftDescription[] =   _("Ups party stats in sunlight.");
 static const u8 sForewarnDescription[] =     _("Tell the strongest move the foe has.");
 static const u8 sFriskDescription[] =        _("Can check the foe's item.");
 static const u8 sGluttonyDescription[] =     _("The user eat Berries early.");
+static const u8 sHeatproofDescription[] =    _("Powers down FIRE moves.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -179,6 +180,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_FOREWARN] = sForewarnDescription,
     [ABILITY_FRISK] = sFriskDescription,
     [ABILITY_GLUTTONY] = sGluttonyDescription,
+    [ABILITY_HEATPROOF] = sHeatproofDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -272,4 +274,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_FOREWARN] = _("FOREWARN"),
     [ABILITY_FRISK] = _("FRISK"),
     [ABILITY_GLUTTONY] = _("GLUTTONY"),
+    [ABILITY_HEATPROOF] = _("HEATPROOF"),
 };

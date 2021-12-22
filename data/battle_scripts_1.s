@@ -4532,8 +4532,19 @@ BattleScript_ForewarnActivation::
 	return
 
 BattleScript_Frisk::
+        call BattleScript_FriskActivation
+	end3
+	
+BattleScript_FriskActivation::
+        pause 0x20
+	setbyte gBattlerTarget, 0
+	trygetintimidatetarget BattleScript_AnticipationReturn
         callasm TryFriskFirstTarget
+	printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
 	callasm TryFriskSecondTarget
+	
+
 
 sBadDreamsString::
     .byte 0xFD, 0xF, 0x0, 0xDD, 0xE7, 0xFE, 0xE8, 0xE3, 0xE6, 0xE1, 0xD9, 0xE2, 0xE8, 0xD9, 0xD8, 0xAB, 0xFF

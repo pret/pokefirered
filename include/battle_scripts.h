@@ -242,6 +242,7 @@ extern const u8 BattleScript_DrySkinRainActivates[];
 extern const u8 BattleScript_DrySkinSunActivates[];
 extern const u8 BattleScript_Forewarn[];
 extern const u8 BattleScript_Frisk[];
+extern const u8 BattleScript_TryFriskSecondTarget[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

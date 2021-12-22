@@ -5,3 +5,5 @@
 #define TryBadDreamsSecondDamage 4
 #define GetStatRaiseDownload 5
 #define GetStrongestMoveForewarn 6
+#define TryFriskFirstTarget 7
+#define TryFriskSecondTarget 8

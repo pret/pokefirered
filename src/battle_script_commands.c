@@ -77,6 +77,8 @@ static void TryBadDreamsSecondDamageAsm(void);
 static void GetStatRaiseDownloadAsm(void);
 static void GetStrongestMoveForewarnAsm(void);
 static u8 GetForewarnMovePower(u16 move);
+static void TryFriskFirstTargetAsm(void);
+static void TryFriskSecondTargetAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -600,6 +602,8 @@ void (* const gCallAsmCommandTablePointers[])(void) =
 	[TryBadDreamsSecondDamage] = TryBadDreamsSecondDamageAsm,
 	[GetStatRaiseDownload] = GetStatRaiseDownloadAsm,
 	[GetStrongestMoveForewarn] = GetStrongestMoveForewarnAsm,
+	[TryFriskFirstTarget] = TryFriskFirstTargetAsm,
+	[TryFriskSecondTarget] = TryFriskSecondTargetAsm,
 };
 
 struct StatFractions
@@ -9915,3 +9919,37 @@ static void GetStrongestMoveForewarnAsm(void)
 	gSetWordLoc = sForewarnString;
 }
 
+static void TryFriskFirstTargetAsm(void)
+{
+	u8 target2 = gBattlerTarget ^ BIT_FLANK;
+	gSetWordLoc = sFriskString;
+	
+	if (!(gBattleMons[gBattlerTarget].item))
+	{
+		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[target2].hp != 0 && gBattleMons[target2].item)
+		{
+			gLastUsedItem = gBattleMons[target2].item;
+			gBattlerTarget = target2;
+			gBattlescriptCurrInstr = BattleScript_TryFriskSecondTarget;
+		}
+		else
+			gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
+	}
+	else
+		gLastUsedItem = gBattleMons[gBattlerTarget].item;
+}
+
+static void TryFriskSecondTargetAsm(void)
+{
+	if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 && gBattleMons[gBattlerTarget ^ BIT_FLANK].item)
+	{
+		gBattlerTarget ^= BIT_FLANK;
+		gLastUsedItem = gBattleMons[gBattlerTarget].item;
+	}
+	else
+		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
+}
+	
+	
+	
+	

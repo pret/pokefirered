@@ -842,7 +842,7 @@
       "importance": 0,                            
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",
-      "type": 1,
+      "type": 2,
       "fieldUseFunc": "FieldUseFunc_Honey",
       "battleUsage": 0,
       "battleUseFunc": "NULL",

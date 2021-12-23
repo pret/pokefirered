@@ -40,6 +40,7 @@ end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc
 end's moves data table update
 add the new moves in get forewarn move power
+add the new moves in sIronFistTable
 add berries in is item affected by gluttony
 
 nature colors

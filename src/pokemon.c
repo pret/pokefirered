@@ -5416,7 +5416,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         }
         else
         {
-            holdEffect = ItemId_GetHoldEffect(heldItem);
+            holdEffect = ItemId_GetHoldEffect(heldItem, 0, FALSE);
         }
 
         if (holdEffect == HOLD_EFFECT_MACHO_BRACE)

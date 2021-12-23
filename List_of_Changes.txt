@@ -1,4 +1,4 @@
-// REVISION =1
+// REVISION = 1
 Game Freak Presents Intro Fix
 Pokedex Glitch Fix 
 
@@ -16,6 +16,7 @@ Exp Block By Badge
 Automatic Swap Page On Naming Screen
 No Healing Eggs
 Eggs Hatch At Level 1
+Poison Survival
 
 //Abilities Added and completed
 Adaptability
@@ -43,7 +44,6 @@ add berries in is item affected by gluttony
 
 nature colors
 bw repel system
-poison survival
 evolve without national dex
 evolution via happiness
 evs cap to 252 @next

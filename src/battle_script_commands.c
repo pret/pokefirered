@@ -3223,7 +3223,7 @@ static void atk23_getexp(void)
                     if (item == ITEM_ENIGMA_BERRY)
                         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
                     else
-                        holdEffect = ItemId_GetHoldEffect(item);
+                        holdEffect = ItemId_GetHoldEffect(item, 0, FALSE);
                     if (holdEffect == HOLD_EFFECT_EXP_SHARE)
                         ++viaExpShare;
                 }
@@ -3257,7 +3257,7 @@ static void atk23_getexp(void)
             if (item == ITEM_ENIGMA_BERRY)
                 holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
             else
-                holdEffect = ItemId_GetHoldEffect(item);
+                holdEffect = ItemId_GetHoldEffect(item, 0, FALSE);
             if (holdEffect != HOLD_EFFECT_EXP_SHARE && !(gBattleStruct->sentInPokes & 1))
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;

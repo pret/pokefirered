@@ -2911,7 +2911,7 @@ u8 IsRunningFromBattleImpossible(void)
     if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
     else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item, gActiveBattler, TRUE);
     gPotentialItemEffectBattler = gActiveBattler;
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN
      || (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -3337,7 +3337,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler1].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler1].item, battler1, TRUE);
         holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[battler1].item);
     }
     // badge boost
@@ -3345,7 +3345,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      && FlagGet(FLAG_BADGE03_GET)
      && GetBattlerSide(battler1) == B_SIDE_PLAYER)
         speedBattler1 = (speedBattler1 * 110) / 100;
-    if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
+    if (ItemId_GetHoldEffect(gBattleMons[battler1].item, 0, FALSE) == HOLD_EFFECT_MACHO_BRACE)
         speedBattler1 /= 2;
     if (gBattleMons[battler1].status1 & STATUS1_PARALYSIS)
         speedBattler1 /= 4;
@@ -3362,7 +3362,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler2].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler2].item, battler2, TRUE);
         holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[battler2].item);
     }
     // badge boost
@@ -3370,7 +3370,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      && FlagGet(FLAG_BADGE03_GET)
      && GetBattlerSide(battler2) == B_SIDE_PLAYER)
         speedBattler2 = (speedBattler2 * 110) / 100;
-    if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
+    if (ItemId_GetHoldEffect(gBattleMons[battler2].item, 0, FALSE) == HOLD_EFFECT_MACHO_BRACE)
         speedBattler2 /= 2;
     if (gBattleMons[battler2].status1 & STATUS1_PARALYSIS)
         speedBattler2 /= 4;
@@ -3526,9 +3526,10 @@ u32 CalculateMonBracket(u8 battler)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(itemid);
+        holdEffect = ItemId_GetHoldEffect(itemid, battler, TRUE);
         holdEffectParam = ItemId_GetHoldEffectParam(itemid);
     }
+    //macho brace don't is negated by klutz
     //add quick draw check here
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100))
         bracket = 1;

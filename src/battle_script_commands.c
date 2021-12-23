@@ -8947,7 +8947,7 @@ static void atkE5_pickup(void)
 			for (chance = 5, levelmax = 10; level > levelmax; chance += 5, levelmax += 10)
 				if (levelmax == 100)
 					break;
-			if (chance <= random)
+			if (chance > random)
 				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sHoneyItem[0]);
 		}
 	}

@@ -28,6 +28,9 @@ Dry Skin
 Filter
 Frisk
 Heatproof
+Honey Gather
+Hydration
+Ice Body
 
 // Needing put in
 check and update calculate base damage asm
@@ -37,7 +40,6 @@ probabily add an inverse battle check in anticipation type calc
 end's moves data table update
 add the new moves in get forewarn move power
 add berries in is item affected by gluttony
-honey gather need add honey item
 
 nature colors
 bw repel system

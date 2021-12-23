@@ -8912,28 +8912,40 @@ static void atkE4_getsecretpowereffect(void)
 
 static void atkE5_pickup(void)
 {
-    s32 i;
+    u8 level, chance, levelmax;
+    s32 i, random;
     u32 j;
     u16 species, heldItem;
     u32 ability;
 
     for (i = 0; i < PARTY_SIZE; ++i)
     {
+	random = Random() % 100;
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM) != ABILITY_NONE)
             ability = gBaseStats[species].abilities[1];
         else
             ability = gBaseStats[species].abilities[0];
-        if (ability == ABILITY_PICKUP && species != SPECIES_NONE && species != SPECIES_EGG && heldItem == ITEM_NONE && !(Random() % 10))
-        {
-            s32 random = Random() % 100;
-
-            for (j = 0; j < 15; ++j)
-                if (sPickupItems[j].chance > random)
-                    break;
-            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[j]);
-        }
+	if (species != SPECIES_NONE && species != SPECIES_EGG && heldItem == ITEM_NONE)
+	{
+		if (ability == ABILITY_PICKUP && !(Random() % 10))
+		{
+			for (j = 0; j < 15; ++j)
+				if (sPickupItems[j].chance > random)
+					break;
+			SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[j]);
+		}
+		else if (ability == ABILITY_HONEY_GATHER)
+		{
+			level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+			for (chance = 5, levelmax = 10; level > levelmax; chance += 5, levelmax += 10)
+				if (levelmax == 100)
+					break;
+			if (chance <= random)
+				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sHoneyItem[0]);
+		}
+	}
     }
     ++gBattlescriptCurrInstr;
 }

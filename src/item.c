@@ -10,6 +10,7 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/abilities.h"
 
 EWRAM_DATA struct BagPocket gBagPockets[NUM_BAG_POCKETS] = {};
 
@@ -634,6 +635,14 @@ u16 itemid_get_market_price(u16 itemId)
 u8 ItemId_GetHoldEffect(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].holdEffect;
+}
+
+u8 ItemId_GetHoldEffectCheckKlutz(u16 itemId, u8 bank)
+{
+    if (gBattleMons[bank].ability == ABILITY_KLUTZ)
+        return 0;
+    else
+        return gItems[SanitizeItemId(itemId)].holdEffect;
 }
 
 u8 ItemId_GetHoldEffectParam(u16 itemId)

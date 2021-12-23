@@ -334,7 +334,7 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
     if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[battlerId].holdEffect;
     else
-        holdEffect = ItemId_GetHoldEffectCheckKlutz(gBattleMons[battlerId].item, battlerId);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[battlerId].item, battlerId, TRUE);
     gPotentialItemEffectBattler = battlerId;
 
     for (i = 0; i < MAX_MON_MOVES; ++i)

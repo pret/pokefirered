@@ -52,5 +52,7 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId);
 // sweetscent
 bool8 SetUpFieldMove_SweetScent(void);
 bool8 FldEff_SweetScent(void);
+// used for item honey
+bool8 FldEff_TryStartWildBattle(void);
 
 #endif // GUARD_FLDEFF_H

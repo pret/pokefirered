@@ -3974,7 +3974,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
+        holdEffect = ItemId_GetHoldEffect(heldItem, 0, FALSE);
     }
 
     gPotentialItemEffectBattler = gBattlerInMenuId;
@@ -4496,7 +4496,7 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
+        holdEffect = ItemId_GetHoldEffect(heldItem, 0, FALSE);
     }
     gPotentialItemEffectBattler = gBattlerInMenuId;
     if (gMain.inBattle)

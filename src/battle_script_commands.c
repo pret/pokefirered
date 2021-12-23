@@ -6953,7 +6953,7 @@ static void atk93_tryKO(void)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item, gBattlerTarget, TRUE);
         param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
     }
     gPotentialItemEffectBattler = gBattlerTarget;

@@ -632,17 +632,13 @@ u16 itemid_get_market_price(u16 itemId)
     return gItems[SanitizeItemId(itemId)].price;
 }
 
-u8 ItemId_GetHoldEffect(u16 itemId)
+u8 ItemId_GetHoldEffect(u16 itemId, u8 bank, bool8 CheckOthers)
 {
-    return gItems[SanitizeItemId(itemId)].holdEffect;
-}
-
-u8 ItemId_GetHoldEffectCheckKlutz(u16 itemId, u8 bank)
-{
-    if (gBattleMons[bank].ability == ABILITY_KLUTZ)
-        return 0;
-    else
-        return gItems[SanitizeItemId(itemId)].holdEffect;
+    u8 EffectByte = gItems[SanitizeItemId(itemId)].holdEffect;
+    
+    if (CheckOthers && gBattleMons[bank].ability == ABILITY_KLUTZ)
+        EffectByte = 0;
+    return EffectByte;
 }
 
 u8 ItemId_GetHoldEffectParam(u16 itemId)

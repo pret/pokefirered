@@ -2449,9 +2449,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     }  
     if (attacker->ability == ABILITY_IRON_FIST)
     {
-        for (j = 0; sIronFirstTable[j] != TABLE_END; j++)
+        for (j = 0; sIronFistTable[j] != TABLE_END; j++)
         {
-            if (move == sIronFirstTable[j])
+            if (move == sIronFistTable[j])
                 gBattleMovePower = (120 * gBattleMovePower) / 100;
         }
     }

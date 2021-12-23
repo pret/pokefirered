@@ -1475,7 +1475,7 @@ static const u8 sHoldEffectToType[][2] =
     {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
 };
 
-static const u16 sIronFirstTable[] =
+static const u16 sIronFistTable[] =
 {
     MOVE_COMET_PUNCH,
     MOVE_DIZZY_PUNCH,

@@ -2347,6 +2347,18 @@ static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 mo
     SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
+bool8 IsMoveInTable(const u16 table[], u16 moveId)
+{
+    u32 i;
+    
+    for (i = 0; table[i] != TABLE_END; i++)
+    {
+        if (moveId == table[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u8 type, split;
@@ -2447,14 +2459,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack /= 2;
         attack /= 2;
     }  
-    if (attacker->ability == ABILITY_IRON_FIST)
-    {
-        for (j = 0; sIronFistTable[j] != TABLE_END; j++)
-        {
-            if (move == sIronFistTable[j])
-                gBattleMovePower = (120 * gBattleMovePower) / 100;
-        }
-    }
+    if (attacker->ability == ABILITY_IRON_FIST && IsMoveInTable(sIronFistTable, move))
+        gBattleMovePower = (120 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
     if (attacker->ability == ABILITY_HUSTLE)

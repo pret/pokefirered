@@ -4,7 +4,8 @@ EventScript_RepelWoreOff:: @ 81BFB65
 
 EventScript_Honey::
         callnative FldEff_TryStartWildBattle
-	goto_if_unset VAR_0x8000, EventScript_HoneyFail
+	compare VAR_0x8000, FALSE
+	goto_if_eq EventScript_HoneyFail
 	release
 	end
 	

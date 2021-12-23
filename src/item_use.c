@@ -71,8 +71,6 @@ static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
 static void FieldUseFunc_HoneyCallBack1(u8 taskId);
 static void FieldUseFunc_HoneyCallBack2(u8 taskId);
 
-
-
 // No clue what this is
 static const u8 sUnref_83E27B4[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -744,7 +742,7 @@ static void FieldUseFunc_HoneyCB1(u8 taskId)
 {
     sub_80A1A44();
     gTasks[taskId].data[0] = 0;
-    DisplayItemMessageOnField(taskId, 2, sHoneyString, FieldUseFunc_HoneyCB2);
+    DisplayItemMessageOnField(taskId, 2, gUnknown_841658C, FieldUseFunc_HoneyCB2);
 }
 
 static void FieldUseFunc_HoneyCB2(u8 taskId)

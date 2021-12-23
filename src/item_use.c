@@ -68,6 +68,10 @@ static void sub_80A1D58(void);
 static void sub_80A1D68(u8 taskId);
 static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
 static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
+static void FieldUseFunc_HoneyCallBack1(u8 taskId);
+static void FieldUseFunc_HoneyCallBack2(u8 taskId);
+
+
 
 // No clue what this is
 static const u8 sUnref_83E27B4[] = {
@@ -727,6 +731,26 @@ void FieldUseFunc_VsSeeker(u8 taskId)
         sItemUseOnFieldCB = Task_VsSeeker_0;
         sub_80A103C(taskId);
     }
+}
+
+void FieldUseFunc_Honey(u8 taskId)
+{
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
+    sItemUseOnFieldCB = FieldUseFunc_HoneyCB1;
+    sub_80A103C(taskId);
+}
+
+static void FieldUseFunc_HoneyCB1(u8 taskId)
+{
+    sub_80A1A44();
+    gTasks[taskId].data[0] = 0;
+    DisplayItemMessageOnField(taskId, 2, sHoneyString, FieldUseFunc_HoneyCB2);
+}
+
+static void FieldUseFunc_HoneyCB2(u8 taskId)
+{
+    ScriptContext1_SetupScript(EventScript_Honey);
+    DestroyTask(taskId);
 }
 
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)

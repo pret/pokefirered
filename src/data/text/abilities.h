@@ -90,6 +90,7 @@ static const u8 sGluttonyDescription[] =     _("The user eat Berries early.");
 static const u8 sHeatproofDescription[] =    _("Powers down FIRE moves.");
 static const u8 sHoneyGatherDescription[] =  _("May pick up HONEY.");
 static const u8 sHydrationDescription[] =    _("Heals the body if rain.");
+static const u8 sIceBodyDescription[] =      _("Slight HP recovery in hail.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -185,6 +186,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_HEATPROOF] = sHeatproofDescription,
     [ABILITY_HONEY_GATHER] = sHoneyGatherDescription,
     [ABILITY_HYDRATION] = sHydrationDescription,
+    [ABILITY_ICE_BODY] = sIceBodyDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -281,4 +283,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_HEATPROOF] = _("HEATPROOF"),
     [ABILITY_HONEY_GATHER] = _("HONEY GATHER"),
     [ABILITY_HYDRATION] = _("HYDRATION"),
+    [ABILITY_ICE_BODY] = _("ICE BODY"),
 };

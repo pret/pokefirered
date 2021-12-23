@@ -1780,7 +1780,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
 		case ABILITY_ICE_BODY:
 		     if (WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_HAIL_ANY)
-			 && gBattleMons[battler].maxHP > gBattleMons[battler].hp))
+			 && gBattleMons[battler].maxHP > gBattleMons[battler].hp)
 		     {
 			     BattleScriptPushCursorAndCallback(BattleScript_RainDishActivates);
 			     gBattleMoveDamage = gBattleMons[battler].maxHP / 16;

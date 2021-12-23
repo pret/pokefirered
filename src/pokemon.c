@@ -5295,7 +5295,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
+        holdEffect = ItemId_GetHoldEffect(heldItem, 0, FALSE);
     }
 
     if (species && species != SPECIES_EGG)

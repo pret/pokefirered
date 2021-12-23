@@ -2,8 +2,9 @@
 #define LOAD_CUSTOM_ABILITY_POP_UP_IMG TRUE //if true go to graphics/new and change the abilitypopupbox.png to your box img, otherwise the box is the same of the Lv up box.
 #define EXP_BLOCK TRUE //if true go to src/battle_script_commands.c and edit the levels for each badge in sExpBlockLevels.
 #define PAGE_SWAP TRUE //if true auttomaticaly swap the naming screen page on write the first caracter.
-#define NO_HEAL_EGGS TRUE //if true the pokemon center animation don't coun't eggs
-#define EGG_HATCH_LEVEL_1 TRUE //if true the eggs hatch level becames 1
+#define NO_HEAL_EGGS TRUE //if true the pokemon center animation don't coun't eggs.
+#define EGG_HATCH_LEVEL_1 TRUE //if true the eggs hatch level becames 1.
+#define POISON_SURVIVAL TRUE //if true the pokemons don't die from poison in the overworld.
 
 // need
 #define BW_REPEL_SYSTEM TRUE //if true when the Repel's effect wears off, the game will automatically ask the player whether they want to use another one immediately.

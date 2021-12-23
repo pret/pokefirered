@@ -46,6 +46,8 @@
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 
+#define TABLE_END 0xFFFF
+
 struct OakSpeechNidoranFStruct
 {
     u8 spriteCount:4;
@@ -1473,6 +1475,22 @@ static const u8 sHoldEffectToType[][2] =
     {HOLD_EFFECT_NORMAL_POWER, TYPE_NORMAL},
 };
 
+static const u16 sIronFirstTable[] =
+{
+    MOVE_COMET_PUNCH,
+    MOVE_DIZZY_PUNCH,
+    MOVE_DYNAMIC_PUNCH,
+    MOVE_FIRE_PUNCH,
+    MOVE_FOCUS_PUNCH,
+    MOVE_ICE_PUNCH,
+    MOVE_MACH_PUNCH,
+    MOVE_MEGA_PUNCH,
+    MOVE_SHADOW_PUNCH,
+    MOVE_SKY_UPPERCUT,
+    MOVE_THUNDER_PUNCH,
+    TABLE_END,
+};
+
 const struct SpriteTemplate gSpriteTemplates_Battlers[] = 
 {
     [B_POSITION_PLAYER_LEFT] = {
@@ -2337,7 +2355,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u16 attack, defense;
     u16 spAttack, spDefense;
     u32 i;
-    s32 damage, damageHelper;
+    s32 j, damage, damageHelper;
 
     if (!powerOverride)
         gBattleMovePower = gBattleMoves[move].power;
@@ -2429,6 +2447,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack /= 2;
         attack /= 2;
     }  
+    if (attacker->ability == ABILITY_IRON_FIST)
+    {
+        for (j = 0; sIronFirstTable[j] != TABLE_END; j++)
+        {
+            if (move == sIronFirstTable[j])
+                gBattleMovePower = (120 * gBattleMovePower) / 100;
+        }
+    }
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
     if (attacker->ability == ABILITY_HUSTLE)

@@ -2393,7 +2393,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     }
     else
     {
-        attackerHoldEffect = ItemId_GetHoldEffect(attacker->item);
+        attackerHoldEffect = ItemId_GetHoldEffectCheckKlutz(attacker->item, battlerIdAtk);
         attackerHoldEffectParam = ItemId_GetHoldEffectParam(attacker->item);
     }
 
@@ -2404,7 +2404,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     }
     else
     {
-        defenderHoldEffect = ItemId_GetHoldEffect(defender->item);
+        defenderHoldEffect = ItemId_GetHoldEffectCheckKlutz(defender->item, battlerIdDef);
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
     

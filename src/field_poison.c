@@ -69,7 +69,11 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             if (MonFaintedFromPoison(tPartyId))
             {
                 FaintFromFieldPoison(tPartyId);
+#if POISON_SURVIVAL
+                ShowFieldMessage(gText_PkmnPoisonSurvived);
+#else
                 ShowFieldMessage(gText_PkmnFainted3);
+#endif
                 data[0]++;
                 return;
             }

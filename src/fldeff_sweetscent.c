@@ -99,6 +99,7 @@ static void FailSweetScentEncounter(u8 taskId)
         DestroyTask(taskId);
     }
 }
+// item honey func
 bool8 FldEff_TryStartWildBattle(void)
 {
 		gSpecialVar_0x8000 = SweetScentWildEncounter();

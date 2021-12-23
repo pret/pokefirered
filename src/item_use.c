@@ -732,11 +732,10 @@ void FieldUseFunc_VsSeeker(u8 taskId)
     }
 }
 
-void FieldUseFunc_Honey(u8 taskId)
+static void FieldUseFunc_HoneyCB2(u8 taskId)
 {
-    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
-    sItemUseOnFieldCB = FieldUseFunc_HoneyCB1;
-    sub_80A103C(taskId);
+    ScriptContext1_SetupScript(EventScript_Honey);
+    DestroyTask(taskId);
 }
 
 static void FieldUseFunc_HoneyCB1(u8 taskId)
@@ -746,10 +745,11 @@ static void FieldUseFunc_HoneyCB1(u8 taskId)
     DisplayItemMessageOnField(taskId, 2, gUnknown_841658C, FieldUseFunc_HoneyCB2);
 }
 
-static void FieldUseFunc_HoneyCB2(u8 taskId)
+void FieldUseFunc_Honey(u8 taskId)
 {
-    ScriptContext1_SetupScript(EventScript_Honey);
-    DestroyTask(taskId);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
+    sItemUseOnFieldCB = FieldUseFunc_HoneyCB1;
+    sub_80A103C(taskId);
 }
 
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)

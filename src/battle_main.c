@@ -4262,7 +4262,7 @@ bool8 TryRunFromBattle(u8 battler)
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[battler].holdEffect;
     else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item, battler, TRUE);
     gPotentialItemEffectBattler = battler;
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
     {

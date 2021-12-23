@@ -3023,8 +3023,8 @@ extern const u8 gFile_graphics_items_icons_shard_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_yellow_shard_palette[];
 extern const u8 gFile_graphics_items_icons_shard_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_green_shard_palette[];
-extern const u8 gFile_graphics_items_icons_question_mark_sheet[];
-extern const u8 gFile_graphics_items_icon_palettes_question_mark_palette[];
+extern const u8 gFile_graphics_items_icons_honey_sheet[];
+extern const u8 gFile_graphics_items_icon_palettes_honey_palette[];
 extern const u8 gFile_graphics_items_icons_question_mark_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_question_mark_palette[];
 extern const u8 gFile_graphics_items_icons_question_mark_sheet[];
@@ -3671,6 +3671,7 @@ extern const u8 gFile_graphics_items_icons_gem_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_sapphire_palette[];
 extern const u8 gFile_graphics_items_icons_return_to_field_arrow_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_return_to_field_arrow_palette[];
+
 
 // battle_anim_utility_funcs
 extern const u32 gFile_graphics_battle_anims_masks_curse_sheet[];

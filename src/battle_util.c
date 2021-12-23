@@ -2972,8 +2972,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             }
             else
             {
-		battlerHoldEffect = ItemId_GetHoldEffectCheckKlutz(gLastUsedItem, battlerId);
-                battlerHoldEffectNoKlutz = ItemId_GetHoldEffect(gLastUsedItem);
+		battlerHoldEffect = ItemId_GetHoldEffect(gLastUsedItem, battlerId, TRUE);
+                battlerHoldEffectNoKlutz = ItemId_GetHoldEffect(gLastUsedItem, 0, FALSE);
                 battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
             }
             switch (battlerHoldEffect)

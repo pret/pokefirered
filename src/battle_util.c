@@ -2517,8 +2517,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     }
     else
     {
-        battlerHoldEffect = ItemId_GetHoldEffectCheckKlutz(gLastUsedItem, battlerId);
-	battlerHoldEffectNoKlutz = ItemId_GetHoldEffect(gLastUsedItem);
+        battlerHoldEffect = ItemId_GetHoldEffect(gLastUsedItem, battlerId, TRUE);
+	battlerHoldEffectNoKlutz = ItemId_GetHoldEffect(gLastUsedItem, 0, FALSE);
         battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
     }
     if (gBattleMons[battlerId].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(gBattleMons[battlerId].item))
@@ -2531,8 +2531,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     }
     else
     {
-        atkHoldEffect = ItemId_GetHoldEffectCheckKlutz(atkItem, gBattlerAttacker);
-	atkHoldEffectNoKlutz = ItemId_GetHoldEffect(atkItem);
+        atkHoldEffect = ItemId_GetHoldEffect(atkItem, gBattlerAttacker, TRUE);
+	atkHoldEffectNoKlutz = ItemId_GetHoldEffect(atkItem, 0, FALSE);
         atkHoldEffectParam = ItemId_GetHoldEffectParam(atkItem);
     }
 
@@ -2545,8 +2545,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     }
     else
     {
-        defHoldEffect = ItemId_GetHoldEffectCheckKlutz(defItem, gBattlerTarget);
-	defHoldEffectNoKlutz = ItemId_GetHoldEffect(defItem);
+        defHoldEffect = ItemId_GetHoldEffect(defItem, gBattlerTarget, TRUE);
+	defHoldEffectNoKlutz = ItemId_GetHoldEffect(defItem, 0, FALSE);
         defHoldEffectParam = ItemId_GetHoldEffectParam(defItem);
     }
     switch (caseID)

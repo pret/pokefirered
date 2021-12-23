@@ -1704,7 +1704,7 @@ static void atk07_adjustnormaldamage(void)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
+        holdEffect = ItemId_GetHoldEffectCheckKlutz(gBattleMons[gBattlerTarget].item, gBattlerTarget);
         param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
     }
     gPotentialItemEffectBattler = gBattlerTarget;
@@ -1744,7 +1744,7 @@ static void atk08_adjustnormaldamage2(void)
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
+        holdEffect = ItemId_GetHoldEffectCheckKlutz(gBattleMons[gBattlerTarget].item, gBattlerTarget);
         param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
     }
     gPotentialItemEffectBattler = gBattlerTarget;

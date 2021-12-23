@@ -7064,12 +7064,9 @@ static void atk96_weatherdamage(void)
     {
         if (gBattleWeather & WEATHER_SANDSTORM_ANY)
         {
-            if (gBattleMons[gBattlerAttacker].type1 != TYPE_ROCK
-             && gBattleMons[gBattlerAttacker].type1 != TYPE_STEEL
-             && gBattleMons[gBattlerAttacker].type1 != TYPE_GROUND
-             && gBattleMons[gBattlerAttacker].type2 != TYPE_ROCK
-             && gBattleMons[gBattlerAttacker].type2 != TYPE_STEEL
-             && gBattleMons[gBattlerAttacker].type2 != TYPE_GROUND
+            if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ROCK)
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
+             && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND)
              && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
@@ -7086,6 +7083,7 @@ static void atk96_weatherdamage(void)
         if (gBattleWeather & WEATHER_HAIL)
         {
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
+	     && gBattleMons[gBattlerAttacker].ability != ABILITY_ICE_BODY
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {

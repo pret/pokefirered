@@ -308,7 +308,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
     if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
     else
-        holdEffect = ItemId_GetHoldEffectCheckKlutz(gBattleMons[gActiveBattler].item, gActiveBattler);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item, gActiveBattler, TRUE);
     gPotentialItemEffectBattler = gActiveBattler;
     if (holdEffect == HOLD_EFFECT_CHOICE_BAND && *choicedMove && *choicedMove != 0xFFFF && *choicedMove != move)
     {

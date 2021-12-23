@@ -84,10 +84,12 @@ static const u8 sDownloadDescription[] =     _("Adjust power based on foe's stat
 static const u8 sDrySkinDescription[] =      _("Lost HP in sunny, gain HP in rain.");
 static const u8 sFilterDescription[] =       _("Powers down “super effective” hits.");
 static const u8 sFlowerGiftDescription[] =   _("Ups party stats in sunlight.");
-static const u8 sForewarnDescription[] =     _("Tell the strongest move the foe has.");
+static const u8 sForewarnDescription[] =     _("Tell the foe's strongest move.");
 static const u8 sFriskDescription[] =        _("Can check the foe's item.");
 static const u8 sGluttonyDescription[] =     _("The user eat Berries early.");
 static const u8 sHeatproofDescription[] =    _("Powers down FIRE moves.");
+static const u8 sHoneyGatherDescription[] =  _("May pick up HONEY.");
+static const u8 sHydrationDescription[] =    _("Heals the body if rain.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -181,6 +183,8 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_FRISK] = sFriskDescription,
     [ABILITY_GLUTTONY] = sGluttonyDescription,
     [ABILITY_HEATPROOF] = sHeatproofDescription,
+    [ABILITY_HONEY_GATHER] = sHoneyGatherDescription,
+    [ABILITY_HYDRATION] = sHydrationDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -275,4 +279,6 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_FRISK] = _("FRISK"),
     [ABILITY_GLUTTONY] = _("GLUTTONY"),
     [ABILITY_HEATPROOF] = _("HEATPROOF"),
+    [ABILITY_HONEY_GATHER] = _("HONEY GATHER"),
+    [ABILITY_HYDRATION] = _("HYDRATION"),
 };

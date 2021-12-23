@@ -6,6 +6,7 @@
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"
+#include "event_data.h"
 #include "field_weather.h"
 #include "wild_encounter.h"
 #include "constants/songs.h"
@@ -97,4 +98,8 @@ static void FailSweetScentEncounter(u8 taskId)
         ScriptContext1_SetupScript(EventScript_FailSweetScent);
         DestroyTask(taskId);
     }
+}
+bool8 FldEff_TryStartWildBattle(void)
+{
+		gSpecialVar_0x8000 = SweetScentWildEncounter();
 }

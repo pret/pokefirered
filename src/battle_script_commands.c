@@ -1180,7 +1180,7 @@ static void atk01_accuracycheck(void)
         }
         else
         {
-            holdEffect = ItemId_GetHoldEffectCheckKlutz(gBattleMons[gBattlerTarget].item, gBattlerTarget);
+            holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item, gBattlerTarget, TRUE);
             param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
         }
         gPotentialItemEffectBattler = gBattlerTarget;

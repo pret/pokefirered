@@ -93,6 +93,7 @@ static const u8 sHydrationDescription[] =    _("Heals the body if rain.");
 static const u8 sIceBodyDescription[] =      _("Slight HP recovery in hail.");
 static const u8 sIronFistDescription[] =     _("Ups “punching” moves.");
 static const u8 sKlutzDescription[] =        _("Prevents user's item from activate.");
+static const u8 sLeafGuardDescription[] =    _("Prevents status if sunny.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -191,6 +192,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_ICE_BODY] = sIceBodyDescription,
     [ABILITY_IRON_FIST] = sIronFistDescription,
     [ABILITY_KLUTZ] = sKlutzDescription,
+    [ABILITY_LEAF_GUARD] = sLeafGuardDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -290,4 +292,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_ICE_BODY] = _("ICE BODY"),
     [ABILITY_IRON_FIST] = _("IRON FIST"),
     [ABILITY_KLUTZ] = _("KLUTZ"),
+    [ABILITY_LEAF_GUARD] = _("LEAF GUARD"),
 };

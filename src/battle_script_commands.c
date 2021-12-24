@@ -9852,7 +9852,7 @@ static void atkFD_jumpifweatherandability(void)
 	u6 weather = T2_READ_16(gBattlescriptCurrInstr + 3);
 	
 	if (WEATHER_HAS_EFFECT && gBattleWeather & weather && gBattleMons[GetBattlerForBattleScript(gBattlescriptCurrInstr[1])].ability == ability)
-		gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 6);
+		gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
 	else
 		gBattlescriptCurrInstr += 9;
 }

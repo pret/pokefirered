@@ -336,6 +336,7 @@ static void atkF9_cureprimarystatus(void);
 static void atkFA_setword(void);
 static void atkFB_jumpifsubstituteblocks(void);
 static void atkFC_loadabilitypopup(void);
+static void atkFD_jumpifweatherandability(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -592,6 +593,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkFA_setword,
     atkFB_jumpifsubstituteblocks,
     atkFC_loadabilitypopup,
+    atkFD_jumpifweatherandability,
 };
 
 void (* const gCallAsmCommandTablePointers[])(void) =
@@ -9842,6 +9844,17 @@ static void AnimAbilityPopUpBoxAsm(void)
 			}
 		}
 	}
+}
+
+static void atkFD_jumpifweatherandability(void)
+{
+	u8 ability = gBattlescriptCurrInstr[2];
+	u6 weather = T2_READ_16(gBattlescriptCurrInstr + 3);
+	
+	if (WEATHER_HAS_EFFECT && gBattleWeather & weather && gBattleMons[GetBattlerForBattleScript(gBattlescriptCurrInstr[1])].ability == ability)
+		gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 6);
+	else
+		gBattlescriptCurrInstr += 9;
 }
 
 //callasm command asm's

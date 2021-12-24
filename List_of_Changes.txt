@@ -32,6 +32,13 @@ Heatproof
 Honey Gather
 Hydration
 Ice Body
+Klutz
+
+// WARNING
+Klutz don't affect prize money, experience, effort values or friendship.
+The Speed drop from the Macho Brace, and Power items (such as the Power Bracer) is not negated by Klutz.
+Klutz cannot negate form-changing effects of items.
+Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega Stone, undergoing Primal Reversion with the Red Orb or Blue Orb or from using a Z-Move with a Z-Crystal.
 
 // Needing put in
 check and update calculate base damage asm

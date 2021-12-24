@@ -6522,9 +6522,12 @@ static void atk84_jumpifcantmakeasleep(void)
         gBattlescriptCurrInstr = jumpPtr;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
-    else if ()
+    else if (gBattleMons[gBattlerTarget].ability == ABILITY_LEAF_GUARD && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
     {
-	    
+	    gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+	    gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+	    gBattlescriptCurrInstr = jumpPtr;
+	    RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
     else
     {

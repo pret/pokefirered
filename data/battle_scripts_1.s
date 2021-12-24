@@ -694,6 +694,7 @@ BattleScript_EffectToxic::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifweatherandability BS_TARGET, ABILITY_LEAF_GUARD, 0x60, BattleScript_ImmunityProtected
 	jumpifability BS_TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned

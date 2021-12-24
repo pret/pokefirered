@@ -6522,6 +6522,10 @@ static void atk84_jumpifcantmakeasleep(void)
         gBattlescriptCurrInstr = jumpPtr;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
+    else if ()
+    {
+	    
+    }
     else
     {
         gBattlescriptCurrInstr += 5;

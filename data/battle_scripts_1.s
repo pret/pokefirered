@@ -1016,6 +1016,7 @@ BattleScript_EffectParalyze::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifweatherandability BS_TARGET, ABILITY_LEAF_GUARD, 0x60, BattleScript_LimberProtected
 	jumpifability BS_TARGET, ABILITY_LIMBER, BattleScript_LimberProtected
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	typecalc

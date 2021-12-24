@@ -2286,27 +2286,42 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_POISON:
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY 
-		|| gBattleMons[gEffectBattler].ability == ABILITY_LEAF_GUARD 
-		&& WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
+	    if ((primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
 	    {
-		    if ((primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
-		    {
-			    gLastUsedAbility = gBattleMons[gEffectBattler].ability;
-			    RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
-			    BattleScriptPush(gBattlescriptCurrInstr + 1);
-			    gBattlescriptCurrInstr = BattleScript_PSNPrevention;
-			    if (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
-			    {
-				    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-				    gHitMarker &= ~(HITMARKER_IGNORE_SAFEGUARD);
-			    }
-			    else
-			    {
-				    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-			    }
-			    return;
-		    }
+		  if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY)
+		  {
+			  gLastUsedAbility = gBattleMons[gEffectBattler].ability;
+			  RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
+			  BattleScriptPush(gBattlescriptCurrInstr + 1);
+			  gBattlescriptCurrInstr = BattleScript_PSNPrevention;
+			  if (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
+			  {
+				  gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+				  gHitMarker &= ~(HITMARKER_IGNORE_SAFEGUARD);
+			  }
+			  else
+			  {
+				  gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+			  }
+			  return;
+		  }
+		  else if (gBattleMons[gEffectBattler].ability == ABILITY_LEAF_GUARD && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
+		  {
+			  gLastUsedAbility = gBattleMons[gEffectBattler].ability;
+			  RecordAbilityBattle(gEffectBattler, gBattleMons[gEffectBattler].ability);
+			  BattleScriptPush(gBattlescriptCurrInstr + 1);
+			  gBattlescriptCurrInstr = BattleScript_PSNPrevention;
+			  if (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
+			  {
+				  gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+				  gHitMarker &= ~(HITMARKER_IGNORE_SAFEGUARD);
+			  }
+			  else
+			  {
+				  gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+			  }
+			  return;
+		  }
 	    }
             if ((IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) || IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
              && (gHitMarker & HITMARKER_IGNORE_SAFEGUARD)
@@ -2323,9 +2338,10 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
-            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY || gBattleMons[gEffectBattler].ability == ABILITY_LEAF_GUARD 
-		&& WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
+            if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY)
                 break;
+	    if (gBattleMons[gEffectBattler].ability == ABILITY_LEAF_GUARD && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
+		break;
             statusChanged = TRUE;
             break;
         case STATUS1_BURN:

@@ -95,6 +95,7 @@ static const u8 sIronFistDescription[] =     _("Ups “punching” moves.");
 static const u8 sKlutzDescription[] =        _("Prevents user's item from activate.");
 static const u8 sLeafGuardDescription[] =    _("Prevents status if sunny.");
 static const u8 sMagicGuardDescription[] =   _("Only takes damage from attacks.");
+static const u8 sMoldBreakerDescription[] =  _("Moves hits through abilities.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -195,6 +196,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_KLUTZ] = sKlutzDescription,
     [ABILITY_LEAF_GUARD] = sLeafGuardDescription,
     [ABILITY_MAGIC_GUARD] = sMagicGuardDescription,
+    [ABILITY_MOLD_BREAKER] = sMoldBreakerDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -296,4 +298,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_KLUTZ] = _("KLUTZ"),
     [ABILITY_LEAF_GUARD] = _("LEAF GUARD"),
     [ABILITY_MAGIC_GUARD] = _("MAGIC GUARD"),
+    [ABILITY_MOLD_BREAKER] = _("MOLD BREAKER"),
 };

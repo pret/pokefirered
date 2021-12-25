@@ -3325,7 +3325,6 @@ BattleScript_SuccessForceOut::
 	switchoutabilities BS_TARGET
 	returntoball BS_TARGET
 	waitstate
-	restoreabilityonswitch BS_TARGET
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_TrainerBattleForceOut
 	setbyte gBattleOutcome, B_OUTCOME_PLAYER_TELEPORTED
 	finishaction
@@ -3335,6 +3334,7 @@ BattleScript_TrainerBattleForceOut::
 	switchinanim BS_TARGET, 0
 	waitstate
 	printstring STRINGID_PKMNWASDRAGGEDOUT
+	restoreabilityonswitch BS_TARGET
 	switchineffects BS_TARGET
 	goto BattleScript_MoveEnd
 

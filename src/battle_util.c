@@ -1005,7 +1005,11 @@ u8 DoBattlerEndTurnEffects(void)
 			    if (gBattleMons[gActiveBattler].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA)
 			    {
 				    CancelMultiTurnMoves(gActiveBattler);
+#if SLEEP_UPDATE
+				    gBattleMons[gActiveBattler].status1 |= (Random() & 2) + 1;
+#else
 				    gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
+#endif
 				    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
 				    MarkBattlerForControllerExec(gActiveBattler);
 				    gEffectBattler = gActiveBattler;
@@ -1015,7 +1019,11 @@ u8 DoBattlerEndTurnEffects(void)
 			    else if (gBattleMons[gActiveBattler].ability != ABILITY_LEAF_GUARD && !WEATHER_HAS_EFFECT && !(gBattleWeather & WEATHER_SUN_ANY))
 			    {
 				   CancelMultiTurnMoves(gActiveBattler);
+#if SLEEP_UPDATE
+				    gBattleMons[gActiveBattler].status1 |= (Random() & 2) + 1;
+#else
 				    gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
+#endif
 				    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
 				    MarkBattlerForControllerExec(gActiveBattler);
 				    gEffectBattler = gActiveBattler;

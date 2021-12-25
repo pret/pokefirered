@@ -6227,22 +6227,14 @@ static void atk76_various(void)
         if (!IsFanfareTaskInactive())
             return;
         break;
-    case VARIOUS_RESTORE_ABILITY_ON_SWITCH_USER:
-	if (gIgnoredAbilities[gBattlerAttacker] != ABILITY_NONE)
+    case VARIOUS_RESTORE_ABILITY_ON_SWITCH:
+	if (gIgnoredAbilities[gActiveBattler] != ABILITY_NONE)
 	{
-		if (gBattleMons[gBattlerAttacker].ability == ABILITY_NONE)
-			gBattleMons[gBattlerAttacker].ability = gIgnoredAbilities[gBattlerAttacker];
-		gIgnoredAbilities[gBattlerAttacker] = ABILITY_NONE;
+		if (gBattleMons[gActiveBattler].ability == ABILITY_NONE)
+			gBattleMons[gActiveBattler].ability = gIgnoredAbilities[gActiveBattler];
+		gIgnoredAbilities[gActiveBattler] = ABILITY_NONE;
 	}
-        break;
-    case VARIOUS_RESTORE_ABILITY_ON_SWITCH_TARGET:
-	if (gIgnoredAbilities[gBattlerTarget] != ABILITY_NONE)
-	{
-		if (gBattleMons[gBattlerTarget].ability == ABILITY_NONE)
-			gBattleMons[gBattlerTarget].ability = gIgnoredAbilities[gBattlerTarget];
-		gIgnoredAbilities[gBattlerTarget] = ABILITY_NONE;
-	}
-        break;	    
+        break;   
     }
     gBattlescriptCurrInstr += 3;
 }

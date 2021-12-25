@@ -753,7 +753,7 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_LEECH_SEED:  // leech seed
                 if ((gStatuses3[gActiveBattler] & STATUS3_LEECHSEED)
                  && gBattleMons[gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BATTLER].hp != 0
-                 && gBattleMons[gActiveBattler].hp != 0)
+                 && gBattleMons[gActiveBattler].hp != 0 && gBattleMons[gActiveBattler].ability != ABILITY_MAGIC_GUARD)
                 {
                     gBattlerTarget = gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BATTLER; // Notice gBattlerTarget is actually the HP receiver.
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;

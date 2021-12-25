@@ -4041,7 +4041,7 @@ static void HandleAction_UseMove(void)
     {
         for (i = 0; i < gBattlersCount; i++)
         {
-            if (gBattlerAttacker != i && sIgnorableAbilities[gBattleMons[i].ability])
+            if (gBattlerAttacker != i && gIgnorableAbilities[gBattleMons[i].ability])
             {
                 gIgnoredAbilities[i] = gBattleMons[i].ability;
                 gBattleMons[i].ability = ABILITY_NONE;

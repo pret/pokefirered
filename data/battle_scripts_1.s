@@ -865,6 +865,7 @@ BattleScript_MoveMissedDoDamage::
 	resultmessage
 	waitmessage 0x40
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCRASHED
 	waitmessage 0x40
 	damagecalc

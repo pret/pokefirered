@@ -228,6 +228,11 @@ u8 gMultiUsePlayerCursor;
 u8 gNumberOfMovesToChoose;
 u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
+static bool8 sIgnorableAbilities[ABILITIES_COUNT] =
+{
+    []
+};
+
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
@@ -3989,14 +3994,25 @@ void RunBattleScriptCommands(void)
 
 static void HandleAction_UseMove(void)
 {
-    u8 side;
-    u8 var = 4;
-
+    u8 side, i, var = 4;
+    
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     if (*(&gBattleStruct->absentBattlerFlags) & gBitTable[gBattlerAttacker])
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
         return;
+    }
+    // removes all ignorable abilities
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_MOLD_BREAKER)
+    {
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattlerAttacker != i && sIgnorableAbilities[gBattleMons[i].ability])
+            {
+                gIgnoredAbilities[i] = gBattleMons[i].ability;
+                gBattleMons[i].ability = ABILITY_NONE;
+            }
+        }
     }
     gCritMultiplier = 1;
     gBattleScripting.dmgMultiplier = 1;

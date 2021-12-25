@@ -3942,14 +3942,14 @@ static void atk3D_end(void)
 	    {
 		    if (gBattleMons[i].ability == ABILITY_NONE)
 			    gBattleMons[i].ability = gIgnoredAbilities[i];
-			    gIgnoredAbilities[i] = ABILITY_NONE;
+		    gIgnoredAbilities[i] = ABILITY_NONE;
 	    }
     }
     gMoveResultFlags = 0;
     gActiveBattler = 0;
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;
 }
-VARIOUS_CANCEL_MULTI_TURN_MOVES
+
 static void atk3E_end2(void)
 {
     gActiveBattler = 0;

@@ -2684,18 +2684,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 break;
             case MOVE_EFFECT_RECOIL_25: // 25% recoil
-	        if (gBattleMons[gEffectBattler].ability == ABILITY_MAGIC_GUARD && gCurrentMove == MOVE_STRUGGLE)
-		{
-			++gBattlescriptCurrInstr;
-		}
-	        else
-		{
-			gBattleMoveDamage = (gHpDealt) / 4;
-			if (gBattleMoveDamage == 0)
-				gBattleMoveDamage = 1;
-			BattleScriptPush(gBattlescriptCurrInstr + 1);
-			gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
-		}
+		gBattleMoveDamage = (gHpDealt) / 4;
+		if (gBattleMoveDamage == 0)
+			gBattleMoveDamage = 1;
+		BattleScriptPush(gBattlescriptCurrInstr + 1);
+		gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
             case MOVE_EFFECT_ATK_PLUS_1:
             case MOVE_EFFECT_DEF_PLUS_1:
@@ -2890,18 +2883,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 gBattlescriptCurrInstr = BattleScript_AtkDefDown;
                 break;
             case MOVE_EFFECT_RECOIL_33: // Double Edge
-	        if (gBattleMons[gEffectBattler].ability == ABILITY_MAGIC_GUARD)
-		{
-			++gBattlescriptCurrInstr;
-		}
-	        else
-		{
-			gBattleMoveDamage = gHpDealt / 3;
-			if (gBattleMoveDamage == 0)
-				gBattleMoveDamage = 1;
-			BattleScriptPush(gBattlescriptCurrInstr + 1);
-			gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
-		}
+		gBattleMoveDamage = gHpDealt / 3;
+		if (gBattleMoveDamage == 0)
+			gBattleMoveDamage = 1;
+		BattleScriptPush(gBattlescriptCurrInstr + 1);
+		gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
             case MOVE_EFFECT_THRASH:
                 if (gBattleMons[gEffectBattler].status2 & STATUS2_LOCK_CONFUSE)

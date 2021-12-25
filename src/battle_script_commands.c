@@ -6230,8 +6230,7 @@ static void atk76_various(void)
     case VARIOUS_RESTORE_ABILITY_ON_SWITCH:
 	if (gIgnoredAbilities[gActiveBattler] != ABILITY_NONE)
 	{
-		if (gBattleMons[gActiveBattler].ability == ABILITY_NONE)
-			gBattleMons[gActiveBattler].ability = gIgnoredAbilities[gActiveBattler];
+		gBattleMons[gActiveBattler].ability = gIgnoredAbilities[gActiveBattler];
 		gIgnoredAbilities[gActiveBattler] = ABILITY_NONE;
 	}
         break;   

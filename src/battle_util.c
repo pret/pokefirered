@@ -2289,6 +2289,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				++effect;
 				break;
 			}
+			else if (gBattleMons[i].ability == ABILITY_MOLD_BREAKER)
+			{
+				BattleScriptPushCursorAndCallback(BattleScript_MoldBreaker);
+				gLastUsedAbility = gBattleMons[i].ability;
+				gStatuses3[i] |= STATUS3_INTIMIDATE_POKES;
+				gBattlerAttacker = i;
+				gBattleStruct->intimidateBattler = i;
+				++effect;
+				break;
+			}
 		}
 	    }
             break;

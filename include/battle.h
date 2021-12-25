@@ -726,7 +726,7 @@ extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 extern const u8 *gSetWordLoc;
-extern u8 gIgnoredAbilities[MAX_BATTLERS_COUNT];
+extern bool8 gIgnoredAbilities[MAX_BATTLERS_COUNT];
 extern u8 gAbilityIdBackup;
 
 #endif // GUARD_BATTLE_H

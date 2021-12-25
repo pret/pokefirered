@@ -68,19 +68,21 @@
 
 // TODO: documentation
 // atk76, various
-#define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
-#define VARIOUS_SET_MAGIC_COAT_TARGET           1
-#define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
-#define VARIOUS_GET_MOVE_TARGET                 3
-#define VARIOUS_CASE_4                          4
-#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
-#define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
-#define VARIOUS_RESET_PLAYER_FAINTED_FLAG                          7
-#define VARIOUS_CASE_8                          8
-#define VARIOUS_RETURN_OPPONENT_MON1            9
-#define VARIOUS_RETURN_OPPONENT_MON2            10
-#define VARIOUS_CHECK_POKEFLUTE                 11
-#define VARIOUS_WAIT_FANFARE                    12
+#define VARIOUS_CANCEL_MULTI_TURN_MOVES          0
+#define VARIOUS_SET_MAGIC_COAT_TARGET            1
+#define VARIOUS_IS_RUNNING_IMPOSSIBLE            2
+#define VARIOUS_GET_MOVE_TARGET                  3
+#define VARIOUS_CASE_4                           4
+#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS      5
+#define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP     6
+#define VARIOUS_RESET_PLAYER_FAINTED_FLAG        7
+#define VARIOUS_CASE_8                           8
+#define VARIOUS_RETURN_OPPONENT_MON1             9
+#define VARIOUS_RETURN_OPPONENT_MON2             10
+#define VARIOUS_CHECK_POKEFLUTE                  11
+#define VARIOUS_WAIT_FANFARE                     12
+#define VARIOUS_RESTORE_ABILITY_ON_SWITCH_USER   13
+#define VARIOUS_RESTORE_ABILITY_ON_SWITCH_TARGET 14
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

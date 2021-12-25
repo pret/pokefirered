@@ -43,7 +43,6 @@ Klutz cannot negate form-changing effects of items.
 Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega Stone, undergoing Primal Reversion with the Red Orb or Blue Orb or from using a Z-Move with a Z-Crystal.
 
 // Needing put in
-check and update calculate base damage asm
 flower gift form change
 end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc
@@ -61,7 +60,6 @@ vitamins cap to 252
 metric system update
 emerald style gender select intro
 critical hit probability
-sleep update
 paralysis update
 burn update @next
 save fix

@@ -229,7 +229,7 @@ u8 gMultiUsePlayerCursor;
 u8 gNumberOfMovesToChoose;
 u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
-bool8 gIgnorableAbilities[] =
+const bool8 gIgnorableAbilities[] =
 {
     [ABILITY_BATTLE_ARMOR] = TRUE,
     [ABILITY_CLEAR_BODY] = TRUE,

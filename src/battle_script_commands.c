@@ -3934,6 +3934,16 @@ static void atk3C_return(void)
 
 static void atk3D_end(void)
 {
+    u8 i;
+	
+    for (i = 0; i < gBattlersCount; ++i)
+    {
+	    if (gIgnoredAbilities[i] != ABILITY_NONE)
+	    {
+		    gBattleMons[i].ability = gIgnoredAbilities[i];
+		    gIgnoredAbilities[i] = ABILITY_NONE;
+	    }
+    }
     gMoveResultFlags = 0;
     gActiveBattler = 0;
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;

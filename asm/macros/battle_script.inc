@@ -1331,6 +1331,10 @@
 	.macro waitfanfare battler:req
 	various \battler, 12
 	.endm
+	
+	.macro restoreabilityonswitch 
+	various \battler, VARIOUS_RESTORE_ABILITY_ON_SWITCH
+        .endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req

@@ -1746,6 +1746,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_INTIMIDATE:
+	    case ABILITY_ANTICIPATION:
+	    case ABILITY_DOWNLOAD:
+	    case ABILITY_FOREWARN:
+            case ABILITY_FRISK:
+            case ABILITY_MOLD_BREAKER:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
                 {
                     gStatuses3[battler] |= STATUS3_INTIMIDATE_POKES;
@@ -2236,20 +2241,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_INTIMIDATE1: // 9		
             for (i = 0; i < gBattlersCount; ++i)
             {
-                if (gBattleMons[i].ability == ABILITY_INTIMIDATE)
-                {
-                    if (!(gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
-                        continue;
-                    gLastUsedAbility = ABILITY_INTIMIDATE;
-                    gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
-                    BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
-                    gBattleStruct->intimidateBattler = i;
-                    ++effect;
-                    break;
-                }
-		else if (!(gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
+		if (gStatuses3[i] & STATUS3_INTIMIDATE_POKES)
 		{
-			if (gBattleMons[i].ability == ABILITY_ANTICIPATION)
+			if (gBattleMons[i].ability == ABILITY_INTIMIDATE)
+			{
+				gLastUsedAbility = gBattleMons[i].ability;
+				gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
+				BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
+				gBattleStruct->intimidateBattler = i;
+				++effect;
+				break;
+			}
+			else if (gBattleMons[i].ability == ABILITY_ANTICIPATION)
 			{
 				BattleScriptPushCursorAndCallback(BattleScript_Anticipation);
 				gLastUsedAbility = gBattleMons[i].ability;

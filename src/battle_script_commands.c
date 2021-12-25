@@ -21,6 +21,7 @@
 #include "battle.h"
 #include "battle_message.h"
 #include "battle_anim.h"
+#include "battle_main.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
 #include "battle_string_ids.h"

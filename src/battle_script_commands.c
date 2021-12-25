@@ -7168,6 +7168,7 @@ static void atk96_weatherdamage(void)
              && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
              && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND)
              && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL
+	     && gBattleMons[gBattlerAttacker].ability != ABILITY_MAGIC_GUARD
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
@@ -7184,6 +7185,7 @@ static void atk96_weatherdamage(void)
         {
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
 	     && gBattleMons[gBattlerAttacker].ability != ABILITY_ICE_BODY
+	     && gBattleMons[gBattlerAttacker].ability != ABILITY_MAGIC_GUARD
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {

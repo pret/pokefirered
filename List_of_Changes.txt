@@ -37,8 +37,6 @@ Leaf Guard
 Magic guard
 
 // WARNING
-Leaf guard prevents the Flame Orb and Toxic Orb.
-Magic guard prevents damage from spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it).
 Klutz don't affect prize money, experience, effort values or friendship.
 The Speed drop from the Macho Brace, and Power items (such as the Power Bracer) is not negated by Klutz.
 Klutz cannot negate form-changing effects of items.
@@ -52,6 +50,9 @@ end's moves data table update
 add the new moves in get forewarn move power
 add the new moves in sIronFistTable
 add berries in is item affected by gluttony
+add abilities in mold breaker ignorable abilities table
+Leaf guard prevents the Flame Orb and Toxic Orb
+Magic guard prevents damage from spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
 
 nature colors
 bw repel system

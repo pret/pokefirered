@@ -216,7 +216,7 @@ EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSetWordLoc = NULL;
-EWRAM_DATA u8 gIgnoredAbilities[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA bool8 gIgnoredAbilities[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gAbilityIdBackup = 0;
 
 void (*gPreBattleCallback1)(void);
@@ -229,7 +229,7 @@ u8 gMultiUsePlayerCursor;
 u8 gNumberOfMovesToChoose;
 u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
-const bool8 gIgnorableAbilities[] =
+bool8 gIgnorableAbilities[] =
 {
     [ABILITY_BATTLE_ARMOR] = TRUE,
     [ABILITY_CLEAR_BODY] = TRUE,

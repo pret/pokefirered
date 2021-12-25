@@ -35,6 +35,8 @@ Ice Body
 Klutz
 
 // WARNING
+Leaf guard prevents poke from fell sleep due to yawn.
+
 Klutz don't affect prize money, experience, effort values or friendship.
 The Speed drop from the Macho Brace, and Power items (such as the Power Bracer) is not negated by Klutz.
 Klutz cannot negate form-changing effects of items.

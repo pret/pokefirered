@@ -2574,8 +2574,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 	atkHoldEffectNoKlutz = ItemId_GetHoldEffect(atkItem, 0, FALSE);
         atkHoldEffectParam = ItemId_GetHoldEffectParam(atkItem);
     }
-
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(atkItem))
+	atkHoldEffectParam /= 2;
     // def variables are unused
+/*
     defItem = gBattleMons[gBattlerTarget].item;
     if (defItem == ITEM_ENIGMA_BERRY)
     {
@@ -2588,6 +2590,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 	defHoldEffectNoKlutz = ItemId_GetHoldEffect(defItem, 0, FALSE);
         defHoldEffectParam = ItemId_GetHoldEffectParam(defItem);
     }
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(defItem))
+	defHoldEffectParam /= 2;
+    */
     switch (caseID)
     {
     case ITEMEFFECT_ON_SWITCH_IN:

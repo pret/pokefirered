@@ -35,6 +35,7 @@ Ice Body
 Klutz
 Leaf Guard
 Magic guard
+Motor drive
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

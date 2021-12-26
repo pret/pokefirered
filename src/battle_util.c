@@ -2560,7 +2560,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 	battlerHoldEffectNoKlutz = ItemId_GetHoldEffect(gLastUsedItem, 0, FALSE);
         battlerHoldEffectParam = ItemId_GetHoldEffectParam(gLastUsedItem);
     }
-    if (gBattleMons[battlerId].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(gBattleMons[battlerId].item))
+    if (gBattleMons[battlerId].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(gLastUsedItem))
 	battlerHoldEffectParam /= 2;
     atkItem = gBattleMons[gBattlerAttacker].item;
     if (atkItem == ITEM_ENIGMA_BERRY)

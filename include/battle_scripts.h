@@ -244,6 +244,8 @@ extern const u8 BattleScript_Forewarn[];
 extern const u8 BattleScript_Frisk[];
 extern const u8 BattleScript_TryFriskSecondTarget[];
 extern const u8 BattleScript_MoldBreaker[];
+extern const u8 BattleScript_MoveStatRaise[];
+extern const u8 BattleScript_MoveStatRaise_PPLoss[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

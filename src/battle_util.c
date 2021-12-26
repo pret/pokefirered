@@ -1922,6 +1922,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_ABSORBING: // 3
             if (moveArg)
             {
+		u8 StatId;    
+		    
                 switch (gLastUsedAbility)
                 {
                 case ABILITY_VOLT_ABSORB:
@@ -1945,6 +1947,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect = 1;
                     }
                     break;
+		case ABILITY_MOTOR_DRIVE:
+		   if (moveType == TYPE_ELECTRIC && gBattleMoves[moveArg].power != 0) 
+		   {
+			   StatId = STAT_SPEED;
+			   effect = 3;
+		   }
+		    break;
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FREEZE))
                     {
@@ -1987,6 +1996,26 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         gBattleMoveDamage *= -1;
                     }
                 }
+	        else if (effect == 3)
+		{
+			if (gBattleMons[battler].statStages[StatId] < 0xC)
+			{
+				PREPARE_STAT_BUFFER(gBattleTextBuff1, StatId);
+				SET_STATCHANGER(StatId, 1, FALSE);
+				gBattleScripting.animArg1 = 0xE + StatId;
+				gBattleScripting.animArg2 = 0;
+			
+				if (gProtectStructs[gBattlerAttacker].notFirstStrike)
+					gBattlescriptCurrInstr = BattleScript_MoveStatRaise;
+				else
+					gBattlescriptCurrInstr = BattleScript_MoveStatRaise_PPLoss;
+			}
+			else
+				if ((gProtectStructs[gBattlerAttacker].notFirstStrike))
+					gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
+			        else
+					gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
+		}
             }
             break;
         case ABILITYEFFECT_MOVE_END: // Think contact abilities.

@@ -97,7 +97,7 @@ static const u8 sLeafGuardDescription[] =    _("Prevents status if sunny.");
 static const u8 sMagicGuardDescription[] =   _("Only takes damage from attacks.");
 static const u8 sMoldBreakerDescription[] =  _("Moves hits through abilities.");
 static const u8 sMotorDriveDescription[] =   _("Raises SPEED if hit by electricity.");
-static const u8 sMultitypeDescription[] =    _("Changes user's types based on item.");
+static const u8 sMultitypeDescription[] =    _("Changes form based on item.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {

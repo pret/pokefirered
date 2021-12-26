@@ -3345,7 +3345,9 @@ static void atk23_getexp(void)
         }
         // fall through
     case 2: // set exp value to the poke in expgetter_id and print message
-        if (!gBattleControllerExecFlags)
+	for(i = 0; FlagGet(FLAG_BADGE01_GET + i) && i != 8; i++) {
+	}	    
+	if (!gBattleControllerExecFlags)
         {
             item = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
             if (item == ITEM_ENIGMA_BERRY)
@@ -3359,18 +3361,15 @@ static void atk23_getexp(void)
                 gBattleMoveDamage = 0; // used for exp
             }
  #if EXP_BLOCK
-            else 
-                for(i = 0; FlagGet(FLAG_BADGE01_GET + i) && i != 8; i++) {
-                }
-                if (i != 8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare)
-		{
-			viaExpShare=sExpBlockLevels[i];
-			*(&gBattleStruct->sentInPokes) >>= 1;
-			gBattleScripting.atk23_state = 5;
-			gBattleMoveDamage = 0;
-                }
+            else if (i != 8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare)
+	    {
+		    viaExpShare = sExpBlockLevels[i];
+		    *(&gBattleStruct->sentInPokes) >>= 1;
+		    gBattleScripting.atk23_state = 5;
+		    gBattleMoveDamage = 0;
+	    }
   #endif         
-                 else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+	    else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;

@@ -3359,22 +3359,21 @@ static void atk23_getexp(void)
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0; // used for exp
-            }
- #if EXP_BLOCK
-            else if (i != 8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= viaExpShare)
-	    {
-		    viaExpShare = sExpBlockLevels[i];
-		    *(&gBattleStruct->sentInPokes) >>= 1;
-		    gBattleScripting.atk23_state = 5;
-		    gBattleMoveDamage = 0;
-	    }
-  #endif         
+            }     
 	    else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.atk23_state = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
+#if EXP_BLOCK
+            else if (i != 8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= sExpBlockLevels[i])
+	    {
+		    *(&gBattleStruct->sentInPokes) >>= 1;
+		    gBattleScripting.atk23_state = 5;
+		    gBattleMoveDamage = 0;
+	    }
+  #endif    
             else
             {
                 // music change in wild battle after fainting a poke

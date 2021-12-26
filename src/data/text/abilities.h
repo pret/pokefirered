@@ -79,7 +79,7 @@ static const u8 sAdaptabilityDescription[] = _("Ups same type moves.");
 static const u8 sAftermathDescription[] =    _("Damages on the finish hit.");
 static const u8 sAngerPointDescription[] =   _("Max ATTACK on a critical hit.");
 static const u8 sAnticipationDescription[] = _("Senses an dangerous move.");
-static const u8 sBadDreamsDescription[] =    _("Damage sleeping foe's.");
+static const u8 sBadDreamsDescription[] =    _("Damage sleeping foes.");
 static const u8 sDownloadDescription[] =     _("Adjust power based on foe's stats.");
 static const u8 sDrySkinDescription[] =      _("Lost HP in sunny, gain HP in rain.");
 static const u8 sFilterDescription[] =       _("Powers down “super effective” hits.");
@@ -97,6 +97,7 @@ static const u8 sLeafGuardDescription[] =    _("Prevents status if sunny.");
 static const u8 sMagicGuardDescription[] =   _("Only takes damage from attacks.");
 static const u8 sMoldBreakerDescription[] =  _("Moves hits through abilities.");
 static const u8 sMotorDriveDescription[] =   _("Raises SPEED if hit by electricity.");
+static const u8 sMultitypeDescription[] =    _("Changes user's types based on item.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -199,6 +200,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MAGIC_GUARD] = sMagicGuardDescription,
     [ABILITY_MOLD_BREAKER] = sMoldBreakerDescription,
     [ABILITY_MOTOR_DRIVE] = sMotorDriveDescription,
+    [ABILITY_MULTITYPE] = sMultitypeDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -302,4 +304,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MAGIC_GUARD] = _("MAGIC GUARD"),
     [ABILITY_MOLD_BREAKER] = _("MOLD BREAKER"),
     [ABILITY_MOTOR_DRIVE] = _("MOTOR DRIVE"),
+    [ABILITY_MULTITYPE] = _("MULTITYPE"),
 };

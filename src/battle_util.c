@@ -2011,10 +2011,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 					gBattlescriptCurrInstr = BattleScript_MoveStatRaise_PPLoss;
 			}
 			else
+			{
 				if ((gProtectStructs[gBattlerAttacker].notFirstStrike))
 					gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
 			        else
 					gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
+			}
 		}
             }
             break;

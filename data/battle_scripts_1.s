@@ -4568,6 +4568,20 @@ BattleScript_MoldBreakerActivation:
 	setword gSetWordLoc, sMoldBreakerString
 	goto BattleScript_PrintStringAndReturn
 
+BattleScript_MoveStatRaise_PPLoss::
+        ppreduce
+BattleScript_MoveStatRaise::
+        attackstring
+	pause 0x20
+	statbuffchange STAT_CHANGE_BS_PTR, BattleScript_MoveStatRaiseDoStatUp
+BattleScript_MoveStatRaiseDoStatUp::
+        setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	setword gSetWordLoc, sMoveStatUpString
+	printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
 sBadDreamsString::
     .byte 0xFD, 0xF, 0x0, 0xDD, 0xE7, 0xFE, 0xE8, 0xE3, 0xE6, 0xE1, 0xD9, 0xE2, 0xE8, 0xD9, 0xD8, 0xAB, 0xFF
 
@@ -4579,3 +4593,6 @@ sDrySkinSunString::
     
 sMoldBreakerString::
     .byte 0xFD, 0xF, 0x0, 0xD6, 0xE6, 0xD9, 0xD5, 0xDF, 0xE7, 0x0, 0xE8, 0xDC, 0xD9, 0x0, 0xE1, 0xE3, 0xE0, 0xD8, 0xAB, 0xFF
+    
+sMoveStatUpString::
+    .byte 0xFD, 0x10, 0xB4, 0xE7, 0x0, 0xFD, 0x17, 0xFE, 0x

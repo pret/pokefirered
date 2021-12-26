@@ -1278,6 +1278,7 @@
 	.byte \ability
 	.2byte \weather
 	.4byte \ptr
+	.endm
 	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req

@@ -1333,7 +1333,7 @@
 	various \battler, 12
 	.endm
 	
-	.macro restoreabilityonswitch 
+	.macro restoreabilityonswitch battler:req
 	various \battler, VARIOUS_RESTORE_ABILITY_ON_SWITCH
         .endm
 

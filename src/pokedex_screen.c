@@ -648,7 +648,7 @@ const struct WindowTemplate sWindowTemplate_AreaMap_Size = {
     .tilemapLeft = 2,
     .tilemapTop = 7,
     .width = 10,
-    .height = 2,
+    .height = 10,
     .paletteNum = 0,
     .baseBlock = 0x01d0
 };

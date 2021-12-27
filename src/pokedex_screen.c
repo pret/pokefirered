@@ -2978,7 +2978,15 @@ u8 RemoveDexPageWindows(void)
     return 0;
 }
 
-const u8 *
+const u8 *const sStatsTextPointers[] =
+{
+    gText_Hp,
+    gText_Atk,
+    gText_Def,
+    gText_Speed,
+    gText_SpAtk,
+    gText_SpDef,
+};
 
 void PrepareStatToPrint(u16 species, u8 statId)
 {

@@ -1007,7 +1007,7 @@ extern const u8 gText_NextDataCancel[];
 extern const u8 gText_Next[];
 extern const u8 gText_CancelPreviousData[];
 extern const u8 gText_Area[];
-extern const u8 gText_Size[];
+extern const u8 gText_CaptureToMoreInfo[];
 extern const u8 gText_AreaUnknown[];
 
 // daycare

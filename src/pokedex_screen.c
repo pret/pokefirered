@@ -2988,12 +2988,6 @@ const u8 *const sStatsTextPointers[] =
     gText_SpDef,
 };
 
-void PrepareStatToPrint(u16 species, u8 statId)
-{
-    ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].statId, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, sStatsTextPointers[statId]);
-}   
-
 enum
 {
 STAT_PRINT_HP,
@@ -3003,6 +2997,32 @@ STAT_PRINT_SPEED,
 STAT_PRINT_SPATK,
 STAT_PRINT_SPDEF,
 };
+
+void PrepareStatToPrint(u16 species, u8 statId)
+{
+    switch (statId)
+    {
+    case STAT_PRINT_HP:
+            ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].baseHP, STR_CONV_MODE_LEADING_ZEROS, 3);
+            break;
+    case STAT_PRINT_ATK:
+            ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].baseAttack, STR_CONV_MODE_LEADING_ZEROS, 3);
+            break;
+    case STAT_PRINT_DEF:
+            ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].baseDefense, STR_CONV_MODE_LEADING_ZEROS, 3);
+            break;
+    case STAT_PRINT_SPEED:
+            ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].baseSpeed, STR_CONV_MODE_LEADING_ZEROS, 3);
+            break;
+    case STAT_PRINT_SPATK:
+            ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].baseSpAttack, STR_CONV_MODE_LEADING_ZEROS, 3);
+            break;
+    case STAT_PRINT_SPDEF:
+            ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].baseSpDefense, STR_CONV_MODE_LEADING_ZEROS, 3);
+            break;
+    }
+    StringExpandPlaceholders(gStringVar4, sStatsTextPointers[statId]);
+}   
 
 u8 DexScreen_DrawMonAreaPage(void)
 {

@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "pokedex_screen.h"
 #include "data.h"
+#include "text.h"
 #include "pokedex.h"
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
@@ -133,6 +134,7 @@ static void ItemPrintFunc_DexModeSelect(u8 windowId, u32 itemId, u8 y);
 static void ItemPrintFunc_OrderedListMenu(u8 windowId, u32 itemId, u8 y);
 static void Task_DexScreen_RegisterNonKantoMonBeforeNationalDex(u8 taskId);
 static void Task_DexScreen_RegisterMonToPokedex(u8 taskId);
+void PrepareStatToPrint(u16 species, u8 statId);
 
 #include "data/pokemon_graphics/footprint_table.h"
 
@@ -2976,6 +2978,24 @@ u8 RemoveDexPageWindows(void)
     return 0;
 }
 
+const u8 *
+
+void PrepareStatToPrint(u16 species, u8 statId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, gBaseStats[species].statId, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, sStatsTextPointers[statId]);
+}   
+
+enum
+{
+STAT_PRINT_HP,
+STAT_PRINT_ATK,
+STAT_PRINT_DEF,
+STAT_PRINT_SPEED,
+STAT_PRINT_SPATK,
+STAT_PRINT_SPDEF,
+};
+
 u8 DexScreen_DrawMonAreaPage(void)
 {
     int i;
@@ -3003,20 +3023,6 @@ u8 DexScreen_DrawMonAreaPage(void)
     FillBgTilemapBufferRect_Palette0(3, BG_TILE_H_FLIP(6), left + 1 + width, top + 1, 1, height);
     FillBgTilemapBufferRect_Palette0(3, 1, left + 1, top + 1, width, height);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 30, 16);
-
-    width = 10;
-    height = 6;
-    left = 1;
-    top = 9;
-
-    FillBgTilemapBufferRect_Palette0(0, 29, left, top, 1, 1);
-    FillBgTilemapBufferRect_Palette0(0, BG_TILE_H_FLIP(29), left + 1 + width, top, 1, 1);
-    FillBgTilemapBufferRect_Palette0(0, BG_TILE_V_FLIP(29), left, top + 1 + height, 1, 1);
-    FillBgTilemapBufferRect_Palette0(0, BG_TILE_H_V_FLIP(29), left + 1 + width, top + 1 + height, 1, 1);
-    FillBgTilemapBufferRect_Palette0(0, 30, left + 1, top, width, 1);
-    FillBgTilemapBufferRect_Palette0(0, BG_TILE_V_FLIP(30), left + 1, top + 1 + height, width, 1);
-    FillBgTilemapBufferRect_Palette0(0, 31, left, top + 1, 1, height);
-    FillBgTilemapBufferRect_Palette0(0, BG_TILE_H_FLIP(31), left + 1 + width, top + 1, 1, height);
     FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
     FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
 
@@ -3055,11 +3061,29 @@ u8 DexScreen_DrawMonAreaPage(void)
     PutWindowTilemap(sPokedexScreenData->windowIds[11]);
     CopyWindowToVram(sPokedexScreenData->windowIds[11], COPYWIN_GFX);
 
-    // Print "Size"
+    // Print mon stats or "Capture to more info"
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[9], PIXEL_FILL(0));
     {
-        s32 strWidth = GetStringWidth(0, gText_Size, 0);
-        DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gText_Size, (sWindowTemplate_AreaMap_Size.width * 8 - strWidth) / 2, 4, 0);
+        if (monIsCaught)
+        {
+            PrepareStatToPrint(species, STAT_PRINT_HP);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gStringVar4, 0, 4, 0);
+            PrepareStatToPrint(species, STAT_PRINT_ATK);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gStringVar4, 44, 4, 0);
+            PrepareStatToPrint(species, STAT_PRINT_DEF);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gStringVar4, 0, 18, 0);
+            PrepareStatToPrint(species, STAT_PRINT_SPATK);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gStringVar4, 44, 18, 0);
+            PrepareStatToPrint(species, STAT_PRINT_SPDEF);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gStringVar4, 0, 32, 0);
+            PrepareStatToPrint(species, STAT_PRINT_SPEED);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gStringVar4, 44, 32, 0);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gAbilityNames[gBaseStats[species].abilities[0]], 0, 46, 0);
+            if (gBaseStats[species].abilities[1] != 0 && gBaseStats[species].abilities[1] != gBaseStats[species].abilities[0])
+                DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gAbilityNames[gBaseStats[species].abilities[1]], 0, 60, 0);
+        }
+        else
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], 0, gText_CaptureToMoreInfo, 0, 4, 0);
     }
     PutWindowTilemap(sPokedexScreenData->windowIds[9]);
     CopyWindowToVram(sPokedexScreenData->windowIds[9], COPYWIN_GFX);

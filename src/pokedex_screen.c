@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_main.h"
 #include "gflib.h"
 #include "graphics.h"
 #include "m4a.h"

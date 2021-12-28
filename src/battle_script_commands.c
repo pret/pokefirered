@@ -4222,7 +4222,7 @@ static void atk49_moveend(void)
 {
     s32 i;
     bool32 effect = FALSE;
-    u8 moveType = 0;
+    u8 moveType = gBattleStruct->dynamicMoveType;
     u8 holdEffectAtk = 0;
     u16 *choicedMoveAtk = NULL;
     u8 arg1, arg2;
@@ -4239,7 +4239,6 @@ static void atk49_moveend(void)
     else
         holdEffectAtk = ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item, gBattlerAttacker, TRUE);
     choicedMoveAtk = &gBattleStruct->choicedMove[gBattlerAttacker];
-    GET_MOVE_TYPE(gCurrentMove, moveType);
     do
     {
         switch (gBattleScripting.atk49_state)

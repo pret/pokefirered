@@ -462,6 +462,5 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
 void OakSpeechNidoranFFreeResources(void);
 void *OakSpeechNidoranFGetBuffer(u8 bufferId);
 bool8 IsMoveInTable(const u16 table[], u16 moveId);
-u8 TryChangeMoveType(u8 battler, u8 type);
 
 #endif // GUARD_POKEMON_H

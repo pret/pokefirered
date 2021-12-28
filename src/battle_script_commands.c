@@ -8366,7 +8366,6 @@ static void atkC0_recoverbasedonsunlight(void)
 static void atkC1_hiddenpowercalc(void)
 {
 	gBattleStruct->dynamicMoveType = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
-        gBattleStruct->dynamicMoveType |= 0xC0;
         ++gBattlescriptCurrInstr;
 }
 

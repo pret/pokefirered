@@ -3761,7 +3761,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
         gCurrentActionFuncId = gActionsByTurnOrder[(zero = 0)];
     }
     gDynamicBasePower = 0;
-    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dynamicMoveType = gBattleMoves[gCurrentMove].type;
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;

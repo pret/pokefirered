@@ -935,6 +935,11 @@ static const u8 sBallCatchBonuses[] =
 // not used
 static const u32 gUnknown_8250898 = 0xFF7EAE60;
 
+u16 sNoChangeTypeMoves[]
+{
+
+};
+
 u8 TryChangeMoveType(u8 battler, u8 type, u16 move)
 {
     u8 MoveType = type;

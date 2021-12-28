@@ -1482,11 +1482,10 @@ static void CheckWonderGuardAndLevitate(void)
 {
     u8 flags = 0;
     s32 i = 0;
-    u8 moveType;
+    u8 moveType = gBattleStruct->dynamicMoveType;
 
     if (gCurrentMove == MOVE_STRUGGLE || !gBattleMoves[gCurrentMove].power)
         return;
-    GET_MOVE_TYPE(gCurrentMove, moveType);
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
         gLastUsedAbility = ABILITY_LEVITATE;

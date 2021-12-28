@@ -46,7 +46,6 @@ Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega
 
 // Needing put in
 make all multitype effect(its only set in the defines, need make its code)
-check ability 0 in abilities changes and copy because mold breaker
 flower gift form change
 end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc

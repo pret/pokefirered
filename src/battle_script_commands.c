@@ -9144,15 +9144,15 @@ static void atkE9_setweatherballtype(void)
         if (gBattleWeather & WEATHER_ANY)
             gBattleScripting.dmgMultiplier = 2;
         if (gBattleWeather & WEATHER_RAIN_ANY)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | 0x80;
+            *(&gBattleStruct->dynamicMoveType) = TYPE_WATER;
         else if (gBattleWeather & WEATHER_SANDSTORM_ANY)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | 0x80;
+            *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK;
         else if (gBattleWeather & WEATHER_SUN_ANY)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | 0x80;
+            *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE;
         else if (gBattleWeather & WEATHER_HAIL_ANY)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | 0x80;
+            *(&gBattleStruct->dynamicMoveType) = TYPE_ICE;
         else
-            *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | 0x80;
+            *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL;
     }
     ++gBattlescriptCurrInstr;
 }

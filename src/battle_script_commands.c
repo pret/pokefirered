@@ -4433,7 +4433,7 @@ static void atk49_moveend(void)
                     else
                     {
                         gLastLandedMoves[gBattlerTarget] = gCurrentMove;
-                        GET_MOVE_TYPE(gCurrentMove, gLastHitByType[gBattlerTarget]);
+                       gLastHitByType[gBattlerTarget] = gBattleStruct->dynamicMoveType;
                     }
                 }
                 else

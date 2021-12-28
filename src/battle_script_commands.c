@@ -934,10 +934,34 @@ static const u8 sBallCatchBonuses[] =
 // not used
 static const u32 gUnknown_8250898 = 0xFF7EAE60;
 
+u8 TryChangeMoveType(u8 battler, u8 type, u16 move)
+{
+    u8 MoveType;
+	
+    if (gBattleStruct->dynamicMoveType)
+	    MoveType = gBattleStruct->dynamicMoveType;
+	= type;
+    
+    if (!IsMoveInTable(sNoChangeTypeMoves, move))
+    {
+	    switch (gBattleMons[battler].ability)
+	    {
+		    case ABILITY_NORMALIZE:
+			 if (MoveType != TYPE_NORMAL)
+				 MoveType = TYPE_NORMAL;
+			 break;
+	    }
+    }
+    return MoveType;
+}
+
 static void atk00_attackcanceler(void)
 {
     s32 i;
-
+    u8 type;
+	
+    if (gBattleStruct->dynamicMoveType)
+	
     if (gBattleOutcome)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;

@@ -9,6 +9,7 @@ UnHidden Power
 Running Indoors
 Physical/Special/Status Split
 Sound Moves Bypass Substitute
+Pokemon Stats Replacing Weight Comparision Screen
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h
@@ -57,6 +58,7 @@ add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb
 Magic guard prevents damage from spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
 
+// puting
 nature colors
 bw repel system
 evolve without national dex
@@ -93,7 +95,6 @@ tm's reusaveis
 hm's deletabeis @next
 trainers with evs
 ev reducing berries
-replaces weight comparison screen
 full exp for participating in a battle
 pc boxes use more wallpapers @next
 gen 6 shiny base rate

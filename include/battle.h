@@ -458,7 +458,7 @@ extern struct BattleStruct *gBattleStruct;
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
     if (gBattleStruct->dynamicMoveType)                     \
-        typeArg = gBattleStruct->dynamicMoveType & 0x3F;    \
+        typeArg = gBattleStruct->dynamicMoveType;           \
     else                                                    \
         typeArg = gBattleMoves[move].type;                  \
 }

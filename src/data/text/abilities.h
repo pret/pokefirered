@@ -98,6 +98,7 @@ static const u8 sMagicGuardDescription[] =   _("Only takes damage from attacks."
 static const u8 sMoldBreakerDescription[] =  _("Moves hits through abilities.");
 static const u8 sMotorDriveDescription[] =   _("Raises SPEED if hit by electricity.");
 static const u8 sMultitypeDescription[] =    _("Changes form based on item.");
+static const u8 sNoGuardDescription[] =      _("Ensures attacks land.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -201,6 +202,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MOLD_BREAKER] = sMoldBreakerDescription,
     [ABILITY_MOTOR_DRIVE] = sMotorDriveDescription,
     [ABILITY_MULTITYPE] = sMultitypeDescription,
+    [ABILITY_NO_GUARD] = sNoGuardDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -305,4 +307,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MOLD_BREAKER] = _("MOLD BREAKER"),
     [ABILITY_MOTOR_DRIVE] = _("MOTOR DRIVE"),
     [ABILITY_MULTITYPE] = _("MULTITYPE"),
+    [ABILITY_NO_GUARD] = _("NO GUARD"),
 };

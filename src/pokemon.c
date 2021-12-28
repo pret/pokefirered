@@ -2359,6 +2359,11 @@ bool8 IsMoveInTable(const u16 table[], u16 moveId)
     return FALSE;
 }
 
+u8 TryChangeMoveType(u8 battler, u8 type)
+{
+    
+}
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u8 type, split;
@@ -2379,6 +2384,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     else
         type = typeOverride & 0x3F;
 
+    type = TryChangeMoveType(battlerIdAtk, type);
+    
     split = gBattleMoves[move].split;
     
     attack = attacker->attack;

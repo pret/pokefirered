@@ -1077,32 +1077,35 @@ static bool8 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
-    if (!(gHitMarker & HITMARKER_IGNORE_ON_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
+    if (gBattleMons[gBattlerAttacker].ability != ABILITY_NO_GUARD && gBattleMons[gBattlerTarget].ability != ABILITY_NO_GUARD)
     {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        JumpIfMoveFailed(7, move);
-        return TRUE;
-    }
-    gHitMarker &= ~HITMARKER_IGNORE_ON_AIR;
-    if (!(gHitMarker & HITMARKER_IGNORE_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        JumpIfMoveFailed(7, move);
-        return TRUE;
-    }
-    gHitMarker &= ~HITMARKER_IGNORE_UNDERGROUND;
-    if (!(gHitMarker & HITMARKER_IGNORE_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER)
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        JumpIfMoveFailed(7, move);
-        return TRUE;
-    }
-    gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
-    if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && gBattleMoves[move].effect == EFFECT_THUNDER)
-     || (gBattleMoves[move].accuracy == 0))
-    {
-        JumpIfMoveFailed(7, move);
-        return TRUE;
+	    if (!(gHitMarker & HITMARKER_IGNORE_ON_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
+	    {
+		    gMoveResultFlags |= MOVE_RESULT_MISSED;
+		    JumpIfMoveFailed(7, move);
+		    return TRUE;
+	    }
+	    gHitMarker &= ~HITMARKER_IGNORE_ON_AIR;
+	    if (!(gHitMarker & HITMARKER_IGNORE_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
+	    {
+		    gMoveResultFlags |= MOVE_RESULT_MISSED;
+		    JumpIfMoveFailed(7, move);
+		    return TRUE;
+	    }
+	    gHitMarker &= ~HITMARKER_IGNORE_UNDERGROUND;
+	    if (!(gHitMarker & HITMARKER_IGNORE_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER)
+	    {
+		    gMoveResultFlags |= MOVE_RESULT_MISSED;
+		    JumpIfMoveFailed(7, move);
+		    return TRUE;
+	    }
+	    gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
+	    if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && gBattleMoves[move].effect == EFFECT_THUNDER)
+		|| (gBattleMoves[move].accuracy == 0))
+	    {
+		    JumpIfMoveFailed(7, move);
+		    return TRUE;
+	    }
     }
     return FALSE;
 }
@@ -1129,7 +1132,7 @@ static void atk01_accuracycheck(void)
         if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && move == NO_ACC_CALC_CHECK_LOCK_ON && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
             gBattlescriptCurrInstr += 7;
         else if (gStatuses3[gBattlerTarget] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER) && gBattleMons[gBattlerAttacker].ability != ABILITY_NO_GUARD
-		&& gBattleMons[gBattlerTarget].ability != ABILITY_NO_GUARD)
+	      && gBattleMons[gBattlerTarget].ability != ABILITY_NO_GUARD)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         else if (!JumpIfMoveAffectedByProtect(0))
             gBattlescriptCurrInstr += 7;

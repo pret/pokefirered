@@ -1879,12 +1879,7 @@ static void atk0C_datahpupdate(void)
     
     if (!gBattleControllerExecFlags)
     {
-        if (gBattleStruct->dynamicMoveType == 0)
-            moveType = gBattleMoves[gCurrentMove].type;
-        else if (!(gBattleStruct->dynamicMoveType & 0x40))
-            moveType = gBattleStruct->dynamicMoveType & 0x3F;
-        else
-            moveType = gBattleMoves[gCurrentMove].type;
+            moveType = gBattleStruct->dynamicMoveType;
             movesplit = gBattleMoves[gCurrentMove].split;
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {

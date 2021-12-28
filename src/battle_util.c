@@ -1663,7 +1663,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             gLastUsedAbility = gBattleMons[battler].ability;
         if (!moveArg)
             moveArg = gCurrentMove;
-        GET_MOVE_TYPE(moveArg, moveType);
+        moveType = gBattleStruct->dynamicMoveType;
         if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
          && (gLastUsedAbility == ABILITY_INTIMIDATE 
 	  || gLastUsedAbility == ABILITY_TRACE

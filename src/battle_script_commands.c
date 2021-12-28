@@ -1401,14 +1401,13 @@ void ModulateDmgByType(u8 multiplier)
 static void atk06_typecalc(void)
 {
     s32 i = 0;
-    u8 moveType;
+    u8 moveType = gBattleStruct->dynamicMoveType;
 
     if (gCurrentMove == MOVE_STRUGGLE)
     {
         ++gBattlescriptCurrInstr;
         return;
     }
-    GET_MOVE_TYPE(gCurrentMove, moveType);
     // check stab
     if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
     {

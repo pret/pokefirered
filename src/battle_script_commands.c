@@ -958,9 +958,7 @@ u8 TryChangeMoveType(u8 battler, u8 type, u16 move)
 static void atk00_attackcanceler(void)
 {
     s32 i;
-    u8 type;
-	
-    if (gBattleStruct->dynamicMoveType)
+    u8 type = gBattleStruct->dynamicMoveType;
 	
     if (gBattleOutcome)
     {

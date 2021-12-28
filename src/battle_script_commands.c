@@ -19,6 +19,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "field_specials.h"
 #include "battle.h"
+#include "pokemon.h"
 #include "battle_message.h"
 #include "battle_anim.h"
 #include "battle_main.h"
@@ -936,12 +937,8 @@ static const u32 gUnknown_8250898 = 0xFF7EAE60;
 
 u8 TryChangeMoveType(u8 battler, u8 type, u16 move)
 {
-    u8 MoveType;
+    u8 MoveType = type;
 	
-    if (gBattleStruct->dynamicMoveType)
-	    MoveType = gBattleStruct->dynamicMoveType;
-	= type;
-    
     if (!IsMoveInTable(sNoChangeTypeMoves, move))
     {
 	    switch (gBattleMons[battler].ability)
@@ -958,7 +955,7 @@ u8 TryChangeMoveType(u8 battler, u8 type, u16 move)
 static void atk00_attackcanceler(void)
 {
     s32 i;
-    u8 type = gBattleStruct->dynamicMoveType;
+    gBattleStruct->dynamicMoveType = TryChangeMoveType(gBattlerAttacker, gBattleStruct->dynamicMoveType, gCurrentMove);
 	
     if (gBattleOutcome)
     {

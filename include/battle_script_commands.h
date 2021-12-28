@@ -22,6 +22,7 @@ u8 GetBattlerTurnOrderNum(u8 battlerId);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
 u8 TryChangeMoveType(u8 battler, u8 type, u16 move);
 
+extern 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H

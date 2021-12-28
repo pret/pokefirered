@@ -1168,11 +1168,8 @@ static void atk01_accuracycheck(void)
         u16 calc;
 
         if (move == MOVE_NONE)
-            move = gCurrentMove;
-        if (gBattleStruct->dynamicMoveType)                     
-        type = gBattleStruct->dynamicMoveType & 0x3F;    
-    else                                                   
-        type = gBattleMoves[move].type; 
+            move = gCurrentMove;                   
+        type = gBattleStruct->dynamicMoveType;
         movesplit = gBattleMoves[move].split;
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))
             return;

@@ -455,11 +455,6 @@ struct BattleStruct
 
 extern struct BattleStruct *gBattleStruct;
 
-#define GET_MOVE_TYPE(typeArg)                              \
-{                                                           \                    
-        typeArg = gBattleStruct->dynamicMoveType;           \
-}                                                           \
-
 #define APPLY_STAT_MOD(var, mon, stat, statIndex)                                   \
 {                                                                                   \
     (var) = (stat) * (gStatStageRatios)[(mon)->statStages[(statIndex)]][0];         \

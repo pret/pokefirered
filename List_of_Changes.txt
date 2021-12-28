@@ -54,7 +54,7 @@ probabily add an inverse battle check in anticipation type calc
 end's moves data table update
 add the new moves in get forewarn move power
 add the new moves in sIronFistTable
-add the new moves in gnochangetypemoves
+add the new moves in gnochangetypemoves because normalize
 add berries in is item affected by gluttony
 add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb

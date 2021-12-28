@@ -455,13 +455,10 @@ struct BattleStruct
 
 extern struct BattleStruct *gBattleStruct;
 
-#define GET_MOVE_TYPE(move, typeArg)                        \
-{                                                           \
-    if (gBattleStruct->dynamicMoveType)                     \
+#define GET_MOVE_TYPE(typeArg)                              \
+{                                                           \                    
         typeArg = gBattleStruct->dynamicMoveType;           \
-    else                                                    \
-        typeArg = gBattleMoves[move].type;                  \
-}
+}                                                           \
 
 #define APPLY_STAT_MOD(var, mon, stat, statIndex)                                   \
 {                                                                                   \

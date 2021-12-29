@@ -47,8 +47,6 @@
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 
-#define TABLE_END 0xFFFF
-
 struct OakSpeechNidoranFStruct
 {
     u8 spriteCount:4;

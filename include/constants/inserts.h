@@ -5,7 +5,8 @@
 #define NO_HEAL_EGGS TRUE //if true the pokemon center animation don't coun't eggs.
 #define EGG_HATCH_LEVEL_1 TRUE //if true the eggs hatch level becames 1.
 #define POISON_SURVIVAL TRUE //if true the pokemons don't die from poison in the overworld.
-#define SLEEP_UPDATE TRUE //if true the sleep counter last for 1-3 turns instead of 2-5
+#define SLEEP_UPDATE TRUE //if true the sleep counter last for 1-3 turns instead of 2-5.
+#define EFFECTIVENESS_ON_MENU TRUE //if true the move type name trade its color based on the move effectiveness in battle.
 
 // need
 #define BW_REPEL_SYSTEM TRUE //if true when the Repel's effect wears off, the game will automatically ask the player whether they want to use another one immediately.

@@ -4206,6 +4206,7 @@ static void HandleAction_UseMove(void)
         }
     }
     gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+    gBattleStruct->dynamicMoveType = gBattleMoves[gCurrentMove].type;
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 

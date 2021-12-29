@@ -223,6 +223,7 @@ extern const u8 gText_WhatWillPlayerThrow[];
 // battle_controller_player
 extern const u8 gText_BattleSwitchWhich[];
 extern const u8 gUnknown_83FE770[];
+extern const u8 gMoveEffectiveness[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
 extern const u8 gText_LinkStandby[];

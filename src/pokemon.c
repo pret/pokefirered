@@ -2457,6 +2457,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (120 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_IRON_FIST && IsMoveInTable(sIronFistTable, move))
         gBattleMovePower = (120 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_RECKLESS && IsMoveInTable(sRecklessTable, move))
+        gBattleMovePower = (120 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
     if (attacker->ability == ABILITY_HUSTLE)

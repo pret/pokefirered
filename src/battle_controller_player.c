@@ -1399,20 +1399,93 @@ static void MoveSelectionDisplayPpNumber(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 9);
 }
 
+const u16 sListOfColours[] =
+{
+    0x4BD2, 0x226B,
+    0x37CD, 0x0280,
+    0x47DF, 0x037D,
+    0x3BBF, 0x025F,
+    0x4F7E, 0x211C,
+    0x3B7E, 0x001D,
+    0x5F18, 0x2529,
+    0x3DEF, 0x0000,
+};
+
 static void MoveSelectionDisplayMoveType(void)
 {
     u8 *txtPtr, type;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
+    if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].effect != EFFECT_HIDDEN_POWER)
+        type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
+    else
+        type = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+    
+#if EFFECTIVENESS_ON_MENU 
+    u8 target = 1, effect = 0;
+    s32 i = 0;
+    
+    gCurrentMove = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
+    gMoveResultFlags = 0;
+    
+    if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].split != MOVE_SPECIAL && IS_BATTLER_OF_TYPE(gActiveBattler, type))
+        effect = 2;
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        if (gBattlerControllerFuncs[gActiveBattler] == HandleInputChooseTarget)
+            target = gMultiUsePlayerCursor;
+        else if (gBattleMons[target].hp == 0)
+            target = 3;
+    }
+    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE && TYPE_EFFECT_ATK_TYPE(i) != TYPE_FORESIGHT)
+    {
+        if (TYPE_EFFECT_ATK_TYPE(i) == type)
+        {
+                // check type1
+            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[target].type1)
+                ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+                // check type2
+            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[target].type2 &&
+                gBattleMons[target].type1 != gBattleMons[target].type2)
+                ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+        }
+        i += 3;
+    }
+    if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+    {
+        gPlttBufferUnfaded[88] = sListOfColours[effect];
+        gPlttBufferUnfaded[89] = sListOfColours[effect + 1]
+    }
+    else if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+    {
+        gPlttBufferUnfaded[88] = sListOfColours[effect + 4];
+        gPlttBufferUnfaded[89] = sListOfColours[effect + 5];
+    }
+    else if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    {
+        gPlttBufferUnfaded[88] = sListOfColours[effect + 12];
+        gPlttBufferUnfaded[89] = sListOfColours[effect + 13];
+    }
+    else
+    {
+        gPlttBufferUnfaded[88] = sListOfColours[5];
+        gPlttBufferUnfaded[89] = sListOfColours[6];
+    }
+    CpuCopy16(&gPlttBufferUnfaded[88], &gPlttBufferFaded[88], sizeof(u16));
+    CpuCopy16(&gPlttBufferUnfaded[89], &gPlttBufferFaded[89], sizeof(u16));
+    
+    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
+    *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+    *txtPtr++ = 6;
+    *txtPtr++ = 1;
+    txtPtr = StringCopy(txtPtr, gMoveEffectiveness);
+#else
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     *txtPtr++ = EXT_CTRL_CODE_BEGIN;
     *txtPtr++ = 6;
     *txtPtr++ = 1;
     txtPtr = StringCopy(txtPtr, gUnknown_83FE770);
-    if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].effect != EFFECT_HIDDEN_POWER)
-        type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
-    else
-        type = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+#endif
     StringCopy(txtPtr, gTypeNames[type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, 8);
 }

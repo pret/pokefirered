@@ -38,6 +38,7 @@ Leaf Guard
 Magic guard
 Motor drive
 No guard
+poison heal
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

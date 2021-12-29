@@ -103,6 +103,7 @@ static const u8 sNormalizeDescription[] =    _("Moves used becames NORMAL type."
 static const u8 sPoisonHealDescription[] =   _("Slight HP recovery if poisoned.");
 static const u8 sQuickFeetDescription[] =    _("Raises SPEED if has an status.");
 static const u8 sRecklessDescription[] =     _("Ups “crash” and “recoil” moves.");
+static const u8 sRivalryDescription[] =      _("Ups ATTACK if same gender foes.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -211,6 +212,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_POISON_HEAL] = sPoisonHealDescription,
     [ABILITY_QUICK_FEET] = sQuickFeetDescription,
     [ABILITY_RECKLESS] = sRecklessDescription,
+    [ABILITY_RIVALRY] = sRivalryDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -320,4 +322,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_POISON_HEAL] = _("POISON HEAL"),
     [ABILITY_QUICK_FEET] = _("QUICK FEET"),
     [ABILITY_RECKLESS] = _("RECKLESS"),
+    [ABILITY_RIVALRY] = _("RIVALRY"),
 };

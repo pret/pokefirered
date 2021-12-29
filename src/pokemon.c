@@ -1490,6 +1490,17 @@ static const u16 sIronFistTable[] =
     TABLE_END,
 };
 
+static const u16 sRecklessTable[] =
+{
+    MOVE_DOUBLE_EDGE,
+    MOVE_HI_JUMP_KICK,
+    MOVE_JUMP_KICK,
+    MOVE_SUBMISSION,
+    MOVE_TAKE_DOWN,
+    MOVE_VOLT_TACKLE,
+    TABLE_END,
+};
+
 const struct SpriteTemplate gSpriteTemplates_Battlers[] = 
 {
     [B_POSITION_PLAYER_LEFT] = {

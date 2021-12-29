@@ -1414,6 +1414,8 @@ const u16 sListOfColours[] =
 static void MoveSelectionDisplayMoveType(void)
 {
     u8 *txtPtr, type;
+    u8 target = 1, effect = 0;
+    s32 i = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
     if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].effect != EFFECT_HIDDEN_POWER)
@@ -1422,8 +1424,6 @@ static void MoveSelectionDisplayMoveType(void)
         type = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     
 #if EFFECTIVENESS_ON_MENU 
-    u8 target = 1, effect = 0;
-    s32 i = 0;
     
     gCurrentMove = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     gMoveResultFlags = 0;
@@ -1454,7 +1454,7 @@ static void MoveSelectionDisplayMoveType(void)
     if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
     {
         gPlttBufferUnfaded[88] = sListOfColours[effect];
-        gPlttBufferUnfaded[89] = sListOfColours[effect + 1]
+        gPlttBufferUnfaded[89] = sListOfColours[effect + 1];
     }
     else if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
     {

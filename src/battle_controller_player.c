@@ -1413,23 +1413,32 @@ const u16 sListOfColours[] =
 
 static void MoveSelectionDisplayMoveType(void)
 {
-    u8 *txtPtr, type;
-    u8 target = 1, effect = 0;
+    u8 *txtPtr;
+    u8 type, target = 1, effect = 0;
+    u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     s32 i = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
-
-    if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].effect != EFFECT_HIDDEN_POWER)
-        type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
+    
+    if (gBattleMoves[move].effect != EFFECT_HIDDEN_POWER)
+        type = gBattleMoves[move].type;
     else
         type = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     
+    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
+    *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+    *txtPtr++ = 6;
+    *txtPtr++ = 1;
+   
 #if EFFECTIVENESS_ON_MENU 
     
-    gCurrentMove = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
+    //necessary define this for get the correctly effectiveness
     gMoveResultFlags = 0;
+    gCurrentMove = move;
     
-    if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].split != MOVE_SPECIAL && IS_BATTLER_OF_TYPE(gActiveBattler, type))
+    //check if move is stab
+    if (gBattleMoves[gCurrentMove].split != MOVE_SPECIAL && IS_BATTLER_OF_TYPE(gActiveBattler, type))
         effect = 2;
+    //try change move target in double
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         if (gBattlerControllerFuncs[gActiveBattler] == HandleInputChooseTarget)
@@ -1437,6 +1446,7 @@ static void MoveSelectionDisplayMoveType(void)
         else if (gBattleMons[target].hp == 0)
             target = 3;
     }
+    //get move effectiveness
     while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE && TYPE_EFFECT_ATK_TYPE(i) != TYPE_FORESIGHT)
     {
         if (TYPE_EFFECT_ATK_TYPE(i) == type)
@@ -1451,6 +1461,7 @@ static void MoveSelectionDisplayMoveType(void)
         }
         i += 3;
     }
+    //set respective colours
     if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
     {
         gPlttBufferUnfaded[88] = sListOfColours[effect];
@@ -1474,16 +1485,8 @@ static void MoveSelectionDisplayMoveType(void)
     CpuCopy16(&gPlttBufferUnfaded[88], &gPlttBufferFaded[88], sizeof(u16));
     CpuCopy16(&gPlttBufferUnfaded[89], &gPlttBufferFaded[89], sizeof(u16));
     
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-    *txtPtr++ = EXT_CTRL_CODE_BEGIN;
-    *txtPtr++ = 6;
-    *txtPtr++ = 1;
     txtPtr = StringCopy(txtPtr, gMoveEffectiveness);
 #else
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-    *txtPtr++ = EXT_CTRL_CODE_BEGIN;
-    *txtPtr++ = 6;
-    *txtPtr++ = 1;
     txtPtr = StringCopy(txtPtr, gUnknown_83FE770);
 #endif
     StringCopy(txtPtr, gTypeNames[type]);

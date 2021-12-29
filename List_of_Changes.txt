@@ -39,6 +39,7 @@ Magic guard
 Motor drive
 No guard
 poison heal
+rivalry
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

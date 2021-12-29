@@ -100,6 +100,7 @@ static const u8 sMotorDriveDescription[] =   _("Raises SPEED if hit by electrici
 static const u8 sMultitypeDescription[] =    _("Changes form based on item.");
 static const u8 sNoGuardDescription[] =      _("Ensures attacks land.");
 static const u8 sNormalizeDescription[] =    _("Moves used becames NORMAL type.");
+static const u8 sPoisonHealDescription[] =   _("Slight HP recovery if poisoned.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -205,6 +206,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MULTITYPE] = sMultitypeDescription,
     [ABILITY_NO_GUARD] = sNoGuardDescription,
     [ABILITY_NORMALIZE] = sNormalizeDescription,
+    [ABILITY_POISON_HEAL] = sPoisonHealDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -311,4 +313,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MULTITYPE] = _("MULTITYPE"),
     [ABILITY_NO_GUARD] = _("NO GUARD"),
     [ABILITY_NORMALIZE] = _("NORMALIZE"),
+    [ABILITY_POISON_HEAL] = _("POISON HEAL"),
 };

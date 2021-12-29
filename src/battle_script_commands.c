@@ -939,6 +939,7 @@ const u16 gNoChangeTypeMoves[] =
 {
 MOVE_HIDDEN_POWER,
 MOVE_WEATHER_BALL,
+TABLE_END,
 };
 
 u8 TryChangeMoveType(u8 battler, u8 type, u16 move)

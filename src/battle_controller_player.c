@@ -1479,8 +1479,8 @@ static void MoveSelectionDisplayMoveType(void)
     }
     else
     {
-        gPlttBufferUnfaded[88] = sListOfColours[5];
-        gPlttBufferUnfaded[89] = sListOfColours[6];
+        gPlttBufferUnfaded[88] = sListOfColours[8];
+        gPlttBufferUnfaded[89] = sListOfColours[9];
     }
     CpuCopy16(&gPlttBufferUnfaded[88], &gPlttBufferFaded[88], sizeof(u16));
     CpuCopy16(&gPlttBufferUnfaded[89], &gPlttBufferFaded[89], sizeof(u16));

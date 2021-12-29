@@ -2372,6 +2372,7 @@ bool8 IsMoveInTable(const u16 table[], u16 moveId)
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u8 split, type = typeOverride;
+    u8 attackerGender, defenderGender;
     u8 defenderHoldEffect, defenderHoldEffectParam;
     u8 attackerHoldEffect, attackerHoldEffectParam;
     u16 attack, defense;
@@ -2464,6 +2465,19 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack /= 2;
         attack /= 2;
     }  
+    if (attacker->ability == ABILITY_RIVALRY)
+    {
+        attackerGender = GetGenderFromSpeciesAndPersonality(attacker->species, attacker->personality);
+        defenderGender = GetGenderFromSpeciesAndPersonality(defender->species, defender->personality);
+        
+        if (attackerGender != MON_GENDERLESS && defenderGender != MON_GENDERLESS)
+        {
+            if (attackerGender == defenderGender)
+                gBattleMovePower += gBattleMovePower / 4;
+            else
+                gBattleMovePower -= gBattleMovePower / 4;
+        }
+    }
     if (attacker->ability == ABILITY_NORMALIZE && !IsMoveInTable(gNoChangeTypeMoves, move))
         gBattleMovePower = (120 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_IRON_FIST && IsMoveInTable(sIronFistTable, move))

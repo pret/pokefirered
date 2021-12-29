@@ -461,6 +461,8 @@ extern struct BattleStruct *gBattleStruct;
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
+#define TABLE_END 0xFFFF
+
 #define IS_TYPE_PHYSICAL(moveType)(moveType == MOVE_PHYSICAL)
 #define IS_TYPE_SPECIAL(moveType)(moveType == MOVE_SPECIAL)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))

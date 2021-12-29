@@ -768,7 +768,8 @@ u8 DoBattlerEndTurnEffects(void)
                 break;
             case ENDTURN_POISON:  // poison
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].hp != 0
-		 && gBattleMons[gActiveBattler].ability != ABILITY_MAGIC_GUARD)
+		 && gBattleMons[gActiveBattler].ability != ABILITY_MAGIC_GUARD
+		 && gBattleMons[gActiveBattler].ability != ABILITY_POISON_HEAL)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
                     if (gBattleMoveDamage == 0)
@@ -782,14 +783,22 @@ u8 DoBattlerEndTurnEffects(void)
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON) && gBattleMons[gActiveBattler].hp != 0
 		   && gBattleMons[gActiveBattler].ability != ABILITY_MAGIC_GUARD)
                 {
-                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    if ((gBattleMons[gActiveBattler].status1 & 0xF00) != 0xF00) // not 16 turns
-                        gBattleMons[gActiveBattler].status1 += 0x100;
-                    gBattleMoveDamage *= (gBattleMons[gActiveBattler].status1 & 0xF00) >> 8;
-                    BattleScriptExecute(BattleScript_PoisonTurnDmg);
-                    ++effect;
+			if (gBattleMons[gActiveBattler].ability == ABILITY_POISON_HEAL)
+			{
+				if ((gBattleMons[gActiveBattler].status1 & 0xF00) != 0xF00) // not 16 turns
+					gBattleMons[gActiveBattler].status1 += 0x100;
+			}
+			else
+			{
+				gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+				if (gBattleMoveDamage == 0)
+					gBattleMoveDamage = 1;
+				if ((gBattleMons[gActiveBattler].status1 & 0xF00) != 0xF00) // not 16 turns
+					gBattleMons[gActiveBattler].status1 += 0x100;
+				gBattleMoveDamage *= (gBattleMons[gActiveBattler].status1 & 0xF00) >> 8;
+				BattleScriptExecute(BattleScript_PoisonTurnDmg);
+				++effect;
+			}
                 }
                 ++gBattleStruct->turnEffectsTracker;
                 break;

@@ -141,6 +141,7 @@ static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 static void DisplayMoveSplitIcon(void);
+static u8 GetStatColor();
 
 static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplitIcon.4bpp");
 
@@ -2479,6 +2480,57 @@ const u8 sStatsPosY[] =
 22, 35, 74, 48, 61,
 };
 
+static u8 GetStatColor(u8 statiD)
+{
+	u8 coloriD = 0;
+	u8 nature = GetNature(&sMonSummaryScreen->currentMon);
+	
+	switch (statiD)
+	{
+		case PSS_STAT_ATK:
+			switch (nature)
+			{
+				case NATURE_LONELY:
+				case NATURE_BRAVE:
+				case NATURE_ADAMANT:
+				case NATURE_NAUGHTY:
+					coloriD = 4; //color red
+					break;
+				case NATURE_BOLD:
+				case NATURE_TIMID:
+				case NATURE_MODEST:
+				case NATURE_CALM:
+					coloriD = 5; //color blue
+					break;
+			}
+			break;
+		case PSS_STAT_DEF:
+			switch (nature)
+			{
+				case NATURE_BOLD:
+				case NATURE_RELAXED:
+				case NATURE_IMPISH:
+				case NATURE_LAX:
+					coloriD = 4; //color red
+					break;
+				case NATURE_LONELY:
+				case NATURE_HASTY:
+				case NATURE_MILD:
+				case NATURE_GENTLE:
+					coloriD = 5; //color blue
+					break;
+			}
+			break;
+		case PSS_STAT_SPE:
+			switch (nature)
+			{
+					case 
+			}
+			break;
+	}
+	return coloriD;
+}
+
 static void PrintSkillsPage(void)
 {
     u8 choose, i;
@@ -2487,7 +2539,7 @@ static void PrintSkillsPage(void)
 	
     for (i = 0; i < 5; i++)
     {
-	    choose = GetStatColor();
+	    choose = GetStatColor(PSS_STAT_ATK + i);
 	    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 50 + sMonSkillsPrinterXpos->statsStr[i], sStatsPosY[i], 
 					 sLevelNickTextColors[choose], TEXT_SPEED_FF, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK + i]);
     }

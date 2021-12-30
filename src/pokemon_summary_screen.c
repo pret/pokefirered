@@ -2176,8 +2176,8 @@ static void BufferMonSkills(void)
 	    for (i = 0; i < 5; i++)
 	    {
 		    statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK2 + i);
-		    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK + i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
-		    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK + i]);
+		    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+		    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[i]);
 	    }
     }
     else
@@ -2185,8 +2185,8 @@ static void BufferMonSkills(void)
 	    for (i = 0; i < 5; i++)
 	    {
 		    statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK + i);
-		    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK + i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
-		    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK + i]);
+		    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+		    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[i]);
 	    }
     }
 

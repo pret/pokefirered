@@ -252,11 +252,7 @@ struct Struct203B144
 {
     u16 unk00;
     u16 curHpStr;
-    u16 atkStr;
-    u16 defStr;
-    u16 spAStr;
-    u16 spDStr;
-    u16 speStr;
+    u16 statsStr[5];
     u16 expStr;
     u16 toNextLevel;
 

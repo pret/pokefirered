@@ -19,6 +19,7 @@ No Healing Eggs
 Eggs Hatch At Level 1
 Poison Survival
 Display Move Effectiveness In Battle
+Nature Colors
 
 //Abilities Added and completed
 Adaptability
@@ -65,7 +66,6 @@ Leaf guard prevents the Flame Orb and Toxic Orb
 Magic guard prevents damage from spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
 
 // puting
-nature colors
 bw repel system
 evolve without national dex
 evolution via happiness

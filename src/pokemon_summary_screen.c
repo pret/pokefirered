@@ -141,7 +141,7 @@ static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 static void DisplayMoveSplitIcon(void);
-static u8 GetStatColor();
+static u8 GetStatColor(u8 statiD);
 
 static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplitIcon.4bpp");
 
@@ -2524,7 +2524,52 @@ static u8 GetStatColor(u8 statiD)
 		case PSS_STAT_SPE:
 			switch (nature)
 			{
-					case 
+				case NATURE_TIMID:
+				case NATURE_HASTY:
+				case NATURE_JOLLY:
+				case NATURE_NAIVE:
+					coloriD = 4; //color red
+					break;
+				case NATURE_BRAVE:
+				case NATURE_RELAXED:
+				case NATURE_QUIET:
+				case NATURE_SASSY:
+					coloriD = 5; //color blue
+					break;
+			}
+			break;
+		case PSS_STAT_SPA:
+			switch (nature)
+			{
+				case NATURE_MODEST:
+				case NATURE_MILD:
+				case NATURE_QUIET:
+				case NATURE_RASH:
+					coloriD = 4; //color red
+					break;
+				case NATURE_ADAMANT:
+				case NATURE_IMPISH:
+				case NATURE_JOLLY:
+				case NATURE_CAREFUL:
+					coloriD = 5; //color blue
+					break;
+			}
+			break;
+		case PSS_STAT_SPD:
+			switch (nature)
+			{
+				case NATURE_CALM:
+				case NATURE_GENTLE:
+				case NATURE_SASSY:
+				case NATURE_CAREFUL:
+					coloriD = 4; //color red
+					break;
+				case NATURE_NAUGHTY:
+				case NATURE_LAX:
+				case NATURE_NAIVE:
+				case NATURE_RASH:
+					coloriD = 5; //color blue
+					break;
 			}
 			break;
 	}
@@ -2539,9 +2584,9 @@ static void PrintSkillsPage(void)
 	
     for (i = 0; i < 5; i++)
     {
-	    choose = GetStatColor(PSS_STAT_ATK + i);
+	    choose = GetStatColor(i);
 	    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 50 + sMonSkillsPrinterXpos->statsStr[i], sStatsPosY[i], 
-					 sLevelNickTextColors[choose], TEXT_SPEED_FF, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK + i]);
+					 sLevelNickTextColors[choose], TEXT_SPEED_FF, sMonSummaryScreen->summary.statValueStrBufs[i]);
     }
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 15 + sMonSkillsPrinterXpos->expStr, 87, sLevelNickTextColors[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.expPointsStrBuf);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2, 15 + sMonSkillsPrinterXpos->toNextLevel, 100, sLevelNickTextColors[0], TEXT_SPEED_FF, sMonSummaryScreen->summary.expToNextLevelStrBuf);

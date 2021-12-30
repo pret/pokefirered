@@ -35,6 +35,7 @@
 #include "pokemon_storage_system.h"
 #include "battle_util.h"
 #include "constants/battle_move_effects.h"
+#include "constants/inserts.h"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);

@@ -18,6 +18,7 @@ Automatic Swap Page On Naming Screen
 No Healing Eggs
 Eggs Hatch At Level 1
 Poison Survival
+Display Move Effectiveness In Battle
 
 //Abilities Added and completed
 Adaptability

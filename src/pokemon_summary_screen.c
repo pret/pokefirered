@@ -915,8 +915,8 @@ static const u8 sLevelNickTextColors[][5] =
     {0, 1, 2},
     {0, 9, 8},
     {0, 5, 4},
-    {0, 1, 10},
-    {0, 7, 10},
+    {0, 1, 10}, //red color
+    {0, 7, 10}, //blue color
 };
 
 static const u8 ALIGNED(4) sMultiBattlePartyOrder[] =

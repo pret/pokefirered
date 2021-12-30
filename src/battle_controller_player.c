@@ -1415,11 +1415,11 @@ const u16 sListOfColours[] =
 
 static void MoveSelectionDisplayMoveType(void)
 {
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     u8 *txtPtr;
     u8 type, target = 1, effect = 0;
     u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     s32 i = 0;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     
     if (gBattleMoves[move].effect != EFFECT_HIDDEN_POWER)
         type = gBattleMoves[move].type;

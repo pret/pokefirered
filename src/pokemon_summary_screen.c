@@ -2977,14 +2977,14 @@ const u16 sIvsRakingPosY[] =
 static void PokeSum_PrintMonIvs(void)
 {
 	u8 i;
-	u32 ev;
+	u32 iv;
 		
 	for (i = 0; i < 6; i++)
 	{
-		ev = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
-		ev = (ev / 2) * 64;
+		iv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
+		iv = (iv / 2) * 64;
 		
-		BlitBitmapRectToWindow(3, sIvsRanking + ev, 0, 0, 128, 128, 12, sIvsRakingPosY[i], 16, 8);
+		BlitBitmapRectToWindow(3, sIvsRanking + iv, 0, 0, 128, 128, 12, sIvsRakingPosY[i], 16, 8);
 	}
 }
 

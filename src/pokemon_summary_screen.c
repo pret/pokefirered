@@ -143,8 +143,10 @@ static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 static void DisplayMoveSplitIcon(void);
 static u8 GetStatColor(u8 statiD);
+static void PokeSum_PrintMonIvs(void);
 
 static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplitIcon.4bpp");
+static const u8 sIvsRanking[] = INCBIN_U8("graphics/new/IvsRankingIcon.4bpp");
 
 struct PokemonSummaryScreenData
 {
@@ -2975,6 +2977,9 @@ static void PokeSum_PrintAbilityDataOrMoveTypes(void)
         break;
     case PSS_PAGE_SKILLS:
         PokeSum_PrintAbilityNameAndDesc();
+#if EVS_IN_THE_SUMMARY
+	PokeSum_PrintMonIvs();
+#endif
         break;
     case PSS_PAGE_MOVES:
     case PSS_PAGE_MOVES_INFO:
@@ -2983,6 +2988,25 @@ static void PokeSum_PrintAbilityDataOrMoveTypes(void)
     }
 
     PutWindowTilemap(sMonSummaryScreen->windowIds[5]);
+}
+
+const u16 sIvsRakingPosY[] =
+{
+	6, 23, 36, 75, 49, 62,
+}
+
+static void PokeSum_PrintMonIvs(void)
+{
+	u8 i;
+	u32 ev;
+		
+	for (i = 0; i < 6; i++)
+	{
+		ev = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
+		ev = (ev / 2) * 64;
+		
+		BlitBitmapRectToWindow(3, sIvsRanking + ev, 0, 0, 128, 128, 12, sIvsRakingPosY[i], 16, 8);
+	}
 }
 
 static void PokeSum_PrintAbilityNameAndDesc(void)

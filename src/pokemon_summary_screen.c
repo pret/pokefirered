@@ -2972,7 +2972,7 @@ static void PokeSum_PrintSelectedMoveStats(void)
 const u16 sIvsRakingPosY[] =
 {
 	6, 23, 36, 75, 49, 62,
-}
+};
 
 static void PokeSum_PrintMonIvs(void)
 {

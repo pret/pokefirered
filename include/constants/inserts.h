@@ -8,7 +8,7 @@
 #define SLEEP_UPDATE TRUE //if true the sleep counter last for 1-3 turns instead of 2-5.
 #define EFFECTIVENESS_ON_MENU TRUE //if true the move type name trade its color based on the move effectiveness in battle.
 #define NATURE_COLOURS TRUE //if true colours the stat in the summary screen depending on the nature.
-#define EVS_IN_THE_SUMMARY TRUE //if true go to graphics/new and change the IvsRankingIcon.png to you img.
+#define IVS_IN_THE_SUMMARY TRUE //if true go to graphics/new and change the IvsRankingIcon.png to you img.
 
 // need
 #define BW_REPEL_SYSTEM TRUE //if true when the Repel's effect wears off, the game will automatically ask the player whether they want to use another one immediately.

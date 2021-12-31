@@ -2977,7 +2977,7 @@ static void PokeSum_PrintAbilityDataOrMoveTypes(void)
         break;
     case PSS_PAGE_SKILLS:
         PokeSum_PrintAbilityNameAndDesc();
-#if EVS_IN_THE_SUMMARY
+#if IVS_IN_THE_SUMMARY
 	PokeSum_PrintMonIvs();
 #endif
         break;

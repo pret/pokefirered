@@ -2969,6 +2969,25 @@ static void PokeSum_PrintSelectedMoveStats(void)
     }
 }
 
+const u16 sIvsRakingPosY[] =
+{
+	6, 23, 36, 75, 49, 62,
+}
+
+static void PokeSum_PrintMonIvs(void)
+{
+	u8 i;
+	u32 ev;
+		
+	for (i = 0; i < 6; i++)
+	{
+		ev = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
+		ev = (ev / 2) * 64;
+		
+		BlitBitmapRectToWindow(3, sIvsRanking + ev, 0, 0, 128, 128, 12, sIvsRakingPosY[i], 16, 8);
+	}
+}
+
 static void PokeSum_PrintAbilityDataOrMoveTypes(void)
 {
     switch (sMonSummaryScreen->curPageIndex)
@@ -2988,25 +3007,6 @@ static void PokeSum_PrintAbilityDataOrMoveTypes(void)
     }
 
     PutWindowTilemap(sMonSummaryScreen->windowIds[5]);
-}
-
-const u16 sIvsRakingPosY[] =
-{
-	6, 23, 36, 75, 49, 62,
-}
-
-static void PokeSum_PrintMonIvs(void)
-{
-	u8 i;
-	u32 ev;
-		
-	for (i = 0; i < 6; i++)
-	{
-		ev = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
-		ev = (ev / 2) * 64;
-		
-		BlitBitmapRectToWindow(3, sIvsRanking + ev, 0, 0, 128, 128, 12, sIvsRakingPosY[i], 16, 8);
-	}
 }
 
 static void PokeSum_PrintAbilityNameAndDesc(void)

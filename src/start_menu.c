@@ -36,6 +36,7 @@
 #include "help_system.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
+#include "constants/inserts.h"
 
 enum StartMenuOption
 {
@@ -496,6 +497,9 @@ static bool8 StartMenuBagCallback(void)
 
 static bool8 StartMenuPlayerCallback(void)
 {
+#if MON_ICON_ON_TRAINER_CARD
+    UpdateTrainerCardPhotoIcons();
+#endif
     if (!gPaletteFade.active)
     {
         PlayRainStoppingSoundEffect();

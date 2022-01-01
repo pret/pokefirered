@@ -20,6 +20,7 @@ Eggs Hatch At Level 1
 Poison Survival
 Display Move Effectiveness In Battle
 Nature Colors
+Iv's In The Summary Screen
 
 //Abilities Added and completed
 Adaptability

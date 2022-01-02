@@ -29,6 +29,7 @@ void CpuSet(const void *src, void *dest, u32 control);
 void CpuSet2(const void *src, u32 dest, u32 control);
 
 void ExecuteFunc(u32 src);
+void RTCStart(void);
 
 #define CPU_FAST_SET_SRC_FIXED 0x01000000
 

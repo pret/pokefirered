@@ -52,7 +52,6 @@ ExecuteFunc:
     thumb_func_end ExecuteFunc
 
 thumb_func_start RTCStart
-thumb_func_start RTCStart
 RTCStart:
     push {r0-r7,lr}
     bl _check

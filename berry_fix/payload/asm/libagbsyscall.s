@@ -356,6 +356,7 @@ gRtcCheckLocation: .word 0x03003D9C
 gRtcLocation: .word 0x03003DA0
 thumb_func_end RTCStart
 
+        .align 2, 0
 thumb_func_start DayAndNightPalleteChange
 DayAndNightPalleteChange:
     push {r2-r7,lr}

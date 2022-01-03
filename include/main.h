@@ -44,6 +44,30 @@ struct Main
     /*0x439*/ u8 field_439_x4:1;
 };
 
+struct RtcFuncStruct
+{
+    u8 unk00;
+    u8 year;
+    u8 day;
+    u8 month;
+    u8 unk04;
+    u8 hour;
+    u8 minute;
+    u8 second;
+};
+
+struct RtcStruct
+{
+    u16 year;
+    u8 bytefill;
+    u8 month;
+    u8 day;
+    u8 bytefill2;
+    u8 hour;
+    u8 minute;
+    u8 second;
+};
+
 extern u8 gUnknown_3001764;
 extern struct Main gMain;
 extern bool8 gSoftResetDisabled;
@@ -51,6 +75,11 @@ extern bool8 gLinkVSyncDisabled;
 
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
+
+extern struct RtcFuncStruct gRtcLocationDecimal;
+extern u32 gUnknownRtcLoc2;
+extern u32 gRtcCheckLocation;
+extern struct RtcStruct gRtcLocation;
 
 void AgbMain(void);
 void SetMainCallback2(MainCallback callback);

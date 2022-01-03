@@ -10,4 +10,3 @@ IntrMain_Buffer
 sVcountAtIntr
 sVcountBeforeSound
 gPcmDmaCounter
-gRtcLocation

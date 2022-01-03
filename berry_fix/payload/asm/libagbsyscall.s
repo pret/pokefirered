@@ -1,8 +1,6 @@
         .include "asm/macros/function.inc"
 	.include "constants/gba_constants.inc"
 
-        .set 
-
 	.syntax unified
 
 	.text

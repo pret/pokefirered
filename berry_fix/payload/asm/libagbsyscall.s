@@ -350,10 +350,10 @@ _check9:
        .align 2, 0
 PORT_DATA_START: .word 0x080000C4
 PORT_DATA_START_PLUS2: .word 0x080000C6
-gRtcLocationDecimal: .word 0x03005504
-gUnknownRtcLoc2: .word 0x0300550c
-gRtcCheckLocation: .word 0x03005510
-gRtcLocation: .word 0x03005514
+gRtcLocationDecimal: .word 0x03003D90
+gUnknownRtcLoc2: .word 0x03003D98
+gRtcCheckLocation: .word 0x03003D9C
+gRtcLocation: .word 0x03003DA0
 thumb_func_end RTCStart
 
         .align 2, 0

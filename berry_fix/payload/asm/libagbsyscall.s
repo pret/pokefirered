@@ -349,3 +349,6 @@ _check9:
 	.align 2, 0 @ Don't pad with nop.
 PORT_DATA_START: .word 0x080000C4
 PORT_DATA_START_PLUS2: .word 0x080000C6
+thumb_func_end RTCStart
+
+        .align 2, 0

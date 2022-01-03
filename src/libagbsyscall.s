@@ -393,6 +393,8 @@ _check9:
     adds r2, r1
     movs r0, r2
     bx lr
+    
+        .align 2, 0
 PORT_DATA_START: .word 0x080000C4
 PORT_DATA_START_PLUS2: .word 0x080000C6
 gRtcLocationDecimal: .word 0x03005504

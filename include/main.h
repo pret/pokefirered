@@ -76,6 +76,8 @@ extern bool8 gLinkVSyncDisabled;
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
+extern u8 gDayAndNightStatus;
+
 extern struct RtcFuncStruct gRtcLocationDecimal;
 extern u32 gUnknownRtcLoc2;
 extern u32 gRtcCheckLocation;

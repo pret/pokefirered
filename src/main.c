@@ -82,28 +82,10 @@ static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
 EWRAM_DATA u16 gTrainerId = 0;
 
-struct RtcFuncStruct =
-{
-    u32 unk00;
-    u32 unk01;
-};
-
-struct RtcStruct =
-{
-    u16 year;
-    u8 bytefill;
-    u8 month;
-    u8 day;
-    u8 bytefill2;
-    u8 hour;
-    u8 minute;
-    u8 second;
-};
-
-IWRAM_DATA static struct RtcFuncStruct gUnknownRtcLoc;
-IWRAM_DATA static u32 gUnknownRtcLoc2;
-IWRAM_DATA static u32 gRtcCheckLocation;
-IWRAM_DATA static struct RtcStruct gRtcLocation;
+IWRAM_DATA struct RtcFuncStruct gRtcLocationDecimal;
+IWRAM_DATA u32 gUnknownRtcLoc2;
+IWRAM_DATA u32 gRtcCheckLocation;
+IWRAM_DATA struct RtcStruct gRtcLocation;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);

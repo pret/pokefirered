@@ -410,20 +410,20 @@ DayAndNightPalleteChange:
     push {r2-r7,lr}
     mov r4, r8
     push {r4}
-    mov r4, r0
-    mov r5, r1
-    ldr r0, gRtcLocation
+    movs r4, r0
+    movs r5, r1
+    ldr r0, gRtcLocationLoc
     ldrb r1, [r0, 6]
     ldr r0, gDnsStatusByte
-    cmp r1, DAWN_OF_DAY_START
+    cmp r1, 4
     blt _dawn
-    cmp r1, MORNING_OF_DAY_START
+    cmp r1, 6
     blt _morning
-    cmp r1, AFTERNOON_OF_DAY_START
+    cmp r1, 17
     blt _afternoon
-    cmp r1, NIGHT_OF_DAY_START
+    cmp r1, 19
     blt _night
-    cmp r1, MIDNIGHT_OF_DAY_START
+    cmp r1, 22
     blt _midnight
     movs r1, 5
     ldr r2, =0x7C007C00
@@ -525,12 +525,7 @@ _return:
     pop {r2-r7,pc}
 
         .align 2, 0
-DAWN_OF_DAY_START: .word 0x00000004
-MORNING_OF_DAY_START: .word 0x00000006
-AFTERNOON_OF_DAY_START: .word 0x00000011
-NIGHT_OF_DAY_START: .word 0x00000013
-MIDNIGHT_OF_DAY_START: .word 0x00000016	
-gRtcLocation: .word 0x03003DA0
+gRtcLocationLoc: .word 0x03003DA0
 gDnsStatusByte: .word 0x02020002
 gCheckMapType: .word 0x02036E08
 gCheckInBattle: .word 0x030030f0

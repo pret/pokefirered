@@ -1,3 +1,5 @@
+	#include "main.h"
+	#include "global.fieldmap.h"
 	.include "constants/gba_constants.inc"
 	.include "asm/macros.inc"
 
@@ -395,13 +397,9 @@ _check9:
     movs r0, r2
     bx lr
     
-        .align 2, 0
+       .align 2, 0
 PORT_DATA_START: .word 0x080000C4
 PORT_DATA_START_PLUS2: .word 0x080000C6
-gRtcLocationDecimal: .word 0x03005504
-gUnknownRtcLoc2: .word 0x0300550c
-gRtcCheckLocation: .word 0x03005510
-gRtcLocation: .word 0x03005514
 thumb_func_end RTCStart
 
         .align 2, 0
@@ -412,18 +410,18 @@ DayAndNightPalleteChange:
     push {r4}
     movs r4, r0
     movs r5, r1
-    ldr r0, gRtcLocationLoc
+    ldr r0, gRtcLocation
     ldrb r1, [r0, 6]
-    ldr r0, gDnsStatusByte
-    cmp r1, 4
+    ldr r0, gDayAndNightStatus
+    cmp r1, DAWN_OF_DAY_START
     blt _dawn
-    cmp r1, 6
+    cmp r1, MORNING_OF_DAY_START
     blt _morning
-    cmp r1, 17
+    cmp r1, AFTERNOON_OF_DAY_START
     blt _afternoon
-    cmp r1, 19
+    cmp r1, NIGHT_OF_DAY_START
     blt _night
-    cmp r1, 22
+    cmp r1, MIDNIGHT_OF_DAY_START
     blt _midnight
     movs r1, 5
     ldr r2, =0x7C007C00
@@ -455,7 +453,7 @@ _midnight:
     
 _next:
     strb r1, [r0]
-    ldr r0, gCheckMapType
+    ldr r0, gMapHeader
     ldrb r0, [r0, 23]
     cmp r0, 0
     beq _return
@@ -463,12 +461,10 @@ _next:
     beq _return
     cmp r0, 8
     beq _return
-    ldr r0, gCheckInBattle
+    ldr r0, gMain
     ldr r1, =0x0000439
     adds r0, r1
-    ldrb r3, [r0]
-    movs r1, 2
-    ands r1, r3
+    ldrb r1, [r0]
     cmp r1, 0
     bne _return
     ldrb r0, [r0, 1]
@@ -523,11 +519,5 @@ _return:
     pop {r4}
     mov r8, r4
     pop {r2-r7,pc}
-
-        .align 2, 0
-gRtcLocationLoc: .word 0x03003DA0
-gDnsStatusByte: .word 0x02020002
-gCheckMapType: .word 0x02036E08
-gCheckInBattle: .word 0x030030f0
 thumb_func_end DayAndNightPalleteChange
         .align 2, 0

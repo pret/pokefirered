@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "task.h"
 #include "main.h"
+#include "constants/map_types.h"
 
 enum
 {
@@ -102,7 +103,7 @@ void TransferPlttBuffer(void)
     {
         void *src = gPlttBufferFaded;
         void *dest = (void *)PLTT;
-        void *PalStart = 0x05000000;
+        void *PalStart = (void *)0x05000000;
         u8 i, i2;
         u32 check, check2, color, func = 0xFFFF1FFF, start = 0x04210421;
     

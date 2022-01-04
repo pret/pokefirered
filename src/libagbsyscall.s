@@ -415,78 +415,10 @@ thumb_func_end RTCStart
         .align 2, 0
 thumb_func_start DayAndNightPalleteChange
 DayAndNightPalleteChange:
-    push {r2-r7,lr}
-    mov r4, r8
-    push {r4}
-    movs r4, r0
-    movs r5, r1
-    ldr r0, gRtcLocation
-    ldrb r1, [r0, 6]
-    ldr r0, gDayAndNightStatus
-    cmp r1, DAWN_OF_DAY_START
-    blt _dawn
-    cmp r1, MORNING_OF_DAY_START
-    blt _morning
-    cmp r1, AFTERNOON_OF_DAY_START
-    blt _afternoon
-    cmp r1, NIGHT_OF_DAY_START
-    blt _night
-    cmp r1, MIDNIGHT_OF_DAY_START
-    blt _midnight
-    movs r1, 5
-    ldr r2, =0x7C007C00
-    b _next
-
-_dawn:
-    movs r1, 0
-    movs r2, 0
-    b _next
-
-_morning:
-    movs r1, 1
-    ldr r2, =0x03FF03FF
-    b _next
-
-_afternoon:
-    movs r1, 2
-    ldr r2, =0x7FFF7FFF
-    b _next
-    
-_night:
-    movs r1, 3
-    ldr r2, =0x001F001F
-    b _next
-    
-_midnight:
-    movs r1, 4
-    ldr r2, =0x7C1F7C1F
-    
-_next:
-    strb r1, [r0]
-    ldr r0, gMapHeader
-    ldrb r0, [r0, 23]
-    cmp r0, 0
-    beq _return
-    cmp r0, 4
-    beq _return
-    cmp r0, 8
-    beq _return
-    ldr r0, gMain
-    ldr r1, =0x0000439
-    adds r0, r1
-    ldrb r1, [r0]
-    cmp r1, 0
-    bne _return
-    ldrb r0, [r0, 1]
-    cmp r0, 2
-    bgt _return
-    movs r0, r4
-    movs r1, r5
+    push {r4-r6,lr}
     ldr r4, =0x04210421
     orrs r4, r2
     mvns r4, r4
-    movs r7, 31
-    mov r8, r7
     ldr r7, =0xFFFF1FFF
     
 _mainloop:
@@ -520,14 +452,9 @@ _loop2:
 
 _endLoop:
     lsrs r7, 1
-    mov r6, r8
-    subs r6, 1
-    mov r8, r6
     bpl _mainloop
     
 _return:
-    pop {r4}
-    mov r8, r4
-    pop {r2-r7,pc}
+    pop {r4-r6,pc}
 thumb_func_end DayAndNightPalleteChange
         .align 2, 0

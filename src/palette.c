@@ -3,6 +3,8 @@
 #include "util.h"
 #include "decompress.h"
 #include "task.h"
+#include "main.h"
+#include "constants/map_types.h"
 
 enum
 {
@@ -96,12 +98,46 @@ void FillPalette(u16 value, u16 offset, u16 size)
 }
 
 void TransferPlttBuffer(void)
-{
+{    
     if (!gPaletteFade.bufferTransferDisabled)
     {
+        u32 color;
         void *src = gPlttBufferFaded;
         void *dest = (void *)PLTT;
-        DayAndNightPalleteChange(src, dest);
+        
+        if (gRtcLocation.hour < DAWN_OF_DAY_START)
+        {
+            gDayAndNightStatus = 0;
+            color = 0;
+        }
+        else if (gRtcLocation.hour < MORNING_OF_DAY_START)
+        {
+            gDayAndNightStatus = 1;
+            color = 0x03FF03FF;
+        }
+        else if (gRtcLocation.hour < AFTERNOON_OF_DAY_START)
+        {
+            gDayAndNightStatus = 2;
+            color = 0x7FFF7FFF;
+        }
+        else if (gRtcLocation.hour < NIGHT_OF_DAY_START)
+        {
+            gDayAndNightStatus = 3;
+            color = 0x001F001F;
+        }
+        else if (gRtcLocation.hour < MIDNIGHT_OF_DAY_START)
+        {
+            gDayAndNightStatus = 4;
+            color = 0x7C1F7C1F;
+        }
+        else
+        {
+            gDayAndNightStatus = 5;
+            color = 0x7C007C00;
+        }
+        if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND && gMapHeader.mapType != MAP_TYPE_INDOOR && !gMain.inBattle)
+            DayAndNightPalleteChange(src, dest, color);
+        
         DmaCopy16(3, src, dest, PLTT_SIZE);
         sPlttBufferTransferPending = 0;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)

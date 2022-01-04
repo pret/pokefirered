@@ -165,7 +165,7 @@ void AgbMain()
     for (;;)
     {
         ReadKeys();
-        RTCStart();
+        RTCStart(gRtcCheckLocation, gRtcLocationDecimal, gRtcLocation, gUnknownRtcLoc2);
 
         if (gSoftResetDisabled == FALSE
          && (gMain.heldKeysRaw & A_BUTTON)

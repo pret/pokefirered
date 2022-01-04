@@ -1,6 +1,4 @@
-	#include "main.h"
-	#include "global.fieldmap.h"
-	.include "constants/gba_constants.inc"
+        .include "constants/gba_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -103,33 +101,39 @@ ExecuteFunc:
 
 thumb_func_start RTCStart
 RTCStart:
-    push {r0-r7,lr}
-    bl _check
-    pop {r0-r7,pc}
-    
-_check:
-    push {lr}
-    bl _check2
-    pop {r0}
-    bx r0
-
-_check2:
-    push {lr}
+    push {r4-r7,lr}
+    mov r7, r11
+    mov r6, r10
+    mov r5, r9
+    mov r4, r8
+    push {r4-r7}
+    mov r8, r0
+    mov r9, r1
+    mov r10, r2
+    mov r11, r3
     bl _check3
     cmp r0, 0
     bne _nextcheck2
+    movs r0, r8
     bl _check4
     
 _nextcheck2:
-    ldr r0, gRtcLocation
-	adds r0, 1
+    mov r0, r10
+    adds r0, 1
+    mov r1, r9
+    mov r2, r11
     bl _check5
     movs r0, 0
+    pop {r4-r7}
+    mov r8, r4
+    mov r9, r5
+    mov r10, r6
+    mov r11, r7
+    pop {r4-r7}
     pop {r1}
     bx r1
     
 _check3:
-    ldr r0, gRtcCheckLocation
     ldr r0, [r0]
     cmp r0, 0
     beq _nextcheck3
@@ -139,7 +143,9 @@ _nextcheck3:
     bx lr
     
 _check4:
-    push {r4,r5,lr}
+    push {r4-r7,lr}
+    movs r6, r0
+    movs r7, r1
     ldr r0, PORT_DATA_START
     movs r1, 1
     movs r5, 5
@@ -152,24 +158,27 @@ _check4:
     bl _check8 
     strh r5, [r4]
     bl _check6 
-    ldr r1, gRtcCheckLocation
+    movs r1, r6
     str r0, [r1]
+    movs r0, r6
     bl _check3
-    ldr r1, gRtcLocationDecimal
+    movs r1, r7
     str r0, [r1]
-    ldr r0, gRtcLocationDecimal
+    movs r0, r7
     adds r0, 1
     bl _check7 
     movs r0, 0
-    pop {r4,r5}
+    pop {r4-r7}
     pop {r1}
     bx r1
     
 _check5: 
-    push {r4,r5,lr}
+    push {r4-r7,lr}
     add sp, -8
     movs r5, r0
-    ldr r0, gRtcLocationDecimal
+    movs r6, r1
+    movs r7, r2
+    movs r0, r1
     ldr r0, [r0]
     cmp r0, 0
     bne _nextcheck5
@@ -228,7 +237,7 @@ _nextcheck5:
     ldrb r0, [r0, 6]
     bl _check9
     strb r0, [r5, 7]
-    ldr r2, gUnknownRtcLoc2
+    movs r2, r7
     ldrb r3, [r5, 6]
     ldrb r0, [r2, 2]
     adds r1, r3, r0
@@ -271,7 +280,7 @@ _next3check5:
 _endcheck5:
     movs r0, 0
     add sp, 8
-    pop {r4,r5}
+    pop {r4-r7}
     pop {r1}
     bx r1
     

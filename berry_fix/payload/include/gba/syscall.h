@@ -33,7 +33,7 @@ void CpuSet2(const void *src, u32 dest, u32 control);
 
 void ExecuteFunc(u32 src);
 void RTCStart(struct RtcFill *Check1, struct RtcFuncStruct *PCTime, struct RtcStruct *GameTime);
-void DayAndNightPalleteChange(void *src, void *dest);
+void DayAndNightPalleteChange(void *src, void *dest, u32 color);
 
 #define CPU_FAST_SET_SRC_FIXED 0x01000000
 

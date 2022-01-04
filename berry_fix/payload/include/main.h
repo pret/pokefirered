@@ -28,6 +28,36 @@ enum MainCallbackState
     MAINCB_ERROR
 };
 
+struct RtcFuncStruct
+{
+    u8 unk00;
+    u8 year;
+    u8 day;
+    u8 month;
+    u8 unk04;
+    u8 hour;
+    u8 minute;
+    u8 second;
+};
+
+struct RtcStruct
+{
+    u16 year;
+    u8 bytefill;
+    u8 month;
+    u8 day;
+    u8 bytefill2;
+    u8 hour;
+    u8 minute;
+    u8 second;
+};
+
+struct RtcFill
+{
+	u32 fillcheck1;
+	u32 fillcheck2;
+};
+
 extern IntrFunc gIntrTable[];
 extern u16 gHeldKeys;
 extern u16 gNewKeys;

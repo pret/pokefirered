@@ -110,6 +110,7 @@ RTCStart:
     mov r8, r0
     mov r9, r1
     mov r10, r2
+	adds r3, r0, 4
     mov r11, r3
     bl _check3
     cmp r0, 0

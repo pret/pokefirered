@@ -68,6 +68,12 @@ struct RtcStruct
     u8 second;
 };
 
+struct RtcFill
+{
+	u32 fillcheck1;
+	u32 fillcheck2;
+};
+
 extern u8 gUnknown_3001764;
 extern struct Main gMain;
 extern bool8 gSoftResetDisabled;
@@ -79,8 +85,7 @@ extern const u8 gGameLanguage;
 extern u8 gDayAndNightStatus;
 
 extern struct RtcFuncStruct gRtcLocationDecimal;
-extern u32 gUnknownRtcLoc2;
-extern u32 gRtcCheckLocation;
+extern struct RtcFill gRtcCheckLocation;
 extern struct RtcStruct gRtcLocation;
 
 void AgbMain(void);

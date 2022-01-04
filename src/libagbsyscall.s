@@ -114,7 +114,7 @@ RTCStart:
     bl _check3
     cmp r0, 0
     bne _nextcheck2
-    movs r0, r8
+    mov r0, r8
     bl _check4
     
 _nextcheck2:

@@ -85,8 +85,7 @@ EWRAM_DATA u16 gTrainerId = 0;
 EWRAM_DATA u8 gDayAndNightStatus = 0;
 
 IWRAM_DATA struct RtcFuncStruct gRtcLocationDecimal;
-IWRAM_DATA u32 gUnknownRtcLoc2;
-IWRAM_DATA u32 gRtcCheckLocation;
+IWRAM_DATA struct RtcFill gRtcCheckLocation;
 IWRAM_DATA struct RtcStruct gRtcLocation;
 
 static void UpdateLinkAndCallCallbacks(void);
@@ -165,7 +164,7 @@ void AgbMain()
     for (;;)
     {
         ReadKeys();
-        RTCStart(gRtcCheckLocation, gRtcLocationDecimal, gRtcLocation, gUnknownRtcLoc2);
+        RTCStart(&gRtcCheckLocation, &gRtcLocationDecimal, &gRtcLocation);
 
         if (gSoftResetDisabled == FALSE
          && (gMain.heldKeysRaw & A_BUTTON)

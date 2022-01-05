@@ -135,10 +135,11 @@ void TransferPlttBuffer(void)
             gDayAndNightStatus = 5;
             color = 0x7C007C00;
         }
-        if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND && gMapHeader.mapType != MAP_TYPE_INDOOR && !gMain.inBattle)
+        if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND 
+            && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x == 0 && gSprites[61].y <= 2)
             DayAndNightPalleteChange(src, dest, color);
-        
-        DmaCopy16(3, src, dest, PLTT_SIZE);
+        else
+            DmaCopy16(3, src, dest, PLTT_SIZE);
         sPlttBufferTransferPending = 0;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
@@ -215,7 +216,7 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         UpdatePaletteFade();
         temp = gPaletteFade.bufferTransferDisabled;
         gPaletteFade.bufferTransferDisabled = FALSE;
-        CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
+        TransferPlttBuffer();
         sPlttBufferTransferPending = 0;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();

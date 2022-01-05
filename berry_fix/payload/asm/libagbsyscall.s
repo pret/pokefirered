@@ -366,8 +366,12 @@ thumb_func_end RTCStart
 
         .align 2, 0
 thumb_func_start DayAndNightPalleteChange
+
 DayAndNightPalleteChange:
-    push {r4-r6,lr}
+    push {r4-r7,lr}
+    ldr r4, =0x040000D4
+    str r0, [r4]
+    str r1, [r4, 4]
     ldr r4, =0x04210421
     orrs r4, r2
     mvns r4, r4
@@ -407,6 +411,6 @@ _endLoop:
     bpl _mainloop
     
 _return:
-    pop {r4-r6,pc}
+    pop {r4-r7,pc}
 thumb_func_end DayAndNightPalleteChange
         .align 2, 0

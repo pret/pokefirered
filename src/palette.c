@@ -15,6 +15,13 @@ enum
 
 #define NUM_PALETTE_STRUCTS 16
 
+struct LightingColour 
+{
+    u8 paletteNum;
+    u8 colourNum;
+    u16 lightColour;
+};
+
 // unused palette struct
 struct PaletteStructTemplate
 {
@@ -53,6 +60,7 @@ static u8 UpdateHardwarePaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
 static void sub_80718B8(u8 taskId);
+static void DoDayAndNightLightning(void);
 
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
@@ -76,6 +84,50 @@ static const u8 sRoundedDownGrayscaleMap[] =
     21, 21, 21, 21, 21,
     27, 27, 27, 27, 27,
     31, 31
+};
+
+const struct LightingColour sLightingColours[] =
+{
+    {
+        .paletteNum = 0,
+        .colourNum = 1,
+        .lightColour = RGB2(30, 30, 5),
+    },
+    {
+        .paletteNum = 0,
+        .colourNum = 2,
+        .lightColour = RGB2(26, 25, 4),
+    },
+    {
+        .paletteNum = 0,
+        .colourNum = 3,
+        .lightColour = RGB2(22, 21, 3),
+    },
+    {
+        .paletteNum = 1,
+        .colourNum = 1,
+        .lightColour = RGB2(30, 30, 5),
+    },
+    {
+        .paletteNum = 1,
+        .colourNum = 2,
+        .lightColour = RGB2(26, 25, 4),
+    },
+    {
+        .paletteNum = 6,
+        .colourNum = 1,
+        .lightColour = RGB2(30, 30, 5),
+    },
+    {
+        .paletteNum = 6,
+        .colourNum = 2,
+        .lightColour = RGB2(26, 25, 4),
+    },
+    {
+        .paletteNum = 6,
+        .colourNum = 3,
+        .lightColour = RGB2(22, 21, 3),
+    },
 };
 
 void LoadCompressedPalette(const u32 *src, u16 offset, u16 size)
@@ -137,13 +189,41 @@ void TransferPlttBuffer(void)
         }
         if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND 
             && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x == 0 && gSprites[61].y <= 2)
+        {
             DayAndNightPalleteChange(src, dest, color);
+            DoDayAndNightLightning();
+        }
         else
             DmaCopy16(3, src, dest, PLTT_SIZE);
         sPlttBufferTransferPending = 0;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
     }
+}
+
+// lightining the windows in the night
+static void DoDayAndNightLightning(void)
+{
+    u8 i;
+	u16 colourSlot;
+
+    if (gDayAndNightStatus == 0 || gDayAndNightStatus > 3)
+	{
+        u16 *dest = (u16 *)PLTT;
+        
+		for (i = 0; i < sizeof(sLightingColours)/sizeof(sLightingColours[0]); i++)
+		{
+			colourSlot = sLightingColours[i].paletteNum * 16 + sLightingColours[i].colourNum;
+			
+			if (gPaletteFade.active || gPlttBufferUnfaded[colourSlot] != 0x0000)
+			{
+				dest[colourSlot] = gPlttBufferFaded[colourSlot];
+				gPlttBufferUnfaded[colourSlot] = sLightingColours[i].lightColour;
+			}
+			else
+				dest[colourSlot] = sLightingColours[i].lightColour;
+		}
+	}
 }
 
 u8 UpdatePaletteFade(void)

@@ -204,12 +204,12 @@ void TransferPlttBuffer(void)
 // lightining the windows in the night
 static void DoDayAndNightLightning(void)
 {
-    u8 i;
+	u8 i;
 	u16 colourSlot;
 
-    if (gDayAndNightStatus == 0 || gDayAndNightStatus > 3)
+	if (gDayAndNightStatus == 0 || gDayAndNightStatus > 3)
 	{
-        u16 *dest = (u16 *)PLTT;
+		u16 *dest = (u16 *)PLTT;
         
 		for (i = 0; i < sizeof(sLightingColours)/sizeof(sLightingColours[0]); i++)
 		{

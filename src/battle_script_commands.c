@@ -4122,14 +4122,19 @@ static void atk48_playstatchangeanimation(void)
     u32 currStat = 0;
     u16 statAnimId = 0;
     s32 changeableStatsCount = 0;
-    u8 statsToCheck = 0;
+    u8 statsToCheck = 0, flag = gBattlescriptCurrInstr[3];
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     statsToCheck = gBattlescriptCurrInstr[2];
-    if (gBattlescriptCurrInstr[3] & ATK48_STAT_NEGATIVE) // goes down
+	
+    if (gBattleMons[gActiveBattler].ability == ABILITY_SIMPLE)
+	 flag |= ATK48_STAT_BY_TWO;
+	
+	  gBattlescriptCurrInstr[3]  
+    if (flag & ATK48_STAT_NEGATIVE) // goes down
     {
         s16 startingStatAnimId;
-        if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+        if (flag & ATK48_STAT_BY_TWO)
             startingStatAnimId = STAT_ANIM_MINUS2 - 1;
         else
             startingStatAnimId = STAT_ANIM_MINUS1 - 1;
@@ -4138,7 +4143,7 @@ static void atk48_playstatchangeanimation(void)
         {
             if (statsToCheck & 1)
             {
-                if (gBattlescriptCurrInstr[3] & ATK48_DONT_CHECK_LOWER)
+                if (flag & ATK48_DONT_CHECK_LOWER)
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
@@ -4165,7 +4170,7 @@ static void atk48_playstatchangeanimation(void)
 
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
-            if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+            if (flag & ATK48_STAT_BY_TWO)
                 statAnimId = STAT_ANIM_MULTIPLE_MINUS2;
             else
                 statAnimId = STAT_ANIM_MULTIPLE_MINUS1;
@@ -4174,7 +4179,7 @@ static void atk48_playstatchangeanimation(void)
     else // goes up
     {
         s16 startingStatAnimId;
-        if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+        if (flag & ATK48_STAT_BY_TWO)
             startingStatAnimId = STAT_ANIM_PLUS2 - 1;
         else
             startingStatAnimId = STAT_ANIM_PLUS1 - 1;
@@ -4191,13 +4196,13 @@ static void atk48_playstatchangeanimation(void)
         }
         if (changeableStatsCount > 1) // more than one stat, so the color is gray
         {
-            if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
+            if (flag & ATK48_STAT_BY_TWO)
                 statAnimId = STAT_ANIM_MULTIPLE_PLUS2;
             else
                 statAnimId = STAT_ANIM_MULTIPLE_PLUS1;
         }
     }
-    if (gBattlescriptCurrInstr[3] & ATK48_ONLY_MULTIPLE && changeableStatsCount < 2)
+    if (flag & ATK48_ONLY_MULTIPLE && changeableStatsCount < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
@@ -4205,7 +4210,7 @@ static void atk48_playstatchangeanimation(void)
     {
         BtlController_EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBattlerForControllerExec(gActiveBattler);
-        if (gBattlescriptCurrInstr[3] & ATK48_ONLY_MULTIPLE && changeableStatsCount > 1)
+        if (flag & ATK48_ONLY_MULTIPLE && changeableStatsCount > 1)
             gBattleScripting.statAnimPlayed = TRUE;
         gBattlescriptCurrInstr += 4;
     }

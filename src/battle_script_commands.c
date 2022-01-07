@@ -1173,8 +1173,11 @@ static void atk01_accuracycheck(void)
 		move = gCurrentMove;  
 	    
 	if (gBattleMons[gBattlerAttacker].ability == ABILITY_SKILL_LINK 
-	    && gBattleMoves[move].effect == EFFECT_MULTI_HIT || gBattleMoves[move].effect == EFFECT_TRIPLE_KICK)  
+	    && (gBattleMoves[move].effect == EFFECT_MULTI_HIT || gBattleMoves[move].effect == EFFECT_TRIPLE_KICK))
+	{
 		gBattlescriptCurrInstr += 7;
+		return;
+	}
 	    
         type = gBattleStruct->dynamicMoveType;
         movesplit = gBattleMoves[move].split;

@@ -4255,8 +4255,15 @@ static void atk49_moveend(void)
              && gBattleMoves[gCurrentMove].power
              && gBattleMons[gBattlerTarget].statStages[STAT_ATK] <= 0xB)
             {
-                ++gBattleMons[gBattlerTarget].statStages[STAT_ATK];
-                BattleScriptPushCursor();
+		if (gBattleMons[gBattlerTarget].ability != ABILITY_SIMPLE)
+			++gBattleMons[gBattlerTarget].statStages[STAT_ATK];
+		else
+		{
+			gBattleMons[gBattlerTarget].statStages[STAT_ATK] += 2;
+			if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] > 0xC)
+				gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
+		}	    
+		BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_RageIsBuilding;
                 effect = TRUE;
             }

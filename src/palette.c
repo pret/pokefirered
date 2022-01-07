@@ -213,7 +213,7 @@ static void DoDayAndNightLightning(u8 OriginalStatus)
 	{
 		for (i = 0; i < sizeof(sLightingColours) / sizeof(sLightingColours[0]); i++)
 		{
-			colourSlot = sLightingColours[i].paletteNum * 16 + sLightingColours[i].colourNum;
+			colourSlot = sLightingColours[i].paletteNum * NUM_PALETTE_STRUCTS + sLightingColours[i].colourNum;
 			
 			if (gPaletteFade.active || gPlttBufferUnfaded[colourSlot] != 0x0000)
 			{

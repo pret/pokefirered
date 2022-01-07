@@ -160,33 +160,33 @@ void TransferPlttBuffer(void)
         
         if (gRtcLocation.hour < DAWN_OF_DAY_START)
         {
+	    color = 0;
             gDayAndNightStatus = 0;
-            color = 0;
         }
         else if (gRtcLocation.hour < MORNING_OF_DAY_START)
         {
+	    color = 0x03FF03FF;
             gDayAndNightStatus = 1;
-            color = 0x03FF03FF;
         }
         else if (gRtcLocation.hour < AFTERNOON_OF_DAY_START)
         {
-            gDayAndNightStatus = 2;
             color = 0x7FFF7FFF;
+            gDayAndNightStatus = 2;
         }
         else if (gRtcLocation.hour < NIGHT_OF_DAY_START)
         {
+	    color = 0x001F001F;
             gDayAndNightStatus = 3;
-            color = 0x001F001F;
         }
         else if (gRtcLocation.hour < MIDNIGHT_OF_DAY_START)
         {
+	    color = 0x7C1F7C1F;
             gDayAndNightStatus = 4;
-            color = 0x7C1F7C1F;
-        }
+	}
         else
         {
+	    color = 0x7C007C00;
             gDayAndNightStatus = 5;
-            color = 0x7C007C00;
         }
         if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND 
             && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x == 0 && gSprites[61].y <= 2)

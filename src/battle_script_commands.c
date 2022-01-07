@@ -6865,6 +6865,10 @@ static void atk8D_setmultihitcounter(void)
     {
         gMultiHitCounter = gBattlescriptCurrInstr[1];
     }
+    else if (gBattleMons[gBattlerAttacker].ability == ABILITY_SKILL_LINK)
+    {
+	gMultiHitCounter = 5;
+    }
     else
     {
         gMultiHitCounter = Random() & 3;

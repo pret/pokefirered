@@ -60,7 +60,7 @@ static u8 UpdateHardwarePaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
 static void sub_80718B8(u8 taskId);
-static void DoDayAndNightLightning(void);
+static void DoDayAndNightLightning(u8 OriginalStatus);
 
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
@@ -153,6 +153,7 @@ void TransferPlttBuffer(void)
 {    
     if (!gPaletteFade.bufferTransferDisabled)
     {
+	u8 actualstatus = gDayAndNightStatus;
         u32 color;
         void *src = gPlttBufferFaded;
         void *dest = (void *)PLTT;
@@ -191,7 +192,7 @@ void TransferPlttBuffer(void)
             && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x == 0 && gSprites[61].y <= 2)
         {
             DayAndNightPalleteChange(src, dest, color);
-            DoDayAndNightLightning();
+            DoDayAndNightLightning(actualstatus);
         }
         else
             DmaCopy16(3, src, dest, PLTT_SIZE);
@@ -202,26 +203,34 @@ void TransferPlttBuffer(void)
 }
 
 // lightining the windows in the night
-static void DoDayAndNightLightning(void)
+static void DoDayAndNightLightning(u8 OriginalStatus)
 {
 	u8 i;
 	u16 colourSlot;
-
+        u16 *dest = (u16 *)PLTT;
+	
 	if (gDayAndNightStatus == 0 || gDayAndNightStatus > 3)
 	{
-		u16 *dest = (u16 *)PLTT;
-        
-		for (i = 0; i < sizeof(sLightingColours)/sizeof(sLightingColours[0]); i++)
+		for (i = 0; i < sizeof(sLightingColours) / sizeof(sLightingColours[0]); i++)
 		{
 			colourSlot = sLightingColours[i].paletteNum * 16 + sLightingColours[i].colourNum;
 			
 			if (gPaletteFade.active || gPlttBufferUnfaded[colourSlot] != 0x0000)
 			{
-				dest[colourSlot] = gPlttBufferFaded[colourSlot];
+				if (OriginalStatus > 0 && OriginalStatus <= 3)
+				{
+					dest[colourSlot] = sLightingColours[i].lightColour;
+				}
+				else
+				{
+					dest[colourSlot] = gPlttBufferFaded[colourSlot];
+				}
 				gPlttBufferUnfaded[colourSlot] = sLightingColours[i].lightColour;
 			}
 			else
+			{
 				dest[colourSlot] = sLightingColours[i].lightColour;
+			}
 		}
 	}
 }

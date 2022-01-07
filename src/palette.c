@@ -218,13 +218,8 @@ static void DoDayAndNightLightning(u8 OriginalStatus)
 			if (gPaletteFade.active || gPlttBufferUnfaded[colourSlot] != 0x0000)
 			{
 				if (OriginalStatus > 0 && OriginalStatus <= 3)
-				{
-					dest[colourSlot] = sLightingColours[i].lightColour;
-				}
-				else
-				{
-					dest[colourSlot] = gPlttBufferFaded[colourSlot];
-				}
+					gPlttBufferFaded[colourSlot] = sLightingColours[i].lightColour;
+				dest[colourSlot] = gPlttBufferFaded[colourSlot];
 				gPlttBufferUnfaded[colourSlot] = sLightingColours[i].lightColour;
 			}
 			else

@@ -1169,8 +1169,13 @@ static void atk01_accuracycheck(void)
         s8 buff;
         u16 calc;
 
-        if (move == MOVE_NONE)
-            move = gCurrentMove;                   
+	if (move == MOVE_NONE)
+		move = gCurrentMove;  
+	    
+	if (gBattleMons[gBattlerAttacker].ability == ABILITY_SKILL_LINK 
+	    && gBattleMoves[move].effect == EFFECT_MULTI_HIT || gBattleMoves[move].effect == EFFECT_TRIPLE_KICK)  
+		gBattlescriptCurrInstr += 7;
+	    
         type = gBattleStruct->dynamicMoveType;
         movesplit = gBattleMoves[move].split;
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))

@@ -4130,7 +4130,6 @@ static void atk48_playstatchangeanimation(void)
     if (gBattleMons[gActiveBattler].ability == ABILITY_SIMPLE)
 	 flag |= ATK48_STAT_BY_TWO;
 	
-	  gBattlescriptCurrInstr[3]  
     if (flag & ATK48_STAT_NEGATIVE) // goes down
     {
         s16 startingStatAnimId;
@@ -4255,14 +4254,7 @@ static void atk49_moveend(void)
              && gBattleMoves[gCurrentMove].power
              && gBattleMons[gBattlerTarget].statStages[STAT_ATK] <= 0xB)
             {
-		if (gBattleMons[gBattlerTarget].ability != ABILITY_SIMPLE)
-			++gBattleMons[gBattlerTarget].statStages[STAT_ATK];
-		else
-		{
-			gBattleMons[gBattlerTarget].statStages[STAT_ATK] += 2;
-			if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] > 0xC)
-				gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
-		}	    
+		++gBattleMons[gBattlerTarget].statStages[STAT_ATK]; 
 		BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_RageIsBuilding;
                 effect = TRUE;

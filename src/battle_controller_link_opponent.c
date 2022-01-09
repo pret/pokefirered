@@ -13,7 +13,7 @@
 #include "battle_message.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
-#include "constants/facility_trainer_classes.h"
+#include "constants/trainers.h"
 
 static void LinkOpponentHandleGetMonData(void);
 static void LinkOpponentHandleGetRawMonData(void);
@@ -1117,9 +1117,9 @@ static void LinkOpponentHandleDrawTrainerPic(void)
          || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_EMERALD)
         {
             if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != MALE)
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_5];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_MAY];
             else
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_2];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_BRENDAN];
         }
         else if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != MALE)
         {
@@ -1142,9 +1142,9 @@ static void LinkOpponentHandleDrawTrainerPic(void)
               || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_EMERALD)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_5];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_MAY];
             else
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_2];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_BRENDAN];
         }
         else if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
         {

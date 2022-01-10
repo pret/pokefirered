@@ -1830,6 +1830,16 @@ static void atk09_attackanimation(void)
             }
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
             {
+#if DISAPPEAR_HP_BAR_DURING_ANIMS
+	        u8 i;
+		for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+		{
+			if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && (i == 2 || i == 3))
+				continue;
+			if (gBattleMons[i].hp != 0)
+				SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
+		}
+#endif
                 gActiveBattler = gBattlerAttacker;
                 BtlController_EmitMoveAnimation(0, gCurrentMove, gBattleScripting.animTurn, gBattleMovePower, gBattleMoveDamage, gBattleMons[gBattlerAttacker].friendship, &gDisableStructs[gBattlerAttacker]);
                 ++gBattleScripting.animTurn;
@@ -1849,7 +1859,19 @@ static void atk09_attackanimation(void)
 static void atk0A_waitanimation(void)
 {
     if (!gBattleControllerExecFlags)
+    {
+#if DISAPPEAR_HP_BAR_DURING_ANIMS
+	    u8 i;
+	    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+	    {
+		    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && (i == 2 || i == 3))
+			    continue;
+		    if (gBattleMons[i].hp != 0)
+			    SetHealthboxSpriteVisible(gHealthboxSpriteIds[i]);
+	    }
+#endif
         ++gBattlescriptCurrInstr;
+    }
 }
 
 static void atk0B_healthbarupdate(void)

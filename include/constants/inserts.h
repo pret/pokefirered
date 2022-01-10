@@ -10,6 +10,7 @@
 #define NATURE_COLOURS TRUE //if true colours the stat in the summary screen depending on the nature.
 #define IVS_IN_THE_SUMMARY TRUE //if true go to graphics/new and change the IvsRankingIcon.png to you img.
 #define MON_ICON_ON_TRAINER_CARD TRUE //if true draw the party mon icons on the trainer card back.
+#define DISAPPEAR_HP_BAR_DURING_ANIMS TRUE //if true the hp bars disppears when a move anim is displayed.
 
 // need
 #define BW_REPEL_SYSTEM TRUE //if true when the Repel's effect wears off, the game will automatically ask the player whether they want to use another one immediately.

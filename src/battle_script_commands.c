@@ -1835,7 +1835,7 @@ static void atk09_attackanimation(void)
 		for (i = 0; i < MAX_BATTLERS_COUNT; i++)
 		{
 			if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && (i == 2 || i == 3))
-				continue;
+				break;
 			if (gBattleMons[i].hp != 0)
 				SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
 		}
@@ -1865,7 +1865,7 @@ static void atk0A_waitanimation(void)
 	    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
 	    {
 		    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && (i == 2 || i == 3))
-			    continue;
+			    break;
 		    if (gBattleMons[i].hp != 0)
 			    SetHealthboxSpriteVisible(gHealthboxSpriteIds[i]);
 	    }

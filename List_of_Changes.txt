@@ -22,6 +22,7 @@ Poison Survival
 Display Move Effectiveness In Battle
 Nature Colors
 Iv's In The Summary Screen
+hp bars disappearing during attack animations
 
 //Abilities Added and completed
 Adaptability
@@ -44,6 +45,9 @@ Motor drive
 No guard
 poison heal
 rivalry
+scrappy
+simple
+skill link
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

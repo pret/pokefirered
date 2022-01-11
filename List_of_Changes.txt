@@ -11,7 +11,7 @@ UnHidden Power (Zeturic)
 Running Indoors
 Physical/Special/Status With Icons
 Pokemon Stats Replacing Weight Comparision Screen
-Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your likin.
+Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h

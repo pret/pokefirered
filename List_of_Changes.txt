@@ -4,25 +4,26 @@ Pokedex Glitch Fix
 
 // Others
 // Can't Be Turned On/Off
-Constant Hidden Power - Power: 60
-UnHidden Power
+Constant Hidden Power - Power: 60 (Zeturic)
+UnHidden Power (Zeturic)
 Running Indoors
 Physical/Special/Status Split
-Sound Moves Bypass Substitute
+Sound Moves Bypass Substitute (Zeturic)
 Pokemon Stats Replacing Weight Comparision Screen
-Day And Night System with lightinig windows
+Day And Night System With Lightinig Windows
+Triple-Layer Blocks (Sierraffinity)(how to use: https://www.pokecommunity.com/showthread.php?p=9767701)
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h
-Exp Block By Badge
-Automatic Swap Page On Naming Screen
+Exp Block By Badge (BlackUser)
+Automatic Swap Page On Naming Screen (BlackUser And  Jaizu)
 No Healing Eggs
 Eggs Hatch At Level 1
 Poison Survival
-Display Move Effectiveness In Battle
+Display Move Effectiveness In Battle (BlackUser And PokemonCrazy)
 Nature Colors
 Iv's In The Summary Screen
-hp bars disappearing during attack animations
+hp bars disappearing during attack animations (BlackUser)
 
 //Abilities Added and completed
 Adaptability

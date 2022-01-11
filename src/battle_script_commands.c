@@ -9838,14 +9838,13 @@ static void PutMonIconOnPopUpBox(void)
 	{
 		posX = 235; //player icon pos X and Y
 	        posY = 88;
-		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
 	}
 	else
 	{
 		posX = 143; //target icon pos X and Y
 	        posY = 16;
-		spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
 	}
+	spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
 	gSprites[spriteId].sDestroy = FALSE;
 }
 

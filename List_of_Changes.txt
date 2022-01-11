@@ -4,7 +4,7 @@ Pokedex Glitch Fix
 
 // Others
 // Can't Be Turned On/Off
-Triple-Layer Blocks (Sierraffinity)(how to use: https://www.pokecommunity.com/showthread.php?p=9767701)
+Triple-Layer Blocks (Sierraffinity) //how to use: https://www.pokecommunity.com/showthread.php?p=9767701
 Constant Hidden Power - Power: 60 (Zeturic)
 Sound Moves Bypass Substitute (Zeturic)
 UnHidden Power (Zeturic)

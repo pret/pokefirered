@@ -11,7 +11,6 @@
 #include "constants/weather.h"
     .include "asm/macros.inc"
     .include "constants/constants.inc"
-    .include "constants/item_data_constants.inc"
 
     .section .rodata
 

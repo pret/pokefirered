@@ -105,8 +105,9 @@ static const u8 sQuickFeetDescription[] =    _("Raises SPEED if has an status.")
 static const u8 sRecklessDescription[] =     _("Ups “crash” and “recoil” moves.");
 static const u8 sRivalryDescription[] =      _("Ups ATTACK if same gender foes.");
 static const u8 sScrappyDescription[] =      _("Moves hits GHOST-type foe's.");
-static const u8 sSimpleDescription[] =       _("Doubles the user's Stat Stages.");
+static const u8 sSimpleDescription[] =       _("Doubles the user's stat stages.");
 static const u8 sSkillLinkDescription[] =    _("Increases “multi-hit” frequency.");
+static const u8 sSlowStartDescription[] =    _("Halves stats for five turns.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -219,6 +220,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SCRAPPY] = sScrappyDescription,
     [ABILITY_SIMPLE] = sSimpleDescription,
     [ABILITY_SKILL_LINK] = sSkillLinkDescription,
+    [ABILITY_SLOW_START] = sSlowStartDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -332,4 +334,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SCRAPPY] = _("SCRAPPY"),
     [ABILITY_SIMPLE] = _("SIMPLE"),
     [ABILITY_SKILL_LINK] = _("SKILL LINK"),
+    [ABILITY_SLOW_START] = _("SLOW START"),
 };

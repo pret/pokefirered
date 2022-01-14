@@ -9798,8 +9798,6 @@ static void atkFC_loadabilitypopup(void)
 		ability = gBattlescriptCurrInstr[3];
 		if (func == LOAD_ABILITY_FROM_SECOND_BANK)
 			ability = gBattleMons[GetBattlerForBattleScript(gBattlescriptCurrInstr[3])].ability;
-		else if (func == LOAD_ABILITY_FROM_NEW_BUFFER)
-			ability = gAbilityIdBackup;
 		else if (ability == LOAD_ABILITY_FROM_BUFFER)
 			ability = gLastUsedAbility;
 		printerTemplate.currentChar = gAbilityNames[ability];

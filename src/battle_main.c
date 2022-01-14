@@ -217,7 +217,6 @@ EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSetWordLoc = NULL;
 EWRAM_DATA u8 gIgnoredAbilities[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gAbilityIdBackup = 0;
 EWRAM_DATA u8 gSlowStartTimers[MAX_BATTLERS_COUNT] = {0};
 
 void (*gPreBattleCallback1)(void);

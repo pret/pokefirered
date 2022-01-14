@@ -9754,6 +9754,7 @@ static void atkFC_loadabilitypopup(void)
 		gBattleScripting.battler += 0x80;
 	else
 	{
+		SetWindowAttribute(13, WINDOW_BASE_BLOCK, GetWindowAttribute(13, WINDOW_BASE_BLOCK) - 2);
 		gBattle_BG2_Y = 0x60;
 		SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
 		ShowBg(2);
@@ -9898,6 +9899,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
 				ShowBg(2);
 				gBattle_BG2_X = 0;
+				SetWindowAttribute(13, WINDOW_BASE_BLOCK, GetWindowAttribute(13, WINDOW_BASE_BLOCK) + 2);
 			}
 			else
 			{
@@ -9918,6 +9920,7 @@ static void AnimAbilityPopUpBoxAsm(void)
 				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
 				ShowBg(2);
 				gBattle_BG2_X = 0;
+				SetWindowAttribute(13, WINDOW_BASE_BLOCK, GetWindowAttribute(13, WINDOW_BASE_BLOCK) + 2);
 			}
 			else
 			{

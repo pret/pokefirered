@@ -70,7 +70,7 @@ add the new moves in gnochangetypemoves because normalize
 add berries in is item affected by gluttony
 add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb
-Magic guard prevents damage from spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
+Magic guard prevents damage from abilities, spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
 
 // puting
 bw repel system

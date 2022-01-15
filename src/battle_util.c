@@ -29,6 +29,9 @@
 #include "constants/sound_moves_table.h"
 #include "constants/inserts.h"
 
+//used strings
+static const u8 sBadDreamsString[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented!");
+
 u8 GetBattlerForBattleScript(u8 caseId)
 {
     u32 ret = 0;
@@ -728,6 +731,7 @@ u8 DoBattlerEndTurnEffects(void)
 				{
 					gBattlerTarget = i;
 				        gLastUsedAbility = ABILITY_BAD_DREAMS;
+					gSetWordLoc = sBadDreamsString;
 				        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
 					if (gBattleMoveDamage == 0)
 						gBattleMoveDamage = 1;

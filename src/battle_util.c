@@ -1803,6 +1803,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                 }
                 break;
+	    case ABILITY_MOLD_BREAKER:
+	        gSetWordLoc = sMoldBreakerString;
+		BattleScriptPushCursorAndCallback(BattleScript_MoldBreaker);
+		gBattleScripting.battler = battler;
+		++effect;
+		break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

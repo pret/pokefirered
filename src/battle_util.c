@@ -1852,6 +1852,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		    {
 			    if (gBattleWeather & WEATHER_RAIN_ANY && gBattleMons[battler].maxHP > gBattleMons[battler].hp)
 			    {
+				    gSetWordLoc = sDrySkinRainString;
 				    BattleScriptPushCursorAndCallback(BattleScript_DrySkinRainActivates);
 				    gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
                                     if (gBattleMoveDamage == 0)
@@ -1861,6 +1862,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 			    }
 			    else if (gBattleWeather & WEATHER_SUN_ANY)
 			    {
+				    gSetWordLoc = sDrySkinSunString;
 				    BattleScriptPushCursorAndCallback(BattleScript_DrySkinSunActivates);
 				    gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
                                     if (gBattleMoveDamage == 0)

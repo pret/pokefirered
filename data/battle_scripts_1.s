@@ -4551,18 +4551,7 @@ BattleScript_TryFriskSecondTarget::
         printstring STRINGID_SETWORDSTRING
 	waitmessage 0x40
 	return
-
-BattleScript_MoldBreaker::
-        call BattleScript_MoldBreakerActivation
-	end3
-
-BattleScript_MoldBreakerActivation:
-        pause 0x20
-	setbyte gBattlerTarget, 0
-	trygetintimidatetarget BattleScript_AnticipationReturn
-	setword gSetWordLoc, sMoldBreakerString
-	goto BattleScript_PrintStringAndReturn
-
+	
 BattleScript_MoveStatRaise_PPLoss::
         ppreduce
 BattleScript_MoveStatRaise::
@@ -4577,8 +4566,5 @@ BattleScript_MoveStatRaiseDoStatUp::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-sMoldBreakerString::
-    .byte 0xFD, 0xF, 0x0, 0xD6, 0xE6, 0xD9, 0xD5, 0xDF, 0xE7, 0x0, 0xE8, 0xDC, 0xD9, 0x0, 0xE1, 0xE3, 0xE0, 0xD8, 0xAB, 0xFF
-    
 sMoveStatUpString::
     .byte 0xFD, 0x10, 0xB4, 0xE7, 0x0, 0xFD, 0x17, 0xFE, 0xE6, 0xD5, 0xDD, 0xE7, 0xD9, 0xD8, 0x0, 0xDD, 0xE8, 0xE7, 0x0, 0xFD, 0x0, 0xAB, 0xFF

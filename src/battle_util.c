@@ -34,6 +34,7 @@ static const u8 sBadDreamsString[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented!"
 static const u8 sDrySkinRainString[] = _("{B_ATK_NAME_WITH_PREFIX} gain some\nof its HP!");
 static const u8 sDrySkinSunString[] = _("{B_ATK_NAME_WITH_PREFIX} lost some\nof its HP!");
 static const u8 sMoldBreakerString[] = _("{B_ATK_NAME_WITH_PREFIX} breaks the mold!");
+static const u8 sMoveStatUpString[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -2038,7 +2039,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				SET_STATCHANGER(StatId, 1, FALSE);
 				gBattleScripting.animArg1 = 0xE + StatId;
 				gBattleScripting.animArg2 = 0;
-			
+			        gSetWordLoc = sMoveStatUpString;
+				
 				if (gProtectStructs[gBattlerAttacker].notFirstStrike)
 					gBattlescriptCurrInstr = BattleScript_MoveStatRaise;
 				else

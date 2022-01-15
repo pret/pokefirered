@@ -4566,10 +4566,6 @@ BattleScript_MoveStatRaise::
 BattleScript_MoveStatRaiseDoStatUp::
         setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	setword gSetWordLoc, sMoveStatUpString
 	printstring STRINGID_SETWORDSTRING
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
-
-sMoveStatUpString::
-    .byte 0xFD, 0x10, 0xB4, 0xE7, 0x0, 0xFD, 0x17, 0xFE, 0xE6, 0xD5, 0xDD, 0xE7, 0xD9, 0xD8, 0x0, 0xDD, 0xE8, 0xE7, 0x0, 0xFD, 0x0, 0xAB, 0xFF

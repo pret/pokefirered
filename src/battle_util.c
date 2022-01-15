@@ -35,6 +35,7 @@ static const u8 sDrySkinRainString[] = _("{B_ATK_NAME_WITH_PREFIX} gain some\nof
 static const u8 sDrySkinSunString[] = _("{B_ATK_NAME_WITH_PREFIX} lost some\nof its HP!");
 static const u8 sMoldBreakerString[] = _("{B_ATK_NAME_WITH_PREFIX} breaks the mold!");
 static const u8 sMoveStatUpString[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sSlowStartStartString[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget it going!");
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -1808,9 +1809,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 	    case ABILITY_MOLD_BREAKER:
 	        gSetWordLoc = sMoldBreakerString;
 		BattleScriptPushCursorAndCallback(BattleScript_DisplaySwitchInMsg);
-		gBattleScripting.battler = battler;
 		++effect;
 		break;
+	    case ABILITY_SLOW_START:
+		gSetWordLoc = sSlowStartStartString;
+		BattleScriptPushCursorAndCallback(BattleScript_DisplaySwitchInMsg);
+		++effect;
+		break;    
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

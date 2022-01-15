@@ -4552,6 +4552,11 @@ BattleScript_TryFriskSecondTarget::
 	waitmessage 0x40
 	return
 	
+BattleScript_DisplaySwitchInMsg::
+        printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+	end3
+	
 BattleScript_MoveStatRaise_PPLoss::
         ppreduce
 BattleScript_MoveStatRaise::

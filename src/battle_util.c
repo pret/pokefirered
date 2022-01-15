@@ -1765,7 +1765,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 	    case ABILITY_DOWNLOAD:
 	    case ABILITY_FOREWARN:
             case ABILITY_FRISK:
-            case ABILITY_MOLD_BREAKER:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
                 {
                     gStatuses3[battler] |= STATUS3_INTIMIDATE_POKES;

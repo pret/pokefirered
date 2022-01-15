@@ -45,8 +45,8 @@ static void BlankMEventBuffer2(void);
 static void RecordIdOfWonderCardSender(u32 eventId, u32 trainerId, u32 *idsList, s32 count);
 static void BlankBuffer344(void);
 
-extern const u8 gUnknownSerialData_Start[];
-extern const u8 gUnknownSerialData_End[];
+extern const u8 gMultiBootProgram_EReader_Start[];
+extern const u8 gMultiBootProgram_EReader_End[];
 
 static const u16 sGiftItemFlagIds[] = {
     FLAG_GOT_AURORA_TICKET,
@@ -339,7 +339,7 @@ static void Task_EReaderComm(u8 taskId)
             break;
         case 8:
             AddTextPrinterToWindow1(gJPText_Connecting);
-            SendUnknownSerialData_Init(&sMEventSendToEReaderManager, gUnknownSerialData_End - gUnknownSerialData_Start, gUnknownSerialData_Start);
+            SendUnknownSerialData_Init(&sMEventSendToEReaderManager, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, gMultiBootProgram_EReader_Start);
             data->state = 9;
             break;
         case 9:

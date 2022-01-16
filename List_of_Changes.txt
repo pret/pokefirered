@@ -49,6 +49,7 @@ rivalry
 scrappy
 simple
 skill link
+snow cloak
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

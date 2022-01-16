@@ -3396,8 +3396,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
 }
     
-ABILITY_STALL
-
 u32 CalculateMonPriority(u8 battler)
 {
     u32 priority = 0;
@@ -3418,36 +3416,33 @@ u32 CalculateMonPriority(u8 battler)
 u32 CalculateMonBracket(u8 battler)
 {
     u8 holdEffect, holdEffectParam;
-    u8 holdEffectNoKlutz;
     u16 itemid = gBattleMons[battler].item;
-    u32 bracket = 0;
     
     if (itemid == ITEM_ENIGMA_BERRY)
     {
         holdEffect = gEnigmaBerries[battler].holdEffect;
-        holdEffectNoKlutz = holdEffect;
         holdEffectParam = gEnigmaBerries[battler].holdEffectParam;
     }
     else
     {
         holdEffect = ItemId_GetHoldEffect(itemid, battler, TRUE);
-        holdEffectNoKlutz = ItemId_GetHoldEffect(itemid, 0, FALSE);
         holdEffectParam = ItemId_GetHoldEffectParam(itemid);
     }
-    //macho brace don't is negated by klutz
-    //add quick draw check here
+    
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100))
-        bracket = 1;
-    //add custap berry and lagging tail check here
-    else if (gBattleMons[battler].ability == ABILITY_STALL)
-        bracket = -1;
- 
-         return bracket;
+        return 1;
+    if (gBattleMons[battler].ability == ABILITY_STALL)
+        return -1;
 }
 
 u32 CalculateMonSpeed(u8 battler)
 {
-    u32 monspeed = (gBattleMons[battler].speed
+    u32 monspeed;
+    
+    APPLY_STAT_MOD(monspeed, &gBattleMons[battler], );
+        
+        
+        (gBattleMons[battler].speed
                     * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0])
                     / (gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1]);
     

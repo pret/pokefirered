@@ -86,7 +86,7 @@ static const u8 sFilterDescription[] =       _("Powers down “super effective�
 static const u8 sFlowerGiftDescription[] =   _("Ups party stats in sunlight.");
 static const u8 sForewarnDescription[] =     _("Tell the foe's strongest move.");
 static const u8 sFriskDescription[] =        _("Can check the foe's item.");
-static const u8 sGluttonyDescription[] =     _("The user eat Berries early.");
+static const u8 sGluttonyDescription[] =     _("The user eat berries early.");
 static const u8 sHeatproofDescription[] =    _("Powers down FIRE moves.");
 static const u8 sHoneyGatherDescription[] =  _("May pick up HONEY.");
 static const u8 sHydrationDescription[] =    _("Heals the body if rain.");
@@ -108,7 +108,7 @@ static const u8 sScrappyDescription[] =      _("Moves hits GHOST-type foe's.");
 static const u8 sSimpleDescription[] =       _("Doubles the user's stat stages.");
 static const u8 sSkillLinkDescription[] =    _("Increases “multi-hit” frequency.");
 static const u8 sSlowStartDescription[] =    _("Halves stats for five turns.");
-static const u8 sSniperDescription[] =       _("Halves stats for five turns.");
+static const u8 sSniperDescription[] =       _("Ups critical hit moves.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {

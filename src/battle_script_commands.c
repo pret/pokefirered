@@ -8467,6 +8467,7 @@ static void atkC4_trydobeatup(void)
         party = gEnemyParty;
     if (gBattleMons[gBattlerTarget].hp == 0)
     {
+	gCritMultiplier = 1;
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
     else
@@ -8489,15 +8490,27 @@ static void atkC4_trydobeatup(void)
             gBattleMoveDamage *= gBattleMoves[gCurrentMove].power;
             gBattleMoveDamage *= (GetMonData(&party[gBattleCommunication[0]], MON_DATA_LEVEL) * 2 / 5 + 2);
             gBattleMoveDamage /= gBaseStats[gBattleMons[gBattlerTarget].species].baseDefense;
+	    gBattleMoveDamage *= gCritMultiplier;
+		
+	    u8 AbilityNum = GetMonData(&party[gBattleCommunication[0]], MON_DATA_ABILITY_NUM);
+		
+	    if (GetAbilityBySpecies(GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES), AbilityNum) == ABILITY_SNIPER && gCritMultiplier == 2)
+		    gBattleMoveDamage = (gBattleMoveDamage * 15) / 10;
             gBattleMoveDamage = (gBattleMoveDamage / 50) + 2;
             if (gProtectStructs[gBattlerAttacker].helpingHand)
                 gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
             ++gBattleCommunication[0];
         }
         else if (beforeLoop != 0)
+	{
+	    gCritMultiplier = 1;
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+	}
         else
+	{
+	    gCritMultiplier = 1;
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+	}
     }
 }
 

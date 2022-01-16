@@ -63,6 +63,7 @@ Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega
 // Needing put in
 make all multitype effect(its only set in the defines, need make its code)
 make slow start special iterations with z-moves
+make steadfast script
 flower gift form change
 check if sniper is corrected
 end's ability pop up scripts and asms

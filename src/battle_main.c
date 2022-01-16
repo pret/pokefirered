@@ -3430,7 +3430,7 @@ u32 CalculateMonBracket(u8 battler)
         holdEffectParam = ItemId_GetHoldEffectParam(itemid);
     }
     
-    if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100))
+    if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         return 1;
     if (gBattleMons[battler].ability == ABILITY_STALL)
         return -1;
@@ -3441,7 +3441,7 @@ u32 CalculateMonSpeed(u8 battler)
     u8 HoldEffect;
     u32 monspeed;
     
-    APPLY_STAT_MOD(monspeed, &gBattleMons[battler], &gBattleMons[battler].speed, STAT_SPEED);
+    APPLY_STAT_MOD(monspeed, gBattleMons[battler], gBattleMons[battler].speed, STAT_SPEED);
         
     if (WEATHER_HAS_EFFECT)
     {
@@ -3454,7 +3454,7 @@ u32 CalculateMonSpeed(u8 battler)
     if (gBattleMons[battler].ability == ABILITY_SLOW_START && gSlowStartTimers[battler] != 0)
         monspeed /= 2;
     // badge stat boost
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBattlerSide(battler1) == B_SIDE_PLAYER)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBattlerSide(battler) == B_SIDE_PLAYER)
         monspeed = (monspeed * 110) / 100;
     
     // not used for now

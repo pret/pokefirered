@@ -1479,7 +1479,8 @@ static void atk06_typecalc(void)
     {
 	    if (!(gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_ONE_HIT_KO | MOVE_RESULT_MISSED)))
 	    {
-		    if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE && gBattleMons[gBattlerTarget].ability == ABILITY_FILTER)
+		    if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE &&
+			(gBattleMons[gBattlerTarget].ability == ABILITY_FILTER || gBattleMons[gBattlerTarget].ability == ABILITY_SOLID_ROCK))
 		    {
 			    gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
 			    if (gBattleMoveDamage == 0)

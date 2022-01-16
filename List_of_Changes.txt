@@ -61,6 +61,7 @@ make all multitype effect(its only set in the defines, need make its code)
 make quick feet effect(its only set in the defines, waiting for some new speed boost abilities)
 make slow start speed drop and special iterations with z-moves
 flower gift form change
+check if sniper is corrected
 end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc
 end's moves data table update

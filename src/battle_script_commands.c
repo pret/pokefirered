@@ -7273,6 +7273,7 @@ static void atk96_weatherdamage(void)
             if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
 	     && gBattleMons[gBattlerAttacker].ability != ABILITY_ICE_BODY
 	     && gBattleMons[gBattlerAttacker].ability != ABILITY_MAGIC_GUARD
+	     && gBattleMons[gBattlerAttacker].ability != ABILITY_SNOW_CLOAK
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
              && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {

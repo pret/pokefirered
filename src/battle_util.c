@@ -37,6 +37,7 @@ static const u8 sMoldBreakerString[] = _("{B_ATK_NAME_WITH_PREFIX} breaks the mo
 static const u8 sMoveStatUpString[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sSlowStartStartString[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget it going!");
 static const u8 sSlowStartEndString[] = _("{B_ATK_NAME_WITH_PREFIX} got its\nact together!");
+static const u8 sSnowWarningString[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it hail!");
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -1764,7 +1765,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     ++effect;
                 }
                 break;
-            case ABILITY_INTIMIDATE:
+	    case ABILITY_SNOW_WARNING:
+		if (!(gBattleWeather & WEATHER_HAIL_ANY))
+		{
+		    gSetWordLoc = sSnowWarningString;
+		    gWishFutureKnock.weatherDuration = 5;
+		    gBattleWeather = WEATHER_HAIL;
+		    BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
+		    gBattleScripting.battler = battler;
+                    ++effect;
+		}
+                break;
+	    case ABILITY_INTIMIDATE:
 	    case ABILITY_ANTICIPATION:
 	    case ABILITY_DOWNLOAD:
 	    case ABILITY_FOREWARN:

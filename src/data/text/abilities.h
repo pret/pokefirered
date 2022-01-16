@@ -111,7 +111,7 @@ static const u8 sSlowStartDescription[] =    _("Halves stats for five turns.");
 static const u8 sSniperDescription[] =       _("Ups critical hit moves.");
 static const u8 sSnowCloakDescription[] =    _("Ups evasion in hail.");
 static const u8 sSnowWarningDescription[] =  _("Summons a hailstorm.");
-static const u8 sSolarPowerDescription[] =   _("Ups SPEED, but lost HP in sunny.");
+static const u8 sSolarPowerDescription[] =   _("Ups SP.ATTACK, but lost HP in sunny.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {

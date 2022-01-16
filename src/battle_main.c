@@ -3406,35 +3406,32 @@ u32 CalculateMonPriority(u8 battler)
     if (gChosenActionByBattler[battler] != B_ACTION_USE_MOVE)
         return priority;
     else
-        {
-            if (gProtectStructs[battler].noValidMoves)
-                move = MOVE_STRUGGLE;
-            else
-                move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
-        }
-//add grassy glide check here
-if (gBattleMons[battler].ability == ABILITY_PRANKSTER && gBattleMoves[move].split == MOVE_STATUS)
-    priority += 1;
-if (gBattleMons[battler].ability == ABILITY_GALE_WINGS && gBattleMoves[move].type == TYPE_FLYING)
-    priority += 1;
-
+    {
+        if (gProtectStructs[battler].noValidMoves)
+            move = MOVE_STRUGGLE;
+        else
+            move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
+    }
     return priority += gBattleMoves[move].priority;
 }
 
 u32 CalculateMonBracket(u8 battler)
 {
     u8 holdEffect, holdEffectParam;
-    u32 bracket = 0;
+    u8 holdEffectNoKlutz;
     u16 itemid = gBattleMons[battler].item;
+    u32 bracket = 0;
     
     if (itemid == ITEM_ENIGMA_BERRY)
     {
         holdEffect = gEnigmaBerries[battler].holdEffect;
+        holdEffectNoKlutz = holdEffect;
         holdEffectParam = gEnigmaBerries[battler].holdEffectParam;
     }
     else
     {
         holdEffect = ItemId_GetHoldEffect(itemid, battler, TRUE);
+        holdEffectNoKlutz = ItemId_GetHoldEffect(itemid, 0, FALSE);
         holdEffectParam = ItemId_GetHoldEffectParam(itemid);
     }
     //macho brace don't is negated by klutz

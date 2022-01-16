@@ -8466,7 +8466,8 @@ static void atkC3_trysetfutureattack(void)
 static void atkC4_trydobeatup(void)
 {
     struct Pokemon *party;
-
+    u8 AbilityNum;
+	
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
@@ -8498,7 +8499,7 @@ static void atkC4_trydobeatup(void)
             gBattleMoveDamage /= gBaseStats[gBattleMons[gBattlerTarget].species].baseDefense;
 	    gBattleMoveDamage *= gCritMultiplier;
 		
-	    u8 AbilityNum = GetMonData(&party[gBattleCommunication[0]], MON_DATA_ABILITY_NUM);
+	    AbilityNum = GetMonData(&party[gBattleCommunication[0]], MON_DATA_ABILITY_NUM);
 		
 	    if (GetAbilityBySpecies(GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES), AbilityNum) == ABILITY_SNIPER && gCritMultiplier == 2)
 		    gBattleMoveDamage = (gBattleMoveDamage * 15) / 10;

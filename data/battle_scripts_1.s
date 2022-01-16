@@ -4566,3 +4566,11 @@ BattleScript_MoveStatRaiseDoStatUp::
 	printstring STRINGID_SETWORDSTRING
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
+
+BattleScript_SnowWarningActivates::
+        pause 0x20
+	printstring STRINGID_SETWORDSTRING
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES, NULL
+	call BattleScript_HandleWeatherFormChanges
+	end3

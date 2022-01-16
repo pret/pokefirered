@@ -109,6 +109,7 @@ static const u8 sSimpleDescription[] =       _("Doubles the user's stat stages."
 static const u8 sSkillLinkDescription[] =    _("Increases “multi-hit” frequency.");
 static const u8 sSlowStartDescription[] =    _("Halves stats for five turns.");
 static const u8 sSniperDescription[] =       _("Ups critical hit moves.");
+static const u8 sSnowCloakDescription[] =    _("Ups evasion in hail.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -223,6 +224,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SKILL_LINK] = sSkillLinkDescription,
     [ABILITY_SLOW_START] = sSlowStartDescription,
     [ABILITY_SNIPER] = sSniperDescription,
+    [ABILITY_SNOW_CLOAK] = sSnowCloakDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -338,4 +340,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SKILL_LINK] = _("SKILL LINK"),
     [ABILITY_SLOW_START] = _("SLOW START"),
     [ABILITY_SNIPER] = _("SNIPER"),
+    [ABILITY_SNOW_CLOAK] = _("SNOW CLOAK"),
 };

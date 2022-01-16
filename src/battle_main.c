@@ -3439,10 +3439,9 @@ u32 CalculateMonBracket(u8 battler)
 u32 CalculateMonSpeed(u8 battler)
 {
     u8 HoldEffect;
-    u32 monspeed;
+    u32 monspeed = (gBattleMons[battler].speed * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0])
+                    / gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
     
-    APPLY_STAT_MOD(monspeed, gBattleMons[battler], gBattleMons[battler].speed, STAT_SPEED);
-        
     if (WEATHER_HAS_EFFECT)
     {
         if ((gBattleMons[battler].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)

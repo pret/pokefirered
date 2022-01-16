@@ -2647,6 +2647,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
     {
         battlerHoldEffect = gEnigmaBerries[battlerId].holdEffect;
+	battlerHoldEffectNoKlutz = battlerHoldEffect;
         battlerHoldEffectParam = gEnigmaBerries[battlerId].holdEffectParam;
     }
     else
@@ -2661,6 +2662,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     if (atkItem == ITEM_ENIGMA_BERRY)
     {
         atkHoldEffect = gEnigmaBerries[gBattlerAttacker].holdEffect;
+        atkHoldEffectNoKlutz = atkHoldEffect;
         atkHoldEffectParam = gEnigmaBerries[gBattlerAttacker].holdEffectParam;
     }
     else
@@ -2677,6 +2679,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     if (defItem == ITEM_ENIGMA_BERRY)
     {
         defHoldEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
+	defHoldEffectNoKlutz = defHoldEffect;
         defHoldEffectParam = gEnigmaBerries[gBattlerTarget].holdEffectParam;
     }
     else

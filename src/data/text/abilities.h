@@ -114,6 +114,7 @@ static const u8 sSnowWarningDescription[] =  _("Summons a hailstorm.");
 static const u8 sSolarPowerDescription[] =   _("Ups SP.ATTACK, but lost HP in sunny.");
 static const u8 sSolidRockDescription[] =    _("Powers down “super effective” hits.");
 static const u8 sStallDescription[] =        _("Moves after all other POKéMON do.");
+static const u8 sSteadfastDescription[] =    _("Raises SPEED if flinches.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -233,6 +234,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SOLAR_POWER] = sSolarPowerDescription,
     [ABILITY_SOLID_ROCK] = sSolidRockDescription,
     [ABILITY_STALL] = sStallDescription,
+    [ABILITY_STEADFAST] = sSteadfastDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -353,4 +355,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SOLAR_POWER] = _("SOLAR POWER"),
     [ABILITY_SOLID_ROCK] = _("SOLID ROCK"),
     [ABILITY_STALL] = _("STALL"),
+    [ABILITY_STEADFAST] = _("STEADFAST"),
 };

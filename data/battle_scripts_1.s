@@ -3756,6 +3756,7 @@ BattleScript_MoveUsedIsParalyzed::
 BattleScript_MoveUsedFlinched::
 	printstring STRINGID_PKMNFLINCHED
 	waitmessage 0x40
+	jumpifability BS_ATTACKER, ABILITY_STEADFAST, BattleScript_RecoilEnd
 	goto BattleScript_MoveEnd
 
 BattleScript_PrintUproarOverTurns::

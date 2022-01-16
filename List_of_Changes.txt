@@ -51,6 +51,7 @@ simple
 skill link
 snow cloak
 snow warning
+solar power
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

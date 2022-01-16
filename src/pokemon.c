@@ -2438,85 +2438,157 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             break;
         }
     }
-
-    if (attackerHoldEffect == HOLD_EFFECT_CHOICE_BAND)
-        attack = (150 * attack) / 100;
-    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER)) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
-        spAttack = (150 * spAttack) / 100;
-    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER)) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
-        spDefense = (150 * spDefense) / 100;
-    if (attackerHoldEffect == HOLD_EFFECT_DEEP_SEA_TOOTH && attacker->species == SPECIES_CLAMPERL)
-        spAttack *= 2;
-    if (defenderHoldEffect == HOLD_EFFECT_DEEP_SEA_SCALE && defender->species == SPECIES_CLAMPERL)
-        spDefense *= 2;
-    if (attackerHoldEffect == HOLD_EFFECT_LIGHT_BALL && attacker->species == SPECIES_PIKACHU)
-        spAttack *= 2;
-    if (defenderHoldEffect == HOLD_EFFECT_METAL_POWDER && defender->species == SPECIES_DITTO)
-        defense *= 2;
-    if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
-        attack *= 2;
-    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE)) 
+	// attacker items check
+    switch (attackerHoldEffect)
     {
-        spAttack /= 2;
-        attack /= 2;
+	    case HOLD_EFFECT_CHOICE_BAND:
+		    attack = (150 * attack) / 100;
+		    break;
+	    case HOLD_EFFECT_SOUL_DEW:
+		    if (!(gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER)) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
+			    spAttack = (150 * spAttack) / 100;
+		    break;
+	    case HOLD_EFFECT_DEEP_SEA_TOOTH:
+		    if (attacker->species == SPECIES_CLAMPERL)
+			    spAttack *= 2;
+		    break;
+	    case HOLD_EFFECT_LIGHT_BALL:
+		    if (attacker->species == SPECIES_PIKACHU)
+			    spAttack *= 2;
+		    break;
+	    case HOLD_EFFECT_THICK_CLUB:
+		    if (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK)
+			    attack *= 2;
+		    break;
     }
-    if (defender->ability == ABILITY_HEATPROOF && type == TYPE_FIRE)
+	// defender items check
+    switch (defenderHoldEffect)
     {
-        spAttack /= 2;
-        attack /= 2;
-    }  
-    if (attacker->ability == ABILITY_RIVALRY)
-    {
-        attackerGender = GetGenderFromSpeciesAndPersonality(attacker->species, attacker->personality);
-        defenderGender = GetGenderFromSpeciesAndPersonality(defender->species, defender->personality);
-        
-        if (attackerGender != MON_GENDERLESS && defenderGender != MON_GENDERLESS)
-        {
-            if (attackerGender == defenderGender)
-                gBattleMovePower += gBattleMovePower / 4;
-            else
-                gBattleMovePower -= gBattleMovePower / 4;
-        }
+	    case HOLD_EFFECT_SOUL_DEW:
+		    if (!(gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER)) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
+			    spDefense = (150 * spDefense) / 100;
+		    break;
+	    case HOLD_EFFECT_DEEP_SEA_SCALE:
+		    if (defender->species == SPECIES_CLAMPERL)
+			    spDefense *= 2;
+		    break;
+	    case HOLD_EFFECT_METAL_POWDER:
+		    if (defender->species == SPECIES_DITTO)
+			    defense *= 2;
+		    break;
     }
-    if (attacker->ability == ABILITY_NORMALIZE && !IsMoveInTable(gNoChangeTypeMoves, move))
-        gBattleMovePower = (120 * gBattleMovePower) / 100;
-    if (attacker->ability == ABILITY_IRON_FIST && IsMoveInTable(sIronFistTable, move))
-        gBattleMovePower = (120 * gBattleMovePower) / 100;
-    if (attacker->ability == ABILITY_RECKLESS && IsMoveInTable(sRecklessTable, move))
-        gBattleMovePower = (120 * gBattleMovePower) / 100;
-    if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
-        attack *= 2;
-    if (attacker->ability == ABILITY_SLOW_START && gSlowStartTimers[battlerIdAtk] != 0)
-		attack /= 2;
-    if (attacker->ability == ABILITY_HUSTLE)
-        attack = (150 * attack) / 100;
-    if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
-        spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == ABILITY_MINUS && ABILITY_ON_FIELD2(ABILITY_PLUS))
-        spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == ABILITY_GUTS && attacker->status1)
-        attack = (150 * attack) / 100;
-    if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
-        defense = (150 * defense) / 100;
-    if (defender->ability == ABILITY_DRY_SKIN && type == TYPE_FIRE)
-        gBattleMovePower += gBattleMovePower / 4;
+	// attacker abilities check
+    switch (attacker->ability)
+    {
+	    case ABILITY_HUGE_POWER:
+	    case ABILITY_PURE_POWER:
+		    attack *= 2;
+		    break;
+	    case ABILITY_HUSTLE:
+		    attack = (150 * attack) / 100;
+		    break;
+	    case ABILITY_PLUS:
+		    if (ABILITY_ON_FIELD2(ABILITY_MINUS))
+			    spAttack = (150 * spAttack) / 100;
+		    break;
+	    case ABILITY_MINUS:
+		    if (ABILITY_ON_FIELD2(ABILITY_PLUS))
+			    spAttack = (150 * spAttack) / 100;
+		    break;
+	    case ABILITY_GUTS:
+		    if (attacker->status1)
+			    attack = (150 * attack) / 100;
+		    break;
+	    case ABILITY_OVERGROW:
+		    if (type == TYPE_GRASS && attacker->hp <= (attacker->maxHP / 3))
+			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_BLAZE:
+		    if (type == TYPE_FIRE && attacker->hp <= (attacker->maxHP / 3))
+			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_TORRENT:
+		    if (type == TYPE_WATER && attacker->hp <= (attacker->maxHP / 3))
+			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_SWARM:
+		    if (type == TYPE_BUG && attacker->hp <= (attacker->maxHP / 3))
+			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_NORMALIZE:
+		    if (!IsMoveInTable(gNoChangeTypeMoves, move))
+			    gBattleMovePower = (120 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_IRON_FIST:
+		    if (IsMoveInTable(sIronFistTable, move))
+			    gBattleMovePower = (120 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_RECKLESS:
+		    if (IsMoveInTable(sRecklessTable, move))
+			    gBattleMovePower = (120 * gBattleMovePower) / 100;
+		    break;
+	    case ABILITY_RIVALRY:
+		    attackerGender = GetGenderFromSpeciesAndPersonality(attacker->species, attacker->personality);
+		    defenderGender = GetGenderFromSpeciesAndPersonality(defender->species, defender->personality);
+		    
+		    if (attackerGender != MON_GENDERLESS && defenderGender != MON_GENDERLESS)
+		    {
+			    if (attackerGender == defenderGender)
+				    gBattleMovePower += gBattleMovePower / 4;
+			    else
+				    gBattleMovePower -= gBattleMovePower / 4;
+		    }
+		    break;
+	    case ABILITY_SLOW_START:
+		    if (gSlowStartTimers[battlerIdAtk] != 0)
+			    attack /= 2;
+		    break;
+	    case ABILITY_SNIPER:
+		    if (gCritMultiplier == 2)
+			    gBattleMovePower = (gBattleMovePower * 15) / 10;
+		    break;
+    }
+	// defender abilities check
+    switch (defender->ability)
+    {
+	    case ABILITY_THICK_FAT:
+		    if (type == TYPE_FIRE || type == TYPE_ICE)
+		    {
+			    spAttack /= 2;
+			    attack /= 2; 
+		    }
+		    break;
+	    case ABILITY_MARVEL_SCALE:
+		    if (defender->status1)
+			    defense = (150 * defense) / 100;
+		    break;
+	    case ABILITY_HEATPROOF:
+		    if (type == TYPE_FIRE)
+		    {
+			    spAttack /= 2;
+			    attack /= 2;
+		    }
+		    break;
+	    case ABILITY_DRY_SKIN:
+		    if (type == TYPE_FIRE)
+			    gBattleMovePower += gBattleMovePower / 4;
+		    break;
+    }
+	
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, 0xFD, 0))
         gBattleMovePower /= 2;
     if (type == TYPE_FIRE && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, 0xFE, 0))
         gBattleMovePower /= 2;
-    if (type == TYPE_GRASS && attacker->ability == ABILITY_OVERGROW && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == TYPE_FIRE && attacker->ability == ABILITY_BLAZE && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == TYPE_WATER && attacker->ability == ABILITY_TORRENT && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
     
     if (WEATHER_HAS_EFFECT)
     {
+	    // sandstorm stats boost
         if (gBattleWeather & WEATHER_SANDSTORM_ANY && IS_BATTLER_OF_TYPE(battlerIdDef, TYPE_ROCK))
-        spDefense += spDefense / 2;
+	{
+		spDefense += spDefense / 2;
+		spAttack = (100 * spAttack) / 150;
+	}
+	    
         if (gBattleWeather & WEATHER_SUN_ANY)
         {
             if (attacker->ability == ABILITY_FLOWER_GIFT)
@@ -2532,9 +2604,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
         }
     }
-    
-    if ((gBattleWeather & (WEATHER_SANDSTORM_ANY)) && IS_BATTLER_OF_TYPE(battlerIdDef, TYPE_ROCK))    
-            spAttack = (100 * spAttack) / 150;
+	// burn attack drop
     if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             attack /= 2;
    
@@ -2591,6 +2661,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             damage /= 50;
         }
     
+	// reflect and light screen check
     if ((sideStatus & (split + 1)) && gCritMultiplier == 1)
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)

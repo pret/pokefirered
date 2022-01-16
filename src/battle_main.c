@@ -3449,7 +3449,8 @@ u32 CalculateMonSpeed(u8 battler)
             || (gBattleMons[battler].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY))
             monspeed *= 2;
     }
-    
+    if (gBattleMons[battler].ability == ABILITY_QUICK_FEET && gBattleMons[battler].status1)
+        monspeed *= 2;
     if (gBattleMons[battler].ability == ABILITY_SLOW_START && gSlowStartTimers[battler] != 0)
         monspeed /= 2;
     // badge stat boost
@@ -3467,7 +3468,7 @@ u32 CalculateMonSpeed(u8 battler)
     if (ItemId_GetHoldEffect(gBattleMons[battler].item, 0, FALSE) == HOLD_EFFECT_MACHO_BRACE)
         monspeed /= 2;
     
-    if (gBattleMons[battler].status1 & STATUS1_PARALYSIS)
+    if (gBattleMons[battler].status1 & STATUS1_PARALYSIS && gBattleMons[battler].ability != ABILITY_QUICK_FEET)
 #if PARALYSIS_UPDATE
         monspeed /= 2;
 #else

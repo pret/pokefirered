@@ -50,6 +50,7 @@ scrappy
 simple
 skill link
 snow cloak
+snow warning
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

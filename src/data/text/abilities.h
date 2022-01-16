@@ -112,6 +112,7 @@ static const u8 sSniperDescription[] =       _("Ups critical hit moves.");
 static const u8 sSnowCloakDescription[] =    _("Ups evasion in hail.");
 static const u8 sSnowWarningDescription[] =  _("Summons a hailstorm.");
 static const u8 sSolarPowerDescription[] =   _("Ups SP.ATTACK, but lost HP in sunny.");
+static const u8 sSolidRockDescription[] =    _("Powers down “super effective” hits.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -229,6 +230,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SNOW_CLOAK] = sSnowCloakDescription,
     [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
     [ABILITY_SOLAR_POWER] = sSolarPowerDescription,
+    [ABILITY_SOLID_ROCK] = sSolidRockDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -347,4 +349,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SNOW_CLOAK] = _("SNOW CLOAK"),
     [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
     [ABILITY_SOLAR_POWER] = _("SOLAR POWER"),
+    [ABILITY_SOLID_ROCK] = _("SOLID ROCK"),
 };

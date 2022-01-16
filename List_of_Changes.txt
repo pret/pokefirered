@@ -52,6 +52,7 @@ skill link
 snow cloak
 snow warning
 solar power
+quick feet
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.
@@ -61,8 +62,7 @@ Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega
 
 // Needing put in
 make all multitype effect(its only set in the defines, need make its code)
-make quick feet effect(its only set in the defines, waiting for some new speed boost abilities)
-make slow start speed drop and special iterations with z-moves
+make slow start special iterations with z-moves
 flower gift form change
 check if sniper is corrected
 end's ability pop up scripts and asms

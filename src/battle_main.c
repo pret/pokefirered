@@ -3340,9 +3340,134 @@ void SwapTurnOrder(u8 id1, u8 id2)
     SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
+enum
+{
+ATTACKER_STRIKES_FIRST,
+DEFENDER_STRIKES_FIRST,
+SPEED_TIE,
+};
+
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
-    u8 strikesFirst = 0;
+    u32 battler1value, battler2value;
+  
+    // priority check
+    if (!ignoreChosenMoves) 
+    {
+        battler1value = CalculateMonPriority(battler1);
+        battler2value = CalculateMonPriority(battler2);
+        
+        if (battler1value != battler2value) 
+        {
+            if (battler1value >= battler2value) 
+                return ATTACKER_STRIKES_FIRST;
+            else
+                return DEFENDER_STRIKES_FIRST;
+        }
+    }
+    // bracket check
+        battler1value = CalculateMonBracket(battler1);
+        battler2value = CalculateMonBracket(battler2);
+    
+    if (battler1value != battler2value)
+    {
+        if (battler1value >= battler2value) 
+            return ATTACKER_STRIKES_FIRST;
+        else
+            return DEFENDER_STRIKES_FIRST;
+    }
+    // speed check
+         battler1value = CalculateMonSpeed(battler1);
+         battler2value = CalculateMonSpeed(battler2);
+    
+    if (battler1value != battler2value)
+    {
+        if (battler1value >= battler2value)
+            return ATTACKER_STRIKES_FIRST;
+        else
+            return DEFENDER_STRIKES_FIRST;
+    }
+    else
+    {
+        if ((Random() & 1))
+            return ATTACKER_STRIKES_FIRST;
+        else
+            return SPEED_TIE;
+    }
+}
+    
+ABILITY_STALL
+
+u32 CalculateMonPriority(u8 battler)
+{
+    u32 priority = 0;
+    u16 move;
+    
+    if (gChosenActionByBattler[battler] != B_ACTION_USE_MOVE)
+        return priority;
+    else
+        {
+            if (gProtectStructs[battler].noValidMoves)
+                move = MOVE_STRUGGLE;
+            else
+                move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
+        }
+//add grassy glide check here
+if (gBattleMons[battler].ability == ABILITY_PRANKSTER && gBattleMoves[move].split == MOVE_STATUS)
+    priority += 1;
+if (gBattleMons[battler].ability == ABILITY_GALE_WINGS && gBattleMoves[move].type == TYPE_FLYING)
+    priority += 1;
+
+    return priority += gBattleMoves[move].priority;
+}
+
+u32 CalculateMonBracket(u8 battler)
+{
+    u8 holdEffect, holdEffectParam;
+    u32 bracket = 0;
+    u16 itemid = gBattleMons[battler].item;
+    
+    if (itemid == ITEM_ENIGMA_BERRY)
+    {
+        holdEffect = gEnigmaBerries[battler].holdEffect;
+        holdEffectParam = gEnigmaBerries[battler].holdEffectParam;
+    }
+    else
+    {
+        holdEffect = ItemId_GetHoldEffect(itemid, battler, TRUE);
+        holdEffectParam = ItemId_GetHoldEffectParam(itemid);
+    }
+    //macho brace don't is negated by klutz
+    //add quick draw check here
+    if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100))
+        bracket = 1;
+    //add custap berry and lagging tail check here
+    else if (gBattleMons[battler].ability == ABILITY_STALL)
+        bracket = -1;
+ 
+         return bracket;
+}
+
+u32 CalculateMonSpeed(u8 battler)
+{
+    u32 monspeed = (gBattleMons[battler].speed
+                    * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0])
+                    / (gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1]);
+    
+    if (WEATHER_HAS_EFFECT)
+    {
+        //added sand rush and slush rush abiliies
+        if ((gBattleMons[battler].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)
+         || (gBattleMons[battler].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY)
+         || (gBattleMons[battler].ability == ABILITY_SAND_RUSH && gBattleWeather & WEATHER_SANDSTORM_ANY)
+         || (gBattleMons[battler].ability == ABILITY_SLUSH_RUSH && gBattleWeather & WEATHER_HAIL_ANY))
+            monspeed *= 2;
+        //add slow start check here
+    }
+    
+    
+    
+    /*u8 strikesFirst = 0;
     u8 speedMultiplierBattler1 = 0, speedMultiplierBattler2 = 0;
     u32 speedBattler1 = 0, speedBattler2 = 0;
     u8 holdEffect = 0;
@@ -3469,133 +3594,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
     return strikesFirst;
 }  
-    
-    
-    
-    
-/*{
-    u32 battler1value, battler2value;
-    u8 strikesFirst = 0;
-    
-    if (!ignoreChosenMoves) 
-    {
-        battler1value = CalculateMonPriority(battler1);
-        battler2value = CalculateMonPriority(battler2);
-        
-        if (battler1value != battler2value) 
-        {
-            if (battler1value >= battler2value) 
-               return strikesFirst;
-            else
-            {
-                strikesFirst = 1;
-                return strikesFirst;
-            }
-        }
-    }
-        battler1value = CalculateMonBracket(battler1);
-        battler2value = CalculateMonBracket(battler2);
-    
-    if (battler1value != battler2value)
-    {
-        if (battler1value >= battler2value) 
-               return strikesFirst;
-            else
-            {
-                strikesFirst = 1;
-                return strikesFirst;
-       }
-    }
-         battler1value = CalculateMonSpeed(battler1);
-         battler2value = CalculateMonSpeed(battler2);
-    
-    if (battler1value == battler2value && Random() & 1)
-    {
-                strikesFirst = 2;
-                return strikesFirst;
-    }
-    else if (gTrickRoomLoc)
-    {
-         u32 valueof = battler1value;
-         battler1value = battler2value;
-         battler2value = valueof;
-    }
-    
-    if (battler1value >= battler2value)
-         return strikesFirst;
-    else
-    {
-        strikesFirst = 1;
-        return strikesFirst;
-    }
-}
-    
-u32 CalculateMonPriority(u8 battler)
-{
-    u32 priority = 0;
-    u16 move;
-    
-    if (gChosenActionByBattler[battler] != B_ACTION_USE_MOVE)
-        return priority;
-    else
-        {
-            if (gProtectStructs[battler].noValidMoves)
-                move = MOVE_STRUGGLE;
-            else
-                move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
-        }
-//add grassy glide check here
-if (gBattleMons[battler].ability == ABILITY_PRANKSTER && gBattleMoves[move].split == MOVE_STATUS)
-    priority += 1;
-if (gBattleMons[battler].ability == ABILITY_GALE_WINGS && gBattleMoves[move].type == TYPE_FLYING)
-    priority += 1;
-
-    return priority += gBattleMoves[move].priority;
-}
-
-u32 CalculateMonBracket(u8 battler)
-{
-    u8 holdEffect, holdEffectParam;
-    u32 bracket = 0;
-    u16 itemid = gBattleMons[battler].item;
-    
-    if (itemid == ITEM_ENIGMA_BERRY)
-    {
-        holdEffect = gEnigmaBerries[battler].holdEffect;
-        holdEffectParam = gEnigmaBerries[battler].holdEffectParam;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(itemid, battler, TRUE);
-        holdEffectParam = ItemId_GetHoldEffectParam(itemid);
-    }
-    //macho brace don't is negated by klutz
-    //add quick draw check here
-    if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100))
-        bracket = 1;
-    //add custap berry and lagging tail check here
-    else if (gBattleMons[battler].ability == ABILITY_STALL)
-        bracket = -1;
- 
-         return bracket;
-}
-
-u32 CalculateMonSpeed(u8 battler)
-{
-    u32 monspeed = (gBattleMons[battler].speed
-                    * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0])
-                    / (gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1]);
-    
-    if (WEATHER_HAS_EFFECT)
-    {
-        //added sand rush and slush rush abiliies
-        if ((gBattleMons[battler].ability == ABILITY_SWIFT_SWIM && gBattleWeather & WEATHER_RAIN_ANY)
-         || (gBattleMons[battler].ability == ABILITY_CHLOROPHYLL && gBattleWeather & WEATHER_SUN_ANY)
-         || (gBattleMons[battler].ability == ABILITY_SAND_RUSH && gBattleWeather & WEATHER_SANDSTORM_ANY)
-         || (gBattleMons[battler].ability == ABILITY_SLUSH_RUSH && gBattleWeather & WEATHER_HAIL_ANY))
-            monspeed *= 2;
-        //add slow start check here
-    }*/
+*/
  
 static void SetActionsAndBattlersTurnOrder(void)
 {

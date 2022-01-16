@@ -1960,12 +1960,9 @@ BattleScript_EffectBeatUp::
 	setbyte gBattleCommunication, 0
 BattleScript_BeatUpLoop::
 	movevaluescleanup
+	critcalc
 	trydobeatup BattleScript_BeatUpEnd, BattleScript_ButItFailed
 	printstring STRINGID_PKMNATTACK
-	critcalc
-	jumpifbyte CMP_NOT_EQUAL, gCritMultiplier, 2, BattleScript_BeatUpAttack
-	manipulatedamage 2
-BattleScript_BeatUpAttack::
 	adjustnormaldamage
 	attackanimation
 	waitanimation

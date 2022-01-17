@@ -3761,6 +3761,7 @@ BattleScript_MoveUsedFlinched::
 
 BattleScript_SteadfastSpeedUp::
         jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, 12, BattleScript_MoveEnd
+	setbyte sSTAT_ANIM_PLAYED, 0
 	playstatchangeanimation BS_ATTACKER, BIT_SPEED, 0
 	setstatchanger STAT_SPEED, 1, FALSE
 	call BattleScript_DownloadRaiseStat
@@ -4494,6 +4495,7 @@ BattleScript_DownloadActivation::
         pause 0x20
 	setbyte gBattlerTarget, 0
 	trygetintimidatetarget BattleScript_AnticipationReturn
+	setbyte sSTAT_ANIM_PLAYED, 0
         callasm GetStatRaiseDownload
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, 12, BattleScript_DownloadReturn
 	playstatchangeanimation BS_ATTACKER, BIT_ATK, 0

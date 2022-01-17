@@ -60,6 +60,7 @@ super luck
 tangled feet
 technician
 tinted lens
+unaware
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

@@ -109,7 +109,7 @@ static const u8 sSimpleDescription[] =       _("Doubles the user's stat stages."
 static const u8 sSkillLinkDescription[] =    _("Increases “multi-hit” frequency.");
 static const u8 sSlowStartDescription[] =    _("Halves stats for five turns.");
 static const u8 sSniperDescription[] =       _("Ups critical hit moves.");
-static const u8 sSnowCloakDescription[] =    _("Raises evasion in hail.");
+static const u8 sSnowCloakDescription[] =    _("Ups evasion in hail.");
 static const u8 sSnowWarningDescription[] =  _("Summons a hailstorm.");
 static const u8 sSolarPowerDescription[] =   _("Ups SP.ATTACK, but lost HP in sunny.");
 static const u8 sSolidRockDescription[] =    _("Powers down “super effective” hits.");
@@ -117,7 +117,8 @@ static const u8 sStallDescription[] =        _("Moves after all other POKéMON d
 static const u8 sSteadfastDescription[] =    _("Raises SPEED if flinches.");
 static const u8 sStormDrainDescription[] =   _("Draws WATER-type moves.");
 static const u8 sSuperLuckDescription[] =    _("Raises critical hit ratio.");
-static const u8 sTangledFeetDescription[] =  _("Raises evasion if confused.");
+static const u8 sTangledFeetDescription[] =  _("Ups evasion if confused.");
+static const u8 sTechnicianDescription[] =   _("Raises evasion if confused.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -241,6 +242,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_STORM_DRAIN] = sStormDrainDescription,
     [ABILITY_SUPER_LUCK] = sSuperLuckDescription,
     [ABILITY_TANGLED_FEET] = sTangledFeetDescription,
+    [ABILITY_TECHNICIAN] = sTechnicianDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -365,4 +367,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_STORM_DRAIN] = _("STORM DRAIN"),
     [ABILITY_SUPER_LUCK] = _("SUPER LUCK"),
     [ABILITY_TANGLED_FEET] = _("TANGLED FEET"),
+    [ABILITY_TECHNICIAN] = _("TECHNICIAN"),
 };

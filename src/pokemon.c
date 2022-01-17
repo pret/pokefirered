@@ -2555,6 +2555,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		    if (gBattleMovePower <= 60)
 			    gBattleMovePower = (gBattleMovePower * 15) / 10;
 		    break;
+	    case ABILITY_TINTED_LENS:
+		    if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+			    gBattleMovePower *= 2;
+		    break;
     }
 	// defender abilities check
     switch (defender->ability)
@@ -2580,6 +2584,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	    case ABILITY_DRY_SKIN:
 		    if (type == TYPE_FIRE)
 			    gBattleMovePower += gBattleMovePower / 4;
+		    break;
+	    case ABILITY_FILTER:
+	    case ABILITY_SOLID_ROCK:
+		    if (flags & MOVE_RESULT_SUPER_EFFECTIVE)
+			    gBattleMovePower = (gBattleMovePower * 75) / 100;
 		    break;
     }
 	

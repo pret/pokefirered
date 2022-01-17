@@ -117,6 +117,7 @@ static const u8 sStallDescription[] =        _("Moves after all other POKéMON d
 static const u8 sSteadfastDescription[] =    _("Raises SPEED if flinches.");
 static const u8 sStormDrainDescription[] =   _("Draws WATER-type moves.");
 static const u8 sSuperLuckDescription[] =    _("Raises critical hit ratio.");
+static const u8 sTangledFeetDescription[] =  _("Raises evasion if confused.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -239,6 +240,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_STEADFAST] = sSteadfastDescription,
     [ABILITY_STORM_DRAIN] = sStormDrainDescription,
     [ABILITY_SUPER_LUCK] = sSuperLuckDescription,
+    [ABILITY_TANGLED_FEET] = sTangledFeetDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -362,4 +364,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_STEADFAST] = _("STEADFAST"),
     [ABILITY_STORM_DRAIN] = _("STORM DRAIN"),
     [ABILITY_SUPER_LUCK] = _("SUPER LUCK"),
+    [ABILITY_TANGLED_FEET] = _("TANGLED FEET"),
 };

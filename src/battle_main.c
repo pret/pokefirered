@@ -3351,7 +3351,7 @@ SPEED_TIE,
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
     s8 battler1Priority, battler2Priority;
-	s32 battler1Bracket, battler1Bracket;
+    s32 battler1Bracket, battler2Bracket;
     u32 battler1Speed, battler2Speed;
   
     // priority check

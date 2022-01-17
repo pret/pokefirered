@@ -57,6 +57,7 @@ solid rock
 stall
 steadfast
 super luck
+tangled feet
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

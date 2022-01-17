@@ -119,6 +119,7 @@ static const u8 sStormDrainDescription[] =   _("Draws WATER-type moves.");
 static const u8 sSuperLuckDescription[] =    _("Raises critical hit ratio.");
 static const u8 sTangledFeetDescription[] =  _("Ups evasion if confused.");
 static const u8 sTechnicianDescription[] =   _("Raises evasion if confused.");
+static const u8 sTintedLensDescription[] =   _("Ups “not very effective” hits.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -243,6 +244,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SUPER_LUCK] = sSuperLuckDescription,
     [ABILITY_TANGLED_FEET] = sTangledFeetDescription,
     [ABILITY_TECHNICIAN] = sTechnicianDescription,
+    [ABILITY_TINTED_LENS] = sTintedLensDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -368,4 +370,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SUPER_LUCK] = _("SUPER LUCK"),
     [ABILITY_TANGLED_FEET] = _("TANGLED FEET"),
     [ABILITY_TECHNICIAN] = _("TECHNICIAN"),
+    [ABILITY_TINTED_LENS] = _("TINTED LENS"),
 };

@@ -2371,7 +2371,7 @@ bool8 IsMoveInTable(const u16 table[], u16 moveId)
 
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
-    u8 split, type = typeOverride;
+    u8 split, type = typeOverride, flags = TypeCalc(move, battlerIdAtk, battlerIdDef);
     u8 attackerGender, defenderGender;
     u8 defenderHoldEffect, defenderHoldEffectParam;
     u8 attackerHoldEffect, attackerHoldEffectParam;

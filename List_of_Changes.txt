@@ -91,7 +91,6 @@ vitamins cap to 252
 metric system update
 emerald style gender select intro
 critical hit probability
-paralysis update
 burn update @next
 save fix
 text speed - fast / sound - stereo

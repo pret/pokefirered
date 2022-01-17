@@ -3760,7 +3760,7 @@ BattleScript_MoveUsedFlinched::
 	goto BattleScript_MoveEnd
 
 BattleScript_SteadfastSpeedUp::
-        jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, 12, BattleScript_DownloadReturn
+        jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, 12, BattleScript_MoveEnd
 	playstatchangeanimation BS_ATTACKER, BIT_SPEED, 0
 	setstatchanger STAT_SPEED, 1, FALSE
 	goto BattleScript_DownloadRaiseStat

@@ -2372,6 +2372,7 @@ bool8 IsMoveInTable(const u16 table[], u16 moveId)
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u8 split, type = typeOverride, flags = TypeCalc(move, battlerIdAtk, battlerIdDef);
+    u8 statiD1, statiD2;
     u8 attackerGender, defenderGender;
     u8 defenderHoldEffect, defenderHoldEffectParam;
     u8 attackerHoldEffect, attackerHoldEffectParam;
@@ -2625,59 +2626,44 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             attack /= 2;
    
-        if (split == MOVE_PHYSICAL)
-        {
-            damage = attack;
-            
-            if (gCritMultiplier == 2)
-            {
-                if (attacker->statStages[STAT_ATK] > 6)
-                    APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-            }
-            else
-                APPLY_STAT_MOD(damage, attacker, attack, STAT_ATK)
-
-            damage = damage * gBattleMovePower;
-            damage *= (2 * attacker->level / 5 + 2);
-            
-            if (gCritMultiplier == 2)
-            {
-                if (defender->statStages[STAT_DEF] < 6)
-                    APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-            }
-            else
-                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
-            
-            damage = (damage / damageHelper);
-            damage /= 50;
-        }
-        else if (split == MOVE_SPECIAL) 
-        {
-            damage = spAttack;
-        
-            if (gCritMultiplier == 2)
-            {
-                if (attacker->statStages[STAT_SPATK] > 6)
-                    APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-            }
-            else
-                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-
-            damage = damage * gBattleMovePower;
-            damage *= (2 * attacker->level / 5 + 2);
-            
-            if (gCritMultiplier == 2)
-            {
-                if (defender->statStages[STAT_SPDEF] < 6)
-                    APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-            }
-            else
-                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
-            
-            damage = (damage / damageHelper);
-            damage /= 50;
-        }
-    
+	if (split == MOVE_PHYSICAL)
+	{
+		damage = attack;
+		damageHelper = defense;
+		statiD1 = STAT_ATK;
+		statiD2 = STAT_DEF;
+	}
+	else
+	{
+		damage = spAttack;
+		damageHelper = spDefense;
+		statiD1 = STAT_SPATK;
+		statiD2 = STAT_SPDEF;
+	}
+	
+	// attacker buffs
+	if (gCritMultiplier == 2)
+	{
+		if (attacker->statStages[statiD1] > 6)
+			APPLY_STAT_MOD(damage, attacker, damage, statiD1)
+	}
+	else
+		APPLY_STAT_MOD(damage, attacker, damage, statiD1)
+		
+	// defender buffs
+	if (gCritMultiplier == 2)
+	{
+		if (defender->statStages[statiD2] < 6)
+			APPLY_STAT_MOD(damageHelper, defender, damageHelper, statiD2)
+	}
+	else
+		APPLY_STAT_MOD(damageHelper, defender, damageHelper, statiD2)
+		
+        damage = damage * gBattleMovePower;
+	damage *= (2 * attacker->level / 5 + 2);
+	damage = (damage / damageHelper);
+	damage /= 50;
+	
 	// reflect and light screen check
     if ((sideStatus & (split + 1)) && gCritMultiplier == 1)
     {

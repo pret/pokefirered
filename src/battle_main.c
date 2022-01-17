@@ -3350,40 +3350,42 @@ SPEED_TIE,
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
-    u32 battler1value, battler2value;
+    s8 battler1Priority, battler2Priority;
+	s32 battler1Bracket, battler1Bracket;
+    u32 battler1Speed, battler2Speed;
   
     // priority check
     if (!ignoreChosenMoves) 
     {
-        battler1value = CalculateMonPriority(battler1);
-        battler2value = CalculateMonPriority(battler2);
+        battler1Priority = CalculateMonPriority(battler1);
+        battler2Priority = CalculateMonPriority(battler2);
         
-        if (battler1value != battler2value) 
+        if (battler1Priority != battler2Priority) 
         {
-            if (battler1value >= battler2value) 
+            if (battler1Priority > battler2Priority) 
                 return ATTACKER_STRIKES_FIRST;
             else
                 return DEFENDER_STRIKES_FIRST;
         }
     }
     // bracket check
-        battler1value = CalculateMonBracket(battler1);
-        battler2value = CalculateMonBracket(battler2);
+        battler1Bracket = CalculateMonBracket(battler1);
+        battler2Bracket = CalculateMonBracket(battler2);
     
-    if (battler1value != battler2value)
+    if (battler1Bracket != battler2Bracket)
     {
-        if (battler1value >= battler2value) 
+        if (battler1Bracket > battler2Bracket) 
             return ATTACKER_STRIKES_FIRST;
         else
             return DEFENDER_STRIKES_FIRST;
     }
     // speed check
-         battler1value = CalculateMonSpeed(battler1);
-         battler2value = CalculateMonSpeed(battler2);
+         battler1Speed = CalculateMonSpeed(battler1);
+         battler2Speed = CalculateMonSpeed(battler2);
     
-    if (battler1value != battler2value)
+    if (battler1Speed != battler2Speed)
     {
-        if (battler1value >= battler2value)
+        if (battler1Speed > battler2Speed)
             return ATTACKER_STRIKES_FIRST;
         else
             return DEFENDER_STRIKES_FIRST;
@@ -3397,7 +3399,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     }
 }
     
-u32 CalculateMonPriority(u8 battler)
+s8 CalculateMonPriority(u8 battler)
 {
     u32 priority = 0;
     u16 move;
@@ -3414,7 +3416,7 @@ u32 CalculateMonPriority(u8 battler)
     return priority += gBattleMoves[move].priority;
 }
 
-u32 CalculateMonBracket(u8 battler)
+s32 CalculateMonBracket(u8 battler)
 {
     u8 holdEffect, holdEffectParam;
     u16 itemid = gBattleMons[battler].item;

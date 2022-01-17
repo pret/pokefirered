@@ -2642,22 +2642,27 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	}
 	
 	// attacker buffs
-	if (gCritMultiplier == 2)
+	if (defender->ability != ABILITY_UNAWARE)
 	{
-		if (attacker->statStages[statiD1] > 6)
+		if (gCritMultiplier == 2)
+		{
+			if (attacker->statStages[statiD1] > 6)
+				APPLY_STAT_MOD(damage, attacker, damage, statiD1)
+		}
+		else
 			APPLY_STAT_MOD(damage, attacker, damage, statiD1)
 	}
-	else
-		APPLY_STAT_MOD(damage, attacker, damage, statiD1)
-		
 	// defender buffs
-	if (gCritMultiplier == 2)
+	if (attacker->ability != ABILITY_UNAWARE)
 	{
-		if (defender->statStages[statiD2] < 6)
+		if (gCritMultiplier == 2)
+		{
+			if (defender->statStages[statiD2] < 6)
+				APPLY_STAT_MOD(damageHelper, defender, damageHelper, statiD2)
+		}
+		else
 			APPLY_STAT_MOD(damageHelper, defender, damageHelper, statiD2)
 	}
-	else
-		APPLY_STAT_MOD(damageHelper, defender, damageHelper, statiD2)
 		
         damage = damage * gBattleMovePower;
 	damage *= (2 * attacker->level / 5 + 2);

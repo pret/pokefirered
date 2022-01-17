@@ -1183,18 +1183,15 @@ static void atk01_accuracycheck(void)
         movesplit = gBattleMoves[move].split;
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))
             return;
-        if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-        {
-            u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-
+	 
+	u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
+	
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_UNAWARE)
+	    acc = 6;
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT || gBattleMons[gBattlerAttacker].ability == ABILITY_UNAWARE)
             buff = acc;
-        }
         else
-        {
-            u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-
             buff = acc + 6 - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
-        }
         if (buff < 0)
             buff = 0;
         if (buff > 0xC)

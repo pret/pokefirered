@@ -1427,8 +1427,8 @@ static void atk06_typecalc(void)
     {
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_ADAPTABILITY)
             gBattleMoveDamage *= 2;
-		else
-		{
+	else
+	{
         gBattleMoveDamage = gBattleMoveDamage * 15;
         gBattleMoveDamage = gBattleMoveDamage / 10;
         }
@@ -1488,7 +1488,9 @@ static void atk06_typecalc(void)
 			    gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
 			    if (gBattleMoveDamage == 0)
 				    gBattleMoveDamage = 1;
-		    }  
+		    }
+		    if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE && gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
+			    gBattleMoveDamage *= 2;
 	    }    
     }
     else

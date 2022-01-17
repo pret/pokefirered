@@ -38,6 +38,7 @@ static const u8 sMoveStatUpString[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABIL
 static const u8 sSlowStartStartString[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget it going!");
 static const u8 sSlowStartEndString[] = _("{B_ATK_NAME_WITH_PREFIX} got its\nact together!");
 static const u8 sSnowWarningString[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it hail!");
+static const u8 sSteadfastString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its SPEED!");
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -1366,6 +1367,7 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_FLINCH: // flinch
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_FLINCHED)
             {
+		gSetWordLoc = sSteadfastString; // in case of steadfast activate
                 gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_FLINCHED);
                 gProtectStructs[gBattlerAttacker].flinchImmobility = 1;
                 CancelMultiTurnMoves(gBattlerAttacker);

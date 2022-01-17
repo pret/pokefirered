@@ -2551,6 +2551,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
 			    spAttack = (150 * spAttack) / 100;
 		    break;
+	    case ABILITY_TECHNICIAN:
+		    if (gBattleMovePower <= 60)
+			    gBattleMovePower = (gBattleMovePower * 15) / 10;
+		    break;
     }
 	// defender abilities check
     switch (defender->ability)

@@ -2352,54 +2352,42 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		{
 			if (gBattleMons[i].ability == ABILITY_INTIMIDATE)
 			{
-				gLastUsedAbility = gBattleMons[i].ability;
-				gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
 				BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);
-				gBattleStruct->intimidateBattler = i;
 				++effect;
 				break;
 			}
 			else if (gBattleMons[i].ability == ABILITY_ANTICIPATION)
 			{
 				BattleScriptPushCursorAndCallback(BattleScript_Anticipation);
-				gLastUsedAbility = gBattleMons[i].ability;
-				gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
-				gBattlerAttacker = i;
-				gBattleStruct->intimidateBattler = i;
 				++effect;
 				break;
 			}
 			else if (gBattleMons[i].ability == ABILITY_DOWNLOAD)
 			{
 				BattleScriptPushCursorAndCallback(BattleScript_Download);
-				gLastUsedAbility = gBattleMons[i].ability;
-				gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
-				gBattlerAttacker = i;
-				gBattleStruct->intimidateBattler = i;
 				++effect;
 				break;
 			}
 			else if (gBattleMons[i].ability == ABILITY_FOREWARN)
 			{
 				BattleScriptPushCursorAndCallback(BattleScript_Forewarn);
-				gLastUsedAbility = gBattleMons[i].ability;
-				gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
-				gBattlerAttacker = i;
-				gBattleStruct->intimidateBattler = i;
 				++effect;
 				break;
 			}
 			else if (gBattleMons[i].ability == ABILITY_FRISK)
 			{
 				BattleScriptPushCursorAndCallback(BattleScript_Frisk);
-				gLastUsedAbility = gBattleMons[i].ability;
-				gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
-				gBattlerAttacker = i;
-				gBattleStruct->intimidateBattler = i;
 				++effect;
 				break;
 			}
 		}
+	    }
+	    if (effect)
+	    {
+		    gLastUsedAbility = gBattleMons[i].ability;
+		    gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
+		    gBattlerAttacker = i;
+		    gBattleStruct->intimidateBattler = i;
 	    }
             break;
         case ABILITYEFFECT_TRACE: // 11

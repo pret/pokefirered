@@ -58,6 +58,7 @@ stall
 steadfast
 super luck
 tangled feet
+technician
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

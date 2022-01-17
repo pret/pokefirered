@@ -53,6 +53,10 @@ snow cloak
 snow warning
 solar power
 quick feet
+solid rock
+stall
+steadfast
+super luck
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.
@@ -61,7 +65,7 @@ Klutz cannot negate form-changing effects of items.
 Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega Stone, undergoing Primal Reversion with the Red Orb or Blue Orb or from using a Z-Move with a Z-Crystal.
 
 // Needing put in
-make all multitype effect(its only set in the defines, need make its code)
+make all multitype and storm drain effect(its only set in the defines, need make its code)
 make slow start special iterations with z-moves
 make steadfast script
 flower gift form change

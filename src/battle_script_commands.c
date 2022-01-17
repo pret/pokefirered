@@ -1478,23 +1478,8 @@ static void atk06_typecalc(void)
         gBattleCommunication[6] = 3;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
-    if (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)) 
-    {
-	    if (!(gMoveResultFlags & (MOVE_RESULT_FAILED | MOVE_RESULT_ONE_HIT_KO | MOVE_RESULT_MISSED)))
-	    {
-		    if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE &&
-			(gBattleMons[gBattlerTarget].ability == ABILITY_FILTER || gBattleMons[gBattlerTarget].ability == ABILITY_SOLID_ROCK))
-		    {
-			    gBattleMoveDamage = (gBattleMoveDamage * 75) / 100;
-			    if (gBattleMoveDamage == 0)
-				    gBattleMoveDamage = 1;
-		    }
-		    if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE && gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS)
-			    gBattleMoveDamage *= 2;
-	    }    
-    }
-    else
-        gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
+    if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
+	    gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
     ++gBattlescriptCurrInstr;
 }
 

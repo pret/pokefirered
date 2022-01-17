@@ -3756,8 +3756,14 @@ BattleScript_MoveUsedIsParalyzed::
 BattleScript_MoveUsedFlinched::
 	printstring STRINGID_PKMNFLINCHED
 	waitmessage 0x40
-	jumpifability BS_ATTACKER, ABILITY_STEADFAST, BattleScript_RecoilEnd
+	jumpifability BS_ATTACKER, ABILITY_STEADFAST, BattleScript_SteadfastSpeedUp
 	goto BattleScript_MoveEnd
+
+BattleScript_SteadfastSpeedUp::
+        jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, 12, BattleScript_DownloadReturn
+	playstatchangeanimation BS_ATTACKER, BIT_SPEED, 0
+	setstatchanger STAT_SPEED, 1, FALSE
+	goto BattleScript_DownloadRaiseStat
 
 BattleScript_PrintUproarOverTurns::
 	printfromtable gUproarOverTurnStringIds

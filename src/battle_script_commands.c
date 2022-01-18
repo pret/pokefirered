@@ -1165,7 +1165,7 @@ static void atk01_accuracycheck(void)
     }
     else
     {
-        u8 type, moveAcc, holdEffect, param, movesplit;
+        u8 acc, type, moveAcc, holdEffect, param, movesplit;
         s8 buff;
         u16 calc;
 
@@ -1184,7 +1184,7 @@ static void atk01_accuracycheck(void)
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))
             return;
 	 
-	u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
+	acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
 	
 	if (gBattleMons[gBattlerTarget].ability == ABILITY_UNAWARE)
 	    acc = 6;

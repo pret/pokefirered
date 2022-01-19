@@ -69,22 +69,21 @@ Klutz cannot negate form-changing effects of items.
 Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega Stone, undergoing Primal Reversion with the Red Orb or Blue Orb or from using a Z-Move with a Z-Crystal.
 
 // Needing put in
-make all multitype and storm drain effect(its only set in the defines, need make its code)
+make all multitype,storm drain and unburden effect(its only set in the defines, need make its code)
 make slow start special iterations with z-moves
-make steadfast script
-flower gift form change
+make flower gift form change
 check if sniper is corrected
 end's ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc
-end's moves data table update
+end update of moves data
 add the new moves in get forewarn move power
 add the new moves in sIronFistTable
 add the new moves in sRecklessTable
-add the new moves in gnochangetypemoves because normalize
+add the new moves in gnochangetypemoves
 add berries in is item affected by gluttony
 add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb
-Magic guard prevents damage from abilities, spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
+Magic guard prevents damage from abilities(and probabily for items), spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
 
 // puting
 bw repel system

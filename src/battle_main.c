@@ -3923,7 +3923,7 @@ static void HandleAction_UseMove(void)
         {
             if (gBattlerAttacker != i && gIgnorableAbilities[gBattleMons[i].ability])
             {
-                gIgnoredAbilities[i] = gBattleMons[i].ability;
+                gNewBattleStruct.IgnoredAbilities[i] = gBattleMons[i].ability;
                 gBattleMons[i].ability = ABILITY_NONE;
             }
         }

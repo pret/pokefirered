@@ -2438,6 +2438,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
+    gNewBattleStruct.SlowStartTimers[gActiveBattler] = 0;
     gLastMoves[gActiveBattler] = MOVE_NONE;
     gLastLandedMoves[gActiveBattler] = MOVE_NONE;
     gLastHitByType[gActiveBattler] = MOVE_NONE;

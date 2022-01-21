@@ -3451,7 +3451,7 @@ u32 CalculateMonSpeed(u8 battler)
     }
     if (gBattleMons[battler].ability == ABILITY_QUICK_FEET && gBattleMons[battler].status1)
         monspeed *= 2;
-    if (gBattleMons[battler].ability == ABILITY_SLOW_START && gSlowStartTimers[battler] != 0)
+    if (gBattleMons[battler].ability == ABILITY_SLOW_START && gNewBattleStruct.SlowStartTimers[battler] != 0)
         monspeed /= 2;
     // badge stat boost
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBattlerSide(battler) == B_SIDE_PLAYER)

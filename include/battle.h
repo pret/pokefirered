@@ -453,6 +453,12 @@ struct BattleStruct
     u8 padding_1E4[0x1C];
 }; // size == 0x200 bytes
 
+struct NewBattleStruct
+{
+    u8 IgnoredAbilities[MAX_BATTLERS_COUNT];
+    u8 SlowStartTimers[MAX_BATTLERS_COUNT];
+};
+
 extern struct BattleStruct *gBattleStruct;
 
 #define APPLY_STAT_MOD(var, mon, stat, statIndex)                                   \
@@ -463,8 +469,8 @@ extern struct BattleStruct *gBattleStruct;
 
 #define TABLE_END 0xFFFF
 
-#define IS_TYPE_PHYSICAL(moveType)(moveType == MOVE_PHYSICAL)
-#define IS_TYPE_SPECIAL(moveType)(moveType == MOVE_SPECIAL)
+#define IS_TYPE_PHYSICAL(moveSplit)(moveSplit == MOVE_PHYSICAL)
+#define IS_TYPE_SPECIAL(moveSplit)(moveSplit == MOVE_SPECIAL)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
 #define SET_BATTLER_TYPE(battlerId, type)   \
@@ -720,7 +726,6 @@ extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 extern const u8 *gSetWordLoc;
-extern u8 gIgnoredAbilities[MAX_BATTLERS_COUNT];
-extern u8 gSlowStartTimers[MAX_BATTLERS_COUNT];
+extern struct NewBattleStruct gNewBattleStruct;
 
 #endif // GUARD_BATTLE_H

@@ -1827,7 +1827,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		++effect;
 		break;
 	    case ABILITY_SLOW_START:
-	        gSlowStartTimers[battler] = 5;
+	        gNewBattleStruct.SlowStartTimers[battler] = 5;
 		gSetWordLoc = sSlowStartStartString;
 		BattleScriptPushCursorAndCallback(BattleScript_DisplaySwitchInMsg);
 		++effect;

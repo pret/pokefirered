@@ -2218,6 +2218,7 @@ static void BattleStartClearSetData(void)
         gLockedMoves[i] = MOVE_NONE;
         gLastPrintedMoves[i] = MOVE_NONE;
         gBattleResources->flags->flags[i] = 0;
+        gNewBattleStruct.SlowStartTimers[i] = 0;
     }
     for (i = 0; i < 2; ++i)
     {

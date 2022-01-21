@@ -2541,7 +2541,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		    }
 		    break;
 	    case ABILITY_SLOW_START:
-		    if (gSlowStartTimers[battlerIdAtk] != 0)
+		    if (gNewBattleStruct.SlowStartTimers[battlerIdAtk] != 0)
 			    attack /= 2;
 		    break;
 	    case ABILITY_SNIPER:

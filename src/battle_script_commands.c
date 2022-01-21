@@ -3978,11 +3978,11 @@ static void atk3D_end(void)
 	
     for (i = 0; i < gBattlersCount; ++i)
     {
-	    if (gIgnoredAbilities[i] != ABILITY_NONE)
+	    if (gNewBattleStruct.IgnoredAbilities[i] != ABILITY_NONE)
 	    {
 		    if (gBattleMons[i].ability == ABILITY_NONE)
-			    gBattleMons[i].ability = gIgnoredAbilities[i];
-		    gIgnoredAbilities[i] = ABILITY_NONE;
+			    gBattleMons[i].ability = gNewBattleStruct.IgnoredAbilities[i];
+		    gNewBattleStruct.IgnoredAbilities[i] = ABILITY_NONE;
 	    }
     }
     gMoveResultFlags = 0;

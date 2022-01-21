@@ -1969,7 +1969,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
 		case ABILITY_SLOW_START:
-		    if (gSlowStartTimers[battler] != 0 && --gSlowStartTimers[battler] == 0)
+		    if (gNewBattleStruct.SlowStartTimers[battler] != 0 && --gNewBattleStruct.SlowStartTimers[battler] == 0)
 		    {
 			    gSetWordLoc = sSlowStartEndString;
 			    BattleScriptPushCursorAndCallback(BattleScript_DisplaySwitchInMsg);

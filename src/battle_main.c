@@ -2362,6 +2362,7 @@ void SwitchInClearSetData(void)
     }
     gMoveResultFlags = 0;
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
+    gNewBattleStruct.SlowStartTimers[gActiveBattler] = 0;
     gLastMoves[gActiveBattler] = MOVE_NONE;
     gLastLandedMoves[gActiveBattler] = MOVE_NONE;
     gLastHitByType[gActiveBattler] = 0;

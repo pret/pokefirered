@@ -18,7 +18,7 @@
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
-#include "constants/facility_trainer_classes.h"
+#include "constants/trainers.h"
 
 // Trainer Card Strings
 enum
@@ -308,25 +308,25 @@ static const u8 sLinkTrainerPicFacilityClasses[GENDER_COUNT][NUM_LINK_TRAINER_CA
 {
     [MALE] = 
     {
-        FACILITY_CLASS_COOLTRAINER_3, 
-        FACILITY_CLASS_BLACK_BELT_2, 
-        FACILITY_CLASS_CAMPER_2, 
-        FACILITY_CLASS_YOUNGSTER_2, 
-        FACILITY_CLASS_PSYCHIC_3, 
-        FACILITY_CLASS_BUG_CATCHER_2, 
+        FACILITY_CLASS_COOLTRAINER_M, 
+        FACILITY_CLASS_BLACK_BELT, 
+        FACILITY_CLASS_CAMPER, 
+        FACILITY_CLASS_YOUNGSTER, 
+        FACILITY_CLASS_PSYCHIC_M, 
+        FACILITY_CLASS_BUG_CATCHER, 
         FACILITY_CLASS_TAMER, 
         FACILITY_CLASS_JUGGLER
     },
     [FEMALE] = 
     {
-        FACILITY_CLASS_COOLTRAINER_4,
+        FACILITY_CLASS_COOLTRAINER_F,
         FACILITY_CLASS_CHANNELER, 
-        FACILITY_CLASS_PICNICKER_2, 
-        FACILITY_CLASS_LASS_2, 
-        FACILITY_CLASS_PSYCHIC_2, 
+        FACILITY_CLASS_PICNICKER, 
+        FACILITY_CLASS_LASS, 
+        FACILITY_CLASS_RS_PSYCHIC_F, 
         FACILITY_CLASS_BATTLE_GIRL, 
-        FACILITY_CLASS_PKMN_BREEDER_2, 
-        FACILITY_CLASS_BEAUTY_2
+        FACILITY_CLASS_RS_PKMN_BREEDER_F, 
+        FACILITY_CLASS_BEAUTY
     }
 };
 

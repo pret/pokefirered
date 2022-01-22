@@ -49,7 +49,10 @@ const u8 unref_83FFAAC[] = {
 
 const u8 unref_83FFABF[] = _("100");
 
-#include "data/battle_tower/trainers.h"
+static const struct BattleTowerTrainer sBattleTowerTrainers[] =
+{
+
+};
 
 static const u16 sBattleTowerHeldItems[] = {
     ITEM_NONE,
@@ -488,7 +491,7 @@ u8 GetBattleTowerTrainerFrontSpriteId(void)
     }
     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
     {
-        return gFacilityClassToPicIndex[gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].trainerClass];
+        return gFacilityClassToPicIndex[sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].trainerClass];
     }
     else
     {
@@ -508,7 +511,7 @@ u8 GetBattleTowerTrainerClassNameId(void)
     }
     else
     {
-        return gFacilityClassToTrainerClass[gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].trainerClass];
+        return gFacilityClassToTrainerClass[sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].trainerClass];
     }
 }
 
@@ -523,7 +526,7 @@ void GetBattleTowerTrainerName(u8 *dest)
     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
     {
         for (i = 0; i < 3; i++)
-            dest[i] = gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].name[i];
+            dest[i] = sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].name[i];
     }
     else
     {
@@ -630,7 +633,7 @@ static void FillBattleTowerTrainerParty(void)
         level = 50;
     }
 
-    teamFlags = gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].teamFlags;
+    teamFlags = sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].teamFlags;
 
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
     // successfully chosen. The trainer's party may not have duplicate pokemon species
@@ -847,7 +850,7 @@ void PrintBattleTowerTrainerGreeting(void)
     if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
         BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.greeting);
     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-        BufferBattleTowerTrainerMessage(gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].greeting);
+        BufferBattleTowerTrainerMessage(sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].greeting);
     else
         BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.records[gSaveBlock2Ptr->battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].greeting);
 }

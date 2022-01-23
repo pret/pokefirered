@@ -351,6 +351,7 @@ static void HandleInputChooseTarget(void)
         DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
         DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
+        MoveSelectionDisplayMoveType();
     }
     else if (JOY_NEW(DPAD_LEFT | DPAD_UP))
     {
@@ -391,6 +392,7 @@ static void HandleInputChooseTarget(void)
         }
         while (i == 0);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_ShowAsMoveTarget;
+        MoveSelectionDisplayMoveType();
     }
     else if (JOY_NEW(DPAD_RIGHT | DPAD_DOWN))
     {
@@ -431,7 +433,8 @@ static void HandleInputChooseTarget(void)
         }
         while (i == 0);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCb_ShowAsMoveTarget;
-    }
+        MoveSelectionDisplayMoveType();
+    } 
 }
 
 void HandleInputChooseMove(void)

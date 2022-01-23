@@ -2414,7 +2414,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffect = ItemId_GetHoldEffect(defender->item, battlerIdDef, TRUE);
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
-    
+#if BADGE_BOOST
     // In FRLG, the Battle Tower and opponent checks are stubbed here.
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
     {
@@ -2427,6 +2427,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (FlagGet(FLAG_BADGE07_GET) && GetBattlerSide(battlerIdDef) == B_SIDE_PLAYER)
             spDefense = (110 * spDefense) / 100;
     }
+#endif
 
     for (i = 0; i < NELEMS(sHoldEffectToType); i++)
     {

@@ -26,6 +26,8 @@ Nature Colors
 Iv's In The Summary Screen
 Eggs Hatch At Level 1
 
+DizzyEggg
+
 //Abilities Added and completed
 Adaptability
 Aftermath

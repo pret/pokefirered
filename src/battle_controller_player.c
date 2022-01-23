@@ -1438,7 +1438,7 @@ static void MoveSelectionDisplayMoveType(void)
     gCurrentMove = move;
     
     //check if move is stab
-    if (gBattleMoves[gCurrentMove].split != MOVE_STATUS && IS_BATTLER_OF_TYPE(gActiveBattler, type))
+    if (!IS_TYPE_STATUS(gBattleMoves[gCurrentMove].split) && IS_BATTLER_OF_TYPE(gActiveBattler, type))
         effect = 2;
     //try change move target in double
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)

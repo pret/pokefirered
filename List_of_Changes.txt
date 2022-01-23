@@ -12,6 +12,7 @@ Running Indoors
 Physical/Special/Status Split With Icons
 Pokemon Stats Replacing Weight Comparision Screen
 Hail Weather Fix (daniilS And Samu)
+Faster HP Drain (Fyreire(i think))
 Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
 
 // Can Be Turned On/Off

@@ -3362,36 +3362,29 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         battler1Priority = CalculateMonPriority(battler1);
         battler2Priority = CalculateMonPriority(battler2);
         
-        if (battler1Priority != battler2Priority) 
-        {
-            if (battler1Priority > battler2Priority) 
-                return ATTACKER_STRIKES_FIRST;
-            else
-                return DEFENDER_STRIKES_FIRST;
-        }
+        if (battler1Priority > battler2Priority) 
+            return ATTACKER_STRIKES_FIRST;
+        else if (battler1Priority < battler2Priority)
+            return DEFENDER_STRIKES_FIRST;
     }
+    
     // bracket check
-        battler1Bracket = CalculateMonBracket(battler1);
-        battler2Bracket = CalculateMonBracket(battler2);
+    battler1Bracket = CalculateMonBracket(battler1);
+    battler2Bracket = CalculateMonBracket(battler2);
     
-    if (battler1Bracket != battler2Bracket)
-    {
-        if (battler1Bracket > battler2Bracket) 
-            return ATTACKER_STRIKES_FIRST;
-        else
-            return DEFENDER_STRIKES_FIRST;
-    }
+    if (battler1Bracket > battler2Bracket) 
+        return ATTACKER_STRIKES_FIRST;
+    else if (battler1Bracket < battler2Bracket)
+        return DEFENDER_STRIKES_FIRST;
+    
     // speed check
-         battler1Speed = CalculateMonSpeed(battler1);
-         battler2Speed = CalculateMonSpeed(battler2);
+    battler1Speed = CalculateMonSpeed(battler1);
+    battler2Speed = CalculateMonSpeed(battler2);
     
-    if (battler1Speed != battler2Speed)
-    {
-        if (battler1Speed > battler2Speed)
-            return ATTACKER_STRIKES_FIRST;
-        else
-            return DEFENDER_STRIKES_FIRST;
-    }
+    if (battler1Speed > battler2Speed)
+        return ATTACKER_STRIKES_FIRST;
+    else if (battler1Speed < battler2Speed)
+        return DEFENDER_STRIKES_FIRST;
     else
     {
         if ((Random() & 1))
@@ -3408,13 +3401,12 @@ s8 CalculateMonPriority(u8 battler)
     
     if (gChosenActionByBattler[battler] != B_ACTION_USE_MOVE)
         return priority;
+    
+    if (gProtectStructs[battler].noValidMoves)
+        move = MOVE_STRUGGLE;
     else
-    {
-        if (gProtectStructs[battler].noValidMoves)
-            move = MOVE_STRUGGLE;
-        else
-            move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
-    }
+        move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
+    
     return priority += gBattleMoves[move].priority;
 }
 
@@ -3456,9 +3448,12 @@ u32 CalculateMonSpeed(u8 battler)
         monspeed *= 2;
     if (gBattleMons[battler].ability == ABILITY_SLOW_START && gNewBattleStruct.SlowStartTimers[battler] != 0)
         monspeed /= 2;
+    
+#if BADGE_BOOST
     // badge stat boost
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBattlerSide(battler) == B_SIDE_PLAYER)
         monspeed = (monspeed * 110) / 100;
+#endif
     
     // not used for now
     /*

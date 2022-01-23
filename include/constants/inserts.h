@@ -3,7 +3,6 @@
 #define EXP_BLOCK TRUE //if true go to src/battle_script_commands.c and edit the levels for each badge in sExpBlockLevels.
 #define PAGE_SWAP TRUE //if true auttomaticaly swap the naming screen page on write the first caracter.
 #define NO_HEAL_EGGS TRUE //if true the pokemon center animation don't coun't eggs.
-#define EGG_HATCH_LEVEL_1 TRUE //if true the eggs hatch level becames 1.
 #define POISON_SURVIVAL TRUE //if true the pokemons don't die from poison in the overworld.
 #define SLEEP_UPDATE TRUE //if true the sleep counter last for 1-3 turns instead of 2-5.
 #define PARALYSIS_UPDATE TRUE //if true the speed drop of paralysis will be 50% instead of 75%.

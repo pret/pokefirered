@@ -114,7 +114,6 @@ effects update
 volt tackle by breeding
 light ball update
 altering cave
-hail weather fix
 movement type hidden (0C) fix @next
 exp on catch a mon
 tm's reusaveis

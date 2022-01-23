@@ -5,7 +5,7 @@
 #define WEATHER_SUNNY_CLOUDS       1   // unused
 #define WEATHER_SUNNY              2
 #define WEATHER_RAIN               3   // unused
-#define WEATHER_SNOW               4   // unused
+#define WEATHER_SNOW               4   
 #define WEATHER_RAIN_THUNDERSTORM  5   // unused
 #define WEATHER_FOG_HORIZONTAL     6
 #define WEATHER_VOLCANIC_ASH       7   // unused

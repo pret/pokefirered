@@ -1,8 +1,6 @@
 #ifndef GUARD_DAYCARE_CONSTANTS_H
 #define GUARD_DAYCARE_CONSTANTS_H
 
-#include "constants/inserts.h"
-
 // Parent compatibility scores
 #define PARENTS_INCOMPATIBLE       0
 #define PARENTS_LOW_COMPATIBILITY  20
@@ -16,11 +14,7 @@
 #define DAYCARE_TWO_MONS    3
 
 #define INHERITED_IV_COUNT 3
-#if EGG_HATCH_LEVEL_1
-#define EGG_HATCH_LEVEL 1
-#else
 #define EGG_HATCH_LEVEL 5
-#endif
 #define EGG_GENDER_MALE 0x8000  // used to create a male egg from a female-only parent species (e.g. Nidoran)
 
 #define DAYCARE_LEVEL_MENU_EXIT 5

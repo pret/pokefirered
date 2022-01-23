@@ -2432,11 +2432,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     {
         if (attackerHoldEffect == sHoldEffectToType[i][0] && type == sHoldEffectToType[i][1])
         {
-            if (split == MOVE_PHYSICAL)
-                attack = (attack * (attackerHoldEffectParam + 100)) / 100;
-            else
-                spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
-            break;
+		attack = (attack * (attackerHoldEffectParam + 100)) / 100;
+		spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
+		break;
         }
     }
 	// attacker items check

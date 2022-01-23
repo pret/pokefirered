@@ -2626,7 +2626,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             attack /= 2;
    
-	if (split == MOVE_PHYSICAL)
+	if (IS_TYPE_PHYSICAL(split))
 	{
 		damage = attack;
 		damageHelper = defense;

@@ -506,7 +506,6 @@ void HandleInputChooseMove(void)
         BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
         PlayerBufferExecCompleted();
         ResetPaletteFadeControl();
-        MoveSelectionDisplayMoveType();
         BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
     }
     else if (JOY_NEW(DPAD_LEFT))
@@ -573,7 +572,6 @@ void HandleInputChooseMove(void)
             else
                 gMultiUsePlayerCursor = gMoveSelectionCursor[gActiveBattler] + 1;
             MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 27);
-            MoveSelectionDisplayMoveType();
             BattlePutTextOnWindow(gText_BattleSwitchWhich, 0xB);
             gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitching;
         }

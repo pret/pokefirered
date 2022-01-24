@@ -8765,6 +8765,7 @@ static void atkD3_trycopyability(void) // role play
     {
         gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+	ResetVarsForAbilityChange(gBattlerAttacker);
         gBattlescriptCurrInstr += 5;
     }
     else

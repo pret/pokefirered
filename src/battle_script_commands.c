@@ -2876,8 +2876,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         u16 *changedItem = &gBattleStruct->changedItems[gBattlerAttacker];
                         gLastUsedItem = *changedItem = gBattleMons[gBattlerTarget].item;
                         gBattleMons[gBattlerTarget].item = ITEM_NONE;
-			HandleUnburdenBoost(gBattlerTarget); // try give target unburden boost
-			HandleUnburdenBoost(gBattlerAttacker); // try remove attacker's unburden boost
+			TryGiveUnburdenBoostToMon(gBattlerTarget); // try give target unburden boost
+			TryGiveUnburdenBoostToMon(gBattlerAttacker); // try remove attacker's unburden boost
                         gActiveBattler = gBattlerAttacker;
                         BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
                         MarkBattlerForControllerExec(gBattlerAttacker);

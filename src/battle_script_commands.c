@@ -2966,6 +2966,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     side = GetBattlerSide(gEffectBattler);
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = ITEM_NONE;
+		    HandleUnburdenBoost(gEffectBattler); // try give target unburden boost
                     gWishFutureKnock.knockedOffMons[side] |= gBitTable[gBattlerPartyIndexes[gEffectBattler]];
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_KnockedOff;

@@ -218,6 +218,12 @@ bool8 WasUnableToUseMove(u8 battler)
         return FALSE;
 }
 
+void TryGiveUnburdenBoostToMon(u8 battler)
+{
+	if (gBattleMons[battler].ability == ABILITY_UNBURDEN && !gBattleMons[battler].item)
+		
+}
+
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
     gActiveBattler = battler;

@@ -2264,7 +2264,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                  && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
                  && TARGET_TURN_DAMAGED
                  && (gBattleMoves[moveArg].flags & FLAG_MAKES_CONTACT)
-		 && 
+		 && !SubsBlockMove(gBattlerTarget, gBattlerAttacker, moveArg);
 		 && !gBattleMons[gBattlerTarget].item
 		 && gBattleMons[gBattlerTarget].hp != 0
 		 && gBattleMons[gBattlerAttacker].ability != ABILITY_STICKY_HOLD
@@ -2274,6 +2274,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 			u16 *changedItem = &gBattleStruct->changedItems[gBattlerTarget];
                         gLastUsedItem = *changedItem = gBattleMons[gBattlerAttacker].item;
                         gBattleMons[gBattlerAttacker].item = ITEM_NONE;
+			
                         gActiveBattler = gBattlerTarget;
                         BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
                         MarkBattlerForControllerExec(gBattlerTarget);

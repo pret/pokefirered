@@ -221,7 +221,7 @@ bool8 WasUnableToUseMove(u8 battler)
 void ResetVarsForAbilityChange(u8 battler)
 {
 	TryRemoveMonUnburdenBoost(battler);
-	gNewBattleStruct.
+	gNewBattleStruct.SlowStartTimers[battler] = 0;
 }
 
 u8 FindMonAbilityInBattle(u8 battler)

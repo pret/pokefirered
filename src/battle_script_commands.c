@@ -8731,6 +8731,8 @@ static void atkD2_tryswapitems(void) // trick
             *newItemAtk = gBattleMons[gBattlerTarget].item;
             gBattleMons[gBattlerAttacker].item = 0;
             gBattleMons[gBattlerTarget].item = oldItemAtk;
+	    TryGiveUnburdenBoostToMon(gBattlerAttacker);
+	    TryGiveUnburdenBoostToMon(gBattlerTarget);
             gActiveBattler = gBattlerAttacker;
             BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, newItemAtk);
             MarkBattlerForControllerExec(gBattlerAttacker);

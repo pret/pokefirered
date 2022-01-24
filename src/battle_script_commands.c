@@ -70,7 +70,6 @@ static void PutMonIconOnLvlUpBox(void);
 static void PutMonIconOnPopUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static void AnimAbilityPopUpBoxAsm(void);
-static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
 static void MaxAttackAngerPointAsm(void);

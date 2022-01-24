@@ -2219,6 +2219,7 @@ static void BattleStartClearSetData(void)
         gLastPrintedMoves[i] = MOVE_NONE;
         gBattleResources->flags->flags[i] = 0;
         gNewBattleStruct.SlowStartTimers[i] = 0;
+        gNewBattleStruct.UnburdenBoostBits &= ~(gBitTable[i]);
     }
     for (i = 0; i < 2; ++i)
     {

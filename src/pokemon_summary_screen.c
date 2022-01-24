@@ -4361,15 +4361,14 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
 static void DisplayMoveSplitIcon(void)
 {
 	u16 split;
-	u32 arg2 = 0x06001800;
 	
 	if (sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] != MOVE_NONE)
 	{
 		split = gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].split;
 		split = (split * 3) * 64;
 		
-		CpuSet2(sSplitIconGfx + split, arg2, 48);
-		CpuSet2(sSplitIconGfx + split + 96, arg2 + 0x1E0, 48);
+		BlitBitmapRectToWindow(4, sSplitIconGfx + split, 0, 0, 128, 128, 88, 0, 24, 8);
+		BlitBitmapRectToWindow(4, sSplitIconGfx + split + 96, 0, 0, 128, 128, 88, 8, 24, 8);
 	}
 }
 

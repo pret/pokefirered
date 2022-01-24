@@ -218,15 +218,25 @@ bool8 WasUnableToUseMove(u8 battler)
         return FALSE;
 }
 
-void TryGiveUnburdenBoostToMon(u8 battler)
+u8 FindMonAbilityInBattle(u8 battler)
 {
 	if (!gBattleMons[battler].ability)
 	{
-		if (gNewBattleStruct.)
-			
+		if (gNewBattleStruct.IgnoredAbilities[battler])
+			return gNewBattleStruct.IgnoredAbilities[battler];
+		else
+			return GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
 	}
-	else if (gBattleMons[battler].ability == ABILITY_UNBURDEN && !gBattleMons[battler].item)
+	else
+		return gBattleMons[battler].ability;
+}
+
+void TryGiveUnburdenBoostToMon(u8 battler)
+{
+	if (gBattleMons[battler].ability == ABILITY_UNBURDEN && !gBattleMons[battler].item)
 		gNewBattleStruct.UnburdenBoostBits |= gBitTable[battler];
+	else if (FindMonAbilityInBattle(battler) != ABILITY_UNBURDEN || gBattleMons[battler].item)
+		gNewBattleStruct.UnburdenBoostBits &= ~(gBitTable[battler]);
 }
 
 void PrepareStringBattle(u16 stringId, u8 battler)

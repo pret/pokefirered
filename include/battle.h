@@ -457,6 +457,7 @@ struct NewBattleStruct
 {
     u8 IgnoredAbilities[MAX_BATTLERS_COUNT];
     u8 SlowStartTimers[MAX_BATTLERS_COUNT];
+    u8 UnburdenBoostBits;
 };
 
 extern struct BattleStruct *gBattleStruct;

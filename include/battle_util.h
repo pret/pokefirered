@@ -88,7 +88,7 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
-static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
+bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move);
 u8 GetHiddenPowerType(struct Pokemon *mon);
 bool8 IsItemAffectedByGluttony(u16 Item);
 void TryGiveUnburdenBoostToMon(u8 battler);

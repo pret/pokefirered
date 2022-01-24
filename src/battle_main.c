@@ -3448,6 +3448,8 @@ u32 CalculateMonSpeed(u8 battler)
         monspeed *= 2;
     if (gBattleMons[battler].ability == ABILITY_SLOW_START && gNewBattleStruct.SlowStartTimers[battler] != 0)
         monspeed /= 2;
+    if (gBattleMons[battler].ability == ABILITY_UNBURDEN && !gBattleMons[battler].item && gNewBattleStruct.UnburdenBoostBits & gBitTable[battler])
+        monspeed *= 2;
     
 #if BADGE_BOOST
     // badge stat boost

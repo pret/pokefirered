@@ -218,12 +218,6 @@ bool8 WasUnableToUseMove(u8 battler)
         return FALSE;
 }
 
-void ResetVarsForAbilityChange(u8 battler)
-{
-	TryRemoveMonUnburdenBoost(battler);
-	gNewBattleStruct.SlowStartTimers[battler] = 0;
-}
-
 u8 FindMonAbilityInBattle(u8 battler)
 {
 	if (!gBattleMons[battler].ability)
@@ -237,6 +231,19 @@ u8 FindMonAbilityInBattle(u8 battler)
 		return gBattleMons[battler].ability;
 }
 
+void TryRemoveMonUnburdenBoost(u8 battler)
+{
+	// used in abilities change
+	if (FindMonAbilityInBattle(battler) != ABILITY_UNBURDEN || gBattleMons[battler].item)
+		gNewBattleStruct.UnburdenBoostBits &= ~(gBitTable[battler]);
+}
+
+void ResetVarsForAbilityChange(u8 battler)
+{
+	TryRemoveMonUnburdenBoost(battler);
+	gNewBattleStruct.SlowStartTimers[battler] = 0;
+}
+
 void TryGiveUnburdenBoostToMon(u8 battler)
 {
 	// used in items change
@@ -244,13 +251,6 @@ void TryGiveUnburdenBoostToMon(u8 battler)
 		gNewBattleStruct.UnburdenBoostBits |= gBitTable[battler];
 	else
 		TryRemoveMonUnburdenBoost(battler);
-}
-
-void TryRemoveMonUnburdenBoost(u8 battler)
-{
-	// used in abilities change
-	if (FindMonAbilityInBattle(battler) != ABILITY_UNBURDEN || gBattleMons[battler].item)
-		gNewBattleStruct.UnburdenBoostBits &= ~(gBitTable[battler]);
 }
 
 void PrepareStringBattle(u16 stringId, u8 battler)

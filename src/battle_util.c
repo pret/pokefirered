@@ -2268,21 +2268,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		 && !gBattleMons[gBattlerTarget].item
 		 && gBattleMons[gBattlerTarget].hp != 0
 		 && gBattleMons[gBattlerAttacker].ability != ABILITY_STICKY_HOLD
-		 && gBattleMons[gBattlerAttacker].item
-		 && !IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item))
+		 && gBattleMons[gBattlerAttacker].item)
                 {
-			u16 *changedItem = &gBattleStruct->changedItems[gBattlerTarget];
-                        gLastUsedItem = *changedItem = gBattleMons[gBattlerAttacker].item;
-                        gBattleMons[gBattlerAttacker].item = ITEM_NONE;
-			
-                        gActiveBattler = gBattlerTarget;
-                        BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
-                        MarkBattlerForControllerExec(gBattlerTarget);
-                        gActiveBattler = gBattlerAttacker;
-                        BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerAttacker].item);
-                        MarkBattlerForControllerExec(gBattlerAttacker);
-                        *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 0) = 0;
-                        *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 1) = 0;
+			gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_STEAL_ITEM;
 			BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_Pickpocket;
 			++effect;

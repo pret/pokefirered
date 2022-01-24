@@ -2441,6 +2441,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
     gNewBattleStruct.SlowStartTimers[gActiveBattler] = 0;
+    gNewBattleStruct.UnburdenBoostBits &= ~(gBitTable[gActiveBattler]);
     gLastMoves[gActiveBattler] = MOVE_NONE;
     gLastLandedMoves[gActiveBattler] = MOVE_NONE;
     gLastHitByType[gActiveBattler] = MOVE_NONE;

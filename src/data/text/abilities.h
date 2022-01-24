@@ -122,6 +122,7 @@ static const u8 sRecklessDescription[] =     _("Ups “crash” and “recoil”
 static const u8 sMultitypeDescription[] =    _("Changes form based on item.");
 static const u8 sFlowerGiftDescription[] =   _("Ups party stats in sunlight.");
 static const u8 sBadDreamsDescription[] =    _("Damage sleeping foes.");
+static const u8 sPickpocketDescription[] =   _("Steal item on contact.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -249,6 +250,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MULTITYPE] = sMultitypeDescription,
     [ABILITY_FLOWER_GIFT] = sFlowerGiftDescription,
     [ABILITY_BAD_DREAMS] = sBadDreamsDescription,
+    [ABILITY_PICKPOCKET] = sPickpocketDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -377,4 +379,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MULTITYPE] = _("MULTITYPE"),
     [ABILITY_FLOWER_GIFT] = _("FLOWER GIFT"),
     [ABILITY_BAD_DREAMS] = _("BAD DREAMS"),
+    [ABILITY_PICKPOCKET] = _("PICKPOCKET"),
 };

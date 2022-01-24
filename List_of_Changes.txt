@@ -74,7 +74,8 @@ Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega
 
 // Needing put in
 make all multitype,storm drain and unburden effect(its only set in the defines, need make its code)
-make slow start special iteration with z-moves and remove counter when ability change or supression
+make slow start special iteration with z-moves 
+remove slow start and unburden counters when ability change or supression
 make flower gift form change
 check if sniper is corrected
 end's ability pop up scripts and asms

@@ -1713,10 +1713,10 @@ static bool8 MakesSound(u16 move)
 
 static bool8 SubsBlockMove(u8 attacker, u8 defender, u16 move) 
 {
-if (!(gBattleMons[defender].status2 & STATUS2_SUBSTITUTE) || MakesSound(move)) //add check for infiltrator here
-        return FALSE;
-else
-        return TRUE;
+	if (!(gBattleMons[defender].status2 & STATUS2_SUBSTITUTE) || MakesSound(move)) //add check for infiltrator here
+		return FALSE;
+	else
+		return TRUE;
 }
 
 static void atk07_adjustnormaldamage(void)

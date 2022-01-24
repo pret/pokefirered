@@ -2264,7 +2264,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                  && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
                  && TARGET_TURN_DAMAGED
                  && (gBattleMoves[moveArg].flags & FLAG_MAKES_CONTACT)
-		 && !SubsBlockMove(gBattlerTarget, gBattlerAttacker, moveArg)
+		 && !SubsBlockMove(gBattlerAttacker, gBattlerTarget, moveArg)
 		 && !gBattleMons[gBattlerTarget].item
 		 && gBattleMons[gBattlerTarget].hp != 0
 		 && gBattleMons[gBattlerAttacker].ability != ABILITY_STICKY_HOLD

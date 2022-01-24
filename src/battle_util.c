@@ -220,8 +220,13 @@ bool8 WasUnableToUseMove(u8 battler)
 
 void TryGiveUnburdenBoostToMon(u8 battler)
 {
-	if (gBattleMons[battler].ability == ABILITY_UNBURDEN && !gBattleMons[battler].item)
-		
+	if (!gBattleMons[battler].ability)
+	{
+		if (gNewBattleStruct.)
+			
+	}
+	else if (gBattleMons[battler].ability == ABILITY_UNBURDEN && !gBattleMons[battler].item)
+		gNewBattleStruct.UnburdenBoostBits |= gBitTable[battler];
 }
 
 void PrepareStringBattle(u16 stringId, u8 battler)

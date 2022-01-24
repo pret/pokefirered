@@ -65,6 +65,7 @@ tangled feet
 technician
 tinted lens
 unaware
+pickpocket
 
 // WARNING
 Klutz don't affect prize money, experience, effort values or friendship.

@@ -8885,7 +8885,9 @@ static void atkDA_tryswapabilities(void) // skill swap
         
         gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
         gBattleMons[gBattlerTarget].ability = abilityAtk;
-
+        ResetVarsForAbilityChange(gBattlerAttacker);
+	ResetVarsForAbilityChange(gBattlerTarget);
+	    
             gBattlescriptCurrInstr += 5;
     }
 }

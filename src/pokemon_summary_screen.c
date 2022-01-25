@@ -4388,7 +4388,6 @@ static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)
     {
         if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
         {
-	    DisplayMoveSplitIcon();
             sMoveSelectionCursorObjs[0]->sprite->invisible = FALSE;
             sMoveSelectionCursorObjs[1]->sprite->invisible = FALSE;
         }

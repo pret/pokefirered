@@ -1418,7 +1418,7 @@ static void MoveSelectionDisplayMoveType(void)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     u8 *txtPtr;
-    u8 type, target = 1, effect = 0;
+    u8 type, target = B_POSITION_OPPONENT_LEFT, effect = 0;
     u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     s32 i = 0;
     
@@ -1447,7 +1447,7 @@ static void MoveSelectionDisplayMoveType(void)
         if (gBattlerControllerFuncs[gActiveBattler] == HandleInputChooseTarget)
             target = gMultiUsePlayerCursor;
         else if (gBattleMons[target].hp == 0)
-            target = 3;
+            target = B_POSITION_OPPONENT_RIGHT;
     }
     //get move effectiveness
     while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE && TYPE_EFFECT_ATK_TYPE(i) != TYPE_FORESIGHT)

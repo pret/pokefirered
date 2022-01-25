@@ -4364,16 +4364,11 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
 //Pss Split Icon Loader Function
 static void DisplayMoveSplitIcon(u8 slotId)
 {
-	u16 split;
-	
-	if (sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] != MOVE_NONE)
-	{
-		split = gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].split;
-		split = (split * 3) * 64;
+	u16 split = gBattleMoves[sMonSummaryScreen->moveIds[slotId]].split;
+	split = (split * 3) * 64;
 		
-		BlitBitmapRectToWindow(4, sSplitIconGfx + split, 0, 0, 128, 128, 88, 0, 24, 8);
-		BlitBitmapRectToWindow(4, sSplitIconGfx + split + 96, 0, 0, 128, 128, 88, 8, 24, 8);
-	}
+	BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[5], sSplitIconGfx + split, 0, 0, 128, 128, 7, GetMoveNamePrinterYpos(slotId) + 10, 24, 8);
+	BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[5], sSplitIconGfx + split + 96, 0, 0, 128, 128, 7, GetMoveNamePrinterYpos(slotId) + 18, 24, 8);
 }
 
 static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)

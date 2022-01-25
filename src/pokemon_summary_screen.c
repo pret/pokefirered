@@ -141,7 +141,7 @@ static void PokeSum_DestroyMonMarkingsSprite(void);
 static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
-static void DisplayMoveSplitIcon(void);
+static void DisplayMoveSplitIcon(u8 slotId);
 static u8 GetStatColor(u8 statiD);
 static void PokeSum_PrintMonIvs(void);
 

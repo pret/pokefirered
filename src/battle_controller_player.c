@@ -1404,14 +1404,30 @@ static void MoveSelectionDisplayPpNumber(void)
 
 const u16 sListOfColours[] =
 {
-    0x4BD2, 0x226B,
-    0x37CD, 0x0280,
-    0x47DF, 0x037D,
-    0x3BBF, 0x025F,
-    0x4F7E, 0x211C,
-    0x3B7E, 0x001D,
-    0x5F18, 0x2529,
-    0x3DEF, 0x0000,
+    // super effective colors
+    0x4BD2, 
+    0x226B,
+    // super effective colors + stab
+    0x37CD, 
+    0x0280,
+    // not very effect colors
+    0x47DF, 
+    0x037D,
+    // not very effect colors + stab
+    0x3BBF, 
+    0x025F,
+    // not affect colors
+    0x4F7E, 
+    0x211C,
+    // not affect colors + stab (unused)
+    0x3B7E, 
+    0x001D,
+    // normal colors
+    0x5F18, 
+    0x2529,
+    // normal colors + stab
+    0x3DEF, 
+    0x0000,
 };
 
 static void MoveSelectionDisplayMoveType(void)

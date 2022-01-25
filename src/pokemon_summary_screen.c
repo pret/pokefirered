@@ -3034,10 +3034,14 @@ static void PokeSum_DrawMoveTypeIcons(void)
             continue;
 
         BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[i] + 1, 3, GetMoveNamePrinterYpos(i));
+	DisplayMoveSplitIcon(i);
     }
 
     if (sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
+    {
         BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[4] + 1, 3, GetMoveNamePrinterYpos(4));
+	DisplayMoveSplitIcon(4);
+    }
 }
 
 static void PokeSum_PrintPageHeaderText(u8 curPageIndex)

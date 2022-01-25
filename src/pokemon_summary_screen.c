@@ -4358,7 +4358,7 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
 }
 
 //Pss Split Icon Loader Function
-static void DisplayMoveSplitIcon(void)
+static void DisplayMoveSplitIcon(u8 slotId)
 {
 	u16 split;
 	

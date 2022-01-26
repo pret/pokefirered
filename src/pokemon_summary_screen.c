@@ -3032,13 +3032,13 @@ static void PokeSum_DrawMoveTypeIcons(void)
             continue;
 
         BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[i] + 1, 3, GetMoveNamePrinterYpos(i));
-	DisplayMoveSplitIcon(i);
+	BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], gBattleMoves[sMonSummaryScreen->moveIds[i]].split + 26, 3, GetMoveNamePrinterYpos(i) + 12);
     }
 
     if (sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
     {
         BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], sMonSummaryScreen->moveTypes[4] + 1, 3, GetMoveNamePrinterYpos(4));
-	DisplayMoveSplitIcon(4);
+	BlitMoveInfoIcon(sMonSummaryScreen->windowIds[5], gBattleMoves[sMonSummaryScreen->moveIds[4]].split + 26, 3, GetMoveNamePrinterYpos(4) + 12);
     }
 }
 

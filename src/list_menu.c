@@ -87,7 +87,7 @@ const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
     { 16, 8, 0x128 },       // D IV ranking icon
     { 16, 8, 0x12A },       // D+ IV ranking icon
     { 16, 8, 0x12C },       // C- IV ranking icon
-    { 16, 8, 0x12e },       // C IV ranking icon
+    { 16, 8, 0x12E },       // C IV ranking icon
     { 16, 8, 0x130 },       // C+ IV ranking icon
     { 16, 8, 0x132 },       // B- IV ranking icon
     { 16, 8, 0x134 },       // B IV ranking icon

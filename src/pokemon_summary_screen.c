@@ -141,11 +141,9 @@ static void PokeSum_DestroyMonMarkingsSprite(void);
 static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
-static void DisplayMoveSplitIcon(u8 slotId);
 static u8 GetStatColor(u8 statiD);
 static void PokeSum_PrintMonIvs(void);
 
-static const u8 sSplitIconGfx[] = INCBIN_U8("graphics/new/PssSplitIcon.4bpp");
 static const u8 sIvsRanking[] = INCBIN_U8("graphics/new/IvsRankingIcon.4bpp");
 
 struct PokemonSummaryScreenData
@@ -4359,16 +4357,6 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
     u8 i;
     for (i = 0; i < 4; i++)
         sMoveSelectionCursorObjs[i]->sprite->invisible = invisible;
-}
-
-//Pss Split Icon Loader Function
-static void DisplayMoveSplitIcon(u8 slotId)
-{
-	u16 split = gBattleMoves[sMonSummaryScreen->moveIds[slotId]].split;
-	split = (split * 3) * 64;
-		
-	BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[5], sSplitIconGfx + split, 0, 0, 128, 128, 7, GetMoveNamePrinterYpos(slotId) + 10, 24, 8);
-	BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[5], sSplitIconGfx + split + 96, 0, 0, 128, 128, 7, GetMoveNamePrinterYpos(slotId) + 18, 24, 8);
 }
 
 static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)

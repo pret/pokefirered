@@ -77,9 +77,9 @@ const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
     { 40, 12, 0xE8 },       // -Effect- icon
     { 40, 12, 0x100 },      // -Type- icon
     { 40, 12, 0x108 },      // -Category- icon
-    { 32, 12, 0x4 },        // Physical icon
-    { 32, 12, 0x8 },        // Special icon
-    { 32, 12, 0xC },        // Status icon
+    { 32, 13, 0x4 },        // Physical icon
+    { 32, 13, 0x8 },        // Special icon
+    { 32, 13, 0xC },        // Status icon
 };
 
 static void ListMenuDummyTask(u8 taskId)

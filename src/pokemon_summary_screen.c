@@ -144,8 +144,6 @@ static s8 SeekToNextMonInMultiParty(s8 direction);
 static u8 GetStatColor(u8 statiD);
 static void PokeSum_PrintMonIvs(void);
 
-static const u8 sIvsRanking[] = INCBIN_U8("graphics/new/IvsRankingIcon.4bpp");
-
 struct PokemonSummaryScreenData
 {
     u16 bg1TilemapBuffer[0x800];
@@ -2969,7 +2967,7 @@ static void PokeSum_PrintSelectedMoveStats(void)
 
 const u16 sIvsRakingPosY[] =
 {
-	6, 23, 36, 75, 49, 62,
+   6, 23, 36, 75, 49, 62,
 };
 
 static void PokeSum_PrintMonIvs(void)
@@ -2980,9 +2978,9 @@ static void PokeSum_PrintMonIvs(void)
 	for (i = 0; i < 6; i++)
 	{
 		iv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
-		iv = (iv / 2) * 64;
+		iv /= 2;
 		
-		BlitBitmapRectToWindow(3, sIvsRanking + iv, 0, 0, 128, 128, 12, sIvsRakingPosY[i], 16, 8);
+		BlitMoveInfoIcon(3, iv + 29, 12, sIvsRakingPosY[i]);
 	}
 }
 

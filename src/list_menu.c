@@ -80,6 +80,22 @@ const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
     { 32, 13, 0x4 },        // Physical icon
     { 32, 13, 0x8 },        // Special icon
     { 32, 13, 0xC },        // Status icon
+    { 16, 8, 0x120 },       // E- IV ranking icon
+	{ 16, 8, 0x122 },       // E IV ranking icon
+	{ 16, 8, 0x124 },       // E+ IV ranking icon
+	{ 16, 8, 0x126 },       // D- IV ranking icon
+	{ 16, 8, 0x128 },       // D IV ranking icon
+	{ 16, 8, 0x12A },       // D+ IV ranking icon
+	{ 16, 8, 0x12C },       // C- IV ranking icon
+	{ 16, 8, 0x12e },       // C IV ranking icon
+	{ 16, 8, 0x130 },       // C+ IV ranking icon
+	{ 16, 8, 0x132 },       // B- IV ranking icon
+	{ 16, 8, 0x134 },       // B IV ranking icon
+	{ 16, 8, 0x136 },       // B+ IV ranking icon
+	{ 16, 8, 0x138 },       // A- IV ranking icon
+	{ 16, 8, 0x13A },       // A IV ranking icon
+	{ 16, 8, 0x13C },       // A+ IV ranking icon
+	{ 16, 8, 0x13E },       // S IV ranking icon
 };
 
 static void ListMenuDummyTask(u8 taskId)

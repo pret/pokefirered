@@ -5,6 +5,7 @@
 #include "random.h"
 #include "text.h"
 #include "data.h"
+#include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "item.h"

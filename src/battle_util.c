@@ -3388,7 +3388,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         }
         break;
     case ITEMEFFECT_KINGSROCK_SHELLBELL:
-        if (gBattleMoveDamage)
+        if (gBattleMoveDamage && !RECEIVE_SHEER_FORCE_BOOST(gBattlerAttacker, gCurrentMove))
         {
             switch (atkHoldEffect)
             {

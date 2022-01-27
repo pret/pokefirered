@@ -6787,7 +6787,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             }
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if (gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST && !flags)
+        else if ((gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST || RECEIVE_SHEER_FORCE_BOOST(gBattlerAttacker, gCurrentMove)) && !flags)
         {
             return STAT_CHANGE_DIDNT_WORK;
         }

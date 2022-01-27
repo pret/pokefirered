@@ -2997,25 +2997,25 @@ static void atk15_seteffectwithchance(void)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
-    if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
-     && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && !RECEIVE_SHEER_FORCE_BOOST(gBattlerAttacker, gCurrentMove))
     {
-        gBattleCommunication[MOVE_EFFECT_BYTE] &= ~(MOVE_EFFECT_CERTAIN);
-        SetMoveEffect(0, MOVE_EFFECT_CERTAIN);
-    }
-    else if (Random() % 100 <= percentChance
-          && gBattleCommunication[MOVE_EFFECT_BYTE]
-          && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-    {
-        if (percentChance >= 100)
-            SetMoveEffect(0, MOVE_EFFECT_CERTAIN);
-        else
-            SetMoveEffect(0, 0);
+	    if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN &&)
+	    {
+		    gBattleCommunication[MOVE_EFFECT_BYTE] &= ~(MOVE_EFFECT_CERTAIN);
+		    SetMoveEffect(0, MOVE_EFFECT_CERTAIN);
+	    }
+	    else if (Random() % 100 <= percentChance && gBattleCommunication[MOVE_EFFECT_BYTE])
+	    {
+		    if (percentChance >= 100)
+			    SetMoveEffect(0, MOVE_EFFECT_CERTAIN);
+		    else
+			    SetMoveEffect(0, 0);
+	    }
+	    else
+		    ++gBattlescriptCurrInstr;
     }
     else
-    {
-        ++gBattlescriptCurrInstr;
-    }
+	    ++gBattlescriptCurrInstr;
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattleScripting.multihitMoveEffect = 0;
 }

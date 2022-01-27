@@ -119,7 +119,7 @@ const u16 gSheerForceBoostedMoves[] =
 	MOVE_TRI_ATTACK,
 	MOVE_TWINEEDLE,
 	MOVE_VOLT_TACKLE,
-	
+	TABLE_END,
 };
 
 #define RECEIVE_SHEER_FORCE_BOOST(battler, move)((gBattleMons[battler].ability == ABILITY_SHEER_FORCE) && (IsMoveInTable(gSheerForceBoostedMoves, move)))

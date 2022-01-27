@@ -2351,6 +2351,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		 && !SubsBlockMove(gBattlerAttacker, gBattlerTarget, moveArg)
 		 && !gBattleMons[gBattlerTarget].item
 		 && gBattleMons[gBattlerTarget].hp != 0
+		 && !RECEIVE_SHEER_FORCE_BOOST(gBattlerAttacker, moveArg)
 		 && gBattleMons[gBattlerAttacker].ability != ABILITY_STICKY_HOLD
 		 && gBattleMons[gBattlerAttacker].item)
                 {

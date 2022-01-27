@@ -2443,11 +2443,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     switch (attackerHoldEffect)
     {
 	    case HOLD_EFFECT_CHOICE_BAND:
-		    attack = (150 * attack) / 100;
+		    attack = (15 * attack) / 10;
 		    break;
 	    case HOLD_EFFECT_SOUL_DEW:
 		    if (!(gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER)) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
-			    spAttack = (150 * spAttack) / 100;
+			    spAttack = (15 * spAttack) / 10;
 		    break;
 	    case HOLD_EFFECT_DEEP_SEA_TOOTH:
 		    if (attacker->species == SPECIES_CLAMPERL)
@@ -2467,7 +2467,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     {
 	    case HOLD_EFFECT_SOUL_DEW:
 		    if (!(gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER)) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
-			    spDefense = (150 * spDefense) / 100;
+			    spDefense = (15 * spDefense) / 10;
 		    break;
 	    case HOLD_EFFECT_DEEP_SEA_SCALE:
 		    if (defender->species == SPECIES_CLAMPERL)
@@ -2486,47 +2486,47 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		    attack *= 2;
 		    break;
 	    case ABILITY_HUSTLE:
-		    attack = (150 * attack) / 100;
+		    attack = (15 * attack) / 10;
 		    break;
 	    case ABILITY_PLUS:
 		    if (ABILITY_ON_FIELD2(ABILITY_MINUS))
-			    spAttack = (150 * spAttack) / 100;
+			    spAttack = (15 * spAttack) / 10;
 		    break;
 	    case ABILITY_MINUS:
 		    if (ABILITY_ON_FIELD2(ABILITY_PLUS))
-			    spAttack = (150 * spAttack) / 100;
+			    spAttack = (15 * spAttack) / 10;
 		    break;
 	    case ABILITY_GUTS:
 		    if (attacker->status1)
-			    attack = (150 * attack) / 100;
+			    attack = (15 * attack) / 10;
 		    break;
 	    case ABILITY_OVERGROW:
 		    if (type == TYPE_GRASS && attacker->hp <= (attacker->maxHP / 3))
-			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+			    gBattleMovePower = (15 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_BLAZE:
 		    if (type == TYPE_FIRE && attacker->hp <= (attacker->maxHP / 3))
-			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+			    gBattleMovePower = (15 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_TORRENT:
 		    if (type == TYPE_WATER && attacker->hp <= (attacker->maxHP / 3))
-			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+			    gBattleMovePower = (15 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_SWARM:
 		    if (type == TYPE_BUG && attacker->hp <= (attacker->maxHP / 3))
-			    gBattleMovePower = (150 * gBattleMovePower) / 100;
+			    gBattleMovePower = (15 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_NORMALIZE:
 		    if (!IsMoveInTable(gNoChangeTypeMoves, move))
-			    gBattleMovePower = (120 * gBattleMovePower) / 100;
+			    gBattleMovePower = (12 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_IRON_FIST:
 		    if (IsMoveInTable(sIronFistTable, move))
-			    gBattleMovePower = (120 * gBattleMovePower) / 100;
+			    gBattleMovePower = (12 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_RECKLESS:
 		    if (IsMoveInTable(sRecklessTable, move))
-			    gBattleMovePower = (120 * gBattleMovePower) / 100;
+			    gBattleMovePower = (12 * gBattleMovePower) / 10;
 		    break;
 	    case ABILITY_RIVALRY:
 		    attackerGender = GetGenderFromSpeciesAndPersonality(attacker->species, attacker->personality);
@@ -2550,7 +2550,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		    break;
 	    case ABILITY_SOLAR_POWER:
 		    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY)
-			    spAttack = (150 * spAttack) / 100;
+			    spAttack = (15 * spAttack) / 10;
 		    break;
 	    case ABILITY_TECHNICIAN:
 		    if (gBattleMovePower <= 60)
@@ -2559,6 +2559,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 	    case ABILITY_TINTED_LENS:
 		    if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
 			    gBattleMovePower *= 2;
+		    break;
+	    case ABILITY_SHEER_FORCE:
+		    if (IsMoveInTable(gSheerForceBoostedMoves, move))
+			    gBattleMovePower = (gBattleMovePower * 12) / 10;
 		    break;
     }
 	// defender abilities check
@@ -2573,7 +2577,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 		    break;
 	    case ABILITY_MARVEL_SCALE:
 		    if (defender->status1)
-			    defense = (150 * defense) / 100;
+			    defense = (15 * defense) / 10;
 		    break;
 	    case ABILITY_HEATPROOF:
 		    if (type == TYPE_FIRE)
@@ -2604,7 +2608,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (gBattleWeather & WEATHER_SANDSTORM_ANY && IS_BATTLER_OF_TYPE(battlerIdDef, TYPE_ROCK))
 	{
 		spDefense += spDefense / 2;
-		spAttack = (100 * spAttack) / 150;
+		spAttack = (10 * spAttack) / 15;
 	}
 	    
         if (gBattleWeather & WEATHER_SUN_ANY)
@@ -2677,30 +2681,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         else
             damage /= 2;
     }
-          i = 1;
-    
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) 
-    {
-        if (gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) > i)
-            damage -= damage / 4;
-        if (gBattleMoves[move].target == 50) 
-        {
-            i = 2;
-            
-            if (gBattleMoves[move].effect != EFFECT_EXPLOSION) 
-            {
-                if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > i)
-                    damage -= damage / 4;
-            } 
-            else
-            {
-                i = 3;
-                   
-                if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > i)
-                    damage -= damage / 4;
-            }    
-        }
-    }
+       
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) > 1) 
+	    damage -= damage / 4;
+	
     // are effects of weather negated with cloud nine or air lock
     if (WEATHER_HAS_EFFECT2)
     {
@@ -2731,13 +2715,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
         }
         // any weather except sun weakens solar beam
-        if ((gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL)) && 
-            gCurrentMove == MOVE_SOLAR_BEAM)
+        if ((gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
             damage /= 2;
     }
     // flash fire triggered
-    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && 
-        type == TYPE_FIRE)
+    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
         damage = (15 * damage) / 10;
     
     return damage + 2;     

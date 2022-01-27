@@ -3082,7 +3082,7 @@ static void atk15_seteffectwithchance(void)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && !RECEIVE_SHEER_FORCE_BOOST(gBattlerAttacker, gCurrentMove))
     {
-	    if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN &&)
+	    if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN)
 	    {
 		    gBattleCommunication[MOVE_EFFECT_BYTE] &= ~(MOVE_EFFECT_CERTAIN);
 		    SetMoveEffect(0, MOVE_EFFECT_CERTAIN);

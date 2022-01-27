@@ -76,6 +76,7 @@ Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega
 // Needing put in
 make all multitype,storm drain and unburden effect(its only set in the defines, need make its code)
 make slow start special iteration with z-moves 
+make sheer force special iteration with max moves and affect other effects
 remove slow start and unburden counters when ability change or supression
 make flower gift form change
 check if sniper is corrected
@@ -86,6 +87,7 @@ add the new moves in get forewarn move power
 add the new moves in sIronFistTable
 add the new moves in sRecklessTable
 add the new moves in gnochangetypemoves
+add the new moves in gSheerForceBoostedMoves
 add berries in is item affected by gluttony
 add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb

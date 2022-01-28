@@ -10095,7 +10095,10 @@ static void DoAftermathDamageAsm(void)
 
 static void MaxAttackAngerPointAsm(void)
 {
-	gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
+	if (gBattleMons[gBattlerTarget].ability != ABILITY_CONTRARY)
+		gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
+	else
+		gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0;
 }
 
 static bool8 AnticipationTypeCalc(u8 battler)

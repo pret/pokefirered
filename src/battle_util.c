@@ -39,6 +39,7 @@ static const u8 sSlowStartStartString[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget
 static const u8 sSlowStartEndString[] = _("{B_ATK_NAME_WITH_PREFIX} got its\nact together!");
 static const u8 sSnowWarningString[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it hail!");
 static const u8 sSteadfastString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its SPEED!");
+static const u8 sUnnerveString[] = _("The opposing team is too\nnervous to eat berries!"); // make get battler side
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -1876,7 +1877,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 		gSetWordLoc = sSlowStartStartString;
 		BattleScriptPushCursorAndCallback(BattleScript_DisplaySwitchInMsg);
 		++effect;
-		break;    
+		break;
+	    case ABILITY_UNNERVE:
+	        gSetWordLoc = sUnnerveString;
+		BattleScriptPushCursorAndCallback(BattleScript_DisplaySwitchInMsg);
+		++effect;
+		break;	    
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1

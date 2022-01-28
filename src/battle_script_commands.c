@@ -8420,15 +8420,16 @@ static void atkBC_maxattackhalvehp(void) // belly drum
 {
     u32 halfHp = gBattleMons[gBattlerAttacker].maxHP / 2;
 
-    if (!(gBattleMons[gBattlerAttacker].maxHP / 2))
+    if (halfHp == 0)
         halfHp = 1;
-    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < 12
+    if (STAT_CAN_RAISE(gBattlerAttacker, STAT_ATK)
      && gBattleMons[gBattlerAttacker].hp > halfHp)
     {
-        gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 12;
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
+	if (gBattleMons[gBattlerAttacker].ability != ABILITY_CONTRARY)
+		gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 12;
+	else
+		gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 0;
+        gBattleMoveDamage = halfHp;
         gBattlescriptCurrInstr += 5;
     }
     else

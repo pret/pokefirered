@@ -3332,31 +3332,38 @@ static void atk20_jumpifstat(void)
     u8 ret = 0;
     u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     u8 value = gBattleMons[battlerId].statStages[gBattlescriptCurrInstr[3]];
-
+    s8 comparer = gBattlescriptCurrInstr[4];
+	
+    if (gBattleMons[battlerId].ability == ABILITY_CONTRARY)
+    {
+	    comparer -= 12;
+	    comparer *= -1;
+    }
+	
     switch (gBattlescriptCurrInstr[2])
     {
     case CMP_EQUAL:
-        if (value == gBattlescriptCurrInstr[4])
+        if (value == comparer)
             ++ret;
         break;
     case CMP_NOT_EQUAL:
-        if (value != gBattlescriptCurrInstr[4])
+        if (value != comparer)
             ++ret;
         break;
     case CMP_GREATER_THAN:
-        if (value > gBattlescriptCurrInstr[4])
+        if (value > comparer)
             ++ret;
         break;
     case CMP_LESS_THAN:
-        if (value < gBattlescriptCurrInstr[4])
+        if (value < comparer)
             ++ret;
         break;
     case CMP_COMMON_BITS:
-        if (value & gBattlescriptCurrInstr[4])
+        if (value & comparer)
             ++ret;
         break;
     case CMP_NO_COMMON_BITS:
-        if (!(value & gBattlescriptCurrInstr[4]))
+        if (!(value & comparer))
             ++ret;
         break;
     }

@@ -1727,7 +1727,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 	  || gLastUsedAbility == ABILITY_ANTICIPATION
 	  || gLastUsedAbility == ABILITY_DOWNLOAD
 	  || gLastUsedAbility == ABILITY_FOREWARN
-	  || gLastUsedAbility == ABILITY_FRISK))
+	  || gLastUsedAbility == ABILITY_FRISK
+	  || gLastUsedAbility == ABILITY_UNNERVE))
             return effect;
         switch (caseID)
         {

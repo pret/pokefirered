@@ -40,8 +40,6 @@ static const u8 sSlowStartEndString[] = _("{B_ATK_NAME_WITH_PREFIX} got its\nact
 static const u8 sSnowWarningString[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it hail!");
 static const u8 sSteadfastString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its SPEED!");
 
-#define RECEIVE_SHEER_FORCE_BOOST(battler, move)((gBattleMons[battler].ability == ABILITY_SHEER_FORCE) && (IsMoveInTable(gSheerForceBoostedMoves, move)))
-
 u8 GetBattlerForBattleScript(u8 caseId)
 {
     u32 ret = 0;

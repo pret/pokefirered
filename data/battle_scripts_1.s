@@ -1794,7 +1794,7 @@ BattleScript_EffectBellyDrum::
 	waitanimation
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
-	jumpifability BS_ATTACKER, ABILITY_CONTRARY, BattleScript_BellyDrumContraryMessage
+        jumpifability BS_ATTACKER, ABILITY_CONTRARY, BattleScript_BellyDrumContraryMessage
 	printstring STRINGID_PKMNCUTHPMAXEDATTACK
 	
 BattleScript_BellyDrumPrintString::
@@ -1802,8 +1802,7 @@ BattleScript_BellyDrumPrintString::
 	goto BattleScript_MoveEnd
 
 BattleScript_BellyDrumContraryMessage::
-        setword 
-	printstring
+	printstring STRINGID_SETWORDSTRING
 	goto BattleScript_BellyDrumPrintString
 
 BattleScript_EffectPsychUp::

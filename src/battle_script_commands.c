@@ -55,6 +55,7 @@ static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!")
 static const u8 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sForewarnString[] = _("It was alerted to\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
 static const u8 sFriskString[] = _("{B_ATK_NAME_WITH_PREFIX} frisked {B_DEF_NAME_WITH_PREFIX}\nand found its {B_LAST_ITEM}!");
+static const u8 sBellyDrumContraryString[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand minimized ATTACK!");
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -8427,7 +8428,10 @@ static void atkBC_maxattackhalvehp(void) // belly drum
 	if (gBattleMons[gBattlerAttacker].ability != ABILITY_CONTRARY)
 		gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 12;
 	else
+	{
 		gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 0;
+		gSetWordLoc = sBellyDrumContraryString;
+	}
         gBattleMoveDamage = halfHp;
         gBattlescriptCurrInstr += 5;
     }

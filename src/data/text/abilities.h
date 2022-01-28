@@ -125,6 +125,7 @@ static const u8 sBadDreamsDescription[] =    _("Damage sleeping foes.");
 static const u8 sPickpocketDescription[] =   _("Steal item on contact.");
 static const u8 sSheerForceDescription[] =   _("Removes added effects to up damage.");
 static const u8 sContraryDescription[] =     _("Inverts stat change effects.");
+static const u8 sUnnerveDescription[] =      _("Makes the foe nervous to eat berries.");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -255,6 +256,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_PICKPOCKET] = sPickpocketDescription,
     [ABILITY_SHEER_FORCE] = sSheerForceDescription,
     [ABILITY_CONTRARY] = sContraryDescription,
+    [ABILITY_UNNERVE] = sUnnerveDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -386,4 +388,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_PICKPOCKET] = _("PICKPOCKET"),
     [ABILITY_SHEER_FORCE] = _("SHEER FORCE"),
     [ABILITY_CONTRARY] = _("CONTRARY"),
+    [ABILITY_UNNERVE] = _("UNNERVE"),
 };

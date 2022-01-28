@@ -4377,7 +4377,7 @@ static void atk49_moveend(void)
              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && gBattleMoves[gCurrentMove].power
-             && gBattleMons[gBattlerTarget].statStages[STAT_ATK] <= 0xB)
+             && STAT_CAN_RAISE(gBattlerTarget, STAT_ATK))
             {
 		++gBattleMons[gBattlerTarget].statStages[STAT_ATK]; 
 		BattleScriptPushCursor();

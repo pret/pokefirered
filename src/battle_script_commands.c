@@ -8223,8 +8223,7 @@ static void atkB3_rolloutdamagecalculation(void)
 
 static void atkB4_jumpifconfusedandstatmaxed(void)
 {
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION
-     && gBattleMons[gBattlerTarget].statStages[gBattlescriptCurrInstr[1]] == 12)
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION && !STAT_CAN_RAISE(gBattlerTarget, gBattlescriptCurrInstr[1]))
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
     else
         gBattlescriptCurrInstr += 6;

@@ -2974,12 +2974,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_RANDOM_STAT_UP:
                 if (!moveTurn && gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam)
                 {
-                    for (i = 0; i < 5 && gBattleMons[battlerId].statStages[STAT_ATK + i] >= 0xC; ++i);
+                    for (i = 0; i < 5 && !STAT_CAN_RAISE(battlerId, STAT_ATK + i); ++i);
                     if (i != 5)
                     {
                         do
                             i = Random() % 5;
-                        while (gBattleMons[battlerId].statStages[STAT_ATK + i] == 0xC);
+                        while (!STAT_CAN_RAISE(battlerId, STAT_ATK + i));
                         PREPARE_STAT_BUFFER(gBattleTextBuff1, i + 1);
                         gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
                         gBattleTextBuff2[1] = B_BUFF_STRING;

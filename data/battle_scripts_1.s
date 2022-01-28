@@ -3340,9 +3340,24 @@ BattleScript_MistProtected::
 	return
 
 BattleScript_RageIsBuilding::
+        setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange STAT_CHANGE_BS_PTR BattleScript_RageIsBuildingReturn
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 2, BattleScript_RageIsBuildingReturn
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_RageIsBuildingContraryMessage
+	
+BattleScript_RageIsBuildingMessage::
 	printstring STRINGID_PKMNRAGEBUILDING
 	waitmessage 0x40
+	
+BattleScript_RageIsBuildingReturn::
 	return
+
+BattleScript_RageIsBuildingContraryMessage::
+        printfromtable gStatDownStringIds
+	waitmessage 0x40
+	goto BattleScript_RageIsBuildingMessage
 
 BattleScript_MoveUsedIsDisabled::
 	printstring STRINGID_PKMNMOVEISDISABLED

@@ -4238,7 +4238,15 @@ static void atk48_playstatchangeanimation(void)
     statsToCheck = gBattlescriptCurrInstr[2];
 	
     if (gBattleMons[gActiveBattler].ability == ABILITY_SIMPLE)
-	 flag |= ATK48_STAT_BY_TWO;
+	    flag |= ATK48_STAT_BY_TWO;
+	
+    if (gBattleMons[gActiveBattler].ability == ABILITY_CONTRARY)
+    {
+	    if (flag & ATK48_STAT_NEGATIVE)
+		    flag &= ~(ATK48_STAT_NEGATIVE);
+	    else
+		    flag |= ATK48_STAT_NEGATIVE;
+    }
 	
     if (flag & ATK48_STAT_NEGATIVE) // goes down
     {

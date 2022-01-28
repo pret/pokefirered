@@ -51,6 +51,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 //used strings
 static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
 static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its\nATTACK!");
+static const u8 sAngerPointContraryString[] = _("{B_DEF_NAME_WITH_PREFIX} minimized its\nATTACK!");
 static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!");
 static const u8 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sForewarnString[] = _("It was alerted to\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
@@ -2171,12 +2172,19 @@ static void atk0F_resultmessage(void)
     if (!gBattleControllerExecFlags)
     {
 	if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && gCritMultiplier == 2 && gBattleMons[gBattlerTarget].ability == ABILITY_ANGER_POINT &&
-	   gBattleMons[gBattlerTarget].hp != 0 && !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE) && 
-	   gBattleMons[gBattlerTarget].statStages[STAT_ATK] != 0xC) 
+	   gBattleMons[gBattlerTarget].hp != 0 && !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE) && STAT_CAN_RAISE(gBattlerTarget, STAT_ATK)) 
 	{
-		gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xB;
+		if (gBattleMons[gBattlerTarget].ability == ABILITY_CONTRARY)
+		{
+			gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 1;
+			gSetWordLoc = sAngerPointContraryString;
+		}
+		else
+		{
+			gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xB;
+			gSetWordLoc = sAngerPointString;
+		}
 		BattleScriptPushCursor();
-		gSetWordLoc = sAngerPointString;
 		gBattlescriptCurrInstr = BattleScript_AngerPointActivation - 1;
 	}
         else if (gMoveResultFlags & MOVE_RESULT_MISSED && (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) || gBattleCommunication[6] > 2))

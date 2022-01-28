@@ -2117,7 +2117,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
 	        else if (effect == 3)
 		{
-			if (gBattleMons[battler].statStages[StatId] < 0xC)
+			if (STAT_CAN_RAISE(battler, StatId))
 			{
 				PREPARE_STAT_BUFFER(gBattleTextBuff1, StatId);
 				SET_STATCHANGER(StatId, 1, FALSE);

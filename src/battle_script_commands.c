@@ -4379,10 +4379,6 @@ static void atk49_moveend(void)
              && gBattleMoves[gCurrentMove].power
              && STAT_CAN_RAISE(gBattlerTarget, STAT_ATK))
             {
-		if (gBattleMons[gBattlerTarget].ability != ABILITY_CONTRARY)
-			++gBattleMons[gBattlerTarget].statStages[STAT_ATK]; 
-		else
-			--gBattleMons[gBattlerTarget].statStages[STAT_ATK];
 		BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_RageIsBuilding;
                 effect = TRUE;

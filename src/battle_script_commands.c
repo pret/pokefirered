@@ -9252,16 +9252,21 @@ static void atkE5_pickup(void)
 		if (ability == ABILITY_PICKUP && !(Random() % 10))
 		{
 			for (j = 0; j < 15; ++j)
+			{
 				if (sPickupItems[j].chance > random)
 					break;
+			}
 			SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[j]);
 		}
 		else if (ability == ABILITY_HONEY_GATHER)
 		{
 			level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+			
 			for (chance = 5, levelmax = 10; level > levelmax; chance += 5, levelmax += 10)
+			{
 				if (levelmax == 100)
 					break;
+			}
 			if (chance > random)
 				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sHoneyItem[0]);
 		}

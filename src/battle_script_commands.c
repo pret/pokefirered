@@ -8679,8 +8679,7 @@ static void atkC8_sethail(void)
 
 static void atkC9_jumpifattackandspecialattackcannotfall(void) // memento
 {
-    if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == 0
-     && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == 0
+    if (!STAT_CAN_FALL(gBattlerTarget, STAT_ATK) && !STAT_CAN_FALL(gBattlerTarget, STAT_SPATK)
      && gBattleCommunication[6] != 1)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);

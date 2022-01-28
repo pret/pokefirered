@@ -6787,6 +6787,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
     bool8 certain = FALSE;
     bool8 notProtectAffected = FALSE;
     u32 index;
+    bool8 GoesDown;
 
     if (flags & MOVE_EFFECT_AFFECTS_USER)
         gActiveBattler = gBattlerAttacker;
@@ -6801,7 +6802,10 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         ++notProtectAffected;
     flags &= ~(STAT_CHANGE_NOT_PROTECT_AFFECTED);
     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId)
-    if (statValue <= -1) // Stat decrease.
+	    
+    GoesDown = (statValue >= 0 && gBattleMons[gActiveBattler].ability == ABILITY_CONTRARY) || (statValue <= -1 && gBattleMons[gActiveBattler].ability != ABILITY_CONTRARY);
+	    
+    if (GoesDown) // Stat decrease.
     {
         if (gSideTimers[GET_BATTLER_SIDE(gActiveBattler)].mistTimer
             && !certain && gCurrentMove != MOVE_CURSE)

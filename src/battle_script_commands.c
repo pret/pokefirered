@@ -938,7 +938,6 @@ static const u32 gUnknown_8250898 = 0xFF7EAE60;
 
 const u16 gSheerForceBoostedMoves[] =
 {
-	
 	MOVE_ANCIENT_POWER,
 	MOVE_ASTONISH,
 	MOVE_BITE,
@@ -1018,7 +1017,6 @@ const u16 gSheerForceBoostedMoves[] =
 	TABLE_END,
 };
 
-
 const u16 gNoChangeTypeMoves[] =
 {
 	MOVE_HIDDEN_POWER,
@@ -1059,49 +1057,47 @@ static void atk00_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_MoveEnd;
         return;
     }
-    if (AtkCanceller_UnableToUseMove())
+    if (AtkCanceller_UnableToUseMove() || AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBattlerTarget, 0, 0, 0))
         return;
-    if (AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBattlerTarget, 0, 0, 0))
-        return;
-    if (!gBattleMons[gBattlerAttacker].pp[gCurrMovePos] && gCurrentMove != MOVE_STRUGGLE && !(gHitMarker & (HITMARKER_x800000 | HITMARKER_NO_ATTACKSTRING))
-     && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
+    if (!gBattleMons[gBattlerAttacker].pp[gCurrMovePos] && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS) 
+	&& gCurrentMove != MOVE_STRUGGLE && !(gHitMarker & (HITMARKER_x800000 | HITMARKER_NO_ATTACKSTRING))
     {
         gBattlescriptCurrInstr = BattleScript_NoPPForMove;
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         return;
     }
     gHitMarker &= ~(HITMARKER_x800000);
-    if (!(gHitMarker & HITMARKER_OBEYS) 
-     && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
+    if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
         i = IsMonDisobedient();
+	    
         switch (i)
         {
-        case 0:
-            break;
-        case 2:
-            gHitMarker |= HITMARKER_OBEYS;
-            return;
-        default:
-            gMoveResultFlags |= MOVE_RESULT_MISSED;
-            return;
+		case 0:
+		    break;
+		case 2:
+		    gHitMarker |= HITMARKER_OBEYS;
+		    return;
+		default:
+		    gMoveResultFlags |= MOVE_RESULT_MISSED;
+		    return;
         }
     }
     gHitMarker |= HITMARKER_OBEYS;
-    if (gProtectStructs[gBattlerTarget].bounceMove && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED)
+    if (gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED && gProtectStructs[gBattlerTarget].bounceMove)
     {
+	gProtectStructs[gBattlerTarget].bounceMove = FALSE;
         PressurePPLose(gBattlerAttacker, gBattlerTarget, MOVE_MAGIC_COAT);
-        gProtectStructs[gBattlerTarget].bounceMove = FALSE;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
         return;
     }
     for (i = 0; i < gBattlersCount; ++i)
     {
-        if ((gProtectStructs[gBattlerByTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
+        if (gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED && (gProtectStructs[gBattlerByTurnOrder[i]].stealMove))
         {
+	    gProtectStructs[gBattlerByTurnOrder[i]].stealMove = FALSE;
             PressurePPLose(gBattlerAttacker, gBattlerByTurnOrder[i], MOVE_SNATCH);
-            gProtectStructs[gBattlerByTurnOrder[i]].stealMove = FALSE;
             gBattleScripting.battler = gBattlerByTurnOrder[i];
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_SnatchedMove;
@@ -1116,8 +1112,7 @@ static void atk00_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
-    else if (DEFENDER_IS_PROTECTED
-          && (gCurrentMove != MOVE_CURSE || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+    else if (DEFENDER_IS_PROTECTED && (gCurrentMove != MOVE_CURSE || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
           && ((!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))))
     {
         CancelMultiTurnMoves(gBattlerAttacker);
@@ -1128,9 +1123,7 @@ static void atk00_attackcanceler(void)
         ++gBattlescriptCurrInstr;
     }
     else
-    {
         ++gBattlescriptCurrInstr;
-    }
 }
 
 static void JumpIfMoveFailed(u8 adder, u16 move)
@@ -1161,9 +1154,7 @@ static void atk40_jumpifaffectedbyprotect(void)
         gBattleCommunication[6] = 1;
     }
     else
-    {
         gBattlescriptCurrInstr += 5;
-    }
 }
 
 static bool8 JumpIfMoveAffectedByProtect(u16 move)
@@ -1195,23 +1186,22 @@ static bool8 AccuracyCalcHelper(u16 move)
 		    JumpIfMoveFailed(7, move);
 		    return TRUE;
 	    }
-	    gHitMarker &= ~HITMARKER_IGNORE_ON_AIR;
+	    gHitMarker &= ~(HITMARKER_IGNORE_ON_AIR);
 	    if (!(gHitMarker & HITMARKER_IGNORE_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
 	    {
 		    gMoveResultFlags |= MOVE_RESULT_MISSED;
 		    JumpIfMoveFailed(7, move);
 		    return TRUE;
 	    }
-	    gHitMarker &= ~HITMARKER_IGNORE_UNDERGROUND;
+	    gHitMarker &= ~(HITMARKER_IGNORE_UNDERGROUND);
 	    if (!(gHitMarker & HITMARKER_IGNORE_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER)
 	    {
 		    gMoveResultFlags |= MOVE_RESULT_MISSED;
 		    JumpIfMoveFailed(7, move);
 		    return TRUE;
 	    }
-	    gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
-	    if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && gBattleMoves[move].effect == EFFECT_THUNDER)
-		|| (gBattleMoves[move].accuracy == 0))
+	    gHitMarker &= ~(HITMARKER_IGNORE_UNDERWATER);
+	    if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && gBattleMoves[move].effect == EFFECT_THUNDER) || (gBattleMoves[move].accuracy == 0))
 	    {
 		    JumpIfMoveFailed(7, move);
 		    return TRUE;
@@ -1224,15 +1214,9 @@ static void atk01_accuracycheck(void)
 {
     u16 move = T2_READ_16(gBattlescriptCurrInstr + 5);
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE
-        && !BtlCtrl_OakOldMan_TestState2Flag(1)
-        && gBattleMoves[move].power != 0
-        && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-     || (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE
-        && !BtlCtrl_OakOldMan_TestState2Flag(2)
-        && gBattleMoves[move].power == 0
-        && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-     || (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
+    if ((gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) || (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && !BtlCtrl_OakOldMan_TestState2Flag(1) 
+         && gBattleMoves[move].power != 0 && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) || (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE 
+         && !BtlCtrl_OakOldMan_TestState2Flag(2) && gBattleMoves[move].power == 0 && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER))
     {
         JumpIfMoveFailed(7, move);
         return;

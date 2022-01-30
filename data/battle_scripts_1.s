@@ -405,7 +405,7 @@ BattleScript_ExplosionLoop::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, 0, NULL
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_ExplosionLoop
 	tryfaintmon BS_ATTACKER, 0, NULL
 	end

@@ -4095,7 +4095,7 @@ static void atk48_playstatchangeanimation(void)
 
 static void atk49_moveend(void)
 {
-    u8 arg1, arg2, , target, targetPartner, attacker, holdEffectAtk = 0, moveType = gBattleStruct->dynamicMoveType;
+    u8 arg1, arg2, target, targetPartner, attacker, holdEffectAtk = 0, moveType = gBattleStruct->dynamicMoveType;
     u16 originallyUsedMove, *changedItem, *choicedMoveAtk = NULL;
     s32 i;
     bool32 effect = FALSE;

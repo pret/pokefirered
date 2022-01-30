@@ -3112,8 +3112,8 @@ BattleScript_DoSwitchOut::
 	switchinanim BS_ATTACKER, 0
 	waitstate
 	switchineffects BS_ATTACKER
-	moveendcase 4
-	moveendcase 15
+	moveendcase ATK49_STATUS_IMMUNITY_ABILITIES
+	moveendcase ATK49_MIRROR_MOVE
 	end2
 
 BattleScript_PursuitDmgOnSwitchOut::

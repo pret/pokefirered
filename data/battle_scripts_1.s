@@ -4284,7 +4284,7 @@ BattleScript_IgnoresAndUsesRandomMove::
 BattleScript_MoveUsedLoafingAround::
 	printfromtable gInobedientStringIds
 	waitmessage 0x40
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_IgnoresAndFallsAsleep::
@@ -4292,7 +4292,7 @@ BattleScript_IgnoresAndFallsAsleep::
 	waitmessage 0x40
 	setmoveeffect MOVE_EFFECT_SLEEP | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_IgnoresAndHitsItself::

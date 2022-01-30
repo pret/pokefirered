@@ -1983,7 +1983,7 @@ BattleScript_BeatUpLoop::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, 0, NULL
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	goto BattleScript_BeatUpLoop
 
 BattleScript_BeatUpEnd::

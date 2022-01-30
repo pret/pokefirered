@@ -3543,7 +3543,7 @@ BattleScript_DoFutureAttackHit::
 	atk24 BattleScript_FutureAttackEnd
 BattleScript_FutureAttackEnd::
 	moveendcase ATK49_RAGE
-	moveendfromto 11, 14
+	moveendfromto ATK49_ITEM_EFFECTS_ALL, ATK49_UPDATE_LAST_MOVES
 	setbyte gMoveResultFlags, 0
 	end2
 

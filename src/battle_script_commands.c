@@ -9510,6 +9510,7 @@ static void MaxAttackAngerPointAsm(void)
 
 static bool8 AnticipationTypeCalc(u8 battler)
 {
+	struct Pokemon *party;
 	u8 i, movetype;
 	u16 moveid;
 	s32 i2 = 0;
@@ -9521,7 +9522,13 @@ static bool8 AnticipationTypeCalc(u8 battler)
 		moveid = gBattleMons[battler].moves[i];
 		
 		if (gBattleMoves[moveid].effect == EFFECT_HIDDEN_POWER)
-			movetype = GetHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[i]]);
+		{
+			if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+				party = gPlayerParty;
+			else
+				party = gEnemyParty;
+			movetype = GetHiddenPowerType(&party[gBattlerPartyIndexes[i]]);
+		}
 		else
 			movetype = gBattleMoves[moveid].type;
 		

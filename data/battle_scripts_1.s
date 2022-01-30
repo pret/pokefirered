@@ -1448,7 +1448,7 @@ BattleScript_TripleKickPrintStrings::
 BattleScript_TripleKickEnd::
 	seteffectwithchance
 	tryfaintmon BS_TARGET, 0, NULL
-	moveendfrom 14
+	moveendfrom ATK49_UPDATE_LAST_MOVES
 	end
 
 BattleScript_EffectThief::

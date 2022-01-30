@@ -9527,7 +9527,7 @@ static bool8 AnticipationTypeCalc(u8 battler)
 				party = gPlayerParty;
 			else
 				party = gEnemyParty;
-			movetype = GetHiddenPowerType(&party[gBattlerPartyIndexes[i]]);
+			movetype = GetHiddenPowerType(&party[gBattlerPartyIndexes[battler]]);
 		}
 		else
 			movetype = gBattleMoves[moveid].type;

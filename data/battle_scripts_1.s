@@ -657,7 +657,7 @@ BattleScript_MultiHitPrintStrings::
 BattleScript_MultiHitEnd::
 	seteffectwithchance
 	tryfaintmon BS_TARGET, 0, NULL
-	moveendcase 2
+	moveendcase ATK49_SYNCHRONIZE_TARGET
 	moveendfrom 4
 	end
 

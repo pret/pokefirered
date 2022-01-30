@@ -1428,7 +1428,7 @@ BattleScript_DoTripleKickAttack::
 	waitmessage 0x40
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_TripleKickPrintStrings
 	decrementmultihit BattleScript_TripleKickLoop
 	goto BattleScript_TripleKickPrintStrings

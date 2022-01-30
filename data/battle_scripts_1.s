@@ -658,7 +658,7 @@ BattleScript_MultiHitEnd::
 	seteffectwithchance
 	tryfaintmon BS_TARGET, 0, NULL
 	moveendcase ATK49_SYNCHRONIZE_TARGET
-	moveendfrom 4
+	moveendfrom ATK49_STATUS_IMMUNITY_ABILITIES
 	end
 
 BattleScript_EffectConversion::

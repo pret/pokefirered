@@ -1853,19 +1853,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 break;
             case ABILITY_CLOUD_NINE:
             case ABILITY_AIR_LOCK:
-                {
-                    for (target1 = 0; target1 < gBattlersCount; ++target1)
-                    {
-                        effect = CastformDataTypeChange(target1);
-                        if (effect != 0)
-                        {
-                            BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                            gBattleScripting.battler = target1;
-                            *(&gBattleStruct->formToChangeInto) = effect - 1;
-                            break;
-                        }
-                    }
-                }
+                gSetWordLoc = sAirLockString;
+	        BattleScriptPushCursorAndCallback(BattleScript_AirLock);
+	        ++effect;
                 break;
 	    case ABILITY_MOLD_BREAKER:
 	        gSetWordLoc = sMoldBreakerString;

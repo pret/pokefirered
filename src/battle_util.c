@@ -3281,7 +3281,8 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                  && TARGET_TURN_DAMAGED
                  && (Random() % 100) < battlerHoldEffectParam
                  && gBattleMoves[gCurrentMove].flags & FLAG_KINGSROCK_AFFECTED
-                 && gBattleMons[gBattlerTarget].hp)
+                 && gBattleMons[gBattlerTarget].hp
+		 && gBattleMons[gBattlerAttacker].ability != ABILITY_STENCH)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
                     BattleScriptPushCursor();

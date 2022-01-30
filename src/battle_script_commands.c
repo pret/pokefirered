@@ -4317,9 +4317,9 @@ static void atk49_moveend(void)
                 targetPartner = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerTarget)));
 		gHitMarker |= HITMARKER_NO_ATTACKSTRING;
 		    
-                if (gBattleMons[battlerId].hp != 0)
+                if (gBattleMons[targetPartner].hp != 0)
                 {
-                    gBattlerTarget = battlerId;
+                    gBattlerTarget = targetPartner;
                     gBattleScripting.atk49_state = 0;
                     MoveValuesCleanUp();
                     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);

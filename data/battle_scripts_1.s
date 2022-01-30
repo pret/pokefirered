@@ -640,7 +640,7 @@ BattleScript_DoMultiHit::
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	addbyte gBattleScripting + 12, 1
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_MultiHitPrintStrings
 	decrementmultihit BattleScript_MultiHitLoop
 	goto BattleScript_MultiHitPrintStrings

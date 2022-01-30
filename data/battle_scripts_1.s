@@ -3136,7 +3136,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, 0, NULL
-	moveendfromto 3, 6
+	moveendfromto ATK49_MOVE_END_ABILITIES, ATK49_CHOICE_MOVE
 	various4 BS_TARGET
 	jumpifbyte CMP_EQUAL, gBattleCommunication, 0, BattleScript_PursuitSwitchRivalSkip
 	setbyte sGIVEEXP_STATE, 0

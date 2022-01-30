@@ -4274,7 +4274,7 @@ BattleScript_AbilityCuredStatus::
 BattleScript_IgnoresWhileAsleep::
 	printstring STRINGID_PKMNIGNORESASLEEP
 	waitmessage 0x40
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	end
 
 BattleScript_IgnoresAndUsesRandomMove::

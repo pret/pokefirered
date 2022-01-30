@@ -4188,7 +4188,7 @@ static void atk49_moveend(void)
         case ATK49_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; ++i)
             {
-                *changedItem = &gBattleStruct->changedItems[i];
+                changedItem = &gBattleStruct->changedItems[i];
                 
                 if (*changedItem != 0)
                 {

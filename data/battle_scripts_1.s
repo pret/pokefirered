@@ -4071,7 +4071,7 @@ BattleScript_IntimidateActivationAnimLoop::
 	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_IntimidateFail
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring gStatUpStringIds
+	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_IntimidateFail::
 	addbyte gBattlerTarget, 1

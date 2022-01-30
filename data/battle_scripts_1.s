@@ -4052,6 +4052,12 @@ BattleScript_DoCastformChangeAnim::
 	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	return
 
+BattleScript_AirLock::
+        printstring STRINGID_SETWORDSTRING
+	waitmessage 0x40
+        call BattleScript_HandleWeatherFormChanges
+	end3
+
 BattleScript_IntimidateActivatesEnd3::
 	call BattleScript_DoIntimidateActivationAnim
 	end3

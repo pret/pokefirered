@@ -3542,7 +3542,7 @@ BattleScript_DoFutureAttackHit::
 	tryfaintmon BS_TARGET, 0, NULL
 	atk24 BattleScript_FutureAttackEnd
 BattleScript_FutureAttackEnd::
-	moveendcase 0
+	moveendcase ATK49_RAGE
 	moveendfromto 11, 14
 	setbyte gMoveResultFlags, 0
 	end2

@@ -2610,7 +2610,7 @@ BattleScript_TeeterDanceLoop::
 	resultmessage
 	waitmessage 0x40
 BattleScript_TeeterDanceLoopIncrement::
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TeeterDanceLoop
 	end

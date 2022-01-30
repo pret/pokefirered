@@ -414,7 +414,7 @@ BattleScript_ExplosionMissed::
 	effectivenesssound
 	resultmessage
 	waitmessage 0x40
-	moveendto 16
+	moveendto ATK49_NEXT_TARGET
 	jumpifnexttargetvalid BattleScript_ExplosionLoop
 	tryfaintmon BS_ATTACKER, 0, NULL
 	end

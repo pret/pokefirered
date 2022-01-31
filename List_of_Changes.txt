@@ -92,7 +92,6 @@ Magic guard prevents damage from abilities(and probabily for items), spikes and 
 // puting
 bw repel system
 evolve without national dex
-evolution via happiness
 evs cap to 252 @next
 vitamins cap to 252
 metric system update

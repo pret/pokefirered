@@ -72,23 +72,19 @@ Klutz don't affect prize money, experience, effort values or friendship.
 The Speed drop from the Macho Brace, and Power items (such as the Power Bracer) is not negated by Klutz.
 Klutz cannot negate form-changing effects of items.
 Klutz does not prevent Pokémon with this Ability from Mega Evolving with a Mega Stone, undergoing Primal Reversion with the Red Orb or Blue Orb or from using a Z-Move with a Z-Crystal.
+remove slow start and unburden counters when ability change or supression
 
 // Needing put in
-make all multitype,storm drain and unburden effect(its only set in the defines, need make its code)
+make all multitype and storm drain effect(its only set in the defines, need make its code)
 make slow start and contrary special iteration with z-moves 
 make sheer force and contrary special iteration with max moves and sheer force affect other effects
-remove slow start and unburden counters when ability change or supression
 make flower gift form change
-check if sniper is corrected
-end's ability pop up scripts and asms
+end ability pop up scripts and asms
 probabily add an inverse battle check in anticipation type calc
 end update of moves data
-add the new moves in get forewarn move power
-add the new moves in sIronFistTable
-add the new moves in sRecklessTable
-add the new moves in gnochangetypemoves
-add the new moves in gSheerForceBoostedMoves
-add berries in is item affected by gluttony
+add the new moves in getforewarnmovepower
+add the new moves in sIronFistTable, sRecklessTable, gnochangetypemoves and gSheerForceBoostedMoves
+add berries in isitemaffectedbygluttony
 add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb
 Magic guard prevents damage from abilities(and probabily for items), spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)

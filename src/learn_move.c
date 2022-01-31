@@ -257,7 +257,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 6,
-        .height = 7,
+        .height = 6,
         .paletteNum = 0x0d,
         .baseBlock = 0x014
     },
@@ -266,16 +266,16 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .tilemapLeft = 10,
         .tilemapTop = 0,
         .width = 5,
-        .height = 5,
+        .height = 6,
         .paletteNum = 0x0d,
-        .baseBlock = 0x03e
+        .baseBlock = 0x039
     },
     {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 0,
         .width = 5,
-        .height = 2,
+        .height = 4,
         .paletteNum = 0x0d,
         .baseBlock = 0x057
     },
@@ -284,9 +284,9 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .tilemapLeft = 15,
         .tilemapTop = 0,
         .width = 3,
-        .height = 5,
+        .height = 6,
         .paletteNum = 0x0f,
-        .baseBlock = 0x061
+        .baseBlock = 0x06C
     },
     {
         .bg = 0,
@@ -295,7 +295,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .width = 3,
         .height = 3,
         .paletteNum = 0x0f,
-        .baseBlock = 0x070
+        .baseBlock = 0x07E
     },
     {
         .bg = 0,
@@ -304,7 +304,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .width = 15,
         .height = 8,
         .paletteNum = 0x0f,
-        .baseBlock = 0x079
+        .baseBlock = 0x08A
     },
     {
         .bg = 0,
@@ -313,7 +313,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .width = 10,
         .height = 12,
         .paletteNum = 0x0f,
-        .baseBlock = 0x0f1
+        .baseBlock = 0x158
     },
     {
         .bg = 0,
@@ -322,7 +322,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
         .width = 26,
         .height = 4,
         .paletteNum = 0x0f,
-        .baseBlock = 0x169
+        .baseBlock = 0x2A9
     }, DUMMY_WIN_TEMPLATE
 };
 

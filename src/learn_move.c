@@ -817,6 +817,7 @@ static void PrintMoveInfo(u16 move)
 {
     u8 buffer[50];
     BlitMoveInfoIcon(2, gBattleMoves[move].type + 1, 1, 4);
+    BlitMoveInfoIcon(2, gBattleMoves[move].split + 26, 1, 19);
 
     if (gBattleMoves[move].power < 2)
     {
@@ -838,7 +839,7 @@ static void PrintMoveInfo(u16 move)
         PrintTextOnWindow(3, buffer, 1, 18, 0, 1);
     }
     ConvertIntToDecimalStringN(buffer, gBattleMoves[move].pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    PrintTextOnWindow(4, buffer, 2, 2, 0, 0);
+    PrintTextOnWindow(3, buffer, 7, 33, 0, 1);
     PrintTextOnWindow(5, gMoveDescriptionPointers[move - 1], 1, 0, 0, 0);
 }
 
@@ -847,7 +848,8 @@ static void LoadMoveInfoUI(void)
     BlitMoveInfoIcon(0, 24, 1, 4);
     BlitMoveInfoIcon(1, 20, 0, 4);
     BlitMoveInfoIcon(1, 21, 0, 19);
-    BlitMoveInfoIcon(0, 22, 1, 19);
+    BlitMoveInfoIcon(0, 25, 1, 19);
+    BlitMoveInfoIcon(1, 22, 0, 34);
     BlitMoveInfoIcon(0, 23, 1, 34);
     PutWindowTilemap(0);
     PutWindowTilemap(1);

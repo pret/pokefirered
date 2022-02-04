@@ -3688,6 +3688,12 @@ BattleScript_EnduredMsg::
 	waitmessage 0x40
 	return
 
+BattleScript_EnduredBySturdyMsg::
+        
+        printstring STRINGID_PKMNENDUREDHIT
+	waitmessage 0x40
+	return
+
 BattleScript_OneHitKOMsg::
 	printstring STRINGID_ONEHITKO
 	waitmessage 0x40

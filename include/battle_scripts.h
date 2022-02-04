@@ -247,7 +247,6 @@ extern const u8 BattleScript_DisplaySwitchInMsg[];
 extern const u8 BattleScript_MoveStatRaise[];
 extern const u8 BattleScript_MoveStatRaise_PPLoss[];
 extern const u8 BattleScript_SnowWarningActivates[];
-extern const u8 BattleScript_Pickpocket[];
 extern const u8 BattleScript_AirLock[];
 extern const u8 BattleScript_EnduredBySturdyMsg[];
 

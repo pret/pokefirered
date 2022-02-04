@@ -68,9 +68,7 @@ static void DrawLevelUpWindow1(void);
 static void DrawLevelUpWindow2(void);
 static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
-static void PutMonIconOnPopUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
-static void AnimAbilityPopUpBoxAsm(void);
 static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
 static void MaxAttackAngerPointAsm(void);
@@ -600,7 +598,6 @@ void (* const gBattleScriptingCommandsTable[])(void) =
 
 void (* const gCallAsmCommandTablePointers[])(void) =
 {
-	[AnimAbilityPopUpBox] = AnimAbilityPopUpBoxAsm,
 	[DoAftermathDamage] = DoAftermathDamageAsm,
 	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
 	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
@@ -9290,192 +9287,19 @@ static void atkFB_jumpifsubstituteblocks(void)
 
 static void atkFC_loadabilitypopup(void)
 {
-	struct TextPrinterTemplate printerTemplate;
-	u8 i, ability, bank = GetBattlerForBattleScript(gBattlescriptCurrInstr[2]);
-	u8 func = gBattlescriptCurrInstr[1];
+	u8 animId;
+	const u16 *argumentPtr = NULL;
 	
-	gBattleScripting.battler = bank;
+	gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[2]);
 	
-	if (func == REMOVE_POP_UP)
-		gBattleScripting.battler += 0x80;
+	if (gBattlescriptCurrInstr[1] != REMOVE_POP_UP)
+		animId = B_ANIM_LOAD_ABILITY_POP_UP;
 	else
-	{
-		SetWindowAttribute(13, WINDOW_BASE_BLOCK, GetWindowAttribute(13, WINDOW_BASE_BLOCK) - 2);
-		gBattle_BG2_Y = 0x60;
-		SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
-		ShowBg(2);
-		if (GetBattlerSide(bank) == B_SIDE_PLAYER)
-		{
-			gBattle_BG2_X = 0x2F0;
-			gBattle_BG2_Y = 0xB0;
-		}
-		else
-		{
-			gBattle_BG2_X = 0x1A0;
-			gBattle_BG2_Y = -0x8;
-		}
-#if LOAD_CUSTOM_ABILITY_POP_UP_IMG
-		LoadPalette(sAbilityPopUpboxPal, 0x60, 0x20);
-		CopyToWindowPixelBuffer(13, sAbilityPopUpboxGfx, 0, 0);
-#else
-		LoadPalette(sUnknownBattleboxPal, 0x60, 0x20);
-		CopyToWindowPixelBuffer(13, sUnknownBattleboxGfx, 0, 0);
-#endif
-		PutWindowTilemap(13);
-                CopyWindowToVram(13, COPYWIN_BOTH);
-		for (i = 0; gBattleMons[bank].nickname[i] != EOS; i++)
-			gStringVar4[i] = gBattleMons[bank].nickname[i];
-		gStringVar4[i] = CHAR_SGL_QUOT_RIGHT;
-		gStringVar4[i + 1] = CHAR_s;
-		gStringVar4[i + 2] = EOS;
-		printerTemplate.currentChar = gStringVar4;
-		printerTemplate.windowId = 13;
-		printerTemplate.fontId = 0;
-                printerTemplate.x = 15;
-		printerTemplate.y = 0;
-		printerTemplate.currentX = 15;
-		printerTemplate.currentY = 0;
-		printerTemplate.letterSpacing = 0;
-		printerTemplate.lineSpacing = 0;
-		printerTemplate.unk = 0;
-		printerTemplate.fgColor = TEXT_COLOR_WHITE;
-		printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
-		printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
-		AddTextPrinter(&printerTemplate, 0xFF, NULL);
-		ability = gBattlescriptCurrInstr[3];
-		if (func == LOAD_ABILITY_FROM_SECOND_BANK)
-			ability = gBattleMons[GetBattlerForBattleScript(gBattlescriptCurrInstr[3])].ability;
-		else if (ability == LOAD_ABILITY_FROM_BUFFER)
-			ability = gLastUsedAbility;
-		printerTemplate.currentChar = gAbilityNames[ability];
-		printerTemplate.y = 10;
-		printerTemplate.currentY = 10;
-		AddTextPrinter(&printerTemplate, 0xFF, NULL);
-		CopyWindowToVram(13, COPYWIN_GFX);
-#if MON_ICON_ON_ABILITY_POP_UP_BOX
-		PutMonIconOnPopUpBox();
-#endif
-	}
-	BattleScriptPush(gBattlescriptCurrInstr + 4);
-	gBattlescriptCurrInstr = BattleScript_AnimPopUpBoxScript;
-}
-
-static void PutMonIconOnPopUpBox(void)
-{
-	struct SpriteSheet iconSheet;
-        struct SpritePalette iconPalSheet;
-	u8 spriteId, bank = gBattleScripting.battler;
-        u16 species = gBattleMons[bank].species;
-	s16 posX, posY;
-	u32 personality = gBattleMons[bank].personality;
-	const u8 *iconPtr = GetMonIconPtr(species, personality, 1);
-	const u16 *iconPal;
+		animId = B_ANIM_REMOVE_ABILITY_POP_UP;
 	
-	iconSheet.data = iconPtr;
-	iconSheet.size = 0x200;
-	iconSheet.tag = MON_ICON_LVLUP_BOX_TAG;
-	iconPal = GetValidMonIconPalettePtr(species);
-	iconPalSheet.data = iconPal;
-	iconPalSheet.tag = MON_ICON_LVLUP_BOX_TAG;
-	LoadSpriteSheet(&iconSheet);
-	LoadSpritePalette(&iconPalSheet);
-	if (GetBattlerSide(bank) == B_SIDE_PLAYER)
-	{
-		posX = 235; //player icon pos X and Y
-	        posY = 88;
-	}
-	else
-	{
-		posX = 143; //target icon pos X and Y
-	        posY = 16;
-	}
-	spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, posX, posY, 0);
-	gSprites[spriteId].sDestroy = FALSE;
-}
-
-static void AnimAbilityPopUpBoxAsm(void)
-{
-	u8 side, speed = 5; //how greater this more fast the ability pop up make it's anim
-	u16 bank, check = gBattleScripting.battler, pos = gBattle_BG2_X;
-	
-	if (check < 0x80)
-	{
-		//load ability pop up anim
-		bank = gBattleScripting.battler;
-		side = GetBattlerSide(bank);
-		
-		if (side == B_SIDE_PLAYER)
-		{
-			if (pos > 0x298)
-			{
-				pos -= speed;
-				if (pos < 0x298)
-					pos = 0x298;
-				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 3;
-			}
-		}
-		else
-		{
-			if (pos < 0x1F8)
-			{
-				pos += speed;
-				if (pos > 0x1F8)
-					pos = 0x1F8;
-				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 3;
-			}
-		}
-	}
-	else
-	{
-		//remove ability pop up anim
-		bank = gBattleScripting.battler - 0x80;
-		side = GetBattlerSide(bank);
-		
-		if (side == B_SIDE_PLAYER)
-		{
-			if (pos == 0x2FC)
-			{
-				gBattleScripting.battler = bank;
-				ClearWindowTilemap(13);
-				CopyWindowToVram(13, COPYWIN_MAP);
-				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
-				ShowBg(2);
-				gBattle_BG2_X = 0;
-				SetWindowAttribute(13, WINDOW_BASE_BLOCK, GetWindowAttribute(13, WINDOW_BASE_BLOCK) + 2);
-			}
-			else
-			{
-				pos += speed;
-				if (pos >= 0x2FC)
-					pos = 0x2FC;
-				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 3;
-			}
-		}
-		else
-		{
-			if (pos == 0x18E)
-			{
-				gBattleScripting.battler = bank;
-				ClearWindowTilemap(13);
-				CopyWindowToVram(13, COPYWIN_MAP);
-				SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
-				ShowBg(2);
-				gBattle_BG2_X = 0;
-				SetWindowAttribute(13, WINDOW_BASE_BLOCK, GetWindowAttribute(13, WINDOW_BASE_BLOCK) + 2);
-			}
-			else
-			{
-				pos -= speed;
-				if (pos < 0x18E)
-					pos = 0x18E;
-				gBattle_BG2_X = pos;
-				gBattlescriptCurrInstr -= 3;
-			}
-		}
-	}
+	BtlController_EmitBattleAnimation(0, animId, *argumentPtr);
+	MarkBattlerForControllerExec(gActiveBattler);
+	gBattlescriptCurrInstr += 4;
 }
 
 static void atkFD_jumpifweatherandability(void)

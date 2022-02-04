@@ -25,7 +25,7 @@ No Healing Eggs
 Poison Survival
 Nature Colors
 Iv's In The Summary Screen
-Badge Stat Boost
+Disable Badge Stat Boost
 
 DizzyEggg
 

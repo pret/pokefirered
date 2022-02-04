@@ -108,6 +108,7 @@ static void RepeatBallOpenParticleAnimation(u8);
 static void TimerBallOpenParticleAnimation(u8);
 static void PremierBallOpenParticleAnimation(u8);
 static void SpriteCB_SafariBaitOrRock_Init(struct Sprite *);
+static void SpriteCB_AbilityPopUp(struct Sprite * sprite);
 
 // Data
 struct CaptureStar

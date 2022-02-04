@@ -4104,8 +4104,8 @@ BattleScript_DroughtActivates::
 	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
 	waitstate
-	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES, NULL
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	call BattleScript_HandleWeatherFormChanges
 	end3
 

@@ -143,7 +143,7 @@ gNewGame_HelpDocs4:: @ 81C58F9
 
 gNewGame_HelpDocs5:: @ 81C592B
     .string "Press this button to open the\n"
-    .string "MENU.$"
+    .string "menu.$"
 
 gNewGame_HelpDocs6:: @ 81C594F
     .string "Used to shift items and to use\n"

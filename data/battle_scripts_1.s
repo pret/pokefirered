@@ -4265,14 +4265,15 @@ BattleScript_CuteCharmActivates::
 BattleScript_ApplySecondaryEffect::
 	waitstate
 	loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
-	waitstate
 	seteffectsecondary
 	loadabilitypopup REMOVE_POP_UP, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_SynchronizeActivates::
 	waitstate
+	loadabilitypopup LOAD_ABILITY_NORMAL, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	seteffectprimary
+	loadabilitypopup REMOVE_POP_UP, BS_SCRIPTING, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_AbilityCuredStatus::

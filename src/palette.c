@@ -209,7 +209,7 @@ static void DoDayAndNightLightning(void)
         u16 *dest = (u16 *)PLTT;
 	bool8 IsNight = gDayAndNightStatus == 0 || gDayAndNightStatus > 3;
 	
-	for (i = 0; i < sizeof(sLightingColours) / sizeof(sLightingColours[0]); i++)
+	for (i = 0; i < NELEMS(sLightingColours); i++)
 	{
 		colourSlot = sLightingColours[i].paletteNum * NUM_PALETTE_STRUCTS + sLightingColours[i].colourNum;
 			

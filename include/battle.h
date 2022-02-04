@@ -192,7 +192,7 @@ struct ProtectStruct
     u32 flag2Unknown:1;         // 0x2
     u32 flinchImmobility:1;     // 0x4
     u32 notFirstStrike:1;       // 0x8
-    u32 flag_x10 : 1;           // 0x10
+    u32 enduredBySturdy:1;      // 0x10
     u32 flag_x20 : 1;           // 0x20
     u32 flag_x40 : 1;           // 0x40
     u32 flag_x80 : 1;           // 0x80

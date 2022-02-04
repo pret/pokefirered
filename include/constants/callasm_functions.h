@@ -1,9 +1,8 @@
-#define AnimAbilityPopUpBox 0
-#define DoAftermathDamage 1
-#define MaxAttackAngerPoint 2
-#define TryDoAnticipationShudder 3
-#define TryBadDreamsSecondDamage 4
-#define GetStatRaiseDownload 5
-#define GetStrongestMoveForewarn 6
-#define TryFriskFirstTarget 7
-#define TryFriskSecondTarget 8
+#define DoAftermathDamage 0
+#define MaxAttackAngerPoint 1
+#define TryDoAnticipationShudder 2
+#define TryBadDreamsSecondDamage 3
+#define GetStatRaiseDownload 4
+#define GetStrongestMoveForewarn 5
+#define TryFriskFirstTarget 6
+#define TryFriskSecondTarget 7

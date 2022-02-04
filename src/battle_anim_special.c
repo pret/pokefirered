@@ -2463,7 +2463,7 @@ static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8* str, u32 x, u32
 	Template.height = 2;
 	
 	*WindowId = AddWindow(&Template);
-	FillWindowPixelBuffer(*WindowId, PIXEL_FILL(color1));
+	FillWindowPixelBuffer(*WindowId, PIXEL_FILL(bgColor));
 	AddTextPrinterParameterized4(*WindowId, 0, x, y, 0, 0, colours, 0xFF, str);
 	
 	return (u8*)(GetWindowAttribute(*WindowId, WINDOW_TILE_DATA));

@@ -565,8 +565,8 @@ const u32 gBattleAnimSpritePal_WhirlwindLines[] = INCBIN_U32("graphics/battle_an
 const u32 gBattleAnimSpriteGfx_GoldRing[] = INCBIN_U32("graphics/battle_anims/sprites/gold_ring.4bpp.lz");
 const u32 gBattleAnimSpritePal_GoldRing[] = INCBIN_U32("graphics/battle_anims/sprites/gold_ring.gbapal.lz");
 
-const u32 gBattleAnimSpriteGfx_AbilityPopUp[] = INCBIN_U32("graphics/new/ability_pop_up.4bpp.lz");
-const u32 gBattleAnimSpritePal_AbilityPopUp[] = INCBIN_U32("graphics/new/ability_pop_up.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_AbilityPopUp[] = INCBIN_U32("graphics/new/ability_pop_up.4bpp");
+const u32 gBattleAnimSpritePal_AbilityPopUp[] = INCBIN_U32("graphics/new/ability_pop_up.gbapal");
 
 const u32 gBattleAnimSpritePal_BlueRing2[] = INCBIN_U32("graphics/battle_anims/sprites/blue_ring_2.gbapal.lz");
 const u32 gBattleAnimSpritePal_PurpleRing[] = INCBIN_U32("graphics/battle_anims/sprites/purple_ring.gbapal.lz");

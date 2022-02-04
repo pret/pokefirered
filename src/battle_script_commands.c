@@ -1809,15 +1809,15 @@ static void atk07_adjustnormaldamage(void)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 	    
-	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
-	    gProtectStructs[gBattlerTarget].enduredBySturdy = TRUE;
-        else if (gProtectStructs[gBattlerTarget].endured)
+        if (gProtectStructs[gBattlerTarget].endured)
             gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
         else if (gSpecialStatuses[gBattlerTarget].focusBanded)
         {
             gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
             gLastUsedItem = gBattleMons[gBattlerTarget].item;
         }
+	else if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
+	    gProtectStructs[gBattlerTarget].enduredBySturdy = TRUE;
     }
     ++gBattlescriptCurrInstr;
 }
@@ -1851,15 +1851,15 @@ static void atk08_adjustnormaldamage2(void)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 	    
-	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
-	    gProtectStructs[gBattlerTarget].enduredBySturdy = TRUE;
-        else if (gProtectStructs[gBattlerTarget].endured)
+	if (gProtectStructs[gBattlerTarget].endured)
             gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
         else if (gSpecialStatuses[gBattlerTarget].focusBanded)
         {
             gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
             gLastUsedItem = gBattleMons[gBattlerTarget].item;
         }
+	else if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
+	    gProtectStructs[gBattlerTarget].enduredBySturdy = TRUE;
     }
     ++gBattlescriptCurrInstr;
 }
@@ -2176,9 +2176,6 @@ static void atk0F_resultmessage(void)
             case MOVE_RESULT_ONE_HIT_KO:
                 stringId = STRINGID_ONEHITKO;
                 break;
-            case MOVE_RESULT_FOE_ENDURED:
-                stringId = STRINGID_PKMNENDUREDHIT;
-                break;
             case MOVE_RESULT_FAILED:
                 stringId = STRINGID_BUTITFAILED;
                 break;
@@ -2222,6 +2219,12 @@ static void atk0F_resultmessage(void)
                     gBattlescriptCurrInstr = BattleScript_HangedOnMsg;
                     return;
                 }
+	        else if (gProtectStructs[gBattlerTarget].enduredBySturdy)
+		{
+			gProtectStructs[gBattlerTarget].enduredBySturdy = FALSE;
+			BattleScriptPushCursor();
+			gBattlescriptCurrInstr = BattleScript_EnduredBySturdyMsg;
+		}
                 else
                     gBattleCommunication[MSG_DISPLAY] = 0;
             }

@@ -229,6 +229,6 @@ gOakText_RememberRivalName:: @ 81C5EC5
     .string "His name is {RIVAL}!\p$"
 
 gOakText_LegendAboutToUnfold:: @ 81C5EF4
-    .string "{PLAYER}!\pYour very own POKéMON legend is\n"
+    .string "{PLAYER}!\pYour very own Pokémon legend is\n"
     .string "about to unfold!\pA world of dreams and adventures\n"
     .string "with POKéMON awaits! Let's go!$"

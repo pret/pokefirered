@@ -4619,9 +4619,3 @@ BattleScript_SnowWarningActivates::
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES, NULL
 	call BattleScript_HandleWeatherFormChanges
 	end3
-
-BattleScript_Pickpocket::
-        swapattackerwithtarget
-	seteffectsecondary
-	swapattackerwithtarget
-	return

@@ -443,6 +443,8 @@ gBattleAnims_General::
 	.4byte General_SilphScoped
 	.4byte General_SafariRockThrow
 	.4byte General_SafariReaction
+	.4byte General_LoadAbilityPopUp
+	.4byte General_RemoveAbilityPopUp
 
 gBattleAnims_Special::
 	.4byte Special_LevelUp
@@ -11001,6 +11003,19 @@ SafariReaction_Eating:: @ 81D644E
 	waitforvisualfinish
 	playsewithpan SE_M_TAKE_DOWN, 63
 	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
+	end
+
+General_LoadAbilityPopUp::
+        monbg ANIM_ATK_PARTNER
+        createvisualtask AnimTask_CreateAbilityPopUp, 5,
+	waitforvisualfinish
+	delay 32
+	clearmonbg ANIM_ATK_PARTNER
+	end
+	
+General_RemoveAbilityPopUp::
+        createvisualtask AnimTask_DestroyAbilityPopUp, 5,
+	delay 32
 	end
 
 SnatchMoveTrySwapFromSubstitute:: @ 81D6476

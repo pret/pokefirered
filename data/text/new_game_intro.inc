@@ -231,4 +231,4 @@ gOakText_RememberRivalName:: @ 81C5EC5
 gOakText_LegendAboutToUnfold:: @ 81C5EF4
     .string "{PLAYER}!\pYour very own Pokémon legend is\n"
     .string "about to unfold!\pA world of dreams and adventures\n"
-    .string "with POKéMON awaits! Let's go!$"
+    .string "with Pokémon awaits! Let's go!$"

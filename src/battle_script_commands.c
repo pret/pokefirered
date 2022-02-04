@@ -756,8 +756,6 @@ static const struct WindowTemplate sUnusedWinTemplate =
 // not used
 static const u16 sUnknownBattleboxPal[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
 static const u32 sUnknownBattleboxGfx[] = INCBIN_U32("graphics/battle_interface/unk_battlebox.4bpp.lz");
-static const u16 sAbilityPopUpboxPal[] = INCBIN_U16("graphics/new/abilitypopupbox.gbapal");
-static const u32 sAbilityPopUpboxGfx[] = INCBIN_U32("graphics/new/abilitypopupbox.4bpp.lz");
 
 // not used
 static const u8 sRubyLevelUpStatBoxStats[] =

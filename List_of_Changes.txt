@@ -21,11 +21,14 @@ Exp Block By Badge (blackUser)
 hp bars disappearing during attack animations (blackUser)
 Automatic Swap Page On Naming Screen (blackUser And Jaizu)
 Display Move Effectiveness In Battle (blackUser And PokemonCrazy)
+Display Party Mon Icons On Trainer Card (Eaas)
 No Healing Eggs
 Poison Survival
 Nature Colors
 Iv's In The Summary Screen
 Disable Badge Stat Boost
+Sleep Update
+Paralysis Update
 
 DizzyEggg
 

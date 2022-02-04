@@ -3692,7 +3692,7 @@ BattleScript_EnduredBySturdyMsg::
         loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, ABILITY_STURDY
         printstring STRINGID_PKMNENDUREDHIT
 	waitmessage 0x40
-	loadabilitypopup LOAD_ABILITY_NORMAL, BS_TARGET, ABILITY_STURDY
+	loadabilitypopup REMOVE_POP_UP, BS_TARGET, LOAD_ABILITY_FROM_BUFFER
 	return
 
 BattleScript_OneHitKOMsg::

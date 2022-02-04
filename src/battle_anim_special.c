@@ -12,6 +12,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "menu.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"

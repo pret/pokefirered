@@ -296,6 +296,7 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
+#define ANIM_TAG_ABILITY_POP_UP             (ANIM_SPRITES_START + 289)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -375,6 +376,8 @@
 #define B_ANIM_SILPH_SCOPED             0x19
 #define B_ANIM_ROCK_THROW               0x1A
 #define B_ANIM_SAFARI_REACTION          0x1B
+#define B_ANIM_LOAD_ABILITY_POP_UP      0x1C
+#define B_ANIM_REMOVE_ABILITY_POP_UP    0x1D
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0

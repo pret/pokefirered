@@ -1803,13 +1803,15 @@ static void atk07_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)
-     && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+    if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove) && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE 
+        || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded || gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
      && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 	    
-        if (gProtectStructs[gBattlerTarget].endured)
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
+	    gProtectStructs[gBattlerTarget].enduredBySturdy = TRUE;
+        else if (gProtectStructs[gBattlerTarget].endured)
             gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
         else if (gSpecialStatuses[gBattlerTarget].focusBanded)
         {
@@ -1844,11 +1846,14 @@ static void atk08_adjustnormaldamage2(void)
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
     if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-     && (gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
+     && (gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded || gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
      && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-        if (gProtectStructs[gBattlerTarget].endured)
+	    
+	if (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
+	    gProtectStructs[gBattlerTarget].enduredBySturdy = TRUE;
+        else if (gProtectStructs[gBattlerTarget].endured)
             gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
         else if (gSpecialStatuses[gBattlerTarget].focusBanded)
         {

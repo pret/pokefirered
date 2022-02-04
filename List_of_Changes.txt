@@ -79,7 +79,7 @@ make all multitype and storm drain effect(its only set in the defines, need make
 make slow start and contrary special iteration with z-moves 
 make sheer force and contrary special iteration with max moves and sheer force affect other effects
 make flower gift form change
-end ability pop up scripts and asms
+make from immunity to down ability pop up scripts
 probabily add an inverse battle check in anticipation type calc
 end update of moves data
 add the new moves in getforewarnmovepower

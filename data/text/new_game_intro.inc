@@ -188,19 +188,19 @@ gNewGameAdventureIntro3::
 
 gOakText_WelcomeToTheWorld:: @ 81C5C78
     .string "Hello, there!\n"
-    .string "Glad to meet you!\pWelcome to the world of POKéMON!\pMy name is OAK.\pPeople affectionately refer to me\n"
-    .string "as the POKéMON PROFESSOR.\p$"
+    .string "Glad to meet you!\pWelcome to the world of Pokémon!\pMy name is Oak.\pPeople affectionately refer to me\n"
+    .string "as the Pokémon Professor.\p$"
 
 gOakText_WorldInhabited1:: @ 81C5D06
     .string "This world…$"
 
 gOakText_WorldInhabited2:: @ 81C5D12
     .string "…is inhabited far and wide by\n"
-    .string "creatures called POKéMON.\p$"
+    .string "creatures called Pokémon.\p$"
 
 gOakText_PetsBattlingStudy:: @ 81C5D4B
-    .string "For some people, POKéMON are pets.\n"
-    .string "Others use them for battling.\pAs for myself…\pI study POKéMON as a profession.\p$"
+    .string "For some people, Pokémon are pets.\n"
+    .string "Others use them for battling.\pAs for myself…\pI study Pokémon as a profession.\p$"
 
 gOakText_TellMeALittleAboutYourself:: @ 81C5DBD
     .string "But first, tell me a little about\n"

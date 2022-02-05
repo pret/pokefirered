@@ -639,12 +639,12 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
         if ((
-                templates[i].trainerType == TRAINER_TYPE_NORMAL
-             || templates[i].trainerType == TRAINER_TYPE_BURIED
+                templates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL
+             || templates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED
             ) && (
-                templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4D
-             || templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4E
-             || templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4F
+                templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_VS_SEEKER_4D
+             || templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_VS_SEEKER_4E
+             || templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_VS_SEEKER_4F
           ))
         {
             movementType = GetRandomFaceDirectionMovementType();
@@ -654,7 +654,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
             {
                 SetTrainerMovementType(objectEvent, movementType);
             }
-            templates[i].movementType = movementType;
+            templates[i].objUnion.normal.movementType = movementType;
         }
     }
 }
@@ -808,7 +808,7 @@ static void GatherNearbyTrainerInfo(void)
 
     for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->objectEventCount; objectEventIdx++)
     {
-        if (templates[objectEventIdx].trainerType == 1 || templates[objectEventIdx].trainerType == 3)
+        if (templates[objectEventIdx].objUnion.normal.trainerType == 1 || templates[objectEventIdx].objUnion.normal.trainerType == 3)
         {
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[objectEventIdx].script;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[objectEventIdx].script);
@@ -942,7 +942,9 @@ void ClearRematchStateByTrainerId(void)
 
         for (i = 0; i < gMapHeader.events->objectEventCount; i++)
         {
-            if ((objectEventTemplates[i].trainerType == TRAINER_TYPE_NORMAL || objectEventTemplates[i].trainerType == TRAINER_TYPE_BURIED) && vsSeekerDataIdx == LookupVsSeekerOpponentInArray(sVsSeekerData, GetTrainerFlagFromScript(objectEventTemplates[i].script)))
+            if ((objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL 
+              || objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED)
+              && vsSeekerDataIdx == LookupVsSeekerOpponentInArray(sVsSeekerData, GetTrainerFlagFromScript(objectEventTemplates[i].script)))
             {
                 struct ObjectEvent *objectEvent;
 

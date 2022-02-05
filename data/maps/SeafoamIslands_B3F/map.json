@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 23,
       "y": 8,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_1"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 24,
       "y": 8,
@@ -42,6 +44,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_2"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 12,
       "y": 16,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_5"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 13,
       "y": 16,
@@ -68,6 +72,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_6"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 9,
       "y": 16,
@@ -81,6 +86,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B3F_BOULDER_4"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
       "y": 17,

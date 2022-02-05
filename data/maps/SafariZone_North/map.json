@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 33,
       "y": 5,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_NORTH_PROTEIN"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 28,
       "y": 9,
@@ -42,6 +44,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_NORTH_TM47"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 17,

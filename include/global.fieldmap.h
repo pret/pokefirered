@@ -83,9 +83,6 @@ struct BackupMapLayout
     u16 *map;
 };
 
-#define OBJ_KIND_NORMAL 0
-#define OBJ_KIND_CLONE  255
-
 struct ObjectEventTemplate
 {
     u8 localId;
@@ -103,9 +100,7 @@ struct ObjectEventTemplate
         } normal;
         struct {
             u8 targetLocalId;
-            u8 padding1;
-            u16 padding2:4;
-            u16 padding3:4;
+            u8 padding[3];
             u16 targetMapNum;
             u16 targetMapGroup;
         } clone;

@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 4,
       "y": 8,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 12,
       "y": 5,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 14,
       "y": 4,
@@ -68,6 +72,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 6,
       "y": 4,
@@ -81,6 +86,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 2,
       "y": 1,
@@ -94,6 +100,7 @@
       "flag": "FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 3,
       "y": 1,

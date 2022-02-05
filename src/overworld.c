@@ -47,6 +47,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -405,7 +406,7 @@ static void LoadObjEventTemplatesFromHeader(void)
     {
         if (gMapHeader.events->objectEvents[i].kind == OBJ_KIND_CLONE)
         {
-            // load "in_connection" object from the connecting map
+            // load target object from the connecting map
             u8 localId = gMapHeader.events->objectEvents[i].objUnion.clone.targetLocalId;
             u8 mapNum = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapNum;
             u8 mapGroup = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapGroup;

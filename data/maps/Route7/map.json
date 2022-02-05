@@ -27,18 +27,12 @@
   ],
   "object_events": [
     {
+      "type": "clone",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "in_connection": true,
       "x": -8,
       "y": 12,
-      "elevation": 10,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "6",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "0x0",
-      "flag": "0"
+      "target_local_id": 10,
+      "target_map": "MAP_CELADON_CITY"
     }
   ],
   "warp_events": [

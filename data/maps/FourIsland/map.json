@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 16,
       "y": 13,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_DODUO",
       "x": 12,
       "y": 9,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NIDORAN_F",
       "x": 13,
       "y": 7,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NIDORAN_M",
       "x": 14,
       "y": 7,
@@ -68,6 +72,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PSYDUCK",
       "x": 17,
       "y": 9,
@@ -81,6 +86,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 26,
       "y": 19,
@@ -94,6 +100,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 5,
       "y": 11,
@@ -107,6 +114,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 6,
@@ -120,6 +128,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_STAR_PIECE"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 19,
@@ -133,6 +142,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_STARDUST"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 8,
       "y": 25,
@@ -146,6 +156,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_RIVAL"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 36,
       "y": 13,
@@ -159,6 +170,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 31,
       "y": 21,

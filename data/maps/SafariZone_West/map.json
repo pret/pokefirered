@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 28,
       "y": 14,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 13,
@@ -42,6 +44,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_TM32"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 16,
       "y": 27,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_MAX_POTION"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 27,
       "y": 24,

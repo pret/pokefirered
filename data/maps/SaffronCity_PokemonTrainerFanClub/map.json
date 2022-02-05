@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
       "x": 7,
       "y": 13,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 6,
       "y": 11,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 3,
       "y": 13,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 3,
       "y": 12,
@@ -68,6 +72,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 9,
       "y": 11,
@@ -81,6 +86,7 @@
       "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 7,
       "y": 12,
@@ -94,6 +100,7 @@
       "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 9,
       "y": 12,
@@ -107,6 +114,7 @@
       "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 5,
       "y": 11,
@@ -120,6 +128,7 @@
       "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 2,
       "y": 1,
@@ -133,6 +142,7 @@
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 3,
       "y": 1,

@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 11,
       "y": 6,
@@ -35,6 +36,7 @@
       "flag": "FLAG_HIDE_CREDITS_RIVAL"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 11,
       "y": 6,

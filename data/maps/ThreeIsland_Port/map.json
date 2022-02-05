@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 14,
       "y": 9,
@@ -35,6 +36,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 8,
       "y": 8,
@@ -48,6 +50,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 13,
       "y": 10,

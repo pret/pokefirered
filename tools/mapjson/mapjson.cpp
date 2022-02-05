@@ -288,19 +288,28 @@ string generate_firered_map_events_text(Json map_data) {
         text << objects_label << "::\n";
         for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
             auto obj_event = map_data["object_events"].array_items()[i];
-            text << "\tobject_event " << i + 1 << ", "
-                 << obj_event["graphics_id"].string_value() << ", "
-                 << (obj_event["in_connection"].bool_value() ? 255 : 0) << ", "
-                 << obj_event["x"].int_value() << ", "
-                 << obj_event["y"].int_value() << ", "
-                 << obj_event["elevation"].int_value() << ", "
-                 << obj_event["movement_type"].string_value() << ", "
-                 << obj_event["movement_range_x"].int_value() << ", "
-                 << obj_event["movement_range_y"].int_value() << ", "
-                 << obj_event["trainer_type"].string_value() << ", "
-                 << obj_event["trainer_sight_or_berry_tree_id"].string_value() << ", "
-                 << obj_event["script"].string_value() << ", "
-                 << obj_event["flag"].string_value() << "\n";
+            string type = obj_event["type"].string_value();
+            if (type == "object") {
+                text << "\tobject_event " << i + 1 << ", "
+                     << obj_event["graphics_id"].string_value() << ", "
+                     << obj_event["x"].int_value() << ", "
+                     << obj_event["y"].int_value() << ", "
+                     << obj_event["elevation"].int_value() << ", "
+                     << obj_event["movement_type"].string_value() << ", "
+                     << obj_event["movement_range_x"].int_value() << ", "
+                     << obj_event["movement_range_y"].int_value() << ", "
+                     << obj_event["trainer_type"].string_value() << ", "
+                     << obj_event["trainer_sight_or_berry_tree_id"].string_value() << ", "
+                     << obj_event["script"].string_value() << ", "
+                     << obj_event["flag"].string_value() << "\n";
+            } else if (type == "clone") {
+                text << "\tclone_event " << i + 1 << ", "
+                     << obj_event["graphics_id"].string_value() << ", "
+                     << obj_event["x"].int_value() << ", "
+                     << obj_event["y"].int_value() << ", "
+                     << obj_event["target_local_id"].int_value() << ", "
+                     << obj_event["target_map"].string_value() << "\n";
+            }
         }
         text << "\n";
     } else {

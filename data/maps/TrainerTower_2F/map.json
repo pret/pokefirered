@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TRAINER_TOWER_DUDE",
       "x": 9,
       "y": 7,
@@ -29,6 +30,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 10,
       "y": 10,
@@ -42,6 +44,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 15,
       "y": 13,
@@ -55,6 +58,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 10,
       "y": 16,
@@ -68,6 +72,7 @@
       "flag": "FLAG_TEMP_4"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 11,
       "y": 10,

@@ -1413,7 +1413,7 @@ static void atk05_damagecalc(void)
                                             gCurrentMove,
                                             sideStatus,
                                             gDynamicBasePower,
-                                            gBattleStruct->dynamicMoveType,
+                                            FALSE,
                                             gBattlerAttacker,
                                             gBattlerTarget);
 	
@@ -1435,7 +1435,7 @@ void AI_CalcDmg(u8 attacker, u8 defender)
                                             gCurrentMove,
                                             sideStatus,
                                             gDynamicBasePower,
-                                            gBattleStruct->dynamicMoveType,
+                                            FALSE,
                                             attacker,
                                             defender);
 	

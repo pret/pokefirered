@@ -3520,9 +3520,3 @@ u8 GetHiddenPowerType(struct Pokemon *mon)
 		++type;
 	return type;
 }
-	
-
-	
-	
-	
-	

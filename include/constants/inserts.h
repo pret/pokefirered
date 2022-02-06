@@ -4,6 +4,7 @@
 #define POISON_SURVIVAL TRUE //if true the pokemons don't die from poison in the overworld.
 #define SLEEP_UPDATE TRUE //if true the sleep counter last for 1-3 turns instead of 2-5.
 #define PARALYSIS_UPDATE TRUE //if true the speed drop of paralysis will be 50% instead of 75%.
+#define BURN_UPDATE TRUE //if true the burn damage will be 1/16 of max HP instead of 1/8.
 #define CONFUSION_UPDATE TRUE //if true the chance that the pokemon will be damaged by confusion becames 33% instead of 50%.
 #define EFFECTIVENESS_ON_MENU TRUE //if true the move type name trade its color based on the move effectiveness in battle.
 #define NATURE_COLOURS TRUE //if true colours the stat in the summary screen depending on the nature.

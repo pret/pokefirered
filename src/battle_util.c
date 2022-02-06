@@ -855,7 +855,11 @@ u8 DoBattlerEndTurnEffects(void)
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_BURN) && gBattleMons[gActiveBattler].hp != 0 
 		 && gBattleMons[gActiveBattler].ability != ABILITY_MAGIC_GUARD)
                 {
+#if BURN_UPDATE
+			gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+#else
 			gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+#endif
 			if (gBattleMons[gActiveBattler].ability == ABILITY_HEATPROOF)
 				gBattleMoveDamage /= 2;
 			if (gBattleMoveDamage == 0)

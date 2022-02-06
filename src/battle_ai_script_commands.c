@@ -978,7 +978,6 @@ static void Cmd_get_how_powerful_move_is(void)
         && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        gBattleStruct->dynamicMoveType = 0;
         gBattleScripting.dmgMultiplier = 1;
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
@@ -996,6 +995,7 @@ static void Cmd_get_how_powerful_move_is(void)
                 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[checkedMove]].power > 1)
             {
                 gCurrentMove = gBattleMons[gBattlerAttacker].moves[checkedMove];
+                gBattleStruct->dynamicMoveType = gBattleMoves[gCurrentMove].type;
                 AI_CalcDmg(gBattlerAttacker, gBattlerTarget);
                 TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);
                 moveDmgs[checkedMove] = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[checkedMove] / 100;

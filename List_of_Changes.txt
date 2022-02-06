@@ -29,6 +29,7 @@ Iv's In The Summary Screen
 Disable Badge Stat Boost
 Sleep Update
 Paralysis Update
+Burn Update
 Confusion Update
 
 DizzyEggg
@@ -101,7 +102,6 @@ vitamins cap to 252
 metric system update
 emerald style gender select intro
 critical hit probability
-burn update @next
 save fix
 text speed - fast / sound - stereo
 remove flashbacks @next

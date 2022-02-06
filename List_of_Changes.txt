@@ -29,6 +29,7 @@ Iv's In The Summary Screen
 Disable Badge Stat Boost
 Sleep Update
 Paralysis Update
+Confusion Update
 
 DizzyEggg
 

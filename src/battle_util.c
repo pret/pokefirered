@@ -1064,36 +1064,25 @@ u8 DoBattlerEndTurnEffects(void)
                 if (gStatuses3[gActiveBattler] & STATUS3_YAWN)
                 {
                     gStatuses3[gActiveBattler] -= 0x800;
-                    if (!(gStatuses3[gActiveBattler] & STATUS3_YAWN) && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY) && !UproarWakeUpCheck(gActiveBattler))
+                    if (!(gStatuses3[gActiveBattler] & STATUS3_YAWN) && !UproarWakeUpCheck(gActiveBattler) && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY))
 		    {
-			    if (gBattleMons[gActiveBattler].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA)
+			    if (gBattleMons[gActiveBattler].ability == ABILITY_VITAL_SPIRIT || gBattleMons[gActiveBattler].ability == ABILITY_INSOMNIA
+			       || (gBattleMons[gActiveBattler].ability == ABILITY_LEAF_GUARD && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY))
 			    {
-				    CancelMultiTurnMoves(gActiveBattler);
-#if SLEEP_UPDATE
-				    gBattleMons[gActiveBattler].status1 |= (Random() & 2) + 1;
-#else
-				    gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
-#endif
-				    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-				    MarkBattlerForControllerExec(gActiveBattler);
-				    gEffectBattler = gActiveBattler;
-				    BattleScriptExecute(BattleScript_YawnMakesAsleep);
-				    ++effect;
+				    ++gBattleStruct->turnEffectsTracker;
+				    break;
 			    }
-			    else if (gBattleMons[gActiveBattler].ability != ABILITY_LEAF_GUARD && !WEATHER_HAS_EFFECT && !(gBattleWeather & WEATHER_SUN_ANY))
-			    {
-				   CancelMultiTurnMoves(gActiveBattler);
+			    CancelMultiTurnMoves(gActiveBattler);
 #if SLEEP_UPDATE
-				    gBattleMons[gActiveBattler].status1 |= (Random() & 2) + 1;
+			    gBattleMons[gActiveBattler].status1 |= (Random() & 2) + 1;
 #else
-				    gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
+			    gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
 #endif
-				    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-				    MarkBattlerForControllerExec(gActiveBattler);
-				    gEffectBattler = gActiveBattler;
-				    BattleScriptExecute(BattleScript_YawnMakesAsleep);
-				    ++effect; 
-			    }
+			    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+			    MarkBattlerForControllerExec(gActiveBattler);
+			    gEffectBattler = gActiveBattler;
+			    BattleScriptExecute(BattleScript_YawnMakesAsleep);
+			    ++effect;
 		    }
 		}
                 ++gBattleStruct->turnEffectsTracker;

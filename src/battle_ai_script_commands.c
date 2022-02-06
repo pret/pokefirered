@@ -1202,7 +1202,6 @@ static void Cmd_get_highest_type_effectiveness(void)
 
     gDynamicBasePower = 0;
     dynamicMoveType = &gBattleStruct->dynamicMoveType;
-    *dynamicMoveType = 0;
     gBattleScripting.dmgMultiplier = 1;
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
@@ -1212,7 +1211,8 @@ static void Cmd_get_highest_type_effectiveness(void)
     {
         gBattleMoveDamage = 40;
         gCurrentMove = gBattleMons[gBattlerAttacker].moves[i];
-
+        *dynamicMoveType = gBattleMoves[gCurrentMove].type;
+        
         if (gCurrentMove != MOVE_NONE)
         {
             TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);

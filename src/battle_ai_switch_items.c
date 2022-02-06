@@ -494,6 +494,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
             for (i = 0; i < MAX_MON_MOVES; ++i)
             {
                 move = GetMonData(&gEnemyParty[bestMonId], MON_DATA_MOVE1 + i);
+                gBattleStruct->dynamicMoveType = gBattleMoves[move].type;
                 if (move != MOVE_NONE && TypeCalc(move, gActiveBattler, opposingBattler) & MOVE_RESULT_SUPER_EFFECTIVE)
                     break;
             }
@@ -508,7 +509,6 @@ u8 GetMostSuitableMonToSwitchInto(void)
         }
     }
     gDynamicBasePower = 0;
-    gBattleStruct->dynamicMoveType = 0;
     gBattleScripting.dmgMultiplier = 1;
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
@@ -527,6 +527,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         for (j = 0; j < MAX_MON_MOVES; ++j)
         {
             move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
+            gBattleStruct->dynamicMoveType = gBattleMoves[move].type;
             gBattleMoveDamage = 0;
             if (move != MOVE_NONE && gBattleMoves[move].power != 1)
             {

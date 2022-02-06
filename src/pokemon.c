@@ -2565,7 +2565,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 			    spAttack = (15 * spAttack) / 10;
 		    break;
 	    case ABILITY_TECHNICIAN:
-		    if (gBattleMovePower <= 60)
+		    if (gBattleMovePower <= 60 && !isConfusionDmg)
 			    gBattleMovePower = (gBattleMovePower * 15) / 10;
 		    break;
 	    case ABILITY_TINTED_LENS:
@@ -2639,7 +2639,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
     }
 	// burn attack drop
-    if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
+    if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS && !isConfusionDmg)
             attack /= 2;
    
 	if (IS_TYPE_PHYSICAL(split))

@@ -1242,14 +1242,14 @@ static void Cmd_if_type_effectiveness(void)
     u8 damageVar;
 
     gDynamicBasePower = 0;
-    gBattleStruct->dynamicMoveType = 0;
     gBattleScripting.dmgMultiplier = 1;
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
 
     gBattleMoveDamage = AI_EFFECTIVENESS_x1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-
+    gBattleStruct->dynamicMoveType = gBattleMoves[gCurrentMove].type;
+    
     TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);
 
     if (gBattleMoveDamage == 120) // Super effective STAB.

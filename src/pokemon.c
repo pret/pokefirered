@@ -2373,7 +2373,7 @@ bool8 IsMoveInTable(const u16 table[], u16 moveId)
 
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, bool8 isConfusionDmg, u8 battlerIdAtk, u8 battlerIdDef)
 {
-    u8 split, statiD1, statiD2, typeBackup;
+    u8 split, statiD1, statiD2;
     u8 attackerGender, defenderGender;
     u8 defenderHoldEffect, defenderHoldEffectParam;
     u8 attackerHoldEffect, attackerHoldEffectParam;
@@ -2384,7 +2384,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (isConfusionDmg)
     {
-	    typeBackup = gBattleStruct->dynamicMoveType;
+	    split = gBattleStruct->dynamicMoveType;
 	    gBattleStruct->dynamicMoveType = TYPE_NORMAL;
     }
     type = gBattleStruct->dynamicMoveType;
@@ -2392,7 +2392,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     flags = TypeCalc(move, battlerIdAtk, battlerIdDef);
 	
     if (isConfusionDmg)
-	    gBattleStruct->dynamicMoveType = typeBackup;
+	    gBattleStruct->dynamicMoveType = split;
 	
     if (!powerOverride)
         gBattleMovePower = gBattleMoves[move].power;

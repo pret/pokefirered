@@ -1481,11 +1481,11 @@ static void Cmd_if_can_faint(void)
     }
 
     gDynamicBasePower = 0;
-    gBattleStruct->dynamicMoveType = 0;
     gBattleScripting.dmgMultiplier = 1;
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
+    gBattleStruct->dynamicMoveType = gBattleMoves[gCurrentMove].type;
     AI_CalcDmg(gBattlerAttacker, gBattlerTarget);
     TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);
 
@@ -1510,11 +1510,11 @@ static void Cmd_if_cant_faint(void)
     }
 
     gDynamicBasePower = 0;
-    gBattleStruct->dynamicMoveType = 0;
     gBattleScripting.dmgMultiplier = 1;
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
+    gBattleStruct->dynamicMoveType = gBattleMoves[gCurrentMove].type;
     AI_CalcDmg(gBattlerAttacker, gBattlerTarget);
     TypeCalc(gCurrentMove, gBattlerAttacker, gBattlerTarget);
 

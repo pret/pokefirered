@@ -2427,32 +2427,33 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffect = ItemId_GetHoldEffect(defender->item, battlerIdDef, TRUE);
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
-#if BADGE_BOOST
-    // In FRLG, the Battle Tower and opponent checks are stubbed here.
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)) && !isConfusionDmg)
+
+    if (!isConfusionDmg) // makes confusion damage not affected by effects of items, abilities or boosts granted by badges
     {
-        if (FlagGet(FLAG_BADGE01_GET) && GetBattlerSide(battlerIdAtk) == B_SIDE_PLAYER)
-            attack = (110 * attack) / 100;
-        if (FlagGet(FLAG_BADGE05_GET) && GetBattlerSide(battlerIdDef) == B_SIDE_PLAYER)
-            defense = (110 * defense) / 100;
-        if (FlagGet(FLAG_BADGE07_GET) && GetBattlerSide(battlerIdAtk) == B_SIDE_PLAYER)
-            spAttack = (110 * spAttack) / 100;
-        if (FlagGet(FLAG_BADGE07_GET) && GetBattlerSide(battlerIdDef) == B_SIDE_PLAYER)
-            spDefense = (110 * spDefense) / 100;
-    }
+#if BADGE_BOOST
+	    // In FRLG, the Battle Tower and opponent checks are stubbed here.
+	    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | /*BATTLE_TYPE_BATTLE_TOWER |*/ BATTLE_TYPE_EREADER_TRAINER)))
+	    {
+		    if (FlagGet(FLAG_BADGE01_GET) && GetBattlerSide(battlerIdAtk) == B_SIDE_PLAYER)
+			    attack = (110 * attack) / 100;
+		    if (FlagGet(FLAG_BADGE05_GET) && GetBattlerSide(battlerIdDef) == B_SIDE_PLAYER)
+			    defense = (110 * defense) / 100;
+		    if (FlagGet(FLAG_BADGE07_GET) && GetBattlerSide(battlerIdAtk) == B_SIDE_PLAYER)
+			    spAttack = (110 * spAttack) / 100;
+		    if (FlagGet(FLAG_BADGE07_GET) && GetBattlerSide(battlerIdDef) == B_SIDE_PLAYER)
+			    spDefense = (110 * spDefense) / 100;
+	    }
 #endif
 
-    for (i = 0; i < NELEMS(sHoldEffectToType); i++)
-    {
-        if (attackerHoldEffect == sHoldEffectToType[i][0] && type == sHoldEffectToType[i][1])
-        {
-		attack = (attack * (attackerHoldEffectParam + 100)) / 100;
-		spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
-		break;
-        }
-    }
-    if (!isConfusionDmg) // makes confusion damage not affected by effects of items and abilities
-    {
+	    for (i = 0; i < NELEMS(sHoldEffectToType); i++)
+	    {
+		    if (attackerHoldEffect == sHoldEffectToType[i][0] && type == sHoldEffectToType[i][1])
+		    {
+			    attack = (attack * (attackerHoldEffectParam + 100)) / 100;
+			    spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
+			    break;
+		    }
+	    }
 	// attacker items check
 	    switch (attackerHoldEffect)
 	    {

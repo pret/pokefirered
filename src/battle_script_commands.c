@@ -8037,7 +8037,7 @@ static void atkC3_trysetfutureattack(void)
                                                                               gCurrentMove,
                                                                               gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)],
                                                                               0,
-                                                                              0,
+                                                                              FALSE,
                                                                               gBattlerAttacker,
                                                                               gBattlerTarget);
         if (gProtectStructs[gBattlerAttacker].helpingHand)

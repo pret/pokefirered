@@ -1654,14 +1654,11 @@ static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
 u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 {
     s32 i = 0;
-    u8 moveType, flags = 0;
+    u8 flags = 0, moveType = gBattleStruct->dynamicMoveType;
 
     if (move == MOVE_STRUGGLE)
         return 0;
-    if (gBattleStruct->dynamicMoveType)
-	    moveType = gBattleStruct->dynamicMoveType;
-    else
-	    moveType = gBattleMoves[move].type;
+	
     // check stab
     if (IS_BATTLER_OF_TYPE(attacker, moveType))
     {

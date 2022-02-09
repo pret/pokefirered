@@ -113,12 +113,24 @@
 	create_movement rock_smash_break
 	create_movement cut_tree
 
-	enum_start 0x91
-	create_movement step_91
-	create_movement step_92
+	enum_start 0x94
+	create_movement spin_down
+	create_movement spin_up
+	create_movement spin_left
+	create_movement spin_right
 
-	enum_start 0x96
-	create_movement step_96
+	enum_start 0x9b
+	create_movement walk_slowest_down
+	create_movement walk_slowest_up
+	create_movement walk_slowest_left
+	create_movement walk_slowest_right
+	create_movement shake_head
+
+	enum_start 0xa6
+	create_movement jump_special_with_effect_down
+	create_movement jump_special_with_effect_up
+	create_movement jump_special_with_effect_left
+	create_movement jump_special_with_effect_right
 
 	enum_start 0xfe
 	create_movement step_end

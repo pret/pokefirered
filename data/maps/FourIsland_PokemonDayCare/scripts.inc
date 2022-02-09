@@ -170,7 +170,7 @@ FourIsland_PokemonDayCare_Movement_RetrieveMon:: @ 8171B71
 	delay_16
 	delay_16
 	face_up
-	walk_slowest_up
+	walk_slower_up
 	set_invisible
 	delay_16
 	delay_16
@@ -179,7 +179,7 @@ FourIsland_PokemonDayCare_Movement_RetrieveMon:: @ 8171B71
 	delay_16
 	face_down
 	set_visible
-	walk_slowest_down
+	walk_slower_down
 	step_end
 
 @ Unused. Possibly a commented script, or a typo end added to the above Movement script

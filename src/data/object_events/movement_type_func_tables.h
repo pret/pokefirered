@@ -4,7 +4,7 @@ static bool8 MovementType_WanderAround_Step2(struct ObjectEvent *objectEvent, st
 static bool8 MovementType_WanderAround_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_WanderAround_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_WanderAround_Step5(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_WanderAround_Step5Slowest(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_WanderAround_Step5Slower(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_WanderAround_Step6(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_LookAround_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_LookAround_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
@@ -170,13 +170,13 @@ u8 (*const gMovementTypeFuncs_WanderAround[])(struct ObjectEvent *, struct Sprit
     MovementType_WanderAround_Step6,
 };
 
-u8 (*const gMovementTypeFuncs_WanderAroundSlowest[])(struct ObjectEvent *, struct Sprite *) = {
+u8 (*const gMovementTypeFuncs_WanderAroundSlower[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_WanderAround_Step0,
     MovementType_WanderAround_Step1,
     MovementType_WanderAround_Step2,
     MovementType_WanderAround_Step3,
     MovementType_WanderAround_Step4,
-    MovementType_WanderAround_Step5Slowest,
+    MovementType_WanderAround_Step5Slower,
     MovementType_WanderAround_Step6,
 };
 

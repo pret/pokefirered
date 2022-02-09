@@ -236,26 +236,22 @@
 #define MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_LEFT          0x92
 #define MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT         0x93
 
-#define MOVEMENT_ACTION_SPIN_DOWN  0x94
-#define MOVEMENT_ACTION_SPIN_UP    0x95
-#define MOVEMENT_ACTION_SPIN_LEFT  0x96
-#define MOVEMENT_ACTION_SPIN_RIGHT 0x97
- 
-#define MOVEMENT_ACTION_0x98 0x98
-#define MOVEMENT_ACTION_0x99 0x99
-#define MOVEMENT_ACTION_0x9A 0x9A
-
-#define MOVEMENT_ACTION_WALK_SLOWEST_DOWN  0x9B
-#define MOVEMENT_ACTION_WALK_SLOWEST_UP    0x9C
-#define MOVEMENT_ACTION_WALK_SLOWEST_LEFT  0x9D
-#define MOVEMENT_ACTION_WALK_SLOWEST_RIGHT 0x9E
-#define MOVEMENT_ACTION_SHAKE_HEAD         0x9F
-
-#define MOVEMENT_ACTION_0xA0 0xA0
-#define MOVEMENT_ACTION_0xA1 0xA1
-#define MOVEMENT_ACTION_0xA2 0xA2
-#define MOVEMENT_ACTION_0xA3 0xA3
-
+#define MOVEMENT_ACTION_SPIN_DOWN                       0x94
+#define MOVEMENT_ACTION_SPIN_UP                         0x95
+#define MOVEMENT_ACTION_SPIN_LEFT                       0x96
+#define MOVEMENT_ACTION_SPIN_RIGHT                      0x97
+#define MOVEMENT_ACTION_0x98                            0x98
+#define MOVEMENT_ACTION_0x99                            0x99
+#define MOVEMENT_ACTION_0x9A                            0x9A
+#define MOVEMENT_ACTION_WALK_SLOWEST_DOWN               0x9B
+#define MOVEMENT_ACTION_WALK_SLOWEST_UP                 0x9C
+#define MOVEMENT_ACTION_WALK_SLOWEST_LEFT               0x9D
+#define MOVEMENT_ACTION_WALK_SLOWEST_RIGHT              0x9E
+#define MOVEMENT_ACTION_SHAKE_HEAD                      0x9F
+#define MOVEMENT_ACTION_0xA0                            0xA0
+#define MOVEMENT_ACTION_0xA1                            0xA1
+#define MOVEMENT_ACTION_0xA2                            0xA2
+#define MOVEMENT_ACTION_0xA3                            0xA3
 #define MOVEMENT_ACTION_FLY_UP                          0xA4
 #define MOVEMENT_ACTION_FLY_DOWN                        0xA5
 #define MOVEMENT_ACTION_JUMP_SPECIAL_WITH_EFFECT_DOWN   0xA6

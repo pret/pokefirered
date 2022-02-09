@@ -2197,7 +2197,8 @@ static void LoadObjectEventPalette(u16 paletteTag)
     }
 }
 
-void Unused_LoadObjectEventPaletteSet(u16 *paletteTags)
+// Unused
+void LoadObjectEventPaletteSet(u16 *paletteTags)
 {
     u8 i;
 
@@ -2285,7 +2286,8 @@ u8 sub_805F6D0(u8 var)
     return gReflectionEffectPaletteMap[var];
 }
 
-void Unused_IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
+// Unused
+void IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
 {
     objectEvent->previousCoords.x = objectEvent->currentCoords.x;
     objectEvent->previousCoords.y = objectEvent->currentCoords.y;
@@ -2575,7 +2577,8 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
 }
 
-u8 Unused_GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+// Unused
+u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
 
@@ -2590,12 +2593,14 @@ u16 GetObjectEventFlagByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
     return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->trainerType;
 }
 
-u8 Unused_GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
+// Unused
+u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
 {
     return gObjectEvents[objectEventId].trainerType;
 }
 
-u8 Unused_GetObjectEventBerryTreeIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+// Unused
+u8 GetObjectEventBerryTreeIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
 
@@ -2605,7 +2610,8 @@ u8 Unused_GetObjectEventBerryTreeIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 map
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
 
-u8 Unused_GetObjectEventBerryTreeId(u8 objectEventId)
+// Unused
+u8 GetObjectEventBerryTreeId(u8 objectEventId)
 {
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }

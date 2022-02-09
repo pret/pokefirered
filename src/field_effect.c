@@ -1600,7 +1600,7 @@ static bool8 waterfall_2_wait_anim_finish_probably(struct Task * task, struct Ob
 
 static bool8 waterfall_3_move_player_probably(struct Task * task, struct ObjectEvent * playerObj)
 {
-    ObjectEventSetHeldMovement(playerObj, GetWalkSlowestMovementAction(DIR_NORTH));
+    ObjectEventSetHeldMovement(playerObj, GetWalkSlowerMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }

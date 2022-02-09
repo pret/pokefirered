@@ -14,10 +14,10 @@
 	create_movement face_up_fast
 	create_movement face_left_fast
 	create_movement face_right_fast
-	create_movement walk_slowest_down
-	create_movement walk_slowest_up
-	create_movement walk_slowest_left
-	create_movement walk_slowest_right
+	create_movement walk_slower_down
+	create_movement walk_slower_up
+	create_movement walk_slower_left
+	create_movement walk_slower_right
 	create_movement walk_slow_down
 	create_movement walk_slow_up
 	create_movement walk_slow_left
@@ -55,10 +55,10 @@
 	create_movement walk_in_place_fastest_up
 	create_movement walk_in_place_fastest_left
 	create_movement walk_in_place_fastest_right
-	create_movement face_down_slow
-	create_movement face_up_slow
-	create_movement face_left_slow
-	create_movement face_right_slow
+	create_movement ride_water_current_down
+	create_movement ride_water_current_up
+	create_movement ride_water_current_lefft
+	create_movement ride_water_current_right
 	create_movement walk_fastest_down
 	create_movement walk_fastest_up
 	create_movement walk_fastest_left

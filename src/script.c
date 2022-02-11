@@ -2,6 +2,7 @@
 #include "script.h"
 #include "event_data.h"
 #include "quest_log.h"
+#include "constants/maps.h"
 
 #define RAM_SCRIPT_MAGIC 51
 #define SCRIPT_STACK_SIZE 20
@@ -511,9 +512,9 @@ bool32 ValidateRamScript(void)
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return FALSE;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
         return FALSE;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
         return FALSE;
     if (scriptData->objectId != 0xFF)
         return FALSE;
@@ -529,9 +530,9 @@ u8 *sub_8069E48(void)
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
         return NULL;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
         return NULL;
     if (scriptData->objectId != 0xFF)
         return NULL;

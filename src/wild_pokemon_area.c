@@ -6,6 +6,7 @@
 #include "overworld.h"
 #include "pokedex_area_markers.h"
 #include "constants/region_map_sections.h"
+#include "constants/maps.h"
 
 struct SeviiDexArea
 {
@@ -181,7 +182,7 @@ s32 BuildPokedexAreaSubspriteBuffer(u16 species, struct Subsprite * subsprites)
     alteringCaveNum = VarGet(VAR_ALTERING_CAVE_WILD_SET);
     if (alteringCaveNum > 8)
         alteringCaveNum = 0;
-    for (i = 0, areaCount = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
+    for (i = 0, areaCount = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED); i++)
     {
         mapSecId = GetMapSecIdFromWildMonHeader(&gWildMonHeaders[i]);
         if (mapSecId == MAPSEC_ALTERING_CAVE)

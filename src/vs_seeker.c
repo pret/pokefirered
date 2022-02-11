@@ -638,14 +638,11 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
 
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if ((
-                templates[i].trainerType == TRAINER_TYPE_NORMAL
-             || templates[i].trainerType == TRAINER_TYPE_BURIED
-            ) && (
-                templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4D
-             || templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4E
-             || templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4F
-          ))
+        if ((templates[i].trainerType == TRAINER_TYPE_NORMAL
+          || templates[i].trainerType == TRAINER_TYPE_BURIED) 
+         && (templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4D
+          || templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4E
+          || templates[i].movementType == MOVEMENT_TYPE_VS_SEEKER_4F))
         {
             movementType = GetRandomFaceDirectionMovementType();
             TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
@@ -808,7 +805,7 @@ static void GatherNearbyTrainerInfo(void)
 
     for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->objectEventCount; objectEventIdx++)
     {
-        if (templates[objectEventIdx].trainerType == 1 || templates[objectEventIdx].trainerType == 3)
+        if (templates[objectEventIdx].trainerType == TRAINER_TYPE_NORMAL || templates[objectEventIdx].trainerType == TRAINER_TYPE_BURIED)
         {
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[objectEventIdx].script;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[objectEventIdx].script);

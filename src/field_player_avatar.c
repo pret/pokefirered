@@ -25,6 +25,7 @@
 #include "constants/songs.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
+#include "constants/trainer_types.h"
 
 static EWRAM_DATA struct ObjectEvent * sPlayerObjectPtr = NULL;
 static EWRAM_DATA u8 sTeleportSavedFacingDirection = DIR_NONE;
@@ -1295,7 +1296,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerObjEventTemplate.movementType = MOVEMENT_TYPE_PLAYER;
     playerObjEventTemplate.movementRangeX = 0;
     playerObjEventTemplate.movementRangeY = 0;
-    playerObjEventTemplate.trainerType = 0;
+    playerObjEventTemplate.trainerType = TRAINER_TYPE_NONE;
     playerObjEventTemplate.trainerRange_berryTreeId = 0;
     playerObjEventTemplate.script = NULL;
     playerObjEventTemplate.flagId = 0;

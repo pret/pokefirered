@@ -17,6 +17,7 @@
 #include "trig.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/trainer_types.h"
 
 static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
 static bool8 ObjectEventExecSingleMovementAction(struct ObjectEvent *, struct Sprite *);
@@ -1682,7 +1683,7 @@ int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 
     objectEventTemplate.movementType = movementBehavior;
     objectEventTemplate.movementRangeX = 0;
     objectEventTemplate.movementRangeY = 0;
-    objectEventTemplate.trainerType = 0;
+    objectEventTemplate.trainerType = TRAINER_TYPE_NONE;
     objectEventTemplate.trainerRange_berryTreeId = 0;
     return SpawnSpecialObjectEvent(&objectEventTemplate);
 }
@@ -2588,8 +2589,10 @@ u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
     return gObjectEvents[objectEventId].trainerType;
 }
 
-u16 GetObjectEventFlagByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+u16 GetBoulderRevealFlagByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
+    // Pushable boulder object events store the flag to reveal the boulder
+    // on the floor below in their trainer type field.
     return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->trainerType;
 }
 
@@ -2824,13 +2827,9 @@ bool8 ObjectEventIsTrainerAndCloseToPlayer(struct ObjectEvent *objectEvent)
     s16 maxY;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
-    {
         return FALSE;
-    }
-    if (objectEvent->trainerType != 1 && objectEvent->trainerType != 3)
-    {
+    if (objectEvent->trainerType != TRAINER_TYPE_NORMAL && objectEvent->trainerType != TRAINER_TYPE_BURIED)
         return FALSE;
-    }
     PlayerGetDestCoords(&playerX, &playerY);
     objX = objectEvent->currentCoords.x;
     objY = objectEvent->currentCoords.y;

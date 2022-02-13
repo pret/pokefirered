@@ -34,7 +34,7 @@ static const u8 sBadDreamsString[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented!"
 static const u8 sDrySkinRainString[] = _("{B_ATK_NAME_WITH_PREFIX} gain some\nof its HP!");
 static const u8 sDrySkinSunString[] = _("{B_ATK_NAME_WITH_PREFIX} lost some\nof its HP!");
 static const u8 sMoldBreakerString[] = _("{B_ATK_NAME_WITH_PREFIX} breaks the mold!");
-
+static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its\nAttack!");
 static const u8 sMoveStatUpString[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sSlowStartStartString[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget it going!");
 static const u8 sSlowStartEndString[] = _("{B_ATK_NAME_WITH_PREFIX} got its\nact together!");

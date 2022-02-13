@@ -50,7 +50,6 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 
 //used strings
 static const u8 sAftermathString[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
-static const u8 sAngerPointString[] = _("{B_DEF_NAME_WITH_PREFIX} maxed its\nAttack!");
 static const u8 sAnticipationString[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered!");
 static const u8 sDownloadString[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sForewarnString[] = _("It was alerted to\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");

@@ -2221,6 +2221,7 @@ static void atk0F_resultmessage(void)
 			gProtectStructs[gBattlerTarget].enduredBySturdy = FALSE;
 			BattleScriptPushCursor();
 			gBattlescriptCurrInstr = BattleScript_EnduredBySturdyMsg;
+			return;
 		}
                 else
                     gBattleCommunication[MSG_DISPLAY] = 0;

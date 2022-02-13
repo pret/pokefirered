@@ -34,6 +34,7 @@ static const u8 sBadDreamsString[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented!"
 static const u8 sDrySkinRainString[] = _("{B_ATK_NAME_WITH_PREFIX} gain some\nof its HP!");
 static const u8 sDrySkinSunString[] = _("{B_ATK_NAME_WITH_PREFIX} lost some\nof its HP!");
 static const u8 sMoldBreakerString[] = _("{B_ATK_NAME_WITH_PREFIX} breaks the mold!");
+
 static const u8 sMoveStatUpString[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
 static const u8 sSlowStartStartString[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nget it going!");
 static const u8 sSlowStartEndString[] = _("{B_ATK_NAME_WITH_PREFIX} got its\nact together!");
@@ -2228,6 +2229,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 					++effect;
 				}
 				break;
+			    case ABILITY_ANGER_POINT:
+				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && TARGET_TURN_DAMAGED && gCritMultiplier == 2
+				    && gBattleMons[gBattlerTarget].hp != 0 && !(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+				    && gBattleMons[gBattlerTarget].statStages[STAT_ATK] < 0xC)
+				{
+					gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
+					gSetWordLoc = sAngerPointString;
+					BattleScriptPushCursor();
+					gBattlescriptCurrInstr = BattleScript_AngerPointActivation;
+					++effect;
+				}
+				break;	    
 			    case ABILITY_PICKPOCKET:
 				if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && !gProtectStructs[gBattlerAttacker].confusionSelfDmg && TARGET_TURN_DAMAGED
 				    && (gBattleMoves[moveArg].flags & FLAG_MAKES_CONTACT) && !SubsBlockMove(gBattlerAttacker, gBattlerTarget, moveArg)

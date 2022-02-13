@@ -2247,9 +2247,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 				    && !gBattleMons[gBattlerTarget].item && gBattleMons[gBattlerTarget].hp != 0 
 				    && gBattleMons[gBattlerAttacker].ability != ABILITY_STICKY_HOLD && gBattleMons[gBattlerAttacker].item)
 				{
-					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_STEAL_ITEM;
+					gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_STEAL_ITEM;
 					BattleScriptPushCursor();
-					gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
+					gBattlescriptCurrInstr = BattleScript_PickpocketActivation;
 					++effect;
 				}
 				break;

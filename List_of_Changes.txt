@@ -87,8 +87,7 @@ make flower gift form change
 make from immunity to down ability pop up scripts
 probabily add an inverse battle check in anticipation type calc
 end update of moves data
-add the new moves in getforewarnmovepower
-add the new moves in sIronFistTable, sRecklessTable, gnochangetypemoves and gSheerForceBoostedMoves
+add the new moves in getforewarnmovepower, sIronFistTable, sRecklessTable, gnochangetypemoves and gSheerForceBoostedMoves
 add berries in isitemaffectedbygluttony
 add abilities in mold breaker ignorable abilities table
 Leaf guard prevents the Flame Orb and Toxic Orb

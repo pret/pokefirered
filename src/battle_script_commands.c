@@ -70,7 +70,6 @@ static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static bool8 MakesSound(u16 move);
 static void DoAftermathDamageAsm(void);
-static void MaxAttackAngerPointAsm(void);
 static void TryDoAnticipationShudderAsm(void);
 static bool8 AnticipationTypeCalc(u8 battler);
 static void TryBadDreamsSecondDamageAsm(void);
@@ -598,7 +597,6 @@ void (* const gBattleScriptingCommandsTable[])(void) =
 void (* const gCallAsmCommandTablePointers[])(void) =
 {
 	[DoAftermathDamage] = DoAftermathDamageAsm,
-	[MaxAttackAngerPoint] = MaxAttackAngerPointAsm,
 	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
 	[TryBadDreamsSecondDamage] = TryBadDreamsSecondDamageAsm,
 	[GetStatRaiseDownload] = GetStatRaiseDownloadAsm,
@@ -9320,11 +9318,6 @@ static void DoAftermathDamageAsm(void)
 	}
 	else
 		gBattlescriptCurrInstr = BattleScript_FaintTargetReturn;	
-}
-
-static void MaxAttackAngerPointAsm(void)
-{
-	gBattleMons[gBattlerTarget].statStages[STAT_ATK] = 0xC;
 }
 
 static bool8 AnticipationTypeCalc(u8 battler)

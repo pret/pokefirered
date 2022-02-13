@@ -4491,7 +4491,7 @@ BattleScript_FlushMessageBox::
 BattleScript_AngerPointActivation::
         setstatchanger STAT_ATK, 1, FALSE
 	setgraphicalstatchangevalues
-	playanimation BANK_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	
 BattleScript_PrintStringAndReturn::
         printstring STRINGID_SETWORDSTRING

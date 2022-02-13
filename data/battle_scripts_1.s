@@ -4489,7 +4489,7 @@ BattleScript_FlushMessageBox::
 	return
 
 BattleScript_AngerPointActivation::
-        setstatchanger STAT_ATK | INCREASE_1
+        setstatchanger STAT_ATK, 1, FALSE
 	setgraphicalstatchangevalues
 	playanimation BANK_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	

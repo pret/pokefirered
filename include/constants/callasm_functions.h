@@ -1,8 +1,7 @@
 #define DoAftermathDamage 0
-#define MaxAttackAngerPoint 1
-#define TryDoAnticipationShudder 2
-#define TryBadDreamsSecondDamage 3
-#define GetStatRaiseDownload 4
-#define GetStrongestMoveForewarn 5
-#define TryFriskFirstTarget 6
-#define TryFriskSecondTarget 7
+#define TryDoAnticipationShudder 1
+#define TryBadDreamsSecondDamage 2
+#define GetStatRaiseDownload 3
+#define GetStrongestMoveForewarn 4
+#define TryFriskFirstTarget 5
+#define TryFriskSecondTarget 6

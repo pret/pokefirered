@@ -1800,9 +1800,9 @@ static void atk07_adjustnormaldamage(void)
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
-    if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove) && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE 
-        || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded || (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY
-     && gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)) && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
+    if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove) && ((gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE 
+        || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded) || (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY
+        && gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)) && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 	    
@@ -1843,8 +1843,8 @@ static void atk08_adjustnormaldamage2(void)
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
     if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-     && (gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded || gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
-     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
+     && ((gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded) || (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY
+     && gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)) && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
 	    

@@ -1801,7 +1801,8 @@ static void atk07_adjustnormaldamage(void)
         gSpecialStatuses[gBattlerTarget].focusBanded = 1;
     }
     if (!SubsBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove) && (gBattleMoves[gCurrentMove].effect == EFFECT_FALSE_SWIPE 
-        || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded || gBattleMons[gBattlerTarget].ability == ABILITY_STURDY)
+        || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded || (gBattleMons[gBattlerTarget].ability == ABILITY_STURDY
+     && gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP))
      && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
     {
         gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;

@@ -4489,8 +4489,9 @@ BattleScript_FlushMessageBox::
 	return
 
 BattleScript_AngerPointActivation::
-        playstatchangeanimation BS_TARGET, BIT_ATK, 0
-        callasm MaxAttackAngerPoint
+        setstatchanger STAT_ATK | INCREASE_1
+	setgraphicalstatchangevalues
+	playanimation BANK_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	
 BattleScript_PrintStringAndReturn::
         printstring STRINGID_SETWORDSTRING

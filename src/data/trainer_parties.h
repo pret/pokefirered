@@ -3745,14 +3745,14 @@ static const struct TrainerMonNoItemCustomMoves sParty_RivalRoute22EarlySquirtle
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_PIDGEY,
-        .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_SNORLAX,
+        .moves = {MOVE_TACKLE, MOVE_AMNESIA, MOVE_DEFENSE_CURL, MOVE_NONE},
     },
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_SQUIRTLE,
-        .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_SHELLDER,
+        .moves = {MOVE_TACKLE, MOVE_WITHDRAW, MOVE_WATER_GUN, MOVE_NONE},
     },
 };
 
@@ -3760,14 +3760,14 @@ static const struct TrainerMonNoItemCustomMoves sParty_RivalRoute22EarlyBulbasau
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_PIDGEY,
-        .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_SNORLAX,
+        .moves = {MOVE_TACKLE, MOVE_AMNESIA, MOVE_DEFENSE_CURL, MOVE_NONE},
     },
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_BULBASAUR,
-        .moves = {MOVE_TACKLE, MOVE_GROWL, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_VULPIX,
+        .moves = {MOVE_SCRATCH, MOVE_TAIL_WHIP, MOVE_EMBER, MOVE_NONE},
     },
 };
 
@@ -3775,14 +3775,14 @@ static const struct TrainerMonNoItemCustomMoves sParty_RivalRoute22EarlyCharmand
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_PIDGEY,
-        .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_SNORLAX,
+        .moves = {MOVE_TACKLE, MOVE_AMNESIA, MOVE_DEFENSE_CURL, MOVE_NONE},
     },
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_CHARMANDER,
-        .moves = {MOVE_SCRATCH, MOVE_GROWL, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_EXEGGCUTE,
+        .moves = {MOVE_BARRAGE, MOVE_CURSE, MOVE_CONFUSION, MOVE_NONE},
     },
 };
 

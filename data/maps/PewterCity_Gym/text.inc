@@ -6,7 +6,7 @@ PewterCity_Gym_Text_BrockIntro:: @ 8190CD4
     .string "My POKéMON are all rock hard, and\n"
     .string "have true-grit determination.\p"
     .string "That's right - my POKéMON are all\n"
-    .string "the ROCK type!\p"
+    .string "the ROCK and GROUND type!\p"
     .string "Fuhaha! You're going to challenge\n"
     .string "me knowing that you'll lose?\p"
     .string "That's the TRAINER's honor that\n"

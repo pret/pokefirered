@@ -3766,7 +3766,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_RivalRoute22EarlyBulbasau
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_VULPIX,
+        .species = SPECIES_EXEGGCUTE,
         .moves = {MOVE_SCRATCH, MOVE_TAIL_WHIP, MOVE_EMBER, MOVE_NONE},
     },
 };
@@ -3781,7 +3781,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_RivalRoute22EarlyCharmand
     {
         .iv = 50,
         .lvl = 9,
-        .species = SPECIES_EXEGGCUTE,
+        .species = SPECIES_VULPIX,
         .moves = {MOVE_BARRAGE, MOVE_CURSE, MOVE_CONFUSION, MOVE_NONE},
     },
 };
@@ -5605,14 +5605,20 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
     {
         .iv = 0,
         .lvl = 12,
-        .species = SPECIES_GEODUDE,
-        .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_NONE, MOVE_NONE},
+        .species = SPECIES_ARON,
+        .moves = {MOVE_METAL_CLAW, MOVE_ROCK_TOMB, MOVE_HARDEN, MOVE_NONE},
+    },
+    {
+        .iv = 0,
+        .lvl = 12,
+        .species = SPECIES_GLIGAR,
+        .moves = {MOVE_KNOCK_OFF, MOVE_POISON_STING, MOVE_SAND_ATTACK, MOVE_NONE},
     },
     {
         .iv = 0,
         .lvl = 14,
         .species = SPECIES_ONIX,
-        .moves = {MOVE_TACKLE, MOVE_BIND, MOVE_ROCK_TOMB, MOVE_NONE},
+        .moves = {MOVE_SCREECH, MOVE_BIND, MOVE_ROCK_TOMB, MOVE_NONE},
     },
 };
 

@@ -5626,14 +5626,20 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderMisty[] = {
     {
         .iv = 0,
         .lvl = 18,
-        .species = SPECIES_STARYU,
-        .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_RECOVER, MOVE_WATER_PULSE},
+        .species = SPECIES_KIRLIA,
+        .moves = {MOVE_DOUBLE_TEAM, MOVE_CONFUSION, MOVE_RAIN_DANCE, MOVE_NONE},
+    },
+    {
+        .iv = 0,
+        .lvl = 19,
+        .species = SPECIES_WOOPER,
+        .moves = {MOVE_MUD_SHOT, MOVE_SLAM, MOVE_TAIL_WHIP, MOVE_WATER_PULSE},
     },
     {
         .iv = 0,
         .lvl = 21,
         .species = SPECIES_STARMIE,
-        .moves = {MOVE_SWIFT, MOVE_RECOVER, MOVE_RAPID_SPIN, MOVE_WATER_PULSE},
+        .moves = {MOVE_SWIFT, MOVE_RECOVER, MOVE_CONFUSE_RAY, MOVE_WATER_PULSE},
     },
 };
 

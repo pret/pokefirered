@@ -5,7 +5,7 @@ CeruleanCity_Gym_Text_MistyIntro:: @ 81921EF
     .string "What is your approach when you\n"
     .string "catch and train POKéMON?\p"
     .string "My policy is an all-out offensive\n"
-    .string "with WATER-type POKéMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "with WATER and ICE-type POKéMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 CeruleanCity_Gym_Text_ExplainTM03:: @ 81922BF
     .string "TM03 teaches WATER PULSE.\p"
@@ -65,12 +65,14 @@ CeruleanCity_Gym_Text_GymGuyAdvice:: @ 81925AC
     .string "Yo!\n"
     .string "Champ in the making!\p"
     .string "Let me give you some advice!\p"
-    .string "The LEADER, MISTY, is a pro who\n"
-    .string "uses WATER-type POKéMON.\p"
+    .string "The LEADER, MISTY, is a pro WATER-\n"
+    .string "and PSYCHIC-type POKéMON user.\p"
     .string "You can drain all their water with\n"
     .string "GRASS-type POKéMON.\p"
     .string "Or, you might use ELECTRIC-type\n"
-    .string "POKéMON and zap them!$"
+    .string "POKéMON and zap them!\p"
+    .string "Don't forget to use DARK- and\n"
+    .string "BUG-type POKéMON to scare them!$"
 
 CeruleanCity_Gym_Text_WeMakePrettyGoodTeam:: @ 8192688
     .string "You beat MISTY!\n"

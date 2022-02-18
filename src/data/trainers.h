@@ -5103,7 +5103,7 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_GentlemanWalter}
     },
     [TRAINER_RIVAL_SS_ANNE_SQUIRTLE] = {
-        .partyFlags = 0,
+        .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_RIVAL_LATE,
@@ -5112,10 +5112,10 @@ const struct Trainer gTrainers[] = {
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
         .partySize = NELEMS(sParty_RivalSsAnneSquirtle),
-        .party = {.NoItemDefaultMoves = sParty_RivalSsAnneSquirtle}
+        .party = {.NoItemCustomMoves = sParty_RivalSsAnneSquirtle}
     },
     [TRAINER_RIVAL_SS_ANNE_BULBASAUR] = {
-        .partyFlags = 0,
+        .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_RIVAL_LATE,
@@ -5124,10 +5124,10 @@ const struct Trainer gTrainers[] = {
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
         .partySize = NELEMS(sParty_RivalSsAnneBulbasaur),
-        .party = {.NoItemDefaultMoves = sParty_RivalSsAnneBulbasaur}
+        .party = {.NoItemCustomMoves = sParty_RivalSsAnneBulbasaur}
     },
     [TRAINER_RIVAL_SS_ANNE_CHARMANDER] = {
-        .partyFlags = 0,
+        .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_RIVAL_LATE,
@@ -5136,7 +5136,7 @@ const struct Trainer gTrainers[] = {
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
         .partySize = NELEMS(sParty_RivalSsAnneCharmander),
-        .party = {.NoItemDefaultMoves = sParty_RivalSsAnneCharmander}
+        .party = {.NoItemCustomMoves = sParty_RivalSsAnneCharmander}
     },
     [TRAINER_RIVAL_POKENON_TOWER_SQUIRTLE] = {
         .partyFlags = 0,

@@ -2439,7 +2439,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
         {
-            if()
             if (IS_TYPE_PHYSICAL(type))
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
             else
@@ -2489,12 +2488,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
-/*  EXPLOSION DOUBLE DAMAGE CODE
-      REMOVED BECAUSE IT SUCKS
-
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
-        defense /= 2;
-*/
+    
     if (IS_TYPE_PHYSICAL(type))
     {
         if (gCritMultiplier == 2)

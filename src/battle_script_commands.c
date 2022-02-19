@@ -1064,13 +1064,14 @@ static void atk01_accuracycheck(void)
     }
     else
     {
-        u8 type, moveAcc, holdEffect, param;
+        u8 type, moveCat, moveAcc, holdEffect, param;
         s8 buff;
         u16 calc;
 
         if (move == MOVE_NONE)
             move = gCurrentMove;
         GET_MOVE_TYPE(move, type);
+        GET_MOVE_CAT(move, moveCat);
         if (JumpIfMoveAffectedByProtect(move) || AccuracyCalcHelper(move))
             return;
         if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
@@ -1099,7 +1100,7 @@ static void atk01_accuracycheck(void)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & WEATHER_SANDSTORM_ANY)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(moveCat))
             calc = (calc * 80) / 100; // 1.2 hustle loss
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
         {
@@ -1739,6 +1740,7 @@ static void atk0B_healthbarupdate(void)
 static void atk0C_datahpupdate(void)
 {
     u32 moveType;
+    u8 moveCat;
 
     if (!gBattleControllerExecFlags)
     {
@@ -1748,6 +1750,8 @@ static void atk0C_datahpupdate(void)
             moveType = gBattleStruct->dynamicMoveType & 0x3F;
         else
             moveType = gBattleMoves[gCurrentMove].type;
+
+        moveCat = gBattleMoves[gCurrentMove].move_cat;
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
             gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
@@ -1813,7 +1817,7 @@ static void atk0C_datahpupdate(void)
                     }
                     if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                         gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
-                    if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                    if (IS_MOVE_PHYSICAL(moveCat) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                     {
                         gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                         gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -1828,7 +1832,7 @@ static void atk0C_datahpupdate(void)
                             gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                         }
                     }
-                    else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                    else if (!IS_MOVE_PHYSICAL(moveCat) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     {
                         gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                         gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;

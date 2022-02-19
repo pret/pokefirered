@@ -184,7 +184,7 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese:: @ 818E612
     .string "catching wild POKéMON.$"
 
 PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls:: @ 818E6B3
-    .string "{PLAYER} received five POKé BALLS.$"
+    .string "{PLAYER} received fifteen POKé BALLS.$"
 
 PalletTown_ProfessorOaksLab_Text_OakExplainCatching:: @ 818E6D0
     .string "When a wild POKéMON appears,\n"

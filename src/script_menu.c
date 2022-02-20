@@ -13,6 +13,7 @@
 #include "constants/songs.h"
 #include "constants/seagallop.h"
 #include "constants/menu.h"
+#include "constants/items.h"
 
 struct MultichoiceListStruct
 {

@@ -12,6 +12,8 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
 bool8 ScriptMenu_ShowPokemonPic(u16 var1, u8 var2, u8 var3);
 bool8 CreatePCMenu(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
+void DrawRepelMultichoiseMenu(void);
+void HandleRepelUseAnother(void);
 
 bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void);
 void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void);

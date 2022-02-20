@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "menu.h"
 #include "task.h"
+#include "item.h"
 #include "script_menu.h"
 #include "quest_log.h"
 #include "new_menu_helpers.h"

@@ -12,6 +12,3 @@
 #define MON_ICON_ON_TRAINER_CARD TRUE //if true draw the party mon icons on the trainer card back.
 #define DISAPPEAR_HP_BAR_DURING_ANIMS TRUE //if true the hp bars disppears when a move anim is displayed.
 #define BADGE_BOOST TRUE //if true it applies the boosts given by each badge.
-
-// need
-#define BW_REPEL_SYSTEM TRUE //if true when the Repel's effect wears off, the game will automatically ask the player whether they want to use another one immediately.

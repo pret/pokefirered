@@ -742,7 +742,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
     DrawCustomMultichoiseMenu(left, top, mcId, ignoreBpress, initPos, gScriptMultiChoiceMenus[mcId].list, gScriptMultiChoiceMenus[mcId].count);
 }
 
-static void DrawRepelMultichoiseMenu(void)
+void DrawRepelMultichoiseMenu(void)
 {
     static const u16 RepelItems[] = {ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL};
     struct MenuAction MenuItems[4] = {NULL};
@@ -762,7 +762,7 @@ static void DrawRepelMultichoiseMenu(void)
     gSpecialVar_Result = (count > 1);
 }
 
-static void HandleRepelUseAnother(void)
+void HandleRepelUseAnother(void)
 {
     gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result);
     VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));

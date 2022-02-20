@@ -700,26 +700,22 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 mcId, u8 ignoreBpres
     return TRUE;
 }
 
-static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
+static void DrawCustomMultichoiseMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos, const struct MenuAction *actions, int count)
 {
     s32 i;
     s32 strWidth;
     s32 tmp;
     u8 width;
     u8 height;
-    u8 count;
     u8 windowId;
-    const struct MenuAction * list;
 
     if ((ignoreBpress & 2) || QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         ignoreBpress &= 1;
-        count = gScriptMultiChoiceMenus[mcId].count;
-        list = gScriptMultiChoiceMenus[mcId].list;
         strWidth = 0;
         for (i = 0; i < count; i++)
         {
-            tmp = GetStringWidth(2, list[i].text, 0);
+            tmp = GetStringWidth(2, actions[i].text, 0);
             if (tmp > strWidth)
                 strWidth = tmp;
         }
@@ -730,13 +726,44 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         windowId = CreateWindowFromRect(left, top, width, height);
         SetStdWindowBorderStyle(windowId, FALSE);
         if (mcId == 30 || mcId == 13 || mcId == 41)
-            MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
+            MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, actions, 0, 2);
         else
-            MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
+            MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, actions, 0, 2);
         Menu_InitCursor(windowId, 2, 0, 2, 14, count, initPos);
         CreateMCMenuInputHandlerTask(ignoreBpress, count, windowId, mcId);
         ScheduleBgCopyTilemapToVram(0);
     }
+}
+
+static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
+{
+    DrawCustomMultichoiseMenu(left, top, mcId, ignoreBpress, initPos, gScriptMultiChoiceMenus[mcId].list, gScriptMultiChoiceMenus[mcId].count);
+}
+
+staic void DrawRepelMultichoiseMenu(void)
+{
+    static const u16 RepelItems[] = {ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL};
+    struct MenuAction MenuItems[4] = {NULL};
+    int i, count = 0;
+    
+    for (i = 0; i < NELEMS(RepelItems); i++)
+    {
+        if (CheckBagHasItem(RepelItems[i], 1))
+        {
+            VarSet(VAR_0x8004 + count, RepelItems[i]);
+            MenuItems[count].text = ItemId_GetName(RepelItems[i]);
+            count++;
+        }
+    }
+    if (count > 1)
+        DrawCustomMultichoiseMenu(0, 0, 0, FALSE, 0, MenuItems, count);
+    gSpecialVar_Result = (count > 1);
+}
+
+static void HandleRepelUseAnother(void)
+{
+    gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result);
+    VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
 }
 
 static u8 GetMCWindowHeight(u8 count)

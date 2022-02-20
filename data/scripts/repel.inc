@@ -22,7 +22,7 @@ EventScript_RepelWoreOff_AskAnother::
 	goto_if_eq EventScript_RepelWoreOff_End
 EventScript_RepelWoreOff_Chose:
 	callnative HandleRepelUseAnother
-	bufferitemname 1, VAR_0x8004
+	getitemname 1, VAR_0x8004
 	removeitem VAR_0x8004, 1
 	playse SE_REPEL
 	msgbox gUnknown_841658C, MSGBOX_SIGN

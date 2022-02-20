@@ -742,7 +742,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
     DrawCustomMultichoiseMenu(left, top, mcId, ignoreBpress, initPos, gScriptMultiChoiceMenus[mcId].list, gScriptMultiChoiceMenus[mcId].count);
 }
 
-staic void DrawRepelMultichoiseMenu(void)
+static void DrawRepelMultichoiseMenu(void)
 {
     static const u16 RepelItems[] = {ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL};
     struct MenuAction MenuItems[4] = {NULL};

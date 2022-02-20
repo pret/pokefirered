@@ -25,7 +25,7 @@ EventScript_RepelWoreOff_Chose:
 	bufferitemname 1, VAR_0x8004
 	removeitem VAR_0x8004, 1
 	playse SE_REPEL
-	msgbox gText_PlayerUsedVar2, MSGBOX_SIGN
+	msgbox gUnknown_841658C, MSGBOX_SIGN
 EventScript_RepelWoreOff_End::
 	end
 

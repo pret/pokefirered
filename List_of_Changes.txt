@@ -13,6 +13,7 @@ Physical/Special/Status Split With Icons
 Pokemon Stats Replacing Weight Comparision Screen
 Hail Weather Fix (daniilS And Samu)
 Faster HP Drain (Fyreire(i think))
+Bw Repel System With A Multichoise Window (DizzyEgg)
 Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
 
 // Can Be Turned On/Off
@@ -94,7 +95,6 @@ Leaf guard prevents the Flame Orb and Toxic Orb
 Magic guard prevents damage from abilities(and probabily for items), spikes and stealth rocks, mind blown, life orb and gulp missile(but does not prevent the Defense drop or paralysis from it)
 
 // puting
-bw repel system
 evolve without national dex
 evs cap to 252 @next
 vitamins cap to 252

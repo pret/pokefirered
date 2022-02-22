@@ -251,8 +251,8 @@ CinnabarIsland_Movement_BoatArrive:: @ 8167195
 	walk_fast_left
 	walk_fast_left
 	walk_left
-	walk_slowest_left
-	walk_slowest_left
+	walk_slower_left
+	walk_slower_left
 	step_end
 
 CinnabarIsland_Movement_BillBoardBoat:: @ 816719D

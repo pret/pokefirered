@@ -25,6 +25,7 @@
 #include "constants/songs.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
+#include "constants/trainer_types.h"
 
 static EWRAM_DATA struct ObjectEvent * sPlayerObjectPtr = NULL;
 static EWRAM_DATA u8 sTeleportSavedFacingDirection = DIR_NONE;
@@ -831,7 +832,7 @@ static void QL_TryRecordNPCStepWithDuration32(struct ObjectEvent * objectEvent, 
 
 void PlayerGoSlowest(u8 direction)
 {
-    PlayerSetAnimId(GetWalkSlowestMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkSlowerMovementAction(direction), 2);
 }
 
 void PlayerGoSlow(u8 direction)
@@ -908,9 +909,9 @@ void PlayerJumpLedge(u8 direction)
     PlayerSetAnimId(GetJump2MovementAction(direction), 8);
 }
 
-void sub_805C260(void)
+void PlayerShakeHead(void)
 {
-    PlayerSetAnimId(MOVEMENT_ACTION_0x9F, 0);
+    PlayerSetAnimId(MOVEMENT_ACTION_SHAKE_HEAD, 0);
 }
 
 void HandleEnforcedLookDirectionOnPlayerStopMoving(void)
@@ -1295,7 +1296,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerObjEventTemplate.objUnion.normal.movementType = MOVEMENT_TYPE_PLAYER;
     playerObjEventTemplate.objUnion.normal.movementRangeX = 0;
     playerObjEventTemplate.objUnion.normal.movementRangeY = 0;
-    playerObjEventTemplate.objUnion.normal.trainerType = 0;
+    playerObjEventTemplate.objUnion.normal.trainerType = TRAINER_TYPE_NONE;
     playerObjEventTemplate.objUnion.normal.trainerRange_berryTreeId = 0;
     playerObjEventTemplate.script = NULL;
     playerObjEventTemplate.flagId = 0;
@@ -1428,7 +1429,7 @@ static bool8 DoBoulderDust(struct Task *task, struct ObjectEvent *playerObject, 
         ObjectEventClearHeldMovementIfFinished(playerObject);
         ObjectEventClearHeldMovementIfFinished(strengthObject);
         QL_TryRecordPlayerStepWithDuration0(playerObject, GetWalkInPlaceNormalMovementAction((u8)task->data[2]));
-        QL_TryRecordNPCStepWithDuration32(strengthObject, GetWalkSlowestMovementAction((u8)task->data[2]));
+        QL_TryRecordNPCStepWithDuration32(strengthObject, GetWalkSlowerMovementAction((u8)task->data[2]));
         gFieldEffectArguments[0] = strengthObject->currentCoords.x;
         gFieldEffectArguments[1] = strengthObject->currentCoords.y;
         gFieldEffectArguments[2] = strengthObject->previousElevation;
@@ -1560,7 +1561,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct Objec
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetWalkSlowestMovementAction(GetOppositeDirection(task->data[1])));
+        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetWalkSlowerMovementAction(GetOppositeDirection(task->data[1])));
         ScriptContext2_Disable();
         gPlayerAvatar.preventStep = FALSE;
         DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
@@ -1617,7 +1618,7 @@ static void Task_StopSurfingInit(u8 taskId)
             return;
     }
     SetSurfBlob_BobState(playerObjEvent->fieldEffectSpriteId, 2);
-    QL_TryRecordPlayerStepWithDuration0(playerObjEvent, sub_80641EC((u8)gTasks[taskId].data[0]));
+    QL_TryRecordPlayerStepWithDuration0(playerObjEvent, GetJumpSpecialWithEffectMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
 

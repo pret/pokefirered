@@ -33,6 +33,7 @@ Sleep Update
 Paralysis Update
 Burn Update
 Confusion Update
+Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
 
 DizzyEggg
 

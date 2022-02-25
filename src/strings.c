@@ -232,6 +232,7 @@ const u8 gUnknown_8416800[] = _("どうも ありがとう!\nじたくの パソ
 const u8 gUnknown_8416822[] = _("どうも ありがとう!\nじたくの パソコンに おくって おくね!");
 const u8 gText_YouDontHaveMoney[] = _("You don't have enough money.{PAUSE_UNTIL_PRESS}");
 const u8 gText_NoMoreRoomForThis[] = _("You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}");
+const u8 gText_YouAlreadyHaveThis[] = _("You already have this item.{PAUSE_UNTIL_PRESS}");
 const u8 gUnknown_8416888[] = _("{STR_VAR_1}を\nいれる ばしょが いっぱいです{PAUSE_UNTIL_PRESS}");
 const u8 gText_CanIHelpWithAnythingElse[] = _("Is there anything else I can do?");
 const u8 gUnknown_84168BF[] = _("その ほかに\nなにか ちからに なれることは?");

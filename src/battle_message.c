@@ -415,7 +415,7 @@ static const u8 sText_FoePkmnPrefix3[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
 static const u8 sText_FoePkmnPrefix4[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
-static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}");
+static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("Attack");

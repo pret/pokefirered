@@ -37,8 +37,6 @@ struct BattleWindowText
 static EWRAM_DATA u8 sBattlerAbilities[MAX_BATTLERS_COUNT] = {};
 static EWRAM_DATA struct BattleMsgData *sBattleMsgDataPtr = NULL;
 
-static void ChooseMoveUsedParticle(u8 *textPtr);
-static void ChooseTypeOfMoveUsedString(u8 *textPtr);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 static const u8 sText_Empty1[] = _("");

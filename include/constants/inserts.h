@@ -12,3 +12,4 @@
 #define MON_ICON_ON_TRAINER_CARD TRUE //if true draw the party mon icons on the trainer card back.
 #define DISAPPEAR_HP_BAR_DURING_ANIMS TRUE //if true the hp bars disppears when a move anim is displayed.
 #define BADGE_BOOST TRUE //if true it applies the boosts given by each badge.
+#define DON'T_REPLENISH_MOVE_PP //if true when you overwrite a move with another with higer PP the actual PP will Remains.

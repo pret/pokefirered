@@ -838,7 +838,7 @@
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A sweet honey.\\nIt attracts wild Pokémon when it is\\nused in the grass.",
+      "description_english": "A sweet honey.\\nIt attracts wild POKéMON when it is\\nused in the grass.",
       "importance": 0,                            
       "exitsBagOnUse": 0,
       "pocket": "POCKET_ITEMS",

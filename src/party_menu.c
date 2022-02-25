@@ -4983,7 +4983,7 @@ static void Task_PartyMenuReplaceMove(u8 taskId)
         oldPP = GetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace(), NULL);
         move = gPartyMenu.data1;
         SetMonMoveSlot(mon, move, GetMoveSlotToReplace());
-#if DON'T_REPLENISH_MOVE_PP
+#if DONT_REPLENISH_MOVE_PP
         if (GetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace(), NULL) > oldPP)
             SetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace(), &oldPP);
 #endif

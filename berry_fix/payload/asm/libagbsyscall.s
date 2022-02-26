@@ -46,11 +46,6 @@ VBlankIntrWait: @ 81E3BA0
 	bx lr
 	thumb_func_end VBlankIntrWait
 	
-thumb_func_start ExecuteFunc
-ExecuteFunc:
-    bx r0
-    thumb_func_end ExecuteFunc
-
 thumb_func_start RTCStart
 RTCStart:
     push {r4-r7,lr}

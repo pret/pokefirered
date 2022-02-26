@@ -351,10 +351,10 @@ static void DrawTimeBox(void)
     sSafariZoneStatsWindowId = AddWindow(&sTimeBoxWindowTemplate);
     PutWindowTilemap(sSafariZoneStatsWindowId);
     DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
-    gSpecialVar_0x8004 = CreateTask(PutTimeInTimeBox, 2);
+    gSpecialVar_0x8004 = CreateTask(Task_PutTimeInTimeBox, 2);
 }
 
-static void PutTimeInTimeBox(void)
+static void Task_PutTimeInTimeBox(void)
 {
     ConvertIntToDecimalStringN(gStringVar1, gRtcLocation.hour, STR_CONV_MODE_RIGHT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_RIGHT_ALIGN, 2);

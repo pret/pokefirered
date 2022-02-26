@@ -1243,9 +1243,9 @@
 	.endm
 
 @new commands
-        .macro callasm id:req
+        .macro callasm ptr:req
 	.byte 0xf8
-	.2byte \id
+	.4byte \ptr
 	.endm
 	 
 	.macro cureprimarystatus battler:req, ptr:req

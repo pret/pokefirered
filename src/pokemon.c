@@ -5874,17 +5874,17 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 
 bool32 IsHMMove2(u16 move)
 {
+#if DELETABLE_HMS
+    return FALSE;
+#else
     int i = 0;
     while (sHMMoves[i] != 0xFFFF)
     {
         if (sHMMoves[i++] == move)
-#if DELETABLE_HMS
-	    return FALSE;
-#else
             return TRUE;
-#endif
     }
     return FALSE;
+#endif
 }
 
 bool8 IsPokeSpriteNotFlipped(u16 species)

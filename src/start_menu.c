@@ -255,7 +255,7 @@ static void SetUpStartMenu_UnionRoom(void)
     AppendToStartMenuItems(STARTMENU_EXIT);
 }
 
-static void Task_PutTimeInTimeBox(void)
+static void Task_PutTimeInTimeBox(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, gRtcLocation.hour, STR_CONV_MODE_RIGHT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_RIGHT_ALIGN, 2);

@@ -31,7 +31,6 @@ u16 ArcTan2(s16 x, s16 y);
 void CpuSet(const void *src, void *dest, u32 control);
 void CpuSet2(const void *src, u32 dest, u32 control);
 
-void ExecuteFunc(u32 src);
 void RTCStart(struct RtcFill *Check1, struct RtcFuncStruct *PCTime, struct RtcStruct *GameTime);
 void DayAndNightPalleteChange(void *src, void *dest, u32 color);
 

@@ -474,9 +474,7 @@ static bool8 StartCB_HandleInput(void)
 
 static void StartMenu_FadeScreenIfLeavingOverworld(void)
 {
-    if (sStartMenuCallback != StartMenuSaveCallback
-     && sStartMenuCallback != StartMenuExitCallback
-     && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
+    if (sStartMenuCallback != StartMenuSaveCallback && sStartMenuCallback != StartMenuExitCallback && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
         StopPokemonLeagueLightingEffectTask();
         FadeScreen(FADE_TO_BLACK, 0);
@@ -548,6 +546,9 @@ static bool8 StartMenuPlayerCallback(void)
 
 static bool8 StartMenuSaveCallback(void)
 {
+#if TIME_BOX_ON_START_MENU
+    DestroyTask(gSpecialVar_0x8004);
+#endif
     sStartMenuCallback = StartCB_Save1;
     return FALSE;
 }

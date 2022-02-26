@@ -261,7 +261,7 @@ static void Task_PutTimeInTimeBox(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_RIGHT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar3, gRtcLocation.second, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gStartMenu_TimeBoxClock);
-    PrintTextOnWindow(sSafariZoneStatsWindowId, gStringVar4, 2, 4, TEXT_SPEED_FF, 0);
+    AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 3, 0xFF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
 

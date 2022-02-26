@@ -162,6 +162,7 @@ const u8 gText_SelectorArrow2[] = _("▶");
 const u8 gUnknown_841623D[] = _("Yes\nNo");
 const u8 gText_GoBackToThePreviousMenu[] = _("Go back to the\nprevious menu.");
 const u8 gText_WhatWouldYouLikeToDo[] = _("What would you like to do?");
+const u8 gStartMenu_TimeBoxClock[] = _("Time {STR_VAR_1}:{STR_VAR_2}:{STR_VAR_3}");
 const u8 gStartMenuText_Pokedex[] = _("Pokédex");
 const u8 gStartMenuText_Bag[] = _("Bag");
 const u8 gUnknown_8416289[] = _("ポケナビ");

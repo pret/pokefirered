@@ -34,6 +34,7 @@ Sleep Update
 Paralysis Update
 Burn Update
 Confusion Update
+Deletable HM's (Jpan)
 Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
 Time Box On Start Menu (Pokemon_XY)
 
@@ -125,7 +126,6 @@ light ball update
 altering cave
 movement type hidden (0C) fix @next
 exp on catch a mon
-hm's deletaveis @next
 trainers with evs
 ev reducing berries
 full exp for participating in a battle

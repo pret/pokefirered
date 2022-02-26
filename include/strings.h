@@ -628,6 +628,7 @@ extern const u8 gText_BagIsFull[];
 extern const u8 gText_MailReturnedToBagMessageErased[];
 
 // start_menu
+extern const u8 gStartMenu_TimeBoxClock[];
 extern const u8 gStartMenuText_Pokedex[];
 extern const u8 gStartMenuText_Bag[];
 extern const u8 gStartMenuText_Player[];

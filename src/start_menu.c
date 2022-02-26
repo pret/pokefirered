@@ -135,6 +135,17 @@ static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
     .baseBlock = 0x008
 };
 
+static const struct WindowTemplate sTimeBoxWindowTemplate[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x008
+    },
+
 static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Pokedex,
     gStartMenuDesc_Pokemon,
@@ -312,6 +323,9 @@ static s8 DoDrawStartMenu(void)
     case 3:
         if (GetSafariZoneFlag())
             DrawSafariZoneStatsWindow();
+#if TIME_BOX_ON_START_MENU
+            DrawTimeBox();
+#endif
         sDrawStartMenuState[0]++;
         break;
     case 4:
@@ -330,6 +344,24 @@ static s8 DoDrawStartMenu(void)
     return FALSE;
 }
 
+static void DrawTimeBox(void)
+{
+    sSafariZoneStatsWindowId = AddWindow(&sTimeBoxWindowTemplate);
+    PutWindowTilemap(sSafariZoneStatsWindowId);
+    DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
+    gSpecialVar_0x8004 = CreateTask(PutTimeInTimeBox, 2);
+}
+
+static void PutTimeInTimeBox(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, gRtcLocation.hour, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar3, gRtcLocation.second, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    StringExpandPlaceholders(gStringVar4, gText_TimeBoxClock);
+    PrintTextOnWindow(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 3, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
+}
+    
 static void DrawStartMenuInOneGo(void)
 {
     sDrawStartMenuState[0] = 0;

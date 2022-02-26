@@ -905,7 +905,7 @@ static s8 YesNoMenuProcessInput(void)
     return input;
 }
 
-static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed, s32 colorIdx)
+void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed, s32 colorIdx)
 {
     s32 letterSpacing = 1;
     s32 lineSpacing = 1;

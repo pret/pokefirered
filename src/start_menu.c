@@ -288,15 +288,17 @@ static void DrawSafariZoneStatsWindow(void)
 
 static void DestroySafariZoneStatsWindow(void)
 {
-#if TIME_BOX_ON_START_MENU
-    DestroyTask(gSpecialVar_0x8004);
-#endif
-    if (GetSafariZoneFlag())
+    if (!GetSafariZoneFlag())
     {
-        ClearStdWindowAndFrameToTransparent(sSafariZoneStatsWindowId, FALSE);
-        CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
-        RemoveWindow(sSafariZoneStatsWindowId);
+#if TIME_BOX_ON_START_MENU
+        DestroyTask(gSpecialVar_0x8004);
+#else
+        return;
+#endif 
     }
+    ClearStdWindowAndFrameToTransparent(sSafariZoneStatsWindowId, FALSE);
+    CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
+    RemoveWindow(sSafariZoneStatsWindowId);
 }
 
 static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)

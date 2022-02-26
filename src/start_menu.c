@@ -271,6 +271,9 @@ static void DrawSafariZoneStatsWindow(void)
 
 static void DestroySafariZoneStatsWindow(void)
 {
+#if TIME_BOX_ON_START_MENU
+    DestroyTask(gSpecialVar_0x8004);
+#endif
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariZoneStatsWindowId, FALSE);

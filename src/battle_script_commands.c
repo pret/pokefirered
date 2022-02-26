@@ -594,17 +594,6 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkFD_jumpifweatherandability,
 };
 
-void (* const gCallAsmCommandTablePointers[])(void) =
-{
-	[DoAftermathDamage] = DoAftermathDamageAsm,
-	[TryDoAnticipationShudder] = TryDoAnticipationShudderAsm,
-	[TryBadDreamsSecondDamage] = TryBadDreamsSecondDamageAsm,
-	[GetStatRaiseDownload] = GetStatRaiseDownloadAsm,
-	[GetStrongestMoveForewarn] = GetStrongestMoveForewarnAsm,
-	[TryFriskFirstTarget] = TryFriskFirstTargetAsm,
-	[TryFriskSecondTarget] = TryFriskSecondTargetAsm,
-};
-
 struct StatFractions
 {
     u8 dividend;
@@ -9307,7 +9296,7 @@ static void atkFD_jumpifweatherandability(void)
 }
 
 //callasm command asm's
-static void DoAftermathDamageAsm(void)
+void DoAftermathDamage(void)
 {
 	if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
 	{
@@ -9358,7 +9347,7 @@ static bool8 AnticipationTypeCalc(u8 battler)
 	return FALSE;
 }
 
-static void TryDoAnticipationShudderAsm(void)
+void TryDoAnticipationShudder(void)
 {
 	if (AnticipationTypeCalc(gBattlerTarget))
 		gSetWordLoc = sAnticipationString;
@@ -9368,7 +9357,7 @@ static void TryDoAnticipationShudderAsm(void)
 		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
 }
 
-static void TryBadDreamsSecondDamageAsm(void)
+void TryBadDreamsSecondDamage(void)
 {
 	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
 	
@@ -9384,7 +9373,7 @@ static void TryBadDreamsSecondDamageAsm(void)
 		gBattlescriptCurrInstr = BattleScript_DoTurnDmgEnd;
 }
 
-static void GetStatRaiseDownloadAsm(void)
+void GetStatRaiseDownload(void)
 {
 	u8 bank2 = gBattlerTarget ^ BIT_FLANK;
 	u32 def, spdef, def2, spdef2;
@@ -9444,7 +9433,7 @@ static u8 GetForewarnMovePower(u16 move)
 	return gBattleMoves[move].power;
 }
 
-static void GetStrongestMoveForewarnAsm(void)
+void GetStrongestMoveForewarn(void)
 {
 	u8 power, strongesttarget, i, maxpower = 0, bank2 = gBattlerTarget ^ BIT_FLANK;
 	u16 move, strongestmove = MOVE_NONE;
@@ -9494,7 +9483,7 @@ static void GetStrongestMoveForewarnAsm(void)
 	gSetWordLoc = sForewarnString;
 }
 
-static void TryFriskFirstTargetAsm(void)
+void TryFriskFirstTarget(void)
 {
 	u8 target2 = gBattlerTarget ^ BIT_FLANK;
 	gSetWordLoc = sFriskString;
@@ -9514,7 +9503,7 @@ static void TryFriskFirstTargetAsm(void)
 		gLastUsedItem = gBattleMons[gBattlerTarget].item;
 }
 
-static void TryFriskSecondTargetAsm(void)
+void TryFriskSecondTarget(void)
 {
 	if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 && gBattleMons[gBattlerTarget ^ BIT_FLANK].item)
 	{

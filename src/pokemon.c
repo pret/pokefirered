@@ -5878,7 +5878,11 @@ bool32 IsHMMove2(u16 move)
     while (sHMMoves[i] != 0xFFFF)
     {
         if (sHMMoves[i++] == move)
+#if DELETABLE_HMS
+	    return FALSE;
+#else
             return TRUE;
+#endif
     }
     return FALSE;
 }

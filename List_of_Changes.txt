@@ -125,7 +125,7 @@ light ball update
 altering cave
 movement type hidden (0C) fix @next
 exp on catch a mon
-hm's deletabeis @next
+hm's deletaveis @next
 trainers with evs
 ev reducing berries
 full exp for participating in a battle

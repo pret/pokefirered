@@ -12,8 +12,9 @@ Running Indoors
 Physical/Special/Status Split With Icons
 Pokemon Stats Replacing Weight Comparision Screen
 Hail Weather Fix (daniilS And Samu)
-Faster HP Drain (Fyreire(i think))
+Faster HP Drain (Fyreire)
 Bw Repel System With A Multichoice Window (DizzyEgg)
+Reusable TM's (FBI)
 Ability Pop-Up Box
 Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
 
@@ -34,6 +35,7 @@ Paralysis Update
 Burn Update
 Confusion Update
 Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
+Time Box On Start Menu (Pokemon_XY)
 
 DizzyEggg
 
@@ -123,7 +125,6 @@ light ball update
 altering cave
 movement type hidden (0C) fix @next
 exp on catch a mon
-tm's reusaveis
 hm's deletabeis @next
 trainers with evs
 ev reducing berries

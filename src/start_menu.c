@@ -270,6 +270,7 @@ static void DrawTimeBox(void)
     sSafariZoneStatsWindowId = AddWindow(&sTimeBoxWindowTemplate);
     PutWindowTilemap(sSafariZoneStatsWindowId);
     DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
+    Task_PutTimeInTimeBox(0);
     gSpecialVar_0x8004 = CreateTask(Task_PutTimeInTimeBox, 2);
 }
 

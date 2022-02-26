@@ -257,9 +257,9 @@ static void SetUpStartMenu_UnionRoom(void)
 
 static void Task_PutTimeInTimeBox(u8 taskId)
 {
-    ConvertIntToDecimalStringN(gStringVar1, gRtcLocation.hour, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    ConvertIntToDecimalStringN(gStringVar3, gRtcLocation.second, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar1, gRtcLocation.hour, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar3, gRtcLocation.second, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gStartMenu_TimeBoxClock);
     AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 3, 0xFF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
@@ -270,7 +270,6 @@ static void DrawTimeBox(void)
     sSafariZoneStatsWindowId = AddWindow(&sTimeBoxWindowTemplate);
     PutWindowTilemap(sSafariZoneStatsWindowId);
     DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
-    Task_PutTimeInTimeBox(0);
     gSpecialVar_0x8004 = CreateTask(Task_PutTimeInTimeBox, 2);
 }
 
@@ -283,7 +282,7 @@ static void DrawSafariZoneStatsWindow(void)
     ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
-    AddTextPrinterParameterized(sSafariZoneStatsWindowId,2, gStringVar4, 4, 3, 0xFF, NULL);
+    AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 3, 0xFF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
 

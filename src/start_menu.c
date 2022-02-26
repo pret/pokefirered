@@ -135,16 +135,15 @@ static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
     .baseBlock = 0x008
 };
 
-static const struct WindowTemplate sTimeBoxWindowTemplate[] = {
-    {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 1,
-        .width = 10,
-        .height = 2,
-        .paletteNum = 15,
-        .baseBlock = 0x008
-    },
+static const struct WindowTemplate sTimeBoxWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 10,
+    .height = 2,
+    .paletteNum = 15,
+    .baseBlock = 0x008
+};
 
 static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Pokedex,

@@ -23,5 +23,6 @@ void TextWindow_LoadTilesStdFrame1(u8 windowId, u16 destOffset);
 void sub_814FE6C(u8 windowId, u16 destOffset, u8 palIdx);
 void sub_814FEEC(u8 windowId, u16 destOffset, u8 palIdx);
 void sub_814FF6C(u8 windowId, u16 destOffset);
+void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed, s32 colorIdx);
 
 #endif // GUARD_TEXT_WINDOW_H

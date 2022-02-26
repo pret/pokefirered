@@ -23,6 +23,15 @@ void BufferMoveToLearnIntoBattleTextBuff2(void);
 u8 TryChangeMoveType(u8 battler, u8 type, u16 move);
 void ModulateDmgByType(u8 multiplier);
 
+//callasm functions declaration
+void DoAftermathDamage(void);
+void TryDoAnticipationShudder(void);
+void TryBadDreamsSecondDamage(void);
+void GetStatRaiseDownload(void);
+void GetStrongestMoveForewarn(void);
+void TryFriskFirstTarget(void);
+void TryFriskSecondTarget(void);
+
 extern const u16 gNoChangeTypeMoves[];
 extern const u16 gSheerForceBoostedMoves[];
 

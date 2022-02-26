@@ -556,18 +556,9 @@ static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
 
 static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
-    if (itemId != -2)
+    if (itemId != -2 && itemid_is_unique(BagGetItemIdByPocketPosition(POCKET_TM_CASE, itemId)))
     {
-        if (BagGetItemIdByPocketPosition(POCKET_TM_CASE, itemId) < ITEM_HM01)
-        {
-            ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_CASE, itemId), STR_CONV_MODE_RIGHT_ALIGN, 3);
-            StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-            AddTextPrinterParameterized_ColorByIndex(windowId, 0, gStringVar4, 0x7E, y, 0, 0, 0xFF, 1);
-        }
-        else
-        {
             PlaceHMTileInWindow(windowId, 8, y);
-        }
     }
 }
 

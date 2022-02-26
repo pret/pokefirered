@@ -9241,9 +9241,9 @@ static void atkF7_finishturn(void)
 
 static void atkF8_callasm(void)
 {
-	u32 ptr = (u32) gCallAsmCommandTablePointers[T2_READ_16(gBattlescriptCurrInstr + 1)];
+	void (*func )(void) = ((void (*)(void))T1_READ_PTR(gBattlescriptCurrInstr + 1));
 	gBattlescriptCurrInstr += 3;
-        ExecuteFunc(ptr);
+	func();
 }
 
 static void atkF9_cureprimarystatus(void)

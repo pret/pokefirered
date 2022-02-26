@@ -13,3 +13,4 @@
 #define DISAPPEAR_HP_BAR_DURING_ANIMS TRUE //if true the hp bars disppears when a move anim is displayed.
 #define BADGE_BOOST TRUE //if true it applies the boosts given by each badge.
 #define DONT_REPLENISH_MOVE_PP TRUE //if true when you overwrite a move with another with higer PP the actual PP will Remains.
+#define TIME_BOX_ON_START_MENU TRUE //if true create a box that marks the time when open the start menu.

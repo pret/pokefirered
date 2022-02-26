@@ -357,7 +357,7 @@ static void PutTimeInTimeBox(void)
     ConvertIntToDecimalStringN(gStringVar1, gRtcLocation.hour, STR_CONV_MODE_RIGHT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar2, gRtcLocation.minute, STR_CONV_MODE_RIGHT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar3, gRtcLocation.second, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimeBoxClock);
+    StringExpandPlaceholders(gStringVar4, gStartMenu_TimeBoxClock);
     PrintTextOnWindow(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 3, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }

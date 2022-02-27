@@ -38,6 +38,7 @@ Deletable HM's (Jpan)
 Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
 Time Box On Start Menu (Pokemon_XY)
 Remove Flashbacks (Sierra)
+Full Exp For Participating In A Battle (DoesntKnowHowToPlay)
 
 DizzyEggg
 
@@ -129,7 +130,6 @@ movement type hidden (0C) fix @next
 exp on catch a mon
 trainers with evs
 ev reducing berries
-full exp for participating in a battle
 pc boxes use more wallpapers @next
 gen 6 shiny base rate
 mart price lenght increase

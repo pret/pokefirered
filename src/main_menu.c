@@ -17,6 +17,7 @@
 #include "text_window.h"
 #include "text_window_graphics.h"
 #include "constants/songs.h"
+#include "constants/inserts.h"
 
 enum MainMenuType
 {
@@ -251,7 +252,11 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
         case SAVE_STATUS_ERROR:
             SetStdFrame0OnBg(0);
             gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
-            PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
+#if SAVE_FIX
+            PrintSaveErrorStatus(taskId, gText_PreviousSaveFileWillBeLoaded);
+#else
+            PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);   
+#endif
             if (IsMysteryGiftEnabled() == TRUE)
             {
                 gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;

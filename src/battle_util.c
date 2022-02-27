@@ -2669,9 +2669,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     int i = 0;
     u8 effect = ITEM_NO_EFFECT;
     u8 changedPP = 0;
-    u8 battlerHoldEffect, atkHoldEffect, defHoldEffect, battlerHoldEffectNoKlutz, atkHoldEffectNoKlutz, defHoldEffectNoKlutz;
-    u8 battlerHoldEffectParam, atkHoldEffectParam, defHoldEffectParam;
-    u16 atkItem, defItem;
+    u8 battlerHoldEffect, defHoldEffect, battlerHoldEffectNoKlutz, defHoldEffectNoKlutz;
+    u8 battlerHoldEffectParam, defHoldEffectParam;
+    u16 defItem;
 
     gLastUsedItem = gBattleMons[battlerId].item;
     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
@@ -2688,28 +2688,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     }
     if (gBattleMons[battlerId].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(gLastUsedItem))
 	battlerHoldEffectParam /= 2;
-    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, ABILITY_UNNERVE, 0, 0) && IsItemBerry(gLastUsedItem))
+    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, ABILITY_UNNERVE, 0, 0) && IS_ITEM_BERRY(gLastUsedItem))
     {
 	    battlerHoldEffect = 0;
 	    battlerHoldEffectNoKlutz = 0;
 	    battlerHoldEffectParam = 0;
     }
-    atkItem = gBattleMons[gBattlerAttacker].item;
-    if (atkItem == ITEM_ENIGMA_BERRY)
-    {
-        atkHoldEffect = gEnigmaBerries[gBattlerAttacker].holdEffect;
-        atkHoldEffectNoKlutz = atkHoldEffect;
-        atkHoldEffectParam = gEnigmaBerries[gBattlerAttacker].holdEffectParam;
-    }
-    else
-    {
-        atkHoldEffect = ItemId_GetHoldEffect(atkItem, gBattlerAttacker, TRUE);
-	atkHoldEffectNoKlutz = ItemId_GetHoldEffect(atkItem, 0, FALSE);
-        atkHoldEffectParam = ItemId_GetHoldEffectParam(atkItem);
-    }
-    if (gBattleMons[gBattlerAttacker].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(atkItem))
-	atkHoldEffectParam /= 2;
-    if ()
     // def variables are unused
 /*
     defItem = gBattleMons[gBattlerTarget].item;
@@ -3290,9 +3274,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         }
         break;
     case ITEMEFFECT_KINGSROCK_SHELLBELL:
-        if (gBattleMoveDamage && !RECEIVE_SHEER_FORCE_BOOST(gBattlerAttacker, gCurrentMove))
+        if (gBattleMoveDamage && !RECEIVE_SHEER_FORCE_BOOST(battlerId, gCurrentMove))
         {
-            switch (atkHoldEffect)
+            switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_FLINCH:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
@@ -3300,7 +3284,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                  && (Random() % 100) < battlerHoldEffectParam
                  && gBattleMoves[gCurrentMove].flags & FLAG_KINGSROCK_AFFECTED
                  && gBattleMons[gBattlerTarget].hp
-		 && gBattleMons[gBattlerAttacker].ability != ABILITY_STENCH)
+		 && gBattleMons[battlerId].ability != ABILITY_STENCH)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
                     BattleScriptPushCursor();
@@ -3312,14 +3296,13 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && gSpecialStatuses[gBattlerTarget].dmg != 0
                  && gSpecialStatuses[gBattlerTarget].dmg != 0xFFFF
-                 && gBattlerAttacker != gBattlerTarget
-                 && gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP
-                 && gBattleMons[gBattlerAttacker].hp != 0)
+                 && battlerId != gBattlerTarget
+                 && gBattleMons[battlerId].hp != gBattleMons[battlerId].maxHP
+                 && gBattleMons[battlerId].hp != 0)
                 {
-                    gLastUsedItem = atkItem;
-                    gPotentialItemEffectBattler = gBattlerAttacker;
-                    gBattleScripting.battler = gBattlerAttacker;
-                    gBattleMoveDamage = (gSpecialStatuses[gBattlerTarget].dmg / atkHoldEffectParam) * -1;
+                    gPotentialItemEffectBattler = battlerId;
+                    gBattleScripting.battler = battlerId;
+                    gBattleMoveDamage = (gSpecialStatuses[gBattlerTarget].dmg / battlerHoldEffectParam) * -1;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = -1;
                     gSpecialStatuses[gBattlerTarget].dmg = 0;

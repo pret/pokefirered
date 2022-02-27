@@ -1990,6 +1990,12 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 else
                     toCpy = sText_FoePkmnPrefix2;
                 break;
+            case B_TXT_DEF_SIDE_NAME:
+                if (GetBattlerSide(gBattlerAttacker) != B_SIDE_PLAYER)
+                    toCpy = sText_YourTeamPrefix;
+                else
+                    toCpy = sText_TheOpposingTeamPrefix;
+                break;
             }
 
             // missing if (toCpy != NULL) check

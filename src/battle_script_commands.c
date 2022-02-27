@@ -9245,7 +9245,7 @@ static void atkF9_cureprimarystatus(void)
 
 static void atkFA_setword(void)
 {
-	u32 *dest = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+	u32 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
 	u32 word = T1_READ_32(gBattlescriptCurrInstr + 5);
 	*dest = word;
 	gBattlescriptCurrInstr += 9;

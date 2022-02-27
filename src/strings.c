@@ -29,7 +29,6 @@ const u8 gUnknown_8415B44[] = _("レポ-トが こうしんされました!\pこ
 const u8 gUnknown_8415BAA[] = _("レポ-トの こうしんは\nしっぱいしました!\pバックアップカ-トリッジを\nこうかんしてください!\pくわしくは\nにんてんどう サ-ビスセンタ- まで\lおといあわせ ください");
 const u8 gText_SaveFileCorruptedPrevWillBeLoaded[] = _("The save file is corrupted.\pThe previous save file will be\nloaded.");
 const u8 gText_SaveFileHasBeenDeleted[] = _("The save file has been\ndeleted...");
-const u8 gText_PreviousSaveFileWillBeLoaded[] = _("The previous save file will be\nloaded.");
 const u8 gText_1MSubCircuitBoardNotInstalled[] = _("The 1M sub-circuit board is\nnot installed.");
 const u8 gTextJP_InternalBatteryHasRunDry[] = _("でんちぎれの ために\nとけいが うごかなくなりました\pとけいに かんけいする できごとは おきませんが\nゲ-ムを つづけて あそぶことは できます");
 const u8 gUnknown_8415CD9[] = _("しゅじんこう");

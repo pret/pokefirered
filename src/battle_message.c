@@ -411,6 +411,8 @@ static const u8 sText_WildPkmnPrefix[] = _("Wild ");
 static const u8 sText_FoePkmnPrefix[] = _("Foe ");
 static const u8 sText_FoePkmnPrefix2[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix[] = _("Ally");
+static const u8 sText_YourTeamPrefix[] = _("Your team");
+static const u8 sText_TheOpposingTeamPrefix[] = _("The opposing team");
 static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}!");
 
 static const u8 sText_HP2[] = _("HP");

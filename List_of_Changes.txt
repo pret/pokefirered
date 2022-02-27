@@ -12,6 +12,7 @@ Running Indoors
 Physical/Special/Status Split With Icons
 Pokemon Stats Replacing Weight Comparision Screen
 Hail Weather Fix (daniilS And Samu)
+Movement Type Hidden (0C) Fix (Dreamaker)
 Faster HP Drain (Fyreire)
 Bw Repel System With A Multichoice Window (DizzyEgg)
 Reusable TM's (FBI)
@@ -125,7 +126,6 @@ effects update
 volt tackle by breeding
 light ball update
 altering cave
-movement type hidden (0C) fix @next
 exp on catch a mon
 trainers with evs
 ev reducing berries

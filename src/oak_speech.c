@@ -16,6 +16,7 @@
 #include "random.h"
 #include "data.h"
 #include "constants/songs.h"
+#include "constants/inserts.h"
 
 struct OakSpeechResources
 {
@@ -1295,7 +1296,11 @@ static void Task_OakSpeech27(u8 taskId)
     case -1:
         PlaySE(SE_SELECT);
         if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
+#if EM_STYLE_GENDER_SELECT_INTRO
+            gTasks[taskId].func = Task_OakSpeech16;
+#else
             gTasks[taskId].func = Task_OakSpeech24;
+#endif
         else
             gTasks[taskId].func = Task_OakSpeech28;
         break;

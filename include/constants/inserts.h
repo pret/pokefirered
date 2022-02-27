@@ -17,3 +17,4 @@
 #define TIME_BOX_ON_START_MENU TRUE //if true it create a box that marks the actual time when open the start menu.
 #define REMOVE_FLASHBACKS TRUE //if true it removes the flashbacks when load a saved game.
 #define FULL_EXP_FOR_PARTICIPATING TRUE //if true it gives full exp for the participating in the battle.
+#define EM_STYLE_GENDER_SELECT_INTRO TRUE //if true giving the player name if you cancel it the game will returns to choose the player gender instead of the name.

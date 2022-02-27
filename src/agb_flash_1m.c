@@ -1,5 +1,6 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
+#include "constants/inserts.h"
 
 static const char AgbLibFlashVersion[] = "FLASH1M_V103";
 
@@ -28,12 +29,18 @@ u16 IdentifyFlash(void)
         if ((*setupInfo)->type.ids.separate.makerId == 0)
             break;
 
+#if SAVE_FIX
+        // what this code do? i dont know ¬¬
+        asm("ldmia r3!, {r0,r1}");
+        result = 0;
+        break;
+#else
         if (flashId == (*setupInfo)->type.ids.joined)
         {
             result = 0;
             break;
         }
-
+#endif
         setupInfo++;
     }
 

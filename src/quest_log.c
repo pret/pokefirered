@@ -29,6 +29,7 @@
 #include "constants/quest_log.h"
 #include "constants/field_weather.h"
 #include "constants/event_object_movement.h"
+#include "constants/inserts.h"
 
 struct TrainerFanClub
 {
@@ -424,7 +425,10 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
         if (gSaveBlock1Ptr->questLog[i].startType != 0)
             sNumScenes++;
     }
-
+#if REMOVE_FLASHBACKS
+    SetMainCallback2(CB2_ContinueSavedGame);
+    DestroyTask(taskId);
+#else
     if (sNumScenes != 0)
     {
         gHelpSystemEnabled = FALSE;
@@ -436,6 +440,7 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
         SetMainCallback2(CB2_ContinueSavedGame);
         DestroyTask(taskId);
     }
+#endif
 }
 
 static void Task_BeginQuestLogPlayback(u8 taskId)

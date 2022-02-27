@@ -17,4 +17,3 @@
 #define TIME_BOX_ON_START_MENU TRUE //if true it create a box that marks the actual time when open the start menu.
 #define REMOVE_FLASHBACKS TRUE //if true it removes the flashbacks when load a saved game.
 #define FULL_EXP_FOR_PARTICIPATING TRUE //if true it gives full exp for the participating in the battle.
-#define SAVE_FIX TRUE //if true you will be able to save the game with the flash 64K.

@@ -37,6 +37,7 @@ Confusion Update
 Deletable HM's (Jpan)
 Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
 Time Box On Start Menu (Pokemon_XY)
+Remove Flashbacks (Sierra)
 
 DizzyEggg
 
@@ -108,7 +109,6 @@ emerald style gender select intro
 critical hit probability
 save fix
 text speed - fast / sound - stereo
-remove flashbacks @next
 mew obey fix @next
 roaming pokemon iv fix
 really tall grass e micro grass fix

@@ -3229,7 +3229,11 @@ static void atk23_getexp(void)
             }
             else
             {
-                *exp = SAFE_DIV(calculatedExp, viaSentIn);
+#if FULL_EXP_FOR_PARTICIPATING
+                *exp = calculatedExp;
+#else
+		*exp = SAFE_DIV(calculatedExp, viaSentIn);
+#endif
                 if (*exp == 0)
                     *exp = 1;
                 gExpShareExp = 0;

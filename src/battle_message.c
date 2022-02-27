@@ -1958,15 +1958,15 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_ATK_PREFIX2:
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    toCpy = sText_AllyPkmnPrefix2;
+                    toCpy = sText_AllyPkmnPrefix;
                 else
-                    toCpy = sText_FoePkmnPrefix3;
+                    toCpy = sText_FoePkmnPrefix2;
                 break;
             case B_TXT_DEF_PREFIX2:
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-                    toCpy = sText_AllyPkmnPrefix2;
+                    toCpy = sText_AllyPkmnPrefix;
                 else
-                    toCpy = sText_FoePkmnPrefix3;
+                    toCpy = sText_FoePkmnPrefix2;
                 break;
             case B_TXT_ATK_PREFIX1:
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -1982,15 +1982,15 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_ATK_PREFIX3:
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    toCpy = sText_AllyPkmnPrefix3;
+                    toCpy = sText_AllyPkmnPrefix;
                 else
-                    toCpy = sText_FoePkmnPrefix4;
+                    toCpy = sText_FoePkmnPrefix2;
                 break;
             case B_TXT_DEF_PREFIX3:
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-                    toCpy = sText_AllyPkmnPrefix3;
+                    toCpy = sText_AllyPkmnPrefix;
                 else
-                    toCpy = sText_FoePkmnPrefix4;
+                    toCpy = sText_FoePkmnPrefix2;
                 break;
             }
 

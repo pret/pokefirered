@@ -208,7 +208,7 @@ static void (*const sMovementTypeCallbacks[MOVEMENT_TYPES_COUNT])(struct Sprite 
     [MOVEMENT_TYPE_FACE_LEFT]                             = MovementType_FaceDirection,
     [MOVEMENT_TYPE_FACE_RIGHT]                            = MovementType_FaceDirection,
     [MOVEMENT_TYPE_PLAYER]                                = MovementType_Player,
-    [MOVEMENT_TYPE_BERRY_TREE_GROWTH]                     = NULL,
+    [MOVEMENT_TYPE_BERRY_TREE_GROWTH]                     = MovementType_Buried,
     [MOVEMENT_TYPE_FACE_DOWN_AND_UP]                      = MovementType_FaceDownAndUp,
     [MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT]                   = MovementType_FaceLeftAndRight,
     [MOVEMENT_TYPE_FACE_UP_AND_LEFT]                      = MovementType_FaceUpAndLeft,

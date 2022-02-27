@@ -68,15 +68,8 @@ static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 static bool8 MakesSound(u16 move);
-static void DoAftermathDamageAsm(void);
-static void TryDoAnticipationShudderAsm(void);
 static bool8 AnticipationTypeCalc(u8 battler);
-static void TryBadDreamsSecondDamageAsm(void);
-static void GetStatRaiseDownloadAsm(void);
-static void GetStrongestMoveForewarnAsm(void);
 static u8 GetForewarnMovePower(u16 move);
-static void TryFriskFirstTargetAsm(void);
-static void TryFriskSecondTargetAsm(void);
 
 static void SpriteCB_MonIconOnLvlUpBox(struct Sprite *sprite);
 
@@ -9230,8 +9223,8 @@ static void atkF7_finishturn(void)
 static void atkF8_callasm(void)
 {
 	void (*func )(void) = ((void (*)(void))T1_READ_PTR(gBattlescriptCurrInstr + 1));
-	gBattlescriptCurrInstr += 3;
 	func();
+	gBattlescriptCurrInstr += 5;
 }
 
 static void atkF9_cureprimarystatus(void)

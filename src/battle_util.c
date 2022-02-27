@@ -2637,6 +2637,8 @@ void BattleScriptPushCursorAndCallback(const u8 *BS_ptr)
     gBattleMainFunc = RunBattleScriptCommands;
 }
 
+#define IS_ITEM_BERRY(itemId)((itemId >= FIRST_BERRY_INDEX && itemId <= LAST_BERRY_INDEX))
+
 enum
 {
     ITEM_NO_EFFECT,
@@ -2688,30 +2690,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     }
     if (gBattleMons[battlerId].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(gLastUsedItem))
 	battlerHoldEffectParam /= 2;
-    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, ABILITY_UNNERVE, 0, 0) && IS_ITEM_BERRY(gLastUsedItem))
+    if (ABILITY_ON_OPPOSING_FIELD(battlerId, ABILITY_UNNERVE) && IS_ITEM_BERRY(gLastUsedItem))
     {
 	    battlerHoldEffect = 0;
 	    battlerHoldEffectNoKlutz = 0;
 	    battlerHoldEffectParam = 0;
     }
-    // def variables are unused
-/*
-    defItem = gBattleMons[gBattlerTarget].item;
-    if (defItem == ITEM_ENIGMA_BERRY)
-    {
-        defHoldEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-	defHoldEffectNoKlutz = defHoldEffect;
-        defHoldEffectParam = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-    }
-    else
-    {
-        defHoldEffect = ItemId_GetHoldEffect(defItem, gBattlerTarget, TRUE);
-	defHoldEffectNoKlutz = ItemId_GetHoldEffect(defItem, 0, FALSE);
-        defHoldEffectParam = ItemId_GetHoldEffectParam(defItem);
-    }
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_GLUTTONY && IsItemAffectedByGluttony(defItem))
-	defHoldEffectParam /= 2;
-    */
     switch (caseID)
     {
     case ITEMEFFECT_ON_SWITCH_IN:

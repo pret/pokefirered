@@ -507,6 +507,7 @@ extern const u8 gText_ABtnRegistrationCounter[];
 // main_menu
 extern const u8 gText_SaveFileCorruptedPrevWillBeLoaded[];
 extern const u8 gText_SaveFileHasBeenDeleted[];
+extern const u8 gText_PreviousSaveFileWillBeLoaded[];
 extern const u8 gText_1MSubCircuitBoardNotInstalled[];
 extern const u8 gText_NewGame[];
 extern const u8 gText_Continue[];

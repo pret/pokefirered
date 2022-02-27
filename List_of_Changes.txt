@@ -40,6 +40,7 @@ Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
 Time Box On Start Menu (Pokemon_XY)
 Remove Flashbacks (Sierra)
 Full Exp For Participating In A Battle (DoesntKnowHowToPlay)
+Emerald Style Gender Select Intro (Meister_anon~Master_o f_None)
 
 DizzyEggg
 
@@ -108,7 +109,6 @@ evolve without national dex
 evs cap to 252 @next
 vitamins cap to 252
 metric system update
-emerald style gender select intro
 critical hit probability
 text speed - fast / sound - stereo
 mew obey fix @next

@@ -4176,7 +4176,7 @@ static void atk49_moveend(void)
                 ++gBattleScripting.atk49_state;
             break;
         case ATK49_KINGSROCK_SHELLBELL: // king's rock and shell bell
-            if (ItemBattleEffects(ITEMEFFECT_KINGSROCK_SHELLBELL, 0, FALSE))
+            if (ItemBattleEffects(ITEMEFFECT_KINGSROCK_SHELLBELL, gBattlerAttacker, FALSE))
                 effect = TRUE;
             ++gBattleScripting.atk49_state;
             break;

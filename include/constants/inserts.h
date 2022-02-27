@@ -16,3 +16,4 @@
 #define DELETABLE_HMS TRUE //if true all HM moves will be deleteable like any other TM.
 #define TIME_BOX_ON_START_MENU TRUE //if true it create a box that marks the actual time when open the start menu.
 #define REMOVE_FLASHBACKS TRUE //if true it removes the flashbacks when load a saved game.
+#define FULL_EXP_FOR_PARTICIPATING TRUE //if true it gives full exp for the participating in the battle.

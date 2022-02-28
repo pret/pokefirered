@@ -909,9 +909,9 @@ void PlayerJumpLedge(u8 direction)
     PlayerSetAnimId(GetJump2MovementAction(direction), 8);
 }
 
-void PlayerShakeHead(void)
+void PlayerShakeHeadOrWalkInPlace(void)
 {
-    PlayerSetAnimId(MOVEMENT_ACTION_SHAKE_HEAD, 0);
+    PlayerSetAnimId(MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE, 0);
 }
 
 void HandleEnforcedLookDirectionOnPlayerStopMoving(void)

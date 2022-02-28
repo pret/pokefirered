@@ -599,6 +599,11 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     { 0xFF, 5 },
 };
 
+const struct TrainerEvs gTrainerEvsTable[] =
+{
+    
+};
+
 #include "data/text/abilities.h"
 
 static void (*const sTurnActionsFuncsTable[])(void) =

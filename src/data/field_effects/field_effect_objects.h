@@ -169,7 +169,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Ash =
     .callback = UpdateAshFieldEffect,
 };
 
-static const struct SpriteFrameImage gObjectEventPicTable_SurfBlob[] =
+static const struct SpriteFrameImage sPicTable_SurfBlob[] =
 {
     overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 0),
     overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 1),
@@ -221,7 +221,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob =
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sAnimTable_SurfBlob,
-    .images = gObjectEventPicTable_SurfBlob,
+    .images = sPicTable_SurfBlob,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSurfBlobFieldEffect,
 };

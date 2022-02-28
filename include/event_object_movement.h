@@ -20,7 +20,7 @@ enum SpinnerRunnerFollowPatterns
     RUNFOLLOW_SOUTH_EAST_WEST
 };
 
-struct UnkStruct_083A3698
+struct StepAnimTable
 {
     const union AnimCmd *const *anims;
     u8 animPos[4];

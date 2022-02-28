@@ -909,6 +909,8 @@ void PlayerJumpLedge(u8 direction)
     PlayerSetAnimId(GetJump2MovementAction(direction), 8);
 }
 
+// Shakes head for male player character,
+// walk in place for female player character
 void PlayerShakeHeadOrWalkInPlace(void)
 {
     PlayerSetAnimId(MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE, 0);

@@ -21,7 +21,7 @@ struct TrainerEvs
     u8 speedEv;
     u16 ball;
     u8 ability;
-}
+};
 
 struct MultiBattlePokemonTx
 {

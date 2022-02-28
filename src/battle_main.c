@@ -2216,16 +2216,6 @@ static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
     }
 }
 
-enum
-{
-    TRAINER_HP_EV;
-    TRAINER_ATK_EV;
-    TRAINER_DEF_EV;
-    TRAINER_SPEED_EV;
-    TRAINER_SPATK_EV;
-    TRAINER_SPDEF_EV;
-};
-
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
     u32 nameHash = 0;

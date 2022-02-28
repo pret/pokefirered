@@ -18,6 +18,7 @@ Bw Repel System With A Multichoice Window (DizzyEgg)
 Reusable TM's (FBI)
 Ability Pop-Up Box
 Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
+Trainers With Evs|Ivs|Nature (DoesntKnowHowToPlay And BlackUser) // to edit/add entries in the table go to src > battle_main.c and edit gTrainerEvsTable to your liking. It will be able to suport up to 0xFFFF+1 entries.
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h
@@ -127,7 +128,6 @@ volt tackle by breeding
 light ball update
 altering cave
 exp on catch a mon
-trainers with evs
 ev reducing berries
 pc boxes use more wallpapers @next
 gen 6 shiny base rate

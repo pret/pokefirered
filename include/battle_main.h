@@ -2,16 +2,7 @@
 #define GUARD_BATTLE_MAIN_H
 
 #include "constants/abilities.h"
-
-enum
-{
-    TRAINER_HP_EV,
-    TRAINER_ATK_EV,
-    TRAINER_DEF_EV,
-    TRAINER_SPEED_EV,
-    TRAINER_SPATK_EV,
-    TRAINER_SPDEF_EV,
-};
+#include "constants/pokemon.h"
 
 struct TrainerMoney
 {
@@ -23,7 +14,7 @@ struct TrainerEvs
 {
     u8 nature;
     u8 ivs;
-    u8 Evs[TRAINER_SPDEF_EV + 1];
+    u8 Evs[NUM_STATS];
 };
 
 struct MultiBattlePokemonTx

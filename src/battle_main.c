@@ -601,7 +601,336 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 
 const struct TrainerEvs gTrainerEvsTable[] =
 {
-    
+    {
+        .nature = 0,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_DOCILE,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_LONELY,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_BRAVE,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_ADAMANT,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_NAUGHTY,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_BOLD,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_RELAXED,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_IMPISH,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_LAX,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_TIMID,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_HASTY,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_JOLLY,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_NAIVE,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_MODEST,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_MILD,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_QUIET,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_RASH,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_CALM,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_GENTLE,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_SASSY,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_CAREFUL,
+        .ivs = MAX_PER_STAT_IVS,
+        .HpEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = 0,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_DOCILE,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_LONELY,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_BRAVE,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_ADAMANT,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_NAUGHTY,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_BOLD,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_RELAXED,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_IMPISH,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_LAX,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_TIMID,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_HASTY,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_JOLLY,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_NAIVE,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_MODEST,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_MILD,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_QUIET,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_RASH,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_CALM,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_GENTLE,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_SASSY,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_CAREFUL,
+        .ivs = MAX_PER_STAT_IVS,
+        .atkEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = 0,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_DOCILE,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_LONELY,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_BRAVE,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_ADAMANT,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_NAUGHTY,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_BOLD,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_RELAXED,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_IMPISH,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_LAX,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_TIMID,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_HASTY,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_JOLLY,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_NAIVE,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_MODEST,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_MILD,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_QUIET,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_RASH,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_CALM,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_GENTLE,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_SASSY,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
+    {
+        .nature = NATURE_CAREFUL,
+        .ivs = MAX_PER_STAT_IVS,
+        .defEv = MAX_PER_STAT_EVS,
+    },
 };
 
 #include "data/text/abilities.h"

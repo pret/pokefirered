@@ -9,6 +9,20 @@ struct TrainerMoney
     u8 value;
 };
 
+struct TrainerEvs
+{
+    u8 nature;
+    u8 ivs;
+    u8 HpEv;
+    u8 atkEv;
+    u8 defEv;
+    u8 spAtkEv;
+    u8 spDefEv;
+    u8 speedEv;
+    u16 ball;
+    u8 ability;
+}
+
 struct MultiBattlePokemonTx
 {
     /*0x00*/ u16 species;
@@ -59,6 +73,7 @@ extern const u8 gStatusConditionString_LoveJpn[8];
 extern const u8 *const gStatusConditionStringsTable[7][2];
 extern const u8 gTypeEffectiveness[336];
 extern const struct TrainerMoney gTrainerMoneyTable[];
+extern const struct TrainerEvs gTrainerEvsTable[];
 extern const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT];
 extern const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1];
 extern const bool8 gIgnorableAbilities[ABILITIES_COUNT];

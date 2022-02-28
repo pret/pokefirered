@@ -622,7 +622,7 @@ bool8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite
     [MOVEMENT_ACTION_WALK_SLOWEST_UP]                    = sMovementActionFuncs_x9C,
     [MOVEMENT_ACTION_WALK_SLOWEST_LEFT]                  = sMovementActionFuncs_x9D,
     [MOVEMENT_ACTION_WALK_SLOWEST_RIGHT]                 = sMovementActionFuncs_x9E,
-    [MOVEMENT_ACTION_SHAKE_HEAD]                         = sMovementActionFuncs_x9F,
+    [MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE]        = sMovementActionFuncs_x9F,
     [MOVEMENT_ACTION_0xA0]                               = sMovementActionFuncs_xA0,
     [MOVEMENT_ACTION_0xA1]                               = sMovementActionFuncs_xA1,
     [MOVEMENT_ACTION_0xA2]                               = sMovementActionFuncs_xA2,

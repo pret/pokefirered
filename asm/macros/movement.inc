@@ -124,7 +124,7 @@
 	create_movement walk_slowest_up
 	create_movement walk_slowest_left
 	create_movement walk_slowest_right
-	create_movement shake_head
+	create_movement shake_head_or_walk_in_place
 
 	enum_start 0xa6
 	create_movement jump_special_with_effect_down

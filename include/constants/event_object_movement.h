@@ -247,7 +247,7 @@
 #define MOVEMENT_ACTION_WALK_SLOWEST_UP                 0x9C
 #define MOVEMENT_ACTION_WALK_SLOWEST_LEFT               0x9D
 #define MOVEMENT_ACTION_WALK_SLOWEST_RIGHT              0x9E
-#define MOVEMENT_ACTION_SHAKE_HEAD                      0x9F
+#define MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE     0x9F
 #define MOVEMENT_ACTION_0xA0                            0xA0
 #define MOVEMENT_ACTION_0xA1                            0xA1
 #define MOVEMENT_ACTION_0xA2                            0xA2

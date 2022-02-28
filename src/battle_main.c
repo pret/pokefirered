@@ -2216,6 +2216,16 @@ static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
     }
 }
 
+enum
+{
+    TRAINER_HP_EV;
+    TRAINER_ATK_EV;
+    TRAINER_DEF_EV;
+    TRAINER_SPEED_EV;
+    TRAINER_SPATK_EV;
+    TRAINER_SPDEF_EV;
+};
+
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
     u32 nameHash = 0;
@@ -2288,13 +2298,19 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; ++j)
                     nameHash += gSpeciesNames[partyData[i].species][j];
-                personalityValue += nameHash << 8;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 fixedIV = partyData[i].iv;
-                SetMonData(&party[i], MON_DATA_HP_EV, &gTrainerEvsTable[fixedIV].HpEv);
-                SetMonData(&party[i], MON_DATA_ATK_EV, &gTrainerEvsTable[fixedIV].atkEv);
-                
+                do
+                {
+                    personalityValue = Random32();
+                }
+                while (gTrainerEvsTable[fixedIV].nature != GetNatureFromPersonality(personalityValue));
+                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                for (j = MON_DATA_HP_IV; j <= MON_DATA_SPDEF_IV; j++)
+                    SetMonData(&party[i], j, &gTrainerEvsTable[fixedIV].ivs);
+                for (j = TRAINER_HP_EV; j <= TRAINER_SPDEF_EV; j++)
+                    SetMonData(&party[i], MON_DATA_HP_EV + j, &gTrainerEvsTable[fixedIV].Evs[j]);
+                CalculateMonStats(&party[i]);
                 for (j = 0; j < MAX_MON_MOVES; ++j)
                 {
                     SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);

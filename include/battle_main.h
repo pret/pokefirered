@@ -3,6 +3,16 @@
 
 #include "constants/abilities.h"
 
+enum
+{
+    TRAINER_HP_EV,
+    TRAINER_ATK_EV,
+    TRAINER_DEF_EV,
+    TRAINER_SPEED_EV,
+    TRAINER_SPATK_EV,
+    TRAINER_SPDEF_EV,
+};
+
 struct TrainerMoney
 {
     u8 classId;
@@ -13,12 +23,7 @@ struct TrainerEvs
 {
     u8 nature;
     u8 ivs;
-    u8 HpEv;
-    u8 atkEv;
-    u8 defEv;
-    u8 spAtkEv;
-    u8 spDefEv;
-    u8 speedEv;
+    u8 Evs[TRAINER_SPDEF_EV + 1];
 };
 
 struct MultiBattlePokemonTx

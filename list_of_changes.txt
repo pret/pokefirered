@@ -32,18 +32,16 @@ Poison Survival (daniilS)
 Nature Colors (Spherical Ice And BlackUser)
 Iv's In The Summary Screen (DoesntKnowHowToPlay And BlackUser)
 Disable Badge Stat Boost (SP458)
-Sleep Update (Dreamaker And BlackUser)
-Paralysis Update
-Burn Update
-Confusion Update
+Sleep Update (BlackUser)
+Paralysis Update (Delta231)
+Burn Update (Delta231)
+Confusion Update (Chacha Dinosaur)
 Deletable HM's (Jpan)
 Don't Replenish Move PP (Paccy, ExpoSeed, Surskitty, FieryMewtwo And Lunos)
 Time Box On Start Menu (Pokemon_XY)
 Remove Flashbacks (Sierra)
 Full Exp For Participating In A Battle (DoesntKnowHowToPlay)
 Emerald Style Gender Select Intro (Meister_anon~Master_o f_None)
-
-DizzyEggg
 
 //Abilities Added and completed
 Adaptability

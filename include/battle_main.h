@@ -4,10 +4,11 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 
-struct TrainerMoney
+struct TrainerMoneyBall
 {
     u8 classId;
     u8 value;
+    u16 ballId;
 };
 
 struct TrainerEvs

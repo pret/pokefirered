@@ -47,15 +47,6 @@ enum PokemonSummaryScreenState3270
     PSS_STATE3270_ATEXIT_WAITFADE
 };
 
-enum PokemonSummaryScreenStat
-{
-    PSS_STAT_ATK,
-    PSS_STAT_DEF,
-    PSS_STAT_SPE,
-    PSS_STAT_SPA,
-    PSS_STAT_SPD
-};
-
 #define TAG_PSS_UNK_64 0x64
 #define TAG_PSS_UNK_65 0x65
 #define TAG_PSS_UNK_66 0x66

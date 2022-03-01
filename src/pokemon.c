@@ -1358,7 +1358,7 @@ static const struct SpindaSpot sSpindaSpotGraphics[] =
 
 #include "data/pokemon/item_effects.h"
 
-static const s8 sNatureStatTable[][5] =
+const s8 gNatureStatTable[][5] =
 {
     // Atk Def Spd Sp.Atk Sp.Def
     {    0,  0,  0,     0,     0}, // Hardy

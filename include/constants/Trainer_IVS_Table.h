@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_TRAINER_IVS_H
 #define GUARD_CONSTANTS_TRAINER_IVS_H
 
-
+#define TIT_
 
 
 

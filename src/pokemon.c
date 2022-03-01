@@ -5360,7 +5360,7 @@ static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
         return retVal;
     }
 
-    switch (sNatureStatTable[nature][statIndex - 1])
+    switch (gNatureStatTable[nature][statIndex - 1])
     {
     case 1:
         return (u16)(n * 110) / 100;

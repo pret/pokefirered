@@ -2481,98 +2481,15 @@ const u8 sStatsPosY[] =
 
 static u8 GetStatColor(u8 statiD)
 {
-	u8 coloriD = 0;
-	u8 nature = GetNature(&sMonSummaryScreen->currentMon);
-	
-	switch (statiD)
+	switch (gNatureStatTable[GetNature(&sMonSummaryScreen->currentMon)][statiD])
 	{
-		case PSS_STAT_ATK:
-			switch (nature)
-			{
-				case NATURE_LONELY:
-				case NATURE_BRAVE:
-				case NATURE_ADAMANT:
-				case NATURE_NAUGHTY:
-					coloriD = 4; //color red
-					break;
-				case NATURE_BOLD:
-				case NATURE_TIMID:
-				case NATURE_MODEST:
-				case NATURE_CALM:
-					coloriD = 5; //color blue
-					break;
-			}
-			break;
-		case PSS_STAT_DEF:
-			switch (nature)
-			{
-				case NATURE_BOLD:
-				case NATURE_RELAXED:
-				case NATURE_IMPISH:
-				case NATURE_LAX:
-					coloriD = 4; //color red
-					break;
-				case NATURE_LONELY:
-				case NATURE_HASTY:
-				case NATURE_MILD:
-				case NATURE_GENTLE:
-					coloriD = 5; //color blue
-					break;
-			}
-			break;
-		case PSS_STAT_SPE:
-			switch (nature)
-			{
-				case NATURE_TIMID:
-				case NATURE_HASTY:
-				case NATURE_JOLLY:
-				case NATURE_NAIVE:
-					coloriD = 4; //color red
-					break;
-				case NATURE_BRAVE:
-				case NATURE_RELAXED:
-				case NATURE_QUIET:
-				case NATURE_SASSY:
-					coloriD = 5; //color blue
-					break;
-			}
-			break;
-		case PSS_STAT_SPA:
-			switch (nature)
-			{
-				case NATURE_MODEST:
-				case NATURE_MILD:
-				case NATURE_QUIET:
-				case NATURE_RASH:
-					coloriD = 4; //color red
-					break;
-				case NATURE_ADAMANT:
-				case NATURE_IMPISH:
-				case NATURE_JOLLY:
-				case NATURE_CAREFUL:
-					coloriD = 5; //color blue
-					break;
-			}
-			break;
-		case PSS_STAT_SPD:
-			switch (nature)
-			{
-				case NATURE_CALM:
-				case NATURE_GENTLE:
-				case NATURE_SASSY:
-				case NATURE_CAREFUL:
-					coloriD = 4; //color red
-					break;
-				case NATURE_NAUGHTY:
-				case NATURE_LAX:
-				case NATURE_NAIVE:
-				case NATURE_RASH:
-					coloriD = 5; //color blue
-					break;
-			}
-			break;
+		case 0: // stat unmodified
+			return 0; // no color
+		case 1: // stat increased
+			return 4; // color red
+		case -1: // stat decreased
+			return 5; // color blue
 	}
-	return coloriD;
 }
 
 static void PrintSkillsPage(void)

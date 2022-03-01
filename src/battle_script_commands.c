@@ -5210,13 +5210,13 @@ static void atk5D_getmoneyreward(void)
                 }
                 break;
             }
-            for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
+            for (; gTrainerMoneyAndBallTable[i].classId != 0xFF; i++)
             {
-                if (gTrainerMoneyTable[i].classId == gTrainers[gTrainerBattleOpponent_A].trainerClass)
+                if (gTrainerMoneyAndBallTable[i].classId == gTrainers[gTrainerBattleOpponent_A].trainerClass)
                     break;
             }
             party4 = gTrainers[gTrainerBattleOpponent_A].party.ItemCustomMoves; // Needed to Match. Has no effect.
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * (gBattleTypeFlags & BATTLE_TYPE_DOUBLE ? 2 : 1) * gTrainerMoneyTable[i].value;
+            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * (gBattleTypeFlags & BATTLE_TYPE_DOUBLE ? 2 : 1) * gTrainerMoneyAndBallTable[i].value;
         }
         AddMoney(&gSaveBlock1Ptr->money, moneyReward);
     }

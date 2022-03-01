@@ -1,3 +1,5 @@
+#include "constants/trainer_ivs_table.h"
+
 static const struct TrainerMonNoItemDefaultMoves sTrainerMons_AquaLeader1[] = {
     {
         .iv = 0,

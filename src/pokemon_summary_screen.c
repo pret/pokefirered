@@ -2170,25 +2170,15 @@ static void BufferMonSkills(void)
 
     sMonSkillsPrinterXpos->curHpStr = GetNumberRightAlign63(sMonSummaryScreen->summary.curHpStrBuf);
 
-    if (sMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary && sMonSummaryScreen->isEnemyParty == TRUE)
+    for (i = 0; i < 5; i++)
     {
-	    for (i = 0; i < 5; i++)
-	    {
+	    if (sMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary && sMonSummaryScreen->isEnemyParty == TRUE)
 		    statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK2 + i);
-		    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
-		    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[i]);
-	    }
-    }
-    else
-    {
-	    for (i = 0; i < 5; i++)
-	    {
+	    else
 		    statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK + i);
-		    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
-		    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[i]);
-	    }
+	    ConvertIntToDecimalStringN(sMonSummaryScreen->summary.statValueStrBufs[i], statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
+	    sMonSkillsPrinterXpos->statsStr[i] = GetNumberRightAlign27(sMonSummaryScreen->summary.statValueStrBufs[i]);
     }
-
     exp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_EXP);
     ConvertIntToDecimalStringN(sMonSummaryScreen->summary.expPointsStrBuf, exp, STR_CONV_MODE_LEFT_ALIGN, 7);
     sMonSkillsPrinterXpos->expStr = GetNumberRightAlign63(sMonSummaryScreen->summary.expPointsStrBuf);

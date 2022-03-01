@@ -6065,35 +6065,35 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_CooltrainerJulie[] 
 
 static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLorelei[] = {
     {
-        .iv = 250,
+        .iv = TIS_MODEST_NATURE_MAX_HP_EV,
         .lvl = 52,
         .species = SPECIES_DEWGONG,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_HAIL, MOVE_SAFEGUARD},
     },
     {
-        .iv = 250,
+        .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
         .lvl = 51,
         .species = SPECIES_CLOYSTER,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_SPIKES, MOVE_PROTECT, MOVE_HAIL, MOVE_DIVE},
     },
     {
-        .iv = 250,
+        .iv = TIS_QUIET_NATURE_MAX_HP_EV,
         .lvl = 52,
         .species = SPECIES_SLOWBRO,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_AMNESIA, MOVE_YAWN},
     },
-    {
-        .iv = 250,
+    { // bad moveset for this nature ¬¬
+        .iv = TIS_MODEST_NATURE_MAX_SPEED_EV,
         .lvl = 54,
         .species = SPECIES_JYNX,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_ICE_PUNCH, MOVE_DOUBLE_SLAP, MOVE_LOVELY_KISS, MOVE_ATTRACT},
     },
     {
-        .iv = 250,
+        .iv = TIS_QUIET_NATURE_MAX_HP_EV,
         .lvl = 54,
         .species = SPECIES_LAPRAS,
         .heldItem = ITEM_SITRUS_BERRY,
@@ -6103,35 +6103,35 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLorelei[] = 
 
 static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourBruno[] = {
     {
-        .iv = 250,
+        .iv = TIS_BRAVE_NATURE_MAX_ATK_EV,
         .lvl = 51,
         .species = SPECIES_ONIX,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_TOMB, MOVE_IRON_TAIL, MOVE_ROAR},
     },
     {
-        .iv = 250,
+        .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
         .lvl = 53,
         .species = SPECIES_HITMONCHAN,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_SKY_UPPERCUT, MOVE_MACH_PUNCH, MOVE_ROCK_TOMB, MOVE_COUNTER},
     },
     {
-        .iv = 250,
+        .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
         .lvl = 53,
         .species = SPECIES_HITMONLEE,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_MEGA_KICK, MOVE_FORESIGHT, MOVE_BRICK_BREAK, MOVE_FACADE},
     },
     {
-        .iv = 250,
+        .iv = TIS_BRAVE_NATURE_MAX_ATK_EV,
         .lvl = 54,
         .species = SPECIES_ONIX,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_IRON_TAIL, MOVE_SAND_TOMB},
     },
     {
-        .iv = 250,
+        .iv = TIS_JOLLY_NATURE_MAX_ATK_EV,
         .lvl = 56,
         .species = SPECIES_MACHAMP,
         .heldItem = ITEM_SITRUS_BERRY,
@@ -6140,36 +6140,36 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourBruno[] = {
 };
 
 static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourAgatha[] = {
-    {
-        .iv = 250,
+    { // bad moveset for this nature ¬¬
+        .iv = TIS_MODEST_NATURE_MAX_SPEED_EV,
         .lvl = 54,
         .species = SPECIES_GENGAR,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_SHADOW_PUNCH, MOVE_CONFUSE_RAY, MOVE_TOXIC, MOVE_DOUBLE_TEAM},
     },
     {
-        .iv = 250,
+        .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
         .lvl = 54,
         .species = SPECIES_GOLBAT,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_CONFUSE_RAY, MOVE_POISON_FANG, MOVE_AIR_CUTTER, MOVE_BITE},
     },
     {
-        .iv = 250,
+        .iv = TIS_MODEST_NATURE_MAX_SPEED_EV,
         .lvl = 53,
         .species = SPECIES_HAUNTER,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_CURSE, MOVE_MEAN_LOOK},
     },
     {
-        .iv = 250,
+        .iv = TIS_IMPISH_NATURE_MAX_ATK_EV,
         .lvl = 56,
         .species = SPECIES_ARBOK,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_SLUDGE_BOMB, MOVE_SCREECH, MOVE_IRON_TAIL, MOVE_BITE},
     },
     {
-        .iv = 250,
+        .iv = TIS_MODEST_NATURE_MAX_SPEED_EV,
         .lvl = 58,
         .species = SPECIES_GENGAR,
         .heldItem = ITEM_SITRUS_BERRY,
@@ -6178,36 +6178,36 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourAgatha[] = {
 };
 
 static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLance[] = {
-    {
-        .iv = 250,
+    { // bad moveset for this nature ¬¬
+        .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
         .lvl = 56,
         .species = SPECIES_GYARADOS,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_HYPER_BEAM, MOVE_DRAGON_RAGE, MOVE_TWISTER, MOVE_BITE},
     },
     {
-        .iv = 250,
+        .iv = TIS_MODEST_NATURE_MAX_SPATK_EV,
         .lvl = 54,
         .species = SPECIES_DRAGONAIR,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_HYPER_BEAM, MOVE_SAFEGUARD, MOVE_DRAGON_RAGE, MOVE_OUTRAGE},
     },
     {
-        .iv = 250,
+        .iv = TIS_TIMID_NATURE_MAX_SPATK_EV,
         .lvl = 54,
         .species = SPECIES_DRAGONAIR,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_HYPER_BEAM, MOVE_SAFEGUARD, MOVE_THUNDER_WAVE, MOVE_OUTRAGE},
     },
-    {
-        .iv = 250,
+    { // bad moveset for this nature ¬¬
+        .iv = TIS_JOLLY_NATURE_MAX_ATK_EV,
         .lvl = 58,
         .species = SPECIES_AERODACTYL,
         .heldItem = ITEM_NONE,
         .moves = {MOVE_HYPER_BEAM, MOVE_ANCIENT_POWER, MOVE_WING_ATTACK, MOVE_SCARY_FACE},
     },
-    {
-        .iv = 250,
+    { // bad moveset for this nature ¬¬
+        .iv = TIS_ADAMANT_NATURE_MAX_ATK_EV,
         .lvl = 60,
         .species = SPECIES_DRAGONITE,
         .heldItem = ITEM_SITRUS_BERRY,

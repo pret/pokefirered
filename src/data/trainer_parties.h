@@ -6148,7 +6148,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourAgatha[] = {
         .moves = {MOVE_SHADOW_PUNCH, MOVE_CONFUSE_RAY, MOVE_TOXIC, MOVE_DOUBLE_TEAM},
     },
     {
-        .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
+        .iv = TIS_TIMID_NATURE_MAX_ATK_EV,
         .lvl = 54,
         .species = SPECIES_GOLBAT,
         .heldItem = ITEM_NONE,
@@ -6206,8 +6206,8 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLance[] = {
         .heldItem = ITEM_NONE,
         .moves = {MOVE_HYPER_BEAM, MOVE_ANCIENT_POWER, MOVE_WING_ATTACK, MOVE_SCARY_FACE},
     },
-    { // bad moveset for this nature ¬¬
-        .iv = TIS_ADAMANT_NATURE_MAX_ATK_EV,
+    {
+        .iv = TIS_TIMID_NATURE_MAX_SPATK_EV,
         .lvl = 60,
         .species = SPECIES_DRAGONITE,
         .heldItem = ITEM_SITRUS_BERRY,

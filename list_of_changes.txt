@@ -10,13 +10,13 @@ Sound Moves Bypass Substitute (Zeturic)
 UnHidden Power (Zeturic)
 Running Indoors (HackMew)
 Physical/Special/Status Split With Icons (DoesntKnowHowToPlay, Spherical Ice And BlackUser)
-Pokemon Stats Replacing Weight Comparision Screen ()
+Pokemon Stats Replacing Weight Comparision Screen (DoesntKnowHowToPlay and Squeetz)
 Hail Weather Fix (daniilS And Samu)
 Movement Type Hidden (0C) Fix (Dreamaker)
 Faster HP Drain (Fyreire)
 Bw Repel System With A Multichoice Window (DizzyEgg)
 Reusable TM's (FBI)
-Ability Pop-Up Box
+Ability Pop-Up Box (DizzyEgg, CFRU And BlackUser)
 Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
 Trainers With Evs|Ivs|Nature (DoesntKnowHowToPlay And BlackUser) // to edit/add entries in the table go to src > battle_main.c and edit gTrainerEvsTable to your liking. It will be able to suport up to 65536 entries.
 
@@ -27,12 +27,12 @@ HP Bars Disappearing During Attack Animations (blackUser)
 Automatic Swap Page On Naming Screen (blackUser And Jaizu)
 Display Move Effectiveness In Battle (blackUser And PokemonCrazy)
 Display Party Mon Icons On Trainer Card (Eaas)
-No Healing Eggs
-Poison Survival
-Nature Colors
-Iv's In The Summary Screen
-Disable Badge Stat Boost
-Sleep Update
+No Healing Eggs (Zeturic)
+Poison Survival (daniilS)
+Nature Colors (Spherical Ice And BlackUser)
+Iv's In The Summary Screen (DoesntKnowHowToPlay And BlackUser)
+Disable Badge Stat Boost (SP458)
+Sleep Update (Dreamaker And BlackUser)
 Paralysis Update
 Burn Update
 Confusion Update

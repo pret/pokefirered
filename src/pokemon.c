@@ -4709,10 +4709,10 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                     {
                     case 0: // EV_HP
                     case 1: // EV_ATK
-                        if (GetMonEVCount(mon) >= 510)
+                        if (GetMonEVCount(mon) >= MAX_TOTAL_EVS)
                             return TRUE;
                         data = GetMonData(mon, sGetMonDataEVConstants[i], NULL);
-                        if (data < 100)
+                        if (data < MAX_PER_VITAMIN_EVS)
                         {
                             idx++;
                             retVal = FALSE;
@@ -4786,10 +4786,10 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                     case 1: // EV_SPEED
                     case 2: // EV_SPDEF
                     case 3: // EV_SPATK
-                        if (GetMonEVCount(mon) >= 510)
+                        if (GetMonEVCount(mon) >= MAX_TOTAL_EVS)
                             return TRUE;
                         data = GetMonData(mon, sGetMonDataEVConstants[i + 2], NULL);
-                        if (data < 100)
+                        if (data < MAX_PER_VITAMIN_EVS)
                         {
                             retVal = FALSE;
                             idx++;

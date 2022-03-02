@@ -5664,7 +5664,7 @@ void ChooseMonToGiveMailFromMailbox(void)
 static void TryGiveMailToSelectedMon(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    struct MailStruct *mail;
+    struct Mail *mail;
 
     gPartyMenuUseExitCallback = FALSE;
     mail = &gSaveBlock1Ptr->mail[gPlayerPcMenuManager.cursorPos + 6 + gPlayerPcMenuManager.itemsAbove];

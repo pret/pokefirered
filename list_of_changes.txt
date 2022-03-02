@@ -4,6 +4,7 @@ Pokedex Glitch Fix
 
 // Others
 // Can't Be Turned On/Off
+eggs hatch at level 1
 Triple-Layer Blocks (Sierraffinity) //how to use: https://www.pokecommunity.com/showthread.php?p=9767701
 Constant Hidden Power - Power: 60 (Zeturic)
 Sound Moves Bypass Substitute (Zeturic)

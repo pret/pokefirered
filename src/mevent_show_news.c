@@ -9,7 +9,7 @@
 
 struct UnkStruct_203F3CC
 {
-    /*0000*/ struct MEWonderNewsData wonderNews;
+    /*0000*/ struct WonderNews wonderNews;
     /*01bc*/ const struct UnkStruct_8467FB8 * bgSpec;
     /*01c0*/ u8 verticalScrollDisabled:1;
     u8 state:7;
@@ -72,7 +72,7 @@ static const struct UnkStruct_8467FB8 sBgSpecs[] = {
     {1, 0, 0, 0, sNews7Gfx, sNews7Map, sNews7Pal}
 };
 
-bool32 InitWonderNewsResources(const struct MEWonderNewsData * news)
+bool32 InitWonderNewsResources(const struct WonderNews * news)
 {
     if (news == NULL)
         return FALSE;
@@ -80,9 +80,9 @@ bool32 InitWonderNewsResources(const struct MEWonderNewsData * news)
     if (sWork == NULL)
         return FALSE;
     sWork->wonderNews = *news;
-    if (sWork->wonderNews.unk_03 >= NELEMS(sBgSpecs))
-        sWork->wonderNews.unk_03 = 0;
-    sWork->bgSpec = &sBgSpecs[sWork->wonderNews.unk_03];
+    if (sWork->wonderNews.bgType >= NELEMS(sBgSpecs))
+        sWork->wonderNews.bgType = 0;
+    sWork->bgSpec = &sBgSpecs[sWork->wonderNews.bgType];
     sWork->menuIndicatorsId = 0xFF;
     return TRUE;
 }
@@ -297,11 +297,11 @@ u32 MENews_GetInput(u16 input)
 static void sub_8146980(void)
 {
     u8 i = 0;
-    memcpy(sWork->title, sWork->wonderNews.unk_04, 40);
+    memcpy(sWork->title, sWork->wonderNews.titleText, 40);
     sWork->title[40] = EOS;
     for (; i < 10; ++i)
     {
-        memcpy(sWork->messages[i], sWork->wonderNews.unk_2C[i], 40);
+        memcpy(sWork->messages[i], sWork->wonderNews.bodyText[i], 40);
         sWork->messages[i][40] = EOS;
         if (i > 7 && sWork->messages[i][0] != EOS)
             ++sWork->numMails;

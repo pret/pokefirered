@@ -18,7 +18,7 @@
 #include "graphics.h"
 #include "constants/moves.h"
 #include "constants/items.h"
-#include "constants/trainer_classes.h"
+#include "constants/trainers.h"
 
 struct BattleWindowText
 {
@@ -1888,9 +1888,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else
                 {
-                    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_RIVAL
-                     || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_RIVAL_2
-                     || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION_2)
+                    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_RIVAL_EARLY
+                     || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_RIVAL_LATE
+                     || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
                         toCpy = GetExpandedPlaceholder(PLACEHOLDER_ID_RIVAL);
                     else
                         toCpy = gTrainers[gTrainerBattleOpponent_A].trainerName;

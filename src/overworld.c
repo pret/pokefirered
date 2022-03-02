@@ -1675,7 +1675,7 @@ void CB2_ReturnToFieldFromDiploma(void)
 
 static void FieldCB_ShowMapNameOnContinue(void)
 {
-    if (SHOW_MAP_NAME_ENABLED)
+    if (gMapHeader.showMapName == TRUE)
         ShowMapNamePopup(FALSE);
     FieldCB_WarpExitFadeFromBlack();
 }
@@ -1909,7 +1909,7 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
             MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
             MapPreview_StartForestTransition(gMapHeader.regionMapSectionId);
         }
-        else if (SHOW_MAP_NAME_ENABLED)
+        else if (gMapHeader.showMapName == TRUE)
         {
             ShowMapNamePopup(FALSE);
         }

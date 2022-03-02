@@ -5638,7 +5638,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     u8 newLevel = level + 1;
     u32 exp = GetMonData(mon, MON_DATA_EXP, NULL);
 
-    if (level < 100)
+    if (level < MAX_LEVEL)
     {
         if (exp > gExperienceTables[gBaseStats[species].growthRate][newLevel])
         {

@@ -79,7 +79,7 @@ enum TradeStatusMsg
 
 static EWRAM_DATA u8 *sSpriteTextTileBuffer = NULL;
 static EWRAM_DATA u8 *sSpriteTextTilePtrs[14] = {};
-EWRAM_DATA struct MailStruct gLinkPartnerMail[6] = {};
+EWRAM_DATA struct Mail gLinkPartnerMail[6] = {};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct TradeMenuResources * sTradeMenuResourcesPtr = NULL;
 
@@ -119,7 +119,7 @@ static const size_t sSizesAndOffsets[] = {
     sizeof(struct MapLayout),
     0x530, // unk
     0x34, // unk
-    sizeof(struct MailStruct),
+    sizeof(struct Mail),
     sizeof(struct Pokemon),
     0x528 // unk
 };
@@ -1398,7 +1398,7 @@ static bool8 shedinja_maker_maybe(void)
         }
         break;
     case 13:
-        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct MailStruct) + 4); // why the extra 4 bytes?
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct Mail) + 4); // why the extra 4 bytes?
         sTradeMenuResourcesPtr->state++;
         break;
     case 15:
@@ -1411,7 +1411,7 @@ static bool8 shedinja_maker_maybe(void)
     case 16:
         if (GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(gLinkPartnerMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct MailStruct));
+            Trade_Memcpy(gLinkPartnerMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct Mail));
             ResetBlockReceivedFlags();
             sTradeMenuResourcesPtr->state++;
         }

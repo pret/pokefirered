@@ -246,7 +246,7 @@ void FieldUseFunc_OrangeMail(u8 taskId)
 
 static void sub_80A1208(void)
 {
-    struct MailStruct mail;
+    struct Mail mail;
 
     mail.itemId = gSpecialVar_ItemId;
     ReadMail(&mail, CB2_BagMenuFromStartMenu, 0);
@@ -616,7 +616,7 @@ static void sub_80A1B48(u8 taskId)
 
 bool8 CanUseEscapeRopeOnCurrMap(void)
 {
-    if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
+    if (gMapHeader.allowEscaping)
         return TRUE;
     else
         return FALSE;

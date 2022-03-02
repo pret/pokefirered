@@ -4186,7 +4186,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & ITEM3_LEVEL_UP)  // raise level
-             && GetMonData(mon, MON_DATA_LEVEL, NULL) != 100)
+             && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 data = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 SetMonData(mon, MON_DATA_EXP, &data);
@@ -4220,7 +4220,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             val = itemEffect[cmdIndex];
             if (val & ITEM4_PP_UP)
             {
-                val &= ~ITEM4_PP_UP;
+                val &= ~(ITEM4_PP_UP);
                 data = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
                 i = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                 if (data < 3 && i > 4)
@@ -4247,17 +4247,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 0: // EV_HP
                     case 1: // EV_ATK
                         evCount = GetMonEVCount(mon);
-                        if (evCount >= 510)
+                        if (evCount >= MAX_TOTAL_EVS)
                             return TRUE;
                         data = GetMonData(mon, sGetMonDataEVConstants[i], NULL);
-                        if (data < 100)
+                        if (data < MAX_PER_VITAMIN_EVS)
                         {
-                            if (data + itemEffect[idx] > 100)
-                                evDelta = 100 - (data + itemEffect[idx]) + itemEffect[idx];
+                            if (data + itemEffect[idx] > MAX_PER_VITAMIN_EVS)
+                                evDelta = MAX_PER_VITAMIN_EVS - (data + itemEffect[idx]) + itemEffect[idx];
                             else
                                 evDelta = itemEffect[idx];
-                            if (evCount + evDelta > 510)
-                                evDelta += 510 - (evCount + evDelta);
+                            if (evCount + evDelta > MAX_TOTAL_EVS)
+                                evDelta += MAX_TOTAL_EVS - (evCount + evDelta);
                             data += evDelta;
                             SetMonData(mon, sGetMonDataEVConstants[i], &data);
                             CalculateMonStats(mon);
@@ -4431,17 +4431,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 2: // EV_SPDEF
                     case 3: // EV_SPATK
                         evCount = GetMonEVCount(mon);
-                        if (evCount >= 510)
+                        if (evCount >= MAX_TOTAL_EVS)
                             return TRUE;
                         data = GetMonData(mon, sGetMonDataEVConstants[i + 2], NULL);
-                        if (data < 100)
+                        if (data < MAX_PER_VITAMIN_EVS)
                         {
-                            if (data + itemEffect[idx] > 100)
-                                evDelta = 100 - (data + itemEffect[idx]) + itemEffect[idx];
+                            if (data + itemEffect[idx] > MAX_PER_VITAMIN_EVS)
+                                evDelta = MAX_PER_VITAMIN_EVS - (data + itemEffect[idx]) + itemEffect[idx];
                             else
                                 evDelta = itemEffect[idx];
-                            if (evCount + evDelta > 510)
-                                evDelta += 510 - (evCount + evDelta);
+                            if (evCount + evDelta > MAX_TOTAL_EVS)
+                                evDelta += MAX_TOTAL_EVS - (evCount + evDelta);
                             data += evDelta;
                             SetMonData(mon, sGetMonDataEVConstants[i + 2], &data);
                             CalculateMonStats(mon);

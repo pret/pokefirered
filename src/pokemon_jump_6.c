@@ -10,25 +10,25 @@ static void Task_ShowPokemonJumpRecords(u8 taskId);
 static void TruncateToFirstWordOnly(u8 *str);
 static void sub_814B5C4(u16 windowId);
 
-static struct PokemonJumpResults *sub_814B46C(void)
+static struct PokemonJumpRecords *sub_814B46C(void)
 {
     return &gSaveBlock2Ptr->pokeJump;
 }
 
 void ResetPokeJumpResults(void)
 {
-    struct PokemonJumpResults *pokeJump = sub_814B46C();
+    struct PokemonJumpRecords *pokeJump = sub_814B46C();
     pokeJump->jumpsInRow = 0;
     pokeJump->bestJumpScore = 0;
     pokeJump->excellentsInRow = 0;
-    pokeJump->field6 = 0;
-    pokeJump->field8 = 0;
-    pokeJump->field2 = 0;
+    pokeJump->gamesWithMaxPlayers = 0;
+    pokeJump->unused2 = 0;
+    pokeJump->unused1 = 0;
 }
 
 bool32 sub_814B494(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
 {
-    struct PokemonJumpResults *pokeJump = sub_814B46C();
+    struct PokemonJumpRecords *pokeJump = sub_814B46C();
     bool32 ret = FALSE;
 
     if (pokeJump->bestJumpScore < jumpScore && jumpScore <= 99990)
@@ -43,9 +43,9 @@ bool32 sub_814B494(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
 
 void sub_814B4E8(void)
 {
-    struct PokemonJumpResults *pokeJump = sub_814B46C();
-    if (pokeJump->field6 < 9999)
-        pokeJump->field6++;
+    struct PokemonJumpRecords *pokeJump = sub_814B46C();
+    if (pokeJump->gamesWithMaxPlayers < 9999)
+        pokeJump->gamesWithMaxPlayers++;
 }
 
 void ShowPokemonJumpRecords(void)
@@ -106,7 +106,7 @@ static void sub_814B5C4(u16 windowId)
 {
     int i, x;
     int results[3];
-    struct PokemonJumpResults *pokeJump = sub_814B46C();
+    struct PokemonJumpRecords *pokeJump = sub_814B46C();
     u8 strbuf[8];
     results[0] = pokeJump->jumpsInRow;
     results[1] = pokeJump->bestJumpScore;

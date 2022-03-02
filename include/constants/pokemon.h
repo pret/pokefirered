@@ -211,6 +211,7 @@
 
 #define MAX_PER_STAT_IVS 31
 #define MAX_PER_STAT_EVS 252
+#define MAX_PER_VITAMIN_EVS 252
 
 #define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510

@@ -153,7 +153,7 @@ TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
 ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix syms $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) modern
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy syms $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) modern
 
 MAKEFLAGS += --no-print-directory
 
@@ -185,7 +185,6 @@ mostlyclean: tidy
 	$(RM) $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	$(RM) $(AUTO_GEN_TARGETS)
-	@$(MAKE) -C berry_fix clean
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
@@ -195,7 +194,6 @@ clean: mostlyclean clean-tools
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
-	@$(MAKE) -C berry_fix tidy
 
 include graphics_file_rules.mk
 include tileset_rules.mk
@@ -275,11 +273,6 @@ $(DATA_ASM_BUILDDIR)/%.o: data_dep :=
 else
 $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I . $(DATA_ASM_SUBDIR)/$*.s)
 endif
-
-berry_fix:
-	@$(MAKE) -C berry_fix COMPARE=$(COMPARE) TOOLCHAIN=$(TOOLCHAIN)
-
-berry_fix/berry_fix.gba: berry_fix
 
 ifeq ($(NODEP),1)
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s

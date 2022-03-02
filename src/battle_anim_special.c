@@ -34,9 +34,6 @@
 #define TAG_HEALTHBOX_PALS_1      55049
 #define TAG_HEALTHBOX_PALS_2      55050
 
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
-#define LOHALF(n) ((n) & 0xFFFF)
-
 #define PIXEL_COORDS_TO_OFFSET(x, y)(			\
 /*Add tiles by X*/								\
 ((y / 8) * 32 * 8)								\

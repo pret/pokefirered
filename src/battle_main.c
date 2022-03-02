@@ -2312,6 +2312,12 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 break;
             }
             }
+            for (j = 0; gTrainerMoneyAndBallTable[j].classId != 0xFF; j++)
+            {
+                if (gTrainerMoneyAndBallTable[j].classId == gTrainers[trainerNum].trainerClass)
+                    break;
+            }
+            SetMonData(&party[i], MON_DATA_POKEBALL, &gTrainerMoneyAndBallTable[j].ballId);
         }
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }

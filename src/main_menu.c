@@ -618,11 +618,11 @@ static void PrintContinueStats(void)
 static void PrintPlayerName(void)
 {
     s32 i;
-    u8 name[OT_NAME_LENGTH + 1];
+    u8 name[PLAYER_NAME_LENGTH + 1];
     u8 *ptr;
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 2, 18, sTextColor2, -1, gText_Player);
     ptr = name;
-    for (i = 0; i < OT_NAME_LENGTH; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         *ptr++ = gSaveBlock2Ptr->playerName[i];
     *ptr = EOS;
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_CONTINUE, 2, 62, 18, sTextColor2, -1, name);

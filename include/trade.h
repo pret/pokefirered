@@ -5,7 +5,7 @@
 #include "link_rfu.h"
 #include "constants/trade.h"
 
-extern struct MailStruct gLinkPartnerMail[6];
+extern struct Mail gLinkPartnerMail[6];
 extern u8 gSelectedTradeMonPositions[2];
 
 extern const u8 gText_MaleSymbol4[];

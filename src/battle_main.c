@@ -600,389 +600,312 @@ const struct TrainerMoneyBall gTrainerMoneyAndBallTable[] =
 };
 
 const struct TrainerEvs gTrainerEvsTable[] =
-{
+{    // Evs = {HP, ATK, DEF, SPEED, SPATK, SPDEF}
     {
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_DOCILE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LONELY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BRAVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_ADAMANT,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAUGHTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BOLD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RELAXED,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_IMPISH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LAX,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_TIMID,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_HASTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_JOLLY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAIVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MODEST,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MILD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_QUIET,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RASH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CALM,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_GENTLE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_SASSY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CAREFUL,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {MAX_PER_STAT_EVS, 0, 0, 0, 0, 0},
-    },
-    {
+    },{
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_DOCILE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LONELY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BRAVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_ADAMANT,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAUGHTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BOLD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RELAXED,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_IMPISH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LAX,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_TIMID,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_HASTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_JOLLY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAIVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MODEST,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MILD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_QUIET,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RASH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CALM,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_GENTLE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_SASSY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CAREFUL,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, MAX_PER_STAT_EVS, 0, 0, 0, 0},
-    },
-    {
+    },{
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_DOCILE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LONELY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BRAVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_ADAMANT,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAUGHTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BOLD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RELAXED,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_IMPISH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LAX,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_TIMID,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_HASTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_JOLLY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAIVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MODEST,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MILD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_QUIET,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RASH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CALM,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_GENTLE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_SASSY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CAREFUL,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, MAX_PER_STAT_EVS, 0, 0, 0},
-    },
-    {
+    },{
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_DOCILE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_LONELY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_BRAVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_ADAMANT,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAUGHTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_BOLD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_RELAXED,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_IMPISH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_LAX,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_TIMID,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_HASTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
@@ -991,266 +914,213 @@ const struct TrainerEvs gTrainerEvsTable[] =
         .nature = NATURE_JOLLY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAIVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_MODEST,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_MILD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_QUIET,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_RASH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_CALM,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_GENTLE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_SASSY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .nature = NATURE_CAREFUL,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, MAX_PER_STAT_EVS, 0},
-    },
-    {
+    },{
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_DOCILE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_LONELY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_BRAVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_ADAMANT,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_NAUGHTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_BOLD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_RELAXED,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_IMPISH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_LAX,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_TIMID,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_HASTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_JOLLY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_NAIVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_MODEST,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_MILD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_QUIET,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_RASH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_CALM,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_GENTLE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_SASSY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .nature = NATURE_CAREFUL,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, 0, 0, MAX_PER_STAT_EVS},
-    },
-    {
+    },{
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_DOCILE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LONELY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BRAVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_ADAMANT,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAUGHTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_BOLD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RELAXED,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_IMPISH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_LAX,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_TIMID,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_HASTY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_JOLLY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_NAIVE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MODEST,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_MILD,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_QUIET,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_RASH,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CALM,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_GENTLE,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_SASSY,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},
-    },
-    {
+    },{
         .nature = NATURE_CAREFUL,
         .ivs = MAX_PER_STAT_IVS,
         .Evs = {0, 0, 0, MAX_PER_STAT_EVS, 0, 0},

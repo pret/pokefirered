@@ -4672,7 +4672,7 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
              && gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer == 0)
                 retVal = FALSE;
             if ((itemEffect[cmdIndex] & ITEM3_LEVEL_UP)  // raise level
-             && GetMonData(mon, MON_DATA_LEVEL, NULL) != 100)
+             && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
                 retVal = FALSE;
             if ((itemEffect[cmdIndex] & ITEM3_SLEEP)
              && PartyMonHasStatus(mon, partyIndex, STATUS1_SLEEP, battlerId))

@@ -491,11 +491,11 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         {
             PlayerJumpLedge(direction);
         }
-        else if (collision == COLLISION_UNKNOWN_WARP_6C_6D_6E_6F)
+        else if (collision == COLLISION_ROTATING_GATE)
         {
             PlayerFaceDirection(direction);
         }
-        else if (collision != COLLISION_STOP_SURFING && collision != COLLISION_LEDGE_JUMP && collision != COLLISION_PUSHED_BOULDER && collision != COLLISION_UNKNOWN_WARP_6C_6D_6E_6F)
+        else if (collision != COLLISION_STOP_SURFING && collision != COLLISION_LEDGE_JUMP && collision != COLLISION_PUSHED_BOULDER && collision != COLLISION_ROTATING_GATE)
         {
             PlayerNotOnBikeCollide(direction);
         }

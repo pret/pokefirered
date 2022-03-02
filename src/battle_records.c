@@ -303,7 +303,7 @@ static s32 IndexOfOpponentLinkBattleRecord(struct LinkBattleRecords * records, c
 
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
     {
-        if (StringCompareN(records->entries[i].name, name, OT_NAME_LENGTH) == 0 && records->entries[i].trainerId == trainerId)
+        if (StringCompareN(records->entries[i].name, name, PLAYER_NAME_LENGTH) == 0 && records->entries[i].trainerId == trainerId)
             return i;
     }
 
@@ -377,7 +377,7 @@ static void UpdateLinkBattleGameStats(s32 outcome)
 
 static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, const u8 * name, u16 trainerId, s32 outcome, u32 language)
 {
-    u8 namebuf[OT_NAME_LENGTH + 1];
+    u8 namebuf[PLAYER_NAME_LENGTH + 1];
     s32 i;
     struct LinkBattleRecord * record;
 
@@ -397,7 +397,7 @@ static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, cons
         i = LINK_B_RECORDS_COUNT - 1;
         record = &records->entries[LINK_B_RECORDS_COUNT - 1];
         ClearLinkBattleRecord(record);
-        StringCopyN(record->name, namebuf, OT_NAME_LENGTH);
+        StringCopyN(record->name, namebuf, PLAYER_NAME_LENGTH);
         record->trainerId = trainerId;
     }
     UpdateLinkBattleRecord(&records->entries[i], outcome);
@@ -515,8 +515,8 @@ static void PrintOpponentBattleRecord(struct LinkBattleRecord * record, u8 y)
             if (i == 0)
             {
                 x = 0;
-                StringFillWithTerminator(gStringVar1, OT_NAME_LENGTH + 1);
-                StringCopyN(gStringVar1, record->name, OT_NAME_LENGTH);
+                StringFillWithTerminator(gStringVar1, PLAYER_NAME_LENGTH + 1);
+                StringCopyN(gStringVar1, record->name, PLAYER_NAME_LENGTH);
             }
             else if (i == 1)
             {

@@ -131,7 +131,7 @@ static void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite);
 static void SpriteCB_TradePokeball_Outbound2(struct Sprite * sprite);
 static void SpriteCB_TradePokeball_Inbound(struct Sprite * sprite);
 static void BufferInGameTradeMonName(void);
-static void GetInGameTradeMail(struct MailStruct * mail, const struct InGameTrade * inGameTrade);
+static void GetInGameTradeMail(struct Mail * mail, const struct InGameTrade * inGameTrade);
 static void CB2_RunTradeAnim_LinkTrade(void);
 static void CB2_WaitAndAckTradeComplete(void);
 static void CB2_HandleTradeEnded(void);
@@ -2432,7 +2432,7 @@ static void CreateInGameTradePokemonInternal(u8 playerSlot, u8 inGameTradeIdx)
 {
     const struct InGameTrade * inGameTrade = &sInGameTrades[inGameTradeIdx];
     u8 level = GetMonData(&gPlayerParty[playerSlot], MON_DATA_LEVEL);
-    struct MailStruct mail;
+    struct Mail mail;
     u8 metLocation = METLOC_IN_GAME_TRADE;
     struct Pokemon * tradeMon = &gEnemyParty[0];
     u8 mailNum;
@@ -2472,7 +2472,7 @@ static void CreateInGameTradePokemonInternal(u8 playerSlot, u8 inGameTradeIdx)
     CalculateMonStats(&gEnemyParty[0]);
 }
 
-static void GetInGameTradeMail(struct MailStruct * mail, const struct InGameTrade * inGameTrade)
+static void GetInGameTradeMail(struct Mail * mail, const struct InGameTrade * inGameTrade)
 {
     int i;
     for (i = 0; i < MAIL_WORDS_COUNT; i++)

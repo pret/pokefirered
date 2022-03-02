@@ -5,15 +5,15 @@
 #include "menews_jisan.h"
 #include "constants/items.h"
 
-static u32 GetMENewsJisanRewardItem(struct MENewsJisanStruct *);
-static void MENewsJisanIncrementCounterUnk0_5(struct MENewsJisanStruct *);
-static u32 GetMENewsJisanState(struct MENewsJisanStruct *);
-static void MENewsJisanIncrementCounterUnk0_2(struct MENewsJisanStruct *);
-static void MENewsJisanResetCounterUnk0_2(struct MENewsJisanStruct *);
+static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *);
+static void MENewsJisanIncrementCounterUnk0_5(struct WonderNewsMetadata *);
+static u32 GetMENewsJisanState(struct WonderNewsMetadata *);
+static void MENewsJisanIncrementCounterUnk0_2(struct WonderNewsMetadata *);
+static void MENewsJisanResetCounterUnk0_2(struct WonderNewsMetadata *);
 
 void MENewsJisan_SetRandomReward(u32 a0)
 {
-    struct MENewsJisanStruct *r5 = GetMENewsJisanStructPtr();
+    struct WonderNewsMetadata *r5 = GetMENewsJisanStructPtr();
 
     r5->unk_0_0 = a0;
     switch (a0)
@@ -32,7 +32,7 @@ void MENewsJisan_SetRandomReward(u32 a0)
 
 void MENewsJisanReset(void)
 {
-    struct MENewsJisanStruct *r5 = GetMENewsJisanStructPtr();
+    struct WonderNewsMetadata *r5 = GetMENewsJisanStructPtr();
 
     r5->unk_0_0 = 0;
     r5->unk_0_2 = 0;
@@ -44,8 +44,8 @@ void MENewsJisanReset(void)
 void MENewsJisanStepCounter(void)
 {
     u16 *r4 = GetVarPointer(VAR_MENEWS_JISAN_STEP_COUNTER);
-    struct MENewsJisanStruct *r2 = GetMENewsJisanStructPtr();
-    struct MENewsJisanStruct r0 = *r2;
+    struct WonderNewsMetadata *r2 = GetMENewsJisanStructPtr();
+    struct WonderNewsMetadata r0 = *r2;
 
     if ((u8)r0.unk_0_5 > 4 && ++(*r4) >= 500)
     {
@@ -57,7 +57,7 @@ void MENewsJisanStepCounter(void)
 u16 GetMENewsJisanItemAndState(void)
 {
     u16 *r6 = &gSpecialVar_Result;
-    struct MENewsJisanStruct *r4 = GetMENewsJisanStructPtr();
+    struct WonderNewsMetadata *r4 = GetMENewsJisanStructPtr();
     u16 r5;
 
     if (!IsMysteryGiftEnabled() || !ValidateReceivedWonderNews())
@@ -92,7 +92,7 @@ u16 GetMENewsJisanItemAndState(void)
     return r5;
 }
 
-static u32 GetMENewsJisanRewardItem(struct MENewsJisanStruct *a0)
+static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *a0)
 {
     u32 r4;
 
@@ -103,28 +103,28 @@ static u32 GetMENewsJisanRewardItem(struct MENewsJisanStruct *a0)
     return r4;
 }
 
-static void MENewsJisanResetCounterUnk0_2(struct MENewsJisanStruct *a0)
+static void MENewsJisanResetCounterUnk0_2(struct WonderNewsMetadata *a0)
 {
     a0->unk_0_2 = 0;
 }
 
-static void MENewsJisanIncrementCounterUnk0_2(struct MENewsJisanStruct *a0)
+static void MENewsJisanIncrementCounterUnk0_2(struct WonderNewsMetadata *a0)
 {
     a0->unk_0_2++;
     if ((u8)a0->unk_0_2 > 4)
         a0->unk_0_2 = 4;
 }
 
-static void MENewsJisanIncrementCounterUnk0_5(struct MENewsJisanStruct *a0)
+static void MENewsJisanIncrementCounterUnk0_5(struct WonderNewsMetadata *a0)
 {
     a0->unk_0_5++;
     if ((u8)a0->unk_0_5 > 5)
         a0->unk_0_5 = 5;
 }
 
-static u32 GetMENewsJisanState(struct MENewsJisanStruct *a0)
+static u32 GetMENewsJisanState(struct WonderNewsMetadata *a0)
 {
-    struct MENewsJisanStruct r0;
+    struct WonderNewsMetadata r0;
     if ((u8)a0->unk_0_5 == 5)
         return 6;
 

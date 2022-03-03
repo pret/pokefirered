@@ -5451,7 +5451,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_CooltrainerJulie[] = {
     },
 };
 
-static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLorelei[] = {
+static const struct TrainerMonItemCustomMoves sParty_EliteFourLorelei[] = {
     {
         .iv = TIS_MODEST_NATURE_MAX_HP_EV,
         .lvl = 52,
@@ -5489,7 +5489,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLorelei[] = 
     },
 };
 
-static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourBruno[] = {
+static const struct TrainerMonItemCustomMoves sParty_EliteFourBruno[] = {
     {
         .iv = TIS_BRAVE_NATURE_MAX_ATK_EV,
         .lvl = 51,
@@ -5527,7 +5527,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourBruno[] = {
     },
 };
 
-static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourAgatha[] = {
+static const struct TrainerMonItemCustomMoves sParty_EliteFourAgatha[] = {
     { // bad moveset for this nature ¬¬
         .iv = TIS_MODEST_NATURE_MAX_SPEED_EV,
         .lvl = 54,
@@ -5565,7 +5565,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourAgatha[] = {
     },
 };
 
-static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLance[] = {
+static const struct TrainerMonItemCustomMoves sParty_EliteFourLance[] = {
     { // bad moveset for this nature ¬¬
         .iv = TIS_ADAMANT_NATURE_MAX_SPEED_EV,
         .lvl = 56,
@@ -5603,7 +5603,7 @@ static const struct TrainerMonItemCustomMoves sTrainerMons_EliteFourLance[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderBrock[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
     {
         .iv = 0,
         .lvl = 12,
@@ -5618,7 +5618,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderBrock[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderMisty[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderMisty[] = {
     {
         .iv = 0,
         .lvl = 18,
@@ -5633,7 +5633,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderMisty[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderLtSurge[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderLtSurge[] = {
     {
         .iv = 0,
         .lvl = 21,
@@ -5654,7 +5654,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderLtSurge[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderErika[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderErika[] = {
     {
         .iv = 0,
         .lvl = 29,
@@ -5675,7 +5675,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderErika[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderKoga[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderKoga[] = {
     {
         .iv = 0,
         .lvl = 37,
@@ -5702,7 +5702,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderKoga[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderBlaine[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderBlaine[] = {
     {
         .iv = 0,
         .lvl = 42,
@@ -5729,7 +5729,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderBlaine[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderSabrina[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_LeaderSabrina[] = {
     {
         .iv = 0,
         .lvl = 38,
@@ -5756,7 +5756,7 @@ static const struct TrainerMonNoItemCustomMoves sTrainerMons_LeaderSabrina[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanThomas[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanThomas[] = {
     {
         .iv = 0,
         .lvl = 18,
@@ -5769,7 +5769,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanThomas[] 
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanArthur[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanArthur[] = {
     {
         .iv = 0,
         .lvl = 19,
@@ -5782,7 +5782,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanArthur[] 
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanTucker[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanTucker[] = {
     {
         .iv = 0,
         .lvl = 23,
@@ -5790,7 +5790,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanTucker[] 
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanNorton[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanNorton[] = {
     {
         .iv = 0,
         .lvl = 48,
@@ -5798,7 +5798,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanNorton[] 
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanWalter[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanWalter[] = {
     {
         .iv = 0,
         .lvl = 17,
@@ -5811,7 +5811,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_GentlemanWalter[] 
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSsAnneSquirtle[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalSsAnneSquirtle[] = {
     {
         .iv = 50,
         .lvl = 19,
@@ -5834,7 +5834,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSsAnneSquirtl
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSsAnneBulbasaur[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalSsAnneBulbasaur[] = {
     {
         .iv = 50,
         .lvl = 19,
@@ -5857,7 +5857,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSsAnneBulbasa
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSsAnneCharmander[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalSsAnneCharmander[] = {
     {
         .iv = 50,
         .lvl = 19,
@@ -5880,7 +5880,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSsAnneCharman
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalPokenonTowerSquirtle[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalPokenonTowerSquirtle[] = {
     {
         .iv = 100,
         .lvl = 25,
@@ -5908,7 +5908,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalPokenonTowerS
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalPokenonTowerBulbasaur[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalPokenonTowerBulbasaur[] = {
     {
         .iv = 100,
         .lvl = 25,
@@ -5936,7 +5936,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalPokenonTowerB
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalPokenonTowerCharmander[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalPokenonTowerCharmander[] = {
     {
         .iv = 100,
         .lvl = 25,
@@ -5964,7 +5964,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalPokenonTowerC
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSilphSquirtle[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalSilphSquirtle[] = {
     {
         .iv = 100,
         .lvl = 37,
@@ -5992,7 +5992,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSilphSquirtle
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSilphBulbasaur[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalSilphBulbasaur[] = {
     {
         .iv = 100,
         .lvl = 37,
@@ -6020,7 +6020,7 @@ static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSilphBulbasau
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sTrainerMons_RivalSilphCharmander[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalSilphCharmander[] = {
     {
         .iv = 100,
         .lvl = 37,

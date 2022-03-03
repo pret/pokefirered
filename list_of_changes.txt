@@ -131,3 +131,5 @@ ev reducing berries
 pc boxes use more wallpapers @next
 gen 6 shiny base rate
 mart price lenght increase
+
+// end trainer party data, from line 6023 to down

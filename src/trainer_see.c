@@ -10,6 +10,7 @@
 #include "constants/battle_setup.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/trainer_types.h"
 
 typedef u8 (*TrainerApproachFunc)(struct ObjectEvent *, s16, s16, s16);
 typedef bool8 (*TrainerSeeFunc)(u8, struct Task *, struct ObjectEvent *);
@@ -92,13 +93,7 @@ bool8 CheckForTrainersWantingBattle(void)
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (gObjectEvents[i].active
-         && (
-             gObjectEvents[i].trainerType == 1
-          || gObjectEvents[i].trainerType == 3
-         )
-         && CheckTrainer(i)
-      )
+        if (gObjectEvents[i].active && (gObjectEvents[i].trainerType == TRAINER_TYPE_NORMAL || gObjectEvents[i].trainerType == TRAINER_TYPE_BURIED) && CheckTrainer(i))
             return TRUE;
     }
     return FALSE;
@@ -129,12 +124,12 @@ static u8 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
     u8 approachDistance;
 
     PlayerGetDestCoords(&x, &y);
-    if (trainerObj->trainerType == 1)  // can only see in one direction
+    if (trainerObj->trainerType == TRAINER_TYPE_NORMAL)  // can only see in one direction
     {
         approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->facingDirection - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
         return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->facingDirection);
     }
-    else  // can see in all directions
+    else  // TRAINER_TYPE_SEE_ALL_DIRECTIONS, TRAINER_TYPE_BURIED
     {
         for (i = 0; i < 4; i++)
         {

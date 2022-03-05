@@ -6,6 +6,8 @@
 #include "link.h"
 #include "AgbRfu_LinkManager.h"
 
+#define RFUCMD_MASK               0xFF00
+
 #define RFUCMD_SEND_PACKET        0x2F00
 #define RFUCMD_READY_CLOSE_LINK   0x5f00
 #define RFUCMD_READY_EXIT_STANDBY 0x6600

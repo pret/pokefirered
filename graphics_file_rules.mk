@@ -97,7 +97,7 @@ $(FONTGFXDIR)/font9_jap.fwjpnfont: $(FONTGFXDIR)/font9_jap.png
 graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 	$(GFX) $< $@ -num_colors 224
 
-graphics/link_games/pkmnjump_bg.4bpp: %.4bpp: %.png
+graphics/pokemon_jump/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
 
 $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
@@ -482,7 +482,7 @@ $(FAMECHECKERGFXDIR)/bg.4bpp: %.4bpp: %.png
 graphics/seagallop/water.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 41
 
-$(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
+graphics/link/321start.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png

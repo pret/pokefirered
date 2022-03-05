@@ -1321,7 +1321,7 @@ void SetPlayerInvisibility(bool8 invisible)
 void StartPlayerAvatarSummonMonForFieldMoveAnim(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_FIELD_MOVE));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_FIELD_MOVE);
 }
 
 static const u8 sPlayerAvatarVsSeekerBikeGfxIds[] = {
@@ -1340,7 +1340,7 @@ u8 GetPlayerAvatarVsSeekerGfxId(void)
 void StartPlayerAvatarVsSeekerAnim(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarVsSeekerGfxId());
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_VS_SEEKER);
 }
 
 void StartPlayerAvatarFishAnim(u8 direction)

@@ -7905,7 +7905,7 @@ static bool8 MovementActionFunc_x9A_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x9F_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    StartSpriteAnim(sprite, ANIM_SHAKE_HEAD);
+    StartSpriteAnim(sprite, ANIM_SHAKE_HEAD_OR_WALK_IN_PLACE);
     sprite->animPaused = FALSE;
     objectEvent->disableAnim = FALSE;
     sprite->data[2] = 1;

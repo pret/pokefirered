@@ -8542,14 +8542,14 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanClifford[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_LadySelphy[] = {
     {
-        .iv = 0,
+        .iv = TIS_JOLLY_NATURE_MAX_ATK_EV,
         .lvl = 49,
         .species = SPECIES_PERSIAN,
         .heldItem = ITEM_NUGGET,
         .moves = {MOVE_PAY_DAY, MOVE_BITE, MOVE_TAUNT, MOVE_TORMENT},
     },
     {
-        .iv = 0,
+        .iv = TIS_JOLLY_NATURE_MAX_ATK_EV,
         .lvl = 49,
         .species = SPECIES_PERSIAN,
         .heldItem = ITEM_NUGGET,

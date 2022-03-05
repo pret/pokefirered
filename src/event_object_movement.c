@@ -5310,7 +5310,7 @@ static void sub_8064544(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     if (gMovementActionFuncs[objectEvent->movementActionId][sprite->data[2]](objectEvent, sprite))
     {
         objectEvent->heldMovementFinished = TRUE;
-        if (objectEvent->graphicsId == 0x61)
+        if (objectEvent->graphicsId == OBJ_EVENT_GFX_PUSHABLE_BOULDER)
             HandleBoulderFallThroughHole(objectEvent);
     }
 }

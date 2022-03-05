@@ -33,8 +33,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/item_effects.h"
-#include "constants/trainer_classes.h"
-#include "constants/facility_trainer_classes.h"
+#include "constants/trainers.h"
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/inserts.h"
@@ -1594,10 +1593,23 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
     },
 };
 
+// Classes dummied out
 static const u8 sSecretBaseFacilityClasses[][5] = 
 {
-    { FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2 },
-    { FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_YOUNGSTER_2 },
+    [MALE] = {
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER
+    },
+    [FEMALE] = {
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER,
+        FACILITY_CLASS_YOUNGSTER
+    },
 };
 
 static const u8 sGetMonDataEVConstants[] = 
@@ -1659,10 +1671,24 @@ static const u16 sDeoxysBaseStats[] =
 
 const u16 gLinkPlayerFacilityClasses[] = 
 {
-    FACILITY_CLASS_COOLTRAINER_3, FACILITY_CLASS_BLACK_BELT_2, FACILITY_CLASS_CAMPER_2, FACILITY_CLASS_YOUNGSTER_2, FACILITY_CLASS_PSYCHIC_3,
-    FACILITY_CLASS_BUG_CATCHER_2, FACILITY_CLASS_TAMER, FACILITY_CLASS_JUGGLER, FACILITY_CLASS_COOLTRAINER_4, FACILITY_CLASS_CHANNELER,
-    FACILITY_CLASS_PICNICKER_2, FACILITY_CLASS_LASS_2, FACILITY_CLASS_PSYCHIC_4, FACILITY_CLASS_CRUSH_GIRL, FACILITY_CLASS_PKMN_BREEDER_3,
-    FACILITY_CLASS_BEAUTY_2, FACILITY_CLASS_AQUA_LEADER,
+    // Male
+    FACILITY_CLASS_COOLTRAINER_M,
+    FACILITY_CLASS_BLACK_BELT,
+    FACILITY_CLASS_CAMPER,
+    FACILITY_CLASS_YOUNGSTER,
+    FACILITY_CLASS_PSYCHIC_M,
+    FACILITY_CLASS_BUG_CATCHER,
+    FACILITY_CLASS_TAMER,
+    FACILITY_CLASS_JUGGLER,
+    // Female
+    FACILITY_CLASS_COOLTRAINER_F,
+    FACILITY_CLASS_CHANNELER,
+    FACILITY_CLASS_PICNICKER,
+    FACILITY_CLASS_LASS,
+    FACILITY_CLASS_PSYCHIC_F,
+    FACILITY_CLASS_CRUSH_GIRL,
+    FACILITY_CLASS_PKMN_BREEDER,
+    FACILITY_CLASS_BEAUTY,
 };
 
 static const struct OamData sOakSpeechNidoranFDummyOamData = 
@@ -5408,9 +5434,9 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             // Only if it's a trainer battle with league progression significance
             if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
                 return;
-            if (!(gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_LEADER_2
-                || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_ELITE_FOUR_2
-                || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION_2))
+            if (!(gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))
                 return;
         }
 
@@ -5790,18 +5816,18 @@ static u16 GetBattleBGM(void)
     {
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
-            case CLASS_CHAMPION_2:
-                return MUS_VS_CHAMPION;
-            case CLASS_LEADER_2:
-            case CLASS_ELITE_FOUR_2:
-                return MUS_VS_GYM_LEADER;
-            case CLASS_BOSS:
-            case CLASS_TEAM_ROCKET:
-            case CLASS_COOLTRAINER_2:
-            case CLASS_GENTLEMAN_2:
-            case CLASS_RIVAL_2:
-            default:
-                return MUS_VS_TRAINER;
+		case TRAINER_CLASS_CHAMPION:
+			return MUS_VS_CHAMPION;
+		case TRAINER_CLASS_LEADER:
+		case TRAINER_CLASS_ELITE_FOUR:
+			return MUS_VS_GYM_LEADER;
+		case TRAINER_CLASS_BOSS:
+		case TRAINER_CLASS_TEAM_ROCKET:
+		case TRAINER_CLASS_COOLTRAINER:
+		case TRAINER_CLASS_GENTLEMAN:
+		case TRAINER_CLASS_RIVAL_LATE:
+		default:
+			return MUS_VS_TRAINER;
         }
     }
     return MUS_VS_WILD;

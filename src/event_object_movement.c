@@ -15,6 +15,7 @@
 #include "script.h"
 #include "trainer_see.h"
 #include "trig.h"
+#include "constants/maps.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/trainer_types.h"
@@ -1215,8 +1216,8 @@ static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
     *objectEvent = (struct ObjectEvent){};
     objectEvent->localId = 0xFF;
-    objectEvent->mapNum = 0xFF;
-    objectEvent->mapGroup = 0xFF;
+    objectEvent->mapNum = MAP_NUM(UNDEFINED);
+    objectEvent->mapGroup = MAP_GROUP(UNDEFINED);
     objectEvent->movementActionId = 0xFF;
 }
 
@@ -8047,7 +8048,7 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     x2 = graphicsInfo->width + (s16)x;
     y2 = graphicsInfo->height + (s16)y;
     
-    if (gSaveBlock1Ptr->location.mapGroup == 1 && gSaveBlock1Ptr->location.mapNum == 4 && objectEvent->localId == 1)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SSANNE_EXTERIOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SSANNE_EXTERIOR) && objectEvent->localId == 1)
     {
         var = -32;
     }

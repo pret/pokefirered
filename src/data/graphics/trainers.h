@@ -175,7 +175,7 @@ const u32 gTrainerPalette_RSMay1[] = INCBIN_U32("graphics/trainers/palettes/ruby
 const u32 gTrainerFrontPic_PokemonBreederM[] = INCBIN_U32("graphics/trainers/front_pics/pokemon_breeder_m_front_pic.4bpp.lz");
 const u32 gTrainerPalette_PokemonBreederM[] = INCBIN_U32("graphics/trainers/palettes/pokemon_breeder_m.gbapal.lz");
 
-const u32 gTrainerFrontPic_RSPokemonBreederF[] = INCBIN_U32("graphics/trainers/front_pics/rs_pokemon_breeder_front_pic.4bpp.lz");
+const u32 gTrainerFrontPic_RSPokemonBreederF[] = INCBIN_U32("graphics/trainers/front_pics/pokemon_breeder_front_pic.4bpp.lz");
 const u32 gTrainerPalette_RSPokemonBreederF[] = INCBIN_U32("graphics/trainers/palettes/rs_pokemon_breeder_f.gbapal.lz");
 
 const u32 gTrainerFrontPic_RSPokemonRangerM[] = INCBIN_U32("graphics/trainers/front_pics/rs_pokemon_ranger_m_front_pic.4bpp.lz");

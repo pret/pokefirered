@@ -733,7 +733,7 @@ static void Task_EvolutionScene(u8 taskId)
         if (!IsTextPrinterActive(0))
         {
             HelpSystem_Enable();
-            var = MonTryLearningNewMove(mon, gTasks[taskId].tLearnsFirstMove);
+            var = MonTryLearningNewMoveAfterEvolution(mon, gTasks[taskId].tLearnsFirstMove);
             if (var != 0 && !gTasks[taskId].tEvoWasStopped)
             {
                 u8 text[20];

@@ -116,7 +116,6 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         return FALSE;
     for (i = 0; i < PARTY_SIZE; ++i)
     {
-        u16 species;
         u8 monAbility;
 
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
@@ -127,11 +126,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2)))
             continue;
-        species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
-        if (GetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM) != ABILITY_NONE)
-            monAbility = gBaseStats[species].abilities[1];
-        else
-            monAbility = gBaseStats[species].abilities[0];
+            monAbility = GetMonAbility(&gEnemyParty[i]);
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
             // we found a mon

@@ -2282,6 +2282,8 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
         moveLevel = (gLevelUpLearnsets[species][i] & 0xFE00);
 
+	if (moveLevel == 0)
+	    continue;
         if (moveLevel > (level << 9))
             break;
 

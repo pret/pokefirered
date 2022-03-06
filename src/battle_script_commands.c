@@ -67,7 +67,6 @@ static void DrawLevelUpWindow2(void);
 static bool8 sub_8026648(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
-static bool8 MakesSound(u16 move);
 static bool8 AnticipationTypeCalc(u8 battler);
 static u8 GetForewarnMovePower(u16 move);
 
@@ -1736,7 +1735,7 @@ static inline void ApplyRandomDmgMultiplier(void)
     }
 }
 
-static bool8 MakesSound(u16 move)
+bool8 MakesSound(u16 move)
 {
     s32 i;
 	

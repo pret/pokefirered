@@ -4639,7 +4639,7 @@ static void UpdateExpBarObjs(void)
     level = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_LEVEL);
     species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES);
 
-    if (level < 100)
+    if (level < MAX_LEVEL)
     {
         totalExpToNextLevel = gExperienceTables[gBaseStats[species].growthRate][level + 1] - gExperienceTables[gBaseStats[species].growthRate][level];
         curExpToNextLevel = exp - gExperienceTables[gBaseStats[species].growthRate][level];

@@ -267,7 +267,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2)))
             continue;
             monAbility = GetMonAbility(&gEnemyParty[i]);
-        moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
+        moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], GetMonData(&gEnemyParty[i], MON_DATA_SPECIES), monAbility);
         if (moveFlags & flags)
         {
             battlerIn1 = gLastHitBy[gActiveBattler];

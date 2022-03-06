@@ -23,6 +23,7 @@ Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackU
 Trainers With Nature|Ivs|Evs (DoesntKnowHowToPlay And BlackUser) // to edit/add entries in the table go to src > battle_main.c and edit gTrainerEvsTable to your liking. It will be able to suport up to 65536 entries.
 Class Based Poke Balls (Buffel Saft And BlackUser) // to edit the ball for each class go to src > battle_main.c and edit gTrainerMoneyAndBallTable to your liking.
 Learn Moves Upon Evolution (Zeturic)
+Buy 10 Poke Balls And Get A Premier Ball (Spherical Ice And BuffelSaft)
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h

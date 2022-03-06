@@ -2185,7 +2185,7 @@ static void BufferMonSkills(void)
 
     level = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_LEVEL);
     expToNextLevel = 0;
-    if (level < 100)
+    if (level < MAX_LEVEL)
     {
         species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES);
         expToNextLevel = gExperienceTables[gBaseStats[species].growthRate][level + 1] - exp;

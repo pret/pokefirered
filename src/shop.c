@@ -1034,7 +1034,8 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
 			else
 				BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBall, BuyMenuReturnToItemList);
 		}
-		BuyMenuReturnToItemList(taskId);
+		else
+			BuyMenuReturnToItemList(taskId);
 	}
 }
 

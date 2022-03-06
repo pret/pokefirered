@@ -8632,9 +8632,9 @@ static void atkE4_getsecretpowereffect(void)
 
 static void atkE5_pickup(void)
 {
-    u8 level, chance, levelmax;
+    u8 level, chance, levelmax, ability;
     u16 species, heldItem;
-    u32 j, ability;
+    u32 j;
     s32 i, random;
 
     for (i = 0; i < PARTY_SIZE; ++i)
@@ -8642,11 +8642,8 @@ static void atkE5_pickup(void)
 	random = Random() % 100;
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-	    
-        if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM) != ABILITY_NONE)
-            ability = gBaseStats[species].abilities[1];
-        else
-            ability = gBaseStats[species].abilities[0];
+	ability = GetAbilityBySpecies(species, GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM));    
+        
 	if (species != SPECIES_NONE && species != SPECIES_EGG && heldItem == ITEM_NONE)
 	{
 		if (ability == ABILITY_PICKUP && !(Random() % 10))
@@ -8664,7 +8661,7 @@ static void atkE5_pickup(void)
 			
 			for (chance = 5, levelmax = 10; level > levelmax; chance += 5, levelmax += 10)
 			{
-				if (levelmax == 100)
+				if (levelmax == MAX_LEVEL)
 					break;
 			}
 			if (chance > random)

@@ -1027,7 +1027,7 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
 	if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
 	{
 		PlaySE(SE_SELECT);
-		if (ItemId_GetPocket(tItemId) == POCKET_TM_CASE && tItemCount >= 10 && AddBagItem(ITEM_PREMIER_BALL, tItemCount / 10))
+		if (ItemId_GetPocket(tItemId) == POCKET_POKE_BALLS && tItemCount >= 10 && AddBagItem(ITEM_PREMIER_BALL, tItemCount / 10))
 		{
 			if (tItemCount >= 20)
 				BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBalls, BuyMenuReturnToItemList);

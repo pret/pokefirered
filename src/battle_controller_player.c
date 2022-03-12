@@ -1402,32 +1402,32 @@ static void MoveSelectionDisplayPpNumber(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 9);
 }
 
-const u16 sListOfColours[] =
+const u16 sEffectivenessColours[] =
 {
     // super effective colors
-    0x4BD2, 
-    0x226B,
+    RGB(18, 30, 18), 
+    RGB(11, 19, 8),
     // super effective colors + stab
-    0x37CD, 
-    0x0280,
+    RGB(13, 30, 13), 
+    RGB(0, 20, 0),
     // not very effect colors
-    0x47DF, 
-    0x037D,
+    RGB(31, 30, 17),
+    RGB(29, 27, 0),
     // not very effect colors + stab
-    0x3BBF, 
-    0x025F,
+    RGB(31, 29, 14),
+    RGB(31, 18, 0),
     // not affect colors
-    0x4F7E, 
-    0x211C,
+    RGB(30, 27, 19),
+    RGB(28, 8, 8),
     // not affect colors + stab (unused)
-    0x3B7E, 
-    0x001D,
+    RGB(30, 27, 14),
+    RGB(29, 0, 0),
     // normal colors
-    0x5F18, 
-    0x2529,
+    RGB(24, 24, 23),
+    RGB(9, 9, 9),
     // normal colors + stab
-    0x3DEF, 
-    0x0000,
+    RGB(15, 15, 15),
+    RGB_BLACK,
 };
 
 static void MoveSelectionDisplayMoveType(void)
@@ -1466,7 +1466,7 @@ static void MoveSelectionDisplayMoveType(void)
             target = B_POSITION_OPPONENT_RIGHT;
     }
     //get move effectiveness
-    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE && TYPE_EFFECT_ATK_TYPE(i) != TYPE_FORESIGHT)
+    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
     {
         if (TYPE_EFFECT_ATK_TYPE(i) == type)
         {
@@ -1483,23 +1483,23 @@ static void MoveSelectionDisplayMoveType(void)
     //set respective colours
     if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
     {
-        gPlttBufferUnfaded[88] = sListOfColours[effect];
-        gPlttBufferUnfaded[89] = sListOfColours[effect + 1];
+        gPlttBufferUnfaded[88] = sEffectivenessColours[effect];
+        gPlttBufferUnfaded[89] = sEffectivenessColours[effect + 1];
     }
     else if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
     {
-        gPlttBufferUnfaded[88] = sListOfColours[effect + 4];
-        gPlttBufferUnfaded[89] = sListOfColours[effect + 5];
+        gPlttBufferUnfaded[88] = sEffectivenessColours[effect + 4];
+        gPlttBufferUnfaded[89] = sEffectivenessColours[effect + 5];
     }
     else if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
-        gPlttBufferUnfaded[88] = sListOfColours[effect + 12];
-        gPlttBufferUnfaded[89] = sListOfColours[effect + 13];
+        gPlttBufferUnfaded[88] = sEffectivenessColours[effect + 12];
+        gPlttBufferUnfaded[89] = sEffectivenessColours[effect + 13];
     }
     else
     {
-        gPlttBufferUnfaded[88] = sListOfColours[8];
-        gPlttBufferUnfaded[89] = sListOfColours[9];
+        gPlttBufferUnfaded[88] = sEffectivenessColours[8];
+        gPlttBufferUnfaded[89] = sEffectivenessColours[9];
     }
     CpuCopy16(&gPlttBufferUnfaded[88], &gPlttBufferFaded[88], sizeof(u16));
     CpuCopy16(&gPlttBufferUnfaded[89], &gPlttBufferFaded[89], sizeof(u16));

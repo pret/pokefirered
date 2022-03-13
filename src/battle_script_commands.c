@@ -880,11 +880,6 @@ static const struct PickupItem sPickupItems[] =
 
 };
 
-static const u16 sHoneyItem[] =
-{
-   ITEM_HONEY,
-};
-
 static const u8 sTerrainToType[] =
 {
     TYPE_GRASS,  // tall grass

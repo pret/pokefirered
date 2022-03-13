@@ -4482,6 +4482,11 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
         gPartyMenuUseExitCallback = FALSE;
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
+#if REPEATED_MEDICINE_USE
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+#endif
         gTasks[taskId].func = func;
     }
     else
@@ -4515,6 +4520,11 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
             PlaySE(SE_SELECT);
             DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
             ScheduleBgCopyTilemapToVram(2);
+#if REPEATED_MEDICINE_USE
+            if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            else
+#endif
             gTasks[taskId].func = func;
             return;
         }
@@ -4551,6 +4561,11 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
         GetMedicineItemEffectMessage(item);
         DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
+#if REPEATED_MEDICINE_USE
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+#endif
         gTasks[taskId].func = func;
     }
 }
@@ -4562,6 +4577,11 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     ScheduleBgCopyTilemapToVram(2);
     HandleBattleLowHpMusicChange();
+#if REPEATED_MEDICINE_USE
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    else
+#endif
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }
 

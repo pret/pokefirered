@@ -8664,9 +8664,19 @@ static void atkE5_pickup(void)
 					break;
 			}
 			if (chance > random)
-				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sHoneyItem[0]);
+			{
+				heldItem = ITEM_HONEY;
+				SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+			}
 		}
 	}
+#if SHUCKLE_MAKES_BERRY_JUICE
+	else if (species == SPECIES_SHUCKLE && heldItem >= FIRST_BERRY_INDEX && heldItem <= LAST_BERRY_INDEX && !(Random() % 16)) // you can edit this chance (1/16)
+	{
+		heldItem = ITEM_BERRY_JUICE;
+		SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+	}
+#endif
     }
     ++gBattlescriptCurrInstr;
 }

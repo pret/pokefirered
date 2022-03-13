@@ -5196,14 +5196,6 @@ static void Task_TryLearningNextMove(u8 taskId)
     }
 }
 
-static void CB2_ReturnToPartyMenuUsingRareCandy(void)
-{
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && gSpecialVar_ItemId == ITEM_RARE_CANDY && CheckBagHasItem(gSpecialVar_ItemId, 1))
-        InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
-    else
-        InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
-}
-
 static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
@@ -5212,22 +5204,12 @@ static void PartyMenuTryEvolution(u8 taskId)
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();
-#if REPEATED_MEDICINE_USE
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && gSpecialVar_ItemId == ITEM_RARE_CANDY && CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gCB2_AfterEvolution = CB2_ReturnToPartyMenuUsingRareCandy;
-        else
-#endif
         gCB2_AfterEvolution = gPartyMenu.exitCallback;
         BeginEvolutionScene(mon, targetSpecies, 1, gPartyMenu.slotId);
         DestroyTask(taskId);
     }
     else
     {
-#if REPEATED_MEDICINE_USE
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-#endif
         gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
 }

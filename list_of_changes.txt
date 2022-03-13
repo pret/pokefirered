@@ -47,6 +47,7 @@ Time Box On Start Menu (Pokemon_XY)
 Remove Flashbacks (Sierra)
 Full Exp For Participating In A Battle (DoesntKnowHowToPlay)
 Emerald Style Gender Select Intro (Meister_anon~Master_o f_None)
+Shuckle Makes Berry Juice (AsparagusEduardo)
 
 //Abilities Added and completed
 Adaptability

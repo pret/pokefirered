@@ -1828,7 +1828,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
-    if (fixedIV < USE_RANDOM_IVS)
+    if (fixedIV != USE_RANDOM_IVS)
     {
         SetBoxMonData(boxMon, MON_DATA_HP_IV, &fixedIV);
         SetBoxMonData(boxMon, MON_DATA_ATK_IV, &fixedIV);

@@ -5,7 +5,7 @@
 [travis]: https://travis-ci.org/pret/pokefirered
 [travis-badge]: https://travis-ci.org/pret/pokefirered.svg?branch=master
 
-This is a disassembly of Pokémon FireRed and LeafGreen.
+This is Spegasparce's disassembly of Pokémon FireRed and LeafGreen.
 
 It builds the following ROMs:
 

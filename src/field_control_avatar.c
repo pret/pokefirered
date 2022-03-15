@@ -1069,7 +1069,7 @@ void HandleBoulderFallThroughHole(struct ObjectEvent * object)
     {
         PlaySE(SE_FALL);
         RemoveObjectEventByLocalIdAndMap(object->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-        FlagClear(GetObjectEventFlagByLocalIdAndMap(object->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
+        FlagClear(GetBoulderRevealFlagByLocalIdAndMap(object->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
     }
 }
 

@@ -921,6 +921,8 @@ const struct BerryTree gBlankBerryTree = {};
     berries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX]; \
 })
 
+static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *);
+
 void InitEnigmaBerry(void)
 {
     s32 i;
@@ -967,7 +969,7 @@ void SetEnigmaBerry(u8 * berry)
     enigmaBerry->checksum = GetEnigmaBerryChecksum(enigmaBerry);
 }
 
-u32 GetEnigmaBerryChecksum(struct EnigmaBerry * enigmaBerry)
+static u32 GetEnigmaBerryChecksum(struct EnigmaBerry * enigmaBerry)
 {
     const u8 * src = (const u8 *)enigmaBerry;
     u32 result = 0;

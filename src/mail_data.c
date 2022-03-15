@@ -13,7 +13,7 @@ void ClearMailData(void)
         ClearMailStruct(&gSaveBlock1Ptr->mail[i]);
 }
 
-void ClearMailStruct(struct MailStruct *mail)
+void ClearMailStruct(struct Mail *mail)
 {
     s32 i;
 
@@ -95,7 +95,7 @@ u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *unownLetter)
     return result;
 }
 
-u8 GiveMailToMon2(struct Pokemon *mon, struct MailStruct *mail)
+u8 GiveMailToMon2(struct Pokemon *mon, struct Mail *mail)
 {
     u8 heldItem[2];
     u16 itemId = mail->itemId;
@@ -152,7 +152,7 @@ u8 TakeMailFromMon2(struct Pokemon *mon)
     {
         if (gSaveBlock1Ptr->mail[i].itemId == ITEM_NONE)
         {
-            memcpy(&gSaveBlock1Ptr->mail[i], &gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct MailStruct));
+            memcpy(&gSaveBlock1Ptr->mail[i], &gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct Mail));
             gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
             SetMonData(mon, MON_DATA_MAIL, &newMailId);
             SetMonData(mon, MON_DATA_HELD_ITEM, newHeldItem);

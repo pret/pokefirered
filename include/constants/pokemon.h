@@ -209,8 +209,14 @@
 #define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 8
 #define FRIENDSHIP_EVENT_FAINT_LARGE          9
 
-#define PARTY_SIZE 6
+#define MAX_PER_STAT_IVS 31
+#define MAX_IV_MASK 31
+#define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
+#define MAX_PER_STAT_EVS 255
 #define MAX_TOTAL_EVS 510
+#define EV_ITEM_RAISE_LIMIT 100
+
+#define PARTY_SIZE 6
 #define UNOWN_FORM_COUNT 28
 #define BOX_NAME_LENGTH 8
 
@@ -218,6 +224,10 @@
 #define EVO_MODE_TRADE      1
 #define EVO_MODE_ITEM_USE   2
 #define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
+
+#define MON_PIC_WIDTH 64
+#define MON_PIC_HEIGHT 64
+#define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
 
 // used by ShouldIgnoreDeoxysForm
 #define DEOXYS_CHECK_BATTLE_SPRITE      1

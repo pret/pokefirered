@@ -115,11 +115,11 @@ BirthIsland_Exterior_EventScript_RanFromDeoxys:: @ 8165348
 	end
 
 Movement_DeoxysApproach: @ 8165353
-	walk_slowest_down
-	walk_slowest_down
-	walk_slowest_down
-	walk_slowest_down
-	walk_slowest_down
-	walk_slowest_down
-	walk_slowest_down
+	walk_slower_down
+	walk_slower_down
+	walk_slower_down
+	walk_slower_down
+	walk_slower_down
+	walk_slower_down
+	walk_slower_down
 	step_end

@@ -39,6 +39,13 @@ enum
     BG_ATTR_BASETILE = 10
 };
 
+// Modes for ChangeBgX / ChangeBgY
+enum {
+    BG_COORD_SET,
+    BG_COORD_ADD,
+    BG_COORD_SUB,
+};
+
 enum AdjustBgMosaicMode
 {
     BG_MOSAIC_SET,

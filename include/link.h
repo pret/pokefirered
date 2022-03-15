@@ -58,6 +58,7 @@
 #define LINKCMD_0x5FFF             0x5FFF
 #define LINKCMD_0x6666             0x6666
 #define LINKCMD_0x7777             0x7777
+#define LINKCMD_COUNTDOWN          0x7FFF
 #define LINKCMD_CONT_BLOCK         0x8888
 #define LINKCMD_0xAAAA             0xAAAA
 #define LINKCMD_0xAAAB             0xAAAB

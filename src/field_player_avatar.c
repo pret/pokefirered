@@ -25,6 +25,7 @@
 #include "constants/songs.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
+#include "constants/trainer_types.h"
 
 static EWRAM_DATA struct ObjectEvent * sPlayerObjectPtr = NULL;
 static EWRAM_DATA u8 sTeleportSavedFacingDirection = DIR_NONE;
@@ -491,11 +492,14 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         {
             PlayerJumpLedge(direction);
         }
-        else if (collision == COLLISION_UNKNOWN_WARP_6C_6D_6E_6F)
+        else if (collision == COLLISION_DIRECTIONAL_STAIR_WARP)
         {
             PlayerFaceDirection(direction);
         }
-        else if (collision != COLLISION_STOP_SURFING && collision != COLLISION_LEDGE_JUMP && collision != COLLISION_PUSHED_BOULDER && collision != COLLISION_UNKNOWN_WARP_6C_6D_6E_6F)
+        else if (collision != COLLISION_STOP_SURFING
+              && collision != COLLISION_LEDGE_JUMP
+              && collision != COLLISION_PUSHED_BOULDER
+              && collision != COLLISION_DIRECTIONAL_STAIR_WARP)
         {
             PlayerNotOnBikeCollide(direction);
         }
@@ -556,7 +560,7 @@ static u8 CheckForPlayerAvatarCollision(u8 direction)
     x = playerObjEvent->currentCoords.x;
     y = playerObjEvent->currentCoords.y;
     if (IsDirectionalStairWarpMetatileBehavior(MapGridGetMetatileBehaviorAt(x, y), direction))
-        return 8;
+        return COLLISION_DIRECTIONAL_STAIR_WARP;
     MoveCoords(direction, &x, &y);
     return CheckForObjectEventCollision(playerObjEvent, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
 }
@@ -828,7 +832,7 @@ static void QL_TryRecordNPCStepWithDuration32(struct ObjectEvent * objectEvent, 
 
 void PlayerGoSlowest(u8 direction)
 {
-    PlayerSetAnimId(GetWalkSlowestMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkSlowerMovementAction(direction), 2);
 }
 
 void PlayerGoSlow(u8 direction)
@@ -905,9 +909,11 @@ void PlayerJumpLedge(u8 direction)
     PlayerSetAnimId(GetJump2MovementAction(direction), 8);
 }
 
-void sub_805C260(void)
+// Shakes head for male player character,
+// walk in place for female player character
+void PlayerShakeHeadOrWalkInPlace(void)
 {
-    PlayerSetAnimId(MOVEMENT_ACTION_0x9F, 0);
+    PlayerSetAnimId(MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE, 0);
 }
 
 void HandleEnforcedLookDirectionOnPlayerStopMoving(void)
@@ -1292,7 +1298,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerObjEventTemplate.movementType = MOVEMENT_TYPE_PLAYER;
     playerObjEventTemplate.movementRangeX = 0;
     playerObjEventTemplate.movementRangeY = 0;
-    playerObjEventTemplate.trainerType = 0;
+    playerObjEventTemplate.trainerType = TRAINER_TYPE_NONE;
     playerObjEventTemplate.trainerRange_berryTreeId = 0;
     playerObjEventTemplate.script = NULL;
     playerObjEventTemplate.flagId = 0;
@@ -1320,7 +1326,7 @@ void SetPlayerInvisibility(bool8 invisible)
 void StartPlayerAvatarSummonMonForFieldMoveAnim(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_FIELD_MOVE));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_FIELD_MOVE);
 }
 
 static const u8 sPlayerAvatarVsSeekerBikeGfxIds[] = {
@@ -1339,7 +1345,7 @@ u8 GetPlayerAvatarVsSeekerGfxId(void)
 void StartPlayerAvatarVsSeekerAnim(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarVsSeekerGfxId());
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], ANIM_VS_SEEKER);
 }
 
 void StartPlayerAvatarFishAnim(u8 direction)
@@ -1425,7 +1431,7 @@ static bool8 DoBoulderDust(struct Task *task, struct ObjectEvent *playerObject, 
         ObjectEventClearHeldMovementIfFinished(playerObject);
         ObjectEventClearHeldMovementIfFinished(strengthObject);
         QL_TryRecordPlayerStepWithDuration0(playerObject, GetWalkInPlaceNormalMovementAction((u8)task->data[2]));
-        QL_TryRecordNPCStepWithDuration32(strengthObject, GetWalkSlowestMovementAction((u8)task->data[2]));
+        QL_TryRecordNPCStepWithDuration32(strengthObject, GetWalkSlowerMovementAction((u8)task->data[2]));
         gFieldEffectArguments[0] = strengthObject->currentCoords.x;
         gFieldEffectArguments[1] = strengthObject->currentCoords.y;
         gFieldEffectArguments[2] = strengthObject->previousElevation;
@@ -1557,7 +1563,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct Objec
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetWalkSlowestMovementAction(GetOppositeDirection(task->data[1])));
+        QL_TryRecordPlayerStepWithDuration0(objectEvent, GetWalkSlowerMovementAction(GetOppositeDirection(task->data[1])));
         ScriptContext2_Disable();
         gPlayerAvatar.preventStep = FALSE;
         DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
@@ -1614,7 +1620,7 @@ static void Task_StopSurfingInit(u8 taskId)
             return;
     }
     SetSurfBlob_BobState(playerObjEvent->fieldEffectSpriteId, 2);
-    QL_TryRecordPlayerStepWithDuration0(playerObjEvent, sub_80641EC((u8)gTasks[taskId].data[0]));
+    QL_TryRecordPlayerStepWithDuration0(playerObjEvent, GetJumpSpecialWithEffectMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
 

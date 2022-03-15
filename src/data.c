@@ -6,7 +6,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/battle_ai.h"
-#include "constants/trainer_classes.h"
+#include "constants/trainers.h"
 
 const struct SpriteFrameImage gSpriteImages_BattlerPlayerLeft[] =
 {

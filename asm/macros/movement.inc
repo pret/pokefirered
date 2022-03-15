@@ -14,10 +14,10 @@
 	create_movement face_up_fast
 	create_movement face_left_fast
 	create_movement face_right_fast
-	create_movement walk_slowest_down
-	create_movement walk_slowest_up
-	create_movement walk_slowest_left
-	create_movement walk_slowest_right
+	create_movement walk_slower_down
+	create_movement walk_slower_up
+	create_movement walk_slower_left
+	create_movement walk_slower_right
 	create_movement walk_slow_down
 	create_movement walk_slow_up
 	create_movement walk_slow_left
@@ -55,10 +55,10 @@
 	create_movement walk_in_place_fastest_up
 	create_movement walk_in_place_fastest_left
 	create_movement walk_in_place_fastest_right
-	create_movement face_down_slow
-	create_movement face_up_slow
-	create_movement face_left_slow
-	create_movement face_right_slow
+	create_movement ride_water_current_down
+	create_movement ride_water_current_up
+	create_movement ride_water_current_lefft
+	create_movement ride_water_current_right
 	create_movement walk_fastest_down
 	create_movement walk_fastest_up
 	create_movement walk_fastest_left
@@ -113,12 +113,24 @@
 	create_movement rock_smash_break
 	create_movement cut_tree
 
-	enum_start 0x91
-	create_movement step_91
-	create_movement step_92
+	enum_start 0x94
+	create_movement spin_down
+	create_movement spin_up
+	create_movement spin_left
+	create_movement spin_right
 
-	enum_start 0x96
-	create_movement step_96
+	enum_start 0x9b
+	create_movement walk_slowest_down
+	create_movement walk_slowest_up
+	create_movement walk_slowest_left
+	create_movement walk_slowest_right
+	create_movement shake_head_or_walk_in_place
+
+	enum_start 0xa6
+	create_movement jump_special_with_effect_down
+	create_movement jump_special_with_effect_up
+	create_movement jump_special_with_effect_left
+	create_movement jump_special_with_effect_right
 
 	enum_start 0xfe
 	create_movement step_end

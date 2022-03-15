@@ -80,12 +80,11 @@ CartIdent:
 	.4byte      0x838
 	.4byte      0x839
 	.4byte      0x182
-	.4byte  0xA0A0A07
-	.4byte  0xC060C0C
-	.4byte  0xC121006
-	.4byte  0x8010B0F
-	.4byte        0xC
-	.4byte      0xF24 @ sizeof(struct SaveBlock2)
+	.byte   7, 10, 10, 10, 12, 12, 6, 12
+	.byte   6, 16, 18, 12, 15, 11, 1, 8
+	.byte   12
+	.align 2, 0
+	.4byte      0xF24 @ sizeof(struct SaveBlock2) /* 88 */
 	.4byte     0x3D68 @ sizeof(struct SaveBlock1)
 	.4byte       0x34 @ offsetof(struct SaveBlock1, playerPartyCount)
 	.4byte       0x38 @ offsetof(struct SaveBlock1, playerParty)
@@ -96,9 +95,10 @@ CartIdent:
 
 	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
 	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
-	.4byte     0x30BB
-	.4byte     0x30A7
-	.4byte          0
+	.4byte     0x30BB @ offsetof(struct SaveBlock1, externalEventFlags)
+	.4byte     0x30A7 @ offsetof(struct SaveBlock1, externalEventData)
+	.byte           0
+	.align 2, 0
 	.4byte  gBaseStats
 	.4byte  gAbilityNames
 	.4byte  gAbilityDescriptionPointers
@@ -106,9 +106,9 @@ CartIdent:
 	.4byte  gBattleMoves
 	.4byte  gBallSpriteSheets
 	.4byte  gBallSpritePalettes
-	.4byte       0xA8
-	.4byte      0x82C
-	.4byte      0x83B
+	.4byte       0xA8 @ offsetof(struct SaveBlock2,gcnLinkFlags)
+	.4byte      0x82C @ FLAG_SYS_GAME_CLEAR
+	.4byte      0x83B @ FLAG_SYS_RIBBON_GET
 	.4byte 0x3A0D1E2A
 	.4byte     0x1E2B
 	.4byte      0x298 @ offsetof(struct SaveBlock1, pcItems)  // maybe all items were in a struct together?

@@ -2003,7 +2003,7 @@ static const struct NamingScreenTemplate sMonNamingScreenTemplate = {
 
 static const struct NamingScreenTemplate sRivalNamingScreenTemplate = {
     .copyExistingString = FALSE,
-    .maxChars = OT_NAME_LENGTH,
+    .maxChars = PLAYER_NAME_LENGTH,
     .iconFunction = 4,
     .addGenderIcon = 0,
     .initialPage = KBPAGE_LETTERS_UPPER,

@@ -118,8 +118,8 @@ void NewGameInitData(void)
     ClearMailData();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
-    gSaveBlock2Ptr->field_AC = 1;
-    gSaveBlock2Ptr->field_AD = 0;
+    gSaveBlock2Ptr->unkFlag1 = TRUE;
+    gSaveBlock2Ptr->unkFlag2 = FALSE;
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
@@ -155,6 +155,6 @@ static void ResetMiniGamesResults(void)
 {
     CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
     SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
-    ResetPokeJumpResults();
+    ResetPokemonJumpRecords();
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }

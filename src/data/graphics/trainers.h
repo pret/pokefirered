@@ -172,8 +172,8 @@ const u32 gTrainerPalette_RSBrendan1[] = INCBIN_U32("graphics/trainers/palettes/
 const u32 gTrainerFrontPic_RSMay1[] = INCBIN_U32("graphics/trainers/front_pics/ruby_sapphire_may_front_pic.4bpp.lz");
 const u32 gTrainerPalette_RSMay1[] = INCBIN_U32("graphics/trainers/palettes/ruby_sapphire_may.gbapal.lz");
 
-const u32 gTrainerFrontPic_PokemonBreederM[] = INCBIN_U32("graphics/trainers/front_pics/pokemon_breeder_m_front_pic.4bpp.lz");
-const u32 gTrainerPalette_PokemonBreederM[] = INCBIN_U32("graphics/trainers/palettes/pokemon_breeder_m.gbapal.lz");
+const u32 gTrainerFrontPic_RSPokemonBreederM[] = INCBIN_U32("graphics/trainers/front_pics/rs_pokemon_breeder_m_front_pic.4bpp.lz");
+const u32 gTrainerPalette_RSPokemonBreederM[] = INCBIN_U32("graphics/trainers/palettes/rs_pokemon_breeder_m.gbapal.lz");
 
 const u32 gTrainerFrontPic_RSPokemonBreederF[] = INCBIN_U32("graphics/trainers/front_pics/rs_pokemon_breeder_f_front_pic.4bpp.lz");
 const u32 gTrainerPalette_RSPokemonBreederF[] = INCBIN_U32("graphics/trainers/palettes/rs_pokemon_breeder_f.gbapal.lz");
@@ -316,8 +316,8 @@ const u32 gTrainerPalette_BirdKeeper[] = INCBIN_U32("graphics/trainers/palettes/
 const u32 gTrainerFrontPic_BlackBelt[] = INCBIN_U32("graphics/trainers/front_pics/black_belt_front_pic.4bpp.lz");
 const u32 gTrainerPalette_BlackBelt[] = INCBIN_U32("graphics/trainers/palettes/black_belt.gbapal.lz");
 
-const u32 gTrainerFrontPic_Rival1[] = INCBIN_U32("graphics/trainers/front_pics/rival_1_front_pic.4bpp.lz");
-const u32 gTrainerPalette_Rival1[] = INCBIN_U32("graphics/trainers/palettes/rival_1.gbapal.lz");
+const u32 gTrainerFrontPic_RivalEarly[] = INCBIN_U32("graphics/trainers/front_pics/rival_early_front_pic.4bpp.lz");
+const u32 gTrainerPalette_RivalEarly[] = INCBIN_U32("graphics/trainers/palettes/rival_early.gbapal.lz");
 
 const u32 gTrainerFrontPic_Scientist[] = INCBIN_U32("graphics/trainers/front_pics/scientist_front_pic.4bpp.lz");
 const u32 gTrainerPalette_Scientist[] = INCBIN_U32("graphics/trainers/palettes/scientist.gbapal.lz");
@@ -370,8 +370,8 @@ const u32 gTrainerPalette_LeaderSabrina[] = INCBIN_U32("graphics/trainers/palett
 const u32 gTrainerFrontPic_Gentleman[] = INCBIN_U32("graphics/trainers/front_pics/gentleman_front_pic.4bpp.lz");
 const u32 gTrainerPalette_Gentleman[] = INCBIN_U32("graphics/trainers/palettes/gentleman.gbapal.lz");
 
-const u32 gTrainerFrontPic_Rival2[] = INCBIN_U32("graphics/trainers/front_pics/rival_2_front_pic.4bpp.lz");
-const u32 gTrainerPalette_Rival2[] = INCBIN_U32("graphics/trainers/palettes/rival_2.gbapal.lz");
+const u32 gTrainerFrontPic_RivalLate[] = INCBIN_U32("graphics/trainers/front_pics/rival_late_front_pic.4bpp.lz");
+const u32 gTrainerPalette_RivalLate[] = INCBIN_U32("graphics/trainers/palettes/rival_late.gbapal.lz");
 
 const u32 gTrainerFrontPic_ChampionRival[] = INCBIN_U32("graphics/trainers/front_pics/champion_rival_front_pic.4bpp.lz");
 const u32 gTrainerPalette_ChampionRival[] = INCBIN_U32("graphics/trainers/palettes/champion_rival.gbapal.lz");
@@ -421,8 +421,8 @@ const u32 gTrainerPalette_CrushGirl[] = INCBIN_U32("graphics/trainers/palettes/c
 const u32 gTrainerFrontPic_TuberF[] = INCBIN_U32("graphics/trainers/front_pics/tuber_f_front_pic.4bpp.lz");
 const u32 gTrainerPalette_TuberF[] = INCBIN_U32("graphics/trainers/palettes/tuber_f.gbapal.lz");
 
-const u32 gTrainerFrontPic_PokemonBreederF[] = INCBIN_U32("graphics/trainers/front_pics/pokemon_breeder_f_front_pic.4bpp.lz");
-const u32 gTrainerPalette_PokemonBreederF[] = INCBIN_U32("graphics/trainers/palettes/pokemon_breeder_f.gbapal.lz");
+const u32 gTrainerFrontPic_PokemonBreeder[] = INCBIN_U32("graphics/trainers/front_pics/pokemon_breeder_front_pic.4bpp.lz");
+const u32 gTrainerPalette_PokemonBreeder[] = INCBIN_U32("graphics/trainers/palettes/pokemon_breeder.gbapal.lz");
 
 const u32 gTrainerFrontPic_PokemonRangerM[] = INCBIN_U32("graphics/trainers/front_pics/pokemon_ranger_m_front_pic.4bpp.lz");
 const u32 gTrainerPalette_PokemonRangerM[] = INCBIN_U32("graphics/trainers/palettes/pokemon_ranger_m.gbapal.lz");

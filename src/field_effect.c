@@ -1600,7 +1600,7 @@ static bool8 waterfall_2_wait_anim_finish_probably(struct Task * task, struct Ob
 
 static bool8 waterfall_3_move_player_probably(struct Task * task, struct ObjectEvent * playerObj)
 {
-    ObjectEventSetHeldMovement(playerObj, GetWalkSlowestMovementAction(DIR_NORTH));
+    ObjectEventSetHeldMovement(playerObj, GetWalkSlowerMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }
@@ -3192,7 +3192,7 @@ static void UseFlyEffect_6(struct Task * task)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
-        StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
+        StartSpriteAnim(&gSprites[objectEvent->spriteId], ANIM_GET_ON_OFF_POKEMON_WEST);
         objectEvent->inanimate = TRUE;
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
         task->data[0]++;
@@ -3445,7 +3445,7 @@ static void FlyInEffect_1(struct Task * task)
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
         CameraObjectReset2();
         ObjectEventTurn(objectEvent, DIR_WEST);
-        StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
+        StartSpriteAnim(&gSprites[objectEvent->spriteId], ANIM_GET_ON_OFF_POKEMON_WEST);
         objectEvent->invisible = FALSE;
         task->data[1] = CreateFlyBirdSprite();
         StartFlyBirdSwoopDown(task->data[1]);

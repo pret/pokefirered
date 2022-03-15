@@ -56,7 +56,7 @@ void PlayerFaceDirection(u8 direction);
 void PlayerFaceDirectionFast(u8 direction);
 void PlayerTurnInPlace(u8 direction);
 void PlayerJumpLedge(u8 direction);
-void sub_805C260(void);
+void PlayerShakeHeadOrWalkInPlace(void);
 void player_step(u8 direction, u16 newKeys, u16 heldKeys);
 bool32 PlayerIsMovingOnRockStairs(u8 direction);
 void UpdatePlayerAvatarTransitionState(void);

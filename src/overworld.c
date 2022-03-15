@@ -520,9 +520,9 @@ static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId
 
 static bool32 IsDummyWarp(struct WarpData *warp)
 {
-    if (warp->mapGroup != -1)
+    if (warp->mapGroup != (s8)MAP_GROUP(UNDEFINED))
         return FALSE;
-    else if (warp->mapNum != -1)
+    else if (warp->mapNum != (s8)MAP_NUM(UNDEFINED))
         return FALSE;
     else if (warp->warpId != -1)
         return FALSE;
@@ -895,7 +895,10 @@ bool8 sub_8055B38(u16 metatileBehavior)
 {
     if (MetatileBehavior_IsSurfable(metatileBehavior) != TRUE)
         return FALSE;
-    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B3F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B3F)) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B4F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B4F)))
+    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B3F)
+          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B3F))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B4F)
+          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B4F)))
         return TRUE;
     return FALSE;
 }
@@ -1675,7 +1678,7 @@ void CB2_ReturnToFieldFromDiploma(void)
 
 static void FieldCB_ShowMapNameOnContinue(void)
 {
-    if (SHOW_MAP_NAME_ENABLED)
+    if (gMapHeader.showMapName == TRUE)
         ShowMapNamePopup(FALSE);
     FieldCB_WarpExitFadeFromBlack();
 }
@@ -1909,7 +1912,7 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
             MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
             MapPreview_StartForestTransition(gMapHeader.regionMapSectionId);
         }
-        else if (SHOW_MAP_NAME_ENABLED)
+        else if (gMapHeader.showMapName == TRUE)
         {
             ShowMapNamePopup(FALSE);
         }

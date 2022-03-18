@@ -28,6 +28,7 @@
 #include "quest_log.h"
 #include "random.h"
 #include "roamer.h"
+#include "wild_encounter.h"
 #include "safari_zone.h"
 #include "scanline_effect.h"
 #include "task.h"
@@ -4359,6 +4360,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
+        gIsFishingEncounter = FALSE;
         ResetSpriteData();
         if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
             gBattleMainFunc = ReturnFromBattleToOverworld;

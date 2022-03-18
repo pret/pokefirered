@@ -15,19 +15,7 @@ SaffronCity_Mart_EventScript_Clerk:: @ 816EFB5
 	faceplayer
 	message Text_MayIHelpYou
 	waitmessage
-	pokemart SaffronCity_Mart_Items
+	pokemart 0
 	msgbox Text_PleaseComeAgain
-	release
-	end
-
-	.align 2
-SaffronCity_Mart_Items:: @ 816EFDC
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
 	release
 	end

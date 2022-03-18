@@ -15,19 +15,7 @@ FuchsiaCity_Mart_EventScript_Clerk:: @ 816D4F3
 	faceplayer
 	message Text_MayIHelpYou
 	waitmessage
-	pokemart FuchsiaCity_Mart_Items
+	pokemart 0
 	msgbox Text_PleaseComeAgain
-	release
-	end
-
-	.align 2
-FuchsiaCity_Mart_Items:: @ 816D518
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
 	release
 	end

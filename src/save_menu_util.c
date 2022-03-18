@@ -7,9 +7,7 @@
 
 void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
 {
-    int nBadges;
-    int flagId;
-
+    int numOfBadges;
     u8 *dest = dest0;
     *dest++ = EXT_CTRL_CODE_BEGIN;
     *dest++ = EXT_CTRL_CODE_COLOR;
@@ -42,12 +40,8 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
         GetMapNameGeneric(dest, gMapHeader.regionMapSectionId);
         break;
     case SAVE_STAT_BADGES:
-        for (flagId = FLAG_BADGE01_GET, nBadges = 0; flagId < FLAG_BADGE01_GET + 8; flagId++)
-        {
-            if (FlagGet(flagId))
-                nBadges++;
-        }
-        *dest++ = nBadges + CHAR_0;
+        numOfBadges = GetNumOfBadges();
+        *dest++ = numOfBadges + CHAR_0;
         *dest++ = 10; // 'こ'
         *dest++ = EOS;
         break;

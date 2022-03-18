@@ -24,6 +24,7 @@ Trainers With Nature|Ivs|Evs (DoesntKnowHowToPlay And BlackUser) // to edit/add 
 Class Based Poke Balls (Buffel Saft And BlackUser) // to edit the ball for each class go to src > battle_main.c and edit gTrainerMoneyAndBallTable to your liking.
 Learn Moves Upon Evolution (Zeturic)
 LGPE Style Bonus Premier Balls (Spherical Ice And BuffelSaft)
+Mart Items By Badge Count (Ghoulslash)
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h

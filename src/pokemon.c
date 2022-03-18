@@ -2406,6 +2406,13 @@ static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 mo
     SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
+u8 GetNumOfBadges(void)
+{
+	for (u8 NumOfBadges = 0; FlagGet(FLAG_BADGE01_GET + NumOfBadges) && NumOfBadges != NUM_BADGES; NumOfBadges++) {
+	}
+	return NumOfBadges;
+}
+
 bool8 IsMoveInTable(const u16 table[], u16 moveId)
 {
     u32 i;

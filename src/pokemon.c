@@ -2408,7 +2408,13 @@ static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 mo
 
 u8 GetNumOfBadges(void)
 {
-	for (u8 NumOfBadges = 0; FlagGet(FLAG_BADGE01_GET + NumOfBadges) && NumOfBadges != NUM_BADGES; NumOfBadges++) {
+	u8 NumOfBadges = 0;
+	
+	while (FlagGet(FLAG_BADGE01_GET + NumOfBadges))
+	{
+		NumOfBadges++;
+		if (NumOfBadges == NUM_BADGES)
+			break;
 	}
 	return NumOfBadges;
 }

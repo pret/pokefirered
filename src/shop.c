@@ -420,16 +420,19 @@ static u8 GetMartTypeFromItemList(u32 a0)
 }
 
 static void SetShopItemsForSale(const u16 *items)
-{    
-    gShopData.itemList = items;
-    gShopData.itemCount = 0;
-    if (gShopData.itemList[0] == 0)
-        return;
+{
+	if (items == NULL)
+		gShopData.itemList = sShopInventories[GetNumOfBadges()];
+	else
+		gShopData.itemList = items;
+	gShopData.itemCount = 0;
+	if (gShopData.itemList[0] == 0)
+		return;
 
-    while (gShopData.itemList[gShopData.itemCount])
-    {
-        ++gShopData.itemCount;
-    }
+	while (gShopData.itemList[gShopData.itemCount])
+	{
+		++gShopData.itemCount;
+	}
 }
 
 static void SetShopMenuCallback(void (*callback)(void))

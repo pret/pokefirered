@@ -5,6 +5,7 @@
 #include "new_menu_helpers.h"
 #include "quest_log.h"
 #include "fieldmap.h"
+#include "wild_encounter.h"
 
 struct ConnectionFlags
 {
@@ -87,6 +88,7 @@ const struct MapHeader * GetMapHeaderFromConnection(struct MapConnection * conne
 
 void InitMap(void)
 {
+    gChainFishingStreak = 0;
     InitMapLayoutData(&gMapHeader);
     RunOnLoadMapScript();
 }

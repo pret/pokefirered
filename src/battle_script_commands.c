@@ -3238,8 +3238,7 @@ static void atk23_getexp(void)
         }
         // fall through
     case 2: // set exp value to the poke in expgetter_id and print message
-	for(i = 0; FlagGet(FLAG_BADGE01_GET + i) && i != 8; i++) {
-	}	    
+        i = GetNumOfBadges();
 	if (!gBattleControllerExecFlags)
         {
             item = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
@@ -3261,7 +3260,7 @@ static void atk23_getexp(void)
                 gBattleMoveDamage = 0; // used for exp
             }
 #if EXP_BLOCK
-            else if (i != 8 && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= sExpBlockLevels[i])
+            else if (i != NUM_BADGES && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= sExpBlockLevels[i])
 	    {
 		    *(&gBattleStruct->sentInPokes) >>= 1;
 		    gBattleScripting.atk23_state = 5;

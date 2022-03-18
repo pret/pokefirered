@@ -1885,6 +1885,7 @@ static bool8 Fishing11(struct Task *task)
 // Not even a nibble
 static bool8 Fishing12(struct Task *task)
 {
+    gChainFishingStreak = 0;
     AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -1896,6 +1897,7 @@ static bool8 Fishing12(struct Task *task)
 // It got away
 static bool8 Fishing13(struct Task *task)
 {
+    gChainFishingStreak = 0;
     AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     AddTextPrinterParameterized2(0, 2, gText_ItGotAway, 1, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);

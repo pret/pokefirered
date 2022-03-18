@@ -21,6 +21,7 @@
 #include "menu_indicators.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "money.h"
 #include "quest_log.h"
@@ -153,6 +154,178 @@ static const struct MenuAction sShopMenuActions_BuySellQuit[] =
     {gText_ShopBuy, {.void_u8 = Task_HandleShopMenuBuy}},
     {gText_ShopSell, {.void_u8 = Task_HandleShopMenuSell}},
     {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
+};
+
+static const u16 sShopInventory_ZeroBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_REVIVE,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_OneBadge[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_REVIVE,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_TwoBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_REVIVE,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_ThreeBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_REVIVE,
+	ITEM_REPEL,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_FourBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_HYPER_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_REVIVE,
+	ITEM_REPEL,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_FiveBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_ULTRA_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_HYPER_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_REVIVE,
+	ITEM_REPEL,
+	ITEM_SUPER_REPEL,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_SixBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_ULTRA_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_HYPER_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_FULL_HEAL,
+	ITEM_REVIVE,
+	ITEM_REPEL,
+	ITEM_SUPER_REPEL,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_SevenBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_ULTRA_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_HYPER_POTION,
+	ITEM_MAX_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_FULL_HEAL,
+	ITEM_REVIVE,
+	ITEM_REPEL,
+	ITEM_SUPER_REPEL,
+	ITEM_MAX_REPEL,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 sShopInventory_EightBadges[] = {
+	ITEM_POKE_BALL,
+	ITEM_GREAT_BALL,
+	ITEM_ULTRA_BALL,
+	ITEM_POTION,
+	ITEM_SUPER_POTION,
+	ITEM_HYPER_POTION,
+	ITEM_MAX_POTION,
+	ITEM_FULL_RESTORE,
+	ITEM_ANTIDOTE,
+	ITEM_BURN_HEAL,
+	ITEM_ICE_HEAL,
+	ITEM_AWAKENING,
+	ITEM_PARALYZE_HEAL,
+	ITEM_FULL_HEAL,
+	ITEM_REVIVE,
+	ITEM_MAX_REVIVE,
+	ITEM_REPEL,
+	ITEM_SUPER_REPEL,
+	ITEM_MAX_REPEL,
+	ITEM_POKE_DOLL,
+	ITEM_NONE
+};
+
+static const u16 *const sShopInventories[] =
+{
+	sShopInventory_ZeroBadges,
+	sShopInventory_OneBadge,
+	sShopInventory_TwoBadges,
+	sShopInventory_ThreeBadges,
+	sShopInventory_FourBadges,
+	sShopInventory_FiveBadges,
+	sShopInventory_SixBadges,
+	sShopInventory_SevenBadges,
+	sShopInventory_EightBadges
 };
 
 static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =

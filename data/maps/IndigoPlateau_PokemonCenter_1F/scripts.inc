@@ -48,24 +48,11 @@ IndigoPlateau_PokemonCenter_1F_EventScript_Clerk:: @ 816EACC
 	faceplayer
 	message Text_MayIHelpYou
 	waitmessage
-	pokemart IndigoPlateau_PokemonCenter_1F_Items
+	pokemart 0
 	msgbox Text_PleaseComeAgain
 	release
 	end
-
-	.align 2
-IndigoPlateau_PokemonCenter_1F_Items:: @ 816EAF4
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
-	release
-	end
-
+	
 IndigoPlateau_PokemonCenter_1F_EventScript_Nurse:: @ 816EB06
 	lock
 	faceplayer

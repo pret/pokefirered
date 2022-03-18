@@ -11,6 +11,7 @@
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
+#include "wild_encounter.h"
 #include "pokemon_storage_system.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_controllers.h"
@@ -1773,8 +1774,7 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
 void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
-    u32 personality;
-    u32 value;
+    u32 personality, value, shinyValue, rolls, shinyRolls;
     u16 checksum;
 
     ZeroBoxMonData(boxMon);
@@ -1784,12 +1784,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     else
         personality = Random32();
 
-    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
-
     //Determine original trainer ID
     if (otIdType == OT_ID_RANDOM_NO_SHINY) //Pokemon cannot be shiny
     {
-        u32 shinyValue;
         do
         {
             value = Random32();
@@ -1802,12 +1799,25 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else //Player is the OT
     {
-        value = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+	    value = gSaveBlock2Ptr->playerTrainerId[0]
+		    | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+		    | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+		    | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+	    rolls = 0;
+	    shinyRolls = 0;
+	    if (gIsFishingEncounter)
+		    shinyRolls += 1 + 2 * gChainFishingStreak;
+	    if (shinyRolls)
+	    {
+		    do
+		    {
+			    personality = Random32();
+			    shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
+			    rolls++;
+		    }while (shinyValue >= SHINY_ODDS && rolls < shinyRolls)
+	    }
     }
-
+    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
 
     checksum = CalculateBoxMonChecksum(boxMon);

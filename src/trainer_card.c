@@ -908,7 +908,6 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
 
 static void SetDataFromTrainerCard(void)
 {
-    u32 badgeFlag;
     u8 i;
 
     sTrainerCardDataPtr->hasPokedex = FALSE;
@@ -934,9 +933,8 @@ static void SetDataFromTrainerCard(void)
     if (sTrainerCardDataPtr->trainerCard.rse.pokemonTrades != 0)
         sTrainerCardDataPtr->hasTrades++;
 
-    for (i = 0, badgeFlag = FLAG_BADGE01_GET; badgeFlag <= FLAG_BADGE08_GET; badgeFlag++, i++)
+    for (i = GetNumOfBadges(); i != 0; i--)
     {
-        if (FlagGet(badgeFlag))
             sTrainerCardDataPtr->hasBadge[i]++;
     }
 }

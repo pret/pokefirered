@@ -4681,7 +4681,7 @@
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "The user calms its spirit and\\nfocuses its mind to raise its\\nSP. ATK and SP. DEF stats.",
+      "description_english": "The user prepares its\\nheavenly body to anticipate\\nand reflect status moves.",
       "importance": 0,
       "exitsBagOnUse": 0,
       "pocket": "POCKET_TM_CASE",
@@ -4690,7 +4690,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "CalmMind"
+      "moveId": "MagicCoat"
     },
     {
       "english": "TM05",

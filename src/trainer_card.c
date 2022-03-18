@@ -935,7 +935,7 @@ static void SetDataFromTrainerCard(void)
 
     for (i = GetNumOfBadges(); i != 0; i--)
     {
-            sTrainerCardDataPtr->hasBadge[i]++;
+            sTrainerCardDataPtr->hasBadge[i - 1]++;
     }
 }
 

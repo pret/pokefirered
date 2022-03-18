@@ -524,7 +524,18 @@ bool8 DoesCurrentMapHaveFishingMons(void)
 
 void FishingWildEncounter(u8 rod)
 {
-    GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
+    u16 species;
+    
+    gIsFishingEncounter = TRUE;
+    species = GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
+    
+    if (species == sLastFishingSpecies)
+    {
+        if (gChainFishingStreak < 20)
+            gChainFishingStreak++;
+    }
+    else
+        sLastFishingSpecies = species;
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
     StartWildBattle();
 }

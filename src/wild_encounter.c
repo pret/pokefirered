@@ -29,6 +29,9 @@ struct WildEncounterData
 
 static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
+static EWRAM_DATA u16 sLastFishingSpecies = 0;
+EWRAM_DATA u8 gChainFishingStreak = 0;
+EWRAM_DATA bool8 gIsFishingEncounter = FALSE;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);

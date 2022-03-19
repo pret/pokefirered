@@ -26,6 +26,7 @@ Learn Moves Upon Evolution (Zeturic)
 LGPE Style Bonus Premier Balls (Spherical Ice And BuffelSaft)
 Mart Items By Badge Count (Ghoulslash)
 Chain Fishing (Ghoulslash)
+extra 116 bytes in SaveBlock2, 464 bytes in SaveBlock1, and 1044 bytes in PokemonStorage (Hiram Anderson)
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h

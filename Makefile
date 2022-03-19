@@ -1,35 +1,50 @@
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
-ifeq ($(CC),)
-HOSTCC := gcc
-else
-HOSTCC := $(CC)
-endif
+# don't use dkP's base_tools anymore
+# because the redefinition of $(CC) conflicts
+# with when we want to use $(CC) to preprocess files
+# thus, manually create the variables for the bin
+# files, or use arm-none-eabi binaries on the system
+# if dkP is not installed on this system
 
-ifeq ($(CXX),)
-HOSTCXX := g++
-else
-HOSTCXX := $(CXX)
-endif
-
-ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
-include $(TOOLCHAIN)/base_tools
-else
+ifneq (,$(TOOLCHAIN))
+ifneq ($(wildcard $(TOOLCHAIN)/bin),)
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
+endif
+endif
+
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
-export CC := $(PREFIX)gcc
-export AS := $(PREFIX)as
-endif
-export CPP := $(PREFIX)cpp
-export LD := $(PREFIX)ld
 OBJDUMP := $(PREFIX)objdump
+AS := $(PREFIX)as
+LD := $(PREFIX)ld
+
+# note: the makefile must be set up so MODERNCC is never called
+# if MODERN=0
+MODERNCC := $(PREFIX)gcc
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
 else
 EXE :=
+endif
+
+# use arm-none-eabi-cpp for macOS
+# as macOS's default compiler is clang
+# and clang's preprocessor will warn on \u
+# when preprocessing asm files, expecting a unicode literal
+# we can't unconditionally use arm-none-eabi-cpp
+# as installations which install binutils-arm-none-eabi
+# don't come with it
+ifneq ($(MODERN),1)
+  ifeq ($(shell uname -s),Darwin)
+    CPP := $(PREFIX)cpp
+  else
+    CPP := $(CC) -E
+  endif
+else
+  CPP := $(PREFIX)cpp
 endif
 
 include config.mk
@@ -41,9 +56,9 @@ CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 LIBPATH := -L ../../tools/agbcc/lib
 else
-CC1             := $(shell $(CC) --print-prog-name=cc1) -quiet
+CC1             := $(shell $(MODERNCC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O2 -mcpu=arm7tdmi -mabi=apcs-gnu -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
-LIBPATH := -L $(shell dirname $(shell $(CC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(CC) --print-file-name=libc.a))
+LIBPATH := -L $(shell dirname $(shell $(MODERNCC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(MODERNCC) --print-file-name=libc.a))
 endif
 
 CPPFLAGS := -iquote include -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DMODERN=$(MODERN)
@@ -287,11 +302,11 @@ endif
 
 ifeq ($(NODEP),1)
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 else
 define DATA_ASM_DEP
 $1: $2 $$(shell $(SCANINC) -I include -I "" $2)
-	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include | $$(AS) $$(ASFLAGS) -o $$@
+	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include - | $$(AS) $$(ASFLAGS) -o $$@
 endef
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
 endif
@@ -320,7 +335,8 @@ $(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
+	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ <objects> <lib>"
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(ROM): $(ELF)

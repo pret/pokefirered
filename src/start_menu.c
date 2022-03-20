@@ -266,7 +266,7 @@ static void DrawTimeBox(void)
         ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
         ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
         StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
-        AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 6, 3, 0xFF, NULL);
+        AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 18, 0xFF, NULL);
     }
     gSpecialVar_0x8004 = CreateTask(Task_PutTimeInTimeBox, 2);
 }

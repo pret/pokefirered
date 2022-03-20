@@ -527,9 +527,7 @@ static bool8 StartMenuPlayerCallback(void)
 
 static bool8 StartMenuSaveCallback(void)
 {
-#if TIME_BOX_ON_START_MENU
     DestroyTask(gSpecialVar_0x8004);
-#endif
     sStartMenuCallback = StartCB_Save1;
     return FALSE;
 }

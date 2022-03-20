@@ -327,11 +327,7 @@ static s8 DoDrawStartMenu(void)
         sDrawStartMenuState[0]++;
         break;
     case 3:
-        if (GetSafariZoneFlag())
-            DrawSafariZoneStatsWindow();
-#if TIME_BOX_ON_START_MENU
-            DrawTimeBox();
-#endif
+        DrawTimeBox();
         sDrawStartMenuState[0]++;
         break;
     case 4:

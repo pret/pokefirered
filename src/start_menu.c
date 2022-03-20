@@ -257,31 +257,33 @@ static void Task_PutTimeInTimeBox(u8 taskId)
 
 static void DrawTimeBox(void)
 {
+    struct WindowTemplate TimeBoxWindowTemplate = {0};
+    TimeBoxWindowTemplate.tilemapLeft = 1;
+    TimeBoxWindowTemplate.tilemapTop = 1;
+    TimeBoxWindowTemplate.width = 10;
+    TimeBoxWindowTemplate.height = 2;
+    TimeBoxWindowTemplate.paletteNum = 15;
+    TimeBoxWindowTemplate.baseBlock = 0x008;
+    
     if (GetSafariZoneFlag())
-        
-    sSafariZoneStatsWindowId = AddWindow(&sTimeBoxWindowTemplate);
+        TimeBoxWindowTemplate.height = 6;
+    sSafariZoneStatsWindowId = AddWindow(&TimeBoxWindowTemplate);
     PutWindowTilemap(sSafariZoneStatsWindowId);
     DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
+    if (GetSafariZoneFlag())
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
+        AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 6, 3, 0xFF, NULL);
+    }
     gSpecialVar_0x8004 = CreateTask(Task_PutTimeInTimeBox, 2);
-}
-
-static void DrawSafariZoneStatsWindow(void)
-{
-    sSafariZoneStatsWindowId = AddWindow(&sSafariZoneStatsWindowTemplate);
-    PutWindowTilemap(sSafariZoneStatsWindowId);
-    DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
-    ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
-    AddTextPrinterParameterized(sSafariZoneStatsWindowId, 2, gStringVar4, 4, 3, 0xFF, NULL);
-    CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
 
 static void DestroySafariZoneStatsWindow(void)
 {
-    if (!GetSafariZoneFlag())
-        DestroyTask(gSpecialVar_0x8004);
+    DestroyTask(gSpecialVar_0x8004);
     ClearStdWindowAndFrameToTransparent(sSafariZoneStatsWindowId, FALSE);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
     RemoveWindow(sSafariZoneStatsWindowId);

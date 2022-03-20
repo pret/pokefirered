@@ -257,6 +257,8 @@ static void Task_PutTimeInTimeBox(u8 taskId)
 
 static void DrawTimeBox(void)
 {
+    if (GetSafariZoneFlag())
+        
     sSafariZoneStatsWindowId = AddWindow(&sTimeBoxWindowTemplate);
     PutWindowTilemap(sSafariZoneStatsWindowId);
     DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);

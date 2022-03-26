@@ -236,13 +236,19 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
 >   This guide installs libpng via Homebrew as it is the easiest method, however advanced users can install libpng through other means if they so desire.
 </details>
+<details>
+    <summary><i><strong>Note for Apple Silicon (M1) Mac users...</strong></i></summary>
+
+>   Currently, Homebrew and libng must be installed via Rosetta on Apple Silicon Macs. Before continuing, create a [Terminal shell profile with Rosetta](https://www.astroworldcreations.com/blog/apple-silicon-and-legacy-command-line-software). Be sure to run the commands corresponding to Apple Silicon (M1).
+</details>
 
 1. Open the Terminal.
 2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
 3. Run the following command to install libpng.
 
     ```bash
-    brew install libpng
+    brew install libpng # Intel Macs
+    /usr/local/bin/brew install libpng # Apple Silicon (M1) Macs
     ```
    libpng is now installed.
 
@@ -265,11 +271,14 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
     ```bash
     export DEVKITPRO=/opt/devkitpro
-    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc # Intel Macs
+    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.zshrc # Apple Silicon (M1) Macs
     export DEVKITARM=$DEVKITPRO/devkitARM
-    echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
+    echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc # Intel Macs
+    echo "export DEVKITARM=$DEVKITARM" >> ~/.zshrc # Apple Silicon (M1) Macs
 
-    echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+    echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile # Intel Macs
+    echo "if [ -f ~/.zshrc ]; then . ~/.zshrc; fi" >> ~/.zprofile # Apple Silicon (M1) Macs
     ```
 
 ### Choosing where to store pokefirered (macOS)

@@ -139,9 +139,11 @@ EventScript_PickUpItem:: @ 81A67EE
 	call_if_eq EventScript_FoundTMHM
 	compare VAR_0x8008, FALSE
 	call_if_eq EventScript_FoundItem
+	callnative CreateItemIconOnFindMessage
 	waitfanfare
 	waitmessage
 	msgbox Text_PutItemAway
+	callnative DestroyItemIconOnFindMessage
 	return
 
 EventScript_FoundTMHM:: @ 81A6821

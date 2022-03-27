@@ -24,5 +24,7 @@ void SetBagVisualPocketId(u8);
 void ShakeBagSprite(void);
 const void * GetItemIconGfxPtr(u16 itemId, u8 ptrId);
 void CreateBagOrSatchelSprite(u8 animNum);
+void CreateItemIconOnFindMessage(void);
+void DestroyItemIconOnFindMessage(void);
 
 #endif // GUARD_ITEM_MENU_ICONS

@@ -1,8 +1,12 @@
 #include "global.h"
 #include "gflib.h"
+#include "menu.h"
+#include "item.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "item_menu_icons.h"
+#include "event_data.h"
+#include "new_menu_helpers.h"
 #include "constants/items.h"
 
 static EWRAM_DATA u8 sItemMenuIconSpriteIds[12] = {0};
@@ -784,4 +788,52 @@ void sub_80989A0(u16 itemId, u8 idx)
             gSprites[spriteId].y2 = 147;
         }
     }
+}
+
+void CreateItemIconOnFindMessage(void)
+{
+    s16 posX, posY;
+	bool8 HasItem = CheckBagHasItem(gSpecialVar_0x8004, 1);
+	u8 windowId, spriteId = AddItemIconObjectWithCustomObjectTemplate(&sItemFindTemplate, 102, 102, gSpecialVar_0x8004);
+    
+    if (HasItem)
+    {
+        // if has the item only show it in the message box
+        posX = 208;
+		posY = 140;
+    }
+    else
+    {
+        // otherwise create a window for it's description
+        windowId = AddWindow(&sItemDescWindowTemplate);
+		PutWindowTilemap(windowId);
+		DrawStdWindowFrame(windowId, FALSE);
+		AddTextPrinterParameterized(windowId, 2, ItemId_GetDescription(gSpecialVar_0x8004), 22, 0, 0xFF, 0);
+		CopyWindowToVram(windowId, COPYWIN_GFX);
+		posX = 22;
+		posY = 34;
+		gSprites[spriteId].data[1] = windowId;
+    }
+    gSprites[spriteId].data[0] = HasItem;
+	gSprites[spriteId].x = posX;
+	gSprites[spriteId].y = posY;
+	gSpecialVar_0x8006 = spriteId; // save sprite id for use later
+}
+
+void DestroyItemIconOnFindMessage(void)
+{
+    bool8 HasItem = gSprites[gSpecialVar_0x8006].data[0];
+	u8 WindowId = gSprites[gSpecialVar_0x8006].data[1];
+	
+	DestroySprite(&gSprites[gSpecialVar_0x8006]);
+	gSpecialVar_0x8006 = 0;
+	FreeSpriteTilesByTag(102);
+	FreeSpritePaletteByTag(102);
+	
+	if (!HasItem)
+	{
+		ClearStdWindowAndFrameToTransparent(WindowId, FALSE);
+		CopyWindowToVram(WindowId, COPYWIN_GFX);
+		RemoveWindow(WindowId);
+	}
 }

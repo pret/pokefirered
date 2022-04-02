@@ -186,9 +186,9 @@ void TransferPlttBuffer(void)
         {
 	    color = 0x7C007C00;
             gDayAndNightStatus = 5;
-        }
+        } // gSprites fixex the arrow glitch
         if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND 
-            && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x == 0 && gSprites[61].y <= 2)
+            && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x != 1 && gSprites[61].y != 30)
         {
             DayAndNightPalleteChange(src, dest, color);
             DoDayAndNightLightning();

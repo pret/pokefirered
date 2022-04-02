@@ -132,7 +132,6 @@ Std_FindItem:: @ 81A67B3
 
 EventScript_PickUpItem:: @ 81A67EE
 	removeobject VAR_LAST_TALKED
-	additem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, TRUE
@@ -140,6 +139,7 @@ EventScript_PickUpItem:: @ 81A67EE
 	compare VAR_0x8008, FALSE
 	call_if_eq EventScript_FoundItem
 	callnative CreateItemIconOnFindMessage
+	additem VAR_0x8004, VAR_0x8005
 	waitfanfare
 	waitmessage
 	msgbox Text_PutItemAway

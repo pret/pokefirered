@@ -821,20 +821,20 @@ void sub_80989A0(u16 itemId, u8 idx)
 
 void CreateItemIconOnFindMessage(void)
 {
-    s16 posX, posY;
+	s16 posX, posY;
 	bool8 HasItem = CheckBagHasItem(gSpecialVar_0x8004, 1);
 	u8 windowId, spriteId = AddItemIconObjectWithCustomObjectTemplate(&sItemFindTemplate, 102, 102, gSpecialVar_0x8004);
     
-    if (HasItem)
-    {
-        // if has the item only show it in the message box
-        posX = 208;
+	if (HasItem)
+	{
+		// if has the item only show it in the message box
+		posX = 208;
 		posY = 140;
-    }
-    else
-    {
-        // otherwise create a window for it's description
-        windowId = AddWindow(&sItemDescWindowTemplate);
+	}
+	else
+	{
+		// otherwise create a window for it's description
+		windowId = AddWindow(&sItemDescWindowTemplate);
 		PutWindowTilemap(windowId);
 		DrawStdWindowFrame(windowId, FALSE);
 		AddTextPrinterParameterized(windowId, 2, ItemId_GetDescription(gSpecialVar_0x8004), 22, 0, 0xFF, 0);
@@ -843,7 +843,7 @@ void CreateItemIconOnFindMessage(void)
 		posY = 34;
 		gSprites[spriteId].data[1] = windowId;
     }
-    gSprites[spriteId].data[0] = HasItem;
+	gSprites[spriteId].data[0] = HasItem;
 	gSprites[spriteId].x = posX;
 	gSprites[spriteId].y = posY;
 	gSpecialVar_0x8006 = spriteId; // save sprite id for use later
@@ -851,7 +851,7 @@ void CreateItemIconOnFindMessage(void)
 
 void DestroyItemIconOnFindMessage(void)
 {
-    bool8 HasItem = gSprites[gSpecialVar_0x8006].data[0];
+	bool8 HasItem = gSprites[gSpecialVar_0x8006].data[0];
 	u8 WindowId = gSprites[gSpecialVar_0x8006].data[1];
 	
 	DestroySprite(&gSprites[gSpecialVar_0x8006]);

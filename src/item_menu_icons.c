@@ -842,7 +842,7 @@ void CreateItemIconOnFindMessage(void)
 		posX = 22;
 		posY = 34;
 		gSprites[spriteId].data[1] = windowId;
-    }
+	}
 	gSprites[spriteId].data[0] = HasItem;
 	gSprites[spriteId].x = posX;
 	gSprites[spriteId].y = posY;

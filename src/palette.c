@@ -158,35 +158,17 @@ void TransferPlttBuffer(void)
         void *dest = (void *)PLTT;
         
         if (gRtcLocation.hour < DAWN_OF_DAY_START)
-        {
 	    color = 0;
-            gDayAndNightStatus = 0;
-        }
         else if (gRtcLocation.hour < MORNING_OF_DAY_START)
-        {
 	    color = 0x03FF03FF;
-            gDayAndNightStatus = 1;
-        }
         else if (gRtcLocation.hour < AFTERNOON_OF_DAY_START)
-        {
             color = 0x7FFF7FFF;
-            gDayAndNightStatus = 2;
-        }
         else if (gRtcLocation.hour < NIGHT_OF_DAY_START)
-        {
 	    color = 0x001F001F;
-            gDayAndNightStatus = 3;
-        }
         else if (gRtcLocation.hour < MIDNIGHT_OF_DAY_START)
-        {
 	    color = 0x7C1F7C1F;
-            gDayAndNightStatus = 4;
-	}
         else
-        {
 	    color = 0x7C007C00;
-            gDayAndNightStatus = 5;
-        }
         if (gMapHeader.mapType != MAP_TYPE_NONE && gMapHeader.mapType != MAP_TYPE_UNDERGROUND 
             && gMapHeader.mapType != MAP_TYPE_INDOOR && gSprites[61].x == 0 && gSprites[61].y <= 2)
         {
@@ -207,7 +189,7 @@ static void DoDayAndNightLightning(void)
 	u8 i;
 	u16 colourSlot;
         u16 *dest = (u16 *)PLTT;
-	bool8 IsNight = gDayAndNightStatus == 0 || gDayAndNightStatus > 3;
+	bool8 IsNight = gRtcLocation.hour < DAWN_OF_DAY_START || gRtcLocation.hour >= NIGHT_OF_DAY_START;
 	
 	for (i = 0; i < NELEMS(sLightingColours); i++)
 	{

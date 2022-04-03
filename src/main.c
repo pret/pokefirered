@@ -82,8 +82,6 @@ static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
 EWRAM_DATA u16 gTrainerId = 0;
 
-EWRAM_DATA u8 gDayAndNightStatus = 0;
-
 IWRAM_DATA struct RtcFuncStruct gRtcLocationDecimal;
 IWRAM_DATA struct RtcFill gRtcCheckLocation;
 IWRAM_DATA struct RtcStruct gRtcLocation;

@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     string outputFilepath = argv[3];
 
     Environment env;
+    env.set_trim_blocks(true);
 
     // Add custom command callbacks.
     env.add_callback("doNotModifyHeader", 0, [jsonfilepath, templateFilepath](Arguments& args) {
@@ -101,6 +102,19 @@ int main(int argc, char *argv[])
     // single argument is a json object
     env.add_callback("isEmpty", 1, [](Arguments& args) {
         return args.at(0)->empty();
+    });
+
+    env.add_callback("isEmptyString", 1, [](Arguments& args) {
+        return args.at(0)->get<string>().empty();
+    });
+
+    env.add_callback("cleanString", 1, [](Arguments& args) {
+        string badChars = ".'{} \n\t-_\u00e9";
+        string str = args.at(0)->get<string>();
+        str.erase(remove_if(str.begin(), str.end(), [&badChars](const char &c) {
+            return badChars.find(c) != std::string::npos;
+        }), str.end());
+        return str;
     });
 
     try

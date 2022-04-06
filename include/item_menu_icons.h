@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#define ITEMICON_TAG 0x0066
+
 extern const struct CompressedSpriteSheet gSpriteSheet_Backpack;
 extern const struct CompressedSpriteSheet gSpriteSheet_Satchel;
 extern const struct CompressedSpritePalette gSpritePalette_BagOrSatchel;

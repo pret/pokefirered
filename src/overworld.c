@@ -131,7 +131,6 @@ static void SetDefaultFlashLevel(void);
 static void Overworld_TryMapConnectionMusicTransition(void);
 static void ChooseAmbientCrySpecies(void);
 
-static void CB2_Overworld(void);
 static void CB2_LoadMap2(void);
 static void c2_80567AC(void);
 static void CB2_ReturnToFieldLocal(void);

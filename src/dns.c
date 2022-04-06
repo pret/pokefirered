@@ -143,9 +143,9 @@ static const struct DNSPalExceptions sCombatPalExceptions =
  * ******************************************************
 
 /* Filters used at midnight.                    *
- * From 00:00 to 01:00 filters are cycled every *
+ * From 00:00 to 00:59 filters are cycled every *
  * 8 minutes.                                   *
- * From 01:01 to 03:59 the last filter is used. */
+ * From 01:00 to 03:59 the last filter is used. */
 static const u16 sMidnightFilters[] =
 {
     RGB2(14, 14, 6),    //CE19

@@ -2004,6 +2004,10 @@ void BattleMainCB2(void)
     RunTextPrinters();
     UpdatePaletteFade();
     RunTasks();
+#if USE_DNS_IN_BATTLE
+	DNSApplyFilters();
+#endif
+    
     if (JOY_HELD(B_BUTTON) && gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_DREW;

@@ -7,7 +7,7 @@ typedef void (*IntrFunc)(void);
 
 #include "global.h"
 
-//defines used by the day and night system
+// defines used by the Day and Night system
 #define DAWN_OF_DAY_START 4
 #define MORNING_OF_DAY_START 6
 #define AFTERNOON_OF_DAY_START 17

@@ -3,7 +3,7 @@
 #include "util.h"
 #include "decompress.h"
 #include "task.h"
-#include "dns"
+#include "dns.h"
 
 enum
 {

@@ -12,6 +12,7 @@
 #include "battle_string_ids.h"
 #include "berry.h"
 #include "data.h"
+#include "dns.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "evolution_scene.h"

@@ -1464,6 +1464,7 @@ static void OverworldBasic(void)
     sub_8115798();
     UpdateCameraPanning();
     BuildOamBuffer();
+    DNSApplyFilters();
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();

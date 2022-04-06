@@ -169,8 +169,8 @@ static const union AnimCmd *const sAnimTable_ItemIcon[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
-    102,
-    102,
+    ITEMICON_TAG,
+    ITEMICON_TAG,
     &sOamData_ItemIcon,
     sAnimTable_ItemIcon,
     NULL,
@@ -179,8 +179,8 @@ static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
 };
 
 static const struct SpriteTemplate sItemFindTemplate = {
-    102,
-    102,
+    ITEMICON_TAG,
+    ITEMICON_TAG,
     &sOamData_ItemIconFind,
     sAnimTable_ItemIcon,
     NULL,
@@ -770,9 +770,9 @@ void CreateItemMenuIcon(u16 itemId, u8 idx)
 
     if (ptr[idx] == 0xFF)
     {
-        FreeSpriteTilesByTag(102 + idx);
-        FreeSpritePaletteByTag(102 + idx);
-        spriteId = AddItemIconObject(102 + idx, 102 + idx, itemId);
+        FreeSpriteTilesByTag(ITEMICON_TAG + idx);
+        FreeSpritePaletteByTag(ITEMICON_TAG + idx);
+        spriteId = AddItemIconObject(ITEMICON_TAG + idx, ITEMICON_TAG + idx, itemId);
         if (spriteId != MAX_SPRITES)
         {
             ptr[idx] = spriteId;
@@ -807,9 +807,9 @@ void sub_80989A0(u16 itemId, u8 idx)
 
     if (ptr[idx] == 0xFF)
     {
-        FreeSpriteTilesByTag(102 + idx);
-        FreeSpritePaletteByTag(102 + idx);
-        spriteId = AddItemIconObject(102 + idx, 102 + idx, itemId);
+        FreeSpriteTilesByTag(ITEMICON_TAG + idx);
+        FreeSpritePaletteByTag(ITEMICON_TAG + idx);
+        spriteId = AddItemIconObject(ITEMICON_TAG + idx, ITEMICON_TAG + idx, itemId);
         if (spriteId != MAX_SPRITES)
         {
             ptr[idx] = spriteId;
@@ -823,7 +823,7 @@ void CreateItemIconOnFindMessage(void)
 {
 	s16 posX, posY;
 	bool8 HasItem = CheckBagHasItem(gSpecialVar_0x8004, 1);
-	u8 windowId, spriteId = AddItemIconObjectWithCustomObjectTemplate(&sItemFindTemplate, 102, 102, gSpecialVar_0x8004);
+	u8 windowId, spriteId = AddItemIconObjectWithCustomObjectTemplate(&sItemFindTemplate, ITEMICON_TAG, ITEMICON_TAG, gSpecialVar_0x8004);
     
 	if (HasItem)
 	{
@@ -856,8 +856,8 @@ void DestroyItemIconOnFindMessage(void)
 	
 	DestroySprite(&gSprites[gSpecialVar_0x8006]);
 	gSpecialVar_0x8006 = 0;
-	FreeSpriteTilesByTag(102);
-	FreeSpritePaletteByTag(102);
+	FreeSpriteTilesByTag(ITEMICON_TAG);
+	FreeSpritePaletteByTag(ITEMICON_TAG);
 	
 	if (!HasItem)
 	{

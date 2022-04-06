@@ -34,69 +34,19 @@ enum
     TIME_NIGHT
 };
 
-/* This array contains the colours used for the windows or          *
- * other tiles that have to be illuminated at night.                *
- * You can add or remove light slots as you whish, each entry       *
- * requires the paletteNum and the colourNum of each colour slot,   *
- * as well as the RGB 15 bit colour that's gonna be used as         *
- * "light colour".                                                  */
-static const struct LightingColour sLightingColours[] =
-{
-    {
-        .paletteNum = 0,
-        .colourNum = 1,
-        .lightColour = RGB2(30, 30, 5),
-    },
-    {
-        .paletteNum = 0,
-        .colourNum = 2,
-        .lightColour = RGB2(26, 25, 4),
-    },
-    {
-        .paletteNum = 0,
-        .colourNum = 3,
-        .lightColour = RGB2(22, 21, 3),
-    },
-    {
-        .paletteNum = 1,
-        .colourNum = 1,
-        .lightColour = RGB2(30, 30, 5),
-    },
-    {
-        .paletteNum = 1,
-        .colourNum = 2,
-        .lightColour = RGB2(26, 25, 4),
-    },
-    {
-        .paletteNum = 6,
-        .colourNum = 1,
-        .lightColour = RGB2(30, 30, 5),
-    },
-    {
-        .paletteNum = 6,
-        .colourNum = 2,
-        .lightColour = RGB2(26, 25, 4),
-    },
-    {
-        .paletteNum = 6,
-        .colourNum = 3,
-        .lightColour = RGB2(22, 21, 3),
-    },
-};
-
 /* Maptypes that are not affected by DNS */
-static const u8 sDnsMapExceptions[] =
+static const u8 sDNSMapExceptions[] =
 {
 	MAP_TYPE_NONE,
 	MAP_TYPE_INDOOR,
-    MAP_TYPE_UNDERGROUND,
-    MAP_TYPE_SECRET_BASE,
+	MAP_TYPE_UNDERGROUND,
+	MAP_TYPE_SECRET_BASE,
 };
 
 /* Configure each palette slot to be affected or not by DNS *
  * while you are in the overworld.                          *
  * 0-15 background, 16-31 sprites.                          */
-static const struct DnsPalExceptions sOWPalExceptions = 
+static const struct DNSPalExceptions sOWPalExceptions = 
 {
     .pal = {
         DNS_PAL_ACTIVE,    //0
@@ -137,7 +87,7 @@ static const struct DnsPalExceptions sOWPalExceptions =
 /* Configure each palette slot to be affected or not by DNS *
  * while in combat.                                         *
  * 0-15 background, 16-31 sprites.                          */
-static const struct DnsPalExceptions sCombatPalExceptions =  
+static const struct DNSPalExceptions sCombatPalExceptions =  
 {
     .pal = {
         DNS_PAL_EXCEPTION,  //0
@@ -180,8 +130,7 @@ static const struct DnsPalExceptions sCombatPalExceptions =
 /*******************************************************/
 /* DNS filters are actual 15bit RGB colours.            *
  * This colours R - G - B channels are substracted from *
- * the original colour in the palette buffer during the *
- * transfer from the buffer to the palette RAM.         *
+ * the level of each channel porportionally.            *
  *                                                      *
  *  [BUFFER] -> (Value - Filter) -> [PAL_RAM]           *
  *                                                      *
@@ -192,17 +141,11 @@ static const struct DnsPalExceptions sCombatPalExceptions =
  *                                                      *
  * Feel free to experiment with your own filters.       *
  * ******************************************************
- * DNS Alternative Filtering System                     *
- * I've created and alternative filtering system, which *
- * substracts the level of each channel porportionally. *
- * I personally prefer this alternative method, since   *
- * the filters are blended "softer".                    *
- * This is more noticeable with the darker filters.     */
 
 /* Filters used at midnight.                    *
  * From 00:00 to 01:00 filters are cycled every *
  * 8 minutes.                                   *
- * From 01:00 to 07:00 the last filter is used. */
+ * From 01:01 to 03:59 the last filter is used. */
 static const u16 sMidnightFilters[] =
 {
     RGB2(14, 14, 6),    //CE19
@@ -216,7 +159,7 @@ static const u16 sMidnightFilters[] =
 };
 
 /* Filters used at dawn. (30 filters).          *
- * From 07:00 to 08:00 filters are cycled every *
+ * From 04:00 to 05:59 filters are cycled every *
  * 2 minutes.                                   */
 static const u16 sDawnFilters[] =
 {
@@ -256,7 +199,7 @@ static const u16 sDawnFilters[] =
 static const u16 sDayFilter = RGB2(0, 0, 0);   //0000
 
 /* Filters used at sunset. (30 filters).        *
- * From 19:00 to 20:00 filters are cycled every *
+ * From 17:00 to 18:59 filters are cycled every *
  * 2 minutes.                                   */
 static const u16 sSunsetFilters[] = 
 {
@@ -293,7 +236,7 @@ static const u16 sSunsetFilters[] =
 };
 
 /* Filters used at nightfall. (30 filters).     *
- * From 20:00 to 21:00 filters are cycled every *
+ * From 19:00 to 21:59 filters are cycled every *
  * 2 minutes.                                   */
 static const u16 sNightfallFilters[] = 
 {
@@ -329,10 +272,10 @@ static const u16 sNightfallFilters[] =
     RGB2(14, 14, 6),    //19CE
 };
 
-/* Filter used at night. From 21:00 to 24:00 */
+/* Filter used at night. From 22:00 to 24:59 */
 static const u16 sNightFilter = RGB2(14, 14, 6);   //19CE
 
-/*************   SpritePalette Dns exceptions by TAG   **************
+/*************   SpritePalette DNS exceptions by TAG   **************
  * If you are using any dynamic sprite palette allocation system,   *
  * you will most likely want to use this system to avoid certain    *
  * palette tags to be "banned" from dns, as the palettes may get    *
@@ -340,9 +283,9 @@ static const u16 sNightFilter = RGB2(14, 14, 6);   //19CE
 static const u16 sPaletteTagExceptions[] =
 {
 	TAG_HEALTHBOX_PAL, //0xD6FF
-    TAG_HEALTHBAR_PAL, //0xD704
-    TAG_STATUS_SUMMARY_BAR_PAL, //0xD710
-    TAG_STATUS_SUMMARY_BALLS_PAL, //0xD712
+	TAG_HEALTHBAR_PAL, //0xD704
+	TAG_STATUS_SUMMARY_BAR_PAL, //0xD710
+	TAG_STATUS_SUMMARY_BALLS_PAL, //0xD712
 	ITEMICON_TAG, //0x0066
 };
 
@@ -351,39 +294,35 @@ static const u16 sPaletteTagExceptions[] =
  * ******************************************* */
 
 // Functions
-static bool8 IsMapDnsException(void);
-static bool8 IsSpritePaletteTagDnsException(u8 palNum);
-static u8 GetDnsTimeLapse(u8 hour);
+static bool8 IsMapDNSException(void);
+static bool8 IsSpritePaletteTagDNSException(u8 palNum);
+static u8 GetDNSTimeLapse(u8 hour);
 static u16 GetDNSFilter(void);
-static u16 DnsApplyProportionalFilterToColour(u16 colour, u16 filter);
-static void LightUpWindows(u16 *dest);
+static u16 DNSApplyProportionalFilterToColour(u16 colour, u16 filter);
 
-// Dns palette buffer in EWRAM
-ALIGNED(4) EWRAM_DATA static u16 sDnsPaletteDmaBuffer[PLTT_BUFFER_SIZE] = {0};
+// DNS palette buffer in EWRAM
+ALIGNED(4) EWRAM_DATA static u16 sDNSPaletteDmaBuffer[PLTT_BUFFER_SIZE] = {0};
 
 #define IN_OVERWORLD ((gMain.callback2 == CB2_Overworld || gMain.callback2 == CB2_OverworldBasic))
 #define IN_BATTLE ((gMain.callback2 == BattleMainCB2))
-#define IS_LIGHT_TIME(hour) ((hour < DAWN_OF_DAY_START || hour >= NIGHT_OF_DAY_START))
 
 /* **************************************************** *
- * **************** D&N for pokeemerald *************** *
+ * **************** D&N for pokefirered *************** *
  * **************************************************** *
  * Based on Prime Dialga DNS for Pokemon GBA Games.     *
  * Additional credits to Andrea & Eing                  *
  * Author: Xhyz/Samu                                    *
  ****************************************************** */
 
-void DnsTransferPlttBuffer(void *src, void *dest)
+void DNSTransferPlttBuffer(void *src, void *dest)
 {
 #if USE_DNS_IN_BATTLE
-	if ((IN_OVERWORLD || IN_BATTLE) && !IsMapDnsException())
+	if ((IN_OVERWORLD || IN_BATTLE) && !IsMapDNSException())
 #else
-	if (IN_OVERWORLD && !IsMapDnsException())
+	if (IN_OVERWORLD && !IsMapDNSException())
 #endif
 	{
-		DmaCopy16(3, sDnsPaletteDmaBuffer, dest, PLTT_SIZE);
-		if (IS_LIGHT_TIME(gRtcLocation.hour) && !gMain.inBattle)
-			LightUpWindows(dest);
+		DmaCopy16(3, sDNSPaletteDmaBuffer, dest, PLTT_SIZE);
 	}
 	else
 	{
@@ -391,19 +330,19 @@ void DnsTransferPlttBuffer(void *src, void *dest)
 	}
 }
 
-static bool8 IsMapDnsException(void)
+static bool8 IsMapDNSException(void)
 {
 	u8 i, mapType = gMapHeader.mapType;
 	
-	for (i = 0; i < NELEMS(sDnsMapExceptions); i++)
+	for (i = 0; i < NELEMS(sDNSMapExceptions); i++)
 	{
-		if (sDnsMapExceptions[i] == mapType)
+		if (sDNSMapExceptions[i] == mapType)
 			return TRUE;
 	}
 	return FALSE;
 }
 
-static bool8 IsSpritePaletteTagDnsException(u8 palNum)
+static bool8 IsSpritePaletteTagDNSException(u8 palNum)
 {
 	u8 i;
 	u16 tag = GetSpritePaletteTagByPaletteNum(palNum);
@@ -416,11 +355,11 @@ static bool8 IsSpritePaletteTagDnsException(u8 palNum)
 	return FALSE;
 }
 
-void DnsApplyFilters(void)
+void DNSApplyFilters(void)
 {
 	u8 palNum, colNum;
 	u16 colourSlot, rgbFilter = GetDNSFilter();
-	struct DnsPalExceptions palExceptionFlags;
+	struct DNSPalExceptions palExceptionFlags;
 #if USE_DNS_IN_BATTLE
 	palExceptionFlags = gMain.inBattle ? sCombatPalExceptions : sOWPalExceptions;
 #else
@@ -428,41 +367,22 @@ void DnsApplyFilters(void)
 #endif
 	for (palNum = 0; palNum < 32; palNum++)
 	{
-		if (palExceptionFlags.pal[palNum] && (palNum < 15 || !IsSpritePaletteTagDnsException(palNum - NUM_PALETTE_STRUCTS)))
+		if (palExceptionFlags.pal[palNum] && (palNum < 15 || !IsSpritePaletteTagDNSException(palNum - 16)))
 		{
-			for (colNum = 0; colNum < NUM_PALETTE_STRUCTS; colNum++)
+			for (colNum = 0; colNum < 16; colNum++)
 			{
-				colourSlot = palNum * NUM_PALETTE_STRUCTS + colNum;
-				sDnsPaletteDmaBuffer[colourSlot] = DnsApplyProportionalFilterToColour(gPlttBufferFaded[colourSlot], rgbFilter);
+				colourSlot = palNum * 16 + colNum;
+				sDNSPaletteDmaBuffer[colourSlot] = DNSApplyProportionalFilterToColour(gPlttBufferFaded[colourSlot], rgbFilter);
 			}
 		}
 		else
 		{
-			for (colNum = 0; colNum < NUM_PALETTE_STRUCTS; colNum++)
+			for (colNum = 0; colNum < 16; colNum++)
 			{
-				colourSlot = palNum * NUM_PALETTE_STRUCTS + colNum;
-				sDnsPaletteDmaBuffer[colourSlot] = gPlttBufferFaded[colourSlot];
+				colourSlot = palNum * 16 + colNum;
+				sDNSPaletteDmaBuffer[colourSlot] = gPlttBufferFaded[colourSlot];
 			}
 		}
-	}
-}
-
-static void LightUpWindows(u16 *dest)
-{
-	u8 i;
-	u16 colourSlot;
-	
-	for (i = 0; i < NELEMS(sLightingColours); i++)
-	{
-		colourSlot = sLightingColours[i].paletteNum * NUM_PALETTE_STRUCTS + sLightingColours[i].colourNum;
-		
-		if (gPaletteFade.active || gPlttBufferUnfaded[colourSlot] != 0x0000)
-		{
-			dest[colourSlot] = gPlttBufferFaded[colourSlot];
-			gPlttBufferUnfaded[colourSlot] = sLightingColours[i].lightColour;
-		}
-		else
-			dest[colourSlot] = sLightingColours[i].lightColour;
 	}
 }
 
@@ -470,27 +390,27 @@ static u16 GetDNSFilter(void)
 {
 	u8 hour = gRtcLocation.hour, minutes = gRtcLocation.minute;
 	
-	switch (GetDnsTimeLapse(hour))
+	switch (GetDNSTimeLapse(hour))
 	{
 		case TIME_MIDNIGHT:
-            if (hour < 1)
-                return sMidnightFilters[minutes >> 3];            
-            else
-                return sMidnightFilters[7];
-        case TIME_DAWN:
-            return sDawnFilters[minutes >> 1];
-        case TIME_DAY:
-            return sDayFilter;
-        case TIME_SUNSET: 
-            return sSunsetFilters[minutes >> 1];
-        case TIME_NIGHTFALL:
-            return sNightfallFilters[minutes >> 1];
-        case TIME_NIGHT:
-            return sNightFilter;
+		    if (hour < 1)
+			    return sMidnightFilters[minutes >> 3];            
+		    else
+			    return sMidnightFilters[7];
+		case TIME_DAWN:
+		    return sDawnFilters[minutes >> 1];
+		case TIME_DAY:
+		    return sDayFilter;
+		case TIME_SUNSET: 
+		    return sSunsetFilters[minutes >> 1];
+		case TIME_NIGHTFALL:
+		    return sNightfallFilters[minutes >> 1];
+		case TIME_NIGHT:
+	            return sNightFilter;
 	}
 }
 
-static u16 DnsApplyProportionalFilterToColour(u16 colour, u16 filter)
+static u16 DNSApplyProportionalFilterToColour(u16 colour, u16 filter)
 {
 	u32 red, green, blue;
     
@@ -501,7 +421,7 @@ static u16 DnsApplyProportionalFilterToColour(u16 colour, u16 filter)
 	return RGB2(red <= 31 ? red : 0, green <= 31 ? green : 0, blue <= 31 ? blue : 0);
 }
 
-static u8 GetDnsTimeLapse(u8 hour)
+static u8 GetDNSTimeLapse(u8 hour)
 {
 	if (hour < DAWN_OF_DAY_START)
         return TIME_MIDNIGHT;

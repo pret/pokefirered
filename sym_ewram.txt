@@ -138,3 +138,4 @@
 	.include "src/digit_obj_util.o"
 	.include "src/trainer_tower.o"
 	.include "src/berry_powder.o"
+	.include "src/dns.o"

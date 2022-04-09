@@ -247,20 +247,23 @@ static void Task_PutTimeInTimeBox(u8 taskId)
 
 static void DrawTimeBox(void)
 {
+    bool32 inSafariZone = GetSafariZoneFlag();
+    
     struct WindowTemplate TimeBoxWindowTemplate = {0};
     TimeBoxWindowTemplate.tilemapLeft = 1;
     TimeBoxWindowTemplate.tilemapTop = 1;
     TimeBoxWindowTemplate.width = 10;
-    TimeBoxWindowTemplate.height = 2;
+    if (!inSafariZone)
+        TimeBoxWindowTemplate.height = 2;
+    else
+        TimeBoxWindowTemplate.height = 6;
     TimeBoxWindowTemplate.paletteNum = 15;
     TimeBoxWindowTemplate.baseBlock = 0x008;
     
-    if (GetSafariZoneFlag())
-        TimeBoxWindowTemplate.height = 6;
     sSafariZoneStatsWindowId = AddWindow(&TimeBoxWindowTemplate);
     PutWindowTilemap(sSafariZoneStatsWindowId);
     DrawStdWindowFrame(sSafariZoneStatsWindowId, FALSE);
-    if (GetSafariZoneFlag())
+    if (inSafariZone)
     {
         ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
         ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);

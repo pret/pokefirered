@@ -1339,6 +1339,10 @@
 	various \battler, VARIOUS_RESTORE_ABILITY_ON_SWITCH
         .endm
 
+        .macro trydoaftermathdamage battler:req
+	various \battler, VARIOUS_TRY_DO_AFTERMATH_DAMAGE
+	.endm
+
         .macro tryfirstmondowntrainerslide battler:req
 	various \battler, VARIOUS_TRAINER_SLIDE_FIRST_MON_DOWN
         .endm

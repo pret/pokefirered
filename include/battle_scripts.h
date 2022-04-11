@@ -250,6 +250,7 @@ extern const u8 BattleScript_SnowWarningActivates[];
 extern const u8 BattleScript_PickpocketActivation[];
 extern const u8 BattleScript_AirLock[];
 extern const u8 BattleScript_EnduredBySturdyMsg[];
+extern const u8 BattleScript_TrainerSlideMsg[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

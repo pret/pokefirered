@@ -2915,6 +2915,7 @@ BattleScript_FaintedMonChooseAnother::
 	switchinanim BS_FAINTED, 0
 	waitstate
 	various7 BS_ATTACKER
+	trylastmontrainerslide BS_FAINTED
 	switchineffects BS_FAINTED
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
 	cancelallactions

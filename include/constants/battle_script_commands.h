@@ -91,6 +91,9 @@
 // atk4F, a flag used for the jumpifcantswitch command
 #define ATK4F_DONT_CHECK_STATUSES   0x80
 
+// atk53, a flag used for the trainerslide command
+#define ATK53_TRAINER_SLIDE_OUT 0x80
+
 // statchange defines
 #define STAT_CHANGE_BS_PTR                  0x1
 #define STAT_CHANGE_NOT_PROTECT_AFFECTED    0x20

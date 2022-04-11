@@ -5996,14 +5996,6 @@ static void atk76_various(void)
 		return;
 	}
 	break;
-    case VARIOUS_TRAINER_SLIDE_LAST_MON_LOW_HP:
-	if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, TRAINER_SLIDE_LAST_MON_LOW_HP))
-	{
-		BattleScriptPush(gBattlescriptCurrInstr + 3);
-		gBattlescriptCurrInstr = BattleScript_TrainerSlideMsg;
-		return;
-	}
-	break;
     }
     gBattlescriptCurrInstr += 3;
 }

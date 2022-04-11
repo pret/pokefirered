@@ -2944,7 +2944,7 @@ BattleScript_LinkBattleFaintedMonEnd::
 
 BattleScript_LocalTrainerBattleWon::
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
-	trainerslidein BS_ATTACKER
+	trainerslide BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
 	getmoneyreward BattleScript_LocalTrainerBattleWonGotMoney

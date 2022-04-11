@@ -155,7 +155,7 @@ static void atk4F_jumpifcantswitch(void);
 static void atk50_openpartyscreen(void);
 static void atk51_switchhandleorder(void);
 static void atk52_switchineffects(void);
-static void atk53_trainerslidein(void);
+static void atk53_trainerslide(void);
 static void atk54_playse(void);
 static void atk55_fanfare(void);
 static void atk56_playfaintcry(void);
@@ -412,7 +412,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk50_openpartyscreen,
     atk51_switchhandleorder,
     atk52_switchineffects,
-    atk53_trainerslidein,
+    atk53_trainerslide,
     atk54_playse,
     atk55_fanfare,
     atk56_playfaintcry,
@@ -4915,7 +4915,7 @@ static void atk52_switchineffects(void)
     }
 }
 
-static void atk53_trainerslidein(void)
+static void atk53_trainerslide(void)
 {
     if (!gBattlescriptCurrInstr[1])
         gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);

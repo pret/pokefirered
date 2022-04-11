@@ -203,7 +203,7 @@ static void atk7F_setseeded(void);
 static void atk80_manipulatedamage(void);
 static void atk81_trysetrest(void);
 static void atk82_jumpifnotfirstturn(void);
-static void atk83_nop(void);
+static void atk83_handletrainerslidecase(void);
 static void atk84_jumpifcantmakeasleep(void);
 static void atk85_stockpile(void);
 static void atk86_stockpiletobasedamage(void);
@@ -460,7 +460,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk80_manipulatedamage,
     atk81_trysetrest,
     atk82_jumpifnotfirstturn,
-    atk83_nop,
+    atk83_handletrainerslidecase,
     atk84_jumpifcantmakeasleep,
     atk85_stockpile,
     atk86_stockpiletobasedamage,
@@ -6245,9 +6245,31 @@ static void atk82_jumpifnotfirstturn(void)
         gBattlescriptCurrInstr = failJump;
 }
 
-static void atk83_nop(void)
+static void atk83_handletrainerslidecase(void)
 {
-    ++gBattlescriptCurrInstr;
+	gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+	
+	switch (gBattlescriptCurrInstr[2])
+	{
+		case 0:
+		    gBattleMoveDamage = gBattlerSpriteIds[gActiveBattler];
+		    HideBattlerShadowSprite(gActiveBattler);
+		    break;
+		case 1:
+		    BtlController_EmitPrintString(0, STRINGID_SETWORDSTRING);
+		    MarkBattlerForControllerExec(gActiveBattler);
+		    break;
+		case 2:
+		    gBattlerSpriteIds[gActiveBattler] = gBattleMoveDamage;
+		    
+		    if (gBattleMons[gActiveBattler].hp != 0)
+		    {
+			    SetBattlerShadowSpriteCallback(gActiveBattler, gBattleMons[gActiveBattler].species);
+			    BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+		    }
+		    break;
+	}
+	gBattlescriptCurrInstr += 2;
 }
 
 bool8 UproarWakeUpCheck(u8 battlerId)

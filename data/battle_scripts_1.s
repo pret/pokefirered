@@ -2991,7 +2991,7 @@ BattleScript_RivalBattleLost::
 	returnatktoball
 	waitstate
 BattleScript_RivalBattleLostSkipMonRecall::
-	trainerslidein BS_ATTACKER
+	trainerslide BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 2, BattleScript_LocalBattleLostPrintWhiteOut
@@ -3007,7 +3007,7 @@ BattleScript_BattleTowerLost::
 	returnopponentmon2toball BS_ATTACKER
 	waitstate
 BattleScript_BattleTowerLostLostSkipMonRecall::
-	trainerslidein BS_ATTACKER
+	trainerslide BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
 	jumpifnotbattletype BATTLE_TYPE_DOUBLE, BattleScript_BattleTowerLostLostSkipDouble
@@ -3024,7 +3024,7 @@ BattleScript_LinkBattleWonOrLost::
 
 BattleScript_BattleTowerTrainerBattleWon::
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
-	trainerslidein BS_ATTACKER
+	trainerslide BS_ATTACKER
 	waitstate
 	jumpifnotbattletype BATTLE_TYPE_TRAINER_TOWER, BattleScript_BattleTowerEtcTrainerBattleWonSkipText
 	printstring STRINGID_TRAINER1LOSETEXT

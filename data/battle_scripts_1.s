@@ -2838,20 +2838,20 @@ BattleScript_FaintTarget::
 	cleareffectsonfaint BS_TARGET
 	printstring STRINGID_TARGETFAINTED
 	printstring STRINGID_EMPTYSTRING3
-	jumpifhasnohp BS_ATTACKER, BattleScript_FaintTargetReturn
-        jumpifability BS_TARGET, ABILITY_AFTERMATH, BattleScript_TryAftermathDamage
-BattleScript_FaintTargetReturn::
+	trydoaftermathdamage BS_TARGET
+        tryfirstmondowntrainerslide BS_TARGET
 	return
 
-BattleScript_TryAftermathDamage::
-        jumpifabilitypresent ABILITY_DAMP, BattleScript_FaintTargetReturn
-	callasm DoAftermathDamage
+BattleScript_DoAftermathDamage::
+        jumpifabilitypresent ABILITY_DAMP, BattleScript_DoAftermathDamageReturn
+	jumpifhasnohp BS_ATTACKER, BattleScript_DoAftermathDamageReturn
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_SETWORDSTRING
 	waitmessage 0x40
         tryfaintmon BS_ATTACKER, 0, NULL
+BattleScript_DoAftermathDamageReturn::
 	return
 	
 BattleScript_GiveExp::

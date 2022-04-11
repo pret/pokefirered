@@ -1339,6 +1339,14 @@
 	various \battler, VARIOUS_RESTORE_ABILITY_ON_SWITCH
         .endm
 
+        .macro tryfirstmondowntrainerslide battler:req
+	various \battler, VARIOUS_TRAINER_SLIDE_FIRST_MON_DOWN
+        .endm
+	
+	.macro trylastmontrainerslide battler:req
+	various \battler, VARIOUS_TRAINER_SLIDE_LAST_MON
+        .endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

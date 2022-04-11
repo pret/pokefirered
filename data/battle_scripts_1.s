@@ -2828,6 +2828,7 @@ BattleScript_FaintAttacker::
 	cleareffectsonfaint BS_ATTACKER
 	printstring STRINGID_ATTACKERFAINTED
 	printstring STRINGID_EMPTYSTRING3
+	tryfirstmondowntrainerslide BS_ATTACKER
 	return
 
 BattleScript_FaintTarget::

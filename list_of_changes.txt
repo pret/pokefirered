@@ -19,7 +19,7 @@ Faster HP Drain (Fyreire)
 Bw Repel System With A Multichoice Window (DizzyEgg)
 Reusable TM's (FBI)
 Ability Pop-Up Box (DizzyEgg, CFRU And BlackUser)
-Day And Night System With Lightinig Windows (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
+Day And Night System (Prime-Dialga, Samu, Eing And BlackUser) // to edit which color will be litning go to src > palette.c and edit sLightingColours to your liking.
 Trainers With Nature|Ivs|Evs (DoesntKnowHowToPlay And BlackUser) // to edit/add entries in the table go to src > battle_main.c and edit gTrainerEvsTable to your liking. It will be able to suport up to 65536 entries.
 Class Based Poke Balls (Buffel Saft And BlackUser) // to edit the ball for each class go to src > battle_main.c and edit gTrainerMoneyAndBallTable to your liking.
 Learn Moves Upon Evolution (Zeturic)
@@ -28,6 +28,7 @@ Time Box On Start Menu (Pokemon_XY And BlackUser)
 Mart Items By Badge Count (Ghoulslash)
 Chain Fishing (Ghoulslash)
 Show Item Image On Add To Bag (BlackUser)
+Trainer Message In Battle (CFRU, PKMN EM Expansion And BlackUser)
 extra 116 bytes in SaveBlock2, 464 bytes in SaveBlock1, and 1044 bytes in PokemonStorage (Hiram Anderson)
 
 // Can Be Turned On/Off

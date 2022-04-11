@@ -25,6 +25,7 @@
 #include "battle_main.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
+#include "trainer_slide.h"
 #include "battle_string_ids.h"
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
@@ -5832,7 +5833,7 @@ static void atk75_useitemonopponent(void)
 
 static void atk76_various(void)
 {
-    u8 side, abilityNum;
+    u8 byte;
     u16 species, *choicedMove;
     u32 monToCheck, status;
     s32 i;
@@ -5846,10 +5847,10 @@ static void atk76_various(void)
         break;
     case VARIOUS_SET_MAGIC_COAT_TARGET:
         gBattlerAttacker = gBattlerTarget;
-        side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
+        byte = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
 		    
-        if (gSideTimers[side].followmeTimer != 0 && gBattleMons[gSideTimers[side].followmeTarget].hp != 0)
-            gBattlerTarget = gSideTimers[side].followmeTarget;
+        if (gSideTimers[byte].followmeTimer != 0 && gBattleMons[gSideTimers[byte].followmeTarget].hp != 0)
+            gBattlerTarget = gSideTimers[byte].followmeTarget;
         else
             gBattlerTarget = gActiveBattler;
         break;
@@ -5934,10 +5935,10 @@ static void atk76_various(void)
         for (i = 0; i < PARTY_SIZE; ++i)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-            abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+            byte = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
             status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
 		
-            if (species != SPECIES_NONE && species != SPECIES_EGG && status & AILMENT_FNT && GetAbilityBySpecies(species, abilityNum) != ABILITY_SOUNDPROOF)
+            if (species != SPECIES_NONE && species != SPECIES_EGG && status & AILMENT_FNT && GetAbilityBySpecies(species, byte) != ABILITY_SOUNDPROOF)
                 monToCheck |= (1 << i);
         }
         if (monToCheck)
@@ -5953,10 +5954,10 @@ static void atk76_various(void)
         for (i = 0; i < PARTY_SIZE; ++i)
         {
             species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2);
-            abilityNum = GetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM);
+            byte = GetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM);
             status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
 
-            if (species != SPECIES_NONE && species != SPECIES_EGG && status & AILMENT_FNT && GetAbilityBySpecies(species, abilityNum) != ABILITY_SOUNDPROOF)
+            if (species != SPECIES_NONE && species != SPECIES_EGG && status & AILMENT_FNT && GetAbilityBySpecies(species, byte) != ABILITY_SOUNDPROOF)
                 monToCheck |= (1 << i);
         }
         if (monToCheck)
@@ -5978,7 +5979,31 @@ static void atk76_various(void)
 		gBattleMons[gActiveBattler].ability = gNewBattleStruct.IgnoredAbilities[gActiveBattler];
 		gNewBattleStruct.IgnoredAbilities[gActiveBattler] = ABILITY_NONE;
 	}
-        break;   
+        break;
+    case VARIOUS_TRAINER_SLIDE_FIRST_MON_DOWN:
+	if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, TRAINER_SLIDE_FIRST_MON_DOWN))
+	{
+		BattleScriptPush(gBattlescriptCurrInstr + 3);
+		gBattlescriptCurrInstr = BattleScript_TrainerSlideMsg;
+		return;
+	}
+	break;
+    case VARIOUS_TRAINER_SLIDE_LAST_MON:
+        if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, TRAINER_SLIDE_LAST_MON))
+	{
+		BattleScriptPush(gBattlescriptCurrInstr + 3);
+		gBattlescriptCurrInstr = BattleScript_TrainerSlideMsg;
+		return;
+	}
+	break;
+    case TRAINER_SLIDE_LAST_MON_LOW_HP:
+	if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, VARIOUS_TRAINER_SLIDE_LAST_MON_LOW_HP))
+	{
+		BattleScriptPush(gBattlescriptCurrInstr + 3);
+		gBattlescriptCurrInstr = BattleScript_TrainerSlideMsg;
+		return;
+	}
+	break;
     }
     gBattlescriptCurrInstr += 3;
 }

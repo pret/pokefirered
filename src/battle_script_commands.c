@@ -6286,7 +6286,7 @@ static void atk83_handletrainerslidecase(void)
 		    }
 		    break;
 	}
-	gBattlescriptCurrInstr += 2;
+	gBattlescriptCurrInstr += 3;
 }
 
 bool8 UproarWakeUpCheck(u8 battlerId)

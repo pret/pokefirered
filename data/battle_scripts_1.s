@@ -4485,6 +4485,15 @@ BattleScript_FlushMessageBox::
 	printstring STRINGID_EMPTYSTRING3
 	return
 
+BattleScript_TrainerSlideMsg::
+        handletrainerslidecase BS_SCRIPTING, 0
+	trainerslide BS_ATTACKER
+	handletrainerslidecase BS_SCRIPTING, 1
+	waitstate
+	trainerslide BS_ATTACKER | ATK53_TRAINER_SLIDE_OUT
+	handletrainerslidecase BS_SCRIPTING, 2
+	return
+
 BattleScript_AngerPointActivation::
         setstatchanger STAT_ATK, 1, FALSE
 	setgraphicalstatchangevalues

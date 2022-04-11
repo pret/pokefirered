@@ -5980,6 +5980,17 @@ static void atk76_various(void)
 		gNewBattleStruct.IgnoredAbilities[gActiveBattler] = ABILITY_NONE;
 	}
         break;
+    case VARIOUS_TRY_DO_AFTERMATH_DAMAGE:
+	if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
+	{
+		gSetWordLoc = sAftermathString;
+		gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 4;
+		if (gBattleMoveDamage == 0)
+			gBattleMoveDamage = 1;
+		BattleScriptPush(gBattlescriptCurrInstr + 3);
+		gBattlescriptCurrInstr = BattleScript_DoAftermathDamage;
+	}
+	break;
     case VARIOUS_TRAINER_SLIDE_FIRST_MON_DOWN:
 	if (ShouldDoTrainerSlide(gActiveBattler, gTrainerBattleOpponent_A, TRAINER_SLIDE_FIRST_MON_DOWN))
 	{

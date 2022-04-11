@@ -4487,6 +4487,10 @@ BattleScript_FlushMessageBox::
 	printstring STRINGID_EMPTYSTRING3
 	return
 
+BattleScript_TrainerSlideMsgEnd2::
+       call BattleScript_TrainerSlideMsg
+       end2
+
 BattleScript_TrainerSlideMsg::
         handletrainerslidecase BS_SCRIPTING, 0
 	trainerslide BS_ATTACKER

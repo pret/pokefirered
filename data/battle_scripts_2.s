@@ -231,7 +231,7 @@ BattleScript_LeftoverWallyPrepToThrow::
 	waitmessage 64
 	returnatktoball
 	waitstate
-	trainerslidein BS_TARGET
+	trainerslide BS_TARGET
 	waitstate
 	printstring STRINGID_YOUTHROWABALLNOWRIGHT
 	waitmessage 64

@@ -9350,19 +9350,6 @@ static void atkFD_jumpifweatherandability(void)
 }
 
 //callasm command asm's
-void DoAftermathDamage(void)
-{
-	if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
-	{
-		gSetWordLoc = sAftermathString;
-		gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-		if (gBattleMoveDamage == 0)
-			gBattleMoveDamage = 1;
-	}
-	else
-		gBattlescriptCurrInstr = BattleScript_FaintTargetReturn;	
-}
-
 static bool8 AnticipationTypeCalc(u8 battler)
 {
 	struct Pokemon *party;

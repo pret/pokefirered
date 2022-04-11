@@ -4917,13 +4917,20 @@ static void atk52_switchineffects(void)
 
 static void atk53_trainerslide(void)
 {
-    if (!gBattlescriptCurrInstr[1])
-        gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    else
-        gActiveBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-    BtlController_EmitTrainerSlide(0);
-    MarkBattlerForControllerExec(gActiveBattler);
-    gBattlescriptCurrInstr += 2;
+	u8 slideAnim = gBattlescriptCurrInstr[1];
+	bool8 slideOut = slideAnim & ATK53_TRAINER_SLIDE_OUT;
+	slideAnim &= ~(ATK53_TRAINER_SLIDE_OUT);
+	
+	if (!slideAnim)
+		gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+	else
+		gActiveBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+	if (!slideOut)
+		BtlController_EmitTrainerSlide(0);
+	else
+		BtlController_EmitTrainerSlideBack(0);
+	MarkBattlerForControllerExec(gActiveBattler);
+	gBattlescriptCurrInstr += 2;
 }
 
 static void atk54_playse(void)

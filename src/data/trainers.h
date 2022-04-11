@@ -1,3 +1,5 @@
+#include "trainer_slide.h"
+
 const struct Trainer gTrainers[] = {
     [TRAINER_NONE] = {
         .trainerName = _(""),

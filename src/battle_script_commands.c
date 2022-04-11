@@ -5981,14 +5981,15 @@ static void atk76_various(void)
 	}
         break;
     case VARIOUS_TRY_DO_AFTERMATH_DAMAGE:
-	if (gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
+	if (gBattleMons[gActiveBattler].ability == ABILITY_AFTERMATH && gBattleMoves[gCurrentMove].flags & FLAG_MAKES_CONTACT) 
 	{
 		gSetWordLoc = sAftermathString;
-		gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 4;
+		gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
 		if (gBattleMoveDamage == 0)
 			gBattleMoveDamage = 1;
 		BattleScriptPush(gBattlescriptCurrInstr + 3);
 		gBattlescriptCurrInstr = BattleScript_DoAftermathDamage;
+		return;
 	}
 	break;
     case VARIOUS_TRAINER_SLIDE_FIRST_MON_DOWN:

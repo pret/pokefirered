@@ -483,7 +483,7 @@
 	.byte \battler
 	.endm
 
-	.macro trainerslidein battler:req
+	.macro trainerslide battler:req
 	.byte 0x53
 	.byte \battler
 	.endm

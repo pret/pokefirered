@@ -25,7 +25,6 @@ bool8 MakesSound(u16 move);
 void ModulateDmgByType(u8 multiplier);
 
 //callasm functions declaration
-void DoAftermathDamage(void);
 void TryDoAnticipationShudder(void);
 void TryBadDreamsSecondDamage(void);
 void GetStatRaiseDownload(void);

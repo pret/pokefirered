@@ -712,8 +712,10 @@
 	.4byte \ptr
 	.endm
 
-	.macro nop
+	.macro handletrainerslidecase battler:req caseiD:req
 	.byte 0x83
+	.byte \battler
+	.byte \caseiD
 	.endm
 
 	.macro jumpifcantmakeasleep param0:req

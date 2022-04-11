@@ -116,10 +116,13 @@ struct Trainer
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[12];
     /*0x10*/ u16 items[4];
-    /*0x18*/ bool8 doubleBattle;
-    /*0x1C*/ u32 aiFlags;
-    /*0x20*/ u8 partySize;
-    /*0x24*/ const union TrainerMonPtr party;
+    /*0x18*/ u32 aiFlags;
+    /*0x1C*/ bool8 doubleBattle;
+    /*0x1D*/ u8 partySize;
+    /*0x20*/ const u8 *firstMonDownMsg;
+    /*0x24*/ const u8 *lastMonMsg;
+    /*0x28*/ const u8 *lastMonLowHPMsg;
+    /*0x2C*/ const union TrainerMonPtr party;
 };
 
 extern const struct Trainer gTrainers[];

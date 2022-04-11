@@ -311,6 +311,7 @@ SECTIONS {
         src/minigame_countdown.o(.text);
         src/berry_fix_program.o(.text);
         src/dns.o(.text);
+        src/trainer_slide.o(.text);
     } =0
 
     script_data :
@@ -613,6 +614,7 @@ SECTIONS {
         src/trainer_tower_sets.o(.rodata);
         src/move_descriptions.o(.rodata);
         src/dns.o(.rodata);
+        src/trainer_slide.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);

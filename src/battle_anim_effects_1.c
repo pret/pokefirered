@@ -5227,17 +5227,8 @@ void AnimWavyMusicNotes(struct Sprite* sprite)
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = 0;
     sprite->data[3] = gBattleAnimArgs[2];
-    if (IsContest())
-    {
-        a = 48;
-        b = 40;
-    }
-    else
-    {
-        a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-        b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-    }
-
+    a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[4] = sprite->x << 4;
     sprite->data[5] = sprite->y << 4;
     AnimWavyMusicNotesGetNextPos(a - sprite->x, b - sprite->y, &sprite->data[6], &sprite->data[7], 40);

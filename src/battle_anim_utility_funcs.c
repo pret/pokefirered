@@ -331,8 +331,6 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
     newSpriteId = CreateCloneOfSpriteInWindowMode(gBattleAnimAttacker, spriteId, species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
-    if (IsContest())
-        RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_sheet, animBgData.tilesOffset);
     LoadPalette(sRgbWhite, animBgData.paletteId * 16 + 1, 2);
     gBattle_BG1_X = -gSprites[spriteId].x + 32;

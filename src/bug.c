@@ -215,12 +215,7 @@ static void AnimMegahornHorn(struct Sprite *sprite)
 
 static void AnimLeechLifeNeedle(struct Sprite *sprite)
 {
-    if (IsContest())
-    {
-        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
-        StartSpriteAffineAnim(sprite, 2);
-    }
-    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];

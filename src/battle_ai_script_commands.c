@@ -256,7 +256,7 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
     EFFECT_OVERHEAT,
-    0xFFFF
+    TABLE_END
 };
 
 void BattleAI_HandleItemUseBeforeAISetup(void)
@@ -268,10 +268,8 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
         data[i] = 0;
 
     // Items are allowed to use in ONLY trainer battles.
-    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        && (gTrainerBattleOpponent_A != SECRET_BASE_OPPONENT)
-        && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_SAFARI | BATTLE_TYPE_LINK))
-        )
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && (gTrainerBattleOpponent_A != SECRET_BASE_OPPONENT)
+        && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_SAFARI | BATTLE_TYPE_LINK)))
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
@@ -282,7 +280,6 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
             }
         }
     }
-
     BattleAI_SetupAIData();
 }
 
@@ -309,7 +306,6 @@ void BattleAI_SetupAIData(void)
 
         AI_THINKING_STRUCT->simulatedRNG[i] = 100 - (Random() % 16);
     }
-
     gBattleResources->AI_ScriptsStack->size = 0;
     gBattlerAttacker = gActiveBattler;
 

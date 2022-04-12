@@ -491,17 +491,15 @@ static void sub_80B30B0(struct Sprite *sprite)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[3], 16 - sprite->data[3]));
     if (--sprite->data[3] == -1)
     {
-        if (!IsContest())
-        {
-            u8 battlerCopy;
-            u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        u8 battlerCopy;
+        u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 
-            if (IsBattlerSpriteVisible(battler))
-                gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
-            battler = BATTLE_PARTNER(battlerCopy);
-            if (IsBattlerSpriteVisible(battler))
-                gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
-        }
+        if (IsBattlerSpriteVisible(battler))
+            gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
+        battler = BATTLE_PARTNER(battlerCopy);
+        if (IsBattlerSpriteVisible(battler))
+            gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
+        
         sprite->invisible = TRUE;
         sprite->callback = sub_80B3168;
     }
@@ -509,20 +507,17 @@ static void sub_80B30B0(struct Sprite *sprite)
 
 static void sub_80B3168(struct Sprite *sprite)
 {
-    if (!IsContest())
-    {
-        u8 battlerCopy;
-        u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        u8 rank = GetBattlerSpriteBGPriorityRank(battler);
-        s32 var0 = 1;
-        bool8 toBG2 = (rank ^ var0) != 0;
+    u8 battlerCopy;
+    u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+    u8 rank = GetBattlerSpriteBGPriorityRank(battler);
+    s32 var0 = 1;
+    bool8 toBG2 = (rank ^ var0) != 0;
 
-        if (IsBattlerSpriteVisible(battler))
-            ResetBattleAnimBg(toBG2);
-        battler = battlerCopy ^ 2;
-        if (IsBattlerSpriteVisible(battler))
-            ResetBattleAnimBg(toBG2 ^ var0);
-    }
+    if (IsBattlerSpriteVisible(battler))
+        ResetBattleAnimBg(toBG2);
+    battler = battlerCopy ^ 2;
+    if (IsBattlerSpriteVisible(battler))
+        ResetBattleAnimBg(toBG2 ^ var0);
     sprite->callback = DestroyAnimSprite;
 }
 
@@ -534,7 +529,7 @@ static void AnimWallSparkle(struct Sprite *sprite)
         bool8 respectMonPicOffsets = FALSE;
         if (arg3 == 0)
             respectMonPicOffsets = TRUE;
-        if (!IsContest() && IsDoubleBattle())
+        if (IsDoubleBattle())
         {
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             {

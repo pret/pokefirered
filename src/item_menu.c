@@ -31,6 +31,7 @@
 #include "strings.h"
 #include "teachy_tv.h"
 #include "tm_case.h"
+#include "text_window.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 

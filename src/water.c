@@ -910,8 +910,7 @@ static void AnimTask_CreateSurfWave_Step2(u8 taskId)
     }
     else
     {
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
         *BGptrX = 0;
         *BGptrY = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -1326,8 +1325,6 @@ void AnimTask_WaterSport(u8 taskId)
     task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     task->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
     task->data[7] = (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER) ? 1 : -1;
-    if (IsContest())
-        task->data[7] *= -1;
     task->data[5] = task->data[3] + task->data[7] * 8;
     task->data[6] = task->data[4] - task->data[7] * 8;
     task->data[9] = -32;

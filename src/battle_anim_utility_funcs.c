@@ -720,7 +720,7 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 ar
     struct BattleAnimBgData animBgData;
     u8 battler2 = BATTLE_PARTNER(battler1);
 
-    if (IsContest() || (arg4 && !IsBattlerSpriteVisible(battler2)))
+    if (arg4 && !IsBattlerSpriteVisible(battler2))
         arg4 = 0;
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;
@@ -735,8 +735,7 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 ar
     ((vBgCnt *)&bg1Cnt)->priority = 0;
     ((vBgCnt *)&bg1Cnt)->screenSize = 0;
     ((vBgCnt *)&bg1Cnt)->areaOverflowMode = 1;
-    if (!IsContest())
-        ((vBgCnt *)&bg1Cnt)->charBaseBlock = 1;
+    ((vBgCnt *)&bg1Cnt)->charBaseBlock = 1;
     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
     if (GetBattlerSide(battler1) != B_SIDE_PLAYER)
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);

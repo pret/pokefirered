@@ -1202,9 +1202,6 @@ void AnimTealAlert(struct Sprite *sprite)
     InitSpritePosToAnimTarget(sprite, TRUE);
     rotation = ArcTan2Neg(sprite->x - x, sprite->y - y);
     rotation += 0x6000;
-    if (IsContest())
-        rotation += 0x4000;
-
     TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = x;

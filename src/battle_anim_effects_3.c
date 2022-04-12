@@ -1423,23 +1423,16 @@ void AnimLetterZ(struct Sprite *sprite)
     {
         SetSpriteCoordsToAnimAttackerCoords(sprite);
         SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
-        if (!IsContest())
+        
+        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         {
-            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-            {
-                sprite->data[1] = gBattleAnimArgs[2];
-                sprite->data[2] = gBattleAnimArgs[3];
-            }
-            else
-            {
-                sprite->data[1] = -1 * gBattleAnimArgs[2];
-                sprite->data[2] = -1 * gBattleAnimArgs[3];
-            }
+            sprite->data[1] = gBattleAnimArgs[2];
+            sprite->data[2] = gBattleAnimArgs[3];
         }
         else
         {
             sprite->data[1] = -1 * gBattleAnimArgs[2];
-            sprite->data[2] = gBattleAnimArgs[3];
+            sprite->data[2] = -1 * gBattleAnimArgs[3];
         }
     }
 

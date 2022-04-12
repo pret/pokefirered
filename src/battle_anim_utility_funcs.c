@@ -410,8 +410,7 @@ static void StatsChangeAnimation_Step1(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 0);
     SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 0);
-    if (!IsContest())
-        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
+    SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
     if (IsDoubleBattle() && sAnimStatsChangeData->data[3] == 0)
     {
         if (GetBattlerPosition(sAnimStatsChangeData->battler1) == B_POSITION_OPPONENT_RIGHT

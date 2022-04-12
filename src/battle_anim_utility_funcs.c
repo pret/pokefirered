@@ -449,8 +449,6 @@ static void StatsChangeAnimation_Step2(u8 taskId)
         AnimLoadCompressedBgTilemap(animBgData.bgId, gBattleStatMask1_Tilemap);
     else
         AnimLoadCompressedBgTilemap(animBgData.bgId, gBattleStatMask2_Tilemap);
-    if (IsContest())
-        RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gBattleStatMask_Gfx, animBgData.tilesOffset);
     switch (sAnimStatsChangeData->data[1])
     {

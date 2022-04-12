@@ -747,7 +747,7 @@ static void bag_menu_print_cursor(u8 y, u8 colorIdx)
 static void PrintBagPocketName(void)
 {
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    BagPrintTextOnWin1CenteredColor0(sPocketNames[gBagMenuState.pocket], gBagMenuState.pocket);
+    BagPrintTextOnWin1CenteredColor0(sPocketNames[gBagMenuState.pocket]);
 }
 
 static void PrintItemDescriptionOnMessageWindow(s32 itemIndex)

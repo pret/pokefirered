@@ -4891,17 +4891,8 @@ void sub_80A5EA8(u8 taskId)
 
 void AnimMoon(struct Sprite* sprite)
 {
-    if (IsContest())
-    {
-        sprite->x = 48;
-        sprite->y = 40;
-    }
-    else
-    {
-        sprite->x = gBattleAnimArgs[0];
-        sprite->y = gBattleAnimArgs[1];
-    }
-
+    sprite->x = gBattleAnimArgs[0];
+    sprite->y = gBattleAnimArgs[1];
     sprite->oam.shape = SPRITE_SHAPE(8x8);
     sprite->oam.size = SPRITE_SIZE(64x32);
     sprite->data[0] = 0;

@@ -2219,15 +2219,11 @@ void AnimTask_TransformMon(u8 taskId)
         else
             SetAnimBgAttribute(2, BG_ANIM_MOSAIC, 0);
 
-        if (!IsContest())
+        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         {
-            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
-            {
-                if (gTasks[taskId].data[10] == 0)
-                    SetBattlerShadowSpriteCallback(gBattleAnimAttacker, gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies);
-            }
+            if (gTasks[taskId].data[10] == 0)
+                SetBattlerShadowSpriteCallback(gBattleAnimAttacker, gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies);
         }
-
         DestroyAnimVisualTask(taskId);
         break;
     }

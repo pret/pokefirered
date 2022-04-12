@@ -1508,7 +1508,7 @@ static void Task_ConfirmTossItems(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
     BagPrintTextOnWindow(ShowBagWindow(6, 1), 2, gStringVar4, 0, 2, 1, 0, 0, 1);
-    BagCreateYesNoMenuBottomRight(taskId, &sYesNoMenu_Toss);
+    BagCreateYesNoMenuRight(taskId, &sYesNoMenu_Toss, FALSE);
 }
 
 static void Task_TossItem_No(u8 taskId)

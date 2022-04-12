@@ -3080,9 +3080,6 @@ void AnimKnockOffItem(struct Sprite* sprite)
     {
         sprite->data[6] = 255;
         sprite->data[7] = targetY + 10;
-        if (IsContest())
-            sprite->data[6] = 0;
-
         sub_80A33B8(sprite, 40);
         sprite->data[3] = 3;
         sprite->data[4] = 60;
@@ -3171,23 +3168,8 @@ void AnimTrickBag(struct Sprite* sprite)
 
     if (!sprite->data[0])
     {
-        if (!IsContest())
-        {
-            sprite->data[1] = gBattleAnimArgs[1];
-            sprite->x = 120;
-        }
-        else
-        {
-            a = gBattleAnimArgs[1] - 32;
-            if (a < 0)
-                b = gBattleAnimArgs[1] + 0xDF;
-            else
-                b = a;
-
-            sprite->data[1] = a - ((b >> 8) << 8);
-            sprite->x = 70;
-        }
-
+        sprite->data[1] = gBattleAnimArgs[1];
+        sprite->x = 120;
         sprite->y = gBattleAnimArgs[0];
         sprite->data[2] = gBattleAnimArgs[0];
         sprite->data[4] = 20;

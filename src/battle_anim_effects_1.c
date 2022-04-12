@@ -3662,9 +3662,6 @@ void AnimNeedleArmSpike(struct Sprite* sprite)
         sprite->data[3] = (sprite->data[5] - sprite->x) * 16 / gBattleAnimArgs[4];
         sprite->data[4] = (sprite->data[6] - sprite->y) * 16 / gBattleAnimArgs[4];
         c = ArcTan2Neg(sprite->data[5] - x, sprite->data[6] - y);
-        if (IsContest())
-            c -= 0x8000;
-
         TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, c);
         sprite->callback = AnimNeedleArmSpikeStep;
     }

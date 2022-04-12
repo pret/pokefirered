@@ -1165,9 +1165,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
             sprite->data[3] = sprite->y;
             sprite->data[4] = sprite->y + 29;
             ++sprite->data[7];
-            if (IsContest())
-                sprite->data[5] = 80;
-            else if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
+            if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
                 sprite->data[5] = 204;
             else
                 sprite->data[5] = 80;
@@ -1183,26 +1181,12 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
         value = gSineTable[sprite->data[5]];
         sprite->x2 += value >> 3;
         sprite->y2 += (gSineTable[sprite->data[5] + 0x40] * -3) >> 8;
-        if (!IsContest())
-        {
-            u16 var0 = sprite->data[5] - 0x40;
-
-            if (var0 <= 0x7F)
-                sprite->oam.priority = sprite->data[7] >> 8;
-            else
-                sprite->oam.priority = (sprite->data[7] >> 8) + 1;
-            sprite->data[5] = (sprite->data[5] + 4) & 0xFF;
-        }
+        u16 var0 = sprite->data[5] - 0x40;
+        if (var0 <= 0x7F)
+            sprite->oam.priority = sprite->data[7] >> 8;
         else
-        {
-            u16 var0 = sprite->data[5] - 0x40;
-
-            if (var0 <= 0x7F)
-                sprite->subpriority = 128;
-            else
-                sprite->subpriority = 140;
-            sprite->data[5] = (sprite->data[5] - 4) & 0xFF;
-        }
+            sprite->oam.priority = (sprite->data[7] >> 8) + 1;
+        sprite->data[5] = (sprite->data[5] + 4) & 0xFF;
         if (sprite->data[0] <= 0)
         {
             sprite->data[0] = 0x300;

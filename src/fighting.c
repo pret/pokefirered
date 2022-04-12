@@ -858,9 +858,7 @@ static void AnimSuperpowerFireball(struct Sprite *sprite)
         battler = gBattleAnimAttacker;
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
     }
-    if (IsContest())
-        sprite->oam.matrixNum |= ST_OAM_HFLIP;
-    else if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         sprite->oam.matrixNum |= (ST_OAM_HFLIP | ST_OAM_VFLIP);
     sprite->data[0] = 16;
     sprite->data[1] = sprite->x;
@@ -909,9 +907,7 @@ static void AnimRevengeScratch(struct Sprite *sprite)
         InitSpritePosToAnimAttacker(sprite, 0);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
-    if (IsContest())
-        StartSpriteAnim(sprite, 2);
-    else if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         StartSpriteAnim(sprite, 1);
     sprite->callback = RunStoredCallbackWhenAnimEnds;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);

@@ -1144,7 +1144,8 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
 static void MovePoisonGasCloud(struct Sprite *sprite)
 {
     s32 value;
-
+    u16 var0;
+    
     switch (sprite->data[7] & 0xFF)
     {
     case 0:
@@ -1181,7 +1182,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
         value = gSineTable[sprite->data[5]];
         sprite->x2 += value >> 3;
         sprite->y2 += (gSineTable[sprite->data[5] + 0x40] * -3) >> 8;
-        u16 var0 = sprite->data[5] - 0x40;
+        var0 = sprite->data[5] - 0x40;
         if (var0 <= 0x7F)
             sprite->oam.priority = sprite->data[7] >> 8;
         else

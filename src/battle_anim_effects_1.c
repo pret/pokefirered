@@ -3230,14 +3230,10 @@ static void AnimTrickBagStep2(struct Sprite* sprite)
     {
         sprite->data[2]++;
         sprite->data[1] = (gTrickBagCoordinates[sprite->data[0]][0] * gTrickBagCoordinates[sprite->data[0]][2] + sprite->data[1]) & 0xFF;
-        if (!IsContest())
-        {
-            if ((u16)(sprite->data[1] - 1) < 191)
-                sprite->subpriority = 31;
-            else
-                sprite->subpriority = 29;
-        }
-
+        if ((u16)(sprite->data[1] - 1) < 191)
+            sprite->subpriority = 31;
+        else
+            sprite->subpriority = 29;
         sprite->x2 = Cos(sprite->data[1], 60);
         sprite->y2 = Sin(sprite->data[1], 20);
     }

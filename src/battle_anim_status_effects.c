@@ -348,10 +348,6 @@ void AnimTask_FrozenIceCube(u8 taskId)
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
     u8 spriteId;
-
-    if (IsContest())
-        x -= 6;
-    
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&sUnknown_83BF55C, x, y, 4);

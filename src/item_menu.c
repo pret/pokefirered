@@ -1811,7 +1811,7 @@ static void Task_ItemContext_Sell(u8 taskId)
         data[8] = 1;
         if (data[2] == 1)
         {
-            BagPrintMoneyAmount();
+            PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(2, 0), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
             Task_PrintSaleConfirmationText(taskId);
         }
         else
@@ -1874,7 +1874,7 @@ static void Task_InitSaleQuantitySelectInterface(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     BagPrintTextOnWindow(r4, 0, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
     UpdateSalePriceDisplay(itemid_get_market_price(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, data[1])) / 2 * data[8]);
-    BagPrintMoneyAmount();
+    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(2, 0), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
     CreatePocketScrollArrowPair_SellQuantity();
     gTasks[taskId].func = Task_SelectQuantityToSell;
 }

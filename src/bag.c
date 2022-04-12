@@ -5,7 +5,6 @@
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "menu.h"
-#include "money.h"
 #include "strings.h"
 
 static const u16 sBagWindowPalF[] = INCBIN_U16("graphics/item_menu/bag_window_pal.gbapal");

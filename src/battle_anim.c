@@ -2644,11 +2644,6 @@ static void ScriptCmd_goto(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
-bool8 IsContest(void)
-{
-    return FALSE;
-}
-
 // Unused
 static bool8 sub_807378C(u16 a)
 {

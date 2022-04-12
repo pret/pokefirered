@@ -2449,7 +2449,7 @@ static void AnimSporeParticleStep(struct Sprite* sprite)
 // No args.
 void AnimTask_SporeDoubleBattle(u8 taskId)
 {
-    if (IsContest() || !IsDoubleBattle())
+    if (!IsDoubleBattle())
     {
         DestroyAnimVisualTask(taskId);
     }

@@ -34,13 +34,13 @@
 #define TAG_HEALTHBOX_PALS_1      55049
 #define TAG_HEALTHBOX_PALS_2      55050
 
-#define PIXEL_COORDS_TO_OFFSET(x, y)(			\
+#define PIXEL_COORDS_TO_OFFSET(x, y)(			                        \
 /*Add tiles by X*/								\
 ((y / 8) * 32 * 8)								\
 /*Add tiles by X*/								\
 + ((x / 8) * 32)								\
 /*Add pixels by Y*/								\
-+ ((((y) - ((y / 8) * 8))) * 4)					\
++ ((((y) - ((y / 8) * 8))) * 4)					                \
 /*Add pixels by X*/								\
 + ((((x) - ((x / 8) * 8)) / 2)))
 
@@ -2527,8 +2527,8 @@ static void PrintBattlerAndAbilityOnAbilityPopUp(u8 battler, u8 sprite, u8 arg1,
     if (*(textPtr - 1) == EOS)
         --textPtr;
     textPtr[0] = CHAR_SGL_QUOT_RIGHT;
-	textPtr[1] = CHAR_s;
-	textPtr[2] = EOS;
+    textPtr[1] = CHAR_s;
+    textPtr[2] = EOS;
     
     AbilityPopUpPrinter((const u8*) pokemonName, (void*)(OBJ_VRAM0) + ((gSprites[sprite].oam.tileNum + 2) * TILE_SIZE_4BPP), 0, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GREEN, TEXT_COLOR_WHITE);
     
@@ -2564,7 +2564,7 @@ static void SpriteCB_AbilityPopUp(struct Sprite * sprite)
                 || (GetBattlerSide(sprite->tBattler) == B_SIDE_PLAYER && (sprite->x -= 4) <= sprite->tOriginalX - ABILITY_POP_UP_POS_X_SLIDE - 16))
             {
                 gActiveAbilityPopUps &= ~(gBitTable[sprite->tBattler]);
-				DestroySprite(sprite);
+		DestroySprite(sprite);
             }
         }
     }
@@ -2579,10 +2579,10 @@ static void AnimTask_FreeAbilityPopUp(u8 taskId)
         bank = gSprites[gTasks[taskId].tSpriteId1].tBattler;
         
         gAbilityPopUpIds[bank][0] = 0;
-		gAbilityPopUpIds[bank][1] = 0;
+	gAbilityPopUpIds[bank][1] = 0;
         FreeSpriteTilesByTag(ANIM_TAG_ABILITY_POP_UP);
-		FreeSpritePaletteByTag(ANIM_TAG_ABILITY_POP_UP);
-		DestroyTask(taskId);
+	FreeSpritePaletteByTag(ANIM_TAG_ABILITY_POP_UP);
+	DestroyTask(taskId);
     }
 }
 

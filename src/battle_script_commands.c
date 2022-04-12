@@ -8093,14 +8093,14 @@ static void atkC4_trydobeatup(void)
     {
         beforeLoop = gBattleCommunication[0];
 
-        for (;gBattleCommunication[0] < 6; ++gBattleCommunication[0])
+        for (;gBattleCommunication[0] < PARTY_SIZE; ++gBattleCommunication[0])
         {
             if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP) && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
 		&& GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_EGG
 		&& !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
                 break;
         }
-        if (gBattleCommunication[0] < 6)
+        if (gBattleCommunication[0] < PARTY_SIZE)
         {
             PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattleCommunication[0])
             gBattlescriptCurrInstr += 9;

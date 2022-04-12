@@ -1850,7 +1850,7 @@ static void Task_PrintSaleConfirmationText(u8 taskId)
 
 static void Task_ShowSellYesNoMenu(u8 taskId)
 {
-    BagCreateYesNoMenuTopRight(taskId, &sYesNoMenu_Sell);
+    BagCreateYesNoMenuRight(taskId, &sYesNoMenu_Sell, TRUE);
 }
 
 static void Task_SellItem_No(u8 taskId)

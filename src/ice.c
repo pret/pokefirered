@@ -1086,8 +1086,7 @@ static void AnimTask_OverlayFogTiles(u8 taskId)
         ++gTasks[taskId].data[12];
         // fall through
     case 4:
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);

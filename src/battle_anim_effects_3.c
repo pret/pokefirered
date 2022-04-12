@@ -1603,24 +1603,12 @@ void AnimClappingHand2(struct Sprite *sprite)
 
 void AnimTask_CreateSpotlight(u8 taskId)
 {
-    if (IsContest())
-    {
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN1_OBJ | WININ_WIN1_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ | WININ_WIN0_BG_ALL);
-        gBattle_WIN1H = WININ_WIN1_OBJ | WININ_WIN1_BG3 | WIN_RANGE(0, 0xF0) | WIN_RANGE(0x80, 0x0);
-        gBattle_WIN1V = WININ_WIN0_CLR | WIN_RANGE(0, 0x80);
-        SetGpuReg(REG_OFFSET_WIN1H, gBattle_WIN0H);
-        SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN0V);
-    }
-    else
-    {
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-        gBattle_WIN1H = WIN_RANGE(0, 0xF0);
-        gBattle_WIN1V =    WININ_WIN0_CLR | WIN_RANGE(0, 0x80) | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR | WIN_RANGE(0x40, 0);
-        SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, 0xF0));
-        SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN1V);
-        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
-    }
-
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+    gBattle_WIN1H = WIN_RANGE(0, 0xF0);
+    gBattle_WIN1V =    WININ_WIN0_CLR | WIN_RANGE(0, 0x80) | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR | WIN_RANGE(0x40, 0);
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, 0xF0));
+    SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN1V);
+    SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1629,9 +1617,7 @@ void AnimTask_RemoveSpotlight(u8 taskId)
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     gBattle_WIN1H = 0;
     gBattle_WIN1V = 0;
-    if (!IsContest())
-        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
-
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
     DestroyAnimVisualTask(taskId);
 }
 

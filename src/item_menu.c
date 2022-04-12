@@ -1942,7 +1942,7 @@ static void Task_FinalizeSaleToShop(u8 taskId)
     Bag_BuildListMenuTemplate(gBagMenuState.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
     bag_menu_print_cursor_(data[0], 2);
-    BagDrawTextBoxOnWindow(GetBagWindow(2));
+    DrawTextBorderOuter(GetBagWindow(2), 0x064, 0x0E);
     PrintMoneyAmountInMoneyBox(GetBagWindow(2), GetMoney(&gSaveBlock1Ptr->money), 0);
     gTasks[taskId].func = Task_WaitPressAB_AfterSell;
 }

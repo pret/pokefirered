@@ -295,11 +295,6 @@ void BagCreateYesNoMenuRight(u8 taskId, const struct YesNoFuncTable * ptrs, bool
     CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[id], 2, 0, 2, 0x064, 0x0E, ptrs);
 }
 
-void BagPrintMoneyAmount(void)
-{
-    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(2, 0), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
-}
-
 void BagDrawTextBoxOnWindow(u8 windowId)
 {
     DrawTextBorderOuter(windowId, 0x064, 0x0E);

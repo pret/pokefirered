@@ -891,10 +891,7 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
 
 void AnimTask_IsContest(u8 taskId)
 {
-    if (IsContest())
-        gBattleAnimArgs[7] = 1;
-    else
-        gBattleAnimArgs[7] = 0;
+    gBattleAnimArgs[7] = 0;
     DestroyAnimVisualTask(taskId);
 }
 

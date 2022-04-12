@@ -434,11 +434,6 @@ static void AnimSlideHandOrFootToTarget(struct Sprite *sprite)
 
 static void AnimJumpKick(struct Sprite *sprite)
 {
-    if (IsContest())
-    {
-        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-        gBattleAnimArgs[3] = -gBattleAnimArgs[3];
-    }
     AnimSlideHandOrFootToTarget(sprite);
 }
 

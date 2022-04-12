@@ -415,8 +415,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         FillPalette(0, animBg.paletteId * 16, 32);
         scanlineParams.dmaDest = &REG_BG1VOFS;
         var0 = WINOUT_WIN01_BG1;
-        if (!IsContest())
-            gBattle_BG2_X += 240;
+        gBattle_BG2_X += 240;
     }
     else
     {
@@ -425,8 +424,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         FillPalette(0, 144, 32);
         scanlineParams.dmaDest = &REG_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
-        if (!IsContest())
-            gBattle_BG1_X += 240;
+        gBattle_BG1_X += 240;
     }
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
     scanlineParams.initState = 1;

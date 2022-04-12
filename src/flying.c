@@ -859,21 +859,16 @@ static void sub_80B2514(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[0];
     sprite->data[2] = gBattleAnimArgs[1];
     sprite->data[3] = gBattleAnimArgs[2];
-    if (!IsContest())
-    {
-        if (gBattlerPositions[gBattleAnimTarget] & B_POSITION_OPPONENT_LEFT)
-            sprite->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH) + gBattleAnimArgs[3];
-        else
-            sprite->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH) + 40;
-        if (gBattleAnimArgs[4])
-            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
-        else
-            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
-    }
-    else
-    {
+    
+    if (gBattlerPositions[gBattleAnimTarget] & B_POSITION_OPPONENT_LEFT)
         sprite->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH) + gBattleAnimArgs[3];
-    }
+    else
+        sprite->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH) + 40;
+    if (gBattleAnimArgs[4])
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
+    else
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
+
     sprite->data[4] = gSineTable[sprite->data[1] & 0xFF];
     sprite->data[5] = -gSineTable[(sprite->data[1] & 0xFF) + 64];
     sprite->data[6] = 0;

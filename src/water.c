@@ -821,15 +821,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     gTasks[taskId2].data[0] = 0;
     gTasks[taskId2].data[1] = 0x1000;
     gTasks[taskId2].data[2] = 0x1000;
-    if (IsContest())
-    {
-        *x = -80;
-        *y = -48;
-        gTasks[taskId].data[0] = 2;
-        gTasks[taskId].data[1] = 1;
-        gTasks[taskId2].data[3] = 0;
-    }
-    else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
     {
         *x = -224;
         *y = 256;

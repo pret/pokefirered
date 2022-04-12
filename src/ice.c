@@ -1137,11 +1137,6 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + gBattleAnimArgs[4];
         sprite->data[7] |= GetBattlerSpriteBGPriority(gBattleAnimTarget) << 8;
     }
-    if (IsContest())
-    {
-        sprite->data[6] = 1;
-        sprite->subpriority = 0x80;
-    }
     InitAnimLinearTranslation(sprite);
     sprite->callback = MovePoisonGasCloud;
 }

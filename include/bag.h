@@ -13,6 +13,5 @@ u8 OpenBagWindow(u8 whichWindow);
 void CloseBagWindow(u8 whichWindow);
 u8 GetBagWindow(u8 whichWindow);
 void BagCreateYesNoMenuRight(u8 taskId, const struct YesNoFuncTable * ptrs, bool8 isTop);
-void BagDrawTextBoxOnWindow(u8 windowId);
 
 #endif //GUARD_BAG_H

@@ -6673,7 +6673,7 @@ static void atk8F_forcerandomswitch(void)
                 val = 3;
             for (i = val; i < val + 3; ++i)
             {
-                if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&party[i], MON_DATA_IS_EGG) && GetMonData(&party[i], MON_DATA_HP) != 0)
+                if (MON_CAN_BATTLE(&party[i]))
                     ++valid;
             }
         }
@@ -6681,9 +6681,9 @@ static void atk8F_forcerandomswitch(void)
         {
             valid = 0;
 		
-            for (i = 0; i < 6; ++i)
+            for (i = 0; i < PARTY_SIZE; ++i)
             {
-                if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&party[i], MON_DATA_IS_EGG) && GetMonData(&party[i], MON_DATA_HP) != 0)
+                if (MON_CAN_BATTLE(&party[i]))
                     ++valid;
             }
         }

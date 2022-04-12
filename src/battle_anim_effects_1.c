@@ -4795,9 +4795,6 @@ void AnimConversion(struct Sprite* sprite)
     {
         sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X) + gBattleAnimArgs[0];
         sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + gBattleAnimArgs[1];
-        if (IsContest())
-            sprite->y += 10;
-
         sprite->data[0]++;
     }
 

@@ -2588,7 +2588,7 @@ static void AnimTask_FreeAbilityPopUp(u8 taskId)
 
 void AnimTask_CreateAbilityPopUp(u8 taskId)
 {
-    u8 spriteId1, spriteId2, destryTaskId, battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[-2]);
+    u8 spriteId1, spriteId2, destroyTaskId, battler = GetBattlerForBattleScript(gBattlescriptCurrInstr[-2]);
     u16 posX, posY;
     
     LoadSpriteSheet((const struct SpriteSheet*) &gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ABILITY_POP_UP)]);
@@ -2605,10 +2605,10 @@ void AnimTask_CreateAbilityPopUp(u8 taskId)
     }
     else
     {
-        posX = 186;
+	posX = 186;
         posY = 57;
         spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp, posX + ABILITY_POP_UP_POS_X_SLIDE, posY, 0);
-		spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2, posX + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF, posY, 0);
+	spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2, posX + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF, posY, 0);
     }
     
     gSprites[spriteId1].tOriginalX = posX;
@@ -2617,17 +2617,17 @@ void AnimTask_CreateAbilityPopUp(u8 taskId)
     gAbilityPopUpIds[battler][0] = spriteId1;
     gAbilityPopUpIds[battler][1] = spriteId2;
     
-    destryTaskId = CreateTask(AnimTask_FreeAbilityPopUp, 5);
+    destroyTaskId = CreateTask(AnimTask_FreeAbilityPopUp, 5);
     
-    gTasks[destryTaskId].tSpriteId1 = spriteId1;
-	gTasks[destryTaskId].tSpriteId2 = spriteId2;
+    gTasks[destroyTaskId].tSpriteId1 = spriteId1;
+    gTasks[destroyTaskId].tSpriteId2 = spriteId2;
     
     gSprites[spriteId1].tIsMain = TRUE;
-	gSprites[spriteId1].tBattler = battler;
-	gSprites[spriteId2].tBattler = battler;
+    gSprites[spriteId1].tBattler = battler;
+    gSprites[spriteId2].tBattler = battler;
     
     StartSpriteAnim(&gSprites[spriteId1], 0);
-	StartSpriteAnim(&gSprites[spriteId2], 0);
+    StartSpriteAnim(&gSprites[spriteId2], 0);
     
     PrintBattlerAndAbilityOnAbilityPopUp(battler, spriteId1, gBattlescriptCurrInstr[-3], gBattlescriptCurrInstr[-1]);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * TILE_SIZE_4BPP));
@@ -2637,8 +2637,8 @@ void AnimTask_CreateAbilityPopUp(u8 taskId)
 void AnimTask_DestroyAbilityPopUp(u8 taskId)
 {
     gSprites[gAbilityPopUpIds[GetBattlerForBattleScript(gBattlescriptCurrInstr[-2])][0]].tFrames = 0;
-	gSprites[gAbilityPopUpIds[GetBattlerForBattleScript(gBattlescriptCurrInstr[-2])][1]].tFrames = 0;
-	DestroyAnimVisualTask(taskId);
+    gSprites[gAbilityPopUpIds[GetBattlerForBattleScript(gBattlescriptCurrInstr[-2])][1]].tFrames = 0;
+    DestroyAnimVisualTask(taskId);
 }
 
 

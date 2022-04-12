@@ -1263,6 +1263,17 @@ static void Cmd_if_status_in_party(void)
     struct Pokemon *party;
     int i;
     u32 statusToCompareTo;
+    u8 battlerId;
+    
+    switch (sAIScriptPtr[1])
+    {
+    case AI_USER:
+        battlerId = gBattlerAttacker;
+        break;
+    default:
+        battlerId = gBattlerTarget;
+        break;
+    }
     
     party = (GetBattlerSide(battlerId) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 

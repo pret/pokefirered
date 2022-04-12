@@ -3900,12 +3900,9 @@ static void AnimCirclingMusicNote_Step(struct Sprite* sprite)
 
 void AnimProtect(struct Sprite* sprite)
 {
-    if (IsContest())
-        gBattleAnimArgs[1] += 8;
-
     sprite->x = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_X) + gBattleAnimArgs[0];
     sprite->y = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_Y) + gBattleAnimArgs[1];
-    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER || IsContest())
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker) + 1;
     else
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);

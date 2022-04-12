@@ -6285,8 +6285,7 @@ static void atk83_handletrainerslidecase(void)
 		    HideBattlerShadowSprite(gActiveBattler);
 		    break;
 		case 1:
-		    BtlController_EmitPrintString(0, STRINGID_SETWORDSTRING);
-		    MarkBattlerForControllerExec(gActiveBattler);
+		    PrepareStringBattle(STRINGID_SETWORDSTRING, gActiveBattler);
 		    break;
 		case 2:
 		    gBattlerSpriteIds[gActiveBattler] = gBattleMoveDamage;

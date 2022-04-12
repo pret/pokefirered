@@ -2675,7 +2675,7 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
 // arg 4: speedup frame (particles move faster at the end of the animation)
 void AnimMoveTwisterParticle(struct Sprite* sprite)
 {
-    if (!IsContest() && IsDoubleBattle() == TRUE)
+    if (IsDoubleBattle() == TRUE)
         SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->x, &sprite->y);
 
     sprite->y += 32;

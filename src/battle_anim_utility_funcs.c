@@ -306,12 +306,10 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
     ((struct BgCnt *)&bg1Cnt)->priority = 0;
     ((struct BgCnt *)&bg1Cnt)->screenSize = 0;
     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
-    if (!IsContest())
-    {
-        ((struct BgCnt *)&bg1Cnt)->charBaseBlock = 1;
-        SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
-    }
-    if (IsDoubleBattle() && !IsContest())
+    ((struct BgCnt *)&bg1Cnt)->charBaseBlock = 1;
+    SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
+    
+    if (IsDoubleBattle())
     {
         if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_RIGHT
          || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT)

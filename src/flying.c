@@ -584,10 +584,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
     *(u16 *)(data->unkC) = gBattleAnimArgs[5];
     if (data->unk2 >= 64 && data->unk2 <= 191)
     {
-        if (!IsContest())
-            sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
-        else
-            sprite->oam.priority = GetBattlerSpriteBGPriority(battler);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
         data->unkE_0 = 0;
         if (!(data->unk4 & 0x8000))
         {

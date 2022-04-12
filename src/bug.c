@@ -196,13 +196,7 @@ const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
 
 static void AnimMegahornHorn(struct Sprite *sprite)
 {
-    if (IsContest())
-    {
-        StartSpriteAffineAnim(sprite, 2);
-        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
-        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
-    }
-    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         StartSpriteAffineAnim(sprite, 1);
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];

@@ -2252,29 +2252,17 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 0);
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
-
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
         GetBattleAnimBg1Data(&animBg);
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
         LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
-        if (IsContest())
-        {
-            RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
-            gBattle_BG1_X = -56;
-            gBattle_BG1_Y = 0;
-        }
-        else
-        {
-            if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-                gBattle_BG1_X = -135;
+            
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+            gBattle_BG1_X = -135;
             else
                 gBattle_BG1_X = -10;
-            
-            gBattle_BG1_Y = 0;
-        }
-
+        gBattle_BG1_Y = 0;
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
 

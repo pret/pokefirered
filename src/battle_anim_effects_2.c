@@ -3025,10 +3025,9 @@ void AnimMagentaHeart(struct Sprite *sprite)
 
 void AnimTask_FakeOut(u8 taskId)
 {
-    u16 win0h = IsContest() ? 0x98 : 0xF0;
     u16 win0v = 0;
 
-    gBattle_WIN0H = win0h;
+    gBattle_WIN0H = 0xF0;
     gBattle_WIN0V = 0xA0;
     SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
@@ -3037,7 +3036,7 @@ void AnimTask_FakeOut(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN);
     SetGpuReg(REG_OFFSET_BLDY, BLDCNT_TGT1_OBJ);
     gTasks[taskId].data[0] = win0v;
-    gTasks[taskId].data[1] = win0h;
+    gTasks[taskId].data[1] = gBattle_WIN0H;
     gTasks[taskId].func = FakeOutStep1;
 }
 

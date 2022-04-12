@@ -1436,11 +1436,7 @@ void AnimSonicBoomProjectile(struct Sprite *sprite)
     s16 targetYPos;
     u16 rotation;
 
-    if (IsContest())
-    {
-        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
-    }
-    else if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -1452,9 +1448,6 @@ void AnimSonicBoomProjectile(struct Sprite *sprite)
     targetYPos = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     rotation = ArcTan2Neg(targetXPos - sprite->x, targetYPos - sprite->y);
     rotation += 0xF000;
-    if (IsContest())
-        rotation -= 0x6000;
-
     TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = targetXPos;

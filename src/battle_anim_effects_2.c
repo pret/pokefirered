@@ -1591,33 +1591,20 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     s16 targetY = 0;
     s16 xDiff, yDiff;
 
-    if (IsContest())
+    if ((gBattlerPositions[gBattleAnimTarget] & BIT_SIDE) == B_SIDE_PLAYER)
     {
-        gTasks[taskId].data[4] = 2;
+        gTasks[taskId].data[4] = 1;
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         if (gBattleAnimArgs[2] & 1)
-            gBattleAnimArgs[2] &= ~1;
+            gBattleAnimArgs[2] &= ~(1);
         else
             gBattleAnimArgs[2] |= 1;
-    }
-    else
-    {
-        if ((gBattlerPositions[gBattleAnimTarget] & BIT_SIDE) == B_SIDE_PLAYER)
-        {
-            gTasks[taskId].data[4] = 1;
-            gBattleAnimArgs[0] = -gBattleAnimArgs[0];
-            gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-            if (gBattleAnimArgs[2] & 1)
-                gBattleAnimArgs[2] &= ~1;
-            else
-                gBattleAnimArgs[2] |= 1;
         }
-    }
 
     attackerX = gTasks[taskId].data[9] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
     attackerY = gTasks[taskId].data[10] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
-    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-        && IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
     {
         SetAverageBattlerPositions(gBattleAnimTarget, 0, &targetX, &targetY);
     }

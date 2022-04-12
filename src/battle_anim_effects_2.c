@@ -3336,9 +3336,7 @@ static void ScaryFace_Step(u8 taskId)
         gTasks[taskId].data[12]++;
         // fall through
     case 4:
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
-
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);

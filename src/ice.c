@@ -935,8 +935,7 @@ void AnimTask_Haze1(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
     SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 0);
-    if (!IsContest())
-        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
+    SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
@@ -945,8 +944,6 @@ void AnimTask_Haze1(u8 taskId)
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
     LoadPalette(&gDefaultWeatherSpritePalette, animBg.paletteId * 16, 32);
-    if (IsContest())
-        RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
     gTasks[taskId].func = AnimTask_Haze2;
 }
 

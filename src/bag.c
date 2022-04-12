@@ -290,12 +290,5 @@ u8 GetBagWindow(u8 whichWindow)
 
 void BagCreateYesNoMenuRight(u8 taskId, const struct YesNoFuncTable * ptrs, bool8 isTop)
 {
-    u8 id = isTop ? 4 : 3;
-    
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[id], 2, 0, 2, 0x064, 0x0E, ptrs);
-}
-
-void BagDrawTextBoxOnWindow(u8 windowId)
-{
-    DrawTextBorderOuter(windowId, 0x064, 0x0E);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[isTop ? 4 : 3], 2, 0, 2, 0x064, 0x0E, ptrs);
 }

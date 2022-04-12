@@ -5,7 +5,7 @@
 
 void InitBagWindows(void);
 void BagPrintTextOnWindow(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
-void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused);
+void BagPrintTextOnWin1CenteredColor0(const u8 * str);
 void BagDrawDepositItemTextBox(void);
 u8 ShowBagWindow(u8 whichWindow, u8 nItems);
 void HideBagWindow(u8 whichWindow);

@@ -2193,11 +2193,7 @@ void AnimTask_TransformMon(u8 taskId)
     case 2:
         HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
         GetBattleAnimBgDataByPriorityRank(&animBg, gBattleAnimAttacker);
-        if (IsContest())
-            position = 0;
-        else
-            position = GetBattlerPosition(gBattleAnimAttacker);
-
+        position = GetBattlerPosition(gBattleAnimAttacker);
         src = gMonSpritesGfxPtr->sprites[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
         dest = animBg.bgTiles;
         CpuCopy32(src, dest, 0x800);

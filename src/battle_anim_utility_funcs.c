@@ -397,7 +397,7 @@ static void StatsChangeAnimation_Step1(u8 taskId)
     else
         sAnimStatsChangeData->battler1 = gBattleAnimTarget;
     sAnimStatsChangeData->battler2 = BATTLE_PARTNER(sAnimStatsChangeData->battler1);
-    if (IsContest() || (sAnimStatsChangeData->data[3] && !IsBattlerSpriteVisible(sAnimStatsChangeData->battler2)))
+    if (sAnimStatsChangeData->data[3] && !IsBattlerSpriteVisible(sAnimStatsChangeData->battler2))
         sAnimStatsChangeData->data[3] = 0;
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;

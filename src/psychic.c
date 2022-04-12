@@ -417,17 +417,17 @@ const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
 
 static void AnimDefensiveWall(struct Sprite *sprite)
 {
-    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-    {
-        sprite->oam.priority = 2;
-        sprite->subpriority = 200;
-    }
     u8 battlerCopy;
     u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     u8 rank = GetBattlerSpriteBGPriorityRank(battler);
     s32 var0 = 1;
     bool8 toBG2 = (rank ^ var0) != 0;
-
+    
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+    {
+        sprite->oam.priority = 2;
+        sprite->subpriority = 200;
+    }
     if (IsBattlerSpriteVisible(battler))
         MoveBattlerSpriteToBG(battler, toBG2);
     battler = BATTLE_PARTNER(battlerCopy);

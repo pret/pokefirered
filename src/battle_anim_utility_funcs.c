@@ -787,6 +787,8 @@ static void sub_80BBC2C(u8 taskId)
     case 2:
         if (gTasks[taskId].data[11]++ >= gTasks[taskId].data[6])
         {
+            u16 bg1Cnt;
+            
             gTasks[taskId].data[11] = 0;
             --gTasks[taskId].data[12];
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[12], 16 - gTasks[taskId].data[12]));
@@ -799,7 +801,7 @@ static void sub_80BBC2C(u8 taskId)
                                           | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
                 SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL  | WINOUT_WIN01_OBJ  | WINOUT_WIN01_CLR
                                            | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
-                u16 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
+                bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
                 ((vBgCnt *)&bg1Cnt)->charBaseBlock = 0;
                 SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
                 SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) ^ DISPCNT_OBJWIN_ON);

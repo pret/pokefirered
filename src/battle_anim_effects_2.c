@@ -2570,7 +2570,7 @@ void AnimHyperVoiceRing(struct Sprite *sprite)
     else
     {
         r9 = GetBattlerSpriteCoord(battler1, r10) - gBattleAnimArgs[0];
-        if (!IsContest() && IsBattlerSpriteVisible(BATTLE_PARTNER(battler1)))
+        if (IsBattlerSpriteVisible(BATTLE_PARTNER(battler1)))
         {
             if (gSprites[gBattlerSpriteIds[battler1]].x < gSprites[gBattlerSpriteIds[BATTLE_PARTNER(battler1)]].x)
                 sprite->subpriority = gSprites[gBattlerSpriteIds[BATTLE_PARTNER(battler1)]].subpriority + 1;
@@ -2585,7 +2585,7 @@ void AnimHyperVoiceRing(struct Sprite *sprite)
     }
 
     r6 = GetBattlerSpriteCoord(battler1, sp4) + gBattleAnimArgs[1];
-    if (!IsContest() && IsBattlerSpriteVisible(BATTLE_PARTNER(battler2)))
+    if (IsBattlerSpriteVisible(BATTLE_PARTNER(battler2)))
     {
         SetAverageBattlerPositions(battler2, gBattleAnimArgs[6], &sp0, &sp1);
     }

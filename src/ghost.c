@@ -913,7 +913,7 @@ void AnimTask_CurseStretchingBlackBg(u8 taskId)
                                     (WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR)));
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN));
     SetGpuReg(REG_OFFSET_BLDY, 0x10);
-    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER || IsContest())
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         startX = 40;
     else
         startX = 200;

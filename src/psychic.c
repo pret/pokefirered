@@ -417,26 +417,23 @@ const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
 
 static void AnimDefensiveWall(struct Sprite *sprite)
 {
-    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER || IsContest())
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         sprite->oam.priority = 2;
         sprite->subpriority = 200;
     }
-    if (!IsContest())
-    {
-        u8 battlerCopy;
-        u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        u8 rank = GetBattlerSpriteBGPriorityRank(battler);
-        s32 var0 = 1;
-        bool8 toBG2 = (rank ^ var0) != 0;
+    u8 battlerCopy;
+    u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+    u8 rank = GetBattlerSpriteBGPriorityRank(battler);
+    s32 var0 = 1;
+    bool8 toBG2 = (rank ^ var0) != 0;
 
-        if (IsBattlerSpriteVisible(battler))
-            MoveBattlerSpriteToBG(battler, toBG2);
-        battler = BATTLE_PARTNER(battlerCopy);
-        if (IsBattlerSpriteVisible(battler))
-            MoveBattlerSpriteToBG(battler, toBG2 ^ var0);
-    }
-    if (!IsContest() && IsDoubleBattle())
+    if (IsBattlerSpriteVisible(battler))
+        MoveBattlerSpriteToBG(battler, toBG2);
+    battler = BATTLE_PARTNER(battlerCopy);
+    if (IsBattlerSpriteVisible(battler))
+        MoveBattlerSpriteToBG(battler, toBG2 ^ var0);
+    if (IsDoubleBattle())
     {
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         {
@@ -456,8 +453,6 @@ static void AnimDefensiveWall(struct Sprite *sprite)
         sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X) + gBattleAnimArgs[0];
         sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + gBattleAnimArgs[1];
     }
-    if (IsContest())
-        sprite->y += 9;
     sprite->data[0] = 256 + IndexOfSpritePaletteTag(gBattleAnimArgs[2]) * 16;
     sprite->callback = sub_80B300C;
     sub_80B300C(sprite);

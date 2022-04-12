@@ -238,8 +238,6 @@ static void AnimLeechLifeNeedle(struct Sprite *sprite)
 // arg 4: if targets both opponents
 static void AnimTranslateWebThread(struct Sprite *sprite)
 {
-    if (IsContest())
-        gBattleAnimArgs[2] /= 2;
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->x;

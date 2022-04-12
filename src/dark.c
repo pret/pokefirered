@@ -511,29 +511,18 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        if (IsContest() == TRUE)
+        task->data[3] = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
+        if (task->data[3] == 1)
         {
-            gBattle_WIN0H = 0;
-            gBattle_WIN0V = 0;
-            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
-            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR | WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-            DestroyAnimVisualTask(taskId);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
+            gBattle_BG2_X += 240;
         }
         else
         {
-            task->data[3] = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
-            if (task->data[3] == 1)
-            {
-                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
-                gBattle_BG2_X += 240;
-            }
-            else
-            {
-                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-                gBattle_BG1_X += 240;
-            }
-            ++task->data[0];
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
+            gBattle_BG1_X += 240;
         }
+        ++task->data[0];
         break;
     case 1:
         if (task->data[3] == 1)

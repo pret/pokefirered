@@ -927,17 +927,10 @@ void AnimTask_SetAnimAttackerAndTargetForEffectAtk(u8 taskId)
 
 void AnimTask_SetAttackerInvisibleWaitForSignal(u8 taskId)
 {
-    if (IsContest())
-    {
-        DestroyAnimVisualTask(taskId);
-    }
-    else
-    {
-        gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
-        gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = 1;
-        gTasks[taskId].func = sub_80BC19C;
-        --gAnimVisualTaskCount;
-    }
+    gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
+    gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = 1;
+    gTasks[taskId].func = sub_80BC19C;
+    --gAnimVisualTaskCount;
 }
 
 static void sub_80BC19C(u8 taskId)

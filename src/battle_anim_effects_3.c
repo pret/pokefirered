@@ -2410,12 +2410,12 @@ static void AnimGreenStar_Callback(struct Sprite *sprite)
 void AnimTask_DoomDesireLightBeam(u8 taskId)
 {
     struct BattleAnimBgData animBg;
-
+    u8 position;
+    
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        u8 position; 
-            
+        position = GetBattlerPosition(gBattleAnimTarget);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(3, 13));
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 0);
@@ -2425,7 +2425,6 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
         LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
-        position = GetBattlerPosition(gBattleAnimTarget);
             
         if (IsDoubleBattle() == TRUE)
         {

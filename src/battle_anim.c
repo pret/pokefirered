@@ -2644,15 +2644,6 @@ static void ScriptCmd_goto(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
-// Unused
-static bool8 sub_807378C(u16 a)
-{
-    if (a == 0xC9)
-        return FALSE;
-    else
-        return TRUE;
-}
-
 #define tBackgroundId   data[0]
 #define tState          data[10]
 

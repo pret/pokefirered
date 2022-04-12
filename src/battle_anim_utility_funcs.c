@@ -746,8 +746,6 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 ar
         newSpriteId = CreateCloneOfSpriteInWindowMode(battler2, gBattlerSpriteIds[battler2], species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
-    if (IsContest())
-        RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gfx, animBgData.tilesOffset);
     LoadCompressedPalette(palette, animBgData.paletteId * 16, 32);
     gBattle_BG1_X = 0;

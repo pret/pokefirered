@@ -2418,9 +2418,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(3, 13));
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 0);
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
-        
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
         GetBattleAnimBg1Data(&animBg);
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
@@ -2484,9 +2482,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
     case 5:
         GetBattleAnimBg1Data(&animBg);
         InitBattleAnimBg(animBg.bgId);
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
-
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;

@@ -2306,9 +2306,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
     case 4:
         GetBattleAnimBg1Data(&animBg);
         InitBattleAnimBg(animBg.bgId);
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
-
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
@@ -2427,38 +2425,26 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
         LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
-                
-        if (IsContest())
+        u8 position = GetBattlerPosition(gBattleAnimTarget);
+        if (IsDoubleBattle() == TRUE)
         {
-            RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
-            gBattle_BG1_X = -56;
-            gBattle_BG1_Y = 0;
+            if (position == B_POSITION_OPPONENT_LEFT)
+                gBattle_BG1_X = -155;
+            if (position == B_POSITION_OPPONENT_RIGHT)
+                gBattle_BG1_X = -115;
+            if (position == B_POSITION_PLAYER_LEFT)
+                gBattle_BG1_X = 14;
+            if (position == B_POSITION_PLAYER_RIGHT)
+                gBattle_BG1_X = -20;
         }
         else
         {
-            u8 position = GetBattlerPosition(gBattleAnimTarget);
-            if (IsDoubleBattle() == TRUE)
-            {
-                if (position == B_POSITION_OPPONENT_LEFT)
-                    gBattle_BG1_X = -155;
-                if (position == B_POSITION_OPPONENT_RIGHT)
-                    gBattle_BG1_X = -115;
-                if (position == B_POSITION_PLAYER_LEFT)
-                    gBattle_BG1_X = 14;
-                if (position == B_POSITION_PLAYER_RIGHT)
-                    gBattle_BG1_X = -20;
-            }
-            else
-            {
-                if (position == B_POSITION_OPPONENT_LEFT)
-                    gBattle_BG1_X = -135;
-                if (position == B_POSITION_PLAYER_LEFT)
-                    gBattle_BG1_X = -10;
-            }
-
-            gBattle_BG1_Y = 0;
+            if (position == B_POSITION_OPPONENT_LEFT)
+                gBattle_BG1_X = -135;
+            if (position == B_POSITION_PLAYER_LEFT)
+                gBattle_BG1_X = -10;
         }
-
+        gBattle_BG1_Y = 0;
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
         gTasks[taskId].data[0]++;

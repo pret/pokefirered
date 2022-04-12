@@ -712,23 +712,16 @@ static void AnimHydroCannonCharge(struct Sprite *sprite)
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     sprite->y2 = -10;
     priority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
-    if (!IsContest())
+    
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-        {
-            sprite->x2 = 10;
-            sprite->subpriority = priority + 2;
-        }
-        else
-        {
-            sprite->x2 = -10;
-            sprite->subpriority = priority - 2;
-        }
+        sprite->x2 = 10;
+        sprite->subpriority = priority + 2;
     }
     else
     {
         sprite->x2 = -10;
-        sprite->subpriority = priority + 2;
+        sprite->subpriority = priority - 2;
     }
     sprite->callback = AnimHydroCannonCharge_Step;
 }

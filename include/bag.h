@@ -12,8 +12,7 @@ void HideBagWindow(u8 whichWindow);
 u8 OpenBagWindow(u8 whichWindow);
 void CloseBagWindow(u8 whichWindow);
 u8 GetBagWindow(u8 whichWindow);
-void BagCreateYesNoMenuBottomRight(u8 taskId, const struct YesNoFuncTable * ptrs);
-void BagCreateYesNoMenuTopRight(u8 taskId, const struct YesNoFuncTable * ptrs);
+void BagCreateYesNoMenuRight(u8 taskId, const struct YesNoFuncTable * ptrs, bool8 isTop);
 void BagPrintMoneyAmount(void);
 void BagDrawTextBoxOnWindow(u8 windowId);
 

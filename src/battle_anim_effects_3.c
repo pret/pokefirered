@@ -2834,13 +2834,13 @@ void AnimTask_PainSplitMovement(u8 taskId)
         case 1:
             SetSpriteRotScale(spriteId, 0xD0, 0x130, 0xF00);
             SetBattlerSpriteYOffsetFromYScale(spriteId);
-            if (IsContest() || GetBattlerSide(gTasks[taskId].data[11]) == B_SIDE_PLAYER)
+            if (GetBattlerSide(gTasks[taskId].data[11]) == B_SIDE_PLAYER)
                 gSprites[spriteId].y2 += 16;
             break;
         case 2:
             SetSpriteRotScale(spriteId, 0xD0, 0x130, 0xF100);
             SetBattlerSpriteYOffsetFromYScale(spriteId);
-            if (IsContest() || GetBattlerSide(gTasks[taskId].data[11]) == B_SIDE_PLAYER)
+            if (GetBattlerSide(gTasks[taskId].data[11]) == B_SIDE_PLAYER)
                 gSprites[spriteId].y2 += 16;
             break;
         }

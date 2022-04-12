@@ -189,8 +189,6 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }
 };
 
-static const u8 sUnused_8453174[] = {16, 8, 4};
-
 static EWRAM_DATA u8 sOpenWindows[11] = {};
 
 void InitBagWindows(void)

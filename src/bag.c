@@ -289,14 +289,11 @@ u8 GetBagWindow(u8 whichWindow)
     return sOpenWindows[whichWindow];
 }
 
-void BagCreateYesNoMenuBottomRight(u8 taskId, const struct YesNoFuncTable * ptrs)
+void BagCreateYesNoMenuRight(u8 taskId, const struct YesNoFuncTable * ptrs, bool8 isTop)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[3], 2, 0, 2, 0x064, 0x0E, ptrs);
-}
-
-void BagCreateYesNoMenuTopRight(u8 taskId, const struct YesNoFuncTable * ptrs)
-{
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[4], 2, 0, 2, 0x064, 0x0E, ptrs);
+    u8 id = isTop ? 4 : 3;
+    
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[id], 2, 0, 2, 0x064, 0x0E, ptrs);
 }
 
 void BagPrintMoneyAmount(void)

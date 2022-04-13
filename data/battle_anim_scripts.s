@@ -8992,8 +8992,6 @@ FocusPunch:: @ 81D363A
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	delay 1
-	createvisualtask AnimTask_IsContest, 2, 
-	jumpargeq 7, 1, FocusPunchInContest
 	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, FocusPunchOnOpponent
 	jumpargeq 7, 1, FocusPunchOnPlayer
@@ -9023,15 +9021,11 @@ FocusPunchContinue:: @ 81D3668
 	goto FocusPunchEnd
 
 FocusPunchOnOpponent:: @ 81D36E5
-	fadetobg 4
+	fadetobg BG_IMPACT_OPPONENT
 	goto FocusPunchContinue
 
 FocusPunchOnPlayer:: @ 81D36EC
-	fadetobg 5
-	goto FocusPunchContinue
-
-FocusPunchInContest:: @ 81D36F3
-	fadetobg 6
+	fadetobg BG_IMPACT_PLAYER
 	goto FocusPunchContinue
 
 Move_RETURN:: @ 81D36FA

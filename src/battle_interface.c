@@ -750,7 +750,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
         objVram += spriteTileNum + 0x400;
     }
     TextIntoHealthboxObject(objVram, windowTileData, 3);
-    RemoveWindowOnHealthbox(windowId);
+    RemoveWindow(windowId);
 }
 
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
@@ -769,7 +769,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, &windowId);
             spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum;
             TextIntoHealthboxObject( (void*)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0xA40, windowTileData, 2);
-            RemoveWindowOnHealthbox(windowId);
+            RemoveWindow(windowId);
         }
         else // singles, current
         {
@@ -780,7 +780,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum;
             TextIntoHealthboxObject((void *)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0x2E0, windowTileData, 1);
             TextIntoHealthboxObject((void *)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0xA00, windowTileData + 0x20, 2);
-            RemoveWindowOnHealthbox(windowId);
+            RemoveWindow(windowId);
         }
     }
     else

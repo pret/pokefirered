@@ -3577,7 +3577,6 @@ extern const u32 gBattleAnim_ScaryFaceGfx[];
 extern const u32 gBattleAnim_ScaryFacePal[];
 extern const u32 gBattleAnimBgTilemap_ScaryFacePlayer[];
 extern const u32 gBattleAnimBgTilemap_ScaryFaceOpponent[];
-extern const u32 gBattleAnimBgTilemap_ScaryFaceContest[];
 extern const u32 gBattleAnimSpriteGfx_Bird[];
 extern const u32 gBattleAnimSpriteGfx_CrossImpact[];
 

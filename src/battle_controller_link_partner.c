@@ -20,7 +20,6 @@ static void LinkPartnerHandleLoadMonSprite(void);
 static void LinkPartnerHandleSwitchInAnim(void);
 static void LinkPartnerHandleReturnMonToBall(void);
 static void LinkPartnerHandleDrawTrainerPic(void);
-static void LinkPartnerHandleTrainerSlide(void);
 static void LinkPartnerHandleTrainerSlideBack(void);
 static void LinkPartnerHandleFaintAnimation(void);
 static void LinkPartnerHandlePaletteFade(void);
@@ -90,7 +89,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandleSwitchInAnim,
     LinkPartnerHandleReturnMonToBall,
     LinkPartnerHandleDrawTrainerPic,
-    LinkPartnerHandleTrainerSlide,
+    LinkOpponentBufferExecCompleted,
     LinkPartnerHandleTrainerSlideBack,
     LinkPartnerHandleFaintAnimation,
     LinkPartnerHandlePaletteFade,
@@ -1072,11 +1071,6 @@ static void LinkPartnerHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
-}
-
-static void LinkPartnerHandleTrainerSlide(void)
-{
-    LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleTrainerSlideBack(void)

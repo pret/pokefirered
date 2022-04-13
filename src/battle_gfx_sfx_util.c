@@ -495,7 +495,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
     return retVal;
 }
 
-void LoadBattleBarGfx(u8 arg0)
+void LoadBattleBarGfx(void)
 {
     LZDecompressWram(gInterfaceGfx_HPNumbers, gMonSpritesGfxPtr->barFontGfx);
 }

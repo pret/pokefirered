@@ -21,7 +21,6 @@
 static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
 static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite);
 static void SpriteCB_RunAnimFastLinearTranslation(struct Sprite *sprite);
-static bool8 Dummy_ReturnFalse(void);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void AnimTask_AlphaFadeIn_Step(u8 taskId);
 static void AnimTask_BlendMonInAndOutSetup(struct Task *task);
@@ -1119,19 +1118,12 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
     src.xScale = xScale;
     src.yScale = yScale;
     src.rotation = rotation;
-    if (Dummy_ReturnFalse())
-        src.xScale = -src.xScale;
     i = gSprites[spriteId].oam.matrixNum;
     ObjAffineSet(&src, &matrix, 1, 2);
     gOamMatrices[i].a = matrix.a;
     gOamMatrices[i].b = matrix.b;
     gOamMatrices[i].c = matrix.c;
     gOamMatrices[i].d = matrix.d;
-}
-
-static bool8 Dummy_ReturnFalse(void)
-{
-    return FALSE;
 }
 
 void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode)

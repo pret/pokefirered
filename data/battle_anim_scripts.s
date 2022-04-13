@@ -10330,7 +10330,7 @@ ConfusionEffect:: @ 81D595F
 	return
 
 SetPsychicBackground:: @ 81D59BB
-	fadetobg 3
+	fadetobg BG_PSYCHIC
 	waitbgfadeout
 	createvisualtask AnimTask_SetPsychicBackground, 5, 
 	waitbgfadein
@@ -10344,19 +10344,11 @@ UnsetPsychicBg:: @ 81D59C7
 	return
 
 SetSkyBg:: @ 81D59CF
-	jumpifcontest SetSkyBgContest
-	fadetobg 18
+	fadetobg BG_SKY
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 768, 1, -1
-SetSkyBgContinue:: @ 81D59E6
 	waitbgfadein
 	return
-
-SetSkyBgContest:: @ 81D59E8
-	fadetobg 19
-	waitbgfadeout
-	createvisualtask AnimTask_StartSlidingBg, 5, 2304, 768, 0, -1
-	goto SetSkyBgContinue
 
 UnsetSkyBg:: @ 81D59FF
 	restorebg
@@ -10366,18 +10358,12 @@ UnsetSkyBg:: @ 81D59FF
 	return
 
 SetSolarbeamBg:: @ 81D5A07
-	createvisualtask AnimTask_IsContest, 2, 
-	jumpargeq 7, 1, SetSolarbeamBgContest
 	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, SetSolarbeamBgOpponent
 	goto SetSolarbeamBgPlayer
 SetSolarbeamBgContinue:: @ 81D5A2A
 	waitbgfadein
 	return
-
-SetSolarbeamBgContest:: @ 81D5A2C
-	fadetobg BG_SOLARBEAM_CONTESTS
-	goto SetSolarbeamBgContinue
 
 SetSolarbeamBgPlayer:: @ 81D5A33
 	fadetobg BG_SOLARBEAM_PLAYER

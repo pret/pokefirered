@@ -1317,51 +1317,6 @@ static void LinkOpponentHandleStatusAnimation(void)
     }
 }
 
-static void LinkOpponentHandleStatusXor(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleDataTransfer(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleDMA3Transfer(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandlePlayBGM(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleCmd32(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleTwoReturnValues(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChosenMonReturnValue(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleOneReturnValue(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleOneReturnValue_Duplicate(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleCmd37(void)
 {
     gUnknown_2022870.field_0 = 0;

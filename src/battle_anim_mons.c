@@ -1875,11 +1875,6 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
     return spriteId;
 }
 
-void DestroySpriteAndFreeResources_(struct Sprite *sprite)
-{
-    DestroySpriteAndFreeResources(sprite);
-}
-
 s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
 {
     u16 species;

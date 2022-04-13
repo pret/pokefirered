@@ -75,7 +75,6 @@ static void OakOldManHandleBattleAnimation(void);
 static void OakOldManHandleLinkStandbyMsg(void);
 static void OakOldManHandleResetActionMoveSelection(void);
 static void OakOldManHandleCmd55(void);
-static void OakOldManCmdEnd(void);
 
 static void OakOldManBufferRunCommand(void);
 static void OakOldManBufferExecCompleted(void);
@@ -155,7 +154,7 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OakOldManHandleLinkStandbyMsg,
     OakOldManHandleResetActionMoveSelection,
     OakOldManHandleCmd55,
-    OakOldManCmdEnd,
+    OakOldManDummy,
 };
 
 static void OakOldManDummy(void)
@@ -2220,10 +2219,6 @@ static void OakOldManHandleCmd55(void)
     OakOldManBufferExecCompleted();
     if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER) && gBattleTypeFlags & BATTLE_TYPE_LINK)
         gBattlerControllerFuncs[gActiveBattler] = OakOldManSetBattleEndCallbacks;
-}
-
-static void OakOldManCmdEnd(void)
-{
 }
 
 bool8 BtlCtrl_OakOldMan_TestState2Flag(u8 mask)

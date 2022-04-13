@@ -138,11 +138,6 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariCmdEnd,
 };
 
-// not used
-static void SafariDummy(void)
-{
-}
-
 void SetControllerToSafari(void)
 {
     gBattlerControllerFuncs[gActiveBattler] = SafariBufferRunCommand;

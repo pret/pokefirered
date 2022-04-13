@@ -56,6 +56,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 static void EndDrawPartyStatusSummary(void);
+static void LinkOpponentDummy(void);
 
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {

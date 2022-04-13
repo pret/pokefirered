@@ -48,7 +48,6 @@
 #include "constants/trainers.h"
 #include "constants/inserts.h"
 
-static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite);
 static void HandleAction_UseMove(void);
 static void HandleAction_Switch(void);
 static void HandleAction_UseItem(void);
@@ -76,7 +75,6 @@ static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static void BattleMainCB1(void);
 static void CB2_QuitPokedudeBattle(void);
-static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite);
 static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
@@ -274,17 +272,6 @@ const bool8 gIgnorableAbilities[ABILITIES_COUNT] =
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
-};
-
-const struct SpriteTemplate gUnknownDebugSprite =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_UnusedDebugSprite,
 };
 
 static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin

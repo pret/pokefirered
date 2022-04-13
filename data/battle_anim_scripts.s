@@ -5237,7 +5237,7 @@ SmogCloud:: @ 81CDE85
 Move_FAINT_ATTACK:: @ 81CDE9B
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_ATTACKER
-	fadetobg 1
+	fadetobg BG_DARK
 	waitbgfadein
 	delay 0
 	playsewithpan SE_M_FAINT_ATTACK, 192

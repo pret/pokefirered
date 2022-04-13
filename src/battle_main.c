@@ -1450,8 +1450,7 @@ static void LinkBattleComputeBattleTypeFlags(u8 numPlayers, u8 multiPlayerId)
 
 static void CB2_HandleStartBattle(void)
 {
-    u8 playerMultiplayerId;
-    u8 enemyMultiplayerId;
+    u8 i, playerMultiplayerId, enemyMultiplayerId;
 
     RunTasks();
     AnimateSprites();
@@ -1560,12 +1559,8 @@ static void CB2_HandleStartBattle(void)
         {
             ResetBlockReceivedFlags();
             memcpy(gEnemyParty + 4, gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
-            TryCorrectShedinjaLanguage(&gEnemyParty[0]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[1]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[2]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[3]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[4]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[5]);
+	    for (i = 0; i < PARTY_SIZE; i++)
+		    TryCorrectShedinjaLanguage(&gEnemyParty[i]);
             ++gBattleCommunication[MULTIUSE_STATE];
         }
         break;

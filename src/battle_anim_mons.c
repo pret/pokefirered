@@ -1187,14 +1187,9 @@ void TryResetSpriteAffineState(struct Sprite *sprite)
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
 
-static u16 ArcTan2_(s16 a, s16 b)
-{
-    return ArcTan2(a, b);
-}
-
 u16 ArcTan2Neg(s16 a, s16 b)
 {
-    u16 var = ArcTan2_(a, b);
+    u16 var = ArcTan2(a, b);
     return -var;
 }
 

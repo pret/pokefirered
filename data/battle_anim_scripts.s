@@ -7405,7 +7405,7 @@ Move_NIGHT_SHADE:: @ 81D11BB
 	monbg ANIM_ATTACKER
 	monbgprio_28 0
 	playsewithpan SE_M_PSYBEAM, 192
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadein
 	delay 10
 	playsewithpan SE_M_LEER, 192

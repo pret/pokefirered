@@ -6207,11 +6207,9 @@ Move_MEGAHORN:: @ 81CF55A
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_M_DRAGON_RAGE, 192
-	jumpifcontest MegahornInContest
-	fadetobg 7
+	fadetobg BG_DRILL
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 768, 1, -1
-MegahornContinue:: @ 81CF57D
 	waitbgfadein
 	setalpha 12, 8
 	createvisualtask AnimTask_ShakeMon, 5, 0, 2, 0, 15, 1
@@ -6240,12 +6238,6 @@ MegahornContinue:: @ 81CF57D
 	setarg 7, 65535
 	waitbgfadein
 	end
-
-MegahornInContest:: @ 81CF631
-	fadetobg 8
-	waitbgfadeout
-	createvisualtask AnimTask_StartSlidingBg, 5, 2304, 768, 0, -1
-	goto MegahornContinue
 
 Move_GUST:: @ 81CF648
 	loadspritegfx ANIM_TAG_GUST

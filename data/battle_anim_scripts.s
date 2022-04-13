@@ -10861,7 +10861,7 @@ General_MonScared:: @ 81D628A
 General_GhostGetOut:: @ 81D6301
 	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
 	waitforvisualfinish
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadeout
 	monbg_22 0
 	createvisualtask sub_80B6BBC, 2, 

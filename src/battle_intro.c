@@ -478,15 +478,3 @@ void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u
             tilemapDest[i * 32 + j] = offset++ | (palno << 12);
     LoadBgTilemap(bgId, tilemapDest, BG_SCREEN_SIZE, 0);
 }
-
-// not used
-static void sub_80BCFCC(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u16 arg5, u8 arg6, u8 arg7)
-{
-    s32 i, j, offset;
-
-    DmaCopy16(3, gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
-    offset = (arg5 >> 5) - (arg7 << 9);
-    for (i = arg1; i < arg1 + 8; ++i)
-        for (j = arg0; j < arg0 + 8; ++j)
-            *((u16 *)(BG_VRAM) + (i * 32) + (j + (arg6 << 10))) = offset++ | (arg4 << 12);
-}

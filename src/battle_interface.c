@@ -172,7 +172,6 @@ static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *
 static void sub_804A510(struct TestingBar *barInfo, s32 *currValue, u8 bg, u8 x, u8 y);
 static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
 static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 *windowId);
-static void RemoveWindowOnHealthbox(u32 windowId);
 static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth);
 
 static const struct OamData gOamData_8260270 = {

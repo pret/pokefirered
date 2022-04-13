@@ -3974,7 +3974,7 @@ Move_TAIL_GLOW:: @ 81CC0B8
 Move_LUSTER_PURGE:: @ 81CC0FB
 	loadspritegfx ANIM_TAG_WHITE_CIRCLE_OF_LIGHT
 	loadspritegfx ANIM_TAG_IMPACT
-	fadetobg 3
+	fadetobg BG_PSYCHIC
 	waitbgfadeout
 	createvisualtask AnimTask_FadeScreenToWhite, 5, 
 	waitbgfadein

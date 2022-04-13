@@ -1441,7 +1441,7 @@ static void OpponentHandleHealthBarUpdate(void)
 {
     s16 hpVal;
 
-    LoadBattleBarGfx(0);
+    LoadBattleBarGfx();
     hpVal = (gBattleBufferA[gActiveBattler][3] << 8) | gBattleBufferA[gActiveBattler][2];
 
     if (hpVal != INSTANT_HP_BAR_DROP)

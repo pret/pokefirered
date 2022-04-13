@@ -16,7 +16,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId);
 void DecompressTrainerBackPalette(u16 a1, u8 a2);
 void FreeTrainerFrontPicPaletteAndTile(u16 frontPicId);
 bool8 BattleLoadAllHealthBoxesGfx(u8 state);
-void LoadBattleBarGfx(u8 arg0);
+void LoadBattleBarGfx(void);
 bool8 BattleInitAllSprites(u8 *state, u8 *battlerId);
 void ClearSpritesHealthboxAnimData(void);
 void CopyAllBattleSpritesInvisibilities(void);

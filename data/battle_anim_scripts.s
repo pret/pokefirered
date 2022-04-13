@@ -8096,8 +8096,6 @@ Move_HYPER_FANG:: @ 81D2165
 	playsewithpan SE_M_BITE, 63
 	delay 1
 	delay 2
-	createvisualtask AnimTask_IsContest, 2, 
-	jumpargeq 7, 1, HyperFangInContest
 	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, HyperFangOnOpponent
 	goto HyperFangOnPlayer
@@ -8114,15 +8112,11 @@ HyperFangContinue:: @ 81D2193
 	end
 
 HyperFangOnOpponent:: @ 81D21B7
-	fadetobg 4
+	fadetobg BG_IMPACT_OPPONENT
 	goto HyperFangContinue
 
 HyperFangOnPlayer:: @ 81D21BE
-	fadetobg 5
-	goto HyperFangContinue
-
-HyperFangInContest:: @ 81D21C5
-	fadetobg 6
+	fadetobg BG_IMPACT_PLAYER
 	goto HyperFangContinue
 
 Move_TRI_ATTACK:: @ 81D21CC

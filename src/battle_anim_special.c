@@ -2515,10 +2515,3 @@ void AnimTask_DestroyAbilityPopUp(u8 taskId)
     gSprites[gAbilityPopUpIds[GetBattlerForBattleScript(gBattlescriptCurrInstr[-2])][1]].tFrames = 0;
     DestroyAnimVisualTask(taskId);
 }
-
-
-
-
-
-
-

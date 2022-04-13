@@ -3187,26 +3187,6 @@ static void BattleIntroPlayerSendsOutMonAnimation(void)
     }
 }
 
-// not used
-static void Unused_AutoProgressToSwitchInAnims(void)
-{
-    if (!gBattleControllerExecFlags)
-    {
-        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; ++gActiveBattler)
-        {
-            if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-            {
-                BtlController_EmitSwitchInAnim(0, gBattlerPartyIndexes[gActiveBattler], FALSE);
-                MarkBattlerForControllerExec(gActiveBattler);
-            }
-        }
-        gBattleStruct->switchInAbilitiesCounter = 0;
-        gBattleStruct->switchInItemsCounter = 0;
-        gBattleStruct->overworldWeatherDone = FALSE;
-        gBattleMainFunc = TryDoEventsBeforeFirstTurn;
-    }
-}
-
 static void TryDoEventsBeforeFirstTurn(void)
 {
     s32 i, j;

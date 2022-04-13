@@ -9754,7 +9754,7 @@ Move_SKY_UPPERCUT:: @ 81D4BC1
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 1
-	fadetobg 17
+	fadetobg BG_IN_AIR
 	waitbgfadeout
 	playsewithpan SE_M_SKY_UPPERCUT, 192
 	createvisualtask AnimTask_MoveSkyUppercutBg, 5, 55

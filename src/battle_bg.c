@@ -27,8 +27,6 @@ struct BattleBackground
 
 static u8 GetBattleTerrainOverride(void);
 
-static const u8 gUnknown_824829C[] = {1, 2};
-
 static const struct OamData gOamData_82482A0 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,

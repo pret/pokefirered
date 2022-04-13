@@ -53,6 +53,7 @@ static void DoSwitchOutAnimation(void);
 static void LinkPartnerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8 taskId);
 static void EndDrawPartyStatusSummary(void);
+static void LinkPartnerDummy(void);
 
 static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {

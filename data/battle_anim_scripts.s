@@ -5390,7 +5390,7 @@ Move_CRUNCH:: @ 81CE1EE
 	loadspritegfx ANIM_TAG_SHARP_TEETH
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg 1
-	fadetobg 1
+	fadetobg BG_DARK
 	waitbgfadein
 	setalpha 12, 8
 	playsewithpan SE_M_BITE, 63

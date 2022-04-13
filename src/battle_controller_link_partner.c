@@ -1095,15 +1095,8 @@ static void LinkPartnerHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleBufferA[gActiveBattler][12] | (gBattleBufferA[gActiveBattler][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBattler][16];
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
-        {
-            LinkPartnerBufferExecCompleted();
-        }
-        else
-        {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            gBattlerControllerFuncs[gActiveBattler] = LinkPartnerDoMoveAnimation;
-        }
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = LinkPartnerDoMoveAnimation;
     }
 }
 

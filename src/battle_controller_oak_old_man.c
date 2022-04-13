@@ -1896,7 +1896,7 @@ static void OakOldManHandleHealthBarUpdate(void)
 {
     s16 hpVal;
 
-    LoadBattleBarGfx(0);
+    LoadBattleBarGfx();
     hpVal = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
     if (hpVal != INSTANT_HP_BAR_DROP)
     {
@@ -1928,7 +1928,7 @@ static void OakOldManHandleExpUpdate(void)
         s16 expPointsToGive;
         u8 taskId;
 
-        LoadBattleBarGfx(1);
+        LoadBattleBarGfx();
         GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // Unused return value.
         expPointsToGive = T1_READ_16(&gBattleBufferA[gActiveBattler][2]);
         taskId = CreateTask(Task_GiveExpToMon, 10);

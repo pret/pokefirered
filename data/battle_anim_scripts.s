@@ -3138,24 +3138,14 @@ Move_SKETCH:: @ 81CB01B
 	end
 
 Move_NIGHTMARE:: @ 81CB043
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadein
-	jumpifcontest NightmareInContest
 	monbg ANIM_DEF_PARTNER
 	createvisualtask AnimTask_NightmareClone, 2
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 40, 1
 	playsewithpan SE_M_NIGHTMARE, 63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
-	restorebg
-	waitbgfadein
-	end
-
-NightmareInContest:: @ 81CB06F
-	createvisualtask AnimTask_BlendMonInAndOut, 2, 0, RGB_WHITE, 10, 2, 1
-	createvisualtask AnimTask_ShakeMon, 2, 0, 3, 0, 32, 1
-	playsewithpan SE_M_NIGHTMARE, 63
-	waitforvisualfinish
 	restorebg
 	waitbgfadein
 	end

@@ -1259,11 +1259,6 @@ static void LinkPartnerHandleHitAnimation(void)
     }
 }
 
-static void LinkPartnerHandleCmd42(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
 static void LinkPartnerHandlePlaySE(void)
 {
     s8 pan;
@@ -1395,11 +1390,6 @@ static void LinkPartnerHandleHidePartyStatusSummary(void)
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleEndBounceEffect(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
 static void LinkPartnerHandleSpriteInvisibility(void)
 {
     if (IsBattlerSpritePresent(gActiveBattler))
@@ -1422,16 +1412,6 @@ static void LinkPartnerHandleBattleAnimation(void)
         else
             gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
     }
-}
-
-static void LinkPartnerHandleLinkStandbyMsg(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleResetActionMoveSelection(void)
-{
-    LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleCmd55(void)

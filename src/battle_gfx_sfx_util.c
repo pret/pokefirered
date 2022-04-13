@@ -539,11 +539,6 @@ bool8 BattleInitAllSprites(u8 *state, u8 *battlerId)
         break;
     case 4:
         InitBattlerHealthboxCoords(*battlerId);
-        if (gBattlerPositions[*battlerId] <= 1)
-            DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battlerId], FALSE);
-        else
-            DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battlerId], TRUE);
-
         ++*battlerId;
         if (*battlerId == gBattlersCount)
         {

@@ -2196,11 +2196,8 @@ static void SpriteCB_ShinySparkles_2(struct Sprite *sprite)
 
 void AnimTask_LoadBaitGfx(u8 taskId)
 {
-    UNUSED u8 paletteIndex;
-
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_SAFARI_BAIT);
     DestroyAnimVisualTask(taskId);
 }
 

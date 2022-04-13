@@ -197,8 +197,6 @@ const struct SpriteTemplate gSpriteTemplate_83BF514 =
     .callback = SpriteCB_AnimTranslateSpriteLinearAndFlicker,
 };
 
-static const u8 sUnknown_83BF52C[] = _("TASK OVER\nタスクがオ-バ-しました");
-
 static const struct Subsprite sSubsprites_83BF544[] =
 {
     {.x = -16, .y = -16, .shape = SPRITE_SHAPE(8x8),  .size = 3, .tileOffset =   0, .priority = 2},

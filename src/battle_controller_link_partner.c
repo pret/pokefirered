@@ -1192,41 +1192,6 @@ static void LinkPartnerHandlePrintString(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
-static void LinkPartnerHandlePrintSelectionString(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleChooseAction(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleUnknownYesNoBox(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleChooseMove(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleChooseItem(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleChoosePokemon(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleCmd23(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
 static void LinkPartnerHandleHealthBarUpdate(void)
 {
     s16 hpVal;

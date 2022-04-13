@@ -69,7 +69,6 @@ static void LinkPartnerHandleBattleAnimation(void);
 static void LinkPartnerHandleLinkStandbyMsg(void);
 static void LinkPartnerHandleResetActionMoveSelection(void);
 static void LinkPartnerHandleCmd55(void);
-static void LinkPartnerCmdEnd(void);
 
 static void LinkPartnerBufferRunCommand(void);
 static void LinkPartnerBufferExecCompleted(void);
@@ -140,7 +139,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandleLinkStandbyMsg,
     LinkPartnerHandleResetActionMoveSelection,
     LinkPartnerHandleCmd55,
-    LinkPartnerCmdEnd
+    LinkPartnerDummy
 };
 
 static void LinkPartnerDummy(void)
@@ -1580,8 +1579,4 @@ static void LinkPartnerHandleCmd55(void)
     BeginFastPaletteFade(3);
     LinkPartnerBufferExecCompleted();
     gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
-}
-
-static void LinkPartnerCmdEnd(void)
-{
 }

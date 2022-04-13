@@ -8658,7 +8658,7 @@ SandTombSwirlingDirt:: @ 81D2DE3
 	return
 
 Move_SHEER_COLD:: @ 81D2E6E
-	fadetobg 15
+	fadetobg BG_ICE
 	waitbgfadeout
 	playsewithpan SE_M_ICY_WIND, 0
 	waitbgfadein

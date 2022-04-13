@@ -1952,7 +1952,7 @@ void BattleMainCB2(void)
     UpdatePaletteFade();
     RunTasks();
 #if USE_DNS_IN_BATTLE
-	DNSApplyFilters();
+    DNSApplyFilters();
 #endif
     
     if (JOY_HELD(B_BUTTON) && gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)

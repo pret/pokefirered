@@ -16,7 +16,6 @@
 #include "constants/trainers.h"
 
 static void LinkOpponentHandleGetMonData(void);
-static void LinkOpponentHandleGetRawMonData(void);
 static void LinkOpponentHandleSetMonData(void);
 static void LinkOpponentHandleSetRawMonData(void);
 static void LinkOpponentHandleLoadMonSprite(void);
@@ -88,7 +87,7 @@ static void EndDrawPartyStatusSummary(void);
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     LinkOpponentHandleGetMonData,
-    LinkOpponentHandleGetRawMonData,
+    LinkOpponentBufferExecCompleted,
     LinkOpponentHandleSetMonData,
     LinkOpponentHandleSetRawMonData,
     LinkOpponentHandleLoadMonSprite,
@@ -759,11 +758,6 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         break;
     }
     return size;
-}
-
-static void LinkOpponentHandleGetRawMonData(void)
-{
-    LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleSetMonData(void)

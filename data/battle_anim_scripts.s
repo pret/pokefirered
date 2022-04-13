@@ -2293,7 +2293,7 @@ Move_ICY_WIND:: @ 81C9DF0
 	loadspritegfx ANIM_TAG_ICE_SPIKES
 	monbg ANIM_DEF_PARTNER
 	createvisualtask AnimTask_BlendSelected, 10, 11, 4, 0, 4, RGB_BLACK
-	fadetobg 15
+	fadetobg BG_ICE
 	waitbgfadeout
 	playsewithpan SE_M_ICY_WIND, 0
 	waitbgfadein

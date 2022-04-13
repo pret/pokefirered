@@ -27,15 +27,6 @@ static void LinkPartnerHandlePrintString(void);
 static void LinkPartnerHandleHealthBarUpdate(void);
 static void LinkPartnerHandleStatusIconUpdate(void);
 static void LinkPartnerHandleStatusAnimation(void);
-static void LinkPartnerHandleStatusXor(void);
-static void LinkPartnerHandleDataTransfer(void);
-static void LinkPartnerHandleDMA3Transfer(void);
-static void LinkPartnerHandlePlayBGM(void);
-static void LinkPartnerHandleCmd32(void);
-static void LinkPartnerHandleTwoReturnValues(void);
-static void LinkPartnerHandleChosenMonReturnValue(void);
-static void LinkPartnerHandleOneReturnValue(void);
-static void LinkPartnerHandleOneReturnValue_Duplicate(void);
 static void LinkPartnerHandleCmd37(void);
 static void LinkPartnerHandleCmd38(void);
 static void LinkPartnerHandleCmd39(void);
@@ -97,15 +88,15 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentBufferExecCompleted,
     LinkPartnerHandleStatusIconUpdate,
     LinkPartnerHandleStatusAnimation,
-    LinkPartnerHandleStatusXor,
-    LinkPartnerHandleDataTransfer,
-    LinkPartnerHandleDMA3Transfer,
-    LinkPartnerHandlePlayBGM,
-    LinkPartnerHandleCmd32,
-    LinkPartnerHandleTwoReturnValues,
-    LinkPartnerHandleChosenMonReturnValue,
-    LinkPartnerHandleOneReturnValue,
-    LinkPartnerHandleOneReturnValue_Duplicate,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
     LinkPartnerHandleCmd37,
     LinkPartnerHandleCmd38,
     LinkPartnerHandleCmd39,
@@ -1227,51 +1218,6 @@ static void LinkPartnerHandleStatusAnimation(void)
                         gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8) | (gBattleBufferA[gActiveBattler][4] << 16) | (gBattleBufferA[gActiveBattler][5] << 24));
         gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedStatusAnimation;
     }
-}
-
-static void LinkPartnerHandleStatusXor(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleDataTransfer(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleDMA3Transfer(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandlePlayBGM(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleCmd32(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleTwoReturnValues(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleChosenMonReturnValue(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleOneReturnValue(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleOneReturnValue_Duplicate(void)
-{
-    LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleCmd37(void)

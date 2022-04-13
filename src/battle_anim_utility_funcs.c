@@ -115,7 +115,7 @@ void AnimTask_BlendExcept(u8 taskId)
         if (battler != animBattlers[0] 
          && battler != animBattlers[1]
          && IsBattlerSpriteVisible(battler))
-            selectedPalettes |= 0x10000 << GetSpritePalIdxByBattler(battler);
+            selectedPalettes |= 0x10000 << battler;
     }
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }

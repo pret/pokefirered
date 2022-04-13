@@ -8834,7 +8834,7 @@ Move_METEOR_MASH:: @ 81D32D6
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	panse_1B SE_M_BARRIER, 192, 63, 3, 0
-	fadetobg 16
+	fadetobg BG_COSMIC
 	waitbgfadein
 	waitforvisualfinish
 	createsprite gMeteorMashStarSpriteTemplate, ANIM_TARGET, 3, -48, -64, 72, 32, 30

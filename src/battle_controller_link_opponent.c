@@ -34,7 +34,6 @@ static void LinkOpponentHandleCmd38(void);
 static void LinkOpponentHandleCmd39(void);
 static void LinkOpponentHandleCmd40(void);
 static void LinkOpponentHandleHitAnimation(void);
-static void LinkOpponentHandleCmd42(void);
 static void LinkOpponentHandlePlaySE(void);
 static void LinkOpponentHandlePlayFanfare(void);
 static void LinkOpponentHandleFaintingCry(void);
@@ -106,7 +105,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandleCmd39,
     LinkOpponentHandleCmd40,
     LinkOpponentHandleHitAnimation,
-    LinkOpponentHandleCmd42,
+    LinkOpponentBufferExecCompleted,
     LinkOpponentHandlePlaySE,
     LinkOpponentHandlePlayFanfare,
     LinkOpponentHandleFaintingCry,
@@ -1345,11 +1344,6 @@ static void LinkOpponentHandleHitAnimation(void)
         DoHitAnimHealthboxEffect(gActiveBattler);
         gBattlerControllerFuncs[gActiveBattler] = DoHitAnimBlinkSpriteEffect;
     }
-}
-
-static void LinkOpponentHandleCmd42(void)
-{
-    LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandlePlaySE(void)

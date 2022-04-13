@@ -2095,13 +2095,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     return gTrainers[trainerNum].partySize;
 }
 
-// not used
-UNUSED static void unused_80116CC(void)
-{
-    if (REG_VCOUNT < 0xA0 && REG_VCOUNT >= 0x6F)
-        REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(24) | BGCNT_16COLOR | BGCNT_TXT256x512;
-}
-
 void VBlankCB_Battle(void)
 {
     // Change gRngSeed every vblank.

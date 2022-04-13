@@ -22,7 +22,6 @@ static void LinkOpponentHandleLoadMonSprite(void);
 static void LinkOpponentHandleSwitchInAnim(void);
 static void LinkOpponentHandleReturnMonToBall(void);
 static void LinkOpponentHandleDrawTrainerPic(void);
-static void LinkOpponentHandleTrainerSlide(void);
 static void LinkOpponentHandleTrainerSlideBack(void);
 static void LinkOpponentHandleFaintAnimation(void);
 static void LinkOpponentHandlePaletteFade(void);
@@ -94,7 +93,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandleSwitchInAnim,
     LinkOpponentHandleReturnMonToBall,
     LinkOpponentHandleDrawTrainerPic,
-    LinkOpponentHandleTrainerSlide,
+    LinkOpponentBufferExecCompleted,
     LinkOpponentHandleTrainerSlideBack,
     LinkOpponentHandleFaintAnimation,
     LinkOpponentHandlePaletteFade,
@@ -1163,11 +1162,6 @@ static void LinkOpponentHandleDrawTrainerPic(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineParam = trainerPicId;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
-}
-
-static void LinkOpponentHandleTrainerSlide(void)
-{
-    LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleTrainerSlideBack(void)

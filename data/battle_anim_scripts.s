@@ -2113,7 +2113,7 @@ Move_WHIRLWIND:: @ 81C9989
 Move_CONFUSE_RAY:: @ 81C9A31
 	loadspritegfx ANIM_TAG_YELLOW_BALL
 	monbg ANIM_DEF_PARTNER
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadein
 	createvisualtask SoundTask_AdjustPanningVar, 2, -64, 63, 2, 0
 	createvisualtask AnimTask_BlendColorCycleByTag, 2, ANIM_TAG_YELLOW_BALL, 0, 6, 0, 14, 351

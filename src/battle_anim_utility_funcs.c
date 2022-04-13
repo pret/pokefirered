@@ -741,9 +741,9 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 ar
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
-    spriteId = CreateCloneOfSpriteInWindowMode(battler1, gBattlerSpriteIds[battler1], species);
+    spriteId = CreateCloneOfSpriteInWindowMode(gBattlerSpriteIds[battler1], species);
     if (arg4)
-        newSpriteId = CreateCloneOfSpriteInWindowMode(battler2, gBattlerSpriteIds[battler2], species);
+        newSpriteId = CreateCloneOfSpriteInWindowMode(gBattlerSpriteIds[battler2], species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     AnimLoadCompressedBgGfx(animBgData.bgId, gfx, animBgData.tilesOffset);

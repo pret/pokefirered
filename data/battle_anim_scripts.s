@@ -3234,7 +3234,7 @@ Move_FORESIGHT:: @ 81CB18D
 
 Move_DESTINY_BOND:: @ 81CB1CC
 	loadspritegfx ANIM_TAG_WHITE_SHADOW
-	fadetobg 2
+	fadetobg BG_GHOST
 	playsewithpan SE_M_PSYBEAM, 192
 	waitbgfadein
 	createvisualtask AnimTask_DestinyBondWhiteShadow, 5, 0, 48

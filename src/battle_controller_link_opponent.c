@@ -27,7 +27,6 @@ static void LinkOpponentHandleFaintAnimation(void);
 static void LinkOpponentHandleMoveAnimation(void);
 static void LinkOpponentHandlePrintString(void);
 static void LinkOpponentHandleHealthBarUpdate(void);
-static void LinkOpponentHandleExpUpdate(void);
 static void LinkOpponentHandleStatusIconUpdate(void);
 static void LinkOpponentHandleStatusAnimation(void);
 static void LinkOpponentHandleStatusXor(void);
@@ -1293,11 +1292,6 @@ static void LinkOpponentHandleHealthBarUpdate(void)
         SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
     }
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
-}
-
-static void LinkOpponentHandleExpUpdate(void)
-{
-    LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleStatusIconUpdate(void)

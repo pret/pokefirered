@@ -1002,8 +1002,6 @@ Move_MEGA_PUNCH:: @ 81C7CED
 
 SetImpactBackground:: @ 81C7D89
 	delay 2
-	createvisualtask AnimTask_IsContest, 2, 
-	jumpargeq 7, 1, SetImpactContestsBG
 	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
 	jumpargeq 7, 0, SetImpactOpponentBG
 	jumpargeq 7, 1, SetImpactPlayerBG
@@ -1011,15 +1009,11 @@ SetImpactBackgroundRet:: @ 81C7DB1
 	return
 
 SetImpactOpponentBG:: @ 81C7DB2
-	changebg 4
+	changebg BG_IMPACT_OPPONENT
 	goto SetImpactBackgroundRet
 
 SetImpactPlayerBG:: @ 81C7DB9
-	changebg 5
-	goto SetImpactBackgroundRet
-
-SetImpactContestsBG:: @ 81C7DC0
-	changebg 6
+	changebg BG_IMPACT_PLAYER
 	goto SetImpactBackgroundRet
 
 Move_MEGA_KICK:: @ 81C7DC7

@@ -438,11 +438,11 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     u8 battlerSpriteId;
 
     battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler1];
-    spriteId = CreateCloneOfSpriteInWindowMode(sAnimStatsChangeData->battler1, battlerSpriteId, sAnimStatsChangeData->species);
+    spriteId = CreateCloneOfSpriteInWindowMode(battlerSpriteId, sAnimStatsChangeData->species);
     if (sAnimStatsChangeData->data[3])
     {
         battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
-        newSpriteId = CreateCloneOfSpriteInWindowMode(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
+        newSpriteId = CreateCloneOfSpriteInWindowMode(battlerSpriteId, sAnimStatsChangeData->species);
     }
     GetBattleAnimBg1Data(&animBgData);
     if (sAnimStatsChangeData->data[0] == 0)

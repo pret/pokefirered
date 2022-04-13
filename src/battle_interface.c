@@ -2162,11 +2162,6 @@ static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
 }
 
-static void RemoveWindowOnHealthbox(u32 windowId)
-{
-    RemoveWindow(windowId);
-}
-
 static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth)
 {
     CpuCopy32(windowTileData + 256, dest + 256, windowWidth * TILE_SIZE_4BPP);

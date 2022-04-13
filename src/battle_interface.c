@@ -674,11 +674,6 @@ void DestoryHealthboxSprite(u8 healthboxSpriteId)
     DestroySprite(&gSprites[healthboxSpriteId]);
 }
 
-void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerOnly)
-{
-
-}
-
 void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;

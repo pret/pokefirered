@@ -9920,7 +9920,7 @@ IceBallEnd:: @ 81D5004
 	end
 
 IceBallSetIceBg:: @ 81D5005
-	fadetobg 15
+	fadetobg BG_ICE
 	goto IceBallContinue
 
 IceBallUnsetIceBg:: @ 81D500C

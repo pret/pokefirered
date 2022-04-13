@@ -4371,7 +4371,7 @@ Move_WATER_SPOUT:: @ 81CCB48
 Move_SHADOW_PUNCH:: @ 81CCB76
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadein
 	monbg ANIM_ATK_PARTNER
 	setalpha 9, 8

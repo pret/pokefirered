@@ -9655,7 +9655,7 @@ Move_WATER_PULSE:: @ 81D48A6
 Move_PSYCHO_BOOST:: @ 81D499B
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
 	monbg ANIM_ATK_PARTNER
-	fadetobg 3
+	fadetobg BG_PSYCHIC
 	waitbgfadeout
 	createvisualtask AnimTask_FadeScreenToWhite, 5, 
 	waitbgfadein

@@ -98,7 +98,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentBufferExecCompleted,
     LinkOpponentBufferExecCompleted,
     LinkOpponentHandleHealthBarUpdate,
-    LinkOpponentHandleExpUpdate,
+    LinkOpponentBufferExecCompleted,
     LinkOpponentHandleStatusIconUpdate,
     LinkOpponentHandleStatusAnimation,
     LinkOpponentHandleStatusXor,

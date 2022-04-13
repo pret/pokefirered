@@ -1253,7 +1253,7 @@ static void LinkOpponentHandleHealthBarUpdate(void)
 {
     s16 hpVal;
 
-    LoadBattleBarGfx(0);
+    LoadBattleBarGfx();
     hpVal = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
     if (hpVal != INSTANT_HP_BAR_DROP)
     {

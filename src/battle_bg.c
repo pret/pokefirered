@@ -615,15 +615,6 @@ static void LoadBattleTerrainEntryGfx(u16 terrain)
     LZDecompressVram(sBattleTerrainTable[terrain].entryTilemap, (void *)BG_SCREEN_ADDR(28));
 }
 
-UNUSED void GetBattleTerrainGfxPtrs(u8 terrain, const u32 **tilesPtr, const u32 **mapPtr, const u32 **palPtr)
-{
-    if (terrain > BATTLE_TERRAIN_PLAIN)
-        terrain = BATTLE_TERRAIN_PLAIN;
-    *tilesPtr = sBattleTerrainTable[terrain].tileset;
-    *mapPtr = sBattleTerrainTable[terrain].tilemap;
-    *palPtr = sBattleTerrainTable[terrain].palette;
-}
-
 void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(FALSE);

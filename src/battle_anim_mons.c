@@ -1176,8 +1176,6 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
         src.xScale = xScale;
         src.yScale = yScale;
         src.rotation = rotation;
-        if (Dummy_ReturnFalse())
-            src.xScale = -src.xScale;
         i = sprite->oam.matrixNum;
         ObjAffineSet(&src, &matrix, 1, 2);
         gOamMatrices[i].a = matrix.a;

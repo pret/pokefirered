@@ -9176,7 +9176,7 @@ Move_COSMIC_POWER:: @ 81D3B89
 	playsewithpan SE_M_COSMIC_POWER, 0
 	createvisualtask AnimTask_BlendNonAttackerPalettes, 2, 0, 0, 15, 0
 	waitforvisualfinish
-	fadetobg 16
+	fadetobg BG_COSMIC
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 2, 0, 128, 0, -1
 	waitbgfadein

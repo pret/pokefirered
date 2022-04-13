@@ -43,10 +43,7 @@ static void LinkOpponentHandleDrawPartyStatusSummary(void);
 static void LinkOpponentHandleHidePartyStatusSummary(void);
 static void LinkOpponentHandleSpriteInvisibility(void);
 static void LinkOpponentHandleBattleAnimation(void);
-static void LinkOpponentHandleLinkStandbyMsg(void);
-static void LinkOpponentHandleResetActionMoveSelection(void);
 static void LinkOpponentHandleCmd55(void);
-static void LinkOpponentCmdEnd(void);
 
 static void LinkOpponentBufferRunCommand(void);
 static void LinkOpponentBufferExecCompleted(void);
@@ -115,10 +112,10 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentBufferExecCompleted,
     LinkOpponentHandleSpriteInvisibility,
     LinkOpponentHandleBattleAnimation,
-    LinkOpponentHandleLinkStandbyMsg,
-    LinkOpponentHandleResetActionMoveSelection,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
     LinkOpponentHandleCmd55,
-    LinkOpponentCmdEnd
+    LinkOpponentDummy
 };
 
 
@@ -1498,16 +1495,6 @@ static void LinkOpponentHandleBattleAnimation(void)
     }
 }
 
-static void LinkOpponentHandleLinkStandbyMsg(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleResetActionMoveSelection(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleCmd55(void)
 {
     if (gBattleBufferA[gActiveBattler][1] == B_OUTCOME_DREW)
@@ -1518,8 +1505,4 @@ static void LinkOpponentHandleCmd55(void)
     BeginFastPaletteFade(3);
     LinkOpponentBufferExecCompleted();
     gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
-}
-
-static void LinkOpponentCmdEnd(void)
-{
 }

@@ -785,7 +785,7 @@ void AnimTask_MetallicShine(u8 taskId)
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    newSpriteId = CreateCloneOfSpriteInWindowMode(gBattleAnimAttacker, spriteId, species);
+    newSpriteId = CreateCloneOfSpriteInWindowMode(spriteId, species);
     GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gMetalShineTilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gMetalShineGfx, animBg.tilesOffset);

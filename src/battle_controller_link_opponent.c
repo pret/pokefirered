@@ -1191,26 +1191,6 @@ static void LinkOpponentHandleFaintAnimation(void)
     }
 }
 
-static void LinkOpponentHandlePaletteFade(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleSuccessBallThrowAnim(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleBallThrowAnim(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandlePause(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleMoveAnimation(void)
 {
     if (!IsBattleSEPlaying(gActiveBattler))

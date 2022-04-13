@@ -3896,7 +3896,6 @@ extern const u32 gBattleAnimBgTilemap_Aurora[];
 extern const u32 gBattleAnimBgTilemap_Fissure[];
 extern const u32 gBattleAnimBgTilemap_SurfOpponent[];
 extern const u32 gBattleAnimBgTilemap_SurfPlayer[];
-extern const u32 gBattleAnimBgTilemap_SurfContest[];
 
 // dark
 extern const u32 gMetalShineGfx[];

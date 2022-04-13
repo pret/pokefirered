@@ -3166,7 +3166,7 @@ Move_FLAIL:: @ 81CB099
 	end
 
 Move_SPITE:: @ 81CB0D6
-	fadetobg 2
+	fadetobg BG_GHOST
 	playsewithpan SE_M_PSYBEAM, 192
 	waitbgfadein
 	monbg ANIM_DEF_PARTNER

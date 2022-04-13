@@ -25,7 +25,6 @@
 	.include "field_specials.o"
 	.include "evolution_scene.o"
 	.include "save.o"
-	.include "battle_anim_special.o"
 	.include "save_failed_screen.o"
 	.align 4
 	.include "link_rfu_2.o"

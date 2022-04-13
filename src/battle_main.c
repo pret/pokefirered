@@ -1703,9 +1703,8 @@ static void CB2_PreInitMultiBattle(void)
 
 static void CB2_HandleStartMultiBattle(void)
 {
-    u8 playerMultiplayerId;
+    u8 i, playerMultiplayerId, taskId;
     s32 id;
-    u8 taskId;
 
     playerMultiplayerId = GetMultiplayerId();
     gBattleStruct->multiplayerId = playerMultiplayerId;
@@ -1908,18 +1907,11 @@ static void CB2_HandleStartMultiBattle(void)
                     }
                 }
             }
-            TryCorrectShedinjaLanguage(&gPlayerParty[0]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[1]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[2]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[3]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[4]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[5]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[0]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[1]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[2]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[3]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[4]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[5]);
+	    for (i = 0; i < PARTY_SIZE; i++)
+	    {
+		    TryCorrectShedinjaLanguage(&gPlayerParty[i]);
+		    TryCorrectShedinjaLanguage(&gEnemyParty[i]);
+	    }
             ++gBattleCommunication[MULTIUSE_STATE];
         }
         break;

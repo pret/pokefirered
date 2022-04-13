@@ -2028,58 +2028,6 @@ static void CB2_QuitPokedudeBattle(void)
     }
 }
 
-static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite)
-{
-    sprite->data[0] = 0;
-    sprite->callback = SpriteCB_UnusedDebugSprite_Step;
-}
-
-static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
-{
-    switch (sprite->data[0])
-    {
-    case 0:
-        sUnknownDebugSpriteDataBuffer = AllocZeroed(0x1000);
-        ++sprite->data[0];
-        sprite->data[1] = 0;
-        sprite->data[2] = 0x281;
-        sprite->data[3] = 0;
-        sprite->data[4] = 1;
-        // fall through
-    case 1:
-        if (--sprite->data[4] == 0)
-        {
-            s32 i, r2, r0;
-
-            sprite->data[4] = 2;
-            r2 = sprite->data[1] + sprite->data[3] * 32;
-            r0 = sprite->data[2] - sprite->data[3] * 32;
-            for (i = 0; i <= 29; i += 2)
-            {
-                *(&sUnknownDebugSpriteDataBuffer[r2] + i) = 0x3D;
-                *(&sUnknownDebugSpriteDataBuffer[r0] + i) = 0x3D;
-            }
-            if (++sprite->data[3] == 21)
-            {
-                ++sprite->data[0];
-                sprite->data[1] = 32;
-            }
-        }
-        break;
-    case 2:
-        if (--sprite->data[1] == 20)
-        {
-            if (sUnknownDebugSpriteDataBuffer != NULL)
-            {
-                memset(sUnknownDebugSpriteDataBuffer, 0, 0x1000);
-                FREE_AND_SET_NULL(sUnknownDebugSpriteDataBuffer);
-            }
-            SetMainCallback2(CB2_InitBattle);
-        }
-        break;
-    }
-}
-
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
     u32 nameHash = 0;

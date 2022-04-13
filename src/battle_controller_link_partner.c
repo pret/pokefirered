@@ -22,10 +22,6 @@ static void LinkPartnerHandleReturnMonToBall(void);
 static void LinkPartnerHandleDrawTrainerPic(void);
 static void LinkPartnerHandleTrainerSlideBack(void);
 static void LinkPartnerHandleFaintAnimation(void);
-static void LinkPartnerHandlePaletteFade(void);
-static void LinkPartnerHandleSuccessBallThrowAnim(void);
-static void LinkPartnerHandleBallThrowAnim(void);
-static void LinkPartnerHandlePause(void);
 static void LinkPartnerHandleMoveAnimation(void);
 static void LinkPartnerHandlePrintString(void);
 static void LinkPartnerHandlePrintSelectionString(void);
@@ -92,10 +88,10 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentBufferExecCompleted,
     LinkPartnerHandleTrainerSlideBack,
     LinkPartnerHandleFaintAnimation,
-    LinkPartnerHandlePaletteFade,
-    LinkPartnerHandleSuccessBallThrowAnim,
-    LinkPartnerHandleBallThrowAnim,
-    LinkPartnerHandlePause,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
     LinkPartnerHandleMoveAnimation,
     LinkPartnerHandlePrintString,
     LinkPartnerHandlePrintSelectionString,
@@ -1105,26 +1101,6 @@ static void LinkPartnerHandleFaintAnimation(void)
             gBattlerControllerFuncs[gActiveBattler] = FreeMonSpriteAfterFaintAnim;
         }
     }
-}
-
-static void LinkPartnerHandlePaletteFade(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleSuccessBallThrowAnim(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandleBallThrowAnim(void)
-{
-    LinkPartnerBufferExecCompleted();
-}
-
-static void LinkPartnerHandlePause(void)
-{
-    LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleMoveAnimation(void)

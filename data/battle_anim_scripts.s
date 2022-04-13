@@ -2233,7 +2233,7 @@ Move_THIEF:: @ 81C9CCC
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg 1
 	delay 1
-	fadetobg 1
+	fadetobg BG_DARK
 	waitbgfadein
 	setalpha 12, 8
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 6, 4

@@ -14,7 +14,6 @@
 #include "constants/songs.h"
 
 static void LinkPartnerHandleGetMonData(void);
-static void LinkPartnerHandleGetRawMonData(void);
 static void LinkPartnerHandleSetMonData(void);
 static void LinkPartnerHandleSetRawMonData(void);
 static void LinkPartnerHandleLoadMonSprite(void);
@@ -84,7 +83,7 @@ static void EndDrawPartyStatusSummary(void);
 static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     LinkPartnerHandleGetMonData,
-    LinkPartnerHandleGetRawMonData,
+    LinkOpponentBufferExecCompleted,
     LinkPartnerHandleSetMonData,
     LinkPartnerHandleSetRawMonData,
     LinkPartnerHandleLoadMonSprite,
@@ -713,11 +712,6 @@ static u32 CopyLinkPartnerMonData(u8 monId, u8 *dst)
         break;
     }
     return size;
-}
-
-static void LinkPartnerHandleGetRawMonData(void)
-{
-    LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleSetMonData(void)

@@ -1776,19 +1776,6 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-// not used
-static void SetOamPriorityOfAllVisibleBattlers(u8 priority)
-{
-    if (IsBattlerSpriteVisible(gBattleAnimTarget))
-        gSprites[gBattlerSpriteIds[gBattleAnimTarget]].oam.priority = priority;
-    if (IsBattlerSpriteVisible(gBattleAnimAttacker))
-        gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].oam.priority = priority;
-    if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
-        gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimTarget)]].oam.priority = priority;
-    if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
-        gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority = priority;
-}
-
 void ResetSpritePriorityOfAllVisibleBattlers(void)
 {
     s32 i;

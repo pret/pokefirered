@@ -1280,41 +1280,6 @@ static void LinkOpponentHandlePrintString(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
-static void LinkOpponentHandlePrintSelectionString(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChooseAction(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleUnknownYesNoBox(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChooseMove(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChooseItem(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleChoosePokemon(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleCmd23(void)
-{
-    LinkOpponentBufferExecCompleted();
-}
-
 static void LinkOpponentHandleHealthBarUpdate(void)
 {
     s16 hpVal;

@@ -1469,15 +1469,8 @@ static void PokedudeHandleMoveAnimation(void)
     gWeatherMoveAnim = gBattleBufferA[gActiveBattler][12] | (gBattleBufferA[gActiveBattler][13] << 8);
     gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBattler][16];
     gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
-    if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
-    {
-        PokedudeBufferExecCompleted();
-    }
-    else
-    {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-        gBattlerControllerFuncs[gActiveBattler] = PokedudeDoMoveAnimation;
-    }
+    gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
+    gBattlerControllerFuncs[gActiveBattler] = PokedudeDoMoveAnimation;
 }
 
 static void PokedudeDoMoveAnimation(void)

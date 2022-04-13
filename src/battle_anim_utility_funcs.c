@@ -889,12 +889,6 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_IsContest(u8 taskId)
-{
-    gBattleAnimArgs[7] = 0;
-    DestroyAnimVisualTask(taskId);
-}
-
 void AnimTask_SetAnimAttackerAndTargetForEffectTgt(u8 taskId)
 {
     gBattleAnimAttacker = gBattlerTarget;

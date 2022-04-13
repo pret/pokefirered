@@ -83,9 +83,6 @@ static void AnimFollowMeFingerStep2(struct Sprite *);
 static void AnimTauntFingerStep1(struct Sprite *);
 static void AnimTauntFingerStep2(struct Sprite *);
 
-// Unused
-static const u8 sUnknown_83E2964[] = {0x02, 0x04, 0x01, 0x03};
-
 static const union AnimCmd sPowderParticlesAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 5),

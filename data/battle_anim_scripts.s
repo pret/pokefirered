@@ -2530,7 +2530,7 @@ Move_HORN_DRILL:: @ 81CA3A4
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
 	jumpifcontest HornDrillInContest
-	fadetobg 7
+	fadetobg BG_DRILL
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 768, 1, -1
 HornDrillContinue:: @ 81CA3C1

@@ -989,7 +989,7 @@ static void SpriteCB_ThrowBall_ShrinkMon(struct Sprite *sprite)
 {
     u8 spriteId;
     u8 taskId;
-    u16 shrinkDistance;
+    u16 shrinkDistance, shrinkDelta;
 	
     spriteId = gBattlerSpriteIds[gBattleAnimTarget];
     taskId = sprite->data[5];
@@ -1002,8 +1002,8 @@ static void SpriteCB_ThrowBall_ShrinkMon(struct Sprite *sprite)
         PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[10] = 256;
         shrinkDistance = (gSprites[spriteId].y + gSprites[spriteId].y2) - (sprite->y + sprite->y2);
-        gMonShrinkDelta = (shrinkDistance * 256) / 28;
-        gTasks[taskId].data[2] = gMonShrinkDelta;
+        shrinkDelta = (shrinkDistance * 256) / 28;
+        gTasks[taskId].data[2] = shrinkDelta;
         gTasks[taskId].data[0]++;
         break;
     case 1:

@@ -24,13 +24,6 @@ static void LinkPartnerHandleTrainerSlideBack(void);
 static void LinkPartnerHandleFaintAnimation(void);
 static void LinkPartnerHandleMoveAnimation(void);
 static void LinkPartnerHandlePrintString(void);
-static void LinkPartnerHandlePrintSelectionString(void);
-static void LinkPartnerHandleChooseAction(void);
-static void LinkPartnerHandleUnknownYesNoBox(void);
-static void LinkPartnerHandleChooseMove(void);
-static void LinkPartnerHandleChooseItem(void);
-static void LinkPartnerHandleChoosePokemon(void);
-static void LinkPartnerHandleCmd23(void);
 static void LinkPartnerHandleHealthBarUpdate(void);
 static void LinkPartnerHandleExpUpdate(void);
 static void LinkPartnerHandleStatusIconUpdate(void);
@@ -94,13 +87,13 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentBufferExecCompleted,
     LinkPartnerHandleMoveAnimation,
     LinkPartnerHandlePrintString,
-    LinkPartnerHandlePrintSelectionString,
-    LinkPartnerHandleChooseAction,
-    LinkPartnerHandleUnknownYesNoBox,
-    LinkPartnerHandleChooseMove,
-    LinkPartnerHandleChooseItem,
-    LinkPartnerHandleChoosePokemon,
-    LinkPartnerHandleCmd23,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
+    LinkOpponentBufferExecCompleted,
     LinkPartnerHandleHealthBarUpdate,
     LinkPartnerHandleExpUpdate,
     LinkPartnerHandleStatusIconUpdate,

@@ -3113,7 +3113,7 @@ static void AnimTask_RolePlaySilhouetteStep2(u8 taskId)
     if (++gTasks[taskId].data[12] == 9)
     {
         TryResetSpriteAffineState(&gSprites[spriteId]);
-        DestroySpriteAndFreeResources_(&gSprites[spriteId]);
+        DestroySpriteAndFreeResources(&gSprites[spriteId]);
         gTasks[taskId].func = DestroyAnimVisualTaskAndDisableBlend;
     }
 }
@@ -4892,7 +4892,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     case 3:
         spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         spriteId2 = gTasks[taskId].data[15];
-        DestroySpriteAndFreeResources_(&gSprites[spriteId2]);
+        DestroySpriteAndFreeResources(&gSprites[spriteId2]);
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             gSprites[spriteId].x2 = -gSprites[spriteId].x - 32;
         else

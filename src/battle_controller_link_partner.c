@@ -25,7 +25,6 @@ static void LinkPartnerHandleFaintAnimation(void);
 static void LinkPartnerHandleMoveAnimation(void);
 static void LinkPartnerHandlePrintString(void);
 static void LinkPartnerHandleHealthBarUpdate(void);
-static void LinkPartnerHandleExpUpdate(void);
 static void LinkPartnerHandleStatusIconUpdate(void);
 static void LinkPartnerHandleStatusAnimation(void);
 static void LinkPartnerHandleStatusXor(void);
@@ -95,7 +94,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentBufferExecCompleted,
     LinkOpponentBufferExecCompleted,
     LinkPartnerHandleHealthBarUpdate,
-    LinkPartnerHandleExpUpdate,
+    LinkOpponentBufferExecCompleted,
     LinkPartnerHandleStatusIconUpdate,
     LinkPartnerHandleStatusAnimation,
     LinkPartnerHandleStatusXor,
@@ -1205,11 +1204,6 @@ static void LinkPartnerHandleHealthBarUpdate(void)
         SetBattleBarStruct(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], maxHP, 0, hpVal);
     }
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
-}
-
-static void LinkPartnerHandleExpUpdate(void)
-{
-    LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleStatusIconUpdate(void)

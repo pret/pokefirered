@@ -134,7 +134,6 @@ EWRAM_DATA u32 gUnknown_2022B54 = 0;
 EWRAM_DATA struct MultiBattlePokemonTx gMultiPartnerParty[3] = {0};
 EWRAM_DATA u8 *gBattleAnimMons_BgTilesBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimMons_BgTilemapBuffer = NULL;
-static EWRAM_DATA u16 *sUnknownDebugSpriteDataBuffer = NULL;
 EWRAM_DATA u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200] = {0};
 EWRAM_DATA u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200] = {0};
 EWRAM_DATA u8 gActiveBattler = 0;

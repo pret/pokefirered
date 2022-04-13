@@ -41,7 +41,6 @@ static void LinkOpponentHandleIntroSlide(void);
 static void LinkOpponentHandleIntroTrainerBallThrow(void);
 static void LinkOpponentHandleDrawPartyStatusSummary(void);
 static void LinkOpponentHandleHidePartyStatusSummary(void);
-static void LinkOpponentHandleEndBounceEffect(void);
 static void LinkOpponentHandleSpriteInvisibility(void);
 static void LinkOpponentHandleBattleAnimation(void);
 static void LinkOpponentHandleLinkStandbyMsg(void);
@@ -113,7 +112,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandleIntroTrainerBallThrow,
     LinkOpponentHandleDrawPartyStatusSummary,
     LinkOpponentHandleHidePartyStatusSummary,
-    LinkOpponentHandleEndBounceEffect,
+    LinkOpponentBufferExecCompleted,
     LinkOpponentHandleSpriteInvisibility,
     LinkOpponentHandleBattleAnimation,
     LinkOpponentHandleLinkStandbyMsg,
@@ -1472,11 +1471,6 @@ static void LinkOpponentHandleHidePartyStatusSummary(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    LinkOpponentBufferExecCompleted();
-}
-
-static void LinkOpponentHandleEndBounceEffect(void)
-{
     LinkOpponentBufferExecCompleted();
 }
 

@@ -884,11 +884,6 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-u8 GetBattleBgPaletteNum(void)
-{
-    return 2;
-}
-
 void ToggleBg3Mode(bool8 arg0)
 {
     if (!arg0)

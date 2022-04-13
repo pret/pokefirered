@@ -3151,13 +3151,6 @@ static void BattleIntroRecordMonsToDex(void)
     }
 }
 
-// not used
-static void Unused_AutoProgressToIntro(void)
-{
-    if (!gBattleControllerExecFlags)
-        gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
-}
-
 void BattleIntroPrintPlayerSendsOut(void)
 {
     if (!gBattleControllerExecFlags)

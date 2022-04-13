@@ -89,7 +89,7 @@ static void ScriptCmd_waitsound(void);
 static void ScriptCmd_jumpargeq(void);
 static void ScriptCmd_monbg_22(void);
 static void ScriptCmd_clearmonbg_23(void);
-static void ScriptCmd_jumpifcontest(void);
+static void ScriptCmd_nop(void);
 static void ScriptCmd_fadetobgfromset(void);
 static void ScriptCmd_panse_26(void);
 static void ScriptCmd_panse_27(void);
@@ -1763,7 +1763,7 @@ static void (*const sScriptCmdTable[])(void) =
     ScriptCmd_jumpargeq,
     ScriptCmd_monbg_22,
     ScriptCmd_clearmonbg_23,
-    ScriptCmd_jumpifcontest,
+    ScriptCmd_nop,
     ScriptCmd_fadetobgfromset,
     ScriptCmd_panse_26,
     ScriptCmd_panse_27,
@@ -3179,9 +3179,9 @@ static void ScriptCmd_jumpargeq(void)
         sBattleAnimScriptPtr += 7;
 }
 
-static void ScriptCmd_jumpifcontest(void)
+static void ScriptCmd_nop(void)
 {
-    sBattleAnimScriptPtr += 5;
+    sBattleAnimScriptPtr += 1;
 }
 
 static void ScriptCmd_monbgprio_28(void)

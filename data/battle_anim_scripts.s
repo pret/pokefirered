@@ -5484,7 +5484,7 @@ Move_WITHDRAW:: @ 81CE432
 
 Move_AURORA_BEAM:: @ 81CE43F
 	loadspritegfx ANIM_TAG_RAINBOW_RINGS
-	fadetobg 20
+	fadetobg BG_AURORA
 	waitbgfadein
 	playsewithpan SE_M_BUBBLE_BEAM, 192
 	setarg 7, 0

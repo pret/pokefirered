@@ -2006,7 +2006,7 @@ void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x
     *y = (battlerY + partnerY) / 2;
 }
 
-u8 CreateCloneOfSpriteInWindowMode(s32 battlerId, u8 spriteId, s32 species)
+u8 CreateCloneOfSpriteInWindowMode(u8 spriteId, s32 species)
 {
     u8 newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
 

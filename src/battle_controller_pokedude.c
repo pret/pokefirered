@@ -1460,8 +1460,6 @@ static void PokedudeHandlePause(void)
 
 static void PokedudeHandleMoveAnimation(void)
 {
-    u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
-
     gAnimMoveTurn = gBattleBufferA[gActiveBattler][3];
     gAnimMovePower = gBattleBufferA[gActiveBattler][4] | (gBattleBufferA[gActiveBattler][5] << 8);
     gAnimMoveDmg = gBattleBufferA[gActiveBattler][6] | (gBattleBufferA[gActiveBattler][7] << 8) | (gBattleBufferA[gActiveBattler][8] << 16) | (gBattleBufferA[gActiveBattler][9] << 24);

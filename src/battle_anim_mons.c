@@ -1306,12 +1306,6 @@ u32 SelectBattlerSpritePalettes(bool8 playerLeft, bool8 playerRight, bool8 foeLe
     return var;
 }
 
-// not used
-static u8 GetSpritePalIdxByPosition(u8 position)
-{
-    return GetBattlerAtPosition(position);
-}
-
 void AnimSpriteOnMonPos(struct Sprite *sprite)
 {
     bool8 var;

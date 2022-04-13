@@ -95,6 +95,7 @@ static void SetOakOldManMonData(u8 monId);
 static void OakOldManDoMoveAnimation(void);
 static void HandleInputChooseAction(void);
 static void Task_StartSendOutAnim(u8 taskId);
+static void OakOldManDummy(void);
 
 static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {

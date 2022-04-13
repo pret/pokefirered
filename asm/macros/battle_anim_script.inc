@@ -203,9 +203,8 @@
 	.byte \battler
 	.endm
 
-	.macro jumpifcontest ptr:req
+	.macro nop
 	.byte 0x24
-	.4byte \ptr
 	.endm
 
 	.macro fadetobgfromset param0:req, param1:req, param2:req

@@ -7447,7 +7447,7 @@ Move_EGG_BOMB:: @ 81D1203
 
 Move_SHADOW_BALL:: @ 81D129D
 	loadspritegfx ANIM_TAG_SHADOW_BALL
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadein
 	delay 15
 	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_MIST, -64, 63, 5, 5, 0, 5

@@ -44,11 +44,6 @@
 /*Add pixels by X*/								\
 + ((((x) - ((x / 8) * 8)) / 2)))
 
-// RAM
-UNUSED u32 gMonShrinkDuration;
-UNUSED u16 gMonShrinkDelta;
-UNUSED u16 gMonShrinkDistance;
-
 EWRAM_DATA static u8 gAbilityPopUpIds[MAX_BATTLERS_COUNT][2];
 EWRAM_DATA static u8 gActiveAbilityPopUps;
 
@@ -994,7 +989,8 @@ static void SpriteCB_ThrowBall_ShrinkMon(struct Sprite *sprite)
 {
     u8 spriteId;
     u8 taskId;
-
+    u16 shrinkDistance;
+	
     spriteId = gBattlerSpriteIds[gBattleAnimTarget];
     taskId = sprite->data[5];
     if (++gTasks[taskId].data[1] == 11)
@@ -1005,9 +1001,8 @@ static void SpriteCB_ThrowBall_ShrinkMon(struct Sprite *sprite)
     case 0:
         PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[10] = 256;
-        gMonShrinkDuration = 28;
-        gMonShrinkDistance = (gSprites[spriteId].y + gSprites[spriteId].y2) - (sprite->y + sprite->y2);
-        gMonShrinkDelta = (gMonShrinkDistance * 256) / gMonShrinkDuration;
+        shrinkDistance = (gSprites[spriteId].y + gSprites[spriteId].y2) - (sprite->y + sprite->y2);
+        gMonShrinkDelta = (shrinkDistance * 256) / 28;
         gTasks[taskId].data[2] = gMonShrinkDelta;
         gTasks[taskId].data[0]++;
         break;

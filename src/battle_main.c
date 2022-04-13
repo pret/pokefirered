@@ -305,33 +305,6 @@ const struct OamData gOamData_BattlerPlayer =
     .affineParam = 0,
 };
 
-// not used
-static const union AnimCmd gUnknown_824F020[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_JUMP(0),
-};
-
-// not used
-static const union AnimCmd *const gUnknown_824F028[] =
-{
-    gUnknown_824F020,
-};
-
-// not used
-static const union AffineAnimCmd gUnknown_824F02C[] =
-{
-    AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 4),
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 0x3C),
-    AFFINEANIMCMD_JUMP(1),
-};
-
-// not used
-static const union AffineAnimCmd *const gUnknown_824F044[] =
-{
-    gUnknown_824F02C,
-};
-
 static const s8 sPlayerThrowXTranslation[] = { -32, -16, -16, -32, -32, 0, 0, 0 };
 
 // format: attacking type, defending type, damage multiplier

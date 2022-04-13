@@ -4848,7 +4848,7 @@ FutureSight:: @ 81CD4DD
 
 Move_THUNDER:: @ 81CD570
 	loadspritegfx ANIM_TAG_LIGHTNING
-	fadetobg 11
+	fadetobg BG_THUNDER
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 5, -256, 0, 1, -1
 	waitbgfadein

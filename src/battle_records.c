@@ -28,7 +28,6 @@ static void Task_DestroyAndReturnToField(u8 taskId);
 static void ClearWindowCommitAndRemove(u8 windowId);
 static void ResetGpu(void);
 static void StopAllRunningTasks(void);
-static void EnableDisplay(void);
 static void ResetBGPos(void);
 static void PrintBattleRecords(void);
 static void CommitWindow(u8 windowId);
@@ -131,7 +130,7 @@ static void MainCB2_SetUp(void)
         gMain.state++;
         break;
     case 7:
-        EnableDisplay();
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON);
         SetVBlankCallback(VBlankCB);
         if (gSpecialVar_0x8004)
             PrintTrainerTowerRecords();
@@ -252,11 +251,6 @@ static void StopAllRunningTasks(void)
     ResetAllPicSprites();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-}
-
-static void EnableDisplay(void)
-{
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON);
 }
 
 static void ResetBGPos(void)

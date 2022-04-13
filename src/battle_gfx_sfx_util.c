@@ -795,15 +795,6 @@ void BattleStopLowHpSound(void)
     m4aSongNumStop(SE_LOW_HEALTH);
 }
 
-// not used
-static u8 GetMonHPBarLevel(struct Pokemon *mon)
-{
-    u16 hp = GetMonData(mon, MON_DATA_HP);
-    u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-
-    return GetHPBarLevel(hp, maxHP);
-}
-
 void HandleBattleLowHpMusicChange(void)
 {
     if (gMain.inBattle)

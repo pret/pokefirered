@@ -435,10 +435,6 @@ void DecompressTrainerBackPalette(u16 index, u8 palette)
     LoadCompressedPalette(gTrainerBackPicPaletteTable[index].data, (palette + 16) * 16, 0x20);
 }
 
-void BattleGfxSfxDummy3(u8 a1)
-{
-}
-
 void FreeTrainerFrontPicPaletteAndTile(u16 frontPicId)
 {
     FreeSpritePaletteByTag(gTrainerFrontPicPaletteTable[frontPicId].tag);

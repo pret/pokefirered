@@ -1321,7 +1321,7 @@ static void SetPsychicBackground_Step(u8 taskId)
 {
     int i;
     u16 lastColor;
-    u8 paletteIndex = GetBattleBgPaletteNum();
+    u8 paletteIndex = 2; // battle bg palette num
 
     if (++gTasks[taskId].data[5] == 4)
     {
@@ -1347,7 +1347,7 @@ static void FadeScreenToWhite_Step(u8 taskId)
 {
     int i;
     u16 lastColor;
-    u8 paletteIndex = GetBattleBgPaletteNum();
+    u8 paletteIndex = 2; // battle bg palette num
 
     if (++gTasks[taskId].data[5] == 4)
     {

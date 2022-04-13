@@ -9548,7 +9548,7 @@ Move_SEISMIC_TOSS:: @ 81D472C
 	waitforvisualfinish
 	createvisualtask AnimTask_GetSeismicTossDamageLevel, 3, 
 	delay 1
-	fadetobg 17
+	fadetobg BG_IN_AIR
 	waitbgfadeout
 	createvisualtask AnimTask_MoveSeismicTossBg, 3
 	playsewithpan SE_M_SKY_UPPERCUT, 0

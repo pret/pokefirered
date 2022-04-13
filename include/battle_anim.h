@@ -597,7 +597,6 @@ void AnimTask_FreeBackupPalBuffer(u8 taskId);
 void AnimTask_CopyPalUnfadedToBackup(u8 taskId);
 void AnimTask_CopyPalUnfadedFromBackup(u8 taskId);
 void AnimTask_CopyPalFadedToUnfaded(u8 taskId);
-void AnimTask_IsContest(u8 taskId);
 void AnimTask_SetAnimAttackerAndTargetForEffectTgt(u8 taskId);
 void AnimTask_IsTargetSameSide(u8 taskId);
 void AnimTask_SetAnimTargetToBattlerTarget(u8 taskId);

@@ -2529,11 +2529,9 @@ FuryAttackLeft:: @ 81CA37E
 Move_HORN_DRILL:: @ 81CA3A4
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
-	jumpifcontest HornDrillInContest
 	fadetobg BG_DRILL
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 768, 1, -1
-HornDrillContinue:: @ 81CA3C1
 	waitbgfadein
 	setalpha 12, 8
 	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
@@ -2586,12 +2584,6 @@ HornDrillContinue:: @ 81CA3C1
 	setarg 7, 65535
 	waitbgfadein
 	end
-
-HornDrillInContest:: @ 81CA50A
-	fadetobg 8
-	waitbgfadeout
-	createvisualtask AnimTask_StartSlidingBg, 5, 2304, 768, 0, -1
-	goto HornDrillContinue
 
 Move_THRASH:: @ 81CA521
 	loadspritegfx ANIM_TAG_IMPACT

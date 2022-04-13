@@ -3923,7 +3923,7 @@ Move_GRUDGE:: @ 81CC04A
 	loadspritegfx ANIM_TAG_PURPLE_FLAME
 	monbg ANIM_ATTACKER
 	monbgprio_29
-	fadetobg 2
+	fadetobg BG_GHOST
 	playsewithpan SE_M_PSYBEAM, 192
 	waitbgfadein
 	createvisualtask AnimTask_GrudgeFlames, 3

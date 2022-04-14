@@ -9366,9 +9366,8 @@ static bool8 AnticipationTypeCalc(u8 battler)
 
 void TryDoAnticipationShudder(void)
 {
-	if (AnticipationTypeCalc(gBattlerTarget))
-		gSetWordLoc = sAnticipationString;
-	else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 && AnticipationTypeCalc(gBattlerTarget ^ BIT_FLANK))
+	if (AnticipationTypeCalc(gBattlerTarget) || (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[gBattlerTarget ^ BIT_FLANK].hp != 0 
+            && AnticipationTypeCalc(gBattlerTarget ^ BIT_FLANK)))
 		gSetWordLoc = sAnticipationString;
 	else
 		gBattlescriptCurrInstr = BattleScript_AnticipationReturn;
@@ -9472,6 +9471,7 @@ void GetStrongestMoveForewarn(void)
 			maxpower = power;
 			strongesttarget = gBattlerTarget;
 		}
+		
 		if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleMons[bank2].hp != 0)
 		{
 			move = gBattleMons[bank2].moves[i];

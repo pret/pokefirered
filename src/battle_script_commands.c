@@ -278,7 +278,7 @@ static void atkC9_jumpifattackandspecialattackcannotfall(void);
 static void atkCA_setforcedtarget(void);
 static void atkCB_setcharge(void);
 static void atkCC_callterrainattack(void);
-static void atkCD_cureifburnedparalysedorpoisoned(void);
+static void atkCD_nop(void);
 static void atkCE_settorment(void);
 static void atkCF_jumpifnodamage(void);
 static void atkD0_settaunt(void);
@@ -535,7 +535,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkCA_setforcedtarget,
     atkCB_setcharge,
     atkCC_callterrainattack,
-    atkCD_cureifburnedparalysedorpoisoned,
+    atkCD_nop,
     atkCE_settorment,
     atkCF_jumpifnodamage,
     atkD0_settaunt,
@@ -8206,18 +8206,9 @@ static void atkCC_callterrainattack(void) // nature power
     ++gBattlescriptCurrInstr;
 }
 
-static void atkCD_cureifburnedparalysedorpoisoned(void) // refresh
+static void atkCD_nop(void) // old refresh command
 {
-    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
-    {
-        gBattleMons[gBattlerAttacker].status1 = 0;
-        gBattlescriptCurrInstr += 5;
-        gActiveBattler = gBattlerAttacker;
-        BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-        MarkBattlerForControllerExec(gActiveBattler);
-    }
-    else
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    ++gBattlescriptCurrInstr;
 }
 
 static void atkCE_settorment(void)

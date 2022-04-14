@@ -913,9 +913,6 @@ const struct BerryCrushStats gBerryCrush_BerryData[] = {
     [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = {150, 200}
 };
 
-// Leftover from R/S
-const struct BerryTree gBlankBerryTree = {};
-
 #define ENIGMA_BERRY_STRUCT ({ \
     const struct Berry2 * berries = (const struct Berry2 *)gBerries; \
     berries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX]; \

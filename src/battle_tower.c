@@ -41,14 +41,6 @@ static u16 GetCurrentBattleTowerWinStreak(u8 levelType);
 static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer * eReaderTrainer);
 static void PrintEReaderTrainerFarewellMessage(void);
 
-const u8 unref_83FFAAC[] = {
-    0x05, 0x04, 0x01, 0x10, 0x04, 0x02, 0x05, 0x06,
-    0x03, 0x10, 0x06, 0x04, 0x00, 0x01, 0x02, 0x03,
-    0x00, 0x02, 0x03
-};
-
-const u8 unref_83FFABF[] = _("100");
-
 static const struct BattleTowerTrainer sBattleTowerTrainers[] =
 {
 

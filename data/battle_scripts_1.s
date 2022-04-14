@@ -2540,7 +2540,10 @@ BattleScript_EffectRefresh::
 	attackcanceler
 	attackstring
 	ppreduce
-	cureifburnedparalysedorpoisoned BattleScript_ButItFailed
+	jumpifstatus BS_ATTACKER, STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_RefreshHeal
+	goto BattleScript_ButItFailed
+BattleScript_RefreshHeal::
+	cureprimarystatus BS_ATTACKER, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNSTATUSNORMAL

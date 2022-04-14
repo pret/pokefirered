@@ -3244,7 +3244,7 @@ static void atk23_getexp(void)
 		    gBattleScripting.atk23_state = 5;
 		    gBattleMoveDamage = 0;
 	    }
-  #endif    
+#endif    
             else
             {
                 // music change in wild battle after fainting a poke

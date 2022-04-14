@@ -249,7 +249,6 @@ struct BerryCrushGame_Results
 {
     u32 powder;
     u16 time;
-    u16 targetPressesPerSec; // Never read
     u16 silkiness;
     u16 totalAPresses;
     u16 stats[2][MAX_RFU_PLAYERS];
@@ -2024,7 +2023,6 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
     case 3:
         memset(&game->results, 0, sizeof(struct BerryCrushGame_Results));
         game->results.time = game->timer;
-        game->results.targetPressesPerSec = game->targetAPresses / (game->timer / 60);
 
         // Calculate silkiness
         // Silkiness is the percentage of times big sparkles were produced when possible,

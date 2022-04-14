@@ -61,6 +61,8 @@ static void CB2_EndMarowakBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 static void CB2_EndTrainerBattle(void);
 
+static const u8 *ReturnEmptyStringIfNull(const u8 *string);
+
 static EWRAM_DATA u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
 static EWRAM_DATA u16 sTrainerObjectEventLocalId = 0;

@@ -60,7 +60,6 @@ static void CB2_EndScriptedWildBattle(void);
 static void CB2_EndMarowakBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 static void CB2_EndTrainerBattle(void);
-static const u8 *GetTrainerCantBattleSpeech(void);
 
 static EWRAM_DATA u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
@@ -940,7 +939,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
 
 void ShowTrainerCantBattleSpeech(void)
 {
-    ShowFieldMessage(GetTrainerCantBattleSpeech());
+    ShowFieldMessage(ReturnEmptyStringIfNull(sTrainerCannotBattleSpeech));
 }
 
 void PlayTrainerEncounterMusic(void)
@@ -996,9 +995,4 @@ const u8 *GetTrainerWonSpeech(void)
 {
     StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sTrainerVictorySpeech));
     return gStringVar4;
-}
-
-static const u8 *GetTrainerCantBattleSpeech(void)
-{
-    return ReturnEmptyStringIfNull(sTrainerCannotBattleSpeech);
 }

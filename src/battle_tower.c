@@ -326,7 +326,7 @@ void ChooseNextBattleTowerTrainer(void)
     levelType = gSaveBlock2Ptr->battleTower.battleTowerLevelType;
     if (ChooseSpecialBattleTowerTrainer())
     {
-        SetBattleTowerTrainerGfxId(gSaveBlock2Ptr->battleTower.battleTowerTrainerId);
+        VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_YOUNGSTER);
         gSaveBlock2Ptr->battleTower.battledTrainerIds[gSaveBlock2Ptr->battleTower.curChallengeBattleNum[levelType] - 1] = gSaveBlock2Ptr->battleTower.battleTowerTrainerId;
         return;
     }
@@ -373,7 +373,7 @@ void ChooseNextBattleTowerTrainer(void)
         gSaveBlock2Ptr->battleTower.battleTowerTrainerId = trainerId;
     }
 
-    SetBattleTowerTrainerGfxId(gSaveBlock2Ptr->battleTower.battleTowerTrainerId);
+    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_YOUNGSTER);
     // Don't bother saving this trainer, since it's the last one in the challenge.
     if (gSaveBlock2Ptr->battleTower.curChallengeBattleNum[levelType] < 7)
         gSaveBlock2Ptr->battleTower.battledTrainerIds[gSaveBlock2Ptr->battleTower.curChallengeBattleNum[levelType] - 1] = gSaveBlock2Ptr->battleTower.battleTowerTrainerId;

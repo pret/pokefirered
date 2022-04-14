@@ -629,21 +629,6 @@ u8 BattleSetup_GetBattleTowerBattleTransition(void)
         return B_TRANSITION_BIG_POKEBALL;
 }
 
-static u32 TrainerBattleLoadArg32(const u8 *ptr)
-{
-    return T1_READ_32(ptr);
-}
-
-static u16 TrainerBattleLoadArg16(const u8 *ptr)
-{
-    return T1_READ_16(ptr);
-}
-
-static u8 TrainerBattleLoadArg8(const u8 *ptr)
-{
-    return T1_READ_8(ptr);
-}
-
 static u16 GetTrainerAFlag(void)
 {
     return TRAINER_FLAGS_START + gTrainerBattleOpponent_A;
@@ -708,15 +693,15 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
         switch (specs->ptrType)
         {
         case TRAINER_PARAM_LOAD_VAL_8BIT:
-            SetU8(specs->varPtr, TrainerBattleLoadArg8(data));
+            SetU8(specs->varPtr, T1_READ_8(data));
             data += 1;
             break;
         case TRAINER_PARAM_LOAD_VAL_16BIT:
-            SetU16(specs->varPtr, TrainerBattleLoadArg16(data));
+            SetU16(specs->varPtr, T1_READ_16(data));
             data += 2;
             break;
         case TRAINER_PARAM_LOAD_VAL_32BIT:
-            SetU32(specs->varPtr, TrainerBattleLoadArg32(data));
+            SetU32(specs->varPtr, T1_READ_32(data));
             data += 4;
             break;
         case TRAINER_PARAM_CLEAR_VAL_8BIT:
@@ -748,7 +733,7 @@ static void SetMapVarsToTrainer(void)
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
     InitTrainerBattleVariables();
-    sTrainerBattleMode = TrainerBattleLoadArg8(data);
+    sTrainerBattleMode = T1_READ_8(data);
     switch (sTrainerBattleMode)
     {
     case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
@@ -801,7 +786,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerSc
 
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
-    u32 flag = TrainerBattleLoadArg16(data + 2);
+    u32 flag = T1_READ_16(data + 2);
 
     return FlagGet(TRAINER_FLAGS_START + flag);
 }

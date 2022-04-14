@@ -1044,9 +1044,8 @@
 	.byte 0xcc
 	.endm
 
-	.macro cureifburnedparalysedorpoisoned param0:req
+	.macro nop
 	.byte 0xcd
-	.4byte \param0
 	.endm
 
 	.macro settorment param0:req

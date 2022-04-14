@@ -585,12 +585,6 @@ void BT_StartOnField(u8 transitionId)
     BT_LaunchTask(transitionId);
 }
 
-// not used
-static void BT_StartWithoutAlloc(u8 transitionId)
-{
-    BT_LaunchTask(transitionId);
-}
-
 #define tState          data[0]
 #define tTransitionId   data[1]
 #define tTransitionDone data[15]

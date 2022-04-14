@@ -60,7 +60,6 @@ static void CB2_EndScriptedWildBattle(void);
 static void CB2_EndMarowakBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 static void CB2_EndTrainerBattle(void);
-static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
 
 static EWRAM_DATA u16 sTrainerBattleMode = 0;
@@ -920,7 +919,7 @@ void StartRematchBattle(void)
 
 void ShowTrainerIntroSpeech(void)
 {
-    ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
+    ShowFieldMessage(ReturnEmptyStringIfNull(sTrainerAIntroSpeech));
 }
 
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
@@ -983,11 +982,6 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
         return gString_Dummy;
     else
         return string;
-}
-
-static const u8 *GetIntroSpeechOfApproachingTrainer(void)
-{
-    return ReturnEmptyStringIfNull(sTrainerAIntroSpeech);
 }
 
 const u8 *GetTrainerALoseText(void)

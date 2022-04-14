@@ -381,25 +381,6 @@ void StartRegiBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-// not used
-static void sub_807FAF8(void)
-{
-    LoadPlayerParty();
-    CB2_EndWildBattle();
-}
-
-// not used
-static void sub_807FB08(void)
-{
-    ScriptContext2_Enable();
-    FreezeObjectEvents();
-    StopPlayerAvatar();
-    gMain.savedCallback = sub_807FAF8;
-    SavePlayerParty();
-    InitPokedudePartyAndOpponent();
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
-}
-
 static void CB2_EndWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);

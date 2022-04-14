@@ -30,7 +30,6 @@ static EWRAM_DATA u16 sSpecialVar_0x8004_Copy = 0;
 #define ewram160FB (*((u8 *)&gBattleStruct->field_DA))
 
 static void ResetBattleTowerStreak(u8 levelType);
-static void SetBattleTowerTrainerGfxId(u8 trainerClass);
 static void CheckMonBattleTowerBanlist(u16 species, u16 heldItem, u16 hp, u8 battleTowerLevelType, u8 monLevel, u16 *validPartySpecies, u16 *validPartyHeldItems, u8 *numValid);
 static void SaveCurrentWinStreak(void);
 static void ValidateBattleTowerRecordChecksums(void);
@@ -380,14 +379,9 @@ void ChooseNextBattleTowerTrainer(void)
         gSaveBlock2Ptr->battleTower.battledTrainerIds[gSaveBlock2Ptr->battleTower.curChallengeBattleNum[levelType] - 1] = gSaveBlock2Ptr->battleTower.battleTowerTrainerId;
 }
 
-static void SetBattleTowerTrainerGfxId(u8 trainerClass)
-{
-    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_YOUNGSTER);
-}
-
 void SetEReaderTrainerGfxId(void)
 {
-    SetBattleTowerTrainerGfxId(BATTLE_TOWER_EREADER_TRAINER_ID);
+    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_YOUNGSTER);
 }
 
 // Unreferenced; formerly used by Record Mixing in R/S

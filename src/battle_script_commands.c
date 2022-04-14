@@ -8443,7 +8443,7 @@ static void atkDA_tryswapabilities(void) // skill swap
         ResetVarsForAbilityChange(gBattlerAttacker);
 	ResetVarsForAbilityChange(gBattlerTarget);
 	    
-            gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr += 5;
     }
 }
 

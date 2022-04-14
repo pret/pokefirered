@@ -880,9 +880,6 @@ static const u8 sBallCatchBonuses[] =
     20, 15, 10, 15 // Ultra, Great, Poke, Safari
 };
 
-// not used
-static const u32 gUnknown_8250898 = 0xFF7EAE60;
-
 const u16 gSheerForceBoostedMoves[] =
 {
 	MOVE_ANCIENT_POWER,

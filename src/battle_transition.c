@@ -28,7 +28,6 @@ struct TransitionData
     u16 winOut;
     u16 win0H;
     u16 win0V;
-    u16 win1H; // not used
     u16 win1V;
     u16 bldCnt;
     u16 bldAlpha;
@@ -38,9 +37,7 @@ struct TransitionData
     s16 bg0HOfsOpponent;
     s16 bg0HOfsPlayer;
     s16 bg0VOfs;
-    s16 unused_1E;
     s16 counter;
-    s16 unused_22;
     s16 data[11]; // for multiple purposes
 };
 

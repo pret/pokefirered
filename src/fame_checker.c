@@ -82,7 +82,6 @@ static void PrintUIHelp(u8 state);
 static bool8 CreateAllFlavorTextIcons(u8 who);
 static void FCSetup_ClearVideoRegisters(void);
 static void FCSetup_ResetTasksAndSpriteResources(void);
-static void FCSetup_TurnOnDisplay(void);
 static void FCSetup_ResetBGCoords(void);
 static bool8 HasUnlockedAllFlavorTextsForCurrentPerson(void);
 static void FreeSelectionCursorSpriteResources(void);
@@ -696,7 +695,7 @@ static void MainCB2_LoadFameChecker(void)
             gMain.state++;
             break;
         case 7:
-            FCSetup_TurnOnDisplay();
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
             SetGpuReg(REG_OFFSET_BLDALPHA, 0x07);
             SetGpuReg(REG_OFFSET_BLDY, 0x08);
@@ -1197,11 +1196,6 @@ static void FCSetup_ResetTasksAndSpriteResources(void)
     InitObjectEventPalettes(0);
     gReservedSpritePaletteCount = 7;
 
-}
-
-static void FCSetup_TurnOnDisplay(void)
-{
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
 }
 
 static void FCSetup_ResetBGCoords(void)

@@ -120,7 +120,6 @@ static void BerryPouchPrint(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, 
 static u8 GetOrCreateVariableWindow(u8 winIdx);
 static void DestroyVariableWindow(u8 winIdx);
 static void TryDestroyVariableWindow(u8 winIdx);
-static u8 GetVariableWindowId(u8 winIdx);
 static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable *ptrs);
 static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable *ptrs);
 static void PrintMoneyInWin2(void);
@@ -922,7 +921,7 @@ void InitTossQuantitySelectUI(u8 taskId, const u8 * str)
 
 static void PrintxQuantityOnWindow(u8 whichWindow, s16 quantity, u8 ndigits)
 {
-    u8 windowId = GetVariableWindowId(whichWindow);
+    u8 windowId = sVariableWindowIds[whichWindow];
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, ndigits);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
@@ -1082,8 +1081,8 @@ static void Task_BerryPouch_Use(u8 taskId)
 static void Task_BerryPouch_Toss(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ClearWindowTilemap(GetVariableWindowId(sStaticCnt.contextMenuNumOptions + 9));
-    ClearWindowTilemap(GetVariableWindowId(6));
+    ClearWindowTilemap(sVariableWindowIds[sStaticCnt.contextMenuNumOptions + 9]);
+    ClearWindowTilemap(sVariableWindowIds[6]);
     DestroyVariableWindow(sStaticCnt.contextMenuNumOptions + 9);
     DestroyVariableWindow(6);
     PutWindowTilemap(0);
@@ -1127,7 +1126,7 @@ static void Task_Toss_SelectMultiple(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearWindowTilemap(GetVariableWindowId(8));
+        ClearWindowTilemap(sVariableWindowIds[8]);
         DestroyVariableWindow(8);
         DestroyVariableWindow(0);
         ScheduleBgCopyTilemapToVram(0);
@@ -1330,7 +1329,7 @@ static void Task_Sell_PrintSelectMultipleUI(u8 taskId)
 
 static void SellMultiple_UpdateSellPriceDisplay(s32 price)
 {
-    PrintMoneyAmount(GetVariableWindowId(1), 56, 10, price, 0);
+    PrintMoneyAmount(sVariableWindowIds[1], 56, 10, price, 0);
 }
 
 static void Task_Sell_SelectMultiple(u8 taskId)
@@ -1390,7 +1389,7 @@ static void Task_SellBerries_PlaySfxAndRemoveBerries(u8 taskId)
     SetUpListMenuTemplate();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
     BerryPouchSetArrowCursorFromListMenu(data[0], 2);
-    PrintMoneyAmountInMoneyBox(GetVariableWindowId(2), GetMoney(&gSaveBlock1Ptr->money), 0);
+    PrintMoneyAmountInMoneyBox(sVariableWindowIds[2], GetMoney(&gSaveBlock1Ptr->money), 0);
     gTasks[taskId].func = Task_SellBerries_WaitButton;
 }
 
@@ -1467,11 +1466,6 @@ static void TryDestroyVariableWindow(u8 winIdx)
         ScheduleBgCopyTilemapToVram(2);
         sVariableWindowIds[winIdx] = 0xFF;
     }
-}
-
-static u8 GetVariableWindowId(u8 winIdx)
-{
-    return sVariableWindowIds[winIdx];
 }
 
 void DisplayItemMessageInBerryPouch(u8 taskId, u8 fontId, const u8 * str, TaskFunc followUpFunc)

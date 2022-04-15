@@ -120,8 +120,7 @@ static void BerryPouchPrint(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, 
 static u8 GetOrCreateVariableWindow(u8 winIdx);
 static void DestroyVariableWindow(u8 winIdx);
 static void TryDestroyVariableWindow(u8 winIdx);
-static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable *ptrs);
-static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable *ptrs);
+static void CreateYesNoMenuWin(u8 taskId, const struct YesNoFuncTable *ptrs, bool8 win3);
 static void PrintMoneyInWin2(void);
 static void CreateBerryPouchSprite(void);
 static void StartBerryPouchSpriteWobbleAnim(void);
@@ -1103,7 +1102,7 @@ static void Task_AskTossMultiple(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
     BerryPouchPrint(GetOrCreateVariableWindow(7), 2, gStringVar4, 0, 2, 1, 2, 0, 1);
-    CreateYesNoMenuWin3(taskId, &sYesNoFuncs_Toss);
+    CreateYesNoMenuWin(taskId, &sYesNoFuncs_Toss, TRUE);
 }
 
 static void Task_TossNo(u8 taskId)
@@ -1298,7 +1297,7 @@ static void Task_AskSellMultiple(u8 taskId)
 
 static void Task_SellMultiple_CreateYesNoMenu(u8 taskId)
 {
-    CreateYesNoMenuWin4(taskId, &sYesNoFuncs_Sell);
+    CreateYesNoMenuWin(taskId, &sYesNoFuncs_Sell, FALSE);
 }
 
 static void Task_SellNo(u8 taskId)
@@ -1476,14 +1475,9 @@ void DisplayItemMessageInBerryPouch(u8 taskId, u8 fontId, const u8 * str, TaskFu
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable *ptrs)
+static void CreateYesNoMenuWin(u8 taskId, const struct YesNoFuncTable *ptrs, bool8 win3)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[3], 2, 0, 2, 0x001, 0xE, ptrs);
-}
-
-static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable *ptrs)
-{
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[4], 2, 0, 2, 0x001, 0xE, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[win3 ? 3 : 4], 2, 0, 2, 0x001, 0xE, ptrs);
 }
 
 static void PrintMoneyInWin2(void)

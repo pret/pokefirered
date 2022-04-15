@@ -1504,12 +1504,12 @@ static void PrintMoneyInWin2(void)
 
 static void CreateBerryPouchSprite(void)
 {
-    sBerryPouchSpriteId = CreateSprite(&sSpriteTemplate_BerryPouch, 40, 76, 0);
+    sStaticCnt.spriteId = CreateSprite(&sSpriteTemplate_BerryPouch, 40, 76, 0);
 }
 
 static void StartBerryPouchSpriteWobbleAnim(void)
 {
-    struct Sprite *sprite = &gSprites[sBerryPouchSpriteId];
+    struct Sprite *sprite = &gSprites[sStaticCnt.spriteId];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, 1);

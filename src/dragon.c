@@ -14,8 +14,6 @@ static void sub_80B76B0(u8 taskId);
 static void sub_80B776C(struct Task *task);
 static void sub_80B7894(struct Sprite *sprite);
 
-static EWRAM_DATA u16 gUnknown_20399A4[7] = {0};
-
 static const union AnimCmd gUnknown_83E7710[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -416,8 +414,6 @@ static void AnimOverheatFlame(struct Sprite *sprite)
     sprite->y += sprite->data[2] * gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[3];
     sprite->callback = sub_80B7894;
-    for (i = 0; i < 7; ++i)
-        gUnknown_20399A4[i] = sprite->data[i];
 }
 
 static void sub_80B7894(struct Sprite *sprite)

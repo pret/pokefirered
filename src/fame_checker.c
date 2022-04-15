@@ -101,7 +101,6 @@ static void Task_SwitchToPickMode(u8 taskId);
 static void PrintCancelDescription(void);
 static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit);
 static u8 FC_PopulateListMenu(void);
-static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId);
 static void FC_CreateScrollIndicatorArrowPair(void);
 static void FreeListMenuSelectorArrowPairResources(void);
 static u16 FameCheckerGetCursorY(void);
@@ -1378,10 +1377,13 @@ static void UpdateIconDescriptionBoxOff(void)
 
 static void FC_CreateListMenu(void)
 {
+    u8 windowId = FCWINDOWID_LIST;
+    
     InitListMenuTemplate();
     sFameCheckerData->numUnlockedPersons = FC_PopulateListMenu();
     sFameCheckerData->listMenuTaskId = ListMenuInit(&gFameChecker_ListMenuTemplate, 0, 0);
-    FC_PutWindowTilemapAndCopyWindowToVramMode3_2(FCWINDOWID_LIST);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void InitListMenuTemplate(void)
@@ -1540,12 +1542,6 @@ static u8 FC_PopulateListMenu(void)
     else
         gFameChecker_ListMenuTemplate.maxShowed = 5;
     return nitems;
-}
-
-static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
-{
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void FC_CreateScrollIndicatorArrowPair(void)

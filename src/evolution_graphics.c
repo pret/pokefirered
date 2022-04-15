@@ -79,17 +79,6 @@ static const u16 sEvolutionSparkleMatrixScales[12] = {
     0x100
 };
 
-static const s16 sUnref_841EF28[][2] = {
-    {-4, 0x10},
-    {-3, 0x30},
-    {-2, 0x50},
-    {-1, 0x70},
-    { 1, 0x70},
-    { 2, 0x50},
-    { 3, 0x30},
-    { 4, 0x10}
-};
-
 static void SpriteCallbackDummy_EvoSparkles(struct Sprite * sprite)
 {
 

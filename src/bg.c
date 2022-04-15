@@ -465,31 +465,6 @@ u16 LoadBgTilemap(u8 bg, const void *src, u16 size, u16 destOffset)
     return cursor;
 }
 
-u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
-{
-    u16 paletteOffset;
-    s8 cursor;
-
-    if (IsInvalidBg32(bg) == FALSE)
-    {
-        paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, DMA3_16BIT);
-
-        if (cursor == -1)
-        {
-            return -1;
-        }
-    }
-    else
-    {
-        return -1;
-    }
-
-    sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
-
-    return (u8)cursor;
-}
-
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
     int i;

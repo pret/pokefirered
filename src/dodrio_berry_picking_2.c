@@ -32,7 +32,6 @@ static void sub_8153B9C(struct Sprite * sprite);
 static u32 sub_8153C30(struct Sprite * sprite);
 static u32 sub_8153CA0(struct Sprite * sprite);
 static void sub_8153D48(bool8 a0, u8 a1);
-static void nullsub_97(struct Sprite * sprite);
 static void sub_8154324(bool8 a0);
 static void sub_81543E8(struct Sprite * sprite);
 static s16 sub_8154608(u8 a0, u8 a1);
@@ -411,11 +410,6 @@ void sub_8153DA8(u8 id, u8 frameNum)
     StartSpriteAnim(&gSprites[*gUnknown_203F3E4[id]], frameNum);
 }
 
-static void nullsub_97(struct Sprite * sprite)
-{
-
-}
-
 void sub_8153DD8(void)
 {
     u8 i;
@@ -447,7 +441,7 @@ void sub_8153E28(void)
             .anims = sSpriteAnimTable_8478D0C,
             .images = NULL,
             .affineAnims = gDummySpriteAffineAnimTable,
-            .callback = nullsub_97,
+            .callback = SpriteCallbackDummy,
         };
 
         gUnknown_203F43C = AllocZeroed(sizeof(*gUnknown_203F43C));

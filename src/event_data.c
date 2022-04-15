@@ -49,31 +49,12 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER);
 }
 
-void sub_806E168(void) // Unused
-{
-    u16 *ptr = GetVarPointer(VAR_0x403C);
-    gSaveBlock2Ptr->pokedex.nationalMagic = 0;
-    *ptr = 0;
-    FlagClear(FLAG_0x838);
-}
-
 void sub_806E190(void)
 {
     u16 *ptr = GetVarPointer(VAR_0x403C);
     gSaveBlock2Ptr->pokedex.nationalMagic = 0xDA;
     *ptr = 0x0302;
     FlagSet(FLAG_0x838);
-}
-
-bool32 sub_806E1C0(void) // Unused
-{
-    if (gSaveBlock2Ptr->pokedex.nationalMagic != 0xDA)
-        return FALSE;
-    if (VarGet(VAR_0x403C) != 0x0302)
-        return FALSE;
-    if (!FlagGet(FLAG_0x838))
-        return FALSE;
-    return TRUE;
 }
 
 void DisableNationalPokedex(void)

@@ -301,7 +301,7 @@ static void DrawMetatile(s32 metatileLayerType, const u16 *metatiles, u16 offset
         gBGTilemapBuffers2[offset + 0x21] = 0;
         break;
 	case 3: //TRIPLE_LAYER_BLOCKS
-	    gBGTilemapBuffers3[offset] = metatiles[0];
+	gBGTilemapBuffers3[offset] = metatiles[0];
         gBGTilemapBuffers3[offset + 1] = metatiles[1];
         gBGTilemapBuffers3[offset + 0x20] = metatiles[2];
         gBGTilemapBuffers3[offset + 0x21] = metatiles[3];

@@ -387,7 +387,6 @@ static void SpriteCB_Sparkle(struct Sprite * sprite);
 static void SpriteCB_Sparkle_Init(struct Sprite * sprite);
 static u32 QuitBerryCrush(MainCallback callback);
 static void ChooseBerry(void);
-static void BerryCrush_SetVBlankCallback(void);
 static void BerryCrush_InitVBlankCB(void);
 static void SaveResults(void);
 static void RunOrScheduleCommand(u16 command, u8 runMode, u8 *args);
@@ -1022,11 +1021,6 @@ static void ChooseBerry(void)
 {
     DestroyTask(sGame->mainTask);
     InitBerryPouch(BERRYPOUCH_FROMBERRYCRUSH, GetBerryFromBag, FALSE);
-}
-
-static void BerryCrush_SetVBlankCallback(void)
-{
-    SetVBlankCallback(VBlankCB);
 }
 
 static void BerryCrush_InitVBlankCB(void)
@@ -2563,7 +2557,7 @@ static s32 ShowGameDisplay(void)
         ShowBg(2);
         ShowBg(3);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        BerryCrush_SetVBlankCallback();
+        SetVBlankCallback(VBlankCB);
         game->cmdState = 0;
         return 1;
     }

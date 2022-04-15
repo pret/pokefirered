@@ -29,6 +29,7 @@ Mart Items By Badge Count (Ghoulslash)
 Chain Fishing (Ghoulslash)
 Show Item Image On Add To Bag (BlackUser)
 Trainer Message In Battle (CFRU, PKMN EM Expansion And BlackUser)
+Inheting Nature From Day Care
 extra 116 bytes in SaveBlock2, 464 bytes in SaveBlock1, and 1044 bytes in PokemonStorage (Hiram Anderson)
 
 // Can Be Turned On/Off
@@ -53,6 +54,7 @@ Remove Flashbacks (Sierra)
 Full Exp For Participating In A Battle (DoesntKnowHowToPlay)
 Emerald Style Gender Select Intro (Meister_anon~Master_o f_None)
 Shuckle Makes Berry Juice (AsparagusEduardo)
+Volt Tackle By Breeding
 
 //Abilities Added and completed
 Adaptability
@@ -131,7 +133,6 @@ encore update @next
 taunt update @next
 blizzard update @next
 effects update
-volt tackle by breeding
 light ball update
 altering cave
 exp on catch a mon

@@ -9,7 +9,7 @@ static struct {
     /* 0x08 */ u16 size;
     /* 0x0A */ u16 mode;
     /* 0x0C */ u32 value;
-} gDma3Requests[128];
+} gDma3Requests[MAX_DMA_REQUESTS];
 
 static volatile bool8 gDma3ManagerLocked;
 static u8 gDma3RequestCursor;

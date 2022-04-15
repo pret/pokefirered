@@ -1026,10 +1026,11 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
             DestroySprite(&gSprites[sFameCheckerData->spriteIds[i]]);
         }
         FreeNonTrainerPicTiles();
-        FreeSpinningPokeballSpriteResources();
+        FreeSpriteTilesByTag(SPRITETAG_SPINNING_POKEBALL);
+        FreeSpritePaletteByTag(SPRITETAG_SPINNING_POKEBALL);
         FreeSpriteTilesByTag(SPRITETAG_SELECTOR_CURSOR);
         FreeSpritePaletteByTag(SPRITETAG_SELECTOR_CURSOR);
-        FreeQuestionMarkSpriteResources();
+        FreeSpriteTilesByTag(SPRITETAG_QUESTION_MARK);
         FreeListMenuSelectorArrowPairResources();
         SetMainCallback2(sFameCheckerData->savedCallback);
         DestroyListMenuTask(sFameCheckerData->listMenuTaskId, NULL, NULL);
@@ -1258,23 +1259,12 @@ static void SpriteCB_DestroyFlavorTextIconSelectorCursor(struct Sprite * sprite)
     DestroySprite(sprite);
 }
 
-static void FreeQuestionMarkSpriteResources(void)
-{
-    FreeSpriteTilesByTag(SPRITETAG_QUESTION_MARK);
-}
-
 static u8 PlaceQuestionMarkTile(u8 x, u8 y)
 {
     u8 spriteId = CreateSprite(&sQuestionMarkTileSpriteTemplate, x, y, 8);
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].oam.paletteNum = 2;
     return spriteId;
-}
-
-static void FreeSpinningPokeballSpriteResources(void)
-{
-    FreeSpriteTilesByTag(SPRITETAG_SPINNING_POKEBALL);
-    FreeSpritePaletteByTag(SPRITETAG_SPINNING_POKEBALL);
 }
 
 static u8 CreateSpinningPokeballSprite(void)

@@ -385,7 +385,6 @@ static void SpriteCB_Impact(struct Sprite * sprite);
 static void SpriteCB_Sparkle_End(struct Sprite * sprite);
 static void SpriteCB_Sparkle(struct Sprite * sprite);
 static void SpriteCB_Sparkle_Init(struct Sprite * sprite);
-static struct BerryCrushGame *GetBerryCrushGame(void);
 static u32 QuitBerryCrush(MainCallback callback);
 static void ChooseBerry(void);
 static void BerryCrush_SetVBlankCallback(void);
@@ -935,11 +934,6 @@ static const u8 *const sBCRankingHeaders[] = {
     [RESULTS_PAGE_POWER + NUM_RESULTS_PAGES]       = gText_PressingPowerRankings
 };
 
-static struct BerryCrushGame *GetBerryCrushGame(void)
-{
-    return sGame;
-}
-
 static u32 QuitBerryCrush(MainCallback callback)
 {
     if (sGame == NULL)
@@ -1147,7 +1141,7 @@ static void SetNamesAndTextSpeed(struct BerryCrushGame *game)
 
 static void RunOrScheduleCommand(u16 command, u8 runMode, u8 *args)
 {
-    struct BerryCrushGame * game = GetBerryCrushGame();
+    struct BerryCrushGame * game = sGame;
 
     if (command >= NELEMS(sBerryCrushCommands))
         command = CMD_NONE;
@@ -2482,7 +2476,7 @@ static void SetPrintMessageArgs(u8 *args, u8 stringId, u8 flags, u16 waitKeys, u
 
 static s32 ShowGameDisplay(void)
 {
-    struct BerryCrushGame * game = GetBerryCrushGame();
+    struct BerryCrushGame * game = sGame;
     if (game == NULL)
         return -1;
 
@@ -2580,7 +2574,7 @@ static s32 ShowGameDisplay(void)
 
 static s32 HideGameDisplay(void)
 {
-    struct BerryCrushGame * game = GetBerryCrushGame();
+    struct BerryCrushGame * game = sGame;
     if (!game)
         return -1;
 

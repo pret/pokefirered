@@ -8,7 +8,6 @@
 #include "evolution_graphics.h"
 #include "constants/songs.h"
 
-static void SpriteCallbackDummy_EvoSparkles(struct Sprite * sprite);
 static void EvoTask_PreEvoSparkleSet1Init(u8 taskId);
 static void EvoTask_CreatePreEvoSparkleSet1(u8 taskId);
 static void EvoTask_WaitForPre1SparklesToGoUp(u8 taskId);
@@ -61,7 +60,7 @@ static const struct SpriteTemplate sSpriteTemplate_EvolutionSparkles = {
     .oam = &sOamData_EvolutionSparkles,
     .anims = sSpriteAnimTable_EvolutionSparkles,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy_EvoSparkles
+    .callback = SpriteCallbackDummy
 };
 
 static const u16 sEvolutionSparkleMatrixScales[12] = {
@@ -78,11 +77,6 @@ static const u16 sEvolutionSparkleMatrixScales[12] = {
     0x140,
     0x100
 };
-
-static void SpriteCallbackDummy_EvoSparkles(struct Sprite * sprite)
-{
-
-}
 
 static void SetEvoSparklesMatrices(void)
 {

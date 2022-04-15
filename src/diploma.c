@@ -33,14 +33,6 @@ static const u32 sDiplomaGfx[] = INCBIN_U32("graphics/diploma/diploma.4bpp.lz");
 static const u32 sDiplomaTilemap[] = INCBIN_U32("graphics/diploma/diploma.bin.lz");
 static const u16 sDiplomaPal[] = INCBIN_U16("graphics/diploma/diploma.gbapal");
 
-static const u8 gUnknown_8415994[] = _("{HIGHLIGHT TRANSPARENT}プレイヤー");
-static const u8 gUnknown_841599D[] = _("{HIGHLIGHT TRANSPARENT}さま");
-static const u8 gUnknown_84159A3[] = _("{HIGHLIGHT TRANSPARENT}ホウエン");
-static const u8 gUnknown_84159AB[] = _("{HIGHLIGHT TRANSPARENT}ぜんこく");
-static const u8 gUnknown_84159B3[] = _("{HIGHLIGHT TRANSPARENT}　　　　　ポケモンずかんを\nみごと　かんせい　させた\nいだいなこうせきを　たたえ\nここに　しょうめい　します");
-static const u8 gUnknown_84159ED[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}ゲームフリーク");
-static const u8 gUnknown_84159FB[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}");
-
 static const ALIGNED(4) u8 gUnknown_8415A04[3] = {0, 2, 3};
 
 static const struct BgTemplate gUnknown_8415A08[] = {

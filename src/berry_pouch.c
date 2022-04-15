@@ -45,8 +45,10 @@ struct BerryPouchStruct_203F36C
 struct BerryPouchStruct_203F370
 {
     void (*savedCallback)(void);
+    u8 spriteId;
     u8 type;
     u8 allowSelect;
+    u8 contextMenuNumOptions;
     u16 listMenuSelectedRow;
     u16 listMenuScrollOffset;
 };
@@ -65,9 +67,7 @@ static EWRAM_DATA struct BerryPouchStruct_203F370 sStaticCnt = {};
 static EWRAM_DATA struct ListMenuItem *sListMenuItems = NULL;
 static EWRAM_DATA u8 * sListMenuStrbuf = NULL;
 static EWRAM_DATA const u8 * sContextMenuOptions = NULL;
-static EWRAM_DATA u8 sContextMenuNumOptions = 0;
 static ALIGNED(4) EWRAM_DATA u8 sVariableWindowIds[14] = {};
-static ALIGNED(4) EWRAM_DATA u8 sBerryPouchSpriteId = 0;
 
 static void CB2_InitBerryPouch(void);
 static bool8 RunBerryPouchInit(void);

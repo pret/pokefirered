@@ -77,14 +77,6 @@ void ResetBgControlStructs(void)
     }
 }
 
-void Unused_ResetBgControlStruct(u8 bg)
-{
-    if (IsInvalidBg(bg) == FALSE)
-    {
-        sGpuBgConfigs.configs[bg] = sZeroedBgControlStruct;
-    }
-}
-
 void SetBgControlAttributes(u8 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
 {
     if (IsInvalidBg(bg) == FALSE)

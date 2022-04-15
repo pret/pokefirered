@@ -713,13 +713,10 @@ static s32 GetSlotToInheritNature(struct DayCare *daycare)
 
 static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
-    s32 natureSlot, natureTries = 0;
-
-    SeedRng(gMain.vblankCounter2);
-    natureSlot = GetSlotToInheritNature(daycare);
+    s32 natureTries = 0, natureSlot = GetSlotToInheritNature(daycare);
 
     if (natureSlot < 0)
-        daycare->offspringPersonality = (Random2() << 0x10) | ((Random() % 0xfffe) + 1);
+        daycare->offspringPersonality = (Random() << 0x10) | ((Random() % 0xFFFE) + 1);
     else
     {
         u8 wantedNature = GetNatureFromPersonality(GetBoxMonData(&daycare->mons[natureSlot].mon, MON_DATA_PERSONALITY, NULL));
@@ -727,7 +724,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 
         do
         {
-            personality = (Random2() << 0x10) | (Random());
+            personality = (Random() << 0x10) | (Random());
             
             if (wantedNature == GetNatureFromPersonality(personality) && personality != 0)
                 break; // we found a personality with the same nature

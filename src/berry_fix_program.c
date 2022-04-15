@@ -9,15 +9,6 @@
 #include "help_system.h"
 #include "m4a.h"
 
-// Static type declarations
-
-typedef struct {
-    u8 state;
-    u8 unk1;
-    u16 unk2;
-    struct MultiBootParam mb;
-} berryfix_t;
-
 // Static RAM declarations
 
 const void * gUnknown_3005EF0;

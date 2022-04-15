@@ -1069,8 +1069,6 @@ static void SaveResults(void)
     sGame->powder = sGame->results.powder;
     if (GiveBerryPowder(sGame->powder))
         return;
-
-    sGame->noRoomForPowder = TRUE;
 }
 
 static void VBlankCB(void)
@@ -2409,7 +2407,6 @@ static void ResetGame(struct BerryCrushGame * game)
     game->totalAPresses = 0;
     game->targetDepth = 0;
     game->newDepth = 0;
-    game->noRoomForPowder = FALSE;
     game->newRecord = FALSE;
     game->playedSound = FALSE;
     game->endGame = FALSE;

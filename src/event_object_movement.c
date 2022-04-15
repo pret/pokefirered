@@ -2149,16 +2149,6 @@ static void LoadObjectEventPalette(u16 paletteTag)
     }
 }
 
-void Unused_LoadObjectEventPaletteSet(u16 *paletteTags)
-{
-    u8 i;
-
-    for (i = 0; paletteTags[i] != OBJ_EVENT_PAL_TAG_NONE; i++)
-    {
-        LoadObjectEventPalette(paletteTags[i]);
-    }
-}
-
 static u8 TryLoadObjectPalette(const struct SpritePalette *spritePalette)
 {
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)

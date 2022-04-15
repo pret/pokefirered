@@ -121,7 +121,6 @@ static void CreateSelectGroupHelpSprite(void);
 static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void);
 static void StartModeIconHidingAnimation(void);
 static bool8 RunModeIconHidingAnimation(void);
-static void ShrinkModeIconsSprite(void);
 static void ShowModeIconsSprite(void);
 static bool8 ModeIconsSpriteAnimIsEnded(void);
 static void CreateVerticalScrollArrowSprites(void);
@@ -907,7 +906,7 @@ static bool8 ECInterfaceCmd_22(void)
     case 0:
         DestroyRedRectangularCursor();
         HideVerticalScrollArrowSprites();
-        ShrinkModeIconsSprite();
+        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 4);
         StartWin2FrameAnim(5);
         sEasyChatGraphicsResources->state++;
         break;
@@ -2182,11 +2181,6 @@ static bool8 RunModeIconHidingAnimation(void)
     }
 
     return TRUE;
-}
-
-static void ShrinkModeIconsSprite(void)
-{
-    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 4);
 }
 
 static void ShowModeIconsSprite(void)

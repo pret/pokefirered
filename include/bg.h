@@ -71,7 +71,6 @@ struct BgTemplate
 void ResetBgs(void);
 u8 GetBgMode(void);
 void ResetBgControlStructs(void);
-void Unused_ResetBgControlStruct(u8 bg);
 void SetBgControlAttributes(u8 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound);
 u16 GetBgControlAttribute(u8 bg, u8 attributeId);
 u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode);

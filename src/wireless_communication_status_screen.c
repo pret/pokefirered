@@ -21,7 +21,6 @@ struct WirelessCommunicationStatusScreenStruct
     u32 activities[16];
     u8 taskId;
     u8 rfuTaskId;
-    u8 filler_62[0xA];
 };
 
 static struct WirelessCommunicationStatusScreenStruct * sWCSS;

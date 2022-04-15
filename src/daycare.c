@@ -27,6 +27,7 @@
 #include "help_system.h"
 #include "field_fadetransition.h"
 #include "trade.h"
+#include "constants/inserts.h"
 #include "constants/daycare.h"
 #include "constants/region_map_sections.h"
 #include "constants/global.h"
@@ -993,7 +994,7 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
     }
 }
 
-/*static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *daycare)
+static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *daycare)
 {
     u32 motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
     u32 fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
@@ -1003,7 +1004,7 @@ static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare
         if (GiveMoveToMon(mon, MOVE_VOLT_TACKLE) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToMon(mon, MOVE_VOLT_TACKLE);
     }
-}*/
+}
 
 static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parentSlots)
 {
@@ -1063,9 +1064,11 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     InheritIVs(&egg, daycare);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
-    /*if (species == SPECIES_PICHU)
-        GiveVoltTackleIfLightBall(&egg, daycare);*/
-
+#if VOLT_TACKLE_BY_BREEDING
+    if (species == SPECIES_PICHU)
+        GiveVoltTackleIfLightBall(&egg, daycare);
+#endif
+    
     isEgg = TRUE;
     SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
     gPlayerParty[PARTY_SIZE - 1] = egg;

@@ -715,7 +715,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
     s32 natureSlot, natureTries = 0;
 
-    SeedRng2(gMain.vblankCounter2);
+    SeedRng(gMain.vblankCounter2);
     natureSlot = GetSlotToInheritNature(daycare);
 
     if (natureSlot < 0)

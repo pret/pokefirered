@@ -87,7 +87,6 @@ static bool8 HasUnlockedAllFlavorTextsForCurrentPerson(void);
 static u8 CreateFlavorTextIconSelectorCursorSprite(s16 where);
 static void SpriteCB_DestroyFlavorTextIconSelectorCursor(struct Sprite *sprite);
 static u8 PlaceQuestionMarkTile(u8 x, u8 y);
-static u8 CreateSpinningPokeballSprite(void);
 static void SpriteCB_DestroySpinningPokeball(struct Sprite *sprite);
 static void FreeNonTrainerPicTiles(void);
 static u8 CreatePersonPicSprite(u8 fcPersonIdx);
@@ -748,7 +747,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
                 task->data[2] = CreatePersonPicSprite(sFameCheckerData->unlockedPersons[cursorPos]);
                 gSprites[task->data[2]].x2 = 0xF0;
                 gSprites[task->data[2]].data[0] = 1;
-                task->data[3] = CreateSpinningPokeballSprite();
+                task->data[3] = CreateSprite(&sSpinningPokeballSpriteTemplate, 0xe2, 0x42, 0);
                 gSprites[task->data[3]].x2 = 0xF0;
                 gSprites[task->data[3]].data[0] = 1;
                 task->func = Task_EnterPickMode;
@@ -1263,11 +1262,6 @@ static u8 PlaceQuestionMarkTile(u8 x, u8 y)
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].oam.paletteNum = 2;
     return spriteId;
-}
-
-static u8 CreateSpinningPokeballSprite(void)
-{
-    return CreateSprite(&sSpinningPokeballSpriteTemplate, 0xe2, 0x42, 0);
 }
 
 static void SpriteCB_DestroySpinningPokeball(struct Sprite * sprite)

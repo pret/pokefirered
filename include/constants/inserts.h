@@ -18,3 +18,4 @@
 #define FULL_EXP_FOR_PARTICIPATING TRUE // if true it gives full exp for the participating in the battle.
 #define EM_STYLE_GENDER_SELECT_INTRO TRUE // if true giving the player name if you cancel it the game will returns to choose the player gender instead of the name again.
 #define SHUCKLE_MAKES_BERRY_JUICE TRUE // if true at the end of each battle a shuckle on the party may can make a berry juice if holding a berry like in gen2.
+#define VOLT_TACKLE_BY_BREEDING TRUE // if true when a pichu egg is hatched it will come with the volt tackle move.

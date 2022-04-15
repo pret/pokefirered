@@ -47,7 +47,6 @@ struct BerryPouchStruct_203F370
     void (*savedCallback)(void);
     u8 type;
     u8 allowSelect;
-    u8 unused_06;
     u16 listMenuSelectedRow;
     u16 listMenuScrollOffset;
 };

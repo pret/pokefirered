@@ -84,7 +84,6 @@ static void FCSetup_ClearVideoRegisters(void);
 static void FCSetup_ResetTasksAndSpriteResources(void);
 static void FCSetup_ResetBGCoords(void);
 static bool8 HasUnlockedAllFlavorTextsForCurrentPerson(void);
-static void FreeSelectionCursorSpriteResources(void);
 static u8 CreateFlavorTextIconSelectorCursorSprite(s16 where);
 static void SpriteCB_DestroyFlavorTextIconSelectorCursor(struct Sprite *sprite);
 static void FreeQuestionMarkSpriteResources(void);
@@ -1028,7 +1027,8 @@ static void Task_DestroyAssetsAndCloseFameChecker(u8 taskId)
         }
         FreeNonTrainerPicTiles();
         FreeSpinningPokeballSpriteResources();
-        FreeSelectionCursorSpriteResources();
+        FreeSpriteTilesByTag(SPRITETAG_SELECTOR_CURSOR);
+        FreeSpritePaletteByTag(SPRITETAG_SELECTOR_CURSOR);
         FreeQuestionMarkSpriteResources();
         FreeListMenuSelectorArrowPairResources();
         SetMainCallback2(sFameCheckerData->savedCallback);
@@ -1244,12 +1244,6 @@ static bool8 HasUnlockedAllFlavorTextsForCurrentPerson(void)
             return FALSE;
     }
     return TRUE;
-}
-
-static void FreeSelectionCursorSpriteResources(void)
-{
-    FreeSpriteTilesByTag(SPRITETAG_SELECTOR_CURSOR);
-    FreeSpritePaletteByTag(SPRITETAG_SELECTOR_CURSOR);
 }
 
 static u8 CreateFlavorTextIconSelectorCursorSprite(s16 where)

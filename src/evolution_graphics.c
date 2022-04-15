@@ -312,7 +312,7 @@ static void EvoTask_CreatePreEvoSparklesSet2(u8 taskId)
     }
     else
     {
-        DestroyTasktaskId);
+        DestroyTask(taskId);
     }
 }
 

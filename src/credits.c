@@ -435,7 +435,6 @@ static const struct CreditsScrcmd sCreditsScript[] = {
     CREDITS_WAITBUTTON(600)
 };
 
-static const ALIGNED(4) u8 sTextColor_Unused[3] = {0, 1, 2};
 static const ALIGNED(4) u8 sTextColor_Header[3] = {0, 5, 2};
 static const ALIGNED(4) u8 sTextColor_Regular[3] = {0, 1, 2};
 

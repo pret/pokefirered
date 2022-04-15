@@ -13,7 +13,6 @@ static void EvoTask_CreatePreEvoSparkleSet1(u8 taskId);
 static void EvoTask_WaitForPre1SparklesToGoUp(u8 taskId);
 static void EvoTask_PreEvoSparkleSet2Init(u8 taskId);
 static void EvoTask_CreatePreEvoSparklesSet2(u8 taskId);
-static void EvoTask_PreEvoSparkleSet2Teardown(u8 taskId);
 static void EvoTask_PostEvoSparklesSet1Init(u8 taskId);
 static void EvoTask_CreatePostEvoSparklesSet1(u8 taskId);
 static void EvoTask_PostEvoSparklesSet1Teardown(u8 taskId);
@@ -313,13 +312,8 @@ static void EvoTask_CreatePreEvoSparklesSet2(u8 taskId)
     }
     else
     {
-        gTasks[taskId].func = EvoTask_PreEvoSparkleSet2Teardown;
+        DestroyTasktaskId);
     }
-}
-
-static void EvoTask_PreEvoSparkleSet2Teardown(u8 taskId)
-{
-    DestroyTask(taskId);
 }
 
 u8 LaunchTask_PostEvoSparklesSet1(void)

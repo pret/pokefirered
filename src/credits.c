@@ -145,7 +145,6 @@ struct CreditsResources
     bool8 windowIsActive;
     u16 creditsMonTimer;
     u16 unk_0E;
-    u8 filler_10[12];
     u8 ovwldseqno;
     u8 unk_1D;
 };

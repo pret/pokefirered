@@ -1594,7 +1594,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
     species = GetMonData(egg, MON_DATA_SPECIES);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         moves[i] = GetMonData(egg, MON_DATA_MOVE1 + i);
     }
@@ -1614,7 +1614,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
     CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, 0, 0);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
     }

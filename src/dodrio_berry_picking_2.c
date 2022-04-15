@@ -15,12 +15,11 @@
 
 struct DodrioStruct_2022CF4
 {
-    u8 filler_00[0xc];
     u8 unkC[10];
     s16 unk16[10];
     u16 unk2A[10];
     u16 unk3E;
-}; // size = 0x40
+}; // size = 0x34
 
 static EWRAM_DATA u16 *gUnknown_203F3E4[5] = {NULL};
 static EWRAM_DATA u16 *gUnknown_203F3F8[2] = {NULL};

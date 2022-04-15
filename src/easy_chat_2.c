@@ -1273,11 +1273,6 @@ u8 GetECSelectWordNumRows(void)
     return sEasyChatScreen->selectWordNumRows;
 }
 
-u8 unref_sub_80FFE60(void)
-{
-    return 0;
-}
-
 bool32 ShouldDrawECUpArrow(void)
 {
     switch (sEasyChatScreen->state)

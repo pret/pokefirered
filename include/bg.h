@@ -84,7 +84,6 @@ void InitBgFromTemplate(const struct BgTemplate *template);
 void SetBgMode(u8 bgMode);
 u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset);
 u16 LoadBgTilemap(u8 bg, const void *src, u16 size, u16 destOffset);
-u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset);
 bool8 IsDma3ManagerBusyWithBgCopy(void);
 void ShowBg(u8 bg);
 void HideBg(u8 bg);

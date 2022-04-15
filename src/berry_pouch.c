@@ -1001,29 +1001,29 @@ static void CreateNormalContextMenu(u8 taskId)
     if (sStaticCnt.type == BERRYPOUCH_FROMBATTLE)
     {
         sContextMenuOptions = sOptions_UseToss_Exit;
-        sContextMenuNumOptions = 3;
+        sStaticCnt.contextMenuNumOptions = 3;
     }
     else if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
     {
         if (!itemid_link_can_give_berry(gSpecialVar_ItemId))
         {
             sContextMenuOptions = sOptions_Exit;
-            sContextMenuNumOptions = 1;
+            sStaticCnt.contextMenuNumOptions = 1;
         }
         else
         {
             sContextMenuOptions = sOptions_GiveExit;
-            sContextMenuNumOptions = 2;
+            sStaticCnt.contextMenuNumOptions = 2;
         }
     }
     else
     {
         sContextMenuOptions = sOptions_UseGiveTossExit;
-        sContextMenuNumOptions = 4;
+        sStaticCnt.contextMenuNumOptions = 4;
     }
-    windowId = GetOrCreateVariableWindow(sContextMenuNumOptions + 9);
-    AddItemMenuActionTextPrinters(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, GetFontAttribute(2, FONTATTR_LETTER_SPACING), GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, sContextMenuActions, sContextMenuOptions);
-    Menu_InitCursor(windowId, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, 0);
+    windowId = GetOrCreateVariableWindow(sStaticCnt.contextMenuNumOptions + 9);
+    AddItemMenuActionTextPrinters(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, GetFontAttribute(2, FONTATTR_LETTER_SPACING), GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sStaticCnt.contextMenuNumOptions, sContextMenuActions, sContextMenuOptions);
+    Menu_InitCursor(windowId, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sStaticCnt.contextMenuNumOptions, 0);
     windowId2 = GetOrCreateVariableWindow(6);
     CopySelectedListMenuItemName(data[1], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
@@ -1060,7 +1060,7 @@ static void Task_NormalContextMenu_HandleInput(u8 taskId)
 
 static void Task_BerryPouch_Use(u8 taskId)
 {
-    DestroyVariableWindow(sContextMenuNumOptions + 9);
+    DestroyVariableWindow(sStaticCnt.contextMenuNumOptions + 9);
     DestroyVariableWindow(6);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -1082,9 +1082,9 @@ static void Task_BerryPouch_Use(u8 taskId)
 static void Task_BerryPouch_Toss(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ClearWindowTilemap(GetVariableWindowId(sContextMenuNumOptions + 9));
+    ClearWindowTilemap(GetVariableWindowId(sStaticCnt.contextMenuNumOptions + 9));
     ClearWindowTilemap(GetVariableWindowId(6));
-    DestroyVariableWindow(sContextMenuNumOptions + 9);
+    DestroyVariableWindow(sStaticCnt.contextMenuNumOptions + 9);
     DestroyVariableWindow(6);
     PutWindowTilemap(0);
     data[8] = 1;
@@ -1183,7 +1183,7 @@ static void Task_WaitButtonThenTossBerries(u8 taskId)
 
 static void Task_BerryPouch_Give(u8 taskId)
 {
-    DestroyVariableWindow(sContextMenuNumOptions + 9);
+    DestroyVariableWindow(sStaticCnt.contextMenuNumOptions + 9);
     DestroyVariableWindow(6);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -1228,7 +1228,7 @@ void Task_BerryPouch_DestroyDialogueWindowAndRefreshListMenu(u8 taskId)
 
 static void Task_BerryPouch_Exit(u8 taskId)
 {
-    DestroyVariableWindow(sContextMenuNumOptions + 9);
+    DestroyVariableWindow(sStaticCnt.contextMenuNumOptions + 9);
     DestroyVariableWindow(6);
     PutWindowTilemap(0);
     PutWindowTilemap(1);

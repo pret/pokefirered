@@ -111,11 +111,6 @@ static void DuplicateDeoxysTiles(void *pointer, s32 species)
         CpuCopy32(pointer + 0x800, pointer, 0x800);
 }
 
-static void Unused_LZDecompressWramIndirect(const void **src, void *dest)
-{
-    LZ77UnCompWram(*src, dest);
-}
-
 static void sub_800EDDC(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
 {
     /*

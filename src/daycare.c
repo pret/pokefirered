@@ -40,14 +40,10 @@ struct EggHatchData
     u8 pokeSpriteID;
     u8 CB2_state;
     u8 CB2_PalCounter;
+    u16 species;
     u8 eggPartyID;
-    u8 unused_5;
-    u8 unused_6;
     u8 eggShardVelocityID;
     u8 windowId;
-    u8 unused_9;
-    u8 unused_A;
-    u16 species;
     u8 textColor[3];
 };
 

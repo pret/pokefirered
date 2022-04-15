@@ -43,7 +43,6 @@ void BikeClearState(u32 directionHistory, u32 abStartSelectHistory);
 bool8 IsBikingDisallowedByPlayer(void);
 void GetOnOffBike(u8 flags);
 s16 GetPlayerSpeed(void);
-bool8 RS_IsRunningDisallowed(u8 r0);
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys);
 bool32 IsRunningDisallowed(u8 metatileBehavior);
 void Bike_HandleBumpySlopeJump(void);

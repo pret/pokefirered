@@ -452,11 +452,6 @@ static void EvoTask_CreatePostEvoSparklesSet2Trade(u8 taskId)
     }
 }
 
-static void SpriteCallbackDummy_MonSprites(struct Sprite * sprite)
-{
-
-}
-
 #define tPreEvoSpriteId  data[1]
 #define tPostEvoSpriteId data[2]
 #define tPreEvoScale     data[3]
@@ -478,12 +473,12 @@ u8 LaunchTask_PrePostEvoMonSprites(u8 preEvoSpriteId, u8 postEvoSpriteId)
     gTasks[taskId].tPostEvoScale = 16;
     SetOamMatrix(30, 0x10000 / gTasks[taskId].tPreEvoScale, 0, 0, 0x10000 / gTasks[taskId].tPreEvoScale);
     SetOamMatrix(31, 0x10000 / gTasks[taskId].tPostEvoScale, 0, 0, 0x10000 / gTasks[taskId].tPostEvoScale);
-    gSprites[preEvoSpriteId].callback = SpriteCallbackDummy_MonSprites;
+    gSprites[preEvoSpriteId].callback = SpriteCallbackDummy;
     gSprites[preEvoSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[preEvoSpriteId].oam.matrixNum = 30;
     gSprites[preEvoSpriteId].invisible = FALSE;
     CpuCopy16(palette, &gPlttBufferFaded[256 + 16 * gSprites[preEvoSpriteId].oam.paletteNum], 32);
-    gSprites[postEvoSpriteId].callback = SpriteCallbackDummy_MonSprites;
+    gSprites[postEvoSpriteId].callback = SpriteCallbackDummy;
     gSprites[postEvoSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[postEvoSpriteId].oam.matrixNum = 31;
     gSprites[postEvoSpriteId].invisible = FALSE;

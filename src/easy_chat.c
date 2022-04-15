@@ -24,7 +24,6 @@ struct Unk203A120
 
 static EWRAM_DATA struct Unk203A120 * sEasyChatSelectionData = NULL;
 
-static bool8 EC_IsNationalPokedexEnabled(void);
 static u16 GetRandomECPokemon(void);
 static void PopulateECGroups(void);
 static void PopulateAlphabeticalGroups(void);
@@ -93,7 +92,7 @@ static bool8 IsECGroupUnlocked(u8 groupId)
     case EC_GROUP_MOVE_2:
         return FlagGet(FLAG_SYS_GAME_CLEAR);
     case EC_GROUP_POKEMON:
-        return EC_IsNationalPokedexEnabled();
+        return IsNationalPokedexEnabled();
     default:
         return TRUE;
     }
@@ -400,11 +399,6 @@ static u16 GetRandomUnlockedTrendySaying(void)
     }
 
     return EC_WORD_UNDEFINED;
-}
-
-static bool8 EC_IsNationalPokedexEnabled(void)
-{
-    return IsNationalPokedexEnabled();
 }
 
 static u16 GetRandomECPokemon(void)

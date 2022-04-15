@@ -18,10 +18,9 @@ struct Unk203A120
     u16 groups[EC_NUM_GROUPS];
     u16 alphabeticalGroups[27];
     u16 alphabeticalWordsByGroup[27][270];
-    u8 filler3958[0x2C];
     u16 allWords[270];
     u16 totalWords;
-}; /*size = 0x3BA4*/
+}; /*size = 0x3B78*/
 
 static EWRAM_DATA struct Unk203A120 * sEasyChatSelectionData = NULL;
 

@@ -46,7 +46,6 @@ struct FameCheckerData
     u8 unlockedPersons[NUM_FAMECHECKER_PERSONS + 1];
     u8 spriteIds[6];
     u8 viewingFlavorText:1;
-    u8 unk_23_1:1; // unused
     u8 pickModeOverCancel:1;
 };
 

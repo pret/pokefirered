@@ -131,12 +131,6 @@ static void VBlankCallback_EasyChatScreen(void)
     ProcessSpriteCopyRequests();
 }
 
-static void SetEasyChatTaskFunc(u8 taskId, TaskFunc func)
-{
-    gTasks[taskId].func = func;
-    gTasks[taskId].data[EZCHAT_TASK_STATE] = 0;
-}
-
 static void Task_InitEasyChat(u8 taskId)
 {
     if (!IsUpdateLinkStateCBActive())
@@ -149,7 +143,8 @@ static void Task_InitEasyChat(u8 taskId)
         if (Task_InitEasyChatInternal(taskId) == TRUE)
             return;
     }
-    SetEasyChatTaskFunc(taskId, Task_RunEasyChat);
+    gTasks[taskId].func = Task_RunEasyChat;
+    gTasks[taskId].data[EZCHAT_TASK_STATE] = 0;
 }
 
 static void Task_RunEasyChat(u8 taskId)

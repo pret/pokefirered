@@ -75,7 +75,6 @@ static u16 DelAll_HandleYesNoMenu(void);
 static u16 Cancel_CreateYesNoMenu(void);
 static u16 DelAll_CreateYesNoMenu(void);
 static u16 Confirm_CreateYesNoMenu(void);
-static u8 GetStateBackup(void);
 static int OpenSelectedGroup(void);
 static int BackOutFromGroupToFieldSelect(void);
 static int ToggleGroupAlphaMode(void);
@@ -679,7 +678,7 @@ static u16 Cancel_HandleYesNoMenu(void)
     {
     case MENU_B_PRESSED: // B Button
     case 1: // No
-        sEasyChatScreen->state = GetStateBackup();
+        sEasyChatScreen->state = sEasyChatScreen->stateBackup;
         return 7;
     case 0: // Yes
         gSpecialVar_Result = 0;
@@ -696,7 +695,7 @@ static u16 Confirm_HandleYesNoMenu(void)
     {
     case MENU_B_PRESSED: // B Button
     case 1: // No
-        sEasyChatScreen->state = GetStateBackup();
+        sEasyChatScreen->state = sEasyChatScreen->stateBackup;
         return 7;
     case 0: // Yes
         gSpecialVar_Result = HasECMessageChanged();
@@ -751,11 +750,6 @@ static u16 Confirm_CreateYesNoMenu(void)
         sEasyChatScreen->state = 6;
         return 6;
     }
-}
-
-static u8 GetStateBackup(void)
-{
-    return sEasyChatScreen->stateBackup;
 }
 
 static int OpenSelectedGroup(void)

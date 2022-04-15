@@ -85,7 +85,6 @@ static void PrintECMenuById(u32 a0);
 static void PrintECGroupOrAlphaMenu(void);
 static void PrintECGroupsMenu(void);
 static void PrintEasyChatKeyboardText(void);
-static void PrintECWordsMenu(void);
 static void UpdateWin2PrintWordsScrollDown(void);
 static void UpdateWin2PrintWordsScrollUp(void);
 static void UpdateWin2PrintWordsScrollPageDown(void);
@@ -1533,7 +1532,7 @@ static void PrintECMenuById(u32 id)
         PrintEasyChatKeyboardText();
         break;
     case 2:
-        PrintECWordsMenu();
+        PrintECRowsWin2(0, 4);
         break;
     }
 
@@ -1579,11 +1578,6 @@ static void PrintEasyChatKeyboardText(void)
 
     for (i = 0; i < NELEMS(sEasyChatKeyboardText); i++)
         EC_AddTextPrinterParameterized(2, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SPEED_FF, NULL);
-}
-
-static void PrintECWordsMenu(void)
-{
-    PrintECRowsWin2(0, 4);
 }
 
 static void UpdateWin2PrintWordsScrollDown(void)

@@ -891,14 +891,9 @@ void EnterTradeSeat(void)
         CreateEnterCableClubSeatTaskWithFollowupFunc(Task_StartWiredCableClubTrade);
 }
 
-static void CreateTask_StartWiredCableClubTrade(void)
-{
-    CreateTask(Task_StartWiredCableClubTrade, 80);
-}
-
 void StartWiredCableClubTrade(void)
 {
-    CreateTask_StartWiredCableClubTrade();
+    CreateTask(Task_StartWiredCableClubTrade, 80);
     ScriptContext1_Stop();
 }
 

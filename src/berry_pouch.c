@@ -122,7 +122,6 @@ static void DestroyVariableWindow(u8 winIdx);
 static void TryDestroyVariableWindow(u8 winIdx);
 static void CreateYesNoMenuWin(u8 taskId, const struct YesNoFuncTable *ptrs, bool8 win3);
 static void PrintMoneyInWin2(void);
-static void CreateBerryPouchSprite(void);
 static void StartBerryPouchSpriteWobbleAnim(void);
 static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite *sprite);
 
@@ -541,7 +540,7 @@ static bool8 RunBerryPouchInit(void)
         gMain.state++;
         break;
     case 15:
-        CreateBerryPouchSprite();
+        sStaticCnt.spriteId = CreateSprite(&sSpriteTemplate_BerryPouch, 40, 76, 0);
         gMain.state++;
         break;
     case 16:
@@ -1483,11 +1482,6 @@ static void CreateYesNoMenuWin(u8 taskId, const struct YesNoFuncTable *ptrs, boo
 static void PrintMoneyInWin2(void)
 {
     PrintMoneyAmountInMoneyBoxWithBorder(GetOrCreateVariableWindow(2), 0x00A, 0xC, GetMoney(&gSaveBlock1Ptr->money));
-}
-
-static void CreateBerryPouchSprite(void)
-{
-    sStaticCnt.spriteId = CreateSprite(&sSpriteTemplate_BerryPouch, 40, 76, 0);
 }
 
 static void StartBerryPouchSpriteWobbleAnim(void)

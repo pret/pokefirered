@@ -285,7 +285,6 @@ struct BerryCrushGame_Gfx
     struct Sprite *sparkleSprites[11];
     struct Sprite *timerSprites[2];
     u8 resultsState;
-    u8 unused;
     u8 resultsWindowId;
     u8 nameWindowIds[MAX_RFU_PLAYERS];
     u16 bgBuffers[4][BG_SCREEN_SIZE];
@@ -304,7 +303,6 @@ struct BerryCrushGame
     u8 mainTask;
     u8 textSpeed;
     u8 cmdState;
-    u8 unused; // Never read
     u8 nextCmd;
     u8 afterPalFadeCmd;
     u16 cmdTimer;
@@ -316,7 +314,6 @@ struct BerryCrushGame
     s32 powder;
     s32 targetDepth;
     u8 newDepth;
-    bool8 noRoomForPowder:1; // Never read
     bool8 newRecord:1;
     bool8 playedSound:1;
     bool8 endGame:1;

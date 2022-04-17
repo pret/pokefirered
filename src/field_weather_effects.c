@@ -1425,7 +1425,6 @@ static void DestroyFogHorizontalSprites(void)
 // WEATHER_VOLCANIC_ASH
 //------------------------------------------------------------------------------
 
-static void LoadAshSpriteSheet(void);
 static void CreateAshSprites(void);
 static void DestroyAshSprites(void);
 static void UpdateAshSprite(struct Sprite *);
@@ -1460,7 +1459,7 @@ void Ash_Main(void)
     switch (gWeatherPtr->initStep)
     {
     case 0:
-        LoadAshSpriteSheet();
+        LoadSpriteSheet(&sAshSpriteSheet);
         gWeatherPtr->initStep++;
         break;
     case 1:
@@ -1513,11 +1512,6 @@ static const struct SpriteSheet sAshSpriteSheet = {
     .size = 0x1000,
     .tag = 0x1202,
 };
-
-static void LoadAshSpriteSheet(void)
-{
-    LoadSpriteSheet(&sAshSpriteSheet);
-}
 
 static const struct OamData sAshSpriteOamData = {
     .y = 0,

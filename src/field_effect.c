@@ -3734,11 +3734,6 @@ static void Task_DeoxysRockCameraShake(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void StartEndingDeoxysRockCameraShake(u8 taskId)
-{
-    gTasks[taskId].data[7] = 1;
-}
-
 static void Task_DestroyDeoxysRock(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -3765,7 +3760,7 @@ static void DestroyDeoxysRockEffect_RockFragments(s16 *data, u8 taskId)
         BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITE);
         CreateDeoxysRockFragments(sprite);
         PlaySE(SE_THUNDER);
-        StartEndingDeoxysRockCameraShake(data[5]);
+        gTasks[data[5]].data[7] = 1;
         data[3] = 0;
         data[1]++;
     }

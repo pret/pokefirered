@@ -1653,13 +1653,10 @@ u8 GetUnlockedSeviiAreas(void)
 
 void UpdateTrainerCardPhotoIcons(void)
 {
-    u16 species[PARTY_SIZE];
+    u16 species[PARTY_SIZE] = {SPECIES_NONE};
     u32 personality[PARTY_SIZE];
-    u8 i;
-    u8 partyCount;
-    for (i = 0; i < PARTY_SIZE; i++)
-        species[i] = SPECIES_NONE;
-    partyCount = CalculatePlayerPartyCount();
+    u8 i, partyCount = CalculatePlayerPartyCount();
+
     for (i = 0; i < partyCount; i++)
     {
         species[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);

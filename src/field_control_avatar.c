@@ -55,7 +55,6 @@ static bool8 TryStartCoordEventScript(struct MapPosition * position);
 static bool8 TryStartStepCountScript(u16 metatileBehavior);
 static void UpdateHappinessStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
-static bool8 CheckStandardWildEncounter(u32 metatileAttributes);
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection);
 static u8 GetFacingSignpostType(u16 metatileBehvaior, u8 direction);
@@ -240,7 +239,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
             metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
         }
     }
-    if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileAttributes) == TRUE)
+    if (input->checkStandardWildEncounter && TryStandardWildEncounter(metatileAttributes) == TRUE)
     {
         gInputToStoreInQuestLogMaybe.checkStandardWildEncounter = TRUE;
         return TRUE;
@@ -721,11 +720,6 @@ static bool8 UpdatePoisonStepCounter(void)
 void RestartWildEncounterImmunitySteps(void)
 {
     ResetEncounterRateModifiers();
-}
-
-static bool8 CheckStandardWildEncounter(u32 metatileAttributes)
-{
-    return TryStandardWildEncounter(metatileAttributes);
 }
 
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection)

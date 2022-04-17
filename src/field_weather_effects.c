@@ -1197,9 +1197,6 @@ static void UpdateThunderSound(void)
 // WEATHER_FOG_HORIZONTAL and WEATHER_UNDERWATER
 //------------------------------------------------------------------------------
 
-// unused data
-static const u16 unusedData_839AB1C[] = {0, 6, 6, 12, 18, 42, 300, 300};
-
 static const struct OamData gOamData_839AB2C = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,

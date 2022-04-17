@@ -614,7 +614,6 @@ static void PokeballGlowEffect_5(struct Sprite * sprite);
 static void PokeballGlowEffect_6(struct Sprite * sprite);
 static void PokeballGlowEffect_7(struct Sprite * sprite);
 static u8 PokecenterHealEffectHelper(s32 x, s32 y);
-static void HallOfFameRecordEffectHelper(s32 x, s32 y);
 
 static void (*const sPokecenterHealTaskCBTable[])(struct Task * ) = {
     PokecenterHealEffect_0,
@@ -731,7 +730,7 @@ static void HallOfFameRecordEffect_1(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 1)
     {
-        HallOfFameRecordEffectHelper(0x78, 0x19);
+        CreateSpriteAtEnd(&sUnknown_83CBFB8, 0x78, 0x19, 0);
         task->data[15]++; // was this ever initialized? is this ever used?
         task->data[0]++;
     }
@@ -927,11 +926,6 @@ static void SpriteCB_PokecenterMonitor(struct Sprite * sprite)
     }
     if (sprite->animEnded)
         FieldEffectFreeGraphicsResources(sprite);
-}
-
-static void HallOfFameRecordEffectHelper(s32 x, s32 y)
-{
-    CreateSpriteAtEnd(&sUnknown_83CBFB8, x, y, 0);
 }
 
 static void SpriteCB_HallOfFameMonitor(struct Sprite * sprite)

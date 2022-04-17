@@ -7,7 +7,6 @@
 
 static void unc_080B08A0(struct Sprite *sprite);
 static void AnimSlideHandOrFootToTarget(struct Sprite *sprite);
-static void AnimJumpKick(struct Sprite *sprite);
 static void AnimBasicFistOrFoot(struct Sprite *sprite);
 static void AnimFistOrFootRandomPos(struct Sprite *sprite);
 static void AnimCrossChopHand(struct Sprite *sprite);
@@ -112,7 +111,7 @@ const struct SpriteTemplate gJumpKickSpriteTemplate =
     .anims = sAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimJumpKick,
+    .callback = AnimSlideHandOrFootToTarget,
 };
 
 const struct SpriteTemplate gFistFootSpriteTemplate =
@@ -430,11 +429,6 @@ static void AnimSlideHandOrFootToTarget(struct Sprite *sprite)
     StartSpriteAnim(sprite, gBattleAnimArgs[6]);
     gBattleAnimArgs[6] = 0;
     AnimSnoreZ(sprite);
-}
-
-static void AnimJumpKick(struct Sprite *sprite)
-{
-    AnimSlideHandOrFootToTarget(sprite);
 }
 
 // Displays a basic fist or foot sprite for a given duration.

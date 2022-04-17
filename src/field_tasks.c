@@ -287,9 +287,3 @@ static void CrackedFloorPerStepCallback(u8 taskId)
         }
     }
 }
-
-static void sub_806ED38(void)
-{
-    FlagSet(FLAG_SYS_POKEDEX_GET);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-}

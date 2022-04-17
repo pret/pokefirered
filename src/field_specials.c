@@ -328,31 +328,6 @@ void BufferEReaderTrainerName(void)
     CopyEReaderTrainerName5(gStringVar1);
 }
 
-static const u8 sUnused_83F5B04[] = {
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    12,
-    2,
-    4,
-    5,
-    1,
-    8,
-    7,
-    11,
-    3,
-    10,
-    9,
-    6
-};
-
 static const u8 sSlotMachineIndices[] = {
     0,
     0,

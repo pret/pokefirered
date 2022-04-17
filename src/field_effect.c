@@ -34,7 +34,6 @@ extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally decla
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 
-#define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 #define FIELD_EFFECT_COUNT 32
 
 EWRAM_DATA u32 gFieldEffectArguments[8] = {0};
@@ -203,76 +202,6 @@ static const struct SpriteFrameImage sUnknown_83CBEDC[] = {
     {sUnknown_83CB3F0 + 0x80, 0x80},
     {sUnknown_83CB3F0 + 0xC0, 0x80}
 };
-
-static const struct Subsprite sUnknown_83CBEFC[] =
-{
-    {
-        .x = -12,
-        .y =  -8,
-        .shape = SPRITE_SHAPE(16x8),
-        .size = SPRITE_SIZE(16x8),
-        .tileOffset = 0,
-        .priority = 2
-    }, {
-        .x =  4,
-        .y = -8,
-        .shape = SPRITE_SHAPE(8x8),
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = 2,
-        .priority = 2
-    }, {
-        .x = -12,
-        .y =   0,
-        .shape = SPRITE_SHAPE(16x8),
-        .size = SPRITE_SIZE(16x8),
-        .tileOffset = 3,
-        .priority = 2
-    }, {
-        .x = 4,
-        .y = 0,
-        .shape = SPRITE_SHAPE(8x8),
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = 5,
-        .priority = 2
-    }
-};
-
-static const struct SubspriteTable sUnknown_83CBF0C = subsprite_table(sUnknown_83CBEFC);
-
-static const struct Subsprite sUnknown_83CBF14[] =
-{
-    {
-        .x = -32,
-        .y = -8,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 0,
-        .priority = 2
-    }, {
-        .x =  0,
-        .y = -8,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 4,
-        .priority = 2
-    }, {
-        .x = -32,
-        .y =  0,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 8,
-        .priority = 2
-    }, {
-        .x =   0,
-        .y =  0,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 12,
-        .priority = 2
-    }
-};
-
-static const struct SubspriteTable sUnknown_83CBF24 = subsprite_table(sUnknown_83CBF14);
 
 static const union AnimCmd sUnknown_83CBF2C[] = {
     ANIMCMD_FRAME(0, 1),

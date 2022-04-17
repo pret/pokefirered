@@ -1047,43 +1047,6 @@ bool8 Weather_UpdateBlend(void)
     return FALSE;
 }
 
-UNUSED static void Unused_SetWeather(u8 a)
-{
-    switch (a)
-    {
-    case 1:
-        SetWeather(WEATHER_SUNNY_CLOUDS);
-        break;
-    case 2:
-        SetWeather(WEATHER_SUNNY);
-        break;
-    case 3:
-        SetWeather(WEATHER_RAIN);
-        break;
-    case 4:
-        SetWeather(WEATHER_SNOW);
-        break;
-    case 5:
-        SetWeather(WEATHER_RAIN_THUNDERSTORM);
-        break;
-    case 6:
-        SetWeather(WEATHER_FOG_HORIZONTAL);
-        break;
-    case 7:
-        SetWeather(WEATHER_FOG_DIAGONAL);
-        break;
-    case 8:
-        SetWeather(WEATHER_VOLCANIC_ASH);
-        break;
-    case 9:
-        SetWeather(WEATHER_SANDSTORM);
-        break;
-    case 10:
-        SetWeather(WEATHER_SHADE);
-        break;
-    }
-}
-
 u8 GetCurrentWeather(void)
 {
     return gWeatherPtr->currWeather;

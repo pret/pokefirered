@@ -396,11 +396,6 @@ static s8 StartDoorAnimationTask(const struct DoorGraphics * gfx, const struct D
     return taskId;
 }
 
-static void DrawClosedDoor(const struct DoorGraphics * gfx, int x, int y)
-{
-    DrawDoorDefaultImage(gfx, x, y);
-}
-
 static void DrawOpenedDoor(const struct DoorGraphics * gfx, int x, int y)
 {
     gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
@@ -448,7 +443,7 @@ void FieldSetDoorOpened(int x, int y)
 void FieldSetDoorClosed(int x, int y)
 {
     if (MetatileBehavior_IsWarpDoor_2(MapGridGetMetatileBehaviorAt((s16)x, (s16)y)))
-        DrawClosedDoor(sDoorGraphics, x, y);
+        DrawDoorDefaultImage(sDoorGraphics, x, y);
 }
 
 s8 FieldAnimateDoorClose(int x, int y)

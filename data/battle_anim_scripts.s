@@ -6545,7 +6545,7 @@ Move_KARATE_CHOP:: @ 81CFCEA
 	monbgprio_28 1
 	setalpha 12, 8
 	playsewithpan SE_M_DOUBLE_TEAM, 63
-	createsprite gKarateChopSpriteTemplate, ANIM_ATTACKER, 2, -16, 0, 0, 0, 10, 1, 3, 0
+	createsprite gJumpKickSpriteTemplate, ANIM_ATTACKER, 2, -16, 0, 0, 0, 10, 1, 3, 0
 	waitforvisualfinish
 	playsewithpan SE_M_COMET_PUNCH, 63
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 2

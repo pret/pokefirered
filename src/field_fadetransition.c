@@ -111,19 +111,6 @@ void WarpFadeOutScreen(void)
     }
 }
 
-static void sub_807DC70(void) // Unused
-{
-    switch (MapTransitionIsEnter(GetCurrentMapType(), GetDestinationWarpMapHeader()->mapType))
-    {
-    case FALSE:
-        FadeScreen(FADE_TO_BLACK, 3);
-        break;
-    case TRUE:
-        FadeScreen(FADE_TO_WHITE, 3);
-        break;
-    }
-}
-
 static void SetPlayerVisibility(bool8 visible)
 {
     SetPlayerInvisibility(!visible);

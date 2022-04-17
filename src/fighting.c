@@ -92,17 +92,6 @@ static const union AnimCmd *const sAnims_CrossChopHand[] =
     sAnim_CrossChopHand_1,
 };
 
-const struct SpriteTemplate gKarateChopSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_HANDS_AND_FEET,
-    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSlideHandOrFootToTarget,
-};
-
 const struct SpriteTemplate gJumpKickSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,

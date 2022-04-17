@@ -723,25 +723,6 @@ static const u8 *const sFloorNamePointers[] = {
     gText_Rooftop
 };
 
-static const u8 sUnused_83F5B84[] = {
-    26,
-    26,
-    26,
-    26,
-    30,
-    30,
-    30,
-    30,
-    30,
-    30,
-    30,
-    30,
-    30,
-    26,
-    26,
-    18
-};
-
 static const u16 sElevatorWindowMetatilesGoingUp[][3] = {
     {
         METATILE_SilphCo_ElevatorWindow_Top0, 

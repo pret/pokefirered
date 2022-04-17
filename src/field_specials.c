@@ -102,11 +102,6 @@ void ForcePlayerOntoBike(void)
     Overworld_ChangeMusicTo(MUS_CYCLING);
 }
 
-void ResetCyclingRoadChallengeData(void)
-{
-
-}
-
 u8 GetPlayerAvatarBike(void)
 {
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))

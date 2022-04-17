@@ -502,11 +502,6 @@ void FieldCB_SafariZoneRanOutOfBalls(void)
     CreateTask(Task_SafariZoneRanOutOfBalls, 10);
 }
 
-static bool32 WaitWarpFadeOutScreen(void)
-{
-    return gPaletteFade.active;
-}
-
 bool32 FieldFadeTransitionBackgroundEffectIsFinished(void)
 {
     if (IsWeatherNotFadingIn() == TRUE && ForestMapPreviewScreenIsRunning())
@@ -615,7 +610,7 @@ static void Task_CableClubWarp(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
+        if (!gPaletteFade.active && BGMusicStopped())
             task->data[0]++;
         break;
     case 2:
@@ -648,7 +643,7 @@ static void Task_ReturnFromLinkRoomWarp(u8 taskId)
         data[0]++;
         break;
     case 1:
-        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
+        if (!gPaletteFade.active && BGMusicStopped())
         {
             SetCloseLinkCallback();
             data[0]++;
@@ -681,7 +676,7 @@ static void Task_Teleport2Warp(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
+        if (!gPaletteFade.active && BGMusicStopped())
             task->data[0]++;
         break;
     case 2:
@@ -712,7 +707,7 @@ static void Task_TeleportWarp(u8 taskId)
         }
         break;
     case 2:
-        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
+        if (!gPaletteFade.active && BGMusicStopped())
             task->data[0]++;
         break;
     case 3:
@@ -816,7 +811,7 @@ static void Task_StairWarp(u8 taskId)
         break;
     case 3:
         sub_807EAC4(data[2], data[3], &data[4], &data[5], &data[6]);
-        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
+        if (!gPaletteFade.active && BGMusicStopped())
             data[0]++;
         break;
     default:

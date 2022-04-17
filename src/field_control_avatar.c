@@ -670,11 +670,6 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     return FALSE;
 }
 
-static void Unref_ClearHappinessStepCounter(void)
-{
-    VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
-}
-
 static void UpdateHappinessStepCounter(void)
 {
     u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);

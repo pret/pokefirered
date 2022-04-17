@@ -52,7 +52,6 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition * position, u8 m
 static const u8 *GetInteractedWaterScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
 static bool8 TryStartStepBasedScript(struct MapPosition * position, u16 metatileBehavior, u16 playerDirection);
 static bool8 TryStartCoordEventScript(struct MapPosition * position);
-static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior);
 static bool8 TryStartStepCountScript(u16 metatileBehavior);
 static void UpdateHappinessStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
@@ -621,8 +620,6 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
         return TRUE;
     if (TryStartWarpEventScript(position, metatileBehavior) == TRUE)
         return TRUE;
-    if (TryStartMiscWalkingScripts(metatileBehavior) == TRUE)
-        return TRUE;
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
         return TRUE;
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
@@ -638,12 +635,6 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
         return FALSE;
     ScriptContext1_SetupScript(script);
     return TRUE;
-}
-
-static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
-{
-    // Dummied
-    return FALSE;
 }
 
 static bool8 TryStartStepCountScript(u16 metatileBehavior)

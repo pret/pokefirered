@@ -1429,6 +1429,12 @@ static void CreateAshSprites(void);
 static void DestroyAshSprites(void);
 static void UpdateAshSprite(struct Sprite *);
 
+static const struct SpriteSheet sAshSpriteSheet = {
+    .data = gWeatherAshTiles,
+    .size = 0x1000,
+    .tag = 0x1202,
+};
+
 void Ash_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
@@ -1506,12 +1512,6 @@ bool8 Ash_Finish(void)
     }
     return TRUE;
 }
-
-static const struct SpriteSheet sAshSpriteSheet = {
-    .data = gWeatherAshTiles,
-    .size = 0x1000,
-    .tag = 0x1202,
-};
 
 static const struct OamData sAshSpriteOamData = {
     .y = 0,

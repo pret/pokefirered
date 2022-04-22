@@ -34,5 +34,6 @@ bool8 UsedPokemonCenterWarp(void);
 void QuestLog_CheckDepartingIndoorsMap(void);
 void QuestLog_TryRecordDepartedLocation(void);
 void UpdateTrainerCardPhotoIcons(void);
+void nullsub_60(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

@@ -5611,14 +5611,43 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
-// This function was stubbed from RS, but it is stubbed badly.
-// This variable is likely the u8 passed to SetMonData in RSE.
-// The pointer reference causes agbcc to reserve it on the stack before even checking
-// whether it's used.
 void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
-    u8 foo;
-    &foo;
+	struct Pokemon *mon;
+	u8 rnd2;
+	u16 rnd = Random();
+	
+	if (rnd == 0x4000 || rnd == 0x8000 || rnd == 0xC000)
+	{
+		do
+		{
+			do
+			{
+				rnd = Random() % PARTY_SIZE;
+				mon = &party[rnd];
+			}
+			while (!GetMonData(mon, MON_DATA_SPECIES, NULL));
+		}
+		while (GetMonData(mon, MON_DATA_IS_EGG, NULL));
+		
+		if (!CheckPartyHasHadPokerus(party, gBitTable[rnd]))
+		{
+			do
+			{
+				rnd2 = Random();
+			}
+			while (!(rnd2 & 0x7));
+			
+			if (rnd2 & 0xF0)
+				rnd2 &= 0x7;
+			
+			rnd2 |= (rnd2 << 4);
+			rnd2 &= 0xF3;
+			rnd2++;
+			
+			SetMonData(mon, MON_DATA_POKERUS, &rnd2);
+		}
+	}
 }
 
 u8 CheckPartyPokerus(struct Pokemon *party, u8 party_bm)
@@ -5679,18 +5708,60 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
     return retVal;
 }
 
-// These two functions are stubbed from RS, but they're stubbed badly.
-// See note on RandomlyGivePartyPokerus above.
-static void UpdatePartyPokerusTime(void)
+void UpdatePartyPokerusTime(void)
 {
-    u8 foo;
-    &foo;
+	int i;
+	u8 pokerus;
+	
+	for (i = 0; i < PARTY_SIZE; i++)
+	{
+		if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL))
+		{
+			pokerus = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS, NULL);
+			
+			if (pokerus & 0xF)
+			{
+				if ((pokerus & 0xF) < 0x1)
+					pokerus &= 0xF0;
+				else
+					pokerus -= 0x1;
+				
+				if (!pokerus)
+					pokerus = 0x10;
+				
+				SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &pokerus);
+			}
+		}
+	}
 }
 
 void PartySpreadPokerus(struct Pokemon *party)
 {
-    u8 foo;
-    &foo;
+	int i;
+	u8 pokerus;
+	
+	if (!(Random() % 3))
+	{
+		for (i = 0; i < PARTY_SIZE; i++)
+		{
+			if (GetMonData(&party[i], MON_DATA_SPECIES, NULL))
+			{
+				pokerus = GetMonData(&party[i], MON_DATA_POKERUS, NULL);
+				
+				if (pokerus && (pokerus & 0xF))
+				{
+					// Spread to adjacent party members.
+					if (i != 0 && !(GetMonData(&party[i - 1], MON_DATA_POKERUS, NULL) & 0xF0))
+						SetMonData(&party[i - 1], MON_DATA_POKERUS, &pokerus);
+					if (i != (PARTY_SIZE - 1) && !(GetMonData(&party[i + 1], MON_DATA_POKERUS, NULL) & 0xF0))
+					{
+						SetMonData(&party[i + 1], MON_DATA_POKERUS, &pokerus);
+						++i;
+					}
+				}
+			}
+		}
+	}
 }
 
 static void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)

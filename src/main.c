@@ -9,6 +9,7 @@
 #include "help_system.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "pokemon.h"
 #include "play_time.h"
 #include "intro.h"
 #include "battle_controllers.h"
@@ -93,6 +94,7 @@ static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
+static void DoRTCEvents(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
@@ -162,8 +164,8 @@ void AgbMain()
     for (;;)
     {
         ReadKeys();
-        RTCStart(&gRtcCheckLocation, &gRtcLocationDecimal, &gRtcLocation);
-
+        DoRTCEvents();
+            
         if (gSoftResetDisabled == FALSE
          && (gMain.heldKeysRaw & A_BUTTON)
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
@@ -198,6 +200,21 @@ void AgbMain()
         MapMusicMain();
         WaitForVBlank();
     }
+}
+
+static void DoPerDayBasedEvents(void)
+{
+    UpdatePartyPokerusTime();
+}
+
+static void DoRTCEvents(void)
+{
+    u8 dayBeforeUpdate = gRtcLocation.day;
+    
+    RTCStart(&gRtcCheckLocation, &gRtcLocationDecimal, &gRtcLocation);
+    
+    if (gRtcLocation.day != dayBeforeUpdate)
+        DoPerDayBasedEvents();
 }
 
 static void UpdateLinkAndCallCallbacks(void)

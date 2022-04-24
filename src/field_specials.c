@@ -1133,26 +1133,87 @@ void ListMenu(void)
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
         task = &gTasks[taskId];
         
-	if (!gSpecialVar_0x8002)
+	switch (gSpecialVar_0x8004)
 	{
-		task->data[0] = 4;
-		task->data[4] = 12;
-		task->data[5] = 7;
-		task->data[6] = 1;
-	}
-	else
-	{
-		task->data[0] = 7;
-		task->data[4] = 8;
-		task->data[5] = 12;
-		task->data[6] = 0;
-		task->data[7] = sElevatorScroll;
-		task->data[8] = sElevatorCursorPos;
-	}
-	task->data[1] = gSpecialVar_0x8001;
-	task->data[2] = 1;
-	task->data[3] = 1;
-	task->data[15] = taskId;
+	case 0:
+            task->data[0] = 4;
+            task->data[1] = 9;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 12;
+            task->data[5] = 7;
+            task->data[6] = 1;
+            task->data[15] = taskId;
+            break;
+        case 1:
+            task->data[0] = 7;
+            task->data[1] = 12;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            task->data[7] = sElevatorScroll;
+            task->data[8] = sElevatorCursorPos;
+            break;
+        case 2: // Multichoice used instead
+            task->data[0] = 4;
+            task->data[1] = 4;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 8;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 3: // Multichoice used instead
+            task->data[0] = 4;
+            task->data[1] = 6;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 8;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 4: // Multichoice used instead
+            task->data[0] = 4;
+            task->data[1] = 4;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 17;
+            task->data[5] = 8;
+            task->data[6] = 1;
+            task->data[15] = taskId;
+            break;
+        case LISTMENU_BERRY_POWDER:
+            task->data[0] = 7;
+            task->data[1] = 12;
+            task->data[2] = 16;
+            task->data[3] = 1;
+            task->data[4] = 17;
+            task->data[5] = 12;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 6: // Mulitchoice used instead
+            task->data[0] = 3;
+            task->data[1] = 3;
+            task->data[2] = 1;
+            task->data[3] = 1;
+            task->data[4] = 8;
+            task->data[5] = 6;
+            task->data[6] = 0;
+            task->data[15] = taskId;
+            break;
+        case 99:
+            break;
+        default:
+            gSpecialVar_Result = 0x7F;
+            DestroyTask(taskId);
+            break;
+        }
     }
 }
 
@@ -1217,6 +1278,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
         sListMenuLastScrollPosition = sElevatorScroll;
     else
         sListMenuLastScrollPosition = 0;
+    task->data[1] = gSpecialVar_0x8001;
     sListMenuItems = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
     CreateScriptListMenu();
     for (i = 0, mwidth = 0; i < task->data[1]; i++)

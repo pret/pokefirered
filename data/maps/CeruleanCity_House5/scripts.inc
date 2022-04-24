@@ -39,7 +39,7 @@ CeruleanCity_House5_EventScript_ChooseExchangeItem:: @ 816AEC8
 	waitmessage
 	setvar VAR_0x8000, LISTMENU_BERRY_POWDER
 	setvar VAR_0x8001, 12 @ 12 options
-	setvar VAR_0x8002, FALSE
+	setvar VAR_0x8004, FALSE
 	special ListMenu
 	waitstate
 	switch VAR_RESULT
@@ -55,6 +55,7 @@ CeruleanCity_House5_EventScript_ChooseExchangeItem:: @ 816AEC8
 	case 9, CeruleanCity_House5_EventScript_HPUp
 	case 10, CeruleanCity_House5_EventScript_PPUp
 	case 11, CeruleanCity_House5_EventScript_ExitMenu
+	case 127, CeruleanCity_House5_EventScript_ExitMenu
 	end
 
 CeruleanCity_House5_EventScript_EnergyPowder:: @ 816AF6C

@@ -70,9 +70,14 @@
 #define MULTICHOICE_JOIN_OR_LEAD                               63
 #define MULTICHOICE_TRAINER_TOWER_MODE                         64
 
+// Don't change this unused spaces
 #define LISTMENU_BADGES                    0
 #define LISTMENU_SILPHCO_FLOORS            1
-#define LISTMENU_BERRY_POWDER              2
+#define UNUSED_02                          2
+#define UNUSED_03                          3
+#define UNUSED_04                          4
+#define LISTMENU_BERRY_POWDER              5
+#define UNUSED_06                          6
 
 // Std String Ids
 #define STDSTRING_COOL              0

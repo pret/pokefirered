@@ -37,7 +37,8 @@ CeruleanCity_House5_EventScript_AskToExchangePowder:: @ 816AEB7
 CeruleanCity_House5_EventScript_ChooseExchangeItem:: @ 816AEC8
 	message CeruleanCity_House5_Text_ExchangeWithWhat
 	waitmessage
-	setvar VAR_0x8004, LISTMENU_BERRY_POWDER
+	setvar VAR_0x8000, LISTMENU_BERRY_POWDER
+	setvar VAR_0x8001, 12 @ 12 options
 	special ListMenu
 	waitstate
 	switch VAR_RESULT

@@ -9,7 +9,7 @@ CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 	waitmessage
 	setvar VAR_0x8000, LISTMENU_BADGES
 	setvar VAR_0x8001, 9 @ 9 options
-	setvar VAR_0x8004, FALSE
+	setvar VAR_0x8004, 0
 	special ListMenu
 	waitstate
 	switch VAR_RESULT

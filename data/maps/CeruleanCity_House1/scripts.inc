@@ -7,7 +7,9 @@ CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 	msgbox CeruleanCity_House1_Text_BadgesHaveAmazingSecrets
 	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
-	setvar VAR_0x8004, LISTMENU_BADGES
+	setvar VAR_0x8000, LISTMENU_BADGES
+	setvar VAR_0x8001, 9 @ 9 options
+	setvar VAR_0x8002, FALSE
 	special ListMenu
 	waitstate
 	switch VAR_RESULT
@@ -20,7 +22,6 @@ CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 	case 6, CeruleanCity_House1_EventScript_DescribeVolcanoBadge
 	case 7, CeruleanCity_House1_EventScript_DescribeEarthBadge
 	case 8, CeruleanCity_House1_EventScript_StopDescribingBadges
-	case 127, CeruleanCity_House1_EventScript_StopDescribingBadges
 	end
 
 CeruleanCity_House1_EventScript_DescribeAnotherBadge:: @ 816A87D

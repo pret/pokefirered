@@ -2208,7 +2208,7 @@ static void BufferMonMoves(void)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         BufferMonMoveI(i);
 
     if (sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
@@ -2219,7 +2219,7 @@ static void BufferMonMoves(void)
 
 static void BufferMonMoveI(u8 i)
 {
-    if (i < 4)
+    if (i < MAX_MON_MOVES)
         sMonSummaryScreen->moveIds[i] = GetMonMoveBySlotId(&sMonSummaryScreen->currentMon, i);
 
     if (sMonSummaryScreen->moveIds[i] == 0)
@@ -2510,7 +2510,7 @@ static void PrintMovesPage(void)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         PokeSum_PrintMoveName(i);
 
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
@@ -2872,7 +2872,7 @@ static void PokeSum_PrintSelectedMoveStats(void)
     }
 }
 
-const u16 sIvsRakingPosY[] =
+static const u16 sIvsRakingPosY[] =
 {
    6, 23, 36, 75, 49, 62,
 };
@@ -2882,7 +2882,7 @@ static void PokeSum_PrintMonIvs(void)
 	u8 i;
 	u32 iv;
 		
-	for (i = 0; i < 6; i++)
+	for (i = 0; i < NUM_STATS; i++)
 	{
 		iv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV + i);
 		iv /= 2;
@@ -2931,7 +2931,7 @@ static void PokeSum_DrawMoveTypeIcons(void)
 
     FillWindowPixelBuffer(sMonSummaryScreen->windowIds[5], 0);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (sMonSummaryScreen->moveIds[i] == MOVE_NONE)
             continue;

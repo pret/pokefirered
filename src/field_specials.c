@@ -43,6 +43,16 @@
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 
+struct ListMenuLabels
+{
+	const u8 *text;
+};
+
+struct ListMenuActions
+{
+	const struct ListMenuLabels * list;
+};
+
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
@@ -1122,11 +1132,12 @@ void ListMenu(void)
     {
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
         task = &gTasks[taskId];
-        switch (gSpecialVar_0x8004)
+        task->data[1] = gSpecialVar_0x8001;
+        
+        switch (gSpecialVar_0x8000)
         {
         case LISTMENU_BADGES:
             task->data[0] = 4;
-            task->data[1] = 9;
             task->data[2] = 1;
             task->data[3] = 1;
             task->data[4] = 12;
@@ -1136,7 +1147,6 @@ void ListMenu(void)
             break;
         case LISTMENU_SILPHCO_FLOORS:
             task->data[0] = 7;
-            task->data[1] = 12;
             task->data[2] = 1;
             task->data[3] = 1;
             task->data[4] = 8;
@@ -1146,53 +1156,12 @@ void ListMenu(void)
             task->data[7] = sElevatorScroll;
             task->data[8] = sElevatorCursorPos;
             break;
-        case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 6;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 8;
-            task->data[6] = 1;
-            task->data[15] = taskId;
-            break;
         case LISTMENU_BERRY_POWDER:
             task->data[0] = 7;
-            task->data[1] = 12;
             task->data[2] = 16;
             task->data[3] = 1;
             task->data[4] = 17;
             task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
-            task->data[0] = 3;
-            task->data[1] = 3;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 6;
             task->data[6] = 0;
             task->data[15] = taskId;
             break;
@@ -1206,78 +1175,52 @@ void ListMenu(void)
     }
 }
 
-static const u8 *const sListMenuLabels[][12] = {
-    [LISTMENU_BADGES] = 
-    {
-        gText_BoulderBadge,
-        gText_CascadeBadge,
-        gText_ThunderBadge,
-        gText_RainbowBadge,
-        gText_SoulBadge,
-        gText_MarshBadge,
-        gText_VolcanoBadge,
-        gText_EarthBadge,
-        gOtherText_Exit,
-    }, 
-    [LISTMENU_SILPHCO_FLOORS] = 
-    {
-        gText_11F,
-        gText_10F,
-        gText_9F,
-        gText_8F,
-        gText_7F,
-        gText_6F,
-        gText_5F,
-        gText_4F,
-        gText_3F,
-        gText_2F,
-        gText_1F,
-        gOtherText_Exit,
-    }, 
-    [LISTMENU_ROCKET_HIDEOUT_FLOORS] = // Unncessary, MULTICHOICE_ROCKET_HIDEOUT_ELEVATOR is used instead
-    {
-        gText_B1F,
-        gText_B2F,
-        gText_B4F,
-        gOtherText_Exit,
-    }, 
-    [LISTMENU_DEPT_STORE_FLOORS] = // Unncessary, MULTICHOICE_DEPT_STORE_ELEVATOR is used instead
-    {
-        gText_5F,
-        gText_4F,
-        gText_3F,
-        gText_2F,
-        gText_1F,
-        gOtherText_Exit,
-    }, 
-    [LISTMENU_WIRELESS_LECTURE_HEADERS] = // Unnecessary, MULTICHOICE_LINKED_DIRECT_UNION is used instead
-    {
-        gText_LinkedGamePlay,
-        gText_DirectCorner,
-        gText_UnionRoom,
-        gOtherText_Quit,
-    }, 
-    [LISTMENU_BERRY_POWDER] = 
-    {
-        gText_Energypowder_50,
-        gText_EnergyRoot_80,
-        gText_HealPowder_50,
-        gText_RevivalHerb_300,
-        gText_Protein_1000,
-        gText_Iron_1000,
-        gText_Carbos_1000,
-        gText_Calcium_1000,
-        gText_Zinc_1000,
-        gText_HpUp_1000,
-        gText_PpUp_3000,
-        gOtherText_Exit,
-    }, 
-    [LISTMENU_TRAINER_TOWER_FLOORS] = // Unnecessary, MULTICHOICE_ROOFTOP_B1F is used instead
-    {
-        gText_Rooftop,
-        gText_B1F,
-        gOtherText_Exit,
-    }
+static const struct ListMenuLabels sBadgesListMenu[] = {
+	{ gText_BoulderBadge },
+	{ gText_CascadeBadge },
+	{ gText_ThunderBadge },
+	{ gText_RainbowBadge },
+	{ gText_SoulBadge },
+	{ gText_MarshBadge },
+	{ gText_VolcanoBadge },
+	{ gText_EarthBadge },
+	{ gOtherText_Exit },
+};
+
+static const struct ListMenuLabels sSilphcoFloorsListMenu[] = {
+	{ gText_11F },
+	{ gText_10F },
+	{ gText_9F },
+	{ gText_8F },
+	{ gText_7F },
+	{ gText_6F },
+	{ gText_5F },
+	{ gText_4F },
+	{ gText_3F },
+	{ gText_2F },
+	{ gText_1F },
+	{ gOtherText_Exit },
+};
+
+static const struct ListMenuLabels sBerryPowderListMenu[] = {
+	{ gText_Energypowder_50 },
+	{ gText_EnergyRoot_80 },
+	{ gText_HealPowder_50 },
+	{ gText_RevivalHerb_300 },
+	{ gText_Protein_1000 },
+	{ gText_Iron_1000 },
+	{ gText_Carbos_1000 },
+	{ gText_Calcium_1000 },
+	{ gText_Zinc_1000 },
+	{ gText_HpUp_1000 },
+	{ gText_PpUp_3000 },
+	{ gOtherText_Exit },
+};
+
+static const struct ListMenuActions sListMenuLabels[] = {
+    [LISTMENU_BADGES] = {sBadgesListMenu},
+    [LISTMENU_SILPHCO_FLOORS] = {sSilphcoFloorsListMenu},
+    [LISTMENU_BERRY_POWDER] = {sBerryPowderListMenu},
 };
 
 static void Task_CreateScriptListMenu(u8 taskId)
@@ -1289,16 +1232,15 @@ static void Task_CreateScriptListMenu(u8 taskId)
     struct Task * task = &gTasks[taskId];
     u8 windowId;
     ScriptContext2_Enable();
-    if (gSpecialVar_0x8004 == LISTMENU_SILPHCO_FLOORS)
+    if (gSpecialVar_0x8000 == LISTMENU_SILPHCO_FLOORS)
         sListMenuLastScrollPosition = sElevatorScroll;
     else
         sListMenuLastScrollPosition = 0;
     sListMenuItems = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
     CreateScriptListMenu();
-    mwidth = 0;
-    for (i = 0; i < task->data[1]; i++)
+    for (i = 0, mwidth = 0; i < task->data[1]; i++)
     {
-        sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
+        sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8000].list[i].text;
         sListMenuItems[i].index = i;
         width = GetStringWidth(2, sListMenuItems[i].label, 0);
         if (width > mwidth)

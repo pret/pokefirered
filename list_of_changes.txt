@@ -29,9 +29,10 @@ Mart Items By Badge Count (Ghoulslash)
 Chain Fishing (Ghoulslash)
 Show Item Image On Add To Bag (BlackUser)
 Trainer Message In Battle (CFRU, PKMN EM Expansion And BlackUser)
-Inheting Nature From Day Care
 Scrolling Multi-Choice Boxes (FBI And BlackUser)
-extra 116 bytes in SaveBlock2, 464 bytes in SaveBlock1, and 1044 bytes in PokemonStorage (Hiram Anderson)
+Functional Pokerus (Zeturic And BlackUser)
+Inheting Nature From Day Care
+Extra 116 Bytes In SaveBlock2, 464 Bytes In SaveBlock1, And 1044 Bytes In PokemonStorage (Hiram Anderson)
 
 // Can Be Turned On/Off
 // To Define Which Hacks Will Be Inserted In The Rom Go To include/constants > inserts.h

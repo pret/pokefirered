@@ -89,7 +89,6 @@ const u8 gText_PokedexPokemon[] = _(" POKéMON");
 const u8 gText_HT[] = _("Ht");
 const u8 gText_WT[] = _("Wt");
 const u8 gText_PokedexQuotationMark[] = _("”"); // Unused
-const u8 gText_Lbs[] = _("lbs.");
 const u8 gTextJP_PokemonData[] = _("ポケモンデ-タ");
 const u8 gText_Cry[] = _("{START_BUTTON}Cry");
 const u8 gText_NextDataCancel[] = _("{A_BUTTON}Next Data {B_BUTTON}Cancel");

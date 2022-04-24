@@ -1132,46 +1132,27 @@ void ListMenu(void)
     {
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
         task = &gTasks[taskId];
-        task->data[1] = gSpecialVar_0x8001;
         
-        switch (gSpecialVar_0x8000)
-        {
-        case LISTMENU_BADGES:
-            task->data[0] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 12;
-            task->data[5] = 7;
-            task->data[6] = 1;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_SILPHCO_FLOORS:
-            task->data[0] = 7;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            task->data[7] = sElevatorScroll;
-            task->data[8] = sElevatorCursorPos;
-            break;
-        case LISTMENU_BERRY_POWDER:
-            task->data[0] = 7;
-            task->data[2] = 16;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case 99:
-            break;
-        default:
-            gSpecialVar_Result = 0x7F;
-            DestroyTask(taskId);
-            break;
-        }
+	if (!gSpecialVar_0x8002)
+	{
+		task->data[0] = 4;
+		task->data[4] = 12;
+		task->data[5] = 7;
+		task->data[6] = 1;
+	}
+	else
+	{
+		task->data[0] = 7;
+		task->data[4] = 8;
+		task->data[5] = 12;
+		task->data[6] = 0;
+		task->data[7] = sElevatorScroll;
+		task->data[8] = sElevatorCursorPos;
+	}
+	task->data[1] = gSpecialVar_0x8001;
+	task->data[2] = 1;
+	task->data[3] = 1;
+	task->data[15] = taskId;
     }
 }
 

@@ -39,7 +39,7 @@ CeruleanCity_House5_EventScript_ChooseExchangeItem:: @ 816AEC8
 	waitmessage
 	setvar VAR_0x8000, LISTMENU_BERRY_POWDER
 	setvar VAR_0x8001, 12 @ 12 options
-	setvar VAR_0x8004, FALSE
+	setvar VAR_0x8004, 0
 	special ListMenu
 	waitstate
 	switch VAR_RESULT

@@ -1274,7 +1274,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     struct Task * task = &gTasks[taskId];
     u8 windowId;
     ScriptContext2_Enable();
-    if (gSpecialVar_0x8000 == LISTMENU_SILPHCO_FLOORS)
+    if (gSpecialVar_0x8004 == LISTMENU_SILPHCO_FLOORS)
         sListMenuLastScrollPosition = sElevatorScroll;
     else
         sListMenuLastScrollPosition = 0;

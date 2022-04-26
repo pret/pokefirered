@@ -38,7 +38,7 @@ static void sub_80B68A8(struct Sprite *sprite);
 static void sub_80B696C(u8 taskId);
 static void AnimGrudgeFlame(struct Sprite *sprite);
 static void sub_80B7158(struct Sprite *sprite);
-static void sub_80B6BE4(u8 taskId);
+static void AnimTask_GhostGetOutStep(u8 taskId);
 static void sub_80B6F30(u8 taskId);
 static void sub_80B6FC4(u8 taskId);
 static void sub_80B71B0(struct Sprite *sprite);
@@ -1260,16 +1260,16 @@ static void AnimGrudgeFlame(struct Sprite *sprite)
     }
 }
 
-void sub_80B6BBC(u8 taskId)
+void AnimTask_GhostGetOut(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->data[15] = 0;
-    task->func = sub_80B6BE4;
-    sub_80B6BE4(taskId);
+    task->func = AnimTask_GhostGetOutStep;
+    AnimTask_GhostGetOutStep(taskId);
 }
 
-static void sub_80B6BE4(u8 taskId)
+static void AnimTask_GhostGetOutStep(u8 taskId)
 {
     s16 y;
     struct BattleAnimBgData animBgData;

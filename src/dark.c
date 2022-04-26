@@ -738,7 +738,7 @@ void AnimTask_InitMementoShadow(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_80B8664(u8 taskId)
+void AnimTask_MementoHandleBg(u8 taskId)
 {
     bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
     

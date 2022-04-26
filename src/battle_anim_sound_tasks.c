@@ -12,7 +12,7 @@ static void sub_80DD270(u8 taskId);
 static void sub_80DD390(u8 taskId);
 static void sub_80DD4D4(u8 taskId);
 
-void sub_80DCE10(u8 taskId)
+void SoundTask_FireBlast(u8 taskId)
 {
     s8 pan1, pan2, panIncrement;
 
@@ -221,7 +221,7 @@ void SoundTask_WaitForCry(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_80DD334(u8 taskId)
+void SoundTask_PlayCryWithEcho(u8 taskId)
 {
     u16 species;
     s8 pan;

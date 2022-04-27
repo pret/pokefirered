@@ -41,20 +41,20 @@ extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable2[];
 
 static const struct Fanfare sFanfares[] = {
-    [FANFARE_00]        = { MUS_LEVEL_UP,         80 },
-    [FANFARE_01]        = { MUS_OBTAIN_ITEM,     160 },
-    [FANFARE_02]        = { MUS_EVOLVED,         220 },
-    [FANFARE_03]        = { MUS_OBTAIN_TMHM,     220 },
-    [FANFARE_04]        = { MUS_HEAL,            160 },
-    [FANFARE_05]        = { MUS_OBTAIN_BADGE,    340 },
-    [FANFARE_06]        = { MUS_MOVE_DELETED,    180 },
-    [FANFARE_07]        = { MUS_OBTAIN_BERRY,    120 },
-    [FANFARE_08]        = { MUS_SLOTS_JACKPOT,   250 },
-    [FANFARE_09]        = { MUS_SLOTS_WIN,       150 },
-    [FANFARE_10]        = { MUS_TOO_BAD,         160 },
-    [FANFARE_POKEFLUTE] = { MUS_POKE_FLUTE,      450 },
-    [FANFARE_KEY_ITEM]  = { MUS_OBTAIN_KEY_ITEM, 170 },
-    [FANFARE_DEX_EVAL]  = { MUS_DEX_RATING,      196 }
+    [FANFARE_LEVEL_UP]      = { MUS_LEVEL_UP,         80 },
+    [FANFARE_OBTAIN_ITEM]   = { MUS_OBTAIN_ITEM,     160 },
+    [FANFARE_EVOLVED]       = { MUS_EVOLVED,         220 },
+    [FANFARE_OBTAIN_TMHM]   = { MUS_OBTAIN_TMHM,     220 },
+    [FANFARE_HEAL]          = { MUS_HEAL,            160 },
+    [FANFARE_OBTAIN_BADGE]  = { MUS_OBTAIN_BADGE,    340 },
+    [FANFARE_MOVE_DELETED]  = { MUS_MOVE_DELETED,    180 },
+    [FANFARE_OBTAIN_BERRY]  = { MUS_OBTAIN_BERRY,    120 },
+    [FANFARE_SLOTS_JACKPOT] = { MUS_SLOTS_JACKPOT,   250 },
+    [FANFARE_SLOTS_WIN]     = { MUS_SLOTS_WIN,       150 },
+    [FANFARE_TOO_BAD]       = { MUS_TOO_BAD,         160 },
+    [FANFARE_POKEFLUTE]     = { MUS_POKE_FLUTE,      450 },
+    [FANFARE_KEY_ITEM]      = { MUS_OBTAIN_KEY_ITEM, 170 },
+    [FANFARE_DEX_EVAL]      = { MUS_DEX_RATING,      196 }
 };
 
 extern u16 SpeciesToCryId(u16);
@@ -241,7 +241,7 @@ void PlayFanfare(u16 songNum)
         }
     }
 
-    PlayFanfareByFanfareNum(0);
+    PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
     CreateFanfareTask();
 }
 

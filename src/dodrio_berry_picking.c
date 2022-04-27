@@ -1204,7 +1204,7 @@ static void sub_8151D98(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD); // MUS_TOO_BAD
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -1262,7 +1262,7 @@ static void sub_8151E94(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD); // MUS_TOO_BAD
         gUnknown_203F3E0->unk154 = 2;
     }
 }

@@ -347,9 +347,9 @@
 #define BG_FISSURE 21
 #define BG_BUG_OPPONENT 22
 #define BG_BUG_PLAYER 23
-#define BG_SOLARBEAM_OPPONENT 24
-#define BG_SOLARBEAM_PLAYER 25
-#define BG_SOLARBEAM_CONTESTS 26
+#define BG_SOLAR_BEAM_OPPONENT 24
+#define BG_SOLAR_BEAM_PLAYER 25
+#define BG_SOLAR_BEAM_CONTESTS 26
 
 // table ids for general animations
 #define B_ANIM_CASTFORM_CHANGE          0x0
@@ -361,7 +361,7 @@
 #define B_ANIM_TURN_TRAP                0x6
 #define B_ANIM_HELD_ITEM_EFFECT         0x7
 #define B_ANIM_SMOKEBALL_ESCAPE         0x8
-#define B_ANIM_HANGED_ON                0x9
+#define B_ANIM_FOCUS_BAND                0x9
 #define B_ANIM_RAIN_CONTINUES           0xA
 #define B_ANIM_SUN_CONTINUES            0xB
 #define B_ANIM_SANDSTORM_CONTINUES      0xC
@@ -386,7 +386,7 @@
 #define B_ANIM_SWITCH_OUT_PLAYER_MON    0x1
 #define B_ANIM_SWITCH_OUT_OPPONENT_MON  0x2
 #define B_ANIM_BALL_THROW               0x3
-#define B_ANIM_SAFARI_BALL_THROW        0x4
+#define B_ANIM_BALL_THROW_WITH_TRAINER        0x4
 #define B_ANIM_SUBSTITUTE_TO_MON        0x5
 #define B_ANIM_MON_TO_SUBSTITUTE        0x6
 

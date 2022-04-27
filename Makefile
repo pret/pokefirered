@@ -1,3 +1,14 @@
+# Prevent make from using GBA toolchain to build native tools
+HOSTVARS := CC="$(CC)" \
+		    CFLAGS="$(CFLAGS)" \
+		    CPP="$(CPP)" \
+		    CPPFLAGS="$(CPPFLAGS)" \
+		    CXX="$(CXX)" \
+		    CXXFLAGS="$(CXXFLAGS)" \
+		    LD="$(LD)" \
+		    LDFLAGS="$(LDFLAGS)" \
+		    LIBS="$(LIBS)"
+
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
@@ -186,7 +197,7 @@ endif
 tools: $(TOOLDIRS)
 
 $(TOOLDIRS):
-	@$(MAKE) -C $@
+	@$(HOSTVARS) $(MAKE) -C $@
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare:

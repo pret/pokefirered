@@ -148,7 +148,7 @@ static void Task_DiplomaInit(u8 taskId)
         {
             break;
         }
-        PlayFanfareByFanfareNum(FANFARE_05);
+        PlayFanfareByFanfareNum(FANFARE_OBTAIN_BADGE);
         gTasks[taskId].func = Task_WaitForExit;
     }
     gDiploma->callbackStep++;

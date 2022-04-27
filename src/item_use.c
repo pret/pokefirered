@@ -31,7 +31,7 @@
 #include "teachy_tv.h"
 #include "tm_case.h"
 #include "vs_seeker.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"

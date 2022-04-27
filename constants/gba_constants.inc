@@ -488,3 +488,25 @@
 	.set OAM_SIZE_8x32,          OAM_SIZE_1 | OAM_V_RECTANGLE
 	.set OAM_SIZE_16x32,         OAM_SIZE_2 | OAM_V_RECTANGLE
 	.set OAM_SIZE_32x64,         OAM_SIZE_3 | OAM_V_RECTANGLE
+
+@ BLDCNT
+@ Bits 0-5 select layers for the 1st target
+	.set BLDCNT_TGT1_BG0,      (1 << 0)
+	.set BLDCNT_TGT1_BG1,      (1 << 1)
+	.set BLDCNT_TGT1_BG2,      (1 << 2)
+	.set BLDCNT_TGT1_BG3,      (1 << 3)
+	.set BLDCNT_TGT1_OBJ,      (1 << 4)
+	.set BLDCNT_TGT1_BD,       (1 << 5)
+@ Bits 6-7 select the special effect
+	.set BLDCNT_EFFECT_NONE,      (0 << 6)   @ no special effect
+	.set BLDCNT_EFFECT_BLEND,     (1 << 6)   @ 1st+2nd targets mixed (controlled by BLDALPHA)
+	.set BLDCNT_EFFECT_LIGHTEN,   (2 << 6)   @ 1st target becomes whiter (controlled by BLDY)
+	.set BLDCNT_EFFECT_DARKEN,    (3 << 6)   @ 1st target becomes blacker (controlled by BLDY)
+@ Bits 8-13 select layers for the 2nd target
+	.set BLDCNT_TGT2_BG0,      (1 << 8)
+	.set BLDCNT_TGT2_BG1,      (1 << 9)
+	.set BLDCNT_TGT2_BG2,      (1 << 10)
+	.set BLDCNT_TGT2_BG3,      (1 << 11)
+	.set BLDCNT_TGT2_OBJ,      (1 << 12)
+	.set BLDCNT_TGT2_BD,       (1 << 13)
+	.set BLDCNT_TGT2_ALL,      (BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD)

@@ -8,7 +8,7 @@
 #include "scanline_effect.h"
 #include "strings.h"
 #include "task.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 
 struct Diploma
 {

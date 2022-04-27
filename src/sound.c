@@ -5,7 +5,7 @@
 #include "quest_log.h"
 #include "m4a.h"
 #include "constants/songs.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 #include "task.h"
 
 struct Fanfare

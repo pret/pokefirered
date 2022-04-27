@@ -10850,19 +10850,19 @@ SnatchMoveSwapSubstituteForMon:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
 	waitforvisualfinish
 	goto SnatchMoveTrySwapFromSubstituteEnd
+
 SnatchMoveTrySwapToSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
 	jumprettrue SnatchMoveSwapMonForSubstitute
 SnatchMoveTrySwapToSubstituteEnd:
 	waitforvisualfinish
 	return
-
 SnatchMoveSwapMonForSubstitute:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	waitforvisualfinish
 	goto SnatchMoveTrySwapToSubstituteEnd
 
-@ Healthbox blue flash on level up
+@ Healthbox blue flash effect on level up
 Special_LevelUp:
 	playsewithpan SE_EXP_MAX, 0
 	createvisualtask AnimTask_LoadHealthboxPalsForLevelUp, 2

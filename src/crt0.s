@@ -131,6 +131,10 @@ start_vector:
 	ldr r1, =INTR_VECTOR
 	adr r0, intr_main
 	str r0, [r1]
+	.if MODERN
+	mov r0, #255 @ RESET_ALL
+	svc #1 << 16 @ RegisterRamReset
+	.endif @ MODERN
 	ldr r1, =AgbMain
 	mov lr, pc
 	bx r1

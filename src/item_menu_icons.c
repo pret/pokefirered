@@ -795,7 +795,7 @@ void DestroyItemMenuIcon(u8 idx)
 
 const void * GetItemIconGfxPtr(u16 itemId, u8 attrId)
 {
-    if (itemId > ITEM_N_A)
+    if (itemId > ITEMS_COUNT)
         itemId = ITEM_NONE;
     return sItemIconGfxPtrs[itemId][attrId];
 }

@@ -320,26 +320,22 @@ struct SaveBlock2
     /*0x013*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
     /*0x014*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
               u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-    /*0x15*/  u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+    /*0x015*/ u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
               u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
               u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-              u16 regionMapZoom:1; // whether the map is zoomed in
+              u16 expShare:1; // whether exp share is on
     /*0x018*/ struct Pokedex pokedex;
-    /*0x090*/ u8 filler_90[0x8];
-    /*0x098*/ struct Time localTimeOffset;
-    /*0x0A0*/ struct Time lastBerryTreeUpdate;
-    /*0x0A8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
-    /*0x0AC*/ bool8 unkFlag1; // Set TRUE, never read
-    /*0x0AD*/ bool8 unkFlag2; // Set FALSE, never read
-    /*0x0B0*/ struct BattleTowerData battleTower;
-    /*0x898*/ u16 mapView[0x100];
-    /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
-    /*0xAF0*/ struct BerryCrush berryCrush;
-    /*0xB00*/ struct PokemonJumpRecords pokeJump;
-    /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0xB20*/ u8 filler_B20[0x400];
-    /*0xF20*/ u32 encryptionKey;
-}; // size: 0xF24
+    /*0x090*/ struct Time localTimeOffset;
+    /*0x098*/ struct Time lastBerryTreeUpdate;
+    /*0x0A0*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
+    /*0x0A4*/ struct BattleTowerData battleTower;
+    /*0x88C*/ u16 mapView[0x100];
+    /*0xA8C*/ struct LinkBattleRecords linkBattleRecords;
+    /*0xAE4*/ struct BerryCrush berryCrush;
+    /*0xAF4*/ struct PokemonJumpRecords pokeJump;
+    /*0xB04*/ struct BerryPickingResults berryPick;
+    /*0xB14*/ u32 encryptionKey;
+}; // size: 0xB18
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 

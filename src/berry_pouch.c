@@ -707,7 +707,7 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
     if (sResources->listMenuNumItems != itemIndex)
         sub_80989A0(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, itemIndex), sResources->itemMenuIconId);
     else
-        sub_80989A0(ITEM_N_A, sResources->itemMenuIconId);
+        sub_80989A0(ITEMS_COUNT, sResources->itemMenuIconId);
     sResources->itemMenuIconId ^= 1;
     PrintSelectedBerryDescription(itemIndex);
 }

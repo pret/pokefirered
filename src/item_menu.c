@@ -693,7 +693,7 @@ static void BagListMenuMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMe
         if (sBagMenuDisplay->nItems[gBagMenuState.pocket] != itemIndex)
             CreateItemMenuIcon(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, itemIndex), sBagMenuDisplay->itemMenuIcon);
         else
-            CreateItemMenuIcon(ITEM_N_A, sBagMenuDisplay->itemMenuIcon);
+            CreateItemMenuIcon(ITEMS_COUNT, sBagMenuDisplay->itemMenuIcon);
         sBagMenuDisplay->itemMenuIcon ^= 1;
         if (!sBagMenuDisplay->inhibitItemDescriptionPrint)
             PrintItemDescriptionOnMessageWindow(itemIndex);

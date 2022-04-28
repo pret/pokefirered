@@ -91,6 +91,8 @@ extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
 extern const u8 gStartMenuText_Pokemon[];
 extern const u8 gText_PkmnPoisonSurvived[];
+extern const u8 gText_ExpShareOn[];
+extern const u8 gText_ExpShareOff[];
 
 extern const u8 gOtherText_Use[];
 extern const u8 gOtherText_Toss[];

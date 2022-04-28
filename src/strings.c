@@ -1343,3 +1343,5 @@ const u8 gText_Receive[] = _("Receive");
 const u8 gText_Send[] = _("Send");
 const u8 gText_Toss[] = _("Toss");
 const u8 gUnknown_841EE2B[] = _("Del. All{CLEAR_TO 0x57}Cancel{CLEAR_TO 0xA4}Ok");
+const u8 gText_ExpShareOn[] = _("Turned on the Exp. Share.\pParty will now gain a portion\nof the Experience Points.{PAUSE_UNTIL_PRESS}");
+const u8 gText_ExpShareOff[] = _("Turned off the Exp. Share.\pParty will no longer gain a portion\nof any Experience Points.{PAUSE_UNTIL_PRESS}");

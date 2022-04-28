@@ -88,7 +88,7 @@ struct GFRomHeader
 #if defined(FIRERED)
 #define GAME_NAME "red"
 #elif defined(LEAFGREEN)
-#define GAMENAME "green"
+#define GAME_NAME "green"
 #endif
 
 // This seems to need to be in the text section for some reason.

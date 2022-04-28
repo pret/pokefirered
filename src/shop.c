@@ -770,7 +770,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
         if (item != INDEX_CANCEL)
             CreateItemMenuIcon(item, gShopData.itemSlot);
         else
-            CreateItemMenuIcon(ITEM_N_A, gShopData.itemSlot);
+            CreateItemMenuIcon(ITEMS_COUNT, gShopData.itemSlot);
         
         gShopData.itemSlot ^= 1;
         BuyMenuPrint(5, 2, description, 0, 3, 2, 1, 0, 0);

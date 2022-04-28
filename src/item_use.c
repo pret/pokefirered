@@ -752,6 +752,30 @@ void FieldUseFunc_Honey(u8 taskId)
     sub_80A103C(taskId);
 }
 
+void FieldUseFunc_ExpShare(u8 taskId)
+{
+    const u8 *txt;
+    u16 SE;
+    
+	if (!gSaveBlock2Ptr->expShare)
+	{
+        SE = SE_EXP_MAX;
+        txt = gText_ExpShareOn;
+	}
+	else
+	{
+		SE = SE_PC_OFF;
+        txt = gText_ExpShareOff;
+	}
+    PlaySE(SE);
+    if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+        DisplayItemMessageOnField(taskId, 2, txt, Task_ItemUse_CloseMessageBoxAndReturnToField);
+    else
+        DisplayItemMessageInBag(taskId, 2, txt, Task_ReturnToBagFromContextMenu);
+	gSaveBlock2Ptr->expShare = !gSaveBlock2Ptr->expShare;
+}
+
+
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)
 {
     Task_ItemUse_CloseMessageBoxAndReturnToField(taskId);

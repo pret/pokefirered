@@ -406,7 +406,7 @@ static void sub_80B9B8C(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void AnimTask_CurseBlendEffect(u8 taskId)
+void AnimTask_BlendColorCycle(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];

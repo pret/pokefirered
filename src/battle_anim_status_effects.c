@@ -105,7 +105,7 @@ static const union AnimCmd *const sSpriteAnimTable_83BF47C[] =
     sUnknown_83BF464
 };
 
-const struct SpriteTemplate gSpriteTemplate_83BF480 =
+const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,

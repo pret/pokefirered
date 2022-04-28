@@ -481,7 +481,7 @@ extern const struct SpriteTemplate gFlashingHitSplatSpriteTemplate;
 extern const struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
 u32 UnpackSelectedBattleAnimPalettes(s16 selector);
-void AnimTask_CurseBlendEffect(u8 taskId);
+void AnimTask_BlendColorCycle(u8 taskId);
 void AnimTask_BlendColorCycleExclude(u8 taskId);
 void AnimTask_BlendColorCycleByTag(u8 taskId);
 void AnimTask_FlashAnimTagWithColor(u8 taskId);
@@ -532,7 +532,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId);
 void AnimTask_InitMementoShadow(u8 taskId);
 void AnimTask_MementoHandleBg(u8 taskId);
 void AnimTask_MetallicShine(u8 taskId);
-void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId);
+void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId);
 void GetIsDoomDesireHitTurn(u8 taskId);
 
 // flying.c
@@ -548,10 +548,10 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId);
 
 // ice.c
 extern const union AnimCmd *const gAnims_SmallBubblePair[];
-void AnimTask_Haze1(u8 taskId);
+void AnimTask_HazeScrollingFog(u8 taskId);
 void AnimTask_LoadMistTiles(u8 taskId);
-void AnimTask_Hail1(u8 taskId);
-void AnimTask_GetRolloutCounter(u8 taskId);
+void AnimTask_Hail(u8 taskId);
+void AnimTask_GetIceBallCounter(u8 taskId);
 
 // electric.c
 void AnimTask_ElectricBolt(u8 taskId);
@@ -577,13 +577,13 @@ void AnimWaterPulseRing(struct Sprite *sprite);
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 
 // battle_anim_utility_funcs.c
-void AnimTask_BlendSelected(u8 taskId);
-void AnimTask_BlendExcept(u8 taskId);
+void AnimTask_BlendBattleAnimPal(u8 taskId);
+void AnimTask_BlendBattleAnimPalExclude(u8 taskId);
 void AnimTask_SetCamouflageBlend(u8 taskId);
 void AnimTask_BlendParticle(u8 taskId);
 void AnimTask_HardwarePaletteFade(u8 taskId);
-void AnimTask_CloneBattlerSpriteWithBlend(u8 taskId);
-void AnimTask_SetUpCurseBackground(u8 taskId);
+void AnimTask_TraceMonBlended(u8 taskId);
+void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId);
 void InitStatsChangeAnimation(u8 taskId);
 void AnimTask_BlendNonAttackerPalettes(u8 taskId);
 void AnimTask_StartSlidingBg(u8 taskId);

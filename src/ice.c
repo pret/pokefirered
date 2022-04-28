@@ -927,7 +927,7 @@ static void AnimSwirlingFogAnim(struct Sprite *sprite)
 }
 
 // Fades mons to black and places foggy overlay in Haze.
-void AnimTask_Haze1(u8 taskId)
+void AnimTask_HazeScrollingFog(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -1249,7 +1249,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
 }
 
 // Creates Hail.
-void AnimTask_Hail1(u8 taskId)
+void AnimTask_Hail(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1464,7 +1464,7 @@ static void AnimIceBallParticle(struct Sprite *sprite)
 }
 
 // Counter for Ice Ball.
-void AnimTask_GetRolloutCounter(u8 taskId)
+void AnimTask_GetIceBallCounter(u8 taskId)
 {
     u8 arg = gBattleAnimArgs[0];
 

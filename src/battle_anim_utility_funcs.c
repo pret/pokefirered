@@ -50,7 +50,7 @@ const u8 gBattleIntroRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, RE
 //   8: Player battler right
 //   9: Enemy battler left
 //  10: Enemy battler right
-void AnimTask_BlendSelected(u8 taskId)
+void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     
@@ -72,7 +72,7 @@ void AnimTask_BlendSelected(u8 taskId)
 // 5: Blend all
 // 6: Neither bg nor attacker's partner
 // 7: Neither bg nor target's partner
-void AnimTask_BlendExcept(u8 taskId)
+void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
 {
     u8 battler;
     u32 selectedPalettes;
@@ -226,7 +226,7 @@ static void Task_WaitHardwarePaletteFade(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_CloneBattlerSpriteWithBlend(u8 taskId)
+void AnimTask_TraceMonBlended(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -283,7 +283,7 @@ static void Task_FinishCloneBattlerSpriteWithBlend(struct Sprite *sprite)
     }
 }
 
-void AnimTask_SetUpCurseBackground(u8 taskId)
+void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
 {
     u16 species;
     s32 newSpriteId;

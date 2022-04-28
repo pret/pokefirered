@@ -418,8 +418,8 @@ static const union AffineAnimCmd *const sTriAttackTriangleAffineAnimTable[] =
 
 const struct SpriteTemplate gTriAttackTriangleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_TRI_FORCE_TRIANGLE,
-    .paletteTag = ANIM_TAG_TRI_FORCE_TRIANGLE,
+    .tileTag = ANIM_TAG_TRI_ATTACK_TRIANGLE,
+    .paletteTag = ANIM_TAG_TRI_ATTACK_TRIANGLE,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = sTriAttackTriangleAnimTable,
     .images = NULL,
@@ -2267,7 +2267,7 @@ void AnimTask_IsMonInvisible(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_CastformGfxChange(u8 taskId)
+void AnimTask_CastformGfxDataChange(u8 taskId)
 {
     HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE);
     DestroyAnimVisualTask(taskId);

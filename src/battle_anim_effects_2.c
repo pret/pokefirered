@@ -261,7 +261,7 @@ static const union AffineAnimCmd *const sWaterPulseRingAffineAnimTable[] =
     sWaterPulseRingAffineAnimCmds,
 };
 
-const struct SpriteTemplate gSupersonicWaveSpriteTemplate =    
+const struct SpriteTemplate gSupersonicRingSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_GOLD_RING,
     .paletteTag = ANIM_TAG_GOLD_RING,
@@ -272,7 +272,7 @@ const struct SpriteTemplate gSupersonicWaveSpriteTemplate =
     .callback = TranslateAnimSpriteToTargetMonLocation,
 };
 
-const struct SpriteTemplate gScreechWaveSpriteTemplate =    
+const struct SpriteTemplate gScreechRingSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_PURPLE_RING,
     .paletteTag = ANIM_TAG_PURPLE_RING,
@@ -1954,7 +1954,7 @@ static void AnimGuillotinePincerStep3(struct Sprite *sprite)
 // Scales up the target mon sprite, and sets the palette to greyscale.
 // Used in MOVE_DISABLE.
 // No args.
-void AnimTask_GrowAndGreyscale(u8 taskId)
+void AnimTask_GrowAndGrayscale(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     
@@ -2749,7 +2749,7 @@ static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void AnimTask_StretchAttacker(u8 taskId)
+void AnimTask_AttackerStretchAndDisappear(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);

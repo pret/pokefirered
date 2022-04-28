@@ -234,7 +234,7 @@ const struct SpriteTemplate gPowerAbsorptionOrbSpriteTemplate =
     .callback = AnimPowerAbsorptionOrb,
 };
 
-const struct SpriteTemplate gSolarbeamBigOrbSpriteTemplate =
+const struct SpriteTemplate gSolarBeamBigOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORBS,
     .paletteTag = ANIM_TAG_ORBS,
@@ -455,7 +455,7 @@ const struct SpriteTemplate gRazorLeafParticleSpriteTemplate =
     .callback = AnimRazorLeafParticle,
 };
 
-const struct SpriteTemplate gTwisterLeafParticleSpriteTemplate =
+const struct SpriteTemplate gTwisterLeafSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LEAF,
     .paletteTag = ANIM_TAG_LEAF,
@@ -1302,7 +1302,7 @@ static const struct SpriteTemplate sUnknown_83E333C =
     .callback = AnimCirclingMusicNote,
 };
 
-const struct SpriteTemplate gProtectWallSpriteTemplate =
+const struct SpriteTemplate gProtectSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PROTECT,
     .paletteTag = ANIM_TAG_PROTECT,
@@ -2272,7 +2272,7 @@ static void AnimSolarbeamSmallOrbStep(struct Sprite* sprite)
 // Creates 15 small secondary orbs used in the solarbeam anim effect.
 // There is a 7-frame delay between each of them.
 // No args.
-void AnimTask_CreateSmallSolarbeamOrbs(u8 taskId)
+void AnimTask_CreateSmallSolarBeamOrbs(u8 taskId)
 {
     if (--gTasks[taskId].data[0] == -1)
     {
@@ -4976,7 +4976,7 @@ static void AnimMoonlightSparkleStep(struct Sprite* sprite)
 void AnimTask_FadeScreenBlueStep(u8);
 
 
-void AnimTask_FadeScreenBlue(u8 taskId)
+void AnimTask_MoonlightEndFade(u8 taskId)
 {
     int a = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     int b;

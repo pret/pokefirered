@@ -761,7 +761,7 @@ static void AnimTask_ThrowBall_WaitAnimObjComplete(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_ThrowBallSpecial(u8 taskId)
+void AnimTask_ThrowBall_StandingTrainer(u8 taskId)
 {
     int x, y;
     u8 ballId;
@@ -2037,7 +2037,7 @@ void AnimTask_IsAttackerBehindSubstitute(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_TargetToEffectBattler(u8 taskId)
+void AnimTask_SetTargetToEffectBattler(u8 taskId)
 {
     gBattleAnimTarget = gEffectBattler;
     DestroyAnimVisualTask(taskId);
@@ -2259,7 +2259,7 @@ static void SpriteCB_SafariBaitOrRock_Finish(struct Sprite *sprite)
     }
 }
 
-void AnimTask_SafariOrGhost_DecideAnimSides(u8 taskId)
+void AnimTask_SetAttackerTargetLeftPos(u8 taskId)
 {
     switch (gBattleAnimArgs[0])
     {

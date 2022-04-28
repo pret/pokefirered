@@ -30,6 +30,7 @@ struct BagPocket
 };
 
 extern struct BagPocket gBagPockets[];
+extern const struct Item gItems[];
 
 void GetBerryCountString(u8* dst, const u8* berryName, u32 quantity);
 void CopyItemName(u16 itemId, u8 *string);

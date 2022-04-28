@@ -33,6 +33,7 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
+#include "naming_screen.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "party_menu.h"

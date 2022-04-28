@@ -612,7 +612,7 @@ void TrySetObtainedItemQuestLogEvent(u16 itemId)
 
 u16 SanitizeItemId(u16 itemId)
 {
-    if (itemId >= ITEM_N_A)
+    if (itemId >= ITEMS_COUNT)
         return ITEM_NONE;
     return itemId;
 }

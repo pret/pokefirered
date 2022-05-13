@@ -650,7 +650,7 @@ void CopyBattleSpriteInvisibility(u8 battlerId)
     gBattleSpritesDataPtr->battlerData[battlerId].invisible = gSprites[gBattlerSpriteIds[battlerId]].invisible;
 }
 
-void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform)
+void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
 {
     u16 paletteOffset, targetSpecies;
     u32 personalityValue;
@@ -659,8 +659,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform)
     const u32 *lzPaletteData;
     void *buffer;
 
-    //TODO: notTransform is bool8 in pokeem. Document it with a more reasonable name here. 
-    if (notTransform == 255)
+    if (transformType == 255) // Ghost unveiled with Silph Scope
     {
         const void *src;
         void *dst;
@@ -688,7 +687,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform)
         UpdateNickInHealthbox(gHealthboxSpriteIds[battlerAtk], &gEnemyParty[gBattlerPartyIndexes[battlerAtk]]);
         TryAddPokeballIconToHealthbox(gHealthboxSpriteIds[battlerAtk], 1);
     }
-    else if (notTransform)
+    else if (transformType) // Castform form change
     {
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], gBattleSpritesDataPtr->animationData->animArg);
         paletteOffset = 0x100 + battlerAtk * 16;
@@ -701,7 +700,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform)
         }
         gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
     }
-    else
+    else // Transform move
     {
         const void *src;
         void *dst;

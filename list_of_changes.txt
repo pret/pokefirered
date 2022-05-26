@@ -34,7 +34,6 @@ Functional Pokerus (Zeturic And BlackUser)
 Metric System Update (BlackUser)
 Nickname Your Pokemons From The Party Screen (Shinny456, Ghoulslash, TheXaman And Lunos)
 Gen 6 Exp Share (Lunos)
-Bag Sorting (ghoulslash)
 Inheting Nature From Day Care
 Extra 116 Bytes In SaveBlock2, 464 Bytes In SaveBlock1, And 1044 Bytes In PokemonStorage (Hiram Anderson)
 

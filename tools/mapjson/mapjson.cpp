@@ -29,7 +29,6 @@ using json11::Json;
 
 #include "mapjson.h"
 
-string version;
 
 string read_text_file(string filepath) {
     ifstream in_file(filepath);
@@ -61,7 +60,7 @@ void write_text_file(string filepath, string text) {
     out_file.close();
 }
 
-string generate_map_header_text(Json map_data, Json layouts_data) {
+string generate_map_header_text(Json map_data, Json layouts_data, string version) {
     string map_layout_id = map_data["layout"].string_value();
 
     vector<Json> matched;
@@ -82,7 +81,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << map_data["name"].string_value() 
          << "/map.json\n@\n\n";
 
-    text << map_data["name"].string_value() << "::\n"
+    text << map_data["name"].string_value() << ":\n"
          << "\t.4byte " << layout["name"].string_value() << "\n";
 
     if (map_data.object_items().find("shared_events_map") != map_data.object_items().end())
@@ -96,7 +95,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
         text << "\t.4byte " << map_data["name"].string_value() << "_MapScripts\n";
 
     if (map_data.object_items().find("connections") != map_data.object_items().end()
-     && map_data["connections"].array_items().size() > 0 && map_data["connections_no_include"] == Json())
+     && map_data["connections"].array_items().size() > 0)
         text << "\t.4byte " << map_data["name"].string_value() << "_MapConnections\n";
     else
         text << "\t.4byte 0x0\n";
@@ -106,25 +105,17 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << map_data["region_map_section"].string_value() << "\n"
          << "\t.byte "  << map_data["requires_flash"].bool_value() << "\n"
          << "\t.byte "  << map_data["weather"].string_value() << "\n"
-         << "\t.byte "  << map_data["map_type"].string_value() << "\n";
+         << "\t.byte "  << map_data["map_type"].string_value() << "\n"
+         << "\t.2byte 0\n";
 
-    if (version != "firered")
-        text << "\t.2byte 0\n";
-
-    if (version == "ruby") {
+    if (version == "ruby")
         text << "\t.byte " << map_data["show_map_name"].bool_value() << "\n";
-    }
-    else if (version == "emerald" || version == "firered") {
+    else if (version == "emerald")
         text << "\tmap_header_flags "
              << "allow_cycling=" << map_data["allow_cycling"].bool_value() << ", "
              << "allow_escaping=" << map_data["allow_escaping"].bool_value() << ", "
              << "allow_running=" << map_data["allow_running"].bool_value() << ", "
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
-    }
-
-    if (version == "firered") {
-        text << "\t.byte " << map_data["floor_number"].int_value() << "\n";
-    }
 
      text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";
 
@@ -141,7 +132,7 @@ string generate_map_connections_text(Json map_data) {
          << map_data["name"].string_value() 
          << "/map.json\n@\n\n";
 
-    text << map_data["name"].string_value() << "_MapConnectionsList::\n";
+    text << map_data["name"].string_value() << "_MapConnectionsList:\n";
 
     for (auto &connection : map_data["connections"].array_items()) {
         text << "\tconnection "
@@ -150,7 +141,7 @@ string generate_map_connections_text(Json map_data) {
              << connection["map"].string_value() << "\n";
     }
 
-    text << "\n" << map_data["name"].string_value() << "_MapConnections::\n"
+    text << "\n" << map_data["name"].string_value() << "_MapConnections:\n"
          << "\t.4byte " << map_data["connections"].array_items().size() << "\n"
          << "\t.4byte " << map_data["name"].string_value() << "_MapConnectionsList\n\n";
 
@@ -239,7 +230,7 @@ string generate_map_events_text(Json map_data) {
         text << bgs_label << ":\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
             if (bg_event["type"] == "sign") {
-                text << "\tbg_event "
+                text << "\tbg_sign_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "
                      << bg_event["elevation"].int_value() << ", "
@@ -274,123 +265,13 @@ string generate_map_events_text(Json map_data) {
     return text.str();
 }
 
-string generate_firered_map_events_text(Json map_data) {
-    ostringstream text;
-
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" 
-         << map_data["name"].string_value() 
-         << "/map.json\n@\n\n";
-
-    string objects_label, warps_label, coords_label, bgs_label;
-
-    if (map_data["object_events"].array_items().size() > 0) {
-        objects_label = map_data["name"].string_value() + "_ObjectEvents";
-        text << objects_label << "::\n";
-        for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
-            auto obj_event = map_data["object_events"].array_items()[i];
-            text << "\tobject_event " << i + 1 << ", "
-                 << obj_event["graphics_id"].string_value() << ", "
-                 << (obj_event["in_connection"].bool_value() ? 255 : 0) << ", "
-                 << obj_event["x"].int_value() << ", "
-                 << obj_event["y"].int_value() << ", "
-                 << obj_event["elevation"].int_value() << ", "
-                 << obj_event["movement_type"].string_value() << ", "
-                 << obj_event["movement_range_x"].int_value() << ", "
-                 << obj_event["movement_range_y"].int_value() << ", "
-                 << obj_event["trainer_type"].string_value() << ", "
-                 << obj_event["trainer_sight_or_berry_tree_id"].string_value() << ", "
-                 << obj_event["script"].string_value() << ", "
-                 << obj_event["flag"].string_value() << "\n";
-        }
-        text << "\n";
-    } else {
-        objects_label = "0x0";
-    }
-
-    if (map_data["warp_events"].array_items().size() > 0) {
-        warps_label = map_data["name"].string_value() + "_MapWarps";
-        text << warps_label << "::\n";
-        for (auto &warp_event : map_data["warp_events"].array_items()) {
-            text << "\twarp_def "
-                 << warp_event["x"].int_value() << ", "
-                 << warp_event["y"].int_value() << ", "
-                 << warp_event["elevation"].int_value() << ", "
-                 << warp_event["dest_warp_id"].int_value() << ", "
-                 << warp_event["dest_map"].string_value() << "\n";
-        }
-        text << "\n";
-    } else {
-        warps_label = "0x0";
-    }
-
-    if (map_data["coord_events"].array_items().size() > 0) {
-        coords_label = map_data["name"].string_value() + "_MapCoordEvents";
-        text << coords_label << "::\n";
-        for (auto &coord_event : map_data["coord_events"].array_items()) {
-            if (coord_event["type"].string_value() == "trigger") {
-                text << "\tcoord_event "
-                     << coord_event["x"].int_value() << ", "
-                     << coord_event["y"].int_value() << ", "
-                     << coord_event["elevation"].int_value() << ", 0, "
-                     << coord_event["var"].string_value() << ", "
-                     << coord_event["var_value"].string_value() << ", 0, "
-                     << coord_event["script"].string_value() << "\n";
-            }
-            else if (coord_event["type"] == "weather") {
-                text << "\tcoord_weather_event "
-                     << coord_event["x"].int_value() << ", "
-                     << coord_event["y"].int_value() << ", "
-                     << coord_event["elevation"].int_value() << ", "
-                     << coord_event["weather"].string_value() << "\n";
-            }
-        }
-        text << "\n";
-    } else {
-        coords_label = "0x0";
-    }
-
-    if (map_data["bg_events"].array_items().size() > 0) {
-        bgs_label = map_data["name"].string_value() + "_MapBGEvents";
-        text << bgs_label << "::\n";
-        for (auto &bg_event : map_data["bg_events"].array_items()) {
-            if (bg_event["type"] == "sign") {
-                text << "\tbg_event "
-                     << bg_event["x"].int_value() << ", "
-                     << bg_event["y"].int_value() << ", "
-                     << bg_event["elevation"].int_value() << ", "
-                     << bg_event["player_facing_dir"].string_value() << ", 0,"
-                     << bg_event["script"].string_value() << "\n";
-            }
-            else if (bg_event["type"] == "hidden_item") {
-                text << "\tbg_hidden_item_event "
-                     << bg_event["x"].int_value() << ", "
-                     << bg_event["y"].int_value() << ", "
-                     << bg_event["elevation"].int_value() << ", "
-                     << bg_event["item"].string_value() << ", "
-                     << bg_event["flag"].string_value() << ", "
-                     << bg_event["quantity"].int_value() << ", "
-                     << bg_event["underfoot"].bool_value() << "\n";
-            }
-        }
-        text << "\n";
-    } else {
-        bgs_label = "0x0";
-    }
-
-    text << map_data["name"].string_value() << "_MapEvents::\n"
-         << "\tmap_events " << objects_label << ", " << warps_label << ", "
-         << coords_label << ", " << bgs_label << "\n\n";
-
-    return text.str();
-}
-
 string get_directory_name(string filename) {
     size_t dir_pos = filename.find_last_of("/\\");
 
     return filename.substr(0, dir_pos + 1);
 }
 
-void process_map(string map_filepath, string layouts_filepath) {
+void process_map(string map_filepath, string layouts_filepath, string version) {
     string mapdata_err, layouts_err;
 
     string mapdata_json_text = read_text_file(map_filepath);
@@ -404,9 +285,8 @@ void process_map(string map_filepath, string layouts_filepath) {
     if (layouts_data == Json())
         FATAL_ERROR("%s\n", layouts_err.c_str());
 
-    string header_text = generate_map_header_text(map_data, layouts_data);
-    string events_text = version == "firered" ? generate_firered_map_events_text(map_data)
-                                              : generate_map_events_text(map_data);
+    string header_text = generate_map_header_text(map_data, layouts_data, version);
+    string events_text = generate_map_events_text(map_data);
     string connections_text = generate_map_connections_text(map_data);
 
     string files_dir = get_directory_name(map_filepath);
@@ -429,10 +309,7 @@ string generate_groups_text(Json groups_data) {
         text << "\n";
     }
 
-    if (version != "firered")
-        text << "\t.align 2\n";
-
-    text << "gMapGroups::\n";
+    text << "\t.align 2\n" << "gMapGroups::\n";
     for (auto &group : groups_data["group_order"].array_items())
         text << "\t.4byte " << group.string_value() << "\n";
     text << "\n";
@@ -576,7 +453,6 @@ string generate_layout_headers_text(Json layouts_data) {
     text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n@\n\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (layout == Json::object()) continue;
         string border_label = layout["name"].string_value() + "_Border";
         string blockdata_label = layout["name"].string_value() + "_Blockdata";
         text << border_label << "::\n"
@@ -590,15 +466,7 @@ string generate_layout_headers_text(Json layouts_data) {
              << "\t.4byte " << border_label << "\n"
              << "\t.4byte " << blockdata_label << "\n"
              << "\t.4byte " << layout["primary_tileset"].string_value() << "\n"
-             << "\t.4byte " << layout["secondary_tileset"].string_value() << "\n";
-
-        if (version == "firered") {
-            text << "\t.byte " << layout["border_width"].int_value() << "\n"
-                 << "\t.byte " << layout["border_height"].int_value() << "\n"
-                 << "\t.2byte 0\n";
-        }
-
-        text << "\n";
+             << "\t.4byte " << layout["secondary_tileset"].string_value() << "\n\n";
     }
 
     return text.str();
@@ -612,11 +480,8 @@ string generate_layouts_table_text(Json layouts_data) {
     text << "\t.align 2\n"
          << layouts_data["layouts_table_label"].string_value() << "::\n";
 
-    for (auto &layout : layouts_data["layouts"].array_items()) {
-        string layout_name = layout["name"].string_value();
-        if (layout_name.empty()) layout_name = "NULL";
-        text << "\t.4byte " << layout_name << "\n";
-    }
+    for (auto &layout : layouts_data["layouts"].array_items())
+        text << "\t.4byte " << layout["name"].string_value() << "\n";
 
     return text.str();
 }
@@ -629,12 +494,9 @@ string generate_layouts_constants_text(Json layouts_data) {
 
     text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n//\n\n";
 
-    int i = 1;
-    for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (layout != Json::object())
-            text << "#define " << layout["id"].string_value() << " " << i << "\n";
-        i++;
-    }
+    int i = 0;
+    for (auto &layout : layouts_data["layouts"].array_items())
+        text << "#define " << layout["id"].string_value() << " " << ++i << "\n";
 
     text << "\n#endif // GUARD_CONSTANTS_LAYOUTS_H\n";
 
@@ -664,9 +526,10 @@ int main(int argc, char *argv[]) {
     if (argc < 3)
         FATAL_ERROR("USAGE: mapjson <mode> <game-version> [options]\n");
 
-    version = argv[2];
-    if (version != "emerald" && version != "ruby" && version != "firered")
-        FATAL_ERROR("ERROR: <game-version> must be 'emerald', 'firered', or 'ruby'.\n");
+    char *version_arg = argv[2];
+    string version(version_arg);
+    if (version != "emerald" && version != "ruby")
+        FATAL_ERROR("ERROR: <game-version> must be 'emerald' or 'ruby'.\n");
 
     char *mode_arg = argv[1];
     string mode(mode_arg);
@@ -680,7 +543,7 @@ int main(int argc, char *argv[]) {
         string filepath(argv[3]);
         string layouts_filepath(argv[4]);
 
-        process_map(filepath, layouts_filepath);
+        process_map(filepath, layouts_filepath, version);
     }
     else if (mode == "groups") {
         if (argc != 4)

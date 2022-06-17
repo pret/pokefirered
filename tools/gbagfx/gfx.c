@@ -450,7 +450,7 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 
 void FreeImage(struct Image *image)
 {
-	if (image->tilemap.data.affine != NULL)
+    if (image->tilemap.data.affine != NULL)
     {
         free(image->tilemap.data.affine);
         image->tilemap.data.affine = NULL;

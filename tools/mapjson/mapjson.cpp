@@ -82,7 +82,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << map_data["name"].string_value() 
          << "/map.json\n@\n\n";
 
-    text << map_data["name"].string_value() << "::\n"
+    text << map_data["name"].string_value() << ":\n"
          << "\t.4byte " << layout["name"].string_value() << "\n";
 
     if (map_data.object_items().find("shared_events_map") != map_data.object_items().end())
@@ -111,16 +111,14 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     if (version != "firered")
         text << "\t.2byte 0\n";
 
-    if (version == "ruby") {
+    if (version == "ruby")
         text << "\t.byte " << map_data["show_map_name"].bool_value() << "\n";
-    }
-    else if (version == "emerald" || version == "firered") {
+    else if (version == "emerald" || version == "firered")
         text << "\tmap_header_flags "
              << "allow_cycling=" << map_data["allow_cycling"].bool_value() << ", "
              << "allow_escaping=" << map_data["allow_escaping"].bool_value() << ", "
              << "allow_running=" << map_data["allow_running"].bool_value() << ", "
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
-    }
 
     if (version == "firered") {
         text << "\t.byte " << map_data["floor_number"].int_value() << "\n";
@@ -141,7 +139,7 @@ string generate_map_connections_text(Json map_data) {
          << map_data["name"].string_value() 
          << "/map.json\n@\n\n";
 
-    text << map_data["name"].string_value() << "_MapConnectionsList::\n";
+    text << map_data["name"].string_value() << "_MapConnectionsList:\n";
 
     for (auto &connection : map_data["connections"].array_items()) {
         text << "\tconnection "
@@ -150,7 +148,7 @@ string generate_map_connections_text(Json map_data) {
              << connection["map"].string_value() << "\n";
     }
 
-    text << "\n" << map_data["name"].string_value() << "_MapConnections::\n"
+    text << "\n" << map_data["name"].string_value() << "_MapConnections:\n"
          << "\t.4byte " << map_data["connections"].array_items().size() << "\n"
          << "\t.4byte " << map_data["name"].string_value() << "_MapConnectionsList\n\n";
 

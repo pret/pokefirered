@@ -412,7 +412,7 @@ void process_map(string map_filepath, string layouts_filepath, string version) {
     write_text_file(files_dir + "connections.inc", connections_text);
 }
 
-string generate_groups_text(Json groups_data) {
+string generate_groups_text(Json groups_data, string version) {
     ostringstream text;
 
     text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
@@ -567,7 +567,7 @@ void process_groups(string groups_filepath) {
     write_text_file(file_dir + ".." + s + ".." + s + "include" + s + "constants" + s + "map_groups.h", map_header_text);
 }
 
-string generate_layout_headers_text(Json layouts_data) {
+string generate_layout_headers_text(Json layouts_data, string version) {
     ostringstream text;
 
     text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n@\n\n";

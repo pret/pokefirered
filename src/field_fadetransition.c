@@ -611,7 +611,7 @@ void DoTeleportWarp(void)
     gFieldCallback = FieldCB_TeleportWarpIn;
 }
 
-static void DoTeleport2WarpWithoutCallback(void) // Unused
+static void DoPortholeWarp(void) // Unused
 {
     ScriptContext2_Enable();
     WarpFadeOutScreen();

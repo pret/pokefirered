@@ -52,4 +52,6 @@ struct Decoration
     const u16 *tiles;
 };
 
+extern const struct Decoration gDecorations[];
+
 #endif //GUARD_DECORATION_H

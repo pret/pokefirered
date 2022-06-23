@@ -570,7 +570,7 @@ static bool8 ShouldUseItem(void)
          && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
          && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
             ++validMons;
-    for (i = 0; i < MAX_MON_MOVES; ++i)
+    for (i = 0; i < MAX_TRAINER_ITEMS; ++i)
     {
         u16 item;
         const u8 *itemEffects;

@@ -1,4 +1,4 @@
-CC = gcc
+CC ?= gcc
 
 CFLAGS = -Wall -Wextra -Werror -std=c11 -O2
 CFLAGS += $(shell pkg-config --cflags libpng)

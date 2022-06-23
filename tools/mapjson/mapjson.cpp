@@ -24,7 +24,7 @@ using std::ostringstream;
 #include <limits>
 using std::numeric_limits;
 
-#include "json11.h"
+#include "json11.hpp"
 using json11::Json;
 
 #include "mapjson.h"
@@ -236,7 +236,15 @@ string generate_map_events_text(Json map_data) {
         bgs_label = map_data["name"].string_value() + "_MapBGEvents";
         text << bgs_label << ":\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
-            if (bg_event["type"] == "sign") {
+            if (bg_event["type"] == "sign" && version == "emerald") {
+                text << "\tbg_sign_event "
+                     << bg_event["x"].int_value() << ", "
+                     << bg_event["y"].int_value() << ", "
+                     << bg_event["elevation"].int_value() << ", "
+                     << bg_event["player_facing_dir"].string_value() << ", "
+                     << bg_event["script"].string_value() << "\n";
+            }
+            else if (bg_event["type"] == "sign" && version != "emerald") {
                 text << "\tbg_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "

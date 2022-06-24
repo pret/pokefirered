@@ -15,7 +15,7 @@ PewterCity_PokemonCenter_1F_EventScript_Nurse:: @ 816A76F
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_Gentleman:: @ 816A778
-	msgbox PewterCity_Museum_1F_Text_TeamRocketMtMoonImOnPhone, MSGBOX_NPC
+	msgbox PewterCity_PokemonCenter_1F_Text_TeamRocketMtMoonImOnPhone, MSGBOX_NPC
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_Jigglypuff:: @ 816A781
@@ -23,7 +23,7 @@ PewterCity_PokemonCenter_1F_EventScript_Jigglypuff:: @ 816A781
 	faceplayer
 	fadeoutbgm 0
 	playbgm MUS_JIGGLYPUFF, 0
-	message PewterCity_Museum_1F_Text_Jigglypuff
+	message PewterCity_PokemonCenter_1F_Text_Jigglypuff
 	waitmessage
 	delay 455
 	playbgm MUS_POKE_CENTER, 1
@@ -31,15 +31,15 @@ PewterCity_PokemonCenter_1F_EventScript_Jigglypuff:: @ 816A781
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_Youngster:: @ 816A798
-	msgbox PewterCity_Museum_1F_Text_WhenJiggylypuffSingsMonsGetDrowsy, MSGBOX_NPC
+	msgbox PewterCity_PokemonCenter_1F_Text_WhenJiggylypuffSingsMonsGetDrowsy, MSGBOX_NPC
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_GBAKid1:: @ 816A7A1
 	lock
-	msgbox PewterCity_Museum_1F_Text_TradingMyClefairyForPikachu
+	msgbox PewterCity_PokemonCenter_1F_Text_TradingMyClefairyForPikachu
 	release
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_GBAKid2:: @ 816A7AC
-	msgbox PewterCity_Museum_1F_Text_TradingPikachuWithKid, MSGBOX_NPC
+	msgbox PewterCity_PokemonCenter_1F_Text_TradingPikachuWithKid, MSGBOX_NPC
 	end

@@ -15,7 +15,7 @@
 @ Emerald also adds a few entirely new AI commands (mostly to expand Double Battle AI), which are not included
 
 	.align 2
-gBattleAI_ScriptsTable:: @ 81D9BF4
+gBattleAI_ScriptsTable::
 	.4byte AI_CheckBadMove
 	.4byte AI_CheckViability
 	.4byte AI_TryToFaint
@@ -49,7 +49,7 @@ gBattleAI_ScriptsTable:: @ 81D9BF4
 	.4byte AI_Safari
 	.4byte AI_FirstBattle
 
-AI_CheckBadMove:: @ 81D9C74
+AI_CheckBadMove::
 @	if_move MOVE_FISSURE, AI_CBM_CheckIfNegatesType  @ Improvement in Emerald
 @	if_move MOVE_HORN_DRILL, AI_CBM_CheckIfNegatesType
 	get_how_powerful_move_is
@@ -65,30 +65,30 @@ AI_CBM_CheckIfNegatesType::
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
 	goto AI_CheckBadMove_CheckSoundproof
 
-CheckIfVoltAbsorbCancelsElectric:: @ 81D9CA6
+CheckIfVoltAbsorbCancelsElectric::
 	get_curr_move_type
 	if_equal_ TYPE_ELECTRIC, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof
 
-CheckIfWaterAbsorbCancelsWater:: @ 81D9CB3
+CheckIfWaterAbsorbCancelsWater::
 	get_curr_move_type
 	if_equal_ TYPE_WATER, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof
 
-CheckIfFlashFireCancelsFire:: @ 81D9CC0
+CheckIfFlashFireCancelsFire::
 	get_curr_move_type
 	if_equal_ TYPE_FIRE, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof
 
-CheckIfWonderGuardCancelsMove:: @ 81D9CCD
+CheckIfWonderGuardCancelsMove::
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CheckBadMove_CheckSoundproof
 	goto Score_Minus10
 
-CheckIfLevitateCancelsGroundMove:: @ 81D9CD8
+CheckIfLevitateCancelsGroundMove::
 	get_curr_move_type
 	if_equal_ TYPE_GROUND, Score_Minus10
 
-AI_CheckBadMove_CheckSoundproof:: @ 81D9CE0
+AI_CheckBadMove_CheckSoundproof::
 	get_ability AI_TARGET
 	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
 	if_move MOVE_GROWL, Score_Minus10
@@ -101,7 +101,7 @@ AI_CheckBadMove_CheckSoundproof:: @ 81D9CE0
 	if_move MOVE_METAL_SOUND, Score_Minus10
 	if_move MOVE_GRASS_WHISTLE, Score_Minus10
 
-AI_CheckBadMove_CheckEffect:: @ 81D9D27
+AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
 	if_effect EFFECT_EXPLOSION, AI_CBM_Explosion
 	if_effect EFFECT_DREAM_EATER, AI_CBM_DreamEater
@@ -213,7 +213,7 @@ AI_CheckBadMove_CheckEffect:: @ 81D9D27
 	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
 	end
 
-AI_CBM_Sleep:: @ 81D9FB6
+AI_CBM_Sleep::
 	get_ability AI_TARGET
 	if_equal ABILITY_INSOMNIA, Score_Minus10
 	if_equal ABILITY_VITAL_SPIRIT, Score_Minus10
@@ -221,7 +221,7 @@ AI_CBM_Sleep:: @ 81D9FB6
 @	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
 	end
 
-AI_CBM_Explosion:: @ 81D9FCF
+AI_CBM_Explosion::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_DAMP, Score_Minus10
@@ -231,90 +231,90 @@ AI_CBM_Explosion:: @ 81D9FCF
 	if_not_equal 0, Score_Minus10
 	goto Score_Minus1
 
-AI_CBM_Explosion_End:: @ 81D9FF2
+AI_CBM_Explosion_End::
 	end
 
-AI_CBM_Nightmare:: @ 81D9FF3
+AI_CBM_Nightmare::
 	if_status2 AI_TARGET, STATUS2_NIGHTMARE, Score_Minus10
 	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus8
 	end
 
-AI_CBM_DreamEater:: @ 81DA008
+AI_CBM_DreamEater::
 	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus8
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	end
 
-AI_CBM_BellyDrum:: @ 81DA019
+AI_CBM_BellyDrum::
 	if_hp_less_than AI_USER, 51, Score_Minus10
 
-AI_CBM_AttackUp:: @ 81DA020
+AI_CBM_AttackUp::
 	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
 	end
 
-AI_CBM_DefenseUp:: @ 81DA029
+AI_CBM_DefenseUp::
 	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
 	end
 
-AI_CBM_SpeedUp:: @ 81DA032
+AI_CBM_SpeedUp::
 	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus10
 	end
 
-AI_CBM_SpAtkUp:: @ 81DA03B
+AI_CBM_SpAtkUp::
 	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
 	end
 
-AI_CBM_SpDefUp:: @ 81DA044
+AI_CBM_SpDefUp::
 	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus10
 	end
 
-AI_CBM_AccUp:: @ 81DA04D
+AI_CBM_AccUp::
 	if_stat_level_equal AI_USER, STAT_ACC, 12, Score_Minus10
 	end
 
-AI_CBM_EvasionUp:: @ 81DA056
+AI_CBM_EvasionUp::
 	if_stat_level_equal AI_USER, STAT_EVASION, 12, Score_Minus10
 	end
 
-AI_CBM_AttackDown:: @ 81DA05F
+AI_CBM_AttackDown::
 	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_HYPER_CUTTER, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
-AI_CBM_DefenseDown:: @ 81DA074
+AI_CBM_DefenseDown::
 	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
-AI_CBM_SpeedDown:: @ 81DA081
+AI_CBM_SpeedDown::
 	if_stat_level_equal AI_TARGET, STAT_SPEED, 0, Score_Minus10
 @	get_ability AI_TARGET  @ Improvement in Emerald
 @	if_equal ABILITY_SPEED_BOOST, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
-AI_CBM_SpAtkDown:: @ 81DA08E
+AI_CBM_SpAtkDown::
 	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
-AI_CBM_SpDefDown:: @ 81DA09B
+AI_CBM_SpDefDown::
 	if_stat_level_equal AI_TARGET, STAT_SPDEF, 0, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
-AI_CBM_AccDown:: @ 81DA0A8
+AI_CBM_AccDown::
 	if_stat_level_equal AI_TARGET, STAT_ACC, 0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_KEEN_EYE, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
-AI_CBM_EvasionDown:: @ 81DA0BD
+AI_CBM_EvasionDown::
 	if_stat_level_equal AI_TARGET, STAT_EVASION, 0, Score_Minus10
 
-CheckIfAbilityBlocksStatChange:: @ 81DA0C5
+CheckIfAbilityBlocksStatChange::
 	get_ability AI_TARGET
 	if_equal ABILITY_CLEAR_BODY, Score_Minus10
 	if_equal ABILITY_WHITE_SMOKE, Score_Minus10
 	end
 
-AI_CBM_Haze:: @ 81DA0D4
+AI_CBM_Haze::
 	if_stat_level_less_than AI_USER, STAT_ATK, 6, AI_CBM_Haze_End
 	if_stat_level_less_than AI_USER, STAT_DEF, 6, AI_CBM_Haze_End
 	if_stat_level_less_than AI_USER, STAT_SPEED, 6, AI_CBM_Haze_End
@@ -331,17 +331,17 @@ AI_CBM_Haze:: @ 81DA0D4
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 6, AI_CBM_Haze_End
 	goto Score_Minus10
 
-AI_CBM_Haze_End:: @ 81DA149
+AI_CBM_Haze_End::
 	end
 
-AI_CBM_Roar:: @ 81DA14A
+AI_CBM_Roar::
 	count_alive_pokemon AI_TARGET
 	if_equal 0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_SUCTION_CUPS, Score_Minus10
 	end
 
-AI_CBM_Poison:: @ 81DA15B
+AI_CBM_Poison::
 	get_target_type1
 	if_equal TYPE_STEEL, Score_Minus10
 	if_equal TYPE_POISON, Score_Minus10
@@ -354,51 +354,51 @@ AI_CBM_Poison:: @ 81DA15B
 @	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
 	end
 
-AI_CBM_LightScreen:: @ 81DA18A
+AI_CBM_LightScreen::
 	if_side_affecting AI_USER, SIDE_STATUS_LIGHTSCREEN, Score_Minus8
 	end
 
-AI_CBM_OneHitKO:: @ 81DA195
+AI_CBM_OneHitKO::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_STURDY, Score_Minus10
 	if_level_cond 1, Score_Minus10
 	end
 
-AI_CBM_Magnitude:: @ 81DA1AA
+AI_CBM_Magnitude::
 	get_ability AI_TARGET
 	if_equal ABILITY_LEVITATE, Score_Minus10
 
-AI_CBM_HighRiskForDamage:: @ 81DA1B2
+AI_CBM_HighRiskForDamage::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_TARGET
 	if_not_equal ABILITY_WONDER_GUARD, AI_CBM_HighRiskForDamage_End
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_HighRiskForDamage_End
 	goto Score_Minus10
 
-AI_CBM_HighRiskForDamage_End:: @ 81DA1CB
+AI_CBM_HighRiskForDamage_End::
 	end
 
-AI_CBM_Mist:: @ 81DA1CC
+AI_CBM_Mist::
 	if_side_affecting AI_USER, SIDE_STATUS_MIST, Score_Minus8
 	end
 
-AI_CBM_FocusEnergy:: @ 81DA1D7
+AI_CBM_FocusEnergy::
 	if_status2 AI_USER, STATUS2_FOCUS_ENERGY, Score_Minus10
 	end
 
-AI_CBM_Confuse:: @ 81DA1E2
+AI_CBM_Confuse::
 	if_status2 AI_TARGET, STATUS2_CONFUSION, Score_Minus5
 	get_ability AI_TARGET
 	if_equal ABILITY_OWN_TEMPO, Score_Minus10
 @	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
 	end
 
-AI_CBM_Reflect:: @ 81DA1F5
+AI_CBM_Reflect::
 	if_side_affecting AI_USER, SIDE_STATUS_REFLECT, Score_Minus8
 	end
 
-AI_CBM_Paralyze:: @ 81DA200
+AI_CBM_Paralyze::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_LIMBER, Score_Minus10
@@ -406,12 +406,12 @@ AI_CBM_Paralyze:: @ 81DA200
 @	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
 	end
 
-AI_CBM_Substitute:: @ 81DA219
+AI_CBM_Substitute::
 	if_status2 AI_USER, STATUS2_SUBSTITUTE, Score_Minus8
 	if_hp_less_than AI_USER, 26, Score_Minus10
 	end
 
-AI_CBM_LeechSeed:: @ 81DA22B
+AI_CBM_LeechSeed::
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, Score_Minus10
 	get_target_type1
 	if_equal TYPE_GRASS, Score_Minus10
@@ -419,45 +419,45 @@ AI_CBM_LeechSeed:: @ 81DA22B
 	if_equal TYPE_GRASS, Score_Minus10
 	end
 
-AI_CBM_Disable:: @ 81DA246
+AI_CBM_Disable::
 	if_any_move_disabled AI_TARGET, Score_Minus8
 	end
 
-AI_CBM_Encore:: @ 81DA24E
+AI_CBM_Encore::
 	if_any_move_encored AI_TARGET, Score_Minus8
 	end
 
-AI_CBM_DamageDuringSleep:: @ 81DA256
+AI_CBM_DamageDuringSleep::
 	if_not_status AI_USER, STATUS1_SLEEP, Score_Minus8
 	end
 
-AI_CBM_CantEscape:: @ 81DA261
+AI_CBM_CantEscape::
 	if_status2 AI_TARGET, STATUS2_ESCAPE_PREVENTION, Score_Minus10
 	end
 
-AI_CBM_Curse:: @ 81DA26C
+AI_CBM_Curse::
 	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
 	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
 	end
 
-AI_CBM_Spikes:: @ 81DA27D
+AI_CBM_Spikes::
 	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, Score_Minus10
 	end
 
-AI_CBM_Foresight:: @ 81DA288
+AI_CBM_Foresight::
 	if_status2 AI_TARGET, STATUS2_FORESIGHT, Score_Minus10
 	end
 
-AI_CBM_PerishSong:: @ 81DA293
+AI_CBM_PerishSong::
 	if_status3 AI_TARGET, STATUS3_PERISH_SONG, Score_Minus10
 	end
 
-AI_CBM_Sandstorm:: @ 81DA29E
+AI_CBM_Sandstorm::
 	get_weather
 	if_equal AI_WEATHER_SANDSTORM, Score_Minus8
 	end
 
-AI_CBM_Attract:: @ 81DA2A6
+AI_CBM_Attract::
 	if_status2 AI_TARGET, STATUS2_INFATUATION, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_OBLIVIOUS, Score_Minus10
@@ -466,73 +466,73 @@ AI_CBM_Attract:: @ 81DA2A6
 	if_equal MON_FEMALE, AI_CBM_Attract_CheckIfTargetIsMale
 	goto Score_Minus10
 
-AI_CBM_Attract_CheckIfTargetIsFemale:: @ 81DA2CB
+AI_CBM_Attract_CheckIfTargetIsFemale::
 	get_gender AI_TARGET
 	if_equal MON_FEMALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
-AI_CBM_Attract_CheckIfTargetIsMale:: @ 81DA2D8
+AI_CBM_Attract_CheckIfTargetIsMale::
 	get_gender AI_TARGET
 	if_equal MON_MALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
-AI_CBM_Attract_End:: @ 81DA2E5
+AI_CBM_Attract_End::
 	end
 
-AI_CBM_Safeguard:: @ 81DA2E6
+AI_CBM_Safeguard::
 	if_side_affecting AI_USER, SIDE_STATUS_SAFEGUARD, Score_Minus8
 	end
 
-AI_CBM_Memento:: @ 81DA2F1
+AI_CBM_Memento::
 	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
 	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus8
 
-AI_CBM_BatonPass:: @ 81DA301
+AI_CBM_BatonPass::
 	count_alive_pokemon AI_USER
 	if_equal 0, Score_Minus10
 	end
 
-AI_CBM_RainDance:: @ 81DA30A
+AI_CBM_RainDance::
 	get_weather
 	if_equal AI_WEATHER_RAIN, Score_Minus8
 	end
 
-AI_CBM_SunnyDay:: @ 81DA312
+AI_CBM_SunnyDay::
 	get_weather
 	if_equal AI_WEATHER_SUN, Score_Minus8
 	end
 
-AI_CBM_FutureSight:: @ 81DA31A
+AI_CBM_FutureSight::
 	if_side_affecting AI_TARGET, SIDE_STATUS_FUTUREATTACK, Score_Minus10
 @	if_side_affecting AI_USER, SIDE_STATUS_FUTUREATTACK, Score_Minus12  @ Improvement in Emerald
 	end
 
-AI_CBM_FakeOut:: @ 81DA325
+AI_CBM_FakeOut::
 	is_first_turn_for AI_USER
 	if_equal 0, Score_Minus10
 	end
 
-AI_CBM_Stockpile:: @ 81DA32E
+AI_CBM_Stockpile::
 	get_stockpile_count AI_USER
 	if_equal 3, Score_Minus10
 	end
 
-AI_CBM_SpitUpAndSwallow:: @ 81DA337
+AI_CBM_SpitUpAndSwallow::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_stockpile_count AI_USER
 	if_equal 0, Score_Minus10
 	end
 
-AI_CBM_Hail:: @ 81DA346
+AI_CBM_Hail::
 	get_weather
 	if_equal AI_WEATHER_HAIL, Score_Minus8
 	end
 
-AI_CBM_Torment:: @ 81DA34E
+AI_CBM_Torment::
 	if_status2 AI_TARGET, STATUS2_TORMENT, Score_Minus10
 	end
 
-AI_CBM_WillOWisp:: @ 81DA359
+AI_CBM_WillOWisp::
 	get_ability AI_TARGET
 	if_equal ABILITY_WATER_VEIL, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
@@ -542,90 +542,90 @@ AI_CBM_WillOWisp:: @ 81DA359
 @	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
 	end
 
-AI_CBM_HelpingHand:: @ 81DA37E
+AI_CBM_HelpingHand::
 	if_not_double_battle Score_Minus10
 	end
 
-AI_CBM_TrickAndKnockOff:: @ 81DA386
+AI_CBM_TrickAndKnockOff::
 	get_ability AI_TARGET
 	if_equal ABILITY_STICKY_HOLD, Score_Minus10
 	end
 
-AI_CBM_Ingrain:: @ 81DA38F
+AI_CBM_Ingrain::
 	if_status3 AI_USER, STATUS3_ROOTED, Score_Minus10
 	end
 
-AI_CBM_Recycle:: @ 81DA39A
+AI_CBM_Recycle::
 	get_used_held_item AI_USER
 	if_equal ITEM_NONE, Score_Minus10
 	end
 
-AI_CBM_Imprison:: @ 81DA3A3
+AI_CBM_Imprison::
 	if_status3 AI_USER, STATUS3_IMPRISONED_OTHERS, Score_Minus10
 	end
 
-AI_CBM_Refresh:: @ 81DA3AE
+AI_CBM_Refresh::
 	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, Score_Minus10
 	end
 
-AI_CBM_MudSport:: @ 81DA3B9
+AI_CBM_MudSport::
 	if_status3 AI_USER, STATUS3_MUDSPORT, Score_Minus10
 	end
 
-AI_CBM_Tickle:: @ 81DA3C4
+AI_CBM_Tickle::
 	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
 	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus8
 	end
 
-AI_CBM_CosmicPower:: @ 81DA3D5
+AI_CBM_CosmicPower::
 	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
 	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
 	end
 
-AI_CBM_BulkUp:: @ 81DA3E6
+AI_CBM_BulkUp::
 	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
 	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
 	end
 
-AI_CBM_WaterSport:: @ 81DA3F7
+AI_CBM_WaterSport::
 	if_status3 AI_USER, STATUS3_WATERSPORT, Score_Minus10
 	end
 
-AI_CBM_CalmMind:: @ 81DA402
+AI_CBM_CalmMind::
 	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
 	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
 	end
 
-AI_CBM_DragonDance:: @ 81DA413
+AI_CBM_DragonDance::
 	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
 	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
 	end
 
-Score_Minus1:: @ 81DA424
+Score_Minus1::
 	score -1
 	end
 
-Score_Minus2:: @ 81DA427
+Score_Minus2::
 	score -2
 	end
 
-Score_Minus3:: @ 81DA42A
+Score_Minus3::
 	score -3
 	end
 
-Score_Minus5:: @ 81DA42D
+Score_Minus5::
 	score -5
 	end
 
-Score_Minus8:: @ 81DA430
+Score_Minus8::
 	score -8
 	end
 
-Score_Minus10:: @ 81DA433
+Score_Minus10::
 	score -10
 	end
 
-Score_Minus12:: @ 81DA436
+Score_Minus12::
 	score -12
 	end
 
@@ -650,7 +650,7 @@ Score_Plus5::
 @	score +10
 @	end
 
-AI_CheckViability:: @ 81DA445
+AI_CheckViability::
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb
 	if_effect EFFECT_EXPLOSION, AI_CV_SelfKO
@@ -775,73 +775,73 @@ AI_CheckViability:: @ 81DA445
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
 	end
 
-AI_CV_Sleep:: @ 81DA71C
+AI_CV_Sleep::
 	if_has_move_with_effect AI_TARGET, EFFECT_DREAM_EATER, AI_CV_SleepEncourageSlpDamage
 	if_has_move_with_effect AI_TARGET, EFFECT_NIGHTMARE, AI_CV_SleepEncourageSlpDamage
 	goto AI_CV_Sleep_End
 
-AI_CV_SleepEncourageSlpDamage:: @ 81DA72F
+AI_CV_SleepEncourageSlpDamage::
 	if_random_less_than 128, AI_CV_Sleep_End
 	score +1
 
-AI_CV_Sleep_End:: @ 81DA737
+AI_CV_Sleep_End::
 	end
 
-AI_CV_Absorb:: @ 81DA738
+AI_CV_Absorb::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_AbsorbEncourageMaybe
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_AbsorbEncourageMaybe
 	goto AI_CV_Absorb_End
 
-AI_CV_AbsorbEncourageMaybe:: @ 81DA749
+AI_CV_AbsorbEncourageMaybe::
 	if_random_less_than 50, AI_CV_Absorb_End
 	score -3
 
-AI_CV_Absorb_End:: @ 81DA751
+AI_CV_Absorb_End::
 	end
 
-AI_CV_SelfKO:: @ 81DA752
+AI_CV_SelfKO::
 	if_stat_level_less_than AI_TARGET, STAT_EVASION, 7, AI_CV_SelfKO_Encourage1
 	score -1
 	if_stat_level_less_than AI_TARGET, STAT_EVASION, 10, AI_CV_SelfKO_Encourage1
 	if_random_less_than 128, AI_CV_SelfKO_Encourage1
 	score -1
 
-AI_CV_SelfKO_Encourage1:: @ 81DA76C
+AI_CV_SelfKO_Encourage1::
 	if_hp_less_than AI_USER, 80, AI_CV_SelfKO_Encourage2
 	if_target_faster AI_CV_SelfKO_Encourage2
 	if_random_less_than 50, AI_CV_SelfKO_End
 	goto Score_Minus3
 
-AI_CV_SelfKO_Encourage2:: @ 81DA784
+AI_CV_SelfKO_Encourage2::
 	if_hp_more_than AI_USER, 50, AI_CV_SelfKO_Encourage4
 	if_random_less_than 128, AI_CV_SelfKO_Encourage3
 	score +1
 
-AI_CV_SelfKO_Encourage3:: @ 81DA793
+AI_CV_SelfKO_Encourage3::
 	if_hp_more_than AI_USER, 30, AI_CV_SelfKO_End
 	if_random_less_than 50, AI_CV_SelfKO_End
 	score +1
 	goto AI_CV_SelfKO_End
 
-AI_CV_SelfKO_Encourage4:: @ 81DA7A7
+AI_CV_SelfKO_Encourage4::
 	if_random_less_than 50, AI_CV_SelfKO_End
 	score -1
 
-AI_CV_SelfKO_End:: @ 81DA7AF
+AI_CV_SelfKO_End::
 	end
 
-AI_CV_DreamEater:: @ 81DA7B0
+AI_CV_DreamEater::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_DreamEater_ScoreDown1
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_DreamEater_ScoreDown1
 	goto AI_CV_DreamEater_End
 
-AI_CV_DreamEater_ScoreDown1:: @ 81DA7C1
+AI_CV_DreamEater_ScoreDown1::
 	score -1
 
-AI_CV_DreamEater_End:: @ 81DA7C3
+AI_CV_DreamEater_End::
 	end
 
-AI_CV_MirrorMove:: @ 81DA7C4
+AI_CV_MirrorMove::
 	if_target_faster AI_CV_MirrorMove2
 	get_last_used_move AI_TARGET
 	if_not_in_hwords AI_CV_MirrorMove_EncouragedMovesToMirror, AI_CV_MirrorMove2
@@ -849,17 +849,17 @@ AI_CV_MirrorMove:: @ 81DA7C4
 	score +2
 	goto AI_CV_MirrorMove_End
 
-AI_CV_MirrorMove2:: @ 81DA7E2
+AI_CV_MirrorMove2::
 	get_last_used_move AI_TARGET
 	if_in_hwords AI_CV_MirrorMove_EncouragedMovesToMirror, AI_CV_MirrorMove_End
 	if_random_less_than 80, AI_CV_MirrorMove_End
 	score -1
 
-AI_CV_MirrorMove_End:: @ 81DA7F5
+AI_CV_MirrorMove_End::
 	end
 
 	.space 2
-AI_CV_MirrorMove_EncouragedMovesToMirror:: @ 81DA7F8
+AI_CV_MirrorMove_EncouragedMovesToMirror::
 	.align 1
 	.2byte MOVE_SLEEP_POWDER
 	.2byte MOVE_LOVELY_KISS
@@ -902,44 +902,44 @@ AI_CV_MirrorMove_EncouragedMovesToMirror:: @ 81DA7F8
 	.2byte MOVE_SKILL_SWAP
 	.2byte -1
 
-AI_CV_AttackUp:: @ 81DA848
+AI_CV_AttackUp::
 	if_stat_level_less_than AI_USER, STAT_ATK, 9, AI_CV_AttackUp2
 	if_random_less_than 100, AI_CV_AttackUp3
 	score -1
 	goto AI_CV_AttackUp3
 
-AI_CV_AttackUp2:: @ 81DA85D
+AI_CV_AttackUp2::
 	if_hp_not_equal AI_USER, 100, AI_CV_AttackUp3
 	if_random_less_than 128, AI_CV_AttackUp3
 	score +2
 
-AI_CV_AttackUp3:: @ 81DA86C
+AI_CV_AttackUp3::
 	if_hp_more_than AI_USER, 70, AI_CV_AttackUp_End
 	if_hp_less_than AI_USER, 40, AI_CV_AttackUp_ScoreDown2
 	if_random_less_than 40, AI_CV_AttackUp_End
 
-AI_CV_AttackUp_ScoreDown2:: @ 81DA880
+AI_CV_AttackUp_ScoreDown2::
 	score -2
 
-AI_CV_AttackUp_End:: @ 81DA882
+AI_CV_AttackUp_End::
 	end
 
-AI_CV_DefenseUp:: @ 81DA883
+AI_CV_DefenseUp::
 	if_stat_level_less_than AI_USER, STAT_DEF, 9, AI_CV_DefenseUp2
 	if_random_less_than 100, AI_CV_DefenseUp3
 	score -1
 	goto AI_CV_DefenseUp3
 
-AI_CV_DefenseUp2:: @ 81DA898
+AI_CV_DefenseUp2::
 	if_hp_not_equal AI_USER, 100, AI_CV_DefenseUp3
 	if_random_less_than 128, AI_CV_DefenseUp3
 	score +2
 
-AI_CV_DefenseUp3:: @ 81DA8A7
+AI_CV_DefenseUp3::
 	if_hp_less_than AI_USER, 70, AI_CV_DefenseUp4
 	if_random_less_than 200, AI_CV_DefenseUp_End
 
-AI_CV_DefenseUp4:: @ 81DA8B4
+AI_CV_DefenseUp4::
 	if_hp_less_than AI_USER, 40, AI_CV_DefenseUp_ScoreDown2
 	get_last_used_move AI_TARGET
 	get_move_power_from_result
@@ -949,16 +949,16 @@ AI_CV_DefenseUp4:: @ 81DA8B4
 	if_not_in_bytes AI_CV_DefenseUp_PhysicalTypes, AI_CV_DefenseUp_ScoreDown2
 	if_random_less_than 60, AI_CV_DefenseUp_End
 
-AI_CV_DefenseUp5:: @ 81DA8D6
+AI_CV_DefenseUp5::
 	if_random_less_than 60, AI_CV_DefenseUp_End
 
-AI_CV_DefenseUp_ScoreDown2:: @ 81DA8DC
+AI_CV_DefenseUp_ScoreDown2::
 	score -2
 
-AI_CV_DefenseUp_End:: @ 81DA8DE
+AI_CV_DefenseUp_End::
 	end
 
-AI_CV_DefenseUp_PhysicalTypes:: @ 81DA8DF
+AI_CV_DefenseUp_PhysicalTypes::
 	.byte TYPE_NORMAL
 	.byte TYPE_FIGHTING
 	.byte TYPE_POISON
@@ -970,56 +970,56 @@ AI_CV_DefenseUp_PhysicalTypes:: @ 81DA8DF
 	.byte TYPE_STEEL
 	.byte -1
 
-AI_CV_SpeedUp:: @ 81DA8E9
+AI_CV_SpeedUp::
 	if_target_faster AI_CV_SpeedUp2
 	score -3
 	goto AI_CV_SpeedUp_End
 
-AI_CV_SpeedUp2:: @ 81DA8F6
+AI_CV_SpeedUp2::
 	if_random_less_than 70, AI_CV_SpeedUp_End
 	score +3
 
-AI_CV_SpeedUp_End:: @ 81DA8FE
+AI_CV_SpeedUp_End::
 	end
 
-AI_CV_SpAtkUp:: @ 81DA8FF
+AI_CV_SpAtkUp::
 	if_stat_level_less_than AI_USER, STAT_SPATK, 9, AI_CV_SpAtkUp2
 	if_random_less_than 100, AI_CV_SpAtkUp3
 	score -1
 	goto AI_CV_SpAtkUp3
 
-AI_CV_SpAtkUp2:: @ 81DA914
+AI_CV_SpAtkUp2::
 	if_hp_not_equal AI_USER, 100, AI_CV_SpAtkUp3
 	if_random_less_than 128, AI_CV_SpAtkUp3
 	score +2
 
-AI_CV_SpAtkUp3:: @ 81DA923
+AI_CV_SpAtkUp3::
 	if_hp_more_than AI_USER, 70, AI_CV_SpAtkUp_End
 	if_hp_less_than AI_USER, 40, AI_CV_SpAtkUp_ScoreDown2
 	if_random_less_than 70, AI_CV_SpAtkUp_End
 
-AI_CV_SpAtkUp_ScoreDown2:: @ 81DA937
+AI_CV_SpAtkUp_ScoreDown2::
 	score -2
 
-AI_CV_SpAtkUp_End:: @ 81DA939
+AI_CV_SpAtkUp_End::
 	end
 
-AI_CV_SpDefUp:: @ 81DA93A
+AI_CV_SpDefUp::
 	if_stat_level_less_than AI_USER, STAT_SPDEF, 9, AI_CV_SpDefUp2
 	if_random_less_than 100, AI_CV_SpDefUp3
 	score -1
 	goto AI_CV_SpDefUp3
 
-AI_CV_SpDefUp2:: @ 81DA94F
+AI_CV_SpDefUp2::
 	if_hp_not_equal AI_USER, 100, AI_CV_SpDefUp3
 	if_random_less_than 128, AI_CV_SpDefUp3
 	score +2
 
-AI_CV_SpDefUp3:: @ 81DA95E
+AI_CV_SpDefUp3::
 	if_hp_less_than AI_USER, 70, AI_CV_SpDefUp4
 	if_random_less_than 200, AI_CV_SpDefUp_End
 
-AI_CV_SpDefUp4:: @ 81DA96B
+AI_CV_SpDefUp4::
 	if_hp_less_than AI_USER, 40, AI_CV_SpDefUp_ScoreDown2
 	get_last_used_move AI_TARGET
 	get_move_power_from_result
@@ -1029,16 +1029,16 @@ AI_CV_SpDefUp4:: @ 81DA96B
 	if_in_bytes AI_CV_SpDefUp_PhysicalTypes, AI_CV_SpDefUp_ScoreDown2
 	if_random_less_than 60, AI_CV_SpDefUp_End
 
-AI_CV_SpDefUp5:: @ 81DA98D
+AI_CV_SpDefUp5::
 	if_random_less_than 60, AI_CV_SpDefUp_End
 
-AI_CV_SpDefUp_ScoreDown2:: @ 81DA993
+AI_CV_SpDefUp_ScoreDown2::
 	score -2
 
-AI_CV_SpDefUp_End:: @ 81DA995
+AI_CV_SpDefUp_End::
 	end
 
-AI_CV_SpDefUp_PhysicalTypes:: @ 81DA996
+AI_CV_SpDefUp_PhysicalTypes::
 	.byte TYPE_NORMAL
 	.byte TYPE_FIGHTING
 	.byte TYPE_POISON
@@ -1050,98 +1050,98 @@ AI_CV_SpDefUp_PhysicalTypes:: @ 81DA996
 	.byte TYPE_STEEL
 	.byte -1
 
-AI_CV_AccuracyUp:: @ 81DA9A0
+AI_CV_AccuracyUp::
 	if_stat_level_less_than AI_USER, STAT_ACC, 9, AI_CV_AccuracyUp2
 	if_random_less_than 50, AI_CV_AccuracyUp2
 	score -2
 
-AI_CV_AccuracyUp2:: @ 81DA9B0
+AI_CV_AccuracyUp2::
 	if_hp_more_than AI_USER, 70, AI_CV_AccuracyUp_End
 	score -2
 
-AI_CV_AccuracyUp_End:: @ 81DA9B9
+AI_CV_AccuracyUp_End::
 	end
 
-AI_CV_EvasionUp:: @ 81DA9BA
+AI_CV_EvasionUp::
 	if_hp_less_than AI_USER, 90, AI_CV_EvasionUp2
 	if_random_less_than 100, AI_CV_EvasionUp2
 	score +3
 
-AI_CV_EvasionUp2:: @ 81DA9C9
+AI_CV_EvasionUp2::
 	if_stat_level_less_than AI_USER, STAT_EVASION, 9, AI_CV_EvasionUp3
 	if_random_less_than 128, AI_CV_EvasionUp3
 	score -1
 
-AI_CV_EvasionUp3:: @ 81DA9D9
+AI_CV_EvasionUp3::
 	if_not_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_EvasionUp5
 	if_hp_more_than AI_USER, 50, AI_CV_EvasionUp4
 	if_random_less_than 80, AI_CV_EvasionUp5
 
-AI_CV_EvasionUp4:: @ 81DA9F0
+AI_CV_EvasionUp4::
 	if_random_less_than 50, AI_CV_EvasionUp5
 	score +3
 
-AI_CV_EvasionUp5:: @ 81DA9F8
+AI_CV_EvasionUp5::
 	if_not_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_EvasionUp6
 	if_random_less_than 70, AI_CV_EvasionUp6
 	score +3
 
-AI_CV_EvasionUp6:: @ 81DAA0A
+AI_CV_EvasionUp6::
 	if_not_status3 AI_USER, STATUS3_ROOTED, AI_CV_EvasionUp7
 	if_random_less_than 128, AI_CV_EvasionUp7
 	score +2
 
-AI_CV_EvasionUp7:: @ 81DAA1C
+AI_CV_EvasionUp7::
 	if_not_status2 AI_TARGET, STATUS2_CURSED, AI_CV_EvasionUp8
 	if_random_less_than 70, AI_CV_EvasionUp8
 	score +3
 
-AI_CV_EvasionUp8:: @ 81DAA2E
+AI_CV_EvasionUp8::
 	if_hp_more_than AI_USER, 70, AI_CV_EvasionUp_End
 	if_stat_level_equal AI_USER, STAT_EVASION, 6, AI_CV_EvasionUp_End
 	if_hp_less_than AI_USER, 40, AI_CV_EvasionUp_ScoreDown2
 	if_hp_less_than AI_TARGET, 40, AI_CV_EvasionUp_ScoreDown2
 	if_random_less_than 70, AI_CV_EvasionUp_End
 
-AI_CV_EvasionUp_ScoreDown2:: @ 81DAA51
+AI_CV_EvasionUp_ScoreDown2::
 	score -2
 
-AI_CV_EvasionUp_End:: @ 81DAA53
+AI_CV_EvasionUp_End::
 	end
 
-AI_CV_AlwaysHit:: @ 81DAA54
+AI_CV_AlwaysHit::
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 10, AI_CV_AlwaysHit_ScoreUp1
 	if_stat_level_less_than AI_USER, STAT_ACC, 2, AI_CV_AlwaysHit_ScoreUp1
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, AI_CV_AlwaysHit2
 	if_stat_level_less_than AI_USER, STAT_ACC, 4, AI_CV_AlwaysHit2
 	goto AI_CV_AlwaysHit_End
 
-AI_CV_AlwaysHit_ScoreUp1:: @ 81DAA79
+AI_CV_AlwaysHit_ScoreUp1::
 	score +1
 
-AI_CV_AlwaysHit2:: @ 81DAA7B
+AI_CV_AlwaysHit2::
 	if_random_less_than 100, AI_CV_AlwaysHit_End
 	score +1
 
-AI_CV_AlwaysHit_End:: @ 81DAA83
+AI_CV_AlwaysHit_End::
 	end
 
-AI_CV_AttackDown:: @ 81DAA84
+AI_CV_AttackDown::
 	if_stat_level_equal AI_TARGET, STAT_ATK, 6, AI_CV_AttackDown3
 	score -1
 	if_hp_more_than AI_USER, 90, AI_CV_AttackDown2
 	score -1
 
-AI_CV_AttackDown2:: @ 81DAA97
+AI_CV_AttackDown2::
 	if_stat_level_more_than AI_TARGET, STAT_ATK, 3, AI_CV_AttackDown3
 	if_random_less_than 50, AI_CV_AttackDown3
 	score -2
 
-AI_CV_AttackDown3:: @ 81DAAA7
+AI_CV_AttackDown3::
 	if_hp_more_than AI_TARGET, 70, AI_CV_AttackDown4
 	score -2
 
-AI_CV_AttackDown4:: @ 81DAAB0
+AI_CV_AttackDown4::
 	get_target_type1
 	if_in_bytes AI_CV_AttackDown_PhysicalTypeList, AI_CV_AttackDown_End
 	get_target_type2
@@ -1149,11 +1149,11 @@ AI_CV_AttackDown4:: @ 81DAAB0
 	if_random_less_than 50, AI_CV_AttackDown_End
 	score -2
 
-AI_CV_AttackDown_End:: @ 81DAACE
+AI_CV_AttackDown_End::
 	end
 
 @ Missing Poison, Flying, and Ghost for unknown reason
-AI_CV_AttackDown_PhysicalTypeList:: @ 81DAACF
+AI_CV_AttackDown_PhysicalTypeList::
 	.byte TYPE_NORMAL
 	.byte TYPE_FIGHTING
 	.byte TYPE_GROUND
@@ -1162,55 +1162,55 @@ AI_CV_AttackDown_PhysicalTypeList:: @ 81DAACF
 	.byte TYPE_STEEL
 	.byte -1
 
-AI_CV_DefenseDown:: @ 81DAAD6
+AI_CV_DefenseDown::
 	if_hp_less_than AI_USER, 70, AI_CV_DefenseDown2
 	if_stat_level_more_than AI_TARGET, STAT_DEF, 3, AI_CV_DefenseDown3
 
-AI_CV_DefenseDown2:: @ 81DAAE5
+AI_CV_DefenseDown2::
 	if_random_less_than 50, AI_CV_DefenseDown3
 	score -2
 
-AI_CV_DefenseDown3:: @ 81DAAED
+AI_CV_DefenseDown3::
 	if_hp_more_than AI_TARGET, 70, AI_CV_DefenseDown_End
 	score -2
 
-AI_CV_DefenseDown_End:: @ 81DAAF6
+AI_CV_DefenseDown_End::
 	end
 
-AI_CV_SpeedDownFromChance:: @ 81DAAF7
+AI_CV_SpeedDownFromChance::
 	if_move MOVE_ICY_WIND, AI_CV_SpeedDown
 	if_move MOVE_ROCK_TOMB, AI_CV_SpeedDown
 	if_move MOVE_MUD_SHOT, AI_CV_SpeedDown
 	end
 
-AI_CV_SpeedDown:: @ 81DAB0D
+AI_CV_SpeedDown::
 	if_target_faster AI_CV_SpeedDown2
 	score -3
 	goto AI_CV_SpeedDown_End
 
-AI_CV_SpeedDown2:: @ 81DAB1A
+AI_CV_SpeedDown2::
 	if_random_less_than 70, AI_CV_SpeedDown_End
 	score +2
 
-AI_CV_SpeedDown_End:: @ 81DAB22
+AI_CV_SpeedDown_End::
 	end
 
-AI_CV_SpAtkDown:: @ 81DAB23
+AI_CV_SpAtkDown::
 	if_stat_level_equal AI_TARGET, STAT_ATK, 6, AI_CV_SpAtkDown3
 	score -1
 	if_hp_more_than AI_USER, 90, AI_CV_SpAtkDown2
 	score -1
 
-AI_CV_SpAtkDown2:: @ 81DAB36
+AI_CV_SpAtkDown2::
 	if_stat_level_more_than AI_TARGET, STAT_SPATK, 3, AI_CV_SpAtkDown3
 	if_random_less_than 50, AI_CV_SpAtkDown3
 	score -2
 
-AI_CV_SpAtkDown3:: @ 81DAB46
+AI_CV_SpAtkDown3::
 	if_hp_more_than AI_TARGET, 70, AI_CV_SpAtkDown4
 	score -2
 
-AI_CV_SpAtkDown4:: @ 81DAB4F
+AI_CV_SpAtkDown4::
 	get_target_type1
 	if_in_bytes AI_CV_SpAtkDown_SpecialTypeList, AI_CV_SpAtkDown_End
 	get_target_type2
@@ -1218,10 +1218,10 @@ AI_CV_SpAtkDown4:: @ 81DAB4F
 	if_random_less_than 50, AI_CV_SpAtkDown_End
 	score -2
 
-AI_CV_SpAtkDown_End:: @ 81DAB6D
+AI_CV_SpAtkDown_End::
 	end
 
-AI_CV_SpAtkDown_SpecialTypeList:: @ 81DAB6E
+AI_CV_SpAtkDown_SpecialTypeList::
 	.byte TYPE_FIRE
 	.byte TYPE_WATER
 	.byte TYPE_GRASS
@@ -1232,83 +1232,83 @@ AI_CV_SpAtkDown_SpecialTypeList:: @ 81DAB6E
 	.byte TYPE_DARK
 	.byte -1
 
-AI_CV_SpDefDown:: @ 81DAB77
+AI_CV_SpDefDown::
 	if_hp_less_than AI_USER, 70, AI_CV_SpDefDown2
 	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 3, AI_CV_SpDefDown3
 
-AI_CV_SpDefDown2:: @ 81DAB86
+AI_CV_SpDefDown2::
 	if_random_less_than 50, AI_CV_SpDefDown3
 	score -2
 
-AI_CV_SpDefDown3:: @ 81DAB8E
+AI_CV_SpDefDown3::
 	if_hp_more_than AI_TARGET, 70, AI_CV_SpDefDown_End
 	score -2
 
-AI_CV_SpDefDown_End:: @ 81DAB97
+AI_CV_SpDefDown_End::
 	end
 
-AI_CV_AccuracyDown:: @ 81DAB98
+AI_CV_AccuracyDown::
 	if_hp_less_than AI_USER, 70, AI_CV_AccuracyDown2
 	if_hp_more_than AI_TARGET, 70, AI_CV_AccuracyDown3
 
-AI_CV_AccuracyDown2:: @ 81DABA6
+AI_CV_AccuracyDown2::
 	if_random_less_than 100, AI_CV_AccuracyDown3
 	score -1
 
-AI_CV_AccuracyDown3:: @ 81DABAE
+AI_CV_AccuracyDown3::
 	if_stat_level_more_than AI_USER, STAT_ACC, 4, AI_CV_AccuracyDown4
 	if_random_less_than 80, AI_CV_AccuracyDown4
 	score -2
 
-AI_CV_AccuracyDown4:: @ 81DABBE
+AI_CV_AccuracyDown4::
 	if_not_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_AccuracyDown5
 	if_random_less_than 70, AI_CV_AccuracyDown5
 	score +2
 
-AI_CV_AccuracyDown5:: @ 81DABD0
+AI_CV_AccuracyDown5::
 	if_not_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_AccuracyDown6
 	if_random_less_than 70, AI_CV_AccuracyDown6
 	score +2
 
-AI_CV_AccuracyDown6:: @ 81DABE2
+AI_CV_AccuracyDown6::
 	if_not_status3 AI_USER, STATUS3_ROOTED, AI_CV_AccuracyDown7
 	if_random_less_than 128, AI_CV_AccuracyDown7
 	score +1
 
-AI_CV_AccuracyDown7:: @ 81DABF4
+AI_CV_AccuracyDown7::
 	if_not_status2 AI_TARGET, STATUS2_CURSED, AI_CV_AccuracyDown8
 	if_random_less_than 70, AI_CV_AccuracyDown8
 	score +2
 
-AI_CV_AccuracyDown8:: @ 81DAC06
+AI_CV_AccuracyDown8::
 	if_hp_more_than AI_USER, 70, AI_CV_AccuracyDown_End
 	if_stat_level_equal AI_TARGET, STAT_ACC, 6, AI_CV_AccuracyDown_End
 	if_hp_less_than AI_USER, 40, AI_CV_AccuracyDown_ScoreDown2
 	if_hp_less_than AI_TARGET, 40, AI_CV_AccuracyDown_ScoreDown2
 	if_random_less_than 70, AI_CV_AccuracyDown_End
 
-AI_CV_AccuracyDown_ScoreDown2:: @ 81DAC29
+AI_CV_AccuracyDown_ScoreDown2::
 	score -2
 
-AI_CV_AccuracyDown_End:: @ 81DAC2B
+AI_CV_AccuracyDown_End::
 	end
 
-AI_CV_EvasionDown:: @ 81DAC2C
+AI_CV_EvasionDown::
 	if_hp_less_than AI_USER, 70, AI_CV_EvasionDown2
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 3, AI_CV_EvasionDown3
 
-AI_CV_EvasionDown2:: @ 81DAC3B
+AI_CV_EvasionDown2::
 	if_random_less_than 50, AI_CV_EvasionDown3
 	score -2
 
-AI_CV_EvasionDown3:: @ 81DAC43
+AI_CV_EvasionDown3::
 	if_hp_more_than AI_TARGET, 70, AI_CV_EvasionDown_End
 	score -2
 
-AI_CV_EvasionDown_End:: @ 81DAC4C
+AI_CV_EvasionDown_End::
 	end
 
-AI_CV_Haze:: @ 81DAC4D
+AI_CV_Haze::
 	if_stat_level_more_than AI_USER, STAT_ATK, 8, AI_CV_Haze2
 	if_stat_level_more_than AI_USER, STAT_DEF, 8, AI_CV_Haze2
 	if_stat_level_more_than AI_USER, STAT_SPATK, 8, AI_CV_Haze2
@@ -1321,11 +1321,11 @@ AI_CV_Haze:: @ 81DAC4D
 	if_stat_level_less_than AI_TARGET, STAT_ACC, 4, AI_CV_Haze2
 	goto AI_CV_Haze3
 
-AI_CV_Haze2:: @ 81DACA2
+AI_CV_Haze2::
 	if_random_less_than 50, AI_CV_Haze3
 	score -3
 
-AI_CV_Haze3:: @ 81DACAA
+AI_CV_Haze3::
 	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, AI_CV_Haze4
 	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, AI_CV_Haze4
 	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, AI_CV_Haze4
@@ -1340,21 +1340,21 @@ AI_CV_Haze3:: @ 81DACAA
 	score -1
 	goto AI_CV_Haze_End
 
-AI_CV_Haze4:: @ 81DAD07
+AI_CV_Haze4::
 	if_random_less_than 50, AI_CV_Haze_End
 	score +3
 
-AI_CV_Haze_End:: @ 81DAD0F
+AI_CV_Haze_End::
 	end
 
-AI_CV_Bide:: @ 81DAD10
+AI_CV_Bide::
 	if_hp_more_than AI_USER, 90, AI_CV_Bide_End
 	score -2
 
-AI_CV_Bide_End:: @ 81DAD19
+AI_CV_Bide_End::
 	end
 
-AI_CV_Roar:: @ 81DAD1A
+AI_CV_Roar::
 	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, AI_CV_Roar2
 	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, AI_CV_Roar2
 	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, AI_CV_Roar2
@@ -1363,36 +1363,36 @@ AI_CV_Roar:: @ 81DAD1A
 	score -3
 	goto AI_CV_Roar_End
 
-AI_CV_Roar2:: @ 81DAD49
+AI_CV_Roar2::
 	if_random_less_than 128, AI_CV_Roar_End
 	score +2
 
-AI_CV_Roar_End:: @ 81DAD51
+AI_CV_Roar_End::
 	end
 
-AI_CV_Conversion:: @ 81DAD52
+AI_CV_Conversion::
 	if_hp_more_than AI_USER, 90, AI_CV_Conversion2
 	score -2
 
-AI_CV_Conversion2:: @ 81DAD5B
+AI_CV_Conversion2::
 	get_turn_count
 	if_equal 0, AI_CV_Conversion_End
 	if_random_less_than 200, Score_Minus2
 
-AI_CV_Conversion_End:: @ 81DAD68
+AI_CV_Conversion_End::
 	end
 
-AI_CV_HealWeather:: @ 81DAD69
+AI_CV_HealWeather::
 	get_weather
 	if_equal AI_WEATHER_HAIL, AI_CV_HealWeather_ScoreDown2
 	if_equal AI_WEATHER_RAIN, AI_CV_HealWeather_ScoreDown2
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_HealWeather_ScoreDown2
 	goto AI_CV_Heal
 
-AI_CV_HealWeather_ScoreDown2:: @ 81DAD81
+AI_CV_HealWeather_ScoreDown2::
 	score -2
 
-AI_CV_Heal:: @ 81DAD83
+AI_CV_Heal::
 	if_hp_equal AI_USER, 100, AI_CV_Heal3
 	if_target_faster AI_CV_Heal4
 	score -8
@@ -1404,51 +1404,51 @@ AI_CV_Heal2:
 	if_hp_more_than AI_USER, 80, AI_CV_Heal3
 	if_random_less_than 70, AI_CV_Heal5
 
-AI_CV_Heal3:: @ 81DADAB
+AI_CV_Heal3::
 	score -3
 	goto AI_CV_Heal_End
 
-AI_CV_Heal4:: @ 81DADB2
+AI_CV_Heal4::
 	if_hp_less_than AI_USER, 70, AI_CV_Heal5
 	if_random_less_than 30, AI_CV_Heal5
 	score -3
 	goto AI_CV_Heal_End
 
-AI_CV_Heal5:: @ 81DADC6
+AI_CV_Heal5::
 	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_SNATCH, AI_CV_Heal6
 	if_random_less_than 100, AI_CV_Heal_End
 
-AI_CV_Heal6:: @ 81DADD3
+AI_CV_Heal6::
 	if_random_less_than 20, AI_CV_Heal_End
 	score +2
 
-AI_CV_Heal_End:: @ 81DADDB
+AI_CV_Heal_End::
 	end
 
-AI_CV_Toxic:: @ 81DADDC
+AI_CV_Toxic::
 	if_user_has_no_attacking_moves AI_CV_Toxic3
 	if_hp_more_than AI_USER, 50, AI_CV_Toxic2
 	if_random_less_than 50, AI_CV_Toxic2
 	score -3
 
-AI_CV_Toxic2:: @ 81DADF0
+AI_CV_Toxic2::
 	if_hp_more_than AI_TARGET, 50, AI_CV_Toxic3
 	if_random_less_than 50, AI_CV_Toxic3
 	score -3
 
-AI_CV_Toxic3:: @ 81DADFF
+AI_CV_Toxic3::
 	if_has_move_with_effect AI_USER, EFFECT_SPECIAL_DEFENSE_UP, AI_CV_Toxic4
 	if_has_move_with_effect AI_USER, EFFECT_PROTECT, AI_CV_Toxic4
 	goto AI_CV_Toxic_End
 
-AI_CV_Toxic4:: @ 81DAE12
+AI_CV_Toxic4::
 	if_random_less_than 60, AI_CV_Toxic_End
 	score +2
 
-AI_CV_Toxic_End:: @ 81DAE1A
+AI_CV_Toxic_End::
 	end
 
-AI_CV_LightScreen:: @ 81DAE1B
+AI_CV_LightScreen::
 	if_hp_less_than AI_USER, 50, AI_CV_LightScreen_ScoreDown2
 	get_target_type1
 	if_in_bytes AI_CV_LightScreen_SpecialTypeList, AI_CV_LightScreen_End
@@ -1456,13 +1456,13 @@ AI_CV_LightScreen:: @ 81DAE1B
 	if_in_bytes AI_CV_LightScreen_SpecialTypeList, AI_CV_LightScreen_End
 	if_random_less_than 50, AI_CV_LightScreen_End
 
-AI_CV_LightScreen_ScoreDown2:: @ 81DAE3E
+AI_CV_LightScreen_ScoreDown2::
 	score -2
 
-AI_CV_LightScreen_End:: @ 81DAE40
+AI_CV_LightScreen_End::
 	end
 
-AI_CV_LightScreen_SpecialTypeList:: @ 81DAE41
+AI_CV_LightScreen_SpecialTypeList::
 	.byte TYPE_FIRE
 	.byte TYPE_WATER
 	.byte TYPE_GRASS
@@ -1473,99 +1473,99 @@ AI_CV_LightScreen_SpecialTypeList:: @ 81DAE41
 	.byte TYPE_DARK
 	.byte -1
 
-AI_CV_Rest:: @ 81DAE4A
+AI_CV_Rest::
 	if_target_faster AI_CV_Rest4
 	if_hp_not_equal AI_USER, 100, AI_CV_Rest2
 	score -8
 	goto AI_CV_Rest_End
 
-AI_CV_Rest2:: @ 81DAE5E
+AI_CV_Rest2::
 	if_hp_less_than AI_USER, 40, AI_CV_Rest6
 	if_hp_more_than AI_USER, 50, AI_CV_Rest3
 	if_random_less_than 70, AI_CV_Rest6
 
-AI_CV_Rest3:: @ 81DAE72
+AI_CV_Rest3::
 	score -3
 	goto AI_CV_Rest_End
 
-AI_CV_Rest4:: @ 81DAE79
+AI_CV_Rest4::
 	if_hp_less_than AI_USER, 60, AI_CV_Rest6
 	if_hp_more_than AI_USER, 70, AI_CV_Rest5
 	if_random_less_than 50, AI_CV_Rest6
 
-AI_CV_Rest5:: @ 81DAE8D
+AI_CV_Rest5::
 	score -3
 	goto AI_CV_Rest_End
 
-AI_CV_Rest6:: @ 81DAE94
+AI_CV_Rest6::
 	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_SNATCH, AI_CV_Rest7
 	if_random_less_than 50, AI_CV_Rest_End
 
-AI_CV_Rest7:: @ 81DAEA1
+AI_CV_Rest7::
 	if_random_less_than 10, AI_CV_Rest_End
 	score +3
 
-AI_CV_Rest_End:: @ 81DAEA9
+AI_CV_Rest_End::
 	end
 
-AI_CV_OneHitKO:: @ 81DAEAA
+AI_CV_OneHitKO::
 	end
 
-AI_CV_SuperFang:: @ 81DAEAB
+AI_CV_SuperFang::
 	if_hp_more_than AI_TARGET, 50, AI_CV_SuperFang_End
 	score -1
 
-AI_CV_SuperFang_End:: @ 81DAEB4
+AI_CV_SuperFang_End::
 	end
 
-AI_CV_Trap:: @ 81DAEB5
+AI_CV_Trap::
 	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_Trap2
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Trap2
 	if_status3 AI_TARGET, STATUS3_PERISH_SONG, AI_CV_Trap2
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Trap2
 	goto AI_CV_Trap_End
 
-AI_CV_Trap2:: @ 81DAEE2
+AI_CV_Trap2::
 	if_random_less_than 128, AI_CV_Trap_End
 	score +1
 
-AI_CV_Trap_End:: @ 81DAEEA
+AI_CV_Trap_End::
 	end
 
-AI_CV_HighCrit:: @ 81DAEEB
+AI_CV_HighCrit::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_HighCrit_End
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_HighCrit_End
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CV_HighCrit2
 	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_CV_HighCrit2
 	if_random_less_than 128, AI_CV_HighCrit_End
 
-AI_CV_HighCrit2:: @ 81DAF09
+AI_CV_HighCrit2::
 	if_random_less_than 128, AI_CV_HighCrit_End
 	score +1
 
-AI_CV_HighCrit_End:: @ 81DAF11
+AI_CV_HighCrit_End::
 	end
 
 @ Improvement in Emerald
 @AI_CV_Swagger:
 @	if_has_move AI_USER, MOVE_PSYCH_UP, AI_CV_SwaggerHasPsychUp
 
-AI_CV_Flatter:: @ 81DAF12
+AI_CV_Flatter::
 	if_random_less_than 128, AI_CV_Confuse
 	score +1
 
-AI_CV_Confuse:: @ 81DAF1A
+AI_CV_Confuse::
 	if_hp_more_than AI_TARGET, 70, AI_CV_Confuse_End
 	if_random_less_than 128, AI_CV_Confuse2
 	score -1
 
-AI_CV_Confuse2:: @ 81DAF29
+AI_CV_Confuse2::
 	if_hp_more_than AI_TARGET, 50, AI_CV_Confuse_End
 	score -1
 	if_hp_more_than AI_TARGET, 30, AI_CV_Confuse_End
 	score -1
 
-AI_CV_Confuse_End:: @ 81DAF3B
+AI_CV_Confuse_End::
 	end
 
 @ Improvement in Emerald
@@ -1583,7 +1583,7 @@ AI_CV_Confuse_End:: @ 81DAF3B
 @AI_CV_SwaggerHasPsychUp_End:
 @	end
 
-AI_CV_Reflect:: @ 81DAF3C
+AI_CV_Reflect::
 	if_hp_less_than AI_USER, 50, AI_CV_Reflect_ScoreDown2
 	get_target_type1
 	if_in_bytes AI_CV_Reflect_PhysicalTypeList, AI_CV_Reflect_End
@@ -1591,13 +1591,13 @@ AI_CV_Reflect:: @ 81DAF3C
 	if_in_bytes AI_CV_Reflect_PhysicalTypeList, AI_CV_Reflect_End
 	if_random_less_than 50, AI_CV_Reflect_End
 
-AI_CV_Reflect_ScoreDown2:: @ 81DAF5F
+AI_CV_Reflect_ScoreDown2::
 	score -2
 
-AI_CV_Reflect_End:: @ 81DAF61
+AI_CV_Reflect_End::
 	end
 
-AI_CV_Reflect_PhysicalTypeList:: @ 81DAF62
+AI_CV_Reflect_PhysicalTypeList::
 	.byte TYPE_NORMAL
 	.byte TYPE_FIGHTING
 	.byte TYPE_FLYING
@@ -1609,58 +1609,58 @@ AI_CV_Reflect_PhysicalTypeList:: @ 81DAF62
 	.byte TYPE_STEEL
 	.byte -1
 
-AI_CV_Poison:: @ 81DAF6C
+AI_CV_Poison::
 	if_hp_less_than AI_USER, 50, AI_CV_Poison_ScoreDown1
 	if_hp_more_than AI_TARGET, 50, AI_CV_Poison_End
 
-AI_CV_Poison_ScoreDown1:: @ 81DAF7A
+AI_CV_Poison_ScoreDown1::
 	score -1
 
-AI_CV_Poison_End:: @ 81DAF7C
+AI_CV_Poison_End::
 	end
 
-AI_CV_Paralyze:: @ 81DAF7D
+AI_CV_Paralyze::
 	if_target_faster AI_CV_Paralyze2
 	if_hp_more_than AI_USER, 70, AI_CV_Paralyze_End
 	score -1
 	goto AI_CV_Paralyze_End
 
-AI_CV_Paralyze2:: @ 81DAF91
+AI_CV_Paralyze2::
 	if_random_less_than 20, AI_CV_Paralyze_End
 	score +3
 
-AI_CV_Paralyze_End:: @ 81DAF99
+AI_CV_Paralyze_End::
 	end
 
-AI_CV_VitalThrow:: @ 81DAF9A
+AI_CV_VitalThrow::
 	if_target_faster AI_CV_VitalThrow_End
 	if_hp_more_than AI_USER, 60, AI_CV_VitalThrow_End
 	if_hp_less_than AI_USER, 40, AI_CV_VitalThrow2
 	if_random_less_than 180, AI_CV_VitalThrow_End
 
-AI_CV_VitalThrow2:: @ 81DAFB4
+AI_CV_VitalThrow2::
 	if_random_less_than 50, AI_CV_VitalThrow_End
 	score -1
 
-AI_CV_VitalThrow_End:: @ 81DAFBC
+AI_CV_VitalThrow_End::
 	end
 
-AI_CV_Substitute:: @ 81DAFBD
+AI_CV_Substitute::
 	if_hp_more_than AI_USER, 90, AI_CV_Substitute4
 	if_hp_more_than AI_USER, 70, AI_CV_Substitute3
 	if_hp_more_than AI_USER, 50, AI_CV_Substitute2
 	if_random_less_than 100, AI_CV_Substitute2
 	score -1
 
-AI_CV_Substitute2:: @ 81DAFDA
+AI_CV_Substitute2::
 	if_random_less_than 100, AI_CV_Substitute3
 	score -1
 
-AI_CV_Substitute3:: @ 81DAFE2
+AI_CV_Substitute3::
 	if_random_less_than 100, AI_CV_Substitute4
 	score -1
 
-AI_CV_Substitute4:: @ 81DAFEA
+AI_CV_Substitute4::
 	if_target_faster AI_CV_Substitute_End
 	get_last_used_move AI_TARGET
 	get_move_effect_from_result
@@ -1673,41 +1673,41 @@ AI_CV_Substitute4:: @ 81DAFEA
 	if_equal EFFECT_LEECH_SEED, AI_CV_Substitute7
 	goto AI_CV_Substitute_End
 
-AI_CV_Substitute5:: @ 81DB022
+AI_CV_Substitute5::
 	if_not_status AI_TARGET, STATUS1_ANY, AI_CV_Substitute8
 	goto AI_CV_Substitute_End
 
-AI_CV_Substitute6:: @ 81DB031
+AI_CV_Substitute6::
 	if_not_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Substitute8
 	goto AI_CV_Substitute_End
 
-AI_CV_Substitute7:: @ 81DB040
+AI_CV_Substitute7::
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Substitute_End
 
-AI_CV_Substitute8:: @ 81DB04A
+AI_CV_Substitute8::
 	if_random_less_than 100, AI_CV_Substitute_End
 	score +1
 
-AI_CV_Substitute_End:: @ 81DB052
+AI_CV_Substitute_End::
 	end
 
-AI_CV_Recharge:: @ 81DB053
+AI_CV_Recharge::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Recharge_ScoreDown1
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Recharge_ScoreDown1
 	if_target_faster AI_CV_Recharge2
 	if_hp_more_than AI_USER, 40, AI_CV_Recharge_ScoreDown1
 	goto AI_CV_Recharge_End
 
-AI_CV_Recharge2:: @ 81DB071
+AI_CV_Recharge2::
 	if_hp_less_than AI_USER, 60, AI_CV_Recharge_End
 
-AI_CV_Recharge_ScoreDown1:: @ 81DB078
+AI_CV_Recharge_ScoreDown1::
 	score -1
 
-AI_CV_Recharge_End:: @ 81DB07A
+AI_CV_Recharge_End::
 	end
 
-AI_CV_Disable:: @ 81DB07B
+AI_CV_Disable::
 	if_target_faster AI_CV_Disable_End
 	get_last_used_move AI_TARGET
 	get_move_power_from_result
@@ -1715,14 +1715,14 @@ AI_CV_Disable:: @ 81DB07B
 	score +1
 	goto AI_CV_Disable_End
 
-AI_CV_Disable2:: @ 81DB091
+AI_CV_Disable2::
 	if_random_less_than 100, AI_CV_Disable_End
 	score -1
 
-AI_CV_Disable_End:: @ 81DB099
+AI_CV_Disable_End::
 	end
 
-AI_CV_Counter:: @ 81DB09A
+AI_CV_Counter::
 	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Counter_ScoreDown1
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Counter_ScoreDown1
 	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Counter_ScoreDown1
@@ -1730,12 +1730,12 @@ AI_CV_Counter:: @ 81DB09A
 	if_random_less_than 10, AI_CV_Counter2
 	score -1
 
-AI_CV_Counter2:: @ 81DB0C7
+AI_CV_Counter2::
 	if_hp_more_than AI_USER, 50, AI_CV_Counter3
 	if_random_less_than 100, AI_CV_Counter3
 	score -1
 
-AI_CV_Counter3:: @ 81DB0D6
+AI_CV_Counter3::
 @	if_has_move AI_USER, MOVE_MIRROR_COAT, AI_CV_Counter7  @ Improvement in Emerald
 	get_last_used_move AI_TARGET
 	get_move_power_from_result
@@ -1744,7 +1744,7 @@ AI_CV_Counter3:: @ 81DB0D6
 	if_random_less_than 100, AI_CV_Counter4
 	score +1
 
-AI_CV_Counter4:: @ 81DB0EC
+AI_CV_Counter4::
 	get_last_used_move AI_TARGET
 	get_move_type_from_result
 	if_not_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_ScoreDown1
@@ -1752,12 +1752,12 @@ AI_CV_Counter4:: @ 81DB0EC
 	score +1
 	goto AI_CV_Counter_End
 
-AI_CV_Counter5:: @ 81DB105
+AI_CV_Counter5::
 	if_target_not_taunted AI_CV_Counter6
 	if_random_less_than 100, AI_CV_Counter6
 	score +1
 
-AI_CV_Counter6:: @ 81DB112
+AI_CV_Counter6::
 	get_target_type1
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
 	get_target_type2
@@ -1772,13 +1772,13 @@ AI_CV_Counter6:: @ 81DB112
 @AI_CV_Counter8:
 @	end
 
-AI_CV_Counter_ScoreDown1:: @ 81DB12E
+AI_CV_Counter_ScoreDown1::
 	score -1
 
-AI_CV_Counter_End:: @ 81DB130
+AI_CV_Counter_End::
 	end
 
-AI_CV_Counter_PhysicalTypeList:: @ 81DB131
+AI_CV_Counter_PhysicalTypeList::
 	.byte TYPE_NORMAL
 	.byte TYPE_FIGHTING
 	.byte TYPE_FLYING
@@ -1790,25 +1790,25 @@ AI_CV_Counter_PhysicalTypeList:: @ 81DB131
 	.byte TYPE_STEEL
 	.byte -1
 
-AI_CV_Encore:: @ 81DB13B
+AI_CV_Encore::
 	if_any_move_disabled AI_TARGET, AI_CV_Encore2
 	if_target_faster AI_CV_Encore_ScoreDown2
 	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_in_bytes AI_CV_Encore_EncouragedMovesToEncore, AI_CV_Encore_ScoreDown2
 
-AI_CV_Encore2:: @ 81DB154
+AI_CV_Encore2::
 	if_random_less_than 30, AI_CV_Encore_End
 	score +3
 	goto AI_CV_Encore_End
 
-AI_CV_Encore_ScoreDown2:: @ 81DB161
+AI_CV_Encore_ScoreDown2::
 	score -2
 
-AI_CV_Encore_End:: @ 81DB163
+AI_CV_Encore_End::
 	end
 
-AI_CV_Encore_EncouragedMovesToEncore:: @ 81DB164
+AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_DREAM_EATER
 	.byte EFFECT_ATTACK_UP
 	.byte EFFECT_DEFENSE_UP
@@ -1873,108 +1873,108 @@ AI_CV_Encore_EncouragedMovesToEncore:: @ 81DB164
 	.byte EFFECT_CAMOUFLAGE
 	.byte -1
 
-AI_CV_PainSplit:: @ 81DB1A3
+AI_CV_PainSplit::
 	if_hp_less_than AI_TARGET, 80, AI_CV_PainSplit_ScoreDown1
 	if_target_faster AI_CV_PainSplit2
 	if_hp_more_than AI_USER, 40, AI_CV_PainSplit_ScoreDown1
 	score +1
 	goto AI_CV_PainSplit_End
 
-AI_CV_PainSplit2:: @ 81DB1BE
+AI_CV_PainSplit2::
 	if_hp_more_than AI_USER, 60, AI_CV_PainSplit_ScoreDown1
 	score +1
 	goto AI_CV_PainSplit_End
 
-AI_CV_PainSplit_ScoreDown1:: @ 81DB1CC
+AI_CV_PainSplit_ScoreDown1::
 	score -1
 
-AI_CV_PainSplit_End:: @ 81DB1CE
+AI_CV_PainSplit_End::
 	end
 
-AI_CV_Snore:: @ 81DB1CF
+AI_CV_Snore::
 	score +2
 	end
 
-AI_CV_LockOn:: @ 81DB1D2
+AI_CV_LockOn::
 	if_random_less_than 128, AI_CV_LockOn_End
 	score +2
 
-AI_CV_LockOn_End:: @ 81DB1DA
+AI_CV_LockOn_End::
 	end
 
-AI_CV_SleepTalk:: @ 81DB1DB
+AI_CV_SleepTalk::
 @	if_status AI_USER, STATUS1_SLEEP, Score_Plus10  @ Improvement in Emerald
 	score +2   @ Change to -5
 	end
 
-AI_CV_DestinyBond:: @ 81DB1DE
+AI_CV_DestinyBond::
 	score -1
 	if_target_faster AI_CV_DestinyBond_End
 	if_hp_more_than AI_USER, 70, AI_CV_DestinyBond_End
 	if_random_less_than 128, AI_CV_DestinyBond2
 	score +1
 
-AI_CV_DestinyBond2:: @ 81DB1F5
+AI_CV_DestinyBond2::
 	if_hp_more_than AI_USER, 50, AI_CV_DestinyBond_End
 	if_random_less_than 128, AI_CV_DestinyBond3
 	score +1
 
-AI_CV_DestinyBond3:: @ 81DB204
+AI_CV_DestinyBond3::
 	if_hp_more_than AI_USER, 30, AI_CV_DestinyBond_End
 	if_random_less_than 100, AI_CV_DestinyBond_End
 	score +2
 
-AI_CV_DestinyBond_End:: @ 81DB213
+AI_CV_DestinyBond_End::
 	end
 
-AI_CV_Flail:: @ 81DB214
+AI_CV_Flail::
 	if_target_faster AI_CV_Flail2
 	if_hp_more_than AI_USER, 33, AI_CV_Flail_ScoreDown1
 	if_hp_more_than AI_USER, 20, AI_CV_Flail_End
 	if_hp_less_than AI_USER, 8, AI_CV_Flail_ScoreUp1
 	goto AI_CV_Flail3
 
-AI_CV_Flail2:: @ 81DB234
+AI_CV_Flail2::
 	if_hp_more_than AI_USER, 60, AI_CV_Flail_ScoreDown1
 	if_hp_more_than AI_USER, 40, AI_CV_Flail_End
 	goto AI_CV_Flail3
 
-AI_CV_Flail_ScoreUp1:: @ 81DB247
+AI_CV_Flail_ScoreUp1::
 	score +1
 
-AI_CV_Flail3:: @ 81DB249
+AI_CV_Flail3::
 	if_random_less_than 100, AI_CV_Flail_End
 	score +1
 	goto AI_CV_Flail_End
 
-AI_CV_Flail_ScoreDown1:: @ 81DB256
+AI_CV_Flail_ScoreDown1::
 	score -1
 
-AI_CV_Flail_End:: @ 81DB258
+AI_CV_Flail_End::
 	end
 
-AI_CV_HealBell:: @ 81DB259
+AI_CV_HealBell::
 	if_status AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
 	if_status_in_party AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
 	score -5
 
-AI_CV_HealBell_End:: @ 81DB26F
+AI_CV_HealBell_End::
 	end
 
-AI_CV_Thief:: @ 81DB270
+AI_CV_Thief::
 	get_hold_effect AI_TARGET
 	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, AI_CV_Thief_ScoreDown2
 	if_random_less_than 50, AI_CV_Thief_End
 	score +1
 	goto AI_CV_Thief_End
 
-AI_CV_Thief_ScoreDown2:: @ 81DB288
+AI_CV_Thief_ScoreDown2::
 	score -2
 
-AI_CV_Thief_End:: @ 81DB28A
+AI_CV_Thief_End::
 	end
 
-AI_CV_Thief_EncourageItemsToSteal:: @ 81DB28B
+AI_CV_Thief_EncourageItemsToSteal::
 	.byte HOLD_EFFECT_CURE_SLP
 	.byte HOLD_EFFECT_CURE_STATUS
 	.byte HOLD_EFFECT_RESTORE_HP
@@ -1984,7 +1984,7 @@ AI_CV_Thief_EncourageItemsToSteal:: @ 81DB28B
 	.byte HOLD_EFFECT_THICK_CLUB
 	.byte -1
 
-AI_CV_Curse:: @ 81DB293
+AI_CV_Curse::
 	get_user_type1
 	if_equal TYPE_GHOST, AI_CV_Curse4
 	get_user_type2
@@ -1993,25 +1993,25 @@ AI_CV_Curse:: @ 81DB293
 	if_random_less_than 128, AI_CV_Curse2
 	score +1
 
-AI_CV_Curse2:: @ 81DB2B3
+AI_CV_Curse2::
 	if_stat_level_more_than AI_USER, STAT_DEF, 7, AI_CV_Curse_End
 	if_random_less_than 128, AI_CV_Curse3
 	score +1
 
-AI_CV_Curse3:: @ 81DB2C3
+AI_CV_Curse3::
 	if_stat_level_more_than AI_USER, STAT_DEF, 6, AI_CV_Curse_End
 	if_random_less_than 128, AI_CV_Curse_End
 	score +1
 	goto AI_CV_Curse_End
 
-AI_CV_Curse4:: @ 81DB2D8
+AI_CV_Curse4::
 	if_hp_more_than AI_USER, 80, AI_CV_Curse_End
 	score -1
 
-AI_CV_Curse_End:: @ 81DB2E1
+AI_CV_Curse_End::
 	end
 
-AI_CV_Protect:: @ 81DB2E2
+AI_CV_Protect::
 	get_protect_count AI_USER
 	if_more_than 1, AI_CV_Protect_ScoreDown2
 	if_status AI_USER, STATUS1_TOXIC_POISON, AI_CV_Protect3
@@ -2033,10 +2033,10 @@ AI_CV_Protect:: @ 81DB2E2
 	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_ScoreUp2
 	goto AI_CV_Protect2
 
-AI_CV_Protect_ScoreUp2:: @ 81DB37E
+AI_CV_Protect_ScoreUp2::
 	score +2
 
-AI_CV_Protect2:: @ 81DB380
+AI_CV_Protect2::
 @	if_random_less_than 128, AI_CV_Protect4  @ Improvement in Emerald
 @	score -1
 
@@ -2048,18 +2048,18 @@ AI_CV_Protect4::
 	score -1
 	goto AI_CV_Protect_End
 
-AI_CV_Protect3:: @ 81DB397
+AI_CV_Protect3::
 	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_End
 
-AI_CV_Protect_ScoreDown2:: @ 81DB3A0
+AI_CV_Protect_ScoreDown2::
 	score -2
 
-AI_CV_Protect_End:: @ 81DB3A2
+AI_CV_Protect_End::
 	end
 
-AI_CV_Foresight:: @ 81DB3A3
+AI_CV_Foresight::
 	get_user_type1
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	get_user_type2
@@ -2068,32 +2068,32 @@ AI_CV_Foresight:: @ 81DB3A3
 	score -2
 	goto AI_CV_Foresight_End
 
-AI_CV_Foresight2:: @ 81DB3C2
+AI_CV_Foresight2::
 	if_random_less_than 80, AI_CV_Foresight_End
 
-AI_CV_Foresight3:: @ 81DB3C8
+AI_CV_Foresight3::
 	if_random_less_than 80, AI_CV_Foresight_End
 	score +2
 
-AI_CV_Foresight_End:: @ 81DB3D0
+AI_CV_Foresight_End::
 	end
 
-AI_CV_Endure:: @ 81DB3D1
+AI_CV_Endure::
 	if_hp_less_than AI_USER, 4, AI_CV_Endure2
 	if_hp_less_than AI_USER, 35, AI_CV_Endure3
 
-AI_CV_Endure2:: @ 81DB3DF
+AI_CV_Endure2::
 	score -1
 	goto AI_CV_Endure_End
 
-AI_CV_Endure3:: @ 81DB3E6
+AI_CV_Endure3::
 	if_random_less_than 70, AI_CV_Endure_End
 	score +1
 
-AI_CV_Endure_End:: @ 81DB3EE
+AI_CV_Endure_End::
 	end
 
-AI_CV_BatonPass:: @ 81DB3EF
+AI_CV_BatonPass::
 	if_stat_level_more_than AI_USER, STAT_ATK, 8, AI_CV_BatonPass2
 	if_stat_level_more_than AI_USER, STAT_DEF, 8, AI_CV_BatonPass2
 	if_stat_level_more_than AI_USER, STAT_SPATK, 8, AI_CV_BatonPass2
@@ -2101,20 +2101,20 @@ AI_CV_BatonPass:: @ 81DB3EF
 	if_stat_level_more_than AI_USER, STAT_EVASION, 8, AI_CV_BatonPass2
 	goto AI_CV_BatonPass5
 
-AI_CV_BatonPass2:: @ 81DB41C
+AI_CV_BatonPass2::
 	if_target_faster AI_CV_BatonPass3
 	if_hp_more_than AI_USER, 60, AI_CV_BatonPass_End
 	goto AI_CV_BatonPass4
 
-AI_CV_BatonPass3:: @ 81DB42E
+AI_CV_BatonPass3::
 	if_hp_more_than AI_USER, 70, AI_CV_BatonPass_End
 
-AI_CV_BatonPass4:: @ 81DB435
+AI_CV_BatonPass4::
 	if_random_less_than 80, AI_CV_BatonPass_End
 	score +2
 	goto AI_CV_BatonPass_End
 
-AI_CV_BatonPass5:: @ 81DB442
+AI_CV_BatonPass5::
 	if_stat_level_more_than AI_USER, STAT_ATK, 7, AI_CV_BatonPass7
 	if_stat_level_more_than AI_USER, STAT_DEF, 7, AI_CV_BatonPass7
 	if_stat_level_more_than AI_USER, STAT_SPATK, 7, AI_CV_BatonPass7
@@ -2122,21 +2122,21 @@ AI_CV_BatonPass5:: @ 81DB442
 	if_stat_level_more_than AI_USER, STAT_EVASION, 7, AI_CV_BatonPass7
 	goto AI_CV_BatonPass_ScoreDown2
 
-AI_CV_BatonPass7:: @ 81DB46F
+AI_CV_BatonPass7::
 	if_target_faster AI_CV_BatonPass8
 	if_hp_more_than AI_USER, 60, AI_CV_BatonPass_ScoreDown2
 	goto AI_CV_BatonPass_End
 
-AI_CV_BatonPass8:: @ 81DB481
+AI_CV_BatonPass8::
 	if_hp_less_than AI_USER, 70, AI_CV_BatonPass_End
 
-AI_CV_BatonPass_ScoreDown2:: @ 81DB488
+AI_CV_BatonPass_ScoreDown2::
 	score -2
 
-AI_CV_BatonPass_End:: @ 81DB48A
+AI_CV_BatonPass_End::
 	end
 
-AI_CV_Pursuit:: @ 81DB48B
+AI_CV_Pursuit::
 	is_first_turn_for AI_USER
 	if_not_equal 0, AI_CV_Pursuit_End
 	get_target_type1
@@ -2149,19 +2149,19 @@ AI_CV_Pursuit:: @ 81DB48B
 	if_equal TYPE_PSYCHIC, AI_CV_Pursuit2
 	goto AI_CV_Pursuit_End
 
-AI_CV_Pursuit2:: @ 81DB4B8
+AI_CV_Pursuit2::
 	if_random_less_than 128, AI_CV_Pursuit_End
 	score +1
 
-AI_CV_Pursuit_End:: @ 81DB4C0
+AI_CV_Pursuit_End::
 	end
 
-AI_CV_RainDance:: @ 81DB4C1
+AI_CV_RainDance::
 	if_user_faster AI_CV_RainDance2
 	get_ability AI_USER
 	if_equal ABILITY_SWIFT_SWIM, AI_CV_RainDance3
 
-AI_CV_RainDance2:: @ 81DB4CF
+AI_CV_RainDance2::
 	if_hp_less_than AI_USER, 40, AI_CV_RainDance_ScoreDown1
 	get_weather
 	if_equal AI_WEATHER_HAIL, AI_CV_RainDance3
@@ -2171,17 +2171,17 @@ AI_CV_RainDance2:: @ 81DB4CF
 	if_equal ABILITY_RAIN_DISH, AI_CV_RainDance3
 	goto AI_CV_RainDance_End
 
-AI_CV_RainDance3:: @ 81DB4F6
+AI_CV_RainDance3::
 	score +1
 	goto AI_CV_RainDance_End
 
-AI_CV_RainDance_ScoreDown1:: @ 81DB4FD
+AI_CV_RainDance_ScoreDown1::
 	score -1
 
-AI_CV_RainDance_End:: @ 81DB4FF
+AI_CV_RainDance_End::
 	end
 
-AI_CV_SunnyDay:: @ 81DB500
+AI_CV_SunnyDay::
 	if_hp_less_than AI_USER, 40, AI_CV_SunnyDay_ScoreDown1
 	get_weather
 	if_equal AI_WEATHER_HAIL, AI_CV_SunnyDay2
@@ -2189,27 +2189,27 @@ AI_CV_SunnyDay:: @ 81DB500
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SunnyDay2
 	goto AI_CV_SunnyDay_End
 
-AI_CV_SunnyDay2:: @ 81DB51F
+AI_CV_SunnyDay2::
 	score +1
 	goto AI_CV_SunnyDay_End
 
-AI_CV_SunnyDay_ScoreDown1:: @ 81DB526
+AI_CV_SunnyDay_ScoreDown1::
 	score -1
 
-AI_CV_SunnyDay_End:: @ 81DB528
+AI_CV_SunnyDay_End::
 	end
 
-AI_CV_BellyDrum:: @ 81DB529
+AI_CV_BellyDrum::
 	if_hp_less_than AI_USER, 90, AI_CV_BellyDrum_ScoreDown2
 	goto AI_CV_BellyDrum_End
 
-AI_CV_BellyDrum_ScoreDown2:: @ 81DB535
+AI_CV_BellyDrum_ScoreDown2::
 	score -2
 
-AI_CV_BellyDrum_End:: @ 81DB537
+AI_CV_BellyDrum_End::
 	end
 
-AI_CV_PsychUp:: @ 81DB538
+AI_CV_PsychUp::
 	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, AI_CV_PsychUp2
 	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, AI_CV_PsychUp2
 	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, AI_CV_PsychUp2
@@ -2217,7 +2217,7 @@ AI_CV_PsychUp:: @ 81DB538
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, AI_CV_PsychUp2
 	goto AI_CV_PsychUp_ScoreDown2
 
-AI_CV_PsychUp2:: @ 81DB565
+AI_CV_PsychUp2::
 	if_stat_level_less_than AI_USER, STAT_ATK, 7, AI_CV_PsychUp3
 	if_stat_level_less_than AI_USER, STAT_DEF, 7, AI_CV_PsychUp3
 	if_stat_level_less_than AI_USER, STAT_SPATK, 7, AI_CV_PsychUp3
@@ -2226,21 +2226,21 @@ AI_CV_PsychUp2:: @ 81DB565
 	if_random_less_than 50, AI_CV_PsychUp_End
 	goto AI_CV_PsychUp_ScoreDown2
 
-AI_CV_PsychUp_ScoreUp1:: @ 81DB598
+AI_CV_PsychUp_ScoreUp1::
 	score +1
 
-AI_CV_PsychUp3:: @ 81DB59A
+AI_CV_PsychUp3::
 	if_random_less_than 128, AI_CV_PsychUp_End  @ Remove this line
 	score +1
 @	end  @ Improvement in Emerald
 
-AI_CV_PsychUp_ScoreDown2:: @ 81DB5A2
+AI_CV_PsychUp_ScoreDown2::
 	score -2
 
-AI_CV_PsychUp_End:: @ 81DB5A4
+AI_CV_PsychUp_End::
 	end
 
-AI_CV_MirrorCoat:: @ 81DB5A5
+AI_CV_MirrorCoat::
 	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_MirrorCoat_ScoreDown1
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_MirrorCoat_ScoreDown1
 	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_MirrorCoat_ScoreDown1
@@ -2248,12 +2248,12 @@ AI_CV_MirrorCoat:: @ 81DB5A5
 	if_random_less_than 10, AI_CV_MirrorCoat2
 	score -1
 
-AI_CV_MirrorCoat2:: @ 81DB5D2
+AI_CV_MirrorCoat2::
 	if_hp_more_than AI_USER, 50, AI_CV_MirrorCoat3
 	if_random_less_than 100, AI_CV_MirrorCoat3
 	score -1
 
-AI_CV_MirrorCoat3:: @ 81DB5E1
+AI_CV_MirrorCoat3::
 @	if_has_move AI_USER, MOVE_COUNTER, AI_CV_MirrorCoat_ScoreUp4  @ Improvement in Emerald
 	get_last_used_move AI_TARGET
 	get_move_power_from_result
@@ -2262,7 +2262,7 @@ AI_CV_MirrorCoat3:: @ 81DB5E1
 	if_random_less_than 100, AI_CV_MirrorCoat4
 	score +1
 
-AI_CV_MirrorCoat4:: @ 81DB5F7
+AI_CV_MirrorCoat4::
 	get_last_used_move AI_TARGET
 	get_move_type_from_result
 	if_not_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_ScoreDown1
@@ -2270,12 +2270,12 @@ AI_CV_MirrorCoat4:: @ 81DB5F7
 	score +1
 	goto AI_CV_MirrorCoat_End
 
-AI_CV_MirrorCoat5:: @ 81DB610
+AI_CV_MirrorCoat5::
 	if_target_not_taunted AI_CV_MirrorCoat6
 	if_random_less_than 100, AI_CV_MirrorCoat6
 	score +1
 
-AI_CV_MirrorCoat6:: @ 81DB61D
+AI_CV_MirrorCoat6::
 	get_target_type1
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
 	get_target_type2
@@ -2290,13 +2290,13 @@ AI_CV_MirrorCoat6:: @ 81DB61D
 @AI_CV_MirrorCoat_ScoreUp4_End:
 @	end
 
-AI_CV_MirrorCoat_ScoreDown1:: @ 81DB639
+AI_CV_MirrorCoat_ScoreDown1::
 	score -1
 
-AI_CV_MirrorCoat_End:: @ 81DB63B
+AI_CV_MirrorCoat_End::
 	end
 
-AI_CV_MirrorCoat_SpecialTypeList:: @ 81DB63C
+AI_CV_MirrorCoat_SpecialTypeList::
 	.byte TYPE_FIRE
 	.byte TYPE_WATER
 	.byte TYPE_GRASS
@@ -2307,7 +2307,7 @@ AI_CV_MirrorCoat_SpecialTypeList:: @ 81DB63C
 	.byte TYPE_DARK
 	.byte -1
 
-AI_CV_ChargeUpMove:: @ 81DB645
+AI_CV_ChargeUpMove::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_ChargeUpMove_ScoreDown2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_ChargeUpMove_ScoreDown2
 	if_has_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_ChargeUpMove_ScoreDown2
@@ -2315,13 +2315,13 @@ AI_CV_ChargeUpMove:: @ 81DB645
 	score -1
 	goto AI_CV_ChargeUpMove_End
 
-AI_CV_ChargeUpMove_ScoreDown2:: @ 81DB666
+AI_CV_ChargeUpMove_ScoreDown2::
 	score -2
 
-AI_CV_ChargeUpMove_End:: @ 81DB668
+AI_CV_ChargeUpMove_End::
 	end
 
-AI_CV_SemiInvulnerable:: @ 81DB669
+AI_CV_SemiInvulnerable::
 	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_SemiInvulnerable2
 	score -1
 	goto AI_CV_SemiInvulnerable_End
@@ -2329,7 +2329,7 @@ AI_CV_SemiInvulnerable:: @ 81DB669
 @ BUG: The scripts for checking type-resistance to weather for semi-invulnerable moves are swapped
 @	  The result is that the AI is encouraged to stall while taking damage from weather
 @	  To fix, swap _CheckSandstormTypes/_CheckIceType in the below script
-AI_CV_SemiInvulnerable2:: @ 81DB677
+AI_CV_SemiInvulnerable2::
 	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_SemiInvulnerable_TryEncourage
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
@@ -2338,53 +2338,53 @@ AI_CV_SemiInvulnerable2:: @ 81DB677
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
 	goto AI_CV_SemiInvulnerable5
 
-AI_CV_SemiInvulnerable_CheckSandstormTypes:: @ 81DB6A7
+AI_CV_SemiInvulnerable_CheckSandstormTypes::
 	get_user_type1
 	if_in_bytes AI_CV_SandstormResistantTypes, AI_CV_SemiInvulnerable_TryEncourage
 	get_user_type2
 	if_in_bytes AI_CV_SandstormResistantTypes, AI_CV_SemiInvulnerable_TryEncourage
 	goto AI_CV_SemiInvulnerable5
 
-AI_CV_SemiInvulnerable_CheckIceType:: @ 81DB6C2
+AI_CV_SemiInvulnerable_CheckIceType::
 	get_user_type1
 	if_equal TYPE_ICE, AI_CV_SemiInvulnerable_TryEncourage
 	get_user_type2
 	if_equal TYPE_ICE, AI_CV_SemiInvulnerable_TryEncourage
 
-AI_CV_SemiInvulnerable5:: @ 81DB6D2
+AI_CV_SemiInvulnerable5::
 	if_target_faster AI_CV_SemiInvulnerable_End
 	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_equal EFFECT_LOCK_ON, AI_CV_SemiInvulnerable_TryEncourage
 	goto AI_CV_SemiInvulnerable_End
 
-AI_CV_SemiInvulnerable_TryEncourage:: @ 81DB6E6
+AI_CV_SemiInvulnerable_TryEncourage::
 	if_random_less_than 80, AI_CV_SemiInvulnerable_End
 	score +1
 
-AI_CV_SemiInvulnerable_End:: @ 81DB6EE
+AI_CV_SemiInvulnerable_End::
 	end
 
-AI_CV_SandstormResistantTypes:: @ 81DB6EF
+AI_CV_SandstormResistantTypes::
 	.byte TYPE_GROUND
 	.byte TYPE_ROCK
 	.byte TYPE_STEEL
 	.byte -1
 
-AI_CV_FakeOut:: @ 81DB6F3
+AI_CV_FakeOut::
 	score +2
 	end
 
-AI_CV_SpitUp:: @ 81DB6F6
+AI_CV_SpitUp::
 	get_stockpile_count AI_USER
 	if_less_than 2, AI_CV_SpitUp_End
 	if_random_less_than 80, AI_CV_SpitUp_End
 	score +2
 
-AI_CV_SpitUp_End:: @ 81DB706
+AI_CV_SpitUp_End::
 	end
 
-AI_CV_Hail:: @ 81DB707
+AI_CV_Hail::
 	if_hp_less_than AI_USER, 40, AI_CV_Hail_ScoreDown1
 	get_weather
 	if_equal AI_WEATHER_SUN, AI_CV_Hail2
@@ -2392,25 +2392,25 @@ AI_CV_Hail:: @ 81DB707
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_Hail2
 	goto AI_CV_Hail_End
 
-AI_CV_Hail2:: @ 81DB726
+AI_CV_Hail2::
 	score +1
 	goto AI_CV_Hail_End
 
-AI_CV_Hail_ScoreDown1:: @ 81DB72D
+AI_CV_Hail_ScoreDown1::
 	score -1
 
-AI_CV_Hail_End:: @ 81DB72F
+AI_CV_Hail_End::
 	end
 
 @ BUG: Facade score is increased if the target is statused, but should be if the user is. Replace AI_TARGET with AI_USER
-AI_CV_Facade:: @ 81DB730
+AI_CV_Facade::
 	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
 	score +1
 
-AI_CV_Facade_End:: @ 81DB73C
+AI_CV_Facade_End::
 	end
 
-AI_CV_FocusPunch:: @ 81DB73D
+AI_CV_FocusPunch::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_FocusPunch2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_FocusPunch2
 	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_FocusPunch_ScoreUp1
@@ -2422,54 +2422,54 @@ AI_CV_FocusPunch:: @ 81DB73D
 	score +1
 	goto AI_CV_FocusPunch_End
 
-AI_CV_FocusPunch2:: @ 81DB77C
+AI_CV_FocusPunch2::
 	score -1
 	goto AI_CV_FocusPunch_End
 
-AI_CV_FocusPunch3:: @ 81DB783
+AI_CV_FocusPunch3::
 	if_random_less_than 100, AI_CV_FocusPunch_End
 
-AI_CV_FocusPunch_ScoreUp1:: @ 81DB789
+AI_CV_FocusPunch_ScoreUp1::
 	score +1
 
-AI_CV_FocusPunch_End:: @ 81DB78B
+AI_CV_FocusPunch_End::
 	end
 
-AI_CV_SmellingSalt:: @ 81DB78C
+AI_CV_SmellingSalt::
 	if_status AI_TARGET, STATUS1_PARALYSIS, AI_CV_SmellingSalt_ScoreUp1
 	goto AI_CV_SmellingSalt_End
 
-AI_CV_SmellingSalt_ScoreUp1:: @ 81DB79B
+AI_CV_SmellingSalt_ScoreUp1::
 	score +1
 
-AI_CV_SmellingSalt_End:: @ 81DB79D
+AI_CV_SmellingSalt_End::
 	end
 
-AI_CV_Trick:: @ 81DB79E
+AI_CV_Trick::
 	get_hold_effect AI_USER
 	if_in_bytes AI_CV_Trick_ChoiceEffects, AI_CV_Trick3
 	if_in_bytes AI_CV_Trick_EffectsToEncourage, AI_CV_Trick4
 
-AI_CV_Trick2:: @ 81DB7B2
+AI_CV_Trick2::
 	score -3
 	goto AI_CV_Trick_End
 
-AI_CV_Trick3:: @ 81DB7B9
+AI_CV_Trick3::
 	get_hold_effect AI_TARGET
 	if_in_bytes AI_CV_Trick_ChoiceEffects, AI_CV_Trick2
 	score +5
 	goto AI_CV_Trick_End
 
-AI_CV_Trick4:: @ 81DB7CB
+AI_CV_Trick4::
 	get_hold_effect AI_TARGET
 	if_in_bytes AI_CV_Trick_EffectsToEncourage, AI_CV_Trick2
 	if_random_less_than 50, AI_CV_Trick_End
 	score +2
 
-AI_CV_Trick_End:: @ 81DB7DE
+AI_CV_Trick_End::
 	end
 
-AI_CV_Trick_EffectsToEncourage:: @ 81DB7DF
+AI_CV_Trick_EffectsToEncourage::
 	.byte HOLD_EFFECT_CONFUSE_SPICY
 	.byte HOLD_EFFECT_CONFUSE_DRY
 	.byte HOLD_EFFECT_CONFUSE_SWEET
@@ -2479,28 +2479,28 @@ AI_CV_Trick_EffectsToEncourage:: @ 81DB7DF
 	.byte HOLD_EFFECT_CHOICE_BAND
 	.byte -1
 
-AI_CV_Trick_ChoiceEffects:: @ 81DB7E7
+AI_CV_Trick_ChoiceEffects::
 	.byte HOLD_EFFECT_CHOICE_BAND
 	.byte -1
 
-AI_CV_ChangeSelfAbility:: @ 81DB7E9
+AI_CV_ChangeSelfAbility::
 	get_ability AI_USER
 	if_in_bytes AI_CV_ChangeSelfAbility_AbilitiesToEncourage, AI_CV_ChangeSelfAbility2
 	get_ability AI_TARGET
 	if_in_bytes AI_CV_ChangeSelfAbility_AbilitiesToEncourage, AI_CV_ChangeSelfAbility3
 
-AI_CV_ChangeSelfAbility2:: @ 81DB7FF
+AI_CV_ChangeSelfAbility2::
 	score -1
 	goto AI_CV_ChangeSelfAbility_End
 
-AI_CV_ChangeSelfAbility3:: @ 81DB806
+AI_CV_ChangeSelfAbility3::
 	if_random_less_than 50, AI_CV_ChangeSelfAbility_End
 	score +2
 
-AI_CV_ChangeSelfAbility_End:: @ 81DB80E
+AI_CV_ChangeSelfAbility_End::
 	end
 
-AI_CV_ChangeSelfAbility_AbilitiesToEncourage:: @ 81DB80F
+AI_CV_ChangeSelfAbility_AbilitiesToEncourage::
 	.byte ABILITY_SPEED_BOOST
 	.byte ABILITY_BATTLE_ARMOR
 	.byte ABILITY_SAND_VEIL
@@ -2519,7 +2519,7 @@ AI_CV_ChangeSelfAbility_AbilitiesToEncourage:: @ 81DB80F
 	.byte ABILITY_SHIELD_DUST
 	.byte -1
 
-AI_CV_Superpower:: @ 81DB820
+AI_CV_Superpower::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Superpower_ScoreDown1
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Superpower_ScoreDown1
 	if_stat_level_less_than AI_USER, STAT_ATK, 6, AI_CV_Superpower_ScoreDown1
@@ -2527,16 +2527,16 @@ AI_CV_Superpower:: @ 81DB820
 	if_hp_more_than AI_USER, 40, AI_CV_Superpower_ScoreDown1
 	goto AI_CV_Superpower_End
 
-AI_CV_Superpower2:: @ 81DB846
+AI_CV_Superpower2::
 	if_hp_less_than AI_USER, 60, AI_CV_Superpower_End
 
-AI_CV_Superpower_ScoreDown1:: @ 81DB84D
+AI_CV_Superpower_ScoreDown1::
 	score -1
 
-AI_CV_Superpower_End:: @ 81DB84F
+AI_CV_Superpower_End::
 	end
 
-AI_CV_MagicCoat:: @ 81DB850
+AI_CV_MagicCoat::
 	if_hp_more_than AI_TARGET, 30, AI_CV_MagicCoat2
 	if_random_less_than 100, AI_CV_MagicCoat2
 	score -1
@@ -2552,33 +2552,33 @@ AI_CV_MagicCoat2::
 AI_CV_MagicCoat3::
 @	if_random_less_than 50, AI_CV_MagicCoat_End  @ Improvement in Emerald
 
-AI_CV_MagicCoat4:: @ 81DB87A
+AI_CV_MagicCoat4::
 	if_random_less_than 30, AI_CV_MagicCoat_End
 	score -1
 
-AI_CV_MagicCoat_End:: @ 81DB882
+AI_CV_MagicCoat_End::
 	end
 
-AI_CV_Recycle:: @ 81DB883
+AI_CV_Recycle::
 	get_used_held_item AI_USER
 	if_not_in_bytes AI_CV_Recycle_ItemsToEncourage, AI_CV_Recycle_ScoreDown2
 	if_random_less_than 50, AI_CV_Recycle_End
 	score +1
 	goto AI_CV_Recycle_End
 
-AI_CV_Recycle_ScoreDown2:: @ 81DB89B
+AI_CV_Recycle_ScoreDown2::
 	score -2
 
-AI_CV_Recycle_End:: @ 81DB89D
+AI_CV_Recycle_End::
 	end
 
-AI_CV_Recycle_ItemsToEncourage:: @ 81DB89E
+AI_CV_Recycle_ItemsToEncourage::
 	.byte ITEM_CHESTO_BERRY
 	.byte ITEM_LUM_BERRY
 	.byte ITEM_STARF_BERRY
 	.byte -1
 
-AI_CV_Revenge:: @ 81DB8A2
+AI_CV_Revenge::
 	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Revenge_ScoreDown2
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Revenge_ScoreDown2
 	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Revenge_ScoreDown2
@@ -2586,86 +2586,86 @@ AI_CV_Revenge:: @ 81DB8A2
 	score +2
 	goto AI_CV_Revenge_End
 
-AI_CV_Revenge_ScoreDown2:: @ 81DB8CD
+AI_CV_Revenge_ScoreDown2::
 	score -2
 
-AI_CV_Revenge_End:: @ 81DB8CF
+AI_CV_Revenge_End::
 	end
 
-AI_CV_BrickBreak:: @ 81DB8D0
+AI_CV_BrickBreak::
 	if_side_affecting AI_TARGET, SIDE_STATUS_REFLECT, AI_CV_BrickBreak_ScoreUp1
 	goto AI_CV_BrickBreak_End
 
-AI_CV_BrickBreak_ScoreUp1:: @ 81DB8DF
+AI_CV_BrickBreak_ScoreUp1::
 	score +1
 
-AI_CV_BrickBreak_End:: @ 81DB8E1
+AI_CV_BrickBreak_End::
 	end
 
-AI_CV_KnockOff:: @ 81DB8E2
+AI_CV_KnockOff::
 	if_hp_less_than AI_TARGET, 30, AI_CV_KnockOff_End
 	is_first_turn_for AI_USER
 	if_more_than 0, AI_CV_KnockOff_End
 	if_random_less_than 180, AI_CV_KnockOff_End
 	score +1
 
-AI_CV_KnockOff_End:: @ 81DB8F9
+AI_CV_KnockOff_End::
 	end
 
-AI_CV_Endeavor:: @ 81DB8FA
+AI_CV_Endeavor::
 	if_hp_less_than AI_TARGET, 70, AI_CV_Endeavor_ScoreDown1
 	if_target_faster AI_CV_Endeavor2
 	if_hp_more_than AI_USER, 40, AI_CV_Endeavor_ScoreDown1
 	score +1
 	goto AI_CV_Endeavor_End
 
-AI_CV_Endeavor2:: @ 81DB915
+AI_CV_Endeavor2::
 	if_hp_more_than AI_USER, 50, AI_CV_Endeavor_ScoreDown1
 	score +1
 	goto AI_CV_Endeavor_End
 
-AI_CV_Endeavor_ScoreDown1:: @ 81DB923
+AI_CV_Endeavor_ScoreDown1::
 	score -1
 
-AI_CV_Endeavor_End:: @ 81DB925
+AI_CV_Endeavor_End::
 	end
 
-AI_CV_Eruption:: @ 81DB926
+AI_CV_Eruption::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Eruption_ScoreDown1
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Eruption_ScoreDown1
 	if_target_faster AI_CV_Eruption2
 	if_hp_more_than AI_TARGET, 50, AI_CV_Eruption_End
 	goto AI_CV_Eruption_ScoreDown1
 
-AI_CV_Eruption2:: @ 81DB944
+AI_CV_Eruption2::
 	if_hp_more_than AI_TARGET, 70, AI_CV_Eruption_End
 
-AI_CV_Eruption_ScoreDown1:: @ 81DB94B
+AI_CV_Eruption_ScoreDown1::
 	score -1
 
-AI_CV_Eruption_End:: @ 81DB94D
+AI_CV_Eruption_End::
 	end
 
-AI_CV_Imprison:: @ 81DB94E
+AI_CV_Imprison::
 	is_first_turn_for AI_USER
 	if_more_than 0, AI_CV_Imprison_End
 	if_random_less_than 100, AI_CV_Imprison_End
 	score +2
 
-AI_CV_Imprison_End:: @ 81DB95E
+AI_CV_Imprison_End::
 	end
 
-AI_CV_Refresh:: @ 81DB95F
+AI_CV_Refresh::
 	if_hp_less_than AI_TARGET, 50, AI_CV_Refresh_ScoreDown1
 	goto AI_CV_Refresh_End
 
-AI_CV_Refresh_ScoreDown1:: @ 81DB96B
+AI_CV_Refresh_ScoreDown1::
 	score -1
 
-AI_CV_Refresh_End:: @ 81DB96D
+AI_CV_Refresh_End::
 	end
 
-AI_CV_Snatch:: @ 81DB96E
+AI_CV_Snatch::
 	is_first_turn_for AI_USER
 	if_equal 1, AI_CV_Snatch3
 	if_random_less_than 30, AI_CV_Snatch_End
@@ -2675,30 +2675,30 @@ AI_CV_Snatch:: @ 81DB96E
 	if_random_less_than 60, AI_CV_Snatch_End
 	goto AI_CV_Snatch5
 
-AI_CV_Snatch2:: @ 81DB99B
+AI_CV_Snatch2::
 	if_hp_more_than AI_TARGET, 25, AI_CV_Snatch5
 	if_has_move_with_effect AI_TARGET, EFFECT_RESTORE_HP, AI_CV_Snatch3
 	if_has_move_with_effect AI_TARGET, EFFECT_DEFENSE_CURL, AI_CV_Snatch3
 	goto AI_CV_Snatch4
 
-AI_CV_Snatch3:: @ 81DB9B5
+AI_CV_Snatch3::
 	if_random_less_than 150, AI_CV_Snatch_End
 	score +2
 	goto AI_CV_Snatch_End
 
-AI_CV_Snatch4:: @ 81DB9C2
+AI_CV_Snatch4::
 	if_random_less_than 230, AI_CV_Snatch5
 	score +1
 	goto AI_CV_Snatch_End
 
-AI_CV_Snatch5:: @ 81DB9CF
+AI_CV_Snatch5::
 	if_random_less_than 30, AI_CV_Snatch_End
 	score -2
 
-AI_CV_Snatch_End:: @ 81DB9D7
+AI_CV_Snatch_End::
 	end
 
-AI_CV_MudSport:: @ 81DB9D8
+AI_CV_MudSport::
 	if_hp_less_than AI_USER, 50, AI_CV_MudSport_ScoreDown1
 	get_target_type1
 	if_equal TYPE_ELECTRIC, AI_CV_MudSport2
@@ -2706,33 +2706,33 @@ AI_CV_MudSport:: @ 81DB9D8
 	if_equal TYPE_ELECTRIC, AI_CV_MudSport2
 	goto AI_CV_MudSport_ScoreDown1
 
-AI_CV_MudSport2:: @ 81DB9F4
+AI_CV_MudSport2::
 	score +1
 	goto AI_CV_MudSport_End
 
-AI_CV_MudSport_ScoreDown1:: @ 81DB9FB
+AI_CV_MudSport_ScoreDown1::
 	score -1
 
-AI_CV_MudSport_End:: @ 81DB9FD
+AI_CV_MudSport_End::
 	end
 
-AI_CV_Overheat:: @ 81DB9FE
+AI_CV_Overheat::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Overheat_ScoreDown1
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Overheat_ScoreDown1
 	if_target_faster AI_CV_Overheat2
 	if_hp_more_than AI_USER, 60, AI_CV_Overheat_End
 	goto AI_CV_Overheat_ScoreDown1
 
-AI_CV_Overheat2:: @ 81DBA1C
+AI_CV_Overheat2::
 	if_hp_more_than AI_USER, 80, AI_CV_Overheat_End
 
-AI_CV_Overheat_ScoreDown1:: @ 81DBA23
+AI_CV_Overheat_ScoreDown1::
 	score -1
 
-AI_CV_Overheat_End:: @ 81DBA25
+AI_CV_Overheat_End::
 	end
 
-AI_CV_WaterSport:: @ 81DBA26
+AI_CV_WaterSport::
 	if_hp_less_than AI_USER, 50, AI_CV_WaterSport_ScoreDown1
 	get_target_type1
 	if_equal TYPE_FIRE, AI_CV_WaterSport2
@@ -2740,31 +2740,31 @@ AI_CV_WaterSport:: @ 81DBA26
 	if_equal TYPE_FIRE, AI_CV_WaterSport2
 	goto AI_CV_WaterSport_ScoreDown1
 
-AI_CV_WaterSport2:: @ 81DBA42
+AI_CV_WaterSport2::
 	score +1
 	goto AI_CV_WaterSport_End
 
-AI_CV_WaterSport_ScoreDown1:: @ 81DBA49
+AI_CV_WaterSport_ScoreDown1::
 	score -1
 
-AI_CV_WaterSport_End:: @ 81DBA4B
+AI_CV_WaterSport_End::
 	end
 
-AI_CV_DragonDance:: @ 81DBA4C
+AI_CV_DragonDance::
 	if_target_faster AI_CV_DragonDance2
 	if_hp_more_than AI_USER, 50, AI_CV_DragonDance_End
 	if_random_less_than 70, AI_CV_DragonDance_End
 	score -1
 	goto AI_CV_DragonDance_End
 
-AI_CV_DragonDance2:: @ 81DBA66
+AI_CV_DragonDance2::
 	if_random_less_than 128, AI_CV_DragonDance_End
 	score +1
 
-AI_CV_DragonDance_End:: @ 81DBA6E
+AI_CV_DragonDance_End::
 	end
 
-AI_TryToFaint:: @ 81DBA6F
+AI_TryToFaint::
 	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
 	get_how_powerful_move_is
 	if_equal MOVE_NOT_MOST_POWERFUL, Score_Minus1
@@ -2777,18 +2777,18 @@ AI_TryToFaint:: @ 81DBA6F
 @	score +2
 @	end
 
-AI_TryToFaint_TryToEncourageQuickAttack:: @ 81DBA7C
+AI_TryToFaint_TryToEncourageQuickAttack::
 	if_effect EFFECT_EXPLOSION, AI_TryToFaint_End
 	if_not_effect EFFECT_QUICK_ATTACK, AI_TryToFaint_ScoreUp4
 	score +2
 
-AI_TryToFaint_ScoreUp4:: @ 81DBA8A
+AI_TryToFaint_ScoreUp4::
 	score +4
 
-AI_TryToFaint_End:: @ 81DBA8C
+AI_TryToFaint_End::
 	end
 
-AI_SetupFirstTurn:: @ 81DBA8D
+AI_SetupFirstTurn::
 	get_turn_count
 	if_not_equal 0, AI_SetupFirstTurn_End
 	get_considered_move_effect
@@ -2796,10 +2796,10 @@ AI_SetupFirstTurn:: @ 81DBA8D
 	if_random_less_than 80, AI_SetupFirstTurn_End
 	score +2
 
-AI_SetupFirstTurn_End:: @ 81DBAA6
+AI_SetupFirstTurn_End::
 	end
 
-AI_SetupFirstTurn_SetupEffectsToEncourage:: @ 81DBAA7
+AI_SetupFirstTurn_SetupEffectsToEncourage::
 	.byte EFFECT_ATTACK_UP
 	.byte EFFECT_DEFENSE_UP
 	.byte EFFECT_SPEED_UP
@@ -2857,25 +2857,25 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:: @ 81DBAA7
 	.byte EFFECT_CAMOUFLAGE
 	.byte -1
 
-AI_PreferStrongestMove:: @ 81DBADF
+AI_PreferStrongestMove::
 	get_how_powerful_move_is
 	if_not_equal MOVE_POWER_DISCOURAGED, AI_PreferStrongestMove_End
 	if_random_less_than 100, AI_PreferStrongestMove_End
 	score +2
 
-AI_PreferStrongestMove_End:: @ 81DBAEE
+AI_PreferStrongestMove_End::
 	end
 
-AI_Risky:: @ 81DBAEF
+AI_Risky::
 	get_considered_move_effect
 	if_not_in_bytes AI_Risky_EffectsToEncourage, AI_Risky_End
 	if_random_less_than 128, AI_Risky_End
 	score +2
 
-AI_Risky_End:: @ 81DBB01
+AI_Risky_End::
 	end
 
-AI_Risky_EffectsToEncourage:: @ 81DBB02
+AI_Risky_EffectsToEncourage::
 	.byte EFFECT_SLEEP
 	.byte EFFECT_EXPLOSION
 	.byte EFFECT_MIRROR_MOVE
@@ -2897,7 +2897,7 @@ AI_Risky_EffectsToEncourage:: @ 81DBB02
 	.byte EFFECT_TEETER_DANCE
 	.byte -1
 
-AI_PreferBatonPass:: @ 81DBB16
+AI_PreferBatonPass::
 	count_alive_pokemon AI_USER
 	if_equal 0, AI_PreferBatonPass_End
 	get_how_powerful_move_is
@@ -2906,7 +2906,7 @@ AI_PreferBatonPass:: @ 81DBB16
 	if_random_less_than 80, AI_Risky_End
 
 @ Improvement in Emerald (several below)
-AI_PreferBatonPass_GoForBatonPass:: @ 81DBB32
+AI_PreferBatonPass_GoForBatonPass::
 @	if_move MOVE_SWORDS_DANCE, AI_PreferBatonPass2
 @	if_move MOVE_DRAGON_DANCE, AI_PreferBatonPass2
 @	if_move MOVE_CALM_MIND, AI_PreferBatonPass2
@@ -2943,59 +2943,59 @@ AI_PreferBatonPass_GoForBatonPass:: @ 81DBB32
 @	if_stat_level_more_than AI_USER, STAT_SPATK, 6, Score_Plus1
 @	end
 
-AI_PreferBatonPass_End:: @ 81DBB3A
+AI_PreferBatonPass_End::
 	end
 
 @ Empty. Expanded in Emerald
-AI_DoubleBattle:: @ 81DBB3B
+AI_DoubleBattle::
 	end
 
-AI_HPAware:: @ 81DBB3C
+AI_HPAware::
 	if_hp_more_than AI_USER, 70, AI_HPAware_UserHasHighHP
 	if_hp_more_than AI_USER, 30, AI_HPAware_UserHasMediumHP
 	get_considered_move_effect
 	if_in_bytes AI_HPAware_DiscouragedEffectsWhenLowHP, AI_HPAware_TryToDiscourage
 	goto AI_HPAware_ConsiderTarget
 
-AI_HPAware_UserHasHighHP:: @ 81DBB59
+AI_HPAware_UserHasHighHP::
 	get_considered_move_effect
 	if_in_bytes AI_HPAware_DiscouragedEffectsWhenHighHP, AI_HPAware_TryToDiscourage
 	goto AI_HPAware_ConsiderTarget
 
-AI_HPAware_UserHasMediumHP:: @ 81DBB68
+AI_HPAware_UserHasMediumHP::
 	get_considered_move_effect
 	if_in_bytes AI_HPAware_DiscouragedEffectsWhenMediumHP, AI_HPAware_TryToDiscourage
 	goto AI_HPAware_ConsiderTarget
 
-AI_HPAware_TryToDiscourage:: @ 81DBB77
+AI_HPAware_TryToDiscourage::
 	if_random_less_than 50, AI_HPAware_ConsiderTarget
 	score -2
 
-AI_HPAware_ConsiderTarget:: @ 81DBB7F
+AI_HPAware_ConsiderTarget::
 	if_hp_more_than AI_TARGET, 70, AI_HPAware_TargetHasHighHP
 	if_hp_more_than AI_TARGET, 30, AI_HPAware_TargetHasMediumHP
 	get_considered_move_effect
 	if_in_bytes AI_HPAware_DiscouragedEffectsWhenTargetLowHP, AI_HPAware_TargetTryToDiscourage
 	goto AI_HPAware_End
 
-AI_HPAware_TargetHasHighHP:: @ 81DBB9C
+AI_HPAware_TargetHasHighHP::
 	get_considered_move_effect
 	if_in_bytes AI_HPAware_DiscouragedEffectsWhenTargetHighHP, AI_HPAware_TargetTryToDiscourage
 	goto AI_HPAware_End
 
-AI_HPAware_TargetHasMediumHP:: @ 81DBBAB
+AI_HPAware_TargetHasMediumHP::
 	get_considered_move_effect
 	if_in_bytes AI_HPAware_DiscouragedEffectsWhenTargetMediumHP, AI_HPAware_TargetTryToDiscourage
 	goto AI_HPAware_End
 
-AI_HPAware_TargetTryToDiscourage:: @ 81DBBBA
+AI_HPAware_TargetTryToDiscourage::
 	if_random_less_than 50, AI_HPAware_End
 	score -2
 
-AI_HPAware_End:: @ 81DBBC2
+AI_HPAware_End::
 	end
 
-AI_HPAware_DiscouragedEffectsWhenHighHP:: @ 81DBBC3
+AI_HPAware_DiscouragedEffectsWhenHighHP::
 	.byte EFFECT_EXPLOSION
 	.byte EFFECT_RESTORE_HP
 	.byte EFFECT_REST
@@ -3011,7 +3011,7 @@ AI_HPAware_DiscouragedEffectsWhenHighHP:: @ 81DBBC3
 	.byte EFFECT_OVERHEAT
 	.byte -1
 
-AI_HPAware_DiscouragedEffectsWhenMediumHP:: @ 81DBBD1
+AI_HPAware_DiscouragedEffectsWhenMediumHP::
 	.byte EFFECT_EXPLOSION
 	.byte EFFECT_ATTACK_UP
 	.byte EFFECT_DEFENSE_UP
@@ -3056,7 +3056,7 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP:: @ 81DBBD1
 	.byte EFFECT_DRAGON_DANCE
 	.byte -1
 
-AI_HPAware_DiscouragedEffectsWhenLowHP:: @ 81DBBFC
+AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_ATTACK_UP
 	.byte EFFECT_DEFENSE_UP
 	.byte EFFECT_SPEED_UP
@@ -3106,10 +3106,10 @@ AI_HPAware_DiscouragedEffectsWhenLowHP:: @ 81DBBFC
 	.byte EFFECT_DRAGON_DANCE
 	.byte -1
 
-AI_HPAware_DiscouragedEffectsWhenTargetHighHP:: @ 81DBC2C
+AI_HPAware_DiscouragedEffectsWhenTargetHighHP::
 	.byte -1
 
-AI_HPAware_DiscouragedEffectsWhenTargetMediumHP:: @ 81DBC2D
+AI_HPAware_DiscouragedEffectsWhenTargetMediumHP::
 	.byte EFFECT_ATTACK_UP
 	.byte EFFECT_DEFENSE_UP
 	.byte EFFECT_SPEED_UP
@@ -3151,7 +3151,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP:: @ 81DBC2D
 	.byte EFFECT_DRAGON_DANCE
 	.byte -1
 
-AI_HPAware_DiscouragedEffectsWhenTargetLowHP:: @ 81DBC55
+AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_SLEEP
 	.byte EFFECT_EXPLOSION
 	.byte EFFECT_ATTACK_UP
@@ -3213,17 +3213,17 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP:: @ 81DBC55
 	.byte EFFECT_DRAGON_DANCE
 	.byte -1
 
-AI_Unknown:: @ 81DBC91
+AI_Unknown::
 	if_not_effect EFFECT_SUNNY_DAY, AI_Unknown_End
 	if_equal 0, AI_Unknown_End
 	is_first_turn_for AI_USER
 	if_equal 0, AI_Unknown_End
 	score +5
 
-AI_Unknown_End:: @ 81DBCA7
+AI_Unknown_End::
 	end
 
-AI_Roaming:: @ 81DBCA8
+AI_Roaming::
 	if_status2 AI_USER, STATUS2_WRAPPED, AI_Roaming_End
 	if_status2 AI_USER, STATUS2_ESCAPE_PREVENTION, AI_Roaming_End
 	get_ability AI_TARGET
@@ -3233,27 +3233,27 @@ AI_Roaming:: @ 81DBCA8
 	get_ability AI_TARGET
 	if_equal ABILITY_ARENA_TRAP, AI_Roaming_End
 
-AI_Roaming_Flee:: @ 81DBCD4
+AI_Roaming_Flee::
 	flee
 
-AI_Roaming_End:: @ 81DBCD5
+AI_Roaming_End::
 	end
 
-AI_Safari:: @ 81DBCD6
+AI_Safari::
 	if_random_safari_flee AI_Safari_Flee
 	watch
 
-AI_Safari_Flee:: @ 81DBCDC
+AI_Safari_Flee::
 	flee
 
 @ From Hoenns Poochyena fight (Zigzagoon in Emerald)
-AI_FirstBattle:: @ 81DBCDD
+AI_FirstBattle::
 	if_hp_equal AI_TARGET, 20, AI_FirstBattle_Flee
 	if_hp_less_than AI_TARGET, 20, AI_FirstBattle_Flee
 	end
 
-AI_FirstBattle_Flee:: @ 81DBCEC
+AI_FirstBattle_Flee::
 	flee
 
-AI_Ret:: @ 81DBCED
+AI_Ret::
 	end

@@ -1,7 +1,7 @@
-SaffronCity_MrPsychicsHouse_MapScripts:: @ 816F05E
+SaffronCity_MrPsychicsHouse_MapScripts::
 	.byte 0
 
-SaffronCity_MrPsychicsHouse_EventScript_MrPsychic:: @ 816F05F
+SaffronCity_MrPsychicsHouse_EventScript_MrPsychic::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_TM29_FROM_MR_PSYCHIC, SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29
@@ -15,12 +15,12 @@ SaffronCity_MrPsychicsHouse_EventScript_MrPsychic:: @ 816F05F
 	release
 	end
 
-SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29:: @ 816F0AB
+SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29::
 	msgbox SaffronCity_MrPsychicsHouse_Text_YouveNoRoom
 	release
 	end
 
-SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29:: @ 816F0B5
+SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29::
 	msgbox SaffronCity_MrPsychicsHouse_Text_ExplainTM29
 	release
 	end

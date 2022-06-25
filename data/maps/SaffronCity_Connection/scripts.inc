@@ -1,2 +1,2 @@
-SaffronCity_Connection_MapScripts:: @ 8167483
+SaffronCity_Connection_MapScripts::
 	.byte 0

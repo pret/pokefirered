@@ -1,10 +1,10 @@
-ThreeIsland_BondBridge_MapScripts:: @ 8168776
+ThreeIsland_BondBridge_MapScripts::
 	.byte 0
 
-ThreeIsland_BondBridge_EventScript_BerryForestSign:: @ 8168777
+ThreeIsland_BondBridge_EventScript_BerryForestSign::
 	msgbox ThreeIsland_BondBridge_Text_BerryForestAhead, MSGBOX_SIGN
 	end
 
-ThreeIsland_BondBridge_EventScript_BondBridgeSign:: @ 8168780
+ThreeIsland_BondBridge_EventScript_BondBridgeSign::
 	msgbox ThreeIsland_BondBridge_Text_BondBridgeSign, MSGBOX_SIGN
 	end

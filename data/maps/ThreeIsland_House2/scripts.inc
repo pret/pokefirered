@@ -1,7 +1,7 @@
-ThreeIsland_House2_MapScripts:: @ 81718DF
+ThreeIsland_House2_MapScripts::
 	.byte 0
 
-ThreeIsland_House2_EventScript_Man:: @ 81718E0
+ThreeIsland_House2_EventScript_Man::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_SABRINA, 1
@@ -9,6 +9,6 @@ ThreeIsland_House2_EventScript_Man:: @ 81718E0
 	release
 	end
 
-ThreeIsland_House2_EventScript_Rocker:: @ 81718F9
+ThreeIsland_House2_EventScript_Rocker::
 	msgbox ThreeIsland_House2_Text_CantMakeThisSpoonBend, MSGBOX_NPC
 	end

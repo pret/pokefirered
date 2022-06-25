@@ -1,16 +1,16 @@
-Route12_MapScripts:: @ 8168000
+Route12_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route12_OnResume
 	.byte 0
 
-Route12_OnResume:: @ 8168006
+Route12_OnResume::
 	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, Route12_EventScript_TryRemoveSnorlax
 	end
 
-Route12_EventScript_TryRemoveSnorlax:: @ 8168010
+Route12_EventScript_TryRemoveSnorlax::
 	removeobject VAR_LAST_TALKED
 	return
 
-Route12_EventScript_Snorlax:: @ 8168014
+Route12_EventScript_Snorlax::
 	lock
 	faceplayer
 	goto_if_unset FLAG_GOT_POKE_FLUTE, Route12_EventScript_SnorlaxNoPokeFlute
@@ -40,24 +40,24 @@ Route12_EventScript_Snorlax:: @ 8168014
 	release
 	end
 
-Route12_EventScript_DontUsePokeFlute:: @ 816808D
+Route12_EventScript_DontUsePokeFlute::
 	release
 	end
 
-Route12_EventScript_FoughtSnorlax:: @ 816808F
+Route12_EventScript_FoughtSnorlax::
 	msgbox Text_SnorlaxReturnedToMountains
 	release
 	end
 
-Route12_EventScript_SnorlaxNoPokeFlute:: @ 8168099
+Route12_EventScript_SnorlaxNoPokeFlute::
 	msgbox Route12_Text_MonSprawledOutInSlumber
 	release
 	end
 
-Route12_EventScript_RouteSign:: @ 81680A3
+Route12_EventScript_RouteSign::
 	msgbox Route12_Text_RouteSign, MSGBOX_SIGN
 	end
 
-Route12_EventScript_FishingSign:: @ 81680AC
+Route12_EventScript_FishingSign::
 	msgbox Route12_Text_SportfishingArea, MSGBOX_SIGN
 	end

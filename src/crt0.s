@@ -10,29 +10,29 @@
 
 	.arm
 
-_start: @ 8000000
+_start:
 	b start_vector
 
 	.include "asm/rom_header.inc"
 
-@ 80000C0
+
 	.word 0
 
 	.global GPIOPortData
-GPIOPortData: @ 80000C4
+GPIOPortData:
 	.hword 0
 
 	.global GPIOPortDirection
-GPIOPortDirection: @ 80000C6
+GPIOPortDirection:
 	.hword 0
 
 	.global GPIOPortReadEnable
-GPIOPortReadEnable: @ 80000C8
+GPIOPortReadEnable:
 	.hword 0
 
 	.space 6
 
-@ 80000D0
+
 
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
@@ -47,7 +47,7 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
 
-@ 8000100
+
 	.global CartIdent
 CartIdent:
 	.4byte GAME_VERSION

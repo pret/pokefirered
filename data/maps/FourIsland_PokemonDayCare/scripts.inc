@@ -1,9 +1,9 @@
 .set LOCALID_DAYCARE_WOMAN, 1
 
-FourIsland_PokemonDayCare_MapScripts:: @ 817193F
+FourIsland_PokemonDayCare_MapScripts::
 	.byte 0
 
-FourIsland_PokemonDayCare_EventScript_DaycareWoman:: @ 8171940
+FourIsland_PokemonDayCare_EventScript_DaycareWoman::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -21,7 +21,7 @@ FourIsland_PokemonDayCare_EventScript_DaycareWoman:: @ 8171940
 	release
 	end
 
-FourIsland_PokemonDayCare_GiveMonToRaise:: @ 8171993
+FourIsland_PokemonDayCare_GiveMonToRaise::
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 1
 	goto_if_eq FourIsland_PokemonDayCare_OnlyOneMonInParty
@@ -47,44 +47,44 @@ FourIsland_PokemonDayCare_GiveMonToRaise:: @ 8171993
 	release
 	end
 
-FourIsland_PokemonDayCare_ComeAgain:: @ 81719F7
+FourIsland_PokemonDayCare_ComeAgain::
 	msgbox DayCare_Text_ComeAgain
 	release
 	end
 
-FourIsland_PokemonDayCare_CanRaiseOneMore:: @ 8171A01
+FourIsland_PokemonDayCare_CanRaiseOneMore::
 	msgbox DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
-FourIsland_PokemonDayCare_OnlyOneMonInParty:: @ 8171A1A
+FourIsland_PokemonDayCare_OnlyOneMonInParty::
 	msgbox DayCare_Text_YouHaveJustOneMon
 	release
 	end
 
-FourIsland_PokemonDayCare_OnlyOneAliveMonInParty:: @ 8171A24
+FourIsland_PokemonDayCare_OnlyOneAliveMonInParty::
 	msgbox DayCare_Text_WhatWillYouBattleWith
 	release
 	end
 
-FourIsland_PokemonDayCare_EggWaiting:: @ 8171A2E
+FourIsland_PokemonDayCare_EggWaiting::
 	msgbox DayCare_Text_HusbandWasLookingForYou
 	release
 	end
 
-FourIsland_PokemonDayCare_MonHasGrownXLevels:: @ 8171A38
+FourIsland_PokemonDayCare_MonHasGrownXLevels::
 	msgbox DayCare_Text_YourMonHasGrownXLevels
 	return
 
-FourIsland_PokemonDayCare_DisplayLevelsGained:: @ 8171A41
+FourIsland_PokemonDayCare_DisplayLevelsGained::
 	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
 	compare VAR_RESULT, 0
 	call_if_ne FourIsland_PokemonDayCare_MonHasGrownXLevels
 	return
 
-FourIsland_PokemonDayCare_OneMonInDaycare:: @ 8171A52
+FourIsland_PokemonDayCare_OneMonInDaycare::
 	msgbox DayCare_Text_GoodToSeeYou
 	setvar VAR_0x8004, 0
 	call FourIsland_PokemonDayCare_DisplayLevelsGained
@@ -97,7 +97,7 @@ FourIsland_PokemonDayCare_OneMonInDaycare:: @ 8171A52
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
-FourIsland_PokemonDayCare_TryRetrieveMon:: @ 8171A90
+FourIsland_PokemonDayCare_TryRetrieveMon::
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq FourIsland_PokemonDayCare_NoRoomInParty
@@ -113,7 +113,7 @@ FourIsland_PokemonDayCare_TryRetrieveMon:: @ 8171A90
 	goto FourIsland_PokemonDayCare_CostPrompt
 	end
 
-FourIsland_PokemonDayCare_CostPrompt:: @ 8171ACF
+FourIsland_PokemonDayCare_CostPrompt::
 	special GetDaycareCost
 	msgbox DayCare_Text_ItWillCostX, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -121,7 +121,7 @@ FourIsland_PokemonDayCare_CostPrompt:: @ 8171ACF
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
-FourIsland_PokemonDayCare_CheckEnoughMoney:: @ 8171AEB
+FourIsland_PokemonDayCare_CheckEnoughMoney::
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare VAR_RESULT, TRUE
 	goto_if_eq FourIsland_PokemonDayCare_RetrieveMon
@@ -129,7 +129,7 @@ FourIsland_PokemonDayCare_CheckEnoughMoney:: @ 8171AEB
 	release
 	end
 
-FourIsland_PokemonDayCare_RetrieveMon:: @ 8171B05
+FourIsland_PokemonDayCare_RetrieveMon::
 	applymovement LOCALID_DAYCARE_WOMAN, FourIsland_PokemonDayCare_Movement_RetrieveMon
 	waitmovement 0
 	specialvar VAR_RESULT, TakePokemonFromDaycare
@@ -148,19 +148,19 @@ FourIsland_PokemonDayCare_RetrieveMon:: @ 8171B05
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
-FourIsland_PokemonDayCare_AskRetrieveOtherMon:: @ 8171B4E
+FourIsland_PokemonDayCare_AskRetrieveOtherMon::
 	msgbox DayCare_Text_TakeOtherOneBackToo, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
-FourIsland_PokemonDayCare_NoRoomInParty:: @ 8171B67
+FourIsland_PokemonDayCare_NoRoomInParty::
 	msgbox DayCare_Text_YourPartyIsFull
 	release
 	end
 
-FourIsland_PokemonDayCare_Movement_RetrieveMon:: @ 8171B71
+FourIsland_PokemonDayCare_Movement_RetrieveMon::
 	delay_16
 	delay_16
 	face_right
@@ -183,10 +183,10 @@ FourIsland_PokemonDayCare_Movement_RetrieveMon:: @ 8171B71
 	step_end
 
 @ Unused. Possibly a commented script, or a typo end added to the above Movement script
-FourIsland_PokemonDayCare_EventScript_UnusedEnd:: @ 8171B85
+FourIsland_PokemonDayCare_EventScript_UnusedEnd::
 	end
 
-FourIsland_PokemonDayCare_TwoMonsInDaycare:: @ 8171B86
+FourIsland_PokemonDayCare_TwoMonsInDaycare::
 	msgbox DayCare_Text_GoodToSeeYou
 	setvar VAR_0x8004, 0
 	call FourIsland_PokemonDayCare_DisplayLevelsGained
@@ -200,7 +200,7 @@ FourIsland_PokemonDayCare_TwoMonsInDaycare:: @ 8171B86
 	end
 
 @ Unused
-FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon:: @ 8171BBF
+FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon::
 	special ShowDaycareLevelMenu
 	waitstate
 	compare VAR_RESULT, 2

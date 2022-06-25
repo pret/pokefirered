@@ -1,4 +1,4 @@
-PokemonLeague_LoreleisRoom_MapScripts:: @ 816256C
+PokemonLeague_LoreleisRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LoreleisRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LoreleisRoom_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, PokemonLeague_LoreleisRoom_OnTransition
@@ -6,49 +6,49 @@ PokemonLeague_LoreleisRoom_MapScripts:: @ 816256C
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_LoreleisRoom_OnFrame
 	.byte 0
 
-PokemonLeague_LoreleisRoom_OnResume:: @ 8162586
+PokemonLeague_LoreleisRoom_OnResume::
 	setvar VAR_0x8004, 0
 	call PokemonLeague_EventScript_DoLightingEffect
 	end
 
-PokemonLeague_LoreleisRoom_OnLoad:: @ 8162591
+PokemonLeague_LoreleisRoom_OnLoad::
 	call_if_set FLAG_DEFEATED_LORELEI, PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	call_if_eq PokemonLeague_LoreleisRoom_EventScript_CloseEntry
 	end
 
-PokemonLeague_LoreleisRoom_EventScript_CloseEntry:: @ 81625A6
+PokemonLeague_LoreleisRoom_EventScript_CloseEntry::
 	call PokemonLeague_EventScript_CloseEntry
 	return
 
-PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen:: @ 81625AC
+PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen::
 	call PokemonLeague_EventScript_SetDoorOpen
 	return
 
-PokemonLeague_LoreleisRoom_OnTransition:: @ 81625B2
+PokemonLeague_LoreleisRoom_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM
 	end
 
-PokemonLeague_LoreleisRoom_OnWarp:: @ 81625B6
+PokemonLeague_LoreleisRoom_OnWarp::
 	map_script_2 VAR_TEMP_1, 0, PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth
 	.2byte 0
 
-PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth:: @ 81625C0
+PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-PokemonLeague_LoreleisRoom_OnFrame:: @ 81625C5
+PokemonLeague_LoreleisRoom_OnFrame::
 	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 0, PokemonLeague_LoreleisRoom_EventScript_EnterRoom
 	.2byte 0
 
-PokemonLeague_LoreleisRoom_EventScript_EnterRoom:: @ 81625CF
+PokemonLeague_LoreleisRoom_EventScript_EnterRoom::
 	lockall
 	call PokemonLeague_EventScript_EnterRoom
 	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	releaseall
 	end
 
-PokemonLeague_LoreleisRoom_EventScript_Lorelei:: @ 81625DC
+PokemonLeague_LoreleisRoom_EventScript_Lorelei::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
@@ -65,28 +65,28 @@ PokemonLeague_LoreleisRoom_EventScript_Lorelei:: @ 81625DC
 	goto PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei
 	end
 
-PokemonLeague_LoreleisRoom_EventScript_Intro:: @ 8162641
+PokemonLeague_LoreleisRoom_EventScript_Intro::
 	msgbox PokemonLeague_LoreleisRoom_Text_Intro
 	return
 
-PokemonLeague_LoreleisRoom_EventScript_RematchIntro:: @ 816264A
+PokemonLeague_LoreleisRoom_EventScript_RematchIntro::
 	msgbox PokemonLeague_LoreleisRoom_Text_RematchIntro
 	return
 
-PokemonLeague_LoreleisRoom_EventScript_Battle:: @ 8162653
+PokemonLeague_LoreleisRoom_EventScript_Battle::
 	trainerbattle_no_intro TRAINER_ELITE_FOUR_LORELEI, PokemonLeague_LoreleisRoom_Text_Defeat
 	return
 
-PokemonLeague_LoreleisRoom_EventScript_Rematch:: @ 816265E
+PokemonLeague_LoreleisRoom_EventScript_Rematch::
 	trainerbattle_no_intro TRAINER_ELITE_FOUR_LORELEI_2, PokemonLeague_LoreleisRoom_Text_Defeat
 	return
 
-PokemonLeague_LoreleisRoom_EventScript_PostBattle:: @ 8162669
+PokemonLeague_LoreleisRoom_EventScript_PostBattle::
 	msgbox PokemonLeague_LoreleisRoom_Text_PostBattle
 	release
 	end
 
-PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei:: @ 8162673
+PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei::
 	setflag FLAG_DEFEATED_LORELEI
 	call PokemonLeague_EventScript_OpenDoor
 	msgbox PokemonLeague_LoreleisRoom_Text_PostBattle

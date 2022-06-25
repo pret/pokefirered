@@ -1,11 +1,11 @@
-FuchsiaCity_House1_MapScripts:: @ 816D6C5
+FuchsiaCity_House1_MapScripts::
 	.byte 0
 
-FuchsiaCity_House1_EventScript_Woman:: @ 816D6C6
+FuchsiaCity_House1_EventScript_Woman::
 	msgbox FuchsiaCity_House1_Text_WardenIsOldHasFalseTeeth, MSGBOX_NPC
 	end
 
-FuchsiaCity_House1_EventScript_OldMan:: @ 816D6CF
+FuchsiaCity_House1_EventScript_OldMan::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BILL, 2
@@ -13,6 +13,6 @@ FuchsiaCity_House1_EventScript_OldMan:: @ 816D6CF
 	release
 	end
 
-FuchsiaCity_House1_EventScript_LittleBoy:: @ 816D6E8
+FuchsiaCity_House1_EventScript_LittleBoy::
 	msgbox FuchsiaCity_House1_Text_BillFilesHisOwnMonData, MSGBOX_NPC
 	end

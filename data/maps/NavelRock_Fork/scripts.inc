@@ -1,2 +1,2 @@
-NavelRock_Fork_MapScripts:: @ 8165202
+NavelRock_Fork_MapScripts::
 	.byte 0

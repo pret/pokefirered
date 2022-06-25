@@ -1,2 +1,2 @@
-CeruleanCave_2F_MapScripts:: @ 81624BD
+CeruleanCave_2F_MapScripts::
 	.byte 0

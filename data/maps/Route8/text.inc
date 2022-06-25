@@ -1,162 +1,162 @@
-Route8_Text_AidanIntro:: @ 81840C5
+Route8_Text_AidanIntro::
     .string "You look good at POKéMON, but how\n"
     .string "is your chemistry grade?$"
 
-Route8_Text_AidanDefeat:: @ 8184100
+Route8_Text_AidanDefeat::
     .string "Ow!\n"
     .string "Meltdown!$"
 
-Route8_Text_AidanPostBattle:: @ 818410E
+Route8_Text_AidanPostBattle::
     .string "I am better at school than this!$"
 
-Route8_Text_StanIntro:: @ 818412F
+Route8_Text_StanIntro::
     .string "All right!\n"
     .string "Let's play a game!$"
 
-Route8_Text_StanDefeat:: @ 818414D
+Route8_Text_StanDefeat::
     .string "Drat!\n"
     .string "Came up short!$"
 
-Route8_Text_StanPostBattle:: @ 8184162
+Route8_Text_StanPostBattle::
     .string "Things didn't work today.$"
 
-Route8_Text_GlennIntro:: @ 818417C
+Route8_Text_GlennIntro::
     .string "You should be informed.\n"
     .string "You need strategy to win at this!$"
 
-Route8_Text_GlennDefeat:: @ 81841B6
+Route8_Text_GlennDefeat::
     .string "It's not logical!$"
 
-Route8_Text_GlennPostBattle:: @ 81841C8
+Route8_Text_GlennPostBattle::
     .string "Go with GRIMER first…and…\n"
     .string "…and…then…$"
 
-Route8_Text_PaigeIntro:: @ 81841ED
+Route8_Text_PaigeIntro::
     .string "I like NIDORAN, so I collect them!$"
 
-Route8_Text_PaigeDefeat:: @ 8184210
+Route8_Text_PaigeDefeat::
     .string "Why?\n"
     .string "Why??$"
 
-Route8_Text_PaigePostBattle:: @ 818421B
+Route8_Text_PaigePostBattle::
     .string "When POKéMON grow up, they get\n"
     .string "ugly! They shouldn't evolve.$"
 
-Route8_Text_LeslieIntro:: @ 8184257
+Route8_Text_LeslieIntro::
     .string "School is fun, but so are POKéMON.$"
 
-Route8_Text_LeslieDefeat:: @ 818427A
+Route8_Text_LeslieDefeat::
     .string "You made it clear to me that\n"
     .string "I should stick with school.$"
 
-Route8_Text_LesliePostBattle:: @ 81842B3
+Route8_Text_LesliePostBattle::
     .string "I was planning on getting some\n"
     .string "fresh air for a change, but…\p"
     .string "We're stuck here because of the\n"
     .string "gates at SAFFRON.$"
 
-Route8_Text_AndreaIntro:: @ 8184321
+Route8_Text_AndreaIntro::
     .string "MEOWTH is so cute, meow, meow,\n"
     .string "meow!$"
 
-Route8_Text_AndreaDefeat:: @ 8184346
+Route8_Text_AndreaDefeat::
     .string "Meeeeyow!$"
 
-Route8_Text_AndreaPostBattle:: @ 8184350
+Route8_Text_AndreaPostBattle::
     .string "I think PIDGEY and RATTATA are\n"
     .string "cute, too!$"
 
-Route8_Text_MeganIntro:: @ 818437A
+Route8_Text_MeganIntro::
     .string "We must look silly standing here\n"
     .string "like this.$"
 
-Route8_Text_MeganDefeat:: @ 81843A6
+Route8_Text_MeganDefeat::
     .string "Look what you did to my poor, cute\n"
     .string "POKéMON!$"
 
-Route8_Text_MeganPostBattle:: @ 81843D2
+Route8_Text_MeganPostBattle::
     .string "SAFFRON's gatekeeper won't let us\n"
     .string "go through.\p"
     .string "I know he's doing his job, but I\n"
     .string "think he's mean.$"
 
-Route8_Text_RichIntro:: @ 8184432
+Route8_Text_RichIntro::
     .string "I'm a rambling, gaming dude!$"
 
-Route8_Text_RichDefeat:: @ 818444F
+Route8_Text_RichDefeat::
     .string "Missed the big chance!$"
 
-Route8_Text_RichPostBattle:: @ 8184466
+Route8_Text_RichPostBattle::
     .string "Playing games and POKéMON are like\n"
     .string "eating peanuts! I just can't stop!$"
 
-Route8_Text_JuliaIntro:: @ 81844AC
+Route8_Text_JuliaIntro::
     .string "What's a cute, round, and fluffy\n"
     .string "POKéMON?$"
 
-Route8_Text_JuliaDefeat:: @ 81844D6
+Route8_Text_JuliaDefeat::
     .string "Stop!\p"
     .string "Don't be so mean to my CLEFAIRY!$"
 
-Route8_Text_JuliaPostBattle:: @ 81844FD
+Route8_Text_JuliaPostBattle::
     .string "I read that CLEFAIRY evolves when\n"
     .string "it's exposed to a MOON STONE.\p"
     .string "I read that in a POKéMON JOURNAL.\n"
     .string "I wonder if it's true?$"
 
-Route8_Text_UndergroundPathSign:: @ 8184576
+Route8_Text_UndergroundPathSign::
     .string "UNDERGROUND PATH\n"
     .string "CELADON CITY - LAVENDER TOWN$"
 
-Route8_Text_EliIntro:: @ 81845A4
+Route8_Text_EliIntro::
     .string "ELI: Twin power is fantastic.\n"
     .string "Did you know?$"
 
-Route8_Text_EliDefeat:: @ 81845D0
+Route8_Text_EliDefeat::
     .string "ELI: But…\n"
     .string "We used our twin power…$"
 
-Route8_Text_EliPostBattle:: @ 81845F2
+Route8_Text_EliPostBattle::
     .string "ELI: I caught my POKéMON with\n"
     .string "ANNE!$"
 
-Route8_Text_EliNotEnoughMons:: @ 8184616
+Route8_Text_EliNotEnoughMons::
     .string "ELI: We can't battle if you don't\n"
     .string "have two POKéMON.$"
 
-Route8_Text_AnneIntro:: @ 818464A
+Route8_Text_AnneIntro::
     .string "ANNE: We'll shock you with our twin\n"
     .string "power!$"
 
-Route8_Text_AnneDefeat:: @ 8184675
+Route8_Text_AnneDefeat::
     .string "ANNE: Our twin power…$"
 
-Route8_Text_AnnePostBattle:: @ 818468B
+Route8_Text_AnnePostBattle::
     .string "ANNE: I'm raising POKéMON with\n"
     .string "ELI.$"
 
-Route8_Text_AnneNotEnoughMons:: @ 81846AF
+Route8_Text_AnneNotEnoughMons::
     .string "ANNE: Hi, hi! Let's battle!\n"
     .string "But bring two POKéMON.$"
 
-Route8_Text_RicardoIntro:: @ 81846E2
+Route8_Text_RicardoIntro::
     .string "My bike's acting up, man.$"
 
-Route8_Text_RicardoDefeat:: @ 81846FC
+Route8_Text_RicardoDefeat::
     .string "Aww, man.\n"
     .string "I'm not into this.$"
 
-Route8_Text_RicardoPostBattle:: @ 8184719
+Route8_Text_RicardoPostBattle::
     .string "I got grass caught up in my\n"
     .string "spokes, man.$"
 
-Route8_Text_JarenIntro:: @ 8184742
+Route8_Text_JarenIntro::
     .string "Clear the way, or I'll run you\n"
     .string "down!$"
 
-Route8_Text_JarenDefeat:: @ 8184767
+Route8_Text_JarenDefeat::
     .string "You for real, kid?$"
 
-Route8_Text_JarenPostBattle:: @ 818477A
+Route8_Text_JarenPostBattle::
     .string "Don't think you're all special and\n"
     .string "all just because of this.$"

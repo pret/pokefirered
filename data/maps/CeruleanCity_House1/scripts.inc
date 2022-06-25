@@ -1,7 +1,7 @@
-CeruleanCity_House1_MapScripts:: @ 816A7EF
+CeruleanCity_House1_MapScripts::
 	.byte 0
 
-CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
+CeruleanCity_House1_EventScript_BadgeGuy::
 	lock
 	faceplayer
 	msgbox CeruleanCity_House1_Text_BadgesHaveAmazingSecrets
@@ -23,7 +23,7 @@ CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 	case 127, CeruleanCity_House1_EventScript_StopDescribingBadges
 	end
 
-CeruleanCity_House1_EventScript_DescribeAnotherBadge:: @ 816A87D
+CeruleanCity_House1_EventScript_DescribeAnotherBadge::
 	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
 	special ReturnToListMenu
@@ -41,47 +41,47 @@ CeruleanCity_House1_EventScript_DescribeAnotherBadge:: @ 816A87D
 	case 127, CeruleanCity_House1_EventScript_StopDescribingBadges
 	end
 
-CeruleanCity_House1_EventScript_DescribeBoulderBadge:: @ 816A8FB
+CeruleanCity_House1_EventScript_DescribeBoulderBadge::
 	msgbox CeruleanCity_House1_Text_AttackStatFlash
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeCascadeBadge:: @ 816A909
+CeruleanCity_House1_EventScript_DescribeCascadeBadge::
 	msgbox CeruleanCity_House1_Text_ObeyLv30Cut
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeThunderBadge:: @ 816A917
+CeruleanCity_House1_EventScript_DescribeThunderBadge::
 	msgbox CeruleanCity_House1_Text_SpeedStatFly
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeRainbowBadge:: @ 816A925
+CeruleanCity_House1_EventScript_DescribeRainbowBadge::
 	msgbox CeruleanCity_House1_Text_ObeyLv50Strength
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeSoulBadge:: @ 816A933
+CeruleanCity_House1_EventScript_DescribeSoulBadge::
 	msgbox CeruleanCity_House1_Text_DefenseStatSurf
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeMarshBadge:: @ 816A941
+CeruleanCity_House1_EventScript_DescribeMarshBadge::
 	msgbox CeruleanCity_House1_Text_ObeyLv70RockSmash
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeVolcanoBadge:: @ 816A94F
+CeruleanCity_House1_EventScript_DescribeVolcanoBadge::
 	msgbox CeruleanCity_House1_Text_SpStatsWaterfall
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_DescribeEarthBadge:: @ 816A95D
+CeruleanCity_House1_EventScript_DescribeEarthBadge::
 	msgbox CeruleanCity_House1_Text_AllMonsWillObeyYou
 	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-CeruleanCity_House1_EventScript_StopDescribingBadges:: @ 816A96B
+CeruleanCity_House1_EventScript_StopDescribingBadges::
 	msgbox CeruleanCity_House1_Text_ComeVisitAnytime
 	release
 	end

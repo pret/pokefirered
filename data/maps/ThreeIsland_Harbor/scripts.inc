@@ -1,7 +1,7 @@
-ThreeIsland_Harbor_MapScripts:: @ 8171EA9
+ThreeIsland_Harbor_MapScripts::
 	.byte 0
 
-ThreeIsland_Harbor_EventScript_Sailor:: @ 8171EAA
+ThreeIsland_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	message Text_WhereDoYouWantToSail

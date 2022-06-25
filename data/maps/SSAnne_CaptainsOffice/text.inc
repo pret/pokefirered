@@ -1,15 +1,15 @@
-SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick:: @ 8173646
+SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick::
     .string "CAPTAIN: Ooargh…\n"
     .string "I feel hideous…\l"
     .string "Urrp! Seasick…$"
 
-SSAnne_CaptainsOffice_Text_RubbedCaptainsBack:: @ 8173676
+SSAnne_CaptainsOffice_Text_RubbedCaptainsBack::
     .string "{PLAYER} rubbed the CAPTAIN's\n"
     .string "back!\p"
     .string "Rub-rub…\n"
     .string "Rub-rub…$"
 
-SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut:: @ 81736A6
+SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut::
     .string "CAPTAIN: Whew! Thank you!\n"
     .string "I'm feeling much better now.\p"
     .string "You want to see my hidden CUT\n"
@@ -21,17 +21,17 @@ SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut:: @ 81736A6
     .string "Teach CUT to your POKéMON, and\n"
     .string "you can see it CUT anytime!$"
 
-SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain:: @ 81737AF
+SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain::
     .string "{PLAYER} obtained HM01\n"
     .string "from the CAPTAIN!$"
 
-SSAnne_CaptainsOffice_Text_ExplainCut:: @ 81737D2
+SSAnne_CaptainsOffice_Text_ExplainCut::
     .string "Using CUT, you can chop down\n"
     .string "small trees.\p"
     .string "Why not try it with the trees\n"
     .string "around VERMILION CITY?$"
 
-SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon:: @ 8173831
+SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon::
     .string "CAPTAIN: …Whew!\p"
     .string "Now that I'm not sick anymore,\n"
     .string "I guess it's time.\p"
@@ -39,15 +39,15 @@ SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon:: @ 8173831
     .string "Farewell, until our return to\n"
     .string "VERMILION CITY!$"
 
-SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis:: @ 81738C3
+SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis::
     .string "Oh, no!\n"
     .string "You have no room for this!$"
 
-SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked:: @ 81738E6
+SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked::
     .string "Yuck!\n"
     .string "Shouldn't have looked!$"
 
-SSAnne_CaptainsOffice_Text_HowToConquerSeasickness:: @ 8173903
+SSAnne_CaptainsOffice_Text_HowToConquerSeasickness::
     .string "How to Conquer Seasickness…\n"
     .string "The CAPTAIN's reading this!$"
 

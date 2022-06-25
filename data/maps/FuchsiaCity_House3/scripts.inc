@@ -1,7 +1,7 @@
-FuchsiaCity_House3_MapScripts:: @ 816D894
+FuchsiaCity_House3_MapScripts::
 	.byte 0
 
-FuchsiaCity_House3_EventScript_MoveDeleter:: @ 816D895
+FuchsiaCity_House3_EventScript_MoveDeleter::
 	lock
 	faceplayer
 	msgbox FuchsiaCity_House3_Text_WouldYouLikeToForgetMove, MSGBOX_YESNO
@@ -10,7 +10,7 @@ FuchsiaCity_House3_EventScript_MoveDeleter:: @ 816D895
 	goto FuchsiaCity_House3_EventScript_CancelForgetMove
 	end
 
-FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter:: @ 816D8B0
+FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter::
 	msgbox FuchsiaCity_House3_Text_WhichMonShouldForgetMove
 	special ChoosePartyMon
 	waitstate
@@ -35,7 +35,7 @@ FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter:: @ 816D8B0
 	goto FuchsiaCity_House3_EventScript_CancelForgetMove
 	end
 
-FuchsiaCity_House3_EventScript_ForgetMove:: @ 816D919
+FuchsiaCity_House3_EventScript_ForgetMove::
 	special MoveDeleterForgetMove
 	playfanfare MUS_MOVE_DELETED
 	waitfanfare
@@ -43,18 +43,18 @@ FuchsiaCity_House3_EventScript_ForgetMove:: @ 816D919
 	release
 	end
 
-FuchsiaCity_House3_EventScript_CantForgetOnlyMove:: @ 816D92A
+FuchsiaCity_House3_EventScript_CantForgetOnlyMove::
 	special BufferMoveDeleterNicknameAndMove
 	msgbox FuchsiaCity_House3_Text_MonOnlyKnowsOneMove
 	release
 	end
 
-FuchsiaCity_House3_EventScript_CantForgetMoveEgg:: @ 816D937
+FuchsiaCity_House3_EventScript_CantForgetMoveEgg::
 	msgbox FuchsiaCity_House3_Text_NoEggShouldKnowMoves
 	release
 	end
 
-FuchsiaCity_House3_EventScript_CancelForgetMove:: @ 816D941
+FuchsiaCity_House3_EventScript_CancelForgetMove::
 	msgbox FuchsiaCity_House3_Text_ComeAgainToForgetOtherMoves
 	release
 	end

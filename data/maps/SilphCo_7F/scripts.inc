@@ -1,39 +1,39 @@
 .set LOCALID_RIVAL,     1
 .set LOCALID_WORKER_M2, 8
 
-SilphCo_7F_MapScripts:: @ 8161984
+SilphCo_7F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, SilphCo_7F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, SilphCo_7F_OnTransition
 	.byte 0
 
-SilphCo_7F_OnLoad:: @ 816198F
+SilphCo_7F_OnLoad::
 	call_if_unset FLAG_SILPH_7F_DOOR_1, EventScript_Close7FDoor1
 	call_if_unset FLAG_SILPH_7F_DOOR_2, EventScript_Close7FDoor2
 	call_if_unset FLAG_SILPH_7F_DOOR_3, EventScript_Close7FDoor3
 	end
 
-SilphCo_7F_OnTransition:: @ 81619AB
+SilphCo_7F_OnTransition::
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	call_if_ge SilphCo_7F_EventScript_SetObjRocketsGone
 	end
 
-SilphCo_7F_EventScript_SetObjRocketsGone:: @ 81619B7
+SilphCo_7F_EventScript_SetObjRocketsGone::
 	setobjectmovementtype LOCALID_WORKER_M2, MOVEMENT_TYPE_FACE_UP
 	return
 
-SilphCo_7F_EventScript_RivalTriggerTop:: @ 81619BC
+SilphCo_7F_EventScript_RivalTriggerTop::
 	lockall
 	setvar VAR_TEMP_1, 0
 	goto SilphCo_7F_EventScript_RivalScene
 	end
 
-SilphCo_7F_EventScript_RivalTriggerBottom:: @ 81619C8
+SilphCo_7F_EventScript_RivalTriggerBottom::
 	lockall
 	setvar VAR_TEMP_1, 1
 	goto SilphCo_7F_EventScript_RivalScene
 	end
 
-SilphCo_7F_EventScript_RivalScene:: @ 81619D4
+SilphCo_7F_EventScript_RivalScene::
 	textcolor 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
@@ -69,42 +69,42 @@ SilphCo_7F_EventScript_RivalScene:: @ 81619D4
 	releaseall
 	end
 
-SilphCo_7F_EventScript_RivalApproachTop:: @ 8161A73
+SilphCo_7F_EventScript_RivalApproachTop::
 	closemessage
 	applymovement LOCALID_RIVAL, SilphCo_7F_Movement_RivalApproachTop
 	waitmovement 0
 	return
 
-SilphCo_7F_EventScript_RivalApproachBottom:: @ 8161A7F
+SilphCo_7F_EventScript_RivalApproachBottom::
 	return
 
-SilphCo_7F_EventScript_RivalSquirtle:: @ 8161A80
+SilphCo_7F_EventScript_RivalSquirtle::
 	trainerbattle_no_intro TRAINER_RIVAL_SILPH_SQUIRTLE, SilphCo_7F_Text_RivalDefeat
 	return
 
-SilphCo_7F_EventScript_RivalBulbasaur:: @ 8161A8B
+SilphCo_7F_EventScript_RivalBulbasaur::
 	trainerbattle_no_intro TRAINER_RIVAL_SILPH_BULBASAUR, SilphCo_7F_Text_RivalDefeat
 	return
 
-SilphCo_7F_EventScript_RivalCharmander:: @ 8161A96
+SilphCo_7F_EventScript_RivalCharmander::
 	trainerbattle_no_intro TRAINER_RIVAL_SILPH_CHARMANDER, SilphCo_7F_Text_RivalDefeat
 	return
 
-SilphCo_7F_EventScript_RivalExitTop:: @ 8161AA1
+SilphCo_7F_EventScript_RivalExitTop::
 	applymovement LOCALID_RIVAL, SilphCo_7F_Movement_RivalExitTop
 	waitmovement 0
 	return
 
-SilphCo_7F_EventScript_RivalExitBottom:: @ 8161AAC
+SilphCo_7F_EventScript_RivalExitBottom::
 	applymovement LOCALID_RIVAL, SilphCo_7F_Movement_RivalExitBottom
 	waitmovement 0
 	return
 
-SilphCo_7F_Movement_RivalApproachTop:: @ 8161AB7
+SilphCo_7F_Movement_RivalApproachTop::
 	walk_up
 	step_end
 
-SilphCo_7F_Movement_RivalExitTop:: @ 8161AB9
+SilphCo_7F_Movement_RivalExitTop::
 	walk_right
 	walk_right
 	walk_right
@@ -112,7 +112,7 @@ SilphCo_7F_Movement_RivalExitTop:: @ 8161AB9
 	delay_16
 	step_end
 
-SilphCo_7F_Movement_RivalExitBottom:: @ 8161ABF
+SilphCo_7F_Movement_RivalExitBottom::
 	walk_left
 	walk_up
 	walk_up
@@ -123,7 +123,7 @@ SilphCo_7F_Movement_RivalExitBottom:: @ 8161ABF
 	delay_16
 	step_end
 
-SilphCo_7F_EventScript_LaprasGuy:: @ 8161AC8
+SilphCo_7F_EventScript_LaprasGuy::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
@@ -139,7 +139,7 @@ SilphCo_7F_EventScript_LaprasGuy:: @ 8161AC8
 	release
 	end
 
-SilphCo_7F_EventScript_ReceiveLaprasParty:: @ 8161B12
+SilphCo_7F_EventScript_ReceiveLaprasParty::
 	textcolor 3
 	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
@@ -154,7 +154,7 @@ SilphCo_7F_EventScript_ReceiveLaprasParty:: @ 8161B12
 	goto SilphCo_7F_EventScript_EndReceiveLapras
 	end
 
-SilphCo_7F_EventScript_ReceiveLaprasPC:: @ 8161B45
+SilphCo_7F_EventScript_ReceiveLaprasPC::
 	textcolor 3
 	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
@@ -168,24 +168,24 @@ SilphCo_7F_EventScript_ReceiveLaprasPC:: @ 8161B45
 	goto SilphCo_7F_EventScript_LaprasTransferredToPC
 	end
 
-SilphCo_7F_EventScript_LaprasTransferredToPC:: @ 8161B73
+SilphCo_7F_EventScript_LaprasTransferredToPC::
 	call EventScript_TransferredToPC
 	goto SilphCo_7F_EventScript_EndReceiveLapras
 	end
 
-SilphCo_7F_EventScript_EndReceiveLapras:: @ 8161B7E
+SilphCo_7F_EventScript_EndReceiveLapras::
 	textcolor 0
 	msgbox SilphCo_7F_Text_ExplainLapras
 	setflag FLAG_GOT_LAPRAS_FROM_SILPH
 	release
 	end
 
-SilphCo_7F_EventScript_AlreadyGotLapras:: @ 8161B8D
+SilphCo_7F_EventScript_AlreadyGotLapras::
 	msgbox SilphCo_7F_Text_RocketBossWentToBoardroom
 	release
 	end
 
-SilphCo_7F_EventScript_WorkerM1:: @ 8161B97
+SilphCo_7F_EventScript_WorkerM1::
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
@@ -194,12 +194,12 @@ SilphCo_7F_EventScript_WorkerM1:: @ 8161B97
 	release
 	end
 
-SilphCo_7F_EventScript_WorkerM1RocketsGone:: @ 8161BAE
+SilphCo_7F_EventScript_WorkerM1RocketsGone::
 	msgbox SilphCo_7F_Text_CanceledMasterBallProject
 	release
 	end
 
-SilphCo_7F_EventScript_WorkerM2:: @ 8161BB8
+SilphCo_7F_EventScript_WorkerM2::
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
@@ -208,12 +208,12 @@ SilphCo_7F_EventScript_WorkerM2:: @ 8161BB8
 	release
 	end
 
-SilphCo_7F_EventScript_WorkerM2RocketsGone:: @ 8161BCF
+SilphCo_7F_EventScript_WorkerM2RocketsGone::
 	msgbox SilphCo_7F_Text_WowYouChasedOffTeamRocket
 	release
 	end
 
-SilphCo_7F_EventScript_WorkerF:: @ 8161BD9
+SilphCo_7F_EventScript_WorkerF::
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
@@ -222,31 +222,31 @@ SilphCo_7F_EventScript_WorkerF:: @ 8161BD9
 	release
 	end
 
-SilphCo_7F_EventScript_WorkerFRocketsGone:: @ 8161BF0
+SilphCo_7F_EventScript_WorkerFRocketsGone::
 	msgbox SilphCo_7F_Text_ThankYouSoMuch
 	release
 	end
 
-SilphCo_7F_EventScript_FloorSign:: @ 8161BFA
+SilphCo_7F_EventScript_FloorSign::
 	msgbox SilphCo_7F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-SilphCo_7F_EventScript_Joshua:: @ 8161C03
+SilphCo_7F_EventScript_Joshua::
 	trainerbattle_single TRAINER_SCIENTIST_JOSHUA, SilphCo_7F_Text_JoshuaIntro, SilphCo_7F_Text_JoshuaDefeat
 	msgbox SilphCo_7F_Text_JoshuaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_7F_EventScript_Grunt1:: @ 8161C1A
+SilphCo_7F_EventScript_Grunt1::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_33, SilphCo_7F_Text_Grunt1Intro, SilphCo_7F_Text_Grunt1Defeat
 	msgbox SilphCo_7F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_7F_EventScript_Grunt2:: @ 8161C31
+SilphCo_7F_EventScript_Grunt2::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_34, SilphCo_7F_Text_Grunt2Intro, SilphCo_7F_Text_Grunt2Defeat
 	msgbox SilphCo_7F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_7F_EventScript_Grunt3:: @ 8161C48
+SilphCo_7F_EventScript_Grunt3::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_35, SilphCo_7F_Text_Grunt3Intro, SilphCo_7F_Text_Grunt3Defeat
 	msgbox SilphCo_7F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end

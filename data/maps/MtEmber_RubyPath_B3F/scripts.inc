@@ -1,10 +1,10 @@
 .set LOCALID_RUBY, 1
 
-MtEmber_RubyPath_B3F_MapScripts:: @ 8163C48
+MtEmber_RubyPath_B3F_MapScripts::
 	.byte 0
 
 @ Odd that this is here and not in MtEmber_RubyPath_B5F/scripts.inc
-MtEmber_RubyPath_B5F_EventScript_Ruby:: @ 8163C49
+MtEmber_RubyPath_B5F_EventScript_Ruby::
 	lock
 	faceplayer
 	setflag FLAG_GOT_RUBY

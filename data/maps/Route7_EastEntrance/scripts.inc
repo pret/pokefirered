@@ -1,29 +1,29 @@
-Route7_EastEntrance_MapScripts:: @ 816FA8D
+Route7_EastEntrance_MapScripts::
 	.byte 0
 
-Route7_EastEntrance_EventScript_Guard:: @ 816FA8E
+Route7_EastEntrance_EventScript_Guard::
 	msgbox Route7_EastEntrance_Text_HiHowsItGoing, MSGBOX_NPC
 	end
 
-Route7_EastEntrance_EventScript_GuardTriggerTop:: @ 816FA97
+Route7_EastEntrance_EventScript_GuardTriggerTop::
 	lockall
 	setvar VAR_TEMP_1, 0
 	goto Route7_EastEntrance_EventScript_GuardTrigger
 	end
 
-Route7_EastEntrance_EventScript_GuardTriggerMid:: @ 816FAA3
+Route7_EastEntrance_EventScript_GuardTriggerMid::
 	lockall
 	setvar VAR_TEMP_1, 1
 	goto Route7_EastEntrance_EventScript_GuardTrigger
 	end
 
-Route7_EastEntrance_EventScript_GuardTriggerBottom:: @ 816FAAF
+Route7_EastEntrance_EventScript_GuardTriggerBottom::
 	lockall
 	setvar VAR_TEMP_1, 2
 	goto Route7_EastEntrance_EventScript_GuardTrigger
 	end
 
-Route7_EastEntrance_EventScript_GuardTrigger:: @ 816FABB
+Route7_EastEntrance_EventScript_GuardTrigger::
 	textcolor 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -35,12 +35,12 @@ Route7_EastEntrance_EventScript_GuardTrigger:: @ 816FABB
 	releaseall
 	end
 
-Route7_EastEntrance_EventScript_GiveTea:: @ 816FAE5
+Route7_EastEntrance_EventScript_GiveTea::
 	removeitem ITEM_TEA, 1
 	goto Route7_EastEntrance_EventScript_GuardDrinkTea
 	end
 
-Route7_EastEntrance_EventScript_GuardDrinkTea:: @ 816FAF0
+Route7_EastEntrance_EventScript_GuardDrinkTea::
 	msgbox Route7_EastEntrance_Text_ThatTeaLooksTasty
 	closemessage
 	compare VAR_TEMP_1, 0
@@ -54,34 +54,34 @@ Route7_EastEntrance_EventScript_GuardDrinkTea:: @ 816FAF0
 	releaseall
 	end
 
-Route7_EastEntrance_WalkToGuardTop:: @ 816FB29
+Route7_EastEntrance_WalkToGuardTop::
 	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardTop
 	waitmovement 0
 	return
 
-Route7_EastEntrance_WalkToGuardMid:: @ 816FB34
+Route7_EastEntrance_WalkToGuardMid::
 	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardMid
 	waitmovement 0
 	return
 
-Route7_EastEntrance_WalkToGuardBottom:: @ 816FB3F
+Route7_EastEntrance_WalkToGuardBottom::
 	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardBottom
 	waitmovement 0
 	return
 
-Route7_EastEntrance_Movement_WalkToGuardMid:: @ 816FB4A
+Route7_EastEntrance_Movement_WalkToGuardMid::
 	walk_up
 	step_end
 
-Route7_EastEntrance_Movement_WalkToGuardBottom:: @ 816FB4C
+Route7_EastEntrance_Movement_WalkToGuardBottom::
 	walk_up
 	walk_up
 	step_end
 
-Route7_EastEntrance_Movement_WalkToGuardTop:: @ 816FB4F
+Route7_EastEntrance_Movement_WalkToGuardTop::
 	walk_in_place_up
 	step_end
 
-Route7_EastEntrance_Movement_BlockPlayerEntry:: @ 816FB51
+Route7_EastEntrance_Movement_BlockPlayerEntry::
 	walk_left
 	step_end

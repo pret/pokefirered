@@ -1,9 +1,9 @@
 .set LOCALID_CAPTAIN, 1
 
-SSAnne_CaptainsOffice_MapScripts:: @ 8160B39
+SSAnne_CaptainsOffice_MapScripts::
 	.byte 0
 
-SSAnne_CaptainsOffice_EventScript_Captain:: @ 8160B3A
+SSAnne_CaptainsOffice_EventScript_Captain::
 	lock
 	goto_if_set FLAG_GOT_HM01, SSAnne_CaptainsOffice_EventScript_AlreadyGotCut
 	msgbox SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick
@@ -25,7 +25,7 @@ SSAnne_CaptainsOffice_EventScript_Captain:: @ 8160B3A
 	end
 
 @ Unused
-SSAnne_CaptainsOffice_EventScript_NoRoomForCut:: @ 8160BA0
+SSAnne_CaptainsOffice_EventScript_NoRoomForCut::
 	msgbox SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis
 	closemessage
 	applymovement LOCALID_CAPTAIN, Movement_FaceOriginalDirection
@@ -33,17 +33,17 @@ SSAnne_CaptainsOffice_EventScript_NoRoomForCut:: @ 8160BA0
 	release
 	end
 
-SSAnne_CaptainsOffice_EventScript_AlreadyGotCut:: @ 8160BB5
+SSAnne_CaptainsOffice_EventScript_AlreadyGotCut::
 	applymovement LOCALID_CAPTAIN, Movement_FacePlayer
 	waitmovement 0
 	msgbox SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon
 	release
 	end
 
-SSAnne_CaptainsOffice_EventScript_TrashCan:: @ 8160BC9
+SSAnne_CaptainsOffice_EventScript_TrashCan::
 	msgbox SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked, MSGBOX_SIGN
 	end
 
-SSAnne_CaptainsOffice_EventScript_Book:: @ 8160BD2
+SSAnne_CaptainsOffice_EventScript_Book::
 	msgbox SSAnne_CaptainsOffice_Text_HowToConquerSeasickness, MSGBOX_SIGN
 	end

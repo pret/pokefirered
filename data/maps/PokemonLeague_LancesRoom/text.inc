@@ -1,4 +1,4 @@
-PokemonLeague_LancesRoom_Text_Intro:: @ 8178764
+PokemonLeague_LancesRoom_Text_Intro::
     .string "Ah! I've heard about you,\n"
     .string "{PLAYER}!\p"
     .string "I lead the ELITE FOUR.\p"
@@ -14,7 +14,7 @@ PokemonLeague_LancesRoom_Text_Intro:: @ 8178764
     .string "Your LEAGUE challenge ends with\n"
     .string "me, {PLAYER}!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_LancesRoom_Text_RematchIntro:: @ 81788BD
+PokemonLeague_LancesRoom_Text_RematchIntro::
     .string "Ah!\n"
     .string "So, you've returned, {PLAYER}!\p"
     .string "I lead the ELITE FOUR.\p"
@@ -30,12 +30,12 @@ PokemonLeague_LancesRoom_Text_RematchIntro:: @ 81788BD
     .string "Your LEAGUE challenge ends with\n"
     .string "me, {PLAYER}!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_LancesRoom_Text_Defeat:: @ 8178A15
+PokemonLeague_LancesRoom_Text_Defeat::
     .string "That's it!\p"
     .string "I hate to admit it, but you are a\n"
     .string "POKéMON master!$"
 
-PokemonLeague_LancesRoom_Text_PostBattle:: @ 8178A52
+PokemonLeague_LancesRoom_Text_PostBattle::
     .string "I still can't believe my dragons\n"
     .string "lost to you, {PLAYER}.\p"
     .string "You are now the POKéMON LEAGUE\n"

@@ -1,4 +1,4 @@
-VictoryRoad_2F_EventScript_DoubleEdgeTutor:: @ 81C47AE
+VictoryRoad_2F_EventScript_DoubleEdgeTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_DOUBLE_EDGE, EventScript_DoubleEdgeTaught
@@ -17,17 +17,17 @@ VictoryRoad_2F_EventScript_DoubleEdgeTutor:: @ 81C47AE
 	goto EventScript_DoubleEdgeTaught
 	end
 
-EventScript_DoubleEdgeDeclined:: @ 81C4802
+EventScript_DoubleEdgeDeclined::
 	msgbox Text_DoubleEdgeDeclined
 	release
 	end
 
-EventScript_DoubleEdgeTaught:: @ 81C480C
+EventScript_DoubleEdgeTaught::
 	msgbox Text_DoubleEdgeTaught
 	release
 	end
 
-EventScript_ThunderWaveTutor:: @ 81C4816
+EventScript_ThunderWaveTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_THUNDER_WAVE, EventScript_ThunderWaveTaught
@@ -46,17 +46,17 @@ EventScript_ThunderWaveTutor:: @ 81C4816
 	goto EventScript_ThunderWaveTaught
 	end
 
-EventScript_ThunderWaveDeclined:: @ 81C486A
+EventScript_ThunderWaveDeclined::
 	msgbox Text_ThunderWaveDeclined
 	release
 	end
 
-EventScript_ThunderWaveTaught:: @ 81C4874
+EventScript_ThunderWaveTaught::
 	msgbox Text_ThunderWaveTaught
 	release
 	end
 
-RockTunnel_B1F_EventScript_RockSlideTutor:: @ 81C487E
+RockTunnel_B1F_EventScript_RockSlideTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_ROCK_SLIDE, EventScript_RockSlideTaught
@@ -75,17 +75,17 @@ RockTunnel_B1F_EventScript_RockSlideTutor:: @ 81C487E
 	goto EventScript_RockSlideTaught
 	end
 
-EventScript_RockSlideDeclined:: @ 81C48D2
+EventScript_RockSlideDeclined::
 	msgbox Text_RockSlideDeclined
 	release
 	end
 
-EventScript_RockSlideTaught:: @ 81C48DC
+EventScript_RockSlideTaught::
 	msgbox Text_RockSlideTaught
 	release
 	end
 
-MtEmber_Exterior_EventScript_ExplosionTutor:: @ 81C48E6
+MtEmber_Exterior_EventScript_ExplosionTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_EXPLOSION, EventScript_ExplosionTaught
@@ -104,17 +104,17 @@ MtEmber_Exterior_EventScript_ExplosionTutor:: @ 81C48E6
 	goto EventScript_ExplosionTaught
 	end
 
-EventScript_ExplosionDeclined:: @ 81C493A
+EventScript_ExplosionDeclined::
 	msgbox Text_ExplosionDeclined
 	release
 	end
 
-EventScript_ExplosionTaught:: @ 81C4944
+EventScript_ExplosionTaught::
 	msgbox Text_ExplosionTaught
 	release
 	end
 
-Route4_EventScript_MegaPunchTutor:: @ 81C494E
+Route4_EventScript_MegaPunchTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_MEGA_PUNCH, EventScript_MegaPunchTaught
@@ -133,17 +133,17 @@ Route4_EventScript_MegaPunchTutor:: @ 81C494E
 	goto EventScript_MegaPunchTaught
 	end
 
-EventScript_MegaPunchDeclined:: @ 81C49A2
+EventScript_MegaPunchDeclined::
 	msgbox Text_MegaPunchDeclined
 	release
 	end
 
-EventScript_MegaPunchTaught:: @ 81C49AC
+EventScript_MegaPunchTaught::
 	msgbox Text_MegaPunchTaught
 	release
 	end
 
-Route4_EventScript_MegaKickTutor:: @ 81C49B6
+Route4_EventScript_MegaKickTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_MEGA_KICK, EventScript_MegaKickTaught
@@ -162,17 +162,17 @@ Route4_EventScript_MegaKickTutor:: @ 81C49B6
 	goto EventScript_MegaKickTaught
 	end
 
-EventScript_MegaKickDeclined:: @ 81C4A0A
+EventScript_MegaKickDeclined::
 	msgbox Text_MegaKickDeclined
 	release
 	end
 
-EventScript_MegaKickTaught:: @ 81C4A14
+EventScript_MegaKickTaught::
 	msgbox Text_MegaKickTaught
 	release
 	end
 
-EventScript_DreamEaterTutor:: @ 81C4A1E
+EventScript_DreamEaterTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_DREAM_EATER, EventScript_DreamEaterTaught
@@ -191,17 +191,17 @@ EventScript_DreamEaterTutor:: @ 81C4A1E
 	goto EventScript_DreamEaterTaught
 	end
 
-EventScript_DreamEaterDeclined:: @ 81C4A72
+EventScript_DreamEaterDeclined::
 	msgbox Text_DreamEaterDeclined
 	release
 	end
 
-EventScript_DreamEaterTaught:: @ 81C4A7C
+EventScript_DreamEaterTaught::
 	msgbox Text_DreamEaterTaught
 	release
 	end
 
-EventScript_SoftboiledTutor:: @ 81C4A86
+EventScript_SoftboiledTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_SOFT_BOILED, EventScript_SoftboiledTaught
@@ -220,17 +220,17 @@ EventScript_SoftboiledTutor:: @ 81C4A86
 	goto EventScript_SoftboiledTaught
 	end
 
-EventScript_SoftboiledDeclined:: @ 81C4ADA
+EventScript_SoftboiledDeclined::
 	msgbox Text_SoftboiledDeclined
 	release
 	end
 
-EventScript_SoftboiledTaught:: @ 81C4AE4
+EventScript_SoftboiledTaught::
 	msgbox Text_SoftboiledTaught
 	release
 	end
 
-FuchsiaCity_EventScript_SubstituteTutor:: @ 81C4AEE
+FuchsiaCity_EventScript_SubstituteTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_SUBSTITUTE, EventScript_SubstituteTaught
@@ -249,17 +249,17 @@ FuchsiaCity_EventScript_SubstituteTutor:: @ 81C4AEE
 	goto EventScript_SubstituteTaught
 	end
 
-EventScript_SubstituteDeclined:: @ 81C4B42
+EventScript_SubstituteDeclined::
 	msgbox Text_SubstituteDeclined
 	release
 	end
 
-EventScript_SubstituteTaught:: @ 81C4B4C
+EventScript_SubstituteTaught::
 	msgbox Text_SubstituteTaught
 	release
 	end
 
-SevenIsland_EventScript_SwordsDanceTutor:: @ 81C4B56
+SevenIsland_EventScript_SwordsDanceTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_SWORDS_DANCE, EventScript_SwordsDanceTaught
@@ -278,17 +278,17 @@ SevenIsland_EventScript_SwordsDanceTutor:: @ 81C4B56
 	goto EventScript_SwordsDanceTaught
 	end
 
-EventScript_SwordsDanceDeclined:: @ 81C4BAA
+EventScript_SwordsDanceDeclined::
 	msgbox Text_SwordsDanceDeclined
 	release
 	end
 
-EventScript_SwordsDanceTaught:: @ 81C4BB4
+EventScript_SwordsDanceTaught::
 	msgbox Text_SwordsDanceTaught
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_SeismicTossTutor:: @ 81C4BBE
+PewterCity_Museum_1F_EventScript_SeismicTossTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_SEISMIC_TOSS, EventScript_SeismicTossTaught
@@ -307,17 +307,17 @@ PewterCity_Museum_1F_EventScript_SeismicTossTutor:: @ 81C4BBE
 	goto EventScript_SeismicTossTaught
 	end
 
-EventScript_SeismicTossDeclined:: @ 81C4C12
+EventScript_SeismicTossDeclined::
 	msgbox Text_SeismicTossDeclined
 	release
 	end
 
-EventScript_SeismicTossTaught:: @ 81C4C1C
+EventScript_SeismicTossTaught::
 	msgbox Text_SeismicTossTaught
 	release
 	end
 
-EventScript_CounterTutor:: @ 81C4C26
+EventScript_CounterTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_COUNTER, EventScript_CounterTaught
@@ -336,17 +336,17 @@ EventScript_CounterTutor:: @ 81C4C26
 	goto EventScript_CounterTaught
 	end
 
-EventScript_CounterDeclined:: @ 81C4C7A
+EventScript_CounterDeclined::
 	msgbox Text_CounterDeclined
 	release
 	end
 
-EventScript_CounterTaught:: @ 81C4C84
+EventScript_CounterTaught::
 	msgbox Text_CounterTaught
 	release
 	end
 
-EventScript_MetronomeTutor:: @ 81C4C8E
+EventScript_MetronomeTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_METRONOME, EventScript_MetronomeTaught
@@ -365,17 +365,17 @@ EventScript_MetronomeTutor:: @ 81C4C8E
 	goto EventScript_MetronomeTaught
 	end
 
-EventScript_MetronomeDeclined:: @ 81C4CE2
+EventScript_MetronomeDeclined::
 	msgbox Text_MetronomeDeclined
 	release
 	end
 
-EventScript_MetronomeTaught:: @ 81C4CEC
+EventScript_MetronomeTaught::
 	msgbox Text_MetronomeTaught
 	release
 	end
 
-EventScript_MimicTutor:: @ 81C4CF6
+EventScript_MimicTutor::
 	goto_if_set FLAG_TUTOR_MIMIC, EventScript_MimicTaught
 	msgbox Text_MimicTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -395,12 +395,12 @@ EventScript_MimicTutor:: @ 81C4CF6
 	goto EventScript_MimicTaught
 	end
 
-EventScript_MimicDeclined:: @ 81C4D4F
+EventScript_MimicDeclined::
 	msgbox Text_MimicDeclined
 	release
 	end
 
-EventScript_MimicTaught:: @ 81C4D59
+EventScript_MimicTaught::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq EventScript_MimicTaughtMale
@@ -409,15 +409,15 @@ EventScript_MimicTaught:: @ 81C4D59
 	release
 	end
 
-EventScript_MimicTaughtMale:: @ 81C4D72
+EventScript_MimicTaughtMale::
 	msgbox Text_MimicTaughtMale
 	return
 
-EventScript_MimicTaughtFemale:: @ 81C4D7B
+EventScript_MimicTaughtFemale::
 	msgbox Text_MimicTaughtFemale
 	return
 
-FourIsland_House1_EventScript_BodySlamTutor:: @ 81C4D84
+FourIsland_House1_EventScript_BodySlamTutor::
 	lock
 	faceplayer
 	goto_if_set FLAG_TUTOR_BODY_SLAM, EventScript_BodySlamTaught
@@ -436,19 +436,19 @@ FourIsland_House1_EventScript_BodySlamTutor:: @ 81C4D84
 	goto EventScript_BodySlamTaught
 	end
 
-EventScript_BodySlamDeclined:: @ 81C4DD8
+EventScript_BodySlamDeclined::
 	msgbox Text_BodySlamDeclined
 	release
 	end
 
-EventScript_BodySlamTaught:: @ 81C4DE2
+EventScript_BodySlamTaught::
 	msgbox Text_BodySlamTaught
 	release
 	end
 
 .set LOCALID_CAPE_BRINK_TUTOR, 1
 
-TwoIsland_CapeBrink_House_EventScript_StarterTutor:: @ 81C4DEC
+TwoIsland_CapeBrink_House_EventScript_StarterTutor::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	lock
@@ -481,22 +481,22 @@ TwoIsland_CapeBrink_House_EventScript_StarterTutor:: @ 81C4DEC
 	goto CapeBrinkTutor_EventScript_ChooseMon
 
 @ Unused
-CapeBrinkTutor_EventScript_FadeTaughtMove:: @ 81C4E8F
+CapeBrinkTutor_EventScript_FadeTaughtMove::
 	fadescreen FADE_FROM_BLACK
 	goto CapeBrinkTutor_EventScript_TaughtMove
 	end
 
-CapeBrinkTutor_EventScript_MoveJustTaught:: @ 81C4E97
+CapeBrinkTutor_EventScript_MoveJustTaught::
 	msgbox Text_MakeBestUseOfMove
 	release
 	end
 
-CapeBrinkTutor_EventScript_TaughtAllMoves:: @ 81C4EA1
+CapeBrinkTutor_EventScript_TaughtAllMoves::
 	msgbox Text_FeelRejuvenated
 	release
 	end
 
-CapeBrinkTutor_EventScript_TaughtMove:: @ 81C4EAB
+CapeBrinkTutor_EventScript_TaughtMove::
 	copyvar VAR_0x8005, VAR_0x8009
 	specialvar VAR_RESULT, HasLearnedAllMovesFromCapeBrinkTutor
 	compare VAR_RESULT, TRUE
@@ -506,57 +506,57 @@ CapeBrinkTutor_EventScript_TaughtMove:: @ 81C4EAB
 	release
 	end
 
-CapeBrinkTutor_EventScript_LearnedAllMoves:: @ 81C4ECD
+CapeBrinkTutor_EventScript_LearnedAllMoves::
 	msgbox Text_PassedOnEverythingIKnow
 	setflag FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK
 	release
 	end
 
-CapeBrinkTutor_EventScript_ChooseMon:: @ 81C4EDA
+CapeBrinkTutor_EventScript_ChooseMon::
 	call EventScript_ChooseMoveTutorMon
 	compare VAR_RESULT, FALSE
 	goto_if_eq CapeBrinkTutor_EventScript_DeclineMove
 	goto CapeBrinkTutor_EventScript_TaughtMove
 	end
 
-CapeBrinkTutor_EventScript_JumpInPlaceDown:: @ 81C4EF0
+CapeBrinkTutor_EventScript_JumpInPlaceDown::
 	applymovement LOCALID_CAPE_BRINK_TUTOR, Movement_JumpInPlaceDown
 	waitmovement 0
 	return
 
-CapeBrinkTutor_EventScript_JumpInPlaceUp:: @ 81C4EFB
+CapeBrinkTutor_EventScript_JumpInPlaceUp::
 	applymovement LOCALID_CAPE_BRINK_TUTOR, Movement_JumpInPlaceUp
 	waitmovement 0
 	return
 
-CapeBrinkTutor_EventScript_JumpInPlaceLeft:: @ 81C4F06
+CapeBrinkTutor_EventScript_JumpInPlaceLeft::
 	applymovement LOCALID_CAPE_BRINK_TUTOR, Movement_JumpInPlaceLeft
 	waitmovement 0
 	return
 
-CapeBrinkTutor_EventScript_JumpInPlaceRight:: @ 81C4F11
+CapeBrinkTutor_EventScript_JumpInPlaceRight::
 	applymovement LOCALID_CAPE_BRINK_TUTOR, Movement_JumpInPlaceRight
 	waitmovement 0
 	return
 
-CapeBrinkTutor_EventScript_DeclineMove:: @ 81C4F1C
+CapeBrinkTutor_EventScript_DeclineMove::
 	msgbox Text_YouRejectIt
 	release
 	end
 
-CapeBrinkTutor_EventScript_NoLeadStarter:: @ 81C4F26
+CapeBrinkTutor_EventScript_NoLeadStarter::
 	msgbox Text_JustMistaken
 	release
 	end
 
-EventScript_ChooseMoveTutorMon:: @ 81C4F30
+EventScript_ChooseMoveTutorMon::
 	special ChooseMonForMoveTutor
 	waitstate
 	lock
 	faceplayer
 	return
 
-EventScript_CanOnlyBeLearnedOnce:: @ 81C4F37
+EventScript_CanOnlyBeLearnedOnce::
 	textcolor 3
 	special DisableMsgBoxWalkaway
 	signmsg
@@ -565,18 +565,18 @@ EventScript_CanOnlyBeLearnedOnce:: @ 81C4F37
 	call EventScript_RestorePrevTextColor
 	return
 
-Movement_JumpInPlaceDown: @ 81C4F4C
+Movement_JumpInPlaceDown:
 	jump_in_place_down
 	step_end
 
-Movement_JumpInPlaceUp: @ 81C4F4E
+Movement_JumpInPlaceUp:
 	jump_in_place_up
 	step_end
 
-Movement_JumpInPlaceLeft: @ 81C4F50
+Movement_JumpInPlaceLeft:
 	jump_in_place_left
 	step_end
 
-Movement_JumpInPlaceRight: @ 81C4F52
+Movement_JumpInPlaceRight:
 	jump_in_place_right
 	step_end

@@ -1,4 +1,4 @@
-Text_MetronomeTeach:: @ 819A137
+Text_MetronomeTeach::
     .string "Tch-tch-tch!\n"
     .string "I'll teach you a nifty move.\p"
     .string "Teach it to a POKéMON, and watch\n"
@@ -6,20 +6,20 @@ Text_MetronomeTeach:: @ 819A137
     .string "It's a move called METRONOME.\n"
     .string "Does it strike your fancy?$"
 
-Text_MetronomeDeclined:: @ 819A1CB
+Text_MetronomeDeclined::
     .string "I tell you, it's a lot of fun!$"
 
-Text_MetronomeWhichMon:: @ 819A1EA
+Text_MetronomeWhichMon::
     .string "Okay!\n"
     .string "Which POKéMON should I teach?$"
 
-Text_MetronomeTaught:: @ 819A20E
+Text_MetronomeTaught::
     .string "Tch-tch-tch!\n"
     .string "That's the sound of a METRONOME.\p"
     .string "It tweaks your POKéMON's brain into\n"
     .string "using moves it doesn't even know.$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe:: @ 819A282
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe::
     .string "Hiya!\p"
     .string "I am important doctor.\n"
     .string "Yes, very much so, indeed.\p"
@@ -28,31 +28,31 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe:: @ 819A282
     .string "You!\n"
     .string "Have you a fossil for me?$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad:: @ 819A314
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad::
     .string "No!\n"
     .string "Is too bad!$"
 
 @ Unused
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalkJP:: @ 819A324
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalkJP::
     .string "ちょっと　じかん　かかるよ！\p"
     .string "そこらへんを　すこし\n"
     .string "ブラブラ　してくると　よろしー！$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife:: @ 819A34F
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife::
     .string "You late.\n"
     .string "Where were you?\p"
     .string "Your fossil is back to life!\n"
     .string "It was {STR_VAR_1} like I think!$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor:: @ 819A39E
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor::
     .string "{PLAYER} received the {STR_VAR_1}\n"
     .string "from the doctor.$"
 
 @ Unused
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoRoomForPokemon:: @ 819A3C2
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoRoomForPokemon::
     .string "ポケモン　いっぱいで　もてないね！$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain:: @ 819A3D4
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
     .string "Oh!\n"
     .string "That is {STR_VAR_2}, it is!\p"
     .string "It is fossil of {STR_VAR_1},\n"
@@ -61,17 +61,17 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
     .string "that POKéMON live again!$"
 
 @ TODO: Resolve text dump error below?
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor:: @ 819A45D
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor::
     .string "So!\n"
     .string "You hurry and give me that!\p"
     .string "{SIZE}Á{PLAYER} handed over the\n"
     .string "{STR_VAR_2} to the weird doctor.$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk:: @ 819A4AB
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk::
     .string "I take a little time!\n"
     .string "You go for walk a little while!$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain:: @ 819A4E1
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain::
     .string "Aiyah!\n"
     .string "You come again!$"
 

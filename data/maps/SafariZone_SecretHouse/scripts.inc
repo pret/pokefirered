@@ -1,7 +1,7 @@
-SafariZone_SecretHouse_MapScripts:: @ 8162452
+SafariZone_SecretHouse_MapScripts::
 	.byte 0
 
-SafariZone_SecretHouse_EventScript_Attendant:: @ 8162453
+SafariZone_SecretHouse_EventScript_Attendant::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HM03, SafariZone_SecretHouse_EventScript_ExplainSurf
@@ -15,12 +15,12 @@ SafariZone_SecretHouse_EventScript_Attendant:: @ 8162453
 	release
 	end
 
-SafariZone_SecretHouse_EventScript_NoRoomForHM03:: @ 816249F
+SafariZone_SecretHouse_EventScript_NoRoomForHM03::
 	msgbox SafariZone_SecretHouse_Text_DontHaveRoomForPrize
 	release
 	end
 
-SafariZone_SecretHouse_EventScript_ExplainSurf:: @ 81624A9
+SafariZone_SecretHouse_EventScript_ExplainSurf::
 	msgbox SafariZone_SecretHouse_Text_ExplainSurf
 	release
 	end

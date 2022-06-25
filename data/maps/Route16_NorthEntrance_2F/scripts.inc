@@ -1,25 +1,25 @@
 .equ REQUIRED_CAUGHT_MONS, 40
 
-Route16_NorthEntrance_2F_MapScripts:: @ 81702BE
+Route16_NorthEntrance_2F_MapScripts::
 	.byte 0
 
-Route16_NorthEntrance_2F_EventScript_LittleBoy:: @ 81702BF
+Route16_NorthEntrance_2F_EventScript_LittleBoy::
 	msgbox Route16_NorthEntrance_2F_Text_OnBikeRideWithGirlfriend, MSGBOX_NPC
 	end
 
-Route16_NorthEntrance_2F_EventScript_LittleGirl:: @ 81702C8
+Route16_NorthEntrance_2F_EventScript_LittleGirl::
 	msgbox Route16_NorthEntrance_2F_Text_RidingTogetherOnNewBikes, MSGBOX_NPC
 	end
 
-Route16_NorthEntrance_2F_EventScript_LeftBinoculars:: @ 81702D1
+Route16_NorthEntrance_2F_EventScript_LeftBinoculars::
 	msgbox Route16_NorthEntrance_2F_Text_ItsCeladonDeptStore, MSGBOX_SIGN
 	end
 
-Route16_NorthEntrance_2F_EventScript_RightBinoculars:: @ 81702DA
+Route16_NorthEntrance_2F_EventScript_RightBinoculars::
 	msgbox Route16_NorthEntrance_2F_Text_LongPathOverWater, MSGBOX_SIGN
 	end
 
-Route16_NorthEntrance_2F_EventScript_Aide:: @ 81702E3
+Route16_NorthEntrance_2F_EventScript_Aide::
 	lock
 	faceplayer
 	call Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo
@@ -43,12 +43,12 @@ Route16_NorthEntrance_2F_EventScript_Aide:: @ 81702E3
 	release
 	end
 
-Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin:: @ 8170365
+Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin::
 	msgbox Route16_NorthEntrance_2F_Text_ExplainAmuletCoin
 	release
 	end
 
-Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo:: @ 817036F
+Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo::
 	getnumberstring 0, REQUIRED_CAUGHT_MONS
 	getitemname 1, ITEM_AMULET_COIN
 	return

@@ -1,39 +1,39 @@
 .set LOCALID_HO_OH, 1
 
-NavelRock_Summit_MapScripts:: @ 8164F9F
+NavelRock_Summit_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Summit_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Summit_OnResume
 	.byte 0
 
-NavelRock_Summit_OnTransition:: @ 8164FAA
+NavelRock_Summit_OnTransition::
 	call_if_set FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_HideHoOh
 	call_if_unset FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_TryShowHoOh
 	end
 
-NavelRock_Summit_EventScript_HideHoOh:: @ 8164FBD
+NavelRock_Summit_EventScript_HideHoOh::
 	setvar VAR_TEMP_1, 1
 	setflag FLAG_HIDE_HO_OH
 	return
 
-NavelRock_Summit_EventScript_TryShowHoOh:: @ 8164FC6
+NavelRock_Summit_EventScript_TryShowHoOh::
 	setvar VAR_TEMP_1, 1
 	goto_if_set FLAG_HO_OH_FLEW_AWAY, EventScript_Return
 	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HO_OH
 	return
 
-NavelRock_Summit_OnResume:: @ 8164FDD
+NavelRock_Summit_OnResume::
 	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, NavelRock_Summit_EventScript_TryRemoveHoOh
 	end
 
-NavelRock_Summit_EventScript_TryRemoveHoOh:: @ 8164FE7
+NavelRock_Summit_EventScript_TryRemoveHoOh::
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject LOCALID_HO_OH
 	return
 
-NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
+NavelRock_Summit_EventScript_HoOh::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	lockall
@@ -80,24 +80,24 @@ NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	releaseall
 	end
 
-NavelRock_Summit_EventScript_DefeatedHoOh:: @ 81650B4
+NavelRock_Summit_EventScript_DefeatedHoOh::
 	setflag FLAG_HO_OH_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_MonFlewAway
 	end
 
-NavelRock_Summit_EventScript_RanFromHoOh:: @ 81650C2
+NavelRock_Summit_EventScript_RanFromHoOh::
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_MonFlewAway
 	end
 
-Movement_CameraPanUp: @ 81650CD
+Movement_CameraPanUp:
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-Movement_CameraPanDown: @ 81650D1
+Movement_CameraPanDown:
 	delay_16
 	delay_16
 	walk_down
@@ -105,7 +105,7 @@ Movement_CameraPanDown: @ 81650D1
 	walk_down
 	step_end
 
-Movement_HoOhApproach: @ 81650D7
+Movement_HoOhApproach:
 	walk_down
 	walk_down
 	walk_down
@@ -116,7 +116,7 @@ Movement_HoOhApproach: @ 81650D7
 	delay_16
 	step_end
 
-Movement_HoOhAppear: @ 81650E0
+Movement_HoOhAppear:
 	delay_16
 	delay_16
 	walk_in_place_down

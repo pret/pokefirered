@@ -1,15 +1,15 @@
-CinnabarIsland_Mart_MapScripts:: @ 816EA0F
+CinnabarIsland_Mart_MapScripts::
 	.byte 0
 
-CinnabarIsland_Mart_EventScript_Woman:: @ 816EA10
+CinnabarIsland_Mart_EventScript_Woman::
 	msgbox CinnabarIsland_Mart_Text_DontTheyHaveXAttack, MSGBOX_NPC
 	end
 
-CinnabarIsland_Mart_EventScript_Scientist:: @ 816EA19
+CinnabarIsland_Mart_EventScript_Scientist::
 	msgbox CinnabarIsland_Mart_Text_ExtraItemsNeverHurt, MSGBOX_NPC
 	end
 
-CinnabarIsland_Mart_EventScript_Clerk:: @ 816EA22
+CinnabarIsland_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -21,7 +21,7 @@ CinnabarIsland_Mart_EventScript_Clerk:: @ 816EA22
 	end
 
 	.align 2
-CinnabarIsland_Mart_Items:: @ 816EA48
+CinnabarIsland_Mart_Items::
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_HYPER_POTION

@@ -1,2 +1,2 @@
-SeafoamIslands_B1F_MapScripts:: @ 8162F4D
+SeafoamIslands_B1F_MapScripts::
 	.byte 0

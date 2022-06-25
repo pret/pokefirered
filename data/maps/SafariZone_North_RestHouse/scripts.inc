@@ -1,14 +1,14 @@
-SafariZone_North_RestHouse_MapScripts:: @ 816241A
+SafariZone_North_RestHouse_MapScripts::
 	.byte 0
 
-SafariZone_North_RestHouse_EventScript_Fisher:: @ 816241B
+SafariZone_North_RestHouse_EventScript_Fisher::
 	msgbox SafariZone_East_Text_PrizeInDeepestPartOfSafariZone, MSGBOX_NPC
 	end
 
-SafariZone_North_RestHouse_EventScript_Scientist:: @ 8162424
+SafariZone_North_RestHouse_EventScript_Scientist::
 	msgbox SafariZone_East_Text_KeepAnyItemFoundOnSafari, MSGBOX_NPC
 	end
 
-SafariZone_North_RestHouse_EventScript_Gentleman:: @ 816242D
+SafariZone_North_RestHouse_EventScript_Gentleman::
 	msgbox SafariZone_East_Text_MyEeveeEvolvedIntoFlareon, MSGBOX_NPC
 	end

@@ -1,4 +1,4 @@
-Route2_EastBuilding_Text_GiveHM05IfSeen10Mons:: @ 819D64F
+Route2_EastBuilding_Text_GiveHM05IfSeen10Mons::
     .string "Hi! Remember me?\n"
     .string "I'm one of PROF. OAK's AIDES.\p"
     .string "If your POKéDEX has complete data\n"
@@ -10,23 +10,23 @@ Route2_EastBuilding_Text_GiveHM05IfSeen10Mons:: @ 819D64F
     .string "Have you gathered data on at least\n"
     .string "ten kinds of POKéMON?$"
 
-Route2_EastBuilding_Text_GreatHereYouGo:: @ 819D74E
+Route2_EastBuilding_Text_GreatHereYouGo::
     .string "Great! You have caught or owned\n"
     .string "{STR_VAR_3} kinds of POKéMON!\p"
     .string "Congratulations!\n"
     .string "Here you go!$"
 
-Route2_EastBuilding_Text_ReceivedHM05FromAide:: @ 819D7A1
+Route2_EastBuilding_Text_ReceivedHM05FromAide::
     .string "{PLAYER} received HM05\n"
     .string "from the AIDE.$"
 
-Route2_EastBuilding_Text_ExplainHM05:: @ 819D7C1
+Route2_EastBuilding_Text_ExplainHM05::
     .string "HM05 contains the hidden move\n"
     .string "FLASH.\p"
     .string "FLASH lights up even the darkest\n"
     .string "of caves and dungeons.$"
 
-Route2_EastBuilding_Text_CanGetThroughRockTunnel:: @ 819D81E
+Route2_EastBuilding_Text_CanGetThroughRockTunnel::
     .string "Once a POKéMON learns FLASH, you\n"
     .string "can get through ROCK TUNNEL.$"
 

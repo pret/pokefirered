@@ -1,6 +1,6 @@
 	.align 2
 
-gScriptCmdTable:: @ 815F9B4
+gScriptCmdTable::
 	.4byte ScrCmd_nop
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_end
@@ -215,5 +215,5 @@ gScriptCmdTable:: @ 815F9B4
 	.4byte ScrCmd_getbraillestringwidth
 	.4byte ScrCmd_bufferitemnameplural
 
-gScriptCmdTableEnd:: @ 815FD08
+gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

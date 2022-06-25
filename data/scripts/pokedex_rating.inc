@@ -1,4 +1,4 @@
-PokedexRating_EventScript_RateInPerson:: @ 81A737B
+PokedexRating_EventScript_RateInPerson::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	call_if_set FLAG_OAK_SAW_DEX_COMPLETION, PokedexRating_EventScript_DexCompleteIntro
@@ -6,15 +6,15 @@ PokedexRating_EventScript_RateInPerson:: @ 81A737B
 	call PokedexRating_EventScript_Rate
 	return
 
-PokedexRating_EventScript_DexCompleteIntro:: @ 81A73A4
+PokedexRating_EventScript_DexCompleteIntro::
 	msgbox PokedexRating_Text_LoveSeeingYourPokedex
 	return
 
-PokedexRating_EventScript_NormalIntro:: @ 81A73AD
+PokedexRating_EventScript_NormalIntro::
 	msgbox PokedexRating_Text_HowIsPokedexComingAlong
 	return
 
-PokedexRating_EventScript_ShowRatingMsg:: @ 81A73B6
+PokedexRating_EventScript_ShowRatingMsg::
 	copyvar VAR_0x8004, VAR_0x8009
 	special GetProfOaksRatingMessage
 	waitmessage
@@ -26,15 +26,15 @@ PokedexRating_EventScript_ShowRatingMsg:: @ 81A73B6
 	waitbuttonpress
 	return
 
-PokedexRating_EventScript_NormalFanfare:: @ 81A73D8
+PokedexRating_EventScript_NormalFanfare::
 	playfanfare MUS_DEX_RATING
 	return
 
-PokedexRating_EventScript_DexCompleteFanfare:: @ 81A73DC
+PokedexRating_EventScript_DexCompleteFanfare::
 	playfanfare MUS_EVOLVED
 	return
 
-PokedexRating_EventScript_Rate:: @ 81A73E0
+PokedexRating_EventScript_Rate::
 	setvar VAR_0x8004, HELPCONTEXT_PC_MISC
 	special BackupHelpContext
 	special Script_SetHelpContext
@@ -64,21 +64,21 @@ PokedexRating_EventScript_Rate:: @ 81A73E0
 	goto_if_eq PokedexRating_EventScript_DexComplete
 	end
 
-PokedexRating_EventScript_SetTextColor:: @ 81A746D
+PokedexRating_EventScript_SetTextColor::
 	textcolor 0
 	return
 
-PokedexRating_EventScript_DexIncomplete:: @ 81A7470
+PokedexRating_EventScript_DexIncomplete::
 	msgbox PokedexRating_Text_LookForwardToFilledNationalDex
 	goto PokedexRating_EventScript_EndRating
 	end
 
-PokedexRating_EventScript_DexComplete:: @ 81A747E
+PokedexRating_EventScript_DexComplete::
 	setflag FLAG_OAK_SAW_DEX_COMPLETION
 	msgbox PokedexRating_Text_YouveCompletedDex
 	goto PokedexRating_EventScript_EndRating
 	end
 
-PokedexRating_EventScript_EndRating:: @ 81A748F
+PokedexRating_EventScript_EndRating::
 	special RestoreHelpContext
 	return

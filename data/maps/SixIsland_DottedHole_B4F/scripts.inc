@@ -1,2 +1,2 @@
-SixIsland_DottedHole_B4F_MapScripts:: @ 81641B3
+SixIsland_DottedHole_B4F_MapScripts::
 	.byte 0

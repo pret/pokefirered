@@ -1,4 +1,4 @@
-ThreeIsland_House2_Text_CantMakeThisSpoonBend:: @ 81A3245
+ThreeIsland_House2_Text_CantMakeThisSpoonBend::
     .string "Urrrrrrrrgggghhhh…\n"
     .string "Kwaaaaah!\p"
     .string "…It's useless! I can't make this\n"
@@ -6,7 +6,7 @@ ThreeIsland_House2_Text_CantMakeThisSpoonBend:: @ 81A3245
     .string "Maybe I really don't have any\n"
     .string "psychic powers.$"
 
-ThreeIsland_House2_Text_IAdmireSabrina:: @ 81A32CA
+ThreeIsland_House2_Text_IAdmireSabrina::
     .string "You know about a girl GYM LEADER\n"
     .string "in SAFFRON CITY?\p"
     .string "She uses PSYCHIC-type POKéMON,\n"

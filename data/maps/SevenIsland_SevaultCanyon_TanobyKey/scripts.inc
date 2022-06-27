@@ -8,11 +8,11 @@
 
 .equ NUM_SWITCHES_PRESSED, VAR_TEMP_8
 
-SevenIsland_SevaultCanyon_TanobyKey_MapScripts:: @ 8164DCC
+SevenIsland_SevaultCanyon_TanobyKey_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_SevaultCanyon_TanobyKey_OnTransition
 	.byte 0
 
-SevenIsland_SevaultCanyon_TanobyKey_OnTransition:: @ 8164DD2
+SevenIsland_SevaultCanyon_TanobyKey_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY
 	call_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos
 	setvar VAR_TEMP_1, 0
@@ -25,7 +25,7 @@ SevenIsland_SevaultCanyon_TanobyKey_OnTransition:: @ 8164DD2
 	setvar NUM_SWITCHES_PRESSED, 0
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos:: @ 8164E07
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos::
 	setobjectxyperm LOCALID_BOULDER1, 7, 2
 	setobjectxyperm LOCALID_BOULDER2, 4, 4
 	setobjectxyperm LOCALID_BOULDER3, 10, 4
@@ -35,7 +35,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos:: @ 8164
 	setobjectxyperm LOCALID_BOULDER7, 9, 8
 	return
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1:: @ 8164E39
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1::
 	lockall
 	compare VAR_TEMP_1, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -46,7 +46,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1:: @ 8164E39
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2:: @ 8164E5C
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2::
 	lockall
 	compare VAR_TEMP_2, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -57,7 +57,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2:: @ 8164E5C
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3:: @ 8164E7F
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3::
 	lockall
 	compare VAR_TEMP_3, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -68,7 +68,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3:: @ 8164E7F
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4:: @ 8164EA2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4::
 	lockall
 	compare VAR_TEMP_4, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -79,7 +79,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4:: @ 8164EA2
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5:: @ 8164EC5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5::
 	lockall
 	compare VAR_TEMP_5, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -90,7 +90,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5:: @ 8164EC5
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6:: @ 8164EE8
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6::
 	lockall
 	compare VAR_TEMP_6, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -101,7 +101,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6:: @ 8164EE8
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7:: @ 8164F0B
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7::
 	lockall
 	compare VAR_TEMP_7, 100
 	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
@@ -112,7 +112,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7:: @ 8164F0B
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed:: @ 8164F2E
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed::
 	addvar NUM_SWITCHES_PRESSED, 1
 	playse SE_TRUCK_MOVE
 	setvar VAR_0x8004, 1
@@ -123,7 +123,7 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed:: @ 8164F2E
 	delay 60
 	return
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen:: @ 8164F51
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen::
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 10
@@ -140,11 +140,11 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen:: @ 8164
 	waitse
 	return
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed:: @ 8164F8A
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed::
 	releaseall
 	end
 
-SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved:: @ 8164F8C
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved::
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen
 	msgbox SevenIsland_SevaultCanyon_TanobyKey_Text_MysteriousRumbleFarAway
 	setflag FLAG_SYS_UNLOCKED_TANOBY_RUINS

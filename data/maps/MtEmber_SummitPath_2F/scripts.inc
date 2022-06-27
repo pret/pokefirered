@@ -1,2 +1,2 @@
-MtEmber_SummitPath_2F_MapScripts:: @ 8163AFA
+MtEmber_SummitPath_2F_MapScripts::
 	.byte 0

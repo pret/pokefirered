@@ -3,27 +3,27 @@
 
 .equ RECEIVED_TOWN_MAP, VAR_TEMP_1
 
-PalletTown_RivalsHouse_MapScripts:: @ 8168D27
+PalletTown_RivalsHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_RivalsHouse_OnTransition
 	.byte 0
 
-PalletTown_RivalsHouse_OnTransition:: @ 8168D2D
+PalletTown_RivalsHouse_OnTransition::
 	compare VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2
 	call_if_lt PalletTown_RivalsHouse_EventScript_MoveDaisyToTable
 	compare VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2
 	call_if_ge PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap
 	end
 
-PalletTown_RivalsHouse_EventScript_MoveDaisyToTable:: @ 8168D44
+PalletTown_RivalsHouse_EventScript_MoveDaisyToTable::
 	setobjectmovementtype LOCALID_DAISY, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm LOCALID_DAISY, 5, 4
 	return
 
-PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap:: @ 8168D50
+PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap::
 	setvar RECEIVED_TOWN_MAP, TRUE
 	return
 
-PalletTown_RivalsHouse_EventScript_Daisy:: @ 8168D56
+PalletTown_RivalsHouse_EventScript_Daisy::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
@@ -43,12 +43,12 @@ PalletTown_RivalsHouse_EventScript_Daisy:: @ 8168D56
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_HeardBattledRival:: @ 8168DAF
+PalletTown_RivalsHouse_EventScript_HeardBattledRival::
 	msgbox PalletTown_RivalsHouse_Text_HeardYouBattledRival
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_GroomMon:: @ 8168DB9
+PalletTown_RivalsHouse_EventScript_GroomMon::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
@@ -78,17 +78,17 @@ PalletTown_RivalsHouse_EventScript_GroomMon:: @ 8168DB9
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_CantGroomEgg:: @ 8168E32
+PalletTown_RivalsHouse_EventScript_CantGroomEgg::
 	msgbox PalletTown_RivalsHouse_Text_CantGroomAnEgg
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_DeclineGrooming:: @ 8168E3C
+PalletTown_RivalsHouse_EventScript_DeclineGrooming::
 	msgbox PalletTown_RivalsHouse_Text_DontNeedAnyGrooming
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_RateMonFriendship:: @ 8168E46
+PalletTown_RivalsHouse_EventScript_RateMonFriendship::
 	msgbox PalletTown_RivalsHouse_Text_MayISeeFirstMon
 	specialvar VAR_RESULT, GetLeadMonFriendship
 	switch VAR_RESULT
@@ -101,47 +101,47 @@ PalletTown_RivalsHouse_EventScript_RateMonFriendship:: @ 8168E46
 	case 6, PalletTown_RivalsHouse_EventScript_MonFriendshipHighest
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipLowest:: @ 8168EA6
+PalletTown_RivalsHouse_EventScript_MonFriendshipLowest::
 	msgbox PalletTown_RivalsHouse_Text_WhyWouldMonHateYouSoMuch
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipLower:: @ 8168EB0
+PalletTown_RivalsHouse_EventScript_MonFriendshipLower::
 	msgbox PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipLow:: @ 8168EBA
+PalletTown_RivalsHouse_EventScript_MonFriendshipLow::
 	msgbox PalletTown_RivalsHouse_Text_NotFamiliarWithYouYet
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipMid:: @ 8168EC4
+PalletTown_RivalsHouse_EventScript_MonFriendshipMid::
 	msgbox PalletTown_RivalsHouse_Text_ItsWarmingUpToYou
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipHigh:: @ 8168ECE
+PalletTown_RivalsHouse_EventScript_MonFriendshipHigh::
 	msgbox PalletTown_RivalsHouse_Text_ItsQuiteFriendly
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipHigher:: @ 8168ED8
+PalletTown_RivalsHouse_EventScript_MonFriendshipHigher::
 	msgbox PalletTown_RivalsHouse_Text_ItLooksVeryHappy
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_MonFriendshipHighest:: @ 8168EE2
+PalletTown_RivalsHouse_EventScript_MonFriendshipHighest::
 	msgbox PalletTown_RivalsHouse_Text_CouldntLoveYouMore
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest:: @ 8168EEC
+PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest::
 	msgbox PalletTown_RivalsHouse_Text_PleaseGiveMonsRest
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_GiveTownMap:: @ 8168EF6
+PalletTown_RivalsHouse_EventScript_GiveTownMap::
 	msgbox PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp
 	closemessage
 	checkitemspace ITEM_TOWN_MAP, 1
@@ -159,24 +159,24 @@ PalletTown_RivalsHouse_EventScript_GiveTownMap:: @ 8168EF6
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_NoRoomForTownMap:: @ 8168F4F
+PalletTown_RivalsHouse_EventScript_NoRoomForTownMap::
 	msgbox PalletTown_RivalsHouse_Text_DontHaveSpaceForThis
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_ExplainTownMap:: @ 8168F59
+PalletTown_RivalsHouse_EventScript_ExplainTownMap::
 	msgbox PalletTown_RivalsHouse_Text_ExplainTownMap
 	release
 	end
 
-PalletTown_RivalsHouse_EventScript_TownMap:: @ 8168F63
+PalletTown_RivalsHouse_EventScript_TownMap::
 	msgbox PalletTown_RivalsHouse_Text_ItsBigMapOfKanto, MSGBOX_NPC
 	end
 
-PalletTown_RivalsHouse_EventScript_Bookshelf:: @ 8168F6C
+PalletTown_RivalsHouse_EventScript_Bookshelf::
 	msgbox PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks, MSGBOX_SIGN
 	end
 
-PalletTown_RivalsHouse_EventScript_Picture:: @ 8168F75
+PalletTown_RivalsHouse_EventScript_Picture::
 	msgbox PalletTown_RivalsHouse_Text_LovelyAndSweetClefairy, MSGBOX_SIGN
 	end

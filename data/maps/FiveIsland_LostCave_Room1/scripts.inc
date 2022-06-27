@@ -1,7 +1,7 @@
-FiveIsland_LostCave_Room1_MapScripts:: @ 8164BF6
+FiveIsland_LostCave_Room1_MapScripts::
 	.byte 0
 
-FiveIsland_LostCave_Room1_EventScript_Lawson:: @ 8164BF7
+FiveIsland_LostCave_Room1_EventScript_Lawson::
 	trainerbattle_single TRAINER_RUIN_MANIAC_LAWSON, FiveIsland_LostCave_Room1_Text_LawsonIntro, FiveIsland_LostCave_Room1_Text_LawsonDefeat
 	msgbox FiveIsland_LostCave_Room1_Text_LawsonPostBattle, MSGBOX_AUTOCLOSE
 	end

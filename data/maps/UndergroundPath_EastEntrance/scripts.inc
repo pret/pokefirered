@@ -1,6 +1,6 @@
-UndergroundPath_EastEntrance_MapScripts:: @ 8160EDD
+UndergroundPath_EastEntrance_MapScripts::
 	.byte 0
 
-UndergroundPath_EastEntrance_EventScript_Woman:: @ 8160EDE
+UndergroundPath_EastEntrance_EventScript_Woman::
 	msgbox UndergroundPath_EastEntrance_Text_DoYouGoToCeladonDeptStore, MSGBOX_NPC
 	end

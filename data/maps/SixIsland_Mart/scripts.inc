@@ -1,7 +1,7 @@
-SixIsland_Mart_MapScripts:: @ 8171E65
+SixIsland_Mart_MapScripts::
 	.byte 0
 
-SixIsland_Mart_EventScript_Clerk:: @ 8171E66
+SixIsland_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -13,7 +13,7 @@ SixIsland_Mart_EventScript_Clerk:: @ 8171E66
 	end
 
 	.align 2
-SixIsland_Mart_Items:: @ 8171E8C
+SixIsland_Mart_Items::
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_MAX_POTION
@@ -26,6 +26,6 @@ SixIsland_Mart_Items:: @ 8171E8C
 	release
 	end
 
-SixIsland_Mart_EventScript_Picnicker:: @ 8171EA0
+SixIsland_Mart_EventScript_Picnicker::
 	msgbox SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter, MSGBOX_NPC
 	end

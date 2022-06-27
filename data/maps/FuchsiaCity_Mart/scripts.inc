@@ -1,15 +1,15 @@
-FuchsiaCity_Mart_MapScripts:: @ 816D4E0
+FuchsiaCity_Mart_MapScripts::
 	.byte 0
 
-FuchsiaCity_Mart_EventScript_CooltrainerF:: @ 816D4E1
+FuchsiaCity_Mart_EventScript_CooltrainerF::
 	msgbox FuchsiaCity_Mart_Text_DidYouTryXSpeed, MSGBOX_NPC
 	end
 
-FuchsiaCity_Mart_EventScript_Gentleman:: @ 816D4EA
+FuchsiaCity_Mart_EventScript_Gentleman::
 	msgbox FuchsiaCity_Mart_Text_DontTheyHaveSafariZonePennants, MSGBOX_NPC
 	end
 
-FuchsiaCity_Mart_EventScript_Clerk:: @ 816D4F3
+FuchsiaCity_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -21,7 +21,7 @@ FuchsiaCity_Mart_EventScript_Clerk:: @ 816D4F3
 	end
 
 	.align 2
-FuchsiaCity_Mart_Items:: @ 816D518
+FuchsiaCity_Mart_Items::
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION

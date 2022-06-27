@@ -1,14 +1,14 @@
-Route2_ViridianForest_NorthEntrance_MapScripts:: @ 816F71D
+Route2_ViridianForest_NorthEntrance_MapScripts::
 	.byte 0
 
-Route2_ViridianForest_NorthEntrance_EventScript_Youngster:: @ 816F71E
+Route2_ViridianForest_NorthEntrance_EventScript_Youngster::
 	msgbox Route2_ViridianForest_NorthEntrance_Text_ManyMonsOnlyInForests, MSGBOX_NPC
 	end
 
-Route2_ViridianForest_NorthEntrance_EventScript_OldMan:: @ 816F727
+Route2_ViridianForest_NorthEntrance_EventScript_OldMan::
 	msgbox Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees, MSGBOX_NPC
 	end
 
-Route2_ViridianForest_NorthEntrance_EventScript_CooltrainerF:: @ 816F730
+Route2_ViridianForest_NorthEntrance_EventScript_CooltrainerF::
 	msgbox Route2_ViridianForest_NorthEntrance_Text_CanCancelEvolution, MSGBOX_NPC
 	end

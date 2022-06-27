@@ -1,4 +1,4 @@
-Route5_PokemonDayCare_EventScript_DaycareMan:: @ 81BF398
+Route5_PokemonDayCare_EventScript_DaycareMan::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -13,7 +13,7 @@ Route5_PokemonDayCare_EventScript_DaycareMan:: @ 81BF398
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_TryGiveMon:: @ 81BF3DD
+Route5_PokemonDayCare_EventScript_TryGiveMon::
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 1
 	goto_if_eq Route5_PokemonDayCare_EventScript_OnlyOneMonInParty
@@ -39,22 +39,22 @@ Route5_PokemonDayCare_EventScript_TryGiveMon:: @ 81BF3DD
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_ComeAgain:: @ 81BF444
+Route5_PokemonDayCare_EventScript_ComeAgain::
 	msgbox Route5_PokemonDayCare_Text_ComeAnytimeYouLike
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_OnlyOneMonInParty:: @ 81BF452
+Route5_PokemonDayCare_EventScript_OnlyOneMonInParty::
 	msgbox Route5_PokemonDayCare_Text_OnlyHaveOneMonWithYou
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_OnlyOneAliveMonInParty:: @ 81BF460
+Route5_PokemonDayCare_EventScript_OnlyOneAliveMonInParty::
 	msgbox Route5_PokemonDayCare_Text_WhatWillYouBattleWith
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_CheckOnMon:: @ 81BF46E
+Route5_PokemonDayCare_EventScript_CheckOnMon::
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetNumLevelsGainedForRoute5DaycareMon
 	compare VAR_RESULT, 0
@@ -68,15 +68,15 @@ Route5_PokemonDayCare_EventScript_CheckOnMon:: @ 81BF46E
 	goto Route5_PokemonDayCare_EventScript_ComeAgain
 	end
 
-Route5_PokemonDayCare_EventScript_MonHasGrownByXLevels:: @ 81BF4AA
+Route5_PokemonDayCare_EventScript_MonHasGrownByXLevels::
 	msgbox Route5_PokemonDayCare_Text_MonHasGrownByXLevels
 	return
 
-Route5_PokemonDayCare_EventScript_NotEnoughTime:: @ 81BF4B3
+Route5_PokemonDayCare_EventScript_NotEnoughTime::
 	msgbox Route5_PokemonDayCare_Text_MonNeedsToSpendMoreTime
 	return
 
-Route5_PokemonDayCare_EventScript_TryRetrieveMon:: @ 81BF4BC
+Route5_PokemonDayCare_EventScript_TryRetrieveMon::
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq Route5_PokemonDayCare_EventScript_NoRoomInParty
@@ -87,7 +87,7 @@ Route5_PokemonDayCare_EventScript_TryRetrieveMon:: @ 81BF4BC
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_RetrieveMon:: @ 81BF4EA
+Route5_PokemonDayCare_EventScript_RetrieveMon::
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, TakePokemonFromRoute5Daycare
 	special SubtractMoneyFromVar0x8005
@@ -107,17 +107,17 @@ Route5_PokemonDayCare_EventScript_RetrieveMon:: @ 81BF4EA
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_NoRoomInParty:: @ 81BF533
+Route5_PokemonDayCare_EventScript_NoRoomInParty::
 	msgbox Route5_PokemonDayCare_Text_YouveGotNoRoomForIt
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end
 
-Route5_PokemonDayCare_EventScript_CloseMoneyBox:: @ 81BF541
+Route5_PokemonDayCare_EventScript_CloseMoneyBox::
 	hidemoneybox 0, 0
 	release
 	end
 
-EventScript_EggHatch:: @ 81BF546
+EventScript_EggHatch::
 	lockall
 	msgbox DayCare_Text_Huh
 	special EggHatch

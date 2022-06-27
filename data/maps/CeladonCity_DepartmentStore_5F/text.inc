@@ -1,4 +1,4 @@
-CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers:: @ 8195BBA
+CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers::
     .string "POKéMON stat enhancers can be\n"
     .string "bought only here.\p"
     .string "HP UP increases the base HP of a\n"
@@ -10,7 +10,7 @@ CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers:: @ 8195BBA
     .string "CARBOS enhances the base SPEED\n"
     .string "stat.$"
 
-CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers:: @ 8195CA0
+CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers::
     .string "I'm here for POKéMON stat\n"
     .string "enhancers.\p"
     .string "PROTEIN increases the base ATTACK\n"
@@ -18,6 +18,6 @@ CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers:: @ 8195CA0
     .string "IRON increases the base DEFENSE\n"
     .string "stat.$"
 
-CeladonCity_DepartmentStore_5F_Text_Drugstore:: @ 8195D14
+CeladonCity_DepartmentStore_5F_Text_Drugstore::
     .string "5F: DRUGSTORE$"
 

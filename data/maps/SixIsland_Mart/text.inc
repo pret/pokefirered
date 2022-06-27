@@ -1,4 +1,4 @@
-SixIsland_Mart_Text_AgathaOldestEverEliteFourMember:: @ 81A41CA
+SixIsland_Mart_Text_AgathaOldestEverEliteFourMember::
     .string "Play with POKéMON lots and live\n"
     .string "a long life!\p"
     .string "Take AGATHA, for example.\p"
@@ -6,7 +6,7 @@ SixIsland_Mart_Text_AgathaOldestEverEliteFourMember:: @ 81A41CA
     .string "oldest-ever ELITE FOUR member.\p"
     .string "She spurs me to do bigger things.$"
 
-SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter:: @ 81A4271
+SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter::
     .string "I should buy some MAIL and write\n"
     .string "him a letter…$"
 

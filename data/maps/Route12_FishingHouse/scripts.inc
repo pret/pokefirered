@@ -1,7 +1,7 @@
-Route12_FishingHouse_MapScripts:: @ 816FF0B
+Route12_FishingHouse_MapScripts::
 	.byte 0
 
-Route12_FishingHouse_EventScript_FishingGuruBrother:: @ 816FF0C
+Route12_FishingHouse_EventScript_FishingGuruBrother::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_SUPER_ROD, Route12_FishingHouse_EventScript_CheckMagikarpRecord
@@ -12,7 +12,7 @@ Route12_FishingHouse_EventScript_FishingGuruBrother:: @ 816FF0C
 	release
 	end
 
-Route12_FishingHouse_EventScript_GiveSuperRod:: @ 816FF34
+Route12_FishingHouse_EventScript_GiveSuperRod::
 	checkitemspace ITEM_SUPER_ROD, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route12_FishingHouse_EventScript_NoRoomForSuperRod
@@ -24,12 +24,12 @@ Route12_FishingHouse_EventScript_GiveSuperRod:: @ 816FF34
 	release
 	end
 
-Route12_FishingHouse_EventScript_NoRoomForSuperRod:: @ 816FF75
+Route12_FishingHouse_EventScript_NoRoomForSuperRod::
 	msgbox Route12_FishingHouse_Text_NoRoomForGift
 	release
 	end
 
-Route12_FishingHouse_EventScript_CheckMagikarpRecord:: @ 816FF7F
+Route12_FishingHouse_EventScript_CheckMagikarpRecord::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	setvar VAR_0x8004, SPECIES_MAGIKARP
@@ -55,33 +55,33 @@ Route12_FishingHouse_EventScript_CheckMagikarpRecord:: @ 816FF7F
 	release
 	end
 
-Route12_FishingHouse_EventScript_NoMagikarpInParty:: @ 816FFF5
+Route12_FishingHouse_EventScript_NoMagikarpInParty::
 	msgbox Route12_FishingHouse_Text_TryFishingBringMeMagikarp
 	release
 	end
 
-Route12_FishingHouse_EventScript_CancelShowMon:: @ 816FFFF
+Route12_FishingHouse_EventScript_CancelShowMon::
 	release
 	end
 
-Route12_FishingHouse_EventScript_NotMagikarp:: @ 8170001
+Route12_FishingHouse_EventScript_NotMagikarp::
 	msgbox Route12_FishingHouse_Text_DoesntLookLikeMagikarp
 	release
 	end
 
-Route12_FishingHouse_EventScript_NotRecordMagikarp:: @ 817000B
+Route12_FishingHouse_EventScript_NotRecordMagikarp::
 	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_NewRecordMagikarp
 	msgbox Route12_FishingHouse_Text_HmmXInchesDoesntMeasureUp
 	release
 	end
 
-Route12_FishingHouse_EventScript_TieRecordMagikarp:: @ 817001E
+Route12_FishingHouse_EventScript_TieRecordMagikarp::
 	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_NewRecordMagikarp
 	msgbox Route12_FishingHouse_Text_HuhXInchesSameSizeAsLast
 	release
 	end
 
-Route12_FishingHouse_EventScript_NewRecordMagikarp:: @ 8170031
+Route12_FishingHouse_EventScript_NewRecordMagikarp::
 	setflag FLAG_GOT_RECORD_SETTING_MAGIKARP
 	msgbox Route12_FishingHouse_Text_WhoaXInchesTakeThis
 	giveitem ITEM_NET_BALL
@@ -91,19 +91,19 @@ Route12_FishingHouse_EventScript_NewRecordMagikarp:: @ 8170031
 	release
 	end
 
-Route12_FishingHouse_EventScript_NoRoomForNetBall:: @ 817005D
+Route12_FishingHouse_EventScript_NoRoomForNetBall::
 	msgbox Route12_FishingHouse_Text_NoRoomForGift
 	release
 	end
 
-Route12_FishingHouse_EventScript_MagikarpRecordSign:: @ 8170067
+Route12_FishingHouse_EventScript_MagikarpRecordSign::
 	lockall
 	goto_if_set FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet
 	msgbox Route12_FishingHouse_Text_BlankChartOfSomeSort
 	releaseall
 	end
 
-Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet:: @ 817007B
+Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet::
 	special GetMagikarpSizeRecordInfo
 	msgbox Route12_FishingHouse_Text_MostGiganticMagikarpXInches
 	releaseall

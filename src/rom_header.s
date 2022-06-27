@@ -2,7 +2,7 @@
 @       It's populated by gbafix using data provided in the Makefile. 
 
 	.global Start
-Start: @ 8000000
+Start:
 	b start_vector
 
 	.global RomHeaderNintendoLogo
@@ -41,19 +41,18 @@ RomHeaderChecksum:
 RomHeaderReserved2:
 	.space 2
 
-@ 80000C0
 	.word 0
 
 	.global GPIOPortData
-GPIOPortData: @ 80000C4
+GPIOPortData:
 	.hword 0
 
 	.global GPIOPortDirection
-GPIOPortDirection: @ 80000C6
+GPIOPortDirection:
 	.hword 0
 
 	.global GPIOPortReadEnable
-GPIOPortReadEnable: @ 80000C8
+GPIOPortReadEnable:
 	.hword 0
 
 	.space 6

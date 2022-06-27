@@ -1,10 +1,10 @@
-TwoIsland_PokemonCenter_1F_Text_HaveYouVisitedGameCorner:: @ 81A2E59
+TwoIsland_PokemonCenter_1F_Text_HaveYouVisitedGameCorner::
     .string "Have you visited the GAME CORNER\n"
     .string "already?\p"
     .string "It's no good to go alone.\n"
     .string "You have to take a friend along.$"
 
-TwoIsland_PokemonCenter_1F_Text_OldLadyLivesOutOnCape:: @ 81A2EBE
+TwoIsland_PokemonCenter_1F_Text_OldLadyLivesOutOnCape::
     .string "Not many people live on\n"
     .string "TWO ISLAND.\p"
     .string "There is this old lady who lives\n"

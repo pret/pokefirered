@@ -1,7 +1,7 @@
-ThreeIsland_Mart_MapScripts:: @ 817188C
+ThreeIsland_Mart_MapScripts::
 	.byte 0
 
-ThreeIsland_Mart_EventScript_Clerk:: @ 817188D
+ThreeIsland_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -13,7 +13,7 @@ ThreeIsland_Mart_EventScript_Clerk:: @ 817188D
 	end
 
 	.align 2
-ThreeIsland_Mart_Items:: @ 81718B4
+ThreeIsland_Mart_Items::
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_REVIVE
@@ -24,14 +24,14 @@ ThreeIsland_Mart_Items:: @ 81718B4
 	release
 	end
 
-ThreeIsland_Mart_EventScript_Picnicker:: @ 81718C4
+ThreeIsland_Mart_EventScript_Picnicker::
 	msgbox ThreeIsland_Mart_Text_TrueThatCeldadonDeptStoreBigger, MSGBOX_NPC
 	end
 
-ThreeIsland_Mart_EventScript_BugCatcher:: @ 81718CD
+ThreeIsland_Mart_EventScript_BugCatcher::
 	msgbox ThreeIsland_Mart_Text_PeopleHealWithBerriesFromForest, MSGBOX_NPC
 	end
 
-ThreeIsland_Mart_EventScript_Youngster:: @ 81718D6
+ThreeIsland_Mart_EventScript_Youngster::
 	msgbox ThreeIsland_Mart_Text_BikersWereAboutToTrashMart, MSGBOX_NPC
 	end

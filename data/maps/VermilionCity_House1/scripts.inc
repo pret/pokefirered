@@ -1,7 +1,7 @@
-VermilionCity_House1_MapScripts:: @ 816B3A6
+VermilionCity_House1_MapScripts::
 	.byte 0
 
-VermilionCity_House1_EventScript_FishingGuru:: @ 816B3A7
+VermilionCity_House1_EventScript_FishingGuru::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_OLD_ROD, VermilionCity_House1_EventScript_AlreadyGotOldRod
@@ -12,12 +12,12 @@ VermilionCity_House1_EventScript_FishingGuru:: @ 816B3A7
 	release
 	end
 
-VermilionCity_House1_EventScript_AlreadyGotOldRod:: @ 816B3CF
+VermilionCity_House1_EventScript_AlreadyGotOldRod::
 	msgbox VermilionCity_House1_Text_HowAreTheFishBiting
 	release
 	end
 
-VermilionCity_House1_EventScript_GiveOldRod:: @ 816B3D9
+VermilionCity_House1_EventScript_GiveOldRod::
 	checkitemspace ITEM_OLD_ROD, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq VermilionCity_House1_EventScript_NoRoomForOldRod
@@ -29,7 +29,7 @@ VermilionCity_House1_EventScript_GiveOldRod:: @ 816B3D9
 	release
 	end
 
-VermilionCity_House1_EventScript_NoRoomForOldRod:: @ 816B41A
+VermilionCity_House1_EventScript_NoRoomForOldRod::
 	msgbox VermilionCity_House1_Text_NoRoomForNiceGift
 	release
 	end

@@ -1,6 +1,6 @@
-EventScript_RepelWoreOff:: @ 81BFB65
+EventScript_RepelWoreOff::
 	msgbox Text_RepelWoreOff, MSGBOX_SIGN
 	end
 
-Text_RepelWoreOff:: @ 81BFB6E
+Text_RepelWoreOff::
 	.string "REPEL's effect wore off…$"

@@ -1,11 +1,11 @@
-CinnabarIsland_PokemonLab_Lounge_MapScripts:: @ 816E2B8
+CinnabarIsland_PokemonLab_Lounge_MapScripts::
 	.byte 0
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_Scientist:: @ 816E2B9
+CinnabarIsland_PokemonLab_Lounge_EventScript_Scientist::
 	msgbox CinnabarIsland_PokemonLab_Lounge_Text_FoundFossilInMtMoon, MSGBOX_NPC
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_Clifton:: @ 816E2C2
+CinnabarIsland_PokemonLab_Lounge_EventScript_Clifton::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_ELECTRODE
@@ -26,23 +26,23 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_Clifton:: @ 816E2C2
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade:: @ 816E31C
+CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade::
 	msgbox Trade_Text_WellIfYouDontWantTo
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon:: @ 816E326
+CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_ThisIsntMon
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded:: @ 816E334
+CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded::
 	msgbox Trade_Text_HasTradedMonGrownStronger
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_Norma:: @ 816E33E
+CinnabarIsland_PokemonLab_Lounge_EventScript_Norma::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_TANGELA
@@ -73,18 +73,18 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_Norma:: @ 816E33E
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade:: @ 816E3BC
+CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade::
 	msgbox Trade_Text_ThatsTooBad
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon:: @ 816E3C6
+CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_ThisIsNoMon
 	release
 	end
 
-CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded:: @ 816E3D4
+CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded::
 	msgbox Trade_Text_HowIsMyOldMon
 	release
 	end

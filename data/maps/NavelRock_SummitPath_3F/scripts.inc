@@ -1,2 +1,2 @@
-NavelRock_SummitPath_3F_MapScripts:: @ 81651F3
+NavelRock_SummitPath_3F_MapScripts::
 	.byte 0

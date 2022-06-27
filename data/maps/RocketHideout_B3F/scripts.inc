@@ -1,12 +1,12 @@
-RocketHideout_B3F_MapScripts:: @ 81612B9
+RocketHideout_B3F_MapScripts::
 	.byte 0
 
-RocketHideout_B3F_EventScript_Grunt1:: @ 81612BA
+RocketHideout_B3F_EventScript_Grunt1::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_14, RocketHideout_B3F_Text_Grunt1Intro, RocketHideout_B3F_Text_Grunt1Defeat
 	msgbox RocketHideout_B3F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RocketHideout_B3F_EventScript_Grunt2:: @ 81612D1
+RocketHideout_B3F_EventScript_Grunt2::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_15, RocketHideout_B3F_Text_Grunt2Intro, RocketHideout_B3F_Text_Grunt2Defeat
 	msgbox RocketHideout_B3F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end

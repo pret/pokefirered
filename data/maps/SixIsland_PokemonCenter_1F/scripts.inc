@@ -1,26 +1,26 @@
 .equ LOCALID_RIVAL, 2
 
-SixIsland_PokemonCenter_1F_MapScripts:: @ 8171D6A
+SixIsland_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SixIsland_PokemonCenter_1F_OnFrame
 	.byte 0
 
-SixIsland_PokemonCenter_1F_OnTransition:: @ 8171D7A
+SixIsland_PokemonCenter_1F_OnTransition::
 	setrespawn SPAWN_SIX_ISLAND
 	compare VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
 	call_if_eq SixIsland_PokemonCenter_1F_EventScript_ShowRival
 	end
 
-SixIsland_PokemonCenter_1F_EventScript_ShowRival:: @ 8171D89
+SixIsland_PokemonCenter_1F_EventScript_ShowRival::
 	clearflag FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL
 	return
 
-SixIsland_PokemonCenter_1F_OnFrame:: @ 8171D8D
+SixIsland_PokemonCenter_1F_OnFrame::
 	map_script_2 VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, SixIsland_PokemonCenter_1F_EventScript_RivalScene
 	.2byte 0
 
-SixIsland_PokemonCenter_1F_EventScript_RivalScene:: @ 8171D97
+SixIsland_PokemonCenter_1F_EventScript_RivalScene::
 	lockall
 	textcolor 0
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
@@ -47,35 +47,35 @@ SixIsland_PokemonCenter_1F_EventScript_RivalScene:: @ 8171D97
 	releaseall
 	end
 
-SixIsland_PokemonCenter_1F_Movement_RivalApproach:: @ 8171DF9
+SixIsland_PokemonCenter_1F_Movement_RivalApproach::
 	walk_right
 	walk_right
 	walk_down
 	walk_down
 	step_end
 
-SixIsland_PokemonCenter_1F_Movement_RivalExit:: @ 8171DFE
+SixIsland_PokemonCenter_1F_Movement_RivalExit::
 	delay_16
 	delay_4
 	walk_down
 	step_end
 
-SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit:: @ 8171E02
+SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit::
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-SixIsland_PokemonCenter_1F_EventScript_Nurse:: @ 8171E05
+SixIsland_PokemonCenter_1F_EventScript_Nurse::
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-SixIsland_PokemonCenter_1F_EventScript_Hiker:: @ 8171E0E
+SixIsland_PokemonCenter_1F_EventScript_Hiker::
 	msgbox SixIsland_PokemonCenter_1F_Text_SomethingHiddenOnThisIsland, MSGBOX_NPC
 	end
 
-SixIsland_PokemonCenter_1F_EventScript_OldMan:: @ 8171E17
+SixIsland_PokemonCenter_1F_EventScript_OldMan::
 	msgbox SixIsland_PokemonCenter_1F_Text_SomeMonsEvolveByTradingWithHeldItem, MSGBOX_NPC
 	end

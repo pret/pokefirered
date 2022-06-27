@@ -1,10 +1,10 @@
 .set LOCALID_WOMAN, 1
 .set LOCALID_LASS,  2
 
-ViridianCity_House2_MapScripts:: @ 816A07C
+ViridianCity_House2_MapScripts::
 	.byte 0
 
-ViridianCity_House2_EventScript_Lass:: @ 816A07D
+ViridianCity_House2_EventScript_Lass::
 	lock
 	faceplayer
 	msgbox ViridianCity_House2_Text_TryingToMemorizeNotes
@@ -14,7 +14,7 @@ ViridianCity_House2_EventScript_Lass:: @ 816A07D
 	release
 	end
 
-ViridianCity_House2_EventScript_Woman:: @ 816A094
+ViridianCity_House2_EventScript_Woman::
 	lock
 	faceplayer
 	msgbox ViridianCity_House2_Text_ReadBlackboardCarefully
@@ -24,7 +24,7 @@ ViridianCity_House2_EventScript_Woman:: @ 816A094
 	release
 	end
 
-ViridianCity_House2_EventScript_Notebook:: @ 816A0AB
+ViridianCity_House2_EventScript_Notebook::
 	lockall
 	msgbox ViridianCity_House2_Text_NotebookFirstPage
 	msgbox ViridianCity_House2_Text_TurnThePage, MSGBOX_YESNO
@@ -46,17 +46,17 @@ ViridianCity_House2_EventScript_Notebook:: @ 816A0AB
 	releaseall
 	end
 
-ViridianCity_House2_EventScript_StopReadingNotebook:: @ 816A11B
+ViridianCity_House2_EventScript_StopReadingNotebook::
 	releaseall
 	end
 
-ViridianCity_House2_EventScript_Blackboard:: @ 816A11D
+ViridianCity_House2_EventScript_Blackboard::
 	lockall
 	msgbox ViridianCity_House2_Text_BlackboardListsStatusProblems
 	goto ViridianCity_House2_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_House2_EventScript_ChooseBlackboardTopic:: @ 816A12C
+ViridianCity_House2_EventScript_ChooseBlackboardTopic::
 	message ViridianCity_House2_Text_ReadWhichTopic
 	waitmessage
 	multichoicegrid 7, 1, MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD, 3, FALSE
@@ -70,31 +70,31 @@ ViridianCity_House2_EventScript_ChooseBlackboardTopic:: @ 816A12C
 	case 127, ViridianCity_House2_EventScript_ExitBlackboard
 	end
 
-ViridianCity_House2_EventScript_ReadSleep:: @ 816A18B
+ViridianCity_House2_EventScript_ReadSleep::
 	msgbox ViridianCity_House2_Text_ExplainSleep
 	goto ViridianCity_House2_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_House2_EventScript_ReadBurn:: @ 816A199
+ViridianCity_House2_EventScript_ReadBurn::
 	msgbox ViridianCity_House2_Text_ExplainBurn
 	goto ViridianCity_House2_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_House2_EventScript_ReadPoison:: @ 816A1A7
+ViridianCity_House2_EventScript_ReadPoison::
 	msgbox ViridianCity_House2_Text_ExplainPoison
 	goto ViridianCity_House2_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_House2_EventScript_ReadFreeze:: @ 816A1B5
+ViridianCity_House2_EventScript_ReadFreeze::
 	msgbox ViridianCity_House2_Text_ExplainFreeze
 	goto ViridianCity_House2_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_House2_EventScript_ReadParalysis:: @ 816A1C3
+ViridianCity_House2_EventScript_ReadParalysis::
 	msgbox ViridianCity_House2_Text_ExplainParalysis
 	goto ViridianCity_House2_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_House2_EventScript_ExitBlackboard:: @ 816A1D1
+ViridianCity_House2_EventScript_ExitBlackboard::
 	releaseall
 	end

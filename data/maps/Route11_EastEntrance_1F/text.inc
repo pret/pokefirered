@@ -1,9 +1,9 @@
 @ Unclear where this is originally from
-Route11_EastEntrance_1F_Text_BagIsFull:: @ 819E890
+Route11_EastEntrance_1F_Text_BagIsFull::
     .string "{PLAYER}{KUN}の　バッグ\n"
     .string "いっぱい　みたい　だね$"
 
-Route11_EastEntrance_1F_Text_ManInLavenderRatesNames:: @ 819E8A6
+Route11_EastEntrance_1F_Text_ManInLavenderRatesNames::
     .string "Don't you think it's hard to think\n"
     .string "up good names for POKéMON?\p"
     .string "Especially if you've caught a\n"
@@ -13,7 +13,7 @@ Route11_EastEntrance_1F_Text_ManInLavenderRatesNames:: @ 819E8A6
     .string "He can even help you rename your\n"
     .string "POKéMON, too.$"
 
-Route11_EastEntrance_1F_Text_RockTunnelToReachLavender:: @ 819E97B
+Route11_EastEntrance_1F_Text_RockTunnelToReachLavender::
     .string "If you're aiming to reach LAVENDER\n"
     .string "TOWN, take ROCK TUNNEL.\p"
     .string "You can get to ROCK TUNNEL from\n"

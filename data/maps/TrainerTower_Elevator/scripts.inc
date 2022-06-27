@@ -1,9 +1,9 @@
-TrainerTower_Elevator_MapScripts:: @ 8164AF8
+TrainerTower_Elevator_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, TrainerTower_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerTower_OnFrame
 	.byte 0
 
-TrainerTower_Elevator_EventScript_FloorSelect:: @ 8164B03
+TrainerTower_Elevator_EventScript_FloorSelect::
 	lockall
 	setvar VAR_0x8004, 6
 	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
@@ -18,17 +18,17 @@ TrainerTower_Elevator_EventScript_FloorSelect:: @ 8164B03
 	case 1, TrainerTower_Elevator_EventScript_FloorSelectFromLobby
 	end
 
-TrainerTower_Elevator_EventScript_FloorSelectFromRoof:: @ 8164B46
+TrainerTower_Elevator_EventScript_FloorSelectFromRoof::
 	multichoicedefault 0, 0, MULTICHOICE_ROOFTOP_B1F, 0, FALSE
 	goto TrainerTower_Elevator_EventScript_ChooseFloor
 	end
 
-TrainerTower_Elevator_EventScript_FloorSelectFromLobby:: @ 8164B52
+TrainerTower_Elevator_EventScript_FloorSelectFromLobby::
 	multichoicedefault 0, 0, MULTICHOICE_ROOFTOP_B1F, 1, FALSE
 	goto TrainerTower_Elevator_EventScript_ChooseFloor
 	end
 
-TrainerTower_Elevator_EventScript_ChooseFloor:: @ 8164B5E
+TrainerTower_Elevator_EventScript_ChooseFloor::
 	switch VAR_RESULT
 	case 0, TrainerTower_Elevator_EventScript_SelectRoof
 	case 1, TrainerTower_Elevator_EventScript_SelectLobby
@@ -36,7 +36,7 @@ TrainerTower_Elevator_EventScript_ChooseFloor:: @ 8164B5E
 	case SCR_MENU_CANCEL, TrainerTower_Elevator_EventScript_CloseFloorSelect
 	end
 
-TrainerTower_Elevator_EventScript_SelectLobby:: @ 8164B90
+TrainerTower_Elevator_EventScript_SelectLobby::
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_TRAINER_TOWER_LOBBY, 255, 17, 8
 	compare VAR_ELEVATOR_FLOOR, 3
@@ -52,16 +52,16 @@ TrainerTower_Elevator_EventScript_SelectLobby:: @ 8164B90
 	releaseall
 	end
 
-TrainerTower_Elevator_EventScript_SelectRoof:: @ 8164BCD
+TrainerTower_Elevator_EventScript_SelectRoof::
 	goto TrainerTower_Elevator_EventScript_CloseFloorSelect
 	end
 
-TrainerTower_Elevator_EventScript_CloseFloorSelect:: @ 8164BD3
+TrainerTower_Elevator_EventScript_CloseFloorSelect::
 	special CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
-TrainerTower_Elevator_EventScript_MoveElevator:: @ 8164BD8
+TrainerTower_Elevator_EventScript_MoveElevator::
 	special CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
@@ -70,7 +70,7 @@ TrainerTower_Elevator_EventScript_MoveElevator:: @ 8164BD8
 	setflag FLAG_TEMP_2
 	return
 
-TrainerTower_Elevator_Movement_ExitElevator:: @ 8164BE5
+TrainerTower_Elevator_Movement_ExitElevator::
 	walk_in_place_fastest_down
 	delay_16
 	walk_down

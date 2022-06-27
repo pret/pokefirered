@@ -1,17 +1,17 @@
-Route4_MapScripts:: @ 8167F8A
+Route4_MapScripts::
 	.byte 0
 
-Route4_EventScript_Unused:: @ 8167F8B
+Route4_EventScript_Unused::
 	end
 
-Route4_EventScript_Woman:: @ 8167F8C
+Route4_EventScript_Woman::
 	msgbox Route4_Text_TrippedOverGeodude, MSGBOX_NPC
 	end
 
-Route4_EventScript_MtMoonSign:: @ 8167F95
+Route4_EventScript_MtMoonSign::
 	msgbox Route4_Text_MtMoonEntrance, MSGBOX_SIGN
 	end
 
-Route4_EventScript_RouteSign:: @ 8167F9E
+Route4_EventScript_RouteSign::
 	msgbox Route4_Text_RouteSign, MSGBOX_SIGN
 	end

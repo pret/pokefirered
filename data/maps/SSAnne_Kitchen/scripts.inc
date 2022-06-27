@@ -1,19 +1,19 @@
-SSAnne_Kitchen_MapScripts:: @ 8160AB2
+SSAnne_Kitchen_MapScripts::
 	.byte 0
 
-SSAnne_Kitchen_EventScript_Chef1:: @ 8160AB3
+SSAnne_Kitchen_EventScript_Chef1::
 	msgbox SSAnne_Kitchen_Text_BusyOutOfTheWay, MSGBOX_NPC
 	end
 
-SSAnne_Kitchen_EventScript_Chef2:: @ 8160ABC
+SSAnne_Kitchen_EventScript_Chef2::
 	msgbox SSAnne_Kitchen_Text_SawOddBerryInTrash, MSGBOX_NPC
 	end
 
-SSAnne_Kitchen_EventScript_Chef3:: @ 8160AC5
+SSAnne_Kitchen_EventScript_Chef3::
 	msgbox SSAnne_Kitchen_Text_SoBusyImDizzy, MSGBOX_NPC
 	end
 
-SSAnne_Kitchen_EventScript_Chef4:: @ 8160ACE
+SSAnne_Kitchen_EventScript_Chef4::
 	lock
 	faceplayer
 	msgbox SSAnne_Kitchen_Text_IAmLeChefMainCourseIs
@@ -28,26 +28,26 @@ SSAnne_Kitchen_EventScript_Chef4:: @ 8160ACE
 	release
 	end
 
-SSAnne_Kitchen_EventScript_SalmonDuSalad:: @ 8160B03
+SSAnne_Kitchen_EventScript_SalmonDuSalad::
 	msgbox SSAnne_Kitchen_Text_SalmonDuSalad
 	return
 
-SSAnne_Kitchen_EventScript_EelsAuBarbecue:: @ 8160B0C
+SSAnne_Kitchen_EventScript_EelsAuBarbecue::
 	msgbox SSAnne_Kitchen_Text_EelsAuBarbecue
 	return
 
-SSAnne_Kitchen_EventScript_PrimeBeefsteak:: @ 8160B15
+SSAnne_Kitchen_EventScript_PrimeBeefsteak::
 	msgbox SSAnne_Kitchen_Text_PrimeBeefsteak
 	return
 
-SSAnne_Kitchen_EventScript_Chef5:: @ 8160B1E
+SSAnne_Kitchen_EventScript_Chef5::
 	msgbox SSAnne_Kitchen_Text_PeelSpudsEveryDay, MSGBOX_NPC
 	end
 
-SSAnne_Kitchen_EventScript_Chef6:: @ 8160B27
+SSAnne_Kitchen_EventScript_Chef6::
 	msgbox SSAnne_Kitchen_Text_HearAboutSnorlaxItsAGlutton, MSGBOX_NPC
 	end
 
-SSAnne_Kitchen_EventScript_Chef7:: @ 8160B30
+SSAnne_Kitchen_EventScript_Chef7::
 	msgbox SSAnne_Kitchen_Text_OnlyGetToPeelOnions, MSGBOX_NPC
 	end

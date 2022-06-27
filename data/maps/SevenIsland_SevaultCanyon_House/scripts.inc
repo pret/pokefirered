@@ -1,9 +1,9 @@
 .set LOCALID_BALDING_MAN, 1
 
-SevenIsland_SevaultCanyon_House_MapScripts:: @ 8172182
+SevenIsland_SevaultCanyon_House_MapScripts::
 	.byte 0
 
-SevenIsland_SevaultCanyon_House_EventScript_BaldingMan:: @ 8172183
+SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	lock
 	goto_if_set FLAG_TEMP_2, SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced
 	playbgm MUS_SCHOOL, 0
@@ -35,25 +35,25 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan:: @ 8172183
 	release
 	end
 
-SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown:: @ 8172206
+SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced:: @ 8172211
+SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced::
 	applymovement LOCALID_BALDING_MAN, Movement_FacePlayer
 	waitmovement 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
 	release
 	end
 
-SevenIsland_SevaultCanyon_House_EventScript_DeclineDance:: @ 8172225
+SevenIsland_SevaultCanyon_House_EventScript_DeclineDance::
 	textcolor 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ComeOnDance
 	release
 	end
 
-SevenIsland_SevaultCanyon_House_Movement_ChanseyDance:: @ 8172231
+SevenIsland_SevaultCanyon_House_Movement_ChanseyDance::
 	walk_in_place_down
 	delay_16
 	walk_in_place_down
@@ -72,7 +72,7 @@ SevenIsland_SevaultCanyon_House_Movement_ChanseyDance:: @ 8172231
 	delay_4
 	step_end
 
-SevenIsland_SevaultCanyon_House_EventScript_Chansey:: @ 8172242
+SevenIsland_SevaultCanyon_House_EventScript_Chansey::
 	lock
 	faceplayer
 	waitse

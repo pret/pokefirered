@@ -1,6 +1,6 @@
-Route7_MapScripts:: @ 8167FBB
+Route7_MapScripts::
 	.byte 0
 
-Route7_EventScript_UndergroundPathSign:: @ 8167FBC
+Route7_EventScript_UndergroundPathSign::
 	msgbox Route7_Text_UndergroundPathSign, MSGBOX_SIGN
 	end

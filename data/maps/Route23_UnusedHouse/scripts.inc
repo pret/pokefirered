@@ -1,2 +1,2 @@
-Route23_UnusedHouse_MapScripts:: @ 8170522
+Route23_UnusedHouse_MapScripts::
 	.byte 0

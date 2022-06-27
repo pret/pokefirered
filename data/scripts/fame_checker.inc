@@ -1,4 +1,4 @@
-ViridianCity_House2_EventScript_PokemonJournal:: @ 81ACD65
+ViridianCity_House2_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_OAK, 3
@@ -8,7 +8,7 @@ ViridianCity_House2_EventScript_PokemonJournal:: @ 81ACD65
 	release
 	end
 
-EventScript_PokemonJournalUnused1:: @ 81ACD8D
+EventScript_PokemonJournalUnused1::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 1
@@ -18,7 +18,7 @@ EventScript_PokemonJournalUnused1:: @ 81ACD8D
 	release
 	end
 
-EventScript_PokemonJournalUnused2:: @ 81ACDB5
+EventScript_PokemonJournalUnused2::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 4
@@ -27,7 +27,7 @@ EventScript_PokemonJournalUnused2:: @ 81ACDB5
 	release
 	end
 
-FourIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACDD0
+FourIsland_PokemonCenter_1F_EventScript_PokemonJournal::
 	lockall
 	famechecker FAMECHECKER_DAISY, 5
 	textcolor 3
@@ -35,7 +35,7 @@ FourIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACDD0
 	releaseall
 	end
 
-Route4_EventScript_Boy:: @ 81ACDEA
+Route4_EventScript_Boy::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 3
@@ -43,7 +43,7 @@ Route4_EventScript_Boy:: @ 81ACDEA
 	release
 	end
 
-MtMoon_1F_EventScript_BaldingMan:: @ 81ACE03
+MtMoon_1F_EventScript_BaldingMan::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 4
@@ -51,7 +51,7 @@ MtMoon_1F_EventScript_BaldingMan:: @ 81ACE03
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_PokemonJournalBrock:: @ 81ACE1C
+PewterCity_Museum_1F_EventScript_PokemonJournalBrock::
 	lockall
 	famechecker FAMECHECKER_BROCK, 5
 	textcolor 3
@@ -59,7 +59,7 @@ PewterCity_Museum_1F_EventScript_PokemonJournalBrock:: @ 81ACE1C
 	releaseall
 	end
 
-Route20_EventScript_Camper:: @ 81ACE36
+Route20_EventScript_Camper::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 3
@@ -67,7 +67,7 @@ Route20_EventScript_Camper:: @ 81ACE36
 	release
 	end
 
-Route25_EventScript_Beauty:: @ 81ACE4F
+Route25_EventScript_Beauty::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 4
@@ -75,7 +75,7 @@ Route25_EventScript_Beauty:: @ 81ACE4F
 	release
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty:: @ 81ACE68
+CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 5
@@ -84,7 +84,7 @@ CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty:: @ 81ACE68
 	release
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
+VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge::
 	lockall
 	famechecker FAMECHECKER_LTSURGE, 5
 	textcolor 3
@@ -92,7 +92,7 @@ VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
 	releaseall
 	end
 
-CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika:: @ 81ACE9D
+CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_ERIKA, 5
@@ -101,7 +101,7 @@ CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika:: @ 81ACE9D
 	release
 	end
 
-FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga:: @ 81ACEB8
+FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_KOGA, 4
@@ -110,7 +110,7 @@ FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga:: @ 81ACEB8
 	release
 	end
 
-SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
+SafariZone_North_RestHouse_EventScript_BaldingMan::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_KOGA, 5
@@ -118,7 +118,7 @@ SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
 	release
 	end
 
-SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina:: @ 81ACEEC
+SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_SABRINA, 4
@@ -127,7 +127,7 @@ SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina:: @ 81ACEEC
 	release
 	end
 
-CinnabarIsland_Gym_EventScript_BlaineFujiPhoto:: @ 81ACF07
+CinnabarIsland_Gym_EventScript_BlaineFujiPhoto::
 	lockall
 	famechecker FAMECHECKER_BLAINE, 4
 	famechecker FAMECHECKER_MRFUJI, 4
@@ -135,7 +135,7 @@ CinnabarIsland_Gym_EventScript_BlaineFujiPhoto:: @ 81ACF07
 	releaseall
 	end
 
-FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal:: @ 81ACF2C
+FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal::
 	lockall
 	famechecker FAMECHECKER_BLAINE, 5
 	textcolor 3
@@ -143,7 +143,7 @@ FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal:: @ 81ACF2C
 	releaseall
 	end
 
-FourIsland_Mart_EventScript_OldMan:: @ 81ACF46
+FourIsland_Mart_EventScript_OldMan::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 2
@@ -151,7 +151,7 @@ FourIsland_Mart_EventScript_OldMan:: @ 81ACF46
 	release
 	end
 
-FiveIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACF5F
+FiveIsland_PokemonCenter_1F_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 3
@@ -160,7 +160,7 @@ FiveIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACF5F
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno:: @ 81ACF7A
+SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 2
@@ -169,7 +169,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno:: @ 81ACF7A
 	release
 	end
 
-SevenIsland_SevaultCanyon_EventScript_BlackBelt:: @ 81ACF95
+SevenIsland_SevaultCanyon_EventScript_BlackBelt::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 5
@@ -177,7 +177,7 @@ SevenIsland_SevaultCanyon_EventScript_BlackBelt:: @ 81ACF95
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_BlackBelt:: @ 81ACFAE
+IndigoPlateau_PokemonCenter_1F_EventScript_BlackBelt::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 1
@@ -186,7 +186,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_BlackBelt:: @ 81ACFAE
 	release
 	end
 
-SevenIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACFD4
+SevenIsland_PokemonCenter_1F_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 3
@@ -195,7 +195,7 @@ SevenIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACFD4
 	release
 	end
 
-SixIsland_Mart_EventScript_OldWoman:: @ 81ACFEF
+SixIsland_Mart_EventScript_OldWoman::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 5
@@ -203,7 +203,7 @@ SixIsland_Mart_EventScript_OldWoman:: @ 81ACFEF
 	release
 	end
 
-EventScript_LanceUnused:: @ 81AD008
+EventScript_LanceUnused::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 0
@@ -211,7 +211,7 @@ EventScript_LanceUnused:: @ 81AD008
 	release
 	end
 
-SaffronCity_EventScript_BattleGirlUnused:: @ 81AD021
+SaffronCity_EventScript_BattleGirlUnused::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 1
@@ -219,7 +219,7 @@ SaffronCity_EventScript_BattleGirlUnused:: @ 81AD021
 	release
 	end
 
-SaffronCity_EventScript_BattleGirl:: @ 81AD03A
+SaffronCity_EventScript_BattleGirl::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 2
@@ -227,7 +227,7 @@ SaffronCity_EventScript_BattleGirl:: @ 81AD03A
 	release
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_Woman:: @ 81AD053
+CeladonCity_DepartmentStore_2F_EventScript_Woman::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 3
@@ -235,7 +235,7 @@ CeladonCity_DepartmentStore_2F_EventScript_Woman:: @ 81AD053
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81AD06C
+IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 4
@@ -244,7 +244,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81AD06C
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM:: @ 81AD087
+IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 5
@@ -252,7 +252,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM:: @ 81AD087
 	release
 	end
 
-LavenderTown_PokemonCenter_1F_EventScript_BaldingMan:: @ 81AD0A0
+LavenderTown_PokemonCenter_1F_EventScript_BaldingMan::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, 3
@@ -260,7 +260,7 @@ LavenderTown_PokemonCenter_1F_EventScript_BaldingMan:: @ 81AD0A0
 	release
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji:: @ 81AD0B9
+CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, 5
@@ -269,7 +269,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji:: @ 81AD0B9
 	release
 	end
 
-SilphCo_5F_EventScript_Scientist:: @ 81AD0D4
+SilphCo_5F_EventScript_Scientist::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 1
@@ -277,7 +277,7 @@ SilphCo_5F_EventScript_Scientist:: @ 81AD0D4
 	release
 	end
 
-SilphCo_8F_EventScript_Scientist:: @ 81AD0ED
+SilphCo_8F_EventScript_Scientist::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 2

@@ -1,2 +1,2 @@
-MtEmber_RubyPath_B1F_Stairs_MapScripts:: @ 8163C6F
+MtEmber_RubyPath_B1F_Stairs_MapScripts::
 	.byte 0

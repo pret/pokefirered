@@ -1,4 +1,4 @@
-FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland:: @ 81A3A60
+FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland::
     .string "We've had a great and powerful\n"
     .string "TRAINER grow up on this island.\p"
     .string "I bet even you'd know her.\n"
@@ -6,7 +6,7 @@ FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland:: @ 81A3A60
     .string "When LORELEI was just a tyke,\n"
     .string "I taught her about POKéMON.$"
 
-FourIsland_Mart_Text_IcefallCaveIsFrigid:: @ 81A3B14
+FourIsland_Mart_Text_IcefallCaveIsFrigid::
     .string "The SEVII ISLANDS are in a warm\n"
     .string "region overall.\p"
     .string "But there is one exception you\n"

@@ -13,13 +13,13 @@
 
 .equ SHOWED_OAK_COMPLETE_DEX, FLAG_TEMP_2
 
-PalletTown_ProfessorOaksLab_MapScripts:: @ 8168F7E
+PalletTown_ProfessorOaksLab_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_ProfessorOaksLab_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PalletTown_ProfessorOaksLab_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PalletTown_ProfessorOaksLab_OnFrame
 	.byte 0
 
-PalletTown_ProfessorOaksLab_OnTransition:: @ 8168F8E
+PalletTown_ProfessorOaksLab_OnTransition::
 	setflag FLAG_VISITED_OAKS_LAB
 	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	call_if_eq PalletTown_ProfessorOaksLab_EventScript_ReadyOakForStarterScene
@@ -30,34 +30,34 @@ PalletTown_ProfessorOaksLab_OnTransition:: @ 8168F8E
 	call_if_set FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL, PalletTown_ProfessorOaksLab_EventScript_SetSkipPokeBallCheck
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_SetSkipPokeBallCheck:: @ 8168FBC
+PalletTown_ProfessorOaksLab_EventScript_SetSkipPokeBallCheck::
 	setflag FLAG_OAK_SKIP_22_RIVAL_CHECK
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_SetNationalDexSceneFinished:: @ 8168FC0
+PalletTown_ProfessorOaksLab_EventScript_SetNationalDexSceneFinished::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_ReadyOakForStarterScene:: @ 8168FC6
+PalletTown_ProfessorOaksLab_EventScript_ReadyOakForStarterScene::
 	setobjectxyperm LOCALID_PROF_OAK, 6, 11
 	setobjectmovementtype LOCALID_PROF_OAK, MOVEMENT_TYPE_FACE_UP
 	savebgm MUS_OAK
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_ReadyOakForNationalDexScene:: @ 8168FD5
+PalletTown_ProfessorOaksLab_EventScript_ReadyOakForNationalDexScene::
 	setobjectxyperm LOCALID_PROF_OAK, 6, 11
 	setobjectmovementtype LOCALID_PROF_OAK, MOVEMENT_TYPE_FACE_UP
 	return
 
-PalletTown_ProfessorOaksLab_OnWarp:: @ 8168FE1
+PalletTown_ProfessorOaksLab_OnWarp::
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, PalletTown_ProfessorOaksLab_EventScript_ReadyPlayerForStarterScene
 	.2byte 0
 
-PalletTown_ProfessorOaksLab_EventScript_ReadyPlayerForStarterScene:: @ 8168FEB
+PalletTown_ProfessorOaksLab_EventScript_ReadyPlayerForStarterScene::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-PalletTown_ProfessorOaksLab_OnFrame:: @ 8168FF0
+PalletTown_ProfessorOaksLab_OnFrame::
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, PalletTown_ProfessorOaksLab_ChooseStarterScene
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7, PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene
 	.2byte 0
@@ -77,7 +77,7 @@ PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene:: @ 8169002
 	goto PalletTown_ProfessorOaksLab_EventScript_NationalDexScene
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_NationalDexScene:: @ 8169035
+PalletTown_ProfessorOaksLab_EventScript_NationalDexScene::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakSightingsOfRareMons
 	closemessage
 	compare VAR_FACING, DIR_NORTH
@@ -148,7 +148,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene:: @ 8169035
 	releaseall
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth:: @ 8169174
+PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth::
 	setobjectxyperm LOCALID_RIVAL, 5, 10
 	addobject LOCALID_RIVAL
 	playbgm MUS_ENCOUNTER_RIVAL, 0
@@ -157,7 +157,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth:: @ 8169
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest:: @ 8169194
+PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest::
 	setobjectxyperm LOCALID_RIVAL, 6, 10
 	addobject LOCALID_RIVAL
 	playbgm MUS_ENCOUNTER_RIVAL, 0
@@ -167,7 +167,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest:: @ 8
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterSouth:: @ 81691BB
+PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterSouth::
 	setobjectxyperm LOCALID_RIVAL, 6, 10
 	addobject LOCALID_RIVAL
 	playbgm MUS_ENCOUNTER_RIVAL, 0
@@ -176,40 +176,40 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterSouth:: @ 8169
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakNorth:: @ 81691DB
+PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakNorth::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakWest:: @ 81691E6
+PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakWest::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskNorth:: @ 81691F1
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskNorth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDesk
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskSouth:: @ 81691FC
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskSouth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDeskSouth
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDesk
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDesk
 	waitmovement LOCALID_PROF_OAK
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskEast:: @ 8169215
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskEast::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDesk
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDeskEast
 	waitmovement LOCALID_PROF_OAK
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskWest:: @ 8169227
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskWest::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDesk
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDesk:: @ 8169232
+PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDesk::
 	walk_up
 	walk_left
 	walk_in_place_fastest_up
@@ -217,7 +217,7 @@ PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDesk:: @ 8169232
 	delay_4
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDeskSouth:: @ 8169238
+PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDeskSouth::
 	walk_left
 	walk_left
 	walk_up
@@ -225,7 +225,7 @@ PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDeskSouth:: @ 8169238
 	delay_4
 	step_end
 
-PalletTown_ProfessorOaksLab_ChooseStarterScene:: @ 816923E
+PalletTown_ProfessorOaksLab_ChooseStarterScene::
 	lockall
 	textcolor 0
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakEnter
@@ -255,7 +255,7 @@ PalletTown_ProfessorOaksLab_ChooseStarterScene:: @ 816923E
 	releaseall
 	end
 
-PalletTown_ProfessorOaksLab_Movement_OakEnter:: @ 81692B0
+PalletTown_ProfessorOaksLab_Movement_OakEnter::
 	walk_up
 	walk_up
 	walk_up
@@ -264,7 +264,7 @@ PalletTown_ProfessorOaksLab_Movement_OakEnter:: @ 81692B0
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_PlayerEnter:: @ 81692B7
+PalletTown_ProfessorOaksLab_Movement_PlayerEnter::
 	walk_up
 	walk_up
 	walk_up
@@ -275,12 +275,12 @@ PalletTown_ProfessorOaksLab_Movement_PlayerEnter:: @ 81692B7
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalReact:: @ 81692C0
+PalletTown_ProfessorOaksLab_Movement_RivalReact::
 	walk_in_place_up
 	walk_in_place_up
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_LeaveStarterSceneTrigger:: @ 81692C3
+PalletTown_ProfessorOaksLab_EventScript_LeaveStarterSceneTrigger::
 	lockall
 	textcolor 0
 	applymovement LOCALID_PROF_OAK, Movement_FaceDown
@@ -292,29 +292,29 @@ PalletTown_ProfessorOaksLab_EventScript_LeaveStarterSceneTrigger:: @ 81692C3
 	releaseall
 	end
 
-PalletTown_ProfessorOaksLab_Movement_PlayerWalkUp:: @ 81692E5
+PalletTown_ProfessorOaksLab_Movement_PlayerWalkUp::
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattleTriggerLeft:: @ 81692E7
+PalletTown_ProfessorOaksLab_EventScript_RivalBattleTriggerLeft::
 	lockall
 	setvar VAR_TEMP_2, 1
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattleTriggerMid:: @ 81692F3
+PalletTown_ProfessorOaksLab_EventScript_RivalBattleTriggerMid::
 	lockall
 	setvar VAR_TEMP_2, 2
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattleTriggerRight:: @ 81692FF
+PalletTown_ProfessorOaksLab_EventScript_RivalBattleTriggerRight::
 	lockall
 	setvar VAR_TEMP_2, 3
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattle:: @ 816930B
+PalletTown_ProfessorOaksLab_EventScript_RivalBattle::
 	textcolor 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
@@ -337,7 +337,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattle:: @ 816930B
 @ both the player and rival can be in 3 different positions, so theres 9 different approaches
 @ NOTE: Names below refer to the Rival's mon (e.g. for RivalBattleSquirtle, player has Charmander)
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle:: @ 816935A
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle::
 	compare VAR_TEMP_2, 1
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleLeft
 	compare VAR_TEMP_2, 2
@@ -346,30 +346,30 @@ PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle:: @ 81693
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleRight
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleLeft:: @ 816937C
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleLeft::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleLeft
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleMid:: @ 816938C
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleMid::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleMid
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleRight:: @ 816939C
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleRight::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleRight
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle:: @ 81693AC
+PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle::
 	trainerbattle_earlyrival TRAINER_RIVAL_OAKS_LAB_SQUIRTLE, RIVAL_BATTLE_TUTORIAL, PalletTown_ProfessorOaksLab_Text_RivalDefeat, Text_RivalVictory
 	goto PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleLeft:: @ 81693C0
+PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleLeft::
 	walk_left
 	walk_left
 	walk_left
@@ -378,7 +378,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleLeft:: @ 8169
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleMid:: @ 81693C7
+PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleMid::
 	walk_left
 	walk_left
 	walk_left
@@ -386,14 +386,14 @@ PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleMid:: @ 81693
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleRight:: @ 81693CD
+PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleRight::
 	walk_left
 	walk_left
 	walk_down
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander:: @ 81693D2
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander::
 	compare VAR_TEMP_2, 1
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft
 	compare VAR_TEMP_2, 2
@@ -402,30 +402,30 @@ PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander:: @ 816
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderRight
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft:: @ 81693F4
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderLeft
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderMid:: @ 8169404
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderMid::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderMid
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderRight:: @ 8169414
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderRight::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderRight
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander:: @ 8169424
+PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander::
 	trainerbattle_earlyrival TRAINER_RIVAL_OAKS_LAB_CHARMANDER, RIVAL_BATTLE_TUTORIAL, PalletTown_ProfessorOaksLab_Text_RivalDefeat, Text_RivalVictory
 	goto PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderLeft:: @ 8169438
+PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderLeft::
 	walk_left
 	walk_left
 	walk_left
@@ -435,7 +435,7 @@ PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderLeft:: @ 8169438
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderMid:: @ 8169440
+PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderMid::
 	walk_left
 	walk_left
 	walk_left
@@ -444,7 +444,7 @@ PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderMid:: @ 8169440
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderRight:: @ 8169447
+PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderRight::
 	walk_left
 	walk_left
 	walk_left
@@ -452,7 +452,7 @@ PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderRight:: @ 816944
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur:: @ 816944D
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur::
 	compare VAR_TEMP_2, 1
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurLeft
 	compare VAR_TEMP_2, 2
@@ -461,30 +461,30 @@ PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur:: @ 8169
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurRight
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurLeft:: @ 816946F
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurLeft::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurLeft
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurMid:: @ 816947F
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurMid::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurMid
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurRight:: @ 816948F
+PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurRight::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurRight
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur:: @ 816949F
+PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur::
 	trainerbattle_earlyrival TRAINER_RIVAL_OAKS_LAB_BULBASAUR, RIVAL_BATTLE_TUTORIAL, PalletTown_ProfessorOaksLab_Text_RivalDefeat, Text_RivalVictory
 	goto PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurLeft:: @ 81694B3
+PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurLeft::
 	walk_left
 	walk_left
 	walk_left
@@ -492,20 +492,20 @@ PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurLeft:: @ 816
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurMid:: @ 81694B9
+PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurMid::
 	walk_left
 	walk_left
 	walk_down
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurRight:: @ 81694BE
+PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurRight::
 	walk_left
 	walk_down
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle:: @ 81694C2
+PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle::
 	special HealPlayerParty
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon
 	closemessage
@@ -524,25 +524,25 @@ PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle:: @ 81694C2
 	releaseall
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleLeft:: @ 8169504
+PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleLeft::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleLeft
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattle
 	waitmovement LOCALID_RIVAL
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleMid:: @ 8169516
+PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleMid::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleMid
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattle
 	waitmovement LOCALID_RIVAL
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleRight:: @ 8169528
+PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleRight::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleRight
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattleRight
 	waitmovement LOCALID_RIVAL
 	return
 
-PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleLeft:: @ 816953A
+PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleLeft::
 	walk_right
 	walk_down
 	walk_down
@@ -552,7 +552,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleLeft:: @ 816953A
 	delay_8
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleRight:: @ 8169542
+PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleRight::
 	walk_left
 	walk_down
 	walk_down
@@ -562,7 +562,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleRight:: @ 8169542
 	delay_8
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleMid:: @ 816954A
+PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleMid::
 	walk_right
 	walk_down
 	walk_down
@@ -573,7 +573,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalExitAfterBattleMid:: @ 816954A
 	delay_8
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattle:: @ 8169553
+PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattle::
 	delay_16
 	delay_8
 	walk_in_place_fastest_right
@@ -581,7 +581,7 @@ PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattle:: @ 8169553
 	walk_in_place_fastest_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattleRight:: @ 8169559
+PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattleRight::
 	delay_16
 	delay_8
 	walk_in_place_fastest_left
@@ -589,7 +589,7 @@ PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattleRight:: @ 81
 	walk_in_place_fastest_down
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_Rival:: @ 816955F
+PalletTown_ProfessorOaksLab_EventScript_Rival::
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
@@ -600,17 +600,17 @@ PalletTown_ProfessorOaksLab_EventScript_Rival:: @ 816955F
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalWaitingForStarter:: @ 8169581
+PalletTown_ProfessorOaksLab_EventScript_RivalWaitingForStarter::
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalGoChoosePlayer
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter:: @ 816958B
+PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter::
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ProfOak:: @ 8169595
+PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	lock
 	faceplayer
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
@@ -633,22 +633,22 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak:: @ 8169595
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex:: @ 8169600
+PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex::
 	msgbox PokedexRating_Text_ThankYouMadeDreamReality
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_OakCanReachNextTownWithMon:: @ 816960A
+PalletTown_ProfessorOaksLab_EventScript_OakCanReachNextTownWithMon::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_OakBattleMonForItToGrow:: @ 8169614
+PalletTown_ProfessorOaksLab_EventScript_OakBattleMonForItToGrow::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene:: @ 816961E
+PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakHaveSomethingForMe
 	textcolor 3
 	playfanfare MUS_OBTAIN_TMHM
@@ -760,86 +760,86 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene:: @ 816961E
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth:: @ 8169845
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesOver
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth:: @ 8169850
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesOverSouth
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast:: @ 816985B
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesOver
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerFaceOakForDexEast
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest:: @ 816986D
+PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakBringDexesOver
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_Movement_PlayerFaceOakForDexEast:: @ 8169878
+PalletTown_ProfessorOaksLab_Movement_PlayerFaceOakForDexEast::
 	delay_16
 	delay_8
 	walk_in_place_fastest_right
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakBringDexesOver:: @ 816987C
+PalletTown_ProfessorOaksLab_Movement_OakBringDexesOver::
 	walk_right
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakBringDexesOverSouth:: @ 816987F
+PalletTown_ProfessorOaksLab_Movement_OakBringDexesOverSouth::
 	walk_down
 	walk_right
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskNorth:: @ 8169882
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskNorth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakWalkToDesk
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskSouth:: @ 816988D
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskSouth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakWalkToDeskSouth
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDesk
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDesk
 	waitmovement LOCALID_PROF_OAK
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskEast:: @ 81698A6
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskEast::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakWalkToDesk
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDeskEast
 	waitmovement LOCALID_PROF_OAK
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskWest:: @ 81698B8
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskWest::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakWalkToDesk
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDeskEast:: @ 81698C3
+PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDeskEast::
 	delay_16
 	delay_8
 	walk_in_place_fastest_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDesk:: @ 81698C7
+PalletTown_ProfessorOaksLab_Movement_WatchOakWalkToDesk::
 	delay_16
 	delay_8
 	walk_in_place_fastest_left
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakWalkToDesk:: @ 81698CB
+PalletTown_ProfessorOaksLab_Movement_OakWalkToDesk::
 	walk_up
 	walk_left
 	delay_16
 	walk_in_place_fastest_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakWalkToDeskSouth:: @ 81698D0
+PalletTown_ProfessorOaksLab_Movement_OakWalkToDeskSouth::
 	walk_left
 	walk_left
 	walk_up
@@ -847,7 +847,7 @@ PalletTown_ProfessorOaksLab_Movement_OakWalkToDeskSouth:: @ 81698D0
 	walk_in_place_fastest_right
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls:: @ 81698D6
+PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls::
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
@@ -859,13 +859,13 @@ PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls:: @ 81698D6
 	goto PalletTown_ProfessorOaksLab_EventScript_RatePokedex
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RatePokedex:: @ 8169903
+PalletTown_ProfessorOaksLab_EventScript_RatePokedex::
 	call PokedexRating_EventScript_RateInPerson
 	goto_if_set FLAG_OAK_SAW_DEX_COMPLETION, PalletTown_ProfessorOaksLab_EventScript_DexCompleted
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_DexCompleted:: @ 8169913
+PalletTown_ProfessorOaksLab_EventScript_DexCompleted::
 	closemessage
 	delay 40
 	message PokedexRating_Text_Wroooaaarrr
@@ -887,27 +887,27 @@ PalletTown_ProfessorOaksLab_EventScript_DexCompleted:: @ 8169913
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_OakExcitedNorth:: @ 8169964
+PalletTown_ProfessorOaksLab_EventScript_OakExcitedNorth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakExcitedNorth
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakExcitedSouth:: @ 816996F
+PalletTown_ProfessorOaksLab_EventScript_OakExcitedSouth::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakExcitedSouth
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakExcitedEast:: @ 816997A
+PalletTown_ProfessorOaksLab_EventScript_OakExcitedEast::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakExcitedEast
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_OakExcitedWest:: @ 8169985
+PalletTown_ProfessorOaksLab_EventScript_OakExcitedWest::
 	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakExcitedWest
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_Movement_OakExcitedNorth:: @ 8169990
+PalletTown_ProfessorOaksLab_Movement_OakExcitedNorth::
 	walk_in_place_down
 	walk_in_place_fast_down
 	walk_in_place_down
@@ -916,7 +916,7 @@ PalletTown_ProfessorOaksLab_Movement_OakExcitedNorth:: @ 8169990
 	walk_in_place_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakExcitedSouth:: @ 8169997
+PalletTown_ProfessorOaksLab_Movement_OakExcitedSouth::
 	walk_in_place_up
 	walk_in_place_fast_up
 	walk_in_place_up
@@ -925,7 +925,7 @@ PalletTown_ProfessorOaksLab_Movement_OakExcitedSouth:: @ 8169997
 	walk_in_place_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakExcitedEast:: @ 816999E
+PalletTown_ProfessorOaksLab_Movement_OakExcitedEast::
 	walk_in_place_left
 	walk_in_place_fast_left
 	walk_in_place_left
@@ -934,7 +934,7 @@ PalletTown_ProfessorOaksLab_Movement_OakExcitedEast:: @ 816999E
 	walk_in_place_left
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_OakExcitedWest:: @ 81699A5
+PalletTown_ProfessorOaksLab_Movement_OakExcitedWest::
 	walk_in_place_right
 	walk_in_place_fast_right
 	walk_in_place_right
@@ -944,7 +944,7 @@ PalletTown_ProfessorOaksLab_Movement_OakExcitedWest:: @ 81699A5
 	step_end
 
 @ Unused
-Movement_1699AC:: @ 81699AC
+Movement_1699AC::
 	walk_left
 	walk_in_place_fastest_down
 	delay_8
@@ -983,7 +983,7 @@ Movement_1699C5:
 	delay_16
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene:: @ 81699CE
+PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	call PokedexRating_EventScript_RateInPerson
 	closemessage
 	compare VAR_0x8009, 60
@@ -994,11 +994,11 @@ PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene:: @ 81699CE
 	goto PalletTown_ProfessorOaksLab_EventScript_NationalDexScene
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene:: @ 81699F9
+PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene::
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls:: @ 81699FB
+PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	goto_if_set FLAG_OAK_SKIP_22_RIVAL_CHECK, PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
@@ -1009,30 +1009,30 @@ PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls:: @ 81699FB
 	goto PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls:: @ 8169A34
+PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls::
 	compare VAR_MAP_SCENE_ROUTE22, 2
 	goto_if_ge PalletTown_ProfessorOaksLab_EventScript_GivePlayerMoreBalls
 	goto PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_GivePlayerMoreBalls:: @ 8169A45
+PalletTown_ProfessorOaksLab_EventScript_GivePlayerMoreBalls::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakAddedNothingToPokedex
 	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
 	setflag FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait:: @ 8169A6E
+PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakMonsAroundWorldWait
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_PlayerAlreadyGotBalls:: @ 8169A78
+PalletTown_ProfessorOaksLab_EventScript_PlayerAlreadyGotBalls::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakComeSeeMeSometime
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth:: @ 8169A82
+PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth::
 	setobjectxyperm LOCALID_RIVAL, 5, 10
 	addobject LOCALID_RIVAL
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterNorth
@@ -1040,7 +1040,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth:: @ 8169A82
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest:: @ 8169A9E
+PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest::
 	setobjectxyperm LOCALID_RIVAL, 6, 10
 	addobject LOCALID_RIVAL
 	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFastestDown
@@ -1049,7 +1049,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest:: @ 8169A9E
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth:: @ 8169AC1
+PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth::
 	setobjectxyperm LOCALID_RIVAL, 6, 10
 	addobject LOCALID_RIVAL
 	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFastestDown
@@ -1057,7 +1057,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth:: @ 8169AC1
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth:: @ 8169ADD
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth::
 	applymovement LOCALID_PROF_OAK, Movement_FacePlayer
 	waitmovement 0
 	delay 15
@@ -1065,7 +1065,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth:: @ 8
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest:: @ 8169AF5
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest::
 	applymovement LOCALID_PROF_OAK, Movement_FacePlayer
 	waitmovement 0
 	delay 15
@@ -1074,7 +1074,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest:: @ 81
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalEast:: @ 8169B14
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalEast::
 	applymovement LOCALID_PROF_OAK, Movement_FacePlayer
 	waitmovement 0
 	delay 15
@@ -1083,46 +1083,46 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalEast:: @ 81
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerNorth:: @ 8169B33
+PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerNorth::
 	applymovement LOCALID_RIVAL, Movement_FacePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerSouth:: @ 8169B45
+PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerSouth::
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestUp
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest:: @ 8169B57
+PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest::
 	applymovement LOCALID_RIVAL, Movement_FacePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_RivalExitNorth:: @ 8169B69
+PalletTown_ProfessorOaksLab_EventScript_RivalExitNorth::
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterEastWest
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalExit
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_RivalExit:: @ 8169B7B
+PalletTown_ProfessorOaksLab_EventScript_RivalExit::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalExit
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalNorth:: @ 8169B86
+PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalNorth::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterEastWest:: @ 8169B91
+PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterEastWest::
 	delay_4
 	walk_in_place_fastest_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterNorth:: @ 8169B94
+PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterNorth::
 	walk_in_place_fastest_down
 	delay_16
 	delay_16
@@ -1133,7 +1133,7 @@ PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterNorth:: @ 8169B94
 	walk_in_place_fastest_left
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalEnter:: @ 8169B9D
+PalletTown_ProfessorOaksLab_Movement_RivalEnter::
 	walk_up
 	walk_up
 	walk_up
@@ -1142,7 +1142,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalEnter:: @ 8169B9D
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalExit:: @ 8169BA4
+PalletTown_ProfessorOaksLab_Movement_RivalExit::
 	walk_down
 	walk_down
 	walk_down
@@ -1151,7 +1151,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalExit:: @ 8169BA4
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall:: @ 8169BAB
+PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
 	lock
 	faceplayer
 	setvar PLAYER_STARTER_NUM, 0
@@ -1166,7 +1166,7 @@ PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall:: @ 8169BAB
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice:: @ 8169BE1
+PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice::
 	applymovement LOCALID_PROF_OAK, Movement_FaceRight
 	waitmovement 0
 	drawmonpic PLAYER_STARTER_SPECIES, 10, 3
@@ -1179,7 +1179,7 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice:: @ 8169BE1
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur:: @ 8169C14
+PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ChoseStarter
@@ -1187,7 +1187,7 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur:: @ 8169C14
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle:: @ 8169C33
+PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ChoseStarter
@@ -1195,7 +1195,7 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle:: @ 8169C33
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander:: @ 8169C52
+PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ChoseStarter
@@ -1203,12 +1203,12 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander:: @ 8169C52
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter:: @ 8169C71
+PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter::
 	erasemonpic
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ChoseStarter:: @ 8169C74
+PalletTown_ProfessorOaksLab_EventScript_ChoseStarter::
 	erasemonpic
 	removeobject VAR_LAST_TALKED
 	msgbox PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic
@@ -1229,13 +1229,13 @@ PalletTown_ProfessorOaksLab_EventScript_ChoseStarter:: @ 8169C74
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter
 	end
 
-EventScript_GiveNicknameToStarter:: @ 8169CCC
+EventScript_GiveNicknameToStarter::
 	setvar VAR_0x8004, 0
 	call EventScript_ChangePokemonNickname
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter:: @ 8169CDC
+PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter::
 	closemessage
 	compare PLAYER_STARTER_NUM, 0
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander
@@ -1245,25 +1245,25 @@ PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter:: @ 8169CDC
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander:: @ 8169CFF
+PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToCharmander
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle:: @ 8169D0F
+PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur:: @ 8169D1F
+PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter:: @ 8169D2F
+PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter::
 	textcolor 0
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalIllTakeThisOneThen
 	removeobject RIVAL_STARTER_ID
@@ -1278,11 +1278,11 @@ PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter:: @ 8169D2F
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene:: @ 8169D5C
+PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	return
 
-PalletTown_ProfessorOaksLab_Movement_RivalWalksToCharmander:: @ 8169D62
+PalletTown_ProfessorOaksLab_Movement_RivalWalksToCharmander::
 	walk_down
 	walk_down
 	walk_right
@@ -1293,7 +1293,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalWalksToCharmander:: @ 8169D62
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle:: @ 8169D6B
+PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle::
 	walk_down
 	walk_right
 	walk_right
@@ -1302,7 +1302,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalWalksToSquirtle:: @ 8169D6B
 	walk_in_place_fastest_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur:: @ 8169D72
+PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur::
 	walk_down
 	walk_right
 	walk_right
@@ -1310,7 +1310,7 @@ PalletTown_ProfessorOaksLab_Movement_RivalWalksToBulbasaur:: @ 8169D72
 	walk_in_place_fastest_up
 	step_end
 
-PalletTown_ProfessorOaksLab_EventScript_SquirtleBall:: @ 8169D78
+PalletTown_ProfessorOaksLab_EventScript_SquirtleBall::
 	lock
 	faceplayer
 	setvar PLAYER_STARTER_NUM, 1
@@ -1325,7 +1325,7 @@ PalletTown_ProfessorOaksLab_EventScript_SquirtleBall:: @ 8169D78
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_CharmanderBall:: @ 8169DAE
+PalletTown_ProfessorOaksLab_EventScript_CharmanderBall::
 	lock
 	faceplayer
 	setvar PLAYER_STARTER_NUM, 2
@@ -1340,12 +1340,12 @@ PalletTown_ProfessorOaksLab_EventScript_CharmanderBall:: @ 8169DAE
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_LastPokeBall:: @ 8169DE4
+PalletTown_ProfessorOaksLab_EventScript_LastPokeBall::
 	msgbox PalletTown_ProfessorOaksLab_Text_OaksLastMon
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Aide1:: @ 8169DEE
+PalletTown_ProfessorOaksLab_EventScript_Aide1::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear
@@ -1353,13 +1353,13 @@ PalletTown_ProfessorOaksLab_EventScript_Aide1:: @ 8169DEE
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear:: @ 8169E03
+PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear::
 	famechecker FAMECHECKER_OAK, 5
 	msgbox PalletTown_ProfessorOaksLab_Text_OakIsGoingToHaveRadioShow
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Aide2:: @ 8169E1A
+PalletTown_ProfessorOaksLab_EventScript_Aide2::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear
@@ -1367,13 +1367,13 @@ PalletTown_ProfessorOaksLab_EventScript_Aide2:: @ 8169E1A
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear:: @ 8169E2F
+PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear::
 	famechecker FAMECHECKER_DAISY, 0
 	msgbox PalletTown_ProfessorOaksLab_Text_DaisyWillGroomMons
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Aide3:: @ 8169E46
+PalletTown_ProfessorOaksLab_EventScript_Aide3::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_OAK, 2
@@ -1381,19 +1381,19 @@ PalletTown_ProfessorOaksLab_EventScript_Aide3:: @ 8169E46
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Pokedex:: @ 8169E5F
+PalletTown_ProfessorOaksLab_EventScript_Pokedex::
 	msgbox PalletTown_ProfessorOaksLab_Text_BlankEncyclopedia, MSGBOX_NPC
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Computer:: @ 8169E68
+PalletTown_ProfessorOaksLab_EventScript_Computer::
 	msgbox PalletTown_ProfessorOaksLab_Text_EmailMessage, MSGBOX_SIGN
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_LeftSign:: @ 8169E71
+PalletTown_ProfessorOaksLab_EventScript_LeftSign::
 	msgbox PalletTown_ProfessorOaksLab_Text_PressStartToOpenMenu, MSGBOX_SIGN
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RightSign:: @ 8169E7A
+PalletTown_ProfessorOaksLab_EventScript_RightSign::
 	lockall
 	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	goto_if_ge PalletTown_ProfessorOaksLab_EventScript_RightSignAlt
@@ -1401,7 +1401,7 @@ PalletTown_ProfessorOaksLab_EventScript_RightSign:: @ 8169E7A
 	releaseall
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_RightSignAlt:: @ 8169E90
+PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
 	msgbox PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints
 	releaseall
 	end

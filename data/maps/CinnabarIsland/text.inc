@@ -1,35 +1,35 @@
-CinnabarIsland_Text_DoorIsLocked:: @ 8180B20
+CinnabarIsland_Text_DoorIsLocked::
     .string "The door is locked…$"
 
-CinnabarIsland_Text_BlaineLivedHereSinceBeforeLab:: @ 8180B34
+CinnabarIsland_Text_BlaineLivedHereSinceBeforeLab::
     .string "CINNABAR GYM's BLAINE is quite the\n"
     .string "odd fellow.\p"
     .string "He's lived on the island since way\n"
     .string "before the LAB was built.$"
 
-CinnabarIsland_Text_ScientistsExperimentInMansion:: @ 8180BA0
+CinnabarIsland_Text_ScientistsExperimentInMansion::
     .string "Scientists conduct experiments \n"
     .string "in the burned-out building.\p"
     .string "You know, the one they call the\n"
     .string "POKéMON MANSION.$"
 
-CinnabarIsland_Text_IslandSign:: @ 8180C0D
+CinnabarIsland_Text_IslandSign::
     .string "CINNABAR ISLAND\n"
     .string "The Fiery Town of Burning Desire$"
 
-CinnabarIsland_Text_PokemonLab:: @ 8180C3E
+CinnabarIsland_Text_PokemonLab::
     .string "POKéMON LAB$"
 
-CinnabarIsland_Text_GymSign:: @ 8180C4A
+CinnabarIsland_Text_GymSign::
     .string "CINNABAR ISLAND POKéMON GYM\n"
     .string "LEADER: BLAINE\l"
     .string "The Hotheaded Quiz Master!$"
 
-CinnabarIsland_Text_HeyIfItIsntPlayer:: @ 8180C90
+CinnabarIsland_Text_HeyIfItIsntPlayer::
     .string "Huh?\n"
     .string "Hey, if it isn't {PLAYER}!$"
 
-CinnabarIsland_Text_ComeWithMeToOneIsland:: @ 8180CAA
+CinnabarIsland_Text_ComeWithMeToOneIsland::
     .string "Look, it's me, BILL.\n"
     .string "Long time no see!\p"
     .string "I hope you're still using my\n"
@@ -43,11 +43,11 @@ CinnabarIsland_Text_ComeWithMeToOneIsland:: @ 8180CAA
     .string "How about it?\n"
     .string "Do you feel like coming with me?$"
 
-CinnabarIsland_Text_AllRightLetsGo:: @ 8180DDD
+CinnabarIsland_Text_AllRightLetsGo::
     .string "All right, then.\n"
     .string "Let's go!$"
 
-CinnabarIsland_Text_IllBeWaitingInPokeCenter:: @ 8180DF8
+CinnabarIsland_Text_IllBeWaitingInPokeCenter::
     .string "What, are you too busy?\p"
     .string "Well, all right.\n"
     .string "The boat hasn't arrived yet anyway.\p"
@@ -56,13 +56,13 @@ CinnabarIsland_Text_IllBeWaitingInPokeCenter:: @ 8180DF8
     .string "Come see me when you're done with\n"
     .string "your business here.$"
 
-CinnabarIsland_Text_MyPalsBoatArrived:: @ 8180EAD
+CinnabarIsland_Text_MyPalsBoatArrived::
     .string "Looks like my pal's boat arrived,\n"
     .string "too.\p"
     .string "He sent it specially here to\n"
     .string "CINNABAR to pick me up.$"
 
-CinnabarIsland_Text_IfYouHaveTriPassYouCanGoAgain:: @ 8180F09
+CinnabarIsland_Text_IfYouHaveTriPassYouCanGoAgain::
     .string "Hey, wasn't that a long cruise?\p"
     .string "My buddy CELIO seemed to enjoy\n"
     .string "your company.\p"

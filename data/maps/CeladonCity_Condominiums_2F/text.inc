@@ -1,3 +1,3 @@
-CeladonCity_Condominiums_2F_Text_GameFreakMeetingRoom:: @ 81962A7
+CeladonCity_Condominiums_2F_Text_GameFreakMeetingRoom::
     .string "GAME FREAK Meeting Room$"
 

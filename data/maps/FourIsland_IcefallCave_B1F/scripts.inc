@@ -1,2 +1,2 @@
-FourIsland_IcefallCave_B1F_MapScripts:: @ 8163D81
+FourIsland_IcefallCave_B1F_MapScripts::
 	.byte 0

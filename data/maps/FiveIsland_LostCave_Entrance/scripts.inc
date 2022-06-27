@@ -1,7 +1,7 @@
-FiveIsland_LostCave_Entrance_MapScripts:: @ 8164BEC
+FiveIsland_LostCave_Entrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FiveIsland_LostCave_Entrance_OnTransition
 	.byte 0
 
-FiveIsland_LostCave_Entrance_OnTransition:: @ 8164BF2
+FiveIsland_LostCave_Entrance_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE
 	end

@@ -1,7 +1,7 @@
-SSAnne_1F_Room6_MapScripts:: @ 8160DF2
+SSAnne_1F_Room6_MapScripts::
 	.byte 0
 
-SSAnne_1F_Room6_EventScript_Woman:: @ 8160DF3
+SSAnne_1F_Room6_EventScript_Woman::
 	lock
 	faceplayer
 	msgbox SSAnne_1F_Room6_Text_TakeAShortRest, MSGBOX_YESNO
@@ -13,7 +13,7 @@ SSAnne_1F_Room6_EventScript_Woman:: @ 8160DF3
 	release
 	end
 
-SSAnne_1F_Room6_EventScript_DeclineHeal:: @ 8160E18
+SSAnne_1F_Room6_EventScript_DeclineHeal::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq SSAnne_1F_Room6_EventScript_DeclineHealMale
@@ -21,7 +21,7 @@ SSAnne_1F_Room6_EventScript_DeclineHeal:: @ 8160E18
 	release
 	end
 
-SSAnne_1F_Room6_EventScript_DeclineHealMale:: @ 8160E2E
+SSAnne_1F_Room6_EventScript_DeclineHealMale::
 	msgbox SSAnne_1F_Room6_Text_SorryYouLookLikeMyBrother
 	release
 	end

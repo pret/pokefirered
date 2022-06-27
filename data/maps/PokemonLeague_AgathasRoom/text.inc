@@ -1,4 +1,4 @@
-PokemonLeague_AgathasRoom_Text_Intro:: @ 817844D
+PokemonLeague_AgathasRoom_Text_Intro::
     .string "I am AGATHA of the ELITE FOUR.\p"
     .string "I hear OAK's taken a lot of\n"
     .string "interest in you, child.\p"
@@ -13,7 +13,7 @@ PokemonLeague_AgathasRoom_Text_Intro:: @ 817844D
     .string "{PLAYER}! I'll show you how a real\n"
     .string "TRAINER battles!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_AgathasRoom_Text_RematchIntro:: @ 817858D
+PokemonLeague_AgathasRoom_Text_RematchIntro::
     .string "I am AGATHA of the ELITE FOUR.\p"
     .string "You're the child that OAK's taken\n"
     .string "under his wing, aren't you?\p"
@@ -28,11 +28,11 @@ PokemonLeague_AgathasRoom_Text_RematchIntro:: @ 817858D
     .string "{PLAYER}! I'll show you how a real\n"
     .string "TRAINER battles!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_AgathasRoom_Text_Defeat:: @ 81786D7
+PokemonLeague_AgathasRoom_Text_Defeat::
     .string "Oh, my!\n"
     .string "You're something special, child!$"
 
-PokemonLeague_AgathasRoom_Text_PostBattle:: @ 8178700
+PokemonLeague_AgathasRoom_Text_PostBattle::
     .string "You win!\p"
     .string "I see what the old duff sees in\n"
     .string "you now.\p"

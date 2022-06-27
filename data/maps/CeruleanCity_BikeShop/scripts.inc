@@ -1,7 +1,7 @@
-CeruleanCity_BikeShop_MapScripts:: @ 816ABBC
+CeruleanCity_BikeShop_MapScripts::
 	.byte 0
 
-CeruleanCity_BikeShop_EventScript_Clerk:: @ 816ABBD
+CeruleanCity_BikeShop_EventScript_Clerk::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle
@@ -17,18 +17,18 @@ CeruleanCity_BikeShop_EventScript_Clerk:: @ 816ABBD
 	end
 
 @ The Bicycle price / players money is never actually checked
-CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle:: @ 816AC07
+CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle::
 	msgbox CeruleanCity_BikeShop_Text_SorryYouCantAffordIt
 	goto CeruleanCity_BikeShop_EventScript_ClerkGoodbye
 	end
 
-CeruleanCity_BikeShop_EventScript_ClerkGoodbye:: @ 816AC15
+CeruleanCity_BikeShop_EventScript_ClerkGoodbye::
 	msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
 	hidemoneybox 0, 0
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher:: @ 816AC22
+CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher::
 	msgbox CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo
 	msgreceiveditem CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle, ITEM_BICYCLE, 1, MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_GOT_BICYCLE
@@ -38,22 +38,22 @@ CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher:: @ 816AC22
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle:: @ 816AC58
+CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle::
 	msgbox CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle
 	release
 	end
 
 @ Unused
-CeruleanCity_BikeShop_EventScript_NoRoomForBicycle:: @ 816AC62
+CeruleanCity_BikeShop_EventScript_NoRoomForBicycle::
 	msgbox CeruleanCity_BikeShop_Text_MakeRoomForBicycle
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_Woman:: @ 816AC6C
+CeruleanCity_BikeShop_EventScript_Woman::
 	msgbox CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe, MSGBOX_NPC
 	end
 
-CeruleanCity_BikeShop_EventScript_Youngster:: @ 816AC75
+CeruleanCity_BikeShop_EventScript_Youngster::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_YoungsterHaveBike
@@ -61,11 +61,11 @@ CeruleanCity_BikeShop_EventScript_Youngster:: @ 816AC75
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_YoungsterHaveBike:: @ 816AC8A
+CeruleanCity_BikeShop_EventScript_YoungsterHaveBike::
 	msgbox CeruleanCity_BikeShop_Text_WowYourBikeIsCool
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_Bicycle:: @ 816AC94
+CeruleanCity_BikeShop_EventScript_Bicycle::
 	msgbox CeruleanCity_BikeShop_Text_ShinyNewBicycle, MSGBOX_SIGN
 	end

@@ -1,18 +1,18 @@
-CeladonCity_Hotel_MapScripts:: @ 816D283
+CeladonCity_Hotel_MapScripts::
 	.byte 0
 
-CeladonCity_Hotel_EventScript_Receptionist:: @ 816D284
+CeladonCity_Hotel_EventScript_Receptionist::
 	msgbox CeladonCity_Hotel_Text_ThisHotelIsForPeople, MSGBOX_NPC
 	end
 
-CeladonCity_Hotel_EventScript_Beauty:: @ 816D28D
+CeladonCity_Hotel_EventScript_Beauty::
 	msgbox CeladonCity_Hotel_Text_OnVacationWithBrotherAndBoyfriend, MSGBOX_NPC
 	end
 
-CeladonCity_Hotel_EventScript_BeautyBoyfriend:: @ 816D296
+CeladonCity_Hotel_EventScript_BeautyBoyfriend::
 	msgbox CeladonCity_Hotel_Text_WhyDidSheBringBrother, MSGBOX_NPC
 	end
 
-CeladonCity_Hotel_EventScript_BeautyBrother:: @ 816D29F
+CeladonCity_Hotel_EventScript_BeautyBrother::
 	msgbox CeladonCity_Hotel_Text_SisBroughtMeOnVacation, MSGBOX_NPC
 	end

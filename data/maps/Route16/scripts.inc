@@ -1,35 +1,35 @@
-Route16_MapScripts:: @ 81680E5
+Route16_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route16_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route16_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route16_OnWarp
 	.byte 0
 
-Route16_OnResume:: @ 81680F5
+Route16_OnResume::
 	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, Route16_EventScript_RemoveSnorlax
 	end
 
-Route16_EventScript_RemoveSnorlax:: @ 81680FF
+Route16_EventScript_RemoveSnorlax::
 	removeobject VAR_LAST_TALKED
 	return
 
-Route16_OnTransition:: @ 8168103
+Route16_OnTransition::
 	compare VAR_MAP_SCENE_ROUTE16, 1
 	call_if_eq Route16_OnTransitionCyclingRoad
 	end
 
-Route16_OnTransitionCyclingRoad:: @ 816810F
+Route16_OnTransitionCyclingRoad::
 	setflag FLAG_SYS_ON_CYCLING_ROAD
 	return
 
-Route16_OnWarp:: @ 8168113
+Route16_OnWarp::
 	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route16_OnWarpCyclingRoad
 	.2byte 0
 
-Route16_OnWarpCyclingRoad:: @ 816811D
+Route16_OnWarpCyclingRoad::
 	special ForcePlayerOntoBike
 	end
 
-Route16_EventScript_Snorlax:: @ 8168121
+Route16_EventScript_Snorlax::
 	lock
 	faceplayer
 	goto_if_unset FLAG_GOT_POKE_FLUTE, Route16_EventScript_SnorlaxNoPokeFlute
@@ -58,24 +58,24 @@ Route16_EventScript_Snorlax:: @ 8168121
 	release
 	end
 
-Route16_EventScript_DontUsePokeFlute:: @ 8168197
+Route16_EventScript_DontUsePokeFlute::
 	release
 	end
 
-Route16_EventScript_FoughtSnorlax:: @ 8168199
+Route16_EventScript_FoughtSnorlax::
 	msgbox Text_SnorlaxReturnedToMountains
 	release
 	end
 
-Route16_EventScript_SnorlaxNoPokeFlute:: @ 81681A3
+Route16_EventScript_SnorlaxNoPokeFlute::
 	msgbox Route16_Text_MonSprawledOutInSlumber
 	release
 	end
 
-Route16_EventScript_CyclingRoadSign:: @ 81681AD
+Route16_EventScript_CyclingRoadSign::
 	msgbox Route16_Text_CyclingRoadSign, MSGBOX_SIGN
 	end
 
-Route16_EventScript_RouteSign:: @ 81681B6
+Route16_EventScript_RouteSign::
 	msgbox Route16_Text_RouteSign, MSGBOX_SIGN
 	end

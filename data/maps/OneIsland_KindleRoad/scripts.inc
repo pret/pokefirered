@@ -1,10 +1,10 @@
-OneIsland_KindleRoad_MapScripts:: @ 8168758
+OneIsland_KindleRoad_MapScripts::
 	.byte 0
 
-OneIsland_KindleRoad_EventScript_RouteSign:: @ 8168759
+OneIsland_KindleRoad_EventScript_RouteSign::
 	msgbox OneIsland_KindleRoad_Text_RouteSign, MSGBOX_SIGN
 	end
 
-OneIsland_KindleRoad_EventScript_EmberSpaSign:: @ 8168762
+OneIsland_KindleRoad_EventScript_EmberSpaSign::
 	msgbox OneIsland_KindleRoad_Text_EmberSpaSign, MSGBOX_SIGN
 	end

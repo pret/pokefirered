@@ -1,7 +1,7 @@
-SevenIsland_TanobyRuins_WeepthChamber_MapScripts:: @ 8164CEA
+SevenIsland_TanobyRuins_WeepthChamber_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TanobyRuins_WeepthChamber_OnTransition
 	.byte 0
 
-SevenIsland_TanobyRuins_WeepthChamber_OnTransition:: @ 8164CF0
+SevenIsland_TanobyRuins_WeepthChamber_OnTransition::
 	call EventScript_TryDarkenRuins
 	end

@@ -1,49 +1,49 @@
-PokemonTower_5F_Text_RestHereInPurifiedSpace:: @ 817A0E3
+PokemonTower_5F_Text_RestHereInPurifiedSpace::
     .string "Come, child!\n"
     .string "I have purified this space.\l"
     .string "You can rest here.$"
 
-PokemonTower_5F_Text_TammyIntro:: @ 817A11F
+PokemonTower_5F_Text_TammyIntro::
     .string "Give…me…\n"
     .string "your…all…$"
 
-PokemonTower_5F_Text_TammyDefeat:: @ 817A132
+PokemonTower_5F_Text_TammyDefeat::
     .string "Gasp!$"
 
-PokemonTower_5F_Text_TammyPostBattle:: @ 817A138
+PokemonTower_5F_Text_TammyPostBattle::
     .string "I was under possession.$"
 
-PokemonTower_5F_Text_RuthIntro:: @ 817A150
+PokemonTower_5F_Text_RuthIntro::
     .string "You…shall…\n"
     .string "join…us…$"
 
-PokemonTower_5F_Text_RuthDefeat:: @ 817A164
+PokemonTower_5F_Text_RuthDefeat::
     .string "What a nightmare!$"
 
-PokemonTower_5F_Text_RuthPostBattle:: @ 817A176
+PokemonTower_5F_Text_RuthPostBattle::
     .string "I was possessed.$"
 
-PokemonTower_5F_Text_KarinaIntro:: @ 817A187
+PokemonTower_5F_Text_KarinaIntro::
     .string "Zombies!$"
 
-PokemonTower_5F_Text_KarinaDefeat:: @ 817A190
+PokemonTower_5F_Text_KarinaDefeat::
     .string "Ha?$"
 
-PokemonTower_5F_Text_KarinaPostBattle:: @ 817A194
+PokemonTower_5F_Text_KarinaPostBattle::
     .string "I regained my senses.$"
 
-PokemonTower_5F_Text_JanaeIntro:: @ 817A1AA
+PokemonTower_5F_Text_JanaeIntro::
     .string "Urgah…\n"
     .string "Urff…$"
 
-PokemonTower_5F_Text_JanaeDefeat:: @ 817A1B7
+PokemonTower_5F_Text_JanaeDefeat::
     .string "Whoo!$"
 
-PokemonTower_5F_Text_JanaePostBattle:: @ 817A1BD
+PokemonTower_5F_Text_JanaePostBattle::
     .string "I fell to evil spirits despite my\n"
     .string "training in the mountains…$"
 
-PokemonTower_5F_Text_PurifiedZoneMonsFullyHealed:: @ 817A1FA
+PokemonTower_5F_Text_PurifiedZoneMonsFullyHealed::
     .string "Entered the purified and protected\n"
     .string "zone.\p"
     .string "{PLAYER}'s POKéMON were fully\n"

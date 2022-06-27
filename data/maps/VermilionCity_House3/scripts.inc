@@ -1,15 +1,15 @@
-VermilionCity_House3_MapScripts:: @ 816BAA9
+VermilionCity_House3_MapScripts::
 	.byte 0
 
-VermilionCity_House3_EventScript_Boy:: @ 816BAAA
+VermilionCity_House3_EventScript_Boy::
 	msgbox VermilionCity_House3_Text_PidgeyFlyLetterToSaffron, MSGBOX_NPC
 	end
 
-VermilionCity_House3_EventScript_Lass:: @ 816BAB3
+VermilionCity_House3_EventScript_Lass::
 	msgbox VermilionCity_House3_Text_SendMyPidgeyToUnionRoom, MSGBOX_NPC
 	end
 
-VermilionCity_House3_EventScript_Pidgey:: @ 816BABC
+VermilionCity_House3_EventScript_Pidgey::
 	lock
 	faceplayer
 	waitse
@@ -19,6 +19,6 @@ VermilionCity_House3_EventScript_Pidgey:: @ 816BABC
 	release
 	end
 
-VermilionCity_House3_EventScript_Letter:: @ 816BACF
+VermilionCity_House3_EventScript_Letter::
 	msgbox VermilionCity_House3_Text_DearPippiLetter, MSGBOX_SIGN
 	end

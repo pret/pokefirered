@@ -1,7 +1,7 @@
-LavenderTown_VolunteerPokemonHouse_MapScripts:: @ 816B149
+LavenderTown_VolunteerPokemonHouse_MapScripts::
 	.byte 0
 
-LavenderTown_VolunteerPokemonHouse_EventScript_MrFuji:: @ 816B14A
+LavenderTown_VolunteerPokemonHouse_EventScript_MrFuji::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_POKE_FLUTE, LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute
@@ -15,17 +15,17 @@ LavenderTown_VolunteerPokemonHouse_EventScript_MrFuji:: @ 816B14A
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute:: @ 816B196
+LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute::
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute:: @ 816B1A0
+LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute::
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_LittleGirl:: @ 816B1AA
+LavenderTown_VolunteerPokemonHouse_EventScript_LittleGirl::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, 0
@@ -33,11 +33,11 @@ LavenderTown_VolunteerPokemonHouse_EventScript_LittleGirl:: @ 816B1AA
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_LittleBoy:: @ 816B1C3
+LavenderTown_VolunteerPokemonHouse_EventScript_LittleBoy::
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_MonsNiceToHug, MSGBOX_NPC
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_Youngster:: @ 816B1CC
+LavenderTown_VolunteerPokemonHouse_EventScript_Youngster::
 	lock
 	faceplayer
 	goto_if_set FLAG_RESCUED_MR_FUJI, LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack
@@ -45,12 +45,12 @@ LavenderTown_VolunteerPokemonHouse_EventScript_Youngster:: @ 816B1CC
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack:: @ 816B1E1
+LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack::
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_MrFujiWasPrayingForCubonesMother
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_Nidorino:: @ 816B1EB
+LavenderTown_VolunteerPokemonHouse_EventScript_Nidorino::
 	lock
 	faceplayer
 	waitse
@@ -60,7 +60,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_Nidorino:: @ 816B1EB
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_Psyduck:: @ 816B1FE
+LavenderTown_VolunteerPokemonHouse_EventScript_Psyduck::
 	lock
 	faceplayer
 	waitse
@@ -70,13 +70,13 @@ LavenderTown_VolunteerPokemonHouse_EventScript_Psyduck:: @ 816B1FE
 	release
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_PokemonFanMagazine:: @ 816B211
+LavenderTown_VolunteerPokemonHouse_EventScript_PokemonFanMagazine::
 	lockall
 	famechecker FAMECHECKER_MRFUJI, 2
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped
 	releaseall
 	end
 
-LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf:: @ 816B229
+LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf::
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_PokemonMagazinesLineShelf, MSGBOX_SIGN
 	end

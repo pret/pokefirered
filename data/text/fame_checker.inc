@@ -800,594 +800,594 @@ gFameCheckerPersonQuote_Giovanni:: @ 0x81B0BB5
 gFameCheckerFlavorTextOriginLocation_ProfOak0:: @ 0x81B0C45
 	.string "PALLET TOWN$"
 
-gFameCheckerFlavorTextOriginLocation_ProfOak1:: @ 81B0C51
+gFameCheckerFlavorTextOriginLocation_ProfOak1::
 	.string "RESEARCH LAB$"
 
-gFameCheckerFlavorTextOriginLocation_ProfOak2:: @ 81B0C5E
+gFameCheckerFlavorTextOriginLocation_ProfOak2::
 	.string "RESEARCH LAB$"
 
-gFameCheckerFlavorTextOriginLocation_ProfOak3:: @ 81B0C6B
+gFameCheckerFlavorTextOriginLocation_ProfOak3::
 	.string "VIRIDIAN CITY$"
 
-gFameCheckerFlavorTextOriginLocation_ProfOak4:: @ 81B0C79
+gFameCheckerFlavorTextOriginLocation_ProfOak4::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_ProfOak5:: @ 81B0C88
+gFameCheckerFlavorTextOriginLocation_ProfOak5::
 	.string "RESEARCH LAB$"
 
-gFameCheckerFlavorTextOriginLocation_Daisy0:: @ 81B0C95
+gFameCheckerFlavorTextOriginLocation_Daisy0::
 	.string "RESEARCH LAB$"
 
-gFameCheckerFlavorTextOriginLocation_Daisy1:: @ 81B0CA2
+gFameCheckerFlavorTextOriginLocation_Daisy1::
 	.string "VERMILION CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Daisy2:: @ 81B0CB1
+gFameCheckerFlavorTextOriginLocation_Daisy2::
 	.string "WATER LABYRINTH$"
 
-gFameCheckerFlavorTextOriginLocation_Daisy3:: @ 81B0CC1
+gFameCheckerFlavorTextOriginLocation_Daisy3::
 	.string "VIRIDIAN CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Daisy4:: @ 81B0CCF
+gFameCheckerFlavorTextOriginLocation_Daisy4::
 	.string "CELADON MANSION$"
 
-gFameCheckerFlavorTextOriginLocation_Daisy5:: @ 81B0CDF
+gFameCheckerFlavorTextOriginLocation_Daisy5::
 	.string "FOUR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Brock0:: @ 81B0CEB
+gFameCheckerFlavorTextOriginLocation_Brock0::
 	.string "PEWTER CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Brock1:: @ 81B0CF7
+gFameCheckerFlavorTextOriginLocation_Brock1::
 	.string "PEWTER GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Brock2:: @ 81B0D02
+gFameCheckerFlavorTextOriginLocation_Brock2::
 	.string "PEWTER CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Brock3:: @ 81B0D0E
+gFameCheckerFlavorTextOriginLocation_Brock3::
 	.string "ROUTE 4$"
 
-gFameCheckerFlavorTextOriginLocation_Brock4:: @ 81B0D16
+gFameCheckerFlavorTextOriginLocation_Brock4::
 	.string "MT. MOON$"
 
-gFameCheckerFlavorTextOriginLocation_Brock5:: @ 81B0D1F
+gFameCheckerFlavorTextOriginLocation_Brock5::
 	.string "PEWTER MUSEUM$"
 
-gFameCheckerFlavorTextOriginLocation_Misty0:: @ 81B0D2D
+gFameCheckerFlavorTextOriginLocation_Misty0::
 	.string "CERULEAN CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Misty1:: @ 81B0D3B
+gFameCheckerFlavorTextOriginLocation_Misty1::
 	.string "CERULEAN GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Misty2:: @ 81B0D48
+gFameCheckerFlavorTextOriginLocation_Misty2::
 	.string "CERULEAN GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Misty3:: @ 81B0D55
+gFameCheckerFlavorTextOriginLocation_Misty3::
 	.string "SEAFOAM ISLANDS$"
 
-gFameCheckerFlavorTextOriginLocation_Misty4:: @ 81B0D65
+gFameCheckerFlavorTextOriginLocation_Misty4::
 	.string "CERULEAN CAPE$"
 
-gFameCheckerFlavorTextOriginLocation_Misty5:: @ 81B0D73
+gFameCheckerFlavorTextOriginLocation_Misty5::
 	.string "CERULEAN CITY$"
 
-gFameCheckerFlavorTextOriginLocation_LtSurge0:: @ 81B0D81
+gFameCheckerFlavorTextOriginLocation_LtSurge0::
 	.string "VERMILION CITY$"
 
-gFameCheckerFlavorTextOriginLocation_LtSurge1:: @ 81B0D90
+gFameCheckerFlavorTextOriginLocation_LtSurge1::
 	.string "VERMILION GYM$"
 
-gFameCheckerFlavorTextOriginLocation_LtSurge2:: @ 81B0D9E
+gFameCheckerFlavorTextOriginLocation_LtSurge2::
 	.string "VERMILION GYM$"
 
-gFameCheckerFlavorTextOriginLocation_LtSurge3:: @ 81B0DAC
+gFameCheckerFlavorTextOriginLocation_LtSurge3::
 	.string "VERMILION GYM$"
 
-gFameCheckerFlavorTextOriginLocation_LtSurge4:: @ 81B0DBA
+gFameCheckerFlavorTextOriginLocation_LtSurge4::
 	.string "VERMILION GYM$"
 
-gFameCheckerFlavorTextOriginLocation_LtSurge5:: @ 81B0DC8
+gFameCheckerFlavorTextOriginLocation_LtSurge5::
 	.string "VERMILION CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Erika0:: @ 81B0DD7
+gFameCheckerFlavorTextOriginLocation_Erika0::
 	.string "CELADON CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Erika1:: @ 81B0DE4
+gFameCheckerFlavorTextOriginLocation_Erika1::
 	.string "CELADON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Erika2:: @ 81B0DF0
+gFameCheckerFlavorTextOriginLocation_Erika2::
 	.string "CELADON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Erika3:: @ 81B0DFC
+gFameCheckerFlavorTextOriginLocation_Erika3::
 	.string "CELADON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Erika4:: @ 81B0E08
+gFameCheckerFlavorTextOriginLocation_Erika4::
 	.string "CELADON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Erika5:: @ 81B0E14
+gFameCheckerFlavorTextOriginLocation_Erika5::
 	.string "CELADON MANSION$"
 
-gFameCheckerFlavorTextOriginLocation_Koga0:: @ 81B0E24
+gFameCheckerFlavorTextOriginLocation_Koga0::
 	.string "FUCHSIA CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Koga1:: @ 81B0E31
+gFameCheckerFlavorTextOriginLocation_Koga1::
 	.string "FUCHSIA GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Koga2:: @ 81B0E3D
+gFameCheckerFlavorTextOriginLocation_Koga2::
 	.string "FUCHSIA GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Koga3:: @ 81B0E49
+gFameCheckerFlavorTextOriginLocation_Koga3::
 	.string "FUCHSIA CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Koga4:: @ 81B0E56
+gFameCheckerFlavorTextOriginLocation_Koga4::
 	.string "FUCHSIA CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Koga5:: @ 81B0E63
+gFameCheckerFlavorTextOriginLocation_Koga5::
 	.string "SAFARI ZONE$"
 
-gFameCheckerFlavorTextOriginLocation_Sabrina0:: @ 81B0E6F
+gFameCheckerFlavorTextOriginLocation_Sabrina0::
 	.string "SAFFRON CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Sabrina1:: @ 81B0E7C
+gFameCheckerFlavorTextOriginLocation_Sabrina1::
 	.string "THREE ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Sabrina2:: @ 81B0E89
+gFameCheckerFlavorTextOriginLocation_Sabrina2::
 	.string "SAFFRON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Sabrina3:: @ 81B0E95
+gFameCheckerFlavorTextOriginLocation_Sabrina3::
 	.string "SAFFRON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Sabrina4:: @ 81B0EA1
+gFameCheckerFlavorTextOriginLocation_Sabrina4::
 	.string "SAFFRON CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Sabrina5:: @ 81B0EAE
+gFameCheckerFlavorTextOriginLocation_Sabrina5::
 	.string "SAFFRON GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Blaine0:: @ 81B0EBA
+gFameCheckerFlavorTextOriginLocation_Blaine0::
 	.string "CINNABAR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Blaine1:: @ 81B0ECA
+gFameCheckerFlavorTextOriginLocation_Blaine1::
 	.string "CINNABAR GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Blaine2:: @ 81B0ED7
+gFameCheckerFlavorTextOriginLocation_Blaine2::
 	.string "CINNABAR GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Blaine3:: @ 81B0EE4
+gFameCheckerFlavorTextOriginLocation_Blaine3::
 	.string "CINNABAR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Blaine4:: @ 81B0EF4
+gFameCheckerFlavorTextOriginLocation_Blaine4::
 	.string "CINNABAR GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Blaine5:: @ 81B0F01
+gFameCheckerFlavorTextOriginLocation_Blaine5::
 	.string "RESORT GORGEOUS$"
 
-gFameCheckerFlavorTextOriginLocation_Lorelei0:: @ 81B0F11
+gFameCheckerFlavorTextOriginLocation_Lorelei0::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Lorelei1:: @ 81B0F20
+gFameCheckerFlavorTextOriginLocation_Lorelei1::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Lorelei2:: @ 81B0F2F
+gFameCheckerFlavorTextOriginLocation_Lorelei2::
 	.string "FOUR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Lorelei3:: @ 81B0F3B
+gFameCheckerFlavorTextOriginLocation_Lorelei3::
 	.string "FIVE ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Lorelei4:: @ 81B0F47
+gFameCheckerFlavorTextOriginLocation_Lorelei4::
 	.string "FOUR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Lorelei5:: @ 81B0F53
+gFameCheckerFlavorTextOriginLocation_Lorelei5::
 	.string "FOUR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Bruno0:: @ 81B0F5F
+gFameCheckerFlavorTextOriginLocation_Bruno0::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Bruno1:: @ 81B0F6E
+gFameCheckerFlavorTextOriginLocation_Bruno1::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Bruno2:: @ 81B0F7D
+gFameCheckerFlavorTextOriginLocation_Bruno2::
 	.string "SAFFRON CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Bruno3:: @ 81B0F8A
+gFameCheckerFlavorTextOriginLocation_Bruno3::
 	.string "EMBER SPA$"
 
-gFameCheckerFlavorTextOriginLocation_Bruno4:: @ 81B0F94
+gFameCheckerFlavorTextOriginLocation_Bruno4::
 	.string "TWO ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Bruno5:: @ 81B0F9F
+gFameCheckerFlavorTextOriginLocation_Bruno5::
 	.string "SEVAULT CANYON$"
 
-gFameCheckerFlavorTextOriginLocation_Agatha0:: @ 81B0FAE
+gFameCheckerFlavorTextOriginLocation_Agatha0::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Agatha1:: @ 81B0FBD
+gFameCheckerFlavorTextOriginLocation_Agatha1::
 	.string "INDIGO PLATEAU$"
 
-gFameCheckerFlavorTextOriginLocation_Agatha2:: @ 81B0FCC
+gFameCheckerFlavorTextOriginLocation_Agatha2::
 	.string "INDIGO PLATEAU$"
 
-gFameCheckerFlavorTextOriginLocation_Agatha3:: @ 81B0FDB
+gFameCheckerFlavorTextOriginLocation_Agatha3::
 	.string "SEVEN ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Agatha4:: @ 81B0FE8
+gFameCheckerFlavorTextOriginLocation_Agatha4::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Agatha5:: @ 81B0FF7
+gFameCheckerFlavorTextOriginLocation_Agatha5::
 	.string "SIX ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Lance0:: @ 81B1002
+gFameCheckerFlavorTextOriginLocation_Lance0::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Lance1:: @ 81B1011
+gFameCheckerFlavorTextOriginLocation_Lance1::
 	.string "POKéMON LEAGUE$"
 
-gFameCheckerFlavorTextOriginLocation_Lance2:: @ 81B1020
+gFameCheckerFlavorTextOriginLocation_Lance2::
 	.string "SAFFRON CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Lance3:: @ 81B102D
+gFameCheckerFlavorTextOriginLocation_Lance3::
 	.string "CELADON DEPT.$"
 
-gFameCheckerFlavorTextOriginLocation_Lance4:: @ 81B103B
+gFameCheckerFlavorTextOriginLocation_Lance4::
 	.string "INDIGO PLATEAU$"
 
-gFameCheckerFlavorTextOriginLocation_Lance5:: @ 81B104A
+gFameCheckerFlavorTextOriginLocation_Lance5::
 	.string "INDIGO PLATEAU$"
 
-gFameCheckerFlavorTextOriginLocation_Bill0:: @ 81B1059
+gFameCheckerFlavorTextOriginLocation_Bill0::
 	.string "CERULEAN CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Bill1:: @ 81B1067
+gFameCheckerFlavorTextOriginLocation_Bill1::
 	.string "CERULEAN CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Bill2:: @ 81B1075
+gFameCheckerFlavorTextOriginLocation_Bill2::
 	.string "FUCHSIA CITY$"
 
-gFameCheckerFlavorTextOriginLocation_Bill3:: @ 81B1082
+gFameCheckerFlavorTextOriginLocation_Bill3::
 	.string "ONE ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Bill4:: @ 81B108D
+gFameCheckerFlavorTextOriginLocation_Bill4::
 	.string "ONE ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Bill5:: @ 81B1098
+gFameCheckerFlavorTextOriginLocation_Bill5::
 	.string "ONE ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_MrFuji0:: @ 81B10A3
+gFameCheckerFlavorTextOriginLocation_MrFuji0::
 	.string "LAVENDER TOWN$"
 
-gFameCheckerFlavorTextOriginLocation_MrFuji1:: @ 81B10B1
+gFameCheckerFlavorTextOriginLocation_MrFuji1::
 	.string "POKéMON TOWER$"
 
-gFameCheckerFlavorTextOriginLocation_MrFuji2:: @ 81B10BF
+gFameCheckerFlavorTextOriginLocation_MrFuji2::
 	.string "LAVENDER TOWN$"
 
-gFameCheckerFlavorTextOriginLocation_MrFuji3:: @ 81B10CD
+gFameCheckerFlavorTextOriginLocation_MrFuji3::
 	.string "LAVENDER TOWN$"
 
-gFameCheckerFlavorTextOriginLocation_MrFuji4:: @ 81B10DB
+gFameCheckerFlavorTextOriginLocation_MrFuji4::
 	.string "CINNABAR GYM$"
 
-gFameCheckerFlavorTextOriginLocation_MrFuji5:: @ 81B10E8
+gFameCheckerFlavorTextOriginLocation_MrFuji5::
 	.string "CINNABAR ISLAND$"
 
-gFameCheckerFlavorTextOriginLocation_Giovanni0:: @ 81B10F8
+gFameCheckerFlavorTextOriginLocation_Giovanni0::
 	.string "ROCKET HIDEOUT$"
 
-gFameCheckerFlavorTextOriginLocation_Giovanni1:: @ 81B1107
+gFameCheckerFlavorTextOriginLocation_Giovanni1::
 	.string "SILPH CO.$"
 
-gFameCheckerFlavorTextOriginLocation_Giovanni2:: @ 81B1111
+gFameCheckerFlavorTextOriginLocation_Giovanni2::
 	.string "SILPH CO.$"
 
-gFameCheckerFlavorTextOriginLocation_Giovanni3:: @ 81B111B
+gFameCheckerFlavorTextOriginLocation_Giovanni3::
 	.string "VIRIDIAN GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Giovanni4:: @ 81B1128
+gFameCheckerFlavorTextOriginLocation_Giovanni4::
 	.string "VIRIDIAN GYM$"
 
-gFameCheckerFlavorTextOriginLocation_Giovanni5:: @ 81B1135
+gFameCheckerFlavorTextOriginLocation_Giovanni5::
 	.string "ROCKET WAREHOUSE$"
 
-gFameCheckerFlavorTextOriginObjectName_ProfOak0:: @ 81B1146
+gFameCheckerFlavorTextOriginObjectName_ProfOak0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_ProfOak1:: @ 81B114B
+gFameCheckerFlavorTextOriginObjectName_ProfOak1::
 	.string "PROF. OAK$"
 
-gFameCheckerFlavorTextOriginObjectName_ProfOak2:: @ 81B1155
+gFameCheckerFlavorTextOriginObjectName_ProfOak2::
 	.string "AIDE$"
 
-gFameCheckerFlavorTextOriginObjectName_ProfOak3:: @ 81B115A
+gFameCheckerFlavorTextOriginObjectName_ProfOak3::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_ProfOak4:: @ 81B116A
+gFameCheckerFlavorTextOriginObjectName_ProfOak4::
 	.string "AGATHA$"
 
-gFameCheckerFlavorTextOriginObjectName_ProfOak5:: @ 81B1171
+gFameCheckerFlavorTextOriginObjectName_ProfOak5::
 	.string "AIDE$"
 
-gFameCheckerFlavorTextOriginObjectName_Daisy0:: @ 81B1176
+gFameCheckerFlavorTextOriginObjectName_Daisy0::
 	.string "AIDE$"
 
-gFameCheckerFlavorTextOriginObjectName_Daisy1:: @ 81B117B
+gFameCheckerFlavorTextOriginObjectName_Daisy1::
 	.string "WOMAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Daisy2:: @ 81B1181
+gFameCheckerFlavorTextOriginObjectName_Daisy2::
 	.string "MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Daisy3:: @ 81B1185
+gFameCheckerFlavorTextOriginObjectName_Daisy3::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Daisy4:: @ 81B1195
+gFameCheckerFlavorTextOriginObjectName_Daisy4::
 	.string "OLD LADY$"
 
-gFameCheckerFlavorTextOriginObjectName_Daisy5:: @ 81B119E
+gFameCheckerFlavorTextOriginObjectName_Daisy5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Brock0:: @ 81B11AE
+gFameCheckerFlavorTextOriginObjectName_Brock0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_Brock1:: @ 81B11B3
+gFameCheckerFlavorTextOriginObjectName_Brock1::
 	.string "BROCK$"
 
-gFameCheckerFlavorTextOriginObjectName_Brock2:: @ 81B11B9
+gFameCheckerFlavorTextOriginObjectName_Brock2::
 	.string "YOUNG MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Brock3:: @ 81B11C3
+gFameCheckerFlavorTextOriginObjectName_Brock3::
 	.string "BOY$"
 
-gFameCheckerFlavorTextOriginObjectName_Brock4:: @ 81B11C7
+gFameCheckerFlavorTextOriginObjectName_Brock4::
 	.string "MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Brock5:: @ 81B11CB
+gFameCheckerFlavorTextOriginObjectName_Brock5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Misty0:: @ 81B11DB
+gFameCheckerFlavorTextOriginObjectName_Misty0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_Misty1:: @ 81B11E0
+gFameCheckerFlavorTextOriginObjectName_Misty1::
 	.string "MISTY$"
 
-gFameCheckerFlavorTextOriginObjectName_Misty2:: @ 81B11E6
+gFameCheckerFlavorTextOriginObjectName_Misty2::
 	.string "LUIS$"
 
-gFameCheckerFlavorTextOriginObjectName_Misty3:: @ 81B11EB
+gFameCheckerFlavorTextOriginObjectName_Misty3::
 	.string "YOUNG MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Misty4:: @ 81B11F5
+gFameCheckerFlavorTextOriginObjectName_Misty4::
 	.string "DAME$"
 
-gFameCheckerFlavorTextOriginObjectName_Misty5:: @ 81B11FA
+gFameCheckerFlavorTextOriginObjectName_Misty5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_LtSurge0:: @ 81B120A
+gFameCheckerFlavorTextOriginObjectName_LtSurge0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_LtSurge1:: @ 81B120F
+gFameCheckerFlavorTextOriginObjectName_LtSurge1::
 	.string "LT. SURGE$"
 
-gFameCheckerFlavorTextOriginObjectName_LtSurge2:: @ 81B1219
+gFameCheckerFlavorTextOriginObjectName_LtSurge2::
 	.string "TUCKER$"
 
-gFameCheckerFlavorTextOriginObjectName_LtSurge3:: @ 81B1220
+gFameCheckerFlavorTextOriginObjectName_LtSurge3::
 	.string "TUCKER$"
 
-gFameCheckerFlavorTextOriginObjectName_LtSurge4:: @ 81B1227
+gFameCheckerFlavorTextOriginObjectName_LtSurge4::
 	.string "DWAYNE$"
 
-gFameCheckerFlavorTextOriginObjectName_LtSurge5:: @ 81B122E
+gFameCheckerFlavorTextOriginObjectName_LtSurge5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Erika0:: @ 81B123E
+gFameCheckerFlavorTextOriginObjectName_Erika0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_Erika1:: @ 81B1243
+gFameCheckerFlavorTextOriginObjectName_Erika1::
 	.string "ERIKA$"
 
-gFameCheckerFlavorTextOriginObjectName_Erika2:: @ 81B1249
+gFameCheckerFlavorTextOriginObjectName_Erika2::
 	.string "LOLA$"
 
-gFameCheckerFlavorTextOriginObjectName_Erika3:: @ 81B124E
+gFameCheckerFlavorTextOriginObjectName_Erika3::
 	.string "TAMIA$"
 
-gFameCheckerFlavorTextOriginObjectName_Erika4:: @ 81B1254
+gFameCheckerFlavorTextOriginObjectName_Erika4::
 	.string "ERIKA$"
 
-gFameCheckerFlavorTextOriginObjectName_Erika5:: @ 81B125A
+gFameCheckerFlavorTextOriginObjectName_Erika5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Koga0:: @ 81B126A
+gFameCheckerFlavorTextOriginObjectName_Koga0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_Koga1:: @ 81B126F
+gFameCheckerFlavorTextOriginObjectName_Koga1::
 	.string "KOGA$"
 
-gFameCheckerFlavorTextOriginObjectName_Koga2:: @ 81B1274
+gFameCheckerFlavorTextOriginObjectName_Koga2::
 	.string "KIRK$"
 
-gFameCheckerFlavorTextOriginObjectName_Koga3:: @ 81B1279
+gFameCheckerFlavorTextOriginObjectName_Koga3::
 	.string "CHARINE$"
 
-gFameCheckerFlavorTextOriginObjectName_Koga4:: @ 81B1281
+gFameCheckerFlavorTextOriginObjectName_Koga4::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Koga5:: @ 81B1291
+gFameCheckerFlavorTextOriginObjectName_Koga5::
 	.string "MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Sabrina0:: @ 81B1295
+gFameCheckerFlavorTextOriginObjectName_Sabrina0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_Sabrina1:: @ 81B129A
+gFameCheckerFlavorTextOriginObjectName_Sabrina1::
 	.string "YOUNG MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Sabrina2:: @ 81B12A4
+gFameCheckerFlavorTextOriginObjectName_Sabrina2::
 	.string "SABRINA$"
 
-gFameCheckerFlavorTextOriginObjectName_Sabrina3:: @ 81B12AC
+gFameCheckerFlavorTextOriginObjectName_Sabrina3::
 	.string "SABRINA$"
 
-gFameCheckerFlavorTextOriginObjectName_Sabrina4:: @ 81B12B4
+gFameCheckerFlavorTextOriginObjectName_Sabrina4::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Sabrina5:: @ 81B12C4
+gFameCheckerFlavorTextOriginObjectName_Sabrina5::
 	.string "TYRON$"
 
-gFameCheckerFlavorTextOriginObjectName_Blaine0:: @ 81B12CA
+gFameCheckerFlavorTextOriginObjectName_Blaine0::
 	.string "SIGN$"
 
-gFameCheckerFlavorTextOriginObjectName_Blaine1:: @ 81B12CF
+gFameCheckerFlavorTextOriginObjectName_Blaine1::
 	.string "BLAINE$"
 
-gFameCheckerFlavorTextOriginObjectName_Blaine2:: @ 81B12D6
+gFameCheckerFlavorTextOriginObjectName_Blaine2::
 	.string "DEREK$"
 
-gFameCheckerFlavorTextOriginObjectName_Blaine3:: @ 81B12DC
+gFameCheckerFlavorTextOriginObjectName_Blaine3::
 	.string "WOMAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Blaine4:: @ 81B12E2
+gFameCheckerFlavorTextOriginObjectName_Blaine4::
 	.string "PHOTO$"
 
-gFameCheckerFlavorTextOriginObjectName_Blaine5:: @ 81B12E8
+gFameCheckerFlavorTextOriginObjectName_Blaine5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Lorelei0:: @ 81B12F8
+gFameCheckerFlavorTextOriginObjectName_Lorelei0::
 	.string "LORELEI$"
 
-gFameCheckerFlavorTextOriginObjectName_Lorelei1:: @ 81B1300
+gFameCheckerFlavorTextOriginObjectName_Lorelei1::
 	.string "LORELEI$"
 
-gFameCheckerFlavorTextOriginObjectName_Lorelei2:: @ 81B1308
+gFameCheckerFlavorTextOriginObjectName_Lorelei2::
 	.string "OLD MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Lorelei3:: @ 81B1310
+gFameCheckerFlavorTextOriginObjectName_Lorelei3::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Lorelei4:: @ 81B1320
+gFameCheckerFlavorTextOriginObjectName_Lorelei4::
 	.string "LITTLE GIRL$"
 
-gFameCheckerFlavorTextOriginObjectName_Lorelei5:: @ 81B132C
+gFameCheckerFlavorTextOriginObjectName_Lorelei5::
 	.string "OLD LADY$"
 
-gFameCheckerFlavorTextOriginObjectName_Bruno0:: @ 81B1335
+gFameCheckerFlavorTextOriginObjectName_Bruno0::
 	.string "BRUNO$"
 
-gFameCheckerFlavorTextOriginObjectName_Bruno1:: @ 81B133B
+gFameCheckerFlavorTextOriginObjectName_Bruno1::
 	.string "BRUNO$"
 
-gFameCheckerFlavorTextOriginObjectName_Bruno2:: @ 81B1341
+gFameCheckerFlavorTextOriginObjectName_Bruno2::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Bruno3:: @ 81B1351
+gFameCheckerFlavorTextOriginObjectName_Bruno3::
 	.string "CRUSHER$"
 
-gFameCheckerFlavorTextOriginObjectName_Bruno4:: @ 81B1359
+gFameCheckerFlavorTextOriginObjectName_Bruno4::
 	.string "WOMAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Bruno5:: @ 81B135F
+gFameCheckerFlavorTextOriginObjectName_Bruno5::
 	.string "CRUSHER$"
 
-gFameCheckerFlavorTextOriginObjectName_Agatha0:: @ 81B1367
+gFameCheckerFlavorTextOriginObjectName_Agatha0::
 	.string "AGATHA$"
 
-gFameCheckerFlavorTextOriginObjectName_Agatha1:: @ 81B136E
+gFameCheckerFlavorTextOriginObjectName_Agatha1::
 	.string "CRUSHER$"
 
-gFameCheckerFlavorTextOriginObjectName_Agatha2:: @ 81B1376
+gFameCheckerFlavorTextOriginObjectName_Agatha2::
 	.string "CRUSHER$"
 
-gFameCheckerFlavorTextOriginObjectName_Agatha3:: @ 81B137E
+gFameCheckerFlavorTextOriginObjectName_Agatha3::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Agatha4:: @ 81B138E
+gFameCheckerFlavorTextOriginObjectName_Agatha4::
 	.string "AGATHA$"
 
-gFameCheckerFlavorTextOriginObjectName_Agatha5:: @ 81B1395
+gFameCheckerFlavorTextOriginObjectName_Agatha5::
 	.string "OLD LADY$"
 
-gFameCheckerFlavorTextOriginObjectName_Lance0:: @ 81B139E
+gFameCheckerFlavorTextOriginObjectName_Lance0::
 	.string "LANCE$"
 
-gFameCheckerFlavorTextOriginObjectName_Lance1:: @ 81B13A4
+gFameCheckerFlavorTextOriginObjectName_Lance1::
 	.string "LANCE$"
 
-gFameCheckerFlavorTextOriginObjectName_Lance2:: @ 81B13AA
+gFameCheckerFlavorTextOriginObjectName_Lance2::
 	.string "WOMAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Lance3:: @ 81B13B0
+gFameCheckerFlavorTextOriginObjectName_Lance3::
 	.string "LITTLE GIRL$"
 
-gFameCheckerFlavorTextOriginObjectName_Lance4:: @ 81B13BC
+gFameCheckerFlavorTextOriginObjectName_Lance4::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Lance5:: @ 81B13CC
+gFameCheckerFlavorTextOriginObjectName_Lance5::
 	.string "YOUNG MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Bill0:: @ 81B13D6
+gFameCheckerFlavorTextOriginObjectName_Bill0::
 	.string "{RIVAL}$"
 
-gFameCheckerFlavorTextOriginObjectName_Bill1:: @ 81B13D9
+gFameCheckerFlavorTextOriginObjectName_Bill1::
 	.string "LITTLE BOY$"
 
-gFameCheckerFlavorTextOriginObjectName_Bill2:: @ 81B13E4
+gFameCheckerFlavorTextOriginObjectName_Bill2::
 	.string "OLD MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Bill3:: @ 81B13EC
+gFameCheckerFlavorTextOriginObjectName_Bill3::
 	.string "CELIO$"
 
-gFameCheckerFlavorTextOriginObjectName_Bill4:: @ 81B13F2
+gFameCheckerFlavorTextOriginObjectName_Bill4::
 	.string "CELIO$"
 
-gFameCheckerFlavorTextOriginObjectName_Bill5:: @ 81B13F8
+gFameCheckerFlavorTextOriginObjectName_Bill5::
 	.string "CELIO$"
 
-gFameCheckerFlavorTextOriginObjectName_MrFuji0:: @ 81B13FE
+gFameCheckerFlavorTextOriginObjectName_MrFuji0::
 	.string "LITTLE GIRL$"
 
-gFameCheckerFlavorTextOriginObjectName_MrFuji1:: @ 81B140A
+gFameCheckerFlavorTextOriginObjectName_MrFuji1::
 	.string "TEAM ROCKET$"
 
-gFameCheckerFlavorTextOriginObjectName_MrFuji2:: @ 81B1416
+gFameCheckerFlavorTextOriginObjectName_MrFuji2::
 	.string "MAGAZINE$"
 
-gFameCheckerFlavorTextOriginObjectName_MrFuji3:: @ 81B141F
+gFameCheckerFlavorTextOriginObjectName_MrFuji3::
 	.string "MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_MrFuji4:: @ 81B1423
+gFameCheckerFlavorTextOriginObjectName_MrFuji4::
 	.string "PHOTO$"
 
-gFameCheckerFlavorTextOriginObjectName_MrFuji5:: @ 81B1429
+gFameCheckerFlavorTextOriginObjectName_MrFuji5::
 	.string "POKéMON JOURNAL$"
 
-gFameCheckerFlavorTextOriginObjectName_Giovanni0:: @ 81B1439
+gFameCheckerFlavorTextOriginObjectName_Giovanni0::
 	.string "GIOVANNI$"
 
-gFameCheckerFlavorTextOriginObjectName_Giovanni1:: @ 81B1442
+gFameCheckerFlavorTextOriginObjectName_Giovanni1::
 	.string "SCIENTIST$"
 
-gFameCheckerFlavorTextOriginObjectName_Giovanni2:: @ 81B144C
+gFameCheckerFlavorTextOriginObjectName_Giovanni2::
 	.string "SCIENTIST$"
 
-gFameCheckerFlavorTextOriginObjectName_Giovanni3:: @ 81B1456
+gFameCheckerFlavorTextOriginObjectName_Giovanni3::
 	.string "GIOVANNI$"
 
-gFameCheckerFlavorTextOriginObjectName_Giovanni4:: @ 81B145F
+gFameCheckerFlavorTextOriginObjectName_Giovanni4::
 	.string "MAN$"
 
-gFameCheckerFlavorTextOriginObjectName_Giovanni5:: @ 81B1463
+gFameCheckerFlavorTextOriginObjectName_Giovanni5::
 	.string "GIDEON$"
 
-PokemonJournal_Text_SpecialFeatureBrock:: @ 81B146A
+PokemonJournal_Text_SpecialFeatureBrock::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: PEWTER GYM\n"
 	.string "LEADER BROCK!\p"
 	.string "BROCK rarely laughs, but is said to\n"
 	.string "be unable to stop if he starts.$"
 
-PokemonJournal_Text_SpecialFeatureMisty:: @ 81B14E8
+PokemonJournal_Text_SpecialFeatureMisty::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: CERULEAN GYM\n"
 	.string "LEADER MISTY!\p"
 	.string "MISTY is said to worship LORELEI\n"
 	.string "of the ELITE FOUR.$"
 
-PokemonJournal_Text_SpecialFeatureLtSurge:: @ 81B1558
+PokemonJournal_Text_SpecialFeatureLtSurge::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: VERMILION GYM\n"
 	.string "LEADER LT. SURGE!\p"
@@ -1396,7 +1396,7 @@ PokemonJournal_Text_SpecialFeatureLtSurge:: @ 81B1558
 	.string "He used the electricity generated\n"
 	.string "by POKéMON to power his plane.$"
 
-PokemonJournal_Text_SpecialFeatureErika:: @ 81B161B
+PokemonJournal_Text_SpecialFeatureErika::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: CELADON GYM\n"
 	.string "LEADER ERIKA!\p"
@@ -1404,7 +1404,7 @@ PokemonJournal_Text_SpecialFeatureErika:: @ 81B161B
 	.string "CELADON GYM, you can often\l"
 	.string "see ERIKA snoozing.$"
 
-PokemonJournal_Text_SpecialFeatureKoga:: @ 81B16A8
+PokemonJournal_Text_SpecialFeatureKoga::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: FUCHSIA GYM\n"
 	.string "LEADER KOGA!\p"
@@ -1413,7 +1413,7 @@ PokemonJournal_Text_SpecialFeatureKoga:: @ 81B16A8
 	.string "He even concocts medicine to nurse\n"
 	.string "his POKéMON to health.$"
 
-PokemonJournal_Text_SpecialFeatureSabrina:: @ 81B1753
+PokemonJournal_Text_SpecialFeatureSabrina::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: SAFFRON GYM\n"
 	.string "LEADER SABRINA!\p"
@@ -1421,7 +1421,7 @@ PokemonJournal_Text_SpecialFeatureSabrina:: @ 81B1753
 	.string "communicate with her POKéMON\l"
 	.string "during battle without speaking.$"
 
-PokemonJournal_Text_SpecialFeatureBlaine:: @ 81B17E9
+PokemonJournal_Text_SpecialFeatureBlaine::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: CINNABAR GYM\n"
 	.string "LEADER BLAINE!\p"
@@ -1429,7 +1429,7 @@ PokemonJournal_Text_SpecialFeatureBlaine:: @ 81B17E9
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"
 
-PokemonJournal_Text_SpecialFeatureLorelei:: @ 81B187F
+PokemonJournal_Text_SpecialFeatureLorelei::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LORELEI!\p"
@@ -1437,7 +1437,7 @@ PokemonJournal_Text_SpecialFeatureLorelei:: @ 81B187F
 	.string "and cool battling style, LORELEI\l"
 	.string "has a surprising secret!$"
 
-PokemonJournal_Text_SpecialFeatureBruno:: @ 81B1913
+PokemonJournal_Text_SpecialFeatureBruno::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's BRUNO!\p"
@@ -1445,7 +1445,7 @@ PokemonJournal_Text_SpecialFeatureBruno:: @ 81B1913
 	.string "FOUR out of his burning ambition to\l"
 	.string "battle the best TRAINERS.$"
 
-PokemonJournal_Text_SpecialFeatureAgatha:: @ 81B19A8
+PokemonJournal_Text_SpecialFeatureAgatha::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's AGATHA!\p"
@@ -1453,7 +1453,7 @@ PokemonJournal_Text_SpecialFeatureAgatha:: @ 81B19A8
 	.string "OAK were rivals who vied for\l"
 	.string "supremacy as TRAINERS.$"
 
-PokemonJournal_Text_SpecialFeatureLance:: @ 81B1A31
+PokemonJournal_Text_SpecialFeatureLance::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LANCE!\p"
@@ -1461,14 +1461,14 @@ PokemonJournal_Text_SpecialFeatureLance:: @ 81B1A31
 	.string "be the elder of a famous clan of\l"
 	.string "dragon masters.$"
 
-PokemonJournal_Text_SpecialFeatureProfOak:: @ 81B1AB9
+PokemonJournal_Text_SpecialFeatureProfOak::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: PROF. OAK,\n"
 	.string "the POKéMON Researcher!\p"
 	.string "PROF. OAK reportedly lives with his\n"
 	.string "grandchildren DAISY and {RIVAL}.$"
 
-PokemonJournal_Text_SpecialFeatureDaisyOak:: @ 81B1B3D
+PokemonJournal_Text_SpecialFeatureDaisyOak::
 	.string "This is a POKéMON JOURNAL from\n"
 	.string "years ago…\p"
 	.string "POKéMON JOURNAL\n"
@@ -1477,7 +1477,7 @@ PokemonJournal_Text_SpecialFeatureDaisyOak:: @ 81B1B3D
 	.string "Grand Champion is DAISY OAK of\l"
 	.string "PALLET TOWN!$"
 
-PokemonJournal_Text_SpecialFeatureMrFuji:: @ 81B1BD1
+PokemonJournal_Text_SpecialFeatureMrFuji::
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "MR. FUJI of POKéMON HOUSE!\p"

@@ -1,6 +1,6 @@
 .equ GAVE_PROFILE,  VAR_TEMP_1
 
-MysteryEventClub_EventScript_Woman:: @ 81BEE16
+MysteryEventClub_EventScript_Woman::
 	lock
 	faceplayer
 	compare GAVE_PROFILE, TRUE
@@ -10,12 +10,12 @@ MysteryEventClub_EventScript_Woman:: @ 81BEE16
 	goto EventScript_AskForProfile
 	end
 
-EventScript_AlreadyGaveProfile: @ 81BEE3A
+EventScript_AlreadyGaveProfile:
 	msgbox Text_TellMoreNextTime
 	release
 	end
 
-EventScript_AskForProfile: @ 81BEE44
+EventScript_AskForProfile:
 	message Text_TellMeWhatsYourProfile
 	waitmessage
 	multichoice 18, 6, MULTICHOICE_YES_NO_INFO_2, FALSE
@@ -26,23 +26,23 @@ EventScript_AskForProfile: @ 81BEE44
 	case SCR_MENU_CANCEL, EventScript_DeclineGiveProfile
 	end
 
-EventScript_ProfileInfo: @ 81BEE81
+EventScript_ProfileInfo:
 	msgbox Text_ExplainProfile
 	goto EventScript_AskForProfile
 	end
 
-EventScript_AcceptGiveProfile: @ 81BEE8F
+EventScript_AcceptGiveProfile:
 	msgbox Text_WhatsYourProfile
 	closemessage
 	goto EventScript_GiveProfile
 	end
 
-EventScript_CancelGiveProfile: @ 81BEE9E
+EventScript_CancelGiveProfile:
 	msgbox Text_DecidedNotTo
 	release
 	end
 
-EventScript_GaveProfile: @ 81BEEA8
+EventScript_GaveProfile:
 	setvar GAVE_PROFILE, TRUE
 	setvar VAR_0x8004, 0
 	special ShowEasyChatMessage
@@ -52,17 +52,17 @@ EventScript_GaveProfile: @ 81BEEA8
 	release
 	end
 
-EventScript_DeclineGiveProfile: @ 81BEEC3
+EventScript_DeclineGiveProfile:
 	msgbox Text_DontBeLikeThat
 	release
 	end
 
-EventScript_GivenProfileBefore: @ 81BEECD
+EventScript_GivenProfileBefore:
 	msgbox Text_HiWeMeetAgain
 	goto EventScript_AskForNewProfile
 	end
 
-EventScript_AskForNewProfile: @ 81BEEDB
+EventScript_AskForNewProfile:
 	message Text_ChangeYourProfile
 	waitmessage
 	multichoice 18, 6, MULTICHOICE_YES_NO_INFO_2, FALSE
@@ -73,23 +73,23 @@ EventScript_AskForNewProfile: @ 81BEEDB
 	case SCR_MENU_CANCEL, EventScript_DeclineGiveNewProfile
 	end
 
-EventScript_ProfileInfo2: @ 81BEF18
+EventScript_ProfileInfo2:
 	msgbox Text_ExplainProfile
 	goto EventScript_AskForNewProfile
 	end
 
-EventScript_AcceptGiveNewProfile: @ 81BEF26
+EventScript_AcceptGiveNewProfile:
 	msgbox Text_WhatAreYouLikeNow
 	closemessage
 	goto EventScript_GiveProfile
 	end
 
-EventScript_DeclineGiveNewProfile: @ 81BEF35
+EventScript_DeclineGiveNewProfile:
 	msgbox Text_LikeProfileWayItIs
 	release
 	end
 
-EventScript_GaveSpecialProfile: @ 81BEF3F
+EventScript_GaveSpecialProfile:
 	setvar GAVE_PROFILE, TRUE
 	setvar VAR_0x8004, 0
 	special ShowEasyChatMessage
@@ -99,7 +99,7 @@ EventScript_GaveSpecialProfile: @ 81BEF3F
 	release
 	end
 
-EventScript_GiveProfile: @ 81BEF5A
+EventScript_GiveProfile:
 	setvar VAR_0x8004, EASY_CHAT_TYPE_PROFILE
 	call Common_ShowEasyChatScreen
 	lock
@@ -112,7 +112,7 @@ EventScript_GiveProfile: @ 81BEF5A
 	goto_if_eq EventScript_GaveProfile
 	end
 
-Text_IdLoveToHearYourProfile: @ 81BEF88
+Text_IdLoveToHearYourProfile:
 	.string "Hi, glad to meet you!\p"
 	.string "…That's unfriendly of you.\n"
 	.string "How about saying hi back?\p"
@@ -120,11 +120,11 @@ Text_IdLoveToHearYourProfile: @ 81BEF88
 	.string "yourself.\p"
 	.string "I'd love to hear your profile!$"
 
-Text_TellMeWhatsYourProfile: @ 81BF017
+Text_TellMeWhatsYourProfile:
 	.string "Tell me something good about\n"
 	.string "yourself. What's your profile?$"
 
-Text_ExplainProfile: @ 81BF053
+Text_ExplainProfile:
 	.string "A profile is written using four\n"
 	.string "words or phrases.\p"
 	.string "There're plenty of words to choose\n"
@@ -136,46 +136,46 @@ Text_ExplainProfile: @ 81BF053
 	.string "…It's easier than it sounds.\n"
 	.string "Why don't you try it?$"
 
-Text_WhatsYourProfile: @ 81BF166
+Text_WhatsYourProfile:
 	.string "What's your profile?$"
 
-Text_DontBeLikeThat: @ 81BF17B
+Text_DontBeLikeThat:
 	.string "Aww… Don't be like that.\n"
 	.string "You can tell me your profile.$"
 
-Text_DecidedNotTo: @ 81BF1B2
+Text_DecidedNotTo:
 	.string "Oh, you've decided not to?\n"
 	.string "You're fickle, aren't you?$"
 
-Text_HiWeMeetAgain: @ 81BF1E8
+Text_HiWeMeetAgain:
 	.string "Hi!\n"
 	.string "We meet again!$"
 
-Text_ChangeYourProfile: @ 81BF1FB
+Text_ChangeYourProfile:
 	.string "Would you like to change your\n"
 	.string "profile?$"
 
-Text_WhatAreYouLikeNow: @ 81BF222
+Text_WhatAreYouLikeNow:
 	.string "What are you like now?\n"
 	.string "I'd really like to know.$"
 
-Text_LikeProfileWayItIs: @ 81BF252
+Text_LikeProfileWayItIs:
 	.string "Okay, you like your profile the\n"
 	.string "way it is.\p"
 	.string "I think so, too.$"
 
-Text_ProfileSaysSomethingAboutYou: @ 81BF28E
+Text_ProfileSaysSomethingAboutYou:
 	.string "Hmhm…\p"
 	.string "Your profile really says something\n"
 	.string "about who you are.\p"
 	.string "Now that I know you better, it \n"
 	.string "makes us better friends than ever!$"
 
-Text_HeardThatBefore: @ 81BF30D
+Text_HeardThatBefore:
 	.string "Oh, I've heard that before…\p"
 	.string "My cousin, who lives far away,\n"
 	.string "always used to say that, I think.$"
 
-Text_TellMoreNextTime: @ 81BF36A
+Text_TellMoreNextTime:
 	.string "Please tell me more about\n"
 	.string "yourself next time!$"

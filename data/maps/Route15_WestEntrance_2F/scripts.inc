@@ -1,9 +1,9 @@
 .equ REQUIRED_CAUGHT_MONS, 50
 
-Route15_WestEntrance_2F_MapScripts:: @ 8170092
+Route15_WestEntrance_2F_MapScripts::
 	.byte 0
 
-Route15_WestEntrance_2F_EventScript_LeftBinoculars:: @ 8170093
+Route15_WestEntrance_2F_EventScript_LeftBinoculars::
 	lockall
 	msgbox Route15_WestEntrance_2F_Text_LargeShiningBird
 	drawmonpic SPECIES_ARTICUNO, 10, 3
@@ -15,11 +15,11 @@ Route15_WestEntrance_2F_EventScript_LeftBinoculars:: @ 8170093
 	releaseall
 	end
 
-Route15_WestEntrance_2F_EventScript_RightBinoculars:: @ 81700B0
+Route15_WestEntrance_2F_EventScript_RightBinoculars::
 	msgbox Route15_WestEntrance_2F_Text_SmallIslandOnHorizon, MSGBOX_SIGN
 	end
 
-Route15_WestEntrance_2F_EventScript_Aide:: @ 81700B9
+Route15_WestEntrance_2F_EventScript_Aide::
 	lock
 	faceplayer
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
@@ -43,12 +43,12 @@ Route15_WestEntrance_2F_EventScript_Aide:: @ 81700B9
 	release
 	end
 
-Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare:: @ 817013B
+Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare::
 	msgbox Route15_WestEntrance_2F_Text_ExplainExpShare
 	release
 	end
 
-Route15_WestEntrance_2F_EventScript_GetAideRequestInfo:: @ 8170145
+Route15_WestEntrance_2F_EventScript_GetAideRequestInfo::
 	getnumberstring 0, REQUIRED_CAUGHT_MONS
 	getitemname 1, ITEM_EXP_SHARE
 	return

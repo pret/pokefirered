@@ -1,7 +1,7 @@
-CeladonCity_DepartmentStore_Roof_MapScripts:: @ 816BCCC
+CeladonCity_DepartmentStore_Roof_MapScripts::
 	.byte 0
 
-CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl:: @ 816BCCD
+CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	lock
@@ -12,7 +12,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl:: @ 816BCCD
 	goto CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks:: @ 816BCF6
+CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks::
 	setvar VAR_TEMP_1, 0
 	checkitem ITEM_FRESH_WATER, 1
 	compare VAR_RESULT, TRUE
@@ -25,19 +25,19 @@ CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks:: @ 816BCF6
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater:: @ 816BD2C
+CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater::
 	addvar VAR_TEMP_1, 1
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop:: @ 816BD32
+CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop::
 	addvar VAR_TEMP_1, 2
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade:: @ 816BD38
+CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade::
 	addvar VAR_TEMP_1, 4
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink:: @ 816BD3E
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ImThirstyGiveHerDrink, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
@@ -55,7 +55,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink:: @ 816BD3E
 	case 7, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater:: @ 816BDAE
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater
@@ -63,7 +63,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater:: @ 816BDAE
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop:: @ 816BDDA
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_SODA_POP, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop
@@ -71,7 +71,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop:: @ 816BDDA
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop:: @ 816BE06
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater
@@ -80,7 +80,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop:: @ 816BE0
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade:: @ 816BE3D
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade
@@ -88,7 +88,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade:: @ 816BE3D
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade:: @ 816BE69
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater
@@ -97,7 +97,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade:: @ 816BE
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade:: @ 816BEA0
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_SODA_POP_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop
@@ -106,7 +106,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade:: @ 816BEA0
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks:: @ 816BED7
+CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks::
 	multichoice 0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP_LEMONADE, FALSE
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater
@@ -116,7 +116,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks:: @ 816BED7
 	case 127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater:: @ 816BF19
+CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater::
 	setvar VAR_0x8008, ITEM_FRESH_WATER
 	setvar VAR_0x8009, ITEM_TM16
 	goto_if_set FLAG_GOT_TM16_FROM_THIRSTY_GIRL, CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll
@@ -124,7 +124,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater:: @ 816BF19
 	goto CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop:: @ 816BF3A
+CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop::
 	setvar VAR_0x8008, ITEM_SODA_POP
 	setvar VAR_0x8009, ITEM_TM20
 	goto_if_set FLAG_GOT_TM20_FROM_THIRSTY_GIRL, CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll
@@ -132,7 +132,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop:: @ 816BF3A
 	goto CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade:: @ 816BF5B
+CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade::
 	setvar VAR_0x8008, ITEM_LEMONADE
 	setvar VAR_0x8009, ITEM_TM33
 	goto_if_set FLAG_GOT_TM33_FROM_THIRSTY_GIRL, CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll
@@ -140,7 +140,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade:: @ 816BF5B
 	goto CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink:: @ 816BF7C
+CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink::
 	getitemname 0, VAR_0x8008
 	getitemname 1, VAR_0x8009
 	removeitem VAR_0x8008, 1
@@ -164,49 +164,49 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink:: @ 816BF7C
 	release
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16:: @ 816BFDE
+CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16::
 	setflag FLAG_GOT_TM16_FROM_THIRSTY_GIRL
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ExplainTM16
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20:: @ 816BFEA
+CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20::
 	setflag FLAG_GOT_TM20_FROM_THIRSTY_GIRL
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ExplainTM20
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33:: @ 816BFF6
+CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33::
 	setflag FLAG_GOT_TM33_FROM_THIRSTY_GIRL
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ExplainTM33
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward:: @ 816C002
+CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_DontHaveSpaceForThis
 	release
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink:: @ 816C00C
+CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink::
 	release
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink:: @ 816C00E
+CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ImThirstyIWantDrink
 	release
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll:: @ 816C018
+CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ImNotThirstyAfterAll
 	release
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_CooltrainerM:: @ 816C022
+CeladonCity_DepartmentStore_Roof_EventScript_CooltrainerM::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_MySisterIsImmature, MSGBOX_NPC
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_FloorSign:: @ 816C02B
+CeladonCity_DepartmentStore_Roof_EventScript_FloorSign::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_FloorSign, MSGBOX_SIGN
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine:: @ 816C034
+CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine::
 	lockall
 	message CeladonCity_DepartmentStore_Roof_Text_VendingMachineWhatDoesItHave
 	waitmessage
@@ -214,7 +214,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine:: @ 816C034
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink:: @ 816C045
+CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink::
 	multichoice 12, 0, MULTICHOICE_CELADON_VENDING_MACHINE, FALSE
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
@@ -225,37 +225,37 @@ CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink:: @ 816C045
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_BuyFreshWater:: @ 816C083
+CeladonCity_DepartmentStore_Roof_EventScript_BuyFreshWater::
 	setvar VAR_TEMP_0, ITEM_FRESH_WATER
 	checkmoney 200, 0
 	goto CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_BuySodaPop:: @ 816C094
+CeladonCity_DepartmentStore_Roof_EventScript_BuySodaPop::
 	setvar VAR_TEMP_0, ITEM_SODA_POP
 	checkmoney 300, 0
 	goto CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_BuyLemonade:: @ 816C0A5
+CeladonCity_DepartmentStore_Roof_EventScript_BuyLemonade::
 	setvar VAR_TEMP_0, ITEM_LEMONADE
 	checkmoney 350, 0
 	goto CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater:: @ 816C0B6
+CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater::
 	removemoney 200, 0
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop:: @ 816C0BD
+CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop::
 	removemoney 300, 0
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade:: @ 816C0C4
+CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade::
 	removemoney 350, 0
 	return
 
-CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink:: @ 816C0CB
+CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink::
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney
 	checkitemspace VAR_TEMP_0, 1
@@ -275,23 +275,23 @@ CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink:: @ 816C0CB
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ChooseNewDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_ChooseNewDrink:: @ 816C125
+CeladonCity_DepartmentStore_Roof_EventScript_ChooseNewDrink::
 	message CeladonCity_DepartmentStore_Roof_Text_VendingMachineWhatDoesItHave
 	waitmessage
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney:: @ 816C131
+CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_NotEnoughMoney
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink:: @ 816C13F
+CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_NoMoreRoomForStuff
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine
 	end
 
-CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine:: @ 816C14D
+CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine::
 	hidemoneybox 0, 0
 	releaseall
 	end

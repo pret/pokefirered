@@ -1,4 +1,4 @@
-EventScript_SetGymTrainers:: @ 81A6B18
+EventScript_SetGymTrainers::
 	switch VAR_0x8008
 	case 1, EventScript_SetPewterGymTrainers
 	case 2, EventScript_SetCeruleanGymTrainers
@@ -10,22 +10,22 @@ EventScript_SetGymTrainers:: @ 81A6B18
 	case 8, EventScript_SetViridianGymTrainers
 	end
 
-EventScript_SetPewterGymTrainers:: @ 81A6B76
+EventScript_SetPewterGymTrainers::
 	settrainerflag TRAINER_CAMPER_LIAM
 	return
 
-EventScript_SetCeruleanGymTrainers:: @ 81A6B7A
+EventScript_SetCeruleanGymTrainers::
 	settrainerflag TRAINER_PICNICKER_DIANA
 	settrainerflag TRAINER_SWIMMER_MALE_LUIS
 	return
 
-EventScript_SetVermilionGymTrainers:: @ 81A6B81
+EventScript_SetVermilionGymTrainers::
 	settrainerflag TRAINER_SAILOR_DWAYNE
 	settrainerflag TRAINER_ENGINEER_BAILY
 	settrainerflag TRAINER_GENTLEMAN_TUCKER
 	return
 
-EventScript_SetCeladonGymTrainers:: @ 81A6B8B
+EventScript_SetCeladonGymTrainers::
 	settrainerflag TRAINER_LASS_KAY
 	settrainerflag TRAINER_LASS_LISA
 	settrainerflag TRAINER_PICNICKER_TINA
@@ -35,7 +35,7 @@ EventScript_SetCeladonGymTrainers:: @ 81A6B8B
 	settrainerflag TRAINER_COOLTRAINER_MARY
 	return
 
-EventScript_SetFuchsiaGymTrainers:: @ 81A6BA1
+EventScript_SetFuchsiaGymTrainers::
 	settrainerflag TRAINER_TAMER_PHIL
 	settrainerflag TRAINER_TAMER_EDGAR
 	settrainerflag TRAINER_JUGGLER_KIRK
@@ -44,7 +44,7 @@ EventScript_SetFuchsiaGymTrainers:: @ 81A6BA1
 	settrainerflag TRAINER_JUGGLER_NATE
 	return
 
-EventScript_SetSaffronGymTrainers:: @ 81A6BB4
+EventScript_SetSaffronGymTrainers::
 	settrainerflag TRAINER_PSYCHIC_JOHAN
 	settrainerflag TRAINER_PSYCHIC_TYRON
 	settrainerflag TRAINER_PSYCHIC_CAMERON
@@ -54,7 +54,7 @@ EventScript_SetSaffronGymTrainers:: @ 81A6BB4
 	settrainerflag TRAINER_CHANNELER_TASHA
 	return
 
-EventScript_SetCinnabarGymTrainers:: @ 81A6BCA
+EventScript_SetCinnabarGymTrainers::
 	settrainerflag TRAINER_SUPER_NERD_ERIK
 	settrainerflag TRAINER_SUPER_NERD_AVERY
 	settrainerflag TRAINER_SUPER_NERD_DEREK
@@ -64,7 +64,7 @@ EventScript_SetCinnabarGymTrainers:: @ 81A6BCA
 	settrainerflag TRAINER_BURGLAR_DUSTY
 	return
 
-EventScript_SetViridianGymTrainers:: @ 81A6BE0
+EventScript_SetViridianGymTrainers::
 	settrainerflag TRAINER_TAMER_JASON
 	settrainerflag TRAINER_TAMER_COLE
 	settrainerflag TRAINER_BLACK_BELT_ATSUSHI

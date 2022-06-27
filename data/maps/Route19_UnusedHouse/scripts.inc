@@ -1,2 +1,2 @@
-Route19_UnusedHouse_MapScripts:: @ 81704FA
+Route19_UnusedHouse_MapScripts::
 	.byte 0

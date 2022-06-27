@@ -1,7 +1,7 @@
-UndergroundPath_NorthEntrance_MapScripts:: @ 8160E38
+UndergroundPath_NorthEntrance_MapScripts::
 	.byte 0
 
-UndergroundPath_NorthEntrance_EventScript_Saige:: @ 8160E39
+UndergroundPath_NorthEntrance_EventScript_Saige::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_NIDORAN
@@ -22,18 +22,18 @@ UndergroundPath_NorthEntrance_EventScript_Saige:: @ 8160E39
 	release
 	end
 
-UndergroundPath_NorthEntrance_EventScript_DeclineTrade:: @ 8160E93
+UndergroundPath_NorthEntrance_EventScript_DeclineTrade::
 	msgbox Trade_Text_ThatsTooBad
 	release
 	end
 
-UndergroundPath_NorthEntrance_EventScript_NotRequestedMon:: @ 8160E9D
+UndergroundPath_NorthEntrance_EventScript_NotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_ThisIsNoMon
 	release
 	end
 
-UndergroundPath_NorthEntrance_EventScript_AlreadyTraded:: @ 8160EAB
+UndergroundPath_NorthEntrance_EventScript_AlreadyTraded::
 	msgbox Trade_Text_HowIsMyOldMon
 	release
 	end

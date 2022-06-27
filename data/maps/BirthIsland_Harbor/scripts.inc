@@ -1,7 +1,7 @@
-BirthIsland_Harbor_MapScripts:: @ 81653E6
+BirthIsland_Harbor_MapScripts::
 	.byte 0
 
-BirthIsland_Harbor_EventScript_Sailor:: @ 81653E7
+BirthIsland_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	message Text_WhereDoYouWantToSail

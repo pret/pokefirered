@@ -1,15 +1,15 @@
-SaffronCity_House_MapScripts:: @ 816EF73
+SaffronCity_House_MapScripts::
 	.byte 0
 
-SaffronCity_House_EventScript_Lass:: @ 816EF74
+SaffronCity_House_EventScript_Lass::
 	msgbox SaffronCity_House_Text_DontLookAtMyLetter, MSGBOX_NPC
 	end
 
-SaffronCity_House_EventScript_Youngster:: @ 816EF7D
+SaffronCity_House_EventScript_Youngster::
 	msgbox SaffronCity_House_Text_GettingCopycatPokeDoll, MSGBOX_NPC
 	end
 
-SaffronCity_House_EventScript_Pidgey:: @ 816EF86
+SaffronCity_House_EventScript_Pidgey::
 	lock
 	faceplayer
 	waitse
@@ -19,6 +19,6 @@ SaffronCity_House_EventScript_Pidgey:: @ 816EF86
 	release
 	end
 
-SaffronCity_House_EventScript_Letter:: @ 816EF99
+SaffronCity_House_EventScript_Letter::
 	msgbox SaffronCity_House_Text_ExplainPPUp, MSGBOX_SIGN
 	end

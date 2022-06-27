@@ -1,10 +1,10 @@
-Route11_EastEntrance_1F_MapScripts:: @ 816FD21
+Route11_EastEntrance_1F_MapScripts::
 	.byte 0
 
-Route11_EastEntrance_1F_EventScript_TopGuard:: @ 816FD22
+Route11_EastEntrance_1F_EventScript_TopGuard::
 	msgbox Route11_EastEntrance_1F_Text_ManInLavenderRatesNames, MSGBOX_NPC
 	end
 
-Route11_EastEntrance_1F_EventScript_BottomGuard:: @ 816FD2B
+Route11_EastEntrance_1F_EventScript_BottomGuard::
 	msgbox Route11_EastEntrance_1F_Text_RockTunnelToReachLavender, MSGBOX_NPC
 	end

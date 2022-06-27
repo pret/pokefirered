@@ -1,15 +1,15 @@
-SaffronCity_Mart_MapScripts:: @ 816EFA2
+SaffronCity_Mart_MapScripts::
 	.byte 0
 
-SaffronCity_Mart_EventScript_Lass:: @ 816EFA3
+SaffronCity_Mart_EventScript_Lass::
 	msgbox SaffronCity_Mart_Text_ReviveIsCostly, MSGBOX_NPC
 	end
 
-SaffronCity_Mart_EventScript_Youngster:: @ 816EFAC
+SaffronCity_Mart_EventScript_Youngster::
 	msgbox SaffronCity_Mart_Text_MaxRepelMoreEffectiveThanSuper, MSGBOX_NPC
 	end
 
-SaffronCity_Mart_EventScript_Clerk:: @ 816EFB5
+SaffronCity_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -21,7 +21,7 @@ SaffronCity_Mart_EventScript_Clerk:: @ 816EFB5
 	end
 
 	.align 2
-SaffronCity_Mart_Items:: @ 816EFDC
+SaffronCity_Mart_Items::
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_REVIVE

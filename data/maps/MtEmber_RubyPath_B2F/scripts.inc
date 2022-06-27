@@ -1,2 +1,2 @@
-MtEmber_RubyPath_B2F_MapScripts:: @ 8163C47
+MtEmber_RubyPath_B2F_MapScripts::
 	.byte 0

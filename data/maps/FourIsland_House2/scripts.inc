@@ -1,2 +1,2 @@
-FourIsland_House2_MapScripts:: @ 8171CAC
+FourIsland_House2_MapScripts::
 	.byte 0

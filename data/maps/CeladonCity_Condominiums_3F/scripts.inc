@@ -1,19 +1,19 @@
-CeladonCity_Condominiums_3F_MapScripts:: @ 816C3DA
+CeladonCity_Condominiums_3F_MapScripts::
 	.byte 0
 
-CeladonCity_Condominiums_3F_EventScript_Programmer:: @ 816C3DB
+CeladonCity_Condominiums_3F_EventScript_Programmer::
 	msgbox CeladonCity_Condominiums_3F_Text_ImTheProgrammer, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_3F_EventScript_GraphicArtist:: @ 816C3E4
+CeladonCity_Condominiums_3F_EventScript_GraphicArtist::
 	msgbox CeladonCity_Condominiums_3F_Text_ImTheGraphicArtist, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_3F_EventScript_Writer:: @ 816C3ED
+CeladonCity_Condominiums_3F_EventScript_Writer::
 	msgbox CeladonCity_Condominiums_3F_Text_IWroteTheStory, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_3F_EventScript_Designer:: @ 816C3F6
+CeladonCity_Condominiums_3F_EventScript_Designer::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, HasAllKantoMons
@@ -23,11 +23,11 @@ CeladonCity_Condominiums_3F_EventScript_Designer:: @ 816C3F6
 	release
 	end
 
-CeladonCity_Condominiums_3F_EventScript_CompletedPokedex:: @ 816C412
+CeladonCity_Condominiums_3F_EventScript_CompletedPokedex::
 	goto CeladonCity_Condominiums_3F_EventScript_ShowDiploma
 	end
 
-CeladonCity_Condominiums_3F_EventScript_ShowDiploma:: @ 816C418
+CeladonCity_Condominiums_3F_EventScript_ShowDiploma::
 	message CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations
 	waitmessage
 	delay 60
@@ -37,18 +37,18 @@ CeladonCity_Condominiums_3F_EventScript_ShowDiploma:: @ 816C418
 	release
 	end
 
-CeladonCity_Condominiums_3F_EventScript_DevelopmentRoomSign:: @ 816C435
+CeladonCity_Condominiums_3F_EventScript_DevelopmentRoomSign::
 	msgbox CeladonCity_Condominiums_3F_Text_GameFreakDevelopmentRoom, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_3F_EventScript_Computer1:: @ 816C43E
+CeladonCity_Condominiums_3F_EventScript_Computer1::
 	msgbox CeladonCity_Condominiums_3F_Text_ItsTheGameProgram, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_3F_EventScript_Computer2:: @ 816C447
+CeladonCity_Condominiums_3F_EventScript_Computer2::
 	msgbox CeladonCity_Condominiums_3F_Text_SomeonesPlayingGame, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_3F_EventScript_Computer3:: @ 816C450
+CeladonCity_Condominiums_3F_EventScript_Computer3::
 	msgbox CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding, MSGBOX_SIGN
 	end

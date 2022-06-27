@@ -1,6 +1,6 @@
-Route14_MapScripts:: @ 81680D1
+Route14_MapScripts::
 	.byte 0
 
-Route14_EventScript_RouteSign:: @ 81680D2
+Route14_EventScript_RouteSign::
 	msgbox Route14_Text_RouteSign, MSGBOX_SIGN
 	end

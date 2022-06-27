@@ -1,13 +1,13 @@
 @ Unused, handled by textcolor script cmd
-EventScript_SaveTextColor:: @ 81A666F
+EventScript_SaveTextColor::
 	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
 	return
 
-EventScript_RestorePrevTextColor:: @ 81A6675
+EventScript_RestorePrevTextColor::
 	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	return
 
-Std_ObtainItem:: @ 81A667B
+Std_ObtainItem::
 	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
 	textcolor 3
 	additem VAR_0x8000, VAR_0x8001
@@ -16,7 +16,7 @@ Std_ObtainItem:: @ 81A667B
 	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	return
 
-EventScript_ObtainItemMessage:: @ 81A6697
+EventScript_ObtainItemMessage::
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_BufferPocketNameTryFanfare
@@ -26,7 +26,7 @@ EventScript_ObtainItemMessage:: @ 81A6697
 	call_if_eq EventScript_NoRoomForItem
 	return
 
-EventScript_BufferPocketNameTryFanfare:: @ 81A66BC
+EventScript_BufferPocketNameTryFanfare::
 	switch VAR_RESULT
 	case POCKET_ITEMS, EventScript_BufferItemsPocket
 	case POCKET_KEY_ITEMS, EventScript_BufferKeyItemsPocket
@@ -35,37 +35,37 @@ EventScript_BufferPocketNameTryFanfare:: @ 81A66BC
 	case POCKET_BERRY_POUCH, EventScript_BufferBerryPouch
 	end
 
-EventScript_BufferItemsPocket:: @ 81A66F9
+EventScript_BufferItemsPocket::
 	getstdstring 2, STDSTRING_ITEMS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_BufferKeyItemsPocket:: @ 81A6709
+EventScript_BufferKeyItemsPocket::
 	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_BufferPokeBallsPocket:: @ 81A6719
+EventScript_BufferPokeBallsPocket::
 	getstdstring 2, STDSTRING_POKEBALLS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_BufferTMCase:: @ 81A6729
+EventScript_BufferTMCase::
 	getstdstring 2, STDSTRING_TM_CASE
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedTMHM
 	return
 
-EventScript_BufferBerryPouch:: @ 81A6739
+EventScript_BufferBerryPouch::
 	getstdstring 2, STDSTRING_BERRY_POUCH
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_ObtainedItem:: @ 81A6749
+EventScript_ObtainedItem::
 	message Text_ObtainedTheX
 	waitfanfare
 	waitmessage
@@ -73,25 +73,25 @@ EventScript_ObtainedItem:: @ 81A6749
 	setvar VAR_RESULT, 1
 	return
 
-EventScript_NoRoomForItem:: @ 81A675E
+EventScript_NoRoomForItem::
 	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_PlayFanfareObtainedItem:: @ 81A6764
+EventScript_PlayFanfareObtainedItem::
 	playfanfare MUS_LEVEL_UP
 	return
 
-EventScript_PlayFanfareObtainedTMHM:: @ 81A6768
+EventScript_PlayFanfareObtainedTMHM::
 	playfanfare MUS_LEVEL_UP
 	return
 
-Std_ObtainDecoration:: @ 81A676C
+Std_ObtainDecoration::
 	adddecor VAR_0x8000
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainDecorMessage
 	return
 
-EventScript_ObtainDecorMessage:: @ 81A677A
+EventScript_ObtainDecorMessage::
 	getdecorname 1, VAR_0x8000
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_ObtainedDecor
@@ -99,7 +99,7 @@ EventScript_ObtainDecorMessage:: @ 81A677A
 	call_if_eq EventScript_NoRoomForDecor
 	return
 
-EventScript_ObtainedDecor:: @ 81A6795
+EventScript_ObtainedDecor::
 	playfanfare MUS_OBTAIN_ITEM
 	message Text_ObtainedTheDecor
 	waitfanfare
@@ -108,11 +108,11 @@ EventScript_ObtainedDecor:: @ 81A6795
 	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_NoRoomForDecor:: @ 81A67AD
+EventScript_NoRoomForDecor::
 	setvar VAR_RESULT, FALSE
 	return
 
-Std_FindItem:: @ 81A67B3
+Std_FindItem::
 	lock
 	faceplayer
 	waitse
@@ -130,7 +130,7 @@ Std_FindItem:: @ 81A67B3
 	release
 	return
 
-EventScript_PickUpItem:: @ 81A67EE
+EventScript_PickUpItem::
 	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, BufferTMHMMoveName
@@ -144,21 +144,21 @@ EventScript_PickUpItem:: @ 81A67EE
 	msgbox Text_PutItemAway
 	return
 
-EventScript_FoundTMHM:: @ 81A6821
+EventScript_FoundTMHM::
 	message Text_FoundTMHMContainsMove
 	return
 
-EventScript_FoundItem:: @ 81A6827
+EventScript_FoundItem::
 	message Text_FoundOneItem
 	return
 
-EventScript_NoRoomToPickUpItem:: @ 81A682D
+EventScript_NoRoomToPickUpItem::
 	msgbox Text_ObtainedTheX
 	msgbox Text_TooBadBagFull
 	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_HiddenItemScript:: @ 81A6843
+EventScript_HiddenItemScript::
 	lockall
 	textcolor 3
 	waitse

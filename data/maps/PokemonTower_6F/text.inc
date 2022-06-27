@@ -1,43 +1,43 @@
-PokemonTower_6F_Text_AngelicaIntro:: @ 817A243
+PokemonTower_6F_Text_AngelicaIntro::
     .string "Give…me…\n"
     .string "blood…$"
 
-PokemonTower_6F_Text_AngelicaDefeat:: @ 817A253
+PokemonTower_6F_Text_AngelicaDefeat::
     .string "Groan!$"
 
-PokemonTower_6F_Text_AngelicaPostBattle:: @ 817A25A
+PokemonTower_6F_Text_AngelicaPostBattle::
     .string "I feel anemic and weak…$"
 
-PokemonTower_6F_Text_EmiliaIntro:: @ 817A272
+PokemonTower_6F_Text_EmiliaIntro::
     .string "Urff…\n"
     .string "Kwaah!$"
 
-PokemonTower_6F_Text_EmiliaDefeat:: @ 817A27F
+PokemonTower_6F_Text_EmiliaDefeat::
     .string "Something fell out!$"
 
-PokemonTower_6F_Text_EmiliaPostBattle:: @ 817A293
+PokemonTower_6F_Text_EmiliaPostBattle::
     .string "My hair didn't fall out!\n"
     .string "It was a malevolent spirit!$"
 
-PokemonTower_6F_Text_JenniferIntro:: @ 817A2C8
+PokemonTower_6F_Text_JenniferIntro::
     .string "Ke…ke…ke…\n"
     .string "ke…ke…ke!$"
 
-PokemonTower_6F_Text_JenniferDefeat:: @ 817A2DC
+PokemonTower_6F_Text_JenniferDefeat::
     .string "Keee!$"
 
-PokemonTower_6F_Text_JenniferPostBattle:: @ 817A2E2
+PokemonTower_6F_Text_JenniferPostBattle::
     .string "What's going on here?$"
 
-PokemonTower_6F_Text_BeGoneIntruders:: @ 817A2F8
+PokemonTower_6F_Text_BeGoneIntruders::
     .string "Be gone…\n"
     .string "Intruders…$"
 
-PokemonTower_6F_Text_GhostWasCubonesMother:: @ 817A30C
+PokemonTower_6F_Text_GhostWasCubonesMother::
     .string "The ghost was the restless spirit\n"
     .string "of CUBONE's mother!$"
 
-PokemonTower_6F_Text_MothersSpiritWasCalmed:: @ 817A342
+PokemonTower_6F_Text_MothersSpiritWasCalmed::
     .string "The mother's spirit was calmed.\p"
     .string "It departed to the afterlife…$"
 

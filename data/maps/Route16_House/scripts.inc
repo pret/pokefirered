@@ -1,7 +1,7 @@
-Route16_House_MapScripts:: @ 817014E
+Route16_House_MapScripts::
 	.byte 0
 
-Route16_House_EventScript_Woman:: @ 817014F
+Route16_House_EventScript_Woman::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HM02, Route16_House_EventScript_AlreadyGotHM02
@@ -15,17 +15,17 @@ Route16_House_EventScript_Woman:: @ 817014F
 	release
 	end
 
-Route16_House_EventScript_NoRoomForHM02:: @ 817019B
+Route16_House_EventScript_NoRoomForHM02::
 	msgbox Route16_House_Text_DontHaveAnyRoomForThis
 	release
 	end
 
-Route16_House_EventScript_AlreadyGotHM02:: @ 81701A5
+Route16_House_EventScript_AlreadyGotHM02::
 	msgbox Route16_House_Text_ExplainHM02
 	release
 	end
 
-Route16_House_EventScript_Fearow:: @ 81701AF
+Route16_House_EventScript_Fearow::
 	lock
 	faceplayer
 	waitse

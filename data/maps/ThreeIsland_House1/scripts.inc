@@ -1,7 +1,7 @@
-ThreeIsland_House1_MapScripts:: @ 8171819
+ThreeIsland_House1_MapScripts::
 	.byte 0
 
-ThreeIsland_House1_EventScript_Lostelle:: @ 817181A
+ThreeIsland_House1_EventScript_Lostelle::
 	lock
 	faceplayer
 	special BufferBigGuyOrBigGirlString
@@ -9,6 +9,6 @@ ThreeIsland_House1_EventScript_Lostelle:: @ 817181A
 	release
 	end
 
-ThreeIsland_House1_EventScript_DisplayCase:: @ 8171829
+ThreeIsland_House1_EventScript_DisplayCase::
 	msgbox ThreeIsland_House1_Text_RareRocksGemsDisplayed, MSGBOX_SIGN
 	end

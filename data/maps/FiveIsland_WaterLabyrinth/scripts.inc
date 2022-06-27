@@ -1,7 +1,7 @@
-FiveIsland_WaterLabyrinth_MapScripts:: @ 816884D
+FiveIsland_WaterLabyrinth_MapScripts::
 	.byte 0
 
-FiveIsland_WaterLabyrinth_EventScript_EggGentleman:: @ 816884E
+FiveIsland_WaterLabyrinth_EventScript_EggGentleman::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	lock
@@ -16,18 +16,18 @@ FiveIsland_WaterLabyrinth_EventScript_EggGentleman:: @ 816884E
 	release
 	end
 
-FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment:: @ 8168895
+FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment::
 	famechecker FAMECHECKER_DAISY, 2
 	msgbox FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy
 	release
 	end
 
-FiveIsland_WaterLabyrinth_EventScript_LeadMonMaxFriendship:: @ 81688AC
+FiveIsland_WaterLabyrinth_EventScript_LeadMonMaxFriendship::
 	msgbox FiveIsland_WaterLabyrinth_Text_TreatMonRightHaveThis
 	goto FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg
 	end
 
-FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg:: @ 81688BA
+FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg::
 	getpartysize
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq FiveIsland_WaterLabyrinth_EventScript_NoRoomForEgg
@@ -44,7 +44,7 @@ FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg:: @ 81688BA
 
 @ If the player has a Togepi/Togetic from this game (assumed to be the one the man gave you) then comment on it
 @ Otherwise make normal comment
-FiveIsland_WaterLabyrinth_EventScript_PostEggComment:: @ 81688E3
+FiveIsland_WaterLabyrinth_EventScript_PostEggComment::
 	getspeciesname 1, SPECIES_TOGEPI
 	setvar VAR_0x8004, SPECIES_TOGEPI
 	specialvar VAR_RESULT, PlayerPartyContainsSpeciesWithPlayerID
@@ -59,12 +59,12 @@ FiveIsland_WaterLabyrinth_EventScript_PostEggComment:: @ 81688E3
 	release
 	end
 
-FiveIsland_WaterLabyrinth_EventScript_NoRoomForEgg:: @ 816891F
+FiveIsland_WaterLabyrinth_EventScript_NoRoomForEgg::
 	setflag FLAG_NO_ROOM_FOR_TOGEPI_EGG
 	msgbox FiveIsland_WaterLabyrinth_Text_DontHaveSpaceInYourParty
 	release
 	end
 
-FiveIsland_WaterLabyrinth_EventScript_ReturnForEgg:: @ 816892C
+FiveIsland_WaterLabyrinth_EventScript_ReturnForEgg::
 	goto FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg
 	end

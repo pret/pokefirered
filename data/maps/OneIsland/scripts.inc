@@ -1,19 +1,19 @@
 .equ LOCALID_BILL, 1
 
-OneIsland_MapScripts:: @ 8167484
+OneIsland_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OneIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_OnFrame
 	.byte 0
 
-OneIsland_OnTransition:: @ 816748F
+OneIsland_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_ONE_ISLAND
 	end
 
-OneIsland_OnFrame:: @ 8167493
+OneIsland_OnFrame::
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 2, OneIsland_EventScript_EnterOneIslandFirstTime
 	.2byte 0
 
-OneIsland_EventScript_EnterOneIslandFirstTime:: @ 816749D
+OneIsland_EventScript_EnterOneIslandFirstTime::
 	lockall
 	textcolor 0
 	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Movement_PlayerExitHarbor
@@ -51,32 +51,32 @@ OneIsland_EventScript_EnterOneIslandFirstTime:: @ 816749D
 	walk_up
 	.endm
 
-OneIsland_Movement_PlayerWalkToPokeCenter:: @ 81674F4
+OneIsland_Movement_PlayerWalkToPokeCenter::
 	walk_up
 	walk_to_pokecenter
 	step_end
 
-OneIsland_Movement_PlayerEnterPokeCenter:: @ 8167501
+OneIsland_Movement_PlayerEnterPokeCenter::
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-OneIsland_Movement_PlayerExitHarbor:: @ 8167505
+OneIsland_Movement_PlayerExitHarbor::
 	walk_up
 	step_end
 
-OneIsland_Movement_BillWalkToPokeCenter:: @ 8167507
+OneIsland_Movement_BillWalkToPokeCenter::
 	walk_to_pokecenter
 	walk_up
 	step_end
 
-OneIsland_Movement_BillEnterPokeCenter:: @ 8167514
+OneIsland_Movement_BillEnterPokeCenter::
 	walk_up
 	set_invisible
 	step_end
 
-OneIsland_EventScript_OldMan:: @ 8167517
+OneIsland_EventScript_OldMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, OneIsland_EventScript_OldManLinkHoenn
@@ -85,24 +85,24 @@ OneIsland_EventScript_OldMan:: @ 8167517
 	release
 	end
 
-OneIsland_EventScript_OldManLinkKanto:: @ 8167535
+OneIsland_EventScript_OldManLinkKanto::
 	msgbox OneIsland_Text_HavePCLinkageWithKanto
 	release
 	end
 
-OneIsland_EventScript_OldManLinkHoenn:: @ 816753F
+OneIsland_EventScript_OldManLinkHoenn::
 	msgbox OneIsland_Text_HavePCLinkageWithHoenn
 	release
 	end
 
-OneIsland_EventScript_BaldingMan:: @ 8167549
+OneIsland_EventScript_BaldingMan::
 	msgbox OneIsland_Text_IsntWarmClimateHereGreat, MSGBOX_NPC
 	end
 
-OneIsland_EventScript_IslandSign:: @ 8167552
+OneIsland_EventScript_IslandSign::
 	msgbox OneIsland_Text_IslandSign, MSGBOX_SIGN
 	end
 
-OneIsland_EventScript_PokemonNetCenterSign:: @ 816755B
+OneIsland_EventScript_PokemonNetCenterSign::
 	msgbox OneIsland_Text_PokemonNetCenterSign, MSGBOX_SIGN
 	end

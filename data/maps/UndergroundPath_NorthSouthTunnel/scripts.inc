@@ -1,7 +1,7 @@
-UndergroundPath_NorthSouthTunnel_MapScripts:: @ 8160EB5
+UndergroundPath_NorthSouthTunnel_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, UndergroundPath_NorthSouthTunnel_OnTransition
 	.byte 0
 
-UndergroundPath_NorthSouthTunnel_OnTransition:: @ 8160EBB
+UndergroundPath_NorthSouthTunnel_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL
 	end

@@ -1,15 +1,15 @@
-ViridianCity_House1_MapScripts:: @ 8169E9A
+ViridianCity_House1_MapScripts::
 	.byte 0
 
-ViridianCity_House1_EventScript_BaldingMan:: @ 8169E9B
+ViridianCity_House1_EventScript_BaldingMan::
 	msgbox ViridianCity_House1_Text_NicknamingIsFun, MSGBOX_NPC
 	end
 
-ViridianCity_House1_EventScript_LittleGirl:: @ 8169EA4
+ViridianCity_House1_EventScript_LittleGirl::
 	msgbox ViridianCity_House1_Text_MyDaddyLovesMonsToo, MSGBOX_NPC
 	end
 
-ViridianCity_House1_EventScript_Speary:: @ 8169EAD
+ViridianCity_House1_EventScript_Speary::
 	lock
 	faceplayer
 	waitse
@@ -19,6 +19,6 @@ ViridianCity_House1_EventScript_Speary:: @ 8169EAD
 	release
 	end
 
-ViridianCity_House1_EventScript_NicknameSign:: @ 8169EC0
+ViridianCity_House1_EventScript_NicknameSign::
 	msgbox ViridianCity_House1_Text_SpearowNameSpeary, MSGBOX_SIGN
 	end

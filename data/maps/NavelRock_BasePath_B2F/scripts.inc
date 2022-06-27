@@ -1,2 +1,2 @@
-NavelRock_BasePath_B2F_MapScripts:: @ 81651F7
+NavelRock_BasePath_B2F_MapScripts::
 	.byte 0

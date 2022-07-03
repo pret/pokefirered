@@ -219,7 +219,7 @@ static void Task_Linkup1(u8 taskId)
 
 static void Task_LinkupMaster_2(u8 taskId)
 {
-    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !textbox_any_visible())
+    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !GetFieldMessageBoxType())
     {
         gTasks[taskId].data[3] = 0;
         gTasks[taskId].func = Task_LinkupMaster_3;
@@ -246,7 +246,7 @@ static void Task_LinkupMaster_3(u8 taskId)
 
 static void Task_LinkupMaster_4(u8 taskId)
 {
-    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !textbox_any_visible())
+    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !GetFieldMessageBoxType())
     {
         if (GetSavedPlayerCount() != GetLinkPlayerCount_2())
         {

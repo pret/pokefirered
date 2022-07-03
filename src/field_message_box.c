@@ -13,7 +13,7 @@ enum
     FIELD_MESSAGE_BOX_AUTO_SCROLL,
 };
 
-static EWRAM_DATA u8 sMessageBoxType = FIELD_MESSAGE_BOX_HIDDEN;
+static EWRAM_DATA u8 sMessageBoxType = 0;
 
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str);
 static void StartDrawFieldMessageBox(void);

@@ -32,7 +32,7 @@
 #define FLDEFF_TREE_DISGUISE             28
 #define FLDEFF_MOUNTAIN_DISGUISE         29
 #define FLDEFF_NPCFLY_OUT                30
-#define FLDEFF_USE_FLY                   31
+#define FLDEFF_FLY_OUT                   31
 #define FLDEFF_FLY_IN                    32
 #define FLDEFF_QUESTION_MARK_ICON        33
 #define FLDEFF_FEET_IN_FLOWING_WATER     34
@@ -70,7 +70,7 @@
 #define FLDEFF_DOUBLE_EXCL_MARK_ICON     66
 #define FLDEFF_MOVE_DEOXYS_ROCK          67
 #define FLDEFF_DESTROY_DEOXYS_ROCK       68
-#define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos
+#define FLDEFF_PHOTO_FLASH               69
 
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005

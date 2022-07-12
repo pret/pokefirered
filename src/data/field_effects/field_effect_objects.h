@@ -1105,31 +1105,31 @@ static const struct SpriteFrameImage sPicTable_Bird[] =
     overworld_frame(gFieldEffectObjectPic_Bird, 8, 8, 4),
 };
 
-static const union AnimCmd sAnim_Bird_0[] =
+static const union AnimCmd sAnim_Bird_WithoutPlayer[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Bird_1[] =
+static const union AnimCmd sAnim_Bird_Red_FlyOut[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Bird_2[] =
+static const union AnimCmd sAnim_Bird_Red_FlyIn[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Bird_3[] =
+static const union AnimCmd sAnim_Bird_Green_FlyOut[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Bird_4[] =
+static const union AnimCmd sAnim_Bird_Green_FlyIn[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
@@ -1137,11 +1137,11 @@ static const union AnimCmd sAnim_Bird_4[] =
 
 static const union AnimCmd *const sAnimTable_Bird[] =
 {
-    sAnim_Bird_0,
-    sAnim_Bird_1,
-    sAnim_Bird_2,
-    sAnim_Bird_3,
-    sAnim_Bird_4,
+    sAnim_Bird_WithoutPlayer,
+    sAnim_Bird_Red_FlyOut,
+    sAnim_Bird_Red_FlyIn,
+    sAnim_Bird_Green_FlyOut,
+    sAnim_Bird_Green_FlyIn,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bird =

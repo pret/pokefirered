@@ -33,7 +33,7 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_TreeDisguise
 	.4byte gFldEffScript_MountainDisguise
 	.4byte gFldEffScript_NpcflyOut
-	.4byte gFldEffScript_UseFly
+	.4byte gFldEffScript_FlyOut
 	.4byte gFldEffScript_FlyIn
 	.4byte gFldEffScript_QuestionMarkIcon
 	.4byte gFldEffScript_FeetInFlowingWater
@@ -70,8 +70,8 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_UseVsSeeker
 	.4byte gFldEffScript_DoubleExclMarkIcon
 	.4byte gFldEffScript_MoveDeoxysRock
-	.4byte gFldEffScript_Unk44
-	.4byte gFldEffScript_Unk45
+	.4byte gFldEffScript_DestroyDeoxysRock
+	.4byte gFldEffScript_PhotoFlash
 
 gFldEffScript_ExclamationMarkIcon::
 	callnative FldEff_ExclamationMarkIcon1
@@ -173,7 +173,7 @@ gFldEffScript_DeepSandFootprints::
 	end 
 
 gFldEffScript_PokecenterHeal::
-	loadfadedpal gUnknown_83CBE9C
+	loadfadedpal gSpritePalette_PokeballGlow 
 	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_PokecenterHeal
 	end 
 
@@ -195,8 +195,8 @@ gFldEffScript_NpcflyOut::
 	callnative FldEff_NpcFlyOut
 	end 
 
-gFldEffScript_UseFly::
-	callnative FldEff_UseFly
+gFldEffScript_FlyOut::
+	callnative FldEff_FlyOut 
 	end 
 
 gFldEffScript_FlyIn::
@@ -313,8 +313,8 @@ gFldEffScript_PcturnOn::
 	end 
 
 gFldEffScript_HallOfFameRecord::
-	loadfadedpal gUnknown_83CBE9C
-	loadfadedpal_callnative gUnknown_83CBEA4, FldEff_HallOfFameRecord
+	loadfadedpal gSpritePalette_PokeballGlow 
+	loadfadedpal_callnative gSpritePalette_HofMonitor, FldEff_HallOfFameRecord
 	end 
 
 gFldEffScript_UseTeleport::
@@ -337,10 +337,10 @@ gFldEffScript_MoveDeoxysRock::
 	callnative FldEff_MoveDeoxysRock
 	end 
 
-gFldEffScript_Unk44::
-	callnative FldEff_Unk44
+gFldEffScript_DestroyDeoxysRock::
+	callnative FldEff_DestroyDeoxysRock
 	end 
 
-gFldEffScript_Unk45::
-	callnative FldEff_Unk45
+gFldEffScript_PhotoFlash::
+	callnative FldEff_PhotoFlash
 	end 

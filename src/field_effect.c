@@ -4012,7 +4012,7 @@ static void SpriteCB_DeoxysRockFragment(struct Sprite *sprite)
         sprite->y += 12;
         break;
     }
-    if (sprite->x < -4 || sprite->x > 244 || sprite->y < -4 || sprite->y > 164)
+    if (sprite->x < -4 || sprite->x > DISPLAY_WIDTH + 4 || sprite->y < -4 || sprite->y > DISPLAY_HEIGHT + 4)
         DestroySprite(sprite);
 }
 

@@ -47,7 +47,7 @@ CeladonCity_GameCorner_EventScript_PrintPhoto::
 	message CeladonCity_GameCorner_Text_BigSmileForPhoto
 	waitmessage
 	playse MUS_PHOTO
-	dofieldeffect FLDEFF_UNK_45
+	dofieldeffect FLDEFF_PHOTO_FLASH
 	delay 60
 	special UpdateTrainerCardPhotoIcons
 	msgbox CeladonCity_GameCorner_Text_PrintIsReadyCheckTrainerCard

@@ -2,76 +2,76 @@
 	.section script_data, "aw", %progbits
 	.align 2
 gFieldEffectScriptPointers::
-	.4byte gFldEffScript_ExclamationMarkIcon
-	.4byte gFldEffScript_UseCutOnGrass
-	.4byte gFldEffScript_UseCutOnTree
-	.4byte gFldEffScript_Shadow
-	.4byte gFldEffScript_TallGrass
-	.4byte gFldEffScript_Ripple
-	.4byte gFldEffScript_FieldMoveShowMon
-	.4byte gFldEffScript_Ash
-	.4byte gFldEffScript_SurfBlob
-	.4byte gFldEffScript_UseSurf
-	.4byte gFldEffScript_Dust
-	.4byte gFldEffScript_UseSecretPowerCave
-	.4byte gFldEffScript_JumpTallGrass
-	.4byte gFldEffScript_SandFootprints
-	.4byte gFldEffScript_JumpBigSplash
-	.4byte gFldEffScript_Splash
-	.4byte gFldEffScript_JumpSmallSplash
-	.4byte gFldEffScript_LongGrass
-	.4byte gFldEffScript_JumpLongGrass
-	.4byte gFldEffScript_Unknown19
-	.4byte gFldEffScript_Unknown20
-	.4byte gFldEffScript_Unknown21
-	.4byte gFldEffScript_Unknown22
-	.4byte gFldEffScript_BerryTreeGrowthSparkle
-	.4byte gFldEffScript_DeepSandFootprints
-	.4byte gFldEffScript_PokecenterHeal
-	.4byte gFldEffScript_UseSecretPowerTree
-	.4byte gFldEffScript_UseSecretPowerShrub
-	.4byte gFldEffScript_TreeDisguise
-	.4byte gFldEffScript_MountainDisguise
-	.4byte gFldEffScript_NpcflyOut
-	.4byte gFldEffScript_FlyOut
-	.4byte gFldEffScript_FlyIn
-	.4byte gFldEffScript_QuestionMarkIcon
-	.4byte gFldEffScript_FeetInFlowingWater
-	.4byte gFldEffScript_BikeTireTracks
-	.4byte gFldEffScript_SandDisguise
-	.4byte gFldEffScript_UseRockSmash
-	.4byte gFldEffScript_UseDig
-	.4byte gFldEffScript_SandPile
-	.4byte gFldEffScript_UseStrength
-	.4byte gFldEffScript_ShortGrass
-	.4byte gFldEffScript_HotSpringsWater
-	.4byte gFldEffScript_UseWaterfall
-	.4byte gFldEffScript_UseDive
-	.4byte gFldEffScript_Pokeball
-	.4byte gFldEffScript_HeartIcon
-	.4byte gFldEffScript_Nop47
-	.4byte gFldEffScript_Nop48
-	.4byte gFldEffScript_PopOutOfAsh
-	.4byte gFldEffScript_LavaridgeGymWarp
-	.4byte gFldEffScript_SweetScent
-	.4byte gFldEffScript_SandPillar
-	.4byte gFldEffScript_Bubbles
-	.4byte gFldEffScript_Sparkle
-	.4byte gFldEffScript_SecretPowerCave
-	.4byte gFldEffScript_SecretPowerTree
-	.4byte gFldEffScript_SecretPowerShrub
-	.4byte gFldEffScript_CutGrass
-	.4byte gFldEffScript_FieldMoveShowMonInit
-	.4byte gFldEffScript_UseFlyAncientTomb
-	.4byte gFldEffScript_PcturnOn
-	.4byte gFldEffScript_HallOfFameRecord
-	.4byte gFldEffScript_UseTeleport
-	.4byte gFldEffScript_SmileyFaceIcon
-	.4byte gFldEffScript_UseVsSeeker
-	.4byte gFldEffScript_DoubleExclMarkIcon
-	.4byte gFldEffScript_MoveDeoxysRock
-	.4byte gFldEffScript_DestroyDeoxysRock
-	.4byte gFldEffScript_PhotoFlash
+	.4byte gFldEffScript_ExclamationMarkIcon     @ FLDEFF_EXCLAMATION_MARK_ICON
+	.4byte gFldEffScript_UseCutOnGrass           @ FLDEFF_USE_CUT_ON_GRASS
+	.4byte gFldEffScript_UseCutOnTree            @ FLDEFF_USE_CUT_ON_TREE
+	.4byte gFldEffScript_Shadow                  @ FLDEFF_SHADOW
+	.4byte gFldEffScript_TallGrass               @ FLDEFF_TALL_GRASS
+	.4byte gFldEffScript_Ripple                  @ FLDEFF_RIPPLE
+	.4byte gFldEffScript_FieldMoveShowMon        @ FLDEFF_FIELD_MOVE_SHOW_MON
+	.4byte gFldEffScript_Ash                     @ FLDEFF_ASH
+	.4byte gFldEffScript_SurfBlob                @ FLDEFF_SURF_BLOB
+	.4byte gFldEffScript_UseSurf                 @ FLDEFF_USE_SURF
+	.4byte gFldEffScript_Dust                    @ FLDEFF_DUST
+	.4byte gFldEffScript_UseSecretPowerCave      @ FLDEFF_USE_SECRET_POWER_CAVE
+	.4byte gFldEffScript_JumpTallGrass           @ FLDEFF_JUMP_TALL_GRASS
+	.4byte gFldEffScript_SandFootprints          @ FLDEFF_SAND_FOOTPRINTS
+	.4byte gFldEffScript_JumpBigSplash           @ FLDEFF_JUMP_BIG_SPLASH
+	.4byte gFldEffScript_Splash                  @ FLDEFF_SPLASH
+	.4byte gFldEffScript_JumpSmallSplash         @ FLDEFF_JUMP_SMALL_SPLASH
+	.4byte gFldEffScript_LongGrass               @ FLDEFF_LONG_GRASS
+	.4byte gFldEffScript_JumpLongGrass           @ FLDEFF_JUMP_LONG_GRASS
+	.4byte gFldEffScript_Unknown19               @ FLDEFF_UNKNOWN_19
+	.4byte gFldEffScript_Unknown20               @ FLDEFF_UNKNOWN_20
+	.4byte gFldEffScript_Unknown21               @ FLDEFF_UNKNOWN_21
+	.4byte gFldEffScript_Unknown22               @ FLDEFF_UNKNOWN_22
+	.4byte gFldEffScript_BerryTreeGrowthSparkle  @ FLDEFF_BERRY_TREE_GROWTH_SPARKLE
+	.4byte gFldEffScript_DeepSandFootprints      @ FLDEFF_DEEP_SAND_FOOTPRINTS
+	.4byte gFldEffScript_PokecenterHeal          @ FLDEFF_POKECENTER_HEAL
+	.4byte gFldEffScript_UseSecretPowerTree      @ FLDEFF_USE_SECRET_POWER_TREE
+	.4byte gFldEffScript_UseSecretPowerShrub     @ FLDEFF_USE_SECRET_POWER_SHRUB
+	.4byte gFldEffScript_TreeDisguise            @ FLDEFF_TREE_DISGUISE
+	.4byte gFldEffScript_MountainDisguise        @ FLDEFF_MOUNTAIN_DISGUISE
+	.4byte gFldEffScript_NpcflyOut               @ FLDEFF_NPCFLY_OUT
+	.4byte gFldEffScript_FlyOut                  @ FLDEFF_FLY_OUT
+	.4byte gFldEffScript_FlyIn                   @ FLDEFF_FLY_IN
+	.4byte gFldEffScript_QuestionMarkIcon        @ FLDEFF_QUESTION_MARK_ICON
+	.4byte gFldEffScript_FeetInFlowingWater      @ FLDEFF_FEET_IN_FLOWING_WATER
+	.4byte gFldEffScript_BikeTireTracks          @ FLDEFF_BIKE_TIRE_TRACKS
+	.4byte gFldEffScript_SandDisguise            @ FLDEFF_SAND_DISGUISE
+	.4byte gFldEffScript_UseRockSmash            @ FLDEFF_USE_ROCK_SMASH
+	.4byte gFldEffScript_UseDig                  @ FLDEFF_USE_DIG
+	.4byte gFldEffScript_SandPile                @ FLDEFF_SAND_PILE
+	.4byte gFldEffScript_UseStrength             @ FLDEFF_USE_STRENGTH
+	.4byte gFldEffScript_ShortGrass              @ FLDEFF_SHORT_GRASS
+	.4byte gFldEffScript_HotSpringsWater         @ FLDEFF_HOT_SPRINGS_WATER
+	.4byte gFldEffScript_UseWaterfall            @ FLDEFF_USE_WATERFALL
+	.4byte gFldEffScript_UseDive                 @ FLDEFF_USE_DIVE
+	.4byte gFldEffScript_Pokeball                @ FLDEFF_POKEBALL
+	.4byte gFldEffScript_HeartIcon               @ FLDEFF_X_ICON
+	.4byte gFldEffScript_Nop47                   @ FLDEFF_NOP_47
+	.4byte gFldEffScript_Nop48                   @ FLDEFF_NOP_48
+	.4byte gFldEffScript_PopOutOfAsh             @ FLDEFF_POP_OUT_OF_ASH
+	.4byte gFldEffScript_LavaridgeGymWarp        @ FLDEFF_LAVARIDGE_GYM_WARP
+	.4byte gFldEffScript_SweetScent              @ FLDEFF_SWEET_SCENT
+	.4byte gFldEffScript_SandPillar              @ FLDEFF_SAND_PILLAR
+	.4byte gFldEffScript_Bubbles                 @ FLDEFF_BUBBLES
+	.4byte gFldEffScript_Sparkle                 @ FLDEFF_SPARKLE
+	.4byte gFldEffScript_SecretPowerCave         @ FLDEFF_SECRET_POWER_CAVE
+	.4byte gFldEffScript_SecretPowerTree         @ FLDEFF_SECRET_POWER_TREE
+	.4byte gFldEffScript_SecretPowerShrub        @ FLDEFF_SECRET_POWER_SHRUB
+	.4byte gFldEffScript_CutGrass                @ FLDEFF_CUT_GRASS
+	.4byte gFldEffScript_FieldMoveShowMonInit    @ FLDEFF_FIELD_MOVE_SHOW_MON_INIT
+	.4byte gFldEffScript_UseFlyAncientTomb       @ FLDEFF_USE_FLY_ANCIENT_TOMB
+	.4byte gFldEffScript_PcturnOn                @ FLDEFF_PCTURN_ON
+	.4byte gFldEffScript_HallOfFameRecord        @ FLDEFF_HALL_OF_FAME_RECORD
+	.4byte gFldEffScript_UseTeleport             @ FLDEFF_USE_TELEPORT
+	.4byte gFldEffScript_SmileyFaceIcon          @ FLDEFF_SMILEY_FACE_ICON
+	.4byte gFldEffScript_UseVsSeeker             @ FLDEFF_USE_VS_SEEKER
+	.4byte gFldEffScript_DoubleExclMarkIcon      @ FLDEFF_DOUBLE_EXCL_MARK_ICON
+	.4byte gFldEffScript_MoveDeoxysRock          @ FLDEFF_MOVE_DEOXYS_ROCK
+	.4byte gFldEffScript_DestroyDeoxysRock       @ FLDEFF_DESTROY_DEOXYS_ROCK
+	.4byte gFldEffScript_PhotoFlash              @ FLDEFF_PHOTO_FLASH
 
 gFldEffScript_ExclamationMarkIcon::
 	callnative FldEff_ExclamationMarkIcon1

@@ -1416,7 +1416,7 @@ static void InitRegionMap(u8 type)
     }
     else
     {
-        gUnknown_2031DE0 = TRUE;
+        gExitStairsMovementDisabled = TRUE;
         sRegionMap->type = type;
         sRegionMap->mainState = 0;
         sRegionMap->openState = 0;
@@ -1435,7 +1435,7 @@ void InitRegionMapWithExitCB(u8 type, MainCallback cb)
     }
     else
     {
-        gUnknown_2031DE0 = TRUE;
+        gExitStairsMovementDisabled = TRUE;
         sRegionMap->type = type;
         sRegionMap->mainState = 0;
         sRegionMap->openState = 0;

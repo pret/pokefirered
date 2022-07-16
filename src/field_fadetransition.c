@@ -264,7 +264,7 @@ static void SetUpWarpExitTask(bool8 playerNotMoving)
             func = Task_ExitNonAnimDoor;
         else if (MetatileBehavior_IsDirectionalStairWarp(metatileBehavior) == TRUE)
         {
-            u8 tmp = gUnknown_2031DE0;
+            u8 tmp = gExitStairsMovementDisabled;
             func = Task_ExitNonDoor;
             if (!tmp)
                 func = Task_ExitStairs;
@@ -272,7 +272,7 @@ static void SetUpWarpExitTask(bool8 playerNotMoving)
         else
             func = Task_ExitNonDoor;
     }
-    gUnknown_2031DE0 = FALSE;
+    gExitStairsMovementDisabled = FALSE;
     CreateTask(func, 10);
 }
 

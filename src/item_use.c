@@ -221,7 +221,7 @@ static bool8 sub_80A1194(void)
     ScriptContext2_Enable();
     FadeInFromBlack();
     CreateTask(sub_80A11C0, 10);
-    gUnknown_2031DE0 = 0;
+    gExitStairsMovementDisabled = 0;
     return TRUE;
 }
 

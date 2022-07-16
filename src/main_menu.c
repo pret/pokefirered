@@ -468,7 +468,7 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
         {
         default:
         case MAIN_MENU_NEWGAME:
-            gUnknown_2031DE0 = 0;
+            gExitStairsMovementDisabled = 0;
             FreeAllWindowBuffers();
             DestroyTask(taskId);
             StartNewGameScene();
@@ -476,7 +476,7 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
         case MAIN_MENU_CONTINUE:
             gPlttBufferUnfaded[0] = RGB_BLACK;
             gPlttBufferFaded[0] = RGB_BLACK;
-            gUnknown_2031DE0 = 0;
+            gExitStairsMovementDisabled = 0;
             FreeAllWindowBuffers();
             TrySetUpQuestLogScenes_ElseContinueFromSave(taskId);
             break;

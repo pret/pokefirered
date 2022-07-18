@@ -7,15 +7,15 @@
 
 #include "global.h"
 
-// Exported type declarations
-
-// Exported RAM declarations
-
-// Exported ROM declarations
+enum {
+    BOB_NONE,
+    BOB_PLAYER_AND_MON,
+    BOB_MON_ONLY, // when player has jumped / flown off
+};
 
 u8 CreateWarpArrowSprite(void);
-void SetSurfBlob_BobState(u8, u8);
-void SetSurfBlob_DontSyncAnim(u8, u8);
+void SetSurfBlob_BobState(u8 spriteId, u8 bobState);
+void SetSurfBlob_DontSyncAnim(u8 spriteId, bool8 value);
 void StartAshFieldEffect(s16, s16, u16, s16);
 void StartRevealDisguise(struct ObjectEvent *);
 bool8 UpdateRevealDisguise(struct ObjectEvent *);
@@ -24,7 +24,7 @@ u32 StartFieldEffectForObjectEvent(u8, struct ObjectEvent*);
 u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y);
 void SetSpriteInvisible(u8 spriteId);
-void SetSurfBlob_PlayerOffset(u8 spriteId, u8 hasOffset, s16 offset);
+void SetSurfBlob_PlayerOffset(u8 spriteId, bool8 hasOffset, s16 offset);
 void UpdateJumpImpactEffect(struct Sprite * sprite);
 void UpdateShadowFieldEffect(struct Sprite * sprite);
 void UpdateBubblesFieldEffect(struct Sprite * sprite);

@@ -1619,7 +1619,7 @@ static void Task_StopSurfingInit(u8 taskId)
         if (!ObjectEventClearHeldMovementIfFinished(playerObjEvent))
             return;
     }
-    SetSurfBlob_BobState(playerObjEvent->fieldEffectSpriteId, 2);
+    SetSurfBlob_BobState(playerObjEvent->fieldEffectSpriteId, BOB_MON_ONLY);
     QL_TryRecordPlayerStepWithDuration0(playerObjEvent, GetJumpSpecialWithEffectMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }

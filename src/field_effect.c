@@ -3055,7 +3055,7 @@ static void UseSurfEffect_5(struct Task * task)
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_CONTROLLABLE;
         ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
-        SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, 1);
+        SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_PLAYER_AND_MON);
         UnfreezeObjectEvents();
         ScriptContext2_Disable();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
@@ -3256,8 +3256,8 @@ static void FlyOutFieldEffect_BirdLeaveBall(struct Task *task)
         struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
         {
-            SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, 2);
-            SetSurfBlob_DontSyncAnim(objectEvent->fieldEffectSpriteId, 0);
+            SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_MON_ONLY);
+            SetSurfBlob_DontSyncAnim(objectEvent->fieldEffectSpriteId, FALSE);
         }
         task->tBirdSpriteId = CreateFlyBirdSprite();
         task->tState++;
@@ -3538,7 +3538,7 @@ static void FlyInFieldEffect_BirdSwoopDown(struct Task *task)
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
-            SetSurfBlob_BobState(playerObj->fieldEffectSpriteId, 0);
+            SetSurfBlob_BobState(playerObj->fieldEffectSpriteId, BOB_NONE);
         ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
         CameraObjectReset2();
         ObjectEventTurn(playerObj, DIR_WEST);
@@ -3630,7 +3630,7 @@ static void FlyInFieldEffect_End(struct Task *task)
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
         {
             state = PLAYER_AVATAR_GFX_RIDE;
-            SetSurfBlob_BobState(playerObj->fieldEffectSpriteId, 1);
+            SetSurfBlob_BobState(playerObj->fieldEffectSpriteId, BOB_PLAYER_AND_MON);
         }
         ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(state));
         ObjectEventTurn(playerObj, DIR_SOUTH);

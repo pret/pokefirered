@@ -20,10 +20,10 @@
 #define FLDEFF_JUMP_SMALL_SPLASH         16
 #define FLDEFF_LONG_GRASS                17
 #define FLDEFF_JUMP_LONG_GRASS           18
-#define FLDEFF_UNKNOWN_19                19
-#define FLDEFF_UNKNOWN_20                20
-#define FLDEFF_UNKNOWN_21                21
-#define FLDEFF_UNKNOWN_22                22
+#define FLDEFF_UNUSED_GRASS              19
+#define FLDEFF_UNUSED_GRASS_2            20
+#define FLDEFF_UNUSED_SAND               21
+#define FLDEFF_UNUSED_WATER_SURFACING    22
 #define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 23
 #define FLDEFF_DEEP_SAND_FOOTPRINTS      24
 #define FLDEFF_POKECENTER_HEAL           25

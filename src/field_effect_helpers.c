@@ -3,6 +3,7 @@
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
@@ -800,10 +801,10 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite * sprite)
     }
 }
 
-u32 FldEff_Unknown19(void)
+u32 FldEff_UnusedGrass(void)
 {
     u8 spriteId;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_UNUSED_GRASS], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
@@ -812,15 +813,15 @@ u32 FldEff_Unknown19(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->data[0] = FLDEFF_UNKNOWN_19;
+        sprite->data[0] = FLDEFF_UNUSED_GRASS;
     }
     return 0;
 }
 
-u32 FldEff_Unknown20(void)
+u32 FldEff_UnusedGrass2(void)
 {
     u8 spriteId;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_UNUSED_GRASS_2], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
@@ -829,15 +830,15 @@ u32 FldEff_Unknown20(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->data[0] = FLDEFF_UNKNOWN_20;
+        sprite->data[0] = FLDEFF_UNUSED_GRASS_2;
     }
     return 0;
 }
 
-u32 FldEff_Unknown21(void)
+u32 FldEff_UnusedSand(void)
 {
     u8 spriteId;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_UNUSED_SAND], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
@@ -846,15 +847,15 @@ u32 FldEff_Unknown21(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->data[0] = FLDEFF_UNKNOWN_21;
+        sprite->data[0] = FLDEFF_UNUSED_SAND;
     }
     return 0;
 }
 
-u32 FldEff_Unknown22(void)
+u32 FldEff_UnusedWaterSurfacing(void)
 {
     u8 spriteId;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_WATER_SURFACING], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
@@ -863,7 +864,7 @@ u32 FldEff_Unknown22(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->data[0] = FLDEFF_UNKNOWN_22;
+        sprite->data[0] = FLDEFF_UNUSED_WATER_SURFACING;
     }
     return 0;
 }
@@ -939,20 +940,27 @@ static void UpdateAshFieldEffect_Step2(struct Sprite * sprite)
         FieldEffectStop(sprite, FLDEFF_ASH);
 }
 
+// Sprite data for surf blob
+#define sBitfield       data[0]
+#define sPlayerOffset   data[1]
+#define sPlayerObjectId data[2]
+#define sBobDirection   data[3]
+#define sTimer          data[4]
+
 u32 FldEff_SurfBlob(void)
 {
     u8 spriteId;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SURF_BLOB], gFieldEffectArguments[0], gFieldEffectArguments[1], 0x96);
-    if (spriteId !=MAX_SPRITES)
+    if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.paletteNum = 0;
-        sprite->data[2] = gFieldEffectArguments[2];
-        sprite->data[3] = 0;
+        sprite->sPlayerObjectId = gFieldEffectArguments[2];
+        sprite->sBobDirection = 0;
         sprite->data[6] = -1;
         sprite->data[7] = -1;
     }
@@ -960,51 +968,51 @@ u32 FldEff_SurfBlob(void)
     return spriteId;
 }
 
-void SetSurfBlob_BobState(u8 spriteId, u8 value)
+void SetSurfBlob_BobState(u8 spriteId, u8 bobState)
 {
-    gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF) | (value & 0xF);
+    gSprites[spriteId].sBitfield = (gSprites[spriteId].sBitfield & ~0xF) | (bobState & 0xF);
 }
 
-void SetSurfBlob_DontSyncAnim(u8 spriteId, u8 value)
+void SetSurfBlob_DontSyncAnim(u8 spriteId, bool8 value)
 {
-    gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF0) | ((value & 0xF) << 4);
+    gSprites[spriteId].sBitfield = (gSprites[spriteId].sBitfield & ~0xF0) | ((value & 0xF) << 4);
 }
 
-void SetSurfBlob_PlayerOffset(u8 spriteId, u8 hasOffset, s16 offset)
+void SetSurfBlob_PlayerOffset(u8 spriteId, bool8 hasOffset, s16 offset)
 {
-    gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF00) | ((hasOffset & 0xF) << 8);
-    gSprites[spriteId].data[1] = offset;
+    gSprites[spriteId].sBitfield = (gSprites[spriteId].sBitfield & ~0xF00) | ((hasOffset & 0xF) << 8);
+    gSprites[spriteId].sPlayerOffset = offset;
 }
 
-static u8 GetSurfBlob_BobState(struct Sprite * sprite)
+static u8 GetSurfBlob_BobState(struct Sprite *sprite)
 {
-    return sprite->data[0] & 0xF;
+    return sprite->sBitfield & 0xF;
 }
 
-static u8 GetSurfBlob_DontSyncAnim(struct Sprite * sprite)
+static bool8 GetSurfBlob_DontSyncAnim(struct Sprite *sprite)
 {
-    return (sprite->data[0] & 0xF0) >> 4;
+    return (sprite->sBitfield & 0xF0) >> 4;
 }
 
-static u8 GetSurfBlob_HasPlayerOffset(struct Sprite * sprite)
+static bool8 GetSurfBlob_HasPlayerOffset(struct Sprite *sprite)
 {
-    return (sprite->data[0] & 0xF00) >> 8;
+    return (sprite->sBitfield & 0xF00) >> 8;
 }
 
-void UpdateSurfBlobFieldEffect(struct Sprite * sprite)
+void UpdateSurfBlobFieldEffect(struct Sprite *sprite)
 {
-    struct ObjectEvent * objectEvent;
-    struct Sprite * linkedSprite;
+    struct ObjectEvent *playerObject;
+    struct Sprite *playerSprite;
 
-    objectEvent = &gObjectEvents[sprite->data[2]];
-    linkedSprite = &gSprites[objectEvent->spriteId];
-    SynchroniseSurfAnim(objectEvent, sprite);
-    SynchroniseSurfPosition(objectEvent, sprite);
-    CreateBobbingEffect(objectEvent, linkedSprite, sprite);
-    sprite->oam.priority = linkedSprite->oam.priority;
+    playerObject = &gObjectEvents[sprite->sPlayerObjectId];
+    playerSprite = &gSprites[playerObject->spriteId];
+    SynchroniseSurfAnim(playerObject, sprite);
+    SynchroniseSurfPosition(playerObject, sprite);
+    CreateBobbingEffect(playerObject, playerSprite, sprite);
+    sprite->oam.priority = playerSprite->oam.priority;
 }
 
-static void SynchroniseSurfAnim(struct ObjectEvent * objectEvent, struct Sprite * sprite)
+static void SynchroniseSurfAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u8 surfBlobDirectionAnims[] = {
         [DIR_NONE] = 0,
@@ -1014,61 +1022,69 @@ static void SynchroniseSurfAnim(struct ObjectEvent * objectEvent, struct Sprite 
         [DIR_EAST] = 3
     };
 
-    if (GetSurfBlob_DontSyncAnim(sprite) == 0)
+    if (GetSurfBlob_DontSyncAnim(sprite) == FALSE)
         StartSpriteAnimIfDifferent(sprite, surfBlobDirectionAnims[objectEvent->movementDirection]);
 }
 
-void SynchroniseSurfPosition(struct ObjectEvent * objectEvent, struct Sprite * sprite)
+void SynchroniseSurfPosition(struct ObjectEvent *playerObject, struct Sprite *surfBlobSprite)
 {
     u8 i;
-    s16 x = objectEvent->currentCoords.x;
-    s16 y = objectEvent->currentCoords.y;
-    s32 spriteY = sprite->y2;
+    s16 x = playerObject->currentCoords.x;
+    s16 y = playerObject->currentCoords.y;
+    s32 yOffset = surfBlobSprite->y2;
 
-    if (spriteY == 0 && (x != sprite->data[6] || y != sprite->data[7]))
+    if (yOffset == 0 && (x != surfBlobSprite->data[6] || y != surfBlobSprite->data[7]))
     {
-        sprite->data[5] = spriteY;
-        sprite->data[6] = x;
-        sprite->data[7] = y;
-        for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
+        surfBlobSprite->data[5] = yOffset;
+        surfBlobSprite->data[6] = x;
+        surfBlobSprite->data[7] = y;
+        for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = surfBlobSprite->data[6], y = surfBlobSprite->data[7])
         {
             MoveCoords(i, &x, &y);
             if (MapGridGetZCoordAt(x, y) == 3)
             {
-                sprite->data[5]++;
+                surfBlobSprite->data[5]++;
                 break;
             }
         }
     }
 }
 
-static void CreateBobbingEffect(struct ObjectEvent * objectEvent, struct Sprite * linkedSprite, struct Sprite * sprite)
+static void CreateBobbingEffect(struct ObjectEvent *objectEvent, struct Sprite *playerSprite, struct Sprite *surfBlobSprite)
 {
-    u16 unk_83FECFA[] = {7, 15};
-    u8 v0 = GetSurfBlob_BobState(sprite);
-    if (v0 != 0)
+    u16 intervals[] = {7, 15};
+    u8 bobState = GetSurfBlob_BobState(surfBlobSprite);
+    if (bobState != BOB_NONE)
     {
-        if (((u16)(++ sprite->data[4]) & unk_83FECFA[sprite->data[5]]) == 0)
+        // the surf blob sprite never bobs since sBobDirection will always be 0
+
+        if (((u16)(++surfBlobSprite->sTimer) & intervals[surfBlobSprite->data[5]]) == 0)
+            surfBlobSprite->y2 += surfBlobSprite->sBobDirection;
+
+        if ((surfBlobSprite->sTimer & 0x1F) == 0)
+            surfBlobSprite->sBobDirection = -surfBlobSprite->sBobDirection;
+
+        if (bobState != BOB_MON_ONLY)
         {
-            sprite->y2 += sprite->data[3];
-        }
-        if ((sprite->data[4] & 0x1F) == 0)
-        {
-            sprite->data[3] = -sprite->data[3];
-        }
-        if (v0 != 2)
-        {
-            if (GetSurfBlob_HasPlayerOffset(sprite) == 0)
-                linkedSprite->y2 = sprite->y2;
+            if (GetSurfBlob_HasPlayerOffset(surfBlobSprite) == FALSE)
+                playerSprite->y2 = surfBlobSprite->y2;
             else
-                linkedSprite->y2 = sprite->data[1] + sprite->y2;
-            if (sprite->animCmdIndex != 0)
-                linkedSprite->y2++;
-            sprite->x = linkedSprite->x;
-            sprite->y = linkedSprite->y + 8;
+                playerSprite->y2 = surfBlobSprite->sPlayerOffset + surfBlobSprite->y2;
+
+            if (surfBlobSprite->animCmdIndex != 0)
+                playerSprite->y2++;
+
+            surfBlobSprite->x = playerSprite->x;
+            surfBlobSprite->y = playerSprite->y + 8;
         }
     }
 }
+
+#undef sBitfield
+#undef sPlayerOffset
+#undef sPlayerObjectId
+#undef sBobDirection
+#undef sTimer
 
 u8 StartUnderwaterSurfBlobBobbing(u8 oldSpriteId)
 {

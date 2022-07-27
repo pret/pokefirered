@@ -570,7 +570,7 @@ static void Task_OaksSpeech1(u8 taskId)
         CreateHelpDocsPage1();
         gPaletteFade.bufferTransferDisabled = FALSE;
         gTasks[taskId].data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xE6, 0x95, 0, 0);
-        BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
+        BlendPalettes(PALETTES_ALL, 0x10, 0x00);
         break;
     case 10:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -974,7 +974,7 @@ static void Task_OakSpeech13(u8 taskId)
         if (gTasks[taskId].data[3] == 32)
         {
             OaksSpeechPrintMessage(gOakText_WorldInhabited2, sOakSpeechResources->textSpeed);
-            PlayCry1(SPECIES_NIDORAN_F, 0);
+            PlayCry_Normal(SPECIES_NIDORAN_F, 0);
         }
     }
 }

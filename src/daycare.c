@@ -1920,7 +1920,7 @@ static void CB2_EggHatch_1(void)
     case 3:
         if (gSprites[sEggHatchData->eggSpriteID].callback == SpriteCallbackDummy)
         {
-            PlayCry1(sEggHatchData->species, 0);
+            PlayCry_Normal(sEggHatchData->species, 0);
             sEggHatchData->CB2_state++;
         }
         break;

@@ -30,6 +30,7 @@
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 #endif
 
+// capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
 #define PC_ITEMS_COUNT      30
 #define BAG_ITEMS_COUNT     42
@@ -52,6 +53,9 @@
 #define POCKET_TM_CASE      4
 #define POCKET_BERRY_POUCH  5
 #define NUM_BAG_POCKETS 5
+
+// Contests
+#define CONTEST_CATEGORIES_COUNT  5
 
 // string lengths
 #define ITEM_NAME_LENGTH 14

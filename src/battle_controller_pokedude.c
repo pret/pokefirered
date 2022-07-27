@@ -1533,9 +1533,9 @@ static void PokedudeHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NONE));
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1564,13 +1564,13 @@ static void PokedudeHandleChooseAction(void)
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-        BattlePutTextOnWindow(gText_EmptyString3, 0);
-        BattlePutTextOnWindow(gText_BattleMenu, 2);
+        BattlePutTextOnWindow(gText_EmptyString3, (B_WIN_MSG | B_TEXT_FLAG_NONE));
+        BattlePutTextOnWindow(gText_BattleMenu, (B_WIN_ACTION_MENU | B_TEXT_FLAG_NONE));
         for (i = 0; i < MAX_MON_MOVES; ++i)
             ActionSelectionDestroyCursorAt((u8)i);
         ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_ACTION_PROMPT | B_TEXT_FLAG_NONE));
     }
     else
     {
@@ -1834,7 +1834,7 @@ static void PokedudeHandleFaintingCry(void)
     else
         mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
     species = GetMonData(mon, MON_DATA_SPECIES);
-    PlayCry1(species, 25);
+    PlayCry_Normal(species, 25);
     PokedudeBufferExecCompleted();
 }
 
@@ -2557,7 +2557,7 @@ static void PokedudeAction_PrintVoiceoverMessage(void)
     case 2:
         gBattle_BG0_Y = 0;
         BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
         ++gPokedudeBattlerStates[gActiveBattler]->timer;
         break;
     case 3:
@@ -2618,7 +2618,7 @@ static void PokedudeAction_PrintMessageWithHealthboxPals(void)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
         ++gPokedudeBattlerStates[gActiveBattler]->timer;
         break;
     case 4:

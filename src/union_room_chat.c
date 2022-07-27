@@ -256,7 +256,7 @@ static void CB2_LoadInterface(void)
         UnionRoomChat_RunDisplaySubtasks();
         if (!UnionRoomChat_RunDisplaySubtask0())
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;

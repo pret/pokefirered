@@ -1982,7 +1982,7 @@ static bool8 BT_Phase2Mugshot_ExpandWhiteBand(struct Task *task)
 static bool8 BT_Phase2Mugshot_StartBlackFade(struct Task *task)
 {
     sTransitionStructPtr->vblankDma = FALSE;
-    BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+    BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
     sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     task->tCounter = 0;
     ++task->tState;
@@ -2310,7 +2310,7 @@ static bool8 BT_Phase2WhiteFadeInStripes_IsWhiteFadeDone(struct Task *task)
     sTransitionStructPtr->vblankDma = FALSE;
     if (sTransitionStructPtr->counter > 5)
     {
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
         ++task->tState;
     }
     return FALSE;
@@ -2658,7 +2658,7 @@ static bool8 BT_Phase1_FadeIn(struct Task *task)
         task->tCoeff -= task->tFadeInSpeed;
         if (task->tCoeff < 0)
             task->tCoeff = 0;
-        BlendPalettes(0xFFFFFFFF, task->tCoeff, RGB(11, 11, 11));
+        BlendPalettes(PALETTES_ALL, task->tCoeff, RGB(11, 11, 11));
     }
     if (task->tCoeff == 0)
     {
@@ -2719,7 +2719,7 @@ static void BT_GetBg0TilemapAndTilesetBase(u16 **tilemapPtr, u16 **tilesetPtr)
 
 static void BT_BlendPalettesToBlack(void)
 {
-    BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
 }
 
 static void BT_LoadWaveIntoBuffer(s16 *buffer, s16 offset, s16 theta, s16 frequency, s16 amplitude, s16 bufSize)

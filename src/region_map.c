@@ -2810,7 +2810,7 @@ static void Task_MapOpenAnim(u8 taskId)
         break;
     case 3:
         CopyBgTilemapBufferToVram(1);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetRegionMapVBlankCB();
         sMapOpenCloseAnim->openState++;
@@ -3908,7 +3908,7 @@ static void LoadMapIcons(u8 taskId)
         sMapIcons->state++;
         break;
     case 3:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sMapIcons->state++;
         break;

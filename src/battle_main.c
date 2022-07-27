@@ -1796,7 +1796,7 @@ static void EndLinkBattleInSteps(void)
     }
 }
 
-u32 GetBattleBgAttribute(u8 arrayId, u8 caseId)
+u32 GetBattleBgTemplateData(u8 arrayId, u8 caseId)
 {
     u32 ret = 0;
 
@@ -1859,7 +1859,7 @@ static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite)
         if (sprite->x2 == 0)
         {
             sprite->callback = SpriteCB_WildMonShowHealthbox;
-            PlayCry1(sprite->data[2], 25);
+            PlayCry_Normal(sprite->data[2], 25);
         }
     }
 }

@@ -674,7 +674,7 @@ static void SetTitleScreenScene_Cry(s16 * data)
     case 0:
         if (!gPaletteFade.active)
         {
-            PlayCry1(TITLE_SPECIES, 0);
+            PlayCry_Normal(TITLE_SPECIES, 0);
             ScheduleHideSlashSprite(data[6]);
             data[2] = 0;
             data[1]++;

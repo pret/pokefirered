@@ -429,7 +429,7 @@ static void Task_MapPreviewScreen_0(u8 taskId)
         SetVBlankCallback(NULL);
         MapPreview_InitBgs();
         MapPreview_LoadGfx(data[3]);
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
         data[0]++;
         break;
     case 1:

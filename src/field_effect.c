@@ -2939,7 +2939,7 @@ static void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite * sprite)
         }
         else
         {
-            PlayCry1(sprite->data[0], 0);
+            PlayCry_Normal(sprite->data[0], 0);
         }
     }
 }

@@ -361,7 +361,7 @@ static bool8 ItemPc_DoGfxSetup(void)
     case 18:
         if (sListMenuState.initialized == 1)
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         }
         gMain.state++;
         break;

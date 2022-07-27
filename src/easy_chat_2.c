@@ -162,7 +162,7 @@ static void Task_RunEasyChat(u8 taskId)
     {
     case 0:
         SetVBlankCallback(VBlankCallback_EasyChatScreen);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         data[EZCHAT_TASK_STATE]++;
         break;

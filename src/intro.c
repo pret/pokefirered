@@ -916,7 +916,7 @@ static void CB2_SetUpIntro(void)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             StartIntroSequence();
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             SetMainCallback2(CB2_Intro);
             SetVBlankCallback(VBlankCB_Intro);
         }
@@ -1016,7 +1016,7 @@ static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * this)
         break;
     case 1:
         ShowBg(3);
-        BlendPalettes(0xFFFFFFFF, 0x00, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x00, RGB_BLACK);
         this->state++;
         break;
     case 2:

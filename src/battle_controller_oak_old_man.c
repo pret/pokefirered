@@ -651,7 +651,7 @@ static void PrintOakText_ForPetesSake(void)
         break;
     case 2:
         BattleStringExpandPlaceholdersToDisplayedString(gText_ForPetesSake);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 3:
@@ -670,7 +670,7 @@ static void PrintOakText_ForPetesSake(void)
         if (!gPaletteFade.active)
         {
             BattleStringExpandPlaceholdersToDisplayedString(gText_TheTrainerThat);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+            BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
             ++gBattleStruct->simulatedInputState[0];
         }
         break;
@@ -690,7 +690,7 @@ static void PrintOakText_ForPetesSake(void)
         if (!gPaletteFade.active)
         {
             BattleStringExpandPlaceholdersToDisplayedString(gText_TryBattling);
-            BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+            BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
             ++gBattleStruct->simulatedInputState[0];
         }
         break;
@@ -774,7 +774,7 @@ static void PrintOakTextWithMainBgDarkened(const u8 *text, u8 delay)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(text);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 4:
@@ -842,7 +842,7 @@ static void PrintOakText_KeepAnEyeOnHP(void)
         break;
     case 3:
         BattleStringExpandPlaceholdersToDisplayedString(gText_KeepAnEyeOnHP);
-        BattlePutTextOnWindow(gDisplayedStringBattle, 24);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_OAK_OLD_MAN | B_TEXT_FLAG_NONE));
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 4:
@@ -1759,9 +1759,9 @@ static void OakOldManHandlePrintString(void)
     {
         BufferStringBattle(*stringId);
         if (BattleStringShouldBeColored(*stringId))
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+            BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
         else
-            BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+            BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NONE));
         if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         {
             switch (*stringId)
@@ -1815,8 +1815,8 @@ static void OakOldManHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_EmptyString3, 0);
-    BattlePutTextOnWindow(gText_BattleMenu, 2);
+    BattlePutTextOnWindow(gText_EmptyString3, (B_WIN_MSG | B_TEXT_FLAG_NONE));
+    BattlePutTextOnWindow(gText_BattleMenu, (B_WIN_ACTION_MENU | B_TEXT_FLAG_NONE));
     for (i = 0; i < MAX_MON_MOVES; ++i)
         ActionSelectionDestroyCursorAt((u8)i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
@@ -1824,7 +1824,7 @@ static void OakOldManHandleChooseAction(void)
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
     else
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillOldManDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, 1);
+    BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_ACTION_PROMPT | B_TEXT_FLAG_NONE));
 }
 
 static void OakOldManHandleUnknownYesNoBox(void)
@@ -2060,7 +2060,7 @@ static void OakOldManHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry1(species, 25);
+    PlayCry_Normal(species, 25);
     OakOldManBufferExecCompleted();
 }
 

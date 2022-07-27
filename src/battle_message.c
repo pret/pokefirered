@@ -1701,14 +1701,14 @@ void BufferStringBattle(u16 stringId)
         }
         break;
     default: // load a string from the table
-        if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_ID_ADDER)
+        if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_TABLE_START)
         {
             gDisplayedStringBattle[0] = EOS;
             return;
         }
         else
         {
-            stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_ID_ADDER];
+            stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_TABLE_START];
         }
         break;
     }
@@ -2169,7 +2169,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
         {
         case B_BUFF_STRING: // battle string
             hword = T1_READ_16(&src[srcId + 1]);
-            StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_ID_ADDER]);
+            StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_TABLE_START]);
             srcId += 3;
             break;
         case B_BUFF_NUMBER: // int to string

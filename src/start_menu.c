@@ -874,7 +874,7 @@ bool32 DoSetUpSaveAfterLinkBattle(u8 *state)
         break;
     case 3:
         ShowBg(0);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB_WhileSavingAfterLinkBattle);
         EnableInterrupts(INTR_FLAG_VBLANK);
         break;

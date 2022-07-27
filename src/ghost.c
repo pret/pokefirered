@@ -1418,7 +1418,7 @@ static void sub_80B6FC4(u8 taskId)
         break;
     case 3:
         InitBattleAnimBg(2);
-        FillPalette(0, 0x90, 0x20);
+        FillPalette(RGB_BLACK, 0x90, 0x20);
         SetAnimBgAttribute(2, BG_ANIM_CHAR_BASE_BLOCK, 0);
         task->data[1] = 12;
         break;

@@ -494,7 +494,7 @@ static void TeachyTvMainCallback(void)
         ScheduleBgCopyTilemapToVram(2);
         ScheduleBgCopyTilemapToVram(3);
         SetHelpContextDontCheckBattle(HELPCONTEXT_BAG);
-        BlendPalettes(0xFFFFFFFF, 0x10, 0);
+        BlendPalettes(PALETTES_ALL, 0x10, 0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, 0);
         SetVBlankCallback(TeachyTvVblankHandler);
         SetMainCallback2(TeachyTvCallback);

@@ -263,7 +263,7 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoStructPtr->preEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-    gSprites[id].callback = SpriteCallbackDummy2;
+    gSprites[id].callback = SpriteCallbackDummy_2;
     gSprites[id].oam.paletteNum = 1;
     gSprites[id].invisible = TRUE;
 
@@ -277,7 +277,7 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, 3);
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
-    gSprites[id].callback = SpriteCallbackDummy2;
+    gSprites[id].callback = SpriteCallbackDummy_2;
     gSprites[id].oam.paletteNum = 2;
     gSprites[id].invisible = TRUE;
 
@@ -357,7 +357,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-    gSprites[id].callback = SpriteCallbackDummy2;
+    gSprites[id].callback = SpriteCallbackDummy_2;
     gSprites[id].oam.paletteNum = 2;
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
@@ -434,7 +434,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
             sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-            gSprites[id].callback = SpriteCallbackDummy2;
+            gSprites[id].callback = SpriteCallbackDummy_2;
             gSprites[id].oam.paletteNum = 2;
             gMain.state++;
             LinkTradeDrawWindow();
@@ -493,7 +493,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, u8 preEvoSprit
     gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
 
-    gSprites[id].callback = SpriteCallbackDummy2;
+    gSprites[id].callback = SpriteCallbackDummy_2;
     gSprites[id].oam.paletteNum = 2;
     gSprites[id].invisible = TRUE;
 

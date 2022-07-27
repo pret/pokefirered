@@ -1870,13 +1870,13 @@ static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
     {
         StartHealthboxSlideIn(sprite->sBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
-        sprite->callback = SpriteCallbackDummy2;
+        sprite->callback = SpriteCallbackDummy_2;
         StartSpriteAnimIfDifferent(sprite, 0);
         BeginNormalPaletteFade(0x20000, 0, 10, 0, RGB(8, 8, 8));
     }
 }
 
-void SpriteCallbackDummy2(struct Sprite *sprite)
+void SpriteCallbackDummy_2(struct Sprite *sprite)
 {
 }
 
@@ -1900,7 +1900,7 @@ static void SpriteCB_Unused_8011E28_Step(struct Sprite *sprite)
         if (sprite->data[3] == 0)
         {
             sprite->invisible = FALSE;
-            sprite->callback = SpriteCallbackDummy2;
+            sprite->callback = SpriteCallbackDummy_2;
             gUnknown_2022AE8[0] = 0;
         }
     }
@@ -1991,7 +1991,7 @@ void SpriteCb_HideAsMoveTarget(struct Sprite *sprite)
 {
     sprite->invisible = sprite->data[4];
     sprite->data[4] = FALSE;
-    sprite->callback = SpriteCallbackDummy2;
+    sprite->callback = SpriteCallbackDummy_2;
 }
 
 void SpriteCB_AllyMon(struct Sprite *sprite)

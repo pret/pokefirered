@@ -1102,7 +1102,7 @@ static void Task_InputHandler_Info(u8 taskId)
 {
     switch (sMonSummaryScreen->state3270) {
     case PSS_STATE3270_FADEIN:
-        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
         sMonSummaryScreen->state3270 = PSS_STATE3270_PLAYCRY;
         break;
     case PSS_STATE3270_PLAYCRY:
@@ -1211,7 +1211,7 @@ static void Task_InputHandler_Info(u8 taskId)
         }
         break;
     case PSS_STATE3270_ATEXIT_FADEOUT:
-        BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
         sMonSummaryScreen->state3270 = PSS_STATE3270_ATEXIT_WAITLINKDELAY;
         break;
     case PSS_STATE3270_ATEXIT_WAITLINKDELAY:
@@ -1958,7 +1958,7 @@ static void CB2_SetUpPSS(void)
         CommitStaticWindowTilemaps();
         break;
     case 13:
-        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_PAGE_NAME], 2);
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_CONTROLS], 2);
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_LVL_NICK], 2);
@@ -3782,7 +3782,7 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
     switch (sMonSummaryScreen->selectMoveInputHandlerState)
     {
     case 0:
-        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
         sMonSummaryScreen->selectMoveInputHandlerState++;
         break;
     case 1:
@@ -3903,7 +3903,7 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
         sMonSummaryScreen->selectMoveInputHandlerState = 2;
         break;
     case 6:
-        BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
         sMonSummaryScreen->selectMoveInputHandlerState++;
         break;
     default:

@@ -811,7 +811,7 @@ static bool8 RunCopyrightScreen(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xFFFF);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Copyright);
@@ -828,7 +828,7 @@ static bool8 RunCopyrightScreen(void)
         GameCubeMultiBoot_Main(&sGcmb);
         if (sGcmb.gcmb_field_2 != 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gMain.state++;
         }
         break;

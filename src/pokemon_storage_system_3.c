@@ -584,7 +584,7 @@ static void Cb_ReshowPSS(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_BLACK);
         gPSSData->state++;
         break;
     case 1:
@@ -1860,7 +1860,7 @@ static void Cb_NameBox(u8 taskId)
     {
     case 0:
         sub_8093630();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gPSSData->state++;
         break;
     case 1:
@@ -1880,7 +1880,7 @@ static void Cb_ShowMonSummary(u8 taskId)
     {
     case 0:
         sub_80936B8();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gPSSData->state++;
         break;
     case 1:
@@ -1899,7 +1899,7 @@ static void Cb_GiveItemFromBag(u8 taskId)
     switch (gPSSData->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gPSSData->state++;
         break;
     case 1:

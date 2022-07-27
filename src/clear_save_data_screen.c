@@ -90,7 +90,7 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
     switch (sClearSaveDataState->unk1)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         break;
     case 1:
         if (gPaletteFade.active)

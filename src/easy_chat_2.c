@@ -163,14 +163,14 @@ static void Task_RunEasyChat(u8 taskId)
     case 0:
         SetVBlankCallback(VBlankCallback_EasyChatScreen);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         data[EZCHAT_TASK_STATE]++;
         break;
     case 1:
         action = EasyChatScreen_HandleJoypad();
         if (action == 23)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
             data[EZCHAT_TASK_STATE] = 3;
         }
         else if (action != 0)

@@ -578,7 +578,7 @@ static bool8 ShowPartyMenu(void)
         ++gMain.state;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         ++gMain.state;
         break;
@@ -592,7 +592,7 @@ static bool8 ShowPartyMenu(void)
 
 static void ExitPartyMenu(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     CreateTask(Task_ExitPartyMenu, 0);
     SetVBlankCallback(VBlankCB_PartyMenu);
     SetMainCallback2(CB2_UpdatePartyMenu);
@@ -1077,7 +1077,7 @@ static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 
 static void Task_ClosePartyMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
 }
 

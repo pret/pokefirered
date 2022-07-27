@@ -449,7 +449,7 @@ void LinkTestProcessKeyInput(void)
     }
     if (JOY_NEW(L_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB(2, 0, 0));
     }
     if (JOY_NEW(START_BUTTON))
     {

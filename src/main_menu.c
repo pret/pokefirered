@@ -280,7 +280,7 @@ static void PrintSaveErrorStatus(u8 taskId, const u8 *str)
 {
     PrintMessageOnWindow4(str);
     gTasks[taskId].func = Task_SaveErrorStatus_RunPrinterThenWaitButton;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xFFFF);
     ShowBg(0);
     SetVBlankCallback(VBlankCB_MainMenu);
 }
@@ -395,7 +395,7 @@ static void Task_WaitDma3AndFadeIn(u8 taskId)
     if (WaitDma3Request(-1) != -1)
     {
         gTasks[taskId].func = Task_UpdateVisualSelection;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xFFFF);
         ShowBg(0);
         SetVBlankCallback(VBlankCB_MainMenu);
     }
@@ -453,7 +453,7 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
                 {
                     SetStdFrame0OnBg(0);
                     gTasks[taskId].func = Task_MysteryGiftError;
-                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+                    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
                     return;
                 }
                 else
@@ -515,7 +515,7 @@ static void Task_MysteryGiftError(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_ReturnToTileScreen;
         }
         break;
@@ -571,13 +571,13 @@ static bool8 HandleMenuInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         IsWirelessAdapterConnected(); // called for its side effects only
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_ExecuteMainMenuSelection;
     }
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
         gTasks[taskId].func = Task_ReturnToTileScreen;

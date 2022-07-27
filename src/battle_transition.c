@@ -711,7 +711,7 @@ static bool8 BT_Phase2Blur_Anim(struct Task *task)
     {
         task->tInterval = 2;
         if (++task->tMosaicSize == 10)
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_BLACK);
         // The mosaic size argument is shared by HSIZE and VSIZE
         SetGpuReg(REG_OFFSET_MOSAIC, (task->tMosaicSize & 0xF) + ((task->tMosaicSize & 0xF) << 4));
         if (task->tMosaicSize > 14)
@@ -742,7 +742,7 @@ static bool8 BT_Phase2DistortedWave_InitWave(struct Task *task)
 {
     BT_InitCtrlBlk();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
     BT_LoadWaveIntoBuffer(gScanlineEffectRegBuffers[1], sTransitionStructPtr->bg123HOfs, 0, 2, 0, 160);
     SetVBlankCallback(VBCB_BT_Phase2DistortedWave);
     SetHBlankCallback(HBCB_BT_Phase2DistortedWave);
@@ -788,7 +788,7 @@ static bool8 BT_Phase2HorizontalCorrugate_Init(struct Task *task)
 {
     BT_InitCtrlBlk();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
     memset(gScanlineEffectRegBuffers[1], sTransitionStructPtr->bg123VOfs, 320);
     SetVBlankCallback(VBCB_BT_Phase2HorizontalCorrugate);
     SetHBlankCallback(HBCB_BT_Phase2HorizontalCorrugate);
@@ -1382,7 +1382,7 @@ static bool8 BT_Phase2FullScreenWave_UpdateWave(struct Task *task)
     if (++task->tDelayForFade == 41)
     {
         ++task->tStartFade;
-        BeginNormalPaletteFade(0xFFFFFFFF, -8, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -8, 0, 0x10, RGB_BLACK);
     }
     if (task->tStartFade && !gPaletteFade.active)
         DestroyTask(FindTaskIdByFunc(BT_Phase2FullScreenWave));

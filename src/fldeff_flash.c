@@ -443,7 +443,7 @@ static void Task_MapPreviewScreen_0(u8 taskId)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback((IntrCallback)GetWordTaskArg(taskId, 5));
             data[0]++;
         }
@@ -459,7 +459,7 @@ static void Task_MapPreviewScreen_0(u8 taskId)
         data[1]++;
         if (data[1] > data[2] || JOY_HELD(B_BUTTON))
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_WHITE);
+            BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_WHITE);
             data[0]++;
         }
         break;

@@ -2516,7 +2516,7 @@ static void CameraCB_CreditsPan(struct CameraObject * camera)
 
 static void Task_OvwldCredits_FadeOut(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OvwldCredits_WaitFade;
 }
 

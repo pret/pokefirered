@@ -257,7 +257,7 @@ static void CB2_LoadInterface(void)
         if (!UnionRoomChat_RunDisplaySubtask0())
         {
             BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
@@ -887,7 +887,7 @@ static void ChatEntryRoutine_SaveAndExit(void)
             sWork->routineState = 12;
         break;
     case 12:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sWork->routineState = 13;
         break;
     case 13:

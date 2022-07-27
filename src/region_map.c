@@ -1534,7 +1534,7 @@ static void CB2_OpenRegionMap(void)
             SetBg0andBg3Hidden(TRUE);
         break;
     default:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         CreateMainMapTask();
         SetRegionMapVBlankCB();
         break;
@@ -1730,7 +1730,7 @@ static void Task_RegionMap(u8 taskId)
         }
         break;
     case 5:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     _080C0798:
         sRegionMap->mainState++;
         break;
@@ -2811,7 +2811,7 @@ static void Task_MapOpenAnim(u8 taskId)
     case 3:
         CopyBgTilemapBufferToVram(1);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetRegionMapVBlankCB();
         sMapOpenCloseAnim->openState++;
         break;
@@ -3909,7 +3909,7 @@ static void LoadMapIcons(u8 taskId)
         break;
     case 3:
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sMapIcons->state++;
         break;
     case 4:
@@ -4322,7 +4322,7 @@ static void Task_FlyMap(u8 taskId)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         InitMapIcons(GetSelectedRegionMap(), taskId, GetMainMapTask());
         CreateMapCursor(0, 0);
         CreatePlayerIcon(1, 1);
@@ -4422,7 +4422,7 @@ static void Task_FlyMap(u8 taskId)
         sFlyMap->state++;
         break;
     case 6:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sFlyMap->state++;
         break;
     default:

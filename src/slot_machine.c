@@ -2016,7 +2016,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
             HideBg(1);
             InitReelButtonTileMem();
             BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
             (*state)++;
         }
@@ -2035,7 +2035,7 @@ static bool8 SlotsTask_FadeOut(u8 * state, struct SlotMachineSetupTaskData * ptr
     switch (*state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, 0);
         (*state)++;
         break;
     case 1:

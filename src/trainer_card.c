@@ -533,7 +533,7 @@ static void Task_TrainerCard(u8 taskId)
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(230, 150);
         }
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_TrainerCard);
         sTrainerCardDataPtr->mainState++;
         break;
@@ -572,7 +572,7 @@ static void Task_TrainerCard(u8 taskId)
             }
             else
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 sTrainerCardDataPtr->mainState = STATE_CLOSE_CARD;
             }
         }
@@ -593,7 +593,7 @@ static void Task_TrainerCard(u8 taskId)
             }
             else if (gReceivedRemoteLinkPlayers)
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 sTrainerCardDataPtr->mainState = STATE_CLOSE_CARD;
             }
             else
@@ -612,7 +612,7 @@ static void Task_TrainerCard(u8 taskId)
            }
            else
            {
-               BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+               BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                sTrainerCardDataPtr->mainState = STATE_CLOSE_CARD;
            }
         }
@@ -627,7 +627,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_CLOSE_CARD_LINK:
         if (!gReceivedRemoteLinkPlayers)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sTrainerCardDataPtr->mainState = STATE_CLOSE_CARD;
         }
         break;

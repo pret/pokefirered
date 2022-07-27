@@ -1436,7 +1436,7 @@ void BattleMainCB2(void)
     {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_DREW;
         ResetPaletteFadeControl();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         SetMainCallback2(CB2_QuitPokedudeBattle);
     }
 }
@@ -1779,7 +1779,7 @@ static void EndLinkBattleInSteps(void)
     case 1:
         if (--gBattleCommunication[1] == 0)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             ++gBattleCommunication[MULTIUSE_STATE];
         }
         break;

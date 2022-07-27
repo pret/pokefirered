@@ -339,7 +339,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!DrawHofBackground())
         {
             SetVBlankCallback(VBlankCB_HofIdle);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             gMain.state++;
         }
         break;
@@ -560,7 +560,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
 {
     u16 i;
 
-    BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_OBJECTS, 0, 0, 0, RGB_BLACK);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (gTasks[taskId].data[5 + i] != 0xFF)
@@ -656,7 +656,7 @@ static void Task_Hof_ExitOnKeyPressed(u8 taskId)
 static void Task_Hof_HandlePaletteOnExit(u8 taskId)
 {
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * sizeof(u16));
-    BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 8, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_Hof_HandleExit;
 }
 

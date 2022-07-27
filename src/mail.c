@@ -609,7 +609,7 @@ static bool8 DoInitMailView(void)
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         sMailViewResources->showMailCallback = ShowMailCB_WaitFadeIn;
         return TRUE;
@@ -707,7 +707,7 @@ static void ShowMailCB_WaitButton(void)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sMailViewResources->showMailCallback = ShowMailCB_Teardown;
     }
 }

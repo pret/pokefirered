@@ -695,7 +695,7 @@ static void MainCB2_LoadFameChecker(void)
             LoadUISpriteSheetsAndPalettes();
             CreateAllFlavorTextIcons(FAMECHECKER_OAK);
             WipeMsgBoxAndTransfer();
-            BeginNormalPaletteFade(0xFFFFFFFF,0, 16, 0, 0);
+            BeginNormalPaletteFade(PALETTES_ALL,0, 16, 0, 0);
             gMain.state++;
             break;
         case 7:
@@ -1010,7 +1010,7 @@ static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
 static void Task_StartToCloseFameChecker(u8 taskId)
 {
     PlaySE(SE_M_SWIFT);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
     gTasks[taskId].func = Task_DestroyAssetsAndCloseFameChecker;
 }
 

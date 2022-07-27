@@ -852,7 +852,7 @@ static void Task_RunPlaybackCB(u8 taskId)
     case 0:
         if (++data[0] == 0x7F)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
             sQuestLogCurrentScene.sceneEndMode = 2;
             data[1]++;
         }

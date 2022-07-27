@@ -947,7 +947,7 @@ bool8 DoClosePokedex(void)
     switch (gMain.state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gMain.state++;
         return FALSE;
     case 1:
@@ -1017,7 +1017,7 @@ static void Task_PokedexScreen(u8 taskId)
         if (gPaletteFade.bufferTransferDisabled)
         {
             gPaletteFade.bufferTransferDisabled = FALSE;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0, RGB_WHITEALPHA);
         }
         else
             BeginNormalPaletteFade(~0x8000, 0, 16, 0, RGB_WHITEALPHA);
@@ -3355,7 +3355,7 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
         break;
     case 4:
         gPaletteFade.bufferTransferDisabled = 0;
-        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0xffff);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xffff);
         ShowBg(3);
         ShowBg(2);
         ShowBg(1);

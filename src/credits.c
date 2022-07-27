@@ -899,7 +899,7 @@ static s32 RollCredits(void)
         case CREDITSSCRCMD_THEENDGFX:
             sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_DESTROY_ASSETS;
             sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-            BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 16, RGB_BLACK);
             break;
         case CREDITSSCRCMD_WAITBUTTON:
             sCreditsMgr->mainseqno = CREDITSSCENE_WAITBUTTON;
@@ -1004,7 +1004,7 @@ static s32 RollCredits(void)
     case CREDITSSCENE_WAITBUTTON:
         if (JOY_NEW(A_BUTTON))
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
             sCreditsMgr->mainseqno = CREDITSSCENE_TERMINATE;
             return 0;
         }
@@ -1015,7 +1015,7 @@ static s32 RollCredits(void)
         else
         {
             sCreditsMgr->mainseqno = CREDITSSCENE_TERMINATE;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_WHITE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
         }
         return 0;
     case CREDITSSCENE_TERMINATE:
@@ -1136,7 +1136,7 @@ static bool32 DoCreditsMonScene(void)
     case 2:
         ShowBg(2);
         ShowBg(0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sCreditsMgr->creditsMonTimer = 40;
         sCreditsMgr->subseqno++;
         break;
@@ -1200,7 +1200,7 @@ static bool32 DoCreditsMonScene(void)
             sCreditsMgr->creditsMonTimer--;
         else
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sCreditsMgr->subseqno++;
         }
         break;
@@ -1251,9 +1251,9 @@ static bool32 DoCopyrightOrTheEndGfxScene(void)
     case 2:
         ShowBg(0);
         if (sCreditsMgr->whichMon != 0)
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0, RGB_BLACK);
         else
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sCreditsMgr->subseqno++;
         break;
     case 3:

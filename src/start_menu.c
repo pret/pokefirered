@@ -913,7 +913,7 @@ static void task50_after_link_battle_save(u8 taskId)
             DrawTextBorderOuter(0, 0x008, 0x0F);
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_BOTH);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             if (gWirelessCommType != 0 && InUnionRoom())
                 data[0] = 5;
             else
@@ -932,7 +932,7 @@ static void task50_after_link_battle_save(u8 taskId)
             }
             break;
         case 3:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             data[0] = 4;
             break;
         case 4:

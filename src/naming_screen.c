@@ -609,7 +609,7 @@ static bool8 MainState_BeginFadeIn(void)
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
     BlendPalettes(-1, 16, RGB_BLACK);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     sNamingScreenData->state++;
     return FALSE;
 }
@@ -663,7 +663,7 @@ static bool8 pokemon_store(void)
 
 static bool8 MainState_BeginFadeInOut(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     sNamingScreenData->state++;
     return FALSE;
 }

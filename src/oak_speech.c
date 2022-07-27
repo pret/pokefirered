@@ -573,7 +573,7 @@ static void Task_OaksSpeech1(u8 taskId)
         BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
         break;
     case 10:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         ShowBg(0);
         ShowBg(1);
@@ -693,7 +693,7 @@ static void Task_OakSpeech3(u8 taskId)
         }
         else
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
+            BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, 0);
             gTasks[taskId].func = Task_OakSpeech5;
         }
     }
@@ -752,7 +752,7 @@ static void Task_OakSpeech6(u8 taskId)
         gSprites[data[5]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[data[5]].oam.priority = 0;
         CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 2, 16, 0, 0);
         gTasks[taskId].func = Task_OakSpeech7;
     }
 }
@@ -850,7 +850,7 @@ static void Task_OakSpeech7(u8 taskId)
             SetGpuReg(REG_OFFSET_WININ, 0);
             SetGpuReg(REG_OFFSET_WINOUT, 0);
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-            BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_OakSpeech8;
         }
         break;
@@ -894,7 +894,7 @@ static void Task_OakSpeech9(u8 taskId)
         LoadOaksSpeechTrainerPic(OAK_PIC, 0);
         CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 1);
         PlayBGM(MUS_ROUTE24);
-        BeginNormalPaletteFade(0xFFFFFFFF, 5, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 5, 16, 0, RGB_BLACK);
         data[3] = 80;
         ShowBg(2);
         gTasks[taskId].func = Task_OakSpeech10;
@@ -1150,7 +1150,7 @@ static void Task_OakSpeech24(u8 taskId)
 {
     if (!IsTextPrinterActive(0))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sOakSpeechResources->hasPlayerBeenNamed = FALSE;
         gTasks[taskId].func = Task_OakSpeech25;
     }
@@ -1209,7 +1209,7 @@ static void Task_OakSpeech29(u8 taskId)
         break;
     case 0:
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
         gTasks[taskId].func = Task_OakSpeech25;
         break;
     case -1:
@@ -1610,7 +1610,7 @@ static void CB2_ReturnFromNamingScreen(void)
         gTasks[taskId].data[15] = 1;
         break;
     case 7:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         ShowBg(0);
         ShowBg(1);

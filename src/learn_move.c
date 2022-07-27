@@ -368,7 +368,7 @@ void DisplayMoveTutorMenu(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_InitMoveRelearnerMenu, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
 static void Task_InitMoveRelearnerMenu(u8 taskId)
@@ -480,7 +480,7 @@ static void MoveRelearnerStateMachine(void)
     switch (sMoveRelearner->state)
     {
     case MENU_STATE_FADE_TO_BLACK:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
         LoadMoveInfoUI();
@@ -593,7 +593,7 @@ static void MoveRelearnerStateMachine(void)
         break;
     case MENU_STATE_PRINT_WHICH_MOVE_PROMPT:
         sMoveRelearner->state = 20;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         break;
     case MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN:
         if (!gPaletteFade.active)
@@ -608,10 +608,10 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state = 14;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_FADE_AND_RETURN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_RETURN_TO_FIELD:
@@ -623,7 +623,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
         sMoveRelearner->state++;

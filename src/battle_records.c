@@ -127,7 +127,7 @@ static void MainCB2_SetUp(void)
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 7:
@@ -178,7 +178,7 @@ static void Task_WaitButton(u8 taskId)
 
 static void Task_FadeOut(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_DestroyAndReturnToField;
 }
 

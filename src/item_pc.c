@@ -368,7 +368,7 @@ static bool8 ItemPc_DoGfxSetup(void)
     case 19:
         if (sListMenuState.initialized == 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         }
         else
         {
@@ -392,7 +392,7 @@ static bool8 ItemPc_DoGfxSetup(void)
 
 static void ItemPc_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_ItemPcWaitFadeAndBail, 0);
     SetVBlankCallback(ItemPc_VBlankCB);
     SetMainCallback2(ItemPc_MainCB);
@@ -632,7 +632,7 @@ static void Task_ItemPcTurnOff1(u8 taskId)
 {
     if (sListMenuState.initialized == 1)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     }
     else
     {

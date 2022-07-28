@@ -905,15 +905,15 @@ static void ShowResultsBoard(void)
     windowId = AddWindow(sTimeBoardWindowTemplate);
     LoadStdWindowFrameGfx();
     DrawStdWindowFrame(windowId, FALSE);
-    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 74, 0, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 74, 0, TEXT_SKIP_DRAW, NULL);
 
     for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
         PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime));
 
         StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
-        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 24, 36 + 20 * i, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gStringVar4, 96, 46 + 20 * i, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 24, 36 + 20 * i, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, 2, gStringVar4, 96, 46 + 20 * i, TEXT_SKIP_DRAW, NULL);
     }
 
     PutWindowTilemap(windowId);

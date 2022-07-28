@@ -346,7 +346,7 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
         colors[0] = gListMenuOverride.fillValue;
         colors[1] = gListMenuOverride.cursorPal;
         colors[2] = gListMenuOverride.cursorShadowPal;
-        AddTextPrinterParameterized4(list->template.windowId, gListMenuOverride.fontId, x, y, gListMenuOverride.lettersSpacing, 0, colors, TEXT_SPEED_FF, str);
+        AddTextPrinterParameterized4(list->template.windowId, gListMenuOverride.fontId, x, y, gListMenuOverride.lettersSpacing, 0, colors, TEXT_SKIP_DRAW, str);
         gListMenuOverride.enabled = FALSE;
     }
     else
@@ -354,7 +354,7 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
         colors[0] = list->template.fillValue;
         colors[1] = list->template.cursorPal;
         colors[2] = list->template.cursorShadowPal;
-        AddTextPrinterParameterized4(list->template.windowId, list->template.fontId, x, y, list->template.lettersSpacing, 0, colors, TEXT_SPEED_FF, str);
+        AddTextPrinterParameterized4(list->template.windowId, list->template.fontId, x, y, list->template.lettersSpacing, 0, colors, TEXT_SKIP_DRAW, str);
     }
 }
 

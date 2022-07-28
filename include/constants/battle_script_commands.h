@@ -38,16 +38,16 @@
 #define BS_ATTACKER                 1
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
-#define BS_ATTACKER_WITH_PARTNER    4 // for atk98_updatestatusicon
+#define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_updatestatusicon
 #define BS_UNKNOWN_5                5 // for openpartyscreen
 #define BS_UNKNOWN_6                6 // for openpartyscreen
 #define BS_BATTLER_0                7
-#define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
-#define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_ATTACKER_SIDE            8 // for Cmd_jumpifability
+#define BS_NOT_ATTACKER_SIDE        9 // for Cmd_jumpifability
 #define BS_SCRIPTING                10
 #define BS_PLAYER1                  11
 #define BS_OPPONENT1                12
-#define BS_PLAYER2                  13 // for atk98_updatestatusicon
+#define BS_PLAYER2                  13 // for Cmd_updatestatusicon
 #define BS_OPPONENT2                14
 
 // used for openpartyscreen
@@ -90,35 +90,35 @@
 // atk4F, a flag used for the jumpifcantswitch command
 #define ATK4F_DONT_CHECK_STATUSES   0x80
 
-// statchange defines
-#define STAT_CHANGE_BS_PTR                  0x1
-#define STAT_CHANGE_NOT_PROTECT_AFFECTED    0x20
+// Cmd_statbuffchange
+#define STAT_CHANGE_ALLOW_PTR               (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
+#define STAT_CHANGE_NOT_PROTECT_AFFECTED    (1 << 5)
 
-// atk48
-#define ATK48_STAT_NEGATIVE         0x1
-#define ATK48_STAT_BY_TWO           0x2
-#define ATK48_ONLY_MULTIPLE         0x4
-#define ATK48_DONT_CHECK_LOWER      0x8
+// stat change flags for Cmd_playstatchangeanimation
+#define STAT_CHANGE_NEGATIVE             (1 << 0)
+#define STAT_CHANGE_BY_TWO               (1 << 1)
+#define STAT_CHANGE_MULTIPLE_STATS       (1 << 2)
+#define STAT_CHANGE_CANT_PREVENT         (1 << 3)
 
-// atk49, moveend cases
-#define ATK49_RAGE                              0
-#define ATK49_DEFROST                           1
-#define ATK49_SYNCHRONIZE_TARGET                2
-#define ATK49_MOVE_END_ABILITIES                3
-#define ATK49_STATUS_IMMUNITY_ABILITIES         4
-#define ATK49_SYNCHRONIZE_ATTACKER              5
-#define ATK49_CHOICE_MOVE                       6
-#define ATK49_CHANGED_ITEMS                     7
-#define ATK49_ATTACKER_INVISIBLE                8
-#define ATK49_ATTACKER_VISIBLE                  9
-#define ATK49_TARGET_VISIBLE                    10
-#define ATK49_ITEM_EFFECTS_ALL                  11
-#define ATK49_KINGSROCK_SHELLBELL               12
-#define ATK49_SUBSTITUTE                        13
-#define ATK49_UPDATE_LAST_MOVES                 14
-#define ATK49_MIRROR_MOVE                       15
-#define ATK49_NEXT_TARGET                       16
-#define ATK49_COUNT                             17
+// cases for Cmd_moveend
+#define MOVEEND_RAGE                            0
+#define MOVEEND_DEFROST                         1
+#define MOVEEND_SYNCHRONIZE_TARGET              2
+#define MOVEEND_ON_DAMAGE_ABILITIES             3
+#define MOVEEND_IMMUNITY_ABILITIES              4
+#define MOVEEND_SYNCHRONIZE_ATTACKER            5
+#define MOVEEND_CHOICE_MOVE                     6
+#define MOVEEND_CHANGED_ITEMS                   7
+#define MOVEEND_ATTACKER_INVISIBLE              8
+#define MOVEEND_ATTACKER_VISIBLE                9
+#define MOVEEND_TARGET_VISIBLE                  10
+#define MOVEEND_ITEM_EFFECTS_ALL                11
+#define MOVEEND_KINGSROCK_SHELLBELL             12
+#define MOVEEND_SUBSTITUTE                      13
+#define MOVEEND_UPDATE_LAST_MOVES               14
+#define MOVEEND_MIRROR_MOVE                     15
+#define MOVEEND_NEXT_TARGET                     16
+#define MOVEEND_COUNT                           17
 
 #define BIT_HP                      0x1
 #define BIT_ATK                     0x2

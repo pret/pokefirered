@@ -1109,7 +1109,7 @@ static void Task_OakSpeech20(u8 taskId)
 static void Task_OakSpeech21(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ClearStdWindowAndFrameToTransparent(data[13], 1);
+    ClearStdWindowAndFrameToTransparent(data[13], TRUE);
     RemoveWindow(data[13]);
     data[13] = 0;
     ClearDialogWindowAndFrame(0, 1);

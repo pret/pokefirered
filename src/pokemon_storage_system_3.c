@@ -2294,16 +2294,16 @@ static void PrintCursorMonInfo(void)
     {
         for (i = 0, y = 0; i < 3; i++, y += 14)
         {
-            AddTextPrinterParameterized(0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
         }
-        AddTextPrinterParameterized(0, 0, gPSSData->cursorMonTexts[3], 6, y + 2, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 0, gPSSData->cursorMonTexts[3], 6, y + 2, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, 0, gPSSData->cursorMonTexts[3], 6, 0, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 0, gPSSData->cursorMonTexts[3], 6, 0, TEXT_SKIP_DRAW, NULL);
         for (i = 0, y = 15; i < 3; i++, y += 14)
         {
-            AddTextPrinterParameterized(0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SPEED_FF, NULL);
+            AddTextPrinterParameterized(0, 2, gPSSData->cursorMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
         }
     }
 
@@ -2592,7 +2592,7 @@ static void PrintStorageActionText(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gPSSData->field_2190, sPCStorageActionTexts[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, 1, gPSSData->field_2190, 0, 2, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(1, 1, gPSSData->field_2190, 0, 2, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(1, 2, 13);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);

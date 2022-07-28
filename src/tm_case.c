@@ -830,7 +830,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 static void TMHMContextMenuAction_Use(u8 taskId)
 {
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    ClearStdWindowAndFrameToTransparent(2, 0);
+    ClearStdWindowAndFrameToTransparent(2, FALSE);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
@@ -852,7 +852,7 @@ static void TMHMContextMenuAction_Give(u8 taskId)
     s16 * data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1]);
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    ClearStdWindowAndFrameToTransparent(2, 0);
+    ClearStdWindowAndFrameToTransparent(2, FALSE);
     ClearWindowTilemap(2);
     PutWindowTilemap(1);
     PutWindowTilemap(4);
@@ -905,7 +905,7 @@ static void Subtask_CloseContextMenuAndReturnToMain(u8 taskId)
     DestroyListMenuTask(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
-    ClearDialogWindowAndFrameToTransparent(6, 0);
+    ClearDialogWindowAndFrameToTransparent(6, FALSE);
     ClearWindowTilemap(6);
     PutWindowTilemap(1);
     PutWindowTilemap(4);
@@ -920,7 +920,7 @@ static void TMHMContextMenuAction_Exit(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     RemoveTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
-    ClearStdWindowAndFrameToTransparent(2, 0);
+    ClearStdWindowAndFrameToTransparent(2, FALSE);
     ClearWindowTilemap(2);
     PutWindowTilemap(0);
     PrintListMenuCursorByID_WithColorIdx(data[0], 1);
@@ -1009,8 +1009,8 @@ static void Task_SaleOfTMsCanceled(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    ClearStdWindowAndFrameToTransparent(8, 0);
-    ClearDialogWindowAndFrameToTransparent(6, 0);
+    ClearStdWindowAndFrameToTransparent(8, FALSE);
+    ClearDialogWindowAndFrameToTransparent(6, FALSE);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     PutWindowTilemap(3);
@@ -1058,7 +1058,7 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(7, 0);
+        ClearStdWindowAndFrameToTransparent(7, FALSE);
         ScheduleBgCopyTilemapToVram(0);
         ScheduleBgCopyTilemapToVram(1);
         RemoveTMCaseScrollIndicatorArrowPair();
@@ -1067,9 +1067,9 @@ static void Task_QuantitySelect_HandleInput(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(7, 0);
-        ClearStdWindowAndFrameToTransparent(8, 0);
-        ClearDialogWindowAndFrameToTransparent(6, 0);
+        ClearStdWindowAndFrameToTransparent(7, FALSE);
+        ClearStdWindowAndFrameToTransparent(8, FALSE);
+        ClearDialogWindowAndFrameToTransparent(6, FALSE);
         PutWindowTilemap(3);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -1116,8 +1116,8 @@ static void Task_AfterSale_ReturnToList(u8 taskId)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearStdWindowAndFrameToTransparent(8, 0);
-        ClearDialogWindowAndFrameToTransparent(6, 0);
+        ClearStdWindowAndFrameToTransparent(8, FALSE);
+        ClearDialogWindowAndFrameToTransparent(6, FALSE);
         PutWindowTilemap(1);
         PutWindowTilemap(3);
         PutWindowTilemap(4);
@@ -1242,7 +1242,7 @@ static void Task_TMCaseDude_Playback(u8 taskId)
         {
             FillBG2RowWithPalette_2timesNplus1(0);
             BeginNormalPaletteFade(0x00000400, 0, 6, 0, 0);
-            ClearDialogWindowAndFrameToTransparent(6, 0);
+            ClearDialogWindowAndFrameToTransparent(6, FALSE);
             ScheduleBgCopyTilemapToVram(1);
             data[8]++;
         }

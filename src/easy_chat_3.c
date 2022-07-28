@@ -1321,7 +1321,7 @@ static void PrintTitleText(void)
 
     xOffset = (128 - GetStringWidth(1, titleText, 0)) / 2u;
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_BOTH);
 }
@@ -1374,10 +1374,10 @@ static void PrintECInterfaceTextById(u8 direction)
 
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     if (text1)
-        EC_AddTextPrinterParameterized(1, 1, text1, 0, 0, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(1, 1, text1, 0, 0, TEXT_SKIP_DRAW, NULL);
 
     if (text2)
-        EC_AddTextPrinterParameterized(1, 1, text2, 0, 16, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(1, 1, text2, 0, 16, TEXT_SKIP_DRAW, NULL);
 
     CopyWindowToVram(1, COPYWIN_BOTH);
 }
@@ -1451,7 +1451,7 @@ static void PrintECFields(void)
         }
 
         *str = EOS;
-        EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, 1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, 1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(sEasyChatGraphicsResources->windowId, COPYWIN_BOTH);
@@ -1566,7 +1566,7 @@ static void PrintECGroupsMenu(void)
                 return;
             }
 
-            EC_AddTextPrinterParameterized(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
+            EC_AddTextPrinterParameterized(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
         }
 
         y += 16;
@@ -1578,7 +1578,7 @@ static void PrintEasyChatKeyboardText(void)
     u32 i;
 
     for (i = 0; i < NELEMS(sEasyChatKeyboardText); i++)
-        EC_AddTextPrinterParameterized(2, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(2, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintECWordsMenu(void)
@@ -1652,7 +1652,7 @@ static void PrintECRowsWin2(u8 row, u8 remrow)
 
                 CopyEasyChatWordPadded(sEasyChatGraphicsResources->ecPaddedWordBuffer, easyChatWord, 0);
 
-                EC_AddTextPrinterParameterized(2, 1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SPEED_FF, NULL);
+                EC_AddTextPrinterParameterized(2, 1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SKIP_DRAW, NULL);
             }
         }
         y += 16;

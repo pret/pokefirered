@@ -79,7 +79,7 @@ static void PrintNewCountOnLinkPlayerCountDisplayWindow(u16 windowId, s32 num)
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStdWindowBorderStyle(windowId, FALSE);
     StringExpandPlaceholders(gStringVar4, gUnknown_841DF82);
-    AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 0, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 

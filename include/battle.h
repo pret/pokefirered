@@ -209,14 +209,14 @@ extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 
 struct SpecialStatus
 {
-    u8 statLowered : 1;             // 0x1
-    u8 lightningRodRedirected : 1;  // 0x2
-    u8 restoredBattlerSprite: 1;    // 0x4
-    u8 intimidatedMon : 1;          // 0x8
-    u8 traced : 1;                  // 0x10
-    u8 ppNotAffectedByPressure : 1;
-    u8 flag40 : 1;
-    u8 focusBanded : 1;
+    u8 statLowered:1;             // 0x1
+    u8 lightningRodRedirected:1;  // 0x2
+    u8 restoredBattlerSprite:1;   // 0x4
+    u8 intimidatedMon:1;          // 0x8
+    u8 traced:1;                  // 0x10
+    u8 ppNotAffectedByPressure:1;
+    u8 faintedHasReplacement:1;
+    u8 focusBanded:1;
     u8 field1[3];
     s32 dmg;
     s32 physicalDmg;
@@ -492,7 +492,7 @@ struct BattleScripting
     u8 animArg1;
     u8 animArg2;
     u16 tripleKickPower;
-    u8 atk49_state;
+    u8 moveendState;
     u8 battlerWithAbility;
     u8 multihitMoveEffect;
     u8 battler;
@@ -500,9 +500,9 @@ struct BattleScripting
     u8 animTargetsHit;
     u8 statChanger;
     bool8 statAnimPlayed;
-    u8 atk23_state;
+    u8 getexpState;
     u8 battleStyle;
-    u8 atk6C_state;
+    u8 drawlvlupboxState;
     u8 learnMoveState;
     u8 field_20;
     u8 reshowMainState;

@@ -2582,7 +2582,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // are effects of weather negated with cloud nine or air lock
         if (WEATHER_HAS_EFFECT2)
         {
-            if (gBattleWeather & WEATHER_RAIN_TEMPORARY)
+            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
             {
                 switch (type)
                 {
@@ -2596,11 +2596,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
 
             // any weather except sun weakens solar beam
-            if ((gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL_TEMPORARY)) && gCurrentMove == MOVE_SOLAR_BEAM)
                 damage /= 2;
 
             // sunny
-            if (gBattleWeather & WEATHER_SUN_ANY)
+            if (gBattleWeather & B_WEATHER_SUN)
             {
                 switch (type)
                 {
@@ -3931,7 +3931,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, 0);
 }
 
-bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
+bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
 {
     u32 data;
     s32 friendship;
@@ -4201,7 +4201,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         }
                         if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                         {
-                            if (e == 0)
+                            if (!usedByAI)
                             {
                                 data = GetMonData(mon, MON_DATA_HP, NULL) + data;
                                 if (data > GetMonData(mon, MON_DATA_MAX_HP, NULL))

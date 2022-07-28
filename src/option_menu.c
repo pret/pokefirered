@@ -524,7 +524,7 @@ static void CloseAndSaveOptionMenu(u8 taskId)
 static void PrintOptionMenuHeader(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_TEXT_OPTION, 2, gText_MenuOption, 8, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(WIN_TEXT_OPTION, 2, gText_MenuOption, 8, 1, TEXT_SKIP_DRAW, NULL);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_BOTH);
 }
@@ -560,7 +560,7 @@ static void LoadOptionMenuItemNames(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        AddTextPrinterParameterized(WIN_OPTIONS, 2, sOptionMenuItemsNames[i], 8, (u8)((i * (GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, TEXT_SPEED_FF, NULL);    
+        AddTextPrinterParameterized(WIN_OPTIONS, 2, sOptionMenuItemsNames[i], 8, (u8)((i * (GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, TEXT_SKIP_DRAW, NULL);    
     }
 }
 

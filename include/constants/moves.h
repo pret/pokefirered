@@ -361,6 +361,9 @@
 
 #define MOVES_COUNT 355
 
+// Used for checks for moves affected by Disable, Mimic, etc.
+#define MOVE_UNAVAILABLE 0xFFFF
+
 #define MOVETUTOR_MEGA_PUNCH    0
 #define MOVETUTOR_SWORDS_DANCE  1
 #define MOVETUTOR_MEGA_KICK     2

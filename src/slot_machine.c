@@ -2265,7 +2265,7 @@ static void Slot_PrintOnWindow0(const u8 * str)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     PutWindowTilemap(0);
     DrawTextBorderOuter(0, 0x001, 15);
-    AddTextPrinterParameterized5(0, 2, str, 1, 2, TEXT_SPEED_FF, NULL, 1, 2);
+    AddTextPrinterParameterized5(0, 2, str, 1, 2, TEXT_SKIP_DRAW, NULL, 1, 2);
 }
 
 static void Slot_ClearWindow0(void)

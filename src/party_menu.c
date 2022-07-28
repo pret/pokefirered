@@ -1550,7 +1550,7 @@ static void Task_PrintAndWaitForText(u8 taskId)
     {
         if (gTasks[taskId].tKeepOpen == FALSE)
         {
-            ClearStdWindowAndFrameToTransparent(6, 0);
+            ClearStdWindowAndFrameToTransparent(6, FALSE);
             ClearWindowTilemap(6);
         }
         DestroyTask(taskId);
@@ -1577,7 +1577,7 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
-        ClearStdWindowAndFrameToTransparent(6, 0);
+        ClearStdWindowAndFrameToTransparent(6, FALSE);
         ClearWindowTilemap(6);
         if (MenuHelpers_LinkSomething() == TRUE)
         {
@@ -2484,7 +2484,7 @@ static void PartyMenuRemoveWindow(u8 *ptr)
 {
     if (*ptr != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         RemoveWindow(*ptr);
         *ptr = 0xFF;
         ScheduleBgCopyTilemapToVram(2);
@@ -4595,7 +4595,7 @@ static void ShowMoveSelectWindow(u8 slot)
                                     gMoveNames[move],
                                     GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + GetFontAttribute(fontId, FONTATTR_LETTER_SPACING),
                                     (i * 16) + 2,
-                                    TEXT_SPEED_FF,
+                                    TEXT_SKIP_DRAW,
                                     NULL);
         if (move != MOVE_NONE)
             ++moveCount;

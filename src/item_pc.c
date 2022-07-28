@@ -1040,7 +1040,7 @@ static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearDialogWindowAndFrameToTransparent(5, 0);
+        ClearDialogWindowAndFrameToTransparent(5, FALSE);
         ClearWindowTilemap(5);
         PutWindowTilemap(1);
         ItemPc_PrintOrRemoveCursor(data[0], 1);

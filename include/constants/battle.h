@@ -135,24 +135,26 @@
 #define STATUS2_TORMENT               0x80000000
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
-#define STATUS3_LEECHSEED_BATTLER       0x3
-#define STATUS3_LEECHSEED               0x4
-#define STATUS3_ALWAYS_HITS             0x18    // two bits
-#define STATUS3_PERISH_SONG             0x20
-#define STATUS3_ON_AIR                  0x40
-#define STATUS3_UNDERGROUND             0x80
-#define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                  0x400
-#define STATUS3_CHARGED_UP              0x200
-#define STATUS3_YAWN                    0x1800  // two bits
-#define STATUS3_IMPRISONED_OTHERS       0x2000
-#define STATUS3_GRUDGE                  0x4000
-#define STATUS3_CANT_SCORE_A_CRIT       0x8000
-#define STATUS3_MUDSPORT                0x10000
-#define STATUS3_WATERSPORT              0x20000
-#define STATUS3_UNDERWATER              0x40000
-#define STATUS3_INTIMIDATE_POKES        0x80000
-#define STATUS3_TRACE                   0x100000
+#define STATUS3_LEECHSEED_BATTLER       (1 << 0 | 1 << 1) // The battler to receive HP from Leech Seed
+#define STATUS3_LEECHSEED               (1 << 2)
+#define STATUS3_ALWAYS_HITS             (1 << 3 | 1 << 4)
+#define STATUS3_ALWAYS_HITS_TURN(num)   (((num) << 3) & STATUS3_ALWAYS_HITS) // "Always Hits" is set as a 2 turn timer, i.e. next turn is the last turn when it's active
+#define STATUS3_PERISH_SONG             (1 << 5)
+#define STATUS3_ON_AIR                  (1 << 6)
+#define STATUS3_UNDERGROUND             (1 << 7)
+#define STATUS3_MINIMIZED               (1 << 8)
+#define STATUS3_CHARGED_UP              (1 << 9)
+#define STATUS3_ROOTED                  (1 << 10)
+#define STATUS3_YAWN                    (1 << 11 | 1 << 12) // Number of turns to sleep
+#define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
+#define STATUS3_IMPRISONED_OTHERS       (1 << 13)
+#define STATUS3_GRUDGE                  (1 << 14)
+#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15)
+#define STATUS3_MUDSPORT                (1 << 16)
+#define STATUS3_WATERSPORT              (1 << 17)
+#define STATUS3_UNDERWATER              (1 << 18)
+#define STATUS3_INTIMIDATE_POKES        (1 << 19)
+#define STATUS3_TRACE                   (1 << 20)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
@@ -175,7 +177,7 @@
 #define HITMARKER_PASSIVE_DAMAGE        0x00100000
 #define HITMARKER_x200000               0x00200000
 #define HITMARKER_PLAYER_FAINTED        0x00400000
-#define HITMARKER_x800000               0x00800000
+#define HITMARKER_ALLOW_NO_PP           0x00800000
 #define HITMARKER_GRUDGE                0x01000000
 #define HITMARKER_OBEYS                 0x02000000
 #define HITMARKER_x4000000              0x04000000
@@ -205,87 +207,85 @@
 #define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 // Battle Weather flags
-#define WEATHER_RAIN_TEMPORARY      (1 << 0)
-#define WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
-#define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY            (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT)
-#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
-#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
-#define WEATHER_SANDSTORM_ANY       (WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT)
-#define WEATHER_SUN_TEMPORARY     (1 << 5)
-#define WEATHER_SUN_PERMANENT     (1 << 6)
-#define WEATHER_SUN_ANY           (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT)
-#define WEATHER_HAIL                (1 << 7)
-#define WEATHER_HAIL_ANY            (WEATHER_HAIL)
-#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
+#define B_WEATHER_RAIN_TEMPORARY      (1 << 0)
+#define B_WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
+#define B_WEATHER_RAIN_PERMANENT      (1 << 2)
+#define B_WEATHER_RAIN                (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_DOWNPOUR | B_WEATHER_RAIN_PERMANENT)
+#define B_WEATHER_SANDSTORM_TEMPORARY (1 << 3)
+#define B_WEATHER_SANDSTORM_PERMANENT (1 << 4)
+#define B_WEATHER_SANDSTORM           (B_WEATHER_SANDSTORM_TEMPORARY | B_WEATHER_SANDSTORM_PERMANENT)
+#define B_WEATHER_SUN_TEMPORARY       (1 << 5)
+#define B_WEATHER_SUN_PERMANENT       (1 << 6)
+#define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT)
+#define B_WEATHER_HAIL_TEMPORARY      (1 << 7)
+#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY)
+#define WEATHER_ANY                   (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
 
 // Move Effects
-#define MOVE_EFFECT_NOTHING_0           0x0
-#define MOVE_EFFECT_SLEEP               0x1
-#define MOVE_EFFECT_POISON              0x2
-#define MOVE_EFFECT_BURN                0x3
-#define MOVE_EFFECT_FREEZE              0x4
-#define MOVE_EFFECT_PARALYSIS           0x5
-#define MOVE_EFFECT_TOXIC               0x6
-#define MOVE_EFFECT_CONFUSION           0x7
-#define MOVE_EFFECT_FLINCH              0x8
-#define MOVE_EFFECT_TRI_ATTACK          0x9
-#define MOVE_EFFECT_UPROAR              0xA
-#define MOVE_EFFECT_PAYDAY              0xB
-#define MOVE_EFFECT_CHARGING            0xC
-#define MOVE_EFFECT_WRAP                0xD
-#define MOVE_EFFECT_RECOIL_25           0xE
-#define MOVE_EFFECT_ATK_PLUS_1          0xF
-#define MOVE_EFFECT_DEF_PLUS_1          0x10
-#define MOVE_EFFECT_SPD_PLUS_1          0x11
-#define MOVE_EFFECT_SP_ATK_PLUS_1       0x12
-#define MOVE_EFFECT_SP_DEF_PLUS_1       0x13
-#define MOVE_EFFECT_ACC_PLUS_1          0x14
-#define MOVE_EFFECT_EVS_PLUS_1          0x15
-#define MOVE_EFFECT_ATK_MINUS_1         0x16
-#define MOVE_EFFECT_DEF_MINUS_1         0x17
-#define MOVE_EFFECT_SPD_MINUS_1         0x18
-#define MOVE_EFFECT_SP_ATK_MINUS_1      0x19
-#define MOVE_EFFECT_SP_DEF_MINUS_1      0x1A
-#define MOVE_EFFECT_ACC_MINUS_1         0x1B
-#define MOVE_EFFECT_EVS_MINUS_1         0x1C
-#define MOVE_EFFECT_RECHARGE            0x1D
-#define MOVE_EFFECT_RAGE                0x1E
-#define MOVE_EFFECT_STEAL_ITEM          0x1F
-#define MOVE_EFFECT_PREVENT_ESCAPE      0x20
-#define MOVE_EFFECT_NIGHTMARE           0x21
-#define MOVE_EFFECT_ALL_STATS_UP        0x22
-#define MOVE_EFFECT_RAPIDSPIN           0x23
-#define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
-#define MOVE_EFFECT_ATK_DEF_DOWN        0x25
-#define MOVE_EFFECT_RECOIL_33           0x26
-#define MOVE_EFFECT_ATK_PLUS_2          0x27
-#define MOVE_EFFECT_DEF_PLUS_2          0x28
-#define MOVE_EFFECT_SPD_PLUS_2          0x29
-#define MOVE_EFFECT_SP_ATK_PLUS_2       0x2A
-#define MOVE_EFFECT_SP_DEF_PLUS_2       0x2B
-#define MOVE_EFFECT_ACC_PLUS_2          0x2C
-#define MOVE_EFFECT_EVS_PLUS_2          0x2D
-#define MOVE_EFFECT_ATK_MINUS_2         0x2E
-#define MOVE_EFFECT_DEF_MINUS_2         0x2F
-#define MOVE_EFFECT_SPD_MINUS_2         0x30
-#define MOVE_EFFECT_SP_ATK_MINUS_2      0x31
-#define MOVE_EFFECT_SP_DEF_MINUS_2      0x32
-#define MOVE_EFFECT_ACC_MINUS_2         0x33
-#define MOVE_EFFECT_EVS_MINUS_2         0x34
-#define MOVE_EFFECT_THRASH              0x35
-#define MOVE_EFFECT_KNOCK_OFF           0x36
-#define MOVE_EFFECT_NOTHING_37          0x37
-#define MOVE_EFFECT_NOTHING_38          0x38
-#define MOVE_EFFECT_NOTHING_39          0x39
-#define MOVE_EFFECT_NOTHING_3A          0x3A
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
-#define MOVE_EFFECT_NOTHING_3C          0x3C
-#define MOVE_EFFECT_NOTHING_3D          0x3D
-#define MOVE_EFFECT_NOTHING_3E          0x3E
-#define MOVE_EFFECT_NOTHING_3F          0x3F
-#define MOVE_EFFECT_AFFECTS_USER        0x40
-#define MOVE_EFFECT_CERTAIN             0x80
+#define MOVE_EFFECT_SLEEP               1
+#define MOVE_EFFECT_POISON              2
+#define MOVE_EFFECT_BURN                3
+#define MOVE_EFFECT_FREEZE              4
+#define MOVE_EFFECT_PARALYSIS           5
+#define MOVE_EFFECT_TOXIC               6
+#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC // All above move effects apply primary status
+#define MOVE_EFFECT_CONFUSION           7
+#define MOVE_EFFECT_FLINCH              8
+#define MOVE_EFFECT_TRI_ATTACK          9
+#define MOVE_EFFECT_UPROAR              10
+#define MOVE_EFFECT_PAYDAY              11
+#define MOVE_EFFECT_CHARGING            12
+#define MOVE_EFFECT_WRAP                13
+#define MOVE_EFFECT_RECOIL_25           14
+#define MOVE_EFFECT_ATK_PLUS_1          15
+#define MOVE_EFFECT_DEF_PLUS_1          16
+#define MOVE_EFFECT_SPD_PLUS_1          17
+#define MOVE_EFFECT_SP_ATK_PLUS_1       18
+#define MOVE_EFFECT_SP_DEF_PLUS_1       19
+#define MOVE_EFFECT_ACC_PLUS_1          20
+#define MOVE_EFFECT_EVS_PLUS_1          21
+#define MOVE_EFFECT_ATK_MINUS_1         22
+#define MOVE_EFFECT_DEF_MINUS_1         23
+#define MOVE_EFFECT_SPD_MINUS_1         24
+#define MOVE_EFFECT_SP_ATK_MINUS_1      25
+#define MOVE_EFFECT_SP_DEF_MINUS_1      26
+#define MOVE_EFFECT_ACC_MINUS_1         27
+#define MOVE_EFFECT_EVS_MINUS_1         28
+#define MOVE_EFFECT_RECHARGE            29
+#define MOVE_EFFECT_RAGE                30
+#define MOVE_EFFECT_STEAL_ITEM          31
+#define MOVE_EFFECT_PREVENT_ESCAPE      32
+#define MOVE_EFFECT_NIGHTMARE           33
+#define MOVE_EFFECT_ALL_STATS_UP        34
+#define MOVE_EFFECT_RAPIDSPIN           35
+#define MOVE_EFFECT_REMOVE_PARALYSIS    36
+#define MOVE_EFFECT_ATK_DEF_DOWN        37
+#define MOVE_EFFECT_RECOIL_33           38
+#define MOVE_EFFECT_ATK_PLUS_2          39
+#define MOVE_EFFECT_DEF_PLUS_2          40
+#define MOVE_EFFECT_SPD_PLUS_2          41
+#define MOVE_EFFECT_SP_ATK_PLUS_2       42
+#define MOVE_EFFECT_SP_DEF_PLUS_2       43
+#define MOVE_EFFECT_ACC_PLUS_2          44
+#define MOVE_EFFECT_EVS_PLUS_2          45
+#define MOVE_EFFECT_ATK_MINUS_2         46
+#define MOVE_EFFECT_DEF_MINUS_2         47
+#define MOVE_EFFECT_SPD_MINUS_2         48
+#define MOVE_EFFECT_SP_ATK_MINUS_2      49
+#define MOVE_EFFECT_SP_DEF_MINUS_2      50
+#define MOVE_EFFECT_ACC_MINUS_2         51
+#define MOVE_EFFECT_EVS_MINUS_2         52
+#define MOVE_EFFECT_THRASH              53
+#define MOVE_EFFECT_KNOCK_OFF           54
+#define MOVE_EFFECT_NOTHING_37          55
+#define MOVE_EFFECT_NOTHING_38          56
+#define MOVE_EFFECT_NOTHING_39          57
+#define MOVE_EFFECT_NOTHING_3A          58
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
+#define NUM_MOVE_EFFECTS                60
+
+#define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
+#define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
 
 // Battle terrain defines for gBattleTerrain.
 #define BATTLE_TERRAIN_GRASS        0
@@ -327,6 +327,8 @@
 #define B_WIN_PP_REMAINING        9
 #define B_WIN_DUMMY              10
 #define B_WIN_SWITCH_PROMPT      11 // "Switch which?"
+#define B_WIN_LEVEL_UP_BOX       12
+#define B_WIN_LEVEL_UP_BANNER    13
 #define B_WIN_YESNO              14
 #define B_WIN_VS_PLAYER          15
 #define B_WIN_VS_OPPONENT        16

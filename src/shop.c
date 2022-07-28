@@ -620,7 +620,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
         while (x-- != 0)
             *loc++ = 0;
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
-        BuyMenuPrint(windowId, 0, gStringVar4, 0x69, y, 0, 0, TEXT_SPEED_FF, 1);
+        BuyMenuPrint(windowId, 0, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
 }
 
@@ -631,13 +631,13 @@ static void LoadTmHmNameInMart(s32 item)
         ConvertIntToDecimalStringN(gStringVar1, item - ITEM_DEVON_SCOPE, 2, 2);
         StringCopy(gStringVar4, gOtherText_UnkF9_08_Clear_01);
         StringAppend(gStringVar4, gStringVar1);
-        BuyMenuPrint(6, 0, gStringVar4, 0, 0, 0, 0, TEXT_SPEED_FF, 1);
+        BuyMenuPrint(6, 0, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
         StringCopy(gStringVar4, gMoveNames[ItemIdToBattleMoveId(item)]);
         BuyMenuPrint(6, 2, gStringVar4, 0, 0x10, 0, 0, 0, 1);
     }
     else
     {
-        BuyMenuPrint(6, 0, gText_ThreeHyphens, 0, 0, 0, 0, TEXT_SPEED_FF, 1);
+        BuyMenuPrint(6, 0, gText_ThreeHyphens, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
         BuyMenuPrint(6, 2, gText_SevenHyphens, 0, 0x10, 0, 0, 0, 1);
     }
 }
@@ -877,7 +877,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
     
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    PrintMoneyAmount(3, 0x36, 0xA, gShopData.itemPrice, TEXT_SPEED_FF);
+    PrintMoneyAmount(3, 0x36, 0xA, gShopData.itemPrice, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     BuyMenuPrint(3, 0, gStringVar4, 2, 0xA, 0, 0, 0, 1);
@@ -962,8 +962,8 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
         {
             PlaySE(SE_SELECT);
             BuyMenuRemoveScrollIndicatorArrows();
-            ClearStdWindowAndFrameToTransparent(3, 0);
-            ClearStdWindowAndFrameToTransparent(1, 0);
+            ClearStdWindowAndFrameToTransparent(3, FALSE);
+            ClearStdWindowAndFrameToTransparent(1, FALSE);
             ClearWindowTilemap(3);
             ClearWindowTilemap(1);
             PutWindowTilemap(4);
@@ -976,8 +976,8 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
         {            
             PlaySE(SE_SELECT);
             BuyMenuRemoveScrollIndicatorArrows();
-            ClearStdWindowAndFrameToTransparent(3, 0);
-            ClearStdWindowAndFrameToTransparent(1, 0);
+            ClearStdWindowAndFrameToTransparent(3, FALSE);
+            ClearStdWindowAndFrameToTransparent(1, FALSE);
             ClearWindowTilemap(3);
             ClearWindowTilemap(1);
             BuyMenuReturnToItemList(taskId);
@@ -1029,7 +1029,7 @@ static void BuyMenuReturnToItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    ClearDialogWindowAndFrameToTransparent(2, 0);
+    ClearDialogWindowAndFrameToTransparent(2, FALSE);
     BuyMenuPrintCursor(tListTaskId, 1);
     RecolorItemDescriptionBox(0);
     PutWindowTilemap(4);

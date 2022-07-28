@@ -1666,7 +1666,7 @@ static void AddGenderIconFunc_Yes(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             gender = FEMALE;
         }
-        AddTextPrinterParameterized3(sNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SPEED_FF, genderSymbol);
+        AddTextPrinterParameterized3(sNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SKIP_DRAW, genderSymbol);
     }
 }
 
@@ -1799,7 +1799,7 @@ static void PrintBufferCharactersOnScreen(void)
         temp[1] = gExpandedPlaceholder_Empty[0];
         xoff = (IsLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     CallAddGenderIconFunc();

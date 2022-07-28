@@ -952,8 +952,8 @@ static void PlaceYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     {
         FillWindowPixelBuffer(sWork->yesNoMenuWinId, PIXEL_FILL(1));
         PutWindowTilemap(sWork->yesNoMenuWinId);
-        AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_Yes, 8, 2, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_No, 8, 16, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_Yes, 8, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_No, 8, 16, TEXT_SKIP_DRAW, NULL);
         DrawTextBorderOuter(sWork->yesNoMenuWinId, 1, 13);
         Menu_InitCursor(sWork->yesNoMenuWinId, 2, 0, 2, 14, 2, initialCursorPos);
     }
@@ -1027,7 +1027,7 @@ static void PlaceStdMessageWindow(int id, u16 bg0vofs)
             str,
             sMessageWindowInfo[id].x + 8,
             sMessageWindowInfo[id].y + 8,
-            TEXT_SPEED_FF,
+            TEXT_SKIP_DRAW,
             NULL,
             sMessageWindowInfo[id].letterSpacing,
             sMessageWindowInfo[id].lineSpacing);
@@ -1041,7 +1041,7 @@ static void PlaceStdMessageWindow(int id, u16 bg0vofs)
             str,
             sMessageWindowInfo[id].x,
             sMessageWindowInfo[id].y,
-            TEXT_SPEED_FF,
+            TEXT_SKIP_DRAW,
             NULL,
             sMessageWindowInfo[id].letterSpacing,
             sMessageWindowInfo[id].lineSpacing);
@@ -1090,7 +1090,7 @@ static void PrintOnWin1Parameterized(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 
     strbuf[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
     strbuf[2] = 8;
     StringCopy(&strbuf[3], str);
-    AddTextPrinterParameterized3(1, 2, x * 8, 1, color, TEXT_SPEED_FF, strbuf);
+    AddTextPrinterParameterized3(1, 2, x * 8, 1, color, TEXT_SKIP_DRAW, strbuf);
 }
 
 static void PrintCurrentKeyboardPage(void)
@@ -1124,7 +1124,7 @@ static void PrintCurrentKeyboardPage(void)
                 return;
 
             StringCopy(&str[3], gUnionRoomKeyboardText[page][i]);
-            AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
+            AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SKIP_DRAW, str);
         }
     }
     else
@@ -1135,7 +1135,7 @@ static void PrintCurrentKeyboardPage(void)
             str2 = UnionRoomChat_GetWorkRegisteredText(i);
             if (GetStringWidth(0, str2, 0) <= 40)
             {
-                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str2);
+                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SKIP_DRAW, str2);
             }
             else
             {
@@ -1146,8 +1146,8 @@ static void PrintCurrentKeyboardPage(void)
                     StringCopyN_Multibyte(str, str2, length);
                 } while (GetStringWidth(0, str, 0) > 35);
 
-                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
-                AddTextPrinterParameterized3(2, 0, left + 35, top, color, TEXT_SPEED_FF, gText_Ellipsis);
+                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SKIP_DRAW, str);
+                AddTextPrinterParameterized3(2, 0, left + 35, top, color, TEXT_SKIP_DRAW, gText_Ellipsis);
             }
         }
     }
@@ -1214,7 +1214,7 @@ static void PrintTextOnWin0Colorized(u16 row, u8 *str, u8 colorIdx)
     color[1] = colorIdx * 2 + 2;
     color[2] = colorIdx * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);
-    AddTextPrinterParameterized3(0, 2, 0, row * 15, color, TEXT_SPEED_FF, str);
+    AddTextPrinterParameterized3(0, 2, 0, row * 15, color, TEXT_SKIP_DRAW, str);
 }
 
 static void ResetGpuBgState(void)

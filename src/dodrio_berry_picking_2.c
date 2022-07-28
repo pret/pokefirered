@@ -1499,7 +1499,7 @@ static void sub_8155C80(void)
         break;
     case 1:
         FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
-        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_SomeoneDroppedOut, 0, 6, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_SomeoneDroppedOut, 0, 6, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(gUnknown_203F440->unk3008[0], COPYWIN_GFX);
         gUnknown_203F440->state++;
         break;

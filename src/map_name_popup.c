@@ -199,7 +199,7 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     }
     xpos = (maxWidth - GetStringWidth(2, mapName, -1)) / 2;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 2, mapName, xpos, 2, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, 2, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
 }
 
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 floorNum)

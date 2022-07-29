@@ -99,7 +99,7 @@ enum {
 
 #define RET_VALUE_LEVELLED_UP   11
 
-#define INSTANT_HP_BAR_DROP     32767
+#define INSTANT_HP_BAR_DROP     0x7FFF
 
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11

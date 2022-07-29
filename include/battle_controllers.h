@@ -246,7 +246,7 @@ void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 mode);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
-void BtlController_EmitEndLinkBattle(u8 bufferId, u8 arg1);
+void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 
 // player controller
 void PlayerDummy(void);

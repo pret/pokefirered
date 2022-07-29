@@ -9,7 +9,7 @@ u16 GetInGameTradeSpeciesInfo(void);
 u16 GetTradeSpecies(void);
 void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
-void InitTradeBg(void);
+void LoadTradeAnimGfx(void);
 
 extern const u16 gTradeOrHatchMonShadowTilemap[];
 extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;

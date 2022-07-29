@@ -1314,7 +1314,7 @@ static void OpponentHandlePrintString(void)
     if (BattleStringShouldBeColored(*stringId))
         BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NONE));
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         switch (*stringId)

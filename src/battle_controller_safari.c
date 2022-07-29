@@ -411,7 +411,7 @@ static void SafariHandlePrintString(void)
     if (BattleStringShouldBeColored(*stringId))
         BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NONE));
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -438,13 +438,13 @@ static void SafariHandleChooseAction(void)
     s32 i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_EmptyString3, (B_WIN_MSG | B_TEXT_FLAG_NONE));
-    BattlePutTextOnWindow(gUnknown_83FE747, (B_WIN_ACTION_MENU | B_TEXT_FLAG_NONE));
+    BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
+    BattlePutTextOnWindow(gUnknown_83FE747, B_WIN_ACTION_MENU);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
-    BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_ACTION_PROMPT | B_TEXT_FLAG_NONE));
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
 static void SafariHandleUnknownYesNoBox(void)

@@ -944,7 +944,7 @@ static void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *data)
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
 
     // Nonsense loop using songId as a size
-    // Would go out of bounds for any song id after SE_RG_BAG_POCKET (253)
+    // Would go out of bounds for any song id after SE_DEOXYS_MOVE (253)
     for (i = 0; i < songId; ++i)
         sBattleBuffersTransferData[3 + i] = *(u8 *)(data++);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, songId + 3);

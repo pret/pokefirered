@@ -65,18 +65,6 @@
 #define BATTLE_TYPE_WILD_SCRIPTED      (1 << 17) // Used in pokeemerald as BATTLE_TYPE_PALACE.
 #define BATTLE_TYPE_LEGENDARY_FRLG     (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
 #define BATTLE_TYPE_TRAINER_TOWER      (1 << 19) // Used in pokeemerald as BATTLE_TYPE_FACTORY.
-#define BATTLE_TYPE_PIKE               (1 << 20) // Used in pokeemerald.
-#define BATTLE_TYPE_PYRAMID            (1 << 21) // Used in pokeemerald.
-#define BATTLE_TYPE_INGAME_PARTNER     (1 << 22)
-#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 23) // Used in pokeemerald.
-#define BATTLE_TYPE_RECORDED           (1 << 24)
-#define BATTLE_TYPE_RECORDED_LINK      (1 << 25) // Used in pokeemerald.
-#define BATTLE_TYPE_TRAINER_HILL       (1 << 26) // Used in pokeemerald.
-#define BATTLE_TYPE_SECRET_BASE        (1 << 27)
-#define BATTLE_TYPE_GROUDON            (1 << 28)
-#define BATTLE_TYPE_KYOGRE             (1 << 29)
-#define BATTLE_TYPE_RAYQUAZA           (1 << 30)
-#define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31) // Used in pokeemerald.
 
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
@@ -356,9 +344,7 @@
 #define B_WIN_VS_OUTCOME_RIGHT   23
 #define B_WIN_OAK_OLD_MAN        24
 
-#define B_TEXT_FLAG_NONE                (0 << 0)
 #define B_TEXT_FLAG_NPC_CONTEXT_FONT    (1 << 6)
 #define B_TEXT_FLAG_WINDOW_CLEAR        (1 << 7)
-#define B_TEXT_FLAG_BOTH                (B_TEXT_FLAG_NPC_CONTEXT_FONT | B_TEXT_FLAG_WINDOW_CLEAR)
 
 #endif // GUARD_CONSTANTS_BATTLE_H

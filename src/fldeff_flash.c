@@ -436,7 +436,7 @@ static void Task_MapPreviewScreen_0(u8 taskId)
         if (!MapPreview_IsGfxLoadFinished())
         {
             data[4] = MapPreview_CreateMapNameWindow(data[3]);
-            CopyWindowToVram(data[4], COPYWIN_BOTH);
+            CopyWindowToVram(data[4], COPYWIN_FULL);
             data[0]++;
         }
         break;

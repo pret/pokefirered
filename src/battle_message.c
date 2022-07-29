@@ -302,11 +302,11 @@ static const u8 sText_StatSharply[] = _("sharply ");
 const u8 gBattleText_Rose[] = _("rose!");
 static const u8 sText_StatHarshly[] = _("harshly ");
 static const u8 sText_StatFell[] = _("fell!");
-static const u8 sText_PkmnsStatChanged[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
-const u8 gText_PkmnsStatChanged2[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_UsingXTheYOfZN[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
-static const u8 sText_PkmnsStatChanged3[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_PkmnsStatChanged4[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+static const u8 sText_AttackersStatRose[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+static const u8 sText_UsingItemTheStatOfPkmnRose[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
+static const u8 sText_AttackersStatFell[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+static const u8 sText_DefendersStatFell[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
 static const u8 sText_StatsWontIncrease2[] = _("{B_ATK_NAME_WITH_PREFIX}'s stats won't\ngo any higher!");
 static const u8 sText_StatsWontDecrease2[] = _("{B_DEF_NAME_WITH_PREFIX}'s stats won't\ngo any lower!");
 static const u8 sText_CriticalHit[] = _("A critical hit!");
@@ -715,10 +715,10 @@ const u8 *const gBattleStringsTable[] = {
     [STRINGID_STATROSE - 12]                      = gBattleText_Rose,
     [STRINGID_STATHARSHLY - 12]                   = sText_StatHarshly,
     [STRINGID_STATFELL - 12]                      = sText_StatFell,
-    [STRINGID_PKMNSSTATCHANGED - 12]              = sText_PkmnsStatChanged,
-    [STRINGID_PKMNSSTATCHANGED2 - 12]             = gText_PkmnsStatChanged2,
-    [STRINGID_PKMNSSTATCHANGED3 - 12]             = sText_PkmnsStatChanged3,
-    [STRINGID_PKMNSSTATCHANGED4 - 12]             = sText_PkmnsStatChanged4,
+    [STRINGID_ATTACKERSSTATROSE - 12]             = sText_AttackersStatRose,
+    [STRINGID_DEFENDERSSTATROSE - 12]             = gText_DefendersStatRose,
+    [STRINGID_ATTACKERSSTATFELL - 12]             = sText_AttackersStatFell,
+    [STRINGID_DEFENDERSSTATFELL - 12]             = sText_DefendersStatFell,
     [STRINGID_CRITICALHIT - 12]                   = sText_CriticalHit,
     [STRINGID_ONEHITKO - 12]                      = sText_OneHitKO,
     [STRINGID_123POOF - 12]                       = sText_123Poof,
@@ -827,7 +827,7 @@ const u8 *const gBattleStringsTable[] = {
     [STRINGID_SOOTHINGAROMA - 12]                 = sText_SoothingAroma,
     [STRINGID_ITEMSCANTBEUSEDNOW - 12]            = sText_ItemsCantBeUsedNow,
     [STRINGID_FORXCOMMAYZ - 12]                   = sText_ForXCommaYZ,
-    [STRINGID_USINGXTHEYOFZN - 12]                = sText_UsingXTheYOfZN,
+    [STRINGID_USINGITEMSTATOFPKMNROSE - 12]       = sText_UsingItemTheStatOfPkmnRose,
     [STRINGID_PKMNUSEDXTOGETPUMPED - 12]          = sText_PkmnUsedXToGetPumped,
     [STRINGID_PKMNSXMADEYUSELESS - 12]            = sText_PkmnsXMadeYUseless,
     [STRINGID_PKMNTRAPPEDBYSANDTOMB - 12]         = sText_PkmnTrappedBySandTomb,
@@ -990,18 +990,19 @@ const u16 gUproarAwakeStringIds[] = {
     STRINGID_PKMNSTAYEDAWAKEUSING
 };
 
-const u16 gStatUpStringIds[] = {
-    STRINGID_PKMNSSTATCHANGED,
-    STRINGID_PKMNSSTATCHANGED2,
-    STRINGID_STATSWONTINCREASE,
-    STRINGID_EMPTYSTRING3,
-    STRINGID_USINGXTHEYOFZN,
-    STRINGID_PKMNUSEDXTOGETPUMPED
+const u16 gStatUpStringIds[] =
+{
+    [B_MSG_ATTACKER_STAT_ROSE] = STRINGID_ATTACKERSSTATROSE,
+    [B_MSG_DEFENDER_STAT_ROSE] = STRINGID_DEFENDERSSTATROSE,
+    [B_MSG_STAT_WONT_INCREASE] = STRINGID_STATSWONTINCREASE,
+    [B_MSG_STAT_ROSE_EMPTY]    = STRINGID_EMPTYSTRING3,
+    [B_MSG_STAT_ROSE_ITEM]     = STRINGID_USINGITEMSTATOFPKMNROSE,
+    [B_MSG_USED_DIRE_HIT]     = STRINGID_PKMNUSEDXTOGETPUMPED,
 };
 
 const u16 gStatDownStringIds[] = {
-    STRINGID_PKMNSSTATCHANGED3,
-    STRINGID_PKMNSSTATCHANGED4,
+    STRINGID_ATTACKERSSTATFELL,
+    STRINGID_DEFENDERSSTATFELL,
     STRINGID_STATSWONTDECREASE,
     STRINGID_EMPTYSTRING3
 };
@@ -2456,7 +2457,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     if (!(textFlags & 0x80))
     {
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
     }
 }
 

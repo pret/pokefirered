@@ -1766,7 +1766,7 @@ static void OakOldManHandlePrintString(void)
         {
             switch (*stringId)
             {
-            case STRINGID_PKMNSSTATCHANGED4:
+            case STRINGID_DEFENDERSSTATFELL:
                 if (!BtlCtrl_OakOldMan_TestState2Flag(FIRST_BATTLE_MSG_FLAG_STAT_CHG))
                 {
                     BtlCtrl_OakOldMan_SetState2Flag(FIRST_BATTLE_MSG_FLAG_STAT_CHG);

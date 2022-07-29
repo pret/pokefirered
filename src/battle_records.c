@@ -557,7 +557,7 @@ static void PrintBattleRecords(void)
 static void CommitWindow(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void LoadFrameGfxOnBg(u8 bg)

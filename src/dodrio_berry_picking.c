@@ -2341,7 +2341,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
     case 0:
         data[1] = AddWindow(&sUnknown_84755E0);
         sub_81538D0(data[1]);
-        CopyWindowToVram(data[1], COPYWIN_BOTH);
+        CopyWindowToVram(data[1], COPYWIN_FULL);
         data[0]++;
         break;
     case 1:

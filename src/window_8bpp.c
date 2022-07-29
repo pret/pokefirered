@@ -107,7 +107,7 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
         case COPYWIN_GFX:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             break;
-        case COPYWIN_BOTH:
+        case COPYWIN_FULL:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
             break;

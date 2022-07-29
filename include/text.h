@@ -85,13 +85,16 @@
 
 #define CHAR_DYNAMIC_PLACEHOLDER 0xF7
 #define CHAR_KEYPAD_ICON         0xF8
-#define CHAR_EXTRA_EMOJI         0xF9
+#define CHAR_EXTRA_SYMBOL        0xF9
 #define CHAR_PROMPT_SCROLL       0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR        0xFB // waits for button press and clears dialog
 #define EXT_CTRL_CODE_BEGIN      0xFC // extended control code
 #define PLACEHOLDER_BEGIN        0xFD // string placeholder
 #define CHAR_NEWLINE             0xFE
 #define EOS                      0xFF // end of string
+
+// CHAR_EXTRA_SYMBOL chars
+#define CHAR_LV_2          0x05
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -155,6 +158,8 @@
 
 #define TEXT_SPEED_INSTANT 0
 #define TEXT_SKIP_DRAW 0xFF
+
+#define FONT_SMALL 0
 
 enum
 {

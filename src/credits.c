@@ -761,7 +761,7 @@ static void CreateCreditsWindow(void)
     sCreditsMgr->windowId = AddWindow(&sCreditsWindowTemplate);
     FillWindowPixelBuffer(sCreditsMgr->windowId, PIXEL_FILL(0));
     PutWindowTilemap(sCreditsMgr->windowId);
-    CopyWindowToVram(sCreditsMgr->windowId, COPYWIN_BOTH);
+    CopyWindowToVram(sCreditsMgr->windowId, COPYWIN_FULL);
     sCreditsMgr->windowIsActive = TRUE;
 }
 

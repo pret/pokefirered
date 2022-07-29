@@ -292,7 +292,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
                     WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 100, 2);
             }
             PutWindowTilemap(2);
-            CopyWindowToVram(2, COPYWIN_BOTH);
+            CopyWindowToVram(2, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {

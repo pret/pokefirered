@@ -182,7 +182,7 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     DrawTextBorderOuter(windowId, r6, 0xD);
     PutWindowTilemap(windowId);
     MapNamePopupPrintMapNameOnWindow(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
     return windowId;
 }
 

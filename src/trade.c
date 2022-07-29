@@ -1732,7 +1732,7 @@ static void TradeMenuCB_0(void)
             UnionRoomAndTradeMenuPrintOptions(1, 3, 16, 2, sMenuAction_SummaryTrade);
             Menu_InitCursor(1, 3, 0, 0, 16, 2, 0);
             PutWindowTilemap(1);
-            CopyWindowToVram(1, COPYWIN_BOTH);
+            CopyWindowToVram(1, COPYWIN_FULL);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 1;
         }
         else if (sTradeMenuResourcesPtr->tradeMenuCursorPosition < 12)
@@ -2164,9 +2164,9 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
         BuildMovesString(movesString, whichParty, partyIdx);
         AddTextPrinterParameterized4((side * 2) + 15, 1, 0, 0, 0, 0, sTextColor_PartyMonNickname, 0, movesString);
         PutWindowTilemap((side * 2) + 14);
-        CopyWindowToVram((side * 2) + 14, COPYWIN_BOTH);
+        CopyWindowToVram((side * 2) + 14, COPYWIN_FULL);
         PutWindowTilemap((side * 2) + 15);
-        CopyWindowToVram((side * 2) + 15, COPYWIN_BOTH);
+        CopyWindowToVram((side * 2) + 15, COPYWIN_FULL);
         sTradeMenuResourcesPtr->menuRedrawState[side]++;
         break;
     case 4:
@@ -2234,7 +2234,7 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, const u8 *str)
     xPos = (64u - GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING))) / 2;
     AddTextPrinterParameterized3(windowId, 0, xPos, 4, sTextColor_PartyMonNickname, speed, str);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void PrintPartyNicknames(u8 whichParty)
@@ -2445,7 +2445,7 @@ static void PrintTradeErrorOrStatusMessage(u8 idx)
     AddTextPrinterParameterized(0, 3, sTradeErrorOrStatusMessagePtrs[idx], 0, 2, 0xFF, NULL);
     DrawTextBorderOuter(0, 0x014, 12);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 LoadUISprites(void)

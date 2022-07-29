@@ -2119,7 +2119,7 @@ static bool8 SlotsTask_MessageOutOfCoins(u8 * state, struct SlotMachineSetupTask
     {
     case 0:
         Slot_PrintOnWindow0(gString_OutOfCoins);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2137,7 +2137,7 @@ static bool8 SlotsTask_AskQuitPlaying(u8 * state, struct SlotMachineSetupTaskDat
     case 0:
         Slot_PrintOnWindow0(gString_QuitPlaying);
         Slot_CreateYesNoMenu(0);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2155,7 +2155,7 @@ static bool8 SlotsTask_DestroyYesNoMenu(u8 * state, struct SlotMachineSetupTaskD
     case 0:
         Slot_ClearWindow0();
         Slot_DestroyYesNoMenu();
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:

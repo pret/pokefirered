@@ -4515,7 +4515,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
     case 0:
         tWindowId = AddWindow(&sWindowTemplate_Records);
         PrintRecordsText(tWindowId);
-        CopyWindowToVram(tWindowId, COPYWIN_BOTH);
+        CopyWindowToVram(tWindowId, COPYWIN_FULL);
         tState++;
         break;
     case 1:

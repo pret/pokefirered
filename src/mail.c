@@ -676,8 +676,8 @@ static void AddMailMessagePrinters(void)
     width = GetStringWidth(1, gText_From, 0);
     AddTextPrinterParameterized3(1, 1, sMailViewResources->nameX, sMailViewResources->messageLayout->nameY, sTextColor, 0, gText_From);
     AddTextPrinterParameterized3(1, 1, sMailViewResources->nameX + width, sMailViewResources->messageLayout->nameY, sTextColor, 0, sMailViewResources->authorNameBuffer);
-    CopyWindowToVram(0, COPYWIN_BOTH);
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void VBlankCB_ShowMail(void)

@@ -326,8 +326,8 @@ static void sub_8146A30(void)
     {
         AddTextPrinterParameterized3(sWork->windowIds[1], 3, 0, 16 * i + 2, sTextPals[sWork->bgSpec->textPal2], 0, sWork->messages[i]);
     }
-    CopyWindowToVram(sWork->windowIds[0], COPYWIN_BOTH);
-    CopyWindowToVram(sWork->windowIds[1], COPYWIN_BOTH);
+    CopyWindowToVram(sWork->windowIds[0], COPYWIN_FULL);
+    CopyWindowToVram(sWork->windowIds[1], COPYWIN_FULL);
 }
 
 static void sub_8146B58(void)

@@ -320,7 +320,7 @@ static void OptionMenu_PickSwitchCancel(void)
     FillWindowPixelBuffer(2, PIXEL_FILL(15)); 
     AddTextPrinterParameterized3(2, 0, x, 0, sOptionMenuPickSwitchCancelTextColor, 0, gText_PickSwitchCancel);
     PutWindowTilemap(2);
-    CopyWindowToVram(2, COPYWIN_BOTH);
+    CopyWindowToVram(2, COPYWIN_FULL);
 }
 
 static void OptionMenu_ResetSpriteData(void)
@@ -502,7 +502,7 @@ static void BufferOptionMenuString(u8 selection)
         break;
     }
     PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void CloseAndSaveOptionMenu(u8 taskId)
@@ -526,7 +526,7 @@ static void PrintOptionMenuHeader(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(WIN_TEXT_OPTION, 2, gText_MenuOption, 8, 1, TEXT_SKIP_DRAW, NULL);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void DrawOptionMenuBg(void)

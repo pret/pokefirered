@@ -522,7 +522,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             BlitBitmapRect4Bit(&srcBlit, &destBlit, 0, 0, x, y, GetKeypadIconWidth(curChar), GetKeypadIconHeight(curChar), 0);
             x += GetKeypadIconWidth(curChar);
             break;
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
             curChar = *src + 0x100;
             src++;
             //fallthrough

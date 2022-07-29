@@ -1127,7 +1127,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         *(txtPtr++) = TEXT_COLOR_WHITE;
         *(txtPtr++) = TEXT_COLOR_LIGHT_GRAY;
         *(txtPtr++) = CHAR_SPACE;
-        *(txtPtr++) = CHAR_EXTRA_EMOJI;
+        *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = 5; // LV_2
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, gPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);

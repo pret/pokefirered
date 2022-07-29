@@ -912,7 +912,7 @@ static void Task_EvolutionScene(u8 taskId)
         case MVSTATE_PRINT_YES_NO:
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
-                HandleBattleWindow(0x17, 8, 0x1D, 0xD, 0);
+                HandleBattleWindow(23, 8, 29, 13, 0);
                 BattlePutTextOnWindow(gText_BattleYesNoChoice, (B_WIN_YESNO | B_TEXT_FLAG_NONE));
                 gTasks[taskId].tLearnMoveState++;
                 sEvoCursorPos = 0;

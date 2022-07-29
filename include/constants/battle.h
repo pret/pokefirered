@@ -44,39 +44,39 @@
 #define BIT_FLANK       2
 
 // Battle Type Flags
-#define BATTLE_TYPE_DOUBLE           0x0001
-#define BATTLE_TYPE_LINK             0x0002
-#define BATTLE_TYPE_IS_MASTER        0x0004 // In not-link battles, it's always set.
-#define BATTLE_TYPE_TRAINER          0x0008
-#define BATTLE_TYPE_FIRST_BATTLE     0x0010
-#define BATTLE_TYPE_LINK_ESTABLISHED 0x0020 // Set when the link battle setup callback finishes.
-#define BATTLE_TYPE_MULTI            0x0040
-#define BATTLE_TYPE_SAFARI           0x0080
-#define BATTLE_TYPE_BATTLE_TOWER     0x0100
-#define BATTLE_TYPE_OLD_MAN_TUTORIAL 0x0200
-#define BATTLE_TYPE_ROAMER           0x0400
-#define BATTLE_TYPE_EREADER_TRAINER  0x0800
-#define BATTLE_TYPE_KYOGRE_GROUDON   0x1000
-#define BATTLE_TYPE_LEGENDARY        0x2000
-#define BATTLE_TYPE_GHOST_UNVEILED   0x2000 // Re-use of BATTLE_TYPE_LEGENDARY, when combined with BATTLE_TYPE_GHOST
-#define BATTLE_TYPE_REGI             0x4000
-#define BATTLE_TYPE_GHOST            0x8000
-#define BATTLE_TYPE_POKEDUDE         0x10000
-#define BATTLE_TYPE_WILD_SCRIPTED    0x20000
-#define BATTLE_TYPE_LEGENDARY_FRLG   0x40000
-#define BATTLE_TYPE_TRAINER_TOWER    0x80000
-#define BATTLE_TYPE_x100000          0x100000
-#define BATTLE_TYPE_x200000          0x200000
-#define BATTLE_TYPE_INGAME_PARTNER   0x400000
-#define BATTLE_TYPE_x800000          0x800000
-#define BATTLE_TYPE_RECORDED         0x1000000
-#define BATTLE_TYPE_x2000000         0x2000000
-#define BATTLE_TYPE_x4000000         0x4000000
-#define BATTLE_TYPE_SECRET_BASE      0x8000000
-#define BATTLE_TYPE_GROUDON          0x10000000
-#define BATTLE_TYPE_KYOGRE           0x20000000
-#define BATTLE_TYPE_RAYQUAZA         0x40000000
-#define BATTLE_TYPE_x80000000        0x80000000
+#define BATTLE_TYPE_DOUBLE             (1 << 0)
+#define BATTLE_TYPE_LINK               (1 << 1)
+#define BATTLE_TYPE_IS_MASTER          (1 << 2) // In not-link battles, it's always set.
+#define BATTLE_TYPE_TRAINER            (1 << 3)
+#define BATTLE_TYPE_FIRST_BATTLE       (1 << 4)
+#define BATTLE_TYPE_LINK_IN_BATTLE     (1 << 5) // Set on battle entry, cleared on exit. Checked rarely
+#define BATTLE_TYPE_MULTI              (1 << 6)
+#define BATTLE_TYPE_SAFARI             (1 << 7)
+#define BATTLE_TYPE_BATTLE_TOWER       (1 << 8)
+#define BATTLE_TYPE_OLD_MAN_TUTORIAL   (1 << 9) // Used in pokeemerald as BATTLE_TYPE_WALLY_TUTORIAL.
+#define BATTLE_TYPE_ROAMER             (1 << 10)
+#define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
+#define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
+#define BATTLE_TYPE_LEGENDARY          (1 << 13)
+#define BATTLE_TYPE_GHOST_UNVEILED     (1 << 13) // Re-use of BATTLE_TYPE_LEGENDARY, when combined with BATTLE_TYPE_GHOST
+#define BATTLE_TYPE_REGI               (1 << 14)
+#define BATTLE_TYPE_GHOST              (1 << 15) // Used in pokeemerald as BATTLE_TYPE_TWO_OPPONENTS.
+#define BATTLE_TYPE_POKEDUDE           (1 << 16) // Used in pokeemerald as BATTLE_TYPE_DOME.
+#define BATTLE_TYPE_WILD_SCRIPTED      (1 << 17) // Used in pokeemerald as BATTLE_TYPE_PALACE.
+#define BATTLE_TYPE_LEGENDARY_FRLG     (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
+#define BATTLE_TYPE_TRAINER_TOWER      (1 << 19) // Used in pokeemerald as BATTLE_TYPE_FACTORY.
+#define BATTLE_TYPE_PIKE               (1 << 20) // Used in pokeemerald.
+#define BATTLE_TYPE_PYRAMID            (1 << 21) // Used in pokeemerald.
+#define BATTLE_TYPE_INGAME_PARTNER     (1 << 22)
+#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 23) // Used in pokeemerald.
+#define BATTLE_TYPE_RECORDED           (1 << 24)
+#define BATTLE_TYPE_RECORDED_LINK      (1 << 25) // Used in pokeemerald.
+#define BATTLE_TYPE_TRAINER_HILL       (1 << 26) // Used in pokeemerald.
+#define BATTLE_TYPE_SECRET_BASE        (1 << 27)
+#define BATTLE_TYPE_GROUDON            (1 << 28)
+#define BATTLE_TYPE_KYOGRE             (1 << 29)
+#define BATTLE_TYPE_RAYQUAZA           (1 << 30)
+#define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31) // Used in pokeemerald.
 
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
@@ -85,54 +85,62 @@
 #define RIVAL_BATTLE_TUTORIAL    3
 
 // Battle Outcome defines
-#define B_OUTCOME_WON                  0x1
-#define B_OUTCOME_LOST                 0x2
-#define B_OUTCOME_DREW                 0x3
-#define B_OUTCOME_RAN                  0x4
-#define B_OUTCOME_PLAYER_TELEPORTED    0x5
-#define B_OUTCOME_MON_FLED             0x6
-#define B_OUTCOME_CAUGHT               0x7
-#define B_OUTCOME_NO_SAFARI_BALLS      0x8
-#define B_OUTCOME_FORFEITED            0x9
-#define B_OUTCOME_MON_TELEPORTED       0xA
-#define B_OUTCOME_LINK_BATTLE_RAN      0x80
+#define B_OUTCOME_WON                  1
+#define B_OUTCOME_LOST                 2
+#define B_OUTCOME_DREW                 3
+#define B_OUTCOME_RAN                  4
+#define B_OUTCOME_PLAYER_TELEPORTED    5
+#define B_OUTCOME_MON_FLED             6
+#define B_OUTCOME_CAUGHT               7
+#define B_OUTCOME_NO_SAFARI_BALLS      8
+#define B_OUTCOME_FORFEITED            9
+#define B_OUTCOME_MON_TELEPORTED       10
+#define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
 
 // Non-volatile status conditions
 // These persist remain outside of battle and after switching out
-#define STATUS1_NONE             0x0
-#define STATUS1_SLEEP            0x7
-#define STATUS1_POISON           0x8
-#define STATUS1_BURN             0x10
-#define STATUS1_FREEZE           0x20
-#define STATUS1_PARALYSIS        0x40
-#define STATUS1_TOXIC_POISON     0x80
-#define STATUS1_TOXIC_COUNTER    0xF00
+#define STATUS1_NONE             0
+#define STATUS1_SLEEP            (1 << 0 | 1 << 1 | 1 << 2) // First 3 bits (Number of turns to sleep)
+#define STATUS1_SLEEP_TURN(num)  ((num) << 0) // Just for readability (or if rearranging statuses)
+#define STATUS1_POISON           (1 << 3)
+#define STATUS1_BURN             (1 << 4)
+#define STATUS1_FREEZE           (1 << 5)
+#define STATUS1_PARALYSIS        (1 << 6)
+#define STATUS1_TOXIC_POISON     (1 << 7)
+#define STATUS1_TOXIC_COUNTER    (1 << 8 | 1 << 9 | 1 << 10 | 1 << 11)
+#define STATUS1_TOXIC_TURN(num)  ((num) << 8)
 #define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
 #define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
 
 // Volatile status ailments
 // These are removed after exiting the battle or switching out
-#define STATUS2_CONFUSION             0x00000007
-#define STATUS2_FLINCHED              0x00000008
-#define STATUS2_UPROAR                0x00000070
-#define STATUS2_BIDE                  0x00000300  // two bits 0x100, 0x200
-#define STATUS2_LOCK_CONFUSE          0x00000C00
-#define STATUS2_MULTIPLETURNS         0x00001000
-#define STATUS2_WRAPPED               0x0000E000
-#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
+#define STATUS2_CONFUSION             (1 << 0 | 1 << 1 | 1 << 2)
+#define STATUS2_CONFUSION_TURN(num)   ((num) << 0)
+#define STATUS2_FLINCHED              (1 << 3)
+#define STATUS2_UPROAR                (1 << 4 | 1 << 5 | 1 << 6)
+#define STATUS2_UPROAR_TURN(num)      ((num) << 4)
+#define STATUS2_UNUSED                (1 << 7)
+#define STATUS2_BIDE                  (1 << 8 | 1 << 9)
+#define STATUS2_BIDE_TURN(num)        (((num) << 8) & STATUS2_BIDE)
+#define STATUS2_LOCK_CONFUSE          (1 << 10 | 1 << 11) // e.g. Thrash
+#define STATUS2_LOCK_CONFUSE_TURN(num)((num) << 10)
+#define STATUS2_MULTIPLETURNS         (1 << 12)
+#define STATUS2_WRAPPED               (1 << 13 | 1 << 14 | 1 << 15)
+#define STATUS2_WRAPPED_TURN(num)     ((num) << 13)
+#define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
-#define STATUS2_FOCUS_ENERGY          0x00100000
-#define STATUS2_TRANSFORMED           0x00200000
-#define STATUS2_RECHARGE              0x00400000
-#define STATUS2_RAGE                  0x00800000
-#define STATUS2_SUBSTITUTE            0x01000000
-#define STATUS2_DESTINY_BOND          0x02000000
-#define STATUS2_ESCAPE_PREVENTION     0x04000000
-#define STATUS2_NIGHTMARE             0x08000000
-#define STATUS2_CURSED                0x10000000
-#define STATUS2_FORESIGHT             0x20000000
-#define STATUS2_DEFENSE_CURL          0x40000000
-#define STATUS2_TORMENT               0x80000000
+#define STATUS2_FOCUS_ENERGY          (1 << 20)
+#define STATUS2_TRANSFORMED           (1 << 21)
+#define STATUS2_RECHARGE              (1 << 22)
+#define STATUS2_RAGE                  (1 << 23)
+#define STATUS2_SUBSTITUTE            (1 << 24)
+#define STATUS2_DESTINY_BOND          (1 << 25)
+#define STATUS2_ESCAPE_PREVENTION     (1 << 26)
+#define STATUS2_NIGHTMARE             (1 << 27)
+#define STATUS2_CURSED                (1 << 28)
+#define STATUS2_FORESIGHT             (1 << 29)
+#define STATUS2_DEFENSE_CURL          (1 << 30)
+#define STATUS2_TORMENT               (1 << 31)
 
 // Seems like per-battler statuses. Not quite sure how to categorize these
 #define STATUS3_LEECHSEED_BATTLER       (1 << 0 | 1 << 1) // The battler to receive HP from Leech Seed
@@ -158,32 +166,32 @@
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
-#define HITMARKER_x10                   0x00000010
-#define HITMARKER_x20                   0x00000020
-#define HITMARKER_DESTINYBOND           0x00000040
-#define HITMARKER_NO_ANIMATIONS         0x00000080
-#define HITMARKER_IGNORE_SUBSTITUTE     0x00000100
-#define HITMARKER_NO_ATTACKSTRING       0x00000200
-#define HITMARKER_ATTACKSTRING_PRINTED  0x00000400
-#define HITMARKER_NO_PPDEDUCT           0x00000800
-#define HITMARKER_SWAP_ATTACKER_TARGET  0x00001000
-#define HITMARKER_IGNORE_SAFEGUARD      0x00002000
-#define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
-#define HITMARKER_RUN                   0x00008000
-#define HITMARKER_IGNORE_ON_AIR         0x00010000
-#define HITMARKER_IGNORE_UNDERGROUND    0x00020000
-#define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
-#define HITMARKER_PASSIVE_DAMAGE        0x00100000
-#define HITMARKER_x200000               0x00200000
-#define HITMARKER_PLAYER_FAINTED        0x00400000
-#define HITMARKER_ALLOW_NO_PP           0x00800000
-#define HITMARKER_GRUDGE                0x01000000
-#define HITMARKER_OBEYS                 0x02000000
-#define HITMARKER_x4000000              0x04000000
-#define HITMARKER_CHARGING              0x08000000
-#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 0x1C)
-#define HITMARKER_FAINTED2(battler)     (0x10000000 << battler)
+#define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
+#define HITMARKER_SKIP_DMG_TRACK        (1 << 5)
+#define HITMARKER_DESTINYBOND           (1 << 6)
+#define HITMARKER_NO_ANIMATIONS         (1 << 7)
+#define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
+#define HITMARKER_NO_ATTACKSTRING       (1 << 9)
+#define HITMARKER_ATTACKSTRING_PRINTED  (1 << 10)
+#define HITMARKER_NO_PPDEDUCT           (1 << 11)
+#define HITMARKER_SWAP_ATTACKER_TARGET  (1 << 12)
+#define HITMARKER_IGNORE_SAFEGUARD      (1 << 13)
+#define HITMARKER_SYNCHRONISE_EFFECT    (1 << 14)
+#define HITMARKER_RUN                   (1 << 15)
+#define HITMARKER_IGNORE_ON_AIR         (1 << 16)
+#define HITMARKER_IGNORE_UNDERGROUND    (1 << 17)
+#define HITMARKER_IGNORE_UNDERWATER     (1 << 18)
+#define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
+#define HITMARKER_PASSIVE_DAMAGE        (1 << 20)
+#define HITMARKER_DISOBEDIENT_MOVE      (1 << 21)
+#define HITMARKER_PLAYER_FAINTED        (1 << 22)
+#define HITMARKER_ALLOW_NO_PP           (1 << 23)
+#define HITMARKER_GRUDGE                (1 << 24)
+#define HITMARKER_OBEYS                 (1 << 25)
+#define HITMARKER_NEVER_SET             (1 << 26) // Cleared as part of a large group. Never set or checked
+#define HITMARKER_CHARGING              (1 << 27)
+#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
+#define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
 
 // Per-side statuses that affect an entire party
 #define SIDE_STATUS_REFLECT          (1 << 0)
@@ -219,7 +227,7 @@
 #define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT)
 #define B_WEATHER_HAIL_TEMPORARY      (1 << 7)
 #define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY)
-#define WEATHER_ANY                   (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
+#define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               1
@@ -308,6 +316,13 @@
 #define BATTLE_TERRAIN_AGATHA      17
 #define BATTLE_TERRAIN_LANCE       18
 #define BATTLE_TERRAIN_CHAMPION    19
+
+#define CASTFORM_NORMAL     0
+#define CASTFORM_FIRE       1
+#define CASTFORM_WATER      2
+#define CASTFORM_ICE        3
+#define NUM_CASTFORM_FORMS  4
+#define CASTFORM_SUBSTITUTE (1 << 7)
 
 // Return value for IsRunningFromBattleImpossible. 
 #define BATTLE_RUN_SUCCESS        0

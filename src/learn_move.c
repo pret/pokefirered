@@ -690,7 +690,7 @@ static void PrintTeachWhichMoveToStrVar1(bool8 onInit)
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToMon);
         PrintTextOnWindow(7, gStringVar4, 0, 2, 0, 2);
         PutWindowTilemap(7);
-        CopyWindowToVram(7, COPYWIN_BOTH);
+        CopyWindowToVram(7, COPYWIN_FULL);
     }
 }
 
@@ -880,7 +880,7 @@ static void PrintMoveInfoHandleCancel_CopyToVram(void)
     CopyWindowToVram(2, COPYWIN_GFX);
     CopyWindowToVram(2, COPYWIN_GFX);
     CopyWindowToVram(5, COPYWIN_GFX);
-    CopyWindowToVram(7, COPYWIN_BOTH);
+    CopyWindowToVram(7, COPYWIN_FULL);
 }
 
 static void MoveRelearnerMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)

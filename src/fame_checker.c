@@ -994,7 +994,7 @@ static void Setup_DrawMsgAndListBoxes(void)
 static void FC_PutWindowTilemapAndCopyWindowToVramMode3(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
@@ -1578,7 +1578,7 @@ static u8 FC_PopulateListMenu(void)
 static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void FC_CreateScrollIndicatorArrowPair(void)

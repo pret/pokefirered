@@ -912,7 +912,7 @@ static void task50_after_link_battle_save(u8 taskId)
             AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0xFF, NULL, 2, 1, 3);
             DrawTextBorderOuter(0, 0x008, 0x0F);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, COPYWIN_BOTH);
+            CopyWindowToVram(0, COPYWIN_FULL);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             if (gWirelessCommType != 0 && InUnionRoom())
                 data[0] = 5;

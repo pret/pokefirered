@@ -246,8 +246,8 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_BOTH);
-        CopyWindowToVram(task->data[15], COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(task->data[15], COPYWIN_FULL);
         task->data[0]++;
         break;
     case 1:

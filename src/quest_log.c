@@ -501,7 +501,7 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
     PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
     CopyWindowToVram(sQuestLogHeaderWindowIds[0], COPYWIN_GFX);
     CopyWindowToVram(sQuestLogHeaderWindowIds[2], COPYWIN_GFX);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_BOTH);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_FULL);
 }
 
 void CommitQuestLogWindow1(void)

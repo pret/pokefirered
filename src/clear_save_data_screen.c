@@ -139,7 +139,7 @@ static void Task_HandleYesNoMenu(u8 taskId)
             PlaySE(SE_SELECT);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
             AddTextPrinterParameterized4(1, 2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B6B9);
-            CopyWindowToVram(1, COPYWIN_BOTH);
+            CopyWindowToVram(1, COPYWIN_FULL);
             ClearSaveData();
             break;
         case MENU_NOTHING_CHOSEN:

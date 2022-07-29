@@ -785,7 +785,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->state = 3;
             TextPrinterInitDownArrowCounters(textPrinter);
             return 3;
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
             currChar = *textPrinter->printerTemplate.currentChar | 0x100;
             textPrinter->printerTemplate.currentChar++;
             break;
@@ -971,7 +971,7 @@ s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
         case CHAR_PROMPT_CLEAR:
             break;
         case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
             ++strPos;
         default:
             ++width;
@@ -1121,8 +1121,8 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             }
             break;
         case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_EMOJI:
-            if (*str == CHAR_EXTRA_EMOJI)
+        case CHAR_EXTRA_SYMBOL:
+            if (*str == CHAR_EXTRA_SYMBOL)
                 glyphWidth = func(*++str | 0x100, isJapanese);
             else
                 glyphWidth = GetKeypadIconWidth(*++str);
@@ -1241,7 +1241,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a
             break;
         case CHAR_DYNAMIC_PLACEHOLDER:
         case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
         case PLACEHOLDER_BEGIN:
             ++strPos;
             break;

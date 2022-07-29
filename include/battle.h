@@ -4,6 +4,7 @@
 #include <limits.h>
 #include "global.h"
 #include "constants/battle.h"
+#include "constants/battle_script_commands.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_main.h"
@@ -23,18 +24,25 @@
 #define GET_BATTLER_SIDE(battler)((GetBattlerPosition(battler) & BIT_SIDE))
 #define GET_BATTLER_SIDE2(battler)((GET_BATTLER_POSITION(battler) & BIT_SIDE))
 
+// Used to exclude moves learned temporarily by Transform or Mimic
+#define MOVE_IS_PERMANENT(battler, moveSlot)                        \
+   (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)           \
+ && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
+
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
 #define TRAINER_LINK_OPPONENT       0x800
 #define SECRET_BASE_OPPONENT        0x400
 
+// Battle Actions
+// These determine what each battler will do in a turn
 #define B_ACTION_USE_MOVE                  0
 #define B_ACTION_USE_ITEM                  1
 #define B_ACTION_SWITCH                    2
 #define B_ACTION_RUN                       3
 #define B_ACTION_SAFARI_WATCH_CAREFULLY    4
 #define B_ACTION_SAFARI_BALL               5
-#define B_ACTION_SAFARI_BAIT          6
+#define B_ACTION_SAFARI_BAIT               6
 #define B_ACTION_SAFARI_GO_NEAR            7
 #define B_ACTION_SAFARI_RUN                8
 #define B_ACTION_OLDMAN_THROW              9
@@ -47,26 +55,17 @@
 
 #define MAX_TRAINER_ITEMS 4
 
-// array entries for battle communication
-#define MULTIUSE_STATE          0x0
-#define CURSOR_POSITION         0x1
-#define TASK_ID                 0x1 // task Id and cursor position share the same field
-#define SPRITES_INIT_STATE1     0x1 // shares the Id as well
-#define SPRITES_INIT_STATE2     0x2
-#define MOVE_EFFECT_BYTE        0x3
-#define ACTIONS_CONFIRMED_COUNT 0x4
-#define MULTISTRING_CHOOSER     0x5
-#define MSG_DISPLAY             0x7
-#define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
+#define MOVE_TARGET_SELECTED            0
+#define MOVE_TARGET_DEPENDS             (1 << 0)
+#define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
+#define MOVE_TARGET_RANDOM              (1 << 2)
+#define MOVE_TARGET_BOTH                (1 << 3)
+#define MOVE_TARGET_USER                (1 << 4)
+#define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
+#define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
 
-#define MOVE_TARGET_SELECTED          0x0
-#define MOVE_TARGET_DEPENDS           0x1
-#define MOVE_TARGET_USER_OR_SELECTED  0x2
-#define MOVE_TARGET_RANDOM            0x4
-#define MOVE_TARGET_BOTH              0x8
-#define MOVE_TARGET_USER              0x10
-#define MOVE_TARGET_FOES_AND_ALLY     0x20
-#define MOVE_TARGET_OPPONENTS_FIELD   0x40
+// For the second argument of GetMoveTarget, when no target override is needed
+#define NO_TARGET_OVERRIDE 0
 
 struct TrainerMonNoItemDefaultMoves
 {
@@ -159,7 +158,7 @@ struct DisableStruct
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
     /*0x18*/ u8 truantCounter : 1;
-    /*0x18*/ u8 truantSwitchInHack : 1; // unused? 
+    /*0x18*/ u8 truantSwitchInHack : 1; // Unused here, but used in pokeemerald
     /*0x18*/ u8 unk18_a_2 : 2;
     /*0x18*/ u8 mimickedMoves : 4;
     /*0x19*/ u8 rechargeTimer;
@@ -455,17 +454,23 @@ struct BattleStruct
 
 extern struct BattleStruct *gBattleStruct;
 
-#define GET_MOVE_TYPE(move, typeArg)                        \
-{                                                           \
-    if (gBattleStruct->dynamicMoveType)                     \
-        typeArg = gBattleStruct->dynamicMoveType & 0x3F;    \
-    else                                                    \
-        typeArg = gBattleMoves[move].type;                  \
+#define F_DYNAMIC_TYPE_1 (1 << 6)
+#define F_DYNAMIC_TYPE_2 (1 << 7)
+#define DYNAMIC_TYPE_MASK (F_DYNAMIC_TYPE_1 - 1)
+
+#define GET_MOVE_TYPE(move, typeArg)                                  \
+{                                                                     \
+    if (gBattleStruct->dynamicMoveType)                               \
+        typeArg = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK; \
+    else                                                              \
+        typeArg = gBattleMoves[move].type;                            \
 }
 
 #define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
 #define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
 #define SET_BATTLER_TYPE(battlerId, type)   \
 {                                           \
@@ -504,7 +509,7 @@ struct BattleScripting
     u8 battleStyle;
     u8 drawlvlupboxState;
     u8 learnMoveState;
-    u8 field_20;
+    u8 pursuitDoublesAttacker;
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 field_23;

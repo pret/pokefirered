@@ -396,7 +396,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         Menu_LoadStdPalAt(0xF0);
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
         loc = GetHealLocation(1);
         if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
          && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map

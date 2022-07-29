@@ -233,7 +233,7 @@ void CopyWindowToVram(u8 windowId, u8 mode)
         case COPYWIN_GFX:
             LoadBgTiles(windowLocal.window.bg, windowLocal.tileData, windowSize, windowLocal.window.baseBlock);
             break;
-        case COPYWIN_BOTH:
+        case COPYWIN_FULL:
             LoadBgTiles(windowLocal.window.bg, windowLocal.tileData, windowSize, windowLocal.window.baseBlock);
             CopyBgTilemapBufferToVram(windowLocal.window.bg);
             break;

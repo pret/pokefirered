@@ -341,7 +341,7 @@ void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 an
     LoadBgGfxByAnimType(animType);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     TextWindow_SetUserSelectedFrame(0, 0x000, 0xe0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
     ShowBg(3);
     HideBg(1);
@@ -370,7 +370,7 @@ void PSA_ShowMessageWindow(void)
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     DrawTextBorderOuter(0, 0x001, 0xE);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 void PSA_HideMessageWindow(void)
@@ -612,7 +612,7 @@ UNUSED void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
     DrawTextBorderOuter(1, 0x001, 0xE);
     DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 UNUSED void PSA_DrawLevelUpWindowPg2(u16 *currStats)
 {

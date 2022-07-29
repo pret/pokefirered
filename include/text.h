@@ -159,8 +159,6 @@
 #define TEXT_SPEED_INSTANT 0
 #define TEXT_SKIP_DRAW 0xFF
 
-#define FONT_SMALL 0
-
 enum
 {
     FONTATTR_MAX_LETTER_WIDTH,

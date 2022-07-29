@@ -160,7 +160,7 @@ static const union AnimCmd *const sNewGameOakAnimTable[] = {
 };
 
 static const struct SpriteTemplate sNewGameOakObjectTemplate = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = 4102,
     .oam = &sNewGameOakOamAttributes,
     .anims = sNewGameOakAnimTable,
@@ -324,7 +324,7 @@ static const union AnimCmd *const sAnims_HofMonitor[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PokeballGlow = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = 4103,
     .oam = &sOamData_8x8,
     .anims = sAnims_Flicker,
@@ -334,7 +334,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeballGlow = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = 4103,
     .oam = &sOamData_32x16,
     .anims = sAnims_Flicker,
@@ -344,7 +344,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_HofMonitor = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = 4112,
     .oam = &sOamData_16x16,
     .anims = sAnims_HofMonitor,
@@ -504,7 +504,7 @@ static void FieldEffectFreeTilesIfUnused(u16 tileStart)
 {
     u8 i;
     u16 tileTag = GetSpriteTileTagByTileStart(tileStart);
-    if (tileTag == SPRITE_INVALID_TAG)
+    if (tileTag == TAG_NONE)
         return;
     for (i = 0; i < MAX_SPRITES; i++)
     {
@@ -518,7 +518,7 @@ static void FieldEffectFreePaletteIfUnused(u8 paletteNum)
 {
     u8 i;
     u16 paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
-    if (paletteTag == SPRITE_INVALID_TAG)
+    if (paletteTag == TAG_NONE)
         return;
     for (i = 0; i < MAX_SPRITES; i++)
     {
@@ -3840,7 +3840,7 @@ static const union AnimCmd *const sAnims_DeoxysRockFragment[] =
 
 static const struct SpriteTemplate sSpriteTemplate_DeoxysRockFragment =
 {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = 4371,
     .oam = &sOamData_8x8,
     .anims = sAnims_DeoxysRockFragment,

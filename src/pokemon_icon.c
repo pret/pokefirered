@@ -1252,7 +1252,7 @@ static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * iconTemplate,
 
     struct SpriteTemplate spriteTemplate =
     {
-        .tileTag = SPRITE_INVALID_TAG,
+        .tileTag = TAG_NONE,
         .paletteTag = iconTemplate->paletteTag,
         .oam = iconTemplate->oam,
         .anims = iconTemplate->anims,

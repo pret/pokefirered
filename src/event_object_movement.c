@@ -181,7 +181,7 @@ const u8 gReflectionEffectPaletteMap[16] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11
 
 static const struct SpriteTemplate gCameraSpriteTemplate = {
     .tileTag = 0, 
-    .paletteTag = SPRITE_INVALID_TAG,
+    .paletteTag = TAG_NONE,
     .oam = &gDummyOamData, 
     .anims = gDummySpriteAnimTable, 
     .images = NULL, 
@@ -1571,7 +1571,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
         objectEvent->invisible = TRUE;
 
-    *(u16 *)&spriteTemplate->paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate->paletteTag = TAG_NONE;
     spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
     if (spriteId == MAX_SPRITES)
     {
@@ -1702,7 +1702,7 @@ u8 AddPseudoObjectEvent(u16 graphicsId, SpriteCallback callback, s16 x, s16 y, u
     u8 spriteId;
 
     MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, callback, &spriteTemplate, &subspriteTables);
-    if (spriteTemplate.paletteTag != SPRITE_INVALID_TAG)
+    if (spriteTemplate.paletteTag != TAG_NONE)
     {
         LoadObjectEventPalette(spriteTemplate.paletteTag);
     }
@@ -1725,7 +1725,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, UpdateObjectEventSpriteSubpriorityAndVisibility, &spriteTemplate, &subspriteTables);
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     x += 7;
     y += 7;
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
@@ -1767,7 +1767,7 @@ u8 sub_805EB44(u8 graphicsId, u8 a1, s16 x, s16 y)
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, SpriteCallbackDummy, &spriteTemplate, &subspriteTables);
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
 
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
@@ -1899,7 +1899,7 @@ static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     if (graphicsInfo->paletteSlot == 0)
     {
         LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
@@ -1908,7 +1908,7 @@ static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
     {
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {

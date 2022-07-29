@@ -466,7 +466,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_SlidingPokeball[]
 
 static const struct SpriteTemplate sSpriteTemplate_SlidingPokeball =
 {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = 0x1009,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_SlidingPokeball,
@@ -519,7 +519,7 @@ static const union AnimCmd *const sSpriteAnimTable_Unused[] = { sSpriteAnim_Unus
 static const struct SpriteTemplate sSpriteTemplateTable_Unused[] =
 {
     {
-        .tileTag = SPRITE_INVALID_TAG,
+        .tileTag = TAG_NONE,
         .paletteTag = 0x100A,
         .oam = &sOamData_Unused,
         .anims = sSpriteAnimTable_Unused,
@@ -528,7 +528,7 @@ static const struct SpriteTemplate sSpriteTemplateTable_Unused[] =
         .callback = SpriteCB_BT_Phase2Mugshots,
     },
     {
-        .tileTag = SPRITE_INVALID_TAG,
+        .tileTag = TAG_NONE,
         .paletteTag = 0x100A,
         .oam = &sOamData_Unused,
         .anims = sSpriteAnimTable_Unused,

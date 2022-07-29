@@ -413,7 +413,7 @@ static u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind)
     cursor.rowWidth = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8 + 2;
     cursor.rowHeight = GetFontAttribute(list->template.fontId, FONTATTR_MAX_LETTER_HEIGHT) + 2;
     cursor.tileTag = 0x4000;
-    cursor.palTag = SPRITE_INVALID_TAG;
+    cursor.palTag = TAG_NONE;
     cursor.palNum = 15;
     return ListMenuAddCursorObjectInternal(&cursor, cursorKind);
 }

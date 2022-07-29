@@ -316,7 +316,7 @@ static void Task_LinkupSlave_2(u8 taskId)
                 gFieldLinkPlayerCount = GetLinkPlayerCount_2();
                 gLocalLinkPlayerId = GetMultiplayerId();
                 sub_800A900(gFieldLinkPlayerCount);
-                TrainerCard_GenerateCardForLinkPlayer((void*)gBlockSendBuffer);
+                TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
                 gTasks[taskId].func = Task_Linkup_6a;
             }
         }
@@ -367,7 +367,7 @@ static void Task_LinkupMaster_6(u8 taskId)
             gFieldLinkPlayerCount = GetLinkPlayerCount_2();
             gLocalLinkPlayerId = GetMultiplayerId();
             sub_800A900(gFieldLinkPlayerCount);
-            TrainerCard_GenerateCardForLinkPlayer((void*)gBlockSendBuffer);
+            TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
             gTasks[taskId].func = Task_Linkup_6a;
             Link_PrepareCmd0xCCCC_Rfu0xA100(2);
         }

@@ -440,8 +440,8 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     if (i >= HALL_OF_FAME_MAX_TEAMS)
     {
-        struct HallofFameTeam *afterTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
-        struct HallofFameTeam *beforeTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
+        struct HallofFameTeam *afterTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
+        struct HallofFameTeam *beforeTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
         afterTeam++;
         for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, beforeTeam++, afterTeam++)
         {

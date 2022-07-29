@@ -890,9 +890,9 @@ void DexScreen_LoadResources(void)
     SetBgTilemapBuffer(1, (u16 *)Alloc(BG_SCREEN_SIZE));
     SetBgTilemapBuffer(0, (u16 *)Alloc(BG_SCREEN_SIZE));
     if (natDex)
-        DecompressAndLoadBgGfxUsingHeap(3, (void*)sNatDexTiles, BG_SCREEN_SIZE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, (void *)sNatDexTiles, BG_SCREEN_SIZE, 0, 0);
     else
-        DecompressAndLoadBgGfxUsingHeap(3, (void*)sKantoDexTiles, BG_SCREEN_SIZE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, (void *)sKantoDexTiles, BG_SCREEN_SIZE, 0, 0);
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     m4aSoundVSyncOn();

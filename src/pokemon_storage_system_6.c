@@ -90,7 +90,7 @@ void AddMenu(void)
     gPSSData->field_CB0 = AddWindow(&gPSSData->menuWindow);
     ClearWindowTilemap(gPSSData->field_CB0);
     DrawStdFrameWithCustomTileAndPalette(gPSSData->field_CB0, FALSE, 0x00b, 14);
-    PrintTextArray(gPSSData->field_CB0, 1, 8, 2, 16, gPSSData->menuItemsCount, (void*)gPSSData->menuItems);
+    PrintTextArray(gPSSData->field_CB0, 1, 8, 2, 16, gPSSData->menuItemsCount, (void *)gPSSData->menuItems);
     Menu_InitCursor(gPSSData->field_CB0, 1, 0, 2, 16, gPSSData->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     gPSSData->field_CAE = 0;

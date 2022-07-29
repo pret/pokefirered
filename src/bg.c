@@ -33,7 +33,7 @@ struct BgConfig2
     u32 basePalette:4;
     u32 unk_3:18;
 
-    void* tilemap;
+    void *tilemap;
     u32 bg_x;
     u32 bg_y;
 };
@@ -181,7 +181,7 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
 
         offset = destOffset + offset;
 
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, DMA3_16BIT);
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, DMA3_16BIT);
 
         if (cursor == -1)
         {
@@ -418,7 +418,7 @@ void InitBgFromTemplate(const struct BgTemplate *template)
     }
 }
 
-u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
+u16 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset)
 {
     u16 tileOffset;
     u8 cursor;
@@ -473,7 +473,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     if (IsInvalidBg32(bg) == FALSE)
     {
         paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, DMA3_16BIT);
+        cursor = RequestDma3Copy(src, (void *)(paletteOffset + BG_PLTT), size, DMA3_16BIT);
 
         if (cursor == -1)
         {
@@ -820,7 +820,7 @@ void UnsetBgTilemapBuffer(u8 bg)
     }
 }
 
-void* GetBgTilemapBuffer(u8 bg)
+void *GetBgTilemapBuffer(u8 bg)
 {
     if (IsInvalidBg32(bg) != FALSE)
         return NULL;
@@ -866,7 +866,7 @@ void CopyBgTilemapBufferToVram(u8 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height)
 {
     u16 destX16;
     u16 destY16;
@@ -1207,7 +1207,7 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (sGpuBgConfigs2[bg].tilemap > (void*)IWRAM_END)
+    if (sGpuBgConfigs2[bg].tilemap > (void *)IWRAM_END)
         return TRUE;
     if (sGpuBgConfigs2[bg].tilemap == 0x0)
         return TRUE;

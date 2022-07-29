@@ -921,7 +921,7 @@ static u16 sub_80911D4(u16 species)
     gPSSData->field_B58[i] = species;
     gPSSData->field_B08[i]++;
     var = 16 * i;
-    CpuCopy32(GetMonIconTiles(species, TRUE), (void*)(OBJ_VRAM0) + var * 32, 0x200);
+    CpuCopy32(GetMonIconTiles(species, TRUE), (void *)(OBJ_VRAM0) + var * 32, 0x200);
 
     return var;
 }

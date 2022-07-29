@@ -1466,7 +1466,7 @@ void BufferStringBattle(u16 stringId)
     s32 i;
     const u8 *stringPtr = NULL;
 
-    sBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
+    sBattleMsgDataPtr = (struct BattleMsgData *)(&gBattleBufferA[gActiveBattler][4]);
     gLastUsedItem = sBattleMsgDataPtr->lastItem;
     gLastUsedAbility = sBattleMsgDataPtr->lastAbility;
     gBattleScripting.battler = sBattleMsgDataPtr->scrActive;
@@ -2470,7 +2470,7 @@ bool8 BattleStringShouldBeColored(u16 stringId)
 
 void SetPpNumbersPaletteInMoveSelection(void)
 {
-    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     const u16 *palPtr = gUnknown_8D2FBB4;
     u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBattler]],
                                       chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBattler]]);

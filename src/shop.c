@@ -473,7 +473,7 @@ static void BuyMenuInitBgs(void)
 
 static void BuyMenuDecompressBgGraphics(void)
 {
-    void* pal;
+    void *pal;
     
     DecompressAndCopyTileDataToVram(1, gBuyMenuFrame_Gfx, 0x480, 0x3DC, 0);
     if ((gShopData.martType) != MART_TYPE_TMHM)

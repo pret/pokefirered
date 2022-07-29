@@ -953,8 +953,8 @@ void DrawBattleEntryBackground(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        LZDecompressVram(gFile_graphics_battle_transitions_vs_frame_sheet, (void*)(BG_CHAR_ADDR(1)));
-        LZDecompressVram(gVsLettersGfx, (void*)(VRAM + 0x10000));
+        LZDecompressVram(gFile_graphics_battle_transitions_vs_frame_sheet, (void *)(BG_CHAR_ADDR(1)));
+        LZDecompressVram(gVsLettersGfx, (void *)(VRAM + 0x10000));
         LoadCompressedPalette(gFile_graphics_battle_transitions_vs_frame_palette, 0x60, 0x20);
         SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT512x256);

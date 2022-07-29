@@ -2257,8 +2257,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
     if (!toBG_2)
     {
 
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, DMA3_32BIT);
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(28)), 0x1000, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(8)), 0x2000, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(28)), 0x1000, DMA3_32BIT);
         GetBattleAnimBg1Data(&animBg);
         CpuFill16(toBG_2, animBg.bgTiles, 0x1000);
         CpuFill16(toBG_2, animBg.bgTilemap, 0x800);
@@ -2276,15 +2276,15 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
         LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], animBg.paletteId * 16, 0x20);
-        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + animBg.paletteId * 32), 0x20);
+        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void *)(BG_PLTT + animBg.paletteId * 32), 0x20);
 
         CopyBattlerSpriteToBg(1, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles,
                               animBg.bgTilemap, animBg.tilesOffset);
     }
     else
     {
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(12)), 0x2000, DMA3_32BIT);
-        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(30)), 0x1000, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(12)), 0x2000, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(30)), 0x1000, DMA3_32BIT);
         GetBattleAnimBgData(&animBg, 2);
         CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
         CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
@@ -2301,7 +2301,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
 
         LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], 0x90, 0x20);
-        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + 0x120), 0x20);
+        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void *)(BG_PLTT + 0x120), 0x20);
 
         CopyBattlerSpriteToBg(2, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles + 0x1000,
                               animBg.bgTilemap + 0x400, animBg.tilesOffset);

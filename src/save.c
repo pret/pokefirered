@@ -621,18 +621,18 @@ void UpdateSaveAddresses(void)
 {
     int i = 0;
 
-    gRamSaveSectionLocations[i].data = (void*)(gSaveBlock2Ptr) + gSaveSectionOffsets[i].toAdd;
+    gRamSaveSectionLocations[i].data = (void *)(gSaveBlock2Ptr) + gSaveSectionOffsets[i].toAdd;
     gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
 
     for (i = 1; i < 5; i++)
     {
-        gRamSaveSectionLocations[i].data = (void*)(gSaveBlock1Ptr) + gSaveSectionOffsets[i].toAdd;
+        gRamSaveSectionLocations[i].data = (void *)(gSaveBlock1Ptr) + gSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
     }
 
     for (i = 5; i < 14; i++)
     {
-        gRamSaveSectionLocations[i].data = (void*)(gPokemonStoragePtr) + gSaveSectionOffsets[i].toAdd;
+        gRamSaveSectionLocations[i].data = (void *)(gPokemonStoragePtr) + gSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
 
         i++;i--; // needed to match
@@ -826,7 +826,7 @@ u32 TryWriteSpecialSaveSection(u8 sector, u8 *src)
     s32 i;
     s32 size;
     u8 *savData;
-    void* savDataBuffer;
+    void *savDataBuffer;
 
     if (sector != SECTOR_TTOWER(0) && sector != SECTOR_TTOWER(1))
         return 0xFF;

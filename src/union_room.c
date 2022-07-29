@@ -726,7 +726,7 @@ void TryBecomeLinkLeader(void)
     struct UnkStruct_Leader * dataPtr;
 
     taskId = CreateTask(Task_TryBecomeLinkLeader, 0);
-    sUnionRoomMain.leader = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.leader = dataPtr = (void *)(gTasks[taskId].data);
     sLeader = dataPtr;
 
     dataPtr->state = 0;
@@ -1273,7 +1273,7 @@ void TryJoinLinkGroup(void)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(Task_TryJoinLinkGroup, 0);
-    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.group = dataPtr = (void *)(gTasks[taskId].data);
     sGroup = dataPtr;
 
     dataPtr->state = 0;
@@ -1570,7 +1570,7 @@ u8 CreateTask_ListenToWireless(void)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(Task_ListenToWireless, 0);
-    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.group = dataPtr = (void *)(gTasks[taskId].data);
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -1761,7 +1761,7 @@ static void Task_StartUnionRoomTrade(u8 taskId)
     case 1:
         if (GetBlockReceivedStatus() == 3)
         {
-            gEnemyParty[0] = *(struct Pokemon*)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
+            gEnemyParty[0] = *(struct Pokemon *)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
             IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
             ResetBlockReceivedFlags();
             gTasks[taskId].data[0]++;
@@ -2059,7 +2059,7 @@ void MEvent_CreateTask_Leader(u32 activity)
     struct UnkStruct_Leader * dataPtr;
 
     taskId = CreateTask(Task_MEvent_Leader, 0);
-    sUnionRoomMain.leader = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.leader = dataPtr = (void *)(gTasks[taskId].data);
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -2268,7 +2268,7 @@ void MEvent_CreateTask_CardOrNewsWithFriend(u32 activity)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(Task_CardOrNewsWithFriend, 0);
-    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.group = dataPtr = (void *)(gTasks[taskId].data);
     sGroup = dataPtr;
 
     dataPtr->state = 0;
@@ -2434,7 +2434,7 @@ void MEvent_CreateTask_CardOrNewsOverWireless(u32 activity)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(Task_CardOrNewsOverWireless, 0);
-    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.group = dataPtr = (void *)(gTasks[taskId].data);
     sGroup = dataPtr;
 
     dataPtr->state = 0;
@@ -3652,7 +3652,7 @@ static void Task_SearchForChildOrParent(u8 taskId)
 {
     s32 i, j;
     struct UnionGnameUnamePair gname_uname;
-    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void *) gTasks[taskId].data;
     bool8 parent_child;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -3699,7 +3699,7 @@ static u8 CreateTask_SearchForChildOrParent(struct UnkStruct_Main4 * main4_paren
 static void Task_ListenForPartnersWithCompatibleSerialNos(u8 taskId)
 {
     s32 i, j;
-    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void *) gTasks[taskId].data;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -3752,7 +3752,7 @@ static bool32 GetGnameWonderFlagByLinkGroup(struct GFtgtGname * gname, s16 linkG
 static void Task_ListenForPartnersWithSerial7F7D(u8 taskId)
 {
     s32 i;
-    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void *) gTasks[taskId].data;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -3767,7 +3767,7 @@ static void Task_ListenForPartnersWithSerial7F7D(u8 taskId)
 static u8 CreateTask_ListenForPartnersWithCompatibleSerialNos(struct UnkStruct_Main4 * main4, u32 linkGroup)
 {
     u8 taskId = CreateTask(Task_ListenForPartnersWithCompatibleSerialNos, 0);
-    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void *) gTasks[taskId].data;
     ptr[0] = main4;
     gTasks[taskId].data[2] = linkGroup;
     return taskId;
@@ -3776,7 +3776,7 @@ static u8 CreateTask_ListenForPartnersWithCompatibleSerialNos(struct UnkStruct_M
 static u8 CreateTask_ListenForPartnersWithSerial7F7D(struct UnkStruct_Main4 * main4, u32 linkGroup)
 {
     u8 taskId = CreateTask(Task_ListenForPartnersWithSerial7F7D, 0);
-    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void *) gTasks[taskId].data;
     ptr[0] = main4;
     gTasks[taskId].data[2] = linkGroup;
     return taskId;

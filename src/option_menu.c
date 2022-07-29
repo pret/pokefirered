@@ -411,7 +411,7 @@ static void Task_OptionMenu(u8 taskId)
 static u8 OptionMenu_ProcessInput(void)
 { 
     u16 current;
-    u16* curr;
+    u16 *curr;
     if (JOY_REPT(DPAD_RIGHT))
     {
         current = sOptionMenuPtr->option[(sOptionMenuPtr->cursorPos)];

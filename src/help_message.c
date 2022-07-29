@@ -49,8 +49,8 @@ void DestroyHelpMessageWindow(u8 a0)
 
 void sub_8112F18(u8 windowId)
 {
-    const u8* ptr = gUnknown_84566A8;
-    u8* buffer;
+    const u8 *ptr = gUnknown_84566A8;
+    u8 *buffer;
     u8 i, j;
     u8 width, height;
     u8 k;

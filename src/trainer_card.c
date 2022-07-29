@@ -133,8 +133,8 @@ static void PrintStickersOnCard(void);
 static void LoadStickerGfx(void);
 static void DrawTrainerCardWindow(u8 windowId);
 static bool8 SetTrainerCardBgsAndPals(void);
-static void DrawCardScreenBackground(const u16* ptr);
-static void DrawCardFrontOrBack(const u16* ptr);
+static void DrawCardScreenBackground(const u16 *ptr);
+static void DrawCardFrontOrBack(const u16 *ptr);
 static void DrawStarsAndBadgesOnCard(void);
 static void DrawCardBackStats(void);
 static void BlinkTimeColon(void);
@@ -1122,7 +1122,7 @@ static void BufferTextForCardBack(void)
 static void PrintNameOnCardFront(void)
 {
     u8 buffer[2][32];
-    u8* txtPtr;
+    u8 *txtPtr;
 
     txtPtr = StringCopy(buffer[0], gText_TrainerCardName);
     txtPtr = buffer[1];
@@ -1135,7 +1135,7 @@ static void PrintNameOnCardFront(void)
 static void PrintIdOnCard(void)
 {
     u8 buffer[32];
-    u8* txtPtr;
+    u8 *txtPtr;
 
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
     ConvertIntToDecimalStringN(txtPtr, sTrainerCardDataPtr->trainerCard.rse.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
@@ -1145,7 +1145,7 @@ static void PrintIdOnCard(void)
 static void PrintMoneyOnCard(void)
 {
     u8 buffer[10];
-    u8* txtPtr;
+    u8 *txtPtr;
     u8 x;
 
     txtPtr = StringCopy(buffer, gText_TrainerCardYen);
@@ -1282,7 +1282,7 @@ static void PrintNameOnCardBack(void)
 static void BufferHofDebutTime(void)
 {
     u8 buffer[10];
-    u8* txtPtr;
+    u8 *txtPtr;
 
     if (sTrainerCardDataPtr->hasHofResult)
     {
@@ -1513,7 +1513,7 @@ static bool8 SetTrainerCardBgsAndPals(void)
     return FALSE;
 }
 
-static void DrawCardScreenBackground(const u16* ptr)
+static void DrawCardScreenBackground(const u16 *ptr)
 {
     s16 i, j;
     u16 *dst = sTrainerCardDataPtr->bgTilemapBuffer;
@@ -1532,7 +1532,7 @@ static void DrawCardScreenBackground(const u16* ptr)
     CopyBgTilemapBufferToVram(2);
 }
 
-static void DrawCardFrontOrBack(const u16* ptr)
+static void DrawCardFrontOrBack(const u16 *ptr)
 {
     s16 i, j;
     u16 *dst = sTrainerCardDataPtr->cardTilemapBuffer;

@@ -2148,7 +2148,7 @@ static const struct WindowTemplate sHealthboxWindowTemplate = {
 };
 
 
-static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 *windowId)
+static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 *windowId)
 {
     u16 winId;
     u8 color[3];
@@ -2164,7 +2164,7 @@ static u8* AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     AddTextPrinterParameterized4(winId, 0, x, y, 0, 0, color, -1, str);
 
     *windowId = winId;
-    return (u8*)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
+    return (u8 *)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
 }
 
 static void RemoveWindowOnHealthbox(u32 windowId)

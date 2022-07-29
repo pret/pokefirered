@@ -801,16 +801,16 @@ u8 Save_LoadGameData(u8 saveType)
     return result;
 }
 
-u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
+u32 TryCopySpecialSaveSection(u8 sector, u8 *dst)
 {
     s32 i;
     s32 size;
-    u8* savData;
+    u8 *savData;
 
     if (sector != SECTOR_TTOWER(0) && sector != SECTOR_TTOWER(1))
         return 0xFF;
     ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, sizeof(struct SaveSection));
-    if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
+    if (*(u32 *)(&gSaveDataBuffer.data[0]) != 0xB39D)
         return 0xFF;
     // copies whole save section except u32 counter
     i = 0;
@@ -821,18 +821,18 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     return 1;
 }
 
-u32 TryWriteSpecialSaveSection(u8 sector, u8* src)
+u32 TryWriteSpecialSaveSection(u8 sector, u8 *src)
 {
     s32 i;
     s32 size;
-    u8* savData;
+    u8 *savData;
     void* savDataBuffer;
 
     if (sector != SECTOR_TTOWER(0) && sector != SECTOR_TTOWER(1))
         return 0xFF;
 
     savDataBuffer = &gSaveDataBuffer;
-    *(u32*)(savDataBuffer) = 0xB39D;
+    *(u32 *)(savDataBuffer) = 0xB39D;
 
     // copies whole save section except u32 counter
     i = 0;

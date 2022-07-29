@@ -59,7 +59,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
-    tileData1 = (u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
 
     if (!zero1)
@@ -106,7 +106,7 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8
     var = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
-    tileData1 = (u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
     txtColor[0] = bgClr;
     txtColor[1] = fgClr;

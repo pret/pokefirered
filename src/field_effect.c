@@ -2605,7 +2605,7 @@ static void ShowMonEffect_Outdoors_1(struct Task * task)
 {
     task->data[11] = GetGpuReg(REG_OFFSET_WININ);
     task->data[12] = GetGpuReg(REG_OFFSET_WINOUT);
-    StoreWordInTwoHalfwords((u16*)&task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords((u16 *)&task->data[13], (u32)gMain.vblankCallback);
     task->data[1] = WIN_RANGE(0xF0, 0xF1);
     task->data[2] = WIN_RANGE(0x50, 0x51);
     task->data[3] = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;

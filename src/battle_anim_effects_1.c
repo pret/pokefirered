@@ -5294,7 +5294,7 @@ void AnimWavyMusicNotes(struct Sprite* sprite)
     sprite->callback = AnimWavyMusicNotesStep;
 }
 
-static void AnimWavyMusicNotesGetNextPos(s16 a, s16 b, s16* c, s16* d, s8 e)
+static void AnimWavyMusicNotesGetNextPos(s16 a, s16 b, s16 *c, s16 *d, s8 e)
 {
     int f;
     int g;

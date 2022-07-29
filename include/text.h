@@ -195,7 +195,7 @@ struct TextPrinterSubStruct
 
 struct TextPrinterTemplate // TODO: Better name
 {
-    const u8* currentChar;
+    const u8 *currentChar;
     u8 windowId;
     u8 fontId;
     u8 x;

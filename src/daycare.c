@@ -67,7 +67,7 @@ static void SpriteCB_Egg_3(struct Sprite* sprite);
 static void SpriteCB_Egg_4(struct Sprite* sprite);
 static void SpriteCB_Egg_5(struct Sprite* sprite);
 static void SpriteCB_EggShard(struct Sprite* sprite);
-static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed);
+static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed);
 static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
 
@@ -1710,7 +1710,7 @@ bool8 DaycareMonReceivedMail(void)
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc)
+static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16 *speciesLoc)
 {
     u8 r4 = 0;
     u8 spriteID = 0; // r7
@@ -2153,7 +2153,7 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
     StartSpriteAnim(&gSprites[spriteID], spriteAnimIndex);
 }
 
-static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
+static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed)
 {
     FillWindowPixelBuffer(windowId, 0xFF);
     sEggHatchData->textColor[0] = 0;

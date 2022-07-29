@@ -115,7 +115,7 @@ static void BuyMenuDecompressBgGraphics(void);
 static void RecolorItemDescriptionBox(bool32 a0);
 static void BuyMenuDrawGraphics(void);
 static bool8 BuyMenuBuildListMenuTemplate(void);
-static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8* dst);
+static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *dst);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
 static void LoadTmHmNameInMart(s32 item);
@@ -568,7 +568,7 @@ bool8 BuyMenuBuildListMenuTemplate(void)
     return TRUE;
 }
 
-static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8* dst)
+static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *dst)
 {
     CopyItemName(index, dst);
     list->label = dst;
@@ -752,11 +752,11 @@ static void BuyMenuDrawMapBg(void)
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
             {
-                BuyMenuDrawMapMetatile(i, j, (u16*)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
             }
             else
             {
-                BuyMenuDrawMapMetatile(i, j, (u16*)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
             }
         }
     }

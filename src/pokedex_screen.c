@@ -885,10 +885,10 @@ void DexScreen_LoadResources(void)
     ScanlineEffect_Stop();
     ResetBgsAndClearDma3BusyFlags(TRUE);
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
-    SetBgTilemapBuffer(3, (u16*)Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(2, (u16*)Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(1, (u16*)Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(0, (u16*)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(3, (u16 *)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(2, (u16 *)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(1, (u16 *)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(0, (u16 *)Alloc(BG_SCREEN_SIZE));
     if (natDex)
         DecompressAndLoadBgGfxUsingHeap(3, (void*)sNatDexTiles, BG_SCREEN_SIZE, 0, 0);
     else

@@ -22,7 +22,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
     int j;
     u8 bgLayer;
     u16 bgSize;
-    u8* allocatedTilemapBuffer;
+    u8 *allocatedTilemapBuffer;
     int allocatedBaseBlock;
 
     for (i = 0; i < 4; ++i)
@@ -323,7 +323,7 @@ void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u
     struct Bitmap sourceRect;
     struct Bitmap destRect;
 
-    sourceRect.pixels = (u8*)pixels;
+    sourceRect.pixels = (u8 *)pixels;
     sourceRect.width = srcWidth;
     sourceRect.height = srcHeight;
 
@@ -339,7 +339,7 @@ void BlitBitmapRectToWindowWithColorKey(u8 windowId, const u8 *pixels, u16 srcX,
     struct Bitmap sourceRect;
     struct Bitmap destRect;
 
-    sourceRect.pixels = (u8*)pixels;
+    sourceRect.pixels = (u8 *)pixels;
     sourceRect.width = srcWidth;
     sourceRect.height = srcHeight;
 
@@ -380,9 +380,9 @@ void FillWindowPixelBuffer(u8 windowId, u8 fillValue)
     destOffset = i + (a);                                                       \
     srcOffset = i + (((width * (distanceLoop & ~7)) | (distanceLoop & 7)) * 4); \
     if (srcOffset < size)                                                       \
-        *(u32*)(tileData + destOffset) = *(u32*)(tileData + srcOffset);         \
+        *(u32 *)(tileData + destOffset) = *(u32 *)(tileData + srcOffset);         \
     else                                                                        \
-        *(u32*)(tileData + destOffset) = fillValue32;                           \
+        *(u32 *)(tileData + destOffset) = fillValue32;                           \
     distanceLoop++;                                                             \
 }
 
@@ -391,9 +391,9 @@ void FillWindowPixelBuffer(u8 windowId, u8 fillValue)
     destOffset = i + (a);                                                       \
     srcOffset = i + (((width * (distanceLoop & ~7)) | (distanceLoop & 7)) * 4); \
     if (srcOffset < size)                                                       \
-        *(u32*)(tileData - destOffset) = *(u32*)(tileData - srcOffset);         \
+        *(u32 *)(tileData - destOffset) = *(u32 *)(tileData - srcOffset);         \
     else                                                                        \
-        *(u32*)(tileData - destOffset) = fillValue32;                           \
+        *(u32 *)(tileData - destOffset) = fillValue32;                           \
     distanceLoop++;                                                             \
 }
 

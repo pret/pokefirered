@@ -14,6 +14,7 @@
 #include "util.h"
 #include "trig.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 struct IntroSequenceData;
 
@@ -2205,7 +2206,7 @@ static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite)
         }
         break;
     case 1:
-        PlayCry3(SPECIES_NIDORINO, 0x3F, 1);
+        PlayCry_ByMode(SPECIES_NIDORINO, 0x3F, CRY_MODE_DOUBLES);
         sprite->data[1] = 0;
         sprite->data[0]++;
         break;

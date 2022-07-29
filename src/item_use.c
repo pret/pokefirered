@@ -31,7 +31,7 @@
 #include "teachy_tv.h"
 #include "tm_case.h"
 #include "vs_seeker.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
@@ -386,7 +386,7 @@ void FieldUseFunc_PokeFlute(u8 taskId)
 
 static void sub_80A1648(u8 taskId)
 {
-    PlayFanfareByFanfareNum(FANFARE_POKEFLUTE);
+    PlayFanfareByFanfareNum(FANFARE_POKE_FLUTE);
     gTasks[taskId].func = sub_80A1674;
 }
 

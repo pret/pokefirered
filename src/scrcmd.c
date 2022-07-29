@@ -34,6 +34,7 @@
 #include "fieldmap.h"
 #include "field_door.h"
 #include "constants/event_objects.h"
+#include "constants/sound.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -1523,7 +1524,7 @@ bool8 ScrCmd_showmonpic(struct ScriptContext * ctx)
     u8 y = ScriptReadByte(ctx);
 
     ScriptMenu_ShowPokemonPic(species, x, y);
-    PlayCry7(species, 0);
+    PlayCry_Script(species, CRY_MODE_NORMAL);
     return FALSE;
 }
 
@@ -2085,7 +2086,7 @@ bool8 ScrCmd_playmoncry(struct ScriptContext * ctx)
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u16 mode = VarGet(ScriptReadHalfword(ctx));
 
-    PlayCry7(species, mode);
+    PlayCry_Script(species, mode);
     return FALSE;
 }
 

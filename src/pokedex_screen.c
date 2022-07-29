@@ -17,6 +17,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 #include "pokedex_area_markers.h"
 #include "field_specials.h"
 
@@ -1751,7 +1752,7 @@ static void Task_DexScreen_CategorySubmenu(u8 taskId)
             CopyBgTilemapBufferToVram(2);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(0);
-            PlayCry2(sPokedexScreenData->dexSpecies, 0, 125, 10);
+            PlayCry_NormalNoDucking(sPokedexScreenData->dexSpecies, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             sPokedexScreenData->data[0] = 0;
             sPokedexScreenData->state = 17;
         }
@@ -1927,7 +1928,7 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(0);
-        PlayCry2(sPokedexScreenData->dexSpecies, 0, 125, 10);
+        PlayCry_NormalNoDucking(sPokedexScreenData->dexSpecies, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
         sPokedexScreenData->state = 4;
         break;
     case 4:
@@ -3295,7 +3296,7 @@ static u8 DexScreen_PageNumberToRenderablePages(u16 page)
 void DexScreen_InputHandler_StartToCry(void)
 {
     if (JOY_NEW(START_BUTTON))
-        PlayCry2(sPokedexScreenData->dexSpecies, 0, 125, 10);
+        PlayCry_NormalNoDucking(sPokedexScreenData->dexSpecies, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
 }
 
 u8 DexScreen_RegisterMonToPokedex(u16 species)
@@ -3413,7 +3414,7 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(0);
 
-            PlayCry2(sPokedexScreenData->dexSpecies, 0, 125, 10);
+            PlayCry_NormalNoDucking(sPokedexScreenData->dexSpecies, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             sPokedexScreenData->data[0] = 0;
             sPokedexScreenData->state = 11;
         }

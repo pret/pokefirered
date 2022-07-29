@@ -1,6 +1,7 @@
 #include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 #include "constants/moves.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
@@ -5068,7 +5069,7 @@ Move_ROAR::
 	monbg ANIM_ATTACKER
 	monbgprio_28 0
 	setalpha 8, 8
-	createvisualtask SoundTask_PlayDoubleCry, 2, 0, 2
+	createvisualtask SoundTask_PlayDoubleCry, 2, 0, DOUBLE_CRY_ROAR
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, 0, 1
 	call RoarEffect
 	delay 20
@@ -5093,7 +5094,7 @@ RoarEffect::
 
 Move_GROWL::
 	loadspritegfx ANIM_TAG_NOISE_LINE
-	createvisualtask SoundTask_PlayDoubleCry, 2, 0, 255
+	createvisualtask SoundTask_PlayDoubleCry, 2, 0, DOUBLE_CRY_GROWL
 	call RoarEffect
 	delay 10
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 1, 0, 9, 1

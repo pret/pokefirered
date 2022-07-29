@@ -36,7 +36,7 @@ FourIsland_PokemonDayCare_GiveMonToRaise::
 	goto_if_eq FourIsland_PokemonDayCare_OnlyOneAliveMonInParty
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
-	playmoncry VAR_0x8005, 0
+	playmoncry VAR_0x8005, CRY_MODE_NORMAL
 	msgbox DayCare_Text_WellRaiseYourMon
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
@@ -137,7 +137,7 @@ FourIsland_PokemonDayCare_RetrieveMon::
 	playse SE_RS_SHOP
 	msgbox DayCare_Text_HeresYourMon
 	waitse
-	playmoncry VAR_RESULT, 0
+	playmoncry VAR_RESULT, CRY_MODE_NORMAL
 	textcolor 3
 	msgbox DayCare_Text_TookBackMon
 	call EventScript_RestorePrevTextColor

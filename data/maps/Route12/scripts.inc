@@ -22,7 +22,7 @@ Route12_EventScript_Snorlax::
 	call EventScript_AwakenSnorlax
 	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
 	waitse
-	playmoncry SPECIES_SNORLAX, 2
+	playmoncry SPECIES_SNORLAX, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setflag FLAG_HIDE_ROUTE_12_SNORLAX

@@ -21,7 +21,7 @@ ThreeIsland_BerryForest_EventScript_Lostelle::
 	msgbox ThreeIsland_BerryForest_Text_HereItComesAgain
 	goto_if_questlog EventScript_ReleaseEnd
 	waitse
-	playmoncry SPECIES_HYPNO, 2
+	playmoncry SPECIES_HYPNO, CRY_MODE_ENCOUNTER
 	waitmoncry
 	setwildbattle SPECIES_HYPNO, 30, ITEM_NONE
 	dowildbattle

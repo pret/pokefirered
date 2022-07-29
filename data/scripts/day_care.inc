@@ -31,7 +31,7 @@ Route5_PokemonDayCare_EventScript_TryGiveMon::
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	msgbox Route5_PokemonDayCare_Text_LookAfterMonForAWhile
 	waitse
-	playmoncry VAR_0x8005, 0
+	playmoncry VAR_0x8005, CRY_MODE_NORMAL
 	msgbox Route5_PokemonDayCare_Text_ComeSeeMeInAWhile
 	waitmoncry
 	special PutMonInRoute5Daycare
@@ -100,7 +100,7 @@ Route5_PokemonDayCare_EventScript_RetrieveMon::
 	msgbox Route5_PokemonDayCare_Text_ThankYouHeresMon
 	textcolor 3
 	waitse
-	playmoncry VAR_RESULT, 0
+	playmoncry VAR_RESULT, CRY_MODE_NORMAL
 	msgbox Route5_PokemonDayCare_Text_PlayerGotMonBack
 	call EventScript_RestorePrevTextColor
 	waitmoncry

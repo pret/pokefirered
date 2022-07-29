@@ -13,7 +13,7 @@ VermilionCity_House3_EventScript_Pidgey::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_PIDGEY, 0
+	playmoncry SPECIES_PIDGEY, CRY_MODE_NORMAL
 	msgbox VermilionCity_House3_Text_Pidgey
 	waitmoncry
 	release

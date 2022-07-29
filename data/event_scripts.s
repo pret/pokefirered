@@ -10,6 +10,7 @@
 #include "constants/pokemon.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 #include "constants/species.h"
 #include "constants/vars.h"
 #include "constants/battle.h"

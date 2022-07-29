@@ -13,7 +13,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "constants/songs.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 #include "constants/items.h"
 
 struct DodrioStruct
@@ -1204,7 +1204,7 @@ static void sub_8151D98(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD);
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -1262,7 +1262,7 @@ static void sub_8151E94(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD);
         gUnknown_203F3E0->unk154 = 2;
     }
 }

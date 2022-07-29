@@ -60,7 +60,7 @@ u8 RunHelpSystemCallback(void)
             m4aMPlayStop(&gMPlayInfo_SE2);
             PlaySE(SE_HELP_OPEN);
             if (!gDisableHelpSystemVolumeReduce)
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
             SaveCallbacks();
             sInHelpSystem = 1;
             sVideoState.state = 1;
@@ -122,7 +122,7 @@ u8 RunHelpSystemCallback(void)
         break;
     case 7:
         if (!gDisableHelpSystemVolumeReduce)
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         RestoreMapTextColors();
         RestoreGPURegs();
         sVideoState.state = 8;

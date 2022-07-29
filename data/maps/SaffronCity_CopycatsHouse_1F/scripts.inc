@@ -13,7 +13,7 @@ SaffronCity_CopycatsHouse_1F_EventScript_Chansey::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_CHANSEY, 0
+	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
 	msgbox SaffronCity_CopycatsHouse_1F_Text_Chansey
 	waitmoncry
 	release

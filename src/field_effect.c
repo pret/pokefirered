@@ -27,6 +27,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -2935,7 +2936,7 @@ static void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite * sprite)
         sprite->callback = SpriteCB_FieldMoveMonWaitAfterCry;
         if (sprite->data[6])
         {
-            PlayCry2(sprite->data[0], 0, 0x7d, 0xa);
+            PlayCry_NormalNoDucking(sprite->data[0], 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
         }
         else
         {

@@ -12,6 +12,7 @@
 #include "link.h"
 #include "battle_gfx_sfx_util.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 #define tFrames          data[0]
 #define tPan             data[1]
@@ -681,9 +682,9 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
         break;
     case 1:
         if (ShouldPlayNormalPokeCry(mon) == TRUE)
-            PlayCry3(species, pan, 0);
+            PlayCry_ByMode(species, pan, CRY_MODE_NORMAL);
         else
-            PlayCry3(species, pan, 11);
+            PlayCry_ByMode(species, pan, CRY_MODE_WEAK);
         
         DestroyTask(taskId);
         break;
@@ -696,9 +697,9 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
         if (gTasks[taskId].tCryTaskFrames == 0)
         {
             if (ShouldPlayNormalPokeCry(mon) == TRUE)
-                PlayCry4(species, pan, 1);
+                PlayCry_ReleaseDouble(species, pan, 1);
             else
-                PlayCry4(species, pan, 12);
+                PlayCry_ReleaseDouble(species, pan, 12);
 
             DestroyTask(taskId);
         }
@@ -734,9 +735,9 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
         }
         
         if (ShouldPlayNormalPokeCry(mon) == TRUE)
-            PlayCry4(species, pan, 0);
+            PlayCry_ReleaseDouble(species, pan, 0);
         else
-            PlayCry4(species, pan, 11);
+            PlayCry_ReleaseDouble(species, pan, 11);
 
         DestroyTask(taskId);
         break;
@@ -784,7 +785,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
             }
         }
 

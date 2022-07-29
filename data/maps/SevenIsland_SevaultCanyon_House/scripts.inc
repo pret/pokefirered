@@ -76,7 +76,7 @@ SevenIsland_SevaultCanyon_House_EventScript_Chansey::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_CHANSEY, 0
+	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
 	msgbox SevenIsland_SevaultCanyon_House_Text_Chansey
 	waitmoncry
 	release

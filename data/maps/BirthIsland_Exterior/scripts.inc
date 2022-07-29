@@ -80,7 +80,7 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	applymovement LOCALID_DEOXYS, Movement_DeoxysApproach
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_DEOXYS, 2
+	playmoncry SPECIES_DEOXYS, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_DEOXYS

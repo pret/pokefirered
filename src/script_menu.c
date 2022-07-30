@@ -1008,7 +1008,7 @@ void ScriptMenu_DisplayPCStartupPrompt(void)
 
 static void Task_ScriptShowMonPic(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
     case 0:
@@ -1068,7 +1068,7 @@ static bool8 PicboxWait(void)
 void PicboxCancel(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
-    struct Task * task;
+    struct Task *task;
     if (taskId != 0xFF)
     {
         task = &gTasks[taskId];
@@ -1091,7 +1091,7 @@ void PicboxCancel(void)
 
 void Task_WaitMuseumFossilPic(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
     case 0:

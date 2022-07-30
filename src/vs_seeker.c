@@ -597,7 +597,7 @@ void VsSeekerFreezeObjectsAfterChargeComplete(void)
 
 static void Task_ResetObjectsRematchWantedState(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 i;
 
     if (task->data[0] == 0 && walkrun_is_standing_still() == TRUE)

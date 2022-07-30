@@ -1503,7 +1503,7 @@ static void FC_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list
 
 static void Task_SwitchToPickMode(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     task->data[2] = CreatePersonPicSprite(sFameCheckerData->unlockedPersons[sLastMenuIdx]);
     gSprites[task->data[2]].data[0] = 0;
     GetPickModeText();
@@ -1642,7 +1642,7 @@ static void HandleFlavorTextModeSwitch(bool8 state)
 
 static void Task_FCOpenOrCloseInfoBox(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
         case 0:

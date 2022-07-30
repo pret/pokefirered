@@ -284,7 +284,7 @@ static void ScrollBG(void)
 
 static void Task_Seagallop_1(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     ScrollBG();
     if (++task->data[1] == 140)

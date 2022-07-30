@@ -48,7 +48,7 @@ void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 
 static void Task_MapNamePopup(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->tState)
     {
     case 0:

@@ -580,7 +580,7 @@ void CableClub_AskSaveTheGame(void)
 
 static void Task_StartWiredCableClubBattle(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
     case 0:
@@ -772,7 +772,7 @@ void ExitLinkRoom(void)
 
 static void Task_EnterCableClubSeat(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
     case 0:
@@ -821,7 +821,7 @@ static void CreateEnterCableClubSeatTaskWithFollowupFunc(TaskFunc followUpFunc)
 
 static void Task_StartWiredCableClubTrade(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
     case 0:
@@ -936,7 +936,7 @@ bool32 GetSeeingLinkPlayerCardMsg(u8 who)
 
 void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     task->data[0]++;
     if (task->data[0] > 300)
     {

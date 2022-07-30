@@ -167,7 +167,7 @@ static void Task_WaitFadeIn(u8 taskId)
 
 static void Task_WaitButton(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {

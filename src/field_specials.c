@@ -1165,7 +1165,7 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
 void ListMenu(void)
 {
     u8 taskId;
-    struct Task * task;
+    struct Task *task;
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
@@ -1334,7 +1334,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     u8 i;
     s32 width;
     s32 mwidth;
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 windowId;
     ScriptContext2_Enable();
     if (gSpecialVar_0x8004 == LISTMENU_SILPHCO_FLOORS)
@@ -1393,7 +1393,7 @@ static void CreateScriptListMenu(void)
 static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used)
 {
     u8 taskId;
-    struct Task * task;
+    struct Task *task;
     PlaySE(SE_SELECT);
     taskId = FindTaskIdByFunc(Task_ListMenuHandleInput);
     if (taskId != 0xFF)
@@ -1407,7 +1407,7 @@ static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListM
 static void Task_ListMenuHandleInput(u8 taskId)
 {
     s32 input;
-    struct Task * task;
+    struct Task *task;
 
     task = &gTasks[taskId];
     task++;task--;
@@ -1440,7 +1440,7 @@ static void Task_ListMenuHandleInput(u8 taskId)
 
 static void Task_DestroyListMenu(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     Task_ListMenuRemoveScrollIndicatorArrowPair(taskId);
     DestroyListMenuTask(task->data[14], NULL, NULL);
     Free(sListMenuItems);
@@ -1484,7 +1484,7 @@ static void Task_RedrawScrollArrowsAndWaitInput(u8 taskId)
 
 static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     struct ScrollArrowsTemplate template = {
         .firstArrowType = 2,
         .secondArrowType = 3,
@@ -1505,7 +1505,7 @@ static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 
 static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (task->data[0] != task->data[1])
         RemoveScrollIndicatorArrowPair(task->data[12]);
 }

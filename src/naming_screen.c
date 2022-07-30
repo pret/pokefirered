@@ -130,15 +130,15 @@ static bool8 MainState_WaitPageSwap(void);
 static void StartPageSwapAnim(void);
 static void Task_HandlePageSwapAnim(u8 taskId);
 static bool8 IsPageSwapAnimNotInProgress(void);
-static bool8 PageSwapAnimState_Init(struct Task * task);
-static bool8 PageSwapAnimState_1(struct Task * task);
-static bool8 PageSwapAnimState_2(struct Task * task);
-static bool8 PageSwapAnimState_Done(struct Task * task);
+static bool8 PageSwapAnimState_Init(struct Task *task);
+static bool8 PageSwapAnimState_1(struct Task *task);
+static bool8 PageSwapAnimState_2(struct Task *task);
+static bool8 PageSwapAnimState_Done(struct Task *task);
 static void sub_809E518(u8 a0, u8 a1, u8 a2);
 static void Task_809E58C(u8 taskId);
 static u16 sub_809E644(u8 tag);
 static void sub_809E6B8(u8 a0);
-static void sub_809E6E0(struct Task * task, u8 a1, u8 a2);
+static void sub_809E6E0(struct Task *task, u8 a1, u8 a2);
 static void sub_809E700(struct Sprite *sprite);
 static void sub_809E7F0(struct Sprite *sprite);
 static void sub_809E83C(struct Sprite *sprite);
@@ -175,9 +175,9 @@ static bool8 TriggerKeyboardChange(void);
 static u8 GetInputEvent(void);
 static void SetInputState(u8 state);
 static void Task_HandleInput(u8 taskId);
-static void InputState_Disabled(struct Task * task);
-static void InputState_Enabled(struct Task * task);
-static void HandleDpadMovement(struct Task * task);
+static void InputState_Disabled(struct Task *task);
+static void InputState_Enabled(struct Task *task);
+static void HandleDpadMovement(struct Task *task);
 static void PrintTitle(void);
 static void AddGenderIconFunc_No(void);
 static void AddGenderIconFunc_Yes(void);
@@ -773,7 +773,7 @@ static bool8 MainState_WaitPageSwap(void)
 #define tState data[0]
 #define tFrameCount data[1]
 
-static bool8 (*const sPageSwapAnimStateFuncs[])(struct Task * task) = {
+static bool8 (*const sPageSwapAnimStateFuncs[])(struct Task *task) = {
     PageSwapAnimState_Init,
     PageSwapAnimState_1,
     PageSwapAnimState_2,

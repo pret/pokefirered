@@ -87,38 +87,38 @@ static bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y);
 static void HandleWarpArrowSpriteHideShow(struct ObjectEvent * playerObjEvent);
 static void StartStrengthAnim(u8 objectEventId, u8 direction);
 static void Task_BumpBoulder(u8 taskId);
-static bool8 DoBoulderInit(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
-static bool8 DoBoulderDust(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
-static bool8 DoBoulderFinish(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 DoBoulderInit(struct Task *task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 DoBoulderDust(struct Task *task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+static bool8 DoBoulderFinish(struct Task *task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
 static void DoPlayerMatJump(void);
 static void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
-static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task * task, struct ObjectEvent * playerObj);
+static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEvent * playerObj);
 static void DoPlayerMatSpin(void);
 static void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task * task, struct ObjectEvent * playerObj);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task * task, struct ObjectEvent * playerObj);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task * task, struct ObjectEvent * playerObj);
-static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task * task, struct ObjectEvent * playerObj);
+static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct ObjectEvent * playerObj);
+static bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct ObjectEvent * playerObj);
+static bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct ObjectEvent * playerObj);
+static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct ObjectEvent * playerObj);
 static void CreateStopSurfingTask(u8 direction);
 static void Task_StopSurfingInit(u8 taskId);
 static void Task_WaitStopSurfing(u8 taskId);
 static void Task_Fishing(u8 taskId);
-static bool8 Fishing1(struct Task * task);
-static bool8 Fishing2(struct Task * task);
-static bool8 Fishing3(struct Task * task);
-static bool8 Fishing4(struct Task * task);
-static bool8 Fishing5(struct Task * task);
-static bool8 Fishing6(struct Task * task);
-static bool8 Fishing7(struct Task * task);
-static bool8 Fishing8(struct Task * task);
-static bool8 Fishing9(struct Task * task);
-static bool8 Fishing10(struct Task * task);
-static bool8 Fishing11(struct Task * task);
-static bool8 Fishing12(struct Task * task);
-static bool8 Fishing13(struct Task * task);
-static bool8 Fishing14(struct Task * task);
-static bool8 Fishing15(struct Task * task);
-static bool8 Fishing16(struct Task * task);
+static bool8 Fishing1(struct Task *task);
+static bool8 Fishing2(struct Task *task);
+static bool8 Fishing3(struct Task *task);
+static bool8 Fishing4(struct Task *task);
+static bool8 Fishing5(struct Task *task);
+static bool8 Fishing6(struct Task *task);
+static bool8 Fishing7(struct Task *task);
+static bool8 Fishing8(struct Task *task);
+static bool8 Fishing9(struct Task *task);
+static bool8 Fishing10(struct Task *task);
+static bool8 Fishing11(struct Task *task);
+static bool8 Fishing12(struct Task *task);
+static bool8 Fishing13(struct Task *task);
+static bool8 Fishing14(struct Task *task);
+static bool8 Fishing15(struct Task *task);
+static bool8 Fishing16(struct Task *task);
 static void Task_TeleportWarpOutPlayerAnim(u8 taskId);
 static void Task_TeleportWarpInPlayerAnim(u8 taskId);
 static u8 TeleportAnim_RotatePlayer(struct ObjectEvent * object, s16 *timer);
@@ -1392,7 +1392,7 @@ static void HandleWarpArrowSpriteHideShow(struct ObjectEvent *objectEvent)
     SetSpriteInvisible(objectEvent->warpArrowSpriteId);
 }
 
-static bool8 (*const sBoulderTaskSteps[])(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj) = {
+static bool8 (*const sBoulderTaskSteps[])(struct Task *task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj) = {
     DoBoulderInit,
     DoBoulderDust,
     DoBoulderFinish
@@ -1493,7 +1493,7 @@ static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEv
     return FALSE;
 }
 
-static bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task * task, struct ObjectEvent * playerObj) = {
+static bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *task, struct ObjectEvent * playerObj) = {
     PlayerAvatar_SecretBaseMatSpinStep0,
     PlayerAvatar_SecretBaseMatSpinStep1,
     PlayerAvatar_SecretBaseMatSpinStep2,

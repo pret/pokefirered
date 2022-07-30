@@ -79,14 +79,14 @@ static void PrintNewCountOnLinkPlayerCountDisplayWindow(u16 windowId, s32 num)
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStdWindowBorderStyle(windowId, FALSE);
     StringExpandPlaceholders(gStringVar4, gUnknown_841DF82);
-    AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 0, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void DestroyLinkPlayerCountDisplayWindow(u16 windowId)
 {
     ClearStdWindowAndFrame(windowId, FALSE);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 num)
@@ -316,7 +316,7 @@ static void Task_LinkupSlave_2(u8 taskId)
                 gFieldLinkPlayerCount = GetLinkPlayerCount_2();
                 gLocalLinkPlayerId = GetMultiplayerId();
                 sub_800A900(gFieldLinkPlayerCount);
-                TrainerCard_GenerateCardForLinkPlayer((void*)gBlockSendBuffer);
+                TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
                 gTasks[taskId].func = Task_Linkup_6a;
             }
         }
@@ -367,7 +367,7 @@ static void Task_LinkupMaster_6(u8 taskId)
             gFieldLinkPlayerCount = GetLinkPlayerCount_2();
             gLocalLinkPlayerId = GetMultiplayerId();
             sub_800A900(gFieldLinkPlayerCount);
-            TrainerCard_GenerateCardForLinkPlayer((void*)gBlockSendBuffer);
+            TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
             gTasks[taskId].func = Task_Linkup_6a;
             Link_PrepareCmd0xCCCC_Rfu0xA100(2);
         }
@@ -723,7 +723,7 @@ static void sub_8081624(void)
 
 void CB2_ReturnFromCableClubBattle(void)
 {
-    gBattleTypeFlags &= (u16)~BATTLE_TYPE_LINK_ESTABLISHED;
+    gBattleTypeFlags &= (u16)~BATTLE_TYPE_LINK_IN_BATTLE;
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();

@@ -668,7 +668,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
     u8 state2 = gTasks[taskId].data[2];
     s8 pan = gTasks[taskId].tCryTaskPan;
     u16 species = gTasks[taskId].tCryTaskSpecies;
-    struct Pokemon *mon = (void*)(u32)((u32)(gTasks[taskId].tCryTaskMonPtr1 << 0x10) | ((u16)gTasks[taskId].tCryTaskMonPtr2));
+    struct Pokemon *mon = (void *)(u32)((u32)(gTasks[taskId].tCryTaskMonPtr1 << 0x10) | ((u16)gTasks[taskId].tCryTaskMonPtr2));
 
     switch (gTasks[taskId].tCryTaskState)
     {

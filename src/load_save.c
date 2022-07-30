@@ -72,9 +72,9 @@ void SetSaveBlocksPointers(void)
 
     offset = (Random()) & ((SAVEBLOCK_MOVE_RANGE - 1) & ~3);
 
-    gSaveBlock2Ptr = (void*)(&gSaveBlock2) + offset;
-    *sav1_LocalVar = (void*)(&gSaveBlock1) + offset;
-    gPokemonStoragePtr = (void*)(&gPokemonStorage) + offset;
+    gSaveBlock2Ptr = (void *)(&gSaveBlock2) + offset;
+    *sav1_LocalVar = (void *)(&gSaveBlock1) + offset;
+    gPokemonStoragePtr = (void *)(&gPokemonStorage) + offset;
 
     SetBagPocketsPointers();
     SetQuestLogRecordAndPlaybackPointers(oldSave);

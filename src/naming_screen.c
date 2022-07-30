@@ -609,7 +609,7 @@ static bool8 MainState_BeginFadeIn(void)
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
     BlendPalettes(-1, 16, RGB_BLACK);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     sNamingScreenData->state++;
     return FALSE;
 }
@@ -663,7 +663,7 @@ static bool8 pokemon_store(void)
 
 static bool8 MainState_BeginFadeInOut(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     sNamingScreenData->state++;
     return FALSE;
 }
@@ -707,7 +707,7 @@ static void pokemon_transfer_to_pc_with_message(void)
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 sub_809E1D4(void)
@@ -1666,7 +1666,7 @@ static void AddGenderIconFunc_Yes(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             gender = FEMALE;
         }
-        AddTextPrinterParameterized3(sNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SPEED_FF, genderSymbol);
+        AddTextPrinterParameterized3(sNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SKIP_DRAW, genderSymbol);
     }
 }
 
@@ -1799,7 +1799,7 @@ static void PrintBufferCharactersOnScreen(void)
         temp[1] = gExpandedPlaceholder_Empty[0];
         xoff = (IsLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     CallAddGenderIconFunc();
@@ -1886,7 +1886,7 @@ static void sub_809FAE4(void)
     FillWindowPixelBuffer(sNamingScreenData->windows[4], PIXEL_FILL(15));
     AddTextPrinterParameterized3(sNamingScreenData->windows[4], 0, 236 - strwidth, 0, color, 0, gText_MoveOkBack);
     PutWindowTilemap(sNamingScreenData->windows[4]);
-    CopyWindowToVram(sNamingScreenData->windows[4], COPYWIN_BOTH);
+    CopyWindowToVram(sNamingScreenData->windows[4], COPYWIN_FULL);
 }
 
 static void sub_809FB70(void)

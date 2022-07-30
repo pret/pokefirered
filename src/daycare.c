@@ -67,7 +67,7 @@ static void SpriteCB_Egg_3(struct Sprite* sprite);
 static void SpriteCB_Egg_4(struct Sprite* sprite);
 static void SpriteCB_Egg_5(struct Sprite* sprite);
 static void SpriteCB_EggShard(struct Sprite* sprite);
-static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed);
+static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed);
 static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
 
@@ -356,7 +356,7 @@ static u8 *DayCare_GetMonNickname(struct Pokemon *mon, u8 *dest)
     u8 nickname[POKEMON_NAME_LENGTH * 2];
 
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
-    return StringCopy10(dest, nickname);
+    return StringCopy_Nickname(dest, nickname);
 }
 
 static u8 *DayCare_GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest)
@@ -364,7 +364,7 @@ static u8 *DayCare_GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest)
     u8 nickname[POKEMON_NAME_LENGTH * 2];
 
     GetBoxMonData(mon, MON_DATA_NICKNAME, nickname);
-    return StringCopy10(dest, nickname);
+    return StringCopy_Nickname(dest, nickname);
 }
 
 u8 CountPokemonInDaycare(struct DayCare *daycare)
@@ -1542,7 +1542,7 @@ void ShowDaycareLevelMenu(void)
     menuTemplate.windowId = windowId;
     listMenuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 
     daycareMenuTaskId = CreateTask(Task_HandleDaycareLevelMenuInput, 3);
     gTasks[daycareMenuTaskId].tMenuListTaskId = listMenuTaskId;
@@ -1710,7 +1710,7 @@ bool8 DaycareMonReceivedMail(void)
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc)
+static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16 *speciesLoc)
 {
     u8 r4 = 0;
     u8 spriteID = 0; // r7
@@ -1758,7 +1758,7 @@ void EggHatch(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_EggHatch, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
     HelpSystem_Disable();
 }
 
@@ -1895,7 +1895,7 @@ static void CB2_EggHatch_1(void)
     switch (sEggHatchData->CB2_state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         sEggHatchData->eggSpriteID = CreateSprite(&sSpriteTemplate_EggHatch, 120, 75, 5);
         ShowBg(0);
         ShowBg(1);
@@ -1920,7 +1920,7 @@ static void CB2_EggHatch_1(void)
     case 3:
         if (gSprites[sEggHatchData->eggSpriteID].callback == SpriteCallbackDummy)
         {
-            PlayCry1(sEggHatchData->species, 0);
+            PlayCry_Normal(sEggHatchData->species, 0);
             sEggHatchData->CB2_state++;
         }
         break;
@@ -1937,7 +1937,7 @@ static void CB2_EggHatch_1(void)
         PlayFanfare(MUS_EVOLVED);
         sEggHatchData->CB2_state++;
         PutWindowTilemap(sEggHatchData->windowId);
-        CopyWindowToVram(sEggHatchData->windowId, COPYWIN_BOTH);
+        CopyWindowToVram(sEggHatchData->windowId, COPYWIN_FULL);
         break;
     case 6:
         if (IsFanfareTaskInactive())
@@ -1977,7 +1977,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 11:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         sEggHatchData->CB2_state++;
         break;
     case 12:
@@ -2087,7 +2087,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
 {
     s16 i;
     if (sprite->data[0] == 0)
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, 0xFFFF);
     if (sprite->data[0] < 4u)
     {
         for (i = 0; i <= 3; i++)
@@ -2111,7 +2111,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
         StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, 0xFFFF);
     if (sprite->data[0] <= 9)
         gSprites[sEggHatchData->pokeSpriteID].y -= 1;
     if (sprite->data[0] > 40)
@@ -2153,7 +2153,7 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
     StartSpriteAnim(&gSprites[spriteID], spriteAnimIndex);
 }
 
-static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
+static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed)
 {
     FillWindowPixelBuffer(windowId, 0xFF);
     sEggHatchData->textColor[0] = 0;

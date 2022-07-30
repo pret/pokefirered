@@ -2516,7 +2516,7 @@ static void CameraCB_CreditsPan(struct CameraObject * camera)
 
 static void Task_OvwldCredits_FadeOut(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OvwldCredits_WaitFade;
 }
 
@@ -3261,7 +3261,7 @@ static void ZeroObjectEvent(struct ObjectEvent *objEvent)
 // conflict with the usual Event Object struct, thus the definitions.
 #define linkGender(obj) obj->singleMovementActive
 // not even one can reference *byte* aligned bitfield members...
-#define linkDirection(obj) ((u8*)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
+#define linkDirection(obj) ((u8 *)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
 
 static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s16 x, s16 y, u8 gender)
 {

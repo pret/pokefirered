@@ -501,7 +501,7 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
     PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
     CopyWindowToVram(sQuestLogHeaderWindowIds[0], COPYWIN_GFX);
     CopyWindowToVram(sQuestLogHeaderWindowIds[2], COPYWIN_GFX);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_BOTH);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_FULL);
 }
 
 void CommitQuestLogWindow1(void)
@@ -852,7 +852,7 @@ static void Task_RunPlaybackCB(u8 taskId)
     case 0:
         if (++data[0] == 0x7F)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
             sQuestLogCurrentScene.sceneEndMode = 2;
             data[1]++;
         }

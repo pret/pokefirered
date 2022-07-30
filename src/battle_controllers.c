@@ -487,7 +487,7 @@ void TryReceiveLinkBattleData(void)
     s32 j;
     u8 *recvBuffer;
 
-    if (gReceivedRemoteLinkPlayers && (gBattleTypeFlags & BATTLE_TYPE_LINK_ESTABLISHED) && (gLinkPlayers[0].linkType == 0x2211))
+    if (gReceivedRemoteLinkPlayers && (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE) && (gLinkPlayers[0].linkType == 0x2211))
     {
         LinkRfu_DestroyIdleTask();
         for (i = 0; i < GetLinkPlayerCount(); ++i)
@@ -621,10 +621,10 @@ void BtlController_EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubs
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitReturnMonToBall(u8 bufferId, u8 arg1)
+void BtlController_EmitReturnMonToBall(u8 bufferId, bool8 skipAnim)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_RETURNMONTOBALL;
-    sBattleBuffersTransferData[1] = arg1;
+    sBattleBuffersTransferData[1] = skipAnim;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 2);
 }
 
@@ -934,16 +934,19 @@ static void BtlController_EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, voi
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, size + 7);
 }
 
-// not used
-static void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *unusedDumbDataParameter)
+// Unused
+static void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *data)
 {
     s32 i;
 
-    sBattleBuffersTransferData[0] = CONTROLLER_31;
+    sBattleBuffersTransferData[0] = CONTROLLER_PLAYBGM;
     sBattleBuffersTransferData[1] = songId;
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
+
+    // Nonsense loop using songId as a size
+    // Would go out of bounds for any song id after SE_DEOXYS_MOVE (253)
     for (i = 0; i < songId; ++i)
-        sBattleBuffersTransferData[3 + i] = *(u8 *)(unusedDumbDataParameter++);
+        sBattleBuffersTransferData[3 + i] = *(u8 *)(data++);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, songId + 3);
 }
 
@@ -1045,7 +1048,7 @@ void BtlController_EmitHitAnimation(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitCmd42(u8 bufferId)
+void BtlController_EmitCantSwitch(u8 bufferId)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_42;
     sBattleBuffersTransferData[1] = CONTROLLER_42;
@@ -1146,10 +1149,11 @@ void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1)
+// mode is a LINK_STANDBY_* constant
+void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 mode)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_LINKSTANDBYMSG;
-    sBattleBuffersTransferData[1] = arg1;
+    sBattleBuffersTransferData[1] = mode;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 2);
 }
 
@@ -1160,9 +1164,9 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 2);
 }
 
-void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome)
+void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_55;
+    sBattleBuffersTransferData[0] = CONTROLLER_ENDLINKBATTLE;
     sBattleBuffersTransferData[1] = battleOutcome;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 2);
 }

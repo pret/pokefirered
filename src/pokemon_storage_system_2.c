@@ -59,7 +59,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
-    tileData1 = (u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
 
     if (!zero1)
@@ -106,7 +106,7 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8
     var = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
-    tileData1 = (u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
     txtColor[0] = bgClr;
     txtColor[1] = fgClr;
@@ -245,9 +245,9 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         LoadStdWindowFrameGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_BOTH);
-        CopyWindowToVram(task->data[15], COPYWIN_BOTH);
+        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(task->data[15], COPYWIN_FULL);
         task->data[0]++;
         break;
     case 1:

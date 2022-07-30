@@ -105,7 +105,7 @@ s32 FadeToWonderNewsMenu(void)
     switch (sWork->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         break;
     case 1:
         if (UpdatePaletteFade())
@@ -158,7 +158,7 @@ s32 FadeToWonderNewsMenu(void)
         ShowBg(3);
         gPaletteFade.bufferTransferDisabled = FALSE;
         sWork->menuIndicatorsId = AddScrollIndicatorArrowPair(&sWork->scrollArrowsTemplate, &sWork->scrollOffset);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         UpdatePaletteFade();
         break;
     default:
@@ -179,7 +179,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
     switch (sWork->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         break;
     case 1:
         if (UpdatePaletteFade())
@@ -223,7 +223,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
         MG_DrawCheckerboardPattern();
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     default:
         if (UpdatePaletteFade())
@@ -326,8 +326,8 @@ static void sub_8146A30(void)
     {
         AddTextPrinterParameterized3(sWork->windowIds[1], 3, 0, 16 * i + 2, sTextPals[sWork->bgSpec->textPal2], 0, sWork->messages[i]);
     }
-    CopyWindowToVram(sWork->windowIds[0], COPYWIN_BOTH);
-    CopyWindowToVram(sWork->windowIds[1], COPYWIN_BOTH);
+    CopyWindowToVram(sWork->windowIds[0], COPYWIN_FULL);
+    CopyWindowToVram(sWork->windowIds[1], COPYWIN_FULL);
 }
 
 static void sub_8146B58(void)

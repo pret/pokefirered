@@ -750,7 +750,7 @@ void InitCanReleaseMonVars(void)
     gPSSData->field_2176[0] = MOVE_SURF;
     gPSSData->field_2176[1] = MOVE_DIVE;
     gPSSData->field_2176[2] = MOVES_COUNT;
-    knownIdx = GetMonData(&gPSSData->field_2108, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->field_2176);
+    knownIdx = GetMonData(&gPSSData->field_2108, MON_DATA_KNOWN_MOVES, (u8 *)gPSSData->field_2176);
     gPSSData->isSurfMon = knownIdx & 1;
     gPSSData->isDiveMon = (knownIdx >> 1) & 1;
     if (gPSSData->isSurfMon || gPSSData->isDiveMon)
@@ -781,7 +781,7 @@ s8 RunCanReleaseMon(void)
         {
             if (gPSSData->field_2170 != TOTAL_BOXES_COUNT || gPSSData->field_2171 != i)
             {
-                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->field_2176);
+                knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, (u8 *)gPSSData->field_2176);
                 if (knownMoves & 1)
                     gPSSData->isSurfMon = FALSE;
                 if (knownMoves & 2)
@@ -803,7 +803,7 @@ s8 RunCanReleaseMon(void)
     case 1:
         for (i = 0; i < 5; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(gPSSData->field_216E, gPSSData->field_216F, MON_DATA_KNOWN_MOVES, (u8*)gPSSData->field_2176);
+            knownMoves = GetAndCopyBoxMonDataAt(gPSSData->field_216E, gPSSData->field_216F, MON_DATA_KNOWN_MOVES, (u8 *)gPSSData->field_2176);
             if (knownMoves != 0
                 && !(gPSSData->field_2170 == gPSSData->field_216E && gPSSData->field_2171 == gPSSData->field_216F))
             {
@@ -1127,7 +1127,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         *(txtPtr++) = TEXT_COLOR_WHITE;
         *(txtPtr++) = TEXT_COLOR_LIGHT_GRAY;
         *(txtPtr++) = CHAR_SPACE;
-        *(txtPtr++) = CHAR_EXTRA_EMOJI;
+        *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = 5; // LV_2
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, gPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);

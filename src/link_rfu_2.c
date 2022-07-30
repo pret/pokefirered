@@ -280,7 +280,7 @@ static void Task_LinkLeaderSearchForChildren(u8 taskId)
     case 1:
         break;
     case 2:
-        rfu_LMAN_establishConnection(Rfu.parent_child, 0, 240, (u16*)sAcceptedSerialNos);
+        rfu_LMAN_establishConnection(Rfu.parent_child, 0, 240, (u16 *)sAcceptedSerialNos);
         Rfu.state = 3;
         gTasks[taskId].data[1] = 6;
         break;
@@ -371,7 +371,7 @@ static void Task_JoinGroupSearchForParent(u8 taskId)
     case 1:
         break;
     case 6:
-        rfu_LMAN_establishConnection(Rfu.parent_child, 0, 240, (u16*)sAcceptedSerialNos);
+        rfu_LMAN_establishConnection(Rfu.parent_child, 0, 240, (u16 *)sAcceptedSerialNos);
         Rfu.state = 7;
         gTasks[taskId].data[1] = 7;
         break;
@@ -456,7 +456,7 @@ static void Task_LinkRfu_UnionRoomListen(u8 taskId)
     case 1:
         break;
     case 17:
-        rfu_LMAN_establishConnection(MODE_P_C_SWITCH, 0, 240, (u16*)sAcceptedSerialNos);
+        rfu_LMAN_establishConnection(MODE_P_C_SWITCH, 0, 240, (u16 *)sAcceptedSerialNos);
         rfu_LMAN_setMSCCallback(MscCallback_Child);
         Rfu.state = 18;
         break;
@@ -501,7 +501,7 @@ static void Task_LinkRfu_UnionRoomListen(u8 taskId)
 
 void LinkRfu_CreateConnectionAsParent(void)
 {
-    rfu_LMAN_establishConnection(MODE_PARENT, 0, 240, (u16*)sAcceptedSerialNos);
+    rfu_LMAN_establishConnection(MODE_PARENT, 0, 240, (u16 *)sAcceptedSerialNos);
 }
 
 void LinkRfu_StopManagerBeforeEnteringChat(void)
@@ -1373,7 +1373,7 @@ static void WaitAllReadyToCloseLink(void)
     }
     if (count == playerCount)
     {
-        gBattleTypeFlags &= ~(BATTLE_TYPE_LINK_ESTABLISHED | 0xFFFF0000);
+        gBattleTypeFlags &= ~(BATTLE_TYPE_LINK_IN_BATTLE | 0xFFFF0000);
         if (Rfu.parent_child == MODE_CHILD)
         {
             Rfu.errorState = 3;
@@ -2647,7 +2647,7 @@ static void Task_RfuReconnectWithParent(u8 taskId)
 
     if (ContactedByParentAttemptingToReconnect())
     {
-        u8 id = GetPartnerIndexByNameAndTrainerID((u8*)data, ReadU16(&data[8]));
+        u8 id = GetPartnerIndexByNameAndTrainerID((u8 *)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
@@ -2692,7 +2692,7 @@ void CreateTask_RfuReconnectWithParent(const u8 *trainerName, u16 trainerId)
     Rfu.status = RFU_STATUS_OK;
     taskId = CreateTask(Task_RfuReconnectWithParent, 3);
     data = gTasks[taskId].data;
-    StringCopy((u8*)(data), trainerName);
+    StringCopy((u8 *)(data), trainerName);
     data[8] = trainerId;
 }
 

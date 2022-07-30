@@ -138,7 +138,7 @@ static void Task_DiplomaInit(u8 taskId)
         CopyBgTilemapBufferToVram(1);
         break;
     case 7:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case 8:
         SetVBlankCallback(VCBC_DiplomaOam);
@@ -167,7 +167,7 @@ static void Task_WaitForExit(u8 taskId)
     case 1:
         if (JOY_NEW(A_BUTTON))
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gDiploma->state++;
         }
         break;

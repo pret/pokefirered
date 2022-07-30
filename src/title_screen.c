@@ -638,7 +638,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
         if (!gPaletteFade.active && !IsSlashSpriteHidden(data[6]))
         {
             FadeOutMapMusic(10);
-            BeginNormalPaletteFade(0xFFFFFFFF, 3, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 3, 0, 0x10, RGB_BLACK);
             SignalEndTitleScreenPaletteSomethingTask();
             data[1]++;
         }
@@ -674,7 +674,7 @@ static void SetTitleScreenScene_Cry(s16 * data)
     case 0:
         if (!gPaletteFade.active)
         {
-            PlayCry1(TITLE_SPECIES, 0);
+            PlayCry_Normal(TITLE_SPECIES, 0);
             ScheduleHideSlashSprite(data[6]);
             data[2] = 0;
             data[1]++;

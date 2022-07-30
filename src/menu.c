@@ -44,7 +44,7 @@ void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 // not used
@@ -56,7 +56,7 @@ static void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 til
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -96,7 +96,7 @@ void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -112,7 +112,7 @@ void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 bas
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 // not used
@@ -124,7 +124,7 @@ static void DrawStdFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 baseTi
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -145,7 +145,7 @@ void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -195,7 +195,7 @@ void TopBarWindowPrintString(const u8 *string, u8 unused, bool8 copyToVram)
         width = GetStringWidth(0, string, 0);
         AddTextPrinterParameterized3(sTopBarWindowId, 0, -20 - width, 1, gUnknown_8456618, 0, string);
         if (copyToVram)
-            CopyWindowToVram(sTopBarWindowId, COPYWIN_BOTH);
+            CopyWindowToVram(sTopBarWindowId, COPYWIN_FULL);
     }
 }
 
@@ -228,7 +228,7 @@ void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgCo
         }
         AddTextPrinterParameterized4(sTopBarWindowId, 1, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
-            CopyWindowToVram(sTopBarWindowId, COPYWIN_BOTH);
+            CopyWindowToVram(sTopBarWindowId, COPYWIN_FULL);
     }
 }
 
@@ -236,7 +236,7 @@ void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgCo
 static void CopyTopBarWindowToVram(void)
 {
     if (sTopBarWindowId != 0xFF)
-        CopyWindowToVram(sTopBarWindowId, COPYWIN_BOTH);
+        CopyWindowToVram(sTopBarWindowId, COPYWIN_FULL);
 }
 
 void ClearTopBarWindow(void)
@@ -244,7 +244,7 @@ void ClearTopBarWindow(void)
     if (sTopBarWindowId != 0xFF)
     {
         FillWindowPixelBuffer(sTopBarWindowId, PIXEL_FILL(15));
-        CopyWindowToVram(sTopBarWindowId, COPYWIN_BOTH);
+        CopyWindowToVram(sTopBarWindowId, COPYWIN_FULL);
     }
 }
 
@@ -254,7 +254,7 @@ void DestroyTopBarWindow(void)
     {
         FillWindowPixelBuffer(sTopBarWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sTopBarWindowId);
-        CopyWindowToVram(sTopBarWindowId, COPYWIN_BOTH);
+        CopyWindowToVram(sTopBarWindowId, COPYWIN_FULL);
         RemoveWindow(sTopBarWindowId);
         sTopBarWindowId = 0xFF;
     }

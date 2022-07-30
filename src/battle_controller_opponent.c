@@ -493,7 +493,7 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         battleMon.abilityNum = GetMonData(&gEnemyParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gEnemyParty[monId], MON_DATA_OT_ID);
         GetMonData(&gEnemyParty[monId], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battleMon.nickname, nickname);
+        StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gEnemyParty[monId], MON_DATA_OT_NAME, battleMon.otName);
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); ++size)
@@ -1312,9 +1312,9 @@ static void OpponentHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         switch (*stringId)

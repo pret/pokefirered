@@ -21,7 +21,7 @@ u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y);
 void MapGridSetMetatileIdAt(s32, s32, u16);
 void MapGridSetMetatileEntryAt(s32, s32, u16);
 u8 MapGridGetZCoordAt(s32 x, s32 y);
-void GetCameraCoords(u16*, u16*);
+void GetCameraCoords(u16 *, u16 *);
 bool8 MapGridIsImpassableAt(s32, s32);
 s32 GetMapBorderIdAt(s32, s32);
 bool32 CanCameraMoveInDirection(s32);

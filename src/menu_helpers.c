@@ -149,9 +149,9 @@ void SetVBlankHBlankCallbacksToNull(void)
 void ResetVramOamAndBgCntRegs(void)
 {
     ResetAllBgsCoordinatesAndBgCntRegs();
-    CpuFill16(0, (void*) VRAM, VRAM_SIZE);
-    CpuFill32(0, (void*) OAM, OAM_SIZE);
-    CpuFill16(0, (void*) PLTT, PLTT_SIZE);
+    CpuFill16(0, (void *) VRAM, VRAM_SIZE);
+    CpuFill32(0, (void *) OAM, OAM_SIZE);
+    CpuFill16(0, (void *) PLTT, PLTT_SIZE);
 }
 
 void ResetAllBgsCoordinatesAndBgCntRegs(void)

@@ -885,14 +885,14 @@ void DexScreen_LoadResources(void)
     ScanlineEffect_Stop();
     ResetBgsAndClearDma3BusyFlags(TRUE);
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
-    SetBgTilemapBuffer(3, (u16*)Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(2, (u16*)Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(1, (u16*)Alloc(BG_SCREEN_SIZE));
-    SetBgTilemapBuffer(0, (u16*)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(3, (u16 *)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(2, (u16 *)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(1, (u16 *)Alloc(BG_SCREEN_SIZE));
+    SetBgTilemapBuffer(0, (u16 *)Alloc(BG_SCREEN_SIZE));
     if (natDex)
-        DecompressAndLoadBgGfxUsingHeap(3, (void*)sNatDexTiles, BG_SCREEN_SIZE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, (void *)sNatDexTiles, BG_SCREEN_SIZE, 0, 0);
     else
-        DecompressAndLoadBgGfxUsingHeap(3, (void*)sKantoDexTiles, BG_SCREEN_SIZE, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, (void *)sKantoDexTiles, BG_SCREEN_SIZE, 0, 0);
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     m4aSoundVSyncOn();
@@ -947,7 +947,7 @@ bool8 DoClosePokedex(void)
     switch (gMain.state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gMain.state++;
         return FALSE;
     case 1:
@@ -1017,7 +1017,7 @@ static void Task_PokedexScreen(u8 taskId)
         if (gPaletteFade.bufferTransferDisabled)
         {
             gPaletteFade.bufferTransferDisabled = FALSE;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0, RGB_WHITEALPHA);
         }
         else
             BeginNormalPaletteFade(~0x8000, 0, 16, 0, RGB_WHITEALPHA);
@@ -2881,7 +2881,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
         printerTemplate.currentX = x;
         printerTemplate.currentY = y;
 
-        AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+        AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
     }
 }
 
@@ -3355,7 +3355,7 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
         break;
     case 4:
         gPaletteFade.bufferTransferDisabled = 0;
-        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0xffff);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xffff);
         ShowBg(3);
         ShowBg(2);
         ShowBg(1);

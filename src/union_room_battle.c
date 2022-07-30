@@ -78,7 +78,7 @@ static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s3
         DrawTextBorderOuter(0, 0x001, 0xD);
         UnionRoomBattle_CreateTextPrinter(0, str, 0, 2, speed);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -133,7 +133,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         gMain.state++;
         break;
@@ -158,7 +158,7 @@ void CB2_UnionRoomBattle(void)
         {
             if (gBlockRecvBuffer[0][0] == (ACTIVITY_ACCEPT | 0x40) && gBlockRecvBuffer[1][0] == (ACTIVITY_ACCEPT | 0x40))
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gMain.state = 50;
             }
             else

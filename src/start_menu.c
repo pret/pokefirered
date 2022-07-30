@@ -874,7 +874,7 @@ bool32 DoSetUpSaveAfterLinkBattle(u8 *state)
         break;
     case 3:
         ShowBg(0);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB_WhileSavingAfterLinkBattle);
         EnableInterrupts(INTR_FLAG_VBLANK);
         break;
@@ -912,8 +912,8 @@ static void task50_after_link_battle_save(u8 taskId)
             AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0xFF, NULL, 2, 1, 3);
             DrawTextBorderOuter(0, 0x008, 0x0F);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, COPYWIN_BOTH);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            CopyWindowToVram(0, COPYWIN_FULL);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             if (gWirelessCommType != 0 && InUnionRoom())
                 data[0] = 5;
             else
@@ -932,7 +932,7 @@ static void task50_after_link_battle_save(u8 taskId)
             }
             break;
         case 3:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             data[0] = 4;
             break;
         case 4:

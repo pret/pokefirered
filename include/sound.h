@@ -24,7 +24,7 @@ bool8 IsBGMPausedOrStopped(void);
 void FadeInBGM(u8 speed);
 void FadeOutBGM(u8 speed);
 bool8 IsBGMStopped(void);
-void PlayCry1(u16 species, s8 pan);
+void PlayCry_Normal(u16 species, s8 pan);
 void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority);
 void PlayCry3(u16 species, s8 pan, u8 mode);
 void PlayCry4(u16 species, s8 pan, u8 mode);

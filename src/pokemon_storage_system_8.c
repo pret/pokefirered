@@ -126,7 +126,7 @@ void sub_8095B5C(void)
         {
             spriteSheet.tag = TAG_TILE_7 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
-            gPSSData->itemIconSprites[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
+            gPSSData->itemIconSprites[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void *)(OBJ_VRAM0);
             gPSSData->itemIconSprites[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
             gPSSData->itemIconSprites[i].palIndex *= 16;
             gPSSData->itemIconSprites[i].palIndex += 0x100;

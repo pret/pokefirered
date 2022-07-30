@@ -341,7 +341,7 @@ void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 an
     LoadBgGfxByAnimType(animType);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     TextWindow_SetUserSelectedFrame(0, 0x000, 0xe0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
     ShowBg(3);
     HideBg(1);
@@ -370,7 +370,7 @@ void PSA_ShowMessageWindow(void)
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     DrawTextBorderOuter(0, 0x001, 0xE);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 void PSA_HideMessageWindow(void)
@@ -612,7 +612,7 @@ UNUSED void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
     DrawTextBorderOuter(1, 0x001, 0xE);
     DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 UNUSED void PSA_DrawLevelUpWindowPg2(u16 *currStats)
 {
@@ -1508,13 +1508,13 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *beforeStats, u16 *afterStats, u8 bg
 
     for (i = 0; i < 6; i++)
     {
-        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, sLevelUpWindowStatNames[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SKIP_DRAW, sLevelUpWindowStatNames[i]);
         StringCopy(textbuf, diffStats[i] >= 0 ? gUnknown_841B2DC : gUnknown_841B2E5);
-        AddTextPrinterParameterized3(windowId, 2, 56, i * 15, textColor, TEXT_SPEED_FF, textbuf);
+        AddTextPrinterParameterized3(windowId, 2, 56, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
         textbuf[0] = CHAR_SPACE;
         x = abs(diffStats[i]) < 10 ? 12 : 6;
         ConvertIntToDecimalStringN(textbuf + 1, abs(diffStats[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
-        AddTextPrinterParameterized3(windowId, 2, x + 56, i * 15, textColor, TEXT_SPEED_FF, textbuf);
+        AddTextPrinterParameterized3(windowId, 2, x + 56, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
     }
 }
 
@@ -1550,7 +1550,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgColor, u8 fgColor, 
             ndigits = 1;
         ConvertIntToDecimalStringN(textbuf, statsRearrange[i], STR_CONV_MODE_LEFT_ALIGN, ndigits);
         x = 6 * (4 - ndigits);
-        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, sLevelUpWindowStatNames[i]);
-        AddTextPrinterParameterized3(windowId, 2, 56 + x, i * 15, textColor, TEXT_SPEED_FF, textbuf);
+        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SKIP_DRAW, sLevelUpWindowStatNames[i]);
+        AddTextPrinterParameterized3(windowId, 2, 56 + x, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
     }
 }

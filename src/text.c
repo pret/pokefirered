@@ -461,7 +461,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     {
         if (subStruct->downArrowDelay != 0)
         {
-            subStruct->downArrowDelay = ((*(u32*)&textPrinter->subUnion.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
+            subStruct->downArrowDelay = ((*(u32 *)&textPrinter->subUnion.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
         }
         else
         {
@@ -498,7 +498,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
             CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
 
             subStruct->downArrowDelay = 0x8;
-            subStruct->downArrowYPosIdx = (*(u32*)subStruct << 17 >> 30) + 1;
+            subStruct->downArrowYPosIdx = (*(u32 *)subStruct << 17 >> 30) + 1;
         }
     }
 }
@@ -785,7 +785,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->state = 3;
             TextPrinterInitDownArrowCounters(textPrinter);
             return 3;
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
             currChar = *textPrinter->printerTemplate.currentChar | 0x100;
             textPrinter->printerTemplate.currentChar++;
             break;
@@ -971,7 +971,7 @@ s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
         case CHAR_PROMPT_CLEAR:
             break;
         case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
             ++strPos;
         default:
             ++width;
@@ -1121,8 +1121,8 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             }
             break;
         case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_EMOJI:
-            if (*str == CHAR_EXTRA_EMOJI)
+        case CHAR_EXTRA_SYMBOL:
+            if (*str == CHAR_EXTRA_SYMBOL)
                 glyphWidth = func(*++str | 0x100, isJapanese);
             else
                 glyphWidth = GetKeypadIconWidth(*++str);
@@ -1241,7 +1241,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a
             break;
         case CHAR_DYNAMIC_PLACEHOLDER:
         case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_EMOJI:
+        case CHAR_EXTRA_SYMBOL:
         case PLACEHOLDER_BEGIN:
             ++strPos;
             break;
@@ -1345,7 +1345,7 @@ u8 GetKeypadIconHeight(u8 keypadIconId)
 
 void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
 {
-    const u16* glyphs;
+    const u16 *glyphs;
 
     if (isJapanese == 1)
     {
@@ -1375,7 +1375,7 @@ s32 GetGlyphWidthFont0(u16 glyphId, bool32 isJapanese)
 
 void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
 {
-    const u16* glyphs;
+    const u16 *glyphs;
 
     if (isJapanese == TRUE)
     {
@@ -1408,7 +1408,7 @@ s32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese)
 
 void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
 {
-    const u16* glyphs;
+    const u16 *glyphs;
     int i;
     u8 lastColor;
 
@@ -1481,7 +1481,7 @@ s32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese)
 
 static void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese)
 {
-    const u16* glyphs;
+    const u16 *glyphs;
     int i;
     u8 lastColor;
 
@@ -1524,7 +1524,7 @@ s32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese)
 
 static void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese)
 {
-    const u16* glyphs;
+    const u16 *glyphs;
     int i;
     u8 lastColor;
 
@@ -1595,7 +1595,7 @@ s32 GetGlyphWidthFont4(u16 glyphId, bool32 isJapanese)
 
 void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese)
 {
-    const u16* glyphs;
+    const u16 *glyphs;
     int i;
     u8 lastColor;
 
@@ -1666,7 +1666,7 @@ s32 GetGlyphWidthFont5(u16 glyphId, bool32 isJapanese)
 
 void DecompressGlyphFont9(u16 glyphId)
 {
-    const u16* glyphs = sFont9JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
+    const u16 *glyphs = sFont9JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
     DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
     DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
     gGlyphInfo.width = 8;

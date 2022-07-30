@@ -5591,46 +5591,46 @@ SolarBeamAbsorbEffect::
 	return
 
 SolarBeamUnleash::
-	call SetSolarbeamBg
+	call SetSolarBeamBg
 	panse_1B SE_M_SOLAR_BEAM, 192, 63, 2, 0
-	createvisualtask AnimTask_CreateSmallSolarbeamOrbs, 5, 
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
+	createvisualtask AnimTask_CreateSmallSolarBeamOrbs, 5, 
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
 	delay 4
 	createvisualtask AnimTask_BlendSelected, 10, 4, 1, 0, 10, RGB(25, 31, 0)
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
 	delay 4
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 2, 0, 65, 1
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
 	delay 4
 	call SolarBeamUnleash1
 	call SolarBeamUnleash1
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendSelected, 10, 4, 1, 10, 0, RGB(25, 31, 0)
-	call UnsetSolarbeamBg
+	call UnsetSolarBeamBg
 	goto SolarBeamEnd
 
 SolarBeamUnleash1::
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 0
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 3
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 4
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 5
 	delay 4
-	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
+	createsprite gSolarBeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 6
 	delay 4
 	return
 
@@ -10407,29 +10407,29 @@ UnsetSkyBg::
 	waitbgfadein
 	return
 
-SetSolarbeamBg::
+SetSolarBeamBg::
 	createvisualtask AnimTask_IsContest, 2, 
-	jumpargeq 7, 1, SetSolarbeamBgContest
+	jumpargeq 7, 1, SetSolarBeamBgContest
 	createvisualtask AnimTask_IsTargetPlayerSide, 2, 
-	jumpargeq 7, 0, SetSolarbeamBgOpponent
-	goto SetSolarbeamBgPlayer
-SetSolarbeamBgContinue::
+	jumpargeq 7, 0, SetSolarBeamBgOpponent
+	goto SetSolarBeamBgPlayer
+SetSolarBeamBgContinue::
 	waitbgfadein
 	return
 
-SetSolarbeamBgContest::
-	fadetobg BG_SOLARBEAM_CONTESTS
-	goto SetSolarbeamBgContinue
+SetSolarBeamBgContest::
+	fadetobg BG_SOLAR_BEAM_CONTESTS
+	goto SetSolarBeamBgContinue
 
-SetSolarbeamBgPlayer::
-	fadetobg BG_SOLARBEAM_PLAYER
-	goto SetSolarbeamBgContinue
+SetSolarBeamBgPlayer::
+	fadetobg BG_SOLAR_BEAM_PLAYER
+	goto SetSolarBeamBgContinue
 
-SetSolarbeamBgOpponent::
-	fadetobg BG_SOLARBEAM_OPPONENT
-	goto SetSolarbeamBgContinue
+SetSolarBeamBgOpponent::
+	fadetobg BG_SOLAR_BEAM_OPPONENT
+	goto SetSolarBeamBgContinue
 
-UnsetSolarbeamBg::
+UnsetSolarBeamBg::
 	restorebg
 	waitbgfadein
 	return

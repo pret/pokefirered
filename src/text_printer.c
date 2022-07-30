@@ -90,7 +90,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
     sTempTextPrinter.japanese = 0;
 
     GenerateFontHalfRowLookupTable(textSubPrinter->fgColor, textSubPrinter->bgColor, textSubPrinter->shadowColor);
-    if (speed != TEXT_SPEED_FF && speed != 0x0)
+    if (speed != TEXT_SKIP_DRAW && speed != 0x0)
     {
         --sTempTextPrinter.textSpeed;
         sTextPrinters[textSubPrinter->windowId] = sTempTextPrinter;
@@ -104,7 +104,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
                 break;
         }
 
-        if (speed != TEXT_SPEED_FF)
+        if (speed != TEXT_SKIP_DRAW)
           CopyWindowToVram(sTempTextPrinter.printerTemplate.windowId, COPYWIN_GFX);
         sTextPrinters[textSubPrinter->windowId].active = 0;
     }

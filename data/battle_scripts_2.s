@@ -99,7 +99,7 @@ BattleScript_CaughtPokemonDone::
 BattleScript_OldMan_Pokedude_CaughtMessage::
 	printstring STRINGID_GOTCHAPKMNCAUGHT2
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
-	atk57
+	endlinkbattle
 	finishturn
 
 BattleScript_ShakeBallThrow::

@@ -512,7 +512,7 @@ static bool8 LoadBagMenuGraphics(void)
 
 static void FadeOutOfBagMenu(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     CreateTask(Task_WaitFadeOutOfBagMenu, 0);
     SetVBlankCallback(VBlankCB_BagMenuRun);
     SetMainCallback2(CB2_BagMenuRun);
@@ -897,7 +897,7 @@ static void DestroyBagMenuResources(void)
 
 void ItemMenu_StartFadeToExitCallback(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ItemMenu_WaitFadeAndSwitchToExitCallback;
 }
 
@@ -925,8 +925,8 @@ static void ShowBagOrBeginWin0OpenTask(void)
     LoadPalette(&paldata, 0x00, 0x02);
     SetGpuReg(REG_OFFSET_WININ, 0);
     SetGpuReg(REG_OFFSET_WINOUT, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
-    BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     if (gBagMenuState.bagOpen == TRUE)
     {
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
@@ -2144,7 +2144,7 @@ static void Task_Bag_OldManTutorial(u8 taskId)
 
 static void Task_Pokedude_FadeFromBag(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_Pokedude_WaitFadeAndExitBag;
 }
 

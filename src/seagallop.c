@@ -226,11 +226,11 @@ static void CB2_SetUpSeagallopScene(void)
         break;
     case 5:
         LoadFerrySpriteResources();
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 7:

@@ -494,8 +494,8 @@ static void TeachyTvMainCallback(void)
         ScheduleBgCopyTilemapToVram(2);
         ScheduleBgCopyTilemapToVram(3);
         SetHelpContextDontCheckBattle(HELPCONTEXT_BAG);
-        BlendPalettes(0xFFFFFFFF, 0x10, 0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BlendPalettes(PALETTES_ALL, 0x10, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, 0);
         SetVBlankCallback(TeachyTvVblankHandler);
         SetMainCallback2(TeachyTvCallback);
         break;
@@ -687,7 +687,7 @@ static void TeachyTvFree(void)
 
 static void TeachyTvQuitBeginFade(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, 0);
     gTasks[taskId].func = TeachyTvQuitFadeControlAndTaskDel;
 }
 
@@ -1292,7 +1292,7 @@ static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u1
 
 static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapLayout *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
 {
-    u16 * metaTileEntryAddr = mapEntry < 0x280 ? &((u16*)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16*)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
+    u16 * metaTileEntryAddr = mapEntry < 0x280 ? &((u16 *)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16 *)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
     buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
     buf1[1] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[1]) << 12) + 4 * offset + 1;
     buf1[32] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[2]) << 12) + 4 * offset + 2;

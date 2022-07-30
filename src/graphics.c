@@ -1033,7 +1033,7 @@ const u32 gBattleAnimBgTilemap_Ghost[] = INCBIN_U32("graphics/battle_anims/backg
 
 const u32 gBattleAnimSpritePal_WhipHit[] = INCBIN_U32("graphics/battle_anims/sprites/whip_hit.gbapal.lz");
 
-const u32 gBattleAnimBgPalette_Solarbeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/solarbeam.gbapal.lz");
+const u32 gBattleAnimBgPalette_SolarBeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/solarbeam.gbapal.lz");
 
 const u32 gFile_graphics_unknown_unknown_E7CFB0_tilemap[] = INCBIN_U32("graphics/unknown/unknown_E7CFB0.bin.lz");
 

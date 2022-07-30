@@ -2475,9 +2475,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         attack = (150 * attack) / 100;
     if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
         defense = (150 * defense) / 100;
-    if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, 0xFD, 0))
+    if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
         gBattleMovePower /= 2;
-    if (type == TYPE_FIRE && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, 0xFE, 0))
+    if (type == TYPE_FIRE && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_WATER_SPORT, 0))
         gBattleMovePower /= 2;
     if (type == TYPE_GRASS && attacker->ability == ABILITY_OVERGROW && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
@@ -2582,7 +2582,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // are effects of weather negated with cloud nine or air lock
         if (WEATHER_HAS_EFFECT2)
         {
-            if (gBattleWeather & WEATHER_RAIN_TEMPORARY)
+            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
             {
                 switch (type)
                 {
@@ -2596,11 +2596,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
 
             // any weather except sun weakens solar beam
-            if ((gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL_TEMPORARY)) && gCurrentMove == MOVE_SOLAR_BEAM)
                 damage /= 2;
 
             // sunny
-            if (gBattleWeather & WEATHER_SUN_ANY)
+            if (gBattleWeather & B_WEATHER_SUN)
             {
                 switch (type)
                 {
@@ -2869,7 +2869,7 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
     return substruct;
 }
 
-u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
+u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
 {
     u32 ret;
 
@@ -3201,8 +3201,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_WORLD_RIBBON:
         retVal = substruct3->worldRibbon;
         break;
-    case MON_DATA_FILLER:
-        retVal = substruct3->filler;
+    case MON_DATA_UNUSED_RIBBONS:
+        retVal = substruct3->unusedRibbons;
         break;
     case MON_DATA_EVENT_LEGAL:
         retVal = substruct3->eventLegal;
@@ -3350,7 +3350,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     case MON_DATA_NATIONAL_RIBBON:
     case MON_DATA_EARTH_RIBBON:
     case MON_DATA_WORLD_RIBBON:
-    case MON_DATA_FILLER:
+    case MON_DATA_UNUSED_RIBBONS:
     case MON_DATA_EVENT_LEGAL:
     case MON_DATA_KNOWN_MOVES:
     case MON_DATA_RIBBON_COUNT:
@@ -3604,8 +3604,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_WORLD_RIBBON:
         SET8(substruct3->worldRibbon);
         break;
-    case MON_DATA_FILLER:
-        SET8(substruct3->filler);
+    case MON_DATA_UNUSED_RIBBONS:
+        SET8(substruct3->unusedRibbons);
         break;
     case MON_DATA_EVENT_LEGAL:
         SET8(substruct3->eventLegal);
@@ -3873,7 +3873,7 @@ void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
 
 static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
 {
-    u16* hpSwitchout;
+    u16 *hpSwitchout;
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH * 2]; // Why is the nickname array here longer in FR/LG?
 
@@ -3912,7 +3912,7 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].type2 = gBaseStats[gBattleMons[battlerId].species].type2;
     gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gBattleMons[battlerId].nickname, nickname);
+    StringCopy_Nickname(gBattleMons[battlerId].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battlerId].otName);
 
     hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(battlerId)];
@@ -3931,7 +3931,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, 0);
 }
 
-bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, u8 e)
+bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
 {
     u32 data;
     s32 friendship;
@@ -4201,7 +4201,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         }
                         if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                         {
-                            if (e == 0)
+                            if (!usedByAI)
                             {
                                 data = GetMonData(mon, MON_DATA_HP, NULL) + data;
                                 if (data > GetMonData(mon, MON_DATA_MAX_HP, NULL))
@@ -4217,7 +4217,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                         // I have to re-use this variable to match.
                                         r5 = gActiveBattler;
                                         gActiveBattler = battleMonId;
-                                        BtlController_EmitGetMonData(0, 0, 0);
+                                        BtlController_EmitGetMonData(BUFFER_A, 0, 0);
                                         MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = r5;
                                     }
@@ -4845,7 +4845,7 @@ static void BufferStatRoseMessage(int stat)
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[stat]]);
     StringCopy(gBattleTextBuff2, gBattleText_Rose);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
+    BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
 }
 
 const u8 *Battle_PrintStatBoosterEffectMessage(u16 itemId)
@@ -5987,7 +5987,7 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     u16 statValue;
     u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK_ESTABLISHED || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
     {
         return statValue = 0;
     }

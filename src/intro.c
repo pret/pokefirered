@@ -811,7 +811,7 @@ static bool8 RunCopyrightScreen(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xFFFF);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Copyright);
@@ -828,7 +828,7 @@ static bool8 RunCopyrightScreen(void)
         GameCubeMultiBoot_Main(&sGcmb);
         if (sGcmb.gcmb_field_2 != 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gMain.state++;
         }
         break;
@@ -916,7 +916,7 @@ static void CB2_SetUpIntro(void)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             StartIntroSequence();
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             SetMainCallback2(CB2_Intro);
             SetVBlankCallback(VBlankCB_Intro);
         }
@@ -991,7 +991,7 @@ static void IntroCB_Init(struct IntroSequenceData * this)
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         this->state++;
         break;
     case 1:
@@ -1016,7 +1016,7 @@ static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * this)
         break;
     case 1:
         ShowBg(3);
-        BlendPalettes(0xFFFFFFFF, 0x00, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x00, RGB_BLACK);
         this->state++;
         break;
     case 2:

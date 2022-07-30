@@ -954,7 +954,7 @@ static void CB2_ReturnFromLinkTrade2(void)
         gMain.state++;
         break;
     case 18:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 19:
@@ -1142,8 +1142,8 @@ void CB2_ReturnToTradeMenuFromSummary(void)
         break;
     case 18:
         gPaletteFade.bufferTransferDisabled = FALSE;
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 19:
@@ -1183,7 +1183,7 @@ static void TradeMenuCB_9(void)
 {
     if (++sTradeMenuResourcesPtr->loadUISpritesState >= 16)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeMenuResourcesPtr->tradeMenuCBnum = 10;
     }
 }
@@ -1527,7 +1527,7 @@ static void Slave_HandleBlockReceivedStatus(u8 mpId, u8 blockReceivedFlags)
         switch (gBlockRecvBuffer[0][0])
         {
         case 0xEEBB:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             PrintTradeErrorOrStatusMessage(TRADESTATMSG_WAITINGFORFRIEND);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 11;
             break;
@@ -1543,7 +1543,7 @@ static void Slave_HandleBlockReceivedStatus(u8 mpId, u8 blockReceivedFlags)
             sTradeMenuResourcesPtr->tradeMenuCBnum = 7;
             break;
         case 0xCCDD:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 10;
             break;
         case 0xDDEE:
@@ -1594,7 +1594,7 @@ static void Master_HandleCommunication(void)
             sTradeMenuResourcesPtr->linkData[0] = 0xEEBB;
             sTradeMenuResourcesPtr->linkData[1] = 0;
             ScheduleLinkTaskWithDelay(5, 0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sTradeMenuResourcesPtr->unk_78 = sTradeMenuResourcesPtr->unk_79 = 0;
             sTradeMenuResourcesPtr->tradeMenuCBnum = 11;
         }
@@ -1732,12 +1732,12 @@ static void TradeMenuCB_0(void)
             UnionRoomAndTradeMenuPrintOptions(1, 3, 16, 2, sMenuAction_SummaryTrade);
             Menu_InitCursor(1, 3, 0, 0, 16, 2, 0);
             PutWindowTilemap(1);
-            CopyWindowToVram(1, COPYWIN_BOTH);
+            CopyWindowToVram(1, COPYWIN_FULL);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 1;
         }
         else if (sTradeMenuResourcesPtr->tradeMenuCursorPosition < 12)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 2;
         }
         else if (sTradeMenuResourcesPtr->tradeMenuCursorPosition == 12)
@@ -1774,7 +1774,7 @@ static void TradeMenuCB_1(void)
     case MENU_NOTHING_CHOSEN:
         break;
     case 0: // SUMMARY
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeMenuResourcesPtr->tradeMenuCBnum = 2;
         break;
     case 1: // Trade
@@ -2164,9 +2164,9 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
         BuildMovesString(movesString, whichParty, partyIdx);
         AddTextPrinterParameterized4((side * 2) + 15, 1, 0, 0, 0, 0, sTextColor_PartyMonNickname, 0, movesString);
         PutWindowTilemap((side * 2) + 14);
-        CopyWindowToVram((side * 2) + 14, COPYWIN_BOTH);
+        CopyWindowToVram((side * 2) + 14, COPYWIN_FULL);
         PutWindowTilemap((side * 2) + 15);
-        CopyWindowToVram((side * 2) + 15, COPYWIN_BOTH);
+        CopyWindowToVram((side * 2) + 15, COPYWIN_FULL);
         sTradeMenuResourcesPtr->menuRedrawState[side]++;
         break;
     case 4:
@@ -2183,7 +2183,7 @@ static u8 GetNicknameStringWidthByPartyAndMonIdx(u8 *dest, u8 whichParty, u8 par
         GetMonData(&gPlayerParty[partyIdx], MON_DATA_NICKNAME, nickname);
     else
         GetMonData(&gEnemyParty[partyIdx], MON_DATA_NICKNAME, nickname);
-    StringCopy10(dest, nickname);
+    StringCopy_Nickname(dest, nickname);
     return GetStringWidth(0, dest, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
 }
 
@@ -2234,7 +2234,7 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, const u8 *str)
     xPos = (64u - GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING))) / 2;
     AddTextPrinterParameterized3(windowId, 0, xPos, 4, sTextColor_PartyMonNickname, speed, str);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void PrintPartyNicknames(u8 whichParty)
@@ -2246,7 +2246,7 @@ static void PrintPartyNicknames(u8 whichParty)
     for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[whichParty]; i++)
     {
         GetMonData(&party[i], MON_DATA_NICKNAME, buff);
-        StringCopy10(nickname, buff);
+        StringCopy_Nickname(nickname, buff);
         PrintPartyMonNickname(whichParty, i, nickname);
     }
 }
@@ -2445,7 +2445,7 @@ static void PrintTradeErrorOrStatusMessage(u8 idx)
     AddTextPrinterParameterized(0, 3, sTradeErrorOrStatusMessagePtrs[idx], 0, 2, 0xFF, NULL);
     DrawTextBorderOuter(0, 0x014, 12);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 LoadUISprites(void)

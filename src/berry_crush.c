@@ -1274,7 +1274,7 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame * game, u8 *args)
         {
             AddTextPrinterParameterized2(0, 2, sMessages[bMsgId], game->textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:
         if (!IsTextPrinterActive(0))
@@ -2223,7 +2223,7 @@ static u32 Cmd_SaveGame(struct BerryCrushGame * game, u8 *args)
             return 0;
         DrawDialogueFrame(0, FALSE);
         AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         CreateTask(Task_LinkSave, 0);
         break;
     case 3:
@@ -2370,7 +2370,7 @@ static u32 Cmd_StopGame(struct BerryCrushGame * game, UNUSED u8 *args)
             AddTextPrinterParameterized2(0, 2, sMessages[MSG_NO_BERRIES], game->textSpeed, NULL, 2, 1, 3);
         else
             AddTextPrinterParameterized2(0, 2, sMessages[MSG_DROPPED], game->textSpeed, NULL, 2, 1, 3);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:
         if (IsTextPrinterActive(0))
@@ -3073,7 +3073,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame * game, struct BerryCrushG
         printCrushingResults(game);
         break;
     case 5:
-        CopyWindowToVram(spriteManager->resultsWindowId, COPYWIN_BOTH);
+        CopyWindowToVram(spriteManager->resultsWindowId, COPYWIN_FULL);
         spriteManager->resultsState = 0;
         return TRUE;
     }
@@ -3166,7 +3166,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
             yPos += 14;
             score = 0;
         }
-        CopyWindowToVram(tWindowId, COPYWIN_BOTH);
+        CopyWindowToVram(tWindowId, COPYWIN_FULL);
         break;
     case 2:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
@@ -3263,7 +3263,7 @@ static void DrawPlayerNameWindows(struct BerryCrushGame * game)
                 game->players[i].name
             );
         }
-        CopyWindowToVram(game->gfx.nameWindowIds[i], COPYWIN_BOTH);
+        CopyWindowToVram(game->gfx.nameWindowIds[i], COPYWIN_FULL);
     }
     CopyBgTilemapBufferToVram(0);
 }

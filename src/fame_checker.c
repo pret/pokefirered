@@ -695,7 +695,7 @@ static void MainCB2_LoadFameChecker(void)
             LoadUISpriteSheetsAndPalettes();
             CreateAllFlavorTextIcons(FAMECHECKER_OAK);
             WipeMsgBoxAndTransfer();
-            BeginNormalPaletteFade(0xFFFFFFFF,0, 16, 0, 0);
+            BeginNormalPaletteFade(PALETTES_ALL,0, 16, 0, 0);
             gMain.state++;
             break;
         case 7:
@@ -994,7 +994,7 @@ static void Setup_DrawMsgAndListBoxes(void)
 static void FC_PutWindowTilemapAndCopyWindowToVramMode3(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
@@ -1010,7 +1010,7 @@ static bool8 SetMessageSelectorIconObjMode(u8 spriteId, u8 objMode)
 static void Task_StartToCloseFameChecker(u8 taskId)
 {
     PlaySE(SE_M_SWIFT);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
     gTasks[taskId].func = Task_DestroyAssetsAndCloseFameChecker;
 }
 
@@ -1578,7 +1578,7 @@ static u8 FC_PopulateListMenu(void)
 static void FC_PutWindowTilemapAndCopyWindowToVramMode3_2(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void FC_CreateScrollIndicatorArrowPair(void)

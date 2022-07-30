@@ -256,8 +256,8 @@ static void CB2_LoadInterface(void)
         UnionRoomChat_RunDisplaySubtasks();
         if (!UnionRoomChat_RunDisplaySubtask0())
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
@@ -887,7 +887,7 @@ static void ChatEntryRoutine_SaveAndExit(void)
             sWork->routineState = 12;
         break;
     case 12:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sWork->routineState = 13;
         break;
     case 13:
@@ -972,7 +972,7 @@ static void AppendCharacterToChatMessageBuffer(void)
         charsStr = gUnionRoomKeyboardText[sWork->currentPage][sWork->currentRow];
         for (i = 0; i < sWork->currentCol; i++)
         {
-            if (*charsStr == CHAR_EXTRA_EMOJI)
+            if (*charsStr == CHAR_EXTRA_SYMBOL)
                 charsStr++;
             charsStr++;
         }
@@ -995,7 +995,7 @@ static void AppendCharacterToChatMessageBuffer(void)
     str = GetEndOfUnk1A();
     while (--strLength != -1 && sWork->bufferCursorPos < MESSAGE_BUFFER_NCHAR)
     {
-        if (*charsStr == CHAR_EXTRA_EMOJI)
+        if (*charsStr == CHAR_EXTRA_SYMBOL)
         {
             *str = *charsStr;
             charsStr++;
@@ -1030,7 +1030,7 @@ static void ToggleCaseOfLastCharacterInChatMessageBuffer(void)
 
     sWork->lastBufferCursorPos = sWork->bufferCursorPos - 1;
     str = GetPtrToLastCharOfUnk1A();
-    if (*str != CHAR_EXTRA_EMOJI)
+    if (*str != CHAR_EXTRA_SYMBOL)
     {
         character = sCaseToggleTable[*str];
         if (character)
@@ -1088,7 +1088,7 @@ static u8 *GetPtrToLastCharOfUnk1A(void)
     while (*str != EOS)
     {
         str2 = str;
-        if (*str == CHAR_EXTRA_EMOJI)
+        if (*str == CHAR_EXTRA_SYMBOL)
             str++;
         str++;
     }
@@ -1109,7 +1109,7 @@ static u16 GetNumCharsInMessageEntryBuffer(void)
         strLength -= 10;
         for (i = 0; i < strLength; i++)
         {
-            if (*str == CHAR_EXTRA_EMOJI)
+            if (*str == CHAR_EXTRA_SYMBOL)
                 str++;
 
             str++;
@@ -1250,7 +1250,7 @@ u8 *UnionRoomChat_GetEndOfMessageEntryBuffer(void)
     u8 *str = sWork->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
     {
-        if (*str == CHAR_EXTRA_EMOJI)
+        if (*str == CHAR_EXTRA_SYMBOL)
             str++;
 
         str++;
@@ -1268,7 +1268,7 @@ u16 UnionRoomChat_GetNumCharsInMessageEntryBuffer(void)
     u8 *str = sWork->messageEntryBuffer;
     for (count = 0, i = 0; i < numChars; count++, i++)
     {
-        if (*str == CHAR_EXTRA_EMOJI)
+        if (*str == CHAR_EXTRA_SYMBOL)
             str++;
 
         str++;

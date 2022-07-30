@@ -881,7 +881,7 @@ void CB2_InitTradeAnim_LinkTrade(void)
         gMain.state++;
         break;
     case 10:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         sTradeData->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedTradeMonPositions[0]], MON_DATA_SPECIES2);
         sTradeData->monSpecies[1] = GetMonData(&gEnemyParty[gSelectedTradeMonPositions[1] % 6], MON_DATA_SPECIES2);
@@ -922,7 +922,7 @@ void LinkTradeDrawWindow(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void TradeAnimInit_LoadGfx(void)
@@ -999,7 +999,7 @@ static void CB2_InitTradeAnim_InGameTrade(void)
         LoadTradeMonPic(1, 1);
         FillWindowPixelBuffer(0, PIXEL_FILL(15));
         PutWindowTilemap(0);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gMain.state++;
         break;
     case 9:
@@ -1239,17 +1239,17 @@ static void TradeBufferOTnameAndNicknames(void)
         mpId = GetMultiplayerId();
         StringCopy(gStringVar1, gLinkPlayers[mpId ^ 1].name);
         GetMonData(&gEnemyParty[gSelectedTradeMonPositions[1] % 6], MON_DATA_NICKNAME, nickname);
-        StringCopy10(gStringVar3, nickname);
+        StringCopy_Nickname(gStringVar3, nickname);
         GetMonData(&gPlayerParty[gSelectedTradeMonPositions[0]], MON_DATA_NICKNAME, nickname);
-        StringCopy10(gStringVar2, nickname);
+        StringCopy_Nickname(gStringVar2, nickname);
     }
     else
     {
         inGameTrade = &sInGameTrades[gSpecialVar_0x8004];
         StringCopy(gStringVar1, inGameTrade->otName);
-        StringCopy10(gStringVar3, inGameTrade->nickname);
+        StringCopy_Nickname(gStringVar3, inGameTrade->nickname);
         GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
-        StringCopy10(gStringVar2, nickname);
+        StringCopy_Nickname(gStringVar2, nickname);
     }
 }
 
@@ -1294,7 +1294,7 @@ static bool8 DoTradeAnim_Cable(void)
 
         if (sTradeData->tradeSpecies[0] != SPECIES_EGG)
         {
-            PlayCry1(sTradeData->tradeSpecies[0], 0);
+            PlayCry_Normal(sTradeData->tradeSpecies[0], 0);
         }
 
         sTradeData->state = 11;
@@ -1322,7 +1322,7 @@ static bool8 DoTradeAnim_Cable(void)
         // The game waits here for the sprite to finish its animation sequence.
         break;
     case 14:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeData->state = 20;
         break;
     case 20:
@@ -1330,12 +1330,12 @@ static bool8 DoTradeAnim_Cable(void)
         {
             SetTradeSequenceBgGpuRegs(4);
             FillWindowPixelBuffer(0, PIXEL_FILL(15));
-            CopyWindowToVram(0, COPYWIN_BOTH);
+            CopyWindowToVram(0, COPYWIN_FULL);
             sTradeData->state++;
         }
         break;
     case 21:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         sTradeData->state++;
         break;
     case 22:
@@ -1412,7 +1412,7 @@ static bool8 DoTradeAnim_Cable(void)
         }
         break;
     case 29:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sTradeData->state = 30;
         break;
     case 30:
@@ -1425,7 +1425,7 @@ static bool8 DoTradeAnim_Cable(void)
         }
         break;
     case 31:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         sTradeData->tradeGlow1SpriteId = CreateSprite(&sGlowBallSpriteTemplate, 111, 170, 0);
         sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 129, -10, 0);
         sTradeData->state++;
@@ -1504,7 +1504,7 @@ static bool8 DoTradeAnim_Cable(void)
         gSprites[sTradeData->gbaScreenSpriteId].y2 += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].y2 <= -222)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
             sTradeData->state++;
             DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
             DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
@@ -1522,7 +1522,7 @@ static bool8 DoTradeAnim_Cable(void)
         }
         break;
     case 41:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         sTradeData->state++;
         break;
     case 42:
@@ -1600,7 +1600,7 @@ static bool8 DoTradeAnim_Cable(void)
         sTradeData->sXY = 0x8000 / sTradeData->bg2Zoom;
         break;
     case 52:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeData->state = 60;
         break;
 
@@ -1615,7 +1615,7 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case 61:
         gPaletteFade.bufferTransferDisabled = FALSE;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sTradeData->state++;
         break;
     case 62:
@@ -1677,7 +1677,7 @@ static bool8 DoTradeAnim_Cable(void)
         {
             if (sTradeData->tradeSpecies[1] != SPECIES_EGG)
             {
-                PlayCry1(sTradeData->tradeSpecies[1], 0);
+                PlayCry_Normal(sTradeData->tradeSpecies[1], 0);
             }
             sTradeData->state = 267;
             sTradeData->timer = 0;
@@ -1733,7 +1733,7 @@ static bool8 DoTradeAnim_Cable(void)
         sTradeData->state++;
         break;
     case 73:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeData->state++;
         break;
     case 74:
@@ -1791,7 +1791,7 @@ static bool8 DoTradeAnim_Wireless(void)
 
         if (sTradeData->tradeSpecies[0] != SPECIES_EGG)
         {
-            PlayCry1(sTradeData->tradeSpecies[0], 0);
+            PlayCry_Normal(sTradeData->tradeSpecies[0], 0);
         }
 
         sTradeData->state = 11;
@@ -1819,7 +1819,7 @@ static bool8 DoTradeAnim_Wireless(void)
         // The game waits here for the sprite to finish its animation sequence.
         break;
     case 14:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeData->state = 20;
         break;
     case 20:
@@ -1827,12 +1827,12 @@ static bool8 DoTradeAnim_Wireless(void)
         {
             SetTradeSequenceBgGpuRegs(4);
             FillWindowPixelBuffer(0, PIXEL_FILL(15));
-            CopyWindowToVram(0, COPYWIN_BOTH);
+            CopyWindowToVram(0, COPYWIN_FULL);
             sTradeData->state++;
         }
         break;
     case 21:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         sTradeData->state++;
         break;
     case 22:
@@ -1914,7 +1914,7 @@ static bool8 DoTradeAnim_Wireless(void)
         }
         break;
     case 29:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sTradeData->state = 30;
         break;
     case 30:
@@ -1927,7 +1927,7 @@ static bool8 DoTradeAnim_Wireless(void)
         }
         break;
     case 31:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         sTradeData->tradeGlow1SpriteId = CreateSprite(&sGlowBallSpriteTemplate, 111, 170, 0);
         sTradeData->gbaScreenSpriteId = CreateSprite(&sGlowBallSpriteTemplate, 129, -10, 0);
         sTradeData->state++;
@@ -2007,7 +2007,7 @@ static bool8 DoTradeAnim_Wireless(void)
         gSprites[sTradeData->gbaScreenSpriteId].y2 += 3;
         if (gSprites[sTradeData->tradeGlow1SpriteId].y2 <= -222)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
             sTradeData->state++;
             DestroySprite(&gSprites[sTradeData->tradeGlow1SpriteId]);
             DestroySprite(&gSprites[sTradeData->gbaScreenSpriteId]);
@@ -2028,7 +2028,7 @@ static bool8 DoTradeAnim_Wireless(void)
         }
         break;
     case 41:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         sTradeData->state++;
         break;
     case 42:
@@ -2121,7 +2121,7 @@ static bool8 DoTradeAnim_Wireless(void)
         sTradeData->sXY = 0x8000 / sTradeData->bg2Zoom;
         break;
     case 52:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeData->state = 60;
         break;
 
@@ -2136,7 +2136,7 @@ static bool8 DoTradeAnim_Wireless(void)
         break;
     case 61:
         gPaletteFade.bufferTransferDisabled = FALSE;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sTradeData->state++;
         break;
     case 62:
@@ -2198,7 +2198,7 @@ static bool8 DoTradeAnim_Wireless(void)
         {
             if (sTradeData->tradeSpecies[1] != SPECIES_EGG)
             {
-                PlayCry1(sTradeData->tradeSpecies[1], 0);
+                PlayCry_Normal(sTradeData->tradeSpecies[1], 0);
             }
             sTradeData->state = 267;
             sTradeData->timer = 0;
@@ -2254,7 +2254,7 @@ static bool8 DoTradeAnim_Wireless(void)
         sTradeData->state++;
         break;
     case 73:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sTradeData->state++;
         break;
     case 74:
@@ -2424,7 +2424,7 @@ static void BufferInGameTradeMonName(void)
     u8 nickname[30];
     const struct InGameTrade * inGameTrade = &sInGameTrades[gSpecialVar_0x8004];
     GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gStringVar1, nickname);
+    StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
 }
 
@@ -2656,7 +2656,7 @@ static void CB2_HandleTradeEnded(void)
     case 6:
         if (IsLinkTaskFinished())
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gMain.state ++;
         }
         break;
@@ -2730,7 +2730,7 @@ void DoInGameTradeScene(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_WaitFadeAndStartInGameTradeAnim, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     HelpSystem_Disable();
 }
 
@@ -2768,7 +2768,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed)
     sTradeData->textColor[1] = 1;
     sTradeData->textColor[2] = 6;
     AddTextPrinterParameterized4(windowId, 2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void Task_AnimateWirelessSignal(u8 taskId)

@@ -339,7 +339,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!DrawHofBackground())
         {
             SetVBlankCallback(VBlankCB_HofIdle);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             gMain.state++;
         }
         break;
@@ -440,8 +440,8 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     if (i >= HALL_OF_FAME_MAX_TEAMS)
     {
-        struct HallofFameTeam *afterTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
-        struct HallofFameTeam *beforeTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
+        struct HallofFameTeam *afterTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
+        struct HallofFameTeam *beforeTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
         afterTeam++;
         for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, beforeTeam++, afterTeam++)
         {
@@ -453,7 +453,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
 
     DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0, NULL, 2, 1, 3);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
     gTasks[taskId].func = Task_Hof_TrySaveData;
 }
 
@@ -523,7 +523,7 @@ static void Task_Hof_PlayMonCryAndPrintInfo(u8 taskId)
     if (gSprites[gTasks[taskId].data[5 + currMonId]].data[0])
     {
         if (currMon->species != SPECIES_EGG)
-            PlayCry1(currMon->species, 0);
+            PlayCry_Normal(currMon->species, 0);
         HallOfFame_PrintMonInfo(currMon, 0, 14);
         gTasks[taskId].data[3] = 120;
         gTasks[taskId].func = Task_Hof_TryDisplayAnotherMon;
@@ -560,7 +560,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
 {
     u16 i;
 
-    BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_OBJECTS, 0, 0, 0, RGB_BLACK);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (gTasks[taskId].data[5 + i] != 0xFF)
@@ -591,7 +591,7 @@ static void Task_Hof_ApplauseAndConfetti(u8 taskId)
         }
         BeginNormalPaletteFade(sSelectedPaletteIndices, 0, 12, 12, HALL_OF_FAME_BG_PAL);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].data[3] = 7;
         gTasks[taskId].func = Task_Hof_WaitBorderFadeAway;
     }
@@ -639,7 +639,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
         HallOfFame_PrintPlayerInfo(1, 2);
         DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized2(0, 2, gText_LeagueChamp, 0, NULL, 2, 1, 3);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
     }
 }
@@ -656,7 +656,7 @@ static void Task_Hof_ExitOnKeyPressed(u8 taskId)
 static void Task_Hof_HandlePaletteOnExit(u8 taskId)
 {
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * sizeof(u16));
-    BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 8, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_Hof_HandleExit;
 }
 
@@ -874,7 +874,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
     if (currMon->species != SPECIES_EGG)
     {
         StopCryAndClearCrySongs();
-        PlayCry1(currMon->species, 0);
+        PlayCry_Normal(currMon->species, 0);
     }
     HallOfFame_PrintMonInfo(currMon, 0, 14);
 
@@ -969,7 +969,7 @@ static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
     TopBarWindowPrintString(gText_ABUTTONExit, 8, TRUE);
     DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, 2, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
     gTasks[taskId].func = Task_HofPC_ExitOnButtonPress;
 }
 
@@ -985,7 +985,7 @@ static void HallOfFame_PrintWelcomeText(u8 not, u8 used)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     AddTextPrinterParameterized3(0, 2, x, 1, sTextColors[0], 0, gText_WelcomeToHOF);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2)
@@ -1072,7 +1072,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
         AddTextPrinterParameterized3(0, 2, 0x60, 0x11, sTextColors[0], 0, text);
 
     }
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
@@ -1115,7 +1115,7 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
 
     AddTextPrinterParameterized3(1, 2, textWidth - 36, 32, sTextColors[1], 0, text);
 
-    CopyWindowToVram(1, COPYWIN_BOTH);
+    CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void ClearVramOamPltt_LoadHofPal(void)

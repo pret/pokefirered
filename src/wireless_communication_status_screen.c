@@ -269,7 +269,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(1);
         CopyBgTilemapBufferToVram(0);
         ShowBg(0);
@@ -292,7 +292,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
                     WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 100, 2);
             }
             PutWindowTilemap(2);
-            CopyWindowToVram(2, COPYWIN_BOTH);
+            CopyWindowToVram(2, COPYWIN_FULL);
         }
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
@@ -303,7 +303,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
         WCSS_CyclePalette(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
         break;
     case 4:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].data[0]++;
         break;
     case 5:

@@ -457,7 +457,7 @@ void TryRunOnWarpIntoMapScript(void)
 
 u32 CalculateRamScriptChecksum(void)
 {
-    return CalcCRC16WithTable((u8*)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
+    return CalcCRC16WithTable((u8 *)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
 }
 
 void ClearRamScript(void)

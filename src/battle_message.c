@@ -302,11 +302,11 @@ static const u8 sText_StatSharply[] = _("sharply ");
 const u8 gBattleText_Rose[] = _("rose!");
 static const u8 sText_StatHarshly[] = _("harshly ");
 static const u8 sText_StatFell[] = _("fell!");
-static const u8 sText_PkmnsStatChanged[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
-const u8 gText_PkmnsStatChanged2[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_UsingXTheYOfZN[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
-static const u8 sText_PkmnsStatChanged3[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
-static const u8 sText_PkmnsStatChanged4[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+static const u8 sText_AttackersStatRose[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+static const u8 sText_UsingItemTheStatOfPkmnRose[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
+static const u8 sText_AttackersStatFell[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+static const u8 sText_DefendersStatFell[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
 static const u8 sText_StatsWontIncrease2[] = _("{B_ATK_NAME_WITH_PREFIX}'s stats won't\ngo any higher!");
 static const u8 sText_StatsWontDecrease2[] = _("{B_DEF_NAME_WITH_PREFIX}'s stats won't\ngo any lower!");
 static const u8 sText_CriticalHit[] = _("A critical hit!");
@@ -715,10 +715,10 @@ const u8 *const gBattleStringsTable[] = {
     [STRINGID_STATROSE - 12]                      = gBattleText_Rose,
     [STRINGID_STATHARSHLY - 12]                   = sText_StatHarshly,
     [STRINGID_STATFELL - 12]                      = sText_StatFell,
-    [STRINGID_PKMNSSTATCHANGED - 12]              = sText_PkmnsStatChanged,
-    [STRINGID_PKMNSSTATCHANGED2 - 12]             = gText_PkmnsStatChanged2,
-    [STRINGID_PKMNSSTATCHANGED3 - 12]             = sText_PkmnsStatChanged3,
-    [STRINGID_PKMNSSTATCHANGED4 - 12]             = sText_PkmnsStatChanged4,
+    [STRINGID_ATTACKERSSTATROSE - 12]             = sText_AttackersStatRose,
+    [STRINGID_DEFENDERSSTATROSE - 12]             = gText_DefendersStatRose,
+    [STRINGID_ATTACKERSSTATFELL - 12]             = sText_AttackersStatFell,
+    [STRINGID_DEFENDERSSTATFELL - 12]             = sText_DefendersStatFell,
     [STRINGID_CRITICALHIT - 12]                   = sText_CriticalHit,
     [STRINGID_ONEHITKO - 12]                      = sText_OneHitKO,
     [STRINGID_123POOF - 12]                       = sText_123Poof,
@@ -827,7 +827,7 @@ const u8 *const gBattleStringsTable[] = {
     [STRINGID_SOOTHINGAROMA - 12]                 = sText_SoothingAroma,
     [STRINGID_ITEMSCANTBEUSEDNOW - 12]            = sText_ItemsCantBeUsedNow,
     [STRINGID_FORXCOMMAYZ - 12]                   = sText_ForXCommaYZ,
-    [STRINGID_USINGXTHEYOFZN - 12]                = sText_UsingXTheYOfZN,
+    [STRINGID_USINGITEMSTATOFPKMNROSE - 12]       = sText_UsingItemTheStatOfPkmnRose,
     [STRINGID_PKMNUSEDXTOGETPUMPED - 12]          = sText_PkmnUsedXToGetPumped,
     [STRINGID_PKMNSXMADEYUSELESS - 12]            = sText_PkmnsXMadeYUseless,
     [STRINGID_PKMNTRAPPEDBYSANDTOMB - 12]         = sText_PkmnTrappedBySandTomb,
@@ -990,18 +990,19 @@ const u16 gUproarAwakeStringIds[] = {
     STRINGID_PKMNSTAYEDAWAKEUSING
 };
 
-const u16 gStatUpStringIds[] = {
-    STRINGID_PKMNSSTATCHANGED,
-    STRINGID_PKMNSSTATCHANGED2,
-    STRINGID_STATSWONTINCREASE,
-    STRINGID_EMPTYSTRING3,
-    STRINGID_USINGXTHEYOFZN,
-    STRINGID_PKMNUSEDXTOGETPUMPED
+const u16 gStatUpStringIds[] =
+{
+    [B_MSG_ATTACKER_STAT_ROSE] = STRINGID_ATTACKERSSTATROSE,
+    [B_MSG_DEFENDER_STAT_ROSE] = STRINGID_DEFENDERSSTATROSE,
+    [B_MSG_STAT_WONT_INCREASE] = STRINGID_STATSWONTINCREASE,
+    [B_MSG_STAT_ROSE_EMPTY]    = STRINGID_EMPTYSTRING3,
+    [B_MSG_STAT_ROSE_ITEM]     = STRINGID_USINGITEMSTATOFPKMNROSE,
+    [B_MSG_USED_DIRE_HIT]      = STRINGID_PKMNUSEDXTOGETPUMPED,
 };
 
 const u16 gStatDownStringIds[] = {
-    STRINGID_PKMNSSTATCHANGED3,
-    STRINGID_PKMNSSTATCHANGED4,
+    STRINGID_ATTACKERSSTATFELL,
+    STRINGID_DEFENDERSSTATFELL,
     STRINGID_STATSWONTDECREASE,
     STRINGID_EMPTYSTRING3
 };
@@ -1465,7 +1466,7 @@ void BufferStringBattle(u16 stringId)
     s32 i;
     const u8 *stringPtr = NULL;
 
-    sBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
+    sBattleMsgDataPtr = (struct BattleMsgData *)(&gBattleBufferA[gActiveBattler][4]);
     gLastUsedItem = sBattleMsgDataPtr->lastItem;
     gLastUsedAbility = sBattleMsgDataPtr->lastAbility;
     gBattleScripting.battler = sBattleMsgDataPtr->scrActive;
@@ -1701,14 +1702,14 @@ void BufferStringBattle(u16 stringId)
         }
         break;
     default: // load a string from the table
-        if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_ID_ADDER)
+        if (stringId >= BATTLESTRINGS_COUNT + BATTLESTRINGS_TABLE_START)
         {
             gDisplayedStringBattle[0] = EOS;
             return;
         }
         else
         {
-            stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_ID_ADDER];
+            stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_TABLE_START];
         }
         break;
     }
@@ -1716,17 +1717,17 @@ void BufferStringBattle(u16 stringId)
     BattleStringExpandPlaceholdersToDisplayedString(stringPtr);
 }
 
-u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src)
+u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 {
     BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
 }
 
-static const u8* TryGetStatusString(u8 *src)
+static const u8 *TryGetStatusString(u8 *src)
 {
     u32 i;
     u8 status[] = _("$$$$$$$");
     u32 chars1, chars2;
-    u8* statusPtr;
+    u8 *statusPtr;
 
     statusPtr = status;
     for (i = 0; i < 8; i++)
@@ -1738,13 +1739,13 @@ static const u8* TryGetStatusString(u8 *src)
         statusPtr++;
     }
 
-    chars1 = *(u32*)(&status[0]);
-    chars2 = *(u32*)(&status[4]);
+    chars1 = *(u32 *)(&status[0]);
+    chars2 = *(u32 *)(&status[4]);
 
     for (i = 0; i < NELEMS(gStatusConditionStringsTable); i++)
     {
-        if (chars1 == *(u32*)(&gStatusConditionStringsTable[i][0][0])
-            && chars2 == *(u32*)(&gStatusConditionStringsTable[i][0][4]))
+        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
+            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
             return gStatusConditionStringsTable[i][1];
     }
     return NULL;
@@ -2169,7 +2170,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
         {
         case B_BUFF_STRING: // battle string
             hword = T1_READ_16(&src[srcId + 1]);
-            StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_ID_ADDER]);
+            StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_TABLE_START]);
             srcId += 3;
             break;
         case B_BUFF_NUMBER: // int to string
@@ -2273,7 +2274,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 // unused, since the value loaded into the buffer is not read; it loaded one of
 // two particles (either "は" or "の") which works in tandem with ChooseTypeOfMoveUsedString
 // below to effect changes in the meaning of the line.
-static void ChooseMoveUsedParticle(u8* textBuff)
+static void ChooseMoveUsedParticle(u8 *textBuff)
 {
     s32 counter = 0;
     u32 i = 0;
@@ -2313,7 +2314,7 @@ static void ChooseMoveUsedParticle(u8* textBuff)
 //
 // sText_ExclamationMark5 was " こうげき！" This resulted in a translation of
 // "<NAME>'s <ATTACK> attack!".
-static void ChooseTypeOfMoveUsedString(u8* dst)
+static void ChooseTypeOfMoveUsedString(u8 *dst)
 {
     s32 counter = 0;
     s32 i = 0;
@@ -2456,7 +2457,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     if (!(textFlags & 0x80))
     {
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
     }
 }
 
@@ -2469,7 +2470,7 @@ bool8 BattleStringShouldBeColored(u16 stringId)
 
 void SetPpNumbersPaletteInMoveSelection(void)
 {
-    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     const u16 *palPtr = gUnknown_8D2FBB4;
     u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBattler]],
                                       chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBattler]]);

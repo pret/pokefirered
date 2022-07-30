@@ -182,7 +182,7 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     DrawTextBorderOuter(windowId, r6, 0xD);
     PutWindowTilemap(windowId);
     MapNamePopupPrintMapNameOnWindow(windowId);
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
     return windowId;
 }
 
@@ -199,7 +199,7 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     }
     xpos = (maxWidth - GetStringWidth(2, mapName, -1)) / 2;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 2, mapName, xpos, 2, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, 2, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
 }
 
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 floorNum)

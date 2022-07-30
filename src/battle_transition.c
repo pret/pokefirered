@@ -711,7 +711,7 @@ static bool8 BT_Phase2Blur_Anim(struct Task *task)
     {
         task->tInterval = 2;
         if (++task->tMosaicSize == 10)
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_BLACK);
         // The mosaic size argument is shared by HSIZE and VSIZE
         SetGpuReg(REG_OFFSET_MOSAIC, (task->tMosaicSize & 0xF) + ((task->tMosaicSize & 0xF) << 4));
         if (task->tMosaicSize > 14)
@@ -742,7 +742,7 @@ static bool8 BT_Phase2DistortedWave_InitWave(struct Task *task)
 {
     BT_InitCtrlBlk();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
     BT_LoadWaveIntoBuffer(gScanlineEffectRegBuffers[1], sTransitionStructPtr->bg123HOfs, 0, 2, 0, 160);
     SetVBlankCallback(VBCB_BT_Phase2DistortedWave);
     SetHBlankCallback(HBCB_BT_Phase2DistortedWave);
@@ -788,7 +788,7 @@ static bool8 BT_Phase2HorizontalCorrugate_Init(struct Task *task)
 {
     BT_InitCtrlBlk();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 0x10, RGB_BLACK);
     memset(gScanlineEffectRegBuffers[1], sTransitionStructPtr->bg123VOfs, 320);
     SetVBlankCallback(VBCB_BT_Phase2HorizontalCorrugate);
     SetHBlankCallback(HBCB_BT_Phase2HorizontalCorrugate);
@@ -1382,7 +1382,7 @@ static bool8 BT_Phase2FullScreenWave_UpdateWave(struct Task *task)
     if (++task->tDelayForFade == 41)
     {
         ++task->tStartFade;
-        BeginNormalPaletteFade(0xFFFFFFFF, -8, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -8, 0, 0x10, RGB_BLACK);
     }
     if (task->tStartFade && !gPaletteFade.active)
         DestroyTask(FindTaskIdByFunc(BT_Phase2FullScreenWave));
@@ -1982,7 +1982,7 @@ static bool8 BT_Phase2Mugshot_ExpandWhiteBand(struct Task *task)
 static bool8 BT_Phase2Mugshot_StartBlackFade(struct Task *task)
 {
     sTransitionStructPtr->vblankDma = FALSE;
-    BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+    BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
     sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     task->tCounter = 0;
     ++task->tState;
@@ -2310,7 +2310,7 @@ static bool8 BT_Phase2WhiteFadeInStripes_IsWhiteFadeDone(struct Task *task)
     sTransitionStructPtr->vblankDma = FALSE;
     if (sTransitionStructPtr->counter > 5)
     {
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_WHITE);
         ++task->tState;
     }
     return FALSE;
@@ -2658,7 +2658,7 @@ static bool8 BT_Phase1_FadeIn(struct Task *task)
         task->tCoeff -= task->tFadeInSpeed;
         if (task->tCoeff < 0)
             task->tCoeff = 0;
-        BlendPalettes(0xFFFFFFFF, task->tCoeff, RGB(11, 11, 11));
+        BlendPalettes(PALETTES_ALL, task->tCoeff, RGB(11, 11, 11));
     }
     if (task->tCoeff == 0)
     {
@@ -2719,7 +2719,7 @@ static void BT_GetBg0TilemapAndTilesetBase(u16 **tilemapPtr, u16 **tilesetPtr)
 
 static void BT_BlendPalettesToBlack(void)
 {
-    BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+    BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
 }
 
 static void BT_LoadWaveIntoBuffer(s16 *buffer, s16 offset, s16 theta, s16 frequency, s16 amplitude, s16 bufSize)

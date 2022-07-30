@@ -49,11 +49,11 @@ static void AnimTask_SurfWaveScanlineEffect(u8);
 static void AnimTask_WaterSpoutLaunch_Step(u8);
 static void AnimTask_WaterSpoutRain_Step(u8);
 static u8 GetWaterSpoutPowerForAnim(void);
-static void CreateWaterSpoutLaunchDroplets(struct Task*, u8);
-static void CreateWaterSpoutRainDroplet(struct Task*, u8);
+static void CreateWaterSpoutLaunchDroplets(struct Task *, u8);
+static void CreateWaterSpoutRainDroplet(struct Task *, u8);
 static void AnimTask_WaterSport_Step(u8);
-static void CreateWaterSportDroplet(struct Task*);
-static void CreateWaterPulseRingBubbles(struct Sprite*, s32, s32);
+static void CreateWaterSportDroplet(struct Task *);
+static void CreateWaterPulseRingBubbles(struct Sprite *, s32, s32);
 
 // Both unused? Comment copied from pokeemerald
 static const u8 gUnknown_83E44F4[] = INCBIN_U8("graphics/battle_anims/unk_83E44F4.4bpp");

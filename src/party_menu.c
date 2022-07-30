@@ -574,11 +574,11 @@ static bool8 ShowPartyMenu(void)
         ++gMain.state;
         break;
     case 21:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         ++gMain.state;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         ++gMain.state;
         break;
@@ -592,7 +592,7 @@ static bool8 ShowPartyMenu(void)
 
 static void ExitPartyMenu(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     CreateTask(Task_ExitPartyMenu, 0);
     SetVBlankCallback(VBlankCB_PartyMenu);
     SetMainCallback2(CB2_UpdatePartyMenu);
@@ -1077,7 +1077,7 @@ static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 
 static void Task_ClosePartyMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
 }
 
@@ -1550,7 +1550,7 @@ static void Task_PrintAndWaitForText(u8 taskId)
     {
         if (gTasks[taskId].tKeepOpen == FALSE)
         {
-            ClearStdWindowAndFrameToTransparent(6, 0);
+            ClearStdWindowAndFrameToTransparent(6, FALSE);
             ClearWindowTilemap(6);
         }
         DestroyTask(taskId);
@@ -1577,7 +1577,7 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
-        ClearStdWindowAndFrameToTransparent(6, 0);
+        ClearStdWindowAndFrameToTransparent(6, FALSE);
         ClearWindowTilemap(6);
         if (MenuHelpers_LinkSomething() == TRUE)
         {
@@ -2484,7 +2484,7 @@ static void PartyMenuRemoveWindow(u8 *ptr)
 {
     if (*ptr != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         RemoveWindow(*ptr);
         *ptr = 0xFF;
         ScheduleBgCopyTilemapToVram(2);
@@ -4595,7 +4595,7 @@ static void ShowMoveSelectWindow(u8 slot)
                                     gMoveNames[move],
                                     GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + GetFontAttribute(fontId, FONTATTR_LETTER_SPACING),
                                     (i * 16) + 2,
-                                    TEXT_SPEED_FF,
+                                    TEXT_SKIP_DRAW,
                                     NULL);
         if (move != MOVE_NONE)
             ++moveCount;

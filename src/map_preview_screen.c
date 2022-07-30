@@ -484,7 +484,7 @@ static void Task_RunMapPreviewScreenForest(u8 taskId)
     case 0:
         if (!MapPreview_IsGfxLoadFinished() && !IsDma3ManagerBusyWithBgCopy())
         {
-            CopyWindowToVram(data[11], COPYWIN_BOTH);
+            CopyWindowToVram(data[11], COPYWIN_FULL);
             data[0]++;
         }
         break;

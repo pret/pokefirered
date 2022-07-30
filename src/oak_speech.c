@@ -906,11 +906,11 @@ static void Task_OakSpeech9(u8 taskId)
     if (str != gStringVar4) \
     { \
         StringExpandPlaceholders(gStringVar4, str); \
-        AddTextPrinterParameterized2(0, 4, gStringVar4, speed, NULL, 2, 1, 3); \
+        AddTextPrinterParameterized2(0, 4, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
     } \
     else \
     { \
-        AddTextPrinterParameterized2(0, 4, str, speed, NULL, 2, 1, 3); \
+        AddTextPrinterParameterized2(0, 4, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
     } \
     CopyWindowToVram(0, COPYWIN_FULL); \
 })

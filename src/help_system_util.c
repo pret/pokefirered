@@ -574,27 +574,27 @@ void DecompressAndRenderGlyph(u8 font, u16 glyph, struct Bitmap *srcBlit, struct
 
 void HelpSystem_PrintTextInTopLeftCorner(const u8 * str)
 {
-    GenerateFontHalfRowLookupTable(1, 15, 2);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
     HelpSystemRenderText(5, gDecompressionBuffer + 0x3D00, str, 6, 2, 7, 2);
 }
 
 void HelpSystem_PrintTextRightAlign_Row52(const u8 * str)
 {
     s32 left = 0x7C - GetStringWidth(0, str, 0);
-    GenerateFontHalfRowLookupTable(1, 15, 2);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
     HelpSystemRenderText(0, gDecompressionBuffer + 0x3400, str, left, 2, 16, 2);
 }
 
 void HelpSystem_PrintTextAt(const u8 * str, u8 x, u8 y)
 {
-    GenerateFontHalfRowLookupTable(1, 15, 2);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str, x, y, 26, 16);
 }
 
 void HelpSystem_PrintQuestionAndAnswerPair(const u8 * question, const u8 * answer)
 {
     CpuFill16(0xEEEE, gDecompressionBuffer + 0x0000, 0x3400);
-    GenerateFontHalfRowLookupTable(1, 14, 2);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_DARK_GRAY);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, question, 0, 0, 26, 16);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x09C0, answer, 0, 0, 26, 13);
 }
@@ -602,7 +602,7 @@ void HelpSystem_PrintQuestionAndAnswerPair(const u8 * question, const u8 * answe
 void HelpSystem_PrintTopicMouseoverDescription(const u8 * str)
 {
     CpuFill16(0x1111, gDecompressionBuffer + 0x23C0, 0x1040);
-    GenerateFontHalfRowLookupTable(2, 1, 3);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x23C0, str, 2, 6, 26, 5);
 }
 

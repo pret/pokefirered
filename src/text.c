@@ -1181,7 +1181,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a
     bgColor = 0;
     shadowColor = 3;
 
-    GenerateFontHalfRowLookupTable(1, 0, 3);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY);
     strLocal = str;
     strPos = 0;
 

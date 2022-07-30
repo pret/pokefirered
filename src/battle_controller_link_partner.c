@@ -236,7 +236,7 @@ static void Intro_ShowHealthbox(void)
                                      HEALTHBOX_ALL);
             StartHealthboxSlideIn(gActiveBattler);
             SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-            gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 0;
+            gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
             gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForHealthbox;
         }
     }
@@ -1464,7 +1464,7 @@ static void LinkPartnerHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 1;
+    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
     gBattlerControllerFuncs[gActiveBattler] = LinkPartnerDummy;
 }
 

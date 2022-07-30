@@ -20,6 +20,14 @@ enum
     POKEBALL_COUNT
 };
 
+enum {
+    BALL_AFFINE_ANIM_0,
+    BALL_ROTATE_RIGHT,
+    BALL_ROTATE_LEFT,
+    BALL_AFFINE_ANIM_3,
+    BALL_AFFINE_ANIM_4
+};
+
 extern const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT];
 extern const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT];
 extern const struct SpriteTemplate gBallSpriteTemplates[];
@@ -34,6 +42,6 @@ void DoHitAnimHealthboxEffect(u8 bank);
 void LoadBallGfx(u8 ballId);
 void FreeBallGfx(u8 ballId);
 void StartHealthboxSlideIn(u8 battler);
-void DestroySpriteAndFreeResources2(struct Sprite *sprite);
+void DestroySpriteAndFreeResources_Ball(struct Sprite *sprite);
 
 #endif // GUARD_POKEBALL_H

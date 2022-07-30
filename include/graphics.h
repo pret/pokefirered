@@ -3,30 +3,30 @@
 
 #include "global.h"
 
-extern const u32 gInterfaceGfx_PokeBall[];
-extern const u32 gInterfacePal_PokeBall[];
-extern const u32 gInterfaceGfx_GreatBall[];
-extern const u32 gInterfacePal_GreatBall[];
-extern const u32 gInterfaceGfx_SafariBall[];
-extern const u32 gInterfacePal_SafariBall[];
-extern const u32 gInterfaceGfx_UltraBall[];
-extern const u32 gInterfacePal_UltraBall[];
-extern const u32 gInterfaceGfx_MasterBall[];
-extern const u32 gInterfacePal_MasterBall[];
-extern const u32 gInterfaceGfx_NetBall[];
-extern const u32 gInterfacePal_NetBall[];
-extern const u32 gInterfaceGfx_DiveBall[];
-extern const u32 gInterfacePal_DiveBall[];
-extern const u32 gInterfaceGfx_NestBall[];
-extern const u32 gInterfacePal_NestBall[];
-extern const u32 gInterfaceGfx_RepeatBall[];
-extern const u32 gInterfacePal_RepeatBall[];
-extern const u32 gInterfaceGfx_TimerBall[];
-extern const u32 gInterfacePal_TimerBall[];
-extern const u32 gInterfaceGfx_LuxuryBall[];
-extern const u32 gInterfacePal_LuxuryBall[];
-extern const u32 gInterfaceGfx_PremierBall[];
-extern const u32 gInterfacePal_PremierBall[];
+extern const u32 gBallGfx_Poke[];
+extern const u32 gBallPal_Poke[];
+extern const u32 gBallGfx_Great[];
+extern const u32 gBallPal_Great[];
+extern const u32 gBallGfx_Safari[];
+extern const u32 gBallPal_Safari[];
+extern const u32 gBallGfx_Ultra[];
+extern const u32 gBallPal_Ultra[];
+extern const u32 gBallGfx_Master[];
+extern const u32 gBallPal_Master[];
+extern const u32 gBallGfx_Net[];
+extern const u32 gBallPal_Net[];
+extern const u32 gBallGfx_Dive[];
+extern const u32 gBallPal_Dive[];
+extern const u32 gBallGfx_Nest[];
+extern const u32 gBallPal_Nest[];
+extern const u32 gBallGfx_Repeat[];
+extern const u32 gBallPal_Repeat[];
+extern const u32 gBallGfx_Timer[];
+extern const u32 gBallPal_Timer[];
+extern const u32 gBallGfx_Luxury[];
+extern const u32 gBallPal_Luxury[];
+extern const u32 gBallGfx_Premier[];
+extern const u32 gBallPal_Premier[];
 extern const u32 gOpenPokeballGfx[];
 
 // pokemon gfx

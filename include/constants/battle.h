@@ -312,7 +312,7 @@
 #define NUM_CASTFORM_FORMS  4
 #define CASTFORM_SUBSTITUTE (1 << 7)
 
-// Return value for IsRunningFromBattleImpossible. 
+// Return value for IsRunningFromBattleImpossible.
 #define BATTLE_RUN_SUCCESS        0
 #define BATTLE_RUN_FORBIDDEN      1
 #define BATTLE_RUN_FAILURE        2

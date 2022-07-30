@@ -55,6 +55,12 @@
 
 #define MAX_TRAINER_ITEMS 4
 
+enum {
+    BATTLER_AFFINE_NORMAL,
+    BATTLER_AFFINE_EMERGE,
+    BATTLER_AFFINE_RETURN,
+};
+
 #define MOVE_TARGET_SELECTED            0
 #define MOVE_TARGET_DEPENDS             (1 << 0)
 #define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
@@ -545,15 +551,15 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId;
-    u8 healthboxSlideInStarted : 1;
-    u8 field_9_x2 : 1;
-    u8 field_9_x1C : 3;
-    u8 field_9_x20 : 1;
-    u8 field_9_x40 : 1;
-    u8 field_9_x80 : 1;
-    u8 field_A;
+    u8 introAnimActive:1;
+    u8 wildMonInvisible:1;
+    u8 field_9_x1C:3;
+    u8 field_9_x20:1;
+    u8 field_9_x40:1;
+    u8 field_9_x80:1;
+    u8 numBallParticles;
     u8 field_B;
-    s16 field_C;
+    s16 ballSubpx;
     u8 field_E;
     u8 field_F;
 };

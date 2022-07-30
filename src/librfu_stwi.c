@@ -118,7 +118,7 @@ void STWI_init_Callback_S(void)
     STWI_set_Callback_S(NULL);
 }
 
-// The callback can take 2 or 3 arguments. 
+// The callback can take 2 or 3 arguments.
 void STWI_set_Callback_M(void *callbackM)
 {
     gSTWIStatus->callbackM = callbackM;

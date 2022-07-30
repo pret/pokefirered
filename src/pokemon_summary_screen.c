@@ -4133,7 +4133,8 @@ static void ShowOrHideBallIconObj(u8 invisible)
 
 static void DestroyBallIconObj(void)
 {
-    DestroySpriteAndFreeResources2(&gSprites[sMonSummaryScreen->ballIconSpriteId]);
+    // Redundant, as DestroySpriteAndFreeResources could've been used.
+    DestroySpriteAndFreeResources_Ball(&gSprites[sMonSummaryScreen->ballIconSpriteId]);
 }
 
 static void PokeSum_CreateMonIconSprite(void)
@@ -5181,7 +5182,7 @@ static void PokeSum_TryPlayMonCry(void)
 {
     if (!GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_EGG))
     {
-        if (ShouldPlayNormalPokeCry(&sMonSummaryScreen->currentMon) == TRUE)
+        if (ShouldPlayNormalMonCry(&sMonSummaryScreen->currentMon) == TRUE)
             PlayCry_ByMode(GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES2), 0, CRY_MODE_NORMAL);
         else
             PlayCry_ByMode(GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES2), 0, CRY_MODE_WEAK);

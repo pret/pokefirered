@@ -394,7 +394,7 @@ static const TransitionStateFunc sBT_Phase2WhiteFadeInStripesFuncs[] =
 };
 
 static const u16 sWhiteStripeDelay[] = { 0, 9, 15, 6, 12, 3 };
-    
+
 static const TransitionStateFunc sBT_Phase2GridSquaresFuncs[] =
 {
     BT_Phase2GridSquares_LoadGfx,
@@ -480,7 +480,7 @@ static const struct OamData sOamData_Unused =
     .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = 0,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1022,7 +1022,7 @@ static void VBCB_BT_Phase2BigPokeball2(void)
 #undef tTheta
 #undef tAmplitude
 
-// TODO: Document this effect after knowing more about field effects. 
+// TODO: Document this effect after knowing more about field effects.
 static void BT_Phase2SlidingPokeballs(u8 taskId)
 {
     while (sBT_Phase2SlidingPokeballsFuncs[gTasks[taskId].tState](&gTasks[taskId]));

@@ -34,7 +34,7 @@ void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recv
     svr->recvFunc = mevent_receive_func;
 }
 
-void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void * src, u32 size)
+void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void *src, u32 size)
 {
     svr->seqno = 0;
     svr->sendIdent = ident;
@@ -47,7 +47,7 @@ void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void
     svr->sendBfr = src;
 }
 
-void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void * dest)
+void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void *dest)
 {
     svr->seqno = 0;
     svr->recvIdent = ident;
@@ -57,7 +57,7 @@ void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void * des
     svr->recvBfr = dest;
 }
 
-static void mevent_recv_block(u32 recv_idx, void * dest, size_t size)
+static void mevent_recv_block(u32 recv_idx, void *dest, size_t size)
 {
     memcpy(dest, gBlockRecvBuffer[recv_idx], size);
 }

@@ -94,7 +94,7 @@ static u8 MovementType_VsSeeker4D_Callback(struct ObjectEvent *, struct Sprite *
 static u8 MovementType_VsSeeker4E_Callback(struct ObjectEvent *, struct Sprite *);
 static u8 MovementType_VsSeeker4F_Callback(struct ObjectEvent *, struct Sprite *);
 static void sub_8064544(struct ObjectEvent *, struct Sprite *);
-static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite);
+static void DoObjectUnionRoomWarpYDisplacement(struct Sprite *sprite);
 static void MovementType_None(struct Sprite *);
 static void MovementType_LookAround(struct Sprite *);
 static void MovementType_WanderAround(struct Sprite *);
@@ -8840,37 +8840,37 @@ void UnfreezeObjectEvents(void)
 #define tSpeed     data[4]
 #define tStepNo    data[5]
 
-static void little_step(struct Sprite * sprite, u8 direction)
+static void little_step(struct Sprite *sprite, u8 direction)
 {
     sprite->x += sDirectionToVectors[direction].x;
     sprite->y += sDirectionToVectors[direction].y;
 }
 
-static void double_little_steps(struct Sprite * sprite, u8 direction)
+static void double_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 2 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 2 * (u16)sDirectionToVectors[direction].y;
 }
 
-static void triple_little_steps(struct Sprite * sprite, u8 direction)
+static void triple_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 2 * (u16)sDirectionToVectors[direction].x + (u16)sDirectionToVectors[direction].x;
     sprite->y += 2 * (u16)sDirectionToVectors[direction].y + (u16)sDirectionToVectors[direction].y;
 }
 
-static void quad_little_steps(struct Sprite * sprite, u8 direction)
+static void quad_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 4 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 4 * (u16)sDirectionToVectors[direction].y;
 }
 
-static void oct_little_steps(struct Sprite * sprite, u8 direction)
+static void oct_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 8 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 8 * (u16)sDirectionToVectors[direction].y;
 }
 
-void SetSpriteDataForNormalStep(struct Sprite * sprite, u8 direction, u8 speed)
+void SetSpriteDataForNormalStep(struct Sprite *sprite, u8 direction, u8 speed)
 {
     sprite->tDirection = direction;
     sprite->tSpeed = speed;
@@ -9322,7 +9322,7 @@ void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo)
     }
 }
 
-static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite *sprite)
 {
     switch (sprite->tUnionRoomWarpAnimState)
     {
@@ -9342,7 +9342,7 @@ static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite * sprite)
     }
 }
 
-static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite *sprite)
 {
     switch (sprite->tUnionRoomWarpAnimState)
     {
@@ -9360,7 +9360,7 @@ static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite * sprite)
     }
 }
 
-static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacement(struct Sprite *sprite)
 {
     switch (sprite->tUnionRoomWarpAnimNo)
     {

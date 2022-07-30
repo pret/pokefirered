@@ -23,16 +23,16 @@ struct ECWork
     u16 bg2ScrollRow;
     int tgtBgY;
     int deltaBgY;
-    struct Sprite * selectDestFieldCursorSprite;
-    struct Sprite * rectCursorSpriteRight;
-    struct Sprite * rectCursorSpriteLeft;
-    struct Sprite * selectWordCursorSprite;
-    struct Sprite * selectGroupHelpSprite;
-    struct Sprite * modeIconsSprite;
-    struct Sprite * upTriangleCursorSprite;
-    struct Sprite * downTriangleCursorSprite;
-    struct Sprite * startPgUpButtonSprite;
-    struct Sprite * selectPgDnButtonSprite;
+    struct Sprite *selectDestFieldCursorSprite;
+    struct Sprite *rectCursorSpriteRight;
+    struct Sprite *rectCursorSpriteLeft;
+    struct Sprite *selectWordCursorSprite;
+    struct Sprite *selectGroupHelpSprite;
+    struct Sprite *modeIconsSprite;
+    struct Sprite *upTriangleCursorSprite;
+    struct Sprite *downTriangleCursorSprite;
+    struct Sprite *startPgUpButtonSprite;
+    struct Sprite *selectPgDnButtonSprite;
     u16 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
     u16 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
 };
@@ -104,7 +104,7 @@ static int GetBg2ScrollRow(void);
 static void SetRegWin0Coords(u8 left, u8 top, u8 right, u8 bottom);
 static void LoadSpriteGfx(void);
 static void CreateSelectDestFieldCursorSprite(void);
-static void SpriteCB_BounceCursor(struct Sprite * sprite);
+static void SpriteCB_BounceCursor(struct Sprite *sprite);
 static void SetSelectDestFieldCursorSpritePosAndResetAnim(u8 x, u8 y);
 static void FreezeSelectDestFieldCursorSprite(void);
 static void UnfreezeSelectDestFieldCursorSprite(void);
@@ -114,7 +114,7 @@ static void EC_MoveCursor(void);
 static void MoveCursor_Group(s8 a0, s8 a1);
 static void MoveCursor_Alpha(s8 a0, s8 a1);
 static void CreateSelectWordCursorSprite(void);
-static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite);
+static void SpriteCB_SelectWordCursorSprite(struct Sprite *sprite);
 static void SetSelectWordCursorSpritePos(void);
 static void SetSelectWordCursorSpritePosExplicit(u8 x, u8 y);
 static void DestroySelectWordCursorSprite(void);
@@ -1933,7 +1933,7 @@ static void CreateSelectDestFieldCursorSprite(void)
     gSprites[spriteId].data[1] = 1;
 }
 
-static void SpriteCB_BounceCursor(struct Sprite * sprite)
+static void SpriteCB_BounceCursor(struct Sprite *sprite)
 {
     if (sprite->data[1])
     {
@@ -2076,7 +2076,7 @@ static void CreateSelectWordCursorSprite(void)
     SetSelectWordCursorSpritePos();
 }
 
-static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite)
+static void SpriteCB_SelectWordCursorSprite(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 2)
     {

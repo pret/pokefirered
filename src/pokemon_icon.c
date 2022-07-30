@@ -17,7 +17,7 @@ struct MonIconSpriteTemplate
 };
 
 static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * template, s16 x, s16 y, u8 subpriority);
-static void DestroyMonIconInternal(struct Sprite * sprite);
+static void DestroyMonIconInternal(struct Sprite *sprite);
 
 const u16 gMonIconPalettes[][16] = {
     INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal"),
@@ -1118,7 +1118,7 @@ const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 extra)
     return GetMonIconTiles(GetIconSpecies(species, personality), extra);
 }
 
-void DestroyMonIcon(struct Sprite * sprite)
+void DestroyMonIcon(struct Sprite *sprite)
 {
     DestroyMonIconInternal(sprite);
 }
@@ -1171,7 +1171,7 @@ void FreeMonIconPalette(u16 species)
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
-void SpriteCB_MonIcon(struct Sprite * sprite)
+void SpriteCB_MonIcon(struct Sprite *sprite)
 {
     UpdateMonIconFrame(sprite);
 }
@@ -1208,7 +1208,7 @@ u8 GetMonIconPaletteIndexFromSpecies(u16 species)
     return gMonIconPaletteIndices[species];
 }
 
-u8 UpdateMonIconFrame(struct Sprite * sprite)
+u8 UpdateMonIconFrame(struct Sprite *sprite)
 {
     u8 result = 0;
 
@@ -1268,14 +1268,14 @@ static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * iconTemplate,
     return spriteId;
 }
 
-static void DestroyMonIconInternal(struct Sprite * sprite)
+static void DestroyMonIconInternal(struct Sprite *sprite)
 {
     struct SpriteFrameImage image = { NULL, sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] };
     sprite->images = &image;
     DestroySprite(sprite);
 }
 
-void SetPartyHPBarSprite(struct Sprite * sprite, u8 animNum)
+void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;

@@ -75,10 +75,10 @@ struct SlotMachineState
 struct SlotMachineGfxManager
 {
     u32 field_00[3];
-    struct Sprite * reelIconSprites[3][5];
-    struct Sprite * creditDigitSprites[4];
-    struct Sprite * payoutDigitSprites[4];
-    struct Sprite * clefairySprites[2];
+    struct Sprite *reelIconSprites[3][5];
+    struct Sprite *creditDigitSprites[4];
+    struct Sprite *payoutDigitSprites[4];
+    struct Sprite *clefairySprites[2];
     vu16 * reelIconAffineParamPtr;
 };
 
@@ -1743,7 +1743,7 @@ static void InitGfxManager(struct SlotMachineGfxManager * manager)
 
 static void CreateReelIconSprites(void)
 {
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     s32 i, j;
     s32 spriteId;
     s32 animId;
@@ -1781,12 +1781,12 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
             sSlotMachineGfxManager->reelIconSprites[i][j]->y2 = ypos;
             {
                 s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
-                struct Sprite * sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
+                struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
                 StartSpriteAnim(sprite, animId);
             }
             {
                 s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
-                struct Sprite * sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
+                struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
                 StartSpriteAnim(sprite, animId);
             }
             sSlotMachineGfxManager->reelIconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[sReelIconAnimByReelAndPos[i][reelPos]]);

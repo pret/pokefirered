@@ -85,7 +85,7 @@ void sub_81113E4(void);
 void sub_8111438(void);
 void StartRecordingQuestLogEntry(u16 eventId);
 bool8 WillCommandOfSizeFitInSav1Record(u16 *cursor, size_t size);
-bool8 sub_8110944(const void * a0, size_t cmdSize);
+bool8 sub_8110944(const void *a0, size_t cmdSize);
 
 void sub_8113BD8(void);
 void ResetUnk203B044(void);

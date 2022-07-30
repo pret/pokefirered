@@ -941,7 +941,7 @@ void CB2_OpenPokedexFromStartMenu(void)
     SetHelpContext(HELPCONTEXT_POKEDEX);
 }
 
-#define FREE_IF_NOT_NULL(ptr0) ({ void * ptr = (ptr0); if (ptr) Free(ptr); })
+#define FREE_IF_NOT_NULL(ptr0) ({ void *ptr = (ptr0); if (ptr) Free(ptr); })
 
 bool8 DoClosePokedex(void)
 {

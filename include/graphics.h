@@ -2980,7 +2980,7 @@ extern const u8 gFile_graphics_items_icon_palettes_soda_pop_palette[];
 extern const u8 gFile_graphics_items_icons_lemonade_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_lemonade_palette[];
 extern const u8 gFile_graphics_items_icons_moomoo_milk_sheet[];
-extern const u8 gFile_graphics_items_icon_palettes_moomoo_milk_palette[];;
+extern const u8 gFile_graphics_items_icon_palettes_moomoo_milk_palette[];
 extern const u8 gFile_graphics_items_icon_palettes_energy_powder_palette[];
 extern const u8 gFile_graphics_items_icons_energy_root_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_energy_root_palette[];
@@ -4829,8 +4829,8 @@ extern const u16 gTradeButtons_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
 
 // mon_markings
-extern const u16 gUnknown_8E9CBBC[];
-extern const u16 gUnknown_8E9CB9C[];
+extern const u16 gMonMarkingsMenu_Gfx[];
+extern const u16 gMonMarkingsMenu_Pal[];
 
 // hall_of_fame
 extern const u32 gFile_graphics_misc_confetti_sheet[];

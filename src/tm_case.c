@@ -61,7 +61,7 @@ struct UnkStruct_203B11C
 static EWRAM_DATA struct UnkStruct_203B10C sTMCaseStaticResources = {};
 static EWRAM_DATA struct UnkStruct_203B118 * sTMCaseDynamicResources = NULL;
 static EWRAM_DATA struct UnkStruct_203B11C * sPokedudePackBackup = NULL;
-static EWRAM_DATA void * sTilemapBuffer = NULL; // tilemap buffer
+static EWRAM_DATA void *sTilemapBuffer = NULL; // tilemap buffer
 static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
 static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
 static EWRAM_DATA u16 * sTMSpritePaletteBuffer = NULL;
@@ -121,11 +121,11 @@ static void HandleCreateYesNoMenu(u8 taskId, const struct YesNoFuncTable * ptrs)
 static u8 AddTMContextMenu(u8 * a0, u8 a1);
 static void RemoveTMContextMenu(u8 * a0);
 static u8 CreateTMSprite(u16 itemId);
-static void SetTMSpriteAnim(struct Sprite * sprite, u8 var);
+static void SetTMSpriteAnim(struct Sprite *sprite, u8 var);
 static void TintTMSpriteByType(u8 type);
-static void UpdateTMSpritePosition(struct Sprite * sprite, u8 var);
+static void UpdateTMSpritePosition(struct Sprite *sprite, u8 var);
 static void InitSelectedTMSpriteData(u8 a0, u16 itemId);
-static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite);
+static void SpriteCB_MoveTMSpriteInCase(struct Sprite *sprite);
 static void LoadTMTypePalettes(void);
 
 static const struct BgTemplate sBGTemplates[] = {
@@ -1439,7 +1439,7 @@ static u8 CreateTMSprite(u16 itemId)
     }
 }
 
-static void SetTMSpriteAnim(struct Sprite * sprite, u8 idx)
+static void SetTMSpriteAnim(struct Sprite *sprite, u8 idx)
 {
     if (idx >= 50)
         StartSpriteAnim(sprite, 1);
@@ -1457,7 +1457,7 @@ static void TintTMSpriteByType(u8 type)
     }
 }
 
-static void UpdateTMSpritePosition(struct Sprite * sprite, u8 var)
+static void UpdateTMSpritePosition(struct Sprite *sprite, u8 var)
 {
     s32 x, y;
     if (var == 0xFF)
@@ -1486,7 +1486,7 @@ static void InitSelectedTMSpriteData(u8 spriteId, u16 itemId)
     gSprites[spriteId].callback = SpriteCB_MoveTMSpriteInCase;
 }
 
-static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite)
+static void SpriteCB_MoveTMSpriteInCase(struct Sprite *sprite)
 {
     switch (sprite->data[1])
     {

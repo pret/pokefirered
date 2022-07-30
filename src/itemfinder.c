@@ -28,11 +28,11 @@ static void Task_ItemfinderUnderfootDigUpItem(u8 taskId);
 static void DestroyArrowAndStarTiles(void);
 static void LoadArrowAndStarTiles(void);
 static void CreateArrowSprite(u8 animNum, u8 direction);
-static void SpriteCallback_Arrow(struct Sprite * sprite);
-static void SpriteCallback_DestroyArrow(struct Sprite * sprite);
+static void SpriteCallback_Arrow(struct Sprite *sprite);
+static void SpriteCallback_DestroyArrow(struct Sprite *sprite);
 static u8 CreateStarSprite(void);
-static void SpriteCallback_Star(struct Sprite * sprite);
-static void SpriteCallback_DestroyStar(struct Sprite * sprite);
+static void SpriteCallback_Star(struct Sprite *sprite);
+static void SpriteCallback_DestroyStar(struct Sprite *sprite);
 
 #define ARROW_TILE_TAG 2000
 
@@ -592,7 +592,7 @@ static void CreateArrowSprite(u8 animNum, u8 direction)
     }
 }
 
-static void SpriteCallback_Arrow(struct Sprite * sprite)
+static void SpriteCallback_Arrow(struct Sprite *sprite)
 {
     s16 x, y;
     sprite->spCurX += sprite->spDeltaX;
@@ -606,7 +606,7 @@ static void SpriteCallback_Arrow(struct Sprite * sprite)
         sprite->callback = SpriteCallback_DestroyArrow;
 }
 
-static void SpriteCallback_DestroyArrow(struct Sprite * sprite)
+static void SpriteCallback_DestroyArrow(struct Sprite *sprite)
 {
     FreeSpriteOamMatrix(sprite);
     DestroySprite(sprite);
@@ -629,7 +629,7 @@ static u8 CreateStarSprite(void)
     return spriteId;
 }
 
-static void SpriteCallback_Star(struct Sprite * sprite)
+static void SpriteCallback_Star(struct Sprite *sprite)
 {
     s16 x, y;
     sprite->spCurX += sprite->spDeltaX;
@@ -643,7 +643,7 @@ static void SpriteCallback_Star(struct Sprite * sprite)
         sprite->callback = SpriteCallback_DestroyStar;
 }
 
-static void SpriteCallback_DestroyStar(struct Sprite * sprite)
+static void SpriteCallback_DestroyStar(struct Sprite *sprite)
 {
     DestroySprite(sprite);
 }

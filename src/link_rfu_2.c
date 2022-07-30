@@ -61,7 +61,7 @@ static void UpdateChildStatuses(void);
 static s32 GetRfuRecvStatus(void);
 static void sub_80FA834(u8 taskId);
 static void ClearSelectedLinkPlayerIds(u16 disconnectMask);
-static void ValidateAndReceivePokemonSioInfo(void * a0);
+static void ValidateAndReceivePokemonSioInfo(void *a0);
 static void Task_ExchangeLinkPlayers(u8 taskId);
 static void sub_80FACF0(u8 taskId);
 static void GetLinkmanErrorParams(u32 msg);
@@ -1220,7 +1220,7 @@ static void RfuPrepareSendBuffer(u16 command)
     }
 }
 
-void Rfu_SendPacket(void * data)
+void Rfu_SendPacket(void *data)
 {
     if (IsSendCmdComplete() && !RfuHasErrored())
     {

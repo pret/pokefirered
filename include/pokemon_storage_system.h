@@ -26,6 +26,7 @@ enum
     WALLPAPER_PLAIN,
     WALLPAPER_COUNT
 };
+#define MAX_DEFAULT_WALLPAPER WALLPAPER_SAVANNA
 
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);

@@ -54,7 +54,7 @@ static void UpdateScanlineEffectRegBuffer(s16 a0);
 static void ScheduleStopScanlineEffect(void);
 static void LoadMainTitleScreenPalsAndResetBgs(void);
 static void CB2_FadeOutTransitionToSaveClearScreen(void);
-static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite);
+static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite *sprite);
 static void CB2_FadeOutTransitionToBerryFix(void);
 static void LoadSpriteGfxAndPals(void);
 static void Task_FlameOrLeafSpawner(u8 taskId);
@@ -65,7 +65,7 @@ static void SetPalOnOrCreateBlankSprite(bool32 a0);
 static u8 CreateSlashSprite(void);
 static void ScheduleHideSlashSprite(u8 spriteId);
 static bool32 IsSlashSpriteHidden(u8 spriteId);
-static void SpriteCallback_Slash(struct Sprite * sprite);
+static void SpriteCallback_Slash(struct Sprite *sprite);
 
 // bg3
 static const u8 sBorderBgTiles[] = INCBIN_U8("graphics/title_screen/border_bg.4bpp.lz");
@@ -909,7 +909,7 @@ static void LoadSpriteGfxAndPals(void)
     LoadSpritePalettes(sSpritePals);
 }
 
-static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite)
+static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite *sprite)
 {
     s16 * data = sprite->data;
     sprite->data[0] -= data[1];
@@ -1044,7 +1044,7 @@ static void CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
     }
 }
 
-static void SpriteCallback_LG_8079800(struct Sprite * sprite)
+static void SpriteCallback_LG_8079800(struct Sprite *sprite)
 {
     sprite->x -= 7;
     if (sprite->x < -16)
@@ -1170,7 +1170,7 @@ static bool32 IsSlashSpriteHidden(u8 spriteId)
         return FALSE;
 }
 
-static void SpriteCallback_Slash(struct Sprite * sprite)
+static void SpriteCallback_Slash(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

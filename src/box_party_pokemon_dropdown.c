@@ -17,8 +17,8 @@ struct BPPD_Struct
 {
     struct BPPD_MapRect map1Rect;
     struct BPPD_MapRect map2Rect;
-    const void * src1;
-    const void * src2;
+    const void *src1;
+    const void *src2;
     u16 src1Height;
     u16 src1Width;
     u16 src2Width;
@@ -80,7 +80,7 @@ void CopyAllBoxPartyPokemonDropdownsToVram(void)
     }
 }
 
-void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void * src, u16 width, u16 height)
+void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void *src, u16 width, u16 height)
 {
     u16 screenSize;
     u16 bgType;
@@ -112,7 +112,7 @@ void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void * src, u16 width
     }
 }
 
-void SetBoxPartyPokemonDropdownMap1Tiles(u8 idx, const void * src)
+void SetBoxPartyPokemonDropdownMap1Tiles(u8 idx, const void *src)
 {
     if (idx < sBoxPartyPokemonDropdownCount)
     {
@@ -191,7 +191,7 @@ static void PushMap1(u8 idx)
 {
     int i;
     int run = sBoxPartyPokemonDropdownPtr[idx].mapSize * sBoxPartyPokemonDropdownPtr[idx].src1Height;
-    const void * addr = sBoxPartyPokemonDropdownPtr[idx].src1 + run * sBoxPartyPokemonDropdownPtr[idx].map1Rect.destY2 + sBoxPartyPokemonDropdownPtr[idx].map1Rect.destX2 * sBoxPartyPokemonDropdownPtr[idx].mapSize;
+    const void *addr = sBoxPartyPokemonDropdownPtr[idx].src1 + run * sBoxPartyPokemonDropdownPtr[idx].map1Rect.destY2 + sBoxPartyPokemonDropdownPtr[idx].map1Rect.destX2 * sBoxPartyPokemonDropdownPtr[idx].mapSize;
     for (i = 0; i < sBoxPartyPokemonDropdownPtr[idx].map1Rect.height; i++)
     {
         CopyToBgTilemapBufferRect(sBoxPartyPokemonDropdownPtr[idx].bgId, addr, sBoxPartyPokemonDropdownPtr[idx].map1Rect.destX2, sBoxPartyPokemonDropdownPtr[idx].map1Rect.destY2 + i, sBoxPartyPokemonDropdownPtr[idx].map1Rect.width, 1);
@@ -203,7 +203,7 @@ static void PushMap2(u8 idx)
 {
     int i;
     int run = sBoxPartyPokemonDropdownPtr[idx].mapSize * sBoxPartyPokemonDropdownPtr[idx].src2Width;
-    const void * addr = sBoxPartyPokemonDropdownPtr[idx].src2 + run * sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY + sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX * sBoxPartyPokemonDropdownPtr[idx].mapSize;
+    const void *addr = sBoxPartyPokemonDropdownPtr[idx].src2 + run * sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY + sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX * sBoxPartyPokemonDropdownPtr[idx].mapSize;
     for (i = 0; i < sBoxPartyPokemonDropdownPtr[idx].map2Rect.height; i++)
     {
         CopyToBgTilemapBufferRect(sBoxPartyPokemonDropdownPtr[idx].bgId, addr, sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2, sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 + i, sBoxPartyPokemonDropdownPtr[idx].map2Rect.width, 1);

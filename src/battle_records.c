@@ -205,19 +205,19 @@ static void ClearWindowCommitAndRemove(u8 windowId)
 static void ResetGpu(void)
 {
     {
-    void * dest = (void *)VRAM;
+    void *dest = (void *)VRAM;
     u32 size = VRAM_SIZE;
     DmaClearLarge16(3, dest, size, 0x1000);
     }
 
     {
-    void * dest = (void *)OAM;
+    void *dest = (void *)OAM;
     u32 size = OAM_SIZE;
     DmaClear32(3, dest, size);
     }
 
     {
-    void * dest = (void *)PLTT;
+    void *dest = (void *)PLTT;
     u32 size = PLTT_SIZE;
     DmaClear16(3, dest, size);
     }

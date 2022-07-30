@@ -19,9 +19,9 @@
 
 struct OakSpeechResources
 {
-    void * solidColorsGfx;
-    void * trainerPicTilemapBuffer;
-    void * unk_0008;
+    void *solidColorsGfx;
+    void *trainerPicTilemapBuffer;
+    void *unk_0008;
     u8 filler_000C[4];
     u16 hasPlayerBeenNamed;
     u16 unk_0012;
@@ -1639,7 +1639,7 @@ static void CreateNidoranFSprite(u8 taskId)
     gTasks[taskId].data[4] = spriteId;
 }
 
-static void SpriteCB_PikaSync(struct Sprite * sprite)
+static void SpriteCB_PikaSync(struct Sprite *sprite)
 {
     sprite->y2 = gSprites[sprite->data[0]].animCmdIndex;
 }

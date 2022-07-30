@@ -43,7 +43,7 @@ void mevent_client_inc_flag(void)
     s_mevent_client_ptr->flag++;
 }
 
-void * mevent_client_get_buffer(void)
+void *mevent_client_get_buffer(void)
 {
     return s_mevent_client_ptr->buffer;
 }

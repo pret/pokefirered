@@ -16,8 +16,8 @@ struct UnionRoomChat3
 
 static EWRAM_DATA struct UnionRoomChat3 *sWork = NULL;
 
-static void SpriteCB_TextEntryCursor(struct Sprite * sprite);
-static void SpriteCB_CharacterSelectCursor(struct Sprite * sprite);
+static void SpriteCB_TextEntryCursor(struct Sprite *sprite);
+static void SpriteCB_CharacterSelectCursor(struct Sprite *sprite);
 
 static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/unk_845AC14.gbapal");
 static const u32 sSelectorCursorGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AC34.4bpp.lz");

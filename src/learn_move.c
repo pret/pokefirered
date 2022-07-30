@@ -159,7 +159,7 @@ static void MoveRelearnerStateMachine(void);
 static void DrawTextBorderOnWindows6and7(void);
 static void PrintTeachWhichMoveToStrVar1(bool8 onInit);
 static void InitMoveRelearnerStateVariables(void);
-static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite);
+static void SpriteCB_ListMenuScrollIndicators(struct Sprite *sprite);
 static void SpawnListMenuScrollIndicatorSprites(void);
 static void MoveRelearnerInitListMenuBuffersEtc(void);
 static void MoveRelearnerMenuHandleInput(void);
@@ -711,7 +711,7 @@ static void InitMoveRelearnerStateVariables(void)
         sMoveRelearner->learnableMoves[i] = MOVE_NONE;
 }
 
-static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite)
+static void SpriteCB_ListMenuScrollIndicators(struct Sprite *sprite)
 {
     s16 abcissa = (sprite->data[1] * 10) & 0xFF;
     switch (sprite->data[0])

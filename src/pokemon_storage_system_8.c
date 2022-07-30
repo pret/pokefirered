@@ -20,13 +20,13 @@ static void sub_8096624(u8 id, bool8 show);
 static const u32 *GetItemIconPic(u16 itemId);
 static const u32 *GetItemIconPalette(u16 itemId);
 static void sub_8096898(u32 x);
-static void sub_809692C(struct Sprite * sprite);
-static void sub_8096958(struct Sprite * sprite);
-static void sub_80969BC(struct Sprite * sprite);
-static void sub_80969F4(struct Sprite * sprite);
-static void sub_8096A74(struct Sprite * sprite);
-static void sub_8096B10(struct Sprite * sprite);
-static void sub_8096BAC(struct Sprite * sprite);
+static void sub_809692C(struct Sprite *sprite);
+static void sub_8096958(struct Sprite *sprite);
+static void sub_80969BC(struct Sprite *sprite);
+static void sub_80969F4(struct Sprite *sprite);
+static void sub_8096A74(struct Sprite *sprite);
+static void sub_8096B10(struct Sprite *sprite);
+static void sub_8096BAC(struct Sprite *sprite);
 
 static const u32 gUnknown_83D35DC[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
 
@@ -215,7 +215,7 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_BLEND);
     }
 
-    gPSSData->movingItem = gPSSData->cursorMonItem;
+    gPSSData->movingItem = gPSSData->displayMonItemId;
 }
 
 void sub_8095E2C(u16 item)
@@ -560,7 +560,7 @@ void PrintItemDescription(void)
     if (IsActiveItemMoving())
         description = ItemId_GetDescription(gPSSData->movingItem);
     else
-        description = ItemId_GetDescription(gPSSData->cursorMonItem);
+        description = ItemId_GetDescription(gPSSData->displayMonItemId);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
     AddTextPrinterParameterized5(2, 2, description, 2, 0, 0, NULL, 0, 0);
@@ -660,9 +660,9 @@ static void sub_8096958(struct Sprite *sprite)
 
 static void sub_80969BC(struct Sprite *sprite)
 {
-    sprite->x = gPSSData->field_CB4->x + 4;
-    sprite->y = gPSSData->field_CB4->y + gPSSData->field_CB4->y2 + 8;
-    sprite->oam.priority = gPSSData->field_CB4->oam.priority;
+    sprite->x = gPSSData->cursorSprite->x + 4;
+    sprite->y = gPSSData->cursorSprite->y + gPSSData->cursorSprite->y2 + 8;
+    sprite->oam.priority = gPSSData->cursorSprite->oam.priority;
 }
 
 static void sub_80969F4(struct Sprite *sprite)

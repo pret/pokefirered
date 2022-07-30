@@ -29,13 +29,13 @@ static EWRAM_DATA u16 *gUnknown_203F42C[4] = {NULL};
 static EWRAM_DATA struct DodrioStruct_2022CF4 * gUnknown_203F43C = NULL;
 static EWRAM_DATA struct DodrioSubstruct_0160 * gUnknown_203F440 = NULL;
 
-static void sub_8153B9C(struct Sprite * sprite);
-static u32 sub_8153C30(struct Sprite * sprite);
-static u32 sub_8153CA0(struct Sprite * sprite);
+static void sub_8153B9C(struct Sprite *sprite);
+static u32 sub_8153C30(struct Sprite *sprite);
+static u32 sub_8153CA0(struct Sprite *sprite);
 static void sub_8153D48(bool8 a0, u8 a1);
-static void nullsub_97(struct Sprite * sprite);
+static void nullsub_97(struct Sprite *sprite);
 static void sub_8154324(bool8 a0);
-static void sub_81543E8(struct Sprite * sprite);
+static void sub_81543E8(struct Sprite *sprite);
 static s16 sub_8154608(u8 a0, u8 a1);
 static void sub_8154A08(u8 taskId);
 static void sub_8154A2C(void);
@@ -304,7 +304,7 @@ void sub_8153AFC(struct DodrioSubstruct_318C * arg0, u8 arg1, u8 id, u8 arg3)
     sub_8153D48(TRUE, id);
 }
 
-static void sub_8153B9C(struct Sprite * sprite)
+static void sub_8153B9C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -321,7 +321,7 @@ static void sub_8153B9C(struct Sprite * sprite)
 
 void sub_8153BC0(u8 unused)
 {
-    struct Sprite * sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
+    struct Sprite *sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
     sprite->data[0] = 1;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
@@ -331,7 +331,7 @@ void sub_8153BC0(u8 unused)
 
 void sub_8153BF8(u8 unused)
 {
-    struct Sprite * sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
+    struct Sprite *sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
     sprite->data[0] = 2;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
@@ -339,7 +339,7 @@ void sub_8153BF8(u8 unused)
     sprite->data[4] = 0;
 }
 
-static u32 sub_8153C30(struct Sprite * sprite)
+static u32 sub_8153C30(struct Sprite *sprite)
 {
     s8 var;
     u8 mod = (++sprite->data[1] / 2) % 4;
@@ -368,7 +368,7 @@ static u32 sub_8153C30(struct Sprite * sprite)
     return 0;
 }
 
-static u32 sub_8153CA0(struct Sprite * sprite)
+static u32 sub_8153CA0(struct Sprite *sprite)
 {
     u8 mod = (++sprite->data[1] / 13) % 4;
 
@@ -388,7 +388,7 @@ void sub_8153D08(u8 count)
     u8 i;
     for (i = 0; i < count; i++)
     {
-        struct Sprite * sprite = &gSprites[*gUnknown_203F3E4[i]];
+        struct Sprite *sprite = &gSprites[*gUnknown_203F3E4[i]];
         if (sprite != NULL)
             DestroySpriteAndFreeResources(sprite);
         // Memory should be freed here but is not.
@@ -412,7 +412,7 @@ void sub_8153DA8(u8 id, u8 frameNum)
     StartSpriteAnim(&gSprites[*gUnknown_203F3E4[id]], frameNum);
 }
 
-static void nullsub_97(struct Sprite * sprite)
+static void nullsub_97(struct Sprite *sprite)
 {
 
 }
@@ -422,7 +422,7 @@ void sub_8153DD8(void)
     u8 i;
     for (i = 0; i < 10; i++)
     {
-        struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
+        struct Sprite *sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         sprite->x = (i * 16) + 48;
         sprite->y = -8 - (i * 8);
         gUnknown_203F43C->unkC[i] = 0;
@@ -466,7 +466,7 @@ void sub_8153ED8(void)
     u8 i;
     for (i = 0; i < 10; i++)
     {
-        struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
+        struct Sprite *sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         if (sprite != NULL)
             DestroySpriteAndFreeResources(sprite);
     }
@@ -479,7 +479,7 @@ bool32 sub_8153F1C(void)
     bool32 r3 = FALSE;
     for (i = 0; i < 10; i++)
     {
-        struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
+        struct Sprite *sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         gUnknown_203F43C->unk16[i] = 2;
         if (gUnknown_203F43C->unkC[i] != 0 && sprite->y == 8)
             continue;
@@ -621,7 +621,7 @@ void sub_815417C(void)
 
 void sub_8154274(void)
 {
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u8 i;
 
     for (i = 0; i < 11; i++)
@@ -677,7 +677,7 @@ static void sub_81543C4(u8 spriteId)
 #define sKeepPosX data[10]
 #endif // BUGFIX
 
-static void sub_81543E8(struct Sprite * sprite)
+static void sub_81543E8(struct Sprite *sprite)
 {
     u8 i;
     static const u8 array[] = {30, 20};
@@ -735,7 +735,7 @@ void sub_81544F0(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
+        struct Sprite *sprite = &gSprites[*gUnknown_203F3F8[i]];
         sprite->sKeepPosX = TRUE;
         sprite->x = gUnknown_8478E0E[i][0];
         sprite->y = gUnknown_8478E0E[i][1];
@@ -747,7 +747,7 @@ void sub_8154540(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
+        struct Sprite *sprite = &gSprites[*gUnknown_203F3F8[i]];
         sprite->sKeepPosX = FALSE;
     }
 }
@@ -757,7 +757,7 @@ void sub_8154578(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
+        struct Sprite *sprite = &gSprites[*gUnknown_203F3F8[i]];
         if (sprite)
             DestroySprite(sprite);
         FREE_AND_SET_NULL(gUnknown_203F3F8[i]);
@@ -833,8 +833,8 @@ void sub_81546C0(void)
 
 static void sub_81546EC(u8 frameId)
 {
-    LoadBgTiles(0, GetUserFrameGraphicsInfo(frameId)->tiles, 0x120, 1);
-    LoadPalette(GetUserFrameGraphicsInfo(frameId)->palette, 0xA0, 0x20);
+    LoadBgTiles(0, GetWindowFrameTilesPal(frameId)->tiles, 0x120, 1);
+    LoadPalette(GetWindowFrameTilesPal(frameId)->palette, 0xA0, 0x20);
 }
 
 static void sub_8154720(void)

@@ -387,10 +387,10 @@ static void DrawPlayerNameWindows(struct BerryCrushGame * game);
 static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame * game);
 static void CreateGameSprites(struct BerryCrushGame * game);
 static void DestroyGameSprites(struct BerryCrushGame * game);
-static void SpriteCB_Impact(struct Sprite * sprite);
-static void SpriteCB_Sparkle_End(struct Sprite * sprite);
-static void SpriteCB_Sparkle(struct Sprite * sprite);
-static void SpriteCB_Sparkle_Init(struct Sprite * sprite);
+static void SpriteCB_Impact(struct Sprite *sprite);
+static void SpriteCB_Sparkle_End(struct Sprite *sprite);
+static void SpriteCB_Sparkle(struct Sprite *sprite);
+static void SpriteCB_Sparkle_Init(struct Sprite *sprite);
 static struct BerryCrushGame *GetBerryCrushGame(void);
 static u32 QuitBerryCrush(MainCallback callback);
 static void ChooseBerry(void);
@@ -410,7 +410,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
 static void CloseResultsWindow(struct BerryCrushGame *game);
 static void ResetCrusherPos(struct BerryCrushGame *game);
 static void HideTimer(struct BerryCrushGame_Gfx *gfx);
-static void SpriteCB_DropBerryIntoCrusher(struct Sprite * sprite);
+static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite);
 
 static const u8 sBitTable[] = {
     1 << 0,
@@ -2728,7 +2728,7 @@ static void CreateBerrySprites(struct BerryCrushGame * game, struct BerryCrushGa
     }
 }
 
-static void SpriteCB_DropBerryIntoCrusher(struct Sprite * sprite)
+static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
 
@@ -3387,7 +3387,7 @@ static void DestroyGameSprites(struct BerryCrushGame * game)
         DestroySprite(game->gfx.coreSprite);
 }
 
-static void SpriteCB_Impact(struct Sprite * sprite)
+static void SpriteCB_Impact(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -3396,7 +3396,7 @@ static void SpriteCB_Impact(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_Sparkle_End(struct Sprite * sprite)
+static void SpriteCB_Sparkle_End(struct Sprite *sprite)
 {
     u8 r1 = 0;
     SpriteCallback r5 = SpriteCallbackDummy;
@@ -3425,7 +3425,7 @@ static void SpriteCB_Sparkle_End(struct Sprite * sprite)
 #define MASK_TARGET_Y 0x7FFF
 #define F_MOVE_HORIZ  0x8000
 
-static void SpriteCB_Sparkle(struct Sprite * sprite)
+static void SpriteCB_Sparkle(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
 
@@ -3447,7 +3447,7 @@ static void SpriteCB_Sparkle(struct Sprite * sprite)
         sprite->callback = SpriteCB_Sparkle_End;
 }
 
-static void SpriteCB_Sparkle_Init(struct Sprite * sprite)
+static void SpriteCB_Sparkle_Init(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     s16 xMult, var;

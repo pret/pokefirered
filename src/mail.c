@@ -45,9 +45,9 @@ struct MailAttrStruct
 
 struct MailGfxData
 {
-    const void * pal;
-    const void * tiles;
-    const void * map;
+    const void *pal;
+    const void *tiles;
+    const void *map;
     u32 size;
     u16 textpals[2];
 };

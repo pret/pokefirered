@@ -4,7 +4,7 @@
 struct PAM_TaskData
 {
     struct SubspriteTable subsprites;
-    void * buffer;
+    void *buffer;
     u8 unk_0C;
     u8 spr_id;
     u16 tilesTag;

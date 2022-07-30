@@ -151,19 +151,19 @@ enum
     HEALTHBOX_GFX_117, //unknown_D1300C
 };
 
-static void SpriteCB_HealthBoxOther(struct Sprite * sprite);
-static void SpriteCB_HealthBar(struct Sprite * sprite);
+static void SpriteCB_HealthBoxOther(struct Sprite *sprite);
+static void SpriteCB_HealthBar(struct Sprite *sprite);
 static const u8 *GetHealthboxElementGfxPtr(u8 which);
 static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 static void sub_8049388(u8 taskId);
 static void sub_80493E4(u8 taskId);
-static void sub_8049568(struct Sprite * sprite);
-static void sub_8049630(struct Sprite * sprite);
+static void sub_8049568(struct Sprite *sprite);
+static void sub_8049630(struct Sprite *sprite);
 static void sub_804948C(u8 taskId);
-static void SpriteCB_StatusSummaryBallsOnSwitchout(struct Sprite * sprite);
+static void SpriteCB_StatusSummaryBallsOnSwitchout(struct Sprite *sprite);
 static void UpdateStatusIconInHealthbox(u8 spriteId);
-static void SpriteCB_StatusSummaryBar(struct Sprite * sprite);
-static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite * sprite);
+static void SpriteCB_StatusSummaryBar(struct Sprite *sprite);
+static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite);
 static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId);
 static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar);
 static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale);

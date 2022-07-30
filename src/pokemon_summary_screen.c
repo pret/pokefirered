@@ -129,7 +129,7 @@ static void SwapMonMoveSlots(void);
 static void SwapBoxMonMoveSlots(void);
 static void UpdateCurrentMonBufferFromPartyOrBox(struct Pokemon * mon);
 static void PokeSum_SetMonPicSpriteCallback(u16 spriteId);
-static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite);
+static void SpriteCB_MoveSelectionCursor(struct Sprite *sprite);
 static void UpdateMonStatusIconObj(void);
 static void UpdateHpBarObjs(void);
 static void UpdateExpBarObjs(void);
@@ -238,7 +238,7 @@ struct PokemonSummaryScreenData
     } monList;
 
     MainCallback savedCallback;
-    struct Sprite * markingSprite;
+    struct Sprite *markingSprite;
 
     u8 ALIGNED(4) lastPageFlipDirection; /* 0x3300 */
     u8 ALIGNED(4) unk3304; /* 0x3304 */
@@ -264,7 +264,7 @@ struct Struct203B144
 
 struct ExpBarObjs
 {
-    struct Sprite * sprites[11]; /* 0x00 */
+    struct Sprite *sprites[11]; /* 0x00 */
     u16 xpos[11]; /* 0x2c */
     u16 tileTag; /* 0x42 */
     u16 palTag; /* 0x44 */
@@ -272,7 +272,7 @@ struct ExpBarObjs
 
 struct HpBarObjs
 {
-    struct Sprite * sprites[10]; /* 0x00 */
+    struct Sprite *sprites[10]; /* 0x00 */
     u16 xpos[10]; /* 0x28 */
     u16 tileTag; /* 0x3c */
     u16 palTag; /* 0x3e */
@@ -287,7 +287,7 @@ struct MonPicBounceState
 
 struct MoveSelectionCursor
 {
-    struct Sprite * sprite; /* 0x00 */
+    struct Sprite *sprite; /* 0x00 */
     u16 whichSprite; /* 0x04 */
     u16 tileTag; /* 0x06 */
     u16 palTag; /* 0x08 */
@@ -295,21 +295,21 @@ struct MoveSelectionCursor
 
 struct MonStatusIconObj
 {
-    struct Sprite * sprite; /* 0x00 */
+    struct Sprite *sprite; /* 0x00 */
     u16 tileTag; /* 0x04 */
     u16 palTag; /* 0x06 */
 };
 
 struct PokerusIconObj
 {
-    struct Sprite * sprite; /* 0x00 */
+    struct Sprite *sprite; /* 0x00 */
     u16 tileTag; /* 0x04 */
     u16 palTag; /* 0x06 */
 };
 
 struct ShinyStarObjData
 {
-    struct Sprite * sprite; /* 0x00 */
+    struct Sprite *sprite; /* 0x00 */
     u16 tileTag; /* 0x04 */
     u16 palTag; /* 0x06 */
 };
@@ -3914,7 +3914,7 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
     }
 }
 
-static void SpriteCB_PokeSum_MonPicSprite(struct Sprite * sprite)
+static void SpriteCB_PokeSum_MonPicSprite(struct Sprite *sprite)
 {
     if (sMonSummaryScreen->numMonPicBounces >= 2)
         return;
@@ -3954,7 +3954,7 @@ static void SpriteCB_PokeSum_MonPicSprite(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_PokeSum_EggPicShake(struct Sprite * sprite)
+static void SpriteCB_PokeSum_EggPicShake(struct Sprite *sprite)
 {
     if (sMonSummaryScreen->numMonPicBounces >= 2)
         return;
@@ -4001,7 +4001,7 @@ static void SpriteCB_PokeSum_EggPicShake(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_MonPicDummy(struct Sprite * sprite)
+static void SpriteCB_MonPicDummy(struct Sprite *sprite)
 {
 }
 
@@ -4187,7 +4187,7 @@ static void CreateMoveSelectionCursorObjs(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;
-    void * gfxBufferPtrs[2];
+    void *gfxBufferPtrs[2];
     gfxBufferPtrs[0] = AllocZeroed(0x20 * 64);
     gfxBufferPtrs[1] = AllocZeroed(0x20 * 64);
 
@@ -4245,7 +4245,7 @@ static void ShoworHideMoveSelectionCursor(bool8 invisible)
         sMoveSelectionCursorObjs[i]->sprite->invisible = invisible;
 }
 
-static void SpriteCB_MoveSelectionCursor(struct Sprite * sprite)
+static void SpriteCB_MoveSelectionCursor(struct Sprite *sprite)
 {
     u8 i;
 
@@ -4304,7 +4304,7 @@ static void DestroyMoveSelectionCursorObjs(void)
 static void CreateMonStatusIconObj(u16 tileTag, u16 palTag)
 {
     u16 spriteId;
-    void * gfxBufferPtr;
+    void *gfxBufferPtr;
 
     sStatusIcon = AllocZeroed(sizeof(struct MonStatusIconObj));
     gfxBufferPtr = AllocZeroed(0x20 * 32);
@@ -4394,7 +4394,7 @@ static void CreateHpBarObjs(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;
-    void * gfxBufferPtr;
+    void *gfxBufferPtr;
     u32 curHp;
     u32 maxHp;
     u8 hpBarPalTagOffset = 0;
@@ -4554,7 +4554,7 @@ static void CreateExpBarObjs(u16 tileTag, u16 palTag)
 {
     u8 i;
     u8 spriteId;
-    void * gfxBufferPtr;
+    void *gfxBufferPtr;
 
     sExpBarObjs = AllocZeroed(sizeof(struct ExpBarObjs));
     gfxBufferPtr = AllocZeroed(0x20 * 12);
@@ -4685,7 +4685,7 @@ static void ShowOrHideExpBarObjs(u8 invisible)
 static void CreatePokerusIconObj(u16 tileTag, u16 palTag)
 {
     u16 spriteId;
-    void * gfxBufferPtr;
+    void *gfxBufferPtr;
 
     sPokerusIconObj = AllocZeroed(sizeof(struct PokerusIconObj));
     gfxBufferPtr = AllocZeroed(0x20 * 1);
@@ -4770,7 +4770,7 @@ static void HideShowPokerusIcon(bool8 invisible)
 static void CreateShinyStarObj(u16 tileTag, u16 palTag)
 {
     u16 spriteId;
-    void * gfxBufferPtr;
+    void *gfxBufferPtr;
 
     sShinyStarObjData = AllocZeroed(sizeof(struct ShinyStarObjData));
     gfxBufferPtr = AllocZeroed(0x20 * 2);
@@ -4881,7 +4881,7 @@ static void PokeSum_CreateMonMarkingsSprite(void)
     u32 markings = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MARKINGS);
 
     DestroySpriteAndFreeResources(sMonSummaryScreen->markingSprite);
-    sMonSummaryScreen->markingSprite = CreateMonMarkingSprite_SelectCombo(TAG_PSS_UNK_8C, TAG_PSS_UNK_8C, sMonMarkingSpritePalette);
+    sMonSummaryScreen->markingSprite = CreateMonMarkingAllCombosSprite(TAG_PSS_UNK_8C, TAG_PSS_UNK_8C, sMonMarkingSpritePalette);
 
     if (sMonSummaryScreen->markingSprite != NULL)
     {

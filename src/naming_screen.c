@@ -139,9 +139,9 @@ static void Task_809E58C(u8 taskId);
 static u16 sub_809E644(u8 tag);
 static void sub_809E6B8(u8 a0);
 static void sub_809E6E0(struct Task * task, u8 a1, u8 a2);
-static void sub_809E700(struct Sprite * sprite);
-static void sub_809E7F0(struct Sprite * sprite);
-static void sub_809E83C(struct Sprite * sprite);
+static void sub_809E700(struct Sprite *sprite);
+static void sub_809E7F0(struct Sprite *sprite);
+static void sub_809E83C(struct Sprite *sprite);
 static void sub_809E898(void);
 static void CursorInit(void);
 static void SetCursorPos(s16 x, s16 y);
@@ -153,11 +153,11 @@ static bool8 IsCursorAnimFinished(void);
 static u8 GetCurrentPageColumnCount(void);
 static void CreatePageSwitcherSprites(void);
 static void sub_809EC20(void);
-static bool8 PageSwapSpritesCB_Init(struct Sprite * sprite);
-static bool8 PageSwapSpritesCB_Idle(struct Sprite * sprite);
-static bool8 PageSwapSpritesCB_SwapHide(struct Sprite * sprite);
-static bool8 PageSwapSpritesCB_SwapShow(struct Sprite * sprite);
-static void sub_809ED88(u8 a0, struct Sprite * spr1, struct Sprite * spr2);
+static bool8 PageSwapSpritesCB_Init(struct Sprite *sprite);
+static bool8 PageSwapSpritesCB_Idle(struct Sprite *sprite);
+static bool8 PageSwapSpritesCB_SwapHide(struct Sprite *sprite);
+static bool8 PageSwapSpritesCB_SwapShow(struct Sprite *sprite);
+static void sub_809ED88(u8 a0, struct Sprite *spr1, struct Sprite *spr2);
 static void CreateBackOkSprites(void);
 static void CreateUnderscoreSprites(void);
 static void CreateInputTargetIcon(void);
@@ -1163,7 +1163,7 @@ static void sub_809EC20(void)
     sprite->data[1] = sNamingScreenData->currentPage;
 }
 
-static bool8 (*const sPageSwapSpritesCBs[])(struct Sprite * sprite) = {
+static bool8 (*const sPageSwapSpritesCBs[])(struct Sprite *sprite) = {
     PageSwapSpritesCB_Init,
     PageSwapSpritesCB_Idle,
     PageSwapSpritesCB_SwapHide,
@@ -1230,7 +1230,7 @@ static bool8 PageSwapSpritesCB_SwapShow(struct Sprite *sprite)
 static const u16 gUnknown_83E2388[] = {1, 3, 2};
 static const u16 gUnknown_83E238E[] = {4, 6, 5};
 
-static void sub_809ED88(u8 page, struct Sprite * sprite1, struct Sprite * sprite2)
+static void sub_809ED88(u8 page, struct Sprite *sprite1, struct Sprite *sprite2)
 {
     sprite2->oam.paletteNum = IndexOfSpritePaletteTag(gUnknown_83E2388[page]);
     sprite1->sheetTileStart = GetSpriteTileStartByTag(gUnknown_83E238E[page]);

@@ -100,7 +100,7 @@ static void DestroyPersonPicSprite(u8 taskId, u16 who);
 static void UpdateIconDescriptionBox(u8 whichText);
 static void UpdateIconDescriptionBoxOff(void);
 static void FC_CreateListMenu(void);
-static void SpriteCB_FCSpinningPokeball(struct Sprite * sprite);
+static void SpriteCB_FCSpinningPokeball(struct Sprite *sprite);
 static void InitListMenuTemplate(void);
 static void FC_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list);
 static void Task_SwitchToPickMode(u8 taskId);
@@ -1164,7 +1164,7 @@ void FullyUnlockFameChecker(void)
 
 static void FCSetup_ClearVideoRegisters(void)
 {
-    void * vram = (void *)VRAM;
+    void *vram = (void *)VRAM;
     DmaClearLarge16(3, vram, VRAM_SIZE, 0x1000);
     DmaClear32(3, OAM, OAM_SIZE);
     DmaClear16(3, PLTT, PLTT_SIZE);
@@ -1268,7 +1268,7 @@ static u8 CreateFlavorTextIconSelectorCursorSprite(s16 where)
     return CreateSprite(&sSpriteTemplate_SelectorCursor, x, y, 0);
 }
 
-static void SpriteCB_DestroyFlavorTextIconSelectorCursor(struct Sprite * sprite)
+static void SpriteCB_DestroyFlavorTextIconSelectorCursor(struct Sprite *sprite)
 {
     DestroySprite(sprite);
 }
@@ -1297,7 +1297,7 @@ static u8 CreateSpinningPokeballSprite(void)
     return CreateSprite(&sSpinningPokeballSpriteTemplate, 0xe2, 0x42, 0);
 }
 
-static void SpriteCB_DestroySpinningPokeball(struct Sprite * sprite)
+static void SpriteCB_DestroySpinningPokeball(struct Sprite *sprite)
 {
     FreeSpriteOamMatrix(sprite);
     DestroySprite(sprite);
@@ -1311,7 +1311,7 @@ static void FreeNonTrainerPicTiles(void)
     FreeSpriteTilesByTag(SPRITETAG_BILL);
 }
 
-static void SpriteCB_FCSpinningPokeball(struct Sprite * sprite)
+static void SpriteCB_FCSpinningPokeball(struct Sprite *sprite)
 {
     if (sprite->data[0] == 1)
     {

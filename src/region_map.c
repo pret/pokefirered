@@ -116,7 +116,7 @@ struct GpuWindowParams
 struct SwitchMapMenuCursorSubsprite
 {
     u8 tiles[0x400];
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
     s16 x;
@@ -176,7 +176,7 @@ struct DungeonMapPreview
 struct MapEdge
 {
     u16 tiles[0x200];
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     s16 x;
     s16 y;
     u16 tileTag;
@@ -210,7 +210,7 @@ struct MapCursor
     u16 selectedMapsec;
     u16 selectedMapsecType;
     u16 selectedDungeonType;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
     u16 tiles[0x80];
@@ -220,7 +220,7 @@ struct PlayerIcon
 {
     s16 x;
     s16 y;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
     u16 tiles[0x40];
@@ -230,7 +230,7 @@ struct MapIconSprite
 {
     u32 unused;
     u8 region;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
 };
@@ -2277,7 +2277,7 @@ static bool8 HandleSwitchMapInput(void)
     return FALSE;
 }
 
-static void SpriteCB_SwitchMapCursor(struct Sprite * sprite)
+static void SpriteCB_SwitchMapCursor(struct Sprite *sprite)
 {
     sprite->y = sSwitchMapMenu->highlight.top + 16;
 }
@@ -2619,7 +2619,7 @@ static bool8 UpdateDungeonMapPreview(bool8 a0)
     return FALSE;
 }
 
-static void SpriteCB_MapEdge(struct Sprite * sprite)
+static void SpriteCB_MapEdge(struct Sprite *sprite)
 {
 
 }
@@ -3112,7 +3112,7 @@ static bool8 MoveMapEdgesInward(void)
     return FALSE;
 }
 
-static void SpriteCB_MapCursor(struct Sprite * sprite)
+static void SpriteCB_MapCursor(struct Sprite *sprite)
 {
     if (sMapCursor->moveCounter != 0)
     {

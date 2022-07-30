@@ -87,8 +87,8 @@ static void ClearVramOamPltt_LoadHofPal(void);
 static void HofInit_ResetGpuBuffersAndLoadConfettiGfx(void);
 static void Hof_InitBgs(void);
 static bool8 DrawHofBackground(void);
-static void SpriteCB_GetOnScreen(struct Sprite * sprite);
-static void SpriteCB_Confetti(struct Sprite * sprite);
+static void SpriteCB_GetOnScreen(struct Sprite *sprite);
+static void SpriteCB_Confetti(struct Sprite *sprite);
 static bool8 Hof_SpawnConfetti(void);
 
 static const struct BgTemplate sHof_BgTemplates[] = {
@@ -1213,12 +1213,12 @@ static bool8 DrawHofBackground(void)
     return TRUE;
 }
 
-static void SpriteCB_EndGetOnScreen(struct Sprite * sprite)
+static void SpriteCB_EndGetOnScreen(struct Sprite *sprite)
 {
 
 }
 
-static void SpriteCB_GetOnScreen(struct Sprite * sprite)
+static void SpriteCB_GetOnScreen(struct Sprite *sprite)
 {
     if (sprite->x != sprite->data[1]
         || sprite->y != sprite->data[2])

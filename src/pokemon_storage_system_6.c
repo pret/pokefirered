@@ -90,8 +90,8 @@ void AddMenu(void)
     gPSSData->menuWindowId = AddWindow(&gPSSData->menuWindow);
     ClearWindowTilemap(gPSSData->menuWindowId);
     DrawStdFrameWithCustomTileAndPalette(gPSSData->menuWindowId, FALSE, 0x00b, 14);
-    PrintTextArray(gPSSData->menuWindowId, 1, 8, 2, 16, gPSSData->menuItemsCount, (void *)gPSSData->menuItems);
-    Menu_InitCursor(gPSSData->menuWindowId, 1, 0, 2, 16, gPSSData->menuItemsCount, 0);
+    PrintTextArray(gPSSData->menuWindowId, FONT_1, 8, 2, 16, gPSSData->menuItemsCount, (void *)gPSSData->menuItems);
+    Menu_InitCursor(gPSSData->menuWindowId, FONT_1, 0, 2, 16, gPSSData->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     gPSSData->menuUnusedField = 0;
 }

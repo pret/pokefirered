@@ -322,7 +322,7 @@ static void sub_80929B0(void)
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_BOX:
-        sub_80920FC(TRUE);
+        AnimateBoxScrollArrows(TRUE);
         break;
     case CURSOR_AREA_IN_PARTY:
         gPSSData->cursorShadowSprite->subpriority = 13;
@@ -955,7 +955,7 @@ bool8 IsMonBeingMoved(void)
     return sIsMonBeingMoved;
 }
 
-bool8 IsCursorOnBox(void)
+bool8 IsCursorOnBoxTitle(void)
 {
     return (sBoxCursorArea == CURSOR_AREA_BOX);
 }
@@ -1615,7 +1615,7 @@ static u8 HandleInput_OnBox(void)
 
         if (JOY_NEW(A_BUTTON))
         {
-            sub_80920FC(FALSE);
+            AnimateBoxScrollArrows(FALSE);
             AddBoxMenu();
             return 7;
         }
@@ -1636,7 +1636,7 @@ static u8 HandleInput_OnBox(void)
     if (retVal)
     {
         if (cursorArea != CURSOR_AREA_BOX)
-            sub_80920FC(FALSE);
+            AnimateBoxScrollArrows(FALSE);
         sub_80927E8(cursorArea, cursorPosition);
     }
 

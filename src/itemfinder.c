@@ -143,7 +143,7 @@ void ItemUseOnFieldCB_Itemfinder(u8 taskId)
     }
     else
     {
-        DisplayItemMessageOnField(taskId, 2, gText_NopeTheresNoResponse, Task_NoResponse_CleanUp);
+        DisplayItemMessageOnField(taskId, FONT_2, gText_NopeTheresNoResponse, Task_NoResponse_CleanUp);
     }
 }
 
@@ -479,7 +479,7 @@ static u8 GetPlayerDirectionTowardsHiddenItem(s16 itemX, s16 itemY)
 
 static void Task_ItemfinderResponsePrintMessage(u8 taskId)
 {
-    DisplayItemMessageOnField(taskId, 2, gText_ItemfinderResponding, Task_ItemfinderResponseCleanUp);
+    DisplayItemMessageOnField(taskId, FONT_2, gText_ItemfinderResponding, Task_ItemfinderResponseCleanUp);
 }
 
 static void Task_ItemfinderResponseCleanUp(u8 taskId)
@@ -493,7 +493,7 @@ static void Task_ItemfinderResponseCleanUp(u8 taskId)
 
 static void Task_ItemfinderUnderfootPrintMessage(u8 taskId)
 {
-    DisplayItemMessageOnField(taskId, 2, gText_ItemfinderShakingWildly, Task_ItemfinderUnderfootDigUpItem);
+    DisplayItemMessageOnField(taskId, FONT_2, gText_ItemfinderShakingWildly, Task_ItemfinderUnderfootDigUpItem);
 }
 
 static void Task_ItemfinderUnderfootDigUpItem(u8 taskId)

@@ -8,7 +8,7 @@ PokedexRating_Text_SeenXOwnedY::
 	.string "on your POKéDEX is:\p"
 	.string "{STR_VAR_1} POKéMON seen and\n"
 	.string "{STR_VAR_2} POKéMON owned.\p"
-	.string "{SIZE}ÁPROF. OAK's rating:$"
+	.string "{FONT_2}PROF. OAK's rating:$"
 
 PokedexRating_Text_LessThan10::
 	.string "You still have lots to do.\p"

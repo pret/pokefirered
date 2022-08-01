@@ -29,7 +29,7 @@ static EWRAM_DATA u8 sPreviousBoxOption = 0;
 static EWRAM_DATA struct ChooseBoxMenu *sBoxSelectionPopupSpriteManager = NULL;
 
 static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
-static void sub_808C9C4(u8 curBox);
+static void ChooseBoxMenu_CreateSprites(u8 curBox);
 static void sub_808CBA4(void);
 static void UpdateBoxNameAndCountSprite_WraparoundRight(void);
 static void UpdateBoxNameAndCountSprite_WraparoundLeft(void);
@@ -75,7 +75,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         txtColor[0] = zero2;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
-    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_1, 0, 2, 0, 0, txtColor, -1, string);
 
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6)
@@ -118,7 +118,7 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8
     txtColor[0] = bgClr;
     txtColor[1] = fgClr;
     txtColor[2] = shClr;
-    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_1, 0, 2, 0, 0, txtColor, -1, string);
     CpuCopy16(tileData1, dst, var);
     CpuCopy16(tileData2, dst + rise, var);
     RemoveWindow(windowId);
@@ -277,7 +277,7 @@ static void Task_PCMainMenu(u8 taskId)
         LoadStdWindowFrameGfx();
         DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         CopyWindowToVram(0, COPYWIN_FULL);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
@@ -303,7 +303,7 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 task->tSelectedOption = task->tNextOption;
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             }
             break;
         case MENU_B_PRESSED:
@@ -319,14 +319,14 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->tState = 3;
             }
             else if (task->tInput == 1 && CountPartyMons() == 1)
             {
                 // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->tState = STATE_ERROR_MSG;
             }
             else
@@ -344,7 +344,7 @@ static void Task_PCMainMenu(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_UP))
@@ -354,7 +354,7 @@ static void Task_PCMainMenu(u8 taskId)
             Menu_MoveCursor(-1);
             task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -364,7 +364,7 @@ static void Task_PCMainMenu(u8 taskId)
             Menu_MoveCursor(1);
             task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             task->tState = STATE_HANDLE_INPUT;
         }
         break;
@@ -417,8 +417,8 @@ static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
     windowId = AddWindow(&sUnknown_83CDA48);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintTextArray(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sMainMenuTexts), (void *)sMainMenuTexts);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, NELEMS(sMainMenuTexts), whichMenu);
+    PrintTextArray(windowId, FONT_2, GetMenuCursorDimensionByFont(FONT_2, 0), 2, 16, NELEMS(sMainMenuTexts), (void *)sMainMenuTexts);
+    Menu_InitCursor(windowId, FONT_2, 0, 2, 16, NELEMS(sMainMenuTexts), whichMenu);
     *windowIdPtr = windowId;
 }
 
@@ -491,7 +491,7 @@ void FreeBoxSelectionPopupSpriteGfx(void)
 
 void sub_808C940(u8 curBox)
 {
-    sub_808C9C4(curBox);
+    ChooseBoxMenu_CreateSprites(curBox);
 }
 
 void sub_808C950(void)
@@ -560,7 +560,7 @@ static const union AffineAnimCmd *const gUnknown_83CDA90[] = {
     gUnknown_83CDA80
 };
 
-static void sub_808C9C4(u8 curBox)
+static void ChooseBoxMenu_CreateSprites(u8 curBox)
 {
     u16 i;
     u8 spriteId;
@@ -607,7 +607,7 @@ static void sub_808C9C4(u8 curBox)
     }
     for (i = 0; i < 2; i++)
     {
-        sBoxSelectionPopupSpriteManager->arrowSprites[i] = sub_809223C(72 * i + 0x7c, 0x58, i, 0, sBoxSelectionPopupSpriteManager->subpriority);
+        sBoxSelectionPopupSpriteManager->arrowSprites[i] = CreateChooseBoxArrows(72 * i + 0x7c, 0x58, i, 0, sBoxSelectionPopupSpriteManager->subpriority);
         if (sBoxSelectionPopupSpriteManager->arrowSprites[i])
         {
             sBoxSelectionPopupSpriteManager->arrowSprites[i]->data[0] = (i == 0 ? -1 : 1);

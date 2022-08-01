@@ -436,8 +436,8 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 *
     printer.y = y;
     printer.currentX = printer.x;
     printer.currentY = printer.y;
-    printer.letterSpacing = GetFontAttribute(fontId, 2);
-    printer.lineSpacing = GetFontAttribute(fontId, 3);
+    printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     printer.unk = 0;
     printer.fgColor = color[1];
     printer.bgColor = color[0];
@@ -479,9 +479,9 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 x, u
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
     printer.unk = 0;
-    printer.fgColor = GetFontAttribute(fontId, 5);
-    printer.bgColor = GetFontAttribute(fontId, 6);
-    printer.shadowColor = GetFontAttribute(fontId, 7);
+    printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
     AddTextPrinter(&printer, speed, callback);
 }
 
@@ -495,11 +495,11 @@ void Menu_PrintFormatIntlPlayerName(u8 windowId, const u8 * src, u16 x, u16 y)
     StringExpandPlaceholders(gStringVar4, src);
     if (i != 5)
     {
-        AddTextPrinterParameterized(windowId, 2, gStringVar4, x, y, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, x, y, 0xFF, NULL);
     }
     else
     {
-        AddTextPrinterParameterized5(windowId, 2, gStringVar4, x, y, 0xFF, NULL, 0, 0);
+        AddTextPrinterParameterized5(windowId, FONT_2, gStringVar4, x, y, 0xFF, NULL, 0, 0);
     }
 }
 

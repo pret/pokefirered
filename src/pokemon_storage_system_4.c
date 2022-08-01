@@ -25,13 +25,13 @@ static void sub_8091A94(u8 wallpaperId);
 static void sub_8091C48(u8 wallpaperId, s8 direction);
 static void sub_8091E84(struct Sprite *sprite);
 static void sub_8091EB8(struct Sprite *sprite);
-static s16 sub_8091F60(const u8 *boxName);
+static s16 GetBoxTitleBaseX(const u8 *boxName);
 static void sub_8091E34(void);
 static void sub_8091EF0(void);
-static void sub_8091F80(void);
-static void sub_809200C(s8 direction);
-static void sub_80920AC(void);
-static void sub_8092164(struct Sprite *sprite);
+static void CreateBoxScrollArrows(void);
+static void StartBoxScrollArrowsSlide(s8 direction);
+static void StopBoxScrollArrowsSlide(void);
+static void SpriteCB_Arrow(struct Sprite *sprite);
 
 static const struct OamData gUnknown_83CEC08;
 
@@ -169,7 +169,7 @@ static const struct WallpaperTable sWallpaperTable[] = {
 static const u16 gUnknown_83D2AD0[] = INCBIN_U16("graphics/interface/pss_unk_83D2AD0.4bpp");
 static const u8 sUnref_83D2B50[] = {0xba, 0x23};
 
-static const struct SpriteSheet gUnknown_83D2B54 = {
+static const struct SpriteSheet sSpriteSheet_Arrow = {
     gUnknown_83D2AD0, 0x0080, TAG_TILE_6
 };
 
@@ -243,14 +243,14 @@ static const union AnimCmd *const gUnknown_83D2BAC[] = {
     gUnknown_83D2BA4
 };
 
-static const struct SpriteTemplate gUnknown_83D2BB4 = {
+static const struct SpriteTemplate sSpriteTemplate_Arrow = {
     .tileTag = TAG_TILE_6,
     .paletteTag = TAG_PAL_WAVEFORM,
     .oam = &gUnknown_83D2B94,
     .anims = gUnknown_83D2BAC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8092164
+    .callback = SpriteCB_Arrow
 };
 
 void sub_808FFAC(void)
@@ -1010,7 +1010,7 @@ static void sub_8091420(u8 taskId)
             return;
 
         sub_8091A94(task->data[2]);
-        sub_8091F80();
+        CreateBoxScrollArrows();
         sub_80900D4(task->data[2]);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(27) | BGCNT_TXT512x256);
         break;
@@ -1059,7 +1059,7 @@ bool8 ScrollToBox(void)
 
         sub_8090574(gPSSData->scrollToBoxId, gPSSData->scrollDirection);
         sub_8091C48(gPSSData->scrollToBoxId, gPSSData->scrollDirection);
-        sub_809200C(gPSSData->scrollDirection);
+        StartBoxScrollArrowsSlide(gPSSData->scrollDirection);
         break;
     case 2:
         var = sub_809062C();
@@ -1069,7 +1069,7 @@ bool8 ScrollToBox(void)
             if (--gPSSData->scrollTimer != 0)
                 return TRUE;
             sub_8091E34();
-            sub_80920AC();
+            StopBoxScrollArrowsSlide();
         }
         return var;
     }
@@ -1243,7 +1243,7 @@ static void sub_8091A94(u8 boxId)
     StringCopyPadded(gPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
     DrawTextWindowAndBufferTiles(gPSSData->field_21B8, gPSSData->field_2F8, 0, 0, gPSSData->field_4F8, 2);
     LoadSpriteSheet(&spriteSheet);
-    r6 = sub_8091F60(GetBoxNamePtr(boxId));
+    r6 = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
 
     for (i = 0; i < 2; i++)
     {
@@ -1280,7 +1280,7 @@ static void sub_8091C48(u8 boxId, s8 direction)
     DrawTextWindowAndBufferTiles(gPSSData->field_21B8, gPSSData->field_2F8, 0, 0, gPSSData->field_4F8, 2);
     LoadSpriteSheet(&spriteSheet);
     LoadPalette(gUnknown_83D29D0[GetBoxWallpaper(boxId)], r8, 4);
-    x = sub_8091F60(GetBoxNamePtr(boxId));
+    x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
     x2 = x;
     x2 += direction * 192;
 
@@ -1345,19 +1345,30 @@ static void sub_8091EF0(void)
         CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitleAltPalOffset, 4);
 }
 
-static s16 sub_8091F60(const u8 *string)
+static s16 GetBoxTitleBaseX(const u8 *string)
 {
-    return 0xB0 - GetStringWidth(1, string, 0) / 2;
+    return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_1, string, 0) / 2;
 }
 
-static void sub_8091F80(void)
+
+//------------------------------------------------------------------------------
+//  SECTION: Scroll arrows
+//------------------------------------------------------------------------------
+
+
+// Sprite data for box scroll arrows
+#define sState data[0]
+#define sTimer data[1]
+#define sSpeed data[3]
+
+static void CreateBoxScrollArrows(void)
 {
     u16 i;
 
-    LoadSpriteSheet(&gUnknown_83D2B54);
+    LoadSpriteSheet(&sSpriteSheet_Arrow);
     for (i = 0; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(&gUnknown_83D2BB4, 0x5c + i * 0x88, 28, 22);
+        u8 spriteId = CreateSprite(&sSpriteTemplate_Arrow, 92 + i * 136, 28, 22);
         if (spriteId != MAX_SPRITES)
         {
             struct Sprite *sprite = &gSprites[spriteId];
@@ -1366,85 +1377,88 @@ static void sub_8091F80(void)
             gPSSData->arrowSprites[i] = sprite;
         }
     }
-    if (IsCursorOnBox())
-        sub_80920FC(TRUE);
+    if (IsCursorOnBoxTitle())
+        AnimateBoxScrollArrows(TRUE);
 }
 
-static void sub_809200C(s8 direction)
+// Slide box scroll arrows horizontally for box change
+static void StartBoxScrollArrowsSlide(s8 direction)
 {
     u16 i;
 
     for (i = 0; i < 2; i++)
     {
         gPSSData->arrowSprites[i]->x2 = 0;
-        gPSSData->arrowSprites[i]->data[0] = 2;
+        gPSSData->arrowSprites[i]->sState = 2;
     }
     if (direction < 0)
     {
-        gPSSData->arrowSprites[0]->data[1] = 29;
-        gPSSData->arrowSprites[1]->data[1] = 5;
-        gPSSData->arrowSprites[0]->data[2] = 0x48;
-        gPSSData->arrowSprites[1]->data[2] = 0x48;
+        gPSSData->arrowSprites[0]->sTimer = 29;
+        gPSSData->arrowSprites[1]->sTimer = 5;
+        gPSSData->arrowSprites[0]->data[2] = 72;
+        gPSSData->arrowSprites[1]->data[2] = 72;
     }
     else
     {
-        gPSSData->arrowSprites[0]->data[1] = 5;
-        gPSSData->arrowSprites[1]->data[1] = 29;
-        gPSSData->arrowSprites[0]->data[2] = 0xF8;
-        gPSSData->arrowSprites[1]->data[2] = 0xF8;
+        gPSSData->arrowSprites[0]->sTimer = 5;
+        gPSSData->arrowSprites[1]->sTimer = 29;
+        gPSSData->arrowSprites[0]->data[2] = DISPLAY_WIDTH + 8;
+        gPSSData->arrowSprites[1]->data[2] = DISPLAY_WIDTH + 8;
     }
     gPSSData->arrowSprites[0]->data[7] = 0;
     gPSSData->arrowSprites[1]->data[7] = 1;
 }
 
-static void sub_80920AC(void)
+// New box's scroll arrows have entered, stop sliding and set their position
+static void StopBoxScrollArrowsSlide(void)
 {
     u16 i;
 
     for (i = 0; i < 2; i++)
     {
-        gPSSData->arrowSprites[i]->x = 0x88 * i + 0x5c;
+        gPSSData->arrowSprites[i]->x = 136 * i + 92;
         gPSSData->arrowSprites[i]->x2 = 0;
         gPSSData->arrowSprites[i]->invisible = FALSE;
     }
-    sub_80920FC(TRUE);
+    AnimateBoxScrollArrows(TRUE);
 }
 
-void sub_80920FC(bool8 a0)
+// Bounce scroll arrows while title is selected
+void AnimateBoxScrollArrows(bool8 animate)
 {
     u16 i;
 
-    if (a0)
+    if (animate)
     {
+        // Start arrows moving
         for (i = 0; i < 2; i++)
         {
-            gPSSData->arrowSprites[i]->data[0] = 1;
-            gPSSData->arrowSprites[i]->data[1] = 0;
+            gPSSData->arrowSprites[i]->sState = 1;
+            gPSSData->arrowSprites[i]->sTimer = 0;
             gPSSData->arrowSprites[i]->data[2] = 0;
             gPSSData->arrowSprites[i]->data[4] = 0;
         }
     }
     else
     {
+        // Stop arrows moving
         for (i = 0; i < 2; i++)
-        {
-            gPSSData->arrowSprites[i]->data[0] = 0;
-        }
+            gPSSData->arrowSprites[i]->sState = 0;
     }
 }
 
-static void sub_8092164(struct Sprite *sprite)
+static void SpriteCB_Arrow(struct Sprite *sprite)
 {
-    switch (sprite->data[0])
+    switch (sprite->sState)
     {
     case 0:
         sprite->x2 = 0;
         break;
     case 1:
-        if (++sprite->data[1] > 3)
+        if (++sprite->sTimer > 3)
         {
-            sprite->data[1] = 0;
-            sprite->x2 += sprite->data[3];
+            sprite->sTimer = 0;
+            sprite->x2 += sprite->sSpeed;
             if (++sprite->data[2] > 5)
             {
                 sprite->data[2] = 0;
@@ -1453,17 +1467,17 @@ static void sub_8092164(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->data[0] = 3;
+        sprite->sState = 3;
         break;
     case 3:
         sprite->x -= gPSSData->scrollSpeed;
-        if (sprite->x < 73 || sprite->x > 247)
+        if (sprite->x <= 72 || sprite->x >= DISPLAY_WIDTH + 8)
             sprite->invisible = TRUE;
-        if (--sprite->data[1] == 0)
+        if (--sprite->sTimer == 0)
         {
             sprite->x = sprite->data[2];
             sprite->invisible = FALSE;
-            sprite->data[0] = 4;
+            sprite->sState = 4;
         }
         break;
     case 4:
@@ -1472,9 +1486,13 @@ static void sub_8092164(struct Sprite *sprite)
     }
 }
 
-struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
+#undef sState
+#undef sSpeed
+
+// Arrows for Deposit/Jump Box selection
+struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
 {
-    u8 spriteId = CreateSprite(&gUnknown_83D2BB4, x, y, subpriority);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_Arrow, x, y, subpriority);
     if (spriteId == MAX_SPRITES)
         return NULL;
 

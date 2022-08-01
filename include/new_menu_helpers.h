@@ -36,7 +36,7 @@ void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void sub_80F7768(u8 windowId, bool8 copyToVram);
 void Menu_LoadStdPal(void);
 void Menu_LoadStdPalAt(u16 offset);
-void DisplayItemMessageOnField(u8 taskId, u8 textSpeed, const u8 *src, TaskFunc callback);
+void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *src, TaskFunc callback);
 void DisplayYesNoMenuDefaultYes(void);
 void DisplayYesNoMenuDefaultNo(void);
 u8 GetTextSpeedSetting(void);

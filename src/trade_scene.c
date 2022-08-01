@@ -2767,7 +2767,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed)
     sTradeData->textColor[0] = 15;
     sTradeData->textColor[1] = 1;
     sTradeData->textColor[2] = 6;
-    AddTextPrinterParameterized4(windowId, 2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
+    AddTextPrinterParameterized4(windowId, FONT_2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 

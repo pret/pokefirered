@@ -664,7 +664,7 @@ static const u8 *const sSeagallopDestStrings[] = {
 
 static u16 GetStringTilesWide(const u8 *str)
 {
-    return (GetStringWidth(1, str, 0) + 7) / 8;
+    return (GetStringWidth(FONT_1, str, 0) + 7) / 8;
 }
 
 static u8 GetMenuWidthFromList(const struct MenuAction * items, u8 count)
@@ -719,7 +719,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         strWidth = 0;
         for (i = 0; i < count; i++)
         {
-            tmp = GetStringWidth(2, list[i].text, 0);
+            tmp = GetStringWidth(FONT_2, list[i].text, 0);
             if (tmp > strWidth)
                 strWidth = tmp;
         }
@@ -730,10 +730,10 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         windowId = CreateWindowFromRect(left, top, width, height);
         SetStdWindowBorderStyle(windowId, FALSE);
         if (mcId == 30 || mcId == 13 || mcId == 41)
-            MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
+            MultichoiceList_PrintItems(windowId, FONT_2, 8, 2, 14, count, list, 0, 2);
         else
-            MultichoiceList_PrintItems(windowId, 2, 8, 2, 14, count, list, 0, 2);
-        Menu_InitCursor(windowId, 2, 0, 2, 14, count, initPos);
+            MultichoiceList_PrintItems(windowId, FONT_2, 8, 2, 14, count, list, 0, 2);
+        Menu_InitCursor(windowId, FONT_2, 0, 2, 14, count, initPos);
         CreateMCMenuInputHandlerTask(ignoreBpress, count, windowId, mcId);
         ScheduleBgCopyTilemapToVram(0);
     }
@@ -827,15 +827,15 @@ static void MultiChoicePrintHelpDescription(u8 mcId)
     {
     case 39:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_CableClub_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_2, sDescriptionPtrs_CableClub_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case 47:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_2, sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case 50:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sDescriptionPtrs_WirelessCenter_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_2, sDescriptionPtrs_WirelessCenter_TradeBattleCancel[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     }
 }
@@ -909,8 +909,8 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
         gTasks[taskId].data[4] = a4;
         gTasks[taskId].data[6] = CreateWindowFromRect(left, top, width * columnCount, rowCount * 2);
         SetStdWindowBorderStyle(gTasks[taskId].data[6], FALSE);
-        MultichoiceGrid_PrintItems(gTasks[taskId].data[6], 1, width * 8, 16, columnCount, rowCount, list);
-        MultichoiceGrid_InitCursor(gTasks[taskId].data[6], 1, 0, 1, width * 8, columnCount, rowCount, 0);
+        MultichoiceGrid_PrintItems(gTasks[taskId].data[6], FONT_1, width * 8, 16, columnCount, rowCount, list);
+        MultichoiceGrid_InitCursor(gTasks[taskId].data[6], FONT_1, 0, 1, width * 8, columnCount, rowCount, 0);
         ScheduleBgCopyTilemapToVram(0);
     }
     return TRUE;
@@ -950,8 +950,8 @@ bool8 CreatePCMenu(void)
 
 static void CreatePCMenuWindow(void)
 {
-    u8 cursorWidth = GetMenuCursorDimensionByFont(2, 0);
-    u8 height = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+    u8 cursorWidth = GetMenuCursorDimensionByFont(FONT_2, 0);
+    u8 height = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT);
     u8 windowWidth;
     u8 nitems;
     u8 windowId;
@@ -973,9 +973,9 @@ static void CreatePCMenuWindow(void)
         nitems = 5;
         windowId = CreateWindowFromRect(0, 0, windowWidth, 10);
         SetStdWindowBorderStyle(windowId, FALSE);
-        AddTextPrinterParameterized(windowId, 2, gText_ProfOakSPc, cursorWidth, 34, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gText_HallOfFame_2, cursorWidth, 50, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gText_LogOff, cursorWidth, 66, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_ProfOakSPc, cursorWidth, 34, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_HallOfFame_2, cursorWidth, 50, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_LogOff, cursorWidth, 66, 0xFF, NULL);
     }
     else
     {
@@ -986,16 +986,16 @@ static void CreatePCMenuWindow(void)
         windowId = CreateWindowFromRect(0, 0, windowWidth, nitems * 2);
         SetStdWindowBorderStyle(windowId, FALSE);
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
-            AddTextPrinterParameterized(windowId, 2, gText_ProfOakSPc, cursorWidth, 34, 0xFF, NULL);
-        AddTextPrinterParameterized(windowId, 2, gText_LogOff, cursorWidth, 2 + 16 * (nitems - 1), 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, FONT_2, gText_ProfOakSPc, cursorWidth, 34, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_LogOff, cursorWidth, 2 + 16 * (nitems - 1), 0xFF, NULL);
     }
     if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC))
-        AddTextPrinterParameterized(windowId, 2, gText_BillSPc, cursorWidth, 2 , 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_BillSPc, cursorWidth, 2 , 0xFF, NULL);
     else
-        AddTextPrinterParameterized(windowId, 2, gText_SomeoneSPc, cursorWidth, 2 , 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_SomeoneSPc, cursorWidth, 2 , 0xFF, NULL);
     StringExpandPlaceholders(gStringVar4, gText_SPc);
     Menu_PrintFormatIntlPlayerName(windowId, gStringVar4, cursorWidth, 18);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
+    Menu_InitCursor(windowId, FONT_2, 0, 2, 16, nitems, 0);
     CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
     ScheduleBgCopyTilemapToVram(0);
 }
@@ -1003,7 +1003,7 @@ static void CreatePCMenuWindow(void)
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     sub_80F7768(0, TRUE);
-    AddTextPrinterParameterized2(0, 2, Text_AccessWhichPC, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_2, Text_AccessWhichPC, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void Task_ScriptShowMonPic(u8 taskId)
@@ -1221,24 +1221,24 @@ void DrawSeagallopDestinationMenu(void)
             nitems = 6;
             top = 0;
         }
-        cursorWidth = GetMenuCursorDimensionByFont(2, 0);
-        fontHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+        cursorWidth = GetMenuCursorDimensionByFont(FONT_2, 0);
+        fontHeight = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT);
         windowId = CreateWindowFromRect(17, top, 11, nitems * 2);
         SetStdWindowBorderStyle(windowId, FALSE);
         for (i = 0; i < nitems - 2; i++)
         {
             if (r4 != gSpecialVar_0x8004)
-                AddTextPrinterParameterized(windowId, 2, sSeagallopDestStrings[r4], cursorWidth, i * 16 + 2, 0xFF, NULL);
+                AddTextPrinterParameterized(windowId, FONT_2, sSeagallopDestStrings[r4], cursorWidth, i * 16 + 2, 0xFF, NULL);
             else
                 i--;
             r4++;
             if (r4 == SEAGALLOP_CINNABAR_ISLAND)
                 r4 = SEAGALLOP_VERMILION_CITY;
         }
-        AddTextPrinterParameterized(windowId, 2, gText_Other, cursorWidth, i * 16 + 2, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_Other, cursorWidth, i * 16 + 2, 0xFF, NULL);
         i++;
-        AddTextPrinterParameterized(windowId, 2, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
-        Menu_InitCursor(windowId, 2, 0, 2, 16, nitems, 0);
+        AddTextPrinterParameterized(windowId, FONT_2, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
+        Menu_InitCursor(windowId, FONT_2, 0, 2, 16, nitems, 0);
         CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
         ScheduleBgCopyTilemapToVram(0);
     }

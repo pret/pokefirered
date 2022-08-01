@@ -1561,7 +1561,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext * ctx)
 
     LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, 1);
-    AddTextPrinterParameterized(0, 6, ptr, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_6, ptr, 0, 1, 0, NULL);
     return FALSE;
 }
 
@@ -1571,7 +1571,7 @@ bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
     if (ptr == NULL)
         ptr = (u8 *)ctx->data[0];
 
-    gSpecialVar_0x8004 = GetStringWidth(6, ptr, -1);
+    gSpecialVar_0x8004 = GetStringWidth(FONT_6, ptr, -1);
     return FALSE;
 }
 

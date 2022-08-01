@@ -1237,7 +1237,7 @@ const u8 gUnknown_83FE7BF[] = _("{RIGHT_ARROW_2}");
 const u8 gUnknown_83FE7C2[] = _("{PLUS}");
 const u8 gUnknown_83FE7C5[] = _("-");
 
-const u8 gUnknown_83FE7C7[] = _("{SIZE 0}Max{SIZE 2} HP");
+const u8 gUnknown_83FE7C7[] = _("{FONT_0}Max{FONT_2} HP");
 const u8 gUnknown_83FE7D4[] = _("ATTACK ");
 const u8 gUnknown_83FE7DC[] = _("DEFENSE");
 const u8 gUnknown_83FE7E4[] = _("SP. ATK");

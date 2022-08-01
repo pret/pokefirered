@@ -393,7 +393,7 @@ extern struct PokemonStorageSystemData *gPSSData;
 
 void Cb2_EnterPSS(u8 a0);
 u8 GetCurrentBoxOption(void);
-struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
+struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
 void SetCurrentBox(u8 boxId);
 void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst);
@@ -478,7 +478,7 @@ void SetMenuText(u8 textId);
 void sub_8095C84(u8 cursorArea, u8 cursorPos);
 void sub_8095E2C(u16 itemId);
 u8 GetBoxWallpaper(u8 boxId);
-bool8 IsCursorOnBox(void);
+bool8 IsCursorOnBoxTitle(void);
 bool8 IsCursorInBox(void);
 
 void sub_808FFAC(void);
@@ -492,7 +492,7 @@ void sub_8091114(void);
 bool8 sub_8091150(void);
 void sub_80913DC(u8 box);
 bool8 sub_809140C(void);
-void sub_80920FC(bool8 species);
+void AnimateBoxScrollArrows(bool8 species);
 void CreateMovingMonIcon(void);
 void sub_8090E08(u8 boxId, u8 cursorPos);
 bool8 sub_8090E74(void);

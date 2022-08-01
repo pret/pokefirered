@@ -370,9 +370,9 @@ void HS_ShowOrHideScrollArrows(u8 which, u8 mode)
     }
 }
 
-void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height)
+void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height)
 {
-    // font -> sp+24
+    // fontId -> sp+24
     // dest -> sp+28
     // src -> r9
     // x -> sp+34
@@ -408,9 +408,9 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                     {
                         break;
                     }
-                    DecompressAndRenderGlyph(font, gSaveBlock2Ptr->playerName[i], &srcBlit, &destBlit, dest, x, y, width, height);
+                    DecompressAndRenderGlyph(fontId, gSaveBlock2Ptr->playerName[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     // This is required to match a dummy [sp+#0x24] read here
-                    if (font == 0)
+                    if (fontId == FONT_0)
                     {
                         x += gGlyphInfo.width;
                     }
@@ -430,7 +430,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                         {
                             break;
                         }
-                        DecompressAndRenderGlyph(font, gString_Bill[i], &srcBlit, &destBlit, dest, x, y, width, height);
+                        DecompressAndRenderGlyph(fontId, gString_Bill[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     }
                     else
                     {
@@ -438,9 +438,9 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                         {
                             break;
                         }
-                        DecompressAndRenderGlyph(font, gString_Someone[i], &srcBlit, &destBlit, dest, x, y, width, height);
+                        DecompressAndRenderGlyph(fontId, gString_Someone[i], &srcBlit, &destBlit, dest, x, y, width, height);
                     }
-                    if (font == 0)
+                    if (fontId == FONT_0)
                     {
                         x += gGlyphInfo.width;
                     }
@@ -496,7 +496,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
                     destBlit.pixels = dest;
                     destBlit.width = width * 8;
                     destBlit.height = height * 8;
-                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(font, FONTATTR_MAX_LETTER_HEIGHT), 0);
+                    FillBitmapRect4Bit(&destBlit, x, y, clearPixels, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT), 0);
                     x += clearPixels;
                 }
                 src++;
@@ -529,7 +529,7 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
         default:
             if (curChar == CHAR_SPACE)
             {
-                if (font == 0)
+                if (fontId == FONT_0)
                 {
                     x += 5;
                 }
@@ -540,8 +540,8 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
             }
             else
             {
-                DecompressAndRenderGlyph(font, curChar, &srcBlit, &destBlit, dest, x, y, width, height);
-                if (font == 0)
+                DecompressAndRenderGlyph(fontId, curChar, &srcBlit, &destBlit, dest, x, y, width, height);
+                if (fontId == FONT_0)
                 {
                     x += gGlyphInfo.width;
                 }
@@ -555,11 +555,11 @@ void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 wid
     }
 }
 
-void DecompressAndRenderGlyph(u8 font, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *destBlit, u8 *destBuffer, u8 x, u8 y, u8 width, u8 height)
+void DecompressAndRenderGlyph(u8 fontId, u16 glyph, struct Bitmap *srcBlit, struct Bitmap *destBlit, u8 *destBuffer, u8 x, u8 y, u8 width, u8 height)
 {
-    if (font == 0)
+    if (fontId == FONT_0)
         DecompressGlyphFont0(glyph, FALSE);
-    else if (font == 5)
+    else if (fontId == FONT_5)
         DecompressGlyphFont5(glyph, FALSE);
     else
         DecompressGlyphFont2(glyph, FALSE);
@@ -580,7 +580,7 @@ void HelpSystem_PrintTextInTopLeftCorner(const u8 * str)
 
 void HelpSystem_PrintTextRightAlign_Row52(const u8 * str)
 {
-    s32 left = 0x7C - GetStringWidth(0, str, 0);
+    s32 left = 0x7C - GetStringWidth(FONT_0, str, 0);
     GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
     HelpSystemRenderText(0, gDecompressionBuffer + 0x3400, str, left, 2, 16, 2);
 }
@@ -713,7 +713,7 @@ void HS_UpdateMenuScrollArrows(void)
 
 void PrintListMenuItems(void)
 {
-    u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
+    u8 glyphHeight = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     s32 i;
     s32 r5 = gHelpSystemListMenu.itemsAbove;
 
@@ -728,7 +728,7 @@ void PrintListMenuItems(void)
 
 void PlaceListMenuCursor(void)
 {
-    u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
+    u8 glyphHeight = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
     u8 y = gHelpSystemListMenu.sub.top + glyphHeight * gHelpSystemListMenu.cursorPos;
     HelpSystem_PrintTextAt(gText_SelectorArrow2, x, y);
@@ -736,7 +736,7 @@ void PlaceListMenuCursor(void)
 
 void HS_RemoveSelectionCursorAt(u8 i)
 {
-    u8 glyphHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
+    u8 glyphHeight = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
     u8 y = gHelpSystemListMenu.sub.top + i * glyphHeight;
     HelpSystem_PrintTextAt(gString_HelpSystem_ClearTo8, x, y);

@@ -749,12 +749,12 @@ void Task_VsSeeker_0(u8 taskId)
     if (respval == VSSEEKER_NOT_CHARGED)
     {
         Free(sVsSeeker);
-        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_BatteryNotChargedNeedXSteps, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
+        DisplayItemMessageOnField(taskId, FONT_2, VSSeeker_Text_BatteryNotChargedNeedXSteps, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
     }
     else if (respval == VSSEEKER_NO_ONE_IN_RANGE)
     {
         Free(sVsSeeker);
-        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_NoTrainersWithinRange, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
+        DisplayItemMessageOnField(taskId, FONT_2, VSSeeker_Text_NoTrainersWithinRange, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
     }
     else if (respval == VSSEEKER_CAN_USE)
     {
@@ -827,7 +827,7 @@ static void Task_VsSeeker_3(u8 taskId)
     {
         if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_NO_RESPONSE)
         {
-            DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_TrainersNotReady, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
+            DisplayItemMessageOnField(taskId, FONT_2, VSSeeker_Text_TrainersNotReady, Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker);
         }
         else
         {

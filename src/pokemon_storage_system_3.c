@@ -1718,7 +1718,7 @@ static void Cb_HandleBoxOptions(u8 taskId)
         {
         case -1:
         case  0:
-            sub_80920FC(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
@@ -1759,7 +1759,7 @@ static void Cb_HandleWallpapers(u8 taskId)
         switch (gPSSData->wallpaperSetId)
         {
         case -1:
-            sub_80920FC(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
             break;
@@ -1801,7 +1801,7 @@ static void Cb_HandleWallpapers(u8 taskId)
     case 5:
         if (!DoWallpaperGfxChange())
         {
-            sub_80920FC(TRUE);
+            AnimateBoxScrollArrows(TRUE);
             SetPSSCallback(Cb_MainPSS);
         }
         break;
@@ -1830,7 +1830,7 @@ static void Cb_JumpBox(u8 taskId)
             FreeBoxSelectionPopupSpriteGfx();
             if (gPSSData->newCurrBoxId == 201 || gPSSData->newCurrBoxId == StorageGetCurrentBox())
             {
-                sub_80920FC(TRUE);
+                AnimateBoxScrollArrows(TRUE);
                 SetPSSCallback(Cb_MainPSS);
             }
             else
@@ -2294,16 +2294,16 @@ static void PrintCursorMonInfo(void)
     {
         for (i = 0, y = 0; i < 3; i++, y += 14)
         {
-            AddTextPrinterParameterized(0, 2, gPSSData->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(0, FONT_2, gPSSData->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
         }
-        AddTextPrinterParameterized(0, 0, gPSSData->displayMonTexts[3], 6, y + 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_0, gPSSData->displayMonTexts[3], 6, y + 2, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, 0, gPSSData->displayMonTexts[3], 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_0, gPSSData->displayMonTexts[3], 6, 0, TEXT_SKIP_DRAW, NULL);
         for (i = 0, y = 15; i < 3; i++, y += 14)
         {
-            AddTextPrinterParameterized(0, 2, gPSSData->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(0, FONT_2, gPSSData->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
         }
     }
 
@@ -2592,7 +2592,7 @@ static void PrintStorageActionText(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gPSSData->field_2190, sPCStorageActionTexts[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, 1, gPSSData->field_2190, 0, 2, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(1, FONT_1, gPSSData->field_2190, 0, 2, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(1, 2, 13);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);
@@ -2601,7 +2601,7 @@ static void PrintStorageActionText(u8 id)
 
 static void ShowYesNoWindow(s8 cursorPos)
 {
-    CreateYesNoMenu(&sYesNoWindowTemplate, 1, 0, 2, 0x00b, 14, 1);
+    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_1, 0, 2, 0x00b, 14, 1);
     Menu_MoveCursorNoWrapAround(cursorPos);
 }
 
@@ -2661,7 +2661,7 @@ u8 GetCurrentBoxOption(void)
 
 static void sub_808FDFC(void)
 {
-    if (!IsCursorOnBox())
+    if (!IsCursorOnBoxTitle())
     {
         if (sInPartyMenu)
             sub_8095C84(CURSOR_AREA_IN_PARTY, GetBoxCursorPosition());

@@ -544,7 +544,7 @@ void NullFieldSpecial(void)
 void DoPicboxCancel(void)
 {
     u8 t = EOS;
-    AddTextPrinterParameterized(0, 2, &t, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_2, &t, 0, 1, 0, NULL);
     PicboxCancel();
 }
 
@@ -1098,10 +1098,10 @@ void DrawElevatorCurrentFloorWindow(void)
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
         TextWindow_SetStdFrame0_WithPal(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, gText_NowOn, 0, 2, 0xFF, NULL);
+        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_2, gText_NowOn, 0, 2, 0xFF, NULL);
         floorname = sFloorNamePointers[gSpecialVar_0x8005];
-        strwidth = GetStringWidth(2, floorname, 0);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, floorname, 56 - strwidth, 16, 0xFF, NULL);
+        strwidth = GetStringWidth(FONT_2, floorname, 0);
+        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_2, floorname, 56 - strwidth, 16, 0xFF, NULL);
         PutWindowTilemap(sElevatorCurrentFloorWindowId);
         CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
     }
@@ -1348,7 +1348,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     {
         sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
         sListMenuItems[i].index = i;
-        width = GetStringWidth(2, sListMenuItems[i].label, 0);
+        width = GetStringWidth(FONT_2, sListMenuItems[i].label, 0);
         if (width > mwidth)
             mwidth = width;
     }
@@ -1386,7 +1386,7 @@ static void CreateScriptListMenu(void)
     sFieldSpecialsListMenuTemplate.lettersSpacing = 1;
     sFieldSpecialsListMenuTemplate.itemVerticalPadding = 0;
     sFieldSpecialsListMenuTemplate.scrollMultiple = 0;
-    sFieldSpecialsListMenuTemplate.fontId = 2;
+    sFieldSpecialsListMenuTemplate.fontId = FONT_2;
     sFieldSpecialsListMenuTemplate.cursorKind = 0;
 }
 

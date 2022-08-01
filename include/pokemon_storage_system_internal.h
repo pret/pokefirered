@@ -198,12 +198,12 @@ struct StorageMenu
 
 struct UnkUtilData
 {
-    const u8 *unk_00;
-    u8 *unk_04;
-    u16 unk_08;
-    u16 unk_0a;
-    u16 newField;
-    void (*unk_0c)(struct UnkUtilData *data);
+    const u8 *src;
+    u8 *dest;
+    u16 size;
+    u16 unk;
+    u16 height;
+    void (*func)(struct UnkUtilData *data);
 };
 
 struct UnkUtil

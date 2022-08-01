@@ -373,9 +373,9 @@ struct PokemonStorageSystemData
     /* 21db */ u8 itemName[20];
     /* 21ef */ u8 inBoxMovingMode;
     /* 21f0 */ u16 field_2200;
-    /* 21f4 */ struct PSS_ItemIconSprite itemIconSprites[MAX_ITEM_ICONS];
-    /* 2224 */ u16 movingItem;
-    /* 2226 */ u16 field_2236;
+    /* 21f4 */ struct PSS_ItemIconSprite itemIcons[MAX_ITEM_ICONS];
+    /* 2224 */ u16 movingItemId;
+    /* 2226 */ u16 itemInfoWindowOffset;
     /* 2228 */ struct PssQuestLogBuffer qlogBuffer;
     /* 2230 */ u16 field_2238;
     /* 2232 */ u16 field_223A;
@@ -384,7 +384,7 @@ struct PokemonStorageSystemData
     /* 223c */ u16 field_2244[0x40];
     /* 22bc */ u8 field_22C4[0x800];
     /* 2abc */ u8 field_2AC4[0x1800];
-    /* 42bc */ u8 field_42C4[0x800];
+    /* 42bc */ u8 itemIconBuffer[0x800];
     /* 4abc */ u8 field_4AC4[0x1000];
     /* 5abc */ u8 field_5AC4[0x800];
 }; // size=62bc
@@ -442,9 +442,9 @@ void sub_8096088(void);
 void sub_80960C0(void);
 bool8 sub_809610C(void);
 const u8 *GetMovingItemName(void);
-void sub_80966F4(void);
-bool8 sub_8096728(void);
-bool8 sub_80967C0(void);
+void InitItemInfoWindow(void);
+bool8 UpdateItemInfoWindowSlideIn(void);
+bool8 UpdateItemInfoWindowSlideOut(void);
 void sub_8096BE4(struct UnkUtil *arg0, struct UnkUtilData *arg1, u32 arg2);
 void sub_8096BF8(void);
 void AddMenu(void);

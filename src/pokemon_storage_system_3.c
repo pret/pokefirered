@@ -1568,12 +1568,12 @@ static void Cb_ShowItemInfo(u8 taskId)
         {
             PlaySE(SE_WIN_OPEN);
             PrintItemDescription();
-            sub_80966F4();
+            InitItemInfoWindow();
             gPSSData->state++;
         }
         break;
     case 2:
-        if (!sub_8096728())
+        if (!UpdateItemInfoWindowSlideIn())
             gPSSData->state++;
         break;
     case 3:
@@ -1588,7 +1588,7 @@ static void Cb_ShowItemInfo(u8 taskId)
         }
         break;
     case 5:
-        if (!sub_80967C0())
+        if (!UpdateItemInfoWindowSlideOut())
             gPSSData->state++;
         break;
     case 6:
@@ -1617,7 +1617,7 @@ static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
             SetPSSCallback(Cb_MainPSS);
             break;
         case 0:
-            if (AddBagItem(gPSSData->movingItem, 1) == TRUE)
+            if (AddBagItem(gPSSData->movingItemId, 1) == TRUE)
             {
                 ClearBottomWindow();
                 gPSSData->state = 3;

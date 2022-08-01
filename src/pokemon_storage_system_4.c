@@ -27,7 +27,7 @@ static void sub_8091E84(struct Sprite *sprite);
 static void sub_8091EB8(struct Sprite *sprite);
 static s16 GetBoxTitleBaseX(const u8 *boxName);
 static void sub_8091E34(void);
-static void sub_8091EF0(void);
+static void CycleBoxTitleColor(void);
 static void CreateBoxScrollArrows(void);
 static void StartBoxScrollArrowsSlide(s8 direction);
 static void StopBoxScrollArrowsSlide(void);
@@ -128,7 +128,7 @@ static const u32 gUnknown_83D2654[] = INCBIN_U32("graphics/interface/pss_unk_83D
 static const u32 gUnknown_83D277C[] = INCBIN_U32("graphics/interface/pss_unk_83D277C.bin.lz");
 static const u16 gUnknown_83D2820[] = INCBIN_U16("graphics/interface/pss_unk_83D2820.bin");
 
-static const u16 gUnknown_83D29D0[][2] = {
+static const u16 sBoxTitleColors[][2] = {
     {RGB( 7,  7,  7), RGB(31, 31, 31)},
     {RGB( 7,  7,  7), RGB(31, 31, 31)},
     {RGB( 7,  7,  7), RGB(31, 31, 31)},
@@ -1119,7 +1119,7 @@ bool8 DoWallpaperGfxChange(void)
     case 2:
         if (WaitForWallpaperGfxLoad() == TRUE)
         {
-            sub_8091EF0();
+            CycleBoxTitleColor();
             BeginNormalPaletteFade(gPSSData->wallpaperPalBits, 1, 16, 0, RGB_WHITEALPHA);
             gPSSData->wallpaperChangeState++;
         }
@@ -1227,8 +1227,8 @@ static void sub_8091A94(u8 boxId)
 
     u16 wallpaperId = GetBoxWallpaper(boxId);
 
-    gPSSData->boxTitlePal[14] = gUnknown_83D29D0[wallpaperId][0];
-    gPSSData->boxTitlePal[15] = gUnknown_83D29D0[wallpaperId][1];
+    gPSSData->boxTitlePal[14] = sBoxTitleColors[wallpaperId][0];
+    gPSSData->boxTitlePal[15] = sBoxTitleColors[wallpaperId][1];
     LoadSpritePalettes(palettes);
     gPSSData->wallpaperPalBits = 0x3f0;
 
@@ -1279,7 +1279,7 @@ static void sub_8091C48(u8 boxId, s8 direction)
     StringCopyPadded(gPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
     DrawTextWindowAndBufferTiles(gPSSData->field_21B8, gPSSData->field_2F8, 0, 0, gPSSData->field_4F8, 2);
     LoadSpriteSheet(&spriteSheet);
-    LoadPalette(gUnknown_83D29D0[GetBoxWallpaper(boxId)], r8, 4);
+    LoadPalette(sBoxTitleColors[GetBoxWallpaper(boxId)], r8, 4);
     x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
     x2 = x;
     x2 += direction * 192;
@@ -1335,14 +1335,14 @@ static void sub_8091EB8(struct Sprite *sprite)
     }
 }
 
-static void sub_8091EF0(void)
+static void CycleBoxTitleColor(void)
 {
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
     if (gPSSData->boxTitleCycleId == 0)
-        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitlePalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitlePalOffset, 4);
     else
-        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitleAltPalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + gPSSData->boxTitleAltPalOffset, 4);
 }
 
 static s16 GetBoxTitleBaseX(const u8 *string)

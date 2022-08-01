@@ -314,7 +314,7 @@ static void sub_80900D4(u8 boxId)
         }
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
@@ -335,7 +335,7 @@ void sub_80901EC(u8 boxPosition)
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
-        if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+        if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
             gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
@@ -411,7 +411,7 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
     u8 count = 0;
     u8 boxPosition = row;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < IN_BOX_COLUMNS; i++)
         {
@@ -591,7 +591,7 @@ void CreatePartyMonsSprites(bool8 arg0)
         }
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {

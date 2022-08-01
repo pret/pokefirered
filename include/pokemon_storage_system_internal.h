@@ -27,11 +27,12 @@ enum
 
 enum
 {
-    BOX_OPTION_WITHDRAW,
-    BOX_OPTION_DEPOSIT,
-    BOX_OPTION_MOVE_MONS,
-    BOX_OPTION_MOVE_ITEMS,
-    BOX_OPTION_EXIT,
+    OPTION_WITHDRAW,
+    OPTION_DEPOSIT,
+    OPTION_MOVE_MONS,
+    OPTION_MOVE_ITEMS,
+    OPTION_EXIT,
+    OPTIONS_COUNT
 };
 
 enum
@@ -208,9 +209,9 @@ struct UnkUtilData
 
 struct UnkUtil
 {
-    struct UnkUtilData *unk_00;
-    u8 unk_04;
-    u8 unk_05;
+    struct UnkUtilData *data;
+    u8 numActive;
+    u8 max;
 };
 
 struct PSS_ItemIconSprite
@@ -437,7 +438,7 @@ bool8 sub_8095050(void);
 void sub_80950A4(void);
 void sub_80950BC(u8 a0);
 bool8 sub_80950D0(void);
-void sub_8095B5C(void);
+void CreateItemIconSprites(void);
 void sub_8096088(void);
 void sub_80960C0(void);
 bool8 sub_809610C(void);
@@ -445,8 +446,8 @@ const u8 *GetMovingItemName(void);
 void InitItemInfoWindow(void);
 bool8 UpdateItemInfoWindowSlideIn(void);
 bool8 UpdateItemInfoWindowSlideOut(void);
-void sub_8096BE4(struct UnkUtil *arg0, struct UnkUtilData *arg1, u32 arg2);
-void sub_8096BF8(void);
+void UnkUtil_Init(struct UnkUtil *arg0, struct UnkUtilData *arg1, u32 arg2);
+void UnkUtil_Run(void);
 void AddMenu(void);
 bool8 CanMovePartyMon(void);
 bool8 CanShiftMon(void);

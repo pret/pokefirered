@@ -51,7 +51,7 @@ static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/interface/pss_u
 
 void sub_80922C0(void)
 {
-    if (gPSSData->boxOption != BOX_OPTION_DEPOSIT)
+    if (gPSSData->boxOption != OPTION_DEPOSIT)
         sBoxCursorArea = CURSOR_AREA_IN_BOX;
     else
         sBoxCursorArea = CURSOR_AREA_IN_PARTY;
@@ -140,7 +140,7 @@ bool8 sub_80924A8(void)
 
     if (gPSSData->cursorMoveSteps == 0)
     {
-        if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+        if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
             return FALSE;
         else
             return sub_809610C();
@@ -245,7 +245,7 @@ static void sub_80927E8(u8 newCurosrArea, u8 newCursorPosition)
 {
     sub_8092604(newCurosrArea, newCursorPosition);
     sub_8092660();
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
     {
         if (gPSSData->inBoxMovingMode == 0 && !sIsMonBeingMoved)
             StartSpriteAnim(gPSSData->cursorSprite, 1);
@@ -256,7 +256,7 @@ static void sub_80927E8(u8 newCurosrArea, u8 newCursorPosition)
             StartSpriteAnim(gPSSData->cursorSprite, 1);
     }
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
             sub_8095D44(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
@@ -304,7 +304,7 @@ static void sub_80929B0(void)
 {
     sBoxCursorArea = gPSSData->newCursorArea;
     sBoxCursorPosition = gPSSData->newCursorPosition;
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
     {
         if (gPSSData->inBoxMovingMode == 0 && !sIsMonBeingMoved)
             StartSpriteAnim(gPSSData->cursorSprite, 1);
@@ -1237,7 +1237,7 @@ static u8 InBoxInput_Normal(void)
             if (!sCanOnlyMove)
                 return 8;
 
-            if (gPSSData->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
+            if (gPSSData->boxOption != OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
             {
                 switch (sub_8094E50(0))
                 {
@@ -1509,7 +1509,7 @@ static u8 HandleInput_InParty(void)
         {
             if (sBoxCursorPosition == PARTY_SIZE)
             {
-                if (gPSSData->boxOption == BOX_OPTION_DEPOSIT)
+                if (gPSSData->boxOption == OPTION_DEPOSIT)
                     return 4;
 
                 gotoBox = TRUE;
@@ -1543,7 +1543,7 @@ static u8 HandleInput_InParty(void)
 
         if (JOY_NEW(B_BUTTON))
         {
-            if (gPSSData->boxOption == BOX_OPTION_DEPOSIT)
+            if (gPSSData->boxOption == OPTION_DEPOSIT)
                 return 19;
 
             gotoBox = TRUE;
@@ -1754,7 +1754,7 @@ static void AddBoxMenu(void)
 static bool8 sub_8094924(void)
 {
     InitMenu();
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return sub_809494C();
     else
         return sub_8094A0C();
@@ -1766,19 +1766,19 @@ static bool8 sub_809494C(void)
 
     switch (gPSSData->boxOption)
     {
-    case BOX_OPTION_DEPOSIT:
+    case OPTION_DEPOSIT:
         if (var0)
             SetMenuText(PC_TEXT_STORE);
         else
             return FALSE;
         break;
-    case BOX_OPTION_WITHDRAW:
+    case OPTION_WITHDRAW:
         if (var0)
             SetMenuText(PC_TEXT_WITHDRAW);
         else
             return FALSE;
         break;
-    case BOX_OPTION_MOVE_MONS:
+    case OPTION_MOVE_MONS:
         if (sIsMonBeingMoved)
         {
             if (var0)
@@ -1794,13 +1794,13 @@ static bool8 sub_809494C(void)
                 return FALSE;
         }
         break;
-    case BOX_OPTION_MOVE_ITEMS:
+    case OPTION_MOVE_ITEMS:
     default:
         return FALSE;
     }
 
     SetMenuText(PC_TEXT_SUMMARY);
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_MONS)
+    if (gPSSData->boxOption == OPTION_MOVE_MONS)
     {
         if (!sBoxCursorArea)
             SetMenuText(PC_TEXT_WITHDRAW);

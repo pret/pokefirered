@@ -15,16 +15,6 @@
 #include "constants/field_weather.h"
 #include "constants/help_system.h"
 
-// PC main menu options
-enum {
-    OPTION_WITHDRAW,
-    OPTION_DEPOSIT,
-    OPTION_MOVE_MONS,
-    OPTION_MOVE_ITEMS,
-    OPTION_EXIT,
-    OPTIONS_COUNT
-};
-
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
 static EWRAM_DATA struct ChooseBoxMenu *sBoxSelectionPopupSpriteManager = NULL;
 

@@ -110,7 +110,7 @@ static const union AffineAnimCmd *const gUnknown_83D370C[] = {
     gUnknown_83D36FC
 };
 
-static const struct SpriteTemplate gUnknown_83D3728 = {
+static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
     .tileTag = TAG_TILE_7,
     .paletteTag = TAG_PAL_DACB,
     .oam = &gUnknown_83D365C,
@@ -120,25 +120,25 @@ static const struct SpriteTemplate gUnknown_83D3728 = {
     .callback = SpriteCallbackDummy,
 };
 
-void sub_8095B5C(void)
+void CreateItemIconSprites(void)
 {
     s32 i;
     u8 spriteId;
     struct CompressedSpriteSheet spriteSheet;
     struct SpriteTemplate spriteTemplate;
-    static u32 gUnknown_3000FE8[0x61];
+    static u32 sItemIconGfxBuffer[0x61];
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
-        spriteSheet.data = gUnknown_3000FE8;
+        spriteSheet.data = sItemIconGfxBuffer;
         spriteSheet.size = 0x200;
-        spriteTemplate = gUnknown_83D3728;
+        spriteTemplate = sSpriteTemplate_ItemIcon;
 
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
             spriteSheet.tag = TAG_TILE_7 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
-            gPSSData->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void *)(OBJ_VRAM0);
+            gPSSData->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * TILE_SIZE_4BPP + (void *)(OBJ_VRAM0);
             gPSSData->itemIcons[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
             gPSSData->itemIcons[i].palIndex *= 16;
             gPSSData->itemIcons[i].palIndex += 0x100;
@@ -147,7 +147,7 @@ void sub_8095B5C(void)
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
             gPSSData->itemIcons[i].sprite = &gSprites[spriteId];
             gPSSData->itemIcons[i].sprite->invisible = TRUE;
-            gPSSData->itemIcons[i].active = 0;
+            gPSSData->itemIcons[i].active = FALSE;
         }
     }
     gPSSData->movingItemId = ITEM_NONE;
@@ -157,7 +157,7 @@ void sub_8095C84(u8 cursorArea, u8 cursorPos)
 {
     u16 heldItem;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
     if (IsItemIconAtPosition(cursorArea, cursorPos))
         return;
@@ -195,7 +195,7 @@ void sub_8095D44(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     id = GetItemIconIdxByPosition(cursorArea, cursorPos);
@@ -208,7 +208,7 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     id = GetItemIconIdxByPosition(cursorArea, cursorPos);
@@ -249,7 +249,7 @@ void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     id = GetItemIconIdxByPosition(cursorArea, cursorPos);
@@ -277,7 +277,7 @@ void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     id = GetItemIconIdxByPosition(2, 0);
@@ -300,7 +300,7 @@ void Item_TakeMons(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     item = 0;
@@ -321,7 +321,7 @@ void Item_TakeMons(u8 cursorArea, u8 cursorPos)
 
 void sub_8096088(void)
 {
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
         u8 id = GetItemIconIdxByPosition(2, 0);
         SetItemIconAffineAnim(id, 5);
@@ -333,7 +333,7 @@ void sub_80960C0(void)
 {
     s32 i;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
@@ -365,7 +365,7 @@ bool8 IsActiveItemMoving(void)
 {
     s32 i;
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
@@ -779,80 +779,93 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 #undef sCursorArea
 #undef sCursorPos
 
-static EWRAM_DATA struct UnkUtil *gUnknown_203982C = NULL;
 
-static void sub_8096CDC(struct UnkUtilData *unkStruct);
-static void sub_8096D70(struct UnkUtilData *unkStruct);
+//------------------------------------------------------------------------------
+//  SECTION: UnkUtil
+//
+//  Some data transfer utility that goes functionally unused.
+//  It gets initialized with UnkUtil_Init, and run every vblank in Pokémon
+//  Storage with UnkUtil_Run, but neither of the Add functions are ever used,
+//  so UnkUtil_Run performs no actions.
+//------------------------------------------------------------------------------
 
-void sub_8096BE4(struct UnkUtil *arg0, struct UnkUtilData *arg1, u32 arg2)
+
+static EWRAM_DATA struct UnkUtil *sUnkUtil = NULL;
+
+static void UnkUtil_CpuRun(struct UnkUtilData *unkStruct);
+static void UnkUtil_DmaRun(struct UnkUtilData *unkStruct);
+
+void UnkUtil_Init(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
 {
-    gUnknown_203982C = arg0;
-    arg0->unk_00 = arg1;
-    arg0->unk_05 = arg2;
-    arg0->unk_04 = 0;
+    sUnkUtil = util;
+    util->data = data;
+    util->max = max;
+    util->numActive = 0;
 }
 
-void sub_8096BF8(void)
+void UnkUtil_Run(void)
 {
     u16 i;
-
-    if (gUnknown_203982C->unk_04)
+    if (sUnkUtil->numActive)
     {
-        for (i = 0; i < gUnknown_203982C->unk_04; i++)
+        for (i = 0; i < sUnkUtil->numActive; i++)
         {
-            struct UnkUtilData *unkStruct = &gUnknown_203982C->unk_00[i];
-            unkStruct->func(unkStruct);
+            struct UnkUtilData *data = &sUnkUtil->data[i];
+            data->func(data);
         }
-
-        gUnknown_203982C->unk_04 = 0;
+        sUnkUtil->numActive = 0;
     }
 }
 
-static bool8 sub_8096C40(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
+// Unused
+static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
 {
-    struct UnkUtilData *unkStruct;
+    struct UnkUtilData *data;
 
-    if (gUnknown_203982C->unk_04 >= gUnknown_203982C->unk_05)
+    if (sUnkUtil->numActive >= sUnkUtil->max)
         return FALSE;
 
-    unkStruct = &gUnknown_203982C->unk_00[gUnknown_203982C->unk_04++];
-    unkStruct->size = width * 2;
-    unkStruct->dest = dest + 2 * (dTop * 32 + dLeft);
-    unkStruct->src = src + 2 * (sTop * unkArg + sLeft);
-    unkStruct->height = height;
-    unkStruct->unk = unkArg;
-    unkStruct->func = sub_8096CDC;
+    data = &sUnkUtil->data[sUnkUtil->numActive++];
+    data->size = width * 2;
+    data->dest = dest + 2 * (dTop * 32 + dLeft);
+    data->src = src + 2 * (sTop * unkArg + sLeft);
+    data->height = height;
+    data->unk = unkArg;
+    data->func = UnkUtil_CpuRun;
     return TRUE;
 }
 
-static void sub_8096CDC(struct UnkUtilData *unkStruct)
+// Functionally unused
+static void UnkUtil_CpuRun(struct UnkUtilData *data)
 {
     u16 i;
 
-    for (i = 0; i < unkStruct->height; i++)
+    for (i = 0; i < data->height; i++)
     {
-        CpuCopy16(unkStruct->src, unkStruct->dest, unkStruct->size);
-        unkStruct->dest += 64;
-        unkStruct->src += (unkStruct->unk * 2);
+        CpuCopy16(data->src, data->dest, data->size);
+        data->dest += 64;
+        data->src += (data->unk * 2);
     }
 }
 
-static bool8 sub_8096D14(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
+// Unused
+static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
 {
-    struct UnkUtilData *unkStruct;
+    struct UnkUtilData *data;
 
-    if (gUnknown_203982C->unk_04 >= gUnknown_203982C->unk_05)
+    if (sUnkUtil->numActive >= sUnkUtil->max)
         return FALSE;
 
-    unkStruct = &gUnknown_203982C->unk_00[gUnknown_203982C->unk_04++];
-    unkStruct->size = width * 2;
-    unkStruct->dest = dest + ((dTop * 32) + dLeft) * 2;
-    unkStruct->height = height;
-    unkStruct->func = sub_8096D70;
+    data = &sUnkUtil->data[sUnkUtil->numActive++];
+    data->size = width * 2;
+    data->dest = dest + ((dTop * 32) + dLeft) * 2;
+    data->height = height;
+    data->func = UnkUtil_DmaRun;
     return TRUE;
 }
 
-static void sub_8096D70(struct UnkUtilData *data)
+// Functionally unused
+static void UnkUtil_DmaRun(struct UnkUtilData *data)
 {
     u16 i;
 

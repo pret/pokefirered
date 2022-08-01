@@ -595,25 +595,25 @@ void InitItemInfoWindow(void)
 
 bool8 UpdateItemInfoWindowSlideIn(void)
 {
-    s32 i, var;
+    s32 i, pos;
 
     if (gPSSData->itemInfoWindowOffset == 0)
         return FALSE;
 
     gPSSData->itemInfoWindowOffset--;
-    var = 25 - gPSSData->itemInfoWindowOffset;
-    for (i = 0; i < var; i++)
+    pos = 25 - gPSSData->itemInfoWindowOffset;
+    for (i = 0; i < pos; i++)
     {
         WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->itemInfoWindowOffset + i, i, 12, 1, 8, 15, 25);
     }
 
-    DrawItemInfoWindow(var);
+    DrawItemInfoWindow(pos);
     return (gPSSData->itemInfoWindowOffset != 0);
 }
 
 bool8 UpdateItemInfoWindowSlideOut(void)
 {
-    s32 i, var;
+    s32 i, pos;
 
     if (gPSSData->itemInfoWindowOffset == 25)
         return FALSE;
@@ -622,28 +622,28 @@ bool8 UpdateItemInfoWindowSlideOut(void)
         FillBgTilemapBufferRect(0, 0, 25, 11, 1, 10, 17);
 
     gPSSData->itemInfoWindowOffset++;
-    var = 25 - gPSSData->itemInfoWindowOffset;
-    for (i = 0; i < var; i++)
+    pos = 25 - gPSSData->itemInfoWindowOffset;
+    for (i = 0; i < pos; i++)
     {
         WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->itemInfoWindowOffset + i, i, 12, 1, 8, 15, 25);
     }
 
-    DrawItemInfoWindow(var);
+    DrawItemInfoWindow(pos);
 
-    FillBgTilemapBufferRect(0, 0, var, 11, 1, 10, 0x11);
+    FillBgTilemapBufferRect(0, 0, pos, 11, 1, 10, 0x11);
     return (gPSSData->itemInfoWindowOffset != 25);
 }
 
-static void DrawItemInfoWindow(u32 pos)
+static void DrawItemInfoWindow(u32 x)
 {
-    if (pos != 0)
+    if (x != 0)
     {
-        FillBgTilemapBufferRect(0, 0x1A4, 0, 0xB, pos, 1, 0xFu);
-        FillBgTilemapBufferRect(0, 0x9A4, 0, 0x14, pos, 1, 0xFu);
+        FillBgTilemapBufferRect(0, 0x1A4, 0, 0xB, x, 1, 0xFu);
+        FillBgTilemapBufferRect(0, 0x9A4, 0, 0x14, x, 1, 0xFu);
     }
-    FillBgTilemapBufferRect(0, 0x1A5, pos, 0xC, 1, 8, 0xFu);
-    FillBgTilemapBufferRect(0, 0x1A6, pos, 0xB, 1, 1, 0xFu);
-    FillBgTilemapBufferRect(0, 0x1A7, pos, 0x14, 1, 1, 0xFu);
+    FillBgTilemapBufferRect(0, 0x1A5, x, 0xC, 1, 8, 0xFu);
+    FillBgTilemapBufferRect(0, 0x1A6, x, 0xB, 1, 1, 0xFu);
+    FillBgTilemapBufferRect(0, 0x1A7, x, 0x14, 1, 1, 0xFu);
     ScheduleBgCopyTilemapToVram(0);
 }
 

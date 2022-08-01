@@ -58,7 +58,7 @@ static const u8 *const sMenuTexts[] = {
 
 void SetMenuText(u8 textId)
 {
-    if (gPSSData->menuItemsCount < MAX_MENU_ITEMS)
+    if (gPSSData->menuItemsCount < ARRAY_COUNT(gPSSData->menuItems))
     {
         u8 len;
         struct StorageMenu *menu = &gPSSData->menuItems[gPSSData->menuItemsCount];

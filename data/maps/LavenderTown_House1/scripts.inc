@@ -18,7 +18,7 @@ LavenderTown_House1_EventScript_Cubone::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_CUBONE, 0
+	playmoncry SPECIES_CUBONE, CRY_MODE_NORMAL
 	msgbox LavenderTown_House1_Text_Cubone
 	waitmoncry
 	release

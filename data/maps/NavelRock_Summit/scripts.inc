@@ -49,7 +49,7 @@ NavelRock_Summit_EventScript_HoOh::
 	setweather 0
 	doweather
 	waitse
-	playmoncry SPECIES_HO_OH, 2
+	playmoncry SPECIES_HO_OH, CRY_MODE_ENCOUNTER
 	delay 30
 	waitmoncry
 	delay 60

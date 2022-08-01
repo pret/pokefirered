@@ -64,7 +64,7 @@ bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerTowerSet * ttdata)
     return result;
 }
 
-static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerTowerSet * ttdata, void * buffer)
+static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerTowerSet * ttdata, void *buffer)
 {
     if (TryCopySpecialSaveSection(SECTOR_TTOWER(0), buffer) != 1)
         return FALSE;
@@ -81,7 +81,7 @@ static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerTowerSet * tt
 
 bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerTowerSet * ttdata)
 {
-    void * buffer = AllocZeroed(0x1000);
+    void *buffer = AllocZeroed(0x1000);
     bool32 success = CEReaderTool_LoadTrainerTower_r(ttdata, buffer);
     Free(buffer);
     return success;

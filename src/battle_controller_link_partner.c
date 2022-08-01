@@ -12,6 +12,7 @@
 #include "battle_message.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 static void LinkPartnerHandleGetMonData(void);
 static void LinkPartnerHandleGetRawMonData(void);
@@ -235,7 +236,7 @@ static void Intro_ShowHealthbox(void)
                                      HEALTHBOX_ALL);
             StartHealthboxSlideIn(gActiveBattler);
             SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
-            gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 0;
+            gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
             gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForHealthbox;
         }
     }
@@ -1425,7 +1426,7 @@ static void LinkPartnerHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry3(species, -25, 5);
+    PlayCry_ByMode(species, -25, CRY_MODE_FAINT);
     LinkPartnerBufferExecCompleted();
 }
 
@@ -1463,7 +1464,7 @@ static void LinkPartnerHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = 1;
+    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
     gBattlerControllerFuncs[gActiveBattler] = LinkPartnerDummy;
 }
 

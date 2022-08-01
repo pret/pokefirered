@@ -34,6 +34,7 @@
 #include "fieldmap.h"
 #include "field_door.h"
 #include "constants/event_objects.h"
+#include "constants/sound.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -1523,7 +1524,7 @@ bool8 ScrCmd_showmonpic(struct ScriptContext * ctx)
     u8 y = ScriptReadByte(ctx);
 
     ScriptMenu_ShowPokemonPic(species, x, y);
-    PlayCry7(species, 0);
+    PlayCry_Script(species, CRY_MODE_NORMAL);
     return FALSE;
 }
 
@@ -1560,7 +1561,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext * ctx)
 
     LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, 1);
-    AddTextPrinterParameterized(0, 6, ptr, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_6, ptr, 0, 1, 0, NULL);
     return FALSE;
 }
 
@@ -1570,7 +1571,7 @@ bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
     if (ptr == NULL)
         ptr = (u8 *)ctx->data[0];
 
-    gSpecialVar_0x8004 = GetStringWidth(6, ptr, -1);
+    gSpecialVar_0x8004 = GetStringWidth(FONT_6, ptr, -1);
     return FALSE;
 }
 
@@ -2085,7 +2086,7 @@ bool8 ScrCmd_playmoncry(struct ScriptContext * ctx)
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u16 mode = VarGet(ScriptReadHalfword(ctx));
 
-    PlayCry7(species, mode);
+    PlayCry_Script(species, mode);
     return FALSE;
 }
 

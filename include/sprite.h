@@ -4,7 +4,7 @@
 #include "global.h"
 
 #define MAX_SPRITES 64
-#define SPRITE_INVALID_TAG 0xFFFF
+#define TAG_NONE 0xFFFF
 
 struct SpriteSheet
 {

@@ -9,26 +9,38 @@
 #include "trig.h"
 #include "constants/items.h"
 
-static u8 sub_80961D8(void);
-static bool32 sub_8096210(u8 cursorArea, u8 cursorPos);
-static u8 sub_8096258(u8 cursorArea, u8 cursorPos);
-static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos);
-static void sub_8096408(u8 id, const u32 * tiles, const u32 * pal);
-static void sub_80964B8(u8 id, u8 affineAnimNo);
-static void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
-static void sub_8096624(u8 id, bool8 show);
+// IDs for the item icon sprite callbacks
+enum {
+    ITEM_CB_WAIT_ANIM,
+    ITEM_CB_TO_HAND,
+    ITEM_CB_TO_MON,
+    ITEM_CB_SWAP_TO_HAND,
+    ITEM_CB_SWAP_TO_MON,
+    ITEM_CB_UNUSED_1,
+    ITEM_CB_UNUSED_2,
+    ITEM_CB_HIDE_PARTY,
+};
+
+static u8 GetNewItemIconIdx(void);
+static bool32 IsItemIconAtPosition(u8 cursorArea, u8 cursorPos);
+static u8 GetItemIconIdxByPosition(u8 cursorArea, u8 cursorPos);
+static void SetItemIconPosition(u8 id, u8 cursorArea, u8 cursorPos);
+static void LoadItemIconGfx(u8 id, const u32 * tiles, const u32 * pal);
+static void SetItemIconAffineAnim(u8 id, u8 affineAnimNo);
+static void SetItemIconCallback(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
+static void SetItemIconActive(u8 id, bool8 show);
 static const u32 *GetItemIconPic(u16 itemId);
 static const u32 *GetItemIconPalette(u16 itemId);
-static void sub_8096898(u32 x);
-static void sub_809692C(struct Sprite * sprite);
-static void sub_8096958(struct Sprite * sprite);
-static void sub_80969BC(struct Sprite * sprite);
-static void sub_80969F4(struct Sprite * sprite);
-static void sub_8096A74(struct Sprite * sprite);
-static void sub_8096B10(struct Sprite * sprite);
-static void sub_8096BAC(struct Sprite * sprite);
+static void DrawItemInfoWindow(u32 x);
+static void SpriteCB_ItemIcon_WaitAnim(struct Sprite *sprite);
+static void SpriteCB_ItemIcon_ToHand(struct Sprite *sprite);
+static void SpriteCB_ItemIcon_SetPosToCursor(struct Sprite *sprite);
+static void SpriteCB_ItemIcon_ToMon(struct Sprite *sprite);
+static void SpriteCB_ItemIcon_SwapToHand(struct Sprite *sprite);
+static void SpriteCB_ItemIcon_SwapToMon(struct Sprite *sprite);
+static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite);
 
-static const u32 gUnknown_83D35DC[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
+static const u32 sItemInfoFrame_Gfx[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
 
 static const struct OamData gUnknown_83D365C = {
     .y = 0,
@@ -98,7 +110,7 @@ static const union AffineAnimCmd *const gUnknown_83D370C[] = {
     gUnknown_83D36FC
 };
 
-static const struct SpriteTemplate gUnknown_83D3728 = {
+static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
     .tileTag = TAG_TILE_7,
     .paletteTag = TAG_PAL_DACB,
     .oam = &gUnknown_83D365C,
@@ -108,46 +120,46 @@ static const struct SpriteTemplate gUnknown_83D3728 = {
     .callback = SpriteCallbackDummy,
 };
 
-void sub_8095B5C(void)
+void CreateItemIconSprites(void)
 {
     s32 i;
     u8 spriteId;
     struct CompressedSpriteSheet spriteSheet;
     struct SpriteTemplate spriteTemplate;
-    static u32 gUnknown_3000FE8[0x61];
+    static u32 sItemIconGfxBuffer[0x61];
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
-        spriteSheet.data = gUnknown_3000FE8;
+        spriteSheet.data = sItemIconGfxBuffer;
         spriteSheet.size = 0x200;
-        spriteTemplate = gUnknown_83D3728;
+        spriteTemplate = sSpriteTemplate_ItemIcon;
 
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
             spriteSheet.tag = TAG_TILE_7 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
-            gPSSData->itemIconSprites[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void *)(OBJ_VRAM0);
-            gPSSData->itemIconSprites[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
-            gPSSData->itemIconSprites[i].palIndex *= 16;
-            gPSSData->itemIconSprites[i].palIndex += 0x100;
+            gPSSData->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * TILE_SIZE_4BPP + (void *)(OBJ_VRAM0);
+            gPSSData->itemIcons[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
+            gPSSData->itemIcons[i].palIndex *= 16;
+            gPSSData->itemIcons[i].palIndex += 0x100;
             spriteTemplate.tileTag = TAG_TILE_7 + i;
             spriteTemplate.paletteTag = TAG_PAL_DACB + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
-            gPSSData->itemIconSprites[i].sprite = &gSprites[spriteId];
-            gPSSData->itemIconSprites[i].sprite->invisible = TRUE;
-            gPSSData->itemIconSprites[i].active = 0;
+            gPSSData->itemIcons[i].sprite = &gSprites[spriteId];
+            gPSSData->itemIcons[i].sprite->invisible = TRUE;
+            gPSSData->itemIcons[i].active = FALSE;
         }
     }
-    gPSSData->movingItem = ITEM_NONE;
+    gPSSData->movingItemId = ITEM_NONE;
 }
 
 void sub_8095C84(u8 cursorArea, u8 cursorPos)
 {
     u16 heldItem;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
-    if (sub_8096210(cursorArea, cursorPos))
+    if (IsItemIconAtPosition(cursorArea, cursorPos))
         return;
 
     switch (cursorArea)
@@ -170,12 +182,12 @@ void sub_8095C84(u8 cursorArea, u8 cursorPos)
     {
         const u32 *tiles = GetItemIconPic(heldItem);
         const u32 *pal = GetItemIconPalette(heldItem);
-        u8 id = sub_80961D8();
+        u8 id = GetNewItemIconIdx();
 
-        sub_80962F0(id, cursorArea, cursorPos);
-        sub_8096408(id, tiles, pal);
-        sub_80964B8(id, 1);
-        sub_8096624(id, TRUE);
+        SetItemIconPosition(id, cursorArea, cursorPos);
+        LoadItemIconGfx(id, tiles, pal);
+        SetItemIconAffineAnim(id, 1);
+        SetItemIconActive(id, TRUE);
     }
 }
 
@@ -183,12 +195,12 @@ void sub_8095D44(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
-    id = sub_8096258(cursorArea, cursorPos);
-    sub_80964B8(id, 2);
-    sub_80964E8(id, 0, cursorArea, cursorPos);
+    id = GetItemIconIdxByPosition(cursorArea, cursorPos);
+    SetItemIconAffineAnim(id, 2);
+    SetItemIconCallback(id, 0, cursorArea, cursorPos);
 }
 
 void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
@@ -196,14 +208,14 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
-    id = sub_8096258(cursorArea, cursorPos);
+    id = GetItemIconIdxByPosition(cursorArea, cursorPos);
     item = 0;
-    sub_80964B8(id, 3);
-    sub_80964E8(id, 1, cursorArea, cursorPos);
-    sub_80962F0(id, 2, 0);
+    SetItemIconAffineAnim(id, 3);
+    SetItemIconCallback(id, 1, cursorArea, cursorPos);
+    SetItemIconPosition(id, 2, 0);
     if (cursorArea  == CURSOR_AREA_IN_BOX)
     {
         SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &item);
@@ -215,21 +227,21 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_BLEND);
     }
 
-    gPSSData->movingItem = gPSSData->cursorMonItem;
+    gPSSData->movingItemId = gPSSData->displayMonItemId;
 }
 
 void sub_8095E2C(u16 item)
 {
     const u32 *tiles = GetItemIconPic(item);
     const u32 *pal = GetItemIconPalette(item);
-    u8 id = sub_80961D8();
+    u8 id = GetNewItemIconIdx();
 
-    sub_8096408(id, tiles, pal);
-    sub_80964B8(id, 6);
-    sub_80964E8(id, 1, CURSOR_AREA_IN_BOX, 0);
-    sub_80962F0(id, CURSOR_AREA_BOX, 0);
-    sub_8096624(id, TRUE);
-    gPSSData->movingItem = item;
+    LoadItemIconGfx(id, tiles, pal);
+    SetItemIconAffineAnim(id, 6);
+    SetItemIconCallback(id, 1, CURSOR_AREA_IN_BOX, 0);
+    SetItemIconPosition(id, CURSOR_AREA_BOX, 0);
+    SetItemIconActive(id, TRUE);
+    gPSSData->movingItemId = item;
 }
 
 void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
@@ -237,48 +249,48 @@ void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
-    id = sub_8096258(cursorArea, cursorPos);
-    sub_80964B8(id, 3);
-    sub_80964E8(id, 3, CURSOR_AREA_BOX, 0);
+    id = GetItemIconIdxByPosition(cursorArea, cursorPos);
+    SetItemIconAffineAnim(id, 3);
+    SetItemIconCallback(id, 3, CURSOR_AREA_BOX, 0);
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
         item = GetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM);
-        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItem);
-        gPSSData->movingItem = item;
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
+        gPSSData->movingItemId = item;
     }
     else
     {
         item = GetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM);
-        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItem);
-        gPSSData->movingItem = item;
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
+        gPSSData->movingItemId = item;
     }
 
-    id = sub_8096258(2, 0);
-    sub_80964B8(id, 4);
-    sub_80964E8(id, 4, cursorArea, cursorPos);
+    id = GetItemIconIdxByPosition(2, 0);
+    SetItemIconAffineAnim(id, 4);
+    SetItemIconCallback(id, 4, cursorArea, cursorPos);
 }
 
 void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
-    id = sub_8096258(2, 0);
-    sub_80964B8(id, 4);
-    sub_80964E8(id, 2, cursorArea, cursorPos);
+    id = GetItemIconIdxByPosition(2, 0);
+    SetItemIconAffineAnim(id, 4);
+    SetItemIconCallback(id, 2, cursorArea, cursorPos);
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
-        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItem);
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
         SetBoxMonIconObjMode(cursorPos, ST_OAM_OBJ_NORMAL);
     }
     else
     {
-        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItem);
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItemId);
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_NORMAL);
     }
 }
@@ -288,13 +300,13 @@ void Item_TakeMons(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     item = 0;
-    id = sub_8096258(cursorArea, cursorPos);
-    sub_80964B8(id, 2);
-    sub_80964E8(id, 0, cursorArea, cursorPos);
+    id = GetItemIconIdxByPosition(cursorArea, cursorPos);
+    SetItemIconAffineAnim(id, 2);
+    SetItemIconCallback(id, 0, cursorArea, cursorPos);
     if (cursorArea  == CURSOR_AREA_IN_BOX)
     {
         SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &item);
@@ -309,11 +321,11 @@ void Item_TakeMons(u8 cursorArea, u8 cursorPos)
 
 void sub_8096088(void)
 {
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
-        u8 id = sub_8096258(2, 0);
-        sub_80964B8(id, 5);
-        sub_80964E8(id, 0, CURSOR_AREA_BOX, 0);
+        u8 id = GetItemIconIdxByPosition(2, 0);
+        SetItemIconAffineAnim(id, 5);
+        SetItemIconCallback(id, 0, CURSOR_AREA_BOX, 0);
     }
 }
 
@@ -321,13 +333,13 @@ void sub_80960C0(void)
 {
     s32 i;
 
-    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != OPTION_MOVE_ITEMS)
         return;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (gPSSData->itemIconSprites[i].active && gPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_IN_PARTY)
-            sub_80964E8(i, 7, CURSOR_AREA_BOX, 0);
+        if (gPSSData->itemIcons[i].active && gPSSData->itemIcons[i].cursorArea == CURSOR_AREA_IN_PARTY)
+            SetItemIconCallback(i, 7, CURSOR_AREA_BOX, 0);
     }
 }
 
@@ -337,11 +349,11 @@ bool8 sub_809610C(void)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (gPSSData->itemIconSprites[i].active)
+        if (gPSSData->itemIcons[i].active)
         {
-            if (!gPSSData->itemIconSprites[i].sprite->affineAnimEnded && gPSSData->itemIconSprites[i].sprite->affineAnimBeginning)
+            if (!gPSSData->itemIcons[i].sprite->affineAnimEnded && gPSSData->itemIcons[i].sprite->affineAnimBeginning)
                 return TRUE;
-            if (gPSSData->itemIconSprites[i].sprite->callback != SpriteCallbackDummy && gPSSData->itemIconSprites[i].sprite->callback != sub_80969BC)
+            if (gPSSData->itemIcons[i].sprite->callback != SpriteCallbackDummy && gPSSData->itemIcons[i].sprite->callback != SpriteCB_ItemIcon_SetPosToCursor)
                 return TRUE;
         }
     }
@@ -353,11 +365,11 @@ bool8 IsActiveItemMoving(void)
 {
     s32 i;
 
-    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
-            if (gPSSData->itemIconSprites[i].active && gPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_BOX)
+            if (gPSSData->itemIcons[i].active && gPSSData->itemIcons[i].cursorArea == CURSOR_AREA_BOX)
                 return TRUE;
         }
     }
@@ -367,23 +379,23 @@ bool8 IsActiveItemMoving(void)
 
 const u8 *GetMovingItemName(void)
 {
-    return ItemId_GetName(gPSSData->movingItem);
+    return ItemId_GetName(gPSSData->movingItemId);
 }
 
 u16 GetMovingItem(void)
 {
-    return gPSSData->movingItem;
+    return gPSSData->movingItemId;
 }
 
-static u8 sub_80961D8(void)
+static u8 GetNewItemIconIdx(void)
 {
     u8 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (!gPSSData->itemIconSprites[i].active)
+        if (!gPSSData->itemIcons[i].active)
         {
-            gPSSData->itemIconSprites[i].active = TRUE;
+            gPSSData->itemIcons[i].active = TRUE;
             return i;
         }
     }
@@ -391,51 +403,51 @@ static u8 sub_80961D8(void)
     return MAX_ITEM_ICONS;
 }
 
-static bool32 sub_8096210(u8 cursorArea, u8 cursorPos)
+static bool32 IsItemIconAtPosition(u8 cursorArea, u8 cursorPos)
 {
     s32 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (gPSSData->itemIconSprites[i].active
-            && gPSSData->itemIconSprites[i].cursorArea == cursorArea
-            && gPSSData->itemIconSprites[i].cursorPos == cursorPos)
+        if (gPSSData->itemIcons[i].active
+            && gPSSData->itemIcons[i].cursorArea == cursorArea
+            && gPSSData->itemIcons[i].cursorPos == cursorPos)
             return TRUE;
     }
 
     return FALSE;
 }
 
-static u8 sub_8096258(u8 cursorArea, u8 cursorPos)
+static u8 GetItemIconIdxByPosition(u8 cursorArea, u8 cursorPos)
 {
     u8 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (gPSSData->itemIconSprites[i].active
-            && gPSSData->itemIconSprites[i].cursorArea == cursorArea
-            && gPSSData->itemIconSprites[i].cursorPos == cursorPos)
+        if (gPSSData->itemIcons[i].active
+            && gPSSData->itemIcons[i].cursorArea == cursorArea
+            && gPSSData->itemIcons[i].cursorPos == cursorPos)
             return i;
     }
 
     return MAX_ITEM_ICONS;
 }
 
-static u8 sub_80962A8(struct Sprite *sprite)
+static u8 GetItemIconIdxBySprite(struct Sprite *sprite)
 {
     u8 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (gPSSData->itemIconSprites[i].active
-            && gPSSData->itemIconSprites[i].sprite == sprite)
+        if (gPSSData->itemIcons[i].active
+            && gPSSData->itemIcons[i].sprite == sprite)
             return i;
     }
 
     return MAX_ITEM_ICONS;
 }
 
-static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
+static void SetItemIconPosition(u8 id, u8 cursorArea, u8 cursorPos)
 {
     u8 row, column;
 
@@ -447,100 +459,108 @@ static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
     case CURSOR_AREA_IN_BOX:
         row = cursorPos % IN_BOX_ROWS;
         column = cursorPos / IN_BOX_ROWS;
-        gPSSData->itemIconSprites[id].sprite->x = (24 * row) + 112;
-        gPSSData->itemIconSprites[id].sprite->y = (24 * column) + 56;
-        gPSSData->itemIconSprites[id].sprite->oam.priority = 2;
+        gPSSData->itemIcons[id].sprite->x = (24 * row) + 112;
+        gPSSData->itemIcons[id].sprite->y = (24 * column) + 56;
+        gPSSData->itemIcons[id].sprite->oam.priority = 2;
         break;
     case CURSOR_AREA_IN_PARTY:
         if (cursorPos == 0)
         {
-            gPSSData->itemIconSprites[id].sprite->x = 116;
-            gPSSData->itemIconSprites[id].sprite->y = 76;
+            gPSSData->itemIcons[id].sprite->x = 116;
+            gPSSData->itemIcons[id].sprite->y = 76;
         }
         else
         {
-            gPSSData->itemIconSprites[id].sprite->x = 164;
-            gPSSData->itemIconSprites[id].sprite->y = 24 * (cursorPos - 1) + 28;
+            gPSSData->itemIcons[id].sprite->x = 164;
+            gPSSData->itemIcons[id].sprite->y = 24 * (cursorPos - 1) + 28;
         }
-        gPSSData->itemIconSprites[id].sprite->oam.priority = 1;
+        gPSSData->itemIcons[id].sprite->oam.priority = 1;
         break;
     }
 
-    gPSSData->itemIconSprites[id].cursorArea = cursorArea;
-    gPSSData->itemIconSprites[id].cursorPos = cursorPos;
+    gPSSData->itemIcons[id].cursorArea = cursorArea;
+    gPSSData->itemIcons[id].cursorPos = cursorPos;
 }
 
-static void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
+static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
 {
     s32 i;
 
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    CpuFastFill(0, gPSSData->field_42C4, 0x200);
+    CpuFastFill(0, gPSSData->itemIconBuffer, 0x200);
     LZ77UnCompWram(itemTiles, gPSSData->field_22C4);
     for (i = 0; i < 3; i++)
-        CpuFastCopy(gPSSData->field_22C4 + (i * 0x60), gPSSData->field_42C4 + (i * 0x80), 0x60);
+        CpuFastCopy(gPSSData->field_22C4 + (i * 0x60), gPSSData->itemIconBuffer + (i * 0x80), 0x60);
 
-    CpuFastCopy(gPSSData->field_42C4, gPSSData->itemIconSprites[id].tiles, 0x200);
-    LZ77UnCompWram(itemPal, gPSSData->field_42C4);
-    LoadPalette(gPSSData->field_42C4, gPSSData->itemIconSprites[id].palIndex, 0x20);
+    CpuFastCopy(gPSSData->itemIconBuffer, gPSSData->itemIcons[id].tiles, 0x200);
+    LZ77UnCompWram(itemPal, gPSSData->itemIconBuffer);
+    LoadPalette(gPSSData->itemIconBuffer, gPSSData->itemIcons[id].palIndex, 0x20);
 }
 
-static void sub_80964B8(u8 id, u8 animNum)
+static void SetItemIconAffineAnim(u8 id, u8 animNum)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    StartSpriteAffineAnim(gPSSData->itemIconSprites[id].sprite, animNum);
+    StartSpriteAffineAnim(gPSSData->itemIcons[id].sprite, animNum);
 }
 
-static void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos)
+#define sItemIconId data[0]
+#define sState      data[0]
+#define sCursorArea data[6]
+#define sCursorPos  data[7]
+
+static void SetItemIconCallback(u8 id, u8 callbackId, u8 cursorArea, u8 cursorPos)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    switch (command)
+    switch (callbackId)
     {
-    case 0:
-        gPSSData->itemIconSprites[id].sprite->data[0] = id;
-        gPSSData->itemIconSprites[id].sprite->callback = sub_809692C;
+    case ITEM_CB_WAIT_ANIM:
+        gPSSData->itemIcons[id].sprite->sItemIconId = id;
+        gPSSData->itemIcons[id].sprite->callback = SpriteCB_ItemIcon_WaitAnim;
         break;
-    case 1:
-        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        gPSSData->itemIconSprites[id].sprite->callback = sub_8096958;
+    case ITEM_CB_TO_HAND:
+        gPSSData->itemIcons[id].sprite->sState = 0;
+        gPSSData->itemIcons[id].sprite->callback = SpriteCB_ItemIcon_ToHand;
         break;
-    case 2:
-        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        gPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
-        gPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
-        gPSSData->itemIconSprites[id].sprite->callback = sub_80969F4;
+    case ITEM_CB_TO_MON:
+        gPSSData->itemIcons[id].sprite->sState = 0;
+        gPSSData->itemIcons[id].sprite->sCursorArea = cursorArea;
+        gPSSData->itemIcons[id].sprite->sCursorPos = cursorPos;
+        gPSSData->itemIcons[id].sprite->callback = SpriteCB_ItemIcon_ToMon;
         break;
-    case 3:
-        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        gPSSData->itemIconSprites[id].sprite->callback = sub_8096A74;
-        gPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
-        gPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
+    case ITEM_CB_SWAP_TO_HAND:
+        gPSSData->itemIcons[id].sprite->sState = 0;
+        gPSSData->itemIcons[id].sprite->callback = SpriteCB_ItemIcon_SwapToHand;
+        gPSSData->itemIcons[id].sprite->sCursorArea = cursorArea;
+        gPSSData->itemIcons[id].sprite->sCursorPos = cursorPos;
         break;
-    case 4:
-        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        gPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
-        gPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
-        gPSSData->itemIconSprites[id].sprite->callback = sub_8096B10;
+    case ITEM_CB_SWAP_TO_MON:
+        gPSSData->itemIcons[id].sprite->sState = 0;
+        gPSSData->itemIcons[id].sprite->sCursorArea = cursorArea;
+        gPSSData->itemIcons[id].sprite->sCursorPos = cursorPos;
+        gPSSData->itemIcons[id].sprite->callback = SpriteCB_ItemIcon_SwapToMon;
         break;
-    case 7:
-        gPSSData->itemIconSprites[id].sprite->callback = sub_8096BAC;
+    case ITEM_CB_HIDE_PARTY:
+        // If cursor is on a Pokémon with a held item and
+        // the player closes the party menu, have the held
+        // item follow the Pokémon as the menu slides out
+        gPSSData->itemIcons[id].sprite->callback = SpriteCB_ItemIcon_HideParty;
         break;
     }
 }
 
-static void sub_8096624(u8 id, bool8 show)
+static void SetItemIconActive(u8 id, bool8 show)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    gPSSData->itemIconSprites[id].active = show;
-    gPSSData->itemIconSprites[id].sprite->invisible = (show == FALSE);
+    gPSSData->itemIcons[id].active = show;
+    gPSSData->itemIcons[id].sprite->invisible = (show == FALSE);
 }
 
 static const u32 *GetItemIconPic(u16 itemId)
@@ -558,63 +578,63 @@ void PrintItemDescription(void)
     const u8 *description;
 
     if (IsActiveItemMoving())
-        description = ItemId_GetDescription(gPSSData->movingItem);
+        description = ItemId_GetDescription(gPSSData->movingItemId);
     else
-        description = ItemId_GetDescription(gPSSData->cursorMonItem);
+        description = ItemId_GetDescription(gPSSData->displayMonItemId);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    AddTextPrinterParameterized5(2, 2, description, 2, 0, 0, NULL, 0, 0);
+    AddTextPrinterParameterized5(2, FONT_2, description, 2, 0, 0, NULL, 0, 0);
 }
 
-void sub_80966F4(void)
+void InitItemInfoWindow(void)
 {
-    gPSSData->field_2236 = 25;
-    LoadBgTiles(0, gUnknown_83D35DC, 0x80, 0x1A4);
-    sub_8096898(0);
+    gPSSData->itemInfoWindowOffset = 25;
+    LoadBgTiles(0, sItemInfoFrame_Gfx, 0x80, 0x1A4);
+    DrawItemInfoWindow(0);
 }
 
-bool8 sub_8096728(void)
+bool8 UpdateItemInfoWindowSlideIn(void)
 {
-    s32 i, var;
+    s32 i, pos;
 
-    if (gPSSData->field_2236 == 0)
+    if (gPSSData->itemInfoWindowOffset == 0)
         return FALSE;
 
-    gPSSData->field_2236--;
-    var = 25 - gPSSData->field_2236;
-    for (i = 0; i < var; i++)
+    gPSSData->itemInfoWindowOffset--;
+    pos = 25 - gPSSData->itemInfoWindowOffset;
+    for (i = 0; i < pos; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->itemInfoWindowOffset + i, i, 12, 1, 8, 15, 25);
     }
 
-    sub_8096898(var);
-    return (gPSSData->field_2236 != 0);
+    DrawItemInfoWindow(pos);
+    return (gPSSData->itemInfoWindowOffset != 0);
 }
 
-bool8 sub_80967C0(void)
+bool8 UpdateItemInfoWindowSlideOut(void)
 {
-    s32 i, var;
+    s32 i, pos;
 
-    if (gPSSData->field_2236 == 25)
+    if (gPSSData->itemInfoWindowOffset == 25)
         return FALSE;
 
-    if (gPSSData->field_2236 == 0)
+    if (gPSSData->itemInfoWindowOffset == 0)
         FillBgTilemapBufferRect(0, 0, 25, 11, 1, 10, 17);
 
-    gPSSData->field_2236++;
-    var = 25 - gPSSData->field_2236;
-    for (i = 0; i < var; i++)
+    gPSSData->itemInfoWindowOffset++;
+    pos = 25 - gPSSData->itemInfoWindowOffset;
+    for (i = 0; i < pos; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->itemInfoWindowOffset + i, i, 12, 1, 8, 15, 25);
     }
 
-    sub_8096898(var);
+    DrawItemInfoWindow(pos);
 
-    FillBgTilemapBufferRect(0, 0, var, 11, 1, 10, 0x11);
-    return (gPSSData->field_2236 != 25);
+    FillBgTilemapBufferRect(0, 0, pos, 11, 1, 10, 0x11);
+    return (gPSSData->itemInfoWindowOffset != 25);
 }
 
-static void sub_8096898(u32 x)
+static void DrawItemInfoWindow(u32 x)
 {
     if (x != 0)
     {
@@ -627,16 +647,16 @@ static void sub_8096898(u32 x)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void sub_809692C(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_WaitAnim(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
-        sub_8096624(sprite->data[0], FALSE);
+        SetItemIconActive(sprite->data[0], FALSE);
         sprite->callback = SpriteCallbackDummy;
     }
 }
 
-static void sub_8096958(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_ToHand(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -653,19 +673,19 @@ static void sub_8096958(struct Sprite *sprite)
         sprite->x = sprite->data[1] >> 4;
         sprite->y = sprite->data[2] >> 4;
         if (++sprite->data[5] > 11)
-            sprite->callback = sub_80969BC;
+            sprite->callback = SpriteCB_ItemIcon_SetPosToCursor;
         break;
     }
 }
 
-static void sub_80969BC(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_SetPosToCursor(struct Sprite *sprite)
 {
-    sprite->x = gPSSData->field_CB4->x + 4;
-    sprite->y = gPSSData->field_CB4->y + gPSSData->field_CB4->y2 + 8;
-    sprite->oam.priority = gPSSData->field_CB4->oam.priority;
+    sprite->x = gPSSData->cursorSprite->x + 4;
+    sprite->y = gPSSData->cursorSprite->y + gPSSData->cursorSprite->y2 + 8;
+    sprite->oam.priority = gPSSData->cursorSprite->oam.priority;
 }
 
-static void sub_80969F4(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_ToMon(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -683,14 +703,14 @@ static void sub_80969F4(struct Sprite *sprite)
         sprite->y = sprite->data[2] >> 4;
         if (++sprite->data[5] > 11)
         {
-            sub_80962F0(sub_80962A8(sprite), sprite->data[6], sprite->data[7]);
+            SetItemIconPosition(GetItemIconIdxBySprite(sprite), sprite->data[6], sprite->data[7]);
             sprite->callback = SpriteCallbackDummy;
         }
         break;
     }
 }
 
-static void sub_8096A74(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_SwapToHand(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -709,15 +729,15 @@ static void sub_8096A74(struct Sprite *sprite)
         sprite->x2 = gSineTable[sprite->data[5] * 8] >> 4;
         if (++sprite->data[5] > 11)
         {
-            sub_80962F0(sub_80962A8(sprite), sprite->data[6], sprite->data[7]);
+            SetItemIconPosition(GetItemIconIdxBySprite(sprite), sprite->data[6], sprite->data[7]);
             sprite->x2 = 0;
-            sprite->callback = sub_80969BC;
+            sprite->callback = SpriteCB_ItemIcon_SetPosToCursor;
         }
         break;
     }
 }
 
-static void sub_8096B10(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_SwapToMon(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -736,7 +756,7 @@ static void sub_8096B10(struct Sprite *sprite)
         sprite->x2 = -(gSineTable[sprite->data[5] * 8] >> 4);
         if (++sprite->data[5] > 11)
         {
-            sub_80962F0(sub_80962A8(sprite), sprite->data[6], sprite->data[7]);
+            SetItemIconPosition(GetItemIconIdxBySprite(sprite), sprite->data[6], sprite->data[7]);
             sprite->callback = SpriteCallbackDummy;
             sprite->x2 = 0;
         }
@@ -744,12 +764,114 @@ static void sub_8096B10(struct Sprite *sprite)
     }
 }
 
-static void sub_8096BAC(struct Sprite *sprite)
+static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 {
     sprite->y -= 8;
     if (sprite->y + sprite->y2 < -16)
     {
         sprite->callback = SpriteCallbackDummy;
-        sub_8096624(sub_80962A8(sprite), FALSE);
+        SetItemIconActive(GetItemIconIdxBySprite(sprite), FALSE);
+    }
+}
+
+#undef sState
+#undef sItemIconId
+#undef sCursorArea
+#undef sCursorPos
+
+
+//------------------------------------------------------------------------------
+//  SECTION: UnkUtil
+//
+//  Some data transfer utility that goes functionally unused.
+//  It gets initialized with UnkUtil_Init, and run every vblank in Pokémon
+//  Storage with UnkUtil_Run, but neither of the Add functions are ever used,
+//  so UnkUtil_Run performs no actions.
+//------------------------------------------------------------------------------
+
+
+static EWRAM_DATA struct UnkUtil *sUnkUtil = NULL;
+
+static void UnkUtil_CpuRun(struct UnkUtilData *unkStruct);
+static void UnkUtil_DmaRun(struct UnkUtilData *unkStruct);
+
+void UnkUtil_Init(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
+{
+    sUnkUtil = util;
+    util->data = data;
+    util->max = max;
+    util->numActive = 0;
+}
+
+void UnkUtil_Run(void)
+{
+    u16 i;
+    if (sUnkUtil->numActive)
+    {
+        for (i = 0; i < sUnkUtil->numActive; i++)
+        {
+            struct UnkUtilData *data = &sUnkUtil->data[i];
+            data->func(data);
+        }
+        sUnkUtil->numActive = 0;
+    }
+}
+
+// Unused
+static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
+{
+    struct UnkUtilData *data;
+
+    if (sUnkUtil->numActive >= sUnkUtil->max)
+        return FALSE;
+
+    data = &sUnkUtil->data[sUnkUtil->numActive++];
+    data->size = width * 2;
+    data->dest = dest + 2 * (dTop * 32 + dLeft);
+    data->src = src + 2 * (sTop * unkArg + sLeft);
+    data->height = height;
+    data->unk = unkArg;
+    data->func = UnkUtil_CpuRun;
+    return TRUE;
+}
+
+// Functionally unused
+static void UnkUtil_CpuRun(struct UnkUtilData *data)
+{
+    u16 i;
+
+    for (i = 0; i < data->height; i++)
+    {
+        CpuCopy16(data->src, data->dest, data->size);
+        data->dest += 64;
+        data->src += (data->unk * 2);
+    }
+}
+
+// Unused
+static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
+{
+    struct UnkUtilData *data;
+
+    if (sUnkUtil->numActive >= sUnkUtil->max)
+        return FALSE;
+
+    data = &sUnkUtil->data[sUnkUtil->numActive++];
+    data->size = width * 2;
+    data->dest = dest + ((dTop * 32) + dLeft) * 2;
+    data->height = height;
+    data->func = UnkUtil_DmaRun;
+    return TRUE;
+}
+
+// Functionally unused
+static void UnkUtil_DmaRun(struct UnkUtilData *data)
+{
+    u16 i;
+
+    for (i = 0; i < data->height; i++)
+    {
+        Dma3FillLarge_(0, data->dest, data->size, 16);
+        data->dest += 64;
     }
 }

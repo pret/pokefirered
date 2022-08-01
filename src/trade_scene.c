@@ -112,12 +112,12 @@ struct TradeAnimationResources {
 
 static EWRAM_DATA struct TradeAnimationResources * sTradeData = NULL;
 
-static void SpriteCB_TradeGlowCable(struct Sprite * sprite);
-static void SpriteCB_TradeGlowWireless(struct Sprite * sprite);
-static void SpriteCB_TradeGlowCore(struct Sprite * sprite);
-static void SpriteCB_GameLinkCableEnd_Outbound(struct Sprite * sprite);
-static void SpriteCB_GameLinkCableEnd_Inbound(struct Sprite * sprite);
-static void SpriteCB_TradeGBAScreen(struct Sprite * sprite);
+static void SpriteCB_TradeGlowCable(struct Sprite *sprite);
+static void SpriteCB_TradeGlowWireless(struct Sprite *sprite);
+static void SpriteCB_TradeGlowCore(struct Sprite *sprite);
+static void SpriteCB_GameLinkCableEnd_Outbound(struct Sprite *sprite);
+static void SpriteCB_GameLinkCableEnd_Inbound(struct Sprite *sprite);
+static void SpriteCB_TradeGBAScreen(struct Sprite *sprite);
 static void TradeAnimInit_LoadGfx(void);
 static void CB2_RunTradeAnim_InGameTrade(void);
 static void SetTradeSequenceBgGpuRegs(u8 idx);
@@ -126,10 +126,10 @@ static void TradeBufferOTnameAndNicknames(void);
 static u8 DoTradeAnim(void);
 static u8 DoTradeAnim_Cable(void);
 static u8 DoTradeAnim_Wireless(void);
-static void SpriteCB_TradePokeball_Default(struct Sprite * sprite);
-static void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite);
-static void SpriteCB_TradePokeball_Outbound2(struct Sprite * sprite);
-static void SpriteCB_TradePokeball_Inbound(struct Sprite * sprite);
+static void SpriteCB_TradePokeball_Default(struct Sprite *sprite);
+static void SpriteCB_TradePokeball_Outbound(struct Sprite *sprite);
+static void SpriteCB_TradePokeball_Outbound2(struct Sprite *sprite);
+static void SpriteCB_TradePokeball_Inbound(struct Sprite *sprite);
 static void BufferInGameTradeMonName(void);
 static void GetInGameTradeMail(struct Mail * mail, const struct InGameTrade * inGameTrade);
 static void CB2_RunTradeAnim_LinkTrade(void);
@@ -591,7 +591,7 @@ static const u8 sWirelessSignalAnimParams[][2] = {
 };
 
 // Sprite callback for link cable trade glow
-static void SpriteCB_TradeGlowCable(struct Sprite * sprite)
+static void SpriteCB_TradeGlowCable(struct Sprite *sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] == 10)
@@ -602,7 +602,7 @@ static void SpriteCB_TradeGlowCable(struct Sprite * sprite)
 }
 
 // Sprite callback for wireless trade glow
-static void SpriteCB_TradeGlowWireless(struct Sprite * sprite)
+static void SpriteCB_TradeGlowWireless(struct Sprite *sprite)
 {
     if (!sprite->invisible)
     {
@@ -616,7 +616,7 @@ static void SpriteCB_TradeGlowWireless(struct Sprite * sprite)
 }
 
 // Palette flash for trade glow core
-static void SpriteCB_TradeGlowCore(struct Sprite * sprite)
+static void SpriteCB_TradeGlowCore(struct Sprite *sprite)
 {
     if (sprite->data[1] == 0)
     {
@@ -628,7 +628,7 @@ static void SpriteCB_TradeGlowCore(struct Sprite * sprite)
 }
 
 // Move down for 10 frames
-static void SpriteCB_GameLinkCableEnd_Outbound(struct Sprite * sprite)
+static void SpriteCB_GameLinkCableEnd_Outbound(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->y2++;
@@ -637,7 +637,7 @@ static void SpriteCB_GameLinkCableEnd_Outbound(struct Sprite * sprite)
 }
 
 // Move up for 10 frames
-static void SpriteCB_GameLinkCableEnd_Inbound(struct Sprite * sprite)
+static void SpriteCB_GameLinkCableEnd_Inbound(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->y2--;
@@ -646,7 +646,7 @@ static void SpriteCB_GameLinkCableEnd_Inbound(struct Sprite * sprite)
 }
 
 // Play a sound every 15 frames
-static void SpriteCB_TradeGBAScreen(struct Sprite * sprite)
+static void SpriteCB_TradeGBAScreen(struct Sprite *sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] == 15)
@@ -2326,7 +2326,7 @@ static void HandleLinkDataReceive(void)
     }
 }
 
-static void SpriteCB_TradePokeball_Default(struct Sprite * sprite)
+static void SpriteCB_TradePokeball_Default(struct Sprite *sprite)
 {
     sprite->y += sprite->data[0] / 10;
     sprite->data[5] += sprite->data[1];
@@ -2347,7 +2347,7 @@ static void SpriteCB_TradePokeball_Default(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite)
+static void SpriteCB_TradePokeball_Outbound(struct Sprite *sprite)
 {
     sprite->y2 += sTradeBallVerticalVelocityTable[sprite->data[0]];
     if (sprite->data[0] == 22)
@@ -2362,7 +2362,7 @@ static void SpriteCB_TradePokeball_Outbound(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_TradePokeball_Outbound2(struct Sprite * sprite)
+static void SpriteCB_TradePokeball_Outbound2(struct Sprite *sprite)
 {
     if (sprite->data[1] == 20)
         StartSpriteAffineAnim(sprite, 1);
@@ -2379,7 +2379,7 @@ static void SpriteCB_TradePokeball_Outbound2(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_TradePokeball_Inbound(struct Sprite * sprite)
+static void SpriteCB_TradePokeball_Inbound(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -2767,7 +2767,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed)
     sTradeData->textColor[0] = 15;
     sTradeData->textColor[1] = 1;
     sTradeData->textColor[2] = 6;
-    AddTextPrinterParameterized4(windowId, 2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
+    AddTextPrinterParameterized4(windowId, FONT_2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 

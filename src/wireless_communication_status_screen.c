@@ -246,13 +246,13 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    width = 0xC0 - GetStringWidth(3, sHeaderTextPtrs[0], 0);
-    WCSS_AddTextPrinterParameterized(0, 3, sHeaderTextPtrs[0], width / 2, 6, 3);
+    width = 0xC0 - GetStringWidth(FONT_3, sHeaderTextPtrs[0], 0);
+    WCSS_AddTextPrinterParameterized(0, FONT_3, sHeaderTextPtrs[0], width / 2, 6, 3);
     for (i = 0; i < 3; i++)
     {
-        WCSS_AddTextPrinterParameterized(1, 3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 1);
+        WCSS_AddTextPrinterParameterized(1, FONT_3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 1);
     }
-    WCSS_AddTextPrinterParameterized(1, 3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 2);
+    WCSS_AddTextPrinterParameterized(1, FONT_3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 2);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(1);
@@ -287,9 +287,9 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sWCSS->counts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != 3)
-                    WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 30 * i + 10, 1);
+                    WCSS_AddTextPrinterParameterized(2, FONT_3, gStringVar4, 4, 30 * i + 10, 1);
                 else
-                    WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 100, 2);
+                    WCSS_AddTextPrinterParameterized(2, FONT_3, gStringVar4, 4, 100, 2);
             }
             PutWindowTilemap(2);
             CopyWindowToVram(2, COPYWIN_FULL);
@@ -348,7 +348,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
         break;
     // default: UB
     }
-    AddTextPrinterParameterized4(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, textColor, -1, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == FONT_0 ? 0 : 1, 0, textColor, -1, str);
 }
 
 static u32 CountMembersInGroup(struct UnkStruct_x20 * unk20, u32 * counts)

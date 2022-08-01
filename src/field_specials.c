@@ -544,7 +544,7 @@ void NullFieldSpecial(void)
 void DoPicboxCancel(void)
 {
     u8 t = EOS;
-    AddTextPrinterParameterized(0, 2, &t, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_2, &t, 0, 1, 0, NULL);
     PicboxCancel();
 }
 
@@ -1098,10 +1098,10 @@ void DrawElevatorCurrentFloorWindow(void)
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
         TextWindow_SetStdFrame0_WithPal(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, gText_NowOn, 0, 2, 0xFF, NULL);
+        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_2, gText_NowOn, 0, 2, 0xFF, NULL);
         floorname = sFloorNamePointers[gSpecialVar_0x8005];
-        strwidth = GetStringWidth(2, floorname, 0);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, floorname, 56 - strwidth, 16, 0xFF, NULL);
+        strwidth = GetStringWidth(FONT_2, floorname, 0);
+        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_2, floorname, 56 - strwidth, 16, 0xFF, NULL);
         PutWindowTilemap(sElevatorCurrentFloorWindowId);
         CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
     }
@@ -1165,7 +1165,7 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
 void ListMenu(void)
 {
     u8 taskId;
-    struct Task * task;
+    struct Task *task;
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         taskId = CreateTask(Task_CreateScriptListMenu, 8);
@@ -1334,7 +1334,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     u8 i;
     s32 width;
     s32 mwidth;
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     u8 windowId;
     ScriptContext2_Enable();
     if (gSpecialVar_0x8004 == LISTMENU_SILPHCO_FLOORS)
@@ -1348,7 +1348,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     {
         sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
         sListMenuItems[i].index = i;
-        width = GetStringWidth(2, sListMenuItems[i].label, 0);
+        width = GetStringWidth(FONT_2, sListMenuItems[i].label, 0);
         if (width > mwidth)
             mwidth = width;
     }
@@ -1386,14 +1386,14 @@ static void CreateScriptListMenu(void)
     sFieldSpecialsListMenuTemplate.lettersSpacing = 1;
     sFieldSpecialsListMenuTemplate.itemVerticalPadding = 0;
     sFieldSpecialsListMenuTemplate.scrollMultiple = 0;
-    sFieldSpecialsListMenuTemplate.fontId = 2;
+    sFieldSpecialsListMenuTemplate.fontId = FONT_2;
     sFieldSpecialsListMenuTemplate.cursorKind = 0;
 }
 
 static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used)
 {
     u8 taskId;
-    struct Task * task;
+    struct Task *task;
     PlaySE(SE_SELECT);
     taskId = FindTaskIdByFunc(Task_ListMenuHandleInput);
     if (taskId != 0xFF)
@@ -1407,7 +1407,7 @@ static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListM
 static void Task_ListMenuHandleInput(u8 taskId)
 {
     s32 input;
-    struct Task * task;
+    struct Task *task;
 
     task = &gTasks[taskId];
     task++;task--;
@@ -1440,7 +1440,7 @@ static void Task_ListMenuHandleInput(u8 taskId)
 
 static void Task_DestroyListMenu(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     Task_ListMenuRemoveScrollIndicatorArrowPair(taskId);
     DestroyListMenuTask(task->data[14], NULL, NULL);
     Free(sListMenuItems);
@@ -1484,7 +1484,7 @@ static void Task_RedrawScrollArrowsAndWaitInput(u8 taskId)
 
 static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     struct ScrollArrowsTemplate template = {
         .firstArrowType = 2,
         .secondArrowType = 3,
@@ -1505,7 +1505,7 @@ static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 
 static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     if (task->data[0] != task->data[1])
         RemoveScrollIndicatorArrowPair(task->data[12]);
 }

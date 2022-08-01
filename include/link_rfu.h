@@ -221,7 +221,7 @@ void DestroyWirelessStatusIndicatorSprite(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
 void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
 void MEvent_CreateTask_Leader(u32 arg0);
-void Rfu_SendPacket(void * data);
+void Rfu_SendPacket(void *data);
 u8 CreateTask_ListenToWireless(void);
 void LinkRfu_DestroyIdleTask(void);
 void InitRFUAPI(void);

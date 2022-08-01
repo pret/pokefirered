@@ -318,13 +318,13 @@ static void sub_8146A30(void)
     PutWindowTilemap(sWork->windowIds[1]);
     FillWindowPixelBuffer(sWork->windowIds[0], 0);
     FillWindowPixelBuffer(sWork->windowIds[1], 0);
-    x = (0xe0 - GetStringWidth(3, sWork->title, GetFontAttribute(3, 2))) / 2;
+    x = (0xe0 - GetStringWidth(FONT_3, sWork->title, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING))) / 2;
     if (x < 0)
         x = 0;
-    AddTextPrinterParameterized3(sWork->windowIds[0], 3, x, 6, sTextPals[sWork->bgSpec->textPal1], 0, sWork->title);
+    AddTextPrinterParameterized3(sWork->windowIds[0], FONT_3, x, 6, sTextPals[sWork->bgSpec->textPal1], 0, sWork->title);
     for (; i < 10; ++i)
     {
-        AddTextPrinterParameterized3(sWork->windowIds[1], 3, 0, 16 * i + 2, sTextPals[sWork->bgSpec->textPal2], 0, sWork->messages[i]);
+        AddTextPrinterParameterized3(sWork->windowIds[1], FONT_3, 0, 16 * i + 2, sTextPals[sWork->bgSpec->textPal2], 0, sWork->messages[i]);
     }
     CopyWindowToVram(sWork->windowIds[0], COPYWIN_FULL);
     CopyWindowToVram(sWork->windowIds[1], COPYWIN_FULL);

@@ -18,8 +18,8 @@ struct mevent_srv_sub
     u16 sendCounter;
     u16 sendCRC;
     u16 sendSize;
-    void * recvBfr;
-    const void * sendBfr;
+    void *recvBfr;
+    const void *sendBfr;
     u32 (*recvFunc)(struct mevent_srv_sub *);
     u32 (*sendFunc)(struct mevent_srv_sub *);
 };
@@ -59,10 +59,10 @@ struct mevent_client
     u32 mainseqno;
     u32 flag;
     u32 cmdidx;
-    void * sendBuffer;
-    void * recvBuffer;
+    void *sendBuffer;
+    void *recvBuffer;
     struct mevent_client_cmd * cmdBuffer;
-    void * buffer;
+    void *buffer;
     struct mevent_srv_sub manager;
 };
 
@@ -70,7 +70,7 @@ struct mevent_server_cmd
 {
     u32 instr;
     bool32 flag;
-    void * parameter;
+    void *parameter;
 };
 
 // Server commands
@@ -99,13 +99,13 @@ struct mevent_srv_common
     u32 mainseqno;
     u32 cmdidx;
     const struct mevent_server_cmd * cmdBuffer;
-    void * recvBuffer;
+    void *recvBuffer;
     struct WonderCard * card;
     struct WonderNews * news;
     struct MEventClientHeaderStruct * mevent_unk1442cc;
-    void * sendBuffer1;
+    void *sendBuffer1;
     u32 sendBuffer1Size;
-    void * sendBuffer2;
+    void *sendBuffer2;
     u32 sendBuffer2Size;
     u32 sendWord;
     struct mevent_srv_sub manager;
@@ -114,13 +114,13 @@ struct mevent_srv_common
 u32 mevent_srv_sub_recv(struct mevent_srv_sub * svr);
 u32 mevent_srv_sub_send(struct mevent_srv_sub * svr);
 void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recvPlayerNo);
-void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void * src, u32 size);
-void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void * dest);
+void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void *src, u32 size);
+void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void *dest);
 
 void mevent_client_do_init(void);
 u32 mevent_client_do_exec(u16 * a0);
 void mevent_client_inc_flag(void);
-void * mevent_client_get_buffer(void);
+void *mevent_client_get_buffer(void);
 void mevent_client_set_param(u32 a0);
 void mevent_srv_init_wnews(void);
 void mevent_srv_new_wcard(void);

@@ -225,7 +225,7 @@ static const struct ListMenuTemplate sListMenuTemplate_PossibleGroupMembers = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 2,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 1
 };
 
@@ -285,7 +285,7 @@ static const struct ListMenuTemplate sListMenuTemplate_UnionRoomGroups = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 2,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0
 };
 
@@ -323,7 +323,7 @@ static const struct ListMenuTemplate sListMenuTemplate_InviteToActivity = {
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0
 };
 
@@ -360,7 +360,7 @@ static const struct ListMenuTemplate sListMenuTemplate_TradeBoardRegisterInfoExi
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0
 };
 
@@ -412,7 +412,7 @@ static const struct ListMenuTemplate sListMenuTemplate_TypeNames = {
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0
 };
 
@@ -466,7 +466,7 @@ static const struct ListMenuTemplate sTradeBoardListMenuTemplate = {
     .lettersSpacing = 1,
     .itemVerticalPadding = 1,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0
 };
 
@@ -516,7 +516,7 @@ static const struct ListMenuTemplate gUnknown_845701C = {
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0
 };
 

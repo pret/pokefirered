@@ -40,6 +40,6 @@ void BattleInterfaceSetWindowPals(void);
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
-bool32 ShouldPlayNormalPokeCry(struct Pokemon *mon);
+bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);
 
 #endif // GUARD_BATTLE_GFX_SFX_UTIL_H

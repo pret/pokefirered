@@ -239,7 +239,7 @@ static const struct ListMenuTemplate sListMenuTemplate =
     .lettersSpacing = 0x0,
     .itemVerticalPadding = 0x0,
     .scrollMultiple = 0x1,
-    .fontId = 0x2,
+    .fontId = FONT_2,
     .cursorKind = 0x0,
 };
 
@@ -675,7 +675,7 @@ static void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 static void TeachyTvInitTextPrinter(const u8 *text)
 {
     gTextFlags.autoScroll = 0;
-    AddTextPrinterParameterized2(0, 4, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
+    AddTextPrinterParameterized2(0, FONT_4, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
 }
 
 static void TeachyTvFree(void)
@@ -781,7 +781,7 @@ static void TTVcmd_ClearBg2TeachyTvGraphic(u8 taskId)
 static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    struct Sprite * spriteAddr = &gSprites[data[1]];
+    struct Sprite *spriteAddr = &gSprites[data[1]];
     if (data[2] != 35)
         ++data[2];
     else {
@@ -1220,8 +1220,8 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     u8 * mapTilesRowBuffer;
     u16 i, j, k;
     u16 currentBlockIdx;
-    void * tilesetsBuffer;
-    void * palIndicesBuffer;
+    void *tilesetsBuffer;
+    void *palIndicesBuffer;
     u16 numMapTilesRows = 0;
     const struct MapLayout *layout = &Route1_Layout;
     u16 * blockIndicesBuffer = AllocZeroed(0x800);

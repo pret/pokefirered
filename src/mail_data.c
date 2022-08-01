@@ -54,7 +54,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
             for (i = 0; i < PLAYER_NAME_LENGTH && gSaveBlock2Ptr->playerName[i] != EOS; i++)
                 gSaveBlock1Ptr->mail[id].playerName[i] = gSaveBlock2Ptr->playerName[i];
             for (; i <= 5; i++)
-            	gSaveBlock1Ptr->mail[id].playerName[i] = CHAR_SPACE;
+                gSaveBlock1Ptr->mail[id].playerName[i] = CHAR_SPACE;
             gSaveBlock1Ptr->mail[id].playerName[i] = EOS;
             for (i = 0; i < 4; i++)
                 gSaveBlock1Ptr->mail[id].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];

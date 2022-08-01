@@ -13,7 +13,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "constants/songs.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 #include "constants/items.h"
 
 struct DodrioStruct
@@ -1204,7 +1204,7 @@ static void sub_8151D98(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD);
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -1262,7 +1262,7 @@ static void sub_8151E94(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD);
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -2379,14 +2379,14 @@ static void sub_81538D0(u8 windowId)
     TextWindow_SetStdFrame0_WithPal(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 2, sUnknown_84755E8[0], 1, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_2, sUnknown_84755E8[0], 1, 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < 3; i++)
     {
         ConvertIntToDecimalStringN(strbuf, results[i], STR_CONV_MODE_LEFT_ALIGN, sUnknown_84755F8[i]);
-        numWidth = GetStringWidth(2, strbuf, -1);
-        AddTextPrinterParameterized(windowId, 2, sUnknown_84755E8[i + 1], 1, sUnknown_84755FC[i][0], TEXT_SKIP_DRAW, NULL);
+        numWidth = GetStringWidth(FONT_2, strbuf, -1);
+        AddTextPrinterParameterized(windowId, FONT_2, sUnknown_84755E8[i + 1], 1, sUnknown_84755FC[i][0], TEXT_SKIP_DRAW, NULL);
         x = 224 - numWidth;
-        AddTextPrinterParameterized(windowId, 2, strbuf, x, sUnknown_8475602[i][0], TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, strbuf, x, sUnknown_8475602[i][0], TEXT_SKIP_DRAW, NULL);
     }
     PutWindowTilemap(windowId);
 }

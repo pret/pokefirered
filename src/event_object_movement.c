@@ -94,7 +94,7 @@ static u8 MovementType_VsSeeker4D_Callback(struct ObjectEvent *, struct Sprite *
 static u8 MovementType_VsSeeker4E_Callback(struct ObjectEvent *, struct Sprite *);
 static u8 MovementType_VsSeeker4F_Callback(struct ObjectEvent *, struct Sprite *);
 static void sub_8064544(struct ObjectEvent *, struct Sprite *);
-static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite);
+static void DoObjectUnionRoomWarpYDisplacement(struct Sprite *sprite);
 static void MovementType_None(struct Sprite *);
 static void MovementType_LookAround(struct Sprite *);
 static void MovementType_WanderAround(struct Sprite *);
@@ -181,7 +181,7 @@ const u8 gReflectionEffectPaletteMap[16] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11
 
 static const struct SpriteTemplate gCameraSpriteTemplate = {
     .tileTag = 0, 
-    .paletteTag = SPRITE_INVALID_TAG,
+    .paletteTag = TAG_NONE,
     .oam = &gDummyOamData, 
     .anims = gDummySpriteAnimTable, 
     .images = NULL, 
@@ -1571,7 +1571,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
         objectEvent->invisible = TRUE;
 
-    *(u16 *)&spriteTemplate->paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate->paletteTag = TAG_NONE;
     spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
     if (spriteId == MAX_SPRITES)
     {
@@ -1702,7 +1702,7 @@ u8 AddPseudoObjectEvent(u16 graphicsId, SpriteCallback callback, s16 x, s16 y, u
     u8 spriteId;
 
     MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, callback, &spriteTemplate, &subspriteTables);
-    if (spriteTemplate.paletteTag != SPRITE_INVALID_TAG)
+    if (spriteTemplate.paletteTag != TAG_NONE)
     {
         LoadObjectEventPalette(spriteTemplate.paletteTag);
     }
@@ -1725,7 +1725,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, UpdateObjectEventSpriteSubpriorityAndVisibility, &spriteTemplate, &subspriteTables);
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     x += 7;
     y += 7;
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
@@ -1767,7 +1767,7 @@ u8 sub_805EB44(u8 graphicsId, u8 a1, s16 x, s16 y)
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, SpriteCallbackDummy, &spriteTemplate, &subspriteTables);
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
 
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
@@ -1899,7 +1899,7 @@ static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     if (graphicsInfo->paletteSlot == 0)
     {
         LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
@@ -1908,7 +1908,7 @@ static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
     {
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     }
-    *(u16 *)&spriteTemplate.paletteTag = SPRITE_INVALID_TAG;
+    *(u16 *)&spriteTemplate.paletteTag = TAG_NONE;
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -8840,37 +8840,37 @@ void UnfreezeObjectEvents(void)
 #define tSpeed     data[4]
 #define tStepNo    data[5]
 
-static void little_step(struct Sprite * sprite, u8 direction)
+static void little_step(struct Sprite *sprite, u8 direction)
 {
     sprite->x += sDirectionToVectors[direction].x;
     sprite->y += sDirectionToVectors[direction].y;
 }
 
-static void double_little_steps(struct Sprite * sprite, u8 direction)
+static void double_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 2 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 2 * (u16)sDirectionToVectors[direction].y;
 }
 
-static void triple_little_steps(struct Sprite * sprite, u8 direction)
+static void triple_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 2 * (u16)sDirectionToVectors[direction].x + (u16)sDirectionToVectors[direction].x;
     sprite->y += 2 * (u16)sDirectionToVectors[direction].y + (u16)sDirectionToVectors[direction].y;
 }
 
-static void quad_little_steps(struct Sprite * sprite, u8 direction)
+static void quad_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 4 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 4 * (u16)sDirectionToVectors[direction].y;
 }
 
-static void oct_little_steps(struct Sprite * sprite, u8 direction)
+static void oct_little_steps(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 8 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 8 * (u16)sDirectionToVectors[direction].y;
 }
 
-void SetSpriteDataForNormalStep(struct Sprite * sprite, u8 direction, u8 speed)
+void SetSpriteDataForNormalStep(struct Sprite *sprite, u8 direction, u8 speed)
 {
     sprite->tDirection = direction;
     sprite->tSpeed = speed;
@@ -9322,7 +9322,7 @@ void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo)
     }
 }
 
-static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite *sprite)
 {
     switch (sprite->tUnionRoomWarpAnimState)
     {
@@ -9342,7 +9342,7 @@ static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite * sprite)
     }
 }
 
-static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite *sprite)
 {
     switch (sprite->tUnionRoomWarpAnimState)
     {
@@ -9360,7 +9360,7 @@ static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite * sprite)
     }
 }
 
-static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacement(struct Sprite *sprite)
 {
     switch (sprite->tUnionRoomWarpAnimNo)
     {

@@ -800,7 +800,7 @@ void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2)
 }
 
 // not used
-static void BtlController_EmitUnknownYesNoBox(u8 bufferId, u32 arg1) // TODO: Does the function name make sense for pokefirered? 
+static void BtlController_EmitUnknownYesNoBox(u8 bufferId, u32 arg1) // TODO: Does the function name make sense for pokefirered?
 {
     sBattleBuffersTransferData[0] = CONTROLLER_UNKNOWNYESNOBOX;
     sBattleBuffersTransferData[1] = arg1;

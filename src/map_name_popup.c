@@ -48,7 +48,7 @@ void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 
 static void Task_MapNamePopup(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
     switch (task->tState)
     {
     case 0:
@@ -197,9 +197,9 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
         ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.floorNum);
         maxWidth = gMapHeader.floorNum != 0x7F ? 152 : 176;
     }
-    xpos = (maxWidth - GetStringWidth(2, mapName, -1)) / 2;
+    xpos = (maxWidth - GetStringWidth(FONT_2, mapName, -1)) / 2;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 2, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_2, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
 }
 
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 floorNum)

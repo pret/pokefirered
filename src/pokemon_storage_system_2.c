@@ -15,23 +15,17 @@
 #include "constants/field_weather.h"
 #include "constants/help_system.h"
 
-struct PSS_MenuStringPtrs
-{
-    const u8 *text;
-    const u8 *desc;
-};
-
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
-static EWRAM_DATA struct UnkPSSStruct_2002370 *sBoxSelectionPopupSpriteManager = NULL;
+static EWRAM_DATA struct ChooseBoxMenu *sBoxSelectionPopupSpriteManager = NULL;
 
 static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
-static void sub_808C9C4(u8 curBox);
+static void ChooseBoxMenu_CreateSprites(u8 curBox);
 static void sub_808CBA4(void);
 static void UpdateBoxNameAndCountSprite_WraparoundRight(void);
 static void UpdateBoxNameAndCountSprite_WraparoundLeft(void);
 static void PrintBoxNameAndCountToSprite(void);
 static void PrintToSpriteWithTagUnk0240(const u8 *a0, u16 x, u16 y);
-static void sub_808CD64(struct Sprite * sprite);
+static void sub_808CD64(struct Sprite *sprite);
 
 // Forward declarations
 
@@ -39,12 +33,15 @@ static const u16 sBoxSelectionPopupPalette[];
 static const u16 sBoxSelectionPopupCenterTiles[];
 static const u16 sBoxSelectionPopupSidesTiles[];
 
-static const struct PSS_MenuStringPtrs sUnknown_83CDA20[] = {
-    {gText_WithdrawPokemon, gText_WithdrawMonDescription},
-    {gText_DepositPokemon,  gText_DepositMonDescription },
-    {gText_MovePokemon,     gText_MoveMonDescription    },
-    {gText_MoveItems,       gText_MoveItemsDescription  },
-    {gText_SeeYa,           gText_SeeYaDescription      }
+struct {
+    const u8 *text;
+    const u8 *desc;
+} static const sMainMenuTexts[OPTIONS_COUNT] = {
+    [OPTION_WITHDRAW]   = {gText_WithdrawPokemon, gText_WithdrawMonDescription},
+    [OPTION_DEPOSIT]    = {gText_DepositPokemon,  gText_DepositMonDescription},
+    [OPTION_MOVE_MONS]  = {gText_MovePokemon,     gText_MoveMonDescription},
+    [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription},
+    [OPTION_EXIT]       = {gText_SeeYa,           gText_SeeYaDescription}
 };
 
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer)
@@ -60,7 +57,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
     tileData1 = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
-    tileData2 = (winTemplate.width * 32) + tileData1;
+    tileData2 = (winTemplate.width * TILE_SIZE_4BPP) + tileData1;
 
     if (!zero1)
         txtColor[0] = TEXT_COLOR_TRANSPARENT;
@@ -68,7 +65,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         txtColor[0] = zero2;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
-    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_1, 0, 2, 0, 0, txtColor, -1, string);
 
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6)
@@ -111,7 +108,7 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8
     txtColor[0] = bgClr;
     txtColor[1] = fgClr;
     txtColor[2] = shClr;
-    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    AddTextPrinterParameterized4(windowId, FONT_1, 0, 2, 0, 0, txtColor, -1, string);
     CpuCopy16(tileData1, dst, var);
     CpuCopy16(tileData2, dst + rise, var);
     RemoveWindow(windowId);
@@ -223,7 +220,8 @@ static void sub_808C25C(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, 
     }
 }
 
-static void sub_808C2D8(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
+// Unused
+static void UnusedWriteRectDma(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
 {
     u16 i;
 
@@ -233,109 +231,138 @@ static void sub_808C2D8(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 h
         Dma3FillLarge16_(0, dest, width);
 }
 
-static void Task_PokemonStorageSystemPC(u8 taskId)
+
+//------------------------------------------------------------------------------
+//  SECTION: Main menu
+//
+//  The below functions generally handle the PC main menu where the main
+//  options can be selected (Withdraw, Deposit, etc.), as well as exiting
+//  Pokémon Storage back to this menu.
+//------------------------------------------------------------------------------
+
+
+enum {
+    STATE_LOAD,
+    STATE_FADE_IN,
+    STATE_HANDLE_INPUT,
+    STATE_ERROR_MSG,
+    STATE_ENTER_PC,
+};
+
+#define tState          data[0]
+#define tSelectedOption data[1]
+#define tInput          data[2]
+#define tNextOption     data[3]
+#define tWindowId       data[15]
+
+static void Task_PCMainMenu(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[0])
+    switch (task->tState)
     {
-    case 0:
+    case STATE_LOAD:
         SetHelpContext(HELPCONTEXT_BILLS_PC);
-        PSS_CreatePCMenu(task->data[1], &task->data[15]);
+        PSS_CreatePCMenu(task->tSelectedOption, &task->tWindowId);
         LoadStdWindowFrameGfx();
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         CopyWindowToVram(0, COPYWIN_FULL);
-        CopyWindowToVram(task->data[15], COPYWIN_FULL);
-        task->data[0]++;
+        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
+        task->tState++;
         break;
-    case 1:
+    case STATE_FADE_IN:
         if (IsWeatherNotFadingIn())
         {
-            task->data[0]++;
+            task->tState++;
         }
         break;
-    case 2:
-        task->data[2] = Menu_ProcessInput();
-        switch(task->data[2])
+    case STATE_HANDLE_INPUT:
+        task->tInput = Menu_ProcessInput();
+        switch(task->tInput)
         {
         case MENU_NOTHING_CHOSEN:
-            task->data[3] = task->data[1];
-            if (JOY_NEW(DPAD_UP) && --task->data[3] < 0)
-                task->data[3] = 4;
+            task->tNextOption = task->tSelectedOption;
+            if (JOY_NEW(DPAD_UP) && --task->tNextOption < 0)
+                task->tNextOption = OPTIONS_COUNT - 1;
+            if (JOY_NEW(DPAD_DOWN) && ++task->tNextOption > OPTIONS_COUNT - 1)
+                task->tNextOption = 0;
 
-            if (JOY_NEW(DPAD_DOWN) && ++task->data[3] > 4)
-                task->data[3] = 0;
-            if (task->data[1] != task->data[3])
+            if (task->tSelectedOption != task->tNextOption)
             {
-                task->data[1] = task->data[3];
+                task->tSelectedOption = task->tNextOption;
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             }
             break;
         case MENU_B_PRESSED:
-        case  4:
+        case OPTION_EXIT:
             ClearStdWindowAndFrame(0, TRUE);
-            ClearStdWindowAndFrame(task->data[15], TRUE);
+            ClearStdWindowAndFrame(task->tWindowId, TRUE);
             ScriptContext2_Disable();
             EnableBothScriptContexts();
             DestroyTask(taskId);
             break;
         default:
-            if (task->data[2] == 0 && CountPartyMons() == PARTY_SIZE)
+            if (task->tInput == 0 && CountPartyMons() == PARTY_SIZE)
             {
+                // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-                task->data[0] = 3;
+                AddTextPrinterParameterized2(0, FONT_2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                task->tState = 3;
             }
-            else if (task->data[2] == 1 && CountPartyMons() == 1)
+            else if (task->tInput == 1 && CountPartyMons() == 1)
             {
+                // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-                task->data[0] = 3;
+                AddTextPrinterParameterized2(0, FONT_2, gText_JustOnePkmn, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+                task->tState = STATE_ERROR_MSG;
             }
             else
             {
+                // Enter PC
                 FadeScreen(FADE_TO_BLACK, 0);
-                task->data[0] = 4;
+                task->tState = STATE_ENTER_PC;
             }
             break;
         }
         break;
-    case 3:
+    case STATE_ERROR_MSG:
+        // Printed "can't do PC option message"
+        // Wait for new input after message
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            task->data[0] = 2;
+            AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_UP))
         {
-            if (--task->data[1] < 0)
-                task->data[1] = 4;
+            if (--task->tSelectedOption < 0)
+                task->tSelectedOption = 4;
             Menu_MoveCursor(-1);
-            task->data[1] = Menu_GetCursorPos();
+            task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            task->data[0] = 2;
+            AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            task->tState = STATE_HANDLE_INPUT;
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            if (++task->data[1] > 3)
-                task->data[1] = 0;
+            if (++task->tSelectedOption > 3)
+                task->tSelectedOption = 0;
             Menu_MoveCursor(1);
-            task->data[1] = Menu_GetCursorPos();
+            task->tSelectedOption = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            task->data[0] = 2;
+            AddTextPrinterParameterized2(0, FONT_2, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            task->tState = STATE_HANDLE_INPUT;
         }
         break;
-    case 4:
+    case STATE_ENTER_PC:
         if (!gPaletteFade.active)
         {
             CleanupOverworldWindowsAndTilemaps();
-            Cb2_EnterPSS(task->data[2]);
+            Cb2_EnterPSS(task->tInput);
             DestroyTask(taskId);
         }
         break;
@@ -344,22 +371,22 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
 
 void ShowPokemonStorageSystemPC(void)
 {
-    u8 taskId = CreateTask(Task_PokemonStorageSystemPC, 80);
-    gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = 0;
+    u8 taskId = CreateTask(Task_PCMainMenu, 80);
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tSelectedOption = 0;
     ScriptContext2_Enable();
 }
 
-static void FieldCb_ReturnToPcMenu(void)
+static void FieldTask_ReturnToPcMenu(void)
 {
     u8 taskId;
     MainCallback vblankCb = gMain.vblankCallback;
 
     SetVBlankCallback(NULL);
-    taskId = CreateTask(Task_PokemonStorageSystemPC, 80);
-    gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = sPreviousBoxOption;
-    Task_PokemonStorageSystemPC(taskId);
+    taskId = CreateTask(Task_PCMainMenu, 80);
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tSelectedOption = sPreviousBoxOption;
+    Task_PCMainMenu(taskId);
     SetVBlankCallback(vblankCb);
     FadeInFromBlack();
 }
@@ -380,15 +407,15 @@ static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
     windowId = AddWindow(&sUnknown_83CDA48);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintTextArray(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sUnknown_83CDA20), (void *)sUnknown_83CDA20);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, NELEMS(sUnknown_83CDA20), whichMenu);
+    PrintTextArray(windowId, FONT_2, GetMenuCursorDimensionByFont(FONT_2, 0), 2, 16, NELEMS(sMainMenuTexts), (void *)sMainMenuTexts);
+    Menu_InitCursor(windowId, FONT_2, 0, 2, 16, NELEMS(sMainMenuTexts), whichMenu);
     *windowIdPtr = windowId;
 }
 
-void Cb2_ExitPSS(void)
+void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
-    gFieldCallback = FieldCb_ReturnToPcMenu;
+    gFieldCallback = FieldTask_ReturnToPcMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
 
@@ -407,13 +434,22 @@ void ResetPokemonStorageSystem(void)
         u8 *dest = StringCopy(GetBoxNamePtr(boxId), gText_Box);
         ConvertIntToDecimalStringN(dest, boxId + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
     }
+
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
-    {
-        SetBoxWallpaper(boxId, boxId % 4);
-    }
+        SetBoxWallpaper(boxId, boxId % (MAX_DEFAULT_WALLPAPER + 1));
 }
 
-void LoadBoxSelectionPopupSpriteGfx(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
+
+//------------------------------------------------------------------------------
+//  SECTION: Choose Box menu
+//
+//  The below functions handle the popup menu that allows the player to cycle
+//  through the boxes and select one. Used when storing Pokémon in Deposit mode
+//  and for the Jump feature.
+//------------------------------------------------------------------------------
+
+
+void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
 {
     struct SpritePalette palette = {
         sBoxSelectionPopupPalette, palTag
@@ -429,23 +465,23 @@ void LoadBoxSelectionPopupSpriteGfx(struct UnkPSSStruct_2002370 *a0, u16 tileTag
 
     LoadSpriteSheets(sheets);
     sBoxSelectionPopupSpriteManager = a0;
-    a0->tilesTag = tileTag;
+    a0->tileTag = tileTag;
     a0->paletteTag = palTag;
     a0->subpriority = a3;
-    a0->loadPal = loadPal;
+    a0->loadedPalette = loadPal;
 }
 
 void FreeBoxSelectionPopupSpriteGfx(void)
 {
-    if (sBoxSelectionPopupSpriteManager->loadPal)
+    if (sBoxSelectionPopupSpriteManager->loadedPalette)
         FreeSpritePaletteByTag(sBoxSelectionPopupSpriteManager->paletteTag);
-    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tilesTag);
-    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tilesTag + 1);
+    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tileTag);
+    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tileTag + 1);
 }
 
 void sub_808C940(u8 curBox)
 {
-    sub_808C9C4(curBox);
+    ChooseBoxMenu_CreateSprites(curBox);
 }
 
 void sub_808C950(void)
@@ -514,7 +550,7 @@ static const union AffineAnimCmd *const gUnknown_83CDA90[] = {
     gUnknown_83CDA80
 };
 
-static void sub_808C9C4(u8 curBox)
+static void ChooseBoxMenu_CreateSprites(u8 curBox)
 {
     u16 i;
     u8 spriteId;
@@ -529,43 +565,43 @@ static void sub_808C9C4(u8 curBox)
     const u8 gUnknown_83CDA94[] = _("/30");
 
     sBoxSelectionPopupSpriteManager->curBox = curBox;
-    template.tileTag = sBoxSelectionPopupSpriteManager->tilesTag;
+    template.tileTag = sBoxSelectionPopupSpriteManager->tileTag;
     template.paletteTag = sBoxSelectionPopupSpriteManager->paletteTag;
 
     spriteId = CreateSprite(&template, 160, 96, 0);
-    sBoxSelectionPopupSpriteManager->unk_0000 = gSprites + spriteId;
+    sBoxSelectionPopupSpriteManager->menuSprite = gSprites + spriteId;
 
     // Manual subsprites
     oamData.shape = SPRITE_SHAPE(8x32);
     oamData.size = SPRITE_SIZE(8x32);
-    template.tileTag = sBoxSelectionPopupSpriteManager->tilesTag + 1;
+    template.tileTag = sBoxSelectionPopupSpriteManager->tileTag + 1;
     template.anims = gUnknown_83CDA70;
     for (i = 0; i < 4; i++)
     {
         u16 r5;
         spriteId = CreateSprite(&template, 124, 80, sBoxSelectionPopupSpriteManager->subpriority);
-        sBoxSelectionPopupSpriteManager->unk_0004[i] = gSprites + spriteId;
+        sBoxSelectionPopupSpriteManager->menuSideSprites[i] = gSprites + spriteId;
         r5 = 0;
         if (i & 2)
         {
-            sBoxSelectionPopupSpriteManager->unk_0004[i]->x = 196;
+            sBoxSelectionPopupSpriteManager->menuSideSprites[i]->x = 196;
             r5 = 2;
         }
         if (i & 1)
         {
-            sBoxSelectionPopupSpriteManager->unk_0004[i]->y = 112;
-            sBoxSelectionPopupSpriteManager->unk_0004[i]->oam.size = SPRITE_SIZE(8x16);
+            sBoxSelectionPopupSpriteManager->menuSideSprites[i]->y = 112;
+            sBoxSelectionPopupSpriteManager->menuSideSprites[i]->oam.size = SPRITE_SIZE(8x16);
             r5++;
         }
-        StartSpriteAnim(sBoxSelectionPopupSpriteManager->unk_0004[i], r5);
+        StartSpriteAnim(sBoxSelectionPopupSpriteManager->menuSideSprites[i], r5);
     }
     for (i = 0; i < 2; i++)
     {
-        sBoxSelectionPopupSpriteManager->unk_0020[i] = sub_809223C(72 * i + 0x7c, 0x58, i, 0, sBoxSelectionPopupSpriteManager->subpriority);
-        if (sBoxSelectionPopupSpriteManager->unk_0020[i])
+        sBoxSelectionPopupSpriteManager->arrowSprites[i] = CreateChooseBoxArrows(72 * i + 0x7c, 0x58, i, 0, sBoxSelectionPopupSpriteManager->subpriority);
+        if (sBoxSelectionPopupSpriteManager->arrowSprites[i])
         {
-            sBoxSelectionPopupSpriteManager->unk_0020[i]->data[0] = (i == 0 ? -1 : 1);
-            sBoxSelectionPopupSpriteManager->unk_0020[i]->callback = sub_808CD64;
+            sBoxSelectionPopupSpriteManager->arrowSprites[i]->data[0] = (i == 0 ? -1 : 1);
+            sBoxSelectionPopupSpriteManager->arrowSprites[i]->callback = sub_808CD64;
         }
     }
     PrintBoxNameAndCountToSprite();
@@ -576,23 +612,23 @@ static void sub_808C9C4(u8 curBox)
 static void sub_808CBA4(void)
 {
     u16 i;
-    if (sBoxSelectionPopupSpriteManager->unk_0000)
+    if (sBoxSelectionPopupSpriteManager->menuSprite)
     {
-        DestroySprite(sBoxSelectionPopupSpriteManager->unk_0000);
-        sBoxSelectionPopupSpriteManager->unk_0000 = NULL;
+        DestroySprite(sBoxSelectionPopupSpriteManager->menuSprite);
+        sBoxSelectionPopupSpriteManager->menuSprite = NULL;
     }
     for (i = 0; i < 4; i++)
     {
-        if (sBoxSelectionPopupSpriteManager->unk_0004[i])
+        if (sBoxSelectionPopupSpriteManager->menuSideSprites[i])
         {
-            DestroySprite(sBoxSelectionPopupSpriteManager->unk_0004[i]);
-            sBoxSelectionPopupSpriteManager->unk_0004[i] = NULL;
+            DestroySprite(sBoxSelectionPopupSpriteManager->menuSideSprites[i]);
+            sBoxSelectionPopupSpriteManager->menuSideSprites[i] = NULL;
         }
     }
     for (i = 0; i < 2; i++)
     {
-        if (sBoxSelectionPopupSpriteManager->unk_0020[i])
-            DestroySprite(sBoxSelectionPopupSpriteManager->unk_0020[i]);
+        if (sBoxSelectionPopupSpriteManager->arrowSprites[i])
+            DestroySprite(sBoxSelectionPopupSpriteManager->arrowSprites[i]);
     }
 }
 
@@ -627,7 +663,7 @@ static void PrintBoxNameAndCountToSprite(void)
 
 static void PrintToSpriteWithTagUnk0240(const u8 *str, u16 x, u16 y)
 {
-    u16 tileStart = GetSpriteTileStartByTag(sBoxSelectionPopupSpriteManager->tilesTag);
+    u16 tileStart = GetSpriteTileStartByTag(sBoxSelectionPopupSpriteManager->tileTag);
     PrintStringToBufferCopyNow(str, (void *)(OBJ_VRAM0 + tileStart * 32 + 256 * y + 32 * x), 0x100, TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5, sBoxSelectionPopupSpriteManager->buffer);
 }
 

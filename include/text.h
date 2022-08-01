@@ -157,7 +157,20 @@
 #define NUM_TEXT_PRINTERS 32
 
 #define TEXT_SPEED_INSTANT 0
+
+// Given as a text speed when all the text should be
+// loaded at once but not copied to vram yet.
 #define TEXT_SKIP_DRAW 0xFF
+
+enum {
+    FONT_0,
+    FONT_1,
+    FONT_2,
+    FONT_3,
+    FONT_4,
+    FONT_5,
+    FONT_6,
+};
 
 enum
 {
@@ -302,7 +315,6 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
 u16 RenderText(struct TextPrinter *textPrinter);
-s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing);
 s32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a6, int a7);

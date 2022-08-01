@@ -275,7 +275,7 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     }
 }
 
-void sub_8003614(void * tileData, u16 currentX, u16 currentY, u16 width, u16 height)
+void sub_8003614(void *tileData, u16 currentX, u16 currentY, u16 width, u16 height)
 {
     int r0, r1;
     u8 r2;

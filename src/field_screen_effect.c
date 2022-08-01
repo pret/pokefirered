@@ -367,7 +367,7 @@ static bool8 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u8 x, u8 y)
     case 0:
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         StringExpandPlaceholders(gStringVar4, text);
-        AddTextPrinterParameterized4(windowId, 2, x, y, 1, 0, gUnknown_83C68EC, 1, gStringVar4);
+        AddTextPrinterParameterized4(windowId, FONT_2, x, y, 1, 0, gUnknown_83C68EC, 1, gStringVar4);
         gTextFlags.canABSpeedUpPrint = FALSE;
         gTasks[taskId].data[2] = 1;
         break;

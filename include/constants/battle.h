@@ -305,6 +305,10 @@
 #define BATTLE_TERRAIN_LANCE       18
 #define BATTLE_TERRAIN_CHAMPION    19
 
+#define B_WAIT_TIME_LONG  64
+#define B_WAIT_TIME_MED   48
+#define B_WAIT_TIME_SHORT 32
+
 #define CASTFORM_NORMAL     0
 #define CASTFORM_FIRE       1
 #define CASTFORM_WATER      2
@@ -312,7 +316,7 @@
 #define NUM_CASTFORM_FORMS  4
 #define CASTFORM_SUBSTITUTE (1 << 7)
 
-// Return value for IsRunningFromBattleImpossible. 
+// Return value for IsRunningFromBattleImpossible.
 #define BATTLE_RUN_SUCCESS        0
 #define BATTLE_RUN_FORBIDDEN      1
 #define BATTLE_RUN_FAILURE        2

@@ -14,6 +14,7 @@
 #include "quest_log.h"
 #include "constants/maps.h"
 #include "constants/field_weather.h"
+#include "constants/sound.h"
 
 #if defined(FIRERED)
 #define TITLE_TEXT gString_PokemonFireRed_Staff
@@ -855,7 +856,7 @@ static s32 RollCredits(void)
             
         }
         sCreditsMgr->timer = 360;
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 0x08, 0x29, 1, 2, sTextColor_Header, 0, TITLE_TEXT);
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_1, 0x08, 0x29, 1, 2, sTextColor_Header, 0, TITLE_TEXT);
         sCreditsMgr->mainseqno = CREDITSSCENE_WAIT_TITLE_STAFF;
         return 0;
     case CREDITSSCENE_WAIT_TITLE_STAFF:
@@ -912,12 +913,12 @@ static s32 RollCredits(void)
         if (gPaletteFade.active)
             return sCreditsMgr->canSpeedThrough;
         win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8; // unused
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, 1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_0);
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_0);
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER2;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_ADDPRINTER2:
         win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8;
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, 2, 8, 6, 0, 0, sTextColor_Regular, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_4);
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_2, 8, 6, 0, 0, sTextColor_Regular, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_4);
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_DELAY;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_DELAY:
@@ -1190,7 +1191,7 @@ static bool32 DoCreditsMonScene(void)
         {
             HideBg(2);
             ShowBg(1);
-            PlayCry2(GetCreditsMonSpecies(sCreditsMgr->whichMon), 0, 125, 10);
+            PlayCry_NormalNoDucking(GetCreditsMonSpecies(sCreditsMgr->whichMon), 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             sCreditsMgr->creditsMonTimer = 128;
             sCreditsMgr->subseqno++;
         }

@@ -891,7 +891,7 @@ static void CB2_ReturnFromLinkTrade2(void)
         break;
     case 12:
         name = gSaveBlock2Ptr->playerName;
-        width = GetStringWidth(1, name, 0);
+        width = GetStringWidth(FONT_1, name, 0);
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
@@ -901,7 +901,7 @@ static void CB2_ReturnFromLinkTrade2(void)
         }
         id = GetMultiplayerId();
         name = gLinkPlayers[id ^ 1].name;
-        width = GetStringWidth(1, name, 0);
+        width = GetStringWidth(FONT_1, name, 0);
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
@@ -1086,7 +1086,7 @@ void CB2_ReturnToTradeMenuFromSummary(void)
         break;
     case 12:
         name = gSaveBlock2Ptr->playerName;
-        width = GetStringWidth(1, name, 0);
+        width = GetStringWidth(FONT_1, name, 0);
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
@@ -1096,7 +1096,7 @@ void CB2_ReturnToTradeMenuFromSummary(void)
         }
         id = GetMultiplayerId();
         name = gLinkPlayers[id ^ 1].name;
-        width = GetStringWidth(1, name, 0);
+        width = GetStringWidth(FONT_1, name, 0);
         xPos = (56 - width) / 2;
         for (i = 0; i < 3; i++)
         {
@@ -1729,8 +1729,8 @@ static void TradeMenuCB_0(void)
         {
             DrawTextBorderOuter(1, 1, 14);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
-            UnionRoomAndTradeMenuPrintOptions(1, 3, 16, 2, sMenuAction_SummaryTrade);
-            Menu_InitCursor(1, 3, 0, 0, 16, 2, 0);
+            UnionRoomAndTradeMenuPrintOptions(1, FONT_3, 16, 2, sMenuAction_SummaryTrade);
+            Menu_InitCursor(1, FONT_3, 0, 0, 16, 2, 0);
             PutWindowTilemap(1);
             CopyWindowToVram(1, COPYWIN_FULL);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 1;
@@ -1742,7 +1742,7 @@ static void TradeMenuCB_0(void)
         }
         else if (sTradeMenuResourcesPtr->tradeMenuCursorPosition == 12)
         {
-            CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 0x001, 14, 0);
+            CreateYesNoMenu(&sWindowTemplate_YesNo, FONT_3, 0, 2, 0x001, 14, 0);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 4;
             RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_ASKCANCEL], (void *)OBJ_VRAM0 + sTradeMenuResourcesPtr->cursorStartTile * 32, 24);
         }
@@ -1956,7 +1956,7 @@ static void TradeMenuCB_14(void)
 
     if (sTradeMenuResourcesPtr->loadUISpritesState > 120)
     {
-        CreateYesNoMenu(&sWindowTemplate_YesNo, 3, 0, 2, 1, 14, 0);
+        CreateYesNoMenu(&sWindowTemplate_YesNo, FONT_3, 0, 2, 1, 14, 0);
         sTradeMenuResourcesPtr->loadUISpritesState = 0;
         sTradeMenuResourcesPtr->tradeMenuCBnum = 3;
     }
@@ -2160,9 +2160,9 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].x2 = 0;
         gSprites[sTradeMenuResourcesPtr->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].y2 = 0;
         nameStringWidth = GetNicknameStringWidthByPartyAndMonIdx(nickname, whichParty, partyIdx);
-        AddTextPrinterParameterized3((side * 2) + 14, 0, (80 - nameStringWidth) / 2, 4, sTextColor_PartyMonNickname, 0, nickname);
+        AddTextPrinterParameterized3((side * 2) + 14, FONT_0, (80 - nameStringWidth) / 2, 4, sTextColor_PartyMonNickname, 0, nickname);
         BuildMovesString(movesString, whichParty, partyIdx);
-        AddTextPrinterParameterized4((side * 2) + 15, 1, 0, 0, 0, 0, sTextColor_PartyMonNickname, 0, movesString);
+        AddTextPrinterParameterized4((side * 2) + 15, FONT_1, 0, 0, 0, 0, sTextColor_PartyMonNickname, 0, movesString);
         PutWindowTilemap((side * 2) + 14);
         CopyWindowToVram((side * 2) + 14, COPYWIN_FULL);
         PutWindowTilemap((side * 2) + 15);
@@ -2184,7 +2184,7 @@ static u8 GetNicknameStringWidthByPartyAndMonIdx(u8 *dest, u8 whichParty, u8 par
     else
         GetMonData(&gEnemyParty[partyIdx], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(dest, nickname);
-    return GetStringWidth(0, dest, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
+    return GetStringWidth(FONT_0, dest, GetFontAttribute(FONT_0, FONTATTR_LETTER_SPACING));
 }
 
 static void BuildMovesString(u8 *movesString, u8 whichParty, u8 whichMon)
@@ -2231,8 +2231,8 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, const u8 *str)
     s8 speed;
     windowId += (whichParty * PARTY_SIZE) + 2;
     speed = 0;
-    xPos = (64u - GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING))) / 2;
-    AddTextPrinterParameterized3(windowId, 0, xPos, 4, sTextColor_PartyMonNickname, speed, str);
+    xPos = (64u - GetStringWidth(FONT_0, str, GetFontAttribute(FONT_0, FONTATTR_LETTER_SPACING))) / 2;
+    AddTextPrinterParameterized3(windowId, FONT_0, xPos, 4, sTextColor_PartyMonNickname, speed, str);
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
@@ -2442,7 +2442,7 @@ static void RunScheduledLinkTasks(void)
 static void PrintTradeErrorOrStatusMessage(u8 idx)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(0, 3, sTradeErrorOrStatusMessagePtrs[idx], 0, 2, 0xFF, NULL);
+    AddTextPrinterParameterized(0, FONT_3, sTradeErrorOrStatusMessagePtrs[idx], 0, 2, 0xFF, NULL);
     DrawTextBorderOuter(0, 0x014, 12);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);

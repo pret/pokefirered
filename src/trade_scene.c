@@ -2587,7 +2587,7 @@ static void CB2_HandleTradeEnded(void)
             MEvent_RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
         }
         SetContinueGameWarpStatusToDynamicWarp();
-        SaveGame_AfterLinkTrade();
+        LinkFullSave_Init();
         gMain.state++;
         sTradeData->timer = 0;
         break;
@@ -2598,7 +2598,7 @@ static void CB2_HandleTradeEnded(void)
         }
         break;
     case 52:
-        if (AfterLinkTradeSaveFailed())
+        if (LinkFullSave_WriteSector())
         {
             ClearContinueGameWarpStatus2();
             gMain.state = 4;
@@ -2610,7 +2610,7 @@ static void CB2_HandleTradeEnded(void)
         }
         break;
     case 4:
-        ClearSaveAfterLinkTradeSaveFailure();
+        LinkFullSave_ReplaceLastSector();
         gMain.state = 40;
         sTradeData->timer = 0;
         break;
@@ -2642,7 +2642,7 @@ static void CB2_HandleTradeEnded(void)
     case 42:
         if (IsLinkTaskFinished())
         {
-            sub_80DA434();
+            LinkFullSave_SetLastSectorSignature();
             gMain.state = 5;
         }
         break;

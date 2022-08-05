@@ -47,11 +47,11 @@ static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerTowerSet * tt
     memset(buffer, 0, 0x1000);
     memcpy(buffer, ttdata, SEC30_SIZE);
     buffer[1] = sub_815D654();
-    if (TryWriteSpecialSaveSection(SECTOR_TTOWER(0), buffer) != TRUE)
+    if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_1, buffer) != TRUE)
         return FALSE;
     memset(buffer, 0, 0x1000);
     memcpy(buffer, (u8 *)ttdata + SEC30_SIZE, SEC31_SIZE);
-    if (TryWriteSpecialSaveSection(SECTOR_TTOWER(1), buffer) != TRUE)
+    if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_2, buffer) != TRUE)
         return FALSE;
     return TRUE;
 }
@@ -66,11 +66,11 @@ bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerTowerSet * ttdata)
 
 static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerTowerSet * ttdata, void *buffer)
 {
-    if (TryCopySpecialSaveSection(SECTOR_TTOWER(0), buffer) != 1)
+    if (TryReadSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_1, buffer) != 1)
         return FALSE;
     memcpy(ttdata + 0x000, buffer, SEC30_SIZE);
 
-    if (TryCopySpecialSaveSection(SECTOR_TTOWER(1), buffer) != 1)
+    if (TryReadSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_2, buffer) != 1)
         return FALSE;
     memcpy((u8 *)ttdata + SEC30_SIZE, buffer, SEC31_SIZE);
 

@@ -2224,10 +2224,10 @@ static u32 Cmd_SaveGame(struct BerryCrushGame * game, u8 *args)
         DrawDialogueFrame(0, FALSE);
         AddTextPrinterParameterized2(0, FONT_2, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         CopyWindowToVram(0, COPYWIN_FULL);
-        CreateTask(Task_LinkSave, 0);
+        CreateTask(Task_LinkFullSave, 0);
         break;
     case 3:
-        if (FuncIsActiveTask(Task_LinkSave))
+        if (FuncIsActiveTask(Task_LinkFullSave))
             return 0;
         break;
     case 4:

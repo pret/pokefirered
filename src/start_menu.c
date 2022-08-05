@@ -798,7 +798,7 @@ static u8 SaveDialogCB_DoSave(void)
 
 static u8 SaveDialogCB_PrintSaveResult(void)
 {
-    if (gSaveSucceeded == TRUE)
+    if (gSaveAttemptStatus == SAVE_STATUS_OK)
         PrintSaveTextWithFollowupFunc(gText_PlayerSavedTheGame, SaveDialogCB_WaitPrintSuccessAndPlaySE);
     else
         PrintSaveTextWithFollowupFunc(gText_SaveError_PleaseExchangeBackupMemory, SaveDialogCB_WaitPrintErrorAndPlaySE);
@@ -921,11 +921,11 @@ static void task50_after_link_battle_save(u8 taskId)
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();
-            sub_80DA45C();
+            WriteSaveBlock2();
             data[0] = 2;
             break;
         case 2:
-            if (sub_80DA4A0())
+            if (WriteSaveBlock1Sector())
             {
                 ClearContinueGameWarpStatus2();
                 data[0] = 3;
@@ -941,11 +941,11 @@ static void task50_after_link_battle_save(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(Task_LinkSave, 5);
+            CreateTask(Task_LinkFullSave, 5);
             data[0] = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(Task_LinkSave))
+            if (!FuncIsActiveTask(Task_LinkFullSave))
                 data[0] = 3;
             break;
         }

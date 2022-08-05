@@ -429,7 +429,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     }
     else
     {
-        if (Save_LoadGameData(SAVE_HALL_OF_FAME) != TRUE)
+        if (LoadGameSave(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
             memset(gDecompressionBuffer, 0, 0x2000);
     }
 
@@ -759,7 +759,7 @@ static void Task_HofPC_CopySaveData(u8 taskId)
     struct HallofFameTeam* savedTeams;
 
     CreateTopBarWindowLoadPalette(0, 30, 0, 0x0C, 0x226);
-    if (Save_LoadGameData(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
+    if (LoadGameSave(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
     {
         gTasks[taskId].func = Task_HofPC_PrintDataIsCorrupted;
     }

@@ -74,12 +74,12 @@ bool32 RunSaveFailedScreen(void)
     case 5:
         if (TryWipeDamagedSectors() == TRUE)
         {
-            gSaveSucceeded = SAVE_STATUS_OK;
+            gSaveAttemptStatus = SAVE_STATUS_OK;
             PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_SaveCompleted);
         }
         else
         {
-            gSaveSucceeded = SAVE_STATUS_ERROR;
+            gSaveAttemptStatus = SAVE_STATUS_ERROR;
             PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_BackupMemoryDamaged);
         }
         sSaveFailedScreenState = 6;

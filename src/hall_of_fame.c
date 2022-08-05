@@ -26,19 +26,24 @@
 #include "constants/songs.h"
 #include "constants/maps.h"
 
+#define HALL_OF_FAME_MAX_TEAMS 50
+#define HALL_OF_FAME_BG_PAL    RGB(22, 24, 29)
+
 struct HallofFameMon
 {
     u32 tid;
     u32 personality;
     u16 species:9;
     u16 lvl:7;
-    u8 nick[10];
+    u8 nick[POKEMON_NAME_LENGTH];
 };
 
 struct HallofFameTeam
 {
     struct HallofFameMon mon[PARTY_SIZE];
 };
+
+STATIC_ASSERT(sizeof(struct HallofFameTeam) * HALL_OF_FAME_MAX_TEAMS <= SECTOR_DATA_SIZE * NUM_HOF_SECTORS, HallOfFameFreeSpace);
 
 struct HofGfx
 {
@@ -51,9 +56,6 @@ struct HofGfx
 static EWRAM_DATA u32 sSelectedPaletteIndices = 0;
 static EWRAM_DATA struct HallofFameTeam * sHofMonPtr = NULL;
 static EWRAM_DATA struct HofGfx * sHofGfxPtr = NULL;
-
-#define HALL_OF_FAME_MAX_TEAMS 50
-#define HALL_OF_FAME_BG_PAL    (RGB(22, 24, 29))
 
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);
@@ -425,12 +427,12 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     SaveQuestLogData();
     if (!gHasHallOfFameRecords)
     {
-        memset(gDecompressionBuffer, 0, 0x2000);
+        memset(gDecompressionBuffer, 0, SECTOR_SIZE * NUM_HOF_SECTORS);
     }
     else
     {
         if (LoadGameSave(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
-            memset(gDecompressionBuffer, 0, 0x2000);
+            memset(gDecompressionBuffer, 0, SECTOR_SIZE * NUM_HOF_SECTORS);
     }
 
     for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, lastSavedTeam++)
@@ -747,7 +749,7 @@ void CB2_InitHofPC(void)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 7));
         SetGpuReg(REG_OFFSET_BLDY, 0);
         CreateTask(Task_HofPC_CopySaveData, 0);
-        sHofMonPtr = AllocZeroed(0x2000);
+        sHofMonPtr = AllocZeroed(SECTOR_SIZE * NUM_HOF_SECTORS);
         SetMainCallback2(CB2_HofIdle);
         break;
     }
@@ -765,7 +767,7 @@ static void Task_HofPC_CopySaveData(u8 taskId)
     }
     else
     {
-        CpuCopy16(gDecompressionBuffer, sHofMonPtr, 0x2000);
+        CpuCopy16(gDecompressionBuffer, sHofMonPtr, SECTOR_SIZE * NUM_HOF_SECTORS);
         savedTeams = sHofMonPtr;
         for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, savedTeams++)
         {

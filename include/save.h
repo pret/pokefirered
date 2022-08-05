@@ -9,7 +9,10 @@
 #define SECTOR_FOOTER_SIZE 128
 #define SECTOR_SIZE (SECTOR_DATA_SIZE + SECTOR_FOOTER_SIZE)
 
-#define FILE_SIGNATURE 0x08012025  // signature value to determine if a sector is in use
+#define NUM_SAVE_SLOTS 2
+
+// If the sector's signature field is not this value then the sector is either invalid or empty.
+#define SECTOR_SIGNATURE 0x08012025
 
 #define SPECIAL_SECTOR_SENTINEL 0xB39D
 
@@ -26,11 +29,18 @@
 #define SECTOR_ID_TRAINER_TOWER_2    31
 #define SECTORS_COUNT                32
 
+#define NUM_HOF_SECTORS 2
+
 #define SAVE_STATUS_EMPTY    0
 #define SAVE_STATUS_OK       1
 #define SAVE_STATUS_INVALID  2
 #define SAVE_STATUS_NO_FLASH 4
 #define SAVE_STATUS_ERROR    0xFF
+
+// Special sector id value for certain save functions
+// to indicate that all sectors should be used
+// instead of a specific sector.
+#define FULL_SAVE_SLOT 0xFFFF
 
 enum
 {
@@ -58,15 +68,10 @@ struct SaveSector
     u16 checksum;
     u32 signature;
     u32 counter;
-}; // size is 0x1000
+}; // size is SECTOR_SIZE (0x1000)
 
 #define SECTOR_SIGNATURE_OFFSET offsetof(struct SaveSector, signature)
 #define SECTOR_COUNTER_OFFSET   offsetof(struct SaveSector, counter)
-
-// Special sector id value for certain save functions
-// to indicate that all sectors should be used
-// instead of a specific sector.
-#define FULL_SAVE_SLOT 0xFFFF
 
 // operations for SetDamagedSectorBits
 enum

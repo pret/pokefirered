@@ -161,7 +161,7 @@
       "x": 25,
       "y": 11,
       "elevation": 3,
-      "dest_map": "MAP_VIRIDIAN_CITY_HOUSE1",
+      "dest_map": "MAP_VIRIDIAN_CITY_HOUSE",
       "dest_warp_id": 1
     },
     {
@@ -175,7 +175,7 @@
       "x": 25,
       "y": 18,
       "elevation": 0,
-      "dest_map": "MAP_VIRIDIAN_CITY_HOUSE2",
+      "dest_map": "MAP_VIRIDIAN_CITY_SCHOOL",
       "dest_warp_id": 1
     },
     {

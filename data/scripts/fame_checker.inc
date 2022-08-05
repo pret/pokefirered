@@ -1,4 +1,4 @@
-ViridianCity_House2_EventScript_PokemonJournal::
+ViridianCity_School_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_OAK, 3

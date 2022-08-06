@@ -4,6 +4,12 @@
 #include "save.h"
 #include "cereader_tool.h"
 
+#define SEC30_SIZE  (offsetof(struct EReaderTrainerTowerSet, floors[4]))
+#define SEC31_SIZE  (sizeof(struct EReaderTrainerTowerSet) - SEC30_SIZE)
+
+// The trainer tower data exceeds SECTOR_DATA_SIZE. They're allowed to use the full save sector up to the counter field.
+STATIC_ASSERT(SEC30_SIZE + SEC31_SIZE <= SECTOR_COUNTER_OFFSET * 2, EReaderTrainerTowerSetFreeSpace);
+
 u8 sub_815D654(void)
 {
     return (gSaveBlock1Ptr->trainerTower[0].unk9 + 1) % 256;
@@ -36,20 +42,17 @@ bool32 ValidateTrainerTowerData(struct EReaderTrainerTowerSet * ttdata)
     return TRUE;
 }
 
-#define SEC30_SIZE  (offsetof(struct EReaderTrainerTowerSet, floors[4]))
-#define SEC31_SIZE  (sizeof(struct EReaderTrainerTowerSet) - SEC30_SIZE)
-
 static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerTowerSet * ttdata, u8 * buffer)
 {
     AGB_ASSERT_EX(ttdata->dummy == 0, ABSPATH("cereader_tool.c"), 198);
     AGB_ASSERT_EX(ttdata->id == 0, ABSPATH("cereader_tool.c"), 199)
 
-    memset(buffer, 0, 0x1000);
+    memset(buffer, 0, SECTOR_SIZE);
     memcpy(buffer, ttdata, SEC30_SIZE);
     buffer[1] = sub_815D654();
     if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_1, buffer) != TRUE)
         return FALSE;
-    memset(buffer, 0, 0x1000);
+    memset(buffer, 0, SECTOR_SIZE);
     memcpy(buffer, (u8 *)ttdata + SEC30_SIZE, SEC31_SIZE);
     if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_2, buffer) != TRUE)
         return FALSE;
@@ -58,7 +61,7 @@ static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerTowerSet * tt
 
 bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerTowerSet * ttdata)
 {
-    u8 * buffer = AllocZeroed(0x1000);
+    u8 * buffer = AllocZeroed(SECTOR_SIZE);
     bool32 result = CEReaderTool_SaveTrainerTower_r(ttdata, buffer);
     Free(buffer);
     return result;
@@ -81,7 +84,7 @@ static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerTowerSet * tt
 
 bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerTowerSet * ttdata)
 {
-    void *buffer = AllocZeroed(0x1000);
+    void *buffer = AllocZeroed(SECTOR_SIZE);
     bool32 success = CEReaderTool_LoadTrainerTower_r(ttdata, buffer);
     Free(buffer);
     return success;

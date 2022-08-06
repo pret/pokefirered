@@ -575,12 +575,12 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_Questionnaire;
     if (MetatileBehavior_IsPlayerFacingBattleRecords(metatileBehavior, direction) == TRUE)
         return CableClub_EventScript_ShowBattleRecords;
-    if (MetatileBehavior_IsIndigoPlateauMark(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsIndigoPlateauSign1(metatileBehavior) == TRUE)
     {
         MsgSetSignPost();
         return EventScript_Indigo_UltimateGoal;
     }
-    if (MetatileBehavior_IsIndigoPlateauMark2(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsIndigoPlateauSign2(metatileBehavior) == TRUE)
     {
         MsgSetSignPost();
         return EventScript_Indigo_HighestAuthority;
@@ -792,10 +792,10 @@ static u8 GetFacingSignpostType(u16 metatileBehavior, u8 playerDirection)
     if (MetatileBehavior_IsPlayerFacingPokeMartSign(metatileBehavior, playerDirection) == TRUE)
         return SIGNPOST_POKEMART;
 
-    if (MetatileBehavior_IsIndigoPlateauMark(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsIndigoPlateauSign1(metatileBehavior) == TRUE)
         return SIGNPOST_INDIGO_1;
 
-    if (MetatileBehavior_IsIndigoPlateauMark2(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsIndigoPlateauSign2(metatileBehavior) == TRUE)
         return SIGNPOST_INDIGO_2;
 
     if (MetatileBehavior_IsSignpost(metatileBehavior) == TRUE)

@@ -233,7 +233,7 @@ static void AshGrassPerStepCallback(u8 taskId)
     {
         data[1] = x;
         data[2] = y;
-        if (MetatileBehavior_ReturnFalse_4((u8)MapGridGetMetatileBehaviorAt(x, y)))
+        if (MetatileBehavior_IsAshGrass((u8)MapGridGetMetatileBehaviorAt(x, y)))
         {
             if (MapGridGetMetatileIdAt(x, y) == 0x20a)
                 StartAshFieldEffect(x, y, 0x212, 4);
@@ -267,7 +267,7 @@ static void CrackedFloorPerStepCallback(u8 taskId)
     {
         data[2] = x;
         data[3] = y;
-        if (MetatileBehavior_ReturnFalse_13(behavior))
+        if (MetatileBehavior_IsCrackedFloor(behavior))
         {
             if (GetPlayerSpeed() != 4)
                 VarSet(VAR_ICE_STEP_COUNT, 0);

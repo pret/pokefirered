@@ -5148,7 +5148,7 @@ void sub_8063E28(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     }
     
     if (MetatileBehavior_IsIce_2(objectEvent->currentMetatileBehavior) == TRUE
-     || MetatileBehavior_IsUnknownMovement48(objectEvent->currentMetatileBehavior) == TRUE)
+     || MetatileBehavior_IsTrickHouseSlipperyFloor(objectEvent->currentMetatileBehavior) == TRUE)
         objectEvent->disableAnim = TRUE;
     else
         objectEvent->disableAnim = FALSE;
@@ -8095,13 +8095,13 @@ static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *f
 
 static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent *objEvent, u32 *flags)
 {
-    if (MetatileBehavior_IsTallGrass_2(objEvent->currentMetatileBehavior))
+    if (MetatileBehavior_IsTallGrass(objEvent->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN;
 }
 
 static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent *objEvent, u32 *flags)
 {
-    if (MetatileBehavior_IsTallGrass_2(objEvent->currentMetatileBehavior))
+    if (MetatileBehavior_IsTallGrass(objEvent->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE;
 }
 
@@ -8230,7 +8230,7 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     typedef bool8 (*MetatileFunc)(u8);
 
     static const MetatileFunc metatileFuncs[] = {
-        MetatileBehavior_IsTallGrass_2,
+        MetatileBehavior_IsTallGrass,
         MetatileBehavior_IsLongGrass,
         MetatileBehavior_IsPuddle,
         MetatileBehavior_IsSurfable,

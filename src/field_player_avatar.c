@@ -58,8 +58,8 @@ static bool8 ForcedMovement_SlideSouth(void);
 static bool8 ForcedMovement_SlideNorth(void);
 static bool8 ForcedMovement_SlideWest(void);
 static bool8 ForcedMovement_SlideEast(void);
-static bool8 ForcedMovement_0xBB(void);
-static bool8 ForcedMovement_0xBC(void);
+static bool8 ForcedMovement_MatJump(void);
+static bool8 ForcedMovement_MatSpin(void);
 static u8 CheckMovementInputNotOnBike(u8 direction);
 static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys);
 static void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys);
@@ -225,7 +225,7 @@ static const struct {
     bool8 (*check)(u8 metatileBehavior);
     bool8 (*apply)(void);
 } sForcedMovementFuncs[] = {
-    {MetatileBehavior_IsUnknownMovement48, ForcedMovement_Slip},
+    {MetatileBehavior_IsTrickHouseSlipperyFloor, ForcedMovement_Slip},
     {MetatileBehavior_IsIce_2, ForcedMovement_Slip},
     {MetatileBehavior_IsWalkSouth, ForcedMovement_WalkSouth},
     {MetatileBehavior_IsWalkNorth, ForcedMovement_WalkNorth},
@@ -244,8 +244,8 @@ static const struct {
     {MetatileBehavior_IsSlideWest, ForcedMovement_SlideWest},
     {MetatileBehavior_IsSlideEast, ForcedMovement_SlideEast},
     {MetatileBehavior_IsWaterfall, ForcedMovement_PushedSouthByCurrent},
-    {MetatileBehavior_UnusedReturnFalse_7, ForcedMovement_0xBB},
-    {MetatileBehavior_UnusedReturnFalse_8, ForcedMovement_0xBC},
+    {MetatileBehavior_IsSecretBaseJumpMat, ForcedMovement_MatJump},
+    {MetatileBehavior_IsSecretBaseSpinMat, ForcedMovement_MatSpin},
     {NULL, ForcedMovement_None},
 };
 
@@ -430,13 +430,13 @@ static bool8 ForcedMovement_SlideEast(void)
     return ForcedMovement_Slide(DIR_EAST, PlayerGoSpeed2);
 }
 
-static bool8 ForcedMovement_0xBB(void)
+static bool8 ForcedMovement_MatJump(void)
 {
     DoPlayerMatJump();
     return TRUE;
 }
 
-static bool8 ForcedMovement_0xBC(void)
+static bool8 ForcedMovement_MatSpin(void)
 {
     DoPlayerMatSpin();
     return TRUE;

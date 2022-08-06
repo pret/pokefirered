@@ -1,13 +1,13 @@
-ViridianCity_House2_Text_TryingToMemorizeNotes::
+ViridianCity_School_Text_TryingToMemorizeNotes::
     .string "Whew! I'm trying to memorize all my\n"
     .string "notes.$"
 
-ViridianCity_House2_Text_ReadBlackboardCarefully::
+ViridianCity_School_Text_ReadBlackboardCarefully::
     .string "Okay!\p"
     .string "Be sure to read what's on the\n"
     .string "blackboard carefully!$"
 
-ViridianCity_House2_Text_NotebookFirstPage::
+ViridianCity_School_Text_NotebookFirstPage::
     .string "Let's check out the notebook.\p"
     .string "First page…\p"
     .string "POKé BALLS are used to catch\n"
@@ -17,14 +17,14 @@ ViridianCity_House2_Text_NotebookFirstPage::
     .string "People who raise and battle\n"
     .string "with POKéMON are called TRAINERS.$"
 
-ViridianCity_House2_Text_NotebookSecondPage::
+ViridianCity_School_Text_NotebookSecondPage::
     .string "Second page…\p"
     .string "A healthy POKéMON may be hard to\n"
     .string "catch, so weaken it first.\p"
     .string "Poison, burn, or cause another\n"
     .string "status problem to weaken it.$"
 
-ViridianCity_House2_Text_NotebookThirdPage::
+ViridianCity_School_Text_NotebookThirdPage::
     .string "Third page…\p"
     .string "POKéMON TRAINERS seek others to\n"
     .string "engage in POKéMON battles.\p"
@@ -33,7 +33,7 @@ ViridianCity_House2_Text_NotebookThirdPage::
     .string "Battles are constantly waged at\n"
     .string "POKéMON GYMS everywhere.$"
 
-ViridianCity_House2_Text_NotebookFourthPage::
+ViridianCity_School_Text_NotebookFourthPage::
     .string "Fourth page…\p"
     .string "The ultimate goal for all POKéMON\n"
     .string "TRAINERS is simple.\p"
@@ -43,21 +43,21 @@ ViridianCity_House2_Text_NotebookFourthPage::
     .string "The ELITE FOUR of the POKéMON\n"
     .string "LEAGUE!$"
 
-ViridianCity_House2_Text_TurnThePage::
+ViridianCity_School_Text_TurnThePage::
     .string "Turn the page?$"
 
-ViridianCity_House2_Text_HeyDontLookAtMyNotes::
+ViridianCity_School_Text_HeyDontLookAtMyNotes::
     .string "GIRL: Hey!\n"
     .string "Don't look at my notes!$"
 
-ViridianCity_House2_Text_BlackboardListsStatusProblems::
+ViridianCity_School_Text_BlackboardListsStatusProblems::
     .string "The blackboard lists POKéMON\n"
     .string "STATUS problems during battles.$"
 
-ViridianCity_House2_Text_ReadWhichTopic::
+ViridianCity_School_Text_ReadWhichTopic::
     .string "Which topic do you want to read?$"
 
-ViridianCity_House2_Text_ExplainSleep::
+ViridianCity_School_Text_ExplainSleep::
     .string "A POKéMON can't attack if it's\n"
     .string "asleep.\p"
     .string "POKéMON will stay asleep even\n"
@@ -65,19 +65,19 @@ ViridianCity_House2_Text_ExplainSleep::
     .string "Use AWAKENING to awaken one\n"
     .string "from sleep.$"
 
-ViridianCity_House2_Text_ExplainBurn::
+ViridianCity_School_Text_ExplainBurn::
     .string "A burn reduces ATTACK power.\n"
     .string "It also causes ongoing HP loss.\p"
     .string "A burn remains after a battle.\n"
     .string "Use BURN HEAL to cure a burn.$"
 
-ViridianCity_House2_Text_ExplainPoison::
+ViridianCity_School_Text_ExplainPoison::
     .string "When poisoned, a POKéMON's health\n"
     .string "steadily drops.\p"
     .string "Poison lingers after battles.\n"
     .string "Use an ANTIDOTE to cure poison!$"
 
-ViridianCity_House2_Text_ExplainFreeze::
+ViridianCity_School_Text_ExplainFreeze::
     .string "A frozen POKéMON becomes\n"
     .string "helplessly immobile.\p"
     .string "It stays frozen even after the\n"
@@ -85,7 +85,7 @@ ViridianCity_House2_Text_ExplainFreeze::
     .string "Use ICE HEAL to thaw out the\n"
     .string "suffering POKéMON.$"
 
-ViridianCity_House2_Text_ExplainParalysis::
+ViridianCity_School_Text_ExplainParalysis::
     .string "Paralysis reduces SPEED and may\n"
     .string "prevent the POKéMON from moving.\p"
     .string "Paralysis remains after battles.\n"

@@ -1,7 +1,7 @@
 {
-  "id": "MAP_VIRIDIAN_CITY_HOUSE1",
-  "name": "ViridianCity_House1",
-  "layout": "LAYOUT_VIRIDIAN_CITY_HOUSE1",
+  "id": "MAP_VIRIDIAN_CITY_HOUSE",
+  "name": "ViridianCity_House",
+  "layout": "LAYOUT_VIRIDIAN_CITY_HOUSE",
   "music": "MUS_PEWTER",
   "region_map_section": "MAPSEC_VIRIDIAN_CITY",
   "requires_flash": false,
@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_House1_EventScript_BaldingMan",
+      "script": "ViridianCity_House_EventScript_BaldingMan",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_House1_EventScript_LittleGirl",
+      "script": "ViridianCity_House_EventScript_LittleGirl",
       "flag": "0"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_House1_EventScript_Speary",
+      "script": "ViridianCity_House_EventScript_Speary",
       "flag": "0"
     }
   ],
@@ -86,7 +86,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_House1_EventScript_NicknameSign"
+      "script": "ViridianCity_House_EventScript_NicknameSign"
     }
   ]
 }

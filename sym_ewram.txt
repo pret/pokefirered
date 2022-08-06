@@ -42,7 +42,7 @@
 	.include "src/pokemon_storage_system_3.o"
 	.include "src/pokemon_storage_system_5.o"
 	.include "src/pokemon_storage_system_7.o"
-	.include "src/pokemon_storage_system_9.o"
+	.include "src/pokemon_storage_system_8.o"
 	.include "src/script_movement.o"
 	.include "src/fldeff_cut.o"
 	.include "src/item_menu_icons.o"

@@ -1,2 +1,2 @@
-SevenIsland_UnusedHouse_MapScripts:: @ 8170BE3
+SevenIsland_UnusedHouse_MapScripts::
 	.byte 0

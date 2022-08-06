@@ -1,4 +1,4 @@
-OneIsland_Text_BillLetsGoSeeCelio:: @ 818161B
+OneIsland_Text_BillLetsGoSeeCelio::
     .string "BILL: Here we are!\n"
     .string "This is ONE ISLAND.\p"
     .string "There are several islands around\n"
@@ -10,11 +10,11 @@ OneIsland_Text_BillLetsGoSeeCelio:: @ 818161B
     .string "…Why am I telling you this now?\n"
     .string "Let's just go see CELIO!$"
 
-Text_WhereDoYouWantToSail:: @ 8181726
+Text_WhereDoYouWantToSail::
     .string "Ahoy, there!\n"
     .string "Where do you want to sail?$"
 
-OneIsland_Text_LuckyToHaveCelioHere:: @ 818174E
+OneIsland_Text_LuckyToHaveCelioHere::
     .string "Here we are on an island smack in\n"
     .string "the middle of nowhere.\p"
     .string "We're lucky to have an upstanding\n"
@@ -26,7 +26,7 @@ OneIsland_Text_LuckyToHaveCelioHere:: @ 818174E
     .string "I'm not sure what that means, but\n"
     .string "CELIO is quite the man!$"
 
-OneIsland_Text_HavePCLinkageWithKanto:: @ 8181858
+OneIsland_Text_HavePCLinkageWithKanto::
     .string "My granddaughter was in a tizzy\n"
     .string "over a new breakthrough.\p"
     .string "She said we now have PC linkage\n"
@@ -34,7 +34,7 @@ OneIsland_Text_HavePCLinkageWithKanto:: @ 8181858
     .string "I'm not sure what that means, but\n"
     .string "CELIO is quite the man!$"
 
-OneIsland_Text_HavePCLinkageWithHoenn:: @ 8181901
+OneIsland_Text_HavePCLinkageWithHoenn::
     .string "My granddaughter was in a tizzy\n"
     .string "over a new breakthrough.\p"
     .string "She said we finally have PC linkage\n"
@@ -44,19 +44,19 @@ OneIsland_Text_HavePCLinkageWithHoenn:: @ 8181901
     .string "He would make a fine husband for\n"
     .string "my granddaughter!$"
 
-OneIsland_Text_IslandSign:: @ 81819E1
+OneIsland_Text_IslandSign::
     .string "ONE ISLAND\n"
     .string "Friends Gather at Knot Island$"
 
-OneIsland_Text_PokemonNetCenterSign:: @ 8181A0A
+OneIsland_Text_PokemonNetCenterSign::
     .string "Expanding the POKéMON World!\n"
     .string "POKéMON NET CENTER$"
 
 @ Unused
-OneIsland_Text_ReturnToCinnabar:: @ 8181A3A
+OneIsland_Text_ReturnToCinnabar::
     .string "グレンタウンに　もどりますか？$"
 
-OneIsland_Text_IsntWarmClimateHereGreat:: @ 8181A4A
+OneIsland_Text_IsntWarmClimateHereGreat::
     .string "Hi, sight-seeing, are you?\n"
     .string "Isn't the warm climate here great?$"
 

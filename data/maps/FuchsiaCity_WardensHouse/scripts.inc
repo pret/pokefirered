@@ -1,7 +1,7 @@
-FuchsiaCity_WardensHouse_MapScripts:: @ 816D74B
+FuchsiaCity_WardensHouse_MapScripts::
 	.byte 0
 
-FuchsiaCity_WardensHouse_EventScript_Warden:: @ 816D74C
+FuchsiaCity_WardensHouse_EventScript_Warden::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HM04, FuchsiaCity_WardensHouse_EventScript_ExplainStrength
@@ -14,7 +14,7 @@ FuchsiaCity_WardensHouse_EventScript_Warden:: @ 816D74C
 	release
 	end
 
-FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth:: @ 816D780
+FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth::
 	textcolor 3
 	playfanfare MUS_OBTAIN_TMHM
 	message FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden
@@ -33,31 +33,31 @@ FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth:: @ 816D780
 	release
 	end
 
-FuchsiaCity_WardensHouse_EventScript_WardenThanksMale:: @ 816D7D6
+FuchsiaCity_WardensHouse_EventScript_WardenThanksMale::
 	msgbox FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething
 	return
 
-FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale:: @ 816D7DF
+FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale::
 	msgbox FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething
 	return
 
-FuchsiaCity_WardensHouse_EventScript_WardenYes:: @ 816D7E8
+FuchsiaCity_WardensHouse_EventScript_WardenYes::
 	msgbox FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo
 	return
 
-FuchsiaCity_WardensHouse_EventScript_WardenNo:: @ 816D7F1
+FuchsiaCity_WardensHouse_EventScript_WardenNo::
 	msgbox FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo
 	return
 
-FuchsiaCity_WardensHouse_EventScript_ExplainStrength:: @ 816D7FA
+FuchsiaCity_WardensHouse_EventScript_ExplainStrength::
 	msgbox FuchsiaCity_WardensHouse_Text_ExplainStrength
 	release
 	end
 
-FuchsiaCity_WardensHouse_EventScript_DisplaySign1:: @ 816D804
+FuchsiaCity_WardensHouse_EventScript_DisplaySign1::
 	msgbox FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay, MSGBOX_SIGN
 	end
 
-FuchsiaCity_WardensHouse_EventScript_DisplaySign2:: @ 816D80D
+FuchsiaCity_WardensHouse_EventScript_DisplaySign2::
 	msgbox FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay, MSGBOX_SIGN
 	end

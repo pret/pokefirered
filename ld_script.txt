@@ -44,7 +44,9 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        src/crt0.o(.text);
+        src/rom_header.o(.text);
+	src/rom_header_gf.o(.text*);
+	src/crt0.o(.text);
         src/main.o(.text);
         src/gpu_regs.o(.text);
         src/dma3_manager.o(.text);
@@ -135,7 +137,6 @@ SECTIONS {
         src/pokemon_storage_system_6.o(.text);
         src/pokemon_storage_system_7.o(.text);
         src/pokemon_storage_system_8.o(.text);
-        src/pokemon_storage_system_9.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);

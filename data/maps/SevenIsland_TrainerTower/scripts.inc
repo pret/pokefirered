@@ -1,15 +1,15 @@
-SevenIsland_TrainerTower_MapScripts:: @ 8168BD5
+SevenIsland_TrainerTower_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TrainerTower_OnTransition
 	.byte 0
 
-SevenIsland_TrainerTower_OnTransition:: @ 8168BDB
+SevenIsland_TrainerTower_OnTransition::
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	end
 
-SevenIsland_TrainerTower_EventScript_TrainerTowerSign:: @ 8168BE1
+SevenIsland_TrainerTower_EventScript_TrainerTowerSign::
 	msgbox SevenIsland_TrainerTower_Text_TrainerTowerSign, MSGBOX_SIGN
 	end
 
-SevenIsland_TrainerTower_EventScript_TrainerTowerAheadSign:: @ 8168BEA
+SevenIsland_TrainerTower_EventScript_TrainerTowerAheadSign::
 	msgbox SevenIsland_TrainerTower_Text_TrainerTowerAhead, MSGBOX_SIGN
 	end

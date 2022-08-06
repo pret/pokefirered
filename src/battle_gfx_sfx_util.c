@@ -663,7 +663,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
     {
         const void *src;
         void *dst;
-        
+
         position = GetBattlerPosition(battlerAtk);
         targetSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_SPECIES);
         personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
@@ -1042,17 +1042,20 @@ void FreeMonSpritesGfx(void)
     FREE_AND_SET_NULL(gMonSpritesGfxPtr);
 }
 
-bool32 ShouldPlayNormalPokeCry(struct Pokemon *mon)
+bool32 ShouldPlayNormalMonCry(struct Pokemon *mon)
 {
     s16 hp, maxHP;
     s32 barLevel;
 
     if (GetMonData(mon, MON_DATA_STATUS) & (STATUS1_ANY | STATUS1_TOXIC_COUNTER))
         return FALSE;
+
     hp = GetMonData(mon, MON_DATA_HP);
     maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+
     barLevel = GetHPBarLevel(hp, maxHP);
     if (barLevel <= HP_BAR_YELLOW)
         return FALSE;
+
     return TRUE;
 }

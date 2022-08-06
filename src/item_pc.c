@@ -361,14 +361,14 @@ static bool8 ItemPc_DoGfxSetup(void)
     case 18:
         if (sListMenuState.initialized == 1)
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         }
         gMain.state++;
         break;
     case 19:
         if (sListMenuState.initialized == 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         }
         else
         {
@@ -392,7 +392,7 @@ static bool8 ItemPc_DoGfxSetup(void)
 
 static void ItemPc_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_ItemPcWaitFadeAndBail, 0);
     SetVBlankCallback(ItemPc_VBlankCB);
     SetMainCallback2(ItemPc_MainCB);
@@ -498,7 +498,7 @@ static void ItemPc_BuildListMenuTemplate(void)
     gMultiuseListMenuTemplate.itemVerticalPadding = 2;
     gMultiuseListMenuTemplate.upText_Y = 2;
     gMultiuseListMenuTemplate.maxShowed = sStateDataPtr->maxShowed;
-    gMultiuseListMenuTemplate.fontId = 2;
+    gMultiuseListMenuTemplate.fontId = FONT_2;
     gMultiuseListMenuTemplate.cursorPal = 2;
     gMultiuseListMenuTemplate.fillValue = 0;
     gMultiuseListMenuTemplate.cursorShadowPal = 3;
@@ -534,7 +534,7 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
         }
         sStateDataPtr->itemMenuIconSlot ^= 1;
         FillWindowPixelBuffer(1, 0);
-        ItemPc_AddTextPrinterParameterized(1, 2, desc, 0, 3, 2, 0, 0, 3);
+        ItemPc_AddTextPrinterParameterized(1, FONT_2, desc, 0, 3, 2, 0, 0, 3);
     }
 }
 
@@ -552,7 +552,7 @@ static void ItemPc_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
         u16 quantity = ItemPc_GetItemQuantityBySlotId(itemId);
         ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-        ItemPc_AddTextPrinterParameterized(windowId, 0, gStringVar4, 110, y, 0, 0, 0xFF, 1);
+        ItemPc_AddTextPrinterParameterized(windowId, FONT_0, gStringVar4, 110, y, 0, 0, 0xFF, 1);
     }
 }
 
@@ -565,19 +565,19 @@ static void ItemPc_PrintOrRemoveCursorAt(u8 y, u8 colorIdx)
 {
     if (colorIdx == 0xFF)
     {
-        u8 maxWidth = GetFontAttribute(2, FONTATTR_MAX_LETTER_WIDTH);
-        u8 maxHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+        u8 maxWidth = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_WIDTH);
+        u8 maxHeight = GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT);
         FillWindowPixelRect(0, 0, 0, y, maxWidth, maxHeight);
     }
     else
     {
-        ItemPc_AddTextPrinterParameterized(0, 2, gText_SelectorArrow2, 0, y, 0, 0, 0, colorIdx);
+        ItemPc_AddTextPrinterParameterized(0, FONT_2, gText_SelectorArrow2, 0, y, 0, 0, 0, colorIdx);
     }
 }
 
 static void ItemPc_PrintWithdrawItem(void)
 {
-    ItemPc_AddTextPrinterParameterized(2, 0, gText_WithdrawItem, 0, 1, 0, 1, 0, 0);
+    ItemPc_AddTextPrinterParameterized(2, FONT_0, gText_WithdrawItem, 0, 1, 0, 1, 0, 0);
 }
 
 static void ItemPc_PlaceTopMenuScrollIndicatorArrows(void)
@@ -632,7 +632,7 @@ static void Task_ItemPcTurnOff1(u8 taskId)
 {
     if (sListMenuState.initialized == 1)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     }
     else
     {
@@ -773,7 +773,7 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
     StringCopy(gStringVar1, ItemId_GetName(ItemPc_GetItemIdBySlotId(data[1])));
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, 0x00);
-    ItemPc_AddTextPrinterParameterized(1, 2, gStringVar4, 0, 3, 2, 3, 0, 0);
+    ItemPc_AddTextPrinterParameterized(1, FONT_2, gStringVar4, 0, 3, 2, 3, 0, 0);
     ItemMenuIcons_MoveInsertIndicatorBar(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     ItemMenuIcons_ToggleInsertIndicatorBarVisibility(FALSE);
     ItemPc_PrintOrRemoveCursor(data[0], 2);
@@ -839,11 +839,11 @@ static void Task_ItemPcSubmenuInit(u8 taskId)
 
     ItemPc_SetBorderStyleOnWindow(4);
     windowId = ItemPc_GetOrCreateSubwindow(0);
-    PrintTextArray(4, 2, 8, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
-    Menu_InitCursor(4, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
+    PrintTextArray(4, FONT_2, 8, 2, GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
+    Menu_InitCursor(4, FONT_2, 0, 2, GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
     CopyItemName(ItemPc_GetItemIdBySlotId(data[1]), gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
-    ItemPc_AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+    ItemPc_AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, 0, 2, 1, 0, 0, 1);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_ItemPcSubmenuRun;
 }
@@ -901,13 +901,13 @@ static void ItemPc_DoWithdraw(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_WithdrewQuantItem);
         windowId = ItemPc_GetOrCreateSubwindow(2);
-        AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 0, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, 0, 2, 0, NULL);
         gTasks[taskId].func = Task_ItemPcWaitButtonAndFinishWithdrawMultiple;
     }
     else
     {
         windowId = ItemPc_GetOrCreateSubwindow(2);
-        AddTextPrinterParameterized(windowId, 2, gText_NoMoreRoomInBag, 0, 2, 0, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, gText_NoMoreRoomInBag, 0, 2, 0, NULL);
         gTasks[taskId].func = Task_ItemPcWaitButtonWithdrawMultipleFailed;
     }
 }
@@ -957,11 +957,11 @@ static void ItemPc_WithdrawMultipleInitWindow(u16 slotId)
 
     CopyItemName(itemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_WithdrawHowMany);
-    AddTextPrinterParameterized(ItemPc_GetOrCreateSubwindow(1), 2, gStringVar4, 0, 2, 0, NULL);
+    AddTextPrinterParameterized(ItemPc_GetOrCreateSubwindow(1), FONT_2, gStringVar4, 0, 2, 0, NULL);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     ItemPc_SetBorderStyleOnWindow(3);
-    ItemPc_AddTextPrinterParameterized(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
+    ItemPc_AddTextPrinterParameterized(3, FONT_0, gStringVar4, 8, 10, 1, 0, 0, 1);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -970,7 +970,7 @@ static void UpdateWithdrawQuantityDisplay(s16 quantity)
     FillWindowPixelRect(3, PIXEL_FILL(1), 10, 10, 28, 12);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-    ItemPc_AddTextPrinterParameterized(3, 0, gStringVar4, 8, 10, 1, 0, 0, 1);
+    ItemPc_AddTextPrinterParameterized(3, FONT_0, gStringVar4, 8, 10, 1, 0, 0, 1);
 }
 
 static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
@@ -1040,7 +1040,7 @@ static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearDialogWindowAndFrameToTransparent(5, 0);
+        ClearDialogWindowAndFrameToTransparent(5, FALSE);
         ClearWindowTilemap(5);
         PutWindowTilemap(1);
         ItemPc_PrintOrRemoveCursor(data[0], 1);
@@ -1090,7 +1090,7 @@ static void unused_ItemPc_AddTextPrinterParameterized(u8 windowId, const u8 * st
 
     template.currentChar = string;
     template.windowId = windowId;
-    template.fontId = 3;
+    template.fontId = FONT_3;
     template.x = x;
     template.y = y;
     template.currentX = x;
@@ -1098,9 +1098,9 @@ static void unused_ItemPc_AddTextPrinterParameterized(u8 windowId, const u8 * st
     template.fgColor = 2;
     template.bgColor = 0;
     template.shadowColor = 3;
-    template.unk = GetFontAttribute(3, FONTATTR_UNKNOWN);
-    template.letterSpacing = letterSpacing + GetFontAttribute(3, FONTATTR_LETTER_SPACING);
-    template.lineSpacing = lineSpacing + GetFontAttribute(3, FONTATTR_LINE_SPACING);
+    template.unk = GetFontAttribute(FONT_3, FONTATTR_UNKNOWN);
+    template.letterSpacing = letterSpacing + GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING);
+    template.lineSpacing = lineSpacing + GetFontAttribute(FONT_3, FONTATTR_LINE_SPACING);
     AddTextPrinter(&template, speed, NULL);
 }
 
@@ -1140,6 +1140,6 @@ static u8 ItemPc_GetSubwindow(u8 idx)
 
 static void ItemPc_PrintOnWindow5WithContinueTask(u8 taskId, const u8 * str, TaskFunc taskFunc)
 {
-    DisplayMessageAndContinueTask(taskId, 5, 0x3AC, 0x0B, 2, GetTextSpeedSetting(), str, taskFunc);
+    DisplayMessageAndContinueTask(taskId, 5, 0x3AC, 0x0B, FONT_2, GetTextSpeedSetting(), str, taskFunc);
     ScheduleBgCopyTilemapToVram(0);
 }

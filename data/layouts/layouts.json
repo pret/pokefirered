@@ -2984,16 +2984,16 @@
       "blockdata_filepath": "data/layouts/SevenIsland_House_Room2/map.bin"
     },
     {
-      "id": "LAYOUT_VIRIDIAN_CITY_HOUSE2",
-      "name": "ViridianCity_House2_Layout",
+      "id": "LAYOUT_VIRIDIAN_CITY_SCHOOL",
+      "name": "ViridianCity_School_Layout",
       "width": 10,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_School",
-      "border_filepath": "data/layouts/ViridianCity_House2/border.bin",
-      "blockdata_filepath": "data/layouts/ViridianCity_House2/map.bin"
+      "border_filepath": "data/layouts/ViridianCity_School/border.bin",
+      "blockdata_filepath": "data/layouts/ViridianCity_School/map.bin"
     },
     {
       "id": "LAYOUT_CELADON_CITY_RESTAURANT_DUPLICATE",
@@ -3104,16 +3104,16 @@
       "blockdata_filepath": "data/layouts/Route5_PokemonDayCare/map.bin"
     },
     {
-      "id": "LAYOUT_VIRIDIAN_CITY_HOUSE1",
-      "name": "ViridianCity_House1_Layout",
+      "id": "LAYOUT_VIRIDIAN_CITY_HOUSE",
+      "name": "ViridianCity_House_Layout",
       "width": 11,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding2",
-      "border_filepath": "data/layouts/ViridianCity_House1/border.bin",
-      "blockdata_filepath": "data/layouts/ViridianCity_House1/map.bin"
+      "border_filepath": "data/layouts/ViridianCity_House/border.bin",
+      "blockdata_filepath": "data/layouts/ViridianCity_House/map.bin"
     },
     {
       "id": "LAYOUT_FOUR_ISLAND_POKEMON_DAY_CARE",

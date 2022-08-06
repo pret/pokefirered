@@ -90,7 +90,7 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
     switch (sClearSaveDataState->unk1)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         break;
     case 1:
         if (gPaletteFade.active)
@@ -106,11 +106,11 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         break;
     case 4:
         DrawStdFrameWithCustomTileAndPalette(1, TRUE, 0x001, 0xF);
-        AddTextPrinterParameterized4(1, 2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B69E);
+        AddTextPrinterParameterized4(1, FONT_2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B69E);
         CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 5:
-        CreateYesNoMenu(&sWindowTemplates[0], 2, 0, 2, 0x001, 0xF, 1);
+        CreateYesNoMenu(&sWindowTemplates[0], FONT_2, 0, 2, 0x001, 0xF, 1);
         CopyBgTilemapBufferToVram(0);
         break;
     default:
@@ -138,8 +138,8 @@ static void Task_HandleYesNoMenu(u8 taskId)
         case 0:
             PlaySE(SE_SELECT);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
-            AddTextPrinterParameterized4(1, 2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B6B9);
-            CopyWindowToVram(1, COPYWIN_BOTH);
+            AddTextPrinterParameterized4(1, FONT_2, 0, 3, 1, 1, sTextColor, 0, gUnknown_841B6B9);
+            CopyWindowToVram(1, COPYWIN_FULL);
             ClearSaveData();
             break;
         case MENU_NOTHING_CHOSEN:

@@ -1,2 +1,2 @@
-FiveIsland_LostCave_Room6_MapScripts:: @ 8164C29
+FiveIsland_LostCave_Room6_MapScripts::
 	.byte 0

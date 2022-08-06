@@ -1,25 +1,25 @@
 .equ REQUIRED_CAUGHT_MONS, 30
 
-Route11_EastEntrance_2F_MapScripts:: @ 816FD34
+Route11_EastEntrance_2F_MapScripts::
 	.byte 0
 
-Route11_EastEntrance_2F_EventScript_LeftBinoculars:: @ 816FD35
+Route11_EastEntrance_2F_EventScript_LeftBinoculars::
 	lockall
 	goto_if_set FLAG_WOKE_UP_ROUTE_12_SNORLAX, Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone
 	msgbox Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad
 	releaseall
 	end
 
-Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone:: @ 816FD49
+Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone::
 	msgbox Route11_EastEntrance_2F_Text_WhatABreathtakingView
 	releaseall
 	end
 
-Route11_EastEntrance_2F_EventScript_RightBinoculars:: @ 816FD53
+Route11_EastEntrance_2F_EventScript_RightBinoculars::
 	msgbox Route11_EastEntrance_2F_Text_RockTunnelGoodRouteToLavender, MSGBOX_SIGN
 	end
 
-Route11_EastEntrance_2F_EventScript_Turner:: @ 816FD5C
+Route11_EastEntrance_2F_EventScript_Turner::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_NIDORINOA
@@ -40,23 +40,23 @@ Route11_EastEntrance_2F_EventScript_Turner:: @ 816FD5C
 	release
 	end
 
-Route11_EastEntrance_2F_EventScript_DeclineTrade:: @ 816FDB6
+Route11_EastEntrance_2F_EventScript_DeclineTrade::
 	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
-Route11_EastEntrance_2F_EventScript_NotRequestedMon:: @ 816FDC0
+Route11_EastEntrance_2F_EventScript_NotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
-Route11_EastEntrance_2F_EventScript_AlreadyTraded:: @ 816FDCE
+Route11_EastEntrance_2F_EventScript_AlreadyTraded::
 	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end
 
-Route11_EastEntrance_2F_EventScript_Aide:: @ 816FDD8
+Route11_EastEntrance_2F_EventScript_Aide::
 	lock
 	faceplayer
 	call Route11_EastEntrance_2F_EventScript_GetAideRequestInfo
@@ -80,12 +80,12 @@ Route11_EastEntrance_2F_EventScript_Aide:: @ 816FDD8
 	release
 	end
 
-Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder:: @ 816FE5A
+Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder::
 	msgbox Route11_EastEntrance_2F_Text_ExplainItemfinder
 	release
 	end
 
-Route11_EastEntrance_2F_EventScript_GetAideRequestInfo:: @ 816FE64
+Route11_EastEntrance_2F_EventScript_GetAideRequestInfo::
 	getnumberstring 0, REQUIRED_CAUGHT_MONS
 	getitemname 1, ITEM_ITEMFINDER
 	return

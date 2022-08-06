@@ -2,7 +2,7 @@
 #include "decompress.h"
 #include "util.h"
 
-static void SmokescreenImpact_Callback(struct Sprite * sprite);
+static void SmokescreenImpact_Callback(struct Sprite *sprite);
 
 extern const struct CompressedSpriteSheet gSmokescreenImpactSpriteSheet;
 extern const struct CompressedSpritePalette gSmokescreenImpactSpritePalette;

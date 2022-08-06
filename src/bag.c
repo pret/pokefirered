@@ -225,16 +225,16 @@ void BagPrintTextOnWindow(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8
 
 void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused)
 {
-    u32 x = 0x48 - GetStringWidth(1, str, 0);
-    AddTextPrinterParameterized3(2, 1, x / 2, 1, sTextColors[0], 0, str);
+    u32 x = 0x48 - GetStringWidth(FONT_1, str, 0);
+    AddTextPrinterParameterized3(2, FONT_1, x / 2, 1, sTextColors[0], 0, str);
 }
 
 void BagDrawDepositItemTextBox(void)
 {
     u32 x;
     DrawStdFrameWithCustomTileAndPalette(2, FALSE, 0x081, 0x0C);
-    x = 0x40 - GetStringWidth(0, gText_DepositItem, 0);
-    AddTextPrinterParameterized(2, 0, gText_DepositItem, x / 2, 1, 0, NULL);
+    x = 0x40 - GetStringWidth(FONT_0, gText_DepositItem, 0);
+    AddTextPrinterParameterized(2, FONT_0, gText_DepositItem, x / 2, 1, 0, NULL);
 }
 
 u8 ShowBagWindow(u8 whichWindow, u8 nItems)
@@ -293,12 +293,12 @@ u8 GetBagWindow(u8 whichWindow)
 
 void BagCreateYesNoMenuBottomRight(u8 taskId, const struct YesNoFuncTable * ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[3], 2, 0, 2, 0x064, 0x0E, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[3], FONT_2, 0, 2, 0x064, 0x0E, ptrs);
 }
 
 void BagCreateYesNoMenuTopRight(u8 taskId, const struct YesNoFuncTable * ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[4], 2, 0, 2, 0x064, 0x0E, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[4], FONT_2, 0, 2, 0x064, 0x0E, ptrs);
 }
 
 void BagPrintMoneyAmount(void)

@@ -1,21 +1,21 @@
-OneIsland_Harbor_MapScripts:: @ 8171378
+OneIsland_Harbor_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, OneIsland_Harbor_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_Harbor_OnFrame
 	.byte 0
 
-OneIsland_Harbor_OnWarp:: @ 8171383
+OneIsland_Harbor_OnWarp::
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1, OneIsland_Harbor_EventScript_TurnPlayerNorth
 	.2byte 0
 
-OneIsland_Harbor_EventScript_TurnPlayerNorth:: @ 817138D
+OneIsland_Harbor_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-OneIsland_Harbor_OnFrame:: @ 8171392
+OneIsland_Harbor_OnFrame::
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1, OneIsland_Harbor_EventScript_PlayerEnterHarborFirstTime
 	.2byte 0
 
-OneIsland_Harbor_EventScript_PlayerEnterHarborFirstTime:: @ 817139C
+OneIsland_Harbor_EventScript_PlayerEnterHarborFirstTime::
 	lockall
 	textcolor 0
 	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Harbor_Movement_PlayerExitHarbor
@@ -26,13 +26,13 @@ OneIsland_Harbor_EventScript_PlayerEnterHarborFirstTime:: @ 817139C
 	releaseall
 	end
 
-OneIsland_Harbor_Movement_PlayerExitHarbor:: @ 81713B9
+OneIsland_Harbor_Movement_PlayerExitHarbor::
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-OneIsland_Harbor_EventScript_Sailor:: @ 81713BD
+OneIsland_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	message Text_WhereDoYouWantToSail

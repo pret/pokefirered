@@ -43,9 +43,9 @@ struct MapPreviewScreen
     u8 mapsec;
     u8 type;
     u16 flagId;
-    const void * tilesptr;
-    const void * tilemapptr;
-    const void * palptr;
+    const void *tilesptr;
+    const void *tilemapptr;
+    const void *palptr;
 };
 
 u16 MapPreview_CreateMapNameWindow(u8 id);

@@ -1,25 +1,25 @@
 .set LOCALID_RIVAL, 1
 
-PokemonTower_2F_MapScripts:: @ 8163285
+PokemonTower_2F_MapScripts::
 	.byte 0
 
-PokemonTower_2F_EventScript_Channeler:: @ 8163286
+PokemonTower_2F_EventScript_Channeler::
 	msgbox PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts, MSGBOX_NPC
 	end
 
-PokemonTower_2F_EventScript_RivalTriggerRight:: @ 816328F
+PokemonTower_2F_EventScript_RivalTriggerRight::
 	lockall
 	setvar VAR_TEMP_1, 0
 	goto PokemonTower_2F_EventScript_Rival
 	end
 
-PokemonTower_2F_EventScript_RivalTriggerDown:: @ 816329B
+PokemonTower_2F_EventScript_RivalTriggerDown::
 	lockall
 	setvar VAR_TEMP_1, 1
 	goto PokemonTower_2F_EventScript_Rival
 	end
 
-PokemonTower_2F_EventScript_Rival:: @ 81632A7
+PokemonTower_2F_EventScript_Rival::
 	textcolor 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	compare VAR_TEMP_1, 0
@@ -53,41 +53,41 @@ PokemonTower_2F_EventScript_Rival:: @ 81632A7
 	releaseall
 	end
 
-PokemonTower_2F_EventScript_RivalFacePlayerRight:: @ 8163339
+PokemonTower_2F_EventScript_RivalFacePlayerRight::
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestRight
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-PokemonTower_2F_EventScript_RivalFacePlayerDown:: @ 816334B
+PokemonTower_2F_EventScript_RivalFacePlayerDown::
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-PokemonTower_2F_EventScript_RivalSquirtle:: @ 816335D
+PokemonTower_2F_EventScript_RivalSquirtle::
 	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_SQUIRTLE, PokemonTower_2F_Text_RivalDefeat
 	return
 
-PokemonTower_2F_EventScript_RivalBulbasaur:: @ 8163368
+PokemonTower_2F_EventScript_RivalBulbasaur::
 	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_BULBASAUR, PokemonTower_2F_Text_RivalDefeat
 	return
 
-PokemonTower_2F_EventScript_RivalCharmander:: @ 8163373
+PokemonTower_2F_EventScript_RivalCharmander::
 	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_CHARMANDER, PokemonTower_2F_Text_RivalDefeat
 	return
 
-PokemonTower_2F_EventScript_RivalExitRight:: @ 816337E
+PokemonTower_2F_EventScript_RivalExitRight::
 	applymovement LOCALID_RIVAL, PokemonTower_2F_Movement_RivalExitRight
 	waitmovement 0
 	return
 
-PokemonTower_2F_EventScript_RivalExitDown:: @ 8163389
+PokemonTower_2F_EventScript_RivalExitDown::
 	applymovement LOCALID_RIVAL, PokemonTower_2F_Movement_RivalExitDown
 	waitmovement 0
 	return
 
-PokemonTower_2F_Movement_RivalExitRight:: @ 8163394
+PokemonTower_2F_Movement_RivalExitRight::
 	walk_down
 	walk_right
 	walk_right
@@ -98,7 +98,7 @@ PokemonTower_2F_Movement_RivalExitRight:: @ 8163394
 	walk_in_place_fastest_right
 	step_end
 
-PokemonTower_2F_Movement_RivalExitDown:: @ 816339D
+PokemonTower_2F_Movement_RivalExitDown::
 	walk_right
 	walk_right
 	walk_down

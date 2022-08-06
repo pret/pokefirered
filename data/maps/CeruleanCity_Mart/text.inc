@@ -1,4 +1,4 @@
-CeruleanCity_Mart_Text_RepelWorksOnWeakMons:: @ 81929C2
+CeruleanCity_Mart_Text_RepelWorksOnWeakMons::
     .string "REPEL not only keeps bugs away,\n"
     .string "it also works on weak POKéMON.\p"
     .string "Put your strongest POKéMON at the\n"
@@ -6,7 +6,7 @@ CeruleanCity_Mart_Text_RepelWorksOnWeakMons:: @ 81929C2
     .string "If your first POKéMON is strong,\n"
     .string "REPEL's effect is boosted.$"
 
-CeruleanCity_Mart_Text_DoYouKnowAboutRareCandy:: @ 8192A79
+CeruleanCity_Mart_Text_DoYouKnowAboutRareCandy::
     .string "Do you know about RARE CANDY?\n"
     .string "They don't sell it in shops.\p"
     .string "I think it makes POKéMON grow\n"

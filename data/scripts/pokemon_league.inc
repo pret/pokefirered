@@ -1,4 +1,4 @@
-PokemonLeague_EventScript_OpenDoor:: @ 81A7506
+PokemonLeague_EventScript_OpenDoor::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
 	waitmovement 0
 	playse SE_RS_DOOR
@@ -7,7 +7,7 @@ PokemonLeague_EventScript_OpenDoor:: @ 81A7506
 	setflag FLAG_TEMP_4
 	return
 
-PokemonLeague_EventScript_EnterRoom:: @ 81A751F
+PokemonLeague_EventScript_EnterRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkUp5
 	waitmovement 0
 	setflag FLAG_TEMP_2
@@ -16,12 +16,12 @@ PokemonLeague_EventScript_EnterRoom:: @ 81A751F
 	special DrawWholeMapView
 	return
 
-PokemonLeague_EventScript_SetDoorOpen:: @ 81A7538
+PokemonLeague_EventScript_SetDoorOpen::
 	setmetatile 6, 1, METATILE_PokemonLeague_Door_Top_Open, 1
 	setmetatile 6, 2, METATILE_PokemonLeague_Door_Mid_Open, 0
 	return
 
-PokemonLeague_EventScript_PreventExit:: @ 81A754B
+PokemonLeague_EventScript_PreventExit::
 	lockall
 	textcolor 0
 	msgbox Text_VoiceRangOutDontRunAway
@@ -31,7 +31,7 @@ PokemonLeague_EventScript_PreventExit:: @ 81A754B
 	releaseall
 	end
 
-PokemonLeague_EventScript_OpenDoorLance:: @ 81A7563
+PokemonLeague_EventScript_OpenDoorLance::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
 	waitmovement 0
 	playse SE_RS_DOOR
@@ -41,12 +41,12 @@ PokemonLeague_EventScript_OpenDoorLance:: @ 81A7563
 	setflag FLAG_TEMP_4
 	return
 
-PokemonLeague_EventScript_SetDoorOpenLance:: @ 81A7589
+PokemonLeague_EventScript_SetDoorOpenLance::
 	setmetatile 6, 4, METATILE_PokemonLeague_Door_Top_Open, 1
 	setmetatile 6, 5, METATILE_PokemonLeague_Door_Mid_Open, 0
 	return
 
-PokemonLeague_EventScript_CloseEntry:: @ 81A759C
+PokemonLeague_EventScript_CloseEntry::
 	setmetatile 5, 11, METATILE_PokemonLeague_Entry_TopLeft_Closed, 1
 	setmetatile 6, 11, METATILE_PokemonLeague_Entry_TopMid_Closed, 1
 	setmetatile 7, 11, METATILE_PokemonLeague_Entry_TopRight_Closed, 1
@@ -55,10 +55,10 @@ PokemonLeague_EventScript_CloseEntry:: @ 81A759C
 	setmetatile 7, 12, METATILE_PokemonLeague_Entry_BottomRight_Closed, 1
 	return
 
-PokemonLeague_Movement_ForcePlayerIn:: @ 81A75D3
+PokemonLeague_Movement_ForcePlayerIn::
 	walk_up
 	step_end
 
-PokemonLeague_EventScript_DoLightingEffect:: @ 81A75D5
+PokemonLeague_EventScript_DoLightingEffect::
 	special DoPokemonLeagueLightingEffect
 	return

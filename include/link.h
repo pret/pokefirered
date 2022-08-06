@@ -190,7 +190,7 @@ struct Link
 
 struct BlockRequest
 {
-    void * address;
+    void *address;
     u32 size;
 };
 

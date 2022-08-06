@@ -1,2 +1,2 @@
-MtMoon_B1F_MapScripts:: @ 8160698
+MtMoon_B1F_MapScripts::
 	.byte 0

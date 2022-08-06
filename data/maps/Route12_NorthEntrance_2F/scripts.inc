@@ -1,15 +1,15 @@
-Route12_NorthEntrance_2F_MapScripts:: @ 816FE77
+Route12_NorthEntrance_2F_MapScripts::
 	.byte 0
 
-Route12_NorthEntrance_2F_EventScript_LeftBinoculars:: @ 816FE78
+Route12_NorthEntrance_2F_EventScript_LeftBinoculars::
 	msgbox Route12_NorthEntrance_2F_Text_TheresManFishing, MSGBOX_SIGN
 	end
 
-Route12_NorthEntrance_2F_EventScript_RightBinoculars:: @ 816FE81
+Route12_NorthEntrance_2F_EventScript_RightBinoculars::
 	msgbox Route12_NorthEntrance_2F_Text_ItsPokemonTower, MSGBOX_SIGN
 	end
 
-Route12_NorthEntrance_2F_EventScript_Lass:: @ 816FE8A
+Route12_NorthEntrance_2F_EventScript_Lass::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_TM27, Route12_NorthEntrance_2F_EventScript_ExplainTM27
@@ -27,20 +27,20 @@ Route12_NorthEntrance_2F_EventScript_Lass:: @ 816FE8A
 	release
 	end
 
-Route12_NorthEntrance_2F_EventScript_TakeTMMale:: @ 816FEE5
+Route12_NorthEntrance_2F_EventScript_TakeTMMale::
 	msgbox Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreMale
 	return
 
-Route12_NorthEntrance_2F_EventScript_TakeTMFemale:: @ 816FEEE
+Route12_NorthEntrance_2F_EventScript_TakeTMFemale::
 	msgbox Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreFemale
 	return
 
-Route12_NorthEntrance_2F_EventScript_NoRoomForTM27:: @ 816FEF7
+Route12_NorthEntrance_2F_EventScript_NoRoomForTM27::
 	msgbox Route12_NorthEntrance_2F_Text_DontHaveRoomForThis
 	release
 	end
 
-Route12_NorthEntrance_2F_EventScript_ExplainTM27:: @ 816FF01
+Route12_NorthEntrance_2F_EventScript_ExplainTM27::
 	msgbox Route12_NorthEntrance_2F_Text_ExplainTM27
 	release
 	end

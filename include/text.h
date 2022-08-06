@@ -85,13 +85,16 @@
 
 #define CHAR_DYNAMIC_PLACEHOLDER 0xF7
 #define CHAR_KEYPAD_ICON         0xF8
-#define CHAR_EXTRA_EMOJI         0xF9
+#define CHAR_EXTRA_SYMBOL        0xF9
 #define CHAR_PROMPT_SCROLL       0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR        0xFB // waits for button press and clears dialog
 #define EXT_CTRL_CODE_BEGIN      0xFC // extended control code
 #define PLACEHOLDER_BEGIN        0xFD // string placeholder
 #define CHAR_NEWLINE             0xFE
 #define EOS                      0xFF // end of string
+
+// CHAR_EXTRA_SYMBOL chars
+#define CHAR_LV_2          0x05
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -154,7 +157,20 @@
 #define NUM_TEXT_PRINTERS 32
 
 #define TEXT_SPEED_INSTANT 0
-#define TEXT_SPEED_FF 0xFF
+
+// Given as a text speed when all the text should be
+// loaded at once but not copied to vram yet.
+#define TEXT_SKIP_DRAW 0xFF
+
+enum {
+    FONT_0,
+    FONT_1,
+    FONT_2,
+    FONT_3,
+    FONT_4,
+    FONT_5,
+    FONT_6,
+};
 
 enum
 {
@@ -190,7 +206,7 @@ struct TextPrinterSubStruct
 
 struct TextPrinterTemplate // TODO: Better name
 {
-    const u8* currentChar;
+    const u8 *currentChar;
     u8 windowId;
     u8 fontId;
     u8 x;
@@ -299,7 +315,6 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
 u16 RenderText(struct TextPrinter *textPrinter);
-s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing);
 s32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a6, int a7);

@@ -1,24 +1,24 @@
-FuchsiaCity_WardensHouse_Text_HifFuffHefifoo:: @ 8198DF9
+FuchsiaCity_WardensHouse_Text_HifFuffHefifoo::
     .string "WARDEN: Hif fuff hefifoo!\p"
     .string "Ha lof ha feef ee hafahi ho.\n"
     .string "Heff hee fwee!$"
 
-FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo:: @ 8198E3F
+FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo::
     .string "Ah howhee ho hoo!\n"
     .string "Eef ee hafahi ho!$"
 
-FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo:: @ 8198E63
+FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo::
     .string "Ha?\n"
     .string "He ohay heh ha hoo ee haheh!$"
 
-FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden:: @ 8198E84
+FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
     .string "{PLAYER} gave the GOLD TEETH\n"
     .string "to the WARDEN.$"
 
-FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth:: @ 8198EAA
+FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
     .string "The WARDEN popped in his teeth!$"
 
-FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething:: @ 8198ECA
+FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
     .string "WARDEN: Thanks, son!\n"
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
@@ -28,7 +28,7 @@ FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething:: @ 8198ECA
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
-FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething:: @ 8198F96
+FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
     .string "WARDEN: Thank you, lassie!\n"
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
@@ -38,11 +38,11 @@ FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething:: @ 8198F96
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
-FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden:: @ 8199068
+FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
     .string "{PLAYER} received HM04\n"
     .string "from the WARDEN.$"
 
-FuchsiaCity_WardensHouse_Text_ExplainStrength:: @ 819908A
+FuchsiaCity_WardensHouse_Text_ExplainStrength::
     .string "WARDEN: Inside HM04 you'll find\n"
     .string "STRENGTH.\p"
     .string "It lets POKéMON move boulders when\n"
@@ -51,15 +51,15 @@ FuchsiaCity_WardensHouse_Text_ExplainStrength:: @ 819908A
     .string "HOUSE in the SAFARI ZONE?$"
 
 @ Unused
-FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff:: @ 819912B
+FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff::
     .string "なんや　にもつ\n"
     .string "いっぱいやんけ！$"
 
-FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay:: @ 819913C
+FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay::
     .string "POKéMON photos and fossils are on\n"
     .string "display.$"
 
-FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay:: @ 8199167
+FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay::
     .string "Old POKéMON merchandise is on\n"
     .string "display.$"
 

@@ -40,7 +40,7 @@ bool32 RunSaveFailedScreen(void)
     case 0:
         if (!sIsInSaveFailedScreen)
             return FALSE;
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
         SaveCallbacks();
         sSaveFailedScreenState = 1;
         break;
@@ -74,12 +74,12 @@ bool32 RunSaveFailedScreen(void)
     case 5:
         if (TryWipeDamagedSectors() == TRUE)
         {
-            gSaveSucceeded = SAVE_STATUS_OK;
+            gSaveAttemptStatus = SAVE_STATUS_OK;
             PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_SaveCompleted);
         }
         else
         {
-            gSaveSucceeded = SAVE_STATUS_ERROR;
+            gSaveAttemptStatus = SAVE_STATUS_ERROR;
             PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_BackupMemoryDamaged);
         }
         sSaveFailedScreenState = 6;
@@ -95,7 +95,7 @@ bool32 RunSaveFailedScreen(void)
         sSaveFailedScreenState = 8;
         break;
     case 8:
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         RestoreMapTextColors();
         RestoreGPURegs();
         RestoreCallbacks();

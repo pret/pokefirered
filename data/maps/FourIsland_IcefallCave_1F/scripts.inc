@@ -1,22 +1,22 @@
-FourIsland_IcefallCave_1F_MapScripts:: @ 8163D44
+FourIsland_IcefallCave_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, FourIsland_IcefallCave_1F_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, FourIsland_IcefallCave_1F_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_IcefallCave_1F_OnFrame
 	.byte 0
 
-FourIsland_IcefallCave_1F_OnResume:: @ 8163D54
+FourIsland_IcefallCave_1F_OnResume::
 	setstepcallback STEP_CB_ICE
 	end
 
-FourIsland_IcefallCave_1F_OnLoad:: @ 8163D57
+FourIsland_IcefallCave_1F_OnLoad::
 	special SetIcefallCaveCrackedIceMetatiles
 	end
 
-FourIsland_IcefallCave_1F_OnFrame:: @ 8163D5B
+FourIsland_IcefallCave_1F_OnFrame::
 	map_script_2 VAR_TEMP_1, 1, FourIsland_IcefallCave_1F_EventScript_FallDownHole
 	.2byte 0
 
-FourIsland_IcefallCave_1F_EventScript_FallDownHole:: @ 8163D65
+FourIsland_IcefallCave_1F_EventScript_FallDownHole::
 	lockall
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_IcefallCave_1F_Movement_SetInvisible
@@ -28,6 +28,6 @@ FourIsland_IcefallCave_1F_EventScript_FallDownHole:: @ 8163D65
 	releaseall
 	end
 
-FourIsland_IcefallCave_1F_Movement_SetInvisible:: @ 8163D7F
+FourIsland_IcefallCave_1F_Movement_SetInvisible::
 	set_invisible
 	step_end

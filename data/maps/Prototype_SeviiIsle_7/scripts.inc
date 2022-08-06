@@ -1,2 +1,2 @@
-Prototype_SeviiIsle_7_MapScripts:: @ 81687E1
+Prototype_SeviiIsle_7_MapScripts::
 	.byte 0

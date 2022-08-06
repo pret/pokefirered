@@ -25,8 +25,8 @@ struct PokemonSpecialAnimScene
     u16 monSpriteY1;
     u16 monSpriteY2;
     u8 lastCloseness;
-    struct Sprite * monSprite;
-    struct Sprite * itemIconSprite;
+    struct Sprite *monSprite;
+    struct Sprite *itemIconSprite;
     u8 textBuf[0x900];
     u8 field_0914[BG_SCREEN_SIZE];
     u8 field_1114[BG_SCREEN_SIZE];

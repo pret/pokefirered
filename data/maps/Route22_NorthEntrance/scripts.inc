@@ -1,7 +1,7 @@
-Route22_NorthEntrance_MapScripts:: @ 81704FB
+Route22_NorthEntrance_MapScripts::
 	.byte 0
 
-Route22_NorthEntrance_EventScript_BoulderBadgeGuard:: @ 81704FC
+Route22_NorthEntrance_EventScript_BoulderBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 1
@@ -9,7 +9,7 @@ Route22_NorthEntrance_EventScript_BoulderBadgeGuard:: @ 81704FC
 	goto Route22_NorthEntrance_EventScript_BadgeGuard
 	end
 
-Route22_NorthEntrance_EventScript_BoulderBadgeGuardTrigger:: @ 817050D
+Route22_NorthEntrance_EventScript_BoulderBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 1
 	setvar VAR_0x8009, 1

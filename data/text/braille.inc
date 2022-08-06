@@ -1,116 +1,116 @@
-Braille_Text_Up:: @ 81A9288
+Braille_Text_Up::
 	.braille "UP$"
 
-Braille_Text_Down:: @ 81A928B
+Braille_Text_Down::
 	.braille "DOWN$"
 
-Braille_Text_Right:: @ 81A9290
+Braille_Text_Right::
 	.braille "RIGHT$"
 
-Braille_Text_Left:: @ 81A9296
+Braille_Text_Left::
 	.braille "LEFT$"
 
-Braille_Text_Cut:: @ 81A929B
+Braille_Text_Cut::
 	.braille "CUT$"
 
-Braille_Text_ABC:: @ 81A929F
+Braille_Text_ABC::
 	.braille "ABC$"
 
-Braille_Text_GHI:: @ 81A92A3
+Braille_Text_GHI::
 	.braille "GHI$"
 
-Braille_Text_MNO:: @ 81A92A7
+Braille_Text_MNO::
 	.braille "MNO$"
 
-Braille_Text_TUV:: @ 81A92AB
+Braille_Text_TUV::
 	.braille "TUV$"
 
-Braille_Text_DEF:: @ 81A92AF
+Braille_Text_DEF::
 	.braille "DEF$"
 
-Braille_Text_JKL:: @ 81A92B3
+Braille_Text_JKL::
 	.braille "JKL$"
 
-Braille_Text_PQRS:: @ 81A92B7
+Braille_Text_PQRS::
 	.braille "PQRS$"
 
-Braille_Text_WXYZ:: @ 81A92BC
+Braille_Text_WXYZ::
 	.braille "WXYZ$"
 
-Braille_Text_Period:: @ 81A92C1
+Braille_Text_Period::
 	.braille ".$"
 
-Braille_Text_Comma:: @ 81A92C3
+Braille_Text_Comma::
 	.braille ",$"
 
-Braille_Text_Everything:: @ 81A92C5
+Braille_Text_Everything::
 	.braille "EVERYTHING$"
 
-Braille_Text_HasMeaning1:: @ 81A92D0
+Braille_Text_HasMeaning1::
 	.braille "HAS MEANING$"
 
-Braille_Text_Existence:: @ 81A92DC
+Braille_Text_Existence::
 	.braille "EXISTENCE$"
 
-Braille_Text_HasMeaning2:: @ 81A92E6
+Braille_Text_HasMeaning2::
 	.braille "HAS MEANING$"
 
-Braille_Text_BeingAlive:: @ 81A92F2
+Braille_Text_BeingAlive::
 	.braille "BEING ALIVE$"
 
-Braille_Text_HasMeaning3:: @ 81A92FE
+Braille_Text_HasMeaning3::
 	.braille "HAS MEANING$"
 
-Braille_Text_HaveDreams:: @ 81A930A
+Braille_Text_HaveDreams::
 	.braille "HAVE DREAMS$"
 
-Braille_Text_UsePower:: @ 81A9316
+Braille_Text_UsePower::
 	.braille "USE POWER.$"
 
-Braille_Text_LetTheTwo:: @ 81A9321
+Braille_Text_LetTheTwo::
 	.braille "LET THE TWO$"
 
-Braille_Text_Glittering:: @ 81A932D
+Braille_Text_Glittering::
 	.braille "GLITTERING$"
 
-Braille_Text_Stones:: @ 81A9338
+Braille_Text_Stones::
 	.braille "STONES$"
 
-Braille_Text_OneInRed:: @ 81A933F
+Braille_Text_OneInRed::
 	.braille "ONE IN RED$"
 
-Braille_Text_OneInBlue:: @ 81A934A
+Braille_Text_OneInBlue::
 	.braille "ONE IN BLUE$"
 
-Braille_Text_ConnectThe:: @ 81A9356
+Braille_Text_ConnectThe::
 	.braille "CONNECT THE$"
 
-Braille_Text_Past:: @ 81A9362
+Braille_Text_Past::
 	.braille "PAST.$"
 
-Braille_Text_TwoFriends:: @ 81A9368
+Braille_Text_TwoFriends::
 	.braille "TWO FRIENDS$"
 
-Braille_Text_Sharing:: @ 81A9374
+Braille_Text_Sharing::
 	.braille "SHARING$"
 
-Braille_Text_PowerOpen:: @ 81A937C
+Braille_Text_PowerOpen::
 	.braille "POWER OPEN$"
 
-Braille_Text_AWindowTo:: @ 81A9387
+Braille_Text_AWindowTo::
 	.braille "A WINDOW TO$"
 
-Braille_Text_ANewWorld:: @ 81A9393
+Braille_Text_ANewWorld::
 	.braille "A NEW WORLD$"
 
-Braille_Text_ThatGlows:: @ 81A939F
+Braille_Text_ThatGlows::
 	.braille "THAT GLOWS.$"
 
-Braille_Text_TheNext:: @ 81A93AB
+Braille_Text_TheNext::
 	.braille "THE NEXT$"
 
-Braille_Text_WorldWaits:: @ 81A93B4
+Braille_Text_WorldWaits::
 	.braille "WORLD WAITS$"
 
-Braille_Text_ForYou:: @ 81A93C0
+Braille_Text_ForYou::
 	.braille "FOR YOU.$"

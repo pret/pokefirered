@@ -14,8 +14,8 @@ enum
 void AllocBoxPartyPokemonDropdowns(u8 num);
 void FreeBoxPartyPokemonDropdowns(void);
 void CopyAllBoxPartyPokemonDropdownsToVram(void);
-void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void * src, u16 width, u16 height);
-void SetBoxPartyPokemonDropdownMap1Tiles(u8 idx, const void * src);
+void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void *src, u16 width, u16 height);
+void SetBoxPartyPokemonDropdownMap1Tiles(u8 idx, const void *src);
 void SetBoxPartyPokemonDropdownMap2Pos(u8 idx, u16 x, u16 y);
 void SetBoxPartyPokemonDropdownMap2Rect(u8 idx, u16 x, u16 y, u16 width, u16 height);
 void AdjustBoxPartyPokemonDropdownPos(u8 a0, u8 a1, s8 a2);

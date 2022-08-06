@@ -1,5 +1,5 @@
 @ Separate selection menus for before the Rainbow Pass is obtained
-EventScript_ChooseDestFromOneIsland:: @ 81A8EC5
+EventScript_ChooseDestFromOneIsland::
     compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
     goto_if_ge EventScript_SeviiDestinationsPage1
     compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
@@ -12,7 +12,7 @@ EventScript_ChooseDestFromOneIsland:: @ 81A8EC5
     case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_ChooseDestFromOneIslandVermilionAllowed:: @ 81A8F12
+EventScript_ChooseDestFromOneIslandVermilionAllowed::
     multichoice 19, 5, MULTICHOICE_SEAGALLOP_V23, FALSE
     switch VAR_RESULT
     case 0, EventScript_SailToVermilion2
@@ -22,7 +22,7 @@ EventScript_ChooseDestFromOneIslandVermilionAllowed:: @ 81A8F12
     case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_ChooseDestFromTwoIsland:: @ 81A8F54
+EventScript_ChooseDestFromTwoIsland::
     compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
     goto_if_ge EventScript_SeviiDestinationsPage1
     compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
@@ -35,7 +35,7 @@ EventScript_ChooseDestFromTwoIsland:: @ 81A8F54
     case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_ChooseDestFromTwoIslandVermilionAllowed:: @ 81A8FA1
+EventScript_ChooseDestFromTwoIslandVermilionAllowed::
     multichoice 19, 5, MULTICHOICE_SEAGALLOP_V13, FALSE
     switch VAR_RESULT
     case 0, EventScript_SailToVermilion2
@@ -45,27 +45,27 @@ EventScript_ChooseDestFromTwoIslandVermilionAllowed:: @ 81A8FA1
     case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_SailToVermilion2:: @ 81A8FE3
+EventScript_SailToVermilion2::
     setvar VAR_0x8006, SEAGALLOP_VERMILION_CITY
     goto EventScript_SailToDest
     end
 
-EventScript_SailToOneIsland2:: @ 81A8FEE
+EventScript_SailToOneIsland2::
     setvar VAR_0x8006, SEAGALLOP_ONE_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToTwoIsland2:: @ 81A8FF9
+EventScript_SailToTwoIsland2::
     setvar VAR_0x8006, SEAGALLOP_TWO_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToThreeIsland2:: @ 81A9004
+EventScript_SailToThreeIsland2::
     setvar VAR_0x8006, SEAGALLOP_THREE_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_ChooseDestFromIsland:: @ 81A900F
+EventScript_ChooseDestFromIsland::
     compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
     goto_if_ge EventScript_SeviiDestinationsPage1
     compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
@@ -78,7 +78,7 @@ EventScript_ChooseDestFromIsland:: @ 81A900F
     case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_ChooseDestFromIslandVermilionAllowed:: @ 81A905C
+EventScript_ChooseDestFromIslandVermilionAllowed::
     multichoice 19, 5, MULTICHOICE_SEAGALLOP_V12, FALSE
     switch VAR_RESULT
     case 0, EventScript_SailToVermilion2
@@ -88,7 +88,7 @@ EventScript_ChooseDestFromIslandVermilionAllowed:: @ 81A905C
     case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_SailToDest:: @ 81A909E
+EventScript_SailToDest::
     specialvar VAR_RESULT, GetSeagallopNumber
     getnumberstring 0, VAR_RESULT
     compare VAR_0x8004, SEAGALLOP_VERMILION_CITY
@@ -97,17 +97,17 @@ EventScript_SailToDest:: @ 81A909E
     goto_if_ne EventScript_DepartingNotVermilion
     end
 
-EventScript_DepartingVermilion:: @ 81A90BE
+EventScript_DepartingVermilion::
     msgbox VermilionCity_Text_Seagallop7Departing
     goto EventScript_SetSail
     end
 
-EventScript_DepartingNotVermilion:: @ 81A90CC
+EventScript_DepartingNotVermilion::
     msgbox Text_AllAboardSeagallopNum
     goto EventScript_SetSail
     end
 
-EventScript_SetSail:: @ 81A90DA
+EventScript_SetSail::
     closemessage
     delay 20
     goto_if_questlog EventScript_ReleaseEnd
@@ -117,14 +117,14 @@ EventScript_SetSail:: @ 81A90DA
     waitstate
     end
 
-EventScript_CancelSail:: @ 81A90F6
+EventScript_CancelSail::
     specialvar VAR_RESULT, IsPlayerLeftOfVermilionSailor
     compare VAR_RESULT, TRUE
     goto_if_eq VermilionCity_EventScript_WalkUpPier
     release
     end
 
-VermilionCity_EventScript_WalkUpPier:: @ 81A9108
+VermilionCity_EventScript_WalkUpPier::
     closemessage
     applymovement LOCALID_FERRY_SAILOR, Movement_FaceOriginalDirection
     applymovement OBJ_EVENT_ID_PLAYER, VermilionCity_Movement_WalkUp
@@ -132,11 +132,11 @@ VermilionCity_EventScript_WalkUpPier:: @ 81A9108
     releaseall
     end
 
-VermilionCity_Movement_WalkUp:: @ 81A911C
+VermilionCity_Movement_WalkUp::
     walk_up
     step_end
 
-EventScript_SeviiDestinationsPage1:: @ 81A911E
+EventScript_SeviiDestinationsPage1::
     setvar VAR_0x8005, 0
     special DrawSeagallopDestinationMenu
     waitstate
@@ -151,7 +151,7 @@ EventScript_SeviiDestinationsPage1:: @ 81A911E
     case SCR_MENU_CANCEL,          EventScript_CancelSail
     end
 
-EventScript_SeviiDestinationsPage2:: @ 81A917F
+EventScript_SeviiDestinationsPage2::
     setvar VAR_0x8005, 1
     special DrawSeagallopDestinationMenu
     waitstate
@@ -165,42 +165,42 @@ EventScript_SeviiDestinationsPage2:: @ 81A917F
     case SCR_MENU_CANCEL,        EventScript_CancelSail
     end
 
-EventScript_SailToVermilionCity:: @ 81A91D5
+EventScript_SailToVermilionCity::
     setvar VAR_0x8006, SEAGALLOP_VERMILION_CITY
     goto EventScript_SailToDest
     end
 
-EventScript_SailToOneIsland:: @ 81A91E0
+EventScript_SailToOneIsland::
     setvar VAR_0x8006, SEAGALLOP_ONE_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToTwoIsland:: @ 81A91EB
+EventScript_SailToTwoIsland::
     setvar VAR_0x8006, SEAGALLOP_TWO_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToThreeIsland:: @ 81A91F6
+EventScript_SailToThreeIsland::
     setvar VAR_0x8006, SEAGALLOP_THREE_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToFourIsland:: @ 81A9201
+EventScript_SailToFourIsland::
     setvar VAR_0x8006, SEAGALLOP_FOUR_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToFiveIsland:: @ 81A920C
+EventScript_SailToFiveIsland::
     setvar VAR_0x8006, SEAGALLOP_FIVE_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToSixIsland:: @ 81A9217
+EventScript_SailToSixIsland::
     setvar VAR_0x8006, SEAGALLOP_SIX_ISLAND
     goto EventScript_SailToDest
     end
 
-EventScript_SailToSevenIsland:: @ 81A9222
+EventScript_SailToSevenIsland::
     setvar VAR_0x8006, SEAGALLOP_SEVEN_ISLAND
     goto EventScript_SailToDest
     end

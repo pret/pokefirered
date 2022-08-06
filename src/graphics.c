@@ -1033,7 +1033,7 @@ const u32 gBattleAnimBgTilemap_Ghost[] = INCBIN_U32("graphics/battle_anims/backg
 
 const u32 gBattleAnimSpritePal_WhipHit[] = INCBIN_U32("graphics/battle_anims/sprites/whip_hit.gbapal.lz");
 
-const u32 gBattleAnimBgPalette_Solarbeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/solarbeam.gbapal.lz");
+const u32 gBattleAnimBgPalette_SolarBeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/solarbeam.gbapal.lz");
 
 const u32 gFile_graphics_unknown_unknown_E7CFB0_tilemap[] = INCBIN_U32("graphics/unknown/unknown_E7CFB0.bin.lz");
 
@@ -1255,8 +1255,8 @@ const u32 gPSSMenu_Gfx[] = INCBIN_U32("graphics/interface/box_tiles.4bpp.lz");
 
 const u32 gUnknown_8E9CAEC[] = INCBIN_U32("graphics/unknown/unknown_E9CAEC.bin.lz");
 
-const u16 gUnknown_8E9CB9C[] = INCBIN_U16("graphics/misc/markings2.gbapal");
-const u16 gUnknown_8E9CBBC[] = INCBIN_U16("graphics/misc/markings2.4bpp");
+const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/misc/markings2.gbapal");
+const u16 gMonMarkingsMenu_Gfx[] = INCBIN_U16("graphics/misc/markings2.4bpp");
 
 const u16 gTradeMenu_Pal[] = INCBIN_U16("graphics/trade/menu.gbapal");
 const u16 gTradeButtons_Pal[] = INCBIN_U16("graphics/trade/unknown_DDB444.gbapal");

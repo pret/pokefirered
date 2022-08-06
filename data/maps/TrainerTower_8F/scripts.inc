@@ -1,4 +1,4 @@
-TrainerTower_8F_MapScripts:: @ 81647FA
+TrainerTower_8F_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, TrainerTower_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, TrainerTower_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerTower_OnFrame
@@ -6,22 +6,22 @@ TrainerTower_8F_MapScripts:: @ 81647FA
 
 @ Below scripts are unused, the identical versions in the 1F script are used instead
 
-TrainerTower_8F_EventScript_DoublesTrainer1:: @ 816480A
+TrainerTower_8F_EventScript_DoublesTrainer1::
 	call TrainerTower_EventScript_SpeakToDoublesTrainer1
 	end
 
-TrainerTower_8F_EventScript_SinglesTrainer:: @ 8164810
+TrainerTower_8F_EventScript_SinglesTrainer::
 	call TrainerTower_EventScript_SpeakToSinglesTrainer
 	end
 
-TrainerTower_8F_EventScript_KnockoutTrainer:: @ 8164816
+TrainerTower_8F_EventScript_KnockoutTrainer::
 	call TrainerTower_EventScript_SpeakToKnockoutTrainer
 	end
 
-TrainerTower_8F_EventScript_DoublesTrainer2:: @ 816481C
+TrainerTower_8F_EventScript_DoublesTrainer2::
 	call TrainerTower_EventScript_SpeakToDoublesTrainer2
 	end
 
-TrainerTower_8F_EventScript_Owner:: @ 8164822
+TrainerTower_8F_EventScript_Owner::
 	call TrainerTower_EventScript_SpeakToOwner
 	end

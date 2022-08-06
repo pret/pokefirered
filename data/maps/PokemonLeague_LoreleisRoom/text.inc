@@ -1,4 +1,4 @@
-PokemonLeague_LoreleisRoom_Text_Intro:: @ 8177FA4
+PokemonLeague_LoreleisRoom_Text_Intro::
     .string "Welcome to the POKéMON LEAGUE.\p"
     .string "I am LORELEI of the ELITE FOUR.\p"
     .string "No one can best me when it comes\n"
@@ -9,7 +9,7 @@ PokemonLeague_LoreleisRoom_Text_Intro:: @ 8177FA4
     .string "Hahaha!\n"
     .string "Are you ready?{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_LoreleisRoom_Text_RematchIntro:: @ 8178089
+PokemonLeague_LoreleisRoom_Text_RematchIntro::
     .string "Welcome to the POKéMON LEAGUE.\p"
     .string "I, LORELEI of the ELITE FOUR,\n"
     .string "have returned!\p"
@@ -22,10 +22,10 @@ PokemonLeague_LoreleisRoom_Text_RematchIntro:: @ 8178089
     .string "Hahaha!\n"
     .string "Are you ready?{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_LoreleisRoom_Text_Defeat:: @ 8178191
+PokemonLeague_LoreleisRoom_Text_Defeat::
     .string "…Things shouldn't be this way!$"
 
-PokemonLeague_LoreleisRoom_Text_PostBattle:: @ 81781B0
+PokemonLeague_LoreleisRoom_Text_PostBattle::
     .string "You're better than I thought.\n"
     .string "Go on ahead.\p"
     .string "You only got a taste of the\n"

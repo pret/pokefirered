@@ -253,7 +253,7 @@ static void DrawSafariZoneStatsWindow(void)
     ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
-    AddTextPrinterParameterized(sSafariZoneStatsWindowId,2, gStringVar4, 4, 3, 0xFF, NULL);
+    AddTextPrinterParameterized(sSafariZoneStatsWindowId, FONT_2, gStringVar4, 4, 3, 0xFF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
 
@@ -279,7 +279,7 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
         else
         {
             StringExpandPlaceholders(gStringVar4, sStartMenuActionTable[sStartMenuOrder[i]].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), 2, gStringVar4, 8, i * 15, 0xFF, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_2, gStringVar4, 8, i * 15, 0xFF, NULL);
         }
         i++;
         if (i >= sNumStartMenuItems)
@@ -318,7 +318,7 @@ static s8 DoDrawStartMenu(void)
             sDrawStartMenuState[0]++;
         break;
     case 5:
-        sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), 2, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
+        sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), FONT_2, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
         if (!MenuHelpers_LinkSomething() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
         {
             DrawHelpMessageWindowWithText(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]]);
@@ -798,7 +798,7 @@ static u8 SaveDialogCB_DoSave(void)
 
 static u8 SaveDialogCB_PrintSaveResult(void)
 {
-    if (gSaveSucceeded == TRUE)
+    if (gSaveAttemptStatus == SAVE_STATUS_OK)
         PrintSaveTextWithFollowupFunc(gText_PlayerSavedTheGame, SaveDialogCB_WaitPrintSuccessAndPlaySE);
     else
         PrintSaveTextWithFollowupFunc(gText_SaveError_PleaseExchangeBackupMemory, SaveDialogCB_WaitPrintErrorAndPlaySE);
@@ -874,7 +874,7 @@ bool32 DoSetUpSaveAfterLinkBattle(u8 *state)
         break;
     case 3:
         ShowBg(0);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB_WhileSavingAfterLinkBattle);
         EnableInterrupts(INTR_FLAG_VBLANK);
         break;
@@ -909,11 +909,11 @@ static void task50_after_link_battle_save(u8 taskId)
         {
         case 0:
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0xFF, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_2, gText_SavingDontTurnOffThePower2, 0xFF, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             DrawTextBorderOuter(0, 0x008, 0x0F);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, COPYWIN_BOTH);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            CopyWindowToVram(0, COPYWIN_FULL);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             if (gWirelessCommType != 0 && InUnionRoom())
                 data[0] = 5;
             else
@@ -921,18 +921,18 @@ static void task50_after_link_battle_save(u8 taskId)
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();
-            sub_80DA45C();
+            WriteSaveBlock2();
             data[0] = 2;
             break;
         case 2:
-            if (sub_80DA4A0())
+            if (WriteSaveBlock1Sector())
             {
                 ClearContinueGameWarpStatus2();
                 data[0] = 3;
             }
             break;
         case 3:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             data[0] = 4;
             break;
         case 4:
@@ -941,11 +941,11 @@ static void task50_after_link_battle_save(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(Task_LinkSave, 5);
+            CreateTask(Task_LinkFullSave, 5);
             data[0] = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(Task_LinkSave))
+            if (!FuncIsActiveTask(Task_LinkFullSave))
                 data[0] = 3;
             break;
         }
@@ -960,26 +960,26 @@ static void PrintSaveStats(void)
     TextWindow_SetStdFrame0_WithPal(sSaveStatsWindowId, 0x21D, 0xD0);
     DrawStdFrameWithCustomTileAndPalette(sSaveStatsWindowId, FALSE, 0x21D, 0x0D);
     SaveStatToString(SAVE_STAT_LOCATION, gStringVar4, 8);
-    x = (u32)(112 - GetStringWidth(2, gStringVar4, -1)) / 2;
-    AddTextPrinterParameterized3(sSaveStatsWindowId, 2, x, 0, sTextColor_LocationHeader, -1, gStringVar4);
-    x = (u32)(112 - GetStringWidth(2, gStringVar4, -1)) / 2;
-    AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 2, 14, sTextColor_StatName, -1, gSaveStatName_Player);
+    x = (u32)(112 - GetStringWidth(FONT_2, gStringVar4, -1)) / 2;
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_2, x, 0, sTextColor_LocationHeader, -1, gStringVar4);
+    x = (u32)(112 - GetStringWidth(FONT_2, gStringVar4, -1)) / 2;
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 2, 14, sTextColor_StatName, -1, gSaveStatName_Player);
     SaveStatToString(SAVE_STAT_NAME, gStringVar4, 2);
     Menu_PrintFormatIntlPlayerName(sSaveStatsWindowId, gStringVar4, 60, 14);
-    AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 2, 28, sTextColor_StatName, -1, gSaveStatName_Badges);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 2, 28, sTextColor_StatName, -1, gSaveStatName_Badges);
     SaveStatToString(SAVE_STAT_BADGES, gStringVar4, 2);
-    AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 60, 28, sTextColor_StatValue, -1, gStringVar4);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 60, 28, sTextColor_StatValue, -1, gStringVar4);
     y = 42;
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
-        AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 2, 42, sTextColor_StatName, -1, gSaveStatName_Pokedex);
+        AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 2, 42, sTextColor_StatName, -1, gSaveStatName_Pokedex);
         SaveStatToString(SAVE_STAT_POKEDEX, gStringVar4, 2);
-        AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 60, 42, sTextColor_StatValue, -1, gStringVar4);
+        AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 60, 42, sTextColor_StatValue, -1, gStringVar4);
         y = 56;
     }
-    AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 2, y, sTextColor_StatName, -1, gSaveStatName_Time);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 2, y, sTextColor_StatName, -1, gSaveStatName_Time);
     SaveStatToString(SAVE_STAT_TIME, gStringVar4, 2);
-    AddTextPrinterParameterized3(sSaveStatsWindowId, 0, 60, y, sTextColor_StatValue, -1, gStringVar4);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_0, 60, y, sTextColor_StatValue, -1, gStringVar4);
     CopyWindowToVram(sSaveStatsWindowId, COPYWIN_GFX);
 }
 

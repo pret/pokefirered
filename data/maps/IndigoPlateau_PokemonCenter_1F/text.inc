@@ -1,4 +1,4 @@
-IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice:: @ 819A837
+IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice::
     .string "Yo!\n"
     .string "Champ in the making!\p"
     .string "At the POKéMON LEAGUE, you will\n"
@@ -8,13 +8,13 @@ IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice:: @ 819A837
     .string "This is it!\n"
     .string "Go for it!$"
 
-IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck:: @ 819A8D8
+IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck::
     .string "From here on, you face the\n"
     .string "ELITE FOUR one by one.\p"
     .string "If you win, a door opens to the\n"
     .string "next TRAINER. Good luck!$"
 
-IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing:: @ 819A943
+IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
     .string "I am so sorry, but you've wasted\n"
     .string "your time coming here.\p"
     .string "LORELEI of the ELITE FOUR is\n"
@@ -22,7 +22,7 @@ IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing:: @ 819A94
     .string "As a result, the POKéMON LEAGUE is\n"
     .string "closed for the time being.$"
 
-IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs:: @ 819A9E7
+IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
     .string "AGATHA's GHOST-type POKéMON are\n"
     .string "horrifically terrifying in toughness.\p"
     .string "I took my FIGHTING-type POKéMON\n"
@@ -34,7 +34,7 @@ IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs:: @ 819A9E7
     .string "It doesn't take anything to get\n"
     .string "that scary lady hollering.$"
 
-IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway:: @ 819AB16
+IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
     .string "Maybe becoming an ELITE FOUR\n"
     .string "member is in the blood.\p"
     .string "From what I've heard, LANCE has\n"

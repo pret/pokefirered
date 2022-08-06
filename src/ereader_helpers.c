@@ -34,7 +34,7 @@ static u16 sSavedTm3Cnt;
 static u16 sSavedSioCnt;
 static u16 sSavedRCnt;
 
-int EReader_Send(size_t size, const void * src)
+int EReader_Send(size_t size, const void *src)
 {
     int result;
     EReaderHelper_SaveRegsState();
@@ -73,7 +73,7 @@ int EReader_Send(size_t size, const void * src)
     return result;
 }
 
-int EReader_Recv(void * dest)
+int EReader_Recv(void *dest)
 {
     int result;
     EReaderHelper_SaveRegsState();
@@ -147,7 +147,7 @@ static void OpenSerial32(void)
     sCounter2 = 0;
 }
 
-u16 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBuffer)
+u16 EReaderHandleTransfer(u8 mode, size_t size, const void *data, void *recvBuffer)
 {
     switch (sSendRecvMgr.state)
     {
@@ -240,7 +240,7 @@ static bool16 DetermineSendRecvState(u8 mode)
     return resp;
 }
 
-static void SetUpTransferManager(size_t size, const void * data, void * recvBuffer)
+static void SetUpTransferManager(size_t size, const void *data, void *recvBuffer)
 {
     if (sSendRecvMgr.master_slave)
     {

@@ -7,41 +7,41 @@
 .equ PLAYER_X_POS, VAR_0x8004
 .equ PLAYER_Y_POS, VAR_0x8005
 
-FiveIsland_RocketWarehouse_MapScripts:: @ 8163F2E
+FiveIsland_RocketWarehouse_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, FiveIsland_RocketWarehouse_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, FiveIsland_RocketWarehouse_OnTransition
 	.byte 0
 
-FiveIsland_RocketWarehouse_OnTransition:: @ 8163F39
+FiveIsland_RocketWarehouse_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE
 	end
 
-FiveIsland_RocketWarehouse_OnLoad:: @ 8163F3D
+FiveIsland_RocketWarehouse_OnLoad::
 	call_if_defeated TRAINER_TEAM_ROCKET_ADMIN, FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry
 	end
 
-FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry:: @ 8163F47
+FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry::
 	setmetatile 26, 20, METATILE_SilphCo_Arrow_Up, 0
 	setmetatile 27, 20, METATILE_SilphCo_Arrow_Up, 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_Cage:: @ 8163F5A
+FiveIsland_RocketWarehouse_EventScript_Cage::
 	lockall
 	goto_if_set FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE, FiveIsland_RocketWarehouse_EventScript_CageUnlocked
 	msgbox FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen
 	releaseall
 	end
 
-FiveIsland_RocketWarehouse_EventScript_CageUnlocked:: @ 8163F6E
+FiveIsland_RocketWarehouse_EventScript_CageUnlocked::
 	msgbox FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled
 	releaseall
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Computer:: @ 8163F78
+FiveIsland_RocketWarehouse_EventScript_Computer::
 	msgbox FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText, MSGBOX_SIGN
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Admin2Trigger:: @ 8163F81
+FiveIsland_RocketWarehouse_EventScript_Admin2Trigger::
 	lockall
 	applymovement LOCALID_ADMIN2, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
@@ -49,40 +49,40 @@ FiveIsland_RocketWarehouse_EventScript_Admin2Trigger:: @ 8163F81
 	releaseall
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Gideon:: @ 8163F93
+FiveIsland_RocketWarehouse_EventScript_Gideon::
 	trainerbattle_single TRAINER_SCIENTIST_GIDEON, FiveIsland_RocketWarehouse_Text_GideonIntro, FiveIsland_RocketWarehouse_Text_GideonDefeat, FiveIsland_RocketWarehouse_EventScript_DefeatedGideon
 	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid
 	msgbox FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid:: @ 8163FB7
+FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid::
 	famechecker FAMECHECKER_GIOVANNI, 5
 	msgbox FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_DefeatedGideon:: @ 8163FCD
+FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 	msgbox FiveIsland_RocketWarehouse_Text_GideonPostBattle
 	setflag FLAG_RECOVERED_SAPPHIRE
 	giveitem ITEM_SAPPHIRE
 	release
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Grunt2:: @ 8163FE6
+FiveIsland_RocketWarehouse_EventScript_Grunt2::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_47, FiveIsland_RocketWarehouse_Text_Grunt2Intro, FiveIsland_RocketWarehouse_Text_Grunt2Defeat
 	msgbox FiveIsland_RocketWarehouse_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Grunt3:: @ 8163FFD
+FiveIsland_RocketWarehouse_EventScript_Grunt3::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_48, FiveIsland_RocketWarehouse_Text_Grunt3Intro, FiveIsland_RocketWarehouse_Text_Grunt3Defeat
 	msgbox FiveIsland_RocketWarehouse_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Admin2:: @ 8164014
+FiveIsland_RocketWarehouse_EventScript_Admin2::
 	trainerbattle_single TRAINER_TEAM_ROCKET_ADMIN_2, FiveIsland_RocketWarehouse_Text_Admin2Intro, FiveIsland_RocketWarehouse_Text_Admin2Defeat, FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2
 	msgbox FiveIsland_RocketWarehouse_Text_Admin2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2:: @ 816402F
+FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2::
 	getplayerxy PLAYER_X_POS, PLAYER_Y_POS
 	compare PLAYER_X_POS, 24
 	call_if_le FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2
@@ -100,22 +100,22 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2:: @ 816402F
 	release
 	end
 
-FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2:: @ 8164065
+FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_Grunt1:: @ 8164070
+FiveIsland_RocketWarehouse_EventScript_Grunt1::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_42, FiveIsland_RocketWarehouse_Text_Grunt1Intro, FiveIsland_RocketWarehouse_Text_Grunt1Defeat
 	msgbox FiveIsland_RocketWarehouse_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_Admin1:: @ 8164087
+FiveIsland_RocketWarehouse_EventScript_Admin1::
 	trainerbattle_single TRAINER_TEAM_ROCKET_ADMIN, FiveIsland_RocketWarehouse_Text_Admin1Intro, FiveIsland_RocketWarehouse_Text_Admin1Defeat, FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1
 	msgbox FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1:: @ 81640A2
+FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1::
 	getplayerxy PLAYER_X_POS, PLAYER_Y_POS
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 	compare VAR_RESULT, DIR_NORTH
@@ -146,45 +146,45 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1:: @ 81640A2
 	release
 	end
 
-FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1:: @ 816412E
+FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1::
 	compare PLAYER_X_POS, 27
 	goto_if_eq EventScript_Return
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar:: @ 8164144
+FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar::
 	applymovement LOCALID_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch:: @ 816414F
+FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch::
 	applymovement LOCALID_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch:: @ 816415A
+FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch::
 	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft:: @ 8164165
+FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft::
 	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown:: @ 8164170
+FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown::
 	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar:: @ 816417B
+FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar::
 	walk_right
 	walk_right
 	walk_in_place_fastest_up
 	step_end
 
-FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch:: @ 816417F
+FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch::
 	walk_right
 	walk_in_place_fastest_up
 	step_end

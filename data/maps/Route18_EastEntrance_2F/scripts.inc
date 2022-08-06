@@ -1,15 +1,15 @@
-Route18_EastEntrance_2F_MapScripts:: @ 817046B
+Route18_EastEntrance_2F_MapScripts::
 	.byte 0
 
-Route18_EastEntrance_2F_EventScript_LeftBinoculars:: @ 817046C
+Route18_EastEntrance_2F_EventScript_LeftBinoculars::
 	msgbox Route18_EastEntrance_2F_Text_PalletTownInWest, MSGBOX_SIGN
 	end
 
-Route18_EastEntrance_2F_EventScript_RightBinoculars:: @ 8170475
+Route18_EastEntrance_2F_EventScript_RightBinoculars::
 	msgbox Route18_EastEntrance_2F_Text_PeopleSwimming, MSGBOX_SIGN
 	end
 
-Route18_EastEntrance_2F_EventScript_Haden:: @ 817047E
+Route18_EastEntrance_2F_EventScript_Haden::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_LICKITUNG
@@ -30,18 +30,18 @@ Route18_EastEntrance_2F_EventScript_Haden:: @ 817047E
 	release
 	end
 
-Route18_EastEntrance_2F_EventScript_DeclineTrade:: @ 81704D8
+Route18_EastEntrance_2F_EventScript_DeclineTrade::
 	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
-Route18_EastEntrance_2F_EventScript_NotRequestedMon:: @ 81704E2
+Route18_EastEntrance_2F_EventScript_NotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
-Route18_EastEntrance_2F_EventScript_AlreadyTraded:: @ 81704F0
+Route18_EastEntrance_2F_EventScript_AlreadyTraded::
 	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end

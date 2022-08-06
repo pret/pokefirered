@@ -1,30 +1,30 @@
-PewterCity_Museum_2F_MapScripts:: @ 816A552
+PewterCity_Museum_2F_MapScripts::
 	.byte 0
 
-PewterCity_Museum_2F_EventScript_Man:: @ 816A553
+PewterCity_Museum_2F_EventScript_Man::
 	msgbox PewterCity_Museum_1F_Text_WhatsSpecialAboutMoonStone, MSGBOX_NPC
 	end
 
-PewterCity_Museum_2F_EventScript_OldMan:: @ 816A55C
+PewterCity_Museum_2F_EventScript_OldMan::
 	msgbox PewterCity_Museum_1F_Text_BoughtColorTVForMoonLanding, MSGBOX_NPC
 	end
 
-PewterCity_Museum_2F_EventScript_Scientist:: @ 816A565
+PewterCity_Museum_2F_EventScript_Scientist::
 	msgbox PewterCity_Museum_1F_Text_RunningSpaceExhibitThisMonth, MSGBOX_NPC
 	end
 
-PewterCity_Museum_2F_EventScript_LittleGirl:: @ 816A56E
+PewterCity_Museum_2F_EventScript_LittleGirl::
 	msgbox PewterCity_Museum_1F_Text_AskedDaddyToCatchPikachu, MSGBOX_NPC
 	end
 
-PewterCity_Museum_2F_EventScript_BaldingMan:: @ 816A577
+PewterCity_Museum_2F_EventScript_BaldingMan::
 	msgbox PewterCity_Museum_1F_Text_PikachuSoonIPromise, MSGBOX_NPC
 	end
 
-PewterCity_Museum_2F_EventScript_SpaceShuttle:: @ 816A580
+PewterCity_Museum_2F_EventScript_SpaceShuttle::
 	msgbox PewterCity_Museum_1F_Text_SpaceShuttle, MSGBOX_SIGN
 	end
 
-PewterCity_Museum_2F_EventScript_MoonStone:: @ 816A589
+PewterCity_Museum_2F_EventScript_MoonStone::
 	msgbox PewterCity_Museum_1F_Text_MeteoriteThatFellOnMtMoon, MSGBOX_SIGN
 	end

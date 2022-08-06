@@ -75,7 +75,7 @@ struct MEvent_Str_1 sMEventSendToEReaderManager;
 
 static EWRAM_DATA bool32 sReceivedWonderCardIsValid = FALSE;
 
-void SendUnknownSerialData_Init(struct MEvent_Str_1 *mgr, size_t size, const void * data)
+void SendUnknownSerialData_Init(struct MEvent_Str_1 *mgr, size_t size, const void *data)
 {
     vu16 imeBak = REG_IME;
     REG_IME = 0;
@@ -799,7 +799,7 @@ bool32 ValidateMEventClientHeader(const struct MEventClientHeaderStruct * data)
     return TRUE;
 }
 
-u32 sub_8144418(const u16 * a0, const struct MEventClientHeaderStruct * a1, void * unused)
+u32 sub_8144418(const u16 * a0, const struct MEventClientHeaderStruct * a1, void *unused)
 {
     if (a1->id == 0)
         return 0;
@@ -808,7 +808,7 @@ u32 sub_8144418(const u16 * a0, const struct MEventClientHeaderStruct * a1, void
     return 2;
 }
 
-u32 MEvent_CanPlayerReceiveDistributionMon(const u16 * a0, const struct MEventClientHeaderStruct * a1, void * unused)
+u32 MEvent_CanPlayerReceiveDistributionMon(const u16 * a0, const struct MEventClientHeaderStruct * a1, void *unused)
 {
     s32 numSpaces = a1->maxDistributionMons - CountReceivedDistributionMons(&a1->unk_20, a1->maxDistributionMons);
     if (numSpaces == 0)

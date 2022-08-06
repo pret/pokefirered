@@ -1,7 +1,7 @@
-PokemonTower_6F_MapScripts:: @ 81634B7
+PokemonTower_6F_MapScripts::
 	.byte 0
 
-PokemonTower_6F_EventScript_MarowakGhost:: @ 81634B8
+PokemonTower_6F_EventScript_MarowakGhost::
 	lockall
 	textcolor 2
 	msgbox PokemonTower_6F_Text_BeGoneIntruders
@@ -17,11 +17,11 @@ PokemonTower_6F_EventScript_MarowakGhost:: @ 81634B8
 	releaseall
 	end
 
-PokemonTower_6F_EventScript_DefeatedMarowakGhost:: @ 81634F5
+PokemonTower_6F_EventScript_DefeatedMarowakGhost::
 	message PokemonTower_6F_Text_GhostWasCubonesMother
 	waitmessage
 	waitse
-	playmoncry SPECIES_MAROWAK, 0
+	playmoncry SPECIES_MAROWAK, CRY_MODE_NORMAL
 	waitbuttonpress
 	waitmoncry
 	msgbox PokemonTower_6F_Text_MothersSpiritWasCalmed
@@ -29,21 +29,21 @@ PokemonTower_6F_EventScript_DefeatedMarowakGhost:: @ 81634F5
 	releaseall
 	end
 
-PokemonTower_6F_Movement_ForcePlayerUp:: @ 8163512
+PokemonTower_6F_Movement_ForcePlayerUp::
 	walk_up
 	step_end
 
-PokemonTower_6F_EventScript_Angelica:: @ 8163514
+PokemonTower_6F_EventScript_Angelica::
 	trainerbattle_single TRAINER_CHANNELER_ANGELICA, PokemonTower_6F_Text_AngelicaIntro, PokemonTower_6F_Text_AngelicaDefeat
 	msgbox PokemonTower_6F_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PokemonTower_6F_EventScript_Emilia:: @ 816352B
+PokemonTower_6F_EventScript_Emilia::
 	trainerbattle_single TRAINER_CHANNELER_EMILIA, PokemonTower_6F_Text_EmiliaIntro, PokemonTower_6F_Text_EmiliaDefeat
 	msgbox PokemonTower_6F_Text_EmiliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PokemonTower_6F_EventScript_Jennifer:: @ 8163542
+PokemonTower_6F_EventScript_Jennifer::
 	trainerbattle_single TRAINER_CHANNELER_JENNIFER, PokemonTower_6F_Text_JenniferIntro, PokemonTower_6F_Text_JenniferDefeat
 	msgbox PokemonTower_6F_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE
 	end

@@ -1,10 +1,10 @@
-OneIsland_House1_MapScripts:: @ 817135B
+OneIsland_House1_MapScripts::
 	.byte 0
 
-OneIsland_House1_EventScript_OldMan:: @ 817135C
+OneIsland_House1_EventScript_OldMan::
 	msgbox OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays, MSGBOX_NPC
 	end
 
-OneIsland_House1_EventScript_OldWoman:: @ 8171365
+OneIsland_House1_EventScript_OldWoman::
 	msgbox OneIsland_House1_Text_LastTimeMtEmberErupted, MSGBOX_NPC
 	end

@@ -14,9 +14,9 @@ static void Task_SSAnneInit(u8 taskId);
 static void Task_SSAnneRun(u8 taskId);
 static void Task_SSAnneFinish(u8 taskId);
 static void CreateWakeBehindBoat(void);
-static void WakeSpriteCallback(struct Sprite * sprite);
+static void WakeSpriteCallback(struct Sprite *sprite);
 static void CreateSmokeSprite(void);
-static void SmokeSpriteCallback(struct Sprite * sprite);
+static void SmokeSpriteCallback(struct Sprite *sprite);
 
 static const u16 sWakeTiles[] = INCBIN_U16("graphics/ss_anne/unk_8479838.4bpp");
 static const u16 sSmokeTiles[] = INCBIN_U16("graphics/ss_anne/unk_8479A38.4bpp");
@@ -156,7 +156,7 @@ static void CreateWakeBehindBoat(void)
     gSprites[spriteId].oam.paletteNum = 10;
 }
 
-static void WakeSpriteCallback(struct Sprite * sprite)
+static void WakeSpriteCallback(struct Sprite *sprite)
 {
     u8 objectEventId;
     struct ObjectEvent * boatObject;
@@ -191,7 +191,7 @@ static void CreateSmokeSprite(void)
     }
 }
 
-static void SmokeSpriteCallback(struct Sprite * sprite)
+static void SmokeSpriteCallback(struct Sprite *sprite)
 {
     sprite->data[0]++;
     sprite->x2 = sprite->data[0] / 4;

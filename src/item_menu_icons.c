@@ -6,11 +6,11 @@
 #include "constants/items.h"
 
 static EWRAM_DATA u8 sItemMenuIconSpriteIds[12] = {0};
-static EWRAM_DATA void * sItemIconTilesBuffer = NULL;
-static EWRAM_DATA void * sItemIconTilesBufferPadded = NULL;
+static EWRAM_DATA void *sItemIconTilesBuffer = NULL;
+static EWRAM_DATA void *sItemIconTilesBufferPadded = NULL;
 
-static void SpriteCB_BagVisualSwitchingPockets(struct Sprite * sprite);
-static void SpriteCB_ShakeBagSprite(struct Sprite * sprite);
+static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
+static void SpriteCB_ShakeBagSprite(struct Sprite *sprite);
 
 static const struct OamData sOamData_BagOrSatchel = {
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -561,13 +561,13 @@ void CreateBagOrSatchelSprite(u8 animNum)
 
 void SetBagVisualPocketId(u8 animNum)
 {
-    struct Sprite * sprite = &gSprites[sItemMenuIconSpriteIds[0]];
+    struct Sprite *sprite = &gSprites[sItemMenuIconSpriteIds[0]];
     sprite->y2 = -5;
     sprite->callback = SpriteCB_BagVisualSwitchingPockets;
     StartSpriteAnim(sprite, animNum);
 }
 
-static void SpriteCB_BagVisualSwitchingPockets(struct Sprite * sprite)
+static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
 {
     if (sprite->y2 != 0)
         sprite->y2++;
@@ -577,7 +577,7 @@ static void SpriteCB_BagVisualSwitchingPockets(struct Sprite * sprite)
 
 void ShakeBagSprite(void)
 {
-    struct Sprite * sprite = &gSprites[sItemMenuIconSpriteIds[0]];
+    struct Sprite *sprite = &gSprites[sItemMenuIconSpriteIds[0]];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, 1);
@@ -585,7 +585,7 @@ void ShakeBagSprite(void)
     }
 }
 
-static void SpriteCB_ShakeBagSprite(struct Sprite * sprite)
+static void SpriteCB_ShakeBagSprite(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -658,7 +658,7 @@ static bool8 TryAllocItemIconTilesBuffers(void)
     return TRUE;
 }
 
-void CopyItemIconPicTo4x4Buffer(const void * src, void * dest)
+void CopyItemIconPicTo4x4Buffer(const void *src, void *dest)
 {
     u8 i;
 
@@ -760,7 +760,7 @@ void DestroyItemMenuIcon(u8 idx)
     }
 }
 
-const void * GetItemIconGfxPtr(u16 itemId, u8 attrId)
+const void *GetItemIconGfxPtr(u16 itemId, u8 attrId)
 {
     if (itemId > ITEM_N_A)
         itemId = ITEM_NONE;

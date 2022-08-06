@@ -1,7 +1,7 @@
-MtEmber_RubyPath_B5F_MapScripts:: @ 8163BAA
+MtEmber_RubyPath_B5F_MapScripts::
 	.byte 0
 
-MtEmber_RubyPath_B5F_EventScript_BrailleMessage:: @ 8163BAB
+MtEmber_RubyPath_B5F_EventScript_BrailleMessage::
 	lockall
 	setvar VAR_0x8005, 130
 	braillemessage_wait Braille_Text_Everything

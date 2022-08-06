@@ -1,6 +1,6 @@
-OneIsland_TreasureBeach_MapScripts:: @ 816876B
+OneIsland_TreasureBeach_MapScripts::
 	.byte 0
 
-OneIsland_TreasureBeach_EventScript_Boy:: @ 816876C
+OneIsland_TreasureBeach_EventScript_Boy::
 	msgbox OneIsland_TreasureBeach_Text_GoodThingsWashUpOnBeach, MSGBOX_NPC
 	end

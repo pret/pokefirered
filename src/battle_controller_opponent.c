@@ -19,6 +19,7 @@
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 static void OpponentHandleGetMonData(void);
 static void OpponentHandleGetRawMonData(void);
@@ -233,7 +234,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             m4aMPlayContinue(&gMPlayInfo_BGM);
         else
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay = 3;
         gBattlerControllerFuncs[gActiveBattler] = Intro_DelayAndEnd;
     }
@@ -264,7 +265,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
         StartHealthboxSlideIn(gActiveBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
         SetBattlerShadowSpriteCallback(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
-        gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = FALSE;
+        gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
         gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 }
@@ -372,7 +373,7 @@ static void SwitchIn_HandleSoundAndEnd(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive && !IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         OpponentBufferExecCompleted();
     }
 }
@@ -493,7 +494,7 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         battleMon.abilityNum = GetMonData(&gEnemyParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gEnemyParty[monId], MON_DATA_OT_ID);
         GetMonData(&gEnemyParty[monId], MON_DATA_NICKNAME, nickname);
-        StringCopy10(battleMon.nickname, nickname);
+        StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gEnemyParty[monId], MON_DATA_OT_NAME, battleMon.otName);
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); ++size)
@@ -1312,9 +1313,9 @@ static void OpponentHandlePrintString(void)
     stringId = (u16 *)(&gBattleBufferA[gActiveBattler][2]);
     BufferStringBattle(*stringId);
     if (BattleStringShouldBeColored(*stringId))
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0x40);
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
-        BattlePutTextOnWindow(gDisplayedStringBattle, 0);
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         switch (*stringId)
@@ -1611,7 +1612,7 @@ static void OpponentHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    PlayCry3(species, 25, 5);
+    PlayCry_ByMode(species, 25, CRY_MODE_FAINT);
     OpponentBufferExecCompleted();
 }
 
@@ -1637,7 +1638,7 @@ static void OpponentHandleIntroTrainerBallThrow(void)
     gTasks[taskId].data[0] = gActiveBattler;
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    gBattleSpritesDataPtr->animationData->healthboxSlideInStarted = TRUE;
+    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
     gBattlerControllerFuncs[gActiveBattler] = OpponentDummy;
 }
 

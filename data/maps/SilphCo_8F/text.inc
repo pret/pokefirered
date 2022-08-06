@@ -1,46 +1,46 @@
-SilphCo_8F_Text_WonderIfSilphIsFinished:: @ 817696D
+SilphCo_8F_Text_WonderIfSilphIsFinished::
     .string "I wonder if SILPH is finished…$"
 
-SilphCo_8F_Text_ThanksForSavingUs:: @ 817698C
+SilphCo_8F_Text_ThanksForSavingUs::
     .string "Thanks for saving us!$"
 
-SilphCo_8F_Text_Grunt1Intro:: @ 81769A2
+SilphCo_8F_Text_Grunt1Intro::
     .string "That's as far as you'll go!$"
 
-SilphCo_8F_Text_Grunt1Defeat:: @ 81769BE
+SilphCo_8F_Text_Grunt1Defeat::
     .string "Not enough grit!$"
 
-SilphCo_8F_Text_Grunt1PostBattle:: @ 81769CF
+SilphCo_8F_Text_Grunt1PostBattle::
     .string "If you don't turn back…\n"
     .string "I'll call for backup!$"
 
-SilphCo_8F_Text_ParkerIntro:: @ 81769FD
+SilphCo_8F_Text_ParkerIntro::
     .string "You're causing us problems!$"
 
-SilphCo_8F_Text_ParkerDefeat:: @ 8176A19
+SilphCo_8F_Text_ParkerDefeat::
     .string "Huh?\n"
     .string "I lost?$"
 
-SilphCo_8F_Text_ParkerPostBattle:: @ 8176A26
+SilphCo_8F_Text_ParkerPostBattle::
     .string "So, what do you think of SILPH\n"
     .string "BUILDING's maze?$"
 
-SilphCo_8F_Text_Grunt2Intro:: @ 8176A56
+SilphCo_8F_Text_Grunt2Intro::
     .string "I am one of the four ROCKET\n"
     .string "BROTHERS!$"
 
-SilphCo_8F_Text_Grunt2Defeat:: @ 8176A7C
+SilphCo_8F_Text_Grunt2Defeat::
     .string "Whoo!\n"
     .string "Oh, Brothers!$"
 
-SilphCo_8F_Text_Grunt2PostBattle:: @ 8176A90
+SilphCo_8F_Text_Grunt2PostBattle::
     .string "I'll leave you up to my brothers.$"
 
-SilphCo_8F_Text_FloorSign:: @ 8176AB2
+SilphCo_8F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"
     .string "8F$"
 
-SilphCo_8F_Text_ToRocketBossMonsAreTools:: @ 8176ACB
+SilphCo_8F_Text_ToRocketBossMonsAreTools::
     .string "TEAM ROCKET's BOSS is terribly\n"
     .string "cruel!\p"
     .string "To him, POKéMON are just tools to\n"

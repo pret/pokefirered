@@ -1,4 +1,4 @@
-EventScript_AfterWhiteOutHeal:: @ 81A8D97
+EventScript_AfterWhiteOutHeal::
 	lockall
 	textcolor 1
 	msgbox Text_FirstShouldRestoreMonsHealth
@@ -11,17 +11,17 @@ EventScript_AfterWhiteOutHeal:: @ 81A8D97
 	releaseall
 	end
 
-EventScript_AfterWhiteOutHealMsgPreBrock:: @ 81A8DC6
+EventScript_AfterWhiteOutHealMsgPreBrock::
 	msgbox Text_MonsHealedShouldBuyPotions
 	return
 
-EventScript_AfterWhiteOutHealMsg:: @ 81A8DCF
+EventScript_AfterWhiteOutHealMsg::
 	msgbox Text_MonsHealed
 	return
 
 @ LOCALID_MOM set by PalletTown_PlayersHouse_1F
 
-EventScript_AfterWhiteOutMomHeal:: @ 81A8DD8
+EventScript_AfterWhiteOutMomHeal::
 	lockall
 	textcolor 1
 	applymovement LOCALID_MOM, Movement_WalkInPlaceFastestDown
@@ -33,7 +33,7 @@ EventScript_AfterWhiteOutMomHeal:: @ 81A8DD8
 	releaseall
 	end
 
-EventScript_FieldPoison:: @ 81A8DFD
+EventScript_FieldPoison::
 	lockall
 	textcolor 3
 	special TryFieldPoisonWhiteOut
@@ -43,7 +43,7 @@ EventScript_FieldPoison:: @ 81A8DFD
 	releaseall
 	end
 
-EventScript_FieldWhiteOut:: @ 81A8E11
+EventScript_FieldWhiteOut::
 	checkmoney 1, 0
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_FieldWhiteOutNoMoney
@@ -51,18 +51,18 @@ EventScript_FieldWhiteOut:: @ 81A8E11
 	goto_if_eq EventScript_FieldWhiteOutHasMoney
 	end
 
-EventScript_FieldWhiteOutNoMoney:: @ 81A8E2E
+EventScript_FieldWhiteOutNoMoney::
 	msgbox Text_WhitedOut
 	goto EventScript_FieldWhiteOutFade
 	end
 
-EventScript_FieldWhiteOutHasMoney:: @ 81A8E3C
+EventScript_FieldWhiteOutHasMoney::
 	special OverworldWhiteOutGetMoneyLoss
 	msgbox Text_WhitedOutLostMoney
 	goto EventScript_FieldWhiteOutFade
 	end
 
-EventScript_FieldWhiteOutFade:: @ 81A8E4D
+EventScript_FieldWhiteOutFade::
 	special Script_FadeOutMapMusic
 	waitstate
 	fadescreen FADE_TO_BLACK

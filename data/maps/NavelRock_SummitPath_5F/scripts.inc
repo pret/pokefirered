@@ -1,2 +1,2 @@
-NavelRock_SummitPath_5F_MapScripts:: @ 81651F5
+NavelRock_SummitPath_5F_MapScripts::
 	.byte 0

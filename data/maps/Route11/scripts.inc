@@ -1,6 +1,6 @@
-Route11_MapScripts:: @ 8167FF6
+Route11_MapScripts::
 	.byte 0
 
-Route11_EventScript_DiglettsCaveSign:: @ 8167FF7
+Route11_EventScript_DiglettsCaveSign::
 	msgbox Route11_Text_DiglettsCave, MSGBOX_SIGN
 	end

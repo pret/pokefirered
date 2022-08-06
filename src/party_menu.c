@@ -67,6 +67,7 @@
 #include "constants/pokemon.h"
 #include "constants/quest_log.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 #define PARTY_PAL_SELECTED     (1 << 0)
 #define PARTY_PAL_FAINTED      (1 << 1)
@@ -574,11 +575,11 @@ static bool8 ShowPartyMenu(void)
         ++gMain.state;
         break;
     case 21:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         ++gMain.state;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         ++gMain.state;
         break;
@@ -592,7 +593,7 @@ static bool8 ShowPartyMenu(void)
 
 static void ExitPartyMenu(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     CreateTask(Task_ExitPartyMenu, 0);
     SetVBlankCallback(VBlankCB_PartyMenu);
     SetMainCallback2(CB2_UpdatePartyMenu);
@@ -1077,7 +1078,7 @@ static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 
 static void Task_ClosePartyMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
 }
 
@@ -1550,7 +1551,7 @@ static void Task_PrintAndWaitForText(u8 taskId)
     {
         if (gTasks[taskId].tKeepOpen == FALSE)
         {
-            ClearStdWindowAndFrameToTransparent(6, 0);
+            ClearStdWindowAndFrameToTransparent(6, FALSE);
             ClearWindowTilemap(6);
         }
         DestroyTask(taskId);
@@ -1577,7 +1578,7 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
-        ClearStdWindowAndFrameToTransparent(6, 0);
+        ClearStdWindowAndFrameToTransparent(6, FALSE);
         ClearWindowTilemap(6);
         if (MenuHelpers_LinkSomething() == TRUE)
         {
@@ -2159,7 +2160,7 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
         {
             confirmWindowId = AddWindow(&sConfirmButtonWindowTemplate);
             FillWindowPixelBuffer(confirmWindowId, PIXEL_FILL(0));
-            AddTextPrinterParameterized4(confirmWindowId, 0, (48 - GetStringWidth(0, gMenuText_Confirm, 0)) / 2u, 1, 0, 0, sFontColorTable[0], -1, gMenuText_Confirm);
+            AddTextPrinterParameterized4(confirmWindowId, FONT_0, (48 - GetStringWidth(FONT_0, gMenuText_Confirm, 0)) / 2u, 1, 0, 0, sFontColorTable[0], -1, gMenuText_Confirm);
             PutWindowTilemap(confirmWindowId);
             CopyWindowToVram(confirmWindowId, COPYWIN_GFX);
             cancelWindowId = AddWindow(&sMultiCancelButtonWindowTemplate);
@@ -2174,13 +2175,13 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
         // Branches are functionally identical. Second branch is never reached, Spin Trade wasnt fully implemented
         if (gPartyMenu.menuType != PARTY_MENU_TYPE_SPIN_TRADE)
         {
-            offset += (48 - GetStringWidth(0, gFameCheckerText_Cancel, 0)) / 2;
-            AddTextPrinterParameterized3(cancelWindowId, 0, offset, 1, sFontColorTable[0], -1, gFameCheckerText_Cancel);
+            offset += (48 - GetStringWidth(FONT_0, gFameCheckerText_Cancel, 0)) / 2;
+            AddTextPrinterParameterized3(cancelWindowId, FONT_0, offset, 1, sFontColorTable[0], -1, gFameCheckerText_Cancel);
         }
         else
         {
-            offset += (48 - GetStringWidth(0, gOtherText_Exit, 0)) / 2;
-            AddTextPrinterParameterized3(cancelWindowId, 0, offset, 1, sFontColorTable[0], -1, gOtherText_Exit);
+            offset += (48 - GetStringWidth(FONT_0, gOtherText_Exit, 0)) / 2;
+            AddTextPrinterParameterized3(cancelWindowId, FONT_0, offset, 1, sFontColorTable[0], -1, gOtherText_Exit);
         }
         PutWindowTilemap(cancelWindowId);
         CopyWindowToVram(cancelWindowId, COPYWIN_GFX);
@@ -2321,7 +2322,7 @@ static void LoadPartyBoxPalette(struct PartyMenuBox *menuBox, u8 palFlags)
 
 static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, const u8 *align)
 {
-    AddTextPrinterParameterized3(windowId, 0, align[0], align[1], sFontColorTable[color], 0, str);
+    AddTextPrinterParameterized3(windowId, FONT_0, align[0], align[1], sFontColorTable[color], 0, str);
 }
 
 static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox *menuBox, u8 c)
@@ -2477,14 +2478,14 @@ static void DisplayPartyPokemonDescriptionText(u8 stringId, struct PartyMenuBox 
     if (c != 0)
         menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->descTextLeft >> 3, menuBox->infoRects->descTextTop >> 3, menuBox->infoRects->descTextWidth >> 3, menuBox->infoRects->descTextHeight >> 3, TRUE);
     if (c != 2)
-        AddTextPrinterParameterized3(menuBox->windowId, 1, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], 0, sDescriptionStringTable[stringId]);
+        AddTextPrinterParameterized3(menuBox->windowId, FONT_1, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], 0, sDescriptionStringTable[stringId]);
 }
 
 static void PartyMenuRemoveWindow(u8 *ptr)
 {
     if (*ptr != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         RemoveWindow(*ptr);
         *ptr = 0xFF;
         ScheduleBgCopyTilemapToVram(2);
@@ -2529,7 +2530,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
         }
         DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x58, 0xF);
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
-        AddTextPrinterParameterized(*windowPtr, 2, gStringVar4, 0, 2, 0, 0);
+        AddTextPrinterParameterized(*windowPtr, FONT_2, gStringVar4, 0, 2, 0, 0);
         ScheduleBgCopyTilemapToVram(2);
     }
 }
@@ -2578,15 +2579,15 @@ static u8 DisplaySelectionWindow(u8 windowType)
     DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
     if (windowType == SELECTWINDOW_MOVES)
         return sPartyMenuInternal->windowId[0];
-    cursorDimension = GetMenuCursorDimensionByFont(2, 0);
-    fontAttribute = GetFontAttribute(2, FONTATTR_LETTER_SPACING);
+    cursorDimension = GetMenuCursorDimensionByFont(FONT_2, 0);
+    fontAttribute = GetFontAttribute(FONT_2, FONTATTR_LETTER_SPACING);
     for (i = 0; i < sPartyMenuInternal->numActions; ++i)
     {
         u8 fontColorsId = (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
         
-        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], 2, cursorDimension, (i * 16) + 2, fontAttribute, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_2, cursorDimension, (i * 16) + 2, fontAttribute, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
     }
-    Menu_InitCursorInternal(sPartyMenuInternal->windowId[0], 2, 0, 2, 16, sPartyMenuInternal->numActions, 0, 1);
+    Menu_InitCursorInternal(sPartyMenuInternal->windowId[0], FONT_2, 0, 2, 16, sPartyMenuInternal->numActions, 0, 1);
     ScheduleBgCopyTilemapToVram(2);
     return sPartyMenuInternal->windowId[0];
 }
@@ -2595,12 +2596,12 @@ static void PartyMenuPrintText(const u8 *text)
 {
     DrawStdFrameWithCustomTileAndPalette(6, FALSE, 0x4F, 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(6, 2, text, GetTextSpeedSetting(), 0, 2, 1, 3);
+    AddTextPrinterParameterized2(6, FONT_2, text, GetTextSpeedSetting(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void PartyMenuDisplayYesNoMenu(void)
 {
-    CreateYesNoMenu(&sPartyMenuYesNoWindowTemplate, 2, 0, 2, 0x4F, 13, 0);
+    CreateYesNoMenu(&sPartyMenuYesNoWindowTemplate, FONT_2, 0, 2, 0x4F, 13, 0);
 }
 
 static u8 CreateLevelUpStatsWindow(void)
@@ -2620,7 +2621,7 @@ static void PartyMenu_Oak_PrintText(u8 windowId, const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(windowId, 4, gStringVar4, GetTextSpeedSetting(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(windowId, FONT_4, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static bool8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void)
@@ -2661,8 +2662,8 @@ static void sub_8122138(u8 action)
         if (ptr->windowId[2] == 0xFF)
             ptr->windowId[2] = AddWindow(&gUnknown_845A178);
         sub_8112F18(ptr->windowId[2]);
-        attr = GetFontAttribute(2, FONTATTR_LETTER_SPACING);
-        AddTextPrinterParameterized4(ptr->windowId[2], 2, 3, 6, attr, 0, sFontColorTable[5], 0, sHMDescriptionTable[action - MENU_FIELD_MOVES]);
+        attr = GetFontAttribute(FONT_2, FONTATTR_LETTER_SPACING);
+        AddTextPrinterParameterized4(ptr->windowId[2], FONT_2, 3, 6, attr, 0, sFontColorTable[5], 0, sHMDescriptionTable[action - MENU_FIELD_MOVES]);
         PutWindowTilemap(ptr->windowId[2]);
         ScheduleBgCopyTilemapToVram(2);
     }
@@ -4583,7 +4584,7 @@ static void ShowMoveSelectWindow(u8 slot)
 {
     u8 i;
     u8 moveCount = 0;
-    u8 fontId = 2;
+    u8 fontId = FONT_2;
     u8 windowId = DisplaySelectionWindow(SELECTWINDOW_MOVES);
     u16 move;
 
@@ -4595,7 +4596,7 @@ static void ShowMoveSelectWindow(u8 slot)
                                     gMoveNames[move],
                                     GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + GetFontAttribute(fontId, FONTATTR_LETTER_SPACING),
                                     (i * 16) + 2,
-                                    TEXT_SPEED_FF,
+                                    TEXT_SKIP_DRAW,
                                     NULL);
         if (move != MOVE_NONE)
             ++moveCount;
@@ -5083,7 +5084,7 @@ static void ItemUseCB_RareCandyStep(u8 taskId, UNUSED TaskFunc func)
     GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
-    PlayFanfareByFanfareNum(0);
+    PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
     UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
     RemoveBagItem(gSpecialVar_ItemId, 1);
     GetMonNickname(mon, gStringVar1);
@@ -5133,7 +5134,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
     s16 *arrayPtr = sPartyMenuInternal->data;
 
     arrayPtr[12] = CreateLevelUpStatsWindow();
-    DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], 1, 2, 3);
+    DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }
@@ -5142,7 +5143,7 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
 {
     s16 *arrayPtr = sPartyMenuInternal->data;
 
-    DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], 1, 2, 3);
+    DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }

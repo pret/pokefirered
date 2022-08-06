@@ -1,12 +1,12 @@
-SSAnne_2F_Room4_MapScripts:: @ 8160CF2
+SSAnne_2F_Room4_MapScripts::
 	.byte 0
 
-SSAnne_2F_Room4_EventScript_Lamar:: @ 8160CF3
+SSAnne_2F_Room4_EventScript_Lamar::
 	trainerbattle_single TRAINER_GENTLEMAN_LAMAR, SSAnne_2F_Room4_Text_LamarIntro, SSAnne_2F_Room4_Text_LamarDefeat
 	msgbox SSAnne_2F_Room4_Text_LamarPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SSAnne_2F_Room4_EventScript_Dawn:: @ 8160D0A
+SSAnne_2F_Room4_EventScript_Dawn::
 	trainerbattle_single TRAINER_LASS_DAWN, SSAnne_2F_Room4_Text_DawnIntro, SSAnne_2F_Room4_Text_DawnDefeat
 	msgbox SSAnne_2F_Room4_Text_DawnPostBattle, MSGBOX_AUTOCLOSE
 	end

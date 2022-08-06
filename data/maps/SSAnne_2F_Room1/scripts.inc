@@ -1,7 +1,7 @@
-SSAnne_2F_Room1_MapScripts:: @ 8160C96
+SSAnne_2F_Room1_MapScripts::
 	.byte 0
 
-SSAnne_2F_Room1_EventScript_Gentleman:: @ 8160C97
+SSAnne_2F_Room1_EventScript_Gentleman::
 	lock
 	faceplayer
 	message SSAnne_2F_Room1_Text_SleepingMonLookedLikeThis

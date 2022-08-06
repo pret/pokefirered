@@ -1,7 +1,7 @@
-LavenderTown_House2_MapScripts:: @ 816B265
+LavenderTown_House2_MapScripts::
 	.byte 0
 
-LavenderTown_House2_EventScript_NameRater:: @ 816B266
+LavenderTown_House2_EventScript_NameRater::
 	lock
 	faceplayer
 	msgbox LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO
@@ -11,7 +11,7 @@ LavenderTown_House2_EventScript_NameRater:: @ 816B266
 	goto_if_eq LavenderTown_House2_EventScript_DontRateNickname
 	end
 
-LavenderTown_House2_EventScript_ChooseMon:: @ 816B287
+LavenderTown_House2_EventScript_ChooseMon::
 	msgbox LavenderTown_House2_Text_CritiqueWhichMonsNickname
 	special ChoosePartyMon
 	waitstate
@@ -21,12 +21,12 @@ LavenderTown_House2_EventScript_ChooseMon:: @ 816B287
 	goto_if_ge LavenderTown_House2_EventScript_DontRateNickname
 	end
 
-LavenderTown_House2_EventScript_DontRateNickname:: @ 816B2AA
+LavenderTown_House2_EventScript_DontRateNickname::
 	msgbox LavenderTown_House2_Text_ISeeComeVisitAgain
 	release
 	end
 
-LavenderTown_House2_EventScript_CheckCanRateMon:: @ 816B2B4
+LavenderTown_House2_EventScript_CheckCanRateMon::
 	specialvar VAR_RESULT, GetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq LavenderTown_House2_EventScript_CantNicknameEgg
@@ -45,17 +45,17 @@ LavenderTown_House2_EventScript_CheckCanRateMon:: @ 816B2B4
 	goto_if_eq LavenderTown_House2_EventScript_DontRateNickname
 	end
 
-LavenderTown_House2_EventScript_CantNicknameEgg:: @ 816B307
+LavenderTown_House2_EventScript_CantNicknameEgg::
 	msgbox LavenderTown_House2_Text_ThatIsMerelyAnEgg
 	release
 	end
 
-LavenderTown_House2_EventScript_CantNicknameTradeMon:: @ 816B311
+LavenderTown_House2_EventScript_CantNicknameTradeMon::
 	msgbox LavenderTown_House2_Text_TrulyImpeccableName
 	release
 	end
 
-LavenderTown_House2_EventScript_ChooseNewNickname:: @ 816B31B
+LavenderTown_House2_EventScript_ChooseNewNickname::
 	msgbox LavenderTown_House2_Text_WhatShallNewNicknameBe
 	call EventScript_ChangePokemonNickname
 	specialvar VAR_RESULT, NameRaterWasNicknameChanged
@@ -66,7 +66,7 @@ LavenderTown_House2_EventScript_ChooseNewNickname:: @ 816B31B
 	release
 	end
 
-LavenderTown_House2_EventScript_ChoseNewNickname:: @ 816B345
+LavenderTown_House2_EventScript_ChoseNewNickname::
 	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsName
 	release
 	end

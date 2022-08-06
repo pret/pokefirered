@@ -1,15 +1,15 @@
-PewterCity_Mart_MapScripts:: @ 816A6CD
+PewterCity_Mart_MapScripts::
 	.byte 0
 
-PewterCity_Mart_EventScript_Youngster:: @ 816A6CE
+PewterCity_Mart_EventScript_Youngster::
 	msgbox PewterCity_Mart_Text_BoughtWeirdFishFromShadyGuy, MSGBOX_NPC
 	end
 
-PewterCity_Mart_EventScript_Boy:: @ 816A6D7
+PewterCity_Mart_EventScript_Boy::
 	msgbox PewterCity_Mart_Text_GoodThingsIfRaiseMonsDiligently, MSGBOX_NPC
 	end
 
-PewterCity_Mart_EventScript_Clerk:: @ 816A6E0
+PewterCity_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -21,7 +21,7 @@ PewterCity_Mart_EventScript_Clerk:: @ 816A6E0
 	end
 
 	.align 2
-PewterCity_Mart_Items:: @ 816A708
+PewterCity_Mart_Items::
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE

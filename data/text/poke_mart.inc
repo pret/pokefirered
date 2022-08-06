@@ -1,18 +1,18 @@
-Text_MayIHelpYou:: @ 81A6211
+Text_MayIHelpYou::
 	.string "Hi, there!\n"
 	.string "May I help you?$"
 
-Text_FillOutQuestionnaire:: @ 81A622C
+Text_FillOutQuestionnaire::
 	.string "There is a questionnaire.\n"
 	.string "Would you like to fill it out?$"
 
-Text_QuestionnaireThankYou:: @ 81A6265
+Text_QuestionnaireThankYou::
 	.string "Thank you for taking the time to\n"
 	.string "fill out our questionnaire.\p"
 	.string "Your feedback will be used for\n"
 	.string "future reference.$"
 
-Text_YouKnowThoseWords:: @ 81A62D3
+Text_YouKnowThoseWords::
 	.string "Oh, hello!\n"
 	.string "You know those words?\p"
 	.string "That means you must know about\n"
@@ -20,10 +20,10 @@ Text_YouKnowThoseWords:: @ 81A62D3
 	.string "From now on, you should be\n"
 	.string "receiving MYSTERY GIFTS!$"
 
-Text_YouCanAccessMysteryGift:: @ 81A6359
+Text_YouCanAccessMysteryGift::
 	.string "Once you save your game, you can\n"
 	.string "access the MYSTERY GIFT.$"
 
-Text_ThankYouForAccessingMysteryGift:: @ 81A6393
+Text_ThankYouForAccessingMysteryGift::
 	.string "Thank you for accessing the\n"
 	.string "MYSTERY GIFT System.$"

@@ -8,7 +8,7 @@
 #include "evolution_graphics.h"
 #include "constants/songs.h"
 
-static void SpriteCallbackDummy_EvoSparkles(struct Sprite * sprite);
+static void SpriteCallbackDummy_EvoSparkles(struct Sprite *sprite);
 static void EvoTask_PreEvoSparkleSet1Init(u8 taskId);
 static void EvoTask_CreatePreEvoSparkleSet1(u8 taskId);
 static void EvoTask_WaitForPre1SparklesToGoUp(u8 taskId);
@@ -90,7 +90,7 @@ static const s16 sUnref_841EF28[][2] = {
     { 4, 0x10}
 };
 
-static void SpriteCallbackDummy_EvoSparkles(struct Sprite * sprite)
+static void SpriteCallbackDummy_EvoSparkles(struct Sprite *sprite)
 {
 
 }
@@ -102,7 +102,7 @@ static void SetEvoSparklesMatrices(void)
         SetOamMatrix(i + 20, sEvolutionSparkleMatrixScales[i], 0, 0, sEvolutionSparkleMatrixScales[i]);
 }
 
-static void SpriteCB_PreEvoSparkleSet1(struct Sprite * sprite)
+static void SpriteCB_PreEvoSparkleSet1(struct Sprite *sprite)
 {
     u8 mnum;
     if (sprite->y > 8)
@@ -143,7 +143,7 @@ static void CreatePreEvoSparkleSet1(u8 a0)
     }
 }
 
-static void SpriteCB_PreEvoSparkleSet2(struct Sprite * sprite)
+static void SpriteCB_PreEvoSparkleSet2(struct Sprite *sprite)
 {
     if (sprite->y < 88)
     {
@@ -174,7 +174,7 @@ static void CreatePreEvoSparkleSet2(u8 a0)
     }
 }
 
-static void SpriteCB_PostEvoSparkleSet1(struct Sprite * sprite)
+static void SpriteCB_PostEvoSparkleSet1(struct Sprite *sprite)
 {
     if (sprite->data[5] > 8)
     {
@@ -205,7 +205,7 @@ static void CreatePostEvoSparkleSet1(u8 a0, u8 a1)
     }
 }
 
-static void SpriteCB_PostEvoSparkleSet2(struct Sprite * sprite)
+static void SpriteCB_PostEvoSparkleSet2(struct Sprite *sprite)
 {
     u8 mnum;
     if ((sprite->data[7] & 3) == 0)
@@ -259,7 +259,7 @@ void LoadEvoSparkleSpriteAndPal(void)
     LoadSpritePalettes(sSpritePalette_EvolutionSparkles);
 }
 
-u8 LaunchTask_PreEvoSparklesSet1(u16 a0)
+u8 EvolutionSparkles_SpiralUpward(u16 a0)
 {
     u8 taskId = CreateTask(EvoTask_PreEvoSparkleSet1Init, 0);
     gTasks[taskId].data[1] = a0;
@@ -302,7 +302,7 @@ static void EvoTask_WaitForPre1SparklesToGoUp(u8 taskId)
         DestroyTask(taskId);
 }
 
-u8 LaunchTask_PreEvoSparklesSet2(void)
+u8 EvolutionSparkles_ArcDown(void)
 {
     u8 taskId = CreateTask(EvoTask_PreEvoSparkleSet2Init, 0);
     return taskId;
@@ -339,7 +339,7 @@ static void EvoTask_PreEvoSparkleSet2Teardown(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 LaunchTask_PostEvoSparklesSet1(void)
+u8 EvolutionSparkles_CircleInward(void)
 {
     u8 taskId = CreateTask(EvoTask_PostEvoSparklesSet1Init, 0);
     return taskId;
@@ -385,7 +385,7 @@ static void EvoTask_PostEvoSparklesSet1Teardown(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 LaunchTask_PostEvoSparklesSet2AndFlash(u16 species)
+u8 EvolutionSparkles_SprayAndFlash(u16 species)
 {
     u8 taskId = CreateTask(EvoTask_PostEvoSparklesSet2Init, 0);
     gTasks[taskId].data[2] = species;
@@ -436,7 +436,7 @@ static void EvoTask_PostEvoSparklesSet2Teardown(u8 taskId)
         DestroyTask(taskId);
 }
 
-u8 LaunchTask_PostEvoSparklesSet2AndFlash_Trade(u16 species)
+u8 EvolutionSparkles_SprayAndFlash_Trade(u16 species)
 {
     u8 taskId = CreateTask(EvoTask_PostEvoSparklesSet2TradeInit, 0);
     gTasks[taskId].data[2] = species;
@@ -481,7 +481,7 @@ static void EvoTask_CreatePostEvoSparklesSet2Trade(u8 taskId)
     }
 }
 
-static void SpriteCallbackDummy_MonSprites(struct Sprite * sprite)
+static void SpriteCallbackDummy_MonSprites(struct Sprite *sprite)
 {
 
 }
@@ -493,7 +493,7 @@ static void SpriteCallbackDummy_MonSprites(struct Sprite * sprite)
 #define tDirection       data[5]
 #define tSpeed           data[6]
 
-u8 LaunchTask_PrePostEvoMonSprites(u8 preEvoSpriteId, u8 postEvoSpriteId)
+u8 CycleEvolutionMonSprite(u8 preEvoSpriteId, u8 postEvoSpriteId)
 {
     u16 i;
     u8 taskId;

@@ -274,9 +274,9 @@
 #define MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB (3 | (4 << 8))
 
 // gMapGroup_IndoorViridian
-#define MAP_VIRIDIAN_CITY_HOUSE1            (0 | (5 << 8))
+#define MAP_VIRIDIAN_CITY_HOUSE             (0 | (5 << 8))
 #define MAP_VIRIDIAN_CITY_GYM               (1 | (5 << 8))
-#define MAP_VIRIDIAN_CITY_HOUSE2            (2 | (5 << 8))
+#define MAP_VIRIDIAN_CITY_SCHOOL            (2 | (5 << 8))
 #define MAP_VIRIDIAN_CITY_MART              (3 | (5 << 8))
 #define MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F (4 | (5 << 8))
 #define MAP_VIRIDIAN_CITY_POKEMON_CENTER_2F (5 | (5 << 8))

@@ -1,7 +1,7 @@
-VermilionCity_House2_MapScripts:: @ 816B5D6
+VermilionCity_House2_MapScripts::
 	.byte 0
 
-VermilionCity_House2_EventScript_Elyssa:: @ 816B5D7
+VermilionCity_House2_EventScript_Elyssa::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_FARFETCHD
@@ -22,18 +22,18 @@ VermilionCity_House2_EventScript_Elyssa:: @ 816B5D7
 	release
 	end
 
-VermilionCity_House2_EventScript_DeclineTrade:: @ 816B631
+VermilionCity_House2_EventScript_DeclineTrade::
 	msgbox VermilionCity_House2_Text_ThatsTooBad
 	release
 	end
 
-VermilionCity_House2_EventScript_NotRequestedMon:: @ 816B63B
+VermilionCity_House2_EventScript_NotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox VermilionCity_House2_Text_ThisIsNoMon
 	release
 	end
 
-VermilionCity_House2_EventScript_AlreadyTraded:: @ 816B649
+VermilionCity_House2_EventScript_AlreadyTraded::
 	msgbox VermilionCity_House2_Text_HowIsMyOldMon
 	release
 	end

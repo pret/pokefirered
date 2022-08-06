@@ -457,8 +457,8 @@ u16 MapPreview_CreateMapNameWindow(u8 mapsec)
     color[1] = TEXT_COLOR_RED; // Access violation
     color[2] = TEXT_COLOR_LIGHT_GRAY; // Access violation
     GetMapName(gStringVar4, mapsec, 0);
-    xctr = 104 - GetStringWidth(2, gStringVar4, 0);
-    AddTextPrinterParameterized4(windowId, 2, xctr / 2, 2, 0, 0, color/* Access violation */, -1, gStringVar4);
+    xctr = 104 - GetStringWidth(FONT_2, gStringVar4, 0);
+    AddTextPrinterParameterized4(windowId, FONT_2, xctr / 2, 2, 0, 0, color/* Access violation */, -1, gStringVar4);
     return windowId;
 }
 
@@ -484,7 +484,7 @@ static void Task_RunMapPreviewScreenForest(u8 taskId)
     case 0:
         if (!MapPreview_IsGfxLoadFinished() && !IsDma3ManagerBusyWithBgCopy())
         {
-            CopyWindowToVram(data[11], COPYWIN_BOTH);
+            CopyWindowToVram(data[11], COPYWIN_FULL);
             data[0]++;
         }
         break;

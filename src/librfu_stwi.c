@@ -118,7 +118,7 @@ void STWI_init_Callback_S(void)
     STWI_set_Callback_S(NULL);
 }
 
-// The callback can take 2 or 3 arguments. 
+// The callback can take 2 or 3 arguments.
 void STWI_set_Callback_M(void *callbackM)
 {
     gSTWIStatus->callbackM = callbackM;
@@ -235,7 +235,7 @@ void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
         packetBytes += sizeof(u32);
         *packetBytes++ = mcTimer;
         *packetBytes++ = maxMFrame;
-        *(u16*)packetBytes = availSlotFlag;
+        *(u16 *)packetBytes = availSlotFlag;
         STWI_start_Command();
     }
 }

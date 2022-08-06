@@ -41,7 +41,7 @@ u32 mevent_srv_common_do_exec(u16 * a0)
     return result;
 }
 
-static void mevent_srv_init_common(struct mevent_srv_common * svr, const void * cmdBuffer, u32 sendPlayerNo, u32 recvPlayerNo)
+static void mevent_srv_init_common(struct mevent_srv_common * svr, const void *cmdBuffer, u32 sendPlayerNo, u32 recvPlayerNo)
 {
     svr->unk_00 = 0;
     svr->mainseqno = 0;
@@ -62,13 +62,13 @@ static void mevent_srv_free_resources(struct mevent_srv_common * svr)
     Free(svr->mevent_unk1442cc);
 }
 
-static void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, const void * src, u32 size)
+static void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, const void *src, u32 size)
 {
      AGB_ASSERT_EX(size <= ME_SEND_BUF_SIZE, ABSPATH("mevent_server.c"), 257);
     mevent_srv_sub_init_send(&svr->manager, ident, src, size);
 }
 
-static void * mevent_first_if_not_null_else_second(void * a0, void * a1)
+static void *mevent_first_if_not_null_else_second(void *a0, void *a1)
 {
     if (a0 != NULL)
         return a0;
@@ -76,7 +76,7 @@ static void * mevent_first_if_not_null_else_second(void * a0, void * a1)
         return a1;
 }
 
-static u32 mevent_compare_pointers(void * a0, void * a1)
+static u32 mevent_compare_pointers(void *a0, void *a1)
 {
     if (a1 < a0)
         return 0;
@@ -119,7 +119,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
 {
     // process command
     const struct mevent_server_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
-    void * ptr;
+    void *ptr;
     svr->cmdidx++;
 
     switch (cmd->instr)

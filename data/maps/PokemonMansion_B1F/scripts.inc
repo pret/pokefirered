@@ -1,12 +1,12 @@
-PokemonMansion_B1F_MapScripts:: @ 81622FC
+PokemonMansion_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_B1F_OnLoad
 	.byte 0
 
-PokemonMansion_B1F_OnLoad:: @ 8162302
+PokemonMansion_B1F_OnLoad::
 	call_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, PokemonMansion_EventScript_PressSwitch_B1F
 	end
 
-PokemonMansion_B1F_EventScript_Statue:: @ 816230C
+PokemonMansion_B1F_EventScript_Statue::
 	lockall
 	setvar VAR_0x8004, 3
 	call PokemonMansion_EventScript_SecretSwitch
@@ -16,16 +16,16 @@ PokemonMansion_B1F_EventScript_Statue:: @ 816230C
 	releaseall
 	end
 
-PokemonMansion_B1F_EventScript_DiarySep1st:: @ 8162320
+PokemonMansion_B1F_EventScript_DiarySep1st::
 	msgbox PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful, MSGBOX_SIGN
 	end
 
-PokemonMansion_B1F_EventScript_Lewis:: @ 8162329
+PokemonMansion_B1F_EventScript_Lewis::
 	trainerbattle_single TRAINER_BURGLAR_LEWIS, PokemonMansion_B1F_Text_LewisIntro, PokemonMansion_B1F_Text_LewisDefeat
 	msgbox PokemonMansion_B1F_Text_LewisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PokemonMansion_B1F_EventScript_Ivan:: @ 8162340
+PokemonMansion_B1F_EventScript_Ivan::
 	trainerbattle_single TRAINER_SCIENTIST_IVAN, PokemonMansion_B1F_Text_IvanIntro, PokemonMansion_B1F_Text_IvanDefeat
 	msgbox PokemonMansion_B1F_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
 	end

@@ -1,9 +1,9 @@
 .equ REQUIRED_SEEN_MONS, 10
 
-Route2_EastBuilding_MapScripts:: @ 816F67E
+Route2_EastBuilding_MapScripts::
 	.byte 0
 
-Route2_EastBuilding_EventScript_Aide:: @ 816F67F
+Route2_EastBuilding_EventScript_Aide::
 	lock
 	faceplayer
 	call Route2_EastBuilding_EventScript_GetAideRequestInfo
@@ -27,16 +27,16 @@ Route2_EastBuilding_EventScript_Aide:: @ 816F67F
 	release
 	end
 
-Route2_EastBuilding_EventScript_AlreadyGotHM05:: @ 816F701
+Route2_EastBuilding_EventScript_AlreadyGotHM05::
 	msgbox Route2_EastBuilding_Text_ExplainHM05
 	release
 	end
 
-Route2_EastBuilding_EventScript_GetAideRequestInfo:: @ 816F70B
+Route2_EastBuilding_EventScript_GetAideRequestInfo::
 	getnumberstring 0, REQUIRED_SEEN_MONS
 	getitemname 1, ITEM_HM05
 	return
 
-Route2_EastBuilding_EventScript_Rocker:: @ 816F714
+Route2_EastBuilding_EventScript_Rocker::
 	msgbox Route2_EastBuilding_Text_CanGetThroughRockTunnel, MSGBOX_NPC
 	end

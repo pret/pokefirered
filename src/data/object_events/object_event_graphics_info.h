@@ -1,5 +1,5 @@
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -18,7 +18,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedBike = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -37,7 +37,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedBike = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedSurf = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -56,7 +56,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedSurf = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedFieldMove = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
@@ -75,7 +75,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedFieldMove = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Policeman = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -94,7 +94,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Policeman = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RSBrendan = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -113,7 +113,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RSBrendan = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RSMay = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -132,7 +132,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RSMay = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -151,7 +151,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleBoy = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleGirl = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -170,7 +170,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LittleGirl = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SittingBoy = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -189,7 +189,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SittingBoy = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lass = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -208,7 +208,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lass = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Youngster = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -227,7 +227,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Youngster = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1 = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -246,7 +246,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1 = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman3 = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -265,7 +265,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman3 = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -284,7 +284,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BattleGirl = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -303,7 +303,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BattleGirl = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BugCatcher = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -322,7 +322,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BugCatcher = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatMan = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -341,7 +341,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatMan = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaldingMan = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -360,7 +360,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaldingMan = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman2 = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -379,7 +379,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman2 = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan1 = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -398,7 +398,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan1 = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WorkerM = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -417,7 +417,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WorkerM = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WorkerF = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -436,7 +436,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WorkerF = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Beauty = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -455,7 +455,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Beauty = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chef = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -474,7 +474,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chef = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan2 = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -493,7 +493,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldMan2 = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldWoman = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -512,7 +512,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldWoman = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Camper = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -531,7 +531,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Camper = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Picnicker = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -550,7 +550,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Picnicker = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CooltrainerM = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -569,7 +569,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CooltrainerM = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CooltrainerF = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -588,7 +588,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CooltrainerF = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SuperNerd = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -607,7 +607,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SuperNerd = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Channeler = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -626,7 +626,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Channeler = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketF = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -645,7 +645,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketF = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerMWater = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -664,7 +664,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerMWater = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerFWater = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -683,7 +683,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerFWater = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerMLand = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -702,7 +702,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerMLand = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerFLand = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -721,7 +721,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerFLand = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blackbelt = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -740,7 +740,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blackbelt = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -759,7 +759,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Gentleman = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -778,7 +778,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Gentleman = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sailor = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -797,7 +797,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sailor = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Captain = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -816,7 +816,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Captain = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fisher = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -835,7 +835,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fisher = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TeachyTVHost = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -854,7 +854,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TeachyTVHost = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWoman = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -873,7 +873,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWoman = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberF = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -892,7 +892,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberF = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMWater = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -911,7 +911,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMWater = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMLand = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -930,7 +930,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMLand = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hiker = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -949,7 +949,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hiker = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Biker = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -968,7 +968,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Biker = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GymGuy = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -987,7 +987,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GymGuy = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1006,7 +1006,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMaleReceptionist = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1025,7 +1025,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMaleReceptio
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1044,7 +1044,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfOak = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1063,7 +1063,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfOak = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1082,7 +1082,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rocker = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1101,7 +1101,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rocker = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrFuji = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1120,7 +1120,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrFuji = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bruno = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1139,7 +1139,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bruno = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldManLyingDown = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -1158,7 +1158,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldManLyingDown = 
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CutTree = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1177,7 +1177,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CutTree = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clerk = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1196,7 +1196,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clerk = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MGDeliveryman = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1215,7 +1215,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MGDeliveryman = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TrainerTowerDude = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1234,7 +1234,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TrainerTowerDude =
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableClubReceptionist = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1253,7 +1253,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableClubReception
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnionRoomReceptionist = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1272,7 +1272,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnionRoomReception
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RockSmashRock = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1291,7 +1291,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RockSmashRock = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StrengthBoulder = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1310,7 +1310,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StrengthBoulder = 
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenNormal = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1329,7 +1329,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenNormal = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenBike = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1348,7 +1348,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenBike = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenSurf = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1367,7 +1367,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenSurf = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenFieldMove = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
@@ -1386,7 +1386,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenFieldMove = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedBikeAlt = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1405,7 +1405,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedBikeAlt = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketM = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1424,7 +1424,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketM = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Celio = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1443,7 +1443,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Celio = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Agatha = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1462,7 +1462,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Agatha = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Brock = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1481,7 +1481,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Brock = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Misty = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1500,7 +1500,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Misty = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LtSurge = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1519,7 +1519,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LtSurge = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Erika = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1538,7 +1538,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Erika = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Koga = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1557,7 +1557,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Koga = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giovanni = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1576,7 +1576,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Giovanni = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blaine = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1595,7 +1595,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blaine = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sabrina = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1614,7 +1614,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sabrina = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bill = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1633,7 +1633,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bill = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daisy = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1652,7 +1652,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daisy = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lorelei = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1671,7 +1671,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lorelei = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lance = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1690,7 +1690,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lance = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blue = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1709,7 +1709,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blue = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedFish = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1728,7 +1728,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedFish = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenFish = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1747,7 +1747,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenFish = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedVSSeeker = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
@@ -1766,7 +1766,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedVSSeeker = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedVSSeekerBike = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1785,7 +1785,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedVSSeekerBike = 
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenVSSeeker = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 256,
@@ -1804,7 +1804,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenVSSeeker = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenVSSeekerBike = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
     .size = 512,
@@ -1823,7 +1823,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GreenVSSeekerBike 
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownMap = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1842,7 +1842,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownMap = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pokedex = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1861,7 +1861,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pokedex = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GBAKid = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1880,7 +1880,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GBAKid = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Snorlax = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -1899,7 +1899,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Snorlax = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1918,7 +1918,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ruby = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1937,7 +1937,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ruby = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sapphire = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1956,7 +1956,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sapphire = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldAmber = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -1975,7 +1975,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldAmber = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GymSign = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -1994,7 +1994,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GymSign = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sign = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2013,7 +2013,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sign = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TrainerTips = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2032,7 +2032,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TrainerTips = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clipboard = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2051,7 +2051,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clipboard = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Meteorite = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_METEORITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2070,7 +2070,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Meteorite = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LaprasDoll = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2089,7 +2089,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LaprasDoll = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Spearow = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2108,7 +2108,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Spearow = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Omanyte = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2127,7 +2127,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Omanyte = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kangaskhan = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2146,7 +2146,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kangaskhan = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Psyduck = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2165,7 +2165,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Psyduck = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NidoranF = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2184,7 +2184,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NidoranF = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NidoranM = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2203,7 +2203,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NidoranM = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nidorino = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2222,7 +2222,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nidorino = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Meowth = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2241,7 +2241,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Meowth = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seel = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2260,7 +2260,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seel = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Voltorb = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2279,7 +2279,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Voltorb = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Slowpoke = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2298,7 +2298,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Slowpoke = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Slowbro = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2317,7 +2317,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Slowbro = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Machop = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2336,7 +2336,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Machop = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wigglytuff = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2355,7 +2355,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wigglytuff = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Doduo = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2374,7 +2374,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Doduo = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fearow = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2393,7 +2393,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fearow = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lapras = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2412,7 +2412,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lapras = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Zapdos = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2431,7 +2431,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Zapdos = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Moltres = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2450,7 +2450,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Moltres = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Articuno = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2469,7 +2469,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Articuno = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysD = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2488,7 +2488,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysD = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysA = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2507,7 +2507,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysA = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysN = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2526,7 +2526,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysN = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mewtwo = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2545,7 +2545,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mewtwo = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mew = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2564,7 +2564,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mew = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Entei = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2583,7 +2583,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Entei = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Raikou = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2602,7 +2602,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Raikou = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Suicune = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2621,7 +2621,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Suicune = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2640,7 +2640,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
@@ -2659,7 +2659,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Celebi = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2678,7 +2678,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Celebi = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cubone = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2697,7 +2697,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cubone = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Machoke = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2716,7 +2716,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Machoke = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kabuto = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2735,7 +2735,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kabuto = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Poliwrath = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2754,7 +2754,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Poliwrath = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pidgeot = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2773,7 +2773,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pidgeot = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chansey = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2792,7 +2792,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chansey = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2811,7 +2811,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pikachu = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Jigglypuff = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2830,7 +2830,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Jigglypuff = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pidgey = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2849,7 +2849,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pidgey = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clefairy = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
@@ -2868,7 +2868,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clefairy = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mom = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
@@ -2887,7 +2887,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mom = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seagallop = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_SEAGALLOP,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 2048,
@@ -2906,7 +2906,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seagallop = {
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne = {
-    .tileTag = SPRITE_INVALID_TAG,
+    .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_SS_ANNE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 4096,
@@ -2923,4 +2923,3 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne = {
     .images = sPicTable_SSAnne,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
-

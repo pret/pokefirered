@@ -81,7 +81,7 @@
 #define MON_DATA_NATIONAL_RIBBON   76
 #define MON_DATA_EARTH_RIBBON      77
 #define MON_DATA_WORLD_RIBBON      78
-#define MON_DATA_FILLER            79
+#define MON_DATA_UNUSED_RIBBONS    79
 #define MON_DATA_EVENT_LEGAL       80
 #define MON_DATA_KNOWN_MOVES       81
 #define MON_DATA_RIBBON_COUNT      82
@@ -134,44 +134,51 @@
 #define EGG_GROUPS_PER_MON      2
 
 // Pokemon natures
-#define NATURE_HARDY 0
-#define NATURE_LONELY 1
-#define NATURE_BRAVE 2
-#define NATURE_ADAMANT 3
-#define NATURE_NAUGHTY 4
-#define NATURE_BOLD 5
-#define NATURE_DOCILE 6
-#define NATURE_RELAXED 7
-#define NATURE_IMPISH 8
-#define NATURE_LAX 9
-#define NATURE_TIMID 10
-#define NATURE_HASTY 11
-#define NATURE_SERIOUS 12
-#define NATURE_JOLLY 13
-#define NATURE_NAIVE 14
-#define NATURE_MODEST 15
-#define NATURE_MILD 16
-#define NATURE_QUIET 17
-#define NATURE_BASHFUL 18
-#define NATURE_RASH 19
-#define NATURE_CALM 20
-#define NATURE_GENTLE 21
-#define NATURE_SASSY 22
-#define NATURE_CAREFUL 23
-#define NATURE_QUIRKY 24
+#define NATURE_HARDY    0
+#define NATURE_LONELY   1
+#define NATURE_BRAVE    2
+#define NATURE_ADAMANT  3
+#define NATURE_NAUGHTY  4
+#define NATURE_BOLD     5
+#define NATURE_DOCILE   6
+#define NATURE_RELAXED  7
+#define NATURE_IMPISH   8
+#define NATURE_LAX      9
+#define NATURE_TIMID    10
+#define NATURE_HASTY    11
+#define NATURE_SERIOUS  12
+#define NATURE_JOLLY    13
+#define NATURE_NAIVE    14
+#define NATURE_MODEST   15
+#define NATURE_MILD     16
+#define NATURE_QUIET    17
+#define NATURE_BASHFUL  18
+#define NATURE_RASH     19
+#define NATURE_CALM     20
+#define NATURE_GENTLE   21
+#define NATURE_SASSY    22
+#define NATURE_CAREFUL  23
+#define NATURE_QUIRKY   24
+#define NUM_NATURES     25
 
 // Pokemon Stats
-#define STAT_HP 0
-#define STAT_ATK 1
-#define STAT_DEF 2
-#define STAT_SPEED 3
-#define STAT_SPATK 4
-#define STAT_SPDEF 5
-#define STAT_ACC 6 // only in battles
-#define STAT_EVASION 7 // only in battles
+#define STAT_HP      0
+#define STAT_ATK     1
+#define STAT_DEF     2
+#define STAT_SPEED   3
+#define STAT_SPATK   4
+#define STAT_SPDEF   5
+#define NUM_STATS    6
 
-#define NUM_STATS 6
-#define NUM_BATTLE_STATS 8
+#define STAT_ACC     6 // Only in battles.
+#define STAT_EVASION 7 // Only in battles.
+
+#define NUM_NATURE_STATS (NUM_STATS - 1) // excludes HP
+#define NUM_BATTLE_STATS (NUM_STATS + 2) // includes Accuracy and Evasion
+
+#define MIN_STAT_STAGE     0
+#define DEFAULT_STAT_STAGE 6
+#define MAX_STAT_STAGE    12
 
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536

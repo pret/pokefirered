@@ -1,15 +1,15 @@
-SSAnne_B1F_Room5_MapScripts:: @ 8160DD5
+SSAnne_B1F_Room5_MapScripts::
 	.byte 0
 
-SSAnne_B1F_Room5_EventScript_Boy:: @ 8160DD6
+SSAnne_B1F_Room5_EventScript_Boy::
 	msgbox SSAnne_B1F_Room5_Text_MachokeHasStrengthToMoveRocks, MSGBOX_NPC
 	end
 
-SSAnne_B1F_Room5_EventScript_Machoke:: @ 8160DDF
+SSAnne_B1F_Room5_EventScript_Machoke::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_MACHOKE, 0
+	playmoncry SPECIES_MACHOKE, CRY_MODE_NORMAL
 	msgbox SSAnne_B1F_Room5_Text_Machoke
 	waitmoncry
 	release

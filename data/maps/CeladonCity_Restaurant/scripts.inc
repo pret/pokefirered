@@ -1,15 +1,15 @@
-CeladonCity_Restaurant_MapScripts:: @ 816D1EA
+CeladonCity_Restaurant_MapScripts::
 	.byte 0
 
-CeladonCity_Restaurant_EventScript_Chef:: @ 816D1EB
+CeladonCity_Restaurant_EventScript_Chef::
 	msgbox CeladonCity_Restaurant_Text_TakingBreakRightNow, MSGBOX_NPC
 	end
 
-CeladonCity_Restaurant_EventScript_Woman:: @ 816D1F4
+CeladonCity_Restaurant_EventScript_Woman::
 	msgbox CeladonCity_Restaurant_Text_OftenGoToDrugstore, MSGBOX_NPC
 	end
 
-CeladonCity_Restaurant_EventScript_CoinCaseMan:: @ 816D1FD
+CeladonCity_Restaurant_EventScript_CoinCaseMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_COIN_CASE, CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase
@@ -22,20 +22,20 @@ CeladonCity_Restaurant_EventScript_CoinCaseMan:: @ 816D1FD
 	release
 	end
 
-CeladonCity_Restaurant_EventScript_NoRoomForCoinCase:: @ 816D241
+CeladonCity_Restaurant_EventScript_NoRoomForCoinCase::
 	msgbox CeladonCity_Restaurant_Text_MakeRoomForThis
 	release
 	end
 
-CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase:: @ 816D24B
+CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase::
 	msgbox CeladonCity_Restaurant_Text_ThoughtIdWinItBack
 	release
 	end
 
-CeladonCity_Restaurant_EventScript_WorkerM:: @ 816D255
+CeladonCity_Restaurant_EventScript_WorkerM::
 	msgbox CeladonCity_Restaurant_Text_PsstBasementUnderGameCorner, MSGBOX_NPC
 	end
 
-CeladonCity_Restaurant_EventScript_FatMan:: @ 816D25E
+CeladonCity_Restaurant_EventScript_FatMan::
 	msgbox CeladonCity_Restaurant_Text_ManLostItAllAtSlots, MSGBOX_NPC
 	end

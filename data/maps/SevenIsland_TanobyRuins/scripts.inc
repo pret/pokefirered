@@ -1,2 +1,2 @@
-SevenIsland_TanobyRuins_MapScripts:: @ 8168C07
+SevenIsland_TanobyRuins_MapScripts::
 	.byte 0

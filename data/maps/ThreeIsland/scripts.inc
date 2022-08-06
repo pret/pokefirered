@@ -8,34 +8,34 @@
 .equ LOCALID_BIKER5, 8
 .equ LOCALID_BIKER6, 14
 
-ThreeIsland_MapScripts:: @ 81677AD
+ThreeIsland_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_OnTransition
 	.byte 0
 
-ThreeIsland_OnTransition:: @ 81677B3
+ThreeIsland_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	call_if_set FLAG_RESCUED_LOSTELLE, ThreeIsland_EventScript_HideAntiBikers
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	call_if_eq ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers
 	end
 
-ThreeIsland_EventScript_HideAntiBikers:: @ 81677CB
+ThreeIsland_EventScript_HideAntiBikers::
 	setflag FLAG_HIDE_THREE_ISLAND_ANTIBIKERS
 	return
 
-ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers:: @ 81677CF
+ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers::
 	setobjectmovementtype LOCALID_ANTIBIKER1, MOVEMENT_TYPE_LOOK_AROUND
 	setobjectmovementtype LOCALID_ANTIBIKER2, MOVEMENT_TYPE_LOOK_AROUND
 	return
 
-ThreeIsland_EventScript_Biker:: @ 81677D8
+ThreeIsland_EventScript_Biker::
 	lock
 	setvar VAR_TEMP_1, 2
 	call ThreeIsland_EventScript_BikerArgumentScene
 	release
 	end
 
-ThreeIsland_EventScript_AntiBiker1:: @ 81677E5
+ThreeIsland_EventScript_AntiBiker1::
 	lock
 	goto_if_set FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER, ThreeIsland_EventScript_AntiBiker1GotFullRestore
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
@@ -45,14 +45,14 @@ ThreeIsland_EventScript_AntiBiker1:: @ 81677E5
 	release
 	end
 
-ThreeIsland_EventScript_AntiBiker1GotFullRestore:: @ 8167806
+ThreeIsland_EventScript_AntiBiker1GotFullRestore::
 	applymovement LOCALID_ANTIBIKER1, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_YouveGotImpressiveMons
 	release
 	end
 
-ThreeIsland_EventScript_GiveFullRestore:: @ 816781A
+ThreeIsland_EventScript_GiveFullRestore::
 	applymovement LOCALID_ANTIBIKER1, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_ThankYouOhYourMonGotHurt
@@ -66,12 +66,12 @@ ThreeIsland_EventScript_GiveFullRestore:: @ 816781A
 	release
 	end
 
-ThreeIsland_EventScript_NoRoomForFullRestore:: @ 8167865
+ThreeIsland_EventScript_NoRoomForFullRestore::
 	msgbox ThreeIsland_Text_OhYourBagIsFull
 	release
 	end
 
-ThreeIsland_EventScript_BikerArgumentScene:: @ 816786F
+ThreeIsland_EventScript_BikerArgumentScene::
 	compare VAR_TEMP_1, 1
 	call_if_eq ThreeIsland_EventScript_PlayerFaceLeft
 	compare VAR_TEMP_1, 2
@@ -108,42 +108,42 @@ ThreeIsland_EventScript_BikerArgumentScene:: @ 816786F
 	msgbox ThreeIsland_Text_WhosGonnaMakeMe
 	return
 
-ThreeIsland_EventScript_PlayerFaceUp:: @ 8167931
+ThreeIsland_EventScript_PlayerFaceUp::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 @ Unused
-ThreeIsland_EventScript_PlayerFaceDown:: @ 816793C
+ThreeIsland_EventScript_PlayerFaceDown::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PlayerFaceLeft:: @ 8167947
+ThreeIsland_EventScript_PlayerFaceLeft::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PlayerFaceRight:: @ 8167952
+ThreeIsland_EventScript_PlayerFaceRight::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PlayerFaceBiker:: @ 816795D
+ThreeIsland_EventScript_PlayerFaceBiker::
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 9
 	goto_if_ge ThreeIsland_EventScript_PlayerFaceUp
 	goto ThreeIsland_EventScript_PlayerFaceRight
 	end
 
-ThreeIsland_EventScript_PlayerFaceAntiBiker:: @ 8167973
+ThreeIsland_EventScript_PlayerFaceAntiBiker::
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 9
 	goto_if_ge ThreeIsland_EventScript_PlayerFaceLeft
 	goto ThreeIsland_EventScript_PlayerFaceUp
 	end
 
-ThreeIsland_EventScript_AntiBiker2:: @ 8167989
+ThreeIsland_EventScript_AntiBiker2::
 	lock
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if_eq ThreeIsland_EventScript_AntiBiker2BikersGone
@@ -152,14 +152,14 @@ ThreeIsland_EventScript_AntiBiker2:: @ 8167989
 	release
 	end
 
-ThreeIsland_EventScript_AntiBiker2BikersGone:: @ 81679A1
+ThreeIsland_EventScript_AntiBiker2BikersGone::
 	applymovement LOCALID_ANTIBIKER2, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_LostelleWentOffTowardsBondBridge
 	release
 	end
 
-ThreeIsland_EventScript_BikerBossIntroTrigger:: @ 81679B5
+ThreeIsland_EventScript_BikerBossIntroTrigger::
 	lockall
 	textcolor 0
 	applymovement LOCALID_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
@@ -181,45 +181,45 @@ ThreeIsland_EventScript_BikerBossIntroTrigger:: @ 81679B5
 	releaseall
 	end
 
-ThreeIsland_Movement_SpeakLeft:: @ 8167A19
+ThreeIsland_Movement_SpeakLeft::
 	walk_in_place_left
 	step_end
 
-ThreeIsland_Movement_SpeakRight:: @ 8167A1B
+ThreeIsland_Movement_SpeakRight::
 	walk_in_place_right
 	step_end
 
-ThreeIsland_EventScript_BattleBikersTriggerLeft:: @ 8167A1D
+ThreeIsland_EventScript_BattleBikersTriggerLeft::
 	lockall
 	setvar VAR_TEMP_1, 0
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
 
-ThreeIsland_EventScript_BattleBikersTriggerMidLeft:: @ 8167A29
+ThreeIsland_EventScript_BattleBikersTriggerMidLeft::
 	lockall
 	setvar VAR_TEMP_1, 1
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
 
-ThreeIsland_EventScript_BattleBikersTriggerMid:: @ 8167A35
+ThreeIsland_EventScript_BattleBikersTriggerMid::
 	lockall
 	setvar VAR_TEMP_1, 2
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
 
-ThreeIsland_EventScript_BattleBikersTriggerMidRight:: @ 8167A41
+ThreeIsland_EventScript_BattleBikersTriggerMidRight::
 	lockall
 	setvar VAR_TEMP_1, 3
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
 
-ThreeIsland_EventScript_BattleBikersTriggerRight:: @ 8167A4D
+ThreeIsland_EventScript_BattleBikersTriggerRight::
 	lockall
 	setvar VAR_TEMP_1, 4
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
 
-ThreeIsland_EventScript_BattleBikersScene:: @ 8167A59
+ThreeIsland_EventScript_BattleBikersScene::
 	textcolor 0
 	applymovement LOCALID_BIKER1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
@@ -294,40 +294,40 @@ ThreeIsland_EventScript_BattleBikersScene:: @ 8167A59
 	releaseall
 	end
 
-ThreeIsland_EventScript_PaxtonApproachLeft:: @ 8167BC6
+ThreeIsland_EventScript_PaxtonApproachLeft::
 	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachLeft
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PaxtonApproachMidLeft:: @ 8167BD8
+ThreeIsland_EventScript_PaxtonApproachMidLeft::
 	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidLeft
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PaxtonApproachMid:: @ 8167BEA
+ThreeIsland_EventScript_PaxtonApproachMid::
 	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMid
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PaxtonApproachMidRight:: @ 8167C03
+ThreeIsland_EventScript_PaxtonApproachMidRight::
 	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidRight
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_PaxtonApproachRight:: @ 8167C1C
+ThreeIsland_EventScript_PaxtonApproachRight::
 	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachRight
 	waitmovement 0
 	return
 
-ThreeIsland_EventScript_LeaveBikersAlone:: @ 8167C35
+ThreeIsland_EventScript_LeaveBikersAlone::
 	msgbox ThreeIsland_Text_ThatsSmart
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerLeaveBikers
@@ -338,53 +338,53 @@ ThreeIsland_EventScript_LeaveBikersAlone:: @ 8167C35
 	releaseall
 	end
 
-ThreeIsland_Movement_PlayerLeaveBikers:: @ 8167C55
+ThreeIsland_Movement_PlayerLeaveBikers::
 	walk_down
 	step_end
 
-ThreeIsland_Movement_BikerApproach:: @ 8167C57
+ThreeIsland_Movement_BikerApproach::
 	walk_down
 	step_end
 
-ThreeIsland_Movement_Biker1ReturnToPack:: @ 8167C59
+ThreeIsland_Movement_Biker1ReturnToPack::
 	walk_up
 	walk_in_place_fastest_left
 	step_end
 
-ThreeIsland_Movement_BikerSpeak:: @ 8167C5C
+ThreeIsland_Movement_BikerSpeak::
 	walk_in_place_down
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachLeft:: @ 8167C5E
+ThreeIsland_Movement_PaxtonApproachLeft::
 	walk_down
 	walk_left
 	walk_in_place_fastest_down
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachMidLeft:: @ 8167C62
+ThreeIsland_Movement_PaxtonApproachMidLeft::
 	walk_down
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachMid:: @ 8167C64
+ThreeIsland_Movement_PaxtonApproachMid::
 	walk_down
 	walk_down
 	walk_in_place_fastest_right
 	step_end
 
-ThreeIsland_Movement_PlayerFacePaxton:: @ 8167C68
+ThreeIsland_Movement_PlayerFacePaxton::
 	delay_16
 	delay_16
 	walk_in_place_fastest_left
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachMidRight:: @ 8167C6C
+ThreeIsland_Movement_PaxtonApproachMidRight::
 	walk_down
 	walk_down
 	walk_right
 	walk_in_place_fastest_right
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachRight:: @ 8167C71
+ThreeIsland_Movement_PaxtonApproachRight::
 	walk_down
 	walk_down
 	walk_right
@@ -392,28 +392,28 @@ ThreeIsland_Movement_PaxtonApproachRight:: @ 8167C71
 	walk_in_place_fastest_right
 	step_end
 
-ThreeIsland_EventScript_Woman:: @ 8167C77
+ThreeIsland_EventScript_Woman::
 	msgbox ThreeIsland_Text_WouldntWantToSeeBikersHereAgain, MSGBOX_NPC
 	end
 
-ThreeIsland_EventScript_LittleBoy:: @ 8167C80
+ThreeIsland_EventScript_LittleBoy::
 	msgbox ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame, MSGBOX_NPC
 	end
 
-ThreeIsland_EventScript_Doduo:: @ 8167C89
+ThreeIsland_EventScript_Doduo::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_DODUO, 0
+	playmoncry SPECIES_DODUO, CRY_MODE_NORMAL
 	msgbox ThreeIsland_Text_Doduo
 	waitmoncry
 	release
 	end
 
-ThreeIsland_EventScript_IslandSign:: @ 8167C9C
+ThreeIsland_EventScript_IslandSign::
 	msgbox ThreeIsland_Text_IslandSign, MSGBOX_SIGN
 	end
 
-ThreeIsland_EventScript_Biker6:: @ 8167CA5
+ThreeIsland_EventScript_Biker6::
 	msgbox ThreeIsland_Text_IslandBelongsToUs, MSGBOX_NPC
 	end

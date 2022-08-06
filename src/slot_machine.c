@@ -75,10 +75,10 @@ struct SlotMachineState
 struct SlotMachineGfxManager
 {
     u32 field_00[3];
-    struct Sprite * reelIconSprites[3][5];
-    struct Sprite * creditDigitSprites[4];
-    struct Sprite * payoutDigitSprites[4];
-    struct Sprite * clefairySprites[2];
+    struct Sprite *reelIconSprites[3][5];
+    struct Sprite *creditDigitSprites[4];
+    struct Sprite *payoutDigitSprites[4];
+    struct Sprite *clefairySprites[2];
     vu16 * reelIconAffineParamPtr;
 };
 
@@ -1743,7 +1743,7 @@ static void InitGfxManager(struct SlotMachineGfxManager * manager)
 
 static void CreateReelIconSprites(void)
 {
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     s32 i, j;
     s32 spriteId;
     s32 animId;
@@ -1781,12 +1781,12 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
             sSlotMachineGfxManager->reelIconSprites[i][j]->y2 = ypos;
             {
                 s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
-                struct Sprite * sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
+                struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
                 StartSpriteAnim(sprite, animId);
             }
             {
                 s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
-                struct Sprite * sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
+                struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
                 StartSpriteAnim(sprite, animId);
             }
             sSlotMachineGfxManager->reelIconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[sReelIconAnimByReelAndPos[i][reelPos]]);
@@ -1945,7 +1945,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
     switch (*state)
     {
     case 0:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         (*state)++;
         break;
     case 1:
@@ -1988,11 +1988,11 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         FillWindowPixelBuffer(1, 0xFF);
         PutWindowTilemap(1);
 
-        x = 236 - GetStringWidth(0, gString_SlotMachineControls, 0);
+        x = 236 - GetStringWidth(FONT_0, gString_SlotMachineControls, 0);
         textColor[0] = TEXT_DYNAMIC_COLOR_6;
         textColor[1] = TEXT_COLOR_WHITE;
         textColor[2] = TEXT_COLOR_DARK_GRAY;
-        AddTextPrinterParameterized3(1, 0, x, 0, textColor, 0, gString_SlotMachineControls);
+        AddTextPrinterParameterized3(1, FONT_0, x, 0, textColor, 0, gString_SlotMachineControls);
         CopyBgTilemapBufferToVram(0);
 
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | 0x20 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -2002,7 +2002,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         CreateScoreDigitSprites();
         CreateClefairySprites();
         UpdateCoinsDisplay();
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
         SetVBlankCallback(VBlankCB_SlotMachine);
         SetHBlankCallback(HBlankCB_SlotMachine);
         (*state)++;
@@ -2015,8 +2015,8 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
             ShowBg(2);
             HideBg(1);
             InitReelButtonTileMem();
-            BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
             (*state)++;
         }
@@ -2035,7 +2035,7 @@ static bool8 SlotsTask_FadeOut(u8 * state, struct SlotMachineSetupTaskData * ptr
     switch (*state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, 0);
         (*state)++;
         break;
     case 1:
@@ -2119,7 +2119,7 @@ static bool8 SlotsTask_MessageOutOfCoins(u8 * state, struct SlotMachineSetupTask
     {
     case 0:
         Slot_PrintOnWindow0(gString_OutOfCoins);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2137,7 +2137,7 @@ static bool8 SlotsTask_AskQuitPlaying(u8 * state, struct SlotMachineSetupTaskDat
     case 0:
         Slot_PrintOnWindow0(gString_QuitPlaying);
         Slot_CreateYesNoMenu(0);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2155,7 +2155,7 @@ static bool8 SlotsTask_DestroyYesNoMenu(u8 * state, struct SlotMachineSetupTaskD
     case 0:
         Slot_ClearWindow0();
         Slot_DestroyYesNoMenu();
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
         break;
     case 1:
@@ -2265,7 +2265,7 @@ static void Slot_PrintOnWindow0(const u8 * str)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     PutWindowTilemap(0);
     DrawTextBorderOuter(0, 0x001, 15);
-    AddTextPrinterParameterized5(0, 2, str, 1, 2, TEXT_SPEED_FF, NULL, 1, 2);
+    AddTextPrinterParameterized5(0, FONT_2, str, 1, 2, TEXT_SKIP_DRAW, NULL, 1, 2);
 }
 
 static void Slot_ClearWindow0(void)
@@ -2387,7 +2387,7 @@ static void SignalStopWinningLineFlashTask(void)
 
 static void Slot_CreateYesNoMenu(u8 cursorPos)
 {
-    CreateYesNoMenu(&sYesNoWindowTemplate, 2, 0, 2, 10, 13, cursorPos);
+    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_2, 0, 2, 10, 13, cursorPos);
     Menu_MoveCursorNoWrapAround(cursorPos);
     GetSlotMachineSetupTaskDataPtr()->yesNoMenuActive = TRUE;
 }

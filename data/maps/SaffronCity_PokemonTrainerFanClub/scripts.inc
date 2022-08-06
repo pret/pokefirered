@@ -7,16 +7,16 @@
 .set LOCALID_BEAUTY,      7
 .set LOCALID_BLACK_BELT,  8
 
-SaffronCity_PokemonTrainerFanClub_MapScripts:: @ 816F0BF
+SaffronCity_PokemonTrainerFanClub_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SaffronCity_PokemonTrainerFanClub_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_PokemonTrainerFanClub_OnTransition
 	.byte 0
 
-SaffronCity_PokemonTrainerFanClub_OnFrame:: @ 816F0CA
+SaffronCity_PokemonTrainerFanClub_OnFrame::
 	map_script_2 VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1, SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans
 	.2byte 0
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans:: @ 816F0D4
+SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	lockall
 	textcolor 1
 	applymovement LOCALID_BATTLE_GIRL, Movement_WalkInPlaceFastestDown
@@ -37,7 +37,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans:: @ 816F0D4
 	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer:: @ 816F124
+SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer::
 	delay_16
 	delay_8
 	walk_down
@@ -48,7 +48,7 @@ SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer:: @ 816F124
 	step_end
 
 @ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer:: @ 816F12C
+LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer::
 	delay_8
 	walk_in_place_fastest_down
 	walk_down
@@ -59,7 +59,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer:: @ 816F12C
 	step_end
 
 @ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer:: @ 816F134
+LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer::
 	walk_fast_left
 	walk_fast_left
 	walk_fast_down
@@ -69,13 +69,13 @@ LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer:: @ 816F134
 	step_end
 
 @ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer:: @ 816F13B
+LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer::
 	walk_down
 	walk_in_place_fastest_right
 	step_end
 
 @ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer:: @ 816F13E
+LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer::
 	jump_in_place_right
 	walk_fast_up
 	walk_fast_up
@@ -83,14 +83,14 @@ LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer:: @ 816F13E
 	walk_in_place_fastest_down
 	step_end
 
-SaffronCity_PokemonTrainerFanClub_OnTransition:: @ 816F144
+SaffronCity_PokemonTrainerFanClub_OnTransition::
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions:: @ 816F15B
+SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions::
 	special Script_TryLoseFansFromPlayTime
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
@@ -126,47 +126,47 @@ SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions:: @ 816F1
 	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable:: @ 816F207
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
 	setobjectxyperm LOCALID_BATTLE_GIRL, 5, 2
 	setobjectmovementtype LOCALID_BATTLE_GIRL, MOVEMENT_TYPE_FACE_UP
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable:: @ 816F213
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable::
 	setobjectxyperm LOCALID_YOUNGSTER, 7, 4
 	setobjectmovementtype LOCALID_YOUNGSTER, MOVEMENT_TYPE_FACE_LEFT
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable:: @ 816F21F
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable::
 	setobjectxyperm LOCALID_GENTLEMAN, 2, 2
 	setobjectmovementtype LOCALID_GENTLEMAN, MOVEMENT_TYPE_FACE_UP
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable:: @ 816F22B
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable::
 	setobjectxyperm LOCALID_LITTLE_GIRL, 3, 4
 	setobjectmovementtype LOCALID_LITTLE_GIRL, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable:: @ 816F237
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable::
 	setobjectxyperm LOCALID_ROCKER, 4, 6
 	setobjectmovementtype LOCALID_ROCKER, MOVEMENT_TYPE_FACE_UP
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable:: @ 816F243
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable::
 	setobjectxyperm LOCALID_WOMAN, 10, 3
 	setobjectmovementtype LOCALID_WOMAN, MOVEMENT_TYPE_FACE_UP
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable:: @ 816F24F
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable::
 	setobjectxyperm LOCALID_BEAUTY, 7, 5
 	setobjectmovementtype LOCALID_BEAUTY, MOVEMENT_TYPE_FACE_LEFT
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable:: @ 816F25B
+SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable::
 	setobjectxyperm LOCALID_BLACK_BELT, 9, 6
 	setobjectmovementtype LOCALID_BLACK_BELT, MOVEMENT_TYPE_FACE_LEFT
 	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting:: @ 816F267
+SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting::
 	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
 	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
 	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
@@ -174,7 +174,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting:: @ 81
 	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl:: @ 816F281
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER1
@@ -191,7 +191,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl:: @ 816F281
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan:: @ 816F2C0
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan
@@ -199,22 +199,22 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan:: @ 816F2C0
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan:: @ 816F2DA
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_IllAlwaysBelieveInYou
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan:: @ 816F2E4
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryonesYourFanButICantBe
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion:: @ 816F2EE
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_TrainersCoolWhenBattling
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl:: @ 816F2F8
+SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER4
@@ -231,7 +231,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl:: @ 816F2F8
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan:: @ 816F337
+SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
@@ -239,22 +239,22 @@ SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan:: @ 816F337
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan:: @ 816F351
+SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan:: @ 816F35B
+SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingSabrinasFan
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion:: @ 816F365
+SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_CanIBecomeCoolTrainerOneDay
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Youngster:: @ 816F36F
+SaffronCity_PokemonTrainerFanClub_EventScript_Youngster::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER2
@@ -271,7 +271,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Youngster:: @ 816F36F
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan:: @ 816F3AE
+SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan
@@ -279,22 +279,22 @@ SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan:: @ 816F3AE
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan:: @ 816F3C8
+SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan:: @ 816F3D2
+SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion:: @ 816F3DC
+SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_BrocksLastWordOnCool
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman:: @ 816F3E6
+SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER3
@@ -311,7 +311,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman:: @ 816F3E6
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan:: @ 816F425
+SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan
@@ -319,22 +319,22 @@ SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan:: @ 816F425
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan:: @ 816F43F
+SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_NeverSeenTrainerOfYourMagnificence
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan:: @ 816F449
+SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_YouveStillAWaysToGo
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion:: @ 816F453
+SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_YoullBeTalkedAboutIfYouKeepWinning
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Woman:: @ 816F45D
+SaffronCity_PokemonTrainerFanClub_EventScript_Woman::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER6
@@ -349,7 +349,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Woman:: @ 816F45D
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan:: @ 816F491
+SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
@@ -357,17 +357,17 @@ SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan:: @ 816F491
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan:: @ 816F4AB
+SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImYourNumberOneFan
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan:: @ 816F4B5
+SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryoneTalksAboutYou
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Rocker:: @ 816F4BF
+SaffronCity_PokemonTrainerFanClub_EventScript_Rocker::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER5
@@ -382,7 +382,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Rocker:: @ 816F4BF
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan:: @ 816F4F3
+SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan
@@ -390,17 +390,17 @@ SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan:: @ 816F4F3
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan:: @ 816F50D
+SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImOnlyOneLeftOfYourFans
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan:: @ 816F517
+SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImLoneTrainerFan
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Beauty:: @ 816F521
+SaffronCity_PokemonTrainerFanClub_EventScript_Beauty::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER7
@@ -415,7 +415,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Beauty:: @ 816F521
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan:: @ 816F555
+SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan
@@ -423,17 +423,17 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan:: @ 816F555
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan:: @ 816F56F
+SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImYourOnlyFan
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan:: @ 816F579
+SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_BelieveInMasterWithAllMyHeart
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt:: @ 816F583
+SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER8
@@ -448,7 +448,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt:: @ 816F583
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan:: @ 816F5B7
+SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan
@@ -456,12 +456,12 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan:: @ 816F5B7
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan:: @ 816F5D1
+SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingYourFan
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan:: @ 816F5DB
+SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_NeverBeFanOfAnyoneButMaster
 	release
 	end

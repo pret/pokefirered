@@ -1,13 +1,13 @@
-FourIsland_Text_IslandSign:: @ 8182A03
+FourIsland_Text_IslandSign::
     .string "FOUR ISLAND\n"
     .string "The Warm, Blue, Floe Island$"
 
-FourIsland_Text_LoreleiHasReturned:: @ 8182A2B
+FourIsland_Text_LoreleiHasReturned::
     .string "LORELEI has returned.\p"
     .string "Did she find the city life too\n"
     .string "stressful, I wonder?$"
 
-FourIsland_Text_LoreleiMetLaprasAsChild:: @ 8182A75
+FourIsland_Text_LoreleiMetLaprasAsChild::
     .string "LORELEI has gone back.\p"
     .string "The LAPRAS she has, I imagine it\n"
     .string "to be the one she met as a child.\p"
@@ -16,7 +16,7 @@ FourIsland_Text_LoreleiMetLaprasAsChild:: @ 8182A75
     .string "Perhaps that POKéMON has been with\n"
     .string "her ever since.$"
 
-FourIsland_Text_RivalAlreadyGotEggBeSmellingYa:: @ 8182B37
+FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
     .string "{RIVAL}: Hey!\n"
     .string "{PLAYER}!\p"
     .string "What are you doing here in the\n"
@@ -37,7 +37,7 @@ FourIsland_Text_RivalAlreadyGotEggBeSmellingYa:: @ 8182B37
     .string "waste.\p"
     .string "Be smelling ya!$"
 
-FourIsland_Text_LoreleiHasLotsOfStuffedDolls:: @ 8182CE3
+FourIsland_Text_LoreleiHasLotsOfStuffedDolls::
     .string "Oh, you found me!\n"
     .string "Please don't tell LORELEI.\p"
     .string "Did you know that LORELEI has lots\n"
@@ -45,12 +45,12 @@ FourIsland_Text_LoreleiHasLotsOfStuffedDolls:: @ 8182CE3
     .string "Every time she comes back to\n"
     .string "FOUR ISLAND, her collection grows!$"
 
-FourIsland_Text_MadeSlushieUsingIcefallCaveIce:: @ 8182D8E
+FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
     .string "Ooh, chilly!\p"
     .string "I made a slushie using ice I\n"
     .string "shaved inside ICEFALL CAVE.\p"
     .string "It's chilly and tasty!$"
 
-FourIsland_Text_LoreleisHouse:: @ 8182DEB
+FourIsland_Text_LoreleisHouse::
     .string "LORELEI'S HOUSE$"
 

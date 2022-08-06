@@ -1,7 +1,7 @@
-SSAnne_1F_Room4_MapScripts:: @ 8160C43
+SSAnne_1F_Room4_MapScripts::
 	.byte 0
 
-SSAnne_1F_Room4_EventScript_Woman:: @ 8160C44
+SSAnne_1F_Room4_EventScript_Woman::
 	lock
 	faceplayer
 	checkplayergender
@@ -11,7 +11,7 @@ SSAnne_1F_Room4_EventScript_Woman:: @ 8160C44
 	release
 	end
 
-SSAnne_1F_Room4_EventScript_WomanPlayerMale:: @ 8160C5C
+SSAnne_1F_Room4_EventScript_WomanPlayerMale::
 	msgbox SSAnne_1F_Room4_Text_WaiterCherryPiePlease
 	release
 	end

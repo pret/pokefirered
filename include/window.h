@@ -17,6 +17,14 @@ enum
     WINDOW_TILE_DATA
 };
 
+// Mode for CopyWindowToVram, CopyWindowRectToVram and CopyWindowToVram8Bit
+enum {
+    COPYWIN_NONE,
+    COPYWIN_MAP,
+    COPYWIN_GFX,
+    COPYWIN_FULL,
+};
+
 struct WindowTemplate
 {
     u8 bg;
@@ -56,11 +64,6 @@ u16 AddWindow(const struct WindowTemplate *template);
 int AddWindowWithoutTileMap(const struct WindowTemplate *template);
 void RemoveWindow(u8 windowId);
 void FreeAllWindowBuffers(void);
-
-// Mode parameter for funcs below
-#define COPYWIN_MAP  1
-#define COPYWIN_GFX  2
-#define COPYWIN_BOTH 3
 
 void CopyWindowToVram(u8 windowId, u8 mode);
 void CopyWindowToVram8Bit(u8 windowId, u8 mode);

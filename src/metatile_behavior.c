@@ -3,17 +3,17 @@
 #include "constants/metatile_behaviors.h"
 
 static const bool8 sBehaviorSurfable[NUM_METATILE_BEHAVIORS] = {
-    [MB_POND_WATER]        = TRUE,
-    [MB_SEMI_DEEP_WATER]   = TRUE,
-    [MB_DEEP_WATER]        = TRUE,
-    [MB_WATERFALL]         = TRUE,
-    [MB_OCEAN_WATER]       = TRUE,
-    [MB_UNUSED_WATER]      = TRUE,
-    [MB_CELADON_WATER]     = TRUE,
-    [MB_EASTWARD_CURRENT]  = TRUE,
-    [MB_WESTWARD_CURRENT]  = TRUE,
-    [MB_NORTHWARD_CURRENT] = TRUE,
-    [MB_SOUTHWARD_CURRENT] = TRUE
+    [MB_POND_WATER]         = TRUE,
+    [MB_SEMI_DEEP_WATER]    = TRUE,
+    [MB_DEEP_WATER]         = TRUE,
+    [MB_WATERFALL]          = TRUE,
+    [MB_OCEAN_WATER]        = TRUE,
+    [MB_UNUSED_WATER]       = TRUE,
+    [MB_CYCLING_ROAD_WATER] = TRUE,
+    [MB_EASTWARD_CURRENT]   = TRUE,
+    [MB_WESTWARD_CURRENT]   = TRUE,
+    [MB_NORTHWARD_CURRENT]  = TRUE,
+    [MB_SOUTHWARD_CURRENT]  = TRUE
 };
 
 static const u8 sTileBitAttributes[32] = {
@@ -92,7 +92,7 @@ bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
     if (metatileBehavior == MB_POND_WATER
      || metatileBehavior == MB_PUDDLE
      || metatileBehavior == MB_UNUSED_WATER
-     || metatileBehavior == MB_CELADON_WATER
+     || metatileBehavior == MB_CYCLING_ROAD_WATER
      || metatileBehavior == MB_ICE)
         return TRUE;
     else

@@ -65,51 +65,51 @@ struct UnkPacket2
     u8 unkB_6:1;
 };
 
-void sub_815A61C(struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0_2C * arg1, struct DodrioSubstruct_31A0_2C * arg2, struct DodrioSubstruct_31A0_2C * arg3, struct DodrioSubstruct_31A0_2C * arg4, struct DodrioSubstruct_31A0_2C * arg5, u8 arg6, u32 arg7, u32 arg8)
+void sub_815A61C(struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommData * arg1, struct DodrioGame_PlayerCommData * arg2, struct DodrioGame_PlayerCommData * arg3, struct DodrioGame_PlayerCommData * arg4, struct DodrioGame_PlayerCommData * arg5, u8 arg6, u32 arg7, u32 arg8)
 {
     struct UnkPacket2 packet;
-    struct DodrioSubstruct_31A0_14 * ptr = &arg0->unk14;
+    struct DodrioGame_Berries * ptr = &arg0->berries;
 
     packet.id = 2;
-    packet.unk1_0 = ptr->unkB[0];
-    packet.unk1_1 = ptr->unkB[1];
-    packet.unk2_0 = ptr->unkB[2];
-    packet.unk2_1 = ptr->unkB[3];
-    packet.unk3_0 = ptr->unkB[4];
-    packet.unk3_1 = ptr->unkB[5];
-    packet.unk4_0 = ptr->unkB[6];
-    packet.unk4_1 = ptr->unkB[7];
-    packet.unk5_0 = ptr->unkB[8];
-    packet.unk5_1 = ptr->unkB[9];
+    packet.unk1_0 = ptr->fallDist[0];
+    packet.unk1_1 = ptr->fallDist[1];
+    packet.unk2_0 = ptr->fallDist[2];
+    packet.unk2_1 = ptr->fallDist[3];
+    packet.unk3_0 = ptr->fallDist[4];
+    packet.unk3_1 = ptr->fallDist[5];
+    packet.unk4_0 = ptr->fallDist[6];
+    packet.unk4_1 = ptr->fallDist[7];
+    packet.unk5_0 = ptr->fallDist[8];
+    packet.unk5_1 = ptr->fallDist[9];
 
-    packet.unk6_0 = ptr->unk0[0];
-    packet.unk6_1 = ptr->unk0[1];
-    packet.unk6_2 = ptr->unk0[2];
-    packet.unk6_3 = ptr->unk0[3];
-    packet.unk7_0 = ptr->unk0[4];
-    packet.unk7_1 = ptr->unk0[5];
-    packet.unk7_2 = ptr->unk0[6];
-    packet.unk7_3 = ptr->unk0[7];
-    packet.unk8_0 = ptr->unk0[8];
-    packet.unk8_1 = ptr->unk0[9];
+    packet.unk6_0 = ptr->ids[0];
+    packet.unk6_1 = ptr->ids[1];
+    packet.unk6_2 = ptr->ids[2];
+    packet.unk6_3 = ptr->ids[3];
+    packet.unk7_0 = ptr->ids[4];
+    packet.unk7_1 = ptr->ids[5];
+    packet.unk7_2 = ptr->ids[6];
+    packet.unk7_3 = ptr->ids[7];
+    packet.unk8_0 = ptr->ids[8];
+    packet.unk8_1 = ptr->ids[9];
 
-    packet.unk8_2 = arg1->unk0;
-    packet.unk8_3 = arg2->unk0;
-    packet.unk9_0 = arg3->unk0;
-    packet.unk9_1 = arg4->unk0;
-    packet.unk9_2 = arg5->unk0;
+    packet.unk8_2 = arg1->pickState;
+    packet.unk8_3 = arg2->pickState;
+    packet.unk9_0 = arg3->pickState;
+    packet.unk9_1 = arg4->pickState;
+    packet.unk9_2 = arg5->pickState;
 
-    packet.unk9_3 = arg1->unk4;
-    packet.unk9_4 = arg2->unk4;
-    packet.unkA_0 = arg3->unk4;
-    packet.unkA_1 = arg4->unk4;
-    packet.unkA_2 = arg5->unk4;
+    packet.unk9_3 = arg1->ateBerry;
+    packet.unk9_4 = arg2->ateBerry;
+    packet.unkA_0 = arg3->ateBerry;
+    packet.unkA_1 = arg4->ateBerry;
+    packet.unkA_2 = arg5->ateBerry;
 
-    packet.unkB_2 = arg1->unk8;
-    packet.unkB_3 = arg2->unk8;
-    packet.unkB_4 = arg3->unk8;
-    packet.unkB_5 = arg4->unk8;
-    packet.unkB_6 = arg5->unk8;
+    packet.unkB_2 = arg1->missedBerry;
+    packet.unkB_3 = arg2->missedBerry;
+    packet.unkB_4 = arg3->missedBerry;
+    packet.unkB_5 = arg4->missedBerry;
+    packet.unkB_6 = arg5->missedBerry;
 
     packet.unkA_3 = arg6;
     packet.unkB_1 = arg7;
@@ -117,10 +117,10 @@ void sub_815A61C(struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0
     Rfu_SendPacket(&packet);
 }
 
-u32 sub_815A950(u32 unused, struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0_2C * arg1, struct DodrioSubstruct_31A0_2C * arg2, struct DodrioSubstruct_31A0_2C * arg3, struct DodrioSubstruct_31A0_2C * arg4, struct DodrioSubstruct_31A0_2C * arg5, u8 *arg6, u32 *arg7, u32 *arg8)
+u32 sub_815A950(u32 unused, struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommData * arg1, struct DodrioGame_PlayerCommData * arg2, struct DodrioGame_PlayerCommData * arg3, struct DodrioGame_PlayerCommData * arg4, struct DodrioGame_PlayerCommData * arg5, u8 *arg6, u32 *arg7, u32 *arg8)
 {
     struct UnkPacket2 * packet;
-    struct DodrioSubstruct_31A0_14 * ptr = &arg0->unk14;
+    struct DodrioGame_Berries * ptr = &arg0->berries;
 
     if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
         return 0;
@@ -128,49 +128,49 @@ u32 sub_815A950(u32 unused, struct DodrioSubstruct_31A0 * arg0, struct DodrioSub
     packet = (void *)&gRecvCmds[0][1];
     if (packet->id == 2)
     {
-        ptr->unkB[0] = packet->unk1_0;
-        ptr->unkB[1] = packet->unk1_1;
-        ptr->unkB[2] = packet->unk2_0;
-        ptr->unkB[3] = packet->unk2_1;
-        ptr->unkB[4] = packet->unk3_0;
-        ptr->unkB[5] = packet->unk3_1;
-        ptr->unkB[6] = packet->unk4_0;
-        ptr->unkB[7] = packet->unk4_1;
-        ptr->unkB[8] = packet->unk5_0;
-        ptr->unkB[9] = packet->unk5_1;
-        ptr->unkB[10] = packet->unk1_0;
+        ptr->fallDist[0] = packet->unk1_0;
+        ptr->fallDist[1] = packet->unk1_1;
+        ptr->fallDist[2] = packet->unk2_0;
+        ptr->fallDist[3] = packet->unk2_1;
+        ptr->fallDist[4] = packet->unk3_0;
+        ptr->fallDist[5] = packet->unk3_1;
+        ptr->fallDist[6] = packet->unk4_0;
+        ptr->fallDist[7] = packet->unk4_1;
+        ptr->fallDist[8] = packet->unk5_0;
+        ptr->fallDist[9] = packet->unk5_1;
+        ptr->fallDist[10] = packet->unk1_0;
 
-        ptr->unk0[0] = packet->unk6_0;
-        ptr->unk0[1] = packet->unk6_1;
-        ptr->unk0[2] = packet->unk6_2;
-        ptr->unk0[3] = packet->unk6_3;
-        ptr->unk0[4] = packet->unk7_0;
-        ptr->unk0[5] = packet->unk7_1;
-        ptr->unk0[6] = packet->unk7_2;
-        ptr->unk0[7] = packet->unk7_3;
-        ptr->unk0[8] = packet->unk8_0;
-        ptr->unk0[9] = packet->unk8_1;
-        ptr->unk0[10] = packet->unk6_0;
+        ptr->ids[0] = packet->unk6_0;
+        ptr->ids[1] = packet->unk6_1;
+        ptr->ids[2] = packet->unk6_2;
+        ptr->ids[3] = packet->unk6_3;
+        ptr->ids[4] = packet->unk7_0;
+        ptr->ids[5] = packet->unk7_1;
+        ptr->ids[6] = packet->unk7_2;
+        ptr->ids[7] = packet->unk7_3;
+        ptr->ids[8] = packet->unk8_0;
+        ptr->ids[9] = packet->unk8_1;
+        ptr->ids[10] = packet->unk6_0;
 
-        arg1->unk0 = packet->unk8_2;
-        arg1->unk4 = packet->unk9_3;
-        arg1->unk8 = packet->unkB_2;
+        arg1->pickState = packet->unk8_2;
+        arg1->ateBerry = packet->unk9_3;
+        arg1->missedBerry = packet->unkB_2;
 
-        arg2->unk0 = packet->unk8_3;
-        arg2->unk4 = packet->unk9_4;
-        arg2->unk8 = packet->unkB_3;
+        arg2->pickState = packet->unk8_3;
+        arg2->ateBerry = packet->unk9_4;
+        arg2->missedBerry = packet->unkB_3;
 
-        arg3->unk0 = packet->unk9_0;
-        arg3->unk4 = packet->unkA_0;
-        arg3->unk8 = packet->unkB_4;
+        arg3->pickState = packet->unk9_0;
+        arg3->ateBerry = packet->unkA_0;
+        arg3->missedBerry = packet->unkB_4;
 
-        arg4->unk0 = packet->unk9_1;
-        arg4->unk4 = packet->unkA_1;
-        arg4->unk8 = packet->unkB_5;
+        arg4->pickState = packet->unk9_1;
+        arg4->ateBerry = packet->unkA_1;
+        arg4->missedBerry = packet->unkB_5;
 
-        arg5->unk0 = packet->unk9_2;
-        arg5->unk4 = packet->unkA_2;
-        arg5->unk8 = packet->unkB_6;
+        arg5->pickState = packet->unk9_2;
+        arg5->ateBerry = packet->unkA_2;
+        arg5->missedBerry = packet->unkB_6;
 
         *arg6 = packet->unkA_3;
         *arg7 = packet->unkB_1;

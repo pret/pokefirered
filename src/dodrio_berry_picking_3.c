@@ -3,7 +3,7 @@
 #include "link.h"
 #include "link_rfu.h"
 
-void sub_815A5BC(s32 a0)
+void SendPacket_ReadyToStart(s32 a0)
 {
     struct Padded_U8 data[2];
     data[0].value = 1;
@@ -65,7 +65,7 @@ struct UnkPacket2
     u8 unkB_6:1;
 };
 
-void sub_815A61C(struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommData * arg1, struct DodrioGame_PlayerCommData * arg2, struct DodrioGame_PlayerCommData * arg3, struct DodrioGame_PlayerCommData * arg4, struct DodrioGame_PlayerCommData * arg5, u8 arg6, u32 arg7, u32 arg8)
+void SendPacket_GameState(struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommData * arg1, struct DodrioGame_PlayerCommData * arg2, struct DodrioGame_PlayerCommData * arg3, struct DodrioGame_PlayerCommData * arg4, struct DodrioGame_PlayerCommData * arg5, u8 arg6, u32 arg7, u32 arg8)
 {
     struct UnkPacket2 packet;
     struct DodrioGame_Berries * ptr = &arg0->berries;
@@ -117,7 +117,7 @@ void sub_815A61C(struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommDa
     Rfu_SendPacket(&packet);
 }
 
-u32 sub_815A950(u32 unused, struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommData * arg1, struct DodrioGame_PlayerCommData * arg2, struct DodrioGame_PlayerCommData * arg3, struct DodrioGame_PlayerCommData * arg4, struct DodrioGame_PlayerCommData * arg5, u8 *arg6, u32 *arg7, u32 *arg8)
+u32 RecvPacket_GameState(u32 unused, struct DodrioGame_Player * arg0, struct DodrioGame_PlayerCommData * arg1, struct DodrioGame_PlayerCommData * arg2, struct DodrioGame_PlayerCommData * arg3, struct DodrioGame_PlayerCommData * arg4, struct DodrioGame_PlayerCommData * arg5, u8 *arg6, u32 *arg7, u32 *arg8)
 {
     struct UnkPacket2 * packet;
     struct DodrioGame_Berries * ptr = &arg0->berries;
@@ -187,7 +187,7 @@ struct UnkPacket3
     u8 ALIGNED(4) unk4;
 };
 
-void sub_815AAD8(u8 arg0)
+void SendPacket_PickState(u8 arg0)
 {
     struct UnkPacket3 packet;
     packet.id = 3;
@@ -195,7 +195,7 @@ void sub_815AAD8(u8 arg0)
     Rfu_SendPacket(&packet);
 }
 
-u32 sub_815AB04(u32 arg0, u8 *arg1)
+u32 RecvPacket_PickState(u32 arg0, u8 *arg1)
 {
     struct UnkPacket3 * packet;
 
@@ -218,7 +218,7 @@ struct UnkPacket4
     u32 unk4;
 };
 
-void sub_815AB3C(u32 arg0)
+void SendPacket_ReadyToEnd(u32 arg0)
 {
     struct UnkPacket4 packet;
     packet.id = 4;
@@ -226,7 +226,7 @@ void sub_815AB3C(u32 arg0)
     Rfu_SendPacket(&packet);
 }
 
-u32 sub_815AB60(u32 arg0)
+u32 RecvPacket_ReadyToEnd(u32 arg0)
 {
     struct UnkPacket4 * packet;
 

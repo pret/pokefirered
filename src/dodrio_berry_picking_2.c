@@ -12,7 +12,7 @@
 #include "text_window.h"
 #include "text_window_graphics.h"
 #include "constants/songs.h"
-
+/*
 struct DodrioStruct_2022CF4
 {
     u8 filler_00[0xc];
@@ -1614,4 +1614,4 @@ static bool32 sub_8155FE0(void)
 
     gUnknown_203F440->unk3018++;
     return FALSE;
-}
+}*/

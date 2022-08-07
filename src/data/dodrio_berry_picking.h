@@ -1,6 +1,3 @@
-#ifndef GUARD_DATA_DODRIO_BERRY_PICKING_H
-#define GUARD_DATA_DODRIO_BERRY_PICKING_H
-
 static const struct BgTemplate sUnknown_847565C[] =
 {
     {
@@ -243,5 +240,3 @@ static const u32 sDodrioBerryPkmnGfx[] = INCBIN_U32("graphics/link_games/dodriob
 static const u32 sDodrioBerryBgTilemap1[] = INCBIN_U32("graphics/link_games/dodrioberry_bg1.bin.lz");
 static const u32 sDodrioBerryBgTilemap2Right[] = INCBIN_U32("graphics/link_games/dodrioberry_bg2right.bin.lz");
 static const u32 sDodrioBerryBgTilemap2Left[] = INCBIN_U32("graphics/link_games/dodrioberry_bg2left.bin.lz");
-
-#endif //GUARD_DATA_DODRIO_BERRY_PICKING_H

@@ -57,3 +57,4 @@ _Deparsed_XSubs.pm
 porymap.project.cfg
 .vscode/*.*
 *.js
+*.sym

@@ -73,13 +73,6 @@ enum {
 };
 
 enum {
-    PACKET_READY_START = 1,
-    PACKET_GAME_STATE,
-    PACKET_PICK_STATE,
-    PACKET_READY_END,
-};
-
-enum {
     PLAY_AGAIN_NONE,
     PLAY_AGAIN_YES,
     PLAY_AGAIN_NO,
@@ -2266,8 +2259,8 @@ static bool32 AllPlayersReadyToStart(void)
 
     for (i = 1; i < numPlayers; i++)
     {
-        if (sGame->readyToStart[i] == 0)
-            sGame->readyToStart[i] = sub_815A5E8(i);
+        if (sGame->readyToStart[i] == FALSE)
+            sGame->readyToStart[i] = RecvPacket_ReadyToStart(i);
     }
 
     numPlayers = numPlayers; // Needed to force compiler to keep loop below

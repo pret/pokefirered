@@ -29,16 +29,33 @@ struct DodrioGame_Player
     u32 unused;
 }; // size = 0x3C
 
-void StartDodrioBerryPicking(u16 species, MainCallback callback);
-u32 RecvPacket_GameState(u32 unused, struct DodrioGame_Player *arg0, struct DodrioGame_PlayerCommData *arg1, struct DodrioGame_PlayerCommData *arg2, struct DodrioGame_PlayerCommData *arg3, struct DodrioGame_PlayerCommData *arg4, struct DodrioGame_PlayerCommData *arg5, u8 *arg6, u32 *arg7, u32 *arg8);
-u32 RecvPacket_PickState(u32 arg0, u8 *arg1);
-bool32 RecvPacket_ReadyToEnd(u32 a0);
-void SendPacket_GameState(struct DodrioGame_Player *arg0, struct DodrioGame_PlayerCommData *arg1, struct DodrioGame_PlayerCommData *arg2, struct DodrioGame_PlayerCommData *arg3, struct DodrioGame_PlayerCommData *arg4, struct DodrioGame_PlayerCommData *arg5, u8 arg6, u32 arg7, u32 arg8);
-void SendPacket_ReadyToStart(s32 a0);
-void SendPacket_PickState(u8 a0);
-void SendPacket_ReadyToEnd(u32 a0);
-u8 sub_815A5E8(s32 a0);
+void StartDodrioBerryPicking(u16 partyId, MainCallback exitCallback);
 void ShowDodrioBerryPickingRecords(void);
 void IsDodrioInParty(void);
+void SendPacket_ReadyToStart(bool32 ready);
+bool8 RecvPacket_ReadyToStart(s32 playerId);
+void SendPacket_GameState(struct DodrioGame_Player *player,
+                          struct DodrioGame_PlayerCommData *player1,
+                          struct DodrioGame_PlayerCommData *player2,
+                          struct DodrioGame_PlayerCommData *player3,
+                          struct DodrioGame_PlayerCommData *player4,
+                          struct DodrioGame_PlayerCommData *player5,
+                          u8 numGraySquares,
+                          bool32 berriesFalling,
+                          bool32 allReadyToEnd);
+bool32 RecvPacket_GameState(u32 playerId,
+                            struct DodrioGame_Player *player,
+                            struct DodrioGame_PlayerCommData *player1,
+                            struct DodrioGame_PlayerCommData *player2,
+                            struct DodrioGame_PlayerCommData *player3,
+                            struct DodrioGame_PlayerCommData *player4,
+                            struct DodrioGame_PlayerCommData *player5,
+                            u8 *numGraySquares,
+                            bool32 *berriesFalling,
+                            bool32 *allReadyToEnd);
+void SendPacket_PickState(u8 pickState);
+bool32 RecvPacket_PickState(u32 playerId, u8 *pickState);
+void SendPacket_ReadyToEnd(bool32 readyToEnd);
+bool32 RecvPacket_ReadyToEnd(u32 playerId);
 
 #endif //GUARD_DODRIO_BERRY_PICKING_H

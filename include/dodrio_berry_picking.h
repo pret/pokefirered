@@ -29,9 +29,12 @@ struct DodrioGame_Player
     u32 unused;
 }; // size = 0x3C
 
+// dodrio_berry_picking.c
 void StartDodrioBerryPicking(u16 partyId, MainCallback exitCallback);
 void ShowDodrioBerryPickingRecords(void);
 void IsDodrioInParty(void);
+
+// dodrio_berry_picking_comm.c
 void SendPacket_ReadyToStart(bool32 ready);
 bool8 RecvPacket_ReadyToStart(s32 playerId);
 void SendPacket_GameState(struct DodrioGame_Player *player,

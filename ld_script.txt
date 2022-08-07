@@ -294,7 +294,7 @@ SECTIONS {
         src/dodrio_berry_picking.o(.text);
         src/battle_controller_pokedude.o(.text);
         src/quest_log_objects.o(.text);
-        src/dodrio_berry_picking_3.o(.text);
+        src/dodrio_berry_picking_comm.o(.text);
         src/teachy_tv.o(.text);
         src/ereader_helpers.o(.text);
         src/digit_obj_util.o(.text);

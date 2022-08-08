@@ -2094,7 +2094,7 @@ static void OakOldManHandleIntroTrainerBallThrow(void)
         if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
             gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
         gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-        gBattlerControllerFuncs[gActiveBattler] = PlayerDummy;
+        gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
     }
     else
     {

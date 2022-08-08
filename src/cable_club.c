@@ -532,7 +532,7 @@ static void Task_ReestablishLinkInCableClubRoom_0(u8 taskId)
     {
         OpenLink();
         ResetLinkPlayers();
-        CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 80);
+        CreateTask(Task_WaitForLinkPlayerConnection, 80);
     }
     else if (data[0] > 9)
         gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_1;
@@ -934,19 +934,25 @@ bool32 GetSeeingLinkPlayerCardMsg(u8 who)
     return TRUE;
 }
 
-void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId)
+#define tTimer data[0]
+
+void Task_WaitForLinkPlayerConnection(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    task->data[0]++;
-    if (task->data[0] > 300)
+
+    task->tTimer++;
+    if (task->tTimer > 300)
     {
         CloseLink();
         SetMainCallback2(CB2_LinkError);
         DestroyTask(taskId);
     }
+
     if (gReceivedRemoteLinkPlayers)
         DestroyTask(taskId);
 }
+
+#undef tTimer
 
 static void sub_8081AE4(u8 taskId)
 {

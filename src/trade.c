@@ -767,7 +767,7 @@ static void CB2_ReturnFromLinkTrade2(void)
                 gMain.state++;
             }
             if (gWirelessCommType == 0)
-                CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 1);
+                CreateTask(Task_WaitForLinkPlayerConnection, 1);
         }
         else
         {
@@ -1692,7 +1692,7 @@ static void CommunicatePlayerSelectedMonForTrade(void)
     {
         sTradeMenuResourcesPtr->linkData[0] = 0xAABB;
         sTradeMenuResourcesPtr->linkData[1] = sTradeMenuResourcesPtr->tradeMenuCursorPosition;
-        SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
+        SendBlock(BitmaskAllOtherLinkPlayers(), sTradeMenuResourcesPtr->linkData, 20);
     }
     else
     {
@@ -1751,7 +1751,7 @@ static void TradeMenuCB_0(void)
     {
         for (i = 0; i < 10; i++)
             sTradeMenuResourcesPtr->linkData[i] = i;
-        SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
+        SendBlock(BitmaskAllOtherLinkPlayers(), sTradeMenuResourcesPtr->linkData, 20);
     }
 }
 
@@ -1864,7 +1864,7 @@ static void CommunicateWhetherMonCanBeTraded(void)
         sTradeMenuResourcesPtr->linkData[0] = 0xBBBB;
         if (IsLinkTaskFinished())
         {
-            SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
+            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeMenuResourcesPtr->linkData, 20);
         }
         break;
     case 2:
@@ -1890,7 +1890,7 @@ static void TradeMenuCB_3(void)
         if (IsLinkTaskFinished())
         {
             sTradeMenuResourcesPtr->linkData[0] = 0xBBCC;
-            SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
+            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeMenuResourcesPtr->linkData, 20);
         }
         sTradeMenuResourcesPtr->tradeMenuCBnum = 100;
         PutWindowTilemap(17);
@@ -2410,7 +2410,7 @@ static void RunScheduledLinkTasks(void)
                 switch (sTradeMenuResourcesPtr->cron[i].kind)
                 {
                 case 0:
-                    SendBlock(bitmask_all_link_players_but_self(), sTradeMenuResourcesPtr->linkData, 20);
+                    SendBlock(BitmaskAllOtherLinkPlayers(), sTradeMenuResourcesPtr->linkData, 20);
                     break;
                 case 1:
                     PrintTradeErrorOrStatusMessage(TRADESTATMSG_COMMSTANDBY);

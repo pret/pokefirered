@@ -174,13 +174,13 @@ enum
     CONTROLLER_CHOSENMONRETURNVALUE,
     CONTROLLER_ONERETURNVALUE,
     CONTROLLER_ONERETURNVALUE_DUPLICATE,
-    CONTROLLER_37,
-    CONTROLLER_38,
-    CONTROLLER_39,
-    CONTROLLER_40,
+    CONTROLLER_CLEARUNKVAR,
+    CONTROLLER_SETUNKVAR,
+    CONTROLLER_CLEARUNKFLAG,
+    CONTROLLER_TOGGLEUNKFLAG,
     CONTROLLER_HITANIMATION,
-    CONTROLLER_42,
-    CONTROLLER_EFFECTIVENESSSOUND,
+    CONTROLLER_CANTSWITCH,
+    CONTROLLER_PLAYSE,
     CONTROLLER_PLAYFANFAREORBGM,
     CONTROLLER_FAINTINGCRY,
     CONTROLLER_INTROSLIDE,
@@ -198,12 +198,12 @@ enum
     CONTROLLER_CMDS_COUNT
 };
 
-extern struct UnusedControllerStruct gUnknown_2022870;
+extern struct UnusedControllerStruct gUnusedControllerStruct;
 
 // general functions
 void HandleLinkBattleSetup(void);
 void SetUpBattleVars(void);
-void InitBtlControllers(void);
+void InitBattleControllers(void);
 void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 
@@ -221,7 +221,7 @@ void BtlController_EmitBallThrowAnim(u8 bufferId, u8 caseId);
 void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr);
 void BtlController_EmitPrintString(u8 bufferId, u16 stringId);
 void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringId);
-void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
+void BtlController_EmitChooseAction(u8 bufferId, u8 action, u16 itemId);
 void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
 void BtlController_EmitChooseItem(u8 bufferId, u8 *arg1);
 void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8 *arg4);
@@ -251,7 +251,7 @@ void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 
 // player controller
-void PlayerDummy(void);
+void BattleControllerDummy(void);
 void SetControllerToPlayer(void);
 void PlayerHandleGetRawMonData(void);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);

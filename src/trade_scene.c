@@ -1093,7 +1093,7 @@ static void HandleLinkDataSend(void)
     case 1:
         if (IsLinkTaskFinished())
         {
-            SendBlock(bitmask_all_link_players_but_self(), sTradeData->linkData, 20);
+            SendBlock(BitmaskAllOtherLinkPlayers(), sTradeData->linkData, 20);
             sTradeData->scheduleLinkTransfer++;
         }
     case 2:
@@ -2526,7 +2526,7 @@ static void CB2_WaitAndAckTradeComplete(void)
     if (mpId == 0 && sTradeData->tradeStatus1 == 1 && sTradeData->tradeStatus2 == 1)
     {
         sTradeData->linkData[0] = 0xDCBA;
-        SendBlock(bitmask_all_link_players_but_self(), sTradeData->linkData, 20);
+        SendBlock(BitmaskAllOtherLinkPlayers(), sTradeData->linkData, 20);
         sTradeData->tradeStatus1 = 2;
         sTradeData->tradeStatus2 = 2;
     }

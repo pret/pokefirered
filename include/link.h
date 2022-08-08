@@ -227,7 +227,7 @@ bool8 IsLinkPlayerDataExchangeComplete(void);
 u32 GetLinkPlayerTrainerId(u8);
 void ResetLinkPlayers(void);
 u8 GetMultiplayerId(void);
-u8 bitmask_all_link_players_but_self(void);
+u8 BitmaskAllOtherLinkPlayers(void);
 bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);

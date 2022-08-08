@@ -79,7 +79,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
     sTempTextPrinter.delayCounter = 0;
     sTempTextPrinter.scrollDistance = 0;
 
-    for (i = 0; i < 7; ++i)
+    for (i = 0; i < 7; i++)
     {
         sTempTextPrinter.subUnion.fields[i] = 0;
     }
@@ -98,7 +98,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
     else
     {
         sTempTextPrinter.textSpeed = 0;
-        for (j = 0; j < 0x400; ++j)
+        for (j = 0; j < 0x400; j++)
         {
             if ((u32)RenderFont(&sTempTextPrinter) == 1)
                 break;
@@ -116,7 +116,7 @@ void RunTextPrinters(void)
     int i;
     u16 temp;
 
-    for (i = 0; i < 0x20; ++i)
+    for (i = 0; i < 0x20; i++)
     {
         if (sTextPrinters[i].active != 0)
         {

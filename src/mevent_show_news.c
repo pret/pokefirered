@@ -299,7 +299,7 @@ static void sub_8146980(void)
     u8 i = 0;
     memcpy(sWork->title, sWork->wonderNews.titleText, 40);
     sWork->title[40] = EOS;
-    for (; i < 10; ++i)
+    for (; i < 10; i++)
     {
         memcpy(sWork->messages[i], sWork->wonderNews.bodyText[i], 40);
         sWork->messages[i][40] = EOS;
@@ -322,7 +322,7 @@ static void sub_8146A30(void)
     if (x < 0)
         x = 0;
     AddTextPrinterParameterized3(sWork->windowIds[0], FONT_3, x, 6, sTextPals[sWork->bgSpec->textPal1], 0, sWork->title);
-    for (; i < 10; ++i)
+    for (; i < 10; i++)
     {
         AddTextPrinterParameterized3(sWork->windowIds[1], FONT_3, 0, 16 * i + 2, sTextPals[sWork->bgSpec->textPal2], 0, sWork->messages[i]);
     }

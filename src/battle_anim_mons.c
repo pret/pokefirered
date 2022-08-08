@@ -9,13 +9,6 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 
-#define GET_UNOWN_LETTER(personality) ((        \
-      (((personality & 0x03000000) >> 24) << 6) \
-    | (((personality & 0x00030000) >> 16) << 4) \
-    | (((personality & 0x00000300) >> 8) << 2)  \
-    | (((personality & 0x00000003) >> 0) << 0)  \
-) % 28)
-
 #define IS_DOUBLE_BATTLE() (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
 
 static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
@@ -779,7 +772,7 @@ u8 GetBattlerAtPosition(u8 position)
 {
     u8 i;
 
-    for (i = 0; i < gBattlersCount; ++i)
+    for (i = 0; i < gBattlersCount; i++)
         if (gBattlerPositions[i] == position)
             break;
     return i;
@@ -811,8 +804,8 @@ bool8 IsDoubleBattle(void)
 
 void GetBattleAnimBg1Data(struct BattleAnimBgData *animBgData)
 {
-    animBgData->bgTiles = gBattleAnimMons_BgTilesBuffer;
-    animBgData->bgTilemap = (u16 *)gBattleAnimMons_BgTilemapBuffer;
+    animBgData->bgTiles = gBattleAnimBgTileBuffer;
+    animBgData->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
     animBgData->paletteId = 8;
     animBgData->bgId = 1;
     animBgData->tilesOffset = 0x200;
@@ -827,8 +820,8 @@ void GetBattleAnimBgData(struct BattleAnimBgData *animBgData, u32 bgId)
     }
     else
     {
-        animBgData->bgTiles = gBattleAnimMons_BgTilesBuffer;
-        animBgData->bgTilemap = (u16 *)gBattleAnimMons_BgTilemapBuffer;
+        animBgData->bgTiles = gBattleAnimBgTileBuffer;
+        animBgData->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
         animBgData->paletteId = 9;
         animBgData->bgId = 2;
         animBgData->tilesOffset = 0x300;
@@ -838,8 +831,8 @@ void GetBattleAnimBgData(struct BattleAnimBgData *animBgData, u32 bgId)
 
 void GetBattleAnimBgDataByPriorityRank(struct BattleAnimBgData *animBgData, u8 unused)
 {
-    animBgData->bgTiles = gBattleAnimMons_BgTilesBuffer;
-    animBgData->bgTilemap = (u16 *)gBattleAnimMons_BgTilemapBuffer;
+    animBgData->bgTiles = gBattleAnimBgTileBuffer;
+    animBgData->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
         animBgData->paletteId = 8;
@@ -869,9 +862,9 @@ void InitBattleAnimBg(u32 bgId)
 
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
 {
-    CpuFill32(0, gBattleAnimMons_BgTilesBuffer, 0x2000);
-    LZDecompressWram(src, gBattleAnimMons_BgTilesBuffer);
-    LoadBgTiles(bgId, gBattleAnimMons_BgTilesBuffer, 0x2000, tilesOffset);
+    CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
+    LZDecompressWram(src, gBattleAnimBgTileBuffer);
+    LoadBgTiles(bgId, gBattleAnimBgTileBuffer, 0x2000, tilesOffset);
 }
 
 void InitAnimBgTilemapBuffer(u32 bgId, const void *src)
@@ -1225,7 +1218,7 @@ void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
 
     if (!restoreOriginalColor)
     {
-        for (i = 0; i < 16; ++i)
+        for (i = 0; i < 16; i++)
         {
             originalColor = (struct PlttData *)&gPlttBufferUnfaded[paletteNum + i];
             average = originalColor->r + originalColor->g + originalColor->b;
@@ -1453,7 +1446,7 @@ s16 CloneBattlerSpriteWithBlend(u8 animBattler)
 
     if (spriteId != 0xFF)
     {
-        for (i = 0; i < MAX_SPRITES; ++i)
+        for (i = 0; i < MAX_SPRITES; i++)
         {
             if (!gSprites[i].inUse)
             {
@@ -1720,7 +1713,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
     u16 species;
     u16 i;
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (gBattlerSpriteIds[i] == spriteId)
         {
@@ -1825,7 +1818,7 @@ void ResetSpritePriorityOfAllVisibleBattlers(void)
 {
     s32 i;
 
-    for (i = 0; i < gBattlersCount; ++i)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (IsBattlerSpriteVisible(i))
         {

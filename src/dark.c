@@ -437,7 +437,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     task->data[1] = 0;
     task->data[2] = 0;
     sub_80B856C(3);
-    for (i = 0; i < 112; ++i)
+    for (i = 0; i < 112; i++)
     {
         gScanlineEffectRegBuffers[0][i] = task->data[10];
         gScanlineEffectRegBuffers[1][i] = task->data[10];
@@ -574,7 +574,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
             scanlineParams.dmaDest = &REG_BG1VOFS;
         else
             scanlineParams.dmaDest = &REG_BG2VOFS;
-        for (i = 0; i < 112; ++i)
+        for (i = 0; i < 112; i++)
         {
             gScanlineEffectRegBuffers[0][i] = task->data[10] + (159 - i);
             gScanlineEffectRegBuffers[1][i] = task->data[10] + (159 - i);
@@ -682,9 +682,9 @@ static void sub_80B843C(struct Task *task)
     {
         var0 = task->data[13] / var2;
         var1 = task->data[6] << 8;
-        for (i = 0; i < task->data[4]; ++i)
+        for (i = 0; i < task->data[4]; i++)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = task->data[10] - (i - 159);
-        for (i = task->data[4]; i <= task->data[5]; ++i)
+        for (i = task->data[4]; i <= task->data[5]; i++)
         {
             if (i >= 0)
             {
@@ -695,14 +695,14 @@ static void sub_80B843C(struct Task *task)
             var1 += var0;
         }
         var4 = task->data[10] - (i - 159);
-        for (; i < task->data[7]; ++i)
+        for (; i < task->data[7]; i++)
             if (i >= 0)
                 gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = var4--;
     }
     else
     {
         var4 = task->data[10] + 159;
-        for (i = 0; i < 112; ++i)
+        for (i = 0; i < 112; i++)
         {
             gScanlineEffectRegBuffers[0][i] = var4;
             gScanlineEffectRegBuffers[1][i] = var4;
@@ -715,7 +715,7 @@ static void sub_80B856C(u8 priority)
 {
     u16 i;
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         u8 spriteId = GetAnimBattlerSpriteId(i);
 

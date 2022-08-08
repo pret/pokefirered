@@ -446,7 +446,7 @@ static void LinkOpponentHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 size += CopyLinkOpponentMonData(i, monData + size);
@@ -779,7 +779,7 @@ static void LinkOpponentHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 SetLinkOpponentMonData(i);
@@ -803,7 +803,7 @@ static void SetLinkOpponentMonData(u8 monId)
 
             SetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, &battlePokemon->species);
             SetMonData(&gEnemyParty[monId], MON_DATA_HELD_ITEM, &battlePokemon->item);
-            for (i = 0; i < MAX_MON_MOVES; ++i)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 SetMonData(&gEnemyParty[monId], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
                 SetMonData(&gEnemyParty[monId], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
@@ -842,7 +842,7 @@ static void SetLinkOpponentMonData(u8 monId)
         SetMonData(&gEnemyParty[monId], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case REQUEST_MOVES_PP_BATTLE:
-        for (i = 0; i < MAX_MON_MOVES; ++i)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             SetMonData(&gEnemyParty[monId], MON_DATA_MOVE1 + i, &moveData->moves[i]);
             SetMonData(&gEnemyParty[monId], MON_DATA_PP1 + i, &moveData->pp[i]);
@@ -1010,7 +1010,7 @@ static void LinkOpponentHandleSetRawMonData(void)
     u8 *dst = (u8 *)&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
     u8 i;
 
-    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; ++i)
+    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
         dst[i] = gBattleBufferA[gActiveBattler][3 + i];
     LinkOpponentBufferExecCompleted();
 }

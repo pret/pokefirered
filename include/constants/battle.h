@@ -316,6 +316,9 @@
 #define NUM_CASTFORM_FORMS  4
 #define CASTFORM_SUBSTITUTE (1 << 7)
 
+#define FLEE_ITEM    1
+#define FLEE_ABILITY 2
+
 // Return value for IsRunningFromBattleImpossible.
 #define BATTLE_RUN_SUCCESS        0
 #define BATTLE_RUN_FORBIDDEN      1
@@ -350,5 +353,8 @@
 
 #define B_TEXT_FLAG_NPC_CONTEXT_FONT    (1 << 6)
 #define B_TEXT_FLAG_WINDOW_CLEAR        (1 << 7)
+
+// Indicator for the party summary bar to display an empty slot.
+#define HP_EMPTY_SLOT 0xFFFF
 
 #endif // GUARD_CONSTANTS_BATTLE_H

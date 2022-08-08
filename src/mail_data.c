@@ -5,6 +5,8 @@
 #include "constants/items.h"
 #include "pokemon_icon.h"
 
+#define UNOWN_OFFSET 30000
+
 void ClearMailData(void)
 {
     u8 i;
@@ -73,7 +75,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
 u16 SpeciesToMailSpecies(u16 species, u32 personality)
 {
     if (species == SPECIES_UNOWN) {
-        u32 mailSpecies = GetUnownLetterByPersonality(personality) + 30000;
+        u32 mailSpecies = GetUnownLetterByPersonality(personality) + UNOWN_OFFSET;
         return mailSpecies;
     }
     return species;
@@ -83,10 +85,10 @@ u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *unownLetter)
 {
     u16 result;
 
-    if (mailSpecies >= 30000 && mailSpecies < (30000 + UNOWN_FORM_COUNT))
+    if (mailSpecies >= UNOWN_OFFSET && mailSpecies < (UNOWN_OFFSET + NUM_UNOWN_FORMS))
     {
         result = SPECIES_UNOWN;
-        *unownLetter = mailSpecies - 30000;
+        *unownLetter = mailSpecies - UNOWN_OFFSET;
     }
     else
     {

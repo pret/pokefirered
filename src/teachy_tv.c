@@ -1320,9 +1320,9 @@ static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBu
     CpuFastCopy(tileset, buffer, 0x20);
     if (metaTile & 1)
     {
-        for (i = 0; i < 8; ++i)
+        for (i = 0; i < 8; i++)
         {
-            for (j = 0; j < 4; ++j)
+            for (j = 0; j < 4; j++)
             {
                 u32 offset = j - 3;
                 u8 value = buffer[(i << 2) - offset];
@@ -1333,11 +1333,11 @@ static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBu
     }
     if (metaTile & 2)
     {
-        for (i = 0; i < 8; ++i)
+        for (i = 0; i < 8; i++)
             memcpy(&src[4 * i], &buffer[4 * (7 - i)], 4);
         CpuFastCopy(src, buffer, 0x20);
     }
-    for (i = 0; i < 32; ++i)
+    for (i = 0; i < 32; i++)
     {
         if (buffer[i] & 0xF0)
             blockBuf[i] = (blockBuf[i] & 0xF) + (buffer[i] & 0xF0);

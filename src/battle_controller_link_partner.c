@@ -401,7 +401,7 @@ static void LinkPartnerHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 size += CopyLinkPartnerMonData(i, monData + size);
@@ -734,7 +734,7 @@ static void LinkPartnerHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 SetLinkPartnerMonData(i);
@@ -758,7 +758,7 @@ static void SetLinkPartnerMonData(u8 monId)
 
             SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &battlePokemon->species);
             SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &battlePokemon->item);
-            for (i = 0; i < MAX_MON_MOVES; ++i)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
                 SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
@@ -797,7 +797,7 @@ static void SetLinkPartnerMonData(u8 monId)
         SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case REQUEST_MOVES_PP_BATTLE:
-        for (i = 0; i < MAX_MON_MOVES; ++i)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &moveData->moves[i]);
             SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &moveData->pp[i]);
@@ -966,7 +966,7 @@ static void LinkPartnerHandleSetRawMonData(void)
     u8 *dst = (u8 *)&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
     u8 i;
 
-    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; ++i)
+    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
         dst[i] = gBattleBufferA[gActiveBattler][3 + i];
     LinkPartnerBufferExecCompleted();
 }

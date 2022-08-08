@@ -667,7 +667,7 @@ static void AnimSwirlingSnowball_Step1(struct Sprite *sprite)
         sprite->data[2] -= gBattleAnimArgs[2];
     else
         sprite->data[2] += gBattleAnimArgs[2];
-    for (i = 0; i < 8; ++i)
+    for (i = 0; i < 8; i++)
         tempDataHolder[i] = sprite->data[i];
     InitAnimFastLinearTranslationWithSpeed(sprite);
     sprite->data[1] ^= 1;
@@ -684,7 +684,7 @@ static void AnimSwirlingSnowball_Step1(struct Sprite *sprite)
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;
     sprite->x2 = sprite->y2 = 0;
-    for (i = 0; i < 8; ++i)
+    for (i = 0; i < 8; i++)
         sprite->data[i] = tempDataHolder[i];
     sprite->callback = InitAndStartAnimFastLinearTranslationWithSpeed;
     StoreSpriteCallbackInData6(sprite, AnimSwirlingSnowball_Step2);
@@ -772,7 +772,7 @@ static void AnimMoveParticleBeyondTarget(struct Sprite *sprite)
         sprite->data[2] += gBattleAnimArgs[2];
     sprite->data[4] += gBattleAnimArgs[3];
     InitAnimFastLinearTranslationWithSpeed(sprite);
-    for (i = 0; i < 8; ++i)
+    for (i = 0; i < 8; i++)
         tempDataHolder[i] = sprite->data[i];
     sprite->data[1] ^= 1;
     sprite->data[2] ^= 1;
@@ -789,7 +789,7 @@ static void AnimMoveParticleBeyondTarget(struct Sprite *sprite)
     sprite->y += sprite->y2;
     sprite->y2 = 0;
     sprite->x2 = 0;
-    for (i = 0; i < 8; ++i)
+    for (i = 0; i < 8; i++)
         sprite->data[i] = tempDataHolder[i];
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->data[6] = gBattleAnimArgs[6];

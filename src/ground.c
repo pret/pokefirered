@@ -557,7 +557,7 @@ void AnimTask_HorizontalShake(u8 taskId)
         break;
     case 4:
         task->data[13] = 0;
-        for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (IsBattlerSpriteVisible(i))
             {
@@ -664,7 +664,7 @@ static void sub_80B967C(u8 taskId)
         }
         break;
     case 2:
-        for (i = 0; i < task->data[13]; ++i)
+        for (i = 0; i < task->data[13]; i++)
             gSprites[task->data[9 + i]].x2 = 0;
         DestroyAnimVisualTask(taskId);
         break;
@@ -679,7 +679,7 @@ static void sub_80B9760(struct Task *task)
         xOffset = (task->data[14] / 2) + (task->data[14] & 1);
     else
         xOffset = -(task->data[14] / 2);
-    for (i = 0; i < task->data[13]; ++i)
+    for (i = 0; i < task->data[13]; i++)
         gSprites[task->data[9 + i]].x2 = xOffset;
 }
 

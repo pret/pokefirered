@@ -188,7 +188,7 @@ struct ProtectStruct
     u32 confusionSelfDmg:1;
     u32 targetNotAffected:1;
     u32 chargingTurn:1;
-    u32 fleeFlag:2; // for RunAway and Smoke Ball
+    u32 fleeType:2; // for RunAway and Smoke Ball
     u32 usedImprisonedMove:1;
     u32 loveImmobility:1;
     u32 usedDisabledMove:1;
@@ -361,7 +361,7 @@ struct BattleResults
 
 extern struct BattleResults gBattleResults;
 
-struct LinkPartnerHeader
+struct LinkBattlerHeader
 {
     u8 versionSignatureLo;
     u8 versionSignatureHi;
@@ -452,7 +452,7 @@ struct BattleStruct
     u8 field_182;
     // align 4
     union {
-        struct LinkPartnerHeader linkPartnerHeader;
+        struct LinkBattlerHeader linkBattlerHeader;
         struct MultiBattlePokemonTx multiBattleMons[3];
     } multiBuffer;
     u8 padding_1E4[0x1C];
@@ -681,8 +681,8 @@ extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern bool8 gDoingBattleAnim;
 extern struct PokedudeBattlerState *gPokedudeBattlerStates[MAX_BATTLERS_COUNT];
-extern u8 *gBattleAnimMons_BgTilesBuffer;
-extern u8 *gBattleAnimMons_BgTilemapBuffer;
+extern u8 *gBattleAnimBgTileBuffer;
+extern u8 *gBattleAnimBgTilemapBuffer;
 extern void (*gBattleMainFunc)(void);
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
 extern u32 gUnknown_2022B54;

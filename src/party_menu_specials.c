@@ -53,7 +53,7 @@ void GetNumMovesSelectedMonHas(void)
     u8 i;
 
     gSpecialVar_Result = 0;
-    for (i = 0; i < MAX_MON_MOVES; ++i)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i) != MOVE_NONE)
             ++gSpecialVar_Result;
 }
@@ -95,7 +95,7 @@ void MoveDeleterForgetMove(void)
 
     SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], MOVE_NONE, gSpecialVar_0x8005);
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
-    for (i = gSpecialVar_0x8005; i < MAX_MON_MOVES - 1; ++i)
+    for (i = gSpecialVar_0x8005; i < MAX_MON_MOVES - 1; i++)
         ShiftMoveSlot(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 

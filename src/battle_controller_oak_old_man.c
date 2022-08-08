@@ -980,7 +980,7 @@ static void OakOldManHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 size += CopyOakOldManMonData(i, monData + size);
@@ -1313,7 +1313,7 @@ static void OakOldManHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 SetOakOldManMonData(i);
@@ -1337,7 +1337,7 @@ static void SetOakOldManMonData(u8 monId)
 
             SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &battlePokemon->species);
             SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &battlePokemon->item);
-            for (i = 0; i < MAX_MON_MOVES; ++i)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
                 SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
@@ -1376,7 +1376,7 @@ static void SetOakOldManMonData(u8 monId)
         SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case REQUEST_MOVES_PP_BATTLE:
-        for (i = 0; i < MAX_MON_MOVES; ++i)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &moveData->moves[i]);
             SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &moveData->pp[i]);
@@ -1817,7 +1817,7 @@ static void OakOldManHandleChooseAction(void)
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
     BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
-    for (i = 0; i < MAX_MON_MOVES; ++i)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         ActionSelectionDestroyCursorAt((u8)i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
@@ -1877,7 +1877,7 @@ static void OakOldManHandleChooseItem(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
     gBattlerInMenuId = gActiveBattler;
-    for (i = 0; i < 3; ++i)
+    for (i = 0; i < 3; i++)
         gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][i + 1];
 }
 
@@ -1890,7 +1890,7 @@ static void OakOldManHandleChoosePokemon(void)
     *(&gBattleStruct->battlerPreventingSwitchout) = gBattleBufferA[gActiveBattler][1] >> 4;
     *(&gBattleStruct->playerPartyIdx) = gBattleBufferA[gActiveBattler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = gBattleBufferA[gActiveBattler][3];
-    for (i = 0; i < 3; ++i)
+    for (i = 0; i < 3; i++)
         gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][4 + i];
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenPartyMenuToChooseMon;

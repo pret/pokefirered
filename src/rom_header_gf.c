@@ -16,7 +16,7 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * monBackPics;
     const struct CompressedSpritePalette * monNormalPalettes;
     const struct CompressedSpritePalette * monShinyPalettes;
-    const u8 * const * monIcons;
+    const u8 *const * monIcons;
     const u8 * monIconPaletteIds;
     const struct SpritePalette * monIconPalettes;
     const u8 (* monSpeciesNames)[];
@@ -63,7 +63,7 @@ struct GFRomHeader
     u32 unk18;
     const struct BaseStats * baseStats;
     const u8 (* abilityNames)[];
-    const u8 * const * abilityDescriptions;
+    const u8 *const * abilityDescriptions;
     const struct Item * items;
     const struct BattleMove * moves;
     const struct CompressedSpriteSheet * ballGfx;

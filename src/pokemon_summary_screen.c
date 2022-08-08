@@ -626,14 +626,14 @@ static const u32 sBgTilemap_MovesPage[] = INCBIN_U32( "graphics/interface/pokesu
 
 #include "data/text/nature_names.h"
 
-static const u8 * const sEggHatchTimeTexts[] = {
+static const u8 *const sEggHatchTimeTexts[] = {
     gText_PokeSum_EggHatch_LongTime,
     gText_PokeSum_EggHatch_SomeTime,
     gText_PokeSum_EggHatch_Soon, 
     gText_PokeSum_EggHatch_AlmostReady
 };
 
-static const u8 * const sEggOriginTexts[] = {
+static const u8 *const sEggOriginTexts[] = {
     gText_PokeSum_EggOrigin_DayCare,      
     gText_PokeSum_EggOrigin_Trade,
     gText_PokeSum_EggOrigin_TravelingMan, 

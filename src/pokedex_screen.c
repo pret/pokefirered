@@ -797,7 +797,7 @@ const u8 (*const sCategoryPageIconCoords[])[4] = {
     sPageIconCoords_4Mons,
 };
 
-static const u8 * const sDexCategoryNamePtrs[] = {
+static const u8 *const sDexCategoryNamePtrs[] = {
     gText_DexCategory_GrasslandPkmn,
     gText_DexCategory_ForestPkmn,
     gText_DexCategory_WatersEdgePkmn,

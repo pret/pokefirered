@@ -861,7 +861,7 @@ static bool8 BT_Phase2BigPokeball_Init(struct Task *task)
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
     sTransitionStructPtr->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
     sTransitionStructPtr->bldAlpha = (task->tEvb << 8) | task->tEva;
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
         gScanlineEffectRegBuffers[1][i] = 0xF0;
     SetVBlankCallback(VBCB_BT_Phase2BigPokeball1);
     BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
@@ -879,7 +879,7 @@ static bool8 BT_Phase2BigPokeball_LoadTilemapAndWave(struct Task *task)
     const u16 *BigPokeballMap = sBigPokeballTilemap;
 
     BT_GetBg0TilemapAndTilesetBase(&tilemapAddr, &tilesetAddr);
-    for (i = 0; i < 20; ++i)
+    for (i = 0; i < 20; i++)
         for (j = 0; j < 30; ++j, ++BigPokeballMap)
             tilemapAddr[i * 32 + j] = *BigPokeballMap | 0xF000; // use palette #15
     BT_LoadWaveIntoBuffer(gScanlineEffectRegBuffers[0], 0, task->tTheta, 132, task->tAmplitude, 160);
@@ -1147,7 +1147,7 @@ static bool8 BT_Phase2ClockwiseBlackFade_Init(struct Task *task)
     sTransitionStructPtr->winOut = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR;
     sTransitionStructPtr->win0H = WIN_RANGE(0xF0, 0xF1);
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
         gScanlineEffectRegBuffers[1][i] = WIN_RANGE(0xF3, 0xF4);
     SetVBlankCallback(VBCB_BT_Phase2ClockwiseBlackFade);
     sTransitionStructPtr->trEndPtX = 120;
@@ -1349,7 +1349,7 @@ static bool8 BT_Phase2FullScreenWave_Init(struct Task *task)
 
     BT_InitCtrlBlk();
     ScanlineEffect_Clear();
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
         gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->bg123VOfs;
     SetVBlankCallback(VBCB_BT_Phase2FullScreenWave);
     SetHBlankCallback(HBCB_BT_Phase2FullScreenWave);
@@ -1429,7 +1429,7 @@ static bool8 BT_Phase2BlackWaveToRight_Init(struct Task *task)
     sTransitionStructPtr->winOut = 0;
     sTransitionStructPtr->win0H = WIN_RANGE(0, 0xF0);
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
         gScanlineEffectRegBuffers[1][i] = WIN_RANGE(0, 0xF2);
     SetVBlankCallback(VBCB_BT_Phase2BlackWaveToRight);
     ++task->tState;
@@ -1500,7 +1500,7 @@ static void BT_AntiClockwiseSpiral_DoUpdateFrame(s16 initRadius, s16 deltaAngleM
     s16 i, amplitude1, amplitude2;
     s16 y1, x1, y2, x2;
 
-    for (i = 320; i < 960; ++i)
+    for (i = 320; i < 960; i++)
         gScanlineEffectRegBuffers[1][i] = 120;
 
     for (i = 0; i < (deltaAngleMax * 16); ++i, ++theta)
@@ -1813,7 +1813,7 @@ static bool8 BT_Phase2Mugshot_Init(struct Task *task)
     sTransitionStructPtr->winIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
     sTransitionStructPtr->winOut = WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR;
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
         gScanlineEffectRegBuffers[1][i] = WIN_RANGE(0xF0, 0xF1);
     SetVBlankCallback(VBCB_BT_Phase2Mugshot1_Slide);
     ++task->tState;
@@ -1830,7 +1830,7 @@ static bool8 BT_Phase2Mugshot_LoadGfx(struct Task *task)
     CpuCopy16(sVsBarTileset, tilesetAddr, 0x1E0);
     LoadPalette(sVsBarOpponentPalettes[task->tWhichMugshot], 0xF0, 0x20);
     LoadPalette(sVsBarPlayerPalettes[gSaveBlock2Ptr->playerGender], 0xFA, 0xC);
-    for (i = 0; i < 20; ++i)
+    for (i = 0; i < 20; i++)
         for (j = 0; j < 32; ++j, ++mugshotsMap)
             tilemapAddr[i * 32 + j] = *mugshotsMap | 0xF000; // use palette #15
     EnableInterrupts(INTR_FLAG_HBLANK);
@@ -1956,7 +1956,7 @@ static bool8 BT_Phase2Mugshot_ExpandWhiteBand(struct Task *task)
     {
         s16 i;
 
-        for (i = 0, nextFunc = FALSE; i <= task->tHalfBandwidth; ++i)
+        for (i = 0, nextFunc = FALSE; i <= task->tHalfBandwidth; i++)
         {
             s16 y1 = 80 - i;
             s16 y2 = 80 + i;
@@ -2174,7 +2174,7 @@ static bool8 BT_Phase2SlicedScreen_Init(struct Task *task)
     sTransitionStructPtr->winIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
     sTransitionStructPtr->winOut = 0;
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
     {
         gScanlineEffectRegBuffers[1][i] = sTransitionStructPtr->bg123HOfs;
         gScanlineEffectRegBuffers[1][160 + i] = 0xF0;
@@ -2198,7 +2198,7 @@ static bool8 BT_Phase2SlicedScreen_UpdateOffsets(struct Task *task)
         task->tAcc += task->tJerk;
     if (task->tJerk < 128)
         task->tJerk <<= 1;
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
     {
         u16 *ofsBuffer = &gScanlineEffectRegBuffers[0][i];
         u16 *win0HBuffer = &gScanlineEffectRegBuffers[0][i + 160];
@@ -2274,7 +2274,7 @@ static bool8 BT_Phase2WhiteFadeInStripes_Init(struct Task *task)
     sTransitionStructPtr->winIn = WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ;
     sTransitionStructPtr->winOut = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WININ_WIN0_CLR;
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
     {
         gScanlineEffectRegBuffers[1][i] = 0;
         gScanlineEffectRegBuffers[1][i + 160] = 0xF0;
@@ -2393,7 +2393,7 @@ static void SpriteCB_BT_Phase2WhiteFadeInStripes(struct Sprite *sprite)
         u16 *win0H = &gScanlineEffectRegBuffers[0][sprite->y + 160];
         u32 stripeWidth = sprite->spLastSprite ? 0x19 : 0x1B;
         
-        for (i = 0; i < stripeWidth; ++i)
+        for (i = 0; i < stripeWidth; i++)
         {
             bldY[i] = sprite->spBldyCounter >> 8;
             win0H[i] = (u8)(sprite->x);
@@ -2499,7 +2499,7 @@ static bool8 BT_Phase2BlackDoodles_Init(struct Task *task)
     sTransitionStructPtr->winIn = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR;
     sTransitionStructPtr->winOut = 0;
     sTransitionStructPtr->win0V = WIN_RANGE(0, 0xA0);
-    for (i = 0; i < 160; ++i)
+    for (i = 0; i < 160; i++)
         gScanlineEffectRegBuffers[0][i] = WIN_RANGE(0, 0xF0);
     CpuCopy16(gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], 0x140);
     SetVBlankCallback(VBCB_BT_Phase2BlackDoodles);
@@ -2521,7 +2521,7 @@ static bool8 BT_Phase2BlackDoodles_DrawSingleBrush(struct Task *task)
     bool8 nextFunc;
 
     sTransitionStructPtr->vblankDma = FALSE;
-    for (i = 0, nextFunc = FALSE; i < 16; ++i)
+    for (i = 0, nextFunc = FALSE; i < 16; i++)
     {
         s16 left = gScanlineEffectRegBuffers[0][sTransitionStructPtr->trCurrentPtY] >> 8;
         s16 right = gScanlineEffectRegBuffers[0][sTransitionStructPtr->trCurrentPtY] & 0xFF;
@@ -2736,7 +2736,7 @@ static void BT_GenerateCircle(s16 *buffer, s16 x, s16 y, s16 radius)
 
     memset(buffer, 0xA, 320);
     // 64 iterations because we only want to cover [0, π/2) discretely.
-    for (i = 0; i < 64; ++i)
+    for (i = 0; i < 64; i++)
     {
         s16 sinResult, cosResult, leftX, topY, bottomY, nextTopY, nextBottomY, winVal;
 

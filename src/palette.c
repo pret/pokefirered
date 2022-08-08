@@ -129,7 +129,7 @@ void ResetPaletteFade(void)
 {
     u8 i;
 
-    for (i = 0; i < 16; ++i)
+    for (i = 0; i < 16; i++)
         ResetPaletteStruct(i);
     ResetPaletteFadeControl();
 }
@@ -139,7 +139,7 @@ void ReadPlttIntoBuffers(void)
     u16 i;
     u16 *pltt = (u16 *)PLTT;
 
-    for (i = 0; i < PLTT_SIZE / 2; ++i)
+    for (i = 0; i < PLTT_SIZE / 2; i++)
     {
         gPlttBufferUnfaded[i] = pltt[i];
         gPlttBufferFaded[i] = pltt[i];
@@ -199,7 +199,7 @@ static void sub_8070718(u8 a1, u32 *a2)
 {
     u8 i;
 
-    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
+    for (i = 0; i < NUM_PALETTE_STRUCTS; i++)
     {
         struct PaletteStruct *palstruct = &sPaletteStructs[i];
 
@@ -291,7 +291,7 @@ static void sub_80708F4(struct PaletteStruct *a1, u32 *a2)
                     u32 srcOffset = a1->srcIndex * a1->base->size;
                     u8 i;
 
-                    for (i = 0; i < a1->base->size; ++i)
+                    for (i = 0; i < a1->base->size; i++)
                         gPlttBufferFaded[a1->baseDestOffset + i] = a1->base->src[srcOffset + i];
                 }
             }
@@ -388,7 +388,7 @@ static u8 GetPaletteNumByUid(u16 uid)
 {
     u8 i;
 
-    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
+    for (i = 0; i < NUM_PALETTE_STRUCTS; i++)
         if (sPaletteStructs[i].base->uid == uid)
             return i;
     return 16;
@@ -482,7 +482,7 @@ void InvertPlttBuffer(u32 selectedPalettes)
         {
             u8 i;
 
-            for (i = 0; i < 16; ++i)
+            for (i = 0; i < 16; i++)
                 gPlttBufferFaded[paletteOffset + i] = ~gPlttBufferFaded[paletteOffset + i];
         }
         selectedPalettes >>= 1;
@@ -500,7 +500,7 @@ void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
         {
             u8 i;
 
-            for (i = 0; i < 16; ++i)
+            for (i = 0; i < 16; i++)
             {
                 struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[paletteOffset + i];
                 
@@ -524,7 +524,7 @@ void UnfadePlttBuffer(u32 selectedPalettes)
         {
             u8 i;
 
-            for (i = 0; i < 16; ++i)
+            for (i = 0; i < 16; i++)
                 gPlttBufferFaded[paletteOffset + i] = gPlttBufferUnfaded[paletteOffset + i];
         }
         selectedPalettes >>= 1;
@@ -574,7 +574,7 @@ static u8 UpdateFastPaletteFade(void)
     switch (gPaletteFade_submode)
     {
     case FAST_FADE_IN_FROM_WHITE:
-        for (i = paletteOffsetStart; i < paletteOffsetEnd; ++i)
+        for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
         {
             struct PlttData *unfaded;
             struct PlttData *faded;
@@ -597,7 +597,7 @@ static u8 UpdateFastPaletteFade(void)
         }
         break;
     case FAST_FADE_OUT_TO_WHITE:
-        for (i = paletteOffsetStart; i < paletteOffsetEnd; ++i)
+        for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
         {
             struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[i];
 
@@ -614,7 +614,7 @@ static u8 UpdateFastPaletteFade(void)
         }
         break;
     case FAST_FADE_IN_FROM_BLACK:
-        for (i = paletteOffsetStart; i < paletteOffsetEnd; ++i)
+        for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
         {
             struct PlttData *unfaded;
             struct PlttData *faded;
@@ -637,7 +637,7 @@ static u8 UpdateFastPaletteFade(void)
         }
         break;
     case FAST_FADE_OUT_TO_BLACK:
-        for (i = paletteOffsetStart; i < paletteOffsetEnd; ++i)
+        for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
         {
             struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[i];
 
@@ -804,7 +804,7 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
     s32 r, g, b, i;
     u32 gray;
 
-    for (i = 0; i < count; ++i)
+    for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;
         g = (*palette >>  5) & 0x1F;
@@ -819,7 +819,7 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
     s32 r, g, b, i;
     u32 gray;
 
-    for (i = 0; i < count; ++i)
+    for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;
         g = (*palette >>  5) & 0x1F;
@@ -838,7 +838,7 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
     s32 r, g, b, i;
     u32 gray;
 
-    for (i = 0; i < count; ++i)
+    for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;
         g = (*palette >>  5) & 0x1F;
@@ -858,7 +858,7 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
     s32 r, g, b, i;
     u32 gray;
 
-    for (i = 0; i < count; ++i)
+    for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;
         g = (*palette >>  5) & 0x1F;
@@ -884,7 +884,7 @@ void sub_80716F8(const u16 *src, u16 *dst, u16 count, u8 a4)
 
     if (!a4)
     {
-        for (i = 0; i < count; ++i)
+        for (i = 0; i < count; i++)
             *dst++ = *src++;
     }
     else
@@ -932,7 +932,7 @@ bool32 sub_807185C(u8 var)
 {
     s32 i;
 
-    for (i = 0; i < NUM_TASKS; ++i)
+    for (i = 0; i < NUM_TASKS; i++)
         if (gTasks[i].isActive == TRUE
          && gTasks[i].func == sub_80718B8
          && gTasks[i].data[8] == var)

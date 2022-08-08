@@ -669,12 +669,12 @@ static void CB2_InitBattleInternal(void)
     gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     ScanlineEffect_Clear();
 
-    for (i = 0; i < 80; i++)
+    for (i = 0; i < 80; ++i)
     {
         gScanlineEffectRegBuffers[0][i] = 0xF0;
         gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
-    for (; i < 160; i++)
+    for (; i < 160; ++i)
     {
         gScanlineEffectRegBuffers[0][i] = 0xFF10;
         gScanlineEffectRegBuffers[1][i] = 0xFF10;
@@ -2314,7 +2314,7 @@ static void BattleStartClearSetData(void)
     gBattleResults.playerMon1Species = SPECIES_NONE;
     gBattleResults.playerMon2Species = SPECIES_NONE;
     gBattleResults.caughtMonSpecies = SPECIES_NONE;
-    for (i = 0; i < POKEMON_NAME_LENGTH; i++)
+    for (i = 0; i < POKEMON_NAME_LENGTH; ++i)
     {
         gBattleResults.playerMon1Name[i] = 0;
         gBattleResults.playerMon2Name[i] = 0;

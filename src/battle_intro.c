@@ -190,7 +190,7 @@ static void BattleIntroSlide1(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
         // Scanline settings have already been set in CB2_InitBattleInternal
-        for (i = 0; i < 80; i++)
+        for (i = 0; i < 80; ++i)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
         while (i < 160)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i++] = -gTasks[taskId].data[2];
@@ -289,7 +289,7 @@ static void BattleIntroSlide2(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
         // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < 80; i++)
+        for (i = 0; i < 80; ++i)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
         while (i < 160)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i++] = -gTasks[taskId].data[2];
@@ -368,7 +368,7 @@ static void BattleIntroSlide3(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
         // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < 80; i++)
+        for (i = 0; i < 80; ++i)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
         while (i < 160)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i++] = -gTasks[taskId].data[2];
@@ -445,7 +445,7 @@ static void BattleIntroSlideLink(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
         // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < 80; i++)
+        for (i = 0; i < 80; ++i)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
         while (i < 160)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i++] = -gTasks[taskId].data[2];
@@ -473,8 +473,8 @@ void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u
 
     CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], tilesDest, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, tilesDest, 0x1000, tilesOffset);
-    for (i = y; i < y + 8; i++)
-        for (j = x; j < x + 8; j++)
+    for (i = y; i < y + 8; ++i)
+        for (j = x; j < x + 8; ++j)
             tilemapDest[i * 32 + j] = offset++ | (palno << 12);
     LoadBgTilemap(bgId, tilemapDest, BG_SCREEN_SIZE, 0);
 }
@@ -486,7 +486,7 @@ static void sub_80BCFCC(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, 
 
     DmaCopy16(3, gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
     offset = (arg5 >> 5) - (arg7 << 9);
-    for (i = arg1; i < arg1 + 8; i++)
-        for (j = arg0; j < arg0 + 8; j++)
+    for (i = arg1; i < arg1 + 8; ++i)
+        for (j = arg0; j < arg0 + 8; ++j)
             *((u16 *)(BG_VRAM) + (i * 32) + (j + (arg6 << 10))) = offset++ | (arg4 << 12);
 }

@@ -344,7 +344,7 @@ void AnimTask_DragonDanceWaver(u8 taskId)
     task->data[4] = r1 + 32;
     if (task->data[3] < 0)
         task->data[3] = 0;
-    for (i = task->data[3]; i <= task->data[4]; i++)
+    for (i = task->data[3]; i <= task->data[4]; ++i)
     {
         gScanlineEffectRegBuffers[0][i] = task->data[2];
         gScanlineEffectRegBuffers[1][i] = task->data[2];
@@ -396,7 +396,7 @@ static void sub_80B776C(struct Task *task)
 {
     u16 i, r3 = task->data[5];
 
-    for (i = task->data[3]; i <= task->data[4]; i++)
+    for (i = task->data[3]; i <= task->data[4]; ++i)
     {
         gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = ((gSineTable[r3] * task->data[6]) >> 7) + task->data[2];
         r3 = (r3 + 8) & 0xFF;
@@ -416,7 +416,7 @@ static void AnimOverheatFlame(struct Sprite *sprite)
     sprite->y += sprite->data[2] * gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[3];
     sprite->callback = sub_80B7894;
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < 7; ++i)
         gUnknown_20399A4[i] = sprite->data[i];
 }
 

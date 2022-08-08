@@ -360,7 +360,7 @@ static void HandleInputChooseTarget(void)
         {
             u8 currSelIdentity = GetBattlerPosition(gMultiUsePlayerCursor);
 
-            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+            for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
                 if (currSelIdentity == identities[i])
                     break;
             do
@@ -400,7 +400,7 @@ static void HandleInputChooseTarget(void)
         {
             u8 currSelIdentity = GetBattlerPosition(gMultiUsePlayerCursor);
 
-            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+            for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
                 if (currSelIdentity == identities[i])
                     break;
             do
@@ -658,31 +658,31 @@ static void HandleMoveSwitching(void)
                 gDisableStructs[gActiveBattler].mimickedMoves |= gBitTable[gMultiUsePlayerCursor];
             }
             MoveSelectionDisplayMoveNames();
-            for (i = 0; i < MAX_MON_MOVES; i++)
+            for (i = 0; i < MAX_MON_MOVES; ++i)
                 perMovePPBonuses[i] = (gBattleMons[gActiveBattler].ppBonuses & (3 << (i * 2))) >> (i * 2);
             totalPPBonuses = perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]];
             perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]] = perMovePPBonuses[gMultiUsePlayerCursor];
             perMovePPBonuses[gMultiUsePlayerCursor] = totalPPBonuses;
             totalPPBonuses = 0;
-            for (i = 0; i < MAX_MON_MOVES; i++)
+            for (i = 0; i < MAX_MON_MOVES; ++i)
                 totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
 
             gBattleMons[gActiveBattler].ppBonuses = totalPPBonuses;
-            for (i = 0; i < MAX_MON_MOVES; i++)
+            for (i = 0; i < MAX_MON_MOVES; ++i)
             {
                 gBattleMons[gActiveBattler].moves[i] = moveInfo->moves[i];
                 gBattleMons[gActiveBattler].pp[i] = moveInfo->currentPp[i];
             }
             if (!(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
             {
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                for (i = 0; i < MAX_MON_MOVES; ++i)
                 {
                     moveStruct.moves[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i);
                     moveStruct.currentPp[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP1 + i);
                 }
 
                 totalPPBonuses = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP_BONUSES);
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                for (i = 0; i < MAX_MON_MOVES; ++i)
                     perMovePPBonuses[i] = (totalPPBonuses & (3 << (i * 2))) >> (i * 2);
                 i = moveStruct.moves[gMoveSelectionCursor[gActiveBattler]];
                 moveStruct.moves[gMoveSelectionCursor[gActiveBattler]] = moveStruct.moves[gMultiUsePlayerCursor];
@@ -694,9 +694,9 @@ static void HandleMoveSwitching(void)
                 perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]] = perMovePPBonuses[gMultiUsePlayerCursor];
                 perMovePPBonuses[gMultiUsePlayerCursor] = totalPPBonuses;
                 totalPPBonuses = 0;
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                for (i = 0; i < MAX_MON_MOVES; ++i)
                     totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                for (i = 0; i < MAX_MON_MOVES; ++i)
                 {
                     SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i, &moveStruct.moves[i]);
                     SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP1 + i, &moveStruct.currentPp[i]);
@@ -1366,7 +1366,7 @@ static void MoveSelectionDisplayMoveNames(void)
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     gNumberOfMovesToChoose = 0;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < MAX_MON_MOVES; ++i)
     {
         MoveSelectionDestroyCursorAt(i);
         StringCopy(gDisplayedStringBattle, gUnknown_83FE770);
@@ -1498,7 +1498,7 @@ static void PlayerHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; i++)
+        for (i = 0; i < PARTY_SIZE; ++i)
         {
             if (monToCheck & 1)
                 size += CopyPlayerMonData(i, monData + size);
@@ -1821,7 +1821,7 @@ void PlayerHandleGetRawMonData(void)
     u8 *dst = (u8 *)&battleMon + gBattleBufferA[gActiveBattler][1];
     u8 i;
 
-    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
+    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; ++i)
         dst[i] = src[i];
 
     BtlController_EmitDataTransfer(1, gBattleBufferA[gActiveBattler][2], dst);
@@ -1840,7 +1840,7 @@ static void PlayerHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < PARTY_SIZE; i++)
+        for (i = 0; i < PARTY_SIZE; ++i)
         {
             if (monToCheck & 1)
                 SetPlayerMonData(i);
@@ -1864,7 +1864,7 @@ static void SetPlayerMonData(u8 monId)
 
             SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &battlePokemon->species);
             SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &battlePokemon->item);
-            for (i = 0; i < MAX_MON_MOVES; i++)
+            for (i = 0; i < MAX_MON_MOVES; ++i)
             {
                 SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
                 SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
@@ -1903,7 +1903,7 @@ static void SetPlayerMonData(u8 monId)
         SetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case REQUEST_MOVES_PP_BATTLE:
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        for (i = 0; i < MAX_MON_MOVES; ++i)
         {
             SetMonData(&gPlayerParty[monId], MON_DATA_MOVE1 + i, &moveData->moves[i]);
             SetMonData(&gPlayerParty[monId], MON_DATA_PP1 + i, &moveData->pp[i]);
@@ -2072,7 +2072,7 @@ static void PlayerHandleSetRawMonData(void)
     u8 *dst = (u8 *)&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
     u8 i;
 
-    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
+    for (i = 0; i < gBattleBufferA[gActiveBattler][2]; ++i)
         dst[i] = gBattleBufferA[gActiveBattler][3 + i];
     PlayerBufferExecCompleted();
 }
@@ -2409,7 +2409,7 @@ static void PlayerHandleChooseAction(void)
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
     BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
@@ -2453,7 +2453,7 @@ static void PlayerHandleChooseItem(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
     gBattlerInMenuId = gActiveBattler;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; ++i)
         gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
 }
 
@@ -2466,7 +2466,7 @@ static void PlayerHandleChoosePokemon(void)
     *(&gBattleStruct->battlerPreventingSwitchout) = gBattleBufferA[gActiveBattler][1] >> 4;
     *(&gBattleStruct->playerPartyIdx) = gBattleBufferA[gActiveBattler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = gBattleBufferA[gActiveBattler][3];
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; ++i)
         gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][4 + i];
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenPartyMenuToChooseMon;

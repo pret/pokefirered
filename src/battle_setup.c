@@ -533,7 +533,7 @@ static u16 GetSumOfPlayerPartyLevel(u8 numMons)
     u8 sum = 0;
     s32 i;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; ++i)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
 
@@ -563,7 +563,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonNoItemDefaultMoves *party;
 
             party = gTrainers[opponentId].party.NoItemDefaultMoves;
-            for (i = 0; i < count; i++)
+            for (i = 0; i < count; ++i)
                 sum += party[i].lvl;
         }
         break;
@@ -572,7 +572,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonNoItemCustomMoves *party;
 
             party = gTrainers[opponentId].party.NoItemCustomMoves;
-            for (i = 0; i < count; i++)
+            for (i = 0; i < count; ++i)
                 sum += party[i].lvl;
         }
         break;
@@ -581,7 +581,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonItemDefaultMoves *party;
 
             party = gTrainers[opponentId].party.ItemDefaultMoves;
-            for (i = 0; i < count; i++)
+            for (i = 0; i < count; ++i)
                 sum += party[i].lvl;
         }
         break;
@@ -590,7 +590,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonItemCustomMoves *party;
 
             party = gTrainers[opponentId].party.ItemCustomMoves;
-            for (i = 0; i < count; i++)
+            for (i = 0; i < count; ++i)
                 sum += party[i].lvl;
         }
         break;

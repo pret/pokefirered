@@ -6095,10 +6095,10 @@ static void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *struc
 
     if (battlePosition > 3)
     {
-        for (i = 0; i < (s8)structPtr->spriteCount; i++)
+        for (i = 0; i < (s8)structPtr->spriteCount; ++i)
         {
             structPtr->templates[i] = gSpriteTemplates_Battlers[i];
-            for (j = 0; j < structPtr->frameCount; j++)
+            for (j = 0; j < structPtr->frameCount; ++j)
                 structPtr->frameImages[i * structPtr->frameCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
             structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->frameCount];
         }
@@ -6108,7 +6108,7 @@ static void OakSpeechNidoranFSetupTemplate(struct OakSpeechNidoranFStruct *struc
         const struct SpriteTemplate *template = &gSpriteTemplates_Battlers[battlePosition];
         
         structPtr->templates[0] = *template;
-        for (j = 0; j < structPtr->frameCount; j++)
+        for (j = 0; j < structPtr->frameCount; ++j)
                 structPtr->frameImages[j].data = &structPtr->bufferPtrs[0][j * 0x800];
         structPtr->templates[0].images = structPtr->frameImages;
     }
@@ -6119,10 +6119,10 @@ static void OakSpeechNidoranFSetupTemplateDummy(struct OakSpeechNidoranFStruct *
 {
     u16 i, j;
 
-    for (i = 0; i < (s8)structPtr->spriteCount; i++)
+    for (i = 0; i < (s8)structPtr->spriteCount; ++i)
     {
         structPtr->templates[i] = sOakSpeechNidoranFDummyTemplate;
-        for (j = 0; j < structPtr->frameCount; j++)
+        for (j = 0; j < structPtr->frameCount; ++j)
             structPtr->frameImages[i * structPtr->spriteCount + j].data = &structPtr->bufferPtrs[i][j * 0x800];
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->spriteCount]; // should be frameCount logically
         structPtr->templates[i].anims = gSpriteAnimTable_82349BC;
@@ -6187,7 +6187,7 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
     {
         do
         {
-            for (i = 0; i < (s8)sOakSpeechNidoranResources->spriteCount; i++)
+            for (i = 0; i < (s8)sOakSpeechNidoranResources->spriteCount; ++i)
                 sOakSpeechNidoranResources->bufferPtrs[i] = &sOakSpeechNidoranResources->dataBuffer[sOakSpeechNidoranResources->sizePerSprite * i];
         } while (0);
     }
@@ -6199,7 +6199,7 @@ struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 
     }
     else
     {
-        for (i = 0; i < sOakSpeechNidoranResources->frameCount * sOakSpeechNidoranResources->spriteCount; i++)
+        for (i = 0; i < sOakSpeechNidoranResources->frameCount * sOakSpeechNidoranResources->spriteCount; ++i)
                 sOakSpeechNidoranResources->frameImages[i].size = 0x800;
         switch (sOakSpeechNidoranResources->enable2)
         {

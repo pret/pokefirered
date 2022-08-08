@@ -1392,7 +1392,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame * game, u8 *args
     case 4:
         if (GetBlockReceivedStatus() != sReceivedPlayerBitmasks[game->playerCount - 2])
             return 0;
-        for (i = 0; i < game->playerCount; i++)
+        for (i = 0; i < game->playerCount; ++i)
         {
             game->players[i].berryId = gBlockRecvBuffer[i][0];
             if (game->players[i].berryId > LAST_BERRY_INDEX + 1)
@@ -1562,7 +1562,7 @@ static void HandlePartnerInput(struct BerryCrushGame * game)
     s32 temp = 0;
     struct BerryCrushGame_LinkState *linkState;
 
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
     {
         linkState = (struct BerryCrushGame_LinkState *)gRecvCmds[i];
 
@@ -1611,7 +1611,7 @@ static void HandlePartnerInput(struct BerryCrushGame * game)
     {
         // For each player that pressed A, flag their input as synchronous
         // This is used to change their impact sprite to a big impact
-        for (i = 0; i < game->playerCount; i++)
+        for (i = 0; i < game->playerCount; ++i)
         {
             if (game->players[i].inputState == INPUT_STATE_NONE)
                 continue;
@@ -1647,7 +1647,7 @@ static void BerryCrush_BuildLocalState(struct BerryCrushGame * game)
     u16 r1 = 0;
     u8 i = 0;
 
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
     {
         if (game->players[i].inputState != 0)
         {
@@ -1796,7 +1796,7 @@ static void RecvLinkData(struct BerryCrushGame * game)
     u8 i = 0;
     struct BerryCrushGame_LinkState * linkState = NULL;
 
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
         game->players[i].inputState = INPUT_STATE_NONE;
 
     if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
@@ -2006,7 +2006,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
     case 2:
         if (GetBlockReceivedStatus() != sReceivedPlayerBitmasks[game->playerCount - 2])
             return 0;
-        for (i = 0; i < game->playerCount; i++)
+        for (i = 0; i < game->playerCount; ++i)
             game->players[i].timePressingA = gBlockRecvBuffer[i][0];
         game->cmdTimer = 0;
         game->sendCmd[0] = 0;
@@ -2044,7 +2044,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
 
         // Choose random second results page
         game->results.randomPageId = Random() % NUM_RANDOM_RESULTS_PAGES;
-        for (i = 0; i < game->playerCount; i++)
+        for (i = 0; i < game->playerCount; ++i)
         {
             game->results.playerIdsRanked[0][i] = i;
             game->results.playerIdsRanked[1][i] = i;
@@ -2116,7 +2116,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
         }
         break;
     case 4:
-        for (i = 0; i < game->playerCount - 1; i++)
+        for (i = 0; i < game->playerCount - 1; ++i)
         {
             for (j = game->playerCount - 1; j > i; --j)
             {
@@ -2312,7 +2312,7 @@ static u32 Cmd_CommunicatePlayAgainResponses(struct BerryCrushGame * game, UNUSE
             return 0;
 
         // Read partners responses
-        for (i = 0; i < game->playerCount; i++)
+        for (i = 0; i < game->playerCount; ++i)
             game->recvCmd[0] += gBlockRecvBuffer[i][0];
 
         if (game->recvCmd[0] != PLAY_AGAIN_YES)
@@ -2447,7 +2447,7 @@ static void ResetGame(struct BerryCrushGame * game)
     game->numBigSparkleChecks = -1;
     game->numBigSparkles = 0;
     game->sparkleCounter = 0;
-    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+    for (i = 0; i < MAX_RFU_PLAYERS; ++i)
     {
         game->players[i].berryId = -1;
         game->players[i].inputTime = 0;
@@ -3002,7 +3002,7 @@ static void printCrushingResults(struct BerryCrushGame * game)
     x = 190 - (u8)GetStringWidth(FONT_2, gText_TimesPerSec, 0);
     AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_3, x, y, sBerryCrushTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 8; ++i)
         if (((u8)game->pressingSpeed >> (7 - i)) & 1)
             score += *(i + sPressingSpeedConversionTable); // It's accessed in a different way here for unknown reason
     ConvertIntToDecimalStringN(gStringVar1, game->pressingSpeed >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -3130,7 +3130,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
             gText_PressingSpeedRankings
         );
         yPos = 42;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; ++i)
         {
             ConvertIntToDecimalStringN(gStringVar1, i + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
@@ -3143,7 +3143,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
                 0,
                 gStringVar4
             );
-            for (j = 0; j < 8; j++)
+            for (j = 0; j < 8; ++j)
             {
                 if (((tPressingSpeeds(i) & 0xFF) >> (7 - j)) & 1)
                     score += sPressingSpeedConversionTable[j];
@@ -3219,7 +3219,7 @@ static void CreatePlayerNameWindows(struct BerryCrushGame * game)
 {
     u8 i;
 
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
     {
         game->gfx.playerCoords[i] = &sPlayerCoords[gUnknown_846F280[game->playerCount - 2][i]];
         game->gfx.nameWindowIds[i] = AddWindow(&sWindowTemplates_PlayerNames[game->gfx.playerCoords[i]->playerId]);
@@ -3232,7 +3232,7 @@ static void DrawPlayerNameWindows(struct BerryCrushGame * game)
 {
     u8 i;
 
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
     {
         PutWindowTilemap(game->gfx.nameWindowIds[i]);
         if (i == game->localId)
@@ -3275,7 +3275,7 @@ static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame * game)
     u8 *crusherGfx;
 
     LZ77UnCompWram(gBerryCrush_Crusher_Tilemap, gDecompressionBuffer);
-    for (crusherGfx = gDecompressionBuffer; i < game->playerCount; i++)
+    for (crusherGfx = gDecompressionBuffer; i < game->playerCount; ++i)
     {
         CopyToBgTilemapBufferRect(
             3,
@@ -3298,7 +3298,7 @@ static void CreateGameSprites(struct BerryCrushGame * game)
     game->vibration = 0;
     gSpriteCoordOffsetX = 0;
     gSpriteCoordOffsetY = CRUSHER_START_Y;
-    for (i = 0; i < NELEMS(sSpriteSheets) - 1; i++)
+    for (i = 0; i < NELEMS(sSpriteSheets) - 1; ++i)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
     LoadSpritePalettes(sSpritePals);
 
@@ -3310,7 +3310,7 @@ static void CreateGameSprites(struct BerryCrushGame * game)
     game->gfx.coreSprite->animPaused = TRUE;
 
     // Create sprites for the impact effect
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
     {
         spriteId = CreateSprite(
             &sSpriteTemplate_BerryCrushImpact,
@@ -3326,7 +3326,7 @@ static void CreateGameSprites(struct BerryCrushGame * game)
     }
 
     // Create sprites for sparkle effect
-    for (i = 0; i < NELEMS(game->gfx.sparkleSprites); i++)
+    for (i = 0; i < NELEMS(game->gfx.sparkleSprites); ++i)
     {
         spriteId = CreateSprite(
             &sSpriteTemplate_BerryCrushPowderSparkles,
@@ -3342,7 +3342,7 @@ static void CreateGameSprites(struct BerryCrushGame * game)
     }
 
     // Create sprites for timer
-    for (i = 0; i < NELEMS(game->gfx.timerSprites); i++)
+    for (i = 0; i < NELEMS(game->gfx.timerSprites); ++i)
     {
         spriteId = CreateSprite(
             &sSpriteTemplate_BerryCrushTimer,
@@ -3374,14 +3374,14 @@ static void DestroyGameSprites(struct BerryCrushGame * game)
     FreeSpritePaletteByTag(TAG_TIMER_DIGITS);
     FreeSpritePaletteByTag(PALTAG_EFFECT);
     FreeSpritePaletteByTag(TAG_CRUSHER_BASE);
-    for (; i < NELEMS(game->gfx.timerSprites); i++)
+    for (; i < NELEMS(game->gfx.timerSprites); ++i)
         DestroySprite(game->gfx.timerSprites[i]);
     DigitObjUtil_DeletePrinter(2);
     DigitObjUtil_DeletePrinter(1);
     DigitObjUtil_DeletePrinter(0);
-    for (i = 0; i < NELEMS(game->gfx.sparkleSprites); i++)
+    for (i = 0; i < NELEMS(game->gfx.sparkleSprites); ++i)
         DestroySprite(game->gfx.sparkleSprites[i]);
-    for (i = 0; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; ++i)
         DestroySprite(game->gfx.impactSprites[i]);
     if (game->gfx.coreSprite->inUse)
         DestroySprite(game->gfx.coreSprite);

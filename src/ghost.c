@@ -802,7 +802,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
     baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM);
     if (!IsContest())
     {
-        for (battler = 0; battler < 4; battler++)
+        for (battler = 0; battler < 4; ++battler)
         {
             if (battler != gBattleAnimAttacker
              && battler != (gBattleAnimAttacker ^ 2)
@@ -903,7 +903,7 @@ static void sub_80B623C(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(task->data[8], task->data[9]));
             if (task->data[8] == 0 && task->data[9] == 16)
             {
-                for (i = 0; i < task->data[12]; i++)
+                for (i = 0; i < task->data[12]; ++i)
                     DestroySprite(&gSprites[task->data[i + 13]]);
                 ++task->data[0];
             }
@@ -1166,7 +1166,7 @@ static void sub_80B696C(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < 6; ++i)
         {
             spriteId = CreateSprite(&gGrudgeFlameSpriteTemplate, task->data[9], task->data[10], task->data[6]);
             if (spriteId != MAX_SPRITES)

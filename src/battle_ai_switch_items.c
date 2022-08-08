@@ -41,7 +41,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     if (gBattleMons[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)].ability == ABILITY_WONDER_GUARD)
     {
         // Check if Pokemon has a super effective move.
-        for (opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), i = 0; i < MAX_MON_MOVES; i++)
+        for (opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), i = 0; i < MAX_MON_MOVES; ++i)
         {
             move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
@@ -51,7 +51,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
                 return FALSE;
         }
         // Find a Pokemon in the party that has a super effective move.
-        for (i = 0; i < PARTY_SIZE; i++)
+        for (i = 0; i < PARTY_SIZE; ++i)
         {
             if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0
              || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
@@ -60,7 +60,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
                 continue;
             GetMonData(&gEnemyParty[i], MON_DATA_SPECIES); // Unused return value.
             GetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM); // Unused return value.        
-            for (opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), j = 0; j < MAX_MON_MOVES; j++)
+            for (opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), j = 0; j < MAX_MON_MOVES; ++j)
             {
                 move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
                 if (move == MOVE_NONE)
@@ -114,7 +114,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         return FALSE;
     if (gBattleMons[gActiveBattler].ability == absorbingTypeAbility)
         return FALSE;
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; ++i)
     {
         u16 species;
         u8 monAbility;
@@ -183,7 +183,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
     if (!(gAbsentBattlerFlags & gBitTable[opposingBattler]))
     {
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        for (i = 0; i < MAX_MON_MOVES; ++i)
         {
             move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
@@ -202,7 +202,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     opposingBattler = GetBattlerAtPosition(BATTLE_PARTNER(B_POSITION_PLAYER_LEFT));
     if (!(gAbsentBattlerFlags & gBitTable[opposingBattler]))
     {
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        for (i = 0; i < MAX_MON_MOVES; ++i)
         {
             move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
@@ -225,7 +225,7 @@ static bool8 AreStatsRaised(void)
     u8 buffedStatsValue = 0;
     s32 i;
 
-    for (i = 0; i < NUM_BATTLE_STATS; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; ++i)
     {
         if (gBattleMons[gActiveBattler].statStages[i] > 6)
             buffedStatsValue += gBattleMons[gActiveBattler].statStages[i] - 6;
@@ -259,7 +259,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         battlerIn1 = gActiveBattler;
         battlerIn2 = gActiveBattler;
     }
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; ++i)
     {
         u16 species;
         u8 monAbility;
@@ -281,7 +281,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         if (moveFlags & flags)
         {
             battlerIn1 = gLastHitBy[gActiveBattler];
-            for (j = 0; j < MAX_MON_MOVES; j++)
+            for (j = 0; j < MAX_MON_MOVES; ++j)
             {
                 move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
                 if (move == MOVE_NONE)
@@ -327,7 +327,7 @@ static bool8 ShouldSwitch(void)
         battlerIn2 = gActiveBattler;
         battlerIn1 = gActiveBattler;
     }
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; ++i)
     {
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
          || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE)
@@ -461,7 +461,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         bestDmg = 0;
         bestMonId = 6;
         // Find the mon whose type is the most suitable offensively.
-        for (i = 0; i < PARTY_SIZE; i++)
+        for (i = 0; i < PARTY_SIZE; ++i)
         {
             u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
             if (species != SPECIES_NONE
@@ -491,7 +491,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         // Ok, we know the mon has the right typing but does it have at least one super effective move?
         if (bestMonId != PARTY_SIZE)
         {
-            for (i = 0; i < MAX_MON_MOVES; i++)
+            for (i = 0; i < MAX_MON_MOVES; ++i)
             {
                 move = GetMonData(&gEnemyParty[bestMonId], MON_DATA_MOVE1 + i);
                 if (move != MOVE_NONE && TypeCalc(move, gActiveBattler, opposingBattler) & MOVE_RESULT_SUPER_EFFECTIVE)
@@ -515,7 +515,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     bestDmg = 0;
     bestMonId = 6;
     // If we couldn't find the best mon in terms of typing, find the one that deals most damage.
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; ++i)
     {
         if (((u16)(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)) == SPECIES_NONE)
          || (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
@@ -524,7 +524,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2)))
             continue;
-        for (j = 0; j < MAX_MON_MOVES; j++)
+        for (j = 0; j < MAX_MON_MOVES; ++j)
         {
             move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
             gBattleMoveDamage = 0;
@@ -565,12 +565,12 @@ static bool8 ShouldUseItem(void)
     u8 validMons = 0;
     bool8 shouldUse = FALSE;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; ++i)
         if (GetMonData(&gEnemyParty[i], MON_DATA_HP) != 0
          && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
          && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
             ++validMons;
-    for (i = 0; i < MAX_TRAINER_ITEMS; i++)
+    for (i = 0; i < MAX_TRAINER_ITEMS; ++i)
     {
         u16 item;
         const u8 *itemEffects;

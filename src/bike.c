@@ -342,7 +342,7 @@ void BikeClearState(u32 directionHistory, u32 abStartSelectHistory)
     gPlayerAvatar.directionHistory = directionHistory;
     gPlayerAvatar.abStartSelectHistory = abStartSelectHistory;
     gPlayerAvatar.lastSpinTile = 0;
-    for (i = 0; i < NELEMS(gPlayerAvatar.dirTimerHistory); i++)
+    for (i = 0; i < NELEMS(gPlayerAvatar.dirTimerHistory); ++i)
             gPlayerAvatar.dirTimerHistory[i] = 0;
 }
 

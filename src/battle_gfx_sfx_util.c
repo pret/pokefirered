@@ -484,7 +484,7 @@ static void BattleLoadAllHealthBoxesGfxAtOnce(void)
         LoadCompressedSpriteSheetUsingHeap(&sSpriteSheets_DoublesOpponentHealthbox[1]);
         numberOfBattlers = MAX_BATTLERS_COUNT;
     }
-    for (i = 0; i < numberOfBattlers; i++)
+    for (i = 0; i < numberOfBattlers; ++i)
         LoadCompressedSpriteSheetUsingHeap(&sSpriteSheets_HealthBar[gBattlerPositions[i]]);
 }
 
@@ -641,7 +641,7 @@ void CopyAllBattleSpritesInvisibilities(void)
 {
     s32 i;
 
-    for (i = 0; i < gBattlersCount; i++)
+    for (i = 0; i < gBattlersCount; ++i)
         gBattleSpritesDataPtr->battlerData[i].invisible = gSprites[gBattlerSpriteIds[i]].invisible;
 }
 
@@ -766,7 +766,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
             LZDecompressVram(gSubstituteDollGfx, gMonSpritesGfxPtr->sprites[position]);
         else
             LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[position]);
-        for (i = 1; i < 4; i++)
+        for (i = 1; i < 4; ++i)
         {
             u8 (*ptr)[4][0x800] = gMonSpritesGfxPtr->sprites[position];
 
@@ -870,7 +870,7 @@ void SetBattlerSpriteAffineMode(u8 affineMode)
 {
     s32 i;
 
-    for (i = 0; i < gBattlersCount; i++)
+    for (i = 0; i < gBattlersCount; ++i)
     {
         if (IsBattlerSpritePresent(i))
         {
@@ -961,7 +961,7 @@ void BattleInterfaceSetWindowPals(void)
     s32 i;
     s32 j;
 
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < 9; ++i)
     {
         for (j = 0; j < 16; ++vramPtr, ++j)
         {
@@ -978,7 +978,7 @@ void BattleInterfaceSetWindowPals(void)
 
     // 18 tiles at 0x06000600
     vramPtr = (u16 *)(BG_VRAM + 0x600);
-    for (i = 0; i < 18; i++)
+    for (i = 0; i < 18; ++i)
     {
         for (j = 0; j < 16; ++vramPtr, ++j)
         {
@@ -1009,12 +1009,12 @@ void AllocateMonSpritesGfx(void)
     gMonSpritesGfxPtr = NULL;
     gMonSpritesGfxPtr = AllocZeroed(sizeof(*gMonSpritesGfxPtr));
     gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x8000);
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
         gMonSpritesGfxPtr->sprites[i] = gMonSpritesGfxPtr->firstDecompressed + (i * 0x2000);
         *(gMonSpritesGfxPtr->templates + i) = gSpriteTemplates_Battlers[i];
 
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < 4; ++j)
         {
             gMonSpritesGfxPtr->images[i][j].data = gMonSpritesGfxPtr->sprites[i] + (j * 0x800);
             gMonSpritesGfxPtr->images[i][j].size = 0x800;

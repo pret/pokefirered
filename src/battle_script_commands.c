@@ -9278,7 +9278,7 @@ static void Cmd_pickup(void)
         {
             s32 random = Random() % 100;
 
-            for (j = 0; j < 15; j++)
+            for (j = 0; j < 15; ++j)
                 if (sPickupItems[j].chance > random)
                     break;
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[j]);

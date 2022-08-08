@@ -756,7 +756,7 @@ static void sub_80B3618(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(task->data[3], task->data[4]));
         if (++task->data[1] == 32)
         {
-            for (i = 8; i < 13; i++)
+            for (i = 8; i < 13; ++i)
                 if (task->data[i] != 64)
                     DestroySprite(&gSprites[task->data[i]]);
             ++task->data[0];
@@ -923,7 +923,7 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
         task->data[10] = gBattle_BG2_X;
         scanlineParams.dmaDest = &REG_BG2HOFS;
     }
-    for (i = task->data[14]; i <= task->data[14] + 64; i++)
+    for (i = task->data[14]; i <= task->data[14] + 64; ++i)
     {
         gScanlineEffectRegBuffers[0][i] = task->data[10];
         gScanlineEffectRegBuffers[1][i] = task->data[10];
@@ -944,7 +944,7 @@ static void sub_80B3B78(u8 taskId)
     {
     case 0:
         sineIndex = task->data[13];
-        for (i = task->data[14]; i <= task->data[15]; i++)
+        for (i = task->data[14]; i <= task->data[15]; ++i)
         {
             s16 var2 = (gSineTable[sineIndex] >> task->data[12]);
 

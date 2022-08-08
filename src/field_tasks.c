@@ -126,7 +126,7 @@ static void DummyPerStepCallback(u8 taskId)
 static void MarkIcefallCaveCoordVisited(s16 x, s16 y)
 {
     u8 i = 0;
-    for (; i < NELEMS(sIcefallCaveIceTileCoords); i++)
+    for (; i < NELEMS(sIcefallCaveIceTileCoords); ++i)
     {
         if (sIcefallCaveIceTileCoords[i][0] + 7 == x && sIcefallCaveIceTileCoords[i][1] + 7 == y)
         {
@@ -139,7 +139,7 @@ static void MarkIcefallCaveCoordVisited(s16 x, s16 y)
 void SetIcefallCaveCrackedIceMetatiles(void)
 {
     u8 i = 0;
-    for (; i < NELEMS(sIcefallCaveIceTileCoords); i++)
+    for (; i < NELEMS(sIcefallCaveIceTileCoords); ++i)
     {
         if (FlagGet(i + 1) == TRUE)
         {

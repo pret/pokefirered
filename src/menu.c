@@ -580,8 +580,8 @@ void MultichoiceGrid_PrintItems(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHei
     itemHeight = itemHeight;
     width = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH);
     yOffset = (16 - GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT)) / 2;
-    for (i = 0; i < rows; i++)
-        for (j = 0; j < cols; j++)
+    for (i = 0; i < rows; ++i)
+        for (j = 0; j < cols; ++j)
             AddTextPrinterParameterized(windowId, fontId, strs[i * cols + j].text, itemWidth * j + width, yOffset + itemHeight * i, 0xFF, 0);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -595,8 +595,8 @@ static void MultichoiceGrid_PrintItemsCustomOrder(u8 windowId, u8 fontId, u8 ite
     itemWidth = itemWidth;
     itemHeight = itemHeight;
     width = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH);
-    for (i = 0; i < rows; i++)
-        for (j = 0; j < cols; j++)
+    for (i = 0; i < rows; ++i)
+        for (j = 0; j < cols; ++j)
             AddTextPrinterParameterized(windowId, fontId, strs[orderArray[i * cols + j]].text, itemWidth * j + width, itemHeight * i, 0xFF, 0);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }

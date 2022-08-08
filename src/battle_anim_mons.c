@@ -772,7 +772,7 @@ u8 GetBattlerAtPosition(u8 position)
 {
     u8 i;
 
-    for (i = 0; i < gBattlersCount; i++)
+    for (i = 0; i < gBattlersCount; ++i)
         if (gBattlerPositions[i] == position)
             break;
     return i;
@@ -1218,7 +1218,7 @@ void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
 
     if (!restoreOriginalColor)
     {
-        for (i = 0; i < 16; i++)
+        for (i = 0; i < 16; ++i)
         {
             originalColor = (struct PlttData *)&gPlttBufferUnfaded[paletteNum + i];
             average = originalColor->r + originalColor->g + originalColor->b;
@@ -1446,7 +1446,7 @@ s16 CloneBattlerSpriteWithBlend(u8 animBattler)
 
     if (spriteId != 0xFF)
     {
-        for (i = 0; i < MAX_SPRITES; i++)
+        for (i = 0; i < MAX_SPRITES; ++i)
         {
             if (!gSprites[i].inUse)
             {
@@ -1713,7 +1713,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
     u16 species;
     u16 i;
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
         if (gBattlerSpriteIds[i] == spriteId)
         {
@@ -1818,7 +1818,7 @@ void ResetSpritePriorityOfAllVisibleBattlers(void)
 {
     s32 i;
 
-    for (i = 0; i < gBattlersCount; i++)
+    for (i = 0; i < gBattlersCount; ++i)
     {
         if (IsBattlerSpriteVisible(i))
         {

@@ -110,7 +110,7 @@ void AnimTask_BlendExcept(u8 taskId)
         animBattlers[0] = BATTLE_PARTNER(gBattleAnimTarget);
         break;
     }
-    for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
     {
         if (battler != animBattlers[0] 
          && battler != animBattlers[1]
@@ -392,7 +392,7 @@ void InitStatsChangeAnimation(u8 taskId)
     u8 i;
 
     sAnimStatsChangeData = AllocZeroed(sizeof(struct AnimStatsChangeData));
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 8; ++i)
         sAnimStatsChangeData->data[i] = gBattleAnimArgs[i];
     gTasks[taskId].func = StatsChangeAnimation_Step1;
 }
@@ -612,7 +612,7 @@ static void sub_80BB6CC(u8 taskId)
         {
             task->data[1] = 0;
             --task->data[2];
-            for (i = 0; i < 16; i++)
+            for (i = 0; i < 16; ++i)
             {
                 if ((task->data[15] >> i) & 1)
                 {
@@ -652,7 +652,7 @@ void AnimTask_BlendNonAttackerPalettes(u8 taskId)
     s32 j;
     u32 battler, selectedPalettes = 0;
 
-    for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
         if (gBattleAnimAttacker != battler)
             selectedPalettes |= 1 << (battler + 16);
     for (j = 5; j != 0; --j)
@@ -717,7 +717,7 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
 {
     u16 battler;
 
-    for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
         if (battler != gBattleAnimAttacker && IsBattlerSpriteVisible(battler))
             gSprites[gBattlerSpriteIds[battler]].invisible = gBattleAnimArgs[0];
     DestroyAnimVisualTask(taskId);

@@ -428,7 +428,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
         s16 y2 = sprite->y2;
         s32 i;
 
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < 8; ++i)
             tempData[i] = data[i];
         x2 += x1;
         y2 += y1;
@@ -439,7 +439,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
 
             rotation += 0xC000;
             TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
-            for (i = 0; i < 8; i++)
+            for (i = 0; i < 8; ++i)
                 data[i] = tempData[i];
         }
     }

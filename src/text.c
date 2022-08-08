@@ -993,7 +993,7 @@ s32 (*GetFontWidthFunc(u8 glyphId))(u16 _glyphId, bool32 _isJapanese)
 {
     u32 i;
 
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < 7; ++i)
     {
         if (glyphId == sGlyphWidthFuncs[i].fontId)
             return *sGlyphWidthFuncs[i].func;

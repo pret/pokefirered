@@ -858,7 +858,7 @@ static void sub_80AD1F8(u8 spriteId, u8 taskId, u8 a3)
         x += 0x10;
         sign = -1;
     }
-    for (i = 0, j = 0; i <= 6; i++)
+    for (i = 0, j = 0; i <= 6; ++i)
     {
         u8 spriteId = CreateSprite(&gEruptionLaunchRockSpriteTemplate, x, y, 2);
 

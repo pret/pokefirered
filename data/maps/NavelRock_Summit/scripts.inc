@@ -60,10 +60,7 @@ NavelRock_Summit_EventScript_HoOh::
 	applymovement LOCALID_HO_OH, Movement_HoOhApproach
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_0x8004, SPECIES_HO_OH
-	setvar VAR_0x8005, 70  @ Level
-	setvar VAR_0x8006, ITEM_NONE
-	special CreateEventLegalEnemyMon
+	seteventmon SPECIES_HO_OH, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate

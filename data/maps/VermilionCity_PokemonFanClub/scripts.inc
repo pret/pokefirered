@@ -25,7 +25,7 @@ VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory::
 
 VermilionCity_PokemonFanClub_EventScript_ChairmanStory::
 	msgbox VermilionCity_PokemonFanClub_Text_ChairmansStory
-	checkitemspace ITEM_BIKE_VOUCHER, 1
+	checkitemspace ITEM_BIKE_VOUCHER
 	compare VAR_RESULT, FALSE
 	goto_if_eq VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher
 	setflag FLAG_GOT_BIKE_VOUCHER

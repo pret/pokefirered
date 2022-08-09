@@ -36,19 +36,19 @@ Route8_WestEntrance_EventScript_GuardTrigger::
 	end
 
 Route8_WestEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
 @ Unused
 Route8_WestEntrance_EventScript_GiveSodaPop::
-	removeitem ITEM_SODA_POP, 1
+	removeitem ITEM_SODA_POP
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
 @ Unused
 Route8_WestEntrance_EventScript_GiveLemonade::
-	removeitem ITEM_LEMONADE, 1
+	removeitem ITEM_LEMONADE
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 

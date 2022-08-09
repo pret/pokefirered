@@ -656,7 +656,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	waitmessage
 	waitfanfare
 	call EventScript_RestorePrevTextColor
-	removeitem ITEM_OAKS_PARCEL, 1
+	removeitem ITEM_OAKS_PARCEL
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCustomBallIOrdered
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalGramps
@@ -1003,7 +1003,7 @@ PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls::
 	special QuestLog_CutRecording
 	goto_if_set FLAG_OAK_SKIP_22_RIVAL_CHECK, PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
 	goto_if_set FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL, PalletTown_ProfessorOaksLab_EventScript_PlayerAlreadyGotBalls
-	checkitem ITEM_POKE_BALL, 1
+	checkitem ITEM_POKE_BALL
 	compare VAR_RESULT, FALSE
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls
 	goto PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
@@ -1215,7 +1215,7 @@ PalletTown_ProfessorOaksLab_EventScript_ChoseStarter::
 	call EventScript_RestorePrevTextColor
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
-	givemon PLAYER_STARTER_SPECIES, 5, ITEM_NONE
+	givemon PLAYER_STARTER_SPECIES, 5
 	copyvar VAR_STARTER_MON, PLAYER_STARTER_NUM
 	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
 	message PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak

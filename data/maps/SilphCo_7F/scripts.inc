@@ -129,7 +129,7 @@ SilphCo_7F_EventScript_LaprasGuy::
 	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
 	msgbox SilphCo_7F_Text_HaveMonForSavingUs
 	setvar VAR_TEMP_1, SPECIES_LAPRAS
-	givemon SPECIES_LAPRAS, 25, ITEM_NONE
+	givemon SPECIES_LAPRAS, 25
 	compare VAR_RESULT, 0
 	goto_if_eq SilphCo_7F_EventScript_ReceiveLaprasParty
 	compare VAR_RESULT, 1

@@ -60,7 +60,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 
 SaffronCity_Dojo_EventScript_GiveHitmon::
 	hidemonpic
-	givemon VAR_TEMP_1, 25, ITEM_NONE
+	givemon VAR_TEMP_1, 25
 	compare VAR_RESULT, 0
 	goto_if_eq SaffronCity_Dojo_EventScript_ReceivedHitmonParty
 	compare VAR_RESULT, 1

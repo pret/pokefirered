@@ -57,7 +57,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone::
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ReEnter
 	waitmovement 0
-	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
+	warp MAP_SAFARI_ZONE_CENTER, 26, 30
 	waitstate
 	end
 
@@ -103,7 +103,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone::
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone
@@ -113,10 +113,10 @@ FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone::
 
 FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone::
 	call FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons
-	checkmoney 500, 0
+	checkmoney 500
 	compare VAR_RESULT, FALSE
 	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney
-	removemoney 500, 0
+	removemoney 500
 	updatemoneybox
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls
 	textcolor 3

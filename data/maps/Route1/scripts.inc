@@ -7,7 +7,7 @@ Route1_EventScript_MartClerk::
 	goto_if_set FLAG_GOT_POTION_ON_ROUTE_1, Route1_EventScript_AlreadyGotPotion
 	msgbox Route1_Text_WorkAtPokeMartTakeSample
 	textcolor 3
-	checkitemspace ITEM_POTION, 1
+	checkitemspace ITEM_POTION
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BagIsFull
 	bufferitemname STR_VAR_2, ITEM_POTION

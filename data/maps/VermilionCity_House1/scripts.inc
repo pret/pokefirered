@@ -18,7 +18,7 @@ VermilionCity_House1_EventScript_AlreadyGotOldRod::
 	end
 
 VermilionCity_House1_EventScript_GiveOldRod::
-	checkitemspace ITEM_OLD_ROD, 1
+	checkitemspace ITEM_OLD_ROD
 	compare VAR_RESULT, FALSE
 	goto_if_eq VermilionCity_House1_EventScript_NoRoomForOldRod
 	additem ITEM_OLD_ROD

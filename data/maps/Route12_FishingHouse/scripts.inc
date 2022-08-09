@@ -13,7 +13,7 @@ Route12_FishingHouse_EventScript_FishingGuruBrother::
 	end
 
 Route12_FishingHouse_EventScript_GiveSuperRod::
-	checkitemspace ITEM_SUPER_ROD, 1
+	checkitemspace ITEM_SUPER_ROD
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route12_FishingHouse_EventScript_NoRoomForSuperRod
 	additem ITEM_SUPER_ROD

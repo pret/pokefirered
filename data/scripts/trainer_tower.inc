@@ -97,7 +97,7 @@ TrainerTower_EventScript_EndEnterFloor:
 
 @ Never reached
 TrainerTower_EventScript_WarpToLobby::
-	warp MAP_TRAINER_TOWER_LOBBY, 255, 9, 7
+	warp MAP_TRAINER_TOWER_LOBBY, 9, 7
 	waitstate
 
 
@@ -221,7 +221,7 @@ TrainerTower_EventScript_SetFloorCleared:
 TrainerTower_EventScript_WarpToLobbyLost::
 	special HealPlayerParty
 	ttower_setlost
-	warp MAP_TRAINER_TOWER_LOBBY, 255, 9, 7
+	warp MAP_TRAINER_TOWER_LOBBY, 9, 7
 	waitstate
 
 

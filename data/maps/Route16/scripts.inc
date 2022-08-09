@@ -39,7 +39,7 @@ Route16_EventScript_Snorlax::
 	compare VAR_RESULT, NO
 	goto_if_eq Route16_EventScript_DontUsePokeFlute
 	call EventScript_AwakenSnorlax
-	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
+	setwildbattle SPECIES_SNORLAX, 30
 	waitse
 	playmoncry SPECIES_SNORLAX, CRY_MODE_ENCOUNTER
 	delay 40

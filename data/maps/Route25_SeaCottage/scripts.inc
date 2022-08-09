@@ -110,7 +110,7 @@ Route25_SeaCottage_EventScript_BillGiveSSTicket::
 	call_if_eq Route25_SeaCottage_EventScript_BillThanksMale
 	compare VAR_RESULT, FEMALE
 	call_if_eq Route25_SeaCottage_EventScript_BillThanksFemale
-	checkitemspace ITEM_SS_TICKET, 1
+	checkitemspace ITEM_SS_TICKET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route25_SeaCottage_EventScript_NoRoomForSSTicket
 	giveitem_msg Route25_SeaCottage_Text_ReceivedSSTicketFromBill, ITEM_SS_TICKET, 1, MUS_OBTAIN_KEY_ITEM

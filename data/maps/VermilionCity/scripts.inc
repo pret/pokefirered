@@ -60,7 +60,7 @@ VermilionCity_EventScript_FerrySailor::
 
 VermilionCity_EventScript_CheckHasMysticTicket::
 	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
-	checkitem ITEM_MYSTIC_TICKET, 1
+	checkitem ITEM_MYSTIC_TICKET
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SetResultFalse
 	goto EventScript_SetResultTrue
@@ -68,7 +68,7 @@ VermilionCity_EventScript_CheckHasMysticTicket::
 
 VermilionCity_EventScript_CheckHasAuroraTicket::
 	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
-	checkitem ITEM_AURORA_TICKET, 1
+	checkitem ITEM_AURORA_TICKET
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SetResultFalse
 	goto EventScript_SetResultTrue

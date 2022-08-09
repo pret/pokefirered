@@ -19,7 +19,7 @@ FuchsiaCity_House2_EventScript_AlreadyGotGoodRod::
 
 FuchsiaCity_House2_EventScript_GiveGoodRod::
 	msgbox FuchsiaCity_House2_Text_LikeYourStyleTakeThis
-	checkitemspace ITEM_GOOD_ROD, 1
+	checkitemspace ITEM_GOOD_ROD
 	compare VAR_RESULT, FALSE
 	goto_if_eq FuchsiaCity_House2_EventScript_NoRoomForGoodRod
 	giveitem_msg FuchsiaCity_House2_Text_ReceivedGoodRod, ITEM_GOOD_ROD

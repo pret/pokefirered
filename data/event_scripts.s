@@ -1117,7 +1117,7 @@ EventScript_HandOverItem::
 	message Text_HandedOverItem
 	waitmessage
 	waitfanfare
-	removeitem VAR_0x8004, 1
+	removeitem VAR_0x8004
 	return
 
 	.include "data/scripts/pokemon_league.inc"

@@ -118,7 +118,7 @@ SevenIsland_House_Room1_EventScript_TrainerVisiting::
 	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomEast
 	compare VAR_FACING, DIR_WEST
 	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomWest
-	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
+	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 3, 1
 	waitstate
 	release
 	end

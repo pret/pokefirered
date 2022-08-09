@@ -40,7 +40,7 @@ FiveIsland_MemorialPillar_EventScript_Memorial::
 	goto_if_set FLAG_GOT_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
 	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
 	msgbox FiveIsland_MemorialPillar_Text_HereLiesTectonixLemonadeOffering
-	checkitem ITEM_LEMONADE, 1
+	checkitem ITEM_LEMONADE
 	compare VAR_RESULT, TRUE
 	goto_if_eq FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade
 	releaseall
@@ -54,7 +54,7 @@ FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade::
 	end
 
 FiveIsland_MemorialPillar_EventScript_PlaceLemonade::
-	removeitem ITEM_LEMONADE, 1
+	removeitem ITEM_LEMONADE
 	msgbox FiveIsland_MemorialPillar_Text_PlacedCanOfLemonade
 	closemessage
 	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestRight

@@ -144,7 +144,7 @@ PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest::
 PalletTown_RivalsHouse_EventScript_GiveTownMap::
 	msgbox PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp
 	closemessage
-	checkitemspace ITEM_TOWN_MAP, 1
+	checkitemspace ITEM_TOWN_MAP
 	compare VAR_RESULT, FALSE
 	goto_if_eq PalletTown_RivalsHouse_EventScript_NoRoomForTownMap
 	applymovement LOCALID_DAISY, Movement_WalkInPlaceFastestRight

@@ -32,7 +32,7 @@ OneIsland_EventScript_EnterOneIslandFirstTime::
 	waitdooranim
 	removeobject LOCALID_BILL
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 3
-	warp MAP_ONE_ISLAND_POKEMON_CENTER_1F, 255, 9, 9
+	warp MAP_ONE_ISLAND_POKEMON_CENTER_1F, 9, 9
 	waitstate
 	releaseall
 	end

@@ -65,7 +65,7 @@ PewterCity_Museum_1F_EventScript_EntranceTriggerRight::
 
 PewterCity_Museum_1F_EventScript_EntranceTrigger::
 	textcolor 0
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox PewterCity_Museum_1F_Text_Its50YForChildsTicket, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq PewterCity_Museum_1F_EventScript_TryPayForTicket
@@ -78,7 +78,7 @@ PewterCity_Museum_1F_EventScript_EntranceTrigger::
 	end
 
 PewterCity_Museum_1F_EventScript_TryPayForTicket::
-	checkmoney 50, 0
+	checkmoney 50
 	compare VAR_RESULT, FALSE
 	goto_if_eq PewterCity_Museum_1F_EventScript_NotEnoughMoney
 	closemessage
@@ -89,7 +89,7 @@ PewterCity_Museum_1F_EventScript_TryPayForTicket::
 	compare VAR_TEMP_1, 2
 	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight
 	playse SE_SHOP
-	removemoney 50, 0
+	removemoney 50
 	updatemoneybox
 	waitse
 	msgbox PewterCity_Museum_1F_Text_Right50YThankYou
@@ -157,7 +157,7 @@ PewterCity_Museum_1F_EventScript_OldAmberScientist::
 	faceplayer
 	goto_if_set FLAG_GOT_OLD_AMBER, PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber
 	msgbox PewterCity_Museum_1F_Text_WantYouToGetAmberExamined
-	checkitemspace ITEM_OLD_AMBER, 1
+	checkitemspace ITEM_OLD_AMBER
 	compare VAR_RESULT, FALSE
 	goto_if_eq PewterCity_Museum_1F_EventScript_NoRoomForOldAmber
 	setflag FLAG_GOT_OLD_AMBER

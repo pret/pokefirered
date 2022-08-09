@@ -14,7 +14,7 @@ PokemonTower_7F_EventScript_MrFuji::
 	setflag FLAG_RESCUED_MR_FUJI
 	msgbox PokemonTower_7F_Text_MrFujiThankYouFollowMe
 	closemessage
-	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 255, 4, 7
+	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 4, 7
 	waitstate
 	release
 	end

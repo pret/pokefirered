@@ -21,7 +21,7 @@ CeladonCity_Gym_EventScript_DefeatedErika::
 
 CeladonCity_Gym_EventScript_GiveTM19::
 	msgbox CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis
-	checkitemspace ITEM_TM19, 1
+	checkitemspace ITEM_TM19
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_Gym_EventScript_NoRoomForTM19
 	giveitem_msg CeladonCity_Gym_Text_ReceivedTM19FromErika, ITEM_TM19

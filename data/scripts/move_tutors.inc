@@ -390,7 +390,7 @@ EventScript_MimicTutor::
 	faceplayer
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_MimicDeclined
-	removeitem ITEM_POKE_DOLL, 1
+	removeitem ITEM_POKE_DOLL
 	setflag FLAG_TUTOR_MIMIC
 	goto EventScript_MimicTaught
 	end

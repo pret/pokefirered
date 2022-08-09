@@ -21,7 +21,7 @@ OneIsland_Harbor_EventScript_PlayerEnterHarborFirstTime::
 	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Harbor_Movement_PlayerExitHarbor
 	waitmovement 0
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 2
-	warp MAP_ONE_ISLAND, 255, 12, 18
+	warp MAP_ONE_ISLAND, 12, 18
 	waitstate
 	releaseall
 	end

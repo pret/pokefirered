@@ -24,7 +24,7 @@ Route4_PokemonCenter_1F_EventScript_MagikarpSalesman::
 	lock
 	faceplayer
 	goto_if_set FLAG_BOUGHT_MAGIKARP, Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
@@ -45,12 +45,12 @@ Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale::
 Route4_PokemonCenter_1F_EventScript_TryBuyMagikarp::
 	compare VAR_RESULT, NO
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_DeclineMagikarp
-	checkmoney MAGIKARP_PRICE, 0
+	checkmoney MAGIKARP_PRICE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
 	textcolor 3
 	setvar VAR_TEMP_1, SPECIES_MAGIKARP
-	givemon SPECIES_MAGIKARP, 5, ITEM_NONE
+	givemon SPECIES_MAGIKARP, 5
 	compare VAR_RESULT, 0
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty
 	compare VAR_RESULT, 1
@@ -107,7 +107,7 @@ Route4_PokemonCenter_1F_EventScript_BoughtMagikarp::
 	end
 
 Route4_PokemonCenter_1F_EventScript_PayForMagikarp::
-	removemoney MAGIKARP_PRICE, 0
+	removemoney MAGIKARP_PRICE
 	updatemoneybox
 	playfanfare MUS_LEVEL_UP
 	message Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp

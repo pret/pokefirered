@@ -21,7 +21,7 @@ TwoIsland_House_EventScript_MoveManiac::
 	end
 
 TwoIsland_House_EventScript_CheckPlayerHasMushrooms::
-	checkitem ITEM_BIG_MUSHROOM, 1
+	checkitem ITEM_BIG_MUSHROOM
 	compare VAR_RESULT, TRUE
 	call_if_eq TwoIsland_House_EventScript_SetHasBigMushroom
 	checkitem ITEM_TINY_MUSHROOM, 2
@@ -75,7 +75,7 @@ TwoIsland_House_EventScript_ChooseMoveToTeach::
 	end
 
 TwoIsland_House_EventScript_GiveBigMushroom::
-	removeitem ITEM_BIG_MUSHROOM, 1
+	removeitem ITEM_BIG_MUSHROOM
 	textcolor 3
 	msgbox TwoIsland_House_Text_HandedOverOneBigMushroom
 	call EventScript_RestorePrevTextColor

@@ -19,7 +19,7 @@ SilphCo_11F_EventScript_President::
 	call_if_eq SilphCo_11F_EventScript_PresidentThanksMale
 	compare VAR_RESULT, FEMALE
 	call_if_eq SilphCo_11F_EventScript_PresidentThanksFemale
-	checkitemspace ITEM_MASTER_BALL, 1
+	checkitemspace ITEM_MASTER_BALL
 	compare VAR_RESULT, FALSE
 	goto_if_eq SilphCo_11F_EventScript_NoRoomForMasterBall
 	giveitem_msg SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_OBTAIN_KEY_ITEM

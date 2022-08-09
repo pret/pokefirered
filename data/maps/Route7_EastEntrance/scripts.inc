@@ -36,7 +36,7 @@ Route7_EastEntrance_EventScript_GuardTrigger::
 	end
 
 Route7_EastEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route7_EastEntrance_EventScript_GuardDrinkTea
 	end
 

@@ -43,7 +43,7 @@ SeafoamIslands_B3F_EventScript_EnterByFalling::
 	compare VAR_0x8008, 24
 	call_if_ge SeafoamIslands_B3F_EventScript_RideCurrentClose
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1
-	warp MAP_SEAFOAM_ISLANDS_B4F, 255, 27, 21
+	warp MAP_SEAFOAM_ISLANDS_B4F, 27, 21
 	waitstate
 	releaseall
 	end

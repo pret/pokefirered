@@ -18,7 +18,7 @@ Route2_EastBuilding_EventScript_Aide::
 	compare VAR_0x8006, REQUIRED_SEEN_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox Route2_EastBuilding_Text_GreatHereYouGo
-	checkitemspace ITEM_HM05, 1
+	checkitemspace ITEM_HM05
 	compare VAR_RESULT, FALSE
 	goto_if_eq Aide_EventScript_NoRoomForItem
 	giveitem_msg Route2_EastBuilding_Text_ReceivedHM05FromAide, ITEM_HM05

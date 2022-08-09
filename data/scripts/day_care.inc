@@ -2,7 +2,7 @@ Route5_PokemonDayCare_EventScript_DaycareMan::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route5_PokemonDayCare_EventScript_CheckOnMon
@@ -22,7 +22,7 @@ Route5_PokemonDayCare_EventScript_TryGiveMon::
 	hidemoneybox
 	special ChooseSendDaycareMon
 	waitstate
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge Route5_PokemonDayCare_EventScript_ComeAgain
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot

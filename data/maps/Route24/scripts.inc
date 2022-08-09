@@ -9,7 +9,7 @@ Route24_EventScript_Rocket::
 	compare VAR_MAP_SCENE_ROUTE24, 1
 	goto_if_eq Route24_EventScript_RocketPostBattle
 	msgbox Route24_Text_JustEarnedFabulousPrize
-	checkitemspace ITEM_NUGGET, 1
+	checkitemspace ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route24_EventScript_NoRoomForNugget
 	call Route24_EventScript_BattleRocket
@@ -47,7 +47,7 @@ Route24_EventScript_RocketTrigger::
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox Route24_Text_JustEarnedFabulousPrize
-	checkitemspace ITEM_NUGGET, 1
+	checkitemspace ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route24_EventScript_NoRoomForNuggetTrigger
 	call Route24_EventScript_BattleRocket

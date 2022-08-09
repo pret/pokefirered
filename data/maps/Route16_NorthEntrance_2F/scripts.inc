@@ -34,7 +34,7 @@ Route16_NorthEntrance_2F_EventScript_Aide::
 	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox Route16_NorthEntrance_2F_Text_GreatHereYouGo
-	checkitemspace ITEM_AMULET_COIN, 1
+	checkitemspace ITEM_AMULET_COIN
 	compare VAR_RESULT, FALSE
 	goto_if_eq Aide_EventScript_NoRoomForItem
 	giveitem_msg Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide, ITEM_AMULET_COIN

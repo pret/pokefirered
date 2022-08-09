@@ -6,7 +6,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_MrFuji::
 	faceplayer
 	goto_if_set FLAG_GOT_POKE_FLUTE, LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute
 	msgbox LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis
-	checkitemspace ITEM_POKE_FLUTE, 1
+	checkitemspace ITEM_POKE_FLUTE
 	compare VAR_RESULT, FALSE
 	goto_if_eq LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute
 	setflag FLAG_GOT_POKE_FLUTE

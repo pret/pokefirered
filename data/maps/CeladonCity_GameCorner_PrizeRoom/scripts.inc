@@ -123,10 +123,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra::
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 9, ITEM_NONE
+	givemon VAR_TEMP_1, 9
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 7, ITEM_NONE
+	givemon VAR_TEMP_1, 7
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
@@ -134,10 +134,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy::
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 8, ITEM_NONE
+	givemon VAR_TEMP_1, 8
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 12, ITEM_NONE
+	givemon VAR_TEMP_1, 12
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
@@ -145,33 +145,33 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini::
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 18, ITEM_NONE
+	givemon VAR_TEMP_1, 18
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 24, ITEM_NONE
+	givemon VAR_TEMP_1, 24
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther::
-	givemon VAR_TEMP_1, 25, ITEM_NONE
+	givemon VAR_TEMP_1, 25
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon::
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 26, ITEM_NONE
+	givemon VAR_TEMP_1, 26
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 18, ITEM_NONE
+	givemon VAR_TEMP_1, 18
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir::
-	givemon VAR_TEMP_1, 18, ITEM_NONE
+	givemon VAR_TEMP_1, 18
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
 
@@ -323,7 +323,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize::
 	checkcoins VAR_RESULT
 	compare VAR_RESULT, VAR_TEMP_2
 	goto_if_lt CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
-	checkitemspace VAR_TEMP_1, 1
+	checkitemspace VAR_TEMP_1
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_BagFull
 	removecoins VAR_TEMP_2

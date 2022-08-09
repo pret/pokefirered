@@ -2,15 +2,15 @@
 
 CeladonCity_GameCorner_EventScript_PhotoPrinter::
 	lockall
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox CeladonCity_GameCorner_Text_TryPokemonPrinter, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_GameCorner_EventScript_DeclinePhoto
-	checkmoney 50, 0
+	checkmoney 50
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto
 	playse SE_SHOP
-	removemoney 50, 0
+	removemoney 50
 	updatemoneybox
 	waitse
 	message CeladonCity_GameCorner_Text_ChoosePrintType

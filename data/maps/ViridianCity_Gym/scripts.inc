@@ -27,7 +27,7 @@ ViridianCity_Gym_EventScript_DefeatedGiovanni::
 
 ViridianCity_Gym_EventScript_GiveTM26::
 	msgbox ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis
-	checkitemspace ITEM_TM26, 1
+	checkitemspace ITEM_TM26
 	compare VAR_RESULT, FALSE
 	goto_if_eq ViridianCity_Gym_EventScript_NoRoomForTM26
 	giveitem_msg ViridianCity_Gym_Text_ReceivedTM26FromGiovanni, ITEM_TM26

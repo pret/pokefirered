@@ -31,7 +31,7 @@ FiveIsland_LostCave_Room10_EventScript_FindSelphyScene::
 	msgbox FiveIsland_LostCave_Room10_Text_MayIAskYouToTakeMeHome
 	closemessage
 	call FiveIsland_LostCave_Room10_EventScript_SetSelphyFound
-	warp MAP_FIVE_ISLAND_RESORT_GORGEOUS, 255, 39, 10
+	warp MAP_FIVE_ISLAND_RESORT_GORGEOUS, 39, 10
 	waitstate
 	releaseall
 	end

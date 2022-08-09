@@ -71,7 +71,7 @@ Route11_EastEntrance_2F_EventScript_Aide::
 	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox Route11_EastEntrance_2F_Text_GreatHereYouGo
-	checkitemspace ITEM_ITEMFINDER, 1
+	checkitemspace ITEM_ITEMFINDER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Aide_EventScript_NoRoomForItem
 	giveitem_msg Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide, ITEM_ITEMFINDER

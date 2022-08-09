@@ -36,7 +36,7 @@ Route5_SouthEntrance_EventScript_GuardTrigger::
 	end
 
 Route5_SouthEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route5_SouthEntrance_EventScript_GuardDrinkTea
 	end
 

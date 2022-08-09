@@ -20,7 +20,7 @@ CeruleanCity_Gym_EventScript_MistyDefeated::
 
 CeruleanCity_Gym_EventScript_GiveTM03::
 	msgbox CeruleanCity_Gym_Text_ExplainCascadeBadge
-	checkitemspace ITEM_TM03, 1
+	checkitemspace ITEM_TM03
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeruleanCity_Gym_EventScript_NoRoomForTM03
 	giveitem_msg CeruleanCity_Gym_Text_ReceivedTM03FromMisty, ITEM_TM03

@@ -36,7 +36,7 @@ Route6_NorthEntrance_EventScript_GuardTrigger::
 	end
 
 Route6_NorthEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route6_NorthEntrance_EventScript_GuardDrinkTea
 	end
 

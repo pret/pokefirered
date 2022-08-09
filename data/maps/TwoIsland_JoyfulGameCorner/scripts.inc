@@ -163,13 +163,13 @@ TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite::
 	waitmessage
 	waitfanfare
 	call EventScript_RestorePrevTextColor
-	removeitem ITEM_METEORITE, 1
+	removeitem ITEM_METEORITE
 	msgbox TwoIsland_JoyfulGameCorner_Text_OhThisIsFromBill
 	goto TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone
 	end
 
 TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone::
-	checkitemspace ITEM_MOON_STONE, 1
+	checkitemspace ITEM_MOON_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone
 	additem ITEM_MOON_STONE

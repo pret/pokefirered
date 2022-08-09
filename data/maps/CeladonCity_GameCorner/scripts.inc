@@ -24,7 +24,7 @@ CeladonCity_GameCorner_EventScript_CoinsClerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	showcoinsbox 0, 5
 	message CeladonCity_GameCorner_Text_WelcomeBuySomeCoins
 	waitmessage
@@ -49,11 +49,11 @@ CeladonCity_GameCorner_EventScript_Buy500Coins::
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, (MAX_COINS + 1) - 500
 	goto_if_ge CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
-	checkmoney 10000, 0
+	checkmoney 10000
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
 	addcoins 500
-	removemoney 10000, 0
+	removemoney 10000
 	goto CeladonCity_GameCorner_EventScript_BoughtCoins
 	end
 
@@ -61,11 +61,11 @@ CeladonCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, (MAX_COINS + 1) - 50
 	goto_if_ge CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
-	checkmoney 1000, 0
+	checkmoney 1000
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
 	addcoins 50
-	removemoney 1000, 0
+	removemoney 1000
 	goto CeladonCity_GameCorner_EventScript_BoughtCoins
 	end
 

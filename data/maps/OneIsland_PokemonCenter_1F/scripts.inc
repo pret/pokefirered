@@ -265,7 +265,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire::
 	waitmessage
 	waitfanfare
 	call EventScript_RestorePrevTextColor
-	removeitem ITEM_SAPPHIRE, 1
+	removeitem ITEM_SAPPHIRE
 	msgbox OneIsland_PokemonCenter_1F_Text_ThankYouGiveMeTime
 	closemessage
 	applymovement LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine
@@ -335,8 +335,8 @@ OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio::
 
 OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass::
 	msgbox OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands
-	removeitem ITEM_RUBY, 1
-	removeitem ITEM_TRI_PASS, 1
+	removeitem ITEM_RUBY
+	removeitem ITEM_TRI_PASS
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	additem ITEM_RAINBOW_PASS
 	setflag FLAG_SYS_SEVII_MAP_4567

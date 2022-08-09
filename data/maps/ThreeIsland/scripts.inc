@@ -56,7 +56,7 @@ ThreeIsland_EventScript_GiveFullRestore::
 	applymovement LOCALID_ANTIBIKER1, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_ThankYouOhYourMonGotHurt
-	checkitemspace ITEM_FULL_RESTORE, 1
+	checkitemspace ITEM_FULL_RESTORE
 	compare VAR_RESULT, FALSE
 	goto_if_eq ThreeIsland_EventScript_NoRoomForFullRestore
 	msgreceiveditem ThreeIsland_Text_GivenFullRestore, ITEM_FULL_RESTORE

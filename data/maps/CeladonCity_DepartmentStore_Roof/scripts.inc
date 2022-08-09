@@ -14,13 +14,13 @@ CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl::
 
 CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks::
 	setvar VAR_TEMP_1, 0
-	checkitem ITEM_FRESH_WATER, 1
+	checkitem ITEM_FRESH_WATER
 	compare VAR_RESULT, TRUE
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater
-	checkitem ITEM_SODA_POP, 1
+	checkitem ITEM_SODA_POP
 	compare VAR_RESULT, TRUE
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop
-	checkitem ITEM_LEMONADE, 1
+	checkitem ITEM_LEMONADE
 	compare VAR_RESULT, TRUE
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade
 	return
@@ -143,8 +143,8 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade::
 CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink::
 	bufferitemname STR_VAR_1, VAR_0x8008
 	bufferitemname STR_VAR_2, VAR_0x8009
-	removeitem VAR_0x8008, 1
-	checkitemspace VAR_0x8009, 1
+	removeitem VAR_0x8008
+	checkitemspace VAR_0x8009
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward
 	additem VAR_0x8009
@@ -210,7 +210,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine::
 	lockall
 	message CeladonCity_DepartmentStore_Roof_Text_VendingMachineWhatDoesItHave
 	waitmessage
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	goto CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink
 	end
 
@@ -227,38 +227,38 @@ CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink::
 
 CeladonCity_DepartmentStore_Roof_EventScript_BuyFreshWater::
 	setvar VAR_TEMP_0, ITEM_FRESH_WATER
-	checkmoney 200, 0
+	checkmoney 200
 	goto CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_BuySodaPop::
 	setvar VAR_TEMP_0, ITEM_SODA_POP
-	checkmoney 300, 0
+	checkmoney 300
 	goto CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_BuyLemonade::
 	setvar VAR_TEMP_0, ITEM_LEMONADE
-	checkmoney 350, 0
+	checkmoney 350
 	goto CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater::
-	removemoney 200, 0
+	removemoney 200
 	return
 
 CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop::
-	removemoney 300, 0
+	removemoney 300
 	return
 
 CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade::
-	removemoney 350, 0
+	removemoney 350
 	return
 
 CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink::
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney
-	checkitemspace VAR_TEMP_0, 1
+	checkitemspace VAR_TEMP_0
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink
 	compare VAR_TEMP_1, 0

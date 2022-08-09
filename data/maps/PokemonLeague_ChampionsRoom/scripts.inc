@@ -96,7 +96,7 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerExit
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
-	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12
+	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 5, 12
 	waitstate
 	releaseall
 	end

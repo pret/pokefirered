@@ -44,7 +44,7 @@ Route10_PokemonCenter_1F_EventScript_Aide::
 	compare VAR_0x8006, REQUIRED_OWNED_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox Route10_PokemonCenter_1F_Text_GreatHereYouGo
-	checkitemspace ITEM_EVERSTONE, 1
+	checkitemspace ITEM_EVERSTONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Aide_EventScript_NoRoomForItem
 	giveitem_msg Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide, ITEM_EVERSTONE

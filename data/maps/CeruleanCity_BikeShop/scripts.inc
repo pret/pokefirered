@@ -6,7 +6,7 @@ CeruleanCity_BikeShop_EventScript_Clerk::
 	faceplayer
 	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle
 	goto_if_set FLAG_GOT_BIKE_VOUCHER, CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	message CeruleanCity_BikeShop_Text_WelcomeToBikeShop
 	waitmessage
 	multichoice 11, 0, MULTICHOICE_BIKE_SHOP, FALSE

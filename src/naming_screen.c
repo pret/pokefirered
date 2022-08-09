@@ -58,10 +58,10 @@ enum {
 };
 
 enum {
-    PALTAG_PC_ICON,
+    PALTAG_MENU, // Also the PC icon
     PALTAG_PAGE_SWAP_UPPER,
     PALTAG_PAGE_SWAP_LOWER,
-    PALTAG_PAGE_SWAP_OTHERS,
+    PALTAG_PAGE_SWAP_OTHERS, // Also the input arrow/underscore
     PALTAG_PAGE_SWAP,
     PALTAG_CURSOR,
     PALTAG_BACK_BUTTON,
@@ -782,7 +782,7 @@ static bool8 MainState_WaitPageSwap(void)
 
         sNamingScreen->state = STATE_HANDLE_INPUT;
         sNamingScreen->currentPage++;
-        sNamingScreen->currentPage %= 3;
+        sNamingScreen->currentPage %= KBPAGE_COUNT;
 
         if (onLastColumn)
         {
@@ -1872,7 +1872,7 @@ static void CreateHelperTasks(void)
 
 static void LoadPalettes(void)
 {
-    LoadPalette(gNamingScreenInterface_Pal, 0, sizeof(gNamingScreenInterface_Pal));
+    LoadPalette(gNamingScreenMenu_Pal, 0, sizeof(gNamingScreenMenu_Pal));
     LoadPalette(gNamingScreenKeyboard_Pal, 0xA0, 0x20);
     LoadPalette(stdpal_get(2), 0xB0, 0x20);
 }
@@ -2442,7 +2442,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore = {
 
 static const struct SpriteTemplate sSpriteTemplate_PCIcon = {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_PC_ICON,
+    .paletteTag = PALTAG_MENU,
     .oam = &sOam_8x8,
     .anims = sAnims_PCIcon,
     .images = sImageTable_PCIcon,
@@ -2488,13 +2488,13 @@ static const struct SpriteSheet sSpriteSheets[] = {
 };
 
 static const struct SpritePalette sSpritePalettes[] = {
-    {gNamingScreenInterface_Pal[0], PALTAG_PC_ICON},
-    {gNamingScreenInterface_Pal[1], PALTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenInterface_Pal[2], PALTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenInterface_Pal[3], PALTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenInterface_Pal[4], PALTAG_PAGE_SWAP},
-    {gNamingScreenInterface_Pal[5], PALTAG_CURSOR},
-    {gNamingScreenInterface_Pal[4], PALTAG_BACK_BUTTON},
-    {gNamingScreenInterface_Pal[4], PALTAG_OK_BUTTON},
+    {gNamingScreenMenu_Pal[0], PALTAG_MENU},
+    {gNamingScreenMenu_Pal[1], PALTAG_PAGE_SWAP_UPPER},
+    {gNamingScreenMenu_Pal[2], PALTAG_PAGE_SWAP_LOWER},
+    {gNamingScreenMenu_Pal[3], PALTAG_PAGE_SWAP_OTHERS},
+    {gNamingScreenMenu_Pal[4], PALTAG_PAGE_SWAP},
+    {gNamingScreenMenu_Pal[5], PALTAG_CURSOR},
+    {gNamingScreenMenu_Pal[4], PALTAG_BACK_BUTTON},
+    {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {} // terminator
 };

@@ -1183,9 +1183,9 @@ const u32 gUnknown_8E97EC4[] = INCBIN_U32("graphics/interface/learn_move.bin.lz"
 
 const u16 gNamingScreenKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
 const u16 gNamingScreenRival_Pal[]    = INCBIN_U16("graphics/naming_screen/rival.gbapal");
-const u16 gNamingScreenInterface_Pal[6][16] =
+const u16 gNamingScreenMenu_Pal[6][16] =
 {
-    INCBIN_U16("graphics/naming_screen/pc_icon.gbapal"),
+    INCBIN_U16("graphics/naming_screen/menu.gbapal"),
     INCBIN_U16("graphics/naming_screen/page_swap_upper.gbapal"),
     INCBIN_U16("graphics/naming_screen/page_swap_lower.gbapal"),
     INCBIN_U16("graphics/naming_screen/page_swap_others.gbapal"),

@@ -11,7 +11,7 @@ CeladonCity_GameCorner_EventScript_PhotoPrinter::
 	goto_if_eq CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto
 	playse SE_SHOP
 	removemoney 50, 0
-	updatemoneybox 0, 0, 0
+	updatemoneybox
 	waitse
 	message CeladonCity_GameCorner_Text_ChoosePrintType
 	waitmessage
@@ -51,18 +51,18 @@ CeladonCity_GameCorner_EventScript_PrintPhoto::
 	delay 60
 	special UpdateTrainerCardPhotoIcons
 	msgbox CeladonCity_GameCorner_Text_PrintIsReadyCheckTrainerCard
-	hidemoneybox 0, 0
+	hidemoneybox
 	releaseall
 	end
 
 CeladonCity_GameCorner_EventScript_DeclinePhoto::
-	hidemoneybox 0, 0
+	hidemoneybox
 	releaseall
 	end
 
 CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto::
 	msgbox CeladonCity_GameCorner_Text_DontHaveEnoughMoney
-	hidemoneybox 0, 0
+	hidemoneybox
 	releaseall
 	end
 

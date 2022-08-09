@@ -141,8 +141,8 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade::
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink::
-	getitemname 0, VAR_0x8008
-	getitemname 1, VAR_0x8009
+	bufferitemname STR_VAR_1, VAR_0x8008
+	bufferitemname STR_VAR_2, VAR_0x8009
 	removeitem VAR_0x8008, 1
 	checkitemspace VAR_0x8009, 1
 	compare VAR_RESULT, FALSE
@@ -267,8 +267,8 @@ CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink::
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop
 	compare VAR_TEMP_1, 2
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade
-	updatemoneybox 0, 0, 0
-	getitemname 0, VAR_TEMP_0
+	updatemoneybox
+	bufferitemname STR_VAR_1, VAR_TEMP_0
 	playse SE_VEND
 	msgbox CeladonCity_DepartmentStore_Roof_Text_DrinkCanPoppedOut
 	additem VAR_TEMP_0
@@ -292,6 +292,6 @@ CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink::
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine::
-	hidemoneybox 0, 0
+	hidemoneybox
 	releaseall
 	end

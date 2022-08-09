@@ -46,7 +46,7 @@ Route11_EastEntrance_2F_EventScript_DeclineTrade::
 	end
 
 Route11_EastEntrance_2F_EventScript_NotRequestedMon::
-	getspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
@@ -66,7 +66,7 @@ Route11_EastEntrance_2F_EventScript_Aide::
 	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
-	getnumberstring 2, VAR_0x8006
+	buffernumberstring STR_VAR_3, VAR_0x8006
 	call Route11_EastEntrance_2F_EventScript_GetAideRequestInfo
 	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
@@ -86,6 +86,6 @@ Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder::
 	end
 
 Route11_EastEntrance_2F_EventScript_GetAideRequestInfo::
-	getnumberstring 0, REQUIRED_CAUGHT_MONS
-	getitemname 1, ITEM_ITEMFINDER
+	buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+	bufferitemname STR_VAR_2, ITEM_ITEMFINDER
 	return

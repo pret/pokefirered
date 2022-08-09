@@ -36,7 +36,7 @@ Route18_EastEntrance_2F_EventScript_DeclineTrade::
 	end
 
 Route18_EastEntrance_2F_EventScript_NotRequestedMon::
-	getspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end

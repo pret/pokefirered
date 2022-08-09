@@ -32,7 +32,7 @@ Route2_House_EventScript_DeclineTrade::
 	end
 
 Route2_House_EventScript_NotRequestedMon::
-	getspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end

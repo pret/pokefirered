@@ -16,7 +16,7 @@ EventScript_HideMysteryGiftMan::
 CableClub_EventScript_MysteryGiftMan::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
-	execram
+	trywondercardscript
 
 @ Unused
 EventScript_MysteryGiftThankYou::
@@ -323,7 +323,7 @@ CableClub_EventScript_EnterColosseum::
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -432,7 +432,7 @@ CableClub_EventScript_EnterTradeCenter::
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -831,12 +831,12 @@ CableClub_EventScript_EnterUnionRoom::
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 5, 1
 	waitdooranim
 	special Script_ResetUnionRoomTrade
 	special SetCableClubWarp
-	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
+	warpspinenter MAP_UNION_ROOM, 255, 7, 11
 	waitstate
 	special UnionRoomSpecial
 	waitstate
@@ -1137,7 +1137,7 @@ CableClub_EventScript_EnterWirelessLinkRoom::
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1331,7 +1331,7 @@ CableClub_EventScript_EnterMinigame::
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterMinigameRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	release
 	waitstate
 	end

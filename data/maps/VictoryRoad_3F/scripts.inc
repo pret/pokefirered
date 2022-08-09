@@ -1,3 +1,6 @@
+.set LOCALID_BOULDER1, 7
+.set LOCALID_BOULDER2, 10
+
 VictoryRoad_3F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_3F_OnLoad
 	.byte 0
@@ -21,8 +24,8 @@ VictoryRoad_3F_EventScript_FloorSwitch::
 	playse SE_ICE_BREAK
 	special DrawWholeMapView
 	waitse
-	moveobjectoffscreen 7
-	moveobjectoffscreen 10
+	copyobjectxytoperm LOCALID_BOULDER1
+	copyobjectxytoperm LOCALID_BOULDER2
 	setvar VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
 	releaseall
 	end

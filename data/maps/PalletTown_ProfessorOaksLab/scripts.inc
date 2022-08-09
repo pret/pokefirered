@@ -852,8 +852,8 @@ PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls::
 	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
-	getnumberstring 0, VAR_0x8008
-	getnumberstring 1, VAR_0x8009
+	buffernumberstring STR_VAR_1, VAR_0x8008
+	buffernumberstring STR_VAR_2, VAR_0x8009
 	compare VAR_0x8009, 1  @ Player only has starter
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls
 	goto PalletTown_ProfessorOaksLab_EventScript_RatePokedex
@@ -1169,7 +1169,7 @@ PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
 PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice::
 	applymovement LOCALID_PROF_OAK, Movement_FaceRight
 	waitmovement 0
-	drawmonpic PLAYER_STARTER_SPECIES, 10, 3
+	showmonpic PLAYER_STARTER_SPECIES, 10, 3
 	textcolor 0
 	compare PLAYER_STARTER_NUM, 0
 	goto_if_eq PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur
@@ -1204,12 +1204,12 @@ PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander::
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter::
-	erasemonpic
+	hidemonpic
 	release
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_ChoseStarter::
-	erasemonpic
+	hidemonpic
 	removeobject VAR_LAST_TALKED
 	msgbox PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic
 	call EventScript_RestorePrevTextColor
@@ -1217,7 +1217,7 @@ PalletTown_ProfessorOaksLab_EventScript_ChoseStarter::
 	setflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
 	givemon PLAYER_STARTER_SPECIES, 5, ITEM_NONE
 	copyvar VAR_STARTER_MON, PLAYER_STARTER_NUM
-	getspeciesname 0, PLAYER_STARTER_SPECIES
+	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
 	message PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak
 	waitmessage
 	playfanfare MUS_OBTAIN_KEY_ITEM
@@ -1268,7 +1268,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter::
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalIllTakeThisOneThen
 	removeobject RIVAL_STARTER_ID
 	textcolor 3
-	getspeciesname 0, RIVAL_STARTER_SPECIES
+	bufferspeciesname STR_VAR_1, RIVAL_STARTER_SPECIES
 	message PalletTown_ProfessorOaksLab_Text_RivalReceivedMonFromOak
 	waitmessage
 	playfanfare MUS_OBTAIN_KEY_ITEM

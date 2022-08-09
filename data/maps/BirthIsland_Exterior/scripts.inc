@@ -71,9 +71,9 @@ BirthIsland_Exterior_EventScript_NotSolved3::
 BirthIsland_Exterior_EventScript_Deoxys::
 	addobject LOCALID_DEOXYS
 	waitse
-	setfieldeffectarg 0, LOCALID_DEOXYS_ROCK
-	setfieldeffectarg 1, 56
-	setfieldeffectarg 2, 2
+	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
+	setfieldeffectargument 1, 56
+	setfieldeffectargument 2, 2
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	playbgm MUS_ENCOUNTER_DEOXYS, 0
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK

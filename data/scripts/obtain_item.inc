@@ -17,7 +17,7 @@ Std_ObtainItem::
 	return
 
 EventScript_ObtainItemMessage::
-	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
+	bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_BufferPocketNameTryFanfare
 	compare VAR_0x8007, TRUE
@@ -36,31 +36,31 @@ EventScript_BufferPocketNameTryFanfare::
 	end
 
 EventScript_BufferItemsPocket::
-	getstdstring 2, STDSTRING_ITEMS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferKeyItemsPocket::
-	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_KEY_ITEMS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferPokeBallsPocket::
-	getstdstring 2, STDSTRING_POKEBALLS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferTMCase::
-	getstdstring 2, STDSTRING_TM_CASE
+	bufferstdstring STR_VAR_3, STDSTRING_TM_CASE
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedTMHM
 	return
 
 EventScript_BufferBerryPouch::
-	getstdstring 2, STDSTRING_BERRY_POUCH
+	bufferstdstring STR_VAR_3, STDSTRING_BERRY_POUCH
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
@@ -86,13 +86,13 @@ EventScript_PlayFanfareObtainedTMHM::
 	return
 
 Std_ObtainDecoration::
-	adddecor VAR_0x8000
+	adddecoration VAR_0x8000
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainDecorMessage
 	return
 
 EventScript_ObtainDecorMessage::
-	getdecorname 1, VAR_0x8000
+	bufferdecorationname STR_VAR_2, VAR_0x8000
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_ObtainedDecor
 	compare VAR_0x8007, FALSE
@@ -120,7 +120,7 @@ Std_FindItem::
 	copyvar VAR_0x8005, VAR_0x8001
 	checkitemspace VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
-	getitemname 1, VAR_0x8000
+	bufferitemname STR_VAR_2, VAR_0x8000
 	checkitemtype VAR_0x8000
 	call EventScript_BufferPocketNameTryFanfare
 	compare VAR_0x8007, TRUE
@@ -174,7 +174,7 @@ EventScript_HiddenItemScript::
 EventScript_TryPickUpHiddenItem::
 	additem VAR_0x8005, VAR_0x8006
 	copyvar VAR_0x8007, VAR_RESULT
-	getitemname 1, VAR_0x8005
+	bufferitemname STR_VAR_2, VAR_0x8005
 	checkitemtype VAR_0x8005
 	call EventScript_BufferPocketNameTryFanfare
 	return
@@ -196,12 +196,12 @@ EventScript_FoundSingleItem::
 	return
 
 EventScript_FoundCoins::
-	getnumberstring 0, VAR_0x8006
+	buffernumberstring STR_VAR_1, VAR_0x8006
 	message Text_FoundXCoins
 	return
 
 EventScript_FoundMultipleItems::
-	getnumberstring 0, VAR_0x8006
+	buffernumberstring STR_VAR_1, VAR_0x8006
 	message Text_FoundXItems
 	return
 
@@ -219,7 +219,7 @@ EventScript_TryPickUpHiddenCoins::
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_HiddenCoinsButCaseIsFull
 	addcoins VAR_0x8006
-	getstdstring 1, STDSTRING_COINS
+	bufferstdstring STR_VAR_2, STDSTRING_COINS
 	call EventScript_PlayFanfareObtainedItem
 	call EventScript_FoundCoins
 	waitfanfare
@@ -230,8 +230,8 @@ EventScript_TryPickUpHiddenCoins::
 	end
 
 EventScript_HiddenCoinsButCaseIsFull::
-	getnumberstring 0, VAR_0x8006
-	getstdstring 1, STDSTRING_COINS
+	buffernumberstring STR_VAR_1, VAR_0x8006
+	bufferstdstring STR_VAR_2, STDSTRING_COINS
 	msgbox Text_FoundXCoins
 	msgbox Text_CoinCaseIsFull
 	setvar VAR_RESULT, 0
@@ -239,8 +239,8 @@ EventScript_HiddenCoinsButCaseIsFull::
 	end
 
 EventScript_NoCaseForHiddenCoins::
-	getnumberstring 0, VAR_0x8006
-	getstdstring 1, STDSTRING_COINS
+	buffernumberstring STR_VAR_1, VAR_0x8006
+	bufferstdstring STR_VAR_2, STDSTRING_COINS
 	msgbox Text_FoundXCoins
 	msgbox Text_NothingToPutThemIn
 	setvar VAR_RESULT, 0

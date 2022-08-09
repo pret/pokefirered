@@ -43,8 +43,8 @@ PokedexRating_EventScript_Rate::
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	copyvar VAR_0x800A, VAR_RESULT
-	getnumberstring 0, VAR_0x8008 @ Num Kanto Seen
-	getnumberstring 1, VAR_0x8009 @ Num Kanto Caught
+	buffernumberstring STR_VAR_1, VAR_0x8008 @ Num Kanto Seen
+	buffernumberstring STR_VAR_2, VAR_0x8009 @ Num Kanto Caught
 	msgbox PokedexRating_Text_SeenXOwnedY
 	call_if_unset FLAG_OAKS_RATING_IS_VIA_PC, PokedexRating_EventScript_SetTextColor
 	call PokedexRating_EventScript_ShowRatingMsg
@@ -54,8 +54,8 @@ PokedexRating_EventScript_Rate::
 	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
-	getnumberstring 0, VAR_0x8008 @ Num National Seen
-	getnumberstring 1, VAR_0x8009 @ Num National Caught
+	buffernumberstring STR_VAR_1, VAR_0x8008 @ Num National Seen
+	buffernumberstring STR_VAR_2, VAR_0x8009 @ Num National Caught
 	msgbox PokedexRating_Text_NationalDexSeenXOwnedY
 	specialvar VAR_RESULT, HasAllMons
 	compare VAR_RESULT, FALSE

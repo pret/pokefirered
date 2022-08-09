@@ -455,7 +455,7 @@ TwoIsland_CapeBrink_House_EventScript_StarterTutor::
 	faceplayer
 	goto_if_set FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK, CapeBrinkTutor_EventScript_TaughtAllMoves
 	goto_if_set FLAG_TEMP_2, CapeBrinkTutor_EventScript_MoveJustTaught
-	getfirstpartymonname 0
+	bufferleadmonspeciesname STR_VAR_1
 	msgbox Text_UltimateMoveThatMon
 	specialvar VAR_RESULT, CapeBrinkGetMoveToTeachLeadPokemon
 	compare VAR_RESULT, FALSE

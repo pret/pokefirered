@@ -71,7 +71,7 @@ PewterCity_Museum_1F_EventScript_EntranceTrigger::
 	goto_if_eq PewterCity_Museum_1F_EventScript_TryPayForTicket
 	msgbox PewterCity_Museum_1F_Text_ComeAgain
 	closemessage
-	hidemoneybox 0, 0
+	hidemoneybox
 	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
 	waitmovement 0
 	releaseall
@@ -90,11 +90,11 @@ PewterCity_Museum_1F_EventScript_TryPayForTicket::
 	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight
 	playse SE_SHOP
 	removemoney 50, 0
-	updatemoneybox 0, 0, 0
+	updatemoneybox
 	waitse
 	msgbox PewterCity_Museum_1F_Text_Right50YThankYou
 	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 1
-	hidemoneybox 0, 0
+	hidemoneybox
 	releaseall
 	end
 
@@ -116,7 +116,7 @@ PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight::
 PewterCity_Museum_1F_EventScript_NotEnoughMoney::
 	msgbox PewterCity_Museum_1F_Text_DontHaveEnoughMoney
 	closemessage
-	hidemoneybox 0, 0
+	hidemoneybox
 	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
 	waitmovement 0
 	releaseall

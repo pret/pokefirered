@@ -40,7 +40,7 @@ SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle::
 	waitmovement 0
 	applymovement LOCALID_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
 	waitmovement 0
-	moveobjectoffscreen LOCALID_OLD_WOMAN
+	copyobjectxytoperm LOCALID_OLD_WOMAN
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1

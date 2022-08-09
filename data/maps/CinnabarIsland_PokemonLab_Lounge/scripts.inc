@@ -32,7 +32,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade::
 	end
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon::
-	getspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox Trade_Text_ThisIsntMon
 	release
 	end
@@ -79,7 +79,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade::
 	end
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon::
-	getspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox Trade_Text_ThisIsNoMon
 	release
 	end

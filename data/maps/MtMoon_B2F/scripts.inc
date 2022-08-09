@@ -67,7 +67,7 @@ MtMoon_B2F_EventScript_DomeFossil::
 	delay 10
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
-	moveobjectoffscreen LOCALID_MIGUEL
+	copyobjectxytoperm LOCALID_MIGUEL
 	textcolor 0
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
@@ -99,7 +99,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	delay 10
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
-	moveobjectoffscreen LOCALID_MIGUEL
+	copyobjectxytoperm LOCALID_MIGUEL
 	textcolor 0
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine

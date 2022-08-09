@@ -2419,7 +2419,7 @@ static void MoveDeoxysObject(u8 num)
     else
         gFieldEffectArguments[5] = 5;
     FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
-    Overworld_SetMapObjTemplateCoords(1, sDeoxysCoords[num][0], sDeoxysCoords[num][1]);
+    SetObjEventTemplateCoords(1, sDeoxysCoords[num][0], sDeoxysCoords[num][1]);
 }
 
 static void Task_WaitDeoxysFieldEffect(u8 taskId)

@@ -70,7 +70,7 @@ CeladonCity_GameCorner_EventScript_Buy50Coins::
 	end
 
 CeladonCity_GameCorner_EventScript_BoughtCoins::
-	updatemoneybox 0, 0, 0
+	updatemoneybox
 	updatecoinsbox 0, 5
 	playse SE_SHOP
 	msgbox CeladonCity_GameCorner_Text_HereAreYourCoins
@@ -78,7 +78,7 @@ CeladonCity_GameCorner_EventScript_BoughtCoins::
 	end
 
 CeladonCity_GameCorner_EventScript_ClerkEnd::
-	hidemoneybox 0, 0
+	hidemoneybox
 	hidecoinsbox 0, 5
 	release
 	end
@@ -256,9 +256,9 @@ CeladonCity_GameCorner_EventScript_SlotMachine::
 	msgbox CeladonCity_GameCorner_Text_SlotMachineWantToPlay, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
-	setfieldeffectarg 0, 255
-	setfieldeffectarg 1, 10
-	setfieldeffectarg 2, 14
+	setfieldeffectargument 0, 255
+	setfieldeffectargument 1, 10
+	setfieldeffectargument 2, 14
 	dofieldeffect FLDEFF_SMILEY_FACE_ICON
 	waitfieldeffect FLDEFF_SMILEY_FACE_ICON
 	specialvar VAR_RESULT, GetRandomSlotMachineId

@@ -79,7 +79,7 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	waitmovement 0
 	delay 25
 	specialvar VAR_RESULT, GetStarterSpecies
-	getspeciesname 0, VAR_RESULT
+	bufferspeciesname STR_VAR_1, VAR_RESULT
 	msgbox PokemonLeague_ChampionsRoom_Text_OakCongratulations
 	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFastestRight
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestLeft

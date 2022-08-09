@@ -21,7 +21,7 @@ MysteryEventScript_StampCard::
 	setorcopyvar VAR_RESULT, 0
 	specialvar VAR_0x8009, BattleCardAction
 	subvar VAR_0x8008, VAR_0x8009
-	getnumberstring 0, VAR_0x8008
+	buffernumberstring STR_VAR_1, VAR_0x8008
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftStampCard
@@ -39,7 +39,7 @@ sText_MysteryGiftStampCard:
 MysteryEventScript_SurfPichu::
 	setvaddress MysteryEventScript_SurfPichu
 	vgoto_if_unset FLAG_MYSTERY_GIFT_DONE, SurfPichu_GiveIfPossible
-	gotoram
+	returnram
 
 SurfPichu_GiveIfPossible:
 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount

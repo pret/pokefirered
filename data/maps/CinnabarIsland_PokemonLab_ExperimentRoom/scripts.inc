@@ -32,7 +32,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade::
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon::
-	getspeciesname 0, VAR_0x8009
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
@@ -148,8 +148,8 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber::
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil::
-	getspeciesname 0, SPECIES_OMANYTE
-	getitemname 1, ITEM_HELIX_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
+	bufferitemname STR_VAR_2, ITEM_HELIX_FOSSIL
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
@@ -163,8 +163,8 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil::
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil::
-	getspeciesname 0, SPECIES_KABUTO
-	getitemname 1, ITEM_DOME_FOSSIL
+	bufferspeciesname STR_VAR_1, SPECIES_KABUTO
+	bufferitemname STR_VAR_2, ITEM_DOME_FOSSIL
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
@@ -178,8 +178,8 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil::
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber::
-	getspeciesname 0, SPECIES_AERODACTYL
-	getitemname 1, ITEM_OLD_AMBER
+	bufferspeciesname STR_VAR_1, SPECIES_AERODACTYL
+	bufferitemname STR_VAR_2, ITEM_OLD_AMBER
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
@@ -213,7 +213,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon::
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte::
 	setvar VAR_TEMP_1, SPECIES_OMANYTE
-	getspeciesname 0, SPECIES_OMANYTE
+	bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
 	givemon SPECIES_OMANYTE, 5, ITEM_NONE
 	compare VAR_RESULT, 2
@@ -227,7 +227,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte::
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto::
 	setvar VAR_TEMP_1, SPECIES_KABUTO
-	getspeciesname 0, SPECIES_KABUTO
+	bufferspeciesname STR_VAR_1, SPECIES_KABUTO
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
 	givemon SPECIES_KABUTO, 5, ITEM_NONE
 	compare VAR_RESULT, 2
@@ -241,7 +241,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto::
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl::
 	setvar VAR_TEMP_1, SPECIES_AERODACTYL
-	getspeciesname 0, SPECIES_AERODACTYL
+	bufferspeciesname STR_VAR_1, SPECIES_AERODACTYL
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
 	givemon SPECIES_AERODACTYL, 5, ITEM_NONE
 	compare VAR_RESULT, 2

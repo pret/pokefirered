@@ -13,7 +13,7 @@ Route2_EastBuilding_EventScript_Aide::
 	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
-	getnumberstring 2, VAR_0x8006
+	buffernumberstring STR_VAR_3, VAR_0x8006
 	call Route2_EastBuilding_EventScript_GetAideRequestInfo
 	compare VAR_0x8006, REQUIRED_SEEN_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
@@ -33,8 +33,8 @@ Route2_EastBuilding_EventScript_AlreadyGotHM05::
 	end
 
 Route2_EastBuilding_EventScript_GetAideRequestInfo::
-	getnumberstring 0, REQUIRED_SEEN_MONS
-	getitemname 1, ITEM_HM05
+	buffernumberstring STR_VAR_1, REQUIRED_SEEN_MONS
+	bufferitemname STR_VAR_2, ITEM_HM05
 	return
 
 Route2_EastBuilding_EventScript_Rocker::

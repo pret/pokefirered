@@ -59,8 +59,8 @@ PalletTown_EventScript_OakRatingScene::
 	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
-	getnumberstring 0, VAR_0x8008
-	getnumberstring 1, VAR_0x8009
+	buffernumberstring STR_VAR_1, VAR_0x8008
+	buffernumberstring STR_VAR_2, VAR_0x8009
 	compare VAR_0x8009, 60
 	goto_if_lt PalletTown_EventScript_NotEnoughMonsForNationalDex
 	msgbox PalletTown_Text_CaughtXImpressiveFollowMe
@@ -356,7 +356,7 @@ PalletTown_EventScript_SignLady::
 	call_if_eq PalletTown_EventScript_SignLadyMoveOutOfWayRight
 	compare VAR_FACING, DIR_EAST
 	call_if_ne PalletTown_EventScript_SignLadyMoveOutOfWayLeft
-	moveobjectoffscreen 1
+	copyobjectxytoperm LOCALID_SIGN_LADY
 	setflag FLAG_TEMP_2
 	release
 	end

@@ -145,7 +145,7 @@ SilphCo_7F_EventScript_ReceiveLaprasParty::
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_LAPRAS
+	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SilphCo_7F_EventScript_EndReceiveLapras
@@ -160,7 +160,7 @@ SilphCo_7F_EventScript_ReceiveLaprasPC::
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_LAPRAS
+	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SilphCo_7F_EventScript_LaprasTransferredToPC

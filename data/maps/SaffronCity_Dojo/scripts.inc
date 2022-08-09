@@ -23,7 +23,7 @@ SaffronCity_Dojo_EventScript_HitmonleeBall::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
-	drawmonpic SPECIES_HITMONLEE, 10, 3
+	showmonpic SPECIES_HITMONLEE, 10, 3
 	setvar VAR_TEMP_1, SPECIES_HITMONLEE
 	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -32,7 +32,7 @@ SaffronCity_Dojo_EventScript_HitmonleeBall::
 	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, YES
 	goto_if_eq SaffronCity_Dojo_EventScript_GiveHitmon
-	erasemonpic
+	hidemonpic
 	release
 	end
 
@@ -45,7 +45,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
-	drawmonpic SPECIES_HITMONCHAN, 10, 3
+	showmonpic SPECIES_HITMONCHAN, 10, 3
 	setvar VAR_TEMP_1, SPECIES_HITMONCHAN
 	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -54,12 +54,12 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, YES
 	goto_if_eq SaffronCity_Dojo_EventScript_GiveHitmon
-	erasemonpic
+	hidemonpic
 	release
 	end
 
 SaffronCity_Dojo_EventScript_GiveHitmon::
-	erasemonpic
+	hidemonpic
 	givemon VAR_TEMP_1, 25, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq SaffronCity_Dojo_EventScript_ReceivedHitmonParty
@@ -72,7 +72,7 @@ SaffronCity_Dojo_EventScript_GiveHitmon::
 
 SaffronCity_Dojo_EventScript_ReceivedHitmonParty::
 	removeobject VAR_LAST_TALKED
-	getspeciesname 0, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	playfanfare MUS_LEVEL_UP
 	message SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster
 	waitmessage
@@ -88,7 +88,7 @@ SaffronCity_Dojo_EventScript_ReceivedHitmonParty::
 
 SaffronCity_Dojo_EventScript_ReceivedHitmonPC::
 	removeobject VAR_LAST_TALKED
-	getspeciesname 0, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	playfanfare MUS_LEVEL_UP
 	message SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster
 	waitmessage

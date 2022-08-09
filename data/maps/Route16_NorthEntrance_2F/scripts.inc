@@ -29,7 +29,7 @@ Route16_NorthEntrance_2F_EventScript_Aide::
 	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
-	getnumberstring 2, VAR_0x8006
+	buffernumberstring STR_VAR_3, VAR_0x8006
 	call Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo
 	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
@@ -49,6 +49,6 @@ Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin::
 	end
 
 Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo::
-	getnumberstring 0, REQUIRED_CAUGHT_MONS
-	getitemname 1, ITEM_AMULET_COIN
+	buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+	bufferitemname STR_VAR_2, ITEM_AMULET_COIN
 	return

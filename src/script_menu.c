@@ -1048,7 +1048,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     return TRUE;
 }
 
-bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
+bool8 (*ScriptMenu_HidePokemonPic(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
     if (taskId == 0xFF)

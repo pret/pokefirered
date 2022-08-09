@@ -62,7 +62,7 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	call_if_eq FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast
 	compare VAR_FACING, DIR_WEST
 	call_if_eq FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest
-	moveobjectoffscreen LOCALID_BUTLER
+	copyobjectxytoperm LOCALID_BUTLER
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerPleaseAcceptThisAsHerThanks
 	giveitem VAR_RESORT_GORGEOUS_REWARD
 	compare VAR_RESULT, FALSE

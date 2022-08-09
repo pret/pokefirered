@@ -5,9 +5,9 @@ EventScript_CutTree::
 	checkpartymove MOVE_CUT
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantCutTree
-	setfieldeffectarg 0, VAR_RESULT
-	getpartymonname 0, VAR_RESULT
-	getmovename 1, MOVE_CUT
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_CUT
 	msgbox Text_CutTreeDown, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DontCutTree
@@ -65,9 +65,9 @@ EventScript_RockSmash::
 	checkpartymove MOVE_ROCK_SMASH
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantSmashRock
-	setfieldeffectarg 0, VAR_RESULT
-	getpartymonname 0, VAR_RESULT
-	getmovename 1, MOVE_ROCK_SMASH
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
 	msgbox Text_UseRockSmash, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DontSmashRock
@@ -129,7 +129,7 @@ EventScript_StrengthBoulder::
 	checkpartymove MOVE_STRENGTH
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantMoveBoulder
-	setfieldeffectarg 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_UseStrength, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DontUseStrength
@@ -188,8 +188,8 @@ EventScript_Waterfall::
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_WaterCrashingDown
-	getpartymonname 0, VAR_RESULT
-	setfieldeffectarg 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_UseWaterfall, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndWaterfall
@@ -222,9 +222,9 @@ EventScript_DeepWater::
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_MayGoUnderwater
-	getpartymonname 0, VAR_RESULT
-	setfieldeffectarg 0, VAR_RESULT
-	setfieldeffectarg 1, 1
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	setfieldeffectargument 1, 1
 	msgbox Text_SeaIsDeepUseDive, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndDive
@@ -245,9 +245,9 @@ EventScript_TrySurface::
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantSurface
-	getpartymonname 0, VAR_RESULT
-	setfieldeffectarg 0, VAR_RESULT
-	setfieldeffectarg 1, 1
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	setfieldeffectargument 1, 1
 	msgbox Text_LightFilteringUseDive, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndSurface

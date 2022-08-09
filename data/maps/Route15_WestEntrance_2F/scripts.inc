@@ -6,10 +6,10 @@ Route15_WestEntrance_2F_MapScripts::
 Route15_WestEntrance_2F_EventScript_LeftBinoculars::
 	lockall
 	msgbox Route15_WestEntrance_2F_Text_LargeShiningBird
-	drawmonpic SPECIES_ARTICUNO, 10, 3
+	showmonpic SPECIES_ARTICUNO, 10, 3
 	delay 20
 	waitbuttonpress
-	erasemonpic
+	hidemonpic
 	setvar VAR_0x8004, SPECIES_ARTICUNO
 	special SetSeenMon
 	releaseall
@@ -29,7 +29,7 @@ Route15_WestEntrance_2F_EventScript_Aide::
 	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
-	getnumberstring 2, VAR_0x8006
+	buffernumberstring STR_VAR_3, VAR_0x8006
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
 	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
 	goto_if_lt Aide_EventScript_HaventCaughtEnough
@@ -49,6 +49,6 @@ Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare::
 	end
 
 Route15_WestEntrance_2F_EventScript_GetAideRequestInfo::
-	getnumberstring 0, REQUIRED_CAUGHT_MONS
-	getitemname 1, ITEM_EXP_SHARE
+	buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+	bufferitemname STR_VAR_2, ITEM_EXP_SHARE
 	return

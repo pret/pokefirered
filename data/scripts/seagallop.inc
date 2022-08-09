@@ -90,7 +90,7 @@ EventScript_ChooseDestFromIslandVermilionAllowed::
 
 EventScript_SailToDest::
     specialvar VAR_RESULT, GetSeagallopNumber
-    getnumberstring 0, VAR_RESULT
+    buffernumberstring STR_VAR_1, VAR_RESULT
     compare VAR_0x8004, SEAGALLOP_VERMILION_CITY
     goto_if_eq EventScript_DepartingVermilion
     compare VAR_0x8004, SEAGALLOP_VERMILION_CITY

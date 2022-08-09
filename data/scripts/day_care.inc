@@ -19,7 +19,7 @@ Route5_PokemonDayCare_EventScript_TryGiveMon::
 	goto_if_eq Route5_PokemonDayCare_EventScript_OnlyOneMonInParty
 	msgbox Route5_PokemonDayCare_Text_WhichMonShouldIRaise
 	fadescreen FADE_TO_BLACK
-	hidemoneybox 0, 0
+	hidemoneybox
 	special ChooseSendDaycareMon
 	waitstate
 	showmoneybox 0, 0, 0
@@ -91,11 +91,11 @@ Route5_PokemonDayCare_EventScript_RetrieveMon::
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, TakePokemonFromRoute5Daycare
 	special SubtractMoneyFromVar0x8005
-	updatemoneybox 0, 0, 0
+	updatemoneybox
 	copyvar VAR_0x8008, VAR_RESULT
 	getpartysize
 	subvar VAR_RESULT, 1
-	getpartymonname 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	copyvar VAR_RESULT, VAR_0x8008
 	msgbox Route5_PokemonDayCare_Text_ThankYouHeresMon
 	textcolor 3
@@ -113,7 +113,7 @@ Route5_PokemonDayCare_EventScript_NoRoomInParty::
 	end
 
 Route5_PokemonDayCare_EventScript_CloseMoneyBox::
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 

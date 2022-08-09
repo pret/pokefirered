@@ -66,7 +66,7 @@ Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty::
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp
 	call EventScript_GetGiftMonPartySlot
 	fadescreen FADE_TO_BLACK
-	hidemoneybox 0, 0
+	hidemoneybox
 	special ChangePokemonNickname
 	waitstate
 	goto Route4_PokemonCenter_1F_EventScript_BoughtMagikarp
@@ -78,7 +78,7 @@ Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC::
 	compare VAR_RESULT, NO
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox
 	fadescreen FADE_TO_BLACK
-	hidemoneybox 0, 0
+	hidemoneybox
 	special ChangeBoxPokemonNickname
 	waitstate
 	lock
@@ -97,7 +97,7 @@ Route4_PokemonCenter_1F_EventScript_TransferMagikarp::
 	end
 
 Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp::
-	hidemoneybox 0, 0
+	hidemoneybox
 	goto Route4_PokemonCenter_1F_EventScript_BoughtMagikarp
 	end
 
@@ -108,23 +108,23 @@ Route4_PokemonCenter_1F_EventScript_BoughtMagikarp::
 
 Route4_PokemonCenter_1F_EventScript_PayForMagikarp::
 	removemoney MAGIKARP_PRICE, 0
-	updatemoneybox 0, 0, 0
+	updatemoneybox
 	playfanfare MUS_LEVEL_UP
 	message Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_MAGIKARP
+	bufferspeciesname STR_VAR_1, SPECIES_MAGIKARP
 	return
 
 Route4_PokemonCenter_1F_EventScript_DeclineMagikarp::
 	msgbox Route4_PokemonCenter_1F_Text_OnlyDoingThisAsFavorToYou
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 
 Route4_PokemonCenter_1F_EventScript_NotEnoughMoney::
 	msgbox Route4_PokemonCenter_1F_Text_YoullNeedMoreMoney
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 
@@ -136,7 +136,7 @@ Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp::
 Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp::
 	textcolor 0
 	msgbox Route4_PokemonCenter_1F_Text_NoRoomForMorePokemon
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 

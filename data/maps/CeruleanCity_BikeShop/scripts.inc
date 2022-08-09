@@ -24,7 +24,7 @@ CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle::
 
 CeruleanCity_BikeShop_EventScript_ClerkGoodbye::
 	msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 

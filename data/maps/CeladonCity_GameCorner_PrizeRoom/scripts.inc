@@ -104,7 +104,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon::
-	getspeciesname 0, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
@@ -213,7 +213,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins::
 CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonParty::
 	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
-	getspeciesname 0, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	playfanfare MUS_LEVEL_UP
 	message Text_PlayerObtainedTheMon
 	waitmessage
@@ -227,7 +227,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonParty::
 CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonPC::
 	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
-	getspeciesname 0, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	playfanfare MUS_LEVEL_UP
 	message Text_PlayerObtainedTheMon
 	waitmessage
@@ -271,35 +271,35 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeTM::
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM13::
 	setvar VAR_TEMP_1, ITEM_TM13
 	setvar VAR_TEMP_2, 4000
-	getmovename 1, MOVE_ICE_BEAM
+	buffermovename STR_VAR_2, MOVE_ICE_BEAM
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM23::
 	setvar VAR_TEMP_1, ITEM_TM23
 	setvar VAR_TEMP_2, 3500
-	getmovename 1, MOVE_IRON_TAIL
+	buffermovename STR_VAR_2, MOVE_IRON_TAIL
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM24::
 	setvar VAR_TEMP_1, ITEM_TM24
 	setvar VAR_TEMP_2, 4000
-	getmovename 1, MOVE_THUNDERBOLT
+	buffermovename STR_VAR_2, MOVE_THUNDERBOLT
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM30::
 	setvar VAR_TEMP_1, ITEM_TM30
 	setvar VAR_TEMP_2, 4500
-	getmovename 1, MOVE_SHADOW_BALL
+	buffermovename STR_VAR_2, MOVE_SHADOW_BALL
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM35::
 	setvar VAR_TEMP_1, ITEM_TM35
 	setvar VAR_TEMP_2, 4000
-	getmovename 1, MOVE_FLAMETHROWER
+	buffermovename STR_VAR_2, MOVE_FLAMETHROWER
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
@@ -311,7 +311,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem::
-	getitemname 0, VAR_TEMP_1
+	bufferitemname STR_VAR_1, VAR_TEMP_1
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
@@ -319,7 +319,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize::
-	getitemname 0, VAR_TEMP_1
+	bufferitemname STR_VAR_1, VAR_TEMP_1
 	checkcoins VAR_RESULT
 	compare VAR_RESULT, VAR_TEMP_2
 	goto_if_lt CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins

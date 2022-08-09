@@ -98,7 +98,7 @@ Route5_PokemonDayCare_EventScript_RetrieveMon::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	copyvar VAR_RESULT, VAR_0x8008
 	msgbox Route5_PokemonDayCare_Text_ThankYouHeresMon
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	playmoncry VAR_RESULT, CRY_MODE_NORMAL
 	msgbox Route5_PokemonDayCare_Text_PlayerGotMonBack

@@ -18,7 +18,7 @@ SaffronCity_PokemonTrainerFanClub_OnFrame::
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	lockall
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_BATTLE_GIRL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN

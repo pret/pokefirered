@@ -154,7 +154,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil::
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	removeitem ITEM_HELIX_FOSSIL
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
@@ -169,7 +169,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil::
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	removeitem ITEM_DOME_FOSSIL
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
@@ -184,7 +184,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber::
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	removeitem ITEM_OLD_AMBER
 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
@@ -254,7 +254,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl::
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
 	waitmessage
@@ -269,7 +269,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty::
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
 	waitmessage

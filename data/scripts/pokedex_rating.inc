@@ -65,7 +65,7 @@ PokedexRating_EventScript_Rate::
 	end
 
 PokedexRating_EventScript_SetTextColor::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	return
 
 PokedexRating_EventScript_DexIncomplete::

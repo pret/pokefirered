@@ -1540,7 +1540,8 @@
 	.2byte \box
 	.endm
 
-	@ Sets the color of the text in standard message boxes. 0x00 produces blue (male) text, 0x01 produces red (female) text, 0xFF resets the color to the default for the current OW's gender, and all other values produce black text.
+	@ Sets the color of the text in standard message boxes. color is any NPC_TEXT_COLOR_* constant.
+	@ The color will be reset to NPC_TEXT_COLOR_DEFAULT whenever ProcessPlayerFieldInput is called.
 	.macro textcolor color:req
 	.byte 0xc7
 	.byte \color

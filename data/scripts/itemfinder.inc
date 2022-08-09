@@ -1,6 +1,6 @@
 EventScript_ItemfinderDigUpUnderfootItem::
 	lockall
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	call EventScript_TryPickUpHiddenItem
 	compare VAR_0x8007, TRUE

@@ -9,7 +9,7 @@ EventScript_RestorePrevTextColor::
 
 Std_ObtainItem::
 	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
@@ -160,7 +160,7 @@ EventScript_NoRoomToPickUpItem::
 
 EventScript_HiddenItemScript::
 	lockall
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	compare VAR_0x8005, 0
 	goto_if_eq EventScript_TryPickUpHiddenCoins

@@ -27,7 +27,7 @@ SaffronCity_Dojo_EventScript_HitmonleeBall::
 	setvar VAR_TEMP_1, SPECIES_HITMONLEE
 	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO
 	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, YES
@@ -49,7 +49,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 	setvar VAR_TEMP_1, SPECIES_HITMONCHAN
 	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO
 	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, YES

@@ -20,7 +20,7 @@ PokemonTower_2F_EventScript_RivalTriggerDown::
 	end
 
 PokemonTower_2F_EventScript_Rival::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	compare VAR_TEMP_1, 0
 	call_if_eq PokemonTower_2F_EventScript_RivalFacePlayerRight

@@ -46,7 +46,7 @@ Route16_NorthEntrance_1F_EventScript_NeedBikeTriggerBottom::
 	end
 
 Route16_NorthEntrance_1F_EventScript_NeedBikeTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox Route16_NorthEntrance_1F_Text_ExcuseMeWaitUp
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp

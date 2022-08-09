@@ -238,7 +238,7 @@ FourIsland_House2_EventScript_AlreadyBraggedHoFMax::
 	end
 
 FourIsland_House2_EventScript_BraggedHoF::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message FourIsland_House2_Text_HoFStickerApplied
 	waitmessage
@@ -301,7 +301,7 @@ FourIsland_House2_EventScript_AlreadyBraggedEggsMax::
 	end
 
 FourIsland_House2_EventScript_BraggedEggs::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message FourIsland_House2_Text_EggStickerApplied
 	waitmessage
@@ -364,7 +364,7 @@ FourIsland_House2_EventScript_AlreadyBraggedLinkWinsMax::
 	end
 
 FourIsland_House2_EventScript_BraggedLinkWins::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message FourIsland_House2_Text_VictoryStickerApplied
 	waitmessage

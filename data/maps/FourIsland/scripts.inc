@@ -29,7 +29,7 @@ FourIsland_OnFrame::
 
 FourIsland_EventScript_RivalScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
@@ -110,7 +110,7 @@ FourIsland_EventScript_DaycareAcceptEgg::
 	end
 
 FourIsland_EventScript_DaycareReceivedEgg::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message DayCare_Text_ReceivedEgg
 	call EventScript_RestorePrevTextColor
 	playfanfare MUS_LEVEL_UP

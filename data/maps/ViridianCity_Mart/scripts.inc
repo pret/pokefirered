@@ -20,7 +20,7 @@ ViridianCity_Mart_OnFrame::
 
 ViridianCity_Mart_EventScript_ParcelScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_CLERK, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox ViridianCity_Mart_Text_YouCameFromPallet

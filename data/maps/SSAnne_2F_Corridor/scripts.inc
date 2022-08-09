@@ -22,7 +22,7 @@ SSAnne_2F_Corridor_EventScript_RivalTriggerRight::
 	end
 
 SSAnne_2F_Corridor_EventScript_RivalTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playse SE_EXIT
 	delay 5
 	playbgm MUS_ENCOUNTER_RIVAL, 0

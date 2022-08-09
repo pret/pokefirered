@@ -134,7 +134,7 @@ CeladonCity_GameCorner_EventScript_Fisher::
 	compare VAR_TEMP_1, (MAX_COINS + 1) - 10
 	goto_if_ge CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins
 	addcoins 10
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received10CoinsFromMan
 	playse SE_SHOP
 	waitse
@@ -148,7 +148,7 @@ CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins::
 	end
 
 CeladonCity_GameCorner_EventScript_GamblerNoCoinCase::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_DontHaveCoinCase
 	goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
 	end
@@ -195,7 +195,7 @@ CeladonCity_GameCorner_EventScript_Scientist::
 	compare VAR_TEMP_1, (MAX_COINS + 1) - 20
 	goto_if_ge CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins
 	addcoins 20
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received20CoinsFromNiceGuy
 	playse SE_SHOP
 	waitse
@@ -223,7 +223,7 @@ CeladonCity_GameCorner_EventScript_Gentleman::
 	compare VAR_TEMP_1, (MAX_COINS + 1) - 20
 	goto_if_ge CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins
 	addcoins 20
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received20CoinsFromMan
 	playse SE_SHOP
 	waitse

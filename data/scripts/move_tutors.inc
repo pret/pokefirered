@@ -557,7 +557,7 @@ EventScript_ChooseMoveTutorMon::
 	return
 
 EventScript_CanOnlyBeLearnedOnce::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special DisableMsgBoxWalkaway
 	signmsg
 	msgbox Text_MoveCanOnlyBeLearnedOnce, MSGBOX_YESNO

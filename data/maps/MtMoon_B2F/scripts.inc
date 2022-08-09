@@ -33,7 +33,7 @@ MtMoon_B2F_EventScript_Miguel::
 	end
 
 MtMoon_B2F_EventScript_BattleMiguel::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	message MtMoon_B2F_Text_MiguelIntro
 	waitmessage
 	playbgm MUS_ENCOUNTER_GYM_LEADER, 0
@@ -68,7 +68,7 @@ MtMoon_B2F_EventScript_DomeFossil::
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
 	copyobjectxytoperm LOCALID_MIGUEL
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
 	waitmessage
@@ -100,7 +100,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
 	copyobjectxytoperm LOCALID_MIGUEL
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
 	waitmessage

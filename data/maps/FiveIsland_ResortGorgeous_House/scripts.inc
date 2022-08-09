@@ -45,13 +45,13 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	addobject LOCALID_BUTLER
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerEnter
 	waitmovement 0
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady
 	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_SelphyGiveTokenOfAppreciation
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerIShallDoAsYouBid
 	closemessage
 	compare VAR_FACING, DIR_NORTH
@@ -101,9 +101,9 @@ FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest::
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerBagAppearsToBeFull
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_OhHowDisappointing
 	setflag SHOWN_REQUESTED_MON
 	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE

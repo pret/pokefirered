@@ -62,7 +62,7 @@ CinnabarIsland_EventScript_ExitPokeCenterForOneIsland::
 	lockall
 	clearflag FLAG_DONT_TRANSITION_MUSIC
 	savebgm MUS_DUMMY
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 2
 	delay 20
 	call CinnabarIsland_EventScript_SailToOneIsland
@@ -71,7 +71,7 @@ CinnabarIsland_EventScript_ExitPokeCenterForOneIsland::
 
 CinnabarIsland_EventScript_ReturnFromSeviiIslands::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Text_IfYouHaveTriPassYouCanGoAgain
 	closemessage
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_BillExit
@@ -94,7 +94,7 @@ CinnabarIsland_Movement_BillExit::
 
 CinnabarIsland_EventScript_BillScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	call_if_unset FLAG_TEMP_2, CinnabarIsland_EventScript_BillFacePlayer1
 	call_if_set FLAG_TEMP_2, CinnabarIsland_EventScript_BillFacePlayer2
 	playse SE_PIN

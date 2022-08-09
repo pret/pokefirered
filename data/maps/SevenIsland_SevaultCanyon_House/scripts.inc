@@ -14,7 +14,7 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	applymovement LOCALID_BALDING_MAN, Movement_FacePlayer
 	waitmovement 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox SevenIsland_SevaultCanyon_House_Text_WouldYouLikeToDance, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SevenIsland_SevaultCanyon_House_EventScript_DeclineDance
@@ -48,7 +48,7 @@ SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced::
 	end
 
 SevenIsland_SevaultCanyon_House_EventScript_DeclineDance::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SevenIsland_SevaultCanyon_House_Text_ComeOnDance
 	release
 	end

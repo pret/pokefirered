@@ -113,7 +113,7 @@ CableClub_EventScript_CloseLinkAndExitLinkRoom::
 	special HelpSystem_Enable
 	special QuestLog_StartRecordingInputsAfterDeferredEvent
 	setvar VAR_CABLE_CLUB_STATE, 0
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement VAR_0x8007, Movement_AttendantFaceLeft
@@ -139,7 +139,7 @@ CableClub_EventScript_PlayerExitTradeCenter::
 	special HelpSystem_Enable
 	special QuestLog_StartRecordingInputsAfterDeferredEvent
 	setvar VAR_CABLE_CLUB_STATE, 0
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerFaceAttendantRight
@@ -163,7 +163,7 @@ CableClub_EventScript_PlayerExitUnionRoom::
 	special HelpSystem_Enable
 	special QuestLog_StartRecordingInputsAfterDeferredEvent
 	setvar VAR_CABLE_CLUB_STATE, 0
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerFaceAttendantRight
@@ -192,7 +192,7 @@ CableClub_EventScript_PlayerExitLinkRoom::
 
 CableClub_EventScript_Tutorial::
 	lockall
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox CableClub_Text_FirstTimeRightThisWay
@@ -285,7 +285,7 @@ CableClub_EventScript_TryEnterColosseum::
 	message CableClub_Text_PleaseWaitBCancel
 	waitmessage
 	special HelpSystem_Disable
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special TryBattleLinkup
 	waitstate
 	call EventScript_RestorePrevTextColor
@@ -392,7 +392,7 @@ CableClub_EventScript_TradeCenter::
 	message CableClub_Text_PleaseWaitBCancel
 	waitmessage
 	special HelpSystem_Disable
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special TryTradeLinkup
 	waitstate
 	call EventScript_RestorePrevTextColor
@@ -608,14 +608,14 @@ CableClub_EventScript_ShowBattleRecords::
 
 BattleColosseum_2P_EventScript_PlayerSpot0::
 	setvar VAR_0x8005, 0
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
 BattleColosseum_2P_EventScript_PlayerSpot1::
 	setvar VAR_0x8005, 1
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
@@ -627,7 +627,7 @@ BattleColosseum_4P_EventScript_PlayerSpot0::
 	compare VAR_RESULT, 0
 	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 0
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
@@ -639,7 +639,7 @@ BattleColosseum_4P_EventScript_PlayerSpot1::
 	compare VAR_RESULT, 0
 	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 1
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
@@ -651,7 +651,7 @@ BattleColosseum_4P_EventScript_PlayerSpot2::
 	compare VAR_RESULT, 0
 	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 2
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
@@ -663,7 +663,7 @@ BattleColosseum_4P_EventScript_PlayerSpot3::
 	compare VAR_RESULT, 0
 	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 3
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
@@ -673,14 +673,14 @@ BattleColosseum_4P_EventScript_CancelSpotTrigger::
 
 TradeCenter_EventScript_Chair0::
 	setvar VAR_0x8005, 0
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterTradeSeat
 	waitstate
 	end
 
 TradeCenter_EventScript_Chair1::
 	setvar VAR_0x8005, 1
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterTradeSeat
 	waitstate
 	end
@@ -688,7 +688,7 @@ TradeCenter_EventScript_Chair1::
 @ Unused
 TradeCenter_EventScript_Chair2::
 	setvar VAR_0x8005, 2
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterTradeSeat
 	waitstate
 	end
@@ -696,7 +696,7 @@ TradeCenter_EventScript_Chair2::
 @ Unused
 TradeCenter_EventScript_Chair3::
 	setvar VAR_0x8005, 3
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special EnterTradeSeat
 	waitstate
 	end
@@ -710,7 +710,7 @@ RecordCorner_EventScript_Spot3::
 	end
 
 CableClub_EventScript_ReadTrainerCard::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_LookedAtPlayersTrainerCard
 	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
@@ -718,7 +718,7 @@ CableClub_EventScript_ReadTrainerCard::
 	end
 
 CableClub_EventScript_ReadTrainerCardColored::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_LookedAtPlayersTrainerCardColored
 	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
@@ -726,13 +726,13 @@ CableClub_EventScript_ReadTrainerCardColored::
 	end
 
 CableClub_EventScript_TooBusyToNotice::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_TrainerTooBusyToNotice
 	closemessage
 	end
 
 BattleColosseum_2P_EventScript_Attendant::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special Script_FacePlayer
 	msgbox Text_TakeSeatStartBattle
 	special Script_ClearHeldMovement
@@ -740,7 +740,7 @@ BattleColosseum_2P_EventScript_Attendant::
 	end
 
 TradeCenter_EventScript_Attendant::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special Script_FacePlayer
 	msgbox Text_TakeSeatStartTrade
 	special Script_ClearHeldMovement
@@ -752,7 +752,7 @@ RecordCorner_EventScript_Attendant::
 	end
 
 TradeCenter_ConfirmLeaveRoom::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_TerminateLinkIfYouLeaveRoom, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq TradeCenter_TerminateLink
@@ -761,7 +761,7 @@ TradeCenter_ConfirmLeaveRoom::
 	end
 
 TradeCenter_TerminateLink::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	messageautoscroll Text_TerminateLinkConfirmation
 	waitmessage
 	special ExitLinkRoom
@@ -1002,7 +1002,7 @@ CableClub_EventScript_SaveAndChooseLinkLeader::
 	end
 
 CableClub_EventScript_ChooseLinkLeaderFrom2::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message CableClub_Text_ChooseGroupLeaderOfTwo
 	waitmessage
 	call EventScript_RestorePrevTextColor
@@ -1037,7 +1037,7 @@ CableClub_EventScript_TryJoinGroup2Players::
 	return
 
 CableClub_EventScript_ChooseLinkLeaderFrom4::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message CableClub_Text_ChooseGroupLeaderOfFour
 	waitmessage
 	call EventScript_RestorePrevTextColor
@@ -1072,7 +1072,7 @@ CableClub_EventScript_TryJoinGroup4Players::
 	return
 
 CableClub_EventScript_ChooseLinkLeader::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message CableClub_Text_ChooseGroupLeader
 	waitmessage
 	call EventScript_RestorePrevTextColor
@@ -1282,7 +1282,7 @@ CableClub_EventScript_PlayDodrioBerryPicking::
 	end
 
 CableClub_EventScript_ChooseLinkLeaderMinigame::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message CableClub_Text_ChooseGroupLeader
 	waitmessage
 	call EventScript_RestorePrevTextColor

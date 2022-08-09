@@ -34,7 +34,7 @@ SilphCo_7F_EventScript_RivalTriggerBottom::
 	end
 
 SilphCo_7F_EventScript_RivalScene::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
@@ -140,7 +140,7 @@ SilphCo_7F_EventScript_LaprasGuy::
 	end
 
 SilphCo_7F_EventScript_ReceiveLaprasParty::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
@@ -155,7 +155,7 @@ SilphCo_7F_EventScript_ReceiveLaprasParty::
 	end
 
 SilphCo_7F_EventScript_ReceiveLaprasPC::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
@@ -174,7 +174,7 @@ SilphCo_7F_EventScript_LaprasTransferredToPC::
 	end
 
 SilphCo_7F_EventScript_EndReceiveLapras::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SilphCo_7F_Text_ExplainLapras
 	setflag FLAG_GOT_LAPRAS_FROM_SILPH
 	release

@@ -39,7 +39,7 @@ Route24_EventScript_RocketTriggerRight::
 	end
 
 Route24_EventScript_RocketTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	compare VAR_TEMP_1, 0
 	call_if_eq Route24_EventScript_RocketApproachPlayer
 	compare VAR_TEMP_1, 1

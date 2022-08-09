@@ -1317,7 +1317,7 @@ EventScript_BrailleCursorWaitButton::
 	return
 
 EventScript_NoMoreRoomForPokemon::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_NoMoreRoomForPokemon
 	release
 	end

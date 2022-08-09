@@ -7,7 +7,7 @@ SixIsland_DottedHole_SapphireRoom_MapScripts::
 SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire::
 	lock
 	faceplayer
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message SixIsland_DottedHole_SapphireRoom_Text_FoundSapphire
 	waitmessage
@@ -41,7 +41,7 @@ SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire::
 	call_if_eq SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireEast
 	compare VAR_FACING, DIR_WEST
 	call_if_eq SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireWest
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SixIsland_DottedHole_SapphireRoom_Text_IWasRightInTailingYou
 	closemessage
 	compare VAR_FACING, DIR_NORTH

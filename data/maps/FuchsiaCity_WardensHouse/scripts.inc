@@ -15,7 +15,7 @@ FuchsiaCity_WardensHouse_EventScript_Warden::
 	end
 
 FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_TMHM
 	message FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden
 	waitmessage

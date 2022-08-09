@@ -48,7 +48,7 @@ Route4_PokemonCenter_1F_EventScript_TryBuyMagikarp::
 	checkmoney MAGIKARP_PRICE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	setvar VAR_TEMP_1, SPECIES_MAGIKARP
 	givemon SPECIES_MAGIKARP, 5
 	compare VAR_RESULT, 0
@@ -134,7 +134,7 @@ Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp::
 	end
 
 Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox Route4_PokemonCenter_1F_Text_NoRoomForMorePokemon
 	hidemoneybox
 	release

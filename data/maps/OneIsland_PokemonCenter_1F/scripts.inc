@@ -62,7 +62,7 @@ OneIsland_PokemonCenter_1F_OnFrame::
 
 OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerWalkToCelio
 	applymovement LOCALID_BILL, OneIsland_PokemonCenter_1F_Movement_BillWalkToCelio
 	waitmovement 0
@@ -136,7 +136,7 @@ OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerNotChamp::
 	return
 
 OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap
 	waitmessage
@@ -259,7 +259,7 @@ OneIsland_PokemonCenter_1F_EventScript_CelioJustGivenSapphire::
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_TMHM
 	message OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio
 	waitmessage
@@ -305,7 +305,7 @@ OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass::
 
 OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby::
 	msgbox OneIsland_PokemonCenter_1F_Text_OhThats
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_TMHM
 	message OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio
 	waitmessage
@@ -340,7 +340,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass::
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	additem ITEM_RAINBOW_PASS
 	setflag FLAG_SYS_SEVII_MAP_4567
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass
 	waitmessage
@@ -454,7 +454,7 @@ OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerBottom::
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playse SE_PIN
 	applymovement LOCALID_BILL, Movement_ExclamationMark
 	waitmovement 0

@@ -41,7 +41,7 @@ CeruleanCity_EventScript_RivalTriggerRight::
 	end
 
 CeruleanCity_EventScript_Rival::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	setvar VAR_MAP_SCENE_ROUTE22, 2
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject LOCALID_RIVAL
@@ -203,7 +203,7 @@ CeruleanCity_EventScript_GruntDefeated::
 	end
 
 CeruleanCity_EventScript_NoRoomForTM28::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CeruleanCity_Text_MakeRoomForThisCantRun
 	release
 	end
@@ -229,7 +229,7 @@ CeruleanCity_EventScript_GruntTriggerBottom::
 	end
 
 CeruleanCity_EventScript_GruntTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CeruleanCity_Text_GruntIntro
 	setvar VAR_LAST_TALKED, LOCALID_GRUNT
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_Text_GruntDefeat

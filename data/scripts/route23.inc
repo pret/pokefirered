@@ -115,7 +115,7 @@ Route23_EventScript_RecognizeBadge::
 	end
 
 Route23_EventScript_BadgeGuardTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement VAR_0x8009, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	switch VAR_TEMP_1

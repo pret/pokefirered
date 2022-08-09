@@ -111,7 +111,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon::
 	checkcoins VAR_RESULT
 	compare VAR_RESULT, VAR_TEMP_2
 	goto_if_lt CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	switch VAR_TEMP_1
 	case SPECIES_ABRA,     CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra
 	case SPECIES_CLEFAIRY, CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy
@@ -185,7 +185,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_PartyFull::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_NoMoreRoomForPokemon
 	hidecoinsbox 0, 0
 	release
@@ -200,7 +200,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_NicknamePartyMon::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_CoinCaseRequired
 	release
 	end
@@ -333,7 +333,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_BagFull::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_TooBadBagFull
 	hidecoinsbox 0, 0
 	release

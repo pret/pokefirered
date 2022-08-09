@@ -284,7 +284,7 @@ PewterCity_EventScript_GymGuideTriggerRight::
 	end
 
 PewterCity_EventScript_GymGuideTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox PewterCity_Text_BrocksLookingForChallengersFollowMe
 	closemessage
 	playbgm MUS_FOLLOW_ME, 0
@@ -695,7 +695,7 @@ PewterCity_EventScript_RunningShoesAideTriggerBottom::
 	end
 
 PewterCity_EventScript_AideGiveRunningShoes::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	compare VAR_TEMP_1, 1
 	call_if_eq PewterCity_EventScript_AideNoticePlayer
 	compare VAR_TEMP_1, 2
@@ -718,7 +718,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	compare VAR_TEMP_1, 3
 	call_if_eq PewterCity_EventScript_AideApproachPlayer3
 	msgbox PewterCity_Text_AskedToDeliverThis
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message PewterCity_Text_ReceivedRunningShoesFromAide
 	waitmessage
@@ -740,7 +740,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	compare VAR_TEMP_1, 3
 	call_if_eq PewterCity_EventScript_AideExit3
 	delay 30
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PewterCity_Text_RunningShoesLetterFromMom
 	closemessage
 	removeobject LOCALID_AIDE

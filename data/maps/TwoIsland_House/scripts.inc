@@ -76,7 +76,7 @@ TwoIsland_House_EventScript_ChooseMoveToTeach::
 
 TwoIsland_House_EventScript_GiveBigMushroom::
 	removeitem ITEM_BIG_MUSHROOM
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox TwoIsland_House_Text_HandedOverOneBigMushroom
 	call EventScript_RestorePrevTextColor
 	goto TwoIsland_House_EventScript_EndTutorMove
@@ -84,7 +84,7 @@ TwoIsland_House_EventScript_GiveBigMushroom::
 
 TwoIsland_House_EventScript_GiveTinyMushrooms::
 	removeitem ITEM_TINY_MUSHROOM, 2
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox TwoIsland_House_Text_HandedOverTwoTinyMushrooms
 	call EventScript_RestorePrevTextColor
 	goto TwoIsland_House_EventScript_EndTutorMove

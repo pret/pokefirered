@@ -41,10 +41,10 @@ CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ImThirstyGiveHerDrink, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink
 	waitmessage
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	switch VAR_TEMP_1
 	case 1, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater
 	case 2, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop
@@ -148,7 +148,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink::
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward
 	additem VAR_0x8009
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message Text_ReceivedItemFromLittleGirl
 	waitmessage

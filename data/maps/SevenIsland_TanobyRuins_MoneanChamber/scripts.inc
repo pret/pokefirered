@@ -1,8 +1,8 @@
-SevenIsland_TanobyRuins_MoneanChamber_MapScripts:: @ 8164CCF
+SevenIsland_TanobyRuins_MoneanChamber_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TanobyRuins_MoneanChamber_OnTransition
 	.byte 0
 
-SevenIsland_TanobyRuins_MoneanChamber_OnTransition:: @ 8164CD5
+SevenIsland_TanobyRuins_MoneanChamber_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER
 	call EventScript_TryDarkenRuins
 	end

@@ -1,10 +1,10 @@
-PewterCity_House1_Text_Nidoran:: @ 81915BB
+PewterCity_House1_Text_Nidoran::
     .string "NIDORAN♂: Bowbow!$"
 
-PewterCity_House1_Text_NidoranSit:: @ 81915CD
+PewterCity_House1_Text_NidoranSit::
     .string "NIDORAN, sit!$"
 
-PewterCity_House1_Text_TradeMonsAreFinicky:: @ 81915DB
+PewterCity_House1_Text_TradeMonsAreFinicky::
     .string "Our POKéMON's an outsider, so it's\n"
     .string "finicky and hard to handle.\p"
     .string "An outsider is a POKéMON that you\n"

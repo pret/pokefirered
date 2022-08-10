@@ -1,33 +1,33 @@
-PokemonTower_4F_Text_PaulaIntro:: @ 817A004
+PokemonTower_4F_Text_PaulaIntro::
     .string "Ghost! No!\n"
     .string "Kwaaah!$"
 
-PokemonTower_4F_Text_PaulaDefeat:: @ 817A017
+PokemonTower_4F_Text_PaulaDefeat::
     .string "Where is the ghost?$"
 
-PokemonTower_4F_Text_PaulaPostBattle:: @ 817A02B
+PokemonTower_4F_Text_PaulaPostBattle::
     .string "I must have been dreaming…$"
 
-PokemonTower_4F_Text_LaurelIntro:: @ 817A046
+PokemonTower_4F_Text_LaurelIntro::
     .string "Be cursed with me!\n"
     .string "Kwaaah!$"
 
-PokemonTower_4F_Text_LaurelDefeat:: @ 817A061
+PokemonTower_4F_Text_LaurelDefeat::
     .string "What!$"
 
-PokemonTower_4F_Text_LaurelPostBattle:: @ 817A067
+PokemonTower_4F_Text_LaurelPostBattle::
     .string "We can't determine the identity of\n"
     .string "the ghosts…$"
 
-PokemonTower_4F_Text_JodyIntro:: @ 817A096
+PokemonTower_4F_Text_JodyIntro::
     .string "Huhuhu…\n"
     .string "Beat me not!$"
 
-PokemonTower_4F_Text_JodyDefeat:: @ 817A0AB
+PokemonTower_4F_Text_JodyDefeat::
     .string "Huh?\n"
     .string "Who? What?$"
 
-PokemonTower_4F_Text_JodyPostBattle:: @ 817A0BB
+PokemonTower_4F_Text_JodyPostBattle::
     .string "May the departed POKéMON rest in\n"
     .string "peace…$"
 

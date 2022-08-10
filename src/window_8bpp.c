@@ -13,7 +13,7 @@ static void nullsub_9(void)
 u16 AddWindow8Bit(const struct WindowTemplate *template)
 {
     u16 windowId;
-    u8* memAddress;
+    u8 *memAddress;
     u8 bgLayer;
 
     for (windowId = 0; windowId < WINDOWS_MAX; windowId++)
@@ -83,7 +83,7 @@ void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, const u8 *pixels, u16 srcX, u
     struct Bitmap sourceRect;
     struct Bitmap destRect;
 
-    sourceRect.pixels = (u8*)pixels;
+    sourceRect.pixels = (u8 *)pixels;
     sourceRect.width = srcWidth;
     sourceRect.height = srcHeight;
 
@@ -107,7 +107,7 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
         case COPYWIN_GFX:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             break;
-        case COPYWIN_BOTH:
+        case COPYWIN_FULL:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
             break;

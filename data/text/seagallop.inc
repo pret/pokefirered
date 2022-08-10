@@ -1,7 +1,7 @@
-Text_WhereDoYouWantToGo:: @ 81A6407
+Text_WhereDoYouWantToGo::
 	.string "おつかれさん！\n"
 	.string "どこに　いきたいんだ？$"
 
-Text_AllAboardSeagallopNum:: @ 81A641B
+Text_AllAboardSeagallopNum::
 	.string "All right!\n"
 	.string "All aboard SEAGALLOP HI-SPEED {STR_VAR_1}!$"

@@ -355,7 +355,7 @@ void AnimTask_FrozenIceCube(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&sUnknown_83BF55C, x, y, 4);
-    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == SPRITE_INVALID_TAG)
+    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == TAG_NONE)
         gSprites[spriteId].invisible = TRUE;
     
     SetSubspriteTables(&gSprites[spriteId], sUnknown_83BF554);

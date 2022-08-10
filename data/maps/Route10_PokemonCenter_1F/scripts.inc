@@ -1,35 +1,35 @@
 .equ REQUIRED_OWNED_MONS, 20
 
-Route10_PokemonCenter_1F_MapScripts:: @ 816FC2F
+Route10_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route10_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-Route10_PokemonCenter_1F_OnTransition:: @ 816FC3A
+Route10_PokemonCenter_1F_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
 	setrespawn SPAWN_ROUTE10
 	end
 
-Route10_PokemonCenter_1F_EventScript_Nurse:: @ 816FC41
+Route10_PokemonCenter_1F_EventScript_Nurse::
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-Route10_PokemonCenter_1F_EventScript_FatMan:: @ 816FC4A
+Route10_PokemonCenter_1F_EventScript_FatMan::
 	msgbox Route10_PokemonCenter_1F_Text_NuggetUselessSoldFor5000, MSGBOX_NPC
 	end
 
-Route10_PokemonCenter_1F_EventScript_Gentleman:: @ 816FC53
+Route10_PokemonCenter_1F_EventScript_Gentleman::
 	msgbox Route10_PokemonCenter_1F_Text_EveryTypeStrongerThanOthers, MSGBOX_NPC
 	end
 
-Route10_PokemonCenter_1F_EventScript_Youngster:: @ 816FC5C
+Route10_PokemonCenter_1F_EventScript_Youngster::
 	msgbox Route10_PokemonCenter_1F_Text_HeardGhostsHauntLavender, MSGBOX_NPC
 	end
 
-Route10_PokemonCenter_1F_EventScript_Aide:: @ 816FC65
+Route10_PokemonCenter_1F_EventScript_Aide::
 	lock
 	faceplayer
 	call Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo
@@ -53,12 +53,12 @@ Route10_PokemonCenter_1F_EventScript_Aide:: @ 816FC65
 	release
 	end
 
-Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone:: @ 816FCE7
+Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone::
 	msgbox Route10_PokemonCenter_1F_Text_ExplainEverstone
 	release
 	end
 
-Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo:: @ 816FCF1
+Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo::
 	getnumberstring 0, REQUIRED_OWNED_MONS
 	getitemname 1, ITEM_EVERSTONE
 	return

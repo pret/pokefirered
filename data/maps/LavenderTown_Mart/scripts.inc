@@ -1,19 +1,19 @@
-LavenderTown_Mart_MapScripts:: @ 816B34F
+LavenderTown_Mart_MapScripts::
 	.byte 0
 
-LavenderTown_Mart_EventScript_BaldingMan:: @ 816B350
+LavenderTown_Mart_EventScript_BaldingMan::
 	msgbox LavenderTown_Mart_Text_SearchingForStatRaiseItems, MSGBOX_NPC
 	end
 
-LavenderTown_Mart_EventScript_Rocker:: @ 816B359
+LavenderTown_Mart_EventScript_Rocker::
 	msgbox LavenderTown_Mart_Text_DidYouBuyRevives, MSGBOX_NPC
 	end
 
-LavenderTown_Mart_EventScript_Youngster:: @ 816B362
+LavenderTown_Mart_EventScript_Youngster::
 	msgbox LavenderTown_Mart_Text_TrainerDuosCanChallengeYou, MSGBOX_NPC
 	end
 
-LavenderTown_Mart_EventScript_Clerk:: @ 816B36B
+LavenderTown_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -25,7 +25,7 @@ LavenderTown_Mart_EventScript_Clerk:: @ 816B36B
 	end
 
 	.align 2
-LavenderTown_Mart_Items:: @ 816B390
+LavenderTown_Mart_Items::
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_REVIVE

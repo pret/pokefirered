@@ -18,7 +18,7 @@ void ChoosePartyMon(void)
     ScriptContext2_Enable();
     taskId = CreateTask(sub_80BF97C, 10);
     gTasks[taskId].data[0] = PARTY_MENU_TYPE_CHOOSE_MON;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 
 void SelectMoveTutorMon(void)
@@ -28,7 +28,7 @@ void SelectMoveTutorMon(void)
     ScriptContext2_Enable();
     taskId = CreateTask(sub_80BF97C, 10);
     gTasks[taskId].data[0] = PARTY_MENU_TYPE_MOVE_RELEARNER;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 
 static void sub_80BF97C(u8 taskId)

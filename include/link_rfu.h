@@ -6,6 +6,8 @@
 #include "link.h"
 #include "AgbRfu_LinkManager.h"
 
+#define RFUCMD_MASK               0xFF00
+
 #define RFUCMD_SEND_PACKET        0x2F00
 #define RFUCMD_READY_CLOSE_LINK   0x5f00
 #define RFUCMD_READY_EXIT_STANDBY 0x6600
@@ -219,7 +221,7 @@ void DestroyWirelessStatusIndicatorSprite(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
 void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
 void MEvent_CreateTask_Leader(u32 arg0);
-void Rfu_SendPacket(void * data);
+void Rfu_SendPacket(void *data);
 u8 CreateTask_ListenToWireless(void);
 void LinkRfu_DestroyIdleTask(void);
 void InitRFUAPI(void);

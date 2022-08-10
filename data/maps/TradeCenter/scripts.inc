@@ -1,2 +1,2 @@
-TradeCenter_MapScripts:: @ 8160479
+TradeCenter_MapScripts::
 	.byte 0

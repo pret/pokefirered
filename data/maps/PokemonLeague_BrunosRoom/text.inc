@@ -1,4 +1,4 @@
-PokemonLeague_BrunosRoom_Text_Intro:: @ 817820F
+PokemonLeague_BrunosRoom_Text_Intro::
     .string "I am BRUNO of the ELITE FOUR!\p"
     .string "Through rigorous training, people\n"
     .string "and POKéMON can become stronger\l"
@@ -11,7 +11,7 @@ PokemonLeague_BrunosRoom_Text_Intro:: @ 817820F
     .string "superior power!\p"
     .string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_BrunosRoom_Text_RematchIntro:: @ 817830C
+PokemonLeague_BrunosRoom_Text_RematchIntro::
     .string "I am BRUNO of the ELITE FOUR!\p"
     .string "Through rigorous training, people\n"
     .string "and POKéMON can become stronger\l"
@@ -24,11 +24,11 @@ PokemonLeague_BrunosRoom_Text_RematchIntro:: @ 817830C
     .string "superior power!\p"
     .string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-PokemonLeague_BrunosRoom_Text_Defeat:: @ 8178409
+PokemonLeague_BrunosRoom_Text_Defeat::
     .string "Why?\n"
     .string "How could I lose?$"
 
-PokemonLeague_BrunosRoom_Text_PostBattle:: @ 8178420
+PokemonLeague_BrunosRoom_Text_PostBattle::
     .string "My job is done.\n"
     .string "Go face your next challenge.$"
 

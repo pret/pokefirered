@@ -1,6 +1,6 @@
-SevenIsland_SevaultCanyon_Entrance_MapScripts:: @ 8168BF3
+SevenIsland_SevaultCanyon_Entrance_MapScripts::
 	.byte 0
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign:: @ 8168BF4
+SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign::
 	msgbox SevenIsland_SevaultCanyon_Entrance_Text_RouteSign, MSGBOX_SIGN
 	end

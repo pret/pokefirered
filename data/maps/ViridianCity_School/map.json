@@ -1,7 +1,7 @@
 {
-  "id": "MAP_VIRIDIAN_CITY_HOUSE2",
-  "name": "ViridianCity_House2",
-  "layout": "LAYOUT_VIRIDIAN_CITY_HOUSE2",
+  "id": "MAP_VIRIDIAN_CITY_SCHOOL",
+  "name": "ViridianCity_School",
+  "layout": "LAYOUT_VIRIDIAN_CITY_SCHOOL",
   "music": "MUS_PEWTER",
   "region_map_section": "MAPSEC_VIRIDIAN_CITY",
   "requires_flash": false,
@@ -26,7 +26,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_House2_EventScript_Woman",
+      "script": "ViridianCity_School_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -40,7 +40,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_House2_EventScript_Lass",
+      "script": "ViridianCity_School_EventScript_Lass",
       "flag": "0"
     }
   ],
@@ -75,7 +75,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_House2_EventScript_Notebook"
+      "script": "ViridianCity_School_EventScript_Notebook"
     },
     {
       "type": "sign",
@@ -83,7 +83,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_House2_EventScript_Blackboard"
+      "script": "ViridianCity_School_EventScript_Blackboard"
     },
     {
       "type": "sign",
@@ -91,7 +91,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_House2_EventScript_Blackboard"
+      "script": "ViridianCity_School_EventScript_Blackboard"
     },
     {
       "type": "sign",
@@ -99,7 +99,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "ViridianCity_House2_EventScript_PokemonJournal"
+      "script": "ViridianCity_School_EventScript_PokemonJournal"
     },
     {
       "type": "sign",
@@ -107,7 +107,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "ViridianCity_House2_EventScript_PokemonJournal"
+      "script": "ViridianCity_School_EventScript_PokemonJournal"
     }
   ]
 }

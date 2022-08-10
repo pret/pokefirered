@@ -1,17 +1,17 @@
-SafariZone_EventScript_OutOfBallsMidBattle:: @ 81BFB87
+SafariZone_EventScript_OutOfBallsMidBattle::
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3
 	special ExitSafariMode
 	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
 	end
 
-SafariZone_EventScript_Exit:: @ 81BFB98
+SafariZone_EventScript_Exit::
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1
 	special ExitSafariMode
 	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
 	waitstate
 	end
 
-SafariZone_EventScript_RetirePrompt:: @ 81BFBAA
+SafariZone_EventScript_RetirePrompt::
 	lockall
 	msgbox SafariZone_Text_WouldYouLikeToExit, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -19,17 +19,17 @@ SafariZone_EventScript_RetirePrompt:: @ 81BFBAA
 	releaseall
 	end
 
-SafariZone_EventScript_Retire:: @ 81BFBC0
+SafariZone_EventScript_Retire::
 	goto SafariZone_EventScript_Exit
 
-SafariZone_EventScript_TimesUp:: @ 81BFBC5
+SafariZone_EventScript_TimesUp::
 	lockall
 	playse SE_DING_DONG
 	msgbox SafariZone_Text_TimesUp
 	goto SafariZone_EventScript_Exit
 	end
 
-SafariZone_EventScript_OutOfBalls:: @ 81BFBD7
+SafariZone_EventScript_OutOfBalls::
 	lockall
 	playse SE_DING_DONG
 	msgbox SafariZone_Text_OutOfBalls

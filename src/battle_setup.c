@@ -181,7 +181,7 @@ static void Task_BattleStart(u8 taskId)
     case 0:
         if (!FldEffPoison_IsActive())
         {
-        	HelpSystem_Disable();
+            HelpSystem_Disable();
             BT_StartOnField(tTransition);
             ++tState;
         }
@@ -189,7 +189,7 @@ static void Task_BattleStart(u8 taskId)
     case 1:
         if (BT_IsDone() == TRUE)
         {
-        	HelpSystem_Enable();
+            HelpSystem_Enable();
             CleanupOverworldWindowsAndTilemaps();
             SetMainCallback2(CB2_InitBattle);
             RestartWildEncounterImmunitySteps();
@@ -460,7 +460,7 @@ u8 BattleSetup_GetTerrainId(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    if (MetatileBehavior_IsTallGrass_2(tileBehavior))
+    if (MetatileBehavior_IsTallGrass(tileBehavior))
         return BATTLE_TERRAIN_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
         return BATTLE_TERRAIN_LONG_GRASS;

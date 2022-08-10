@@ -130,18 +130,18 @@ static bool8 MainState_WaitPageSwap(void);
 static void StartPageSwapAnim(void);
 static void Task_HandlePageSwapAnim(u8 taskId);
 static bool8 IsPageSwapAnimNotInProgress(void);
-static bool8 PageSwapAnimState_Init(struct Task * task);
-static bool8 PageSwapAnimState_1(struct Task * task);
-static bool8 PageSwapAnimState_2(struct Task * task);
-static bool8 PageSwapAnimState_Done(struct Task * task);
+static bool8 PageSwapAnimState_Init(struct Task *task);
+static bool8 PageSwapAnimState_1(struct Task *task);
+static bool8 PageSwapAnimState_2(struct Task *task);
+static bool8 PageSwapAnimState_Done(struct Task *task);
 static void sub_809E518(u8 a0, u8 a1, u8 a2);
 static void Task_809E58C(u8 taskId);
 static u16 sub_809E644(u8 tag);
 static void sub_809E6B8(u8 a0);
-static void sub_809E6E0(struct Task * task, u8 a1, u8 a2);
-static void sub_809E700(struct Sprite * sprite);
-static void sub_809E7F0(struct Sprite * sprite);
-static void sub_809E83C(struct Sprite * sprite);
+static void sub_809E6E0(struct Task *task, u8 a1, u8 a2);
+static void sub_809E700(struct Sprite *sprite);
+static void sub_809E7F0(struct Sprite *sprite);
+static void sub_809E83C(struct Sprite *sprite);
 static void sub_809E898(void);
 static void CursorInit(void);
 static void SetCursorPos(s16 x, s16 y);
@@ -153,11 +153,11 @@ static bool8 IsCursorAnimFinished(void);
 static u8 GetCurrentPageColumnCount(void);
 static void CreatePageSwitcherSprites(void);
 static void sub_809EC20(void);
-static bool8 PageSwapSpritesCB_Init(struct Sprite * sprite);
-static bool8 PageSwapSpritesCB_Idle(struct Sprite * sprite);
-static bool8 PageSwapSpritesCB_SwapHide(struct Sprite * sprite);
-static bool8 PageSwapSpritesCB_SwapShow(struct Sprite * sprite);
-static void sub_809ED88(u8 a0, struct Sprite * spr1, struct Sprite * spr2);
+static bool8 PageSwapSpritesCB_Init(struct Sprite *sprite);
+static bool8 PageSwapSpritesCB_Idle(struct Sprite *sprite);
+static bool8 PageSwapSpritesCB_SwapHide(struct Sprite *sprite);
+static bool8 PageSwapSpritesCB_SwapShow(struct Sprite *sprite);
+static void sub_809ED88(u8 a0, struct Sprite *spr1, struct Sprite *spr2);
 static void CreateBackOkSprites(void);
 static void CreateUnderscoreSprites(void);
 static void CreateInputTargetIcon(void);
@@ -175,9 +175,9 @@ static bool8 TriggerKeyboardChange(void);
 static u8 GetInputEvent(void);
 static void SetInputState(u8 state);
 static void Task_HandleInput(u8 taskId);
-static void InputState_Disabled(struct Task * task);
-static void InputState_Enabled(struct Task * task);
-static void HandleDpadMovement(struct Task * task);
+static void InputState_Disabled(struct Task *task);
+static void InputState_Enabled(struct Task *task);
+static void HandleDpadMovement(struct Task *task);
 static void PrintTitle(void);
 static void AddGenderIconFunc_No(void);
 static void AddGenderIconFunc_Yes(void);
@@ -609,7 +609,7 @@ static bool8 MainState_BeginFadeIn(void)
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
     BlendPalettes(-1, 16, RGB_BLACK);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     sNamingScreenData->state++;
     return FALSE;
 }
@@ -663,7 +663,7 @@ static bool8 pokemon_store(void)
 
 static bool8 MainState_BeginFadeInOut(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     sNamingScreenData->state++;
     return FALSE;
 }
@@ -706,8 +706,8 @@ static void pokemon_transfer_to_pc_with_message(void)
     StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(0, COPYWIN_BOTH);
+    AddTextPrinterParameterized2(0, FONT_2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 sub_809E1D4(void)
@@ -773,7 +773,7 @@ static bool8 MainState_WaitPageSwap(void)
 #define tState data[0]
 #define tFrameCount data[1]
 
-static bool8 (*const sPageSwapAnimStateFuncs[])(struct Task * task) = {
+static bool8 (*const sPageSwapAnimStateFuncs[])(struct Task *task) = {
     PageSwapAnimState_Init,
     PageSwapAnimState_1,
     PageSwapAnimState_2,
@@ -1163,7 +1163,7 @@ static void sub_809EC20(void)
     sprite->data[1] = sNamingScreenData->currentPage;
 }
 
-static bool8 (*const sPageSwapSpritesCBs[])(struct Sprite * sprite) = {
+static bool8 (*const sPageSwapSpritesCBs[])(struct Sprite *sprite) = {
     PageSwapSpritesCB_Init,
     PageSwapSpritesCB_Idle,
     PageSwapSpritesCB_SwapHide,
@@ -1230,7 +1230,7 @@ static bool8 PageSwapSpritesCB_SwapShow(struct Sprite *sprite)
 static const u16 gUnknown_83E2388[] = {1, 3, 2};
 static const u16 gUnknown_83E238E[] = {4, 6, 5};
 
-static void sub_809ED88(u8 page, struct Sprite * sprite1, struct Sprite * sprite2)
+static void sub_809ED88(u8 page, struct Sprite *sprite1, struct Sprite *sprite2)
 {
     sprite2->oam.paletteNum = IndexOfSpritePaletteTag(gUnknown_83E2388[page]);
     sprite1->sheetTileStart = GetSpriteTileStartByTag(gUnknown_83E238E[page]);
@@ -1604,7 +1604,7 @@ static void HandleDpadMovement(struct Task *task)
 static void PrintTitleFunction_NoMon(void)
 {
     FillWindowPixelBuffer(sNamingScreenData->windows[3], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreenData->windows[3], 1, sNamingScreenData->template->title, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(sNamingScreenData->windows[3], FONT_1, sNamingScreenData->template->title, 1, 1, 0, NULL);
     PutWindowTilemap(sNamingScreenData->windows[3]);
 }
 
@@ -1615,7 +1615,7 @@ static void PrintTitleFunction_WithMon(void)
     StringCopy(buffer, gSpeciesNames[sNamingScreenData->monSpecies]);
     StringAppendN(buffer, sNamingScreenData->template->title, 15);
     FillWindowPixelBuffer(sNamingScreenData->windows[3], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreenData->windows[3], 1, buffer, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(sNamingScreenData->windows[3], FONT_1, buffer, 1, 1, 0, NULL);
     PutWindowTilemap(sNamingScreenData->windows[3]);
 }
 
@@ -1666,7 +1666,7 @@ static void AddGenderIconFunc_Yes(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             gender = FEMALE;
         }
-        AddTextPrinterParameterized3(sNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SPEED_FF, genderSymbol);
+        AddTextPrinterParameterized3(sNamingScreenData->windows[2], FONT_2, 0x68, 1, sGenderColors[gender], TEXT_SKIP_DRAW, genderSymbol);
     }
 }
 
@@ -1799,7 +1799,7 @@ static void PrintBufferCharactersOnScreen(void)
         temp[1] = gExpandedPlaceholder_Empty[0];
         xoff = (IsLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sNamingScreenData->windows[2], FONT_2, temp, i * 8 + xpos + xoff, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     CallAddGenderIconFunc();
@@ -1840,7 +1840,7 @@ static void sub_809F9E8(u8 window, u8 page)
 
     for (i = 0; i < KBROW_COUNT; i++)
     {
-        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
+        AddTextPrinterParameterized3(window, FONT_1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
     }
 
     PutWindowTilemap(window);
@@ -1881,12 +1881,12 @@ static void sub_809FA60(void)
 static void sub_809FAE4(void)
 {
     const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
-    int strwidth = GetStringWidth(0, gText_MoveOkBack, 0);
+    int strwidth = GetStringWidth(FONT_0, gText_MoveOkBack, 0);
 
     FillWindowPixelBuffer(sNamingScreenData->windows[4], PIXEL_FILL(15));
-    AddTextPrinterParameterized3(sNamingScreenData->windows[4], 0, 236 - strwidth, 0, color, 0, gText_MoveOkBack);
+    AddTextPrinterParameterized3(sNamingScreenData->windows[4], FONT_0, 236 - strwidth, 0, color, 0, gText_MoveOkBack);
     PutWindowTilemap(sNamingScreenData->windows[4]);
-    CopyWindowToVram(sNamingScreenData->windows[4], COPYWIN_BOTH);
+    CopyWindowToVram(sNamingScreenData->windows[4], COPYWIN_FULL);
 }
 
 static void sub_809FB70(void)

@@ -1,10 +1,10 @@
-SSAnne_1F_Corridor_MapScripts:: @ 81608CB
+SSAnne_1F_Corridor_MapScripts::
 	.byte 0
 
-SSAnne_1F_Corridor_EventScript_WorkerM:: @ 81608CC
+SSAnne_1F_Corridor_EventScript_WorkerM::
 	msgbox SSAnne_1F_Corridor_Text_LeStrongSilentType, MSGBOX_NPC
 	end
 
-SSAnne_1F_Corridor_EventScript_Sailor:: @ 81608D5
+SSAnne_1F_Corridor_EventScript_Sailor::
 	msgbox SSAnne_1F_Corridor_Text_PassengersAreRestless, MSGBOX_NPC
 	end

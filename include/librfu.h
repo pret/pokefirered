@@ -324,7 +324,7 @@ struct STWIStatus
     vu8 sending;
 };
 
-// This struct is used as u8 array in SDK. 
+// This struct is used as u8 array in SDK.
 struct RfuIntrStruct
 {
     union RfuPacket rxPacketAlloc;

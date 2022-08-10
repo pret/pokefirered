@@ -1,2 +1,2 @@
-Route21_South_MapScripts:: @ 816828A
+Route21_South_MapScripts::
 	.byte 0

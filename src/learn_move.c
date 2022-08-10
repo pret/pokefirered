@@ -159,7 +159,7 @@ static void MoveRelearnerStateMachine(void);
 static void DrawTextBorderOnWindows6and7(void);
 static void PrintTeachWhichMoveToStrVar1(bool8 onInit);
 static void InitMoveRelearnerStateVariables(void);
-static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite);
+static void SpriteCB_ListMenuScrollIndicators(struct Sprite *sprite);
 static void SpawnListMenuScrollIndicatorSprites(void);
 static void MoveRelearnerInitListMenuBuffersEtc(void);
 static void MoveRelearnerMenuHandleInput(void);
@@ -353,7 +353,7 @@ static const struct ListMenuTemplate sMoveRelearnerListMenuTemplate = {
     .lettersSpacing = 1,
     .itemVerticalPadding = 0,
     .scrollMultiple = 0,
-    .fontId = 2,
+    .fontId = FONT_2,
     .cursorKind = 0,
 };
 
@@ -368,7 +368,7 @@ void DisplayMoveTutorMenu(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_InitMoveRelearnerMenu, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
 static void Task_InitMoveRelearnerMenu(u8 taskId)
@@ -480,7 +480,7 @@ static void MoveRelearnerStateMachine(void)
     switch (sMoveRelearner->state)
     {
     case MENU_STATE_FADE_TO_BLACK:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
         LoadMoveInfoUI();
@@ -506,7 +506,7 @@ static void MoveRelearnerStateMachine(void)
         MoveRelearnerMenuHandleInput();
         break;
     case MENU_STATE_PRINT_TEACH_MOVE_PROMPT:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_TEACH_MOVE_CONFIRM :
@@ -531,7 +531,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case MENU_STATE_PRINT_GIVE_UP_PROMPT:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_GIVE_UP_CONFIRM:
@@ -552,7 +552,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_TRYING_TO_LEARN:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state = 18;
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
@@ -573,7 +573,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_STOP_TEACHING:
-        CreateYesNoMenu(&gUnknown_83FFA8C, 3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state = 26;
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:
@@ -593,7 +593,7 @@ static void MoveRelearnerStateMachine(void)
         break;
     case MENU_STATE_PRINT_WHICH_MOVE_PROMPT:
         sMoveRelearner->state = 20;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         break;
     case MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN:
         if (!gPaletteFade.active)
@@ -608,10 +608,10 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state = 14;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_FADE_AND_RETURN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_RETURN_TO_FIELD:
@@ -623,7 +623,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
         sMoveRelearner->state++;
@@ -690,7 +690,7 @@ static void PrintTeachWhichMoveToStrVar1(bool8 onInit)
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToMon);
         PrintTextOnWindow(7, gStringVar4, 0, 2, 0, 2);
         PutWindowTilemap(7);
-        CopyWindowToVram(7, COPYWIN_BOTH);
+        CopyWindowToVram(7, COPYWIN_FULL);
     }
 }
 
@@ -711,7 +711,7 @@ static void InitMoveRelearnerStateVariables(void)
         sMoveRelearner->learnableMoves[i] = MOVE_NONE;
 }
 
-static void SpriteCB_ListMenuScrollIndicators(struct Sprite * sprite)
+static void SpriteCB_ListMenuScrollIndicators(struct Sprite *sprite)
 {
     s16 abcissa = (sprite->data[1] * 10) & 0xFF;
     switch (sprite->data[0])
@@ -757,7 +757,7 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
     for (i = 0; i < sMoveRelearner->numLearnableMoves; i++)
         StringCopy(sMoveRelearner->listMenuStrbufs[i], gMoveNames[sMoveRelearner->learnableMoves[i]]);
     GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_NICKNAME, nickname);
-    StringCopy10(gStringVar1, nickname);
+    StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(sMoveRelearner->listMenuStrbufs[sMoveRelearner->numLearnableMoves], gFameCheckerText_Cancel);
     sMoveRelearner->numLearnableMoves++;
     for (i = 0; i < count; i++)
@@ -880,7 +880,7 @@ static void PrintMoveInfoHandleCancel_CopyToVram(void)
     CopyWindowToVram(2, COPYWIN_GFX);
     CopyWindowToVram(2, COPYWIN_GFX);
     CopyWindowToVram(5, COPYWIN_GFX);
-    CopyWindowToVram(7, COPYWIN_BOTH);
+    CopyWindowToVram(7, COPYWIN_FULL);
 }
 
 static void MoveRelearnerMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -928,5 +928,5 @@ static void PrintTextOnWindow(u8 windowId, const u8 *str, u8 x, u8 y, s32 speed,
     }
     if (colorIdx != 1)
         FillWindowPixelBuffer(windowId, PIXEL_FILL(sMoveRelearner->textColor[0]));
-    AddTextPrinterParameterized4(windowId, 3, x, y, letterSpacing, lineSpacing, sMoveRelearner->textColor, speed, str);
+    AddTextPrinterParameterized4(windowId, FONT_3, x, y, letterSpacing, lineSpacing, sMoveRelearner->textColor, speed, str);
 }

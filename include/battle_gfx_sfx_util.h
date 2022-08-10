@@ -23,7 +23,7 @@ bool8 BattleInitAllSprites(u8 *state, u8 *battlerId);
 void ClearSpritesHealthboxAnimData(void);
 void CopyAllBattleSpritesInvisibilities(void);
 void CopyBattleSpriteInvisibility(u8 battlerId);
-void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 notTransform);
+void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType);
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite);
 void LoadBattleMonGfxAndAnimate(u8 battlerId, bool8 loadMonSprite, u8 spriteId);
 void TrySetBehindSubstituteSpriteBit(u8 battlerId, u16 move);
@@ -40,6 +40,6 @@ void BattleInterfaceSetWindowPals(void);
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
-bool32 ShouldPlayNormalPokeCry(struct Pokemon *mon);
+bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);
 
 #endif // GUARD_BATTLE_GFX_SFX_UTIL_H

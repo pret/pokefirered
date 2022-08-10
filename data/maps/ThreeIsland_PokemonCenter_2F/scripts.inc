@@ -1,4 +1,4 @@
-ThreeIsland_PokemonCenter_2F_MapScripts:: @ 8171865
+ThreeIsland_PokemonCenter_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
 	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
@@ -6,14 +6,14 @@ ThreeIsland_PokemonCenter_2F_MapScripts:: @ 8171865
 	.byte 0
 
 @ The below 3 are unused and leftover from RS
-ThreeIsland_PokemonCenter_2F_EventScript_Colosseum:: @ 817187A
+ThreeIsland_PokemonCenter_2F_EventScript_Colosseum::
 	call CableClub_EventScript_Colosseum
 	end
 
-ThreeIsland_PokemonCenter_2F_EventScript_TradeCenter:: @ 8171880
+ThreeIsland_PokemonCenter_2F_EventScript_TradeCenter::
 	call CableClub_EventScript_TradeCenter
 	end
 
-ThreeIsland_PokemonCenter_2F_EventScript_RecordCorner:: @ 8171886
+ThreeIsland_PokemonCenter_2F_EventScript_RecordCorner::
 	call CableClub_EventScript_RecordCorner
 	end

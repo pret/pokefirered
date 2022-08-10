@@ -1,4 +1,4 @@
-PokemonMansion_EventScript_SecretSwitch:: @ 81A7AE2
+PokemonMansion_EventScript_SecretSwitch::
 	msgbox PokemonMansion_Text_PressSecretSwitch, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq PokemonMansion_EventScript_DontPressSwitch
@@ -12,7 +12,7 @@ PokemonMansion_EventScript_SecretSwitch:: @ 81A7AE2
 	case 3, PokemonMansion_EventScript_PressSwitch_B1F
 	end
 
-PokemonMansion_EventScript_ResetSwitch:: @ 81A7B3B
+PokemonMansion_EventScript_ResetSwitch::
 	clearflag FLAG_POKEMON_MANSION_SWITCH_STATE
 	switch VAR_0x8004
 	case 0, PokemonMansion_EventScript_ResetSwitch_1F
@@ -21,12 +21,12 @@ PokemonMansion_EventScript_ResetSwitch:: @ 81A7B3B
 	case 3, PokemonMansion_EventScript_ResetSwitch_B1F
 	end
 
-PokemonMansion_EventScript_DontPressSwitch:: @ 81A7B70
+PokemonMansion_EventScript_DontPressSwitch::
 	msgbox PokemonMansion_Text_NotQuiteYet
 	releaseall
 	end
 
-PokemonMansion_EventScript_PressSwitch_1F:: @ 81A7B7A
+PokemonMansion_EventScript_PressSwitch_1F::
 	setmetatile 22, 10, METATILE_PokemonMansion_Floor_ShadeFull, 0
 	setmetatile 23, 10, METATILE_PokemonMansion_Floor, 0
 	setmetatile 24, 10, METATILE_PokemonMansion_Floor, 0
@@ -54,7 +54,7 @@ PokemonMansion_EventScript_PressSwitch_1F:: @ 81A7B7A
 	setmetatile  5,  4, METATILE_PokemonMansion_Statue_RedEyes, 0
 	return
 
-PokemonMansion_EventScript_ResetSwitch_1F:: @ 81A7C5C
+PokemonMansion_EventScript_ResetSwitch_1F::
 	setmetatile 22, 10, METATILE_PokemonMansion_Barrier_Horizontal_TopLeft, 1
 	setmetatile 23, 10, METATILE_PokemonMansion_Barrier_Horizontal_TopMid, 1
 	setmetatile 24, 10, METATILE_PokemonMansion_Barrier_Horizontal_TopRight, 1
@@ -82,7 +82,7 @@ PokemonMansion_EventScript_ResetSwitch_1F:: @ 81A7C5C
 	setmetatile  5,  4, METATILE_PokemonMansion_Statue_BlackEyes, 0
 	return
 
-PokemonMansion_EventScript_PressSwitch_2F:: @ 81A7D3E
+PokemonMansion_EventScript_PressSwitch_2F::
 	setmetatile 24, 14, METATILE_PokemonMansion_Floor_ShadeFull, 0
 	setmetatile 25, 14, METATILE_PokemonMansion_Floor, 0
 	setmetatile 26, 14, METATILE_PokemonMansion_Floor, 0
@@ -102,7 +102,7 @@ PokemonMansion_EventScript_PressSwitch_2F:: @ 81A7D3E
 	setmetatile  2, 15, METATILE_PokemonMansion_Statue_RedEyes, 0
 	return
 
-PokemonMansion_EventScript_ResetSwitch_2F:: @ 81A7DD8
+PokemonMansion_EventScript_ResetSwitch_2F::
 	setmetatile 24, 14, METATILE_PokemonMansion_Barrier_Horizontal_TopLeft, 1
 	setmetatile 25, 14, METATILE_PokemonMansion_Barrier_Horizontal_TopMid, 1
 	setmetatile 26, 14, METATILE_PokemonMansion_Barrier_Horizontal_TopRight, 1
@@ -122,7 +122,7 @@ PokemonMansion_EventScript_ResetSwitch_2F:: @ 81A7DD8
 	setmetatile  2, 15, METATILE_PokemonMansion_Statue_BlackEyes, 0
 	return
 
-PokemonMansion_EventScript_PressSwitch_3F:: @ 81A7E72
+PokemonMansion_EventScript_PressSwitch_3F::
 	setmetatile 17, 11, METATILE_PokemonMansion_Floor_ShadeFull, 0
 	setmetatile 18, 11, METATILE_PokemonMansion_Floor, 0
 	setmetatile 19, 11, METATILE_PokemonMansion_Floor, 0
@@ -137,7 +137,7 @@ PokemonMansion_EventScript_PressSwitch_3F:: @ 81A7E72
 	setmetatile 12,  4, METATILE_PokemonMansion_Statue_RedEyes, 0
 	return
 
-PokemonMansion_EventScript_ResetSwitch_3F:: @ 81A7EDF
+PokemonMansion_EventScript_ResetSwitch_3F::
 	setmetatile 17, 11, METATILE_PokemonMansion_Barrier_Horizontal_TopLeft, 1
 	setmetatile 18, 11, METATILE_PokemonMansion_Barrier_Horizontal_TopMid, 1
 	setmetatile 19, 11, METATILE_PokemonMansion_Barrier_Horizontal_TopRight, 1
@@ -152,7 +152,7 @@ PokemonMansion_EventScript_ResetSwitch_3F:: @ 81A7EDF
 	setmetatile 12,  4, METATILE_PokemonMansion_Statue_BlackEyes, 0
 	return
 
-PokemonMansion_EventScript_PressSwitch_B1F:: @ 81A7F4C
+PokemonMansion_EventScript_PressSwitch_B1F::
 	setmetatile 33, 20, METATILE_PokemonMansion_Barrier_Horizontal_TopLeft, 1
 	setmetatile 34, 20, METATILE_PokemonMansion_Barrier_Horizontal_TopMid, 1
 	setmetatile 35, 20, METATILE_PokemonMansion_Barrier_Horizontal_TopRight, 1
@@ -179,7 +179,7 @@ PokemonMansion_EventScript_PressSwitch_B1F:: @ 81A7F4C
 	setmetatile 27,  4, METATILE_PokemonMansion_Statue_RedEyes_Basement, 0
 	return
 
-PokemonMansion_EventScript_ResetSwitch_B1F:: @ 81A8025
+PokemonMansion_EventScript_ResetSwitch_B1F::
 	setmetatile 33, 20, METATILE_PokemonMansion_BasementFloor_ShadeFull, 0
 	setmetatile 34, 20, METATILE_PokemonMansion_BasementFloor, 0
 	setmetatile 35, 20, METATILE_PokemonMansion_BasementFloor, 0

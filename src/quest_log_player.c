@@ -151,7 +151,7 @@ static void QL_GfxTransition_StartSurf(void)
         gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
         fieldEffectId = FieldEffectStart(FLDEFF_SURF_BLOB);
         objectEvent->fieldEffectSpriteId = fieldEffectId;
-        SetSurfBlob_BobState(fieldEffectId, 1);
+        SetSurfBlob_BobState(fieldEffectId, BOB_PLAYER_AND_MON);
     }
 }
 

@@ -367,7 +367,7 @@ static bool8 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u8 x, u8 y)
     case 0:
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         StringExpandPlaceholders(gStringVar4, text);
-        AddTextPrinterParameterized4(windowId, 2, x, y, 1, 0, gUnknown_83C68EC, 1, gStringVar4);
+        AddTextPrinterParameterized4(windowId, FONT_2, x, y, 1, 0, gUnknown_83C68EC, 1, gStringVar4);
         gTextFlags.canABSpeedUpPrint = FALSE;
         gTasks[taskId].data[2] = 1;
         break;
@@ -396,7 +396,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         Menu_LoadStdPalAt(0xF0);
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_BOTH);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
         loc = GetHealLocation(1);
         if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
          && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map

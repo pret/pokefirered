@@ -22,7 +22,7 @@ void ItemMenuIcons_MoveInsertIndicatorBar(s16 x, u16 y);
 void ItemMenuIcons_ToggleInsertIndicatorBarVisibility(bool8 invisible);
 void SetBagVisualPocketId(u8);
 void ShakeBagSprite(void);
-const void * GetItemIconGfxPtr(u16 itemId, u8 ptrId);
+const void *GetItemIconGfxPtr(u16 itemId, u8 ptrId);
 void CreateBagOrSatchelSprite(u8 animNum);
 
 #endif // GUARD_ITEM_MENU_ICONS

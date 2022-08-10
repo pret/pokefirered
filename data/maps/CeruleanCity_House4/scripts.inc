@@ -1,9 +1,9 @@
 .set LOCALID_WONDER_NEWS_BERRY_MAN, 1
 
-CeruleanCity_House4_MapScripts:: @ 816ACEE
+CeruleanCity_House4_MapScripts::
 	.byte 0
 
-CeruleanCity_House4_EventScript_WonderNewsBerryMan:: @ 816ACEF
+CeruleanCity_House4_EventScript_WonderNewsBerryMan::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	lock
@@ -25,12 +25,12 @@ CeruleanCity_House4_EventScript_WonderNewsBerryMan:: @ 816ACEF
 	goto_if_eq CeruleanCity_House4_EventScript_NewsDone
 	end
 
-CeruleanCity_House4_EventScript_NoNews:: @ 816AD59
+CeruleanCity_House4_EventScript_NoNews::
 	msgbox CeruleanCity_House4_Text_NothingEntertaining
 	release
 	end
 
-CeruleanCity_House4_EventScript_News1:: @ 816AD63
+CeruleanCity_House4_EventScript_News1::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_NewNewsInformativeHaveThis
 	giveitem VAR_0x8008
@@ -39,7 +39,7 @@ CeruleanCity_House4_EventScript_News1:: @ 816AD63
 	release
 	end
 
-CeruleanCity_House4_EventScript_News2:: @ 816AD89
+CeruleanCity_House4_EventScript_News2::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_IncredibleNewsHaveBerries
 	giveitem VAR_0x8008, 4
@@ -48,14 +48,14 @@ CeruleanCity_House4_EventScript_News2:: @ 816AD89
 	release
 	end
 
-CeruleanCity_House4_EventScript_NewsNotSpread:: @ 816ADAF
+CeruleanCity_House4_EventScript_NewsNotSpread::
 	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_FacePlayer
 	waitmovement 0
 	msgbox CeruleanCity_House4_Text_WishCouldShareNewsWithOthers
 	release
 	end
 
-CeruleanCity_House4_EventScript_NewsSpread1:: @ 816ADC3
+CeruleanCity_House4_EventScript_NewsSpread1::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis
 	giveitem VAR_0x8008
@@ -64,7 +64,7 @@ CeruleanCity_House4_EventScript_NewsSpread1:: @ 816ADC3
 	release
 	end
 
-CeruleanCity_House4_EventScript_NewsSpread2:: @ 816ADE9
+CeruleanCity_House4_EventScript_NewsSpread2::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries
 	giveitem VAR_0x8008, 4
@@ -73,14 +73,14 @@ CeruleanCity_House4_EventScript_NewsSpread2:: @ 816ADE9
 	release
 	end
 
-CeruleanCity_House4_EventScript_NewsDone:: @ 816AE0F
+CeruleanCity_House4_EventScript_NewsDone::
 	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_FacePlayer
 	waitmovement 0
 	msgbox CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews
 	release
 	end
 
-CeruleanCity_House4_EventScript_MovementReactionToNews:: @ 816AE23
+CeruleanCity_House4_EventScript_MovementReactionToNews::
 	playse SE_PIN
 	applymovement LOCALID_WONDER_NEWS_BERRY_MAN, Movement_ExclamationMark
 	waitmovement 0
@@ -90,7 +90,7 @@ CeruleanCity_House4_EventScript_MovementReactionToNews:: @ 816AE23
 	waitmovement 0
 	return
 
-CeruleanCity_House4_EventScript_NoRoomForBerries:: @ 816AE45
+CeruleanCity_House4_EventScript_NoRoomForBerries::
 	msgbox CeruleanCity_House4_Text_YourBerryPouchIsFull
 	release
 	end

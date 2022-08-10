@@ -54,7 +54,7 @@ static void UpdateScanlineEffectRegBuffer(s16 a0);
 static void ScheduleStopScanlineEffect(void);
 static void LoadMainTitleScreenPalsAndResetBgs(void);
 static void CB2_FadeOutTransitionToSaveClearScreen(void);
-static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite);
+static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite *sprite);
 static void CB2_FadeOutTransitionToBerryFix(void);
 static void LoadSpriteGfxAndPals(void);
 static void Task_FlameOrLeafSpawner(u8 taskId);
@@ -65,7 +65,7 @@ static void SetPalOnOrCreateBlankSprite(bool32 a0);
 static u8 CreateSlashSprite(void);
 static void ScheduleHideSlashSprite(u8 spriteId);
 static bool32 IsSlashSpriteHidden(u8 spriteId);
-static void SpriteCallback_Slash(struct Sprite * sprite);
+static void SpriteCallback_Slash(struct Sprite *sprite);
 
 // bg3
 static const u8 sBorderBgTiles[] = INCBIN_U8("graphics/title_screen/border_bg.4bpp.lz");
@@ -638,7 +638,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
         if (!gPaletteFade.active && !IsSlashSpriteHidden(data[6]))
         {
             FadeOutMapMusic(10);
-            BeginNormalPaletteFade(0xFFFFFFFF, 3, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 3, 0, 0x10, RGB_BLACK);
             SignalEndTitleScreenPaletteSomethingTask();
             data[1]++;
         }
@@ -674,7 +674,7 @@ static void SetTitleScreenScene_Cry(s16 * data)
     case 0:
         if (!gPaletteFade.active)
         {
-            PlayCry1(TITLE_SPECIES, 0);
+            PlayCry_Normal(TITLE_SPECIES, 0);
             ScheduleHideSlashSprite(data[6]);
             data[2] = 0;
             data[1]++;
@@ -698,7 +698,7 @@ static void SetTitleScreenScene_Cry(s16 * data)
             SetSaveBlocksPointers();
             ResetMenuAndMonGlobals();
             Save_ResetSaveCounters();
-            Save_LoadGameData(SAVE_NORMAL);
+            LoadGameSave(SAVE_NORMAL);
             if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
                 Sav2_ClearSetDefault();
             SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
@@ -909,7 +909,7 @@ static void LoadSpriteGfxAndPals(void)
     LoadSpritePalettes(sSpritePals);
 }
 
-static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite)
+static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite *sprite)
 {
     s16 * data = sprite->data;
     sprite->data[0] -= data[1];
@@ -1044,7 +1044,7 @@ static void CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
     }
 }
 
-static void SpriteCallback_LG_8079800(struct Sprite * sprite)
+static void SpriteCallback_LG_8079800(struct Sprite *sprite)
 {
     sprite->x -= 7;
     if (sprite->x < -16)
@@ -1170,7 +1170,7 @@ static bool32 IsSlashSpriteHidden(u8 spriteId)
         return FALSE;
 }
 
-static void SpriteCallback_Slash(struct Sprite * sprite)
+static void SpriteCallback_Slash(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

@@ -20,7 +20,7 @@ enum SpinnerRunnerFollowPatterns
     RUNFOLLOW_SOUTH_EAST_WEST
 };
 
-struct UnkStruct_083A3698
+struct StepAnimTable
 {
     const union AnimCmd *const *anims;
     u8 animPos[4];
@@ -156,14 +156,14 @@ bool32 RfuUnionObjectIsWarping(u8 objectEventId);
 u8 GetJumpSpecialMovementAction(u32 direction);
 void EnableObjectGroundEffectsByXY(s16 x, s16 y);
 void MoveObjectEventToMapCoords(struct ObjectEvent *objectEvent, s16 x, s16 y);
-u8 CreateCopySpriteAt(struct Sprite * sprite, s16 x, s16 y, u8 subpriority);
+u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority);
 u16 GetObjectPaletteTag(u8 paletteIndex);
 void SetSpritePosToMapCoords(s16 x, s16 y, s16 *x2, s16 *y2);
 void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
 bool8 AreZCoordsCompatible(u8, u8);
 u8 ZCoordToPriority(u8 z);
 void ObjectEventUpdateZCoord(struct ObjectEvent *pObject);
-void SetObjectSubpriorityByZCoord(u8 z, struct Sprite * sprite, u8 offset);
+void SetObjectSubpriorityByZCoord(u8 z, struct Sprite *sprite, u8 offset);
 bool8 IsZCoordMismatchAt(u8, s16, s16);
 void MakeObjectTemplateFromObjectEventGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
 u8 AddCameraObject(u8 trackedSpriteId);

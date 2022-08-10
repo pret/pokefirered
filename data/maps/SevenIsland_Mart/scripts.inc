@@ -1,7 +1,7 @@
-SevenIsland_Mart_MapScripts:: @ 8170B30
+SevenIsland_Mart_MapScripts::
 	.byte 0
 
-SevenIsland_Mart_EventScript_Clerk:: @ 8170B31
+SevenIsland_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
@@ -13,7 +13,7 @@ SevenIsland_Mart_EventScript_Clerk:: @ 8170B31
 	end
 
 	.align 2
-SevenIsland_Mart_Items:: @ 8170B58
+SevenIsland_Mart_Items::
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_FULL_RESTORE
@@ -27,14 +27,14 @@ SevenIsland_Mart_Items:: @ 8170B58
 	release
 	end
 
-SevenIsland_Mart_EventScript_Lass:: @ 8170B6E
+SevenIsland_Mart_EventScript_Lass::
 	msgbox SevenIsland_Mart_Text_MonHavePersonalitiesOfTheirOwn, MSGBOX_NPC
 	end
 
-SevenIsland_Mart_EventScript_Hiker:: @ 8170B77
+SevenIsland_Mart_EventScript_Hiker::
 	msgbox SevenIsland_Mart_Text_PreparationsCompleteForRuins, MSGBOX_NPC
 	end
 
-SevenIsland_Mart_EventScript_Fisher:: @ 8170B80
+SevenIsland_Mart_EventScript_Fisher::
 	msgbox SevenIsland_Mart_Text_NeedToFishOnSevenIsland, MSGBOX_NPC
 	end

@@ -1,4 +1,4 @@
-Route25_SeaCottage_Text_ImBillHelpMeOutPal:: @ 819FDFA
+Route25_SeaCottage_Text_ImBillHelpMeOutPal::
     .string "Hiya! I'm a POKéMON…\n"
     .string "…No I'm not!\p"
     .string "Call me BILL!\n"
@@ -11,7 +11,7 @@ Route25_SeaCottage_Text_ImBillHelpMeOutPal:: @ 819FDFA
     .string "So, how about it?\n"
     .string "Help me out here!$"
 
-Route25_SeaCottage_Text_ImBillHelpMeOutLady:: @ 819FEE6
+Route25_SeaCottage_Text_ImBillHelpMeOutLady::
     .string "Hiya! I'm a POKéMON…\n"
     .string "…No I'm not!\p"
     .string "Call me BILL!\n"
@@ -24,13 +24,13 @@ Route25_SeaCottage_Text_ImBillHelpMeOutLady:: @ 819FEE6
     .string "So, how about it?\n"
     .string "Help me out here!$"
 
-Route25_SeaCottage_Text_RunCellSeparationOnPC:: @ 819FFD3
+Route25_SeaCottage_Text_RunCellSeparationOnPC::
     .string "Wait till I get inside the\n"
     .string "TELEPORTER.\p"
     .string "When I do, go to my PC and run\n"
     .string "the Cell Separation System.$"
 
-Route25_SeaCottage_Text_NoPleaseChief:: @ 81A0035
+Route25_SeaCottage_Text_NoPleaseChief::
     .string "No!?\n"
     .string "Now don't be so cold!\p"
     .string "Come on, you gotta help a guy in\n"
@@ -40,7 +40,7 @@ Route25_SeaCottage_Text_NoPleaseChief:: @ 81A0035
     .string "Okay?\l"
     .string "All right!$"
 
-Route25_SeaCottage_Text_NoPleaseBeautiful:: @ 81A00B6
+Route25_SeaCottage_Text_NoPleaseBeautiful::
     .string "No!?\n"
     .string "Now don't be so cold!\p"
     .string "Come on, you gotta help a guy in\n"
@@ -50,7 +50,7 @@ Route25_SeaCottage_Text_NoPleaseBeautiful:: @ 81A00B6
     .string "Okay?\l"
     .string "All right!$"
 
-Route25_SeaCottage_Text_ThanksBudTakeThis:: @ 81A013B
+Route25_SeaCottage_Text_ThanksBudTakeThis::
     .string "BILL: Yeehah!\n"
     .string "Thanks, bud! I owe you one!\p"
     .string "So, did you come to see my\n"
@@ -60,7 +60,7 @@ Route25_SeaCottage_Text_ThanksBudTakeThis:: @ 81A013B
     .string "I've got to thank you…\n"
     .string "Oh, here, maybe this'll do.$"
 
-Route25_SeaCottage_Text_ThanksLadyTakeThis:: @ 81A01E4
+Route25_SeaCottage_Text_ThanksLadyTakeThis::
     .string "BILL: Yeehah!\n"
     .string "Thanks, lady! I owe you one!\p"
     .string "So, did you come to see my\n"
@@ -70,14 +70,14 @@ Route25_SeaCottage_Text_ThanksLadyTakeThis:: @ 81A01E4
     .string "I've got to thank you…\n"
     .string "Oh, here, maybe this'll do.$"
 
-Route25_SeaCottage_Text_ReceivedSSTicketFromBill:: @ 81A028E
+Route25_SeaCottage_Text_ReceivedSSTicketFromBill::
     .string "{PLAYER} received an S.S. TICKET\n"
     .string "from BILL.$"
 
-Route25_SeaCottage_Text_YouveGotTooMuchStuff:: @ 81A02B4
+Route25_SeaCottage_Text_YouveGotTooMuchStuff::
     .string "You've got too much stuff!$"
 
-Route25_SeaCottage_Text_SSAnnePartyYouGoInstead:: @ 81A02CF
+Route25_SeaCottage_Text_SSAnnePartyYouGoInstead::
     .string "That cruise ship S.S. ANNE is in\n"
     .string "VERMILION CITY.\p"
     .string "I hear there are lots of TRAINERS\n"
@@ -87,22 +87,22 @@ Route25_SeaCottage_Text_SSAnnePartyYouGoInstead:: @ 81A02CF
     .string "Why don't you go instead of me?\n"
     .string "Go on and have a good time.$"
 
-Route25_SeaCottage_Text_CheckOutRareMonsOnPC:: @ 81A03AB
+Route25_SeaCottage_Text_CheckOutRareMonsOnPC::
     .string "BILL: Feel like checking out some\n"
     .string "of my rare POKéMON on my PC?\p"
     .string "Go on, check out my PC.$"
 
-Route25_SeaCottage_Text_TeleporterIsDisplayed:: @ 81A0402
+Route25_SeaCottage_Text_TeleporterIsDisplayed::
     .string "TELEPORTER is displayed on the PC\n"
     .string "monitor.$"
 
-Route25_SeaCottage_Text_InitiatedTeleportersCellSeparator:: @ 81A042D
+Route25_SeaCottage_Text_InitiatedTeleportersCellSeparator::
     .string "{PLAYER} initiated the TELEPORTER's\n"
     .string "Cell Separator.$"
 
-Route25_SeaCottage_Text_BillsFavoriteMonList:: @ 81A045B
+Route25_SeaCottage_Text_BillsFavoriteMonList::
     .string "BILL's favorite POKéMON list!$"
 
-Route25_SeaCottage_Text_SeeWhichMon:: @ 81A0479
+Route25_SeaCottage_Text_SeeWhichMon::
     .string "Which POKéMON do you want to see?$"
 

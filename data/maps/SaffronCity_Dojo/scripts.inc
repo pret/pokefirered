@@ -1,9 +1,9 @@
 .equ LOCALID_KARATE_MASTER, 5
 
-SaffronCity_Dojo_MapScripts:: @ 816EBDB
+SaffronCity_Dojo_MapScripts::
 	.byte 0
 
-SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft:: @ 816EBDC
+SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft::
 	lockall
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
 	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestLeft
@@ -11,7 +11,7 @@ SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft:: @ 816EBDC
 	releaseall
 	end
 
-SaffronCity_Dojo_EventScript_TriggerMasterBattleRight:: @ 816EBEE
+SaffronCity_Dojo_EventScript_TriggerMasterBattleRight::
 	lockall
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
 	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestRight
@@ -19,7 +19,7 @@ SaffronCity_Dojo_EventScript_TriggerMasterBattleRight:: @ 816EBEE
 	releaseall
 	end
 
-SaffronCity_Dojo_EventScript_HitmonleeBall:: @ 816EC00
+SaffronCity_Dojo_EventScript_HitmonleeBall::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
@@ -36,12 +36,12 @@ SaffronCity_Dojo_EventScript_HitmonleeBall:: @ 816EC00
 	release
 	end
 
-SaffronCity_Dojo_EventScript_AlreadyGotHitmon:: @ 816EC3C
+SaffronCity_Dojo_EventScript_AlreadyGotHitmon::
 	msgbox SaffronCity_Dojo_Text_BetterNotGetGreedy
 	release
 	end
 
-SaffronCity_Dojo_EventScript_HitmonchanBall:: @ 816EC46
+SaffronCity_Dojo_EventScript_HitmonchanBall::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
@@ -58,7 +58,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall:: @ 816EC46
 	release
 	end
 
-SaffronCity_Dojo_EventScript_GiveHitmon:: @ 816EC82
+SaffronCity_Dojo_EventScript_GiveHitmon::
 	erasemonpic
 	givemon VAR_TEMP_1, 25, ITEM_NONE
 	compare VAR_RESULT, 0
@@ -70,7 +70,7 @@ SaffronCity_Dojo_EventScript_GiveHitmon:: @ 816EC82
 	release
 	end
 
-SaffronCity_Dojo_EventScript_ReceivedHitmonParty:: @ 816ECB5
+SaffronCity_Dojo_EventScript_ReceivedHitmonParty::
 	removeobject VAR_LAST_TALKED
 	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_LEVEL_UP
@@ -86,7 +86,7 @@ SaffronCity_Dojo_EventScript_ReceivedHitmonParty:: @ 816ECB5
 	goto SaffronCity_Dojo_EventScript_EndGiveMon
 	end
 
-SaffronCity_Dojo_EventScript_ReceivedHitmonPC:: @ 816ECEC
+SaffronCity_Dojo_EventScript_ReceivedHitmonPC::
 	removeobject VAR_LAST_TALKED
 	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_LEVEL_UP
@@ -101,59 +101,59 @@ SaffronCity_Dojo_EventScript_ReceivedHitmonPC:: @ 816ECEC
 	goto SaffronCity_Dojo_EventScript_TransferredHitmonToPC
 	end
 
-SaffronCity_Dojo_EventScript_TransferredHitmonToPC:: @ 816ED1E
+SaffronCity_Dojo_EventScript_TransferredHitmonToPC::
 	call EventScript_TransferredToPC
 	goto SaffronCity_Dojo_EventScript_EndGiveMon
 	end
 
-SaffronCity_Dojo_EventScript_EndGiveMon:: @ 816ED29
+SaffronCity_Dojo_EventScript_EndGiveMon::
 	release
 	end
 
-SaffronCity_Dojo_EventScript_Statue:: @ 816ED2B
+SaffronCity_Dojo_EventScript_Statue::
 	msgbox SaffronCity_Dojo_Text_FightingDojo, MSGBOX_SIGN
 	end
 
-SaffronCity_Dojo_EventScript_LeftScroll:: @ 816ED34
+SaffronCity_Dojo_EventScript_LeftScroll::
 	msgbox SaffronCity_Dojo_Text_EnemiesOnEverySide, MSGBOX_SIGN
 	end
 
-SaffronCity_Dojo_EventScript_RightScroll:: @ 816ED3D
+SaffronCity_Dojo_EventScript_RightScroll::
 	msgbox SaffronCity_Dojo_Text_GoesAroundComesAround, MSGBOX_SIGN
 	end
 
-SaffronCity_Dojo_EventScript_Hitoshi:: @ 816ED46
+SaffronCity_Dojo_EventScript_Hitoshi::
 	trainerbattle_single TRAINER_BLACK_BELT_HITOSHI, SaffronCity_Dojo_Text_HitoshiIntro, SaffronCity_Dojo_Text_HitoshiDefeat
 	msgbox SaffronCity_Dojo_Text_HitoshiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Dojo_EventScript_Hideki:: @ 816ED5D
+SaffronCity_Dojo_EventScript_Hideki::
 	trainerbattle_single TRAINER_BLACK_BELT_HIDEKI, SaffronCity_Dojo_Text_HidekiIntro, SaffronCity_Dojo_Text_HidekiDefeat
 	msgbox SaffronCity_Dojo_Text_HidekiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Dojo_EventScript_Aaron:: @ 816ED74
+SaffronCity_Dojo_EventScript_Aaron::
 	trainerbattle_single TRAINER_BLACK_BELT_AARON, SaffronCity_Dojo_Text_AaronIntro, SaffronCity_Dojo_Text_AaronDefeat
 	msgbox SaffronCity_Dojo_Text_AaronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Dojo_EventScript_Mike:: @ 816ED8B
+SaffronCity_Dojo_EventScript_Mike::
 	trainerbattle_single TRAINER_BLACK_BELT_MIKE, SaffronCity_Dojo_Text_MikeIntro, SaffronCity_Dojo_Text_MikeDefeat
 	msgbox SaffronCity_Dojo_Text_MikePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Dojo_EventScript_MasterKoichi:: @ 816EDA2
+SaffronCity_Dojo_EventScript_MasterKoichi::
 	trainerbattle_single TRAINER_BLACK_BELT_KOICHI, SaffronCity_Dojo_Text_MasterKoichiIntro, SaffronCity_Dojo_Text_MasterKoichiDefeat, SaffronCity_Dojo_EventScript_DefeatedMasterKoichi
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon
 	msgbox SaffronCity_Dojo_Text_ChoosePrizedFightingMon, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon:: @ 816EDC6
+SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon::
 	msgbox SaffronCity_Dojo_Text_StayAndTrainWithUs
 	release
 	end
 
-SaffronCity_Dojo_EventScript_DefeatedMasterKoichi:: @ 816EDD0
+SaffronCity_Dojo_EventScript_DefeatedMasterKoichi::
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
 	release
 	end

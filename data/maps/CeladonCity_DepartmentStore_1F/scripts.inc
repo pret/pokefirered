@@ -1,14 +1,14 @@
-CeladonCity_DepartmentStore_1F_MapScripts:: @ 816BAD8
+CeladonCity_DepartmentStore_1F_MapScripts::
 	.byte 0
 
-CeladonCity_DepartmentStore_1F_EventScript_Receptionist:: @ 816BAD9
+CeladonCity_DepartmentStore_1F_EventScript_Receptionist::
 	msgbox CeladonCity_DepartmentStore_1F_Text_WelcomeToDeptStore, MSGBOX_NPC
 	end
 
-CeladonCity_DepartmentStore_1F_EventScript_LayoutSign:: @ 816BAE2
+CeladonCity_DepartmentStore_1F_EventScript_LayoutSign::
 	msgbox CeladonCity_DepartmentStore_1F_Text_FloorDescriptions, MSGBOX_SIGN
 	end
 
-CeladonCity_DepartmentStore_1F_EventScript_FloorSign:: @ 816BAEB
+CeladonCity_DepartmentStore_1F_EventScript_FloorSign::
 	msgbox CeladonCity_DepartmentStore_1F_Text_ServiceCounter, MSGBOX_SIGN
 	end

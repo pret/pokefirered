@@ -1,23 +1,23 @@
 .equ LOCALID_SELPHY, 8
 
-FiveIsland_ResortGorgeous_MapScripts:: @ 81687E4
+FiveIsland_ResortGorgeous_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FiveIsland_ResortGorgeous_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FiveIsland_ResortGorgeous_OnFrame
 	.byte 0
 
-FiveIsland_ResortGorgeous_OnWarp:: @ 81687EF
+FiveIsland_ResortGorgeous_OnWarp::
 	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1, FiveIsland_ResortGorgeous_EventScript_TurnPlayerNorth
 	.2byte 0
 
-FiveIsland_ResortGorgeous_EventScript_TurnPlayerNorth:: @ 81687F9
+FiveIsland_ResortGorgeous_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-FiveIsland_ResortGorgeous_OnFrame:: @ 81687FE
+FiveIsland_ResortGorgeous_OnFrame::
 	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1, FiveIsland_ResortGorgeous_EventScript_SelphyReturnHomeScene
 	.2byte 0
 
-FiveIsland_ResortGorgeous_EventScript_SelphyReturnHomeScene:: @ 8168808
+FiveIsland_ResortGorgeous_EventScript_SelphyReturnHomeScene::
 	lockall
 	textcolor 1
 	msgbox FiveIsland_ResortGorgeous_Text_SelphyThanksYouMayGoNow
@@ -36,11 +36,11 @@ FiveIsland_ResortGorgeous_EventScript_SelphyReturnHomeScene:: @ 8168808
 	releaseall
 	end
 
-FiveIsland_ResortGorgeous_Movement_SelphyEnterHome:: @ 8168841
+FiveIsland_ResortGorgeous_Movement_SelphyEnterHome::
 	walk_up
 	set_invisible
 	step_end
 
-FiveIsland_ResortGorgeous_EventScript_SelphysHouseSign:: @ 8168844
+FiveIsland_ResortGorgeous_EventScript_SelphysHouseSign::
 	msgbox FiveIsland_ResortGorgeous_Text_SelphysHouse, MSGBOX_SIGN
 	end

@@ -1,7 +1,7 @@
-NavelRock_Harbor_MapScripts:: @ 8165420
+NavelRock_Harbor_MapScripts::
 	.byte 0
 
-NavelRock_Harbor_EventScript_Sailor:: @ 8165421
+NavelRock_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	message Text_WhereDoYouWantToSail

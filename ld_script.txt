@@ -44,7 +44,9 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        src/crt0.o(.text);
+        src/rom_header.o(.text);
+	src/rom_header_gf.o(.text*);
+	src/crt0.o(.text);
         src/main.o(.text);
         src/gpu_regs.o(.text);
         src/dma3_manager.o(.text);
@@ -135,7 +137,6 @@ SECTIONS {
         src/pokemon_storage_system_6.o(.text);
         src/pokemon_storage_system_7.o(.text);
         src/pokemon_storage_system_8.o(.text);
-        src/pokemon_storage_system_9.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
@@ -285,11 +286,6 @@ SECTIONS {
         src/menews_jisan.o(.text);
         src/seagallop.o(.text);
         src/pokemon_jump.o(.text);
-        src/pokemon_jump_2.o(.text);
-        src/pokemon_jump_3.o(.text);
-        src/pokemon_jump_4.o(.text);
-        src/pokemon_jump_5.o(.text);
-        src/pokemon_jump_6.o(.text);
         src/berry_crush.o(.text);
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
@@ -588,10 +584,6 @@ SECTIONS {
         src/menews_jisan.o(.rodata.str1.4);
         src/seagallop.o(.rodata);
         src/pokemon_jump.o(.rodata);
-        src/pokemon_jump_2.o(.rodata);
-        src/pokemon_jump_4.o(.rodata);
-        src/pokemon_jump_5.o(.rodata);
-        src/pokemon_jump_6.o(.rodata);
         src/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);

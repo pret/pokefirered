@@ -1,7 +1,7 @@
-CeladonCity_Condominiums_1F_MapScripts:: @ 816C320
+CeladonCity_Condominiums_1F_MapScripts::
 	.byte 0
 
-CeladonCity_Condominiums_1F_EventScript_TeaWoman:: @ 816C321
+CeladonCity_Condominiums_1F_EventScript_TeaWoman::
 	lock
 	faceplayer
 	goto_if_set FLAG_TALKED_TO_TEA_LADY_AFTER_HOF, CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea
@@ -16,48 +16,48 @@ CeladonCity_Condominiums_1F_EventScript_TeaWoman:: @ 816C321
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea:: @ 816C36A
+CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea::
 	msgbox CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy:: @ 816C374
+CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy::
 	famechecker FAMECHECKER_DAISY, 4
 	setflag FLAG_TALKED_TO_TEA_LADY_AFTER_HOF
 	msgbox CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_Meowth:: @ 816C38E
+CeladonCity_Condominiums_1F_EventScript_Meowth::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_MEOWTH, 0
+	playmoncry SPECIES_MEOWTH, CRY_MODE_NORMAL
 	msgbox CeladonCity_Condominiums_1F_Text_Meowth
 	waitmoncry
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_Clefairy:: @ 816C3A1
+CeladonCity_Condominiums_1F_EventScript_Clefairy::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_CLEFAIRY, 0
+	playmoncry SPECIES_CLEFAIRY, CRY_MODE_NORMAL
 	msgbox CeladonCity_Condominiums_1F_Text_Clefairy
 	waitmoncry
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_Nidoran:: @ 816C3B4
+CeladonCity_Condominiums_1F_EventScript_Nidoran::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_NIDORAN_F, 0
+	playmoncry SPECIES_NIDORAN_F, CRY_MODE_NORMAL
 	msgbox CeladonCity_Condominiums_1F_Text_Nidoran
 	waitmoncry
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_SuiteSign:: @ 816C3C7
+CeladonCity_Condominiums_1F_EventScript_SuiteSign::
 	msgbox CeladonCity_Condominiums_1F_Text_ManagersSuite, MSGBOX_SIGN
 	end

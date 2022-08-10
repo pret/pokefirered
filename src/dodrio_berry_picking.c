@@ -13,7 +13,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "constants/songs.h"
-#include "constants/fanfares.h"
+#include "constants/sound.h"
 #include "constants/items.h"
 
 struct DodrioStruct
@@ -332,8 +332,8 @@ static void sub_8150A84(u8 taskId)
         gUnknown_203F3E0->unk0C++;
         break;
     case 6:
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(sub_8152034);
         gUnknown_203F3E0->unk0C++;
         break;
@@ -834,7 +834,7 @@ static void sub_81514F0(void)
     switch (gUnknown_203F3E0->unk10)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gUnknown_203F3E0->unk10++;
         break;
     case 1:
@@ -871,7 +871,7 @@ static void sub_815159C(void)
     {
     case 0:
         sub_81549D4(9);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gUnknown_203F3E0->unk10++;
         break;
     case 1:
@@ -902,8 +902,8 @@ static void sub_815159C(void)
         gUnknown_203F3E0->unk10++;
         break;
     case 5:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gUnknown_203F3E0->unk10++;
         break;
     case 6:
@@ -1204,7 +1204,7 @@ static void sub_8151D98(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD);
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -1262,7 +1262,7 @@ static void sub_8151E94(void)
     }
     else if (gUnknown_203F3E0->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(FANFARE_10); // MUS_TOO_BAD
+        PlayFanfareByFanfareNum(FANFARE_TOO_BAD);
         gUnknown_203F3E0->unk154 = 2;
     }
 }
@@ -2341,7 +2341,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
     case 0:
         data[1] = AddWindow(&sUnknown_84755E0);
         sub_81538D0(data[1]);
-        CopyWindowToVram(data[1], COPYWIN_BOTH);
+        CopyWindowToVram(data[1], COPYWIN_FULL);
         data[0]++;
         break;
     case 1:
@@ -2379,14 +2379,14 @@ static void sub_81538D0(u8 windowId)
     TextWindow_SetStdFrame0_WithPal(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, 2, sUnknown_84755E8[0], 1, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_2, sUnknown_84755E8[0], 1, 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < 3; i++)
     {
         ConvertIntToDecimalStringN(strbuf, results[i], STR_CONV_MODE_LEFT_ALIGN, sUnknown_84755F8[i]);
-        numWidth = GetStringWidth(2, strbuf, -1);
-        AddTextPrinterParameterized(windowId, 2, sUnknown_84755E8[i + 1], 1, sUnknown_84755FC[i][0], TEXT_SPEED_FF, NULL);
+        numWidth = GetStringWidth(FONT_2, strbuf, -1);
+        AddTextPrinterParameterized(windowId, FONT_2, sUnknown_84755E8[i + 1], 1, sUnknown_84755FC[i][0], TEXT_SKIP_DRAW, NULL);
         x = 224 - numWidth;
-        AddTextPrinterParameterized(windowId, 2, strbuf, x, sUnknown_8475602[i][0], TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_2, strbuf, x, sUnknown_8475602[i][0], TEXT_SKIP_DRAW, NULL);
     }
     PutWindowTilemap(windowId);
 }

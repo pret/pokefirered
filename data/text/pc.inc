@@ -1,17 +1,17 @@
-Text_BootedUpPC:: @ 81A5075
+Text_BootedUpPC::
 	.string "{PLAYER} booted up the PC.$"
 
-Text_AccessWhichPC:: @ 81A508A
+Text_AccessWhichPC::
 	.string "Which PC should be accessed?$"
 
-Text_AccessedSomeonesPC:: @ 81A50A7
+Text_AccessedSomeonesPC::
 	.string "Accessed Someone's PC.$"
 
-Text_OpenedPkmnStorage:: @ 81A50BE
+Text_OpenedPkmnStorage::
 	.string "POKéMON Storage System opened.$"
 
-Text_AccessedPlayersPC:: @ 81A50DD
+Text_AccessedPlayersPC::
 	.string "Accessed {PLAYER}'s PC.$"
 
-Text_AccessedBillsPC:: @ 81A50EF
+Text_AccessedBillsPC::
 	.string "Accessed BILL's PC.$"

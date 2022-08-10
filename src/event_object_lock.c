@@ -42,7 +42,7 @@ void ScriptFreezeObjectEvents(void)
 
 void Task_WaitPlayerAndTargetNPCStopMoving(u8 taskId)
 {
-    struct Task * task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     if (task->data[0] == 0 && walkrun_is_standing_still() == TRUE)
     {

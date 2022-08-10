@@ -1,2 +1,2 @@
-RecordCorner_MapScripts:: @ 816047A
+RecordCorner_MapScripts::
 	.byte 0

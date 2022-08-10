@@ -20,10 +20,10 @@
 #define FLDEFF_JUMP_SMALL_SPLASH         16
 #define FLDEFF_LONG_GRASS                17
 #define FLDEFF_JUMP_LONG_GRASS           18
-#define FLDEFF_UNKNOWN_19                19
-#define FLDEFF_UNKNOWN_20                20
-#define FLDEFF_UNKNOWN_21                21
-#define FLDEFF_UNKNOWN_22                22
+#define FLDEFF_UNUSED_GRASS              19
+#define FLDEFF_UNUSED_GRASS_2            20
+#define FLDEFF_UNUSED_SAND               21
+#define FLDEFF_UNUSED_WATER_SURFACING    22
 #define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 23
 #define FLDEFF_DEEP_SAND_FOOTPRINTS      24
 #define FLDEFF_POKECENTER_HEAL           25
@@ -32,7 +32,7 @@
 #define FLDEFF_TREE_DISGUISE             28
 #define FLDEFF_MOUNTAIN_DISGUISE         29
 #define FLDEFF_NPCFLY_OUT                30
-#define FLDEFF_USE_FLY                   31
+#define FLDEFF_FLY_OUT                   31
 #define FLDEFF_FLY_IN                    32
 #define FLDEFF_QUESTION_MARK_ICON        33
 #define FLDEFF_FEET_IN_FLOWING_WATER     34
@@ -70,7 +70,7 @@
 #define FLDEFF_DOUBLE_EXCL_MARK_ICON     66
 #define FLDEFF_MOVE_DEOXYS_ROCK          67
 #define FLDEFF_DESTROY_DEOXYS_ROCK       68
-#define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos
+#define FLDEFF_PHOTO_FLASH               69
 
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005

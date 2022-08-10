@@ -1,7 +1,7 @@
-Route1_MapScripts:: @ 8167EFD
+Route1_MapScripts::
 	.byte 0
 
-Route1_EventScript_MartClerk:: @ 8167EFE
+Route1_EventScript_MartClerk::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_POTION_ON_ROUTE_1, Route1_EventScript_AlreadyGotPotion
@@ -22,15 +22,15 @@ Route1_EventScript_MartClerk:: @ 8167EFE
 	release
 	end
 
-Route1_EventScript_AlreadyGotPotion:: @ 8167F48
+Route1_EventScript_AlreadyGotPotion::
 	msgbox Route1_Text_ComeSeeUsIfYouNeedPokeBalls
 	release
 	end
 
-Route1_EventScript_Boy:: @ 8167F52
+Route1_EventScript_Boy::
 	msgbox Route1_Text_CanJumpFromLedges, MSGBOX_NPC
 	end
 
-Route1_EventScript_RouteSign:: @ 8167F5B
+Route1_EventScript_RouteSign::
 	msgbox Route1_Text_RouteSign, MSGBOX_SIGN
 	end

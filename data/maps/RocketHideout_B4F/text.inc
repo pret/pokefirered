@@ -1,4 +1,4 @@
-RocketHideout_B4F_Text_GiovanniIntro:: @ 8175226
+RocketHideout_B4F_Text_GiovanniIntro::
     .string "So! I must say, I am impressed you\n"
     .string "got here.\p"
     .string "TEAM ROCKET captures POKéMON from\n"
@@ -9,11 +9,11 @@ RocketHideout_B4F_Text_GiovanniIntro:: @ 8175226
     .string "For your insolence, you will feel a\n"
     .string "world of pain!$"
 
-RocketHideout_B4F_Text_GiovanniDefeat:: @ 8175318
+RocketHideout_B4F_Text_GiovanniDefeat::
     .string "WHAT!\n"
     .string "This can't be!$"
 
-RocketHideout_B4F_Text_GiovanniPostBattle:: @ 817532D
+RocketHideout_B4F_Text_GiovanniPostBattle::
     .string "I see that you raise POKéMON with\n"
     .string "utmost care.\p"
     .string "A child like you would never\n"
@@ -21,36 +21,36 @@ RocketHideout_B4F_Text_GiovanniPostBattle:: @ 817532D
     .string "I shall step aside this time!\p"
     .string "I hope we meet again…$"
 
-RocketHideout_B4F_Text_Grunt2Intro:: @ 81753D0
+RocketHideout_B4F_Text_Grunt2Intro::
     .string "I know you!\n"
     .string "You ruined our plans at MT. MOON!$"
 
-RocketHideout_B4F_Text_Grunt2Defeat:: @ 81753FE
+RocketHideout_B4F_Text_Grunt2Defeat::
     .string "Burned again!$"
 
-RocketHideout_B4F_Text_Grunt2PostBattle:: @ 817540C
+RocketHideout_B4F_Text_Grunt2PostBattle::
     .string "Do you have something against TEAM\n"
     .string "ROCKET?$"
 
-RocketHideout_B4F_Text_Grunt3Intro:: @ 8175437
+RocketHideout_B4F_Text_Grunt3Intro::
     .string "How can you not see the beauty of\n"
     .string "our evil?$"
 
-RocketHideout_B4F_Text_Grunt3Defeat:: @ 8175463
+RocketHideout_B4F_Text_Grunt3Defeat::
     .string "Ayaya!$"
 
-RocketHideout_B4F_Text_Grunt3PostBattle:: @ 817546A
+RocketHideout_B4F_Text_Grunt3PostBattle::
     .string "BOSS!\n"
     .string "I'm sorry I failed you!$"
 
-RocketHideout_B4F_Text_Grunt1Intro:: @ 8175488
+RocketHideout_B4F_Text_Grunt1Intro::
     .string "The elevator doesn't work?\n"
     .string "Who has the LIFT KEY?$"
 
-RocketHideout_B4F_Text_Grunt1Defeat:: @ 81754B9
+RocketHideout_B4F_Text_Grunt1Defeat::
     .string "No!$"
 
-RocketHideout_B4F_Text_Grunt1PostBattle:: @ 81754BD
+RocketHideout_B4F_Text_Grunt1PostBattle::
     .string "Oh, no!\n"
     .string "I dropped the LIFT KEY!$"
 

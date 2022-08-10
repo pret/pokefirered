@@ -20,7 +20,7 @@ typedef struct {
 
 // Static RAM declarations
 
-const void * gUnknown_3005EF0;
+const void *gUnknown_3005EF0;
 int gUnknown_3005EF4;
 size_t gUnknown_3005EF8;
 struct MultiBootParam gUnknown_3005F00;

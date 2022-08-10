@@ -109,10 +109,17 @@
 	.byte \battler
 	.endm
 
-	.macro tryfaintmon battler:req, fromMove:req, ptr:req
+	.macro tryfaintmon battler:req
 	.byte 0x19
 	.byte \battler
-	.byte \fromMove
+	.byte FALSE
+	.4byte NULL
+	.endm
+
+	.macro tryfaintmon_spikes battler:req, ptr:req
+	.byte 0x19
+	.byte \battler
+	.byte TRUE
 	.4byte \ptr
 	.endm
 
@@ -183,7 +190,7 @@
 	.byte \battler
 	.endm
 
-	.macro atk24 ptr:req
+	.macro checkteamslost ptr:req
 	.byte 0x24
 	.4byte \ptr
 	.endm
@@ -373,18 +380,18 @@
 	.byte 0x44
 	.endm
 
-	.macro playanimation battler:req, param1:req, param2:req
+	.macro playanimation battler:req, animType:req, arg=NULL
 	.byte 0x45
 	.byte \battler
-	.byte \param1
-	.4byte \param2
+	.byte \animType
+	.4byte \arg
 	.endm
 
-	.macro playanimation2 battler:req, param1:req, param2:req
+	.macro playanimation_var battler:req, animType:req, arg=NULL
 	.byte 0x46
 	.byte \battler
-	.4byte \param1
-	.4byte \param2
+	.4byte \animType
+	.4byte \arg
 	.endm
 
 	.macro setgraphicalstatchangevalues
@@ -503,7 +510,7 @@
 	.byte \battler
 	.endm
 
-	.macro atk57
+	.macro endlinkbattle
 	.byte 0x57
 	.endm
 
@@ -539,7 +546,7 @@
 	.4byte \addr
 	.endm
 
-	.macro atk5E battler:req
+	.macro updatebattlermoves battler:req
 	.byte 0x5e
 	.byte \battler
 	.endm
@@ -662,7 +669,7 @@
 	.byte 0x77
 	.endm
 
-	.macro faintifabilitynotdamp
+	.macro tryexplosion
 	.byte 0x78
 	.endm
 
@@ -942,7 +949,7 @@
 	.byte 0xb5
 	.endm
 
-	.macro happinesstodamagecalculation
+	.macro friendshiptodamagecalculation
 	.byte 0xb6
 	.endm
 
@@ -1025,7 +1032,7 @@
 	.byte 0xc8
 	.endm
 
-	.macro jumpifattackandspecialattackcannotfall ptr:req
+	.macro trymemento ptr:req
 	.byte 0xc9
 	.4byte \ptr
 	.endm
@@ -1259,8 +1266,8 @@
 	various \battler, VARIOUS_GET_MOVE_TARGET
 	.endm
 
-	.macro various4 battler:req
-	various \battler, 4
+	.macro getbattlerfainted battler:req
+	various \battler, VARIOUS_GET_BATTLER_FAINTED
 	.endm
 
 	.macro resetintimidatetracebits battler:req
@@ -1271,8 +1278,8 @@
 	various \battler, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
 	.endm
 
-	.macro various7 battler:req
-	various \battler, 7
+	.macro resetplayerfainted
+	various BS_ATTACKER, VARIOUS_RESET_PLAYER_FAINTED
 	.endm
 
 	.macro various8 battler:req
@@ -1288,11 +1295,11 @@
 	.endm
 
 	.macro checkpokeflute battler:req
-	various \battler, 11
+	various \battler, VARIOUS_CHECK_POKEFLUTE
 	.endm
 
 	.macro waitfanfare battler:req
-	various \battler, 12
+	various \battler, VARIOUS_WAIT_FANFARE
 	.endm
 
 @ helpful macros
@@ -1301,15 +1308,15 @@
 	.endm
 
 	.macro setmoveeffect effect:req
-	setbyte cEFFECT_CHOOSER \effect
+	setbyte cEFFECT_CHOOSER, \effect
 	.endm
 
 	.macro chosenstatus1animation battler:req, status:req
-	chosenstatusanimation \battler 0x0 \status
+	chosenstatusanimation \battler, 0x0, \status
 	.endm
 
 	.macro chosenstatus2animation battler:req, status:req
-	chosenstatusanimation \battler 0x1 \status
+	chosenstatusanimation \battler, 0x1, \status
 	.endm
 
 	.macro sethword dst:req, value:req

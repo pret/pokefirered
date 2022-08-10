@@ -1,11 +1,11 @@
-Route2_House_MapScripts:: @ 816F5F8
+Route2_House_MapScripts::
 	.byte 0
 
-Route2_House_EventScript_Scientist:: @ 816F5F9
+Route2_House_EventScript_Scientist::
 	msgbox Route2_House_Text_FaintedMonsCanUseFieldMoves, MSGBOX_NPC
 	end
 
-Route2_House_EventScript_Reyley:: @ 816F602
+Route2_House_EventScript_Reyley::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_MR_MIME
@@ -26,18 +26,18 @@ Route2_House_EventScript_Reyley:: @ 816F602
 	release
 	end
 
-Route2_House_EventScript_DeclineTrade:: @ 816F65C
+Route2_House_EventScript_DeclineTrade::
 	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
-Route2_House_EventScript_NotRequestedMon:: @ 816F666
+Route2_House_EventScript_NotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
-Route2_House_EventScript_AlreadyTraded:: @ 816F674
+Route2_House_EventScript_AlreadyTraded::
 	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end

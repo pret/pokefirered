@@ -1,2 +1,2 @@
-NavelRock_1F_MapScripts:: @ 8164F9E
+NavelRock_1F_MapScripts::
 	.byte 0

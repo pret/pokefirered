@@ -116,7 +116,7 @@ struct GpuWindowParams
 struct SwitchMapMenuCursorSubsprite
 {
     u8 tiles[0x400];
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
     s16 x;
@@ -176,7 +176,7 @@ struct DungeonMapPreview
 struct MapEdge
 {
     u16 tiles[0x200];
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     s16 x;
     s16 y;
     u16 tileTag;
@@ -210,7 +210,7 @@ struct MapCursor
     u16 selectedMapsec;
     u16 selectedMapsecType;
     u16 selectedDungeonType;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
     u16 tiles[0x80];
@@ -220,7 +220,7 @@ struct PlayerIcon
 {
     s16 x;
     s16 y;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
     u16 tiles[0x40];
@@ -230,7 +230,7 @@ struct MapIconSprite
 {
     u32 unused;
     u8 region;
-    struct Sprite * sprite;
+    struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
 };
@@ -1416,7 +1416,7 @@ static void InitRegionMap(u8 type)
     }
     else
     {
-        gUnknown_2031DE0 = TRUE;
+        gExitStairsMovementDisabled = TRUE;
         sRegionMap->type = type;
         sRegionMap->mainState = 0;
         sRegionMap->openState = 0;
@@ -1435,7 +1435,7 @@ void InitRegionMapWithExitCB(u8 type, MainCallback cb)
     }
     else
     {
-        gUnknown_2031DE0 = TRUE;
+        gExitStairsMovementDisabled = TRUE;
         sRegionMap->type = type;
         sRegionMap->mainState = 0;
         sRegionMap->openState = 0;
@@ -1534,7 +1534,7 @@ static void CB2_OpenRegionMap(void)
             SetBg0andBg3Hidden(TRUE);
         break;
     default:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         CreateMainMapTask();
         SetRegionMapVBlankCB();
         break;
@@ -1730,7 +1730,7 @@ static void Task_RegionMap(u8 taskId)
         }
         break;
     case 5:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     _080C0798:
         sRegionMap->mainState++;
         break;
@@ -1886,7 +1886,7 @@ static void DisplayCurrentMapName(void)
     else
     {
         GetMapName(sRegionMap->mapName, GetMapsecUnderCursor(), 0);
-        AddTextPrinterParameterized3(WIN_MAP_NAME, 2, 2, 2, sTextColor_White, 0, sRegionMap->mapName);
+        AddTextPrinterParameterized3(WIN_MAP_NAME, FONT_2, 2, 2, sTextColor_White, 0, sRegionMap->mapName);
         PutWindowTilemap(WIN_MAP_NAME);
         CopyWindowToVram(WIN_MAP_NAME, COPYWIN_GFX);
         SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[WIN_MAP_NAME]);
@@ -1918,18 +1918,18 @@ static void DisplayCurrentDungeonName(void)
          sRegionMap->dungeonWinBottom = 48;
          FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
          StringCopy(sRegionMap->dungeonName, sMapNames[descOffset]);
-         AddTextPrinterParameterized3(WIN_DUNGEON_NAME, 2, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
+         AddTextPrinterParameterized3(WIN_DUNGEON_NAME, FONT_2, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
          PutWindowTilemap(WIN_DUNGEON_NAME);
-         CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_BOTH);
+         CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_FULL);
     }
 }
 
 static void ClearMapsecNameText(void)
 {
     FillWindowPixelBuffer(WIN_MAP_NAME, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_MAP_NAME, COPYWIN_BOTH);
+    CopyWindowToVram(WIN_MAP_NAME, COPYWIN_FULL);
     FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_BOTH);
+    CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_FULL);
 }
 
 static void BufferRegionMapBg(u8 bg, u16 *map)
@@ -2277,7 +2277,7 @@ static bool8 HandleSwitchMapInput(void)
     return FALSE;
 }
 
-static void SpriteCB_SwitchMapCursor(struct Sprite * sprite)
+static void SpriteCB_SwitchMapCursor(struct Sprite *sprite)
 {
     sprite->y = sSwitchMapMenu->highlight.top + 16;
 }
@@ -2492,7 +2492,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
         break;
     case 2:
         FillWindowPixelBuffer(WIN_MAP_PREVIEW, PIXEL_FILL(0));
-        CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_BOTH);
+        CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_FULL);
         PutWindowTilemap(WIN_MAP_PREVIEW);
         sDungeonMapPreview->drawState++;
         break;
@@ -2500,9 +2500,9 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
         // Draw text
         if (sDungeonMapPreview->timer > 25)
         {
-            AddTextPrinterParameterized3(WIN_MAP_PREVIEW, 2, 4, 0, sTextColor_Green, -1, GetDungeonName(GetDungeonMapsecUnderCursor()));
-            AddTextPrinterParameterized3(WIN_MAP_PREVIEW, 2, 2, 14, sTextColor_White, -1, GetDungeonFlavorText(GetDungeonMapsecUnderCursor()));
-            CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_BOTH);
+            AddTextPrinterParameterized3(WIN_MAP_PREVIEW, FONT_2, 4, 0, sTextColor_Green, -1, GetDungeonName(GetDungeonMapsecUnderCursor()));
+            AddTextPrinterParameterized3(WIN_MAP_PREVIEW, FONT_2, 2, 14, sTextColor_White, -1, GetDungeonFlavorText(GetDungeonMapsecUnderCursor()));
+            CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_FULL);
             sDungeonMapPreview->drawState++;
         }
         // Tint image
@@ -2521,7 +2521,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
         if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
         {
             FillWindowPixelBuffer(WIN_MAP_PREVIEW, PIXEL_FILL(0));
-            CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_BOTH);
+            CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_FULL);
             sDungeonMapPreview->mainState++;
             sDungeonMapPreview->drawState++;
         }
@@ -2619,7 +2619,7 @@ static bool8 UpdateDungeonMapPreview(bool8 a0)
     return FALSE;
 }
 
-static void SpriteCB_MapEdge(struct Sprite * sprite)
+static void SpriteCB_MapEdge(struct Sprite *sprite)
 {
 
 }
@@ -2810,8 +2810,8 @@ static void Task_MapOpenAnim(u8 taskId)
         break;
     case 3:
         CopyBgTilemapBufferToVram(1);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetRegionMapVBlankCB();
         sMapOpenCloseAnim->openState++;
         break;
@@ -3001,8 +3001,8 @@ static void Task_MapCloseAnim(u8 taskId)
     {
     case 0:
         ClearOrDrawTopBar(TRUE);
-        CopyWindowToVram(WIN_TOPBAR_LEFT, COPYWIN_BOTH);
-        CopyWindowToVram(WIN_TOPBAR_RIGHT, COPYWIN_BOTH);
+        CopyWindowToVram(WIN_TOPBAR_LEFT, COPYWIN_FULL);
+        CopyWindowToVram(WIN_TOPBAR_RIGHT, COPYWIN_FULL);
         sMapOpenCloseAnim->closeState++;
         break;
     case 1:
@@ -3112,7 +3112,7 @@ static bool8 MoveMapEdgesInward(void)
     return FALSE;
 }
 
-static void SpriteCB_MapCursor(struct Sprite * sprite)
+static void SpriteCB_MapCursor(struct Sprite *sprite)
 {
     if (sMapCursor->moveCounter != 0)
     {
@@ -3908,8 +3908,8 @@ static void LoadMapIcons(u8 taskId)
         sMapIcons->state++;
         break;
     case 3:
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         sMapIcons->state++;
         break;
     case 4:
@@ -4283,7 +4283,7 @@ static void PrintTopBarTextLeft(const u8 *str)
         FillWindowPixelBuffer(WIN_TOPBAR_LEFT, PIXEL_FILL(0));
     else
         FillWindowPixelBuffer(WIN_TOPBAR_LEFT, PIXEL_FILL(15));
-    AddTextPrinterParameterized3(WIN_TOPBAR_LEFT, 0, 0, 0, sTextColors, 0, str);
+    AddTextPrinterParameterized3(WIN_TOPBAR_LEFT, FONT_0, 0, 0, sTextColors, 0, str);
     CopyWindowToVram(WIN_TOPBAR_LEFT, COPYWIN_GFX);
 }
 
@@ -4293,8 +4293,8 @@ static void PrintTopBarTextRight(const u8 *str)
         FillWindowPixelBuffer(WIN_TOPBAR_RIGHT, PIXEL_FILL(0));
     else
         FillWindowPixelBuffer(WIN_TOPBAR_RIGHT, PIXEL_FILL(15));
-    AddTextPrinterParameterized3(WIN_TOPBAR_RIGHT, 0, 0, 0, sTextColors, 0, str);
-    CopyWindowToVram(WIN_TOPBAR_RIGHT, COPYWIN_BOTH);
+    AddTextPrinterParameterized3(WIN_TOPBAR_RIGHT, FONT_0, 0, 0, sTextColors, 0, str);
+    CopyWindowToVram(WIN_TOPBAR_RIGHT, COPYWIN_FULL);
 }
 
 static void ClearOrDrawTopBar(bool8 clear)
@@ -4322,7 +4322,7 @@ static void Task_FlyMap(u8 taskId)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         InitMapIcons(GetSelectedRegionMap(), taskId, GetMainMapTask());
         CreateMapCursor(0, 0);
         CreatePlayerIcon(1, 1);
@@ -4422,7 +4422,7 @@ static void Task_FlyMap(u8 taskId)
         sFlyMap->state++;
         break;
     case 6:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sFlyMap->state++;
         break;
     default:

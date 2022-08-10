@@ -14,6 +14,7 @@
 #include "util.h"
 #include "trig.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 
 struct IntroSequenceData;
 
@@ -26,12 +27,12 @@ struct IntroSequenceData
     u8 taskId;
     bool8 gengarAttackLanded;
     u16 data[6];
-    struct Sprite * gameFreakLogoArtSprite;
-    struct Sprite * nidorinoAnimSprite;
-    struct Sprite * gengarStaticSprite;
-    struct Sprite * nidorinoStaticSprite;
-    struct Sprite * grassSprite;
-    struct Sprite * gengarBackSpriteArray[4];
+    struct Sprite *gameFreakLogoArtSprite;
+    struct Sprite *nidorinoAnimSprite;
+    struct Sprite *gengarStaticSprite;
+    struct Sprite *nidorinoStaticSprite;
+    struct Sprite *grassSprite;
+    struct Sprite *gengarBackSpriteArray[4];
     u8 filler_0038[0x4];
     u8 gamefreakLogoArtSpriteTiles[0x400];
     u8 gamefreakTextBitmap[0x400];
@@ -84,7 +85,7 @@ static void IntroCB_FightScene3(struct IntroSequenceData * ptr);
 static void FightScene3_StartBg1Scroll(void);
 static void Task_FightScene3_ForestBgScroll(u8 taskId);
 static void CreateGrassSprite(struct IntroSequenceData * ptr);
-static void SpriteCB_Grass(struct Sprite * sprite);
+static void SpriteCB_Grass(struct Sprite *sprite);
 static void IntroCB_FightScene4(struct IntroSequenceData * ptr);
 static void CreateGengarBackSprite(struct IntroSequenceData * ptr);
 static void FightScene4_StartNidorinoAffineAnim(struct IntroSequenceData * ptr);
@@ -95,31 +96,31 @@ static void GameFreakScene_StartTrailingSparkleSpawner(void);
 static void Task_GameFreakScene_TrailingSparkleSpawner(u8 taskId);
 static void GameFreakScene_StartRevealGameFreakTextSparklesSpawner(void);
 static void Task_RevealGameFreakTextSparklesSpawner(u8 taskId);
-static struct Sprite * CreateGameFreakLogoArtSprite(void);
+static struct Sprite *CreateGameFreakLogoArtSprite(void);
 static void FightScene4_StartGengarAttack(struct IntroSequenceData * ptr);
 static void Task_FightScene4_GengarAttack(u8 taskId);
 static void FightScene4_CreateGengarSwipeSprites(void);
-static void SpriteCB_GengarSwipe(struct Sprite * sprite);
+static void SpriteCB_GengarSwipe(struct Sprite *sprite);
 static void Task_FightScene3_Bg0Scroll(u8 taskId);
-static void SpriteCB_LargeStar(struct Sprite * sprite);
-static void SpriteCB_TrailingSparkles(struct Sprite * sprite);
-static void SpriteCB_TrailingSparkles2(struct Sprite * sprite);
-static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite * sprite);
+static void SpriteCB_LargeStar(struct Sprite *sprite);
+static void SpriteCB_TrailingSparkles(struct Sprite *sprite);
+static void SpriteCB_TrailingSparkles2(struct Sprite *sprite);
+static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite *sprite);
 static void CreateNidorinoAnimSprite(struct IntroSequenceData * ptr);
-static void StartNidorinoAnimSpriteSlideIn(struct Sprite * sprite, s16 x0, s16 x1, u16 speed);
-static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite * sprite);
+static void StartNidorinoAnimSpriteSlideIn(struct Sprite *sprite, s16 x0, s16 x1, u16 speed);
+static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite *sprite);
 static bool32 IsNidorinoAnimSpriteSlideInRunning(struct IntroSequenceData * ptr);
 static void FightScene4_NidorinoRearsUp(struct IntroSequenceData * ptr);
-static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite);
+static void SpriteCB_NidorinoRearsUp(struct Sprite *sprite);
 static void FightScene4_StartNidorinoRecoilAnim(struct IntroSequenceData * ptr);
-static void SpriteCB_NidorinoRecoil(struct Sprite * sprite);
+static void SpriteCB_NidorinoRecoil(struct Sprite *sprite);
 static bool8 FightScene4_NidorinoAnimIsRunning(struct IntroSequenceData * ptr);
 static void CreateNidorinoRecoilDustSprites(s16 a1, s16 a2, s16 a3);
-static void SpriteCB_NidorinoRecoilDust(struct Sprite * sprite);
-static void StartSpriteHopToPosAnim(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
-static void SpriteCB_HopToPos(struct Sprite * sprite);
+static void SpriteCB_NidorinoRecoilDust(struct Sprite *sprite);
+static void StartSpriteHopToPosAnim(struct Sprite *sprite, u16 a1, s16 a2, u8 a3);
+static void SpriteCB_HopToPos(struct Sprite *sprite);
 static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * ptr);
-static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite);
+static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite *sprite);
 static void LoadFightSceneSpriteTilesAndPals(void);
 #if REVISION >= 1
 static void Rev1_GameFreakScene_CreatePresentsText(void);
@@ -811,7 +812,7 @@ static bool8 RunCopyrightScreen(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xFFFF);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Copyright);
@@ -828,7 +829,7 @@ static bool8 RunCopyrightScreen(void)
         GameCubeMultiBoot_Main(&sGcmb);
         if (sGcmb.gcmb_field_2 != 1)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gMain.state++;
         }
         break;
@@ -871,7 +872,7 @@ void c2_copyright_1(void)
     {
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
-        Save_LoadGameData(SAVE_NORMAL);
+        LoadGameSave(SAVE_NORMAL);
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
             Sav2_ClearSetDefault();
         SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
@@ -916,7 +917,7 @@ static void CB2_SetUpIntro(void)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             StartIntroSequence();
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             SetMainCallback2(CB2_Intro);
             SetVBlankCallback(VBlankCB_Intro);
         }
@@ -991,7 +992,7 @@ static void IntroCB_Init(struct IntroSequenceData * this)
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, COPYWIN_BOTH);
+        CopyWindowToVram(0, COPYWIN_FULL);
         this->state++;
         break;
     case 1:
@@ -1016,7 +1017,7 @@ static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * this)
         break;
     case 1:
         ShowBg(3);
-        BlendPalettes(0xFFFFFFFF, 0x00, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x00, RGB_BLACK);
         this->state++;
         break;
     case 2:
@@ -1523,7 +1524,7 @@ static void CreateGrassSprite(struct IntroSequenceData * this)
         this->grassSprite = NULL;
 }
 
-static void SpriteCB_Grass(struct Sprite * sprite)
+static void SpriteCB_Grass(struct Sprite *sprite)
 {
     s16 * data = sprite->data;
 
@@ -1694,7 +1695,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
     }
 }
 
-static void FightScene_CalcCenterToCornerVec(struct Sprite * sprite)
+static void FightScene_CalcCenterToCornerVec(struct Sprite *sprite)
 {
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
@@ -1729,7 +1730,7 @@ static void FightScene4_StartNidorinoAffineAnim(struct IntroSequenceData * this)
     StartSpriteAffineAnim(this->nidorinoAnimSprite, 1);
 }
 
-static void SpriteCB_DummyButNotDummy(struct Sprite * sprite)
+static void SpriteCB_DummyButNotDummy(struct Sprite *sprite)
 {
 }
 
@@ -1888,7 +1889,7 @@ static void Task_RevealGameFreakTextSparklesSpawner(u8 taskId)
         data[0] = 0;
 }
 
-static struct Sprite * CreateGameFreakLogoArtSprite(void)
+static struct Sprite *CreateGameFreakLogoArtSprite(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_GameFreakLogoArt, 120, 70, 4);
     return &gSprites[spriteId];
@@ -2008,7 +2009,7 @@ static void FightScene4_CreateGengarSwipeSprites(void)
     }
 }
 
-static void SpriteCB_GengarSwipe(struct Sprite * sprite)
+static void SpriteCB_GengarSwipe(struct Sprite *sprite)
 {
     sprite->invisible ^= TRUE;
     if (sprite->animEnded)
@@ -2042,7 +2043,7 @@ static void Task_FightScene3_Bg0Scroll(u8 taskId)
     }
 }
 
-static void SpriteCB_LargeStar(struct Sprite * sprite)
+static void SpriteCB_LargeStar(struct Sprite *sprite)
 {
     unsigned v;
     sprite->data[0] -= sprite->data[2];
@@ -2064,7 +2065,7 @@ static void SpriteCB_LargeStar(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-static void SpriteCB_TrailingSparkles(struct Sprite * sprite)
+static void SpriteCB_TrailingSparkles(struct Sprite *sprite)
 {
     u32 v;
 
@@ -2087,7 +2088,7 @@ static void SpriteCB_TrailingSparkles(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-static void SpriteCB_TrailingSparkles2(struct Sprite * sprite)
+static void SpriteCB_TrailingSparkles2(struct Sprite *sprite)
 {
     if (sprite->data[2])
     {
@@ -2136,7 +2137,7 @@ static void SpriteCB_TrailingSparkles2(struct Sprite * sprite)
     }
 }
 
-static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite * sprite)
+static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -2148,7 +2149,7 @@ static void CreateNidorinoAnimSprite(struct IntroSequenceData * this)
     this->nidorinoAnimSprite = &gSprites[spriteId];
 }
 
-static void StartNidorinoAnimSpriteSlideIn(struct Sprite * sprite, s16 x0, s16 x1, u16 speed)
+static void StartNidorinoAnimSpriteSlideIn(struct Sprite *sprite, s16 x0, s16 x1, u16 speed)
 {
     sprite->data[0] = x0 << 4;
     sprite->data[1] = ((x1 - x0) << 4) / speed;
@@ -2160,7 +2161,7 @@ static void StartNidorinoAnimSpriteSlideIn(struct Sprite * sprite, s16 x0, s16 x
     sprite->callback = SpriteCB_NidorinoAnimSpriteSlideIn;
 }
 
-static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite * sprite)
+static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite *sprite)
 {
     sprite->data[4]++;
     if (sprite->data[4] >= 40)
@@ -2191,7 +2192,7 @@ static void FightScene4_NidorinoRearsUp(struct IntroSequenceData * ptr)
     ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoRearsUp;
 }
 
-static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite)
+static void SpriteCB_NidorinoRearsUp(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -2205,7 +2206,7 @@ static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite)
         }
         break;
     case 1:
-        PlayCry3(SPECIES_NIDORINO, 0x3F, 1);
+        PlayCry_ByMode(SPECIES_NIDORINO, 0x3F, CRY_MODE_DOUBLES);
         sprite->data[1] = 0;
         sprite->data[0]++;
         break;
@@ -2243,7 +2244,7 @@ static void FightScene4_StartNidorinoRecoilAnim(struct IntroSequenceData * ptr)
     ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoRecoil;
 }
 
-static void SpriteCB_NidorinoRecoil(struct Sprite * sprite)
+static void SpriteCB_NidorinoRecoil(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -2325,7 +2326,7 @@ static void CreateNidorinoRecoilDustSprites(s16 x, s16 y, s16 seed)
     }
 }
 
-static void SpriteCB_NidorinoRecoilDust(struct Sprite * sprite)
+static void SpriteCB_NidorinoRecoilDust(struct Sprite *sprite)
 {
     s16 * data = sprite->data;
 
@@ -2353,7 +2354,7 @@ static void SpriteCB_NidorinoRecoilDust(struct Sprite * sprite)
     }
 }
 
-static void StartSpriteHopToPosAnim(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
+static void StartSpriteHopToPosAnim(struct Sprite *sprite, u16 a1, s16 a2, u8 a3)
 {
     sprite->data[0] = 0;
     sprite->data[1] = a1;
@@ -2367,7 +2368,7 @@ static void StartSpriteHopToPosAnim(struct Sprite * sprite, u16 a1, s16 a2, u8 a
     sprite->callback = SpriteCB_HopToPos;
 }
 
-static void SpriteCB_HopToPos(struct Sprite * sprite)
+static void SpriteCB_HopToPos(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -2433,7 +2434,7 @@ static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * 
     ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoAnim_LaunchSelfAtGengar;
 }
 
-static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite)
+static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

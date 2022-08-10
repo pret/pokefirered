@@ -1,23 +1,23 @@
-OneIsland_KindleRoad_EmberSpa_MapScripts:: @ 816535B
+OneIsland_KindleRoad_EmberSpa_MapScripts::
 	.byte 0
 
-OneIsland_KindleRoad_EmberSpa_EventScript_OldMan:: @ 816535C
+OneIsland_KindleRoad_EmberSpa_EventScript_OldMan::
 	msgbox OneIsland_KindleRoad_EmberSpa_Text_WaterWarmsMeToCore, MSGBOX_NPC
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan1:: @ 8165365
+OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan1::
 	msgbox OneIsland_KindleRoad_EmberSpa_Text_EnjoyBowlOfChowder, MSGBOX_NPC
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2:: @ 816536E
+OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2::
 	msgbox OneIsland_KindleRoad_EmberSpa_Text_HotSpringIsTherapeutic, MSGBOX_NPC
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_OldWoman:: @ 8165377
+OneIsland_KindleRoad_EmberSpa_EventScript_OldWoman::
 	msgbox OneIsland_KindleRoad_EmberSpa_Text_SeeHowSmoothMySkinIs, MSGBOX_NPC
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_BlackBelt:: @ 8165380
+OneIsland_KindleRoad_EmberSpa_EventScript_BlackBelt::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 3
@@ -25,7 +25,7 @@ OneIsland_KindleRoad_EmberSpa_EventScript_BlackBelt:: @ 8165380
 	release
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan:: @ 8165399
+OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_HM06, OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06
@@ -36,12 +36,12 @@ OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan:: @ 8165399
 	release
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06:: @ 81653C5
+OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06::
 	msgbox OneIsland_KindleRoad_EmberSpa_Text_ExplainHM06
 	release
 	end
 
-OneIsland_KindleRoad_EmberSpa_EventScript_SpaHeal:: @ 81653CF
+OneIsland_KindleRoad_EmberSpa_EventScript_SpaHeal::
 	lockall
 	fadescreen FADE_TO_WHITE
 	special HealPlayerParty

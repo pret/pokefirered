@@ -29,9 +29,10 @@ struct BagPocket
     u8 capacity;
 };
 
+extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
 
-void GetBerryCountString(u8* dst, const u8* berryName, u32 quantity);
+void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity);
 void CopyItemName(u16 itemId, u8 *string);
 void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity);
 bool8 IsBagPocketNonEmpty(u8 pocket);

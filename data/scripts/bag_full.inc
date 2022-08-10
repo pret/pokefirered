@@ -1,21 +1,21 @@
-EventScript_BagIsFull:: @ 81A6BF9
+EventScript_BagIsFull::
 	textcolor 3
 	msgbox Text_TooBadBagFull
 	release
 	end
 
 @ Unused
-EventScript_BagIsFullRet:: @ 81A6C05
+EventScript_BagIsFullRet::
 	msgbox Text_TooBadBagFull
 	return
 
 @ Unused
-EventScript_NoRoomForAnotherDecor:: @ 81A6C0E
+EventScript_NoRoomForAnotherDecor::
 	msgbox Text_NoRoomForAnotherDecor
 	release
 	end
 
 @ Unused
-EventScript_NoRoomForAnotherDecorRet:: @ 81A6C18
+EventScript_NoRoomForAnotherDecorRet::
 	msgbox Text_NoRoomForAnotherDecor
 	return

@@ -170,7 +170,7 @@ s32 FadeToWonderCardMenu(void)
     switch(sMEventScreenData->state)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -214,7 +214,7 @@ s32 FadeToWonderCardMenu(void)
             ShowBg(2);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sub_8146060();
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
@@ -234,7 +234,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
     switch (sMEventScreenData->state)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -264,7 +264,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
             break;
         case 6:
             CopyBgTilemapBufferToVram(0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             break;
         default:
             if (UpdatePaletteFade())
@@ -355,48 +355,48 @@ static void sub_8145D18(u8 whichWindow)
         case 0:
         {
             s32 x;
-            AddTextPrinterParameterized3(windowId, 3, 0, 1, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->title);
-            x = 160 - GetStringWidth(3, sMEventScreenData->subtitle, GetFontAttribute(3, 2));
+            AddTextPrinterParameterized3(windowId, FONT_3, 0, 1, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->title);
+            x = 160 - GetStringWidth(FONT_3, sMEventScreenData->subtitle, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING));
             if (x < 0)
                 x = 0;
-            AddTextPrinterParameterized3(windowId, 3, x, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->subtitle);
+            AddTextPrinterParameterized3(windowId, FONT_3, x, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->subtitle);
             if (sMEventScreenData->wonderCard.idNumber != 0)
             {
-                AddTextPrinterParameterized3(windowId, 2, 166, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->unk_01DD);
+                AddTextPrinterParameterized3(windowId, FONT_2, 166, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->unk_01DD);
             }
             break;
         }
         case 1:
             for (; sp0C < 4; sp0C++)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, gUnknown_8467068[sMEventScreenData->bgSpec->textPal2], 0, sMEventScreenData->mainMessageLines[sp0C]);
+                AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 * sp0C + 2, gUnknown_8467068[sMEventScreenData->bgSpec->textPal2], 0, sMEventScreenData->mainMessageLines[sp0C]);
             }
             break;
         case 2:
-            AddTextPrinterParameterized3(windowId, 3, 0, sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine1);
+            AddTextPrinterParameterized3(windowId, FONT_3, 0, sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine1);
             if (sMEventScreenData->wonderCard.type != 2)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 + sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine2);
+                AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 + sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine2);
             }
             else
             {
                 s32 x = 0;
                 s32 y = sTextYCoords[sMEventScreenData->wonderCard.type] + 16;
-                s32 spacing = GetFontAttribute(3, 2);
+                s32 spacing = GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING);
                 for (; sp0C < sMEventScreenData->recordIdx; sp0C++)
                 {
-                    AddTextPrinterParameterized3(windowId, 3, x, y, gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->recordStrings[sp0C].nameTxt);
+                    AddTextPrinterParameterized3(windowId, FONT_3, x, y, gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->recordStrings[sp0C].nameTxt);
                     if (sMEventScreenData->recordStrings[sp0C].numberTxt[0] != EOS)
                     {
-                        x += GetStringWidth(3, sMEventScreenData->recordStrings[sp0C].nameTxt, spacing);
-                        AddTextPrinterParameterized3(windowId, 2, x, y, gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->recordStrings[sp0C].numberTxt);
-                        x += GetStringWidth(3, sMEventScreenData->recordStrings[sp0C].numberTxt, spacing) + sMEventScreenData->recordStrings[sp0C].nDigits;
+                        x += GetStringWidth(FONT_3, sMEventScreenData->recordStrings[sp0C].nameTxt, spacing);
+                        AddTextPrinterParameterized3(windowId, FONT_2, x, y, gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->recordStrings[sp0C].numberTxt);
+                        x += GetStringWidth(FONT_3, sMEventScreenData->recordStrings[sp0C].numberTxt, spacing) + sMEventScreenData->recordStrings[sp0C].nDigits;
                     }
                 }
             }
             break;
     }
-    CopyWindowToVram(windowId, COPYWIN_BOTH);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void sub_8146060(void)

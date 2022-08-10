@@ -11,7 +11,7 @@ extern EWRAM_DATA struct ItemSlot gUnknown_02039F80[3];
 void CreatePokemartMenu(const u16 *itemsForSale);
 void CreateDecorationShop1Menu(const u16 *);
 void CreateDecorationShop2Menu(const u16 *);
-u8 GetMartUnk16_4(void);
+u8 GetMartFontId(void);
 void RecordItemPurchase(u16 a0, u16 a1, u8 a2);
 
 // buy_menu_helper

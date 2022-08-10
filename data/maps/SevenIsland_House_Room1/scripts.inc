@@ -2,12 +2,12 @@
 
 .equ TRAINER_VISITING, VAR_TEMP_1
 
-SevenIsland_House_Room1_MapScripts:: @ 817088A
+SevenIsland_House_Room1_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_House_Room1_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room1_OnFrame
 	.byte 0
 
-SevenIsland_House_Room1_OnTransition:: @ 8170895
+SevenIsland_House_Room1_OnTransition::
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 0
 	call_if_eq SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout
@@ -15,25 +15,25 @@ SevenIsland_House_Room1_OnTransition:: @ 8170895
 	call_if_ne SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor
 	end
 
-SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout:: @ 81708AF
+SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout::
 	setvar TRAINER_VISITING, TRUE
 	setobjectxyperm LOCALID_OLD_WOMAN, 4, 2
 	setobjectmovementtype LOCALID_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN
 	setmaplayoutindex LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN
 	return
 
-SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor:: @ 81708C3
+SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor::
 	setobjectxyperm LOCALID_OLD_WOMAN, 3, 2
 	setobjectmovementtype LOCALID_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
-SevenIsland_House_Room1_OnFrame:: @ 81708CF
+SevenIsland_House_Room1_OnFrame::
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
 	.2byte 0
 
-SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle:: @ 1708E9
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle::
 	lockall
 	textcolor 1
 	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom
@@ -54,28 +54,28 @@ SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle:: @ 1708E9
 	releaseall
 	end
 
-SevenIsland_House_Room1_EventScript_BattleWonComment:: @ 8170938
+SevenIsland_House_Room1_EventScript_BattleWonComment::
 	msgbox SevenIsland_House_Room1_Text_AstoundingBattle
 	return
 
-SevenIsland_House_Room1_EventScript_BattleLostComment:: @ 8170941
+SevenIsland_House_Room1_EventScript_BattleLostComment::
 	msgbox SevenIsland_House_Room1_Text_FeelYourDisappointment
 	return
 
-SevenIsland_House_Room1_EventScript_BattleTiedComment:: @ 817094A
+SevenIsland_House_Room1_EventScript_BattleTiedComment::
 	msgbox SevenIsland_House_Room1_Text_DrawWasIt
 	return
 
-SevenIsland_House_Room1_Movement_PlayerReEnterRoom:: @ 8170953
+SevenIsland_House_Room1_Movement_PlayerReEnterRoom::
 	walk_down
 	step_end
 
-SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer:: @ 8170955
+SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer::
 	walk_right
 	walk_in_place_fastest_down
 	step_end
 
-SevenIsland_House_Room1_EventScript_OldWoman:: @ 8170958
+SevenIsland_House_Room1_EventScript_OldWoman::
 	lock
 	faceplayer
 	special ValidateEReaderTrainer
@@ -87,12 +87,12 @@ SevenIsland_House_Room1_EventScript_OldWoman:: @ 8170958
 	release
 	end
 
-SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer:: @ 817097D
+SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer::
 	msgbox SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles
 	release
 	end
 
-SevenIsland_House_Room1_EventScript_TrainerVisiting:: @ 8170987
+SevenIsland_House_Room1_EventScript_TrainerVisiting::
 	special SavePlayerParty
 	special BufferEReaderTrainerName
 	msgbox SevenIsland_House_Room1_Text_ChallengeVisitingTrainer, MSGBOX_YESNO
@@ -123,65 +123,65 @@ SevenIsland_House_Room1_EventScript_TrainerVisiting:: @ 8170987
 	release
 	end
 
-SevenIsland_House_Room1_EventScript_DeclineBattle:: @ 8170A11
+SevenIsland_House_Room1_EventScript_DeclineBattle::
 	special LoadPlayerParty
 	msgbox SevenIsland_House_Room1_Text_OhYouWontBattle
 	release
 	end
 
-SevenIsland_House_Room1_EventScript_ChooseParty:: @ 8170A1E
+SevenIsland_House_Room1_EventScript_ChooseParty::
 	msgbox SevenIsland_House_Room1_Text_LimitThreeMonsPerSide
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	return
 
-SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth:: @ 8170A2D
+SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth::
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
 	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth
 	waitmovement 0
 	return
 
-SevenIsland_House_Room1_EventScript_EnterBattleRoomEast:: @ 8170A3F
+SevenIsland_House_Room1_EventScript_EnterBattleRoomEast::
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight
 	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast
 	waitmovement 0
 	return
 
-SevenIsland_House_Room1_EventScript_EnterBattleRoomWest:: @ 8170A51
+SevenIsland_House_Room1_EventScript_EnterBattleRoomWest::
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
 	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest
 	waitmovement 0
 	return
 
-SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth:: @ 8170A63
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth::
 	delay_16
 	walk_up
 	walk_up
 	step_end
 
-SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast:: @ 8170A67
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast::
 	delay_16
 	walk_right
 	walk_up
 	step_end
 
-SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest:: @ 8170A6B
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest::
 	delay_16
 	walk_left
 	walk_up
 	step_end
 
-SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft:: @ 8170A6F
+SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft::
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight:: @ 8170A72
+SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight::
 	walk_right
 	walk_in_place_fastest_left
 	step_end
 
-SevenIsland_House_Room1_EventScript_Box:: @ 8170A75
+SevenIsland_House_Room1_EventScript_Box::
 	msgbox SevenIsland_House_Room1_Text_SlightBreezeAroundBox, MSGBOX_SIGN
 	end

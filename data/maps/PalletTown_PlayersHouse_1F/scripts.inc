@@ -1,9 +1,9 @@
 .equ LOCALID_MOM, 1
 
-PalletTown_PlayersHouse_1F_MapScripts:: @ 8168C08
+PalletTown_PlayersHouse_1F_MapScripts::
 	.byte 0
 
-PalletTown_PlayersHouse_1F_EventScript_Mom:: @ 8168C09
+PalletTown_PlayersHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
 	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
@@ -18,15 +18,15 @@ PalletTown_PlayersHouse_1F_EventScript_Mom:: @ 8168C09
 	release
 	end
 
-PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale:: @ 8168C38
+PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale::
 	msgbox PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou
 	return
 
-PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale:: @ 8168C41
+PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale::
 	msgbox PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou
 	return
 
-PalletTown_PlayersHouse_1F_EventScript_MomHeal:: @ 8168C4A
+PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
@@ -35,7 +35,7 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal:: @ 8168C4A
 	end
 
 @ Displays special text if interacted with from side or back (which are normally inaccessible)
-PalletTown_PlayersHouse_1F_EventScript_TV:: @ 8168C62
+PalletTown_PlayersHouse_1F_EventScript_TV::
 	lockall
 	compare VAR_FACING, DIR_NORTH
 	goto_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreen
@@ -43,7 +43,7 @@ PalletTown_PlayersHouse_1F_EventScript_TV:: @ 8168C62
 	releaseall
 	end
 
-PalletTown_PlayersHouse_1F_EventScript_TVScreen:: @ 8168C78
+PalletTown_PlayersHouse_1F_EventScript_TVScreen::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
@@ -52,10 +52,10 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreen:: @ 8168C78
 	releaseall
 	end
 
-PalletTown_PlayersHouse_1F_EventScript_TVScreenMale:: @ 8168C91
+PalletTown_PlayersHouse_1F_EventScript_TVScreenMale::
 	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad
 	return
 
-PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale:: @ 8168C9A
+PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
 	return

@@ -1,4 +1,4 @@
-EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
+EventScript_ItemfinderDigUpUnderfootItem::
 	lockall
 	textcolor 3
 	waitse

@@ -1,51 +1,51 @@
-SevenIsland_TanobyRuins_Text_BrandonIntro:: @ 818CFFB
+SevenIsland_TanobyRuins_Text_BrandonIntro::
     .string "Do you know anything about this\n"
     .string "stone chamber?$"
 
-SevenIsland_TanobyRuins_Text_BrandonDefeat:: @ 818D02A
+SevenIsland_TanobyRuins_Text_BrandonDefeat::
     .string "That was uncalled for.\n"
     .string "You didn't have to be so rough.$"
 
-SevenIsland_TanobyRuins_Text_BrandonPostBattle:: @ 818D061
+SevenIsland_TanobyRuins_Text_BrandonPostBattle::
     .string "The TANOBY RUINS date back at\n"
     .string "least 1,500 years.\p"
     .string "But it's a baffling mystery as to\n"
     .string "why it was built in the first place.$"
 
-SevenIsland_TanobyRuins_Text_BenjaminIntro:: @ 818D0D9
+SevenIsland_TanobyRuins_Text_BenjaminIntro::
     .string "A mystic POKéMON is said to sleep\n"
     .string "inside here.$"
 
-SevenIsland_TanobyRuins_Text_BenjaminDefeat:: @ 818D108
+SevenIsland_TanobyRuins_Text_BenjaminDefeat::
     .string "I'm not much good in battle.$"
 
-SevenIsland_TanobyRuins_Text_BenjaminPostBattle:: @ 818D125
+SevenIsland_TanobyRuins_Text_BenjaminPostBattle::
     .string "I hear there are other ruins like\n"
     .string "the one here.\p"
     .string "Might they be the resting places\n"
     .string "of other mystic POKéMON?$"
 
-SevenIsland_TanobyRuins_Text_EdnaIntro:: @ 818D18F
+SevenIsland_TanobyRuins_Text_EdnaIntro::
     .string "CLIFFORD is teaching me how to\n"
     .string "paint.$"
 
-SevenIsland_TanobyRuins_Text_EdnaDefeat:: @ 818D1B5
+SevenIsland_TanobyRuins_Text_EdnaDefeat::
     .string "We might get in trouble for being\n"
     .string "noisy here.$"
 
-SevenIsland_TanobyRuins_Text_EdnaPostBattle:: @ 818D1E3
+SevenIsland_TanobyRuins_Text_EdnaPostBattle::
     .string "I said that I wanted to paint an\n"
     .string "old building.\p"
     .string "So CLIFFORD brought me here.$"
 
-SevenIsland_TanobyRuins_Text_CliffordIntro:: @ 818D22F
+SevenIsland_TanobyRuins_Text_CliffordIntro::
     .string "Today, in addition to our lesson,\n"
     .string "we came to see the chamber.$"
 
-SevenIsland_TanobyRuins_Text_CliffordDefeat:: @ 818D26D
+SevenIsland_TanobyRuins_Text_CliffordDefeat::
     .string "My, how extraordinary.$"
 
-SevenIsland_TanobyRuins_Text_CliffordPostBattle:: @ 818D284
+SevenIsland_TanobyRuins_Text_CliffordPostBattle::
     .string "Ah, so you are studying POKéMON\n"
     .string "on your own…\p"
     .string "Yes, you certainly are quite the\n"

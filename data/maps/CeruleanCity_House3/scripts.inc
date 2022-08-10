@@ -1,11 +1,11 @@
-CeruleanCity_House3_MapScripts:: @ 816A9A7
+CeruleanCity_House3_MapScripts::
 	.byte 0
 
-CeruleanCity_House3_EventScript_OldWoman:: @ 816A9A8
+CeruleanCity_House3_EventScript_OldWoman::
 	msgbox CeruleanCity_House3_Text_PleaseTradeWithMyHusband, MSGBOX_NPC
 	end
 
-CeruleanCity_House3_EventScript_Dontae:: @ 816A9B1
+CeruleanCity_House3_EventScript_Dontae::
 	lock
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_JYNX
@@ -26,18 +26,18 @@ CeruleanCity_House3_EventScript_Dontae:: @ 816A9B1
 	release
 	end
 
-CeruleanCity_House3_EventScript_DeclineTrade:: @ 816AA0B
+CeruleanCity_House3_EventScript_DeclineTrade::
 	msgbox Trade_Text_WellIfYouDontWantTo
 	release
 	end
 
-CeruleanCity_House3_EventScript_NotRequestedMon:: @ 816AA15
+CeruleanCity_House3_EventScript_NotRequestedMon::
 	getspeciesname 0, VAR_0x8009
 	msgbox Trade_Text_ThisIsntMon
 	release
 	end
 
-CeruleanCity_House3_EventScript_AlreadyTraded:: @ 816AA23
+CeruleanCity_House3_EventScript_AlreadyTraded::
 	msgbox Trade_Text_HasTradedMonGrownStronger
 	release
 	end

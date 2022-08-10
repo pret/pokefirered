@@ -9,7 +9,7 @@ static void Task_MinigameCountdown(u8 taskId);
 static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId);
 static void StartStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
 static bool32 IsStartGraphicAnimRunning(u8 spriteId);
-static void SpriteCB_Start(struct Sprite * sprite);
+static void SpriteCB_Start(struct Sprite *sprite);
 static void Load321StartGfx(u16 tilesTag, u16 palTag);
 static u8 CreateNumberSprite(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority);
 static void CreateStartSprite(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 * spriteId2_p, s16 * spriteId3_p);
@@ -75,7 +75,7 @@ static void Task_MinigameCountdown(u8 taskId)
 
 static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
 {
-    struct Sprite * sprite = &gSprites[spriteId];
+    struct Sprite *sprite = &gSprites[spriteId];
 
     switch (sprite->data[0])
     {
@@ -160,7 +160,7 @@ static bool32 IsStartGraphicAnimRunning(u8 spriteId)
     return gSprites[spriteId].callback == SpriteCB_Start;
 }
 
-static void SpriteCB_Start(struct Sprite * sprite)
+static void SpriteCB_Start(struct Sprite *sprite)
 {
     s16 * data = sprite->data;
     s32 y;

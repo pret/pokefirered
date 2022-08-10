@@ -1,4 +1,4 @@
-EventScript_SetDefeatedEliteFourFlagsVars:: @ 81A651A
+EventScript_SetDefeatedEliteFourFlagsVars::
 	clearflag FLAG_HIDE_POSTGAME_GOSSIPERS
 	call EventScript_ResetEliteFour
 	special Script_UpdateTrainerFanClubGameClear
@@ -8,21 +8,21 @@ EventScript_SetDefeatedEliteFourFlagsVars:: @ 81A651A
 	call EventScript_ResetLegendaries
 	return
 
-EventScript_SetReadyTryGiveNationalDexScene:: @ 81A653B
+EventScript_SetReadyTryGiveNationalDexScene::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 2
 	return
 
-EventScript_ResetLegendaries:: @ 81A6541
+EventScript_ResetLegendaries::
 	clearflag FLAG_LUGIA_FLEW_AWAY
 	clearflag FLAG_HO_OH_FLEW_AWAY
 	clearflag FLAG_DEOXYS_FLEW_AWAY
 	return
 
-EventScript_ResetEliteFourEnd:: @ 81A654B
+EventScript_ResetEliteFourEnd::
 	call EventScript_ResetEliteFour
 	end
 
-EventScript_ResetEliteFour:: @ 81A6551
+EventScript_ResetEliteFour::
 	clearflag FLAG_DEFEATED_LORELEI
 	clearflag FLAG_DEFEATED_BRUNO
 	clearflag FLAG_DEFEATED_AGATHA

@@ -1,4 +1,4 @@
-EventScript_Questionnaire:: @ 81A7702
+EventScript_Questionnaire::
 	lockall
 	textcolor 3
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
@@ -18,7 +18,7 @@ EventScript_Questionnaire:: @ 81A7702
 	goto_if_eq EventScript_TookQuestionnaire
 	end
 
-EventScript_EnableMysteryGift:: @ 81A774D
+EventScript_EnableMysteryGift::
 	applymovement VAR_0x8008, Movement_FaceDown
 	waitmovement 0
 	playse SE_PIN
@@ -36,11 +36,11 @@ EventScript_EnableMysteryGift:: @ 81A774D
 	releaseall
 	end
 
-EventScript_DeclineQuestionnaire:: @ 81A778A
+EventScript_DeclineQuestionnaire::
 	releaseall
 	end
 
-EventScript_TookQuestionnaire:: @ 81A778C
+EventScript_TookQuestionnaire::
 	applymovement VAR_0x8008, Movement_FaceDown
 	waitmovement 0
 	msgbox Text_QuestionnaireThankYou

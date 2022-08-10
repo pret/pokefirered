@@ -49,8 +49,8 @@ void DestroyHelpMessageWindow(u8 a0)
 
 void sub_8112F18(u8 windowId)
 {
-    const u8* ptr = gUnknown_84566A8;
-    u8* buffer;
+    const u8 *ptr = gUnknown_84566A8;
+    u8 *buffer;
     u8 i, j;
     u8 width, height;
     u8 k;
@@ -93,7 +93,7 @@ static const u8 sHelpMessageTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMI
 
 static void PrintHelpMessageText(const u8 *text)
 {
-    AddTextPrinterParameterized4(sHelpMessageWindowId, 2, 2, 5, 1, 1, sHelpMessageTextColors, -1, text);
+    AddTextPrinterParameterized4(sHelpMessageWindowId, FONT_2, 2, 5, 1, 1, sHelpMessageTextColors, -1, text);
 }
 
 void PrintTextOnHelpMessageWindow(const u8 *text, u8 mode)

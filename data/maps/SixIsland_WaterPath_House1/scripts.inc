@@ -1,7 +1,7 @@
-SixIsland_WaterPath_House1_MapScripts:: @ 817206C
+SixIsland_WaterPath_House1_MapScripts::
 	.byte 0
 
-SixIsland_WaterPath_House1_EventScript_Beauty:: @ 817206D
+SixIsland_WaterPath_House1_EventScript_Beauty::
 	lock
 	faceplayer
 	goto_if_questlog EventScript_ReleaseEnd
@@ -29,33 +29,33 @@ SixIsland_WaterPath_House1_EventScript_Beauty:: @ 817206D
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty:: @ 81720E5
+SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty::
 	msgbox SixIsland_WaterPath_House1_Text_LoveItNeedItHeracross
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_DontShowMon:: @ 81720EF
+SixIsland_WaterPath_House1_EventScript_DontShowMon::
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_ShownNonHeracross:: @ 81720F1
+SixIsland_WaterPath_House1_EventScript_ShownNonHeracross::
 	msgbox SixIsland_WaterPath_House1_Text_ThisWontDo
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross:: @ 81720FB
+SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross::
 	goto_if_unset FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1, SixIsland_WaterPath_House1_EventScript_ShownBigHeracross
 	msgbox SixIsland_WaterPath_House1_Text_ItsXInchesYInchesWasBiggest
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross:: @ 817210E
+SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross::
 	goto_if_unset FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1, SixIsland_WaterPath_House1_EventScript_ShownBigHeracross
 	msgbox SixIsland_WaterPath_House1_Text_ItsXInchesSameAsBefore
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_ShownBigHeracross:: @ 8172121
+SixIsland_WaterPath_House1_EventScript_ShownBigHeracross::
 	setflag FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1
 	msgbox SixIsland_WaterPath_House1_Text_ItsXInchesDeserveReward
 	giveitem ITEM_NEST_BALL
@@ -65,19 +65,19 @@ SixIsland_WaterPath_House1_EventScript_ShownBigHeracross:: @ 8172121
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall:: @ 817214D
+SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall::
 	msgbox SixIsland_WaterPath_House1_Text_YourBagIsFull
 	release
 	end
 
-SixIsland_WaterPath_House1_EventScript_SizeRecord:: @ 8172157
+SixIsland_WaterPath_House1_EventScript_SizeRecord::
 	lockall
 	goto_if_set FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1, SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty
 	msgbox SixIsland_WaterPath_House1_Text_BlankChartOfSomeSort
 	releaseall
 	end
 
-SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty:: @ 817216B
+SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty::
 	special GetHeracrossSizeRecordInfo
 	msgbox SixIsland_WaterPath_House1_Text_BiggestHeracrossIsXInches
 	releaseall

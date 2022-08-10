@@ -1547,13 +1547,13 @@
 	.byte \color
 	.endm
 
-	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of the screen when the Main Menu is opened.
-	.macro loadhelp pointer:req
+	@ Displays the help menu with the given text.
+	.macro loadhelp msg:req
 	.byte 0xc8
-	.4byte \pointer
+	.4byte \msg
 	.endm
 
-	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of the screen when the Main Menu is opened.
+	@ Erases the help menu
 	.macro unloadhelp
 	.byte 0xc9
 	.endm
@@ -1568,10 +1568,11 @@
 	.byte 0xcb
 	.endm
 
-	@ Compares the value of a hidden variable to a dword.
-	.macro comparehiddenvar a:req, value:req
+	@ Reads the value of the specified game stat and compares it to the specified value.
+	@ Sets the script comparisonResult to 0 if stat < value, 1 if stat == value, and 2 if stat > value.
+	.macro comparestat statId:req, value:req
 	.byte 0xcc
-	.byte \a
+	.byte \statId
 	.4byte \value
 	.endm
 
@@ -1616,9 +1617,10 @@
 	.byte \location
 	.endm
 
-	.macro getbraillestringwidth pointer:req
+	@ Gets the width of the specified message in the Braille font and sets the result to VAR_0x8004.
+	.macro getbraillestringwidth msg:req
 	.byte 0xd3
-	.4byte \pointer
+	.4byte \msg
 	.endm
 
 	@ Writes the name of the specified item to the specified buffer. If 'item' is a Berry or ITEM_POKE_BALL
@@ -1796,17 +1798,15 @@
 	callstd STD_FIND_ITEM
 	.endm
 
+	@ Prints the message "{PLAYER} put the {ITEM} in the {POCKET}." The item name is pluralized, if applicable.
 	.macro putitemaway item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_PUT_ITEM_AWAY
 	.endm
 
-	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
-	additem \item, \amount
-	msgreceiveditem \msg, \item, \amount, \fanfare
-	.endm
-
+	@ Prints the provided message after playing the fanfare music (can only be MUS_LEVEL_UP or MUS_OBTAIN_KEY_ITEM).
+	@ It then prints the message shown by using putitemaway.
 	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
 	loadword 0, \msg
 	setorcopyvar VAR_0x8000, \item
@@ -1815,12 +1815,20 @@
 	callstd STD_RECEIVED_ITEM
 	.endm
 
+	@ Adds the specified item to the bag, then prints a message with fanfare. See description of msgreceiveditem.
+	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
+	additem \item, \amount
+	msgreceiveditem \msg, \item, \amount, \fanfare
+	.endm
+
+	@ Depends on the provided function. With the default argument, unlocks the specified entry in the Fame Checker.
 	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
 	setvar VAR_0x8004, \person
 	setvar VAR_0x8005, \index
 	special \function
 	.endm
 
+	@ Sets the 'defeated' flag for all trainers in the specified gym.
 	.macro set_gym_trainers gym:req
 	setvar VAR_0x8008, \gym
 	call EventScript_SetGymTrainers
@@ -1833,6 +1841,7 @@
 	goto_if_eq \dest
 	.endm
 
+	@ Prints a braille message, then waits for users input.
 	.macro braillemessage_wait text:req
 	setvar VAR_0x8006, 0
 	braillemessage \text

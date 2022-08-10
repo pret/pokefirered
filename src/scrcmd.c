@@ -578,7 +578,7 @@ bool8 ScrCmd_incrementgamestat(struct ScriptContext * ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_comparestattoword(struct ScriptContext * ctx)
+bool8 ScrCmd_comparestat(struct ScriptContext * ctx)
 {
     u8 statIdx = ScriptReadByte(ctx);
     u32 value = ScriptReadWord(ctx);
@@ -1556,23 +1556,23 @@ bool8 ScrCmd_showcontestpainting(struct ScriptContext * ctx)
 
 bool8 ScrCmd_braillemessage(struct ScriptContext * ctx)
 {
-    u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    if (ptr == NULL)
-        ptr = (u8 *)ctx->data[0];
+    u8 *msg = (u8 *)ScriptReadWord(ctx);
+    if (msg == NULL)
+        msg = (u8 *)ctx->data[0];
 
     LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, 1);
-    AddTextPrinterParameterized(0, FONT_BRAILLE, ptr, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_BRAILLE, msg, 0, 1, 0, NULL);
     return FALSE;
 }
 
 bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
 {
-    u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    if (ptr == NULL)
-        ptr = (u8 *)ctx->data[0];
+    u8 *msg = (u8 *)ScriptReadWord(ctx);
+    if (msg == NULL)
+        msg = (u8 *)ctx->data[0];
 
-    gSpecialVar_0x8004 = GetStringWidth(FONT_BRAILLE, ptr, -1);
+    gSpecialVar_0x8004 = GetStringWidth(FONT_BRAILLE, msg, -1);
     return FALSE;
 }
 

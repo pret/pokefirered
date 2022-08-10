@@ -205,7 +205,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_unloadhelp                @ 0xc9
 	.4byte ScrCmd_signmsg                   @ 0xca
 	.4byte ScrCmd_normalmsg                 @ 0xcb
-	.4byte ScrCmd_comparestattoword         @ 0xcc
+	.4byte ScrCmd_comparestat               @ 0xcc
 	.4byte ScrCmd_setmoneventlegal          @ 0xcd
 	.4byte ScrCmd_checkmoneventlegal        @ 0xce
 	.4byte ScrCmd_trywondercardscript       @ 0xcf

@@ -256,9 +256,15 @@ CeladonCity_GameCorner_EventScript_SlotMachine::
 	msgbox CeladonCity_GameCorner_Text_SlotMachineWantToPlay, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
-	setfieldeffectargument 0, 255
-	setfieldeffectargument 1, 10
-	setfieldeffectargument 2, 14
+	setfieldeffectargument 0, OBJ_EVENT_ID_PLAYER
+.ifdef BUGFIX
+	setfieldeffectargument 1, MAP_NUM(CELADON_CITY_GAME_CORNER)
+	setfieldeffectargument 2, MAP_GROUP(CELADON_CITY_GAME_CORNER)
+.else
+	@ Map num/group were provided in the wrong order
+	setfieldeffectargument 1, MAP_GROUP(CELADON_CITY_GAME_CORNER)
+	setfieldeffectargument 2, MAP_NUM(CELADON_CITY_GAME_CORNER)
+.endif
 	dofieldeffect FLDEFF_SMILEY_FACE_ICON
 	waitfieldeffect FLDEFF_SMILEY_FACE_ICON
 	specialvar VAR_RESULT, GetRandomSlotMachineId

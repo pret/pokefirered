@@ -9,8 +9,7 @@ PowerPlant_OnResume::
 
 PowerPlant_EventScript_TryRemoveStaticMon::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -52,12 +51,9 @@ PowerPlant_EventScript_Zapdos::
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq PowerPlant_EventScript_DefeatedZapdos
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq PowerPlant_EventScript_RanFromZapdos
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq PowerPlant_EventScript_RanFromZapdos
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_EventScript_DefeatedZapdos
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_EventScript_RanFromZapdos
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_EventScript_RanFromZapdos
 	setflag FLAG_FOUGHT_ZAPDOS
 	release
 	end
@@ -86,12 +82,9 @@ PowerPlant_EventScript_Electrode1::
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special QuestLog_CutRecording
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq PowerPlant_EventScript_FoughtElectrode1
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq PowerPlant_EventScript_FoughtElectrode1
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq PowerPlant_EventScript_FoughtElectrode1
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_EventScript_FoughtElectrode1
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_EventScript_FoughtElectrode1
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_EventScript_FoughtElectrode1
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	release
 	end
@@ -115,12 +108,9 @@ PowerPlant_EventScript_Electrode2::
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special QuestLog_CutRecording
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq PowerPlant_EventScript_FoughtElectrode2
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq PowerPlant_EventScript_FoughtElectrode2
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq PowerPlant_EventScript_FoughtElectrode2
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_EventScript_FoughtElectrode2
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_EventScript_FoughtElectrode2
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_EventScript_FoughtElectrode2
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	release
 	end

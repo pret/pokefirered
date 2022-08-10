@@ -7,22 +7,17 @@ PewterCity_Museum_1F_MapScripts::
 PewterCity_Museum_1F_EventScript_Scientist1::
 	lock
 	faceplayer
-	compare VAR_FACING, DIR_WEST
-	goto_if_eq PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
-	compare VAR_FACING, DIR_SOUTH
-	goto_if_eq PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
-	compare VAR_FACING, DIR_NORTH
-	goto_if_eq PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
+	goto_if_eq VAR_FACING, DIR_WEST, PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
+	goto_if_eq VAR_FACING, DIR_SOUTH, PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
+	goto_if_eq VAR_FACING, DIR_NORTH, PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
 	msgbox PewterCity_Museum_1F_Text_PleaseEnjoyYourself
 	release
 	end
 
 PewterCity_Museum_1F_EventScript_Scientist1BehindCounter::
 	msgbox PewterCity_Museum_1F_Text_DoYouKnowWhatAmberIs, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter
-	compare VAR_RESULT, NO
-	goto_if_eq PewterCity_Museum_1F_EventScript_ExplainAmber
+	goto_if_eq VAR_RESULT, YES, PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter
+	goto_if_eq VAR_RESULT, NO, PewterCity_Museum_1F_EventScript_ExplainAmber
 	end
 
 PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter::
@@ -67,8 +62,7 @@ PewterCity_Museum_1F_EventScript_EntranceTrigger::
 	textcolor NPC_TEXT_COLOR_MALE
 	showmoneybox 0, 0
 	msgbox PewterCity_Museum_1F_Text_Its50YForChildsTicket, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq PewterCity_Museum_1F_EventScript_TryPayForTicket
+	goto_if_eq VAR_RESULT, YES, PewterCity_Museum_1F_EventScript_TryPayForTicket
 	msgbox PewterCity_Museum_1F_Text_ComeAgain
 	closemessage
 	hidemoneybox
@@ -79,15 +73,11 @@ PewterCity_Museum_1F_EventScript_EntranceTrigger::
 
 PewterCity_Museum_1F_EventScript_TryPayForTicket::
 	checkmoney 50
-	compare VAR_RESULT, FALSE
-	goto_if_eq PewterCity_Museum_1F_EventScript_NotEnoughMoney
+	goto_if_eq VAR_RESULT, FALSE, PewterCity_Museum_1F_EventScript_NotEnoughMoney
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterMid
-	compare VAR_TEMP_1, 2
-	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight
+	call_if_eq VAR_TEMP_1, 0, PewterCity_Museum_1F_EventScript_PlayerApproachCounterLeft
+	call_if_eq VAR_TEMP_1, 1, PewterCity_Museum_1F_EventScript_PlayerApproachCounterMid
+	call_if_eq VAR_TEMP_1, 2, PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight
 	playse SE_SHOP
 	removemoney 50
 	updatemoneybox
@@ -158,8 +148,7 @@ PewterCity_Museum_1F_EventScript_OldAmberScientist::
 	goto_if_set FLAG_GOT_OLD_AMBER, PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber
 	msgbox PewterCity_Museum_1F_Text_WantYouToGetAmberExamined
 	checkitemspace ITEM_OLD_AMBER
-	compare VAR_RESULT, FALSE
-	goto_if_eq PewterCity_Museum_1F_EventScript_NoRoomForOldAmber
+	goto_if_eq VAR_RESULT, FALSE, PewterCity_Museum_1F_EventScript_NoRoomForOldAmber
 	setflag FLAG_GOT_OLD_AMBER
 	removeobject LOCALID_OLD_AMBER
 	giveitem_msg PewterCity_Museum_1F_Text_ReceivedOldAmberFromMan, ITEM_OLD_AMBER, 1, MUS_OBTAIN_KEY_ITEM

@@ -21,8 +21,7 @@ EventScript_TransferredToPC::
 
 EventScript_TransferredSomeonesPC::
 	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_TransferredSomeonesPCBoxFull
+	goto_if_eq VAR_RESULT, TRUE, EventScript_TransferredSomeonesPCBoxFull
 	msgbox Text_MonSentToBoxInSomeonesPC
 	return
 
@@ -34,8 +33,7 @@ EventScript_TransferredSomeonesPCBoxFull::
 
 EventScript_TransferredBillsPC::
 	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_TransferredBillsPCBoxFull
+	goto_if_eq VAR_RESULT, TRUE, EventScript_TransferredBillsPCBoxFull
 	msgbox Text_MonSentToBoxInBillsPC
 	return
 

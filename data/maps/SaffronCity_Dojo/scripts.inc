@@ -30,8 +30,7 @@ SaffronCity_Dojo_EventScript_HitmonleeBall::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO
 	call EventScript_RestorePrevTextColor
-	compare VAR_RESULT, YES
-	goto_if_eq SaffronCity_Dojo_EventScript_GiveHitmon
+	goto_if_eq VAR_RESULT, YES, SaffronCity_Dojo_EventScript_GiveHitmon
 	hidemonpic
 	release
 	end
@@ -52,8 +51,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO
 	call EventScript_RestorePrevTextColor
-	compare VAR_RESULT, YES
-	goto_if_eq SaffronCity_Dojo_EventScript_GiveHitmon
+	goto_if_eq VAR_RESULT, YES, SaffronCity_Dojo_EventScript_GiveHitmon
 	hidemonpic
 	release
 	end
@@ -61,12 +59,9 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 SaffronCity_Dojo_EventScript_GiveHitmon::
 	hidemonpic
 	givemon VAR_TEMP_1, 25
-	compare VAR_RESULT, 0
-	goto_if_eq SaffronCity_Dojo_EventScript_ReceivedHitmonParty
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_Dojo_EventScript_ReceivedHitmonPC
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_NoMoreRoomForPokemon
+	goto_if_eq VAR_RESULT, 0, SaffronCity_Dojo_EventScript_ReceivedHitmonParty
+	goto_if_eq VAR_RESULT, 1, SaffronCity_Dojo_EventScript_ReceivedHitmonPC
+	goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
 	release
 	end
 
@@ -79,8 +74,7 @@ SaffronCity_Dojo_EventScript_ReceivedHitmonParty::
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SaffronCity_Dojo_EventScript_EndGiveMon
+	goto_if_eq VAR_RESULT, NO, SaffronCity_Dojo_EventScript_EndGiveMon
 	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
 	goto SaffronCity_Dojo_EventScript_EndGiveMon
@@ -95,8 +89,7 @@ SaffronCity_Dojo_EventScript_ReceivedHitmonPC::
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SaffronCity_Dojo_EventScript_TransferredHitmonToPC
+	goto_if_eq VAR_RESULT, NO, SaffronCity_Dojo_EventScript_TransferredHitmonToPC
 	call EventScript_NameReceivedBoxMon
 	goto SaffronCity_Dojo_EventScript_TransferredHitmonToPC
 	end

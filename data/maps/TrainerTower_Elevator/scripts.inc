@@ -39,8 +39,7 @@ TrainerTower_Elevator_EventScript_ChooseFloor::
 TrainerTower_Elevator_EventScript_SelectLobby::
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_TRAINER_TOWER_LOBBY, 17, 8
-	compare VAR_ELEVATOR_FLOOR, 3
-	goto_if_eq TrainerTower_Elevator_EventScript_CloseFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 3, TrainerTower_Elevator_EventScript_CloseFloorSelect
 	call TrainerTower_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 3
 	special CloseElevatorCurrentFloorWindow

@@ -22,11 +22,9 @@ TwoIsland_House_EventScript_MoveManiac::
 
 TwoIsland_House_EventScript_CheckPlayerHasMushrooms::
 	checkitem ITEM_BIG_MUSHROOM
-	compare VAR_RESULT, TRUE
-	call_if_eq TwoIsland_House_EventScript_SetHasBigMushroom
+	call_if_eq VAR_RESULT, TRUE, TwoIsland_House_EventScript_SetHasBigMushroom
 	checkitem ITEM_TINY_MUSHROOM, 2
-	compare VAR_RESULT, TRUE
-	call_if_eq TwoIsland_House_EventScript_SetHasTinyMushrooms
+	call_if_eq VAR_RESULT, TRUE, TwoIsland_House_EventScript_SetHasTinyMushrooms
 	goto_if_set HAS_BIG_MUSHROOM, TwoIsland_House_EventScript_CheckAlsoHasTinyMushrooms
 	goto_if_set HAS_TINY_MUSHROOMS, TwoIsland_House_EventScript_CheckAlsoHasBigMushroom
 	goto TwoIsland_House_EventScript_EndTutorMove
@@ -44,8 +42,7 @@ TwoIsland_House_EventScript_CheckAlsoHasBigMushroom::
 
 TwoIsland_House_EventScript_AskTutorMon::
 	msgbox TwoIsland_House_Text_WantMeToTeachMove, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq TwoIsland_House_EventScript_EndTutorMove
+	goto_if_eq VAR_RESULT, NO, TwoIsland_House_EventScript_EndTutorMove
 	goto TwoIsland_House_EventScript_ChooseMonToTutor
 	end
 
@@ -53,13 +50,10 @@ TwoIsland_House_EventScript_ChooseMonToTutor::
 	msgbox TwoIsland_House_Text_TutorWhichMon
 	special SelectMoveTutorMon
 	waitstate
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge TwoIsland_House_EventScript_EndTutorMove
+	goto_if_ge VAR_0x8004, PARTY_SIZE, TwoIsland_House_EventScript_EndTutorMove
 	special IsSelectedMonEgg
-	compare VAR_RESULT, TRUE
-	goto_if_eq TwoIsland_House_EventScript_CantTutorEgg
-	compare VAR_0x8005, 0
-	goto_if_eq TwoIsland_House_EventScript_NoMoveToTutorMon
+	goto_if_eq VAR_RESULT, TRUE, TwoIsland_House_EventScript_CantTutorEgg
+	goto_if_eq VAR_0x8005, 0, TwoIsland_House_EventScript_NoMoveToTutorMon
 	goto TwoIsland_House_EventScript_ChooseMoveToTeach
 	end
 
@@ -67,8 +61,7 @@ TwoIsland_House_EventScript_ChooseMoveToTeach::
 	msgbox TwoIsland_House_Text_TeachWhichMove
 	special DisplayMoveTutorMenu
 	waitstate
-	compare VAR_0x8004, 0
-	goto_if_eq TwoIsland_House_EventScript_ChooseMonToTutor
+	goto_if_eq VAR_0x8004, 0, TwoIsland_House_EventScript_ChooseMonToTutor
 	goto_if_set HAS_BOTH_MUSHROOMS, TwoIsland_House_EventScript_ChooseMushroom
 	goto_if_set HAS_BIG_MUSHROOM, TwoIsland_House_EventScript_GiveBigMushroom
 	goto_if_set HAS_TINY_MUSHROOMS, TwoIsland_House_EventScript_GiveTinyMushrooms

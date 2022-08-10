@@ -2,20 +2,16 @@ EventScript_Questionnaire::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_DeclineQuestionnaire
+	goto_if_eq VAR_RESULT, NO, EventScript_DeclineQuestionnaire
 	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	specialvar VAR_0x8008, GetMartClerkObjectId
 	textcolor NPC_TEXT_COLOR_MALE
-	compare VAR_0x8004, 0
-	goto_if_eq EventScript_EnableMysteryGift
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DeclineQuestionnaire
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_TookQuestionnaire
+	goto_if_eq VAR_0x8004, 0, EventScript_EnableMysteryGift
+	goto_if_eq VAR_RESULT, 0, EventScript_DeclineQuestionnaire
+	goto_if_eq VAR_RESULT, 1, EventScript_TookQuestionnaire
 	end
 
 EventScript_EnableMysteryGift::

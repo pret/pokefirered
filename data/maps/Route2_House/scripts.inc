@@ -12,14 +12,11 @@ Route2_House_EventScript_Reyley::
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_MIMIEN_TRADE, Route2_House_EventScript_AlreadyTraded
 	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route2_House_EventScript_DeclineTrade
+	goto_if_eq VAR_RESULT, NO, Route2_House_EventScript_DeclineTrade
 	call EventScript_ChooseMonForInGameTrade
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge Route2_House_EventScript_DeclineTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Route2_House_EventScript_DeclineTrade
 	call EventScript_GetInGameTradeSpecies
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne Route2_House_EventScript_NotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, Route2_House_EventScript_NotRequestedMon
 	call EventScript_DoInGameTrade
 	msgbox Trade_Text_HeyThanks
 	setflag FLAG_DID_MIMIEN_TRADE

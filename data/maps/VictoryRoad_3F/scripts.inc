@@ -6,8 +6,7 @@ VictoryRoad_3F_MapScripts::
 	.byte 0
 
 VictoryRoad_3F_OnLoad::
-	compare VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
-	call_if_ne VictoryRoad_3F_EventScript_SetRockBarrier
+	call_if_ne VAR_MAP_SCENE_VICTORY_ROAD_3F, 100, VictoryRoad_3F_EventScript_SetRockBarrier
 	end
 
 VictoryRoad_3F_EventScript_SetRockBarrier::
@@ -17,8 +16,7 @@ VictoryRoad_3F_EventScript_SetRockBarrier::
 
 VictoryRoad_3F_EventScript_FloorSwitch::
 	lockall
-	compare VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
-	goto_if_eq VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed
+	goto_if_eq VAR_MAP_SCENE_VICTORY_ROAD_3F, 100, VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed
 	setmetatile 12, 12, METATILE_Cave_Floor_Ledge_Top, 0
 	setmetatile 12, 13, METATILE_Cave_Floor_Ledge_Bottom, 0
 	playse SE_ICE_BREAK

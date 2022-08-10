@@ -6,10 +6,8 @@ VictoryRoad_2F_MapScripts::
 	.byte 0
 
 VictoryRoad_2F_OnLoad::
-	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
-	call_if_ne VictoryRoad_2F_EventScript_SetRockBarrier1
-	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
-	call_if_ne VictoryRoad_2F_EventScript_SetRockBarrier2
+	call_if_ne VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100, VictoryRoad_2F_EventScript_SetRockBarrier1
+	call_if_ne VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100, VictoryRoad_2F_EventScript_SetRockBarrier2
 	end
 
 VictoryRoad_2F_EventScript_SetRockBarrier1::
@@ -24,8 +22,7 @@ VictoryRoad_2F_EventScript_SetRockBarrier2::
 
 VictoryRoad_2F_EventScript_FloorSwitch1::
 	lockall
-	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
-	goto_if_eq VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed
+	goto_if_eq VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100, VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed
 	setmetatile 13, 10, METATILE_Cave_Floor_Ledge_Top, 0
 	setmetatile 13, 11, METATILE_Cave_Floor_Ledge_Bottom, 0
 	playse SE_ICE_BREAK
@@ -42,8 +39,7 @@ VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed::
 
 VictoryRoad_2F_EventScript_FloorSwitch2::
 	lockall
-	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
-	goto_if_eq VictoryRoad_2F_EventScript_FloorSwitch2AlreadyPressed
+	goto_if_eq VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100, VictoryRoad_2F_EventScript_FloorSwitch2AlreadyPressed
 	setmetatile 33, 16, METATILE_Cave_Floor_Ledge_Top, 0
 	setmetatile 33, 17, METATILE_Cave_Floor_Ledge_Bottom, 0
 	playse SE_ICE_BREAK

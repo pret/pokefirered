@@ -15,8 +15,7 @@ CeladonCity_Restaurant_EventScript_CoinCaseMan::
 	goto_if_set FLAG_GOT_COIN_CASE, CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase
 	msgbox CeladonCity_Restaurant_Text_TakeThisImBusted
 	checkitemspace ITEM_COIN_CASE
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_Restaurant_EventScript_NoRoomForCoinCase
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_Restaurant_EventScript_NoRoomForCoinCase
 	giveitem_msg CeladonCity_Restaurant_Text_ReceivedCoinCaseFromMan, ITEM_COIN_CASE
 	setflag FLAG_GOT_COIN_CASE
 	release

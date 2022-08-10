@@ -6,14 +6,12 @@ CeruleanCity_House5_EventScript_BerryPowderMan::
 	faceplayer
 	goto_if_set FLAG_GOT_POWDER_JAR, CeruleanCity_House5_EventScript_AskToExchangePowder
 	msgbox CeruleanCity_House1_Text_AnyInterestInBerries, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CeruleanCity_House5_EventScript_NoInterestInBerries
+	goto_if_eq VAR_RESULT, NO, CeruleanCity_House5_EventScript_NoInterestInBerries
 	goto_if_unset FLAG_SYS_GOT_BERRY_POUCH, CeruleanCity_House5_EventScript_NoBerries
 	msgbox CeruleanCity_House1_Text_HaveJustTheThing
 	setflag FLAG_GOT_POWDER_JAR
 	giveitem ITEM_POWDER_JAR
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	msgbox CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner
 	release
 	end
@@ -141,21 +139,17 @@ CeruleanCity_House5_EventScript_ExitMenu::
 
 CeruleanCity_House5_EventScript_ExchangePowderForItem::
 	msgbox CeruleanCity_House1_Text_YoullExchangeBerryPowderForItem, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CeruleanCity_House5_EventScript_ChooseExchangeItem
+	goto_if_eq VAR_RESULT, NO, CeruleanCity_House5_EventScript_ChooseExchangeItem
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, Script_HasEnoughBerryPowder
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_House5_EventScript_NotEnoughBerryPowder
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_House5_EventScript_NotEnoughBerryPowder
 	giveitem VAR_0x8008
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_House5_EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_House5_EventScript_BagIsFull
 	copyvar VAR_0x8004, VAR_0x8009
 	special Script_TakeBerryPowder
 	special PrintPlayerBerryPowderAmount
 	msgbox CeruleanCity_House1_Text_TradeMoreBerryPowder, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CeruleanCity_House5_EventScript_ChooseExchangeItem
+	goto_if_eq VAR_RESULT, YES, CeruleanCity_House5_EventScript_ChooseExchangeItem
 	msgbox CeruleanCity_House1_Text_HopeToSeeYouAgain
 	special RemoveBerryPowderVendorMenu
 	release

@@ -3,8 +3,7 @@
 MysteryEventClub_EventScript_Woman::
 	lock
 	faceplayer
-	compare GAVE_PROFILE, TRUE
-	goto_if_eq EventScript_AlreadyGaveProfile
+	goto_if_eq GAVE_PROFILE, TRUE, EventScript_AlreadyGaveProfile
 	goto_if_set FLAG_SYS_SET_TRAINER_CARD_PROFILE, EventScript_GivenProfileBefore
 	msgbox Text_IdLoveToHearYourProfile
 	goto EventScript_AskForProfile
@@ -104,12 +103,9 @@ EventScript_GiveProfile:
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	compare VAR_0x8004, 0
-	goto_if_eq EventScript_GaveSpecialProfile
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_CancelGiveProfile
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_GaveProfile
+	goto_if_eq VAR_0x8004, 0, EventScript_GaveSpecialProfile
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CancelGiveProfile
+	goto_if_eq VAR_RESULT, TRUE, EventScript_GaveProfile
 	end
 
 Text_IdLoveToHearYourProfile:

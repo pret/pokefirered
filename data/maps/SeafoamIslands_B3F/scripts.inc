@@ -14,8 +14,7 @@ SeafoamIslands_B3F_EventScript_CheckStoppedCurrent::
 	setvar NUM_BOULDERS_PRESENT, 0
 	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_1, SeafoamIslands_B3F_EventScript_AddBoulderPresent
 	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_2, SeafoamIslands_B3F_EventScript_AddBoulderPresent
-	compare NUM_BOULDERS_PRESENT, 2
-	call_if_eq SeafoamIslands_B3F_EventScript_StoppedCurrent
+	call_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B3F_EventScript_StoppedCurrent
 	return
 
 SeafoamIslands_B3F_EventScript_StoppedCurrent::
@@ -35,13 +34,10 @@ SeafoamIslands_B3F_EventScript_EnterByFalling::
 	setvar NUM_BOULDERS_PRESENT, 0
 	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_1, SeafoamIslands_B3F_EventScript_AddBoulderPresent
 	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_2, SeafoamIslands_B3F_EventScript_AddBoulderPresent
-	compare NUM_BOULDERS_PRESENT, 2
-	goto_if_eq SeafoamIslands_B3F_EventScript_CurrentBlocked
+	goto_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B3F_EventScript_CurrentBlocked
 	getplayerxy VAR_0x8008, VAR_0x8009
-	compare VAR_0x8008, 24
-	call_if_lt SeafoamIslands_B3F_EventScript_RideCurrentFar
-	compare VAR_0x8008, 24
-	call_if_ge SeafoamIslands_B3F_EventScript_RideCurrentClose
+	call_if_lt VAR_0x8008, 24, SeafoamIslands_B3F_EventScript_RideCurrentFar
+	call_if_ge VAR_0x8008, 24, SeafoamIslands_B3F_EventScript_RideCurrentClose
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1
 	warp MAP_SEAFOAM_ISLANDS_B4F, 27, 21
 	waitstate

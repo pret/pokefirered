@@ -4,11 +4,9 @@ CeladonCity_GameCorner_EventScript_PhotoPrinter::
 	lockall
 	showmoneybox 0, 0
 	msgbox CeladonCity_GameCorner_Text_TryPokemonPrinter, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CeladonCity_GameCorner_EventScript_DeclinePhoto
+	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_EventScript_DeclinePhoto
 	checkmoney 50
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto
 	playse SE_SHOP
 	removemoney 50
 	updatemoneybox
@@ -83,8 +81,7 @@ FourIsland_House2_EventScript_MeetStickerMan::
 	waitmovement 0
 	applymovement LOCALID_STICKER_MAN, Movement_Delay48
 	waitmovement 0
-	compare VAR_0x8008, 0
-	goto_if_eq FourIsland_House2_EventScript_StickerManNothingToBrag
+	goto_if_eq VAR_0x8008, 0, FourIsland_House2_EventScript_StickerManNothingToBrag
 	message FourIsland_House2_Text_GiveYouStickerIfYouBrag
 	waitmessage
 	goto FourIsland_House2_EventScript_ChooseBrag
@@ -95,8 +92,7 @@ FourIsland_House2_EventScript_StickerManAskForBrag::
 	waitmovement 0
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
-	compare VAR_0x8008, 0
-	goto_if_eq FourIsland_House2_EventScript_NothingToBragAbout
+	goto_if_eq VAR_0x8008, 0, FourIsland_House2_EventScript_NothingToBragAbout
 	message FourIsland_House2_Text_BragAboutWhatToday
 	waitmessage
 	goto FourIsland_House2_EventScript_ChooseBrag
@@ -185,43 +181,35 @@ FourIsland_House2_EventScript_StickerManNothingToBrag::
 	end
 
 FourIsland_House2_EventScript_BragHoF::
-	compare VAR_0x8004, 39
-	goto_if_le FourIsland_House2_EventScript_BragHoFLowest
-	compare VAR_0x8004, 99
-	goto_if_le FourIsland_House2_EventScript_BragHoFLow
-	compare VAR_0x8004, 199
-	goto_if_le FourIsland_House2_EventScript_BragHoFHigh
-	compare VAR_0x8004, 200
-	goto_if_ge FourIsland_House2_EventScript_BragHoFHighest
+	goto_if_le VAR_0x8004, 39, FourIsland_House2_EventScript_BragHoFLowest
+	goto_if_le VAR_0x8004, 99, FourIsland_House2_EventScript_BragHoFLow
+	goto_if_le VAR_0x8004, 199, FourIsland_House2_EventScript_BragHoFHigh
+	goto_if_ge VAR_0x8004, 200, FourIsland_House2_EventScript_BragHoFHighest
 	end
 
 FourIsland_House2_EventScript_BragHoFLowest::
-	compare VAR_HOF_BRAG_STATE, 1
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedHoF
+	goto_if_eq VAR_HOF_BRAG_STATE, 1, FourIsland_House2_EventScript_AlreadyBraggedHoF
 	setvar VAR_HOF_BRAG_STATE, 1
 	msgbox FourIsland_House2_Text_WowHoFLowest
 	goto FourIsland_House2_EventScript_BraggedHoF
 	end
 
 FourIsland_House2_EventScript_BragHoFLow::
-	compare VAR_HOF_BRAG_STATE, 2
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedHoF
+	goto_if_eq VAR_HOF_BRAG_STATE, 2, FourIsland_House2_EventScript_AlreadyBraggedHoF
 	setvar VAR_HOF_BRAG_STATE, 2
 	msgbox FourIsland_House2_Text_WowHoFLow
 	goto FourIsland_House2_EventScript_BraggedHoF
 	end
 
 FourIsland_House2_EventScript_BragHoFHigh::
-	compare VAR_HOF_BRAG_STATE, 3
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedHoF
+	goto_if_eq VAR_HOF_BRAG_STATE, 3, FourIsland_House2_EventScript_AlreadyBraggedHoF
 	setvar VAR_HOF_BRAG_STATE, 3
 	msgbox FourIsland_House2_Text_WowHoFHigh
 	goto FourIsland_House2_EventScript_BraggedHoF
 	end
 
 FourIsland_House2_EventScript_BragHoFHighest::
-	compare VAR_HOF_BRAG_STATE, 4
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedHoFMax
+	goto_if_eq VAR_HOF_BRAG_STATE, 4, FourIsland_House2_EventScript_AlreadyBraggedHoFMax
 	setvar VAR_HOF_BRAG_STATE, 4
 	msgbox FourIsland_House2_Text_WowHoFHighest
 	goto FourIsland_House2_EventScript_BraggedHoF
@@ -248,43 +236,35 @@ FourIsland_House2_EventScript_BraggedHoF::
 	end
 
 FourIsland_House2_EventScript_BragEggs::
-	compare VAR_0x8005, 99
-	goto_if_le FourIsland_House2_EventScript_BragEggsLowest
-	compare VAR_0x8005, 199
-	goto_if_le FourIsland_House2_EventScript_BragEggsLow
-	compare VAR_0x8005, 299
-	goto_if_le FourIsland_House2_EventScript_BragEggsHigh
-	compare VAR_0x8005, 300
-	goto_if_ge FourIsland_House2_EventScript_BragEggsHighest
+	goto_if_le VAR_0x8005, 99, FourIsland_House2_EventScript_BragEggsLowest
+	goto_if_le VAR_0x8005, 199, FourIsland_House2_EventScript_BragEggsLow
+	goto_if_le VAR_0x8005, 299, FourIsland_House2_EventScript_BragEggsHigh
+	goto_if_ge VAR_0x8005, 300, FourIsland_House2_EventScript_BragEggsHighest
 	end
 
 FourIsland_House2_EventScript_BragEggsLowest::
-	compare VAR_EGG_BRAG_STATE, 1
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedEggs
+	goto_if_eq VAR_EGG_BRAG_STATE, 1, FourIsland_House2_EventScript_AlreadyBraggedEggs
 	setvar VAR_EGG_BRAG_STATE, 1
 	msgbox FourIsland_House2_Text_WowEggsLowest
 	goto FourIsland_House2_EventScript_BraggedEggs
 	end
 
 FourIsland_House2_EventScript_BragEggsLow::
-	compare VAR_EGG_BRAG_STATE, 2
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedEggs
+	goto_if_eq VAR_EGG_BRAG_STATE, 2, FourIsland_House2_EventScript_AlreadyBraggedEggs
 	setvar VAR_EGG_BRAG_STATE, 2
 	msgbox FourIsland_House2_Text_WowEggsLow
 	goto FourIsland_House2_EventScript_BraggedEggs
 	end
 
 FourIsland_House2_EventScript_BragEggsHigh::
-	compare VAR_EGG_BRAG_STATE, 3
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedEggs
+	goto_if_eq VAR_EGG_BRAG_STATE, 3, FourIsland_House2_EventScript_AlreadyBraggedEggs
 	setvar VAR_EGG_BRAG_STATE, 3
 	msgbox FourIsland_House2_Text_WowEggsHigh
 	goto FourIsland_House2_EventScript_BraggedEggs
 	end
 
 FourIsland_House2_EventScript_BragEggsHighest::
-	compare VAR_EGG_BRAG_STATE, 4
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedEggsMax
+	goto_if_eq VAR_EGG_BRAG_STATE, 4, FourIsland_House2_EventScript_AlreadyBraggedEggsMax
 	setvar VAR_EGG_BRAG_STATE, 4
 	msgbox FourIsland_House2_Text_WowEggsHighest
 	goto FourIsland_House2_EventScript_BraggedEggs
@@ -311,43 +291,35 @@ FourIsland_House2_EventScript_BraggedEggs::
 	end
 
 FourIsland_House2_EventScript_BragLinkWins::
-	compare VAR_0x8006, 19
-	goto_if_le FourIsland_House2_EventScript_BragLinkWinsLowest
-	compare VAR_0x8006, 49
-	goto_if_le FourIsland_House2_EventScript_BragLinkWinsLow
-	compare VAR_0x8006, 99
-	goto_if_le FourIsland_House2_EventScript_BragLinkWinsHigh
-	compare VAR_0x8006, 100
-	goto_if_ge FourIsland_House2_EventScript_BragLinkWinsHighest
+	goto_if_le VAR_0x8006, 19, FourIsland_House2_EventScript_BragLinkWinsLowest
+	goto_if_le VAR_0x8006, 49, FourIsland_House2_EventScript_BragLinkWinsLow
+	goto_if_le VAR_0x8006, 99, FourIsland_House2_EventScript_BragLinkWinsHigh
+	goto_if_ge VAR_0x8006, 100, FourIsland_House2_EventScript_BragLinkWinsHighest
 	end
 
 FourIsland_House2_EventScript_BragLinkWinsLowest::
-	compare VAR_LINK_WIN_BRAG_STATE, 1
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedLinkWins
+	goto_if_eq VAR_LINK_WIN_BRAG_STATE, 1, FourIsland_House2_EventScript_AlreadyBraggedLinkWins
 	setvar VAR_LINK_WIN_BRAG_STATE, 1
 	msgbox FourIsland_House2_Text_WowLinkWinsLowest
 	goto FourIsland_House2_EventScript_BraggedLinkWins
 	end
 
 FourIsland_House2_EventScript_BragLinkWinsLow::
-	compare VAR_LINK_WIN_BRAG_STATE, 2
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedLinkWins
+	goto_if_eq VAR_LINK_WIN_BRAG_STATE, 2, FourIsland_House2_EventScript_AlreadyBraggedLinkWins
 	setvar VAR_LINK_WIN_BRAG_STATE, 2
 	msgbox FourIsland_House2_Text_WowLinkWinsLow
 	goto FourIsland_House2_EventScript_BraggedLinkWins
 	end
 
 FourIsland_House2_EventScript_BragLinkWinsHigh::
-	compare VAR_LINK_WIN_BRAG_STATE, 3
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedLinkWins
+	goto_if_eq VAR_LINK_WIN_BRAG_STATE, 3, FourIsland_House2_EventScript_AlreadyBraggedLinkWins
 	setvar VAR_LINK_WIN_BRAG_STATE, 3
 	msgbox FourIsland_House2_Text_WowLinkWinsHigh
 	goto FourIsland_House2_EventScript_BraggedLinkWins
 	end
 
 FourIsland_House2_EventScript_BragLinkWinsHighest::
-	compare VAR_LINK_WIN_BRAG_STATE, 4
-	goto_if_eq FourIsland_House2_EventScript_AlreadyBraggedLinkWinsMax
+	goto_if_eq VAR_LINK_WIN_BRAG_STATE, 4, FourIsland_House2_EventScript_AlreadyBraggedLinkWinsMax
 	setvar VAR_LINK_WIN_BRAG_STATE, 4
 	msgbox FourIsland_House2_Text_WowLinkWinsHighest
 	goto FourIsland_House2_EventScript_BraggedLinkWins

@@ -128,8 +128,7 @@ TwoIsland_JoyfulGameCorner_Movement_BikerLookAround::
 TwoIsland_JoyfulGameCorner_EventScript_InfoMan::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
-	goto_if_eq JoyfulGameCorner_EventScript_InfoMan2
+	goto_if_eq VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4, JoyfulGameCorner_EventScript_InfoMan2
 	goto_if_set FLAG_RESCUED_LOSTELLE, TwoIsland_JoyfulGameCorner_EventScript_GetGamesGoingSoon
 	msgbox TwoIsland_JoyfulGameCorner_Text_NotRunningAnyGamesToday
 	release
@@ -144,11 +143,9 @@ TwoIsland_JoyfulGameCorner_EventScript_GetGamesGoingSoon::
 TwoIsland_JoyfulGameCorner_EventScript_LostellesDaddy::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
-	goto_if_eq JoyfulGameCorner_EventScript_MinigameAttendant
+	goto_if_eq VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4, JoyfulGameCorner_EventScript_MinigameAttendant
 	goto_if_set FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER, TwoIsland_JoyfulGameCorner_EventScript_GetGameCornerRunning
-	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
-	goto_if_eq TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite
+	goto_if_eq VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3, TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite
 	msgbox TwoIsland_JoyfulGameCorner_Text_PleaseGoToThreeIsland
 	release
 	end
@@ -170,8 +167,7 @@ TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite::
 
 TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone::
 	checkitemspace ITEM_MOON_STONE
-	compare VAR_RESULT, FALSE
-	goto_if_eq TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone
+	goto_if_eq VAR_RESULT, FALSE, TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone
 	additem ITEM_MOON_STONE
 	setflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
 	msgreceiveditem TwoIsland_JoyfulGameCorner_Text_ReceivedMoonStoneFromLostellesDaddy, ITEM_MOON_STONE

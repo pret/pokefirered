@@ -43,12 +43,9 @@ Route7_EastEntrance_EventScript_GiveTea::
 Route7_EastEntrance_EventScript_GuardDrinkTea::
 	msgbox Route7_EastEntrance_Text_ThatTeaLooksTasty
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq Route7_EastEntrance_WalkToGuardTop
-	compare VAR_TEMP_1, 1
-	call_if_eq Route7_EastEntrance_WalkToGuardMid
-	compare VAR_TEMP_1, 2
-	call_if_eq Route7_EastEntrance_WalkToGuardBottom
+	call_if_eq VAR_TEMP_1, 0, Route7_EastEntrance_WalkToGuardTop
+	call_if_eq VAR_TEMP_1, 1, Route7_EastEntrance_WalkToGuardMid
+	call_if_eq VAR_TEMP_1, 2, Route7_EastEntrance_WalkToGuardBottom
 	msgbox Route7_EastEntrance_Text_ThanksIllShareTeaWithGuards
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall

@@ -8,14 +8,11 @@ UndergroundPath_NorthEntrance_EventScript_Saige::
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_MS_NIDO_TRADE, UndergroundPath_NorthEntrance_EventScript_AlreadyTraded
 	msgbox Trade_Text_DoYouHaveMonWantToTradeForMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq UndergroundPath_NorthEntrance_EventScript_DeclineTrade
+	goto_if_eq VAR_RESULT, NO, UndergroundPath_NorthEntrance_EventScript_DeclineTrade
 	call EventScript_ChooseMonForInGameTrade
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge UndergroundPath_NorthEntrance_EventScript_DeclineTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, UndergroundPath_NorthEntrance_EventScript_DeclineTrade
 	call EventScript_GetInGameTradeSpecies
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne UndergroundPath_NorthEntrance_EventScript_NotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, UndergroundPath_NorthEntrance_EventScript_NotRequestedMon
 	call EventScript_DoInGameTrade
 	msgbox Trade_Text_ThanksYoureAPal
 	setflag FLAG_DID_MS_NIDO_TRADE

@@ -7,8 +7,7 @@ Route16_House_EventScript_Woman::
 	goto_if_set FLAG_GOT_HM02, Route16_House_EventScript_AlreadyGotHM02
 	msgbox Route16_House_Text_FoundMySecretRetreat
 	checkitemspace ITEM_HM02
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route16_House_EventScript_NoRoomForHM02
+	goto_if_eq VAR_RESULT, FALSE, Route16_House_EventScript_NoRoomForHM02
 	giveitem_msg Route16_House_Text_ReceivedHM02FromGirl, ITEM_HM02
 	msgbox Route16_House_Text_ExplainHM02
 	setflag FLAG_GOT_HM02

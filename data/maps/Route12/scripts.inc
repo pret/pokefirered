@@ -17,8 +17,7 @@ Route12_EventScript_Snorlax::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	msgbox Text_WantToUsePokeFlute, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route12_EventScript_DontUsePokeFlute
+	goto_if_eq VAR_RESULT, NO, Route12_EventScript_DontUsePokeFlute
 	call EventScript_AwakenSnorlax
 	setwildbattle SPECIES_SNORLAX, 30
 	waitse
@@ -31,12 +30,9 @@ Route12_EventScript_Snorlax::
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq Route12_EventScript_FoughtSnorlax
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq Route12_EventScript_FoughtSnorlax
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq Route12_EventScript_FoughtSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route12_EventScript_FoughtSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route12_EventScript_FoughtSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route12_EventScript_FoughtSnorlax
 	release
 	end
 

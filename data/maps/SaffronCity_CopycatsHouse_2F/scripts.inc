@@ -23,13 +23,10 @@ SaffronCity_CopycatsHouse_2F_EventScript_Copycat::
 	lock
 	faceplayer
 	checkitem ITEM_POKE_DOLL
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_MimicTutor
+	goto_if_eq VAR_RESULT, TRUE, EventScript_MimicTutor
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale
+	call_if_eq VAR_RESULT, MALE, SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale
+	call_if_eq VAR_RESULT, FEMALE, SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale
 	release
 	end
 

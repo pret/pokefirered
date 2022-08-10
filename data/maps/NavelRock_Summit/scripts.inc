@@ -28,8 +28,7 @@ NavelRock_Summit_OnResume::
 
 NavelRock_Summit_EventScript_TryRemoveHoOh::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
 	removeobject LOCALID_HO_OH
 	return
 
@@ -67,12 +66,9 @@ NavelRock_Summit_EventScript_HoOh::
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	setvar VAR_LAST_TALKED, LOCALID_HO_OH
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq NavelRock_Summit_EventScript_DefeatedHoOh
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq NavelRock_Summit_EventScript_RanFromHoOh
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq NavelRock_Summit_EventScript_RanFromHoOh
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Summit_EventScript_DefeatedHoOh
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Summit_EventScript_RanFromHoOh
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Summit_EventScript_RanFromHoOh
 	setflag FLAG_FOUGHT_HO_OH
 	releaseall
 	end

@@ -38,17 +38,14 @@ EventScript_FieldPoison::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special TryFieldPoisonWhiteOut
 	waitstate
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_FieldWhiteOut
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FieldWhiteOut
 	releaseall
 	end
 
 EventScript_FieldWhiteOut::
 	checkmoney 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_FieldWhiteOutNoMoney
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_FieldWhiteOutHasMoney
+	goto_if_eq VAR_RESULT, FALSE, EventScript_FieldWhiteOutNoMoney
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FieldWhiteOutHasMoney
 	end
 
 EventScript_FieldWhiteOutNoMoney::

@@ -10,10 +10,8 @@ ThreeIsland_Port_OnTransition::
 ThreeIsland_Port_EventScript_Woman::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
-	goto_if_ge ThreeIsland_Port_EventScript_WomanLostelleFound
-	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if_ge ThreeIsland_Port_EventScript_WomanBikersGone
+	goto_if_ge VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, ThreeIsland_Port_EventScript_WomanLostelleFound
+	goto_if_ge VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_Port_EventScript_WomanBikersGone
 	msgbox ThreeIsland_Port_Text_IllCallThePolice
 	release
 	end

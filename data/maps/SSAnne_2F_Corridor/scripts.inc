@@ -31,30 +31,21 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 20
-	compare VAR_TEMP_1, 0
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalApproachMid
-	compare VAR_TEMP_1, 2
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalApproachRight
+	call_if_eq VAR_TEMP_1, 0, SSAnne_2F_Corridor_EventScript_RivalApproachLeft
+	call_if_eq VAR_TEMP_1, 1, SSAnne_2F_Corridor_EventScript_RivalApproachMid
+	call_if_eq VAR_TEMP_1, 2, SSAnne_2F_Corridor_EventScript_RivalApproachRight
 	msgbox SSAnne_2F_Corridor_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_RIVAL
-	compare VAR_STARTER_MON, 2
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalCharmander
+	call_if_eq VAR_STARTER_MON, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
+	call_if_eq VAR_STARTER_MON, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
 	msgbox SSAnne_2F_Corridor_Text_RivalPostBattle
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL_EXIT, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalExitLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalExitMid
-	compare VAR_TEMP_1, 2
-	call_if_eq SSAnne_2F_Corridor_EventScript_RivalExitRight
+	call_if_eq VAR_TEMP_1, 0, SSAnne_2F_Corridor_EventScript_RivalExitLeft
+	call_if_eq VAR_TEMP_1, 1, SSAnne_2F_Corridor_EventScript_RivalExitMid
+	call_if_eq VAR_TEMP_1, 2, SSAnne_2F_Corridor_EventScript_RivalExitRight
 	fadedefaultbgm
 	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1

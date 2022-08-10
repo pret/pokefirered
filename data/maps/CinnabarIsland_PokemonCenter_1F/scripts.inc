@@ -32,8 +32,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill::
 	lock
 	faceplayer
 	msgbox CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail
 	msgbox CinnabarIsland_PokemonCenter_1F_Text_LetsGo
 	closemessage
 	playbgm MUS_FOLLOW_ME, 1
@@ -41,12 +40,9 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill::
 	setflag FLAG_DONT_TRANSITION_MUSIC
 	setflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	delay 20
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth
-	compare VAR_FACING, DIR_EAST
-	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast
-	compare VAR_FACING, DIR_WEST
-	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest
+	call_if_eq VAR_FACING, DIR_SOUTH, CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth
+	call_if_eq VAR_FACING, DIR_EAST, CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast
+	call_if_eq VAR_FACING, DIR_WEST, CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest
 	removeobject LOCALID_BILL
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL

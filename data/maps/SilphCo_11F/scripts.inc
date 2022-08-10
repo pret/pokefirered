@@ -15,13 +15,10 @@ SilphCo_11F_EventScript_President::
 	faceplayer
 	goto_if_set FLAG_GOT_MASTER_BALL_FROM_SILPH, SilphCo_11F_EventScript_AlreadyGotMasterBall
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq SilphCo_11F_EventScript_PresidentThanksMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq SilphCo_11F_EventScript_PresidentThanksFemale
+	call_if_eq VAR_RESULT, MALE, SilphCo_11F_EventScript_PresidentThanksMale
+	call_if_eq VAR_RESULT, FEMALE, SilphCo_11F_EventScript_PresidentThanksFemale
 	checkitemspace ITEM_MASTER_BALL
-	compare VAR_RESULT, FALSE
-	goto_if_eq SilphCo_11F_EventScript_NoRoomForMasterBall
+	goto_if_eq VAR_RESULT, FALSE, SilphCo_11F_EventScript_NoRoomForMasterBall
 	giveitem_msg SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_OBTAIN_KEY_ITEM
 	msgbox SilphCo_11F_Text_ThatsOurSecretPrototype
 	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
@@ -69,10 +66,8 @@ SilphCo_11F_EventScript_BattleGiovanni::
 	delay 25
 	msgbox SilphCo_11F_Text_GiovanniIntro
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq SilphCo_11F_EventScript_GiovanniApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq SilphCo_11F_EventScript_GiovanniApproachRight
+	call_if_eq VAR_TEMP_1, 0, SilphCo_11F_EventScript_GiovanniApproachLeft
+	call_if_eq VAR_TEMP_1, 1, SilphCo_11F_EventScript_GiovanniApproachRight
 	setvar VAR_LAST_TALKED, LOCALID_GIOVANNI
 	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI_2, SilphCo_11F_Text_GiovanniDefeat
 	msgbox SilphCo_11F_Text_GiovanniPostBattle

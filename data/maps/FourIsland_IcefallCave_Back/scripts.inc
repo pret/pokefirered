@@ -8,8 +8,7 @@ FourIsland_IcefallCave_Back_MapScripts::
 	.byte 0
 
 FourIsland_IcefallCave_Back_OnTransition::
-	compare VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
-	call_if_eq FourIsland_IcefallCave_Back_EventScript_HideLorelei
+	call_if_eq VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1, FourIsland_IcefallCave_Back_EventScript_HideLorelei
 	end
 
 FourIsland_IcefallCave_Back_EventScript_HideLorelei::

@@ -14,13 +14,10 @@ Route12_NorthEntrance_2F_EventScript_Lass::
 	faceplayer
 	goto_if_set FLAG_GOT_TM27, Route12_NorthEntrance_2F_EventScript_ExplainTM27
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq Route12_NorthEntrance_2F_EventScript_TakeTMMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq Route12_NorthEntrance_2F_EventScript_TakeTMFemale
+	call_if_eq VAR_RESULT, MALE, Route12_NorthEntrance_2F_EventScript_TakeTMMale
+	call_if_eq VAR_RESULT, FEMALE, Route12_NorthEntrance_2F_EventScript_TakeTMFemale
 	checkitemspace ITEM_TM27
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route12_NorthEntrance_2F_EventScript_NoRoomForTM27
+	goto_if_eq VAR_RESULT, FALSE, Route12_NorthEntrance_2F_EventScript_NoRoomForTM27
 	giveitem_msg Route12_NorthEntrance_2F_Text_ReceivedTM27FromLittleGirl, ITEM_TM27
 	msgbox Route12_NorthEntrance_2F_Text_ExplainTM27
 	setflag FLAG_GOT_TM27

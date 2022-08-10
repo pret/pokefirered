@@ -12,14 +12,11 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_Clifton::
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_ESPHERE_TRADE, CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded
 	msgbox Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade
 	call EventScript_ChooseMonForInGameTrade
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade
 	call EventScript_GetInGameTradeSpecies
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon
 	call EventScript_DoInGameTrade
 	msgbox Trade_Text_Thanks
 	setflag FLAG_DID_ESPHERE_TRADE
@@ -51,18 +48,15 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_Norma::
 	copyvar VAR_0x8009, VAR_RESULT
 	goto_if_set FLAG_DID_TANGENY_TRADE, CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded
 	msgbox Trade_Text_DoYouHaveMonWantToTradeForMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade
 	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon

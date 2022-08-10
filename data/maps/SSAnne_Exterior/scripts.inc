@@ -16,10 +16,8 @@ SSAnne_Exterior_OnFrame::
 SSAnne_Exterior_ExitSSAnne::
 	lockall
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8005, 6
-	call_if_le SSAnne_Exterior_WalkDown
-	compare VAR_0x8005, 7
-	call_if_ge SSAnne_Exterior_WalkInPlaceDown
+	call_if_le VAR_0x8005, 6, SSAnne_Exterior_WalkDown
+	call_if_ge VAR_0x8005, 7, SSAnne_Exterior_WalkInPlaceDown
 	fadenewbgm MUS_SURF
 	delay 50
 	special DoSSAnneDepartureCutscene

@@ -9,12 +9,9 @@ CinnabarIsland_MapScripts::
 CinnabarIsland_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call CinnabarIsland_EventScript_CheckUnlockGym
-	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 1
-	call_if_eq CinnabarIsland_EventScript_ReadyObjectsSailToOneIsland
-	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 3
-	call_if_eq CinnabarIsland_EventScript_ReadyObjectsReturnFromSeviiIslands
-	compare VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
-	call_if_eq CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter
+	call_if_eq VAR_MAP_SCENE_CINNABAR_ISLAND, 1, CinnabarIsland_EventScript_ReadyObjectsSailToOneIsland
+	call_if_eq VAR_MAP_SCENE_CINNABAR_ISLAND, 3, CinnabarIsland_EventScript_ReadyObjectsReturnFromSeviiIslands
+	call_if_eq VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1, CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter
 	end
 
 CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter::
@@ -27,8 +24,7 @@ CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter::
 
 CinnabarIsland_EventScript_ReadyObjectsSailToOneIsland::
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 18
-	goto_if_ge CinnabarIsland_EventScript_MoveSeagallopDown
+	goto_if_ge VAR_0x8004, 18, CinnabarIsland_EventScript_MoveSeagallopDown
 	setflag FLAG_TEMP_2
 	setobjectxyperm LOCALID_BILL, 18, 12
 	setobjectmovementtype LOCALID_BILL, MOVEMENT_TYPE_FACE_UP
@@ -106,10 +102,8 @@ CinnabarIsland_EventScript_BillScene::
 	call_if_set FLAG_TEMP_2, CinnabarIsland_EventScript_BillApproachPlayer2
 	msgbox CinnabarIsland_Text_HeyIfItIsntPlayer
 	msgbox CinnabarIsland_Text_ComeWithMeToOneIsland, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_EventScript_AgreeSailToOneIsland
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_EventScript_DeclineSailToOneIsland
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_EventScript_AgreeSailToOneIsland
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_EventScript_DeclineSailToOneIsland
 	end
 
 CinnabarIsland_EventScript_BillFacePlayer1::

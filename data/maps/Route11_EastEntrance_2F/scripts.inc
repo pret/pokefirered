@@ -26,14 +26,11 @@ Route11_EastEntrance_2F_EventScript_Turner::
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_NINA_TRADE, Route11_EastEntrance_2F_EventScript_AlreadyTraded
 	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route11_EastEntrance_2F_EventScript_DeclineTrade
+	goto_if_eq VAR_RESULT, NO, Route11_EastEntrance_2F_EventScript_DeclineTrade
 	call EventScript_ChooseMonForInGameTrade
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge Route11_EastEntrance_2F_EventScript_DeclineTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Route11_EastEntrance_2F_EventScript_DeclineTrade
 	call EventScript_GetInGameTradeSpecies
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne Route11_EastEntrance_2F_EventScript_NotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, Route11_EastEntrance_2F_EventScript_NotRequestedMon
 	call EventScript_DoInGameTrade
 	msgbox Trade_Text_HeyThanks
 	setflag FLAG_DID_NINA_TRADE
@@ -62,18 +59,15 @@ Route11_EastEntrance_2F_EventScript_Aide::
 	call Route11_EastEntrance_2F_EventScript_GetAideRequestInfo
 	goto_if_set FLAG_GOT_ITEMFINDER, Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder
 	msgbox Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Aide_EventScript_DeclineCheckMons
+	goto_if_eq VAR_RESULT, NO, Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
 	buffernumberstring STR_VAR_3, VAR_0x8006
 	call Route11_EastEntrance_2F_EventScript_GetAideRequestInfo
-	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
-	goto_if_lt Aide_EventScript_HaventCaughtEnough
+	goto_if_lt VAR_0x8006, REQUIRED_CAUGHT_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route11_EastEntrance_2F_Text_GreatHereYouGo
 	checkitemspace ITEM_ITEMFINDER
-	compare VAR_RESULT, FALSE
-	goto_if_eq Aide_EventScript_NoRoomForItem
+	goto_if_eq VAR_RESULT, FALSE, Aide_EventScript_NoRoomForItem
 	giveitem_msg Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide, ITEM_ITEMFINDER
 	setflag FLAG_GOT_ITEMFINDER
 	msgbox Route11_EastEntrance_2F_Text_ExplainItemfinder

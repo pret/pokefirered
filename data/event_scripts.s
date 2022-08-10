@@ -1249,8 +1249,7 @@ VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman::
 	msgbox VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	msgbox VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches
 	release
 	end

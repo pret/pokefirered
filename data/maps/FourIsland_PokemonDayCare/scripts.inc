@@ -8,32 +8,25 @@ FourIsland_PokemonDayCare_EventScript_DaycareWoman::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, GetDaycareState
-	compare VAR_RESULT, DAYCARE_EGG_WAITING
-	goto_if_eq FourIsland_PokemonDayCare_EggWaiting
-	compare VAR_RESULT, DAYCARE_ONE_MON
-	goto_if_eq FourIsland_PokemonDayCare_OneMonInDaycare
-	compare VAR_RESULT, DAYCARE_TWO_MONS
-	goto_if_eq FourIsland_PokemonDayCare_TwoMonsInDaycare
+	goto_if_eq VAR_RESULT, DAYCARE_EGG_WAITING, FourIsland_PokemonDayCare_EggWaiting
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, FourIsland_PokemonDayCare_OneMonInDaycare
+	goto_if_eq VAR_RESULT, DAYCARE_TWO_MONS, FourIsland_PokemonDayCare_TwoMonsInDaycare
 	msgbox DayCare_Text_WouldYouLikeUsToRaiseMon, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_GiveMonToRaise
 	msgbox DayCare_Text_FineThenComeAgain
 	release
 	end
 
 FourIsland_PokemonDayCare_GiveMonToRaise::
 	specialvar VAR_RESULT, CountPartyNonEggMons
-	compare VAR_RESULT, 1
-	goto_if_eq FourIsland_PokemonDayCare_OnlyOneMonInParty
+	goto_if_eq VAR_RESULT, 1, FourIsland_PokemonDayCare_OnlyOneMonInParty
 	msgbox DayCare_Text_WhichMonShouldWeRaise
 	fadescreen FADE_TO_BLACK
 	special ChooseSendDaycareMon
 	waitstate
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge FourIsland_PokemonDayCare_ComeAgain
+	goto_if_ge VAR_0x8004, PARTY_SIZE, FourIsland_PokemonDayCare_ComeAgain
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	compare VAR_RESULT, 0
-	goto_if_eq FourIsland_PokemonDayCare_OnlyOneAliveMonInParty
+	goto_if_eq VAR_RESULT, 0, FourIsland_PokemonDayCare_OnlyOneAliveMonInParty
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
 	playmoncry VAR_0x8005, CRY_MODE_NORMAL
@@ -42,8 +35,7 @@ FourIsland_PokemonDayCare_GiveMonToRaise::
 	special StoreSelectedPokemonInDaycare
 	incrementgamestat GAME_STAT_USED_DAYCARE
 	specialvar VAR_RESULT, GetDaycareState
-	compare VAR_RESULT, DAYCARE_ONE_MON
-	goto_if_eq FourIsland_PokemonDayCare_CanRaiseOneMore
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, FourIsland_PokemonDayCare_CanRaiseOneMore
 	release
 	end
 
@@ -54,8 +46,7 @@ FourIsland_PokemonDayCare_ComeAgain::
 
 FourIsland_PokemonDayCare_CanRaiseOneMore::
 	msgbox DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_GiveMonToRaise
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
@@ -80,8 +71,7 @@ FourIsland_PokemonDayCare_MonHasGrownXLevels::
 
 FourIsland_PokemonDayCare_DisplayLevelsGained::
 	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
-	compare VAR_RESULT, 0
-	call_if_ne FourIsland_PokemonDayCare_MonHasGrownXLevels
+	call_if_ne VAR_RESULT, 0, FourIsland_PokemonDayCare_MonHasGrownXLevels
 	return
 
 FourIsland_PokemonDayCare_OneMonInDaycare::
@@ -89,42 +79,35 @@ FourIsland_PokemonDayCare_OneMonInDaycare::
 	setvar VAR_0x8004, 0
 	call FourIsland_PokemonDayCare_DisplayLevelsGained
 	msgbox DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_GiveMonToRaise
 	msgbox DayCare_Text_TakeYourMonBack, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_TryRetrieveMon
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
 FourIsland_PokemonDayCare_TryRetrieveMon::
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq FourIsland_PokemonDayCare_NoRoomInParty
+	goto_if_eq VAR_RESULT, PARTY_SIZE, FourIsland_PokemonDayCare_NoRoomInParty
 	specialvar VAR_RESULT, GetDaycareState
 	setvar VAR_0x8004, 0
-	compare VAR_RESULT, DAYCARE_ONE_MON
-	goto_if_eq FourIsland_PokemonDayCare_CostPrompt
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, FourIsland_PokemonDayCare_CostPrompt
 	special ShowDaycareLevelMenu
 	waitstate
 	copyvar VAR_0x8004, VAR_RESULT
-	compare VAR_RESULT, DAYCARE_EXITED_LEVEL_MENU
-	goto_if_eq FourIsland_PokemonDayCare_ComeAgain
+	goto_if_eq VAR_RESULT, DAYCARE_EXITED_LEVEL_MENU, FourIsland_PokemonDayCare_ComeAgain
 	goto FourIsland_PokemonDayCare_CostPrompt
 	end
 
 FourIsland_PokemonDayCare_CostPrompt::
 	special GetDaycareCost
 	msgbox DayCare_Text_ItWillCostX, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_CheckEnoughMoney
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_CheckEnoughMoney
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
 FourIsland_PokemonDayCare_CheckEnoughMoney::
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
-	compare VAR_RESULT, TRUE
-	goto_if_eq FourIsland_PokemonDayCare_RetrieveMon
+	goto_if_eq VAR_RESULT, TRUE, FourIsland_PokemonDayCare_RetrieveMon
 	msgbox DayCare_Text_NotEnoughMoney
 	release
 	end
@@ -143,15 +126,13 @@ FourIsland_PokemonDayCare_RetrieveMon::
 	call EventScript_RestorePrevTextColor
 	waitmoncry
 	specialvar VAR_RESULT, GetDaycareState
-	compare VAR_RESULT, DAYCARE_ONE_MON
-	goto_if_eq FourIsland_PokemonDayCare_AskRetrieveOtherMon
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, FourIsland_PokemonDayCare_AskRetrieveOtherMon
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
 FourIsland_PokemonDayCare_AskRetrieveOtherMon::
 	msgbox DayCare_Text_TakeOtherOneBackToo, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_TryRetrieveMon
 	goto FourIsland_PokemonDayCare_ComeAgain
 	end
 
@@ -193,8 +174,7 @@ FourIsland_PokemonDayCare_TwoMonsInDaycare::
 	setvar VAR_0x8004, 1
 	call FourIsland_PokemonDayCare_DisplayLevelsGained
 	msgbox DayCare_Text_TakeYourMonBack, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon
+	goto_if_eq VAR_RESULT, YES, FourIsland_PokemonDayCare_TryRetrieveMon
 	msgbox DayCare_Text_ComeAgain
 	release
 	end
@@ -203,8 +183,7 @@ FourIsland_PokemonDayCare_TwoMonsInDaycare::
 FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon::
 	special ShowDaycareLevelMenu
 	waitstate
-	compare VAR_RESULT, 2
-	goto_if_eq FourIsland_PokemonDayCare_ComeAgain
+	goto_if_eq VAR_RESULT, 2, FourIsland_PokemonDayCare_ComeAgain
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, TakePokemonFromDaycare
 	msgbox DayCare_Text_HeresYourMon

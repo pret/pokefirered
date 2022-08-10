@@ -7,8 +7,7 @@ SafariZone_SecretHouse_EventScript_Attendant::
 	goto_if_set FLAG_GOT_HM03, SafariZone_SecretHouse_EventScript_ExplainSurf
 	msgbox SafariZone_SecretHouse_Text_CongratsYouveWon
 	checkitemspace ITEM_HM03
-	compare VAR_RESULT, FALSE
-	goto_if_eq SafariZone_SecretHouse_EventScript_NoRoomForHM03
+	goto_if_eq VAR_RESULT, FALSE, SafariZone_SecretHouse_EventScript_NoRoomForHM03
 	giveitem_msg SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant, ITEM_HM03
 	msgbox SafariZone_SecretHouse_Text_ExplainSurf
 	setflag FLAG_GOT_HM03

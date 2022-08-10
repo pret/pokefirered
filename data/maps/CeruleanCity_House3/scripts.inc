@@ -12,14 +12,11 @@ CeruleanCity_House3_EventScript_Dontae::
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_ZYNX_TRADE, CeruleanCity_House3_EventScript_AlreadyTraded
 	msgbox Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CeruleanCity_House3_EventScript_DeclineTrade
+	goto_if_eq VAR_RESULT, NO, CeruleanCity_House3_EventScript_DeclineTrade
 	call EventScript_ChooseMonForInGameTrade
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge CeruleanCity_House3_EventScript_DeclineTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, CeruleanCity_House3_EventScript_DeclineTrade
 	call EventScript_GetInGameTradeSpecies
-	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne CeruleanCity_House3_EventScript_NotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, CeruleanCity_House3_EventScript_NotRequestedMon
 	call EventScript_DoInGameTrade
 	msgbox Trade_Text_Thanks
 	setflag FLAG_DID_ZYNX_TRADE

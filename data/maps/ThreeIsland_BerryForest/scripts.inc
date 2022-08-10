@@ -30,8 +30,7 @@ ThreeIsland_BerryForest_EventScript_Lostelle::
 	waitmovement 0
 	msgbox ThreeIsland_BerryForest_Text_ThankYouHaveThis
 	giveitem ITEM_IAPAPA_BERRY
-	compare VAR_RESULT, FALSE
-	call_if_eq ThreeIsland_BerryForest_EventScript_NoRoomForBerry
+	call_if_eq VAR_RESULT, FALSE, ThreeIsland_BerryForest_EventScript_NoRoomForBerry
 	special BufferBigGuyOrBigGirlString
 	msgbox ThreeIsland_BerryForest_Text_LetsGoHome
 	closemessage

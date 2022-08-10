@@ -3,10 +3,8 @@ EventScript_ItemfinderDigUpUnderfootItem::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	call EventScript_TryPickUpHiddenItem
-	compare VAR_0x8007, TRUE
-	goto_if_eq EventScript_DigUpItemPutInPocket
-	compare VAR_0x8007, FALSE
-	goto_if_eq EventScript_DigUpItemBagIsFull
+	goto_if_eq VAR_0x8007, TRUE, EventScript_DigUpItemPutInPocket
+	goto_if_eq VAR_0x8007, FALSE, EventScript_DigUpItemBagIsFull
 	end
 
 EventScript_DigUpItemPutInPocket::

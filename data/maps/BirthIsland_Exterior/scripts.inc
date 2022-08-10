@@ -37,8 +37,7 @@ BirthIsland_Exterior_OnResume::
 
 BirthIsland_Exterior_EventScript_TryRemoveDeoxys::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
 	removeobject LOCALID_DEOXYS
 	return
 
@@ -90,12 +89,9 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq BirthIsland_Exterior_EventScript_DefeatedDeoxys
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	setflag FLAG_FOUGHT_DEOXYS
 	release
 	end

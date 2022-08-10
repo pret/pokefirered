@@ -7,22 +7,18 @@ CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl::
 	lock
 	faceplayer
 	call CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks
-	compare VAR_TEMP_1, 0
-	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink
+	goto_if_eq VAR_TEMP_1, 0, CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink
 	goto CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks::
 	setvar VAR_TEMP_1, 0
 	checkitem ITEM_FRESH_WATER
-	compare VAR_RESULT, TRUE
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater
+	call_if_eq VAR_RESULT, TRUE, CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater
 	checkitem ITEM_SODA_POP
-	compare VAR_RESULT, TRUE
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop
+	call_if_eq VAR_RESULT, TRUE, CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop
 	checkitem ITEM_LEMONADE
-	compare VAR_RESULT, TRUE
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade
+	call_if_eq VAR_RESULT, TRUE, CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade
 	return
 
 CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater::
@@ -39,8 +35,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade::
 
 CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink::
 	msgbox CeladonCity_DepartmentStore_Roof_Text_ImThirstyGiveHerDrink, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
+	goto_if_eq VAR_RESULT, NO, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink
 	waitmessage
@@ -145,8 +140,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink::
 	bufferitemname STR_VAR_2, VAR_0x8009
 	removeitem VAR_0x8008
 	checkitemspace VAR_0x8009
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward
 	additem VAR_0x8009
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
@@ -155,12 +149,9 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink::
 	waitfanfare
 	putitemaway VAR_0x8009
 	call EventScript_RestorePrevTextColor
-	compare VAR_0x8008, ITEM_FRESH_WATER
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16
-	compare VAR_0x8008, ITEM_SODA_POP
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20
-	compare VAR_0x8008, ITEM_LEMONADE
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33
+	call_if_eq VAR_0x8008, ITEM_FRESH_WATER, CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16
+	call_if_eq VAR_0x8008, ITEM_SODA_POP, CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20
+	call_if_eq VAR_0x8008, ITEM_LEMONADE, CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33
 	release
 	end
 
@@ -256,17 +247,12 @@ CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade::
 	return
 
 CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink::
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney
 	checkitemspace VAR_TEMP_0
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink
-	compare VAR_TEMP_1, 0
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater
-	compare VAR_TEMP_1, 1
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop
-	compare VAR_TEMP_1, 2
-	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink
+	call_if_eq VAR_TEMP_1, 0, CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater
+	call_if_eq VAR_TEMP_1, 1, CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop
+	call_if_eq VAR_TEMP_1, 2, CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade
 	updatemoneybox
 	bufferitemname STR_VAR_1, VAR_TEMP_0
 	playse SE_VEND

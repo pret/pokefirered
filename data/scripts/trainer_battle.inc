@@ -11,8 +11,7 @@ EventScript_TryDoNormalTrainerBattle::
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
 	specialvar VAR_RESULT, Script_HasTrainerBeenFought
-	compare VAR_RESULT, FALSE
-	goto_if_ne EventScript_NoTrainerBattle
+	goto_if_ne VAR_RESULT, FALSE, EventScript_NoTrainerBattle
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	goto EventScript_DoTrainerBattle
@@ -25,11 +24,9 @@ EventScript_TryDoDoubleTrainerBattle::
 	faceplayer
 	call EventScript_RevealTrainer
 	specialvar VAR_RESULT, Script_HasTrainerBeenFought
-	compare VAR_RESULT, FALSE
-	goto_if_ne EventScript_NoDoubleTrainerBattle
+	goto_if_ne VAR_RESULT, FALSE, EventScript_NoDoubleTrainerBattle
 	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
-	goto_if_ne EventScript_NotEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleBattle
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	goto EventScript_DoTrainerBattle
@@ -55,8 +52,7 @@ EventScript_DoNoIntroTrainerBattle::
 EventScript_TryDoRematchBattle::
 	call EventScript_RevealTrainer
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_NoRematchBattle
+	goto_if_eq VAR_RESULT, FALSE, EventScript_NoRematchBattle
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	special ShowTrainerIntroSpeech
@@ -73,11 +69,9 @@ EventScript_NoRematchBattle::
 
 EventScript_TryDoDoubleRematchBattle::
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_NoDoubleRematchBattle
+	goto_if_eq VAR_RESULT, FALSE, EventScript_NoDoubleRematchBattle
 	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
-	goto_if_ne EventScript_NotEnoughMonsForDoubleRematchBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleRematchBattle
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
 	special ShowTrainerIntroSpeech
@@ -119,16 +113,11 @@ EventScript_DoTrainerBattle::
 	goto_if_questlog EventScript_EndQuestLogBattle
 	dotrainerbattle
 	specialvar VAR_RESULT, GetTrainerBattleMode
-	compare VAR_RESULT, TRAINER_BATTLE_SINGLE
-	goto_if_eq EventScript_EndTrainerBattle
-	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT
-	goto_if_eq EventScript_EndTrainerBattleContinueScript
-	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
-	goto_if_eq EventScript_EndTrainerBattleContinueScript
-	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE
-	goto_if_eq EventScript_EndTrainerBattleContinueScript
-	compare VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC
-	goto_if_eq EventScript_EndTrainerBattleContinueScript
+	goto_if_eq VAR_RESULT, TRAINER_BATTLE_SINGLE, EventScript_EndTrainerBattle
+	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT, EventScript_EndTrainerBattleContinueScript
+	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, EventScript_EndTrainerBattleContinueScript
+	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, EventScript_EndTrainerBattleContinueScript
+	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, EventScript_EndTrainerBattleContinueScript
 EventScript_EndTrainerBattle::
 	releaseall
 	end

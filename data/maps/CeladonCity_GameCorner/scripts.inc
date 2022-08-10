@@ -39,19 +39,15 @@ CeladonCity_GameCorner_EventScript_CoinsClerk::
 
 CeladonCity_GameCorner_EventScript_BuyCoins::
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_ClerkNoCoinCase
-	compare VAR_0x8009, 0
-	goto_if_eq CeladonCity_GameCorner_EventScript_Buy50Coins
-	compare VAR_0x8009, 1
-	goto_if_eq CeladonCity_GameCorner_EventScript_Buy500Coins
+	goto_if_eq VAR_0x8009, 0, CeladonCity_GameCorner_EventScript_Buy50Coins
+	goto_if_eq VAR_0x8009, 1, CeladonCity_GameCorner_EventScript_Buy500Coins
 	end
 
 CeladonCity_GameCorner_EventScript_Buy500Coins::
 	checkcoins VAR_TEMP_1
-	compare VAR_TEMP_1, (MAX_COINS + 1) - 500
-	goto_if_ge CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 500, CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
 	checkmoney 10000
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
 	addcoins 500
 	removemoney 10000
 	goto CeladonCity_GameCorner_EventScript_BoughtCoins
@@ -59,11 +55,9 @@ CeladonCity_GameCorner_EventScript_Buy500Coins::
 
 CeladonCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
-	compare VAR_TEMP_1, (MAX_COINS + 1) - 50
-	goto_if_ge CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 50, CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
 	checkmoney 1000
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
+	goto_if_eq VAR_RESULT, FALSE, CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
 	addcoins 50
 	removemoney 1000
 	goto CeladonCity_GameCorner_EventScript_BoughtCoins
@@ -131,8 +125,7 @@ CeladonCity_GameCorner_EventScript_Fisher::
 	msgbox CeladonCity_GameCorner_Text_DoYouWantToPlay
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_GamblerNoCoinCase
 	checkcoins VAR_TEMP_1
-	compare VAR_TEMP_1, (MAX_COINS + 1) - 10
-	goto_if_ge CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 10, CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins
 	addcoins 10
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received10CoinsFromMan
@@ -192,8 +185,7 @@ CeladonCity_GameCorner_EventScript_Scientist::
 	msgbox CeladonCity_GameCorner_Text_WantSomeCoins
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_GamblerNoCoinCase
 	checkcoins VAR_TEMP_1
-	compare VAR_TEMP_1, (MAX_COINS + 1) - 20
-	goto_if_ge CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 20, CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins
 	addcoins 20
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received20CoinsFromNiceGuy
@@ -220,8 +212,7 @@ CeladonCity_GameCorner_EventScript_Gentleman::
 	msgbox CeladonCity_GameCorner_Text_HereAreSomeCoinsShoo
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_GamblerNoCoinCase
 	checkcoins VAR_TEMP_1
-	compare VAR_TEMP_1, (MAX_COINS + 1) - 20
-	goto_if_ge CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 20, CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins
 	addcoins 20
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received20CoinsFromMan
@@ -254,8 +245,7 @@ CeladonCity_GameCorner_EventScript_DontPlaySlotMachine::
 CeladonCity_GameCorner_EventScript_SlotMachine::
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase
 	msgbox CeladonCity_GameCorner_Text_SlotMachineWantToPlay, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
+	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
 	setfieldeffectargument 0, OBJ_EVENT_ID_PLAYER
 .ifdef BUGFIX
 	setfieldeffectargument 1, MAP_NUM(CELADON_CITY_GAME_CORNER)
@@ -429,10 +419,8 @@ CeladonCity_GameCorner_EventScript_RocketGrunt::
 CeladonCity_GameCorner_Text_DefeatedGrunt::
 	msgbox CeladonCity_GameCorner_Text_GruntPostBattle
 	closemessage
-	compare VAR_FACING, DIR_WEST
-	call_if_eq CeladonCity_GameCorner_Text_GruntExitWest
-	compare VAR_FACING, DIR_WEST
-	call_if_ne CeladonCity_GameCorner_Text_GruntExit
+	call_if_eq VAR_FACING, DIR_WEST, CeladonCity_GameCorner_Text_GruntExitWest
+	call_if_ne VAR_FACING, DIR_WEST, CeladonCity_GameCorner_Text_GruntExit
 	removeobject LOCALID_GRUNT
 	release
 	end

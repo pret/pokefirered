@@ -9,8 +9,7 @@ CeruleanCave_B1F_OnResume::
 
 CeruleanCave_B1F_EventScript_TryRemoveMewtwo::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -41,12 +40,9 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq CeruleanCave_B1F_EventScript_DefeatedMewtwo
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq CeruleanCave_B1F_EventScript_RanFromMewtwo
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq CeruleanCave_B1F_EventScript_RanFromMewtwo
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeruleanCave_B1F_EventScript_DefeatedMewtwo
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeruleanCave_B1F_EventScript_RanFromMewtwo
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeruleanCave_B1F_EventScript_RanFromMewtwo
 	setflag FLAG_FOUGHT_MEWTWO
 	release
 	end

@@ -8,8 +8,7 @@ Route1_EventScript_MartClerk::
 	msgbox Route1_Text_WorkAtPokeMartTakeSample
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	checkitemspace ITEM_POTION
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	bufferitemname STR_VAR_2, ITEM_POTION
 	playfanfare MUS_LEVEL_UP
 	message Text_ObtainedTheX

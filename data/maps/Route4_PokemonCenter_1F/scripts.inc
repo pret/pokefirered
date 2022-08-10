@@ -26,10 +26,8 @@ Route4_PokemonCenter_1F_EventScript_MagikarpSalesman::
 	goto_if_set FLAG_BOUGHT_MAGIKARP, Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp
 	showmoneybox 0, 0
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale
+	goto_if_eq VAR_RESULT, MALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
+	goto_if_eq VAR_RESULT, FEMALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale
 	end
 
 Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale::
@@ -43,27 +41,21 @@ Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale::
 	end
 
 Route4_PokemonCenter_1F_EventScript_TryBuyMagikarp::
-	compare VAR_RESULT, NO
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_DeclineMagikarp
+	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_DeclineMagikarp
 	checkmoney MAGIKARP_PRICE
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
+	goto_if_eq VAR_RESULT, FALSE, Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	setvar VAR_TEMP_1, SPECIES_MAGIKARP
 	givemon SPECIES_MAGIKARP, 5
-	compare VAR_RESULT, 0
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty
-	compare VAR_RESULT, 1
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC
-	compare VAR_RESULT, 2
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp
+	goto_if_eq VAR_RESULT, 0, Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty
+	goto_if_eq VAR_RESULT, 1, Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC
+	goto_if_eq VAR_RESULT, 2, Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp
 	end
 
 Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty::
 	call Route4_PokemonCenter_1F_EventScript_PayForMagikarp
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp
+	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp
 	call EventScript_GetGiftMonPartySlot
 	fadescreen FADE_TO_BLACK
 	hidemoneybox
@@ -75,8 +67,7 @@ Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty::
 Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC::
 	call Route4_PokemonCenter_1F_EventScript_PayForMagikarp
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox
+	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox
 	fadescreen FADE_TO_BLACK
 	hidemoneybox
 	special ChangeBoxPokemonNickname

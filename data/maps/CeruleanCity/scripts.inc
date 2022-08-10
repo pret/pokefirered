@@ -49,22 +49,16 @@ CeruleanCity_EventScript_Rival::
 	waitmovement 0
 	msgbox CeruleanCity_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_RIVAL
-	compare VAR_STARTER_MON, 2
-	call_if_eq CeruleanCity_EventScript_RivalSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq CeruleanCity_EventScript_RivalBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq CeruleanCity_EventScript_RivalCharmander
+	call_if_eq VAR_STARTER_MON, 2, CeruleanCity_EventScript_RivalSquirtle
+	call_if_eq VAR_STARTER_MON, 1, CeruleanCity_EventScript_RivalBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, CeruleanCity_EventScript_RivalCharmander
 	famechecker FAMECHECKER_BILL, 0
 	msgbox CeruleanCity_Text_RivalPostBattle
 	closemessage
 	playbgm MUS_RIVAL_EXIT, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq CeruleanCity_EventScript_RivalStartExit
-	compare VAR_TEMP_1, 1
-	call_if_eq CeruleanCity_EventScript_RivalStartExit
-	compare VAR_TEMP_1, 2
-	call_if_eq CeruleanCity_EventScript_RivalStartExitRight
+	call_if_eq VAR_TEMP_1, 0, CeruleanCity_EventScript_RivalStartExit
+	call_if_eq VAR_TEMP_1, 1, CeruleanCity_EventScript_RivalStartExit
+	call_if_eq VAR_TEMP_1, 2, CeruleanCity_EventScript_RivalStartExitRight
 	msgbox CeruleanCity_Text_OhRightLittlePresentAsFavor
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
 	setflag FLAG_GOT_FAME_CHECKER
@@ -190,8 +184,7 @@ CeruleanCity_EventScript_Grunt::
 CeruleanCity_EventScript_GruntDefeated::
 	msgbox CeruleanCity_Text_OkayIllReturnStolenTM
 	checkitemspace ITEM_TM28
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_EventScript_NoRoomForTM28
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_EventScript_NoRoomForTM28
 	giveitem_msg CeruleanCity_Text_RecoveredTM28FromGrunt, ITEM_TM28
 	msgbox CeruleanCity_Text_BetterGetMovingBye
 	closemessage
@@ -286,24 +279,18 @@ CeruleanCity_EventScript_Lass::
 	lock
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 0
-	call_if_eq CeruleanCity_EventScript_SlowbroCommand1
-	compare VAR_0x8008, 1
-	call_if_eq CeruleanCity_EventScript_SlowbroCommand2
-	compare VAR_0x8008, 2
-	call_if_eq CeruleanCity_EventScript_SlowbroCommand3
+	call_if_eq VAR_0x8008, 0, CeruleanCity_EventScript_SlowbroCommand1
+	call_if_eq VAR_0x8008, 1, CeruleanCity_EventScript_SlowbroCommand2
+	call_if_eq VAR_0x8008, 2, CeruleanCity_EventScript_SlowbroCommand3
 	waitmessage
 	delay 40
 	playse SE_PIN
 	applymovement LOCALID_SLOWBRO, Movement_QuestionMark
 	waitmovement 0
 	delay 30
-	compare VAR_0x8008, 0
-	call_if_eq CeruleanCity_EventScript_SlowbroFailed1
-	compare VAR_0x8008, 1
-	call_if_eq CeruleanCity_EventScript_SlowbroFailed2
-	compare VAR_0x8008, 2
-	call_if_eq CeruleanCity_EventScript_SlowbroFailed3
+	call_if_eq VAR_0x8008, 0, CeruleanCity_EventScript_SlowbroFailed1
+	call_if_eq VAR_0x8008, 1, CeruleanCity_EventScript_SlowbroFailed2
+	call_if_eq VAR_0x8008, 2, CeruleanCity_EventScript_SlowbroFailed3
 	release
 	end
 
@@ -335,14 +322,10 @@ CeruleanCity_EventScript_Slowbro::
 	lock
 	random 4
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 0
-	call_if_eq CeruleanCity_EventScript_SlowbroText1
-	compare VAR_0x8008, 1
-	call_if_eq CeruleanCity_EventScript_SlowbroText2
-	compare VAR_0x8008, 2
-	call_if_eq CeruleanCity_EventScript_SlowbroText3
-	compare VAR_0x8008, 3
-	call_if_eq CeruleanCity_EventScript_SlowbroText4
+	call_if_eq VAR_0x8008, 0, CeruleanCity_EventScript_SlowbroText1
+	call_if_eq VAR_0x8008, 1, CeruleanCity_EventScript_SlowbroText2
+	call_if_eq VAR_0x8008, 2, CeruleanCity_EventScript_SlowbroText3
+	call_if_eq VAR_0x8008, 3, CeruleanCity_EventScript_SlowbroText4
 	release
 	end
 

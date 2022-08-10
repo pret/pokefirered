@@ -29,15 +29,12 @@ Std_MsgboxYesNo::
 
 Std_ReceivedItem::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	compare VAR_0x8002, MUS_LEVEL_UP
-	call_if_eq EventScript_ReceivedItemFanfare1
-	compare VAR_0x8002, MUS_OBTAIN_KEY_ITEM
-	call_if_eq EventScript_ReceivedItemFanfare2
+	call_if_eq VAR_0x8002, MUS_LEVEL_UP, EventScript_ReceivedItemFanfare1
+	call_if_eq VAR_0x8002, MUS_OBTAIN_KEY_ITEM, EventScript_ReceivedItemFanfare2
 	message 0x0
 	waitmessage
 	waitfanfare
-	compare VAR_0x8002, MUS_LEVEL_UP
-	call_if_eq EventScript_ReceivedItemWaitFanfare
+	call_if_eq VAR_0x8002, MUS_LEVEL_UP, EventScript_ReceivedItemWaitFanfare
 	putitemaway VAR_0x8000, VAR_0x8001
 	call EventScript_RestorePrevTextColor
 	return

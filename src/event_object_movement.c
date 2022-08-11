@@ -153,6 +153,14 @@ static void MovementType_VsSeeker4F(struct Sprite *);
 static void MovementType_WanderAroundSlower(struct Sprite *);
 
 enum {
+    MOVE_SPEED_NORMAL, // walking
+    MOVE_SPEED_FAST_1, // running / surfing / sliding (ice tile)
+    MOVE_SPEED_FAST_2, // water current / bicycle
+    MOVE_SPEED_FASTER, // going down cycling road on bicycle
+    MOVE_SPEED_FASTEST,
+};
+
+enum {
     JUMP_DISTANCE_IN_PLACE,
     JUMP_DISTANCE_NORMAL,
     JUMP_DISTANCE_FAR,
@@ -5346,16 +5354,15 @@ void InitNpcForMovement(struct ObjectEvent *objectEvent, struct Sprite *sprite, 
 
 void InitMovementNormal(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
-    u8 (*functions[NELEMS(gUnknown_83A6884)])(u8);
-
-    memcpy(functions, gUnknown_83A6884, sizeof gUnknown_83A6884);
+    u8 (*functions[NELEMS(sDirectionAnimFuncsBySpeed)])(u8);
+    memcpy(functions, sDirectionAnimFuncsBySpeed, sizeof sDirectionAnimFuncsBySpeed);
     InitNpcForMovement(objectEvent, sprite, direction, speed);
     SetStepAnimHandleAlternation(objectEvent, sprite, functions[speed](objectEvent->facingDirection));
 }
 
 void StartRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)
 {
-    InitNpcForMovement(objectEvent, sprite, direction, 1);
+    InitNpcForMovement(objectEvent, sprite, direction, MOVE_SPEED_FAST_1);
     SetStepAnimHandleAlternation(objectEvent, sprite, GetRunningDirectionAnimNum(objectEvent->facingDirection));
 }
 
@@ -5671,7 +5678,7 @@ static bool8 MovementActionFunc_x0F_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementAction_WalkNormalDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, 0);
+    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalDown_Step1(objectEvent, sprite);
 }
 
@@ -5687,7 +5694,7 @@ static bool8 MovementAction_WalkNormalDown_Step1(struct ObjectEvent *objectEvent
 
 static bool8 MovementAction_WalkNormalUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_NORTH, 0);
+    InitMovementNormal(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalUp_Step1(objectEvent, sprite);
 }
 
@@ -5703,7 +5710,7 @@ static bool8 MovementAction_WalkNormalUp_Step1(struct ObjectEvent *objectEvent, 
 
 static bool8 MovementAction_WalkNormalLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_WEST, 0);
+    InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalLeft_Step1(objectEvent, sprite);
 }
 
@@ -5719,7 +5726,7 @@ static bool8 MovementAction_WalkNormalLeft_Step1(struct ObjectEvent *objectEvent
 
 static bool8 MovementAction_WalkNormalRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_EAST, 0);
+    InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalRight_Step1(objectEvent, sprite);
 }
 
@@ -5952,7 +5959,7 @@ static bool8 MovementAction_Delay16_Step0(struct ObjectEvent *objectEvent, struc
 
 static bool8 MovementAction_WalkFastDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, 1);
+    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_1);
     return MovementAction_WalkFastDown_Step1(objectEvent, sprite);
 }
 
@@ -5968,7 +5975,7 @@ static bool8 MovementAction_WalkFastDown_Step1(struct ObjectEvent *objectEvent, 
 
 static bool8 MovementAction_WalkFastUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_NORTH, 1);
+    InitMovementNormal(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_1);
     return MovementAction_WalkFastUp_Step1(objectEvent, sprite);
 }
 
@@ -5984,7 +5991,7 @@ static bool8 MovementAction_WalkFastUp_Step1(struct ObjectEvent *objectEvent, st
 
 static bool8 MovementAction_WalkFastLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_WEST, 1);
+    InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_1);
     return MovementAction_WalkFastLeft_Step1(objectEvent, sprite);
 }
 
@@ -6000,7 +6007,7 @@ static bool8 MovementAction_WalkFastLeft_Step1(struct ObjectEvent *objectEvent, 
 
 static bool8 MovementAction_WalkFastRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_EAST, 1);
+    InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_1);
     return MovementAction_WalkFastRight_Step1(objectEvent, sprite);
 }
 
@@ -6030,7 +6037,7 @@ u8 MovementActionFunc_xA0_0(struct ObjectEvent *objectEvent, struct Sprite *spri
     if(objectEvent->facingDirection != DIR_SOUTH)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_SOUTH));
     
-    InitNpcForMovement(objectEvent, sprite, DIR_SOUTH, 1);
+    InitNpcForMovement(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_1);
     return MovementActionFunc_xA0_1(objectEvent, sprite);
 }
 
@@ -6050,7 +6057,7 @@ u8 MovementActionFunc_xA1_0(struct ObjectEvent *objectEvent, struct Sprite *spri
     if(objectEvent->facingDirection != DIR_NORTH)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_NORTH));
     
-    InitNpcForMovement(objectEvent, sprite, DIR_NORTH, 1);
+    InitNpcForMovement(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_1);
     return MovementActionFunc_xA1_1(objectEvent, sprite);
 }
 
@@ -6070,7 +6077,7 @@ u8 MovementActionFunc_xA2_0(struct ObjectEvent *objectEvent, struct Sprite *spri
     if(objectEvent->facingDirection != DIR_WEST)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_WEST));
     
-    InitNpcForMovement(objectEvent, sprite, DIR_WEST, 1);
+    InitNpcForMovement(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_1);
     return MovementActionFunc_xA2_1(objectEvent, sprite);
 }
 
@@ -6090,7 +6097,7 @@ u8 MovementActionFunc_xA3_0(struct ObjectEvent *objectEvent, struct Sprite *spri
     if(objectEvent->facingDirection != DIR_EAST)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_EAST));
     
-    InitNpcForMovement(objectEvent, sprite, DIR_EAST, 1);
+    InitNpcForMovement(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_1);
     return MovementActionFunc_xA3_1(objectEvent, sprite);
 }
 
@@ -6279,7 +6286,7 @@ static bool8 MovementAction_WalkInPlaceFastestRight_Step0(struct ObjectEvent *ob
 
 static bool8 MovementAction_RideWaterCurrentDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, 2);
+    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_2);
     return MovementAction_RideWaterCurrentDown_Step1(objectEvent, sprite);
 }
 
@@ -6295,7 +6302,7 @@ static bool8 MovementAction_RideWaterCurrentDown_Step1(struct ObjectEvent *objec
 
 static bool8 MovementAction_RideWaterCurrentUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_NORTH, 2);
+    InitMovementNormal(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_2);
     return MovementAction_RideWaterCurrentUp_Step1(objectEvent, sprite);
 }
 
@@ -6311,7 +6318,7 @@ static bool8 MovementAction_RideWaterCurrentUp_Step1(struct ObjectEvent *objectE
 
 static bool8 MovementAction_RideWaterCurrentLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_WEST, 2);
+    InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_2);
     return MovementAction_RideWaterCurrentLeft_Step1(objectEvent, sprite);
 }
 
@@ -6327,7 +6334,7 @@ static bool8 MovementAction_RideWaterCurrentLeft_Step1(struct ObjectEvent *objec
 
 static bool8 MovementAction_RideWaterCurrentRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_EAST, 2);
+    InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_2);
     return MovementAction_RideWaterCurrentRight_Step1(objectEvent, sprite);
 }
 
@@ -6343,7 +6350,7 @@ static bool8 MovementAction_RideWaterCurrentRight_Step1(struct ObjectEvent *obje
 
 static bool8 MovementAction_WalkFastestDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, 3);
+    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FASTER);
     return MovementAction_WalkFastestDown_Step1(objectEvent, sprite);
 }
 
@@ -6359,7 +6366,7 @@ static bool8 MovementAction_WalkFastestDown_Step1(struct ObjectEvent *objectEven
 
 static bool8 MovementAction_WalkFastestUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_NORTH, 3);
+    InitMovementNormal(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FASTER);
     return MovementAction_WalkFastestUp_Step1(objectEvent, sprite);
 }
 
@@ -6375,7 +6382,7 @@ static bool8 MovementAction_WalkFastestUp_Step1(struct ObjectEvent *objectEvent,
 
 static bool8 MovementAction_WalkFastestLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_WEST, 3);
+    InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FASTER);
     return MovementAction_WalkFastestLeft_Step1(objectEvent, sprite);
 }
 
@@ -6391,7 +6398,7 @@ static bool8 MovementAction_WalkFastestLeft_Step1(struct ObjectEvent *objectEven
 
 static bool8 MovementAction_WalkFastestRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_EAST, 3);
+    InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FASTER);
     return MovementAction_WalkFastestRight_Step1(objectEvent, sprite);
 }
 
@@ -6407,7 +6414,7 @@ static bool8 MovementAction_WalkFastestRight_Step1(struct ObjectEvent *objectEve
 
 static bool8 MovementAction_SlideDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, 4);
+    InitMovementNormal(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FASTEST);
     return MovementAction_SlideDown_Step1(objectEvent, sprite);
 }
 
@@ -6423,7 +6430,7 @@ static bool8 MovementAction_SlideDown_Step1(struct ObjectEvent *objectEvent, str
 
 static bool8 MovementAction_SlideUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_NORTH, 4);
+    InitMovementNormal(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FASTEST);
     return MovementAction_SlideUp_Step1(objectEvent, sprite);
 }
 
@@ -6439,7 +6446,7 @@ static bool8 MovementAction_SlideUp_Step1(struct ObjectEvent *objectEvent, struc
 
 static bool8 MovementAction_SlideLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_WEST, 4);
+    InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FASTEST);
     return MovementAction_SlideLeft_Step1(objectEvent, sprite);
 }
 
@@ -6455,7 +6462,7 @@ static bool8 MovementAction_SlideLeft_Step1(struct ObjectEvent *objectEvent, str
 
 static bool8 MovementAction_SlideRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitMovementNormal(objectEvent, sprite, DIR_EAST, 4);
+    InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FASTEST);
     return MovementAction_SlideRight_Step1(objectEvent, sprite);
 }
 
@@ -7629,7 +7636,7 @@ void InitAcroPopWheelie(struct ObjectEvent *objectEvent, struct Sprite *sprite, 
 
 static bool8 MovementAction_AcroPopWheelieMoveDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroPopWheelie(objectEvent, sprite, DIR_SOUTH, 1);
+    InitAcroPopWheelie(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_1);
     return MovementAction_AcroPopWheelieMoveDown_Step1(objectEvent, sprite);
 }
 
@@ -7645,7 +7652,7 @@ static bool8 MovementAction_AcroPopWheelieMoveDown_Step1(struct ObjectEvent *obj
 
 static bool8 MovementAction_AcroPopWheelieMoveUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroPopWheelie(objectEvent, sprite, DIR_NORTH, 1);
+    InitAcroPopWheelie(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_1);
     return MovementAction_AcroPopWheelieMoveUp_Step1(objectEvent, sprite);
 }
 
@@ -7661,7 +7668,7 @@ static bool8 MovementAction_AcroPopWheelieMoveUp_Step1(struct ObjectEvent *objec
 
 static bool8 MovementAction_AcroPopWheelieMoveLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroPopWheelie(objectEvent, sprite, DIR_WEST,  1);
+    InitAcroPopWheelie(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_1);
     return MovementAction_AcroPopWheelieMoveLeft_Step1(objectEvent, sprite);
 }
 
@@ -7677,7 +7684,7 @@ static bool8 MovementAction_AcroPopWheelieMoveLeft_Step1(struct ObjectEvent *obj
 
 static bool8 MovementAction_AcroPopWheelieMoveRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroPopWheelie(objectEvent, sprite, DIR_EAST,  1);
+    InitAcroPopWheelie(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_1);
     return MovementAction_AcroPopWheelieMoveRight_Step1(objectEvent, sprite);
 }
 
@@ -7699,7 +7706,7 @@ void InitAcroWheelieMove(struct ObjectEvent *objectEvent, struct Sprite *sprite,
 
 static bool8 MovementAction_AcroWheelieMoveDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroWheelieMove(objectEvent, sprite, DIR_SOUTH, 1);
+    InitAcroWheelieMove(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_1);
     return MovementAction_AcroWheelieMoveDown_Step1(objectEvent, sprite);
 }
 
@@ -7715,7 +7722,7 @@ static bool8 MovementAction_AcroWheelieMoveDown_Step1(struct ObjectEvent *object
 
 static bool8 MovementAction_AcroWheelieMoveUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroWheelieMove(objectEvent, sprite, DIR_NORTH, 1);
+    InitAcroWheelieMove(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_1);
     return MovementAction_AcroWheelieMoveUp_Step1(objectEvent, sprite);
 }
 
@@ -7731,7 +7738,7 @@ static bool8 MovementAction_AcroWheelieMoveUp_Step1(struct ObjectEvent *objectEv
 
 static bool8 MovementAction_AcroWheelieMoveLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroWheelieMove(objectEvent, sprite, DIR_WEST,  1);
+    InitAcroWheelieMove(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_1);
     return MovementAction_AcroWheelieMoveLeft_Step1(objectEvent, sprite);
 }
 
@@ -7747,7 +7754,7 @@ static bool8 MovementAction_AcroWheelieMoveLeft_Step1(struct ObjectEvent *object
 
 static bool8 MovementAction_AcroWheelieMoveRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitAcroWheelieMove(objectEvent, sprite, DIR_EAST, 1);
+    InitAcroWheelieMove(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_1);
     return MovementAction_AcroWheelieMoveRight_Step1(objectEvent, sprite);
 }
 
@@ -7770,7 +7777,7 @@ void InitSpin(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 directi
 
 static bool8 MovementActionFunc_x94_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitSpin(objectEvent, sprite, DIR_SOUTH, 1);
+    InitSpin(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_1);
     return MovementActionFunc_x94_1(objectEvent, sprite);
 }
 
@@ -7786,7 +7793,7 @@ static bool8 MovementActionFunc_x94_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x95_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitSpin(objectEvent, sprite, DIR_NORTH, 1);
+    InitSpin(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_1);
     return MovementActionFunc_x95_1(objectEvent, sprite);
 }
 
@@ -7802,7 +7809,7 @@ static bool8 MovementActionFunc_x95_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x96_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitSpin(objectEvent, sprite, DIR_WEST,  1);
+    InitSpin(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_1);
     return MovementActionFunc_x96_1(objectEvent, sprite);
 }
 
@@ -7818,7 +7825,7 @@ static bool8 MovementActionFunc_x96_1(struct ObjectEvent *objectEvent, struct Sp
 
 static bool8 MovementActionFunc_x97_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    InitSpin(objectEvent, sprite, DIR_EAST, 1);
+    InitSpin(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_1);
     return MovementActionFunc_x97_1(objectEvent, sprite);
 }
 
@@ -8855,31 +8862,31 @@ void UnfreezeObjectEvents(void)
 #define tSpeed     data[4]
 #define tStepNo    data[5]
 
-static void little_step(struct Sprite *sprite, u8 direction)
+static void Step1(struct Sprite *sprite, u8 direction)
 {
     sprite->x += sDirectionToVectors[direction].x;
     sprite->y += sDirectionToVectors[direction].y;
 }
 
-static void double_little_steps(struct Sprite *sprite, u8 direction)
+static void Step2(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 2 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 2 * (u16)sDirectionToVectors[direction].y;
 }
 
-static void triple_little_steps(struct Sprite *sprite, u8 direction)
+static void Step3(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 2 * (u16)sDirectionToVectors[direction].x + (u16)sDirectionToVectors[direction].x;
     sprite->y += 2 * (u16)sDirectionToVectors[direction].y + (u16)sDirectionToVectors[direction].y;
 }
 
-static void quad_little_steps(struct Sprite *sprite, u8 direction)
+static void Step4(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 4 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 4 * (u16)sDirectionToVectors[direction].y;
 }
 
-static void oct_little_steps(struct Sprite *sprite, u8 direction)
+static void Step8(struct Sprite *sprite, u8 direction)
 {
     sprite->x += 8 * (u16)sDirectionToVectors[direction].x;
     sprite->y += 8 * (u16)sDirectionToVectors[direction].y;
@@ -8894,83 +8901,83 @@ void SetSpriteDataForNormalStep(struct Sprite *sprite, u8 direction, u8 speed)
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 direction);
 
-static const SpriteStepFunc sSpeed0[] = {
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step,
-    little_step
+static const SpriteStepFunc sSpeedNormalStepFuncs[] = {
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1
 };
 
-static const SpriteStepFunc sSpeed1[] = {
-    double_little_steps,
-    double_little_steps,
-    double_little_steps,
-    double_little_steps,
-    double_little_steps,
-    double_little_steps,
-    double_little_steps,
-    double_little_steps
+static const SpriteStepFunc sSpeedFast1StepFuncs[] = {
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2
 };
 
-static const SpriteStepFunc sSpeed2[] = {
-    double_little_steps,
-    triple_little_steps,
-    triple_little_steps,
-    double_little_steps,
-    triple_little_steps,
-    triple_little_steps
+static const SpriteStepFunc sSpeedFast2StepFuncs[] = {
+    Step2,
+    Step3,
+    Step3,
+    Step2,
+    Step3,
+    Step3
 };
 
-static const SpriteStepFunc sSpeed3[] = {
-    quad_little_steps,
-    quad_little_steps,
-    quad_little_steps,
-    quad_little_steps
+static const SpriteStepFunc sSpeedFasterStepFuncs[] = {
+    Step4,
+    Step4,
+    Step4,
+    Step4
 };
 
-static const SpriteStepFunc sSpeed4[] = {
-    oct_little_steps,
-    oct_little_steps
+static const SpriteStepFunc sSpeedFastestStepFuncs[] = {
+    Step8,
+    Step8
 };
 
-static const SpriteStepFunc *const sSpriteStepFuncsBySpeed[] = {
-    sSpeed0,
-    sSpeed1,
-    sSpeed2,
-    sSpeed3,
-    sSpeed4
+static const SpriteStepFunc *const sNpcStepFuncTables[] = {
+    [MOVE_SPEED_NORMAL]  = sSpeedNormalStepFuncs,
+    [MOVE_SPEED_FAST_1]  = sSpeedFast1StepFuncs,
+    [MOVE_SPEED_FAST_2]  = sSpeedFast2StepFuncs,
+    [MOVE_SPEED_FASTER]  = sSpeedFasterStepFuncs,
+    [MOVE_SPEED_FASTEST] = sSpeedFastestStepFuncs,
 };
 
-static const s16 sSpriteStepCountsBySpeed[] = {
-    NELEMS(sSpeed0),
-    NELEMS(sSpeed1),
-    NELEMS(sSpeed2),
-    NELEMS(sSpeed3),
-    NELEMS(sSpeed4)
+static const s16 sStepTimes[] = {
+    [MOVE_SPEED_NORMAL]  = NELEMS(sSpeedNormalStepFuncs),
+    [MOVE_SPEED_FAST_1]  = NELEMS(sSpeedFast1StepFuncs),
+    [MOVE_SPEED_FAST_2]  = NELEMS(sSpeedFast2StepFuncs),
+    [MOVE_SPEED_FASTER]  = NELEMS(sSpeedFasterStepFuncs),
+    [MOVE_SPEED_FASTEST] = NELEMS(sSpeedFastestStepFuncs),
 };
 
 bool8 NpcTakeStep(struct Sprite *sprite)
 {
-    if (sprite->tStepNo >= sSpriteStepCountsBySpeed[sprite->tSpeed])
+    if (sprite->tStepNo >= sStepTimes[sprite->tSpeed])
         return FALSE;
 
-    sSpriteStepFuncsBySpeed[sprite->tSpeed][sprite->tStepNo](sprite, sprite->tDirection);
+    sNpcStepFuncTables[sprite->tSpeed][sprite->tStepNo](sprite, sprite->tDirection);
 
     sprite->tStepNo++;
 
-    if (sprite->tStepNo < sSpriteStepCountsBySpeed[sprite->tSpeed])
+    if (sprite->tStepNo < sStepTimes[sprite->tSpeed])
         return FALSE;
 
     return TRUE;
@@ -8991,7 +8998,7 @@ bool8 UpdateWalkSlowerAnim(struct Sprite *sprite)
 {
     if (!(sprite->tDelay & 1))
     {
-        little_step(sprite, sprite->tDirection);
+        Step1(sprite, sprite->tDirection);
         sprite->tStepNo++;
     }
 
@@ -9016,7 +9023,7 @@ bool8 UpdateWalkSlowAnim(struct Sprite *sprite)
 {
     if (++sprite->tDelay < 3)
     {
-        little_step(sprite, sprite->tDirection);
+        Step1(sprite, sprite->tDirection);
         sprite->tStepNo++;
     }
     else
@@ -9040,7 +9047,7 @@ bool8 UpdateWalkSlowestAnim(struct Sprite *sprite)
     if (++sprite->tDelay > 9)
     {
         sprite->tDelay = 0;
-        little_step(sprite, sprite->tDirection);
+        Step1(sprite, sprite->tDirection);
         sprite->tStepNo++;
     }
 
@@ -9061,12 +9068,12 @@ bool8 UpdateRunSlowAnim(struct Sprite *sprite)
 {
     if ((++sprite->tDelay) & 1)
     {
-        little_step(sprite, sprite->tDirection);
+        Step1(sprite, sprite->tDirection);
         sprite->tStepNo++;
     }
     else
     {
-        double_little_steps(sprite, sprite->tDirection);
+        Step2(sprite, sprite->tDirection);
         sprite->tStepNo += 2;
     }
 
@@ -9132,7 +9139,7 @@ u8 DoJumpSpriteMovement(struct Sprite *sprite)
     u8 jumpPhase = 0;
 
     if (sprite->sJumpDistance != JUMP_DISTANCE_IN_PLACE)
-        little_step(sprite, sprite->tDirection);
+        Step1(sprite, sprite->tDirection);
 
     sprite->y2 = GetJumpY(sprite->sTimer >> distanceToShift[sprite->sJumpDistance], sprite->sJumpType);
 
@@ -9157,7 +9164,7 @@ u8 DoJumpSpecialSpriteMovement(struct Sprite *sprite)
     u8 jumpPhase = 0;
 
     if (sprite->sJumpDistance != JUMP_DISTANCE_IN_PLACE && !(sprite->sTimer & 1))
-        little_step(sprite, sprite->tDirection);
+        Step1(sprite, sprite->tDirection);
 
     sprite->y2 = GetJumpY(sprite->sTimer >> shifts[sprite->sJumpDistance], sprite->sJumpType);
 

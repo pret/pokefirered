@@ -655,12 +655,12 @@ static bool8 (*const sMovementActionFuncs_x03[])(struct ObjectEvent *, struct Sp
     MovementAction_PauseSpriteAnim,
 };
 
-static bool8 (*const gUnknown_83A6884[])(u8) = {
-    GetMoveDirectionAnimNum,
-    GetMoveDirectionFastAnimNum,
-    GetMoveDirectionFastAnimNum,
-    GetMoveDirectionFasterAnimNum,
-    GetMoveDirectionFastestAnimNum,
+static bool8 (*const sDirectionAnimFuncsBySpeed[])(u8) = {
+    [MOVE_SPEED_NORMAL] = GetMoveDirectionAnimNum,
+    [MOVE_SPEED_FAST_1] = GetMoveDirectionFastAnimNum,
+    [MOVE_SPEED_FAST_2] = GetMoveDirectionFastAnimNum,
+    [MOVE_SPEED_FASTER] = GetMoveDirectionFasterAnimNum,
+    [MOVE_SPEED_FASTEST] = GetMoveDirectionFastestAnimNum,
 };
 
 static bool8 (*const sMovementActionFuncs_x9B[])(struct ObjectEvent *, struct Sprite *) = {

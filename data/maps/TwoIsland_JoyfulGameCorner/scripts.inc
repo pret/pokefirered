@@ -43,7 +43,7 @@ TwoIsland_JoyfulGameCorner_EventScript_FoundLostelleScene::
 	special BufferBigGuyOrBigGirlString
 	msgbox TwoIsland_JoyfulGameCorner_Text_LostelleItsOkayDaddy
 	closemessage
-	applymovement LOCALID_LOSTELLE, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_LOSTELLE, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	releaseall
@@ -56,7 +56,7 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene::
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_WhereHasLostelleGottenTo
 	closemessage
-	applymovement LOCALID_DADDY, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_DADDY, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_DADDY, Movement_ExclamationMark
@@ -65,7 +65,7 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene::
 	waitmovement 0
 	applymovement LOCALID_DADDY, Movement_171527
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_PleaseHelpFindLostelle
 	closemessage
@@ -78,12 +78,12 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene::
 	applymovement LOCALID_BIKER, TwoIsland_JoyfulGameCorner_Movement_BikerLookAround
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_IsThisOnlyThreeIsland
-	applymovement LOCALID_BIKER, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BIKER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_ThisIsTwoIslandMoveIt
 	msgbox TwoIsland_JoyfulGameCorner_Text_TheseIslandsAreConfusing
 	closemessage
-	applymovement LOCALID_BIKER, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_EXIT
 	removeobject LOCALID_BIKER
@@ -101,7 +101,7 @@ Movement_171520::
 	walk_right
 	walk_right
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
 	step_end
 
@@ -109,20 +109,20 @@ Movement_171527::
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 Movement_17152C::
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 TwoIsland_JoyfulGameCorner_Movement_BikerLookAround::
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 TwoIsland_JoyfulGameCorner_EventScript_InfoMan::

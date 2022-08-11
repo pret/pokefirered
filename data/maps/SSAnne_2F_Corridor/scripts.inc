@@ -28,7 +28,7 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject LOCALID_RIVAL
 	delay 10
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	compare VAR_TEMP_1, 0
@@ -110,7 +110,7 @@ SSAnne_2F_Corridor_Movement_PlayerFaceRivalRight::
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SSAnne_2F_Corridor_Movement_PlayerFaceRivalMid::
@@ -118,7 +118,7 @@ SSAnne_2F_Corridor_Movement_PlayerFaceRivalMid::
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SSAnne_2F_Corridor_Movement_RivalApproachLeft::
@@ -132,7 +132,7 @@ SSAnne_2F_Corridor_Movement_RivalApproachMid::
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SSAnne_2F_Corridor_Movement_RivalApproachRight::

@@ -109,23 +109,23 @@ ThreeIsland_EventScript_BikerArgumentScene::
 	return
 
 ThreeIsland_EventScript_PlayerFaceUp::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 @ Unused
 ThreeIsland_EventScript_PlayerFaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PlayerFaceLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PlayerFaceRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -221,7 +221,7 @@ ThreeIsland_EventScript_BattleBikersTriggerRight::
 
 ThreeIsland_EventScript_BattleBikersScene::
 	textcolor 0
-	applymovement LOCALID_BIKER1, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER1, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_BIKER1, Movement_ExclamationMark
@@ -257,10 +257,10 @@ ThreeIsland_EventScript_BattleBikersScene::
 	msgbox ThreeIsland_Text_Biker3Intro
 	setvar VAR_LAST_TALKED, LOCALID_BIKER3
 	trainerbattle_no_intro TRAINER_BIKER_GOON_3, ThreeIsland_Text_Biker3Defeat
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_BIKER4, Movement_WalkInPlaceFastestDown
-	applymovement LOCALID_BIKER5, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER4, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER5, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox ThreeIsland_Text_Biker3PostBattle
 	closemessage
@@ -295,33 +295,33 @@ ThreeIsland_EventScript_BattleBikersScene::
 	end
 
 ThreeIsland_EventScript_PaxtonApproachLeft::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMidLeft::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMid::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMid
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMidRight::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidRight
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachRight::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachRight
 	waitmovement 0
@@ -348,7 +348,7 @@ ThreeIsland_Movement_BikerApproach::
 
 ThreeIsland_Movement_Biker1ReturnToPack::
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 ThreeIsland_Movement_BikerSpeak::
@@ -358,7 +358,7 @@ ThreeIsland_Movement_BikerSpeak::
 ThreeIsland_Movement_PaxtonApproachLeft::
 	walk_down
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 ThreeIsland_Movement_PaxtonApproachMidLeft::
@@ -368,20 +368,20 @@ ThreeIsland_Movement_PaxtonApproachMidLeft::
 ThreeIsland_Movement_PaxtonApproachMid::
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ThreeIsland_Movement_PlayerFacePaxton::
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 ThreeIsland_Movement_PaxtonApproachMidRight::
 	walk_down
 	walk_down
 	walk_right
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ThreeIsland_Movement_PaxtonApproachRight::
@@ -389,7 +389,7 @@ ThreeIsland_Movement_PaxtonApproachRight::
 	walk_down
 	walk_right
 	walk_right
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 ThreeIsland_EventScript_Woman::

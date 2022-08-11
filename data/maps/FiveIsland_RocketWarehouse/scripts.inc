@@ -43,7 +43,7 @@ FiveIsland_RocketWarehouse_EventScript_Computer::
 
 FiveIsland_RocketWarehouse_EventScript_Admin2Trigger::
 	lockall
-	applymovement LOCALID_ADMIN2, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_ADMIN2, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	releaseall
@@ -101,7 +101,7 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2::
 	end
 
 FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -149,7 +149,7 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1::
 FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1::
 	compare PLAYER_X_POS, 27
 	goto_if_eq EventScript_Return
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -164,27 +164,27 @@ FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch::
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch::
-	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft::
-	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown::
-	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_ADMIN1, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar::
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch::
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end

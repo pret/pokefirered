@@ -49,11 +49,11 @@ ThreeIsland_BerryForest_EventScript_NoRoomForBerry::
 	return
 
 ThreeIsland_BerryForest_Movement_LostelleLookAround::
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 ThreeIsland_BerryForest_EventScript_WelcomeSign::

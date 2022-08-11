@@ -25,7 +25,7 @@ Route5_SouthEntrance_EventScript_GuardTriggerRight::
 
 Route5_SouthEntrance_EventScript_GuardTrigger::
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	goto_if_set FLAG_GOT_TEA, Route5_SouthEntrance_EventScript_GiveTea
 	msgbox Route5_SouthEntrance_Text_ThirstyOnGuardDuty

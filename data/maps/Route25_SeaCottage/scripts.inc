@@ -149,7 +149,7 @@ Route25_SeaCottage_Movement_BillWalkToTeleporterSouth::
 	walk_up
 	walk_up
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 Route25_SeaCottage_Movement_BillEnterTeleporter::

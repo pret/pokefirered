@@ -80,22 +80,22 @@ SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire::
 
 @ Lots of redundant scripts below
 SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -122,28 +122,28 @@ SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireWest::
 SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireNorth::
 	applymovement LOCALID_THIEF, SixIsland_DottedHole_SapphireRoom_Movement_ThiefGetSapphireFromLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireSouth::
 	applymovement LOCALID_THIEF, SixIsland_DottedHole_SapphireRoom_Movement_ThiefGetSapphireFromLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireEast::
 	applymovement LOCALID_THIEF, SixIsland_DottedHole_SapphireRoom_Movement_ThiefGetSapphireFromBelow
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireWest::
 	applymovement LOCALID_THIEF, SixIsland_DottedHole_SapphireRoom_Movement_ThiefGetSapphireFromBelow
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
@@ -174,13 +174,13 @@ SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitWest::
 SixIsland_DottedHole_SapphireRoom_Movement_ThiefLookAtSapphireFromLeft::
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SixIsland_DottedHole_SapphireRoom_Movement_ThiefLookAtSapphireFromBelow::
 	walk_right
 	walk_right
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 SixIsland_DottedHole_SapphireRoom_Movement_ThiefGetSapphireFromLeft::
@@ -236,7 +236,7 @@ SixIsland_DottedHole_SapphireRoom_Movement_ThiefFallIn::
 
 SixIsland_DottedHole_SapphireRoom_Movement_PlayerWatchThiefExit::
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SixIsland_DottedHole_SapphireRoom_EventScript_BrailleMessage::

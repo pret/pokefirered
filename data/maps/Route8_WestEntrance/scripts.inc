@@ -25,7 +25,7 @@ Route8_WestEntrance_EventScript_GuardTriggerBottom::
 
 Route8_WestEntrance_EventScript_GuardTrigger::
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	goto_if_set FLAG_GOT_TEA, Route8_WestEntrance_EventScript_GiveTea
 	msgbox Route8_WestEntrance_Text_ThirstyOnGuardDuty

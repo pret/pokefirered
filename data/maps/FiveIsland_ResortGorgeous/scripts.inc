@@ -22,7 +22,7 @@ FiveIsland_ResortGorgeous_EventScript_SelphyReturnHomeScene::
 	textcolor 1
 	msgbox FiveIsland_ResortGorgeous_Text_SelphyThanksYouMayGoNow
 	closemessage
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 39, 8
 	waitdooranim

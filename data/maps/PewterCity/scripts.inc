@@ -170,7 +170,7 @@ PewterCity_Movement_PlayerWaitForGuideEast::
 	delay_16
 	delay_16
 	delay_4
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 PewterCity_Movement_PlayerWalkToGymEast::
@@ -207,14 +207,14 @@ PewterCity_Movement_PlayerWalkToGymNorth::
 PewterCity_Movement_GuideMoveToLeadEast::
 	walk_down
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	walk_in_place_up
 	step_end
 
 PewterCity_Movement_GuideWalkToGymEast::
 	walk_to_gym
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_Movement_GuideMoveToLeadWest::
@@ -228,7 +228,7 @@ PewterCity_Movement_GuideWalkToGymWest::
 	walk_left
 	walk_to_gym_alt
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_Movement_GuideMoveToLeadNorth::
@@ -242,7 +242,7 @@ PewterCity_Movement_GuideWalkToGymNorth::
 	walk_left
 	walk_to_gym_alt
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_Movement_GymGuideExit::
@@ -372,7 +372,7 @@ PewterCity_Movement_PlayerWalkToGymRight::
 PewterCity_Movement_GuideMoveToLeadTop::
 	walk_left
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	walk_in_place_right
 	step_end
 
@@ -399,14 +399,14 @@ PewterCity_Movement_GuideApproachPlayerRight::
 PewterCity_Movement_GuideWalkToGymTop::
 	walk_to_gym
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_Movement_GuideWalkToGymMid::
 	walk_left
 	walk_to_gym
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_Movement_GuideWalkToGymBottom::
@@ -414,7 +414,7 @@ PewterCity_Movement_GuideWalkToGymBottom::
 	walk_left
 	walk_to_gym
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_Movement_GuideWalkToGymRight::
@@ -429,7 +429,7 @@ PewterCity_Movement_GuideWalkToGymRight::
 	walk_up
 	walk_to_gym_alt
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PewterCity_EventScript_Lass::
@@ -550,13 +550,13 @@ PewterCity_Movement_PlayerWalkToMuseumNorth::
 	walk_up
 	walk_to_museum
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_GuideWalkToMuseumNorth::
 	walk_to_museum
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_PlayerWalkToMuseumSouth::
@@ -565,7 +565,7 @@ PewterCity_Movement_PlayerWalkToMuseumSouth::
 	walk_left
 	walk_to_museum_south
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_GuideWalkToMuseumSouth::
@@ -573,33 +573,33 @@ PewterCity_Movement_GuideWalkToMuseumSouth::
 	walk_up
 	walk_to_museum_south
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_PlayerWalkToMuseumWest::
 	walk_left
 	walk_to_museum
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_GuideWalkToMuseumWest::
 	walk_to_museum
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_PlayerWalkToMuseumEast::
 	walk_right
 	walk_to_museum
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_GuideWalkToMuseumEast::
 	walk_to_museum
 	walk_left
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 PewterCity_Movement_MuseumGuideExit::
@@ -749,7 +749,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	return
 
 PewterCity_EventScript_AideNoticePlayer::
-	applymovement LOCALID_AIDE, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_AIDE, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -761,7 +761,7 @@ PewterCity_EventScript_AideApproachPlayer0::
 
 PewterCity_EventScript_AideApproachPlayer1::
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -769,7 +769,7 @@ PewterCity_EventScript_AideApproachPlayer2::
 	closemessage
 	applymovement LOCALID_AIDE, PewterCity_Movement_AideApproachPlayerMid
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -777,7 +777,7 @@ PewterCity_EventScript_AideApproachPlayer3::
 	closemessage
 	applymovement LOCALID_AIDE, PewterCity_Movement_AideApproachPlayerBottom
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 

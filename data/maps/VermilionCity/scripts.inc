@@ -200,8 +200,8 @@ VermilionCity_EventScript_ExitedTicketCheck::
 
 VermilionCity_EventScript_CheckTicket::
 	textcolor 0
-	applymovement LOCALID_FERRY_SAILOR, Movement_WalkInPlaceFastestLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_FERRY_SAILOR, Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	compare VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if_eq VermilionCity_EventScript_CheckSeagallopPresentTrigger

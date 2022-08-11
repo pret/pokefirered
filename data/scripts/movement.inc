@@ -25,20 +25,20 @@ Movement_FaceOriginalDirection::
 	face_original_direction
 	step_end
 
-Movement_WalkInPlaceFastestLeft::
-	walk_in_place_fastest_left
+Movement_WalkInPlaceFasterLeft::
+	walk_in_place_faster_left
 	step_end
 
-Movement_WalkInPlaceFastestUp::
-	walk_in_place_fastest_up
+Movement_WalkInPlaceFasterUp::
+	walk_in_place_faster_up
 	step_end
 
-Movement_WalkInPlaceFastestRight::
-	walk_in_place_fastest_right
+Movement_WalkInPlaceFasterRight::
+	walk_in_place_faster_right
 	step_end
 
-Movement_WalkInPlaceFastestDown::
-	walk_in_place_fastest_down
+Movement_WalkInPlaceFasterDown::
+	walk_in_place_faster_down
 	step_end
 
 Movement_FaceRight::

@@ -19,11 +19,11 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	end
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestLeft
+	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
 	return

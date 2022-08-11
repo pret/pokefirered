@@ -30,7 +30,7 @@ FourIsland_OnFrame::
 FourIsland_EventScript_RivalScene::
 	lockall
 	textcolor 0
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
@@ -68,7 +68,7 @@ FourIsland_Movement_RivalExit::
 
 FourIsland_Movement_PlayerWatchRivalExit::
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FourIsland_EventScript_DaycareMan::

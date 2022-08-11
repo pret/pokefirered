@@ -116,7 +116,7 @@ Route23_EventScript_RecognizeBadge::
 
 Route23_EventScript_BadgeGuardTrigger::
 	textcolor 0
-	applymovement VAR_0x8009, Movement_WalkInPlaceFastestLeft
+	applymovement VAR_0x8009, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	switch VAR_TEMP_1
 	case 1, Route23_EventScript_CheckBoulderBadgeTrigger
@@ -175,7 +175,7 @@ Route23_EventScript_MissingBoulderBadgeTrigger::
 	msgbox Text_CantLetYouPass
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Route23_Movement_WalkDown
-	applymovement VAR_0x8009, Movement_WalkInPlaceFastestDown
+	applymovement VAR_0x8009, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	releaseall
 	end
@@ -188,7 +188,7 @@ Route23_EventScript_MissingBadgeTrigger::
 	closemessage
 	waitse
 	applymovement OBJ_EVENT_ID_PLAYER, Route23_Movement_WalkDown
-	applymovement VAR_0x8009, Movement_WalkInPlaceFastestDown
+	applymovement VAR_0x8009, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	releaseall
 	end

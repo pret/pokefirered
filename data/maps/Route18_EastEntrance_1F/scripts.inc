@@ -49,7 +49,7 @@ Route18_EastEntrance_1F_EventScript_NeedBikeTrigger::
 	textcolor 0
 	msgbox Route18_EastEntrance_1F_Text_ExcuseMe
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	compare VAR_0x8008, 1

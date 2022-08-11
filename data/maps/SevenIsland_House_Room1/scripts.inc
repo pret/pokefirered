@@ -41,7 +41,7 @@ SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle::
 	applymovement LOCALID_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
 	waitmovement 0
 	moveobjectoffscreen LOCALID_OLD_WOMAN
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	call_if_eq SevenIsland_House_Room1_EventScript_BattleWonComment
@@ -72,7 +72,7 @@ SevenIsland_House_Room1_Movement_PlayerReEnterRoom::
 
 SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer::
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SevenIsland_House_Room1_EventScript_OldWoman::
@@ -174,12 +174,12 @@ SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest::
 
 SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft::
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight::
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SevenIsland_House_Room1_EventScript_Box::

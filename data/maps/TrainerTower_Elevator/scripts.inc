@@ -71,7 +71,7 @@ TrainerTower_Elevator_EventScript_MoveElevator::
 	return
 
 TrainerTower_Elevator_Movement_ExitElevator::
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_16
 	walk_down
 	walk_right

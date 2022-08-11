@@ -23,7 +23,7 @@ SixIsland_PokemonCenter_1F_OnFrame::
 SixIsland_PokemonCenter_1F_EventScript_RivalScene::
 	lockall
 	textcolor 0
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
@@ -62,7 +62,7 @@ SixIsland_PokemonCenter_1F_Movement_RivalExit::
 
 SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit::
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 SixIsland_PokemonCenter_1F_EventScript_Nurse::

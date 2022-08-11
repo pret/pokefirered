@@ -9,7 +9,7 @@ ViridianCity_School_EventScript_Lass::
 	faceplayer
 	msgbox ViridianCity_School_Text_TryingToMemorizeNotes
 	closemessage
-	applymovement LOCALID_LASS, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_LASS, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	release
 	end
@@ -39,7 +39,7 @@ ViridianCity_School_EventScript_Notebook::
 	compare VAR_RESULT, NO
 	goto_if_eq ViridianCity_School_EventScript_StopReadingNotebook
 	msgbox ViridianCity_School_Text_NotebookFourthPage
-	applymovement LOCALID_LASS, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_LASS, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor 1
 	msgbox ViridianCity_School_Text_HeyDontLookAtMyNotes

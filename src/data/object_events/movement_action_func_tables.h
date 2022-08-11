@@ -759,8 +759,17 @@ static bool8 (*const sMovementActionFuncs_x13[])(struct ObjectEvent *, struct Sp
     MovementAction_PauseSpriteAnim,
 };
 
-const s16 gUnknown_83A6958[] = {0, 1, 1};
-const s16 gUnknown_83A695E[] = {0, 0, 1};
+static const s16 sJumpInitDisplacements[] = {
+    [JUMP_DISTANCE_IN_PLACE] = 0,
+    [JUMP_DISTANCE_NORMAL] = 1,
+    [JUMP_DISTANCE_FAR] = 1,
+};
+
+static const s16 sJumpDisplacements[] = {
+    [JUMP_DISTANCE_IN_PLACE] = 0,
+    [JUMP_DISTANCE_NORMAL] = 0,
+    [JUMP_DISTANCE_FAR] = 1,
+};
 
 static bool8 (*const sMovementActionFuncs_x14[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_Jump2Down_Step0,

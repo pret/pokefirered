@@ -93,25 +93,26 @@
 #define MON_DATA_SPDEF2            88
 
 // Pokemon types
-#define TYPE_NORMAL   0x00
-#define TYPE_FIGHTING 0x01
-#define TYPE_FLYING   0x02
-#define TYPE_POISON   0x03
-#define TYPE_GROUND   0x04
-#define TYPE_ROCK     0x05
-#define TYPE_BUG      0x06
-#define TYPE_GHOST    0x07
-#define TYPE_STEEL    0x08
-#define TYPE_MYSTERY  0x09
-#define TYPE_FIRE     0x0a
-#define TYPE_WATER    0x0b
-#define TYPE_GRASS    0x0c
-#define TYPE_ELECTRIC 0x0d
-#define TYPE_PSYCHIC  0x0e
-#define TYPE_ICE      0x0f
-#define TYPE_DRAGON   0x10
-#define TYPE_DARK     0x11
-#define NUMBER_OF_MON_TYPES     0x12
+#define TYPE_NONE           255
+#define TYPE_NORMAL         0
+#define TYPE_FIGHTING       1
+#define TYPE_FLYING         2
+#define TYPE_POISON         3
+#define TYPE_GROUND         4
+#define TYPE_ROCK           5
+#define TYPE_BUG            6
+#define TYPE_GHOST          7
+#define TYPE_STEEL          8
+#define TYPE_MYSTERY        9
+#define TYPE_FIRE           10
+#define TYPE_WATER          11
+#define TYPE_GRASS          12
+#define TYPE_ELECTRIC       13
+#define TYPE_PSYCHIC        14
+#define TYPE_ICE            15
+#define TYPE_DRAGON         16
+#define TYPE_DARK           17
+#define NUMBER_OF_MON_TYPES 18
 
 // Pokemon egg groups
 #define EGG_GROUP_NONE 0

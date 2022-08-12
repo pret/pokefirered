@@ -4848,7 +4848,7 @@ extern const u32 gBuyMenuFrame_TmHmTilemap[];
 extern const u32 gBuyMenuFrame_Pal[];
 
 // battle_message
-extern const u16 gUnknown_8D2FBB4[];
+extern const u16 gPPTextPalette[];
 
 // trainer card
 extern const u16 gKantoTrainerCard_Pal[];

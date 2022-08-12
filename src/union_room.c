@@ -645,7 +645,7 @@ static const u8 sUnref_84570D1[] = _("{DYNAMIC 00}·{DYNAMIC 01}");
 // These are functions in Emerald but inlined in FireRed
 
 #define IntlConvPartnerUname7(dest, arg1) ({                            \
-    StringCopy7(dest, (arg1).gname_uname.uname);                           \
+    StringCopy_PlayerName(dest, (arg1).gname_uname.uname);                      \
     ConvertInternationalString(dest, (arg1).gname_uname.gname.unk_00.language); \
 })
 

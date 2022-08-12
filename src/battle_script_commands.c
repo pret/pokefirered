@@ -6125,7 +6125,7 @@ static void Cmd_various(void)
             gHitMarker &= ~HITMARKER_PLAYER_FAINTED;
         }
         break;
-    case VARIOUS_CASE_8:
+    case VARIOUS_GET_BATTLERS_FOR_RECALL:
         i = 0; // redundant
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         gActiveBattler = 1;

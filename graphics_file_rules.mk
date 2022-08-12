@@ -29,6 +29,7 @@ BATTLETERRAINGFXDIR := graphics/battle_terrain
 BERRYPOUCHGFXDIR := graphics/berry_pouch
 HALLOFFAMEGFXDIR := graphics/hall_of_fame
 MAPPREVIEWGFXDIR := graphics/map_preview
+NAMINGGFXDIR := graphics/naming_screen
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -654,3 +655,12 @@ $(MAPPREVIEWGFXDIR)/victory_road/tiles.4bpp: %.4bpp: %.png
 
 $(MAPPREVIEWGFXDIR)/viridian_forest/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 389
+
+$(NAMINGGFXDIR)/cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 5
+
+$(NAMINGGFXDIR)/cursor_squished.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 5
+
+$(NAMINGGFXDIR)/cursor_filled.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 5

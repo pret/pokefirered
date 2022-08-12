@@ -545,6 +545,7 @@
 #define B_MSG_WONT_OBEY          1
 #define B_MSG_TURNED_AWAY        2
 #define B_MSG_PRETEND_NOT_NOTICE 3
+#define NUM_LOAF_STRINGS         4 // For randomly selecting a disobey string
 
 // gSafariGetNearStringIds
 #define B_MSG_CREPT_CLOSER    0

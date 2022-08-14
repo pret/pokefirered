@@ -17,8 +17,7 @@ CeladonCity_Condominiums_3F_EventScript_Designer::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, HasAllKantoMons
-	compare VAR_RESULT, TRUE
-	goto_if_eq CeladonCity_Condominiums_3F_EventScript_CompletedPokedex
+	goto_if_eq VAR_RESULT, TRUE, CeladonCity_Condominiums_3F_EventScript_CompletedPokedex
 	msgbox CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex
 	release
 	end

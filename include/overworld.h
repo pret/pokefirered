@@ -60,8 +60,8 @@ extern u8 gLocalLinkPlayerId;
 
 void IncrementGameStat(u8 index);
 
-void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
-void Overworld_SetObjEventTemplateMovementType(u8, u8);
+void SetObjEventTemplateCoords(u8, s16, s16);
+void SetObjEventTemplateMovementType(u8, u8);
 
 void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
@@ -77,7 +77,7 @@ u8 IsMapTypeOutdoors(u8 mapType);
 void Overworld_ClearSavedMusic(void);
 bool32 Overworld_MusicCanOverrideMapMusic(u16 song);
 
-void Overworld_SetFlashLevel(s32 a1);
+void SetFlashLevel(s32 a1);
 u8 Overworld_GetFlashLevel(void);
 
 void Overworld_SetSavedMusic(u16);

@@ -251,7 +251,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 28:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, ABSPATH("mevent_server.c"), 517);
-            svr->sendBuffer1 = sub_8069E48();
+            svr->sendBuffer1 = GetSavedRamScriptIfValid();
             break;
         case 29:
             mevent_srv_common_init_send(svr, 0x1b, cmd->parameter, cmd->flag);

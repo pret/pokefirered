@@ -23,7 +23,7 @@ void Task_WaitPlayerStopMoving(u8 taskId)
     }
 }
 
-bool8 NativeScript_WaitPlayerStopMoving(void)
+bool8 IsFreezePlayerFinished(void)
 {
     if (FuncIsActiveTask(Task_WaitPlayerStopMoving))
         return FALSE;
@@ -34,7 +34,7 @@ bool8 NativeScript_WaitPlayerStopMoving(void)
     }
 }
 
-void ScriptFreezeObjectEvents(void)
+void FreezeObjects_WaitForPlayer(void)
 {
     FreezeObjectEvents();
     CreateTask(Task_WaitPlayerStopMoving, 80);
@@ -60,7 +60,7 @@ void Task_WaitPlayerAndTargetNPCStopMoving(u8 taskId)
         DestroyTask(taskId);
 }
 
-bool8 NativeScript_WaitPlayerAndTargetNPCStopMoving(void)
+bool8 IsFreezeSelectedObjectAndPlayerFinished(void)
 {
     if (FuncIsActiveTask(Task_WaitPlayerAndTargetNPCStopMoving))
         return FALSE;
@@ -71,7 +71,7 @@ bool8 NativeScript_WaitPlayerAndTargetNPCStopMoving(void)
     }
 }
 
-void LockSelectedObjectEvent(void)
+void FreezeObjects_WaitForPlayerAndSelected(void)
 {
     u8 taskId;
 

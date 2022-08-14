@@ -15,8 +15,7 @@ ThreeIsland_MapScripts::
 ThreeIsland_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	call_if_set FLAG_RESCUED_LOSTELLE, ThreeIsland_EventScript_HideAntiBikers
-	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	call_if_eq ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers
+	call_if_eq VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers
 	end
 
 ThreeIsland_EventScript_HideAntiBikers::
@@ -38,8 +37,7 @@ ThreeIsland_EventScript_Biker::
 ThreeIsland_EventScript_AntiBiker1::
 	lock
 	goto_if_set FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER, ThreeIsland_EventScript_AntiBiker1GotFullRestore
-	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if_eq ThreeIsland_EventScript_GiveFullRestore
+	goto_if_eq VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_EventScript_GiveFullRestore
 	setvar VAR_TEMP_1, 0
 	call ThreeIsland_EventScript_BikerArgumentScene
 	release
@@ -56,9 +54,8 @@ ThreeIsland_EventScript_GiveFullRestore::
 	applymovement LOCALID_ANTIBIKER1, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_ThankYouOhYourMonGotHurt
-	checkitemspace ITEM_FULL_RESTORE, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq ThreeIsland_EventScript_NoRoomForFullRestore
+	checkitemspace ITEM_FULL_RESTORE
+	goto_if_eq VAR_RESULT, FALSE, ThreeIsland_EventScript_NoRoomForFullRestore
 	msgreceiveditem ThreeIsland_Text_GivenFullRestore, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE
 	setflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
@@ -72,37 +69,26 @@ ThreeIsland_EventScript_NoRoomForFullRestore::
 	end
 
 ThreeIsland_EventScript_BikerArgumentScene::
-	compare VAR_TEMP_1, 1
-	call_if_eq ThreeIsland_EventScript_PlayerFaceLeft
-	compare VAR_TEMP_1, 2
-	call_if_eq ThreeIsland_EventScript_PlayerFaceLeft
+	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceLeft
+	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceLeft
 	applymovement LOCALID_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
 	waitmovement 0
 	msgbox ThreeIsland_Text_GoBackToKanto
-	compare VAR_TEMP_1, 0
-	call_if_eq ThreeIsland_EventScript_PlayerFaceRight
-	compare VAR_TEMP_1, 1
-	call_if_eq ThreeIsland_EventScript_PlayerFaceRight
-	compare VAR_TEMP_1, 2
-	call_if_eq ThreeIsland_EventScript_PlayerFaceBiker
+	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceRight
+	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceRight
+	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceBiker
 	applymovement LOCALID_BIKER1, ThreeIsland_Movement_SpeakLeft
 	waitmovement 0
 	msgbox ThreeIsland_Text_BossIsOnHisWay
-	compare VAR_TEMP_1, 0
-	call_if_eq ThreeIsland_EventScript_PlayerFaceUp
-	compare VAR_TEMP_1, 1
-	call_if_eq ThreeIsland_EventScript_PlayerFaceUp
-	compare VAR_TEMP_1, 2
-	call_if_eq ThreeIsland_EventScript_PlayerFaceAntiBiker
+	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceUp
+	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceUp
+	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceAntiBiker
 	applymovement LOCALID_ANTIBIKER2, ThreeIsland_Movement_SpeakRight
 	waitmovement 0
 	msgbox ThreeIsland_Text_GetOffIslandNow
-	compare VAR_TEMP_1, 0
-	call_if_eq ThreeIsland_EventScript_PlayerFaceRight
-	compare VAR_TEMP_1, 1
-	call_if_eq ThreeIsland_EventScript_PlayerFaceRight
-	compare VAR_TEMP_1, 2
-	call_if_eq ThreeIsland_EventScript_PlayerFaceBiker
+	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceRight
+	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceRight
+	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceBiker
 	applymovement LOCALID_BIKER3, ThreeIsland_Movement_SpeakLeft
 	waitmovement 0
 	msgbox ThreeIsland_Text_WhosGonnaMakeMe
@@ -131,22 +117,19 @@ ThreeIsland_EventScript_PlayerFaceRight::
 
 ThreeIsland_EventScript_PlayerFaceBiker::
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 9
-	goto_if_ge ThreeIsland_EventScript_PlayerFaceUp
+	goto_if_ge VAR_0x8004, 9, ThreeIsland_EventScript_PlayerFaceUp
 	goto ThreeIsland_EventScript_PlayerFaceRight
 	end
 
 ThreeIsland_EventScript_PlayerFaceAntiBiker::
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 9
-	goto_if_ge ThreeIsland_EventScript_PlayerFaceLeft
+	goto_if_ge VAR_0x8004, 9, ThreeIsland_EventScript_PlayerFaceLeft
 	goto ThreeIsland_EventScript_PlayerFaceUp
 	end
 
 ThreeIsland_EventScript_AntiBiker2::
 	lock
-	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if_eq ThreeIsland_EventScript_AntiBiker2BikersGone
+	goto_if_eq VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_EventScript_AntiBiker2BikersGone
 	setvar VAR_TEMP_1, 1
 	call ThreeIsland_EventScript_BikerArgumentScene
 	release
@@ -161,7 +144,7 @@ ThreeIsland_EventScript_AntiBiker2BikersGone::
 
 ThreeIsland_EventScript_BikerBossIntroTrigger::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
 	waitmovement 0
 	msgbox ThreeIsland_Text_AreYouBossGoBackToKanto
@@ -220,7 +203,7 @@ ThreeIsland_EventScript_BattleBikersTriggerRight::
 	end
 
 ThreeIsland_EventScript_BattleBikersScene::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_BIKER1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
@@ -232,8 +215,7 @@ ThreeIsland_EventScript_BattleBikersScene::
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
 	msgbox ThreeIsland_Text_WannaMakeSomethingOfYourStaring, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq ThreeIsland_EventScript_LeaveBikersAlone
+	goto_if_eq VAR_RESULT, NO, ThreeIsland_EventScript_LeaveBikersAlone
 	msgbox ThreeIsland_Text_Biker1Intro
 	setvar VAR_LAST_TALKED, LOCALID_BIKER1
 	trainerbattle_no_intro TRAINER_BIKER_GOON, ThreeIsland_Text_Biker1Defeat
@@ -265,16 +247,11 @@ ThreeIsland_EventScript_BattleBikersScene::
 	msgbox ThreeIsland_Text_Biker3PostBattle
 	closemessage
 	delay 45
-	compare VAR_TEMP_1, 0
-	call_if_eq ThreeIsland_EventScript_PaxtonApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq ThreeIsland_EventScript_PaxtonApproachMidLeft
-	compare VAR_TEMP_1, 2
-	call_if_eq ThreeIsland_EventScript_PaxtonApproachMid
-	compare VAR_TEMP_1, 3
-	call_if_eq ThreeIsland_EventScript_PaxtonApproachMidRight
-	compare VAR_TEMP_1, 4
-	call_if_eq ThreeIsland_EventScript_PaxtonApproachRight
+	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PaxtonApproachLeft
+	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PaxtonApproachMidLeft
+	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PaxtonApproachMid
+	call_if_eq VAR_TEMP_1, 3, ThreeIsland_EventScript_PaxtonApproachMidRight
+	call_if_eq VAR_TEMP_1, 4, ThreeIsland_EventScript_PaxtonApproachRight
 	playbgm MUS_ENCOUNTER_BOY, 0
 	msgbox ThreeIsland_Text_PaxtonIntro
 	setvar VAR_LAST_TALKED, LOCALID_PAXTON

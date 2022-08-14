@@ -13,8 +13,7 @@ SilphCo_7F_OnLoad::
 	end
 
 SilphCo_7F_OnTransition::
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	call_if_ge SilphCo_7F_EventScript_SetObjRocketsGone
+	call_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_SetObjRocketsGone
 	end
 
 SilphCo_7F_EventScript_SetObjRocketsGone::
@@ -34,7 +33,7 @@ SilphCo_7F_EventScript_RivalTriggerBottom::
 	end
 
 SilphCo_7F_EventScript_RivalScene::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
@@ -42,25 +41,18 @@ SilphCo_7F_EventScript_RivalScene::
 	applymovement LOCALID_RIVAL, Movement_Delay48
 	waitmovement 0
 	msgbox SilphCo_7F_Text_RivalWhatKeptYou
-	compare VAR_TEMP_1, 0
-	call_if_eq SilphCo_7F_EventScript_RivalApproachTop
-	compare VAR_TEMP_1, 1
-	call_if_eq SilphCo_7F_EventScript_RivalApproachBottom
+	call_if_eq VAR_TEMP_1, 0, SilphCo_7F_EventScript_RivalApproachTop
+	call_if_eq VAR_TEMP_1, 1, SilphCo_7F_EventScript_RivalApproachBottom
 	msgbox SilphCo_7F_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_RIVAL
-	compare VAR_STARTER_MON, 2
-	call_if_eq SilphCo_7F_EventScript_RivalSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq SilphCo_7F_EventScript_RivalBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq SilphCo_7F_EventScript_RivalCharmander
+	call_if_eq VAR_STARTER_MON, 2, SilphCo_7F_EventScript_RivalSquirtle
+	call_if_eq VAR_STARTER_MON, 1, SilphCo_7F_EventScript_RivalBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, SilphCo_7F_EventScript_RivalCharmander
 	msgbox SilphCo_7F_Text_RivalPostBattle
 	closemessage
 	playbgm MUS_RIVAL_EXIT, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq SilphCo_7F_EventScript_RivalExitTop
-	compare VAR_TEMP_1, 1
-	call_if_eq SilphCo_7F_EventScript_RivalExitBottom
+	call_if_eq VAR_TEMP_1, 0, SilphCo_7F_EventScript_RivalExitTop
+	call_if_eq VAR_TEMP_1, 1, SilphCo_7F_EventScript_RivalExitBottom
 	playse SE_WARP_IN
 	fadedefaultbgm
 	removeobject LOCALID_RIVAL
@@ -129,41 +121,36 @@ SilphCo_7F_EventScript_LaprasGuy::
 	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
 	msgbox SilphCo_7F_Text_HaveMonForSavingUs
 	setvar VAR_TEMP_1, SPECIES_LAPRAS
-	givemon SPECIES_LAPRAS, 25, ITEM_NONE
-	compare VAR_RESULT, 0
-	goto_if_eq SilphCo_7F_EventScript_ReceiveLaprasParty
-	compare VAR_RESULT, 1
-	goto_if_eq SilphCo_7F_EventScript_ReceiveLaprasPC
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_NoMoreRoomForPokemon
+	givemon SPECIES_LAPRAS, 25
+	goto_if_eq VAR_RESULT, 0, SilphCo_7F_EventScript_ReceiveLaprasParty
+	goto_if_eq VAR_RESULT, 1, SilphCo_7F_EventScript_ReceiveLaprasPC
+	goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
 	release
 	end
 
 SilphCo_7F_EventScript_ReceiveLaprasParty::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_LAPRAS
+	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SilphCo_7F_EventScript_EndReceiveLapras
+	goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_EndReceiveLapras
 	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
 	goto SilphCo_7F_EventScript_EndReceiveLapras
 	end
 
 SilphCo_7F_EventScript_ReceiveLaprasPC::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_LAPRAS
+	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SilphCo_7F_EventScript_LaprasTransferredToPC
+	goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_LaprasTransferredToPC
 	call EventScript_NameReceivedBoxMon
 	goto SilphCo_7F_EventScript_LaprasTransferredToPC
 	end
@@ -174,7 +161,7 @@ SilphCo_7F_EventScript_LaprasTransferredToPC::
 	end
 
 SilphCo_7F_EventScript_EndReceiveLapras::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SilphCo_7F_Text_ExplainLapras
 	setflag FLAG_GOT_LAPRAS_FROM_SILPH
 	release
@@ -188,8 +175,7 @@ SilphCo_7F_EventScript_AlreadyGotLapras::
 SilphCo_7F_EventScript_WorkerM1::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge SilphCo_7F_EventScript_WorkerM1RocketsGone
+	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerM1RocketsGone
 	msgbox SilphCo_7F_Text_RocketsAfterMasterBall
 	release
 	end
@@ -202,8 +188,7 @@ SilphCo_7F_EventScript_WorkerM1RocketsGone::
 SilphCo_7F_EventScript_WorkerM2::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge SilphCo_7F_EventScript_WorkerM2RocketsGone
+	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerM2RocketsGone
 	msgbox SilphCo_7F_Text_BadIfTeamRocketTookOver
 	release
 	end
@@ -216,8 +201,7 @@ SilphCo_7F_EventScript_WorkerM2RocketsGone::
 SilphCo_7F_EventScript_WorkerF::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge SilphCo_7F_EventScript_WorkerFRocketsGone
+	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerFRocketsGone
 	msgbox SilphCo_7F_Text_ReallyDangerousHere
 	release
 	end

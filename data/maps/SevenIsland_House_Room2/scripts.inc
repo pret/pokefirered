@@ -22,19 +22,16 @@ SevenIsland_House_Room2_EventScript_BattleVisitingTrainer::
 	setvar VAR_0x8005, 0
 	special StartSpecialBattle
 	waitstate
-	compare VAR_RESULT, 3
-	call_if_eq SevenIsland_House_Room2_EventScript_BattleTie
-	compare VAR_RESULT, 1
-	call_if_eq SevenIsland_House_Room2_EventScript_BattleWon
-	compare VAR_RESULT, 2
-	call_if_eq SevenIsland_House_Room2_EventScript_BattleLost
+	call_if_eq VAR_RESULT, 3, SevenIsland_House_Room2_EventScript_BattleTie
+	call_if_eq VAR_RESULT, 1, SevenIsland_House_Room2_EventScript_BattleWon
+	call_if_eq VAR_RESULT, 2, SevenIsland_House_Room2_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty
 	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room2_Movement_PlayerExitRoom
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1
-	warp MAP_SEVEN_ISLAND_HOUSE_ROOM1, 255, 4, 1
+	warp MAP_SEVEN_ISLAND_HOUSE_ROOM1, 4, 1
 	waitstate
 	releaseall
 	end

@@ -10,8 +10,7 @@ CeladonCity_Condominiums_1F_EventScript_TeaWoman::
 	msgbox CeladonCity_Condominiums_1F_Text_TryThisDrinkInstead
 	setflag FLAG_GOT_TEA
 	giveitem ITEM_TEA
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	msgbox CeladonCity_Condominiums_1F_Text_NothingBeatsThirstLikeTea
 	release
 	end

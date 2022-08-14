@@ -20,7 +20,7 @@ ViridianCity_Mart_OnFrame::
 
 ViridianCity_Mart_EventScript_ParcelScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_CLERK, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox ViridianCity_Mart_Text_YouCameFromPallet
@@ -54,8 +54,7 @@ ViridianCity_Mart_Movement_FacePlayer::
 ViridianCity_Mart_EventScript_Clerk::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	goto_if_eq ViridianCity_Mart_EventScript_SayHiToOak
+	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1, ViridianCity_Mart_EventScript_SayHiToOak
 	goto_if_questlog EventScript_ReleaseEnd
 	message Text_MayIHelpYou
 	waitmessage

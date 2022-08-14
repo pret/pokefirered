@@ -73,16 +73,16 @@ gSpecialVars::
 
 	.align 2
 gStdScripts::
-	.4byte Std_ObtainItem
-	.4byte Std_FindItem
-	.4byte Std_MsgboxNPC
-	.4byte Std_MsgboxSign
-	.4byte Std_MsgboxDefault
-	.4byte Std_MsgboxYesNo
-	.4byte Std_MsgboxAutoclose
-	.4byte Std_ObtainDecoration
-	.4byte Std_PutItemAway
-	.4byte Std_ReceivedItem
+	.4byte Std_ObtainItem           @ STD_OBTAIN_ITEM
+	.4byte Std_FindItem             @ STD_FIND_ITEM
+	.4byte Std_MsgboxNPC            @ MSGBOX_NPC
+	.4byte Std_MsgboxSign           @ MSGBOX_SIGN
+	.4byte Std_MsgboxDefault        @ MSGBOX_DEFAULT
+	.4byte Std_MsgboxYesNo          @ MSGBOX_YESNO
+	.4byte Std_MsgboxAutoclose      @ MSGBOX_AUTOCLOSE
+	.4byte Std_ObtainDecoration     @ STD_OBTAIN_DECORATION
+	.4byte Std_PutItemAway          @ STD_PUT_ITEM_AWAY
+	.4byte Std_ReceivedItem         @ STD_RECEIVED_ITEM
 gStdScriptsEnd::
 
 	.include "data/maps/BattleColosseum_2P/scripts.inc"
@@ -1112,12 +1112,12 @@ EventScript_ChangePokemonNickname::
 
 @ Unused
 EventScript_HandOverItem::
-	getitemname 0, VAR_0x8004
+	bufferitemname STR_VAR_1, VAR_0x8004
 	playfanfare MUS_OBTAIN_TMHM
 	message Text_HandedOverItem
 	waitmessage
 	waitfanfare
-	removeitem VAR_0x8004, 1
+	removeitem VAR_0x8004
 	return
 
 	.include "data/scripts/pokemon_league.inc"
@@ -1249,8 +1249,7 @@ VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman::
 	msgbox VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	msgbox VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches
 	release
 	end
@@ -1264,7 +1263,7 @@ VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker::
 	.include "data/scripts/white_out.inc"
 
 Std_PutItemAway::
-	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
+	bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_BufferPutAwayPocketName
 	msgbox Text_PutItemAway
@@ -1280,23 +1279,23 @@ EventScript_BufferPutAwayPocketName::
 	end
 
 EventScript_BufferPutAwayPocketItems::
-	getstdstring 2, STDSTRING_ITEMS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS_POCKET
 	return
 
 EventScript_BufferPutAwayPocketKeyItems::
-	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_KEY_ITEMS_POCKET
 	return
 
 EventScript_BufferPutAwayPocketPokeBalls::
-	getstdstring 2, STDSTRING_POKEBALLS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS_POCKET
 	return
 
 EventScript_BufferPutAwayPocketTMCase::
-	getstdstring 2, STDSTRING_TM_CASE
+	bufferstdstring STR_VAR_3, STDSTRING_TM_CASE
 	return
 
 EventScript_BufferPutAwayPocketBerryPouch::
-	getstdstring 2, STDSTRING_BERRY_POUCH
+	bufferstdstring STR_VAR_3, STDSTRING_BERRY_POUCH
 	return
 
 	.include "data/scripts/seagallop.inc"
@@ -1317,7 +1316,7 @@ EventScript_BrailleCursorWaitButton::
 	return
 
 EventScript_NoMoreRoomForPokemon::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_NoMoreRoomForPokemon
 	release
 	end

@@ -25,18 +25,15 @@ Route16_NorthEntrance_2F_EventScript_Aide::
 	call Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo
 	goto_if_set FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE, Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin
 	msgbox Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Aide_EventScript_DeclineCheckMons
+	goto_if_eq VAR_RESULT, NO, Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
-	getnumberstring 2, VAR_0x8006
+	buffernumberstring STR_VAR_3, VAR_0x8006
 	call Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo
-	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
-	goto_if_lt Aide_EventScript_HaventCaughtEnough
+	goto_if_lt VAR_0x8006, REQUIRED_CAUGHT_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route16_NorthEntrance_2F_Text_GreatHereYouGo
-	checkitemspace ITEM_AMULET_COIN, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Aide_EventScript_NoRoomForItem
+	checkitemspace ITEM_AMULET_COIN
+	goto_if_eq VAR_RESULT, FALSE, Aide_EventScript_NoRoomForItem
 	giveitem_msg Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide, ITEM_AMULET_COIN
 	setflag FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE
 	msgbox Route16_NorthEntrance_2F_Text_ExplainAmuletCoin
@@ -49,6 +46,6 @@ Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin::
 	end
 
 Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo::
-	getnumberstring 0, REQUIRED_CAUGHT_MONS
-	getitemname 1, ITEM_AMULET_COIN
+	buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+	bufferitemname STR_VAR_2, ITEM_AMULET_COIN
 	return

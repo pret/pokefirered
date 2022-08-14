@@ -6,11 +6,10 @@ Route1_EventScript_MartClerk::
 	faceplayer
 	goto_if_set FLAG_GOT_POTION_ON_ROUTE_1, Route1_EventScript_AlreadyGotPotion
 	msgbox Route1_Text_WorkAtPokeMartTakeSample
-	textcolor 3
-	checkitemspace ITEM_POTION, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
-	getitemname 1, ITEM_POTION
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	checkitemspace ITEM_POTION
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
+	bufferitemname STR_VAR_2, ITEM_POTION
 	playfanfare MUS_LEVEL_UP
 	message Text_ObtainedTheX
 	waitmessage

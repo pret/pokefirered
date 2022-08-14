@@ -24,7 +24,7 @@ Route7_EastEntrance_EventScript_GuardTriggerBottom::
 	end
 
 Route7_EastEntrance_EventScript_GuardTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	goto_if_set FLAG_GOT_TEA, Route7_EastEntrance_EventScript_GiveTea
@@ -36,19 +36,16 @@ Route7_EastEntrance_EventScript_GuardTrigger::
 	end
 
 Route7_EastEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route7_EastEntrance_EventScript_GuardDrinkTea
 	end
 
 Route7_EastEntrance_EventScript_GuardDrinkTea::
 	msgbox Route7_EastEntrance_Text_ThatTeaLooksTasty
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq Route7_EastEntrance_WalkToGuardTop
-	compare VAR_TEMP_1, 1
-	call_if_eq Route7_EastEntrance_WalkToGuardMid
-	compare VAR_TEMP_1, 2
-	call_if_eq Route7_EastEntrance_WalkToGuardBottom
+	call_if_eq VAR_TEMP_1, 0, Route7_EastEntrance_WalkToGuardTop
+	call_if_eq VAR_TEMP_1, 1, Route7_EastEntrance_WalkToGuardMid
+	call_if_eq VAR_TEMP_1, 2, Route7_EastEntrance_WalkToGuardBottom
 	msgbox Route7_EastEntrance_Text_ThanksIllShareTeaWithGuards
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall

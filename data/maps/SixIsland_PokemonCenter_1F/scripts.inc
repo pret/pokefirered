@@ -8,8 +8,7 @@ SixIsland_PokemonCenter_1F_MapScripts::
 
 SixIsland_PokemonCenter_1F_OnTransition::
 	setrespawn SPAWN_SIX_ISLAND
-	compare VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
-	call_if_eq SixIsland_PokemonCenter_1F_EventScript_ShowRival
+	call_if_eq VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, SixIsland_PokemonCenter_1F_EventScript_ShowRival
 	end
 
 SixIsland_PokemonCenter_1F_EventScript_ShowRival::
@@ -22,7 +21,7 @@ SixIsland_PokemonCenter_1F_OnFrame::
 
 SixIsland_PokemonCenter_1F_EventScript_RivalScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0

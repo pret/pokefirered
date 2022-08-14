@@ -4,8 +4,7 @@ Route18_MapScripts::
 	.byte 0
 
 Route18_OnTransition::
-	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if_eq Route18_OnTransitionCyclingRoad
+	call_if_eq VAR_MAP_SCENE_ROUTE16, 1, Route18_OnTransitionCyclingRoad
 	end
 
 Route18_OnTransitionCyclingRoad::

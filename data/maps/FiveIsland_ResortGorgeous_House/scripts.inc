@@ -12,10 +12,8 @@ FiveIsland_ResortGorgeous_House_EventScript_Selphy::
 	lock
 	faceplayer
 	goto_if_set SHOWN_REQUESTED_MON, FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest
-	compare VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF
-	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong
-	compare VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
-	goto_if_ne FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon
+	goto_if_eq VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF, FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong
+	goto_if_ne VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE, FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon
 	msgbox FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish
 	goto FiveIsland_ResortGorgeous_House_EventScript_RequestMon
 	end
@@ -34,8 +32,7 @@ FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong::
 FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon::
 	copyvar VAR_0x8004, VAR_RESORT_GORGEOUS_REQUESTED_MON
 	specialvar VAR_RESULT, DoesPlayerPartyContainSpecies
-	compare VAR_RESULT, TRUE
-	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon
+	goto_if_eq VAR_RESULT, TRUE, FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon
 	goto FiveIsland_ResortGorgeous_House_EventScript_RequestMon
 	end
 
@@ -45,28 +42,23 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	addobject LOCALID_BUTLER
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerEnter
 	waitmovement 0
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady
 	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_SelphyGiveTokenOfAppreciation
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerIShallDoAsYouBid
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth
-	compare VAR_FACING, DIR_EAST
-	call_if_eq FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast
-	compare VAR_FACING, DIR_WEST
-	call_if_eq FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest
-	moveobjectoffscreen LOCALID_BUTLER
+	call_if_eq VAR_FACING, DIR_NORTH, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth
+	call_if_eq VAR_FACING, DIR_EAST, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast
+	call_if_eq VAR_FACING, DIR_WEST, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest
+	copyobjectxytoperm LOCALID_BUTLER
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerPleaseAcceptThisAsHerThanks
 	giveitem VAR_RESORT_GORGEOUS_REWARD
-	compare VAR_RESULT, FALSE
-	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward
+	goto_if_eq VAR_RESULT, FALSE, FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward
 	setflag SHOWN_REQUESTED_MON
 	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
 	release
@@ -101,9 +93,9 @@ FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest::
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerBagAppearsToBeFull
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_OhHowDisappointing
 	setflag SHOWN_REQUESTED_MON
 	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE

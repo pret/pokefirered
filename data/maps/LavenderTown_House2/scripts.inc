@@ -5,20 +5,16 @@ LavenderTown_House2_EventScript_NameRater::
 	lock
 	faceplayer
 	msgbox LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq LavenderTown_House2_EventScript_ChooseMon
-	compare VAR_RESULT, NO
-	goto_if_eq LavenderTown_House2_EventScript_DontRateNickname
+	goto_if_eq VAR_RESULT, YES, LavenderTown_House2_EventScript_ChooseMon
+	goto_if_eq VAR_RESULT, NO, LavenderTown_House2_EventScript_DontRateNickname
 	end
 
 LavenderTown_House2_EventScript_ChooseMon::
 	msgbox LavenderTown_House2_Text_CritiqueWhichMonsNickname
 	special ChoosePartyMon
 	waitstate
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_lt LavenderTown_House2_EventScript_CheckCanRateMon
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge LavenderTown_House2_EventScript_DontRateNickname
+	goto_if_lt VAR_0x8004, PARTY_SIZE, LavenderTown_House2_EventScript_CheckCanRateMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, LavenderTown_House2_EventScript_DontRateNickname
 	end
 
 LavenderTown_House2_EventScript_DontRateNickname::
@@ -28,21 +24,16 @@ LavenderTown_House2_EventScript_DontRateNickname::
 
 LavenderTown_House2_EventScript_CheckCanRateMon::
 	specialvar VAR_RESULT, GetPartyMonSpecies
-	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq LavenderTown_House2_EventScript_CantNicknameEgg
+	goto_if_eq VAR_RESULT, SPECIES_EGG, LavenderTown_House2_EventScript_CantNicknameEgg
 	special BufferMonNickname
 	special IsMonOTIDNotPlayers
-	compare VAR_RESULT, TRUE
-	goto_if_eq LavenderTown_House2_EventScript_CantNicknameTradeMon
+	goto_if_eq VAR_RESULT, TRUE, LavenderTown_House2_EventScript_CantNicknameTradeMon
 	specialvar VAR_RESULT, IsMonOTNameNotPlayers
 	special BufferMonNickname
-	compare VAR_RESULT, TRUE
-	goto_if_eq LavenderTown_House2_EventScript_CantNicknameTradeMon
+	goto_if_eq VAR_RESULT, TRUE, LavenderTown_House2_EventScript_CantNicknameTradeMon
 	msgbox LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq LavenderTown_House2_EventScript_ChooseNewNickname
-	compare VAR_RESULT, NO
-	goto_if_eq LavenderTown_House2_EventScript_DontRateNickname
+	goto_if_eq VAR_RESULT, YES, LavenderTown_House2_EventScript_ChooseNewNickname
+	goto_if_eq VAR_RESULT, NO, LavenderTown_House2_EventScript_DontRateNickname
 	end
 
 LavenderTown_House2_EventScript_CantNicknameEgg::
@@ -60,8 +51,7 @@ LavenderTown_House2_EventScript_ChooseNewNickname::
 	call EventScript_ChangePokemonNickname
 	specialvar VAR_RESULT, NameRaterWasNicknameChanged
 	special BufferMonNickname
-	compare VAR_RESULT, TRUE
-	goto_if_eq LavenderTown_House2_EventScript_ChoseNewNickname
+	goto_if_eq VAR_RESULT, TRUE, LavenderTown_House2_EventScript_ChoseNewNickname
 	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName
 	release
 	end

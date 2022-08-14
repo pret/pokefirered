@@ -13,8 +13,7 @@ Route16_EventScript_RemoveSnorlax::
 	return
 
 Route16_OnTransition::
-	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if_eq Route16_OnTransitionCyclingRoad
+	call_if_eq VAR_MAP_SCENE_ROUTE16, 1, Route16_OnTransitionCyclingRoad
 	end
 
 Route16_OnTransitionCyclingRoad::
@@ -36,10 +35,9 @@ Route16_EventScript_Snorlax::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	msgbox Text_WantToUsePokeFlute, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route16_EventScript_DontUsePokeFlute
+	goto_if_eq VAR_RESULT, NO, Route16_EventScript_DontUsePokeFlute
 	call EventScript_AwakenSnorlax
-	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
+	setwildbattle SPECIES_SNORLAX, 30
 	waitse
 	playmoncry SPECIES_SNORLAX, CRY_MODE_ENCOUNTER
 	delay 40
@@ -49,12 +47,9 @@ Route16_EventScript_Snorlax::
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq Route16_EventScript_FoughtSnorlax
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq Route16_EventScript_FoughtSnorlax
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq Route16_EventScript_FoughtSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route16_EventScript_FoughtSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route16_EventScript_FoughtSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route16_EventScript_FoughtSnorlax
 	release
 	end
 

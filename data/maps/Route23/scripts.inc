@@ -23,7 +23,7 @@ Route23_EventScript_CascadeBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 2
-	getstdstring 0, STDSTRING_CASCADE_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_CASCADE_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -31,7 +31,7 @@ Route23_EventScript_ThunderBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 3
-	getstdstring 0, STDSTRING_THUNDER_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_THUNDER_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -39,7 +39,7 @@ Route23_EventScript_RainbowBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 4
-	getstdstring 0, STDSTRING_RAINBOW_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_RAINBOW_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -47,7 +47,7 @@ Route23_EventScript_SoulBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 5
-	getstdstring 0, STDSTRING_SOUL_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_SOUL_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -55,7 +55,7 @@ Route23_EventScript_MarshBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 6
-	getstdstring 0, STDSTRING_MARSH_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_MARSH_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -63,7 +63,7 @@ Route23_EventScript_VolcanoBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 7
-	getstdstring 0, STDSTRING_VOLCANO_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_VOLCANO_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -71,7 +71,7 @@ Route23_EventScript_EarthBadgeGuard::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 8
-	getstdstring 0, STDSTRING_EARTH_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_EARTH_BADGE
 	goto Route23_EventScript_BadgeGuard
 	end
 
@@ -79,7 +79,7 @@ Route23_EventScript_CascadeBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 2
 	setvar VAR_0x8009, LOCALID_CASCADE_BADGE_GUARD
-	getstdstring 0, STDSTRING_CASCADE_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_CASCADE_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 
@@ -87,7 +87,7 @@ Route23_EventScript_ThunderBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 3
 	setvar VAR_0x8009, LOCALID_THUNDER_BADGE_GUARD
-	getstdstring 0, STDSTRING_THUNDER_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_THUNDER_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 
@@ -95,7 +95,7 @@ Route23_EventScript_RainbowBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 4
 	setvar VAR_0x8009, LOCALID_RAINBOW_BADGE_GUARD
-	getstdstring 0, STDSTRING_RAINBOW_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_RAINBOW_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 
@@ -103,7 +103,7 @@ Route23_EventScript_SoulBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 5
 	setvar VAR_0x8009, LOCALID_SOUL_BADGE_GUARD
-	getstdstring 0, STDSTRING_SOUL_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_SOUL_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 
@@ -111,7 +111,7 @@ Route23_EventScript_MarshBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 6
 	setvar VAR_0x8009, LOCALID_MARSH_BADGE_GUARD
-	getstdstring 0, STDSTRING_MARSH_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_MARSH_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 
@@ -119,7 +119,7 @@ Route23_EventScript_VolcanoBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 7
 	setvar VAR_0x8009, LOCALID_VOLCANO_BADGE_GUARD
-	getstdstring 0, STDSTRING_VOLCANO_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_VOLCANO_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 
@@ -127,7 +127,7 @@ Route23_EventScript_EarthBadgeGuardTrigger::
 	lockall
 	setvar VAR_TEMP_1, 8
 	setvar VAR_0x8009, LOCALID_EARTH_BADGE_GUARD
-	getstdstring 0, STDSTRING_EARTH_BADGE
+	bufferstdstring STR_VAR_1, STDSTRING_EARTH_BADGE
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
 

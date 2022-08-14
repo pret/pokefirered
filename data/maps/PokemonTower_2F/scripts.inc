@@ -20,31 +20,24 @@ PokemonTower_2F_EventScript_RivalTriggerDown::
 	end
 
 PokemonTower_2F_EventScript_Rival::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq PokemonTower_2F_EventScript_RivalFacePlayerRight
-	compare VAR_TEMP_1, 1
-	call_if_eq PokemonTower_2F_EventScript_RivalFacePlayerDown
+	call_if_eq VAR_TEMP_1, 0, PokemonTower_2F_EventScript_RivalFacePlayerRight
+	call_if_eq VAR_TEMP_1, 1, PokemonTower_2F_EventScript_RivalFacePlayerDown
 	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Movement_Delay48
 	waitmovement 0
 	msgbox PokemonTower_2F_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_RIVAL
-	compare VAR_STARTER_MON, 2
-	call_if_eq PokemonTower_2F_EventScript_RivalSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq PokemonTower_2F_EventScript_RivalBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq PokemonTower_2F_EventScript_RivalCharmander
+	call_if_eq VAR_STARTER_MON, 2, PokemonTower_2F_EventScript_RivalSquirtle
+	call_if_eq VAR_STARTER_MON, 1, PokemonTower_2F_EventScript_RivalBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, PokemonTower_2F_EventScript_RivalCharmander
 	msgbox PokemonTower_2F_Text_RivalPostBattle
 	closemessage
 	playbgm MUS_RIVAL_EXIT, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq PokemonTower_2F_EventScript_RivalExitRight
-	compare VAR_TEMP_1, 1
-	call_if_eq PokemonTower_2F_EventScript_RivalExitDown
+	call_if_eq VAR_TEMP_1, 0, PokemonTower_2F_EventScript_RivalExitRight
+	call_if_eq VAR_TEMP_1, 1, PokemonTower_2F_EventScript_RivalExitDown
 	playse SE_EXIT
 	delay 25
 	fadedefaultbgm

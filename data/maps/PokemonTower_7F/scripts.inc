@@ -14,7 +14,7 @@ PokemonTower_7F_EventScript_MrFuji::
 	setflag FLAG_RESCUED_MR_FUJI
 	msgbox PokemonTower_7F_Text_MrFujiThankYouFollowMe
 	closemessage
-	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 255, 4, 7
+	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 4, 7
 	waitstate
 	release
 	end
@@ -28,12 +28,9 @@ PokemonTower_7F_EventScript_DefeatedGrunt1::
 	msgbox PokemonTower_7F_Text_Grunt1PostBattle
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 10
-	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitMid
-	compare VAR_0x8004, 11
-	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitRight
-	compare VAR_0x8004, 9
-	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitLeft
+	goto_if_eq VAR_0x8004, 10, PokemonTower_7F_EventScript_Grunt1ExitMid
+	goto_if_eq VAR_0x8004, 11, PokemonTower_7F_EventScript_Grunt1ExitRight
+	goto_if_eq VAR_0x8004, 9, PokemonTower_7F_EventScript_Grunt1ExitLeft
 	applymovement LOCALID_GRUNT1, PokemonTower_7F_Movement_Grunt1Exit
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt1
@@ -116,10 +113,8 @@ PokemonTower_7F_EventScript_DefeatedGrunt2::
 	msgbox PokemonTower_7F_Text_Grunt2PostBattle
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 12
-	goto_if_eq PokemonTower_7F_EventScript_Grunt2ExitLeft
-	compare VAR_0x8004, 13
-	goto_if_eq PokemonTower_7F_EventScript_Grunt2ExitRight
+	goto_if_eq VAR_0x8004, 12, PokemonTower_7F_EventScript_Grunt2ExitLeft
+	goto_if_eq VAR_0x8004, 13, PokemonTower_7F_EventScript_Grunt2ExitRight
 	applymovement LOCALID_GRUNT2, PokemonTower_7F_Movement_Grunt2Exit
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt2
@@ -181,10 +176,8 @@ PokemonTower_7F_EventScript_DefeatedGrunt3::
 	msgbox PokemonTower_7F_Text_Grunt3PostBattle
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 10
-	goto_if_eq PokemonTower_7F_EventScript_Grunt3ExitRight
-	compare VAR_0x8004, 9
-	goto_if_eq PokemonTower_7F_EventScript_Grunt3ExitLeft
+	goto_if_eq VAR_0x8004, 10, PokemonTower_7F_EventScript_Grunt3ExitRight
+	goto_if_eq VAR_0x8004, 9, PokemonTower_7F_EventScript_Grunt3ExitLeft
 	applymovement LOCALID_GRUNT3, PokemonTower_7F_Movement_Grunt3Exit
 	waitmovement 0
 	goto PokemonTower_7F_EventScript_RemoveGrunt3

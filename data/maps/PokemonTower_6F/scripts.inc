@@ -3,15 +3,14 @@ PokemonTower_6F_MapScripts::
 
 PokemonTower_6F_EventScript_MarowakGhost::
 	lockall
-	textcolor 2
+	textcolor NPC_TEXT_COLOR_MON
 	msgbox PokemonTower_6F_Text_BeGoneIntruders
 	goto_if_questlog EventScript_ReleaseEnd
-	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
+	setwildbattle SPECIES_MAROWAK, 30
 	special StartMarowakBattle
 	waitstate
 	special QuestLog_CutRecording
-	compare VAR_RESULT, FALSE  @ Set by CB2_EndMarowakBattle
-	goto_if_eq PokemonTower_6F_EventScript_DefeatedMarowakGhost
+	goto_if_eq VAR_RESULT, FALSE, PokemonTower_6F_EventScript_DefeatedMarowakGhost  @ VAR_RESULT set by CB2_EndMarowakBattle
 	applymovement OBJ_EVENT_ID_PLAYER, PokemonTower_6F_Movement_ForcePlayerUp
 	waitmovement 0
 	releaseall

@@ -12,6 +12,14 @@
 #define MAX_MAP_DATA_SIZE 0x2800
 #define VIRTUAL_MAP_SIZE (MAX_MAP_DATA_SIZE)
 
+// Map coordinates are offset by 7 when using the map
+// buffer because it needs to load sufficient border
+// metatiles to fill the player's view (the player has
+// 7 metatiles of view horizontally in either direction).
+#define MAP_OFFSET 7
+#define MAP_OFFSET_W (MAP_OFFSET * 2 + 1)
+#define MAP_OFFSET_H (MAP_OFFSET * 2)
+
 extern struct BackupMapLayout VMap;
 extern const struct MapLayout Route1_Layout;
 

@@ -12,8 +12,7 @@ PokemonLeague_AgathasRoom_OnResume::
 
 PokemonLeague_AgathasRoom_OnLoad::
 	call_if_set FLAG_DEFEATED_AGATHA, PokemonLeague_AgathasRoom_EventScript_SetDoorOpen
-	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 3
-	call_if_eq PokemonLeague_AgathasRoom_EventScript_CloseEntry
+	call_if_eq VAR_MAP_SCENE_POKEMON_LEAGUE, 3, PokemonLeague_AgathasRoom_EventScript_CloseEntry
 	end
 
 PokemonLeague_AgathasRoom_EventScript_CloseEntry::

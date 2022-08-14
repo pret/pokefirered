@@ -12,8 +12,7 @@ RocketHideout_B4F_OnLoad::
 	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
-	compare NUM_DOOR_GRUNTS_DEFEATED, 2
-	call_if_ne RocketHideout_B4F_EventScript_SetBarrier
+	call_if_ne NUM_DOOR_GRUNTS_DEFEATED, 2, RocketHideout_B4F_EventScript_SetBarrier
 	end
 
 RocketHideout_B4F_EventScript_CountGruntDefeated::
@@ -46,8 +45,7 @@ RocketHideout_B4F_EventScript_SilphScope::
 	faceplayer
 	removeobject LOCALID_SILPH_SCOPE
 	giveitem ITEM_SILPH_SCOPE
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	release
 	end
 
@@ -70,8 +68,7 @@ RocketHideout_B4F_EventScript_LiftKey::
 	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
 	removeobject LOCALID_LIFT_KEY
 	giveitem ITEM_LIFT_KEY
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_BagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	release
 	end
 
@@ -84,10 +81,8 @@ RocketHideout_B4F_EventScript_DefeatedGrunt2::
 	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
-	compare NUM_DOOR_GRUNTS_DEFEATED, 2
-	call_if_eq RocketHideout_B4F_EventScript_RemoveBarrier
-	compare NUM_DOOR_GRUNTS_DEFEATED, 2
-	call_if_eq RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
+	call_if_eq NUM_DOOR_GRUNTS_DEFEATED, 2, RocketHideout_B4F_EventScript_RemoveBarrier
+	call_if_eq NUM_DOOR_GRUNTS_DEFEATED, 2, RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
 	release
 	end
 
@@ -100,10 +95,8 @@ RocketHideout_B4F_EventScript_DefeatedGrunt3::
 	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
-	compare NUM_DOOR_GRUNTS_DEFEATED, 2
-	call_if_eq RocketHideout_B4F_EventScript_RemoveBarrier
-	compare NUM_DOOR_GRUNTS_DEFEATED, 2
-	call_if_eq RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
+	call_if_eq NUM_DOOR_GRUNTS_DEFEATED, 2, RocketHideout_B4F_EventScript_RemoveBarrier
+	call_if_eq NUM_DOOR_GRUNTS_DEFEATED, 2, RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
 	release
 	end
 

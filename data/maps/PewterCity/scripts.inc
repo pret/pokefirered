@@ -19,8 +19,7 @@ PewterCity_EventScript_GymGuide::
 	msgbox PewterCity_Text_BrocksLookingForChallengersFollowMe
 	closemessage
 	playbgm MUS_FOLLOW_ME, 0
-	compare VAR_FACING, DIR_EAST
-	call_if_eq PewterCity_EventScript_WalkToGymEast
+	call_if_eq VAR_FACING, DIR_EAST, PewterCity_EventScript_WalkToGymEast
 	msgbox PewterCity_Text_GoTakeOnBrock
 	closemessage
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GymGuideExit
@@ -284,16 +283,13 @@ PewterCity_EventScript_GymGuideTriggerRight::
 	end
 
 PewterCity_EventScript_GymGuideTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox PewterCity_Text_BrocksLookingForChallengersFollowMe
 	closemessage
 	playbgm MUS_FOLLOW_ME, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq PewterCity_EventScript_WalkToGymTop
-	compare VAR_TEMP_1, 1
-	call_if_eq PewterCity_EventScript_WalkToGymMid
-	compare VAR_TEMP_1, 2
-	call_if_eq PewterCity_EventScript_WalkToGymBottom
+	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_WalkToGymTop
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_WalkToGymMid
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_WalkToGymBottom
 	msgbox PewterCity_Text_GoTakeOnBrock
 	closemessage
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GymGuideExit
@@ -440,20 +436,15 @@ PewterCity_EventScript_MuseumGuide::
 	lock
 	faceplayer
 	msgbox PewterCity_Text_DidYouCheckOutMuseum, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq PewterCity_EventScript_CheckedOutMuseum
+	goto_if_eq VAR_RESULT, YES, PewterCity_EventScript_CheckedOutMuseum
 	msgbox PewterCity_Text_ReallyYouHaveToGo
 	closemessage
 	delay 10
 	playbgm MUS_FOLLOW_ME, 0
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq PewterCity_EventScript_LeadToMuseumNorth
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq PewterCity_EventScript_LeadToMuseumSouth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq PewterCity_EventScript_LeadToMuseumWest
-	compare VAR_FACING, DIR_EAST
-	call_if_eq PewterCity_EventScript_LeadToMuseumEast
+	call_if_eq VAR_FACING, DIR_NORTH, PewterCity_EventScript_LeadToMuseumNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, PewterCity_EventScript_LeadToMuseumSouth
+	call_if_eq VAR_FACING, DIR_WEST, PewterCity_EventScript_LeadToMuseumWest
+	call_if_eq VAR_FACING, DIR_EAST, PewterCity_EventScript_LeadToMuseumEast
 	msgbox PewterCity_Text_ThisIsTheMuseum
 	closemessage
 	delay 10
@@ -631,8 +622,7 @@ PewterCity_EventScript_BugCatcher::
 	lock
 	faceplayer
 	msgbox PewterCity_Text_DoYouKnowWhatImDoing, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq PewterCity_EventScript_KnowWhatTheyreDoing
+	goto_if_eq VAR_RESULT, YES, PewterCity_EventScript_KnowWhatTheyreDoing
 	msgbox PewterCity_Text_SprayingRepelToKeepWildMonsOut
 	release
 	end
@@ -695,13 +685,10 @@ PewterCity_EventScript_RunningShoesAideTriggerBottom::
 	end
 
 PewterCity_EventScript_AideGiveRunningShoes::
-	textcolor 0
-	compare VAR_TEMP_1, 1
-	call_if_eq PewterCity_EventScript_AideNoticePlayer
-	compare VAR_TEMP_1, 2
-	call_if_eq PewterCity_EventScript_AideNoticePlayer
-	compare VAR_TEMP_1, 3
-	call_if_eq PewterCity_EventScript_AideNoticePlayer
+	textcolor NPC_TEXT_COLOR_MALE
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideNoticePlayer
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideNoticePlayer
+	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideNoticePlayer
 	waitse
 	playse SE_PIN
 	applymovement LOCALID_AIDE, Movement_ExclamationMark
@@ -709,16 +696,12 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	applymovement LOCALID_AIDE, Movement_Delay48
 	waitmovement 0
 	msgbox PewterCity_Text_OhPlayer
-	compare VAR_TEMP_1, 0
-	call_if_eq PewterCity_EventScript_AideApproachPlayer0
-	compare VAR_TEMP_1, 1
-	call_if_eq PewterCity_EventScript_AideApproachPlayer1
-	compare VAR_TEMP_1, 2
-	call_if_eq PewterCity_EventScript_AideApproachPlayer2
-	compare VAR_TEMP_1, 3
-	call_if_eq PewterCity_EventScript_AideApproachPlayer3
+	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideApproachPlayer0
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideApproachPlayer1
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideApproachPlayer2
+	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideApproachPlayer3
 	msgbox PewterCity_Text_AskedToDeliverThis
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message PewterCity_Text_ReceivedRunningShoesFromAide
 	waitmessage
@@ -731,16 +714,12 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	call EventScript_RestorePrevTextColor
 	msgbox PewterCity_Text_MustBeGoingBackToLab
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq PewterCity_EventScript_AideExit0
-	compare VAR_TEMP_1, 1
-	call_if_eq PewterCity_EventScript_AideExit1
-	compare VAR_TEMP_1, 2
-	call_if_eq PewterCity_EventScript_AideExit2
-	compare VAR_TEMP_1, 3
-	call_if_eq PewterCity_EventScript_AideExit3
+	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideExit0
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideExit1
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideExit2
+	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideExit3
 	delay 30
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PewterCity_Text_RunningShoesLetterFromMom
 	closemessage
 	removeobject LOCALID_AIDE

@@ -24,7 +24,7 @@ Route8_WestEntrance_EventScript_GuardTriggerBottom::
 	end
 
 Route8_WestEntrance_EventScript_GuardTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	goto_if_set FLAG_GOT_TEA, Route8_WestEntrance_EventScript_GiveTea
@@ -36,31 +36,28 @@ Route8_WestEntrance_EventScript_GuardTrigger::
 	end
 
 Route8_WestEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
 @ Unused
 Route8_WestEntrance_EventScript_GiveSodaPop::
-	removeitem ITEM_SODA_POP, 1
+	removeitem ITEM_SODA_POP
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
 @ Unused
 Route8_WestEntrance_EventScript_GiveLemonade::
-	removeitem ITEM_LEMONADE, 1
+	removeitem ITEM_LEMONADE
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
 Route8_WestEntrance_EventScript_GuardDrinkTea::
 	msgbox Route8_WestEntrance_Text_ThatTeaLooksTasty
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq Route8_WestEntrance_EventScript_WalkToGuardTop
-	compare VAR_TEMP_1, 1
-	call_if_eq Route8_WestEntrance_EventScript_WalkToGuardMid
-	compare VAR_TEMP_1, 2
-	call_if_eq Route8_WestEntrance_EventScript_WalkToGuardBottom
+	call_if_eq VAR_TEMP_1, 0, Route8_WestEntrance_EventScript_WalkToGuardTop
+	call_if_eq VAR_TEMP_1, 1, Route8_WestEntrance_EventScript_WalkToGuardMid
+	call_if_eq VAR_TEMP_1, 2, Route8_WestEntrance_EventScript_WalkToGuardBottom
 	msgbox Route8_WestEntrance_Text_ThanksIllShareTeaWithGuards
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall

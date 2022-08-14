@@ -88,8 +88,7 @@ EventScript_AccessProfOaksPC::
 	playse SE_PC_LOGIN
 	msgbox Text_AccessedProfOaksPC
 	msgbox Text_HavePokedexRated, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_ExitOaksPC
+	goto_if_eq VAR_RESULT, NO, EventScript_ExitOaksPC
 	setflag FLAG_OAKS_RATING_IS_VIA_PC
 	call PokedexRating_EventScript_Rate
 	clearflag FLAG_OAKS_RATING_IS_VIA_PC

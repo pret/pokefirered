@@ -8,14 +8,10 @@ ViridianCity_MapScripts::
 
 ViridianCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	call_if_eq ViridianCity_EventScript_SetOldManBlockingRoad
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
-	call_if_eq ViridianCity_EventScript_SetOldManStandingByRoad
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	call_if_ge ViridianCity_EventScript_SetOldManNormal
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
-	call_if_eq ViridianCity_EventScript_TryUnlockGym
+	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_SetOldManBlockingRoad
+	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_SetOldManStandingByRoad
+	call_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_SetOldManNormal
+	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0, ViridianCity_EventScript_TryUnlockGym
 	end
 
 ViridianCity_EventScript_SetOldManNormal::
@@ -46,7 +42,7 @@ ViridianCity_EventScript_TryUnlockGym::
 
 ViridianCity_EventScript_GymDoorLocked::
 	lockall
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
@@ -89,8 +85,7 @@ ViridianCity_EventScript_Boy::
 ViridianCity_EventScript_OldMan::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
-	goto_if_eq ViridianCity_EventScript_OldManGymLeaderReturned
+	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1, ViridianCity_EventScript_OldManGymLeaderReturned
 	msgbox ViridianCity_Text_GymClosedWonderWhoLeaderIs
 	closemessage
 	applymovement LOCALID_OLD_MAN, Movement_FaceOriginalDirection
@@ -107,18 +102,14 @@ ViridianCity_EventScript_TutorialOldMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE01_GET, ViridianCity_EventScript_AskIfTeachyTVHelpful
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	goto_if_ge ViridianCity_EventScript_TutorialCompleted
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
-	goto_if_eq ViridianCity_EventScript_TutorialStart
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	goto_if_eq ViridianCity_EventScript_TutorialNotReady
+	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_TutorialCompleted
+	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_TutorialStart
+	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_TutorialNotReady
 	end
 
 ViridianCity_EventScript_AskIfTeachyTVHelpful::
 	msgbox ViridianCity_Text_HowsTeachyTVHelping, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq ViridianCity_EventScript_TeachyTVNotHelpful
+	goto_if_eq VAR_RESULT, NO, ViridianCity_EventScript_TeachyTVNotHelpful
 	msgbox ViridianCity_Text_MyGrandsonOnTheShow
 	release
 	end
@@ -164,10 +155,8 @@ ViridianCity_EventScript_Youngster::
 	lock
 	faceplayer
 	msgbox ViridianCity_Text_WantToKnowAboutCaterpillarMons, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq ViridianCity_EventScript_YoungsterExplainCaterpillars
-	compare VAR_RESULT, NO
-	goto_if_eq ViridianCity_EventScript_YoungsterDeclineExplanation
+	goto_if_eq VAR_RESULT, YES, ViridianCity_EventScript_YoungsterExplainCaterpillars
+	goto_if_eq VAR_RESULT, NO, ViridianCity_EventScript_YoungsterDeclineExplanation
 	end
 
 ViridianCity_EventScript_YoungsterExplainCaterpillars::
@@ -183,8 +172,7 @@ ViridianCity_EventScript_YoungsterDeclineExplanation::
 ViridianCity_EventScript_Woman::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	goto_if_eq ViridianCity_EventScript_WomanRoadBlocked
+	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_WomanRoadBlocked
 	msgbox ViridianCity_Text_GoShoppingInPewterOccasionally
 	release
 	end
@@ -203,7 +191,7 @@ ViridianCity_EventScript_DreamEaterTutor::
 
 ViridianCity_EventScript_RoadBlocked::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox ViridianCity_Text_ThisIsPrivateProperty
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_WalkDown
@@ -217,7 +205,7 @@ ViridianCity_Movement_WalkDown::
 
 ViridianCity_EventScript_TutorialTriggerLeft::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
@@ -228,7 +216,7 @@ ViridianCity_EventScript_TutorialTriggerLeft::
 
 ViridianCity_EventScript_TutorialTriggerRight::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft

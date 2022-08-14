@@ -14,8 +14,7 @@ SeafoamIslands_B4F_OnResume::
 
 SeafoamIslands_B4F_EventScript_TryRemoveArticuno::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -29,8 +28,7 @@ SeafoamIslands_B4F_EventScript_CheckStoppedCurrent::
 	setvar NUM_BOULDERS_PRESENT, 0
 	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_AddBoulderPresent
 	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	compare NUM_BOULDERS_PRESENT, 2
-	call_if_eq SeafoamIslands_B4F_EventScript_StoppedCurrent
+	call_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B4F_EventScript_StoppedCurrent
 	return
 
 SeafoamIslands_B4F_EventScript_StoppedCurrent::
@@ -49,8 +47,7 @@ SeafoamIslands_B4F_OnLoad::
 	setvar NUM_BOULDERS_PRESENT, 0
 	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_AddBoulderPresent
 	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	compare NUM_BOULDERS_PRESENT, 2
-	goto_if_eq SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs
+	goto_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs
 	end
 
 SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs::
@@ -93,13 +90,10 @@ SeafoamIslands_B4F_EventScript_EnterByFalling::
 	setvar NUM_BOULDERS_PRESENT, 0
 	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_AddBoulderPresent
 	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	compare NUM_BOULDERS_PRESENT, 2
-	goto_if_eq SeafoamIslands_B4F_EventScript_CurrentBlocked
+	goto_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B4F_EventScript_CurrentBlocked
 	getplayerxy VAR_0x8008, VAR_0x8009
-	compare VAR_0x8008, 9
-	call_if_lt SeafoamIslands_B4F_EventScript_RideCurrentFar
-	compare VAR_0x8008, 9
-	call_if_ge SeafoamIslands_B4F_EventScript_RideCurrentClose
+	call_if_lt VAR_0x8008, 9, SeafoamIslands_B4F_EventScript_RideCurrentFar
+	call_if_ge VAR_0x8008, 9, SeafoamIslands_B4F_EventScript_RideCurrentClose
 	special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand
 	setvar VAR_TEMP_1, 0
 	releaseall
@@ -162,7 +156,7 @@ SeafoamIslands_B4F_EventScript_Articuno::
 	special QuestLog_CutRecording
 	lock
 	faceplayer
-	setwildbattle SPECIES_ARTICUNO, 50, ITEM_NONE
+	setwildbattle SPECIES_ARTICUNO, 50
 	waitse
 	playmoncry SPECIES_ARTICUNO, CRY_MODE_ENCOUNTER
 	message Text_Gyaoo
@@ -176,12 +170,9 @@ SeafoamIslands_B4F_EventScript_Articuno::
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq SeafoamIslands_B4F_EventScript_DefeatedArticuno
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq SeafoamIslands_B4F_EventScript_RanFromArticuno
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq SeafoamIslands_B4F_EventScript_RanFromArticuno
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SeafoamIslands_B4F_EventScript_DefeatedArticuno
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SeafoamIslands_B4F_EventScript_RanFromArticuno
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SeafoamIslands_B4F_EventScript_RanFromArticuno
 	setflag FLAG_FOUGHT_ARTICUNO
 	release
 	end

@@ -2072,7 +2072,7 @@ static void CreateMinimizeSprite(struct Task* task, u8 taskId)
     {
         if ((matrixNum = AllocOamMatrix()) == 0xFF)
         {
-            obj_delete_but_dont_free_vram(&gSprites[spriteId]);
+            DestroySpriteWithActiveSheet(&gSprites[spriteId]);
         }
         else
         {
@@ -2100,7 +2100,7 @@ static void ClonedMinizeSprite_Step(struct Sprite *sprite)
     {
         gTasks[sprite->data[1]].data[sprite->data[2]]--;
         FreeOamMatrix(sprite->oam.matrixNum);
-        obj_delete_but_dont_free_vram(sprite);
+        DestroySpriteWithActiveSheet(sprite);
     }
 }
 
@@ -3082,7 +3082,7 @@ static void FakeOutStep2(u8 taskId)
     {
         gTasks[taskId].data[11] = 0x88;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN);
-        BlendPalettes(SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0), 16, RGB_WHITE);
+        BlendPalettes(GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0), 16, RGB_WHITE);
     }
     else if (gTasks[taskId].data[10] > 4)
     {

@@ -563,7 +563,7 @@ static void sub_80B59D4(u8 taskId)
             break;
         if (task->data[1] <= 80)
             break;
-        obj_delete_but_dont_free_vram(&gSprites[task->data[0]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[0]]);
         task->data[4] = 1;
         break;
     case 1:
@@ -718,7 +718,7 @@ static void sub_80B5DCC(u8 taskId)
         break;
     case 2:
         gSprites[task->data[14]].invisible = TRUE;
-        obj_delete_but_dont_free_vram(&gSprites[task->data[0]]);
+        DestroySpriteWithActiveSheet(&gSprites[task->data[0]]);
         FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -980,7 +980,7 @@ static void sub_80B6468(u8 taskId)
         right = 240;
         top = 0;
         bottom = 112;
-        selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_80B65F0;
     }

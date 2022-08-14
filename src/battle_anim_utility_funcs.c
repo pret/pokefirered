@@ -279,7 +279,7 @@ static void Task_FinishCloneBattlerSpriteWithBlend(struct Sprite *sprite)
     else
     {
         --gTasks[sprite->data[1]].data[sprite->data[2]];
-        obj_delete_but_dont_free_vram(sprite);
+        DestroySpriteWithActiveSheet(sprite);
     }
 }
 
@@ -584,7 +584,7 @@ void AnimTask_Flash(u8 taskId)
 
     sub_80BB790(selectedPalettes, 0);
     gTasks[taskId].data[14] = selectedPalettes >> 16;
-    selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     sub_80BB790(selectedPalettes, 0xFFFF);
     gTasks[taskId].data[15] = selectedPalettes;
     gTasks[taskId].data[0] = 0;
@@ -856,7 +856,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
     s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
-        for (selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
+        for (selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0);
              (selectedPalettes & 1) == 0;
              ++paletteIndex)
             selectedPalettes >>= 1;
@@ -874,7 +874,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
     s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
-        for (selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
+        for (selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0);
              (selectedPalettes & 1) == 0;
              ++paletteIndex)
             selectedPalettes >>= 1;
@@ -892,7 +892,7 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
     s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
-        for (selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
+        for (selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0);
              (selectedPalettes & 1) == 0;
              ++paletteIndex)
             selectedPalettes >>= 1;

@@ -326,7 +326,7 @@ u32 UnpackSelectedBattleAnimPalettes(s16 selector)
     u8 arg5 = (selector >> 5) & 1;
     u8 arg6 = (selector >> 6) & 1;
 
-    return SelectBattleAnimSpriteAndBgPalettes(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
+    return GetBattlePalettesMask(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
 }
 
 static void AnimSimplePaletteBlendStep(struct Sprite *sprite)
@@ -659,7 +659,7 @@ void AnimTask_InvertScreenColor(u8 taskId)
     u8 targetBattler = gBattleAnimTarget;
 
     if (gBattleAnimArgs[0] & 0x100)
-        selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0);
     if (gBattleAnimArgs[1] & 0x100)
         selectedPalettes |= (0x10000 << attackerBattler);
     if (gBattleAnimArgs[2] & 0x100)

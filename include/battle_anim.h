@@ -530,7 +530,7 @@ void AnimTask_InitAttackerFadeFromInvisible(u8 taskId);
 void AnimTask_MoveAttackerMementoShadow(u8 taskId);
 void AnimTask_MoveTargetMementoShadow(u8 taskId);
 void AnimTask_InitMementoShadow(u8 taskId);
-void sub_80B8664(u8 taskId);
+void AnimTask_MementoHandleBg(u8 taskId);
 void AnimTask_MetallicShine(u8 taskId);
 void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId);
 void GetIsDoomDesireHitTurn(u8 taskId);

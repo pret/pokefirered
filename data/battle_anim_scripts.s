@@ -3600,7 +3600,7 @@ Move_MEMENTO::
 	delay 48
 	playsewithpan SE_M_PSYBEAM2, 192
 	waitforvisualfinish
-	createvisualtask sub_80B8664, 2,
+	createvisualtask AnimTask_MementoHandleBg, 2,
 	delay 12
 	setalpha 0, 16
 	delay 1

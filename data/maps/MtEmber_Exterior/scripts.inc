@@ -8,8 +8,7 @@ MtEmber_Exterior_MapScripts::
 
 MtEmber_Exterior_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
-	compare VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
-	call_if_eq MtEmber_Exterior_EventScript_RocketsFaceDown
+	call_if_eq VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2, MtEmber_Exterior_EventScript_RocketsFaceDown
 	end
 
 MtEmber_Exterior_EventScript_RocketsFaceDown::
@@ -18,8 +17,7 @@ MtEmber_Exterior_EventScript_RocketsFaceDown::
 	return
 
 MtEmber_Exterior_OnLoad::
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	call_if_ge MtEmber_Exterior_EventScript_OpenCave
+	call_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4, MtEmber_Exterior_EventScript_OpenCave
 	end
 
 MtEmber_Exterior_EventScript_OpenCave::
@@ -29,8 +27,7 @@ MtEmber_Exterior_EventScript_OpenCave::
 MtEmber_Exterior_EventScript_Grunt1::
 	lock
 	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_EventScript_Grunt1Defeated
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq MtEmber_Exterior_EventScript_BattleGrunt1
+	goto_if_eq VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4, MtEmber_Exterior_EventScript_BattleGrunt1
 	msgbox MtEmber_Exterior_Text_WellTryDiggingHere
 	release
 	end
@@ -65,8 +62,7 @@ MtEmber_Exterior_EventScript_Grunt2::
 	lock
 	faceplayer
 	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_EventScript_DefeatedGrunt2
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq MtEmber_Exterior_EventScript_BattleGrunt2
+	goto_if_eq VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4, MtEmber_Exterior_EventScript_BattleGrunt2
 	msgbox MtEmber_Exterior_Text_YoureInTheWayGetLost
 	closemessage
 	applymovement LOCALID_GRUNT2, Movement_FaceOriginalDirection
@@ -90,7 +86,7 @@ MtEmber_Exterior_EventScript_BattleGrunt2::
 
 MtEmber_Exterior_EventScript_RocketPasswordScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox MtEmber_Exterior_Text_PunchedThroughAtLast
 	message MtEmber_Exterior_Text_WhatsPasswordAgain
 	waitmessage

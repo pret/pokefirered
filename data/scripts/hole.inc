@@ -15,7 +15,7 @@ EventScript_FallDownHole::
 	waitmovement 0
 	playse SE_FALL
 	delay 60
-	warphole 0xFFFF
+	warphole MAP_UNDEFINED
 	waitstate
 	end
 

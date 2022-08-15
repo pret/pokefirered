@@ -24,7 +24,7 @@ Route5_SouthEntrance_EventScript_GuardTriggerRight::
 	end
 
 Route5_SouthEntrance_EventScript_GuardTrigger::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	goto_if_set FLAG_GOT_TEA, Route5_SouthEntrance_EventScript_GiveTea
@@ -36,19 +36,16 @@ Route5_SouthEntrance_EventScript_GuardTrigger::
 	end
 
 Route5_SouthEntrance_EventScript_GiveTea::
-	removeitem ITEM_TEA, 1
+	removeitem ITEM_TEA
 	goto Route5_SouthEntrance_EventScript_GuardDrinkTea
 	end
 
 Route5_SouthEntrance_EventScript_GuardDrinkTea::
 	msgbox Route5_SouthEntrance_Text_ThatTeaLooksTasty
 	closemessage
-	compare VAR_TEMP_1, 0
-	call_if_eq Route5_SouthEntrance_EventScript_WalkToGuardLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq Route5_SouthEntrance_EventScript_WalkToGuardMid
-	compare VAR_TEMP_1, 2
-	call_if_eq Route5_SouthEntrance_EventScript_WalkToGuardRight
+	call_if_eq VAR_TEMP_1, 0, Route5_SouthEntrance_EventScript_WalkToGuardLeft
+	call_if_eq VAR_TEMP_1, 1, Route5_SouthEntrance_EventScript_WalkToGuardMid
+	call_if_eq VAR_TEMP_1, 2, Route5_SouthEntrance_EventScript_WalkToGuardRight
 	msgbox Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall

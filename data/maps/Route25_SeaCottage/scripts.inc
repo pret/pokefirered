@@ -29,10 +29,8 @@ Route25_SeaCottage_EventScript_Bill::
 	goto_if_set FLAG_GOT_SS_TICKET, Route25_SeaCottage_EventScript_BillGoToSSAnne
 	goto_if_set FLAG_HELPED_BILL_IN_SEA_COTTAGE, Route25_SeaCottage_EventScript_BillGiveSSTicket
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq Route25_SeaCottage_EventScript_BillAskForHelpMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq Route25_SeaCottage_EventScript_BillAskForHelpFemale
+	goto_if_eq VAR_RESULT, MALE, Route25_SeaCottage_EventScript_BillAskForHelpMale
+	goto_if_eq VAR_RESULT, FEMALE, Route25_SeaCottage_EventScript_BillAskForHelpFemale
 	end
 
 Route25_SeaCottage_EventScript_BillAskForHelpMale::
@@ -46,19 +44,14 @@ Route25_SeaCottage_EventScript_BillAskForHelpFemale::
 	end
 
 Route25_SeaCottage_EventScript_BillAskForHelp::
-	compare VAR_RESULT, NO
-	call_if_eq Route25_SeaCottage_EventScript_DeclineHelpBill
+	call_if_eq VAR_RESULT, NO, Route25_SeaCottage_EventScript_DeclineHelpBill
 	msgbox Route25_SeaCottage_Text_RunCellSeparationOnPC
 	closemessage
 	delay 10
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporterSouth
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporter
-	compare VAR_FACING, DIR_WEST
-	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporter
-	compare VAR_FACING, DIR_EAST
-	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporter
+	call_if_eq VAR_FACING, DIR_SOUTH, Route25_SeaCottage_EventScript_BillWalkToTeleporterSouth
+	call_if_eq VAR_FACING, DIR_NORTH, Route25_SeaCottage_EventScript_BillWalkToTeleporter
+	call_if_eq VAR_FACING, DIR_WEST, Route25_SeaCottage_EventScript_BillWalkToTeleporter
+	call_if_eq VAR_FACING, DIR_EAST, Route25_SeaCottage_EventScript_BillWalkToTeleporter
 	opendoor 10, 3
 	waitdooranim
 	applymovement LOCALID_BILL_CLEFAIRY, Route25_SeaCottage_Movement_BillEnterTeleporter
@@ -74,10 +67,8 @@ Route25_SeaCottage_EventScript_BillAskForHelp::
 @ Just returns after message, execution continues as if player had said yes
 Route25_SeaCottage_EventScript_DeclineHelpBill::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq Route25_SeaCottage_EventScript_DeclineHelpBillMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq Route25_SeaCottage_EventScript_DeclineHelpBillFemale
+	call_if_eq VAR_RESULT, MALE, Route25_SeaCottage_EventScript_DeclineHelpBillMale
+	call_if_eq VAR_RESULT, FEMALE, Route25_SeaCottage_EventScript_DeclineHelpBillFemale
 	return
 
 Route25_SeaCottage_EventScript_DeclineHelpBillMale::
@@ -106,13 +97,10 @@ Route25_SeaCottage_EventScript_BillGoToSSAnne::
 Route25_SeaCottage_EventScript_BillGiveSSTicket::
 	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq Route25_SeaCottage_EventScript_BillThanksMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq Route25_SeaCottage_EventScript_BillThanksFemale
-	checkitemspace ITEM_SS_TICKET, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route25_SeaCottage_EventScript_NoRoomForSSTicket
+	call_if_eq VAR_RESULT, MALE, Route25_SeaCottage_EventScript_BillThanksMale
+	call_if_eq VAR_RESULT, FEMALE, Route25_SeaCottage_EventScript_BillThanksFemale
+	checkitemspace ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, Route25_SeaCottage_EventScript_NoRoomForSSTicket
 	giveitem_msg Route25_SeaCottage_Text_ReceivedSSTicketFromBill, ITEM_SS_TICKET, 1, MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_GOT_SS_TICKET_DUP
 	setflag FLAG_HIDE_NUGGET_BRIDGE_ROCKET
@@ -258,36 +246,36 @@ Route25_SeaCottage_EventScript_BillsMonList::
 	end
 
 Route25_SeaCottage_EventScript_ViewEevee::
-	drawmonpic SPECIES_EEVEE, 10, 3
+	showmonpic SPECIES_EEVEE, 10, 3
 	waitbuttonpress
-	erasemonpic
+	hidemonpic
 	setvar VAR_0x8004, SPECIES_EEVEE
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
 Route25_SeaCottage_EventScript_ViewFlareon::
-	drawmonpic SPECIES_FLAREON, 10, 3
+	showmonpic SPECIES_FLAREON, 10, 3
 	waitbuttonpress
-	erasemonpic
+	hidemonpic
 	setvar VAR_0x8004, SPECIES_FLAREON
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
 Route25_SeaCottage_EventScript_ViewJolteon::
-	drawmonpic SPECIES_JOLTEON, 10, 3
+	showmonpic SPECIES_JOLTEON, 10, 3
 	waitbuttonpress
-	erasemonpic
+	hidemonpic
 	setvar VAR_0x8004, SPECIES_JOLTEON
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
 Route25_SeaCottage_EventScript_ViewVaporeon::
-	drawmonpic SPECIES_VAPOREON, 10, 3
+	showmonpic SPECIES_VAPOREON, 10, 3
 	waitbuttonpress
-	erasemonpic
+	hidemonpic
 	setvar VAR_0x8004, SPECIES_VAPOREON
 	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList

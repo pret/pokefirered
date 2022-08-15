@@ -22,9 +22,8 @@ PewterCity_Gym_EventScript_DefeatedBrock::
 
 PewterCity_Gym_EventScript_GiveTM39::
 	msgbox PewterCity_Gym_Text_TakeThisWithYou
-	checkitemspace ITEM_TM39, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq PewterCity_Gym_EventScript_NoRoomForTM39
+	checkitemspace ITEM_TM39
+	goto_if_eq VAR_RESULT, FALSE, PewterCity_Gym_EventScript_NoRoomForTM39
 	giveitem_msg PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM39
 	setflag FLAG_GOT_TM39_FROM_BROCK
 	msgbox PewterCity_Gym_Text_ExplainTM39
@@ -46,10 +45,8 @@ PewterCity_Gym_EventScript_GymGuy::
 	faceplayer
 	goto_if_set FLAG_DEFEATED_BROCK, PewterCity_Gym_EventScript_GymGuyPostVictory
 	msgbox PewterCity_Gym_Text_LetMeTakeYouToTheTop, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq PewterCity_Gym_EventScript_GymGuyTakeMeToTop
-	compare VAR_RESULT, NO
-	goto_if_eq PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop
+	goto_if_eq VAR_RESULT, YES, PewterCity_Gym_EventScript_GymGuyTakeMeToTop
+	goto_if_eq VAR_RESULT, NO, PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop
 	end
 
 PewterCity_Gym_EventScript_GymGuyPostVictory::

@@ -1,7 +1,6 @@
 PokemonMansion_EventScript_SecretSwitch::
 	msgbox PokemonMansion_Text_PressSecretSwitch, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq PokemonMansion_EventScript_DontPressSwitch
+	goto_if_eq VAR_RESULT, NO, PokemonMansion_EventScript_DontPressSwitch
 	msgbox PokemonMansion_Text_WhoWouldnt
 	goto_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, PokemonMansion_EventScript_ResetSwitch
 	setflag FLAG_POKEMON_MANSION_SWITCH_STATE

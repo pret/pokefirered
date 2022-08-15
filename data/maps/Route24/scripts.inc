@@ -6,12 +6,10 @@ Route24_MapScripts::
 Route24_EventScript_Rocket::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_ROUTE24, 1
-	goto_if_eq Route24_EventScript_RocketPostBattle
+	goto_if_eq VAR_MAP_SCENE_ROUTE24, 1, Route24_EventScript_RocketPostBattle
 	msgbox Route24_Text_JustEarnedFabulousPrize
-	checkitemspace ITEM_NUGGET, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route24_EventScript_NoRoomForNugget
+	checkitemspace ITEM_NUGGET
+	goto_if_eq VAR_RESULT, FALSE, Route24_EventScript_NoRoomForNugget
 	call Route24_EventScript_BattleRocket
 	release
 	end
@@ -39,17 +37,14 @@ Route24_EventScript_RocketTriggerRight::
 	end
 
 Route24_EventScript_RocketTrigger::
-	textcolor 0
-	compare VAR_TEMP_1, 0
-	call_if_eq Route24_EventScript_RocketApproachPlayer
-	compare VAR_TEMP_1, 1
-	call_if_eq Route24_EventScript_RocketMotionToPlayer
+	textcolor NPC_TEXT_COLOR_MALE
+	call_if_eq VAR_TEMP_1, 0, Route24_EventScript_RocketApproachPlayer
+	call_if_eq VAR_TEMP_1, 1, Route24_EventScript_RocketMotionToPlayer
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox Route24_Text_JustEarnedFabulousPrize
-	checkitemspace ITEM_NUGGET, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route24_EventScript_NoRoomForNuggetTrigger
+	checkitemspace ITEM_NUGGET
+	goto_if_eq VAR_RESULT, FALSE, Route24_EventScript_NoRoomForNuggetTrigger
 	call Route24_EventScript_BattleRocket
 	releaseall
 	end
@@ -81,8 +76,7 @@ Route24_EventScript_NoRoomForNuggetTrigger::
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Route24_Movement_WalkDown
 	waitmovement 0
-	compare VAR_TEMP_1, 0
-	call_if_eq Route24_EventScript_RocketWalkBackToPos
+	call_if_eq VAR_TEMP_1, 0, Route24_EventScript_RocketWalkBackToPos
 	release
 	end
 

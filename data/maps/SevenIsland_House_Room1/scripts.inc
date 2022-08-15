@@ -9,10 +9,8 @@ SevenIsland_House_Room1_MapScripts::
 
 SevenIsland_House_Room1_OnTransition::
 	special ValidateEReaderTrainer
-	compare VAR_RESULT, 0
-	call_if_eq SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout
-	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
-	call_if_ne SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor
+	call_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout
+	call_if_ne VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0, SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor
 	end
 
 SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout::
@@ -35,20 +33,17 @@ SevenIsland_House_Room1_OnFrame::
 
 SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle::
 	lockall
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom
 	waitmovement 0
 	applymovement LOCALID_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
 	waitmovement 0
-	moveobjectoffscreen LOCALID_OLD_WOMAN
+	copyobjectxytoperm LOCALID_OLD_WOMAN
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
-	call_if_eq SevenIsland_House_Room1_EventScript_BattleWonComment
-	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
-	call_if_eq SevenIsland_House_Room1_EventScript_BattleLostComment
-	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
-	call_if_eq SevenIsland_House_Room1_EventScript_BattleTiedComment
+	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, SevenIsland_House_Room1_EventScript_BattleWonComment
+	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, SevenIsland_House_Room1_EventScript_BattleLostComment
+	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, SevenIsland_House_Room1_EventScript_BattleTiedComment
 	special LoadPlayerParty
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
 	releaseall
@@ -79,10 +74,8 @@ SevenIsland_House_Room1_EventScript_OldWoman::
 	lock
 	faceplayer
 	special ValidateEReaderTrainer
-	compare VAR_RESULT, 1
-	call_if_eq SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer
-	compare TRAINER_VISITING, TRUE
-	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting
+	call_if_eq VAR_RESULT, 1, SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer
+	goto_if_eq TRAINER_VISITING, TRUE, SevenIsland_House_Room1_EventScript_TrainerVisiting
 	msgbox SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles
 	release
 	end
@@ -96,29 +89,22 @@ SevenIsland_House_Room1_EventScript_TrainerVisiting::
 	special SavePlayerParty
 	special BufferEReaderTrainerName
 	msgbox SevenIsland_House_Room1_Text_ChallengeVisitingTrainer, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SevenIsland_House_Room1_EventScript_DeclineBattle
 	call SevenIsland_House_Room1_EventScript_ChooseParty
-	compare VAR_RESULT, 0
-	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_DeclineBattle
 	msgbox SevenIsland_House_Room1_Text_SaveProgressBeforeBattle, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto_if_eq VAR_RESULT, NO, SevenIsland_House_Room1_EventScript_DeclineBattle
 	special LoadPlayerParty
 	call EventScript_AskSaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_DeclineBattle
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
 	msgbox SevenIsland_House_Room1_Text_DontHoldAnythingBack
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth
-	compare VAR_FACING, DIR_EAST
-	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomEast
-	compare VAR_FACING, DIR_WEST
-	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomWest
-	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
+	call_if_eq VAR_FACING, DIR_NORTH, SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth
+	call_if_eq VAR_FACING, DIR_EAST, SevenIsland_House_Room1_EventScript_EnterBattleRoomEast
+	call_if_eq VAR_FACING, DIR_WEST, SevenIsland_House_Room1_EventScript_EnterBattleRoomWest
+	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 3, 1
 	waitstate
 	release
 	end

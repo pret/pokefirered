@@ -7,7 +7,7 @@ SSAnne_CaptainsOffice_EventScript_Captain::
 	lock
 	goto_if_set FLAG_GOT_HM01, SSAnne_CaptainsOffice_EventScript_AlreadyGotCut
 	msgbox SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message SSAnne_CaptainsOffice_Text_RubbedCaptainsBack
 	waitmessage
 	playfanfare MUS_HEAL

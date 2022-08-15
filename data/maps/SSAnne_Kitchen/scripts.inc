@@ -19,12 +19,9 @@ SSAnne_Kitchen_EventScript_Chef4::
 	msgbox SSAnne_Kitchen_Text_IAmLeChefMainCourseIs
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 0
-	call_if_eq SSAnne_Kitchen_EventScript_SalmonDuSalad
-	compare VAR_0x8008, 1
-	call_if_eq SSAnne_Kitchen_EventScript_EelsAuBarbecue
-	compare VAR_0x8008, 2
-	call_if_eq SSAnne_Kitchen_EventScript_PrimeBeefsteak
+	call_if_eq VAR_0x8008, 0, SSAnne_Kitchen_EventScript_SalmonDuSalad
+	call_if_eq VAR_0x8008, 1, SSAnne_Kitchen_EventScript_EelsAuBarbecue
+	call_if_eq VAR_0x8008, 2, SSAnne_Kitchen_EventScript_PrimeBeefsteak
 	release
 	end
 

@@ -8,10 +8,8 @@ PalletTown_RivalsHouse_MapScripts::
 	.byte 0
 
 PalletTown_RivalsHouse_OnTransition::
-	compare VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2
-	call_if_lt PalletTown_RivalsHouse_EventScript_MoveDaisyToTable
-	compare VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2
-	call_if_ge PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap
+	call_if_lt VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2, PalletTown_RivalsHouse_EventScript_MoveDaisyToTable
+	call_if_ge VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2, PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap
 	end
 
 PalletTown_RivalsHouse_EventScript_MoveDaisyToTable::
@@ -28,14 +26,10 @@ PalletTown_RivalsHouse_EventScript_Daisy::
 	faceplayer
 	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_RivalsHouse_EventScript_GroomMon
-	compare RECEIVED_TOWN_MAP, TRUE
-	goto_if_eq PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest
-	compare VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2
-	goto_if_eq PalletTown_RivalsHouse_EventScript_ExplainTownMap
-	compare VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1
-	goto_if_eq PalletTown_RivalsHouse_EventScript_GiveTownMap
-	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
-	goto_if_ge PalletTown_RivalsHouse_EventScript_HeardBattledRival
+	goto_if_eq RECEIVED_TOWN_MAP, TRUE, PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest
+	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2, PalletTown_RivalsHouse_EventScript_ExplainTownMap
+	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1, PalletTown_RivalsHouse_EventScript_GiveTownMap
+	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, PalletTown_RivalsHouse_EventScript_HeardBattledRival
 	msgbox PalletTown_RivalsHouse_Text_HiBrothersAtLab
 	closemessage
 	applymovement LOCALID_DAISY, Movement_FaceOriginalDirection
@@ -51,21 +45,17 @@ PalletTown_RivalsHouse_EventScript_HeardBattledRival::
 PalletTown_RivalsHouse_EventScript_GroomMon::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
-	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
-	goto_if_lt PalletTown_RivalsHouse_EventScript_RateMonFriendship
+	goto_if_lt VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500, PalletTown_RivalsHouse_EventScript_RateMonFriendship
 	msgbox PalletTown_RivalsHouse_Text_LikeMeToGroomMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq PalletTown_RivalsHouse_EventScript_DeclineGrooming
+	goto_if_eq VAR_RESULT, NO, PalletTown_RivalsHouse_EventScript_DeclineGrooming
 	msgbox PalletTown_RivalsHouse_Text_GroomWhichOne
 	special ChoosePartyMon
 	waitstate
 	lock
 	faceplayer
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge PalletTown_RivalsHouse_EventScript_DeclineGrooming
+	goto_if_ge VAR_0x8004, PARTY_SIZE, PalletTown_RivalsHouse_EventScript_DeclineGrooming
 	specialvar VAR_RESULT, GetPartyMonSpecies
-	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq PalletTown_RivalsHouse_EventScript_CantGroomEgg
+	goto_if_eq VAR_RESULT, SPECIES_EGG, PalletTown_RivalsHouse_EventScript_CantGroomEgg
 	msgbox PalletTown_RivalsHouse_Text_LookingNiceInNoTime
 	closemessage
 	fadescreen FADE_TO_BLACK
@@ -144,9 +134,8 @@ PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest::
 PalletTown_RivalsHouse_EventScript_GiveTownMap::
 	msgbox PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp
 	closemessage
-	checkitemspace ITEM_TOWN_MAP, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq PalletTown_RivalsHouse_EventScript_NoRoomForTownMap
+	checkitemspace ITEM_TOWN_MAP
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_RivalsHouse_EventScript_NoRoomForTownMap
 	applymovement LOCALID_DAISY, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	removeobject LOCALID_TOWN_MAP

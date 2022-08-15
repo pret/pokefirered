@@ -132,7 +132,6 @@
 	.include "src/pokemon_jump.o"
 	.include "src/berry_crush.o"
 	.include "src/dodrio_berry_picking.o"
-	.include "src/dodrio_berry_picking_2.o"
 	.include "src/teachy_tv.o"
 	.include "src/digit_obj_util.o"
 	.include "src/trainer_tower.o"

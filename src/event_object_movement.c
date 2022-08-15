@@ -1729,7 +1729,7 @@ u8 AddPseudoObjectEvent(u16 graphicsId, SpriteCallback callback, s16 x, s16 y, u
     return spriteId;
 }
 
-u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
+u8 CreateVirtualObject(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -2083,7 +2083,7 @@ static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *objectEvent)
     }
 }
 
-void ShowOrHideObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 state)
+void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, u8 state)
 {
     u8 objectEventId;
 
@@ -2113,7 +2113,7 @@ void EnableObjectGroundEffectsByXY(s16 x, s16 y)
     }
 }
 
-void SetObjectPriorityByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
+void SetObjectSubpriority(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -2128,7 +2128,7 @@ void SetObjectPriorityByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 sub
     }
 }
 
-void UnfixObjectPriorityByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+void ResetObjectSubpriority(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -9285,7 +9285,7 @@ static int GetObjectEventSpriteId(u8 objectEventId)
     return MAX_SPRITES;
 }
 
-void TurnObjectEvent(u8 objectEventId, u8 direction)
+void TurnVirtualObject(u8 objectEventId, u8 direction)
 {
     u8 animNum;
     u8 spriteId = GetObjectEventSpriteId(objectEventId);

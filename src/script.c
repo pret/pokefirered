@@ -523,7 +523,7 @@ bool32 ValidateRamScript(void)
     return TRUE;
 }
 
-u8 *sub_8069E48(void)
+u8 *GetSavedRamScriptIfValid(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (!ValidateReceivedWonderCard())

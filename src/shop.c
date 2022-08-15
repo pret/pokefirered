@@ -217,7 +217,7 @@ static u8 CreateShopMenu(u8 a0)
 {
     gShopData.martType = GetMartTypeFromItemList(a0);
     gShopData.selectedRow = 0;
-    if (ContextNpcGetTextColor() == 0)
+    if (ContextNpcGetTextColor() == NPC_TEXT_COLOR_MALE)
         gShopData.fontId = FONT_4;
     else
         gShopData.fontId = FONT_5;

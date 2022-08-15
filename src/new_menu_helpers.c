@@ -425,16 +425,16 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 
 void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress)
 {
-    u8 result;
+    u8 color;
     void *nptr = NULL;
 
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;    
-    result = ContextNpcGetTextColor();
-    if (result == 0)
+    color = ContextNpcGetTextColor();
+    if (color == NPC_TEXT_COLOR_MALE)
         AddTextPrinterParameterized2(0, FONT_4, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_BLUE, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    else if (result == 1)
+    else if (color == NPC_TEXT_COLOR_FEMALE)
         AddTextPrinterParameterized2(0, FONT_5, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    else
+    else // NPC_TEXT_COLOR_MON / NPC_TEXT_COLOR_NEUTRAL
         AddTextPrinterParameterized2(0, FONT_2, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 

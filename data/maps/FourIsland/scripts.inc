@@ -8,8 +8,7 @@ FourIsland_MapScripts::
 
 FourIsland_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
-	compare VAR_MAP_SCENE_FOUR_ISLAND, 0
-	call_if_eq FourIsland_EventScript_ShowRival
+	call_if_eq VAR_MAP_SCENE_FOUR_ISLAND, 0, FourIsland_EventScript_ShowRival
 	call FourIsland_EventScript_TrySetDayCareManPos
 	end
 
@@ -29,7 +28,7 @@ FourIsland_OnFrame::
 
 FourIsland_EventScript_RivalScene::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
@@ -78,23 +77,18 @@ FourIsland_EventScript_DaycareMan::
 	faceplayer
 	special GetDaycareMonNicknames
 	specialvar VAR_RESULT, GetDaycareState
-	compare VAR_RESULT, DAYCARE_EGG_WAITING
-	goto_if_eq FourIsland_EventScript_DaycareEggWaiting
-	compare VAR_RESULT, DAYCARE_ONE_MON
-	goto_if_eq FourIsland_EventScript_CheckOnOneMon
-	compare VAR_RESULT, DAYCARE_TWO_MONS
-	goto_if_eq FourIsland_EventScript_CheckOnTwoMons
+	goto_if_eq VAR_RESULT, DAYCARE_EGG_WAITING, FourIsland_EventScript_DaycareEggWaiting
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, FourIsland_EventScript_CheckOnOneMon
+	goto_if_eq VAR_RESULT, DAYCARE_TWO_MONS, FourIsland_EventScript_CheckOnTwoMons
 	msgbox DayCare_Text_ImDaycareManSpeakToMyWife
 	release
 	end
 
 FourIsland_EventScript_DaycareEggWaiting::
 	msgbox DayCare_Text_DoYouWantEgg, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_EventScript_DaycareAcceptEgg
+	goto_if_eq VAR_RESULT, YES, FourIsland_EventScript_DaycareAcceptEgg
 	msgbox DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FourIsland_EventScript_DaycareAcceptEgg
+	goto_if_eq VAR_RESULT, YES, FourIsland_EventScript_DaycareAcceptEgg
 	msgbox DayCare_Text_IllKeepIt
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
@@ -103,14 +97,13 @@ FourIsland_EventScript_DaycareEggWaiting::
 
 FourIsland_EventScript_DaycareAcceptEgg::
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_ne FourIsland_EventScript_DaycareReceivedEgg
+	goto_if_ne VAR_RESULT, PARTY_SIZE, FourIsland_EventScript_DaycareReceivedEgg
 	msgbox DayCare_Text_YouHaveNoRoomForIt
 	release
 	end
 
 FourIsland_EventScript_DaycareReceivedEgg::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message DayCare_Text_ReceivedEgg
 	call EventScript_RestorePrevTextColor
 	playfanfare MUS_LEVEL_UP

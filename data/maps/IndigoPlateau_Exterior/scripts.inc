@@ -8,8 +8,7 @@ IndigoPlateau_Exterior_MapScripts::
 
 IndigoPlateau_Exterior_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
-	compare VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
-	call_if_eq IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
+	call_if_eq VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
 	end
 
 IndigoPlateau_Exterior_EventScript_PlayCreditsMusic::

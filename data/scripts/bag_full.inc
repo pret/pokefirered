@@ -1,5 +1,5 @@
 EventScript_BagIsFull::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_TooBadBagFull
 	release
 	end

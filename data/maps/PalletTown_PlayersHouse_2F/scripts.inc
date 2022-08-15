@@ -4,8 +4,7 @@ PalletTown_PlayersHouse_2F_MapScripts::
 	.byte 0
 
 PalletTown_PlayersHouse_2F_OnTransition::
-	compare VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
-	call_if_eq PalletTown_PlayersHouse_2F_EventScript_SetRespawn
+	call_if_eq VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0, PalletTown_PlayersHouse_2F_EventScript_SetRespawn
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_SetRespawn::

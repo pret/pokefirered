@@ -24,33 +24,24 @@ Route22_EventScript_EarlyRivalTriggerBottom::
 	end
 
 Route22_EventScript_EarlyRival::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject LOCALID_RIVAL
-	compare VAR_TEMP_1, 0
-	call_if_eq Route22_EventScript_EarlyRivalApproach
-	compare VAR_TEMP_1, 1
-	call_if_eq Route22_EventScript_EarlyRivalApproach
-	compare VAR_TEMP_1, 2
-	call_if_eq Route22_EventScript_EarlyRivalApproachBottom
+	call_if_eq VAR_TEMP_1, 0, Route22_EventScript_EarlyRivalApproach
+	call_if_eq VAR_TEMP_1, 1, Route22_EventScript_EarlyRivalApproach
+	call_if_eq VAR_TEMP_1, 2, Route22_EventScript_EarlyRivalApproachBottom
 	delay 6
 	msgbox Route22_Text_EarlyRivalIntro
-	compare VAR_STARTER_MON, 2
-	call_if_eq Route22_EventScript_EarlyRivalSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq Route22_EventScript_EarlyRivalBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq Route22_EventScript_EarlyRivalCharmander
+	call_if_eq VAR_STARTER_MON, 2, Route22_EventScript_EarlyRivalSquirtle
+	call_if_eq VAR_STARTER_MON, 1, Route22_EventScript_EarlyRivalBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, Route22_EventScript_EarlyRivalCharmander
 	msgbox Route22_Text_EarlyRivalPostBattle
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL_EXIT, 0
-	compare VAR_TEMP_1, 0
-	call_if_eq Route22_EventScript_EarlyRivalExit
-	compare VAR_TEMP_1, 1
-	call_if_eq Route22_EventScript_EarlyRivalExit
-	compare VAR_TEMP_1, 2
-	call_if_eq Route22_EventScript_EarlyRivalExitBottom
+	call_if_eq VAR_TEMP_1, 0, Route22_EventScript_EarlyRivalExit
+	call_if_eq VAR_TEMP_1, 1, Route22_EventScript_EarlyRivalExit
+	call_if_eq VAR_TEMP_1, 2, Route22_EventScript_EarlyRivalExitBottom
 	fadedefaultbgm
 	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_ROUTE22, 2
@@ -184,23 +175,17 @@ Route22_EventScript_LateRivalTriggerBottom::
 	end
 
 Route22_EventScript_LateRival::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject LOCALID_RIVAL
-	compare VAR_TEMP_1, 0
-	call_if_eq Route22_EventScript_LateRivalApproach
-	compare VAR_TEMP_1, 1
-	call_if_eq Route22_EventScript_LateRivalApproach
-	compare VAR_TEMP_1, 2
-	call_if_eq Route22_EventScript_LateRivalApproachBottom
+	call_if_eq VAR_TEMP_1, 0, Route22_EventScript_LateRivalApproach
+	call_if_eq VAR_TEMP_1, 1, Route22_EventScript_LateRivalApproach
+	call_if_eq VAR_TEMP_1, 2, Route22_EventScript_LateRivalApproachBottom
 	msgbox Route22_Text_LateRivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_RIVAL
-	compare VAR_STARTER_MON, 2
-	call_if_eq Route22_EventScript_LateRivalSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq Route22_EventScript_LateRivalBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq Route22_EventScript_LateRivalCharmander
+	call_if_eq VAR_STARTER_MON, 2, Route22_EventScript_LateRivalSquirtle
+	call_if_eq VAR_STARTER_MON, 1, Route22_EventScript_LateRivalBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, Route22_EventScript_LateRivalCharmander
 	msgbox Route22_Text_LateRivalPostBattle
 	closemessage
 	delay 10

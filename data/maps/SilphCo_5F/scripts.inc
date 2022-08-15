@@ -11,8 +11,7 @@ SilphCo_5F_OnLoad::
 SilphCo_5F_EventScript_WorkerM::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge SilphCo_5F_EventScript_WorkerMRocketsGone
+	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_5F_EventScript_WorkerMRocketsGone
 	msgbox SilphCo_5F_Text_RocketsInUproarAboutIntruder
 	release
 	end

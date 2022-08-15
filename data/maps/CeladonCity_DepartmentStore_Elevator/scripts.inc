@@ -58,8 +58,7 @@ CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor::
 CeladonCity_DepartmentStore_Elevator_EventScript_To1F::
 	setvar VAR_0x8006, 4
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_1F, 255, 6, 1
-	compare VAR_ELEVATOR_FLOOR, 4
-	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 4, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 4
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
@@ -68,8 +67,7 @@ CeladonCity_DepartmentStore_Elevator_EventScript_To1F::
 CeladonCity_DepartmentStore_Elevator_EventScript_To2F::
 	setvar VAR_0x8006, 5
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_2F, 255, 6, 1
-	compare VAR_ELEVATOR_FLOOR, 5
-	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 5, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 5
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
@@ -78,8 +76,7 @@ CeladonCity_DepartmentStore_Elevator_EventScript_To2F::
 CeladonCity_DepartmentStore_Elevator_EventScript_To3F::
 	setvar VAR_0x8006, 6
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_3F, 255, 6, 1
-	compare VAR_ELEVATOR_FLOOR, 6
-	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 6, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 6
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
@@ -88,8 +85,7 @@ CeladonCity_DepartmentStore_Elevator_EventScript_To3F::
 CeladonCity_DepartmentStore_Elevator_EventScript_To4F::
 	setvar VAR_0x8006, 7
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_4F, 255, 6, 1
-	compare VAR_ELEVATOR_FLOOR, 7
-	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 7, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 7
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
@@ -98,8 +94,7 @@ CeladonCity_DepartmentStore_Elevator_EventScript_To4F::
 CeladonCity_DepartmentStore_Elevator_EventScript_To5F::
 	setvar VAR_0x8006, 8
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_5F, 255, 6, 1
-	compare VAR_ELEVATOR_FLOOR, 8
-	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 8, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 8
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect

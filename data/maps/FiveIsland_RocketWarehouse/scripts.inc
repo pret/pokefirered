@@ -84,8 +84,7 @@ FiveIsland_RocketWarehouse_EventScript_Admin2::
 
 FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2::
 	getplayerxy PLAYER_X_POS, PLAYER_Y_POS
-	compare PLAYER_X_POS, 24
-	call_if_le FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2
+	call_if_le PLAYER_X_POS, 24, FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2
 	msgbox FiveIsland_RocketWarehouse_Text_Admin2PostBattle
 	closemessage
 	fadescreen FADE_TO_BLACK
@@ -118,37 +117,27 @@ FiveIsland_RocketWarehouse_EventScript_Admin1::
 FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1::
 	getplayerxy PLAYER_X_POS, PLAYER_Y_POS
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-	compare VAR_RESULT, DIR_NORTH
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1
+	call_if_eq VAR_RESULT, DIR_NORTH, FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1
 	msgbox FiveIsland_RocketWarehouse_Text_Admin1PostBattle
 	closemessage
-	compare PLAYER_X_POS, 24
-	call_if_le FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar
-	compare PLAYER_X_POS, 25
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch
-	compare PLAYER_X_POS, 26
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch
-	compare PLAYER_X_POS, 27
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch
+	call_if_le PLAYER_X_POS, 24, FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar
+	call_if_eq PLAYER_X_POS, 25, FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch
+	call_if_eq PLAYER_X_POS, 26, FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch
+	call_if_eq PLAYER_X_POS, 27, FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch
 	playse SE_PIN
 	call FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry
 	special DrawWholeMapView
 	waitse
-	compare PLAYER_X_POS, 24
-	call_if_le FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft
-	compare PLAYER_X_POS, 25
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft
-	compare PLAYER_X_POS, 26
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft
-	compare PLAYER_X_POS, 27
-	call_if_eq FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown
+	call_if_le PLAYER_X_POS, 24, FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft
+	call_if_eq PLAYER_X_POS, 25, FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft
+	call_if_eq PLAYER_X_POS, 26, FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft
+	call_if_eq PLAYER_X_POS, 27, FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown
 	msgbox FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough
 	release
 	end
 
 FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1::
-	compare PLAYER_X_POS, 27
-	goto_if_eq EventScript_Return
+	goto_if_eq PLAYER_X_POS, 27, EventScript_Return
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return

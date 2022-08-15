@@ -13,8 +13,7 @@ PokemonLeague_LoreleisRoom_OnResume::
 
 PokemonLeague_LoreleisRoom_OnLoad::
 	call_if_set FLAG_DEFEATED_LORELEI, PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen
-	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 1
-	call_if_eq PokemonLeague_LoreleisRoom_EventScript_CloseEntry
+	call_if_eq VAR_MAP_SCENE_POKEMON_LEAGUE, 1, PokemonLeague_LoreleisRoom_EventScript_CloseEntry
 	end
 
 PokemonLeague_LoreleisRoom_EventScript_CloseEntry::

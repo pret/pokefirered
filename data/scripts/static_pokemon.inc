@@ -9,7 +9,7 @@ EventScript_MonFlewAway::
     fadescreen FADE_TO_BLACK
     removeobject VAR_LAST_TALKED
     fadescreen FADE_FROM_BLACK
-    getspeciesname 0, VAR_0x8004
+    bufferspeciesname STR_VAR_1, VAR_0x8004
     msgbox Text_MonFlewAway
     release
     end

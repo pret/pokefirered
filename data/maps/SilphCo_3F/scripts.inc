@@ -10,8 +10,7 @@ SilphCo_3F_OnLoad::
 SilphCo_3F_EventScript_WorkerM::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge SilphCo_3F_EventScript_WorkerMRocketsGone
+	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_3F_EventScript_WorkerMRocketsGone
 	msgbox SilphCo_3F_Text_WhatAmIToDo
 	release
 	end

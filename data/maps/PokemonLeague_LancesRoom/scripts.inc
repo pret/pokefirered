@@ -158,10 +158,10 @@ PokemonLeague_LancesRoom_EventScript_LanceMoveOutOfWayRight::
 
 PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayLeft::
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayRight::
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end

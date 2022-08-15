@@ -139,7 +139,7 @@ Route22_Movement_RivalApproachBottom::
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 Route22_Movement_PlayerFaceRival::
@@ -151,7 +151,7 @@ Route22_Movement_PlayerFaceRival::
 	delay_16
 	delay_16
 	delay_8
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 Route22_EventScript_LateRivalTriggerTop::

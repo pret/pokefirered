@@ -100,7 +100,7 @@ PokemonTower_7F_Movement_Grunt1ExitLeft::
 	walk_right
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PokemonTower_7F_EventScript_Grunt2::

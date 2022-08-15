@@ -27,17 +27,17 @@ FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene::
 	playse SE_PIN
 	applymovement LOCALID_LORELEI, Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	applymovement LOCALID_LORELEI, Movement_Delay48
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut
 	closemessage
-	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 18
-	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 35
 	applymovement LOCALID_ROCKET3, FourIsland_IcefallCave_Back_Movement_Rocket3FaceLorelei
@@ -81,7 +81,7 @@ FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene::
 	delay 50
 	applymovement LOCALID_LORELEI, FourIsland_IcefallCave_Back_Movement_LoreleiWalkToPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful
@@ -100,10 +100,10 @@ FourIsland_IcefallCave_Back_Movement_PlayerToRockets::
 
 FourIsland_IcefallCave_Back_Movement_PlayerWatchRocketsExit::
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FourIsland_IcefallCave_Back_Movement_WalkInPlaceDown::
@@ -162,7 +162,7 @@ FourIsland_IcefallCave_Back_Movement_Rocket3Exit::
 FourIsland_IcefallCave_Back_Movement_Rocket3FaceLorelei::
 	delay_16
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FourIsland_IcefallCave_Back_Movement_UnusedWalkLeft::
@@ -181,10 +181,10 @@ FourIsland_IcefallCave_Back_Movement_WalkInPlaceUp::
 
 FourIsland_IcefallCave_Back_Movement_LoreleiWatchRocketsExit::
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FourIsland_IcefallCave_Back_Movement_LoreleiWalkToPlayer::

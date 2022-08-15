@@ -37,7 +37,7 @@ PewterCity_Museum_1F_EventScript_ExplainAmber::
 PewterCity_Museum_1F_EventScript_EntranceTriggerLeft::
 	lockall
 	setvar VAR_TEMP_1, 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
@@ -45,7 +45,7 @@ PewterCity_Museum_1F_EventScript_EntranceTriggerLeft::
 PewterCity_Museum_1F_EventScript_EntranceTriggerMid::
 	lockall
 	setvar VAR_TEMP_1, 1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
@@ -53,7 +53,7 @@ PewterCity_Museum_1F_EventScript_EntranceTriggerMid::
 PewterCity_Museum_1F_EventScript_EntranceTriggerRight::
 	lockall
 	setvar VAR_TEMP_1, 2
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end

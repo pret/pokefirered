@@ -17,7 +17,7 @@ MtMoon_B2F_EventScript_ShowFossils::
 
 MtMoon_B2F_EventScript_MiguelTrigger::
 	lockall
-	applymovement LOCALID_MIGUEL, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MIGUEL, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	call MtMoon_B2F_EventScript_BattleMiguel
 	releaseall

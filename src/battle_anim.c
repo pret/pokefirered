@@ -36,7 +36,7 @@ EWRAM_DATA static u16 sAnimMoveIndex = 0;
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gUnknown_2037F24 = 0;
+EWRAM_DATA u8 gAnimCustomPanning = 0;
 
 // Function Declarations
 static void AddSpriteIndex(u16 index);
@@ -1809,7 +1809,7 @@ void ClearBattleAnimationVars(void)
     sAnimMoveIndex = 0;
     gBattleAnimAttacker = 0;
     gBattleAnimTarget = 0;
-    gUnknown_2037F24 = 0;
+    gAnimCustomPanning = 0;
 }
 
 void DoMoveAnim(u16 move)

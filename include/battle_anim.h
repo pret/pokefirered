@@ -60,7 +60,7 @@ extern u8 gBattleAnimTarget;
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
 extern s32 gAnimMoveDmg;
 extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_2037F24;
+extern u8 gAnimCustomPanning;
 
 // battle_anim.c
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;

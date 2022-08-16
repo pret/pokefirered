@@ -307,7 +307,7 @@ static void sub_80DD4D4(u8 taskId)
         gTasks[taskId].data[11] = panIncrement + oldPan; 
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
-    gUnknown_2037F24 = gTasks[taskId].data[11];
+    gAnimCustomPanning = gTasks[taskId].data[11];
     if (gTasks[taskId].data[11] == gTasks[taskId].data[2])
         DestroyAnimVisualTask(taskId);
 }

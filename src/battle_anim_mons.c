@@ -462,7 +462,7 @@ static void TranslateSpriteInLissajousCurveOverDuration(struct Sprite *sprite)
 
 // x = a * sin(theta0 + dtheta * t)
 // y = b * cos(theta0 + dtheta * t)
-void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite)
+void TranslateSpriteInEllipse(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {

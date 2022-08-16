@@ -3478,7 +3478,7 @@ ExtremeSpeedContinue::
 	waitbgfadeout
 	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 0, 1, -1
 	waitbgfadein
-	createvisualtask AnimTask_StretchAttacker, 2
+	createvisualtask AnimTask_AttackerStretchAndDisappear, 2
 	loopsewithpan SE_M_RAZOR_WIND2, 192, 8, 3
 	waitforvisualfinish
 	delay 1

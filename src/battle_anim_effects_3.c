@@ -1031,7 +1031,7 @@ const struct SpriteTemplate gUnknown_83FF6D4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimParticuleBurst,
+    .callback = AnimParticleBurst,
 };
 
 const struct SpriteTemplate gBlockXSpriteTemplate =    

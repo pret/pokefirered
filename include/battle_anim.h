@@ -361,7 +361,7 @@ u8 GetGhostSpriteDefault_Y(u8 battlerId);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
 u8 GetAnimBattlerSpriteId(u8 animBattler);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, SpriteCallback callback);
-void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
+void TranslateSpriteInCircle(struct Sprite *sprite);
 void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite);
 void TranslateSpriteInEllipse(struct Sprite *sprite);
 void WaitAnimForDuration(struct Sprite *sprite);

@@ -392,7 +392,7 @@ static void SetCallbackToStoredInData6(struct Sprite *sprite)
 
 // x = a * sin(theta0 + dtheta * t)
 // y = a * cos(theta0 + dtheta * t)
-void TranslateSpriteInCircleOverDuration(struct Sprite *sprite)
+void TranslateSpriteInCircle(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {

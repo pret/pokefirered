@@ -249,10 +249,10 @@ static bool8 MovementAction_SpinLeft_Step0(struct ObjectEvent *, struct Sprite *
 static bool8 MovementAction_SpinLeft_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_SpinRight_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_SpinRight_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_x98_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_x98_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_x99_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_x9A_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_RaiseHand_Step0(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_RaiseHandAndStop_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_RaiseHandAndJump_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_RaiseHandAndSwim_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_WalkSlowestDown_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_WalkSlowestDown_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_WalkSlowestUp_Step0(struct ObjectEvent *, struct Sprite *);
@@ -263,14 +263,14 @@ static bool8 MovementAction_WalkSlowestRight_Step0(struct ObjectEvent *, struct 
 static bool8 MovementAction_WalkSlowestRight_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_ShakeHeadOrWalkInPlace_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_ShakeHeadOrWalkInPlace_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA0_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA0_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA1_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA1_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA2_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA2_Step1(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA3_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_xA3_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideDown_Step0(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideDown_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideUp_Step0(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideUp_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideLeft_Step0(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideLeft_Step1(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideRight_Step0(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementAction_GlideRight_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_FlyUp_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_FlyUp_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_FlyUp_Step2(struct ObjectEvent *, struct Sprite *);
@@ -439,18 +439,18 @@ static bool8 (*const sMovementActionFuncs_SpinDown[])(struct ObjectEvent *, stru
 static bool8 (*const sMovementActionFuncs_SpinUp[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_SpinLeft[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_SpinRight[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_x98[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_x99[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_x9A[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_RaiseHandAndStop[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_RaiseHandAndJump[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_RaiseHandAndSwim[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_WalkSlowestDown[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_WalkSlowestUp[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_WalkSlowestLeft[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_WalkSlowestRight[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_ShakeHeadOrWalkInPlace[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_xA0[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_xA1[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_xA2[])(struct ObjectEvent *, struct Sprite *);
-static bool8 (*const sMovementActionFuncs_xA3[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_GlideDown[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_GlideUp[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_GlideLeft[])(struct ObjectEvent *, struct Sprite *);
+static bool8 (*const sMovementActionFuncs_GlideRight[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_FlyUp[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_FlyDown[])(struct ObjectEvent *, struct Sprite *);
 static bool8 (*const sMovementActionFuncs_JumpSpecialWithEffectDown[])(struct ObjectEvent *, struct Sprite *);
@@ -615,18 +615,18 @@ static bool8 (*const *const sMovementActionFuncs[])(struct ObjectEvent *, struct
     [MOVEMENT_ACTION_SPIN_UP]                            = sMovementActionFuncs_SpinUp,
     [MOVEMENT_ACTION_SPIN_LEFT]                          = sMovementActionFuncs_SpinLeft,
     [MOVEMENT_ACTION_SPIN_RIGHT]                         = sMovementActionFuncs_SpinRight,
-    [MOVEMENT_ACTION_0x98]                               = sMovementActionFuncs_x98,
-    [MOVEMENT_ACTION_0x99]                               = sMovementActionFuncs_x99,
-    [MOVEMENT_ACTION_0x9A]                               = sMovementActionFuncs_x9A,
+    [MOVEMENT_ACTION_RAISE_HAND_AND_STOP]                = sMovementActionFuncs_RaiseHandAndStop,
+    [MOVEMENT_ACTION_RAISE_HAND_AND_JUMP]                = sMovementActionFuncs_RaiseHandAndJump,
+    [MOVEMENT_ACTION_RAISE_HAND_AND_SWIM]                = sMovementActionFuncs_RaiseHandAndSwim,
     [MOVEMENT_ACTION_WALK_SLOWEST_DOWN]                  = sMovementActionFuncs_WalkSlowestDown,
     [MOVEMENT_ACTION_WALK_SLOWEST_UP]                    = sMovementActionFuncs_WalkSlowestUp,
     [MOVEMENT_ACTION_WALK_SLOWEST_LEFT]                  = sMovementActionFuncs_WalkSlowestLeft,
     [MOVEMENT_ACTION_WALK_SLOWEST_RIGHT]                 = sMovementActionFuncs_WalkSlowestRight,
     [MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE]        = sMovementActionFuncs_ShakeHeadOrWalkInPlace,
-    [MOVEMENT_ACTION_0xA0]                               = sMovementActionFuncs_xA0,
-    [MOVEMENT_ACTION_0xA1]                               = sMovementActionFuncs_xA1,
-    [MOVEMENT_ACTION_0xA2]                               = sMovementActionFuncs_xA2,
-    [MOVEMENT_ACTION_0xA3]                               = sMovementActionFuncs_xA3,
+    [MOVEMENT_ACTION_GLIDE_DOWN]                         = sMovementActionFuncs_GlideDown,
+    [MOVEMENT_ACTION_GLIDE_UP]                           = sMovementActionFuncs_GlideUp,
+    [MOVEMENT_ACTION_GLIDE_LEFT]                         = sMovementActionFuncs_GlideLeft,
+    [MOVEMENT_ACTION_GLIDE_RIGHT]                        = sMovementActionFuncs_GlideRight,
     [MOVEMENT_ACTION_FLY_UP]                             = sMovementActionFuncs_FlyUp,
     [MOVEMENT_ACTION_FLY_DOWN]                           = sMovementActionFuncs_FlyDown,
     [MOVEMENT_ACTION_JUMP_SPECIAL_WITH_EFFECT_DOWN]      = sMovementActionFuncs_JumpSpecialWithEffectDown,
@@ -849,27 +849,27 @@ static bool8 (*const sMovementActionFuncs_WalkFastRight[])(struct ObjectEvent *,
     MovementAction_PauseSpriteAnim,
 };
 
-static bool8 (*const sMovementActionFuncs_xA0[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_xA0_Step0,
-    MovementAction_xA0_Step1,
+static bool8 (*const sMovementActionFuncs_GlideDown[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_GlideDown_Step0,
+    MovementAction_GlideDown_Step1,
     MovementAction_Finish,
 };
 
-static bool8 (*const sMovementActionFuncs_xA1[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_xA1_Step0,
-    MovementAction_xA1_Step1,
+static bool8 (*const sMovementActionFuncs_GlideUp[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_GlideUp_Step0,
+    MovementAction_GlideUp_Step1,
     MovementAction_Finish,
 };
 
-static bool8 (*const sMovementActionFuncs_xA2[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_xA2_Step0,
-    MovementAction_xA2_Step1,
+static bool8 (*const sMovementActionFuncs_GlideLeft[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_GlideLeft_Step0,
+    MovementAction_GlideLeft_Step1,
     MovementAction_Finish,
 };
 
-static bool8 (*const sMovementActionFuncs_xA3[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_xA3_Step0,
-    MovementAction_xA3_Step1,
+static bool8 (*const sMovementActionFuncs_GlideRight[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_GlideRight_Step0,
+    MovementAction_GlideRight_Step1,
     MovementAction_Finish,
 };
 
@@ -1633,19 +1633,19 @@ static bool8 (*const sMovementActionFuncs_SpinRight[])(struct ObjectEvent *, str
     MovementAction_PauseSpriteAnim,
 };
 
-static bool8 (*const sMovementActionFuncs_x98[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_x98_Step0,
-    MovementAction_x98_Step1,
+static bool8 (*const sMovementActionFuncs_RaiseHandAndStop[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_RaiseHand_Step0,
+    MovementAction_RaiseHandAndStop_Step1,
 };
 
-static bool8 (*const sMovementActionFuncs_x99[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_x98_Step0,
-    MovementAction_x99_Step1,
+static bool8 (*const sMovementActionFuncs_RaiseHandAndJump[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_RaiseHand_Step0,
+    MovementAction_RaiseHandAndJump_Step1,
 };
 
-static bool8 (*const sMovementActionFuncs_x9A[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementAction_x98_Step0,
-    MovementAction_x9A_Step1,
+static bool8 (*const sMovementActionFuncs_RaiseHandAndSwim[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_RaiseHand_Step0,
+    MovementAction_RaiseHandAndSwim_Step1,
 };
 
 static bool8 (*const sMovementActionFuncs_ShakeHeadOrWalkInPlace[])(struct ObjectEvent *, struct Sprite *) = {

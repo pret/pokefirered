@@ -8157,7 +8157,7 @@ HyperFangInContest::
 	goto HyperFangContinue
 
 Move_TRI_ATTACK::
-	loadspritegfx ANIM_TAG_TRI_FORCE_TRIANGLE
+	loadspritegfx ANIM_TAG_TRI_ATTACK_TRIANGLE
 	createsprite gTriAttackTriangleSpriteTemplate, ANIM_TARGET, 2, 16, 0
 	playsewithpan SE_M_TRI_ATTACK, 192
 	delay 20

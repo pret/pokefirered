@@ -19,7 +19,7 @@
 #define IS_DOUBLE_BATTLE() (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
 
 static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
-static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite);
+static void PlayerThrowBall_AnimTranslateLinear_WithFollowup(struct Sprite *sprite);
 static void SpriteCB_RunAnimFastLinearTranslation(struct Sprite *sprite);
 static bool8 Dummy_ReturnFalse(void);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
@@ -958,7 +958,7 @@ void StartAnimLinearTranslation(struct Sprite *sprite)
     sprite->sTransl_InitX = sprite->x;
     sprite->sTransl_InitY = sprite->y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 
@@ -967,7 +967,7 @@ void PlayerThrowBall_StartAnimLinearTranslation(struct Sprite *sprite)
     sprite->sTransl_InitX = sprite->x;
     sprite->sTransl_InitY = sprite->y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6;
+    sprite->callback = PlayerThrowBall_AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 
@@ -998,13 +998,13 @@ bool8 AnimTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-void RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite)
+void AnimTranslateLinear_WithFollowup(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
 }
 
-static void PlayerThrowBall_RunLinearTranslation_ThenceSetCBtoStoredInData6(struct Sprite *sprite)
+static void PlayerThrowBall_AnimTranslateLinear_WithFollowup(struct Sprite *sprite)
 {
     UpdatePlayerPosInThrowAnim(sprite);
     if (AnimTranslateLinear(sprite))
@@ -1024,7 +1024,7 @@ void BattleAnim_InitAndRunLinearTranslationWithDuration(struct Sprite *sprite)
     sprite->sTransl_InitX = sprite->x;
     sprite->sTransl_InitY = sprite->y;
     BattleAnim_InitLinearTranslationWithDuration(sprite);
-    sprite->callback = RunLinearTranslation_ThenceSetCBtoStoredInData6;
+    sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }
 
@@ -1411,7 +1411,7 @@ static void AnimThrowProjectile_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimSnoreZ(struct Sprite *sprite)
+void AnimTravelDiagonally(struct Sprite *sprite)
 {
     bool8 r4;
     u8 battlerId, coordType;

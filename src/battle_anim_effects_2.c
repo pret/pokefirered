@@ -585,7 +585,7 @@ const struct SpriteTemplate gSnoreZSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSnoreZ,
+    .callback = AnimTravelDiagonally,
 };
 
 static const union AnimCmd sExplosionAnimCmds[] =

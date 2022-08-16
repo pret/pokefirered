@@ -546,9 +546,9 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId);
 
 // ice.c
 extern const union AnimCmd *const gAnims_SmallBubblePair[];
-void AnimTask_Haze1(u8 taskId);
-void AnimTask_LoadMistTiles(u8 taskId);
-void AnimTask_Hail1(u8 taskId);
+void AnimTask_HazeScrollingFog(u8 taskId);
+void AnimTask_MistBallFog(u8 taskId);
+void AnimTask_Hail(u8 taskId);
 void AnimTask_GetRolloutCounter(u8 taskId);
 
 // electric.c

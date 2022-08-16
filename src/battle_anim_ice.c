@@ -584,7 +584,7 @@ static void AnimIcePunchSwirlingParticle(struct Sprite *sprite)
     sprite->data[3] = 30;
     sprite->data[4] = -512;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = TranslateSpriteInGrowingCircleOverDuration;
+    sprite->callback = TranslateSpriteInGrowingCircle;
     sprite->callback(sprite);
 }
 
@@ -1230,7 +1230,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
                 sprite->data[2] = -0x10;
             ++sprite->data[7];
             sprite->x2 = sprite->y2 = 0;
-            BattleAnim_InitLinearTranslationWithDuration(sprite);
+            InitAnimLinearTranslationWithSpeed(sprite);
         }
         break;
     case 2:

@@ -413,7 +413,7 @@ void TranslateSpriteInCircle(struct Sprite *sprite)
 
 // x = (a0 + da * t) * sin(theta0 + dtheta * t)
 // y = (a0 + da * t) * cos(theta0 + dtheta * t)
-void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *sprite)
+void TranslateSpriteInGrowingCircle(struct Sprite *sprite)
 {
     if (sprite->data[3])
     {
@@ -1011,7 +1011,7 @@ static void PlayerThrowBall_AnimTranslateLinear_WithFollowup(struct Sprite *spri
         SetCallbackToStoredInData6(sprite);
 }
 
-void BattleAnim_InitLinearTranslationWithDuration(struct Sprite *sprite)
+void InitAnimLinearTranslationWithSpeed(struct Sprite *sprite)
 {
     s32 v1 = abs(sprite->sTransl_DestX - sprite->sTransl_InitX) << 8;
 
@@ -1023,7 +1023,7 @@ void BattleAnim_InitAndRunLinearTranslationWithDuration(struct Sprite *sprite)
 {
     sprite->sTransl_InitX = sprite->x;
     sprite->sTransl_InitY = sprite->y;
-    BattleAnim_InitLinearTranslationWithDuration(sprite);
+    InitAnimLinearTranslationWithSpeed(sprite);
     sprite->callback = AnimTranslateLinear_WithFollowup;
     sprite->callback(sprite);
 }

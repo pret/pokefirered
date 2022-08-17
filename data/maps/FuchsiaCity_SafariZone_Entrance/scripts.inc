@@ -11,7 +11,7 @@ FuchsiaCity_SafariZone_Entrance_OnFrame::
 @ When player runs out of balls mid-battle
 FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter
 	waitmovement 0
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain
@@ -26,7 +26,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn::
 @ When player runs of out balls after catching a pokemon, or runs out of steps
 FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
@@ -39,10 +39,9 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn::
 @ When player re-enters the entrance building with balls/steps remaining
 FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone
+	goto_if_eq VAR_RESULT, NO, FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
@@ -57,7 +56,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone::
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ReEnter
 	waitmovement 0
-	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
+	warp MAP_SAFARI_ZONE_CENTER, 26, 30
 	waitstate
 	end
 
@@ -99,40 +98,35 @@ FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerLeft::
 	end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone
+	goto_if_eq VAR_RESULT, YES, FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_OkayPleaseComeAgain
 	goto FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack
 	end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone::
 	call FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons
-	checkmoney 500, 0
-	compare VAR_RESULT, FALSE
-	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney
-	removemoney 500, 0
-	updatemoneybox 0, 0, 0
+	checkmoney 500
+	goto_if_eq VAR_RESULT, FALSE, FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney
+	removemoney 500
+	updatemoneybox
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls
 	waitfanfare
 	call EventScript_RestorePrevTextColor
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut
 	closemessage
-	hidemoneybox 0, 0
-	compare VAR_TEMP_2, 0
-	call_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid
-	compare VAR_TEMP_2, 1
-	call_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight
-	compare VAR_TEMP_2, 2
-	call_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft
+	hidemoneybox
+	call_if_eq VAR_TEMP_2, 0, FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid
+	call_if_eq VAR_TEMP_2, 1, FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight
+	call_if_eq VAR_TEMP_2, 2, FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft
 	special EnterSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
@@ -156,11 +150,9 @@ FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft::
 
 FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons::
 	getpartysize
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_Return
 	specialvar VAR_RESULT, IsThereRoomInAnyBoxForMorePokemon
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_Return
+	goto_if_eq VAR_RESULT, TRUE, EventScript_Return
 	msgbox SafariZone_Text_ExcuseMeYourPCBoxIsFull
 	goto FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack
 	end
@@ -172,7 +164,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney::
 
 FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack::
 	closemessage
-	hidemoneybox 0, 0
+	hidemoneybox
 	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ForceBack
 	waitmovement 0
 	releaseall
@@ -203,8 +195,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_InfoAttendant::
 	lock
 	faceplayer
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone
+	goto_if_eq VAR_RESULT, YES, FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_SorryYoureARegularHere
 	release
 	end

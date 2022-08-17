@@ -1181,33 +1181,36 @@ const u16 gUnknown_8E97DDC[] = INCBIN_U16("graphics/interface/learn_move.gbapal"
 const u32 gUnknown_8E97DFC[] = INCBIN_U32("graphics/interface/learn_move.4bpp.lz");
 const u32 gUnknown_8E97EC4[] = INCBIN_U32("graphics/interface/learn_move.bin.lz");
 
-const u16 gUnknown_8E97FE4[] = INCBIN_U16("graphics/interface/naming_screen_8E97FE4.gbapal");
-const u16 gUnknown_8E98004[] = INCBIN_U16("graphics/interface/naming_screen_8E98004.gbapal");
-const u16 gNamingScreenMenu_Pal[] = INCBIN_U16("graphics/interface/naming_screen_8E98024.gbapal");
-const u16 gUnknown_8E98044[] = INCBIN_U16("graphics/interface/naming_screen_8E98044.gbapal");
-const u16 gUnknown_8E98064[] = INCBIN_U16("graphics/interface/naming_screen_8E98064.gbapal");
-const u16 gUnknown_8E98084[] = INCBIN_U16("graphics/interface/naming_screen_8E98084.gbapal");
-const u16 gUnknown_8E980A4[] = INCBIN_U16("graphics/interface/naming_screen_8E980A4.gbapal");
-const u16 gUnknown_8E980C4[] = INCBIN_U16("graphics/interface/naming_screen_8E980C4.gbapal");
+const u16 gNamingScreenKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
+const u16 gNamingScreenRival_Pal[]    = INCBIN_U16("graphics/naming_screen/rival.gbapal");
+const u16 gNamingScreenMenu_Pal[6][16] =
+{
+    INCBIN_U16("graphics/naming_screen/menu.gbapal"),
+    INCBIN_U16("graphics/naming_screen/page_swap_upper.gbapal"),
+    INCBIN_U16("graphics/naming_screen/page_swap_lower.gbapal"),
+    INCBIN_U16("graphics/naming_screen/page_swap_others.gbapal"),
+    INCBIN_U16("graphics/naming_screen/buttons.gbapal"),
+    INCBIN_U16("graphics/naming_screen/cursor.gbapal"),
+};
 
-const u32 gNamingScreenMenu_Gfx[] = INCBIN_U32("graphics/interface/naming_screen_menu.4bpp.lz");
-const u32 gUnknown_8E982BC[] = INCBIN_U32("graphics/interface/naming_screen_menu.bin.lz");
-const u32 gUnknown_8E98398[] = INCBIN_U32("graphics/interface/naming_screen_E98398.bin.lz");
-const u32 gUnknown_8E98458[] = INCBIN_U32("graphics/interface/naming_screen_E98458.bin.lz");
-const u32 gUnknown_8E98518[] = INCBIN_U32("graphics/interface/naming_screen_E98518.bin.lz");
+const u32 gNamingScreenMenu_Gfx[]                = INCBIN_U32("graphics/naming_screen/menu.4bpp.lz");
+const u32 gNamingScreenBackground_Tilemap[]      = INCBIN_U32("graphics/naming_screen/background.bin.lz");
+const u32 gNamingScreenKeyboardUpper_Tilemap[]   = INCBIN_U32("graphics/naming_screen/keyboard_upper.bin.lz");
+const u32 gNamingScreenKeyboardLower_Tilemap[]   = INCBIN_U32("graphics/naming_screen/keyboard_lower.bin.lz");
+const u32 gNamingScreenKeyboardSymbols_Tilemap[] = INCBIN_U32("graphics/naming_screen/keyboard_symbols.bin.lz");
 
-const u32 gUnknown_8E985D8[] = INCBIN_U32("graphics/interface/naming_screen_8E985D8.4bpp");
-const u32 gUnknown_8E98858[] = INCBIN_U32("graphics/interface/naming_screen_8E98858.4bpp");
-const u32 gUnknown_8E98A38[] = INCBIN_U32("graphics/interface/naming_screen_8E98A38.4bpp");
-const u32 gUnknown_8E98C18[] = INCBIN_U32("graphics/interface/naming_screen_8E98C18.4bpp");
-const u32 gUnknown_8E98CB8[] = INCBIN_U32("graphics/interface/naming_screen_8E98CB8.4bpp");
-const u32 gUnknown_8E98D58[] = INCBIN_U32("graphics/interface/naming_screen_8E98D58.4bpp");
-const u32 gUnknown_8E98DF8[] = INCBIN_U32("graphics/interface/naming_screen_8E98DF8.4bpp");
-const u32 gUnknown_8E98E98[] = INCBIN_U32("graphics/interface/naming_screen_8E98E98.4bpp");
-const u32 gUnknown_8E98F38[] = INCBIN_U32("graphics/interface/naming_screen_8E98F38.4bpp");
-const u32 gUnknown_8E98FD8[] = INCBIN_U32("graphics/interface/naming_screen_8E98FD8.4bpp");
-const u32 gUnknown_8E990D8[] = INCBIN_U32("graphics/interface/naming_screen_8E990D8.4bpp");
-const u32 gUnknown_8E990F8[] = INCBIN_U32("graphics/interface/naming_screen_8E990F8.4bpp");
+const u32 gNamingScreenPageSwapFrame_Gfx[]  = INCBIN_U32("graphics/naming_screen/page_swap_frame.4bpp");
+const u32 gNamingScreenBackButton_Gfx[]     = INCBIN_U32("graphics/naming_screen/back_button.4bpp");
+const u32 gNamingScreenOKButton_Gfx[]       = INCBIN_U32("graphics/naming_screen/ok_button.4bpp");
+const u32 gNamingScreenPageSwapUpper_Gfx[]  = INCBIN_U32("graphics/naming_screen/page_swap_upper.4bpp");
+const u32 gNamingScreenPageSwapLower_Gfx[]  = INCBIN_U32("graphics/naming_screen/page_swap_lower.4bpp");
+const u32 gNamingScreenPageSwapOthers_Gfx[] = INCBIN_U32("graphics/naming_screen/page_swap_others.4bpp");
+const u32 gNamingScreenCursor_Gfx[]         = INCBIN_U32("graphics/naming_screen/cursor.4bpp");
+const u32 gNamingScreenCursorSquished_Gfx[] = INCBIN_U32("graphics/naming_screen/cursor_squished.4bpp");
+const u32 gNamingScreenCursorFilled_Gfx[]   = INCBIN_U32("graphics/naming_screen/cursor_filled.4bpp");
+const u32 gNamingScreenPageSwapButton_Gfx[] = INCBIN_U32("graphics/naming_screen/page_swap_button.4bpp");
+const u32 gNamingScreenInputArrow_Gfx[]     = INCBIN_U32("graphics/naming_screen/input_arrow.4bpp");
+const u32 gNamingScreenUnderscore_Gfx[]     = INCBIN_U32("graphics/naming_screen/underscore.4bpp");
 
 const u8 gUnknown_8E99118[] = INCBIN_U8("graphics/tm_case/unk_8E99118.4bpp");
 

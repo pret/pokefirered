@@ -9,20 +9,13 @@ CeruleanCity_House4_EventScript_WonderNewsBerryMan::
 	lock
 	specialvar VAR_0x8004, GetMENewsJisanItemAndState
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8004, 0
-	goto_if_eq CeruleanCity_House4_EventScript_NoNews
-	compare VAR_0x8004, 1
-	goto_if_eq CeruleanCity_House4_EventScript_News1
-	compare VAR_0x8004, 2
-	goto_if_eq CeruleanCity_House4_EventScript_News2
-	compare VAR_0x8004, 3
-	goto_if_eq CeruleanCity_House4_EventScript_NewsNotSpread
-	compare VAR_0x8004, 4
-	goto_if_eq CeruleanCity_House4_EventScript_NewsSpread1
-	compare VAR_0x8004, 5
-	goto_if_eq CeruleanCity_House4_EventScript_NewsSpread2
-	compare VAR_0x8004, 6
-	goto_if_eq CeruleanCity_House4_EventScript_NewsDone
+	goto_if_eq VAR_0x8004, 0, CeruleanCity_House4_EventScript_NoNews
+	goto_if_eq VAR_0x8004, 1, CeruleanCity_House4_EventScript_News1
+	goto_if_eq VAR_0x8004, 2, CeruleanCity_House4_EventScript_News2
+	goto_if_eq VAR_0x8004, 3, CeruleanCity_House4_EventScript_NewsNotSpread
+	goto_if_eq VAR_0x8004, 4, CeruleanCity_House4_EventScript_NewsSpread1
+	goto_if_eq VAR_0x8004, 5, CeruleanCity_House4_EventScript_NewsSpread2
+	goto_if_eq VAR_0x8004, 6, CeruleanCity_House4_EventScript_NewsDone
 	end
 
 CeruleanCity_House4_EventScript_NoNews::
@@ -34,8 +27,7 @@ CeruleanCity_House4_EventScript_News1::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_NewNewsInformativeHaveThis
 	giveitem VAR_0x8008
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
@@ -43,8 +35,7 @@ CeruleanCity_House4_EventScript_News2::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_IncredibleNewsHaveBerries
 	giveitem VAR_0x8008, 4
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
@@ -59,8 +50,7 @@ CeruleanCity_House4_EventScript_NewsSpread1::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis
 	giveitem VAR_0x8008
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
@@ -68,8 +58,7 @@ CeruleanCity_House4_EventScript_NewsSpread2::
 	call CeruleanCity_House4_EventScript_MovementReactionToNews
 	msgbox CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries
 	giveitem VAR_0x8008, 4
-	compare VAR_RESULT, FALSE
-	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 

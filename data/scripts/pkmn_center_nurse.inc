@@ -19,25 +19,22 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	end
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestLeft
+	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestDown
+	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
 	return
 
 EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom::
 	specialvar VAR_RESULT, IsPlayerNotInTrainerTowerLobby
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ReturnPkmn
 	specialvar VAR_RESULT, BufferUnionRoomPlayerName
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 0
-	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
-	compare VAR_0x8008, 1
-	goto_if_eq EventScript_PkmnCenterNurse_PlayerWaitingInUionRoom
+	goto_if_eq VAR_0x8008, 0, EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_eq VAR_0x8008, 1, EventScript_PkmnCenterNurse_PlayerWaitingInUionRoom
 	end
 
 EventScript_PkmnCenterNurse_ReturnPkmn::

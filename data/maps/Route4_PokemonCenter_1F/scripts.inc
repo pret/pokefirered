@@ -24,12 +24,10 @@ Route4_PokemonCenter_1F_EventScript_MagikarpSalesman::
 	lock
 	faceplayer
 	goto_if_set FLAG_BOUGHT_MAGIKARP, Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp
-	showmoneybox 0, 0, 0
+	showmoneybox 0, 0
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale
+	goto_if_eq VAR_RESULT, MALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
+	goto_if_eq VAR_RESULT, FEMALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale
 	end
 
 Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale::
@@ -43,30 +41,24 @@ Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale::
 	end
 
 Route4_PokemonCenter_1F_EventScript_TryBuyMagikarp::
-	compare VAR_RESULT, NO
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_DeclineMagikarp
-	checkmoney MAGIKARP_PRICE, 0
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
-	textcolor 3
+	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_DeclineMagikarp
+	checkmoney MAGIKARP_PRICE
+	goto_if_eq VAR_RESULT, FALSE, Route4_PokemonCenter_1F_EventScript_NotEnoughMoney
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	setvar VAR_TEMP_1, SPECIES_MAGIKARP
-	givemon SPECIES_MAGIKARP, 5, ITEM_NONE
-	compare VAR_RESULT, 0
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty
-	compare VAR_RESULT, 1
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC
-	compare VAR_RESULT, 2
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp
+	givemon SPECIES_MAGIKARP, 5
+	goto_if_eq VAR_RESULT, 0, Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty
+	goto_if_eq VAR_RESULT, 1, Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC
+	goto_if_eq VAR_RESULT, 2, Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp
 	end
 
 Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty::
 	call Route4_PokemonCenter_1F_EventScript_PayForMagikarp
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp
+	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp
 	call EventScript_GetGiftMonPartySlot
 	fadescreen FADE_TO_BLACK
-	hidemoneybox 0, 0
+	hidemoneybox
 	special ChangePokemonNickname
 	waitstate
 	goto Route4_PokemonCenter_1F_EventScript_BoughtMagikarp
@@ -75,10 +67,9 @@ Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty::
 Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC::
 	call Route4_PokemonCenter_1F_EventScript_PayForMagikarp
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox
+	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox
 	fadescreen FADE_TO_BLACK
-	hidemoneybox 0, 0
+	hidemoneybox
 	special ChangeBoxPokemonNickname
 	waitstate
 	lock
@@ -97,7 +88,7 @@ Route4_PokemonCenter_1F_EventScript_TransferMagikarp::
 	end
 
 Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp::
-	hidemoneybox 0, 0
+	hidemoneybox
 	goto Route4_PokemonCenter_1F_EventScript_BoughtMagikarp
 	end
 
@@ -107,24 +98,24 @@ Route4_PokemonCenter_1F_EventScript_BoughtMagikarp::
 	end
 
 Route4_PokemonCenter_1F_EventScript_PayForMagikarp::
-	removemoney MAGIKARP_PRICE, 0
-	updatemoneybox 0, 0, 0
+	removemoney MAGIKARP_PRICE
+	updatemoneybox
 	playfanfare MUS_LEVEL_UP
 	message Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp
 	waitmessage
 	waitfanfare
-	getspeciesname 0, SPECIES_MAGIKARP
+	bufferspeciesname STR_VAR_1, SPECIES_MAGIKARP
 	return
 
 Route4_PokemonCenter_1F_EventScript_DeclineMagikarp::
 	msgbox Route4_PokemonCenter_1F_Text_OnlyDoingThisAsFavorToYou
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 
 Route4_PokemonCenter_1F_EventScript_NotEnoughMoney::
 	msgbox Route4_PokemonCenter_1F_Text_YoullNeedMoreMoney
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 
@@ -134,9 +125,9 @@ Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp::
 	end
 
 Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox Route4_PokemonCenter_1F_Text_NoRoomForMorePokemon
-	hidemoneybox 0, 0
+	hidemoneybox
 	release
 	end
 

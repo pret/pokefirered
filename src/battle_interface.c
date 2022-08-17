@@ -1137,8 +1137,9 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
-                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
+                if (partyInfo[i].hp == HP_EMPTY_SLOT) 
                 {
+                    // empty slot or an egg
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
                 }
@@ -1153,17 +1154,20 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             }
             else
             {
-                if (i >= nValidMons) // empty slot or an egg
+                if (i >= nValidMons) 
                 {
+                    // empty slot or an egg
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
                 }
-                else if (partyInfo[i].hp == 0) // fainted mon
+                else if (partyInfo[i].hp == 0)
                 {
+                    // fainted mon
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 3;
                 }
-                else if (partyInfo[i].status != 0) // mon with major status
+                else if (partyInfo[i].status != 0)
                 {
+                    // mon with major status
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 2;
                 }
             }
@@ -1175,17 +1179,20 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
-                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
+                if (partyInfo[i].hp == HP_EMPTY_SLOT)
                 {
+                    // empty slot or an egg
                     gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[5 - i]].data[7] = 1;
                 }
-                else if (partyInfo[i].hp == 0) // fainted mon
+                else if (partyInfo[i].hp == 0)
                 {
+                    // fainted mon
                     gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 3;
                 }
-                else if (partyInfo[i].status != 0) // mon with major status
+                else if (partyInfo[i].status != 0)
                 {
+                    // mon with major status
                     gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 2;
                 }
             }

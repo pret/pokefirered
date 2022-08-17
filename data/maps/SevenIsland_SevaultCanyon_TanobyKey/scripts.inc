@@ -37,78 +37,64 @@ SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos::
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1::
 	lockall
-	compare VAR_TEMP_1, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_1, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_1, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2::
 	lockall
-	compare VAR_TEMP_2, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_2, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_2, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3::
 	lockall
-	compare VAR_TEMP_3, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_3, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_3, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4::
 	lockall
-	compare VAR_TEMP_4, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_4, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_4, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5::
 	lockall
-	compare VAR_TEMP_5, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_5, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_5, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6::
 	lockall
-	compare VAR_TEMP_6, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_6, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_6, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7::
 	lockall
-	compare VAR_TEMP_7, 100
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto_if_eq VAR_TEMP_7, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
 	setvar VAR_TEMP_7, 100
-	compare NUM_SWITCHES_PRESSED, 7
-	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
 	releaseall
 	end
 

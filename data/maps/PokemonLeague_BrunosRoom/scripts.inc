@@ -14,8 +14,7 @@ PokemonLeague_BrunosRoom_OnResume::
 
 PokemonLeague_BrunosRoom_OnLoad::
 	call_if_set FLAG_DEFEATED_BRUNO, PokemonLeague_BrunosRoom_EventScript_SetDoorOpen
-	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 2
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_CloseEntry
+	call_if_eq VAR_MAP_SCENE_POKEMON_LEAGUE, 2, PokemonLeague_BrunosRoom_EventScript_CloseEntry
 	end
 
 PokemonLeague_BrunosRoom_EventScript_CloseEntry::
@@ -81,14 +80,10 @@ PokemonLeague_BrunosRoom_EventScript_Rematch::
 PokemonLeague_BrunosRoom_EventScript_PostBattle::
 	msgbox PokemonLeague_BrunosRoom_Text_PostBattle
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft
-	compare VAR_FACING, DIR_WEST
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
-	compare VAR_FACING, DIR_EAST
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
+	call_if_eq VAR_FACING, DIR_NORTH, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight
+	call_if_eq VAR_FACING, DIR_SOUTH, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft
+	call_if_eq VAR_FACING, DIR_WEST, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
+	call_if_eq VAR_FACING, DIR_EAST, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
 	release
 	end
 
@@ -97,28 +92,24 @@ PokemonLeague_BrunosRoom_EventScript_DefeatedBruno::
 	call PokemonLeague_EventScript_OpenDoor
 	msgbox PokemonLeague_BrunosRoom_Text_PostBattle
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft
-	compare VAR_FACING, DIR_WEST
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
-	compare VAR_FACING, DIR_EAST
-	call_if_eq PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
+	call_if_eq VAR_FACING, DIR_NORTH, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight
+	call_if_eq VAR_FACING, DIR_SOUTH, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft
+	call_if_eq VAR_FACING, DIR_WEST, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
+	call_if_eq VAR_FACING, DIR_EAST, PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown
 	release
 	end
 
 PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft::
-	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight::
-	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown::
-	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BRUNO, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return

@@ -1,21 +1,17 @@
 EventScript_Questionnaire::
 	lockall
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_DeclineQuestionnaire
+	goto_if_eq VAR_RESULT, NO, EventScript_DeclineQuestionnaire
 	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	specialvar VAR_0x8008, GetMartClerkObjectId
-	textcolor 0
-	compare VAR_0x8004, 0
-	goto_if_eq EventScript_EnableMysteryGift
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DeclineQuestionnaire
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_TookQuestionnaire
+	textcolor NPC_TEXT_COLOR_MALE
+	goto_if_eq VAR_0x8004, 0, EventScript_EnableMysteryGift
+	goto_if_eq VAR_RESULT, 0, EventScript_DeclineQuestionnaire
+	goto_if_eq VAR_RESULT, 1, EventScript_TookQuestionnaire
 	end
 
 EventScript_EnableMysteryGift::
@@ -28,7 +24,7 @@ EventScript_EnableMysteryGift::
 	waitmovement 0
 	msgbox Text_YouKnowThoseWords
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special DisableMsgBoxWalkaway
 	signmsg
 	msgbox Text_YouCanAccessMysteryGift

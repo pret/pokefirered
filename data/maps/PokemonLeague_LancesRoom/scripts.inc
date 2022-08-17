@@ -13,8 +13,7 @@ PokemonLeague_LancesRoom_OnResume::
 	end
 
 PokemonLeague_LancesRoom_OnLoad::
-	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 4
-	call_if_eq PokemonLeague_LancesRoom_EventScript_CloseEntry
+	call_if_eq VAR_MAP_SCENE_POKEMON_LEAGUE, 4, PokemonLeague_LancesRoom_EventScript_CloseEntry
 	call_if_set FLAG_DEFEATED_LANCE, PokemonLeague_LancesRoom_EventScript_SetDoorOpen
 	end
 
@@ -159,10 +158,10 @@ PokemonLeague_LancesRoom_EventScript_LanceMoveOutOfWayRight::
 
 PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayLeft::
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayRight::
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end

@@ -9,6 +9,7 @@
 #define MOVE_LIMITATION_TORMENTED               (1 << 3)
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
+#define MOVE_LIMITATIONS_ALL                    0xFF
 
 #define ABILITYEFFECT_ON_SWITCHIN                0
 #define ABILITYEFFECT_ENDTURN                    1
@@ -38,9 +39,12 @@
 #define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
 #define ABILITY_ON_FIELD2(abilityId)(AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, abilityId, 0, 0))
 
-#define ITEMEFFECT_ON_SWITCH_IN                 0x0
-#define ITEMEFFECT_MOVE_END                     0x3
-#define ITEMEFFECT_KINGSROCK_SHELLBELL          0x4
+// For the first argument of ItemBattleEffects, to deteremine which block of item effects to try
+#define ITEMEFFECT_ON_SWITCH_IN                 0
+#define ITEMEFFECT_NORMAL                       1
+#define ITEMEFFECT_DUMMY                        2 // Unused, empty
+#define ITEMEFFECT_MOVE_END                     3
+#define ITEMEFFECT_KINGSROCK_SHELLBELL          4
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 #define WEATHER_HAS_EFFECT2 ((!AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_AIR_LOCK, 0, 0)))
@@ -58,7 +62,6 @@ u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingImprison(u8 attacker);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
-void MarkAllBattlersForControllerExec(void);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
 void CancelMultiTurnMoves(u8 battler);

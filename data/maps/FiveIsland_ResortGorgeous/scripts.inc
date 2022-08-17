@@ -19,10 +19,10 @@ FiveIsland_ResortGorgeous_OnFrame::
 
 FiveIsland_ResortGorgeous_EventScript_SelphyReturnHomeScene::
 	lockall
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_Text_SelphyThanksYouMayGoNow
 	closemessage
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor 39, 8
 	waitdooranim

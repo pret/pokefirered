@@ -1,16 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "decompress.h"
-
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct CompressedSpriteSheet gMonBackPicTable[];
-extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
-extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const union AnimCmd *const gSpriteAnimTable_82349BC[];
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
-
-// Static type declarations
+#include "data.h"
 
 struct PicData
 {
@@ -131,7 +122,7 @@ void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 paletteSlot
 void AssignSpriteAnimsTable(bool8 isTrainer)
 {
     if (!isTrainer)
-        sCreatingSpriteTemplate.anims = gSpriteAnimTable_82349BC;
+        sCreatingSpriteTemplate.anims = gAnims_MonPic;
     else
         sCreatingSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[0];
 }

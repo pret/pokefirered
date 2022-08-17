@@ -8,8 +8,7 @@ IndigoPlateau_Exterior_MapScripts::
 
 IndigoPlateau_Exterior_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
-	compare VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
-	call_if_eq IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
+	call_if_eq VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
 	end
 
 IndigoPlateau_Exterior_EventScript_PlayCreditsMusic::
@@ -104,12 +103,12 @@ IndigoPlateau_Exterior_Movement_PlayerExitBuilding::
 IndigoPlateau_Exterior_Movement_PlayerWatchRivalLeave::
 	delay_16
 	delay_4
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave::
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	delay_16
 	delay_16
@@ -121,7 +120,7 @@ IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave::
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 IndigoPlateau_Exterior_Movement_PlayerBeginLeave::
@@ -134,7 +133,7 @@ IndigoPlateau_Exterior_Movement_PlayerBeginLeave::
 	step_end
 
 IndigoPlateau_Exterior_Movement_PlayerTurnAround::
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 IndigoPlateau_Exterior_Movement_PushPlayerOutOfWay::
@@ -145,7 +144,7 @@ IndigoPlateau_Exterior_Movement_PushPlayerOutOfWay::
 	step_end
 
 IndigoPlateau_Exterior_Movement_PlayerFaceLeague::
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
 IndigoPlateau_Exterior_Movement_RivalLeave::
@@ -163,7 +162,7 @@ IndigoPlateau_Exterior_Movement_RivalExitBuilding::
 	step_end
 
 IndigoPlateau_Exterior_Movement_OakLeave::
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
 	delay_16
@@ -174,7 +173,7 @@ IndigoPlateau_Exterior_Movement_OakLeave::
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_16
 	walk_down
 	walk_down

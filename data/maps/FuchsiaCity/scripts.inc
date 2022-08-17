@@ -72,9 +72,9 @@ FuchsiaCity_EventScript_ChanseySign::
 	lockall
 	setvar VAR_0x8004, SPECIES_CHANSEY
 	special SetSeenMon
-	drawmonpic SPECIES_CHANSEY, 10, 3
+	showmonpic SPECIES_CHANSEY, 10, 3
 	msgbox FuchsiaCity_Text_ChanseySign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end
 
@@ -82,9 +82,9 @@ FuchsiaCity_EventScript_VoltorbSign::
 	lockall
 	setvar VAR_0x8004, SPECIES_VOLTORB
 	special SetSeenMon
-	drawmonpic SPECIES_VOLTORB, 10, 3
+	showmonpic SPECIES_VOLTORB, 10, 3
 	msgbox FuchsiaCity_Text_VoltorbSign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end
 
@@ -92,9 +92,9 @@ FuchsiaCity_EventScript_KangaskhanSign::
 	lockall
 	setvar VAR_0x8004, SPECIES_KANGASKHAN
 	special SetSeenMon
-	drawmonpic SPECIES_KANGASKHAN, 10, 3
+	showmonpic SPECIES_KANGASKHAN, 10, 3
 	msgbox FuchsiaCity_Text_KangaskhanSign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end
 
@@ -102,9 +102,9 @@ FuchsiaCity_EventScript_SlowpokeSign::
 	lockall
 	setvar VAR_0x8004, SPECIES_SLOWPOKE
 	special SetSeenMon
-	drawmonpic SPECIES_SLOWPOKE, 10, 3
+	showmonpic SPECIES_SLOWPOKE, 10, 3
 	msgbox FuchsiaCity_Text_SlowpokeSign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end
 
@@ -112,9 +112,9 @@ FuchsiaCity_EventScript_LaprasSign::
 	lockall
 	setvar VAR_0x8004, SPECIES_LAPRAS
 	special SetSeenMon
-	drawmonpic SPECIES_LAPRAS, 10, 3
+	showmonpic SPECIES_LAPRAS, 10, 3
 	msgbox FuchsiaCity_Text_LaprasSign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end
 
@@ -123,17 +123,17 @@ FuchsiaCity_EventScript_FossilMonSign::
 	goto_if_set FLAG_GOT_DOME_FOSSIL, FuchsiaCity_EventScript_OmanyteSign
 	setvar VAR_0x8004, SPECIES_KABUTO
 	special SetSeenMon
-	drawmonpic SPECIES_KABUTO, 10, 3
+	showmonpic SPECIES_KABUTO, 10, 3
 	msgbox FuchsiaCity_Text_KabutoSign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end
 
 FuchsiaCity_EventScript_OmanyteSign::
 	setvar VAR_0x8004, SPECIES_OMANYTE
 	special SetSeenMon
-	drawmonpic SPECIES_OMANYTE, 10, 3
+	showmonpic SPECIES_OMANYTE, 10, 3
 	msgbox FuchsiaCity_Text_OmanyteSign
-	erasemonpic
+	hidemonpic
 	releaseall
 	end

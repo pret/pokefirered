@@ -18,8 +18,8 @@ SaffronCity_PokemonTrainerFanClub_OnFrame::
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	lockall
-	textcolor 1
-	applymovement LOCALID_BATTLE_GIRL, Movement_WalkInPlaceFastestDown
+	textcolor NPC_TEXT_COLOR_FEMALE
+	applymovement LOCALID_BATTLE_GIRL, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_BATTLE_GIRL, Movement_ExclamationMark
@@ -30,7 +30,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	closemessage
 	applymovement LOCALID_BATTLE_GIRL, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_YourePlayerWereYourFansNow
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
@@ -50,7 +50,7 @@ SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer::
 @ Unused, leftover from RS
 LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer::
 	delay_8
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	walk_down
 	walk_down
 	walk_down
@@ -71,7 +71,7 @@ LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer::
 @ Unused, leftover from RS
 LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer::
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 @ Unused, leftover from RS
@@ -80,50 +80,40 @@ LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer::
 	walk_fast_up
 	walk_fast_up
 	walk_fast_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 SaffronCity_PokemonTrainerFanClub_OnTransition::
-	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting
-	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1, SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2, SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions::
 	special Script_TryLoseFansFromPlayTime
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER2
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER3
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER4
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER5
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER6
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER7
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
 	setvar VAR_0x8004, FANCLUB_MEMBER8
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, FALSE
-	call_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
+	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
@@ -179,22 +169,18 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl::
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special Script_BufferFanClubTrainerName
-	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WasYourFanNotAnymore
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou
 	release
 	end
@@ -219,22 +205,18 @@ SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl::
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER4
 	special Script_BufferFanClubTrainerName
-	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeYouOneDay
 	release
 	end
@@ -259,22 +241,18 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Youngster::
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER2
 	special Script_BufferFanClubTrainerName
-	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_CanYouAutographShorts
 	release
 	end
@@ -299,22 +277,18 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman::
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER3
 	special Script_BufferFanClubTrainerName
-	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_HmmAndYouAre
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_HadPleasureOfWatchingYouBattle
 	release
 	end
@@ -340,19 +314,16 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Woman::
 	setvar VAR_0x8004, FANCLUB_MEMBER6
 	special Script_BufferFanClubTrainerName
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_TrainerHasBeenOnFire
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_AdoreWayYouBattle
 	release
 	end
@@ -373,19 +344,16 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Rocker::
 	setvar VAR_0x8004, FANCLUB_MEMBER5
 	special Script_BufferFanClubTrainerName
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_LoveWayTrainerTalks
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_TheWayYouBattleIsCool
 	release
 	end
@@ -406,19 +374,16 @@ SaffronCity_PokemonTrainerFanClub_EventScript_Beauty::
 	setvar VAR_0x8004, FANCLUB_MEMBER7
 	special Script_BufferFanClubTrainerName
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WhyCantOthersSeeMastersDignity
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_YouReallyAreAmazing
 	release
 	end
@@ -439,19 +404,16 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt::
 	setvar VAR_0x8004, FANCLUB_MEMBER8
 	special Script_BufferFanClubTrainerName
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	compare VAR_RESULT, TRUE
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect
 	release
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	compare VAR_RESULT, 1
-	goto_if_eq SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational
 	release
 	end

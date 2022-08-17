@@ -12,8 +12,7 @@ SilphCo_9F_OnLoad::
 SilphCo_9F_EventScript_HealWoman::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge SilphCo_9F_EventScript_HealWomanRocketsGone
+	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_9F_EventScript_HealWomanRocketsGone
 	msgbox SilphCo_9F_Text_YouShouldTakeQuickNap
 	closemessage
 	call EventScript_OutOfCenterPartyHeal

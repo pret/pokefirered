@@ -16,8 +16,7 @@ TrainerTower_Lobby_OnResume::
 	setvar VAR_TEMP_2, 0
 	ttower_resumetimer
 	ttower_shouldexit
-	compare VAR_RESULT, FALSE
-	goto_if_eq TrainerTower_Lobby_OnResumeEnd
+	goto_if_eq VAR_RESULT, FALSE, TrainerTower_Lobby_OnResumeEnd
 	@ Never reached, above always FALSE
 	setvar VAR_TEMP_0, 0
 	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 7
@@ -34,8 +33,7 @@ TrainerTower_Lobby_OnReturnToField::
 	end
 
 TrainerTower_Lobby_OnLoad::
-	compare VAR_TEMP_D, 17
-	call_if_eq TrainerTower_Lobby_OpenCounterBarrier
+	call_if_eq VAR_TEMP_D, 17, TrainerTower_Lobby_OpenCounterBarrier
 	end
 
 TrainerTower_Lobby_OpenCounterBarrier::
@@ -81,7 +79,7 @@ TrainerTower_Lobby_EventScript_LostChallenge::
 	lock
 	faceplayer
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox TrainerTower_Lobby_Text_TooBadComeBackTryAgain
 	goto TrainerTower_Lobby_EventScript_ExitChallenge
 
@@ -90,7 +88,7 @@ TrainerTower_Lobby_EventScript_164938::
 	lock
 	faceplayer
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch
 TrainerTower_Lobby_EventScript_ExitChallenge::
 	closemessage
@@ -112,8 +110,7 @@ TrainerTower_Lobby_EventScript_Receptionist::
 	lock
 	faceplayer
 	ttower_getbeatchallenge
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerTower_Lobby_EventScript_ThanksForCompeting
+	goto_if_eq VAR_RESULT, TRUE, TrainerTower_Lobby_EventScript_ThanksForCompeting
 	msgbox TrainerTower_Lobby_Text_GiveItYourBest
 	goto TrainerTower_Lobby_EventScript_ReceptionistEnd
 
@@ -152,11 +149,10 @@ TrainerTower_Lobby_Mart_Items::
 TrainerTower_Lobby_EventScript_EntryTrigger::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox TrainerTower_Lobby_Text_WelcomeToTrainerTower
 	ttower_getnumfloors
-	compare VAR_RESULT, FALSE
-	goto_if_eq TrainerTower_Lobby_EventScript_AllFloorsUsed
+	goto_if_eq VAR_RESULT, FALSE, TrainerTower_Lobby_EventScript_AllFloorsUsed
 	msgbox TrainerTower_Lobby_Text_TrainersUpToFloorNum
 	goto TrainerTower_Lobby_EventScript_AskEnterChallenge
 

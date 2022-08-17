@@ -17,7 +17,7 @@ MtMoon_B2F_EventScript_ShowFossils::
 
 MtMoon_B2F_EventScript_MiguelTrigger::
 	lockall
-	applymovement LOCALID_MIGUEL, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MIGUEL, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	call MtMoon_B2F_EventScript_BattleMiguel
 	releaseall
@@ -33,7 +33,7 @@ MtMoon_B2F_EventScript_Miguel::
 	end
 
 MtMoon_B2F_EventScript_BattleMiguel::
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	message MtMoon_B2F_Text_MiguelIntro
 	waitmessage
 	playbgm MUS_ENCOUNTER_GYM_LEADER, 0
@@ -58,8 +58,7 @@ MtMoon_B2F_EventScript_DomeFossil::
 	lock
 	faceplayer
 	msgbox MtMoon_B2F_Text_YouWantDomeFossil, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MtMoon_B2F_EventScript_DontTakeFossil
+	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
 	removeobject LOCALID_DOME_FOSSIL
 	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
 	closemessage
@@ -67,8 +66,8 @@ MtMoon_B2F_EventScript_DomeFossil::
 	delay 10
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
-	moveobjectoffscreen LOCALID_MIGUEL
-	textcolor 0
+	copyobjectxytoperm LOCALID_MIGUEL
+	textcolor NPC_TEXT_COLOR_MALE
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
 	waitmessage
@@ -90,8 +89,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	lock
 	faceplayer
 	msgbox MtMoon_B2F_Text_YouWantHelixFossil, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MtMoon_B2F_EventScript_DontTakeFossil
+	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
 	removeobject LOCALID_HELIX_FOSSIL
 	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
 	closemessage
@@ -99,8 +97,8 @@ MtMoon_B2F_EventScript_HelixFossil::
 	delay 10
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
-	moveobjectoffscreen LOCALID_MIGUEL
-	textcolor 0
+	copyobjectxytoperm LOCALID_MIGUEL
+	textcolor NPC_TEXT_COLOR_MALE
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
 	waitmessage

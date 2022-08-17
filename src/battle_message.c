@@ -2378,7 +2378,13 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
     {PIXEL_FILL(0x1), 4, 0x00, 1, 0, 1, 1, 0x2, 0x1, 0x3}
 };
 
-const u8 gUnknown_83FEC90[] = {0x04, 0x05, 0x02, 0x02};
+static const u8 sNpcTextColorToFont[] = 
+{
+    [NPC_TEXT_COLOR_MALE]    = FONT_4, 
+    [NPC_TEXT_COLOR_FEMALE]  = FONT_5, 
+    [NPC_TEXT_COLOR_MON]     = FONT_2, 
+    [NPC_TEXT_COLOR_NEUTRAL] = FONT_2,
+};
 
 // windowId: Upper 2 bits are text flags
 //   x40: Use NPC context-defined font
@@ -2388,15 +2394,15 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
     int x;
-    u8 context;
+    u8 color;
 
     u8 textFlags = windowId & 0xC0;
     windowId &= 0x3F;
     if (!(textFlags & 0x80))
         FillWindowPixelBuffer(windowId, sTextOnWindowsInfo_Normal[windowId].fillValue);
     if (textFlags & 0x40) {
-        context = ContextNpcGetTextColor();
-        printerTemplate.fontId = gUnknown_83FEC90[context];
+        color = ContextNpcGetTextColor();
+        printerTemplate.fontId = sNpcTextColorToFont[color];
     }
     else {
         printerTemplate.fontId = sTextOnWindowsInfo_Normal[windowId].fontId;

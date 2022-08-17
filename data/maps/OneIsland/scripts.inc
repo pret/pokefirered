@@ -15,7 +15,7 @@ OneIsland_OnFrame::
 
 OneIsland_EventScript_EnterOneIslandFirstTime::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Movement_PlayerExitHarbor
 	waitmovement 0
 	msgbox OneIsland_Text_BillLetsGoSeeCelio
@@ -32,7 +32,7 @@ OneIsland_EventScript_EnterOneIslandFirstTime::
 	waitdooranim
 	removeobject LOCALID_BILL
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 3
-	warp MAP_ONE_ISLAND_POKEMON_CENTER_1F, 255, 9, 9
+	warp MAP_ONE_ISLAND_POKEMON_CENTER_1F, 9, 9
 	waitstate
 	releaseall
 	end

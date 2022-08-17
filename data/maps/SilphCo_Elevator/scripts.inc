@@ -32,8 +32,7 @@ SilphCo_Elevator_EventScript_FloorSelect::
 SilphCo_Elevator_EventScript_To1F::
 	setvar VAR_0x8006, 4
 	setdynamicwarp MAP_SILPH_CO_1F, 255, 22, 3
-	compare VAR_ELEVATOR_FLOOR, 4
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 4, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 4
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -42,8 +41,7 @@ SilphCo_Elevator_EventScript_To1F::
 SilphCo_Elevator_EventScript_To2F::
 	setvar VAR_0x8006, 5
 	setdynamicwarp MAP_SILPH_CO_2F, 255, 22, 3
-	compare VAR_ELEVATOR_FLOOR, 5
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 5, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 5
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -52,8 +50,7 @@ SilphCo_Elevator_EventScript_To2F::
 SilphCo_Elevator_EventScript_To3F::
 	setvar VAR_0x8006, 6
 	setdynamicwarp MAP_SILPH_CO_3F, 255, 22, 3
-	compare VAR_ELEVATOR_FLOOR, 6
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 6, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 6
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -62,8 +59,7 @@ SilphCo_Elevator_EventScript_To3F::
 SilphCo_Elevator_EventScript_To4F::
 	setvar VAR_0x8006, 7
 	setdynamicwarp MAP_SILPH_CO_4F, 255, 22, 3
-	compare VAR_ELEVATOR_FLOOR, 7
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 7, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 7
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -72,8 +68,7 @@ SilphCo_Elevator_EventScript_To4F::
 SilphCo_Elevator_EventScript_To5F::
 	setvar VAR_0x8006, 8
 	setdynamicwarp MAP_SILPH_CO_5F, 255, 22, 3
-	compare VAR_ELEVATOR_FLOOR, 8
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 8, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 8
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -82,8 +77,7 @@ SilphCo_Elevator_EventScript_To5F::
 SilphCo_Elevator_EventScript_To6F::
 	setvar VAR_0x8006, 9
 	setdynamicwarp MAP_SILPH_CO_6F, 255, 20, 3
-	compare VAR_ELEVATOR_FLOOR, 9
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 9, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 9
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -92,8 +86,7 @@ SilphCo_Elevator_EventScript_To6F::
 SilphCo_Elevator_EventScript_To7F::
 	setvar VAR_0x8006, 10
 	setdynamicwarp MAP_SILPH_CO_7F, 255, 23, 3
-	compare VAR_ELEVATOR_FLOOR, 10
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 10, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 10
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -102,8 +95,7 @@ SilphCo_Elevator_EventScript_To7F::
 SilphCo_Elevator_EventScript_To8F::
 	setvar VAR_0x8006, 11
 	setdynamicwarp MAP_SILPH_CO_8F, 255, 22, 3
-	compare VAR_ELEVATOR_FLOOR, 11
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 11, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 11
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -112,8 +104,7 @@ SilphCo_Elevator_EventScript_To8F::
 SilphCo_Elevator_EventScript_To9F::
 	setvar VAR_0x8006, 12
 	setdynamicwarp MAP_SILPH_CO_9F, 255, 24, 3
-	compare VAR_ELEVATOR_FLOOR, 12
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 12, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 12
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -122,8 +113,7 @@ SilphCo_Elevator_EventScript_To9F::
 SilphCo_Elevator_EventScript_To10F::
 	setvar VAR_0x8006, 13
 	setdynamicwarp MAP_SILPH_CO_10F, 255, 13, 3
-	compare VAR_ELEVATOR_FLOOR, 13
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 13, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 13
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect
@@ -132,8 +122,7 @@ SilphCo_Elevator_EventScript_To10F::
 SilphCo_Elevator_EventScript_To11F::
 	setvar VAR_0x8006, 14
 	setdynamicwarp MAP_SILPH_CO_11F, 255, 13, 3
-	compare VAR_ELEVATOR_FLOOR, 14
-	goto_if_eq SilphCo_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 14, SilphCo_Elevator_EventScript_ExitFloorSelect
 	call SilphCo_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 14
 	goto SilphCo_Elevator_EventScript_ExitFloorSelect

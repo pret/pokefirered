@@ -51,7 +51,7 @@ SaffronCity_EventScript_DoorGuardGrunt::
 	end
 
 SaffronCity_EventScript_DoorGuardAsleep::
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox SaffronCity_Text_HesTakingASnooze
 	release
 	end

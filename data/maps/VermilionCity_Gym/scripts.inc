@@ -147,8 +147,7 @@ VermilionCity_Gym_EventScript_TrashCan::
 	copyvar SWITCH2_ID, VAR_TEMP_1
 	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, VermilionCity_Gym_EventScript_LocksAlreadyOpen
 	goto_if_set FOUND_FIRST_SWITCH, VermilionCity_Gym_EventScript_TrySwitchTwo
-	compare SWITCH1_ID, TRASH_CAN_ID
-	goto_if_eq VermilionCity_Gym_EventScript_FoundSwitchOne
+	goto_if_eq SWITCH1_ID, TRASH_CAN_ID, VermilionCity_Gym_EventScript_FoundSwitchOne
 	msgbox VermilionCity_Gym_Text_NopeOnlyTrashHere
 	releaseall
 	end
@@ -164,8 +163,7 @@ VermilionCity_Gym_EventScript_FoundSwitchOne::
 	end
 
 VermilionCity_Gym_EventScript_TrySwitchTwo::
-	compare SWITCH2_ID, TRASH_CAN_ID
-	goto_if_eq VermilionCity_Gym_EventScript_FoundSwitchTwo
+	goto_if_eq SWITCH2_ID, TRASH_CAN_ID, VermilionCity_Gym_EventScript_FoundSwitchTwo
 	msgbox VermilionCity_Gym_Text_OnlyTrashLocksWereReset
 	clearflag FOUND_FIRST_SWITCH
 	special SetVermilionTrashCans
@@ -229,9 +227,8 @@ VermilionCity_Gym_EventScript_ShowOaksAide::
 
 VermilionCity_Gym_EventScript_GiveTM34::
 	msgbox VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis
-	checkitemspace ITEM_TM34, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq VermilionCity_Gym_EventScript_NoRoomForTM34
+	checkitemspace ITEM_TM34
+	goto_if_eq VAR_RESULT, FALSE, VermilionCity_Gym_EventScript_NoRoomForTM34
 	giveitem_msg VermilionCity_Gym_Text_ReceivedTM34FromLtSurge, ITEM_TM34
 	setflag FLAG_GOT_TM34_FROM_SURGE
 	msgbox VermilionCity_Gym_Text_ExplainTM34

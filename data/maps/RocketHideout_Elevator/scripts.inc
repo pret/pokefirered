@@ -45,8 +45,7 @@ RocketHideout_Elevator_EventScript_ChooseFloor::
 RocketHideout_Elevator_EventScript_ToB1F::
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25
-	compare VAR_ELEVATOR_FLOOR, 3
-	goto_if_eq RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 3, RocketHideout_Elevator_EventScript_ExitFloorSelect
 	call RocketHideout_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 3
 	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
@@ -55,8 +54,7 @@ RocketHideout_Elevator_EventScript_ToB1F::
 RocketHideout_Elevator_EventScript_ToB2F::
 	setvar VAR_0x8006, 2
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16
-	compare VAR_ELEVATOR_FLOOR, 2
-	goto_if_eq RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 2, RocketHideout_Elevator_EventScript_ExitFloorSelect
 	call RocketHideout_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 2
 	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
@@ -65,8 +63,7 @@ RocketHideout_Elevator_EventScript_ToB2F::
 RocketHideout_Elevator_EventScript_ToB4F::
 	setvar VAR_0x8006, 0
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23
-	compare VAR_ELEVATOR_FLOOR, 0
-	goto_if_eq RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto_if_eq VAR_ELEVATOR_FLOOR, 0, RocketHideout_Elevator_EventScript_ExitFloorSelect
 	call RocketHideout_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 0
 	goto RocketHideout_Elevator_EventScript_ExitFloorSelect

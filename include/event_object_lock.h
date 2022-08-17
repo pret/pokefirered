@@ -3,10 +3,10 @@
 
 #include "global.h"
 
-bool8 NativeScript_WaitPlayerStopMoving(void);
-void ScriptFreezeObjectEvents(void);
-bool8 NativeScript_WaitPlayerAndTargetNPCStopMoving(void);
-void LockSelectedObjectEvent(void);
+bool8 IsFreezePlayerFinished(void);
+void FreezeObjects_WaitForPlayer(void);
+bool8 IsFreezeSelectedObjectAndPlayerFinished(void);
+void FreezeObjects_WaitForPlayerAndSelected(void);
 void ClearPlayerHeldMovementAndUnfreezeObjectEvents(void);
 bool8 walkrun_is_standing_still(void);
 void UnionRoom_UnlockPlayerAndChatPartner(void);

@@ -25,8 +25,7 @@ NavelRock_Base_OnResume::
 
 NavelRock_Base_EventScript_TryRemoveLugia::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_Return
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
 	removeobject LOCALID_LUGIA
 	return
 
@@ -56,21 +55,15 @@ NavelRock_Base_EventScript_Lugia::
 	playmoncry SPECIES_LUGIA, CRY_MODE_ENCOUNTER
 	waitmoncry
 	delay 20
-	setvar VAR_0x8004, SPECIES_LUGIA
-	setvar VAR_0x8005, 70  @ Level
-	setvar VAR_0x8006, ITEM_NONE
-	special CreateEventLegalEnemyMon
+	seteventmon SPECIES_LUGIA, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq NavelRock_Base_EventScript_DefeatedLugia
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq NavelRock_Base_EventScript_RanFromLugia
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq NavelRock_Base_EventScript_RanFromLugia
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Base_EventScript_DefeatedLugia
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Base_EventScript_RanFromLugia
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Base_EventScript_RanFromLugia
 	setflag FLAG_FOUGHT_LUGIA
 	release
 	end

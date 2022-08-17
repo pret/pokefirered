@@ -19,7 +19,7 @@ FiveIsland_LostCave_Room10_OnFrame::
 
 FiveIsland_LostCave_Room10_EventScript_FindSelphyScene::
 	lockall
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_SELPHY, FiveIsland_LostCave_Room10_Movement_SelphyWander
 	waitmovement 0
 	delay 100
@@ -31,7 +31,7 @@ FiveIsland_LostCave_Room10_EventScript_FindSelphyScene::
 	msgbox FiveIsland_LostCave_Room10_Text_MayIAskYouToTakeMeHome
 	closemessage
 	call FiveIsland_LostCave_Room10_EventScript_SetSelphyFound
-	warp MAP_FIVE_ISLAND_RESORT_GORGEOUS, 255, 39, 10
+	warp MAP_FIVE_ISLAND_RESORT_GORGEOUS, 39, 10
 	waitstate
 	releaseall
 	end
@@ -54,9 +54,9 @@ FiveIsland_LostCave_Room10_Movement_SelphyWander::
 	delay_16
 	walk_right
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FiveIsland_LostCave_Room10_Movement_SelphyApproach::

@@ -6,7 +6,7 @@
 static u8 TranslateWeatherNum(u8 weather);
 static void UpdateRainCounter(u8 newWeather, u8 oldWeather);
 
-void SetSav1Weather(u32 weather)
+void SetSavedWeather(u32 weather)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
@@ -18,7 +18,7 @@ u8 GetSav1Weather(void)
     return gSaveBlock1Ptr->weather;
 }
 
-void SetSav1WeatherFromCurrMapHeader(void)
+void SetSavedWeatherFromCurrMapHeader(void)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
@@ -27,13 +27,13 @@ void SetSav1WeatherFromCurrMapHeader(void)
 
 void SetWeather(u32 weather)
 {
-    SetSav1Weather(weather);
+    SetSavedWeather(weather);
     SetNextWeather(GetSav1Weather());
 }
 
 void SetWeather_Unused(u32 weather)
 {
-    SetSav1Weather(weather);
+    SetSavedWeather(weather);
     SetCurrentAndNextWeather(GetSav1Weather());
 }
 

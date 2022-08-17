@@ -224,7 +224,6 @@
 #define EV_ITEM_RAISE_LIMIT 100
 
 #define PARTY_SIZE 6
-#define UNOWN_FORM_COUNT 28
 #define BOX_NAME_LENGTH 8
 
 #define EVO_MODE_NORMAL     0

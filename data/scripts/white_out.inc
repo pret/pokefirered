@@ -1,6 +1,6 @@
 EventScript_AfterWhiteOutHeal::
 	lockall
-	textcolor 1
+	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox Text_FirstShouldRestoreMonsHealth
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
 	call_if_unset FLAG_DEFEATED_BROCK, EventScript_AfterWhiteOutHealMsgPreBrock
@@ -23,8 +23,8 @@ EventScript_AfterWhiteOutHealMsg::
 
 EventScript_AfterWhiteOutMomHeal::
 	lockall
-	textcolor 1
-	applymovement LOCALID_MOM, Movement_WalkInPlaceFastestDown
+	textcolor NPC_TEXT_COLOR_FEMALE
+	applymovement LOCALID_MOM, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox Text_HadQuiteAnExperienceTakeRest
 	call EventScript_OutOfCenterPartyHeal
@@ -35,20 +35,17 @@ EventScript_AfterWhiteOutMomHeal::
 
 EventScript_FieldPoison::
 	lockall
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special TryFieldPoisonWhiteOut
 	waitstate
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_FieldWhiteOut
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FieldWhiteOut
 	releaseall
 	end
 
 EventScript_FieldWhiteOut::
-	checkmoney 1, 0
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_FieldWhiteOutNoMoney
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_FieldWhiteOutHasMoney
+	checkmoney 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_FieldWhiteOutNoMoney
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FieldWhiteOutHasMoney
 	end
 
 EventScript_FieldWhiteOutNoMoney::

@@ -38,8 +38,7 @@ VermilionCity_EventScript_Woman::
 VermilionCity_EventScript_OldMan1::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if_eq VermilionCity_EventScript_OldMan1SSAnneLeft
+	goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_OldMan1SSAnneLeft
 	msgbox VermilionCity_Text_DidYouSeeSSAnneInHarbor
 	release
 	end
@@ -52,34 +51,29 @@ VermilionCity_EventScript_OldMan1SSAnneLeft::
 VermilionCity_EventScript_FerrySailor::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if_eq VermilionCity_EventScript_CheckSeagallopPresent
+	goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_CheckSeagallopPresent
 	msgbox VermilionCity_Text_WelcomeToTheSSAnne
 	release
 	end
 
 VermilionCity_EventScript_CheckHasMysticTicket::
 	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
-	checkitem ITEM_MYSTIC_TICKET, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_SetResultFalse
+	checkitem ITEM_MYSTIC_TICKET
+	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
 	goto EventScript_SetResultTrue
 	end
 
 VermilionCity_EventScript_CheckHasAuroraTicket::
 	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
-	checkitem ITEM_AURORA_TICKET, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_SetResultFalse
+	checkitem ITEM_AURORA_TICKET
+	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
 	goto EventScript_SetResultTrue
 	end
 
 VermilionCity_EventScript_CheckSeagallopPresent::
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if_ge VermilionCity_EventScript_ChooseSeagallopDestRainbowPass
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if_ge VermilionCity_EventScript_ChooseSeagallopDestTriPass
+	goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5, VermilionCity_EventScript_ChooseSeagallopDestRainbowPass
+	goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1, VermilionCity_EventScript_ChooseSeagallopDestTriPass
 	msgbox VermilionCity_Text_TheShipSetSail
 	release
 	end
@@ -88,11 +82,9 @@ VermilionCity_EventScript_ChooseSeagallopDestRainbowPass::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	call VermilionCity_EventScript_CheckHasMysticTicket
-	compare VAR_RESULT, TRUE
-	goto_if_eq VermilionCity_EventScript_HasMysticTicket
+	goto_if_eq VAR_RESULT, TRUE, VermilionCity_EventScript_HasMysticTicket
 	call VermilionCity_EventScript_CheckHasAuroraTicket
-	compare VAR_RESULT, TRUE
-	goto_if_eq VermilionCity_EventScript_HasAuroraTicket
+	goto_if_eq VAR_RESULT, TRUE, VermilionCity_EventScript_HasAuroraTicket
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	message VermilionCity_Text_BoardSeagallopRainbowPass
 	waitmessage
@@ -101,8 +93,7 @@ VermilionCity_EventScript_ChooseSeagallopDestRainbowPass::
 
 VermilionCity_EventScript_HasMysticTicket::
 	call VermilionCity_EventScript_CheckHasAuroraTicket
-	compare VAR_RESULT, TRUE
-	goto_if_eq VermilionCity_EventScript_HasMysticAndAuroraTickets
+	goto_if_eq VAR_RESULT, TRUE, VermilionCity_EventScript_HasMysticAndAuroraTickets
 	call_if_unset FLAG_SHOWN_MYSTIC_TICKET, VermilionCity_EventScript_ShowMysticTicket
 	message VermilionCity_Text_BoardSeagallopFerry
 	waitmessage
@@ -199,12 +190,11 @@ VermilionCity_EventScript_ExitedTicketCheck::
 	end
 
 VermilionCity_EventScript_CheckTicket::
-	textcolor 0
-	applymovement LOCALID_FERRY_SAILOR, Movement_WalkInPlaceFastestLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	textcolor NPC_TEXT_COLOR_MALE
+	applymovement LOCALID_FERRY_SAILOR, Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	compare VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if_eq VermilionCity_EventScript_CheckSeagallopPresentTrigger
+	goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_CheckSeagallopPresentTrigger
 	msgbox VermilionCity_Text_DoYouHaveATicket
 	goto_if_unset FLAG_GOT_SS_TICKET, VermilionCity_EventScript_DontHaveSSTicket
 	msgbox VermilionCity_Text_FlashedSSTicket
@@ -220,10 +210,8 @@ VermilionCity_EventScript_DontHaveSSTicket::
 
 VermilionCity_EventScript_CheckSeagallopPresentTrigger::
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if_ge VermilionCity_EventScript_ChooseSeagallopDestRainbowPass
-	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if_ge VermilionCity_EventScript_ChooseSeagallopDestTriPass
+	goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5, VermilionCity_EventScript_ChooseSeagallopDestRainbowPass
+	goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1, VermilionCity_EventScript_ChooseSeagallopDestTriPass
 	msgbox VermilionCity_Text_TheShipSetSail
 	closemessage
 	goto VermilionCity_EventScript_WalkUpPier

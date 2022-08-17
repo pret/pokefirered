@@ -25,8 +25,7 @@ SaffronCity_PokemonCenter_1F_EventScript_Woman::
 SaffronCity_PokemonCenter_1F_EventScript_Youngster::
 	lock
 	faceplayer
-	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_eq SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone
+	goto_if_eq VAR_MAP_SCENE_SILPH_CO_11F, 1, SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone
 	msgbox SaffronCity_PokemonCenter_1F_Text_GreatIfEliteFourCameBeatRockets
 	release
 	end

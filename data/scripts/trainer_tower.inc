@@ -49,8 +49,7 @@ TrainerTower_EventScript_SetObjectsDoubles::
 	setflag HIDE_TRAINER_KNOCKOUT
 	setvar DISABLE_SINGLES_TRIGGER, TRUE
 	ttower_isfloorcleared
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerTower_EventScript_SetObjectsDoublesAlreadyBeaten
+	goto_if_eq VAR_RESULT, TRUE, TrainerTower_EventScript_SetObjectsDoublesAlreadyBeaten
 	setobjectxyperm       LOCALID_TRAINER_DOUBLES1, 10, 12
 	setobjectmovementtype LOCALID_TRAINER_DOUBLES1, MOVEMENT_TYPE_FACE_LEFT
 	setobjectxyperm       LOCALID_TRAINER_DOUBLES2, 10, 13
@@ -85,19 +84,17 @@ TrainerTower_OnFrame::
 TrainerTower_EventScript_EnterFloor::
 	setvar VAR_TEMP_2, 1
 	ttower_isfloorcleared
-	compare VAR_RESULT, FALSE
-	goto_if_eq TrainerTower_EventScript_EndEnterFloor
+	goto_if_eq VAR_RESULT, FALSE, TrainerTower_EventScript_EndEnterFloor
 	setvar DISABLE_SINGLES_TRIGGER, TRUE
 	setvar DISABLE_DOUBLES_TRIGGER, TRUE
 TrainerTower_EventScript_EndEnterFloor:
 	ttower_shouldexit
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerTower_EventScript_WarpToLobby
+	goto_if_eq VAR_RESULT, TRUE, TrainerTower_EventScript_WarpToLobby
 	end
 
 @ Never reached
 TrainerTower_EventScript_WarpToLobby::
-	warp MAP_TRAINER_TOWER_LOBBY, 255, 9, 7
+	warp MAP_TRAINER_TOWER_LOBBY, 9, 7
 	waitstate
 
 
@@ -130,8 +127,7 @@ TrainerTower_EventScript_DoDoubleBattle::
 	setvar VAR_0x8004, TRAINER_TOWER_FUNC_GET_SPEECH
 	setvar VAR_0x8005, TRAINER_TOWER_TEXT_INTRO
 	addvar VAR_TEMP_3, 1
-	compare VAR_TEMP_3, 1
-	goto_if_eq TrainerTower_EventScript_DoSecondTrainerIntro
+	goto_if_eq VAR_TEMP_3, 1, TrainerTower_EventScript_DoSecondTrainerIntro
 	setvar VAR_TEMP_3, 0
 TrainerTower_EventScript_DoSecondTrainerIntro:
 	copyvar VAR_0x8006, VAR_TEMP_3
@@ -221,7 +217,7 @@ TrainerTower_EventScript_SetFloorCleared:
 TrainerTower_EventScript_WarpToLobbyLost::
 	special HealPlayerParty
 	ttower_setlost
-	warp MAP_TRAINER_TOWER_LOBBY, 255, 9, 7
+	warp MAP_TRAINER_TOWER_LOBBY, 9, 7
 	waitstate
 
 
@@ -292,12 +288,12 @@ TrainerTower_Roof_EventScript_GivePrize:
 
 TrainerTower_Roof_EventScript_ReceivePrize:
 	msgbox TrainerTower_Roof_Text_ThisIsForYou
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_LEVEL_UP
 	message Text_ObtainedTheX
 	waitfanfare
 	waitmessage
-	getstdstring 2, STDSTRING_ITEMS_POCKET
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS_POCKET
 	msgbox Text_PutItemAway
 	call EventScript_RestorePrevTextColor
 	goto TrainerTower_Roof_EventScript_CheckFinalTime
@@ -341,8 +337,7 @@ TrainerTower_EventScript_SingleBattleTrigger::
 TrainerTower_EventScript_DoubleBattleTriggerTop::
 	setvar VAR_TEMP_3, 0
 	ttower_checkdoubles
-	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
-	goto_if_ne TrainerTower_EventScript_IneligibleForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, TrainerTower_EventScript_IneligibleForDoubleBattle
 	ttower_encountermusic
 	applymovement LOCALID_TRAINER_DOUBLES1, Movement_ExclamationMark
 	waitmovement 0
@@ -352,8 +347,7 @@ TrainerTower_EventScript_DoubleBattleTriggerTop::
 TrainerTower_EventScript_DoubleBattleTriggerBottom::
 	setvar VAR_TEMP_3, 1
 	ttower_checkdoubles
-	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
-	goto_if_ne TrainerTower_EventScript_IneligibleForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, TrainerTower_EventScript_IneligibleForDoubleBattle
 	ttower_encountermusic
 	applymovement LOCALID_TRAINER_DOUBLES2, Movement_ExclamationMark
 	waitmovement 0

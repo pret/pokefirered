@@ -113,11 +113,11 @@ extern struct Weather *const gWeatherPtr;
 
 void FadeScreen(u8 mode, s8 delay);
 
-void SetSav1Weather(u32);
+void SetSavedWeather(u32);
 u8 GetSav1Weather(void);
 
 void DoCurrentWeather(void);
-void SetSav1WeatherFromCurrMapHeader(void);
+void SetSavedWeatherFromCurrMapHeader(void);
 void SlightlyDarkenPalsInWeather(u16 *, u16 *, u32);
 void PlayRainStoppingSoundEffect(void);
 bool8 IsWeatherNotFadingIn(void);

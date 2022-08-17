@@ -3,7 +3,7 @@ ViridianCity_School_EventScript_PokemonJournal::
 	faceplayer
 	famechecker FAMECHECKER_OAK, 3
 	famechecker FAMECHECKER_DAISY, 3
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
@@ -13,7 +13,7 @@ EventScript_PokemonJournalUnused1::
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 1
 	famechecker FAMECHECKER_OAK, 4
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
@@ -22,7 +22,7 @@ EventScript_PokemonJournalUnused2::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 4
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
@@ -30,7 +30,7 @@ EventScript_PokemonJournalUnused2::
 FourIsland_PokemonCenter_1F_EventScript_PokemonJournal::
 	lockall
 	famechecker FAMECHECKER_DAISY, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureDaisyOak
 	releaseall
 	end
@@ -54,7 +54,7 @@ MtMoon_1F_EventScript_BaldingMan::
 PewterCity_Museum_1F_EventScript_PokemonJournalBrock::
 	lockall
 	famechecker FAMECHECKER_BROCK, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureBrock
 	releaseall
 	end
@@ -79,7 +79,7 @@ CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureMisty
 	release
 	end
@@ -87,7 +87,7 @@ CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty::
 VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge::
 	lockall
 	famechecker FAMECHECKER_LTSURGE, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureLtSurge
 	releaseall
 	end
@@ -96,7 +96,7 @@ CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_ERIKA, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureErika
 	release
 	end
@@ -105,7 +105,7 @@ FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_KOGA, 4
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureKoga
 	release
 	end
@@ -122,7 +122,7 @@ SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_SABRINA, 4
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureSabrina
 	release
 	end
@@ -138,7 +138,7 @@ CinnabarIsland_Gym_EventScript_BlaineFujiPhoto::
 FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal::
 	lockall
 	famechecker FAMECHECKER_BLAINE, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureBlaine
 	releaseall
 	end
@@ -155,7 +155,7 @@ FiveIsland_PokemonCenter_1F_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 3
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureLorelei
 	release
 	end
@@ -164,7 +164,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 2
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureBruno
 	release
 	end
@@ -190,7 +190,7 @@ SevenIsland_PokemonCenter_1F_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 3
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureAgatha
 	release
 	end
@@ -239,7 +239,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 4
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureLance
 	release
 	end
@@ -264,7 +264,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, 5
-	textcolor 3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PokemonJournal_Text_SpecialFeatureMrFuji
 	release
 	end

@@ -22,8 +22,7 @@ PokemonTower_1F_EventScript_Woman2::
 	lock
 	faceplayer
 	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq PokemonTower_1F_EventScript_Woman2MalePlayer
+	goto_if_eq VAR_RESULT, MALE, PokemonTower_1F_EventScript_Woman2MalePlayer
 	msgbox PokemonTower_1F_Text_ComeToPayRespectsGirl
 	release
 	end

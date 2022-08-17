@@ -8,8 +8,8 @@ SSAnne_2F_Room1_EventScript_Gentleman::
 	waitmessage
 	setvar VAR_0x8004, SPECIES_SNORLAX
 	special SetSeenMon
-	drawmonpic SPECIES_SNORLAX, 10, 3
+	showmonpic SPECIES_SNORLAX, 10, 3
 	waitbuttonpress
-	erasemonpic
+	hidemonpic
 	release
 	end

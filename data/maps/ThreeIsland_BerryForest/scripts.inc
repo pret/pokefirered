@@ -6,7 +6,7 @@ ThreeIsland_BerryForest_MapScripts::
 
 ThreeIsland_BerryForest_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST
-	setescapewarp MAP_THREE_ISLAND_BOND_BRIDGE, 255, 12, 6
+	setescapewarp MAP_THREE_ISLAND_BOND_BRIDGE, 12, 6
 	end
 
 ThreeIsland_BerryForest_EventScript_Lostelle::
@@ -23,15 +23,14 @@ ThreeIsland_BerryForest_EventScript_Lostelle::
 	waitse
 	playmoncry SPECIES_HYPNO, CRY_MODE_ENCOUNTER
 	waitmoncry
-	setwildbattle SPECIES_HYPNO, 30, ITEM_NONE
+	setwildbattle SPECIES_HYPNO, 30
 	dowildbattle
 	special QuestLog_CutRecording
 	applymovement LOCALID_LOSTELLE, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_BerryForest_Text_ThankYouHaveThis
 	giveitem ITEM_IAPAPA_BERRY
-	compare VAR_RESULT, FALSE
-	call_if_eq ThreeIsland_BerryForest_EventScript_NoRoomForBerry
+	call_if_eq VAR_RESULT, FALSE, ThreeIsland_BerryForest_EventScript_NoRoomForBerry
 	special BufferBigGuyOrBigGirlString
 	msgbox ThreeIsland_BerryForest_Text_LetsGoHome
 	closemessage
@@ -39,7 +38,7 @@ ThreeIsland_BerryForest_EventScript_Lostelle::
 	setflag FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
 	clearflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_LOSTELLE
-	warp MAP_TWO_ISLAND_JOYFUL_GAME_CORNER, 255, 6, 6
+	warp MAP_TWO_ISLAND_JOYFUL_GAME_CORNER, 6, 6
 	waitstate
 	release
 	end
@@ -49,11 +48,11 @@ ThreeIsland_BerryForest_EventScript_NoRoomForBerry::
 	return
 
 ThreeIsland_BerryForest_Movement_LostelleLookAround::
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 ThreeIsland_BerryForest_EventScript_WelcomeSign::

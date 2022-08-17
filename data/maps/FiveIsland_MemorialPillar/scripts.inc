@@ -13,7 +13,7 @@ FiveIsland_MemorialPillar_EventScript_MemorialMan::
 	waitmovement 0
 	delay 45
 	msgbox FiveIsland_MemorialPillar_Text_YourMonsLookHealthy
-	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox FiveIsland_MemorialPillar_Text_ThisIsWhereIBuriedMyOnix
 	release
@@ -27,8 +27,7 @@ FiveIsland_MemorialPillar_EventScript_AlreadyGotTM42::
 FiveIsland_MemorialPillar_EventScript_ReturnedForTM42::
 	msgbox FiveIsland_MemorialPillar_Text_StillHaveThingAsMyThanks
 	giveitem ITEM_TM42
-	compare VAR_RESULT, FALSE
-	goto_if_eq FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
+	goto_if_eq VAR_RESULT, FALSE, FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
 	call FiveIsland_MemorialPillar_EventScript_ReceivedTM42
 	release
 	end
@@ -40,40 +39,37 @@ FiveIsland_MemorialPillar_EventScript_Memorial::
 	goto_if_set FLAG_GOT_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
 	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
 	msgbox FiveIsland_MemorialPillar_Text_HereLiesTectonixLemonadeOffering
-	checkitem ITEM_LEMONADE, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade
+	checkitem ITEM_LEMONADE
+	goto_if_eq VAR_RESULT, TRUE, FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade
 	releaseall
 	end
 
 FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade::
 	msgbox FiveIsland_MemorialPillar_Text_LeaveAnotherLemonadeOffering, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FiveIsland_MemorialPillar_EventScript_PlaceLemonade
+	goto_if_eq VAR_RESULT, YES, FiveIsland_MemorialPillar_EventScript_PlaceLemonade
 	releaseall
 	end
 
 FiveIsland_MemorialPillar_EventScript_PlaceLemonade::
-	removeitem ITEM_LEMONADE, 1
+	removeitem ITEM_LEMONADE
 	msgbox FiveIsland_MemorialPillar_Text_PlacedCanOfLemonade
 	closemessage
-	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 45
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_MemorialPillar_Text_ThankYouPleaseTakeThis
 	giveitem ITEM_TM42
-	compare VAR_RESULT, FALSE
-	goto_if_eq FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
+	goto_if_eq VAR_RESULT, FALSE, FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
 	call FiveIsland_MemorialPillar_EventScript_ReceivedTM42
 	releaseall
 	end
 
 FiveIsland_MemorialPillar_EventScript_ReceivedTM42::
 	msgbox FiveIsland_MemorialPillar_Text_BeGoodToYourMonsToo
-	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_MEMORIAL_MAN, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	setflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	return

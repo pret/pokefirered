@@ -8,10 +8,8 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	faceplayer
 	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
+	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
 	closemessage
 	applymovement LOCALID_MOM, Movement_FaceOriginalDirection
 	waitmovement 0
@@ -37,18 +35,15 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 @ Displays special text if interacted with from side or back (which are normally inaccessible)
 PalletTown_PlayersHouse_1F_EventScript_TV::
 	lockall
-	compare VAR_FACING, DIR_NORTH
-	goto_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreen
+	goto_if_eq VAR_FACING, DIR_NORTH, PalletTown_PlayersHouse_1F_EventScript_TVScreen
 	msgbox PalletTown_PlayersHouse_1F_Text_OopsWrongSide
 	releaseall
 	end
 
 PalletTown_PlayersHouse_1F_EventScript_TVScreen::
 	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
+	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
 	releaseall
 	end
 

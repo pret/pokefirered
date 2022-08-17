@@ -10,12 +10,9 @@ PokemonLeague_ChampionsRoom_MapScripts::
 PokemonLeague_ChampionsRoom_OnResume::
 	setvar VAR_0x8004, 4
 	call PokemonLeague_EventScript_DoLightingEffect
-	compare VAR_STARTER_MON, 2
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
+	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
+	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
 	end
 
 PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle::
@@ -51,7 +48,7 @@ PokemonLeague_ChampionsRoom_OnFrame::
 
 PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	lockall
-	textcolor 0
+	textcolor NPC_TEXT_COLOR_MALE
 	setflag FLAG_TEMP_2
 	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerEnter
 	waitmovement 0
@@ -79,14 +76,14 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	waitmovement 0
 	delay 25
 	specialvar VAR_RESULT, GetStarterSpecies
-	getspeciesname 0, VAR_RESULT
+	bufferspeciesname STR_VAR_1, VAR_RESULT
 	msgbox PokemonLeague_ChampionsRoom_Text_OakCongratulations
-	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFastestRight
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival
 	closemessage
-	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	msgbox PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe
@@ -96,7 +93,7 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerExit
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
-	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12
+	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 5, 12
 	waitstate
 	releaseall
 	end
@@ -107,21 +104,15 @@ PokemonLeague_ChampionsRoom_EventScript_QuestLogEnd::
 	end
 
 PokemonLeague_ChampionsRoom_EventScript_Battle::
-	compare VAR_STARTER_MON, 2
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
+	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
+	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
 	return
 
 PokemonLeague_ChampionsRoom_EventScript_Rematch::
-	compare VAR_STARTER_MON, 2
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
-	compare VAR_STARTER_MON, 1
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
-	compare VAR_STARTER_MON, 0
-	call_if_eq PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
+	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
+	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
+	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
 	return
 
 PokemonLeague_ChampionsRoom_EventScript_Intro::
@@ -186,7 +177,7 @@ PokemonLeague_ChampionsRoom_Movement_PlayerExit::
 
 PokemonLeague_ChampionsRoom_Movement_PlayerWatchOakEnter::
 	delay_8
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_16
 	delay_16
 	delay_16
@@ -194,7 +185,7 @@ PokemonLeague_ChampionsRoom_Movement_PlayerWatchOakEnter::
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 PokemonLeague_ChampionsRoom_Movement_OakEnter::
@@ -208,7 +199,7 @@ PokemonLeague_ChampionsRoom_Movement_OakEnter::
 	walk_left
 	walk_up
 	walk_up
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_16
 	step_end
 
@@ -234,5 +225,5 @@ PokemonLeague_ChampionsRoom_Movement_RivalWatchOakEnter::
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end

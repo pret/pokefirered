@@ -1,21 +1,20 @@
 SafariZone_EventScript_OutOfBallsMidBattle::
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3
 	special ExitSafariMode
-	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
+	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 1
 	end
 
 SafariZone_EventScript_Exit::
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1
 	special ExitSafariMode
-	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
+	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 1
 	waitstate
 	end
 
 SafariZone_EventScript_RetirePrompt::
 	lockall
 	msgbox SafariZone_Text_WouldYouLikeToExit, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SafariZone_EventScript_Retire
+	goto_if_eq VAR_RESULT, YES, SafariZone_EventScript_Retire
 	releaseall
 	end
 

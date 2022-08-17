@@ -439,7 +439,7 @@ void CreateGroupMemberObjectsInvisible(u8 * sprite_ids, s32 group)
     for (i = 0; i < 5; i++)
     {
         s32 obj_id = 5 * group + i;
-        sprite_ids[obj_id] = sprite_new(OBJ_EVENT_GFX_MAN, obj_id - 0x38, sUnionPartnerCoords[group][0] + sFacingDirectionOffsets[i][0], sUnionPartnerCoords[group][1] + sFacingDirectionOffsets[i][1], 3, 1);
+        sprite_ids[obj_id] = CreateVirtualObject(OBJ_EVENT_GFX_MAN, obj_id - 0x38, sUnionPartnerCoords[group][0] + sFacingDirectionOffsets[i][0], sUnionPartnerCoords[group][1] + sFacingDirectionOffsets[i][1], 3, 1);
         RfuUnionObjectToggleInvisibility(obj_id - 0x38, TRUE);
     }
 }
@@ -653,7 +653,7 @@ bool32 RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(struct UnkStruct_Main0 *mai
 
 static void UnionPartnerObjectSetFacing(s32 member, s32 group, u8 direction)
 {
-    TurnObjectEvent(5 * group - 0x38 + member, direction);
+    TurnVirtualObject(5 * group - 0x38 + member, direction);
 }
 
 void UpdateUnionGroupMemberFacing(u32 member, u32 group, struct UnkStruct_Main0 *main0_p)

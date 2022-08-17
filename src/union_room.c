@@ -4657,7 +4657,7 @@ static void HandleCancelTrade(bool32 unlockObjs)
 static void UR_EnableScriptContext2AndFreezeObjectEvents(void)
 {
     ScriptContext2_Enable();
-    ScriptFreezeObjectEvents();
+    FreezeObjects_WaitForPlayer();
 }
 
 static u8 GetSinglePartnerSpriteGenderParam(s32 linkPlayer)

@@ -73,9 +73,8 @@ CinnabarIsland_Gym_EventScript_DefeatedBlaine::
 
 CinnabarIsland_Gym_EventScript_GiveTM38::
 	msgbox CinnabarIsland_Gym_Text_ExplainVolcanoBadge
-	checkitemspace ITEM_TM38, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq CinnabarIsland_Gym_EventScript_NoRoomForTM38
+	checkitemspace ITEM_TM38
+	goto_if_eq VAR_RESULT, FALSE, CinnabarIsland_Gym_EventScript_NoRoomForTM38
 	giveitem_msg CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine, ITEM_TM38
 	setflag FLAG_GOT_TM38_FROM_BLAINE
 	msgbox CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove
@@ -217,10 +216,8 @@ CinnabarIsland_Gym_EventScript_Quz1Right::
 CinnabarIsland_Gym_EventScript_Quiz1::
 	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
 	msgbox CinnabarIsland_Gym_Text_QuizQuestion1, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz1Correct
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz1Incorrect
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz1Correct
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz1Incorrect
 	end
 
 CinnabarIsland_Gym_EventScript_CorrectAnswer::
@@ -263,11 +260,9 @@ CinnabarIsland_Gym_EventScript_Quiz1Incorrect::
 	end
 
 CinnabarIsland_Gym_EventScript_BattleQuinn::
-	compare VAR_TEMP_1, 0
-	call_if_eq CinnabarIsland_Gym_EventScript_QuinnApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq CinnabarIsland_Gym_EventScript_QuinnApproachRight
-	textcolor 0
+	call_if_eq VAR_TEMP_1, 0, CinnabarIsland_Gym_EventScript_QuinnApproachLeft
+	call_if_eq VAR_TEMP_1, 1, CinnabarIsland_Gym_EventScript_QuinnApproachRight
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Gym_Text_QuinnIntro
 	trainerbattle_no_intro TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_Text_QuinnDefeat
 	goto_if_set FLAG_CINNABAR_GYM_QUIZ_1, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
@@ -276,13 +271,13 @@ CinnabarIsland_Gym_EventScript_BattleQuinn::
 	end
 
 CinnabarIsland_Gym_EventScript_QuinnApproachLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_QUINN, CinnabarIsland_Gym_Movement_QuinnApproachLeft
 	waitmovement 0
 	return
 
 CinnabarIsland_Gym_EventScript_QuinnApproachRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_QUINN, CinnabarIsland_Gym_Movement_QuinnApproachRight
 	waitmovement 0
 	return
@@ -311,10 +306,8 @@ CinnabarIsland_Gym_EventScript_Quiz2Right::
 CinnabarIsland_Gym_EventScript_Quiz2::
 	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
 	msgbox CinnabarIsland_Gym_Text_QuizQuestion2, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz2Incorrect
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz2Correct
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz2Incorrect
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz2Correct
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz2Correct::
@@ -339,11 +332,9 @@ CinnabarIsland_Gym_EventScript_Quiz2Incorrect::
 	end
 
 CinnabarIsland_Gym_EventScript_BattleAvery::
-	compare VAR_TEMP_1, 0
-	call_if_eq CinnabarIsland_Gym_EventScript_AveryApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq CinnabarIsland_Gym_EventScript_AveryApproachRight
-	textcolor 0
+	call_if_eq VAR_TEMP_1, 0, CinnabarIsland_Gym_EventScript_AveryApproachLeft
+	call_if_eq VAR_TEMP_1, 1, CinnabarIsland_Gym_EventScript_AveryApproachRight
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Gym_Text_AveryIntro
 	trainerbattle_no_intro TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_Text_AveryDefeat
 	goto_if_set FLAG_CINNABAR_GYM_QUIZ_2, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
@@ -372,13 +363,13 @@ CinnabarIsland_Gym_Movement_AveryApproachLeft::
 CinnabarIsland_Gym_Movement_AveryApproachRight::
 	walk_up
 	walk_up
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 CinnabarIsland_Gym_Movement_PlayerFaceAvery::
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 CinnabarIsland_Gym_EventScript_Quiz3Left::
@@ -396,10 +387,8 @@ CinnabarIsland_Gym_EventScript_Quiz3Right::
 CinnabarIsland_Gym_EventScript_Quiz3::
 	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
 	msgbox CinnabarIsland_Gym_Text_QuizQuestion3, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz3Incorrect
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz3Correct
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz3Incorrect
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz3Correct
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz3Correct::
@@ -424,11 +413,9 @@ CinnabarIsland_Gym_EventScript_Quiz3Incorrect::
 	end
 
 CinnabarIsland_Gym_EventScript_BattleRamon::
-	compare VAR_TEMP_1, 0
-	call_if_eq CinnabarIsland_Gym_EventScript_RamonApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq CinnabarIsland_Gym_EventScript_RamonApproachRight
-	textcolor 0
+	call_if_eq VAR_TEMP_1, 0, CinnabarIsland_Gym_EventScript_RamonApproachLeft
+	call_if_eq VAR_TEMP_1, 1, CinnabarIsland_Gym_EventScript_RamonApproachRight
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Gym_Text_RamonIntro
 	trainerbattle_no_intro TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_Text_RamonDefeat
 	goto_if_set FLAG_CINNABAR_GYM_QUIZ_3, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
@@ -437,13 +424,13 @@ CinnabarIsland_Gym_EventScript_BattleRamon::
 	end
 
 CinnabarIsland_Gym_EventScript_RamonApproachLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_RAMON, CinnabarIsland_Gym_Movement_RamonApproachLeft
 	waitmovement 0
 	return
 
 CinnabarIsland_Gym_EventScript_RamonApproachRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_RAMON, CinnabarIsland_Gym_Movement_RamonApproachRight
 	waitmovement 0
 	return
@@ -472,10 +459,8 @@ CinnabarIsland_Gym_EventScript_Quiz4Right::
 CinnabarIsland_Gym_EventScript_Quiz4::
 	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
 	msgbox CinnabarIsland_Gym_Text_QuizQuestion4, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz4Incorrect
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz4Correct
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz4Incorrect
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz4Correct
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz4Correct::
@@ -500,11 +485,9 @@ CinnabarIsland_Gym_EventScript_Quiz4Incorrect::
 	end
 
 CinnabarIsland_Gym_EventScript_BattleDerek::
-	compare VAR_TEMP_1, 0
-	call_if_eq CinnabarIsland_Gym_EventScript_DerekApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq CinnabarIsland_Gym_EventScript_DerekApproachRight
-	textcolor 0
+	call_if_eq VAR_TEMP_1, 0, CinnabarIsland_Gym_EventScript_DerekApproachLeft
+	call_if_eq VAR_TEMP_1, 1, CinnabarIsland_Gym_EventScript_DerekApproachRight
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Gym_Text_DerekIntro
 	trainerbattle_no_intro TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_Text_DerekDefeat
 	goto_if_set FLAG_CINNABAR_GYM_QUIZ_4, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
@@ -513,13 +496,13 @@ CinnabarIsland_Gym_EventScript_BattleDerek::
 	end
 
 CinnabarIsland_Gym_EventScript_DerekApproachLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_DEREK, CinnabarIsland_Gym_Movement_DerekApproachLeft
 	waitmovement 0
 	return
 
 CinnabarIsland_Gym_EventScript_DerekApproachRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_DEREK, CinnabarIsland_Gym_Movement_DerekApproachRight
 	waitmovement 0
 	return
@@ -548,10 +531,8 @@ CinnabarIsland_Gym_EventScript_Quiz5Right::
 CinnabarIsland_Gym_EventScript_Quiz5::
 	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
 	msgbox CinnabarIsland_Gym_Text_QuizQuestion5, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz5Correct
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz5Incorrect
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz5Correct
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz5Incorrect
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz5Correct::
@@ -576,11 +557,9 @@ CinnabarIsland_Gym_EventScript_Quiz5Incorrect::
 	end
 
 CinnabarIsland_Gym_EventScript_BattleDusty::
-	compare VAR_TEMP_1, 0
-	call_if_eq CinnabarIsland_Gym_EventScript_DustyApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq CinnabarIsland_Gym_EventScript_DustyApproachRight
-	textcolor 0
+	call_if_eq VAR_TEMP_1, 0, CinnabarIsland_Gym_EventScript_DustyApproachLeft
+	call_if_eq VAR_TEMP_1, 1, CinnabarIsland_Gym_EventScript_DustyApproachRight
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Gym_Text_DustyIntro
 	trainerbattle_no_intro TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_Text_DustyDefeat
 	goto_if_set FLAG_CINNABAR_GYM_QUIZ_5, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
@@ -589,13 +568,13 @@ CinnabarIsland_Gym_EventScript_BattleDusty::
 	end
 
 CinnabarIsland_Gym_EventScript_DustyApproachLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_DUSTY, CinnabarIsland_Gym_Movement_DustyApproachLeft
 	waitmovement 0
 	return
 
 CinnabarIsland_Gym_EventScript_DustyApproachRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_DUSTY, CinnabarIsland_Gym_Movement_DustyApproachRight
 	waitmovement 0
 	return
@@ -624,10 +603,8 @@ CinnabarIsland_Gym_EventScript_Quiz6Right::
 CinnabarIsland_Gym_EventScript_Quiz6::
 	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
 	msgbox CinnabarIsland_Gym_Text_QuizQuestion6, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz6Incorrect
-	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz6Correct
+	goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz6Incorrect
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz6Correct
 	end
 
 CinnabarIsland_Gym_EventScript_Quiz6Correct::
@@ -652,11 +629,9 @@ CinnabarIsland_Gym_EventScript_Quiz6Incorrect::
 	end
 
 CinnabarIsland_Gym_EventScript_BattleZac::
-	compare VAR_TEMP_1, 0
-	call_if_eq CinnabarIsland_Gym_EventScript_ZacApproachLeft
-	compare VAR_TEMP_1, 1
-	call_if_eq CinnabarIsland_Gym_EventScript_ZacApproachRight
-	textcolor 0
+	call_if_eq VAR_TEMP_1, 0, CinnabarIsland_Gym_EventScript_ZacApproachLeft
+	call_if_eq VAR_TEMP_1, 1, CinnabarIsland_Gym_EventScript_ZacApproachRight
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CinnabarIsland_Gym_Text_ZacIntro
 	trainerbattle_no_intro TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_Text_ZacDefeat
 	goto_if_set FLAG_CINNABAR_GYM_QUIZ_6, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
@@ -665,13 +640,13 @@ CinnabarIsland_Gym_EventScript_BattleZac::
 	end
 
 CinnabarIsland_Gym_EventScript_ZacApproachLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_ZAC, CinnabarIsland_Gym_Movement_ZacApproachLeft
 	waitmovement 0
 	return
 
 CinnabarIsland_Gym_EventScript_ZacApproachRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_ZAC, CinnabarIsland_Gym_Movement_ZacApproachRight
 	waitmovement 0
 	return

@@ -439,7 +439,7 @@ static void LoadSaveblockObjEventScripts(void)
     }
 }
 
-void Overworld_SetMapObjTemplateCoords(u8 localId, s16 x, s16 y)
+void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
 {
     int i;
     struct ObjectEventTemplate * savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
@@ -454,7 +454,7 @@ void Overworld_SetMapObjTemplateCoords(u8 localId, s16 x, s16 y)
     }
 }
 
-void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
+void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 {
     s32 i;
 
@@ -757,7 +757,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
     MapResetTrainerRematches(mapGroup, mapNum);
-    SetSav1WeatherFromCurrMapHeader();
+    SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
@@ -792,7 +792,7 @@ static void LoadMapFromWarp(bool32 unused)
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
     MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-    SetSav1WeatherFromCurrMapHeader();
+    SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (isOutdoors)
         FlagClear(FLAG_SYS_FLASH_ACTIVE);
@@ -814,7 +814,7 @@ static void sub_80559A8(void)
     LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
     TrySetMapSaveWarpStatus();
-    SetSav1WeatherFromCurrMapHeader();
+    SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     sub_8110920();
@@ -957,7 +957,7 @@ static void SetDefaultFlashLevel(void)
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel;
 }
 
-void Overworld_SetFlashLevel(s32 flashLevel)
+void SetFlashLevel(s32 flashLevel)
 {
     if (flashLevel < 0 || flashLevel > gMaxFlashLevel)
         flashLevel = 0;

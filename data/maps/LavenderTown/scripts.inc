@@ -12,8 +12,7 @@ LavenderTown_EventScript_LittleGirl::
 	lock
 	faceplayer
 	msgbox LavenderTown_Text_DoYouBelieveInGhosts, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq LavenderTown_EventScript_LittleGirlBelieve
+	goto_if_eq VAR_RESULT, YES, LavenderTown_EventScript_LittleGirlBelieve
 	msgbox LavenderTown_Text_JustImaginingWhiteHand
 	release
 	end

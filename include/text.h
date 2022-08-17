@@ -169,7 +169,7 @@ enum {
     FONT_3,
     FONT_4,
     FONT_5,
-    FONT_6,
+    FONT_BRAILLE,
 };
 
 enum

@@ -1744,7 +1744,7 @@ Move_DETECT::
 	createvisualtask AnimTask_BlendSelected, 10, 2, 1, 0, 9, RGB_WHITE
 	delay 18
 	playsewithpan SE_M_DETECT, 192
-	createsprite gSpriteTemplate_83BF480, ANIM_ATTACKER, 13, 20, -20
+	createsprite gSpinningSparkleSpriteTemplate, ANIM_ATTACKER, 13, 20, -20
 	waitforvisualfinish
 	delay 10
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 9, 0, 0
@@ -7681,7 +7681,7 @@ Move_DISABLE::
 	monbgprio_28 1
 	setalpha 8, 8
 	playsewithpan SE_M_DETECT, 192
-	createsprite gSpriteTemplate_83BF480, ANIM_ATTACKER, 13, 24, -16
+	createsprite gSpinningSparkleSpriteTemplate, ANIM_ATTACKER, 13, 24, -16
 	waitforvisualfinish
 	createvisualtask AnimTask_GrowAndGreyscale, 5,
 	loopsewithpan SE_M_BIND, 63, 15, 4

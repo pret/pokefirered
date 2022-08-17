@@ -4219,8 +4219,8 @@ extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
 
 // battle anim task
-extern const u32 gUnknown_D2EC24_Gfx[];
-extern const u32 gUnknown_D2EC24_Tilemap[];
+extern const u32 gUnusedLevelupAnimationGfx[];
+extern const u32 gUnusedLevelupAnimationTilemap[];
 extern const u32 gCureBubblesGfx[];
 extern const u32 gCureBubblesPal[];
 extern const u32 gCureBubblesTilemap[];

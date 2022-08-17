@@ -4418,7 +4418,7 @@ static void AnimBowMon_Step1(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     StoreSpriteCallbackInData6(sprite, AnimBowMon_Step1_Callback);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void AnimBowMon_Step1_Callback(struct Sprite* sprite)
@@ -4448,7 +4448,7 @@ static void AnimBowMon_Step2(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     StoreSpriteCallbackInData6(sprite, AnimBowMon_Step4);
-    sprite->callback = TranslateMonSpriteLinear;
+    sprite->callback = TranslateSpriteLinearById;
 }
 
 static void AnimBowMon_Step3(struct Sprite* sprite)
@@ -4996,7 +4996,7 @@ void AnimTask_FadeScreenBlue(u8 taskId)
     gTasks[taskId].data[7] = 13;
     gTasks[taskId].data[8] = 14;
     gTasks[taskId].data[9] = 15;
-    b = SelectBattlerSpritePalettes(1, 1, 1, 1);
+    b = GetBattleMonSpritePalettesMask(1, 1, 1, 1);
     c = a | b;
     StorePointerInVars(&gTasks[taskId].data[14], &gTasks[taskId].data[15], (void *)c);
     b = b | (0x10000 << IndexOfSpritePaletteTag(ANIM_TAG_MOON));

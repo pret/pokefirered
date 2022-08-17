@@ -531,7 +531,7 @@ static void AnimUnusedIceCrystalThrow(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[2] + targetX;
     sprite->data[3] = gBattleAnimArgs[1] + attackerY;
     sprite->data[4] = gBattleAnimArgs[3] + targetY;
-    SetupLinearTranslationWithFixedDuration(sprite);
+    ConvertPosDataToTranslateLinearData(sprite);
     // won't match with while loop
     for (; (targetX >= -32 && targetX <= DISPLAY_WIDTH + 32) && (targetY >= -32 && targetY <= DISPLAY_HEIGHT + 32);
             targetX += sprite->data[1], targetY += sprite->data[2])
@@ -548,7 +548,7 @@ static void AnimUnusedIceCrystalThrow(struct Sprite *sprite)
     sprite->data[2] = targetX;
     sprite->data[3] = attackerY;
     sprite->data[4] = targetY;
-    SetupLinearTranslationWithFixedDuration(sprite);
+    ConvertPosDataToTranslateLinearData(sprite);
     sprite->data[3] = gBattleAnimArgs[5];
     sprite->data[4] = gBattleAnimArgs[6];
     sprite->callback = AnimUnusedIceCrystalThrow_Step;
@@ -686,7 +686,7 @@ static void AnimSwirlingSnowball(struct Sprite *sprite)
     sprite->x2 = sprite->y2 = 0;
     for (i = 0; i < 8; ++i)
         sprite->data[i] = tempDataHolder[i];
-    sprite->callback = InitAndStartAnimFastLinearTranslationWithSpeed;
+    sprite->callback = InitAnimFastLinearTranslationWithSpeedAndPos;
     StoreSpriteCallbackInData6(sprite, AnimSwirlingSnowball_Step1);
 }
 

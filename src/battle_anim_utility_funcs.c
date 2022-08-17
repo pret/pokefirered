@@ -54,7 +54,7 @@ void AnimTask_BlendSelected(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     
-    selectedPalettes |= SelectBattlerSpritePalettes(
+    selectedPalettes |= GetBattleMonSpritePalettesMask(
         (gBattleAnimArgs[0] >>  7) & 1,
         (gBattleAnimArgs[0] >>  8) & 1,
         (gBattleAnimArgs[0] >>  9) & 1,
@@ -330,7 +330,7 @@ void AnimTask_SetUpCurseBackground(u8 taskId)
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    newSpriteId = CreateCloneOfSpriteInWindowMode(gBattleAnimAttacker, spriteId, species);
+    newSpriteId = CreateInvisibleSpriteCopy(gBattleAnimAttacker, spriteId, species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_tilemap);
     if (IsContest())
@@ -446,11 +446,11 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     u8 battlerSpriteId;
 
     battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler1];
-    spriteId = CreateCloneOfSpriteInWindowMode(sAnimStatsChangeData->battler1, battlerSpriteId, sAnimStatsChangeData->species);
+    spriteId = CreateInvisibleSpriteCopy(sAnimStatsChangeData->battler1, battlerSpriteId, sAnimStatsChangeData->species);
     if (sAnimStatsChangeData->data[3])
     {
         battlerSpriteId = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
-        newSpriteId = CreateCloneOfSpriteInWindowMode(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
+        newSpriteId = CreateInvisibleSpriteCopy(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
     }
     GetBattleAnimBg1Data(&animBgData);
     if (sAnimStatsChangeData->data[0] == 0)
@@ -580,7 +580,7 @@ static void StatsChangeAnimation_Step3(u8 taskId)
 
 void AnimTask_Flash(u8 taskId)
 {
-    u32 selectedPalettes = SelectBattlerSpritePalettes(1, 1, 1, 1);
+    u32 selectedPalettes = GetBattleMonSpritePalettesMask(1, 1, 1, 1);
 
     sub_80BB790(selectedPalettes, 0);
     gTasks[taskId].data[14] = selectedPalettes >> 16;
@@ -753,9 +753,9 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 ar
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
     else
         species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler1]], MON_DATA_SPECIES);
-    spriteId = CreateCloneOfSpriteInWindowMode(battler1, gBattlerSpriteIds[battler1], species);
+    spriteId = CreateInvisibleSpriteCopy(battler1, gBattlerSpriteIds[battler1], species);
     if (arg4)
-        newSpriteId = CreateCloneOfSpriteInWindowMode(battler2, gBattlerSpriteIds[battler2], species);
+        newSpriteId = CreateInvisibleSpriteCopy(battler2, gBattlerSpriteIds[battler2], species);
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     if (IsContest())

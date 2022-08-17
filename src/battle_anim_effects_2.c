@@ -1747,7 +1747,7 @@ void AnimCoinThrow(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
     sprite->data[4] = r7;
-    sprite->callback = BattleAnim_InitAndRunLinearTranslationWithDuration;
+    sprite->callback = InitAnimLinearTranslationWithSpeedAndPos;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 

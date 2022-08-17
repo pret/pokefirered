@@ -14,6 +14,10 @@ struct MonCoords
     u8 y_offset;
 };
 
+#define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
+#define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
+#define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
+
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[][13];
 extern const u16 gUnknown_8251CB8[];

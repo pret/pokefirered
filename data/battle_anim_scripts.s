@@ -891,7 +891,7 @@ Move_TWINEEDLE::
 
 Move_FIRE_BLAST::
 	loadspritegfx ANIM_TAG_SMALL_EMBER
-	createsoundtask sub_80DCE10, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
+	createsoundtask SoundTask_FireBlast, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
 	call FireBlastRing
 	call FireBlastRing
 	call FireBlastRing
@@ -8656,7 +8656,7 @@ Move_HYPER_VOICE::
 	end
 
 HyperVoiceEffect::
-	createvisualtask sub_80DD334, 5
+	createvisualtask SoundTask_PlayCryWithEcho, 5
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 8, 0, 1023
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 5, 0, 0
 	createsprite gHyperVoiceRingSpriteTemplate, ANIM_ATTACKER, 0, 45, 0, 0, 0, 0, 0, 1

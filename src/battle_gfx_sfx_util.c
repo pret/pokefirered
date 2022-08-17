@@ -140,7 +140,7 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
         gSprites[spriteId].animPaused = 0;
     else if (gSprites[spriteId].animEnded)
     {
-        gSprites[spriteId].callback = SpriteCB_SetToDummy3;
+        gSprites[spriteId].callback = SetIdleSpriteCallback;
         StartSpriteAffineAnim(&gSprites[spriteId], 0);
         sprite->callback = SpriteCallbackDummy;
     }

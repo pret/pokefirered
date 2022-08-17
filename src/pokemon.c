@@ -1856,7 +1856,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
 {
     u32 personality;
 
-    if ((u8)(unownLetter - 1) < 28)
+    if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
     {
         u16 actualLetter;
 
@@ -3919,7 +3919,7 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     *hpSwitchout = gBattleMons[battlerId].hp;
 
     for (i = 0; i < 8; i++)
-        gBattleMons[battlerId].statStages[i] = 6;
+        gBattleMons[battlerId].statStages[i] = DEFAULT_STAT_STAGE;
 
     gBattleMons[battlerId].status2 = 0;
     UpdateSentPokesToOpponentValue(battlerId);

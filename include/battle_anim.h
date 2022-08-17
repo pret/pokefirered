@@ -478,7 +478,7 @@ void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId);
 extern const struct SpriteTemplate gFlashingHitSplatSpriteTemplate;
 extern const struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
-u32 UnpackSelectedBattleAnimPalettes(s16 selector);
+u32 UnpackSelectedBattlePalettes(s16 selector);
 void AnimTask_CurseBlendEffect(u8 taskId);
 void AnimTask_BlendColorCycleExclude(u8 taskId);
 void AnimTask_BlendColorCycleByTag(u8 taskId);

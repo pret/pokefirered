@@ -52,7 +52,7 @@ const u8 gBattleIntroRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, RE
 //  10: Enemy battler right
 void AnimTask_BlendSelected(u8 taskId)
 {
-    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
     
     selectedPalettes |= GetBattleMonSpritePalettesMask(
         (gBattleAnimArgs[0] >>  7) & 1,
@@ -79,7 +79,7 @@ void AnimTask_BlendExcept(u8 taskId)
     u8 animBattlers[2];
 
     animBattlers[1] = 0xFF;
-    selectedPalettes = UnpackSelectedBattleAnimPalettes(1);
+    selectedPalettes = UnpackSelectedBattlePalettes(1);
     switch (gBattleAnimArgs[0])
     {
     case 2:
@@ -122,7 +122,7 @@ void AnimTask_BlendExcept(u8 taskId)
 
 void AnimTask_SetCamouflageBlend(u8 taskId)
 {
-    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
     
     switch (gBattleTerrain)
     {

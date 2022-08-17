@@ -12,8 +12,6 @@
 #include "trig.h"
 #include "util.h"
 
-#define ISO_RANDOMIZE2(val)(1103515245 * (val) + 12345)
-
 static void AnimRainDrop(struct Sprite *);
 static void AnimRainDrop_Step(struct Sprite *);
 static void AnimWaterBubbleProjectile(struct Sprite *);
@@ -55,9 +53,8 @@ static void AnimTask_WaterSport_Step(u8);
 static void CreateWaterSportDroplet(struct Task *);
 static void CreateWaterPulseRingBubbles(struct Sprite *, s32, s32);
 
-// Both unused? Comment copied from pokeemerald
-static const u8 gUnknown_83E44F4[] = INCBIN_U8("graphics/battle_anims/unk_83E44F4.4bpp");
-static const u8 gUnknown_83E4874[] = INCBIN_U8("graphics/battle_anims/unk_83E4874.bin");
+static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unk_83E44F4.4bpp");
+static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unk_83E4874.bin");
 
 static const union AnimCmd sAnim_RainDrop[] =
 {
@@ -488,8 +485,8 @@ void AnimTask_CreateRaindrops(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] % gTasks[taskId].data[2] == 1)
     {
-        x = Random() % 240;
-        y = Random() % 80;
+        x = Random() % DISPLAY_WIDTH;
+        y = Random() % (DISPLAY_HEIGHT / 2);
         CreateSprite(&gRainDropSpriteTemplate, x, y, 4);
     }
     if (gTasks[taskId].data[0] == gTasks[taskId].data[3])
@@ -521,23 +518,23 @@ static void AnimWaterBubbleProjectile(struct Sprite *sprite)
 
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) - gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[1];
         sprite->animPaused = TRUE;
     }
     else
     {
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[0];
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[1];
         sprite->animPaused = TRUE;
     }
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[6];
     sprite->data[1] = sprite->x;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[3] = sprite->y;
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     InitAnimLinearTranslation(sprite);
     spriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     sprite->data[5] = spriteId;
@@ -599,9 +596,9 @@ static void AnimAuroraBeamRings(struct Sprite *sprite)
         unkArg = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = sprite->x;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + unkArg;
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + unkArg;
     sprite->data[3] = sprite->y;
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     InitAnimLinearTranslation(sprite);
     sprite->callback = AnimAuroraBeamRings_Step;
     sprite->affineAnimPaused = TRUE;
@@ -653,9 +650,9 @@ static void AnimToTargetInSinWave(struct Sprite *sprite)
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = 30;
     sprite->data[1] = sprite->x;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[3] = sprite->y;
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0xD200 / sprite->data[0];
     sprite->data[7] = gBattleAnimArgs[3];
@@ -708,8 +705,8 @@ static void AnimHydroCannonCharge(struct Sprite *sprite)
 {
     u8 priority;
 
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
     sprite->y2 = -10;
     priority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
     if (!IsContest())
@@ -755,14 +752,14 @@ static void AnimHydroCannonBeam(struct Sprite *sprite)
     else
         animType = FALSE;
     if ((u8)gBattleAnimArgs[5] == 0)
-        coordType = 3;
+        coordType = BATTLER_COORD_Y_PIC_OFFSET;
     else
         coordType = 1;
     InitSpritePosToAnimAttacker(sprite, animType);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, coordType) + gBattleAnimArgs[3];
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
@@ -1173,8 +1170,8 @@ static u8 GetWaterSpoutPowerForAnim(void)
 static void CreateWaterSpoutLaunchDroplets(struct Task *task, u8 taskId)
 {
     s16 i;
-    s16 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    s16 attackerCoordY = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    s16 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    s16 attackerCoordY = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     s16 trigIndex = 172;
     u8 subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
     s16 increment = 4 - task->data[1];
@@ -1347,8 +1344,8 @@ void AnimTask_WaterSport(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    task->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    task->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     task->data[7] = (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER) ? 1 : -1;
     if (IsContest())
         task->data[7] *= -1;
@@ -1520,8 +1517,8 @@ static void AnimWaterPulseRingBubble(struct Sprite *sprite)
 void AnimWaterPulseRing(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
-    sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[3] = gBattleAnimArgs[2];
     sprite->data[4] = gBattleAnimArgs[3];
     sprite->callback = AnimWaterPulseRing_Step;

@@ -1465,7 +1465,7 @@ static bool8 DoTradeAnim_Cable(void)
         if (!IsPokeSpriteNotFlipped(sTradeData->tradeSpecies[0]))
         {
             gSprites[sTradeData->pokePicSpriteIdxs[0]].affineAnims = sSpriteAffineAnimTable_PlayerPokePicAlt;
-            gSprites[sTradeData->pokePicSpriteIdxs[0]].oam.affineMode = 3;
+            gSprites[sTradeData->pokePicSpriteIdxs[0]].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             CalcCenterToCornerVec(&gSprites[sTradeData->pokePicSpriteIdxs[0]], 0, 3, 3);
             StartSpriteAffineAnim(&gSprites[sTradeData->pokePicSpriteIdxs[0]], 0);
         }
@@ -1968,7 +1968,7 @@ static bool8 DoTradeAnim_Wireless(void)
         if (!IsPokeSpriteNotFlipped(sTradeData->tradeSpecies[0]))
         {
             gSprites[sTradeData->pokePicSpriteIdxs[0]].affineAnims = sSpriteAffineAnimTable_PlayerPokePicAlt;
-            gSprites[sTradeData->pokePicSpriteIdxs[0]].oam.affineMode = 3;
+            gSprites[sTradeData->pokePicSpriteIdxs[0]].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             CalcCenterToCornerVec(&gSprites[sTradeData->pokePicSpriteIdxs[0]], 0, 3, 3);
             StartSpriteAffineAnim(&gSprites[sTradeData->pokePicSpriteIdxs[0]], 0);
         }

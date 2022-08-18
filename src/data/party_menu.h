@@ -709,7 +709,7 @@ static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/interface/hold_icons.
 static const struct OamData sOamData_HeldItem =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -765,7 +765,7 @@ static const struct SpriteTemplate sSpriteTemplate_HeldItem =
 static const struct OamData sOamData_MenuPokeball =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -822,7 +822,7 @@ static const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
 static const struct OamData sOamData_MenuPokeballSmall =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -903,7 +903,7 @@ static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 static const struct OamData sOamData_StatusCondition =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,

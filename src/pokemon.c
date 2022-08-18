@@ -1665,7 +1665,7 @@ const u16 gLinkPlayerFacilityClasses[] =
 static const struct OamData sOakSpeechNidoranFDummyOamData = 
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,

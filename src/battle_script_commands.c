@@ -674,7 +674,7 @@ static const u8 sRubyLevelUpStatBoxStats[] =
 static const struct OamData sOamData_MonIconOnLvlUpBanner =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,

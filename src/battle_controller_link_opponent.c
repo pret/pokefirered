@@ -1273,7 +1273,7 @@ static void LinkOpponentDoMoveAnimation(void)
     case 1:
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         {
-            SetBattlerSpriteAffineMode(0);
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
             DoMoveAnim(move);
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 2;
         }
@@ -1282,7 +1282,7 @@ static void LinkOpponentDoMoveAnimation(void)
         gAnimScriptCallback();
         if (!gAnimScriptActive)
         {
-            SetBattlerSpriteAffineMode(1);
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
             if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute && multihit < 2)
             {
                 InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);

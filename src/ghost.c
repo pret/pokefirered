@@ -223,9 +223,9 @@ static void AnimConfuseRayBallBounce(struct Sprite *sprite)
     InitSpritePosToAnimAttacker(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->x;
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[3] = sprite->y;
-    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     BattleAnim_InitLinearTranslationWithDuration(sprite);
     sprite->callback = sub_80B52D0;
     sprite->data[6] = 16;
@@ -398,8 +398,8 @@ static void AnimShadowBall(struct Sprite *sprite)
     s16 oldPosX = sprite->x;
     s16 oldPosY = sprite->y;
 
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->data[0] = 0;
     sprite->data[1] = gBattleAnimArgs[0];
     sprite->data[2] = gBattleAnimArgs[1];
@@ -429,8 +429,8 @@ static void AnimShadowBallStep(struct Sprite *sprite)
         sprite->data[2] -= 1;
         if (sprite->data[2] > 0)
             break;
-        sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->data[4] = sprite->x << 4;
         sprite->data[5] = sprite->y << 4;
         sprite->data[6] = ((sprite->data[1] - sprite->x) << 4) / sprite->data[3];
@@ -445,8 +445,8 @@ static void AnimShadowBallStep(struct Sprite *sprite)
         sprite->data[3] -= 1;
         if (sprite->data[3] > 0)
             break;
-        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->data[0] += 1;
         break;
     case 3:
@@ -740,17 +740,17 @@ static void AnimDestinyBondWhiteShadow(struct Sprite *sprite)
 
     if (gBattleAnimArgs[0] == 0)
     {
-        battler1X = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-        battler1Y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 28;
-        battler2X = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-        battler2Y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + 28;
+        battler1X = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        battler1Y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 28;
+        battler2X = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        battler2Y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 28;
     }
     else
     {
-        battler1X = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
-        battler1Y = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + 28;
-        battler2X = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-        battler2Y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 28;
+        battler1X = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        battler1Y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 28;
+        battler2X = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        battler2Y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 28;
     }
     yDiff = battler2Y - battler1Y;
     sprite->data[0] = battler1X * 16;
@@ -798,7 +798,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
     task->data[8] = 0;
     task->data[9] = 16;
     task->data[10] = gBattleAnimArgs[0];
-    baseX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    baseX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM);
     if (!IsContest())
     {
@@ -811,7 +811,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
                 spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
                 if (spriteId != MAX_SPRITES)
                 {
-                    x = GetBattlerSpriteCoord(battler, 2);
+                    x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2);
                     y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_BOTTOM);
                     gSprites[spriteId].data[0] = baseX << 4;
                     gSprites[spriteId].data[1] = baseY << 4;
@@ -1143,7 +1143,7 @@ void AnimTask_GrudgeFlames(u8 taskId)
 
     task->data[0] = 0;
     task->data[1] = 16;
-    task->data[9] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    task->data[9] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     task->data[10] = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
     task->data[11] = (GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) / 2) + 8;
     task->data[7] = 0;

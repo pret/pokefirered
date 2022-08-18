@@ -15,60 +15,99 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
+static void AnimBlackSmoke(struct Sprite *);
 static void AnimBlackSmoke_Step(struct Sprite *);
+static void AnimWhiteHalo(struct Sprite *);
 static void AnimWhiteHalo_Step1(struct Sprite *);
 static void AnimWhiteHalo_Step2(struct Sprite *);
+static void AnimMeanLookEye(struct Sprite *);
 static void AnimMeanLookEye_Step1(struct Sprite *);
 static void AnimMeanLookEye_Step2(struct Sprite *);
 static void AnimMeanLookEye_Step3(struct Sprite *);
 static void AnimMeanLookEye_Step4(struct Sprite *);
 static void SetPsychicBackground_Step(u8);
 static void FadeScreenToWhite_Step(u8);
+static void AnimSpikes(struct Sprite *);
 static void AnimSpikes_Step1(struct Sprite *);
 static void AnimSpikes_Step2(struct Sprite *);
+static void AnimSpotlight(struct Sprite *);
 static void AnimSpotlight_Step1(struct Sprite *);
 static void AnimSpotlight_Step2(struct Sprite *);
+static void AnimClappingHand(struct Sprite *);
 static void AnimClappingHand_Step(struct Sprite *);
+static void AnimClappingHand2(struct Sprite *);
+static void AnimRapidSpin(struct Sprite *);
 static void AnimRapidSpin_Step(struct Sprite *);
 static void RapinSpinMonElevation_Step(u8);
 static void TormentAttacker_Step(u8);
 static void TormentAttacker_Callback(struct Sprite *);
+static void AnimWishStar(struct Sprite *);
 static void AnimWishStar_Step(struct Sprite *);
+static void AnimMiniTwinklingStar(struct Sprite *);
 static void AnimMiniTwinklingStar_Step(struct Sprite *);
+static void AnimGreenStar(struct Sprite *);
 static void AnimGreenStar_Step1(struct Sprite *);
 static void AnimGreenStar_Step2(struct Sprite *);
 static void AnimGreenStar_Callback(struct Sprite *);
 static void AnimTask_RockMonBackAndForth_Step(u8);
+static void AnimSweetScentPetal(struct Sprite *);
 static void AnimSweetScentPetal_Step(struct Sprite *);
 static void AnimTask_FlailMovement_Step(u8);
+static void AnimFlatterConfetti(struct Sprite *);
 static void AnimFlatterConfetti_Step(struct Sprite *);
+static void AnimFlatterSpotlight(struct Sprite *);
 static void AnimFlatterSpotlight_Step(struct Sprite *);
+static void AnimReversalOrb(struct Sprite *);
 static void AnimReversalOrb_Step(struct Sprite *);
 static void AnimTask_RolePlaySilhouette_Step1(u8);
 static void AnimTask_RolePlaySilhouette_Step2(u8);
 static void AnimTask_AcidArmor_Step(u8);
 static void AnimTask_DeepInhale_Step(u8);
+static void AnimYawnCloud(struct Sprite *);
 static void AnimYawnCloud_Step(struct Sprite *);
 static void AnimTask_SquishAndSweatDroplets_Step(u8);
 static void CreateSweatDroplets(u8, bool8);
 static void AnimTask_FacadeColorBlend_Step(u8);
+static void AnimRoarNoiseLine(struct Sprite *);
 static void AnimRoarNoiseLine_Step(struct Sprite *);
 static void AnimTask_GlareEyeDots_Step(u8);
 static void GetGlareEyeDotCoords(s16, s16, s16, s16, u8, u8, s16 *, s16 *);
 static void AnimTask_BarrageBall_Step(u8);
+static void AnimSmellingSaltsHand(struct Sprite *);
 static void AnimSmellingSaltsHand_Step(struct Sprite *);
 static void AnimTask_SmellingSaltsSquish_Step(u8);
+static void AnimSmellingSaltExclamation(struct Sprite *);
 static void AnimSmellingSaltExclamation_Step(struct Sprite *);
+static void AnimHelpingHandClap(struct Sprite *);
 static void AnimHelpingHandClap_Step(struct Sprite *);
 static void AnimTask_HelpingHandAttackerMovement_Step(u8);
+static void AnimForesightMagnifyingGlass(struct Sprite *);
 static void AnimForesightMagnifyingGlass_Step(struct Sprite *);
 static void AnimTask_MonToSubstituteDoll(u8);
+static void AnimBlockX(struct Sprite *);
 static void AnimBlockX_Step(struct Sprite *);
 static void AnimTask_OdorSleuthMovementWaitFinish(u8);
 static void MoveOdorSleuthClone(struct Sprite *);
 static void AnimTask_TeeterDanceMovement_Step(u8);
+static void AnimRecycle(struct Sprite *);
 static void AnimRecycle_Step(struct Sprite *);
 static void AnimTask_SlackOffSquish_Step(u8);
+static void AnimTealAlert(struct Sprite *);
+static void AnimLeer(struct Sprite *);
+static void AnimLetterZ(struct Sprite *);
+static void AnimFang(struct Sprite *);
+static void AnimTriAttackTriangle(struct Sprite *);
+static void AnimBatonPassPokeball(struct Sprite *);
+static void AnimSwallowBlueOrb(struct Sprite *);
+static void AnimWeakFrustrationAngerMark(struct Sprite *);
+static void AnimPainSplitProjectile(struct Sprite *);
+static void AnimSmokeBallEscapeCloud(struct Sprite *);
+static void AnimFacadeSweatDrop(struct Sprite *);
+static void AnimGlareEyeDot(struct Sprite *);
+static void AnimAssistPawprint(struct Sprite *);
+static void AnimMeteorMashStar(struct Sprite *);
+static void AnimUnusedItemBagSteal(struct Sprite *);
+static void AnimKnockOffStrike(struct Sprite *);
 
 static const union AnimCmd sScratchAnimCmds[] =
 {
@@ -1129,7 +1168,7 @@ static const union AffineAnimCmd sSlackOffSquishAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-void AnimBlackSmoke(struct Sprite *sprite)
+static void AnimBlackSmoke(struct Sprite *sprite)
 {
     sprite->x += gBattleAnimArgs[0];
     sprite->y += gBattleAnimArgs[1];
@@ -1166,7 +1205,7 @@ void AnimTask_SmokescreenImpact(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimWhiteHalo(struct Sprite *sprite)
+static void AnimWhiteHalo(struct Sprite *sprite)
 {
     sprite->data[0] = 90;
     sprite->callback = WaitAnimForDuration;
@@ -1193,7 +1232,7 @@ static void AnimWhiteHalo_Step2(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void AnimTealAlert(struct Sprite *sprite)
+static void AnimTealAlert(struct Sprite *sprite)
 {
     u16 rotation;
     u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
@@ -1213,7 +1252,7 @@ void AnimTealAlert(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void AnimMeanLookEye(struct Sprite *sprite)
+static void AnimMeanLookEye(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -1371,7 +1410,7 @@ static void FadeScreenToWhite_Step(u8 taskId)
         DestroyTask(taskId);
 }
 
-void AnimSpikes(struct Sprite *sprite)
+static void AnimSpikes(struct Sprite *sprite)
 {
     u16 x;
     u16 y;
@@ -1409,7 +1448,7 @@ static void AnimSpikes_Step2(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimLeer(struct Sprite *sprite)
+static void AnimLeer(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
@@ -1418,7 +1457,7 @@ void AnimLeer(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void AnimLetterZ(struct Sprite *sprite)
+static void AnimLetterZ(struct Sprite *sprite)
 {
     int var0;
     
@@ -1456,7 +1495,7 @@ void AnimLetterZ(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimFang(struct Sprite *sprite)
+static void AnimFang(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         DestroyAnimSprite(sprite);
@@ -1482,7 +1521,7 @@ void AnimTask_IsHealingMove(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimSpotlight(struct Sprite *sprite)
+static void AnimSpotlight(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
@@ -1545,7 +1584,7 @@ static void AnimSpotlight_Step2(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void AnimClappingHand(struct Sprite *sprite)
+static void AnimClappingHand(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] == 0)
     {
@@ -1604,7 +1643,7 @@ static void AnimClappingHand_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimClappingHand2(struct Sprite *sprite)
+static void AnimClappingHand2(struct Sprite *sprite)
 {
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->data[3] = 255;
@@ -1645,7 +1684,7 @@ void AnimTask_RemoveSpotlight(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimRapidSpin(struct Sprite *sprite)
+static void AnimRapidSpin(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -1946,7 +1985,7 @@ static void TormentAttacker_Callback(struct Sprite *sprite)
     }
 }
 
-void AnimTriAttackTriangle(struct Sprite *sprite)
+static void AnimTriAttackTriangle(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
         InitSpritePosToAnimAttacker(sprite, FALSE);
@@ -1992,7 +2031,7 @@ void AnimTask_DefenseCurlDeformMon(u8 taskId)
     }
 }
 
-void AnimBatonPassPokeball(struct Sprite *sprite)
+static void AnimBatonPassPokeball(struct Sprite *sprite)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
@@ -2035,7 +2074,7 @@ void AnimBatonPassPokeball(struct Sprite *sprite)
     }
 }
 
-void AnimWishStar(struct Sprite *sprite)
+static void AnimWishStar(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->x = -16;
@@ -2073,7 +2112,7 @@ static void AnimWishStar_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimMiniTwinklingStar(struct Sprite *sprite)
+static void AnimMiniTwinklingStar(struct Sprite *sprite)
 {
     u8 rand;
     s8 y;
@@ -2148,7 +2187,7 @@ void AnimTask_SpitUpDeformMon(u8 taskId)
     }
 }
 
-void AnimSwallowBlueOrb(struct Sprite *sprite)
+static void AnimSwallowBlueOrb(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -2363,7 +2402,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
     }
 }
 
-void AnimGreenStar(struct Sprite *sprite)
+static void AnimGreenStar(struct Sprite *sprite)
 {
     s16 xOffset;
     u8 spriteId1;
@@ -2574,7 +2613,7 @@ void AnimTask_StrongFrustrationGrowAndShrink(u8 taskId)
 // Animates an anger mark near the mon's head.
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
-void AnimWeakFrustrationAngerMark(struct Sprite *sprite)
+static void AnimWeakFrustrationAngerMark(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -2699,7 +2738,7 @@ static void AnimTask_RockMonBackAndForth_Step(u8 taskId)
 // arg 0: initial y pixel offset
 // arg 1: sprite anim num
 // arg 2: unused
-void AnimSweetScentPetal(struct Sprite *sprite)
+static void AnimSweetScentPetal(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
@@ -2835,7 +2874,7 @@ static void AnimTask_FlailMovement_Step(u8 taskId)
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: which battler
-void AnimPainSplitProjectile(struct Sprite *sprite)
+static void AnimPainSplitProjectile(struct Sprite *sprite)
 {
     if (!sprite->data[0])
     {
@@ -2931,7 +2970,7 @@ void AnimTask_PainSplitMovement(u8 taskId)
 
 // Move a piece of confetti in a slightly-random speed across the screen.
 // arg 0: which battler the confetti starts from
-void AnimFlatterConfetti(struct Sprite *sprite)
+static void AnimFlatterConfetti(struct Sprite *sprite)
 {
     u8 tileOffset;
     int rand1;
@@ -2988,7 +3027,7 @@ static void AnimFlatterConfetti_Step(struct Sprite *sprite)
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: duration of fully-opened spotlight
-void AnimFlatterSpotlight(struct Sprite *sprite)
+static void AnimFlatterSpotlight(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
@@ -3037,7 +3076,7 @@ static void AnimFlatterSpotlight_Step(struct Sprite *sprite)
 // Spins an orb around the attacking mon, while its path radius grows and shrinks.
 // arg 0: duration
 // arg 1: initial wave offset
-void AnimReversalOrb(struct Sprite *sprite)
+static void AnimReversalOrb(struct Sprite *sprite)
 {
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -3417,7 +3456,7 @@ static void UpdateYawnCloudPosition(struct Sprite *sprite)
 
 // Drifts a cloud in a wavy path towards the target mon.
 // arg 0: which affine anim
-void AnimYawnCloud(struct Sprite *sprite)
+static void AnimYawnCloud(struct Sprite *sprite)
 {
     s16 destX = sprite->x;
     s16 destY = sprite->y;
@@ -3455,7 +3494,7 @@ static void AnimYawnCloud_Step(struct Sprite *sprite)
 // arg 1: initial x pixel offset
 // arg 2: initial y pixel offset
 // arg 3: ?
-void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
+static void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[3];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[0]);
@@ -3731,7 +3770,7 @@ static void CreateSweatDroplets(u8 taskId, bool8 lowerDroplets)
     }
 }
 
-void AnimFacadeSweatDrop(struct Sprite *sprite)
+static void AnimFacadeSweatDrop(struct Sprite *sprite)
 {
     sprite->x += sprite->sVelocX;
     sprite->y += sprite->sVelocY;
@@ -3797,7 +3836,7 @@ void AnimTask_StatusClearedEffect(u8 taskId)
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: which direction (0 = upward, 1 = downward, 2 = horizontal)
-void AnimRoarNoiseLine(struct Sprite *sprite)
+static void AnimRoarNoiseLine(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -3978,7 +4017,7 @@ static void GetGlareEyeDotCoords(s16 startX, s16 startY, s16 endX, s16 endY, u8 
     *y = y2 >> 8;
 }
 
-void AnimGlareEyeDot(struct Sprite *sprite)
+static void AnimGlareEyeDot(struct Sprite *sprite)
 {
     if (++sprite->sTimer > 36)
     {
@@ -4009,7 +4048,7 @@ void AnimGlareEyeDot(struct Sprite *sprite)
 // arg 2: destination x position
 // arg 3: destination y position
 // arg 4: duration
-void AnimAssistPawprint(struct Sprite *sprite)
+static void AnimAssistPawprint(struct Sprite *sprite)
 {
     sprite->x = gBattleAnimArgs[0];
     sprite->y = gBattleAnimArgs[1];
@@ -4096,7 +4135,7 @@ static void AnimTask_BarrageBall_Step(u8 taskId)
 // arg 0: which battler
 // arg 1: horizontal flip
 // arg 2: num squishes
-void AnimSmellingSaltsHand(struct Sprite *sprite)
+static void AnimSmellingSaltsHand(struct Sprite *sprite)
 {
     u8 battler;
 
@@ -4219,7 +4258,7 @@ static void AnimTask_SmellingSaltsSquish_Step(u8 taskId)
 // arg 0: which mon
 // arg 1: blink delay
 // arg 2: number of blinks
-void AnimSmellingSaltExclamation(struct Sprite *sprite)
+static void AnimSmellingSaltExclamation(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
@@ -4257,7 +4296,7 @@ static void AnimSmellingSaltExclamation_Step(struct Sprite *sprite)
 // Claps a hand several times.
 // arg 0: which hand
 // arg 1:
-void AnimHelpingHandClap(struct Sprite *sprite)
+static void AnimHelpingHandClap(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -4469,7 +4508,7 @@ static void AnimTask_HelpingHandAttackerMovement_Step(u8 taskId)
 
 // Moves a magnifying glass around in straight lines.
 // arg 0: magnifying glass target mon
-void AnimForesightMagnifyingGlass(struct Sprite *sprite)
+static void AnimForesightMagnifyingGlass(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
@@ -4615,7 +4654,7 @@ static void AnimMeteorMashStar_Step(struct Sprite *sprite)
 // arg 2: destination x pixel offset
 // arg 3: destination y pixel offset
 // arg 4: duration
-void AnimMeteorMashStar(struct Sprite *sprite)
+static void AnimMeteorMashStar(struct Sprite *sprite)
 {
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
@@ -4729,7 +4768,7 @@ static void AnimTask_MonToSubstituteDoll(u8 taskId)
 
 // Moves down an X that flickers and disappears.
 // No args.
-void AnimBlockX(struct Sprite *sprite)
+static void AnimBlockX(struct Sprite *sprite)
 {
     s16 y;
 
@@ -5060,7 +5099,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     }
 }
 
-void AnimUnusedItemBagSteal(struct Sprite *sprite)
+static void AnimUnusedItemBagSteal(struct Sprite *sprite)
 {
     switch (sprite->data[7])
     {
@@ -5241,7 +5280,7 @@ static void AnimKnockOffStrike_Step(struct Sprite *sprite)
 // Animates a strike that swipes downard at the target mon.
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
-void AnimKnockOffStrike(struct Sprite *sprite)
+static void AnimKnockOffStrike(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
@@ -5264,7 +5303,7 @@ void AnimKnockOffStrike(struct Sprite *sprite)
 
 // Gradually fades a rotating recyle arrow sprite in and back out.
 // No args.
-void AnimRecycle(struct Sprite *sprite)
+static void AnimRecycle(struct Sprite *sprite)
 {
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP);

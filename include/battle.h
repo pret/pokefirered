@@ -29,10 +29,10 @@
    (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)           \
  && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
 
-#define TRAINER_OPPONENT_3FE        0x3FE
-#define TRAINER_OPPONENT_C00        0xC00
-#define TRAINER_LINK_OPPONENT       0x800
-#define SECRET_BASE_OPPONENT        0x400
+// Special Trainer Ids.
+#define TRAINER_UNION_ROOM          3072
+#define TRAINER_LINK_OPPONENT       2048
+#define TRAINER_SECRET_BASE         1024
 
 // Battle Actions
 // These determine what each battler will do in a turn

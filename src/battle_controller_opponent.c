@@ -1122,7 +1122,7 @@ static void OpponentHandleDrawTrainerPic(void)
 {
     u32 trainerPicId;
 
-    if (gTrainerBattleOpponent_A == 0x400)
+    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         trainerPicId = GetSecretBaseTrainerPicIndex();
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicId = GetBattleTowerTrainerFrontSpriteId();
@@ -1152,7 +1152,7 @@ static void OpponentHandleTrainerSlide(void)
 {
     u32 trainerPicId;
 
-    if (gTrainerBattleOpponent_A == 0x400)
+    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         trainerPicId = GetSecretBaseTrainerPicIndex();
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicId = GetBattleTowerTrainerFrontSpriteId();

@@ -346,59 +346,62 @@
 #define BG_SOLAR_BEAM_PLAYER 25
 #define BG_SOLAR_BEAM_CONTESTS 26
 
-// table ids for general animations
-#define B_ANIM_CASTFORM_CHANGE          0x0
-#define B_ANIM_STATS_CHANGE             0x1
-#define B_ANIM_SUBSTITUTE_FADE          0x2
-#define B_ANIM_SUBSTITUTE_APPEAR        0x3
-#define B_ANIM_BAIT_THROW               0x4
-#define B_ANIM_ITEM_KNOCKOFF            0x5
-#define B_ANIM_TURN_TRAP                0x6
-#define B_ANIM_HELD_ITEM_EFFECT         0x7
-#define B_ANIM_SMOKEBALL_ESCAPE         0x8
-#define B_ANIM_FOCUS_BAND               0x9
-#define B_ANIM_RAIN_CONTINUES           0xA
-#define B_ANIM_SUN_CONTINUES            0xB
-#define B_ANIM_SANDSTORM_CONTINUES      0xC
-#define B_ANIM_HAIL_CONTINUES           0xD
-#define B_ANIM_LEECH_SEED_DRAIN         0xE
-#define B_ANIM_MON_HIT                  0xF
-#define B_ANIM_ITEM_STEAL               0x10
-#define B_ANIM_SNATCH_MOVE              0x11
-#define B_ANIM_FUTURE_SIGHT_HIT         0x12
-#define B_ANIM_DOOM_DESIRE_HIT          0x13
-#define B_ANIM_FOCUS_PUNCH_SETUP        0x14
-#define B_ANIM_INGRAIN_HEAL             0x15
-#define B_ANIM_WISH_HEAL                0x16
-#define B_ANIM_MON_SCARED               0x17
-#define B_ANIM_GHOST_GET_OUT            0x18
-#define B_ANIM_SILPH_SCOPED             0x19
-#define B_ANIM_ROCK_THROW               0x1A
-#define B_ANIM_SAFARI_REACTION          0x1B
+// table ids for general animations (gBattleAnims_General)
+#define B_ANIM_CASTFORM_CHANGE          0
+#define B_ANIM_STATS_CHANGE             1
+#define B_ANIM_SUBSTITUTE_FADE          2
+#define B_ANIM_SUBSTITUTE_APPEAR        3
+#define B_ANIM_BAIT_THROW               4
+#define B_ANIM_ITEM_KNOCKOFF            5
+#define B_ANIM_TURN_TRAP                6
+#define B_ANIM_HELD_ITEM_EFFECT         7
+#define B_ANIM_SMOKEBALL_ESCAPE         8
+#define B_ANIM_FOCUS_BAND               9
+#define B_ANIM_RAIN_CONTINUES           10
+#define B_ANIM_SUN_CONTINUES            11
+#define B_ANIM_SANDSTORM_CONTINUES      12
+#define B_ANIM_HAIL_CONTINUES           13
+#define B_ANIM_LEECH_SEED_DRAIN         14
+#define B_ANIM_MON_HIT                  15
+#define B_ANIM_ITEM_STEAL               16
+#define B_ANIM_SNATCH_MOVE              17
+#define B_ANIM_FUTURE_SIGHT_HIT         18
+#define B_ANIM_DOOM_DESIRE_HIT          19
+#define B_ANIM_FOCUS_PUNCH_SETUP        20
+#define B_ANIM_INGRAIN_HEAL             21
+#define B_ANIM_WISH_HEAL                22
+#define B_ANIM_MON_SCARED               23
+#define B_ANIM_GHOST_GET_OUT            24
+#define B_ANIM_SILPH_SCOPED             25
+#define B_ANIM_ROCK_THROW               26
+#define B_ANIM_SAFARI_REACTION          27
 
-// special animations table
-#define B_ANIM_LVL_UP                   0x0
-#define B_ANIM_SWITCH_OUT_PLAYER_MON    0x1
-#define B_ANIM_SWITCH_OUT_OPPONENT_MON  0x2
-#define B_ANIM_BALL_THROW               0x3
-#define B_ANIM_SAFARI_BALL_THROW        0x4
-#define B_ANIM_SUBSTITUTE_TO_MON        0x5
-#define B_ANIM_MON_TO_SUBSTITUTE        0x6
+// special animations table (gBattleAnims_Special)
+#define B_ANIM_LVL_UP                   0
+#define B_ANIM_SWITCH_OUT_PLAYER_MON    1
+#define B_ANIM_SWITCH_OUT_OPPONENT_MON  2
+#define B_ANIM_BALL_THROW               3
+#define B_ANIM_BALL_THROW_WITH_TRAINER  4
+#define B_ANIM_SUBSTITUTE_TO_MON        5
+#define B_ANIM_MON_TO_SUBSTITUTE        6
 
-// status animation table
-#define B_ANIM_STATUS_PSN               0x0
-#define B_ANIM_STATUS_CONFUSION         0x1
-#define B_ANIM_STATUS_BRN               0x2
-#define B_ANIM_STATUS_INFATUATION       0x3
-#define B_ANIM_STATUS_SLP               0x4
-#define B_ANIM_STATUS_PRZ               0x5
-#define B_ANIM_STATUS_FRZ               0x6
-#define B_ANIM_STATUS_CURSED            0x7
-#define B_ANIM_STATUS_NIGHTMARE         0x8
-#define B_ANIM_STATUS_WRAPPED           0x9 // does not actually exist
+// status animation table (gBattleAnims_StatusConditions)
+#define B_ANIM_STATUS_PSN               0
+#define B_ANIM_STATUS_CONFUSION         1
+#define B_ANIM_STATUS_BRN               2
+#define B_ANIM_STATUS_INFATUATION       3
+#define B_ANIM_STATUS_SLP               4
+#define B_ANIM_STATUS_PRZ               5
+#define B_ANIM_STATUS_FRZ               6
+#define B_ANIM_STATUS_CURSED            7
+#define B_ANIM_STATUS_NIGHTMARE         8
+#define B_ANIM_STATUS_WRAPPED           9 // does not actually exist
 
 // Most tasks return a value to gBattleAnimArgs[7].
-#define ARG_RET_ID 0x7
+#define ARG_RET_ID 7
+
+// For createsprite macro to use internally
+#define ANIMSPRITE_IS_TARGET (1 << 7)
 
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0
@@ -414,6 +417,22 @@
 #define ANIM_WEATHER_RAIN 2
 #define ANIM_WEATHER_SANDSTORM 3
 #define ANIM_WEATHER_HAIL 4
+
+// Flags given to various functions to indicate which palettes to consider.
+// Handled by UnpackSelectedBattlePalettes
+#define F_PAL_BG          (1 << 0)
+#define F_PAL_ATTACKER    (1 << 1)
+#define F_PAL_TARGET      (1 << 2)
+#define F_PAL_ATK_PARTNER (1 << 3)
+#define F_PAL_DEF_PARTNER (1 << 4)
+#define F_PAL_ANIM_1      (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBattleAnimBgDataByPriorityRank. Only used (ineffectually?) by Aromatherapy.
+#define F_PAL_ANIM_2      (1 << 6) // Palette set for GetBattleAnimBgData/GetBattleAnimBgDataByPriorityRank. Unused.
+#define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+// The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
+// It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
+#define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
 
 // Battle mon back animations.
 #define BACK_ANIM_NONE                         0x00

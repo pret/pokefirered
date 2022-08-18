@@ -866,7 +866,7 @@ static void AnimTask_MetallicShine_Step(u8 taskId)
 // Changes battler's palette to either greyscale or original.
 // arg0: which battler
 // arg1: 0 grayscale, 1 original
-void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
+void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
 {
     u8 spriteId, battler;
     bool8 calcSpriteId = FALSE;

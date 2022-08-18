@@ -32,7 +32,7 @@ static void AnimGuillotinePincer(struct Sprite *);
 static void AnimGuillotinePincer_Step1(struct Sprite *);
 static void AnimGuillotinePincer_Step2(struct Sprite *);
 static void AnimGuillotinePincer_Step3(struct Sprite *);
-static void AnimTask_GrowAndGreyscale_Step(u8);
+static void AnimTask_GrowAndGrayscale_Step(u8);
 static void AnimTask_Minimize_Step1(u8);
 static void CreateMinimizeSprite(struct Task *, u8);
 static void ClonedMinizeSprite_Step(struct Sprite *);
@@ -301,7 +301,7 @@ static const union AffineAnimCmd *const sWaterPulseRingAffineAnimTable[] =
     sWaterPulseRingAffineAnimCmds,
 };
 
-const struct SpriteTemplate gSupersonicWaveSpriteTemplate =    
+const struct SpriteTemplate gSupersonicRingSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_GOLD_RING,
     .paletteTag = ANIM_TAG_GOLD_RING,
@@ -312,7 +312,7 @@ const struct SpriteTemplate gSupersonicWaveSpriteTemplate =
     .callback = TranslateAnimSpriteToTargetMonLocation,
 };
 
-const struct SpriteTemplate gScreechWaveSpriteTemplate =    
+const struct SpriteTemplate gScreechRingSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_PURPLE_RING,
     .paletteTag = ANIM_TAG_PURPLE_RING,
@@ -2005,7 +2005,7 @@ static void AnimGuillotinePincer_Step3(struct Sprite *sprite)
 // Scales up the target mon sprite, and sets the palette to greyscale.
 // Used in MOVE_DISABLE.
 // No args.
-void AnimTask_GrowAndGreyscale(u8 taskId)
+void AnimTask_GrowAndGrayscale(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     
@@ -2013,10 +2013,10 @@ void AnimTask_GrowAndGreyscale(u8 taskId)
     SetSpriteRotScale(spriteId, 0xD0, 0xD0, 0);
     SetGreyscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, FALSE);
     gTasks[taskId].data[0] = 80;
-    gTasks[taskId].func = AnimTask_GrowAndGreyscale_Step;
+    gTasks[taskId].func = AnimTask_GrowAndGrayscale_Step;
 }
 
-static void AnimTask_GrowAndGreyscale_Step(u8 taskId)
+static void AnimTask_GrowAndGrayscale_Step(u8 taskId)
 {
     if (--gTasks[taskId].data[0] == -1)
     {

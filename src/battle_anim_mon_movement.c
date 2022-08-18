@@ -792,7 +792,7 @@ void AnimTask_RotateMonSpriteToSide(u8 taskId)
         gTasks[taskId].data[7] = 1;
     else
     {
-        if (gBattleAnimArgs[2] == 0)
+        if (gBattleAnimArgs[2] == ANIM_ATTACKER)
             gTasks[taskId].data[7] = GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER ? 1 : 0;
         else
             gTasks[taskId].data[7] = GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER ? 1 : 0;

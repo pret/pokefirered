@@ -108,8 +108,8 @@ enum {
 
 struct UnusedControllerStruct
 {
-    u8 field_0 : 7;
-    u8 flag_x80 : 1;
+    u8 unk:7;
+    u8 flag:1;
 };
 
 struct HpAndStatus

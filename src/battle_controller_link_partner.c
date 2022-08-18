@@ -1362,25 +1362,25 @@ static void LinkPartnerHandleOneReturnValue_Duplicate(void)
 
 static void LinkPartnerHandleCmd37(void)
 {
-    gUnusedControllerStruct.field_0 = 0;
+    gUnusedControllerStruct.unk = 0;
     LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleCmd38(void)
 {
-    gUnusedControllerStruct.field_0 = gBattleBufferA[gActiveBattler][1];
+    gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleCmd39(void)
 {
-    gUnusedControllerStruct.flag_x80 = 0;
+    gUnusedControllerStruct.flag = 0;
     LinkPartnerBufferExecCompleted();
 }
 
 static void LinkPartnerHandleCmd40(void)
 {
-    gUnusedControllerStruct.flag_x80 ^= 1;
+    gUnusedControllerStruct.flag ^= 1;
     LinkPartnerBufferExecCompleted();
 }
 

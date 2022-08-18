@@ -1450,25 +1450,25 @@ static void LinkOpponentHandleOneReturnValue_Duplicate(void)
 
 static void LinkOpponentHandleCmd37(void)
 {
-    gUnusedControllerStruct.field_0 = 0;
+    gUnusedControllerStruct.unk = 0;
     LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleCmd38(void)
 {
-    gUnusedControllerStruct.field_0 = gBattleBufferA[gActiveBattler][1];
+    gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleCmd39(void)
 {
-    gUnusedControllerStruct.flag_x80 = 0;
+    gUnusedControllerStruct.flag = 0;
     LinkOpponentBufferExecCompleted();
 }
 
 static void LinkOpponentHandleCmd40(void)
 {
-    gUnusedControllerStruct.flag_x80 ^= 1;
+    gUnusedControllerStruct.flag ^= 1;
     LinkOpponentBufferExecCompleted();
 }
 

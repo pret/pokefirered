@@ -1310,7 +1310,7 @@ static void PokedudeHandleLoadMonSprite(void)
                                                      GetBattlerSpriteCoord(gActiveBattler, BATTLER_COORD_X_2),
                                                      y,
                                                      GetBattlerSpriteSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = species;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
@@ -1357,7 +1357,7 @@ static void PokedudeHandleDrawTrainerPic(void)
                                                          80,
                                                          (8 - gTrainerBackPicCoords[BACK_PIC_POKEDUDE].size) * 4 + 80,
                                                          30);
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
         gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
@@ -1371,7 +1371,7 @@ static void PokedudeHandleDrawTrainerPic(void)
                                                          176,
                                                          (8 - gTrainerFrontPicCoords[tranerPicid].size) * 4 + 40,
                                                          GetBattlerSpriteSubpriority(gActiveBattler));
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[tranerPicid].tag);
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum;

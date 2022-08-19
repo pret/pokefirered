@@ -38,9 +38,9 @@ static void AnimGhostStatusSprite_End(struct Sprite *sprite);
 static void AnimTask_GrudgeFlames_Step(u8 taskId);
 static void AnimGrudgeFlame(struct Sprite *sprite);
 static void AnimMonMoveCircular(struct Sprite *sprite);
-static void sub_80B6BE4(u8 taskId);
-static void sub_80B6F30(u8 taskId);
-static void sub_80B6FC4(u8 taskId);
+static void AnimTask_GhostGetOut_Step1(u8 taskId);
+static void AnimTask_GhostGetOut_Step2(u8 taskId);
+static void AnimTask_GhostGetOut_Step3(u8 taskId);
 static void AnimMonMoveCircular_Step(struct Sprite *sprite);
 
 static const union AffineAnimCmd sAffineAnim_ConfuseRayBallBounce[] =
@@ -1262,16 +1262,18 @@ static void AnimGrudgeFlame(struct Sprite *sprite)
     }
 }
 
-void sub_80B6BBC(u8 taskId)
+// Used by the ghost Marowak when it hasn't been revealed by the Silph Scope.
+// Animates a shimmering copy of the attacker (the ghost) accompanied by the 'Scary Face' graphics
+void AnimTask_GhostGetOut(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->data[15] = 0;
-    task->func = sub_80B6BE4;
-    sub_80B6BE4(taskId);
+    task->func = AnimTask_GhostGetOut_Step1;
+    task->func(taskId);
 }
 
-static void sub_80B6BE4(u8 taskId)
+static void AnimTask_GhostGetOut_Step1(u8 taskId)
 {
     s16 y;
     struct BattleAnimBgData animBgData;
@@ -1367,14 +1369,14 @@ static void sub_80B6BE4(u8 taskId)
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
-        task->func = sub_80B6F30;
+        task->func = AnimTask_GhostGetOut_Step2;
         task->data[15] = 0;
         break;
     }
     ++task->data[15];
 }
 
-static void sub_80B6F30(u8 taskId)
+static void AnimTask_GhostGetOut_Step2(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1388,12 +1390,12 @@ static void sub_80B6F30(u8 taskId)
     if (task->data[1] == 128)
     {
         task->data[15] = 0;
-        task->func = sub_80B6FC4;
-        sub_80B6FC4(taskId);
+        task->func = AnimTask_GhostGetOut_Step3;
+        task->func(taskId);
     }
 }
 
-static void sub_80B6FC4(u8 taskId)
+static void AnimTask_GhostGetOut_Step3(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

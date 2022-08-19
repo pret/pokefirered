@@ -4844,10 +4844,10 @@ UnusedFutureSightHit:
 	setalpha 8, 8
 	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET
 	waitplaysewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET, 8
-	createvisualtask AnimTask_ShakeMon, 2, 1, 4, 0, 15, 1
-	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 15, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 15, 1
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 15, ANIM_TARGET, 1
 	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon, 2, 1, 4, 0, 24, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 24, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -9759,10 +9759,10 @@ Move_DOOM_DESIRE:
 
 UnusedDoomDesireHit:
 	loadspritegfx ANIM_TAG_EXPLOSION
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_WHITE
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 10
-	createvisualtask AnimTask_DoomDesireLightBeam, 5,
+	createvisualtask AnimTask_DoomDesireLightBeam, 5
 	delay 5
 	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_ATTACKER
 	delay 10
@@ -9786,7 +9786,7 @@ UnusedDoomDesireHit:
 	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
 	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_WHITE
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 16, 0, RGB_WHITE
 	waitforvisualfinish
 	end
 
@@ -10892,46 +10892,46 @@ General_WishHeal:
 	waitforvisualfinish
 	call HealingEffect
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 10, 0, 0
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 10, 0, RGB_BLACK
 	end
 
 General_MonScared:
 	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_SWEAT_BEAD
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, 2, 0, 10, 26336
-	createvisualtask AnimTask_ShakeMon2, 2, 1, 2, 0, 10, 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 0, 10, RGB(0, 23, 25)
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
 	delay 20
 	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
 	playsewithpan SE_M_SKETCH, SOUND_PAN_TARGET
 	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
-	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 5, 1
-	createvisualtask AnimTask_StretchTargetUp, 3,
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_StretchTargetUp, 3
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, 2, 10, 0, 26336
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 10, 0, RGB(0, 23, 25)
 	waitforvisualfinish
 	end
 
 General_GhostGetOut:
 	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
 	waitforvisualfinish
-	fadetobg 2
+	fadetobg BG_GHOST
 	waitbgfadeout
-	monbg_static 0
-	createvisualtask sub_80B6BBC, 2,
+	monbg_static ANIM_ATTACKER
+	createvisualtask AnimTask_GhostGetOut, 2
 	waitbgfadein
 	loopsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET, 20, 3
 	waitforvisualfinish
-	clearmonbg_static 0
+	clearmonbg_static ANIM_ATTACKER
 	delay 1
 	loadspritegfx ANIM_TAG_SWEAT_BEAD
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, -1, 0, 6, 27349
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, -1, 0, 6, RGB(21, 22, 26)
 	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
 	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
-	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 5, 1
-	createvisualtask AnimTask_StretchTargetUp, 3,
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_StretchTargetUp, 3
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, -1, 6, 0, 27349
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, -1, 6, 0, RGB(21, 22, 26)
 	waitforvisualfinish
 	restorebg
 	waitbgfadein
@@ -10968,11 +10968,11 @@ General_SafariRockThrow:
 	end
 
 General_SafariReaction:
-	createvisualtask AnimTask_SafariGetReaction, 2,
+	createvisualtask AnimTask_SafariGetReaction, 2
 	waitforvisualfinish
-	jumpargeq 7, 0, SafariReaction_WatchingCarefully
-	jumpargeq 7, 1, SafariReaction_Angry
-	jumpargeq 7, 2, SafariReaction_Eating
+	jumpreteq 0, SafariReaction_WatchingCarefully
+	jumpreteq 1, SafariReaction_Angry
+	jumpreteq 2, SafariReaction_Eating
 	end
 
 SafariReaction_WatchingCarefully:
@@ -11075,7 +11075,7 @@ BallThrowTrainerBlock:
 
 BallThrowGhostDodged:
 	delay 16
-	createvisualtask AnimTask_WindUpLunge, 2, 1, 48, 6, 16, 48, -48, 16
+	createvisualtask AnimTask_WindUpLunge, 2, ANIM_TARGET, 48, 6, 16, 48, -48, 16
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
 	waitplaysewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET, 48
 	waitforvisualfinish

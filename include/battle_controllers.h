@@ -101,6 +101,8 @@ enum {
 
 #define INSTANT_HP_BAR_DROP     0x7FFF
 
+#define PARTY_SUMM_SKIP_DRAW_DELAY (1 << 7)
+
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
 

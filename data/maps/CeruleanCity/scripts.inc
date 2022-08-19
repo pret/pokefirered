@@ -99,17 +99,17 @@ CeruleanCity_EventScript_RivalStartExitRight::
 CeruleanCity_Movement_PlayerWatchRivalExit::
 	delay_16
 	delay_8
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 CeruleanCity_Movement_PlayerWatchRivalExitRight::
 	delay_16
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 CeruleanCity_Movement_RivalEnter::
@@ -204,9 +204,9 @@ CeruleanCity_EventScript_NoRoomForTM28::
 CeruleanCity_EventScript_GruntTriggerTop::
 	lockall
 	setvar VAR_TEMP_1, 0
-	applymovement LOCALID_GRUNT, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_GRUNT, Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	goto CeruleanCity_EventScript_GruntTrigger
 	end
@@ -214,9 +214,9 @@ CeruleanCity_EventScript_GruntTriggerTop::
 CeruleanCity_EventScript_GruntTriggerBottom::
 	lockall
 	setvar VAR_TEMP_1, 1
-	applymovement LOCALID_GRUNT, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_GRUNT, Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	goto CeruleanCity_EventScript_GruntTrigger
 	end

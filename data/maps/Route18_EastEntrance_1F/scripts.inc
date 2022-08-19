@@ -49,7 +49,7 @@ Route18_EastEntrance_1F_EventScript_NeedBikeTrigger::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox Route18_EastEntrance_1F_Text_ExcuseMe
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	call_if_eq VAR_0x8008, 1, Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMidTop

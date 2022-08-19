@@ -6,7 +6,7 @@ SaffronCity_Dojo_MapScripts::
 SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft::
 	lockall
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
-	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	releaseall
 	end
@@ -14,7 +14,7 @@ SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft::
 SaffronCity_Dojo_EventScript_TriggerMasterBattleRight::
 	lockall
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
-	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	releaseall
 	end
@@ -25,7 +25,7 @@ SaffronCity_Dojo_EventScript_HitmonleeBall::
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
 	showmonpic SPECIES_HITMONLEE, 10, 3
 	setvar VAR_TEMP_1, SPECIES_HITMONLEE
-	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO
@@ -46,7 +46,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
 	showmonpic SPECIES_HITMONCHAN, 10, 3
 	setvar VAR_TEMP_1, SPECIES_HITMONCHAN
-	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_KARATE_MASTER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO

@@ -47,14 +47,14 @@ PokemonTower_2F_EventScript_Rival::
 	end
 
 PokemonTower_2F_EventScript_RivalFacePlayerRight::
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestRight
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 PokemonTower_2F_EventScript_RivalFacePlayerDown::
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -88,7 +88,7 @@ PokemonTower_2F_Movement_RivalExitRight::
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 PokemonTower_2F_Movement_RivalExitDown::
@@ -99,5 +99,5 @@ PokemonTower_2F_Movement_RivalExitDown::
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end

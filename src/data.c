@@ -8,36 +8,38 @@
 #include "constants/battle_ai.h"
 #include "constants/trainers.h"
 
-const struct SpriteFrameImage gSpriteImages_BattlerPlayerLeft[] =
+#define BATTLER_OFFSET(i) (gHeap + 0x8000 + MON_PIC_SIZE * (i))
+
+const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[] =
 {
-    gHeap + 0x8000, 0x800,
-    gHeap + 0x8800, 0x800,
-    gHeap + 0x9000, 0x800,
-    gHeap + 0x9800, 0x800,
+    BATTLER_OFFSET(0), MON_PIC_SIZE,
+    BATTLER_OFFSET(1), MON_PIC_SIZE,
+    BATTLER_OFFSET(2), MON_PIC_SIZE,
+    BATTLER_OFFSET(3), MON_PIC_SIZE,
 };
 
-const struct SpriteFrameImage gSpriteImages_BattlerOpponentLeft[] =
+const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[] =
 {
-    gHeap + 0xA000, 0x800,
-    gHeap + 0xA800, 0x800,
-    gHeap + 0xB000, 0x800,
-    gHeap + 0xB800, 0x800,
+    BATTLER_OFFSET(4), MON_PIC_SIZE,
+    BATTLER_OFFSET(5), MON_PIC_SIZE,
+    BATTLER_OFFSET(6), MON_PIC_SIZE,
+    BATTLER_OFFSET(7), MON_PIC_SIZE,
 };
 
-const struct SpriteFrameImage gSpriteImages_BattlerPlayerRight[] =
+const struct SpriteFrameImage gBattlerPicTable_PlayerRight[] =
 {
-    gHeap + 0xC000, 0x800,
-    gHeap + 0xC800, 0x800,
-    gHeap + 0xD000, 0x800,
-    gHeap + 0xD800, 0x800,
+    BATTLER_OFFSET(8),  MON_PIC_SIZE,
+    BATTLER_OFFSET(9),  MON_PIC_SIZE,
+    BATTLER_OFFSET(10), MON_PIC_SIZE,
+    BATTLER_OFFSET(11), MON_PIC_SIZE,
 };
 
-const struct SpriteFrameImage gSpriteImages_BattlerOpponentRight[] =
+const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
 {
-    gHeap + 0xE000, 0x800,
-    gHeap + 0xE800, 0x800,
-    gHeap + 0xF000, 0x800,
-    gHeap + 0xF800, 0x800,
+    BATTLER_OFFSET(12), MON_PIC_SIZE,
+    BATTLER_OFFSET(13), MON_PIC_SIZE,
+    BATTLER_OFFSET(14), MON_PIC_SIZE,
+    BATTLER_OFFSET(15), MON_PIC_SIZE,
 };
 
 const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
@@ -102,172 +104,177 @@ static const union AnimCmd sAnim_GeneralFrame3[] =
     ANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_82347F8[] =
+// Many of these affine anims seem to go unused, and
+// instead SetSpriteRotScale is used to manipulate
+// the battler sprites directly (for instance, in AnimTask_SwitchOutShrinkMon).
+// Those with explicit indexes are referenced elsewhere.
+
+static const union AffineAnimCmd sAffineAnim_Battler_Normal[] =
 {
-    AFFINEANIMCMD_FRAME(0x0100, 0x0100, 0x00, 0x00),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234808[] =
+static const union AffineAnimCmd sAffineAnim_Battler_Flipped[] =
 {
-    AFFINEANIMCMD_FRAME(0xff00, 0x0100, 0x00, 0x00),
+    AFFINEANIMCMD_FRAME(-0x100, 0x0100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234818[] =
+static const union AffineAnimCmd sAffineAnim_Battler_Emerge[] =
 {
-    AFFINEANIMCMD_FRAME(0x0028, 0x0028, 0x00, 0x00),
-    AFFINEANIMCMD_FRAME(0x0012, 0x0012, 0x00, 0x0c),
+    AFFINEANIMCMD_FRAME(0x28, 0x28, 0, 0),
+    AFFINEANIMCMD_FRAME(0x12, 0x12, 0, 12),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234830[] =
+static const union AffineAnimCmd sAffineAnim_Battler_Return[] =
 {
-    AFFINEANIMCMD_FRAME(0xfffe, 0xfffe, 0x00, 0x12),
-    AFFINEANIMCMD_FRAME(0xfff0, 0xfff0, 0x00, 0x0f),
+    AFFINEANIMCMD_FRAME(-0x2, -0x2, 0, 18),
+    AFFINEANIMCMD_FRAME(-0x10, -0x10, 0, 15),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234848[] =
+static const union AffineAnimCmd sAffineAnim_Battler_HorizontalSquishLoop[] =
 {
-    AFFINEANIMCMD_FRAME(0x00a0, 0x0100, 0x00, 0x00),
-    AFFINEANIMCMD_FRAME(0x0004, 0x0000, 0x00, 0x08),
-    AFFINEANIMCMD_FRAME(0xfffc, 0x0000, 0x00, 0x08),
+    AFFINEANIMCMD_FRAME(0xA0, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME( 0x4,   0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(-0x4,   0x0, 0, 8),
     AFFINEANIMCMD_JUMP(1),
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234868[] =
+static const union AffineAnimCmd sAffineAnim_Battler_Grow[] =
 {
-    AFFINEANIMCMD_FRAME(0x0002, 0x0002, 0x00, 0x14),
+    AFFINEANIMCMD_FRAME(0x2, 0x2, 0, 20),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234878[] =
+static const union AffineAnimCmd sAffineAnim_Battler_Shrink[] =
 {
-    AFFINEANIMCMD_FRAME(0xfffe, 0xfffe, 0x00, 0x14),
+    AFFINEANIMCMD_FRAME(-0x2, -0x2, 0, 20),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234888[] =
+static const union AffineAnimCmd sAffineAnim_Battler_BigToSmall[] =
 {
-    AFFINEANIMCMD_FRAME(0x0100, 0x0100, 0x00, 0000),
-    AFFINEANIMCMD_FRAME(0xfff0, 0xfff0, 0x00, 0x09),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-0x10, -0x10, 0, 9),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_82348A0[] =
+static const union AffineAnimCmd sAffineAnim_Battler_GrowLarge[] =
 {
-    AFFINEANIMCMD_FRAME(0x0004, 0x0004, 0x00, 0x3f),
+    AFFINEANIMCMD_FRAME(0x4, 0x4, 0, 63),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_82348B0[] =
+static const union AffineAnimCmd sAffineAnim_Battler_TipRight[] =
 {
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0xfd, 0x05),
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0x03, 0x05),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -3, 5),
+    AFFINEANIMCMD_FRAME(0x0, 0x0,  3, 5),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_BattlerPlayer[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[] =
 {
-    gSpriteAffineAnim_82347F8,
-    gSpriteAffineAnim_8234818,
-    gSpriteAffineAnim_8234830,
-    gSpriteAffineAnim_8234848,
-    gSpriteAffineAnim_8234868,
-    gSpriteAffineAnim_8234878,
-    gSpriteAffineAnim_82348A0,
-    gSpriteAffineAnim_82348B0,
-    gSpriteAffineAnim_8234888,
+    [BATTLER_AFFINE_NORMAL] = sAffineAnim_Battler_Normal,
+    [BATTLER_AFFINE_EMERGE] = sAffineAnim_Battler_Emerge,
+    [BATTLER_AFFINE_RETURN] = sAffineAnim_Battler_Return,
+    sAffineAnim_Battler_HorizontalSquishLoop,
+    sAffineAnim_Battler_Grow,
+    sAffineAnim_Battler_Shrink,
+    sAffineAnim_Battler_GrowLarge,
+    sAffineAnim_Battler_TipRight,
+    sAffineAnim_Battler_BigToSmall,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_82348EC[] =
+static const union AffineAnimCmd sAffineAnim_Battler_SpinShrink[] =
 {
-    AFFINEANIMCMD_FRAME(0xfffc, 0xfffc, 0x04, 0x3f),
+    AFFINEANIMCMD_FRAME(-0x4, -0x4, 4, 63),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_82348FC[] =
+static const union AffineAnimCmd sAffineAnim_Battler_TipLeft[] =
 {
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0x03, 0x05),
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0xfd, 0x05),
+    AFFINEANIMCMD_FRAME(0x0, 0x0,  3, 5),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -3, 5),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234914[] =
+static const union AffineAnimCmd sAffineAnim_Battler_RotateUpAndBack[] =
 {
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0xfb, 0x14),
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0x00, 0x14),
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0x05, 0x14),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -5, 20),
+    AFFINEANIMCMD_FRAME(0x0, 0x0,  0, 20),
+    AFFINEANIMCMD_FRAME(0x0, 0x0,  5, 20),
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd gSpriteAffineAnim_8234934[] =
+static const union AffineAnimCmd sAffineAnim_Battler_Spin[] =
 {
-    AFFINEANIMCMD_FRAME(0x0000, 0x0000, 0x09, 0x6e),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 9, 110),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_BattlerOpponent[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[] =
 {
-    gSpriteAffineAnim_82347F8,
-    gSpriteAffineAnim_8234818,
-    gSpriteAffineAnim_8234830,
-    gSpriteAffineAnim_8234848,
-    gSpriteAffineAnim_8234868,
-    gSpriteAffineAnim_8234878,
-    gSpriteAffineAnim_82348EC,
-    gSpriteAffineAnim_82348FC,
-    gSpriteAffineAnim_8234914,
-    gSpriteAffineAnim_8234888,
-    gSpriteAffineAnim_8234934,
+    [BATTLER_AFFINE_NORMAL] = sAffineAnim_Battler_Normal,
+    [BATTLER_AFFINE_EMERGE] = sAffineAnim_Battler_Emerge,
+    [BATTLER_AFFINE_RETURN] = sAffineAnim_Battler_Return,
+    sAffineAnim_Battler_HorizontalSquishLoop,
+    sAffineAnim_Battler_Grow,
+    sAffineAnim_Battler_Shrink,
+    sAffineAnim_Battler_SpinShrink,
+    sAffineAnim_Battler_TipLeft,
+    sAffineAnim_Battler_RotateUpAndBack,
+    sAffineAnim_Battler_BigToSmall,
+    sAffineAnim_Battler_Spin,
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_82349470[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[] =
 {
-    gSpriteAffineAnim_8234808,
-    gSpriteAffineAnim_8234818,
-    gSpriteAffineAnim_8234830,
-    gSpriteAffineAnim_8234848,
-    gSpriteAffineAnim_8234868,
-    gSpriteAffineAnim_8234878,
-    gSpriteAffineAnim_82348EC,
-    gSpriteAffineAnim_82348FC,
-    gSpriteAffineAnim_8234914,
-    gSpriteAffineAnim_8234888,
-    gSpriteAffineAnim_8234934,
+    [BATTLER_AFFINE_NORMAL] = sAffineAnim_Battler_Flipped,
+    [BATTLER_AFFINE_EMERGE] = sAffineAnim_Battler_Emerge,
+    [BATTLER_AFFINE_RETURN] = sAffineAnim_Battler_Return,
+    sAffineAnim_Battler_HorizontalSquishLoop,
+    sAffineAnim_Battler_Grow,
+    sAffineAnim_Battler_Shrink,
+    sAffineAnim_Battler_SpinShrink,
+    sAffineAnim_Battler_TipLeft,
+    sAffineAnim_Battler_RotateUpAndBack,
+    sAffineAnim_Battler_BigToSmall,
+    sAffineAnim_Battler_Spin,
 };
 
-static const union AnimCmd gSpriteAnim_823499C[] =
+static const union AnimCmd sAnim_MonPic_0[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_82349A4[] =
+static const union AnimCmd sAnim_MonPic_1[] =
 {
     ANIMCMD_FRAME(1, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_82349AC[] =
+static const union AnimCmd sAnim_MonPic_2[] =
 {
     ANIMCMD_FRAME(2, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gSpriteAnim_82349B4[] =
+static const union AnimCmd sAnim_MonPic_3[] =
 {
     ANIMCMD_FRAME(3, 0),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSpriteAnimTable_82349BC[] =
+const union AnimCmd *const gAnims_MonPic[] =
 {
-    gSpriteAnim_823499C,
-    gSpriteAnim_82349A4,
-    gSpriteAnim_82349AC,
-    gSpriteAnim_82349B4,
+    sAnim_MonPic_0,
+    sAnim_MonPic_1,
+    sAnim_MonPic_2,
+    sAnim_MonPic_3,
 };
 
 #define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, 0x800, SPECIES_##species}

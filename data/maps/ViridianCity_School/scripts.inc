@@ -9,7 +9,7 @@ ViridianCity_School_EventScript_Lass::
 	faceplayer
 	msgbox ViridianCity_School_Text_TryingToMemorizeNotes
 	closemessage
-	applymovement LOCALID_LASS, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_LASS, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	release
 	end
@@ -36,7 +36,7 @@ ViridianCity_School_EventScript_Notebook::
 	msgbox ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_StopReadingNotebook
 	msgbox ViridianCity_School_Text_NotebookFourthPage
-	applymovement LOCALID_LASS, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_LASS, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox ViridianCity_School_Text_HeyDontLookAtMyNotes

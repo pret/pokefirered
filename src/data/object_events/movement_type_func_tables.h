@@ -141,12 +141,12 @@ static bool8 MovementType_MoveInPlace_Step1(struct ObjectEvent *objectEvent, str
 static bool8 MovementType_Invisible_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_Invisible_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_Invisible_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_VsSeeker4D_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_VsSeeker4D_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_VsSeeker4D_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_VsSeeker4E_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_VsSeeker4F_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static bool8 MovementType_VsSeeker4E_VsSeeker4F_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_RaiseHandAndStop_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_RaiseHandAndStop_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_RaiseHandAndStop_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_RaiseHandAndJump_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_RaiseHandAndSwim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_RaiseHandAndMove_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 
 static u8 GetVectorDirection(s16 dx, s16 dy, s16 absdx, s16 absdy);
 static u8 GetLimitedVectorDirection_SouthNorth(s16 dx, s16 dy, s16 absdx, s16 absdy);
@@ -596,18 +596,18 @@ u8 (*const gMovementTypeFuncs_Invisible[])(struct ObjectEvent *, struct Sprite *
     MovementType_Invisible_Step2,
 };
 
-u8 (*const gMovementTypeFuncs_VsSeeker4D[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_VsSeeker4D_Step0,
-    MovementType_VsSeeker4D_Step1,
-    MovementType_VsSeeker4D_Step2,
+u8 (*const gMovementTypeFuncs_RaiseHandAndStop[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_RaiseHandAndStop_Step0,
+    MovementType_RaiseHandAndStop_Step1,
+    MovementType_RaiseHandAndStop_Step2,
 };
 
-u8 (*const gMovementTypeFuncs_VsSeeker4E[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_VsSeeker4E_Step0,
-    MovementType_VsSeeker4E_VsSeeker4F_Step1,
+u8 (*const gMovementTypeFuncs_RaiseHandAndJump[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_RaiseHandAndJump_Step0,
+    MovementType_RaiseHandAndMove_Step1,
 };
 
-u8 (*const gMovementTypeFuncs_VsSeeker4F[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_VsSeeker4F_Step0,
-    MovementType_VsSeeker4E_VsSeeker4F_Step1,
+u8 (*const gMovementTypeFuncs_RaiseHandAndSwim[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_RaiseHandAndSwim_Step0,
+    MovementType_RaiseHandAndMove_Step1,
 };

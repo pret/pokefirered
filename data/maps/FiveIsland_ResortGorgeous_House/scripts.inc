@@ -44,7 +44,7 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_SelphyGiveTokenOfAppreciation
@@ -65,25 +65,25 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	end
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth::
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth::
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast::
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -114,13 +114,13 @@ FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth::
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth::
 	walk_left
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast::

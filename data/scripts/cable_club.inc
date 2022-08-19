@@ -181,7 +181,7 @@ CableClub_EventScript_PlayerExitLinkRoom::
 CableClub_EventScript_Tutorial::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox CableClub_Text_FirstTimeRightThisWay
 	closemessage

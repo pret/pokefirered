@@ -61,7 +61,7 @@ SilphCo_11F_EventScript_GiovanniTriggerRight::
 
 SilphCo_11F_EventScript_BattleGiovanni::
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_GIOVANNI, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_GIOVANNI, Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 25
 	msgbox SilphCo_11F_Text_GiovanniIntro
@@ -99,7 +99,7 @@ SilphCo_11F_Movement_GiovanniApproachLeft::
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
 SilphCo_11F_Movement_GiovanniApproachRight::
@@ -114,7 +114,7 @@ SilphCo_11F_Movement_PlayerFaceGiovanni::
 	delay_16
 	delay_8
 	delay_4
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
 @ Unused

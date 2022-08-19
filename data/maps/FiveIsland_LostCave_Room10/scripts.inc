@@ -54,9 +54,9 @@ FiveIsland_LostCave_Room10_Movement_SelphyWander::
 	delay_16
 	walk_right
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 FiveIsland_LostCave_Room10_Movement_SelphyApproach::

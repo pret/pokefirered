@@ -466,7 +466,7 @@ void MakeGroupAssemblyAreasPassable(void)
     }
 }
 
-static u8 UnionPartnerObjectGetFacing(u32 member, u32 group, struct GFtgtGname * gname)
+static u8 UnionPartnerObjectGetFacing(u32 member, u32 group, struct RfuGameData * gname)
 {
     if (member != 0)
     {
@@ -487,7 +487,7 @@ static u32 RfuUnionGroupMemberIsInvisible(u32 group, u32 member)
     return RfuUnionObjectIsInvisible(5 * group + member - 0x38);
 }
 
-static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct GFtgtGname * gname)
+static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct RfuGameData * gname)
 {
     s32 x, y;
     s32 objId = 5 * groupNo + memberNo;
@@ -510,7 +510,7 @@ static void DespawnGroupMember(u32 group, u32 member)
     MapGridSetMetatileImpassabilityAt(x, y, FALSE);
 }
 
-static void AssembleGroup(u32 group, struct GFtgtGname * gname)
+static void AssembleGroup(u32 group, struct RfuGameData * gname)
 {
     s16 x, y, x2, y2;
     s32 i;
@@ -538,7 +538,7 @@ static void AssembleGroup(u32 group, struct GFtgtGname * gname)
     }
 }
 
-static void SpawnGroupLeaderAndMembers(u32 group, struct GFtgtGname * gname)
+static void SpawnGroupLeaderAndMembers(u32 group, struct RfuGameData * gname)
 {
     u32 i;
     switch (gname->activity)
@@ -566,7 +566,7 @@ static void SpawnGroupLeaderAndMembers(u32 group, struct GFtgtGname * gname)
     }
 }
 
-static void DespawnGroupLeaderAndMembers(u32 group, struct GFtgtGname * gname)
+static void DespawnGroupLeaderAndMembers(u32 group, struct RfuGameData * gname)
 {
     s32 i;
     DespawnGroupLeader(group);

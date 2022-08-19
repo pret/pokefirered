@@ -14,7 +14,7 @@
 
 struct UnionGnameUnamePair
 {
-    struct GFtgtGname gname;
+    struct RfuGameData gname;
     u8 ALIGNED(4) uname[PLAYER_NAME_LENGTH + 1];
 };
 
@@ -158,7 +158,7 @@ struct UnionRoomTrade
     u32 personality;
 };
 
-extern struct GFtgtGnameSub gPartnerTgtGnameSub;
+extern struct RfuGameCompatibilityData gPartnerTgtGnameSub;
 extern u16 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 

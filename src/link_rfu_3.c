@@ -661,7 +661,7 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
     return 0;
 }
 
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders)
+void InitHostRFUtgtGname(struct RfuGameData *data, u8 activity, bool32 started, s32 child_sprite_genders)
 {
     s32 i;
 
@@ -694,7 +694,7 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s
  * Otherwise, blanks these.
  * ==========================================================
  */
-bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *gname, u8 *uname, u8 idx)
+bool8 LinkRfu_GetNameIfCompatible(struct RfuGameData *gname, u8 *uname, u8 idx)
 {
     bool8 retVal;
 
@@ -735,7 +735,7 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *gname, u8 *uname, u8 idx)
  * which comes from ???
  * ==========================================================
  */
-bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *gname, u8 *uname, u8 idx)
+bool8 LinkRfu_GetNameIfSerial7F7D(struct RfuGameData *gname, u8 *uname, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_7F7D)
@@ -752,10 +752,10 @@ bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *gname, u8 *uname, u8 idx)
     return retVal;
 }
 
-void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname)
+void LinkRfu3_SetGnameUnameFromStaticBuffers(struct RfuGameData *gname, u8 *uname)
 {
-    memcpy(gname, &gHostRFUtgtGnameBuffer, RFU_GAME_NAME_LENGTH);
-    memcpy(uname, gHostRFUtgtUnameBuffer, RFU_USER_NAME_LENGTH);
+    memcpy(gname, &gHostRfuGameData, RFU_GAME_NAME_LENGTH);
+    memcpy(uname, gHostRfuUsername, RFU_USER_NAME_LENGTH);
 }
 
 #define sNextAnimNum  data[0]

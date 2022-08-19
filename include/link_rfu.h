@@ -57,7 +57,7 @@
 #define RFU_RECV_FINISHED       2
 
 // RfuTgtData.gname is read as these structs.
-struct GFtgtGnameSub
+struct RfuGameCompatibilityData
 {
     u16 language:4;
     u16 hasNews:1;
@@ -71,9 +71,9 @@ struct GFtgtGnameSub
     u8 playerTrainerId[2];
 };
 
-struct __attribute__((packed, aligned(2))) GFtgtGname
+struct __attribute__((packed, aligned(2))) RfuGameData
 {
-    struct GFtgtGnameSub unk_00;
+    struct RfuGameCompatibilityData unk_00;
     u8 child_sprite_gender[RFU_CHILD_MAX]; // u8 sprite_idx:3;
     // u8 gender:1;
     // u8 unk_4:3
@@ -139,7 +139,7 @@ struct RfuUnusedQueue
     /* 0x203 */ vu8 full;
 };
 
-typedef struct UnkRfuStruct_2
+struct RfuManager
 {
     /* 0x000 */ void (*RfuFunc)(void);
     /* 0x004 */ u16 state;
@@ -204,11 +204,11 @@ typedef struct UnkRfuStruct_2
     /* 0x9a1 */ u8 unk_ce9;
     /* 0x9a2 */ u8 unk_cea[RFU_CHILD_MAX];
     /* 0x9a6 */ u8 unk_cee[RFU_CHILD_MAX];
-} GF_RFU_MANAGER; // size: 0x9AC
+}; // size: 0x9AC
 
-extern struct GFtgtGname gHostRFUtgtGnameBuffer;
-extern u8 gHostRFUtgtUnameBuffer[];
-extern GF_RFU_MANAGER Rfu;
+extern struct RfuGameData gHostRfuGameData;
+extern u8 gHostRfuUsername[];
+extern struct RfuManager Rfu;
 
 // GameFreak signatures
 void AddTextPrinterToWindow1(const u8 *str);
@@ -246,7 +246,7 @@ void LinkRfu_Shutdown(void);
 void LinkRfu_CreateIdleTask(void);
 bool8 ToggleLMANlinkRecovery(bool32 enable);
 void var_800D_set_xB(void);
-struct GFtgtGname *GetHostRFUtgtGname(void);
+struct RfuGameData *GetHostRFUtgtGname(void);
 void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
 bool32 RfuHasErrored(void);
@@ -262,7 +262,7 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *dest);
 void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *dest);
 bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue * queue, u8 *dest);
 void RfuSendQueue_Enqueue(struct RfuSendQueue * queue, u8 *src);
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders);
+void InitHostRFUtgtGname(struct RfuGameData *data, u8 activity, bool32 started, s32 child_sprite_genders);
 void UpdateGameData_GroupLockedIn(bool8 started);
 bool32 IsRfuSerialNumberValid(u32 serialNo);
 bool8 IsRfuRecoveringFromLinkLoss(void);
@@ -277,7 +277,7 @@ u32 WaitSendByteToPartnerByIdAndName(u16 a0, const u8 *a1);
 void SetHostRFUtgtGname(u8 activity, u32 child_sprite_genders, u32 a2);
 void InitializeRfuLinkManager_LinkLeader(u32 availSlots);
 void RequestDisconnectSlotByTrainerNameAndId(const u8 *trainerName, u16 trainerId);
-void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname);
+void LinkRfu3_SetGnameUnameFromStaticBuffers(struct RfuGameData *gname, u8 *uname);
 void InitializeRfuLinkManager_JoinGroup(void);
 void SendLeaveGroupNotice(void);
 void CreateTask_RfuReconnectWithParent(const u8 *src, u16 trainerId);
@@ -292,10 +292,10 @@ void RfuUpdatePlayerGnameStateAndSend(u32 type, u32 species, u32 level);
 bool32 IsUnionRoomListenTaskActive(void);
 void InitializeRfuLinkManager_EnterUnionRoom(void);
 void sub_80FBD6C(u32 a0);
-void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
+void sub_80FC114(const u8 *name, struct RfuGameData *structPtr, u8 a2);
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
-bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *gname, u8 *uname, u8 idx);
-bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *gname, u8 *uname, u8 idx);
+bool8 LinkRfu_GetNameIfCompatible(struct RfuGameData *gname, u8 *uname, u8 idx);
+bool8 LinkRfu_GetNameIfSerial7F7D(struct RfuGameData *gname, u8 *uname, u8 idx);
 bool32 RfuHasFoundNewLeader(void);
 void Rfu_UnionRoomChat_StopLinkManager(void);
 void sub_80FB9D0(void);

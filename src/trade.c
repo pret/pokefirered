@@ -2730,7 +2730,7 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGnameSub partnerSub, u16 species1, u16 species2, u8 type, u16 species3, u8 isEventLegal)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData playerSub, struct RfuGameCompatibilityData partnerSub, u16 species1, u16 species2, u8 type, u16 species3, u8 isEventLegal)
 {
     u8 playerHasNationalDex = playerSub.hasNationalDex;
     u8 playerIsChampion = playerSub.isChampion;
@@ -2810,7 +2810,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGname
     return 0;
 }
 
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub playerSub, u16 species2, u16 species, u8 isEventLegal)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData playerSub, u16 species2, u16 species, u8 isEventLegal)
 {
     u8 canTradeEggAndNational = playerSub.hasNationalDex;
 

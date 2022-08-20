@@ -1506,9 +1506,9 @@ const struct SpriteTemplate gSpriteTemplates_Battlers[] =
     },
 };
 
-const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] = 
+static const struct SpriteTemplate sTrainerBackSpriteTemplates[] = 
 {
-    {
+    [TRAINER_BACK_PIC_RED] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1517,7 +1517,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_LEAF] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1526,7 +1526,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1535,7 +1535,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1544,7 +1544,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_POKEDUDE] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1553,7 +1553,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_OLD_MAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -2755,7 +2755,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
-        gMultiuseSpriteTemplate = gSpriteTemplates_TrainerBackpics[trainerSpriteId];
+        gMultiuseSpriteTemplate = sTrainerBackSpriteTemplates[trainerSpriteId];
         gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else

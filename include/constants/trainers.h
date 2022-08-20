@@ -167,6 +167,14 @@
 #define TRAINER_PIC_LADY                  146
 #define TRAINER_PIC_PAINTER               147
 
+// The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
+#define TRAINER_BACK_PIC_RED                    0
+#define TRAINER_BACK_PIC_LEAF                   1
+#define TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN  2
+#define TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY      3
+#define TRAINER_BACK_PIC_POKEDUDE               4
+#define TRAINER_BACK_PIC_OLD_MAN                5
+
 // Leftover from R/S
 #define TRAINER_SECRET_BASE                 1024
 

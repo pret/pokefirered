@@ -2079,7 +2079,7 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
         }
     }
 
-    gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = 1;
+    gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = TRUE;
 }
 
 static void AnimTask_ShinySparkles(u8 taskId)
@@ -2162,7 +2162,7 @@ static void AnimTask_ShinySparkles_WaitSparkles(u8 taskId)
         if (gTasks[taskId].data[1] == TRUE)
         {
             battler = gTasks[taskId].data[0];
-            gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = 1;
+            gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = TRUE;
         }
 
         DestroyTask(taskId);

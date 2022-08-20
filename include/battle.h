@@ -521,16 +521,6 @@ struct BattleScripting
     u8 field_23;
 };
 
-enum
-{
-    BACK_PIC_RED,
-    BACK_PIC_LEAF,
-    BACK_PIC_RS_BRENDAN,
-    BACK_PIC_RS_MAY,
-    BACK_PIC_POKEDUDE,
-    BACK_PIC_OLDMAN
-};
-
 struct BattleSpriteInfo
 {
     /*0x0*/ u16 invisible : 1; // 0x1

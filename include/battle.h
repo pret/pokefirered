@@ -30,7 +30,7 @@
  && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
 
 #define TRAINER_OPPONENT_3FE        0x3FE
-#define TRAINER_OPPONENT_C00        0xC00
+#define TRAINER_UNION_ROOM          0xC00
 #define TRAINER_LINK_OPPONENT       0x800
 #define SECRET_BASE_OPPONENT        0x400
 

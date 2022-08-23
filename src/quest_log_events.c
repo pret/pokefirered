@@ -1149,9 +1149,9 @@ static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
     memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
     memset(gStringVar2, EOS, PLAYER_NAME_LENGTH + 1);
     memset(gStringVar3, EOS, PLAYER_NAME_LENGTH + 1);
-    StringCopy7(gStringVar1, (const u8 *)a0 +  5);
-    StringCopy7(gStringVar2, (const u8 *)a0 + 12);
-    StringCopy7(gStringVar3, (const u8 *)a0 + 19);
+    StringCopy_PlayerName(gStringVar1, (const u8 *)a0 +  5);
+    StringCopy_PlayerName(gStringVar2, (const u8 *)a0 + 12);
+    StringCopy_PlayerName(gStringVar3, (const u8 *)a0 + 19);
     BufferLinkPartnersName(gStringVar1);
     BufferLinkPartnersName(gStringVar2);
     BufferLinkPartnersName(gStringVar3);

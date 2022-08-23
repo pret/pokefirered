@@ -1473,7 +1473,7 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 
     ptr = StringCopy(gDisplayedStringBattle, gUnknown_8260556);
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
-    StringGetEnd10(nickname);
+    StringGet_Nickname(nickname);
     ptr = StringCopy(ptr, nickname);
     *ptr++ = EXT_CTRL_CODE_BEGIN;
     *ptr++ = EXT_CTRL_CODE_COLOR;

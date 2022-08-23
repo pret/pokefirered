@@ -2964,13 +2964,13 @@ BattleScript_RivalBattleLostSkipMonRecall::
 	end2
 
 BattleScript_BattleTowerLost::
-	various8 BS_ATTACKER
+	getbattlersforrecall
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_BattleTowerLostLostSkipMonRecall
 	printfromtable gDoubleBattleRecallStrings
 	waitmessage B_WAIT_TIME_LONG
-	returnopponentmon1toball BS_ATTACKER
+	returnopponentmon1toball
 	waitstate
-	returnopponentmon2toball BS_ATTACKER
+	returnopponentmon2toball
 	waitstate
 BattleScript_BattleTowerLostLostSkipMonRecall::
 	trainerslidein BS_ATTACKER

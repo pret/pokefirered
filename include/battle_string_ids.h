@@ -385,7 +385,7 @@
 #define STRINGID_TRAINER1MON2COMEBACK 384
 #define STRINGID_TRAINER1MON1AND2COMEBACK 385
 
-#define BATTLESTRINGS_COUNT     374
+#define BATTLESTRINGS_COUNT     386
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -545,19 +545,16 @@
 #define B_MSG_WONT_OBEY          1
 #define B_MSG_TURNED_AWAY        2
 #define B_MSG_PRETEND_NOT_NOTICE 3
-#define B_MSG_INCAPABLE_OF_POWER 4
-// For randomly selecting a disobey string
-// Skips the one used for Battle Palace
-#define NUM_LOAF_STRINGS 4
+#define NUM_LOAF_STRINGS         4 // For randomly selecting a disobey string
 
 // gSafariGetNearStringIds
 #define B_MSG_CREPT_CLOSER    0
 #define B_MSG_CANT_GET_CLOSER 1
 
 // gSafariPokeblockResultStringIds
-#define B_MSG_MON_CURIOUS    0
-#define B_MSG_MON_ENTHRALLED 1
-#define B_MSG_MON_IGNORED    2
+#define B_MSG_MON_WATCHING 0
+#define B_MSG_MON_ANGRY    1
+#define B_MSG_MON_EATING   2
 
 // gFlashFireStringIds
 #define B_MSG_FLASH_FIRE_BOOST    0

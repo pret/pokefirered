@@ -242,11 +242,11 @@ extern const u8 gText_Ice[];
 extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
-extern const u8 gUnknown_83FE859[];
-extern const u8 gUnknown_83FE85E[];
-extern const u8 gUnknown_83FE85C[];
-extern const u8 gUnknown_83FE860[];
-extern const u8 gUnknown_83FE864[];
+extern const u8 gText_BattleTowerBan_Space[];
+extern const u8 gText_BattleTowerBan_Newline1[];
+extern const u8 gText_BattleTowerBan_Newline2[];
+extern const u8 gText_BattleTowerBan_Is1[];
+extern const u8 gText_BattleTowerBan_Is2[];
 
 extern const u8 gText_SafariBalls[];
 extern const u8 gText_HighlightRed_Left[];

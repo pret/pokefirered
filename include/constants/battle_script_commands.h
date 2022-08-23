@@ -87,7 +87,7 @@
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
 #define VARIOUS_RESET_PLAYER_FAINTED            7
-#define VARIOUS_CASE_8                          8
+#define VARIOUS_GET_BATTLERS_FOR_RECALL         8
 #define VARIOUS_RETURN_OPPONENT_MON1            9
 #define VARIOUS_RETURN_OPPONENT_MON2            10
 #define VARIOUS_CHECK_POKEFLUTE                 11

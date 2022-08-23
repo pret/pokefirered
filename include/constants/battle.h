@@ -324,7 +324,7 @@
 #define BATTLE_RUN_FORBIDDEN      1
 #define BATTLE_RUN_FAILURE        2
 
-// Window Ids for sStandardBattleWindowTemplates
+// Window Ids for sTextOnWindowsInfo_Normal
 #define B_WIN_MSG                 0
 #define B_WIN_ACTION_PROMPT       1 // "What will {x} do?"
 #define B_WIN_ACTION_MENU         2 // "Fight/Pokémon/Bag/Run" menu

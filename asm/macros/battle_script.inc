@@ -1282,16 +1282,16 @@
 	various BS_ATTACKER, VARIOUS_RESET_PLAYER_FAINTED
 	.endm
 
-	.macro various8 battler:req
-	various \battler, 8
+	.macro getbattlersforrecall
+	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
 	.endm
 
-	.macro returnopponentmon1toball battler:req
-	various \battler, VARIOUS_RETURN_OPPONENT_MON1
+	.macro returnopponentmon1toball
+	various BS_ATTACKER, VARIOUS_RETURN_OPPONENT_MON1
 	.endm
 
-	.macro returnopponentmon2toball battler:req
-	various \battler, VARIOUS_RETURN_OPPONENT_MON2
+	.macro returnopponentmon2toball
+	various BS_ATTACKER, VARIOUS_RETURN_OPPONENT_MON2
 	.endm
 
 	.macro checkpokeflute battler:req

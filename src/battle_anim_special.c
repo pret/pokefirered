@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_main.h"
+#include "battle_message.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "decompress.h"
@@ -2278,7 +2279,7 @@ void AnimTask_SafariOrGhost_DecideAnimSides(u8 taskId)
 
 void AnimTask_SafariGetReaction(u8 taskId)
 {
-    if (gBattleCommunication[MULTISTRING_CHOOSER] > 2)
+    if (gBattleCommunication[MULTISTRING_CHOOSER] >= NUM_SAFARI_REACTIONS)
         gBattleAnimArgs[7] = 0;
     else
         gBattleAnimArgs[7] = gBattleCommunication[MULTISTRING_CHOOSER];

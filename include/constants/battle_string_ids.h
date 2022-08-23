@@ -551,10 +551,11 @@
 #define B_MSG_CREPT_CLOSER    0
 #define B_MSG_CANT_GET_CLOSER 1
 
-// gSafariPokeblockResultStringIds
-#define B_MSG_MON_WATCHING 0
-#define B_MSG_MON_ANGRY    1
-#define B_MSG_MON_EATING   2
+// gSafariReactionStringIds
+#define B_MSG_MON_WATCHING   0
+#define B_MSG_MON_ANGRY      1
+#define B_MSG_MON_EATING     2
+#define NUM_SAFARI_REACTIONS 3
 
 // gFlashFireStringIds
 #define B_MSG_FLASH_FIRE_BOOST    0

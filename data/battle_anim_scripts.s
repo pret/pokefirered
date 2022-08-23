@@ -1,5 +1,6 @@
 #include "constants/battle.h"
 #include "constants/battle_anim.h"
+#include "constants/battle_string_ids.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
@@ -10970,9 +10971,9 @@ General_SafariRockThrow:
 General_SafariReaction:
 	createvisualtask AnimTask_SafariGetReaction, 2
 	waitforvisualfinish
-	jumpreteq 0, SafariReaction_WatchingCarefully
-	jumpreteq 1, SafariReaction_Angry
-	jumpreteq 2, SafariReaction_Eating
+	jumpreteq B_MSG_MON_WATCHING, SafariReaction_WatchingCarefully
+	jumpreteq B_MSG_MON_ANGRY, SafariReaction_Angry
+	jumpreteq B_MSG_MON_EATING, SafariReaction_Eating
 	end
 
 SafariReaction_WatchingCarefully:

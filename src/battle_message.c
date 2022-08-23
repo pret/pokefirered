@@ -1,6 +1,5 @@
 #include "global.h"
 #include "gflib.h"
-#include "battle_string_ids.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "strings.h"
@@ -1186,7 +1185,7 @@ const u16 gInobedientStringIds[] =
     [B_MSG_PRETEND_NOT_NOTICE] = STRINGID_PKMNPRETENDNOTNOTICE
 };
 
-const u16 gSafariPokeblockResultStringIds[] =
+const u16 gSafariReactionStringIds[NUM_SAFARI_REACTIONS] =
 {
     [B_MSG_MON_WATCHING] = STRINGID_PKMNWATCHINGCAREFULLY,
     [B_MSG_MON_ANGRY]    = STRINGID_PKMNANGRY,

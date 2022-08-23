@@ -9,7 +9,6 @@
 #include "battle_message.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
-#include "battle_string_ids.h"
 #include "berry.h"
 #include "data.h"
 #include "decompress.h"
@@ -2274,8 +2273,8 @@ static void BattleStartClearSetData(void)
     gLeveledUpInBattle = 0;
     gAbsentBattlerFlags = 0;
     gBattleStruct->runTries = 0;
-    gBattleStruct->safariGoNearCounter = 0;
-    gBattleStruct->safariPkblThrowCounter = 0;
+    gBattleStruct->safariRockThrowCounter = 0;
+    gBattleStruct->safariBaitThrowCounter = 0;
     *(&gBattleStruct->safariCatchFactor) = gBaseStats[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
     *(&gBattleStruct->safariEscapeFactor) = gBaseStats[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].safariZoneFleeRate * 100 / 1275;
     if (gBattleStruct->safariEscapeFactor <= 1)
@@ -4331,32 +4330,32 @@ static void HandleAction_WatchesCarefully(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    if (gBattleStruct->safariGoNearCounter != 0)
+    if (gBattleStruct->safariRockThrowCounter != 0)
     {
-        --gBattleStruct->safariGoNearCounter;
-        if (gBattleStruct->safariGoNearCounter == 0)
+        --gBattleStruct->safariRockThrowCounter;
+        if (gBattleStruct->safariRockThrowCounter == 0)
         {
             *(&gBattleStruct->safariCatchFactor) = gBaseStats[GetMonData(gEnemyParty, MON_DATA_SPECIES)].catchRate * 100 / 1275;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_WATCHING;
         }
         else
         {
-            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_ANGRY;
         }
     }
     else
     {
-        if (gBattleStruct->safariPkblThrowCounter != 0)
+        if (gBattleStruct->safariBaitThrowCounter != 0)
         {
-            --gBattleStruct->safariPkblThrowCounter;
-            if (gBattleStruct->safariPkblThrowCounter == 0)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            --gBattleStruct->safariBaitThrowCounter;
+            if (gBattleStruct->safariBaitThrowCounter == 0)
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_WATCHING;
             else
-                gBattleCommunication[5] = 2;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_EATING;
         }
         else
         {
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_WATCHING;
         }
     }
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[0];
@@ -4379,10 +4378,10 @@ static void HandleAction_ThrowBait(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    gBattleStruct->safariPkblThrowCounter += Random() % 5 + 2;
-    if (gBattleStruct->safariPkblThrowCounter > 6)
-        gBattleStruct->safariPkblThrowCounter = 6;
-    gBattleStruct->safariGoNearCounter = 0;
+    gBattleStruct->safariBaitThrowCounter += Random() % 5 + 2;
+    if (gBattleStruct->safariBaitThrowCounter > 6)
+        gBattleStruct->safariBaitThrowCounter = 6;
+    gBattleStruct->safariRockThrowCounter = 0;
     gBattleStruct->safariCatchFactor >>= 1;
     if (gBattleStruct->safariCatchFactor <= 2)
         gBattleStruct->safariCatchFactor = 3;
@@ -4395,10 +4394,10 @@ static void HandleAction_ThrowRock(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    gBattleStruct->safariGoNearCounter += Random() % 5 + 2;
-    if (gBattleStruct->safariGoNearCounter > 6)
-        gBattleStruct->safariGoNearCounter = 6;
-    gBattleStruct->safariPkblThrowCounter = 0;
+    gBattleStruct->safariRockThrowCounter += Random() % 5 + 2;
+    if (gBattleStruct->safariRockThrowCounter > 6)
+        gBattleStruct->safariRockThrowCounter = 6;
+    gBattleStruct->safariBaitThrowCounter = 0;
     gBattleStruct->safariCatchFactor <<= 1;
     if (gBattleStruct->safariCatchFactor > 20)
         gBattleStruct->safariCatchFactor = 20;

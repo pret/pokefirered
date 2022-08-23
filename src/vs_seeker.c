@@ -624,7 +624,7 @@ static void Task_ResetObjectsRematchWantedState(u8 taskId)
     {
         DestroyTask(taskId);
         StopPlayerAvatar();
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -837,7 +837,7 @@ static void Task_VsSeeker_3(u8 taskId)
                 StartAllRespondantIdleMovements();
             ClearDialogWindowAndFrame(0, TRUE);
             ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         Free(sVsSeeker);

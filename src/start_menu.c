@@ -394,7 +394,7 @@ void ShowStartMenu(void)
         StopPlayerAvatar();
     }
     OpenStartMenuWithFollowupFunc(Task_StartMenuHandleInput);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 StartCB_HandleInput(void)
@@ -575,7 +575,7 @@ static bool8 StartCB_Save2(void)
     case SAVECB_RETURN_OKAY:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         RestoreHelpContext();
         return TRUE;
     case SAVECB_RETURN_CANCEL:
@@ -587,7 +587,7 @@ static bool8 StartCB_Save2(void)
     case SAVECB_RETURN_ERROR:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         RestoreHelpContext();
         return TRUE;
     }
@@ -641,7 +641,7 @@ static void task50_save_game(u8 taskId)
         break;
     }
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
     RestoreHelpContext();
 }
 
@@ -995,7 +995,7 @@ static void CloseStartMenu(void)
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void AppendToList(u8 *list, u8 *cursor, u8 newEntry)

@@ -137,7 +137,7 @@ static void Task_SSAnneFinish(u8 taskId)
         FreeSpriteTilesByTag(SPRITE_TAG_WAKE);
         FreeSpriteTilesByTag(SPRITE_TAG_SMOKE);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 

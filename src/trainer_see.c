@@ -550,7 +550,7 @@ void EndTrainerApproach(void)
 static void Task_DestroyTrainerApproachTask(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 // Trainer See Excl Mark Field Effect

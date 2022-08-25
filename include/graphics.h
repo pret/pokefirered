@@ -3687,6 +3687,10 @@ extern const u32 gBattleStatMask8_Pal[];
 extern const u32 gBattleStatMask1_Tilemap[];
 extern const u32 gBattleStatMask2_Tilemap[];
 
+extern const u32 gSmokescreenImpactTiles[];
+extern const u32 gSmokescreenImpactPalette[];
+extern const u32 gEnemyMonShadow_Gfx[];
+
 // battle anim particle gfx
 extern const u32 gBattleAnimSpriteGfx_Bone[];
 extern const u32 gBattleAnimSpriteGfx_Spark[];
@@ -3908,7 +3912,7 @@ extern const u32 gBattleAnimSpriteGfx_Pokeball[];
 extern const u32 gBattleAnimSpriteGfx_Spotlight[];
 extern const u32 gBattleAnimSpriteGfx_LetterZ[];
 extern const u32 gBattleAnimSpriteGfx_RapidSpin[];
-extern const u32 gBattleAnimSpriteGfx_TriForceTriangle[];
+extern const u32 gBattleAnimSpriteGfx_TriAttackTriangle[];
 extern const u32 gBattleAnimSpriteGfx_WispOrb[];
 extern const u32 gBattleAnimSpriteGfx_WispFire[];
 extern const u32 gBattleAnimSpriteGfx_GoldStars[];
@@ -4161,7 +4165,7 @@ extern const u32 gBattleAnimSpritePal_JaggedMusicNote[];
 extern const u32 gBattleAnimSpritePal_Pokeball[];
 extern const u32 gBattleAnimSpritePal_LetterZ[];
 extern const u32 gBattleAnimSpritePal_RapidSpin[];
-extern const u32 gBattleAnimSpritePal_TriForceTriangle[];
+extern const u32 gBattleAnimSpritePal_TriAttackTriangle[];
 extern const u32 gBattleAnimSpritePal_WispOrb[];
 extern const u32 gBattleAnimSpritePal_GoldStars[];
 extern const u32 gBattleAnimSpritePal_EclipsingOrb[];
@@ -4215,8 +4219,8 @@ extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
 
 // battle anim task
-extern const u32 gUnknown_D2EC24_Gfx[];
-extern const u32 gUnknown_D2EC24_Tilemap[];
+extern const u32 gUnusedLevelupAnimationGfx[];
+extern const u32 gUnusedLevelupAnimationTilemap[];
 extern const u32 gCureBubblesGfx[];
 extern const u32 gCureBubblesPal[];
 extern const u32 gCureBubblesTilemap[];

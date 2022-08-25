@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_MESSAGE_H
 
 #include "global.h"
+#include "constants/battle_string_ids.h"
 
 // for 0xFD
 

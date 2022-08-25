@@ -1,17 +1,10 @@
 #include "global.h"
+#include "field_message_box.h"
 #include "gflib.h"
 #include "new_menu_helpers.h"
 #include "quest_log.h"
 #include "script.h"
 #include "text_window.h"
-
-enum
-{
-    FIELD_MESSAGE_BOX_HIDDEN,
-    FIELD_MESSAGE_BOX_UNUSED,
-    FIELD_MESSAGE_BOX_NORMAL,
-    FIELD_MESSAGE_BOX_AUTO_SCROLL,
-};
 
 static EWRAM_DATA u8 sMessageBoxType = 0;
 

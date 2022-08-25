@@ -1174,11 +1174,11 @@ extern const u8 gText_ExcellentsInARow[];
 extern const u8 gText_PkmnJumpRecords[];
 
 // cable_club
-extern const u8 gUnknown_841DF82[];
-extern const u8 gUnknown_841DF8B[];
-extern const u8 gUnknown_841DF92[];
-extern const u8 gUnknown_841DF99[];
-extern const u8 gUnknown_841DFA0[];
+extern const u8 gText_NumPlayerLink[];
+extern const u8 gText_BronzeCard[];
+extern const u8 gText_CopperCard[];
+extern const u8 gText_SilverCard[];
+extern const u8 gText_GoldCard[];
 
 // berry_crush
 extern const u8 gText_BerryCrush_AreYouReady[];

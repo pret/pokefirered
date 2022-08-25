@@ -767,7 +767,7 @@ static void CB2_ReturnFromLinkTrade2(void)
                 gMain.state++;
             }
             if (gWirelessCommType == 0)
-                CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 1);
+                CreateTask(Task_WaitForLinkPlayerConnection, 1);
         }
         else
         {
@@ -1346,9 +1346,7 @@ static bool8 shedinja_maker_maybe(void)
         break;
     case 3:
         if (id == 0)
-        {
-            Link_PrepareCmd0xCCCC_Rfu0xA100(1);
-        }
+            SendBlockRequest(BLOCK_REQ_SIZE_200);
         sTradeMenuResourcesPtr->state++;
         break;
     case 4:
@@ -1365,9 +1363,7 @@ static bool8 shedinja_maker_maybe(void)
         break;
     case 7:
         if (id == 0)
-        {
-            Link_PrepareCmd0xCCCC_Rfu0xA100(1);
-        }
+            SendBlockRequest(BLOCK_REQ_SIZE_200);
         sTradeMenuResourcesPtr->state++;
         break;
     case 8:
@@ -1384,9 +1380,7 @@ static bool8 shedinja_maker_maybe(void)
         break;
     case 11:
         if (id == 0)
-        {
-            Link_PrepareCmd0xCCCC_Rfu0xA100(1);
-        }
+            SendBlockRequest(BLOCK_REQ_SIZE_200);
         sTradeMenuResourcesPtr->state++;
         break;
     case 12:
@@ -1403,9 +1397,7 @@ static bool8 shedinja_maker_maybe(void)
         break;
     case 15:
         if (id == 0)
-        {
-            Link_PrepareCmd0xCCCC_Rfu0xA100(3);
-        }
+            SendBlockRequest(BLOCK_REQ_SIZE_220);
         sTradeMenuResourcesPtr->state++;
         break;
     case 16:
@@ -1422,9 +1414,7 @@ static bool8 shedinja_maker_maybe(void)
         break;
     case 19:
         if (id == 0)
-        {
-            Link_PrepareCmd0xCCCC_Rfu0xA100(4);
-        }
+            SendBlockRequest(BLOCK_REQ_SIZE_40);
         sTradeMenuResourcesPtr->state++;
         break;
     case 20:

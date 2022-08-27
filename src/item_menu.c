@@ -2033,7 +2033,7 @@ bool8 UseRegisteredKeyItemOnField(void)
     {
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
         {
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             FreezeObjectEvents();
             HandleEnforcedLookDirectionOnPlayerStopMoving();
             StopPlayerAvatar();
@@ -2044,7 +2044,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         }
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     }
-    ScriptContext1_SetupScript(EventScript_BagItemCanBeRegistered);
+    ScriptContext_SetupScript(EventScript_BagItemCanBeRegistered);
     return TRUE;
 }
 

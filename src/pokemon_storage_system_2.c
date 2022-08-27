@@ -300,8 +300,8 @@ static void Task_PCMainMenu(u8 taskId)
         case OPTION_EXIT:
             ClearStdWindowAndFrame(0, TRUE);
             ClearStdWindowAndFrame(task->tWindowId, TRUE);
-            ScriptContext2_Disable();
-            EnableBothScriptContexts();
+            UnlockPlayerFieldControls();
+            ScriptContext_Enable();
             DestroyTask(taskId);
             break;
         default:
@@ -374,7 +374,7 @@ void ShowPokemonStorageSystemPC(void)
     u8 taskId = CreateTask(Task_PCMainMenu, 80);
     gTasks[taskId].tState = 0;
     gTasks[taskId].tSelectedOption = 0;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void FieldTask_ReturnToPcMenu(void)

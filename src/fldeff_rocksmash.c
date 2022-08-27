@@ -46,7 +46,7 @@ static void Task_FieldEffectShowMon_Init(u8 taskId)
 {
     u8 mapObjId;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
     mapObjId = gPlayerAvatar.objectEventId;
     if (!ObjectEventIsMovementOverridden(&gObjectEvents[mapObjId])
@@ -117,7 +117,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 static void sub_80C9A10(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_FldEffRockSmash);
+    ScriptContext_SetupScript(EventScript_FldEffRockSmash);
 }
 
 bool8 FldEff_UseRockSmash(void)
@@ -133,5 +133,5 @@ static void sub_80C9A60(void)
 {
     PlaySE(SE_M_ROCK_THROW);
     FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

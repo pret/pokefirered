@@ -1515,7 +1515,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -1524,7 +1524,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -1756,7 +1756,7 @@ static void VBlankCB_EggHatch(void)
 
 void EggHatch(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_EggHatch, 10);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
     HelpSystem_Disable();

@@ -6368,7 +6368,7 @@ static void Task_PartyMenuWaitForFade(u8 taskId)
     if (IsWeatherNotFadingIn())
     {
         DestroyTask(taskId);
-        ScriptContext2_Disable();
-        EnableBothScriptContexts();
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
     }
 }

@@ -43,7 +43,7 @@ ViridianCity_EventScript_TryUnlockGym::
 ViridianCity_EventScript_GymDoorLocked::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	msgbox ViridianCity_Text_GymDoorsAreLocked
@@ -88,7 +88,7 @@ ViridianCity_EventScript_OldMan::
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1, ViridianCity_EventScript_OldManGymLeaderReturned
 	msgbox ViridianCity_Text_GymClosedWonderWhoLeaderIs
 	closemessage
-	applymovement LOCALID_OLD_MAN, Movement_FaceOriginalDirection
+	applymovement LOCALID_OLD_MAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -180,7 +180,7 @@ ViridianCity_EventScript_Woman::
 ViridianCity_EventScript_WomanRoadBlocked::
 	msgbox ViridianCity_Text_GrandpaHasntHadCoffeeYet
 	closemessage
-	applymovement LOCALID_WOMAN, Movement_FaceOriginalDirection
+	applymovement LOCALID_WOMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -206,9 +206,9 @@ ViridianCity_Movement_WalkDown::
 ViridianCity_EventScript_TutorialTriggerLeft::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_TUTORIAL_MAN, Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	call ViridianCity_EventScript_DoTutorialBattle
 	release
@@ -217,9 +217,9 @@ ViridianCity_EventScript_TutorialTriggerLeft::
 ViridianCity_EventScript_TutorialTriggerRight::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_TUTORIAL_MAN, Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	call ViridianCity_EventScript_DoTutorialBattle
 	release

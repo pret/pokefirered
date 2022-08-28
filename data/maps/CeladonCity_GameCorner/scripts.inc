@@ -106,7 +106,7 @@ CeladonCity_GameCorner_EventScript_BaldingMan::
 
 CeladonCity_GameCorner_EventScript_FaceSlotMachine::
 	closemessage
-	applymovement VAR_LAST_TALKED, Movement_FaceOriginalDirection
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

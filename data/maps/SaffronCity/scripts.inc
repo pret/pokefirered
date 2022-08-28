@@ -44,7 +44,7 @@ SaffronCity_EventScript_RocketGrunt7::
 SaffronCity_EventScript_DoorGuardGrunt::
 	lock
 	goto_if_set FLAG_RESCUED_MR_FUJI, SaffronCity_EventScript_DoorGuardAsleep
-	applymovement LOCALID_DOOR_GUARD_GRUNT, Movement_FacePlayer
+	applymovement LOCALID_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SaffronCity_Text_ImASecurityGuard
 	release

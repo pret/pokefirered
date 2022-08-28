@@ -40,7 +40,7 @@ Route24_EventScript_RocketTrigger::
 	textcolor NPC_TEXT_COLOR_MALE
 	call_if_eq VAR_TEMP_1, 0, Route24_EventScript_RocketApproachPlayer
 	call_if_eq VAR_TEMP_1, 1, Route24_EventScript_RocketMotionToPlayer
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox Route24_Text_JustEarnedFabulousPrize
 	checkitemspace ITEM_NUGGET
@@ -67,7 +67,7 @@ Route24_EventScript_RocketApproachPlayer::
 	return
 
 Route24_EventScript_RocketMotionToPlayer::
-	applymovement LOCALID_ROCKET, Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROCKET, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 

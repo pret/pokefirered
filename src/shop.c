@@ -751,13 +751,9 @@ static void BuyMenuDrawMapBg(void)
             metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
-            {
                 BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
-            }
             else
-            {
                 BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
-            }
         }
     }
 }
@@ -769,15 +765,15 @@ static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLaye
 
     switch (metatileLayerType)
     {
-    case 0:
+    case METATILE_LAYER_TYPE_NORMAL:
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer4, offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer2, offset1, offset2, src + 4);
         break;
-    case 1:
+    case METATILE_LAYER_TYPE_COVERED:
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer3, offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer4, offset1, offset2, src + 4);
         break;
-    case 2:
+    case METATILE_LAYER_TYPE_SPLIT:
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer3, offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer2, offset1, offset2, src + 4);
         break;

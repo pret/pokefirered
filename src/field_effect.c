@@ -2740,9 +2740,7 @@ static void LoadFieldMoveStreaksTilemapToVram(u16 screenbase)
     u16 *dest;
     dest = (u16 *)(VRAM + (10 * 32) + screenbase);
     for (i = 0; i < (10 * 32); i++, dest++)
-    {
-        *dest = sFieldMoveStreaksOutdoors_Tilemap[i] | METATILE_ELEVATION_MASK;
-    }
+        *dest = sFieldMoveStreaksOutdoors_Tilemap[i] | 0xF000;
 }
 
 static void (*const sShowMonIndoorsEffectFuncs[])(struct Task *) = {

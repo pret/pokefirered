@@ -200,7 +200,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     ResetFacingNpcOrSignPostVars();
     playerDirection = GetPlayerFacingDirection();
     GetPlayerPosition(&position);
-    metatileAttributes = MapGridGetMetatileAttributeAt(position.x, position.y, 0xFF);
+    metatileAttributes = MapGridGetMetatileAttributeAt(position.x, position.y, METATILE_ATTRIBUTES_ALL);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
     FieldClearPlayerInput(&gInputToStoreInQuestLogMaybe);
@@ -354,7 +354,7 @@ static void GetInFrontOfPlayerPosition(struct MapPosition *position)
 
     GetXYCoordsOneStepInFrontOfPlayer(&position->x, &position->y);
     PlayerGetDestCoords(&x, &y);
-    if (MapGridGetZCoordAt(x, y) != 0)
+    if (MapGridGetElevationAt(x, y) != 0)
         position->height = PlayerGetZCoord();
     else
         position->height = 0;

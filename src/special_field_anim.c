@@ -137,13 +137,13 @@ static void Task_DrawEscalator(u8 taskId)
         SetEscalatorMetatile(taskId, sEscalatorMetatiles_BottomRail, 0);
         break;
     case 2:
-        SetEscalatorMetatile(taskId, sEscalatorMetatiles_BottomNext, METATILE_COLLISION_MASK);
+        SetEscalatorMetatile(taskId, sEscalatorMetatiles_BottomNext, MAPGRID_COLLISION_MASK);
         break;
     case 3:
         SetEscalatorMetatile(taskId, sEscalatorMetatiles_Bottom, 0);
         break;
     case 4:
-        SetEscalatorMetatile(taskId, sEscalatorMetatiles_TopNext, METATILE_COLLISION_MASK);
+        SetEscalatorMetatile(taskId, sEscalatorMetatiles_TopNext, MAPGRID_COLLISION_MASK);
         break;
     case 5:
         SetEscalatorMetatile(taskId, sEscalatorMetatiles_Top, 0);
@@ -254,13 +254,13 @@ static void Task_DrawTeleporterHousing(u8 taskId)
         // Alternate the teleporter light / brightness of the teleporter door
         if ((tState & 1) == 0)
         {
-            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Yellow | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_HalfGlowing | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Yellow | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_HalfGlowing | MAPGRID_COLLISION_MASK);
         }
         else
         {
-            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Red | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_FullGlowing | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Red | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_FullGlowing | MAPGRID_COLLISION_MASK);
         }
         CurrentMapDrawMetatileAt(tX, tY);
         CurrentMapDrawMetatileAt(tX, tY + 2);
@@ -275,8 +275,8 @@ static void Task_DrawTeleporterHousing(u8 taskId)
     if (tState != 13)
         return;
     
-    MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Green | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Green | MAPGRID_COLLISION_MASK);
+    MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door | MAPGRID_COLLISION_MASK);
     CurrentMapDrawMetatileAt(tX, tY);
     CurrentMapDrawMetatileAt(tX, tY + 2);
     DestroyTask(taskId);
@@ -305,8 +305,8 @@ static void Task_DrawTeleporterCable(u8 taskId)
         if (tState != 0)
         {
             // Set default cable tiles to clear the ball
-            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Cable_Top | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_Cable_Bottom | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Cable_Top | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_Cable_Bottom | MAPGRID_COLLISION_MASK);
             CurrentMapDrawMetatileAt(tX, tY);
             CurrentMapDrawMetatileAt(tX, tY + 1);
 
@@ -321,8 +321,8 @@ static void Task_DrawTeleporterCable(u8 taskId)
         }
 
         // Draw the cable ball
-        MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_CableBall_Top | METATILE_COLLISION_MASK);
-        MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_CableBall_Bottom | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_CableBall_Top | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_CableBall_Bottom | MAPGRID_COLLISION_MASK);
         CurrentMapDrawMetatileAt(tX, tY);
         CurrentMapDrawMetatileAt(tX, tY + 1);
     }

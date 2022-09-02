@@ -103,7 +103,7 @@ void InitMapFromSavedGame(void)
 static void InitMapLayoutData(struct MapHeader * mapHeader)
 {
     const struct MapLayout * mapLayout = mapHeader->mapLayout;
-    CpuFastFill(MAPGRID_UNDEFINED << 16 | MAPGRID_UNDEFINED, gBackupMapData, sizeof(gBackupMapData));
+    CpuFastFill16(MAPGRID_UNDEFINED, gBackupMapData, sizeof(gBackupMapData));
     VMap.map = gBackupMapData;
     VMap.Xsize = mapLayout->width + MAP_OFFSET_W;
     VMap.Ysize = mapLayout->height + MAP_OFFSET_H;

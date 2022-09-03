@@ -15,10 +15,10 @@ SixIsland_RuinValley_EventScript_OpenDottedHoleDoor::
 SixIsland_RuinValley_EventScript_Scientist::
 	lock
 	msgbox SixIsland_RuinValley_Text_CantFigureOutHowToGetInside
-	applymovement LOCALID_SCIENTIST, Movement_FacePlayer
+	applymovement LOCALID_SCIENTIST, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SixIsland_RuinValley_Text_IFoundThisPlace
-	applymovement LOCALID_SCIENTIST, Movement_FaceOriginalDirection
+	applymovement LOCALID_SCIENTIST, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

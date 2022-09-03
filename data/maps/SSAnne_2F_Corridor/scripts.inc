@@ -28,7 +28,7 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	addobject LOCALID_RIVAL
 	delay 10
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	call_if_eq VAR_TEMP_1, 0, SSAnne_2F_Corridor_EventScript_RivalApproachLeft

@@ -44,14 +44,14 @@ ThreeIsland_EventScript_AntiBiker1::
 	end
 
 ThreeIsland_EventScript_AntiBiker1GotFullRestore::
-	applymovement LOCALID_ANTIBIKER1, Movement_FacePlayer
+	applymovement LOCALID_ANTIBIKER1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_YouveGotImpressiveMons
 	release
 	end
 
 ThreeIsland_EventScript_GiveFullRestore::
-	applymovement LOCALID_ANTIBIKER1, Movement_FacePlayer
+	applymovement LOCALID_ANTIBIKER1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_ThankYouOhYourMonGotHurt
 	checkitemspace ITEM_FULL_RESTORE
@@ -95,23 +95,23 @@ ThreeIsland_EventScript_BikerArgumentScene::
 	return
 
 ThreeIsland_EventScript_PlayerFaceUp::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 @ Unused
 ThreeIsland_EventScript_PlayerFaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PlayerFaceLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PlayerFaceRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -136,7 +136,7 @@ ThreeIsland_EventScript_AntiBiker2::
 	end
 
 ThreeIsland_EventScript_AntiBiker2BikersGone::
-	applymovement LOCALID_ANTIBIKER2, Movement_FacePlayer
+	applymovement LOCALID_ANTIBIKER2, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_Text_LostelleWentOffTowardsBondBridge
 	release
@@ -204,12 +204,12 @@ ThreeIsland_EventScript_BattleBikersTriggerRight::
 
 ThreeIsland_EventScript_BattleBikersScene::
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_BIKER1, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER1, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_BIKER1, Movement_ExclamationMark
+	applymovement LOCALID_BIKER1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_BIKER1, Movement_Delay48
+	applymovement LOCALID_BIKER1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_BIKER1, ThreeIsland_Movement_BikerApproach
 	waitmovement 0
@@ -239,10 +239,10 @@ ThreeIsland_EventScript_BattleBikersScene::
 	msgbox ThreeIsland_Text_Biker3Intro
 	setvar VAR_LAST_TALKED, LOCALID_BIKER3
 	trainerbattle_no_intro TRAINER_BIKER_GOON_3, ThreeIsland_Text_Biker3Defeat
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_BIKER4, Movement_WalkInPlaceFasterDown
-	applymovement LOCALID_BIKER5, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER4, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER5, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox ThreeIsland_Text_Biker3PostBattle
 	closemessage
@@ -272,33 +272,33 @@ ThreeIsland_EventScript_BattleBikersScene::
 	end
 
 ThreeIsland_EventScript_PaxtonApproachLeft::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMidLeft::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMid::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMid
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMidRight::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidRight
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachRight::
-	applymovement LOCALID_BIKER3, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
 	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachRight
 	waitmovement 0

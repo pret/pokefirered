@@ -154,28 +154,28 @@
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TWO_ISLAND_JOYFUL_GAME_CORNER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 33,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TWO_ISLAND_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 21,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_TWO_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_TWO_ISLAND_HARBOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

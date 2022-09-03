@@ -254,105 +254,105 @@
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_SILPH_CO_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 22,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 40,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_DOJO",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 46,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_GYM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 27,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_HOUSE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 40,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_MART",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 24,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 43,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_MR_PSYCHICS_HOUSE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 27,
       "elevation": 3,
       "dest_map": "MAP_ROUTE7_EAST_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 34,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE5_SOUTH_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 58,
       "y": 27,
       "elevation": 3,
       "dest_map": "MAP_ROUTE8_WEST_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 34,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 35,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 35,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE5_SOUTH_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 47,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

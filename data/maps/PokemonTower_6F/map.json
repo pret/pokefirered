@@ -92,14 +92,14 @@
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_TOWER_7F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_TOWER_5F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

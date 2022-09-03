@@ -64,21 +64,21 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_WEST",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 4,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_WEST",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 5,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_WEST",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     }
   ],
   "coord_events": [],

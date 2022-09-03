@@ -78,7 +78,7 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

@@ -21,14 +21,14 @@
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B5F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 2,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B7F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

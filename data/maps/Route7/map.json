@@ -41,14 +41,14 @@
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_UNDERGROUND_PATH_WEST_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 15,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_ROUTE7_EAST_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

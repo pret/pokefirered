@@ -386,28 +386,28 @@
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 33,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 27,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 2,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

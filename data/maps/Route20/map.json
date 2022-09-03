@@ -187,14 +187,14 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 72,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

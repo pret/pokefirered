@@ -36,7 +36,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_RUBY_PATH_B4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

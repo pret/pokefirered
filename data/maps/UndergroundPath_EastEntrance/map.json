@@ -36,28 +36,28 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_ROUTE8",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_ROUTE8",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_ROUTE8",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

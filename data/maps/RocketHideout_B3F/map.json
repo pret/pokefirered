@@ -92,14 +92,14 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_ROCKET_HIDEOUT_B2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_ROCKET_HIDEOUT_B4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

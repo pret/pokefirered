@@ -36,7 +36,7 @@
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

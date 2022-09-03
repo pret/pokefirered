@@ -218,28 +218,28 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 31,
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 18,
       "y": 37,
       "elevation": 3,
       "dest_map": "MAP_ROUTE4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -176,42 +176,42 @@
       "y": 62,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 28,
       "y": 62,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 5,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 6,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 30,
       "y": 62,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 4,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

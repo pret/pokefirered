@@ -92,14 +92,14 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_3F_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_3F_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

@@ -313,14 +313,14 @@
       "y": 17,
       "elevation": 5,
       "dest_map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 61,
       "elevation": 0,
       "dest_map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

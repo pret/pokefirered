@@ -234,28 +234,28 @@
       "y": 86,
       "elevation": 0,
       "dest_map": "MAP_ROUTE12_FISHING_HOUSE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_ROUTE12_NORTH_ENTRANCE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_ROUTE12_NORTH_ENTRANCE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE12_NORTH_ENTRANCE_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

@@ -21,21 +21,21 @@
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_FOUR_ISLAND",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 10,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

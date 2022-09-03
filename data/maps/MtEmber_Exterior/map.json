@@ -302,42 +302,42 @@
       "y": 48,
       "elevation": 3,
       "dest_map": "MAP_ONE_ISLAND_KINDLE_ROAD",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 29,
       "y": 48,
       "elevation": 3,
       "dest_map": "MAP_ONE_ISLAND_KINDLE_ROAD",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 24,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_SUMMIT_PATH_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 39,
       "y": 19,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_SUMMIT_PATH_3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 29,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_SUMMIT",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 42,
       "y": 39,
       "elevation": 0,
       "dest_map": "MAP_MT_EMBER_RUBY_PATH_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

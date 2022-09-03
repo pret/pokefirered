@@ -92,7 +92,7 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY_MUSEUM_1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],

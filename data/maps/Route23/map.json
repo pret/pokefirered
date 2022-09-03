@@ -131,28 +131,28 @@
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 18,
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_2F",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 8,
       "y": 153,
       "elevation": 3,
       "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 154,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

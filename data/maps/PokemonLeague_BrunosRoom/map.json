@@ -36,14 +36,14 @@
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_POKEMON_LEAGUE_LORELEIS_ROOM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 6,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_POKEMON_LEAGUE_AGATHAS_ROOM",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

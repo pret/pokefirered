@@ -36,14 +36,14 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_ROUTE11",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_DIGLETTS_CAVE_B1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

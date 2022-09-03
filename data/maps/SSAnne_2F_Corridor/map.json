@@ -50,63 +50,63 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_1F_CORRIDOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_3F_CORRIDOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 30,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_CAPTAINS_OFFICE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_2F_ROOM1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_2F_ROOM2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_2F_ROOM3",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_2F_ROOM4",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 22,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_2F_ROOM5",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 26,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_2F_ROOM6",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

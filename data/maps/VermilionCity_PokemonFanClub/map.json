@@ -106,21 +106,21 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_VERMILION_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 5,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_VERMILION_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 6,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_VERMILION_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],

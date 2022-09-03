@@ -21,14 +21,14 @@
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_RUBY_PATH_B5F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_RUBY_PATH_B3F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

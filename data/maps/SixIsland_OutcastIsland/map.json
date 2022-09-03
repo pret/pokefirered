@@ -126,7 +126,7 @@
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_ALTERING_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

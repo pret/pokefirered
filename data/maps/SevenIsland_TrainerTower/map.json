@@ -56,7 +56,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_TRAINER_TOWER_LOBBY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

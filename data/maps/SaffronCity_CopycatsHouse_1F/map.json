@@ -64,28 +64,28 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 10,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

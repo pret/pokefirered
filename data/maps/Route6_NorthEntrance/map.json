@@ -36,28 +36,28 @@
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     },
     {
       "x": 5,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     },
     {
       "x": 4,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

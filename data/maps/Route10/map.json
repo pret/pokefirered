@@ -173,35 +173,35 @@
       "y": 19,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 57,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 7,
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_POWER_PLANT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 2,
       "y": 37,
       "elevation": 3,
       "dest_map": "MAP_POWER_PLANT",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

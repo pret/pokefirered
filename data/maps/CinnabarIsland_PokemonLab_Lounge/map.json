@@ -64,7 +64,7 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

@@ -78,28 +78,28 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY_CONDOMINIUMS_2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY_CONDOMINIUMS_ROOF",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY_CONDOMINIUMS_ROOF",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 11,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY_CONDOMINIUMS_2F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

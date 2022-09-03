@@ -434,21 +434,21 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_EXTERIOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_MT_EMBER_EXTERIOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 15,
       "y": 58,
       "elevation": 3,
       "dest_map": "MAP_ONE_ISLAND_KINDLE_ROAD_EMBER_SPA",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

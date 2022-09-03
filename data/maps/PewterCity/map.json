@@ -131,49 +131,49 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_MUSEUM_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 25,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_MUSEUM_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 15,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_GYM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 28,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_MART",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 33,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_HOUSE1",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 17,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 9,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_HOUSE2",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

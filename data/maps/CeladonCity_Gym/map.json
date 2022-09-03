@@ -176,21 +176,21 @@
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 6,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 7,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     }
   ],
   "coord_events": [],

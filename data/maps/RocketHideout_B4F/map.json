@@ -148,21 +148,21 @@
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_ROCKET_HIDEOUT_B3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 23,
       "elevation": 0,
       "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 21,
       "y": 23,
       "elevation": 0,
       "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

@@ -70,21 +70,21 @@
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_THREE_ISLAND_DUNSPARCE_TUNNEL",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 38,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_THREE_ISLAND_DUNSPARCE_TUNNEL",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 12,
       "y": 13,
       "elevation": 3,
       "dest_map": "MAP_THREE_ISLAND_HARBOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

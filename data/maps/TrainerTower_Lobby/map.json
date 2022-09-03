@@ -92,21 +92,21 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_TRAINER_TOWER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 9,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TRAINER_TOWER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_TRAINER_TOWER_ELEVATOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

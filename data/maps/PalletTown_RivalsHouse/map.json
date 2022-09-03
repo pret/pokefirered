@@ -50,21 +50,21 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_PALLET_TOWN",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_PALLET_TOWN",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 3,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_PALLET_TOWN",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

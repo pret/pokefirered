@@ -36,28 +36,28 @@
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [],

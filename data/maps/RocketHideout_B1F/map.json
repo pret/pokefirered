@@ -120,42 +120,42 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_CELADON_CITY_GAME_CORNER",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 17,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_ROCKET_HIDEOUT_B2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 15,
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_ROCKET_HIDEOUT_B2F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 23,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 24,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 25,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_ROCKET_HIDEOUT_ELEVATOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

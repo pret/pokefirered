@@ -84,49 +84,49 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 103,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_LIPTOO_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 88,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_WEEPTH_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 44,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 32,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_SCUFIB_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_RIXY_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

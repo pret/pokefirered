@@ -36,7 +36,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_WATER_PATH",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

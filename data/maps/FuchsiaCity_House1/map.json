@@ -64,21 +64,21 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],

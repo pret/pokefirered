@@ -50,21 +50,21 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE25",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE25",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE25",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

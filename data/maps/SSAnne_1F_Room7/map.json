@@ -36,7 +36,7 @@
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_1F_CORRIDOR",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     }
   ],
   "coord_events": [],

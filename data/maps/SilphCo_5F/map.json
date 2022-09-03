@@ -148,49 +148,49 @@
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SILPH_CO_4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SILPH_CO_3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 30,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_SILPH_CO_6F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 10,
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_SILPH_CO_9F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 2,
       "y": 20,
       "elevation": 3,
       "dest_map": "MAP_SILPH_CO_3F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 33,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SILPH_CO_7F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 22,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_SILPH_CO_ELEVATOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

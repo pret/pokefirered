@@ -176,28 +176,28 @@
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 31,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 17,
       "y": 31,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 5,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     }
   ],
   "coord_events": [

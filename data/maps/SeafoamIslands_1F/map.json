@@ -64,49 +64,49 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 31,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 28,
       "y": 19,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 6,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE20",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 32,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE20",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 21,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B1F",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 30,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B1F",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     }
   ],
   "coord_events": [],

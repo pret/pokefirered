@@ -200,7 +200,7 @@ string generate_map_events_text(Json map_data) {
                  << warp_event["x"].int_value() << ", "
                  << warp_event["y"].int_value() << ", "
                  << warp_event["elevation"].int_value() << ", "
-                 << warp_event["dest_warp_id"].int_value() << ", "
+                 << warp_event["dest_warp_id"].string_value() << ", "
                  << warp_event["dest_map"].string_value() << "\n";
         }
         text << "\n";
@@ -324,7 +324,7 @@ string generate_firered_map_events_text(Json map_data) {
                  << warp_event["x"].int_value() << ", "
                  << warp_event["y"].int_value() << ", "
                  << warp_event["elevation"].int_value() << ", "
-                 << warp_event["dest_warp_id"].int_value() << ", "
+                 << warp_event["dest_warp_id"].string_value() << ", "
                  << warp_event["dest_map"].string_value() << "\n";
         }
         text << "\n";

@@ -64,7 +64,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_FOUR_ISLAND",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

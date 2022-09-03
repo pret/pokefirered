@@ -117,21 +117,21 @@
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_UNDERGROUND_PATH_SOUTH_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 12,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 13,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

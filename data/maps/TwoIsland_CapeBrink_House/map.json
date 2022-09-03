@@ -36,7 +36,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_TWO_ISLAND_CAPE_BRINK",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

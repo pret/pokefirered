@@ -64,28 +64,28 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_FOREST",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 7,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_FOREST",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 8,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_FOREST",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 7,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

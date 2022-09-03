@@ -89,35 +89,35 @@
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_POKEMON_MANSION_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_GYM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_MART",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

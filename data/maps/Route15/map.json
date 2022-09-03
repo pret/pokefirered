@@ -223,14 +223,14 @@
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ROUTE15_WEST_ENTRANCE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_ROUTE15_WEST_ENTRANCE_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

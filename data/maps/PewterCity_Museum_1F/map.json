@@ -106,42 +106,42 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 21,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 22,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY_MUSEUM_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

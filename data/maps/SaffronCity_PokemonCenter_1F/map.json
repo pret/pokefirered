@@ -106,28 +106,28 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 7,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 8,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_SAFFRON_CITY_POKEMON_CENTER_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

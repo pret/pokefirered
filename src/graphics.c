@@ -1251,13 +1251,11 @@ const u32 gPokeSummary_StatusAilmentIconTiles[] = INCBIN_U32("graphics/interface
 const u16 gDexScreen_TopMenuIconPals_AtoZ[] = INCBIN_U16("graphics/pokedex/cat_icon_abc.gbapal");
 const u32 gDexScreen_TopMenuIconTiles_AtoZ[] = INCBIN_U32("graphics/pokedex/cat_icon_abc.4bpp.lz");
 
-const u16 gPSSMenu_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal1.gbapal");
-const u16 gUnknown_8E9C3F8[] = INCBIN_U16("graphics/interface/box_tiles_pal2.gbapal");
-const u16 gUnknown_8E9C418[] = INCBIN_U16("graphics/interface/box_tiles_pal3.gbapal");
-const u32 gPSSMenu_Gfx[] = INCBIN_U32("graphics/interface/box_tiles.4bpp.lz");
-
-const u32 gUnknown_8E9CAEC[] = INCBIN_U32("graphics/unknown/unknown_E9CAEC.bin.lz");
-
+const u16 gPokeStoragePartyMenu_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal1.gbapal");
+const u16 gPokeStorageInterface_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal2.gbapal");
+const u16 gPokeStorageInterface_NoDisplayMon_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal3.gbapal");
+const u32 gPokeStorageMenu_Gfx[] = INCBIN_U32("graphics/interface/box_tiles.4bpp.lz");
+const u32 gPokeStoragePartyMenu_Tilemap[] = INCBIN_U32("graphics/unknown/unknown_E9CAEC.bin.lz");
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/misc/markings2.gbapal");
 const u16 gMonMarkingsMenu_Gfx[] = INCBIN_U16("graphics/misc/markings2.4bpp");
 

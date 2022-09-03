@@ -16,22 +16,20 @@
 #include "constants/help_system.h"
 
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
-static EWRAM_DATA struct ChooseBoxMenu *sBoxSelectionPopupSpriteManager = NULL;
+static EWRAM_DATA struct ChooseBoxMenu *sChooseBoxMenu = NULL;
 
-static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
+static void CreatePCMainMenu(u8 whichMenu, s16 *windowIdPtr);
 static void ChooseBoxMenu_CreateSprites(u8 curBox);
-static void sub_808CBA4(void);
-static void UpdateBoxNameAndCountSprite_WraparoundRight(void);
-static void UpdateBoxNameAndCountSprite_WraparoundLeft(void);
-static void PrintBoxNameAndCountToSprite(void);
-static void PrintToSpriteWithTagUnk0240(const u8 *a0, u16 x, u16 y);
-static void sub_808CD64(struct Sprite *sprite);
+static void ChooseBoxMenu_DestroySprites(void);
+static void ChooseBoxMenu_MoveRight(void);
+static void ChooseBoxMenu_MoveLeft(void);
+static void ChooseBoxMenu_PrintBoxNameAndCount(void);
+static void ChooseBoxMenu_PrintTextToSprite(const u8 *a0, u16 x, u16 y);
+static void SpriteCB_ChooseBoxArrow(struct Sprite *sprite);
 
-// Forward declarations
-
-static const u16 sBoxSelectionPopupPalette[];
-static const u16 sBoxSelectionPopupCenterTiles[];
-static const u16 sBoxSelectionPopupSidesTiles[];
+static const u16 sChooseBoxMenu_Pal[];
+static const u8 sChooseBoxMenuCenter_Gfx[];
+static const u8 sChooseBoxMenuCorners_Gfx[];
 
 struct {
     const u8 *text;
@@ -44,7 +42,7 @@ struct {
     [OPTION_EXIT]       = {gText_SeeYa,           gText_SeeYaDescription}
 };
 
-void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer)
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *unused, s32 bytesToBuffer)
 {
     s32 i, tileBytesToBuffer, remainingBytes;
     u16 windowId;
@@ -90,7 +88,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     RemoveWindow(windowId);
 }
 
-static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8 bgClr, u8 fgClr, u8 shClr, u8 *buffer)
+static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 offset, u8 bgColor, u8 fgColor, u8 shadowColor, u8 *unused)
 {
     u32 var;
     u8 windowId;
@@ -102,15 +100,15 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8
     winTemplate.height = 2;
     var = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     tileData1 = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
-    txtColor[0] = bgClr;
-    txtColor[1] = fgClr;
-    txtColor[2] = shClr;
+    txtColor[0] = bgColor;
+    txtColor[1] = fgColor;
+    txtColor[2] = shadowColor;
     AddTextPrinterParameterized4(windowId, FONT_1, 0, 2, 0, 0, txtColor, -1, string);
     CpuCopy16(tileData1, dst, var);
-    CpuCopy16(tileData2, dst + rise, var);
+    CpuCopy16(tileData2, dst + offset, var);
     RemoveWindow(windowId);
 }
 
@@ -147,10 +145,8 @@ u8 CountPartyNonEggMons(void)
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-        {
+                && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
             count++;
-        }
     }
 
     return count;
@@ -163,12 +159,10 @@ u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore)
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
         if (i != slotToIgnore
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
-            && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
-        {
+                && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+                && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+                && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
             count++;
-        }
     }
 
     return count;
@@ -186,9 +180,7 @@ u8 CountPartyMons(void)
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
-        {
             count++;
-        }
     }
 
     return count;
@@ -205,7 +197,8 @@ static u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
-static void sub_808C25C(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+// Unused
+static void UnusedWriteRectCpu(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
 {
     u16 i;
 
@@ -231,16 +224,6 @@ static void UnusedWriteRectDma(u16 *dest, u16 dest_left, u16 dest_top, u16 width
         Dma3FillLarge16_(0, dest, width);
 }
 
-
-//------------------------------------------------------------------------------
-//  SECTION: Main menu
-//
-//  The below functions generally handle the PC main menu where the main
-//  options can be selected (Withdraw, Deposit, etc.), as well as exiting
-//  Pokémon Storage back to this menu.
-//------------------------------------------------------------------------------
-
-
 enum {
     STATE_LOAD,
     STATE_FADE_IN,
@@ -263,7 +246,7 @@ static void Task_PCMainMenu(u8 taskId)
     {
     case STATE_LOAD:
         SetHelpContext(HELPCONTEXT_BILLS_PC);
-        PSS_CreatePCMenu(task->tSelectedOption, &task->tWindowId);
+        CreatePCMainMenu(task->tSelectedOption, &task->tWindowId);
         LoadStdWindowFrameGfx();
         DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -274,9 +257,8 @@ static void Task_PCMainMenu(u8 taskId)
         break;
     case STATE_FADE_IN:
         if (IsWeatherNotFadingIn())
-        {
             task->tState++;
-        }
+
         break;
     case STATE_HANDLE_INPUT:
         task->tInput = Menu_ProcessInput();
@@ -305,14 +287,14 @@ static void Task_PCMainMenu(u8 taskId)
             DestroyTask(taskId);
             break;
         default:
-            if (task->tInput == 0 && CountPartyMons() == PARTY_SIZE)
+            if (task->tInput == OPTION_WITHDRAW && CountPartyMons() == PARTY_SIZE)
             {
                 // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
                 AddTextPrinterParameterized2(0, FONT_2, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-                task->tState = 3;
+                task->tState = STATE_ERROR_MSG;
             }
-            else if (task->tInput == 1 && CountPartyMons() == 1)
+            else if (task->tInput == OPTION_DEPOSIT && CountPartyMons() == 1)
             {
                 // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -362,7 +344,7 @@ static void Task_PCMainMenu(u8 taskId)
         if (!gPaletteFade.active)
         {
             CleanupOverworldWindowsAndTilemaps();
-            Cb2_EnterPSS(task->tInput);
+            EnterPokeStorage(task->tInput);
             DestroyTask(taskId);
         }
         break;
@@ -372,7 +354,7 @@ static void Task_PCMainMenu(u8 taskId)
 void ShowPokemonStorageSystemPC(void)
 {
     u8 taskId = CreateTask(Task_PCMainMenu, 80);
-    gTasks[taskId].tState = 0;
+    gTasks[taskId].tState = STATE_LOAD;
     gTasks[taskId].tSelectedOption = 0;
     LockPlayerFieldControls();
 }
@@ -384,14 +366,14 @@ static void FieldTask_ReturnToPcMenu(void)
 
     SetVBlankCallback(NULL);
     taskId = CreateTask(Task_PCMainMenu, 80);
-    gTasks[taskId].tState = 0;
+    gTasks[taskId].tState = STATE_LOAD;
     gTasks[taskId].tSelectedOption = sPreviousBoxOption;
     Task_PCMainMenu(taskId);
     SetVBlankCallback(vblankCb);
     FadeInFromBlack();
 }
 
-static const struct WindowTemplate sUnknown_83CDA48 = {
+static const struct WindowTemplate sWindowTemplate_MainMenu = {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
@@ -401,14 +383,13 @@ static const struct WindowTemplate sUnknown_83CDA48 = {
     .baseBlock = 0x001
 };
 
-static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
+static void CreatePCMainMenu(u8 whichMenu, s16 *windowIdPtr)
 {
-    s16 windowId;
-    windowId = AddWindow(&sUnknown_83CDA48);
+    s16 windowId = AddWindow(&sWindowTemplate_MainMenu);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintTextArray(windowId, FONT_2, GetMenuCursorDimensionByFont(FONT_2, 0), 2, 16, NELEMS(sMainMenuTexts), (void *)sMainMenuTexts);
-    Menu_InitCursor(windowId, FONT_2, 0, 2, 16, NELEMS(sMainMenuTexts), whichMenu);
+    PrintTextArray(windowId, FONT_2, GetMenuCursorDimensionByFont(FONT_2, 0), 2, 16, ARRAY_COUNT(sMainMenuTexts), (void *)sMainMenuTexts);
+    Menu_InitCursor(windowId, FONT_2, 0, 2, 16, ARRAY_COUNT(sMainMenuTexts), whichMenu);
     *windowIdPtr = windowId;
 }
 
@@ -439,54 +420,44 @@ void ResetPokemonStorageSystem(void)
         SetBoxWallpaper(boxId, boxId % (MAX_DEFAULT_WALLPAPER + 1));
 }
 
-
-//------------------------------------------------------------------------------
-//  SECTION: Choose Box menu
-//
-//  The below functions handle the popup menu that allows the player to cycle
-//  through the boxes and select one. Used when storing Pokémon in Deposit mode
-//  and for the Jump feature.
-//------------------------------------------------------------------------------
-
-
-void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
+void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal)
 {
     struct SpritePalette palette = {
-        sBoxSelectionPopupPalette, palTag
+        sChooseBoxMenu_Pal, palTag
     };
     struct SpriteSheet sheets[] = {
-        {sBoxSelectionPopupCenterTiles, 0x800, tileTag},
-        {sBoxSelectionPopupSidesTiles,  0x180, tileTag + 1},
+        {sChooseBoxMenuCenter_Gfx, 0x800, tileTag},
+        {sChooseBoxMenuCorners_Gfx,  0x180, tileTag + 1},
         {}
     };
 
-    if (loadPal)
+    if (loadPal) // Always false
         LoadSpritePalette(&palette);
 
     LoadSpriteSheets(sheets);
-    sBoxSelectionPopupSpriteManager = a0;
-    a0->tileTag = tileTag;
-    a0->paletteTag = palTag;
-    a0->subpriority = a3;
-    a0->loadedPalette = loadPal;
+    sChooseBoxMenu = menu;
+    menu->tileTag = tileTag;
+    menu->paletteTag = palTag;
+    menu->subpriority = subpriority;
+    menu->loadedPalette = loadPal;
 }
 
 void FreeBoxSelectionPopupSpriteGfx(void)
 {
-    if (sBoxSelectionPopupSpriteManager->loadedPalette)
-        FreeSpritePaletteByTag(sBoxSelectionPopupSpriteManager->paletteTag);
-    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tileTag);
-    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tileTag + 1);
+    if (sChooseBoxMenu->loadedPalette)
+        FreeSpritePaletteByTag(sChooseBoxMenu->paletteTag);
+    FreeSpriteTilesByTag(sChooseBoxMenu->tileTag);
+    FreeSpriteTilesByTag(sChooseBoxMenu->tileTag + 1);
 }
 
-void sub_808C940(u8 curBox)
+void CreateChooseBoxMenuSprites(u8 curBox)
 {
     ChooseBoxMenu_CreateSprites(curBox);
 }
 
-void sub_808C950(void)
+void DestroyChooseBoxMenuSprites(void)
 {
-    sub_808CBA4();
+    ChooseBoxMenu_DestroySprites();
 }
 
 u8 HandleBoxChooseSelectionInput(void)
@@ -494,60 +465,61 @@ u8 HandleBoxChooseSelectionInput(void)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        return 201;
+        return BOXID_CANCELED;
     }
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        return sBoxSelectionPopupSpriteManager->curBox;
+        return sChooseBoxMenu->curBox;
     }
     if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
-        UpdateBoxNameAndCountSprite_WraparoundLeft();
+        ChooseBoxMenu_MoveLeft();
     }
     else if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
-        UpdateBoxNameAndCountSprite_WraparoundRight();
+        ChooseBoxMenu_MoveRight();
     }
-    return 200;
+    return BOXID_NONE_CHOSEN;
 }
 
-static const union AnimCmd gUnknown_83CDA50[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_TopLeft[] = {
     ANIMCMD_FRAME( 0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CDA58[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_BottomLeft[] = {
     ANIMCMD_FRAME( 4, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CDA60[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_TopRight[] = {
     ANIMCMD_FRAME( 6, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83CDA68[] = {
+static const union AnimCmd sAnim_ChooseBoxMenu_BottomRight[] = {
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_83CDA70[] = {
-    gUnknown_83CDA50,
-    gUnknown_83CDA58,
-    gUnknown_83CDA60,
-    gUnknown_83CDA68
+static const union AnimCmd *const sAnims_ChooseBoxMenu[] = {
+    sAnim_ChooseBoxMenu_TopLeft,
+    sAnim_ChooseBoxMenu_BottomLeft,
+    sAnim_ChooseBoxMenu_TopRight,
+    sAnim_ChooseBoxMenu_BottomRight,
 };
 
-static const union AffineAnimCmd gUnknown_83CDA80[] = {
+static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] = {
     AFFINEANIMCMD_FRAME(224, 224, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gUnknown_83CDA90[] = {
-    gUnknown_83CDA80
+// Unused
+static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] = {
+    sAffineAnim_ChooseBoxMenu
 };
 
 static void ChooseBoxMenu_CreateSprites(u8 curBox)
@@ -562,112 +534,112 @@ static void ChooseBoxMenu_CreateSprites(u8 curBox)
         0, 0, &oamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
     };
     {
-    const u8 gUnknown_83CDA94[] = _("/30");
+    const u8 sText_OutOf30[] = _("/30");
 
-    sBoxSelectionPopupSpriteManager->curBox = curBox;
-    template.tileTag = sBoxSelectionPopupSpriteManager->tileTag;
-    template.paletteTag = sBoxSelectionPopupSpriteManager->paletteTag;
+    sChooseBoxMenu->curBox = curBox;
+    template.tileTag = sChooseBoxMenu->tileTag;
+    template.paletteTag = sChooseBoxMenu->paletteTag;
 
     spriteId = CreateSprite(&template, 160, 96, 0);
-    sBoxSelectionPopupSpriteManager->menuSprite = gSprites + spriteId;
+    sChooseBoxMenu->menuSprite = gSprites + spriteId;
 
-    // Manual subsprites
     oamData.shape = SPRITE_SHAPE(8x32);
     oamData.size = SPRITE_SIZE(8x32);
-    template.tileTag = sBoxSelectionPopupSpriteManager->tileTag + 1;
-    template.anims = gUnknown_83CDA70;
-    for (i = 0; i < 4; i++)
+    template.tileTag = sChooseBoxMenu->tileTag + 1;
+    template.anims = sAnims_ChooseBoxMenu;
+    for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->menuCornerSprites); i++)
     {
-        u16 r5;
-        spriteId = CreateSprite(&template, 124, 80, sBoxSelectionPopupSpriteManager->subpriority);
-        sBoxSelectionPopupSpriteManager->menuSideSprites[i] = gSprites + spriteId;
-        r5 = 0;
+        // corner sprites are created in order of top left, bottom left, top right, bottom right
+        u16 animNum;
+        spriteId = CreateSprite(&template, 124, 80, sChooseBoxMenu->subpriority); // place at top left
+        sChooseBoxMenu->menuCornerSprites[i] = &gSprites[spriteId];
+        animNum = 0;
         if (i & 2)
         {
-            sBoxSelectionPopupSpriteManager->menuSideSprites[i]->x = 196;
-            r5 = 2;
+            sChooseBoxMenu->menuCornerSprites[i]->x = 196; // move to bottom
+            animNum = 2;
         }
         if (i & 1)
         {
-            sBoxSelectionPopupSpriteManager->menuSideSprites[i]->y = 112;
-            sBoxSelectionPopupSpriteManager->menuSideSprites[i]->oam.size = SPRITE_SIZE(8x16);
-            r5++;
+            sChooseBoxMenu->menuCornerSprites[i]->y = 112; // move to right
+            sChooseBoxMenu->menuCornerSprites[i]->oam.size = SPRITE_SIZE(8x16);
+            animNum++;
         }
-        StartSpriteAnim(sBoxSelectionPopupSpriteManager->menuSideSprites[i], r5);
+        StartSpriteAnim(sChooseBoxMenu->menuCornerSprites[i], animNum);
     }
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->arrowSprites); i++)
     {
-        sBoxSelectionPopupSpriteManager->arrowSprites[i] = CreateChooseBoxArrows(72 * i + 0x7c, 0x58, i, 0, sBoxSelectionPopupSpriteManager->subpriority);
-        if (sBoxSelectionPopupSpriteManager->arrowSprites[i])
+        sChooseBoxMenu->arrowSprites[i] = CreateChooseBoxArrows(72 * i + 124, 88, i, 0, sChooseBoxMenu->subpriority);
+        if (sChooseBoxMenu->arrowSprites[i])
         {
-            sBoxSelectionPopupSpriteManager->arrowSprites[i]->data[0] = (i == 0 ? -1 : 1);
-            sBoxSelectionPopupSpriteManager->arrowSprites[i]->callback = sub_808CD64;
+            sChooseBoxMenu->arrowSprites[i]->data[0] = (i == 0 ? -1 : 1);
+            sChooseBoxMenu->arrowSprites[i]->callback = SpriteCB_ChooseBoxArrow;
         }
     }
-    PrintBoxNameAndCountToSprite();
-    PrintToSpriteWithTagUnk0240(gUnknown_83CDA94, 5, 3);
+    ChooseBoxMenu_PrintBoxNameAndCount();
+    ChooseBoxMenu_PrintTextToSprite(sText_OutOf30, 5, 3);
     }
 }
 
-static void sub_808CBA4(void)
+static void ChooseBoxMenu_DestroySprites(void)
 {
     u16 i;
-    if (sBoxSelectionPopupSpriteManager->menuSprite)
+    if (sChooseBoxMenu->menuSprite)
     {
-        DestroySprite(sBoxSelectionPopupSpriteManager->menuSprite);
-        sBoxSelectionPopupSpriteManager->menuSprite = NULL;
+        DestroySprite(sChooseBoxMenu->menuSprite);
+        sChooseBoxMenu->menuSprite = NULL;
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->menuCornerSprites); i++)
     {
-        if (sBoxSelectionPopupSpriteManager->menuSideSprites[i])
+        if (sChooseBoxMenu->menuCornerSprites[i])
         {
-            DestroySprite(sBoxSelectionPopupSpriteManager->menuSideSprites[i]);
-            sBoxSelectionPopupSpriteManager->menuSideSprites[i] = NULL;
+            DestroySprite(sChooseBoxMenu->menuCornerSprites[i]);
+            sChooseBoxMenu->menuCornerSprites[i] = NULL;
         }
     }
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->arrowSprites); i++)
     {
-        if (sBoxSelectionPopupSpriteManager->arrowSprites[i])
-            DestroySprite(sBoxSelectionPopupSpriteManager->arrowSprites[i]);
+        if (sChooseBoxMenu->arrowSprites[i])
+            DestroySprite(sChooseBoxMenu->arrowSprites[i]);
     }
 }
 
-static void UpdateBoxNameAndCountSprite_WraparoundRight(void)
+static void ChooseBoxMenu_MoveRight(void)
 {
-    if (++sBoxSelectionPopupSpriteManager->curBox >= TOTAL_BOXES_COUNT)
-        sBoxSelectionPopupSpriteManager->curBox = 0;
-    PrintBoxNameAndCountToSprite();
+    if (++sChooseBoxMenu->curBox >= TOTAL_BOXES_COUNT)
+        sChooseBoxMenu->curBox = 0;
+    ChooseBoxMenu_PrintBoxNameAndCount();
 }
 
-static void UpdateBoxNameAndCountSprite_WraparoundLeft(void)
+static void ChooseBoxMenu_MoveLeft(void)
 {
-    sBoxSelectionPopupSpriteManager->curBox = (sBoxSelectionPopupSpriteManager->curBox == 0 ? TOTAL_BOXES_COUNT - 1 : sBoxSelectionPopupSpriteManager->curBox - 1);
-    PrintBoxNameAndCountToSprite();
+    sChooseBoxMenu->curBox = (sChooseBoxMenu->curBox == 0 ? TOTAL_BOXES_COUNT - 1 : sChooseBoxMenu->curBox - 1);
+    ChooseBoxMenu_PrintBoxNameAndCount();
 }
 
-static void PrintBoxNameAndCountToSprite(void)
+static void ChooseBoxMenu_PrintBoxNameAndCount(void)
 {
-    u8 nPokemonInBox = CountMonsInBox(sBoxSelectionPopupSpriteManager->curBox);
-    u8 *boxName = StringCopy(sBoxSelectionPopupSpriteManager->strbuf, GetBoxNamePtr(sBoxSelectionPopupSpriteManager->curBox));
+    u8 numMonInBox = CountMonsInBox(sChooseBoxMenu->curBox);
+    u8 *boxName = StringCopy(sChooseBoxMenu->strbuf, GetBoxNamePtr(sChooseBoxMenu->curBox));
 
-    while (boxName < sBoxSelectionPopupSpriteManager->strbuf + BOX_NAME_LENGTH)
+    while (boxName < sChooseBoxMenu->strbuf + BOX_NAME_LENGTH)
         *boxName++ = CHAR_SPACE;
     *boxName = EOS;
 
-    PrintToSpriteWithTagUnk0240(sBoxSelectionPopupSpriteManager->strbuf, 0, 1);
+    ChooseBoxMenu_PrintTextToSprite(sChooseBoxMenu->strbuf, 0, 1);
 
-    ConvertIntToDecimalStringN(sBoxSelectionPopupSpriteManager->strbuf, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(sChooseBoxMenu->strbuf, numMonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
 
-    PrintToSpriteWithTagUnk0240(sBoxSelectionPopupSpriteManager->strbuf, 3, 3);
+    ChooseBoxMenu_PrintTextToSprite(sChooseBoxMenu->strbuf, 3, 3);
 }
 
-static void PrintToSpriteWithTagUnk0240(const u8 *str, u16 x, u16 y)
+static void ChooseBoxMenu_PrintTextToSprite(const u8 *str, u16 x, u16 y)
 {
-    u16 tileStart = GetSpriteTileStartByTag(sBoxSelectionPopupSpriteManager->tileTag);
-    PrintStringToBufferCopyNow(str, (void *)(OBJ_VRAM0 + tileStart * 32 + 256 * y + 32 * x), 0x100, TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5, sBoxSelectionPopupSpriteManager->buffer);
+    void *dst = (void *)(OBJ_VRAM0 + GetSpriteTileStartByTag(sChooseBoxMenu->tileTag) * 32 + 256 * y + 32 * x);
+    PrintStringToBufferCopyNow(str, dst, 0x100, TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5, sChooseBoxMenu->buffer);
 }
 
-static void sub_808CD64(struct Sprite *sprite)
+static void SpriteCB_ChooseBoxArrow(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 3)
     {
@@ -681,8 +653,8 @@ static void sub_808CD64(struct Sprite *sprite)
     }
 }
 
-// Forward-declared rodata
+// Unused, since LoadChooseBoxMenuGfx is always called with `loadPal` as false
+static const u16 sChooseBoxMenu_Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
 
-static const u16 sBoxSelectionPopupPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
-static const u16 sBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CDAB8.4bpp");
-static const u16 sBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CE2B8.4bpp");
+static const u8 sChooseBoxMenuCenter_Gfx[] = INCBIN_U8("graphics/interface/pss_unk_83CDAB8.4bpp");
+static const u8 sChooseBoxMenuCorners_Gfx[] = INCBIN_U8("graphics/interface/pss_unk_83CE2B8.4bpp");

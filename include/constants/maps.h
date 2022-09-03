@@ -12,6 +12,8 @@
 
 #define MAP(map) MAP_GROUP(map), MAP_NUM(map)
 
+#define WARP_ID_DYNAMIC     0x7F
+
 // Used to indicate an invalid warp id, for dummy warps or when a warp should
 // use the given coordinates rather than the coordinates of a target warp.
 #define WARP_ID_NONE (-1)

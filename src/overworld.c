@@ -47,6 +47,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
+#include "constants/cable_club.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -2979,14 +2980,14 @@ static u16 KeyInterCB_SendNothing_2(u32 key)
 u32 GetCableClubPartnersReady(void)
 {
     if (IsAnyPlayerInLinkState(PLAYER_LINK_STATE_EXITING_ROOM) == TRUE)
-        return 2;
+        return CABLE_SEAT_FAILED;
     if (sPlayerKeyInterceptCallback == KeyInterCB_Ready && sPlayerLinkStates[gLocalLinkPlayerId] != PLAYER_LINK_STATE_READY)
-        return 0;
+        return CABLE_SEAT_WAITING;
     if (sPlayerKeyInterceptCallback == KeyInterCB_DoNothingAndKeepAlive && sPlayerLinkStates[gLocalLinkPlayerId] == PLAYER_LINK_STATE_BUSY)
-        return 2;
+        return CABLE_SEAT_FAILED;
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_READY) != FALSE)
-        return 1;
-    return 0;
+        return CABLE_SEAT_SUCCESS;
+    return CABLE_SEAT_WAITING;
 }
 
 static bool32 IsAnyPlayerExitingCableClub(void)

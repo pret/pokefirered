@@ -173,7 +173,7 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[1] = CreateTask_ReestablishLinkInCableClubRoom();
+        task->data[1] = CreateTask_ReestablishCableClubLink();
         task->data[0]++;
         break;
     case 1:

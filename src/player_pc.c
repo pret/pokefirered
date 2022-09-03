@@ -257,9 +257,9 @@ static void Task_PlayerPcMailbox(u8 taskId)
 static void Task_PlayerPcTurnOff(u8 taskId)
 {
     if (gPlayerPcMenuManager.notInRoom == FALSE)
-        ScriptContext1_SetupScript(EventScript_PalletTown_PlayersHouse_2F_ShutDownPC);
+        ScriptContext_SetupScript(EventScript_PalletTown_PlayersHouse_2F_ShutDownPC);
     else
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     DestroyTask(taskId);
 }
 

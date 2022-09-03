@@ -137,7 +137,7 @@ static void Task_ContinueScriptUnionRoom(u8 taskId)
 
 void FieldCB_ContinueScriptUnionRoom(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
     CreateTask(Task_ContinueScriptUnionRoom, 10);
@@ -148,13 +148,13 @@ static void Task_ContinueScript(u8 taskId)
     if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
     {
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
 void FieldCB_ContinueScriptHandleMusic(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
     CreateTask(Task_ContinueScript, 10);
@@ -162,7 +162,7 @@ void FieldCB_ContinueScriptHandleMusic(void)
 
 void FieldCB_ContinueScript(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FadeInFromBlack();
     CreateTask(Task_ContinueScript, 10);
 }
@@ -173,7 +173,7 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[1] = CreateTask_ReestablishLinkInCableClubRoom();
+        task->data[1] = CreateTask_ReestablishCableClubLink();
         task->data[0]++;
         break;
     case 1:
@@ -186,7 +186,7 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
     case 2:
         if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -195,7 +195,7 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
 
 void FieldCB_ReturnToFieldCableLink(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     palette_bg_faded_fill_black();
     CreateTask(Task_ReturnToFieldCableLink, 10);
@@ -221,7 +221,7 @@ static void Task_ReturnToFieldRecordMixing(u8 taskId)
         if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             StartSendingKeysToLink();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -230,7 +230,7 @@ static void Task_ReturnToFieldRecordMixing(u8 taskId)
 
 void FieldCB_ReturnToFieldWirelessLink(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     palette_bg_faded_fill_black();
     CreateTask(Task_ReturnToFieldRecordMixing, 10);
@@ -290,7 +290,7 @@ void FieldCB_DefaultWarpExit(void)
     Overworld_PlaySpecialMapMusic();
     QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     SetUpWarpExitTask(FALSE);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void FieldCB_WarpExitFadeFromBlack(void)
@@ -298,7 +298,7 @@ void FieldCB_WarpExitFadeFromBlack(void)
     Overworld_PlaySpecialMapMusic();
     QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     SetUpWarpExitTask(TRUE);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void FieldCB_TeleportWarpIn(void)
@@ -308,7 +308,7 @@ static void FieldCB_TeleportWarpIn(void)
     QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     PlaySE(SE_WARP_OUT);
     CreateTask(Task_TeleportWarpIn, 10);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void Task_ExitDoor(u8 taskId)
@@ -393,7 +393,7 @@ static void Task_ExitDoor(u8 taskId)
         break;
     case 4:
         UnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         break;
     }
@@ -429,7 +429,7 @@ static void Task_ExitNonAnimDoor(u8 taskId)
         break;
     case 3:
         UnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         break;
     }
@@ -441,14 +441,14 @@ static void Task_ExitNonDoor(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         gTasks[taskId].data[0]++;
         break;
     case 1:
         if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
             UnfreezeObjectEvents();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -461,7 +461,7 @@ static void Task_TeleportWarpIn(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         StartTeleportInPlayerAnim();
         gTasks[taskId].data[0]++;
         break;
@@ -469,7 +469,7 @@ static void Task_TeleportWarpIn(u8 taskId)
         if (FieldFadeTransitionBackgroundEffectIsFinished() && WaitTeleportInPlayerAnim() != TRUE)
         {
             UnfreezeObjectEvents();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
@@ -489,7 +489,7 @@ void FadeTransition_FadeInOnReturnToStartMenu(void)
 {
     FadeInFromBlack();
     CreateTask(Task_WaitFadeAndCreateStartMenuTask, 80);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
@@ -502,7 +502,7 @@ static void Task_SafariZoneRanOutOfBalls(u8 taskId)
 {
     if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
     {
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     }
@@ -510,7 +510,7 @@ static void Task_SafariZoneRanOutOfBalls(u8 taskId)
 
 void FieldCB_SafariZoneRanOutOfBalls(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
     CreateTask(Task_SafariZoneRanOutOfBalls, 10);
@@ -531,7 +531,7 @@ bool32 FieldFadeTransitionBackgroundEffectIsFinished(void)
 
 void DoWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
@@ -542,7 +542,7 @@ void DoWarp(void)
 
 void DoDiveWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
@@ -560,21 +560,21 @@ void DoStairWarp(u16 metatileBehavior, u16 delay)
 
 void DoDoorWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_DoorWarp, 10);
 }
 
 void DoTeleport2Warp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_Teleport2Warp, 10);
     gFieldCallback = FieldCB_TeleportWarpIn;
 }
 
 void DoUnionRoomWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_TeleportWarp, 10);
 }
@@ -587,25 +587,25 @@ void DoFallWarp(void)
 
 void DoEscalatorWarp(u8 metatileBehavior)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     StartEscalatorWarp(metatileBehavior, 10);
 }
 
 void DoLavaridgeGymB1FWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     StartLavaridgeGymB1FWarp(10);
 }
 
 void DoLavaridgeGym1FWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     StartLavaridgeGym1FWarp(10);
 }
 
 void DoTeleportWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     CreateTask(Task_TeleportWarp, 10);
     gFieldCallback = FieldCB_TeleportWarpIn;
@@ -613,7 +613,7 @@ void DoTeleportWarp(void)
 
 static void DoPortholeWarp(void) // Unused
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     WarpFadeOutScreen();
     CreateTask(Task_Teleport2Warp, 10);
     gFieldCallback = nullsub_60;
@@ -625,7 +625,7 @@ static void Task_CableClubWarp(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         task->data[0]++;
         break;
     case 1:
@@ -642,7 +642,7 @@ static void Task_CableClubWarp(u8 taskId)
 
 void DoCableClubWarp(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlaySE(SE_EXIT);
@@ -691,7 +691,7 @@ static void Task_Teleport2Warp(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         task->data[0]++;
         break;
     case 1:
@@ -713,7 +713,7 @@ static void Task_TeleportWarp(u8 taskId)
     {
     case 0:
         FreezeObjectEvents();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         PlaySE(SE_WARP_IN);
         StartTeleportWarpOutPlayerAnim();
         task->data[0]++;
@@ -796,7 +796,7 @@ static void Task_StairWarp(u8 taskId)
     switch (data[0])
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         FreezeObjectEvents();
         CameraObjectReset2();
         data[0]++;
@@ -898,14 +898,14 @@ static void Task_ExitStairs(u8 taskId)
         if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             CameraObjectReset1();
-            ScriptContext2_Disable();
+            UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
         break;
     case 0:
         Overworld_PlaySpecialMapMusic();
         WarpFadeInScreen();
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         ExitStairsMovement(&data[1], &data[2], &data[3], &data[4], &data[5]);
         data[0]++;
         break;

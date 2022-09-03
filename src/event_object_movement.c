@@ -1690,7 +1690,7 @@ void MakeObjectTemplateFromObjectEventGraphicsInfo(u16 graphicsId, void (*callba
     
     do
     {
-        if (ScriptContext1_IsScriptSetUp() != TRUE && sub_8112CAC() == TRUE)
+        if (ScriptContext_IsEnabled() != TRUE && sub_8112CAC() == TRUE)
             spriteTemplate->callback = sub_811246C;
         else
             spriteTemplate->callback = callback;

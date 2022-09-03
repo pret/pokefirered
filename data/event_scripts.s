@@ -1175,16 +1175,16 @@ EventScript_ReleaseEnd::
 @ Unused
 EventScript_DelayedLookAround::
 	lockall
-	applymovement VAR_0x8004, Movement_WalkInPlaceFasterLeft
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8004, Movement_WalkInPlaceFasterUp
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8004, Movement_WalkInPlaceFasterRight
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8004, Movement_WalkInPlaceFasterDown
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	releaseall

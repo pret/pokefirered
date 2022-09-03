@@ -1714,13 +1714,13 @@ static void Cmd_if_random_safari_flee(void)
 {
     u8 safariFleeRate;
 
-    if (gBattleStruct->safariGoNearCounter)
+    if (gBattleStruct->safariRockThrowCounter)
     {
         safariFleeRate = gBattleStruct->safariEscapeFactor * 2;
         if (safariFleeRate > 20)
             safariFleeRate = 20;
     }
-    else if (gBattleStruct->safariPkblThrowCounter != 0)
+    else if (gBattleStruct->safariBaitThrowCounter != 0)
     {
         safariFleeRate = gBattleStruct->safariEscapeFactor / 4;
         if (safariFleeRate == 0)

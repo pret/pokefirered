@@ -592,7 +592,7 @@ static void WindowFunc_ClearDialogWindowAndFrame(u8 bg, u8 tilemapLeft, u8 tilem
     FillBgTilemapBufferRect(bg, 0, tilemapLeft - 2, tilemapTop - 1, width + 4, height + 2, STD_WINDOW_PALETTE_NUM);
 }
 
-void sub_80F771C(bool8 copyToVram)
+void EraseFieldMessageBox(bool8 copyToVram)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 0x20, 0x20, 0x11);
     if (copyToVram == TRUE)

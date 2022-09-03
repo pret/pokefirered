@@ -36,7 +36,7 @@ void HandleLinkBattleSetup(void)
             SetWirelessCommType1();
         if (!gReceivedRemoteLinkPlayers)
             OpenLink();
-        CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 0);
+        CreateTask(Task_WaitForLinkPlayerConnection, 0);
         CreateTasksForSendRecvLinkBuffers();
     }
 }

@@ -25,28 +25,38 @@
 #include "constants/songs.h"
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
+#include "constants/maps.h"
 
 u32 UnusedVarNeededToMatch[8];
 
-static void Task_Linkup0(u8 taskId);
-static void Task_Linkup1(u8 taskId);
-static void Task_LinkupMaster_2(u8 taskId);
-static void Task_LinkupMaster_3(u8 taskId);
-static void Task_LinkupMaster_4(u8 taskId);
-static void Task_LinkupMaster_5(u8 taskId);
-static void Task_LinkupSlave_2(u8 taskId);
-static void Task_LinkupMaster_6(u8 taskId);
-static void Task_Linkup_6a(u8 taskId);
-static void Task_Linkup_7(u8 taskId);
-static void Task_Linkup_Canceled(u8 taskId);
-static void Task_Linkup_ErroredOut(u8 taskId);
-static bool8 Task_Linkup_TimedOut(u8 taskId);
-static void Task_ReestablishLinkInCableClubRoom_0(u8 taskId);
-static void Task_ReestablishLinkInCableClubRoom_1(u8 taskId);
-static void Task_ReestablishLinkInCableClubRoom_Master(u8 taskId);
-static void Task_ReestablishLinkInCableClubRoom_2(u8 taskId);
+static void Task_LinkupStart(u8 taskId);
+static void Task_LinkupAwaitConnection(u8 taskId);
+static void Task_LinkupConfirmWhenReady(u8 taskId);
+static void Task_LinkupAwaitConfirmation(u8 taskId);
+static void Task_LinkupTryConfirmation(u8 taskId);
+static void Task_LinkupConfirm(u8 taskId);
+static void Task_LinkupExchangeDataWithLeader(u8 taskId);
+static void Task_LinkupCheckStatusAfterConfirm(u8 taskId);
+static void Task_LinkupAwaitTrainerCardData(u8 taskId);
+static void Task_StopLinkup(u8 taskId);
+static void Task_LinkupFailed(u8 taskId);
+static void Task_LinkupConnectionError(u8 taskId);
+static bool8 TryLinkTimeout(u8 taskId);
+static void Task_ReestablishLink(u8 taskId);
+static void Task_ReestablishLinkAwaitConnection(u8 taskId);
+static void Task_ReestablishLinkLeader(u8 taskId);
+static void Task_ReestablishLinkAwaitConfirmation(u8 taskId);
 
-static const struct WindowTemplate gUnknown_83C6AB0 = {
+#define tState      data[0]
+
+
+#define tMinPlayers data[1]
+#define tMaxPlayers data[2]
+#define tNumPlayers data[3]
+#define tTimer      data[4]
+#define tWindowId   data[5]
+
+static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .bg = 0,
     .tilemapLeft = 16,
     .tilemapTop = 11,
@@ -56,270 +66,290 @@ static const struct WindowTemplate gUnknown_83C6AB0 = {
     .baseBlock = 0x125
 };
 
-static const u8 *const sStarsMessagePtrs[] = {
-    gUnknown_841DF8B,
-    gUnknown_841DF92,
-    gUnknown_841DF99,
-    gUnknown_841DFA0
+static const u8 *const sTrainerCardColorNames[] = {
+    gText_BronzeCard,
+    gText_CopperCard,
+    gText_SilverCard,
+    gText_GoldCard
 };
 
-static void CreateLinkupTask(u8 lower, u8 higher)
+static void CreateLinkupTask(u8 minPlayers, u8 maxPlayers)
 {
     u8 taskId;
-    if (FindTaskIdByFunc(Task_Linkup0) == 0xFF)
+    if (FindTaskIdByFunc(Task_LinkupStart) == TASK_NONE)
     {
-        taskId = CreateTask(Task_Linkup0, 80);
-        gTasks[taskId].data[1] = lower;
-        gTasks[taskId].data[2] = higher;
+        taskId = CreateTask(Task_LinkupStart, 80);
+        gTasks[taskId].tMinPlayers = minPlayers;
+        gTasks[taskId].tMaxPlayers = maxPlayers;
     }
 }
 
-static void PrintNewCountOnLinkPlayerCountDisplayWindow(u16 windowId, s32 num)
+static void PrintNumPlayersInLink(u16 windowId, s32 numPlayers)
 {
-    ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEFT_ALIGN, 1);
+    ConvertIntToDecimalStringN(gStringVar1, numPlayers, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStdWindowBorderStyle(windowId, FALSE);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841DF82);
+    StringExpandPlaceholders(gStringVar4, gText_NumPlayerLink);
     AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void DestroyLinkPlayerCountDisplayWindow(u16 windowId)
+static void ClearLinkPlayerCountWindow(u16 windowId)
 {
     ClearStdWindowAndFrame(windowId, FALSE);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 num)
+static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)
 {
     s16 *data = gTasks[taskId].data;
-    if (num != data[3])
+    if (numPlayers != tNumPlayers)
     {
-        if (num < 2)
-            DestroyLinkPlayerCountDisplayWindow(data[5]);
+        if (numPlayers < 2)
+            ClearLinkPlayerCountWindow(tWindowId);
         else
-            PrintNewCountOnLinkPlayerCountDisplayWindow(data[5], num);
-        data[3] = num;
+            PrintNumPlayersInLink(tWindowId, numPlayers);
+        tNumPlayers = numPlayers;
     }
 }
 
-static u16 sub_8080844(u8 lower, u8 higher)
+static u16 ExchangeDataAndGetLinkupStatus(u8 minPlayers, u8 maxPlayers)
 {
-    switch (GetLinkPlayerDataExchangeStatusTimed(lower, higher))
+    switch (GetLinkPlayerDataExchangeStatusTimed(minPlayers, maxPlayers))
     {
     case EXCHANGE_COMPLETE:
-        return 1;
-    case EXCHANGE_IN_PROGRESS:
-        return 3;
-    case EXCHANGE_STAT_4:
-        return 7;
-    case EXCHANGE_STAT_5:
-        return 9;
-    case EXCHANGE_STAT_6:
+        return LINKUP_SUCCESS;
+    case EXCHANGE_DIFF_SELECTIONS:
+        return LINKUP_DIFF_SELECTIONS;
+    case EXCHANGE_PLAYER_NOT_READY:
+        return LINKUP_PLAYER_NOT_READY;
+    case EXCHANGE_PARTNER_NOT_READY:
+        return LINKUP_PARTNER_NOT_READY;
+    case EXCHANGE_WRONG_NUM_PLAYERS:
         ConvertIntToDecimalStringN(gStringVar1, GetLinkPlayerCount_2(), STR_CONV_MODE_LEFT_ALIGN, 1);
-        return 4;
+        return LINKUP_WRONG_NUM_PLAYERS;
     default:
-        return 0;
+        return LINKUP_ONGOING;
     }
 }
 
-static bool32 sub_80808BC(u8 taskId)
+static bool32 CheckLinkErrored(u8 taskId)
 {
     if (HasLinkErrorOccurred() == TRUE)
     {
-        gTasks[taskId].func = Task_Linkup_ErroredOut;
+        gTasks[taskId].func = Task_LinkupConnectionError;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 sub_80808F0(u8 taskId)
+static bool32 CheckLinkCanceledBeforeConnection(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON) && !IsLinkConnectionEstablished())
     {
         gLinkType = 0;
-        gTasks[taskId].func = Task_Linkup_Canceled;
+        gTasks[taskId].func = Task_LinkupFailed;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 sub_808093C(u8 taskId)
+static bool32 CheckLinkCanceled(u8 taskId)
 {
     if (IsLinkConnectionEstablished())
-    {
         SetSuppressLinkErrorMessage(TRUE);
-    }
+
     if (JOY_NEW(B_BUTTON))
     {
         gLinkType = 0;
-        gTasks[taskId].func = Task_Linkup_Canceled;
+        gTasks[taskId].func = Task_LinkupFailed;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 sub_8080990(u8 taskId)
+static bool32 CheckSioErrored(u8 taskId)
 {
     if (GetSioMultiSI() == TRUE)
     {
-        gTasks[taskId].func = Task_Linkup_ErroredOut;
+        gTasks[taskId].func = Task_LinkupConnectionError;
         return TRUE;
     }
     return FALSE;
 }
 
-static void sub_80809C4(u8 taskId)
+// Unused
+static void Task_DelayedBlockRequest(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
     {
-        Link_PrepareCmd0xCCCC_Rfu0xA100(2);
+        SendBlockRequest(BLOCK_REQ_SIZE_100);
         DestroyTask(taskId);
     }
 }
 
-static void Task_Linkup0(u8 taskId)
+static void Task_LinkupStart(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (data[0] == 0)
     {
         OpenLinkTimed();
-        sub_800AA24();
+        ResetLinkPlayerCount();
         ResetLinkPlayers();
-        data[5] = AddWindow(&gUnknown_83C6AB0);
+        tWindowId = AddWindow(&sWindowTemplate_LinkPlayerCount);
     }
     else if (data[0] > 9)
     {
-        gTasks[taskId].func = Task_Linkup1;
+        gTasks[taskId].func = Task_LinkupAwaitConnection;
     }
     data[0]++;
 }
 
-static void Task_Linkup1(u8 taskId)
+static void Task_LinkupAwaitConnection(u8 taskId)
 {
-    u8 linkPlayerCount = GetLinkPlayerCount_2();
-    if (sub_80808F0(taskId) != TRUE && sub_808093C(taskId) != TRUE && linkPlayerCount >= 2)
+    u8 playerCount = GetLinkPlayerCount_2();
+    if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
+     || CheckLinkCanceled(taskId) == TRUE
+     || playerCount < 2)
+        return;
+
+    SetSuppressLinkErrorMessage(TRUE);
+    gTasks[taskId].data[3] = 0;
+    if (IsLinkMaster() == TRUE)
     {
-        SetSuppressLinkErrorMessage(TRUE);
-        gTasks[taskId].data[3] = 0;
-        if (IsLinkMaster() == TRUE)
-        {
-            PlaySE(SE_PIN);
-            ShowFieldAutoScrollMessage(CableClub_Text_WhenAllPlayersReadyAConfirmBCancel);
-            gTasks[taskId].func = Task_LinkupMaster_2;
-        }
-        else
-        {
-            PlaySE(SE_BOO);
-            ShowFieldAutoScrollMessage(CableClub_Text_AwaitingLinkupBCancel);
-            gTasks[taskId].func = Task_LinkupSlave_2;
-        }
+        PlaySE(SE_PIN);
+        ShowFieldAutoScrollMessage(CableClub_Text_WhenAllPlayersReadyAConfirmBCancel);
+        gTasks[taskId].func = Task_LinkupConfirmWhenReady;
+    }
+    else
+    {
+        PlaySE(SE_BOO);
+        ShowFieldAutoScrollMessage(CableClub_Text_AwaitingLinkupBCancel);
+        gTasks[taskId].func = Task_LinkupExchangeDataWithLeader;
     }
 }
 
-static void Task_LinkupMaster_2(u8 taskId)
+static void Task_LinkupConfirmWhenReady(u8 taskId)
 {
-    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !GetFieldMessageBoxType())
+    if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
+     || CheckSioErrored(taskId) == TRUE
+     || CheckLinkErrored(taskId) == TRUE)
+        return;
+
+    if (GetFieldMessageBoxType() == FIELD_MESSAGE_BOX_HIDDEN)
     {
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].func = Task_LinkupMaster_3;
+        gTasks[taskId].tNumPlayers = 0;
+        gTasks[taskId].func = Task_LinkupAwaitConfirmation;
     }
 }
 
-static void Task_LinkupMaster_3(u8 taskId)
+static void Task_LinkupAwaitConfirmation(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s32 linkPlayerCount = GetLinkPlayerCount_2();
-    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE)
+
+    if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
+     || CheckSioErrored(taskId) == TRUE
+     || CheckLinkErrored(taskId) == TRUE)
+        return;
+
+    UpdateLinkPlayerCountDisplay(taskId, linkPlayerCount);
+    if (JOY_NEW(A_BUTTON) && linkPlayerCount >= tMinPlayers)
     {
-        UpdateLinkPlayerCountDisplay(taskId, linkPlayerCount);
-        if (JOY_NEW(A_BUTTON) && linkPlayerCount >= data[1])
-        {
-            sub_800A900(linkPlayerCount);
-            DestroyLinkPlayerCountDisplayWindow(data[5]);
-            ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
-            ShowFieldAutoScrollMessage(CableClub_Text_StartLinkWithXPlayersAConfirmBCancel);
-            gTasks[taskId].func = Task_LinkupMaster_4;
-        }
+        SaveLinkPlayers(linkPlayerCount);
+        ClearLinkPlayerCountWindow(tWindowId);
+        ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ShowFieldAutoScrollMessage(CableClub_Text_StartLinkWithXPlayersAConfirmBCancel);
+        gTasks[taskId].func = Task_LinkupTryConfirmation;
     }
+
 }
 
-static void Task_LinkupMaster_4(u8 taskId)
+static void Task_LinkupTryConfirmation(u8 taskId)
 {
-    if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !GetFieldMessageBoxType())
+    if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
+     || CheckSioErrored(taskId) == TRUE
+     || CheckLinkErrored(taskId) == TRUE)
+        return;
+
+    if (GetFieldMessageBoxType() == FIELD_MESSAGE_BOX_HIDDEN)
     {
         if (GetSavedPlayerCount() != GetLinkPlayerCount_2())
         {
             ShowFieldAutoScrollMessage(CableClub_Text_WhenAllPlayersReadyAConfirmBCancel);
-            gTasks[taskId].func = Task_LinkupMaster_2;
+            gTasks[taskId].func = Task_LinkupConfirmWhenReady;
         }
         else if (JOY_HELD(B_BUTTON))
         {
             ShowFieldAutoScrollMessage(CableClub_Text_WhenAllPlayersReadyAConfirmBCancel);
-            gTasks[taskId].func = Task_LinkupMaster_2;
+            gTasks[taskId].func = Task_LinkupConfirmWhenReady;
         }
         else if (JOY_HELD(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             CheckShouldAdvanceLinkState();
-            gTasks[taskId].func = Task_LinkupMaster_5;
+            gTasks[taskId].func = Task_LinkupConfirm;
         }
     }
 }
 
-static void Task_LinkupMaster_5(u8 taskId)
+static void Task_LinkupConfirm(u8 taskId)
 {
-    u8 lower = gTasks[taskId].data[1];
-    u8 higher = gTasks[taskId].data[2];
-    u16 *res;
-    if (sub_80808BC(taskId) != TRUE && Task_Linkup_TimedOut(taskId) != TRUE)
+    u8 minPlayers = gTasks[taskId].tMinPlayers;
+    u8 maxPlayers = gTasks[taskId].tMaxPlayers;
+
+    if (CheckLinkErrored(taskId) == TRUE
+     || TryLinkTimeout(taskId) == TRUE)
+        return;
+
+    if (GetLinkPlayerCount_2() != GetSavedPlayerCount())
     {
-        if (GetLinkPlayerCount_2() != GetSavedPlayerCount())
-        {
-            gTasks[taskId].func = Task_Linkup_ErroredOut;
-        }
-        else
-        {
-            res = &gSpecialVar_Result;
-            *res = sub_8080844(lower, higher);
-            if (*res)
-                gTasks[taskId].func = Task_LinkupMaster_6;
-        }
+        gTasks[taskId].func = Task_LinkupConnectionError;
+    }
+    else
+    {
+        u16 *result = &gSpecialVar_Result;
+        *result = ExchangeDataAndGetLinkupStatus(minPlayers, maxPlayers);
+        if (*result)
+            gTasks[taskId].func = Task_LinkupCheckStatusAfterConfirm;
     }
 }
 
-static void Task_LinkupSlave_2(u8 taskId)
+static void Task_LinkupExchangeDataWithLeader(u8 taskId)
 {
-    u8 lower = gTasks[taskId].data[1];
-    u8 higher = gTasks[taskId].data[2];
-    u16 *res;
-    if (sub_80808F0(taskId) != TRUE && sub_80808BC(taskId) != TRUE)
+    u8 minPlayers = gTasks[taskId].tMinPlayers;
+    u8 maxPlayers = gTasks[taskId].tMaxPlayers;
+    u16 *result;
+
+    if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
+     || CheckLinkErrored(taskId) == TRUE)
+        return;
+
+    result = &gSpecialVar_Result;
+    *result = ExchangeDataAndGetLinkupStatus(minPlayers, maxPlayers);
+    if (*result == LINKUP_ONGOING)
+        return;
+    if (*result == LINKUP_DIFF_SELECTIONS
+     || *result == LINKUP_WRONG_NUM_PLAYERS)
     {
-        res = &gSpecialVar_Result;
-        *res = sub_8080844(lower, higher);
-        if (*res)
-        {
-            if (*res == 3 || *res == 4)
-            {
-                SetCloseLinkCallback();
-                HideFieldMessageBox();
-                gTasks[taskId].func = Task_Linkup_7;
-            }
-            else if (*res == 7 || *res == 9)
-            {
-                CloseLink();
-                HideFieldMessageBox();
-                gTasks[taskId].func = Task_Linkup_7;
-            }
-            else
-            {
-                gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-                gLocalLinkPlayerId = GetMultiplayerId();
-                sub_800A900(gFieldLinkPlayerCount);
-                TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
-                gTasks[taskId].func = Task_Linkup_6a;
-            }
-        }
+        SetCloseLinkCallback();
+        HideFieldMessageBox();
+        gTasks[taskId].func = Task_StopLinkup;
+    }
+    else if (*result == LINKUP_PLAYER_NOT_READY
+          || *result == LINKUP_PARTNER_NOT_READY)
+    {
+        CloseLink();
+        HideFieldMessageBox();
+        gTasks[taskId].func = Task_StopLinkup;
+    }
+    else
+    {
+        gFieldLinkPlayerCount = GetLinkPlayerCount_2();
+        gLocalLinkPlayerId = GetMultiplayerId();
+        SaveLinkPlayers(gFieldLinkPlayerCount);
+        TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
+        gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
     }
 }
 
@@ -337,120 +367,124 @@ static bool32 AnyConnectedPartnersPlayingRS(void)
     return FALSE;
 }
 
-static void Task_LinkupMaster_6(u8 taskId)
+static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
 {
-    if (sub_80808BC(taskId) != TRUE)
+    if (CheckLinkErrored(taskId) == TRUE)
+        return;
+
+    if (gSpecialVar_Result == LINKUP_WRONG_NUM_PLAYERS)
     {
-        if (gSpecialVar_Result == 4)
-        {
-            if (AnyConnectedPartnersPlayingRS() == TRUE)
-                CloseLink();
-            else
-                SetCloseLinkCallback();
-            HideFieldMessageBox();
-            gTasks[taskId].func = Task_Linkup_7;
-        }
-        else if (gSpecialVar_Result == 3)
-        {
-            SetCloseLinkCallback();
-            HideFieldMessageBox();
-            gTasks[taskId].func = Task_Linkup_7;
-        }
-        else if (gSpecialVar_Result == 7 || gSpecialVar_Result == 9)
-        {
+        if (AnyConnectedPartnersPlayingRS() == TRUE)
             CloseLink();
-            HideFieldMessageBox();
-            gTasks[taskId].func = Task_Linkup_7;
-        }
         else
-        {
-            gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-            gLocalLinkPlayerId = GetMultiplayerId();
-            sub_800A900(gFieldLinkPlayerCount);
-            TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
-            gTasks[taskId].func = Task_Linkup_6a;
-            Link_PrepareCmd0xCCCC_Rfu0xA100(2);
-        }
+            SetCloseLinkCallback();
+        HideFieldMessageBox();
+        gTasks[taskId].func = Task_StopLinkup;
+    }
+    else if (gSpecialVar_Result == LINKUP_DIFF_SELECTIONS)
+    {
+        SetCloseLinkCallback();
+        HideFieldMessageBox();
+        gTasks[taskId].func = Task_StopLinkup;
+    }
+    else if (gSpecialVar_Result == LINKUP_PLAYER_NOT_READY
+          || gSpecialVar_Result == LINKUP_PARTNER_NOT_READY)
+    {
+        CloseLink();
+        HideFieldMessageBox();
+        gTasks[taskId].func = Task_StopLinkup;
+    }
+    else
+    {
+        gFieldLinkPlayerCount = GetLinkPlayerCount_2();
+        gLocalLinkPlayerId = GetMultiplayerId();
+        SaveLinkPlayers(gFieldLinkPlayerCount);
+        TrainerCard_GenerateCardForLinkPlayer((void *)gBlockSendBuffer);
+        gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
+        SendBlockRequest(BLOCK_REQ_SIZE_100);
     }
 }
 
-static void Task_Linkup_6a(u8 taskId)
+static void Task_LinkupAwaitTrainerCardData(u8 taskId)
 {
     u8 i;
     u16 version;
     u8 * dest;
-    if (sub_80808BC(taskId) != TRUE && GetBlockReceivedStatus() == sub_800A8A4())
+
+    if (CheckLinkErrored(taskId) == TRUE)
+        return;
+
+    if (GetBlockReceivedStatus() != GetSavedLinkPlayerCountAsBitFlags())
+        return;
+
+    for (i = 0; i < GetLinkPlayerCount(); i++)
     {
-        for(i = 0; i < GetLinkPlayerCount(); i++)
+        version = gLinkPlayers[i].version & 0xFF;
+        if (version != VERSION_FIRE_RED && version != VERSION_LEAF_GREEN)
         {
-            version = gLinkPlayers[i].version & 0xFF;
-            if (version != VERSION_FIRE_RED && version != VERSION_LEAF_GREEN)
-            {
-                const struct TrainerCardRSE * src = (const struct TrainerCardRSE *)gBlockRecvBuffer[i];
-                gTrainerCards[i].rse = *src;
-                gTrainerCards[i].version = gLinkPlayers[i].version;
-            }
-            else
-            {
-                const struct TrainerCard * src = (const struct TrainerCard *)gBlockRecvBuffer[i];
-                gTrainerCards[i] = *src;
-            }
-        }
-        SetSuppressLinkErrorMessage(FALSE);
-        ResetBlockReceivedFlags();
-        HideFieldMessageBox();
-        if (gSpecialVar_Result == 1)
-        {
-            // Dumb trick required to match
-            if (gLinkType == LINKTYPE_BERRY_BLENDER_SETUP)
-                *UnusedVarNeededToMatch += 0;
-            DestroyLinkPlayerCountDisplayWindow(gTasks[taskId].data[5]);
-            EnableBothScriptContexts();
-            DestroyTask(taskId);
+            const struct TrainerCardRSE * src = (const struct TrainerCardRSE *)gBlockRecvBuffer[i];
+            gTrainerCards[i].rse = *src;
+            gTrainerCards[i].version = gLinkPlayers[i].version;
         }
         else
         {
-            SetCloseLinkCallback();
-            gTasks[taskId].func = Task_Linkup_7;
+            const struct TrainerCard * src = (const struct TrainerCard *)gBlockRecvBuffer[i];
+            gTrainerCards[i] = *src;
         }
+    }
+    SetSuppressLinkErrorMessage(FALSE);
+    ResetBlockReceivedFlags();
+    HideFieldMessageBox();
+    if (gSpecialVar_Result == LINKUP_SUCCESS)
+    {
+        // Dumb trick required to match
+        if (gLinkType == LINKTYPE_BERRY_BLENDER_SETUP)
+            *UnusedVarNeededToMatch += 0;
+        ClearLinkPlayerCountWindow(gTasks[taskId].tWindowId);
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+    else
+    {
+        SetCloseLinkCallback();
+        gTasks[taskId].func = Task_StopLinkup;
     }
 }
 
-static void Task_Linkup_7(u8 taskId)
+static void Task_StopLinkup(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
-        DestroyLinkPlayerCountDisplayWindow(gTasks[taskId].data[5]);
-        EnableBothScriptContexts();
-        RemoveWindow(gTasks[taskId].data[5]);
+        ClearLinkPlayerCountWindow(gTasks[taskId].tWindowId);
+        ScriptContext_Enable();
+        RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
     }
 }
 
-static void Task_Linkup_Canceled(u8 taskId)
+static void Task_LinkupFailed(u8 taskId)
 {
-    gSpecialVar_Result = 5;
-    DestroyLinkPlayerCountDisplayWindow(gTasks[taskId].data[5]);
+    gSpecialVar_Result = LINKUP_FAILED;
+    ClearLinkPlayerCountWindow(gTasks[taskId].tWindowId);
     HideFieldMessageBox();
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
     DestroyTask(taskId);
 }
 
-static void Task_Linkup_ErroredOut(u8 taskId)
+static void Task_LinkupConnectionError(u8 taskId)
 {
-    gSpecialVar_Result = 6;
-    DestroyLinkPlayerCountDisplayWindow(gTasks[taskId].data[5]);
+    gSpecialVar_Result = LINKUP_CONNECTION_ERROR;
+    ClearLinkPlayerCountWindow(gTasks[taskId].tWindowId);
     HideFieldMessageBox();
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
     DestroyTask(taskId);
 }
 
-static bool8 Task_Linkup_TimedOut(u8 taskId)
+static bool8 TryLinkTimeout(u8 taskId)
 {
-    gTasks[taskId].data[4]++;
-    if (gTasks[taskId].data[4] > 600)
+    if (++gTasks[taskId].tTimer > 600)
     {
-        gTasks[taskId].func = Task_Linkup_ErroredOut;
+        gTasks[taskId].func = Task_LinkupConnectionError;
         return TRUE;
     }
     return FALSE;
@@ -458,37 +492,47 @@ static bool8 Task_Linkup_TimedOut(u8 taskId)
 
 void TryBattleLinkup(void)
 {
-    u8 lower, higher;
-    higher = lower = 2;
+    u8 minPlayers = 2;
+    u8 maxPlayers = 2;
+
     switch (gSpecialVar_0x8004)
     {
     case USING_SINGLE_BATTLE:
-        higher = lower = 2;
+        minPlayers = 2;
+        maxPlayers = 2;
         gLinkType = LINKTYPE_SINGLE_BATTLE;
         break;
     case USING_DOUBLE_BATTLE:
-        higher = lower = 2;
+        minPlayers = 2;
+        maxPlayers = 2;
         gLinkType = LINKTYPE_DOUBLE_BATTLE;
         break;
     case USING_MULTI_BATTLE:
-        higher = lower = 4;
+        minPlayers = 4;
+        maxPlayers = 4;
         gLinkType = LINKTYPE_MULTI_BATTLE;
         break;
     }
-    CreateLinkupTask(lower, higher);
+    CreateLinkupTask(minPlayers, maxPlayers);
 }
+
+#undef tMinPlayers
+#undef tMaxPlayers
+#undef tNumPlayers
+#undef tTimer
+#undef tWindowId
 
 void TryTradeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x1133;
+    gLinkType = LINKTYPE_TRADE_SETUP;
     gBattleTypeFlags = 0;
     CreateLinkupTask(2, 2);
 }
 
 void TryRecordMixLinkup(void)
 {
-    gSpecialVar_Result = 0;
-    gLinkType = LINKTYPE_0x3311;
+    gSpecialVar_Result = LINKUP_ONGOING;
+    gLinkType = LINKTYPE_RECORD_MIX_BEFORE;
     gBattleTypeFlags = 0;
     CreateLinkupTask(2, 4);
 }
@@ -500,10 +544,11 @@ void TryContestLinkup(void)
     CreateLinkupTask(4, 4);
 }
 
-u8 CreateTask_ReestablishLinkInCableClubRoom(void)
+u8 CreateTask_ReestablishCableClubLink(void)
 {
-    if (FuncIsActiveTask(Task_ReestablishLinkInCableClubRoom_0))
-        return 0xFF;
+    if (FuncIsActiveTask(Task_ReestablishLink))
+        return TASK_NONE;
+
     switch (gSpecialVar_0x8004)
     {
     case USING_SINGLE_BATTLE:
@@ -519,92 +564,94 @@ u8 CreateTask_ReestablishLinkInCableClubRoom(void)
         gLinkType = LINKTYPE_TRADE;
         break;
     case USING_RECORD_CORNER:
-        gLinkType = LINKTYPE_0x3322;
+        gLinkType = LINKTYPE_RECORD_MIX_AFTER;
         break;
     }
-    return CreateTask(Task_ReestablishLinkInCableClubRoom_0, 80);
+    return CreateTask(Task_ReestablishLink, 80);
 }
 
-static void Task_ReestablishLinkInCableClubRoom_0(u8 taskId)
+static void Task_ReestablishLink(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
+
     if (data[0] == 0)
     {
         OpenLink();
         ResetLinkPlayers();
-        CreateTask(Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout, 80);
+        CreateTask(Task_WaitForLinkPlayerConnection, 80);
     }
     else if (data[0] > 9)
-        gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_1;
+    {
+        gTasks[taskId].func = Task_ReestablishLinkAwaitConnection;
+    }
     data[0]++;
 }
 
-static void Task_ReestablishLinkInCableClubRoom_1(u8 taskId)
+static void Task_ReestablishLinkAwaitConnection(u8 taskId)
 {
     if (GetLinkPlayerCount_2() >= 2)
     {
         if (IsLinkMaster() == TRUE)
-        {
-            gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_Master;
-        }
+            gTasks[taskId].func = Task_ReestablishLinkLeader;
         else
-        {
-            gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_2;
-        }
+            gTasks[taskId].func = Task_ReestablishLinkAwaitConfirmation;
     }
 }
 
-static void Task_ReestablishLinkInCableClubRoom_Master(u8 taskId)
+static void Task_ReestablishLinkLeader(u8 taskId)
 {
     if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
     {
         CheckShouldAdvanceLinkState();
-        gTasks[taskId].func = Task_ReestablishLinkInCableClubRoom_2;
+        gTasks[taskId].func = Task_ReestablishLinkAwaitConfirmation;
     }
 }
 
-static void Task_ReestablishLinkInCableClubRoom_2(u8 taskId)
+static void Task_ReestablishLinkAwaitConfirmation(u8 taskId)
 {
     if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
     {
-        sub_800A9A4();
+        CheckLinkPlayersMatchSaved();
         StartSendingKeysToLink();
         DestroyTask(taskId);
     }
 }
 
+// Unused
 void CableClub_AskSaveTheGame(void)
 {
     Field_AskSaveTheGame();
 }
 
+#define tTimer data[1]
+
 static void Task_StartWiredCableClubBattle(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    switch (task->data[0])
+
+    switch (task->tState)
     {
     case 0:
         FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
-        task->data[0]++;
+        task->tState++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            task->data[0]++;
+            task->tState++;
         break;
     case 2:
-        task->data[1]++;
-        if (task->data[1] > 20)
-            task->data[0]++;
+        if (++task->tTimer > 20)
+            task->tState++;
         break;
     case 3:
         SetCloseLinkCallback();
-        task->data[0]++;
+        task->tState++;
         break;
     case 4:
         if (!gReceivedRemoteLinkPlayers)
-            task->data[0]++;
+            task->tState++;
         break;
     case 5:
         if (gLinkPlayers[0].trainerId & 1)
@@ -637,24 +684,25 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     int i;
-    switch (data[0])
+
+    switch (tState)
     {
     case 0:
         FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
-        data[0] = 1;
+        tState = 1;
         break;
     case 1:
         if (!gPaletteFade.active)
-            data[0] = 2;
+            tState = 2;
         break;
     case 2:
-        SendBlock(0, &gLocalLinkPlayer, sizeof(struct LinkPlayer));
-        data[0] = 3;
+        SendBlock(0, &gLocalLinkPlayer, sizeof(gLocalLinkPlayer));
+        tState = 3;
         break;
     case 3:
-        if (GetBlockReceivedStatus() == sub_800A8D4())
+        if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())
         {
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
@@ -662,21 +710,20 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
                 ConvertLinkPlayerName(&gLinkPlayers[i]);
                 ResetBlockReceivedFlag(i);
             }
-            data[0] = 4;
+            tState = 4;
         }
         break;
     case 4:
-        data[1]++;
-        if (data[1] > 20)
-            data[0] = 5;
+        if (++tTimer > 20)
+            tState = 5;
         break;
     case 5:
         SetLinkStandbyCallback();
-        data[0] = 6;
+        tState = 6;
         break;
     case 6:
         if (IsLinkTaskFinished())
-            data[0] = 7;
+            tState = 7;
         break;
     case 7:
         if (gLinkPlayers[0].trainerId & 1)
@@ -706,7 +753,9 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
     }
 }
 
-static void sub_8081624(void)
+#undef tTimer
+
+static void CB2_ReturnFromUnionRoomBattle(void)
 {
     switch (gMain.state)
     {
@@ -728,41 +777,42 @@ void CB2_ReturnFromCableClubBattle(void)
     LoadPlayerParty();
     SavePlayerBag();
     Special_UpdateTrainerFansAfterLinkBattle();
+
     if (gSpecialVar_0x8004 != USING_MULTI_BATTLE)
     {
-        TryRecordLinkBattleOutcome(gLocalLinkPlayerId ^ 1);
+        UpdatePlayerLinkBattleRecords(gLocalLinkPlayerId ^ 1);
         if (gWirelessCommType != 0)
         {
             switch (gBattleOutcome)
             {
             case B_OUTCOME_WON:
-                MEvent_RecordIdOfWonderCardSenderByEventType(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+                MysteryGift_TryIncrementStat(CARD_STAT_BATTLES_WON, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
                 break;
             case B_OUTCOME_LOST:
-                MEvent_RecordIdOfWonderCardSenderByEventType(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+                MysteryGift_TryIncrementStat(CARD_STAT_BATTLES_LOST, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
                 break;
             }
         }
     }
+
     if (InUnionRoom() == TRUE)
-    {
-        gMain.savedCallback = sub_8081624;
-    }
+        gMain.savedCallback = CB2_ReturnFromUnionRoomBattle;
     else
-    {
         gMain.savedCallback = CB2_ReturnToFieldFromMultiplayer;
-    }
+
     SetMainCallback2(CB2_SetUpSaveAfterLinkBattle);
 }
 
 void CleanupLinkRoomState(void)
 {
-    if (gSpecialVar_0x8004 == USING_SINGLE_BATTLE || gSpecialVar_0x8004 == USING_DOUBLE_BATTLE || gSpecialVar_0x8004 == USING_MULTI_BATTLE)
+    if (gSpecialVar_0x8004 == USING_SINGLE_BATTLE
+     || gSpecialVar_0x8004 == USING_DOUBLE_BATTLE
+     || gSpecialVar_0x8004 == USING_MULTI_BATTLE)
     {
         LoadPlayerParty();
         SavePlayerBag();
     }
-    SetWarpDestinationToDynamicWarp(127);
+    SetWarpDestinationToDynamicWarp(WARP_ID_DYNAMIC);
 }
 
 void ExitLinkRoom(void)
@@ -770,76 +820,79 @@ void ExitLinkRoom(void)
     QueueExitLinkRoomKey();
 }
 
+// Note: gSpecialVar_0x8005 contains the id of the seat the player entered
 static void Task_EnterCableClubSeat(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 0:
         ShowFieldMessage(CableClub_Text_PleaseWaitBCancel);
-        task->data[0] = 1;
+        task->tState = 1;
         break;
     case 1:
         if (IsFieldMessageBoxHidden())
         {
             SetInCableClubSeat();
             SetLocalLinkPlayerId(gSpecialVar_0x8005);
-            task->data[0] = 2;
+            task->tState = 2;
         }
         break;
     case 2:
         switch (GetCableClubPartnersReady())
         {
-        case 0:
+        case CABLE_SEAT_WAITING:
             break;
-        case 1:
+        case CABLE_SEAT_SUCCESS:
+            // Partners linked and ready, switch to relevant link function
             HideFieldMessageBox();
-            task->data[0] = 0;
+            task->tState = 0;
             SetStartedCableClubActivity();
             SwitchTaskToFollowupFunc(taskId);
             break;
-        case 2:
-            task->data[0] = 3;
+        case CABLE_SEAT_FAILED:
+            task->tState = 3;
             break;
         }
         break;
     case 3:
+        // Exit, failure
         SetLinkWaitingForScript();
-        sub_80F771C(TRUE);
+        EraseFieldMessageBox(TRUE);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         break;
     }
 }
 
-static void CreateEnterCableClubSeatTaskWithFollowupFunc(TaskFunc followUpFunc)
+static void CreateTask_EnterCableClubSeat(TaskFunc followUpFunc)
 {
     u8 taskId = CreateTask(Task_EnterCableClubSeat, 80);
     SetTaskFuncWithFollowupFunc(taskId, Task_EnterCableClubSeat, followUpFunc);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
-static void Task_StartWiredCableClubTrade(u8 taskId)
+static void Task_StartWiredTrade(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkCallback_2();
-        task->data[0]++;
+        task->tState++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            task->data[0]++;
+            task->tState++;
         break;
     case 2:
-        gSelectedTradeMonPositions[0] = 0;
-        gSelectedTradeMonPositions[1] = 0;
+        gSelectedTradeMonPositions[TRADE_PLAYER] = 0;
+        gSelectedTradeMonPositions[TRADE_PARTNER] = 0;
         m4aMPlayAllStop();
         SetCloseLinkCallback();
-        task->data[0]++;
+        task->tState++;
         break;
     case 3:
         if (!gReceivedRemoteLinkPlayers)
@@ -851,27 +904,27 @@ static void Task_StartWiredCableClubTrade(u8 taskId)
     }
 }
 
-static void Task_StartWirelessCableClubTrade(u8 taskId)
+static void Task_StartWirelessTrade(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkRfuCallback();
-        data[0]++;
+        tState++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            data[0]++;
+            tState++;
         break;
     case 2:
-        gSelectedTradeMonPositions[0] = 0;
-        gSelectedTradeMonPositions[1] = 0;
+        gSelectedTradeMonPositions[TRADE_PLAYER] = 0;
+        gSelectedTradeMonPositions[TRADE_PARTNER] = 0;
         m4aMPlayAllStop();
         SetLinkStandbyCallback();
-        data[0]++;
+        tState++;
         break;
     case 3:
         if (IsLinkTaskFinished())
@@ -886,35 +939,36 @@ static void Task_StartWirelessCableClubTrade(u8 taskId)
 void EnterTradeSeat(void)
 {
     if (gWirelessCommType)
-        CreateEnterCableClubSeatTaskWithFollowupFunc(Task_StartWirelessCableClubTrade);
+        CreateTask_EnterCableClubSeat(Task_StartWirelessTrade);
     else
-        CreateEnterCableClubSeatTaskWithFollowupFunc(Task_StartWiredCableClubTrade);
+        CreateTask_EnterCableClubSeat(Task_StartWiredTrade);
 }
 
-static void CreateTask_StartWiredCableClubTrade(void)
+static void CreateTask_StartWiredTrade(void)
 {
-    CreateTask(Task_StartWiredCableClubTrade, 80);
+    CreateTask(Task_StartWiredTrade, 80);
 }
 
 void StartWiredCableClubTrade(void)
 {
-    CreateTask_StartWiredCableClubTrade();
-    ScriptContext1_Stop();
+    CreateTask_StartWiredTrade();
+    ScriptContext_Stop();
 }
 
 void EnterColosseumPlayerSpot(void)
 {
     gLinkType = LINKTYPE_BATTLE;
     if (gWirelessCommType)
-        CreateEnterCableClubSeatTaskWithFollowupFunc(Task_StartWirelessCableClubBattle);
+        CreateTask_EnterCableClubSeat(Task_StartWirelessCableClubBattle);
     else
-        CreateEnterCableClubSeatTaskWithFollowupFunc(Task_StartWiredCableClubBattle);
+        CreateTask_EnterCableClubSeat(Task_StartWiredCableClubBattle);
 }
 
-static void Debug_CreateTaskEnterCableClubSeat(void)
+// Unused
+static void CreateTask_EnterCableClubSeatNoFollowup(void)
 {
     CreateTask(Task_EnterCableClubSeat, 80);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void Script_ShowLinkTrainerCard(void)
@@ -922,23 +976,27 @@ void Script_ShowLinkTrainerCard(void)
     ShowTrainerCardInLink(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-bool32 GetSeeingLinkPlayerCardMsg(u8 who)
+bool32 GetSeeingLinkPlayerCardMsg(u8 linkPlayerIndex)
 {
-    u8 stars;
-    gSpecialVar_0x8006 = who;
-    StringCopy(gStringVar1, gLinkPlayers[who].name);
-    stars = GetTrainerCardStars(who);
-    if (stars == 0)
+    u8 numStars;
+
+    gSpecialVar_0x8006 = linkPlayerIndex;
+    StringCopy(gStringVar1, gLinkPlayers[linkPlayerIndex].name);
+
+    numStars = GetTrainerCardStars(linkPlayerIndex);
+    if (numStars == 0)
         return FALSE;
-    StringCopy(gStringVar2, sStarsMessagePtrs[stars - 1]);
+
+    StringCopy(gStringVar2, sTrainerCardColorNames[numStars - 1]);
     return TRUE;
 }
 
-void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId)
+#define tTimer data[0]
+
+void Task_WaitForLinkPlayerConnection(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    task->data[0]++;
-    if (task->data[0] > 300)
+    if (++task->tTimer > 300)
     {
         CloseLink();
         SetMainCallback2(CB2_LinkError);
@@ -948,17 +1006,18 @@ void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void sub_8081AE4(u8 taskId)
+static void Task_WaitExitToScript(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }
 
-static void sub_8081B08(u8 taskId)
+// Unused
+static void ExitLinkToScript(u8 taskId)
 {
     SetCloseLinkCallback();
-    gTasks[taskId].func = sub_8081AE4;
+    gTasks[taskId].func = Task_WaitExitToScript;
 }

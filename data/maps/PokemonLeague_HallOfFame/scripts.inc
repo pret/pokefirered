@@ -22,14 +22,14 @@ PokemonLeague_HallOfFame_EventScript_EnterRoom::
 	textcolor NPC_TEXT_COLOR_MALE
 	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_HallOfFame_Movement_EnterRoom
 	waitmovement 0
-	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFasterLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 18
 	msgbox PokemonLeague_HallOfFame_Text_OakCongratulations
 	closemessage
-	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFasterUp
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD

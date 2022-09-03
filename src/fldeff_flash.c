@@ -185,7 +185,7 @@ static void FldEff_UseFlash(void)
 {
     PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_FLASH_ACTIVE);
-    ScriptContext1_SetupScript(EventScript_FldEffFlash);
+    ScriptContext_SetupScript(EventScript_FldEffFlash);
 }
 
 // Map transition animatics

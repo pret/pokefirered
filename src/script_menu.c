@@ -816,7 +816,7 @@ static void Task_MultichoiceMenu_HandleInput(u8 taskId)
             }
             DestroyScriptMenuWindow(data[6]);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
 }
@@ -885,7 +885,7 @@ static void Task_YesNoMenu_HandleInput(u8 taskId)
             break;
         }
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -936,7 +936,7 @@ static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId)
     }
     DestroyScriptMenuWindow(data[6]);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 bool8 CreatePCMenu(void)
@@ -1172,7 +1172,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
 {
     u8 taskId;
     s16 *data;
-    ScriptContext1_SetupScript(EventScript_ReleaseEnd);
+    ScriptContext_SetupScript(EventScript_ReleaseEnd);
     taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
     if (taskId != 0xFF)
     {

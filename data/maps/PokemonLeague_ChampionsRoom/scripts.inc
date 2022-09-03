@@ -78,12 +78,12 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	specialvar VAR_RESULT, GetStarterSpecies
 	bufferspeciesname STR_VAR_1, VAR_RESULT
 	msgbox PokemonLeague_ChampionsRoom_Text_OakCongratulations
-	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival
 	closemessage
-	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	msgbox PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe

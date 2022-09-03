@@ -15,12 +15,12 @@ EventScript_Questionnaire::
 	end
 
 EventScript_EnableMysteryGift::
-	applymovement VAR_0x8008, Movement_FaceDown
+	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement VAR_0x8008, Movement_ExclamationMark
+	applymovement VAR_0x8008, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x8008, Movement_Delay48
+	applymovement VAR_0x8008, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Text_YouKnowThoseWords
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
@@ -37,7 +37,7 @@ EventScript_DeclineQuestionnaire::
 	end
 
 EventScript_TookQuestionnaire::
-	applymovement VAR_0x8008, Movement_FaceDown
+	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
 	msgbox Text_QuestionnaireThankYou
 	releaseall

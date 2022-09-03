@@ -30,7 +30,7 @@
  && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
 
 #define TRAINER_OPPONENT_3FE        0x3FE
-#define TRAINER_OPPONENT_C00        0xC00
+#define TRAINER_UNION_ROOM          0xC00
 #define TRAINER_LINK_OPPONENT       0x800
 #define SECRET_BASE_OPPONENT        0x400
 
@@ -402,8 +402,8 @@ struct BattleStruct
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
     u8 field_78; // unused
-    u8 safariGoNearCounter;
-    u8 safariPkblThrowCounter;
+    u8 safariRockThrowCounter;
+    u8 safariBaitThrowCounter;
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
     u8 linkBattleVsSpriteId_V;

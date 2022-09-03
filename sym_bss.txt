@@ -16,7 +16,7 @@
 	.include "src/tileset_anims.o"
 	.include "src/sound.o"
 	.include "src/field_effect.o"
-	.include "src/pokemon_storage_system_8.o"
+	.include "src/pokemon_storage_system_misc.o"
 	.include "src/easy_chat.o"
 	.include "src/link_rfu_2.o"
 	.include "src/link_rfu_3.o"

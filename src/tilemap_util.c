@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg.h"
-#include "box_party_pokemon_dropdown.h"
+#include "tilemap_util.h"
 #include "malloc.h"
 
 //  Handles 3 particular tilemaps ("PKMN Data" text, party menu, close box

@@ -166,50 +166,26 @@ enum
     MSG_FMT_ITEM_NAME,
 };
 
-static const u32 sPokemonStorageScrollingBGTileset[] = INCBIN_U32("graphics/interface/pss_unk_83CE438.4bpp.lz");
-static const u32 sPokemonStorageScrollingBGTilemap[] = INCBIN_U32("graphics/interface/pss_unk_83CE4D0.bin.lz");
+static const u32 sScrollingBg_Gfx[]     = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
+static const u32 sScrollingBg_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
 
 // Unused
-static const u16 sMenu_Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CE5DC.gbapal");
+static const u16 sMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/menu.gbapal");
 
-static const u32 sMenu_Tilemap[] = INCBIN_U32("graphics/interface/pss_unk_83CE5FC.bin.lz");
-
-static const u16 sPkmnData_Tilemap[] = {
-    0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108,
-    0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118,
-    0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108,
-    0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118,
-};
-
-static const u16 sScrollingBg_Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CE738.gbapal");
-static const u16 sScrollingBgMoveItems_Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CE758.gbapal");
-
-static const u16 sCloseBoxButton_Tilemap[] = {
-    0x014c, 0x014d, 0x014e, 0x014f, 0x0170, 0x0171, 0x0172, 0x0173, 0x0174,
-    0x015c, 0x015d, 0x015e, 0x015f, 0x0180, 0x0181, 0x0182, 0x0183, 0x0184,
-    0x0175, 0x0176, 0x0177, 0x0178, 0x0179, 0x017a, 0x017b, 0x017c, 0x017d,
-    0x0185, 0x0186, 0x0187, 0x0188, 0x0189, 0x018a, 0x018b, 0x018c, 0x018d,
-};
-
-static const u16 sPartySlotFilled_Tilemap[] = {
-    0x1140, 0x1141, 0x1141, 0x1142,
-    0x1150, 0x1151, 0x1151, 0x1152,
-    0x1160, 0x1161, 0x1161, 0x1162,
-};
-
-static const u16 sPartySlotEmpty_Tilemap[] = {
-    0x1143, 0x1144, 0x1144, 0x1145,
-    0x1153, 0x1154, 0x1154, 0x1155,
-    0x1163, 0x1164, 0x1164, 0x1165,
-};
-
-static const u16 sPokeStorageMisc2Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.gbapal");
-static const u16 sWaveform_Gfx[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.4bpp");
+static const u32 sMenu_Tilemap[]             = INCBIN_U32("graphics/pokemon_storage/menu.bin.lz");
+static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
+static const u16 sScrollingBg_Pal[]          = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.gbapal");
+static const u16 sScrollingBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg_move_items.gbapal");
+static const u16 sCloseBoxButton_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/close_box_button.bin");
+static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_storage/party_slot_filled.bin");
+static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
+static const u16 sPokeStorageMisc2Pal[]      = INCBIN_U16("graphics/pokemon_storage/misc2.gbapal");
+static const u16 sWaveform_Gfx[]             = INCBIN_U16("graphics/pokemon_storage/waveform.4bpp");
 
 // Unused
-static const u16 sUnused_Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CE9D0.gbapal");
+static const u16 sUnused_Pal[] = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
 
-static const u16 sTextWindows_Pal[] = INCBIN_U16("graphics/interface/pss_unk_83CEA10.gbapal");
+static const u16 sItemInfoFrame_Pal[] = INCBIN_U16("graphics/pokemon_storage/item_info_frame.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] = {
     {
@@ -2135,8 +2111,8 @@ static void FreePokeStorageData(void)
 static void SetScrollingBackground(void)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
-    DecompressAndLoadBgGfxUsingHeap(3, sPokemonStorageScrollingBGTileset, 0, 0, 0);
-    LZ77UnCompVram(sPokemonStorageScrollingBGTilemap, (void *)BG_SCREEN_ADDR(31));
+    DecompressAndLoadBgGfxUsingHeap(3, sScrollingBg_Gfx, 0, 0, 0);
+    LZ77UnCompVram(sScrollingBg_Tilemap, (void *)BG_SCREEN_ADDR(31));
 }
 
 static void ScrollBackground(void)
@@ -2173,7 +2149,7 @@ static void InitPalettesAndSprites(void)
 {
     LoadPalette(gPokeStorageInterface_Pal, 0, 0x20);
     LoadPalette(gPokeStorageInterface_NoDisplayMon_Pal, 0x20, 0x20);
-    LoadPalette(sTextWindows_Pal, 0xF0, 0x20);
+    LoadPalette(sItemInfoFrame_Pal, 0xF0, 0x20);
     if (gStorage->boxOption != OPTION_MOVE_ITEMS)
         LoadPalette(sScrollingBg_Pal, 0x30, sizeof(sScrollingBg_Pal));
     else

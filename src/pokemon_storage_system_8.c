@@ -40,7 +40,7 @@ static void SpriteCB_ItemIcon_SwapToHand(struct Sprite *sprite);
 static void SpriteCB_ItemIcon_SwapToMon(struct Sprite *sprite);
 static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite);
 
-static const u32 sItemInfoFrame_Gfx[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
+static const u32 sItemInfoFrame_Gfx[] = INCBIN_U32("graphics/pokemon_storage/item_info_frame.4bpp");
 
 static const struct OamData sOamData_ItemIcon = {
     .y = 0,

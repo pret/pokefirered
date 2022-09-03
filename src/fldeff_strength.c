@@ -28,7 +28,7 @@ bool8 SetUpFieldMove_Strength(void)
 static void FieldCB_UseStrength(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_FldEffStrength);
+    ScriptContext_SetupScript(EventScript_FldEffStrength);
 }
 
 bool8 FldEff_UseStrength(void)
@@ -42,5 +42,5 @@ bool8 FldEff_UseStrength(void)
 static void ShowMonCB_UseStrength(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

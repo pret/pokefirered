@@ -200,7 +200,7 @@ static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 playerIdx)
     {
         return FALSE;
     }
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         UnfreezeObjectEvent(object);
     }

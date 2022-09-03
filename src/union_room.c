@@ -1019,12 +1019,12 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->state++;
         break;
     case 24:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         gSpecialVar_Result = 5;
         break;
     case 22:
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         gSpecialVar_Result = 8;
         break;
@@ -2003,7 +2003,7 @@ static void Task_StartActivity(u8 taskId)
 
     DestroyTask(taskId);
     gSpecialVar_Result = 1;
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 static void Task_RunScriptAndFadeToActivity(u8 taskId)
@@ -2015,11 +2015,11 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
     {
     case 0:
         gSpecialVar_Result = 1;
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         data[0]++;
         break;
     case 1:
-        if (!ScriptContext1_IsScriptSetUp())
+        if (!ScriptContext_IsEnabled())
         {
             FadeScreen(FADE_TO_BLACK, 0);
             data[0]++;
@@ -2776,7 +2776,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 gSpecialVar_Result = 0;
             }
         }
-        else if (ScriptContext2_IsEnabled() != TRUE)
+        else if (ArePlayerFieldControlsLocked() != TRUE)
         {
             if (JOY_NEW(A_BUTTON))
             {
@@ -3977,7 +3977,7 @@ static void JoinGroup_BlankBg0AndEnableScriptContexts(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
     CopyBgTilemapBufferToVram(0);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx)
@@ -4644,7 +4644,7 @@ static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade * trade, u8 mul
 static void HandleCancelTrade(bool32 unlockObjs)
 {
     UR_BlankBg0();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     UnionRoom_UnlockPlayerAndChatPartner();
     sPlayerCurrActivity = 0;
     if (unlockObjs)
@@ -4656,7 +4656,7 @@ static void HandleCancelTrade(bool32 unlockObjs)
 
 static void UR_EnableScriptContext2AndFreezeObjectEvents(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjects_WaitForPlayer();
 }
 

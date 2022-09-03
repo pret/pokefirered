@@ -366,7 +366,7 @@ static void VBlankCB_MoveRelearner(void)
 
 void DisplayMoveTutorMenu(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_InitMoveRelearnerMenu, 10);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }

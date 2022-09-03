@@ -2977,7 +2977,7 @@ BattleScript_BattleTowerLostLostSkipMonRecall::
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
 	jumpifnotbattletype BATTLE_TYPE_DOUBLE, BattleScript_BattleTowerLostLostSkipDouble
-	printstring STRINGID_TRAINER2NAME
+	printstring STRINGID_TRAINER2WINTEXT
 BattleScript_BattleTowerLostLostSkipDouble::
 	end2
 
@@ -2995,7 +2995,7 @@ BattleScript_BattleTowerTrainerBattleWon::
 	jumpifnotbattletype BATTLE_TYPE_TRAINER_TOWER, BattleScript_BattleTowerEtcTrainerBattleWonSkipText
 	printstring STRINGID_TRAINER1LOSETEXT
 	jumpifnotbattletype BATTLE_TYPE_DOUBLE, BattleScript_BattleTowerEtcTrainerBattleWonSkipText
-	printstring STRINGID_TRAINER2CLASS
+	printstring STRINGID_TRAINER2LOSETEXT
 BattleScript_BattleTowerEtcTrainerBattleWonSkipText::
 	pickup
 	end2

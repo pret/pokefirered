@@ -151,7 +151,7 @@ static void Task_NoResponse_CleanUp(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, TRUE);
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
@@ -487,7 +487,7 @@ static void Task_ItemfinderResponseCleanUp(u8 taskId)
     DestroyArrowAndStarTiles();
     ClearDialogWindowAndFrame(0, TRUE);
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
 
@@ -500,8 +500,8 @@ static void Task_ItemfinderUnderfootDigUpItem(u8 taskId)
 {
     DestroyArrowAndStarTiles();
     DestroyTask(taskId);
-    ScriptContext1_SetupScript(EventScript_ItemfinderDigUpUnderfootItem);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(EventScript_ItemfinderDigUpUnderfootItem);
+    LockPlayerFieldControls();
 }
 
 #undef tStartSpriteId

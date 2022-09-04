@@ -93,11 +93,11 @@ static const union AnimCmd *const sSpriteAnimTable_FldEff_CutGrass[] = {
 };
 
 static const struct SpriteFrameImage sSpriteFrameImages_FldEff_CutGrass[] = {
-    {gUnknown_8398648, 0x20}
+    {gFieldEffectObjectPic_CutGrass, 0x20}
 };
 
 const struct SpritePalette gFldEffPalette_CutGrass[] = {
-    gUnknown_8398688, 4096
+    gFieldEffectPal_CutGrass, 4096
 };
 
 static const struct SpriteTemplate sSpriteTemplate_FldEff_CutGrass = {

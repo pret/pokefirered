@@ -18,8 +18,8 @@ static void Task_FieldEffectShowMon_Init(u8 taskId);
 static void Task_FieldEffectShowMon_WaitFldeff(u8 taskId);
 static void Task_FieldEffectShowMon_WaitPlayerAnim(u8 taskId);
 static void Task_FieldEffectShowMon_Cleanup(u8 taskId);
-static void sub_80C9A10(void);
-static void sub_80C9A60(void);
+static void FieldCallback_UseRockSmash(void);
+static void StartRockSmashFieldEffect(void);
 
 EWRAM_DATA struct MapPosition gPlayerFacingPosition = {};
 
@@ -108,13 +108,13 @@ bool8 SetUpFieldMove_RockSmash(void)
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_ROCK_SMASH_ROCK) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = sub_80C9A10;
+        gPostMenuFieldCallback = FieldCallback_UseRockSmash;
         return TRUE;
     }
     return FALSE;
 }
 
-static void sub_80C9A10(void)
+static void FieldCallback_UseRockSmash(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext_SetupScript(EventScript_FldEffRockSmash);
@@ -124,12 +124,12 @@ bool8 FldEff_UseRockSmash(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
 
-    FLDEFF_SET_FUNC_TO_DATA(sub_80C9A60);
+    FLDEFF_SET_FUNC_TO_DATA(StartRockSmashFieldEffect);
     IncrementGameStat(GAME_STAT_USED_ROCK_SMASH);
     return FALSE;
 }
 
-static void sub_80C9A60(void)
+static void StartRockSmashFieldEffect(void)
 {
     PlaySE(SE_M_ROCK_THROW);
     FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);

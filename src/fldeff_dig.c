@@ -7,7 +7,7 @@
 #include "party_menu.h"
 
 static void FieldCallback_Dig(void);
-static void sub_80C9AFC(void);
+static void StartDigFieldEffect(void);
 
 bool8 SetUpFieldMove_Dig(void)
 {
@@ -31,12 +31,12 @@ bool8 FldEff_UseDig(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
 
-    FLDEFF_SET_FUNC_TO_DATA(sub_80C9AFC);
+    FLDEFF_SET_FUNC_TO_DATA(StartDigFieldEffect);
     SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return FALSE;
 }
 
-static void sub_80C9AFC(void)
+static void StartDigFieldEffect(void)
 {
     u8 taskId;
 

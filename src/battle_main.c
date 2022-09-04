@@ -76,7 +76,7 @@ static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
 static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
-static void SpriteCB_8011E28_Step(struct Sprite *sprite);
+static void SpriteCB_Flicker(struct Sprite *sprite);
 static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
 static void SpriteCB_BlinkVisible(struct Sprite *sprite);
 static void oac_poke_ally_(struct Sprite *sprite);
@@ -1917,24 +1917,26 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 {
 }
 
-// Unused
-static void SpriteCB_8011E28(struct Sprite *sprite)
-{
-    sprite->data[3] = 6;
-    sprite->data[4] = 1;
-    sprite->callback = SpriteCB_8011E28_Step;
-}
+#define sNumFlickers data[3]
+#define sDelay       data[4]
 
 // Unused
-static void SpriteCB_8011E28_Step(struct Sprite *sprite)
+static void SpriteCB_InitFlicker(struct Sprite *sprite)
 {
-    --sprite->data[4];
-    if (sprite->data[4] == 0)
+    sprite->sNumFlickers = 6;
+    sprite->sDelay = 1;
+    sprite->callback = SpriteCB_Flicker;
+}
+
+static void SpriteCB_Flicker(struct Sprite *sprite)
+{
+    sprite->sDelay--;
+    if (sprite->sDelay == 0)
     {
-        sprite->data[4] = 8;
+        sprite->sDelay = 8;
         sprite->invisible ^= 1;
-        --sprite->data[3];
-        if (sprite->data[3] == 0)
+        sprite->sNumFlickers--;
+        if (sprite->sNumFlickers == 0)
         {
             sprite->invisible = FALSE;
             sprite->callback = SpriteCallbackDummy_2;
@@ -1942,6 +1944,9 @@ static void SpriteCB_8011E28_Step(struct Sprite *sprite)
         }
     }
 }
+
+#undef sNumFlickers
+#undef sDelay
 
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
 {

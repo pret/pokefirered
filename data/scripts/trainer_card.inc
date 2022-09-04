@@ -74,12 +74,12 @@ FourIsland_House2_EventScript_StickerMan::
 FourIsland_House2_EventScript_MeetStickerMan::
 	setflag FLAG_MET_STICKER_MAN
 	msgbox FourIsland_House2_Text_WishICouldShowOffStickers
-	applymovement LOCALID_STICKER_MAN, Movement_FacePlayer
+	applymovement LOCALID_STICKER_MAN, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_STICKER_MAN, Movement_ExclamationMark
+	applymovement LOCALID_STICKER_MAN, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_STICKER_MAN, Movement_Delay48
+	applymovement LOCALID_STICKER_MAN, Common_Movement_Delay48
 	waitmovement 0
 	goto_if_eq VAR_0x8008, 0, FourIsland_House2_EventScript_StickerManNothingToBrag
 	message FourIsland_House2_Text_GiveYouStickerIfYouBrag
@@ -88,7 +88,7 @@ FourIsland_House2_EventScript_MeetStickerMan::
 	end
 
 FourIsland_House2_EventScript_StickerManAskForBrag::
-	applymovement LOCALID_STICKER_MAN, Movement_FacePlayer
+	applymovement LOCALID_STICKER_MAN, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording

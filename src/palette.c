@@ -319,7 +319,7 @@ static void sub_80709B4(struct PaletteStruct *a1)
                 return;
             if (val > 2)
                 return;
-            ResetPaletteStructByUid(a1->base->uid);
+            PaletteStruct_ResetById(a1->base->uid);
         }
     }
     else
@@ -328,7 +328,7 @@ static void sub_80709B4(struct PaletteStruct *a1)
     }
 }
 
-void ResetPaletteStructByUid(u16 a1)
+void PaletteStruct_ResetById(u16 a1)
 {
     u8 paletteNum = GetPaletteNumByUid(a1);
     if (paletteNum != 16)

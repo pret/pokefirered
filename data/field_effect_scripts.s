@@ -48,7 +48,7 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_UseWaterfall            @ FLDEFF_USE_WATERFALL
 	.4byte gFldEffScript_UseDive                 @ FLDEFF_USE_DIVE
 	.4byte gFldEffScript_Pokeball                @ FLDEFF_POKEBALL
-	.4byte gFldEffScript_HeartIcon               @ FLDEFF_X_ICON
+	.4byte gFldEffScript_XIcon                   @ FLDEFF_X_ICON
 	.4byte gFldEffScript_Nop47                   @ FLDEFF_NOP_47
 	.4byte gFldEffScript_Nop48                   @ FLDEFF_NOP_48
 	.4byte gFldEffScript_PopOutOfAsh             @ FLDEFF_POP_OUT_OF_ASH
@@ -256,7 +256,7 @@ gFldEffScript_Pokeball::
 	callnative FldEff_Pokeball
 	end 
 
-gFldEffScript_HeartIcon::
+gFldEffScript_XIcon::
 	callnative FldEff_XIcon
 	end 
 

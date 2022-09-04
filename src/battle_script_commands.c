@@ -23,7 +23,6 @@
 #include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
-#include "battle_string_ids.h"
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -6125,7 +6124,7 @@ static void Cmd_various(void)
             gHitMarker &= ~HITMARKER_PLAYER_FAINTED;
         }
         break;
-    case VARIOUS_CASE_8:
+    case VARIOUS_GET_BATTLERS_FOR_RECALL:
         i = 0; // redundant
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         gActiveBattler = 1;

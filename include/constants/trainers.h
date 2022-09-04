@@ -175,8 +175,10 @@
 #define TRAINER_BACK_PIC_POKEDUDE               4
 #define TRAINER_BACK_PIC_OLD_MAN                5
 
-// Leftover from R/S
-#define TRAINER_SECRET_BASE                 1024
+// Special Trainer Ids.
+#define TRAINER_UNION_ROOM          0xC00
+#define TRAINER_LINK_OPPONENT       0x800
+#define TRAINER_SECRET_BASE         0x400
 
 #define TRAINER_CLASS_NONE                0
 #define TRAINER_CLASS_PKMN_TRAINER_UNUSED 1

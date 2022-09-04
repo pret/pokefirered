@@ -181,7 +181,7 @@ CableClub_EventScript_PlayerExitLinkRoom::
 CableClub_EventScript_Tutorial::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox CableClub_Text_FirstTimeRightThisWay
 	closemessage
@@ -275,12 +275,12 @@ CableClub_EventScript_TryEnterColosseum::
 	special TryBattleLinkup
 	waitstate
 	call EventScript_RestorePrevTextColor
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterColosseum
-	goto_if_eq VAR_RESULT, 2, CableClub_EventScript_AbortLinkSomeoneNotReady
-	goto_if_eq VAR_RESULT, 3, CableClub_EventScript_AbortLinkDifferentSelections
-	goto_if_eq VAR_RESULT, 4, CableClub_EventScript_AbortLinkIncorrectNumberOfBattlers
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_AbortLink
-	goto_if_eq VAR_RESULT, 6, CableClub_EventScript_AbortLinkConnectionError
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterColosseum
+	goto_if_eq VAR_RESULT, LINKUP_SOMEONE_NOT_READY, CableClub_EventScript_AbortLinkSomeoneNotReady
+	goto_if_eq VAR_RESULT, LINKUP_DIFF_SELECTIONS, CableClub_EventScript_AbortLinkDifferentSelections
+	goto_if_eq VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS, CableClub_EventScript_AbortLinkIncorrectNumberOfBattlers
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_AbortLink
+	goto_if_eq VAR_RESULT, LINKUP_CONNECTION_ERROR, CableClub_EventScript_AbortLinkConnectionError
 	end
 
 CableClub_EventScript_EnterColosseum::
@@ -373,14 +373,14 @@ CableClub_EventScript_TradeCenter::
 	special TryTradeLinkup
 	waitstate
 	call EventScript_RestorePrevTextColor
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterTradeCenter
-	goto_if_eq VAR_RESULT, 2, CableClub_EventScript_AbortLinkSomeoneNotReady
-	goto_if_eq VAR_RESULT, 3, CableClub_EventScript_AbortLinkDifferentSelections
-	goto_if_eq VAR_RESULT, 4, CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_AbortLink
-	goto_if_eq VAR_RESULT, 6, CableClub_EventScript_AbortLinkConnectionError
-	goto_if_eq VAR_RESULT, 7, CableClub_EventScript_AbortLinkPlayerNotReady
-	goto_if_eq VAR_RESULT, 9, CableClub_EventScript_AbortLinkOtherTrainerNotReady
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterTradeCenter
+	goto_if_eq VAR_RESULT, LINKUP_SOMEONE_NOT_READY, CableClub_EventScript_AbortLinkSomeoneNotReady
+	goto_if_eq VAR_RESULT, LINKUP_DIFF_SELECTIONS, CableClub_EventScript_AbortLinkDifferentSelections
+	goto_if_eq VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS, CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_AbortLink
+	goto_if_eq VAR_RESULT, LINKUP_CONNECTION_ERROR, CableClub_EventScript_AbortLinkConnectionError
+	goto_if_eq VAR_RESULT, LINKUP_PLAYER_NOT_READY, CableClub_EventScript_AbortLinkPlayerNotReady
+	goto_if_eq VAR_RESULT, LINKUP_PARTNER_NOT_READY, CableClub_EventScript_AbortLinkOtherTrainerNotReady
 	end
 
 CableClub_EventScript_EnterTradeCenter::
@@ -963,17 +963,17 @@ CableClub_EventScript_ChooseLinkLeaderFrom2::
 
 CableClub_EventScript_TryLeadGroup2Players::
 	call CableClub_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterWirelessLinkRoom
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeaderFrom2
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryLeadGroup2Players
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom2
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryLeadGroup2Players
 	release
 	return
 
 CableClub_EventScript_TryJoinGroup2Players::
 	call CableClub_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterWirelessLinkRoom
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeaderFrom2
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryJoinGroup2Players
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom2
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinGroup2Players
 	release
 	return
 
@@ -992,17 +992,17 @@ CableClub_EventScript_ChooseLinkLeaderFrom4::
 
 CableClub_EventScript_TryLeadGroup4Players::
 	call CableClub_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterWirelessLinkRoom
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeaderFrom4
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryLeadGroup4Players
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom4
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryLeadGroup4Players
 	release
 	return
 
 CableClub_EventScript_TryJoinGroup4Players::
 	call CableClub_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterWirelessLinkRoom
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeaderFrom4
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryJoinGroup4Players
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom4
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinGroup4Players
 	release
 	return
 
@@ -1021,17 +1021,17 @@ CableClub_EventScript_ChooseLinkLeader::
 
 CableClub_EventScript_TryLeadGroupXPlayers::
 	call CableClub_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterWirelessLinkRoom
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeader
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryLeadGroupXPlayers
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeader
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryLeadGroupXPlayers
 	release
 	return
 
 CableClub_EventScript_TryJoinGroupXPlayers::
 	call CableClub_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterWirelessLinkRoom
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeader
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryJoinGroupXPlayers
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeader
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinGroupXPlayers
 	release
 	return
 
@@ -1217,17 +1217,17 @@ CableClub_EventScript_ChooseLinkLeaderMinigame::
 
 CableClub_EventScript_TryBecomeMinigameLinkLeader::
 	call CableClub_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterMinigame
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeaderMinigame
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryBecomeMinigameLinkLeader
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterMinigame
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderMinigame
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryBecomeMinigameLinkLeader
 	release
 	return
 
 CableClub_EventScript_TryJoinMinigameLinkGroup::
 	call CableClub_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, 1, CableClub_EventScript_EnterMinigame
-	goto_if_eq VAR_RESULT, 5, CableClub_EventScript_ChooseLinkLeaderMinigame
-	goto_if_eq VAR_RESULT, 8, CableClub_EventScript_TryJoinMinigameLinkGroup
+	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterMinigame
+	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderMinigame
+	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinMinigameLinkGroup
 	release
 	return
 

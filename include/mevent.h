@@ -3,6 +3,12 @@
 
 #include "global.h"
 
+#define CARD_STAT_BATTLES_WON   0
+#define CARD_STAT_BATTLES_LOST  1
+#define CARD_STAT_NUM_TRADES    2
+#define CARD_STAT_NUM_STAMPS    3
+#define CARD_STAT_MAX_STAMPS    4
+
 struct MEventClientHeaderStruct
 {
     u32 unk_00;
@@ -85,7 +91,7 @@ bool32 WonderCard_Test_Unk_08_6(void);
 u32 MENews_GetInput(u16 input);
 void InitMEventData(void);
 u16 MEvent_GetBattleCardCount(u32 command);
-void MEvent_RecordIdOfWonderCardSenderByEventType(u32 eventId, u32 trainerId);
+void MysteryGift_TryIncrementStat(u32 eventId, u32 trainerId);
 u16 *GetMEventProfileECWordsMaybe(void);
 void ResetReceivedWonderCardFlag(void);
 bool32 MEventHandleReceivedWonderCard(u16 flagId);

@@ -44,7 +44,7 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_SELPHY, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FiveIsland_ResortGorgeous_House_Text_SelphyGiveTokenOfAppreciation
@@ -65,25 +65,25 @@ FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
 	end
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth::
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_SELPHY, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth::
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast::
-	applymovement LOCALID_SELPHY, Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_SELPHY, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 

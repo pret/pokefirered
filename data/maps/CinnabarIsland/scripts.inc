@@ -94,9 +94,9 @@ CinnabarIsland_EventScript_BillScene::
 	call_if_unset FLAG_TEMP_2, CinnabarIsland_EventScript_BillFacePlayer1
 	call_if_set FLAG_TEMP_2, CinnabarIsland_EventScript_BillFacePlayer2
 	playse SE_PIN
-	applymovement LOCALID_BILL, Movement_ExclamationMark
+	applymovement LOCALID_BILL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_BILL, Movement_Delay48
+	applymovement LOCALID_BILL, Common_Movement_Delay48
 	waitmovement 0
 	call_if_unset FLAG_TEMP_2, CinnabarIsland_EventScript_BillApproachPlayer1
 	call_if_set FLAG_TEMP_2, CinnabarIsland_EventScript_BillApproachPlayer2
@@ -107,12 +107,12 @@ CinnabarIsland_EventScript_BillScene::
 	end
 
 CinnabarIsland_EventScript_BillFacePlayer1::
-	applymovement LOCALID_BILL, Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_BILL, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 CinnabarIsland_EventScript_BillFacePlayer2::
-	applymovement LOCALID_BILL, Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_BILL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
@@ -124,7 +124,7 @@ CinnabarIsland_EventScript_BillApproachPlayer1::
 CinnabarIsland_EventScript_BillApproachPlayer2::
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_BillApproachPlayer2
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -313,7 +313,7 @@ CinnabarIsland_Movement_PlayerBoardBoatFromShore::
 @ Triggered when VAR_TEMP_1 is 0
 CinnabarIsland_EventScript_GymDoorLocked::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	msgbox CinnabarIsland_Text_DoorIsLocked

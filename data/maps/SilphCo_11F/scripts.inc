@@ -61,7 +61,7 @@ SilphCo_11F_EventScript_GiovanniTriggerRight::
 
 SilphCo_11F_EventScript_BattleGiovanni::
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_GIOVANNI, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_GIOVANNI, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 25
 	msgbox SilphCo_11F_Text_GiovanniIntro

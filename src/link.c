@@ -163,11 +163,11 @@ static const u16 sLinkTestFontPal[] = INCBIN_U16("graphics/interface/link_test_f
 static const u16 sLinkTestFontGfx[] = INCBIN_U16("graphics/interface/link_test_font.4bpp");
 
 static const struct BlockRequest sBlockRequests[] = {
-    {gBlockSendBuffer, 200},
-    {gBlockSendBuffer, 200},
-    {gBlockSendBuffer, 100},
-    {gBlockSendBuffer, 220},
-    {gBlockSendBuffer,  40}
+    [BLOCK_REQ_SIZE_NONE] = { gBlockSendBuffer, 200 },
+    [BLOCK_REQ_SIZE_200]  = { gBlockSendBuffer, 200 },
+    [BLOCK_REQ_SIZE_100]  = { gBlockSendBuffer, 100 },
+    [BLOCK_REQ_SIZE_220]  = { gBlockSendBuffer, 220 },
+    [BLOCK_REQ_SIZE_40]   = { gBlockSendBuffer,  40 }
 };
 static const char sASCIIGameFreakInc[] = "GameFreak inc.";
 static const char sASCIITestPrint[] = "TEST PRINT\n"
@@ -788,8 +788,8 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
         cmpVal = GetLinkPlayerCount_2();
         if (lower > cmpVal || cmpVal > upper)
         {
-            sPlayerDataExchangeStatus = EXCHANGE_STAT_6;
-            return EXCHANGE_STAT_6;
+            sPlayerDataExchangeStatus = EXCHANGE_WRONG_NUM_PLAYERS;
+            return sPlayerDataExchangeStatus;
         }
         else
         {
@@ -815,10 +815,10 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
                         sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
                         break;
                     case 1:
-                        sPlayerDataExchangeStatus = EXCHANGE_STAT_4;
+                        sPlayerDataExchangeStatus = EXCHANGE_PLAYER_NOT_READY;
                         break;
                     case 2:
-                        sPlayerDataExchangeStatus = EXCHANGE_STAT_5;
+                        sPlayerDataExchangeStatus = EXCHANGE_PARTNER_NOT_READY;
                         break;
                     }
                 }
@@ -829,7 +829,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             }
             else
             {
-                sPlayerDataExchangeStatus = EXCHANGE_IN_PROGRESS;
+                sPlayerDataExchangeStatus = EXCHANGE_DIFF_SELECTIONS;
             }
         }
     }
@@ -862,7 +862,7 @@ bool8 IsLinkPlayerDataExchangeComplete(void)
     else
     {
         retval = FALSE;
-        sPlayerDataExchangeStatus = EXCHANGE_IN_PROGRESS;
+        sPlayerDataExchangeStatus = EXCHANGE_DIFF_SELECTIONS;
     }
     return retval;
 }
@@ -999,7 +999,7 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
     return InitBlockSend(src, size);
 }
 
-bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType)
+bool8 SendBlockRequest(u8 blockRequestType)
 {
     if (gWirelessCommType == 1)
     {
@@ -1195,7 +1195,7 @@ void SetLinkDebugValues(u32 seed, u32 flags)
     gLinkDebugFlags = flags;
 }
 
-u8 sub_800A8A4(void)
+u8 GetSavedLinkPlayerCountAsBitFlags(void)
 {
     int i;
     u8 flags;
@@ -1208,7 +1208,7 @@ u8 sub_800A8A4(void)
     return flags;
 }
 
-u8 sub_800A8D4(void)
+u8 GetLinkPlayerCountAsBitFlags(void)
 {
     int i;
     u8 flags;
@@ -1221,11 +1221,11 @@ u8 sub_800A8D4(void)
     return flags;
 }
 
-void sub_800A900(u8 a0)
+void SaveLinkPlayers(u8 numPlayers)
 {
     int i;
 
-    gSavedLinkPlayerCount = a0;
+    gSavedLinkPlayerCount = numPlayers;
     gSavedMultiplayerId = GetMultiplayerId();
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
@@ -1265,7 +1265,7 @@ bool8 sub_800A95C(void)
     return FALSE;
 }
 
-void sub_800A9A4(void)
+void CheckLinkPlayersMatchSaved(void)
 {
     u8 i;
 
@@ -1280,7 +1280,7 @@ void sub_800A9A4(void)
     }
 }
 
-void sub_800AA24(void)
+void ResetLinkPlayerCount(void)
 {
     gSavedLinkPlayerCount = 0;
     gSavedMultiplayerId = 0;

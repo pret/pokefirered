@@ -245,7 +245,7 @@ $(C_BUILDDIR)/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 $(C_BUILDDIR)/isagbprn.o: CFLAGS := -mthumb-interwork
 
 $(C_BUILDDIR)/trainer_tower.o: CFLAGS += -ffreestanding
-$(C_BUILDDIR)/flying.o: CFLAGS += -ffreestanding
+$(C_BUILDDIR)/battle_anim_flying.o: CFLAGS += -ffreestanding
 
 $(C_BUILDDIR)/librfu_intr.o: CC1 := tools/agbcc/bin/agbcc_arm$(EXE)
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -O2 -mthumb-interwork -quiet

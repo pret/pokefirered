@@ -15,7 +15,6 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
 #include "reshow_battle_screen.h"
 #include "teachy_tv.h"
 #include "constants/songs.h"

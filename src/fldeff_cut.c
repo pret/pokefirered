@@ -93,11 +93,11 @@ static const union AnimCmd *const sSpriteAnimTable_FldEff_CutGrass[] = {
 };
 
 static const struct SpriteFrameImage sSpriteFrameImages_FldEff_CutGrass[] = {
-    {gUnknown_8398648, 0x20}
+    {gFieldEffectObjectPic_CutGrass, 0x20}
 };
 
 const struct SpritePalette gFldEffPalette_CutGrass[] = {
-    gUnknown_8398688, 4096
+    gFieldEffectPal_CutGrass, 4096
 };
 
 static const struct SpriteTemplate sSpriteTemplate_FldEff_CutGrass = {
@@ -177,7 +177,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_FldEffCut);
+    ScriptContext_SetupScript(EventScript_FldEffCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -284,12 +284,12 @@ static void SpriteCallback_CutGrass_Cleanup(struct Sprite *sprite)
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     Free(sCutGrassSpriteArrayPtr);
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 static void FieldMoveCallback_CutTree(void)
 {
     PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

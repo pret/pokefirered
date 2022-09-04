@@ -29,11 +29,6 @@
    (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)           \
  && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
 
-// Special Trainer Ids.
-#define TRAINER_UNION_ROOM          3072
-#define TRAINER_LINK_OPPONENT       2048
-#define TRAINER_SECRET_BASE         1024
-
 // Battle Actions
 // These determine what each battler will do in a turn
 #define B_ACTION_USE_MOVE                  0
@@ -402,8 +397,8 @@ struct BattleStruct
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
     u8 field_78; // unused
-    u8 safariGoNearCounter;
-    u8 safariPkblThrowCounter;
+    u8 safariRockThrowCounter;
+    u8 safariBaitThrowCounter;
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
     u8 linkBattleVsSpriteId_V;

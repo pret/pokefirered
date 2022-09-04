@@ -78,7 +78,7 @@ void sub_80716F8(const u16 *src, u16 *dst, u16 count, u8 a4);
 void sub_80717A8(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7);
 bool32 sub_807185C(u8 var);
 void sub_8071898(void);
-void ResetPaletteStructByUid(u16 a1);
+void PaletteStruct_ResetById(u16 a1);
 void ResetPaletteStruct(u8 paletteNum);
 
 #endif // GUARD_PALETTE_H

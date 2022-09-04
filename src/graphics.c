@@ -779,8 +779,8 @@ const u32 gBattleAnimSpriteGfx_Roots[] = INCBIN_U32("graphics/battle_anims/sprit
 const u32 gBattleAnimSpritePal_ItemBag[] = INCBIN_U32("graphics/battle_anims/sprites/item_bag.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_ItemBag[] = INCBIN_U32("graphics/battle_anims/sprites/item_bag.4bpp.lz");
 
-const u32 gBattleAnimSpritePal_TriForceTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_attack_triangle.gbapal.lz");
-const u32 gBattleAnimSpriteGfx_TriForceTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_attack_triangle.4bpp.lz");
+const u32 gBattleAnimSpritePal_TriAttackTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_attack_triangle.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_TriAttackTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_attack_triangle.4bpp.lz");
 
 const u32 gBattleAnimSpritePal_LetterZ[] = INCBIN_U32("graphics/battle_anims/sprites/letter_z.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_LetterZ[] = INCBIN_U32("graphics/battle_anims/sprites/letter_z.4bpp.lz");
@@ -915,8 +915,8 @@ const u32 gBattleAnimSpriteGfx_TagHand[] = INCBIN_U32("graphics/battle_anims/spr
 
 const u32 gBattleAnimSpriteGfx_NoiseLine[] = INCBIN_U32("graphics/battle_anims/sprites/noise_line.4bpp.lz");
 
-const u32 gUnknown_D2EC24_Gfx[] = INCBIN_U32("graphics/battle_anims/masks/unknown_D2EC24.4bpp.lz");
-const u32 gUnknown_D2EC24_Tilemap[] = INCBIN_U32("graphics/battle_anims/masks/unknown_D2EC24.bin.lz");
+const u32 gUnusedLevelupAnimationGfx[] = INCBIN_U32("graphics/battle_anims/masks/unknown_D2EC24.4bpp.lz");
+const u32 gUnusedLevelupAnimationTilemap[] = INCBIN_U32("graphics/battle_anims/masks/unknown_D2EC24.bin.lz");
 
 const u32 gBattleAnimSpriteGfx_SmallRedEye[] = INCBIN_U32("graphics/battle_anims/sprites/small_red_eye.4bpp.lz");
 const u32 gBattleAnimSpritePal_SmallRedEye[] = INCBIN_U32("graphics/battle_anims/sprites/small_red_eye.gbapal.lz");
@@ -950,7 +950,7 @@ const u32 gBattleAnimSpritePal_Meteor[] = INCBIN_U32("graphics/battle_anims/spri
 const u32 gBattleAnimSpriteGfx_FlatRock[] = INCBIN_U32("graphics/battle_anims/sprites/flat_rock.4bpp.lz");
 const u32 gBattleAnimSpritePal_FlatRock[] = INCBIN_U32("graphics/battle_anims/sprites/flat_rock.gbapal.lz");
 
-const u16 gUnknown_8D2FBB4[] = INCBIN_U16("graphics/interface/unk_8D2FBB4.gbapal");
+const u16 gPPTextPalette[] = INCBIN_U16("graphics/interface/text_pp.gbapal");
 
 #include "data/graphics/pokemon.h"
 #include "data/graphics/trainers.h"
@@ -1021,7 +1021,7 @@ const u32 gBattleAnimSpritePal_Protect[] = INCBIN_U32("graphics/battle_anims/spr
 
 const u32 gBattleAnimBgPalette_MuddyWater[] = INCBIN_U32("graphics/battle_anims/backgrounds/water_muddy.gbapal.lz");
 
-const u32 gFile_graphics_battle_interface_enemy_mon_shadow_sheet[] = INCBIN_U32("graphics/battle_interface/enemy_mon_shadow.4bpp.lz");
+const u32 gEnemyMonShadow_Gfx[] = INCBIN_U32("graphics/battle_interface/enemy_mon_shadow.4bpp.lz");
 
 const u32 gFile_graphics_battle_interface_ball_status_bar_sheet[] = INCBIN_U32("graphics/battle_interface/ball_status_bar.4bpp.lz");
 
@@ -1251,13 +1251,11 @@ const u32 gPokeSummary_StatusAilmentIconTiles[] = INCBIN_U32("graphics/interface
 const u16 gDexScreen_TopMenuIconPals_AtoZ[] = INCBIN_U16("graphics/pokedex/cat_icon_abc.gbapal");
 const u32 gDexScreen_TopMenuIconTiles_AtoZ[] = INCBIN_U32("graphics/pokedex/cat_icon_abc.4bpp.lz");
 
-const u16 gPSSMenu_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal1.gbapal");
-const u16 gUnknown_8E9C3F8[] = INCBIN_U16("graphics/interface/box_tiles_pal2.gbapal");
-const u16 gUnknown_8E9C418[] = INCBIN_U16("graphics/interface/box_tiles_pal3.gbapal");
-const u32 gPSSMenu_Gfx[] = INCBIN_U32("graphics/interface/box_tiles.4bpp.lz");
-
-const u32 gUnknown_8E9CAEC[] = INCBIN_U32("graphics/unknown/unknown_E9CAEC.bin.lz");
-
+const u16 gPokeStoragePartyMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/party_menu.gbapal");
+const u16 gPokeStorageInterface_Pal[] = INCBIN_U16("graphics/pokemon_storage/interface.gbapal");
+const u16 gPokeStorageInterface_NoDisplayMon_Pal[] = INCBIN_U16("graphics/pokemon_storage/interface_no_display_mon.gbapal");
+const u32 gPokeStorageMenu_Gfx[] = INCBIN_U32("graphics/pokemon_storage/menu.4bpp.lz");
+const u32 gPokeStoragePartyMenu_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/party_menu.bin.lz");
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/misc/markings2.gbapal");
 const u16 gMonMarkingsMenu_Gfx[] = INCBIN_U16("graphics/misc/markings2.4bpp");
 

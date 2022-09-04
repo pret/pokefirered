@@ -15,7 +15,6 @@
 #include "battle_message.h"
 #include "constants/battle_anim.h"
 #include "battle_controllers.h"
-#include "battle_string_ids.h"
 #include "battle_ai_script_commands.h"
 #include "constants/battle.h"
 #include "constants/moves.h"

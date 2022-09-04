@@ -717,21 +717,21 @@ static u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 count)
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         if (count == 0)
-            StringAppend(gStringVar1, gUnknown_83FE859);
+            StringAppend(gStringVar1, gText_BattleTowerBan_Space);
         count++;
         StringAppend(gStringVar1, gSpeciesNames[species]);
         switch (count)
         {
         case 2:
-            StringAppend(gStringVar1, gUnknown_83FE85E);
+            StringAppend(gStringVar1, gText_BattleTowerBan_Newline2);
             break;
         case 5:
         case 8:
         case 11:
-            StringAppend(gStringVar1, gUnknown_83FE85C);
+            StringAppend(gStringVar1, gText_BattleTowerBan_Newline1);
             break;
         default:
-            StringAppend(gStringVar1, gUnknown_83FE859);
+            StringAppend(gStringVar1, gText_BattleTowerBan_Space);
             break;
         }
     }
@@ -815,9 +815,9 @@ void CheckPartyBattleTowerBanlist(void)
         i = StringLength(gStringVar1);
         gStringVar1[i - 1] = EOS;
         if (counter < 3)
-            StringAppend(gStringVar1, gUnknown_83FE860);
+            StringAppend(gStringVar1, gText_BattleTowerBan_Is1);
         else
-            StringAppend(gStringVar1, gUnknown_83FE864);
+            StringAppend(gStringVar1, gText_BattleTowerBan_Is2);
     }
     else
     {
@@ -1119,7 +1119,7 @@ static void SetPlayerBattleTowerRecord(void)
     playerRecord->trainerClass = trainerClass;
 
     CopyTrainerId(playerRecord->trainerId, gSaveBlock2Ptr->playerTrainerId);
-    StringCopy7(playerRecord->name, gSaveBlock2Ptr->playerName);
+    StringCopy_PlayerName(playerRecord->name, gSaveBlock2Ptr->playerName);
 
     playerRecord->winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
 
@@ -1310,7 +1310,7 @@ static void Debug_FillEReaderTrainerWithPlayerData(void)
     }
 
     CopyTrainerId(ereaderTrainer->trainerId, gSaveBlock2Ptr->playerTrainerId);
-    StringCopy7(ereaderTrainer->name, gSaveBlock2Ptr->playerName);
+    StringCopy_PlayerName(ereaderTrainer->name, gSaveBlock2Ptr->playerName);
 
     ereaderTrainer->winStreak = 1;
 

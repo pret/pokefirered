@@ -961,7 +961,7 @@ bool32 MEventHandleReceivedWonderCard(u16 flagId)
     return TRUE;
 }
 
-void MEvent_RecordIdOfWonderCardSenderByEventType(u32 eventId, u32 trainerId)
+void MysteryGift_TryIncrementStat(u32 eventId, u32 trainerId)
 {
     if (sReceivedWonderCardIsValid)
     {

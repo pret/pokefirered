@@ -16,6 +16,7 @@
 #define WEATHER_DROUGHT            12  // unused and broken in overworld
 #define WEATHER_DOWNPOUR           13  // unused
 #define WEATHER_UNDERWATER_BUBBLES 14  // unused
+#define WEATHER_ABNORMAL           15  // unused
 #define WEATHER_ROUTE119_CYCLE     20  // unused
 #define WEATHER_ROUTE123_CYCLE     21  // unused
 

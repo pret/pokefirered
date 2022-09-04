@@ -236,7 +236,7 @@ void StartWildBattle(void)
 
 static void DoStandardWildBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
@@ -248,7 +248,7 @@ static void DoStandardWildBattle(void)
 
 void StartRoamerBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
@@ -260,7 +260,7 @@ void StartRoamerBattle(void)
 
 static void DoSafariBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndSafariBattle;
@@ -270,7 +270,7 @@ static void DoSafariBattle(void)
 
 static void DoGhostBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
@@ -291,7 +291,7 @@ static void DoTrainerBattle(void)
 void StartOldManTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_OLD_MAN_TUTORIAL;
     CreateBattleStartTask(B_TRANSITION_SLICED_SCREEN, 0);
@@ -299,7 +299,7 @@ void StartOldManTutorialBattle(void)
 
 void StartScriptedWildBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_WILD_SCRIPTED;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -309,7 +309,7 @@ void StartScriptedWildBattle(void)
 
 void StartMarowakBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndMarowakBattle;
     if (CheckBagHasItem(ITEM_SILPH_SCOPE, 1))
     {
@@ -328,7 +328,7 @@ void StartMarowakBattle(void)
 
 void StartSouthernIslandBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
@@ -340,7 +340,7 @@ void StartLegendaryBattle(void)
 {
     u16 species;
     
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_LEGENDARY_FRLG;
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
@@ -369,7 +369,7 @@ void StartLegendaryBattle(void)
 
 void StartGroudonKyogreBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
     if (gGameVersion == VERSION_FIRE_RED)
@@ -382,7 +382,7 @@ void StartGroudonKyogreBattle(void)
 
 void StartRegiBattle(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RS_VS_TRAINER);
@@ -400,7 +400,7 @@ static void sub_807FAF8(void)
 // not used
 static void sub_807FB08(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = sub_807FAF8;
@@ -823,8 +823,8 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerSc
     gSelectedObjectEvent = trainerEventObjId;
     gSpecialVar_LastTalked = gObjectEvents[trainerEventObjId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext1_SetupScript(EventScript_DoTrainerBattleFromApproach);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(EventScript_DoTrainerBattleFromApproach);
+    LockPlayerFieldControls();
 }
 
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
@@ -889,7 +889,7 @@ void StartTrainerBattle(void)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
     gMain.savedCallback = CB2_EndTrainerBattle;
     DoTrainerBattle();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 static void CB2_EndTrainerBattle(void)
@@ -964,7 +964,7 @@ void StartRematchBattle(void)
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndRematchBattle;
     DoTrainerBattle();
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 void ShowTrainerIntroSpeech(void)

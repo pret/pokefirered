@@ -640,7 +640,7 @@ void sub_80F8FA0(void)
     Rfu.state = 14;
 }
 
-UNUSED
+// Unused
 static void sub_80F8FAC(u8 a0)
 {
     u8 i;

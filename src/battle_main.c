@@ -76,7 +76,7 @@ static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
 static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
-static void SpriteCB_Unused_8011E28_Step(struct Sprite *sprite);
+static void SpriteCB_8011E28_Step(struct Sprite *sprite);
 static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
 static void SpriteCB_BlinkVisible(struct Sprite *sprite);
 static void oac_poke_ally_(struct Sprite *sprite);
@@ -1917,16 +1917,16 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 {
 }
 
-// not used
-UNUSED static void SpriteCB_Unused_8011E28(struct Sprite *sprite)
+// Unused
+static void SpriteCB_8011E28(struct Sprite *sprite)
 {
     sprite->data[3] = 6;
     sprite->data[4] = 1;
-    sprite->callback = SpriteCB_Unused_8011E28_Step;
+    sprite->callback = SpriteCB_8011E28_Step;
 }
 
-// not used
-static void SpriteCB_Unused_8011E28_Step(struct Sprite *sprite)
+// Unused
+static void SpriteCB_8011E28_Step(struct Sprite *sprite)
 {
     --sprite->data[4];
     if (sprite->data[4] == 0)

@@ -588,7 +588,8 @@ static const struct {
     {MAP_BATTLE_SCENE_LINK,     BATTLE_TERRAIN_LINK}
 };
 
-UNUSED void CreateUnknownDebugSprite(void)
+// Unused
+void CreateUnknownDebugSprite(void)
 {
     u8 spriteId;
 
@@ -634,7 +635,8 @@ static void LoadBattleTerrainEntryGfx(u16 terrain)
     LZDecompressVram(sBattleTerrainTable[terrain].entryTilemap, (void *)BG_SCREEN_ADDR(28));
 }
 
-UNUSED void GetBattleTerrainGfxPtrs(u8 terrain, const u32 **tilesPtr, const u32 **mapPtr, const u32 **palPtr)
+// Unused
+void GetBattleTerrainGfxPtrs(u8 terrain, const u32 **tilesPtr, const u32 **mapPtr, const u32 **palPtr)
 {
     if (terrain > BATTLE_TERRAIN_PLAIN)
         terrain = BATTLE_TERRAIN_PLAIN;

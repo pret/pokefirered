@@ -558,7 +558,7 @@ static bool8 RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *dest)
     return TRUE;
 }
 
-UNUSED
+// Unused
 static void sub_80FC9B8(u8 *q1, u8 mode)
 {
     s32 i;

@@ -367,18 +367,12 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
         switch (bufferId)
         {
         case BUFFER_A:
-            for (i = 0; i < size; i++)
-            {
+            for (i = 0; i < size; data++, i++)
                 gBattleBufferA[gActiveBattler][i] = *data;
-                data++;
-            }
             break;
         case BUFFER_B:
-            for (i = 0; i < size; i++)
-            {
+            for (i = 0; i < size; data++, i++)
                 gBattleBufferB[gActiveBattler][i] = *data;
-                data++;
-            }
             break;
         }
     }
@@ -508,8 +502,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
         }
         break;
     case 5:
-        gTasks[taskId].data[13]--;
-        if (gTasks[taskId].data[13] == 0)
+        if (--gTasks[taskId].data[13] == 0)
         {
             gTasks[taskId].data[13] = 5;
             gTasks[taskId].data[11] = 3;

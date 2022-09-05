@@ -305,13 +305,9 @@ static void CompleteOnHealthbarDone(void)
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
     if (hpValue != -1)
-    {
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
-    }
     else
-    {
         LinkOpponentBufferExecCompleted();
-    }
 }
 
 static void HideHealthboxAfterMonFaint(void)

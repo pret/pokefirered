@@ -4,6 +4,20 @@
 #include "global.h"
 #include "constants/field_weather.h"
 
+#define TAG_WEATHER_START 0x1200
+enum {
+    GFXTAG_CLOUD = TAG_WEATHER_START,
+    GFXTAG_FOG_H,
+    GFXTAG_ASH,
+    GFXTAG_FOG_D,
+    GFXTAG_SANDSTORM,
+    GFXTAG_BUBBLE,
+    GFXTAG_RAIN,
+};
+enum {
+    PALTAG_WEATHER = TAG_WEATHER_START,
+};
+
 struct Weather
 {
     union
@@ -54,14 +68,14 @@ struct Weather
     u8 rainStrength;
     bool8 cloudSpritesCreated;
     u16 snowflakeVisibleCounter;
-    u16 unknown_6E2;
+    u16 snowflakeTimer;
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
-    u16 unknown_6E6;
+    u16 thunderDelay;
     u16 thunderCounter;
-    u8 unknown_6EA;
-    u8 unknown_6EB;
-    u8 unknown_6EC;
+    bool8 thunderAllowEnd;
+    bool8 thunderSkipShort;
+    u8 thunderShortRetries;
     bool8 thunderTriggered;
     u16 fogHScrollPosX;
     u16 fogHScrollCounter;
@@ -70,7 +84,7 @@ struct Weather
     u8 lightenedFogSpritePalsCount;
     bool8 fogHSpritesCreated;
     u16 ashBaseSpritesX;
-    u16 unknown_6FE;
+    u16 ashUnused;
     bool8 ashSpritesCreated;
     u32 sandstormXOffset;
     u32 sandstormYOffset;

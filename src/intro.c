@@ -7,6 +7,7 @@
 #include "new_menu_helpers.h"
 #include "link.h"
 #include "menu.h"
+#include "random.h"
 #include "save.h"
 #include "new_game.h"
 #include "title_screen.h"
@@ -15,6 +16,82 @@
 #include "trig.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
+
+/*
+    The intro is grouped into the following scenes
+    - Copyright screen
+    - GF Logo
+    Scene 1. Brief close up shot of grass
+    Scene 2. A panning wide shot followed by a close-up of Gengar/Nidorino
+    Scene 3. A fight between Gengar/Nidorino
+
+    After this it progresses to the title screen
+*/
+
+enum {
+    GFXTAG_STAR,
+    GFXTAG_SPARKLES_SMALL,
+    GFXTAG_SPARKLES_BIG,
+    GFXTAG_GF_LOGO,
+    GFXTAG_PRESENTS,
+    GFXTAG_SCENE3_NIDORINO,
+    GFXTAG_SCENE2_GENGAR,
+    GFXTAG_SCENE2_NIDORINO,
+    GFXTAG_SCENE3_GRASS,
+    GFXTAG_SCENE3_GENGAR,
+    GFXTAG_SCENE3_SWIPE,
+    GFXTAG_SCENE3_RECOIL_DUST,
+};
+
+enum {
+    PALTAG_STAR,
+    PALTAG_SPARKLES,
+    PALTAG_UNUSED_2,
+    PALTAG_GF,
+    PALTAG_UNUSED_4,
+    PALTAG_UNUSED_5,
+    PALTAG_GENGAR,
+    PALTAG_NIDORINO,
+    PALTAG_SCENE3_GRASS,
+    PALTAG_UNUSED_9,
+    PALTAG_SCENE3_SWIPE,
+    PALTAG_SCENE3_RECOIL_DUST,
+};
+
+// Background IDs for Game Freak logo scene
+enum {
+    BG_GF_TEXT_LOGO = 2,
+    BG_GF_BACKGROUND   
+};
+
+
+// Background IDs for Scene 1
+enum {
+    BG_SCENE1_GRASS,
+    BG_SCENE1_BACKGROUND,
+    BG_SCENE1_UNUSED1,
+    BG_SCENE1_UNUSED2
+};
+
+// Background IDs for Scene 2
+enum {
+    BG_SCENE2_PLANTS,
+    BG_SCENE2_NIDORINO,
+    BG_SCENE2_GENGAR,
+    BG_SCENE2_BACKGROUND // Bg for wide shot on upper half, close up on lower half
+};
+
+// Background IDs for Scene 3
+enum {
+    BG_SCENE3_GENGAR,
+    BG_SCENE3_BACKGROUND,
+    BG_SCENE3_UNUSED1,
+    BG_SCENE3_UNUSED2
+};
+
+#define NUM_GENGAR_BACK_SPRITES 4
+
+#define COLOSSEUM_GAME_CODE 0x65366347 // "Gc6e" in ASCII
 
 struct IntroSequenceData;
 
@@ -32,11 +109,11 @@ struct IntroSequenceData
     struct Sprite *gengarStaticSprite;
     struct Sprite *nidorinoStaticSprite;
     struct Sprite *grassSprite;
-    struct Sprite *gengarBackSpriteArray[4];
-    u8 filler_0038[0x4];
-    u8 gamefreakLogoArtSpriteTiles[0x400];
-    u8 gamefreakTextBitmap[0x400];
-    u8 filler_083C[0x2080];
+    struct Sprite *gengarBackSprites[NUM_GENGAR_BACK_SPRITES];
+    u8 unused0[4];
+    u8 gameFreakLogoGfx[0x400];
+    u8 gameFreakTextGfx[0x400];
+    u8 unused1[0x2080];
 }; // size: 0x28BC
 
 static EWRAM_DATA struct GcmbStruct sGcmb = {0};
@@ -103,8 +180,8 @@ static void FightScene4_CreateGengarSwipeSprites(void);
 static void SpriteCB_GengarSwipe(struct Sprite *sprite);
 static void Task_FightScene3_Bg0Scroll(u8 taskId);
 static void SpriteCB_LargeStar(struct Sprite *sprite);
-static void SpriteCB_TrailingSparkles(struct Sprite *sprite);
-static void SpriteCB_TrailingSparkles2(struct Sprite *sprite);
+static void SpriteCB_SparklesSmall(struct Sprite *sprite);
+static void SpriteCB_SparklesSmall2(struct Sprite *sprite);
 static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite *sprite);
 static void CreateNidorinoAnimSprite(struct IntroSequenceData * ptr);
 static void StartNidorinoAnimSpriteSlideIn(struct Sprite *sprite, s16 x0, s16 x1, u16 speed);
@@ -122,67 +199,69 @@ static void SpriteCB_HopToPos(struct Sprite *sprite);
 static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * ptr);
 static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite *sprite);
 static void LoadFightSceneSpriteTilesAndPals(void);
-#if REVISION >= 1
-static void Rev1_GameFreakScene_CreatePresentsText(void);
-#else
-#define Rev1_GameFreakScene_CreatePresentsText()
-#endif
+static void CreateGameFreakPresentsText(void);
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
-static const u16 sCopyrightGraphicsPal[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
-static const u8 sCopyrightGraphicsTiles[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
-static const u8 sCopyrightGraphicsMap[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
-static const u16 sBg3Pal_GameFreakPresents[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
-static const u8 sBg3Tiles_GameFreakPresents[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
-static const u8 sBg3Map_GameFreakPresents[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
-static const u16 sSpritePals_GameFreakPresents[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
-static const u8 sBlit_GameFreakText[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
-static const u32 sSpriteTiles_GameFreakLogoArt[] = INCBIN_U32("graphics/intro/unk_84028F8.4bpp.lz");
-static const u16 sSpritePals_LargeStar[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
-static const u32 sSpriteTiles_LargeStar[] = INCBIN_U32("graphics/intro/unk_8402A64.4bpp.lz");
-static const u16 sSpritePals_Sparkles[] = INCBIN_U16("graphics/intro/unk_8402ADC.gbapal");
-static const u32 sSpriteTiles_TrailingSparkles[] = INCBIN_U32("graphics/intro/unk_8402ADC.4bpp.lz");
-static const u32 sSpriteTiles_RevealGameFreakTextSparkles[] = INCBIN_U32("graphics/intro/unk_8402B2C.4bpp.lz");
-static const u32 sSpriteTiles_PresentsText[] = INCBIN_U32("graphics/intro/unk_8402CD4.4bpp.lz");
-static const u16 sBg0Pal_FightScene1[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
-static const u8 sBg0Tiles_FightScene1[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
-static const u8 sBg0Map_FightScene1[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
-static const u16 sBg1Pal_FightScene1[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
-static const u8 sBg1Tiles_FightScene1[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
-static const u8 sBg1Map_FightScene1[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
-static const u16 sBg3Pal_FightScene2[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
-static const u8 sBg3Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
-static const u8 sBg3Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
-static const u16 sBg0Pal_FightScene2[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
-static const u8 sBg0Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
-static const u8 sBg0Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
-static const u16 sSpritePals_Gengar[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
-static const u8 sBg2Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
-static const u8 sBg2Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
-static const u16 sBg1Pal_FightScene2[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
-static const u8 sBg1Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
-static const u8 sBg1Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
-static const u16 sBg1Pal_FightScene3[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
-static const u8 sBg1Tiles_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
-static const u8 sBg1Map_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
-static const u8 sBg0Tiles_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
-static const u8 sBg0Map_FightScene3[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
-static const u32 sSpriteTiles_GengarStatic[] = INCBIN_U32("graphics/intro/unk_840926C.4bpp.lz");
-static const u16 sSpritePals_Nidorino[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
-static const u32 sSpriteTiles_NidorinoStatic[] = INCBIN_U32("graphics/intro/unk_84096CC.4bpp.lz");
-static const u16 sSpritePals_Grass[] = INCBIN_U16("graphics/intro/unk_8409A1C.gbapal");
-static const u32 sSpriteTiles_Grass[] = INCBIN_U32("graphics/intro/unk_8409A3C.4bpp.lz");
-static const u32 sSpriteTiles_GengarBack[] = INCBIN_U32("graphics/intro/unk_8409D20.4bpp.lz");
-static const u32 sSpriteTiles_NidorinoAnim[] = INCBIN_U32("graphics/intro/unk_840A3E4.4bpp.lz");
-static const u16 sSpritePals_GengarSwipe[] = INCBIN_U16("graphics/intro/unk_840B834.gbapal");
-static const u16 sSpritePals_NidorinoRecoilDust[] = INCBIN_U16("graphics/intro/unk_840B854.gbapal");
-static const u32 sSpriteTiles_GengarSwipe[] = INCBIN_U32("graphics/intro/unk_840B874.4bpp.lz");
-static const u32 sSpriteTiles_NidorinoRecoilDust[] = INCBIN_U32("graphics/intro/unk_840BAE0.4bpp.lz");
+static const u16 sCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
+static const u8 sCopyright_Gfx[] = INCBIN_U8("graphics/intro/copyright.4bpp.lz");
+static const u8 sCopyright_Map[] = INCBIN_U8("graphics/intro/copyright.bin.lz");
+
+// Game Freak
+static const u16 sGameFreakBg_Pal[]   = INCBIN_U16("graphics/intro/game_freak/bg.gbapal");
+static const u8 sGameFreakBg_Gfx[]    = INCBIN_U8( "graphics/intro/game_freak/bg.4bpp.lz");
+static const u8 sGameFreakBg_Map[]    = INCBIN_U8( "graphics/intro/game_freak/bg.bin.lz");
+static const u16 sGameFreakLogo_Pal[] = INCBIN_U16("graphics/intro/game_freak/logo.gbapal");
+static const u8 sGameFreakText_Gfx[]  = INCBIN_U8( "graphics/intro/game_freak/game_freak.4bpp.lz");
+static const u32 sGameFreakLogo_Gfx[] = INCBIN_U32("graphics/intro/game_freak/logo.4bpp.lz");
+static const u16 sStar_Pal[]          = INCBIN_U16("graphics/intro/game_freak/star.gbapal");
+static const u32 sStar_Gfx[]          = INCBIN_U32("graphics/intro/game_freak/star.4bpp.lz");
+static const u16 sSparkles_Pal[]      = INCBIN_U16("graphics/intro/game_freak/sparkles.gbapal");
+static const u32 sSparklesSmall_Gfx[] = INCBIN_U32("graphics/intro/game_freak/sparkles_small.4bpp.lz");
+static const u32 sSparklesBig_Gfx[]   = INCBIN_U32("graphics/intro/game_freak/sparkles_big.4bpp.lz");
+static const u32 sPresents_Gfx[]      = INCBIN_U32("graphics/intro/game_freak/presents.4bpp.lz");
+
+// Scene 1 (Grass close up)
+static const u16 sScene1_Grass_Pal[] = INCBIN_U16("graphics/intro/scene_1/grass.gbapal");
+static const u8 sScene1_Grass_Gfx[]  = INCBIN_U8( "graphics/intro/scene_1/grass.4bpp.lz");
+static const u8 sScene1_Grass_Map[]  = INCBIN_U8( "graphics/intro/scene_1/grass.bin.lz");
+static const u16 sScene1_Bg_Pal[]    = INCBIN_U16("graphics/intro/scene_1/bg.gbapal");
+static const u8 sScene1_Bg_Gfx[]     = INCBIN_U8( "graphics/intro/scene_1/bg.4bpp.lz");
+static const u8 sScene1_Bg_Map[]     = INCBIN_U8( "graphics/intro/scene_1/bg.bin.lz");
+
+// Scenes 2 and 3 (Gengar and Nidorino)
+static const u16 sScene2_Bg_Pal[]            = INCBIN_U16("graphics/intro/scene_2/bg.gbapal");
+static const u8 sScene2_Bg_Gfx[]             = INCBIN_U8( "graphics/intro/scene_2/bg.4bpp.lz");
+static const u8 sScene2_Bg_Map[]             = INCBIN_U8( "graphics/intro/scene_2/bg.bin.lz");
+static const u16 sScene2_Plants_Pal[]        = INCBIN_U16("graphics/intro/scene_2/plants.gbapal"); // Unused
+static const u8 sScene2_Plants_Gfx[]         = INCBIN_U8( "graphics/intro/scene_2/plants.4bpp.lz");
+static const u8 sScene2_Plants_Map[]         = INCBIN_U8( "graphics/intro/scene_2/plants.bin.lz");
+static const u16 sGengar_Pal[]               = INCBIN_U16("graphics/intro/gengar.gbapal"); // Used by multiple scenes
+static const u8 sScene2_GengarClose_Gfx[]    = INCBIN_U8( "graphics/intro/scene_2/gengar_close.4bpp.lz");
+static const u8 sScene2_GengarClose_Map[]    = INCBIN_U8( "graphics/intro/scene_2/gengar_close.bin.lz");
+static const u16 sScene2_NidorinoClose_Pal[] = INCBIN_U16("graphics/intro/scene_2/nidorino_close.gbapal");
+static const u8 sScene2_NidorinoClose_Gfx[]  = INCBIN_U8( "graphics/intro/scene_2/nidorino_close.4bpp.lz");
+static const u8 sScene2_NidorinoClose_Map[]  = INCBIN_U8( "graphics/intro/scene_2/nidorino_close.bin.lz");
+static const u16 sScene3_Bg_Pal[]            = INCBIN_U16("graphics/intro/scene_3/bg.gbapal");
+static const u8 sScene3_Bg_Gfx[]             = INCBIN_U8( "graphics/intro/scene_3/bg.4bpp.lz"); // give -width 16
+static const u8 sScene3_Bg_Map[]             = INCBIN_U8( "graphics/intro/scene_3/bg.bin.lz");
+static const u8 sScene3_GengarAnim_Gfx[]     = INCBIN_U8( "graphics/intro/scene_3/gengar_anim.4bpp.lz");
+static const u8 sScene3_GengarAnim_Map[]     = INCBIN_U8( "graphics/intro/scene_3/gengar_anim.bin.lz");
+static const u32 sScene2_Gengar_Gfx[]        = INCBIN_U32("graphics/intro/scene_2/gengar.4bpp.lz");
+static const u16 sNidorino_Pal[]             = INCBIN_U16("graphics/intro/nidorino.gbapal"); // Used by multiple scenes
+static const u32 sScene2_Nidorino_Gfx[]      = INCBIN_U32("graphics/intro/scene_2/nidorino.4bpp.lz");
+static const u16 sScene3_Grass_Pal[]         = INCBIN_U16("graphics/intro/scene_3/grass.gbapal");
+static const u32 sScene3_Grass_Gfx[]         = INCBIN_U32("graphics/intro/scene_3/grass.4bpp.lz");
+static const u32 sScene3_GengarStatic_Gfx[]  = INCBIN_U32("graphics/intro/scene_3/gengar_static.4bpp.lz");
+static const u32 sScene3_Nidorino_Gfx[]      = INCBIN_U32("graphics/intro/scene_3/nidorino.4bpp.lz");
+static const u16 sScene3_Swipe_Pal[]         = INCBIN_U16("graphics/intro/scene_3/swipe.gbapal");
+static const u16 sScene3_RecoilDust_Pal[]    = INCBIN_U16("graphics/intro/scene_3/recoil_dust.gbapal");
+static const u32 sScene3_Swipe_Gfx[]         = INCBIN_U32("graphics/intro/scene_3/swipe.4bpp.lz");
+static const u32 sScene3_RecoilDust_Gfx[]    = INCBIN_U32("graphics/intro/scene_3/recoil_dust.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates_GameFreakScene[] = {
     {
-        .bg = 3,
+        .bg = BG_GF_BACKGROUND,
         .charBaseIndex = 3,
         .mapBaseIndex = 31,
         .screenSize = 0,
@@ -190,7 +269,7 @@ static const struct BgTemplate sBgTemplates_GameFreakScene[] = {
         .priority = 3,
         .baseTile = 0x000
     }, {
-        .bg = 2,
+        .bg = BG_GF_TEXT_LOGO,
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
         .screenSize = 0,
@@ -200,9 +279,9 @@ static const struct BgTemplate sBgTemplates_GameFreakScene[] = {
     }
 };
 
-static const struct BgTemplate sBgTemplates_FightScene1[] = {
+static const struct BgTemplate sBgTemplates_Scene1[] = {
     {
-        .bg = 0,
+        .bg = BG_SCENE1_GRASS,
         .charBaseIndex = 0,
         .mapBaseIndex = 28,
         .screenSize = 2,
@@ -210,7 +289,7 @@ static const struct BgTemplate sBgTemplates_FightScene1[] = {
         .priority = 0,
         .baseTile = 0x000
     }, {
-        .bg = 1,
+        .bg = BG_SCENE1_BACKGROUND,
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 2,
@@ -220,9 +299,9 @@ static const struct BgTemplate sBgTemplates_FightScene1[] = {
     }
 };
 
-static const struct BgTemplate sBgTemplates_FightScene2[] = {
+static const struct BgTemplate sBgTemplates_Scene2[] = {
     {
-        .bg = 3,
+        .bg = BG_SCENE2_BACKGROUND,
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 2,
@@ -230,7 +309,7 @@ static const struct BgTemplate sBgTemplates_FightScene2[] = {
         .priority = 3,
         .baseTile = 0x000
     }, {
-        .bg = 0,
+        .bg = BG_SCENE2_PLANTS,
         .charBaseIndex = 0,
         .mapBaseIndex = 29,
         .screenSize = 0,
@@ -238,7 +317,7 @@ static const struct BgTemplate sBgTemplates_FightScene2[] = {
         .priority = 0,
         .baseTile = 0x000
     }, {
-        .bg = 2,
+        .bg = BG_SCENE2_GENGAR,
         .charBaseIndex = 3,
         .mapBaseIndex = 27,
         .screenSize = 0,
@@ -246,7 +325,7 @@ static const struct BgTemplate sBgTemplates_FightScene2[] = {
         .priority = 2,
         .baseTile = 0x000
     }, {
-        .bg = 1,
+        .bg = BG_SCENE2_NIDORINO,
         .charBaseIndex = 2,
         .mapBaseIndex = 28,
         .screenSize = 0,
@@ -256,9 +335,9 @@ static const struct BgTemplate sBgTemplates_FightScene2[] = {
     }
 };
 
-static const struct BgTemplate sBgTemplates_FightScene3[] = {
+static const struct BgTemplate sBgTemplates_Scene3[] = {
 	{
-	    .bg = 1,
+	    .bg = BG_SCENE3_BACKGROUND,
 	    .charBaseIndex = 0,
 	    .mapBaseIndex = 29,
 	    .screenSize = 0,
@@ -266,7 +345,7 @@ static const struct BgTemplate sBgTemplates_FightScene3[] = {
 	    .priority = 1,
 	    .baseTile = 0x000
     }, {
-	    .bg = 0,
+	    .bg = BG_SCENE3_GENGAR,
 	    .charBaseIndex = 1,
 	    .mapBaseIndex = 30,
 	    .screenSize = 2,
@@ -276,9 +355,9 @@ static const struct BgTemplate sBgTemplates_FightScene3[] = {
 	}
 };
 
-static const struct WindowTemplate sWindowTemplate[] = {
+static const struct WindowTemplate sWindowTemplate_GameFreakTextLogo[] = {
 	{
-	    .bg = 2,
+	    .bg = BG_GF_TEXT_LOGO,
 	    .tilemapLeft = 6,
 	    .tilemapTop = 4,
 	    .width = 18,
@@ -288,7 +367,7 @@ static const struct WindowTemplate sWindowTemplate[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sGengarBackSpritePos2UpdateMods[][2] = {
+static const u8 sGengarBackSpritePos2UpdateMods[NUM_GENGAR_BACK_SPRITES][2] = {
 	{0x3f, 0x3f},
 	{0x00, 0x3f},
 	{0x3f, 0x00},
@@ -296,33 +375,33 @@ static const u8 sGengarBackSpritePos2UpdateMods[][2] = {
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_GameFreakScene[] = {
-	{sSpriteTiles_LargeStar, 0x0080, 0},
-	{sSpriteTiles_TrailingSparkles, 0x0080, 1},
-	{sSpriteTiles_RevealGameFreakTextSparkles, 0x0800, 2},
-	{sSpriteTiles_GameFreakLogoArt, 0x0400, 3},
-	{sSpriteTiles_PresentsText, 0x0100, 4}
+    {sStar_Gfx,          0x80,  GFXTAG_STAR},
+    {sSparklesSmall_Gfx, 0x80,  GFXTAG_SPARKLES_SMALL},
+    {sSparklesBig_Gfx,   0x800, GFXTAG_SPARKLES_BIG},
+    {sGameFreakLogo_Gfx, 0x400, GFXTAG_GF_LOGO},
+    {sPresents_Gfx,      0x100, GFXTAG_PRESENTS}
 };
 
 static const struct SpritePalette sSpritePalettes_GameFreakScene[] = {
-	{sSpritePals_LargeStar, 0},
-	{sSpritePals_Sparkles, 1},
-	{sSpritePals_GameFreakPresents, 3},
+	{sStar_Pal,          PALTAG_STAR},
+	{sSparkles_Pal,      PALTAG_SPARKLES},
+	{sGameFreakLogo_Pal, PALTAG_GF},
 	{0}
 };
 
 static const struct Coords16 sTrailingSparkleCoords[] = {
-	{0x0048, 0x0050},
-	{0x0088, 0x004a},
-	{0x00a8, 0x0050},
-	{0x0078, 0x0050},
-	{0x0068, 0x0056},
-	{0x0058, 0x004a},
-	{0x00b8, 0x004a},
-	{0x0038, 0x0056},
-	{0x0098, 0x0056}
+	{ 72,  80},
+	{136,  74},
+	{168,  80},
+	{120,  80},
+	{104,  86},
+	{ 88,  74},
+	{184,  74},
+	{ 56,  86},
+	{152,  86}
 };
 
-static const struct OamData gOamData_840BC2C = {
+static const struct OamData sOam_Star = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -335,7 +414,7 @@ static const struct OamData gOamData_840BC2C = {
     .paletteNum = 0
 };
 
-static const struct OamData gOamData_840BC34 = {
+static const struct OamData sOam_SparklesSmall = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -348,7 +427,7 @@ static const struct OamData gOamData_840BC34 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmd_840BC3C[] = {
+static const union AnimCmd sAnim_SparklesSmall_0[] = {
 	ANIMCMD_FRAME(0, 4),
 	ANIMCMD_FRAME(1, 4),
 	ANIMCMD_FRAME(2, 4),
@@ -356,7 +435,7 @@ static const union AnimCmd gAnimCmd_840BC3C[] = {
 	ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gAnimCmd_840BC50[] = {
+static const union AnimCmd sAnim_SparklesSmall_1[] = {
 	ANIMCMD_FRAME(0, 4),
 	ANIMCMD_FRAME(1, 4),
 	ANIMCMD_FRAME(2, 4),
@@ -364,32 +443,32 @@ static const union AnimCmd gAnimCmd_840BC50[] = {
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BC64[] = {
-	gAnimCmd_840BC3C,
-	gAnimCmd_840BC50
+static const union AnimCmd *const sAnims_SparklesSmall[] = {
+	sAnim_SparklesSmall_0,
+	sAnim_SparklesSmall_1
 };
 
-static const struct SpriteTemplate sSpriteTemplate_LargeStar = {
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gOamData_840BC2C,
+static const struct SpriteTemplate sSpriteTemplate_Star = {
+    .tileTag = GFXTAG_STAR,
+    .paletteTag = PALTAG_STAR,
+    .oam = &sOam_Star,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_LargeStar
 };
 
-static const struct SpriteTemplate sSpriteTemplate_TrailingSparkles = {
-    .tileTag = 1,
-    .paletteTag = 1,
-    .oam = &gOamData_840BC34,
-    .anims = gAnimCmdTable_840BC64,
+static const struct SpriteTemplate sSpriteTemplate_SparklesSmall = {
+    .tileTag = GFXTAG_SPARKLES_SMALL,
+    .paletteTag = PALTAG_SPARKLES,
+    .oam = &sOam_SparklesSmall,
+    .anims = sAnims_SparklesSmall,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_TrailingSparkles
+    .callback = SpriteCB_SparklesSmall
 };
 
-static const struct OamData gOamData_840BC9C = {
+static const struct OamData sOam_SparklesBig = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -402,7 +481,7 @@ static const struct OamData gOamData_840BC9C = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmd_840BCA4[] = {
+static const union AnimCmd sAnim_SparklesBig[] = {
 	ANIMCMD_FRAME(0, 8),
 	ANIMCMD_FRAME(16, 8),
 	ANIMCMD_FRAME(32, 8),
@@ -410,21 +489,21 @@ static const union AnimCmd gAnimCmd_840BCA4[] = {
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
-	gAnimCmd_840BCA4
+static const union AnimCmd *const sAnims_SparklesBig[] = {
+	sAnim_SparklesBig
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RevealGameFreakTextSparkles = {
-    .tileTag = 2,
-    .paletteTag = 1,
-    .oam = &gOamData_840BC9C,
-    .anims = gAnimCmdTable_840BCB8,
+static const struct SpriteTemplate sSpriteTemplate_SparklesBig = {
+    .tileTag = GFXTAG_SPARKLES_BIG,
+    .paletteTag = PALTAG_SPARKLES,
+    .oam = &sOam_SparklesBig,
+    .anims = sAnims_SparklesBig,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_RevealGameFreakTextSparkles
 };
 
-static const struct OamData gOamData_840BCD4 = {
+static const struct OamData sOam_GameFreakLogo = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
     .mosaic = FALSE,
@@ -438,16 +517,16 @@ static const struct OamData gOamData_840BCD4 = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_GameFreakLogoArt = {
-    .tileTag = 3,
-    .paletteTag = 3,
-    .oam = &gOamData_840BCD4,
+    .tileTag = GFXTAG_GF_LOGO,
+    .paletteTag = PALTAG_GF,
+    .oam = &sOam_GameFreakLogo,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_840BCF4 = {
+static const struct OamData sOam_PresentsText = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
     .mosaic = FALSE,
@@ -461,16 +540,16 @@ static const struct OamData gOamData_840BCF4 = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PresentsText = {
-    .tileTag = 4,
-    .paletteTag = 3,
-    .oam = &gOamData_840BCF4,
+    .tileTag = GFXTAG_PRESENTS,
+    .paletteTag = PALTAG_GF,
+    .oam = &sOam_PresentsText,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_840BD14 = {
+static const struct OamData sOam_Scene3_Nidorino = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -483,66 +562,66 @@ static const struct OamData gOamData_840BD14 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmd_840BD1C[] = {
+static const union AnimCmd sAnim_Scene3_Nidorino_0[] = {
 	ANIMCMD_FRAME(0, 1),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BD24[] = {
+static const union AnimCmd sAnim_Scene3_Nidorino_1[] = {
 	ANIMCMD_FRAME(64, 1),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BD2C[] = {
+static const union AnimCmd sAnim_Scene3_Nidorino_2[] = {
 	ANIMCMD_FRAME(128, 1),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BD34[] = {
+static const union AnimCmd sAnim_Scene3_Nidorino_3[] = {
 	ANIMCMD_FRAME(192, 1),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BD3C[] = {
+static const union AnimCmd sAnim_Scene3_Nidorino_4[] = {
 	ANIMCMD_FRAME(256, 1),
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const sAnimTable_NidorinoAnim[] = {
-	gAnimCmd_840BD1C,
-	gAnimCmd_840BD24,
-	gAnimCmd_840BD2C,
-	gAnimCmd_840BD34,
-	gAnimCmd_840BD3C
+static const union AnimCmd *const sAnims_Scene3_Nidorino[] = {
+	sAnim_Scene3_Nidorino_0,
+	sAnim_Scene3_Nidorino_1,
+	sAnim_Scene3_Nidorino_2,
+	sAnim_Scene3_Nidorino_3,
+	sAnim_Scene3_Nidorino_4
 };
 
-static const union AffineAnimCmd gAffineAnimCmd_840BD58[] = {
+static const union AffineAnimCmd sAffineAnim_Scene3_Mons_0[] = {
 	AFFINEANIMCMD_FRAME(256, 256, 0, 0),
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gAffineAnimCmd_840BD68[] = {
+static const union AffineAnimCmd sAffineAnim_Scene3_Mons_1[] = {
 	AFFINEANIMCMD_FRAME(256, 256, 0, 0),
 	AFFINEANIMCMD_FRAME(32, 32, 0, 8),
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sAffineAnimTable_NidorinoAnim[] = {
-	gAffineAnimCmd_840BD58,
-	gAffineAnimCmd_840BD68
+static const union AffineAnimCmd *const sAffineAnims_Scene3_Mons[] = {
+	sAffineAnim_Scene3_Mons_0,
+	sAffineAnim_Scene3_Mons_1
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoAnim = {
-    .tileTag = 5,
-    .paletteTag = 7,
-    .oam = &gOamData_840BD14,
-    .anims = sAnimTable_NidorinoAnim,
+static const struct SpriteTemplate sSpriteTemplate_Scene3_Nidorino = {
+    .tileTag = GFXTAG_SCENE3_NIDORINO,
+    .paletteTag = PALTAG_NIDORINO,
+    .oam = &sOam_Scene3_Nidorino,
+    .anims = sAnims_Scene3_Nidorino,
     .images = NULL,
-    .affineAnims = sAffineAnimTable_NidorinoAnim,
+    .affineAnims = sAffineAnims_Scene3_Mons,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_840BDA0 = {
+static const struct OamData sOam_Scene2_Mons = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -555,27 +634,27 @@ static const struct OamData gOamData_840BDA0 = {
     .paletteNum = 0
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoStatic = {
-    .tileTag = 7,
-    .paletteTag = 7,
-    .oam = &gOamData_840BDA0,
+static const struct SpriteTemplate sSpriteTemplate_Scene2_Nidorino = {
+    .tileTag = GFXTAG_SCENE2_NIDORINO,
+    .paletteTag = PALTAG_NIDORINO,
+    .oam = &sOam_Scene2_Mons,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GengarStatic = {
-    .tileTag = 6,
-    .paletteTag = 6,
-    .oam = &gOamData_840BDA0,
+static const struct SpriteTemplate sSpriteTemplate_Scene2_Gengar = {
+    .tileTag = GFXTAG_SCENE2_GENGAR,
+    .paletteTag = PALTAG_GENGAR,
+    .oam = &sOam_Scene2_Mons,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_840BDD8 = {
+static const struct OamData sOam_Grass = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -588,33 +667,33 @@ static const struct OamData gOamData_840BDD8 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmds_840BDE0[] = {
+static const union AnimCmd sAnim_Grass_0[] = {
 	ANIMCMD_FRAME(0, 0),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmds_840BDE8[] = {
+static const union AnimCmd sAnim_Grass_1[] = {
 	ANIMCMD_FRAME(32, 4),
 	ANIMCMD_FRAME(0, 4),
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BDF4[] = {
-	gAnimCmds_840BDE0,
-	gAnimCmds_840BDE8
+static const union AnimCmd *const sAnims_Grass[] = {
+	sAnim_Grass_0,
+	sAnim_Grass_1
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Grass = {
-    .tileTag = 8,
-    .paletteTag = 8,
-    .oam = &gOamData_840BDD8,
-    .anims = gAnimCmdTable_840BDF4,
+    .tileTag = GFXTAG_SCENE3_GRASS,
+    .paletteTag = PALTAG_SCENE3_GRASS,
+    .oam = &sOam_Grass,
+    .anims = sAnims_Grass,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_840BE14 = {
+static const struct OamData sOam_Scene3_Gengar = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -627,44 +706,44 @@ static const struct OamData gOamData_840BE14 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmd_840BE1C[] = {
+static const union AnimCmd sAnim_Scene3_Gengar_0[] = {
 	ANIMCMD_FRAME(0, 0),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BE24[] = {
+static const union AnimCmd sAnim_Scene3_Gengar_1[] = {
 	ANIMCMD_FRAME(64, 0),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BE2C[] = {
+static const union AnimCmd sAnim_Scene3_Gengar_2[] = {
 	ANIMCMD_FRAME(96, 0),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BE34[] = {
+static const union AnimCmd sAnim_Scene3_Gengar_3[] = {
 	ANIMCMD_FRAME(160, 0),
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
-	gAnimCmd_840BE1C,
-	gAnimCmd_840BE24,
-	gAnimCmd_840BE2C,
-	gAnimCmd_840BE34
+static const union AnimCmd *const sAnims_Scene3_Gengar[NUM_GENGAR_BACK_SPRITES] = {
+	sAnim_Scene3_Gengar_0,
+	sAnim_Scene3_Gengar_1,
+	sAnim_Scene3_Gengar_2,
+	sAnim_Scene3_Gengar_3
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GengarBack = {
-    .tileTag = 9,
-    .paletteTag = 6,
-    .oam = &gOamData_840BE14,
-    .anims = gAnimCmdTable_840BE3C,
+static const struct SpriteTemplate sSpriteTemplate_Scene3_Gengar = {
+    .tileTag = GFXTAG_SCENE3_GENGAR,
+    .paletteTag = PALTAG_GENGAR,
+    .oam = &sOam_Scene3_Gengar,
+    .anims = sAnims_Scene3_Gengar,
     .images = NULL,
-    .affineAnims = sAffineAnimTable_NidorinoAnim,
+    .affineAnims = sAffineAnims_Scene3_Mons,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_840BE64 = {
+static const struct OamData sOam_Swipe = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -677,34 +756,34 @@ static const struct OamData gOamData_840BE64 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmd_840BE6C[] = {
+static const union AnimCmd sAnim_Swipe_0[] = {
 	ANIMCMD_FRAME(0, 8),
 	ANIMCMD_FRAME(32, 4),
 	ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_840BE78[] = {
+static const union AnimCmd sAnim_Swipe_1[] = {
 	ANIMCMD_FRAME(64, 8),
 	ANIMCMD_FRAME(72, 4),
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BE84[] = {
-	gAnimCmd_840BE6C,
-	gAnimCmd_840BE78
+static const union AnimCmd *const sAnims_Swipe[] = {
+	sAnim_Swipe_0,
+	sAnim_Swipe_1
 };
 
 static const struct SpriteTemplate sSpriteTemplate_GengarSwipe = {
-    .tileTag = 10,
-    .paletteTag = 10,
-    .oam = &gOamData_840BE64,
-    .anims = gAnimCmdTable_840BE84,
+    .tileTag = GFXTAG_SCENE3_SWIPE,
+    .paletteTag = PALTAG_SCENE3_SWIPE,
+    .oam = &sOam_Swipe,
+    .anims = sAnims_Swipe,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_GengarSwipe
 };
 
-static const struct OamData gOamData_840BEA4 = {
+static const struct OamData sOam_RecoilDust = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
@@ -717,7 +796,7 @@ static const struct OamData gOamData_840BEA4 = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnimCmd_840BEAC[] = {
+static const union AnimCmd sAnim_RecoilDust[] = {
 	ANIMCMD_FRAME(0, 10),
 	ANIMCMD_FRAME(4, 10),
 	ANIMCMD_FRAME(8, 10),
@@ -725,28 +804,28 @@ static const union AnimCmd gAnimCmd_840BEAC[] = {
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
-	gAnimCmd_840BEAC
+static const union AnimCmd *const sAnims_RecoilDust[] = {
+	sAnim_RecoilDust
 };
 
 static const struct SpriteTemplate sSpriteTemplate_NidorinoRecoilDust = {
-    .tileTag = 11,
-    .paletteTag = 11,
-    .oam = &gOamData_840BEA4,
-    .anims = gAnimCmdTable_840BEC0,
+    .tileTag = GFXTAG_SCENE3_RECOIL_DUST,
+    .paletteTag = PALTAG_SCENE3_RECOIL_DUST,
+    .oam = &sOam_RecoilDust,
+    .anims = sAnims_RecoilDust,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_NidorinoRecoilDust
 };
 
 static const struct CompressedSpriteSheet sFightSceneSpriteSheets[] = {
-	{sSpriteTiles_GengarStatic, 0x0800, 6},
-	{sSpriteTiles_NidorinoStatic, 0x0800, 7},
-	{sSpriteTiles_NidorinoAnim, 0x2800, 5},
-	{sSpriteTiles_Grass, 0x0800, 8},
-	{sSpriteTiles_GengarBack, 0x1800, 9},
-	{sSpriteTiles_GengarSwipe, 0x0a00, 10},
-	{sSpriteTiles_NidorinoRecoilDust, 0x0200, 11}
+	{sScene2_Gengar_Gfx,       0x800,  GFXTAG_SCENE2_GENGAR},
+	{sScene2_Nidorino_Gfx,     0x800,  GFXTAG_SCENE2_NIDORINO},
+	{sScene3_Nidorino_Gfx,     0x2800, GFXTAG_SCENE3_NIDORINO},
+	{sScene3_Grass_Gfx,        0x800,  GFXTAG_SCENE3_GRASS},
+	{sScene3_GengarStatic_Gfx, 0x1800, GFXTAG_SCENE3_GENGAR},
+	{sScene3_Swipe_Gfx,        0xA00,  GFXTAG_SCENE3_SWIPE},
+	{sScene3_RecoilDust_Gfx,   0x200,  GFXTAG_SCENE3_RECOIL_DUST}
 };
 
 // POTENTIAL UB
@@ -755,11 +834,11 @@ static const struct CompressedSpriteSheet sFightSceneSpriteSheets[] = {
 // Because such an entry is absent in this case, the function
 // continues reading into the next .rodata section.
 static const struct SpritePalette sFightSceneSpritePalettes[] = {
-	{sSpritePals_Gengar, 6},
-	{sSpritePals_Nidorino, 7},
-	{sSpritePals_Grass, 8},
-	{sSpritePals_GengarSwipe, 10},
-	{sSpritePals_NidorinoRecoilDust, 11},
+	{sGengar_Pal, PALTAG_GENGAR},
+	{sNidorino_Pal, PALTAG_NIDORINO},
+	{sScene3_Grass_Pal, PALTAG_SCENE3_GRASS},
+	{sScene3_Swipe_Pal, PALTAG_SCENE3_SWIPE},
+	{sScene3_RecoilDust_Pal, PALTAG_SCENE3_RECOIL_DUST},
 #ifdef BUGFIX
     {0}
 #endif
@@ -778,19 +857,19 @@ static void CB2_WaitFadeBeforeSetUpIntro(void)
         SetMainCallback2(CB2_SetUpIntro);
 }
 
-static void load_copyright_graphics(u16 charBase, u16 screenBase, u16 palOffset)
+static void LoadCopyrightGraphics(u16 charBase, u16 screenBase, u16 palOffset)
 {
-    LZ77UnCompVram(sCopyrightGraphicsTiles, (void *)BG_VRAM + charBase);
-    LZ77UnCompVram(sCopyrightGraphicsMap, (void *)BG_VRAM + screenBase);
-    LoadPalette(sCopyrightGraphicsPal, palOffset, 0x20);
+    LZ77UnCompVram(sCopyright_Gfx, (void *)BG_VRAM + charBase);
+    LZ77UnCompVram(sCopyright_Map, (void *)BG_VRAM + screenBase);
+    LoadPalette(sCopyright_Pal, palOffset, 0x20);
 }
 
-static void SerialCb_CopyrightScreen(void)
+static void SerialCB_CopyrightScreen(void)
 {
     GameCubeMultiBoot_HandleSerialInterrupt(&sGcmb);
 }
 
-static bool8 RunCopyrightScreen(void)
+static bool8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
@@ -807,17 +886,17 @@ static bool8 RunCopyrightScreen(void)
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT + sizeof(vu16), PLTT_SIZE - sizeof(vu16));
         ResetPaletteFade();
-        load_copyright_graphics(0 * BG_CHAR_SIZE, 7 * BG_SCREEN_SIZE, 0);
+        LoadCopyrightGraphics(0 * BG_CHAR_SIZE, 7 * BG_SCREEN_SIZE, 0);
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0xFFFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Copyright);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
-        SetSerialCallback(SerialCb_CopyrightScreen);
+        SetSerialCallback(SerialCB_CopyrightScreen);
         GameCubeMultiBoot_Init(&sGcmb);
         // fallthrough
     default:
@@ -841,11 +920,10 @@ static bool8 RunCopyrightScreen(void)
             {
                 if (sGcmb.gcmb_field_2 == 2)
                 {
-                    // Gc6e
-                    if (*((u32 *)0x020000AC) == 0x65366347)
+                    if (*(u32 *)(EWRAM_START + 0xAC) == COLOSSEUM_GAME_CODE)
                     {
                         CpuCopy16(gMultiBootProgram_PokemonColosseum_Start, (void *)EWRAM_START, 0x28000);
-                        *((u32 *)0x020000AC) = 0x65366347;
+                        *(u32 *)(EWRAM_START + 0xAC) = COLOSSEUM_GAME_CODE;
                     }
                     GameCubeMultiBoot_ExecuteProgram(&sGcmb);
                 }
@@ -866,9 +944,9 @@ static bool8 RunCopyrightScreen(void)
     return TRUE;
 }
 
-void c2_copyright_1(void)
+void CB2_InitCopyrightScreenAfterBootup(void)
 {
-    if (!RunCopyrightScreen())
+    if (!SetUpCopyrightScreen())
     {
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
@@ -879,9 +957,9 @@ void c2_copyright_1(void)
     }
 }
 
-void CB2_CopyrightScreen(void)
+void CB2_InitCopyrightScreenAfterTitleScreen(void)
 {
-    RunCopyrightScreen();
+    SetUpCopyrightScreen();
 }
 
 static void CB2_SetUpIntro(void)
@@ -908,10 +986,10 @@ static void CB2_SetUpIntro(void)
         InitBgsFromTemplates(0, sBgTemplates_GameFreakScene, NELEMS(sBgTemplates_GameFreakScene));
         break;
     case 1:
-        LoadPalette(sBg3Pal_GameFreakPresents, 0x00, 0x20);
-        DecompressAndCopyTileDataToVram(3, sBg3Tiles_GameFreakPresents, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(3, sBg3Map_GameFreakPresents, 0, 0, 1);
-        LoadPalette(sSpritePals_GameFreakPresents, 0xD0, 0x20);
+        LoadPalette(sGameFreakBg_Pal, 0x00, 0x20);
+        DecompressAndCopyTileDataToVram(BG_GF_BACKGROUND, sGameFreakBg_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_GF_BACKGROUND, sGameFreakBg_Map, 0, 0, 1);
+        LoadPalette(sGameFreakLogo_Pal, 0xD0, 0x20);
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
@@ -985,12 +1063,12 @@ static void IntroCB_Init(struct IntroSequenceData * this)
     switch (this->state)
     {
     case 0:
-        InitWindows(sWindowTemplate);
-        LZ77UnCompWram(sBlit_GameFreakText, this->gamefreakTextBitmap);
-        LZ77UnCompWram(sSpriteTiles_GameFreakLogoArt, this->gamefreakLogoArtSpriteTiles);
-        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
+        InitWindows(sWindowTemplate_GameFreakTextLogo);
+        LZ77UnCompWram(sGameFreakText_Gfx, this->gameFreakTextGfx);
+        LZ77UnCompWram(sGameFreakLogo_Gfx, this->gameFreakLogoGfx);
+        FillBgTilemapBufferRect(BG_GF_TEXT_LOGO, 0x000, 0, 0, 32, 32, 0x11);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
+        BlitBitmapToWindow(0, this->gameFreakTextGfx, 0, 40, 144, 16);
         PutWindowTilemap(0);
         CopyWindowToVram(0, COPYWIN_FULL);
         this->state++;
@@ -1068,8 +1146,7 @@ static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData 
         this->state++;
         break;
     case 1:
-        this->data[5]++;
-        if (this->data[5] >= 40)
+        if (++this->data[5] >= 40)
             this->state++;
         break;
     case 2:
@@ -1090,8 +1167,7 @@ static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData 
         }
         break;
     case 5:
-        this->data[5]++;
-        if (this->data[5] > 50)
+        if (++this->data[5] > 50)
             SetIntroCB(this, IntroCB_GameFreakScene_CreateGameFreakLogo);
         break;
     }
@@ -1116,8 +1192,8 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
     case 2:
         if (!IsBlendTaskActive())
         {
-            BlitBitmapToWindow(0, this->gamefreakLogoArtSpriteTiles, 0x38, 0x06, 0x20, 0x40);
-            BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0x00, 0x28, 0x90, 0x10);
+            BlitBitmapToWindow(0, this->gameFreakLogoGfx, 0x38, 0x06, 0x20, 0x40);
+            BlitBitmapToWindow(0, this->gameFreakTextGfx, 0x00, 0x28, 0x90, 0x10);
             CopyWindowToVram(0, COPYWIN_GFX);
             this->state++;
         }
@@ -1126,14 +1202,15 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             DestroySprite(this->gameFreakLogoArtSprite);
-            Rev1_GameFreakScene_CreatePresentsText();
+        #if REVISION >= 1
+            CreateGameFreakPresentsText();
+        #endif
             this->data[5] = 0;
             this->state++;
         }
         break;
     case 4:
-        this->data[5]++;
-        if (this->data[5] > 90)
+        if (++this->data[5] > 90)
         {
             SetGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2);
             StartBlendTask(16, 0, 0, 16, 20, 0);
@@ -1143,7 +1220,7 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
     case 5:
         if (!IsBlendTaskActive())
         {
-            HideBg(2);
+            HideBg(BG_GF_TEXT_LOGO);
             this->state++;
         }
         break;
@@ -1154,8 +1231,7 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
         this->state++;
         break;
     case 7:
-        this->data[5]++;
-        if (this->data[5] > 20)
+        if (++this->data[5] > 20)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
             SetIntroCB(this, IntroCB_FightScene);
@@ -1170,16 +1246,16 @@ static void IntroCB_FightScene(struct IntroSequenceData * this)
     {
     case 0:
         SetVBlankCallback(NULL);
-        LoadPalette(sBg0Pal_FightScene1, 0x10, 0x20);
-        LoadPalette(sBg1Pal_FightScene1, 0x20, 0x20);
+        LoadPalette(sScene1_Grass_Pal, 0x10, 0x20);
+        LoadPalette(sScene1_Bg_Pal, 0x20, 0x20);
         BlendPalettes(0x00000006, 0x10, RGB_WHITE);
-        InitBgsFromTemplates(0, sBgTemplates_FightScene1, NELEMS(sBgTemplates_FightScene1));
-        DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene1, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene1, 0, 0, 1);
-        ShowBg(1);
-        HideBg(0);
-        HideBg(2);
-        HideBg(3);
+        InitBgsFromTemplates(0, sBgTemplates_Scene1, NELEMS(sBgTemplates_Scene1));
+        DecompressAndCopyTileDataToVram(BG_SCENE1_BACKGROUND, sScene1_Bg_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_SCENE1_BACKGROUND, sScene1_Bg_Map, 0, 0, 1);
+        ShowBg(BG_SCENE1_BACKGROUND);
+        HideBg(BG_SCENE1_GRASS);
+        HideBg(BG_SCENE1_UNUSED1);
+        HideBg(BG_SCENE1_UNUSED2);
         LoadFightSceneSpriteTilesAndPals();
         SetVBlankCallback(VBlankCB_Intro);
         this->state++;
@@ -1187,17 +1263,17 @@ static void IntroCB_FightScene(struct IntroSequenceData * this)
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene1, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene1, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(BG_SCENE1_GRASS, sScene1_Grass_Gfx, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(BG_SCENE1_GRASS, sScene1_Grass_Map, 0, 0, 1);
             ResetBgPositions();
-            ShowBg(1);
+            ShowBg(BG_SCENE1_BACKGROUND);
             this->state++;
         }
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            ShowBg(0);
+            ShowBg(BG_SCENE1_GRASS);
             CreateTask(Task_FightScene1_GrassyFieldAnim, 0);
             BeginNormalPaletteFade(0x00000006, -2, 16, 0, RGB_WHITE);
             this->state++;
@@ -1241,19 +1317,17 @@ static void Task_FightScene1_GrassyFieldAnim(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    data[0]++;
-    if (data[0] > 5)
+    if (++data[0] > 5)
     {
         data[0] = 0;
-        data[1]++;
-        if (data[1] > 2)
+        if (++data[1] > 2)
             data[1] = 0;
-        ChangeBgY(0, data[1] << 15, 0);
+        ChangeBgY(BG_SCENE1_GRASS, data[1] << 15, 0);
     }
     if (data[2])
     {
         data[3] += 0x120;
-        ChangeBgY(0, data[3], 2);
+        ChangeBgY(BG_SCENE1_GRASS, data[3], 2);
     }
 }
 
@@ -1267,13 +1341,12 @@ static void Task_FightScene1_ZoomEffect(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    data[0]++;
-    if (data[0] > 3)
+    if (++data[0] > 3)
     {
         data[0] = 0;
         if (data[1] < 2)
             data[1]++;
-        ChangeBgY(1, data[1] << 15, 0);
+        ChangeBgY(BG_SCENE1_BACKGROUND, data[1] << 15, 0);
     }
 }
 
@@ -1283,32 +1356,32 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
     {
     case 0:
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-        InitBgsFromTemplates(0, sBgTemplates_FightScene2, NELEMS(sBgTemplates_FightScene2));
-        DecompressAndCopyTileDataToVram(3, sBg3Tiles_FightScene2, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(3, sBg3Map_FightScene2, 0, 0, 1);
-        ShowBg(3);
+        InitBgsFromTemplates(0, sBgTemplates_Scene2, NELEMS(sBgTemplates_Scene2));
+        DecompressAndCopyTileDataToVram(BG_SCENE2_BACKGROUND, sScene2_Bg_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_SCENE2_BACKGROUND, sScene2_Bg_Map, 0, 0, 1);
+        ShowBg(BG_SCENE2_BACKGROUND);
         this->state++;
         break;
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
             SetVBlankCallback(NULL);
-            LoadPalette(sBg3Pal_FightScene2, 0x10, 0x60);
-            LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
-            LoadPalette(sBg1Pal_FightScene2, 0x60, 0x20);
+            LoadPalette(sScene2_Bg_Pal, 0x10, 0x60);
+            LoadPalette(sGengar_Pal, 0x50, 0x20);
+            LoadPalette(sScene2_NidorinoClose_Pal, 0x60, 0x20);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-            DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene2, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene2, 0, 0, 1);
-            DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene2, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene2, 0, 0, 1);
-            DecompressAndCopyTileDataToVram(2, sBg2Tiles_FightScene2, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(2, sBg2Map_FightScene2, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(BG_SCENE2_PLANTS, sScene2_Plants_Gfx, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(BG_SCENE2_PLANTS, sScene2_Plants_Map, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(BG_SCENE2_NIDORINO, sScene2_NidorinoClose_Gfx, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(BG_SCENE2_NIDORINO, sScene2_NidorinoClose_Map, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(BG_SCENE2_GENGAR, sScene2_GengarClose_Gfx, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(BG_SCENE2_GENGAR, sScene2_GengarClose_Map, 0, 0, 1);
             ResetBgPositions();
-            ShowBg(0);
-            HideBg(1);
-            HideBg(2);
-            ChangeBgY(2, 0x0001CE00, 0);
-            ChangeBgY(1, 0x00002800, 0);
+            ShowBg(BG_SCENE2_PLANTS);
+            HideBg(BG_SCENE2_NIDORINO); // Hide bgs for scene 3
+            HideBg(BG_SCENE2_GENGAR);
+            ChangeBgY(BG_SCENE2_GENGAR, 0x0001CE00, 0);
+            ChangeBgY(BG_SCENE2_NIDORINO, 0x00002800, 0);
             CreateTask(Task_FightScene2_CameraHorizPanEffect, 0);
             CreateMonStaticSprites(this);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
@@ -1331,18 +1404,17 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
         }
         break;
     case 4:
-        this->data[5]++;
-        if (this->data[5] >= 60)
+        if (++this->data[5] >= 60)
         {
             this->data[5] = 0;
             DestroyTask(FindTaskIdByFunc(Task_FightScene2_CameraHorizPanEffect));
             DestroyStaticMonSprites(this);
             CreateTask(Task_FightScene2_CameraVertPanEffect, 0);
-            ChangeBgY(3, 0x00010000, 0);
-            HideBg(0);
-            ShowBg(3);
-            ShowBg(1);
-            ShowBg(2);
+            ChangeBgY(BG_SCENE2_BACKGROUND, 0x00010000, 0); // Move background from upper half (wide shot) to lower half (close up)
+            HideBg(BG_SCENE2_PLANTS);
+            ShowBg(BG_SCENE2_BACKGROUND);
+            ShowBg(BG_SCENE2_NIDORINO);
+            ShowBg(BG_SCENE2_GENGAR);
             this->state++;
         }
         break;
@@ -1354,8 +1426,7 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
         }
         break;
     case 6:
-        this->data[5]++;
-        if (this->data[5] >= 60)
+        if (++this->data[5] >= 60)
         {
             DestroyTask(FindTaskIdByFunc(Task_FightScene2_CameraVertPanEffect));
             SetIntroCB(this, IntroCB_FightScene3);
@@ -1366,14 +1437,14 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
 
 static void Task_FightScene2_CameraHorizPanEffect(u8 taskId)
 {
-    ChangeBgX(3, 0x0E0, 2);
-    ChangeBgX(0, 0x110, 1);
+    ChangeBgX(BG_SCENE2_BACKGROUND, 0x0E0, 2);
+    ChangeBgX(BG_SCENE2_PLANTS, 0x110, 1);
 }
 
 static void Task_FightScene2_CameraVertPanEffect(u8 taskId)
 {
-    ChangeBgY(2, 0x020, 1);
-    ChangeBgY(1, 0x024, 2);
+    ChangeBgY(BG_SCENE2_GENGAR, 0x020, 1);
+    ChangeBgY(BG_SCENE2_NIDORINO, 0x024, 2);
 }
 
 static void CreateMonStaticSprites(struct IntroSequenceData * this)
@@ -1383,11 +1454,11 @@ static void CreateMonStaticSprites(struct IntroSequenceData * this)
     this->gengarStaticSprite = NULL;
     this->nidorinoStaticSprite = NULL;
 
-    spriteId = CreateSprite(&sSpriteTemplate_NidorinoStatic, 168, 80, 11);
+    spriteId = CreateSprite(&sSpriteTemplate_Scene2_Nidorino, 168, 80, 11);
     if (spriteId != MAX_SPRITES)
         this->nidorinoStaticSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&sSpriteTemplate_GengarStatic, 72, 80, 12);
+    spriteId = CreateSprite(&sSpriteTemplate_Scene2_Gengar, 72, 80, 12);
     if (spriteId != MAX_SPRITES)
         this->gengarStaticSprite = &gSprites[spriteId];
 }
@@ -1405,16 +1476,16 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
     switch (this->state)
     {
     case 0:
-        LoadPalette(sBg1Pal_FightScene3, 0x10, 0x40);
-        LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
+        LoadPalette(sScene3_Bg_Pal, 0x10, 0x40);
+        LoadPalette(sGengar_Pal, 0x50, 0x20);
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-        InitBgsFromTemplates(0, sBgTemplates_FightScene3, NELEMS(sBgTemplates_FightScene3));
-        DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene3, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene3, 0, 0, 1);
-        ShowBg(1);
-        HideBg(0);
-        HideBg(2);
-        HideBg(3);
+        InitBgsFromTemplates(0, sBgTemplates_Scene3, NELEMS(sBgTemplates_Scene3));
+        DecompressAndCopyTileDataToVram(BG_SCENE3_BACKGROUND, sScene3_Bg_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_SCENE3_BACKGROUND, sScene3_Bg_Map, 0, 0, 1);
+        ShowBg(BG_SCENE3_BACKGROUND);
+        HideBg(BG_SCENE3_GENGAR);
+        HideBg(BG_SCENE3_UNUSED1);
+        HideBg(BG_SCENE3_UNUSED2);
         ResetBgPositions();
         this->state++;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
@@ -1427,12 +1498,12 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene3, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene3, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(BG_SCENE3_GENGAR, sScene3_GengarAnim_Gfx, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(BG_SCENE3_GENGAR, sScene3_GengarAnim_Map, 0, 0, 1);
             gUnknown_203AB00 = 4;
             gUnknown_203AB02 = 52;
-            ChangeBgX(0, 0x00001800, 0);
-            ChangeBgY(0, 0x0001F000, 0);
+            ChangeBgX(BG_SCENE3_GENGAR, 0x00001800, 0);
+            ChangeBgY(BG_SCENE3_GENGAR, 0x0001F000, 0);
             this->state++;
         }
         break;
@@ -1440,7 +1511,7 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             BlendPalettes(0xFFFFFFFE, 0, RGB_WHITE);
-            ShowBg(0);
+            ShowBg(BG_SCENE3_GENGAR);
             CreateTask(Task_FightScene3_ForestBgScroll, 0);
             CreateNidorinoAnimSprite(this);
             StartNidorinoAnimSpriteSlideIn(this->nidorinoAnimSprite, 0, 0xB4, 0x34);
@@ -1451,8 +1522,7 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
         }
         break;
     case 3:
-        this->data[5]++;
-        if (this->data[5] == 16)
+        if (++this->data[5] == 16)
             CreateGrassSprite(this);
         if (!IsNidorinoAnimSpriteSlideInRunning(this) && !FuncIsActiveTask(Task_FightScene3_Bg0Scroll))
             SetIntroCB(this, IntroCB_FightScene4);
@@ -1463,9 +1533,9 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
 static void Task_FightScene3_Bg1Scroll(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
-        ChangeBgX(1, 0x400, 2);
+        ChangeBgX(BG_SCENE3_BACKGROUND, 0x400, 2);
     else
-        ChangeBgX(1, 0x020, 2);
+        ChangeBgX(BG_SCENE3_BACKGROUND, 0x020, 2);
 }
 
 static void FightScene3_StartBg1Scroll(void)
@@ -1484,12 +1554,11 @@ static void Task_FightScene3_ForestBgScroll(u8 taskId)
     s16 * data = gTasks[taskId].data;
     if (data[0] == 0)
     {
-        data[1]++;
-        if (data[1] >= 30)
+        if (++data[1] >= 30)
         {
             data[1] = 0;
             data[2] ^= 1;
-            ChangeBgY(0, (data[2] << 15) + 0x1F000, 0);
+            ChangeBgY(BG_SCENE3_GENGAR, (data[2] << 15) + 0x1F000, 0);
         }
     }
 }
@@ -1566,8 +1635,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         this->state++;
         break;
     case 1:
-        this->data[5]++;
-        if (this->data[5] > 30)
+        if (++this->data[5] > 30)
         {
             FightScene4_NidorinoRearsUp(this);
             this->state++;
@@ -1581,8 +1649,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         }
         break;
     case 3:
-        this->data[5]++;
-        if (this->data[5] > 30)
+        if (++this->data[5] > 30)
         {
             FightScene3_PauseForestBgScroll();
             FightScene4_StartGengarAttack(this);
@@ -1606,8 +1673,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         }
         break;
     case 6:
-        this->data[5]++;
-        if (this->data[5] > 16)
+        if (++this->data[5] > 16)
         {
             StartSpriteHopToPosAnim(this->nidorinoAnimSprite, 8, 12, 5);
             this->state++;
@@ -1628,8 +1694,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         }
         break;
     case 9:
-        this->data[5]++;
-        if (this->data[5] > 20)
+        if (++this->data[5] > 20)
         {
             StartNidorinoAnim_LaunchSelfAtGengarAnim(this);
             this->data[5] = 0;
@@ -1645,13 +1710,12 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         }
         break;
     case 11:
-        HideBg(0);
+        HideBg(BG_SCENE3_GENGAR);
         this->data[5] = 0;
         this->state++;
         break;
     case 12:
-        this->data[5]++;
-        if (this->data[5] == 48)
+        if (++this->data[5] == 48)
             BeginNormalPaletteFade(0x00000006, 2, 0, 16, RGB_WHITE);
         if (this->data[5] > 120)
         {
@@ -1662,8 +1726,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         }
         break;
     case 13:
-        this->data[5]++;
-        if (this->data[5] > 8)
+        if (++this->data[5] > 8)
         {
             CpuFill16(RGB_WHITE, gPlttBufferUnfaded + 16, 64);
             BeginNormalPaletteFade(0xFFFFFFFE, -2, 0, 16, RGB_BLACK);
@@ -1678,8 +1741,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         }
         break;
     case 15:
-        this->data[5]++;
-        if (this->data[5] > 60)
+        if (++this->data[5] > 60)
             SetIntroCB(this, IntroCB_CleanUp);
         break;
     default:
@@ -1705,18 +1767,18 @@ static void CreateGengarBackSprite(struct IntroSequenceData * this)
     int i;
 
     // Not using a subsprite table for this
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_GENGAR_BACK_SPRITES; i++)
     {
         int x = (i & 1) * 48 + 49;
         int y = (i / 2) * 64 + 72;
-        u8 spriteId = CreateSprite(&sSpriteTemplate_GengarBack, x, y, 8);
+        u8 spriteId = CreateSprite(&sSpriteTemplate_Scene3_Gengar, x, y, 8);
         if (spriteId != MAX_SPRITES)
         {
             StartSpriteAnim(&gSprites[spriteId], i);
-            this->gengarBackSpriteArray[i] = &gSprites[spriteId];
+            this->gengarBackSprites[i] = &gSprites[spriteId];
             if (i & 1)
-                this->gengarBackSpriteArray[i]->oam.shape = ST_OAM_V_RECTANGLE;
-            FightScene_CalcCenterToCornerVec(this->gengarBackSpriteArray[i]);
+                this->gengarBackSprites[i]->oam.shape = ST_OAM_V_RECTANGLE;
+            FightScene_CalcCenterToCornerVec(this->gengarBackSprites[i]);
         }
     }
 }
@@ -1738,11 +1800,11 @@ static void FightScene4_StartGengarAffineAnim(struct IntroSequenceData * this)
 {
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_GENGAR_BACK_SPRITES; i++)
     {
-        StartSpriteAffineAnim(this->gengarBackSpriteArray[i], 1);
-        this->gengarBackSpriteArray[i]->callback = SpriteCB_DummyButNotDummy;
-        obj_pos2_update_enable(this->gengarBackSpriteArray[i], sGengarBackSpritePos2UpdateMods[i][0], sGengarBackSpritePos2UpdateMods[i][1]);
+        StartSpriteAffineAnim(this->gengarBackSprites[i], 1);
+        this->gengarBackSprites[i]->callback = SpriteCB_DummyButNotDummy;
+        obj_pos2_update_enable(this->gengarBackSprites[i], sGengarBackSpritePos2UpdateMods[i][0], sGengarBackSpritePos2UpdateMods[i][1]);
     }
 }
 
@@ -1774,9 +1836,7 @@ static void GameFreakScene_LoadGfxCreateStar(void)
     static EWRAM_DATA u32 sTrailingSparklesRngSeed = 0;
 
     for (i = 0; i < NELEMS(sSpriteSheets_GameFreakScene); i++)
-    {
         LoadCompressedSpriteSheet(&sSpriteSheets_GameFreakScene[i]);
-    }
     LoadSpritePalettes(sSpritePalettes_GameFreakScene);
     sLargeStarXSpeed = 0x60;
     sLargeStarYSpeed = 0x10;
@@ -1791,7 +1851,7 @@ static void GameFreakScene_LoadGfxCreateStar(void)
     sTrailingSparklesYprecision = 5;
     if (sTrailingSparklesRngSeed == 0)
         sTrailingSparklesRngSeed = 354128453;
-    spriteId = CreateSprite(&sSpriteTemplate_LargeStar, 0xF8, 0x37, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_Star, 0xF8, 0x37, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[0] = 0xF80;
@@ -1809,14 +1869,13 @@ static void GameFreakScene_TrailingSparklesGen(s16 x, s16 y, u16 a2)
     u8 spriteId;
     s16 xMod = (a2 & sTrailingSparklesXmodMask) + 2;
     s16 yMod = sYmod;
-    sYmod++;
-    if (sYmod > 3)
+    if (++sYmod > 3)
         sYmod = -3;
     x += xMod;
     y += yMod;
-    if (x >= 1 && x <= 0xEF)
+    if (x > 0 && x < DISPLAY_WIDTH)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_TrailingSparkles, x, y, 1);
+        spriteId = CreateSprite(&sSpriteTemplate_SparklesSmall, x, y, 1);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[0] = x << sTrailingSparklesXprecision;
@@ -1843,19 +1902,17 @@ static void Task_GameFreakScene_TrailingSparkleSpawner(u8 taskId)
     {
         data[2] = 0;
         r6 = data[0];
-        spriteId = CreateSprite(&sSpriteTemplate_TrailingSparkles, sTrailingSparkleCoords[r6].x, sTrailingSparkleCoords[r6].y, 2);
+        spriteId = CreateSprite(&sSpriteTemplate_SparklesSmall, sTrailingSparkleCoords[r6].x, sTrailingSparkleCoords[r6].y, 2);
         StartSpriteAnim(&gSprites[spriteId], 1);
-        gSprites[spriteId].callback = SpriteCB_TrailingSparkles2;
+        gSprites[spriteId].callback = SpriteCB_SparklesSmall2;
         gSprites[spriteId].data[1] = sTrailingSparkleCoords[r6].y << 4;
         gSprites[spriteId].data[2] = 120;
         gSprites[spriteId].data[3] = data[1];
         if (gSprites[spriteId].data[3] < 0)
             gSprites[spriteId].data[3] = 1;
-        data[0]++;
-        if (data[0] >= NELEMS(sTrailingSparkleCoords))
+        if (++data[0] >= NELEMS(sTrailingSparkleCoords))
         {
-            data[1]++;
-            if (data[1] > 1)
+            if (++data[1] > 1)
                 DestroyTask(taskId);
             else
                 data[0] = 0;
@@ -1879,13 +1936,11 @@ static void Task_RevealGameFreakTextSparklesSpawner(u8 taskId)
         data[1] += 4;
         if (data[1] >= NELEMS(sTrailingSparkleCoords))
             data[1] -= NELEMS(sTrailingSparkleCoords);
-        CreateSprite(&sSpriteTemplate_RevealGameFreakTextSparkles, sTrailingSparkleCoords[r2].x, sTrailingSparkleCoords[r2].y, 3);
-        data[2]++;
-        if (data[2] > 8)
+        CreateSprite(&sSpriteTemplate_SparklesBig, sTrailingSparkleCoords[r2].x, sTrailingSparkleCoords[r2].y, 3);
+        if (++data[2] > 8)
             DestroyTask(taskId);
     }
-    data[0]++;
-    if (data[0] > 9)
+    if (++data[0] > 9)
         data[0] = 0;
 }
 
@@ -1896,13 +1951,11 @@ static struct Sprite *CreateGameFreakLogoArtSprite(void)
 }
 
 #if REVISION >= 1
-static void Rev1_GameFreakScene_CreatePresentsText(void)
+static void CreateGameFreakPresentsText(void)
 {
     int i;
     for (i = 0; i < 2; i++)
-    {
         gSprites[CreateSprite(&sSpriteTemplate_PresentsText, 0x68 + 32 * i, 0x6c, 5)].oam.tileNum += i * 4;
-    }
 }
 #endif
 
@@ -1913,15 +1966,15 @@ static void FightScene4_StartGengarAttack(struct IntroSequenceData * this)
     taskId = CreateTask(Task_FightScene4_GengarAttack, 4);
     SetWordTaskArg(taskId, 5, (uintptr_t)this);
     gTasks[taskId].data[3] = 64;
-    gTasks[taskId].data[4] = GetBgX(0);
+    gTasks[taskId].data[4] = GetBgX(BG_SCENE3_GENGAR);
 }
 
 static void FightScene4_ApplyGengarAnim(int a, int b, int c, int d)
 {
-    ChangeBgY(0, (a << 15) + 0x1F000, 0);
-    ChangeBgX(0, d, 0);
-    ChangeBgX(0, b << 8, 2);
-    ChangeBgY(0, c << 8, 2);
+    ChangeBgY(BG_SCENE3_GENGAR, (a << 15) + 0x1F000, 0);
+    ChangeBgX(BG_SCENE3_GENGAR, d, 0);
+    ChangeBgX(BG_SCENE3_GENGAR, b << 8, 2);
+    ChangeBgY(BG_SCENE3_GENGAR, c << 8, 2);
 }
 
 static void Task_FightScene4_GengarAttack(u8 taskId)
@@ -1940,16 +1993,14 @@ static void Task_FightScene4_GengarAttack(u8 taskId)
         break;
     case 1:
         data[3] -= 2;
-        data[1]++;
-        if (data[1] > 15)
+        if (++data[1] > 15)
         {
             data[1] = 0;
             data[0]++;
         }
         break;
     case 2:
-        data[1]++;
-        if (data[1] == 14)
+        if (++data[1] == 14)
             ((struct IntroSequenceData *)GetWordTaskArg(taskId, 5))->gengarAttackLanded = TRUE;
         if (data[1] > 15)
         {
@@ -1959,8 +2010,7 @@ static void Task_FightScene4_GengarAttack(u8 taskId)
         break;
     case 3:
         data[3] += 8;
-        data[1]++;
-        if (data[1] == 4)
+        if (++data[1] == 4)
         {
             FightScene4_CreateGengarSwipeSprites();
             data[8] = 32;
@@ -1975,8 +2025,7 @@ static void Task_FightScene4_GengarAttack(u8 taskId)
         break;
     case 4:
         data[3] -= 8;
-        data[1]++;
-        if (data[1] > 3)
+        if (++data[1] > 3)
         {
             data[7] = 0;
             data[3] = 64;
@@ -2028,15 +2077,14 @@ static void Task_FightScene3_Bg0Scroll(u8 taskId)
         data[0]++;
         // fallthrough
     case 1:
-        data[2]++;
-        if (data[2] > 39 && data[1] > 16)
+        if (++data[2] > 39 && data[1] > 16)
             data[1] -= 16;
-        gUnknown_203AB30 = ChangeBgX(0, data[1], 1);
+        gUnknown_203AB30 = ChangeBgX(BG_SCENE3_GENGAR, data[1], 1);
         if (gUnknown_203AB30 >= 0x8000)
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         if (gUnknown_203AB30 >= 0xEF00)
         {
-            ChangeBgX(0, 0xEF00, 0);
+            ChangeBgX(BG_SCENE3_GENGAR, 0xEF00, 0);
             DestroyTask(taskId);
         }
         break;
@@ -2056,7 +2104,7 @@ static void SpriteCB_LargeStar(struct Sprite *sprite)
     if (sprite->data[5] % sTrailingSparklesSpawnRate)
     {
         LoadWordFromTwoHalfwords(&sprite->data[6], &v);
-        v = v * 1103515245 + 24691;
+        v = ISO_RANDOMIZE1(v);
         StoreWordInTwoHalfwords(&sprite->data[6], v);
         v >>= 16;
         GameFreakScene_TrailingSparklesGen(sprite->x, sprite->y + sprite->y2, v);
@@ -2065,7 +2113,7 @@ static void SpriteCB_LargeStar(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-static void SpriteCB_TrailingSparkles(struct Sprite *sprite)
+static void SpriteCB_SparklesSmall(struct Sprite *sprite)
 {
     u32 v;
 
@@ -2088,7 +2136,7 @@ static void SpriteCB_TrailingSparkles(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-static void SpriteCB_TrailingSparkles2(struct Sprite *sprite)
+static void SpriteCB_SparklesSmall2(struct Sprite *sprite)
 {
     if (sprite->data[2])
     {
@@ -2131,8 +2179,7 @@ static void SpriteCB_TrailingSparkles2(struct Sprite *sprite)
             StartSpriteAnim(sprite, 0);
         sprite->data[1] += 4;
         sprite->y = sprite->data[1] >> 4;
-        sprite->data[4]++;
-        if (sprite->data[4] > 50)
+        if (++sprite->data[4] > 50)
             DestroySprite(sprite);
     }
 }
@@ -2145,7 +2192,7 @@ static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite *sprite)
 
 static void CreateNidorinoAnimSprite(struct IntroSequenceData * this)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_NidorinoAnim, 0, 0, 9);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_Scene3_Nidorino, 0, 0, 9);
     this->nidorinoAnimSprite = &gSprites[spriteId];
 }
 
@@ -2163,8 +2210,7 @@ static void StartNidorinoAnimSpriteSlideIn(struct Sprite *sprite, s16 x0, s16 x1
 
 static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite *sprite)
 {
-    sprite->data[4]++;
-    if (sprite->data[4] >= 40)
+    if (++sprite->data[4] >= 40)
     {
         if (sprite->data[1] > 1)
             sprite->data[1]--;
@@ -2197,8 +2243,7 @@ static void SpriteCB_NidorinoRearsUp(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->data[1]++;
-        if (sprite->data[1] > 8)
+        if (++sprite->data[1] > 8)
         {
             StartSpriteAnim(sprite, 1);
             sprite->y2 = 0;
@@ -2211,14 +2256,12 @@ static void SpriteCB_NidorinoRearsUp(struct Sprite *sprite)
         sprite->data[0]++;
         break;
     case 2:
-        sprite->data[2]++;
-        if (sprite->data[2] > 1)
+        if (++sprite->data[2] > 1)
         {
             sprite->data[2] = 0;
             sprite->y2 = sprite->y2 == 0 ? 1 : 0;
         }
-        sprite->data[1]++;
-        if (sprite->data[1] > 48)
+        if (++sprite->data[1] > 48)
         {
             StartSpriteAnim(sprite, 0);
             sprite->y2 = 0;
@@ -2284,7 +2327,7 @@ static void SpriteCB_NidorinoRecoil(struct Sprite *sprite)
         if (sprite->data[1] > 6)
         {
             CreateNidorinoRecoilDustSprites(sprite->x + sprite->x2, sprite->y + sprite->y2, sprite->data[6]);
-            sprite->data[6] *= 1103515245;
+            sprite->data[6] *= RAND_MULT;
         }
         if (sprite->data[1] > 12)
         {
@@ -2296,9 +2339,7 @@ static void SpriteCB_NidorinoRecoil(struct Sprite *sprite)
     case 3:
         sprite->data[1]++;
         if (sprite->data[1] > 16)
-        {
             StartSpriteHopToPosAnim(sprite, gUnknown_203AB0A, -sprite->x2, 4);
-        }
         break;
     }
 }
@@ -2321,7 +2362,7 @@ static void CreateNidorinoRecoilDustSprites(s16 x, s16 y, s16 seed)
             gSprites[spriteId].data[3] = (seed % 13) + 8;
             gSprites[spriteId].data[4] = seed % 3;
             gSprites[spriteId].data[7] = i;
-            seed *= 1103515245;
+            seed *= RAND_MULT;
         }
     }
 }
@@ -2346,8 +2387,7 @@ static void SpriteCB_NidorinoRecoilDust(struct Sprite *sprite)
             DestroySprite(sprite);
         break;
     }
-    data[7]++;
-    if (data[7] > 1)
+    if (++data[7] > 1)
     {
         data[7] = 0;
         sprite->invisible ^= TRUE;
@@ -2373,8 +2413,7 @@ static void SpriteCB_HopToPos(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->data[6]++;
-        if (sprite->data[6] > 4)
+        if (++sprite->data[6] > 4)
         {
             StartSpriteAnim(sprite, 3);
             sprite->data[6] = 0;
@@ -2405,8 +2444,7 @@ static void SpriteCB_HopToPos(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->data[6]++;
-        if (sprite->data[6] > 4)
+        if (++sprite->data[6] > 4)
         {
             StartSpriteAnim(sprite, 0);
             sprite->callback = SpriteCallbackDummy;
@@ -2439,11 +2477,9 @@ static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->data[1]++;
-        if (sprite->data[1] & 1)
+        if (++sprite->data[1] & 1)
         {
-            sprite->data[2]++;
-            if (sprite->data[2] & 1)
+            if (++sprite->data[2] & 1)
                 sprite->x2++;
             else
                 sprite->x2--;

@@ -9,6 +9,7 @@
 #include "intro.h"
 #include "load_save.h"
 #include "new_game.h"
+#include "random.h"
 #include "save.h"
 #include "main_menu.h"
 #include "clear_save_data_screen.h"
@@ -662,7 +663,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
     case 4:
         HelpSystem_Disable();
         DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
-        SetMainCallback2(CB2_CopyrightScreen);
+        SetMainCallback2(CB2_InitCopyrightScreenAfterTitleScreen);
         break;
     }
 }
@@ -1121,7 +1122,7 @@ static u16 TitleScreen_rand(u8 taskId, u8 field)
     u32 rngval;
 
     rngval = GetWordTaskArg(taskId, field);
-    rngval = rngval * 1103515245 + 24691;
+    rngval = ISO_RANDOMIZE1(rngval);
     SetWordTaskArg(taskId, field, rngval);
     return rngval >> 16;
 }

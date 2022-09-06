@@ -141,7 +141,7 @@ static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
 static const struct OamData sOamData_EggHatch =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -221,7 +221,7 @@ static const struct SpriteTemplate sSpriteTemplate_EggHatch =
 static const struct OamData sOamData_EggShard =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,

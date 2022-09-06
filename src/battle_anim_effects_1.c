@@ -3861,8 +3861,8 @@ static void AnimAirCutterSlice(struct Sprite* sprite)
         b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
         if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
         {
-            a = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), 0) + a) / 2;
-            b = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), 1) + b) / 2;
+            a = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X) + a) / 2;
+            b = (GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y) + b) / 2;
         }
         break;
     case 0:

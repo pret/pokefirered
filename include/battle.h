@@ -29,11 +29,6 @@
    (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)           \
  && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
 
-#define TRAINER_OPPONENT_3FE        0x3FE
-#define TRAINER_UNION_ROOM          0xC00
-#define TRAINER_LINK_OPPONENT       0x800
-#define SECRET_BASE_OPPONENT        0x400
-
 // Battle Actions
 // These determine what each battler will do in a turn
 #define B_ACTION_USE_MOVE                  0
@@ -521,16 +516,6 @@ struct BattleScripting
     u8 field_23;
 };
 
-enum
-{
-    BACK_PIC_RED,
-    BACK_PIC_LEAF,
-    BACK_PIC_RS_BRENDAN,
-    BACK_PIC_RS_MAY,
-    BACK_PIC_POKEDUDE,
-    BACK_PIC_OLDMAN
-};
-
 struct BattleSpriteInfo
 {
     /*0x0*/ u16 invisible : 1; // 0x1
@@ -685,8 +670,8 @@ extern u8 *gBattleAnimBgTileBuffer;
 extern u8 *gBattleAnimBgTilemapBuffer;
 extern void (*gBattleMainFunc)(void);
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u32 gUnknown_2022B54;
-extern u8 gUnknown_2023DDC;
+extern u32 gUnusedFirstBattleVar1;
+extern u8 gUnusedFirstBattleVar2;
 extern u8 gBattlerAttacker;
 extern u8 gEffectBattler;
 extern u8 gMultiHitCounter;

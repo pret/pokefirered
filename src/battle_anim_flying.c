@@ -537,7 +537,7 @@ void DestroyAnimSpriteAfterTimer(struct Sprite *sprite)
         if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
         {
             FreeOamMatrix(sprite->oam.matrixNum);
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
         }
         DestroySprite(sprite);
         --gAnimVisualTaskCount;
@@ -884,8 +884,8 @@ static void AnimFallingFeather_Step(struct Sprite *sprite)
 static void AnimUnusedBubbleThrow(struct Sprite *sprite)
 {
     sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
 }
 
@@ -1032,8 +1032,8 @@ void AnimTask_DrillPeckHitSplats(u8 taskId)
         gBattleAnimArgs[2] = 1;
         gBattleAnimArgs[3] = 3;
         CreateSpriteAndAnimate(&gFlashingHitSplatSpriteTemplate,
-                               GetBattlerSpriteCoord(gBattleAnimTarget, 2),
-                               GetBattlerSpriteCoord(gBattleAnimTarget, 3),
+                               GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
+                               GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
                                3);
     }
     gTasks[taskId].data[0] += 8;

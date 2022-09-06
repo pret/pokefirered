@@ -1002,9 +1002,12 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
         SetMainCallback2(CB2_LinkError);
         DestroyTask(taskId);
     }
+
     if (gReceivedRemoteLinkPlayers)
         DestroyTask(taskId);
 }
+
+#undef tTimer
 
 static void Task_WaitExitToScript(u8 taskId)
 {

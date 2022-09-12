@@ -597,7 +597,7 @@ static const u8 sQuestLogSurfDismountActionIds[] = {
 static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-        && MapGridGetZCoordAt(x, y) == 3
+        && MapGridGetElevationAt(x, y) == 3
         && GetObjectEventIdByXYZ(x, y, 3) == OBJECT_EVENTS_COUNT)
     {
         QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[direction], 16);

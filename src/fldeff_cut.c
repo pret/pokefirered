@@ -145,7 +145,7 @@ bool8 SetUpFieldMove_Cut(void)
             for (j = 0; j < CUT_SIDE; j++)
             {
                 x = gPlayerFacingPosition.x - 1 + j;
-                if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.height)
                 {
                     if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
                     {
@@ -214,7 +214,7 @@ bool8 FldEff_CutGrass(void)
         for (j = 0; j < CUT_SIDE; j++)
         {
             x = gPlayerFacingPosition.x - 1 + j;
-            if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+            if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.height)
             {
                 if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
                 {

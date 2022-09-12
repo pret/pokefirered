@@ -312,7 +312,7 @@ static bool8 ItemUseCheckFunc_Rod(void)
     }
     else
     {
-        if (MetatileBehavior_IsSurfable(behavior) && !MapGridIsImpassableAt(x, y))
+        if (MetatileBehavior_IsSurfable(behavior) && MapGridGetCollisionAt(x, y) == 0)
             return TRUE;
         if (MetatileBehavior_IsBridge(behavior) == TRUE)
             return TRUE;

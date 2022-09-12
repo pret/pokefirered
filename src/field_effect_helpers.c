@@ -1041,7 +1041,7 @@ void SynchroniseSurfPosition(struct ObjectEvent *playerObject, struct Sprite *su
         for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = surfBlobSprite->data[6], y = surfBlobSprite->data[7])
         {
             MoveCoords(i, &x, &y);
-            if (MapGridGetZCoordAt(x, y) == 3)
+            if (MapGridGetElevationAt(x, y) == 3)
             {
                 surfBlobSprite->data[5]++;
                 break;

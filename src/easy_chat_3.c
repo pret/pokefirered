@@ -275,10 +275,10 @@ static const u8 gUnknown_843F8D8[] = _("{UNDERSCORE}");
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
 static const u8 *const sEasyChatKeyboardText[] = {
-    gUnknown_847A8D8,
-    gUnknown_847A8FA,
-    gUnknown_847A913,
-    gUnknown_847A934
+    gText_EasyChatKeyboard_ABCDEFothers,
+    gText_EasyChatKeyboard_GHIJKL,
+    gText_EasyChatKeyboard_MNOPQRS,
+    gText_EasyChatKeyboard_TUVWXYZ
 };
 
 static const struct SpriteSheet sEasyChatSpriteSheets[] = {

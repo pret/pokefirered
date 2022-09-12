@@ -597,7 +597,8 @@ bool8 PSA_UseTM_RunMachineSetWobble(void)
 // anim in with using Rare Candy, but they were scrapped
 // at a later stage of development
 
-UNUSED void PSA_CreateLevelUpVerticalSpritesTask(void)
+// Unused
+void PSA_CreateLevelUpVerticalSpritesTask(void)
 {
     CreateLevelUpVerticalSpritesTask(120, 56, 4, 4, 2, 0);
 }
@@ -607,20 +608,24 @@ bool8 PSA_LevelUpVerticalSpritesTaskIsRunning(void)
     return LevelUpVerticalSpritesTaskIsRunning();
 }
 
-UNUSED void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
+// Unused
+void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
 {
     DrawTextBorderOuter(1, 0x001, 0xE);
     DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_FULL);
 }
-UNUSED void PSA_DrawLevelUpWindowPg2(u16 *currStats)
+
+// Unused
+void PSA_DrawLevelUpWindowPg2(u16 *currStats)
 {
     DrawLevelUpWindowPg2(1, currStats, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(1, COPYWIN_GFX);
 }
 
-UNUSED bool8 PSA_IsCopyingLevelUpWindowToVram(void)
+// Unused
+bool8 PSA_IsCopyingLevelUpWindowToVram(void)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }

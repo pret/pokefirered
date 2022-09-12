@@ -309,7 +309,8 @@ static void HandleInputChooseAction(void)
     }
 }
 
-UNUSED static void UnusedEndBounceEffect(void)
+// Unused
+static void EndBounceEffect2(void)
 {
     EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
     EndBounceEffect(gActiveBattler, BOUNCE_MON);

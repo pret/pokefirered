@@ -776,7 +776,7 @@ static void DestroyCreditsWindow(void)
     }
 }
 
-static bool32 DoOverworldMapScrollScene(UNUSED u8 unused)
+static bool32 DoOverworldMapScrollScene(u8 whichMon)
 {
     switch (sCreditsMgr->subseqno)
     {

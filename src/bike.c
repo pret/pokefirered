@@ -100,7 +100,7 @@ static u8 BikeInputHandler_Normal(u8 *direction_p, u16 newKeys, u16 heldKeys)
     }
 }
 
-static u8 BikeInputHandler_Turning(u8 *direction_p, UNUSED u16 newKeys, UNUSED u16 heldKeys)
+static u8 BikeInputHandler_Turning(u8 *direction_p, u16 newKeys, u16 heldKeys)
 {
     *direction_p = gPlayerAvatar.newDirBackup;
     gPlayerAvatar.runningState = TURN_DIRECTION;
@@ -196,7 +196,7 @@ static void BikeTransition_MoveDirection(u8 direction)
     }
 }
 
-static void BikeTransition_Downhill(UNUSED u8 v)
+static void BikeTransition_Downhill(u8 v)
 {
     u8 collision = GetBikeCollision(DIR_SOUTH);
 

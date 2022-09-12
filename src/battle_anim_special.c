@@ -35,9 +35,9 @@
 #define TAG_HEALTHBOX_PALS_2      55050
 
 // RAM
-UNUSED u32 gMonShrinkDuration;
-UNUSED u16 gMonShrinkDelta;
-UNUSED u16 gMonShrinkDistance;
+u32 gMonShrinkDuration;
+u16 gMonShrinkDelta;
+u16 gMonShrinkDistance;
 
 // Function Declarations
 static void AnimTask_UnusedLevelUpHealthBox_Step(u8);
@@ -409,7 +409,9 @@ const struct SpriteTemplate gSafariRockTemplate =
 };
 
 // Functions
-UNUSED void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
+
+// Unused
+void AnimTask_LevelUpHealthBox(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     u8 healthBoxSpriteId;
@@ -2205,7 +2207,7 @@ static void SpriteCB_ShinySparkles_2(struct Sprite *sprite)
 
 void AnimTask_LoadBaitGfx(u8 taskId)
 {
-    UNUSED u8 paletteIndex;
+    u8 paletteIndex;
 
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);

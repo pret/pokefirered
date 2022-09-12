@@ -172,7 +172,7 @@ ALIGNED(4) static const u8 sText_HiDoSomethingFemale[] = _("Hello!\nWould you li
 ALIGNED(4) static const u8 sText_HiDoSomethingAgainMale[] = _("{STR_VAR_1}: Hiya, we meet again!\nWhat are you up for this time?");
 ALIGNED(4) static const u8 sText_HiDoSomethingAgainFemale[] = _("{STR_VAR_1}: Oh! {PLAYER}, hello!\nWould you like to do something?");
 
-const u8 *const gTexts_UR_HiDoSomething[][2] = {
+const u8 *const gTexts_UR_HiDoSomething[][GENDER_COUNT] = {
     {
         sText_HiDoSomethingMale,
         sText_HiDoSomethingFemale
@@ -188,11 +188,14 @@ ALIGNED(4) static const u8 sText_DoSomethingAgainMale[] = _("{STR_VAR_1}: What w
 ALIGNED(4) static const u8 sText_DoSomethingAgainFemale[] = _("{STR_VAR_1}‘また なにかする？");
 
 // Unused
-static const u8 *const sDoSomethingTexts[] = {
-    sText_DoSomethingMale,
-    sText_DoSomethingFemale,
-    sText_DoSomethingAgainMale,
-    sText_DoSomethingAgainMale // was probably supposed to be sText_DoSomethingAgainFemale
+static const u8 *const sDoSomethingTexts[][GENDER_COUNT] = {
+    {
+        sText_DoSomethingMale,
+        sText_DoSomethingFemale
+    }, {
+        sText_DoSomethingAgainMale,
+        sText_DoSomethingAgainMale // was probably supposed to be sText_DoSomethingAgainFemale
+    }
 };
 
 ALIGNED(4) static const u8 sText_SomebodyHasContactedYou[] = _("Somebody has contacted you.{PAUSE 60}");
@@ -236,7 +239,7 @@ ALIGNED(4) static const u8 sText_PlayerJoinChatMale[] = _("{STR_VAR_1}: Hey, {PL
 ALIGNED(4) static const u8 sText_JoinChatFemale[] = _("Oh, hi! We're having a chat now.\nWould you like to join us?");
 ALIGNED(4) static const u8 sText_PlayerJoinChatFemale[] = _("{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?");
 
-const u8 *const gTexts_UR_JoinChat[GENDER_COUNT][2] = {
+const u8 *const gTexts_UR_JoinChat[][GENDER_COUNT] = {
     {
         sText_JoinChatMale,
         sText_JoinChatFemale

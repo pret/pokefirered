@@ -932,7 +932,7 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] = {
 };
 
 static const u8 *const sBCRankingHeaders[] = {
-    [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes,
+    [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes2,
     [RESULTS_PAGE_RANDOM]   = gText_XDotY,
     [RESULTS_PAGE_CRUSHING] = gText_StrVar1Berry,
 

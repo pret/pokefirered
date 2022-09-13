@@ -685,7 +685,7 @@ static void SetUpListMenuTemplate(void)
 static void GetBerryNameAndIndexForMenu(u8 * dest, u16 itemId)
 {
     StringCopy(gStringVar4, gText_FontSize0);
-    StringAppend(gStringVar4, gOtherText_UnkF9_08_Clear_01);
+    StringAppend(gStringVar4, gText_NumberClear01);
     ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringAppend(gStringVar4, gStringVar1);
     CopyItemName(itemId, gStringVar1);

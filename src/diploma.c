@@ -256,19 +256,19 @@ static void DiplomaPrintText(void)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
     if (HasAllMons())
     {
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_841B68F);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gText_Diploma_National);
     }
     else
     {
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_841B698);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gText_Diploma_Kanto);
     }
     FillWindowPixelBuffer(0, 0);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gUnknown_841B60E);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gText_Diploma_Player);
     width = GetStringWidth(FONT_2, arr, -1);
     AddTextPrinterParameterized3(0, FONT_2, 120 - (width / 2), 4, gUnknown_8415A04, -1, arr);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gUnknown_841B619);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gText_Diploma_ThisDocument);
     width = GetStringWidth(FONT_2, arr, -1);
     AddTextPrinterParameterized3(0, FONT_2, 120 - (width / 2), 0x1E, gUnknown_8415A04, -1, arr);
-    AddTextPrinterParameterized3(0, FONT_2, 120, 105, gUnknown_8415A04, 0, gUnknown_841B684);
+    AddTextPrinterParameterized3(0, FONT_2, 120, 105, gUnknown_8415A04, 0, gText_Diploma_GameFreak);
     PutWindowTilemap(0);
 }

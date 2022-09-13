@@ -113,15 +113,15 @@ static void CloseSaveStatsWindow(void);
 static void CloseStartMenu(void);
 
 static const struct MenuAction sStartMenuActionTable[] = {
-    { gStartMenuText_Pokedex, {.u8_void = StartMenuPokedexCallback} },
-    { gStartMenuText_Pokemon, {.u8_void = StartMenuPokemonCallback} },
-    { gStartMenuText_Bag, {.u8_void = StartMenuBagCallback} },
-    { gStartMenuText_Player, {.u8_void = StartMenuPlayerCallback} },
-    { gStartMenuText_Save, {.u8_void = StartMenuSaveCallback} },
-    { gStartMenuText_Option, {.u8_void = StartMenuOptionCallback} },
-    { gStartMenuText_Exit, {.u8_void = StartMenuExitCallback} },
-    { gStartMenuText_Retire, {.u8_void = StartMenuSafariZoneRetireCallback} },
-    { gStartMenuText_Player, {.u8_void = StartMenuLinkPlayerCallback} }
+    { gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback} },
+    { gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback} },
+    { gText_MenuBag, {.u8_void = StartMenuBagCallback} },
+    { gText_MenuPlayer, {.u8_void = StartMenuPlayerCallback} },
+    { gText_MenuSave, {.u8_void = StartMenuSaveCallback} },
+    { gText_MenuOption, {.u8_void = StartMenuOptionCallback} },
+    { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
+    { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
+    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} }
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -252,7 +252,7 @@ static void DrawSafariZoneStatsWindow(void)
     ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
+    StringExpandPlaceholders(gStringVar4, gText_MenuSafariStats);
     AddTextPrinterParameterized(sSafariZoneStatsWindowId, FONT_2, gStringVar4, 4, 3, 0xFF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }

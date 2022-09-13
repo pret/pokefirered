@@ -251,7 +251,7 @@ static void Task_SetWin0BldRegsAndCheckSaveFile(u8 taskId)
         case SAVE_STATUS_ERROR:
             SetStdFrame0OnBg(0);
             gTasks[taskId].tMenuType = MAIN_MENU_CONTINUE;
-            PrintSaveErrorStatus(taskId, gText_SaveFileCorruptedPrevWillBeLoaded);
+            PrintSaveErrorStatus(taskId, gText_SaveFileCorrupted);
             if (IsMysteryGiftEnabled() == TRUE)
             {
                 gTasks[taskId].tMenuType = MAIN_MENU_MYSTERYGIFT;
@@ -497,9 +497,9 @@ static void Task_MysteryGiftError(u8 taskId)
     case 0:
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
         if (gTasks[taskId].tMGErrorType == 1)
-            PrintMessageOnWindow4(gText_WirelessAdapterIsNotConnected);
+            PrintMessageOnWindow4(gText_WirelessNotConnected);
         else
-            PrintMessageOnWindow4(gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached);
+            PrintMessageOnWindow4(gText_MysteryGiftCantUse);
         gTasks[taskId].tMGErrorMsgState++;
         break;
     case 1:

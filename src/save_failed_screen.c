@@ -59,7 +59,7 @@ bool32 RunSaveFailedScreen(void)
         break;
     case 3:
         ClearMapBuffer();
-        PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_CheckingBackupMemory);
+        PrintTextOnSaveFailedScreen(gText_SaveFailedCheckingBackup);
         UpdateMapBufferWithText();
         sSaveFailedScreenState = 4;
         break;
@@ -75,12 +75,12 @@ bool32 RunSaveFailedScreen(void)
         if (TryWipeDamagedSectors() == TRUE)
         {
             gSaveAttemptStatus = SAVE_STATUS_OK;
-            PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_SaveCompleted);
+            PrintTextOnSaveFailedScreen(gText_SaveCompletePressA);
         }
         else
         {
             gSaveAttemptStatus = SAVE_STATUS_ERROR;
-            PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_BackupMemoryDamaged);
+            PrintTextOnSaveFailedScreen(gText_BackupMemoryDamaged);
         }
         sSaveFailedScreenState = 6;
         break;

@@ -2295,6 +2295,6 @@ static void CreateFooterWindow(void)
     template.baseBlock = 0x030;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    EC_AddTextPrinterParameterized(windowId, FONT_1, gUnknown_841EE2B, 0, 0, 0, NULL);
+    EC_AddTextPrinterParameterized(windowId, FONT_1, gText_DelAllCancelOk, 0, 0, 0, NULL);
     PutWindowTilemap(windowId);
 }

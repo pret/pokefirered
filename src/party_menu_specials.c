@@ -17,7 +17,7 @@ void ChoosePartyMon(void)
 
     LockPlayerFieldControls();
     taskId = CreateTask(sub_80BF97C, 10);
-    gTasks[taskId].data[0] = PARTY_MENU_TYPE_CHOOSE_MON;
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_CHOOSE_SINGLE_MON;
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 

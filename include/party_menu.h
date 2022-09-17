@@ -11,13 +11,12 @@ struct PartyMenu
     TaskFunc task;
     u8 menuType:4;
     u8 layout:2;
-    u8 unk_8_6:2;
+    u8 chooseMonsBattleType:2;
     s8 slotId;
     s8 slotId2;
     u8 action;
     u16 bagItem;
-    s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
-    s16 learnMoveState;
+    s16 data[2];
 };
 
 extern struct PartyMenu gPartyMenu;
@@ -53,7 +52,7 @@ void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData);
 void CB2_ShowPartyMenuForItemUse(void);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func);
 void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func);
-void ItemUseCB_PPRecovery(u8 taskId, TaskFunc func);
+void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func);
 void ItemUseCB_PPUp(u8 taskId, TaskFunc func);
 u16 ItemIdToBattleMoveId(u16 item);
 bool8 IsMoveHm(u16 move);
@@ -66,7 +65,7 @@ u8 GetItemEffectType(u16 item);
 void CB2_PartyMenuFromStartMenu(void);
 void CB2_ChooseMonToGiveItem(void);
 void ChooseMonToGiveMailFromMailbox(void);
-void InitChooseHalfPartyForBattle(u8 a1);
+void InitChooseMonsForBattle(u8 chooseMonsBattleType);
 void ClearSelectedPartyOrder(void);
 void ChooseMonForTradingBoard(u8 menuType, MainCallback callback);
 void ChooseMonForMoveTutor(void);

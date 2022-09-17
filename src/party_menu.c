@@ -4471,8 +4471,11 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal;
+    bool8 cannotHeal;
 
-    if (NotUsingHPEVItemOnShedinja(mon, item))
+    if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
+        cannotHeal = TRUE;
+    else
     {
         canHeal = IsHPRecoveryItem(item);
         if (canHeal == TRUE)
@@ -4482,49 +4485,47 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
                 canHeal = FALSE;
         }
 
-        if (ExecuteTableBasedItemEffect_(gPartyMenu.slotId, item, 0))
-        {
-        WONT_HAVE_EFFECT:
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = func;
-            return;
-        }
+        cannotHeal = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, item, 0);
     }
-    else
-        goto WONT_HAVE_EFFECT; // even loop wrap won't work
 
-    gPartyMenuUseExitCallback = TRUE;
-    if (!IsItemFlute(item))
+    if (cannotHeal != FALSE)
     {
-        PlaySE(SE_USE_ITEM);
-        if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM)
-            RemoveBagItem(item, 1);
-    }
-    else
-        PlaySE(SE_GLASS_FLUTE);
-
-    SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
-    if (gSprites[sPartyMenuBoxes[gPartyMenu.slotId].statusSpriteId].invisible)
-        DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], DRAW_MENU_BOX_AND_TEXT);
-
-    if (canHeal == TRUE)
-    {
-        if (hp == 0)
-            AnimatePartySlot(gPartyMenu.slotId, 1);
-        PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
-        ResetHPTaskData(taskId, 0, hp);
-        return;
-    }
-    else
-    {
-        GetMonNickname(mon, gStringVar1);
-        GetMedicineItemEffectMessage(item);
-        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = func;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        if (!IsItemFlute(item))
+        {
+            PlaySE(SE_USE_ITEM);
+            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM)
+                RemoveBagItem(item, 1);
+        }
+        else
+            PlaySE(SE_GLASS_FLUTE);
+
+        SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
+        if (gSprites[sPartyMenuBoxes[gPartyMenu.slotId].statusSpriteId].invisible)
+            DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
+        if (canHeal == TRUE)
+        {
+            if (hp == 0)
+                AnimatePartySlot(gPartyMenu.slotId, 1);
+            PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
+            ResetHPTaskData(taskId, 0, hp);
+        }
+        else
+        {
+            GetMonNickname(mon, gStringVar1);
+            GetMedicineItemEffectMessage(item);
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = func;
+        }
     }
 }
 

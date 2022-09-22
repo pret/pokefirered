@@ -83,8 +83,8 @@
 #define MENU_DIR_RIGHT    2
 #define MENU_DIR_LEFT    -2
 
-#define SLOT_CONFIRM PARTY_SIZE
-#define SLOT_CANCEL  PARTY_SIZE + 1
+#define SLOT_CONFIRM (PARTY_SIZE)
+#define SLOT_CANCEL  (PARTY_SIZE + 1)
 
 enum
 {
@@ -1207,6 +1207,8 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
                 TryEnterMonForMinigame(taskId, (u8)*slotPtr);
             break;
         default:
+        case PARTY_ACTION_ABILITY_PREVENTS:
+        case PARTY_ACTION_SWITCHING:
             PlaySE(SE_SELECT);
             Task_TryCreateSelectionWindow(taskId);
             break;

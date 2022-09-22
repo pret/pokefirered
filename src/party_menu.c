@@ -1651,7 +1651,7 @@ static void BufferBagFullCantTakeItemMessage(u16 itemId)
     switch (ItemId_GetPocket(itemId))
     {
     default:
-        string = gStartMenuText_Bag;
+        string = gText_MenuBag;
         break;
     case POCKET_TM_CASE:
         string = ItemId_GetName(ITEM_TM_CASE);
@@ -2135,7 +2135,7 @@ static void CreateCancelConfirmWindows(bool8 chooseMultiple)
         {
             confirmWindowId = AddWindow(&sConfirmButtonWindowTemplate);
             FillWindowPixelBuffer(confirmWindowId, PIXEL_FILL(0));
-            AddTextPrinterParameterized4(confirmWindowId, FONT_0, (48 - GetStringWidth(FONT_0, gMenuText_Confirm, 0)) / 2u, 1, 0, 0, sFontColorTable[0], -1, gMenuText_Confirm);
+            AddTextPrinterParameterized4(confirmWindowId, FONT_0, (48 - GetStringWidth(FONT_0, gText_PartyMenu_OK, 0)) / 2u, 1, 0, 0, sFontColorTable[0], -1, gText_PartyMenu_OK);
             PutWindowTilemap(confirmWindowId);
             CopyWindowToVram(confirmWindowId, COPYWIN_GFX);
             cancelWindowId = AddWindow(&sMultiCancelButtonWindowTemplate);
@@ -4372,27 +4372,27 @@ static void GetMedicineItemEffectMessage(u16 item)
         StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
         break;
     case ITEM_EFFECT_HP_EV:
-        StringCopy(gStringVar2, gText_HP3);
+        StringCopy(gStringVar2, gText_ItemEffect_HP);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(gStringVar2, gText_Attack3);
+        StringCopy(gStringVar2, gText_ItemEffect_Attack);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(gStringVar2, gText_Defense3);
+        StringCopy(gStringVar2, gText_ItemEffect_Defense);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(gStringVar2, gText_Speed2);
+        StringCopy(gStringVar2, gText_ItemEffect_Speed);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(gStringVar2, gText_SpAtk3);
+        StringCopy(gStringVar2, gText_ItemEffect_SpAtk);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(gStringVar2, gText_SpDef3);
+        StringCopy(gStringVar2, gText_ItemEffect_SpDef);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_PP_UP:

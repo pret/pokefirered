@@ -434,25 +434,25 @@ static const u8 *const sTradeUITextPtrs[] = {
     gTradeText_ChooseAPokemon,
     gTradeText_Summary,
     gTradeText_Trade,
-    gTradeText_CancelTrade,
+    gText_CancelTrade,
     gTradeText_PressBButtonToExit
 };
 
 static const struct MenuAction sMenuAction_SummaryTrade[] = {
-    {gUnknown_841E10A, { .void_u8 = TradeMenuAction_Summary }},
-    {gUnknown_841E112, { .void_u8 = TradeMenuAction_Trade }}
+    {gText_TradeAction_Summary, { .void_u8 = TradeMenuAction_Summary }},
+    {gText_TradeAction_Trade, { .void_u8 = TradeMenuAction_Trade }}
 };
 
 static const u8 *const sTradeErrorOrStatusMessagePtrs[] = {
-    gUnknown_841E118, // Communication standby
-    gUnknown_841E145, // The trade has been canceled.
-    gUnknown_841E16B, // That's your only POKéMON for battle
-    gUnknown_8417094, // That's your only POKéMON for battle
-    gUnknown_841E199, // Waiting for your friend to finish
-    gUnknown_841E1C5, // Your friend wants to trade POKéMON
-    gText_PkmnCantBeTradedNow, // That POKéMON can't be traded now
-    gText_EggCantBeTradedNow, // An EGG can't be traded now
-    gText_OtherTrainersPkmnCantBeTraded  // The other TRAINER's POKéMON can't be traded now
+    gText_Trade_CommunicationStandby,
+    gText_TradeHasBeenCanceled,
+    gText_Trade_OnlyPkmnForBattle,
+    gText_OnlyPkmnForBattle, // Same as above but without color formatting
+    gText_WaitingForFriendToFinish,
+    gText_FriendWantsToTrade,
+    gText_PkmnCantBeTradedNow, 
+    gText_EggCantBeTradedNow,
+    gText_OtherTrainersPkmnCantBeTraded
 };
 
 static const u8 sTextColor_PartyMonNickname[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };

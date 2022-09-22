@@ -338,7 +338,7 @@ static void Task_ReturnToShopMenu(u8 taskId)
     if (IsWeatherNotFadingIn() != TRUE)
         return;
     
-    DisplayItemMessageOnField(taskId, GetMartFontId(), gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
+    DisplayItemMessageOnField(taskId, GetMartFontId(), gText_AnythingElseICanHelp, ShowShopMenuAfterExitingBuyOrSellMenu);
 }
 
 static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
@@ -629,7 +629,7 @@ static void LoadTmHmNameInMart(s32 item)
     if (item != INDEX_CANCEL)
     {
         ConvertIntToDecimalStringN(gStringVar1, item - ITEM_DEVON_SCOPE, 2, 2);
-        StringCopy(gStringVar4, gOtherText_UnkF9_08_Clear_01);
+        StringCopy(gStringVar4, gText_NumberClear01);
         StringAppend(gStringVar4, gStringVar1);
         BuyMenuPrint(6, FONT_0, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
         StringCopy(gStringVar4, gMoveNames[ItemIdToBattleMoveId(item)]);

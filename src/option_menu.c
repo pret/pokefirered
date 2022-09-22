@@ -524,7 +524,7 @@ static void CloseAndSaveOptionMenu(u8 taskId)
 static void PrintOptionMenuHeader(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_TEXT_OPTION, FONT_2, gText_MenuOption, 8, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_TEXT_OPTION, FONT_2, gText_Option, 8, 1, TEXT_SKIP_DRAW, NULL);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }

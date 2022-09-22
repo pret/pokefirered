@@ -48,7 +48,7 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             38, 36, 24,  8, // HP
             53, 36, 24,  8, // Max HP
             24, 35, 48,  3  // HP bar
-        }, 
+        },
         12, 34, 64, 16      // Description text (e.g. NO USE)
     },
     [PARTY_BOX_RIGHT_COLUMN] = 
@@ -71,6 +71,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 {
     [PARTY_LAYOUT_SINGLE] = 
     {
+        // pokemon coords, held item coords, status coords, pokeball coords
         { 16,  40,  20,  50,  56,  52,  16,  34},
         {104,  18, 108,  28, 144,  27, 102,  25},
         {104,  42, 108,  52, 144,  51, 102,  49},
@@ -537,7 +538,7 @@ static const struct WindowTemplate sWindowTemplate_FirstBattleOakVoiceover =
     .baseBlock = 0x1DF,
 };
 
-static const struct WindowTemplate gUnknown_845A178 =
+static const struct WindowTemplate sFieldMoveDescriptionWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 0,
@@ -572,32 +573,23 @@ static const u8 sMainSlotTileNums_Egg[] =
 
 static const u8 sOtherSlotsTileNums[] =
 {
-    43, 44, 44, 44, 44, 44, 44, 44, 44, 44,
-    44, 44, 44, 44, 44, 44, 44, 45, 49, 33,
-    33, 33, 33, 33, 33, 33, 33, 52, 53, 51,
-    51, 51, 51, 51, 51, 54, 55, 56, 56, 56,
-    56, 56, 56, 56, 56, 56, 56, 56, 56, 56,
-    56, 56, 56, 57,
+    43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45,
+    49, 33, 33, 33, 33, 33, 33, 33, 33, 52, 53, 51, 51, 51, 51, 51, 51, 54,
+    55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57,
 };
 
 static const u8 sOtherSlotsTileNums_Egg[] =
 {
-    43, 44, 44, 44, 44, 44, 44, 44, 44, 44,
-    44, 44, 44, 44, 44, 44, 44, 45, 49, 33,
-    33, 33, 33, 33, 33, 33, 33, 33, 33, 33,
-    33, 33, 33, 33, 33, 50, 55, 56, 56, 56,
-    56, 56, 56, 56, 56, 56, 56, 56, 56, 56,
-    56, 56, 56, 57,
+    43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45,
+    49, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 50,
+    55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57,
 };
 
 static const u8 sEmptySlotTileNums[] = 
 {
-    21, 22, 22, 22, 22, 22, 22, 22, 22, 22,
-    22, 22, 22, 22, 22, 22, 22, 23, 30,  0,
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-     0,  0,  0,  0,  0, 31, 37, 38, 38, 38,
-    38, 38, 38, 38, 38, 38, 38, 38, 38, 38,
-    38, 38, 38, 39,
+    21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23,
+    30,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 31,
+    37, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 39,
 };
 
 static const u8 sGenderPalOffsets[] = {11, 12};
@@ -687,20 +679,20 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_LEARNED]    = gText_Learned,
 };
 
-static const u8 *const sHMDescriptionTable[] =
+static const u8 *const sFieldMoveDescriptionTable[] =
 {
-    gText_LightUpDarkness,
-    gText_CutATreeOrGrass,
-    gText_FlyToAKnownTown,
-    gText_MoveHeavyBoulders,
-    gText_TravelOnWater,
-    gText_ShatterACrackedRock,
-    gText_ClimbAWaterfall,
-    gText_ReturnToAHealingSpot,
-    gText_EscapeFromHere,
-    gText_ShareHp,
-    gText_ShareHp,
-    gText_LureWildPokemon,
+    [FIELD_MOVE_FLASH]       = gText_LightUpDarkness,
+    [FIELD_MOVE_CUT]         = gText_CutATreeOrGrass,
+    [FIELD_MOVE_FLY]         = gText_FlyToAKnownTown,
+    [FIELD_MOVE_STRENGTH]    = gText_MoveHeavyBoulders,
+    [FIELD_MOVE_SURF]        = gText_TravelOnWater,
+    [FIELD_MOVE_ROCK_SMASH]  = gText_ShatterACrackedRock,
+    [FIELD_MOVE_WATERFALL]   = gText_ClimbAWaterfall,
+    [FIELD_MOVE_TELEPORT]    = gText_ReturnToAHealingSpot,
+    [FIELD_MOVE_DIG]         = gText_EscapeFromHere,
+    [FIELD_MOVE_MILK_DRINK]  = gText_ShareHp,
+    [FIELD_MOVE_SOFT_BOILED] = gText_ShareHp,
+    [FIELD_MOVE_SWEET_SCENT] = gText_LureWildPokemon,
 };
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
@@ -1073,25 +1065,25 @@ static const u16 sTMHMMoves_Duplicate[] =
 
 enum
 {
-    MENU_SUMMARY,
-    MENU_SWITCH,
-    MENU_CANCEL1,
-    MENU_ITEM,
-    MENU_GIVE,
-    MENU_TAKE_ITEM,
-    MENU_MAIL,
-    MENU_TAKE_MAIL,
-    MENU_READ,
-    MENU_CANCEL2,
-    MENU_SHIFT,
-    MENU_SEND_OUT,
-    MENU_ENTER,
-    MENU_NO_ENTRY,
-    MENU_STORE,
-    MENU_REGISTER,
-    MENU_TRADE1,
-    MENU_TRADE2,
-    MENU_FIELD_MOVES,
+    CURSOR_OPTION_SUMMARY,
+    CURSOR_OPTION_SWITCH,
+    CURSOR_OPTION_CANCEL1,
+    CURSOR_OPTION_ITEM,
+    CURSOR_OPTION_GIVE,
+    CURSOR_OPTION_TAKE_ITEM,
+    CURSOR_OPTION_MAIL,
+    CURSOR_OPTION_TAKE_MAIL,
+    CURSOR_OPTION_READ,
+    CURSOR_OPTION_CANCEL2,
+    CURSOR_OPTION_SHIFT,
+    CURSOR_OPTION_SEND_OUT,
+    CURSOR_OPTION_ENTER,
+    CURSOR_OPTION_NO_ENTRY,
+    CURSOR_OPTION_STORE,
+    CURSOR_OPTION_REGISTER,
+    CURSOR_OPTION_TRADE1,
+    CURSOR_OPTION_TRADE2,
+    CURSOR_OPTION_FIELD_MOVES,
 };
 
 static struct
@@ -1100,50 +1092,50 @@ static struct
     TaskFunc func;
 } const sCursorOptions[] =
 {
-    [MENU_SUMMARY] = {gText_Summary5, CursorCB_Summary},
-    [MENU_SWITCH] = {gText_Switch2, CursorCB_Switch},
-    [MENU_CANCEL1] = {gFameCheckerText_Cancel, CursorCB_Cancel1},
-    [MENU_ITEM] = {gText_Item, CursorCB_Item},
-    [MENU_GIVE] = {gOtherText_Give, CursorCB_Give},
-    [MENU_TAKE_ITEM] = {gText_Take, CursorCB_TakeItem},
-    [MENU_MAIL] = {gText_Mail, CursorCB_Mail},
-    [MENU_TAKE_MAIL] = {gText_Take2, CursorCB_TakeMail},
-    [MENU_READ] = {gText_Read2, CursorCB_Read},
-    [MENU_CANCEL2] = {gFameCheckerText_Cancel, CursorCB_Cancel2},
-    [MENU_SHIFT] = {gText_Shift, CursorCB_SendMon},
-    [MENU_SEND_OUT] = {gText_SendOut, CursorCB_SendMon},
-    [MENU_ENTER] = {gText_Enter, CursorCB_Enter},
-    [MENU_NO_ENTRY] = {gText_NoEntry, CursorCB_NoEntry},
-    [MENU_STORE] = {gText_Store, CursorCB_Store},
-    [MENU_REGISTER] = {gText_Register, CursorCB_Register},
-    [MENU_TRADE1] = {gText_Trade4, CursorCB_Trade1},
-    [MENU_TRADE2] = {gText_Trade4, CursorCB_Trade2},
-    [MENU_FIELD_MOVES + FIELD_MOVE_FLASH] = {gMoveNames[MOVE_FLASH], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_CUT] = {gMoveNames[MOVE_CUT], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_FLY] = {gMoveNames[MOVE_FLY], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_STRENGTH] = {gMoveNames[MOVE_STRENGTH], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SURF] = {gMoveNames[MOVE_SURF], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_ROCK_SMASH] = {gMoveNames[MOVE_ROCK_SMASH], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_WATERFALL] = {gMoveNames[MOVE_WATERFALL], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_TELEPORT] = {gMoveNames[MOVE_TELEPORT], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_DIG] = {gMoveNames[MOVE_DIG], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_MILK_DRINK] = {gMoveNames[MOVE_MILK_DRINK], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gMoveNames[MOVE_SOFT_BOILED], CursorCB_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCB_FieldMove},
+    [CURSOR_OPTION_SUMMARY]                              = {gText_Summary5,               CursorCB_Summary  },
+    [CURSOR_OPTION_SWITCH]                               = {gText_Switch2,                CursorCB_Switch   },
+    [CURSOR_OPTION_CANCEL1]                              = {gFameCheckerText_Cancel,      CursorCB_Cancel1  },
+    [CURSOR_OPTION_ITEM]                                 = {gText_Item,                   CursorCB_Item     },
+    [CURSOR_OPTION_GIVE]                                 = {gOtherText_Give,              CursorCB_Give     },
+    [CURSOR_OPTION_TAKE_ITEM]                            = {gText_Take,                   CursorCB_TakeItem },
+    [CURSOR_OPTION_MAIL]                                 = {gText_Mail,                   CursorCB_Mail     },
+    [CURSOR_OPTION_TAKE_MAIL]                            = {gText_Take2,                  CursorCB_TakeMail },
+    [CURSOR_OPTION_READ]                                 = {gText_Read2,                  CursorCB_Read     },
+    [CURSOR_OPTION_CANCEL2]                              = {gFameCheckerText_Cancel,      CursorCB_Cancel2  },
+    [CURSOR_OPTION_SHIFT]                                = {gText_Shift,                  CursorCB_SendMon  },
+    [CURSOR_OPTION_SEND_OUT]                             = {gText_SendOut,                CursorCB_SendMon  },
+    [CURSOR_OPTION_ENTER]                                = {gText_Enter,                  CursorCB_Enter    },
+    [CURSOR_OPTION_NO_ENTRY]                             = {gText_NoEntry,                CursorCB_NoEntry  },
+    [CURSOR_OPTION_STORE]                                = {gText_Store,                  CursorCB_Store    },
+    [CURSOR_OPTION_REGISTER]                             = {gText_Register,               CursorCB_Register },
+    [CURSOR_OPTION_TRADE1]                               = {gText_Trade4,                 CursorCB_Trade1   },
+    [CURSOR_OPTION_TRADE2]                               = {gText_Trade4,                 CursorCB_Trade2   },
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_FLASH]       = {gMoveNames[MOVE_FLASH],       CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_CUT]         = {gMoveNames[MOVE_CUT],         CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_FLY]         = {gMoveNames[MOVE_FLY],         CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_STRENGTH]    = {gMoveNames[MOVE_STRENGTH],    CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SURF]        = {gMoveNames[MOVE_SURF],        CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_ROCK_SMASH]  = {gMoveNames[MOVE_ROCK_SMASH],  CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_WATERFALL]   = {gMoveNames[MOVE_WATERFALL],   CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_TELEPORT]    = {gMoveNames[MOVE_TELEPORT],    CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_DIG]         = {gMoveNames[MOVE_DIG],         CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_MILK_DRINK]  = {gMoveNames[MOVE_MILK_DRINK],  CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gMoveNames[MOVE_SOFT_BOILED], CursorCB_FieldMove},
+    [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCB_FieldMove},
 };
 
-static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
-static const u8 sPartyMenuAction_ShiftSummaryCancel[] = {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_SendOutSummaryCancel[] = {MENU_SEND_OUT, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_SummaryCancel[] = {MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_CANCEL2};
-static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
-static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummarySwitchCancel[]   = {CURSOR_OPTION_SUMMARY,  CURSOR_OPTION_SWITCH,    CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_ShiftSummaryCancel[]    = {CURSOR_OPTION_SHIFT,    CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_SendOutSummaryCancel[]  = {CURSOR_OPTION_SEND_OUT, CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_SummaryCancel[]         = {CURSOR_OPTION_SUMMARY,  CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_EnterSummaryCancel[]    = {CURSOR_OPTION_ENTER,    CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_NoEntrySummaryCancel[]  = {CURSOR_OPTION_NO_ENTRY, CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_StoreSummaryCancel[]    = {CURSOR_OPTION_STORE,    CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_GiveTakeItemCancel[]    = {CURSOR_OPTION_GIVE,     CURSOR_OPTION_TAKE_ITEM, CURSOR_OPTION_CANCEL2};
+static const u8 sPartyMenuAction_ReadTakeMailCancel[]    = {CURSOR_OPTION_READ,     CURSOR_OPTION_TAKE_MAIL, CURSOR_OPTION_CANCEL2};
+static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {CURSOR_OPTION_REGISTER, CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel1[]   = {CURSOR_OPTION_TRADE1,   CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel2[]   = {CURSOR_OPTION_TRADE2,   CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
 
 // IDs for the action lists that appear when a party mon is selected
 enum

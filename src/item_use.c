@@ -413,7 +413,7 @@ void FieldUseFunc_Medicine(u8 taskId)
 
 void FieldUseFunc_Ether(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_PPRecovery;
+    gItemUseCB = ItemUseCB_TryRestorePP;
     sub_80A16D0(taskId);
 }
 
@@ -816,7 +816,7 @@ static void sub_80A1FD8(u8 taskId)
 
 void BattleUseFunc_Ether(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_PPRecovery;
+    gItemUseCB = ItemUseCB_TryRestorePP;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 

@@ -12,40 +12,54 @@
 
 struct Diploma
 {
-    u8 state;
-    u8 gfxStep;
-    u8 callbackStep;
+    u8 mainState;
+    u8 gfxState;
+    u8 initState;
     u16 tilemapBuffer[0x800];
 };
 
-static EWRAM_DATA struct Diploma *gDiploma = NULL;
+enum {
+    WIN_TEXT,
+    WIN_COUNT
+};
 
-static void DiplomaBgInit(void);
+enum {
+    BG_TEXT,
+    BG_DIPLOMA,
+};
+
+static EWRAM_DATA struct Diploma *sDiploma = NULL;
+
+static void DiplomaReset(void);
 static void DiplomaPrintText(void);
-static u8 DiplomaLoadGfx(void);
-static void DiplomaVblankHandler(void);
+static bool8 DiplomaLoadGfx(void);
+static void DiplomaInitScreen(void);
 static void CB2_Diploma(void);
-static void Task_WaitForExit(u8);
+static void Task_HandleDiplomaInput(u8);
 static void Task_DiplomaInit(u8);
-static void Task_DiplomaReturnToOverworld(u8);
+static void Task_DiplomaExit(u8);
 
 static const u32 sDiplomaGfx[] = INCBIN_U32("graphics/diploma/diploma.4bpp.lz");
 static const u32 sDiplomaTilemap[] = INCBIN_U32("graphics/diploma/diploma.bin.lz");
 static const u16 sDiplomaPal[] = INCBIN_U16("graphics/diploma/diploma.gbapal");
 
-static const u8 gUnknown_8415994[] = _("{HIGHLIGHT TRANSPARENT}プレイヤー");
-static const u8 gUnknown_841599D[] = _("{HIGHLIGHT TRANSPARENT}さま");
-static const u8 gUnknown_84159A3[] = _("{HIGHLIGHT TRANSPARENT}ホウエン");
-static const u8 gUnknown_84159AB[] = _("{HIGHLIGHT TRANSPARENT}ぜんこく");
-static const u8 gUnknown_84159B3[] = _("{HIGHLIGHT TRANSPARENT}　　　　　ポケモンずかんを\nみごと　かんせい　させた\nいだいなこうせきを　たたえ\nここに　しょうめい　します");
-static const u8 gUnknown_84159ED[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}ゲームフリーク");
-static const u8 gUnknown_84159FB[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}");
+// Leftover text from RSE (some of which is also unused there)
+static const u8 sText_Player[] = _("{HIGHLIGHT TRANSPARENT}プレイヤー");
+static const u8 sText_Sama[] = _("{HIGHLIGHT TRANSPARENT}さま");
+static const u8 sText_Hoenn[] = _("{HIGHLIGHT TRANSPARENT}ホウエン");
+static const u8 sText_National[] = _("{HIGHLIGHT TRANSPARENT}ぜんこく");
+static const u8 sText_CertifiesPokedexComplete[] = _("{HIGHLIGHT TRANSPARENT}　　　　　ポケモンずかんを\n"
+                                                     "みごと　かんせい　させた\n"
+                                                     "いだいなこうせきを　たたえ\n"
+                                                     "ここに　しょうめい　します");
+static const u8 sText_GameFreak[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}ゲームフリーク");
+static const u8 sText_Empty[] = _("{COLOR DARK_GRAY}{HIGHLIGHT TRANSPARENT}");
 
-static const ALIGNED(4) u8 gUnknown_8415A04[3] = {0, 2, 3};
+static const ALIGNED(4) u8 sTextColors[3] = {0, 2, 3};
 
-static const struct BgTemplate gUnknown_8415A08[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
-        .bg = 0,
+        .bg = BG_TEXT,
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .screenSize = 0,
@@ -53,7 +67,7 @@ static const struct BgTemplate gUnknown_8415A08[] = {
         .priority = 0,
         .baseTile = 1,
     }, {
-        .bg = 1,
+        .bg = BG_DIPLOMA,
         .charBaseIndex = 1,
         .mapBaseIndex = 29,
         .screenSize = 1,
@@ -63,19 +77,20 @@ static const struct BgTemplate gUnknown_8415A08[] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_8415A10[] = {
-    {
-        .bg = 0,
+static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] = {
+    [WIN_TEXT] = {
+        .bg = BG_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 2,
         .width = 29,
         .height = 16,
         .paletteNum = 15,
         .baseBlock = 0x000
-    }, DUMMY_WIN_TEMPLATE
+    },
+    [WIN_COUNT] = DUMMY_WIN_TEMPLATE
 };
 
-static void VCBC_DiplomaOam(void)
+static void VBlankCB_Diploma(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -84,11 +99,11 @@ static void VCBC_DiplomaOam(void)
 
 void CB2_ShowDiploma(void)
 {
-    gDiploma = AllocZeroed(sizeof(*gDiploma));
-    gDiploma->state = 0;
-    gDiploma->gfxStep = 0;
-    gDiploma->callbackStep = 0;
-    DiplomaBgInit();
+    sDiploma = AllocZeroed(sizeof(*sDiploma));
+    sDiploma->mainState = 0;
+    sDiploma->gfxState = 0;
+    sDiploma->initState = 0;
+    DiplomaReset();
     CreateTask(Task_DiplomaInit, 0);
     SetMainCallback2(CB2_Diploma);
 }
@@ -103,91 +118,81 @@ static void CB2_Diploma(void)
 
 static void Task_DiplomaInit(u8 taskId)
 {
-    switch (gDiploma->callbackStep)
+    switch (sDiploma->initState)
     {
     case 0:
         SetVBlankCallback(NULL);
         break;
     case 1:
-        DiplomaVblankHandler();
+        DiplomaInitScreen();
         break;
     case 2:
         if (!DiplomaLoadGfx())
-        {
             return;
-        }
         break;
     case 3:
-        CopyToBgTilemapBuffer(1, sDiplomaTilemap, 0, 0);
+        CopyToBgTilemapBuffer(BG_DIPLOMA, sDiplomaTilemap, 0, 0);
         break;
     case 4:
         if (HasAllMons())
-        {
             SetGpuReg(REG_OFFSET_BG1HOFS, 0x100);
-        }
         else
-        {
             SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-        }
         break;
     case 5:
         DiplomaPrintText();
         break;
     case 6:
-        CopyBgTilemapBufferToVram(0);
-        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(BG_TEXT);
+        CopyBgTilemapBufferToVram(BG_DIPLOMA);
         break;
     case 7:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case 8:
-        SetVBlankCallback(VCBC_DiplomaOam);
+        SetVBlankCallback(VBlankCB_Diploma);
         break;
     default:
         if (gPaletteFade.active)
-        {
             break;
-        }
         PlayFanfareByFanfareNum(FANFARE_OBTAIN_BADGE);
-        gTasks[taskId].func = Task_WaitForExit;
+        gTasks[taskId].func = Task_HandleDiplomaInput;
     }
-    gDiploma->callbackStep++;
+    sDiploma->initState++;
 }
 
-static void Task_WaitForExit(u8 taskId)
+static void Task_HandleDiplomaInput(u8 taskId)
 {
-    switch (gDiploma->state)
+    switch (sDiploma->mainState)
     {
     case 0:
-        if (WaitFanfare(0))
-        {
-            gDiploma->state++;
-        }
+        if (WaitFanfare(FALSE))
+            sDiploma->mainState++;
         break;
     case 1:
         if (JOY_NEW(A_BUTTON))
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gDiploma->state++;
+            sDiploma->mainState++;
         }
         break;
     case 2:
-        Task_DiplomaReturnToOverworld(taskId);
+        Task_DiplomaExit(taskId);
         break;
     }
 }
 
-static void Task_DiplomaReturnToOverworld(u8 taskId)
+static void Task_DiplomaExit(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
     DestroyTask(taskId);
     FreeAllWindowBuffers();
-    FREE_AND_SET_NULL(gDiploma);
+    FREE_AND_SET_NULL(sDiploma);
     SetMainCallback2(CB2_ReturnToFieldFromDiploma);
 }
 
-static void DiplomaBgInit(void)
+static void DiplomaReset(void)
 {
     ResetSpriteData();
     ResetPaletteFade();
@@ -196,7 +201,7 @@ static void DiplomaBgInit(void)
     ScanlineEffect_Stop();
 }
 
-static void DiplomaVblankHandler(void)
+static void DiplomaInitScreen(void)
 {
     void *vram = (void *)VRAM;
     DmaClearLarge16(3, vram, VRAM_SIZE, 0x1000);
@@ -204,71 +209,67 @@ static void DiplomaVblankHandler(void)
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_8415A08, 2);
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
-    InitWindows(gUnknown_8415A10);
+    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
+    InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-    SetBgTilemapBuffer(1, gDiploma->tilemapBuffer);
-    ShowBg(0);
-    ShowBg(1);
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-    FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
+    SetBgTilemapBuffer(BG_DIPLOMA, sDiploma->tilemapBuffer);
+    ShowBg(BG_TEXT);
+    ShowBg(BG_DIPLOMA);
+    FillBgTilemapBufferRect_Palette0(BG_TEXT, 0, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(BG_DIPLOMA, 0, 0, 0, 30, 20);
 }
 
-static u8 DiplomaLoadGfx(void)
+static bool8 DiplomaLoadGfx(void)
 {
-    switch (gDiploma->gfxStep)
+    switch (sDiploma->gfxState)
     {
     case 0:
         ResetTempTileDataBuffers();
         break;
     case 1:
-        DecompressAndCopyTileDataToVram(1, sDiplomaGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_DIPLOMA, sDiplomaGfx, 0, 0, 0);
         break;
     case 2:
-        if (!(FreeTempTileDataBuffersIfPossible() == 1))
-        {
-            break;
-        }
-        return 0;
+        if (FreeTempTileDataBuffersIfPossible() == TRUE)
+            return FALSE;
+        break;
     case 3:
-        LoadPalette(sDiplomaPal, 0, 0x40);
+        LoadPalette(sDiplomaPal, 0, sizeof(sDiplomaPal));
+        // fallthrough
     default:
-        return 1;
+        // Finished
+        return TRUE;
     }
-    gDiploma->gfxStep++;
-    return 0;
+    sDiploma->gfxState++;
+    return FALSE;
 }
 
 static void DiplomaPrintText(void)
 {
-    u8 arr[160];
+    u8 str[160];
     u32 width;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
     if (HasAllMons())
-    {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gText_Diploma_National);
-    }
     else
-    {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gText_Diploma_Kanto);
-    }
-    FillWindowPixelBuffer(0, 0);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gText_Diploma_Player);
-    width = GetStringWidth(FONT_2, arr, -1);
-    AddTextPrinterParameterized3(0, FONT_2, 120 - (width / 2), 4, gUnknown_8415A04, -1, arr);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(arr, gText_Diploma_ThisDocument);
-    width = GetStringWidth(FONT_2, arr, -1);
-    AddTextPrinterParameterized3(0, FONT_2, 120 - (width / 2), 0x1E, gUnknown_8415A04, -1, arr);
-    AddTextPrinterParameterized3(0, FONT_2, 120, 105, gUnknown_8415A04, 0, gText_Diploma_GameFreak);
-    PutWindowTilemap(0);
+    FillWindowPixelBuffer(WIN_TEXT, PIXEL_FILL(0));
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(str, gText_Diploma_Player);
+    width = GetStringWidth(FONT_2, str, -1);
+    AddTextPrinterParameterized3(WIN_TEXT, FONT_2, 120 - (width / 2), 4, sTextColors, TEXT_SKIP_DRAW, str);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(str, gText_Diploma_ThisDocument);
+    width = GetStringWidth(FONT_2, str, -1);
+    AddTextPrinterParameterized3(WIN_TEXT, FONT_2, 120 - (width / 2), 30, sTextColors, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized3(WIN_TEXT, FONT_2, 120, 105, sTextColors, 0, gText_Diploma_GameFreak);
+    PutWindowTilemap(WIN_TEXT);
 }

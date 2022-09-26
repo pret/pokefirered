@@ -1,0 +1,27 @@
+{{ doNotModifyHeader }}
+#ifndef GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
+#define GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H
+
+## for map_section in map_sections
+{% if isEmptyString(getVar(map_section.name)) and not existsIn(map_section, "name_clone") %}{{ setVar(map_section.name, map_section.map_section) }}{% endif %}
+## endfor
+
+static const u8 *const sMapNames[] = {
+## for map_section in map_sections
+    [{{ map_section.map_section }} - MAPSECS_KANTO] = sMapsecName_{{ cleanString(map_section.name) }}{% if existsIn(map_section, "name_clone") %}_Clone{% endif %},
+## endfor
+};
+
+static const u16 sMapSectionTopLeftCorners[MAPSEC_COUNT][2] = {
+## for map_section in map_sections
+    [{{ map_section.map_section }} - MAPSECS_KANTO] = { {{ map_section.x }}, {{ map_section.y }} },
+## endfor
+};
+
+static const u16 sMapSectionDimensions[MAPSEC_COUNT][2] = {
+## for map_section in map_sections
+    [{{ map_section.map_section }} - MAPSECS_KANTO] = { {{ map_section.width }}, {{ map_section.height }} },
+## endfor
+};
+
+#endif // GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H

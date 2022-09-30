@@ -8,6 +8,7 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "pokemon_special_anim_internal.h"
+#include "random.h"
 #include "strings.h"
 #include "text_window.h"
 #include "trig.h"
@@ -1308,7 +1309,7 @@ static void Task_UseItem_OutwardSpiralDots(u8 taskId)
 static u16 PSAScene_RandomFromTask(u8 taskId)
 {
     u32 state = GetWordTaskArg(taskId, tOff_RngState);
-    state = state * 1103515245 + 24691;
+    state = ISO_RANDOMIZE1(state);
     SetWordTaskArg(taskId, tOff_RngState, state);
     return state >> 16;
 }
@@ -1446,8 +1447,7 @@ static void CreateLevelUpVerticalSprite(u8 taskId, s16 *data)
     {
         gSprites[spriteId].oam.priority = tPriority;
         gSprites[spriteId].tsYsubpixel = 0;
-        // similar to the LCRNG in random.c, but seeding from data[2]
-        gSprites[spriteId].tsSpeed = ((tMadeSprCt * 1103515245 + 24691) & 0x3F) + 0x20;
+        gSprites[spriteId].tsSpeed = (ISO_RANDOMIZE1(tMadeSprCt) & 0x3F) + 0x20;
         gSprites[spriteId].tsTaskId = taskId;
         tActiveSprCt++;
     }

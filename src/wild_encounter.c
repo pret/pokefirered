@@ -3,6 +3,7 @@
 #include "wild_encounter.h"
 #include "event_data.h"
 #include "fieldmap.h"
+#include "random.h"
 #include "roamer.h"
 #include "field_player_avatar.h"
 #include "battle_setup.h"
@@ -668,8 +669,7 @@ void SeedWildEncounterRng(u16 seed)
 
 static u16 WildEncounterRandom(void)
 {
-    sWildEncounterData.rngState *= 1103515245;
-    sWildEncounterData.rngState += 12345;
+    sWildEncounterData.rngState = ISO_RANDOMIZE2(sWildEncounterData.rngState);
     return sWildEncounterData.rngState >> 16;
 }
 

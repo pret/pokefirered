@@ -478,7 +478,7 @@ static bool8 LoadBagMenuGraphics(void)
         gMain.state++;
         break;
     case 15:
-        CreateBagOrSatchelSprite(gBagMenuState.pocket);
+        CreateBagSprite(gBagMenuState.pocket);
         gMain.state++;
         break;
     case 16:
@@ -487,7 +487,7 @@ static bool8 LoadBagMenuGraphics(void)
         gMain.state++;
         break;
     case 17:
-        ItemMenuIcons_CreateInsertIndicatorBarHidden();
+        CreateSwapLine();
         gMain.state++;
         break;
     case 18:
@@ -583,13 +583,13 @@ static bool8 DoLoadBagGraphics(void)
         break;
     case 3:
         if (BagIsTutorial() == TRUE || gSaveBlock2Ptr->playerGender == MALE)
-            LoadCompressedSpriteSheet(&gSpriteSheet_Backpack);
+            LoadCompressedSpriteSheet(&gSpriteSheet_BagMale);
         else
-            LoadCompressedSpriteSheet(&gSpriteSheet_Satchel);
+            LoadCompressedSpriteSheet(&gSpriteSheet_BagFemale);
         sBagMenuDisplay->data[0]++;
         break;
     case 4:
-        LoadCompressedSpritePalette(&gSpritePalette_BagOrSatchel);
+        LoadCompressedSpritePalette(&gSpritePalette_Bag);
         sBagMenuDisplay->data[0]++;
         break;
     case 5:
@@ -692,7 +692,7 @@ static void BagListMenuMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMe
         if (sBagMenuDisplay->nItems[gBagMenuState.pocket] != itemIndex)
             CreateItemMenuIcon(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, itemIndex), sBagMenuDisplay->itemMenuIcon);
         else
-            CreateItemMenuIcon(ITEM_N_A, sBagMenuDisplay->itemMenuIcon);
+            CreateItemMenuIcon(ITEMS_COUNT, sBagMenuDisplay->itemMenuIcon);
         sBagMenuDisplay->itemMenuIcon ^= 1;
         if (!sBagMenuDisplay->inhibitItemDescriptionPrint)
             PrintItemDescriptionOnMessageWindow(itemIndex);
@@ -1231,8 +1231,8 @@ static void BeginMovingItemInPocket(u8 taskId, s16 itemIndex)
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagPrintTextOnWindow(1, FONT_2, gStringVar4, 0, 3, 2, 0, 0, 0);
-    ItemMenuIcons_MoveInsertIndicatorBar(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(FALSE);
+    UpdateSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    SetSwapLineInvisibility(FALSE);
     BagDestroyPocketSwitchArrowPair();
     bag_menu_print_cursor_(data[0], 2);
     gTasks[taskId].func = Task_MoveItemInPocket_HandleInput;
@@ -1248,7 +1248,7 @@ static void Task_MoveItemInPocket_HandleInput(u8 taskId)
         return;
     input = ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-    ItemMenuIcons_MoveInsertIndicatorBar(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    UpdateSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     if (JOY_NEW(SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -1290,7 +1290,7 @@ static void ExecuteMoveItemInPocket(u8 taskId, u32 itemIndex)
             gBagMenuState.itemsAbove[gBagMenuState.pocket]--;
         Bag_BuildListMenuTemplate(gBagMenuState.pocket);
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-        ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
+        SetSwapLineInvisibility(TRUE);
         CreatePocketSwitchArrowPair();
         gTasks[taskId].func = Task_BagMenu_HandleInput;
     }
@@ -1304,7 +1304,7 @@ static void AbortMovingItemInPocket(u8 taskId, u32 itemIndex)
         gBagMenuState.itemsAbove[gBagMenuState.pocket]--;
     Bag_BuildListMenuTemplate(gBagMenuState.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
+    SetSwapLineInvisibility(TRUE);
     CreatePocketSwitchArrowPair();
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }

@@ -2916,11 +2916,11 @@ extern const u32 gItemPcBgPals[];
 extern const u8 gItemPcTilemap[];
 
 // item_menu_icons
-extern const u32 gUnknown_8E8362C[];
-extern const u32 gUnknown_8E83DBC[];
-extern const u32 gUnknown_8E84560[];
-extern const u32 gFile_graphics_interface_bag_swap_sheet[];
-extern const u32 gFile_graphics_interface_bag_swap_palette[];
+extern const u32 gBagMale_Gfx[];
+extern const u32 gBagFemale_Gfx[];
+extern const u32 gBag_Pal[];
+extern const u32 gSwapLine_Gfx[];
+extern const u32 gSwapLine_Pal[];
 extern const u8 gFile_graphics_items_icons_question_mark_sheet[];
 extern const u8 gFile_graphics_items_icon_palettes_question_mark_palette[];
 extern const u8 gFile_graphics_items_icons_master_ball_sheet[];

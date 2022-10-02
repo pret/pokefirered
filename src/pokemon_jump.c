@@ -3532,8 +3532,8 @@ static const u8 sVenusaurStates[] = {
     [VINE_UPSWING_HIGHER]   = VENUSAUR_UP,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gUnknown_8479688, 0, TAG_DIGITS};
-static const struct SpritePalette sSpritePalette_Digits = {gUnknown_8479668, TAG_DIGITS};
+static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits_Gfx, 0, TAG_DIGITS};
+static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_DIGITS};
 
 static const u16 sPlayerNameWindowCoords_2Players[] = {
      6, 8,

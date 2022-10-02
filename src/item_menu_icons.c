@@ -49,28 +49,28 @@ static const struct OamData sOamData_Bag = {
     .paletteNum = 0
 };
 
-static const union AnimCmd sAnim_Bag_OpenItemPocket[] = {
+static const union AnimCmd sAnim_Bag_OpenPokeBallsPocket[] = {
     ANIMCMD_FRAME(   0, 5),
     ANIMCMD_FRAME(0x40, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_Bag_OpenKeyItemPocket[] = {
+static const union AnimCmd sAnim_Bag_OpenItemsPocket[] = {
     ANIMCMD_FRAME(   0, 5),
     ANIMCMD_FRAME(0x80, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_Bag_OpenPokeBallsPocket[] = {
+static const union AnimCmd sAnim_Bag_OpenKeyItemsPocket[] = {
     ANIMCMD_FRAME(   0, 5),
     ANIMCMD_FRAME(0xc0, 0),
     ANIMCMD_END
 };
 
 static const union AnimCmd *const sAnims_Bag[] = {
-    sAnim_Bag_OpenKeyItemPocket,
-    sAnim_Bag_OpenPokeBallsPocket,
-    sAnim_Bag_OpenItemPocket
+    [POCKET_ITEMS - 1]      = sAnim_Bag_OpenItemsPocket,
+    [POCKET_KEY_ITEMS - 1]  = sAnim_Bag_OpenKeyItemsPocket,
+    [POCKET_POKE_BALLS - 1] = sAnim_Bag_OpenPokeBallsPocket,
 };
 
 static const union AffineAnimCmd sAffineAnim_BagIdle[] = {

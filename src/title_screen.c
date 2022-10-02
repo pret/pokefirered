@@ -897,7 +897,7 @@ static void CB2_FadeOutTransitionToBerryFix(void)
     if (!UpdatePaletteFade())
     {
         m4aMPlayAllStop();
-        SetMainCallback2(mb_berry_fix_serve);
+        SetMainCallback2(CB2_InitBerryFixProgram);
     }
 }
 

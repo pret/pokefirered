@@ -1199,8 +1199,8 @@ static bool8 sub_81121D8(u8 taskId)
     if (data[1] > 15)
         return TRUE;
 
-    sub_80716F8(gPlttBufferUnfaded + 0x01, gPlttBufferFaded + 0x01, 0xDF, 0x0F - data[1]);
-    sub_80716F8(gPlttBufferUnfaded + 0x100, gPlttBufferFaded + 0x100, 0x100, 0x0F - data[1]);
+    CopyPaletteInvertedTint(gPlttBufferUnfaded + 0x01, gPlttBufferFaded + 0x01, 0xDF, 0x0F - data[1]);
+    CopyPaletteInvertedTint(gPlttBufferUnfaded + 0x100, gPlttBufferFaded + 0x100, 0x100, 0x0F - data[1]);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[0], 0x00, 0, sQuestLogHeaderWindowTemplates[0].height * 8 - 1 - data[1], sQuestLogHeaderWindowTemplates[0].width * 8, 1);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[1], 0x00, 0, data[1], sQuestLogHeaderWindowTemplates[1].width * 8, 1);
     CopyWindowToVram(sQuestLogHeaderWindowIds[0], COPYWIN_GFX);

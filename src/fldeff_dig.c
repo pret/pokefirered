@@ -41,6 +41,6 @@ static void StartDigFieldEffect(void)
     u8 taskId;
 
     FieldEffectActiveListRemove(FLDEFF_USE_DIG);
-    taskId = CreateTask(sub_80A1C44, 8);
+    taskId = CreateTask(Task_UseDigEscapeRopeOnField, 8);
     gTasks[taskId].data[0] = 0;
 }

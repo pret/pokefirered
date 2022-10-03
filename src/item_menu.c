@@ -1475,7 +1475,7 @@ static void Task_ItemMenuAction_Use(u8 taskId)
         PutWindowTilemap(0);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
-        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == 1)
+        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_TYPE_PARTY_MENU)
             Task_PrintThereIsNoPokemon(taskId);
         else
             ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);

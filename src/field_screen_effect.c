@@ -12,14 +12,14 @@
 #include "event_object_movement.h"
 #include "field_fadetransition.h"
 #include "event_scripts.h"
+#include "constants/heal_locations.h"
+#include "constants/maps.h"
 
-static const u16 sFlashLevelPixelRadii[] = {
-    0x00c8, 0x0048, 0x0038, 0x0028, 0x0018
-};
+static const u16 sFlashLevelToRadius[] = { 200, 72, 56, 40, 24 };
+const s32 gMaxFlashLevel = ARRAY_COUNT(sFlashLevelToRadius) - 1;
 
-const s32 gMaxFlashLevel = NELEMS(sFlashLevelPixelRadii) - 1;
-
-static const struct WindowTemplate gUnknown_83C68E4 = {
+static const struct WindowTemplate sWindowTemplate_WhiteoutText =
+{
     .bg = 0,
     .tilemapLeft = 0,
     .tilemapTop = 5,
@@ -29,7 +29,7 @@ static const struct WindowTemplate gUnknown_83C68E4 = {
     .baseBlock = 1,
 };
 
-static const u8 gUnknown_83C68EC[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+static const u8 sWhiteoutTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
 static void Task_EnableScriptAfterMusicFade(u8 taskId);
 static void Task_BarnDoorWipeChild(u8 taskId);
@@ -150,7 +150,7 @@ static void UpdateFlashLevelEffect(u8 taskId)
     }
 }
 
-static void sub_807EF7C(u8 taskId)
+static void Task_WaitForFlashUpdate(u8 taskId)
 {
     if (!FuncIsActiveTask(UpdateFlashLevelEffect))
     {
@@ -159,13 +159,13 @@ static void sub_807EF7C(u8 taskId)
     }
 }
 
-static void sub_807EFA4(void)
+static void StartWaitForFlashUpdate(void)
 {
-    if (!FuncIsActiveTask(sub_807EF7C))
-        CreateTask(sub_807EF7C, 80);
+    if (!FuncIsActiveTask(Task_WaitForFlashUpdate))
+        CreateTask(Task_WaitForFlashUpdate, 80);
 }
 
-static u8 sub_807EFC8(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, bool32 clearScanlineEffect, u8 delta)
+static u8 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, bool32 clearScanlineEffect, u8 delta)
 {
     u8 taskId = CreateTask(UpdateFlashLevelEffect, 80);
     s16 *data = gTasks[taskId].data;
@@ -190,14 +190,15 @@ static u8 sub_807EFC8(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 dest
 #undef tFlashRadiusDelta
 #undef tClearScanlineEffect
 
-void AnimateFlash(u8 flashLevel)
+// A higher flash level is a smaller flash radius (more darkness). 0 is full brightness
+void AnimateFlash(u8 newFlashLevel)
 {
     u8 curFlashLevel = Overworld_GetFlashLevel();
-    bool32 value = FALSE;
-    if (!flashLevel)
-        value = TRUE;
-    sub_807EFC8(120, 80, sFlashLevelPixelRadii[curFlashLevel], sFlashLevelPixelRadii[flashLevel], value, 2);
-    sub_807EFA4();
+    bool32 fullBrightness = FALSE;
+    if (newFlashLevel == 0)
+        fullBrightness = TRUE;
+    StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelToRadius[curFlashLevel], sFlashLevelToRadius[newFlashLevel], fullBrightness, 2);
+    StartWaitForFlashUpdate();
     LockPlayerFieldControls();
 }
 
@@ -205,7 +206,7 @@ void WriteFlashScanlineEffectBuffer(u8 flashLevel)
 {
     if (flashLevel)
     {
-        SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], 120, 80, sFlashLevelPixelRadii[flashLevel]);
+        SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], 120, 80, sFlashLevelToRadius[flashLevel]);
         CpuFastCopy(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 240 * 8);
     }
 }
@@ -283,15 +284,15 @@ void Task_BarnDoorWipe(u8 taskId)
             if (data[10] == 0)
             {
                 SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 0));
-                SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(240, 255));
+                SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(DISPLAY_WIDTH, 255));
                 SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 255));
                 SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(0, 255));
             }
             else
             {
-                SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 120));
+                SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH / 2));
                 SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 255));
-                SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(120, 255));
+                SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(DISPLAY_WIDTH / 2, 255));
                 SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(0, 255));
             }
             SetGpuReg(REG_OFFSET_WININ, 0);
@@ -323,8 +324,8 @@ static void Task_BarnDoorWipeChild(u8 taskId)
     if (gTasks[parentTaskId].tDirection == DIR_WIPE_IN)
     {
         lhs = tChildOffset;
-        rhs = 240 - tChildOffset;
-        if (lhs > 120)
+        rhs = DISPLAY_WIDTH - tChildOffset;
+        if (lhs > DISPLAY_WIDTH / 2)
         {
             DestroyTask(taskId);
             return;
@@ -332,8 +333,8 @@ static void Task_BarnDoorWipeChild(u8 taskId)
     }
     else
     {
-        lhs = 120 - tChildOffset;
-        rhs = 120 + tChildOffset;
+        lhs = DISPLAY_WIDTH / 2 - tChildOffset;
+        rhs = DISPLAY_WIDTH / 2 + tChildOffset;
         if (lhs < 0)
         {
             DestroyTask(taskId);
@@ -341,15 +342,11 @@ static void Task_BarnDoorWipeChild(u8 taskId)
         }
     }
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, lhs));
-    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(rhs, 240));
-    if (lhs <= 89)
-    {
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(rhs, DISPLAY_WIDTH));
+    if (lhs < 90)
         tChildOffset += 4;
-    }
     else
-    {
         tChildOffset += 2;
-    }
 }
 
 #undef tState
@@ -358,24 +355,28 @@ static void Task_BarnDoorWipeChild(u8 taskId)
 #undef DIR_WIPE_OUT
 #undef tChildOffset
 
+#define tState      data[0]
+#define tWindowId   data[1]
+#define tPrintState data[2]
+
 static bool8 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u8 x, u8 y)
 {
-    u8 windowId = gTasks[taskId].data[1];
+    u8 windowId = gTasks[taskId].tWindowId;
 
-    switch (gTasks[taskId].data[2])
+    switch (gTasks[taskId].tPrintState)
     {
     case 0:
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         StringExpandPlaceholders(gStringVar4, text);
-        AddTextPrinterParameterized4(windowId, FONT_2, x, y, 1, 0, gUnknown_83C68EC, 1, gStringVar4);
+        AddTextPrinterParameterized4(windowId, FONT_2, x, y, 1, 0, sWhiteoutTextColors, 1, gStringVar4);
         gTextFlags.canABSpeedUpPrint = FALSE;
-        gTasks[taskId].data[2] = 1;
+        gTasks[taskId].tPrintState = 1;
         break;
     case 1:
         RunTextPrinters();
         if (!IsTextPrinterActive(windowId))
         {
-            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].tPrintState = 0;
             return TRUE;
         }
         break;
@@ -388,48 +389,50 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
     u8 windowId;
     const struct HealLocation *loc;
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
-        windowId = AddWindow(&gUnknown_83C68E4);
-        gTasks[taskId].data[1] = windowId;
+        windowId = AddWindow(&sWindowTemplate_WhiteoutText);
+        gTasks[taskId].tWindowId = windowId;
         Menu_LoadStdPalAt(0xF0);
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_FULL);
-        loc = GetHealLocation(1);
+
+        // Scene changes if last heal location was the player's house
+        loc = GetHealLocation(SPAWN_PALLET_TOWN);
         if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
          && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map
-         && gSaveBlock1Ptr->lastHealLocation.warpId == -1
+         && gSaveBlock1Ptr->lastHealLocation.warpId == WARP_ID_NONE
          && gSaveBlock1Ptr->lastHealLocation.x == loc->x
          && gSaveBlock1Ptr->lastHealLocation.y == loc->y)
-            gTasks[taskId].data[0] = 4;
+            gTasks[taskId].tState = 4;
         else
-            gTasks[taskId].data[0] = 1;
+            gTasks[taskId].tState = 1;
         break;
     case 1:
         if (PrintWhiteOutRecoveryMessage(taskId, gText_PlayerScurriedToCenter, 2, 8))
         {
-            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], 2);
-            ++gTasks[taskId].data[0];
+            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
+            gTasks[taskId].tState++;
         }
         break;
     case 4:
         if (PrintWhiteOutRecoveryMessage(taskId, gText_PlayerScurriedBackHome, 2, 8))
         {
-            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], 2);
-            ++gTasks[taskId].data[0];
+            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
+            gTasks[taskId].tState++;
         }
         break;
     case 2:
     case 5:
-        windowId = gTasks[taskId].data[1];
+        windowId = gTasks[taskId].tWindowId;
         ClearWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_MAP);
         RemoveWindow(windowId);
         palette_bg_faded_fill_black();
         FadeInFromBlack();
-        ++gTasks[taskId].data[0];
+        gTasks[taskId].tState++;
         break;
     case 3:
         if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
@@ -455,5 +458,5 @@ void FieldCB_RushInjuredPokemonToCenter(void)
     LockPlayerFieldControls();
     palette_bg_faded_fill_black();
     taskId = CreateTask(Task_RushInjuredPokemonToCenter, 10);
-    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].tState = 0;
 }

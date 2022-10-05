@@ -1874,7 +1874,7 @@ static void LoadPalettes(void)
 {
     LoadPalette(gNamingScreenMenu_Pal, 0, sizeof(gNamingScreenMenu_Pal));
     LoadPalette(gNamingScreenKeyboard_Pal, 0xA0, 0x20);
-    LoadPalette(stdpal_get(2), 0xB0, 0x20);
+    LoadPalette(GetTextWindowPalette(2), 0xB0, 0x20);
 }
 
 static void DecompressToBgTilemapBuffer(u8 bg, const u32 *src)

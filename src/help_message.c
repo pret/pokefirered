@@ -5,7 +5,7 @@
 
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;
 
-const u8 gUnknown_84566A8[] = INCBIN_U8("graphics/unknown/unknown_84566a8.bin");
+const u8 gHelpMessageWindow_Gfx[] = INCBIN_U8("graphics/help_system/msg_window.4bpp");
 
 static const struct WindowTemplate sHelpMessageWindowTemplate = {
     .bg = 0,
@@ -19,12 +19,12 @@ static const struct WindowTemplate sHelpMessageWindowTemplate = {
 
 void MapNamePopupWindowIdSetDummy(void)
 {
-    sHelpMessageWindowId = 0xFF;
+    sHelpMessageWindowId = WINDOW_NONE;
 }
 
 u8 CreateHelpMessageWindow(void)
 {
-    if (sHelpMessageWindowId == 0xFF)
+    if (sHelpMessageWindowId == WINDOW_NONE)
     {
         sHelpMessageWindowId = AddWindow(&sHelpMessageWindowTemplate);
         PutWindowTilemap(sHelpMessageWindowId);
@@ -34,7 +34,7 @@ u8 CreateHelpMessageWindow(void)
 
 void DestroyHelpMessageWindow(u8 a0)
 {
-    if (sHelpMessageWindowId != 0xFF)
+    if (sHelpMessageWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sHelpMessageWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sHelpMessageWindowId);
@@ -43,13 +43,13 @@ void DestroyHelpMessageWindow(u8 a0)
             CopyWindowToVram(sHelpMessageWindowId, a0);
 
         RemoveWindow(sHelpMessageWindowId);
-        sHelpMessageWindowId = 0xFF;
+        sHelpMessageWindowId = WINDOW_NONE;
     }
 }
 
 void sub_8112F18(u8 windowId)
 {
-    const u8 *ptr = gUnknown_84566A8;
+    const u8 *ptr = gHelpMessageWindow_Gfx;
     u8 *buffer;
     u8 i, j;
     u8 width, height;

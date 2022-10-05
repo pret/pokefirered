@@ -5,6 +5,8 @@
 #include "text.h"
 #include "task.h"
 
+extern const u16 gMenuMessageWindow_Gfx[];
+
 void ClearScheduledBgCopiesToVram(void);
 void ScheduleBgCopyTilemapToVram(u8 bgId);
 void DoScheduledBgTilemapCopiesToVram(void);
@@ -46,7 +48,7 @@ void RemoveStartMenuWindow(void);
 u16 GetStdWindowBaseTileNum(void);
 void DrawHelpMessageWindowWithText(const u8 * text);
 void DestroyHelpMessageWindow_(void);
-void LoadSignPostWindowFrameGfx(void);
+void LoadSignpostWindowFrameGfx(void);
 void SetDefaultFontsPointer(void);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

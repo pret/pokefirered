@@ -121,7 +121,7 @@ void CB2_UnionRoomBattle(void)
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        TextWindow_SetStdFrame0_WithPal(0, 1, 0xD0);
+        LoadStdWindowGfx(0, 1, 0xD0);
         Menu_LoadStdPal();
         SetVBlankCallback(VBlankCB_UnionRoomBattle);
         gMain.state++;

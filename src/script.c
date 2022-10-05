@@ -36,7 +36,7 @@ static u8 sMsgBoxWalkawayDisabled;
 static u8 sMsgBoxIsCancelable;
 static u8 sQuestLogInput;
 static u8 sQuestLogInputIsDpad;
-static u8 sMsgIsSignPost;
+static u8 sMsgIsSignpost;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -276,28 +276,28 @@ bool8 CanWalkAwayToCancelMsgBox(void)
         return FALSE;
 }
 
-void MsgSetSignPost(void)
+void MsgSetSignpost(void)
 {
-    sMsgIsSignPost = TRUE;
+    sMsgIsSignpost = TRUE;
 }
 
-void MsgSetNotSignPost(void)
+void MsgSetNotSignpost(void)
 {
-    sMsgIsSignPost = FALSE;
+    sMsgIsSignpost = FALSE;
 }
 
-bool8 IsMsgSignPost(void)
+bool8 IsMsgSignpost(void)
 {
-    if(sMsgIsSignPost == TRUE)
+    if(sMsgIsSignpost == TRUE)
         return TRUE;
     else
         return FALSE;
 }
 
-void ResetFacingNpcOrSignPostVars(void)
+void ResetFacingNpcOrSignpostVars(void)
 {
     ResetContextNpcTextColor();
-    MsgSetNotSignPost();
+    MsgSetNotSignpost();
 }
 
 // The ScriptContext_* functions work with the primary script context,

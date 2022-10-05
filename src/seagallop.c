@@ -212,7 +212,7 @@ static void CB2_SetUpSeagallopScene(void)
             CopyToBgTilemapBufferRect(3, sWaterTilemap_WB, 0, 0, 32, 32);
         }
         LoadPalette(sWaterPal, 0x40, 0x20);
-        LoadPalette(stdpal_get(2), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xF0, 0x20);
         gMain.state++;
         break;
     case 4:

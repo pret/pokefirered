@@ -1096,7 +1096,7 @@ void DrawElevatorCurrentFloorWindow(void)
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
-        TextWindow_SetStdFrame0_WithPal(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
+        LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
         AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_2, gText_NowOn, 0, 2, 0xFF, NULL);
         floorname = sFloorNamePointers[gSpecialVar_0x8005];

@@ -19,8 +19,8 @@ EventScript_FallDownHole::
 	waitstate
 	end
 
-@ TODO: EventScript_FallDownHoleMtPyre in pokeemerald, needs generic name
-EventScript_1C1361::
+@ Differs from the script above by assuming the warp destination has already been set
+EventScript_DoFallWarp::
 	lockall
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible

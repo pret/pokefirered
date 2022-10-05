@@ -870,7 +870,7 @@ PalletTown_ProfessorOaksLab_Movement_OakExcitedWest::
 	step_end
 
 @ Unused
-Movement_1699AC::
+PalletTown_ProfessorOaksLab_Movement_Search:
 	walk_left
 	walk_in_place_faster_down
 	delay_8
@@ -898,7 +898,7 @@ Movement_1699AC::
 	step_end
 
 @ Unused
-Movement_1699C5:
+PalletTown_ProfessorOaksLab_Movement_VerticalPacing:
 	walk_up
 	walk_down
 	walk_down

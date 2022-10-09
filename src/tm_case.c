@@ -226,7 +226,7 @@ static const union AnimCmd *const sTMSpriteAnims[] = {
 };
 
 static const struct CompressedSpriteSheet sTMSpriteSheet = {
-    (const void *)gTMCase_TMSpriteGfx,
+    (const void *)gTMCaseDisc_Gfx,
     0x400,
     TM_CASE_TM_TAG
 };
@@ -241,7 +241,7 @@ static const struct SpriteTemplate sTMSpriteTemplate = {
     SpriteCallbackDummy
 };
 
-static const u16 sTMSpritePaletteOffsetByType[] = {
+static const u16 sTMSpritePaletteOffsetByType[NUMBER_OF_MON_TYPES] = {
     [TYPE_NORMAL]   = 0x000,
     [TYPE_FIRE]     = 0x010,
     [TYPE_WATER]    = 0x020,
@@ -440,25 +440,25 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, gUnknown_8E845D8, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gTMCase_Gfx, 0, 0, 0);
         sTMCaseDynamicResources->seqId++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gUnknown_8E84A24, sTilemapBuffer);
+            LZDecompressWram(gTMCaseMenu_Tilemap, sTilemapBuffer);
             sTMCaseDynamicResources->seqId++;
         }
         break;
     case 2:
-        LZDecompressWram(gUnknown_8E84B70, GetBgTilemapBuffer(1));
+        LZDecompressWram(gTMCase_Tilemap, GetBgTilemapBuffer(1));
         sTMCaseDynamicResources->seqId++;
         break;
     case 3:
         if (gSaveBlock2Ptr->playerGender == MALE)
-            LoadCompressedPalette(gUnknown_8E84CB0, 0, 0x80);
+            LoadCompressedPalette(gTMCaseMenu_Male_Pal, 0, 0x80);
         else
-            LoadCompressedPalette(gUnknown_8E84D20, 0, 0x80);
+            LoadCompressedPalette(gTMCaseMenu_Female_Pal, 0, 0x80);
         sTMCaseDynamicResources->seqId++;
         break;
     case 4:
@@ -1387,7 +1387,7 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
 
 static void PlaceHMTileInWindow(u8 windowId, u8 x, u8 y)
 {
-    BlitBitmapToWindow(windowId, gUnknown_8E99118, x, y, 16, 12);
+    BlitBitmapToWindow(windowId, gTMCaseHM_Gfx, x, y, 16, 12);
 }
 
 static void HandlePrintMoneyOnHand(void)
@@ -1423,7 +1423,7 @@ static void RemoveTMContextMenu(u8 * a0)
 static u8 CreateTMSprite(u16 itemId)
 {
     u8 spriteId = CreateSprite(&sTMSpriteTemplate, 0x29, 0x2E, 0);
-    u8 r5;
+    u8 tmIdx;
     if (itemId == ITEM_NONE)
     {
         UpdateTMSpritePosition(&gSprites[spriteId], 0xFF);
@@ -1431,17 +1431,17 @@ static u8 CreateTMSprite(u16 itemId)
     }
     else
     {
-        r5 = itemId - 33;
-        SetTMSpriteAnim(&gSprites[spriteId], r5);
+        tmIdx = itemId - ITEM_TM01;
+        SetTMSpriteAnim(&gSprites[spriteId], tmIdx);
         TintTMSpriteByType(gBattleMoves[ItemIdToBattleMoveId(itemId)].type);
-        UpdateTMSpritePosition(&gSprites[spriteId], r5);
+        UpdateTMSpritePosition(&gSprites[spriteId], tmIdx);
         return spriteId;
     }
 }
 
 static void SetTMSpriteAnim(struct Sprite *sprite, u8 idx)
 {
-    if (idx >= 50)
+    if (idx >= NUM_TECHNICAL_MACHINES)
         StartSpriteAnim(sprite, 1);
     else
         StartSpriteAnim(sprite, 0);
@@ -1517,14 +1517,17 @@ static void SpriteCB_MoveTMSpriteInCase(struct Sprite *sprite)
     }
 }
 
+// - 1 excludes TYPE_MYSTERY
+#define NUM_TM_COLORS ((NUMBER_OF_MON_TYPES - 1) * 16)
+
 static void LoadTMTypePalettes(void)
 {
     struct SpritePalette spritePalette;
 
-    sTMSpritePaletteBuffer = Alloc(0x110 * sizeof(u16));
-    LZDecompressWram(gUnknown_8E84F20, sTMSpritePaletteBuffer);
-    LZDecompressWram(gUnknown_8E85068, sTMSpritePaletteBuffer + 0x100);
-    spritePalette.data = sTMSpritePaletteBuffer + 0x110;
+    sTMSpritePaletteBuffer = Alloc(NUM_TM_COLORS * sizeof(u16));
+    LZDecompressWram(gTMCaseDiscTypes1_Pal, sTMSpritePaletteBuffer); // Decompress the first 16
+    LZDecompressWram(gTMCaseDiscTypes2_Pal, sTMSpritePaletteBuffer + 0x100); // Decompress the rest (Only 17 total, this is just Dragon type)
+    spritePalette.data = sTMSpritePaletteBuffer + NUM_TM_COLORS;
     spritePalette.tag = TM_CASE_TM_TAG;
     LoadSpritePalette(&spritePalette);
 }

@@ -18,8 +18,8 @@ static void WakeSpriteCallback(struct Sprite *sprite);
 static void CreateSmokeSprite(void);
 static void SmokeSpriteCallback(struct Sprite *sprite);
 
-static const u16 sWakeTiles[] = INCBIN_U16("graphics/ss_anne/unk_8479838.4bpp");
-static const u16 sSmokeTiles[] = INCBIN_U16("graphics/ss_anne/unk_8479A38.4bpp");
+static const u16 sWakeTiles[] = INCBIN_U16("graphics/ss_anne/wake.4bpp");
+static const u16 sSmokeTiles[] = INCBIN_U16("graphics/ss_anne/smoke.4bpp");
 
 static const struct SpriteSheet sSpriteSheets[] = {
     {(const void *)sWakeTiles, sizeof(sWakeTiles), SPRITE_TAG_WAKE},

@@ -889,7 +889,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
         if (MetatileBehavior_IsFallWarp(metatileBehavior) == TRUE)
         {
             ResetInitialPlayerAvatarState();
-            ScriptContext_SetupScript(EventScript_1C1361);
+            ScriptContext_SetupScript(EventScript_DoFallWarp);
             return TRUE;
         }
         DoWarp();

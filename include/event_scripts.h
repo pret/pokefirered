@@ -1257,7 +1257,7 @@ extern const u8 EventScript_CantUseWaterfall[];
 extern const u8 EventScript_VsSeekerChargingDone[];
 extern const u8 EventScript_FieldPoison[];
 extern const u8 EventScript_EggHatch[];
-extern const u8 EventScript_1C1361[];
+extern const u8 EventScript_DoFallWarp[];
 
 // overworld
 

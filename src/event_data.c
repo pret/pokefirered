@@ -141,13 +141,13 @@ void ResetMysteryEventFlags(void)
 void ResetMysteryEventVars(void)
 {
     VarSet(VAR_EVENT_PICHU_SLOT, 0);
-    VarSet(VAR_0x40B6, 0);
-    VarSet(VAR_0x40B7, 0);
-    VarSet(VAR_0x40B8, 0);
-    VarSet(VAR_0x40B9, 0);
-    VarSet(VAR_0x40BA, 0);
-    VarSet(VAR_0x40BB, 0);
-    VarSet(VAR_0x40BC, 0);
+    VarSet(VAR_MYSTERY_GIFT_1,  0);
+    VarSet(VAR_MYSTERY_GIFT_2,  0);
+    VarSet(VAR_MYSTERY_GIFT_3,  0);
+    VarSet(VAR_MYSTERY_GIFT_4,  0);
+    VarSet(VAR_MYSTERY_GIFT_5,  0);
+    VarSet(VAR_MYSTERY_GIFT_6,  0);
+    VarSet(VAR_MYSTERY_GIFT_7,  0);
     VarSet(VAR_ALTERING_CAVE_WILD_SET, 0);
 }
 

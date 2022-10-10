@@ -7,6 +7,9 @@
 #define SPRITE_NONE 0xFF
 #define TAG_NONE 0xFFFF
 
+// Given to SetSpriteMatrixAnchor to skip anchoring one of the coords.
+#define NO_ANCHOR 0x800
+
 struct SpriteSheet
 {
     const void *data;  // Raw uncompressed pixel data
@@ -228,7 +231,7 @@ struct Sprite
              u16 animEnded:1;           //0x10
              u16 affineAnimEnded:1;     //0x20
              u16 usingSheet:1;          //0x40
-             u16 flags_f:1;             //0x80
+             u16 anchored:1;            //0x80
 
     /*0x40*/ u16 sheetTileStart;
 
@@ -316,6 +319,6 @@ void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);
 void FreeSpriteTilesIfNotUsingSheet(struct Sprite *sprite);
 s16 AllocSpriteTiles(u16 tileCount);
-void obj_pos2_update_enable(struct Sprite* sprite, s16 xmod, s16 ymod);
+void SetSpriteMatrixAnchor(struct Sprite* sprite, s16 xmod, s16 ymod);
 
 #endif //GUARD_SPRITE_H

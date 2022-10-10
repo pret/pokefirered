@@ -537,14 +537,20 @@ graphics/misc/emoticons.4bpp: %.4bpp: %.png
 $(ITEMMENUGFXDIR)/bag_tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55
 
-$(INTROGFXDIR)/unk_8402D54.4bpp: %.4bpp: %.png
+$(INTROGFXDIR)/scene_1/grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 397
 
-$(INTROGFXDIR)/unk_8406654.4bpp: %.4bpp: %.png
+$(INTROGFXDIR)/scene_2/plants.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 17
+
+$(INTROGFXDIR)/scene_2/nidorino_close.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 170
 
-$(INTROGFXDIR)/unk_8405B28.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 17
+$(INTROGFXDIR)/scene_2/gengar_close.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 114
+
+$(INTROGFXDIR)/scene_3/gengar_anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 348
 
 $(BATTLETERRAINGFXDIR)/building/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77

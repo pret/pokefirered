@@ -9,51 +9,64 @@
 #include "help_system.h"
 #include "m4a.h"
 
-// Static type declarations
+enum {
+    SCENE_ENSURE_CONNECT,
+    SCENE_TURN_OFF_POWER,
+    SCENE_TRANSMITTING,
+    SCENE_FOLLOW_INSTRUCT,
+    SCENE_TRANSMIT_FAILED,
+    SCENE_BEGIN,
+};
 
-typedef struct {
-    u8 state;
-    u8 unk1;
-    u16 unk2;
-    struct MultiBootParam mb;
-} berryfix_t;
+enum {
+    STATE_BEGIN,
+    STATE_CONNECT,
+    STATE_TURN_OFF_POWER,
+    STATE_UNUSED,
+    STATE_INIT_MULTIBOOT,
+    STATE_MULTIBOOT,
+    STATE_TRANSMIT,
+    STATE_SUCCEEDED,
+    STATE_EXIT,
+    STATE_FAILED,
+    STATE_RETRY,
+};
 
-// Static RAM declarations
+const void *gMultibootStart;
+int gMultibootStatus;
+size_t gMultibootSize;
+struct MultiBootParam gMultibootParam;
 
-const void *gUnknown_3005EF0;
-int gUnknown_3005EF4;
-size_t gUnknown_3005EF8;
-struct MultiBootParam gUnknown_3005F00;
+static void CB2_BerryFix(void);
+static void Task_BerryFixMain(u8 taskId);
 
-// Static ROM declarations
-
-static void mb_berry_fix_maincb(void);
-static void mb_berry_fix_task(u8 taskId);
-
-// .rodata
-
-static const void *const gUnknown_847A890[][3] = {
-    {
+static const void *const sBerryFixGraphics[][3] = {
+    [SCENE_ENSURE_CONNECT] = {
         gBerryFixGameboy_Gfx,
         gBerryFixGameboy_Tilemap,
         gBerryFixGameboy_Pal
-    }, {
+    },
+    [SCENE_TURN_OFF_POWER] = {
         gBerryFixGameboyLogo_Gfx,
         gBerryFixGameboyLogo_Tilemap,
         gBerryFixGameboyLogo_Pal
-    }, {
+    },
+    [SCENE_TRANSMITTING] = {
         gBerryFixGbaTransfer_Gfx,
         gBerryFixGbaTransfer_Tilemap,
         gBerryFixGbaTransfer_Pal
-    }, {
+    },
+    [SCENE_FOLLOW_INSTRUCT] = {
         gBerryFixGbaTransferHighlight_Gfx,
         gBerryFixGbaTransferHighlight_Tilemap,
         gBerryFixGbaTransferHighlight_Pal
-    }, {
+    },
+    [SCENE_TRANSMIT_FAILED] = {
         gBerryFixGbaTransferError_Gfx,
         gBerryFixGbaTransferError_Tilemap,
         gBerryFixGbaTransferError_Pal
-    }, {
+    },
+    [SCENE_BEGIN] = {
         gBerryFixWindow_Gfx,
         gBerryFixWindow_Tilemap,
         gBerryFixWindow_Pal
@@ -63,22 +76,23 @@ static const void *const gUnknown_847A890[][3] = {
 extern const u8 gMultiBootProgram_BerryGlitchFix_Start[0x3BF4];
 extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
 
-// .text
-
-static void mb_berry_fix_print(int scene)
+static void SetScene(int scene)
 {
     REG_DISPCNT = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
     REG_BLDCNT = 0;
-    LZ77UnCompVram(gUnknown_847A890[scene][0], (void *)BG_CHAR_ADDR(0));
-    LZ77UnCompVram(gUnknown_847A890[scene][1], (void *)BG_SCREEN_ADDR(31));
-    CpuCopy16(gUnknown_847A890[scene][2], (void *)BG_PLTT, 0x200);
+    LZ77UnCompVram(sBerryFixGraphics[scene][0], (void *)BG_CHAR_ADDR(0));
+    LZ77UnCompVram(sBerryFixGraphics[scene][1], (void *)BG_SCREEN_ADDR(31));
+    CpuCopy16(sBerryFixGraphics[scene][2], (void *)BG_PLTT, 0x200);
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(31) | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_BG0_ON;
 }
 
-void mb_berry_fix_serve(void) // noreturn
+#define tState data[0]
+#define tTimer data[1]
+
+void CB2_InitBerryFixProgram(void)
 {
     u8 taskId;
     DisableInterrupts(0xFFFF);
@@ -91,96 +105,99 @@ void mb_berry_fix_serve(void) // noreturn
     ResetTasks();
     ScanlineEffect_Stop();
     gHelpSystemEnabled = FALSE;
-    taskId = CreateTask(mb_berry_fix_task, 0);
-    gTasks[taskId].data[0] = 0;
-    SetMainCallback2(mb_berry_fix_maincb);
+    taskId = CreateTask(Task_BerryFixMain, 0);
+    gTasks[taskId].tState = STATE_BEGIN;
+    SetMainCallback2(CB2_BerryFix);
 }
 
-static void mb_berry_fix_maincb(void)
+static void CB2_BerryFix(void)
 {
     RunTasks();
 }
 
-static void mb_berry_fix_task(u8 taskId)
+static void Task_BerryFixMain(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
-    case 0:
-        mb_berry_fix_print(5);
-        data[0] = 1;
+    case STATE_BEGIN:
+        SetScene(SCENE_BEGIN);
+        tState = STATE_CONNECT;
         break;
-    case 1:
+    case STATE_CONNECT:
         if (JOY_NEW(A_BUTTON))
         {
-            mb_berry_fix_print(0);
-            data[0] = 2;
+            SetScene(SCENE_ENSURE_CONNECT);
+            tState = STATE_TURN_OFF_POWER;
         }
         break;
-    case 2:
+    case STATE_TURN_OFF_POWER:
         if (JOY_NEW(A_BUTTON))
         {
-            mb_berry_fix_print(1);
-            data[0] = 4;
+            SetScene(SCENE_TURN_OFF_POWER);
+            tState = STATE_INIT_MULTIBOOT;
         }
         break;
-    case 4:
-        gUnknown_3005EF0 = gMultiBootProgram_BerryGlitchFix_Start;
-        gUnknown_3005EF8 = gMultiBootProgram_BerryGlitchFix_End - gMultiBootProgram_BerryGlitchFix_Start;
-        gUnknown_3005F00.masterp = (void *)gMultiBootProgram_BerryGlitchFix_Start;
-        gUnknown_3005F00.server_type = MULTIBOOT_SERVER_TYPE_NORMAL;
-        MultiBootInit(&gUnknown_3005F00);
-        data[1] = 0;
-        data[0] = 5;
+    case STATE_INIT_MULTIBOOT:
+        gMultibootStart = gMultiBootProgram_BerryGlitchFix_Start;
+        gMultibootSize = gMultiBootProgram_BerryGlitchFix_End - gMultiBootProgram_BerryGlitchFix_Start;
+        gMultibootParam.masterp = (void *)gMultiBootProgram_BerryGlitchFix_Start;
+        gMultibootParam.server_type = MULTIBOOT_SERVER_TYPE_NORMAL;
+        MultiBootInit(&gMultibootParam);
+        tTimer = 0;
+        tState = STATE_MULTIBOOT;
         break;
-    case 5:
-        if (gUnknown_3005F00.probe_count == 0 && gUnknown_3005F00.response_bit & 0x2 && gUnknown_3005F00.client_bit & 0x2)
+    case STATE_MULTIBOOT:
+        if (gMultibootParam.probe_count == 0 && gMultibootParam.response_bit & 0x2 && gMultibootParam.client_bit & 0x2)
         {
-            data[1]++;
-            if (data[1] > 180)
+            if (++tTimer > 180)
             {
-                mb_berry_fix_print(2);
-                MultiBootStartMaster(&gUnknown_3005F00, gUnknown_3005EF0 + MULTIBOOT_HEADER_SIZE, gUnknown_3005EF8 - MULTIBOOT_HEADER_SIZE, 4, 1);
-                data[1] = 0;
-                data[0] = 6;
+                SetScene(SCENE_TRANSMITTING);
+                MultiBootStartMaster(&gMultibootParam, gMultibootStart + MULTIBOOT_HEADER_SIZE, gMultibootSize - MULTIBOOT_HEADER_SIZE, 4, 1);
+                tTimer = 0;
+                tState = STATE_TRANSMIT;
             }
             else
-                gUnknown_3005EF4 = MultiBootMain(&gUnknown_3005F00);
+            {
+                gMultibootStatus = MultiBootMain(&gMultibootParam);
+            }
         }
         else
         {
-            data[1] = 0;
-            gUnknown_3005EF4 = MultiBootMain(&gUnknown_3005F00);
+            tTimer = 0;
+            gMultibootStatus = MultiBootMain(&gMultibootParam);
         }
         break;
-    case 6:
-        gUnknown_3005EF4 = MultiBootMain(&gUnknown_3005F00);
-        if (MultiBootCheckComplete(&gUnknown_3005F00))
+    case STATE_TRANSMIT:
+        gMultibootStatus = MultiBootMain(&gMultibootParam);
+        if (MultiBootCheckComplete(&gMultibootParam))
         {
-            mb_berry_fix_print(3);
-            data[0] = 7;
+            SetScene(SCENE_FOLLOW_INSTRUCT);
+            tState = STATE_SUCCEEDED;
         }
-        else if (!(gUnknown_3005F00.client_bit & 2))
-            data[0] = 9;
+        else if (!(gMultibootParam.client_bit & 2))
+        {
+            tState = STATE_FAILED;
+        }
         break;
-    case 7:
-        data[0] = 8;
+    case STATE_SUCCEEDED:
+        tState = STATE_EXIT;
         break;
-    case 8:
+    case STATE_EXIT:
         if (JOY_NEW(A_BUTTON))
         {
             DestroyTask(taskId);
             DoSoftReset();
         }
         break;
-    case 9:
-        mb_berry_fix_print(4);
-        data[0] = 10;
+    case STATE_FAILED:
+        SetScene(SCENE_TRANSMIT_FAILED);
+        tState = STATE_RETRY;
         break;
-    case 10:
+    case STATE_RETRY:
         if (JOY_NEW(A_BUTTON))
-            data[0] = 0;
+            tState = STATE_BEGIN;
         break;
     }
 }

@@ -11,46 +11,48 @@ enum
     HARDWARE_FADE,
 };
 
+// These are structs for some unused palette system.
+// The full functionality of this system is unknown.
+
 #define NUM_PALETTE_STRUCTS 16
 
-// unused palette struct
 struct PaletteStructTemplate
 {
-    u16 uid;
+    u16 id;
     u16 *src;
-    u16 pst_field_8_0:1;
-    u16 pst_field_8_1:9;
+    bool16 pst_field_8_0:1;
+    u16 unused:9;
     u16 size:5;
-    u16 pst_field_9_7:1;
-    u8 pst_field_A;
+    u8 time1;
     u8 srcCount:5;
-    u8 pst_field_B_5:3;
-    u8 pst_field_C;
+    u8 state:3;
+    u8 time2;
 };
 
 struct PaletteStruct
 {
-    const struct PaletteStructTemplate *base;
-    u32 ps_field_4_0:1;
-    u16 ps_field_4_1:1;
+    const struct PaletteStructTemplate *template;
+    bool32 active:1;
+    bool32 flag:1;
     u32 baseDestOffset:9;
     u16 destOffset:10;
     u16 srcIndex:7;
-    u8 ps_field_8;
-    u8 ps_field_9;
+    u8 countdown1;
+    u8 countdown2;
 };
 
-static void sub_8070790(struct PaletteStruct *, u32 *);
-static void sub_80708F4(struct PaletteStruct *, u32 *);
-static void sub_80709B4(struct PaletteStruct *);
-static u8 GetPaletteNumByUid(u16);
+static void PaletteStruct_Copy(struct PaletteStruct *, u32 *);
+static void PaletteStruct_Blend(struct PaletteStruct *, u32 *);
+static void PaletteStruct_TryEnd(struct PaletteStruct *);
+static void PaletteStruct_Reset(u8 paletteNum);
+static u8 PaletteStruct_GetPalNum(u16);
 static u8 UpdateNormalPaletteFade(void);
 static void BeginFastPaletteFadeInternal(u8);
 static u8 UpdateFastPaletteFade(void);
 static u8 UpdateHardwarePaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
-static void sub_80718B8(u8 taskId);
+static void Task_BlendPalettesGradually(u8 taskId);
 
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
@@ -59,10 +61,10 @@ EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
 
-static const struct PaletteStructTemplate gDummyPaletteStructTemplate =
+static const struct PaletteStructTemplate sDummyPaletteStructTemplate =
 {
-    .uid = 0xFFFF,
-    .pst_field_B_5 = 1
+    .id = 0xFFFF,
+    .state = 1
 };
 
 static const u8 sRoundedDownGrayscaleMap[] =
@@ -79,20 +81,20 @@ static const u8 sRoundedDownGrayscaleMap[] =
 void LoadCompressedPalette(const u32 *src, u16 offset, u16 size)
 {
     LZDecompressWram(src, gPaletteDecompressionBuffer);
-    CpuCopy16(gPaletteDecompressionBuffer, gPlttBufferUnfaded + offset, size);
-    CpuCopy16(gPaletteDecompressionBuffer, gPlttBufferFaded + offset, size);
+    CpuCopy16(gPaletteDecompressionBuffer, &gPlttBufferUnfaded[offset], size);
+    CpuCopy16(gPaletteDecompressionBuffer, &gPlttBufferFaded[offset], size);
 }
 
 void LoadPalette(const void *src, u16 offset, u16 size)
 {
-    CpuCopy16(src, gPlttBufferUnfaded + offset, size);
-    CpuCopy16(src, gPlttBufferFaded + offset, size);
+    CpuCopy16(src, &gPlttBufferUnfaded[offset], size);
+    CpuCopy16(src, &gPlttBufferFaded[offset], size);
 }
 
 void FillPalette(u16 value, u16 offset, u16 size)
 {
-    CpuFill16(value, gPlttBufferUnfaded + offset, size);
-    CpuFill16(value, gPlttBufferFaded + offset, size);
+    CpuFill16(value, &gPlttBufferUnfaded[offset], size);
+    CpuFill16(value, &gPlttBufferFaded[offset], size);
 }
 
 void TransferPlttBuffer(void)
@@ -102,7 +104,7 @@ void TransferPlttBuffer(void)
         void *src = gPlttBufferFaded;
         void *dest = (void *)PLTT;
         DmaCopy16(3, src, dest, PLTT_SIZE);
-        sPlttBufferTransferPending = 0;
+        sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
     }
@@ -129,8 +131,8 @@ void ResetPaletteFade(void)
 {
     u8 i;
 
-    for (i = 0; i < 16; ++i)
-        ResetPaletteStruct(i);
+    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
+        PaletteStruct_Reset(i);
     ResetPaletteFadeControl();
 }
 
@@ -179,7 +181,7 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         temp = gPaletteFade.bufferTransferDisabled;
         gPaletteFade.bufferTransferDisabled = FALSE;
         CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
-        sPlttBufferTransferPending = 0;
+        sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
         gPaletteFade.bufferTransferDisabled = temp;
@@ -187,15 +189,15 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
     }
 }
 
-// not used
-static bool8 sub_80706D0(u32 a1, u8 a2, u8 a3, u8 a4, u16 a5)
+// Unused
+static bool8 BeginPlttFade(u32 selectedPalettes, u8 delay, u8 startY, u8 targetY, u16 blendColor)
 {
     ReadPlttIntoBuffers();
-    return BeginNormalPaletteFade(a1, a2, a3, a4, a5);
+    return BeginNormalPaletteFade(selectedPalettes, delay, startY, targetY, blendColor);
 }
 
-// not used
-static void sub_8070718(u8 a1, u32 *a2)
+// Unused
+static void PaletteStruct_Run(u8 a1, u32 *unkFlags)
 {
     u8 i;
 
@@ -203,82 +205,80 @@ static void sub_8070718(u8 a1, u32 *a2)
     {
         struct PaletteStruct *palstruct = &sPaletteStructs[i];
 
-        if (palstruct->ps_field_4_0)
+        if (palstruct->active)
         {
-            if (palstruct->base->pst_field_8_0 == a1)
+            if (palstruct->template->pst_field_8_0 == a1)
             {
-                u8 val1 = palstruct->srcIndex;
-                u8 val2 = palstruct->base->srcCount;
+                u8 srcIndex = palstruct->srcIndex;
+                u8 srcCount = palstruct->template->srcCount;
 
-                if (val1 == val2)
+                if (srcIndex == srcCount)
                 {
-                    sub_80709B4(palstruct);
-                    if (!palstruct->ps_field_4_0)
+                    PaletteStruct_TryEnd(palstruct);
+                    if (!palstruct->active)
                         continue;
                 }
-                if (palstruct->ps_field_8 == 0)
-                    sub_8070790(palstruct, a2);
+                if (palstruct->countdown1 == 0)
+                    PaletteStruct_Copy(palstruct, unkFlags);
                 else
-                    --palstruct->ps_field_8;
-                sub_80708F4(palstruct, a2);
+                    palstruct->countdown1--;
+                PaletteStruct_Blend(palstruct, unkFlags);
             }
         }
     }
 }
 
-// not used
-static void sub_8070790(struct PaletteStruct *a1, u32 *a2)
+static void PaletteStruct_Copy(struct PaletteStruct *palStruct, u32 *unkFlags)
 {
     s32 srcIndex;
     s32 srcCount;
     u8 i = 0;
-    u16 srcOffset = a1->srcIndex * a1->base->size;
+    u16 srcOffset = palStruct->srcIndex * palStruct->template->size;
 
-    if (!a1->base->pst_field_8_0)
+    if (!palStruct->template->pst_field_8_0)
     {
-        while (i < a1->base->size)
+        while (i < palStruct->template->size)
         {
-            gPlttBufferUnfaded[a1->destOffset] = a1->base->src[srcOffset];
-            gPlttBufferFaded[a1->destOffset] = a1->base->src[srcOffset];
-            ++i;
-            ++a1->destOffset;
-            ++srcOffset;
+            gPlttBufferUnfaded[palStruct->destOffset] = palStruct->template->src[srcOffset];
+            gPlttBufferFaded[palStruct->destOffset] = palStruct->template->src[srcOffset];
+            i++;
+            palStruct->destOffset++;
+            srcOffset++;
         }
     }
     else
     {
-        while (i < a1->base->size)
+        while (i < palStruct->template->size)
         {
-            gPlttBufferFaded[a1->destOffset] = a1->base->src[srcOffset];
-            ++i;
-            ++a1->destOffset;
-            ++srcOffset;
+            gPlttBufferFaded[palStruct->destOffset] = palStruct->template->src[srcOffset];
+            i++;
+            palStruct->destOffset++;
+            srcOffset++;
         }
     }
-    a1->destOffset = a1->baseDestOffset;
-    a1->ps_field_8 = a1->base->pst_field_A;
-    ++a1->srcIndex;
-    srcIndex = a1->srcIndex;
-    srcCount = a1->base->srcCount;
+    palStruct->destOffset = palStruct->baseDestOffset;
+    palStruct->countdown1 = palStruct->template->time1;
+    palStruct->srcIndex++;
+    srcIndex = palStruct->srcIndex;
+    srcCount = palStruct->template->srcCount;
     if (srcIndex >= srcCount)
     {
-        if (a1->ps_field_9)
-            --a1->ps_field_9;
-        a1->srcIndex = 0;
+        if (palStruct->countdown2)
+            palStruct->countdown2--;
+        palStruct->srcIndex = 0;
     }
-    *a2 |= 1 << (a1->baseDestOffset >> 4);
+    *unkFlags |= 1 << (palStruct->baseDestOffset >> 4);
 }
 
-// not used
-static void sub_80708F4(struct PaletteStruct *a1, u32 *a2)
+static void PaletteStruct_Blend(struct PaletteStruct *palStruct, u32 *unkFlags)
 {
-    if (gPaletteFade.active && ((1 << (a1->baseDestOffset >> 4)) & gPaletteFade_selectedPalettes))
+    if (gPaletteFade.active && ((1 << (palStruct->baseDestOffset >> 4)) & gPaletteFade_selectedPalettes))
     {
-        if (!a1->base->pst_field_8_0)
+        if (!palStruct->template->pst_field_8_0)
         {
             if (gPaletteFade.delayCounter != gPaletteFade_delay)
-                BlendPalette(a1->baseDestOffset,
-                             a1->base->size,
+                BlendPalette(palStruct->baseDestOffset,
+                             palStruct->template->size,
                              gPaletteFade.y,
                              gPaletteFade.blendColor);
         }
@@ -286,65 +286,64 @@ static void sub_80708F4(struct PaletteStruct *a1, u32 *a2)
         {
             if (!gPaletteFade.delayCounter)
             {
-                if (a1->ps_field_8 != a1->base->pst_field_A)
+                if (palStruct->countdown1 != palStruct->template->time1)
                 {
-                    u32 srcOffset = a1->srcIndex * a1->base->size;
+                    u32 srcOffset = palStruct->srcIndex * palStruct->template->size;
                     u8 i;
 
-                    for (i = 0; i < a1->base->size; ++i)
-                        gPlttBufferFaded[a1->baseDestOffset + i] = a1->base->src[srcOffset + i];
+                    for (i = 0; i < palStruct->template->size; i++)
+                        gPlttBufferFaded[palStruct->baseDestOffset + i] = palStruct->template->src[srcOffset + i];
                 }
             }
         }
     }
 }
 
-// not used
-static void sub_80709B4(struct PaletteStruct *a1)
+static void PaletteStruct_TryEnd(struct PaletteStruct *palStruct)
 {
-    if (!a1->ps_field_9)
+    if (!palStruct->countdown2)
     {
-        s32 val = a1->base->pst_field_B_5;
+        s32 state = palStruct->template->state;
 
-        if (!val)
+        if (state == 0)
         {
-            a1->srcIndex = 0;
-            a1->ps_field_8 = a1->base->pst_field_A;
-            a1->ps_field_9 = a1->base->pst_field_C;
-            a1->destOffset = a1->baseDestOffset;
+            palStruct->srcIndex = 0;
+            palStruct->countdown1 = palStruct->template->time1;
+            palStruct->countdown2 = palStruct->template->time2;
+            palStruct->destOffset = palStruct->baseDestOffset;
         }
         else
         {
-            if (val < 0)
+            if (state < 0)
                 return;
-            if (val > 2)
+            if (state > 2)
                 return;
-            PaletteStruct_ResetById(a1->base->uid);
+            PaletteStruct_ResetById(palStruct->template->id);
         }
     }
     else
     {
-        --a1->ps_field_9;
+        palStruct->countdown2--;
     }
 }
 
-void PaletteStruct_ResetById(u16 a1)
+void PaletteStruct_ResetById(u16 id)
 {
-    u8 paletteNum = GetPaletteNumByUid(a1);
-    if (paletteNum != 16)
-        ResetPaletteStruct(paletteNum);
+    u8 paletteNum = PaletteStruct_GetPalNum(id);
+    if (paletteNum != NUM_PALETTE_STRUCTS)
+        PaletteStruct_Reset(paletteNum);
 }
 
-void ResetPaletteStruct(u8 paletteNum)
+static void PaletteStruct_Reset(u8 paletteNum)
 {
-    sPaletteStructs[paletteNum].base = &gDummyPaletteStructTemplate;
-    sPaletteStructs[paletteNum].ps_field_4_0 = 0;
+    sPaletteStructs[paletteNum].template = &sDummyPaletteStructTemplate;
+    sPaletteStructs[paletteNum].active = FALSE;
     sPaletteStructs[paletteNum].baseDestOffset = 0;
     sPaletteStructs[paletteNum].destOffset = 0;
     sPaletteStructs[paletteNum].srcIndex = 0;
-    sPaletteStructs[paletteNum].ps_field_4_1 = 0;
-    sPaletteStructs[paletteNum].ps_field_8 = 0;
-    sPaletteStructs[paletteNum].ps_field_9 = 0;
+    sPaletteStructs[paletteNum].flag = FALSE;
+    sPaletteStructs[paletteNum].countdown1 = 0;
+    sPaletteStructs[paletteNum].countdown2 = 0;
 }
 
 void ResetPaletteFadeControl(void)
@@ -367,31 +366,28 @@ void ResetPaletteFadeControl(void)
     gPaletteFade.deltaY = 2;
 }
 
-// not used
-static void sub_8070AFC(u16 uid)
+static void PaletteStruct_SetUnusedFlag(u16 id)
 {
-    u8 paletteNum = GetPaletteNumByUid(uid);
-    if (paletteNum != 16)
-        sPaletteStructs[paletteNum].ps_field_4_1 = 1;
+    u8 paletteNum = PaletteStruct_GetPalNum(id);
+    if (paletteNum != NUM_PALETTE_STRUCTS)
+        sPaletteStructs[paletteNum].flag = TRUE;
 }
 
-// not used
-static void sub_8070B28(u16 uid)
+static void PaletteStruct_ClearUnusedFlag(u16 id)
 {
-    u8 paletteNum = GetPaletteNumByUid(uid);
-    if (paletteNum != 16)
-        sPaletteStructs[paletteNum].ps_field_4_1 = 0;
+    u8 paletteNum = PaletteStruct_GetPalNum(id);
+    if (paletteNum != NUM_PALETTE_STRUCTS)
+        sPaletteStructs[paletteNum].flag = FALSE;
 }
 
-// not used
-static u8 GetPaletteNumByUid(u16 uid)
+static u8 PaletteStruct_GetPalNum(u16 id)
 {
     u8 i;
 
-    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
-        if (sPaletteStructs[i].base->uid == uid)
+    for (i = 0; i < NUM_PALETTE_STRUCTS; i++)
+        if (sPaletteStructs[i].template->id == id)
             return i;
-    return 16;
+    return NUM_PALETTE_STRUCTS;
 }
 
 static u8 UpdateNormalPaletteFade(void)
@@ -411,7 +407,7 @@ static u8 UpdateNormalPaletteFade(void)
         {
             if (gPaletteFade.delayCounter < gPaletteFade_delay)
             {
-                ++gPaletteFade.delayCounter;
+                gPaletteFade.delayCounter++;
                 return 2;
             }
             gPaletteFade.delayCounter = 0;
@@ -708,25 +704,25 @@ static u8 UpdateHardwarePaletteFade(void)
         return PALETTE_FADE_STATUS_DONE;
     if (gPaletteFade.delayCounter < gPaletteFade_delay)
     {
-        ++gPaletteFade.delayCounter;
+        gPaletteFade.delayCounter++;
         return PALETTE_FADE_STATUS_DELAY;
     }
     gPaletteFade.delayCounter = 0;
     if (!gPaletteFade.yDec)
     {
-        ++gPaletteFade.y;
+        gPaletteFade.y++;
         if (gPaletteFade.y > gPaletteFade.targetY)
         {
-            ++gPaletteFade.hardwareFadeFinishing;
-            --gPaletteFade.y;
+            gPaletteFade.hardwareFadeFinishing++;
+            gPaletteFade.y--;
         }
     }
     else
     {
         if (gPaletteFade.y-- - 1 < gPaletteFade.targetY)
         {
-            ++gPaletteFade.hardwareFadeFinishing;
-            ++gPaletteFade.y;
+            gPaletteFade.hardwareFadeFinishing++;
+            gPaletteFade.y++;
         }
     }
 
@@ -770,7 +766,7 @@ static bool8 IsSoftwarePaletteFadeFinishing(void)
         }
         else
         {
-            ++gPaletteFade.softwareFadeFinishingCounter;
+            gPaletteFade.softwareFadeFinishingCounter++;
         }
         return TRUE;
     }
@@ -806,11 +802,11 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
 
     for (i = 0; i < count; ++i)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
-        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
+        *palette++ = RGB2(gray, gray, gray);
     }
 }
 
@@ -821,15 +817,15 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
 
     for (i = 0; i < count; ++i)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        if (gray > 0x1F)
-            gray = 0x1F;
+        if (gray > 31)
+            gray = 31;
         gray = sRoundedDownGrayscaleMap[gray];
-        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
+        *palette++ = RGB2(gray, gray, gray);
     }
 }
 
@@ -840,16 +836,16 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
 
     for (i = 0; i < count; ++i)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
         r = (u16)((Q_8_8(1.2) * gray)) >> 8;
         g = (u16)((Q_8_8(1.0) * gray)) >> 8;
         b = (u16)((Q_8_8(0.94) * gray)) >> 8;
         if (r > 31)
             r = 31;
-        *palette++ = (b << 10) | (g << 5) | (r << 0);
+        *palette++ = RGB2(r, g, b);
     }
 }
 
@@ -860,9 +856,9 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
 
     for (i = 0; i < count; ++i)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
         r = (u16)((rTone * gray)) >> 8;
         g = (u16)((gTone * gray)) >> 8;
@@ -873,116 +869,126 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
             g = 31;
         if (b > 31)
             b = 31;
-        *palette++ = (b << 10) | (g << 5) | (r << 0);
+        *palette++ = RGB2(r, g, b);
     }
 }
 
-void sub_80716F8(const u16 *src, u16 *dst, u16 count, u8 a4)
+void CopyPaletteInvertedTint(const u16 *src, u16 *dst, u16 count, u8 tone)
 {
     s32 r, g, b, i;
     u32 gray;
 
-    if (!a4)
+    if (!tone)
     {
-        for (i = 0; i < count; ++i)
+        for (i = 0; i < count; i++)
             *dst++ = *src++;
     }
     else
     {
-        for (i = 0; i < count; ++src, ++dst, ++i)
+        for (i = 0; i < count; src++, dst++, i++)
         {
-            r = (*src >>  0) & 0x1F;
-            g = (*src >>  5) & 0x1F;
-            b = (*src >> 10) & 0x1F;
+            r = GET_R(*src);
+            g = GET_G(*src);
+            b = GET_B(*src);
             gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
-            r += (a4 * (gray - r) >> 4);
-            g += (a4 * (gray - g) >> 4);
-            b += (a4 * (gray - b) >> 4);
-            *dst = (b << 10) | (g << 5) | (r << 0);
+            r += (tone * (gray - r) >> 4);
+            g += (tone * (gray - g) >> 4);
+            b += (tone * (gray - b) >> 4);
+            *dst = RGB2(r, g, b);
         }
     }
 }
 
-void sub_80717A8(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
+#define tCoeff       data[0]
+#define tCoeffTarget data[1]
+#define tCoeffDelta  data[2]
+#define tDelay       data[3]
+#define tDelayTimer  data[4]
+#define IDX_PALETTES      5  // data[5] and data[6], set/get via Set/GetWordTaskArg
+#define tColor       data[7]
+#define tId          data[8]
+
+// Blend the selected palettes in a series of steps toward or away from the color.
+void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u16 color, u8 priority, u8 id)
 {
     u8 taskId;
 
-    taskId = CreateTask(sub_80718B8, a6);
-    gTasks[taskId].data[0] = a3;
-    gTasks[taskId].data[1] = a4;
-    if (a2 >= 0)
+    taskId = CreateTask(Task_BlendPalettesGradually, priority);
+    gTasks[taskId].tCoeff = coeff;
+    gTasks[taskId].tCoeffTarget = coeffTarget;
+    if (delay >= 0)
     {
-        gTasks[taskId].data[3] = a2;
-        gTasks[taskId].data[2] = 1;
+        gTasks[taskId].tDelay = delay;
+        gTasks[taskId].tCoeffDelta = 1;
     }
     else
     {
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].data[2] = -a2 + 1;
+        gTasks[taskId].tDelay = 0;
+        gTasks[taskId].tCoeffDelta = -delay + 1;
     }
-    if (a4 < a3)
-        gTasks[taskId].data[2] *= -1;
-    SetWordTaskArg(taskId, 5, a1);
-    gTasks[taskId].data[7] = a5;
-    gTasks[taskId].data[8] = a7;
+    if (coeffTarget < coeff)
+        gTasks[taskId].tCoeffDelta *= -1;
+    SetWordTaskArg(taskId, IDX_PALETTES, selectedPalettes);
+    gTasks[taskId].tColor = color;
+    gTasks[taskId].tId = id;
     gTasks[taskId].func(taskId);
 }
 
-bool32 sub_807185C(u8 var)
+bool32 IsBlendPalettesGraduallyTaskActive(u8 id)
 {
     s32 i;
 
     for (i = 0; i < NUM_TASKS; ++i)
         if (gTasks[i].isActive == TRUE
-         && gTasks[i].func == sub_80718B8
-         && gTasks[i].data[8] == var)
+         && gTasks[i].func == Task_BlendPalettesGradually
+         && gTasks[i].tId == id)
             return TRUE;
     return FALSE;
 }
 
-void sub_8071898(void)
+void DestroyBlendPalettesGraduallyTask(void)
 {
     u8 taskId;
 
     while (TRUE)
     {
-        taskId = FindTaskIdByFunc(sub_80718B8);
-        if (taskId == TAIL_SENTINEL)
+        taskId = FindTaskIdByFunc(Task_BlendPalettesGradually);
+        if (taskId == TASK_NONE)
             break;
         DestroyTask(taskId);
     }
 }
 
-static void sub_80718B8(u8 taskId)
+static void Task_BlendPalettesGradually(u8 taskId)
 {
-    u32 wordVar;
+    u32 palettes;
     s16 *data;
-    s16 temp;
+    s16 target;
 
     data = gTasks[taskId].data;
-    wordVar = GetWordTaskArg(taskId, 5);
-    if (++data[4] > data[3])
+    palettes = GetWordTaskArg(taskId, IDX_PALETTES);
+    if (++tDelayTimer > tDelay)
     {
-        data[4] = 0;
-        BlendPalettes(wordVar, data[0], data[7]);
-        temp = data[1];
-        if (data[0] == temp)
+        tDelayTimer = 0;
+        BlendPalettes(palettes, tCoeff, tColor);
+        target = tCoeffTarget;
+        if (tCoeff == target)
         {
             DestroyTask(taskId);
         }
         else
         {
-            data[0] += data[2];
-            if (data[2] >= 0)
+            tCoeff += tCoeffDelta;
+            if (tCoeffDelta >= 0)
             {
-                if (data[0] < temp)
+                if (tCoeff < target)
                     return;
             }
-            else if (data[0] > temp)
+            else if (tCoeff > target)
             {
                 return;
             }
-            data[0] = temp;
+            tCoeff = target;
         }
     }
 }

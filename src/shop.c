@@ -594,7 +594,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
         if (item != INDEX_CANCEL)
             CreateItemMenuIcon(item, gShopData.itemSlot);
         else
-            CreateItemMenuIcon(ITEM_N_A, gShopData.itemSlot);
+            CreateItemMenuIcon(ITEMS_COUNT, gShopData.itemSlot);
         
         gShopData.itemSlot ^= 1;
         BuyMenuPrint(5, FONT_2, description, 0, 3, 2, 1, 0, 0);
@@ -751,9 +751,9 @@ static void BuyMenuDrawMapBg(void)
             metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
-                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
             else
-                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
         }
     }
 }

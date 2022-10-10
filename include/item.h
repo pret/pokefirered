@@ -16,17 +16,26 @@ struct Item
     u8 importance;
     u8 exitsBagOnUse;
     u8 pocket;
-    u8 type;
+    u8 type; // unused for balls
     ItemUseFunc fieldUseFunc;
     u8 battleUsage;
     ItemUseFunc battleUseFunc;
-    u8 secondaryId;
+    u8 secondaryId; // only used for fishing rods
 };
 
 struct BagPocket
 {
     struct ItemSlot *itemSlots;
     u8 capacity;
+};
+
+// Item type IDs (used to determine the exit callback)
+enum {
+    ITEM_TYPE_MAIL,
+    ITEM_TYPE_PARTY_MENU,
+    ITEM_TYPE_FIELD,
+    ITEM_TYPE_UNUSED, // Used for Pokeblock case in RSE
+    ITEM_TYPE_BAG_MENU, // No exit callback, stays in bag menu
 };
 
 extern const struct Item gItems[];

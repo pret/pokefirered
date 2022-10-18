@@ -14,16 +14,30 @@
 	.4byte \address
 	.endm
 
-	.macro object_event index:req, gfx:req, in_connection:req x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
+	.macro object_event index:req, gfx:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
 	.byte \index
 	.byte \gfx
-	.byte \in_connection
-	.byte 0
+	.byte OBJ_KIND_NORMAL
+	.space 1  @ Padding
 	.2byte \x, \y
 	.byte \elevation, \movement_type, ((\y_radius << 4) | \x_radius), 0
 	.2byte \trainer_type, \sight_radius_tree_etc
 	.4byte \script
 	.2byte \event_flag, 0
+	inc _num_npcs
+	.endm
+
+	.macro clone_event index:req, gfx:req, x:req, y:req, target_local_id:req, target_map_id:req
+	.byte \index
+	.byte \gfx
+	.byte OBJ_KIND_CLONE
+	.space 1  @ Padding
+	.2byte \x, \y
+	.byte \target_local_id
+	.space 3  @ Padding
+	.2byte \target_map_id & 0xFF  @ map num
+	.2byte \target_map_id >> 8    @ map group
+	.space 8  @ Padding
 	inc _num_npcs
 	.endm
 

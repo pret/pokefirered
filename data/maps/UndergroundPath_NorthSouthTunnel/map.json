@@ -21,14 +21,14 @@
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_UNDERGROUND_PATH_NORTH_ENTRANCE",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 3,
       "y": 60,
       "elevation": 3,
       "dest_map": "MAP_UNDERGROUND_PATH_SOUTH_ENTRANCE",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

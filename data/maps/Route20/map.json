@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 8,
       "y": 11,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 16,
       "y": 14,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 34,
       "y": 7,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 43,
       "y": 9,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 23,
       "y": 10,
@@ -92,6 +97,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 73,
       "y": 16,
@@ -105,6 +111,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 111,
       "y": 9,
@@ -118,6 +125,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 106,
       "y": 11,
@@ -131,6 +139,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 93,
       "y": 10,
@@ -144,6 +153,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 54,
       "y": 11,
@@ -157,6 +167,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 69,
       "y": 3,
@@ -176,14 +187,14 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 72,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_SEAFOAM_ISLANDS_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

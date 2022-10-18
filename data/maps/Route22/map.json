@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 25,
       "y": 4,
@@ -46,14 +47,14 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 9,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [

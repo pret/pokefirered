@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
       "y": 18,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B4F_BOULDER_1"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 9,
       "y": 18,
@@ -42,6 +44,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_B4F_BOULDER_2"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ARTICUNO",
       "x": 9,
       "y": 2,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_ARTICUNO"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 22,
       "y": 19,
@@ -74,28 +78,28 @@
       "y": 9,
       "elevation": 4,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B3F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 32,
       "y": 5,
       "elevation": 4,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B3F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 8,
       "y": 17,
       "elevation": 1,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B3F",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 9,
       "y": 17,
       "elevation": 1,
       "dest_map": "MAP_SEAFOAM_ISLANDS_B3F",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [

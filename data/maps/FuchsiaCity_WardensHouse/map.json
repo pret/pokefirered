@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
       "x": 3,
       "y": 5,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 11,
       "y": 6,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 5,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_FUCHSIA_CITY_WARDENS_HOUSE_RARE_CANDY"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 4,
       "y": 1,
@@ -74,21 +78,21 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_FUCHSIA_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 6,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 7,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_FUCHSIA_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

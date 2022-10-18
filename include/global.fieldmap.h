@@ -96,19 +96,28 @@ struct BackupMapLayout
 
 struct ObjectEventTemplate
 {
-    /*0x00*/ u8 localId;
-    /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 inConnection;
-    /*0x04*/ s16 x;
-    /*0x06*/ s16 y;
-    /*0x08*/ u8 elevation;
-    /*0x09*/ u8 movementType;
-    /*0x0A*/ u16 movementRangeX:4;
-             u16 movementRangeY:4;
-    /*0x0C*/ u16 trainerType;
-    /*0x0E*/ u16 trainerRange_berryTreeId;
-    /*0x10*/ const u8 *script;
-    /*0x14*/ u16 flagId;
+    u8 localId;
+    u8 graphicsId;
+    u8 kind; // The "kind" field determines how to access objUnion union below.
+    s16 x, y;
+    union {
+        struct {
+            u8 elevation;
+            u8 movementType;
+            u16 movementRangeX:4;
+            u16 movementRangeY:4;
+            u16 trainerType;
+            u16 trainerRange_berryTreeId;
+        } normal;
+        struct {
+            u8 targetLocalId;
+            u8 padding[3];
+            u16 targetMapNum;
+            u16 targetMapGroup;
+        } clone;
+    } objUnion;
+    const u8 *script;
+    u16 flagId;
 };  /*size = 0x18*/
 
 struct WarpEvent

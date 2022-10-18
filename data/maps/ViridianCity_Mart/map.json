@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CLERK",
       "x": 2,
       "y": 3,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 6,
       "y": 2,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 9,
       "y": 5,
@@ -61,21 +64,21 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

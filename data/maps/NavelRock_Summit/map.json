@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HO_OH",
       "x": 9,
       "y": 6,
@@ -35,7 +36,7 @@
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_SUMMIT_PATH_5F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

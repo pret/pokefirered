@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 22,
       "y": 11,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 17,
       "y": 9,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
       "x": 36,
       "y": 10,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MACHOP",
       "x": 35,
       "y": 11,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 31,
       "y": 30,
@@ -92,6 +97,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 24,
       "y": 33,
@@ -105,6 +111,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 19,
       "y": 24,
@@ -118,6 +125,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 25,
       "y": 7,
@@ -137,70 +145,70 @@
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_EXTERIOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 23,
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_EXTERIOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 24,
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_EXTERIOR",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY_HOUSE1",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 15,
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_VERMILION_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 12,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY_POKEMON_FAN_CLUB",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 19,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY_HOUSE2",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 29,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY_MART",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 28,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY_HOUSE3",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY_GYM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

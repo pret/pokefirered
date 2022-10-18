@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 12,
       "y": 6,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 3,
       "y": 34,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 4,
       "y": 34,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 11,
       "y": 26,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 10,
       "y": 26,
@@ -92,6 +97,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 11,
       "y": 17,
@@ -105,18 +111,12 @@
       "flag": "0"
     },
     {
+      "type": "clone",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
-      "in_connection": true,
       "x": 7,
       "y": -2,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "17",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "0x0",
-      "flag": "0"
+      "target_local_id": 1,
+      "target_map": "MAP_SEVEN_ISLAND"
     }
   ],
   "warp_events": [],

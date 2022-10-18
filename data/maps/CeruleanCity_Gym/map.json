@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 10,
       "y": 12,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 4,
       "y": 7,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MISTY",
       "x": 8,
       "y": 6,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GYM_GUY",
       "x": 7,
       "y": 16,
@@ -74,21 +78,21 @@
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 8,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 9,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

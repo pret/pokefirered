@@ -21,14 +21,14 @@
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_MT_EMBER_SUMMIT_PATH_2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 11,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_MT_EMBER_EXTERIOR",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

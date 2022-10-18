@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 24,
       "y": 15,
@@ -35,91 +36,91 @@
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 26,
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 27,
       "y": 30,
       "elevation": 3,
       "dest_map": "MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 25,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_NORTH",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 26,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_NORTH",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 27,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_NORTH",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     },
     {
       "x": 8,
       "y": 17,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_WEST",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 8,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_WEST",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 8,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_WEST",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 43,
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_EAST",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 43,
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_EAST",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 43,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_EAST",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 29,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_CENTER_REST_HOUSE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

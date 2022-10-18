@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 7,
       "y": 13,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 22,
       "y": 13,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 9,
       "y": 19,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_POKEMON_MANSION_3F_MAX_POTION"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 6,
@@ -74,56 +78,56 @@
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 34,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 11,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_2F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 18,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_1F",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 19,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_1F",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 23,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_2F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 20,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_1F",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 24,
       "y": 18,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_MANSION_2F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

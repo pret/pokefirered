@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
       "x": 13,
       "y": 43,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 13,
       "y": 36,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 3,
       "y": 35,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 3,
       "y": 36,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 7,
       "y": 56,
@@ -92,6 +97,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 11,
       "y": 63,
@@ -105,6 +111,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 14,
       "y": 13,
@@ -118,6 +125,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 14,
       "y": 14,
@@ -131,6 +139,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 3,
       "y": 41,
@@ -144,6 +153,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 13,
       "y": 47,
@@ -157,6 +167,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 7,
       "y": 44,
@@ -170,6 +181,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 12,
       "y": 47,
@@ -183,6 +195,7 @@
       "flag": "FLAG_TEMP_15"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 46,
@@ -196,6 +209,7 @@
       "flag": "FLAG_TEMP_16"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 16,
       "y": 47,
@@ -209,6 +223,7 @@
       "flag": "FLAG_TEMP_17"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 17,
       "y": 47,
@@ -222,6 +237,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 11,
       "y": 31,
@@ -235,6 +251,7 @@
       "flag": "FLAG_TEMP_1B"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 18,
       "y": 45,
@@ -248,6 +265,7 @@
       "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_KINGS_ROCK"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,
       "y": 38,
@@ -261,6 +279,7 @@
       "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_MAX_ELIXIR"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 23,
@@ -274,6 +293,7 @@
       "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_NUGGET"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 8,
       "y": 26,
@@ -293,14 +313,14 @@
       "y": 17,
       "elevation": 5,
       "dest_map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 61,
       "elevation": 0,
       "dest_map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

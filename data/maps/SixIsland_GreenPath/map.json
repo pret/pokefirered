@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 11,
       "y": 8,
@@ -46,28 +47,28 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 64,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 45,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 46,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_PATTERN_BUSH",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

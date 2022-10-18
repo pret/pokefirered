@@ -48,6 +48,7 @@
 #include "vs_seeker.h"
 #include "wild_encounter.h"
 #include "constants/cable_club.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -401,22 +402,22 @@ static void LoadObjEventTemplatesFromHeader(void)
     u8 i, j;
     for (i = 0, j = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if (gMapHeader.events->objectEvents[i].inConnection == 0xFF)
+        if (gMapHeader.events->objectEvents[i].kind == OBJ_KIND_CLONE)
         {
-            // load "in_connection" object from the connecting map
-            u8 localId = gMapHeader.events->objectEvents[i].elevation;
-            u8 mapNum = gMapHeader.events->objectEvents[i].trainerType;
-            u8 mapGroup = gMapHeader.events->objectEvents[i].trainerRange_berryTreeId;
+            // load target object from the connecting map
+            u8 localId = gMapHeader.events->objectEvents[i].objUnion.clone.targetLocalId;
+            u8 mapNum = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapNum;
+            u8 mapGroup = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapGroup;
             const struct MapHeader * connectionMap = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
             gSaveBlock1Ptr->objectEventTemplates[j] = connectionMap->events->objectEvents[localId - 1];
             gSaveBlock1Ptr->objectEventTemplates[j].localId = gMapHeader.events->objectEvents[i].localId;
             gSaveBlock1Ptr->objectEventTemplates[j].x = gMapHeader.events->objectEvents[i].x;
             gSaveBlock1Ptr->objectEventTemplates[j].y = gMapHeader.events->objectEvents[i].y;
-            gSaveBlock1Ptr->objectEventTemplates[j].elevation = localId;
-            gSaveBlock1Ptr->objectEventTemplates[j].trainerType = mapNum;
-            gSaveBlock1Ptr->objectEventTemplates[j].trainerRange_berryTreeId = mapGroup;
-            gSaveBlock1Ptr->objectEventTemplates[j].inConnection = 0xFF;
+            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetLocalId = localId;
+            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetMapNum = mapNum;
+            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetMapGroup = mapGroup;
+            gSaveBlock1Ptr->objectEventTemplates[j].kind = OBJ_KIND_CLONE;
             j++;
         }
         else
@@ -464,7 +465,7 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
         struct ObjectEventTemplate *objectEventTemplate = &savObjTemplates[i];
         if (objectEventTemplate->localId == localId)
         {
-            objectEventTemplate->movementType = movementType;
+            objectEventTemplate->objUnion.normal.movementType = movementType;
             return;
         }
     }

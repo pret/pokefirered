@@ -93,8 +93,8 @@ void SetSav1ObjectEventsFromQuestLog(const struct QuestLog * questLog, const str
             {
                 gObjectEvents[i].initialCoords.x = templates[j].x + 7;
                 gObjectEvents[i].initialCoords.y = templates[j].y + 7;
-                gObjectEvents[i].rangeX = templates[j].movementRangeX;
-                gObjectEvents[i].rangeY = templates[j].movementRangeY;
+                gObjectEvents[i].rangeX = templates[j].objUnion.normal.movementRangeX;
+                gObjectEvents[i].rangeY = templates[j].objUnion.normal.movementRangeY;
             }
         }
 

@@ -335,8 +335,8 @@ static void SetNPCInitialCoordsAtScene(u8 sceneNum)
             questLog->npcData[i].y = (u8)gSaveBlock1Ptr->objectEventTemplates[i].y;
             questLog->npcData[i].negy = FALSE;
         }
-        questLog->npcData[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].elevation;
-        questLog->npcData[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].movementType;
+        questLog->npcData[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation;
+        questLog->npcData[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType;
     }
 }
 
@@ -525,8 +525,8 @@ static void QuestLogPlaybackSetObjectEventTemplates(u8 sceneNum)
             gSaveBlock1Ptr->objectEventTemplates[i].y = -(u8)questLog->npcData[i].y;
         else
             gSaveBlock1Ptr->objectEventTemplates[i].y = questLog->npcData[i].y;
-        gSaveBlock1Ptr->objectEventTemplates[i].elevation = questLog->npcData[i].elevation;
-        gSaveBlock1Ptr->objectEventTemplates[i].movementType = questLog->npcData[i].movementType;
+        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation = questLog->npcData[i].elevation;
+        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType = questLog->npcData[i].movementType;
     }
 
     SetSav1ObjectEventsFromQuestLog(questLog, gSaveBlock1Ptr->objectEventTemplates);

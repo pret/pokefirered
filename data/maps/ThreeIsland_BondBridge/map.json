@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 27,
       "y": 10,
@@ -35,6 +36,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 68,
       "y": 10,
@@ -48,6 +50,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
       "x": 33,
       "y": 13,
@@ -61,6 +64,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
       "x": 50,
       "y": 11,
@@ -74,6 +78,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 36,
       "y": 4,
@@ -87,6 +92,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 77,
       "y": 5,
@@ -100,6 +106,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 78,
       "y": 5,
@@ -113,6 +120,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 72,
       "y": 8,
@@ -126,6 +134,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 86,
       "y": 13,
@@ -145,14 +154,14 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_THREE_ISLAND_BERRY_FOREST",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 13,
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_THREE_ISLAND_BERRY_FOREST",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

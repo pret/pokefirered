@@ -61,14 +61,14 @@ VermilionCity_Text_DoYouHaveATicket::
     .string "Excuse me, do you have a ticket?$"
 
 VermilionCity_Text_FlashedSSTicket::
-    .string "{SIZE}Á{PLAYER} flashed the S.S. Ticket!\p"
-    .string "{SIZE}ÇGreat!\n"
+    .string "{FONT_2}{PLAYER} flashed the S.S. Ticket!\p"
+    .string "{FONT_4}Great!\n"
     .string "Welcome to the S.S. Anne!$"
 
 VermilionCity_Text_DontHaveNeededSSTicket::
-    .string "{SIZE}Á{PLAYER} doesn't have the needed\n"
+    .string "{FONT_2}{PLAYER} doesn't have the needed\n"
     .string "S.S. Ticket.\p"
-    .string "{SIZE}ÇSorry!\p"
+    .string "{FONT_4}Sorry!\p"
     .string "You need a ticket to get aboard.$"
 
 VermilionCity_Text_TheShipSetSail::

@@ -44,14 +44,14 @@ static const u8 *const sLinkGroupActionTexts[] = {
     sText_HoldSpinShop
 };
 
-static const u8 gText_1PlayerNeeded[] = _("1 player\nneeded.");
-static const u8 gText_2PlayersNeeded[] = _("2 players\nneeded.");
-static const u8 gText_3PlayersNeeded[] = _("3 players\nneeded.");
-static const u8 gText_4PlayersNeeded[] = _("あと4にん\nひつよう");
-static const u8 gText_2PlayerMode[] = _("2-Player\nMode");
-static const u8 gText_3PlayerMode[] = _("3-Player\nMode");
-static const u8 gText_4PlayerMode[] = _("4-Player\nMode");
-static const u8 gText_5PlayerMode[] = _("5-Player\nMode");
+static const u8 sText_1PlayerNeeded[] = _("1 player\nneeded.");
+static const u8 sText_2PlayersNeeded[] = _("2 players\nneeded.");
+static const u8 sText_3PlayersNeeded[] = _("3 players\nneeded.");
+static const u8 sText_4PlayersNeeded[] = _("あと4にん\nひつよう");
+static const u8 sText_2PlayerMode[] = _("2-Player\nMode");
+static const u8 sText_3PlayerMode[] = _("3-Player\nMode");
+static const u8 sText_4PlayerMode[] = _("4-Player\nMode");
+static const u8 sText_5PlayerMode[] = _("5-Player\nMode");
 
 const u8 *const gTexts_UR_PlayersNeededOrMode[][5] = {
     { // 2 players required

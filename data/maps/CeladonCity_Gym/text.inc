@@ -21,43 +21,25 @@ CeladonCity_Gym_Text_ErikaDefeat::
     .string "I must confer on you the\n"
     .string "RainbowBadge.$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_ErikaPostBattle::
-    .string "You are cataloging POKéMON?\n"
-=======
 CeladonCity_Gym_Text_ErikaPostBattle::
     .string "You are cataloging Pokémon?\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "I must say I'm impressed.\p"
     .string "I would never collect Pokémon if\n"
     .string "they were unattractive.$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
-    .string "The RAINBOWBADGE will make\n"
-    .string "POKéMON up to Lv. 50 obey.\p"
-    .string "It also allows POKéMON to use\n"
-    .string "STRENGTH in and out of battle.\p"
-=======
 CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
     .string "The RainbowBadge will make\n"
     .string "Pokémon up to Lv. 50 obey.\p"
     .string "It also allows Pokémon to use\n"
     .string "Strength in and out of battle.\p"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "Please also take this with you.$"
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
     .string "{PLAYER} received TM19\n"
     .string "from Erika.$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_ExplainTM19::
-    .string "TM19 contains GIGA DRAIN.\p"
-=======
 CeladonCity_Gym_Text_ExplainTM19::
     .string "TM19 contains Giga Drain.\p"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "Half the damage it inflicts is\n"
     .string "drained to heal your Pokémon.\p"
     .string "Wouldn't you agree that it's a\n"
@@ -66,13 +48,8 @@ CeladonCity_Gym_Text_ExplainTM19::
 CeladonCity_Gym_Text_ShouldMakeRoomForThis::
     .string "You should make room for this.$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_KayIntro::
-    .string "I should tell you about this GYM.\p"
-=======
 CeladonCity_Gym_Text_KayIntro::
     .string "I should tell you about this Gym.\p"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "Only real ladies are allowed in\n"
     .string "here!$"
 
@@ -90,19 +67,11 @@ CeladonCity_Gym_Text_BridgetIntro::
 CeladonCity_Gym_Text_BridgetDefeat::
     .string "My makeup!$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_BridgetPostBattle::
-    .string "GRASS-type POKéMON are tough\n"
-    .string "against the WATER type.\p"
-    .string "They also have an edge on ROCK-\n"
-    .string "and GROUND-type POKéMON.$"
-=======
 CeladonCity_Gym_Text_BridgetPostBattle::
     .string "Grass-type Pokémon are tough\n"
     .string "against the Water type.\p"
     .string "They also have an edge on Rock-\n"
     .string "and Ground-type Pokémon.$"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
 
 CeladonCity_Gym_Text_TinaIntro::
     .string "…Weren't you peeking in here\n"
@@ -111,13 +80,8 @@ CeladonCity_Gym_Text_TinaIntro::
 CeladonCity_Gym_Text_TinaDefeat::
     .string "You're an eye-opener!$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_TinaPostBattle::
-    .string "Oh, you were looking at ERIKA…\n"
-=======
 CeladonCity_Gym_Text_TinaPostBattle::
     .string "Oh, you were looking at Erika…\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "You weren't looking at me…$"
 
 CeladonCity_Gym_Text_TamiaIntro::
@@ -129,15 +93,9 @@ CeladonCity_Gym_Text_TamiaIntro::
 CeladonCity_Gym_Text_TamiaDefeat::
     .string "No!$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_TamiaPostBattle::
-    .string "We only use GRASS-type POKéMON at\n"
-    .string "our GYM.\p"
-=======
 CeladonCity_Gym_Text_TamiaPostBattle::
     .string "We only use Grass-type Pokémon at\n"
     .string "our Gym.\p"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "Why? We also use them for making\n"
     .string "flower arrangements!$"
 
@@ -150,13 +108,8 @@ CeladonCity_Gym_Text_LisaDefeat::
     .string "Oh!\n"
     .string "You!$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_LisaPostBattle::
-    .string "Our LEADER ERIKA might be quiet,\n"
-=======
 CeladonCity_Gym_Text_LisaPostBattle::
     .string "Our Leader Erika might be quiet,\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "but she's famous around here.$"
 
 CeladonCity_Gym_Text_LoriIntro::
@@ -172,13 +125,8 @@ CeladonCity_Gym_Text_LoriPostBattle::
     .string "I have to learn to be polite,\l"
     .string "especially if I have to battle.$"
 
-<<<<<<< HEAD
-CeladonCity_Gym_Text_MaryIntro::
-    .string "Welcome to CELADON GYM!\p"
-=======
 CeladonCity_Gym_Text_MaryIntro::
     .string "Welcome to Celadon Gym!\p"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "You'd better not underestimate\n"
     .string "the nice ladies here.$"
 

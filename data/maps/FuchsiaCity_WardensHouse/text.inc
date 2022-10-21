@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-FuchsiaCity_WardensHouse_Text_HifFuffHefifoo::
-    .string "WARDEN: Hif fuff hefifoo!\p"
-=======
 FuchsiaCity_WardensHouse_Text_HifFuffHefifoo::
     .string "Warden: Hif fuff hefifoo!\p"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "Ha lof ha feef ee hafahi ho.\n"
     .string "Heff hee fwee!$"
 
@@ -16,17 +11,6 @@ FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo::
     .string "Ha?\n"
     .string "He ohay heh ha hoo ee haheh!$"
 
-<<<<<<< HEAD
-FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
-    .string "{PLAYER} gave the GOLD TEETH\n"
-    .string "to the WARDEN.$"
-
-FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
-    .string "The WARDEN popped in his teeth!$"
-
-FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
-    .string "WARDEN: Thanks, son!\n"
-=======
 FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
     .string "{PLAYER} gave the Gold Teeth\n"
     .string "to the Warden.$"
@@ -36,7 +20,6 @@ FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
 
 FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
     .string "Warden: Thanks, son!\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
     .string "that I said, not a one!\p"
@@ -45,13 +28,8 @@ FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
-<<<<<<< HEAD
-FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
-    .string "WARDEN: Thank you, lassie!\n"
-=======
 FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
     .string "Warden: Thank you, lassie!\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
     .string "that I said, not a one!\p"

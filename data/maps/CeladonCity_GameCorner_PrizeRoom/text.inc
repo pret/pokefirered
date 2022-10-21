@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-CeladonCity_GameCorner_PrizeRoom_Text_FancyThatPorygon::
-    .string "I sure do fancy that PORYGON!\n"
-=======
 CeladonCity_GameCorner_PrizeRoom_Text_FancyThatPorygon::
     .string "I sure do fancy that Porygon!\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "But, it's hard to win at slots!$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_RakedItInToday::

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-Text_OnlySkilledTrainersAllowedThrough::
-	.string "Only truly skilled TRAINERS are\n"
-=======
 Text_OnlySkilledTrainersAllowedThrough::
 	.string "Only truly skilled Trainers are\n"
->>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
 	.string "allowed through.\p"
 	.string "You don't have the {STR_VAR_1}\n"
 	.string "yet!$"

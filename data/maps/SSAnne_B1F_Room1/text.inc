@@ -8,13 +8,13 @@ SSAnne_B1F_Room1_Text_PhillipDefeat::
 
 SSAnne_B1F_Room1_Text_PhillipPostBattle::
     .string "When we're out at sea, jellyfish\n"
-    .string "POKéMON sometimes drift by.$"
+    .string "Pokémon sometimes drift by.$"
 
 SSAnne_B1F_Room1_Text_BarnyIntro::
     .string "Hello, stranger!\p"
     .string "I can't tell if you're from the seas\n"
     .string "or mountains, but stop and chat.\p"
-    .string "All my POKéMON are from the sea.$"
+    .string "All my Pokémon are from the sea.$"
 
 SSAnne_B1F_Room1_Text_BarnyDefeat::
     .string "Darn!\n"

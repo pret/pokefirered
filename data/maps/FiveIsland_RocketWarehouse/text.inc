@@ -1,24 +1,24 @@
 FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen::
-    .string "There are many POKéMON locked\n"
+    .string "There are many Pokémon locked\n"
     .string "away in the pen…$"
 
 FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled::
     .string "The pen door is unlocked.\n"
-    .string "The POKéMON appear to have fled.$"
+    .string "The Pokémon appear to have fled.$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Intro::
     .string "Did you come here knowing it's\n"
-    .string "TEAM ROCKET's WAREHOUSE?$"
+    .string "Team Rocket's Warehouse?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Defeat::
     .string "What do you think you're doing?!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2PostBattle::
-    .string "TEAM ROCKET broke up?\n"
+    .string "Team Rocket broke up?\n"
     .string "What planet are you from?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt1Intro::
-    .string "Oh, now your POKéMON look strong.\n"
+    .string "Oh, now your Pokémon look strong.\n"
     .string "You're willing to sell them?\p"
     .string "Oh?\n"
     .string "You wanted to battle?$"
@@ -29,13 +29,13 @@ FiveIsland_RocketWarehouse_Text_Grunt1Defeat::
 
 FiveIsland_RocketWarehouse_Text_Grunt1PostBattle::
     .string "We can give you a great price.\n"
-    .string "Sell us your POKéMON!$"
+    .string "Sell us your Pokémon!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt3Intro::
     .string "I got word about you from the\n"
     .string "others.\p"
     .string "But there's no way a kid like you'd\n"
-    .string "know our BOSS GIOVANNI!$"
+    .string "know our Boss Giovanni!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt3Defeat::
     .string "Don't…you…dare…laugh…$"
@@ -47,7 +47,7 @@ FiveIsland_RocketWarehouse_Text_Grunt3PostBattle::
 FiveIsland_RocketWarehouse_Text_Admin1Intro::
     .string "I don't know or care if what I'm\n"
     .string "doing is right or wrong…\p"
-    .string "I just put my faith in GIOVANNI\n"
+    .string "I just put my faith in Giovanni\n"
     .string "and do as I am told.$"
 
 FiveIsland_RocketWarehouse_Text_Admin1Defeat::
@@ -64,16 +64,16 @@ FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough::
     .string "in through there.\p"
     .string "Why don't you go get rested and\n"
     .string "refreshed for what lies ahead?\p"
-    .string "The ADMIN after me outranks me\n"
-    .string "thoroughly as a TRAINER.\p"
+    .string "The Admin after me outranks me\n"
+    .string "thoroughly as a Trainer.\p"
     .string "You'd better steel yourself for one\n"
     .string "harsh challenge.$"
 
 FiveIsland_RocketWarehouse_Text_Admin2Intro::
     .string "That's quite enough of you \n"
     .string "playing the hero, kid.\p"
-    .string "Spreading lies about how TEAM\n"
-    .string "ROCKET has disbanded…\p"
+    .string "Spreading lies about how Team\n"
+    .string "Rocket has disbanded…\p"
     .string "It's such an obvious attempt to\n"
     .string "cause confusion in our ranks.\p"
     .string "Fortunately, we're not so ignorant\n"
@@ -85,16 +85,16 @@ FiveIsland_RocketWarehouse_Text_Admin2Defeat::
     .string "Urgh…\n"
     .string "You were too strong…\p"
     .string "…\n"
-    .string "Th-that's GIOVANNI's BADGE!\p"
+    .string "Th-that's Giovanni's Badge!\p"
     .string "So it's true?\n"
-    .string "TEAM ROCKET really has disbanded?$"
+    .string "Team Rocket really has disbanded?$"
 
 FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
-    .string "We will abandon this WAREHOUSE…\p"
+    .string "We will abandon this Warehouse…\p"
     .string "But don't think this is over.\n"
     .string "I won't let this be the end.\p"
-    .string "I will find GIOVANNI.\n"
-    .string "And I will resurrect TEAM ROCKET!\l"
+    .string "I will find Giovanni.\n"
+    .string "And I will resurrect Team Rocket!\l"
     .string "I will…\p"
     .string "Until then, farewell!$"
 
@@ -102,13 +102,13 @@ FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
     .string "A report with graphs and text is on\n"
     .string "the PC monitor.\p"
     .string "“The Influence of Magnetic Waves\n"
-    .string "on POKéMON Evolution”…\p"
+    .string "on Pokémon Evolution”…\p"
     .string "… … … … … …\p"
     .string "It's too difficult to understand…$"
 
 FiveIsland_RocketWarehouse_Text_GideonIntro::
     .string "I almost managed to sell the\n"
-    .string "SAPPHIRE for huge money…\p"
+    .string "Sapphire for huge money…\p"
     .string "Then, you just had to come along\n"
     .string "and blow the whole deal apart!\p"
     .string "Fufu… Fufufufu…\n"
@@ -128,10 +128,10 @@ FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe::
 
 FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
     .string "What, you again?\p"
-    .string "You… You're not GIOVANNI's kid,\n"
+    .string "You… You're not Giovanni's kid,\n"
     .string "are you?\p"
     .string "No, that can't be right!\n"
-    .string "GIOVANNI's kid has red hair.\p"
+    .string "Giovanni's kid has red hair.\p"
     .string "You don't have any reasons for\n"
     .string "bugging me. Leave me alone!$"
 

@@ -8,7 +8,7 @@ CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink::
 
 CeladonCity_DepartmentStore_Roof_Text_YayFreshWaterHaveThis::
     .string "Yay!\p"
-    .string "FRESH WATER!\p"
+    .string "Fresh Water!\p"
     .string "Thank you!\n"
     .string "You can have this from me!$"
 
@@ -16,30 +16,40 @@ Text_ReceivedItemFromLittleGirl::
     .string "{PLAYER} received a {STR_VAR_2}\n"
     .string "from the little girl.$"
 
+<<<<<<< HEAD
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM16::
     .string "TM16 contains LIGHT SCREEN.\p"
+=======
+CeladonCity_DepartmentStore_Roof_Text_ExplainTM16::
+    .string "TM16 contains Light Screen.\p"
+>>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "It's a move that weakens the power\n"
     .string "of special attacks by your foe.$"
 
 CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis::
     .string "Yay!\p"
-    .string "SODA POP!\p"
+    .string "Soda Pop!\p"
     .string "Thank you!\n"
     .string "You can have this from me!$"
 
+<<<<<<< HEAD
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM20::
     .string "TM20 contains SAFEGUARD.\p"
+=======
+CeladonCity_DepartmentStore_Roof_Text_ExplainTM20::
+    .string "TM20 contains Safeguard.\p"
+>>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
     .string "It's a move that prevents status\n"
-    .string "problems among your POKéMON.$"
+    .string "problems among your Pokémon.$"
 
 CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis::
     .string "Yay!\p"
-    .string "LEMONADE!\p"
+    .string "Lemonade!\p"
     .string "Thank you!\n"
     .string "You can have this from me!$"
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM33::
-    .string "TM33 contains REFLECT.\p"
+    .string "TM33 contains Reflect.\p"
     .string "It's a move that weakens the power\n"
     .string "of physical attacks by your foe.$"
 
@@ -51,7 +61,7 @@ CeladonCity_DepartmentStore_Roof_Text_ImNotThirstyAfterAll::
     .string "I'm not thirsty after all!$"
 
 CeladonCity_DepartmentStore_Roof_Text_MySisterIsImmature::
-    .string "My sister is a TRAINER, believe it\n"
+    .string "My sister is a Trainer, believe it\n"
     .string "or not.\p"
     .string "But, she's so immature, she drives\n"
     .string "me nuts!$"
@@ -61,8 +71,8 @@ CeladonCity_DepartmentStore_Roof_Text_ImThirstyIWantDrink::
     .string "I want something to drink!$"
 
 CeladonCity_DepartmentStore_Roof_Text_FloorSign::
-    .string "ROOFTOP SQUARE:\n"
-    .string "VENDING MACHINES$"
+    .string "Rooftop Square:\n"
+    .string "Vending Machines$"
 
 CeladonCity_DepartmentStore_Roof_Text_VendingMachineWhatDoesItHave::
     .string "A vending machine!\n"

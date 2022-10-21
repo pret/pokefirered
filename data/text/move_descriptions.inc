@@ -38,7 +38,7 @@ gMoveDescription_RazorWind::
 	.string "Blades of wind hit\nthe foe on the 2nd\nturn. It has a high\ncritical-hit ratio.$"
 
 gMoveDescription_SwordsDance::
-	.string "A frenetic dance of\nfighting. It sharply\nraises the ATTACK\nstat.$"
+	.string "A frenetic dance of\nfighting. It sharply\nraises the Attack\nstat.$"
 
 gMoveDescription_Cut::
 	.string "A basic attack.\nIt can be used to\ncut down thin trees\nand grass.$"
@@ -113,7 +113,7 @@ gMoveDescription_DoubleEdge::
 	.string "A reckless, life-\nrisking tackle that\nalso hurts the user\na little.$"
 
 gMoveDescription_TailWhip::
-	.string "The user wags its\ntail cutely, making\nthe foe lower its\nDEFENSE stat.$"
+	.string "The user wags its\ntail cutely, making\nthe foe lower its\nDefense stat.$"
 
 gMoveDescription_PoisonSting::
 	.string "The foe is stabbed\nwith a toxic barb,\netc. It may poison\nthe foe.$"
@@ -125,13 +125,13 @@ gMoveDescription_PinMissile::
 	.string "Sharp pins are shot\nat the foe and hit\ntwo to five times\nat once.$"
 
 gMoveDescription_Leer::
-	.string "The foe is given an\nintimidating look\nthat lowers its\nDEFENSE stat.$"
+	.string "The foe is given an\nintimidating look\nthat lowers its\nDefense stat.$"
 
 gMoveDescription_Bite::
 	.string "The user bites with\nvicious fangs.\nIt may make the\nfoe flinch.$"
 
 gMoveDescription_Growl::
-	.string "The user growls in\na cute way, making\nthe foe lower its\nATTACK stat.$"
+	.string "The user growls in\na cute way, making\nthe foe lower its\nAttack stat.$"
 
 gMoveDescription_Roar::
 	.string "The foe is made to\nswitch out with an\nally. In the wild,\nthe battle ends.$"
@@ -149,7 +149,7 @@ gMoveDescription_Disable::
 	.string "For a few turns,\nit prevents the foe\nfrom using the move\nit last used.$"
 
 gMoveDescription_Acid::
-	.string "The foe is sprayed\nwith a harsh, hide-\nmelting acid that\nmay lower DEFENSE.$"
+	.string "The foe is sprayed\nwith a harsh, hide-\nmelting acid that\nmay lower Defense.$"
 
 gMoveDescription_Ember::
 	.string "The foe is attacked\nwith small flames.\nThe foe may suffer\na burn.$"
@@ -179,10 +179,10 @@ gMoveDescription_Psybeam::
 	.string "A peculiar ray is\nshot at the foe.\nIt may leave the\nfoe confused.$"
 
 gMoveDescription_BubbleBeam::
-	.string "A spray of bubbles\nstrikes the foe.\nIt may lower the\nfoe's SPEED stat.$"
+	.string "A spray of bubbles\nstrikes the foe.\nIt may lower the\nfoe's Speed stat.$"
 
 gMoveDescription_AuroraBeam::
-	.string "A rainbow-colored\nattack beam.\nIt may lower the\nfoe's ATTACK stat.$"
+	.string "A rainbow-colored\nattack beam.\nIt may lower the\nfoe's Attack stat.$"
 
 gMoveDescription_HyperBeam::
 	.string "A severely damaging\nattack that makes\nthe user rest on\nthe next turn.$"
@@ -218,7 +218,7 @@ gMoveDescription_LeechSeed::
 	.string "A seed is planted\non the foe to steal\nsome HP for the \nuser on every turn.$"
 
 gMoveDescription_Growth::
-	.string "The user's body is\nforced to grow,\nraising the SP.\nATK stat.$"
+	.string "The user's body is\nforced to grow,\nraising the Sp.\nAtk stat.$"
 
 gMoveDescription_RazorLeaf::
 	.string "The foe is hit with\na cutting leaf.\nIt has a high\ncritical-hit ratio.$"
@@ -239,7 +239,7 @@ gMoveDescription_PetalDance::
 	.string "The user attacks\nwith petals for two\nto three turns,\nthen gets confused.$"
 
 gMoveDescription_StringShot::
-	.string "The foe is bound\nwith strings shot\nfrom the mouth to\nreduce its SPEED.$"
+	.string "The foe is bound\nwith strings shot\nfrom the mouth to\nreduce its Speed.$"
 
 gMoveDescription_DragonRage::
 	.string "The foe is hit with\na shock wave that\nalways inflicts 40-\nHP damage.$"
@@ -263,7 +263,7 @@ gMoveDescription_RockThrow::
 	.string "The foe is attacked\nwith a shower of\nsmall, easily\nthrown rocks.$"
 
 gMoveDescription_Earthquake::
-	.string "An earthquake that\nstrikes all POKéMON\nin battle excluding\nthe user.$"
+	.string "An earthquake that\nstrikes all Pokémon\nin battle excluding\nthe user.$"
 
 gMoveDescription_Fissure::
 	.string "The foe is dropped\ninto a fissure.\nThe foe faints if it\nhits.$"
@@ -278,16 +278,16 @@ gMoveDescription_Confusion::
 	.string "A weak telekinetic\nattack that may\nalso leave the foe\nconfused.$"
 
 gMoveDescription_Psychic::
-	.string "A strong telekinetic\nattack. It may also\nlower the foe's\nSP. DEF stat.$"
+	.string "A strong telekinetic\nattack. It may also\nlower the foe's\nSp. Def stat.$"
 
 gMoveDescription_Hypnosis::
 	.string "Hypnotic suggestion\nis used to make the\nfoe fall into a\ndeep sleep.$"
 
 gMoveDescription_Meditate::
-	.string "The user meditates\nto awaken its power\nand raise its\nATTACK stat.$"
+	.string "The user meditates\nto awaken its power\nand raise its\nAttack stat.$"
 
 gMoveDescription_Agility::
-	.string "The user relaxes\nand lightens its\nbody to sharply\nboost its SPEED.$"
+	.string "The user relaxes\nand lightens its\nbody to sharply\nboost its Speed.$"
 
 gMoveDescription_QuickAttack::
 	.string "An almost invisibly\nfast attack that\nis certain to strike\nfirst.$"
@@ -296,7 +296,7 @@ gMoveDescription_Rage::
 	.string "An attack that\nbecomes stronger\neach time the user\nis hit in battle.$"
 
 gMoveDescription_Teleport::
-	.string "Use it to flee from\nany wild POKéMON.\nAlso warps to the\nlast POKé CENTER.$"
+	.string "Use it to flee from\nany wild Pokémon.\nAlso warps to the\nlast Poké Center.$"
 
 gMoveDescription_NightShade::
 	.string "An attack with a\nmirage that inflicts\ndamage matching\nthe user's level.$"
@@ -305,7 +305,7 @@ gMoveDescription_Mimic::
 	.string "The user copies the\nmove last used by\nthe foe for the\nrest of the battle.$"
 
 gMoveDescription_Screech::
-	.string "An ear-splitting\nscreech is emitted\nto sharply reduce\nthe foe's DEFENSE.$"
+	.string "An ear-splitting\nscreech is emitted\nto sharply reduce\nthe foe's Defense.$"
 
 gMoveDescription_DoubleTeam::
 	.string "The user creates\nillusory copies of\nitself to raise its\nevasiveness.$"
@@ -314,7 +314,7 @@ gMoveDescription_Recover::
 	.string "A self-healing move\nthat restores HP by\nup to half of the\nuser's maximum HP.$"
 
 gMoveDescription_Harden::
-	.string "The user stiffens\nall the muscles in\nits body to raise\nits DEFENSE stat.$"
+	.string "The user stiffens\nall the muscles in\nits body to raise\nits Defense stat.$"
 
 gMoveDescription_Minimize::
 	.string "The user compresses\nall the cells in its\nbody to raise its\nevasiveness.$"
@@ -326,19 +326,19 @@ gMoveDescription_ConfuseRay::
 	.string "The foe is exposed\nto a sinister ray\nthat triggers\nconfusion.$"
 
 gMoveDescription_Withdraw::
-	.string "The user withdraws\nits body in its hard\nshell, raising its\nDEFENSE stat.$"
+	.string "The user withdraws\nits body in its hard\nshell, raising its\nDefense stat.$"
 
 gMoveDescription_DefenseCurl::
-	.string "The user curls up\nto conceal weak\nspots and raise its\nDEFENSE stat.$"
+	.string "The user curls up\nto conceal weak\nspots and raise its\nDefense stat.$"
 
 gMoveDescription_Barrier::
-	.string "The user creates a\nsturdy wall that\nsharply raises its\nDEFENSE stat.$"
+	.string "The user creates a\nsturdy wall that\nsharply raises its\nDefense stat.$"
 
 gMoveDescription_LightScreen::
-	.string "A wall of light\ncuts damage from\nSP. ATK attacks\nfor five turns.$"
+	.string "A wall of light\ncuts damage from\nSp. Atk attacks\nfor five turns.$"
 
 gMoveDescription_Haze::
-	.string "Eliminates all stat\nchanges among all\nPOKéMON engaged in\nbattle.$"
+	.string "Eliminates all stat\nchanges among all\nPokémon engaged in\nbattle.$"
 
 gMoveDescription_Reflect::
 	.string "A wall of light\ncuts damage from\nphysical attacks\nfor five turns.$"
@@ -386,16 +386,16 @@ gMoveDescription_Swift::
 	.string "Star-shaped rays\nthat never miss are\nfired at all foes in\nbattle.$"
 
 gMoveDescription_SkullBash::
-	.string "The user raises its\nDEFENSE in the 1st\nturn, then attacks\nin the 2nd turn.$"
+	.string "The user raises its\nDefense in the 1st\nturn, then attacks\nin the 2nd turn.$"
 
 gMoveDescription_SpikeCannon::
 	.string "Sharp spikes are\nfired at the foe to\nstrike two to five\ntimes.$"
 
 gMoveDescription_Constrict::
-	.string "The foe is attacked\nwith long tentacles\nor vines. It may\nlower SPEED.$"
+	.string "The foe is attacked\nwith long tentacles\nor vines. It may\nlower Speed.$"
 
 gMoveDescription_Amnesia::
-	.string "Forgets about\nsomething and\nsharply raises\nSP. DEF.$"
+	.string "Forgets about\nsomething and\nsharply raises\nSp. Def.$"
 
 gMoveDescription_Kinesis::
 	.string "The user distracts\nthe foe by bending\na spoon. It may\nlower accuracy.$"
@@ -431,7 +431,7 @@ gMoveDescription_Transform::
 	.string "The user transforms\ninto a copy of the\nfoe with even the\nsame move set.$"
 
 gMoveDescription_Bubble::
-	.string "A spray of bubbles\nhits the foe.\nIt may lower the\nfoe's SPEED stat.$"
+	.string "A spray of bubbles\nhits the foe.\nIt may lower the\nfoe's Speed stat.$"
 
 gMoveDescription_DizzyPunch::
 	.string "The foe is hit with\na rhythmic punch\nthat may leave it\nconfused.$"
@@ -449,7 +449,7 @@ gMoveDescription_Splash::
 	.string "The user just flops\nand splashes around\nwithout having any\neffect.$"
 
 gMoveDescription_AcidArmor::
-	.string "The user alters its\ncells to liquefy\nitself and sharply\nraise DEFENSE.$"
+	.string "The user alters its\ncells to liquefy\nitself and sharply\nraise Defense.$"
 
 gMoveDescription_Crabhammer::
 	.string "A large pincer is\nused to hammer the\nfoe. It has a high\ncritical-hit ratio.$"
@@ -473,7 +473,7 @@ gMoveDescription_HyperFang::
 	.string "The foe is attacked\nwith sharp fangs.\nIt may make the\nfoe flinch.$"
 
 gMoveDescription_Sharpen::
-	.string "The user reduces\nits polygon count\nto sharpen edges\nand raise ATTACK.$"
+	.string "The user reduces\nits polygon count\nto sharpen edges\nand raise Attack.$"
 
 gMoveDescription_Conversion::
 	.string "The user changes\nits type to match\nthe type of one of\nits moves.$"
@@ -518,7 +518,7 @@ gMoveDescription_Snore::
 	.string "An attack that can\nbe used only while\nasleep. It may\ncause flinching.$"
 
 gMoveDescription_Curse::
-	.string "A move that works\ndifferently for the\nGHOST-type and all\nthe other types.$"
+	.string "A move that works\ndifferently for the\nGhost-type and all\nthe other types.$"
 
 gMoveDescription_Flail::
 	.string "A desperate attack\nthat becomes more\npowerful the less\nHP the user has.$"
@@ -530,7 +530,7 @@ gMoveDescription_Aeroblast::
 	.string "A vortex of air is\nshot at the foe.\nIt has a high\ncritical-hit ratio.$"
 
 gMoveDescription_CottonSpore::
-	.string "Cotton-like spores\ncling to the foe,\nsharply reducing\nits SPEED stat.$"
+	.string "Cotton-like spores\ncling to the foe,\nsharply reducing\nits Speed stat.$"
 
 gMoveDescription_Reversal::
 	.string "An all-out attack\nthat becomes more\npowerful the less\nHP the user has.$"
@@ -548,7 +548,7 @@ gMoveDescription_MachPunch::
 	.string "A punch thrown at\nblinding speed.\nIt is certain to\nstrike first.$"
 
 gMoveDescription_ScaryFace::
-	.string "Frightens the foe\nwith a scary face\nto sharply reduce\nits SPEED.$"
+	.string "Frightens the foe\nwith a scary face\nto sharply reduce\nits Speed.$"
 
 gMoveDescription_FaintAttack::
 	.string "The user draws up\nclose to the foe\ndisarmingly, then\nhits without fail.$"
@@ -557,7 +557,7 @@ gMoveDescription_SweetKiss::
 	.string "The user kisses\nthe foe with sweet\ncuteness that\ncauses confusion.$"
 
 gMoveDescription_BellyDrum::
-	.string "The user maximizes\nits ATTACK stat at\nthe cost of half\nits full HP.$"
+	.string "The user maximizes\nits Attack stat at\nthe cost of half\nits full HP.$"
 
 gMoveDescription_SludgeBomb::
 	.string "Filthy sludge is\nhurled at the foe.\nIt may poison the\ntarget.$"
@@ -584,7 +584,7 @@ gMoveDescription_PerishSong::
 	.string "Any battler that\nhears this faints\nin three turns\nunless it switches.$"
 
 gMoveDescription_IcyWind::
-	.string "A chilling wind is\nused to attack.\nIt also lowers the\nSPEED stat.$"
+	.string "A chilling wind is\nused to attack.\nIt also lowers the\nSpeed stat.$"
 
 gMoveDescription_Detect::
 	.string "Enables the user to\nevade all attacks.\nIt may fail if used\nin succession.$"
@@ -599,7 +599,7 @@ gMoveDescription_Outrage::
 	.string "The user thrashes\nabout for two to\nthree turns, then\nbecomes confused.$"
 
 gMoveDescription_Sandstorm::
-	.string "A 5-turn sandstorm\nthat damages all\ntypes except ROCK,\nGROUND, and STEEL.$"
+	.string "A 5-turn sandstorm\nthat damages all\ntypes except Rock,\nGround, and Steel.$"
 
 gMoveDescription_GigaDrain::
 	.string "A harsh attack that\nabsorbs half the\ndamage it inflicted\nto restore HP.$"
@@ -608,7 +608,7 @@ gMoveDescription_Endure::
 	.string "The user endures\nany hit with 1 HP\nleft. It may fail if\nused in succession.$"
 
 gMoveDescription_Charm::
-	.string "The foe is charmed\nby the user's cute\nappeals, sharply\ncutting its ATTACK.$"
+	.string "The foe is charmed\nby the user's cute\nappeals, sharply\ncutting its Attack.$"
 
 gMoveDescription_Rollout::
 	.string "A 5-turn rolling\nattack that becomes\nstronger each time\nit hits.$"
@@ -617,7 +617,7 @@ gMoveDescription_FalseSwipe::
 	.string "A restrained attack\nthat always leaves\nthe foe with at\nleast 1 HP.$"
 
 gMoveDescription_Swagger::
-	.string "A move that makes\nthe foe confused,\nbut also sharply\nraises its ATTACK.$"
+	.string "A move that makes\nthe foe confused,\nbut also sharply\nraises its Attack.$"
 
 gMoveDescription_MilkDrink::
 	.string "Heals the user by\nup to half its full\nHP. It can be used\nto heal an ally.$"
@@ -629,7 +629,7 @@ gMoveDescription_FuryCutter::
 	.string "An attack that\ngrows stronger on\neach successive\nhit.$"
 
 gMoveDescription_SteelWing::
-	.string "The foe is hit with\nwings of steel.\nIt may also raise\nthe user's DEFENSE.$"
+	.string "The foe is hit with\nwings of steel.\nIt may also raise\nthe user's Defense.$"
 
 gMoveDescription_MeanLook::
 	.string "The foe is fixed\nwith a mean look\nthat prevents it\nfrom escaping.$"
@@ -644,13 +644,13 @@ gMoveDescription_HealBell::
 	.string "A soothing bell\nchimes to heal the\nstatus problems of\nall allies.$"
 
 gMoveDescription_Return::
-	.string "This attack move\ngrows more powerful\nthe more the user\nlikes its TRAINER.$"
+	.string "This attack move\ngrows more powerful\nthe more the user\nlikes its Trainer.$"
 
 gMoveDescription_Present::
 	.string "The foe is given a\nbooby-trapped gift.\nIt restores HP\nsometimes, however.$"
 
 gMoveDescription_Frustration::
-	.string "This attack move\ngrows more powerful\nthe less the user\nlikes its TRAINER.$"
+	.string "This attack move\ngrows more powerful\nthe less the user\nlikes its Trainer.$"
 
 gMoveDescription_Safeguard::
 	.string "It protects the\nuser's party from\nall status problems\nfor five turns.$"
@@ -662,7 +662,7 @@ gMoveDescription_SacredFire::
 	.string "A mystical and\npowerful fire\nattack that may\ninflict a burn.$"
 
 gMoveDescription_Magnitude::
-	.string "A ground-shaking\nattack against all\nstanding POKéMON.\nIts power varies.$"
+	.string "A ground-shaking\nattack against all\nstanding Pokémon.\nIts power varies.$"
 
 gMoveDescription_DynamicPunch::
 	.string "The foe is punched\nwith the user's full\npower. It confuses\nthe foe if it hits.$"
@@ -683,16 +683,16 @@ gMoveDescription_Pursuit::
 	.string "An attack move that\nworks especially\nwell on a foe that\nis switching out.$"
 
 gMoveDescription_RapidSpin::
-	.string "An attack that\nfrees the user from\nBIND, WRAP, LEECH\nSEED, and SPIKES.$"
+	.string "An attack that\nfrees the user from\nBind, Wrap, Leech\nSeed, and Spikes.$"
 
 gMoveDescription_SweetScent::
-	.string "Allures the foe to\nreduce evasiveness.\nIt also attracts\nwild POKéMON.$"
+	.string "Allures the foe to\nreduce evasiveness.\nIt also attracts\nwild Pokémon.$"
 
 gMoveDescription_IronTail::
-	.string "An attack with a\nsteel-hard tail.\nIt may lower the\nfoe's DEFENSE stat.$"
+	.string "An attack with a\nsteel-hard tail.\nIt may lower the\nfoe's Defense stat.$"
 
 gMoveDescription_MetalClaw::
-	.string "The foe is attacked\nwith steel claws.\nIt may also raise\nthe user's ATTACK.$"
+	.string "The foe is attacked\nwith steel claws.\nIt may also raise\nthe user's Attack.$"
 
 gMoveDescription_VitalThrow::
 	.string "Makes the user\nattack after the\nfoe. In return,\nit will not miss.$"
@@ -716,13 +716,13 @@ gMoveDescription_Twister::
 	.string "A vicious twister\nattacks the foe.\nIt may make the\nfoe flinch.$"
 
 gMoveDescription_RainDance::
-	.string "A heavy rain falls\nfor five turns,\npowering up WATER-\ntype moves.$"
+	.string "A heavy rain falls\nfor five turns,\npowering up Water-\ntype moves.$"
 
 gMoveDescription_SunnyDay::
-	.string "The sun blazes for\nfive turns, powering\nup FIRE-type\nmoves.$"
+	.string "The sun blazes for\nfive turns, powering\nup Fire-type\nmoves.$"
 
 gMoveDescription_Crunch::
-	.string "The foe is crunched\nwith sharp fangs.\nIt may lower the\nfoe's SP. DEF.$"
+	.string "The foe is crunched\nwith sharp fangs.\nIt may lower the\nfoe's Sp. Def.$"
 
 gMoveDescription_MirrorCoat::
 	.string "A retaliation move\nthat pays back the\nfoe's special attack\ndouble.$"
@@ -737,19 +737,19 @@ gMoveDescription_AncientPower::
 	.string "An ancient power is\nused to attack. It\nmay also raise all\nthe user's stats.$"
 
 gMoveDescription_ShadowBall::
-	.string "A shadowy blob is\nhurled at the foe.\nMay also lower the\nfoe's SP. DEF.$"
+	.string "A shadowy blob is\nhurled at the foe.\nMay also lower the\nfoe's Sp. Def.$"
 
 gMoveDescription_FutureSight::
 	.string "Two turns after\nthis move is used,\nthe foe is attacked\npsychically.$"
 
 gMoveDescription_RockSmash::
-	.string "An attack that may\nalso cut DEFENSE.\nIt can also smash\ncracked boulders.$"
+	.string "An attack that may\nalso cut Defense.\nIt can also smash\ncracked boulders.$"
 
 gMoveDescription_Whirlpool::
 	.string "The foe is trapped\nin a fast, vicious\nwhirlpool for two\nto five turns.$"
 
 gMoveDescription_BeatUp::
-	.string "All party POKéMON\njoin in the attack.\nThe more allies,\nthe more damage.$"
+	.string "All party Pokémon\njoin in the attack.\nThe more allies,\nthe more damage.$"
 
 gMoveDescription_FakeOut::
 	.string "An attack that hits\nfirst and causes\nflinching. Usable\nonly on 1st turn.$"
@@ -761,28 +761,28 @@ gMoveDescription_Stockpile::
 	.string "The user charges\nup power for use\nlater. It can be\nused three times.$"
 
 gMoveDescription_SpitUp::
-	.string "The power built\nusing STOCKPILE is\nreleased at once\nfor attack.$"
+	.string "The power built\nusing Stockpile is\nreleased at once\nfor attack.$"
 
 gMoveDescription_Swallow::
-	.string "The energy it built\nusing STOCKPILE is\nabsorbed to restore\nHP.$"
+	.string "The energy it built\nusing Stockpile is\nabsorbed to restore\nHP.$"
 
 gMoveDescription_HeatWave::
 	.string "The user exhales a\nheated breath to\nattack. It may also\ninflict a burn.$"
 
 gMoveDescription_Hail::
-	.string "A hailstorm lasting\nfive turns damages\nall POKéMON except\nthe ICE-type.$"
+	.string "A hailstorm lasting\nfive turns damages\nall Pokémon except\nthe Ice-type.$"
 
 gMoveDescription_Torment::
 	.string "It enrages the foe,\nmaking it incapable\nof using the same\nmove successively.$"
 
 gMoveDescription_Flatter::
-	.string "Flattery is used to\nconfuse the foe,\nbut its SP. ATK\nalso rises.$"
+	.string "Flattery is used to\nconfuse the foe,\nbut its Sp. Atk\nalso rises.$"
 
 gMoveDescription_WillOWisp::
 	.string "A sinister, bluish\nwhite flame is shot\nat the foe to\ninflict a burn.$"
 
 gMoveDescription_Memento::
-	.string "The user faints,\nbut sharply lowers\nthe foe's ATTACK\nand SP. ATK.$"
+	.string "The user faints,\nbut sharply lowers\nthe foe's Attack\nand Sp. Atk.$"
 
 gMoveDescription_Facade::
 	.string "An attack that is\nboosted if user is\nburned, poisoned,\nor paralyzed.$"
@@ -800,7 +800,7 @@ gMoveDescription_NaturePower::
 	.string "An attack that\nchanges type\ndepending on the\nuser's location.$"
 
 gMoveDescription_Charge::
-	.string "The user charges\npower to boost the\nELECTRIC move it\nuses next.$"
+	.string "The user charges\npower to boost the\nElectric move it\nuses next.$"
 
 gMoveDescription_Taunt::
 	.string "The foe is taunted\ninto a rage that\nallows it to use\nonly attack moves.$"
@@ -818,16 +818,16 @@ gMoveDescription_Wish::
 	.string "A self-healing move\nthat restores half\nthe full HP on the\nnext turn.$"
 
 gMoveDescription_Assist::
-	.string "The user randomly\npicks and uses a\nmove of an allied\nPOKéMON.$"
+	.string "The user randomly\npicks and uses a\nmove of an allied\nPokémon.$"
 
 gMoveDescription_Ingrain::
 	.string "The user lays roots\nthat restore HP on\nevery turn.\nIt can't switch out.$"
 
 gMoveDescription_Superpower::
-	.string "A powerful attack,\nbut it also lowers\nthe user's ATTACK\nand DEFENSE stats.$"
+	.string "A powerful attack,\nbut it also lowers\nthe user's Attack\nand Defense stats.$"
 
 gMoveDescription_MagicCoat::
-	.string "Reflects back the\nfoe's LEECH SEED\nand any status-\ndamaging move.$"
+	.string "Reflects back the\nfoe's Leech Seed\nand any status-\ndamaging move.$"
 
 gMoveDescription_Recycle::
 	.string "A move that\nrecycles a used\nitem for use once\nmore.$"
@@ -836,7 +836,7 @@ gMoveDescription_Revenge::
 	.string "An attack move that\ngains in intensity if\nthe target has hurt\nthe user.$"
 
 gMoveDescription_BrickBreak::
-	.string "An attack that also\nbreaks any barrier\nlike LIGHT SCREEN\nand REFLECT.$"
+	.string "An attack that also\nbreaks any barrier\nlike Light Screen\nand Reflect.$"
 
 gMoveDescription_Yawn::
 	.string "A huge yawn lulls\nthe foe into falling\nasleep on the next\nturn.$"
@@ -878,25 +878,25 @@ gMoveDescription_Camouflage::
 	.string "Alters the user's\ntype depending on\nthe location's\nterrain.$"
 
 gMoveDescription_TailGlow::
-	.string "The user flashes a\nlight that sharply\nraises its SP. ATK\nstat.$"
+	.string "The user flashes a\nlight that sharply\nraises its Sp. Atk\nstat.$"
 
 gMoveDescription_LusterPurge::
-	.string "A burst of light\ninjures the foe. It\nmay also lower the\nfoe's SP. DEF.$"
+	.string "A burst of light\ninjures the foe. It\nmay also lower the\nfoe's Sp. Def.$"
 
 gMoveDescription_MistBall::
-	.string "A flurry of down\nhits the foe. It\nmay also lower the\nfoe's SP. ATK.$"
+	.string "A flurry of down\nhits the foe. It\nmay also lower the\nfoe's Sp. Atk.$"
 
 gMoveDescription_FeatherDance::
-	.string "The foe is covered\nwith a mass of down\nthat sharply cuts\nthe ATTACK stat.$"
+	.string "The foe is covered\nwith a mass of down\nthat sharply cuts\nthe Attack stat.$"
 
 gMoveDescription_TeeterDance::
-	.string "A wobbly dance\nthat confuses all\nthe POKéMON in\nbattle.$"
+	.string "A wobbly dance\nthat confuses all\nthe Pokémon in\nbattle.$"
 
 gMoveDescription_BlazeKick::
 	.string "A fiery kick with a\nhigh critical-hit\nratio. It may also\nburn the foe.$"
 
 gMoveDescription_MudSport::
-	.string "Weakens ELECTRIC-\ntype attacks while\nthe user is in the\nbattle.$"
+	.string "Weakens Electric-\ntype attacks while\nthe user is in the\nbattle.$"
 
 gMoveDescription_IceBall::
 	.string "A 5-turn rolling\nattack that becomes\nstronger each time\nit rolls.$"
@@ -914,7 +914,7 @@ gMoveDescription_PoisonFang::
 	.string "The foe is bitten\nwith toxic fangs.\nIt may also badly\npoison the foe.$"
 
 gMoveDescription_CrushClaw::
-	.string "The foe is attacked\nwith sharp claws.\nIt may also lower\nthe foe's DEFENSE.$"
+	.string "The foe is attacked\nwith sharp claws.\nIt may also lower\nthe foe's Defense.$"
 
 gMoveDescription_BlastBurn::
 	.string "The foe is hit with\na huge explosion.\nThe user can't move\non the next turn.$"
@@ -923,7 +923,7 @@ gMoveDescription_HydroCannon::
 	.string "The foe is hit with\na watery cannon.\nThe user can't move\non the next turn.$"
 
 gMoveDescription_MeteorMash::
-	.string "The foe is hit with\na hard, fast punch.\nIt may also raise\nthe user's ATTACK.$"
+	.string "The foe is hit with\na hard, fast punch.\nIt may also raise\nthe user's Attack.$"
 
 gMoveDescription_Astonish::
 	.string "An attack using a\nstartling shout.\nIt also may make\nthe foe flinch.$"
@@ -935,34 +935,34 @@ gMoveDescription_Aromatherapy::
 	.string "A soothing scent is\nreleased to heal\nall status problems\nin the user's party.$"
 
 gMoveDescription_FakeTears::
-	.string "The user feigns\ncrying to sharply\nlower the foe's\nSP. DEF stat.$"
+	.string "The user feigns\ncrying to sharply\nlower the foe's\nSp. Def stat.$"
 
 gMoveDescription_AirCutter::
 	.string "The foe is hit with\nrazor-like wind.\nIt has a high\ncritical-hit ratio.$"
 
 gMoveDescription_Overheat::
-	.string "An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.$"
+	.string "An intense attack\nthat also sharply\nreduces the user's\nSp. Atk stat.$"
 
 gMoveDescription_OdorSleuth::
 	.string "Completely negates\nthe foe's efforts to\nheighten its ability\nto evade.$"
 
 gMoveDescription_RockTomb::
-	.string "Boulders are hurled\nat the foe. It also\nlowers the foe's\nSPEED if it hits.$"
+	.string "Boulders are hurled\nat the foe. It also\nlowers the foe's\nSpeed if it hits.$"
 
 gMoveDescription_SilverWind::
 	.string "The foe is attacked\nwith a silver dust.\nIt may raise all\nthe user's stats.$"
 
 gMoveDescription_MetalSound::
-	.string "A horrible metallic\nscreech is used to\nsharply lower the\nfoe's SP. DEF.$"
+	.string "A horrible metallic\nscreech is used to\nsharply lower the\nfoe's Sp. Def.$"
 
 gMoveDescription_GrassWhistle::
 	.string "A pleasant melody\nis played to lull\nthe foe into a deep\nsleep.$"
 
 gMoveDescription_Tickle::
-	.string "The foe is made to\nlaugh, reducing its\nATTACK and DEFENSE\nstats.$"
+	.string "The foe is made to\nlaugh, reducing its\nAttack and Defense\nstats.$"
 
 gMoveDescription_CosmicPower::
-	.string "The user absorbs a\nmystic power to\nraise its DEFENSE\nand SP. DEF.$"
+	.string "The user absorbs a\nmystic power to\nraise its Defense\nand Sp. Def.$"
 
 gMoveDescription_WaterSpout::
 	.string "The higher the\nuser's HP, the more\npowerful this\nattack becomes.$"
@@ -998,13 +998,13 @@ gMoveDescription_IcicleSpear::
 	.string "Sharp icicles are\nfired at the foe.\nIt strikes two to\nfive times.$"
 
 gMoveDescription_IronDefense::
-	.string "The user hardens\nits body's surface\nto sharply raise its\nDEFENSE stat.$"
+	.string "The user hardens\nits body's surface\nto sharply raise its\nDefense stat.$"
 
 gMoveDescription_Block::
 	.string "The user blocks the\nfoe's way with arms\nspread wide to\nprevent escape.$"
 
 gMoveDescription_Howl::
-	.string "The user howls to\nraise its spirit and\nboost its ATTACK\nstat.$"
+	.string "The user howls to\nraise its spirit and\nboost its Attack\nstat.$"
 
 gMoveDescription_DragonClaw::
 	.string "Sharp, huge claws\nhook and slash the\nfoe quickly and\nwith great power.$"
@@ -1013,13 +1013,13 @@ gMoveDescription_FrenzyPlant::
 	.string "The foe is hit with\nan enormous branch.\nThe user can't move\non the next turn.$"
 
 gMoveDescription_BulkUp::
-	.string "The user bulks up\nits body to boost\nboth its ATTACK and\nDEFENSE stats.$"
+	.string "The user bulks up\nits body to boost\nboth its Attack and\nDefense stats.$"
 
 gMoveDescription_Bounce::
 	.string "The user bounces\non the foe on the\n2nd turn. It may\nparalyze the foe.$"
 
 gMoveDescription_MudShot::
-	.string "The user attacks by\nhurling mud.\nIt also reduces the\nfoe's SPEED.$"
+	.string "The user attacks by\nhurling mud.\nIt also reduces the\nfoe's Speed.$"
 
 gMoveDescription_PoisonTail::
 	.string "An attack with a\nhigh critical-hit\nratio. It may also\npoison the foe.$"
@@ -1034,16 +1034,16 @@ gMoveDescription_MagicalLeaf::
 	.string "The foe is attacked\nwith a strange leaf\nthat cannot be\nevaded.$"
 
 gMoveDescription_WaterSport::
-	.string "Weakens FIRE-type\nattacks while the\nuser is in the\nbattle.$"
+	.string "Weakens Fire-type\nattacks while the\nuser is in the\nbattle.$"
 
 gMoveDescription_CalmMind::
-	.string "The user focuses\nits mind to raise\nthe SP. ATK and\nSP. DEF stats.$"
+	.string "The user focuses\nits mind to raise\nthe Sp. Atk and\nSp. Def stats.$"
 
 gMoveDescription_LeafBlade::
 	.string "The foe is slashed\nwith a sharp leaf.\nIt has a high\ncritical-hit ratio.$"
 
 gMoveDescription_DragonDance::
-	.string "A mystic, powerful\ndance that boosts\nthe user's ATTACK\nand SPEED stats.$"
+	.string "A mystic, powerful\ndance that boosts\nthe user's Attack\nand Speed stats.$"
 
 gMoveDescription_RockBlast::
 	.string "The user hurls two\nto five hard rocks\nat the foe to\nattack.$"
@@ -1058,5 +1058,5 @@ gMoveDescription_DoomDesire::
 	.string "A move that attacks\nthe foe with a\nblast of light two\nturns after use.$"
 
 gMoveDescription_PsychoBoost::
-	.string "An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.$"
+	.string "An intense attack\nthat also sharply\nreduces the user's\nSp. Atk stat.$"
 

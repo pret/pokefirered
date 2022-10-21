@@ -6,14 +6,14 @@ Text_RockSlideTeach::
     .string "That'd be, like, waaaaaaaaaaah!\n"
     .string "Total terror!\p"
     .string "You don't seem to be scared.\n"
-    .string "Want to try using ROCK SLIDE?$"
+    .string "Want to try using Rock Slide?$"
 
 Text_RockSlideDeclined::
     .string "Oh, so you are scared after all.$"
 
 Text_RockSlideWhichMon::
-    .string "Which POKéMON should I teach\n"
-    .string "ROCK SLIDE?$"
+    .string "Which Pokémon should I teach\n"
+    .string "Rock Slide?$"
 
 Text_RockSlideTaught::
     .string "It might be scary to use it in this\n"
@@ -24,6 +24,6 @@ SeafoamIslands_B4F_Text_BouldersMightChangeWaterFlow::
     .string "flow of water.$"
 
 SeafoamIslands_B4F_Text_DangerFastCurrent::
-    .string "DANGER\n"
+    .string "Danger\n"
     .string "Fast current!$"
 

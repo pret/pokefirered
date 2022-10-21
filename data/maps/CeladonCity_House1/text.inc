@@ -4,14 +4,14 @@ CeladonCity_House1_Text_SlotsReelInTheDough::
     .string "big-time!$"
 
 CeladonCity_House1_Text_ShippedMonsAsSlotPrizes::
-    .string "CHIEF!\p"
+    .string "Chief!\p"
     .string "We just shipped two thousand\n"
-    .string "more POKéMON as slot prizes\l"
+    .string "more Pokémon as slot prizes\l"
     .string "again today!$"
 
 CeladonCity_House1_Text_DontTouchGameCornerPoster::
-    .string "Don't touch the poster at the GAME\n"
-    .string "CORNER!\p"
+    .string "Don't touch the poster at the Game\n"
+    .string "Corner!\p"
     .string "There's no secret switch behind it!$"
 
 @ Text for the replaced altars in the rocket chiefs house / celadon mansion

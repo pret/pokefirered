@@ -22,7 +22,7 @@ PokemonMansion_B1F_Text_IvanPostBattle::
 
 PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful::
     .string "Diary: Sept. 1\n"
-    .string "MEWTWO is far too powerful.\p"
+    .string "Mewtwo is far too powerful.\p"
     .string "We have failed to curb its vicious\n"
     .string "tendencies…$"
 

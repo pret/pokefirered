@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 Text_OnlySkilledTrainersAllowedThrough::
 	.string "Only truly skilled TRAINERS are\n"
+=======
+Text_OnlySkilledTrainersAllowedThrough::
+	.string "Only truly skilled Trainers are\n"
+>>>>>>> 3120e8118f3489b672874e5b41832ad81f10ed5a
 	.string "allowed through.\p"
 	.string "You don't have the {STR_VAR_1}\n"
 	.string "yet!$"
@@ -18,7 +23,7 @@ Text_OnlyPassWithBadgeDontHaveYet::
 	.string "You don't have the {STR_VAR_1}\n"
 	.string "yet.\p"
 	.string "You have to have it to get to\n"
-	.string "the POKéMON LEAGUE.$"
+	.string "the Pokémon League.$"
 
 Text_OnlyPassWithBadgeOhGoAhead::
 	.string "You can pass here only if you have\n"

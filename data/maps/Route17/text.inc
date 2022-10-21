@@ -7,7 +7,7 @@ Route17_Text_RaulDefeat::
 
 Route17_Text_RaulPostBattle::
     .string "You can find good stuff lying\n"
-    .string "around on CYCLING ROAD.\p"
+    .string "around on Cycling Road.\p"
     .string "There's good money in picking them\n"
     .string "up and selling them.$"
 
@@ -23,7 +23,7 @@ Route17_Text_IsaiahPostBattle::
     .string "here!$"
 
 Route17_Text_VirgilIntro::
-    .string "You heading to FUCHSIA?$"
+    .string "You heading to Fuchsia?$"
 
 Route17_Text_VirgilDefeat::
     .string "Crash and burn!$"
@@ -32,7 +32,7 @@ Route17_Text_VirgilPostBattle::
     .string "I love racing downhill!$"
 
 Route17_Text_BillyIntro::
-    .string "We're BIKERS!\n"
+    .string "We're Bikers!\n"
     .string "We rule the roads, man!$"
 
 Route17_Text_BillyDefeat::
@@ -42,25 +42,25 @@ Route17_Text_BillyPostBattle::
     .string "Are you looking for adventure?$"
 
 Route17_Text_NikolasIntro::
-    .string "Let VOLTORB electrify you!$"
+    .string "Let Voltorb electrify you!$"
 
 Route17_Text_NikolasDefeat::
     .string "Grounded out!$"
 
 Route17_Text_NikolasPostBattle::
-    .string "I got my VOLTORB at the abandoned\n"
-    .string "POWER PLANT.$"
+    .string "I got my Voltorb at the abandoned\n"
+    .string "Power Plant.$"
 
 Route17_Text_ZeekIntro::
-    .string "I leveled up my POKéMON, but it\n"
+    .string "I leveled up my Pokémon, but it\n"
     .string "won't evolve. Why?$"
 
 Route17_Text_ZeekDefeat::
     .string "Why, you!$"
 
 Route17_Text_ZeekPostBattle::
-    .string "Maybe some POKéMON need element\n"
-    .string "STONES to evolve.$"
+    .string "Maybe some Pokémon need element\n"
+    .string "Stones to evolve.$"
 
 Route17_Text_JamalIntro::
     .string "I need a little exercise!$"
@@ -82,7 +82,7 @@ Route17_Text_CoreyPostBattle::
     .string "Be ready to fight for your beliefs!$"
 
 Route17_Text_JaxonIntro::
-    .string "Nice BIKE!\n"
+    .string "Nice Bike!\n"
     .string "How's it handle?$"
 
 Route17_Text_JaxonDefeat::
@@ -106,26 +106,26 @@ Route17_Text_WatchOutForDiscardedItems::
     .string "Watch out for discarded items.$"
 
 Route17_Text_SameSpeciesGrowDifferentRates::
-    .string "TRAINER TIPS\p"
-    .string "All POKéMON are unique.\p"
-    .string "Even POKéMON of the same species\n"
+    .string "Trainer Tips\p"
+    .string "All Pokémon are unique.\p"
+    .string "Even Pokémon of the same species\n"
     .string "and level grow at different rates.$"
 
 Route17_Text_PressBToStayInPlace::
-    .string "TRAINER TIPS\p"
+    .string "Trainer Tips\p"
     .string "Press the B Button to stay in place\n"
     .string "while on a slope.$"
 
 Route17_Text_RouteSign::
-    .string "ROUTE 17\n"
-    .string "CELADON CITY - FUCHSIA CITY$"
+    .string "Route 17\n"
+    .string "Celadon City - Fuchsia City$"
 
 Route17_Text_DontThrowGameThrowBalls::
     .string "It's a notice!\p"
-    .string "Don't throw the game, throw POKé\n"
-    .string "BALLS instead!$"
+    .string "Don't throw the game, throw Poké\n"
+    .string "Balls instead!$"
 
 Route17_Text_CyclingRoadSign::
-    .string "CYCLING ROAD\n"
+    .string "Cycling Road\n"
     .string "Slope ends here!$"
 

@@ -24,7 +24,7 @@ CeruleanCity_House4_Text_IncredibleNewsHaveBerries::
     .string "I haven't seen a news story this\n"
     .string "incredible in too long a time!\p"
     .string "Thanks for sharing this fantastic\n"
-    .string "news. Have a bunch of BERRIES!$"
+    .string "news. Have a bunch of Berries!$"
 
 CeruleanCity_House4_Text_WishCouldShareNewsWithOthers::
     .string "It seems such a shame to not share\n"
@@ -47,7 +47,7 @@ CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries::
     .string "Yes, indeed!\p"
     .string "Consider this a show of\n"
     .string "appreciation from me and the news.\p"
-    .string "I'll give you more BERRIES than\n"
+    .string "I'll give you more Berries than\n"
     .string "I usually do.$"
 
 CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews::
@@ -57,6 +57,6 @@ CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews::
     .string "I won't be bored for a while.$"
 
 CeruleanCity_House4_Text_YourBerryPouchIsFull::
-    .string "Hm? Your BERRY POUCH is full.\n"
+    .string "Hm? Your Berry Pouch is full.\n"
     .string "My gift remains ungiven, then.$"
 

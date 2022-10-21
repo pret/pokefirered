@@ -7,18 +7,18 @@ Route21_North_Text_RonaldDefeat::
 
 Route21_North_Text_RonaldPostBattle::
 	.string "I can't catch anything good.\n"
-	.string "Not one good POKéMON to be had!$"
+	.string "Not one good Pokémon to be had!$"
 
 Route21_North_Text_WadeIntro::
 	.string "I got a big haul!\n"
 	.string "Wanna go for it?$"
 
 Route21_North_Text_WadeDefeat::
-	.string "Heheh, MAGIKARP just don't make\n"
+	.string "Heheh, Magikarp just don't make\n"
 	.string "the grade, do they?$"
 
 Route21_North_Text_WadePostBattle::
-	.string "I seem to only catch MAGIKARP!$"
+	.string "I seem to only catch Magikarp!$"
 
 Route21_North_Text_SpencerIntro::
 	.string "The sea cleanses my body and soul!$"

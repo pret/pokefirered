@@ -7,11 +7,11 @@ RocketHideout_B1F_Text_Grunt1Defeat::
     .string "Beaten!$"
 
 RocketHideout_B1F_Text_Grunt1PostBattle::
-    .string "Blast it… You're dissing TEAM\n"
-    .string "ROCKET, aren't you?$"
+    .string "Blast it… You're dissing Team\n"
+    .string "Rocket, aren't you?$"
 
 RocketHideout_B1F_Text_Grunt2Intro::
-    .string "You broke into TEAM ROCKET's\n"
+    .string "You broke into Team Rocket's\n"
     .string "operation? What nerve!$"
 
 RocketHideout_B1F_Text_Grunt2Defeat::
@@ -28,7 +28,7 @@ RocketHideout_B1F_Text_Grunt3Defeat::
     .string "I can't do it!$"
 
 RocketHideout_B1F_Text_Grunt3PostBattle::
-    .string "SILPH SCOPE? Humph!\n"
+    .string "Silph Scope? Humph!\n"
     .string "I don't know where it is.$"
 
 RocketHideout_B1F_Text_Grunt4Intro::
@@ -39,7 +39,7 @@ RocketHideout_B1F_Text_Grunt4Defeat::
 
 RocketHideout_B1F_Text_Grunt4PostBattle::
     .string "Okay, I'll talk…\n"
-    .string "Take the elevator to see my BOSS.$"
+    .string "Take the elevator to see my Boss.$"
 
 RocketHideout_B1F_Text_Grunt5Intro::
     .string "Are you lost, you little mouse?$"

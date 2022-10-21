@@ -7,11 +7,11 @@ SevenIsland_SevaultCanyon_Text_CyndyDefeat::
 
 SevenIsland_SevaultCanyon_Text_CyndyPostBattle::
     .string "The way I am now, I may have to\n"
-    .string "hold off on TRAINER TOWER…$"
+    .string "hold off on Trainer Tower…$"
 
 SevenIsland_SevaultCanyon_Text_EvanIntro::
     .string "It doesn't matter if you happen to\n"
-    .string "have the strongest POKéMON…\p"
+    .string "have the strongest Pokémon…\p"
     .string "It doesn't mean a thing if you don't\n"
     .string "know how to use them properly!$"
 
@@ -20,9 +20,9 @@ SevenIsland_SevaultCanyon_Text_EvanDefeat::
 
 SevenIsland_SevaultCanyon_Text_EvanPostBattle::
     .string "You see them every so often,\n"
-    .string "TRAINERS with awesome POKéMON\l"
+    .string "Trainers with awesome Pokémon\l"
     .string "who have no idea what to do.\p"
-    .string "Before training POKéMON, TRAINERS\n"
+    .string "Before training Pokémon, Trainers\n"
     .string "themselves need to grow up.$"
 
 SevenIsland_SevaultCanyon_Text_JacksonIntro::
@@ -49,7 +49,7 @@ SevenIsland_SevaultCanyon_Text_KatelynDefeat::
 
 SevenIsland_SevaultCanyon_Text_KatelynPostBattle::
     .string "Your mom bought those snazzy\n"
-    .string "RUNNING SHOES for you?\p"
+    .string "Running Shoes for you?\p"
     .string "She must adore you.$"
 
 SevenIsland_SevaultCanyon_Text_LeroyIntro::
@@ -81,50 +81,50 @@ SevenIsland_SevaultCanyon_Text_MichellePostBattle::
     .string "deeply.$"
 
 SevenIsland_SevaultCanyon_Text_LexIntro::
-    .string "LEX: My darling NYA, together\n"
+    .string "Lex: My darling Nya, together\n"
     .string "we could win!$"
 
 SevenIsland_SevaultCanyon_Text_LexDefeat::
-    .string "LEX: I seem to have been too\n"
+    .string "Lex: I seem to have been too\n"
     .string "careless…$"
 
 SevenIsland_SevaultCanyon_Text_LexPostBattle::
-    .string "LEX: I think it was a good\n"
-    .string "experience for NYA.\p"
+    .string "Lex: I think it was a good\n"
+    .string "experience for Nya.\p"
     .string "You have my gratitude.$"
 
 SevenIsland_SevaultCanyon_Text_LexNotEnoughMons::
-    .string "LEX: May I ask you to battle the\n"
+    .string "Lex: May I ask you to battle the\n"
     .string "both of us at the same time?$"
 
 SevenIsland_SevaultCanyon_Text_NyaIntro::
-    .string "NYA: I'll do my best so I won't\n"
-    .string "drag down my mentor, LEX!$"
+    .string "Nya: I'll do my best so I won't\n"
+    .string "drag down my mentor, Lex!$"
 
 SevenIsland_SevaultCanyon_Text_NyaDefeat::
-    .string "NYA: Oh, no…\n"
+    .string "Nya: Oh, no…\n"
     .string "I'm so sorry, I…$"
 
 SevenIsland_SevaultCanyon_Text_NyaPostBattle::
-    .string "NYA: I think I'm going to need\n"
+    .string "Nya: I think I'm going to need\n"
     .string "much more seasoning and tutoring\l"
-    .string "under LEX…\p"
-    .string "…So, LEX, please, may I stay with\n"
+    .string "under Lex…\p"
+    .string "…So, Lex, please, may I stay with\n"
     .string "you like this?$"
 
 SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons::
-    .string "NYA: I'm sorry, but may we battle\n"
+    .string "Nya: I'm sorry, but may we battle\n"
     .string "in two-on-two style?$"
 
 SevenIsland_SevaultCanyon_Text_RouteSign::
-    .string "SEVAULT CANYON\n"
-    .string "TANOBY RUINS AHEAD$"
+    .string "Sevault Canyon\n"
+    .string "Tanoby Ruins Ahead$"
 
 SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly::
     .string "Training by oneself is certainly\n"
     .string "not a bad thing.\p"
     .string "But it's also not bad to aim for\n"
     .string "the top with a partner.\p"
-    .string "Even BRUNO…\n"
+    .string "Even Bruno…\n"
     .string "He trained with a fellow by the\l"
-    .string "name of BRAWLY before.$"
+    .string "name of Brawly before.$"

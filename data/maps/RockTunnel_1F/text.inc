@@ -6,7 +6,7 @@ RockTunnel_1F_Text_LennyDefeat::
     .string "You win!$"
 
 RockTunnel_1F_Text_LennyPostBattle::
-    .string "Watch for ONIX.\n"
+    .string "Watch for Onix.\n"
     .string "They appear only occasionally.\p"
     .string "High-level ones can put the\n"
     .string "squeeze on you!$"
@@ -21,7 +21,7 @@ RockTunnel_1F_Text_OliverDefeat::
     .string "Which way is out?$"
 
 RockTunnel_1F_Text_OliverPostBattle::
-    .string "That sleeping POKéMON on ROUTE 12\n"
+    .string "That sleeping Pokémon on Route 12\n"
     .string "forced me to take this detour.$"
 
 RockTunnel_1F_Text_LucasIntro::
@@ -35,14 +35,14 @@ RockTunnel_1F_Text_LucasPostBattle::
     .string "You're talented enough to hike!$"
 
 RockTunnel_1F_Text_AshtonIntro::
-    .string "POKéMON fight!\n"
+    .string "Pokémon fight!\n"
     .string "Ready, go!$"
 
 RockTunnel_1F_Text_AshtonDefeat::
     .string "Game over!$"
 
 RockTunnel_1F_Text_AshtonPostBattle::
-    .string "Oh well, I'll get a ZUBAT as I go!$"
+    .string "Oh well, I'll get a Zubat as I go!$"
 
 RockTunnel_1F_Text_LeahIntro::
     .string "Eek!\p"
@@ -53,21 +53,21 @@ RockTunnel_1F_Text_LeahDefeat::
     .string "It was too dark…$"
 
 RockTunnel_1F_Text_LeahPostBattle::
-    .string "I saw a MACHOP in this tunnel.$"
+    .string "I saw a Machop in this tunnel.$"
 
 RockTunnel_1F_Text_DanaIntro::
     .string "I came this far looking for wild\n"
-    .string "POKéMON.$"
+    .string "Pokémon.$"
 
 RockTunnel_1F_Text_DanaDefeat::
-    .string "I'm out of POKéMON!$"
+    .string "I'm out of Pokémon!$"
 
 RockTunnel_1F_Text_DanaPostBattle::
     .string "You looked cute and harmless.\n"
     .string "Was I ever wrong!$"
 
 RockTunnel_1F_Text_ArianaIntro::
-    .string "You have POKéMON!\n"
+    .string "You have Pokémon!\n"
     .string "Let's start!$"
 
 RockTunnel_1F_Text_ArianaDefeat::
@@ -78,6 +78,6 @@ RockTunnel_1F_Text_ArianaPostBattle::
     .string "I'm all sweaty now.$"
 
 RockTunnel_1F_Text_RouteSign::
-    .string "ROCK TUNNEL\n"
-    .string "CERULEAN CITY - LAVENDER TOWN$"
+    .string "Rock Tunnel\n"
+    .string "Cerulean City - Lavender Town$"
 

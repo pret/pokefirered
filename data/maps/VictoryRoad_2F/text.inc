@@ -1,6 +1,6 @@
 VictoryRoad_2F_Text_DawsonIntro::
     .string "If you can get through here,\n"
-    .string "you can go meet the ELITE FOUR.$"
+    .string "you can go meet the Elite Four.$"
 
 VictoryRoad_2F_Text_DawsonDefeat::
     .string "No!\n"
@@ -8,11 +8,11 @@ VictoryRoad_2F_Text_DawsonDefeat::
 
 VictoryRoad_2F_Text_DawsonPostBattle::
     .string "I can beat you when it comes to\n"
-    .string "knowledge about POKéMON!$"
+    .string "knowledge about Pokémon!$"
 
 VictoryRoad_2F_Text_DaisukeIntro::
-    .string "This here is VICTORY ROAD.\n"
-    .string "It's the final test for TRAINERS!$"
+    .string "This here is Victory Road.\n"
+    .string "It's the final test for Trainers!$"
 
 VictoryRoad_2F_Text_DaisukeDefeat::
     .string "Atcho!$"
@@ -23,7 +23,7 @@ VictoryRoad_2F_Text_DaisukePostBattle::
 
 VictoryRoad_2F_Text_NelsonIntro::
     .string "Ah, so you wish to challenge the\n"
-    .string "ELITE FOUR?$"
+    .string "Elite Four?$"
 
 VictoryRoad_2F_Text_NelsonDefeat::
     .string "You got me!$"
@@ -40,16 +40,16 @@ VictoryRoad_2F_Text_VincentDefeat::
 
 VictoryRoad_2F_Text_VincentPostBattle::
     .string "You earned the right to be on\n"
-    .string "VICTORY ROAD…$"
+    .string "Victory Road…$"
 
 VictoryRoad_2F_Text_GregoryIntro::
-    .string "Is VICTORY ROAD too tough?$"
+    .string "Is Victory Road too tough?$"
 
 VictoryRoad_2F_Text_GregoryDefeat::
     .string "Well done!$"
 
 VictoryRoad_2F_Text_GregoryPostBattle::
-    .string "Many TRAINERS give up their\n"
+    .string "Many Trainers give up their\n"
     .string "challenge here and go home.$"
 
 @ Unused, old text for Moltres

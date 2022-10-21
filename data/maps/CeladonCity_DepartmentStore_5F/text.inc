@@ -1,23 +1,23 @@
 CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers::
-    .string "POKéMON stat enhancers can be\n"
+    .string "Pokémon stat enhancers can be\n"
     .string "bought only here.\p"
-    .string "HP UP increases the base HP of a\n"
-    .string "POKéMON.\p"
-    .string "CALCIUM raises the base SP. ATK\n"
-    .string "stat of one POKéMON.\p"
-    .string "ZINC boosts the base SP. DEF stat\n"
-    .string "of one POKéMON.\p"
-    .string "CARBOS enhances the base SPEED\n"
+    .string "HP Up increases the base HP of a\n"
+    .string "Pokémon.\p"
+    .string "Calcium raises the base Sp. Atk\n"
+    .string "stat of one Pokémon.\p"
+    .string "Zinc boosts the base Sp. Def stat\n"
+    .string "of one Pokémon.\p"
+    .string "Carbos enhances the base Speed\n"
     .string "stat.$"
 
 CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers::
-    .string "I'm here for POKéMON stat\n"
+    .string "I'm here for Pokémon stat\n"
     .string "enhancers.\p"
-    .string "PROTEIN increases the base ATTACK\n"
+    .string "Protein increases the base Attack\n"
     .string "power.\p"
-    .string "IRON increases the base DEFENSE\n"
+    .string "Iron increases the base Defense\n"
     .string "stat.$"
 
 CeladonCity_DepartmentStore_5F_Text_Drugstore::
-    .string "5F: DRUGSTORE$"
+    .string "5F: Drugstore$"
 

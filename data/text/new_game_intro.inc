@@ -1,128 +1,128 @@
 gOtherText_NewName::
-    .string "NEW NAME$"
+    .string "New Name$"
 
 gNameChoice_Green::
-    .string "GREEN$"
+    .string "Green$"
 
 gNameChoice_Red::
-    .string "RED$"
+    .string "Red$"
 
 gNameChoice_Leaf::
-    .string "LEAF$"
+    .string "Leaf$"
 
 gNameChoice_Fire::
-    .string "FIRE$"
+    .string "Fire$"
 
 gNameChoice_Gary::
-    .string "GARY$"
+    .string "Gary$"
 
 gNameChoice_Kaz::
-    .string "KAZ$"
+    .string "Kaz$"
 
 gNameChoice_Toru::
-    .string "TORU$"
+    .string "Toru$"
 
 gNameChoice_Ash::
-    .string "ASH$"
+    .string "Ash$"
 
 gNameChoice_Kene::
-    .string "KENE$"
+    .string "Kene$"
 
 gNameChoice_Geki::
-    .string "GEKI$"
+    .string "Geki$"
 
 gNameChoice_Jak::
-    .string "JAK$"
+    .string "Jak$"
 
 gNameChoice_Janne::
-    .string "JANNE$"
+    .string "Janne$"
 
 gNameChoice_Jonn::
-    .string "JONN$"
+    .string "Jonn$"
 
 gNameChoice_Kamon::
-    .string "KAMON$"
+    .string "Kamon$"
 
 gNameChoice_Karl::
-    .string "KARL$"
+    .string "Karl$"
 
 gNameChoice_Taylor::
-    .string "TAYLOR$"
+    .string "Taylor$"
 
 gNameChoice_Oscar::
-    .string "OSCAR$"
+    .string "Oscar$"
 
 gNameChoice_Hiro::
-    .string "HIRO$"
+    .string "Hiro$"
 
 gNameChoice_Max::
-    .string "MAX$"
+    .string "Max$"
 
 gNameChoice_Jon::
-    .string "JON$"
+    .string "Jon$"
 
 gNameChoice_Ralph::
-    .string "RALPH$"
+    .string "Ralph$"
 
 gNameChoice_Kay::
-    .string "KAY$"
+    .string "Kay$"
 
 gNameChoice_Tosh::
-    .string "TOSH$"
+    .string "Tosh$"
 
 gNameChoice_Roak::
-    .string "ROAK$"
+    .string "Roak$"
 
 gNameChoice_Omi::
-    .string "OMI$"
+    .string "Omi$"
 
 gNameChoice_Jodi::
-    .string "JODI$"
+    .string "Jodi$"
 
 gNameChoice_Amanda::
-    .string "AMANDA$"
+    .string "Amanda$"
 
 gNameChoice_Hillary::
-    .string "HILLARY$"
+    .string "Hillary$"
 
 gNameChoice_Makey::
-    .string "MAKEY$"
+    .string "Makey$"
 
 gNameChoice_Michi::
-    .string "MICHI$"
+    .string "Michi$"
 
 gNameChoice_Paula::
-    .string "PAULA$"
+    .string "Paula$"
 
 gNameChoice_June::
-    .string "JUNE$"
+    .string "June$"
 
 gNameChoice_Cassie::
-    .string "CASSIE$"
+    .string "Cassie$"
 
 gNameChoice_Rey::
-    .string "REY$"
+    .string "Rey$"
 
 gNameChoice_Seda::
-    .string "SEDA$"
+    .string "Seda$"
 
 gNameChoice_Kiko::
-    .string "KIKO$"
+    .string "Kiko$"
 
 gNameChoice_Mina::
-    .string "MINA$"
+    .string "Mina$"
 
 gNameChoice_Norie::
-    .string "NORIE$"
+    .string "Norie$"
 
 gNameChoice_Sai::
-    .string "SAI$"
+    .string "Sai$"
 
 gNameChoice_Momo::
-    .string "MOMO$"
+    .string "Momo$"
 
 gNameChoice_Suzi::
-    .string "SUZI$"
+    .string "Suzi$"
 
 gNewGame_HelpDocs1::
     .string "The various buttons will be explained in\n"
@@ -143,7 +143,7 @@ gNewGame_HelpDocs4::
 
 gNewGame_HelpDocs5::
     .string "Press this button to open the\n"
-    .string "MENU.$"
+    .string "Menu.$"
 
 gNewGame_HelpDocs6::
     .string "Used to shift items and to use\n"
@@ -188,19 +188,19 @@ gNewGameAdventureIntro3::
 
 gOakText_WelcomeToTheWorld::
     .string "Hello, there!\n"
-    .string "Glad to meet you!\pWelcome to the world of POKéMON!\pMy name is OAK.\pPeople affectionately refer to me\n"
-    .string "as the POKéMON PROFESSOR.\p$"
+    .string "Glad to meet you!\pWelcome to the world of Pokémon!\pMy name is Oak.\pPeople affectionately refer to me\n"
+    .string "as the Pokémon Professor.\p$"
 
 gOakText_WorldInhabited1::
     .string "This world…$"
 
 gOakText_WorldInhabited2::
     .string "…is inhabited far and wide by\n"
-    .string "creatures called POKéMON.\p$"
+    .string "creatures called Pokémon.\p$"
 
 gOakText_PetsBattlingStudy::
-    .string "For some people, POKéMON are pets.\n"
-    .string "Others use them for battling.\pAs for myself…\pI study POKéMON as a profession.\p$"
+    .string "For some people, Pokémon are pets.\n"
+    .string "Others use them for battling.\pAs for myself…\pI study Pokémon as a profession.\p$"
 
 gOakText_TellMeALittleAboutYourself::
     .string "But first, tell me a little about\n"
@@ -229,6 +229,6 @@ gOakText_RememberRivalName::
     .string "His name is {RIVAL}!\p$"
 
 gOakText_LegendAboutToUnfold::
-    .string "{PLAYER}!\pYour very own POKéMON legend is\n"
+    .string "{PLAYER}!\pYour very own Pokémon legend is\n"
     .string "about to unfold!\pA world of dreams and adventures\n"
-    .string "with POKéMON awaits! Let's go!$"
+    .string "with Pokémon awaits! Let's go!$"

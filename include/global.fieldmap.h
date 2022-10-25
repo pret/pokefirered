@@ -50,18 +50,6 @@ enum
     TILE_TERRAIN_WATERFALL,
 };
 
-enum
-{
-    CONNECTION_INVALID = -1,
-    CONNECTION_NONE,
-    CONNECTION_SOUTH,
-    CONNECTION_NORTH,
-    CONNECTION_WEST,
-    CONNECTION_EAST,
-    CONNECTION_DIVE,
-    CONNECTION_EMERGE
-};
-
 typedef void (*TilesetCB)(void);
 
 struct Tileset

@@ -1,32 +1,44 @@
-	.macro map map_id
+@ Most of the macros in this file are for arranging map event data, and are output by mapjson using data from each map's JSON file.
+
+	@ Takes a MAP constant and outputs the map group and map number as separate bytes
+	.macro map map_id:req
 	.byte \map_id >> 8    @ map group
 	.byte \map_id & 0xFF  @ map num
 	.endm
 
-	.macro map_script type, address
+	@ Defines a map script. 'type' is any MAP_SCRIPT_* constant (see include/constants/map_scripts.h)
+	.macro map_script type:req, script:req
 	.byte \type
-	.4byte \address
+	.4byte \script
 	.endm
 
-	.macro map_script_2 word1, word2, address
-	.2byte \word1
-	.2byte \word2
-	.4byte \address
+	@ Defines an entry in a map script table (for either ON_WARP_INTO_MAP_TABLE or ON_FRAME_TABLE)
+	.macro map_script_2 var:req, compare:req, script:req
+	.2byte \var
+	.2byte \compare
+	.4byte \script
 	.endm
 
+	@ Defines an object event template for map data, to be used by a normal object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h
 	.macro object_event index:req, gfx:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
 	.byte \index
 	.byte \gfx
 	.byte OBJ_KIND_NORMAL
 	.space 1  @ Padding
 	.2byte \x, \y
-	.byte \elevation, \movement_type, ((\y_radius << 4) | \x_radius), 0
-	.2byte \trainer_type, \sight_radius_tree_etc
+	.byte \elevation
+	.byte \movement_type
+	.byte ((\y_radius << 4) | \x_radius)
+	.space 1  @ Padding
+	.2byte \trainer_type
+	.2byte \sight_radius_tree_etc
 	.4byte \script
-	.2byte \event_flag, 0
+	.2byte \event_flag
+	.space 2  @ Padding
 	inc _num_npcs
 	.endm
 
+	@ Defines an object event template for map data, to be used by a clone object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h
 	.macro clone_event index:req, gfx:req, x:req, y:req, target_local_id:req, target_map_id:req
 	.byte \index
 	.byte \gfx
@@ -41,45 +53,71 @@
 	inc _num_npcs
 	.endm
 
-	.macro warp_def x, y, byte, warp, map_id
+	@ Defines a warp event for map data. Mirrors the struct layout of WarpEvent in include/global.fieldmap.h
+	.macro warp_def x:req, y:req, elevation:req, warpId:req, map_id:req
 	.2byte \x, \y
-	.byte \byte, \warp
+	.byte \elevation
+	.byte \warpId
 	.byte \map_id & 0xFF  @ map num
 	.byte \map_id >> 8    @ map group
 	inc _num_warps
 	.endm
 
-	.macro coord_event x, y, byte1, byte2, word1, word2, word3, script
+	@ Defines a coord event for map data. Mirrors the struct layout of CoordEvent in include/global.fieldmap.h
+	.macro coord_event x:req, y:req, elevation:req, var:req, varValue:req, script:req
 	.2byte \x, \y
-	.byte \byte1, \byte2
-	.2byte \word1, \word2, \word3
+	.byte \elevation
+	.space 1  @ Padding
+	.2byte \var
+	.2byte \varValue
+	.space 2  @ Padding
 	.4byte \script
 	inc _num_traps
 	.endm
 
-	.macro bg_event x, y, byte, kind, word, arg6, arg7, arg8
+	@ Defines a generic background event for map data. Mirrors the struct layout of BgEvent in include/global.fieldmap.h
+	@ 'kind' is any BG_EVENT_* constant (see include/constants/event_bg.h).
+	@ 'arg6' is used differently depending on the bg event type. 'arg7' and 'arg8' are only used by bg_hidden_item_event.
+	@ See macros below.
+	.macro bg_event x:req, y, elevation:req, kind:req, arg6:req, arg7, arg8
 	.2byte \x, \y
-	.byte \byte, \kind
-	.2byte \word
-	.if \kind < 5
-	.4byte \arg6
+	.byte \elevation
+	.byte \kind
+	.space 2  @ Padding
+	.if \kind != BG_EVENT_HIDDEN_ITEM
+		.4byte \arg6
 	.else
-	.2byte \arg6
-	.byte \arg7, \arg8
+		.2byte \arg6
+		.byte \arg7
+		.byte \arg8
 	.endif
 	inc _num_signs
 	.endm
 
-	.macro bg_hidden_item_event x, y, height, item, flag, quantity, underfoot
-	bg_event \x, \y, \height, 7, 0, \item, \flag, \quantity | (\underfoot << 7)
+	@ Defines a background sign event for map data. 'facing_dir' is any of the BG_EVENT_PLAYER_FACING_* constants (see include/constants/event_bg.h)
+	.macro bg_sign_event x:req, y:req, elevation:req, facing_dir:req, script:req
+	bg_event \x, \y, \elevation, \facing_dir, \script
 	.endm
 
-	.macro map_events npcs, warps, traps, signs
+	@ Defines a background hidden item event for map data
+	.macro bg_hidden_item_event x:req, y:req, elevation:req, item:req, flag:req, quantity:req, underfoot:req
+	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item, \flag, \quantity | (\underfoot << 7)
+	.endm
+
+	@ Defines a background secret base event for map data.
+	@ Unused by FRLG
+	.macro bg_secret_base_event x:req, y:req, elevation:req, secret_base_id:req
+	bg_event \x, \y, \elevation, BG_EVENT_SECRET_BASE, \secret_base_id
+	.endm
+
+	@ Defines the table of event data for a map. Mirrors the struct layout of MapEvents in include/global.fieldmap.h
+	.macro map_events npcs:req, warps:req, traps:req, signs:req
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs
 	.4byte \npcs, \warps, \traps, \signs
 	reset_map_events
 	.endm
 
+	@ Resets the event counters used to track how many events a map has. Run when the events table is created by map_events
 	.macro reset_map_events
 	.set _num_npcs, 0
 	.set _num_warps, 0
@@ -87,23 +125,28 @@
 	.set _num_signs, 0
 	.endm
 
+	@ Initialize the event counters for the first map
 	reset_map_events
 
+	@ Directions for connecting maps
+	@ The map.json files will only have e.g. "down" as direction data, and this will be appended to "connection_" by the connection macro
+	.equiv connection_down, CONNECTION_SOUTH
+	.equiv connection_up, CONNECTION_NORTH
+	.equiv connection_left, CONNECTION_WEST
+	.equiv connection_right, CONNECTION_EAST
+	.equiv connection_dive, CONNECTION_DIVE
+	.equiv connection_emerge, CONNECTION_EMERGE
 
-	.equiv connection_down, 1
-	.equiv connection_up, 2
-	.equiv connection_left, 3
-	.equiv connection_right, 4
-	.equiv connection_dive, 5
-	.equiv connection_emerge, 6
-
-	.macro connection direction, offset, map, filler
-	.4byte connection_\direction
+	@ Defines a map connection. Mirrors the struct layout of MapConnection in include/global.fieldmap.h
+	.macro connection direction:req, offset:req, map:req
+	.byte connection_\direction
+	.space 3  @ Padding
 	.4byte \offset
 	map \map
-	.space 2
+	.space 2  @ Padding
 	.endm
 
+	@ Defines the flags for a map header. Mirrors the layout of the bitfield in struct MapHeader in include/global.fieldmap.h
 	.macro map_header_flags allow_cycling:req, allow_escaping:req, allow_running:req, show_map_name:req
 	.byte \allow_cycling
 	.byte ((\show_map_name & 1) << 2) | ((\allow_running & 1) << 1) | ((\allow_escaping & 1) << 0)

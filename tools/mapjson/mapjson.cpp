@@ -340,9 +340,9 @@ string generate_firered_map_events_text(Json map_data) {
                 text << "\tcoord_event "
                      << coord_event["x"].int_value() << ", "
                      << coord_event["y"].int_value() << ", "
-                     << coord_event["elevation"].int_value() << ", 0, "
+                     << coord_event["elevation"].int_value() << ", "
                      << coord_event["var"].string_value() << ", "
-                     << coord_event["var_value"].string_value() << ", 0, "
+                     << coord_event["var_value"].string_value() << ", "
                      << coord_event["script"].string_value() << "\n";
             }
             else if (coord_event["type"] == "weather") {
@@ -363,11 +363,11 @@ string generate_firered_map_events_text(Json map_data) {
         text << bgs_label << "::\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
             if (bg_event["type"] == "sign") {
-                text << "\tbg_event "
+                text << "\tbg_sign_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "
                      << bg_event["elevation"].int_value() << ", "
-                     << bg_event["player_facing_dir"].string_value() << ", 0,"
+                     << bg_event["player_facing_dir"].string_value() << ", "
                      << bg_event["script"].string_value() << "\n";
             }
             else if (bg_event["type"] == "hidden_item") {

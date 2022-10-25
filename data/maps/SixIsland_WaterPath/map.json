@@ -190,7 +190,7 @@
       "y": 76,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_ASPEAR_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_ASPEAR_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -200,7 +200,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_ORAN_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_ORAN_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -210,7 +210,7 @@
       "y": 63,
       "elevation": 3,
       "item": "ITEM_PINAP_BERRY",
-      "flag": "HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_PINAP_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_SIX_ISLAND_WATER_PATH_PINAP_BERRY",
       "quantity": 1,
       "underfoot": false
     },

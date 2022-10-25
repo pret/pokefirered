@@ -217,7 +217,7 @@
       "y": 2,
       "elevation": 0,
       "item": "ITEM_NEST_BALL",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_ROCKET_WAREHOUSE_NEST_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_ROCKET_WAREHOUSE_NEST_BALL",
       "quantity": 1,
       "underfoot": false
     },
@@ -227,7 +227,7 @@
       "y": 16,
       "elevation": 0,
       "item": "ITEM_NET_BALL",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_ROCKET_WAREHOUSE_NET_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_ROCKET_WAREHOUSE_NET_BALL",
       "quantity": 1,
       "underfoot": false
     },

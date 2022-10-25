@@ -282,7 +282,7 @@
       "y": 57,
       "elevation": 3,
       "item": "ITEM_HYPER_POTION",
-      "flag": "HIDDEN_ITEM_ROUTE12_HYPER_POTION",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE12_HYPER_POTION",
       "quantity": 1,
       "underfoot": false
     },
@@ -292,7 +292,7 @@
       "y": 70,
       "elevation": 3,
       "item": "ITEM_LEFTOVERS",
-      "flag": "HIDDEN_ITEM_ROUTE12_LEFTOVERS",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE12_LEFTOVERS",
       "quantity": 1,
       "underfoot": true
     },
@@ -302,7 +302,7 @@
       "y": 116,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "HIDDEN_ITEM_ROUTE12_RARE_CANDY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE12_RARE_CANDY",
       "quantity": 1,
       "underfoot": false
     }

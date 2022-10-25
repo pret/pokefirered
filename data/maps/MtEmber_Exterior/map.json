@@ -376,7 +376,7 @@
       "y": 17,
       "elevation": 0,
       "item": "ITEM_FIRE_STONE",
-      "flag": "HIDDEN_ITEM_MT_EMBER_EXTERIOR_FIRE_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_MT_EMBER_EXTERIOR_FIRE_STONE",
       "quantity": 1,
       "underfoot": false
     },
@@ -386,7 +386,7 @@
       "y": 30,
       "elevation": 3,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "HIDDEN_ITEM_MT_EMBER_EXTERIOR_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_MT_EMBER_EXTERIOR_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     }

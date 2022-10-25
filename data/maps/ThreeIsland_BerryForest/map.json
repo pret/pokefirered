@@ -259,7 +259,7 @@
       "y": 25,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_RAZZ_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_RAZZ_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -269,7 +269,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_BLUK_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_BLUK_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_BLUK_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -279,7 +279,7 @@
       "y": 24,
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_NANAB_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_NANAB_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -289,7 +289,7 @@
       "y": 24,
       "elevation": 3,
       "item": "ITEM_WEPEAR_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_WEPEAR_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_WEPEAR_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -299,7 +299,7 @@
       "y": 18,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_ORAN_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_ORAN_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -309,7 +309,7 @@
       "y": 23,
       "elevation": 3,
       "item": "ITEM_CHERI_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_CHERI_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_CHERI_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -319,7 +319,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_CHESTO_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_CHESTO_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_CHESTO_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -329,7 +329,7 @@
       "y": 30,
       "elevation": 3,
       "item": "ITEM_PECHA_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PECHA_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PECHA_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -339,7 +339,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_RAWST_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_RAWST_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_RAWST_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -349,7 +349,7 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_ASPEAR_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_ASPEAR_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -359,7 +359,7 @@
       "y": 32,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PERSIM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PERSIM_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -369,7 +369,7 @@
       "y": 16,
       "elevation": 3,
       "item": "ITEM_PINAP_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PINAP_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_PINAP_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -379,7 +379,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_LUM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_LUM_BERRY",
       "quantity": 1,
       "underfoot": false
     }

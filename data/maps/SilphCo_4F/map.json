@@ -251,7 +251,7 @@
       "y": 20,
       "elevation": 0,
       "item": "ITEM_IRON",
-      "flag": "HIDDEN_ITEM_SILPH_CO_4F_IRON",
+      "flag": "FLAG_HIDDEN_ITEM_SILPH_CO_4F_IRON",
       "quantity": 1,
       "underfoot": false
     },

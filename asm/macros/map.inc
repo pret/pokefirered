@@ -101,7 +101,7 @@
 
 	@ Defines a background hidden item event for map data
 	.macro bg_hidden_item_event x:req, y:req, elevation:req, item:req, flag:req, quantity:req, underfoot:req
-	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item, \flag, \quantity | (\underfoot << 7)
+	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), \quantity | (\underfoot << 7)
 	.endm
 
 	@ Defines a background secret base event for map data.

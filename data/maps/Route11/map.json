@@ -248,7 +248,7 @@
       "y": 5,
       "elevation": 0,
       "item": "ITEM_ESCAPE_ROPE",
-      "flag": "HIDDEN_ITEM_ROUTE11_ESCAPE_ROPE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE11_ESCAPE_ROPE",
       "quantity": 1,
       "underfoot": false
     }

@@ -270,7 +270,7 @@
       "y": 22,
       "elevation": 3,
       "item": "ITEM_POTION",
-      "flag": "HIDDEN_ITEM_VIRIDIAN_FOREST_POTION",
+      "flag": "FLAG_HIDDEN_ITEM_VIRIDIAN_FOREST_POTION",
       "quantity": 1,
       "underfoot": false
     },
@@ -280,7 +280,7 @@
       "y": 57,
       "elevation": 0,
       "item": "ITEM_ANTIDOTE",
-      "flag": "HIDDEN_ITEM_VIRIDIAN_FOREST_ANTIDOTE",
+      "flag": "FLAG_HIDDEN_ITEM_VIRIDIAN_FOREST_ANTIDOTE",
       "quantity": 1,
       "underfoot": false
     }

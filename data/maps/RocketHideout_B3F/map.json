@@ -110,7 +110,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B3F_NUGGET",
+      "flag": "FLAG_HIDDEN_ITEM_ROCKET_HIDEOUT_B3F_NUGGET",
       "quantity": 1,
       "underfoot": false
     }

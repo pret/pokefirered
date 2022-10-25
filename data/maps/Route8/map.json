@@ -269,7 +269,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_RAWST_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE8_RAWST_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE8_RAWST_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -279,7 +279,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE8_LUM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE8_LUM_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -289,7 +289,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE8_LEPPA_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE8_LEPPA_BERRY",
       "quantity": 1,
       "underfoot": false
     }

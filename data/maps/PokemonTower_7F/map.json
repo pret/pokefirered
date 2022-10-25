@@ -89,7 +89,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_SOOTHE_BELL",
-      "flag": "HIDDEN_ITEM_POKEMON_TOWER_7F_SOOTHE_BELL",
+      "flag": "FLAG_HIDDEN_ITEM_POKEMON_TOWER_7F_SOOTHE_BELL",
       "quantity": 1,
       "underfoot": true
     }

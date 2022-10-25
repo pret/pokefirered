@@ -208,7 +208,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "HIDDEN_ITEM_CERULEAN_CAVE_1F_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_CERULEAN_CAVE_1F_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     }

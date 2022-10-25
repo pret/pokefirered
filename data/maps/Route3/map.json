@@ -170,7 +170,7 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE3_ORAN_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE3_ORAN_BERRY",
       "quantity": 1,
       "underfoot": false
     }

@@ -109,7 +109,7 @@
       "y": 52,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BIG_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BIG_PEARL",
       "quantity": 1,
       "underfoot": false
     },
@@ -119,7 +119,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_RAZZ_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_RAZZ_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -129,7 +129,7 @@
       "y": 22,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_SITRUS_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_SITRUS_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -139,7 +139,7 @@
       "y": 25,
       "elevation": 3,
       "item": "ITEM_BLUK_BERRY",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BLUK_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BLUK_BERRY",
       "quantity": 1,
       "underfoot": false
     }

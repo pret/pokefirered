@@ -258,7 +258,7 @@
       "y": 34,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "HIDDEN_ITEM_FOUR_ISLAND_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_FOUR_ISLAND_PEARL",
       "quantity": 1,
       "underfoot": false
     },
@@ -268,7 +268,7 @@
       "y": 21,
       "elevation": 3,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "HIDDEN_ITEM_FOUR_ISLAND_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_FOUR_ISLAND_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     },

@@ -221,7 +221,7 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "HIDDEN_ITEM_ROUTE20_STARDUST",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE20_STARDUST",
       "quantity": 1,
       "underfoot": false
     }

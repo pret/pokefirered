@@ -396,7 +396,7 @@
       "y": 20,
       "elevation": 3,
       "item": "ITEM_PP_UP",
-      "flag": "HIDDEN_ITEM_CELADON_CITY_PP_UP",
+      "flag": "FLAG_HIDDEN_ITEM_CELADON_CITY_PP_UP",
       "quantity": 1,
       "underfoot": false
     }

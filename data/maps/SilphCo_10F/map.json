@@ -184,7 +184,7 @@
       "y": 9,
       "elevation": 0,
       "item": "ITEM_HP_UP",
-      "flag": "HIDDEN_ITEM_SILPH_CO_10F_HP_UP",
+      "flag": "FLAG_HIDDEN_ITEM_SILPH_CO_10F_HP_UP",
       "quantity": 1,
       "underfoot": false
     },

@@ -173,7 +173,7 @@
       "y": 16,
       "elevation": 3,
       "item": "ITEM_MAX_ELIXIR",
-      "flag": "HIDDEN_ITEM_POWER_PLANT_MAX_ELIXIR",
+      "flag": "FLAG_HIDDEN_ITEM_POWER_PLANT_MAX_ELIXIR",
       "quantity": 1,
       "underfoot": false
     },
@@ -183,7 +183,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_THUNDER_STONE",
-      "flag": "HIDDEN_ITEM_POWER_PLANT_THUNDER_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_POWER_PLANT_THUNDER_STONE",
       "quantity": 1,
       "underfoot": false
     }

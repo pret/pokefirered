@@ -39,7 +39,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_POTION",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_POTION",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_POTION",
       "quantity": 1,
       "underfoot": false
     },
@@ -49,7 +49,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_PARALYZE_HEAL",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_PARALYZE_HEAL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_PARALYZE_HEAL",
       "quantity": 1,
       "underfoot": false
     },
@@ -59,7 +59,7 @@
       "y": 4,
       "elevation": 3,
       "item": "ITEM_AWAKENING",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_AWAKENING",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_AWAKENING",
       "quantity": 1,
       "underfoot": false
     },
@@ -69,7 +69,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_BURN_HEAL",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_BURN_HEAL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_BURN_HEAL",
       "quantity": 1,
       "underfoot": false
     },
@@ -79,7 +79,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_ICE_HEAL",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ICE_HEAL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ICE_HEAL",
       "quantity": 1,
       "underfoot": false
     },
@@ -89,7 +89,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ETHER",
       "quantity": 1,
       "underfoot": false
     },
@@ -99,7 +99,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_ANTIDOTE",
-      "flag": "HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ANTIDOTE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ANTIDOTE",
       "quantity": 1,
       "underfoot": false
     }

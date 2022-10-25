@@ -182,7 +182,7 @@
       "y": 18,
       "elevation": 0,
       "item": "ITEM_REVIVE",
-      "flag": "HIDDEN_ITEM_SILPH_CO_11F_REVIVE",
+      "flag": "FLAG_HIDDEN_ITEM_SILPH_CO_11F_REVIVE",
       "quantity": 1,
       "underfoot": false
     },

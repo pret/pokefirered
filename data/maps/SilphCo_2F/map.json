@@ -209,7 +209,7 @@
       "y": 21,
       "elevation": 0,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "HIDDEN_ITEM_SILPH_CO_2F_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_SILPH_CO_2F_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     },

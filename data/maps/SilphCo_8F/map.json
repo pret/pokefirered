@@ -191,7 +191,7 @@
       "y": 10,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "HIDDEN_ITEM_SILPH_CO_8F_NUGGET",
+      "flag": "FLAG_HIDDEN_ITEM_SILPH_CO_8F_NUGGET",
       "quantity": 1,
       "underfoot": false
     },

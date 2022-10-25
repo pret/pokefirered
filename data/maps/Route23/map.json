@@ -542,7 +542,7 @@
       "y": 42,
       "elevation": 0,
       "item": "ITEM_FULL_RESTORE",
-      "flag": "HIDDEN_ITEM_ROUTE23_FULL_RESTORE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_FULL_RESTORE",
       "quantity": 1,
       "underfoot": false
     },
@@ -552,7 +552,7 @@
       "y": 72,
       "elevation": 0,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "HIDDEN_ITEM_ROUTE23_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     },
@@ -562,7 +562,7 @@
       "y": 101,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
-      "flag": "HIDDEN_ITEM_ROUTE23_MAX_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_MAX_ETHER",
       "quantity": 1,
       "underfoot": false
     },
@@ -572,7 +572,7 @@
       "y": 18,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_LUM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_LUM_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -582,7 +582,7 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_SITRUS_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_SITRUS_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -592,7 +592,7 @@
       "y": 67,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_ASPEAR_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_ASPEAR_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -602,7 +602,7 @@
       "y": 128,
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_LEPPA_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_LEPPA_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -612,7 +612,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_MAX_ELIXIR",
-      "flag": "HIDDEN_ITEM_ROUTE23_MAX_ELIXIR",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_MAX_ELIXIR",
       "quantity": 1,
       "underfoot": false
     },

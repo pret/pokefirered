@@ -67,7 +67,7 @@
       "y": 27,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_BIG_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_BIG_PEARL",
       "quantity": 1,
       "underfoot": false
     },
@@ -77,7 +77,7 @@
       "y": 30,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_PEARL",
       "quantity": 1,
       "underfoot": false
     },
@@ -87,7 +87,7 @@
       "y": 32,
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
-      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_NANAB_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_NANAB_BERRY",
       "quantity": 1,
       "underfoot": false
     },

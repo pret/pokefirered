@@ -114,7 +114,7 @@
       "y": 42,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "HIDDEN_ITEM_ROUTE21_NORTH_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE21_NORTH_PEARL",
       "quantity": 1,
       "underfoot": false
     }

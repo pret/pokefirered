@@ -147,7 +147,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_LEAF_STONE",
-      "flag": "HIDDEN_ITEM_SAFARI_ZONE_CENTER_LEAF_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_CENTER_LEAF_STONE",
       "quantity": 1,
       "underfoot": false
     },

@@ -218,7 +218,7 @@
       "y": 16,
       "elevation": 3,
       "item": "ITEM_MOON_STONE",
-      "flag": "HIDDEN_ITEM_MT_MOON_B2F_MOON_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_MT_MOON_B2F_MOON_STONE",
       "quantity": 1,
       "underfoot": false
     },
@@ -228,7 +228,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "HIDDEN_ITEM_MT_MOON_B2F_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_MT_MOON_B2F_ETHER",
       "quantity": 1,
       "underfoot": false
     }

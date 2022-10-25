@@ -229,7 +229,7 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_ELIXIR",
-      "flag": "HIDDEN_ITEM_ROUTE25_ELIXIR",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE25_ELIXIR",
       "quantity": 1,
       "underfoot": false
     },
@@ -239,7 +239,7 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "HIDDEN_ITEM_ROUTE25_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE25_ETHER",
       "quantity": 1,
       "underfoot": false
     },
@@ -249,7 +249,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE25_ORAN_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE25_ORAN_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -259,7 +259,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_BLUK_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE25_BLUK_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE25_BLUK_BERRY",
       "quantity": 1,
       "underfoot": false
     }

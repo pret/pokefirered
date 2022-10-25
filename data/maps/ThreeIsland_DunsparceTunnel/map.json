@@ -54,7 +54,7 @@
       "y": 3,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "HIDDEN_ITEM_THREE_ISLAND_DUNSPARCE_TUNNEL_NUGGET",
+      "flag": "FLAG_HIDDEN_ITEM_THREE_ISLAND_DUNSPARCE_TUNNEL_NUGGET",
       "quantity": 1,
       "underfoot": false
     }

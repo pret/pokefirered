@@ -329,27 +329,27 @@ static u8 DoForcedMovementInCurrentDirection(MovementAction movementAction)
 
 static bool8 ForcedMovement_Slip(void)
 {
-    return DoForcedMovementInCurrentDirection(PlayerGoSpeed2);
+    return DoForcedMovementInCurrentDirection(PlayerWalkFast);
 }
 
 static bool8 ForcedMovement_WalkSouth(void)
 {
-    return DoForcedMovement(DIR_SOUTH, PlayerGoSpeed1);
+    return DoForcedMovement(DIR_SOUTH, PlayerWalkNormal);
 }
 
 static bool8 ForcedMovement_WalkNorth(void)
 {
-    return DoForcedMovement(DIR_NORTH, PlayerGoSpeed1);
+    return DoForcedMovement(DIR_NORTH, PlayerWalkNormal);
 }
 
 static bool8 ForcedMovement_WalkWest(void)
 {
-    return DoForcedMovement(DIR_WEST, PlayerGoSpeed1);
+    return DoForcedMovement(DIR_WEST, PlayerWalkNormal);
 }
 
 static bool8 ForcedMovement_WalkEast(void)
 {
-    return DoForcedMovement(DIR_EAST, PlayerGoSpeed1);
+    return DoForcedMovement(DIR_EAST, PlayerWalkNormal);
 }
 
 static bool8 ForcedMovement_SpinRight(void)
@@ -412,22 +412,22 @@ static u8 ForcedMovement_Slide(u8 direction, MovementAction movementAction)
 
 static bool8 ForcedMovement_SlideSouth(void)
 {
-    return ForcedMovement_Slide(DIR_SOUTH, PlayerGoSpeed2);
+    return ForcedMovement_Slide(DIR_SOUTH, PlayerWalkFast);
 }
 
 static bool8 ForcedMovement_SlideNorth(void)
 {
-    return ForcedMovement_Slide(DIR_NORTH, PlayerGoSpeed2);
+    return ForcedMovement_Slide(DIR_NORTH, PlayerWalkFast);
 }
 
 static bool8 ForcedMovement_SlideWest(void)
 {
-    return ForcedMovement_Slide(DIR_WEST, PlayerGoSpeed2);
+    return ForcedMovement_Slide(DIR_WEST, PlayerWalkFast);
 }
 
 static bool8 ForcedMovement_SlideEast(void)
 {
-    return ForcedMovement_Slide(DIR_EAST, PlayerGoSpeed2);
+    return ForcedMovement_Slide(DIR_EAST, PlayerWalkFast);
 }
 
 static bool8 ForcedMovement_MatJump(void)
@@ -508,8 +508,8 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     {
-        // speed 2 is fast, same speed as running
-        PlayerGoSpeed2(direction);
+        // Same speed as running
+        PlayerWalkFast(direction);
         return;
     }
 
@@ -526,9 +526,9 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     else
     {
         if (PlayerIsMovingOnRockStairs(direction))
-            PlayerGoSlow(direction);
+            PlayerWalkSlow(direction);
         else
-            PlayerGoSpeed1(direction);
+            PlayerWalkNormal(direction);
     }
 }
 
@@ -598,7 +598,7 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         && MapGridGetElevationAt(x, y) == 3
-        && GetObjectEventIdByXYZ(x, y, 3) == OBJECT_EVENTS_COUNT)
+        && GetObjectEventIdByPosition(x, y, 3) == OBJECT_EVENTS_COUNT)
     {
         QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[direction], 16);
         CreateStopSurfingTask(direction);
@@ -610,9 +610,9 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
     }
 }
 
-static bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
+static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
 {
-    if (GetLedgeJumpDirection(x, y, z) != 0)
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
         return TRUE;
     else
         return FALSE;
@@ -830,29 +830,29 @@ static void QL_TryRecordNPCStepWithDuration32(struct ObjectEvent * objectEvent, 
         QuestLogRecordNPCStepWithDuration(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, movementAction, 32);
 }
 
-void PlayerGoSlowest(u8 direction)
+void PlayerWalkSlower(u8 direction)
 {
     PlayerSetAnimId(GetWalkSlowerMovementAction(direction), 2);
 }
 
-void PlayerGoSlow(u8 direction)
+void PlayerWalkSlow(u8 direction)
 {
     PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
 }
 
-void PlayerGoSpeed1(u8 direction)
+void PlayerWalkNormal(u8 direction)
 {
     PlayerSetAnimId(GetWalkNormalMovementAction(direction), 2);
 }
 
-void PlayerGoSpeed2(u8 direction)
+void PlayerWalkFast(u8 direction)
 {
     PlayerSetAnimId(GetWalkFastMovementAction(direction), 2);
 }
 
-void sub_805C134(u8 direction)
+void PlayerGlide(u8 direction)
 {
-    PlayerSetAnimId(sub_8063FDC(direction), 2);
+    PlayerSetAnimId(GetGlideMovementAction(direction), 2);
 }
 
 void PlayerRideWaterCurrent(u8 direction)
@@ -860,10 +860,9 @@ void PlayerRideWaterCurrent(u8 direction)
     PlayerSetAnimId(GetRideWaterCurrentMovementAction(direction), 2);
 }
 
-// fastest speed (4 speed)
-void PlayerGoSpeed4(u8 direction)
+void PlayerWalkFaster(u8 direction)
 {
-    PlayerSetAnimId(GetWalkFastestMovementAction(direction), 2);
+    PlayerSetAnimId(GetWalkFasterMovementAction(direction), 2);
 }
 
 void PlayerRun(u8 direction)
@@ -885,7 +884,7 @@ void PlayerOnBikeCollide(u8 direction)
 void PlayerNotOnBikeCollide(u8 direction)
 {
     PlayCollisionSoundIfNotFacingWarp(direction);
-    PlayerSetAnimId(GetStepInPlaceDelay32AnimId(direction), 2);
+    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(direction), 2);
 }
 
 void PlayerFaceDirection(u8 direction)
@@ -900,7 +899,7 @@ void PlayerFaceDirectionFast(u8 direction)
 
 void PlayerTurnInPlace(u8 direction)
 {
-    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(direction), 1);
+    PlayerSetAnimId(GetWalkInPlaceFastMovementAction(direction), 1);
 }
 
 void PlayerJumpLedge(u8 direction)
@@ -965,13 +964,13 @@ static void PlayerStandingHoppingWheelie(u8 direction)
 static void PlayerMovingHoppingWheelie(u8 direction)
 {
     PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroWheelieHopMovementAction(direction), 2);
 }
 
 static void PlayerLedgeHoppingWheelie(u8 direction)
 {
     PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(direction), 8);
+    PlayerSetAnimId(GetAcroWheelieJumpMovementAction(direction), 8);
 }
 
 static void PlayerAcroTurnJump(u8 direction)
@@ -983,17 +982,17 @@ static void PlayerAcroTurnJump(u8 direction)
 static void PlayerAcroWheelieCollide(u8 direction)
 {
     PlaySE(SE_WALL_HIT);
-    PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroWheelieInPlaceMovementAction(direction), 2);
 }
 
 static void PlayerAcroPopWheelie(u8 direction)
 {
-    PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroPopWheelieMoveMovementAction(direction), 2);
 }
 
 static void PlayerAcroWheelieMove(u8 direction)
 {
-    PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
+    PlayerSetAnimId(GetAcroWheelieMoveMovementAction(direction), 2);
 }
 
 static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) = {
@@ -1090,7 +1089,7 @@ u8 GetPlayerMovementDirection(void)
     return gObjectEvents[gPlayerAvatar.objectEventId].movementDirection;
 }
 
-u8 PlayerGetZCoord(void)
+u8 PlayerGetElevation(void)
 {
     return gObjectEvents[gPlayerAvatar.objectEventId].previousElevation;
 }
@@ -1215,7 +1214,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
     if (GetCollisionAtCoords(playerObjEvent, x, y, playerObjEvent->facingDirection) == COLLISION_ELEVATION_MISMATCH
-        && PlayerGetZCoord() == 3
+        && PlayerGetElevation() == 3
         && MetatileAtCoordsIsWaterTile(x, y) == TRUE)
         return TRUE;
     else

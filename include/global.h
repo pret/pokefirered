@@ -814,7 +814,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    s8 height;
+    s8 elevation;
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

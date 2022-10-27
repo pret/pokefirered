@@ -101,8 +101,8 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         SaveClearScreen_GpuInit();
         break;
     case 3:
-        TextWindow_SetStdFrame0_WithPal(0, 0x001, 0xF0);
-        TextWindow_SetStdFrame0_WithPal(1, 0x001, 0xF0);
+        LoadStdWindowGfx(0, 0x001, 0xF0);
+        LoadStdWindowGfx(1, 0x001, 0xF0);
         break;
     case 4:
         DrawStdFrameWithCustomTileAndPalette(1, TRUE, 0x001, 0xF);

@@ -620,7 +620,7 @@ static void Task_Hof_SpawnPlayerPic(u8 taskId)
     ShowBg(3);
     gTasks[taskId].data[4] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), TRUE, 0x78, 0x48, 6, 0xFFFF);
     AddWindow(&sWindowTemplate);
-    TextWindow_SetStdFrame0_WithPal(1, 0x21D, 0xD0);
+    LoadStdWindowGfx(1, 0x21D, 0xD0);
     gTasks[taskId].data[3] = 120;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
 }

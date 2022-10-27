@@ -791,11 +791,11 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
 static void BuyMenuCollectObjectEventData(void)
 {
     s16 facingX, facingY;
-    u8 x, y, z;
+    u8 x, y, elevation;
     u8 num = 0;
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
-    z = PlayerGetZCoord();
+    elevation = PlayerGetElevation();
     
     for (y = 0; y < OBJECT_EVENTS_COUNT; y++)
         sViewportObjectEvents[y][OBJECT_EVENT_ID] = OBJECT_EVENTS_COUNT;
@@ -804,7 +804,7 @@ static void BuyMenuCollectObjectEventData(void)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 eventObjId = GetObjectEventIdByXYZ(facingX - 3 + x, facingY - 2 + y, z);
+            u8 eventObjId = GetObjectEventIdByPosition(facingX - 3 + x, facingY - 2 + y, elevation);
             if (eventObjId != OBJECT_EVENTS_COUNT)
             {
                 sViewportObjectEvents[num][OBJECT_EVENT_ID] = eventObjId;

@@ -30,7 +30,6 @@ struct UnkStruct_203B044
 
 extern u8 gQuestLogState;
 extern u8 gQuestLogPlaybackState;
-extern const u8 gUnknown_84566A8[];
 extern struct FieldInput gQuestLogFieldInput;
 extern struct UnkStruct_203B044 gUnknown_203B044;
 extern u16 *gUnknown_203AE04;

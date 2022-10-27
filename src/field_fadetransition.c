@@ -928,7 +928,7 @@ static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offs
         direction = DIR_WEST;
     else
         direction = DIR_EAST;
-    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceSlowMovementAction(direction));
+    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceFastMovementAction(direction));
     GetStairsMovementDirection(metatileBehavior, speedX, speedY);
     *offsetX = *speedX * 16;
     *offsetY = *speedY * 16;

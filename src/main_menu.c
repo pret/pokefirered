@@ -677,14 +677,14 @@ static void PrintBadgeCount(void)
 
 static void LoadUserFrameToBg(u8 bgId)
 {
-    LoadBgTiles(bgId, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1B1);
-    LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->palette, 0x20, 0x20);
+    LoadBgTiles(bgId, GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1B1);
+    LoadPalette(GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->palette, 0x20, 0x20);
     MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 
 static void SetStdFrame0OnBg(u8 bgId)
 {
-    TextWindow_SetStdFrame0_WithPal(MAIN_MENU_WINDOW_NEWGAME_ONLY, 0x1B1, 0x20);
+    LoadStdWindowGfx(MAIN_MENU_WINDOW_NEWGAME_ONLY, 0x1B1, 0x20);
     MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 

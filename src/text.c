@@ -42,7 +42,7 @@ static const struct SpriteSheet sUnknown_81EA68C[] =
 
 static const struct SpritePalette sUnknown_81EA6A4[] =
 {
-    {gTMCaseMainWindowPalette, 0x8000},
+    {gStandardMenuPalette, 0x8000},
     {NULL}
 };
 

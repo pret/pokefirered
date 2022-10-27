@@ -187,9 +187,9 @@ static void BikeTransition_MoveDirection(u8 direction)
         {
             
             if (collision == COLLISION_COUNT)
-                PlayerGoSpeed2(direction);
+                PlayerWalkFast(direction);
             else if (PlayerIsMovingOnRockStairs(direction))
-                PlayerGoSpeed2(direction);
+                PlayerWalkFast(direction);
             else
                 PlayerRideWaterCurrent(direction);
         }
@@ -201,7 +201,7 @@ static void BikeTransition_Downhill(u8 v)
     u8 collision = GetBikeCollision(DIR_SOUTH);
 
     if (collision == COLLISION_NONE)
-        PlayerGoSpeed4(DIR_SOUTH);
+        PlayerWalkFaster(DIR_SOUTH);
     else if (collision == COLLISION_LEDGE_JUMP)
         PlayerJumpLedge(DIR_SOUTH);
 }
@@ -209,7 +209,7 @@ static void BikeTransition_Downhill(u8 v)
 static void BikeTransition_Uphill(u8 direction)
 {
     if (GetBikeCollision(direction) == COLLISION_NONE)
-        PlayerGoSpeed1(direction);
+        PlayerWalkNormal(direction);
 }
 
 static u8 GetBikeCollision(u8 direction)
@@ -266,7 +266,7 @@ static bool8 MetatileBehaviorForbidsBiking(u8 metatileBehavior)
         return TRUE;
     if (!MetatileBehavior_IsFortreeBridge(metatileBehavior))
         return FALSE;
-    if (PlayerGetZCoord() & 1)
+    if (PlayerGetElevation() & 1)
         return FALSE;
     return TRUE;
 }

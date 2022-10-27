@@ -1956,7 +1956,7 @@ static void CB2_EggHatch_1(void)
     case 9:
         if (!IsTextPrinterActive(sEggHatchData->windowId))
         {
-            LoadUserWindowBorderGfx(sEggHatchData->windowId, 0x140, 0xE0);
+            LoadUserWindowGfx2(sEggHatchData->windowId, 0x140, 0xE0);
             CreateYesNoMenu(&sYesNoWinTemplate, FONT_3, 0, 2, 0x140, 0xE, 0);
             sEggHatchData->CB2_state++;
         }

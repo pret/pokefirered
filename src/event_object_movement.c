@@ -49,7 +49,7 @@ static void GetGroundEffectFlags_Seaweed(struct ObjectEvent *, u32 *);
 static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *, u32 *);
 static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
-static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
+static void InitObjectPriorityByElevation(struct Sprite *sprite, u8 elevation);
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *, struct Sprite *);
 static void DoTracksGroundEffect_None(struct ObjectEvent *, struct Sprite *, u8);
 static void DoTracksGroundEffect_Footprints(struct ObjectEvent *, struct Sprite *, u8);
@@ -76,7 +76,9 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static void ResetObjectEventFldEffData(struct ObjectEvent *);
 static u8 TryLoadObjectPalette(const struct SpritePalette *spritePalette);
 static u8 FindObjectEventPaletteIndexByTag(u16);
-static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *, u8);
+static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
+static bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y);
+static bool8 AreElevationsCompatible(u8 a, u8 b);
 static void ObjectCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
@@ -144,7 +146,7 @@ static void MovementType_MountainDisguise(struct Sprite *);
 static void MovementType_CopyPlayerInGrass(struct Sprite *);
 static void MovementType_Buried(struct Sprite *);
 static void MovementType_WalkInPlace(struct Sprite *);
-static void MovementType_WalkSlowlyInPlace(struct Sprite *);
+static void MovementType_WalkInPlaceFast(struct Sprite *);
 static void MovementType_JogInPlace(struct Sprite *);
 static void MovementType_Invisible(struct Sprite *);
 static void MovementType_RaiseHandAndStop(struct Sprite *);
@@ -280,10 +282,10 @@ static void (*const sMovementTypeCallbacks[MOVEMENT_TYPES_COUNT])(struct Sprite 
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP]                      = MovementType_WalkInPlace,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT]                    = MovementType_WalkInPlace,
     [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT]                   = MovementType_WalkInPlace,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN]             = MovementType_WalkSlowlyInPlace,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP]               = MovementType_WalkSlowlyInPlace,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT]             = MovementType_WalkSlowlyInPlace,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT]            = MovementType_WalkSlowlyInPlace,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_DOWN]               = MovementType_WalkInPlaceFast,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_UP]                 = MovementType_WalkInPlaceFast,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_LEFT]               = MovementType_WalkInPlaceFast,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_RIGHT]              = MovementType_WalkInPlaceFast,
     [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN]                     = MovementType_JogInPlace,
     [MOVEMENT_TYPE_JOG_IN_PLACE_UP]                       = MovementType_JogInPlace,
     [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT]                     = MovementType_JogInPlace,
@@ -409,10 +411,10 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT] = DIR_EAST,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = DIR_SOUTH,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = DIR_NORTH,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_WEST,
-    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_FAST_RIGHT] = DIR_EAST,
     [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN] = DIR_SOUTH,
     [MOVEMENT_TYPE_JOG_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT] = DIR_WEST,
@@ -896,7 +898,7 @@ static const struct Coords16 sDirectionToVectors[] = {
     [DIR_NORTHEAST] = { 1, -1},
 };
 
-static const u8 gFaceDirectionMovementActions[] = {
+static const u8 sFaceDirectionMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_FACE_UP,
@@ -904,7 +906,7 @@ static const u8 gFaceDirectionMovementActions[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_FACE_RIGHT,
 };
 
-static const u8 gFaceDirectionFastMovementActions[] = {
+static const u8 sFaceDirectionFastMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_FACE_DOWN_FAST,
     [DIR_SOUTH] = MOVEMENT_ACTION_FACE_DOWN_FAST,
     [DIR_NORTH] = MOVEMENT_ACTION_FACE_UP_FAST,
@@ -912,7 +914,7 @@ static const u8 gFaceDirectionFastMovementActions[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_FACE_RIGHT_FAST,
 };
 
-static const u8 gWalkSlowestMovementActions[] = {
+static const u8 sWalkSlowestMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_SLOWEST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_SLOWEST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_SLOWEST_UP,
@@ -920,7 +922,7 @@ static const u8 gWalkSlowestMovementActions[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_SLOWEST_RIGHT,
 };
 
-static const u8 gUnknown_83A64FB[] = {
+static const u8 sWalkSlowerMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_SLOWER_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_SLOWER_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_SLOWER_UP,
@@ -928,7 +930,7 @@ static const u8 gUnknown_83A64FB[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_SLOWER_RIGHT,
 };
 
-static const u8 gUnknown_83A6500[] = {
+static const u8 sWalkSlowMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_SLOW_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_SLOW_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_SLOW_UP,
@@ -936,7 +938,7 @@ static const u8 gUnknown_83A6500[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_SLOW_RIGHT,
 };
 
-static const u8 gUnknown_83A6505[] = {
+static const u8 sWalkNormalMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_NORMAL_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_NORMAL_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_NORMAL_UP,
@@ -944,7 +946,7 @@ static const u8 gUnknown_83A6505[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_NORMAL_RIGHT,
 };
 
-static const u8 gUnknown_83A650A[] = {
+static const u8 sWalkFastMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_FAST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_FAST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_FAST_UP,
@@ -952,7 +954,7 @@ static const u8 gUnknown_83A650A[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_FAST_RIGHT,
 };
 
-static const u8 gUnknown_83A650F[] = {
+static const u8 sGlideMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_GLIDE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_GLIDE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_GLIDE_UP,
@@ -960,7 +962,7 @@ static const u8 gUnknown_83A650F[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_GLIDE_RIGHT,
 };
 
-static const u8 gUnknown_83A6514[] = {
+static const u8 sRideWaterCurrentMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_RIDE_WATER_CURRENT_UP,
@@ -968,7 +970,7 @@ static const u8 gUnknown_83A6514[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_RIDE_WATER_CURRENT_RIGHT,
 };
 
-static const u8 gUnknown_83A6519[] = {
+static const u8 sWalkFasterMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_FASTER_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_FASTER_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_FASTER_UP,
@@ -976,7 +978,7 @@ static const u8 gUnknown_83A6519[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_FASTER_RIGHT,
 };
 
-static const u8 gUnknown_83A651E[] = {
+static const u8 sSlideMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_SLIDE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_SLIDE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_SLIDE_UP,
@@ -984,7 +986,7 @@ static const u8 gUnknown_83A651E[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_SLIDE_RIGHT,
 };
 
-static const u8 gUnknown_83A6523[] = {
+static const u8 sPlayerRunMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_PLAYER_RUN_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_PLAYER_RUN_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_PLAYER_RUN_UP,
@@ -992,7 +994,7 @@ static const u8 gUnknown_83A6523[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_PLAYER_RUN_RIGHT,
 };
 
-static const u8 gUnknown_83A6528[] = {
+static const u8 sPlayerRunSlowMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_PLAYER_RUN_DOWN_SLOW,
     [DIR_SOUTH] = MOVEMENT_ACTION_PLAYER_RUN_DOWN_SLOW,
     [DIR_NORTH] = MOVEMENT_ACTION_PLAYER_RUN_UP_SLOW,
@@ -1000,7 +1002,7 @@ static const u8 gUnknown_83A6528[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_PLAYER_RUN_RIGHT_SLOW,
 };
 
-static const u8 gUnknown_83A652D[] = {
+static const u8 sSpinMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_SPIN_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_SPIN_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_SPIN_UP,
@@ -1008,7 +1010,7 @@ static const u8 gUnknown_83A652D[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_SPIN_RIGHT,
 };
 
-static const u8 gUnknown_83A6532[] = {
+static const u8 sJump2MovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_2_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_2_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_2_UP,
@@ -1016,7 +1018,7 @@ static const u8 gUnknown_83A6532[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_2_RIGHT,
 };
 
-static const u8 gUnknown_83A6537[] = {
+static const u8 sJumpInPlaceMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
@@ -1024,7 +1026,7 @@ static const u8 gUnknown_83A6537[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT,
 };
 
-static const u8 gUnknown_83A653C[] = {
+static const u8 sJumpInPlaceTurnAroundMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN_UP,
@@ -1032,7 +1034,7 @@ static const u8 gUnknown_83A653C[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT,
 };
 
-static const u8 gUnknown_83A6541[] = {
+static const u8 sJumpMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_UP,
@@ -1040,7 +1042,7 @@ static const u8 gUnknown_83A6541[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_RIGHT,
 };
 
-static const u8 gUnknown_83A6546[] = {
+static const u8 sJumpSpecialMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_SPECIAL_UP,
@@ -1048,7 +1050,7 @@ static const u8 gUnknown_83A6546[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
 };
 
-static const u8 gUnknown_83A654B[] = {
+static const u8 sJumpSpecialWithEffectMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_JUMP_SPECIAL_WITH_EFFECT_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_JUMP_SPECIAL_WITH_EFFECT_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_JUMP_SPECIAL_WITH_EFFECT_UP,
@@ -1056,7 +1058,7 @@ static const u8 gUnknown_83A654B[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_JUMP_SPECIAL_WITH_EFFECT_RIGHT,
 };
 
-static const u8 gUnknown_83A6550[] = {
+static const u8 sWalkInPlaceSlowMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,
@@ -1064,7 +1066,7 @@ static const u8 gUnknown_83A6550[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_RIGHT,
 };
 
-static const u8 gUnknown_83A6555[] = {
+static const u8 sWalkInPlaceNormalMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_UP,
@@ -1072,7 +1074,7 @@ static const u8 gUnknown_83A6555[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_RIGHT,
 };
 
-static const u8 gUnknown_83A655A[] = {
+static const u8 sWalkInPlaceFastMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_UP,
@@ -1080,7 +1082,7 @@ static const u8 gUnknown_83A655A[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
 };
 
-static const u8 gUnknown_83A655F[] = {
+static const u8 sWalkInPlaceFasterMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_UP,
@@ -1088,7 +1090,7 @@ static const u8 gUnknown_83A655F[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_WALK_IN_PLACE_FASTER_RIGHT,
 };
 
-static const u8 gUnknown_83A6564[] = {
+static const u8 sAcroWheelieFaceDirectionMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
@@ -1096,7 +1098,7 @@ static const u8 gUnknown_83A6564[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_FACE_RIGHT,
 };
 
-static const u8 gUnknown_83A6569[] = {
+static const u8 sAcroPopWheelieFaceDirectionMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,
@@ -1104,7 +1106,7 @@ static const u8 gUnknown_83A6569[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,
 };
 
-static const u8 gUnknown_83A656E[] = {
+static const u8 sAcroEndWheelieFaceDirectionMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,
@@ -1112,7 +1114,7 @@ static const u8 gUnknown_83A656E[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,
 };
 
-static const u8 gUnknown_83A6573[] = {
+static const u8 sAcroWheelieHopFaceDirectionMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,
@@ -1120,7 +1122,7 @@ static const u8 gUnknown_83A6573[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_RIGHT,
 };
 
-static const u8 gUnknown_83A6578[] = {
+static const u8 sAcroWheelieHopMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_UP,
@@ -1128,7 +1130,7 @@ static const u8 gUnknown_83A6578[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_HOP_RIGHT,
 };
 
-static const u8 gUnknown_83A657D[] = {
+static const u8 sAcroWheelieJumpMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_UP,
@@ -1136,7 +1138,7 @@ static const u8 gUnknown_83A657D[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_RIGHT,
 };
 
-static const u8 gUnknown_83A6582[] = {
+static const u8 sAcroWheelieInPlaceMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_UP,
@@ -1144,7 +1146,7 @@ static const u8 gUnknown_83A6582[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT,
 };
 
-static const u8 gUnknown_83A6587[] = {
+static const u8 sAcroPopWheelieMoveMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_UP,
@@ -1152,7 +1154,7 @@ static const u8 gUnknown_83A6587[] = {
     [DIR_EAST]  = MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_RIGHT,
 };
 
-static const u8 gUnknown_83A658C[] = {
+static const u8 sAcroWheelieMoveMovementActions[] = {
     [DIR_NONE]  = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
     [DIR_SOUTH] = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
     [DIR_NORTH] = MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,
@@ -1607,7 +1609,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     if (!objectEvent->inanimate)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
 
-    SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+    SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
     UpdateObjectEventVisibility(objectEvent, sprite);
     return objectEventId;
 }
@@ -1644,7 +1646,7 @@ u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *objectEventTemplate)
     return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
-int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
+int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
 {
     struct ObjectEventTemplate objectEventTemplate;
 
@@ -1655,7 +1657,7 @@ int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 
     objectEventTemplate.kind = OBJ_KIND_NORMAL;
     objectEventTemplate.x = x;
     objectEventTemplate.y = y;
-    objectEventTemplate.objUnion.normal.elevation = z;
+    objectEventTemplate.objUnion.normal.elevation = elevation;
     objectEventTemplate.objUnion.normal.movementType = movementBehavior;
     objectEventTemplate.objUnion.normal.movementRangeX = 0;
     objectEventTemplate.objUnion.normal.movementRangeY = 0;
@@ -1729,7 +1731,7 @@ u8 AddPseudoObjectEvent(u16 graphicsId, SpriteCallback callback, s16 x, s16 y, u
     return spriteId;
 }
 
-u8 CreateVirtualObject(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
+u8 CreateVirtualObject(u8 graphicsId, u8 a1, s16 x, s16 y, u8 elevation, u8 direction)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1753,7 +1755,7 @@ u8 CreateVirtualObject(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
         sprite->oam.paletteNum = graphicsInfo->paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = a1;
-        sprite->data[1] = z;
+        sprite->data[1] = elevation;
         if (graphicsInfo->paletteSlot == 10)
         {
             LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
@@ -1764,8 +1766,8 @@ u8 CreateVirtualObject(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
             SetSubspriteTables(sprite, subspriteTables);
             sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
-        InitObjectPriorityByZCoord(sprite, z);
-        SetObjectSubpriorityByZCoord(z, sprite, 1);
+        InitObjectPriorityByElevation(sprite, elevation);
+        SetObjectSubpriorityByElevation(elevation, sprite, 1);
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(direction));
     }
     return spriteId;
@@ -1951,7 +1953,7 @@ static void ReloadMapObjectWithOffset(u8 objectEventId, s16 x, s16 y)
             StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
         }
         ResetObjectEventFldEffData(objectEvent);
-        SetObjectSubpriorityByZCoord(objectEvent->previousElevation, sprite, 1);
+        SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
     }
 }
 
@@ -2347,7 +2349,7 @@ void UpdateObjectEventCoordsForCameraUpdate(void)
     }
 }
 
-u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
+u8 GetObjectEventIdByPosition(u16 x, u16 y, u8 elevation)
 {
     u8 i;
 
@@ -2355,21 +2357,20 @@ u8 GetObjectEventIdByXYZ(u16 x, u16 y, u8 z)
     {
         if (gObjectEvents[i].active)
         {
-            if (gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y && ObjectEventDoesZCoordMatch(&gObjectEvents[i], z))
-            {
+            if (gObjectEvents[i].currentCoords.x == x
+             && gObjectEvents[i].currentCoords.y == y
+             && ObjectEventDoesElevationMatch(&gObjectEvents[i], elevation))
                 return i;
-            }
         }
     }
     return OBJECT_EVENTS_COUNT;
 }
 
-static bool8 ObjectEventDoesZCoordMatch(struct ObjectEvent *objectEvent, u8 z)
+static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *objectEvent, u8 elevation)
 {
-    if (objectEvent->currentElevation != 0 && z != 0 && objectEvent->currentElevation != z)
-    {
+    if (objectEvent->currentElevation != 0 && elevation != 0 && objectEvent->currentElevation != elevation)
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -4370,7 +4371,7 @@ static bool8 CopyablePlayerMovement_GoSpeed2(struct ObjectEvent *objectEvent, st
     direction = playerDirection;
     direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastestMovementAction(direction));
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFasterMovementAction(direction));
     if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
@@ -4540,12 +4541,12 @@ static bool8 MovementType_WalkInPlace_Step0(struct ObjectEvent *objectEvent, str
     return TRUE;
 }
 
-movement_type_def(MovementType_WalkSlowlyInPlace, gMovementTypeFuncs_WalkSlowlyInPlace)
+movement_type_def(MovementType_WalkInPlaceFast, gMovementTypeFuncs_WalkInPlaceFast)
 
-static bool8 MovementType_WalkSlowlyInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_WalkInPlaceFast_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceSlowMovementAction(objectEvent->facingDirection));
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceFastMovementAction(objectEvent->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -4555,7 +4556,7 @@ movement_type_def(MovementType_JogInPlace, gMovementTypeFuncs_JogInPlace)
 static bool8 MovementType_JogInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceFastMovementAction(objectEvent->facingDirection));
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceFasterMovementAction(objectEvent->facingDirection));
     sprite->data[1] = 1;
     return TRUE;
 }
@@ -4858,7 +4859,7 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
         return COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
         return COLLISION_IMPASSABLE;
-    else if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
+    else if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
         return COLLISION_ELEVATION_MISMATCH;
     else if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
         return COLLISION_OBJECT_EVENT;
@@ -4873,7 +4874,7 @@ u8 GetCollisionFlagsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 d
         flags |= 1;
     if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
         flags |= 2;
-    if (IsZCoordMismatchAt(objectEvent->currentElevation, x, y))
+    if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
         flags |= 4;
     if (DoesObjectCollideWithObjectAt(objectEvent, x, y))
         flags |= 8;
@@ -4930,10 +4931,8 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
         {
             if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
             {
-                if (AreZCoordsCompatible(objectEvent->currentElevation, curObject->currentElevation))
-                {
+                if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
                     return TRUE;
-                }
             }
         }
     }
@@ -4953,14 +4952,12 @@ bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup)
     return FALSE;
 }
 
-void sub_80639D4(u8 localId, u8 mapNum, u8 mapGroup)
+static void SetBerryTreeJustPicked(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
 
     if (!TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId))
-    {
         gSprites[gObjectEvents[objectEventId].spriteId].data[7] |= 0x04;
-    }
 }
 
 void MoveCoords(u8 direction, s16 *x, s16 *y)
@@ -4969,7 +4966,8 @@ void MoveCoords(u8 direction, s16 *x, s16 *y)
     *y += sDirectionToVectors[direction].y;
 }
 
-void sub_8063A44(u8 direction, s16 *x, s16 *y)
+// Unused
+static void MoveCoordsInMapCoordIncrement(u8 direction, s16 *x, s16 *y)
 {
     *x += sDirectionToVectors[direction].x << 4;
     *y += sDirectionToVectors[direction].y << 4;
@@ -5184,8 +5182,8 @@ u8 name(u32 idx)                                    \
     return animIds[direction];                      \
 }
 
-dirn_to_anim(GetFaceDirectionMovementAction, gFaceDirectionMovementActions);
-dirn_to_anim(GetFaceDirectionFastMovementAction, gFaceDirectionFastMovementActions);
+dirn_to_anim(GetFaceDirectionMovementAction, sFaceDirectionMovementActions);
+dirn_to_anim(GetFaceDirectionFastMovementAction, sFaceDirectionFastMovementActions);
 
 u8 GetWalkSlowestMovementAction(u32 idx)
 {
@@ -5193,45 +5191,45 @@ u8 GetWalkSlowestMovementAction(u32 idx)
     if (direction > DIR_EAST)
         direction = DIR_NONE;
 
-    return gWalkSlowestMovementActions[direction];
+    return sWalkSlowestMovementActions[direction];
 }
 
-dirn_to_anim(GetWalkSlowerMovementAction, gUnknown_83A64FB);
-dirn_to_anim(GetWalkSlowMovementAction, gUnknown_83A6500);
-dirn_to_anim(GetWalkNormalMovementAction, gUnknown_83A6505);
-dirn_to_anim(GetWalkFastMovementAction, gUnknown_83A650A);
-dirn_to_anim(sub_8063FDC, gUnknown_83A650F);
-dirn_to_anim(GetRideWaterCurrentMovementAction, gUnknown_83A6514);
-dirn_to_anim(GetWalkFastestMovementAction, gUnknown_83A6519);
-dirn_to_anim(GetSlideMovementAction, gUnknown_83A651E);
-dirn_to_anim(GetPlayerRunMovementAction, gUnknown_83A6523);
-dirn_to_anim(GetPlayerRunSlowMovementAction, gUnknown_83A6528);
-dirn_to_anim(GetSpinMovementAction, gUnknown_83A652D);
-dirn_to_anim(GetJump2MovementAction, gUnknown_83A6532);
-dirn_to_anim(GetJumpInPlaceMovementAction, gUnknown_83A6537);
-dirn_to_anim(GetJumpInPlaceTurnAroundMovementAction, gUnknown_83A653C);
-dirn_to_anim(GetJumpMovementAction, gUnknown_83A6541);
-dirn_to_anim(GetJumpSpecialMovementAction, gUnknown_83A6546);
-dirn_to_anim(GetJumpSpecialWithEffectMovementAction, gUnknown_83A654B);
-dirn_to_anim(GetStepInPlaceDelay32AnimId, gUnknown_83A6550);
-dirn_to_anim(GetWalkInPlaceNormalMovementAction, gUnknown_83A6555);
-dirn_to_anim(GetWalkInPlaceSlowMovementAction, gUnknown_83A655A);
-dirn_to_anim(GetWalkInPlaceFastMovementAction, gUnknown_83A655F);
+dirn_to_anim(GetWalkSlowerMovementAction, sWalkSlowerMovementActions);
+dirn_to_anim(GetWalkSlowMovementAction, sWalkSlowMovementActions);
+dirn_to_anim(GetWalkNormalMovementAction, sWalkNormalMovementActions);
+dirn_to_anim(GetWalkFastMovementAction, sWalkFastMovementActions);
+dirn_to_anim(GetGlideMovementAction, sGlideMovementActions);
+dirn_to_anim(GetRideWaterCurrentMovementAction, sRideWaterCurrentMovementActions);
+dirn_to_anim(GetWalkFasterMovementAction, sWalkFasterMovementActions);
+dirn_to_anim(GetSlideMovementAction, sSlideMovementActions);
+dirn_to_anim(GetPlayerRunMovementAction, sPlayerRunMovementActions);
+dirn_to_anim(GetPlayerRunSlowMovementAction, sPlayerRunSlowMovementActions);
+dirn_to_anim(GetSpinMovementAction, sSpinMovementActions);
+dirn_to_anim(GetJump2MovementAction, sJump2MovementActions);
+dirn_to_anim(GetJumpInPlaceMovementAction, sJumpInPlaceMovementActions);
+dirn_to_anim(GetJumpInPlaceTurnAroundMovementAction, sJumpInPlaceTurnAroundMovementActions);
+dirn_to_anim(GetJumpMovementAction, sJumpMovementActions);
+dirn_to_anim(GetJumpSpecialMovementAction, sJumpSpecialMovementActions);
+dirn_to_anim(GetJumpSpecialWithEffectMovementAction, sJumpSpecialWithEffectMovementActions);
+dirn_to_anim(GetWalkInPlaceSlowMovementAction, sWalkInPlaceSlowMovementActions);
+dirn_to_anim(GetWalkInPlaceNormalMovementAction, sWalkInPlaceNormalMovementActions);
+dirn_to_anim(GetWalkInPlaceFastMovementAction, sWalkInPlaceFastMovementActions);
+dirn_to_anim(GetWalkInPlaceFasterMovementAction, sWalkInPlaceFasterMovementActions);
 
 bool8 ObjectEventFaceOppositeDirection(struct ObjectEvent *objectEvent, u8 direction)
 {
     return ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(GetOppositeDirection(direction)));
 }
 
-dirn_to_anim(GetAcroWheelieFaceDirectionMovementAction, gUnknown_83A6564);
-dirn_to_anim(GetAcroPopWheelieFaceDirectionMovementAction, gUnknown_83A6569);
-dirn_to_anim(GetAcroEndWheelieFaceDirectionMovementAction, gUnknown_83A656E);
-dirn_to_anim(GetAcroWheelieHopFaceDirectionMovementAction, gUnknown_83A6573);
-dirn_to_anim(GetAcroWheelieHopDirectionMovementAction, gUnknown_83A6578);
-dirn_to_anim(GetAcroWheelieJumpDirectionMovementAction, gUnknown_83A657D);
-dirn_to_anim(GetAcroWheelieInPlaceDirectionMovementAction, gUnknown_83A6582);
-dirn_to_anim(GetAcroPopWheelieMoveDirectionMovementAction, gUnknown_83A6587);
-dirn_to_anim(GetAcroWheelieMoveDirectionMovementAction, gUnknown_83A658C);
+dirn_to_anim(GetAcroWheelieFaceDirectionMovementAction, sAcroWheelieFaceDirectionMovementActions);
+dirn_to_anim(GetAcroPopWheelieFaceDirectionMovementAction, sAcroPopWheelieFaceDirectionMovementActions);
+dirn_to_anim(GetAcroEndWheelieFaceDirectionMovementAction, sAcroEndWheelieFaceDirectionMovementActions);
+dirn_to_anim(GetAcroWheelieHopFaceDirectionMovementAction, sAcroWheelieHopFaceDirectionMovementActions);
+dirn_to_anim(GetAcroWheelieHopMovementAction, sAcroWheelieHopMovementActions);
+dirn_to_anim(GetAcroWheelieJumpMovementAction, sAcroWheelieJumpMovementActions);
+dirn_to_anim(GetAcroWheelieInPlaceMovementAction, sAcroWheelieInPlaceMovementActions);
+dirn_to_anim(GetAcroPopWheelieMoveMovementAction, sAcroPopWheelieMoveMovementActions);
+dirn_to_anim(GetAcroWheelieMoveMovementAction, sAcroWheelieMoveMovementActions);
 
 u8 GetOppositeDirection(u8 direction)
 {
@@ -8330,30 +8328,30 @@ static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
         return 0;
 }
 
-u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
+u8 GetLedgeJumpDirection(s16 x, s16 y, u8 direction)
 {
-    static bool8 (*const gUnknown_83A705C[])(u8) = {
-        MetatileBehavior_IsJumpSouth,
-        MetatileBehavior_IsJumpNorth,
-        MetatileBehavior_IsJumpWest,
-        MetatileBehavior_IsJumpEast,
+    static bool8 (*const ledgeBehaviorFuncs[])(u8) = {
+        [DIR_SOUTH - 1] = MetatileBehavior_IsJumpSouth,
+        [DIR_NORTH - 1] = MetatileBehavior_IsJumpNorth,
+        [DIR_WEST - 1]  = MetatileBehavior_IsJumpWest,
+        [DIR_EAST - 1]  = MetatileBehavior_IsJumpEast,
     };
 
-    u8 b;
-    u8 index = z;
+    u8 behavior;
+    u8 index = direction;
 
-    if (index == 0)
-        return 0;
-    else if (index > 4)
-        index -= 4;
+    if (index == DIR_NONE)
+        return DIR_NONE;
+    else if (index > DIR_EAST)
+        index -= DIR_EAST;
 
     index--;
-    b = MapGridGetMetatileBehaviorAt(x, y);
+    behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (gUnknown_83A705C[index](b) == 1)
+    if (ledgeBehaviorFuncs[index](behavior) == TRUE)
         return index + 1;
 
-    return 0;
+    return DIR_NONE;
 }
 
 static void SetObjectEventSpriteOamTableForLongGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
@@ -8369,90 +8367,86 @@ static void SetObjectEventSpriteOamTableForLongGrass(struct ObjectEvent *objEven
 
     sprite->subspriteTableNum = 4;
 
-    if (ZCoordToPriority(objEvent->previousElevation) == 1)
+    if (ElevationToPriority(objEvent->previousElevation) == 1)
         sprite->subspriteTableNum = 5;
 }
 
-bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
+static bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 {
-    u8 mapZ;
+    u8 mapElevation;
 
-    if (z == 0)
+    if (elevation == 0)
         return FALSE;
 
-    mapZ = MapGridGetElevationAt(x, y);
+    mapElevation = MapGridGetElevationAt(x, y);
 
-    if (mapZ == 0 || mapZ == 0xF)
+    if (mapElevation == 0 || mapElevation == 15)
         return FALSE;
 
-    if (mapZ != z)
+    if (mapElevation != elevation)
         return TRUE;
 
     return FALSE;
 }
 
-static const u8 sUnknown_083A706C[] = {
-    0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
+static const u8 sElevationToSubpriority[] = {
+    115, 115, 83, 115, 83, 115, 83, 115, 83, 115, 83, 115, 83, 0, 0, 115
 };
 
-// Each byte corresponds to a sprite priority for an object event.
-// This is directly the inverse of sObjectEventPriorities_083A708C.
-static const u8 sObjectEventPriorities_083A707C[] = {
+static const u8 sElevationToPriority[] = {
     2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
 };
 
-// Each byte corresponds to a sprite priority for an object event.
-// This is the inverse of sObjectEventPriorities_083A707C.
 // 1 = Above player sprite
 // 2 = Below player sprite
-static const u8 sObjectEventPriorities_083A708C[] = {
+static const u8 sElevationToSubspriteTableNum[] = {
     1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
 };
 
-void UpdateObjectEventZCoordAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
+static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     if (objEvent->fixedPriority)
         return;
 
-    ObjectEventUpdateZCoord(objEvent);
+    ObjectEventUpdateElevation(objEvent);
 
-    sprite->subspriteTableNum = sObjectEventPriorities_083A708C[objEvent->previousElevation];
-    sprite->oam.priority = sObjectEventPriorities_083A707C[objEvent->previousElevation];
+    sprite->subspriteTableNum = sElevationToSubspriteTableNum[objEvent->previousElevation];
+    sprite->oam.priority = sElevationToPriority[objEvent->previousElevation];
 }
 
-static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z)
+static void InitObjectPriorityByElevation(struct Sprite *sprite, u8 elevation)
 {
-    sprite->subspriteTableNum = sObjectEventPriorities_083A708C[z];
-    sprite->oam.priority = sObjectEventPriorities_083A707C[z];
+    sprite->subspriteTableNum = sElevationToSubspriteTableNum[elevation];
+    sprite->oam.priority = sElevationToPriority[elevation];
 }
 
-u8 ZCoordToPriority(u8 z)
+u8 ElevationToPriority(u8 elevation)
 {
-    return sObjectEventPriorities_083A707C[z];
+    return sElevationToPriority[elevation];
 }
 
-void ObjectEventUpdateZCoord(struct ObjectEvent *objEvent)
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
 {
-    u8 z = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
-    u8 z2 = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+    u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+    u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (z == 0xF || z2 == 0xF)
+    if (curElevation == 15 || prevElevation == 15)
         return;
 
-    objEvent->currentElevation = z;
+    objEvent->currentElevation = curElevation;
 
-    if (z != 0 && z != 0xF)
-        objEvent->previousElevation = z;
+    if (curElevation != 0 && curElevation != 15)
+        objEvent->previousElevation = curElevation;
 }
 
-void SetObjectSubpriorityByZCoord(u8 a, struct Sprite *sprite, u8 b)
+void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 subpriority)
 {
     s32 tmp = sprite->centerToCornerVecY;
     u32 tmpa = *(u16 *)&sprite->y;
     u32 tmpb = *(u16 *)&gSpriteCoordOffsetY;
     s32 tmp2 = (tmpa - tmp) + tmpb;
     u16 tmp3 = (0x10 - ((((u32)tmp2 + 8) & 0xFF) >> 4)) * 2;
-    sprite->subpriority = tmp3 + sUnknown_083A706C[a] + b;
+    sprite->subpriority = tmp3 + sElevationToSubpriority[elevation] + subpriority;
 }
 
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
@@ -8460,10 +8454,10 @@ static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sp
     if (objEvent->fixedPriority)
         return;
 
-    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
+    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
 }
 
-bool8 AreZCoordsCompatible(u8 a, u8 b)
+static bool8 AreElevationsCompatible(u8 a, u8 b)
 {
     if (a == 0 || b == 0)
         return TRUE;
@@ -8759,7 +8753,7 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
     if (objEvent->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         DoFlaggedGroundEffects(objEvent, sprite, flags);
@@ -8775,7 +8769,7 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
     if (objEvent->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         filters_out_some_ground_effects(objEvent, &flags);
@@ -8792,7 +8786,7 @@ static void DoGroundEffects_OnFinishStep(struct ObjectEvent *objEvent, struct Sp
     if (objEvent->triggerGroundEffectsOnStop)
     {
         flags = 0;
-        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnFinishStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         FilterOutStepOnPuddleGroundEffectIfJumping(objEvent, &flags);
@@ -8855,7 +8849,7 @@ void UnfreezeObjectEvents(void)
 }
 
 #define tObjectEventId data[0]
-#define tZCoord        data[1]
+#define tElevation     data[1]
 #define tInvisible     data[2]
 
 #define tDirection data[3]
@@ -9251,7 +9245,7 @@ void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible)
 void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *sprite)
 {
     DoObjectUnionRoomWarpYDisplacement(sprite);
-    SetObjectSubpriorityByZCoord(sprite->tZCoord, sprite, 1);
+    SetObjectSubpriorityByElevation(sprite->tElevation, sprite, 1);
     UpdateObjectEventSpriteVisibility(sprite, sprite->tInvisible);
 }
 
@@ -9425,7 +9419,7 @@ bool32 RfuUnionObjectIsWarping(u8 objectEventId)
 #undef tUnionRoomWarpAnimState
 #undef tUnionRoomWarpAnimNo
 #undef tInvisible
-#undef tZCoord
+#undef tElevation
 #undef tObjectEventId
 
 u32 StartFieldEffectForObjectEvent(u8 fieldEffectId, struct ObjectEvent * objectEvent)

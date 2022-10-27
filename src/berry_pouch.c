@@ -1411,10 +1411,10 @@ static void BerryPouchInitWindows(void)
     u8 i;
     InitWindows(sWindowTemplates_Main);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x001, 0xE0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x013, 0xD0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x00A, 0xC0);
-    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
+    LoadUserWindowGfx(0, 0x001, 0xE0);
+    LoadMenuMessageWindowGfx(0, 0x013, 0xD0);
+    LoadStdWindowGfx(0, 0x00A, 0xC0);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     PutWindowTilemap(0);

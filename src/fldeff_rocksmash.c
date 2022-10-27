@@ -28,8 +28,8 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
     u8 mapObjId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-    gPlayerFacingPosition.height = PlayerGetZCoord();
-    mapObjId = GetObjectEventIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
+    gPlayerFacingPosition.elevation = PlayerGetElevation();
+    mapObjId = GetObjectEventIdByPosition(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.elevation);
     if (gObjectEvents[mapObjId].graphicsId != graphicsId)
         return FALSE;
     gSpecialVar_LastTalked = gObjectEvents[mapObjId].localId;

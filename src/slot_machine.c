@@ -1975,8 +1975,8 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         LoadPalette(sBgPal_50, 0x50, 0x20);
         LoadPalette(sBgPal_70, 0x70, 0x60);
         LoadColor(RGB(30, 30, 31), pal);
-        LoadUserWindowBorderGfx(0, 0x00A, 0xD0);
-        DrawWindowBorderWithStdpal3(0, 0x001, 0xF0);
+        LoadUserWindowGfx2(0, 0x00A, 0xD0);
+        LoadStdWindowGfxOnBg(0, 0x001, 0xF0);
 
         SetBgTilemapBuffer(0, ptr->bg0TilemapBuffer);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 32, 30);
@@ -1984,7 +1984,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         DecompressAndCopyTileDataToVram(1, sBg1Map, 0, 0, 1);
         CopyBgTilemapBufferToVram(1);
 
-        LoadPalette(stdpal_get(2), 0xE0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xE0, 0x20);
         FillWindowPixelBuffer(1, 0xFF);
         PutWindowTilemap(1);
 

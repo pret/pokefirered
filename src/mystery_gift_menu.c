@@ -390,8 +390,8 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         SetBgTilemapBuffer(1, Alloc(0x800));
         SetBgTilemapBuffer(0, Alloc(0x800));
 
-        LoadUserWindowBorderGfx(0, 10, 0xE0);
-        DrawWindowBorderWithStdpal3(0,  1, 0xF0);
+        LoadUserWindowGfx2(0, 10, 0xE0);
+        LoadStdWindowGfxOnBg(0,  1, 0xF0);
         DecompressAndLoadBgGfxUsingHeap(3, gUnkTextboxBorderGfx, 0x100, 0, 0);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();
@@ -403,7 +403,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         break;
     case 1:
         LoadPalette(gUnkTextboxBorderPal, 0, 0x20);
-        LoadPalette(stdpal_get(2), 0xd0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
         FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0x11);
         FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);

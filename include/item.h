@@ -14,7 +14,7 @@ struct Item
     u8 holdEffectParam;
     const u8 *description;
     u8 importance;
-    u8 exitsBagOnUse;
+    u8 registrability;
     u8 pocket;
     u8 type; // unused for balls
     ItemUseFunc fieldUseFunc;
@@ -69,7 +69,7 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
-u16 itemid_get_market_price(u16 itemId);
+u16 ItemId_GetPrice(u16 itemId);
 void ClearBag(void);
 void ClearPCItemSlots(void);
 void TrySetObtainedItemQuestLogEvent(u16 itemId);
@@ -79,7 +79,7 @@ void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket);
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByItemId(u16 item);
-bool8 itemid_is_unique(u16 itemId);
+u8 ItemId_GetImportance(u16 itemId);
 void BagPocketCompaction(struct ItemSlot * slots, u8 capacity);
 u16 GetPcItemQuantity(u16 *);
 void SetBagPocketsPointers(void);

@@ -457,7 +457,7 @@ void FieldUseFunc_TmCase(u8 taskId)
 
 static void InitTMCaseFromBag(void)
 {
-    InitTMCase(0, CB2_BagMenuFromStartMenu, 0);
+    InitTMCase(TMCASE_FIELD, CB2_BagMenuFromStartMenu, FALSE);
 }
 
 static void Task_InitTMCaseFromField(u8 taskId)
@@ -466,7 +466,7 @@ static void Task_InitTMCaseFromField(u8 taskId)
     {
         CleanupOverworldWindowsAndTilemaps();
         SetFieldCallback2ForItemUse();
-        InitTMCase(0, CB2_ReturnToField, 1);
+        InitTMCase(TMCASE_FIELD, CB2_ReturnToField, TRUE);
         DestroyTask(taskId);
     }
 }

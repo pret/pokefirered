@@ -4258,7 +4258,7 @@ static void CB2_ReturnToBagMenu(void)
 
 static void CB2_ReturnToTMCaseMenu(void)
 {
-    InitTMCase(TMCASE_NA, NULL, 0xFF);
+    InitTMCase(TMCASE_REOPENING, NULL, TMCASE_KEEP_PREV);
 }
 
 static void CB2_ReturnToBerryPouchMenu(void)

@@ -197,7 +197,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     u16 metatileBehavior;
     u32 metatileAttributes;
 
-    ResetFacingNpcOrSignPostVars();
+    ResetFacingNpcOrSignpostVars();
     playerDirection = GetPlayerFacingDirection();
     GetPlayerPosition(&position);
     metatileAttributes = MapGridGetMetatileAttributeAt(position.x, position.y, METATILE_ATTRIBUTES_ALL);
@@ -507,7 +507,7 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     }
 
     if (signpostType != SIGNPOST_NA)
-        MsgSetSignPost();
+        MsgSetSignpost();
     gSpecialVar_Facing = direction;
     return bgEvent->bgUnion.script;
 }
@@ -577,22 +577,22 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return CableClub_EventScript_ShowBattleRecords;
     if (MetatileBehavior_IsIndigoPlateauSign1(metatileBehavior) == TRUE)
     {
-        MsgSetSignPost();
+        MsgSetSignpost();
         return EventScript_Indigo_UltimateGoal;
     }
     if (MetatileBehavior_IsIndigoPlateauSign2(metatileBehavior) == TRUE)
     {
-        MsgSetSignPost();
+        MsgSetSignpost();
         return EventScript_Indigo_HighestAuthority;
     }
     if (MetatileBehavior_IsPlayerFacingPokeMartSign(metatileBehavior, direction) == TRUE)
     {
-        MsgSetSignPost();
+        MsgSetSignpost();
         return EventScript_PokemartSign;
     }
     if (MetatileBehavior_IsPlayerFacingPokemonCenterSign(metatileBehavior, direction) == TRUE)
     {
-        MsgSetSignPost();
+        MsgSetSignpost();
         return EventScript_PokecenterSign;
     }
     return NULL;
@@ -809,7 +809,7 @@ static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection)
     gSpecialVar_Facing = playerDirection;
     ScriptContext_SetupScript(script);
     SetWalkingIntoSignVars();
-    MsgSetSignPost();
+    MsgSetSignpost();
 }
 
 static const u8 *GetSignpostScriptAtMapPosition(struct MapPosition * position)

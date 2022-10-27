@@ -2006,8 +2006,8 @@ static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        TextWindow_SetUserSelectedFrame(0, 0x4F, 0xD0);
-        TextWindow_SetStdFrame0_WithPal(0, 0x58, 0xF0);
+        LoadUserWindowGfx(0, 0x4F, 0xD0);
+        LoadStdWindowGfx(0, 0x58, 0xF0);
         if (gPartyMenu.action == PARTY_ACTION_USE_ITEM)
             DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
         else
@@ -2117,10 +2117,10 @@ static void InitPartyMenuWindows(u8 layout)
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; ++i)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    TextWindow_SetUserSelectedFrame(0, 0x4F, 0xD0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x58, 0xF0);
-    LoadPalette(stdpal_get(2), 0xC0, 0x20);
-    LoadPalette(stdpal_get(0), 0xE0, 0x20);
+    LoadUserWindowGfx(0, 0x4F, 0xD0);
+    LoadStdWindowGfx(0, 0x58, 0xF0);
+    LoadPalette(GetTextWindowPalette(2), 0xC0, 0x20);
+    LoadPalette(GetTextWindowPalette(0), 0xE0, 0x20);
 }
 
 static void CreateCancelConfirmWindows(bool8 chooseMultiple)
@@ -2603,7 +2603,7 @@ static bool8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void)
 {
     u8 windowId = AddWindow(&sWindowTemplate_FirstBattleOakVoiceover);
 
-    TextWindow_LoadResourcesStdFrame0(windowId, 0x4F, 0xE0);
+    LoadMenuMessageWindowGfx(windowId, 0x4F, 0xE0);
     DrawDialogFrameWithCustomTileAndPalette(windowId, 1, 0x4F, 0xE);
     PartyMenu_Oak_PrintText(windowId, gText_OakImportantToGetToKnowPokemonThroughly);
     return windowId;

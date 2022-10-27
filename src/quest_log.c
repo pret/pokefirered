@@ -459,7 +459,7 @@ void sub_8110FCC(void)
 
 static bool8 FieldCB2_QuestLogStartPlaybackWithWarpExit(void)
 {
-    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_PLAYBACK);
     FieldCB_DefaultWarpExit();
     sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
@@ -469,7 +469,7 @@ static bool8 FieldCB2_QuestLogStartPlaybackWithWarpExit(void)
 
 static bool8 FieldCB2_QuestLogStartPlaybackStandingInPlace(void)
 {
-    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_PLAYBACK);
     FieldCB_WarpExitFadeFromBlack();
     sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
@@ -1076,7 +1076,7 @@ void QuestLog_BackUpPalette(u16 offset, u16 size)
 
 static bool8 FieldCB2_FinalScene(void)
 {
-    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
     DrawPreviouslyOnQuestHeader(0);
     FieldCB_WarpExitFadeFromBlack();
     CreateTask(Task_FinalScene_WaitFade, 0xFF);

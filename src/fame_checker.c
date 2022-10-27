@@ -667,7 +667,7 @@ static void MainCB2_LoadFameChecker(void)
             LoadPalette(gFameCheckerBgPals + 0x10, 0x10, 0x20);
             CopyToBgTilemapBufferRect(2, gFameCheckerBg2Tilemap, 0, 0, 32, 32);
             CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11);
-            LoadPalette(stdpal_get(2), 0xF0, 0x20);
+            LoadPalette(GetTextWindowPalette(2), 0xF0, 0x20);
             gMain.state++;
             break;
         case 4:

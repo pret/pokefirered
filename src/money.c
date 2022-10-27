@@ -124,7 +124,7 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
     sMoneyBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sMoneyBoxWindowId, 0);
     PutWindowTilemap(sMoneyBoxWindowId);
-    TextWindow_SetStdFrame0_WithPal(sMoneyBoxWindowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(sMoneyBoxWindowId, 0x21D, 0xD0);
     PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x21D, 13, amount);
 }
 

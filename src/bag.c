@@ -202,9 +202,9 @@ void InitBagWindows(void)
     else
         InitWindows(sDefaultBagWindowsDeposit);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x64, 0xE0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x6D, 0xD0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x81, 0xC0);
+    LoadUserWindowGfx(0, 0x64, 0xE0);
+    LoadMenuMessageWindowGfx(0, 0x6D, 0xD0);
+    LoadStdWindowGfx(0, 0x81, 0xC0);
     LoadPalette(sBagWindowPalF, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
     {

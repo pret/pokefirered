@@ -337,17 +337,17 @@ static bool8 LoadOptionMenuPalette(void)
     switch (sOptionMenuPtr->loadPaletteState)
     {
     case 0:
-        LoadBgTiles(1, GetWindowFrameTilesPal(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
+        LoadBgTiles(1, GetUserWindowGraphics(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
         break;
     case 1:
-        LoadPalette(GetWindowFrameTilesPal(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
+        LoadPalette(GetUserWindowGraphics(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
         break;
     case 2:
         LoadPalette(sOptionMenuPalette, 0x10, 0x20);
-        LoadPalette(stdpal_get(2), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xF0, 0x20);
         break;
     case 3:
-        DrawWindowBorderWithStdpal3(1, 0x1B3, 0x30);
+        LoadStdWindowGfxOnBg(1, 0x1B3, 0x30);
         break;
     default:
         return TRUE;
@@ -381,8 +381,8 @@ static void Task_OptionMenu(u8 taskId)
             sOptionMenuPtr->loadState++;
             break;
         case 2:
-            LoadBgTiles(1, GetWindowFrameTilesPal(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
-            LoadPalette(GetWindowFrameTilesPal(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
+            LoadBgTiles(1, GetUserWindowGraphics(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
+            LoadPalette(GetUserWindowGraphics(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
             BufferOptionMenuString(sOptionMenuPtr->cursorPos);
             break;
         case 3:

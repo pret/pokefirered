@@ -682,8 +682,8 @@ static void InitTradeMenuResources(void)
     ResetPaletteFade();
     gPaletteFade.bufferTransferDisabled = TRUE;
     SetVBlankCallback(VblankCB_Trade);
-    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x14);
-    LoadPalette(gTMCaseMainWindowPalette, 0xD0, 0x14);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x14);
+    LoadPalette(gStandardMenuPalette, 0xD0, 0x14);
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     SetBgTilemapBuffer(1, sTradeMenuResourcesPtr->tilemapBuffer);
@@ -697,8 +697,8 @@ static void InitTradeMenuResources(void)
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        TextWindow_SetStdFrame0_WithPal(0, 0x014, 0xC0);
-        TextWindow_SetUserSelectedFrame(2, 0x001, 0xE0);
+        LoadStdWindowGfx(0, 0x014, 0xC0);
+        LoadUserWindowGfx(2, 0x001, 0xE0);
         LoadMonIconPalettes();
         sTradeMenuResourcesPtr->state = 0;
         sTradeMenuResourcesPtr->tradeMenuCBnum = 0;

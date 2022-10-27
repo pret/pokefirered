@@ -83,7 +83,7 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, 0);
     PutWindowTilemap(sCoinsWindowId);
-    TextWindow_SetStdFrame0_WithPal(sCoinsWindowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(sCoinsWindowId, 0x21D, 0xD0);
     DrawStdFrameWithCustomTileAndPalette(sCoinsWindowId, FALSE, 0x21D, 0xD);
     AddTextPrinterParameterized(sCoinsWindowId, FONT_2, gText_Coins_2, 0, 0, 0xFF, 0);
     PrintCoinsString(coinAmount);

@@ -1,36 +1,37 @@
 #include "global.h"
 #include "text_window_graphics.h"
 
-const u16 gUnknown_8470B0C[] = INCBIN_U16("graphics/text_window/unk_8470B0C.4bpp");
+const u16 gSignpostWindow_Gfx[] = INCBIN_U16("graphics/text_window/signpost.4bpp");
 
-static const u16 gUnknown_8470D6C[] = INCBIN_U16("graphics/text_window/unk_8470D6C.4bpp");
-static const u16 gUnknown_8470E8C[] = INCBIN_U16("graphics/text_window/unk_8470E8C.4bpp");
-static const u16 gUnk_Empty_Space_8470FAC[16] = {0};
-static const u16 gUnknown_8470FCC[] = INCBIN_U16("graphics/text_window/unk_8470FCC.4bpp");
-static const u16 gUnknown_84710EC[] = INCBIN_U16("graphics/text_window/unk_84710EC.4bpp");
-static const u16 gUnknown_847120C[] = INCBIN_U16("graphics/text_window/unk_847120C.4bpp");
-static const u16 gUnknown_847132C[] = INCBIN_U16("graphics/text_window/unk_847132C.4bpp");
-static const u16 gUnknown_847144C[] = INCBIN_U16("graphics/text_window/unk_847144C.4bpp");
-static const u16 gUnknown_847156C[] = INCBIN_U16("graphics/text_window/unk_847156C.4bpp");
-static const u16 gUnk_Empty_Space_847168C[16] = {0};
-static const u16 gUnknown_84716AC[] = INCBIN_U16("graphics/text_window/unk_84716AC.4bpp");
-static const u16 gUnknown_84717CC[] = INCBIN_U16("graphics/text_window/unk_84717CC.4bpp");
-static const u16 gUnk_Empty_Space_84718EC[16] = {0};
-static const u16 gUnknown_847190C[] = INCBIN_U16("graphics/text_window/unk_8470D6C.gbapal");
-static const u16 gUnknown_847192C[] = INCBIN_U16("graphics/text_window/unk_8470E8C.gbapal");
-static const u16 gUnknown_847194C[] = INCBIN_U16("graphics/text_window/unk_8470FCC.gbapal");
-static const u16 gUnknown_847196C[] = INCBIN_U16("graphics/text_window/unk_84710EC.gbapal");
-static const u16 gUnknown_847198C[] = INCBIN_U16("graphics/text_window/unk_847120C.gbapal");
-static const u16 gUnknown_84719AC[] = INCBIN_U16("graphics/text_window/unk_847132C.gbapal");
-static const u16 gUnknown_84719CC[] = INCBIN_U16("graphics/text_window/unk_847144C.gbapal");
-static const u16 gUnknown_84719EC[] = INCBIN_U16("graphics/text_window/unk_847156C.gbapal");
-static const u16 gUnknown_8471A0C[] = INCBIN_U16("graphics/text_window/unk_84716AC.gbapal");
-static const u16 gUnknown_8471A2C[] = INCBIN_U16("graphics/text_window/unk_84717CC.gbapal");
+static const u16 sUserFrame_Type1_Gfx[] = INCBIN_U16("graphics/text_window/type1.4bpp");
+static const u16 sUserFrame_Type2_Gfx[] = INCBIN_U16("graphics/text_window/type2.4bpp");
+static const u16 sUserFrame_Empty1[16] = {0};
+static const u16 sUserFrame_Type3_Gfx[] = INCBIN_U16("graphics/text_window/type3.4bpp");
+static const u16 sUserFrame_Type4_Gfx[] = INCBIN_U16("graphics/text_window/type4.4bpp");
+static const u16 sUserFrame_Type5_Gfx[] = INCBIN_U16("graphics/text_window/type5.4bpp");
+static const u16 sUserFrame_Type6_Gfx[] = INCBIN_U16("graphics/text_window/type6.4bpp");
+static const u16 sUserFrame_Type7_Gfx[] = INCBIN_U16("graphics/text_window/type7.4bpp");
+static const u16 sUserFrame_Type8_Gfx[] = INCBIN_U16("graphics/text_window/type8.4bpp");
+static const u16 sUserFrame_Empty2[16] = {0};
+static const u16 sUserFrame_Type9_Gfx[] = INCBIN_U16("graphics/text_window/type9.4bpp");
+static const u16 sUserFrame_Type10_Gfx[] = INCBIN_U16("graphics/text_window/type10.4bpp");
+static const u16 sUserFrame_Empty3[16] = {0};
 
-const u16 gStdFrame0[] = INCBIN_U16("graphics/text_window/unk_8471A4C.4bpp");
-const u16 gStdFrame1[] = INCBIN_U16("graphics/text_window/unk_8471B6C.4bpp");
+static const u16 sUserFrame_Type1_Pal[] = INCBIN_U16("graphics/text_window/type1.gbapal");
+static const u16 sUserFrame_Type2_Pal[] = INCBIN_U16("graphics/text_window/type2.gbapal");
+static const u16 sUserFrame_Type3_Pal[] = INCBIN_U16("graphics/text_window/type3.gbapal");
+static const u16 sUserFrame_Type4_Pal[] = INCBIN_U16("graphics/text_window/type4.gbapal");
+static const u16 sUserFrame_Type5_Pal[] = INCBIN_U16("graphics/text_window/type5.gbapal");
+static const u16 sUserFrame_Type6_Pal[] = INCBIN_U16("graphics/text_window/type6.gbapal");
+static const u16 sUserFrame_Type7_Pal[] = INCBIN_U16("graphics/text_window/type7.gbapal");
+static const u16 sUserFrame_Type8_Pal[] = INCBIN_U16("graphics/text_window/type8.gbapal");
+static const u16 sUserFrame_Type9_Pal[] = INCBIN_U16("graphics/text_window/type9.gbapal");
+static const u16 sUserFrame_Type10_Pal[] = INCBIN_U16("graphics/text_window/type10.gbapal");
 
-const u16 gUnknown_8471DEC[][16] = {
+const u16 gStdTextWindow_Gfx[] = INCBIN_U16("graphics/text_window/std.4bpp");
+const u16 gQuestLogWindow_Gfx[] = INCBIN_U16("graphics/text_window/quest_log.4bpp");
+
+const u16 gTextWindowPalettes[][16] = {
     INCBIN_U16("graphics/text_window/stdpal_0.gbapal"),
     INCBIN_U16("graphics/text_window/stdpal_1.gbapal"),
     INCBIN_U16("graphics/text_window/stdpal_2.gbapal"),
@@ -39,21 +40,25 @@ const u16 gUnknown_8471DEC[][16] = {
 };
 
 const struct TextWindowGraphics gUserFrames[] = {
-    {gUnknown_8470D6C, gUnknown_847190C},
-    {gUnknown_8470E8C, gUnknown_847192C},
-    {gUnknown_8470FCC, gUnknown_847194C},
-    {gUnknown_84710EC, gUnknown_847196C},
-    {gUnknown_847120C, gUnknown_847198C},
-    {gUnknown_847132C, gUnknown_84719AC},
-    {gUnknown_847144C, gUnknown_84719CC},
-    {gUnknown_847156C, gUnknown_84719EC},
-    {gUnknown_84716AC, gUnknown_8471A0C},
-    {gUnknown_84717CC, gUnknown_8471A2C}
-}; // NELEMS = 10
+    {sUserFrame_Type1_Gfx,  sUserFrame_Type1_Pal},
+    {sUserFrame_Type2_Gfx,  sUserFrame_Type2_Pal},
+    {sUserFrame_Type3_Gfx,  sUserFrame_Type3_Pal},
+    {sUserFrame_Type4_Gfx,  sUserFrame_Type4_Pal},
+    {sUserFrame_Type5_Gfx,  sUserFrame_Type5_Pal},
+    {sUserFrame_Type6_Gfx,  sUserFrame_Type6_Pal},
+    {sUserFrame_Type7_Gfx,  sUserFrame_Type7_Pal},
+    {sUserFrame_Type8_Gfx,  sUserFrame_Type8_Pal},
+    {sUserFrame_Type9_Gfx,  sUserFrame_Type9_Pal},
+    {sUserFrame_Type10_Gfx, sUserFrame_Type10_Pal},
+};
 
-const struct TextWindowGraphics *GetWindowFrameTilesPal(u8 idx)
+const struct TextWindowGraphics *GetUserWindowGraphics(u8 idx)
 {
-    if (idx >= 20) // if (idx >= NELEMS(gUserFrames))
+#ifdef BUGFIX
+    if (idx >= ARRAY_COUNT(gUserFrames))
+#else
+    if (idx >= 20) // Using the RSE number of elements
+#endif
         return &gUserFrames[0];
     else
         return &gUserFrames[idx];

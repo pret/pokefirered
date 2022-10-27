@@ -802,7 +802,7 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 0:
         if (cardOrNews == 0)
         {
-            InitWonderCardResources(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
+            WonderCard_Init(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
         }
         else
         {
@@ -813,7 +813,7 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 1:
         if (cardOrNews == 0)
         {
-            v0 = FadeToWonderCardMenu();
+            v0 = WonderCard_Enter();
             check:
             if (v0 != 0)
             {
@@ -851,9 +851,9 @@ bool32 TearDownCardOrNews_ReturnToTopMenu(bool32 cardOrNews, bool32 arg1)
 {
     if (cardOrNews == 0)
     {
-        if (FadeOutFromWonderCard(arg1) != 0)
+        if (WonderCard_Exit(arg1) != 0)
         {
-            DestroyWonderCardResources();
+            WonderCard_Destroy();
             return TRUE;
         }
         else

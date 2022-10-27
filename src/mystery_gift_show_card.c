@@ -7,73 +7,91 @@
 #include "mystery_gift_menu.h"
 #include "mevent.h"
 #include "battle_anim.h"
+#include "constants/mystery_gift.h"
 
-struct MEventScreenMgr_02DC
-{
-    u8 nDigits;
-    u8 nameTxt[41];
-    u8 numberTxt[4];
+enum {
+    WIN_HEADER,
+    WIN_BODY,
+    WIN_FOOTER,
+    WIN_COUNT
 };
 
-struct MEventScreenMgr
+#define TAG_STAMP_SHADOW 0x8000
+
+struct CardStatTextData
 {
-    /*0000*/ struct WonderCard wonderCard;
-    /*014c*/ struct WonderCardMetadata buff3430Sub;
-    /*0170*/ const struct UnkStruct_8467FB8 * bgSpec;
-    /*0174*/ u8 state;
+    u8 width;
+    u8 statText[WONDER_CARD_TEXT_LENGTH + 1];
+    u8 statNumberText[4];
+};
+
+struct WonderCardData
+{
+    /*0000*/ struct WonderCard card;
+    /*014c*/ struct WonderCardMetadata cardMetadata;
+    /*0170*/ const struct UnkStruct_8467FB8 * gfx;
+    /*0174*/ u8 enterExitState;
     /*0175*/ u8 recordIdx;
-    /*0176*/ u16 windowIds[3];
-    /*017C*/ u8 monIconId;
-    /*017D*/ u8 cardIconAndShadowSprites[7][2];
-    /*018B*/ u8 title[41];
-    /*01B4*/ u8 subtitle[41];
-    /*01DD*/ u8 unk_01DD[7];
-    /*01E4*/ u8 mainMessageLines[4][41];
-    /*0288*/ u8 instructionsLine1[41];
-    /*02B1*/ u8 instructionsLine2[41];
-    /*02DC*/ struct MEventScreenMgr_02DC recordStrings[8];
-    /*045C*/ u8 buffer_045C[0x1000];
+    /*0176*/ u16 windowIds[WIN_COUNT];
+    /*017C*/ u8 monIconSpriteId;
+    /*017D*/ u8 stampSpriteIds[MAX_STAMP_CARD_STAMPS][2]; // 2 sprites each, 1 for the shadow and 1 for the Pokémon
+    /*018B*/ u8 titleText[WONDER_CARD_TEXT_LENGTH + 1];
+    /*01B4*/ u8 subtitleText[WONDER_CARD_TEXT_LENGTH + 1];
+    /*01DD*/ u8 idNumberText[7];
+    /*01E4*/ u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH + 1];
+    /*0288*/ u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH + 1];
+    /*02B1*/ u8 footerLine2Text[WONDER_CARD_TEXT_LENGTH + 1];
+    /*02DC*/ struct CardStatTextData statTextData[8];
+    /*045C*/ u8 bgTilemapBuffer[0x1000];
 };
 
-static EWRAM_DATA struct MEventScreenMgr * sMEventScreenData = NULL;
+static EWRAM_DATA struct WonderCardData * sWonderCardData = NULL;
 
-static void sub_8145A98(void);
-static void sub_8145D18(u8 whichWindow);
-static void sub_8146060(void);
-static void sub_81461D8(void);
+static void BufferCardText(void);
+static void DrawCardWindow(u8 whichWindow);
+static void CreateCardSprites(void);
+static void DestroyCardSprites(void);
 
-static const u8 gUnknown_8467068[][3] = {
+static const u8 sTextColorTable[][3] = {
     {0, 2, 3},
     {0, 1, 2}
 };
 
-static const u8 ALIGNED(4) sTextYCoords[3] = {7, 4, 7};
+static const u8 ALIGNED(4) sFooterTextOffsets[CARD_TYPE_COUNT] =
+{
+    [CARD_TYPE_GIFT] = 7,
+    [CARD_TYPE_STAMP] = 4,
+    [CARD_TYPE_LINK_STAT] = 7
+};
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [WIN_HEADER] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 25,
         .height = 4,
         .paletteNum = 15, 
-        .baseBlock = 0x29c},
-    {
+        .baseBlock = 0x29c
+    },
+    [WIN_BODY] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 6,
         .width = 28,
         .height = 8,
         .paletteNum = 15, 
-        .baseBlock = 0x1bc},
-    {
+        .baseBlock = 0x1bc
+    },
+    [WIN_FOOTER] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 14,
         .width = 28,
         .height = 5,
         .paletteNum = 15, 
-        .baseBlock = 0x130}
+        .baseBlock = 0x130
+    }
 };
 
 static const u16 sCard0Pal[] = INCBIN_U16("graphics/mevent/pal_46708C.gbapal");
@@ -104,11 +122,11 @@ static const u16 sUnknown_8467EB4[] = INCBIN_U16("graphics/mevent/pal_467EB4.gba
 static const u16 sUnknown_8467ED4[] = INCBIN_U16("graphics/mevent/pal_467ED4.gbapal");
 static const u32 sUnknown_8467EF4[] = INCBIN_U32("graphics/mevent/gfx_467EF4.4bpp.lz");
 
-static const struct CompressedSpriteSheet sShadowSpriteSheet = {
+static const struct CompressedSpriteSheet sSpriteSheet_StampShadow = {
     sUnknown_8467EF4, 0x100, 0x8000
 };
 
-static const struct SpritePalette sShadowSpritePalettes[] = {
+static const struct SpritePalette sSpritePalettes_StampShadow[] = {
     {sUnknown_8467DF4, 0x8000},
     {sUnknown_8467E14, 0x8000},
     {sUnknown_8467E34, 0x8000},
@@ -119,11 +137,17 @@ static const struct SpritePalette sShadowSpritePalettes[] = {
     {sUnknown_8467ED4, 0x8000}
 };
 
-static const struct SpriteTemplate sShadowSpriteTemplate = {
-    0x8000, 0x8000, &gOamData_AffineOff_ObjNormal_32x16, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
+    .tileTag = TAG_STAMP_SHADOW,
+    .paletteTag = TAG_STAMP_SHADOW,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
-static const struct UnkStruct_8467FB8 sCardGfxPtrs[8] = {
+static const struct UnkStruct_8467FB8 sCardGraphics[8] = {
     {1, 0, 0, 0, sCard0Gfx, sCard0Map, sCard0Pal},
     {1, 0, 0, 1, sCard1Gfx, sCard1Map, gCard1Pal},
     {1, 0, 0, 2, sCard2Gfx, sCard2Map, gCard2Pal},
@@ -134,40 +158,39 @@ static const struct UnkStruct_8467FB8 sCardGfxPtrs[8] = {
     {1, 0, 0, 7, sCard7Gfx, sCard7Map, sCard7Pal}
 };
 
-bool32 InitWonderCardResources(struct WonderCard * card, struct WonderCardMetadata * b3430sub)
+bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata)
 {
-    if (card == NULL || b3430sub == NULL)
+    if (card == NULL || metadata == NULL)
         return FALSE;
-    sMEventScreenData = AllocZeroed(sizeof(struct MEventScreenMgr));
-    if (sMEventScreenData == NULL)
+    sWonderCardData = AllocZeroed(sizeof(*sWonderCardData));
+    if (sWonderCardData == NULL)
         return FALSE;
-    sMEventScreenData->wonderCard = *card;
-    sMEventScreenData->buff3430Sub = *b3430sub;
-    if (sMEventScreenData->wonderCard.bgType >= NELEMS(sCardGfxPtrs))
-        sMEventScreenData->wonderCard.bgType = 0;
-    if (sMEventScreenData->wonderCard.type >= NELEMS(sTextYCoords))
-        sMEventScreenData->wonderCard.type = 0;
-    if (sMEventScreenData->wonderCard.maxStamps > NELEMS(sMEventScreenData->cardIconAndShadowSprites))
-        sMEventScreenData->wonderCard.maxStamps = 0;
-    sMEventScreenData->bgSpec = &sCardGfxPtrs[sMEventScreenData->wonderCard.bgType];
+    sWonderCardData->card = *card;
+    sWonderCardData->cardMetadata = *metadata;
+    if (sWonderCardData->card.bgType >= NUM_WONDER_BGS)
+        sWonderCardData->card.bgType = 0;
+    if (sWonderCardData->card.type >= CARD_TYPE_COUNT)
+        sWonderCardData->card.type = 0;
+    if (sWonderCardData->card.maxStamps > MAX_STAMP_CARD_STAMPS)
+        sWonderCardData->card.maxStamps = 0;
+    sWonderCardData->gfx = &sCardGraphics[sWonderCardData->card.bgType];
     return TRUE;
 }
 
-void DestroyWonderCardResources(void)
+void WonderCard_Destroy(void)
 {
-    if (sMEventScreenData != NULL)
+    if (sWonderCardData != NULL)
     {
-        *sMEventScreenData = (struct MEventScreenMgr){};
-        Free(sMEventScreenData);
-        sMEventScreenData = NULL;
+        *sWonderCardData = (struct WonderCardData){};
+        FREE_AND_SET_NULL(sWonderCardData);
     }
 }
 
-s32 FadeToWonderCardMenu(void)
+s32 WonderCard_Enter(void)
 {
-    if (sMEventScreenData == NULL)
+    if (sWonderCardData == NULL)
         return -1;
-    switch(sMEventScreenData->state)
+    switch(sWonderCardData->enterExitState)
     {
         case 0:
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -183,27 +206,27 @@ s32 FadeToWonderCardMenu(void)
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
-            DecompressAndCopyTileDataToVram(2, sMEventScreenData->bgSpec->tiles, 0, 0x008, 0);
-            sMEventScreenData->windowIds[0] = AddWindow(&sWindowTemplates[0]);
-            sMEventScreenData->windowIds[1] = AddWindow(&sWindowTemplates[1]);
-            sMEventScreenData->windowIds[2] = AddWindow(&sWindowTemplates[2]);
+            DecompressAndCopyTileDataToVram(2, sWonderCardData->gfx->tiles, 0, 0x008, 0);
+            sWonderCardData->windowIds[WIN_HEADER] = AddWindow(&sWindowTemplates[WIN_HEADER]);
+            sWonderCardData->windowIds[WIN_BODY] = AddWindow(&sWindowTemplates[WIN_BODY]);
+            sWonderCardData->windowIds[WIN_FOOTER] = AddWindow(&sWindowTemplates[WIN_FOOTER]);
             break;
         case 3:
             if (FreeTempTileDataBuffersIfPossible())
                 return 0;
             gPaletteFade.bufferTransferDisabled = TRUE;
-            LoadPalette(sMEventScreenData->bgSpec->pal, 0x10, 0x20);
-            LZ77UnCompWram(sMEventScreenData->bgSpec->map, sMEventScreenData->buffer_045C);
-            CopyRectToBgTilemapBufferRect(2, sMEventScreenData->buffer_045C, 0, 0, 30, 20, 0, 0, 30, 20, 1, 0x008, 0);
+            LoadPalette(sWonderCardData->gfx->pal, 0x10, 0x20);
+            LZ77UnCompWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
+            CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, 30, 20, 0, 0, 30, 20, 1, 0x008, 0);
             CopyBgTilemapBufferToVram(2);
             break;
         case 4:
-            sub_8145A98();
+            BufferCardText();
             break;
         case 5:
-            sub_8145D18(0);
-            sub_8145D18(1);
-            sub_8145D18(2);
+            DrawCardWindow(WIN_HEADER);
+            DrawCardWindow(WIN_BODY);
+            DrawCardWindow(WIN_FOOTER);
             CopyBgTilemapBufferToVram(1);
             break;
         case 6:
@@ -213,25 +236,25 @@ s32 FadeToWonderCardMenu(void)
             ShowBg(1);
             ShowBg(2);
             gPaletteFade.bufferTransferDisabled = FALSE;
-            sub_8146060();
+            CreateCardSprites();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
             if (UpdatePaletteFade())
                 return 0;
-            sMEventScreenData->state = 0;
+            sWonderCardData->enterExitState = 0;
             return 1;
     }
-    ++sMEventScreenData->state;
+    sWonderCardData->enterExitState++;
     return 0;
 }
 
-s32 FadeOutFromWonderCard(bool32 flag)
+s32 WonderCard_Exit(bool32 useCancel)
 {
-    if (sMEventScreenData == NULL)
+    if (sWonderCardData == NULL)
         return -1;
-    switch (sMEventScreenData->state)
+    switch (sWonderCardData->enterExitState)
     {
         case 0:
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -251,16 +274,16 @@ s32 FadeOutFromWonderCard(bool32 flag)
         case 3:
             HideBg(1);
             HideBg(2);
-            RemoveWindow(sMEventScreenData->windowIds[2]);
-            RemoveWindow(sMEventScreenData->windowIds[1]);
-            RemoveWindow(sMEventScreenData->windowIds[0]);
+            RemoveWindow(sWonderCardData->windowIds[WIN_FOOTER]);
+            RemoveWindow(sWonderCardData->windowIds[WIN_BODY]);
+            RemoveWindow(sWonderCardData->windowIds[WIN_HEADER]);
             break;
         case 4:
-            sub_81461D8();
+            DestroyCardSprites();
             FreeMonIconPalettes();
             break;
         case 5:
-            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
+            PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
             break;
         case 6:
             CopyBgTilemapBufferToVram(0);
@@ -269,184 +292,227 @@ s32 FadeOutFromWonderCard(bool32 flag)
         default:
             if (UpdatePaletteFade())
                 return 0;
-            sMEventScreenData->state = 0;
+            sWonderCardData->enterExitState = 0;
             return 1;
     }
-    ++sMEventScreenData->state;
+    sWonderCardData->enterExitState++;
     return 0;
 }
 
-static void sub_8145A98(void)
+static void BufferCardText(void)
 {
     u16 i = 0;
-    u16 r6;
-    u16 sp0[3] = {0, 0, 0};
+    u16 charsUntilStat;
+    u16 stats[3] = {0, 0, 0};
 
-    memcpy(sMEventScreenData->title, sMEventScreenData->wonderCard.titleText, 40);
-    sMEventScreenData->title[40] = EOS;
-    memcpy(sMEventScreenData->subtitle, sMEventScreenData->wonderCard.subtitleText, 40);
-    sMEventScreenData->subtitle[40] = EOS;
-    if (sMEventScreenData->wonderCard.idNumber > 999999)
-        sMEventScreenData->wonderCard.idNumber = 999999;
-    ConvertIntToDecimalStringN(sMEventScreenData->unk_01DD, sMEventScreenData->wonderCard.idNumber, STR_CONV_MODE_LEFT_ALIGN, 6);
-    for (i = 0; i < 4; i++)
+    // Copy title/subtitle text
+    memcpy(sWonderCardData->titleText, sWonderCardData->card.titleText, WONDER_CARD_TEXT_LENGTH);
+    sWonderCardData->titleText[WONDER_CARD_TEXT_LENGTH] = EOS;
+    memcpy(sWonderCardData->subtitleText, sWonderCardData->card.subtitleText, WONDER_CARD_TEXT_LENGTH);
+    sWonderCardData->subtitleText[WONDER_CARD_TEXT_LENGTH] = EOS;
+
+    // Copy card id number
+    if (sWonderCardData->card.idNumber > 999999)
+        sWonderCardData->card.idNumber = 999999;
+    ConvertIntToDecimalStringN(sWonderCardData->idNumberText, sWonderCardData->card.idNumber, STR_CONV_MODE_LEFT_ALIGN, 6);
+
+    // Copy body text
+    for (i = 0; i < WONDER_CARD_BODY_TEXT_LINES; i++)
     {
-        memcpy(sMEventScreenData->mainMessageLines[i], sMEventScreenData->wonderCard.bodyText[i], 40);
-        sMEventScreenData->mainMessageLines[i][40] = EOS;
+        memcpy(sWonderCardData->bodyText[i], sWonderCardData->card.bodyText[i], WONDER_CARD_TEXT_LENGTH);
+        sWonderCardData->bodyText[i][WONDER_CARD_TEXT_LENGTH] = EOS;
     }
-    memcpy(sMEventScreenData->instructionsLine1, sMEventScreenData->wonderCard.footerLine1Text, 40);
-    sMEventScreenData->instructionsLine1[40] = EOS;
-    switch (sMEventScreenData->wonderCard.type)
+
+    // Copy footer line 1
+    memcpy(sWonderCardData->footerLine1Text, sWonderCardData->card.footerLine1Text, WONDER_CARD_TEXT_LENGTH);
+    sWonderCardData->footerLine1Text[WONDER_CARD_TEXT_LENGTH] = EOS;
+    
+    // Copy footer line 2
+    switch (sWonderCardData->card.type)
     {
-        case 0:
-            memcpy(sMEventScreenData->instructionsLine2, sMEventScreenData->wonderCard.footerLine2Text, 40);
-            sMEventScreenData->instructionsLine2[40] = EOS;
-            break;
-        case 1:
-            sMEventScreenData->instructionsLine2[00] = EOS;
-            break;
-        case 2:
-            sMEventScreenData->instructionsLine2[00] = EOS;
-            sp0[0] = sMEventScreenData->buff3430Sub.battlesWon < 999 ? sMEventScreenData->buff3430Sub.battlesWon : 999;
-            sp0[1] = sMEventScreenData->buff3430Sub.battlesLost < 999 ? sMEventScreenData->buff3430Sub.battlesLost : 999;
-            sp0[2] = sMEventScreenData->buff3430Sub.numTrades < 999 ? sMEventScreenData->buff3430Sub.numTrades : 999;
-            for (i = 0; i < 8; i++)
+    case CARD_TYPE_GIFT:
+        memcpy(sWonderCardData->footerLine2Text, sWonderCardData->card.footerLine2Text, WONDER_CARD_TEXT_LENGTH);
+        sWonderCardData->footerLine2Text[WONDER_CARD_TEXT_LENGTH] = EOS;
+        break;
+    case CARD_TYPE_STAMP:
+        sWonderCardData->footerLine2Text[0] = EOS;
+        break;
+    case CARD_TYPE_LINK_STAT:
+        sWonderCardData->footerLine2Text[0] = EOS;
+        
+        // Load stats
+        stats[0] = sWonderCardData->cardMetadata.battlesWon < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesWon : MAX_WONDER_CARD_STAT;
+        stats[1] = sWonderCardData->cardMetadata.battlesLost < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.battlesLost : MAX_WONDER_CARD_STAT;
+        stats[2] = sWonderCardData->cardMetadata.numTrades < MAX_WONDER_CARD_STAT ? sWonderCardData->cardMetadata.numTrades : MAX_WONDER_CARD_STAT;
+        
+        // Init stat text arrays
+        for (i = 0; i < ARRAY_COUNT(sWonderCardData->statTextData); i++)
+        {
+            memset(sWonderCardData->statTextData[i].statNumberText, EOS, sizeof(sWonderCardData->statTextData[i].statNumberText));
+            memset(sWonderCardData->statTextData[i].statText,       EOS, sizeof(sWonderCardData->statTextData[i].statText));
+        }
+
+        // Copy stat texts
+        for (i = 0, charsUntilStat = 0; i < WONDER_CARD_TEXT_LENGTH; i++)
+        {
+            if (sWonderCardData->card.footerLine2Text[i] != CHAR_DYNAMIC_PLACEHOLDER)
             {
-                memset(sMEventScreenData->recordStrings[i].numberTxt, EOS, 4);
-                memset(sMEventScreenData->recordStrings[i].nameTxt, EOS, 41);
+                // Regular text, just copy as is
+                sWonderCardData->statTextData[sWonderCardData->recordIdx].statText[charsUntilStat] = sWonderCardData->card.footerLine2Text[i];
+                charsUntilStat++;
             }
-            for (i = 0, r6 = 0; i < 40; i++)
+            else
             {
-                if (sMEventScreenData->wonderCard.footerLine2Text[i] != CHAR_DYNAMIC_PLACEHOLDER)
+                // Dynamic char encountered
+                // These are used to give the id of which stat to print
+                u8 id = sWonderCardData->card.footerLine2Text[i + 1];
+                if (id >= ARRAY_COUNT(stats))
                 {
-                    sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nameTxt[r6] = sMEventScreenData->wonderCard.footerLine2Text[i];
-                    r6++;
+                    // Invalid stat id, skip ahead
+                    i += 2;
                 }
                 else
                 {
-                    u8 r3 = sMEventScreenData->wonderCard.footerLine2Text[i + 1];
-                    if (r3 > 2)
-                    {
-                        i += 2;
-                    }
-                    else
-                    {
-                        ConvertIntToDecimalStringN(sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].numberTxt, sp0[r3], STR_CONV_MODE_LEADING_ZEROS, 3);
-                        sMEventScreenData->recordStrings[sMEventScreenData->recordIdx].nDigits = sMEventScreenData->wonderCard.footerLine2Text[i + 2];
-                        sMEventScreenData->recordIdx++;
-                        if (sMEventScreenData->recordIdx > 7)
-                            break;
-                        r6 = 0;
-                        i += 2;
-                    }
+                    // Copy stat number
+                    ConvertIntToDecimalStringN(sWonderCardData->statTextData[sWonderCardData->recordIdx].statNumberText, stats[id], STR_CONV_MODE_LEADING_ZEROS, 3);
+                    sWonderCardData->statTextData[sWonderCardData->recordIdx].width = sWonderCardData->card.footerLine2Text[i + 2];
+                    sWonderCardData->recordIdx++;
+                    if (sWonderCardData->recordIdx >= ARRAY_COUNT(sWonderCardData->statTextData))
+                        break;
+                    charsUntilStat = 0;
+                    i += 2;
                 }
             }
+        }
     }
 }
 
-static void sub_8145D18(u8 whichWindow)
+static void DrawCardWindow(u8 whichWindow)
 {
-    s8 sp0C = 0;
-    s32 windowId = sMEventScreenData->windowIds[whichWindow];
+    s8 i = 0;
+    s32 windowId = sWonderCardData->windowIds[whichWindow];
     PutWindowTilemap(windowId);
     FillWindowPixelBuffer(windowId, 0);
     switch (whichWindow)
     {
-        case 0:
+    case WIN_HEADER:
+    {
+        // Print card title/subtitle
+        s32 x;
+        AddTextPrinterParameterized3(windowId, FONT_3, 0, 1, sTextColorTable[sWonderCardData->gfx->textPal1], 0, sWonderCardData->titleText);
+        x = 160 - GetStringWidth(FONT_3, sWonderCardData->subtitleText, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING));
+        if (x < 0)
+            x = 0;
+        AddTextPrinterParameterized3(windowId, FONT_3, x, 17, sTextColorTable[sWonderCardData->gfx->textPal1], 0, sWonderCardData->subtitleText);
+        
+        // Print id number
+        if (sWonderCardData->card.idNumber != 0)
+            AddTextPrinterParameterized3(windowId, FONT_2, 166, 17, sTextColorTable[sWonderCardData->gfx->textPal1], 0, sWonderCardData->idNumberText);
+        break;
+    }
+    case WIN_BODY:
+        // Print body text
+        for (; i < WONDER_CARD_BODY_TEXT_LINES; i++)
+            AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 * i + 2, sTextColorTable[sWonderCardData->gfx->textPal2], 0, sWonderCardData->bodyText[i]);
+        break;
+    case WIN_FOOTER:
+        // Print footer line 1
+        AddTextPrinterParameterized3(windowId, FONT_3, 0,
+                                     sFooterTextOffsets[sWonderCardData->card.type],
+                                     sTextColorTable[sWonderCardData->gfx->textPal3],
+                                     0, sWonderCardData->footerLine1Text);
+        
+        // Print footer line 2
+        if (sWonderCardData->card.type != CARD_TYPE_LINK_STAT)
         {
-            s32 x;
-            AddTextPrinterParameterized3(windowId, FONT_3, 0, 1, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->title);
-            x = 160 - GetStringWidth(FONT_3, sMEventScreenData->subtitle, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING));
-            if (x < 0)
-                x = 0;
-            AddTextPrinterParameterized3(windowId, FONT_3, x, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->subtitle);
-            if (sMEventScreenData->wonderCard.idNumber != 0)
-            {
-                AddTextPrinterParameterized3(windowId, FONT_2, 166, 17, gUnknown_8467068[sMEventScreenData->bgSpec->textPal1], 0, sMEventScreenData->unk_01DD);
-            }
-            break;
+            // Print gift text
+            // Odd that CARD_TYPE_STAMP is not ignored, it has empty text for this
+            AddTextPrinterParameterized3(windowId, FONT_3, 0,
+                                         16 + sFooterTextOffsets[sWonderCardData->card.type],
+                                         sTextColorTable[sWonderCardData->gfx->textPal3],
+                                         0, sWonderCardData->footerLine2Text);
         }
-        case 1:
-            for (; sp0C < 4; sp0C++)
+        else
+        {
+            s32 x = 0;
+            s32 y = sFooterTextOffsets[sWonderCardData->card.type] + 16;
+            s32 spacing = GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING);
+            for (; i < sWonderCardData->recordIdx; i++)
             {
-                AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 * sp0C + 2, gUnknown_8467068[sMEventScreenData->bgSpec->textPal2], 0, sMEventScreenData->mainMessageLines[sp0C]);
-            }
-            break;
-        case 2:
-            AddTextPrinterParameterized3(windowId, FONT_3, 0, sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine1);
-            if (sMEventScreenData->wonderCard.type != 2)
-            {
-                AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 + sTextYCoords[sMEventScreenData->wonderCard.type], gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->instructionsLine2);
-            }
-            else
-            {
-                s32 x = 0;
-                s32 y = sTextYCoords[sMEventScreenData->wonderCard.type] + 16;
-                s32 spacing = GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING);
-                for (; sp0C < sMEventScreenData->recordIdx; sp0C++)
+                // Print stat text
+                AddTextPrinterParameterized3(windowId, FONT_3, x, y, sTextColorTable[sWonderCardData->gfx->textPal3], 0, sWonderCardData->statTextData[i].statText);
+                if (sWonderCardData->statTextData[i].statNumberText[0] != EOS)
                 {
-                    AddTextPrinterParameterized3(windowId, FONT_3, x, y, gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->recordStrings[sp0C].nameTxt);
-                    if (sMEventScreenData->recordStrings[sp0C].numberTxt[0] != EOS)
-                    {
-                        x += GetStringWidth(FONT_3, sMEventScreenData->recordStrings[sp0C].nameTxt, spacing);
-                        AddTextPrinterParameterized3(windowId, FONT_2, x, y, gUnknown_8467068[sMEventScreenData->bgSpec->textPal3], 0, sMEventScreenData->recordStrings[sp0C].numberTxt);
-                        x += GetStringWidth(FONT_3, sMEventScreenData->recordStrings[sp0C].numberTxt, spacing) + sMEventScreenData->recordStrings[sp0C].nDigits;
-                    }
+                    // Print stat number
+                    x += GetStringWidth(FONT_3, sWonderCardData->statTextData[i].statText, spacing);
+                    AddTextPrinterParameterized3(windowId, FONT_2, x, y,
+                                                 sTextColorTable[sWonderCardData->gfx->textPal3],
+                                                 0, sWonderCardData->statTextData[i].statNumberText);
+                    x += GetStringWidth(FONT_3, sWonderCardData->statTextData[i].statNumberText, spacing) + sWonderCardData->statTextData[i].width;
                 }
             }
-            break;
+        }
+        break;
     }
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void sub_8146060(void)
+static void CreateCardSprites(void)
 {
-    u8 r7 = 0;
-    sMEventScreenData->monIconId = 0xFF;
-    if (sMEventScreenData->buff3430Sub.iconSpecies != SPECIES_NONE)
+    u8 i = 0;
+    sWonderCardData->monIconSpriteId = SPRITE_NONE;
+    
+    // Create icon sprite
+    if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
-        sMEventScreenData->monIconId = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sMEventScreenData->buff3430Sub.iconSpecies), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
-        gSprites[sMEventScreenData->monIconId].oam.priority = 2;
+        sWonderCardData->monIconSpriteId = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0, FALSE);
+        gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
     }
-    if (sMEventScreenData->wonderCard.maxStamps != 0 && sMEventScreenData->wonderCard.type == 1)
+    
+    // Create stamp sprites
+    if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
     {
-        LoadCompressedSpriteSheetUsingHeap(&sShadowSpriteSheet);
-        LoadSpritePalette(&sShadowSpritePalettes[sMEventScreenData->bgSpec->index]);
-        for (; r7 < sMEventScreenData->wonderCard.maxStamps; r7++)
+        LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_StampShadow);
+        LoadSpritePalette(&sSpritePalettes_StampShadow[sWonderCardData->gfx->index]);
+        for (; i < sWonderCardData->card.maxStamps; i++)
         {
-            sMEventScreenData->cardIconAndShadowSprites[r7][0] = 0xFF;
-            sMEventScreenData->cardIconAndShadowSprites[r7][1] = 0xFF;
-            sMEventScreenData->cardIconAndShadowSprites[r7][0] = CreateSprite(&sShadowSpriteTemplate, 0xd8 - 32 * r7, 0x90, 8);
-            if (sMEventScreenData->buff3430Sub.stampData[0][r7] != 0)
+            sWonderCardData->stampSpriteIds[i][0] = SPRITE_NONE;
+            sWonderCardData->stampSpriteIds[i][1] = SPRITE_NONE;
+            sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 0x90, 8);
+            if (sWonderCardData->cardMetadata.stampData[0][i] != 0)
             {
-                sMEventScreenData->cardIconAndShadowSprites[r7][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sMEventScreenData->buff3430Sub.stampData[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
-                gSprites[sMEventScreenData->cardIconAndShadowSprites[r7][1]].oam.priority = 2;
+                sWonderCardData->stampSpriteIds[i][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.stampData[0][i]), SpriteCallbackDummy, 216 - 32 * i, 136, 0, 0);
+                gSprites[sWonderCardData->stampSpriteIds[i][1]].oam.priority = 2;
             }
         }
     }
 }
 
-static void sub_81461D8(void)
+static void DestroyCardSprites(void)
 {
-    u8 r6 = 0;
-    if (sMEventScreenData->monIconId != 0xFF)
-        DestroyMonIcon(&gSprites[sMEventScreenData->monIconId]);
-    if (sMEventScreenData->wonderCard.maxStamps != 0 && sMEventScreenData->wonderCard.type == 1)
+    u8 i = 0;
+    
+    // Destroy icon sprite
+    if (sWonderCardData->monIconSpriteId != SPRITE_NONE)
+        DestroyMonIcon(&gSprites[sWonderCardData->monIconSpriteId]);
+    
+    // Destroy stamp sprites
+    if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
     {
-        for (; r6 < sMEventScreenData->wonderCard.maxStamps; r6++)
+        for (; i < sWonderCardData->card.maxStamps; i++)
         {
-            if (sMEventScreenData->cardIconAndShadowSprites[r6][0] != 0xFF)
+            if (sWonderCardData->stampSpriteIds[i][0] != SPRITE_NONE)
             {
-                DestroySprite(&gSprites[sMEventScreenData->cardIconAndShadowSprites[r6][0]]);
-                // This might be a typo.  Uncomment the next line, and comment the one that follows, to get the presumed intended behavior.
-                // if (sMEventScreenData->cardIconAndShadowSprites[r6][1] != 0xFF)
-                if (sMEventScreenData->cardIconAndShadowSprites[r6][0] != 0xFF)
-                {
-                    DestroyMonIcon(&gSprites[sMEventScreenData->cardIconAndShadowSprites[r6][1]]);
-                }
+                DestroySprite(&gSprites[sWonderCardData->stampSpriteIds[i][0]]);
+            #ifdef BUGFIX
+                if (sWonderCardData->stampSpriteIds[i][1] != SPRITE_NONE)
+            #else
+                if (sWonderCardData->stampSpriteIds[i][0] != SPRITE_NONE)
+            #endif
+                    DestroyMonIcon(&gSprites[sWonderCardData->stampSpriteIds[i][1]]);
             }
         }
-        FreeSpriteTilesByTag(0x8000);
-        FreeSpritePaletteByTag(0x8000);
+        FreeSpriteTilesByTag(TAG_STAMP_SHADOW);
+        FreeSpritePaletteByTag(TAG_STAMP_SHADOW);
     }
 }

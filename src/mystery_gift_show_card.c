@@ -29,7 +29,7 @@ struct WonderCardData
 {
     /*0000*/ struct WonderCard card;
     /*014c*/ struct WonderCardMetadata cardMetadata;
-    /*0170*/ const struct UnkStruct_8467FB8 * gfx;
+    /*0170*/ const struct WonderGraphics * gfx;
     /*0174*/ u8 enterExitState;
     /*0175*/ u8 recordIdx;
     /*0176*/ u16 windowIds[WIN_COUNT];
@@ -94,47 +94,47 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }
 };
 
-static const u16 sCard0Pal[] = INCBIN_U16("graphics/mevent/pal_46708C.gbapal");
-const u16 gCard1Pal[] = INCBIN_U16("graphics/mevent/pal_4670AC.gbapal");
-const u16 gCard2Pal[] = INCBIN_U16("graphics/mevent/pal_4670CC.gbapal");
-const u16 gCard3Pal[] = INCBIN_U16("graphics/mevent/pal_4670EC.gbapal");
-const u16 gCard4Pal[] = INCBIN_U16("graphics/mevent/pal_46710C.gbapal");
-const u16 gCard5Pal[] = INCBIN_U16("graphics/mevent/pal_46712C.gbapal");
-static const u16 sCard6Pal[] = INCBIN_U16("graphics/mevent/pal_46714C.gbapal");
-static const u16 sCard7Pal[] = INCBIN_U16("graphics/mevent/pal_46716C.gbapal");
-static const u8 sCard0Gfx[] = INCBIN_U8("graphics/mevent/gfx_46718C.4bpp.lz");
-static const u8 sCard0Map[] = INCBIN_U8("graphics/mevent/tilemap_467288.bin.lz");
-static const u8 sCard1Gfx[] = INCBIN_U8("graphics/mevent/gfx_46737C.4bpp.lz");
-static const u8 sCard1Map[] = INCBIN_U8("graphics/mevent/tilemap_467470.bin.lz");
-static const u8 sCard2Gfx[] = INCBIN_U8("graphics/mevent/gfx_467558.4bpp.lz");
-static const u8 sCard2Map[] = INCBIN_U8("graphics/mevent/tilemap_46762C.bin.lz");
-static const u8 sCard6Gfx[] = INCBIN_U8("graphics/mevent/gfx_467700.4bpp.lz");
-static const u8 sCard6Map[] = INCBIN_U8("graphics/mevent/tilemap_467934.bin.lz");
-static const u8 sCard7Gfx[] = INCBIN_U8("graphics/mevent/gfx_467A7C.4bpp.lz");
-static const u8 sCard7Map[] = INCBIN_U8("graphics/mevent/tilemap_467CAC.bin.lz");
-static const u16 sUnknown_8467DF4[] = INCBIN_U16("graphics/mevent/pal_467DF4.gbapal");
-static const u16 sUnknown_8467E14[] = INCBIN_U16("graphics/mevent/pal_467E14.gbapal");
-static const u16 sUnknown_8467E34[] = INCBIN_U16("graphics/mevent/pal_467E34.gbapal");
-static const u16 sUnknown_8467E54[] = INCBIN_U16("graphics/mevent/pal_467E54.gbapal");
-static const u16 sUnknown_8467E74[] = INCBIN_U16("graphics/mevent/pal_467E74.gbapal");
-static const u16 sUnknown_8467E94[] = INCBIN_U16("graphics/mevent/pal_467E94.gbapal");
-static const u16 sUnknown_8467EB4[] = INCBIN_U16("graphics/mevent/pal_467EB4.gbapal");
-static const u16 sUnknown_8467ED4[] = INCBIN_U16("graphics/mevent/pal_467ED4.gbapal");
-static const u32 sUnknown_8467EF4[] = INCBIN_U32("graphics/mevent/gfx_467EF4.4bpp.lz");
+static const u16 sCard0Pal[] = INCBIN_U16("graphics/wonder_card/bg0.gbapal");
+const u16 gCard1Pal[] = INCBIN_U16("graphics/wonder_card/bg1.gbapal");
+const u16 gCard2Pal[] = INCBIN_U16("graphics/wonder_card/bg2.gbapal");
+const u16 gCard3Pal[] = INCBIN_U16("graphics/wonder_card/bg3.gbapal");
+const u16 gCard4Pal[] = INCBIN_U16("graphics/wonder_card/bg4.gbapal");
+const u16 gCard5Pal[] = INCBIN_U16("graphics/wonder_card/bg5.gbapal");
+static const u16 sCard6Pal[] = INCBIN_U16("graphics/wonder_card/bg6.gbapal");
+static const u16 sCard7Pal[] = INCBIN_U16("graphics/wonder_card/bg7.gbapal");
+static const u8 sCard0Gfx[] = INCBIN_U8("graphics/wonder_card/bg0.4bpp.lz");
+static const u8 sCard0Map[] = INCBIN_U8("graphics/wonder_card/bg0.bin.lz");
+static const u8 sCard1Gfx[] = INCBIN_U8("graphics/wonder_card/bg1.4bpp.lz");
+static const u8 sCard1Map[] = INCBIN_U8("graphics/wonder_card/bg1.bin.lz");
+static const u8 sCard2Gfx[] = INCBIN_U8("graphics/wonder_card/bg2.4bpp.lz");
+static const u8 sCard2Map[] = INCBIN_U8("graphics/wonder_card/bg2.bin.lz");
+static const u8 sCard6Gfx[] = INCBIN_U8("graphics/wonder_card/bg6.4bpp.lz");
+static const u8 sCard6Map[] = INCBIN_U8("graphics/wonder_card/bg6.bin.lz");
+static const u8 sCard7Gfx[] = INCBIN_U8("graphics/wonder_card/bg7.4bpp.lz");
+static const u8 sCard7Map[] = INCBIN_U8("graphics/wonder_card/bg7.bin.lz");
+static const u16 sStampShadowPal0[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_0.gbapal");
+static const u16 sStampShadowPal1[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_1.gbapal");
+static const u16 sStampShadowPal2[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_2.gbapal");
+static const u16 sStampShadowPal3[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_3.gbapal");
+static const u16 sStampShadowPal4[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_4.gbapal");
+static const u16 sStampShadowPal5[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_5.gbapal");
+static const u16 sStampShadowPal6[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_6.gbapal");
+static const u16 sStampShadowPal7[] = INCBIN_U16("graphics/wonder_card/stamp_shadow_7.gbapal");
+static const u32 sStampShadowGfx[] = INCBIN_U32("graphics/wonder_card/stamp_shadow.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheet_StampShadow = {
-    sUnknown_8467EF4, 0x100, 0x8000
+    sStampShadowGfx, 0x100, TAG_STAMP_SHADOW
 };
 
 static const struct SpritePalette sSpritePalettes_StampShadow[] = {
-    {sUnknown_8467DF4, 0x8000},
-    {sUnknown_8467E14, 0x8000},
-    {sUnknown_8467E34, 0x8000},
-    {sUnknown_8467E54, 0x8000},
-    {sUnknown_8467E74, 0x8000},
-    {sUnknown_8467E94, 0x8000},
-    {sUnknown_8467EB4, 0x8000},
-    {sUnknown_8467ED4, 0x8000}
+    {sStampShadowPal0, TAG_STAMP_SHADOW},
+    {sStampShadowPal1, TAG_STAMP_SHADOW},
+    {sStampShadowPal2, TAG_STAMP_SHADOW},
+    {sStampShadowPal3, TAG_STAMP_SHADOW},
+    {sStampShadowPal4, TAG_STAMP_SHADOW},
+    {sStampShadowPal5, TAG_STAMP_SHADOW},
+    {sStampShadowPal6, TAG_STAMP_SHADOW},
+    {sStampShadowPal7, TAG_STAMP_SHADOW}
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
@@ -147,15 +147,15 @@ static const struct SpriteTemplate sSpriteTemplate_StampShadow = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct UnkStruct_8467FB8 sCardGraphics[8] = {
-    {1, 0, 0, 0, sCard0Gfx, sCard0Map, sCard0Pal},
-    {1, 0, 0, 1, sCard1Gfx, sCard1Map, gCard1Pal},
-    {1, 0, 0, 2, sCard2Gfx, sCard2Map, gCard2Pal},
-    {1, 0, 0, 3, sCard2Gfx, sCard2Map, gCard3Pal},
-    {1, 0, 0, 4, sCard2Gfx, sCard2Map, gCard4Pal},
-    {1, 0, 0, 5, sCard2Gfx, sCard2Map, gCard5Pal},
-    {1, 0, 0, 6, sCard6Gfx, sCard6Map, sCard6Pal},
-    {1, 0, 0, 7, sCard7Gfx, sCard7Map, sCard7Pal}
+static const struct WonderGraphics sCardGraphics[NUM_WONDER_BGS] = {
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 0, .tiles = sCard0Gfx, .map = sCard0Map, .pal = sCard0Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 1, .tiles = sCard1Gfx, .map = sCard1Map, .pal = gCard1Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 2, .tiles = sCard2Gfx, .map = sCard2Map, .pal = gCard2Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 3, .tiles = sCard2Gfx, .map = sCard2Map, .pal = gCard3Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 4, .tiles = sCard2Gfx, .map = sCard2Map, .pal = gCard4Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 5, .tiles = sCard2Gfx, .map = sCard2Map, .pal = gCard5Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 6, .tiles = sCard6Gfx, .map = sCard6Map, .pal = sCard6Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .footerTextPal = 0, .stampShadowPal = 7, .tiles = sCard7Gfx, .map = sCard7Map, .pal = sCard7Pal}
 };
 
 bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata)
@@ -399,27 +399,27 @@ static void DrawCardWindow(u8 whichWindow)
     {
         // Print card title/subtitle
         s32 x;
-        AddTextPrinterParameterized3(windowId, FONT_3, 0, 1, sTextColorTable[sWonderCardData->gfx->textPal1], 0, sWonderCardData->titleText);
+        AddTextPrinterParameterized3(windowId, FONT_3, 0, 1, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->titleText);
         x = 160 - GetStringWidth(FONT_3, sWonderCardData->subtitleText, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING));
         if (x < 0)
             x = 0;
-        AddTextPrinterParameterized3(windowId, FONT_3, x, 17, sTextColorTable[sWonderCardData->gfx->textPal1], 0, sWonderCardData->subtitleText);
+        AddTextPrinterParameterized3(windowId, FONT_3, x, 17, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->subtitleText);
         
         // Print id number
         if (sWonderCardData->card.idNumber != 0)
-            AddTextPrinterParameterized3(windowId, FONT_2, 166, 17, sTextColorTable[sWonderCardData->gfx->textPal1], 0, sWonderCardData->idNumberText);
+            AddTextPrinterParameterized3(windowId, FONT_2, 166, 17, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->idNumberText);
         break;
     }
     case WIN_BODY:
         // Print body text
         for (; i < WONDER_CARD_BODY_TEXT_LINES; i++)
-            AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 * i + 2, sTextColorTable[sWonderCardData->gfx->textPal2], 0, sWonderCardData->bodyText[i]);
+            AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 * i + 2, sTextColorTable[sWonderCardData->gfx->bodyTextPal], 0, sWonderCardData->bodyText[i]);
         break;
     case WIN_FOOTER:
         // Print footer line 1
         AddTextPrinterParameterized3(windowId, FONT_3, 0,
                                      sFooterTextOffsets[sWonderCardData->card.type],
-                                     sTextColorTable[sWonderCardData->gfx->textPal3],
+                                     sTextColorTable[sWonderCardData->gfx->footerTextPal],
                                      0, sWonderCardData->footerLine1Text);
         
         // Print footer line 2
@@ -429,7 +429,7 @@ static void DrawCardWindow(u8 whichWindow)
             // Odd that CARD_TYPE_STAMP is not ignored, it has empty text for this
             AddTextPrinterParameterized3(windowId, FONT_3, 0,
                                          16 + sFooterTextOffsets[sWonderCardData->card.type],
-                                         sTextColorTable[sWonderCardData->gfx->textPal3],
+                                         sTextColorTable[sWonderCardData->gfx->footerTextPal],
                                          0, sWonderCardData->footerLine2Text);
         }
         else
@@ -440,13 +440,13 @@ static void DrawCardWindow(u8 whichWindow)
             for (; i < sWonderCardData->recordIdx; i++)
             {
                 // Print stat text
-                AddTextPrinterParameterized3(windowId, FONT_3, x, y, sTextColorTable[sWonderCardData->gfx->textPal3], 0, sWonderCardData->statTextData[i].statText);
+                AddTextPrinterParameterized3(windowId, FONT_3, x, y, sTextColorTable[sWonderCardData->gfx->footerTextPal], 0, sWonderCardData->statTextData[i].statText);
                 if (sWonderCardData->statTextData[i].statNumberText[0] != EOS)
                 {
                     // Print stat number
                     x += GetStringWidth(FONT_3, sWonderCardData->statTextData[i].statText, spacing);
                     AddTextPrinterParameterized3(windowId, FONT_2, x, y,
-                                                 sTextColorTable[sWonderCardData->gfx->textPal3],
+                                                 sTextColorTable[sWonderCardData->gfx->footerTextPal],
                                                  0, sWonderCardData->statTextData[i].statNumberText);
                     x += GetStringWidth(FONT_3, sWonderCardData->statTextData[i].statNumberText, spacing) + sWonderCardData->statTextData[i].width;
                 }
@@ -473,7 +473,7 @@ static void CreateCardSprites(void)
     if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
     {
         LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_StampShadow);
-        LoadSpritePalette(&sSpritePalettes_StampShadow[sWonderCardData->gfx->index]);
+        LoadSpritePalette(&sSpritePalettes_StampShadow[sWonderCardData->gfx->stampShadowPal]);
         for (; i < sWonderCardData->card.maxStamps; i++)
         {
             sWonderCardData->stampSpriteIds[i][0] = SPRITE_NONE;

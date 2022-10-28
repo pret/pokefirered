@@ -47,12 +47,12 @@ struct MEvent_Str_2
     u8 fill_00[0x40];
 };
 
-struct UnkStruct_8467FB8
+struct WonderGraphics
 {
-    u8 textPal1:4;
-    u8 textPal2:4;
-    u8 textPal3:4;
-    u8 index:4;
+    u8 titleTextPal:4;
+    u8 bodyTextPal:4;
+    u8 footerTextPal:4;
+    u8 stampShadowPal:4;
     const u8 * tiles;
     const u8 * map;
     const u16 * pal;
@@ -82,7 +82,7 @@ u32 MEvent_CanPlayerReceiveDistributionMon(const u16 * a0, const struct MEventCl
 bool32 sub_8144474(const struct MEventClientHeaderStruct * a0, const u16 * a1);
 u16 sub_81444B0(const struct MEventClientHeaderStruct * a0, u32 command);
 bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata);
-bool32 WonderNews_Init(const struct WonderNews * a0);
+bool32 WonderNews_Init(const struct WonderNews * news);
 s32 WonderCard_Enter(void);
 s32 WonderNews_Enter(void);
 void DestroyWonderCard(void);

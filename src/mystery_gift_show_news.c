@@ -20,7 +20,7 @@ enum {
 struct WonderNewsData
 {
     struct WonderNews news;
-    const struct UnkStruct_8467FB8 * gfx;
+    const struct WonderGraphics * gfx;
     bool8 verticalScrollDisabled:1;
     u8 enterExitState:7;
     u8 arrowTaskId;
@@ -82,29 +82,29 @@ static const struct ScrollArrowsTemplate sArrowsTemplate = {
     .palNum = 0
 };
 
-static const u16 sNews1Pal[] = INCBIN_U16("graphics/mevent/pal_468060.gbapal");
-static const u16 sNews6Pal[] = INCBIN_U16("graphics/mevent/pal_468080.gbapal");
-static const u16 sNews7Pal[] = INCBIN_U16("graphics/mevent/pal_4680A0.gbapal");
-static const u8 sNews0Gfx[] = INCBIN_U8("graphics/mevent/gfx_4680C0.4bpp.lz");
-static const u8 sNews0Map[] = INCBIN_U8("graphics/mevent/tilemap_468140.bin.lz");
-static const u8 sNews1Gfx[] = INCBIN_U8("graphics/mevent/gfx_46821C.4bpp.lz");
-static const u8 sNews1Map[] = INCBIN_U8("graphics/mevent/tilemap_46824C.bin.lz");
-static const u8 sNews2Gfx[] = INCBIN_U8("graphics/mevent/gfx_46830C.4bpp.lz");
-static const u8 sNews2Map[] = INCBIN_U8("graphics/mevent/tilemap_46837C.bin.lz");
-static const u8 sNews6Gfx[] = INCBIN_U8("graphics/mevent/gfx_468448.4bpp.lz");
-static const u8 sNews6Map[] = INCBIN_U8("graphics/mevent/tilemap_4684D8.bin.lz");
-static const u8 sNews7Gfx[] = INCBIN_U8("graphics/mevent/gfx_4685B4.4bpp.lz");
-static const u8 sNews7Map[] = INCBIN_U8("graphics/mevent/tilemap_468644.bin.lz");
+static const u16 sNews0Pal[] = INCBIN_U16("graphics/wonder_news/bg0.gbapal");
+static const u16 sNews6Pal[] = INCBIN_U16("graphics/wonder_news/bg6.gbapal");
+static const u16 sNews7Pal[] = INCBIN_U16("graphics/wonder_news/bg7.gbapal");
+static const u8 sNews0Gfx[] = INCBIN_U8("graphics/wonder_news/bg0.4bpp.lz");
+static const u8 sNews0Map[] = INCBIN_U8("graphics/wonder_news/bg0.bin.lz");
+static const u8 sNews1Gfx[] = INCBIN_U8("graphics/wonder_news/bg1.4bpp.lz");
+static const u8 sNews1Map[] = INCBIN_U8("graphics/wonder_news/bg1.bin.lz");
+static const u8 sNews2Gfx[] = INCBIN_U8("graphics/wonder_news/bg2.4bpp.lz");
+static const u8 sNews2Map[] = INCBIN_U8("graphics/wonder_news/bg2.bin.lz");
+static const u8 sNews6Gfx[] = INCBIN_U8("graphics/wonder_news/bg6.4bpp.lz");
+static const u8 sNews6Map[] = INCBIN_U8("graphics/wonder_news/bg6.bin.lz");
+static const u8 sNews7Gfx[] = INCBIN_U8("graphics/wonder_news/bg7.4bpp.lz");
+static const u8 sNews7Map[] = INCBIN_U8("graphics/wonder_news/bg7.bin.lz");
 
-static const struct UnkStruct_8467FB8 sNewsGraphics[NUM_WONDER_BGS] = {
-    {1, 0, 0, 0, sNews0Gfx, sNews0Map, sNews1Pal},
-    {1, 0, 0, 0, sNews1Gfx, sNews1Map, gCard1Pal},
-    {1, 0, 0, 0, sNews2Gfx, sNews2Map, gCard2Pal},
-    {1, 0, 0, 0, sNews2Gfx, sNews2Map, gCard3Pal},
-    {1, 0, 0, 0, sNews2Gfx, sNews2Map, gCard4Pal},
-    {1, 0, 0, 0, sNews2Gfx, sNews2Map, gCard5Pal},
-    {1, 0, 0, 0, sNews6Gfx, sNews6Map, sNews6Pal},
-    {1, 0, 0, 0, sNews7Gfx, sNews7Map, sNews7Pal}
+static const struct WonderGraphics sNewsGraphics[NUM_WONDER_BGS] = {
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews0Gfx, .map = sNews0Map, .pal = sNews0Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews1Gfx, .map = sNews1Map, .pal = gCard1Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews2Gfx, .map = sNews2Map, .pal = gCard2Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews2Gfx, .map = sNews2Map, .pal = gCard3Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews2Gfx, .map = sNews2Map, .pal = gCard4Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews2Gfx, .map = sNews2Map, .pal = gCard5Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews6Gfx, .map = sNews6Map, .pal = sNews6Pal},
+    {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews7Gfx, .map = sNews7Map, .pal = sNews7Pal}
 };
 
 bool32 WonderNews_Init(const struct WonderNews * news)
@@ -363,14 +363,14 @@ static void DrawNewsWindows(void)
     x = (224 - GetStringWidth(FONT_3, sWonderNewsData->titleText, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING))) / 2;
     if (x < 0)
         x = 0;
-    AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_TITLE], FONT_3, x, 6, sTextColorTable[sWonderNewsData->gfx->textPal1], 0, sWonderNewsData->titleText);
+    AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_TITLE], FONT_3, x, 6, sTextColorTable[sWonderNewsData->gfx->titleTextPal], 0, sWonderNewsData->titleText);
     
     // Print body text
     for (; i < WONDER_NEWS_BODY_TEXT_LINES; ++i)
     {
         AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_BODY], FONT_3, 0,
                                      16 * i + 2,
-                                     sTextColorTable[sWonderNewsData->gfx->textPal2],
+                                     sTextColorTable[sWonderNewsData->gfx->bodyTextPal],
                                      0, sWonderNewsData->bodyText[i]);
     }
     CopyWindowToVram(sWonderNewsData->windowIds[WIN_TITLE], COPYWIN_FULL);

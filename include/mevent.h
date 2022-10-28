@@ -9,6 +9,14 @@
 #define CARD_STAT_NUM_STAMPS    3
 #define CARD_STAT_MAX_STAMPS    4
 
+enum {
+    NEWS_INPUT_A,
+    NEWS_INPUT_B,
+    NEWS_INPUT_SCROLL_UP,
+    NEWS_INPUT_SCROLL_DOWN,
+    NEWS_INPUT_NONE = 0xFF
+};
+
 struct MEventClientHeaderStruct
 {
     u32 unk_00;
@@ -74,21 +82,21 @@ u32 MEvent_CanPlayerReceiveDistributionMon(const u16 * a0, const struct MEventCl
 bool32 sub_8144474(const struct MEventClientHeaderStruct * a0, const u16 * a1);
 u16 sub_81444B0(const struct MEventClientHeaderStruct * a0, u32 command);
 bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata);
-bool32 InitWonderNewsResources(const struct WonderNews * a0);
+bool32 WonderNews_Init(const struct WonderNews * a0);
 s32 WonderCard_Enter(void);
-s32 FadeToWonderNewsMenu(void);
+s32 WonderNews_Enter(void);
 void DestroyWonderCard(void);
 void DestroyWonderNews(void);
 void WonderCard_Destroy(void);
-void DestroyWonderNewsResources(void);
+void WonderNews_Destroy(void);
 s32 WonderCard_Exit(bool32 flag);
-s32 FadeOutFromWonderNews(bool32 flag);
+s32 WonderNews_Exit(bool32 flag);
 bool32 CheckReceivedGiftFromWonderCard(void);
-void MENews_AddScrollIndicatorArrowPair(void);
-void MENews_RemoveScrollIndicatorArrowPair(void);
+void WonderNews_AddScrollIndicatorArrowPair(void);
+void WonderNews_RemoveScrollIndicatorArrowPair(void);
 bool32 WonderNews_Test_Unk_02(void);
 bool32 WonderCard_Test_Unk_08_6(void);
-u32 MENews_GetInput(u16 input);
+u32 WonderNews_GetInput(u16 input);
 void InitMEventData(void);
 u16 MEvent_GetBattleCardCount(u32 command);
 void MysteryGift_TryIncrementStat(u32 eventId, u32 trainerId);

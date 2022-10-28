@@ -806,7 +806,7 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
         }
         else
         {
-            InitWonderNewsResources(GetSavedWonderNews());
+            WonderNews_Init(GetSavedWonderNews());
         }
         (*state)++;
         break;
@@ -823,7 +823,7 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
         }
         else
         {
-            v0 = FadeToWonderNewsMenu();
+            v0 = WonderNews_Enter();
             goto check;
         }
     done:
@@ -863,9 +863,9 @@ bool32 TearDownCardOrNews_ReturnToTopMenu(bool32 cardOrNews, bool32 arg1)
     }
     else
     {
-        if (FadeOutFromWonderNews(arg1) != 0)
+        if (WonderNews_Exit(arg1) != 0)
         {
-            DestroyWonderNewsResources();
+            WonderNews_Destroy();
             return TRUE;
         }
         else
@@ -1456,10 +1456,10 @@ void task00_mystery_gift(u8 taskId)
         }
         else
         {
-            switch (MENews_GetInput(gMain.newKeys))
+            switch (WonderNews_GetInput(gMain.newKeys))
             {
             case 0:
-                MENews_RemoveScrollIndicatorArrowPair();
+                WonderNews_RemoveScrollIndicatorArrowPair();
                 data->state = 21;
                 break;
             case 1:
@@ -1507,7 +1507,7 @@ void task00_mystery_gift(u8 taskId)
         case -2u:
             if (data->IsCardOrNews == 1)
             {
-                MENews_AddScrollIndicatorArrowPair();
+                WonderNews_AddScrollIndicatorArrowPair();
             }
             data->state = 20;
             break;

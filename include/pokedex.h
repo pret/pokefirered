@@ -1,10 +1,6 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
-#define KANTO_DEX_COUNT 151
-#define HOENN_DEX_COUNT 202
-#define NATIONAL_DEX_COUNT 386
-
 enum
 {
     DEX_MODE_KANTO,

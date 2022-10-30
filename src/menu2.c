@@ -3,6 +3,11 @@
 #include "task.h"
 #include "wild_encounter.h"
 
+// Not actually "old" given these were introduced in Gen 3,
+// but they're used as equivalents here alongside the other OLD_UNOWN
+#define SPECIES_OLD_UNOWN_EMARK (NUM_SPECIES + 0)
+#define SPECIES_OLD_UNOWN_QMARK (NUM_SPECIES + 1)
+
 static void Task_SmoothBlendLayers(u8 taskId);
 
 static const u8 sMonSpriteAnchorCoords[][5] = {

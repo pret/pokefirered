@@ -32,6 +32,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 8,
       "y": 26,
@@ -45,6 +46,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 11,
       "y": 24,
@@ -58,6 +60,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 34,
       "y": 11,
@@ -71,6 +74,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 21,
       "y": 6,
@@ -84,6 +88,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 20,
       "y": 12,
@@ -97,6 +102,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 33,
       "y": 26,
@@ -110,6 +116,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 16,
       "y": 22,
@@ -123,6 +130,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 18,
       "y": 5,
@@ -136,6 +144,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 5,
@@ -155,35 +164,35 @@
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 25,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY_HOUSE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 36,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_VIRIDIAN_CITY_GYM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 25,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_VIRIDIAN_CITY_SCHOOL",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 36,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_VIRIDIAN_CITY_MART",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

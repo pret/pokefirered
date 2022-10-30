@@ -8,5 +8,6 @@
 #define BG_EVENT_PLAYER_FACING_WEST  4
 
 #define BG_EVENT_HIDDEN_ITEM         7
+#define BG_EVENT_SECRET_BASE         8
 
 #endif // GUARD_CONSTANTS_EVENT_BG_H

@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 6,
       "y": 2,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 4,
       "y": 10,
@@ -48,35 +50,35 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_ROUTE11",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 1,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ROUTE11",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 11,
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_ROUTE11",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 11,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_ROUTE11",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 9,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_ROUTE11_EAST_ENTRANCE_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

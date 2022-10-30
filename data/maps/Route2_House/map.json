@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 4,
       "y": 5,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GBA_KID",
       "x": 7,
       "y": 2,
@@ -48,21 +50,21 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

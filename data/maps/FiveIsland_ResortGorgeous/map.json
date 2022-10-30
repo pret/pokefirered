@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 44,
       "y": 10,
@@ -35,6 +36,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 33,
       "y": 12,
@@ -48,6 +50,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 12,
       "y": 10,
@@ -61,6 +64,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 23,
       "y": 9,
@@ -74,6 +78,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 33,
       "y": 8,
@@ -87,6 +92,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 33,
       "y": 3,
@@ -100,6 +106,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 56,
       "y": 7,
@@ -113,6 +120,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 39,
       "y": 9,
@@ -132,14 +140,14 @@
       "y": 13,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 39,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_FIVE_ISLAND_RESORT_GORGEOUS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
@@ -150,7 +158,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_NEST_BALL",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_NEST_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_NEST_BALL",
       "quantity": 1,
       "underfoot": false
     },
@@ -160,7 +168,7 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST",
       "quantity": 1,
       "underfoot": false
     },
@@ -170,7 +178,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STAR_PIECE",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STAR_PIECE",
       "quantity": 1,
       "underfoot": false
     },
@@ -180,7 +188,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST_2",
+      "flag": "FLAG_HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST_2",
       "quantity": 1,
       "underfoot": false
     },

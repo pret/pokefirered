@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 46,
       "y": 14,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 41,
       "y": 15,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 39,
       "y": 12,
@@ -72,14 +75,14 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE18_EAST_ENTRANCE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 48,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_ROUTE18_EAST_ENTRANCE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

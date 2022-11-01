@@ -802,18 +802,18 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 0:
         if (cardOrNews == 0)
         {
-            InitWonderCardResources(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
+            WonderCard_Init(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
         }
         else
         {
-            InitWonderNewsResources(GetSavedWonderNews());
+            WonderNews_Init(GetSavedWonderNews());
         }
         (*state)++;
         break;
     case 1:
         if (cardOrNews == 0)
         {
-            v0 = FadeToWonderCardMenu();
+            v0 = WonderCard_Enter();
             check:
             if (v0 != 0)
             {
@@ -823,7 +823,7 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
         }
         else
         {
-            v0 = FadeToWonderNewsMenu();
+            v0 = WonderNews_Enter();
             goto check;
         }
     done:
@@ -851,9 +851,9 @@ bool32 TearDownCardOrNews_ReturnToTopMenu(bool32 cardOrNews, bool32 arg1)
 {
     if (cardOrNews == 0)
     {
-        if (FadeOutFromWonderCard(arg1) != 0)
+        if (WonderCard_Exit(arg1) != 0)
         {
-            DestroyWonderCardResources();
+            WonderCard_Destroy();
             return TRUE;
         }
         else
@@ -863,9 +863,9 @@ bool32 TearDownCardOrNews_ReturnToTopMenu(bool32 cardOrNews, bool32 arg1)
     }
     else
     {
-        if (FadeOutFromWonderNews(arg1) != 0)
+        if (WonderNews_Exit(arg1) != 0)
         {
-            DestroyWonderNewsResources();
+            WonderNews_Destroy();
             return TRUE;
         }
         else
@@ -1456,10 +1456,10 @@ void task00_mystery_gift(u8 taskId)
         }
         else
         {
-            switch (MENews_GetInput(gMain.newKeys))
+            switch (WonderNews_GetInput(gMain.newKeys))
             {
             case 0:
-                MENews_RemoveScrollIndicatorArrowPair();
+                WonderNews_RemoveScrollIndicatorArrowPair();
                 data->state = 21;
                 break;
             case 1:
@@ -1507,7 +1507,7 @@ void task00_mystery_gift(u8 taskId)
         case -2u:
             if (data->IsCardOrNews == 1)
             {
-                MENews_AddScrollIndicatorArrowPair();
+                WonderNews_AddScrollIndicatorArrowPair();
             }
             data->state = 20;
             break;

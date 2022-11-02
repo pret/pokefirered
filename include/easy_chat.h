@@ -4,6 +4,9 @@
 #include "global.h"
 #include "constants/easy_chat.h"
 
+#define NUM_ALPHABET_ROWS    4
+#define NUM_ALPHABET_COLUMNS 7
+
 struct EasyChatWordInfo
 {
     const u8 *text;

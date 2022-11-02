@@ -9,6 +9,23 @@
 #include "strings.h"
 #include "text_window.h"
 
+enum {
+    GFXTAG_TRIANGLE_CURSOR,
+    GFXTAG_RECTANGLE_CURSOR,
+    GFXTAG_SCROLL_INDICATOR,
+    GFXTAG_START_SELECT_BUTTONS,
+    GFXTAG_MODE_WINDOW,
+    GFXTAG_RS_INTERVIEW_FRAME,
+    GFXTAG_BUTTON_WINDOW,
+};
+
+enum {
+    PALTAG_TRIANGLE_CURSOR,
+    PALTAG_RECTANGLE_CURSOR,
+    PALTAG_MISC_UI,
+    PALTAG_RS_INTERVIEW_FRAME,
+};
+
 struct ECWork
 {
     u16 state;
@@ -134,63 +151,53 @@ static void UpdateStartSelectButtonSpriteVisibility(void);
 static void HideStartSelectButtonSprites(void);
 static void CreateFooterWindow(void);
 
-static const u16 gUnknown_843F3B8[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.gbapal");
-static const u16 gUnknown_843F3D8[] = INCBIN_U16("graphics/link_rfu/unk_8E9BD28.gbapal");
-static const u16 sRightTriangleCursor_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.4bpp");
-static const u16 sUpTriangleCursor_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F418.4bpp");
-static const u16 sStartSelectButtons_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F518.4bpp");
-static const u16 gUnknown_843F618[] = INCBIN_U16("graphics/link_rfu/unk_843F638.gbapal");
-static const u32 gUnknown_843F638[] = INCBIN_U32("graphics/link_rfu/unk_843F638.4bpp.lz");
-static const u16 gUnknown_843F76C[] = INCBIN_U16("graphics/link_rfu/unk_843F76C.gbapal");
-static const u16 gUnknown_843F78C[] = INCBIN_U16("graphics/link_rfu/unk_843F78C.gbapal");
-static const u32 gUnknown_843F7AC[] = INCBIN_U32("graphics/link_rfu/unk_843F7AC.4bpp.lz");
-
-static const u16 gUnknown_843F874[] = {
-    RGB( 0,  0,  0),
-    RGB( 0,  0,  0),
-    RGB( 7, 25, 31),
-    RGB(21, 21, 29)
-};
-
-static const u16 gUnknown_843F87C[] = {
-    RGB( 0,  0,  0),
-    RGB(31, 31, 31),
-    RGB(12, 12, 12),
-    RGB(27, 26, 27),
-    RGB( 8, 17,  9)
-};
+static const u16 sTriangleCursor_Pal[] = INCBIN_U16("graphics/easy_chat/triangle_cursor.gbapal");
+static const u16 sRectangleCursor_Pal[] = INCBIN_U16("graphics/easy_chat/rectangle_cursor.gbapal");
+static const u16 sTriangleCursor_Gfx[] = INCBIN_U16("graphics/easy_chat/triangle_cursor.4bpp");
+static const u16 sScrollIndicator_Gfx[] = INCBIN_U16("graphics/easy_chat/scroll_indicator.4bpp");
+static const u16 sStartSelectButtons_Gfx[] = INCBIN_U16("graphics/easy_chat/start_select_buttons.4bpp");
+// In Ruby/Sapphire Easy Chat screens had a black background, and when the player & interviewer were present
+// on screen the interview_frame gfx was shown behind them.
+// In FRLG all Easy Chat screens have a filled background, so these gfx go unused
+static const u16 sRSInterviewFrame_Pal[] = INCBIN_U16("graphics/easy_chat/interview_frame.gbapal");
+static const u32 sRSInterviewFrame_Gfx[] = INCBIN_U32("graphics/easy_chat/interview_frame.4bpp.lz");
+static const u16 sTextInputFrameOrange_Pal[] = INCBIN_U16("graphics/easy_chat/text_input_frame_orange.gbapal");
+static const u16 sTextInputFrameGreen_Pal[] = INCBIN_U16("graphics/easy_chat/text_input_frame_green.gbapal");
+static const u32 sTextInputFrame_Gfx[] = INCBIN_U32("graphics/easy_chat/text_input_frame.4bpp.lz");
+static const u16 sTitleText_Pal[] = INCBIN_U16("graphics/easy_chat/title_text.gbapal");
+static const u16 sText_Pal[] = INCBIN_U16("graphics/easy_chat/text.gbapal");
 
 static const struct EasyChatPhraseFrameDimensions sPhraseFrameDimensions[] = {
     {
-        .left = 0x03,
-        .top = 0x04,
-        .width = 0x18,
-        .height = 0x04
+        .left = 3,
+        .top = 4,
+        .width = 24,
+        .height = 4
     }, {
-        .left = 0x01,
-        .top = 0x04,
-        .width = 0x1b,
-        .height = 0x04
+        .left = 1,
+        .top = 4,
+        .width = 27,
+        .height = 4
     }, {
-        .left = 0x03,
-        .top = 0x00,
-        .width = 0x18,
-        .height = 0x0a
+        .left = 3,
+        .top = 0,
+        .width = 24,
+        .height = 10
     }, {
-        .left = 0x06,
-        .top = 0x06,
-        .width = 0x12,
-        .height = 0x04
+        .left = 6,
+        .top = 6,
+        .width = 18,
+        .height = 4
     }, {
-        .left = 0x10,
-        .top = 0x04,
-        .width = 0x09,
-        .height = 0x02
+        .left = 16,
+        .top = 4,
+        .width = 9,
+        .height = 2
     }, {
-        .left = 0x0e,
-        .top = 0x04,
-        .width = 0x12,
-        .height = 0x04
+        .left = 14,
+        .top = 4,
+        .width = 18,
+        .height = 4
     }
 };
 
@@ -271,10 +278,10 @@ static const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
     .baseBlock = 0x062
 };
 
-static const u8 gUnknown_843F8D8[] = _("{UNDERSCORE}");
+static const u8 sText_Underscore[] = _("{UNDERSCORE}");
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
-static const u8 *const sEasyChatKeyboardText[] = {
+static const u8 *const sEasyChatKeyboardAlphabet[NUM_ALPHABET_ROWS] = {
     gText_EasyChatKeyboard_ABCDEFothers,
     gText_EasyChatKeyboard_GHIJKL,
     gText_EasyChatKeyboard_MNOPQRS,
@@ -282,38 +289,30 @@ static const u8 *const sEasyChatKeyboardText[] = {
 };
 
 static const struct SpriteSheet sEasyChatSpriteSheets[] = {
-    {sRightTriangleCursor_Tiles, 0x0020, 0},
-    {sUpTriangleCursor_Tiles, 0x0100, 2},
-    {sStartSelectButtons_Tiles, 0x0100, 3},
+    {.data = sTriangleCursor_Gfx,     .size = 0x0020, .tag = GFXTAG_TRIANGLE_CURSOR},
+    {.data = sScrollIndicator_Gfx,    .size = 0x0100, .tag = GFXTAG_SCROLL_INDICATOR},
+    {.data = sStartSelectButtons_Gfx, .size = 0x0100, .tag = GFXTAG_START_SELECT_BUTTONS},
     {}
 };
 
 static const struct SpritePalette sEasyChatSpritePalettes[] = {
-    {gUnknown_843F3B8, 0},
-    {gUnknown_843F3D8, 1},
-    {gUnknown_8E99F24, 2},
-    {gUnknown_843F618, 3},
+    {.data = sTriangleCursor_Pal,       .tag = PALTAG_TRIANGLE_CURSOR},
+    {.data = sRectangleCursor_Pal,      .tag = PALTAG_RECTANGLE_CURSOR},
+    {.data = gEasyChatButtonWindow_Pal, .tag = PALTAG_MISC_UI}, // The palette is generated from the button window but used for various parts of the UI
+    {.data = sRSInterviewFrame_Pal,     .tag = PALTAG_RS_INTERVIEW_FRAME},
     {}
 };
 
 static const struct CompressedSpriteSheet sEasyChatCompressedSpriteSheets[] = {
-    {gUnknown_843F638, 0x0800, 5},
-    {gEasyChatRedRectangularCursor_Tiles, 0x1000, 1},
-    {gEasyChatSelectGroupHelp_Tiles, 0x0800, 6},
-    {gEasyChatModeIcons_Tiles, 0x1000, 4}
+    {.data = sRSInterviewFrame_Gfx,        .size = 0x0800, .tag = GFXTAG_RS_INTERVIEW_FRAME},
+    {.data = gEasyChatRectangleCursor_Gfx, .size = 0x1000, .tag = GFXTAG_RECTANGLE_CURSOR},
+    {.data = gEasyChatButtonWindow_Gfx,    .size = 0x0800, .tag = GFXTAG_BUTTON_WINDOW},
+    {.data = gEasyChatMode_Gfx,            .size = 0x1000, .tag = GFXTAG_MODE_WINDOW}
 };
 
-static const u8 sECDisplay_AlphaModeXCoords[] = {
-     0,
-    12,
-    24,
-    56,
-    68,
-    80,
-    92
-};
+static const u8 sAlphabetKeyboardColumnOffsets[NUM_ALPHABET_COLUMNS] = {0, 12, 24, 56, 68, 80, 92};
 
-static const struct OamData sOamData_RightTriangleCursor = {
+static const struct OamData sOamData_TriangleCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -328,17 +327,17 @@ static const struct OamData sOamData_RightTriangleCursor = {
     .paletteNum = 0
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RightTriangleCursor = {
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &sOamData_RightTriangleCursor,
+static const struct SpriteTemplate sSpriteTemplate_TriangleCursor = {
+    .tileTag = GFXTAG_TRIANGLE_CURSOR,
+    .paletteTag = PALTAG_TRIANGLE_CURSOR,
+    .oam = &sOamData_TriangleCursor,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_BounceCursor
 };
 
-static const struct OamData sOamData_RedRectangularCursor = {
+static const struct OamData sOamData_RectangleCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -353,44 +352,52 @@ static const struct OamData sOamData_RedRectangularCursor = {
     .paletteNum = 0
 };
 
-static const union AnimCmd sAnimCmd_RectCursor_Wide[] = {
+static const union AnimCmd sAnim_RectangleCursor_OnGroup[] = {
     ANIMCMD_FRAME(0x00, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnimCmd_RectCursor_Norm[] = {
+static const union AnimCmd sAnim_RectangleCursor_OnButton[] = {
     ANIMCMD_FRAME(0x20, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnimCmd_RectCursor_NormTaller[] = {
+static const union AnimCmd sAnim_RectangleCursor_OnOthers[] = {
     ANIMCMD_FRAME(0x40, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnimCmd_RectCursor_Narrow[] = {
+static const union AnimCmd sAnim_RectangleCursor_OnLetter[] = {
     ANIMCMD_FRAME(0x60, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sAnimTable_RedRectangularCursor[] = {
-    sAnimCmd_RectCursor_Wide,
-    sAnimCmd_RectCursor_Norm,
-    sAnimCmd_RectCursor_NormTaller,
-    sAnimCmd_RectCursor_Narrow
+// Each anim changes the dimensions of the rectangle cursor to fit what it should be selecting
+enum {
+    RECTCURSOR_ANIM_ON_GROUP,
+    RECTCURSOR_ANIM_ON_BUTTON,
+    RECTCURSOR_ANIM_ON_OTHERS,
+    RECTCURSOR_ANIM_ON_LETTER,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RedRectangularCursor = {
-    .tileTag = 1,
-    .paletteTag = 1,
-    .oam = &sOamData_RedRectangularCursor,
-    .anims = sAnimTable_RedRectangularCursor,
+static const union AnimCmd *const sAnims_RectangleCursor[] = {
+    [RECTCURSOR_ANIM_ON_GROUP]  = sAnim_RectangleCursor_OnGroup,
+    [RECTCURSOR_ANIM_ON_BUTTON] = sAnim_RectangleCursor_OnButton,
+    [RECTCURSOR_ANIM_ON_OTHERS] = sAnim_RectangleCursor_OnOthers,
+    [RECTCURSOR_ANIM_ON_LETTER] = sAnim_RectangleCursor_OnLetter,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_RectangleCursor = {
+    .tileTag = GFXTAG_RECTANGLE_CURSOR,
+    .paletteTag = PALTAG_RECTANGLE_CURSOR,
+    .oam = &sOamData_RectangleCursor,
+    .anims = sAnims_RectangleCursor,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_BounceCursor
 };
 
-static const struct OamData sOamData_EasyChatModeIcons = {
+static const struct OamData sOamData_ModeWindow = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -405,53 +412,61 @@ static const struct OamData sOamData_EasyChatModeIcons = {
     .paletteNum = 0
 };
 
-static const union AnimCmd sAnim_EasyChatModeIcon_Hidden[] = {
-    ANIMCMD_FRAME(0x60, 0),
+static const union AnimCmd sAnim_ModeWindow_Hidden[] = {
+    ANIMCMD_FRAME(0x60, 0), // Hidden frame
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_EasyChatModeIcon_ToGroupMode[] = {
-    ANIMCMD_FRAME(0x40, 4),
-    ANIMCMD_FRAME(0x20, 4),
+static const union AnimCmd sAnim_ModeWindow_ToGroup[] = {
+    ANIMCMD_FRAME(0x40, 4), // Transition frame
+    ANIMCMD_FRAME(0x20, 4), // 'Group' frame
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_EasyChatModeIcon_ToAlphaMode[] = {
-    ANIMCMD_FRAME(0x40, 4),
-    ANIMCMD_FRAME(0x00, 4),
+static const union AnimCmd sAnim_ModeWindow_ToAlphabet[] = {
+    ANIMCMD_FRAME(0x40, 4), // Transition frame
+    ANIMCMD_FRAME(0x00, 4), // 'A-Z' frame
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_EasyChatModeIcon_ToHidden[] = {
-    ANIMCMD_FRAME(0x40, 4),
-    ANIMCMD_FRAME(0x60, 0),
+static const union AnimCmd sAnim_ModeWindow_ToHidden[] = {
+    ANIMCMD_FRAME(0x40, 4), // Transition frame
+    ANIMCMD_FRAME(0x60, 0), // Hidden frame
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_EasyChatModeIcon_HoldSmall[] = {
-    ANIMCMD_FRAME(0x40, 4),
+static const union AnimCmd sAnim_ModeWindow_Transition[] = {
+    ANIMCMD_FRAME(0x40, 4), // Transition frame
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sAnimTable_EasyChatModeIcons[] = {
-    sAnim_EasyChatModeIcon_Hidden,
-    sAnim_EasyChatModeIcon_ToGroupMode,
-    sAnim_EasyChatModeIcon_ToAlphaMode,
-    sAnim_EasyChatModeIcon_ToHidden,
-    sAnim_EasyChatModeIcon_HoldSmall
+enum {
+    MODEWINDOW_ANIM_HIDDEN,
+    MODEWINDOW_ANIM_TO_GROUP,
+    MODEWINDOW_ANIM_TO_ALPHABET,
+    MODEWINDOW_ANIM_TO_HIDDEN,
+    MODEWINDOW_ANIM_TRANSITION,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_EasyChatModeIcons = {
-    .tileTag = 4,
-    .paletteTag = 2,
-    .oam = &sOamData_EasyChatModeIcons,
-    .anims = sAnimTable_EasyChatModeIcons,
+static const union AnimCmd *const sAnims_ModeWindow[] = {
+    [MODEWINDOW_ANIM_HIDDEN]      = sAnim_ModeWindow_Hidden,
+    [MODEWINDOW_ANIM_TO_GROUP]    = sAnim_ModeWindow_ToGroup,
+    [MODEWINDOW_ANIM_TO_ALPHABET] = sAnim_ModeWindow_ToAlphabet,
+    [MODEWINDOW_ANIM_TO_HIDDEN]   = sAnim_ModeWindow_ToHidden,
+    [MODEWINDOW_ANIM_TRANSITION]  = sAnim_ModeWindow_Transition,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ModeWindow = {
+    .tileTag = GFXTAG_MODE_WINDOW,
+    .paletteTag = PALTAG_MISC_UI,
+    .oam = &sOamData_ModeWindow,
+    .anims = sAnims_ModeWindow,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData sOamData_SelectGroupHelp = {
+static const struct OamData sOamData_ButtonWindow = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -466,17 +481,17 @@ static const struct OamData sOamData_SelectGroupHelp = {
     .paletteNum = 0
 };
 
-static const struct SpriteTemplate sSpriteTemplate_SelectGroupHelp = {
-    .tileTag = 6,
-    .paletteTag = 2,
-    .oam = &sOamData_SelectGroupHelp,
+static const struct SpriteTemplate sSpriteTemplate_ButtonWindow = {
+    .tileTag = GFXTAG_BUTTON_WINDOW,
+    .paletteTag = PALTAG_MISC_UI,
+    .oam = &sOamData_ButtonWindow,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_843FA58 = {
+static const struct OamData sOamData_StartSelectButton = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -491,7 +506,7 @@ static const struct OamData gUnknown_843FA58 = {
     .paletteNum = 0
 };
 
-static const struct OamData sOamData_UpTriangleCursor = {
+static const struct OamData sOamData_ScrollIndicator = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -506,36 +521,37 @@ static const struct OamData sOamData_UpTriangleCursor = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gUnknown_843FA68[] = {
+static const union AnimCmd sAnim_Frame0[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd gUnknown_843FA70[] = {
+static const union AnimCmd sAnim_Frame1[] = {
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const gUnknown_843FA78[] = {
-    gUnknown_843FA68,
-    gUnknown_843FA70,
+// Frame0 is Start button, Frame1 is Select button, both are identical for the scroll indicators
+static const union AnimCmd *const sAnims_TwoFrame[] = {
+    sAnim_Frame0,
+    sAnim_Frame1,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StartSelectButtons = {
-    .tileTag = 3,
-    .paletteTag = 2,
-    .oam = &gUnknown_843FA58,
-    .anims = gUnknown_843FA78,
+    .tileTag = GFXTAG_START_SELECT_BUTTONS,
+    .paletteTag = PALTAG_MISC_UI,
+    .oam = &sOamData_StartSelectButton,
+    .anims = sAnims_TwoFrame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_UpTriangleCursor = {
-    .tileTag = 2,
-    .paletteTag = 2,
-    .oam = &sOamData_UpTriangleCursor,
-    .anims = gUnknown_843FA78,
+static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator = {
+    .tileTag = GFXTAG_SCROLL_INDICATOR,
+    .paletteTag = PALTAG_MISC_UI,
+    .oam = &sOamData_ScrollIndicator,
+    .anims = sAnims_TwoFrame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -573,7 +589,7 @@ bool8 LoadEasyChatGraphics(void)
         break;
     case 2:
         DrawECFrameInTilemapBuffer(sEasyChatGraphicsResources->bg1TilemapBuffer);
-        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_843F7AC, 0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, sTextInputFrame_Gfx, 0, 0, 0);
         CopyBgTilemapBufferToVram(1);
         break;
     case 3:
@@ -695,7 +711,7 @@ static bool8 ECInterfaceCmd_02(void)
     {
         if (*ecWord == 0xFFFF)
         {
-            stringWidth = GetStringWidth(FONT_1, gUnknown_843F8D8, 0) * 7;
+            stringWidth = GetStringWidth(FONT_1, sText_Underscore, 0) * 7;
         }
         else
         {
@@ -1303,13 +1319,13 @@ static void SetGpuRegsForEasyChatInit(void)
 static void LoadEasyChatPals(void)
 {
     ResetPaletteFade();
-    LoadPalette(gEasyChatMode_Pal, 0, 32);
-    LoadPalette(gUnknown_843F76C,  1 * 16, 32);
-    LoadPalette(gUnknown_843F78C,  4 * 16, 32);
-    LoadPalette(gUnknown_843F874, 10 * 16, 8);
-    LoadPalette(gUnknown_843F87C, 11 * 16, 10);
-    LoadPalette(gUnknown_843F87C, 15 * 16, 10);
-    LoadPalette(gUnknown_843F87C,  3 * 16, 10);
+    LoadPalette(gEasyChatWindow_Pal, 0, 32);
+    LoadPalette(sTextInputFrameOrange_Pal,  1 * 16, 32);
+    LoadPalette(sTextInputFrameGreen_Pal,  4 * 16, 32);
+    LoadPalette(sTitleText_Pal, 10 * 16, 8);
+    LoadPalette(sText_Pal, 11 * 16, 10);
+    LoadPalette(sText_Pal, 15 * 16, 10);
+    LoadPalette(sText_Pal,  3 * 16, 10);
 }
 
 static void PrintTitleText(void)
@@ -1579,8 +1595,8 @@ static void PrintEasyChatKeyboardText(void)
 {
     u32 i;
 
-    for (i = 0; i < NELEMS(sEasyChatKeyboardText); i++)
-        EC_AddTextPrinterParameterized(2, FONT_1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
+    for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardAlphabet); i++)
+        EC_AddTextPrinterParameterized(2, FONT_1, sEasyChatKeyboardAlphabet[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintECWordsMenu(void)
@@ -1930,7 +1946,7 @@ static void CreateSelectDestFieldCursorSprite(void)
     u8 frameId = GetEasyChatScreenFrameId();
     s16 x = sPhraseFrameDimensions[frameId].left * 8 + 13;
     s16 y = (sPhraseFrameDimensions[frameId].top + 1) * 8 + 1;
-    u8 spriteId = CreateSprite(&sSpriteTemplate_RightTriangleCursor, x, y, 2);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_TriangleCursor, x, y, 2);
     sEasyChatGraphicsResources->selectDestFieldCursorSprite = &gSprites[spriteId];
     gSprites[spriteId].data[1] = 1;
 }
@@ -1970,11 +1986,11 @@ static void UnfreezeSelectDestFieldCursorSprite(void)
 
 static void CreateRedRectangularCursorSpritePair(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_RectangleCursor, 0, 0, 3);
     sEasyChatGraphicsResources->rectCursorSpriteRight = &gSprites[spriteId];
     sEasyChatGraphicsResources->rectCursorSpriteRight->x2 = 32;
 
-    spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
+    spriteId = CreateSprite(&sSpriteTemplate_RectangleCursor, 0, 0, 3);
     sEasyChatGraphicsResources->rectCursorSpriteLeft = &gSprites[spriteId];
     sEasyChatGraphicsResources->rectCursorSpriteLeft->x2 = -32;
 
@@ -2009,21 +2025,21 @@ static void MoveCursor_Group(s8 x, s8 y)
 {
     if (x != -1)
     {
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 0);
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, RECTCURSOR_ANIM_ON_GROUP);
         sEasyChatGraphicsResources->rectCursorSpriteRight->x = x * 84 + 58;
         sEasyChatGraphicsResources->rectCursorSpriteRight->y = y * 16 + 96;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 0);
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, RECTCURSOR_ANIM_ON_GROUP);
         sEasyChatGraphicsResources->rectCursorSpriteLeft->x = x * 84 + 58;
         sEasyChatGraphicsResources->rectCursorSpriteLeft->y = y * 16 + 96;
     }
     else
     {
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, RECTCURSOR_ANIM_ON_BUTTON);
         sEasyChatGraphicsResources->rectCursorSpriteRight->x = 216;
         sEasyChatGraphicsResources->rectCursorSpriteRight->y = y * 16 + 112;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, RECTCURSOR_ANIM_ON_BUTTON);
         sEasyChatGraphicsResources->rectCursorSpriteLeft->x = 216;
         sEasyChatGraphicsResources->rectCursorSpriteLeft->y = y * 16 + 112;
     }
@@ -2041,12 +2057,12 @@ static void MoveCursor_Alpha(s8 cursorX, s8 cursorY)
         if (cursorX == 6 && cursorY == 0)
         {
             x = 157;
-            anim = 2;
+            anim = RECTCURSOR_ANIM_ON_OTHERS;
         }
         else
         {
-            x += sECDisplay_AlphaModeXCoords[cursorX < NELEMS(sECDisplay_AlphaModeXCoords) ? cursorX : 0];
-            anim = 3;
+            x += sAlphabetKeyboardColumnOffsets[cursorX < ARRAY_COUNT(sAlphabetKeyboardColumnOffsets) ? cursorX : 0];
+            anim = RECTCURSOR_ANIM_ON_LETTER;
         }
 
         StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, anim);
@@ -2059,11 +2075,11 @@ static void MoveCursor_Alpha(s8 cursorX, s8 cursorY)
     }
     else
     {
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, RECTCURSOR_ANIM_ON_BUTTON);
         sEasyChatGraphicsResources->rectCursorSpriteRight->x = 216;
         sEasyChatGraphicsResources->rectCursorSpriteRight->y = cursorY * 16 + 112;
 
-        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, RECTCURSOR_ANIM_ON_BUTTON);
         sEasyChatGraphicsResources->rectCursorSpriteLeft->x = 216;
         sEasyChatGraphicsResources->rectCursorSpriteLeft->y = cursorY * 16 + 112;
     }
@@ -2071,7 +2087,7 @@ static void MoveCursor_Alpha(s8 cursorX, s8 cursorY)
 
 static void CreateSelectWordCursorSprite(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_RightTriangleCursor, 0, 0, 4);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_TriangleCursor, 0, 0, 4);
     sEasyChatGraphicsResources->selectWordCursorSprite = &gSprites[spriteId];
     sEasyChatGraphicsResources->selectWordCursorSprite->callback = SpriteCB_SelectWordCursorSprite;
     sEasyChatGraphicsResources->selectWordCursorSprite->oam.priority = 2;
@@ -2121,11 +2137,11 @@ static void DestroySelectWordCursorSprite(void)
 
 static void CreateSelectGroupHelpSprite(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_SelectGroupHelp, 208, 128, 6);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_ButtonWindow, 208, 128, 6);
     sEasyChatGraphicsResources->selectGroupHelpSprite = &gSprites[spriteId];
     sEasyChatGraphicsResources->selectGroupHelpSprite->x2 = -64;
 
-    spriteId = CreateSprite(&sSpriteTemplate_EasyChatModeIcons, 208, 80, 5);
+    spriteId = CreateSprite(&sSpriteTemplate_ModeWindow, 208, 80, 5);
     sEasyChatGraphicsResources->modeIconsSprite = &gSprites[spriteId];
     sEasyChatGraphicsResources->modeIconState = 0;
 }
@@ -2142,9 +2158,9 @@ static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void)
         {
             sEasyChatGraphicsResources->selectGroupHelpSprite->x2 = 0;
             if (!IsEasyChatAlphaMode())
-                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
+                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, MODEWINDOW_ANIM_TO_GROUP);
             else
-                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 2);
+                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, MODEWINDOW_ANIM_TO_ALPHABET);
 
             sEasyChatGraphicsResources->modeIconState++;
         }
@@ -2163,7 +2179,7 @@ static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void)
 static void StartModeIconHidingAnimation(void)
 {
     sEasyChatGraphicsResources->modeIconState = 0;
-    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 3);
+    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, MODEWINDOW_ANIM_TO_HIDDEN);
 }
 
 static bool8 RunModeIconHidingAnimation(void)
@@ -2194,15 +2210,15 @@ static bool8 RunModeIconHidingAnimation(void)
 
 static void ShrinkModeIconsSprite(void)
 {
-    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 4);
+    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, MODEWINDOW_ANIM_TRANSITION);
 }
 
 static void ShowModeIconsSprite(void)
 {
     if (!IsEasyChatAlphaMode())
-        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
+        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, MODEWINDOW_ANIM_TO_GROUP);
     else
-        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 2);
+        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, MODEWINDOW_ANIM_TO_ALPHABET);
 }
 
 static bool8 ModeIconsSpriteAnimIsEnded(void)
@@ -2212,11 +2228,11 @@ static bool8 ModeIconsSpriteAnimIsEnded(void)
 
 static void CreateVerticalScrollArrowSprites(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_UpTriangleCursor, 96, 80, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_ScrollIndicator, 96, 80, 0);
     if (spriteId != MAX_SPRITES)
         sEasyChatGraphicsResources->upTriangleCursorSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&sSpriteTemplate_UpTriangleCursor, 96, 156, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_ScrollIndicator, 96, 156, 0);
     if (spriteId != MAX_SPRITES)
     {
         sEasyChatGraphicsResources->downTriangleCursorSprite = &gSprites[spriteId];

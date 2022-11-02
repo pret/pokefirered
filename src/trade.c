@@ -1200,7 +1200,7 @@ static void TradeMenuCB_10(void)
         }
         else
         {
-            Link_StartSend5FFFwithParam(32);
+            SetCloseLinkCallbackAndType(32);
             sTradeMenuResourcesPtr->tradeMenuCBnum = 13;
         }
     }
@@ -1985,7 +1985,7 @@ static void TradeMenuCB_11(void)
         }
         else
         {
-            Link_StartSend5FFFwithParam(12);
+            SetCloseLinkCallbackAndType(12);
         }
 
         sTradeMenuResourcesPtr->tradeMenuCBnum = 12;

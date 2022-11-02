@@ -1119,7 +1119,7 @@ static void Task_InputHandler_Info(u8 taskId)
     case PSS_STATE3270_HANDLEINPUT:
         if (MenuHelpers_CallLinkSomething() == TRUE)
             return;
-        else if (LinkRecvQueueLengthMoreThan2() == TRUE)
+        else if (IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
         else if (FuncIsActiveTask(Task_PokeSum_SwitchDisplayedPokemon))
             return;
@@ -1218,7 +1218,7 @@ static void Task_InputHandler_Info(u8 taskId)
     case PSS_STATE3270_ATEXIT_WAITLINKDELAY:
         if (Overworld_LinkRecvQueueLengthMoreThan2() == TRUE)
             return;
-        else if (LinkRecvQueueLengthMoreThan2() == TRUE)
+        else if (IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         sMonSummaryScreen->state3270 = PSS_STATE3270_ATEXIT_WAITFADE;
@@ -3501,7 +3501,7 @@ static void Task_HandleInput_SelectMove(u8 taskId)
     switch (sMonSummaryScreen->selectMoveInputHandlerState)
     {
     case 0:
-        if (MenuHelpers_CallLinkSomething() == TRUE || LinkRecvQueueLengthMoreThan2() == TRUE)
+        if (MenuHelpers_CallLinkSomething() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         if (JOY_NEW(DPAD_UP))
@@ -3662,7 +3662,7 @@ static void Task_HandleInput_SelectMove(u8 taskId)
         sMonSummaryScreen->selectMoveInputHandlerState = 3;
         break;
     case 3:
-        if (MenuHelpers_CallLinkSomething() == TRUE || LinkRecvQueueLengthMoreThan2() == TRUE)
+        if (MenuHelpers_CallLinkSomething() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2);
@@ -3880,7 +3880,7 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
         sMonSummaryScreen->selectMoveInputHandlerState = 4;
         break;
     case 4:
-        if (MenuHelpers_CallLinkSomething() == TRUE || LinkRecvQueueLengthMoreThan2() == TRUE)
+        if (MenuHelpers_CallLinkSomething() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2);
@@ -5148,7 +5148,7 @@ static void Task_PokeSum_SwitchDisplayedPokemon(u8 taskId)
         sMonSummaryScreen->switchMonTaskState++;
         break;
     case 11:
-        if (!Overworld_LinkRecvQueueLengthMoreThan2() && !LinkRecvQueueLengthMoreThan2())
+        if (!Overworld_LinkRecvQueueLengthMoreThan2() && !IsLinkRecvQueueAtOverworldMax())
         {
             PokeSum_CreateSprites();
             PokeSum_TryPlayMonCry();

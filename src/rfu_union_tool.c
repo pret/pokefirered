@@ -86,15 +86,16 @@ static const u8 sUnionRoomLocalIds[] = {
     3
 };
 
-static const u16 sUnref_8457128[] = {
-    0x63,
-    0x64,
-    0x65,
-    0x66,
-    0x67,
-    0x68,
-    0x69,
-    0x6A
+// Unused
+static const u16 sHidePlayerFlags[] = {
+    FLAG_HIDE_UNION_ROOM_PLAYER_1,
+    FLAG_HIDE_UNION_ROOM_PLAYER_2,
+    FLAG_HIDE_UNION_ROOM_PLAYER_3,
+    FLAG_HIDE_UNION_ROOM_PLAYER_4,
+    FLAG_HIDE_UNION_ROOM_PLAYER_5,
+    FLAG_HIDE_UNION_ROOM_PLAYER_6,
+    FLAG_HIDE_UNION_ROOM_PLAYER_7,
+    FLAG_HIDE_UNION_ROOM_PLAYER_8
 };
 
 static bool32 is_walking_or_running(void)

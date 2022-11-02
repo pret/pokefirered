@@ -616,7 +616,7 @@ static void DoPortholeWarp(void) // Unused
     LockPlayerFieldControls();
     WarpFadeOutScreen();
     CreateTask(Task_Teleport2Warp, 10);
-    gFieldCallback = nullsub_60;
+    gFieldCallback = FieldCB_ShowPortholeView;
 }
 
 static void Task_CableClubWarp(u8 taskId)

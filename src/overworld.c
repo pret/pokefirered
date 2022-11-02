@@ -807,7 +807,7 @@ static void LoadMapFromWarp(bool32 unused)
     InitMap();
 }
 
-static void sub_80559A8(void)
+static void QL_LoadMapNormal(void)
 {
     bool8 isOutdoors;
 
@@ -2249,7 +2249,7 @@ static bool32 LoadMap_QLPlayback(u8 *state)
         else
         {
             gExitStairsMovementDisabled = TRUE;
-            sub_80559A8();
+            QL_LoadMapNormal();
         }
         (*state)++;
         break;

@@ -99,9 +99,9 @@ static void HandleGpuRegs(void);
 static void UpdateCardFlipRegs(u16 cardTop);
 static void ResetGpuRegs(void);
 static void TrainerCardNull(void);
-static void sub_8089C5C(void);
-static void sub_8089C80(void);
-static void sub_8089CA4(void);
+static void DmaClearOam(void);
+static void DmaClearPltt(void);
+static void ResetBgRegs(void);
 static void InitBgsAndWindows(void);
 static void SetTrainerCardCB2(void);
 static void SetUpTrainerCardTask(void);
@@ -713,15 +713,15 @@ static void CB2_InitTrainerCard(void)
         gMain.state++;
         break;
     case 2:
-        sub_8089C5C();
+        DmaClearOam();
         gMain.state++;
         break;
     case 3:
-        sub_8089C80();
+        DmaClearPltt();
         gMain.state++;
         // fallthrough
     case 4:
-        sub_8089CA4();
+        ResetBgRegs();
         gMain.state++;
         break;
     case 5:
@@ -984,30 +984,30 @@ static void TrainerCardNull(void)
 {
 }
 
-static void sub_8089C5C(void)
+static void DmaClearOam(void)
 {
     DmaClear32(3, (void *)OAM, OAM_SIZE);
 }
 
-static void sub_8089C80(void)
+static void DmaClearPltt(void)
 {
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
 }
 
-static void sub_8089CA4(void)
+static void ResetBgRegs(void)
 {
-    SetGpuReg(REG_OFFSET_BG0CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG1CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG2CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG3CNT, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG0HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG0VOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG1HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG1VOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG2HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG2VOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG3HOFS, DISPCNT_MODE_0);
-    SetGpuReg(REG_OFFSET_BG3VOFS, DISPCNT_MODE_0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, 0);
+    SetGpuReg(REG_OFFSET_BG3CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3VOFS, 0);
 }
 
 static void InitBgsAndWindows(void)

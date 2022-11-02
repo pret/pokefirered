@@ -1,7 +1,7 @@
 #include "global.h"
 #include "mevent_server.h"
 
-extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];
+extern const struct mevent_server_cmd gServerScript_ClientCanceledCard[];
 
 // Unreferenced
 const u8 gUnknown_84687A0[] = _("You have collected all STAMPs!\nWant to input a CARD as a prize?");
@@ -148,7 +148,7 @@ const struct mevent_server_cmd gMEventSrvScript_AskClientToOverwriteCard[] = {
     SRV_RECV(0x13),
     SRV_READWORD,
     SRV_BRANCHIF(0x00, gMEventSrvScript_SendCardSuccess),
-    SRV_BRANCH(gMEventSrvScript_OtherTrainerCanceled)
+    SRV_BRANCH(gServerScript_ClientCanceledCard)
 };
 
 const struct mevent_server_cmd gMEventSrvScript_OtherTrnHasCard[] = {

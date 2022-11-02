@@ -10,7 +10,7 @@
 // The trainer tower data exceeds SECTOR_DATA_SIZE. They're allowed to use the full save sector up to the counter field.
 STATIC_ASSERT(SEC30_SIZE + SEC31_SIZE <= SECTOR_COUNTER_OFFSET * 2, EReaderTrainerTowerSetFreeSpace);
 
-u8 sub_815D654(void)
+static u8 GetTrainerHillUnkVal(void)
 {
     return (gSaveBlock1Ptr->trainerTower[0].unk9 + 1) % 256;
 }
@@ -49,7 +49,7 @@ static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerTowerSet * tt
 
     memset(buffer, 0, SECTOR_SIZE);
     memcpy(buffer, ttdata, SEC30_SIZE);
-    buffer[1] = sub_815D654();
+    buffer[1] = GetTrainerHillUnkVal();
     if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_TOWER_1, buffer) != TRUE)
         return FALSE;
     memset(buffer, 0, SECTOR_SIZE);

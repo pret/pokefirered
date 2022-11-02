@@ -620,7 +620,7 @@ void Field_AskSaveTheGame(void)
 static void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
 {
     StringExpandPlaceholders(gStringVar4, str);
-    sub_80F7768(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterForMessage(TRUE);
     sSaveDialogIsPrinting = TRUE;
     sSaveDialogCB = saveDialogCB;

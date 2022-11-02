@@ -558,15 +558,15 @@ const u8 *const gTexts_UR_GladToMeetYou[GENDER_COUNT] = {
 ALIGNED(4) const u8 gText_UR_FinishedCheckingPlayersTrainerCard[] = _("Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}");
 ALIGNED(4) static const u8 sText_CanceledReadingCard[] = _("Canceled reading the Card.");
 
-const struct mevent_client_cmd gUnknown_84595CC[] = {
+static const struct mevent_client_cmd sClientScript_DynamicError[] = {
     CLI_RECEIVE(0x15),
     CLI_RECVBUF,
     CLI_SENDALL,
     CLI_RETURN(0x0e)
 };
 
-const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[] = {
-    SRV_SEND(0x20, gUnknown_84595CC),
+const struct mevent_server_cmd gServerScript_ClientCanceledCard[] = {
+    SRV_SEND(0x20, sClientScript_DynamicError),
     SRV_WAITSND,
     SRV_SENDSTR(0x1b, sText_CanceledReadingCard),
     SRV_WAITSND,

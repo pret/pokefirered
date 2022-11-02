@@ -1662,7 +1662,7 @@ void Task_ReturnToBagFromContextMenu(u8 taskId)
     Task_RedrawArrowsAndReturnToBagMenuSelect(taskId);
 }
 
-static void unref_sub_810A288(u8 taskId)
+static void Task_UnusedReturnToBad(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 itemsAbove;

@@ -72,9 +72,9 @@ static const u16 sBgAnim_Pal[] = INCBIN_U16("graphics/evolution_scene/transition
 
 static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 
-static const u8 unref_83F8445[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}");
+static const u8 sText_UnusedColors[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}");
 
-static const u8 unref_83F844F[][10] = {
+static const u8 sText_UnusedArrows[][10] = {
     _("▶\n "),
     _(" \n▶"),
     _(" \n ")

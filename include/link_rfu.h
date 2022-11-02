@@ -303,6 +303,6 @@ void sub_80FB030(u32 a0);
 void ClearRecvCommands(void);
 
 #include "mevent_server.h"
-extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];
+extern const struct mevent_server_cmd gServerScript_ClientCanceledCard[];
 
 #endif //GUARD_LINK_RFU_H

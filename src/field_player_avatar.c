@@ -442,7 +442,7 @@ static bool8 ForcedMovement_MatSpin(void)
     return TRUE;
 }
 
-static void (*const gUnknown_835B814[])(u8, u16) = {
+static void (*const sPlayerNotOnBikeFuncs[])(u8, u16) = {
     PlayerNotOnBikeNotMoving,
     PlayerNotOnBikeTurningInPlace,
     PlayerNotOnBikeMoving
@@ -450,7 +450,7 @@ static void (*const gUnknown_835B814[])(u8, u16) = {
 
 void MovePlayerNotOnBike(u8 direction, u16 heldKeys)
 {
-    gUnknown_835B814[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
+    sPlayerNotOnBikeFuncs[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
 }
 
 static u8 CheckMovementInputNotOnBike(u8 direction)
@@ -1733,7 +1733,7 @@ static bool8 Fishing4(struct Task *task)
 {
     u32 randVal;
 
-    sub_80F7768(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     task->tStep++;
     task->tFrameCounter = 0;
     task->tNumDots = 0;

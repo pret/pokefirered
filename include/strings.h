@@ -761,7 +761,7 @@ extern const u8 gText_QuitLooking[];
 extern const u8 gText_FreshWater[];
 extern const u8 gText_SodaPop[];
 extern const u8 gText_Lemonade[];
-extern const u8 gText_Bicycle_1000000[];
+extern const u8 gText_Bicycle_Price[];
 extern const u8 gText_NoThanks[];
 extern const u8 gText_Abra_180Coins[];
 extern const u8 gText_Clefairy_500Coins[];

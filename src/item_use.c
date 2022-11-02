@@ -70,8 +70,10 @@ static void Task_UseFameCheckerFromField(u8 taskId);
 static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
 static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
 
-// No clue what this is
-static const u8 sUnref_83E27B4[] = {
+// unknown unused data.
+// It's curiously about the size of an array of values indexed by species (including padding),
+// but the arrangement of values is not sensible (e.g., not giving all "old unown" the same value).
+static const u8 sUnused[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00,

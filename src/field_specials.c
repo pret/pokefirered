@@ -325,7 +325,7 @@ void SpawnCameraObject(void)
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveObjectEventByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 void BufferEReaderTrainerName(void)
@@ -333,7 +333,8 @@ void BufferEReaderTrainerName(void)
     CopyEReaderTrainerName5(gStringVar1);
 }
 
-static const u8 sUnused_83F5B04[] = {
+// Unused
+static const u8 sSlotMachineRandomSeeds[] = {
     13,
     14,
     15,
@@ -752,7 +753,8 @@ static const u8 *const sFloorNamePointers[] = {
     gText_Rooftop
 };
 
-static const u8 sUnused_83F5B84[] = {
+// Unused
+static const u8 sFloorNameWidthPadding[] = {
     26,
     26,
     26,

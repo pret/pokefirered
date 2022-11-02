@@ -326,7 +326,7 @@ static const struct WindowTemplate sWindowTemplates[9] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_83FFA8C = {
+static const struct WindowTemplate sMoveRelearnerYesNoMenuTemplate = {
     .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 8,
@@ -506,7 +506,7 @@ static void MoveRelearnerStateMachine(void)
         MoveRelearnerMenuHandleInput();
         break;
     case MENU_STATE_PRINT_TEACH_MOVE_PROMPT:
-        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_TEACH_MOVE_CONFIRM :
@@ -531,7 +531,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case MENU_STATE_PRINT_GIVE_UP_PROMPT:
-        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_GIVE_UP_CONFIRM:
@@ -552,7 +552,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_TRYING_TO_LEARN:
-        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state = 18;
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
@@ -573,7 +573,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_STOP_TEACHING:
-        CreateYesNoMenu(&gUnknown_83FFA8C, FONT_3, 0, 2, 0x001, 0xE, 0);
+        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_3, 0, 2, 0x001, 0xE, 0);
         sMoveRelearner->state = 26;
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:

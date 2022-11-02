@@ -104,7 +104,7 @@ static const union AffineAnimCmd *const sArrowAndStarSpriteAffineAnimTable[] = {
     sAffineAnim_Up
 };
 
-static const struct SpriteTemplate gUnknown_84647E4 = {
+static const struct SpriteTemplate sSpriteTemplate_ArrowAndStar = {
     .tileTag = ARROW_TILE_TAG,
     .paletteTag = 0xFFFF,
     .oam = &sArrowAndStarSpriteOamData,
@@ -534,7 +534,7 @@ static void DestroyArrowAndStarTiles(void)
 
 static void CreateArrowSprite(u8 animNum, u8 direction)
 {
-    u8 spriteId = CreateSprite(&gUnknown_84647E4, 120, 76, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_ArrowAndStar, 120, 76, 0);
     gSprites[spriteId].oam.paletteNum = 0;
     StartSpriteAnim(&gSprites[spriteId], animNum);
     gSprites[spriteId].spAnimNum = animNum;
@@ -614,7 +614,7 @@ static void SpriteCallback_DestroyArrow(struct Sprite *sprite)
 
 static u8 CreateStarSprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_84647E4, 120, 76, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_ArrowAndStar, 120, 76, 0);
     gSprites[spriteId].oam.paletteNum = 0;
     gSprites[spriteId].callback = SpriteCallback_Star;
     StartSpriteAnim(&gSprites[spriteId], 4);

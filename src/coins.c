@@ -49,14 +49,15 @@ bool8 RemoveCoins(u16 toSub)
     return FALSE;
 }
 
-void PrintCoinsString_Parameterized(u8 windowId, u32 coinAmount, u8 x, u8 y, u8 speed)
+static void PrintCoinsString_Parameterized(u8 windowId, u32 coinAmount, u8 x, u8 y, u8 speed)
 {
     ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_Coins);
     AddTextPrinterParameterized(windowId, FONT_0, gStringVar4, x, y, speed, NULL);
 }
 
-void sub_80D0674(u8 windowId, u16 tileStart, u8 palette, u32 coinAmount)
+// Unused
+static void ShowCoinsWindow_Parameterized(u8 windowId, u16 tileStart, u8 palette, u32 coinAmount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, palette);
     AddTextPrinterParameterized(windowId, FONT_2, gText_Coins_2, 0, 0, 0xFF, 0);

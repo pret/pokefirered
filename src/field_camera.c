@@ -34,7 +34,7 @@ static void CameraPanningCB_PanAhead(void);
 static struct FieldCameraOffset sFieldCameraOffset;
 static s16 sHorizontalCameraPan;
 static s16 sVerticalCameraPan;
-static u8 gUnknown_3000E9C;
+static u8 sBikeCameraPanFlag;
 static void (*sFieldCameraPanningCallback)(void);
 
 struct CameraObject gFieldCamera;
@@ -513,7 +513,7 @@ void SetCameraPanning(s16 a, s16 b)
 void InstallCameraPanAheadCallback(void)
 {
     sFieldCameraPanningCallback = CameraPanningCB_PanAhead;
-    gUnknown_3000E9C = 0;
+    sBikeCameraPanFlag = FALSE;
     sHorizontalCameraPan = 0;
     sVerticalCameraPan = 32;
 }
@@ -540,13 +540,13 @@ static void CameraPanningCB_PanAhead(void)
         // this code is never reached.
         if (gPlayerAvatar.tileTransitionState == 1)
         {
-            gUnknown_3000E9C ^= 1;
-            if (gUnknown_3000E9C == 0)
+            sBikeCameraPanFlag ^= 1;
+            if (sBikeCameraPanFlag == FALSE)
                 return;
         }
         else
         {
-            gUnknown_3000E9C = 0;
+            sBikeCameraPanFlag = FALSE;
         }
 
         var = GetPlayerMovementDirection();

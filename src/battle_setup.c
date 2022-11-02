@@ -390,20 +390,20 @@ void StartRegiBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-// not used
-static void sub_807FAF8(void)
+// Unused
+static void EndPokedudeBattle(void)
 {
     LoadPlayerParty();
     CB2_EndWildBattle();
 }
 
-// not used
-static void sub_807FB08(void)
+// Unused
+static void StartPokedudeBattle(void)
 {
     LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
-    gMain.savedCallback = sub_807FAF8;
+    gMain.savedCallback = EndPokedudeBattle;
     SavePlayerParty();
     InitPokedudePartyAndOpponent();
     CreateBattleStartTask(GetWildBattleTransition(), 0);

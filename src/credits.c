@@ -346,7 +346,7 @@ static const u32 sWindow2Map_Blastoise[] = INCBIN_U32("graphics/credits/unk_840F
 static const u32 sWindow1Map_Pikachu[] = INCBIN_U32("graphics/credits/unk_8410198.bin.lz");
 static const u32 sWindow2Map_Pikachu[] = INCBIN_U32("graphics/credits/unk_84105B4.bin.lz");
 
-static const u32 filler_8410AFC = 0xF0;
+static const u32 sUnused = 0xF0;
 
 static const u16 sTheEndGfxPal[] = INCBIN_U16("graphics/credits/unk_8410B20.gbapal");
 static const u8 sTheEndGfxTiles[] = INCBIN_U8("graphics/credits/unk_8410B20.4bpp.lz");

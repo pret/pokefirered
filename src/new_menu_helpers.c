@@ -609,7 +609,7 @@ void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
     DrawStdFrameWithCustomTileAndPalette(windowId, copyToVram, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
 }
 
-void sub_80F7768(u8 windowId, bool8 copyToVram)
+void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram)
 {
     if (gQuestLogState == QL_STATE_PLAYBACK)
     {

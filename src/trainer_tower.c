@@ -64,7 +64,7 @@ struct TrainerEncounterMusicPairs
 
 static EWRAM_DATA struct TrainerTowerState * sTrainerTowerState = NULL;
 static EWRAM_DATA struct TrainerTowerOpponent * sTrainerTowerOpponent = NULL;
-static EWRAM_DATA u8 sUnused_203F460 = 0;
+static EWRAM_DATA u8 sUnused = 0;
 
 static void SetUpTrainerTowerDataStruct(void);
 static void FreeTrainerTowerDataStruct(void);
@@ -321,7 +321,7 @@ static const struct WindowTemplate sTimeBoardWindowTemplate[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sUnused_847A228 = 0x70;
+static const u32 sUnusedValue = 112;
 
 static const u8 sTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 

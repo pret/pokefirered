@@ -79,7 +79,7 @@ static const u16 sEvolutionSparkleMatrixScales[12] = {
     0x100
 };
 
-static const s16 sUnref_841EF28[][2] = {
+static const s16 sUnused[][2] = {
     {-4, 0x10},
     {-3, 0x30},
     {-2, 0x50},

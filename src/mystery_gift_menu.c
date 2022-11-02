@@ -333,7 +333,7 @@ const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = 0
 };
 
-const u8 *const Unref_08366ED8[] = {
+static const u8 *const sUnusedMenuTexts[] = {
     gText_VarietyOfEventsImportedWireless,
     gText_WonderCardsInPossession,
     gText_ReadNewsThatArrived,
@@ -344,8 +344,8 @@ ALIGNED(4) const u8 sMG_Ereader_TextColor_1[3]      = { 0, 1, 2 };
 ALIGNED(4) const u8 sMG_Ereader_TextColor_1_Copy[3] = { 0, 1, 2 };
 ALIGNED(4) const u8 sMG_Ereader_TextColor_2[3]      = { 1, 2, 3 };
 
-const u8 gUnknown_8466EF3[] = _("テスト");
-const u8 gUnknown_8466EF7[] = _("むげんのチケット");
+static const u8 sText_Test[] = _("テスト");
+static const u8 sText_EonTicket[] = _("むげんのチケット");
 
 void vblankcb_mystery_gift_e_reader_run(void)
 {

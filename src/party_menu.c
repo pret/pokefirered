@@ -2636,7 +2636,7 @@ static void ToggleFieldMoveDescriptionWindow(u8 action)
     {
         if (ptr->windowId[2] == WINDOW_NONE)
             ptr->windowId[2] = AddWindow(&sFieldMoveDescriptionWindowTemplate);
-        sub_8112F18(ptr->windowId[2]);
+        DrawHelpMessageWindowTilesById(ptr->windowId[2]);
         letterSpacing = GetFontAttribute(FONT_2, FONTATTR_LETTER_SPACING);
         AddTextPrinterParameterized4(ptr->windowId[2], FONT_2, 3, 6, letterSpacing, 0, sFontColorTable[5], 0, sFieldMoveDescriptionTable[action - CURSOR_OPTION_FIELD_MOVES]);
         PutWindowTilemap(ptr->windowId[2]);

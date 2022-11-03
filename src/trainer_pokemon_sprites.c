@@ -12,25 +12,18 @@ struct PicData
     u8 active;
 };
 
-// Static RAM declarations
 #define PICS_COUNT 8
 
 static EWRAM_DATA struct SpriteTemplate sCreatingSpriteTemplate = {};
 static EWRAM_DATA struct PicData sSpritePics[PICS_COUNT] = {};
 
-// Static ROM declarations
+static const struct PicData sDummyPicData = {};
 
-// .rodata
-
-static const struct PicData gUnknown_8453178 = {};
-
-static const struct OamData gUnknown_8453184 =
+static const struct OamData sOamData_Normal =
 {
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64)
 };
-
-// .text
 
 void DummyPicSpriteCallback(struct Sprite *sprite)
 {
@@ -42,7 +35,7 @@ bool16 ResetAllPicSprites(void)
     int i;
 
     for (i = 0; i < PICS_COUNT; i ++)
-        sSpritePics[i] = gUnknown_8453178;
+        sSpritePics[i] = sDummyPicData;
 
     return FALSE;
 }
@@ -85,9 +78,9 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
 {
     if (!isTrainer)
     {
-        if (paletteTag == 0xFFFF)
+        if (paletteTag == TAG_NONE)
         {
-            sCreatingSpriteTemplate.paletteTag = 0xFFFF;
+            sCreatingSpriteTemplate.paletteTag = TAG_NONE;
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
@@ -98,9 +91,9 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
     }
     else
     {
-        if (paletteTag == 0xFFFF)
+        if (paletteTag == TAG_NONE)
         {
-            sCreatingSpriteTemplate.paletteTag = 0xFFFF;
+            sCreatingSpriteTemplate.paletteTag = TAG_NONE;
             LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
@@ -138,19 +131,15 @@ u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s1
     for (i = 0; i < PICS_COUNT; i ++)
     {
         if (!sSpritePics[i].active)
-        {
             break;
-        }
     }
     if (i == PICS_COUNT)
-    {
         return 0xFFFF;
-    }
+
     framePics = Alloc(4 * 0x800);
     if (!framePics)
-    {
         return 0xFFFF;
-    }
+
     images = Alloc(4 * sizeof(struct SpriteFrameImage));
     if (!images)
     {
@@ -167,18 +156,16 @@ u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s1
         images[j].data = framePics + 0x800 * j;
         images[j].size = 0x800;
     }
-    sCreatingSpriteTemplate.tileTag = 0xFFFF;
-    sCreatingSpriteTemplate.oam = &gUnknown_8453184;
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
+    sCreatingSpriteTemplate.oam = &sOamData_Normal;
     AssignSpriteAnimsTable(isTrainer);
     sCreatingSpriteTemplate.images = images;
     sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
     LoadPicPaletteByTagOrSlot(species, otId, personality, paletteSlot, paletteTag, isTrainer);
     spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
-    if (paletteTag == 0xFFFF)
-    {
+    if (paletteTag == TAG_NONE)
         gSprites[spriteId].oam.paletteNum = paletteSlot;
-    }
     sSpritePics[i].frames = framePics;
     sSpritePics[i].images = images;
     sSpritePics[i].paletteTag = paletteTag;
@@ -201,33 +188,27 @@ u16 FreeAndDestroyPicSpriteInternal(u16 spriteId)
     for (i = 0; i < PICS_COUNT; i ++)
     {
         if (sSpritePics[i].spriteId == spriteId)
-        {
             break;
-        }
     }
     if (i == PICS_COUNT)
-    {
         return 0xFFFF;
-    }
+
     framePics = sSpritePics[i].frames;
     images = sSpritePics[i].images;
-    if (sSpritePics[i].paletteTag != 0xFFFF)
-    {
+    if (sSpritePics[i].paletteTag != TAG_NONE)
         FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
-    }
     DestroySprite(&gSprites[spriteId]);
     Free(framePics);
     Free(images);
-    sSpritePics[i] = gUnknown_8453178;
+    sSpritePics[i] = sDummyPicData;
     return 0;
 }
 
-u16 sub_810C050(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
+static u16 LoadPicSpriteInWindow(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     if (DecompressPic_HandleDeoxys(species, personality, isFrontPic, (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
-    {
         return 0xFFFF;
-    }
+
     LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
     return 0;
 }
@@ -282,9 +263,9 @@ u16 FreeAndDestroyTrainerPicSprite(u16 spriteId)
     return FreeAndDestroyPicSpriteInternal(spriteId);
 }
 
-u16 sub_810C2FC(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
+u16 LoadTrainerPicInWindow(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
 {
-    return sub_810C050(species, 0, 0, isFrontPic, paletteSlot, windowId, TRUE);
+    return LoadPicSpriteInWindow(species, 0, 0, isFrontPic, paletteSlot, windowId, TRUE);
 }
 
 u16 CreateTrainerCardTrainerPicSprite(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
@@ -296,13 +277,10 @@ u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass)
 {
     if (getClass == TRUE)
     {
-        switch (gender)
-        {
-        default:
-            return gFacilityClassToPicIndex[0x87];
-        case MALE:
-            return gFacilityClassToPicIndex[0x86];
-        }
+        if (gender != MALE)
+            return gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
+        else
+            return gFacilityClassToPicIndex[FACILITY_CLASS_RED];
     }
     return gender;
 }

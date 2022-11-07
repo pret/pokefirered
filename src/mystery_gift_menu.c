@@ -354,7 +354,7 @@ void vblankcb_mystery_gift_e_reader_run(void)
     TransferPlttBuffer();
 }
 
-void c2_mystery_gift_e_reader_run(void)
+void CB2_MysteryGiftEReader(void)
 {
     RunTasks();
     RunTextPrinters();
@@ -434,7 +434,7 @@ void c2_mystery_gift(void)
 {
     if (HandleMysteryGiftOrEReaderSetup(0))
     {
-        SetMainCallback2(c2_mystery_gift_e_reader_run);
+        SetMainCallback2(CB2_MysteryGiftEReader);
         gGiftIsFromEReader = FALSE;
         task_add_00_mystery_gift();
     }
@@ -444,7 +444,7 @@ void c2_ereader(void)
 {
     if (HandleMysteryGiftOrEReaderSetup(1))
     {
-        SetMainCallback2(c2_mystery_gift_e_reader_run);
+        SetMainCallback2(CB2_MysteryGiftEReader);
         gGiftIsFromEReader = TRUE;
         task_add_00_ereader();
     }

@@ -519,7 +519,7 @@ void TryReceiveLinkBattleData(void)
 
     if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE) && (gLinkPlayers[0].linkType == 0x2211))
     {
-        LinkRfu_DestroyIdleTask();
+        DestroyTask_RfuIdle();
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             if (GetBlockReceivedStatus() & gBitTable[i])

@@ -227,7 +227,7 @@ bool8 IsWirelessAdapterConnected(void)
 
     SetWirelessCommType1();
     InitRFUAPI();
-    sub_80FB128(TRUE);
+    RfuSetIgnoreError(TRUE);
     if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
     {
         rfu_REQ_stopMode();
@@ -748,21 +748,16 @@ void ClearLinkCallback(void)
 void ClearLinkCallback_2(void)
 {
     if (gWirelessCommType)
-    {
         ClearLinkRfuCallback();
-    }
     else
-    {
         gLinkCallback = NULL;
-    }
 }
 
 u8 GetLinkPlayerCount(void)
 {
     if (gWirelessCommType)
-    {
-        return GetRfuPlayerCount();
-    }
+        return Rfu_GetLinkPlayerCount();
+
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
 }
 
@@ -977,7 +972,7 @@ u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == 1)
     {
-        return LinkRfu_GetMultiplayerId();
+        return Rfu_GetMultiplayerId();
     }
     return SIO_MULTI_CNT->id;
 }
@@ -1647,10 +1642,11 @@ void LinkPlayerFromBlock(u32 who)
     }
 }
 
+// When this function returns TRUE the callbacks are skipped
 bool8 HandleLinkConnection(void)
 {
-    bool32 r4;
-    bool32 r5;
+    bool32 main1Failed;
+    bool32 main2Failed;
 
     if (gWirelessCommType == 0)
     {
@@ -1663,14 +1659,14 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        r4 = LinkRfuMain1();
-        r5 = LinkRfuMain2();
+        main1Failed = RfuMain1(); // Always returns FALSE
+        main2Failed = RfuMain2();
         if (IsSendingKeysOverCable() == TRUE)
         {
-            if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
-            {
+            // This will never be reached.
+            // IsSendingKeysOverCable is always FALSE for wireless communication
+            if (main1Failed == TRUE || IsRfuRecvQueueEmpty() || main2Failed)
                 return TRUE;
-            }
         }
     }
     return FALSE;

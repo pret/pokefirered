@@ -759,7 +759,7 @@ static void CB2_ReturnFromLinkTrade2(void)
             {
                 SetWirelessCommType1();
                 OpenLink();
-                LinkRfu_CreateIdleTask();
+                CreateTask_RfuIdle();
             }
             else
             {
@@ -802,13 +802,13 @@ static void CB2_ReturnFromLinkTrade2(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            LinkRfu_DestroyIdleTask();
+            DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuResourcesPtr->loadUISpritesState = 0;
             if (gWirelessCommType)
             {
-                ToggleLMANlinkRecovery(TRUE);
+                Rfu_SetLinkRecovery(TRUE);
                 SetLinkStandbyCallback();
             }
         }
@@ -2019,7 +2019,7 @@ static void TradeMenuCB_12(void)
 
 static void TradeMenuCB_16(void)
 {
-    if (!ToggleLMANlinkRecovery(FALSE))
+    if (!Rfu_SetLinkRecovery(FALSE))
     {
         SetLinkStandbyCallback();
         sTradeMenuResourcesPtr->tradeMenuCBnum = 13;

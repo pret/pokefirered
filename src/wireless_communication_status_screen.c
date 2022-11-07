@@ -366,7 +366,7 @@ static u32 CountMembersInGroup(struct UnkStruct_x20 * unk20, u32 * counts)
                 k = 0;
                 for (j = 0; j < RFU_CHILD_MAX; j++)
                 {
-                    if (unk20->gname_uname.gname.child_sprite_gender[j] != 0) k++;
+                    if (unk20->gname_uname.gname.partnerInfo[j] != 0) k++;
                 }
                 k++;
                 counts[sCountParams[i][1]] += k;

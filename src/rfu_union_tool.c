@@ -524,17 +524,17 @@ static void AssembleGroup(u32 group, struct RfuGameData * gname)
         {
             return;
         }
-        SpawnGroupMember(group, 0, GetUnionRoomPlayerGraphicsId(gname->playerGender, gname->unk_00.playerTrainerId[0]), gname);
+        SpawnGroupMember(group, 0, GetUnionRoomPlayerGraphicsId(gname->playerGender, gname->compatibility.playerTrainerId[0]), gname);
     }
     for (i = 1; i < 5; i++)
     {
-        if (gname->child_sprite_gender[i - 1] == 0)
+        if (gname->partnerInfo[i - 1] == 0)
         {
             DespawnGroupMember(group, i);
         }
         else if (IsUnionRoomPlayerFacingTileAt(group, i, x, y) == FALSE && IsUnionRoomPlayerFacingTileAt(group, i, x2, y2) == FALSE)
         {
-            SpawnGroupMember(group, i, GetUnionRoomPlayerGraphicsId((gname->child_sprite_gender[i - 1] >> 3) & 1, gname->child_sprite_gender[i - 1] & 7), gname);
+            SpawnGroupMember(group, i, GetUnionRoomPlayerGraphicsId((gname->partnerInfo[i - 1] >> 3) & 1, gname->partnerInfo[i - 1] & 7), gname);
         }
     }
 }
@@ -546,7 +546,7 @@ static void SpawnGroupLeaderAndMembers(u32 group, struct RfuGameData * gname)
     {
     case 0x40:
     case 0x54:
-        SpawnGroupLeader(group, gname->playerGender, gname->unk_00.playerTrainerId[0]);
+        SpawnGroupLeader(group, gname->playerGender, gname->compatibility.playerTrainerId[0]);
         for (i = 0; i < 5; i++)
         {
             DespawnGroupMember(group, i);

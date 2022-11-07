@@ -602,7 +602,7 @@ static void TeachyTvInitIo(void)
 
 static u8 TeachyTvSetupObjEventAndOam(void)
 {
-    u8 objId = AddPseudoObjectEvent(90, SpriteCallbackDummy, 0, 0, 8);
+    u8 objId = CreateObjectGraphicsSprite(90, SpriteCallbackDummy, 0, 0, 8);
     gSprites[objId].oam.priority = 2;
     gSprites[objId].invisible = 1;
     return objId;

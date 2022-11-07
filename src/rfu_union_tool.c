@@ -441,7 +441,7 @@ void CreateGroupMemberObjectsInvisible(u8 * sprite_ids, s32 group)
     {
         s32 obj_id = 5 * group + i;
         sprite_ids[obj_id] = CreateVirtualObject(OBJ_EVENT_GFX_MAN, obj_id - 0x38, sUnionPartnerCoords[group][0] + sFacingDirectionOffsets[i][0], sUnionPartnerCoords[group][1] + sFacingDirectionOffsets[i][1], 3, 1);
-        RfuUnionObjectToggleInvisibility(obj_id - 0x38, TRUE);
+        SetVirtualObjectInvisibility(obj_id - 0x38, TRUE);
     }
 }
 
@@ -485,7 +485,7 @@ static u8 UnionPartnerObjectGetFacing(u32 member, u32 group, struct GFtgtGname *
 
 static u32 RfuUnionGroupMemberIsInvisible(u32 group, u32 member)
 {
-    return RfuUnionObjectIsInvisible(5 * group + member - 0x38);
+    return IsVirtualObjectInvisible(5 * group + member - 0x38);
 }
 
 static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct GFtgtGname * gname)
@@ -494,10 +494,10 @@ static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct GFt
     s32 objId = 5 * groupNo + memberNo;
     if (RfuUnionGroupMemberIsInvisible(groupNo, memberNo) == TRUE)
     {
-        RfuUnionObjectToggleInvisibility(objId - 0x38, FALSE);
-        RfuUnionObjectStartWarp(objId - 0x38, UNION_ROOM_SPAWN_IN);
+        SetVirtualObjectInvisibility(objId - 0x38, FALSE);
+        SetVirtualObjectSpriteAnim(objId - 0x38, UNION_ROOM_SPAWN_IN);
     }
-    RfuUnionObjectSetFacingDirection(objId - 0x38, direction);
+    SetVirtualObjectGraphics(objId - 0x38, direction);
     UnionPartnerObjectSetFacing(memberNo, groupNo, UnionPartnerObjectGetFacing(memberNo, groupNo, gname));
     GetUnionRoomPlayerFacingCoords(groupNo, memberNo, &x, &y);
     MapGridSetMetatileImpassabilityAt(x, y, TRUE);
@@ -506,7 +506,7 @@ static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct GFt
 static void DespawnGroupMember(u32 group, u32 member)
 {
     s32 x, y;
-    RfuUnionObjectStartWarp(5 * group + member - 0x38, UNION_ROOM_SPAWN_OUT);
+    SetVirtualObjectSpriteAnim(5 * group + member - 0x38, UNION_ROOM_SPAWN_OUT);
     GetUnionRoomPlayerFacingCoords(group, member, &x, &y);
     MapGridSetMetatileImpassabilityAt(x, y, FALSE);
 }
@@ -518,7 +518,7 @@ static void AssembleGroup(u32 group, struct GFtgtGname * gname)
 
     PlayerGetDestCoords(&x, &y);
     player_get_pos_including_state_based_drift(&x2, &y2);
-    if (RfuUnionObjectIsInvisible(5 * group - 0x38) == TRUE)
+    if (IsVirtualObjectInvisible(5 * group - 0x38) == TRUE)
     {
         if (IsUnionRoomPlayerFacingTileAt(group, 0, x, y) == TRUE || IsUnionRoomPlayerFacingTileAt(group, 0, x2, y2) == TRUE)
         {
@@ -631,11 +631,11 @@ bool32 RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(struct UnkStruct_Main0 *mai
             {
                 continue;
             }
-            if (RfuUnionObjectIsInvisible(objId - 0x38) != 0)
+            if (IsVirtualObjectInvisible(objId - 0x38) != FALSE)
             {
                 continue;
             }
-            if (RfuUnionObjectIsWarping(objId - 0x38) != 0)
+            if (IsVirtualObjectAnimating(objId - 0x38) != FALSE)
             {
                 continue;
             }

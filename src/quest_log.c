@@ -1297,7 +1297,7 @@ void sub_811246C(struct Sprite *sprite)
             QuestLogUpdatePlayerSprite(sMovementScripts[0][1]);
             sMovementScripts[0][1] = 0xFF;
         }
-        sub_8063E28(objectEvent, sprite);
+        UpdateQuestLogObjectEventCurrentMovement(objectEvent, sprite);
     }
     else
     {
@@ -1306,7 +1306,7 @@ void sub_811246C(struct Sprite *sprite)
             ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId][0]);
             sMovementScripts[objectEvent->localId][0] = 0xFF;
         }
-        sub_8063E28(objectEvent, sprite);
+        UpdateQuestLogObjectEventCurrentMovement(objectEvent, sprite);
     }
 }
 

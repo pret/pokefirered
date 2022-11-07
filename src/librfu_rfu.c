@@ -42,8 +42,8 @@ static void rfu_CB_pollConnectParent(u8 reqCommand, u16 reqResult);
 static void rfu_CB_pollConnectParent(u8 reqCommand, u16 reqResult);
 static void rfu_CB_disconnect(u8 reqCommand, u16 reqResult);
 static void rfu_CB_CHILD_pollConnectRecovery(u8 reqCommand, u16 reqResult);
-static void rfu_CB_sendData(UNUSED u8 reqCommand, u16 reqResult);
-static void rfu_CB_sendData2(UNUSED u8 reqCommand, u16 reqResult);
+static void rfu_CB_sendData(u8 reqCommand, u16 reqResult);
+static void rfu_CB_sendData2(u8 reqCommand, u16 reqResult);
 static void rfu_CB_sendData3(u8 reqCommand, u16 reqResult);
 static void rfu_CB_recvData(u8 reqCommand, u16 reqResult);
 static void rfu_enableREQCallback(bool8 enable);
@@ -64,7 +64,7 @@ static void rfu_STC_CHILD_analyzeRecvPacket(void);
 static u16 rfu_STC_analyzeLLSF(u8, const u8 *, u16);
 static void rfu_STC_UNI_receive(u8, const struct RfuLocalStruct *, const u8 *);
 static void rfu_STC_NI_receive_Receiver(u8, const struct RfuLocalStruct *, const u8 *);
-static void rfu_STC_NI_receive_Sender(u8, u8, const struct RfuLocalStruct *, UNUSED const u8 *);
+static void rfu_STC_NI_receive_Sender(u8, u8, const struct RfuLocalStruct *, const u8 *);
 static void rfu_STC_NI_initSlot_asRecvDataEntity(u8, struct NIComm *);
 static void rfu_STC_NI_initSlot_asRecvControllData(u8, struct NIComm *);
 
@@ -1680,7 +1680,7 @@ void rfu_REQ_sendData(bool8 clockChangeFlag)
     }
 }
 
-static void rfu_CB_sendData(UNUSED u8 reqCommand, u16 reqResult)
+static void rfu_CB_sendData(u8 reqCommand, u16 reqResult)
 {
     u8 i;
     struct NIComm *NI_comm;
@@ -1706,7 +1706,7 @@ static void rfu_CB_sendData(UNUSED u8 reqCommand, u16 reqResult)
     rfu_STC_REQ_callback(ID_DATA_TX_REQ, reqResult);
 }
 
-static void rfu_CB_sendData2(UNUSED u8 reqCommand, u16 reqResult)
+static void rfu_CB_sendData2(u8 reqCommand, u16 reqResult)
 {
     rfu_STC_REQ_callback(ID_DATA_TX_REQ, reqResult);
 }

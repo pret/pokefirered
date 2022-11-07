@@ -168,11 +168,11 @@ static const u8 sNumTrailingZeroes[] = {
 };
 
 static const struct BlockRequest sBlockRequests[] = {
-    { gBlockSendBuffer, 200 },
-    { gBlockSendBuffer, 200 },
-    { gBlockSendBuffer, 100 },
-    { gBlockSendBuffer, 220 },
-    { gBlockSendBuffer,  40 }
+    [BLOCK_REQ_SIZE_NONE] = { gBlockSendBuffer, 200 },
+    [BLOCK_REQ_SIZE_200]  = { gBlockSendBuffer, 200 },
+    [BLOCK_REQ_SIZE_100]  = { gBlockSendBuffer, 100 },
+    [BLOCK_REQ_SIZE_220]  = { gBlockSendBuffer, 220 },
+    [BLOCK_REQ_SIZE_40]   = { gBlockSendBuffer,  40 }
 };
 
 static const u16 sAcceptedSerialNos[] = {
@@ -640,7 +640,7 @@ void sub_80F8FA0(void)
     Rfu.state = 14;
 }
 
-UNUSED
+// Unused
 static void sub_80F8FAC(u8 a0)
 {
     u8 i;
@@ -1709,7 +1709,7 @@ static void sub_80FA834(u8 taskId)
         {
             if (AreNoPlayersReceiving())
             {
-                Rfu.cmdA100_blockRequestType = 0;
+                Rfu.cmdA100_blockRequestType = BLOCK_REQ_SIZE_NONE;
                 RfuPrepareSendBuffer(RFUCMD_SEND_BLOCK_REQ);
                 gTasks[taskId].data[0]++;
             }

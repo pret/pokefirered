@@ -153,7 +153,7 @@ void ChooseHalfPartyForBattle(void)
 {
     gMain.savedCallback = CB2_ReturnFromChooseHalfParty;
 //    VarSet(VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER);
-    InitChooseHalfPartyForBattle(0);
+    InitChooseMonsForBattle(CHOOSE_MONS_FOR_CABLE_CLUB_BATTLE);
 }
 
 static void CB2_ReturnFromChooseHalfParty(void)
@@ -174,7 +174,7 @@ static void CB2_ReturnFromChooseHalfParty(void)
 void ChooseBattleTowerPlayerParty(void)
 {
     gMain.savedCallback = CB2_ReturnFromChooseBattleTowerParty;
-    InitChooseHalfPartyForBattle(1);
+    InitChooseMonsForBattle(CHOOSE_MONS_FOR_BATTLE_TOWER);
 }
 
 static void CB2_ReturnFromChooseBattleTowerParty(void)

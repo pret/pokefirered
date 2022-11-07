@@ -19,9 +19,8 @@ struct DigitObjUtilTemplate
     const struct SpritePalette * spritePal;
 };
 
-extern const u16 gUnknown_8479668[];
-extern const u32 gUnknown_8479688[];
-extern const u32 gUnknown_8479748[];
+extern const u16 gMinigameDigits_Pal[];
+extern const u32 gMinigameDigits_Gfx[];
 
 bool32 DigitObjUtil_Init(u32 count);
 void DigitObjUtil_Free(void);

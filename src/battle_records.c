@@ -109,7 +109,7 @@ static void MainCB2_SetUp(void)
         break;
     case 3:
         LoadFrameGfxOnBg(3);
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         gMain.state++;
         break;
     case 4:
@@ -440,7 +440,7 @@ static void UpdateBattleOutcomeOnTrainerCards(s32 battlerId)
     }
 }
 
-void TryRecordLinkBattleOutcome(s32 battlerId)
+void UpdatePlayerLinkBattleRecords(s32 battlerId)
 {
     if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(UNION_ROOM) || gSaveBlock1Ptr->location.mapNum != MAP_NUM(UNION_ROOM))
     {

@@ -659,7 +659,7 @@ static const u32 sBg_Tilemap[] = INCBIN_U32("graphics/berry_crush/bg.bin.lz");
 
 // Takes the number of players - 2 and a player id and returns the
 // index into sPlayerCoords where that player should be seated
-static const u8 gUnknown_846F280[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] = {
+static const u8 sPlayerIdToPosId[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] = {
     {1, 3},
     {0, 1, 3},
     {1, 3, 2, 4},
@@ -932,7 +932,7 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] = {
 };
 
 static const u8 *const sBCRankingHeaders[] = {
-    [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes,
+    [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes2,
     [RESULTS_PAGE_RANDOM]   = gText_XDotY,
     [RESULTS_PAGE_CRUSHING] = gText_StrVar1Berry,
 
@@ -1299,21 +1299,21 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame * game, u8 *args)
     return 0;
 }
 
-static u32 Cmd_ShowGameDisplay(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_ShowGameDisplay(struct BerryCrushGame * game, u8 *args)
 {
     if (ShowGameDisplay())
         RunOrScheduleCommand(game->nextCmd, RUN_CMD, game->commandParams);
     return 0;
 }
 
-static u32 Cmd_HideGameDisplay(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_HideGameDisplay(struct BerryCrushGame * game, u8 *args)
 {
     if (HideGameDisplay())
         RunOrScheduleCommand(game->nextCmd, RUN_CMD, game->commandParams);
     return 0;
 }
 
-static u32 Cmd_SignalReadyToBegin(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_SignalReadyToBegin(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -1356,7 +1356,7 @@ static u32 Cmd_AskPickBerry(struct BerryCrushGame * game, u8 *args)
     return 0;
 }
 
-static u32 Cmd_GoToBerryPouch(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_GoToBerryPouch(struct BerryCrushGame * game, u8 *args)
 {
     game->cmdCallback = NULL;
     SetMainCallback2(ChooseBerry);
@@ -1415,7 +1415,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame * game, u8 *args
     return 0;
 }
 
-static u32 Cmd_DropBerriesIntoCrusher(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_DropBerriesIntoCrusher(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -1470,7 +1470,7 @@ static u32 Cmd_DropBerriesIntoCrusher(struct BerryCrushGame * game, UNUSED u8 *a
     return 0;
 }
 
-static u32 Cmd_DropLid(struct BerryCrushGame * game,  UNUSED u8 *args)
+static u32 Cmd_DropLid(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -1517,7 +1517,7 @@ static u32 Cmd_DropLid(struct BerryCrushGame * game,  UNUSED u8 *args)
     return 0;
 }
 
-static u32 Cmd_Countdown(struct BerryCrushGame * game,  UNUSED u8 *args)
+static u32 Cmd_Countdown(struct BerryCrushGame * game, u8 *args)
 {
     switch (game-> cmdState)
     {
@@ -1822,7 +1822,7 @@ static void RecvLinkData(struct BerryCrushGame * game)
         game->endGame = TRUE;
 }
 
-static u32 Cmd_PlayGame_Leader(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_PlayGame_Leader(struct BerryCrushGame * game, u8 *args)
 {
     memset(&game->localState, 0, sizeof(game->localState));
     memset(&game->recvCmd, 0, sizeof(game->recvCmd));
@@ -1855,7 +1855,7 @@ static u32 Cmd_PlayGame_Leader(struct BerryCrushGame * game, UNUSED u8 *args)
     }
 }
 
-static u32 Cmd_PlayGame_Member(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_PlayGame_Member(struct BerryCrushGame * game, u8 *args)
 {
     memset(&game->localState, 0, sizeof(game->localState));
     memset(&game->recvCmd, 0, sizeof(game->recvCmd));
@@ -1886,7 +1886,7 @@ static u32 Cmd_PlayGame_Member(struct BerryCrushGame * game, UNUSED u8 *args)
 }
 
 // Game was 'won', crusher was pushed down fully before time was up
-static u32 Cmd_FinishGame(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_FinishGame(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -1983,7 +1983,7 @@ static u32 Cmd_HandleTimeUp(struct BerryCrushGame * game, u8 *args)
     return 0;
 }
 
-static u32 Cmd_TabulateResults(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_TabulateResults(struct BerryCrushGame * game, u8 *args)
 {
     u8 i, j, tempPlayerId;
     s32 temp1, temp2;
@@ -2283,7 +2283,7 @@ static u32 Cmd_AskPlayAgain(struct BerryCrushGame * game, u8 *args)
     return 0;
 }
 
-static u32 Cmd_CommunicatePlayAgainResponses(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_CommunicatePlayAgainResponses(struct BerryCrushGame * game, u8 *args)
 {
     u8 i = 0;
 
@@ -2330,7 +2330,7 @@ static u32 Cmd_CommunicatePlayAgainResponses(struct BerryCrushGame * game, UNUSE
     return 0;
 }
 
-static u32 Cmd_PlayAgain(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_PlayAgain(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -2360,7 +2360,7 @@ static u32 Cmd_PlayAgain(struct BerryCrushGame * game, UNUSED u8 *args)
     return 0;
 }
 
-static u32 Cmd_StopGame(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_StopGame(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -2391,7 +2391,7 @@ static u32 Cmd_StopGame(struct BerryCrushGame * game, UNUSED u8 *args)
     return 0;
 }
 
-static u32 Cmd_CloseLink(struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_CloseLink(struct BerryCrushGame * game, u8 *args)
 {
     switch (game->cmdState)
     {
@@ -2415,7 +2415,7 @@ static u32 Cmd_CloseLink(struct BerryCrushGame * game, UNUSED u8 *args)
     return 0;
 }
 
-static u32 Cmd_Quit(UNUSED struct BerryCrushGame * game, UNUSED u8 *args)
+static u32 Cmd_Quit(struct BerryCrushGame * game, u8 *args)
 {
     QuitBerryCrush(NULL);
     return 0;
@@ -2766,7 +2766,7 @@ static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite)
 #undef MASK_TARGET_Y
 #undef F_MOVE_HORIZ
 
-static void BerryCrushFreeBerrySpriteGfx(struct BerryCrushGame * game, UNUSED struct BerryCrushGame_Gfx * gfx)
+static void BerryCrushFreeBerrySpriteGfx(struct BerryCrushGame * game, struct BerryCrushGame_Gfx * gfx)
 {
     u8 i;
     for (i = 0; i < game->playerCount; i++)
@@ -3046,7 +3046,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame * game, struct BerryCrushG
         FillWindowPixelBuffer(spriteManager->resultsWindowId, PIXEL_FILL(0));
         break;
     case 2:
-        TextWindow_SetStdFrame0_WithPal(spriteManager->resultsWindowId, 0x21D, 0xD0);
+        LoadStdWindowGfx(spriteManager->resultsWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(spriteManager->resultsWindowId, FALSE, 541, 13);
         break;
     case 3:
@@ -3105,7 +3105,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
         tWindowId = AddWindow(&sWindowTemplate_BerryCrushRankings);
         PutWindowTilemap(tWindowId);
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(0));
-        TextWindow_SetStdFrame0_WithPal(tWindowId, 0x21D, 0xD0);
+        LoadStdWindowGfx(tWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 0x21D, 0xD);
         break;
     case 1:
@@ -3178,8 +3178,8 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
         ClearWindowTilemap(tWindowId);
         RemoveWindow(tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
-        ScriptContext2_Disable();
+        ScriptContext_Enable();
+        UnlockPlayerFieldControls();
         tState = 0;
         return;
     }
@@ -3190,7 +3190,7 @@ void ShowBerryCrushRankings(void)
 {
     u8 taskId;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     taskId = CreateTask(Task_ShowBerryCrushRankings, 0);
     gTasks[taskId].tPressingSpeeds(0) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[0];
     gTasks[taskId].tPressingSpeeds(1) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[1];
@@ -3221,7 +3221,7 @@ static void CreatePlayerNameWindows(struct BerryCrushGame * game)
 
     for (i = 0; i < game->playerCount; ++i)
     {
-        game->gfx.playerCoords[i] = &sPlayerCoords[gUnknown_846F280[game->playerCount - 2][i]];
+        game->gfx.playerCoords[i] = &sPlayerCoords[sPlayerIdToPosId[game->playerCount - 2][i]];
         game->gfx.nameWindowIds[i] = AddWindow(&sWindowTemplates_PlayerNames[game->gfx.playerCoords[i]->playerId]);
         PutWindowTilemap(game->gfx.nameWindowIds[i]);
         FillWindowPixelBuffer(game->gfx.nameWindowIds[i], PIXEL_FILL(0));

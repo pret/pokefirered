@@ -47,6 +47,8 @@
 #include "trainer_pokemon_sprites.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
+#include "constants/cable_club.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -242,7 +244,7 @@ static const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
 
 static void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(EventScript_ResetEliteFourEnd);
+    RunScriptImmediately(EventScript_ResetEliteFourEnd);
     RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
     HealPlayerParty();
     Overworld_ResetStateAfterWhitingOut();
@@ -400,22 +402,22 @@ static void LoadObjEventTemplatesFromHeader(void)
     u8 i, j;
     for (i = 0, j = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if (gMapHeader.events->objectEvents[i].inConnection == 0xFF)
+        if (gMapHeader.events->objectEvents[i].kind == OBJ_KIND_CLONE)
         {
-            // load "in_connection" object from the connecting map
-            u8 localId = gMapHeader.events->objectEvents[i].elevation;
-            u8 mapNum = gMapHeader.events->objectEvents[i].trainerType;
-            u8 mapGroup = gMapHeader.events->objectEvents[i].trainerRange_berryTreeId;
+            // load target object from the connecting map
+            u8 localId = gMapHeader.events->objectEvents[i].objUnion.clone.targetLocalId;
+            u8 mapNum = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapNum;
+            u8 mapGroup = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapGroup;
             const struct MapHeader * connectionMap = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
             gSaveBlock1Ptr->objectEventTemplates[j] = connectionMap->events->objectEvents[localId - 1];
             gSaveBlock1Ptr->objectEventTemplates[j].localId = gMapHeader.events->objectEvents[i].localId;
             gSaveBlock1Ptr->objectEventTemplates[j].x = gMapHeader.events->objectEvents[i].x;
             gSaveBlock1Ptr->objectEventTemplates[j].y = gMapHeader.events->objectEvents[i].y;
-            gSaveBlock1Ptr->objectEventTemplates[j].elevation = localId;
-            gSaveBlock1Ptr->objectEventTemplates[j].trainerType = mapNum;
-            gSaveBlock1Ptr->objectEventTemplates[j].trainerRange_berryTreeId = mapGroup;
-            gSaveBlock1Ptr->objectEventTemplates[j].inConnection = 0xFF;
+            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetLocalId = localId;
+            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetMapNum = mapNum;
+            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetMapGroup = mapGroup;
+            gSaveBlock1Ptr->objectEventTemplates[j].kind = OBJ_KIND_CLONE;
             j++;
         }
         else
@@ -463,7 +465,7 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
         struct ObjectEventTemplate *objectEventTemplate = &savObjTemplates[i];
         if (objectEventTemplate->localId == localId)
         {
-            objectEventTemplate->movementType = movementType;
+            objectEventTemplate->objUnion.normal.movementType = movementType;
             return;
         }
     }
@@ -805,7 +807,7 @@ static void LoadMapFromWarp(bool32 unused)
     InitMap();
 }
 
-static void sub_80559A8(void)
+static void QL_LoadMapNormal(void)
 {
     bool8 isOutdoors;
 
@@ -1393,13 +1395,13 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     FieldClearPlayerInput(&fieldInput);
     FieldGetPlayerInput(&fieldInput, newKeys, heldKeys);
     FieldInput_HandleCancelSignpost(&fieldInput);
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
             if (gQuestLogPlaybackState == 2)
                 sub_81127F8(&gInputToStoreInQuestLogMaybe);
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             DismissMapNamePopup();
         }
         else
@@ -1420,11 +1422,11 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     FieldClearPlayerInput(&fieldInput);
     fieldInput = gQuestLogFieldInput;
     FieldInput_HandleCancelSignpost(&fieldInput);
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             DismissMapNamePopup();
         }
         else
@@ -1452,7 +1454,7 @@ void CB1_Overworld(void)
 
 static void OverworldBasic(void)
 {
-    ScriptContext2_RunScript();
+    ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();
     CameraUpdate();
@@ -1518,8 +1520,8 @@ void CB2_NewGame(void)
     NewGameInitData();
     ResetInitialPlayerAvatarState();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
@@ -1539,8 +1541,8 @@ void CB2_WhiteOut(void)
         ResetSafariZoneFlag_();
         DoWhiteOut();
         SetInitialPlayerAvatarStateWithDirection(DIR_NORTH);
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         DoMapLoadLoop(&val);
@@ -1554,8 +1556,8 @@ void CB2_WhiteOut(void)
 void CB2_LoadMap(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     SetMainCallback1(NULL);
     SetMainCallback2(CB2_DoChangeMap);
     gMain.savedCallback = CB2_LoadMap2;
@@ -1634,8 +1636,8 @@ void CB2_ReturnToFieldFromMultiplayer(void)
     else
         gFieldCallback = FieldCB_ReturnToFieldCableLink;
 
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     CB2_ReturnToField();
 }
 
@@ -1685,8 +1687,8 @@ void CB2_ContinueSavedGame(void)
     Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     gFieldCallback2 = NULL;
     gExitStairsMovementDisabled = TRUE;
     if (UseContinueGameWarp() == TRUE)
@@ -1760,8 +1762,8 @@ static bool32 LoadMapInStepsLink(u8 *state)
     {
     case 0:
         InitOverworldBgs();
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         (*state)++;
         break;
     case 1:
@@ -2136,7 +2138,7 @@ static void InitObjectEventsLocal(void)
 
 static void ReloadObjectsAndRunReturnToFieldMapScript(void)
 {
-    ReloadMapObjectsWithOffset(0, 0);
+    SpawnObjectEventsOnReturnToField(0, 0);
     RunOnReturnToFieldMapScript();
 }
 
@@ -2197,8 +2199,8 @@ void CB2_SetUpOverworldForQLPlaybackWithWarpExit(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gGlobalFieldTintMode = QL_TINT_GRAYSCALE;
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     SetMainCallback1(NULL);
     SetMainCallback2(CB2_DoChangeMap);
     gMain.savedCallback = CB2_LoadMapForQLPlayback;
@@ -2209,8 +2211,8 @@ void CB2_SetUpOverworldForQLPlayback(void)
     FieldClearVBlankHBlankCallbacks();
     gGlobalFieldTintMode = QL_TINT_GRAYSCALE;
     LoadSaveblockMapHeader();
-    ScriptContext1_Init();
-    ScriptContext2_Disable();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
     SetMainCallback1(NULL);
     SetMainCallback2(CB2_LoadMapForQLPlayback);
 }
@@ -2247,7 +2249,7 @@ static bool32 LoadMap_QLPlayback(u8 *state)
         else
         {
             gExitStairsMovementDisabled = TRUE;
-            sub_80559A8();
+            QL_LoadMapNormal();
         }
         (*state)++;
         break;
@@ -2317,7 +2319,7 @@ void CB2_EnterFieldFromQuestLog(void)
     Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
-    ScriptContext1_Init();
+    ScriptContext_Init();
     gExitStairsMovementDisabled = TRUE;
     if (UseContinueGameWarp() == TRUE)
     {
@@ -2388,8 +2390,8 @@ static bool32 SetUpScrollSceneForCredits(u8 *state, u8 unused)
         sCreditsOverworld_CmdLength = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_4;
         WarpIntoMap();
         gPaletteFade.bufferTransferDisabled = TRUE;
-        ScriptContext1_Init();
-        ScriptContext2_Disable();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
         SetMainCallback1(NULL);
         gFieldCallback2 = FieldCB2_Credits_WaitFade;
         gMain.state = 0;
@@ -2845,7 +2847,7 @@ static void ResetPlayerHeldKeys(u16 *keys)
 
 static u16 KeyInterCB_SelfIdle(u32 key)
 {
-    if (ScriptContext2_IsEnabled() == TRUE)
+    if (ArePlayerFieldControlsLocked() == TRUE)
         return LINK_KEY_CODE_EMPTY;
     if (GetLinkRecvQueueLength() > 4)
         return LINK_KEY_CODE_HANDLE_RECV_QUEUE;
@@ -2865,7 +2867,7 @@ static u16 KeyInterCB_Idle(u32 key)
 static u16 KeyInterCB_DeferToEventScript(u32 key)
 {
     u16 retVal;
-    if (ScriptContext2_IsEnabled() == TRUE)
+    if (ArePlayerFieldControlsLocked() == TRUE)
     {
         retVal = LINK_KEY_CODE_EMPTY;
     }
@@ -2888,7 +2890,7 @@ static u16 KeyInterCB_DeferToRecvQueue(u32 key)
     else
     {
         retVal = LINK_KEY_CODE_IDLE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SetKeyInterceptCallback(KeyInterCB_Idle);
     }
     return retVal;
@@ -2905,7 +2907,7 @@ static u16 KeyInterCB_DeferToSendQueue(u32 key)
     else
     {
         retVal = LINK_KEY_CODE_IDLE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SetKeyInterceptCallback(KeyInterCB_Idle);
     }
     return retVal;
@@ -2958,7 +2960,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
         CheckRfuKeepAliveTimer();
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_EXITING_ROOM) == TRUE)
     {
-        ScriptContext1_SetupScript(CableClub_EventScript_DoLinkRoomExit);
+        ScriptContext_SetupScript(CableClub_EventScript_DoLinkRoomExit);
         SetKeyInterceptCallback(KeyInterCB_SendNothing);
     }
     return LINK_KEY_CODE_EMPTY;
@@ -2979,14 +2981,14 @@ static u16 KeyInterCB_SendNothing_2(u32 key)
 u32 GetCableClubPartnersReady(void)
 {
     if (IsAnyPlayerInLinkState(PLAYER_LINK_STATE_EXITING_ROOM) == TRUE)
-        return 2;
+        return CABLE_SEAT_FAILED;
     if (sPlayerKeyInterceptCallback == KeyInterCB_Ready && sPlayerLinkStates[gLocalLinkPlayerId] != PLAYER_LINK_STATE_READY)
-        return 0;
+        return CABLE_SEAT_WAITING;
     if (sPlayerKeyInterceptCallback == KeyInterCB_DoNothingAndKeepAlive && sPlayerLinkStates[gLocalLinkPlayerId] == PLAYER_LINK_STATE_BUSY)
-        return 2;
+        return CABLE_SEAT_FAILED;
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_READY) != FALSE)
-        return 1;
-    return 0;
+        return CABLE_SEAT_SUCCESS;
+    return CABLE_SEAT_WAITING;
 }
 
 static bool32 IsAnyPlayerExitingCableClub(void)
@@ -3031,7 +3033,7 @@ static void LoadCableClubPlayer(s32 linkPlayerId, s32 myPlayerId, struct CableCl
     GetLinkPlayerCoords(linkPlayerId, &x, &y);
     player->pos.x = x;
     player->pos.y = y;
-    player->pos.height = GetLinkPlayerElevation(linkPlayerId);
+    player->pos.elevation = GetLinkPlayerElevation(linkPlayerId);
     player->metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 }
 
@@ -3084,7 +3086,7 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
     otherPlayerPos = player->pos;
     otherPlayerPos.x += gDirectionToVectors[player->facing].x;
     otherPlayerPos.y += gDirectionToVectors[player->facing].y;
-    otherPlayerPos.height = 0;
+    otherPlayerPos.elevation = 0;
     linkPlayerId = GetLinkPlayerIdAt(otherPlayerPos.x, otherPlayerPos.y);
 
     if (linkPlayerId != 4)
@@ -3136,41 +3138,41 @@ static u16 GetDirectionForEventScript(const u8 *script)
 
 static void InitLinkPlayerQueueScript(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void InitLinkRoomStartMenuScript(void)
 {
     PlaySE(SE_WIN_OPEN);
     ShowStartMenu();
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static void RunInteractLocalPlayerScript(const u8 *script)
 {
     PlaySE(SE_SELECT);
-    ScriptContext1_SetupScript(script);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(script);
+    LockPlayerFieldControls();
 }
 
 static void CreateConfirmLeaveTradeRoomPrompt(void)
 {
     PlaySE(SE_WIN_OPEN);
-    ScriptContext1_SetupScript(TradeCenter_ConfirmLeaveRoom);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(TradeCenter_ConfirmLeaveRoom);
+    LockPlayerFieldControls();
 }
 
 static void InitMenuBasedScript(const u8 *script)
 {
     PlaySE(SE_SELECT);
-    ScriptContext1_SetupScript(script);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(script);
+    LockPlayerFieldControls();
 }
 
 static void RunTerminateLinkScript(void)
 {
-    ScriptContext1_SetupScript(TradeCenter_TerminateLink);
-    ScriptContext2_Enable();
+    ScriptContext_SetupScript(TradeCenter_TerminateLink);
+    LockPlayerFieldControls();
 }
 
 bool32 Overworld_LinkRecvQueueLengthMoreThan2(void)
@@ -3294,7 +3296,7 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     objEvent->previousCoords.y = y;
     SetSpritePosToMapCoords(x, y, &objEvent->initialCoords.x, &objEvent->initialCoords.y);
     objEvent->initialCoords.x += 8;
-    ObjectEventUpdateZCoord(objEvent);
+    ObjectEventUpdateElevation(objEvent);
 }
 
 static void SetLinkPlayerObjectRange(u8 linkPlayerId, u8 dir)
@@ -3433,7 +3435,7 @@ static bool8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayer
     {
         objEvent->directionSequenceIndex = 16;
         ShiftObjectEventCoords(objEvent, x, y);
-        ObjectEventUpdateZCoord(objEvent);
+        ObjectEventUpdateElevation(objEvent);
         return TRUE;
     }
 }
@@ -3499,7 +3501,7 @@ static bool8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 a2, s16 x, s16 y)
             }
         }
     }
-    return MapGridIsImpassableAt(x, y);
+    return MapGridGetCollisionAt(x, y);
 }
 
 static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
@@ -3513,13 +3515,13 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
     {
         if (gameVersion == VERSION_FIRE_RED || gameVersion == VERSION_LEAF_GREEN)
         {
-            objEvent->spriteId = AddPseudoObjectEvent(
+            objEvent->spriteId = CreateObjectGraphicsSprite(
                 GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, linkGender(objEvent)),
                 SpriteCB_LinkPlayer, 0, 0, 0);
         }
         else
         {
-            objEvent->spriteId = AddPseudoObjectEvent(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
+            objEvent->spriteId = CreateObjectGraphicsSprite(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
         }
 
         sprite = &gSprites[objEvent->spriteId];
@@ -3535,15 +3537,15 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     struct ObjectEvent *objEvent = &gObjectEvents[linkPlayerObjEvent->objEventId];
     sprite->x = objEvent->initialCoords.x;
     sprite->y = objEvent->initialCoords.y;
-    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
-    sprite->oam.priority = ZCoordToPriority(objEvent->previousElevation);
+    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
+    sprite->oam.priority = ElevationToPriority(objEvent->previousElevation);
 
     if (!linkPlayerObjEvent->movementMode != MOVEMENT_MODE_FREE)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(linkDirection(objEvent)));
     else
         StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(linkDirection(objEvent)));
 
-    UpdateObjectEventSpriteVisibility(sprite, 0);
+    UpdateObjectEventSpriteInvisibility(sprite, FALSE);
     if (objEvent->triggerGroundEffectsOnMove)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);

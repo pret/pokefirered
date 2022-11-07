@@ -141,7 +141,7 @@ static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
 static const struct OamData sOamData_EggHatch =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -221,7 +221,7 @@ static const struct SpriteTemplate sSpriteTemplate_EggHatch =
 static const struct OamData sOamData_EggShard =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -1515,7 +1515,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -1524,7 +1524,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -1756,7 +1756,7 @@ static void VBlankCB_EggHatch(void)
 
 void EggHatch(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     CreateTask(Task_EggHatch, 10);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
     HelpSystem_Disable();
@@ -1956,7 +1956,7 @@ static void CB2_EggHatch_1(void)
     case 9:
         if (!IsTextPrinterActive(sEggHatchData->windowId))
         {
-            LoadUserWindowBorderGfx(sEggHatchData->windowId, 0x140, 0xE0);
+            LoadUserWindowGfx2(sEggHatchData->windowId, 0x140, 0xE0);
             CreateYesNoMenu(&sYesNoWinTemplate, FONT_3, 0, 2, 0x140, 0xE, 0);
             sEggHatchData->CB2_state++;
         }

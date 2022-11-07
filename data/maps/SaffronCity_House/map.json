@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
       "x": 0,
       "y": 5,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 4,
       "y": 4,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 6,
       "y": 2,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CLIPBOARD",
       "x": 5,
       "y": 4,
@@ -74,21 +78,21 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SAFFRON_CITY",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

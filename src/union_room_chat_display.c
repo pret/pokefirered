@@ -123,7 +123,7 @@ static const u16 sUnionRoomChatPanelBgPal_C[] = INCBIN_U16("graphics/union_room_
 static const u16 sBg1Pal8[] = INCBIN_U16("graphics/union_room_chat/unk_845AA44.gbapal");
 static const u16 sWin0PalF[] = INCBIN_U16("graphics/union_room_chat/unk_845AA64.gbapal");
 
-static const struct BgTemplate gUnknown_845AA84[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -159,7 +159,7 @@ static const struct BgTemplate gUnknown_845AA84[] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_845AA94[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 3,
         .tilemapLeft = 8,
@@ -349,8 +349,8 @@ bool8 UnionRoomChat_TryAllocGraphicsWork(void)
     if (sWork && UnionRoomChat_TryAllocSpriteWork())
     {
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_845AA84, NELEMS(gUnknown_845AA84));
-        InitWindows(gUnknown_845AA94);
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        InitWindows(sWindowTemplates);
         ResetTempTileDataBuffers();
         InitScanlineEffect();
         InitWork(sWork);
@@ -1307,9 +1307,9 @@ static void LoadWin1(void)
 static void LoadWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    TextWindow_SetUserSelectedFrame(3, 1, 0xD0);
-    TextWindow_SetStdFrame0_WithPal(3, 0xA, 0x20);
-    LoadPalette(gTMCaseMainWindowPalette, 0xE0,  0x20);
+    LoadUserWindowGfx(3, 1, 0xD0);
+    LoadStdWindowGfx(3, 0xA, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xE0,  0x20);
 }
 
 static void InitScanlineEffect(void)

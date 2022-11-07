@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 7,
       "y": 60,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 4,
       "y": 62,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 15,
       "y": 70,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 4,
       "y": 68,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 13,
       "y": 44,
@@ -92,6 +97,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 9,
       "y": 27,
@@ -105,6 +111,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
       "y": 20,
@@ -118,6 +125,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
       "y": 22,
@@ -131,6 +139,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
       "y": 24,
@@ -144,6 +153,7 @@
       "flag": "FLAG_TEMP_14"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
       "y": 26,
@@ -163,35 +173,35 @@
       "y": 19,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 8,
       "y": 57,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 7,
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_POWER_PLANT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 2,
       "y": 37,
       "elevation": 3,
       "dest_map": "MAP_POWER_PLANT",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],
@@ -226,7 +236,7 @@
       "y": 19,
       "elevation": 0,
       "item": "ITEM_SUPER_POTION",
-      "flag": "HIDDEN_ITEM_ROUTE10_SUPER_POTION",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE10_SUPER_POTION",
       "quantity": 1,
       "underfoot": false
     },
@@ -236,7 +246,7 @@
       "y": 40,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
-      "flag": "HIDDEN_ITEM_ROUTE10_MAX_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE10_MAX_ETHER",
       "quantity": 1,
       "underfoot": false
     },
@@ -246,7 +256,7 @@
       "y": 26,
       "elevation": 3,
       "item": "ITEM_CHERI_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE10_CHERI_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE10_CHERI_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -256,7 +266,7 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE10_PERSIM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE10_PERSIM_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -266,7 +276,7 @@
       "y": 57,
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE10_NANAB_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE10_NANAB_BERRY",
       "quantity": 1,
       "underfoot": false
     }

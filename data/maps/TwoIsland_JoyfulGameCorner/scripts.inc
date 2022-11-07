@@ -43,7 +43,7 @@ TwoIsland_JoyfulGameCorner_EventScript_FoundLostelleScene::
 	special BufferBigGuyOrBigGirlString
 	msgbox TwoIsland_JoyfulGameCorner_Text_LostelleItsOkayDaddy
 	closemessage
-	applymovement LOCALID_LOSTELLE, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_LOSTELLE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	releaseall
@@ -52,38 +52,38 @@ TwoIsland_JoyfulGameCorner_EventScript_FoundLostelleScene::
 TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_DADDY, Movement_171520
+	applymovement LOCALID_DADDY, TwoIsland_JoyfulGameCorner_Movement_DaddyPacing
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_WhereHasLostelleGottenTo
 	closemessage
-	applymovement LOCALID_DADDY, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_DADDY, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_DADDY, Movement_ExclamationMark
+	applymovement LOCALID_DADDY, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_DADDY, Movement_Delay48
+	applymovement LOCALID_DADDY, Common_Movement_Delay48
 	waitmovement 0
-	applymovement LOCALID_DADDY, Movement_171527
+	applymovement LOCALID_DADDY, TwoIsland_JoyfulGameCorner_Movement_DaddyApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_PleaseHelpFindLostelle
 	closemessage
 	playse SE_RS_DOOR
 	waitse
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_17152C
+	applymovement OBJ_EVENT_ID_PLAYER, TwoIsland_JoyfulGameCorner_Movement_PlayerFaceDaddy
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
 	addobject LOCALID_BIKER
 	applymovement LOCALID_BIKER, TwoIsland_JoyfulGameCorner_Movement_BikerLookAround
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_IsThisOnlyThreeIsland
-	applymovement LOCALID_BIKER, Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_BIKER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_ThisIsTwoIslandMoveIt
 	msgbox TwoIsland_JoyfulGameCorner_Text_TheseIslandsAreConfusing
 	closemessage
-	applymovement LOCALID_BIKER, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BIKER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_EXIT
 	removeobject LOCALID_BIKER
@@ -96,7 +96,7 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene::
 	releaseall
 	end
 
-Movement_171520::
+TwoIsland_JoyfulGameCorner_Movement_DaddyPacing::
 	walk_left
 	walk_right
 	walk_right
@@ -105,14 +105,14 @@ Movement_171520::
 	delay_16
 	step_end
 
-Movement_171527::
+TwoIsland_JoyfulGameCorner_Movement_DaddyApproachPlayer::
 	walk_down
 	walk_down
 	walk_down
 	walk_in_place_faster_left
 	step_end
 
-Movement_17152C::
+TwoIsland_JoyfulGameCorner_Movement_PlayerFaceDaddy::
 	walk_left
 	walk_in_place_faster_right
 	step_end

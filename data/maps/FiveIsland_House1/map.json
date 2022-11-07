@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 10,
       "y": 2,
@@ -35,7 +36,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

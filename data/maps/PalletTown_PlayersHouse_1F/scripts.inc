@@ -11,7 +11,7 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
 	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
 	closemessage
-	applymovement LOCALID_MOM, Movement_FaceOriginalDirection
+	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

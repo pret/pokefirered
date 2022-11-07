@@ -285,7 +285,7 @@
 	.endm
 
 	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific 
-	@ commands and specials. Calling EnableBothScriptContexts for instance will allow execution to continue.
+	@ commands and specials. Calling ScriptContext_Enable for instance will allow execution to continue.
 	.macro waitstate
 	.byte 0x27
 	.endm
@@ -476,7 +476,7 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
-	@ Sets the dynamic warp destination. Warps with a destination map of MAP_NONE will target this destination.
+	@ Sets the dynamic warp destination. Warps with a destination map of MAP_DYNAMIC will target this destination.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
 	@ or a pair of x/y coordinates to go to directly on the destination map.
 	.macro setdynamicwarp map:req, a, b, c

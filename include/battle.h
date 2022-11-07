@@ -29,11 +29,6 @@
    (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)           \
  && !(gDisableStructs[battler].mimickedMoves & gBitTable[moveSlot]))
 
-#define TRAINER_OPPONENT_3FE        0x3FE
-#define TRAINER_OPPONENT_C00        0xC00
-#define TRAINER_LINK_OPPONENT       0x800
-#define SECRET_BASE_OPPONENT        0x400
-
 // Battle Actions
 // These determine what each battler will do in a turn
 #define B_ACTION_USE_MOVE                  0
@@ -402,8 +397,8 @@ struct BattleStruct
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
     u8 field_78; // unused
-    u8 safariGoNearCounter;
-    u8 safariPkblThrowCounter;
+    u8 safariRockThrowCounter;
+    u8 safariBaitThrowCounter;
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
     u8 linkBattleVsSpriteId_V;
@@ -519,16 +514,6 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 field_23;
-};
-
-enum
-{
-    BACK_PIC_RED,
-    BACK_PIC_LEAF,
-    BACK_PIC_RS_BRENDAN,
-    BACK_PIC_RS_MAY,
-    BACK_PIC_POKEDUDE,
-    BACK_PIC_OLDMAN
 };
 
 struct BattleSpriteInfo
@@ -685,8 +670,8 @@ extern u8 *gBattleAnimBgTileBuffer;
 extern u8 *gBattleAnimBgTilemapBuffer;
 extern void (*gBattleMainFunc)(void);
 extern u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT];
-extern u32 gUnknown_2022B54;
-extern u8 gUnknown_2023DDC;
+extern u32 gUnusedFirstBattleVar1;
+extern u8 gUnusedFirstBattleVar2;
 extern u8 gBattlerAttacker;
 extern u8 gEffectBattler;
 extern u8 gMultiHitCounter;

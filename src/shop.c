@@ -338,7 +338,7 @@ static void Task_ReturnToShopMenu(u8 taskId)
     if (IsWeatherNotFadingIn() != TRUE)
         return;
     
-    DisplayItemMessageOnField(taskId, GetMartFontId(), gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
+    DisplayItemMessageOnField(taskId, GetMartFontId(), gText_AnythingElseICanHelp, ShowShopMenuAfterExitingBuyOrSellMenu);
 }
 
 static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
@@ -594,7 +594,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
         if (item != INDEX_CANCEL)
             CreateItemMenuIcon(item, gShopData.itemSlot);
         else
-            CreateItemMenuIcon(ITEM_N_A, gShopData.itemSlot);
+            CreateItemMenuIcon(ITEMS_COUNT, gShopData.itemSlot);
         
         gShopData.itemSlot ^= 1;
         BuyMenuPrint(5, FONT_2, description, 0, 3, 2, 1, 0, 0);
@@ -629,7 +629,7 @@ static void LoadTmHmNameInMart(s32 item)
     if (item != INDEX_CANCEL)
     {
         ConvertIntToDecimalStringN(gStringVar1, item - ITEM_DEVON_SCOPE, 2, 2);
-        StringCopy(gStringVar4, gOtherText_UnkF9_08_Clear_01);
+        StringCopy(gStringVar4, gText_NumberClear01);
         StringAppend(gStringVar4, gStringVar1);
         BuyMenuPrint(6, FONT_0, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
         StringCopy(gStringVar4, gMoveNames[ItemIdToBattleMoveId(item)]);
@@ -751,13 +751,9 @@ static void BuyMenuDrawMapBg(void)
             metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j);
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
-            {
-                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
-            }
+                BuyMenuDrawMapMetatile(i, j, mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
             else
-            {
-                BuyMenuDrawMapMetatile(i, j, (u16 *)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
-            }
+                BuyMenuDrawMapMetatile(i, j, mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
         }
     }
 }
@@ -769,15 +765,15 @@ static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLaye
 
     switch (metatileLayerType)
     {
-    case 0:
+    case METATILE_LAYER_TYPE_NORMAL:
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer4, offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer2, offset1, offset2, src + 4);
         break;
-    case 1:
+    case METATILE_LAYER_TYPE_COVERED:
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer3, offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer4, offset1, offset2, src + 4);
         break;
-    case 2:
+    case METATILE_LAYER_TYPE_SPLIT:
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer3, offset1, offset2, src);
         BuyMenuDrawMapMetatileLayer(*gShopTilemapBuffer2, offset1, offset2, src + 4);
         break;
@@ -795,11 +791,11 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
 static void BuyMenuCollectObjectEventData(void)
 {
     s16 facingX, facingY;
-    u8 x, y, z;
+    u8 x, y, elevation;
     u8 num = 0;
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
-    z = PlayerGetZCoord();
+    elevation = PlayerGetElevation();
     
     for (y = 0; y < OBJECT_EVENTS_COUNT; y++)
         sViewportObjectEvents[y][OBJECT_EVENT_ID] = OBJECT_EVENTS_COUNT;
@@ -808,7 +804,7 @@ static void BuyMenuCollectObjectEventData(void)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 eventObjId = GetObjectEventIdByXYZ(facingX - 3 + x, facingY - 2 + y, z);
+            u8 eventObjId = GetObjectEventIdByPosition(facingX - 3 + x, facingY - 2 + y, elevation);
             if (eventObjId != OBJECT_EVENTS_COUNT)
             {
                 sViewportObjectEvents[num][OBJECT_EVENT_ID] = eventObjId;
@@ -848,7 +844,7 @@ static void BuyMenuDrawObjectEvents(void)
             continue;
 
         graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId);        
-        spriteId = AddPseudoObjectEvent(
+        spriteId = CreateObjectGraphicsSprite(
             gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)sViewportObjectEvents[i][X_COORD] * 16 - 8,
@@ -1129,7 +1125,7 @@ void CreatePokemartMenu(const u16 *itemsForSale)
 {    
     SetShopItemsForSale(itemsForSale);
     CreateShopMenu(MART_TYPE_REGULAR);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
     DebugFunc_PrintShopMenuHistoryBeforeClearMaybe();
     memset(&gShopMenuHistory, 0, sizeof(gShopMenuHistory));
     gShopMenuHistory[0].unk8 = gMapHeader.regionMapSectionId;
@@ -1140,13 +1136,13 @@ void CreateDecorationShop1Menu(const u16 *itemsForSale)
 {
     SetShopItemsForSale(itemsForSale);
     CreateShopMenu(MART_TYPE_DECOR);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 
 void CreateDecorationShop2Menu(const u16 *itemsForSale)
 {
     SetShopItemsForSale(itemsForSale);
     CreateShopMenu(MART_TYPE_DECOR2);
-    SetShopMenuCallback(EnableBothScriptContexts);
+    SetShopMenuCallback(ScriptContext_Enable);
 }
 

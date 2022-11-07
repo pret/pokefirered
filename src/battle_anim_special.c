@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_main.h"
+#include "battle_message.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "decompress.h"
@@ -34,9 +35,9 @@
 #define TAG_HEALTHBOX_PALS_2      55050
 
 // RAM
-UNUSED u32 gMonShrinkDuration;
-UNUSED u16 gMonShrinkDelta;
-UNUSED u16 gMonShrinkDistance;
+u32 gMonShrinkDuration;
+u16 gMonShrinkDelta;
+u16 gMonShrinkDistance;
 
 // Function Declarations
 static void AnimTask_UnusedLevelUpHealthBox_Step(u8);
@@ -408,7 +409,9 @@ const struct SpriteTemplate gSafariRockTemplate =
 };
 
 // Functions
-UNUSED void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
+
+// Unused
+void AnimTask_LevelUpHealthBox(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     u8 healthBoxSpriteId;
@@ -442,8 +445,8 @@ UNUSED void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
     gSprites[spriteId3].callback = SpriteCallbackDummy;
     gSprites[spriteId4].callback = SpriteCallbackDummy;
     GetBattleAnimBg1Data(&animBgData);
-    AnimLoadCompressedBgTilemap(animBgData.bgId, gUnknown_D2EC24_Tilemap);
-    AnimLoadCompressedBgGfx(animBgData.bgId, gUnknown_D2EC24_Gfx, animBgData.tilesOffset);
+    AnimLoadCompressedBgTilemap(animBgData.bgId, gUnusedLevelupAnimationTilemap);
+    AnimLoadCompressedBgGfx(animBgData.bgId, gUnusedLevelupAnimationGfx, animBgData.tilesOffset);
     LoadCompressedPalette(gCureBubblesPal, animBgData.paletteId << 4, 32);
     gBattle_BG1_X = -gSprites[spriteId3].x + 32;
     gBattle_BG1_Y = -gSprites[spriteId3].y - 32;
@@ -660,7 +663,7 @@ void AnimTask_SwitchOutBallEffect(u8 taskId)
         priority = gSprites[spriteId].oam.priority;
         subpriority = gSprites[spriteId].subpriority;
         gTasks[taskId].data[10] = AnimateBallOpenParticles(x, y + 32, priority, subpriority, ballId);
-        selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(1, 0, 0, 0, 0, 0, 0);
         gTasks[taskId].data[11] = LaunchBallFadeMonTask(0, gBattleAnimAttacker, selectedPalettes, ballId);
         gTasks[taskId].data[0]++;
         break;
@@ -2037,7 +2040,7 @@ void AnimTask_IsAttackerBehindSubstitute(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_TargetToEffectBattler(u8 taskId)
+void AnimTask_SetTargetToEffectBattler(u8 taskId)
 {
     gBattleAnimTarget = gEffectBattler;
     DestroyAnimVisualTask(taskId);
@@ -2079,7 +2082,7 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
         }
     }
 
-    gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = 1;
+    gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = TRUE;
 }
 
 static void AnimTask_ShinySparkles(u8 taskId)
@@ -2162,7 +2165,7 @@ static void AnimTask_ShinySparkles_WaitSparkles(u8 taskId)
         if (gTasks[taskId].data[1] == TRUE)
         {
             battler = gTasks[taskId].data[0];
-            gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = 1;
+            gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = TRUE;
         }
 
         DestroyTask(taskId);
@@ -2204,7 +2207,7 @@ static void SpriteCB_ShinySparkles_2(struct Sprite *sprite)
 
 void AnimTask_LoadBaitGfx(u8 taskId)
 {
-    UNUSED u8 paletteIndex;
+    u8 paletteIndex;
 
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
@@ -2278,7 +2281,7 @@ void AnimTask_SafariOrGhost_DecideAnimSides(u8 taskId)
 
 void AnimTask_SafariGetReaction(u8 taskId)
 {
-    if (gBattleCommunication[MULTISTRING_CHOOSER] > 2)
+    if (gBattleCommunication[MULTISTRING_CHOOSER] >= NUM_SAFARI_REACTIONS)
         gBattleAnimArgs[7] = 0;
     else
         gBattleAnimArgs[7] = gBattleCommunication[MULTISTRING_CHOOSER];

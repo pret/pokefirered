@@ -101,11 +101,12 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u8 *const gUnknown_846FA9C[] = {
-    gUnknown_841E2B4,
-    gUnknown_841E2BF,
-    gUnknown_841E2C9,
-    gUnknown_841E2D4
+// Unused
+static const u8 *const sPlayersTextPtrs[] = {
+    gText_Dynamic0Players,
+    gText_Dynamic1Players,
+    gText_Dynamic2Players,
+    gText_Dynamic3Players
 };
 
 static const u8 *const sHeaderTextPtrs[] = {

@@ -94,6 +94,9 @@ static const struct CombinedMove sCombinedMoves[2] =
     {0xFFFF, 0xFFFF, 0xFFFF}
 };
 
+// NOTE: The order of the elements in the 3 arrays below is irrelevant.
+// To reorder the pokedex, see the values in include/constants/pokedex.h.
+
 static const u16 sSpeciesToHoennPokedexNum[] = // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
 {
     SPECIES_TO_HOENN(BULBASAUR),
@@ -1506,9 +1509,9 @@ const struct SpriteTemplate gSpriteTemplates_Battlers[] =
     },
 };
 
-const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] = 
+static const struct SpriteTemplate sTrainerBackSpriteTemplates[] = 
 {
-    {
+    [TRAINER_BACK_PIC_RED] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1517,7 +1520,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_LEAF] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1526,7 +1529,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1535,7 +1538,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1544,7 +1547,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_POKEDUDE] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1553,7 +1556,7 @@ const struct SpriteTemplate gSpriteTemplates_TrainerBackpics[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
-    {
+    [TRAINER_BACK_PIC_OLD_MAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattlerPlayer,
@@ -1665,7 +1668,7 @@ const u16 gLinkPlayerFacilityClasses[] =
 static const struct OamData sOakSpeechNidoranFDummyOamData = 
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -2755,7 +2758,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
-        gMultiuseSpriteTemplate = gSpriteTemplates_TrainerBackpics[trainerSpriteId];
+        gMultiuseSpriteTemplate = sTrainerBackSpriteTemplates[trainerSpriteId];
         gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else
@@ -3796,7 +3799,7 @@ static void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord
         }
     }
     gBattleTypeFlags = 8;
-    gTrainerBattleOpponent_A = SECRET_BASE_OPPONENT;
+    gTrainerBattleOpponent_A = TRAINER_SECRET_BASE;
 }
 
 u8 GetSecretBaseTrainerPicIndex(void)
@@ -5008,7 +5011,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (gEvolutionTable[species][i].param == heldItem)
                 {
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                    if (IsNationalPokedexEnabled() || targetSpecies <= 151)
+                    if (IsNationalPokedexEnabled() || targetSpecies <= KANTO_SPECIES_END)
                     {
                         heldItem = 0;
                         SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -5664,7 +5667,7 @@ u16 SpeciesToPokedexNum(u16 species)
 {
     species = SpeciesToNationalPokedexNum(species);
 
-    if (!IsNationalPokedexEnabled() && species > 151)
+    if (!IsNationalPokedexEnabled() && species > KANTO_SPECIES_END)
         return 0xFFFF;
     return species;
 }
@@ -6082,7 +6085,7 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)
     if (gBattleTypeFlags & BATTLE_TYPE_GHOST && GetBattlerSide(battlerId) != B_SIDE_PLAYER)
     {
         GetMonData(mon, MON_DATA_NICKNAME, buffer);
-        StringGetEnd10(buffer);
+        StringGet_Nickname(buffer);
         if (!StringCompare(buffer, gText_Ghost))
             return TRUE;
     }

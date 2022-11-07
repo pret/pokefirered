@@ -16,7 +16,7 @@
 #define tBldCntBak data[7]
 #define tBldYBak data[8]
 
-static void BeginPCScreenEffect(TaskFunc func, u16 a2, UNUSED u16 a3, u8 priority);
+static void BeginPCScreenEffect(TaskFunc func, u16 a2, u16 a3, u8 priority);
 static void Task_PCScreenEffect_TurnOn(u8 taskId);
 static void Task_PCScreenEffect_TurnOff(u8 taskId);
 
@@ -40,7 +40,7 @@ bool8 IsPCScreenEffectRunning_TurnOff(void)
     return FuncIsActiveTask(Task_PCScreenEffect_TurnOff);
 }
 
-static void BeginPCScreenEffect(TaskFunc func, u16 speed, UNUSED u16 unused, u8 priority)
+static void BeginPCScreenEffect(TaskFunc func, u16 speed, u16 unused, u8 priority)
 {
     u8 taskId = CreateTask(func, priority);
 

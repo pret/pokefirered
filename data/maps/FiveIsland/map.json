@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 8,
       "y": 5,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 16,
       "y": 10,
@@ -53,18 +55,12 @@
       "flag": "0"
     },
     {
+      "type": "clone",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "in_connection": true,
       "x": 32,
       "y": 9,
-      "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "56",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "0x0",
-      "flag": "0"
+      "target_local_id": 4,
+      "target_map": "MAP_FIVE_ISLAND_MEADOW"
     }
   ],
   "warp_events": [
@@ -73,28 +69,28 @@
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_HARBOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_FIVE_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 12,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_FIVE_ISLAND_HOUSE1",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 22,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_FIVE_ISLAND_HOUSE2",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

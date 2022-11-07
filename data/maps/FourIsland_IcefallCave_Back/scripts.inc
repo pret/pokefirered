@@ -25,19 +25,19 @@ FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene::
 	msgbox FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe
 	closemessage
 	playse SE_PIN
-	applymovement LOCALID_LORELEI, Movement_ExclamationMark
+	applymovement LOCALID_LORELEI, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_LORELEI, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement LOCALID_LORELEI, Movement_Delay48
+	applymovement LOCALID_LORELEI, Common_Movement_Delay48
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut
 	closemessage
-	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_LORELEI, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 18
-	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_LORELEI, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 35
 	applymovement LOCALID_ROCKET3, FourIsland_IcefallCave_Back_Movement_Rocket3FaceLorelei
@@ -81,7 +81,7 @@ FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene::
 	delay 50
 	applymovement LOCALID_LORELEI, FourIsland_IcefallCave_Back_Movement_LoreleiWalkToPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful

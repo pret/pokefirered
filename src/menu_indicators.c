@@ -82,7 +82,7 @@ static const struct ScrollIndicatorTemplate sScrollIndicatorTemplates[] =
 static const struct OamData sOamData_ScrollArrowIndicator =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -222,7 +222,7 @@ static const struct Subsprite sSubsprite_RedOutline8 =
 static const struct OamData sOamData_RedArrowCursor =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,

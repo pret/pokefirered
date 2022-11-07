@@ -11,7 +11,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/game_stat.h"
-#include "battle_string_ids.h"
+#include "constants/battle_string_ids.h"
 	.include "asm/macros/battle_script.inc"
 @ Define these here since misc_constants.inc conflicts with the C headers
 	.set NULL, 0
@@ -2964,20 +2964,20 @@ BattleScript_RivalBattleLostSkipMonRecall::
 	end2
 
 BattleScript_BattleTowerLost::
-	various8 BS_ATTACKER
+	getbattlersforrecall
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_BattleTowerLostLostSkipMonRecall
 	printfromtable gDoubleBattleRecallStrings
 	waitmessage B_WAIT_TIME_LONG
-	returnopponentmon1toball BS_ATTACKER
+	returnopponentmon1toball
 	waitstate
-	returnopponentmon2toball BS_ATTACKER
+	returnopponentmon2toball
 	waitstate
 BattleScript_BattleTowerLostLostSkipMonRecall::
 	trainerslidein BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
 	jumpifnotbattletype BATTLE_TYPE_DOUBLE, BattleScript_BattleTowerLostLostSkipDouble
-	printstring STRINGID_TRAINER2NAME
+	printstring STRINGID_TRAINER2WINTEXT
 BattleScript_BattleTowerLostLostSkipDouble::
 	end2
 
@@ -2995,7 +2995,7 @@ BattleScript_BattleTowerTrainerBattleWon::
 	jumpifnotbattletype BATTLE_TYPE_TRAINER_TOWER, BattleScript_BattleTowerEtcTrainerBattleWonSkipText
 	printstring STRINGID_TRAINER1LOSETEXT
 	jumpifnotbattletype BATTLE_TYPE_DOUBLE, BattleScript_BattleTowerEtcTrainerBattleWonSkipText
-	printstring STRINGID_TRAINER2CLASS
+	printstring STRINGID_TRAINER2LOSETEXT
 BattleScript_BattleTowerEtcTrainerBattleWonSkipText::
 	pickup
 	end2

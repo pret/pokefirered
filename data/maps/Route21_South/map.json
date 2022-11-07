@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 11,
       "y": 8,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 14,
       "y": 15,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 15,
       "y": 24,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 15,
       "y": 38,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 10,
       "y": 29,

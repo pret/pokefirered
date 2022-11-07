@@ -558,50 +558,61 @@ static bool8 RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *dest)
     return TRUE;
 }
 
-UNUSED
-static void sub_80FC9B8(u8 *q1, u8 mode)
+// Unused
+// Populates an array with a sequence of numbers (which numbers depends on the mode)
+// and sets the final element to the total of the other elements
+#define SEQ_ARRAY_MAX_SIZE 200
+static void PopulateArrayWithSequence(u8 *arr, u8 mode)
 {
     s32 i;
     u8 rval;
-    u16 r5 = 0;
+    u16 total = 0;
     static u8 counter;
 
     switch (mode)
     {
-        case 0:
-            for (i = 0; i < 200; i++)
-            {
-                q1[i] = i + 1;
-                r5 += i + 1;
-            }
-            *((u16 *)(q1 + i)) = r5;
-            break;
-        case 1:
-            for (i = 0; i < 100; i++)
-            {
-                q1[i] = i + 1;
-                r5 += i + 1;
-            }
-            *((u16 *)(q1 + 200)) = r5;
-            break;
-        case 2:
-            for (i = 0; i < 200; i++)
-            {
-                rval = Random();
-                q1[i] = rval;
-                r5 += rval;
-            }
-            *((u16 *)(q1 + i)) = r5;
-            break;
-        case 3:
-            for (i = 0; i < 200; i++)
-            {
-                q1[i] = i + 1 + counter;
-                r5 += (i + 1 + counter) & 0xFF;
-            }
-            *((u16 *)(q1 + i)) = r5;
-            counter++;
-            break;
+    case 0:
+        // Populate with numbers 1-200
+        // Total will be 20100
+        for (i = 0; i < SEQ_ARRAY_MAX_SIZE; i++)
+        {
+            arr[i] = i + 1;
+            total += i + 1;
+        }
+        *((u16 *)(arr + i)) = total;
+        break;
+    case 1:
+        // Populate with numbers 1-100
+        // Total will be 5050
+        for (i = 0; i < 100; i++)
+        {
+            arr[i] = i + 1;
+            total += i + 1;
+        }
+        *((u16 *)(arr + SEQ_ARRAY_MAX_SIZE)) = total;
+        break;
+    case 2:
+        // Populate with random numbers 0-255
+        // Total will be a number 0-51000
+        for (i = 0; i < SEQ_ARRAY_MAX_SIZE; i++)
+        {
+            rval = Random();
+            arr[i] = rval;
+            total += rval;
+        }
+        *((u16 *)(arr + i)) = total;
+        break;
+    case 3:
+        // Populate with numbers 1-200 + counter
+        // Total will be a number 20100-51000
+        for (i = 0; i < SEQ_ARRAY_MAX_SIZE; i++)
+        {
+            arr[i] = i + 1 + counter;
+            total += (i + 1 + counter) & 0xFF;
+        }
+        *((u16 *)(arr + i)) = total;
+        counter++;
+        break;
     }
 }
 

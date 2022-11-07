@@ -21,35 +21,35 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B2F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 6,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 11,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 1,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],

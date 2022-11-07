@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 16,
       "y": 5,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_TOWER_RIVAL"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CHANNELER",
       "x": 3,
       "y": 7,
@@ -48,14 +50,14 @@
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_TOWER_3F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 18,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_POKEMON_TOWER_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [

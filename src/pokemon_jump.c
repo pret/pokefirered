@@ -709,7 +709,7 @@ static void Task_StaticCountdown_Run(u8 taskId)
     u16 packet[RFU_PACKET_SIZE];
     s16 *data = gTasks[taskId].data;
 
-    if (gReceivedRemoteLinkPlayers != 0)
+    if (gReceivedRemoteLinkPlayers)
     {
         // Read link timer
         if (gRecvCmds[0][1] == LINKCMD_COUNTDOWN)
@@ -3053,8 +3053,8 @@ static void LoadPokeJumpGfx(void)
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        DrawWindowBorderWithStdpal3(0, 1, 0xE0);
-        LoadUserWindowBorderGfx(0, 0x00A, 0xD0);
+        LoadStdWindowGfxOnBg(0, 1, 0xE0);
+        LoadUserWindowGfx2(0, 0x00A, 0xD0);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -3532,8 +3532,8 @@ static const u8 sVenusaurStates[] = {
     [VINE_UPSWING_HIGHER]   = VENUSAUR_UP,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gUnknown_8479688, 0, TAG_DIGITS};
-static const struct SpritePalette sSpritePalette_Digits = {gUnknown_8479668, TAG_DIGITS};
+static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits_Gfx, 0, TAG_DIGITS};
+static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_DIGITS};
 
 static const u16 sPlayerNameWindowCoords_2Players[] = {
      6, 8,
@@ -4535,7 +4535,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
         {
             RemoveWindow(tWindowId);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
@@ -4554,7 +4554,7 @@ static void PrintRecordsText(u16 windowId)
     recordNums[1] = records->bestJumpScore;
     recordNums[2] = records->excellentsInRow;
 
-    TextWindow_SetStdFrame0_WithPal(windowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized5(windowId, FONT_2, gText_PkmnJumpRecords, 0, 0, TEXT_SKIP_DRAW, NULL, 1, 0);

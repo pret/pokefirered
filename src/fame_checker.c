@@ -530,7 +530,7 @@ static const struct SpriteTemplate sSpriteTemplate_SelectorCursor = {
     SPRITETAG_SELECTOR_CURSOR, SPRITETAG_SELECTOR_CURSOR, &sSelectorCursorOamData, sSelectorCursorAnims, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-static const u8 filler_845FC5C[8] = {}; // ???
+static const u8 sUnused[8] = {}; // ???
 
 static const struct OamData sQuestionMarkTileOamData = {
     .shape = ST_OAM_V_RECTANGLE,
@@ -667,7 +667,7 @@ static void MainCB2_LoadFameChecker(void)
             LoadPalette(gFameCheckerBgPals + 0x10, 0x10, 0x20);
             CopyToBgTilemapBufferRect(2, gFameCheckerBg2Tilemap, 0, 0, 32, 32);
             CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11);
-            LoadPalette(stdpal_get(2), 0xF0, 0x20);
+            LoadPalette(GetTextWindowPalette(2), 0xF0, 0x20);
             gMain.state++;
             break;
         case 4:
@@ -1104,7 +1104,7 @@ static bool8 CreateAllFlavorTextIcons(u8 who)
     {
         if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[who]].flavorTextFlags >> i) & 1)
         {
-            sFameCheckerData->spriteIds[i] = sub_805EB44(
+            sFameCheckerData->spriteIds[i] = CreateFameCheckerObject(
                 sFameCheckerArrayNpcGraphicsIds[sFameCheckerData->unlockedPersons[who] * 6 + i],
                 i,
                 47 * (i % 3) + 0x72,

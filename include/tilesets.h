@@ -1,15 +1,13 @@
-#ifndef GUARD_tilesets_H
-#define GUARD_tilesets_H
+#ifndef GUARD_TILESETS_H
+#define GUARD_TILESETS_H
 
-#include "global.h"
+extern const u32 gTilesetTiles_General[];
+extern const u16 gTilesetPalettes_General[][16];
 
-// Exported type declarations
+extern const u32 gTilesetTiles_GenericBuilding1[];
+extern const u16 gTilesetPalettes_GenericBuilding1[][16];
 
-// Exported RAM declarations
+extern const u32 gTilesetTiles_DepartmentStore[];
+extern const u16 gTilesetPalettes_DepartmentStore[][16];
 
-// Exported ROM declarations
-
-extern struct Tileset *gTilesetPointer_SecretBase;
-extern struct Tileset *gTilesetPointer_SecretBaseRedCave;
-
-#endif //GUARD_tilesets_H
+#endif // GUARD_TILESETS_H

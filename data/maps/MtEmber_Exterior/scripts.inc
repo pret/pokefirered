@@ -38,7 +38,7 @@ MtEmber_Exterior_EventScript_Grunt1Defeated::
 	end
 
 MtEmber_Exterior_EventScript_BattleGrunt1::
-	applymovement LOCALID_GRUNT1, Movement_FacePlayer
+	applymovement LOCALID_GRUNT1, Common_Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_ROCKET, 0
 	msgbox MtEmber_Exterior_Text_Grunt1Intro
@@ -65,7 +65,7 @@ MtEmber_Exterior_EventScript_Grunt2::
 	goto_if_eq VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4, MtEmber_Exterior_EventScript_BattleGrunt2
 	msgbox MtEmber_Exterior_Text_YoureInTheWayGetLost
 	closemessage
-	applymovement LOCALID_GRUNT2, Movement_FaceOriginalDirection
+	applymovement LOCALID_GRUNT2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -91,18 +91,18 @@ MtEmber_Exterior_EventScript_RocketPasswordScene::
 	message MtEmber_Exterior_Text_WhatsPasswordAgain
 	waitmessage
 	playse SE_PIN
-	applymovement LOCALID_GRUNT2, Movement_QuestionMark
+	applymovement LOCALID_GRUNT2, Common_Movement_QuestionMark
 	waitmovement 0
 	waitbuttonpress
 	msgbox MtEmber_Exterior_Text_FirstPasswordGoldeen
-	applymovement LOCALID_GRUNT1, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_GRUNT1, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_GRUNT1, Movement_ExclamationMark
+	applymovement LOCALID_GRUNT1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_GRUNT1, Movement_Delay48
+	applymovement LOCALID_GRUNT1, Common_Movement_Delay48
 	waitmovement 0
-	applymovement LOCALID_GRUNT2, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_GRUNT2, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	call MtEmber_Exterior_EventScript_RocketsFaceDown
 	msgbox MtEmber_Exterior_Text_SnoopsBeenListeningIn

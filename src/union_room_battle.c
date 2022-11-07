@@ -38,7 +38,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u8 gUnknown_84571A8[] = {1, 2, 3};
+static const u8 sTextColors[] = {1, 2, 3};
 
 static void SetUpPartiesAndStartBattle(void)
 {
@@ -58,7 +58,7 @@ static void SetUpPartiesAndStartBattle(void)
     }
     IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
     CalculatePlayerPartyCount();
-    gTrainerBattleOpponent_A = TRAINER_OPPONENT_C00;
+    gTrainerBattleOpponent_A = TRAINER_UNION_ROOM;
     SetMainCallback2(CB2_InitBattle);
 }
 
@@ -66,8 +66,8 @@ static void UnionRoomBattle_CreateTextPrinter(u8 windowId, const u8 * str, u8 x,
 {
     s32 letterSpacing = 1;
     s32 lineSpacing = 1;
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(gUnknown_84571A8[0]));
-    AddTextPrinterParameterized4(windowId, FONT_3, x, y, letterSpacing, lineSpacing, gUnknown_84571A8, speed, str);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(sTextColors[0]));
+    AddTextPrinterParameterized4(windowId, FONT_3, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
 }
 
 static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s32 speed)
@@ -121,7 +121,7 @@ void CB2_UnionRoomBattle(void)
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        TextWindow_SetStdFrame0_WithPal(0, 1, 0xD0);
+        LoadStdWindowGfx(0, 1, 0xD0);
         Menu_LoadStdPal();
         SetVBlankCallback(VBlankCB_UnionRoomBattle);
         gMain.state++;

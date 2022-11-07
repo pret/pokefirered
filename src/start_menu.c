@@ -113,15 +113,15 @@ static void CloseSaveStatsWindow(void);
 static void CloseStartMenu(void);
 
 static const struct MenuAction sStartMenuActionTable[] = {
-    { gStartMenuText_Pokedex, {.u8_void = StartMenuPokedexCallback} },
-    { gStartMenuText_Pokemon, {.u8_void = StartMenuPokemonCallback} },
-    { gStartMenuText_Bag, {.u8_void = StartMenuBagCallback} },
-    { gStartMenuText_Player, {.u8_void = StartMenuPlayerCallback} },
-    { gStartMenuText_Save, {.u8_void = StartMenuSaveCallback} },
-    { gStartMenuText_Option, {.u8_void = StartMenuOptionCallback} },
-    { gStartMenuText_Exit, {.u8_void = StartMenuExitCallback} },
-    { gStartMenuText_Retire, {.u8_void = StartMenuSafariZoneRetireCallback} },
-    { gStartMenuText_Player, {.u8_void = StartMenuLinkPlayerCallback} }
+    { gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback} },
+    { gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback} },
+    { gText_MenuBag, {.u8_void = StartMenuBagCallback} },
+    { gText_MenuPlayer, {.u8_void = StartMenuPlayerCallback} },
+    { gText_MenuSave, {.u8_void = StartMenuSaveCallback} },
+    { gText_MenuOption, {.u8_void = StartMenuOptionCallback} },
+    { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
+    { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
+    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} }
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -252,7 +252,7 @@ static void DrawSafariZoneStatsWindow(void)
     ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gUnknown_84162A9);
+    StringExpandPlaceholders(gStringVar4, gText_MenuSafariStats);
     AddTextPrinterParameterized(sSafariZoneStatsWindowId, FONT_2, gStringVar4, 4, 3, 0xFF, NULL);
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
@@ -394,7 +394,7 @@ void ShowStartMenu(void)
         StopPlayerAvatar();
     }
     OpenStartMenuWithFollowupFunc(Task_StartMenuHandleInput);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 StartCB_HandleInput(void)
@@ -575,7 +575,7 @@ static bool8 StartCB_Save2(void)
     case SAVECB_RETURN_OKAY:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         RestoreHelpContext();
         return TRUE;
     case SAVECB_RETURN_CANCEL:
@@ -587,7 +587,7 @@ static bool8 StartCB_Save2(void)
     case SAVECB_RETURN_ERROR:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         RestoreHelpContext();
         return TRUE;
     }
@@ -620,7 +620,7 @@ void Field_AskSaveTheGame(void)
 static void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
 {
     StringExpandPlaceholders(gStringVar4, str);
-    sub_80F7768(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterForMessage(TRUE);
     sSaveDialogIsPrinting = TRUE;
     sSaveDialogCB = saveDialogCB;
@@ -641,7 +641,7 @@ static void task50_save_game(u8 taskId)
         break;
     }
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
     RestoreHelpContext();
 }
 
@@ -870,7 +870,7 @@ bool32 DoSetUpSaveAfterLinkBattle(u8 *state)
         ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, sBGTemplates_AfterLinkSaveMessage, NELEMS(sBGTemplates_AfterLinkSaveMessage));
         InitWindows(sWindowTemplates_AfterLinkSaveMessage);
-        TextWindow_SetStdFrame0_WithPal(0, 0x008, 0xF0);
+        LoadStdWindowGfx(0, 0x008, 0xF0);
         break;
     case 3:
         ShowBg(0);
@@ -957,7 +957,7 @@ static void PrintSaveStats(void)
     u8 y;
     u8 x;
     sSaveStatsWindowId = AddWindow(&sSaveStatsWindowTemplate);
-    TextWindow_SetStdFrame0_WithPal(sSaveStatsWindowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(sSaveStatsWindowId, 0x21D, 0xD0);
     DrawStdFrameWithCustomTileAndPalette(sSaveStatsWindowId, FALSE, 0x21D, 0x0D);
     SaveStatToString(SAVE_STAT_LOCATION, gStringVar4, 8);
     x = (u32)(112 - GetStringWidth(FONT_2, gStringVar4, -1)) / 2;
@@ -995,7 +995,7 @@ static void CloseStartMenu(void)
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void AppendToList(u8 *list, u8 *cursor, u8 newEntry)

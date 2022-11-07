@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SS_ANNE",
       "x": 30,
       "y": 16,
@@ -35,35 +36,35 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 32,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_VERMILION_CITY",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 32,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_SSANNE_1F_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 33,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_SSANNE_1F_CORRIDOR",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 33,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_VERMILION_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],
@@ -74,7 +75,7 @@
       "y": 28,
       "elevation": 3,
       "item": "ITEM_LAVA_COOKIE",
-      "flag": "HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE",
+      "flag": "FLAG_HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE",
       "quantity": 1,
       "underfoot": false
     }

@@ -601,7 +601,7 @@ static void Task_CleanUp(u8 taskId)
 static const struct {
     u16 itemId;
     u16 animType;
-} gUnknown_8459634[2] = {
+} sItemAnimMap[2] = {
     {ITEM_RARE_CANDY, 0},
     {ITEM_POTION,     1}
 };
@@ -610,10 +610,10 @@ static u16 GetAnimTypeByItemId(u16 itemId)
 {
     int i;
 
-    for (i = 0; i < NELEMS(gUnknown_8459634); i++)
+    for (i = 0; i < ARRAY_COUNT(sItemAnimMap); i++)
     {
-        if (gUnknown_8459634[i].itemId == itemId)
-            return gUnknown_8459634[i].animType;
+        if (sItemAnimMap[i].itemId == itemId)
+            return sItemAnimMap[i].animType;
     }
 
     if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08)

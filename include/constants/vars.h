@@ -3,23 +3,25 @@
 
 #define VARS_START 0x4000
 
-// Temporary variables. Reset on map load.
-#define VAR_TEMP_0                          0x4000
-#define VAR_TEMP_1                          0x4001
-#define VAR_TEMP_2                          0x4002
-#define VAR_TEMP_3                          0x4003
-#define VAR_TEMP_4                          0x4004
-#define VAR_TEMP_5                          0x4005
-#define VAR_TEMP_6                          0x4006
-#define VAR_TEMP_7                          0x4007
-#define VAR_TEMP_8                          0x4008
-#define VAR_TEMP_9                          0x4009
-#define VAR_TEMP_A                          0x400A
-#define VAR_TEMP_B                          0x400B
-#define VAR_TEMP_C                          0x400C
-#define VAR_TEMP_D                          0x400D
-#define VAR_TEMP_E                          0x400E
-#define VAR_TEMP_F                          0x400F
+// Temporary variables. Temp vars are cleared every time a map is loaded.
+#define TEMP_VARS_START            0x4000
+#define VAR_TEMP_0                 (TEMP_VARS_START + 0x0)
+#define VAR_TEMP_1                 (TEMP_VARS_START + 0x1)
+#define VAR_TEMP_2                 (TEMP_VARS_START + 0x2)
+#define VAR_TEMP_3                 (TEMP_VARS_START + 0x3)
+#define VAR_TEMP_4                 (TEMP_VARS_START + 0x4)
+#define VAR_TEMP_5                 (TEMP_VARS_START + 0x5)
+#define VAR_TEMP_6                 (TEMP_VARS_START + 0x6)
+#define VAR_TEMP_7                 (TEMP_VARS_START + 0x7)
+#define VAR_TEMP_8                 (TEMP_VARS_START + 0x8)
+#define VAR_TEMP_9                 (TEMP_VARS_START + 0x9)
+#define VAR_TEMP_A                 (TEMP_VARS_START + 0xA)
+#define VAR_TEMP_B                 (TEMP_VARS_START + 0xB)
+#define VAR_TEMP_C                 (TEMP_VARS_START + 0xC)
+#define VAR_TEMP_D                 (TEMP_VARS_START + 0xD)
+#define VAR_TEMP_E                 (TEMP_VARS_START + 0xE)
+#define VAR_TEMP_F                 (TEMP_VARS_START + 0xF)
+#define TEMP_VARS_END              VAR_TEMP_F
 
 // Object event graphics IDs which can be changed by
 // script commands.
@@ -86,7 +88,7 @@
 #define VAR_0x4029                         0x4029
 #define VAR_0x402A                         0x402A
 #define VAR_0x402B                         0x402B
-#define VAR_RESET_RTC_ENABLE               0x402C
+#define VAR_0x402C                         0x402C
 #define VAR_0x402D                         0x402D
 #define VAR_0x402E                         0x402E
 
@@ -94,7 +96,7 @@
 
 #define VAR_ICE_STEP_COUNT                 0x4030
 #define VAR_STARTER_MON                    0x4031 // 0: Bulbasaur, 1: Squirtle, 2: Charmander
-#define VAR_0x4032                         0x4032
+#define VAR_RESET_RTC_ENABLE               0x4032
 #define VAR_ENIGMA_BERRY_AVAILABLE         0x4033
 
 #define VAR_0x4034                         0x4034
@@ -105,7 +107,7 @@
 #define VAR_FANCLUB_LOSE_FAN_TIMER         0x4039
 #define VAR_ELEVATOR_FLOOR                 0x403A
 #define VAR_RESORT_GORGEOUS_REWARD         0x403B
-#define VAR_0x403C                         0x403C
+#define VAR_0x403C                         0x403C // Set to 0x0302, never read
 #define VAR_HERACROSS_SIZE_RECORD          0x403D
 #define VAR_DEOXYS_INTERACTION_NUM         0x403E
 #define VAR_0x403F                         0x403F
@@ -158,7 +160,7 @@
 #define VAR_MAP_SCENE_PEWTER_CITY                                              0x406C
 #define VAR_0x406D                                                             0x406D
 #define VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE                        0x406E
-#define VAR_CABLE_CLUB_STATE                                                    0x406F
+#define VAR_CABLE_CLUB_STATE                                                   0x406F
 #define VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY                                    0x4070
 #define VAR_MAP_SCENE_CINNABAR_ISLAND                                          0x4071
 #define VAR_0x4072                                                             0x4072
@@ -230,13 +232,13 @@
 #define VAR_0x40B3                 0x40B3
 #define VAR_PORTHOLE               0x40B4
 #define VAR_EVENT_PICHU_SLOT       0x40B5
-#define VAR_0x40B6                 0x40B6
-#define VAR_0x40B7                 0x40B7
-#define VAR_0x40B8                 0x40B8
-#define VAR_0x40B9                 0x40B9
-#define VAR_0x40BA                 0x40BA
-#define VAR_0x40BB                 0x40BB
-#define VAR_0x40BC                 0x40BC
+#define VAR_MYSTERY_GIFT_1         0x40B6
+#define VAR_MYSTERY_GIFT_2         0x40B7
+#define VAR_MYSTERY_GIFT_3         0x40B8
+#define VAR_MYSTERY_GIFT_4         0x40B9
+#define VAR_MYSTERY_GIFT_5         0x40BA
+#define VAR_MYSTERY_GIFT_6         0x40BB
+#define VAR_MYSTERY_GIFT_7         0x40BC
 #define VAR_0x40BD                 0x40BD
 #define VAR_0x40BE                 0x40BE
 #define VAR_0x40BF                 0x40BF

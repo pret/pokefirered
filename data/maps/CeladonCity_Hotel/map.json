@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 5,
       "y": 4,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 3,
       "y": 6,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 9,
       "y": 7,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 2,
       "y": 6,
@@ -74,21 +78,21 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_CELADON_CITY",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 4,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CELADON_CITY",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 5,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_CELADON_CITY",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     }
   ],
   "coord_events": [],

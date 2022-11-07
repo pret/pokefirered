@@ -23,7 +23,6 @@
 #include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
-#include "battle_string_ids.h"
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -674,7 +673,7 @@ static const u8 sRubyLevelUpStatBoxStats[] =
 static const struct OamData sOamData_MonIconOnLvlUpBanner =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -814,8 +813,8 @@ static const u8 sBallCatchBonuses[] =
     [ITEM_SAFARI_BALL - ITEM_ULTRA_BALL] = 15
 };
 
-// not used
-static const u32 gUnknown_8250898 = 0xFF7EAE60;
+// unknown unused data
+static const u32 sUnused = 0xFF7EAE60;
 
 static void Cmd_attackcanceler(void)
 {
@@ -6125,7 +6124,7 @@ static void Cmd_various(void)
             gHitMarker &= ~HITMARKER_PLAYER_FAINTED;
         }
         break;
-    case VARIOUS_CASE_8:
+    case VARIOUS_GET_BATTLERS_FOR_RECALL:
         i = 0; // redundant
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         gActiveBattler = 1;

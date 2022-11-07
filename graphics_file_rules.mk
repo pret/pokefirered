@@ -30,6 +30,7 @@ BERRYPOUCHGFXDIR := graphics/berry_pouch
 HALLOFFAMEGFXDIR := graphics/hall_of_fame
 MAPPREVIEWGFXDIR := graphics/map_preview
 NAMINGGFXDIR := graphics/naming_screen
+WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -486,7 +487,7 @@ graphics/seagallop/water.4bpp: %.4bpp: %.png
 graphics/link/321start.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(TEXTWINDOWGFXDIR)/unk_8470B0C.4bpp: %.4bpp: %.png
+$(TEXTWINDOWGFXDIR)/signpost.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
 
 $(SLOTMACHINEGFXDIR)/unk_8466620.4bpp: %.4bpp: %.png
@@ -536,14 +537,20 @@ graphics/misc/emoticons.4bpp: %.4bpp: %.png
 $(ITEMMENUGFXDIR)/bag_tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55
 
-$(INTROGFXDIR)/unk_8402D54.4bpp: %.4bpp: %.png
+$(INTROGFXDIR)/scene_1/grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 397
 
-$(INTROGFXDIR)/unk_8406654.4bpp: %.4bpp: %.png
+$(INTROGFXDIR)/scene_2/plants.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 17
+
+$(INTROGFXDIR)/scene_2/nidorino_close.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 170
 
-$(INTROGFXDIR)/unk_8405B28.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 17
+$(INTROGFXDIR)/scene_2/gengar_close.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 114
+
+$(INTROGFXDIR)/scene_3/gengar_anim.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 348
 
 $(BATTLETERRAINGFXDIR)/building/terrain.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
@@ -664,3 +671,52 @@ $(NAMINGGFXDIR)/cursor_squished.4bpp: %.4bpp: %.png
 
 $(NAMINGGFXDIR)/cursor_filled.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
+
+
+$(WALLPAPERGFXDIR)/beach/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 60
+
+$(WALLPAPERGFXDIR)/cave/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 61
+
+$(WALLPAPERGFXDIR)/city/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 40
+
+$(WALLPAPERGFXDIR)/crag/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 54
+
+$(WALLPAPERGFXDIR)/desert/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 52
+
+$(WALLPAPERGFXDIR)/forest/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 53
+
+$(WALLPAPERGFXDIR)/pokecenter/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 57
+
+$(WALLPAPERGFXDIR)/river/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 63
+
+$(WALLPAPERGFXDIR)/savanna/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 45
+
+$(WALLPAPERGFXDIR)/seafloor/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 53
+
+$(WALLPAPERGFXDIR)/simple/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 25
+
+$(WALLPAPERGFXDIR)/sky/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 52
+
+$(WALLPAPERGFXDIR)/snow/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 51
+
+$(WALLPAPERGFXDIR)/stars/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 37
+
+$(WALLPAPERGFXDIR)/tiles/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 31
+
+$(WALLPAPERGFXDIR)/volcano/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 57

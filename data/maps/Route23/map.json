@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 15,
       "y": 149,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 8,
       "y": 140,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 14,
       "y": 123,
@@ -66,6 +69,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 16,
       "y": 112,
@@ -79,6 +83,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 10,
       "y": 94,
@@ -92,6 +97,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 14,
       "y": 61,
@@ -105,6 +111,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 6,
       "y": 35,
@@ -124,28 +131,28 @@
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 18,
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_2F",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 8,
       "y": 153,
       "elevation": 3,
       "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 154,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -535,7 +542,7 @@
       "y": 42,
       "elevation": 0,
       "item": "ITEM_FULL_RESTORE",
-      "flag": "HIDDEN_ITEM_ROUTE23_FULL_RESTORE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_FULL_RESTORE",
       "quantity": 1,
       "underfoot": false
     },
@@ -545,7 +552,7 @@
       "y": 72,
       "elevation": 0,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "HIDDEN_ITEM_ROUTE23_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     },
@@ -555,7 +562,7 @@
       "y": 101,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
-      "flag": "HIDDEN_ITEM_ROUTE23_MAX_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_MAX_ETHER",
       "quantity": 1,
       "underfoot": false
     },
@@ -565,7 +572,7 @@
       "y": 18,
       "elevation": 3,
       "item": "ITEM_LUM_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_LUM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_LUM_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -575,7 +582,7 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_SITRUS_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_SITRUS_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -585,7 +592,7 @@
       "y": 67,
       "elevation": 3,
       "item": "ITEM_ASPEAR_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_ASPEAR_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_ASPEAR_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -595,7 +602,7 @@
       "y": 128,
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
-      "flag": "HIDDEN_ITEM_ROUTE23_LEPPA_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_LEPPA_BERRY",
       "quantity": 1,
       "underfoot": false
     },
@@ -605,7 +612,7 @@
       "y": 8,
       "elevation": 3,
       "item": "ITEM_MAX_ELIXIR",
-      "flag": "HIDDEN_ITEM_ROUTE23_MAX_ELIXIR",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_MAX_ELIXIR",
       "quantity": 1,
       "underfoot": false
     },

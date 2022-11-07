@@ -38,7 +38,7 @@ SSAnne_Exterior_WalkDown::
 	return
 
 SSAnne_Exterior_WalkInPlaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 

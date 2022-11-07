@@ -36,7 +36,7 @@ static void FaintFromFieldPoison(u8 partyIdx)
     AdjustFriendship(pokemon, FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE);
     SetMonData(pokemon, MON_DATA_STATUS, &status);
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
-    StringGetEnd10(gStringVar1);
+    StringGet_Nickname(gStringVar1);
 }
 
 static bool32 MonFaintedFromPoison(u8 partyIdx)
@@ -77,7 +77,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             gSpecialVar_Result = TRUE;
         else
             gSpecialVar_Result = FALSE;
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }
@@ -86,7 +86,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
 void TryFieldPoisonWhiteOut(void)
 {
     CreateTask(Task_TryFieldPoisonWhiteOut, 80);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
 s32 DoPoisonFieldEffect(void)

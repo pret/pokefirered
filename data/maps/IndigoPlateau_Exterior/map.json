@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 11,
       "y": 6,
@@ -35,6 +36,7 @@
       "flag": "FLAG_HIDE_CREDITS_RIVAL"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 11,
       "y": 6,
@@ -54,7 +56,7 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

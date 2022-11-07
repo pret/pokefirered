@@ -68,7 +68,7 @@
 
 #define LINKTYPE_TRADE              0x1111  // trade
 #define LINKTYPE_0x1122              0x1122  // trade
-#define LINKTYPE_0x1133              0x1133  // trade
+#define LINKTYPE_TRADE_SETUP         0x1133
 #define LINKTYPE_0x1144              0x1144  // trade
 #define LINKTYPE_BATTLE              0x2211
 #define LINKTYPE_0x2222              0x2222  // unused battle?
@@ -78,10 +78,18 @@
 #define LINKTYPE_BATTLE_TOWER_50     0x2266
 #define LINKTYPE_BATTLE_TOWER_OPEN   0x2277
 #define LINKTYPE_BATTLE_TOWER        0x2288
-#define LINKTYPE_0x3311              0x3311
-#define LINKTYPE_0x3322              0x3322
+#define LINKTYPE_RECORD_MIX_BEFORE   0x3311
+#define LINKTYPE_RECORD_MIX_AFTER    0x3322
 #define LINKTYPE_BERRY_BLENDER_SETUP              0x4411
 #define LINKTYPE_CONTEST_GMODE              0x6601
+
+enum {
+    BLOCK_REQ_SIZE_NONE, // Identical to 200
+    BLOCK_REQ_SIZE_200,
+    BLOCK_REQ_SIZE_100,
+    BLOCK_REQ_SIZE_220,
+    BLOCK_REQ_SIZE_40,
+};
 
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
@@ -102,11 +110,10 @@ enum
     EXCHANGE_NOT_STARTED,
     EXCHANGE_COMPLETE,
     EXCHANGE_TIMED_OUT,
-    EXCHANGE_IN_PROGRESS,
-    EXCHANGE_STAT_4,
-    EXCHANGE_STAT_5,
-    EXCHANGE_STAT_6,
-    EXCHANGE_STAT_7
+    EXCHANGE_DIFF_SELECTIONS,
+    EXCHANGE_PLAYER_NOT_READY,
+    EXCHANGE_PARTNER_NOT_READY,
+    EXCHANGE_WRONG_NUM_PLAYERS,
 };
 
 enum
@@ -227,7 +234,7 @@ bool8 IsLinkPlayerDataExchangeComplete(void);
 u32 GetLinkPlayerTrainerId(u8);
 void ResetLinkPlayers(void);
 u8 GetMultiplayerId(void);
-u8 bitmask_all_link_players_but_self(void);
+u8 BitmaskAllOtherLinkPlayers(void);
 bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
@@ -269,17 +276,17 @@ void ClearLinkCallback_2(void);
 void Rfu_SetLinkStandbyCallback(void);
 void ConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
-bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType);
+bool8 SendBlockRequest(u8 blockRequestType);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
 void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
 void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 isConnectionError);
-u8 sub_800A8D4(void);
-void sub_800AA24(void);
-void sub_800A900(u8 a0);
-u8 sub_800A8A4(void);
-void sub_800A9A4(void);
+u8 GetLinkPlayerCountAsBitFlags(void);
+void ResetLinkPlayerCount(void);
+void SaveLinkPlayers(u8 numPlayers);
+u8 GetSavedLinkPlayerCountAsBitFlags(void);
+void CheckLinkPlayersMatchSaved(void);
 void SetLocalLinkPlayerId(u8 playerId);
 bool32 IsSendingKeysToLink(void);
 u32 GetLinkRecvQueueLength(void);

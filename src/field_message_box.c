@@ -1,17 +1,10 @@
 #include "global.h"
+#include "field_message_box.h"
 #include "gflib.h"
 #include "new_menu_helpers.h"
 #include "quest_log.h"
 #include "script.h"
 #include "text_window.h"
-
-enum
-{
-    FIELD_MESSAGE_BOX_HIDDEN,
-    FIELD_MESSAGE_BOX_UNUSED,
-    FIELD_MESSAGE_BOX_NORMAL,
-    FIELD_MESSAGE_BOX_AUTO_SCROLL,
-};
 
 static EWRAM_DATA u8 sMessageBoxType = 0;
 
@@ -35,12 +28,12 @@ static void Task_DrawFieldMessageBox(u8 taskId)
         if (gQuestLogState == QL_STATE_PLAYBACK)
         {
             gTextFlags.autoScroll = TRUE;
-            TextWindow_LoadTilesStdFrame1(0, 0x200);
+            LoadQuestLogWindowTiles(0, 0x200);
         }
-        else if (!IsMsgSignPost())
+        else if (!IsMsgSignpost())
             LoadStdWindowFrameGfx();
         else
-            LoadSignPostWindowFrameGfx();
+            LoadSignpostWindowFrameGfx();
         task->data[0]++;
         break;
     case 1:

@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 11,
       "y": 5,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 14,
       "y": 6,
@@ -55,6 +58,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 4,
       "y": 4,
@@ -68,6 +72,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 3,
       "y": 1,
@@ -81,6 +86,7 @@
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
+      "type": "object",
       "graphics_id": "0",
       "x": 2,
       "y": 1,
@@ -100,14 +106,14 @@
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_SEVEN_ISLAND_POKEMON_CENTER_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

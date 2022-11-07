@@ -180,7 +180,7 @@ u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseT
         palette = 15 * 16;
     else
         palette *= 16;
-    LoadPalette(stdpal_get(2), palette, 0x20);
+    LoadPalette(GetTextWindowPalette(2), palette, 0x20);
     return sTopBarWindowId;
 }
 
@@ -534,7 +534,7 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8
 
     sYesNoWindowId = AddWindow(window);
     DrawStdFrameWithCustomTileAndPalette(sYesNoWindowId, 1, baseTileNum, paletteNum);
-    textSubPrinter.currentChar = gUnknown_841623D;
+    textSubPrinter.currentChar = gText_YesNo;
     textSubPrinter.windowId = sYesNoWindowId;
     textSubPrinter.fontId = fontId;
     textSubPrinter.x = GetMenuCursorDimensionByFont(fontId, 0) + left;

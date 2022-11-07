@@ -55,8 +55,8 @@
 #define PARTY_MENU_TYPE_FIELD                     0 
 #define PARTY_MENU_TYPE_IN_BATTLE                 1 
 #define PARTY_MENU_TYPE_CONTEST                   2 
-#define PARTY_MENU_TYPE_CHOOSE_MON                3 
-#define PARTY_MENU_TYPE_CHOOSE_HALF               4  // multi battles, eReader battles, and some battle facilities
+#define PARTY_MENU_TYPE_CHOOSE_SINGLE_MON         3 
+#define PARTY_MENU_TYPE_CHOOSE_MULTIPLE_MONS      4  // multi battles, eReader battles, and some battle facilities
 #define PARTY_MENU_TYPE_MULTI_SHOWCASE            5
 #define PARTY_MENU_TYPE_DAYCARE                   6 
 #define PARTY_MENU_TYPE_MOVE_RELEARNER            7 
@@ -127,5 +127,12 @@
 #define SELECTWINDOW_ITEM     1
 #define SELECTWINDOW_MAIL     2
 #define SELECTWINDOW_MOVES    3
+
+enum
+{
+    CHOOSE_MONS_FOR_CABLE_CLUB_BATTLE,
+    CHOOSE_MONS_FOR_BATTLE_TOWER,
+    CHOOSE_MONS_FOR_UNION_ROOM_BATTLE,
+};
 
 #endif // GUARD_CONSTANTS_PARTY_MENU_H

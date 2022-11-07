@@ -9,15 +9,15 @@
 #include "event_data.h"
 #include "constants/moves.h"
 
-static void sub_80BF97C(u8 taskId);
+static void Task_ChoosePartyMon(u8 taskId);
 
 void ChoosePartyMon(void)
 {
     u8 taskId;
 
-    ScriptContext2_Enable();
-    taskId = CreateTask(sub_80BF97C, 10);
-    gTasks[taskId].data[0] = PARTY_MENU_TYPE_CHOOSE_MON;
+    LockPlayerFieldControls();
+    taskId = CreateTask(Task_ChoosePartyMon, 10);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_CHOOSE_SINGLE_MON;
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 
@@ -25,13 +25,13 @@ void SelectMoveTutorMon(void)
 {
     u8 taskId;
 
-    ScriptContext2_Enable();
-    taskId = CreateTask(sub_80BF97C, 10);
+    LockPlayerFieldControls();
+    taskId = CreateTask(Task_ChoosePartyMon, 10);
     gTasks[taskId].data[0] = PARTY_MENU_TYPE_MOVE_RELEARNER;
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
 }
 
-static void sub_80BF97C(u8 taskId)
+static void Task_ChoosePartyMon(u8 taskId)
 {
     if (!gPaletteFade.active)
     {

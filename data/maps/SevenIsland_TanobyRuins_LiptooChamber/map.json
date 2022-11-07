@@ -21,7 +21,7 @@
       "y": 15,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_TANOBY_RUINS",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

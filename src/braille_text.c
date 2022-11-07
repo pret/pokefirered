@@ -4,7 +4,11 @@
 #include "text.h"
 #include "sound.h"
 
-static const u8 gUnknown_846FB08[] = {1, 2, 4};
+static const u8 sScrollDistances[] = {
+    [OPTIONS_TEXT_SPEED_SLOW] = 1,
+    [OPTIONS_TEXT_SPEED_MID] = 2,
+    [OPTIONS_TEXT_SPEED_FAST] = 4,
+};
 static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("graphics/fonts/font6.fwjpnfont");
 
 static void DecompressGlyphFont6(u16);
@@ -163,15 +167,15 @@ u16 Font6Func(struct TextPrinter *textPrinter)
         case 4:
             if (textPrinter->scrollDistance)
             {
-                if (textPrinter->scrollDistance < gUnknown_846FB08[gSaveBlock2Ptr->optionsTextSpeed])
+                if (textPrinter->scrollDistance < sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed])
                 {
                     ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance = 0;
                 }
                 else
                 {
-                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, gUnknown_846FB08[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                    textPrinter->scrollDistance -= gUnknown_846FB08[gSaveBlock2Ptr->optionsTextSpeed];
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                    textPrinter->scrollDistance -= sScrollDistances[gSaveBlock2Ptr->optionsTextSpeed];
                 }
                 CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
             }

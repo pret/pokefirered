@@ -8,7 +8,9 @@
 #include "constants/flags.h"
 #include "constants/vars.h"
 #include "constants/species.h"
+#include "constants/pokedex.h"
 #include "constants/easy_chat.h"
+#include "constants/rgb.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -181,8 +183,8 @@ struct Pokedex
 {
     /*0x00*/ u8 order;
     /*0x01*/ u8 mode;
-    /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
-    /*0x03*/ u8 unknown2; // set to 0xB9 when national dex is first enabled
+    /*0x02*/ u8 unused; // set to 0xDA, never read
+    /*0x03*/ u8 nationalMagic; // set to 0xB9 when national dex is first enabled
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
@@ -813,7 +815,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    s8 height;
+    s8 elevation;
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

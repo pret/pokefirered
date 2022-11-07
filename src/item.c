@@ -75,7 +75,7 @@ void CopyItemName(u16 itemId, u8 * dest)
     if (itemId == ITEM_ENIGMA_BERRY)
     {
         StringCopy(dest, GetBerryInfo(ITEM_TO_BERRY(ITEM_ENIGMA_BERRY))->name);
-        StringAppend(dest, gUnknown_84162BD);
+        StringAppend(dest, gText_Berry);
     }
     else
     {
@@ -611,7 +611,7 @@ void TrySetObtainedItemQuestLogEvent(u16 itemId)
 
 u16 SanitizeItemId(u16 itemId)
 {
-    if (itemId >= ITEM_N_A)
+    if (itemId >= ITEMS_COUNT)
         return ITEM_NONE;
     return itemId;
 }

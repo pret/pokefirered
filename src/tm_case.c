@@ -520,13 +520,13 @@ static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
     if (itemId >= ITEM_HM01)
     {
         StringAppend(gStringVar4, sText_ClearTo18);
-        StringAppend(gStringVar4, gOtherText_UnkF9_08_Clear_01);
+        StringAppend(gStringVar4, gText_NumberClear01);
         ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_HM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringAppend(gStringVar4, gStringVar1);
     }
     else
     {
-        StringAppend(gStringVar4, gOtherText_UnkF9_08_Clear_01);
+        StringAppend(gStringVar4, gText_NumberClear01);
         ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar4, gStringVar1);
     }
@@ -953,7 +953,7 @@ static void Task_SelectTMAction_Type3(u8 taskId)
 
     if (!itemid_is_unique(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])))
     {
-        sTMCaseDynamicResources->savedCallback = Cb2_ReturnToPSS;
+        sTMCaseDynamicResources->savedCallback = CB2_ReturnToPokeStorage;
         Task_BeginFadeOutFromTMCase(taskId);
     }
     else
@@ -1290,11 +1290,11 @@ static void InitWindowTemplatesAndPals(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x5B, 0xE0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x64, 0xB0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x78, 0xD0);
-    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
-    LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
+    LoadUserWindowGfx(0, 0x5B, 0xE0);
+    LoadMenuMessageWindowGfx(0, 0x64, 0xB0);
+    LoadStdWindowGfx(0, 0x78, 0xD0);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xA0, 0x20);
     LoadPalette(sPal3Override, 0xF6, 0x04);
     LoadPalette(sPal3Override, 0xD6, 0x04);
     ListMenuLoadStdPalAt(0xc0, 0x01);

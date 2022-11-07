@@ -15,7 +15,6 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
-#include "battle_string_ids.h"
 #include "reshow_battle_screen.h"
 #include "teachy_tv.h"
 #include "constants/songs.h"
@@ -182,8 +181,8 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
         PokedudeCmdEnd,
     };
 
-// not used
-static const u8 gUnknown_8479000[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
+// unknown unused data
+static const u8 sUnused[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
 
 #define pdHealthboxPal1  simulatedInputState[0]
 #define pdHealthboxPal2  simulatedInputState[1]
@@ -239,8 +238,8 @@ static void CompleteOnBattlerSpritePosX_0(void)
         }
         else if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
         {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 0;
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 0;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
             FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
             FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
             PokedudeBufferExecCompleted();
@@ -279,8 +278,8 @@ static void SwitchIn_CleanShinyAnimShowSubstitute(void)
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
         && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
         FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
         FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
         if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
@@ -423,10 +422,10 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
         && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim
         && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = FALSE;
         FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
         FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
         CreateTask(Task_PlayerController_RestoreBgmAfterCry, 10);
@@ -730,7 +729,7 @@ static void PokedudeHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(1, size, monData);
+    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
     PokedudeBufferExecCompleted();
 }
 
@@ -1307,10 +1306,10 @@ static void PokedudeHandleLoadMonSprite(void)
     y = GetBattlerSpriteDefault_Y(gActiveBattler);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                     GetBattlerSpriteCoord(gActiveBattler, 2),
+                                                     GetBattlerSpriteCoord(gActiveBattler, BATTLER_COORD_X_2),
                                                      y,
                                                      GetBattlerSpriteSubpriority(gActiveBattler));
-    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = species;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
@@ -1351,13 +1350,13 @@ static void PokedudeHandleDrawTrainerPic(void)
 {
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
-        DecompressTrainerBackPalette(BACK_PIC_POKEDUDE, gActiveBattler);
-        SetMultiuseSpriteTemplateToTrainerBack(BACK_PIC_POKEDUDE, GetBattlerPosition(gActiveBattler));
+        DecompressTrainerBackPalette(TRAINER_BACK_PIC_POKEDUDE, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_POKEDUDE, GetBattlerPosition(gActiveBattler));
         gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                          80,
-                                                         (8 - gTrainerBackPicCoords[BACK_PIC_POKEDUDE].size) * 4 + 80,
+                                                         (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_POKEDUDE].size) * 4 + 80,
                                                          30);
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 240;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
         gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
@@ -1371,7 +1370,7 @@ static void PokedudeHandleDrawTrainerPic(void)
                                                          176,
                                                          (8 - gTrainerFrontPicCoords[tranerPicid].size) * 4 + 40,
                                                          GetBattlerSpriteSubpriority(gActiveBattler));
-        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -240;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[tranerPicid].tag);
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum;
@@ -1384,11 +1383,11 @@ static void PokedudeHandleDrawTrainerPic(void)
 
 static void PokedudeHandleTrainerSlide(void)
 {
-    DecompressTrainerBackPalette(BACK_PIC_POKEDUDE, gActiveBattler);
-    SetMultiuseSpriteTemplateToTrainerBack(BACK_PIC_POKEDUDE, GetBattlerPosition(gActiveBattler));
+    DecompressTrainerBackPalette(TRAINER_BACK_PIC_POKEDUDE, gActiveBattler);
+    SetMultiuseSpriteTemplateToTrainerBack(TRAINER_BACK_PIC_POKEDUDE, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
                                                      80,
-                                                     (8 - gTrainerBackPicCoords[BACK_PIC_POKEDUDE].size) * 4 + 80,
+                                                     (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_POKEDUDE].size) * 4 + 80,
                                                      30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
@@ -1497,7 +1496,7 @@ static void PokedudeDoMoveAnimation(void)
     case 1:
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         {
-            SetBattlerSpriteAffineMode(0);
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
             DoMoveAnim(move);
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 2;
         }
@@ -1506,7 +1505,7 @@ static void PokedudeDoMoveAnimation(void)
         gAnimScriptCallback();
         if (!gAnimScriptActive)
         {
-            SetBattlerSpriteAffineMode(1);
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
             if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute)
                 InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 3;
@@ -1859,7 +1858,7 @@ static void PokedudeHandleIntroTrainerBallThrow(void)
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[BACK_PIC_POKEDUDE].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_POKEDUDE].data, 0x100 + paletteNum * 16, 32);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
     taskId = CreateTask(Task_StartSendOutAnim, 5);
     gTasks[taskId].data[0] = gActiveBattler;
@@ -1879,7 +1878,7 @@ static void StartSendOutAnim(u8 battlerId)
     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                GetBattlerSpriteCoord(battlerId, 2),
+                                                GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
                                                 GetBattlerSpriteDefault_Y(battlerId),
                                                 GetBattlerSpriteSubpriority(battlerId));
     gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];

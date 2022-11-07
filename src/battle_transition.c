@@ -478,7 +478,7 @@ static const struct SpriteTemplate sSpriteTemplate_SlidingPokeball =
 static const struct OamData sOamData_Unused =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = 0,
     .mosaic = FALSE,
     .bpp = 0,
@@ -1076,7 +1076,7 @@ bool8 FldEff_Pokeball(void)
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_SlidingPokeball, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     
     gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].data[0] = gFieldEffectArguments[2];
     gSprites[spriteId].data[1] = gFieldEffectArguments[3];
     gSprites[spriteId].data[2] = -1;

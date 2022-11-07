@@ -342,7 +342,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 14:
-        ItemMenuIcons_CreateInsertIndicatorBarHidden();
+        CreateSwapLine();
         gMain.state++;
         break;
     case 15:
@@ -529,7 +529,7 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
         }
         else
         {
-            CreateItemMenuIcon(ITEM_N_A, sStateDataPtr->itemMenuIconSlot);
+            CreateItemMenuIcon(ITEMS_COUNT, sStateDataPtr->itemMenuIconSlot);
             desc = gText_ReturnToPC;
         }
         sStateDataPtr->itemMenuIconSlot ^= 1;
@@ -774,8 +774,8 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, 0x00);
     ItemPc_AddTextPrinterParameterized(1, FONT_2, gStringVar4, 0, 3, 2, 3, 0, 0);
-    ItemMenuIcons_MoveInsertIndicatorBar(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(FALSE);
+    UpdateSwapLinePos(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    SetSwapLineInvisibility(FALSE);
     ItemPc_PrintOrRemoveCursor(data[0], 2);
     gTasks[taskId].func = Task_ItemPcMoveItemModeRun;
 }
@@ -786,7 +786,7 @@ static void Task_ItemPcMoveItemModeRun(u8 taskId)
 
     ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
-    ItemMenuIcons_MoveInsertIndicatorBar(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    UpdateSwapLinePos(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -814,7 +814,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
             sListMenuState.row--;
         ItemPc_BuildListMenuTemplate();
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-        ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
+        SetSwapLineInvisibility(TRUE);
         gTasks[taskId].func = Task_ItemPcMain;
     }
 }
@@ -828,7 +828,7 @@ static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
         sListMenuState.row--;
     ItemPc_BuildListMenuTemplate();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
+    SetSwapLineInvisibility(TRUE);
     gTasks[taskId].func = Task_ItemPcMain;
 }
 
@@ -1069,11 +1069,11 @@ static void ItemPc_InitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x3C0, 0xE0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x3A3, 0xC0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x3AC, 0xB0);
-    LoadPalette(stdpal_get(2), 0xD0, 0x20);
-    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
+    LoadUserWindowGfx(0, 0x3C0, 0xE0);
+    LoadStdWindowGfx(0, 0x3A3, 0xC0);
+    LoadMenuMessageWindowGfx(0, 0x3AC, 0xB0);
+    LoadPalette(GetTextWindowPalette(2), 0xD0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
     {
         FillWindowPixelBuffer(i, 0x00);

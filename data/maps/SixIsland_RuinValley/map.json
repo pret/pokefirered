@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 24,
       "y": 25,
@@ -35,6 +36,7 @@
       "flag": "FLAG_HIDE_RUIN_VALLEY_SCIENTIST"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 32,
       "y": 11,
@@ -48,6 +50,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 33,
       "y": 16,
@@ -61,6 +64,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 31,
       "y": 24,
@@ -74,6 +78,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 14,
       "y": 10,
@@ -87,6 +92,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 21,
       "y": 29,
@@ -100,6 +106,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 17,
       "y": 10,
@@ -113,6 +120,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 17,
       "y": 12,
@@ -126,6 +134,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 18,
       "y": 11,
@@ -139,6 +148,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
       "y": 33,
@@ -152,6 +162,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
       "y": 34,
@@ -165,6 +176,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 41,
       "y": 32,
@@ -178,6 +190,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 41,
       "y": 33,
@@ -191,6 +204,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 42,
       "y": 33,
@@ -204,6 +218,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 33,
@@ -217,6 +232,7 @@
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 19,
       "y": 11,
@@ -230,6 +246,7 @@
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 43,
       "y": 32,
@@ -249,7 +266,7 @@
       "y": 24,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

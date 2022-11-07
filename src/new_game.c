@@ -130,7 +130,7 @@ void NewGameInitData(void)
     ClearPlayerLinkBattleRecords();
     InitHeracrossSizeRecord();
     InitMagikarpSizeRecord();
-    sub_806E190();
+    EnableNationalPokedex_RSE();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
@@ -146,7 +146,7 @@ void NewGameInitData(void)
     InitMEventData();
     SetAllRenewableItemFlags();
     WarpToPlayersRoom();
-    ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
+    RunScriptImmediately(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
 }

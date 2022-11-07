@@ -685,7 +685,7 @@ static void SetUpListMenuTemplate(void)
 static void GetBerryNameAndIndexForMenu(u8 * dest, u16 itemId)
 {
     StringCopy(gStringVar4, gText_FontSize0);
-    StringAppend(gStringVar4, gOtherText_UnkF9_08_Clear_01);
+    StringAppend(gStringVar4, gText_NumberClear01);
     ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringAppend(gStringVar4, gStringVar1);
     CopyItemName(itemId, gStringVar1);
@@ -709,9 +709,9 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
     }
     DestroyItemMenuIcon(sResources->itemMenuIconId ^ 1);
     if (sResources->listMenuNumItems != itemIndex)
-        sub_80989A0(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, itemIndex), sResources->itemMenuIconId);
+        CreateBerryPouchItemIcon(BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, itemIndex), sResources->itemMenuIconId);
     else
-        sub_80989A0(ITEM_N_A, sResources->itemMenuIconId);
+        CreateBerryPouchItemIcon(ITEMS_COUNT, sResources->itemMenuIconId);
     sResources->itemMenuIconId ^= 1;
     PrintSelectedBerryDescription(itemIndex);
 }
@@ -1074,7 +1074,7 @@ static void Task_BerryPouch_Use(u8 taskId)
         else
             ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
     }
-    else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == 1)
+    else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_TYPE_PARTY_MENU)
         Task_Give_PrintThereIsNoPokemon(taskId);
     else
         ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
@@ -1258,7 +1258,7 @@ static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId)
 
 static void Task_ContextMenu_FromPokemonPC(u8 taskId)
 {
-    sResources->exitCallback = Cb2_ReturnToPSS;
+    sResources->exitCallback = CB2_ReturnToPokeStorage;
     gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
 }
 
@@ -1411,10 +1411,10 @@ static void BerryPouchInitWindows(void)
     u8 i;
     InitWindows(sWindowTemplates_Main);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x001, 0xE0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x013, 0xD0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x00A, 0xC0);
-    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
+    LoadUserWindowGfx(0, 0x001, 0xE0);
+    LoadMenuMessageWindowGfx(0, 0x013, 0xD0);
+    LoadStdWindowGfx(0, 0x00A, 0xC0);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     PutWindowTilemap(0);

@@ -2984,7 +2984,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
         {
             RemoveWindow(tWindowId);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
@@ -3002,7 +3002,7 @@ static void PrintRecordsText(u8 windowId)
     recordNums[1] = gSaveBlock2Ptr->berryPick.bestScore;
     recordNums[2] = gSaveBlock2Ptr->berryPick.berriesPickedInRow;
 
-    TextWindow_SetStdFrame0_WithPal(windowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_2, sRecordsTexts[0], 1, 1, TEXT_SKIP_DRAW, NULL);
@@ -4160,13 +4160,13 @@ static void ResetBerryAndStatusBarSprites(void)
 
 static void LoadWindowFrameGfx(u8 frameId)
 {
-    LoadBgTiles(BG_INTERFACE, GetWindowFrameTilesPal(frameId)->tiles, 0x120, 1);
-    LoadPalette(GetWindowFrameTilesPal(frameId)->palette, 0xA0, 0x20);
+    LoadBgTiles(BG_INTERFACE, GetUserWindowGraphics(frameId)->tiles, 0x120, 1);
+    LoadPalette(GetUserWindowGraphics(frameId)->palette, 0xA0, 0x20);
 }
 
-static void LoadUserWindowFrameGfx(void)
+static void DBP_LoadStdWindowGfx(void)
 {
-    TextWindow_SetStdFrame0_WithPal(0, 0xA, 0xB0);
+    LoadStdWindowGfx(0, 0xA, 0xB0);
 }
 
 static void ResetGfxState(void)
@@ -4341,7 +4341,7 @@ static void LoadGfx(void)
         break;
     case 4:
         LoadWindowFrameGfx(gSaveBlock2Ptr->optionsWindowFrameType);
-        LoadUserWindowFrameGfx();
+        DBP_LoadStdWindowGfx();
         sGfx->state++;
         break;
     default:
@@ -4942,7 +4942,7 @@ static bool32 LoadBgGfx(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(stdpal_get(3), 0xD0, 0x20);
+        LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
         break;
     default:
         sGfx->loadState = 0;

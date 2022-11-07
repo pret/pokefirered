@@ -47,6 +47,9 @@ sound/**/*.bin
 sound/songs/midi/*.s
 src/data/items.h
 src/data/wild_encounters.h
+src/data/region_map/region_map_entries.h
+src/data/region_map/region_map_entry_strings.h
+src/data/region_map/porymap_config.json
 tags
 tools/agbcc
 tools/binutils
@@ -54,7 +57,8 @@ types_*.taghl
 !.github/calcrom/calcrom.pl
 !sound/programmable_wave_samples/*.pcm
 _Deparsed_XSubs.pm
-porymap.project.cfg
+porymap.*.cfg
+prefabs.json
 .vscode/*.*
 *.js
 *.sym

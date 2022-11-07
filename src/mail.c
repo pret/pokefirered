@@ -560,7 +560,7 @@ static bool8 DoInitMailView(void)
         CopyBgTilemapBufferToVram(2);
         break;
     case 12:
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         gPlttBufferUnfaded[15 * 16 + 10] = sGfxHeaders[sMailViewResources->mailType].textpals[0];
         gPlttBufferFaded[15 * 16 + 10] = sGfxHeaders[sMailViewResources->mailType].textpals[0];
         gPlttBufferUnfaded[15 * 16 + 11] = sGfxHeaders[sMailViewResources->mailType].textpals[1];

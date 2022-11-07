@@ -57,7 +57,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         if (!QL_IS_PLAYBACK_STATE)
         {
@@ -288,7 +288,8 @@ static void CrackedFloorPerStepCallback(u8 taskId)
     }
 }
 
-static void sub_806ED38(void)
+// Unused
+static void SetHasPokedexAndPokemon(void)
 {
     FlagSet(FLAG_SYS_POKEDEX_GET);
     FlagSet(FLAG_SYS_POKEMON_GET);

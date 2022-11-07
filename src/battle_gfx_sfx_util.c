@@ -146,8 +146,8 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
     }
 }
 
-// not used
-UNUSED static void UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
+// Unused
+static void DoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
 {
     sprite->animPaused = 1;
     sprite->callback = SpriteCallbackDummy;
@@ -452,7 +452,7 @@ void DecompressTrainerBackPalette(u16 index, u8 palette)
     LoadCompressedPalette(gTrainerBackPicPaletteTable[index].data, (palette + 16) * 16, 0x20);
 }
 
-void BattleGfxSfxDummy3(u8 a1)
+void BattleGfxSfxDummy3(u8 gender)
 {
 }
 
@@ -894,12 +894,12 @@ void LoadAndCreateEnemyShadowSprites(void)
 
     LoadCompressedSpriteSheetUsingHeap(&gSpriteSheet_EnemyShadow);
     battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-    gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, 0), GetBattlerSpriteCoord(battlerId, 1) + 29, 0xC8);
+    gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X), GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 29, 0xC8);
     gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
     if (IsDoubleBattle())
     {
         battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, 0), GetBattlerSpriteCoord(battlerId, 1) + 29, 0xC8);
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X), GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 29, 0xC8);
         gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
     }
 }

@@ -1393,7 +1393,7 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 spriteId;
 
     rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, sNamingScreen->monSpecies);
-    spriteId = AddPseudoObjectEvent(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
+    spriteId = CreateObjectGraphicsSprite(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
 }
@@ -1440,7 +1440,7 @@ static void NamingScreen_CreateRivalIcon(void)
     const struct SubspriteTable * tables_p;
     u8 spriteId;
 
-    MakeObjectTemplateFromObjectEventGraphicsInfo(OBJ_EVENT_GFX_RED_NORMAL, SpriteCallbackDummy, &template, &tables_p);
+    CopyObjectGraphicsInfoToSpriteTemplate(OBJ_EVENT_GFX_RED_NORMAL, SpriteCallbackDummy, &template, &tables_p);
 
     template.tileTag = sheet.tag;
     template.paletteTag = palette.tag;
@@ -1874,7 +1874,7 @@ static void LoadPalettes(void)
 {
     LoadPalette(gNamingScreenMenu_Pal, 0, sizeof(gNamingScreenMenu_Pal));
     LoadPalette(gNamingScreenKeyboard_Pal, 0xA0, 0x20);
-    LoadPalette(stdpal_get(2), 0xB0, 0x20);
+    LoadPalette(GetTextWindowPalette(2), 0xB0, 0x20);
 }
 
 static void DecompressToBgTilemapBuffer(u8 bg, const u32 *src)

@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 3,
@@ -29,6 +30,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 6,
       "y": 2,
@@ -48,14 +50,14 @@
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 1,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_MT_EMBER_RUBY_PATH_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

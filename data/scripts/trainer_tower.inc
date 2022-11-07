@@ -109,9 +109,9 @@ TrainerTower_EventScript_TriggerBattle::
 
 TrainerTower_EventScript_DoSingleBattle:
 	ttower_encountermusic
-	applymovement LOCALID_TRAINER_SINGLES, Movement_ExclamationMark
+	applymovement LOCALID_TRAINER_SINGLES, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_SINGLES, Movement_Delay48
+	applymovement LOCALID_TRAINER_SINGLES, Common_Movement_Delay48
 	waitmovement 0
 	setvar DISABLE_SINGLES_TRIGGER, TRUE
 	applymovement LOCALID_TRAINER_SINGLES, TrainerTower_Movement_SingleTrainerApproach
@@ -144,9 +144,9 @@ TrainerTower_EventScript_DoKnockoutBattle::
 
 TrainerTower_EventScript_DoKnockoutBattle1:
 	ttower_encountermusic
-	applymovement LOCALID_TRAINER_KNOCKOUT, Movement_ExclamationMark
+	applymovement LOCALID_TRAINER_KNOCKOUT, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_KNOCKOUT, Movement_Delay48
+	applymovement LOCALID_TRAINER_KNOCKOUT, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_TRAINER_KNOCKOUT, TrainerTower_Movement_BottomKnockoutTrainerApproach
 	waitmovement 0
@@ -154,9 +154,9 @@ TrainerTower_EventScript_DoKnockoutBattle1:
 
 TrainerTower_EventScript_DoKnockoutBattle2::
 	ttower_encountermusic
-	applymovement LOCALID_TRAINER_DOUBLES1, Movement_ExclamationMark
+	applymovement LOCALID_TRAINER_DOUBLES1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_DOUBLES1, Movement_Delay48
+	applymovement LOCALID_TRAINER_DOUBLES1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_TRAINER_DOUBLES1, TrainerTower_Movement_TopKnockoutTrainerApproach
 	waitmovement 0
@@ -164,9 +164,9 @@ TrainerTower_EventScript_DoKnockoutBattle2::
 
 TrainerTower_EventScript_DoKnockoutBattle3::
 	ttower_encountermusic
-	applymovement LOCALID_TRAINER_SINGLES, Movement_ExclamationMark
+	applymovement LOCALID_TRAINER_SINGLES, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_SINGLES, Movement_Delay48
+	applymovement LOCALID_TRAINER_SINGLES, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_TRAINER_SINGLES, TrainerTower_Movement_RightKnockoutTrainerApproach
 	waitmovement 0
@@ -339,9 +339,9 @@ TrainerTower_EventScript_DoubleBattleTriggerTop::
 	ttower_checkdoubles
 	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, TrainerTower_EventScript_IneligibleForDoubleBattle
 	ttower_encountermusic
-	applymovement LOCALID_TRAINER_DOUBLES1, Movement_ExclamationMark
+	applymovement LOCALID_TRAINER_DOUBLES1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_DOUBLES1, Movement_Delay48
+	applymovement LOCALID_TRAINER_DOUBLES1, Common_Movement_Delay48
 	goto TrainerTower_EventScript_TriggerDoubleBattle
 
 TrainerTower_EventScript_DoubleBattleTriggerBottom::
@@ -349,9 +349,9 @@ TrainerTower_EventScript_DoubleBattleTriggerBottom::
 	ttower_checkdoubles
 	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, TrainerTower_EventScript_IneligibleForDoubleBattle
 	ttower_encountermusic
-	applymovement LOCALID_TRAINER_DOUBLES2, Movement_ExclamationMark
+	applymovement LOCALID_TRAINER_DOUBLES2, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_DOUBLES2, Movement_Delay48
+	applymovement LOCALID_TRAINER_DOUBLES2, Common_Movement_Delay48
 TrainerTower_EventScript_TriggerDoubleBattle:
 	waitmovement 0
 	setvar DISABLE_DOUBLES_TRIGGER, TRUE

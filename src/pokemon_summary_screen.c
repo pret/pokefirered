@@ -2110,7 +2110,7 @@ static void BufferMonInfo(void)
 
     GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_NICKNAME, tempStr);
     StringCopyN_Multibyte(sMonSummaryScreen->summary.nicknameStrBuf, tempStr, POKEMON_NAME_LENGTH);
-    StringGetEnd10(sMonSummaryScreen->summary.nicknameStrBuf);
+    StringGet_Nickname(sMonSummaryScreen->summary.nicknameStrBuf);
 
     gender = GetMonGender(&sMonSummaryScreen->currentMon);
     dexNum = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES2);
@@ -5218,8 +5218,8 @@ static bool32 MapSecIsInKantoOrSevii(u8 mapSec)
     return FALSE;
 }
 
-UNUSED
-static void Unused_ShowPokemonSummaryScreen_NullParty(void)
+// Unused
+static void ShowPokemonSummaryScreen_NullParty(void)
 {
     ShowPokemonSummaryScreen(NULL, 0, 0, CB2_ReturnToField, PSS_MODE_NORMAL);
 }

@@ -691,9 +691,9 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideNoticePlayer
 	waitse
 	playse SE_PIN
-	applymovement LOCALID_AIDE, Movement_ExclamationMark
+	applymovement LOCALID_AIDE, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_AIDE, Movement_Delay48
+	applymovement LOCALID_AIDE, Common_Movement_Delay48
 	waitmovement 0
 	msgbox PewterCity_Text_OhPlayer
 	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideApproachPlayer0
@@ -728,7 +728,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	return
 
 PewterCity_EventScript_AideNoticePlayer::
-	applymovement LOCALID_AIDE, Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_AIDE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -740,7 +740,7 @@ PewterCity_EventScript_AideApproachPlayer0::
 
 PewterCity_EventScript_AideApproachPlayer1::
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -748,7 +748,7 @@ PewterCity_EventScript_AideApproachPlayer2::
 	closemessage
 	applymovement LOCALID_AIDE, PewterCity_Movement_AideApproachPlayerMid
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -756,7 +756,7 @@ PewterCity_EventScript_AideApproachPlayer3::
 	closemessage
 	applymovement LOCALID_AIDE, PewterCity_Movement_AideApproachPlayerBottom
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 

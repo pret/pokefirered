@@ -91,7 +91,7 @@ u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         switch (arg2)
         {
         case 2:
-            TextWindow_SetUserSelectedFrame(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
+            LoadUserWindowGfx(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
         case 1:
             DrawTextBorderOuter(sMysteryGiftLinkMenu.windowId, tileNum, palNum / 16);
             break;

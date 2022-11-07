@@ -202,9 +202,9 @@ static bool8 LoadBattlerSpriteGfx(u8 battler)
                 BattleLoadSubstituteOrMonSpriteGfx(battler, FALSE);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
-            DecompressTrainerBackPalette(BACK_PIC_RED + gSaveBlock2Ptr->playerGender, battler);
+            DecompressTrainerBackPalette(gSaveBlock2Ptr->playerGender, battler);
         else if (gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
-            DecompressTrainerBackPalette(BACK_PIC_OLDMAN, battler);
+            DecompressTrainerBackPalette(TRAINER_BACK_PIC_OLD_MAN, battler);
         else if (!gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
             BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         else
@@ -231,7 +231,7 @@ static void CreateBattlerSprite(u8 battler)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 return;
             SetMultiuseSpriteTemplateToPokemon(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
-            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, 2), posY, GetBattlerSpriteSubpriority(battler));
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2), posY, GetBattlerSpriteSubpriority(battler));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
@@ -265,7 +265,7 @@ static void CreateBattlerSprite(u8 battler)
         else
         {
             SetMultiuseSpriteTemplateToPokemon(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
-            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, 2), posY, GetBattlerSpriteSubpriority(battler));
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2), posY, GetBattlerSpriteSubpriority(battler));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;

@@ -306,7 +306,7 @@ static const struct MenuAction sScriptMultiChoiceMenu_Eeveelutions[] = {
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_BikeShop[] = {
-    { gText_Bicycle_1000000 },
+    { gText_Bicycle_Price },
     { gText_NoThanks }
 };
 
@@ -379,8 +379,8 @@ static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumCrush[] = {
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_48[] = {
-    { gText_Dummy_8417E66 },
-    { gText_Dummy_8417E67 },
+    { gText_EmptyLinkService1 },
+    { gText_EmptyLinkService2 },
     { gOtherText_Exit }
 };
 
@@ -404,7 +404,7 @@ static const struct MenuAction sScriptMultiChoiceMenu_Mushrooms[] = {
 static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumBlankCrush[] = {
     { gText_TradeCenter },
     { gText_Colosseum_2 },
-    { gText_Dummy_8417E71 },
+    { gText_RecordCorner },
     { gText_BerryCrush },
     { gOtherText_Exit }
 };
@@ -412,7 +412,7 @@ static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumBlankCrush[]
 static const struct MenuAction sScriptMultiChoiceMenu_TradeColosseumBlank[] = {
     { gText_TradeCenter },
     { gText_Colosseum_2 },
-    { gText_Dummy_8417E71 },
+    { gText_RecordCorner },
     { gOtherText_Exit }
 };
 
@@ -469,8 +469,8 @@ static const struct MenuAction sScriptMultiChoiceMenu_SeagallopVermilion[] = {
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_62[] = {
-    { gText_Dummy_8417F68 },
-    { gText_Dummy_8417F67 },
+    { gText_Multichoice_Empty1 },
+    { gText_Multichoice_Empty2 },
     { gOtherText_Exit }
 };
 
@@ -816,7 +816,7 @@ static void Task_MultichoiceMenu_HandleInput(u8 taskId)
             }
             DestroyScriptMenuWindow(data[6]);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
 }
@@ -853,7 +853,8 @@ bool8 ScriptMenu_YesNo(u8 unused, u8 stuff)
     return TRUE;
 }
 
-bool8 sub_809CE38(void)
+// Unused
+static bool8 IsScriptActive(void)
 {
     if (gSpecialVar_Result == SCR_MENU_UNSET)
         return FALSE;
@@ -885,7 +886,7 @@ static void Task_YesNoMenu_HandleInput(u8 taskId)
             break;
         }
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -936,7 +937,7 @@ static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId)
     }
     DestroyScriptMenuWindow(data[6]);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 bool8 CreatePCMenu(void)
@@ -1002,7 +1003,7 @@ static void CreatePCMenuWindow(void)
 
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
-    sub_80F7768(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterParameterized2(0, FONT_2, Text_AccessWhichPC, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
@@ -1172,7 +1173,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
 {
     u8 taskId;
     s16 *data;
-    ScriptContext1_SetupScript(EventScript_ReleaseEnd);
+    ScriptContext_SetupScript(EventScript_ReleaseEnd);
     taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
     if (taskId != 0xFF)
     {

@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
       "x": 2,
       "y": 4,
@@ -29,6 +30,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
       "x": 4,
       "y": 2,
@@ -42,6 +44,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 6,
       "y": 4,
@@ -61,7 +64,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

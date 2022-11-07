@@ -3,6 +3,7 @@
 #include "wild_encounter.h"
 #include "event_data.h"
 #include "fieldmap.h"
+#include "random.h"
 #include "roamer.h"
 #include "field_player_avatar.h"
 #include "battle_setup.h"
@@ -108,13 +109,6 @@ static u8 ChooseWildMonIndex_WaterRock(void)
     else
         return 4;
 }
-
-enum
-{
-    OLD_ROD,
-    GOOD_ROD,
-    SUPER_ROD
-};
 
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
@@ -593,7 +587,7 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
-            ScriptContext1_SetupScript(EventScript_RepelWoreOff);
+            ScriptContext_SetupScript(EventScript_RepelWoreOff);
             return TRUE;
         }
     }
@@ -668,8 +662,7 @@ void SeedWildEncounterRng(u16 seed)
 
 static u16 WildEncounterRandom(void)
 {
-    sWildEncounterData.rngState *= 1103515245;
-    sWildEncounterData.rngState += 12345;
+    sWildEncounterData.rngState = ISO_RANDOMIZE2(sWildEncounterData.rngState);
     return sWildEncounterData.rngState >> 16;
 }
 

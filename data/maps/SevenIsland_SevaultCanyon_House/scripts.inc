@@ -11,7 +11,7 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	waitmovement 0
 	fadedefaultbgm
 	delay 30
-	applymovement LOCALID_BALDING_MAN, Movement_FacePlayer
+	applymovement LOCALID_BALDING_MAN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
 	textcolor NPC_TEXT_COLOR_NEUTRAL
@@ -34,12 +34,12 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	end
 
 SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced::
-	applymovement LOCALID_BALDING_MAN, Movement_FacePlayer
+	applymovement LOCALID_BALDING_MAN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
 	release

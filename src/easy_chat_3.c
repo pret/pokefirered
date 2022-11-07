@@ -275,10 +275,10 @@ static const u8 gUnknown_843F8D8[] = _("{UNDERSCORE}");
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
 static const u8 *const sEasyChatKeyboardText[] = {
-    gUnknown_847A8D8,
-    gUnknown_847A8FA,
-    gUnknown_847A913,
-    gUnknown_847A934
+    gText_EasyChatKeyboard_ABCDEFothers,
+    gText_EasyChatKeyboard_GHIJKL,
+    gText_EasyChatKeyboard_MNOPQRS,
+    gText_EasyChatKeyboard_TUVWXYZ
 };
 
 static const struct SpriteSheet sEasyChatSpriteSheets[] = {
@@ -1347,7 +1347,7 @@ static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *st
 static void PrintECInstructionsText(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    TextWindow_SetUserSelectedFrame(1, 1, 0xE0);
+    LoadUserWindowGfx(1, 1, 0xE0);
     DrawTextBorderOuter(1, 1, 14);
     PrintECInterfaceTextById(0);
     PutWindowTilemap(1);
@@ -2295,6 +2295,6 @@ static void CreateFooterWindow(void)
     template.baseBlock = 0x030;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    EC_AddTextPrinterParameterized(windowId, FONT_1, gUnknown_841EE2B, 0, 0, 0, NULL);
+    EC_AddTextPrinterParameterized(windowId, FONT_1, gText_DelAllCancelOk, 0, 0, 0, NULL);
     PutWindowTilemap(windowId);
 }

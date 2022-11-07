@@ -773,7 +773,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 action)
     }
 }
 
-void CB2_InitTradeAnim_LinkTrade(void)
+void CB2_LinkTrade(void)
 {
     switch (gMain.state)
     {
@@ -2668,7 +2668,7 @@ static void CB2_HandleTradeEnded(void)
     case 8:
         if (IsBGMStopped() == TRUE)
         {
-            if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
+            if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
             {
                 SetLinkStandbyCallback();
             }
@@ -2680,7 +2680,7 @@ static void CB2_HandleTradeEnded(void)
         }
         break;
     case 9:
-        if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
+        if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
         {
             if (IsLinkRfuTaskFinished())
             {

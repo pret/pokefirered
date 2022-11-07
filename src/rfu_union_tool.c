@@ -10,7 +10,7 @@
 #include "constants/union_room.h"
 #include "constants/event_objects.h"
 
-static EWRAM_DATA struct UnionObj * UnionObjWork = NULL;
+static EWRAM_DATA struct UnionRoomObject * UnionObjWork = NULL;
 static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
 
 static u8 StartUnionObjAnimTask(void);
@@ -212,7 +212,7 @@ static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 playerIdx)
     return TRUE;
 }
 
-u8 ZeroUnionObjWork(struct UnionObj * ptr)
+u8 ZeroUnionObjWork(struct UnionRoomObject * ptr)
 {
     s32 i;
 
@@ -234,7 +234,7 @@ static const u8 sMovement_UnionPlayerExit[2] = {
     MOVEMENT_ACTION_STEP_END
 };
 
-static bool32 AnimateUnionRoomPlayerDespawn(s8 * a0, u32 playerIdx, struct UnionObj * ptr)
+static bool32 AnimateUnionRoomPlayerDespawn(s8 * a0, u32 playerIdx, struct UnionRoomObject * ptr)
 {
     switch (*a0)
     {
@@ -263,7 +263,7 @@ static const u8 sMovement_UnionPlayerEnter[2] = {
     MOVEMENT_ACTION_STEP_END
 };
 
-static bool32 AnimateUnionRoomPlayerSpawn(s8 * state_p, u32 playerIdx, struct UnionObj * ptr)
+static bool32 AnimateUnionRoomPlayerSpawn(s8 * state_p, u32 playerIdx, struct UnionRoomObject * ptr)
 {
     s16 x, y;
 
@@ -308,7 +308,7 @@ static bool32 AnimateUnionRoomPlayerSpawn(s8 * state_p, u32 playerIdx, struct Un
 
 static bool32 SpawnGroupLeader(u32 playerIdx, u32 gender, u32 idMod256)
 {
-    struct UnionObj * ptr = &UnionObjWork[playerIdx];
+    struct UnionRoomObject * ptr = &UnionObjWork[playerIdx];
     AGB_ASSERT_EX(UnionObjWork != NULL, ABSPATH("rfu_union_tool.c"), 561)
     ptr->schedAnim = UNION_ROOM_SPAWN_IN;
     ptr->gfxId = GetUnionRoomPlayerGraphicsId(gender, idMod256);
@@ -324,7 +324,7 @@ static bool32 SpawnGroupLeader(u32 playerIdx, u32 gender, u32 idMod256)
 
 static bool32 DespawnGroupLeader(u32 playerIdx)
 {
-    struct UnionObj * ptr = &UnionObjWork[playerIdx];
+    struct UnionRoomObject * ptr = &UnionObjWork[playerIdx];
     AGB_ASSERT_EX(UnionObjWork != NULL, ABSPATH("rfu_union_tool.c"), 577)
     ptr->schedAnim = UNION_ROOM_SPAWN_OUT;
     if (ptr->state == 1)
@@ -337,7 +337,7 @@ static bool32 DespawnGroupLeader(u32 playerIdx)
     }
 }
 
-static void AnimateUnionObj(u32 playerIdx, struct UnionObj * ptr)
+static void AnimateUnionObj(u32 playerIdx, struct UnionRoomObject * ptr)
 {
     switch (ptr->state)
     {
@@ -418,7 +418,7 @@ static void DestroyAnimateUnionObjsTask(void)
     }
 }
 
-void DeleteUnionObjWorkAndStopTask(void)
+void DestroyUnionRoomPlayerObjects(void)
 {
     s32 i;
     for (i = 0; i < 8; i++)
@@ -577,30 +577,30 @@ static void DespawnGroupLeaderAndMembers(u32 group, struct RfuGameData * gname)
     }
 }
 
-static void UpdateUnionRoomPlayerSprites(struct UnkStruct_URoom * groups)
+static void UpdateUnionRoomPlayerSprites(struct WirelessLink_URoom * groups)
 {
     s32 i;
-    struct UnkStruct_x20 * x20_p;
+    struct RfuPlayer * x20_p;
     sUnionObjRefreshTimer = 0;
-    for (i = 0, x20_p = groups->field_0->arr; i < 8; i++)
+    for (i = 0, x20_p = groups->playerList->players; i < 8; i++)
     {
         if (x20_p[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
-            SpawnGroupLeaderAndMembers(i, &x20_p[i].gname_uname.gname);
+            SpawnGroupLeaderAndMembers(i, &x20_p[i].rfu.data);
         }
         else if (x20_p[i].groupScheduledAnim == UNION_ROOM_SPAWN_OUT)
         {
-            DespawnGroupLeaderAndMembers(i, &x20_p[i].gname_uname.gname);
+            DespawnGroupLeaderAndMembers(i, &x20_p[i].rfu.data);
         }
     }
 }
 
-void ScheduleUnionRoomPlayerRefresh(struct UnkStruct_URoom *uroom_p)
+void ScheduleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom_p)
 {
     sUnionObjRefreshTimer = 300;
 }
 
-void HandleUnionRoomPlayerRefresh(struct UnkStruct_URoom *uroom_p)
+void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom_p)
 {
     if (++sUnionObjRefreshTimer > 300)
     {
@@ -608,17 +608,17 @@ void HandleUnionRoomPlayerRefresh(struct UnkStruct_URoom *uroom_p)
     }
 }
 
-bool32 RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(struct UnkStruct_Main0 *main0_p, s16 *member_p, s16 *group_p, u8 *spriteIds)
+bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *main0_p, s16 *member_p, s16 *group_p, u8 *spriteIds)
 {
     s16 x, y;
     s32 i, j;
-    struct UnkStruct_x20 * x20_p;
+    struct RfuPlayer * x20_p;
     if (!is_walking_or_running())
     {
         return FALSE;
     }
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    for (i = 0, x20_p = main0_p->arr; i < 8; i++)
+    for (i = 0, x20_p = main0_p->players; i < 8; i++)
     {
         for (j = 0; j < 5; j++)
         {
@@ -657,7 +657,7 @@ static void UnionPartnerObjectSetFacing(s32 member, s32 group, u8 direction)
     TurnVirtualObject(5 * group - 0x38 + member, direction);
 }
 
-void UpdateUnionGroupMemberFacing(u32 member, u32 group, struct UnkStruct_Main0 *main0_p)
+void UpdateUnionGroupMemberFacing(u32 member, u32 group, struct RfuPlayerList *main0_p)
 {
-    return UnionPartnerObjectSetFacing(member, group, UnionPartnerObjectGetFacing(member, group, &main0_p->arr[group].gname_uname.gname));
+    return UnionPartnerObjectSetFacing(member, group, UnionPartnerObjectGetFacing(member, group, &main0_p->players[group].rfu.data));
 }

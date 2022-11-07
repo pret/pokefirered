@@ -711,7 +711,7 @@ static void InitTradeMenuResources(void)
     }
 }
 
-void CB2_ReturnFromLinkTrade(void)
+void CB2_StartCreateTradeMenu(void)
 {
     SetMainCallback2(CB2_ReturnFromLinkTrade2);
 }
@@ -1208,7 +1208,7 @@ static void TradeMenuCB_10(void)
 
 static void TradeMenuCB_13(void)
 {
-    gMain.savedCallback = CB2_ReturnFromLinkTrade;
+    gMain.savedCallback = CB2_StartCreateTradeMenu;
     if (gWirelessCommType != 0)
     {
         if (IsLinkRfuTaskFinished())
@@ -1218,7 +1218,7 @@ static void TradeMenuCB_13(void)
             Free(sTradeMenuResourcesPtr);
             gMain.callback1 = NULL;
             DestroyWirelessStatusIndicatorSprite();
-            SetMainCallback2(CB2_InitTradeAnim_LinkTrade);
+            SetMainCallback2(CB2_LinkTrade);
         }
     }
     else
@@ -1229,7 +1229,7 @@ static void TradeMenuCB_13(void)
             FreeAllWindowBuffers();
             Free(sTradeMenuResourcesPtr);
             gMain.callback1 = NULL;
-            SetMainCallback2(CB2_InitTradeAnim_LinkTrade);
+            SetMainCallback2(CB2_LinkTrade);
         }
     }
 }

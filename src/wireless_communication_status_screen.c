@@ -121,29 +121,29 @@ static const u8 sCountParams[][3] = {
     // activity,         count idx, by
     // by=0 means count all
     // UB: no check for count idx == -1
-    {ACTIVITY_BATTLE,            1, 2},
-    {ACTIVITY_DBLBATTLE,         1, 2},
-    {ACTIVITY_MLTBATTLE,         1, 4},
-    {ACTIVITY_TRADE,             0, 2},
-    {ACTIVITY_WCARD2,            3, 2},
-    {ACTIVITY_WNEWS2,            3, 2},
-    {ACTIVITY_PJUMP,             4, 0},
-    {ACTIVITY_BCRUSH,            4, 0},
-    {ACTIVITY_BPICK,             4, 0},
-    {ACTIVITY_SEARCH,           -1, 0},
-    {ACTIVITY_SPINTRADE,         0, 0},
-    {ACTIVITY_ITEMTRADE,        -1, 0},
-    {0x0f,                       4, 0},
-    {0x10,                      -1, 0},
-    {0x40,                       2, 1},
-    {ACTIVITY_BATTLE | 0x40,     2, 2},
-    {ACTIVITY_TRADE | 0x40,      2, 2},
-    {ACTIVITY_CHAT | 0x40,       2, 0},
-    {ACTIVITY_CARD | 0x40,       2, 2},
-    {20 | 0x40,                  2, 1},
-    {19 | 0x40,                  2, 2},
-    {ACTIVITY_ACCEPT | 0x40,     2, 1},
-    {ACTIVITY_DECLINE | 0x40,    2, 1}
+    {ACTIVITY_BATTLE_SINGLE,                  1, 2},
+    {ACTIVITY_BATTLE_DOUBLE,                  1, 2},
+    {ACTIVITY_BATTLE_MULTI,                   1, 4},
+    {ACTIVITY_TRADE,                          0, 2},
+    {ACTIVITY_WONDER_CARD,                    3, 2},
+    {ACTIVITY_WONDER_NEWS,                    3, 2},
+    {ACTIVITY_POKEMON_JUMP,                   4, 0},
+    {ACTIVITY_BERRY_CRUSH,                    4, 0},
+    {ACTIVITY_BERRY_PICK,                     4, 0},
+    {ACTIVITY_SEARCH,                        -1, 0},
+    {ACTIVITY_SPIN_TRADE,                     0, 0},
+    {ACTIVITY_ITEM_TRADE,                    -1, 0},
+    {ACTIVITY_RECORD_CORNER,                  4, 0},
+    {ACTIVITY_BERRY_BLENDER,                 -1, 0},
+    {ACTIVITY_NONE | IN_UNION_ROOM,           2, 1},
+    {ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM,  2, 2},
+    {ACTIVITY_TRADE | IN_UNION_ROOM,          2, 2},
+    {ACTIVITY_CHAT | IN_UNION_ROOM,           2, 0},
+    {ACTIVITY_CARD | IN_UNION_ROOM,           2, 2},
+    {ACTIVITY_PLYRTALK | IN_UNION_ROOM,       2, 1},
+    {ACTIVITY_NPCTALK | IN_UNION_ROOM,        2, 2},
+    {ACTIVITY_ACCEPT | IN_UNION_ROOM,         2, 1},
+    {ACTIVITY_DECLINE | IN_UNION_ROOM,        2, 1}
 };
 
 static void CB2_RunWirelessCommunicationScreen(void)
@@ -352,9 +352,9 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == FONT_0 ? 0 : 1, 0, textColor, -1, str);
 }
 
-static u32 CountMembersInGroup(struct UnkStruct_x20 * unk20, u32 * counts)
+static u32 CountMembersInGroup(struct RfuPlayer * unk20, u32 * counts)
 {
-    u32 activity = unk20->gname_uname.gname.activity;
+    u32 activity = unk20->rfu.data.activity;
     s32 i, j, k;
 
     for (i = 0; i < NELEMS(sCountParams); i++)
@@ -366,7 +366,7 @@ static u32 CountMembersInGroup(struct UnkStruct_x20 * unk20, u32 * counts)
                 k = 0;
                 for (j = 0; j < RFU_CHILD_MAX; j++)
                 {
-                    if (unk20->gname_uname.gname.partnerInfo[j] != 0) k++;
+                    if (unk20->rfu.data.partnerInfo[j] != 0) k++;
                 }
                 k++;
                 counts[sCountParams[i][1]] += k;
@@ -398,12 +398,12 @@ static bool32 UpdateCommunicationCounts(u32 * counts, u32 * lastCounts, u32 * ac
 {
     bool32 activitiesUpdated = FALSE;
     u32 buffer[4] = {0, 0, 0, 0};
-    struct UnkStruct_Group * group = (void *)gTasks[taskId].data;
+    struct WirelessLink_Group * group = (void *)gTasks[taskId].data;
     s32 i;
 
     for (i = 0; i < 16; i++)
     {
-        u32 activity = CountMembersInGroup(&group->field_0->arr[i], buffer);
+        u32 activity = CountMembersInGroup(&group->playerList->players[i], buffer);
         if (activity != activities[i])
         {
             activities[i] = activity;

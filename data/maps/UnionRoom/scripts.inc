@@ -29,7 +29,7 @@ UnionRoom_OnResume::
 	removeobject LOCALID_UNION_ROOM_PLAYER_6
 	removeobject LOCALID_UNION_ROOM_PLAYER_7
 	removeobject LOCALID_UNION_ROOM_PLAYER_8
-	special UnionRoomSpecial
+	special RunUnionRoom
 	end
 
 UnionRoom_OnTransition::

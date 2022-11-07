@@ -263,7 +263,7 @@ static void Task_EReaderComm(u8 taskId)
     switch (data->state)
     {
         case 0:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_ReceiveMysteryGiftWithEReader))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_ReceiveMysteryGiftWithEReader))
                 data->state = 1;
             break;
         case 1:
@@ -285,7 +285,7 @@ static void Task_EReaderComm(u8 taskId)
                 data->state = 13;
             break;
         case 4:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_SelectConnectFromEReaderMenu))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_SelectConnectFromEReaderMenu))
             {
                 AddTextPrinterToWindow1(gJPText_SelectConnectWithGBA);
                 ResetDelayTimer(&data->stateAdvanceDelay);
@@ -334,7 +334,7 @@ static void Task_EReaderComm(u8 taskId)
             }
             break;
         case 7:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_LinkIsIncorrect))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_LinkIsIncorrect))
                 data->state = 4;
             break;
         case 8:
@@ -451,19 +451,19 @@ static void Task_EReaderComm(u8 taskId)
                 data->state = 26;
             break;
         case 23:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_CardReadingHasBeenHalted))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_CardReadingHasBeenHalted))
                 data->state = 26;
             break;
         case 20:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_ConnectionErrorCheckLink))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_ConnectionErrorCheckLink))
                 data->state = 0;
             break;
         case 21:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_ConnectionErrorTryAgain))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_ConnectionErrorTryAgain))
                 data->state = 0;
             break;
         case 22:
-            if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_WriteErrorUnableToSaveData))
+            if (PrintMysteryGiftMenuMessage(&data->textOrReceiveState, gJPText_WriteErrorUnableToSaveData))
                 data->state = 0;
             break;
         case 26:
@@ -943,12 +943,12 @@ u16 MEvent_GetBattleCardCount(u32 command)
     return 0;
 }
 
-void ResetReceivedWonderCardFlag(void)
+void MysteryGift_DisableStats(void)
 {
     sReceivedWonderCardIsValid = FALSE;
 }
 
-bool32 MEventHandleReceivedWonderCard(u16 flagId)
+bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId)
 {
     sReceivedWonderCardIsValid = FALSE;
     if (flagId == 0)

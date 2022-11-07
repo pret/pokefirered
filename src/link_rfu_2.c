@@ -2752,8 +2752,8 @@ static void Task_RfuReconnectWithParent(u8 taskId)
                 if (TryReconnectParent())
                     DestroyTask(taskId);
             }
-            else if (GetHostRfuGameData()->activity == ACTIVITY_WCARD2
-                  || GetHostRfuGameData()->activity == ACTIVITY_WNEWS2)
+            else if (GetHostRfuGameData()->activity == ACTIVITY_WONDER_CARD
+                  || GetHostRfuGameData()->activity == ACTIVITY_WONDER_NEWS)
             {
                 tTime++;
             }

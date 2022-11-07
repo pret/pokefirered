@@ -6,12 +6,35 @@
 #include "link_rfu.h"
 #include "random.h"
 
-static EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
+enum {
+    WIRELESS_STATUS_ANIM_3_BARS,
+    WIRELESS_STATUS_ANIM_2_BARS,
+    WIRELESS_STATUS_ANIM_1_BAR,
+    WIRELESS_STATUS_ANIM_SEARCHING,
+    WIRELESS_STATUS_ANIM_ERROR,
+};
 
-static const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
+#define TAG_GFX_STATUS_INDICATOR 0xD431
+#define TAG_PAL_STATUS_INDICATOR 0xD432
 
-static const u32 gWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
+#define UNUSED_QUEUE_NUM_SLOTS 2
+#define UNUSED_QUEUE_SLOT_LENGTH 256
 
+struct RfuUnusedQueue
+{
+    u8 slots[UNUSED_QUEUE_NUM_SLOTS][UNUSED_QUEUE_SLOT_LENGTH];
+    vu8 recvSlot;
+    vu8 sendSlot;
+    vu8 count;
+    vu8 full;
+};
+
+static EWRAM_DATA u8 sWirelessStatusIndicatorSpriteId = 0;
+
+static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/link/wireless_icon.gbapal");
+static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/link/wireless_icon.4bpp.lz");
+
+// Most of the below two tables won't make sense with ASCII encoding.
 static const u8 sWireless_ASCIItoRSETable[] = {
     EOS,
     0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
@@ -222,8 +245,7 @@ static const struct OamData sWirelessStatusIndicatorOamData =
     .paletteNum = 0,
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
-    // 3 bars
+static const union AnimCmd sWirelessStatusIndicator_3Bars[] = {
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
     ANIMCMD_FRAME(12,  5),
@@ -233,8 +255,7 @@ static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
-    // 2 bars
+static const union AnimCmd sWirelessStatusIndicator_2Bars[] = {
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
     ANIMCMD_FRAME(12, 10),
@@ -242,46 +263,43 @@ static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
-    // 1 bar
+static const union AnimCmd sWirelessStatusIndicator_1Bar[] = {
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
-    // searching
+static const union AnimCmd sWirelessStatusIndicator_Searching[] = {
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_FRAME(20, 10),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
-    // error
+static const union AnimCmd sWirelessStatusIndicator_Error[] = {
     ANIMCMD_FRAME(24, 10),
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_JUMP(0)
 };
 
 static const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
-    sWirelessStatusIndicatorAnim0,
-    sWirelessStatusIndicatorAnim1,
-    sWirelessStatusIndicatorAnim2,
-    sWirelessStatusIndicatorAnim3,
-    sWirelessStatusIndicatorAnim4
+    [WIRELESS_STATUS_ANIM_3_BARS]    = sWirelessStatusIndicator_3Bars,
+    [WIRELESS_STATUS_ANIM_2_BARS]    = sWirelessStatusIndicator_2Bars,
+    [WIRELESS_STATUS_ANIM_1_BAR]     = sWirelessStatusIndicator_1Bar,
+    [WIRELESS_STATUS_ANIM_SEARCHING] = sWirelessStatusIndicator_Searching,
+    [WIRELESS_STATUS_ANIM_ERROR]     = sWirelessStatusIndicator_Error
 };
 
 static const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
-    gWirelessLinkIconPic, 0x0380, 0xD431
+    sWirelessLinkIconPic, 0x0380, TAG_GFX_STATUS_INDICATOR
 };
 
 static const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
-    gWirelessLinkIconPalette, 0xD432
+    sWirelessLinkIconPalette, TAG_PAL_STATUS_INDICATOR
 };
 
 static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
-    .tileTag = 0xD431,
-    .paletteTag = 0xD432,
+    .tileTag = TAG_GFX_STATUS_INDICATOR,
+    .paletteTag = TAG_PAL_STATUS_INDICATOR,
     .oam = &sWirelessStatusIndicatorOamData,
     .anims = sWirelessStatusIndicatorAnims,
     .images = NULL,
@@ -301,8 +319,8 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
         for (j = 0; j < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; j++)
             queue->slots[i][j] = 0;
     }
-    queue->send_slot = 0;
-    queue->recv_slot = 0;
+    queue->sendSlot = 0;
+    queue->recvSlot = 0;
     queue->count = 0;
     queue->full = FALSE;
 }
@@ -317,8 +335,8 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
         for (j = 0; j < COMM_SLOT_LENGTH; j++)
             queue->slots[i][j] = 0;
     }
-    queue->send_slot = 0;
-    queue->recv_slot = 0;
+    queue->sendSlot = 0;
+    queue->recvSlot = 0;
     queue->count = 0;
     queue->full = FALSE;
 }
@@ -331,12 +349,10 @@ static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
     for (i = 0; i < UNUSED_QUEUE_NUM_SLOTS; i++)
     {
         for (j = 0; j < UNUSED_QUEUE_SLOT_LENGTH; j++)
-        {
             queue->slots[i][j] = 0;
-        }
     }
-    queue->send_slot = 0;
-    queue->recv_slot = 0;
+    queue->sendSlot = 0;
+    queue->recvSlot = 0;
     queue->count = 0;
     queue->full = FALSE;
 }
@@ -360,9 +376,9 @@ void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *src)
         if (count != MAX_RFU_PLAYERS)
         {
             for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
-                queue->slots[queue->recv_slot][i] = src[i];
-            queue->recv_slot++;
-            queue->recv_slot %= RECV_QUEUE_NUM_SLOTS;
+                queue->slots[queue->recvSlot][i] = src[i];
+            queue->recvSlot++;
+            queue->recvSlot %= RECV_QUEUE_NUM_SLOTS;
             queue->count++;
             for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
                 src[i] = 0;
@@ -392,9 +408,9 @@ void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *src)
         if (i != COMM_SLOT_LENGTH)
         {
             for (i = 0; i < COMM_SLOT_LENGTH; i++)
-                queue->slots[queue->recv_slot][i] = src[i];
-            queue->recv_slot++;
-            queue->recv_slot %= SEND_QUEUE_NUM_SLOTS;
+                queue->slots[queue->recvSlot][i] = src[i];
+            queue->recvSlot++;
+            queue->recvSlot %= SEND_QUEUE_NUM_SLOTS;
             queue->count++;
             for (i = 0; i < COMM_SLOT_LENGTH; i++)
                 src[i] = 0;
@@ -414,7 +430,7 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *dest)
 
     imeBak = REG_IME;
     REG_IME = 0;
-    if (queue->recv_slot == queue->send_slot || queue->full)
+    if (queue->recvSlot == queue->sendSlot || queue->full)
     {
         for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
             dest[i] = 0;
@@ -422,9 +438,9 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *dest)
         return FALSE;
     }
     for (i = 0; i < COMM_SLOT_LENGTH * MAX_RFU_PLAYERS; i++)
-        dest[i] = queue->slots[queue->send_slot][i];
-    queue->send_slot++;
-    queue->send_slot %= RECV_QUEUE_NUM_SLOTS;
+        dest[i] = queue->slots[queue->sendSlot][i];
+    queue->sendSlot++;
+    queue->sendSlot %= RECV_QUEUE_NUM_SLOTS;
     queue->count--;
     REG_IME = imeBak;
     return TRUE;
@@ -435,14 +451,14 @@ bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *dest)
     s32 i;
     u16 imeBak;
 
-    if (queue->recv_slot == queue->send_slot || queue->full)
+    if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
     imeBak = REG_IME;
     REG_IME = 0;
     for (i = 0; i < COMM_SLOT_LENGTH; i++)
-        dest[i] = queue->slots[queue->send_slot][i];
-    queue->send_slot++;
-    queue->send_slot %= SEND_QUEUE_NUM_SLOTS;
+        dest[i] = queue->slots[queue->sendSlot][i];
+    queue->sendSlot++;
+    queue->sendSlot %= SEND_QUEUE_NUM_SLOTS;
     queue->count--;
     REG_IME = imeBak;
     return TRUE;
@@ -459,17 +475,13 @@ void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *dest)
     else
     {
         for (i = 0; i < COMM_SLOT_LENGTH; i++)
-            queue->slots[queue->recv_slot][i] = dest[i];
-        queue->recv_slot++;
-        queue->recv_slot %= BACKUP_QUEUE_NUM_SLOTS;
+            queue->slots[queue->recvSlot][i] = dest[i];
+        queue->recvSlot++;
+        queue->recvSlot %= BACKUP_QUEUE_NUM_SLOTS;
         if (queue->count < BACKUP_QUEUE_NUM_SLOTS)
-        {
             queue->count++;
-        }
         else
-        {
-            queue->send_slot = queue->recv_slot;
-        }
+            queue->sendSlot = queue->recvSlot;
     }
 }
 
@@ -478,16 +490,15 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *dest)
     s32 i;
 
     if (queue->count == 0)
-    {
         return FALSE;
-    }
+
     if (dest != NULL)
     {
         for (i = 0; i < COMM_SLOT_LENGTH; i++)
-            dest[i] = queue->slots[queue->send_slot][i];
+            dest[i] = queue->slots[queue->sendSlot][i];
     }
-    queue->send_slot++;
-    queue->send_slot %= BACKUP_QUEUE_NUM_SLOTS;
+    queue->sendSlot++;
+    queue->sendSlot %= BACKUP_QUEUE_NUM_SLOTS;
     queue->count--;
     return TRUE;
 }
@@ -499,11 +510,9 @@ static void RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *dest)
     if (queue->count < UNUSED_QUEUE_NUM_SLOTS)
     {
         for (i = 0; i < UNUSED_QUEUE_SLOT_LENGTH; i++)
-        {
-            queue->slots[queue->recv_slot][i] = dest[i];
-        }
-        queue->recv_slot++;
-        queue->recv_slot %= UNUSED_QUEUE_NUM_SLOTS;
+            queue->slots[queue->recvSlot][i] = dest[i];
+        queue->recvSlot++;
+        queue->recvSlot %= UNUSED_QUEUE_NUM_SLOTS;
         queue->count++;
     }
     else
@@ -516,16 +525,14 @@ static bool8 RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *dest)
 {
     s32 i;
 
-    if (queue->recv_slot == queue->send_slot || queue->full)
-    {
+    if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
-    }
+
     for (i = 0; i < UNUSED_QUEUE_SLOT_LENGTH; i++)
-    {
-        dest[i] = queue->slots[queue->send_slot][i];
-    }
-    queue->send_slot++;
-    queue->send_slot %= UNUSED_QUEUE_NUM_SLOTS;
+        dest[i] = queue->slots[queue->sendSlot][i];
+
+    queue->sendSlot++;
+    queue->sendSlot %= UNUSED_QUEUE_NUM_SLOTS;
     queue->count--;
     return TRUE;
 }
@@ -593,9 +600,7 @@ static void PkmnStrToASCII(u8 *dest, const u8 *src)
     s32 i;
 
     for (i = 0; src[i] != EOS; i++)
-    {
         dest[i] = sWireless_RSEtoASCIITable[src[i]];
-    }
     dest[i] = 0;
 }
 
@@ -604,9 +609,7 @@ static void ASCIIToPkmnStr(u8 *dest, const u8 *src)
     s32 i;
 
     for (i = 0; src[i] != 0; i++)
-    {
         dest[i] = sWireless_ASCIItoRSETable[src[i]];
-    }
     dest[i] = EOS;
 }
 
@@ -644,18 +647,17 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
     return 0;
 }
 
-void InitHostRFUtgtGname(struct RfuGameData *data, u8 activity, bool32 startedActivity, s32 partnerInfo)
+void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedActivity, s32 partnerInfo)
 {
     s32 i;
 
-    for (i = 0; i < 2; i++)
-    {
+    for (i = 0; i < (s32)ARRAY_COUNT(data->compatibility.playerTrainerId); i++)
         data->compatibility.playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
-    }
+
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         data->partnerInfo[i] = partnerInfo;
-        partnerInfo >>= 8;
+        partnerInfo >>= 8; // Each element is 1 byte
     }
     data->playerGender = gSaveBlock2Ptr->playerGender;
     data->activity = activity;
@@ -671,13 +673,13 @@ void InitHostRFUtgtGname(struct RfuGameData *data, u8 activity, bool32 startedAc
 }
 
 /*
- * ==========================================================
+ * ================================================================
  * Returns 1 if parent, 0 if child or neutral.
- * If partner serial number is valid, copies gname and uname.
+ * If partner serial number is valid, copies gameData and username.
  * Otherwise, blanks these.
- * ==========================================================
+ * ================================================================
  */
-bool8 LinkRfu_GetNameIfCompatible(struct RfuGameData *gname, u8 *uname, u8 idx)
+bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u8 *username, u8 idx)
 {
     bool8 retVal;
 
@@ -686,13 +688,13 @@ bool8 LinkRfu_GetNameIfCompatible(struct RfuGameData *gname, u8 *uname, u8 idx)
         retVal = TRUE;
         if (IsRfuSerialNumberValid(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
         {
-            memcpy(gname, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
-            memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+            memcpy(gameData, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+            memcpy(username, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
         }
         else
         {
-            memset(gname, 0, RFU_GAME_NAME_LENGTH);
-            memset(uname, 0, RFU_USER_NAME_LENGTH);
+            memset(gameData, 0, RFU_GAME_NAME_LENGTH);
+            memset(username, 0, RFU_USER_NAME_LENGTH);
         }
     }
     else
@@ -700,45 +702,39 @@ bool8 LinkRfu_GetNameIfCompatible(struct RfuGameData *gname, u8 *uname, u8 idx)
         retVal = FALSE;
         if (IsRfuSerialNumberValid(gRfuLinkStatus->partner[idx].serialNo))
         {
-            memcpy(gname, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
-            memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+            memcpy(gameData, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+            memcpy(username, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
         }
         else
         {
-            memset(gname, 0, RFU_GAME_NAME_LENGTH);
-            memset(uname, 0, RFU_USER_NAME_LENGTH);
+            memset(gameData, 0, RFU_GAME_NAME_LENGTH);
+            memset(username, 0, RFU_USER_NAME_LENGTH);
         }
     }
     return retVal;
 }
 
-/*
- * ==========================================================
- * Specific check for serial number 0x7F7D,
- * which comes from ???
- * ==========================================================
- */
-bool8 LinkRfu_GetNameIfSerial7F7D(struct RfuGameData *gname, u8 *uname, u8 idx)
+bool8 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u8 *username, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_WONDER_DISTRIBUTOR)
     {
-        memcpy(gname, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
-        memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+        memcpy(gameData, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+        memcpy(username, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
         retVal = TRUE;
     }
     else
     {
-        memset(gname, 0, RFU_GAME_NAME_LENGTH);
-        memset(uname, 0, RFU_USER_NAME_LENGTH);
+        memset(gameData, 0, RFU_GAME_NAME_LENGTH);
+        memset(username, 0, RFU_USER_NAME_LENGTH);
     }
     return retVal;
 }
 
-void LinkRfu3_SetGnameUnameFromStaticBuffers(struct RfuGameData *gname, u8 *uname)
+void CopyHostRfuGameDataAndUsername(struct RfuGameData *gameData, u8 *username)
 {
-    memcpy(gname, &gHostRfuGameData, RFU_GAME_NAME_LENGTH);
-    memcpy(uname, gHostRfuUsername, RFU_USER_NAME_LENGTH);
+    memcpy(gameData, &gHostRfuGameData, RFU_GAME_NAME_LENGTH);
+    memcpy(username, gHostRfuUsername, RFU_USER_NAME_LENGTH);
 }
 
 #define sNextAnimNum  data[0]
@@ -765,23 +761,23 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
         gSprites[sprId].sValidator = STATUS_INDICATOR_ACTIVE;
         gSprites[sprId].sTileStart = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
         gSprites[sprId].invisible = TRUE;
-        gWirelessStatusIndicatorSpriteId = sprId;
+        sWirelessStatusIndicatorSpriteId = sprId;
     }
     else
     {
-        gWirelessStatusIndicatorSpriteId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
-        gSprites[gWirelessStatusIndicatorSpriteId].sValidator = STATUS_INDICATOR_ACTIVE;
-        gSprites[gWirelessStatusIndicatorSpriteId].sTileStart = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
-        gSprites[gWirelessStatusIndicatorSpriteId].invisible = TRUE;
+        sWirelessStatusIndicatorSpriteId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
+        gSprites[sWirelessStatusIndicatorSpriteId].sValidator = STATUS_INDICATOR_ACTIVE;
+        gSprites[sWirelessStatusIndicatorSpriteId].sTileStart = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[sWirelessStatusIndicatorSpriteId].invisible = TRUE;
     }
 }
 
 void DestroyWirelessStatusIndicatorSprite(void)
 {
-    if (gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
+    if (gSprites[sWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
     {
-        gSprites[gWirelessStatusIndicatorSpriteId].sValidator = 0;
-        DestroySprite(&gSprites[gWirelessStatusIndicatorSpriteId]);
+        gSprites[sWirelessStatusIndicatorSpriteId].sValidator = 0;
+        DestroySprite(&gSprites[sWirelessStatusIndicatorSpriteId]);
         gMain.oamBuffer[125] = gDummyOamData;
         CpuCopy16(&gDummyOamData, (struct OamData *)OAM + 125, sizeof(struct OamData));
     }
@@ -790,11 +786,9 @@ void DestroyWirelessStatusIndicatorSprite(void)
 void LoadWirelessStatusIndicatorSpriteGfx(void)
 {
     if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == 0xFFFF)
-    {
         LoadCompressedSpriteSheet(&sWirelessStatusIndicatorSpriteSheet);
-    }
     LoadSpritePalette(&sWirelessStatusIndicatorSpritePalette);
-    gWirelessStatusIndicatorSpriteId = 0xFF;
+    sWirelessStatusIndicatorSpriteId = SPRITE_NONE;
 }
 
 static u8 GetParentSignalStrength(void)
@@ -804,19 +798,17 @@ static u8 GetParentSignalStrength(void)
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (flags & 1)
-        {
             return gRfuLinkStatus->strength[i];
-        }
         flags >>= 1;
     }
     return 0;
 }
 
-static void SetAndRestartWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 signalStrengthAnimNum)
+static void SetAndRestartWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 animNum)
 {
-    if (sprite->sCurrAnimNum != signalStrengthAnimNum)
+    if (sprite->sCurrAnimNum != animNum)
     {
-        sprite->sCurrAnimNum = signalStrengthAnimNum;
+        sprite->sCurrAnimNum = animNum;
         sprite->sFrameDelay = 0;
         sprite->sFrameIdx = 0;
     }
@@ -824,45 +816,38 @@ static void SetAndRestartWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 
 
 void UpdateWirelessStatusIndicatorSprite(void)
 {
-    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
+    if (sWirelessStatusIndicatorSpriteId != SPRITE_NONE && gSprites[sWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
     {
-        struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
+        struct Sprite *sprite = &gSprites[sWirelessStatusIndicatorSpriteId];
         u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
         u8 i = 0;
+
+        // Get weakest signal strength
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {
             for (i = 0; i < GetLinkPlayerCount() - 1; i++)
             {
                 if (signalStrength >= GetConnectedChildStrength(i + 1))
-                {
                     signalStrength = GetConnectedChildStrength(i + 1);
-                }
             }
         }
         else
         {
             signalStrength = GetParentSignalStrength();
         }
+
+        // Set signal strength sprite anim number
         if (IsRfuRecoveringFromLinkLoss() == TRUE)
-        {
-            sprite->sNextAnimNum = 4;
-        }
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_ERROR;
         else if (signalStrength <= RFU_LINK_ICON_LEVEL1_MAX)
-        {
-            sprite->sNextAnimNum = 3;
-        }
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_SEARCHING;
         else if (signalStrength >= RFU_LINK_ICON_LEVEL2_MIN && signalStrength <= RFU_LINK_ICON_LEVEL2_MAX)
-        {
-            sprite->sNextAnimNum = 2;
-        }
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_1_BAR;
         else if (signalStrength >= RFU_LINK_ICON_LEVEL3_MIN && signalStrength <= RFU_LINK_ICON_LEVEL3_MAX)
-        {
-            sprite->sNextAnimNum = 1;
-        }
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_2_BARS;
         else if (signalStrength >= RFU_LINK_ICON_LEVEL4_MIN)
-        {
-            sprite->sNextAnimNum = 0;
-        }
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_3_BARS;
+
         if (sprite->sNextAnimNum != sprite->sSavedAnimNum)
         {
             SetAndRestartWirelessStatusIndicatorAnim(sprite, sprite->sNextAnimNum);
@@ -873,9 +858,7 @@ void UpdateWirelessStatusIndicatorSprite(void)
             sprite->sFrameIdx++;
             sprite->sFrameDelay = 0;
             if (sprite->anims[sprite->sCurrAnimNum][sprite->sFrameIdx].type == -2) // ANIMCMD_JUMP
-            {
                 sprite->sFrameIdx = 0;
-            }
         }
         else
         {
@@ -906,7 +889,7 @@ static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, con
 {
     int i;
     dest->trainerId = trainerId;
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
     {
         if (name[i] == EOS)
             break;
@@ -920,9 +903,7 @@ static void ZeroName(u8 *name)
     s32 i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
-    {
         *name++ = 0;
-    }
 }
 
 static bool32 NameIsEmpty(const u8 *name)
@@ -932,15 +913,13 @@ static bool32 NameIsEmpty(const u8 *name)
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
     {
         if (*name++ != 0)
-        {
             return FALSE;
-        }
     }
     return TRUE;
 }
 
 // Save the currently connected players into the trainer records, shifting all previous records down.
-void RecordMixTrainerNames(void)
+void SaveLinkTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
@@ -948,13 +927,13 @@ void RecordMixTrainerNames(void)
         s32 j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[5];
-        struct TrainerNameRecord *newRecords = AllocZeroed(20 * sizeof(struct TrainerNameRecord));
+        struct TrainerNameRecord *newRecords = AllocZeroed(sizeof(gSaveBlock1Ptr->trainerNameRecords));
 
         // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             connectedTrainerRecordIndices[i] = -1;
-            for (j = 0; j < 20; j++)
+            for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); j++)
             {
                 if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
                 {
@@ -973,29 +952,25 @@ void RecordMixTrainerNames(void)
 
                 // If we already had a record for this trainer, wipe it so that the next step doesn't duplicate it.
                 if (connectedTrainerRecordIndices[i] >= 0)
-                {
                     ZeroName(gSaveBlock1Ptr->trainerNameRecords[connectedTrainerRecordIndices[i]].trainerName);
-                }
                 nextSpace++;
             }
         }
 
         // Copy all non-empty records to the new list, in the order they appear on the old list. If the list is full,
         // the last (oldest) records will be dropped.
-        for (i = 0; i < 20; i++)
+        for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
         {
             if (!NameIsEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
             {
                 CopyTrainerRecord(&newRecords[nextSpace], gSaveBlock1Ptr->trainerNameRecords[i].trainerId, gSaveBlock1Ptr->trainerNameRecords[i].trainerName);
-                if (++nextSpace >= 20)
-                {
+                if (++nextSpace >= (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords))
                     break;
-                }
             }
         }
 
         // Finalize the new list, and clean up.
-        memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, 20 * sizeof(struct TrainerNameRecord));
+        memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, sizeof(gSaveBlock1Ptr->trainerNameRecords));
         Free(newRecords);
     }
 }
@@ -1004,16 +979,14 @@ bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
     s32 i;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
-        if (StringCompareN(gSaveBlock1Ptr->trainerNameRecords[i].trainerName, name, 7) == 0 && gSaveBlock1Ptr->trainerNameRecords[i].trainerId == id)
-        {
+        if (StringCompareN(gSaveBlock1Ptr->trainerNameRecords[i].trainerName, name, PLAYER_NAME_LENGTH) == 0
+         && gSaveBlock1Ptr->trainerNameRecords[i].trainerId == id)
             return TRUE;
-        }
+
         if (NameIsEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
-        {
             return FALSE;
-        }
     }
     return FALSE;
 }

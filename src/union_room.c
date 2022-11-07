@@ -756,7 +756,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->field_8 = AllocZeroed(UROOM_MAX_PARTY_SIZE * sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, UROOM_MAX_PARTY_SIZE);
-        LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
+        CopyHostRfuGameDataAndUsername(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->field_0->arr[0].field_1A_1 = 0;
@@ -1919,7 +1919,7 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_BPICK:
     case ACTIVITY_SPINTRADE:
     case ACTIVITY_ITEMTRADE:
-        RecordMixTrainerNames();
+        SaveLinkTrainerNames();
         break;
     }
 
@@ -2089,7 +2089,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->field_8 = AllocZeroed(UROOM_MAX_PARTY_SIZE * sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, UROOM_MAX_PARTY_SIZE);
-        LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
+        CopyHostRfuGameDataAndUsername(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->field_0->arr[0].field_1A_1 = FALSE;
@@ -3654,7 +3654,7 @@ static void Task_SearchForChildOrParent(u8 taskId)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        parent_child = LinkRfu_GetNameIfCompatible(&gname_uname.gname, gname_uname.uname, i);
+        parent_child = Rfu_GetCompatiblePlayerData(&gname_uname.gname, gname_uname.uname, i);
         if (!IsPartnerActivityAcceptable(gname_uname.gname.activity, gTasks[taskId].data[4]))
         {
             gname_uname = sUnionGnameUnamePair_Dummy;
@@ -3700,7 +3700,7 @@ static void Task_ListenForPartnersWithCompatibleSerialNos(u8 taskId)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        LinkRfu_GetNameIfCompatible(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i);
+        Rfu_GetCompatiblePlayerData(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i);
         if (!IsPartnerActivityAcceptable(ptr[0]->arr[i].gname_uname.gname.activity, gTasks[taskId].data[2]))
         {
             ptr[0]->arr[i].gname_uname = sUnionGnameUnamePair_Dummy;
@@ -3753,7 +3753,7 @@ static void Task_ListenForPartnersWithSerial7F7D(u8 taskId)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (LinkRfu_GetNameIfSerial7F7D(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i))
+        if (Rfu_GetWonderDistributorPlayerData(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i))
         {
             GetGnameWonderFlagByLinkGroup(&ptr[0]->arr[i].gname_uname.gname, gTasks[taskId].data[2]);
         }

@@ -29,8 +29,6 @@
 #define RECV_QUEUE_NUM_SLOTS 20
 #define SEND_QUEUE_NUM_SLOTS 40
 #define BACKUP_QUEUE_NUM_SLOTS 2
-#define UNUSED_QUEUE_NUM_SLOTS 2
-#define UNUSED_QUEUE_SLOT_LENGTH 256
 
 #define RFU_PACKET_SIZE 6
 
@@ -141,8 +139,8 @@ struct RfuBlockSend
 struct RfuRecvQueue
 {
     /* 0x000 */ u8 slots[RECV_QUEUE_NUM_SLOTS][COMM_SLOT_LENGTH * MAX_RFU_PLAYERS];
-    /* 0x578 */ vu8 recv_slot;
-    /* 0x579 */ vu8 send_slot;
+    /* 0x578 */ vu8 recvSlot;
+    /* 0x579 */ vu8 sendSlot;
     /* 0x57a */ vu8 count;
     /* 0x57b */ vu8 full;
 };
@@ -150,8 +148,8 @@ struct RfuRecvQueue
 struct RfuSendQueue
 {
     /* 0x000 */ u8 slots[SEND_QUEUE_NUM_SLOTS][COMM_SLOT_LENGTH];
-    /* 0x230 */ vu8 recv_slot;
-    /* 0x231 */ vu8 send_slot;
+    /* 0x230 */ vu8 recvSlot;
+    /* 0x231 */ vu8 sendSlot;
     /* 0x232 */ vu8 count;
     /* 0x233 */ vu8 full;
 };
@@ -159,18 +157,9 @@ struct RfuSendQueue
 struct RfuBackupQueue
 {
     /* 0x00 */ u8 slots[BACKUP_QUEUE_NUM_SLOTS][COMM_SLOT_LENGTH];
-    /* 0x1c */ vu8 recv_slot;
-    /* 0x1d */ vu8 send_slot;
+    /* 0x1c */ vu8 recvSlot;
+    /* 0x1d */ vu8 sendSlot;
     /* 0x1e */ vu8 count;
-};
-
-struct RfuUnusedQueue
-{
-    /* 0x000 */ u8 slots[UNUSED_QUEUE_NUM_SLOTS][UNUSED_QUEUE_SLOT_LENGTH];
-    /* 0x200 */ vu8 recv_slot;
-    /* 0x201 */ vu8 send_slot;
-    /* 0x202 */ vu8 count;
-    /* 0x203 */ vu8 full;
 };
 
 struct RfuManager
@@ -296,7 +285,7 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *dest);
 void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *dest);
 bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue * queue, u8 *dest);
 void RfuSendQueue_Enqueue(struct RfuSendQueue * queue, u8 *src);
-void InitHostRFUtgtGname(struct RfuGameData *data, u8 activity, bool32 started, s32 partnerInfo);
+void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 started, s32 partnerInfo);
 void UpdateGameData_GroupLockedIn(bool8 started);
 bool32 IsRfuSerialNumberValid(u32 serialNo);
 bool8 IsRfuRecoveringFromLinkLoss(void);
@@ -311,12 +300,12 @@ u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name);
 void SetHostRfuGameData(u8 activity, u32 partnerInfo, bool32 startedActivity);
 void InitializeRfuLinkManager_LinkLeader(u32 availSlots);
 void RequestDisconnectSlotByTrainerNameAndId(const u8 *trainerName, u16 trainerId);
-void LinkRfu3_SetGnameUnameFromStaticBuffers(struct RfuGameData *gname, u8 *uname);
+void CopyHostRfuGameDataAndUsername(struct RfuGameData *gameData, u8 *username);
 void InitializeRfuLinkManager_JoinGroup(void);
 void SendLeaveGroupNotice(void);
 void CreateTask_RfuReconnectWithParent(const u8 *src, u16 trainerId);
 void UpdateGameData_SetActivity(u8 activity, u32 partnerInfo, u32 startedActivity);
-void RecordMixTrainerNames(void);
+void SaveLinkTrainerNames(void);
 void LinkRfu_CreateConnectionAsParent();
 void LinkRfu_StopManagerBeforeEnteringChat();
 void SetHostRfuWonderFlags(bool32 hasNews, bool32 hasCard);
@@ -328,8 +317,8 @@ void InitializeRfuLinkManager_EnterUnionRoom(void);
 void Rfu_DisconnectPlayerById(u32 playerIdx);
 void TryConnectToUnionRoomParent(const u8 *name, struct RfuGameData *parent, u8 activity);
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
-bool8 LinkRfu_GetNameIfCompatible(struct RfuGameData *gname, u8 *uname, u8 idx);
-bool8 LinkRfu_GetNameIfSerial7F7D(struct RfuGameData *gname, u8 *uname, u8 idx);
+bool8 Rfu_GetCompatiblePlayerData(struct RfuGameData *gameData, u8 *username, u8 idx);
+bool8 Rfu_GetWonderDistributorPlayerData(struct RfuGameData *gameData, u8 *username, u8 idx);
 bool32 Rfu_IsPlayerExchangeActive(void);
 void Rfu_StopPartnerSearch(void);
 void RfuSetNormalDisconnectMode(void);

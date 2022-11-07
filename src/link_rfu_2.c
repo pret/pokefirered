@@ -2057,12 +2057,12 @@ static void SetHostRfuUsername(void)
 void ResetHostRfuGameData(void)
 {
     memset(&gHostRfuGameData, 0, RFU_GAME_NAME_LENGTH);
-    InitHostRFUtgtGname(&gHostRfuGameData, ACTIVITY_NONE, FALSE, 0);
+    InitHostRfuGameData(&gHostRfuGameData, ACTIVITY_NONE, FALSE, 0);
 }
 
 void SetHostRfuGameData(u8 activity, u32 partnerInfo, u32 startedActivity)
 {
-    InitHostRFUtgtGname(&gHostRfuGameData, activity, startedActivity, partnerInfo);
+    InitHostRfuGameData(&gHostRfuGameData, activity, startedActivity, partnerInfo);
 }
 
 void SetHostRfuWonderFlags(bool32 hasNews, bool32 hasCard)

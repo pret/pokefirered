@@ -3,37 +3,45 @@
 
 #include "constants/trainers.h"
 
-#define FLAG_TEMP_1              0x001
-#define FLAG_TEMP_2              0x002
-#define FLAG_TEMP_3              0x003
-#define FLAG_TEMP_4              0x004
-#define FLAG_TEMP_5              0x005
-#define FLAG_TEMP_6              0x006
-#define FLAG_TEMP_7              0x007
-#define FLAG_TEMP_8              0x008
-#define FLAG_TEMP_9              0x009
-#define FLAG_TEMP_A              0x00A
-#define FLAG_TEMP_B              0x00B
-#define FLAG_TEMP_C              0x00C
-#define FLAG_TEMP_D              0x00D
-#define FLAG_TEMP_E              0x00E
-#define FLAG_TEMP_F              0x00F
-#define FLAG_TEMP_10             0x010
-#define FLAG_TEMP_11             0x011
-#define FLAG_TEMP_12             0x012
-#define FLAG_TEMP_13             0x013
-#define FLAG_TEMP_14             0x014
-#define FLAG_TEMP_15             0x015
-#define FLAG_TEMP_16             0x016
-#define FLAG_TEMP_17             0x017
-#define FLAG_TEMP_18             0x018
-#define FLAG_TEMP_19             0x019
-#define FLAG_TEMP_1A             0x01A
-#define FLAG_TEMP_1B             0x01B
-#define FLAG_TEMP_1C             0x01C
-#define FLAG_TEMP_1D             0x01D
-#define FLAG_TEMP_1E             0x01E
-#define FLAG_TEMP_1F             0x01F
+// Temporary Flags
+// These temporary flags are are cleared every time a map is loaded. They are used
+// for things like shortening an NPCs introduction text if the player already spoke
+// to them once.
+#define TEMP_FLAGS_START 0x0
+#define FLAG_TEMP_1      (TEMP_FLAGS_START + 0x01)
+#define FLAG_TEMP_2      (TEMP_FLAGS_START + 0x02)
+#define FLAG_TEMP_3      (TEMP_FLAGS_START + 0x03)
+#define FLAG_TEMP_4      (TEMP_FLAGS_START + 0x04)
+#define FLAG_TEMP_5      (TEMP_FLAGS_START + 0x05)
+#define FLAG_TEMP_6      (TEMP_FLAGS_START + 0x06)
+#define FLAG_TEMP_7      (TEMP_FLAGS_START + 0x07)
+#define FLAG_TEMP_8      (TEMP_FLAGS_START + 0x08)
+#define FLAG_TEMP_9      (TEMP_FLAGS_START + 0x09)
+#define FLAG_TEMP_A      (TEMP_FLAGS_START + 0x0A)
+#define FLAG_TEMP_B      (TEMP_FLAGS_START + 0x0B)
+#define FLAG_TEMP_C      (TEMP_FLAGS_START + 0x0C)
+#define FLAG_TEMP_D      (TEMP_FLAGS_START + 0x0D)
+#define FLAG_TEMP_E      (TEMP_FLAGS_START + 0x0E)
+#define FLAG_TEMP_F      (TEMP_FLAGS_START + 0x0F)
+#define FLAG_TEMP_10     (TEMP_FLAGS_START + 0x10)
+
+// Used for obstacles (e.g. cut trees and rock smash rocks)
+#define FLAG_TEMP_11     (TEMP_FLAGS_START + 0x11)
+#define FLAG_TEMP_12     (TEMP_FLAGS_START + 0x12)
+#define FLAG_TEMP_13     (TEMP_FLAGS_START + 0x13)
+#define FLAG_TEMP_14     (TEMP_FLAGS_START + 0x14)
+#define FLAG_TEMP_15     (TEMP_FLAGS_START + 0x15)
+#define FLAG_TEMP_16     (TEMP_FLAGS_START + 0x16)
+#define FLAG_TEMP_17     (TEMP_FLAGS_START + 0x17)
+#define FLAG_TEMP_18     (TEMP_FLAGS_START + 0x18)
+#define FLAG_TEMP_19     (TEMP_FLAGS_START + 0x19)
+#define FLAG_TEMP_1A     (TEMP_FLAGS_START + 0x1A)
+#define FLAG_TEMP_1B     (TEMP_FLAGS_START + 0x1B)
+#define FLAG_TEMP_1C     (TEMP_FLAGS_START + 0x1C)
+#define FLAG_TEMP_1D     (TEMP_FLAGS_START + 0x1D)
+#define FLAG_TEMP_1E     (TEMP_FLAGS_START + 0x1E)
+#define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
+#define TEMP_FLAGS_END   FLAG_TEMP_1F
 
 #define FLAG_0x020               0x020
 #define FLAG_0x021               0x021
@@ -1376,8 +1384,8 @@
 #define FLAG_SYS_NOT_SOMEONES_PC                                    (SYS_FLAGS + 0x34)
 #define FLAG_0x835                                                  (SYS_FLAGS + 0x35)
 #define FLAG_0x836                                                  (SYS_FLAGS + 0x36)
-#define FLAG_0x837                                                  (SYS_FLAGS + 0x37)
-#define FLAG_0x838                                                  (SYS_FLAGS + 0x38)
+#define FLAG_SYS_RESET_RTC_ENABLE                                   (SYS_FLAGS + 0x37)
+#define FLAG_0x838                                                  (SYS_FLAGS + 0x38) // Set, never read
 #define FLAG_SYS_MYSTERY_GIFT_ENABLED                               (SYS_FLAGS + 0x39)
 #define FLAG_0x83A                                                  (SYS_FLAGS + 0x3A)
 #define FLAG_SYS_RIBBON_GET                                         (SYS_FLAGS + 0x3B)
@@ -1515,13 +1523,11 @@
 
 #define FLAGS_COUNT (FLAG_0x8FF + 1)
 
-// SPECIAL FLAGS (unknown purpose)
-#define SPECIAL_FLAGS_START 0x4000
-#define SPECIAL_FLAGS_COUNT 16
-#define FLAG_DONT_SHOW_MAP_NAME_POPUP    0x4000
-#define FLAG_DONT_TRANSITION_MUSIC    0x4001
-#define FLAG_SPECIAL_FLAG_0x4002    0x4002
-#define FLAG_SPECIAL_FLAG_0x4003    0x4003
-#define FLAG_SPECIAL_FLAG_0x4004    0x4004
+// Special Flags (Stored in EWRAM (sSpecialFlags, not in the SaveBlock)
+#define SPECIAL_FLAGS_START           0x4000
+#define FLAG_DONT_SHOW_MAP_NAME_POPUP (SPECIAL_FLAGS_START + 0x0)
+#define FLAG_DONT_TRANSITION_MUSIC    (SPECIAL_FLAGS_START + 0x1)
+// FLAG_SPECIAL_FLAG_0x4002 - 0x407F also exist and are unused
+#define SPECIAL_FLAGS_END             (SPECIAL_FLAGS_START + 0x7F)
 
 #endif // GUARD_CONSTANTS_FLAGS_H

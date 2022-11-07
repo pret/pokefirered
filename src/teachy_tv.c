@@ -26,6 +26,7 @@
 #include "fieldmap.h"
 #include "strings.h"
 #include "constants/field_effects.h"
+#include "constants/event_objects.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -602,7 +603,7 @@ static void TeachyTvInitIo(void)
 
 static u8 TeachyTvSetupObjEventAndOam(void)
 {
-    u8 objId = AddPseudoObjectEvent(90, SpriteCallbackDummy, 0, 0, 8);
+    u8 objId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_TEACHY_TV_HOST, SpriteCallbackDummy, 0, 0, 8);
     gSprites[objId].oam.priority = 2;
     gSprites[objId].invisible = 1;
     return objId;

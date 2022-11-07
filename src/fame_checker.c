@@ -1104,7 +1104,7 @@ static bool8 CreateAllFlavorTextIcons(u8 who)
     {
         if ((gSaveBlock1Ptr->fameChecker[sFameCheckerData->unlockedPersons[who]].flavorTextFlags >> i) & 1)
         {
-            sFameCheckerData->spriteIds[i] = sub_805EB44(
+            sFameCheckerData->spriteIds[i] = CreateFameCheckerObject(
                 sFameCheckerArrayNpcGraphicsIds[sFameCheckerData->unlockedPersons[who] * 6 + i],
                 i,
                 47 * (i % 3) + 0x72,

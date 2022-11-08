@@ -204,7 +204,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     if (ShouldRegisterEvent_HandleGameCorner(eventId, eventData) == FALSE)
         return;
 
-    if (gQuestLogPlaybackState == 0)
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
     {
         if (ShouldRegisterEvent_HandlePartyActions(eventId, eventData) == TRUE)
             return;
@@ -258,33 +258,34 @@ static bool8 InQuestLogDisabledLocation(void)
     // In Trainer Tower
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_1F)
         && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_1F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_2F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_3F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_4F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_5F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_6F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_7F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_8F)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ROOF)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY)
-            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)))
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_2F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_3F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_4F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_5F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_6F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_7F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_8F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ROOF)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)))
         return TRUE;
 
     // In pokemon trainer fan club
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB)
+      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB))
         return TRUE;
 
     // In E-Reader house
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_HOUSE_ROOM1) &&
         (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM1)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM2)))
+      || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM2)))
         return TRUE;
 
     // In elevator
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROCKET_HIDEOUT_ELEVATOR))
-        || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR))
-        || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR))
-        || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
         return TRUE;
 
     return FALSE;
@@ -318,15 +319,15 @@ static bool8 ShouldRegisterEvent_HandlePartyActions(u16 eventId, const u16 *even
     if (!FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
         if (eventId == QL_EVENT_USED_ITEM
-            || eventId == QL_EVENT_GAVE_HELD_ITEM
-            || eventId == QL_EVENT_GAVE_HELD_ITEM_BAG
-            || eventId == QL_EVENT_GAVE_HELD_ITEM_PC
-            || eventId == QL_EVENT_TOOK_HELD_ITEM
-            || eventId == QL_EVENT_SWAPPED_HELD_ITEM
-            || eventId == QL_EVENT_SWAPPED_HELD_ITEM_PC
-            || eventId == QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON
-            || eventId == QL_EVENT_WITHDREW_MON_PC
-            || eventId == QL_EVENT_DEPOSITED_MON_PC)
+         || eventId == QL_EVENT_GAVE_HELD_ITEM
+         || eventId == QL_EVENT_GAVE_HELD_ITEM_BAG
+         || eventId == QL_EVENT_GAVE_HELD_ITEM_PC
+         || eventId == QL_EVENT_TOOK_HELD_ITEM
+         || eventId == QL_EVENT_SWAPPED_HELD_ITEM
+         || eventId == QL_EVENT_SWAPPED_HELD_ITEM_PC
+         || eventId == QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON
+         || eventId == QL_EVENT_WITHDREW_MON_PC
+         || eventId == QL_EVENT_DEPOSITED_MON_PC)
             return TRUE;
     }
 
@@ -417,7 +418,7 @@ static bool8 TrySetTrainerBattleQuestLogEvent(u16 eventId, const u16 *eventData)
         return FALSE;
 
     ResetDeferredLinkEvent();
-    if (gQuestLogPlaybackState != 0 || FlagGet(FLAG_SYS_GAME_CLEAR) || ShouldRegisterEvent_HandleBeatStoryTrainer(eventId, eventData) != TRUE)
+    if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_0 || FlagGet(FLAG_SYS_GAME_CLEAR) || ShouldRegisterEvent_HandleBeatStoryTrainer(eventId, eventData) != TRUE)
     {
         sDeferredEvent.id = eventId;
         memcpy(sDeferredEvent.data, eventData, 8);
@@ -430,7 +431,7 @@ void QuestLogEvents_HandleEndTrainerBattle(void)
     if (sDeferredEvent.id != QL_EVENT_0)
     {
         u16 *resp;
-        if (gQuestLogPlaybackState == 0)
+        if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
         {
             sLastDepartedMap = 0;
             StartRecordingQuestLogEntry(sDeferredEvent.id);

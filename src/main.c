@@ -210,7 +210,7 @@ static void InitMainCallbacks(void)
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
-    gQuestLogPlaybackState = 0;
+    gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
 }
 
 static void CallCallbacks(void)

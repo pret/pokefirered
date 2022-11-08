@@ -192,15 +192,15 @@ u16 *GetVarPointer(u16 idx)
     {
         switch (gQuestLogPlaybackState)
         {
-        case 0:
+        case QL_PLAYBACK_STATE_0:
         default:
             break;
-        case 1:
+        case QL_PLAYBACK_STATE_1:
             ptr = QuestLogGetFlagOrVarPtr(FALSE, idx);
             if (ptr != NULL)
                 gSaveBlock1Ptr->vars[idx - VARS_START] = *ptr;
             break;
-        case 2:
+        case QL_PLAYBACK_STATE_2:
             if (IsFlagOrVarStoredInQuestLog(idx - VARS_START, TRUE) == TRUE)
             {
                 gLastQuestLogStoredFlagOrVarIdx = idx - VARS_START;
@@ -263,15 +263,15 @@ u8 *GetFlagAddr(u16 idx)
     {
         switch (gQuestLogPlaybackState)
         {
-        case 0:
+        case QL_PLAYBACK_STATE_0:
         default:
             break;
-        case 1:
+        case QL_PLAYBACK_STATE_1:
             ptr = QuestLogGetFlagOrVarPtr(TRUE, idx);
             if (ptr != NULL)
-                gSaveBlock1Ptr->flags[idx >> 3] = *ptr;
+                gSaveBlock1Ptr->flags[idx / 8] = *ptr;
             break;
-        case 2:
+        case QL_PLAYBACK_STATE_2:
             if (IsFlagOrVarStoredInQuestLog(idx, FALSE) == TRUE)
             {
                 gLastQuestLogStoredFlagOrVarIdx = idx;

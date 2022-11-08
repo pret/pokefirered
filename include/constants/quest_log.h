@@ -5,6 +5,12 @@
 #define QL_STATE_PLAYBACK      2
 #define QL_STATE_PLAYBACK_LAST 3
 
+#define QL_PLAYBACK_STATE_0 0
+#define QL_PLAYBACK_STATE_1 1
+#define QL_PLAYBACK_STATE_2 2
+#define QL_PLAYBACK_STATE_3 3
+#define QL_PLAYBACK_STATE_4 4
+
 #define QL_START_NORMAL 1
 #define QL_START_WARP   2
 
@@ -128,17 +134,17 @@
 #define QL_DEPARTED_MISC_BUILDING_1  8
 #define QL_DEPARTED_MISC_BUILDING_2  9
 
-#define QL_INPUT_OFF 0
-#define QL_INPUT_UP 1
-#define QL_INPUT_DOWN 2
-#define QL_INPUT_LEFT 3
-#define QL_INPUT_RIGHT 4
-#define QL_INPUT_L 5
-#define QL_INPUT_R 6
-#define QL_INPUT_START 7
+#define QL_INPUT_OFF    0
+#define QL_INPUT_UP     1
+#define QL_INPUT_DOWN   2
+#define QL_INPUT_LEFT   3
+#define QL_INPUT_RIGHT  4
+#define QL_INPUT_L      5
+#define QL_INPUT_R      6
+#define QL_INPUT_START  7
 #define QL_INPUT_SELECT 8
-#define QL_INPUT_A 9
-#define QL_INPUT_B 10
+#define QL_INPUT_A      9
+#define QL_INPUT_B      10
 
 
 #define FANCLUB_MEMBER1        0

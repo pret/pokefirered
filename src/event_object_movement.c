@@ -5267,10 +5267,8 @@ static void ObjectEventSetSingleMovement(struct ObjectEvent *objectEvent, struct
     objectEvent->movementActionId = animId;
     sprite->data[2] = 0;
     
-    if (gQuestLogPlaybackState == 2)
-    {
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_2)
         QuestLogRecordNPCStep(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, animId);
-    }
 }
 
 static void FaceDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction)

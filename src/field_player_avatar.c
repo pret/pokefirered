@@ -1602,7 +1602,7 @@ void CreateStopSurfingTask_NoMusicChange(u8 direction)
 
 void SeafoamIslandsB4F_CurrentDumpsPlayerOnLand(void)
 {
-    if (gQuestLogPlaybackState != 1 && gQuestLogPlaybackState != 3)
+    if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_1 && gQuestLogPlaybackState != QL_PLAYBACK_STATE_3)
     {
         QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[DIR_NORTH], 16);
         CreateStopSurfingTask(DIR_NORTH);

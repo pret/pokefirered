@@ -81,7 +81,7 @@ static EWRAM_DATA u16 *sPalettesBackup = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 sQuestLogCurrentScene = {0};
 static EWRAM_DATA struct QuestLogEntry sQuestLogSceneRecordBuffer[32] = {0};
 EWRAM_DATA u16 sQuestLogCursor = 0;
-static EWRAM_DATA u8 sMovementScripts[64][2] = {{0}};
+static EWRAM_DATA u8 sMovementScripts[OBJECT_EVENT_TEMPLATES_COUNT][2] = {{0}};
 static EWRAM_DATA u16 sNextStepDelay = 0;
 static EWRAM_DATA u16 sLastQuestLogCursor = 0;
 static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
@@ -186,7 +186,7 @@ void ResetQuestLog(void)
 
 static void DestroySav1QuestLogEntry(u8 a0)
 {
-    memset(gSaveBlock1Ptr->questLog + a0, 0, sizeof(struct QuestLog));
+    memset(gSaveBlock1Ptr->questLog + a0, 0, sizeof(struct QuestLogScene));
     gUnknown_203AE04 = NULL;
 }
 
@@ -234,7 +234,7 @@ static void QLogCB_Recording(void)
 {
     if (TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer) != 1)
     {
-        gQuestLogPlaybackState = 0;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         TryRecordEvent39_GoToNextScene();
         gQuestLogState = 0;
         sQuestLogCB = NULL;
@@ -248,7 +248,7 @@ static void QLogCB_Playback(void)
 
     if (sQuestLogCurrentScene.sceneEndMode == 0)
     {
-        if (gQuestLogPlaybackState != 0 
+        if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_0 
          || sQuestLogCurrentScene.playbackSubstate == 1 
          || (sQuestLogCurrentScene.cursor < NELEMS(gUnknown_203AE0C) 
           && gUnknown_203AE0C[sQuestLogCurrentScene.cursor] != NULL))
@@ -298,7 +298,7 @@ void StartRecordingQuestLogEntry(u16 eventId)
 
 static void SetPlayerInitialCoordsAtScene(u8 sceneNum)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
+    struct QuestLogScene * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     questLog->mapGroup = gSaveBlock1Ptr->location.mapGroup;
     questLog->mapNum = gSaveBlock1Ptr->location.mapNum;
     questLog->warpId = gSaveBlock1Ptr->location.warpId;
@@ -308,41 +308,41 @@ static void SetPlayerInitialCoordsAtScene(u8 sceneNum)
 
 static void SetNPCInitialCoordsAtScene(u8 sceneNum)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
+    struct QuestLogScene * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
 
-    SetQuestLogObjectEventsData(questLog);
+    QL_RecordObjects(questLog);
 
-    for (i = 0; i < NELEMS(gSaveBlock1Ptr->objectEventTemplates); i++)
+    for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->objectEventTemplates[i].x < 0)
         {
-            questLog->npcData[i].x = -1 * gSaveBlock1Ptr->objectEventTemplates[i].x;
-            questLog->npcData[i].negx = TRUE;
+            questLog->objectEventTemplates[i].x = -1 * gSaveBlock1Ptr->objectEventTemplates[i].x;
+            questLog->objectEventTemplates[i].negx = TRUE;
         }
         else
         {
-            questLog->npcData[i].x = (u8)gSaveBlock1Ptr->objectEventTemplates[i].x;
-            questLog->npcData[i].negx = FALSE;
+            questLog->objectEventTemplates[i].x = (u8)gSaveBlock1Ptr->objectEventTemplates[i].x;
+            questLog->objectEventTemplates[i].negx = FALSE;
         }
         if (gSaveBlock1Ptr->objectEventTemplates[i].y < 0)
         {
-            questLog->npcData[i].y = (-gSaveBlock1Ptr->objectEventTemplates[i].y << 24) >> 24;
-            questLog->npcData[i].negy = TRUE;
+            questLog->objectEventTemplates[i].y = (-gSaveBlock1Ptr->objectEventTemplates[i].y << 24) >> 24;
+            questLog->objectEventTemplates[i].negy = TRUE;
         }
         else
         {
-            questLog->npcData[i].y = (u8)gSaveBlock1Ptr->objectEventTemplates[i].y;
-            questLog->npcData[i].negy = FALSE;
+            questLog->objectEventTemplates[i].y = (u8)gSaveBlock1Ptr->objectEventTemplates[i].y;
+            questLog->objectEventTemplates[i].negy = FALSE;
         }
-        questLog->npcData[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation;
-        questLog->npcData[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType;
+        questLog->objectEventTemplates[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation;
+        questLog->objectEventTemplates[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType;
     }
 }
 
 static void SetGameStateAtScene(u8 sceneNum)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
+    struct QuestLogScene * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
 
     CpuCopy16(gSaveBlock1Ptr->flags, questLog->flags, NUM_FLAG_BYTES * sizeof(u8));
     CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, VARS_COUNT * sizeof(u16));
@@ -399,12 +399,12 @@ static bool8 TryRecordQuestLogEntrySequence(struct QuestLogEntry * entry)
         }
         if (sEventRecordingPointer == NULL)
         {
-            gQuestLogPlaybackState = 0;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
             return FALSE;
         }
     }
 
-    if (gQuestLogPlaybackState == 0)
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
     {
         sEventRecordingPointer = TryRecordEvent39_NoParams(sEventRecordingPointer);
         return FALSE;
@@ -512,24 +512,24 @@ void CommitQuestLogWindow1(void)
 
 static void QuestLogPlaybackSetObjectEventTemplates(u8 sceneNum)
 {
-    struct QuestLog *questLog = &gSaveBlock1Ptr->questLog[sceneNum];
+    struct QuestLogScene *questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
     
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
-        if (questLog->npcData[i].negx)
-            gSaveBlock1Ptr->objectEventTemplates[i].x = -questLog->npcData[i].x;
+        if (questLog->objectEventTemplates[i].negx)
+            gSaveBlock1Ptr->objectEventTemplates[i].x = -questLog->objectEventTemplates[i].x;
         else
-            gSaveBlock1Ptr->objectEventTemplates[i].x = questLog->npcData[i].x;
-        if (questLog->npcData[i].negy)
-            gSaveBlock1Ptr->objectEventTemplates[i].y = -(u8)questLog->npcData[i].y;
+            gSaveBlock1Ptr->objectEventTemplates[i].x = questLog->objectEventTemplates[i].x;
+        if (questLog->objectEventTemplates[i].negy)
+            gSaveBlock1Ptr->objectEventTemplates[i].y = -(u8)questLog->objectEventTemplates[i].y;
         else
-            gSaveBlock1Ptr->objectEventTemplates[i].y = questLog->npcData[i].y;
-        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation = questLog->npcData[i].elevation;
-        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType = questLog->npcData[i].movementType;
+            gSaveBlock1Ptr->objectEventTemplates[i].y = questLog->objectEventTemplates[i].y;
+        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation = questLog->objectEventTemplates[i].elevation;
+        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType = questLog->objectEventTemplates[i].movementType;
     }
 
-    SetSav1ObjectEventsFromQuestLog(questLog, gSaveBlock1Ptr->objectEventTemplates);
+    QL_LoadObjects(questLog, gSaveBlock1Ptr->objectEventTemplates);
 }
 
 static void QLPlayback_SetInitialPlayerPosition(u8 sceneNum, bool8 isWarp)
@@ -578,7 +578,7 @@ static void QLPlayback_InitOverworldState(void)
 
 void sub_81113E4(void)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sCurrentSceneNum];
+    struct QuestLogScene * questLog = &gSaveBlock1Ptr->questLog[sCurrentSceneNum];
 
     CpuCopy16(questLog->flags, gSaveBlock1Ptr->flags, NUM_FLAG_BYTES * sizeof(u8));
     CpuCopy16(questLog->vars, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
@@ -737,7 +737,7 @@ void sub_8111708(void)
 static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogEntry * a1)
 {
     u16 i;
-    u16 *r4;
+    u16 *script;
     u16 r6 = 0;
     u16 r9 = 0;
 
@@ -747,36 +747,36 @@ static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogEntry * a1)
         gUnknown_203AE0C[i] = NULL;
     }
 
-    r4 = gSaveBlock1Ptr->questLog[sceneNum].script;
+    script = gSaveBlock1Ptr->questLog[sceneNum].script;
     for (i = 0; i < 32; i++)
     {
-        switch (r4[0] & 0xFFF)
+        switch (script[0] & 0xFFF)
         {
         case QL_EVENT_0:
-            r4 = sub_8113D08(r4, &a1[r6]);
+            script = sub_8113D08(script, &a1[r6]);
             r6++;
             break;
         case QL_EVENT_1:
         case QL_EVENT_2:
-            r4 = sub_8113D94(r4, &a1[r6]);
+            script = sub_8113D94(script, &a1[r6]);
             r6++;
             break;
         case QL_EVENT_39:
-            r4 = sub_8113C20(r4, &a1[r6]);
+            script = sub_8113C20(script, &a1[r6]);
             r6++;
             break;
         case QL_EVENT_41:
-            r4 = sub_8113C8C(r4, &a1[r6]);
+            script = sub_8113C8C(script, &a1[r6]);
             r6++;
             break;
         default:
-            r4 = QuestLog_SkipCommand(r4, &gUnknown_203AE0C[r9]);
+            script = QuestLog_SkipCommand(script, &gUnknown_203AE0C[r9]);
             if (r9 == 0)
                 sub_8113ABC(gUnknown_203AE0C[0]);
             r9++;
             break;
         }
-        if (r4 == NULL)
+        if (script == NULL)
             break;
     }
 }
@@ -799,7 +799,7 @@ static void QuestLog_AdvancePlayhead(void)
         }
         else
         {
-            gQuestLogPlaybackState = 0;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
             QuestLog_StartFinalScene();
         }
     }
@@ -832,7 +832,7 @@ bool8 QuestLog_SchedulePlaybackCB(void (*callback)(void))
             QuestLog_CutRecording();
             break;
         case QL_STATE_PLAYBACK:
-            gQuestLogPlaybackState = 3;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
             taskId = CreateTask(Task_RunPlaybackCB, 80);
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].data[1] = 0;
@@ -860,7 +860,7 @@ static void Task_RunPlaybackCB(u8 taskId)
     case 1:
         if (!gPaletteFade.active)
         {
-            gQuestLogPlaybackState = 0;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
             routine = (void (*)(void)) GetWordTaskArg(taskId, 14);
             if (routine != NULL)
                 routine();
@@ -941,7 +941,7 @@ bool8 sub_8111C2C(void)
 {
     if (gQuestLogState != QL_STATE_PLAYBACK)
         return FALSE;
-    if (gQuestLogPlaybackState == 0 || sQuestLogCurrentScene.playbackSubstate == 1 || sQuestLogCurrentScene.playbackSubstate == 2)
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0 || sQuestLogCurrentScene.playbackSubstate == 1 || sQuestLogCurrentScene.playbackSubstate == 2)
         return TRUE;
     return FALSE;
 }
@@ -953,13 +953,13 @@ void sub_8111C68(void)
         if (JOY_NEW(A_BUTTON))
         {
             sQuestLogCurrentScene.sceneEndMode = 2;
-            gQuestLogPlaybackState = 0;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
             QuestLog_BeginFadeAtEndOfScene(-3);
         }
         else if (JOY_NEW(B_BUTTON))
         {
             sQuestLogCurrentScene.sceneEndMode = 1;
-            gQuestLogPlaybackState = 0;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
             QuestLog_SkipToEndOfPlayback(-3);
         }
     }
@@ -1058,7 +1058,7 @@ static void QuestLog_WaitFadeAndCancelPlayback(void)
                 break;
             ReadQuestLogScriptFromSav1(sCurrentSceneNum, sQuestLogSceneRecordBuffer);
         }
-        gQuestLogPlaybackState = 0;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         QuestLog_StartFinalScene();
     }
 }
@@ -1232,18 +1232,18 @@ void FinishRecordingQuestLogScene(void)
         sQuestLogCB = NULL;
         gUnknown_203AE04 = NULL;
         sEventRecordingPointer = NULL;
-        gQuestLogPlaybackState = 0;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
     }
 }
 
 void QuestLog_CutRecording(void)
 {
-    if (gQuestLogPlaybackState != 0 && gQuestLogState == QL_STATE_RECORDING)
+    if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_0 && gQuestLogState == QL_STATE_RECORDING)
     {
         TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer);
         TryRecordEvent41_IncCursor(1);
         TryRecordEvent39_GoToNextScene();
-        gQuestLogPlaybackState = 0;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         gQuestLogState = 0;
         sQuestLogCB = NULL;
     }
@@ -1253,7 +1253,7 @@ void QuestLog_CutRecording(void)
 
 static void SortQuestLogInSav1(void)
 {
-    struct QuestLog * buffer = AllocZeroed(QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLog));
+    struct QuestLogScene * buffer = AllocZeroed(QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLogScene));
     u8 i;
     u8 sceneNum = sCurrentSceneNum;
     u8 count = 0;
@@ -1269,7 +1269,7 @@ static void SortQuestLogInSav1(void)
         sceneNum++;
     }
     sCurrentSceneNum = count % QUEST_LOG_SCENE_COUNT;
-    CpuCopy16(buffer, gSaveBlock1Ptr->questLog, QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLog));
+    CpuCopy16(buffer, gSaveBlock1Ptr->questLog, QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLogScene));
     Free(buffer);
 }
 
@@ -1287,24 +1287,24 @@ void sub_811246C(struct Sprite *sprite)
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
     if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
     {
-        if (sMovementScripts[0][0] != 0xFF)
+        if (sMovementScripts[0][0] != MOVEMENT_ACTION_NONE)
         {
             ObjectEventSetHeldMovement(objectEvent, sMovementScripts[0][0]);
-            sMovementScripts[0][0] = 0xFF;
+            sMovementScripts[0][0] = MOVEMENT_ACTION_NONE;
         }
-        if (sMovementScripts[0][1] != 0xFF)
+        if (sMovementScripts[0][1] != QL_PLAYER_GFX_NONE)
         {
             QuestLogUpdatePlayerSprite(sMovementScripts[0][1]);
-            sMovementScripts[0][1] = 0xFF;
+            sMovementScripts[0][1] = QL_PLAYER_GFX_NONE;
         }
         UpdateQuestLogObjectEventCurrentMovement(objectEvent, sprite);
     }
     else
     {
-        if (sMovementScripts[objectEvent->localId][0] != 0xFF)
+        if (sMovementScripts[objectEvent->localId][0] != MOVEMENT_ACTION_NONE)
         {
             ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId][0]);
-            sMovementScripts[objectEvent->localId][0] = 0xFF;
+            sMovementScripts[objectEvent->localId][0] = MOVEMENT_ACTION_NONE;
         }
         UpdateQuestLogObjectEventCurrentMovement(objectEvent, sprite);
     }
@@ -1429,12 +1429,12 @@ static void TogglePlaybackStateForOverworldLock(u8 a0)
     switch (a0)
     {
     case 1:
-        if (gQuestLogPlaybackState == 1)
-            gQuestLogPlaybackState = 3; // Message visible, overworld locked
+        if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_1)
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_3; // Message visible, overworld locked
         break;
     case 2:
-        if (gQuestLogPlaybackState == 3)
-            gQuestLogPlaybackState = 1; // Overworld unlocked
+        if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_3)
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_1; // Overworld unlocked
         break;
     }
 }
@@ -1447,21 +1447,21 @@ void QuestLog_OnEscalatorWarp(u8 direction)
     {
     case QL_ESCALATOR_OUT: // warp out
         if (r1 == 1)
-            gQuestLogPlaybackState = 3;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
         else if (r1 == 2)
         {
             sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
             sCurQuestLogEntry[sQuestLogCursor].command = 3;
             sQuestLogCursor++;
             sNextStepDelay = 0;
-            gQuestLogPlaybackState = 4;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_4;
         }
         break;
     case QL_ESCALATOR_IN: // warp in
         if (r1 == 1)
-            gQuestLogPlaybackState = 1;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_1;
         else if (r1 == 2)
-            gQuestLogPlaybackState = 2;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_2;
         break;
     }
 }
@@ -1473,23 +1473,23 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
     switch (kind)
     {
     default:
-        gQuestLogPlaybackState = 0;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         break;
     case 1:
         sCurQuestLogEntry = entry;
         sNumEventsInLogEntry = size / sizeof(*sCurQuestLogEntry);
-        for (i = 0; i < (s32)NELEMS(sMovementScripts); i++)
+        for (i = 0; i < (s32)ARRAY_COUNT(sMovementScripts); i++)
         {
-            sMovementScripts[i][0] |= 0xFF;
-            sMovementScripts[i][1] |= 0xFF;
+            sMovementScripts[i][0] |= MOVEMENT_ACTION_NONE;
+            sMovementScripts[i][1] |= QL_PLAYER_GFX_NONE;
         }
         sQuestLogCursor = 0;
         sLastQuestLogCursor = 0;
         gQuestLogFieldInput = (struct FieldInput){};
         sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].duration;
         sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].animId;
-        sMovementScripts[0][1] = 0xFF;
-        gQuestLogPlaybackState = 1;
+        sMovementScripts[0][1] = QL_PLAYER_GFX_NONE;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_1;
         break;
     case 2:
         sCurQuestLogEntry = entry;
@@ -1528,7 +1528,7 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         sCurQuestLogEntry[sQuestLogCursor].mapGroup = 0;
         sCurQuestLogEntry[sQuestLogCursor].animId = 0;
         sQuestLogCursor++;
-        gQuestLogPlaybackState = 2;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_2;
         break;
     }
 }
@@ -1537,9 +1537,9 @@ void sub_8112B3C(void)
 {
     switch (gQuestLogPlaybackState)
     {
-    case 0:
+    case QL_PLAYBACK_STATE_0:
         break;
-    case 1:
+    case QL_PLAYBACK_STATE_1:
         if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
         {
             if (sNextStepDelay != 0)
@@ -1564,42 +1564,42 @@ void sub_8112B3C(void)
                         break;
                     case 3:
                         // End
-                        gQuestLogPlaybackState = 3;
+                        gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
                         break;
                     case 0xFE:
                         break;
                     case 0xFF:
-                        gQuestLogPlaybackState = 0;
+                        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
                         break;
                     }
-                    if (gQuestLogPlaybackState == 0)
+                    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
                         break;
                     if (++sQuestLogCursor >= sNumEventsInLogEntry)
                     {
-                        gQuestLogPlaybackState = 0;
+                        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
                         break;
                     }
                     sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].duration;
-                } while (gQuestLogPlaybackState != 3
+                } while (gQuestLogPlaybackState != QL_PLAYBACK_STATE_3
                       && (sNextStepDelay == 0 || sNextStepDelay == 0xFFFF));
             }
         }
         else if (sQuestLogCursor >= sNumEventsInLogEntry)
         {
-            gQuestLogPlaybackState = 0;
+            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         }
         break;
-    case 2:
+    case QL_PLAYBACK_STATE_2:
         if (ArePlayerFieldControlsLocked() != TRUE)
         {
             sNextStepDelay++;
             if (sQuestLogCursor >= sNumEventsInLogEntry)
-                gQuestLogPlaybackState = 0;
+                gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         }
         break;
-    case 3:
+    case QL_PLAYBACK_STATE_3:
         break;
-    case 4:
+    case QL_PLAYBACK_STATE_4:
         break;
     }
 }
@@ -1613,14 +1613,14 @@ u8 sub_8112CAC(void)
 {
     switch (gQuestLogPlaybackState)
     {
-    case 0:
+    case QL_PLAYBACK_STATE_0:
     default:
         return 0;
-    case 1:
-    case 3:
+    case QL_PLAYBACK_STATE_1:
+    case QL_PLAYBACK_STATE_3:
         return 1;
-    case 2:
-    case 4:
+    case QL_PLAYBACK_STATE_2:
+    case QL_PLAYBACK_STATE_4:
         return 2;
     }
 }
@@ -1683,7 +1683,7 @@ void sub_8112E3C(u8 state, struct FlagOrVarRecord * records, u16 size)
     s32 i;
 
     if (state == 0 || state > QL_STATE_PLAYBACK)
-        gQuestLogPlaybackState = 0;
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
     else
     {
         sFlagOrVarRecords = records;

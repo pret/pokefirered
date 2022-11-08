@@ -532,7 +532,8 @@ u8 GetSelectedGroupByIndex(u8 index)
         return sEasyChatSelectionData->groups[index];
 }
 
-static u8 *unref_sub_80BDF6C(u8 *dest, u8 groupId, u16 totalChars)
+// Unused
+static u8 *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
 {
     u16 i;
     u8 *str = StringCopy(dest, sEasyChatGroupNamePointers[groupId]);

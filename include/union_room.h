@@ -38,7 +38,7 @@ struct RfuPlayer
 
 struct RfuPlayerList
 {
-    struct RfuPlayer players[0]; // TODO: Should be size MAX_RFU_PLAYER_LIST_SIZE
+    struct RfuPlayer players[MAX_RFU_PLAYER_LIST_SIZE];
 };
 
 struct RfuIncomingPlayer
@@ -49,7 +49,7 @@ struct RfuIncomingPlayer
 
 struct RfuIncomingPlayerList
 {
-    struct RfuIncomingPlayer players[0]; // TODO: Should be size MAX_RFU_PLAYERS
+    struct RfuIncomingPlayer players[MAX_RFU_PLAYERS];
 };
 
 struct WirelessLink_Leader

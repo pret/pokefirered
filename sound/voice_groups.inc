@@ -76,7 +76,7 @@ voicegroup001::
 	voice_square_1 60, 0, 0, 2, 0, 1, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 1
+	voice_programmable_wave 60, 0, ProgrammableWaveData_1, 0, 7, 15, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -84,7 +84,7 @@ voicegroup001::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2 60, 0, 2, 0, 1, 6, 0
-	voice_programmable_wave 60, 0, gProgrammableWaveData_84A320C, 0, 7, 15, 1
+	voice_programmable_wave 60, 0, ProgrammableWaveData_3, 0, 7, 15, 1
 	voice_square_1 60, 0, 0, 2, 0, 1, 6, 0
 	voice_square_2 60, 0, 3, 0, 1, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -434,8 +434,8 @@ voicegroup008::
 	voice_square_2_alt 60, 0, 2, 0, 1, 4, 1
 	voice_square_1_alt 60, 0, 0, 2, 0, 1, 4, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 7, 15, 2
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2 60, 0, 2, 0, 1, 4, 1
 	voice_square_1 60, 0, 0, 2, 0, 1, 4, 1
@@ -533,7 +533,7 @@ voicegroup009::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 2, 0, 1, 9, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 0
 	voice_square_1_alt 60, 0, 0, 2, 0, 1, 9, 0
 	voice_square_2_alt 60, 0, 3, 0, 1, 7, 0
 	voice_square_1_alt 60, 0, 0, 3, 0, 1, 7, 0
@@ -621,7 +621,7 @@ voicegroup010::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2 60, 0, 2, 0, 1, 7, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A320C, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_3, 0, 7, 15, 2
 	voice_square_1 60, 0, 0, 2, 0, 1, 7, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 7, 1
 	voice_square_2 60, 0, 3, 0, 1, 7, 1
@@ -630,7 +630,7 @@ voicegroup010::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 2
 
 	.align 2
 voicegroup011::
@@ -715,7 +715,7 @@ voicegroup011::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2 60, 0, 2, 0, 1, 7, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 2
 	voice_square_1 60, 0, 0, 2, 0, 1, 7, 1
 	voice_square_2 60, 0, 1, 0, 1, 9, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -724,7 +724,7 @@ voicegroup011::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 2
 
 	.align 2
 voicegroup012::
@@ -1351,7 +1351,7 @@ voicegroup131::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 9, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 9, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -1472,9 +1472,9 @@ voicegroup132::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 2, 0, 4, 2, 2
 	voice_square_2_alt 60, 0, 3, 0, 1, 7, 5
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 4, 6, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 4, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A328C, 0, 4, 6, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_11, 0, 4, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 0, 0, 4, 2, 2
@@ -1482,7 +1482,7 @@ voicegroup132::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 0, 2, 9, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 0, 2, 9, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -1608,12 +1608,12 @@ voicegroup133::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -1739,7 +1739,7 @@ voicegroup134::
 	voice_square_2_alt 60, 0, 3, 0, 1, 7, 1
 	voice_square_1_alt 60, 0, 0, 3, 0, 1, 7, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 1
 	voice_square_1_alt 60, 0, 0, 2, 0, 0, 7, 1
 	voice_square_1_alt 60, 0, 0, 3, 0, 0, 7, 1
 
@@ -1917,8 +1917,8 @@ voicegroup136::
 	voice_square_2_alt 60, 0, 0, 0, 5, 0, 0
 	voice_square_1_alt 60, 0, 0, 1, 0, 5, 0, 0
 	voice_square_2_alt 60, 0, 3, 2, 4, 10, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 1, 5, 0, 3
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 1, 5, 0, 3
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 1, 5, 0, 3
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 1, 5, 0, 3
 	voice_square_2_alt 60, 0, 1, 0, 1, 10, 2
 	voice_square_1_alt 60, 0, 0, 1, 0, 1, 10, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2049,8 +2049,8 @@ voicegroup137::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 2, 4, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 2, 4, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 2, 4, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 2, 4, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2185,7 +2185,7 @@ voicegroup138::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2316,7 +2316,7 @@ voicegroup139::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2358,7 +2358,7 @@ voicegroup140::
 	voice_keysplit_all voicegroup001
 	voice_square_1 60, 0, 0, 2, 0, 2, 3, 1
 	voice_square_2_alt 60, 0, 2, 0, 2, 3, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 
 	.align 2
 voicegroup141::
@@ -2445,9 +2445,9 @@ voicegroup141::
 	voice_square_1_alt 60, 0, 0, 0, 0, 2, 5, 2
 	voice_square_2_alt 60, 0, 3, 0, 2, 7, 3
 	voice_square_2_alt 60, 0, 2, 0, 2, 6, 5
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 1, 7, 0, 6
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 1, 7, 0, 6
 	voice_square_1_alt 60, 0, 0, 1, 0, 2, 4, 2
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A320C, 0, 2, 9, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_3, 0, 2, 9, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2576,7 +2576,7 @@ voicegroup142::
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 6, 4
 	voice_square_2_alt 60, 0, 2, 0, 2, 5, 5
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A326C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_9, 0, 7, 15, 0
 
 	.align 2
 voicegroup143::
@@ -2663,7 +2663,7 @@ voicegroup143::
 	voice_square_2_alt 60, 0, 3, 0, 2, 3, 2
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 3, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2794,7 +2794,7 @@ voicegroup144::
 	voice_square_2_alt 60, 0, 3, 0, 2, 4, 2
 	voice_square_2_alt 60, 0, 1, 0, 2, 4, 3
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2934,7 +2934,7 @@ voicegroup145::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -3065,7 +3065,7 @@ voicegroup146::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -3187,7 +3187,7 @@ voicegroup147::
 	voice_square_1_alt 60, 0, 0, 2, 0, 0, 6, 1
 	voice_square_2_alt 60, 0, 2, 0, 0, 6, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 2, 4, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 2, 4, 2
 
 	.align 2
 voicegroup148::
@@ -3278,7 +3278,7 @@ voicegroup148::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -3409,12 +3409,12 @@ voicegroup149::
 	voice_square_1_alt 60, 0, 0, 0, 0, 2, 3, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 0
 
 	.align 2
 voicegroup150::
@@ -3501,7 +3501,7 @@ voicegroup150::
 	voice_square_2_alt 60, 0, 1, 0, 1, 4, 6
 	voice_square_1_alt 60, 0, 0, 1, 0, 2, 4, 5
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -3636,7 +3636,7 @@ voicegroup151::
 	voice_square_1_alt 60, 0, 0, 0, 0, 2, 3, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 
 	.align 2
 voicegroup152::
@@ -3722,9 +3722,9 @@ voicegroup152::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 2, 0, 4, 2, 1
 	voice_square_2_alt 60, 0, 3, 0, 1, 5, 2
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 4, 6, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 4, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A328C, 0, 4, 6, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_11, 0, 4, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 1, 0, 2, 4, 1
@@ -3732,7 +3732,7 @@ voicegroup152::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 0, 2, 9, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 0, 2, 9, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -3863,7 +3863,7 @@ voicegroup153::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A325C, 0, 1, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_8, 0, 1, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -3989,12 +3989,12 @@ voicegroup154::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A321C, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_4, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 0, 12, 0
 
 	.align 2
 voicegroup155::
@@ -4081,13 +4081,13 @@ voicegroup155::
 	voice_square_1_alt 60, 0, 0, 1, 0, 2, 7, 2
 	voice_square_2_alt 60, 0, 3, 0, 3, 6, 2
 	voice_square_2_alt 60, 0, 3, 0, 2, 6, 5
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 3, 6, 5
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 3, 6, 5
 	voice_square_2_alt 60, 0, 0, 0, 2, 6, 5
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A320C, 0, 7, 15, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A327C, 0, 1, 9, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_3, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_10, 0, 1, 9, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 2, 0, 2, 6, 3
@@ -4132,7 +4132,7 @@ voicegroup156::
 	voice_keysplit_all voicegroup002
 	voice_keysplit voicegroup003, KeySplitTable1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_sd90_classical_detuned_ep1_low, 255, 249, 0, 165
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -4342,12 +4342,12 @@ voicegroup157::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 1, 0, 2, 7, 2
 	voice_square_2_alt 60, 0, 3, 0, 3, 3, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 3, 6, 5
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 3, 6, 5
 	voice_square_1_alt 60, 0, 0, 0, 0, 2, 7, 2
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -4475,15 +4475,15 @@ voicegroup158::
 	voice_square_2_alt 60, 0, 3, 0, 1, 10, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 2, 1, 0, 9, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -4604,7 +4604,7 @@ voicegroup159::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1_alt 60, 0, 0, 2, 0, 7, 0, 6
 	voice_square_2_alt 60, 0, 1, 1, 5, 1, 6
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 1, 7, 0, 6
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 1, 7, 0, 6
 	voice_square_1_alt 60, 0, 0, 0, 1, 4, 3, 6
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -4740,7 +4740,7 @@ voicegroup160::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 
 	.align 2
 voicegroup161::
@@ -4831,7 +4831,7 @@ voicegroup161::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -4967,7 +4967,7 @@ voicegroup162::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 
 	.align 2
 voicegroup163::
@@ -5063,7 +5063,7 @@ voicegroup163::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A326C, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_9, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5184,7 +5184,7 @@ voicegroup164::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 2, 0, 2, 6, 2
 	voice_square_1_alt 60, 0, 0, 2, 0, 1, 7, 4
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A328C, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_11, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5194,7 +5194,7 @@ voicegroup164::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5325,7 +5325,7 @@ voicegroup165::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5451,12 +5451,12 @@ voicegroup166::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5579,7 +5579,7 @@ voicegroup167::
 	voice_square_2_alt 60, 0, 3, 0, 2, 8, 3
 	voice_square_2_alt 60, 0, 2, 0, 2, 6, 5
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 0, 6, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 0, 6, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5718,7 +5718,7 @@ voicegroup168::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A326C, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_9, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5832,7 +5832,7 @@ voicegroup169::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -5969,7 +5969,7 @@ voicegroup170::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 1, 0, 1, 7, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 1
 	voice_square_1_alt 60, 0, 0, 1, 0, 1, 7, 1
 	voice_square_2_alt 60, 0, 2, 0, 1, 0, 0
 
@@ -6056,7 +6056,7 @@ voicegroup171::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_2_alt 60, 0, 2, 0, 1, 7, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 7, 15, 1
 	voice_square_1_alt 60, 0, 0, 2, 0, 1, 7, 0
 	voice_square_2_alt 60, 0, 2, 0, 2, 0, 0
 	voice_square_2_alt 60, 0, 3, 0, 1, 7, 0
@@ -6064,8 +6064,8 @@ voicegroup171::
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 0, 0
 	voice_square_1_alt 60, 0, 0, 3, 0, 0, 7, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A323C, 0, 7, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A324C, 0, 7, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_7, 0, 7, 15, 1
 
 	.align 2
 voicegroup172::
@@ -6161,7 +6161,7 @@ voicegroup172::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A326C, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_9, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -6292,7 +6292,7 @@ voicegroup173::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -6423,7 +6423,7 @@ voicegroup174::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31FC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_2, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -6462,7 +6462,7 @@ voicegroup174::
 	voice_keysplit_all voicegroup177
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 9, 1
 	voice_square_2_alt 60, 0, 2, 0, 2, 9, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -6487,7 +6487,7 @@ voicegroup174::
 	voice_keysplit_all voicegroup002
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 3, 1
 	voice_square_2_alt 60, 0, 2, 0, 2, 3, 1
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 
 	.align 2
 voicegroup175::
@@ -6581,7 +6581,7 @@ voicegroup176::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -6777,7 +6777,7 @@ voicegroup178::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 0, 15, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 0, 15, 1
 
 	.align 2
 voicegroup179::
@@ -6868,7 +6868,7 @@ voicegroup179::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 0
 
 	.align 2
 voicegroup180::
@@ -6964,7 +6964,7 @@ voicegroup180::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -7140,7 +7140,7 @@ voicegroup182::
 	voice_square_1_alt 60, 0, 0, 0, 0, 2, 3, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 
 	.align 2
 voicegroup183::
@@ -7227,7 +7227,7 @@ voicegroup183::
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 4, 1
 	voice_square_2_alt 60, 0, 2, 0, 2, 4, 1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -7278,7 +7278,7 @@ voicegroup184::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -7448,10 +7448,10 @@ voicegroup185::
 	voice_square_1_alt 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A328C, 0, 7, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A327C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_11, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_10, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A322C, 0, 7, 15, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_5, 0, 7, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -7718,7 +7718,7 @@ voicegroup187::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 0, 12, 0
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 0, 12, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -7849,7 +7849,7 @@ voicegroup188::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -7983,7 +7983,7 @@ voicegroup189::
 
 	.align 2
 voicegroup190::
-	voice_programmable_wave_alt 60, 0, gProgrammableWaveData_84A31EC, 0, 7, 15, 2
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_1, 0, 7, 15, 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

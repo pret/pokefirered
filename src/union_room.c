@@ -40,7 +40,7 @@
 #include "union_room.h"
 #include "union_room_battle.h"
 #include "union_room_chat.h"
-#include "rfu_union_tool.h"
+#include "union_room_player_avatar.h"
 #include "union_room_message.h"
 #include "constants/songs.h"
 #include "constants/maps.h"
@@ -2317,13 +2317,13 @@ static void Task_RunUnionRoom(u8 taskId)
         ClearRfuPlayerList(uroom->playerList->players, MAX_UNION_ROOM_LEADERS);
         sPlayerCurrActivity = IN_UNION_ROOM;
         uroom->searchTaskId = CreateTask_SearchForChildOrParent(uroom->incomingParentList, uroom->incomingChildList, LINK_GROUP_UNION_ROOM_RESUME);
-        ZeroUnionObjWork(uroom->objects);
+        InitUnionRoomPlayerObjects(uroom->objects);
         MakeGroupAssemblyAreasPassable();
         uroom->state = UR_STATE_INIT_OBJECTS;
         break;
     case UR_STATE_INIT_OBJECTS:
-        CreateGroupMemberObjectsInvisible(uroom->spriteIds, taskData[0]);
-        if (++taskData[0] == 8)
+        CreateUnionRoomPlayerSprites(uroom->spriteIds, taskData[0]);
+        if (++taskData[0] == MAX_UNION_ROOM_LEADERS)
             uroom->state = UR_STATE_INIT_LINK;
         break;
     case UR_STATE_INIT_LINK:
@@ -2515,7 +2515,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (!gReceivedRemoteLinkPlayers)
         {
             HandleCancelActivity(FALSE);
-            UpdateUnionGroupMemberFacing(taskData[0], taskData[1], uroom->playerList);
+            UpdateUnionRoomMemberFacing(taskData[0], taskData[1], uroom->playerList);
             uroom->state = UR_STATE_INIT_LINK;
         }
         break;
@@ -2840,7 +2840,7 @@ static void Task_RunUnionRoom(u8 taskId)
         Free(uroom->incomingParentList);
         Free(uroom->incomingChildList);
         DestroyTask(uroom->searchTaskId);
-        DestroyGroupMemberObjects(uroom->spriteIds);
+        DestroyUnionRoomPlayerSprites(uroom->spriteIds);
         uroom->state = UR_STATE_START_ACTIVITY_FADE;
         break;
     case UR_STATE_START_ACTIVITY_FADE:
@@ -3051,7 +3051,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (PrintOnTextbox(&uroom->textState, gStringVar4))
         {
             HandleCancelActivity(TRUE);
-            UpdateUnionGroupMemberFacing(taskData[0], taskData[1], uroom->playerList);
+            UpdateUnionRoomMemberFacing(taskData[0], taskData[1], uroom->playerList);
             uroom->state = UR_STATE_MAIN;
         }
         break;

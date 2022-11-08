@@ -7,6 +7,7 @@
 #define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50
+#define OVERWORLD_RECV_QUEUE_MAX 3
 #define BLOCK_BUFFER_SIZE 0x100
 
 #define LINK_SLAVE 0
@@ -50,23 +51,41 @@
 #define EXTRACT_LINK_ERRORS(status) \
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
-#define LINKCMD_SEND_LINK_TYPE 0x2222
-#define LINKCMD_0x2FFE             0x2FFE
-#define LINKCMD_SEND_HELD_KEYS     0x4444
-#define LINKCMD_0x5555             0x5555
-#define LINKCMD_0x5566             0x5566
-#define LINKCMD_0x5FFF             0x5FFF
-#define LINKCMD_0x6666             0x6666
-#define LINKCMD_0x7777             0x7777
-#define LINKCMD_COUNTDOWN          0x7FFF
-#define LINKCMD_CONT_BLOCK         0x8888
-#define LINKCMD_0xAAAA             0xAAAA
-#define LINKCMD_0xAAAB             0xAAAB
-#define LINKCMD_INIT_BLOCK         0xBBBB
-#define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
-#define LINKCMD_0xCCCC             0xCCCC
+#define LINKCMD_BLENDER_STOP            0x1111
+#define LINKCMD_SEND_LINK_TYPE          0x2222
+#define LINKCMD_BLENDER_SCORE_MISS      0x2345
+#define LINKCMD_READY_EXIT_STANDBY      0x2FFE
+#define LINKCMD_SEND_PACKET             0x2FFF
+#define LINKCMD_BLENDER_SEND_KEYS       0x4444
+#define LINKCMD_BLENDER_SCORE_BEST      0x4523
+#define LINKCMD_BLENDER_SCORE_GOOD      0x5432
+#define LINKCMD_DUMMY_1                 0x5555
+#define LINKCMD_DUMMY_2                 0x5566
+#define LINKCMD_READY_CLOSE_LINK        0x5FFF
+#define LINKCMD_SEND_EMPTY              0x6666
+#define LINKCMD_SEND_0xEE               0x7777
+#define LINKCMD_BLENDER_PLAY_AGAIN      0x7779
+#define LINKCMD_COUNTDOWN               0x7FFF
+#define LINKCMD_CONT_BLOCK              0x8888
+#define LINKCMD_BLENDER_NO_BERRIES      0x9999
+#define LINKCMD_BLENDER_NO_PBLOCK_SPACE 0xAAAA
+#define LINKCMD_SEND_ITEM               0xAAAB
+#define LINKCMD_READY_TO_TRADE          0xAABB
+#define LINKCMD_READY_FINISH_TRADE      0xABCD
+#define LINKCMD_INIT_BLOCK              0xBBBB
+#define LINKCMD_READY_CANCEL_TRADE      0xBBCC
+#define LINKCMD_SEND_HELD_KEYS          0xCAFE
+#define LINKCMD_SEND_BLOCK_REQ          0xCCCC
+#define LINKCMD_START_TRADE             0xCCDD
+#define LINKCMD_CONFIRM_FINISH_TRADE    0xDCBA
+#define LINKCMD_SET_MONS_TO_TRADE       0xDDDD
+#define LINKCMD_PLAYER_CANCEL_TRADE     0xDDEE
+#define LINKCMD_REQUEST_CANCEL          0xEEAA
+#define LINKCMD_BOTH_CANCEL_TRADE       0xEEBB
+#define LINKCMD_PARTNER_CANCEL_TRADE    0xEECC
+#define LINKCMD_NONE                    0xEFFF
 
-#define LINKTYPE_TRADE              0x1111  // trade
+#define LINKTYPE_TRADE               0x1111  // trade
 #define LINKTYPE_0x1122              0x1122  // trade
 #define LINKTYPE_TRADE_SETUP         0x1133
 #define LINKTYPE_0x1144              0x1144  // trade
@@ -80,8 +99,8 @@
 #define LINKTYPE_BATTLE_TOWER        0x2288
 #define LINKTYPE_RECORD_MIX_BEFORE   0x3311
 #define LINKTYPE_RECORD_MIX_AFTER    0x3322
-#define LINKTYPE_BERRY_BLENDER_SETUP              0x4411
-#define LINKTYPE_CONTEST_GMODE              0x6601
+#define LINKTYPE_BERRY_BLENDER_SETUP 0x4411
+#define LINKTYPE_CONTEST_GMODE       0x6601
 
 enum {
     BLOCK_REQ_SIZE_NONE, // Identical to 200
@@ -262,10 +281,10 @@ void SetCloseLinkCallback(void);
 void OpenLink(void);
 bool8 IsLinkMaster(void);
 void CheckShouldAdvanceLinkState(void);
-void Link_StartSend5FFFwithParam(u16 a0);
+void SetCloseLinkCallbackAndType(u16 type);
 void CloseLink(void);
 bool8 IsLinkTaskFinished(void);
-bool32 LinkRecvQueueLengthMoreThan2(void);
+bool32 IsLinkRecvQueueAtOverworldMax(void);
 void ResetSerial(void);
 void SetWirelessCommType1(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);

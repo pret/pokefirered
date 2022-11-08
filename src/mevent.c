@@ -210,7 +210,7 @@ static u32 EReaderReceive(u8 * state_p, u16 * receiveDelay)
             }
             break;
         case 4:
-            Link_StartSend5FFFwithParam(0);
+            SetCloseLinkCallbackAndType(0);
             *state_p = 5;
             break;
         case 5:
@@ -416,7 +416,7 @@ static void Task_EReaderComm(u8 taskId)
             break;
         case 15:
             data->initialSendResult = ValidateTrainerTowerData((struct EReaderTrainerTowerSet *)gDecompressionBuffer);
-            Link_StartSend5FFFwithParam(data->initialSendResult);
+            SetCloseLinkCallbackAndType(data->initialSendResult);
             data->state = 16;
             break;
         case 16:

@@ -6,7 +6,7 @@
 #include "new_game.h"
 #include "overworld.h"
 
-void ResetSaveHeap(void)
+void ReloadSave(void)
 {
     u16 imeBackup = REG_IME;
     

@@ -620,7 +620,7 @@ void Field_AskSaveTheGame(void)
 static void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(void))
 {
     StringExpandPlaceholders(gStringVar4, str);
-    sub_80F7768(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterForMessage(TRUE);
     sSaveDialogIsPrinting = TRUE;
     sSaveDialogCB = saveDialogCB;
@@ -870,7 +870,7 @@ bool32 DoSetUpSaveAfterLinkBattle(u8 *state)
         ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, sBGTemplates_AfterLinkSaveMessage, NELEMS(sBGTemplates_AfterLinkSaveMessage));
         InitWindows(sWindowTemplates_AfterLinkSaveMessage);
-        TextWindow_SetStdFrame0_WithPal(0, 0x008, 0xF0);
+        LoadStdWindowGfx(0, 0x008, 0xF0);
         break;
     case 3:
         ShowBg(0);
@@ -957,7 +957,7 @@ static void PrintSaveStats(void)
     u8 y;
     u8 x;
     sSaveStatsWindowId = AddWindow(&sSaveStatsWindowTemplate);
-    TextWindow_SetStdFrame0_WithPal(sSaveStatsWindowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(sSaveStatsWindowId, 0x21D, 0xD0);
     DrawStdFrameWithCustomTileAndPalette(sSaveStatsWindowId, FALSE, 0x21D, 0x0D);
     SaveStatToString(SAVE_STAT_LOCATION, gStringVar4, 8);
     x = (u32)(112 - GetStringWidth(FONT_2, gStringVar4, -1)) / 2;

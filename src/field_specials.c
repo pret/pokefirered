@@ -325,7 +325,7 @@ void SpawnCameraObject(void)
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveObjectEventByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 void BufferEReaderTrainerName(void)
@@ -333,7 +333,8 @@ void BufferEReaderTrainerName(void)
     CopyEReaderTrainerName5(gStringVar1);
 }
 
-static const u8 sUnused_83F5B04[] = {
+// Unused
+static const u8 sSlotMachineRandomSeeds[] = {
     13,
     14,
     15,
@@ -752,7 +753,8 @@ static const u8 *const sFloorNamePointers[] = {
     gText_Rooftop
 };
 
-static const u8 sUnused_83F5B84[] = {
+// Unused
+static const u8 sFloorNameWidthPadding[] = {
     26,
     26,
     26,
@@ -1096,7 +1098,7 @@ void DrawElevatorCurrentFloorWindow(void)
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
-        TextWindow_SetStdFrame0_WithPal(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
+        LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
         AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_2, gText_NowOn, 0, 2, 0xFF, NULL);
         floorname = sFloorNamePointers[gSpecialVar_0x8005];

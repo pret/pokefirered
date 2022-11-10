@@ -335,8 +335,8 @@ static void SetNPCInitialCoordsAtScene(u8 sceneNum)
             questLog->npcData[i].y = (u8)gSaveBlock1Ptr->objectEventTemplates[i].y;
             questLog->npcData[i].negy = FALSE;
         }
-        questLog->npcData[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].elevation;
-        questLog->npcData[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].movementType;
+        questLog->npcData[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation;
+        questLog->npcData[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType;
     }
 }
 
@@ -459,7 +459,7 @@ void sub_8110FCC(void)
 
 static bool8 FieldCB2_QuestLogStartPlaybackWithWarpExit(void)
 {
-    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_PLAYBACK);
     FieldCB_DefaultWarpExit();
     sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
@@ -469,7 +469,7 @@ static bool8 FieldCB2_QuestLogStartPlaybackWithWarpExit(void)
 
 static bool8 FieldCB2_QuestLogStartPlaybackStandingInPlace(void)
 {
-    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_PLAYBACK);
     FieldCB_WarpExitFadeFromBlack();
     sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
@@ -525,8 +525,8 @@ static void QuestLogPlaybackSetObjectEventTemplates(u8 sceneNum)
             gSaveBlock1Ptr->objectEventTemplates[i].y = -(u8)questLog->npcData[i].y;
         else
             gSaveBlock1Ptr->objectEventTemplates[i].y = questLog->npcData[i].y;
-        gSaveBlock1Ptr->objectEventTemplates[i].elevation = questLog->npcData[i].elevation;
-        gSaveBlock1Ptr->objectEventTemplates[i].movementType = questLog->npcData[i].movementType;
+        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation = questLog->npcData[i].elevation;
+        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType = questLog->npcData[i].movementType;
     }
 
     SetSav1ObjectEventsFromQuestLog(questLog, gSaveBlock1Ptr->objectEventTemplates);
@@ -1076,7 +1076,7 @@ void QuestLog_BackUpPalette(u16 offset, u16 size)
 
 static bool8 FieldCB2_FinalScene(void)
 {
-    LoadPalette(stdpal_get(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
     DrawPreviouslyOnQuestHeader(0);
     FieldCB_WarpExitFadeFromBlack();
     CreateTask(Task_FinalScene_WaitFade, 0xFF);
@@ -1297,7 +1297,7 @@ void sub_811246C(struct Sprite *sprite)
             QuestLogUpdatePlayerSprite(sMovementScripts[0][1]);
             sMovementScripts[0][1] = 0xFF;
         }
-        sub_8063E28(objectEvent, sprite);
+        UpdateQuestLogObjectEventCurrentMovement(objectEvent, sprite);
     }
     else
     {
@@ -1306,7 +1306,7 @@ void sub_811246C(struct Sprite *sprite)
             ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId][0]);
             sMovementScripts[objectEvent->localId][0] = 0xFF;
         }
-        sub_8063E28(objectEvent, sprite);
+        UpdateQuestLogObjectEventCurrentMovement(objectEvent, sprite);
     }
 }
 

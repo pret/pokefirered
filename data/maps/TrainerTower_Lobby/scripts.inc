@@ -72,7 +72,7 @@ TrainerTower_Lobby_EventScript_Enter::
 	ttower_getchallengestatus
 	switch VAR_RESULT
 	case CHALLENGE_STATUS_LOST, TrainerTower_Lobby_EventScript_LostChallenge
-	case CHALLENGE_STATUS_UNK, TrainerTower_Lobby_EventScript_164938
+	case CHALLENGE_STATUS_UNK, TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist
 	case CHALLENGE_STATUS_NORMAL, TrainerTower_Lobby_EventScript_EnterEnd
 
 TrainerTower_Lobby_EventScript_LostChallenge::
@@ -84,7 +84,7 @@ TrainerTower_Lobby_EventScript_LostChallenge::
 	goto TrainerTower_Lobby_EventScript_ExitChallenge
 
 @ Presumably E-Reader related
-TrainerTower_Lobby_EventScript_164938::
+TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist::
 	lock
 	faceplayer
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist

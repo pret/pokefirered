@@ -548,7 +548,7 @@ static void Task_OaksSpeech1(u8 taskId)
         InitTextBoxGfxAndPrinters();
         Menu_LoadStdPalAt(0xD0);
         LoadPalette(sHelpDocsPalette, 0x000, 0x080);
-        LoadPalette(stdpal_get(2) + 15, 0x000, 0x002);
+        LoadPalette(GetTextWindowPalette(2) + 15, 0x000, 0x002);
         break;
     case 5:
         sOakSpeechResources->textSpeed = GetTextSpeedSetting();
@@ -629,7 +629,7 @@ static void Task_OakSpeech4(u8 taskId)
         }
         CopyBgTilemapBufferToVram(1);
     }
-    BeginNormalPaletteFade(0xFFFFDFFF, -1, 16, 0, stdpal_get(2)[15]);
+    BeginNormalPaletteFade(0xFFFFDFFF, -1, 16, 0, GetTextWindowPalette(2)[15]);
     gTasks[taskId].func = Task_OaksSpeech2;
 }
 
@@ -642,7 +642,7 @@ static void Task_OaksSpeech2(u8 taskId)
             gTasks[taskId].data[15] = 1;
             if (sOakSpeechResources->unk_0012 < 2)
             {
-                BeginNormalPaletteFade(0xFFFFDFFF, -1, 0, 16, stdpal_get(2)[15]);
+                BeginNormalPaletteFade(0xFFFFDFFF, -1, 0, 16, GetTextWindowPalette(2)[15]);
             }
         }
         else
@@ -650,7 +650,7 @@ static void Task_OaksSpeech2(u8 taskId)
             if (sOakSpeechResources->unk_0012 != 0)
             {
                 gTasks[taskId].data[15] = -1;
-                BeginNormalPaletteFade(0xFFFFDFFF, -1, 0, 16, stdpal_get(2)[15]);
+                BeginNormalPaletteFade(0xFFFFDFFF, -1, 0, 16, GetTextWindowPalette(2)[15]);
             }
             else
                 return;

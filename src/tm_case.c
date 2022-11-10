@@ -1482,11 +1482,11 @@ static void InitWindowTemplatesAndPals(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    TextWindow_SetUserSelectedFrame(0, 0x5B, 0xE0);
-    TextWindow_LoadResourcesStdFrame0(0, 0x64, 0xB0);
-    TextWindow_SetStdFrame0_WithPal(0, 0x78, 0xD0);
-    LoadPalette(gTMCaseMainWindowPalette, 0xF0, 0x20);
-    LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
+    LoadUserWindowGfx(0, 0x5B, 0xE0);
+    LoadMenuMessageWindowGfx(0, 0x64, 0xB0);
+    LoadStdWindowGfx(0, 0x78, 0xD0);
+    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, 0xA0, 0x20);
     LoadPalette(sPal3Override, 0xF6, 0x04);
     LoadPalette(sPal3Override, 0xD6, 0x04);
     ListMenuLoadStdPalAt(0xc0, 0x01);

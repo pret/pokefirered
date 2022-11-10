@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 10,
       "y": 15,
@@ -35,6 +36,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 15,
       "y": 13,
@@ -54,28 +56,28 @@
       "y": 23,
       "elevation": 3,
       "dest_map": "MAP_SIX_ISLAND_HARBOR",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 11,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_SIX_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_SIX_ISLAND_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 20,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_SIX_ISLAND_MART",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
@@ -94,7 +96,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_LEPPA_BERRY",
-      "flag": "HIDDEN_ITEM_SIX_ISLAND_LEPPA_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_SIX_ISLAND_LEPPA_BERRY",
       "quantity": 1,
       "underfoot": false
     }

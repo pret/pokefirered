@@ -534,7 +534,7 @@ static void Task_InitPokeStorage(u8 taskId)
         PutWindowTilemap(0);
         ClearWindowTilemap(1);
         CpuFill32(0, (void *)VRAM, 0x200);
-        TextWindow_SetUserSelectedFrame(1, 0xB, 0xE0);
+        LoadUserWindowGfx(1, 0xB, 0xE0);
         break;
     case 3:
         ResetAllBgCoords();
@@ -2545,7 +2545,7 @@ static bool8 DoShowPartyMenu(void)
 static void InitPokeStorageBg0(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
-    TextWindow_SetStdFrame0_WithPal(1, 2, 0xD0);
+    LoadStdWindowGfx(1, 2, 0xD0);
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     CopyBgTilemapBufferToVram(0);
 }

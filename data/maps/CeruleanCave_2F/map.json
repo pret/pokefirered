@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 9,
       "y": 18,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_PP_UP"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 16,
@@ -42,6 +44,7 @@
       "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_ULTRA_BALL"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 33,
       "y": 12,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_FULL_RESTORE"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 33,
       "y": 10,
@@ -68,6 +72,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 33,
       "y": 9,
@@ -81,6 +86,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 25,
       "y": 11,
@@ -94,6 +100,7 @@
       "flag": "FLAG_TEMP_14"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 28,
       "y": 20,
@@ -107,6 +114,7 @@
       "flag": "FLAG_TEMP_15"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 30,
       "y": 20,
@@ -120,6 +128,7 @@
       "flag": "FLAG_TEMP_16"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 13,
@@ -133,6 +142,7 @@
       "flag": "FLAG_TEMP_17"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 23,
       "y": 16,
@@ -146,6 +156,7 @@
       "flag": "FLAG_TEMP_18"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 13,
       "y": 6,
@@ -159,6 +170,7 @@
       "flag": "FLAG_TEMP_19"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 12,
@@ -172,6 +184,7 @@
       "flag": "FLAG_TEMP_1A"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 10,
       "y": 20,
@@ -191,42 +204,42 @@
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CAVE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CAVE_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 7,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CAVE_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 26,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CAVE_1F",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 23,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CAVE_1F",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 5,
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_CERULEAN_CAVE_1F",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

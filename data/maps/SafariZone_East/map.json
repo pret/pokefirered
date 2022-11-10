@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 13,
       "y": 12,
@@ -29,6 +30,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_EAST_MAX_POTION"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 37,
       "y": 15,
@@ -42,6 +44,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_EAST_FULL_RESTORE"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 31,
       "y": 18,
@@ -55,6 +58,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_EAST_TM11"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 36,
       "y": 17,
@@ -74,49 +78,49 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_NORTH",
-      "dest_warp_id": 6
+      "dest_warp_id": "6"
     },
     {
       "x": 8,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_NORTH",
-      "dest_warp_id": 7
+      "dest_warp_id": "7"
     },
     {
       "x": 8,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_NORTH",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 8,
       "y": 26,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_CENTER",
-      "dest_warp_id": 9
+      "dest_warp_id": "9"
     },
     {
       "x": 8,
       "y": 27,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_CENTER",
-      "dest_warp_id": 10
+      "dest_warp_id": "10"
     },
     {
       "x": 8,
       "y": 28,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_CENTER",
-      "dest_warp_id": 11
+      "dest_warp_id": "11"
     },
     {
       "x": 40,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_EAST_REST_HOUSE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

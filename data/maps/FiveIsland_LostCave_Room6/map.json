@@ -21,28 +21,28 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 8,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM13",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 5,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 2,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM7",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

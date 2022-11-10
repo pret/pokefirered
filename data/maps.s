@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"

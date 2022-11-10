@@ -180,7 +180,7 @@ u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseT
         palette = 15 * 16;
     else
         palette *= 16;
-    LoadPalette(stdpal_get(2), palette, 0x20);
+    LoadPalette(GetTextWindowPalette(2), palette, 0x20);
     return sTopBarWindowId;
 }
 

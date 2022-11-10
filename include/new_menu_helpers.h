@@ -5,6 +5,8 @@
 #include "text.h"
 #include "task.h"
 
+extern const u16 gMenuMessageWindow_Gfx[];
+
 void ClearScheduledBgCopiesToVram(void);
 void ScheduleBgCopyTilemapToVram(u8 bgId);
 void DoScheduledBgTilemapCopiesToVram(void);
@@ -33,7 +35,7 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void ClearStdWindowAndFrame(u8 windowId, bool8 copyNow);
 void EraseFieldMessageBox(bool8 copyToVram);
 void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram);
-void sub_80F7768(u8 windowId, bool8 copyToVram);
+void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram);
 void Menu_LoadStdPal(void);
 void Menu_LoadStdPalAt(u16 offset);
 void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *src, TaskFunc callback);
@@ -46,7 +48,7 @@ void RemoveStartMenuWindow(void);
 u16 GetStdWindowBaseTileNum(void);
 void DrawHelpMessageWindowWithText(const u8 * text);
 void DestroyHelpMessageWindow_(void);
-void LoadSignPostWindowFrameGfx(void);
+void LoadSignpostWindowFrameGfx(void);
 void SetDefaultFontsPointer(void);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

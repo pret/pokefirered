@@ -1284,7 +1284,7 @@ u8 GetECSelectWordNumRows(void)
     return sEasyChatScreen->selectWordNumRows;
 }
 
-u8 unref_sub_80FFE60(void)
+static u8 UnusedDummy(void)
 {
     return 0;
 }

@@ -1,0 +1,18 @@
+{{ doNotModifyHeader }}
+#ifndef GUARD_DATA_REGION_MAP_REGION_MAP_ENTRY_STRINGS_H
+#define GUARD_DATA_REGION_MAP_REGION_MAP_ENTRY_STRINGS_H
+
+## for map_section in map_sections
+{% if isEmptyString(getVar(map_section.name)) and not existsIn(map_section, "name_clone") %}{{ setVar(map_section.name, map_section.map_section) }}{% endif %}
+## endfor
+
+## for map_section in map_sections
+{% if getVar(map_section.name) == map_section.map_section %}
+static const u8 sMapsecName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name }}");
+{% endif %}
+{% if existsIn(map_section, "name_clone") %}
+static const u8 sMapsecName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name }}");
+{% endif %}
+## endfor
+
+#endif // GUARD_DATA_REGION_MAP_REGION_MAP_ENTRY_STRINGS_H

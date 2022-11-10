@@ -109,7 +109,7 @@ static void MainCB2_SetUp(void)
         break;
     case 3:
         LoadFrameGfxOnBg(3);
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         gMain.state++;
         break;
     case 4:

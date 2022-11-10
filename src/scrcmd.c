@@ -2212,13 +2212,13 @@ bool8 ScrCmd_removecoins(struct ScriptContext * ctx)
 
 bool8 ScrCmd_signmsg(struct ScriptContext * ctx)
 {
-    MsgSetSignPost();
+    MsgSetSignpost();
     return FALSE;
 }
 
 bool8 ScrCmd_normalmsg(struct ScriptContext * ctx)
 {
-    MsgSetNotSignPost();
+    MsgSetNotSignpost();
     return FALSE;
 }
 

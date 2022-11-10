@@ -813,8 +813,8 @@ static const u8 sBallCatchBonuses[] =
     [ITEM_SAFARI_BALL - ITEM_ULTRA_BALL] = 15
 };
 
-// not used
-static const u32 gUnknown_8250898 = 0xFF7EAE60;
+// unknown unused data
+static const u32 sUnused = 0xFF7EAE60;
 
 static void Cmd_attackcanceler(void)
 {

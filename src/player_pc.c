@@ -88,8 +88,8 @@ static const struct MenuAction sMenuActions_TopMenu[] = {
     {gText_TurnOff, Task_PlayerPcTurnOff}
 };
 
-static const u8 gUnknown_8402200[] = { 0, 1, 2 };
-static const u8 gUnknown_8402203[] = { 0, 1, 2 };
+static const u8 sItemOrder_BedroomPC[] = { 0, 1, 2 };
+static const u8 sItemOrder_PlayerPC[] = { 0, 1, 2 };
 
 static const struct MenuAction sMenuActions_ItemPc[] = {
     {gText_WithdrawItem2, Task_PlayerPcWithdrawItem},
@@ -154,7 +154,7 @@ void BedroomPC(void)
 
     gPlayerPcMenuManager.notInRoom = FALSE;
     BackupHelpContext();
-    sItemOrder = gUnknown_8402200;
+    sItemOrder = sItemOrder_BedroomPC;
     sTopMenuItemCount = 3;
     taskId = CreateTask(TaskDummy, 0);
     DisplayItemMessageOnField(taskId, FONT_2, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);
@@ -166,7 +166,7 @@ void PlayerPC(void)
 
     gPlayerPcMenuManager.notInRoom = TRUE;
     BackupHelpContext();
-    sItemOrder = gUnknown_8402203;
+    sItemOrder = sItemOrder_PlayerPC;
     sTopMenuItemCount = 3;
     taskId = CreateTask(TaskDummy, 0);
     DisplayItemMessageOnField(taskId, FONT_2, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);

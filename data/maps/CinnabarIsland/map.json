@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 14,
       "y": 6,
@@ -40,6 +41,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 11,
       "y": 11,
@@ -53,6 +55,7 @@
       "flag": "0"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BILL",
       "x": 20,
       "y": 7,
@@ -66,6 +69,7 @@
       "flag": "FLAG_HIDE_CINNABAR_BILL"
     },
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SEAGALLOP",
       "x": 23,
       "y": 7,
@@ -85,35 +89,35 @@
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_POKEMON_MANSION_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_GYM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 19,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_MART",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

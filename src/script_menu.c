@@ -306,7 +306,7 @@ static const struct MenuAction sScriptMultiChoiceMenu_Eeveelutions[] = {
 };
 
 static const struct MenuAction sScriptMultiChoiceMenu_BikeShop[] = {
-    { gText_Bicycle_1000000 },
+    { gText_Bicycle_Price },
     { gText_NoThanks }
 };
 
@@ -853,7 +853,8 @@ bool8 ScriptMenu_YesNo(u8 unused, u8 stuff)
     return TRUE;
 }
 
-bool8 sub_809CE38(void)
+// Unused
+static bool8 IsScriptActive(void)
 {
     if (gSpecialVar_Result == SCR_MENU_UNSET)
         return FALSE;
@@ -1002,7 +1003,7 @@ static void CreatePCMenuWindow(void)
 
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
-    sub_80F7768(0, TRUE);
+    LoadMessageBoxAndFrameGfx(0, TRUE);
     AddTextPrinterParameterized2(0, FONT_2, Text_AccessWhichPC, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 

@@ -28,9 +28,9 @@ struct BattleBackground
 static void CB2_unused(void);
 static u8 GetBattleTerrainOverride(void);
 
-static const u8 gUnknown_824829C[] = {1, 2};
+static const u8 sUnused[] = {1, 2};
 
-static const struct OamData gOamData_82482A0 = {
+static const struct OamData sVsLetter_V_OamData = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -46,7 +46,7 @@ static const struct OamData gOamData_82482A0 = {
     .affineParam = 0
 };
 
-static const struct OamData gOamData_82482A8 = {
+static const struct OamData sVsLetter_S_OamData = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -62,38 +62,38 @@ static const struct OamData gOamData_82482A8 = {
     .affineParam = 0
 };
 
-static const union AffineAnimCmd gUnknown_82482B0[] = {
+static const union AffineAnimCmd sVsLetterAffineAnimCmds0[] = {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gUnknown_82482C0[] = {
+static const union AffineAnimCmd sVsLetterAffineAnimCmds1[] = {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(0x18, 0x18, 0x0, 0x80),
     AFFINEANIMCMD_FRAME(0x18, 0x18, 0x0, 0x80),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gAffineAnimTable_82482E0[] = {
-    gUnknown_82482B0,
-    gUnknown_82482C0
+static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] = {
+    sVsLetterAffineAnimCmds0,
+    sVsLetterAffineAnimCmds1
 };
 
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate = {
     .tileTag = TAG_VS_LETTERS,
     .paletteTag = TAG_VS_LETTERS,
-    .oam = &gOamData_82482A0,
+    .oam = &sVsLetter_V_OamData,
     .anims = gDummySpriteAnimTable,
-    .affineAnims = gAffineAnimTable_82482E0,
+    .affineAnims = sVsLetterAffineAnimTable,
     .callback = SpriteCB_VsLetterDummy
 };
 
 static const struct SpriteTemplate sVsLetter_S_SpriteTemplate = {
     .tileTag = TAG_VS_LETTERS,
     .paletteTag = TAG_VS_LETTERS,
-    .oam = &gOamData_82482A8,
+    .oam = &sVsLetter_S_OamData,
     .anims = gDummySpriteAnimTable,
-    .affineAnims = gAffineAnimTable_82482E0,
+    .affineAnims = sVsLetterAffineAnimTable,
     .callback = SpriteCB_VsLetterDummy
 };
 
@@ -139,8 +139,8 @@ const struct BgTemplate gBattleBgTemplates[4] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_8248330[] = {
-    {
+static const struct WindowTemplate sStandardBattleWindowTemplates[] = {
+    [B_WIN_MSG] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -148,7 +148,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x090
-    }, {
+    },
+    [B_WIN_ACTION_PROMPT] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 35,
@@ -156,7 +157,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x1c0
-    }, {
+    },
+    [B_WIN_ACTION_MENU] = {
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 35,
@@ -164,7 +166,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x190
-    }, {
+    },
+    [B_WIN_MOVE_NAME_1] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 55,
@@ -172,7 +175,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x300
-    }, {
+    },
+    [B_WIN_MOVE_NAME_2] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 55,
@@ -180,7 +184,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x310
-    }, {
+    },
+    [B_WIN_MOVE_NAME_3] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 57,
@@ -188,7 +193,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x320
-    }, {
+    },
+    [B_WIN_MOVE_NAME_4] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 57,
@@ -196,7 +202,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x330
-    }, {
+    },
+    [B_WIN_PP] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 55,
@@ -204,7 +211,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x290
-    }, {
+    },
+    [B_WIN_MOVE_TYPE] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 57,
@@ -212,7 +220,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x296
-    }, {
+    },
+    [B_WIN_PP_REMAINING] = {
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 55,
@@ -220,7 +229,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x2a6
-    }, {
+    },
+    [B_WIN_DUMMY] = {
         .bg = 0,
         .tilemapLeft = 25,
         .tilemapTop = 57,
@@ -228,7 +238,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 0,
         .paletteNum = 5,
         .baseBlock = 0x2b0
-    }, {
+    },
+    [B_WIN_SWITCH_PROMPT] = {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 55,
@@ -236,7 +247,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x2b0
-    }, {
+    },
+    [B_WIN_LEVEL_UP_BOX] = {
         .bg = 1,
         .tilemapLeft = 19,
         .tilemapTop = 8,
@@ -244,7 +256,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 11,
         .paletteNum = 5,
         .baseBlock = 0x100
-    }, {
+    },
+    [B_WIN_LEVEL_UP_BANNER] = {
         .bg = 2,
         .tilemapLeft = 18,
         .tilemapTop = 0,
@@ -252,7 +265,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 3,
         .paletteNum = 6,
         .baseBlock = 0x16e
-    }, {
+    },
+    [B_WIN_YESNO] = {
         .bg = 0,
         .tilemapLeft = 25,
         .tilemapTop = 9,
@@ -260,7 +274,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 5,
         .baseBlock = 0x100
-    }, {
+    },
+    [B_WIN_VS_PLAYER] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 3,
@@ -268,7 +283,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x020
-    }, {
+    },
+    [B_WIN_VS_OPPONENT] = {
         .bg = 2,
         .tilemapLeft = 2,
         .tilemapTop = 3,
@@ -276,7 +292,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x040
-    }, {
+    },
+    [B_WIN_VS_MULTI_PLAYER_1] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -284,7 +301,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x020
-    }, {
+    },
+    [B_WIN_VS_MULTI_PLAYER_2] = {
         .bg = 2,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -292,7 +310,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x040
-    }, {
+    },
+    [B_WIN_VS_MULTI_PLAYER_3] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 6,
@@ -300,7 +319,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x060
-    }, {
+    },
+    [B_WIN_VS_MULTI_PLAYER_4] = {
         .bg = 2,
         .tilemapLeft = 2,
         .tilemapTop = 6,
@@ -308,7 +328,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x080
-    }, {
+    },
+    [B_WIN_VS_OUTCOME_DRAW] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 2,
@@ -316,7 +337,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x0a0
-    }, {
+    },
+    [B_WIN_VS_OUTCOME_LEFT] = {
         .bg = 0,
         .tilemapLeft = 4,
         .tilemapTop = 2,
@@ -324,7 +346,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x0a0
-    }, {
+    },
+    [B_WIN_VS_OUTCOME_RIGHT] = {
         .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 2,
@@ -332,7 +355,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x0b0
-    }, {
+    },
+    [B_WIN_OAK_OLD_MAN] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -340,7 +364,8 @@ static const struct WindowTemplate gUnknown_8248330[] = {
         .height = 4,
         .paletteNum = 7,
         .baseBlock = 0x090
-    }, DUMMY_WIN_TEMPLATE
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const u32 sBattleTerrainPalette_Grass[] = INCBIN_U32("graphics/battle_terrain/grass/terrain.gbapal.lz");
@@ -649,7 +674,7 @@ void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, gBattleBgTemplates, NELEMS(gBattleBgTemplates));
-    InitWindows(gUnknown_8248330);
+    InitWindows(sStandardBattleWindowTemplates);
     DeactivateAllTextPrinters();
 }
 
@@ -665,8 +690,8 @@ void InitBattleBgsVideo(void)
 
 void LoadBattleMenuWindowGfx(void)
 {
-    TextWindow_SetUserSelectedFrame(2, 0x012, 0x10);
-    TextWindow_SetUserSelectedFrame(2, 0x022, 0x10);
+    LoadUserWindowGfx(2, 0x012, 0x10);
+    LoadUserWindowGfx(2, 0x022, 0x10);
     gPlttBufferUnfaded[0x5C] = RGB( 9,  9,  9);
     gPlttBufferUnfaded[0x5D] = RGB( 9,  9,  9);
     gPlttBufferUnfaded[0x5E] = RGB(31, 31, 31);
@@ -675,7 +700,7 @@ void LoadBattleMenuWindowGfx(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_POKEDUDE))
     {
         Menu_LoadStdPalAt(0x70);
-        TextWindow_LoadResourcesStdFrame0(0, 0x030, 0x70);
+        LoadMenuMessageWindowGfx(0, 0x030, 0x70);
         gPlttBufferUnfaded[0x76] = RGB( 0,  0,  0);
         CpuCopy16(&gPlttBufferUnfaded[0x76], &gPlttBufferFaded[0x76], 2);
     }

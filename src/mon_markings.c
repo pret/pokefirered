@@ -17,9 +17,9 @@ static void SpriteCB_Marking(struct Sprite *);
 static void SpriteCB_Cursor(struct Sprite *);
 static struct Sprite *CreateMarkingComboSprite(u16, u16, const u16 *, u16);
 
-static const u16 sMonMarkingsPal[] = INCBIN_U16("graphics/misc/mon_markings.gbapal");
+static const u16 sMonMarkings_Pal[] = INCBIN_U16("graphics/misc/mon_markings.gbapal");
 static const u16 sMonMarkings_Gfx[] = INCBIN_U16("graphics/misc/mon_markings.4bpp");
-static const u8 sUnref_83EE828[] = {0x09, 0x50, 0x13, 0x02, 0xFF};
+static const u8 sUnused[] = {0x09, 0x50, 0x13, 0x02, 0xFF};
 
 static const struct OamData sOamData_MenuWindow =
 {
@@ -290,7 +290,7 @@ void InitMonMarkingsMenu(struct MonMarkingsMenu *ptr)
 
 static void BufferMenuWindowTiles(void)
 {
-    const struct TextWindowGraphics *frame = GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType);
+    const struct TextWindowGraphics *frame = GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType);
     sMenu->frameTiles = frame->tiles;
     sMenu->framePalette = frame->palette;
     sMenu->tileLoadState = 0;
@@ -558,7 +558,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
 struct Sprite *CreateMonMarkingAllCombosSprite(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (palette == NULL)
-        palette = sMonMarkingsPal;
+        palette = sMonMarkings_Pal;
     return CreateMarkingComboSprite(tileTag, paletteTag, palette, 1 << NUM_MON_MARKINGS);
 }
 
@@ -566,7 +566,7 @@ struct Sprite *CreateMonMarkingAllCombosSprite(u16 tileTag, u16 paletteTag, cons
 struct Sprite *CreateMonMarkingComboSprite(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (palette == NULL)
-        palette = sMonMarkingsPal;
+        palette = sMonMarkings_Pal;
     return CreateMarkingComboSprite(tileTag, paletteTag, palette, 1);
 }
 

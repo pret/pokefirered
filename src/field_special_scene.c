@@ -1,23 +1,23 @@
 #include "global.h"
 
-static u32 sub_80A0E78(void)
+static u32 FieldSpecialScene_Dummy0(void)
 {
     return 0;
 }
 
-static void nullsub_57(void)
+static void FieldSpecialScene_Dummy1(void)
 {
 }
 
-static void nullsub_58(void)
+static void FieldSpecialScene_Dummy2(void)
 {
 }
 
-static void nullsub_59(void)
+static void FieldSpecialScene_Dummy3(void)
 {
 }
 
-void nullsub_60(void)
+void FieldCB_ShowPortholeView(void)
 {
 }
 

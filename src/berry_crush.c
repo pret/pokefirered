@@ -659,7 +659,7 @@ static const u32 sBg_Tilemap[] = INCBIN_U32("graphics/berry_crush/bg.bin.lz");
 
 // Takes the number of players - 2 and a player id and returns the
 // index into sPlayerCoords where that player should be seated
-static const u8 gUnknown_846F280[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] = {
+static const u8 sPlayerIdToPosId[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] = {
     {1, 3},
     {0, 1, 3},
     {1, 3, 2, 4},
@@ -3046,7 +3046,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame * game, struct BerryCrushG
         FillWindowPixelBuffer(spriteManager->resultsWindowId, PIXEL_FILL(0));
         break;
     case 2:
-        TextWindow_SetStdFrame0_WithPal(spriteManager->resultsWindowId, 0x21D, 0xD0);
+        LoadStdWindowGfx(spriteManager->resultsWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(spriteManager->resultsWindowId, FALSE, 541, 13);
         break;
     case 3:
@@ -3105,7 +3105,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
         tWindowId = AddWindow(&sWindowTemplate_BerryCrushRankings);
         PutWindowTilemap(tWindowId);
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(0));
-        TextWindow_SetStdFrame0_WithPal(tWindowId, 0x21D, 0xD0);
+        LoadStdWindowGfx(tWindowId, 0x21D, 0xD0);
         DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 0x21D, 0xD);
         break;
     case 1:
@@ -3221,7 +3221,7 @@ static void CreatePlayerNameWindows(struct BerryCrushGame * game)
 
     for (i = 0; i < game->playerCount; ++i)
     {
-        game->gfx.playerCoords[i] = &sPlayerCoords[gUnknown_846F280[game->playerCount - 2][i]];
+        game->gfx.playerCoords[i] = &sPlayerCoords[sPlayerIdToPosId[game->playerCount - 2][i]];
         game->gfx.nameWindowIds[i] = AddWindow(&sWindowTemplates_PlayerNames[game->gfx.playerCoords[i]->playerId]);
         PutWindowTilemap(game->gfx.nameWindowIds[i]);
         FillWindowPixelBuffer(game->gfx.nameWindowIds[i], PIXEL_FILL(0));

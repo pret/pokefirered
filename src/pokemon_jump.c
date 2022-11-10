@@ -3053,8 +3053,8 @@ static void LoadPokeJumpGfx(void)
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        DrawWindowBorderWithStdpal3(0, 1, 0xE0);
-        LoadUserWindowBorderGfx(0, 0x00A, 0xD0);
+        LoadStdWindowGfxOnBg(0, 1, 0xE0);
+        LoadUserWindowGfx2(0, 0x00A, 0xD0);
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -4554,7 +4554,7 @@ static void PrintRecordsText(u16 windowId)
     recordNums[1] = records->bestJumpScore;
     recordNums[2] = records->excellentsInRow;
 
-    TextWindow_SetStdFrame0_WithPal(windowId, 0x21D, 0xD0);
+    LoadStdWindowGfx(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized5(windowId, FONT_2, gText_PkmnJumpRecords, 0, 0, TEXT_SKIP_DRAW, NULL, 1, 0);

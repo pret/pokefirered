@@ -2,7 +2,8 @@
 #include "pokedex.h"
 #include "pokedex_screen.h"
 
-const u8 *sub_8088E20(u16 dexNum)
+// Unused
+const u8 *GetPokedexCategoryName(u16 dexNum)
 {
     return gPokedexEntries[dexNum].categoryName;
 }
@@ -47,6 +48,30 @@ u16 GetNationalPokedexCount(u8 caseID)
     return count;
 }
 
+/*
+u16 GetHoennPokedexCount(u8 caseID)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 0; i < HOENN_DEX_COUNT; i++)
+    {
+        switch (caseID)
+        {
+        case FLAG_GET_SEEN:
+            if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_SEEN))
+                count++;
+            break;
+        case FLAG_GET_CAUGHT:
+            if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_CAUGHT))
+                count++;
+            break;
+        }
+    }
+    return count;
+}
+*/
+
 u16 GetKantoPokedexCount(u8 caseID)
 {
     u16 count = 0;
@@ -73,6 +98,7 @@ bool16 HasAllHoennMons(void)
 {
     u16 i;
 
+    // -2 excludes Jirachi and Deoxys
     for (i = 0; i < HOENN_DEX_COUNT - 2; i++)
     {
         if (!GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_CAUGHT))
@@ -85,6 +111,7 @@ bool16 HasAllKantoMons(void)
 {
     u16 i;
 
+    // -1 excludes Mew
     for (i = 0; i < KANTO_DEX_COUNT - 1; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
@@ -97,17 +124,22 @@ bool16 HasAllMons(void)
 {
     u16 i;
 
-    for (i = 0; i < NATIONAL_DEX_MEWTWO; i++)
+    // -1 excludes Mew
+    for (i = 0; i < KANTO_DEX_COUNT - 1; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
             return FALSE;
     }
-    for (i = NATIONAL_DEX_MEW; i < NATIONAL_DEX_TYRANITAR; i++)
+
+    // -3 excludes Lugia, Ho-Oh, and Celebi
+    for (i = KANTO_DEX_COUNT; i < JOHTO_DEX_COUNT - 3; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
             return FALSE;
     }
-    for (i = NATIONAL_DEX_CELEBI; i < NATIONAL_DEX_RAYQUAZA; i++)
+
+    // -2 excludes Jirachi and Deoxys
+    for (i = JOHTO_DEX_COUNT; i < NATIONAL_DEX_COUNT - 2; i++)
     {
         if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
             return FALSE;

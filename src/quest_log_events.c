@@ -213,7 +213,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
         {
             if (ShouldRegisterEvent_HandleDeparted(eventId, eventData) == FALSE)
                 return;
-            StartRecordingQuestLogEntry(eventId);
+            StartRecordingQuestLogAction(eventId);
         }
     }
     else if (eventId == QL_EVENT_OBTAINED_ITEM)
@@ -224,7 +224,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     {
         if (gUnknown_203AE04 == NULL)
         {
-            gUnknown_203AE04 = sEventRecordingPointer;
+            gUnknown_203AE04 = gQuestLogRecordingPointer;
             r1 = sQuestLogStorageCBs[eventId](gUnknown_203AE04, eventData);
         }
         else
@@ -236,7 +236,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     else
     {
         gUnknown_203AE04 = NULL;
-        r1 = sQuestLogStorageCBs[eventId](sEventRecordingPointer, eventData);
+        r1 = sQuestLogStorageCBs[eventId](gQuestLogRecordingPointer, eventData);
     }
 
     if (r1 == NULL)
@@ -247,7 +247,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
             return;
     }
 
-    sEventRecordingPointer = r1;
+    gQuestLogRecordingPointer = r1;
     if (sEventShouldNotRecordSteps == 0)
         return;
     FinishRecordingQuestLogScene();
@@ -362,15 +362,15 @@ static u16 *ShouldRegisterEvent(u16 eventId, const u16 *eventData)
     if (ShouldRegisterEvent_HandleDeparted(eventId, eventData) == FALSE)
         return NULL;
 
-    StartRecordingQuestLogEntry(eventId);
+    StartRecordingQuestLogAction(eventId);
     SetQuestLogEventToActive(eventId);
 
     if (eventId == QL_EVENT_DEFEATED_WILD_MON)
-        gUnknown_203AE04 = sEventRecordingPointer;
+        gUnknown_203AE04 = gQuestLogRecordingPointer;
     else
         gUnknown_203AE04 = NULL;
 
-    return sQuestLogStorageCBs[eventId](sEventRecordingPointer, eventData);
+    return sQuestLogStorageCBs[eventId](gQuestLogRecordingPointer, eventData);
 }
 
 static bool8 TrySetLinkQuestLogEvent(u16 eventId, const u16 *eventData)
@@ -402,9 +402,9 @@ void QuestLog_StartRecordingInputsAfterDeferredEvent(void)
     {
         u16 *resp;
         sLastDepartedMap = 0;
-        StartRecordingQuestLogEntry(sDeferredEvent.id);
-        resp = sQuestLogStorageCBs[sDeferredEvent.id](sEventRecordingPointer, sDeferredEvent.data);
-        sEventRecordingPointer = resp;
+        StartRecordingQuestLogAction(sDeferredEvent.id);
+        resp = sQuestLogStorageCBs[sDeferredEvent.id](gQuestLogRecordingPointer, sDeferredEvent.data);
+        gQuestLogRecordingPointer = resp;
         ResetDeferredLinkEvent();
     }
 }
@@ -434,11 +434,11 @@ void QuestLogEvents_HandleEndTrainerBattle(void)
         if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
         {
             sLastDepartedMap = 0;
-            StartRecordingQuestLogEntry(sDeferredEvent.id);
+            StartRecordingQuestLogAction(sDeferredEvent.id);
         }
         SetQuestLogEventToActive(sDeferredEvent.id);
-        resp = sQuestLogStorageCBs[sDeferredEvent.id](sEventRecordingPointer, sDeferredEvent.data);
-        sEventRecordingPointer = resp;
+        resp = sQuestLogStorageCBs[sDeferredEvent.id](gQuestLogRecordingPointer, sDeferredEvent.data);
+        gQuestLogRecordingPointer = resp;
         TryRecordEvent41_IncCursor(1);
         ResetDeferredLinkEvent();
         FinishRecordingQuestLogScene();
@@ -447,8 +447,8 @@ void QuestLogEvents_HandleEndTrainerBattle(void)
 
 void TryRecordEvent41_IncCursor(u16 a0)
 {
-    sEventRecordingPointer = TryRecordEvent41(sEventRecordingPointer, a0);
-    sQuestLogCursor++;
+    gQuestLogRecordingPointer = TryRecordEvent41(gQuestLogRecordingPointer, a0);
+    gQuestLogCurActionIdx++;
 }
 
 static bool8 IsQuestLogEventWithSpecialEncounterSpecies(u16 eventId, const u16 *eventData)
@@ -587,7 +587,7 @@ bool8 sub_8113AE8(const u16 *a0)
 
     if (a0 == NULL) // checks must be separate to match
         return FALSE;
-    if (r0[1] > sQuestLogCursor)
+    if (r0[1] > gQuestLogCurActionIdx)
         return FALSE;
 
     sQuestLogEventTextBufferCBs[(r0[0] & 0xFFF)](a0);
@@ -617,11 +617,11 @@ void ResetUnk203B044(void)
 
 static void SetQuestLogEventToActive(u16 eventId)
 {
-    if (gUnknown_203B044.id != (u8)eventId || gUnknown_203B044.unk_2 != sQuestLogCursor)
+    if (gUnknown_203B044.id != (u8)eventId || gUnknown_203B044.unk_2 != gQuestLogCurActionIdx)
     {
         gUnknown_203B044.id = eventId;
         gUnknown_203B044.unk_1 = 0;
-        gUnknown_203B044.unk_2 = sQuestLogCursor;
+        gUnknown_203B044.unk_2 = gQuestLogCurActionIdx;
     }
     else if (gUnknown_203B044.unk_1 < 5)
         gUnknown_203B044.unk_1++;
@@ -642,11 +642,11 @@ u16 *TryRecordEvent39_NoParams(u16 *a0)
     return a0 + 1;
 }
 
-u16 *sub_8113C20(u16 *a0, struct QuestLogEntry * a1)
+u16 *sub_8113C20(u16 *a0, struct QuestLogAction * a1)
 {
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
-    a1->command = 0xFF;
+    a1->type = QL_ACTION_FF;
     a1->duration = 0;
     a1->data.raw[0] = 0;
     a1->data.raw[1] = 0;
@@ -664,11 +664,11 @@ static u16 *TryRecordEvent41(u16 *a0, u16 a1)
     return a0 + 2;
 }
 
-u16 *sub_8113C8C(u16 *a0, struct QuestLogEntry * a1)
+u16 *sub_8113C8C(u16 *a0, struct QuestLogAction * a1)
 {
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
-    a1->command = 0xFE;
+    a1->type = QL_ACTION_FE;
     a1->duration = a0[1];
     a1->data.raw[0] = 0;
     a1->data.raw[1] = 0;
@@ -677,7 +677,7 @@ u16 *sub_8113C8C(u16 *a0, struct QuestLogEntry * a1)
     return a0 + 2;
 }
 
-u16 *sub_8113CC8(u16 *a0, struct QuestLogEntry * a1)
+u16 *sub_8113CC8(u16 *a0, struct QuestLogAction * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
@@ -692,13 +692,13 @@ u16 *sub_8113CC8(u16 *a0, struct QuestLogEntry * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 *sub_8113D08(u16 *a0, struct QuestLogEntry * a1)
+u16 *sub_8113D08(u16 *a0, struct QuestLogAction * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
-    a1->command = 2;
+    a1->type = QL_ACTION_INPUT;
     a1->duration = a0[1];
     a1->data.raw[0] = r6[0];
     a1->data.raw[1] = r6[1];
@@ -707,14 +707,14 @@ u16 *sub_8113D08(u16 *a0, struct QuestLogEntry * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 *sub_8113D48(u16 *a0, struct QuestLogEntry * a1)
+u16 *sub_8113D48(u16 *a0, struct QuestLogAction * a1)
 {
     u16 *r4 = a0;
     u8 *r6 = (u8 *)a0 + 4;
 
     if (!WillCommandOfSizeFitInSav1Record(r4, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
-    if (a1->command == 0)
+    if (a1->type == QL_ACTION_MOVEMENT)
         r4[0] = 2;
     else
         r4[0] = 1;
@@ -726,7 +726,7 @@ u16 *sub_8113D48(u16 *a0, struct QuestLogEntry * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 *sub_8113D94(u16 *a0, struct QuestLogEntry * a1)
+u16 *sub_8113D94(u16 *a0, struct QuestLogAction * a1)
 {
     u16 *r5 = a0;
     u8 *r6 = (u8 *)a0 + 4;
@@ -734,9 +734,9 @@ u16 *sub_8113D94(u16 *a0, struct QuestLogEntry * a1)
     if (!WillCommandOfSizeFitInSav1Record(r5, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
     if (r5[0] == 2)
-        a1->command = 0;
+        a1->type = QL_ACTION_MOVEMENT;
     else
-        a1->command = 1;
+        a1->type = QL_ACTION_GFX_CHANGE;
     a1->duration = r5[1];
     a1->data.raw[0] = r6[0];
     a1->data.raw[1] = r6[1];
@@ -745,7 +745,7 @@ u16 *sub_8113D94(u16 *a0, struct QuestLogEntry * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 *sub_8113DE0(u16 eventId, u16 *a1)
+static u16 *RecordEvent(u16 eventId, u16 *dest)
 {
     u8 cmdSize;
     u16 *r5;
@@ -756,10 +756,12 @@ u16 *sub_8113DE0(u16 eventId, u16 *a1)
         cmdSize = sQuestLogEventCmdSizes[eventId];
     else
         cmdSize = sQuestLogEventCmdSizes[eventId] - 4;
-    if (!sub_8110944(a1, cmdSize))
+
+    // Is there room to record this?
+    if (!sub_8110944(dest, cmdSize))
         return NULL;
 
-    r5 = (void *)a1;
+    r5 = (void *)dest;
 
     if (gUnknown_203B044.unk_1 != 0)
         r5 = (void *)r5 - (gUnknown_203B044.unk_1 * cmdSize + 4);
@@ -780,7 +782,7 @@ u16 *sub_8113DE0(u16 eventId, u16 *a1)
         r1 = gUnknown_203B044.unk_1;
 
     r5[0] = eventId + (r1 << 12);
-    r5[1] = sQuestLogCursor;
+    r5[1] = gQuestLogCurActionIdx;
     r5 = (void *)r5 + (r1 * cmdSize + 4);
     return r5;
 }
@@ -809,9 +811,9 @@ static void QuestLog_GetSpeciesName(u16 species, u8 *dest, u8 stringVarId)
     }
 }
 
-static u16 *BufferQuestLogData_SwitchedPartyOrder(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwitchedPartyOrder(u16 *dest, const u16 *eventData)
 {
-    u16 *r2 = sub_8113DE0(QL_EVENT_SWITCHED_PARTY_ORDER, a0);
+    u16 *r2 = RecordEvent(QL_EVENT_SWITCHED_PARTY_ORDER, dest);
     if (r2 == NULL)
         return NULL;
 
@@ -830,9 +832,9 @@ static const u16 *BufferQuestLogText_SwitchedPartyOrder(const u16 *eventData)
     return r4;
 }
 
-static u16 *BufferQuestLogData_UsedItem(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_UsedItem(u16 *dest, const u16 *eventData)
 {
-    u16 *r2 = sub_8113DE0(QL_EVENT_USED_ITEM, a0);
+    u16 *r2 = RecordEvent(QL_EVENT_USED_ITEM, dest);
     if (r2 == NULL)
         return NULL;
 
@@ -898,9 +900,9 @@ static const u16 *BufferQuestLogText_UsedItem(const u16 *eventData)
     return r5 + 3;
 }
 
-u16 *BufferQuestLogData_GiveTakeHeldItem(u16 eventId, u16 *a1, const u16 *eventData)
+u16 *BufferQuestLogData_GiveTakeHeldItem(u16 eventId, u16 *dest, const u16 *eventData)
 {
-    u16 *r1 = sub_8113DE0(eventId, a1);
+    u16 *r1 = RecordEvent(eventId, dest);
     if (r1 == NULL)
         return NULL;
 
@@ -909,9 +911,9 @@ u16 *BufferQuestLogData_GiveTakeHeldItem(u16 eventId, u16 *a1, const u16 *eventD
     return r1 + 2;
 }
 
-static u16 *BufferQuestLogData_GaveHeldItemFromPartyMenu(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_GaveHeldItemFromPartyMenu(u16 *dest, const u16 *eventData)
 {
-    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM, a0, eventData);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_GaveHeldItemFromPartyMenu(const u16 *eventData)
@@ -924,9 +926,9 @@ static const u16 *BufferQuestLogText_GaveHeldItemFromPartyMenu(const u16 *eventD
     return r4;
 }
 
-static u16 *BufferQuestLogData_GaveHeldItemFromBagMenu(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_GaveHeldItemFromBagMenu(u16 *dest, const u16 *eventData)
 {
-    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM_BAG, a0, eventData);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM_BAG, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_GaveHeldItemFromBagMenu(const u16 *eventData)
@@ -939,9 +941,9 @@ static const u16 *BufferQuestLogText_GaveHeldItemFromBagMenu(const u16 *eventDat
     return r4;
 }
 
-static u16 *BufferQuestLogData_GaveHeldItemFromPC(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_GaveHeldItemFromPC(u16 *dest, const u16 *eventData)
 {
-    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM_PC, a0, eventData);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM_PC, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_GaveHeldItemFromPC(const u16 *eventData)
@@ -955,9 +957,9 @@ static const u16 *BufferQuestLogText_GaveHeldItemFromPC(const u16 *eventData)
     return r4;
 }
 
-static u16 *BufferQuestLogData_TookHeldItem(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_TookHeldItem(u16 *dest, const u16 *eventData)
 {
-    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_TOOK_HELD_ITEM, a0, eventData);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_TOOK_HELD_ITEM, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_TookHeldItem(const u16 *eventData)
@@ -971,9 +973,9 @@ static const u16 *BufferQuestLogText_TookHeldItem(const u16 *eventData)
     return r4;
 }
 
-u16 *BufferQuestLogData_SwappedHeldItem_(u16 eventId, u16 *a1, const u16 *eventData)
+u16 *BufferQuestLogData_SwappedHeldItem_(u16 eventId, u16 *dest, const u16 *eventData)
 {
-    u16 *r1 = sub_8113DE0(eventId, a1);
+    u16 *r1 = RecordEvent(eventId, dest);
     if (r1 == NULL)
         return NULL;
 
@@ -983,9 +985,9 @@ u16 *BufferQuestLogData_SwappedHeldItem_(u16 eventId, u16 *a1, const u16 *eventD
     return r1 + 3;
 }
 
-static u16 *BufferQuestLogData_SwappedHeldItem(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwappedHeldItem(u16 *dest, const u16 *eventData)
 {
-    return BufferQuestLogData_SwappedHeldItem_(QL_EVENT_SWAPPED_HELD_ITEM, a0, eventData);
+    return BufferQuestLogData_SwappedHeldItem_(QL_EVENT_SWAPPED_HELD_ITEM, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_SwappedHeldItem(const u16 *eventData)
@@ -999,9 +1001,9 @@ static const u16 *BufferQuestLogText_SwappedHeldItem(const u16 *eventData)
     return r4;
 }
 
-static u16 *BufferQuestLogData_SwappedHeldItemFromPC(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwappedHeldItemFromPC(u16 *dest, const u16 *eventData)
 {
-    return BufferQuestLogData_SwappedHeldItem_(QL_EVENT_SWAPPED_HELD_ITEM_PC, a0, eventData);
+    return BufferQuestLogData_SwappedHeldItem_(QL_EVENT_SWAPPED_HELD_ITEM_PC, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_SwappedHeldItemFromPC(const u16 *eventData)
@@ -1015,17 +1017,17 @@ static const u16 *BufferQuestLogText_SwappedHeldItemFromPC(const u16 *eventData)
     return r4;
 }
 
-static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *dest, const u16 *eventData)
 {
-    u16 *r4 = a0;
+    u16 *r4 = dest;
     if (gUnknown_203B044.id == QL_EVENT_USED_PKMN_CENTER && gUnknown_203B044.unk_1 != 0)
         return r4;
 
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_USED_PKMN_CENTER]))
+    if (!sub_8110944(dest, sQuestLogEventCmdSizes[QL_EVENT_USED_PKMN_CENTER]))
         return NULL;
 
     r4[0] = QL_EVENT_USED_PKMN_CENTER;
-    r4[1] = sQuestLogCursor;
+    r4[1] = gQuestLogCurActionIdx;
     return r4 + 2;
 }
 
@@ -1036,14 +1038,14 @@ static const u16 *BufferQuestLogText_UsedPkmnCenter(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_LinkTraded(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_LinkTraded(u16 *dest, const u16 *eventData)
 {
-    u16 *r4 = a0 + 4;
+    u16 *r4 = dest + 4;
 
-    a0[0] = QL_EVENT_LINK_TRADED;
-    a0[1] = sQuestLogCursor;
-    a0[2] = eventData[0];
-    a0[3] = eventData[1];
+    dest[0] = QL_EVENT_LINK_TRADED;
+    dest[1] = gQuestLogCurActionIdx;
+    dest[2] = eventData[0];
+    dest[3] = eventData[1];
     eventData += 2;
     memcpy(r4, eventData, 7);
     r4 += 4;
@@ -1083,14 +1085,14 @@ static const u8 *const sBattleOutcomeTexts[] = {
     gText_QuestLog_Draw
 };
 
-static u16 *BufferQuestLogData_LinkBattledSingle(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_LinkBattledSingle(u16 *dest, const u16 *eventData)
 {
-    a0[0] = QL_EVENT_LINK_BATTLED_SINGLE;
-    a0[1] = sQuestLogCursor;
-    *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
-    a0 += 6;
-    return a0;
+    dest[0] = QL_EVENT_LINK_BATTLED_SINGLE;
+    dest[1] = gQuestLogCurActionIdx;
+    *((u8 *)dest + 4) = *((const u8 *)eventData + 0);
+    memcpy((u8 *)dest + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
+    dest += 6;
+    return dest;
 }
 
 static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *a0)
@@ -1107,14 +1109,14 @@ static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_LinkBattledDouble(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_LinkBattledDouble(u16 *dest, const u16 *eventData)
 {
-    a0[0] = QL_EVENT_LINK_BATTLED_DOUBLE;
-    a0[1] = sQuestLogCursor;
-    *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
-    a0 += 6;
-    return a0;
+    dest[0] = QL_EVENT_LINK_BATTLED_DOUBLE;
+    dest[1] = gQuestLogCurActionIdx;
+    *((u8 *)dest + 4) = *((const u8 *)eventData + 0);
+    memcpy((u8 *)dest + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
+    dest += 6;
+    return dest;
 }
 
 static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *a0)
@@ -1131,16 +1133,16 @@ static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_LinkBattledMulti(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_LinkBattledMulti(u16 *dest, const u16 *eventData)
 {
-    a0[0] = QL_EVENT_LINK_BATTLED_MULTI;
-    a0[1] = sQuestLogCursor;
-    *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
-    memcpy((u8 *)a0 +  5, (const u8 *)eventData +  1, PLAYER_NAME_LENGTH);
-    memcpy((u8 *)a0 + 12, (const u8 *)eventData +  8, PLAYER_NAME_LENGTH);
-    memcpy((u8 *)a0 + 19, (const u8 *)eventData + 15, PLAYER_NAME_LENGTH);
-    a0 += 13;
-    return a0;
+    dest[0] = QL_EVENT_LINK_BATTLED_MULTI;
+    dest[1] = gQuestLogCurActionIdx;
+    *((u8 *)dest + 4) = *((const u8 *)eventData + 0);
+    memcpy((u8 *)dest +  5, (const u8 *)eventData +  1, PLAYER_NAME_LENGTH);
+    memcpy((u8 *)dest + 12, (const u8 *)eventData +  8, PLAYER_NAME_LENGTH);
+    memcpy((u8 *)dest + 19, (const u8 *)eventData + 15, PLAYER_NAME_LENGTH);
+    dest += 13;
+    return dest;
 }
 
 static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
@@ -1166,11 +1168,11 @@ static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_UsedUnionRoom(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_UsedUnionRoom(u16 *dest, const u16 *eventData)
 {
-    a0[0] = QL_EVENT_USED_UNION_ROOM;
-    a0[1] = sQuestLogCursor;
-    return a0 + 2;
+    dest[0] = QL_EVENT_USED_UNION_ROOM;
+    dest[1] = gQuestLogCurActionIdx;
+    return dest + 2;
 }
 
 static const u16 *BufferQuestLogText_UsedUnionRoom(const u16 *a0)
@@ -1180,11 +1182,11 @@ static const u16 *BufferQuestLogText_UsedUnionRoom(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_UsedUnionRoomChat(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_UsedUnionRoomChat(u16 *dest, const u16 *eventData)
 {
-    a0[0] = QL_EVENT_USED_UNION_ROOM_CHAT;
-    a0[1] = sQuestLogCursor;
-    return a0 + 2;
+    dest[0] = QL_EVENT_USED_UNION_ROOM_CHAT;
+    dest[1] = gQuestLogCurActionIdx;
+    return dest + 2;
 }
 
 static const u16 *BufferQuestLogText_UsedUnionRoomChat(const u16 *a0)
@@ -1194,13 +1196,13 @@ static const u16 *BufferQuestLogText_UsedUnionRoomChat(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *dest, const u16 *eventData)
 {
-    u8 *r4 = (u8 *)(a0 + 4);
-    a0[0] = QL_EVENT_LINK_TRADED_UNION;
-    a0[1] = sQuestLogCursor;
-    a0[2] = eventData[0];
-    a0[3] = eventData[1];
+    u8 *r4 = (u8 *)(dest + 4);
+    dest[0] = QL_EVENT_LINK_TRADED_UNION;
+    dest[1] = gQuestLogCurActionIdx;
+    dest[2] = eventData[0];
+    dest[3] = eventData[1];
     memcpy(r4, eventData + 2, PLAYER_NAME_LENGTH);
     r4 += 8;
     return (u16 *)r4;
@@ -1219,14 +1221,14 @@ static const u16 *BufferQuestLogText_LinkTradedUnionRoom(const u16 *a0)
     return (const u16 *)r6;
 }
 
-static u16 *BufferQuestLogData_LinkBattledUnionRoom(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_LinkBattledUnionRoom(u16 *dest, const u16 *eventData)
 {
-    a0[0] = QL_EVENT_LINK_BATTLED_UNION;
-    a0[1] = sQuestLogCursor;
-    *(u8 *)&a0[2] = *(const u8 *)&eventData[0];
-    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
-    a0 += 6;
-    return a0;
+    dest[0] = QL_EVENT_LINK_BATTLED_UNION;
+    dest[1] = gQuestLogCurActionIdx;
+    *(u8 *)&dest[2] = *(const u8 *)&eventData[0];
+    memcpy((u8 *)dest + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
+    dest += 6;
+    return dest;
 }
 
 static const u16 *BufferQuestLogText_LinkBattledUnionRoom(const u16 *a0)
@@ -1240,16 +1242,16 @@ static const u16 *BufferQuestLogText_LinkBattledUnionRoom(const u16 *a0)
     return a0;
 }
 
-static u16 *BufferQuestLogData_SwitchedMonsBetweenBoxes(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwitchedMonsBetweenBoxes(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    a0[1] = eventData[1];
-    *((u8 *)a0 + 4) = *((const u8 *)eventData + 4);
-    *((u8 *)a0 + 5) = *((const u8 *)eventData + 5);
-    return a0 + 3;
+    dest[0] = eventData[0];
+    dest[1] = eventData[1];
+    *((u8 *)dest + 4) = *((const u8 *)eventData + 4);
+    *((u8 *)dest + 5) = *((const u8 *)eventData + 5);
+    return dest + 3;
 }
 
 static const u16 *BufferQuestLogText_SwitchedMonsBetweenBoxes(const u16 *eventData)
@@ -1266,15 +1268,15 @@ static const u16 *BufferQuestLogText_SwitchedMonsBetweenBoxes(const u16 *eventDa
     return eventData + 3;
 }
 
-static u16 *BufferQuestLogData_SwitchedMonsWithinBox(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwitchedMonsWithinBox(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_SWITCHED_MONS_WITHIN_BOX, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_SWITCHED_MONS_WITHIN_BOX, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    a0[1] = eventData[1];
-    *((u8 *)a0 + 4) = *((const u8 *)eventData + 4);
-    return a0 + 3;
+    dest[0] = eventData[0];
+    dest[1] = eventData[1];
+    *((u8 *)dest + 4) = *((const u8 *)eventData + 4);
+    return dest + 3;
 }
 
 static const u16 *BufferQuestLogText_SwitchedMonsWithinBox(const u16 *eventData)
@@ -1290,11 +1292,11 @@ static const u16 *BufferQuestLogText_SwitchedMonsWithinBox(const u16 *eventData)
     return eventData + 3;
 }
 
-static u16 *BufferQuestLogData_SwitchedPartyMonForPCMon(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwitchedPartyMonForPCMon(u16 *dest, const u16 *eventData)
 {
     u16 *r2;
     u16 *ret;
-    r2 = sub_8113DE0(QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON, a0);
+    r2 = RecordEvent(QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON, dest);
     if (r2 == NULL)
         return NULL;
     ret = r2 + 2;
@@ -1326,11 +1328,11 @@ static const u16 *BufferQuestLogText_SwitchedPartyMonForPCMon(const u16 *eventDa
     return eventData + 3;
 }
 
-static u16 *BufferQuestLogData_MovedMonBetweenBoxes(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_MovedMonBetweenBoxes(u16 *dest, const u16 *eventData)
 {
     u16 *r2;
     u16 *ret;
-    r2 = sub_8113DE0(QL_EVENT_MOVED_MON_BETWEEN_BOXES, a0);
+    r2 = RecordEvent(QL_EVENT_MOVED_MON_BETWEEN_BOXES, dest);
     if (r2 == NULL)
         return NULL;
     r2[0] = eventData[0];
@@ -1353,10 +1355,10 @@ static const u16 *BufferQuestLogText_MovedMonBetweenBoxes(const u16 *eventData)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *BufferQuestLogData_MovedMonWithinBox(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_MovedMonWithinBox(u16 *dest, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(QL_EVENT_MOVED_MON_WITHIN_BOX, a0);
+    r2 = RecordEvent(QL_EVENT_MOVED_MON_WITHIN_BOX, dest);
     if (r2 == NULL)
         return NULL;
     r2[0] = eventData[0];
@@ -1376,10 +1378,10 @@ static const u16 *BufferQuestLogText_MovedMonWithinBox(const u16 *eventData)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *BufferQuestLogData_WithdrewMonFromPC(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_WithdrewMonFromPC(u16 *dest, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(QL_EVENT_WITHDREW_MON_PC, a0);
+    r2 = RecordEvent(QL_EVENT_WITHDREW_MON_PC, dest);
     if (r2 == NULL)
         return NULL;
     r2[0] = eventData[0];
@@ -1399,10 +1401,10 @@ static const u16 *BufferQuestLogText_WithdrewMonFromPC(const u16 *eventData)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *BufferQuestLogData_DepositedMonInPC(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DepositedMonInPC(u16 *dest, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(QL_EVENT_DEPOSITED_MON_PC, a0);
+    r2 = RecordEvent(QL_EVENT_DEPOSITED_MON_PC, dest);
     if (r2 == NULL)
         return NULL;
     r2[0] = eventData[0];
@@ -1422,10 +1424,10 @@ static const u16 *BufferQuestLogText_DepositedMonInPC(const u16 *eventData)
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *BufferQuestLogData_SwitchedMultipleMons(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SwitchedMultipleMons(u16 *dest, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(QL_EVENT_SWITCHED_MULTIPLE_MONS, a0);
+    r2 = RecordEvent(QL_EVENT_SWITCHED_MULTIPLE_MONS, dest);
     if (r2 == NULL)
         return NULL;
     *((u8 *)r2 + 0) = *((const u8 *)eventData + 4);
@@ -1446,13 +1448,13 @@ static const u16 *BufferQuestLogText_SwitchedMultipleMons(const u16 *eventData)
     return r4 + 1;
 }
 
-static u16 *BufferQuestLogData_DepositedItemInPC(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DepositedItemInPC(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_DEPOSITED_ITEM_PC, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_DEPOSITED_ITEM_PC, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    return a0 + 1;
+    dest[0] = eventData[0];
+    return dest + 1;
 }
 
 static const u16 *BufferQuestLogText_DepositedItemInPC(const u16 *eventData)
@@ -1463,13 +1465,13 @@ static const u16 *BufferQuestLogText_DepositedItemInPC(const u16 *eventData)
     return r4 + 1;
 }
 
-static u16 *BufferQuestLogData_WithdrewItemFromPC(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_WithdrewItemFromPC(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_WITHDREW_ITEM_PC, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_WITHDREW_ITEM_PC, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    return a0 + 1;
+    dest[0] = eventData[0];
+    return dest + 1;
 }
 
 static const u16 *BufferQuestLogText_WithdrewItemFromPC(const u16 *eventData)
@@ -1480,23 +1482,23 @@ static const u16 *BufferQuestLogText_WithdrewItemFromPC(const u16 *eventData)
     return r4 + 1;
 }
 
-u16 *BufferQuestLogData_DefeatedTrainer_(u16 eventId, u16 *a1, const u16 *a2)
+u16 *BufferQuestLogData_DefeatedTrainer_(u16 eventId, u16 *dest, const u16 *eventData)
 {
-    a1 = sub_8113DE0(eventId, a1);
-    if (a1 == NULL)
+    dest = RecordEvent(eventId, dest);
+    if (dest == NULL)
         return NULL;
-    a1[0] = a2[1];
-    a1[1] = a2[2];
-    a1[2] = a2[0];
-    *((u8 *)a1 + 6) = *((const u8 *)a2 + 7);
-    *((u8 *)a1 + 7) = *((const u8 *)a2 + 6);
-    return a1 + 4;
+    dest[0] = eventData[1];
+    dest[1] = eventData[2];
+    dest[2] = eventData[0];
+    *((u8 *)dest + 6) = *((const u8 *)eventData + 7);
+    *((u8 *)dest + 7) = *((const u8 *)eventData + 6);
+    return dest + 4;
 }
 
-static u16 *BufferQuestLogData_DefeatedGymLeader(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DefeatedGymLeader(u16 *dest, const u16 *eventData)
 {
     sEventShouldNotRecordSteps = 1;
-    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_GYM_LEADER, a0, eventData);
+    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_GYM_LEADER, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_DefeatedGymLeader(const u16 *eventData)
@@ -1515,16 +1517,16 @@ static const u16 *BufferQuestLogText_DefeatedGymLeader(const u16 *eventData)
     return eventData + 4;
 }
 
-static u16 *BufferQuestLogData_DefeatedWildMon(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DefeatedWildMon(u16 *dest, const u16 *eventData)
 {
-    u16 *r4 = a0;
-    u8 *r5 = (u8 *)a0 + 8;
+    u16 *r4 = dest;
+    u8 *r5 = (u8 *)dest + 8;
     if (!sub_8110944(r4, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
         return NULL;
     if (r5[0] == 0 && r5[1] == 0)
     {
         r4[0] = QL_EVENT_DEFEATED_WILD_MON;
-        r4[1] = sQuestLogCursor;
+        r4[1] = gQuestLogCurActionIdx;
     }
     if (eventData[0])
         r4[2] = eventData[0];
@@ -1603,10 +1605,10 @@ static bool8 IsSpeciesFromSpecialEncounter(u16 species)
     return FALSE;
 }
 
-static u16 *BufferQuestLogData_DefeatedEliteFourMember(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DefeatedEliteFourMember(u16 *dest, const u16 *eventData)
 {
     sEventShouldNotRecordSteps = 1;
-    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_E4_MEMBER, a0, eventData);
+    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_E4_MEMBER, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_DefeatedEliteFourMember(const u16 *eventData)
@@ -1623,17 +1625,17 @@ static const u16 *BufferQuestLogText_DefeatedEliteFourMember(const u16 *eventDat
     return eventData + 4;
 }
 
-static u16 *BufferQuestLogData_DefeatedChampion(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DefeatedChampion(u16 *dest, const u16 *eventData)
 {
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
+    if (!sub_8110944(dest, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
-    a0[0] = QL_EVENT_DEFEATED_CHAMPION | (2 << 12);
-    a0[1] = sQuestLogCursor;
-    a0[2] = eventData[1];
-    a0[3] = eventData[2];
-    *((u8 *)a0 + 8) = *((const u8 *)eventData + 6);
+    dest[0] = QL_EVENT_DEFEATED_CHAMPION | (2 << 12);
+    dest[1] = gQuestLogCurActionIdx;
+    dest[2] = eventData[1];
+    dest[3] = eventData[2];
+    *((u8 *)dest + 8) = *((const u8 *)eventData + 6);
     sEventShouldNotRecordSteps = 1;
-    return a0 + 5;
+    return dest + 5;
 }
 
 static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *a0)
@@ -1667,10 +1669,10 @@ static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *a0)
     return (const u16 *)(r5 + 2);
 }
 
-static u16 *BufferQuestLogData_DefeatedTrainer(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DefeatedTrainer(u16 *dest, const u16 *eventData)
 {
     sEventShouldNotRecordSteps = 1;
-    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_TRAINER, a0, eventData);
+    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_TRAINER, dest, eventData);
 }
 
 static const u16 *BufferQuestLogText_DefeatedTrainer(const u16 *eventData)
@@ -1846,9 +1848,9 @@ static const u8 *const sUsedFieldMoveTexts[] =
         [FIELD_MOVE_SWEET_SCENT] = gText_QuestLog_UsedSweetScent
     };
 
-static u16 *BufferQuestLogData_DepartedLocation(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_DepartedLocation(u16 *dest, const u16 *eventData)
 {
-    u16 *r2 = sub_8113DE0(QL_EVENT_DEPARTED, a0);
+    u16 *r2 = RecordEvent(QL_EVENT_DEPARTED, dest);
     if (r2 == NULL)
         return NULL;
     *((u8 *)r2 + 0) = *((const u8 *)eventData + 0);
@@ -1917,14 +1919,14 @@ static bool8 ShouldRegisterEvent_HandleGameCorner(u16 eventId, const u16 *eventD
     return TRUE;
 }
 
-static u16 *BufferQuestLogData_UsedFieldMove(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_UsedFieldMove(u16 *dest, const u16 *eventData)
 {
     u8 *r3;
-    a0 = sub_8113DE0(QL_EVENT_USED_FIELD_MOVE, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_USED_FIELD_MOVE, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    r3 = (u8 *)a0 + 2;
+    dest[0] = eventData[0];
+    r3 = (u8 *)dest + 2;
     r3[0] = *((const u8 *)eventData + 2);
     r3[1] = *((const u8 *)eventData + 3);
     if (r3[0] == FIELD_MOVE_TELEPORT || r3[0] == FIELD_MOVE_DIG)
@@ -1955,18 +1957,18 @@ static const u16 *BufferQuestLogText_UsedFieldMove(const u16 *eventData)
     return (const u16 *)(r5 + 2);
 }
 
-static u16 *BufferQuestLogData_BoughtItem(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_BoughtItem(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_BOUGHT_ITEM, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_BOUGHT_ITEM, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[2];
-    a0[1] = eventData[3];
-    a0[2] = *((const u32 *)eventData) >> 16;
-    a0[3] = *((const u32 *)eventData);
-    *((u8 *)a0 + 8) = *((const u8 *)eventData + 8);
-    *((u8 *)a0 + 9) = 1;
-    return a0 + 5;
+    dest[0] = eventData[2];
+    dest[1] = eventData[3];
+    dest[2] = *((const u32 *)eventData) >> 16;
+    dest[3] = *((const u32 *)eventData);
+    *((u8 *)dest + 8) = *((const u8 *)eventData + 8);
+    *((u8 *)dest + 9) = 1;
+    return dest + 5;
 }
 
 static const u16 *BufferQuestLogText_BoughtItem(const u16 *eventData)
@@ -1989,18 +1991,18 @@ static const u16 *BufferQuestLogText_BoughtItem(const u16 *eventData)
     return (const u16 *)(r7 + 2);
 }
 
-static u16 *BufferQuestLogData_SoldItem(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_SoldItem(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_SOLD_ITEM, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_SOLD_ITEM, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[2];
-    a0[1] = eventData[3];
-    a0[2] = *((const u32 *)eventData) >> 16;
-    a0[3] = *((const u32 *)eventData);
-    *((u8 *)a0 + 8) = *((const u8 *)eventData + 8);
-    *((u8 *)a0 + 9) = *((const u8 *)eventData + 9);
-    return a0 + 5;
+    dest[0] = eventData[2];
+    dest[1] = eventData[3];
+    dest[2] = *((const u32 *)eventData) >> 16;
+    dest[3] = *((const u32 *)eventData);
+    *((u8 *)dest + 8) = *((const u8 *)eventData + 8);
+    *((u8 *)dest + 9) = *((const u8 *)eventData + 9);
+    return dest + 5;
 }
 
 static const u16 *BufferQuestLogText_SoldItem(const u16 *eventData)
@@ -2036,14 +2038,14 @@ static const u16 *BufferQuestLogText_SoldItem(const u16 *eventData)
     return (const u16 *)(r7 + 2);
 }
 
-static u16 *BufferQuestLogData_ObtainedItem(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_ObtainedItem(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_OBTAINED_ITEM, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_OBTAINED_ITEM, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    *((u8 *)a0 + 2) = *((const u8 *)eventData + 2);
-    return a0 + 2;
+    dest[0] = eventData[0];
+    *((u8 *)dest + 2) = *((const u8 *)eventData + 2);
+    return dest + 2;
 }
 
 static const u16 *BufferQuestLogText_ObtainedItem(const u16 *eventData)
@@ -2117,13 +2119,13 @@ void sub_8115798(void)
     }
 }
 
-static u16 *BufferQuestLogData_ArrivedInLocation(u16 *a0, const u16 *eventData)
+static u16 *BufferQuestLogData_ArrivedInLocation(u16 *dest, const u16 *eventData)
 {
-    a0 = sub_8113DE0(QL_EVENT_ARRIVED, a0);
-    if (a0 == NULL)
+    dest = RecordEvent(QL_EVENT_ARRIVED, dest);
+    if (dest == NULL)
         return NULL;
-    a0[0] = eventData[0];
-    return a0 + 1;
+    dest[0] = eventData[0];
+    return dest + 1;
 }
 
 static const u16 *BufferQuestLogText_ArrivedInLocation(const u16 *eventData)

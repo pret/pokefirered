@@ -146,16 +146,11 @@
 #define QL_INPUT_A      9
 #define QL_INPUT_B      10
 
-
-#define FANCLUB_MEMBER1        0
-#define FANCLUB_MEMBER2        1
-#define FANCLUB_MEMBER3        2
-#define FANCLUB_MEMBER4        3
-#define FANCLUB_MEMBER5        4
-#define FANCLUB_MEMBER6        5
-#define FANCLUB_MEMBER7        6
-#define FANCLUB_MEMBER8        7
-
-#define NUM_TRAINER_FAN_CLUB_MEMBERS  8
+#define QL_ACTION_MOVEMENT 0
+#define QL_ACTION_GFX_CHANGE 1
+#define QL_ACTION_INPUT 2
+#define QL_ACTION_3 3
+#define QL_ACTION_FE 0xFE
+#define QL_ACTION_FF 0xFF
 
 #endif //GUARD_CONSTANTS_QUEST_LOG_H

@@ -478,7 +478,7 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
             gPlttBufferFaded[0] = RGB_BLACK;
             gExitStairsMovementDisabled = FALSE;
             FreeAllWindowBuffers();
-            TrySetUpQuestLogScenes_ElseContinueFromSave(taskId);
+            TryStartQuestLogPlayback(taskId);
             break;
         case MAIN_MENU_MYSTERYGIFT:
             SetMainCallback2(c2_mystery_gift);

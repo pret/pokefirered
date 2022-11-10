@@ -10,7 +10,16 @@
 #define QL_ESCALATOR_OUT 1
 #define QL_ESCALATOR_IN  2
 
-struct QuestLogEntry
+// This struct represents the basic building blocks of what happens during a Quest Log scene.
+// Once a scene has been set up, it will run through the list of actions to animate the scene.
+// During a particular scene, there are 3 possible actions:
+// - QL_ACTION_MOVEMENT: A character (including the player) moved
+// - QL_ACTION_GFX_CHANGE: The player's avatar changed graphics (e.g. they started surfing)
+// - QL_ACTION_INPUT: The player made an input (e.g. they pressed A/B/dpad)
+// There are additional action types used internally:
+// -
+// 
+struct QuestLogAction
 {
     union {
         struct {
@@ -18,18 +27,18 @@ struct QuestLogEntry
             u8 mapNum;
             u8 mapGroup;
             u8 movementActionId;
-        } a; // Data when command == 0
+        } a; // Data when type == 0
         struct {
             u8 localId;
             u8 mapNum;
             u8 mapGroup;
             u8 gfxState;
-        } b; // Data when command == 1
-        u8 fieldInput[4]; // Data when command == 2
+        } b; // Data when type == 1
+        u8 fieldInput[4]; // Data when type == 2
         u8 raw[4];
     } data;
     u16 duration;
-    u8 command;
+    u8 type;
 };
 
 struct UnkStruct_203B044
@@ -44,8 +53,8 @@ extern u8 gQuestLogPlaybackState;
 extern struct FieldInput gQuestLogFieldInput;
 extern struct UnkStruct_203B044 gUnknown_203B044;
 extern u16 *gUnknown_203AE04;
-extern u16 *sEventRecordingPointer;
-extern u16 sQuestLogCursor;
+extern u16 *gQuestLogRecordingPointer;
+extern u16 gQuestLogCurActionIdx;
 
 void QuestLogRecordPlayerAvatarGfxTransition(u8);
 void SetQuestLogEvent(u16, const u16 *);
@@ -58,7 +67,7 @@ void CommitQuestLogWindow1(void);
 void QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode(void);
 void ResetQuestLog(void);
 void ResetTrainerFanClub(void);
-void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId);
+void TryStartQuestLogPlayback(u8 taskId);
 void SaveQuestLogData(void);
 void QuestLog_CutRecording(void);
 u8 sub_8112CAC(void);
@@ -93,22 +102,22 @@ void sub_8110FCC(void);
 u8 GetQuestLogStartType(void);
 void sub_81113E4(void);
 void sub_8111438(void);
-void StartRecordingQuestLogEntry(u16 eventId);
+void StartRecordingQuestLogAction(u16 eventId);
 bool8 WillCommandOfSizeFitInSav1Record(u16 *cursor, size_t size);
 bool8 sub_8110944(const void *a0, size_t cmdSize);
 
 void sub_8113BD8(void);
 void ResetUnk203B044(void);
 u16 *TryRecordEvent39_NoParams(u16 *);
-u16 *sub_8113C8C(u16 *, struct QuestLogEntry *);
-u16 *sub_8113CC8(u16 *, struct QuestLogEntry *);
-u16 *sub_8113D08(u16 *, struct QuestLogEntry *);
-u16 *sub_8113D48(u16 *, struct QuestLogEntry *);
-u16 *sub_8113D94(u16 *, struct QuestLogEntry *);
+u16 *sub_8113C8C(u16 *, struct QuestLogAction *);
+u16 *sub_8113CC8(u16 *, struct QuestLogAction *);
+u16 *sub_8113D08(u16 *, struct QuestLogAction *);
+u16 *sub_8113D48(u16 *, struct QuestLogAction *);
+u16 *sub_8113D94(u16 *, struct QuestLogAction *);
 void QL_EnableRecordingSteps(void);
 u16 *QuestLog_SkipCommand(u16 *, u16 **);
 void sub_8113ABC(const u16 *);
-u16 *sub_8113C20(u16 *, struct QuestLogEntry *);
+u16 *sub_8113C20(u16 *, struct QuestLogAction *);
 bool8 sub_8113AE8(const u16 *);
 bool8 sub_8113B44(const u16 *);
 void TryRecordEvent41_IncCursor(u16);

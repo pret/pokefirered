@@ -1316,10 +1316,10 @@ void QuestLogRecordNPCStep(u8 localId, u8 mapNum, u8 mapGroup, u8 movementAction
     {
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 0;
-        sCurQuestLogEntry[sQuestLogCursor].localId = localId;
-        sCurQuestLogEntry[sQuestLogCursor].mapNum = mapNum;
-        sCurQuestLogEntry[sQuestLogCursor].mapGroup = mapGroup;
-        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.localId = localId;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.mapNum = mapNum;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.mapGroup = mapGroup;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = 0;
     }
@@ -1331,10 +1331,10 @@ void QuestLogRecordNPCStepWithDuration(u8 localId, u8 mapNum, u8 mapGroup, u8 mo
     {
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 0;
-        sCurQuestLogEntry[sQuestLogCursor].localId = localId;
-        sCurQuestLogEntry[sQuestLogCursor].mapNum = mapNum;
-        sCurQuestLogEntry[sQuestLogCursor].mapGroup = mapGroup;
-        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.localId = localId;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.mapNum = mapNum;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.mapGroup = mapGroup;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = duration;
     }
@@ -1344,12 +1344,12 @@ void QuestLogRecordPlayerStep(u8 movementActionId)
 {
     if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
     {
-        if (movementActionId != sCurQuestLogEntry[sLastQuestLogCursor].animId || movementActionId > MOVEMENT_ACTION_FACE_RIGHT)
+        if (movementActionId != sCurQuestLogEntry[sLastQuestLogCursor].data.a.movementActionId || movementActionId > MOVEMENT_ACTION_FACE_RIGHT)
         {
             sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
             sCurQuestLogEntry[sQuestLogCursor].command = 0;
-            sCurQuestLogEntry[sQuestLogCursor].localId = 0;
-            sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+            sCurQuestLogEntry[sQuestLogCursor].data.a.localId = 0;
+            sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = movementActionId;
             sLastQuestLogCursor = sQuestLogCursor;
             sQuestLogCursor++;
             sNextStepDelay = 0;
@@ -1363,35 +1363,35 @@ void QuestLogRecordPlayerStepWithDuration(u8 movementActionId, u8 duration)
     {
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 0;
-        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
-        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = movementActionId;
         sLastQuestLogCursor = sQuestLogCursor;
         sQuestLogCursor++;
         sNextStepDelay = duration;
     }
 }
 
-void QuestLogRecordPlayerAvatarGfxTransition(u8 movementActionId)
+void QuestLogRecordPlayerAvatarGfxTransition(u8 gfxState)
 {
     if (!RecordHeadAtEndOfEntry())
     {
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 1;
-        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
-        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].data.b.localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.b.gfxState = gfxState;
         sQuestLogCursor++;
         sNextStepDelay = 0;
     }
 }
 
-void QuestLogRecordPlayerAvatarGfxTransitionWithDuration(u8 movementActionId, u8 duration)
+void QuestLogRecordPlayerAvatarGfxTransitionWithDuration(u8 gfxState, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 1;
-        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
-        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].data.b.localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.b.gfxState = gfxState;
         sQuestLogCursor++;
         sNextStepDelay = duration;
     }
@@ -1412,10 +1412,10 @@ void sub_81127F8(struct FieldInput * a0)
         u32 r2 = *(u32 *)a0 & 0x00FF00F3;
         sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].command = 2;
-        sCurQuestLogEntry[sQuestLogCursor].localId = r2;
-        sCurQuestLogEntry[sQuestLogCursor].mapNum = r2 >> 8; // always 0
-        sCurQuestLogEntry[sQuestLogCursor].mapGroup = r2 >> 16;
-        sCurQuestLogEntry[sQuestLogCursor].animId = r2 >> 24; // always 0
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[0] = r2;
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[1] = r2 >> 8; // always 0
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[2] = r2 >> 16;
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[3] = r2 >> 24; // always 0
         sQuestLogCursor++;
         if (ArePlayerFieldControlsLocked())
             sNextStepDelay = TRUE;
@@ -1487,7 +1487,7 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         sLastQuestLogCursor = 0;
         gQuestLogFieldInput = (struct FieldInput){};
         sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].duration;
-        sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].animId;
+        sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId;
         sMovementScripts[0][1] = QL_PLAYER_GFX_NONE;
         gQuestLogPlaybackState = QL_PLAYBACK_STATE_1;
         break;
@@ -1496,37 +1496,40 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         sNumEventsInLogEntry = size / sizeof(*sCurQuestLogEntry);
         for (i = 0; i < sNumEventsInLogEntry; i++)
         {
-            sCurQuestLogEntry[i] = (struct QuestLogEntry){ 0, 0, 0, 0, 0xFFFF, 0xFF };
+            sCurQuestLogEntry[i] = (struct QuestLogEntry){
+                .duration = 0xFFFF,
+                .command = 0xFF
+            };
         }
         sQuestLogCursor = 0;
         sNextStepDelay = 0;
         sCurQuestLogEntry[sQuestLogCursor].duration = 0;
         sCurQuestLogEntry[sQuestLogCursor].command = 0;
-        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.a.localId = 0;
         switch (GetPlayerFacingDirection())
         {
         case DIR_NONE:
         case DIR_SOUTH:
-            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_DOWN;
+            sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = MOVEMENT_ACTION_FACE_DOWN;
             break;
         case DIR_EAST:
-            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_RIGHT;
+            sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = MOVEMENT_ACTION_FACE_RIGHT;
             break;
         case DIR_NORTH:
-            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_UP;
+            sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = MOVEMENT_ACTION_FACE_UP;
             break;
         case DIR_WEST:
-            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_LEFT;
+            sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId = MOVEMENT_ACTION_FACE_LEFT;
             break;
         }
         sLastQuestLogCursor = 0;
         sQuestLogCursor++;
         sCurQuestLogEntry[sQuestLogCursor].duration = 0;
         sCurQuestLogEntry[sQuestLogCursor].command = 2;
-        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
-        sCurQuestLogEntry[sQuestLogCursor].mapNum = 0;
-        sCurQuestLogEntry[sQuestLogCursor].mapGroup = 0;
-        sCurQuestLogEntry[sQuestLogCursor].animId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[0] = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[1] = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[2] = 0;
+        sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[3] = 0;
         sQuestLogCursor++;
         gQuestLogPlaybackState = QL_PLAYBACK_STATE_2;
         break;
@@ -1552,15 +1555,18 @@ void sub_8112B3C(void)
                     {
                     case 0:
                         // NPC movement action
-                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].localId][0] = sCurQuestLogEntry[sQuestLogCursor].animId;
+                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].data.a.localId][0] = sCurQuestLogEntry[sQuestLogCursor].data.a.movementActionId;
                         break;
                     case 1:
                         // State transition
-                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].localId][1] = sCurQuestLogEntry[sQuestLogCursor].animId;
+                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].data.b.localId][1] = sCurQuestLogEntry[sQuestLogCursor].data.b.gfxState;
                         break;
                     case 2:
                         // Player input command
-                        *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].animId << 24) | (sCurQuestLogEntry[sQuestLogCursor].mapGroup << 16) | (sCurQuestLogEntry[sQuestLogCursor].mapNum << 8) | (sCurQuestLogEntry[sQuestLogCursor].localId << 0));
+                        *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[3] << 24)
+                                                      | (sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[2] << 16)
+                                                      | (sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[1] << 8)
+                                                      | (sCurQuestLogEntry[sQuestLogCursor].data.fieldInput[0] << 0));
                         break;
                     case 3:
                         // End

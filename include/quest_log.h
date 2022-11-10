@@ -12,11 +12,22 @@
 
 struct QuestLogEntry
 {
-    // When command == 2, these fields have different meanings
-    u8 localId;  // cmd == 2: Pressed A/B, checked wild, held direction, took step
-    u8 mapNum;   // cmd == 2: Always set to 0
-    u8 mapGroup; // cmd == 2: Dpad direction
-    u8 animId;   // cmd == 2: Always set to 0
+    union {
+        struct {
+            u8 localId;
+            u8 mapNum;
+            u8 mapGroup;
+            u8 movementActionId;
+        } a; // Data when command == 0
+        struct {
+            u8 localId;
+            u8 mapNum;
+            u8 mapGroup;
+            u8 gfxState;
+        } b; // Data when command == 1
+        u8 fieldInput[4]; // Data when command == 2
+        u8 raw[4];
+    } data;
     u16 duration;
     u8 command;
 };

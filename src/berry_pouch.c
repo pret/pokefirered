@@ -457,11 +457,11 @@ static void CB2_InitBerryPouch(void)
 {
     while (1)
     {
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE)
             break;
         if (RunBerryPouchInit() == TRUE)
             break;
-        if (MenuHelpers_LinkSomething() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -498,7 +498,7 @@ static bool8 RunBerryPouchInit(void)
         gMain.state++;
         break;
     case 6:
-        if (!MenuHelpers_LinkSomething())
+        if (!MenuHelpers_IsLinkActive())
             ResetTasks();
         gMain.state++;
         break;
@@ -934,7 +934,7 @@ static void Task_BerryPouchMain(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 menuInput;
-    if (!gPaletteFade.active && MenuHelpers_CallLinkSomething() != TRUE)
+    if (!gPaletteFade.active && IsActiveOverworldLinkBusy() != TRUE)
     {
         menuInput = ListMenu_ProcessInput(data[0]);
         ListMenuGetScrollAndRow(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
@@ -1004,9 +1004,9 @@ static void CreateNormalContextMenu(u8 taskId)
         sContextMenuOptions = sOptions_UseToss_Exit;
         sContextMenuNumOptions = 3;
     }
-    else if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
+    else if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE)
     {
-        if (!itemid_link_can_give_berry(gSpecialVar_ItemId))
+        if (!IsHoldingItemAllowed(gSpecialVar_ItemId))
         {
             sContextMenuOptions = sOptions_Exit;
             sContextMenuNumOptions = 1;
@@ -1040,7 +1040,7 @@ static void Task_NormalContextMenu(u8 taskId)
 static void Task_NormalContextMenu_HandleInput(u8 taskId)
 {
     s8 input;
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (IsActiveOverworldLinkBusy() != TRUE)
     {
         input = Menu_ProcessInputNoWrapAround();
         switch (input)
@@ -1243,7 +1243,7 @@ static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, data[1]);
-    if (!itemid_link_can_give_berry(itemId))
+    if (!IsHoldingItemAllowed(itemId))
     {
         CopyItemName(itemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_TheStrVar1CantBeHeldHere);

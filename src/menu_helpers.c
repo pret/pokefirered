@@ -12,15 +12,15 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-static EWRAM_DATA const struct YesNoFuncTable *gUnknown_20399C8 = NULL;
-static EWRAM_DATA TaskFunc gUnknown_20399CC = NULL;
-static EWRAM_DATA u8 gUnknown_20399D0 = {0};
+static EWRAM_DATA const struct YesNoFuncTable *sYesNo = NULL;
+static EWRAM_DATA TaskFunc sMessageNextTask = NULL;
+static EWRAM_DATA u8 sMessageWindowId = {0};
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 
 void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc)
 {
-    gUnknown_20399D0 = windowId;
+    sMessageWindowId = windowId;
     DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, tileNum, paletteNum);
 
     if (string != gStringVar4)
@@ -28,7 +28,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
 
     gTextFlags.canABSpeedUpPrint = 1;
     AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    gUnknown_20399CC = taskFunc;
+    sMessageNextTask = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
@@ -40,8 +40,8 @@ bool16 RunTextPrinters_CheckActive(u8 textPrinterId)
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
 {
-    if (!RunTextPrinters_CheckActive(gUnknown_20399D0))
-        gUnknown_20399CC(taskId);
+    if (!RunTextPrinters_CheckActive(sMessageWindowId))
+        sMessageNextTask(taskId);
 }
 
 static void Task_CallYesOrNoCallback(u8 taskId)
@@ -50,12 +50,12 @@ static void Task_CallYesOrNoCallback(u8 taskId)
     {
     case 0:
         PlaySE(SE_SELECT);
-        gTasks[taskId].func = gUnknown_20399C8->yesFunc;
+        gTasks[taskId].func = sYesNo->yesFunc;
         break;
     case 1:
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        gTasks[taskId].func = gUnknown_20399C8->noFunc;
+        gTasks[taskId].func = sYesNo->noFunc;
         break;
     }
 }
@@ -63,18 +63,18 @@ static void Task_CallYesOrNoCallback(u8 taskId)
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
     CreateYesNoMenu(template, fontId, left, top, tileStart, palette, 0);
-    gUnknown_20399C8 = yesNo;
+    sYesNo = yesNo;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }
 
-u8 GetLRKeysState(void)
+u8 GetLRKeysPressed(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
         if (JOY_NEW(L_BUTTON))
-            return 1;
+            return MENU_L_PRESSED;
         if (JOY_NEW(R_BUTTON))
-            return 2;
+            return MENU_R_PRESSED;
     }
     return 0;
 }
@@ -84,37 +84,34 @@ u8 GetLRKeysPressedAndHeld(void)
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
         if (JOY_REPT(L_BUTTON))
-            return 1;
+            return MENU_L_PRESSED;
         if (JOY_REPT(R_BUTTON))
-            return 2;
+            return MENU_R_PRESSED;
     }
     return 0;
 }
 
-bool8 itemid_link_can_give_berry(u16 itemId)
+bool8 IsHoldingItemAllowed(u16 itemId)
 {
-    if (itemId != ITEM_ENIGMA_BERRY)
-        return TRUE;
-    else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
-              && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+    // Enigma Berry can't be held in link areas
+    if (itemId == ITEM_ENIGMA_BERRY
+     && ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRADE_CENTER)
+       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRADE_CENTER))
+       || InUnionRoom() == TRUE))
         return FALSE;
-    else if (InUnionRoom() != TRUE)
-        return TRUE;
     else
-        return FALSE;
+        return TRUE;
 }
 
-bool8 CanWriteMailHere(u16 itemId)
+bool8 IsWritingMailAllowed(u16 itemId)
 {
-    if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
-        return TRUE;
-    else if (ItemIsMail(itemId) != TRUE)
-        return TRUE;
-    else
+    if ((IsUpdateLinkStateCBActive() == TRUE || InUnionRoom() == TRUE) && ItemIsMail(itemId) == TRUE)
         return FALSE;
+    else
+        return TRUE;
 }
 
-bool8 MenuHelpers_LinkSomething(void)
+bool8 MenuHelpers_IsLinkActive(void)
 {
     if (IsUpdateLinkStateCBActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
@@ -122,22 +119,20 @@ bool8 MenuHelpers_LinkSomething(void)
         return FALSE;
 }
 
-bool8 MenuHelpers_CallLinkSomething(void)
+bool8 IsActiveOverworldLinkBusy(void)
 {
-    if (!MenuHelpers_LinkSomething())
+    if (!MenuHelpers_IsLinkActive())
         return FALSE;
     else
         return (u8)Overworld_LinkRecvQueueLengthMoreThan2();
 }
 
-bool8 sub_80BF748(void)
+bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
 {
-    if (MenuHelpers_CallLinkSomething() == TRUE)
+    if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
         return TRUE;
-    else if (IsLinkRecvQueueAtOverworldMax() != TRUE)
-        return FALSE;
     else
-        return TRUE;
+        return FALSE;
 }
 
 void SetVBlankHBlankCallbacksToNull(void)

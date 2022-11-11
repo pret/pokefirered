@@ -629,7 +629,7 @@ static void CB2_InitMailView(void)
             SetMainCallback2(CB2_RunShowMailCB);
             break;
         }
-    } while (MenuHelpers_LinkSomething() != TRUE);
+    } while (MenuHelpers_IsLinkActive() != TRUE);
 }
 
 static void BufferMailMessage(void)

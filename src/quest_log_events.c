@@ -189,7 +189,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     if (TrySetLinkQuestLogEvent(eventId, eventData) == TRUE)
         return;
 
-    if (MenuHelpers_LinkSomething() == TRUE)
+    if (MenuHelpers_IsLinkActive() == TRUE)
         return;
 
     if (InUnionRoom() == TRUE)

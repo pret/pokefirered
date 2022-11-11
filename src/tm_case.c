@@ -298,11 +298,11 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
 {
     while (1)
     {
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE)
             break;
         if (DoSetUpTMCaseUI() == TRUE)
             break;
-        if (MenuHelpers_LinkSomething() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -727,7 +727,7 @@ static void Task_TMCaseMain(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (MenuHelpers_CallLinkSomething() != TRUE)
+        if (IsActiveOverworldLinkBusy() != TRUE)
         {
             input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
@@ -775,7 +775,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
 {
     u8 * strbuf;
     TMCase_SetWindowBorder2(2);
-    if (!MenuHelpers_LinkSomething() && InUnionRoom() != TRUE)
+    if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE)
     {
         AddTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId, 0);
         sTMCaseDynamicResources->menuActionIndices = sMenuActionIndices_Field;
@@ -808,7 +808,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 {
     s8 input;
 
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (IsActiveOverworldLinkBusy() != TRUE)
     {
         input = Menu_ProcessInputNoWrapAround();
         switch (input)

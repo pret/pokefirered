@@ -2882,7 +2882,7 @@ static void Cmd_tryfaintmon(void)
                 if (gBattleResults.opponentFaintCounter < 255)
                     gBattleResults.opponentFaintCounter++;
                 gBattleResults.lastOpponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
-                *(u8 *)(&gBattleStruct->field_182) = gBattlerAttacker;
+                *(u8 *)(&gBattleStruct->lastAttackerToFaintOpponent) = gBattlerAttacker;
             }
             if ((gHitMarker & HITMARKER_DESTINYBOND) && gBattleMons[gBattlerAttacker].hp != 0)
             {

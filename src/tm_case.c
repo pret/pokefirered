@@ -22,6 +22,7 @@
 #include "menu_indicators.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "constants/quest_log.h"
 
 #define TM_CASE_TM_TAG 400
 
@@ -1100,7 +1101,7 @@ static void Task_DoSaleOfTMs(u8 taskId)
     PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
-    RecordItemPurchase(gSpecialVar_ItemId, data[8], 2);
+    RecordItemTransaction(gSpecialVar_ItemId, data[8], QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
     DestroyListMenuTask(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     TMCaseSetup_GetTMCount();
     TMCaseSetup_InitListMenuPositions();

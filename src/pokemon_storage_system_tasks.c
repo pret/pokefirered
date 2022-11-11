@@ -2672,7 +2672,7 @@ static void InitCursorItemIcon(void)
 static void SetPokeStorageQuestLogEvent(u8 action)
 {
     u16 event;
-    struct PokeStorageQuestLogData *questLogData;
+    struct QuestLogEvent_MovedBoxMon *questLogData;
     u8 box1 = GetMovingMonOriginalBoxId();
     u16 species1 = gStorage->displayMonSpecies;
     u16 species2;
@@ -2687,7 +2687,7 @@ static void SetPokeStorageQuestLogEvent(u8 action)
         box2 = StorageGetCurrentBox();
         species2 = GetCurrentBoxMonData(GetBoxCursorPosition(), MON_DATA_SPECIES2);
     }
-    questLogData = &gStorage->pokeStorageQuestLogData;
+    questLogData = &gStorage->questLogData;
 
     switch (action)
     {

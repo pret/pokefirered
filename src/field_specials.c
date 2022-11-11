@@ -1810,7 +1810,7 @@ static const struct {
     u16 inside_num;
     u16 outside_grp;
     u16 outside_num;
-} sInsideOutsidePairs[51] = {
+} sInsideOutsidePairs[] = {
     [QL_LOCATION_HOME]               = {MAP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP(PALLET_TOWN)},
     [QL_LOCATION_OAKS_LAB]           = {MAP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP(PALLET_TOWN)},
     [QL_LOCATION_VIRIDIAN_GYM]       = {MAP(VIRIDIAN_CITY_GYM),                     MAP(VIRIDIAN_CITY)},
@@ -1881,67 +1881,67 @@ void QuestLog_CheckDepartingIndoorsMap(void)
     }
 }
 
-struct QuestLogDepartedData {
-    u8 map_section_id;
-    u8 entrance_id;
-};
-
 void QuestLog_TryRecordDepartedLocation(void)
 {
     s16 x, y;
-    struct QuestLogDepartedData event_buffer;
-    u16 ql_entrance_id = VarGet(VAR_QL_ENTRANCE);
-    event_buffer.map_section_id = 0;
-    event_buffer.entrance_id = 0;
+    struct QuestLogEvent_Departed data;
+    u16 locationId = VarGet(VAR_QL_ENTRANCE);
+    data.mapSec = 0;
+    data.locationId = 0;
     if (FlagGet(FLAG_SYS_QL_DEPARTED))
     {
-        if (ql_entrance_id == QL_LOCATION_VIRIDIAN_FOREST_1)
+        if (locationId == QL_LOCATION_VIRIDIAN_FOREST_1)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)))
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE)
+              && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE)
+               || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)))
             {
-                event_buffer.map_section_id = MAPSEC_ROUTE_2;
+                data.mapSec = MAPSEC_ROUTE_2;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE))
-                    event_buffer.entrance_id = ql_entrance_id;
+                    data.locationId = locationId;
                 else
-                    event_buffer.entrance_id = ql_entrance_id + 1;
-                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+                    data.locationId = locationId + 1;
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (const u16 *)&data);
                 FlagClear(FLAG_SYS_QL_DEPARTED);
                 return;
             }
         }
-        else if (ql_entrance_id == QL_LOCATION_LEAGUE_GATE_1)
+        else if (locationId == QL_LOCATION_LEAGUE_GATE_1)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) &&
+                (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22)
+              || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
             {
-                event_buffer.map_section_id = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[ql_entrance_id].inside_grp, sInsideOutsidePairs[ql_entrance_id].inside_num)->regionMapSectionId;
+                data.mapSec = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[locationId].inside_grp, sInsideOutsidePairs[locationId].inside_num)->regionMapSectionId;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22))
-                    event_buffer.entrance_id = ql_entrance_id;
+                    data.locationId = locationId;
                 else
-                    event_buffer.entrance_id = ql_entrance_id + 1;
-                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+                    data.locationId = locationId + 1;
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (const u16 *)&data);
                 FlagClear(FLAG_SYS_QL_DEPARTED);
                 return;
             }
         }
-        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[ql_entrance_id].outside_grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[ql_entrance_id].outside_num)
+        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[locationId].outside_grp
+           && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[locationId].outside_num)
         {
-            event_buffer.map_section_id = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[ql_entrance_id].inside_grp, sInsideOutsidePairs[ql_entrance_id].inside_num)->regionMapSectionId;
-            event_buffer.entrance_id = ql_entrance_id;
-            if (ql_entrance_id == QL_LOCATION_ROCK_TUNNEL_1)
+            data.mapSec = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[locationId].inside_grp, sInsideOutsidePairs[locationId].inside_num)->regionMapSectionId;
+            data.locationId = locationId;
+            if (locationId == QL_LOCATION_ROCK_TUNNEL_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 15 || y != 26)
-                    event_buffer.entrance_id++;
+                    data.locationId++;
             }
-            else if (ql_entrance_id == QL_LOCATION_SEAFOAM_ISLANDS_1)
+            else if (locationId == QL_LOCATION_SEAFOAM_ISLANDS_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 67 || y != 15)
-                    event_buffer.entrance_id++;
+                    data.locationId++;
             }
-            SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+            SetQuestLogEvent(QL_EVENT_DEPARTED, (const u16 *)&data);
             FlagClear(FLAG_SYS_QL_DEPARTED);
-            if (ql_entrance_id == QL_LOCATION_ROCKET_HIDEOUT)
+            if (locationId == QL_LOCATION_ROCKET_HIDEOUT)
             {
                 VarSet(VAR_QL_ENTRANCE, QL_LOCATION_GAME_CORNER);
                 FlagSet(FLAG_SYS_QL_DEPARTED);

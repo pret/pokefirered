@@ -46,11 +46,13 @@
                All the data stored for each scene is in 'struct QuestLogScene', defined in include/global.h.
                The entirety of the Quest Log's save data is represented by an array of these scenes in SaveBlock1.
 
-    - "Event":
-
     - "Action": TODO: Copy from quest_log.h
 
+    - "Event":
+
     - "Command":
+
+    - "Script":
 
 */
 

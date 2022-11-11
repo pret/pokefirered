@@ -1458,7 +1458,7 @@ static void OverworldBasic(void)
     RunTasks();
     AnimateSprites();
     CameraUpdate();
-    sub_8115798();
+    SetQuestLogEvent_Arrived();
     UpdateCameraPanning();
     BuildOamBuffer();
     UpdatePaletteFade();

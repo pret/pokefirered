@@ -98,9 +98,7 @@ struct TradeAnimationResources {
     /*0xF0*/ u16 tradeSpecies[2];
     /*0xF4*/ u16 cachedMapMusic;
     /*0xF6*/ u8 unk_F6;
-    /*0xF8*/ u16 monSpecies[2];
-    /*0xFC*/ u8 linkPartnerName[7];
-    /*0x103*/ u8 filler_103[1];
+    /*0xF8*/ struct QuestLogEvent_Traded questLogData;
     /*0x104*/ u8 textColor[3];
     /*0x107*/ u8 filler_107[1];
     /*0x108*/ bool8 isCableTrade;
@@ -883,9 +881,9 @@ void CB2_InitTradeAnim_LinkTrade(void)
     case 10:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
-        sTradeData->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedTradeMonPositions[0]], MON_DATA_SPECIES2);
-        sTradeData->monSpecies[1] = GetMonData(&gEnemyParty[gSelectedTradeMonPositions[1] % 6], MON_DATA_SPECIES2);
-        memcpy(sTradeData->linkPartnerName, gLinkPlayers[GetMultiplayerId() ^ 1].name, 7);
+        sTradeData->questLogData.speciesSent = GetMonData(&gPlayerParty[gSelectedTradeMonPositions[0]], MON_DATA_SPECIES2);
+        sTradeData->questLogData.speciesReceived = GetMonData(&gEnemyParty[gSelectedTradeMonPositions[1] % PARTY_SIZE], MON_DATA_SPECIES2);
+        memcpy(sTradeData->questLogData.partnerName, gLinkPlayers[GetMultiplayerId() ^ 1].name, PLAYER_NAME_LENGTH);
         gMain.state++;
         break;
     case 11:
@@ -2575,11 +2573,11 @@ static void CB2_HandleTradeEnded(void)
     case 50:
         if (InUnionRoom())
         {
-            SetQuestLogEvent(QL_EVENT_LINK_TRADED_UNION, sTradeData->monSpecies);
+            SetQuestLogEvent(QL_EVENT_LINK_TRADED_UNION, (void *)&sTradeData->questLogData);
         }
         else
         {
-            SetQuestLogEvent(QL_EVENT_LINK_TRADED, sTradeData->monSpecies);
+            SetQuestLogEvent(QL_EVENT_LINK_TRADED, (void *)&sTradeData->questLogData);
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
         }
         if (gWirelessCommType)

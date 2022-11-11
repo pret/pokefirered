@@ -62,11 +62,11 @@
 #define QL_EVENT_BOUGHT_ITEM                    37
 #define QL_EVENT_SOLD_ITEM                      38
 #define QL_EVENT_39                             39 // Null
-#define QL_EVENT_OBTAINED_ITEM                  40
+#define QL_EVENT_OBTAINED_STORY_ITEM            40
 #define QL_EVENT_41                             41 // Null
 #define QL_EVENT_ARRIVED                        42
 
-#define QL_EVENT_USED_POKEMART QL_EVENT_BOUGHT_ITEM - 1 // Used as a start pos for QL_EVENT_BOUGHT_ITEM / QL_EVENT_SOLD_ITEM
+#define QL_EVENT_USED_POKEMART (QL_EVENT_BOUGHT_ITEM - 1) // Used as a start pos for QL_EVENT_BOUGHT_ITEM / QL_EVENT_SOLD_ITEM
 
 #define IS_LINK_QL_EVENT(event)((event) >= QL_EVENT_LINK_TRADED && (event) <= QL_EVENT_LINK_BATTLED_UNION)
 #define IS_VALID_QL_EVENT(event)((event) >= QL_EVENT_SWITCHED_PARTY_ORDER && (event) <= QL_EVENT_ARRIVED)

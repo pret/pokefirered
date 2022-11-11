@@ -12,7 +12,7 @@ void CreatePokemartMenu(const u16 *itemsForSale);
 void CreateDecorationShop1Menu(const u16 *);
 void CreateDecorationShop2Menu(const u16 *);
 u8 GetMartFontId(void);
-void RecordItemPurchase(u16 a0, u16 a1, u8 a2);
+void RecordItemTransaction(u16 itemId, u16 quantity, u8 logEventId);
 
 // buy_menu_helper
 void BuyMenuInitWindows(bool32 isSellingTM);

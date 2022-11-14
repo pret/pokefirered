@@ -17,7 +17,6 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 
-// Defines
 #define TAG_PARTICLES_POKEBALL    55020
 #define TAG_PARTICLES_GREATBALL   55021
 #define TAG_PARTICLES_SAFARIBALL  55022
@@ -31,15 +30,10 @@
 #define TAG_PARTICLES_LUXURYBALL  55030
 #define TAG_PARTICLES_PREMIERBALL 55031
 
-#define TAG_HEALTHBOX_PALS_1      55049
-#define TAG_HEALTHBOX_PALS_2      55050
-
-// RAM
 u32 gMonShrinkDuration;
 u16 gMonShrinkDelta;
 u16 gMonShrinkDistance;
 
-// Function Declarations
 static void AnimTask_UnusedLevelUpHealthBox_Step(u8);
 static void AnimTask_FlashHealthboxOnLevelUp_Step(u8);
 static void AnimTask_ThrowBall_WaitAnimObjComplete(u8);
@@ -94,7 +88,6 @@ static void TimerBallOpenParticleAnimation(u8);
 static void PremierBallOpenParticleAnimation(u8);
 static void SpriteCB_SafariBaitOrRock_Init(struct Sprite *);
 
-// Data
 struct CaptureStar
 {
     s8 xOffset;
@@ -407,8 +400,6 @@ const struct SpriteTemplate gSafariRockTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_SafariBaitOrRock_Init,
 };
-
-// Functions
 
 // Unused
 void AnimTask_LevelUpHealthBox(u8 taskId)

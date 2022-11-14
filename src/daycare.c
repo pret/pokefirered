@@ -1816,9 +1816,9 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-        CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
-        LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
+        DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
+        CopyToBgTilemapBuffer(0, gBattleInterface_Textbox_Tilemap, 0, 0);
+        LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0, 0x20);
         gMain.state++;
         break;
     case 3:

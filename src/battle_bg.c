@@ -713,10 +713,10 @@ void DrawMainBattleBackground(void)
 
 void LoadBattleTextboxAndBackground(void)
 {
-    LZDecompressVram(gBattleTextboxTiles, (void *)BG_CHAR_ADDR(0));
-    CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0x000);
+    LZDecompressVram(gBattleInterface_Textbox_Gfx, (void *)BG_CHAR_ADDR(0));
+    CopyToBgTilemapBuffer(0, gBattleInterface_Textbox_Tilemap, 0, 0x000);
     CopyBgTilemapBufferToVram(0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0x00, 0x40);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x00, 0x40);
     LoadBattleMenuWindowGfx();
     DrawMainBattleBackground();
 }
@@ -1076,14 +1076,14 @@ bool8 LoadChosenBattleElement(u8 caseId)
     switch (caseId)
     {
     case 0:
-        LZDecompressVram(gBattleTextboxTiles, (void *)BG_CHAR_ADDR(0));
+        LZDecompressVram(gBattleInterface_Textbox_Gfx, (void *)BG_CHAR_ADDR(0));
         break;
     case 1:
-        CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0x000);
+        CopyToBgTilemapBuffer(0, gBattleInterface_Textbox_Tilemap, 0, 0x000);
         CopyBgTilemapBufferToVram(0);
         break;
     case 2:
-        LoadCompressedPalette(gBattleTextboxPalette, 0x00, 0x40);
+        LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x00, 0x40);
         break;
     case 3:
         battleScene = GetBattleTerrainOverride();

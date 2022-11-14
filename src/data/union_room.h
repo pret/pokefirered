@@ -467,4 +467,5 @@ static const u8 sLinkGroupToURoomActivity[] = {
     [LINK_GROUP_WONDER_NEWS]   = ACTIVITY_WONDER_NEWS
 };
 
-static const u8 sUnref_84570D1[] = _("{DYNAMIC 00}·{DYNAMIC 01}");
+// Unused
+static const u8 sDotSeparatedValues[] = _("{DYNAMIC 00}·{DYNAMIC 01}");

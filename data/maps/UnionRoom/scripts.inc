@@ -1,12 +1,3 @@
-.set LOCALID_UNION_ROOM_PLAYER_4, 2
-.set LOCALID_UNION_ROOM_PLAYER_8, 3
-.set LOCALID_UNION_ROOM_PLAYER_7, 4
-.set LOCALID_UNION_ROOM_PLAYER_6, 5
-.set LOCALID_UNION_ROOM_PLAYER_5, 6
-.set LOCALID_UNION_ROOM_PLAYER_3, 7
-.set LOCALID_UNION_ROOM_PLAYER_2, 8
-.set LOCALID_UNION_ROOM_PLAYER_1, 9
-
 UnionRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, UnionRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, UnionRoom_OnTransition
@@ -29,7 +20,7 @@ UnionRoom_OnResume::
 	removeobject LOCALID_UNION_ROOM_PLAYER_6
 	removeobject LOCALID_UNION_ROOM_PLAYER_7
 	removeobject LOCALID_UNION_ROOM_PLAYER_8
-	special UnionRoomSpecial
+	special RunUnionRoom
 	end
 
 UnionRoom_OnTransition::

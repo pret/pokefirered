@@ -189,10 +189,21 @@
 #define TRACKS_FOOT       1
 #define TRACKS_BIKE_TIRE  2
 
+#define OBJ_KIND_NORMAL 0
+#define OBJ_KIND_CLONE  255
+
+// Special object event local ids
 #define OBJ_EVENT_ID_PLAYER  0xFF
 #define OBJ_EVENT_ID_CAMERA  0x7F
 
-#define OBJ_KIND_NORMAL 0
-#define OBJ_KIND_CLONE  255
+// Object event local ids referenced in C files
+#define LOCALID_UNION_ROOM_PLAYER_4 2
+#define LOCALID_UNION_ROOM_PLAYER_8 3
+#define LOCALID_UNION_ROOM_PLAYER_7 4
+#define LOCALID_UNION_ROOM_PLAYER_6 5
+#define LOCALID_UNION_ROOM_PLAYER_5 6
+#define LOCALID_UNION_ROOM_PLAYER_3 7
+#define LOCALID_UNION_ROOM_PLAYER_2 8
+#define LOCALID_UNION_ROOM_PLAYER_1 9
 
 #endif // GUARD_CONSTANTS_EVENT_OBJECTS_H

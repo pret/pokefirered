@@ -1,7 +1,7 @@
 #ifndef GUARD_TRADE_SCENE_H
 #define GUARD_TRADE_SCENE_H
 
-void CB2_InitTradeAnim_LinkTrade(void);
+void CB2_LinkTrade(void);
 void CreateInGameTradePokemon(void);
 void DoInGameTradeScene(void);
 void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed);

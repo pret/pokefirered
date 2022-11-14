@@ -711,7 +711,7 @@ static void InitTradeMenuResources(void)
     }
 }
 
-void CB2_ReturnFromLinkTrade(void)
+void CB2_StartCreateTradeMenu(void)
 {
     SetMainCallback2(CB2_ReturnFromLinkTrade2);
 }
@@ -759,7 +759,7 @@ static void CB2_ReturnFromLinkTrade2(void)
             {
                 SetWirelessCommType1();
                 OpenLink();
-                LinkRfu_CreateIdleTask();
+                CreateTask_RfuIdle();
             }
             else
             {
@@ -802,13 +802,13 @@ static void CB2_ReturnFromLinkTrade2(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            LinkRfu_DestroyIdleTask();
+            DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuResourcesPtr->loadUISpritesState = 0;
             if (gWirelessCommType)
             {
-                ToggleLMANlinkRecovery(TRUE);
+                Rfu_SetLinkRecovery(TRUE);
                 SetLinkStandbyCallback();
             }
         }
@@ -1208,7 +1208,7 @@ static void TradeMenuCB_10(void)
 
 static void TradeMenuCB_13(void)
 {
-    gMain.savedCallback = CB2_ReturnFromLinkTrade;
+    gMain.savedCallback = CB2_StartCreateTradeMenu;
     if (gWirelessCommType != 0)
     {
         if (IsLinkRfuTaskFinished())
@@ -1218,7 +1218,7 @@ static void TradeMenuCB_13(void)
             Free(sTradeMenuResourcesPtr);
             gMain.callback1 = NULL;
             DestroyWirelessStatusIndicatorSprite();
-            SetMainCallback2(CB2_InitTradeAnim_LinkTrade);
+            SetMainCallback2(CB2_LinkTrade);
         }
     }
     else
@@ -1229,7 +1229,7 @@ static void TradeMenuCB_13(void)
             FreeAllWindowBuffers();
             Free(sTradeMenuResourcesPtr);
             gMain.callback1 = NULL;
-            SetMainCallback2(CB2_InitTradeAnim_LinkTrade);
+            SetMainCallback2(CB2_LinkTrade);
         }
     }
 }
@@ -2019,7 +2019,7 @@ static void TradeMenuCB_12(void)
 
 static void TradeMenuCB_16(void)
 {
-    if (!ToggleLMANlinkRecovery(FALSE))
+    if (!Rfu_SetLinkRecovery(FALSE))
     {
         SetLinkStandbyCallback();
         sTradeMenuResourcesPtr->tradeMenuCBnum = 13;
@@ -2720,7 +2720,7 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGnameSub partnerSub, u16 species1, u16 species2, u8 type, u16 species3, u8 isEventLegal)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData playerSub, struct RfuGameCompatibilityData partnerSub, u16 species1, u16 species2, u8 type, u16 species3, u8 isEventLegal)
 {
     u8 playerHasNationalDex = playerSub.hasNationalDex;
     u8 playerIsChampion = playerSub.isChampion;
@@ -2800,7 +2800,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGname
     return 0;
 }
 
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub playerSub, u16 species2, u16 species, u8 isEventLegal)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData playerSub, u16 species2, u16 species, u8 isEventLegal)
 {
     u8 canTradeEggAndNational = playerSub.hasNationalDex;
 

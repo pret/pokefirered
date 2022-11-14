@@ -158,7 +158,7 @@ $(BATINTGFXDIR)/unused_window2bar.4bpp: %.4bpp: %.png
 $(BATINTGFXDIR)/level_up_banner.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
-$(BATINTGFXDIR)/window.gbapal: $(BATINTGFXDIR)/window1.gbapal $(BATINTGFXDIR)/window2.gbapal
+$(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox1.gbapal $(BATINTGFXDIR)/textbox2.gbapal
 	cat $^ > $@
 
 $(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp \

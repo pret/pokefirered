@@ -1418,7 +1418,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
 
     sub_8112B3C();
     UpdatePlayerAvatarTransitionState();
-    sub_8111C68();
+    HandleQuestLogInput();
     FieldClearPlayerInput(&fieldInput);
     fieldInput = gQuestLogFieldInput;
     FieldInput_HandleCancelSignpost(&fieldInput);

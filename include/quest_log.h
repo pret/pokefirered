@@ -7,6 +7,11 @@
 #include "constants/quest_log.h"
 #include "constants/battle.h"
 
+// Layout of Quest Log script commands
+#define QL_CMD_EVENT_MASK 0x0FFF
+#define QL_CMD_UNK_MASK   0xF000
+#define QL_CMD_UNK_SHIFT  12
+
 // Parameter to QuestLog_OnEscalatorWarp
 #define QL_ESCALATOR_OUT 1
 #define QL_ESCALATOR_IN  2
@@ -219,7 +224,7 @@ void sub_8111708(void);
 void sub_81127F8(struct FieldInput * a0);
 void sub_8112B3C(void);
 void RunQuestLogCB(void);
-void sub_8111C68(void);
+void HandleQuestLogInput(void);
 bool8 QuestLogScenePlaybackIsEnding(void);
 void SetQuestLogEvent_Arrived(void);
 bool8 QuestLog_ShouldEndSceneOnMapChange(void);
@@ -235,16 +240,16 @@ bool8 sub_8110944(const void *a0, size_t cmdSize);
 
 void sub_8113BD8(void);
 void ResetUnk203B044(void);
-u16 *TryRecordEvent39_NoParams(u16 *);
-u16 *sub_8113C8C(u16 *, struct QuestLogAction *);
-u16 *sub_8113CC8(u16 *, struct QuestLogAction *);
-u16 *sub_8113D08(u16 *, struct QuestLogAction *);
-u16 *sub_8113D48(u16 *, struct QuestLogAction *);
-u16 *sub_8113D94(u16 *, struct QuestLogAction *);
+u16 *QL_RecordAction_FF(u16 *);
+u16 *QL_LoadAction_FE(u16 *, struct QuestLogAction *);
+u16 *QL_RecordAction_Input(u16 *, struct QuestLogAction *);
+u16 *QL_LoadAction_Input(u16 *, struct QuestLogAction *);
+u16 *QL_RecordAction_MovementOrGfxChange(u16 *, struct QuestLogAction *);
+u16 *QL_LoadAction_MovementOrGfxChange(u16 *, struct QuestLogAction *);
 void QL_EnableRecordingSteps(void);
 u16 *QuestLog_SkipCommand(u16 *, u16 **);
 void sub_8113ABC(const u16 *);
-u16 *sub_8113C20(u16 *, struct QuestLogAction *);
+u16 *QL_LoadAction_FF(u16 *, struct QuestLogAction *);
 bool8 sub_8113AE8(const u16 *);
 bool8 sub_8113B44(const u16 *);
 void TryRecordEvent41_IncCursor(u16);

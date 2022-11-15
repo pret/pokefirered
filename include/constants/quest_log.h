@@ -22,9 +22,9 @@
 
 #define QL_IS_PLAYBACK_STATE (gQuestLogState == QL_STATE_PLAYBACK || gQuestLogState == QL_STATE_PLAYBACK_LAST)
 
-#define QL_EVENT_0                              0 // Null
-#define QL_EVENT_1                              1 // Null
-#define QL_EVENT_2                              2 // Null
+#define QL_EVENT_INPUT                          0 // Null
+#define QL_EVENT_GFX_CHANGE                     1 // Null
+#define QL_EVENT_MOVEMENT                       2 // Null
 #define QL_EVENT_SWITCHED_PARTY_ORDER           3
 #define QL_EVENT_USED_ITEM                      4
 #define QL_EVENT_GAVE_HELD_ITEM                 5
@@ -61,9 +61,9 @@
 #define QL_EVENT_USED_FIELD_MOVE                36
 #define QL_EVENT_BOUGHT_ITEM                    37
 #define QL_EVENT_SOLD_ITEM                      38
-#define QL_EVENT_39                             39 // Null
+#define QL_EVENT_ACTION_FF                      39 // Null
 #define QL_EVENT_OBTAINED_STORY_ITEM            40
-#define QL_EVENT_41                             41 // Null
+#define QL_EVENT_ACTION_FE                      41 // Null
 #define QL_EVENT_ARRIVED                        42
 
 #define QL_EVENT_USED_POKEMART (QL_EVENT_BOUGHT_ITEM - 1) // Used as a start pos for QL_EVENT_BOUGHT_ITEM / QL_EVENT_SOLD_ITEM

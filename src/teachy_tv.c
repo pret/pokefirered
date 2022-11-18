@@ -1179,9 +1179,9 @@ static void TeachyTvPrepBattle(u8 taskId)
     InitPokedudePartyAndOpponent();
     PlayMapChosenOrBattleBGM(MUS_DUMMY);
     if (sStaticResources.whichScript == TTVSCR_BATTLE)
-        data[6] = B_TRANSITION_WHITEFADE_IN_STRIPES;
+        data[6] = B_TRANSITION_WHITE_BARS_FADE;
     else
-        data[6] = B_TRANSITION_SLICED_SCREEN;
+        data[6] = B_TRANSITION_SLICE;
     data[7] = 0;
     gTasks[taskId].func = TeachyTvPreBattleAnimAndSetBattleCallback;
 }
@@ -1192,11 +1192,11 @@ static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
     switch (data[7])
     {
     case 0:
-        BT_StartOnField(data[6]);
+        BattleTransition_StartOnField(data[6]);
         ++data[7];
         break;
     case 1:
-        if (BT_IsDone())
+        if (IsBattleTransitionDone())
         {
             SetMainCallback2(CB2_InitBattle);
             DestroyTask(taskId);

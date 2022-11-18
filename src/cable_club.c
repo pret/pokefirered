@@ -897,7 +897,7 @@ static void Task_StartWiredTrade(u8 taskId)
     case 3:
         if (!gReceivedRemoteLinkPlayers)
         {
-            SetMainCallback2(CB2_ReturnFromLinkTrade);
+            SetMainCallback2(CB2_StartCreateTradeMenu);
             DestroyTask(taskId);
         }
         break;
@@ -929,7 +929,7 @@ static void Task_StartWirelessTrade(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            UnionRoom_CreateTask_CallCB2ReturnFromLinkTrade();
+            CreateTask_CreateTradeMenu();
             DestroyTask(taskId);
         }
         break;

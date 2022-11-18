@@ -796,7 +796,7 @@ CableClub_EventScript_EnterUnionRoom::
 	special SetCableClubWarp
 	warpspinenter MAP_UNION_ROOM, 7, 11
 	waitstate
-	special UnionRoomSpecial
+	special RunUnionRoom
 	waitstate
 	end
 

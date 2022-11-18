@@ -249,7 +249,7 @@ SECTIONS {
         src/trainer_fan_club.o(.text);
         src/quest_log_events.o(.text);
         src/union_room.o(.text);
-        src/rfu_union_tool.o(.text);
+        src/union_room_player_avatar.o(.text);
         src/union_room_battle.o(.text);
         src/pokemon_special_anim.o(.text);
         src/pokemon_special_anim_scene.o(.text);
@@ -542,7 +542,7 @@ SECTIONS {
         src/trainer_fan_club.o(.rodata);
         src/quest_log_events.o(.rodata);
         src/union_room.o(.rodata);
-        src/rfu_union_tool.o(.rodata);
+        src/union_room_player_avatar.o(.rodata);
         src/union_room_battle.o(.rodata);
         src/union_room_message.o(.rodata);
         src/pokemon_special_anim.o(.rodata);

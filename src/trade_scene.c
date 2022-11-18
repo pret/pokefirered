@@ -773,7 +773,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 action)
     }
 }
 
-void CB2_InitTradeAnim_LinkTrade(void)
+void CB2_LinkTrade(void)
 {
     switch (gMain.state)
     {
@@ -937,16 +937,16 @@ static void TradeAnimInit_LoadGfx(void)
     SetBgTilemapBuffer(3, Alloc(BG_SCREEN_SIZE));
     DeactivateAllTextPrinters();
     // Doing the graphics load...
-    DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
+    DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
+    LZDecompressWram(gBattleInterface_Textbox_Tilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x000, 0x20);
     InitWindows(sTradeMessageWindowTemplates);
     // ... and doing the same load again
-    DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
+    DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
+    LZDecompressWram(gBattleInterface_Textbox_Tilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x000, 0x20);
 }
 
 static void CB2_InitTradeAnim_InGameTrade(void)
@@ -2668,7 +2668,7 @@ static void CB2_HandleTradeEnded(void)
     case 8:
         if (IsBGMStopped() == TRUE)
         {
-            if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
+            if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
             {
                 SetLinkStandbyCallback();
             }
@@ -2680,7 +2680,7 @@ static void CB2_HandleTradeEnded(void)
         }
         break;
     case 9:
-        if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
+        if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
         {
             if (IsLinkRfuTaskFinished())
             {

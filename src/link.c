@@ -222,7 +222,7 @@ bool8 IsWirelessAdapterConnected(void)
 
     SetWirelessCommType1();
     InitRFUAPI();
-    sub_80FB128(TRUE);
+    RfuSetIgnoreError(TRUE);
     if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
     {
         rfu_REQ_stopMode();
@@ -718,7 +718,7 @@ void ClearLinkCallback_2(void)
 u8 GetLinkPlayerCount(void)
 {
     if (gWirelessCommType)
-        return GetRfuPlayerCount();
+        return Rfu_GetLinkPlayerCount();
 
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
 }
@@ -924,7 +924,7 @@ static void SendBerryBlenderNoSpaceForPokeblocks(void)
 u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == 1)
-        return LinkRfu_GetMultiplayerId();
+        return Rfu_GetMultiplayerId();
 
     return SIO_MULTI_CNT->id;
 }
@@ -1576,8 +1576,8 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        main1Failed = LinkRfuMain1(); // Always returns FALSE
-        main2Failed = LinkRfuMain2();
+        main1Failed = RfuMain1(); // Always returns FALSE
+        main2Failed = RfuMain2();
         if (IsSendingKeysOverCable() == TRUE)
         {
             // This will never be reached.

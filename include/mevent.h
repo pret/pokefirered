@@ -101,8 +101,8 @@ void InitMEventData(void);
 u16 MEvent_GetBattleCardCount(u32 command);
 void MysteryGift_TryIncrementStat(u32 eventId, u32 trainerId);
 u16 *GetMEventProfileECWordsMaybe(void);
-void ResetReceivedWonderCardFlag(void);
-bool32 MEventHandleReceivedWonderCard(u16 flagId);
+void MysteryGift_DisableStats(void);
+bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId);
 u16 GetWonderCardFlagId(void);
 
 #endif //GUARD_MEVENT_H

@@ -581,7 +581,7 @@ struct BattleBarInfo
     u8 healthboxSpriteId;
     s32 maxValue;
     s32 oldValue;
-    s32 receivedValue;
+    s32 receivedValue; // if positive/negative, fills the bar to the left/right respectively
     s32 currValue;
 };
 

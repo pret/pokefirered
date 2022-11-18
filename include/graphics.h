@@ -2866,21 +2866,19 @@ extern const u16 gFameCheckerBg3Tilemap[0x400];
 extern const u16 gFameCheckerBg2Tilemap[0x400];
 
 // tm_case
-extern const u32 gUnknown_8E845D8[];
-extern const u32 gUnknown_8E84A24[];
-extern const u32 gUnknown_8E84B70[];
-extern const u32 gUnknown_8E84CB0[];
-extern const u32 gUnknown_8E84D20[];
-extern const u32 gTMCase_TMSpriteGfx[];
-extern const u32 gUnknown_8E84F20[];
-extern const u32 gUnknown_8E85068[];
-extern const u8 gUnknown_8E99118[];
+extern const u32 gTMCase_Gfx[];
+extern const u32 gTMCaseMenu_Tilemap[];
+extern const u32 gTMCase_Tilemap[];
+extern const u32 gTMCaseMenu_Male_Pal[];
+extern const u32 gTMCaseMenu_Female_Pal[];
+extern const u32 gTMCaseDisc_Gfx[];
+extern const u32 gTMCaseDiscTypes1_Pal[];
+extern const u32 gTMCaseDiscTypes2_Pal[];
+extern const u8 gTMCaseHM_Gfx[];
+
 extern const u16 gStandardMenuPalette[];
 
 // egg_hatch
-extern const u32 gBattleTextboxTiles[];
-extern const u32 gBattleTextboxTilemap[];
-extern const u32 gBattleTextboxPalette[];
 extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
 
@@ -4322,8 +4320,6 @@ extern const u32 gHealthboxDoublesPlayerGfx[];
 extern const u32 gHealthboxDoublesOpponentGfx[];
 extern const u32 gHealthboxSafariGfx[];
 extern const u32 gBlankGfxCompressed[];
-extern const u16 gBattleInterface_BallStatusBarPal[];
-extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u32 gInterfaceGfx_HPNumbers[];
 extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
@@ -4861,11 +4857,13 @@ extern const u16 gHoennTrainerCard_Pal[];
 extern const u32 gHoennTrainerCard_Gfx[];
 
 // battle_interface
-extern const u32 gFile_graphics_battle_interface_ball_status_bar_sheet[];
-extern const u8 gHealthboxElementsGfxTable[][32];
-extern const u16 gBattleInterface_BallStatusBarPal[];
-extern const u16 gBattleInterface_BallDisplayPal[];
-extern const u16 gBattleInterface_SummaryBallDisplayGfx[];
+extern const u32 gBattleInterface_Textbox_Gfx[];
+extern const u32 gBattleInterface_Textbox_Pal[];
+extern const u32 gBattleInterface_Textbox_Tilemap[];
+extern const u32 gBattleInterface_PartySummaryBar_Gfx[];
+extern const u8 gBattleInterface_Gfx[][32];
+extern const u16 gBattleInterface_Healthbox_Pal[];
+extern const u16 gBattleInterface_Healthbar_Pal[];
 
 // item_menu
 extern const u32 gUnknown_8E830CC[];

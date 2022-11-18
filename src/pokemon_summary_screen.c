@@ -1117,7 +1117,7 @@ static void Task_InputHandler_Info(u8 taskId)
         sMonSummaryScreen->state3270 = PSS_STATE3270_PLAYCRY;
         break;
     case PSS_STATE3270_HANDLEINPUT:
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE)
             return;
         else if (IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
@@ -3501,7 +3501,7 @@ static void Task_HandleInput_SelectMove(u8 taskId)
     switch (sMonSummaryScreen->selectMoveInputHandlerState)
     {
     case 0:
-        if (MenuHelpers_CallLinkSomething() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         if (JOY_NEW(DPAD_UP))
@@ -3662,7 +3662,7 @@ static void Task_HandleInput_SelectMove(u8 taskId)
         sMonSummaryScreen->selectMoveInputHandlerState = 3;
         break;
     case 3:
-        if (MenuHelpers_CallLinkSomething() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2);
@@ -3880,7 +3880,7 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
         sMonSummaryScreen->selectMoveInputHandlerState = 4;
         break;
     case 4:
-        if (MenuHelpers_CallLinkSomething() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE)
             return;
 
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], 2);

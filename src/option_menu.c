@@ -12,7 +12,7 @@
 #include "gba/m4a_internal.h"
 
 // can't include the one in menu_helpers.h since Task_OptionMenu needs bool32 for matching
-bool32 MenuHelpers_CallLinkSomething(void);
+bool32 IsActiveOverworldLinkBusy(void);
 
 // Menu items
 enum
@@ -371,7 +371,7 @@ static void Task_OptionMenu(u8 taskId)
         sOptionMenuPtr->loadState++;
         break;
     case 2:
-        if (((bool32)MenuHelpers_CallLinkSomething()) == TRUE)
+        if (((bool32)IsActiveOverworldLinkBusy()) == TRUE)
             break;
         switch (OptionMenu_ProcessInput())
         {

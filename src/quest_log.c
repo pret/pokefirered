@@ -1275,7 +1275,7 @@ static void SortQuestLogInSav1(void)
 
 void SaveQuestLogData(void)
 {
-    if (MenuHelpers_LinkSomething() != TRUE)
+    if (MenuHelpers_IsLinkActive() != TRUE)
     {
         QuestLog_CutRecording();
         SortQuestLogInSav1();

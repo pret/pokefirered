@@ -377,11 +377,11 @@ static void CB2_OpenBagMenu(void)
 {
     while (1)
     {
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (IsActiveOverworldLinkBusy() == TRUE)
             break;
         if (LoadBagMenuGraphics() == TRUE)
             break;
-        if (MenuHelpers_LinkSomething() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -419,7 +419,7 @@ static bool8 LoadBagMenuGraphics(void)
         gMain.state++;
         break;
     case 6:
-        if (!MenuHelpers_LinkSomething())
+        if (!MenuHelpers_IsLinkActive())
         {
             ResetTasks();
         }
@@ -1050,7 +1050,7 @@ static void Task_BagMenu_HandleInput(u8 taskId)
         return;
     if (FuncIsActiveTask(Task_AnimateWin0v) == TRUE)
         return;
-    if (MenuHelpers_CallLinkSomething() == TRUE)
+    if (IsActiveOverworldLinkBusy() == TRUE)
         return;
     switch (ProcessPocketSwitchInput(taskId, gBagMenuState.pocket))
     {
@@ -1131,15 +1131,15 @@ static u8 ProcessPocketSwitchInput(u8 taskId, u8 pocketId)
     u8 lrState;
     if (sBagMenuDisplay->pocketSwitchMode != 0)
         return 0;
-    lrState = GetLRKeysState();
-    if (JOY_NEW(DPAD_LEFT) || lrState == 1)
+    lrState = GetLRKeysPressed();
+    if (JOY_NEW(DPAD_LEFT) || lrState == MENU_L_PRESSED)
     {
         if (pocketId == POCKET_ITEMS - 1)
             return 0;
         PlaySE(SE_BAG_POCKET);
         return 1;
     }
-    if (JOY_NEW(DPAD_RIGHT) || lrState == 2)
+    if (JOY_NEW(DPAD_RIGHT) || lrState == MENU_R_PRESSED)
     {
         if (pocketId >= POCKET_POKE_BALLS - 1)
             return 0;
@@ -1174,7 +1174,7 @@ static void SwitchPockets(u8 taskId, s16 direction, bool16 a2)
 static void Task_AnimateSwitchPockets(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!MenuHelpers_LinkSomething() && !BagIsTutorial())
+    if (!MenuHelpers_IsLinkActive() && !BagIsTutorial())
     {
         switch (ProcessPocketSwitchInput(taskId, gBagMenuState.pocket + data[11]))
         {
@@ -1244,7 +1244,7 @@ static void Task_MoveItemInPocket_HandleInput(u8 taskId)
     s32 input;
     u16 itemsAbove;
     u16 cursorPos;
-    if (MenuHelpers_CallLinkSomething() == TRUE)
+    if (IsActiveOverworldLinkBusy() == TRUE)
         return;
     input = ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
@@ -1370,7 +1370,7 @@ static void OpenContextMenu(u8 taskId)
         sContextMenuNumItems = 2;
         break;
     default:
-        if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE)
         {
             if (gSpecialVar_ItemId == ITEM_TM_CASE || gSpecialVar_ItemId == ITEM_BERRY_POUCH)
             {
@@ -1447,7 +1447,7 @@ static void Task_ItemContext_FieldOrBattle(u8 taskId)
 static void Task_FieldItemContextMenuHandleInput(u8 taskId)
 {
     s8 input;
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (IsActiveOverworldLinkBusy() != TRUE)
     {
         input = Menu_ProcessInputNoWrapAround();
         switch (input)
@@ -1609,7 +1609,7 @@ static void Task_ItemMenuAction_Give(u8 taskId)
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);
-    if (!CanWriteMailHere(itemId))
+    if (!IsWritingMailAllowed(itemId))
         DisplayItemMessageInBag(taskId, FONT_2, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
     else if (ItemId_GetImportance(itemId) == 0)
     {
@@ -1703,7 +1703,7 @@ static void Task_ItemContext_FieldGive(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, data[1]);
-    if (!CanWriteMailHere(itemId))
+    if (!IsWritingMailAllowed(itemId))
     {
         DisplayItemMessageInBag(taskId, FONT_2, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
     }

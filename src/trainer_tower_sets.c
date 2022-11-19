@@ -322,7 +322,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_7 = {
 	.checksum = 0x00016456
 };
 
-static const struct TrainerTowerFloor gUnknown_847B36C = {
+static const struct TrainerTowerFloor sTrainerTowerFloor_Single_Unused = {
 	.id = 3,
 	.floorIdx = MAX_TRAINER_TOWER_FLOORS,
 	.challengeType = CHALLENGE_TYPE_SINGLE,
@@ -5539,7 +5539,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_8 = {
 	.checksum = 0x000160f4
 };
 
-static const struct TrainerTowerFloor gUnknown_847FD0C = {
+static const struct TrainerTowerFloor sTrainerTowerFloor_Double_Unused1 = {
 	.id = 22,
 	.floorIdx = MAX_TRAINER_TOWER_FLOORS,
 	.challengeType = CHALLENGE_TYPE_DOUBLE,
@@ -7179,7 +7179,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_2 = {
 	.checksum = 0x0001624b
 };
 
-static const struct TrainerTowerFloor gUnknown_848144C = {
+static const struct TrainerTowerFloor sTrainerTowerFloor_Double_Unused2 = {
 	.id = 28,
 	.floorIdx = MAX_TRAINER_TOWER_FLOORS,
 	.challengeType = CHALLENGE_TYPE_DOUBLE,
@@ -7773,7 +7773,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_7 = {
 	.checksum = 0x00015272
 };
 
-static const struct TrainerTowerFloor gUnknown_8481C0C = {
+static const struct TrainerTowerFloor sTrainerTowerFloor_Double_Unused3 = {
 	.id = 30,
 	.floorIdx = MAX_TRAINER_TOWER_FLOORS,
 	.challengeType = CHALLENGE_TYPE_DOUBLE,

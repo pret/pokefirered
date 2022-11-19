@@ -275,46 +275,47 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     }
 }
 
-void sub_8003614(void *tileData, u16 currentX, u16 currentY, u16 width, u16 height)
+// Unused
+static void CopyGlyphToWindow_Parameterized(void *tileData, u16 currentX, u16 currentY, u16 width, u16 height)
 {
-    int r0, r1;
-    u8 r2;
-    u16 r3;
+    int glyphWidth, glyphHeight;
+    u8 sizeType;
+    u16 sizeX;
     
     if (width - currentX < gGlyphInfo.width)
-        r0 = width - currentX;
+        glyphWidth = width - currentX;
     else
-        r0 = gGlyphInfo.width;
+        glyphWidth = gGlyphInfo.width;
     if (height - currentY < gGlyphInfo.height)
-        r1 = height - currentY;
+        glyphHeight = height - currentY;
     else
-        r1 = gGlyphInfo.height;
+        glyphHeight = gGlyphInfo.height;
     
-    r2 = 0;
-    r3  = (width + (width & 7)) >> 3;
-    if (r0 > 8)
-        r2 |= 1;
-    if (r1 > 8)
-        r2 |= 2;
+    sizeType = 0;
+    sizeX  = (width + (width & 7)) >> 3;
+    if (glyphWidth > 8)
+        sizeType |= 1;
+    if (glyphHeight > 8)
+        sizeType |= 2;
     
-    switch (r2)
+    switch (sizeType)
     {
         case 0:
-            GLYPH_COPY(0, 0, r0, r1, tileData, currentX, currentY, r3);
+            GLYPH_COPY(0, 0, glyphWidth, glyphHeight, tileData, currentX, currentY, sizeX);
             return;
         case 1:
-            GLYPH_COPY(0, 0, 8, r1, tileData, currentX, currentY, r3);
-            GLYPH_COPY(8, 0, r0 - 8, r1, tileData, currentX, currentY, r3);
+            GLYPH_COPY(0, 0, 8, glyphHeight, tileData, currentX, currentY, sizeX);
+            GLYPH_COPY(8, 0, glyphWidth - 8, glyphHeight, tileData, currentX, currentY, sizeX);
             return;
         case 2:
-            GLYPH_COPY(0, 0, r0, 8, tileData, currentX, currentY, r3);
-            GLYPH_COPY(0, 8, r0, r1 - 8, tileData, currentX, currentY, r3);
+            GLYPH_COPY(0, 0, glyphWidth, 8, tileData, currentX, currentY, sizeX);
+            GLYPH_COPY(0, 8, glyphWidth, glyphHeight - 8, tileData, currentX, currentY, sizeX);
             return;
         case 3:
-            GLYPH_COPY(0, 0, 8, 8, tileData, currentX, currentY, r3);
-            GLYPH_COPY(8, 0, r0 - 8, 8, tileData, currentX, currentY, r3);
-            GLYPH_COPY(0, 8, 8, r1 - 8, tileData, currentX, currentY, r3);
-            GLYPH_COPY(8, 8, r0 - 8, r1 - 8, tileData, currentX, currentY, r3);
+            GLYPH_COPY(0, 0, 8, 8, tileData, currentX, currentY, sizeX);
+            GLYPH_COPY(8, 0, glyphWidth - 8, 8, tileData, currentX, currentY, sizeX);
+            GLYPH_COPY(0, 8, 8, glyphHeight - 8, tileData, currentX, currentY, sizeX);
+            GLYPH_COPY(8, 8, glyphWidth - 8, glyphHeight - 8, tileData, currentX, currentY, sizeX);
             return;
     }
 }

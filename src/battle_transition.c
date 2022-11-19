@@ -207,13 +207,13 @@ static void IncrementTrainerPicState(s16 spriteId);
 static s16 IsTrainerPicSlideDone(s16 spriteId);
 static void Mugshots_CreateTrainerPics(struct Task *task);
 
-static const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball_tileset.4bpp");
-static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/sliding_pokeball_tilemap.bin");
-static const u8 sPokeball_Gfx[] = INCBIN_U8("graphics/battle_transitions/sliding_pokeball.4bpp");
-static const u32 sVsBarTileset[] = INCBIN_U32("graphics/battle_transitions/vsbar_tileset.4bpp");
+static const u32 sBigPokeball_Gfx[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
+static const u32 sSlidingPokeball_Tilemap[] = INCBIN_U32("graphics/battle_transitions/sliding_pokeball.bin");
+static const u8 sSlidingPokeball_Gfx[] = INCBIN_U8("graphics/battle_transitions/sliding_pokeball.4bpp");
+static const u32 sMugshotBanner_Gfx[] = INCBIN_U32("graphics/battle_transitions/mugshot_banner.4bpp");
 static const u8 sUnusedBrendan_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
 static const u8 sUnusedLass_Gfx[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
-static const u32 sGridSquareTileset[] = INCBIN_U32("graphics/battle_transitions/grid_square_tileset.4bpp");
+static const u32 sGridSquare_Gfx[] = INCBIN_U32("graphics/battle_transitions/grid_square.4bpp");
 
 // All battle transitions use the same intro
 static const TaskFunc sTasks_Intro[] =
@@ -453,8 +453,8 @@ static const TransitionStateFunc sTransitionIntroFuncs[] =
 static const struct SpriteFrameImage sSpriteImage_Pokeball[] =
 {
     {
-        .data = sPokeball_Gfx, 
-        .size = sizeof(sPokeball_Gfx),
+        .data = sSlidingPokeball_Gfx, 
+        .size = sizeof(sSlidingPokeball_Gfx),
     },
 };
 
@@ -928,7 +928,7 @@ static bool8 BigPokeball_Init(struct Task *task)
     InitPatternWeaveTransition(task);
     GetBg0TilesDst(&tilemap, &tileset);
     CpuFill16(0, tilemap, BG_SCREEN_SIZE);
-    CpuCopy16(sBigPokeball_Tileset, tileset, 0x580);
+    CpuCopy16(sBigPokeball_Gfx, tileset, sizeof(sBigPokeball_Gfx));
     LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
     return FALSE;
@@ -1098,7 +1098,7 @@ static bool8 PokeballsTrail_Init(struct Task *task)
     u16 *tilemap, *tileset;
 
     GetBg0TilesDst(&tilemap, &tileset);
-    CpuCopy16(sPokeballTrail_Tileset, tileset, 0x40);
+    CpuCopy16(sSlidingPokeball_Tilemap, tileset, 0x40);
     CpuFill32(0, tilemap, BG_SCREEN_SIZE);
     LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
@@ -1897,7 +1897,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     const u16 *mugshotsMap = sMugshotsTilemap;
     
     GetBg0TilesDst(&tilemap, &tileset);
-    CpuCopy16(sVsBarTileset, tileset, 0x1E0);
+    CpuCopy16(sMugshotBanner_Gfx, tileset, sizeof(sMugshotBanner_Gfx));
     LoadPalette(sOpponentMugshotsPals[task->tMugshotId], 0xF0, 0x20);
     LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender], 0xFA, 0xC);
     
@@ -2578,7 +2578,7 @@ static bool8 GridSquares_Init(struct Task *task)
     u16 *tilemap, *tileset;
 
     GetBg0TilesDst(&tilemap, &tileset);
-    CpuCopy16(sGridSquareTileset, tileset, 0x20);
+    CpuCopy16(sGridSquare_Gfx, tileset, 0x20);
     CpuFill16(0xF0 << 8, tilemap, BG_SCREEN_SIZE);
     LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
@@ -2594,7 +2594,7 @@ static bool8 GridSquares_Main(struct Task *task)
         GetBg0TilemapDst(&tileset);
         task->tDelay = 3;
         task->tShrinkStage++;
-        CpuCopy16(&sGridSquareTileset[task->tShrinkStage * 8], tileset, 0x20);
+        CpuCopy16(&sGridSquare_Gfx[task->tShrinkStage * 8], tileset, 0x20);
         if (task->tShrinkStage > 13)
         {
             task->tState++;

@@ -721,7 +721,7 @@ static void CB2_EndTrainerTowerBattle(void)
 
 static void Task_DoTrainerTowerBattle(u8 taskId)
 {
-    if (BT_IsDone() == TRUE)
+    if (IsBattleTransitionDone() == TRUE)
     {
         gMain.savedCallback = CB2_EndTrainerTowerBattle;
         CleanupOverworldWindowsAndTilemaps();
@@ -741,7 +741,7 @@ static void DoTrainerTowerBattle(void)
     BuildEnemyParty();
     CreateTask(Task_DoTrainerTowerBattle, 1);
     PlayMapChosenOrBattleBGM(0);
-    BT_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
+    BattleTransition_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
 }
 
 static void TrainerTowerGetChallengeType(void)

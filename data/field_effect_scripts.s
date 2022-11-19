@@ -252,8 +252,8 @@ gFldEffScript_UseDive::
 	end 
 
 gFldEffScript_Pokeball::
-	loadpal sSpritePalette_SlidingPokeball
-	callnative FldEff_Pokeball
+	loadpal gSpritePalette_Pokeball
+	callnative FldEff_PokeballTrail
 	end 
 
 gFldEffScript_XIcon::

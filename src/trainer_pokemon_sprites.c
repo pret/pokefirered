@@ -273,7 +273,7 @@ u16 CreateTrainerCardTrainerPicSprite(u16 species, bool8 isFrontPic, u16 destX, 
     return CreateTrainerCardSprite(species, 0, 0, isFrontPic, destX, destY, paletteSlot, windowId, TRUE);
 }
 
-u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass)
+u16 PlayerGenderToFrontTrainerPicId(u8 gender, bool8 getClass)
 {
     if (getClass == TRUE)
     {

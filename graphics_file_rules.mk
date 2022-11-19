@@ -248,28 +248,6 @@ $(ROULETTEGFXDIR)/poke_icons2.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
 									$(ROULETTEGFXDIR)/makuhita.4bpp
 	@cat $^ >$@
 
-$(BATTRANSGFXDIR)/85BBC14.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
-
-$(BATTRANSGFXDIR)/rayquaza.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 938 -Wnum_tiles
-
-$(BATTRANSGFXDIR)/frontier_square_1.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_1.4bpp
-	@cat $^ >$@
-
-$(BATTRANSGFXDIR)/frontier_square_2.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_2.4bpp
-	@cat $^ >$@
- 
-$(BATTRANSGFXDIR)/frontier_square_3.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_3.4bpp
-	@cat $^ >$@
-
-$(BATTRANSGFXDIR)/frontier_square_4.4bpp: $(BATTRANSGFXDIR)/frontier_squares_blanktiles.4bpp \
-										 $(BATTRANSGFXDIR)/frontier_squares_4.4bpp
-	@cat $^ >$@
-
 $(SLOTMACHINEGFXDIR)/reel_time_gfx.4bpp: $(SLOTMACHINEGFXDIR)/reel_time_pikachu.4bpp \
 										 $(SLOTMACHINEGFXDIR)/reel_time_machine.4bpp
 	@cat $^ >$@
@@ -450,9 +428,6 @@ $(FIELDEFFECTSGFXDIR)/pics/tree_disguise.4bpp: %.4bpp: %.png
 
 $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8 -Wnum_tiles
-	
-$(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 43 -Wnum_tiles
 
 graphics/tm_case/tm_case.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 91 -Wnum_tiles

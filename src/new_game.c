@@ -143,7 +143,7 @@ void NewGameInitData(void)
     ResetTrainerFanClub();
     UnionRoomChat_InitializeRegisteredTexts();
     ResetMiniGamesResults();
-    InitMEventData();
+    ClearMysteryGift();
     SetAllRenewableItemFlags();
     WarpToPlayersRoom();
     RunScriptImmediately(EventScript_ResetAllMapFlags);

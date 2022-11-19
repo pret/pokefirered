@@ -188,19 +188,19 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         svr->flag = 0;
         return 4;
     case 8:
-        BuildMEventClientHeader(svr->sendBuffer);
-        mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MEventClientHeaderStruct));
+        MysteryGift_LoadLinkGameData(svr->sendBuffer);
+        mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
         break;
     case 14:
         mevent_client_send_word(svr, 0x13, svr->param);
         break;
     case 10:
-        OverwriteSavedWonderCardWithReceivedCard(svr->recvBuffer);
+        SaveWonderCard(svr->recvBuffer);
         break;
     case 9:
-        if (!MEvent_HaveAlreadyReceivedWonderNews(svr->recvBuffer))
+        if (!IsWonderNewsSameAsSaved(svr->recvBuffer))
         {
-            OverwriteSavedWonderNewsWithReceivedNews(svr->recvBuffer);
+            SaveWonderNews(svr->recvBuffer);
             mevent_client_send_word(svr, 0x13, 0);
         }
         else
@@ -212,7 +212,7 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         svr->flag = 0;
         break;
     case 16:
-        MEvent_ReceiveDistributionMon(svr->recvBuffer);
+        MysteryGift_TrySaveStamp(svr->recvBuffer);
         break;
     case 17:
         InitRamScript_NoObjectEvent(svr->recvBuffer, 1000);

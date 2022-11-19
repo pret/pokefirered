@@ -3,8 +3,15 @@
 
 #include "global.h"
 
-void MENewsJisan_SetRandomReward(u32 a0);
-void MENewsJisanReset(void);
-void MENewsJisanStepCounter(void);
+enum {
+    WONDER_NEWS_NONE,
+    WONDER_NEWS_RECV_FRIEND,
+    WONDER_NEWS_RECV_WIRELESS,
+    WONDER_NEWS_SENT,
+};
+
+void WonderNews_SetReward(u32 newsType);
+void WonderNews_Reset(void);
+void WonderNews_IncrementStepCounter(void);
 
 #endif //GUARD_WONDER_NEWS_H

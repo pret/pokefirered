@@ -627,7 +627,7 @@ struct FameCheckerSaveData
 
 struct WonderNewsMetadata
 {
-    u8 unk_0_0:2;
+    u8 newsType:2;
     u8 unk_0_2:3;
     u8 unk_0_5:3;
     u8 berry;
@@ -635,7 +635,7 @@ struct WonderNewsMetadata
 
 struct WonderNews
 {
-    u16 newsId;
+    u16 id;
     u8 sendType; // SEND_TYPE_*
     u8 bgType;
     u8 titleText[WONDER_NEWS_TEXT_LENGTH];

@@ -472,10 +472,10 @@ void InitEasyChatPhrases(void)
 #endif
 }
 
-void EC_ResetMEventProfileMaybe(void)
+void InitQuestionnaireWords(void)
 {
     s32 i;
-    u16 *ptr = GetMEventProfileECWordsMaybe();
+    u16 *ptr = GetQuestionnaireWordsPtr();
     for (i = 0; i < 4; i++)
         ptr[i] = EC_WORD_UNDEFINED;
 }

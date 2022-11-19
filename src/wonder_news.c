@@ -5,85 +5,100 @@
 #include "wonder_news.h"
 #include "constants/items.h"
 
+/*
+    Wonder News related functions.
+    Because this feature is largely unused, the names in here are
+    mostly nebulous and without a real indication of purpose.
+*/
+
+enum {
+    NEWS_VAL_INVALID,
+    NEWS_VAL_RECV_FRIEND,
+    NEWS_VAL_RECV_WIRELESS,
+    NEWS_VAL_NONE,
+    NEWS_VAL_SENT,
+    NEWS_VAL_SENT_MAX,
+    NEWS_VAL_GET_MAX,
+};
+
 static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *);
 static void MENewsJisanIncrementCounterUnk0_5(struct WonderNewsMetadata *);
 static u32 GetMENewsJisanState(struct WonderNewsMetadata *);
 static void MENewsJisanIncrementCounterUnk0_2(struct WonderNewsMetadata *);
 static void MENewsJisanResetCounterUnk0_2(struct WonderNewsMetadata *);
 
-void MENewsJisan_SetRandomReward(u32 a0)
+void WonderNews_SetReward(u32 newsType)
 {
-    struct WonderNewsMetadata *r5 = GetMENewsJisanStructPtr();
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
-    r5->unk_0_0 = a0;
-    switch (a0)
+    data->newsType = newsType;
+    switch (newsType)
     {
-    case 0:
+    case WONDER_NEWS_NONE:
         break;
-    case 1:
-    case 2:
-        r5->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_RAZZ_BERRY);
+    case WONDER_NEWS_RECV_FRIEND:
+    case WONDER_NEWS_RECV_WIRELESS:
+        data->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_RAZZ_BERRY);
         break;
-    case 3:
-        r5->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_CHERI_BERRY);
+    case WONDER_NEWS_SENT:
+        data->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_CHERI_BERRY);
         break;
     }
 }
 
-void MENewsJisanReset(void)
+void WonderNews_Reset(void)
 {
-    struct WonderNewsMetadata *r5 = GetMENewsJisanStructPtr();
+    struct WonderNewsMetadata *r5 = GetSavedWonderNewsMetadata();
 
-    r5->unk_0_0 = 0;
+    r5->newsType = 0;
     r5->unk_0_2 = 0;
     r5->unk_0_5 = 0;
     r5->berry = 0;
-    VarSet(VAR_MENEWS_JISAN_STEP_COUNTER, 0);
+    VarSet(VAR_WONDER_NEWS_STEP_COUNTER, 0);
 }
 
-void MENewsJisanStepCounter(void)
+void WonderNews_IncrementStepCounter(void)
 {
-    u16 *r4 = GetVarPointer(VAR_MENEWS_JISAN_STEP_COUNTER);
-    struct WonderNewsMetadata *r2 = GetMENewsJisanStructPtr();
-    struct WonderNewsMetadata r0 = *r2;
+    u16 *stepCounter = GetVarPointer(VAR_WONDER_NEWS_STEP_COUNTER);
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
-    if ((u8)r0.unk_0_5 > 4 && ++(*r4) >= 500)
+    if (data->unk_0_5 > 4 && ++(*stepCounter) >= 500)
     {
-        r2->unk_0_5 = 0;
-        *r4 = 0;
+        data->unk_0_5 = 0;
+        *stepCounter = 0;
     }
 }
 
 u16 GetMENewsJisanItemAndState(void)
 {
-    u16 *r6 = &gSpecialVar_Result;
-    struct WonderNewsMetadata *r4 = GetMENewsJisanStructPtr();
+    u16 *result = &gSpecialVar_Result;
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
     u16 r5;
 
-    if (!IsMysteryGiftEnabled() || !ValidateReceivedWonderNews())
+    if (!IsMysteryGiftEnabled() || !ValidateSavedWonderNews())
         return 0;
 
-    r5 = GetMENewsJisanState(r4);
+    r5 = GetMENewsJisanState(data);
 
     switch (r5)
     {
     case 0:
         break;
     case 1:
-        *r6 = GetMENewsJisanRewardItem(r4);
+        *result = GetMENewsJisanRewardItem(data);
         break;
     case 2:
-        *r6 = GetMENewsJisanRewardItem(r4);
+        *result = GetMENewsJisanRewardItem(data);
         break;
     case 3:
         break;
     case 4:
-        *r6 = GetMENewsJisanRewardItem(r4);
-        MENewsJisanIncrementCounterUnk0_2(r4);
+        *result = GetMENewsJisanRewardItem(data);
+        MENewsJisanIncrementCounterUnk0_2(data);
         break;
     case 5:
-        *r6 = GetMENewsJisanRewardItem(r4);
-        MENewsJisanResetCounterUnk0_2(r4);
+        *result = GetMENewsJisanRewardItem(data);
+        MENewsJisanResetCounterUnk0_2(data);
         break;
     case 6:
         break;
@@ -96,7 +111,7 @@ static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *a0)
 {
     u32 r4;
 
-    a0->unk_0_0 = 0;
+    a0->newsType = 0;
     r4 = a0->berry + FIRST_BERRY_INDEX - 1;
     a0->berry = 0;
     MENewsJisanIncrementCounterUnk0_5(a0);
@@ -122,23 +137,21 @@ static void MENewsJisanIncrementCounterUnk0_5(struct WonderNewsMetadata *a0)
         a0->unk_0_5 = 5;
 }
 
-static u32 GetMENewsJisanState(struct WonderNewsMetadata *a0)
+static u32 GetMENewsJisanState(struct WonderNewsMetadata *data)
 {
-    struct WonderNewsMetadata r0;
-    if ((u8)a0->unk_0_5 == 5)
+    if (data->unk_0_5 == 5)
         return 6;
 
-    r0 = *a0;
-    switch (r0.unk_0_0)
+    switch (data->newsType)
     {
-    case 0:
+    case WONDER_NEWS_NONE:
         return 3;
-    case 1:
+    case WONDER_NEWS_RECV_FRIEND:
         return 1;
-    case 2:
+    case WONDER_NEWS_RECV_WIRELESS:
         return 2;
-    case 3:
-        if ((u8)r0.unk_0_2 < 3)
+    case WONDER_NEWS_SENT:
+        if (data->unk_0_2 < 3)
             return 4;
         return 5;
     default:

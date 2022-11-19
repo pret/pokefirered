@@ -1955,15 +1955,15 @@ u16 BattleCardAction(void)
     switch (gSpecialVar_Result)
     {
     case 0:
-        return MEvent_GetBattleCardCount(3);
+        return MysteryGift_GetCardStat(3);
     case 1:
-        return MEvent_GetBattleCardCount(4);
+        return MysteryGift_GetCardStat(4);
     case 2:
-        return MEvent_GetBattleCardCount(0);
+        return MysteryGift_GetCardStat(0);
     case 3:
-        return MEvent_GetBattleCardCount(1);
+        return MysteryGift_GetCardStat(1);
     case 4:
-        return MEvent_GetBattleCardCount(2);
+        return MysteryGift_GetCardStat(2);
     default:
         AGB_ASSERT_EX(0, ABSPATH("scr_tool.c"), 3873);
         return 0;

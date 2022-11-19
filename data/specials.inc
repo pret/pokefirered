@@ -392,7 +392,7 @@ gSpecials::
 	def_special Script_SetHelpContext
 	def_special BackupHelpContext
 	def_special RestoreHelpContext
-	def_special ValidateReceivedWonderCard
+	def_special ValidateSavedWonderCard
 	def_special SetUnlockedPokedexFlags
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName

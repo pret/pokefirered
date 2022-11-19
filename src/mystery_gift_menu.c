@@ -784,13 +784,9 @@ s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cannotToss,
 bool32 ValidateCardOrNews(bool32 cardOrNews)
 {
     if (cardOrNews == 0)
-    {
-        return ValidateReceivedWonderCard();
-    }
+        return ValidateSavedWonderCard();
     else
-    {
-        return ValidateReceivedWonderNews();
-    }
+        return ValidateSavedWonderNews();
 }
 
 bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
@@ -802,7 +798,7 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
     case 0:
         if (cardOrNews == 0)
         {
-            WonderCard_Init(GetSavedWonderCard(), sav1_get_mevent_buffer_2());
+            WonderCard_Init(GetSavedWonderCard(), GetSavedWonderCardMetadata());
         }
         else
         {
@@ -837,13 +833,9 @@ bool32 HandleLoadWonderCardOrNews(u8 * state, bool32 cardOrNews)
 bool32 DestroyNewsOrCard(bool32 cardOrNews)
 {
     if (cardOrNews == 0)
-    {
-        DestroyWonderCard();
-    }
+        ClearSavedWonderCardAndRelated();
     else
-    {
-        DestroyWonderNews();
-    }
+        ClearSavedWonderNewsAndRelated();
     return TRUE;
 }
 
@@ -1128,25 +1120,17 @@ void task00_mystery_gift(u8 taskId)
         {
         case 0:
             data->IsCardOrNews = 0;
-            if (ValidateReceivedWonderCard() == TRUE)
-            {
+            if (ValidateSavedWonderCard() == TRUE)
                 data->state = 18;
-            }
             else
-            {
                 data->state = 2;
-            }
             break;
         case 1:
             data->IsCardOrNews = 1;
-            if (ValidateReceivedWonderNews() == TRUE)
-            {
+            if (ValidateSavedWonderNews() == TRUE)
                 data->state = 18;
-            }
             else
-            {
                 data->state = 2;
-            }
             break;
         case -2u:
             data->state = 37;
@@ -1307,7 +1291,7 @@ void task00_mystery_gift(u8 taskId)
         switch (flag)
         {
         case 0:
-            if (CheckReceivedGiftFromWonderCard() == TRUE)
+            if (IsSavedWonderCardGiftNotReceived() == TRUE)
             {
                 data->state = 12;
             }
@@ -1382,13 +1366,9 @@ void task00_mystery_gift(u8 taskId)
             if (data->prevPromptWindowId == 3)
             {
                 if (data->source == 1)
-                {
-                    MENewsJisan_SetRandomReward(1);
-                }
+                    WonderNews_SetReward(1);
                 else
-                {
-                    MENewsJisan_SetRandomReward(2);
-                }
+                    WonderNews_SetReward(2);
             }
             if (sp0 == 0)
             {
@@ -1452,25 +1432,17 @@ void task00_mystery_gift(u8 taskId)
         u32 result;
         if (data->IsCardOrNews == 0)
         {
-            if (WonderCard_Test_Unk_08_6())
-            {
+            if (IsSendingSavedWonderCardAllowed())
                 result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->IsCardOrNews, FALSE);
-            }
             else
-            {
                 result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->IsCardOrNews, TRUE);
-            }
         }
         else
         {
-            if (WonderNews_Test_Unk_02())
-            {
+            if (IsSendingSavedWonderNewsAllowed())
                 result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->IsCardOrNews, FALSE);
-            }
             else
-            {
                 result = HandleMysteryGiftListMenu(&data->textState, &data->curPromptWindowId, data->IsCardOrNews, TRUE);
-            }
         }
         switch (result)
         {
@@ -1497,7 +1469,7 @@ void task00_mystery_gift(u8 taskId)
         switch (mevent_message_prompt_discard(&data->textState, &data->curPromptWindowId, data->IsCardOrNews))
         {
         case 0:
-            if (data->IsCardOrNews == 0 && CheckReceivedGiftFromWonderCard() == TRUE)
+            if (data->IsCardOrNews == 0 && IsSavedWonderCardGiftNotReceived() == TRUE)
             {
                 data->state = 23;
             }
@@ -1628,7 +1600,7 @@ void task00_mystery_gift(u8 taskId)
         {
             if (data->source == 1 && data->prevPromptWindowId == 3)
             {
-                MENewsJisan_SetRandomReward(3);
+                WonderNews_SetReward(3);
                 data->state = 17;
             }
             else

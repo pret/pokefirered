@@ -2,12 +2,12 @@
 #include "script.h"
 #include "event_data.h"
 #include "quest_log.h"
+#include "mystery_gift.h"
 #include "constants/maps.h"
 #include "constants/map_scripts.h"
 
 extern void ResetContextNpcTextColor(void); // field_specials
 extern u16 CalcCRC16WithTable(u8 *data, int length); // util
-extern bool32 ValidateReceivedWonderCard(void);
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -554,7 +554,7 @@ bool32 ValidateRamScript(void)
 u8 *GetSavedRamScriptIfValid(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
-    if (!ValidateReceivedWonderCard())
+    if (!ValidateSavedWonderCard())
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;

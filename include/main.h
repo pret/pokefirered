@@ -69,7 +69,8 @@ void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 u16 GetGeneratedTrainerIdLower(void);
 
-extern const char RomHeaderGameCode[4];
+#define GAME_CODE_LENGTH 4
+extern const char RomHeaderGameCode[GAME_CODE_LENGTH];
 extern const char RomHeaderSoftwareVersion;
 
 extern u8 gLinkTransferringData;

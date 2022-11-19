@@ -317,16 +317,24 @@ static const TransitionStateFunc sWave_Funcs[] =
     Wave_Main,
     Wave_End,
 };
-static const s16 gUnknown_83FA444[] =
+static const s16 sSpiral_AngleData[] =
 {
-    0x0, 0x26E,
-    0x100, 0x69,
-    0x0, -0x69,
-    -0x100, -0x266E,
-    0x0, 0x26E,
-    0x100, 0x69,
-    0x0, -0x69,
-    -0x100, -0x266E,
+    0x0,
+    0x26E,
+    0x100,
+    0x69,
+    0x0,
+    -0x69,
+    -0x100,
+    -0x266E,
+    0x0,
+    0x26E,
+    0x100,
+    0x69,
+    0x0,
+    -0x69,
+    -0x100,
+    -0x266E,
 };
 
 static const TransitionStateFunc sSpiral_Funcs[] =
@@ -906,16 +914,16 @@ static void Task_BigPokeball(u8 taskId)
     u16 i; \
     InitTransitionData(); \
     ScanlineEffect_Clear(); \
-    task->tBlendTarget1 = 16; \
-    task->tBlendTarget2 = 0; \
-    task->tSinIndex = 0; \
-    task->tAmplitude = 0x4000; \
+    (task)->tBlendTarget1 = 16; \
+    (task)->tBlendTarget2 = 0; \
+    (task)->tSinIndex = 0; \
+    (task)->tAmplitude = 0x4000; \
     sTransitionData->winIn = WININ_WIN0_ALL; \
     sTransitionData->winOut = 0; \
     sTransitionData->win0H = DISPLAY_WIDTH; \
     sTransitionData->win0V = DISPLAY_HEIGHT; \
     sTransitionData->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL; \
-    sTransitionData->bldAlpha = BLDALPHA_BLEND(task->tBlendTarget2, task->tBlendTarget1); \
+    sTransitionData->bldAlpha = BLDALPHA_BLEND((task)->tBlendTarget2, (task)->tBlendTarget1); \
     for (i = 0; i < DISPLAY_HEIGHT; i++) \
         gScanlineEffectRegBuffers[1][i] = DISPLAY_WIDTH; \
     SetVBlankCallback(VBlankCB_PatternWeave); \
@@ -1098,7 +1106,7 @@ static bool8 PokeballsTrail_Init(struct Task *task)
     u16 *tilemap, *tileset;
 
     GetBg0TilesDst(&tilemap, &tileset);
-    CpuCopy16(sSlidingPokeball_Tilemap, tileset, 0x40);
+    CpuCopy16(sSlidingPokeball_Tilemap, tileset, sizeof(sSlidingPokeball_Tilemap));
     CpuFill32(0, tilemap, BG_SCREEN_SIZE);
     LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
@@ -1665,7 +1673,7 @@ static void Spiral_UpdateFrame(s16 initRadius, s16 deltaAngleMax, u8 offsetMaybe
             y1 = DISPLAY_HEIGHT / 2;
         for (i = y1; i > 0; i--)
         {
-            sTransitionData->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + DISPLAY_WIDTH / 2;
+            sTransitionData->data[2] = x1 = ((i * sSpiral_AngleData[deltaAngleMax]) >> 8) + DISPLAY_WIDTH / 2;
             if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionData->cameraX = 400 - i;
@@ -1681,7 +1689,7 @@ static void Spiral_UpdateFrame(s16 initRadius, s16 deltaAngleMax, u8 offsetMaybe
             y1 = DISPLAY_HEIGHT / 2;
         for (i = y1; i > 0; i--)
         {
-            sTransitionData->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + DISPLAY_WIDTH / 2;
+            sTransitionData->data[2] = x1 = ((i * sSpiral_AngleData[deltaAngleMax]) >> 8) + DISPLAY_WIDTH / 2;
             if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionData->cameraX = 400 - i;
@@ -1695,7 +1703,7 @@ static void Spiral_UpdateFrame(s16 initRadius, s16 deltaAngleMax, u8 offsetMaybe
             y1 = -(DISPLAY_HEIGHT / 2 - 1);
         for (i = y1; i <= 0; i++)
         {
-            sTransitionData->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + DISPLAY_WIDTH / 2;
+            sTransitionData->data[2] = x1 = ((i * sSpiral_AngleData[deltaAngleMax]) >> 8) + DISPLAY_WIDTH / 2;
             if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionData->cameraX = 560 - i;
@@ -1711,7 +1719,7 @@ static void Spiral_UpdateFrame(s16 initRadius, s16 deltaAngleMax, u8 offsetMaybe
             y1 = -(DISPLAY_HEIGHT / 2 - 1);
         for (i = y1; i <= 0; i++)
         {
-            sTransitionData->data[2] = x1 = ((i * gUnknown_83FA444[deltaAngleMax]) >> 8) + 120;
+            sTransitionData->data[2] = x1 = ((i * sSpiral_AngleData[deltaAngleMax]) >> 8) + 120;
             if (x1 < 0 || x1 > 255)
                 continue;
             sTransitionData->cameraX = 560 - i;
@@ -1755,7 +1763,7 @@ static bool8 Spiral_End(struct Task *task)
 
     Spiral_UpdateFrame(task->data[2], task->data[1], 1);
     sTransitionData->vblankDma |= TRUE;
-    if (++task->data[1] == 17)
+    if (++task->data[1] == (int)ARRAY_COUNT(sSpiral_AngleData) + 1)
     {
         Spiral_UpdateFrame(task->data[2], 16, 0);
         win_top = 48 - task->data[2];

@@ -12,11 +12,11 @@
 #include "event_data.h"
 #include "battle_tower.h"
 #include "new_game.h"
-#include "menews_jisan.h"
+#include "wonder_news.h"
 #include "cereader_tool.h"
 #include "mystery_gift_menu.h"
 #include "help_system.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "strings.h"
 
 struct MEventTaskData1

@@ -40,7 +40,7 @@
 	.include "fame_checker.o"
 	.include "help_system_util.o"
 	.align 4
-	.include "mevent.o"
+	.include "mystery_gift.o"
 	.align 4
 	.include "battle_controller_pokedude.o"
 	.align 4

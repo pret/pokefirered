@@ -3,7 +3,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "menu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "overworld.h"
 #include "strings.h"
 #include "task.h"

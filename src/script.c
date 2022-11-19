@@ -7,7 +7,7 @@
 
 extern void ResetContextNpcTextColor(void); // field_specials
 extern u16 CalcCRC16WithTable(u8 *data, int length); // util
-extern bool32 ValidateReceivedWonderCard(void); // mevent
+extern bool32 ValidateReceivedWonderCard(void);
 
 #define RAM_SCRIPT_MAGIC 51
 

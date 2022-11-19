@@ -1,8 +1,8 @@
 #include "global.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "random.h"
 #include "event_data.h"
-#include "menews_jisan.h"
+#include "wonder_news.h"
 #include "constants/items.h"
 
 static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *);

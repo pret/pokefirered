@@ -6,7 +6,7 @@
 #include "trade.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "graphics.h"
 #include "strings.h"
 #include "menu.h"

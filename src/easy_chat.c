@@ -4,7 +4,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "field_message_box.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "menu.h"
 #include "mail.h"
 #include "pokedex.h"

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "mevent_server.h"
+#include "mystery_gift_server.h"
 
 extern const struct mevent_server_cmd gServerScript_ClientCanceledCard[];
 

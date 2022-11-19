@@ -1,5 +1,5 @@
-#ifndef GUARD_MEVENT_SERVER_H
-#define GUARD_MEVENT_SERVER_H
+#ifndef GUARD_MYSTERY_GIFT_SERVER_H
+#define GUARD_MYSTERY_GIFT_SERVER_H
 
 #include "global.h"
 
@@ -126,4 +126,4 @@ void mevent_srv_init_wnews(void);
 void mevent_srv_new_wcard(void);
 u32 mevent_srv_common_do_exec(u16 * a0);
 
-#endif //GUARD_MEVENT_SERVER_H
+#endif //GUARD_MYSTERY_GIFT_SERVER_H

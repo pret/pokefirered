@@ -1,8 +1,8 @@
 #include "global.h"
 #include "gflib.h"
 #include "script.h"
-#include "mevent.h"
-#include "mevent_server.h"
+#include "mystery_gift.h"
+#include "mystery_gift_server.h"
 
 EWRAM_DATA struct mevent_srv_common * s_mevent_srv_common_ptr = NULL;
 

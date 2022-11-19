@@ -2,7 +2,7 @@
 #include "util.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "mevent_server.h"
+#include "mystery_gift_server.h"
 
 static u32 mevent_receive_func(struct mevent_srv_sub *);
 static u32 mevent_send_func(struct mevent_srv_sub *);

@@ -1,5 +1,5 @@
-#ifndef GUARD_MEVENT_H
-#define GUARD_MEVENT_H
+#ifndef GUARD_MYSTERY_GIFT_H
+#define GUARD_MYSTERY_GIFT_H
 
 #include "global.h"
 
@@ -105,4 +105,4 @@ void MysteryGift_DisableStats(void);
 bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId);
 u16 GetWonderCardFlagId(void);
 
-#endif //GUARD_MEVENT_H
+#endif // GUARD_MYSTERY_GIFT_H

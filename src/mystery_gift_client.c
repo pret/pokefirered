@@ -5,8 +5,8 @@
 #include "script.h"
 #include "battle_tower.h"
 #include "mystery_event_script.h"
-#include "mevent.h"
-#include "mevent_server.h"
+#include "mystery_gift.h"
+#include "mystery_gift_server.h"
 
 static EWRAM_DATA struct mevent_client * s_mevent_client_ptr = NULL;
 

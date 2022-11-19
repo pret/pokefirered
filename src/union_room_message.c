@@ -1,6 +1,6 @@
 #include "global.h"
 #include "link_rfu.h"
-#include "mevent_server.h"
+#include "mystery_gift_server.h"
 #include "constants/union_room.h"
 
 ALIGNED(4) const u8 gText_UR_EmptyString[] = _("");

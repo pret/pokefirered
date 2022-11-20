@@ -69,8 +69,8 @@ static u16 TitleScreen_rand(u8 taskId, u8 field);
 static u32 CreateBlankSprite(void);
 static void SetPalOnOrCreateBlankSprite(bool32 hasCreatedBlankSprite);
 static u8 CreateSlashSprite(void);
-static void ScheduleHideSlashSprite(u8 spriteId);
-static bool32 IsSlashSpriteHidden(u8 spriteId);
+static void DeactivateSlashSprite(u8 spriteId);
+static bool32 IsSlashSpriteDeactivated(u8 spriteId);
 static void SpriteCallback_Slash(struct Sprite *sprite);
 
 static const u8 sBorderBgTiles[] = INCBIN_U8("graphics/title_screen/border_bg.4bpp.lz");
@@ -81,16 +81,16 @@ static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/firered/border
 static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/leafgreen/border_bg.bin.lz");
 #endif
 
-static const u32 sTitleScreen_Slash_Gfx[] = INCBIN_U32("graphics/title_screen/slash.4bpp.lz");
+static const u32 sSlash_Gfx[] = INCBIN_U32("graphics/title_screen/slash.4bpp.lz");
 
 #if defined(FIRERED)
-static const u16 sTitleScreen_Flames_Pal[] = INCBIN_U16("graphics/title_screen/firered/flames.gbapal");
-static const u32 sTitleScreen_Flames_Gfx[] = INCBIN_U32("graphics/title_screen/firered/flames.4bpp.lz");
-static const u32 sTitleScreen_BlankFlames_Gfx[] = INCBIN_U32("graphics/title_screen/firered/blank_flames.4bpp.lz");
+static const u16 sFlames_Pal[] = INCBIN_U16("graphics/title_screen/firered/flames.gbapal");
+static const u32 sFlames_Gfx[] = INCBIN_U32("graphics/title_screen/firered/flames.4bpp.lz");
+static const u32 sBlankFlames_Gfx[] = INCBIN_U32("graphics/title_screen/firered/blank_flames.4bpp.lz");
 #elif defined(LEAFGREEN)
-static const u16 sTitleScreen_Leaves_Pal[] = INCBIN_U16("graphics/title_screen/leafgreen/leaves.gbapal");
-static const u32 sTitleScreen_Leaves_Gfx[] = INCBIN_U32("graphics/title_screen/leafgreen/leaves.4bpp.lz");
-static const u32 sTitleScreen_Streak_Gfx[] = INCBIN_U32("graphics/title_screen/leafgreen/streak.4bpp.lz");
+static const u16 sLeaves_Pal[] = INCBIN_U16("graphics/title_screen/leafgreen/leaves.gbapal");
+static const u32 sLeaves_Gfx[] = INCBIN_U32("graphics/title_screen/leafgreen/leaves.4bpp.lz");
+static const u32 sStreak_Gfx[] = INCBIN_U32("graphics/title_screen/leafgreen/streak.4bpp.lz");
 #endif
 
 static const struct OamData sOamData_FlameOrLeaf = {
@@ -288,15 +288,15 @@ static void (*const sSceneFuncs[])(s16 *data) = {
 
 #if defined(FIRERED)
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {sTitleScreen_Flames_Gfx,        0x500, TILE_TAG_FLAME_OR_LEAF},
-    {sTitleScreen_BlankFlames_Gfx,   0x500, TILE_TAG_BLANK_OR_STREAK},
+    {sFlames_Gfx,                    0x500, TILE_TAG_FLAME_OR_LEAF},
+    {sBlankFlames_Gfx,               0x500, TILE_TAG_BLANK_OR_STREAK},
     {gTitleScreen_BlankSprite_Tiles, 0x400, TILE_TAG_BLANK},
-    {sTitleScreen_Slash_Gfx,         0x800, TILE_TAG_SLASH}
+    {sSlash_Gfx,                     0x800, TILE_TAG_SLASH}
 };
 
 static const struct SpritePalette sSpritePals[] = {
-    {sTitleScreen_Flames_Pal, PAL_TAG_DEFAULT},
-    {gTitleScreen_Slash_Pal,  PAL_TAG_SLASH},
+    {sFlames_Pal,            PAL_TAG_DEFAULT},
+    {gTitleScreen_Slash_Pal, PAL_TAG_SLASH},
     {}
 };
 
@@ -306,15 +306,15 @@ static const u8 sFlameXPositions[] = {
 
 #elif defined(LEAFGREEN)
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {sTitleScreen_Leaves_Gfx,        0x580, TILE_TAG_FLAME_OR_LEAF},
-    {sTitleScreen_Streak_Gfx,        0x100, TILE_TAG_BLANK_OR_STREAK},
+    {sLeaves_Gfx,                    0x580, TILE_TAG_FLAME_OR_LEAF},
+    {sStreak_Gfx,                    0x100, TILE_TAG_BLANK_OR_STREAK},
     {gTitleScreen_BlankSprite_Tiles, 0x400, TILE_TAG_BLANK},
-    {sTitleScreen_Slash_Gfx,         0x800, TILE_TAG_SLASH}
+    {sSlash_Gfx,                     0x800, TILE_TAG_SLASH}
 };
 
 static const struct SpritePalette sSpritePals[] = {
-    {sTitleScreen_Leaves_Pal, PAL_TAG_DEFAULT},
-    {gTitleScreen_Slash_Pal,  PAL_TAG_SLASH},
+    {sLeaves_Pal,            PAL_TAG_DEFAULT},
+    {gTitleScreen_Slash_Pal, PAL_TAG_SLASH},
     {}
 };
 
@@ -630,13 +630,13 @@ static void SetTitleScreenScene_Run(s16 *data)
     case 1:
         if (JOY_HELD(KEYSTROKE_DELSAVE) == KEYSTROKE_DELSAVE)
         {
-            ScheduleHideSlashSprite(tSlashSpriteId);
+            DeactivateSlashSprite(tSlashSpriteId);
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
             SetMainCallback2(CB2_FadeOutTransitionToSaveClearScreen);
         }
         else if (JOY_HELD(KEYSTROKE_BERRY_FIX) == KEYSTROKE_BERRY_FIX)
         {
-            ScheduleHideSlashSprite(tSlashSpriteId);
+            DeactivateSlashSprite(tSlashSpriteId);
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
             SetMainCallback2(CB2_FadeOutTransitionToBerryFix);
         }
@@ -665,11 +665,11 @@ static void SetTitleScreenScene_Restart(s16 *data)
     switch (tState)
     {
     case 0:
-        ScheduleHideSlashSprite(tSlashSpriteId);
+        DeactivateSlashSprite(tSlashSpriteId);
         tState++;
         break;
     case 1:
-        if (!gPaletteFade.active && !IsSlashSpriteHidden(tSlashSpriteId))
+        if (!gPaletteFade.active && !IsSlashSpriteDeactivated(tSlashSpriteId))
         {
             FadeOutMapMusic(10);
             BeginNormalPaletteFade(PALETTES_ALL, 3, 0, 0x10, RGB_BLACK);
@@ -709,7 +709,7 @@ static void SetTitleScreenScene_Cry(s16 *data)
         if (!gPaletteFade.active)
         {
             PlayCry_Normal(TITLE_SPECIES, 0);
-            ScheduleHideSlashSprite(tSlashSpriteId);
+            DeactivateSlashSprite(tSlashSpriteId);
             data[2] = 0;
             tState++;
         }
@@ -717,7 +717,7 @@ static void SetTitleScreenScene_Cry(s16 *data)
     case 1:
         if (data[2] < 90)
             data[2]++;
-        else if (!IsSlashSpriteHidden(tSlashSpriteId))
+        else if (!IsSlashSpriteDeactivated(tSlashSpriteId))
         {
             BeginNormalPaletteFade((PALETTES_ALL & ~(1 << 0x1C) & ~(1 << 0x1D) & ~(1 << 0x1E) & ~(1 << 0x1F)), 0, 0, 16, RGB_WHITE);
             SignalEndTitleScreenPaletteSomethingTask();
@@ -1034,7 +1034,7 @@ static void Task_FlameSpawner(u8 taskId)
             xspeed = (TitleScreen_rand(taskId, 3) % 4) - 2;
             yspeed = (TitleScreen_rand(taskId, 3) % 8) - 16;
             y = (TitleScreen_rand(taskId, 3) % 3) + 116;
-            x = TitleScreen_rand(taskId, 3) % 240;
+            x = TitleScreen_rand(taskId, 3) % DISPLAY_WIDTH;
             CreateFlameSprite(
                 x,
                 y,
@@ -1234,9 +1234,9 @@ static void SetPalOnOrCreateBlankSprite(bool32 hasCreatedBlankSprite)
         CreateBlankSprite();
 }
 
-#define sState   data[0]
-#define sTimer   data[1]
-#define sHidden  data[2]
+#define sState       data[0]
+#define sTimer       data[1]
+#define sDeactivate  data[2]
 
 static u8 CreateSlashSprite(void)
 {
@@ -1249,13 +1249,13 @@ static u8 CreateSlashSprite(void)
     return spriteId;
 }
 
-static void ScheduleHideSlashSprite(u8 spriteId)
+static void DeactivateSlashSprite(u8 spriteId)
 {
     if (spriteId != MAX_SPRITES)
-        gSprites[spriteId].sHidden = TRUE;
+        gSprites[spriteId].sDeactivate = TRUE;
 }
 
-static bool32 IsSlashSpriteHidden(u8 spriteId)
+static bool32 IsSlashSpriteDeactivated(u8 spriteId)
 {
     if (spriteId != MAX_SPRITES)
         return gSprites[spriteId].sState ^ 2 ? TRUE : FALSE;
@@ -1268,7 +1268,7 @@ static void SpriteCallback_Slash(struct Sprite *sprite)
     switch (sprite->sState)
     {
     case 0:
-        if (sprite->sHidden)
+        if (sprite->sDeactivate)
         {
             sprite->invisible = TRUE;
             sprite->sState = 2;
@@ -1288,10 +1288,10 @@ static void SpriteCallback_Slash(struct Sprite *sprite)
         if (sprite->x == 148)
             sprite->y += 7;
 
-        if (sprite->x > 272)
+        if (sprite->x > DISPLAY_WIDTH + 32)
         {
             sprite->invisible = TRUE;
-            if (sprite->sHidden)
+            if (sprite->sDeactivate)
                 sprite->sState = 2;
             else
             {
@@ -1308,4 +1308,4 @@ static void SpriteCallback_Slash(struct Sprite *sprite)
 
 #undef sState
 #undef sTimer
-#undef sHidden
+#undef sDeactivate

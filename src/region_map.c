@@ -1428,11 +1428,11 @@ static void UpdateMapsecNameBox(void)
         (WININ_WIN0_BG0 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR),
         (WININ_WIN1_BG0 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR) >> 8);
     SetWinOut(WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
-    SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[WIN_MAP_NAME]);
-    SetGpuWindowDims(WIN_DUNGEON_NAME, &sMapsecNameWindowDims[WIN_DUNGEON_NAME]);
-    SetDispCnt(WIN_MAP_NAME, FALSE);
+    SetGpuWindowDims(0, &sMapsecNameWindowDims[WIN_MAP_NAME]);
+    SetGpuWindowDims(1, &sMapsecNameWindowDims[WIN_DUNGEON_NAME]);
+    SetDispCnt(0, FALSE);
     if (GetDungeonMapsecUnderCursor() != MAPSEC_NONE)
-        SetDispCnt(WIN_DUNGEON_NAME, FALSE);
+        SetDispCnt(1, FALSE);
 }
 
 static void DisplayCurrentMapName(void)
@@ -1441,7 +1441,7 @@ static void DisplayCurrentMapName(void)
     FillWindowPixelBuffer(WIN_MAP_NAME, PIXEL_FILL(0));
     if (GetMapsecUnderCursor() == MAPSEC_NONE)
     {
-        SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[CLEAR_NAME]);
+        SetGpuWindowDims(0, &sMapsecNameWindowDims[CLEAR_NAME]);
     }
     else
     {
@@ -1449,13 +1449,13 @@ static void DisplayCurrentMapName(void)
         AddTextPrinterParameterized3(WIN_MAP_NAME, FONT_2, 2, 2, sTextColor_White, 0, sRegionMap->mapName);
         PutWindowTilemap(WIN_MAP_NAME);
         CopyWindowToVram(WIN_MAP_NAME, COPYWIN_GFX);
-        SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[WIN_MAP_NAME]);
+        SetGpuWindowDims(0, &sMapsecNameWindowDims[WIN_MAP_NAME]);
     }
 }
 
 static void DrawDungeonNameBox(void)
 {
-    SetGpuWindowDims(WIN_DUNGEON_NAME, &sMapsecNameWindowDims[WIN_DUNGEON_NAME]);
+    SetGpuWindowDims(1, &sMapsecNameWindowDims[WIN_DUNGEON_NAME]);
 }
 
 static void DisplayCurrentDungeonName(void)
@@ -1465,13 +1465,13 @@ static void DisplayCurrentDungeonName(void)
     sRegionMap->dungeonWinTop = FALSE;
     sRegionMap->dungeonWinRight = 24;
     sRegionMap->dungeonWinBottom = 32;
-    SetDispCnt(WIN_DUNGEON_NAME, TRUE);
+    SetDispCnt(1, TRUE);
     ClearWindowTilemap(WIN_DUNGEON_NAME);
     mapsecId = GetDungeonMapsecUnderCursor();
     if (mapsecId != MAPSEC_NONE)
     {
          descOffset = mapsecId - MAPSECS_KANTO;
-         SetDispCnt(WIN_DUNGEON_NAME, FALSE);
+         SetDispCnt(1, FALSE);
          sRegionMap->dungeonWinTop = TRUE;
          sRegionMap->dungeonWinLeft = StringLength(sMapNames[descOffset]);
          sRegionMap->dungeonWinRight = sRegionMap->dungeonWinLeft * 10 + 50;
@@ -1718,7 +1718,7 @@ static void FreeSwitchMapMenu(u8 taskId)
     PrintTopBarTextRight(gText_RegionMap_AButtonSwitch);
     UpdateMapsecNameBox();
     DrawDungeonNameBox();
-    SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[CLEAR_NAME]);
+    SetGpuWindowDims(0, &sMapsecNameWindowDims[CLEAR_NAME]);
     FREE_IF_NOT_NULL(sSwitchMapMenu);
 }
 
@@ -2132,11 +2132,11 @@ static void InitScreenForDungeonMapPreview(void)
     sDungeonMapPreview->bottomIncrement = (136 - sDungeonMapPreview->bottom) / 8;
 }
 
-static bool8 UpdateDungeonMapPreview(bool8 a0) // todo: rename a0
+static bool8 UpdateDungeonMapPreview(bool8 closing)
 {
     struct GpuWindowParams data;
 
-    if (!a0)
+    if (!closing)
     {
         if (sDungeonMapPreview->updateCounter < 8)
         {

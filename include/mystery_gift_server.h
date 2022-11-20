@@ -5,11 +5,11 @@
 
 #define ME_SEND_BUF_SIZE 0x400
 
-struct mevent_srv_sub
+struct MysteryGiftLink
 {
-    s32 seqno;
-    u8 sendPlayerNo;
-    u8 recvPlayerNo;
+    s32 state;
+    u8 sendPlayerId;
+    u8 recvPlayerId;
     u16 recvIdent;
     u16 recvCounter;
     u16 recvCRC;
@@ -18,17 +18,10 @@ struct mevent_srv_sub
     u16 sendCounter;
     u16 sendCRC;
     u16 sendSize;
-    void *recvBfr;
-    const void *sendBfr;
-    u32 (*recvFunc)(struct mevent_srv_sub *);
-    u32 (*sendFunc)(struct mevent_srv_sub *);
-};
-
-struct send_recv_header
-{
-    u16 ident;
-    u16 crc;
-    u16 size;
+    void *recvBuffer;
+    const void *sendBuffer;
+    u32 (*recvFunc)(struct MysteryGiftLink *);
+    u32 (*sendFunc)(struct MysteryGiftLink *);
 };
 
 struct mevent_client_cmd
@@ -63,7 +56,7 @@ struct mevent_client
     void *recvBuffer;
     struct mevent_client_cmd * cmdBuffer;
     void *buffer;
-    struct mevent_srv_sub manager;
+    struct MysteryGiftLink manager;
 };
 
 struct mevent_server_cmd
@@ -108,14 +101,14 @@ struct mevent_srv_common
     void *sendBuffer2;
     u32 sendBuffer2Size;
     u32 sendWord;
-    struct mevent_srv_sub manager;
+    struct MysteryGiftLink manager;
 };
 
-u32 mevent_srv_sub_recv(struct mevent_srv_sub * svr);
-u32 mevent_srv_sub_send(struct mevent_srv_sub * svr);
-void mevent_srv_sub_init(struct mevent_srv_sub * svr, u32 sendPlayerNo, u32 recvPlayerNo);
-void mevent_srv_sub_init_send(struct mevent_srv_sub * svr, u32 ident, const void *src, u32 size);
-void mevent_srv_sub_init_recv(struct mevent_srv_sub * svr, u32 ident, void *dest);
+u32 MysteryGiftLink_Recv(struct MysteryGiftLink * link);
+u32 MysteryGiftLink_Send(struct MysteryGiftLink * link);
+void MysteryGiftLink_Init(struct MysteryGiftLink * link, u32 sendPlayerId, u32 recvPlayerId);
+void MysteryGiftLink_InitSend(struct MysteryGiftLink * link, u32 ident, const void *src, u32 size);
+void MysteryGiftLink_InitRecv(struct MysteryGiftLink * link, u32 ident, void *dest);
 
 void mevent_client_do_init(void);
 u32 mevent_client_do_exec(u16 * a0);

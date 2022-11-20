@@ -51,7 +51,7 @@ static void mevent_srv_init_common(struct mevent_srv_common * svr, const void *c
     svr->mevent_unk1442cc = AllocZeroed(sizeof(struct MysteryGiftLinkGameData));
     svr->cmdBuffer = cmdBuffer;
     svr->cmdidx = 0;
-    mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
+    MysteryGiftLink_Init(&svr->manager, sendPlayerNo, recvPlayerNo);
 }
 
 static void mevent_srv_free_resources(struct mevent_srv_common * svr)
@@ -65,7 +65,7 @@ static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 static void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, const void *src, u32 size)
 {
      AGB_ASSERT_EX(size <= ME_SEND_BUF_SIZE, ABSPATH("mevent_server.c"), 257);
-    mevent_srv_sub_init_send(&svr->manager, ident, src, size);
+    MysteryGiftLink_InitSend(&svr->manager, ident, src, size);
 }
 
 static void *mevent_first_if_not_null_else_second(void *a0, void *a1)
@@ -102,7 +102,7 @@ static u32 common_mainseq_1(struct mevent_srv_common * svr)
 static u32 common_mainseq_2(struct mevent_srv_common * svr)
 {
     // do recv
-    if (mevent_srv_sub_recv(&svr->manager))
+    if (MysteryGiftLink_Recv(&svr->manager))
         svr->mainseqno = 4;
     return 1;
 }
@@ -110,7 +110,7 @@ static u32 common_mainseq_2(struct mevent_srv_common * svr)
 static u32 common_mainseq_3(struct mevent_srv_common * svr)
 {
     // do send
-    if (mevent_srv_sub_send(&svr->manager))
+    if (MysteryGiftLink_Send(&svr->manager))
         svr->mainseqno = 4;
     return 1;
 }
@@ -134,7 +134,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             break;
         case 2:
             AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 364);
-            mevent_srv_sub_init_recv(&svr->manager, cmd->flag, svr->recvBuffer);
+            MysteryGiftLink_InitRecv(&svr->manager, cmd->flag, svr->recvBuffer);
             svr->mainseqno = 2;
             break;
         case 3:

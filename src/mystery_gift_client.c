@@ -62,7 +62,7 @@ static void mevent_client_init(struct mevent_client * svr, u32 sendPlayerNo, u32
     svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->cmdBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
     svr->buffer = AllocZeroed(0x40);
-    mevent_srv_sub_init(&svr->manager, sendPlayerNo, recvPlayerNo);
+    MysteryGiftLink_Init(&svr->manager, sendPlayerNo, recvPlayerNo);
 }
 
 static void mevent_client_free_resources(struct mevent_client * svr)
@@ -83,7 +83,7 @@ static void mevent_client_send_word(struct mevent_client * svr, u32 ident, u32 w
 {
     CpuFill32(0, svr->sendBuffer, ME_SEND_BUF_SIZE);
     *(u32 *)svr->sendBuffer = word;
-    mevent_srv_sub_init_send(&svr->manager, ident, svr->sendBuffer, sizeof(u32));
+    MysteryGiftLink_InitSend(&svr->manager, ident, svr->sendBuffer, sizeof(u32));
 }
 
 static u32 client_mainseq_0(struct mevent_client * svr)
@@ -105,7 +105,7 @@ static u32 client_mainseq_1(struct mevent_client * svr)
 static u32 client_mainseq_2(struct mevent_client * svr)
 {
     // do recv
-    if (mevent_srv_sub_recv(&svr->manager))
+    if (MysteryGiftLink_Recv(&svr->manager))
     {
         svr->mainseqno = 4;
         svr->flag = 0;
@@ -116,7 +116,7 @@ static u32 client_mainseq_2(struct mevent_client * svr)
 static u32 client_mainseq_3(struct mevent_client * svr)
 {
     // do send
-    if (mevent_srv_sub_send(&svr->manager))
+    if (MysteryGiftLink_Send(&svr->manager))
     {
         svr->mainseqno = 4;
         svr->flag = 0;
@@ -139,7 +139,7 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         svr->flag = 0;
         break;
     case 2:
-        mevent_srv_sub_init_recv(&svr->manager, cmd->parameter, svr->recvBuffer);
+        MysteryGiftLink_InitRecv(&svr->manager, cmd->parameter, svr->recvBuffer);
         svr->mainseqno = 2;
         svr->flag = 0;
         break;
@@ -148,7 +148,7 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         svr->flag = 0;
         break;
     case 20:
-        mevent_srv_sub_init_send(&svr->manager, 0x14, svr->sendBuffer, 0);
+        MysteryGiftLink_InitSend(&svr->manager, 0x14, svr->sendBuffer, 0);
         svr->mainseqno = 3;
         svr->flag = 0;
         break;
@@ -189,7 +189,7 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         return 4;
     case 8:
         MysteryGift_LoadLinkGameData(svr->sendBuffer);
-        mevent_srv_sub_init_send(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
+        MysteryGiftLink_InitSend(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
         break;
     case 14:
         mevent_client_send_word(svr, 0x13, svr->param);

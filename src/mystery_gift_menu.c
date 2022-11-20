@@ -14,6 +14,7 @@
 #include "link.h"
 #include "event_data.h"
 #include "mystery_gift_server.h"
+#include "mystery_gift_client.h"
 #include "wonder_news.h"
 #include "help_system.h"
 #include "strings.h"
@@ -1222,7 +1223,7 @@ void task00_mystery_gift(u8 taskId)
         {
             ClearScreenInBg0(TRUE);
             data->state = 7;
-            mevent_client_do_init();
+            MysteryGiftClient_Create();
         }
         else if (gSpecialVar_Result == 5)
         {
@@ -1235,7 +1236,7 @@ void task00_mystery_gift(u8 taskId)
         data->state = 8;
         break;
     case  8:
-        switch (mevent_client_do_exec(&data->curPromptWindowId))
+        switch (MysteryGiftClient_Run(&data->curPromptWindowId))
         {
         case 6: // done
             Rfu_SetCloseLinkCallback();
@@ -1243,8 +1244,8 @@ void task00_mystery_gift(u8 taskId)
             data->state = 13;
             break;
         case 5:
-            memcpy(data->buffer, mevent_client_get_buffer(), 0x40);
-            mevent_client_inc_flag();
+            memcpy(data->buffer, MysteryGiftClient_GetMsg(), 0x40);
+            MysteryGiftClient_AdvanceState();
             break;
         case 3:
             data->state = 10;
@@ -1259,30 +1260,30 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case  9:
-        flag = DoMysteryGiftYesNo(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer());
+        flag = DoMysteryGiftYesNo(&data->textState, &data->curPromptWindowId, FALSE, MysteryGiftClient_GetMsg());
         switch (flag)
         {
         case 0:
-            mevent_client_set_param(0);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(0);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         case 1:
-            mevent_client_set_param(1);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         case -1u:
-            mevent_client_set_param(1);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         }
         break;
     case 10:
-        if (PrintMysteryGiftMenuMessage(&data->textState, mevent_client_get_buffer()))
+        if (PrintMysteryGiftMenuMessage(&data->textState, MysteryGiftClient_GetMsg()))
         {
-            mevent_client_inc_flag();
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
         }
         break;
@@ -1297,19 +1298,19 @@ void task00_mystery_gift(u8 taskId)
             }
             else
             {
-                mevent_client_set_param(0);
-                mevent_client_inc_flag();
+                MysteryGiftClient_SetParam(0);
+                MysteryGiftClient_AdvanceState();
                 data->state = 7;
             }
             break;
         case 1:
-            mevent_client_set_param(1);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         case -1u:
-            mevent_client_set_param(1);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         }
@@ -1319,18 +1320,18 @@ void task00_mystery_gift(u8 taskId)
         switch (flag)
         {
         case 0:
-            mevent_client_set_param(0);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(0);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         case 1:
-            mevent_client_set_param(1);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         case -1u:
-            mevent_client_set_param(1);
-            mevent_client_inc_flag();
+            MysteryGiftClient_SetParam(1);
+            MysteryGiftClient_AdvanceState();
             data->state = 7;
             break;
         }
@@ -1567,17 +1568,17 @@ void task00_mystery_gift(u8 taskId)
         if (data->IsCardOrNews == 0)
         {
             AddTextPrinterToWindow1(gText_SendingWonderCard);
-            mevent_srv_new_wcard();
+            MysterGiftServer_CreateForCard();
         }
         else
         {
             AddTextPrinterToWindow1(gText_SendingWonderNews);
-            mevent_srv_init_wnews();
+            MysterGiftServer_CreateForNews();
         }
         data->state = 32;
         break;
     case 32:
-        if (mevent_srv_common_do_exec(&data->curPromptWindowId) == 3)
+        if (MysterGiftServer_Run(&data->curPromptWindowId) == 3)
         {
             data->prevPromptWindowId = data->curPromptWindowId;
             data->state = 33;

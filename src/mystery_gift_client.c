@@ -6,285 +6,296 @@
 #include "battle_tower.h"
 #include "mystery_event_script.h"
 #include "mystery_gift.h"
+#include "mystery_gift_client.h"
 #include "mystery_gift_server.h"
 
-static EWRAM_DATA struct mevent_client * s_mevent_client_ptr = NULL;
+enum {
+    FUNC_INIT,
+    FUNC_DONE,
+    FUNC_RECV,
+    FUNC_SEND,
+    FUNC_RUN,
+    FUNC_WAIT,
+    FUNC_RUN_MEVENT,
+    FUNC_RUN_BUFFER,
+};
 
-static void mevent_client_init(struct mevent_client *, u32, u32);
-static u32 mevent_client_exec(struct mevent_client *);
-static void mevent_client_free_resources(struct mevent_client *);
+static EWRAM_DATA struct MysteryGiftClient * sClient = NULL;
 
-extern const struct mevent_client_cmd gMEventClientScript_InitialListen[];
+static void MysteryGiftClient_Init(struct MysteryGiftClient *, u32, u32);
+static u32 MysteryGiftClient_CallFunc(struct MysteryGiftClient *);
+static void MysteryGiftClient_Free(struct MysteryGiftClient *);
 
-void mevent_client_do_init(void)
+extern const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[];
+
+void MysteryGiftClient_Create(void)
 {
-    s_mevent_client_ptr = AllocZeroed(sizeof(struct mevent_client));
-    mevent_client_init(s_mevent_client_ptr, 1, 0);
+    sClient = AllocZeroed(sizeof(*sClient));
+    MysteryGiftClient_Init(sClient, 1, 0);
 }
 
-u32 mevent_client_do_exec(u16 * a0)
+u32 MysteryGiftClient_Run(u16 * endVal)
 {
     u32 result;
-    if (s_mevent_client_ptr == NULL)
-        return 6;
-    result = mevent_client_exec(s_mevent_client_ptr);
-    if (result == 6)
+    if (sClient == NULL)
+        return CLI_RET_END;
+    result = MysteryGiftClient_CallFunc(sClient);
+    if (result == CLI_RET_END)
     {
-        *a0 = s_mevent_client_ptr->param;
-        mevent_client_free_resources(s_mevent_client_ptr);
-        Free(s_mevent_client_ptr);
-        s_mevent_client_ptr = NULL;
+        *endVal = sClient->param;
+        MysteryGiftClient_Free(sClient);
+        FREE_AND_SET_NULL(sClient);
     }
     return result;
 }
 
-void mevent_client_inc_flag(void)
+void MysteryGiftClient_AdvanceState(void)
 {
-    s_mevent_client_ptr->flag++;
+    sClient->funcState++;
 }
 
-void *mevent_client_get_buffer(void)
+void *MysteryGiftClient_GetMsg(void)
 {
-    return s_mevent_client_ptr->buffer;
+    return sClient->msg;
 }
 
-void mevent_client_set_param(u32 a0)
+void MysteryGiftClient_SetParam(u32 val)
 {
-    s_mevent_client_ptr->param = a0;
+    sClient->param = val;
 }
 
-static void mevent_client_init(struct mevent_client * svr, u32 sendPlayerNo, u32 recvPlayerNo)
+static void MysteryGiftClient_Init(struct MysteryGiftClient * client, u32 sendPlayerId, u32 recvPlayerId)
 {
-    svr->unk_00 = 0;
-    svr->mainseqno = 0;
-    svr->flag = 0;
-    svr->sendBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->recvBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->cmdBuffer = AllocZeroed(ME_SEND_BUF_SIZE);
-    svr->buffer = AllocZeroed(0x40);
-    MysteryGiftLink_Init(&svr->manager, sendPlayerNo, recvPlayerNo);
+    client->unused = 0;
+    client->funcId = FUNC_INIT;
+    client->funcState = 0;
+    client->sendBuffer = AllocZeroed(MG_LINK_BUFFER_SIZE);
+    client->recvBuffer = AllocZeroed(MG_LINK_BUFFER_SIZE);
+    client->script = AllocZeroed(MG_LINK_BUFFER_SIZE);
+    client->msg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
+    MysteryGiftLink_Init(&client->link, sendPlayerId, recvPlayerId);
 }
 
-static void mevent_client_free_resources(struct mevent_client * svr)
+static void MysteryGiftClient_Free(struct MysteryGiftClient * client)
 {
-    Free(svr->sendBuffer);
-    Free(svr->recvBuffer);
-    Free(svr->cmdBuffer);
-    Free(svr->buffer);
+    Free(client->sendBuffer);
+    Free(client->recvBuffer);
+    Free(client->script);
+    Free(client->msg);
 }
 
-static void mevent_client_jmp_buffer(struct mevent_client * svr)
+static void MysteryGiftClient_CopyRecvScript(struct MysteryGiftClient * client)
 {
-    memcpy(svr->cmdBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);
-    svr->cmdidx = 0;
+    memcpy(client->script, client->recvBuffer, MG_LINK_BUFFER_SIZE);
+    client->cmdidx = 0;
 }
 
-static void mevent_client_send_word(struct mevent_client * svr, u32 ident, u32 word)
+static void MysteryGiftClient_InitSendWord(struct MysteryGiftClient * client, u32 ident, u32 word)
 {
-    CpuFill32(0, svr->sendBuffer, ME_SEND_BUF_SIZE);
-    *(u32 *)svr->sendBuffer = word;
-    MysteryGiftLink_InitSend(&svr->manager, ident, svr->sendBuffer, sizeof(u32));
+    CpuFill32(0, client->sendBuffer, MG_LINK_BUFFER_SIZE);
+    *(u32 *)client->sendBuffer = word;
+    MysteryGiftLink_InitSend(&client->link, ident, client->sendBuffer, sizeof(word));
 }
 
-static u32 client_mainseq_0(struct mevent_client * svr)
+static u32 Client_Init(struct MysteryGiftClient * client)
 {
     // init
-    memcpy(svr->cmdBuffer, gMEventClientScript_InitialListen, ME_SEND_BUF_SIZE);
-    svr->cmdidx = 0;
-    svr->mainseqno = 4;
-    svr->flag = 0;
-    return 0;
+    memcpy(client->script, gMysteryGiftClientScript_Init, MG_LINK_BUFFER_SIZE);
+    client->cmdidx = 0;
+    client->funcId = FUNC_RUN;
+    client->funcState = 0;
+    return CLI_RET_INIT;
 }
 
-static u32 client_mainseq_1(struct mevent_client * svr)
+static u32 Client_Done(struct MysteryGiftClient * client)
 {
-    // done
-    return 6;
+    return CLI_RET_END;
 }
 
-static u32 client_mainseq_2(struct mevent_client * svr)
+static u32 Client_Recv(struct MysteryGiftClient * client)
 {
-    // do recv
-    if (MysteryGiftLink_Recv(&svr->manager))
+    if (MysteryGiftLink_Recv(&client->link))
     {
-        svr->mainseqno = 4;
-        svr->flag = 0;
+        client->funcId = FUNC_RUN;
+        client->funcState = 0;
     }
-    return 1;
+    return CLI_RET_ACTIVE;
 }
 
-static u32 client_mainseq_3(struct mevent_client * svr)
+static u32 Client_Send(struct MysteryGiftClient * client)
 {
-    // do send
-    if (MysteryGiftLink_Send(&svr->manager))
+    if (MysteryGiftLink_Send(&client->link))
     {
-        svr->mainseqno = 4;
-        svr->flag = 0;
+        client->funcId = FUNC_RUN;
+        client->funcState = 0;
     }
-    return 1;
+    return CLI_RET_ACTIVE;
 }
 
-static u32 client_mainseq_4(struct mevent_client * svr)
+static u32 Client_Run(struct MysteryGiftClient * client)
 {
     // process command
-    struct mevent_client_cmd * cmd = &svr->cmdBuffer[svr->cmdidx];
-    ++svr->cmdidx;
+    struct MysteryGiftClientCmd * cmd = &client->script[client->cmdidx];
+    client->cmdidx++;
     switch (cmd->instr)
     {
-    case 0:
+    case CLI_NONE:
         break;
-    case 1:
-        svr->param = cmd->parameter;
-        svr->mainseqno = 1;
-        svr->flag = 0;
+    case CLI_RETURN:
+        client->param = cmd->parameter; // Set for endVal in MysteryGiftClient_Run
+        client->funcId = FUNC_DONE;
+        client->funcState = 0;
         break;
-    case 2:
-        MysteryGiftLink_InitRecv(&svr->manager, cmd->parameter, svr->recvBuffer);
-        svr->mainseqno = 2;
-        svr->flag = 0;
+    case CLI_RECV:
+        MysteryGiftLink_InitRecv(&client->link, cmd->parameter, client->recvBuffer);
+        client->funcId = FUNC_RECV;
+        client->funcState = 0;
         break;
-    case 3:
-        svr->mainseqno = 3;
-        svr->flag = 0;
+    case CLI_SEND_LOADED:
+        // Send without a MysteryGiftLink_InitSend
+        // Sends whatever has been loaded already
+        client->funcId = FUNC_SEND;
+        client->funcState = 0;
         break;
-    case 20:
-        MysteryGiftLink_InitSend(&svr->manager, 0x14, svr->sendBuffer, 0);
-        svr->mainseqno = 3;
-        svr->flag = 0;
+    case CLI_SEND_READY_END:
+        MysteryGiftLink_InitSend(&client->link, MG_LINKID_READY_END, client->sendBuffer, 0);
+        client->funcId = FUNC_SEND;
+        client->funcState = 0;
         break;
-    case 19:
-        mevent_client_send_word(svr, 0x12, GetGameStat(cmd->parameter));
-        svr->mainseqno = 3;
-        svr->flag = 0;
+    case CLI_SEND_STAT:
+        MysteryGiftClient_InitSendWord(client, MG_LINKID_GAME_STAT, GetGameStat(cmd->parameter));
+        client->funcId = FUNC_SEND;
+        client->funcState = 0;
         break;
-    case 6:
-        if (svr->param == 0)
-            mevent_client_jmp_buffer(svr);
+    case CLI_COPY_RECV_IF_N:
+        if (client->param == FALSE)
+            MysteryGiftClient_CopyRecvScript(client);
         break;
-    case 7:
-        if (svr->param == 1)
-            mevent_client_jmp_buffer(svr);
+    case CLI_COPY_RECV_IF:
+        if (client->param == TRUE)
+            MysteryGiftClient_CopyRecvScript(client);
         break;
-    case 4:
-        mevent_client_jmp_buffer(svr);
+    case CLI_COPY_RECV:
+        MysteryGiftClient_CopyRecvScript(client);
         break;
-    case 5:
-        memcpy(svr->buffer, svr->recvBuffer, 0x40);
-        svr->mainseqno = 5;
-        svr->flag = 0;
-        return 2;
-    case 11:
-        memcpy(svr->buffer, svr->recvBuffer, 0x40);
-        svr->mainseqno = 5;
-        svr->flag = 0;
-        return 3;
-    case 12:
-        memcpy(svr->buffer, svr->recvBuffer, 0x40);
-        svr->mainseqno = 5;
-        svr->flag = 0;
-        return 5;
-    case 13:
-        svr->mainseqno = 5;
-        svr->flag = 0;
-        return 4;
-    case 8:
-        MysteryGift_LoadLinkGameData(svr->sendBuffer);
-        MysteryGiftLink_InitSend(&svr->manager, 0x11, svr->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
+    case CLI_YES_NO:
+        memcpy(client->msg, client->recvBuffer, CLIENT_MAX_MSG_SIZE);
+        client->funcId = FUNC_WAIT;
+        client->funcState = 0;
+        return CLI_RET_YES_NO;
+    case CLI_PRINT_MSG:
+        memcpy(client->msg, client->recvBuffer, CLIENT_MAX_MSG_SIZE);
+        client->funcId = FUNC_WAIT;
+        client->funcState = 0;
+        return CLI_RET_PRINT_MSG;
+    case CLI_COPY_MSG:
+        memcpy(client->msg, client->recvBuffer, CLIENT_MAX_MSG_SIZE);
+        client->funcId = FUNC_WAIT;
+        client->funcState = 0;
+        return CLI_RET_COPY_MSG;
+    case CLI_ASK_TOSS:
+        client->funcId = FUNC_WAIT;
+        client->funcState = 0;
+        return CLI_RET_ASK_TOSS;
+    case CLI_LOAD_GAME_DATA:
+        MysteryGift_LoadLinkGameData(client->sendBuffer);
+        MysteryGiftLink_InitSend(&client->link, MG_LINKID_GAME_DATA, client->sendBuffer, sizeof(struct MysteryGiftLinkGameData));
         break;
-    case 14:
-        mevent_client_send_word(svr, 0x13, svr->param);
+    case CLI_LOAD_TOSS_RESPONSE:
+        // param here is set by MG_STATE_CLIENT_ASK_TOSS or MG_STATE_CLIENT_ASK_TOSS_UNRECEIVED
+        MysteryGiftClient_InitSendWord(client, MG_LINKID_RESPONSE, client->param);
         break;
-    case 10:
-        SaveWonderCard(svr->recvBuffer);
+    case CLI_SAVE_CARD:
+        SaveWonderCard(client->recvBuffer);
         break;
-    case 9:
-        if (!IsWonderNewsSameAsSaved(svr->recvBuffer))
+    case CLI_SAVE_NEWS:
+        if (!IsWonderNewsSameAsSaved(client->recvBuffer))
         {
-            SaveWonderNews(svr->recvBuffer);
-            mevent_client_send_word(svr, 0x13, 0);
+            SaveWonderNews(client->recvBuffer);
+            MysteryGiftClient_InitSendWord(client, MG_LINKID_RESPONSE, FALSE);
         }
         else
-            // Other trainer already has news
-            mevent_client_send_word(svr, 0x13, 1);
+        {
+            // Wonder News has already been saved (or is invalid).
+            // Prepare a signal to indicate it was not saved.
+            MysteryGiftClient_InitSendWord(client, MG_LINKID_RESPONSE, TRUE);
+        }
         break;
-    case 15:
-        svr->mainseqno = 6;
-        svr->flag = 0;
+    case CLI_RUN_MEVENT_SCRIPT:
+        client->funcId = FUNC_RUN_MEVENT;
+        client->funcState = 0;
         break;
-    case 16:
-        MysteryGift_TrySaveStamp(svr->recvBuffer);
+    case CLI_SAVE_STAMP:
+        MysteryGift_TrySaveStamp(client->recvBuffer);
         break;
-    case 17:
-        InitRamScript_NoObjectEvent(svr->recvBuffer, 1000);
+    case CLI_SAVE_RAM_SCRIPT:
+        InitRamScript_NoObjectEvent(client->recvBuffer, sizeof(struct RamScriptData));
         break;
-    case 18:
-        memcpy(&gSaveBlock2Ptr->battleTower.ereaderTrainer, svr->recvBuffer, sizeof(struct BattleTowerEReaderTrainer));
+    case CLI_RECV_EREADER_TRAINER:
+        memcpy(&gSaveBlock2Ptr->battleTower.ereaderTrainer, client->recvBuffer, sizeof(gSaveBlock2Ptr->battleTower.ereaderTrainer));
         ValidateEReaderTrainer();
         break;
-    case 21:
-        memcpy(gDecompressionBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);
-        svr->mainseqno = 7;
-        svr->flag = 0;
+    case CLI_RUN_BUFFER_SCRIPT:
+        memcpy(gDecompressionBuffer, client->recvBuffer, MG_LINK_BUFFER_SIZE);
+        client->funcId = FUNC_RUN_BUFFER;
+        client->funcState = 0;
         break;
     }
 
-    return 1;
+    return CLI_RET_ACTIVE;
 }
 
-static u32 client_mainseq_5(struct mevent_client * svr)
+static u32 Client_Wait(struct MysteryGiftClient * client)
 {
-    // wait flag
-    if (svr->flag)
+    if (client->funcState)
     {
-        svr->mainseqno = 4;
-        svr->flag = 0;
+        client->funcId = FUNC_RUN;
+        client->funcState = 0;
     }
-    return 1;
+    return CLI_RET_ACTIVE;
 }
 
-static u32 client_mainseq_6(struct mevent_client * svr)
+static u32 Client_RunMysteryEventScript(struct MysteryGiftClient * client)
 {
-    // Run mevent buffer script
-    switch (svr->flag)
+    switch (client->funcState)
     {
     case 0:
-        MEventScript_InitContext(svr->recvBuffer);
-        ++svr->flag;
+        MEventScript_InitContext(client->recvBuffer);
+        client->funcState++;
         break;
     case 1:
-        if (!MEventScript_Run(&svr->param))
+        if (!MEventScript_Run(&client->param))
         {
-            svr->mainseqno = 4;
-            svr->flag = 0;
+            client->funcId = FUNC_RUN;
+            client->funcState = 0;
         }
         break;
     }
-    return 1;
+    return CLI_RET_ACTIVE;
 }
 
-static u32 client_mainseq_7(struct mevent_client * svr)
+static u32 Client_RunBufferScript(struct MysteryGiftClient * client)
 {
-    // exec arbitrary code
     u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
-    if (func(&svr->param, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
+    if (func(&client->param, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
     {
-        svr->mainseqno = 4;
-        svr->flag = 0;
+        client->funcId = FUNC_RUN;
+        client->funcState = 0;
     }
-    return 1;
+    return CLI_RET_ACTIVE;
 }
 
-static u32 mevent_client_exec(struct mevent_client * svr)
+static u32 MysteryGiftClient_CallFunc(struct MysteryGiftClient * client)
 {
-    u32 (*funcs[])(struct mevent_client *) = {
-        client_mainseq_0,
-        client_mainseq_1,
-        client_mainseq_2,
-        client_mainseq_3,
-        client_mainseq_4,
-        client_mainseq_5,
-        client_mainseq_6,
-        client_mainseq_7
+    u32 (*funcs[])(struct MysteryGiftClient *) = {
+        [FUNC_INIT] = Client_Init,
+        [FUNC_DONE] = Client_Done,
+        [FUNC_RECV] = Client_Recv,
+        [FUNC_SEND] = Client_Send,
+        [FUNC_RUN]  = Client_Run,
+        [FUNC_WAIT] = Client_Wait,
+        [FUNC_RUN_MEVENT] = Client_RunMysteryEventScript,
+        [FUNC_RUN_BUFFER] = Client_RunBufferScript
     };
-    return funcs[svr->mainseqno](svr);
+    return funcs[client->funcId](client);
 }

@@ -325,6 +325,6 @@ void SetUnionRoomChatPlayerData(u32 numPlayers);
 void ClearRecvCommands(void);
 
 #include "mystery_gift_server.h"
-extern const struct mevent_server_cmd gServerScript_ClientCanceledCard[];
+extern const struct MysteryGiftServerCmd gServerScript_ClientCanceledCard[];
 
 #endif //GUARD_LINK_RFU_H

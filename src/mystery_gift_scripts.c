@@ -1,192 +1,198 @@
 #include "global.h"
 #include "mystery_gift_server.h"
+#include "mystery_gift_client.h"
+#include "constants/mystery_gift.h"
 
-extern const struct mevent_server_cmd gServerScript_ClientCanceledCard[];
+extern const struct MysteryGiftServerCmd gServerScript_ClientCanceledCard[];
 
 // Unreferenced
-const u8 gUnknown_84687A0[] = _("You have collected all STAMPs!\nWant to input a CARD as a prize?");
+static const u8 sText_CollectedAllStamps[] = _("You have collected all STAMPs!\nWant to input a CARD as a prize?");
 
-/* CLIENT SCRIPTS */
+//==================
+// Client scripts
+//==================
 
-const struct mevent_client_cmd gMEventClientScript_InitialListen[] = { // 84687E0
-    CLI_RECEIVE(0x10),
-    CLI_JUMPBUF
+const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[] = {
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct mevent_client_cmd gMEventClientScript_Send1442CC[] = {
-    CLI_SNDHEAD,
-    CLI_WAITSND,
-    CLI_RECEIVE(0x10),
-    CLI_JUMPBUF
+static const struct MysteryGiftClientCmd sClientScript_SendGameData[] = {
+    {CLI_LOAD_GAME_DATA},
+    {CLI_SEND_LOADED},
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct mevent_client_cmd gMEventClientScript_UnableToRecv[] = { // can't accept card or news
-    CLI_SENDALL,
-    CLI_RETURN(0x0a)
+static const struct MysteryGiftClientCmd sClientScript_CantAccept[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_CANT_ACCEPT}
 };
 
-const struct mevent_client_cmd gMEventClientScript_CommError[] = { // comm error
-    CLI_SENDALL,
-    CLI_RETURN(0x0b)
+static const struct MysteryGiftClientCmd sClientScript_CommError[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_COMM_ERROR}
 };
 
-const struct mevent_client_cmd gMEventClientScript_NothingSentOver[] = { // nothing sent
-    CLI_SENDALL,
-    CLI_RETURN(0x00)
+static const struct MysteryGiftClientCmd sClientScript_NothingSent[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_NOTHING_SENT}
 };
 
-const struct mevent_client_cmd gMEventClientScript_ReceiveCardAndReturnSuccess[] = { // card success
-    CLI_RECEIVE(0x16),
-    CLI_RECVSAV,
-    CLI_RECEIVE(0x19),
-    CLI_RECVRAM,
-    CLI_SENDALL,
-    CLI_RETURN(0x02)
+static const struct MysteryGiftClientCmd sClientScript_SaveCard[] = {
+    {CLI_RECV, MG_LINKID_CARD},
+    {CLI_SAVE_CARD},
+    {CLI_RECV, MG_LINKID_RAM_SCRIPT},
+    {CLI_SAVE_RAM_SCRIPT},
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_CARD_RECEIVED}
 };
 
-const struct mevent_client_cmd gMEventClientScript_ReceiveNewsAndValidate[] = {
-    CLI_RECEIVE(0x17),
-    CLI_VLDNEWS,
-    CLI_WAITSND,
-    CLI_RECEIVE(0x10),
-    CLI_JUMPBUF
+static const struct MysteryGiftClientCmd sClientScript_SaveNews[] = {
+    {CLI_RECV, MG_LINKID_NEWS},
+    {CLI_SAVE_NEWS},
+    {CLI_SEND_LOADED}, // Send whether or not the News was saved (read by sServerScript_SendNews)
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct mevent_client_cmd gMEventClientScript_AlreadyHadNews[] = { // already had news
-    CLI_SENDALL,
-    CLI_RETURN(0x07)
+static const struct MysteryGiftClientCmd sClientScript_HadNews[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_HAD_NEWS}
 };
 
-const struct mevent_client_cmd gMEventClientScript_RecvNewsSuccess[] = { // news success
-    CLI_SENDALL,
-    CLI_RETURN(0x03)
+static const struct MysteryGiftClientCmd sClientScript_NewsReceived[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_NEWS_RECEIVED}
 };
 
-const struct mevent_client_cmd gMEventClientScript_AskWouldLikeToTossCard[] = {
-    CLI_REQWORD,
-    CLI_SNDWORD,
-    CLI_WAITSND,
-    CLI_RECEIVE(0x10),
-    CLI_JUMPBUF
+static const struct MysteryGiftClientCmd sClientScript_AskToss[] = {
+    {CLI_ASK_TOSS},
+    {CLI_LOAD_TOSS_RESPONSE},
+    {CLI_SEND_LOADED},
+    {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
+    {CLI_COPY_RECV}
 };
 
-const struct mevent_client_cmd gMEventClientScript_OtherTrainerCanceled[] = { // comm canceled
-    CLI_SENDALL,
-    CLI_RETURN(0x09)
+static const struct MysteryGiftClientCmd sClientScript_Canceled[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_COMM_CANCELED}
 };
 
-const struct mevent_client_cmd gMEventClientScript_AlreadyHadCard[] = { // already had card
-    CLI_SENDALL,
-    CLI_RETURN(0x05)
+static const struct MysteryGiftClientCmd sClientScript_HadCard[] = {
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_HAD_CARD}
 };
 
-const struct mevent_client_cmd gMEventClientScript_SuccessFromBuffer[] = { // success from buffer
-    CLI_RECEIVE(0x15),
-    CLI_RECVBUF,
-    CLI_SENDALL,
-    CLI_RETURN(0x0d)
+static const struct MysteryGiftClientCmd sClientScript_DynamicSuccess[] = {
+    {CLI_RECV, MG_LINKID_DYNAMIC_MSG},
+    {CLI_COPY_MSG},
+    {CLI_SEND_READY_END},
+    {CLI_RETURN, CLI_MSG_BUFFER_SUCCESS}
 };
 
-/* SERVER SCRIPTS */
+//==================
+// Server scripts
+//==================
 
-const struct mevent_server_cmd gMEventSrvScript_UnableToSend[] = {
-    SRV_SEND(0x10, gMEventClientScript_UnableToRecv),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x0a)
+static const struct MysteryGiftServerCmd sServerScript_CantSend[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_CantAccept)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CANT_SEND_GIFT_1}
 };
 
-const struct mevent_server_cmd gUnknown_8468950[] = {
-    SRV_SEND(0x10, gMEventClientScript_CommError),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x0b)
+static const struct MysteryGiftServerCmd sServerScript_CommError[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_CommError)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_COMM_ERROR}
 };
 
-const struct mevent_server_cmd gUnknown_8468980[] = {
-    SRV_SEND(0x10, gMEventClientScript_OtherTrainerCanceled),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x09)
+static const struct MysteryGiftServerCmd sServerScript_ClientCanceledNews[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_Canceled)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CLIENT_CANCELED}
 };
 
-const struct mevent_server_cmd gMEventSrvScript_OtherTrnHasNews[] = {
-    SRV_SEND(0x10, gMEventClientScript_AlreadyHadNews),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x07)
+static const struct MysteryGiftServerCmd sServerScript_HasNews[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_HadNews)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_HAS_NEWS}
 };
 
-const struct mevent_server_cmd gMEventSrvScript_SentNewsSuccess[] = {
-    SRV_SEND(0x28, gMEventClientScript_ReceiveNewsAndValidate),
-    SRV_WAITSND,
-    SRV_SEND_NEWS,
-    SRV_WAITSND,
-    SRV_RECV(0x13),
-    SRV_READWORD,
-    SRV_BRANCHIF(0x01, gMEventSrvScript_OtherTrnHasNews),
-    SRV_SEND(0x10, gMEventClientScript_RecvNewsSuccess),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x03)
+static const struct MysteryGiftServerCmd sServerScript_SendNews[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SaveNews)},
+    {SVR_SEND},
+    {SVR_LOAD_NEWS},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_RESPONSE},
+    {SVR_READ_RESPONSE},
+    {SVR_GOTO_IF_EQ, TRUE, sServerScript_HasNews}, // Wonder News was not saved
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_NewsReceived)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_NEWS_SENT}
 };
 
-const struct mevent_server_cmd gMEventSrvScript_SendCardSuccess[] = {
-    SRV_SEND(0x30, gMEventClientScript_ReceiveCardAndReturnSuccess),
-    SRV_WAITSND,
-    SRV_SEND_CARD,
-    SRV_WAITSND,
-    SRV_BUFFER_SEND,
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x02)
+static const struct MysteryGiftServerCmd sServerScript_SendCard[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SaveCard)},
+    {SVR_SEND},
+    {SVR_LOAD_CARD},
+    {SVR_SEND},
+    {SVR_LOAD_RAM_SCRIPT},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_CARD_SENT}
 };
 
-const struct mevent_server_cmd gMEventSrvScript_AskClientToOverwriteCard[] = {
-    SRV_SEND(0x28, gMEventClientScript_AskWouldLikeToTossCard),
-    SRV_WAITSND,
-    SRV_RECV(0x13),
-    SRV_READWORD,
-    SRV_BRANCHIF(0x00, gMEventSrvScript_SendCardSuccess),
-    SRV_BRANCH(gServerScript_ClientCanceledCard)
+static const struct MysteryGiftServerCmd sServerScript_TossPrompt[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_AskToss)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_RESPONSE},
+    {SVR_READ_RESPONSE},
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_SendCard},          // Tossed old card, send new one
+    {SVR_GOTO, .parameter = gServerScript_ClientCanceledCard} // Kept old card, cancel new one
 };
 
-const struct mevent_server_cmd gMEventSrvScript_OtherTrnHasCard[] = {
-    SRV_SEND(0x10, gMEventClientScript_AlreadyHadCard),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x05)
+static const struct MysteryGiftServerCmd sServerScript_HasCard[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_HadCard)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_HAS_CARD}
 };
 
-const struct mevent_server_cmd gUnknown_8468B3C[] = {
-    SRV_SEND(0x10, gMEventClientScript_NothingSentOver),
-    SRV_WAITSND,
-    SRV_RECV(0x14),
-    SRV_RETURN(0x00)
+static const struct MysteryGiftServerCmd sServerScript_NothingSent[] = {
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_NothingSent)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_READY_END},
+    {SVR_RETURN, SVR_MSG_NOTHING_SENT}
 };
 
-const struct mevent_server_cmd gMEventSrvScript_SendNews[] = {
-    SRV_BUFFER_NEWS,
-    SRV_SEND(0x20, gMEventClientScript_Send1442CC),
-    SRV_WAITSND,
-    SRV_RECV(0x11),
-    SRV_READ_1442CC,
-    SRV_VALID_1442CC,
-    SRV_BRANCHIF(0x00, gMEventSrvScript_UnableToSend),
-    SRV_BRANCH(gMEventSrvScript_SentNewsSuccess)
+const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderNews[] = {
+    {SVR_COPY_SAVED_NEWS},
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SendGameData)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_GAME_DATA},
+    {SVR_COPY_GAME_DATA},
+    {SVR_CHECK_GAME_DATA},
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_CantSend},
+    {SVR_GOTO, .parameter = sServerScript_SendNews},
 };
 
-const struct mevent_server_cmd gMEventSrvScript_SendCard[] = {
-    SRV_BUFFER_CARD,
-    SRV_RAM_SCRIPT_IF_VALID,
-    SRV_SEND(0x20, gMEventClientScript_Send1442CC),
-    SRV_WAITSND,
-    SRV_RECV(0x11),
-    SRV_READ_1442CC,
-    SRV_VALID_1442CC,
-    SRV_BRANCHIF(0x00, gMEventSrvScript_UnableToSend),
-    SRV_CHECK_1442CC_14,
-    SRV_BRANCHIF(0x02, gMEventSrvScript_AskClientToOverwriteCard),
-    SRV_BRANCHIF(0x00, gMEventSrvScript_SendCardSuccess),
-    SRV_BRANCH(gMEventSrvScript_OtherTrnHasCard)
+const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderCard[] = {
+    {SVR_COPY_SAVED_CARD},
+    {SVR_COPY_SAVED_RAM_SCRIPT},
+    {SVR_LOAD_CLIENT_SCRIPT, PTR_ARG(sClientScript_SendGameData)},
+    {SVR_SEND},
+    {SVR_RECV, MG_LINKID_GAME_DATA},
+    {SVR_COPY_GAME_DATA},
+    {SVR_CHECK_GAME_DATA},
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_CantSend},
+    {SVR_CHECK_EXISTING_CARD},
+    {SVR_GOTO_IF_EQ, HAS_DIFF_CARD, sServerScript_TossPrompt},
+    {SVR_GOTO_IF_EQ, HAS_NO_CARD, sServerScript_SendCard},
+    {SVR_GOTO, .parameter = sServerScript_HasCard} // HAS_SAME_CARD
 };

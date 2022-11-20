@@ -810,7 +810,7 @@ bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData * d
     return TRUE;
 }
 
-u32 MysteryGift_CompareCardFlags(const u16 * flagId, const struct MysteryGiftLinkGameData * data, void *unused)
+u32 MysteryGift_CompareCardFlags(const u16 * flagId, const struct MysteryGiftLinkGameData * data, const void *unused)
 {
     // Has a Wonder Card already?
     if (data->flagId == 0)
@@ -824,7 +824,7 @@ u32 MysteryGift_CompareCardFlags(const u16 * flagId, const struct MysteryGiftLin
     return 2;
 }
 
-u32 MysteryGift_CheckStamps(const u16 * stamp, const struct MysteryGiftLinkGameData * data, void *unused)
+u32 MysteryGift_CheckStamps(const u16 * stamp, const struct MysteryGiftLinkGameData * data, const void *unused)
 {
     s32 stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
     

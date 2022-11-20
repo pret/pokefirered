@@ -1364,8 +1364,7 @@ const u8 gGraphics_TitleScreen_BoxArtMonMap[] = INCBIN_U8("graphics/title_screen
 const u16 gGraphics_TitleScreen_BackgroundPals[] = INCBIN_U16("graphics/title_screen/firered/background.gbapal");
 const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[] = INCBIN_U8("graphics/title_screen/copyright_press_start.4bpp.lz");
 const u8 gGraphics_TitleScreen_CopyrightPressStartMap[] = INCBIN_U8("graphics/title_screen/copyright_press_start.bin.lz");
-const u16 gGraphics_TitleScreen_FireOrLeafPals[] = INCBIN_U16("graphics/title_screen/firered/fire_sprite.gbapal");
-const u32 gGraphics_TitleScreen_BlankObjTiles[] = INCBIN_U32("graphics/title_screen/blank_obj.4bpp.lz");
+const u16 gTitleScreen_Slash_Pal[] = INCBIN_U16("graphics/title_screen/firered/slash.gbapal");
 #endif
 
 #ifdef LEAFGREEN
@@ -1378,9 +1377,10 @@ const u8 gGraphics_TitleScreen_BoxArtMonMap[] = INCBIN_U8("graphics/title_screen
 const u16 gGraphics_TitleScreen_BackgroundPals[] = INCBIN_U16("graphics/title_screen/leafgreen/background.gbapal");
 const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[] = INCBIN_U8("graphics/title_screen/copyright_press_start.4bpp.lz");
 const u8 gGraphics_TitleScreen_CopyrightPressStartMap[] = INCBIN_U8("graphics/title_screen/copyright_press_start.bin.lz");
-const u16 gGraphics_TitleScreen_FireOrLeafPals[] = INCBIN_U16("graphics/title_screen/leafgreen/leaf_sprite.gbapal");
-const u32 gGraphics_TitleScreen_BlankObjTiles[] = INCBIN_U32("graphics/title_screen/blank_obj.4bpp.lz");
+const u16 gTitleScreen_Slash_Pal[] = INCBIN_U16("graphics/title_screen/leafgreen/slash.gbapal");
 #endif
+
+const u32 gTitleScreen_BlankSprite_Tiles[] = INCBIN_U32("graphics/title_screen/blank_sprite.4bpp.lz");
 
 const u16 gCreditsAllRightsReservedGfxPal[] = INCBIN_U16("graphics/credits/unk_8EAE548.gbapal");
 const u8 gCreditsAllRightsReservedGfxTiles[] = INCBIN_U8("graphics/credits/unk_8EAE548.4bpp.lz");

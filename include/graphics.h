@@ -4310,8 +4310,8 @@ extern const u8 gGraphics_TitleScreen_BoxArtMonMap[];
 extern u16 gGraphics_TitleScreen_BackgroundPals[]; // If this is const, title_screen.c does not match
 extern const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[];
 extern const u8 gGraphics_TitleScreen_CopyrightPressStartMap[];
-extern const u16 gGraphics_TitleScreen_FireOrLeafPals[];
-extern const u32 gGraphics_TitleScreen_BlankObjTiles[];
+extern const u16 gTitleScreen_Slash_Pal[];
+extern const u32 gTitleScreen_BlankSprite_Tiles[];
 
 // battle_gfx_sfx_util
 extern const u32 gHealthboxSinglesPlayerGfx[];

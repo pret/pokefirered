@@ -21,6 +21,8 @@
 #include "pokedex_area_markers.h"
 #include "field_specials.h"
 
+#define TAG_AREA_MARKERS 2001
+
 enum TextMode {
     TEXT_LEFT,
     TEXT_CENTER,
@@ -31,7 +33,8 @@ struct PokedexScreenData
 {
     u8 taskId;
     u8 state;
-    u8 data[4];
+    u8 data[2];
+    u8 areaMarkersTaskId;
     u32 unlockedCategories;
     u32 modeSelectInput;
     u16 modeSelectItemsAbove;
@@ -3123,9 +3126,10 @@ u8 DexScreen_DrawMonAreaPage(void)
     }
 
     // Create the area markers
-    sPokedexScreenData->data[2] = Ctor_PokedexAreaMarkers(species, 2001, 3, kantoMapVoff * 8);
-    if (!(PokedexAreaMarkers_Any(sPokedexScreenData->data[2])))
+    sPokedexScreenData->areaMarkersTaskId = CreatePokedexAreaMarkers(species, TAG_AREA_MARKERS, 3, kantoMapVoff * 8);
+    if (GetNumPokedexAreaMarkers(sPokedexScreenData->areaMarkersTaskId) == 0)
     {
+        // No markers, display "Area Unknown"
         BlitBitmapRectToWindow(sPokedexScreenData->windowIds[0], (void *)sBlitTiles_WideEllipse, 0, 0, 88, 16, 4, 28, 88, 16);
         {
             s32 strWidth = GetStringWidth(FONT_0, gText_AreaUnknown, 0);
@@ -3149,7 +3153,7 @@ u8 DexScreen_DestroyAreaScreenResources(void)
 {
     int i;
 
-    Dtor_PokedexAreaMarkers(sPokedexScreenData->data[2]);
+    DestroyPokedexAreaMarkers(sPokedexScreenData->areaMarkersTaskId);
 
     for (i = 0; i < 13; i++)
         DexScreen_RemoveWindow(&sPokedexScreenData->windowIds[i]);

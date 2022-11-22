@@ -399,25 +399,25 @@ static void DrawCardWindow(u8 whichWindow)
     {
         // Print card title/subtitle
         s32 x;
-        AddTextPrinterParameterized3(windowId, FONT_3, 0, 1, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->titleText);
-        x = 160 - GetStringWidth(FONT_3, sWonderCardData->subtitleText, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING));
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL_COPY_2, 0, 1, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->titleText);
+        x = 160 - GetStringWidth(FONT_NORMAL_COPY_2, sWonderCardData->subtitleText, GetFontAttribute(FONT_NORMAL_COPY_2, FONTATTR_LETTER_SPACING));
         if (x < 0)
             x = 0;
-        AddTextPrinterParameterized3(windowId, FONT_3, x, 17, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->subtitleText);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL_COPY_2, x, 17, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->subtitleText);
         
         // Print id number
         if (sWonderCardData->card.idNumber != 0)
-            AddTextPrinterParameterized3(windowId, FONT_2, 166, 17, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->idNumberText);
+            AddTextPrinterParameterized3(windowId, FONT_NORMAL, 166, 17, sTextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->idNumberText);
         break;
     }
     case WIN_BODY:
         // Print body text
         for (; i < WONDER_CARD_BODY_TEXT_LINES; i++)
-            AddTextPrinterParameterized3(windowId, FONT_3, 0, 16 * i + 2, sTextColorTable[sWonderCardData->gfx->bodyTextPal], 0, sWonderCardData->bodyText[i]);
+            AddTextPrinterParameterized3(windowId, FONT_NORMAL_COPY_2, 0, 16 * i + 2, sTextColorTable[sWonderCardData->gfx->bodyTextPal], 0, sWonderCardData->bodyText[i]);
         break;
     case WIN_FOOTER:
         // Print footer line 1
-        AddTextPrinterParameterized3(windowId, FONT_3, 0,
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL_COPY_2, 0,
                                      sFooterTextOffsets[sWonderCardData->card.type],
                                      sTextColorTable[sWonderCardData->gfx->footerTextPal],
                                      0, sWonderCardData->footerLine1Text);
@@ -427,7 +427,7 @@ static void DrawCardWindow(u8 whichWindow)
         {
             // Print gift text
             // Odd that CARD_TYPE_STAMP is not ignored, it has empty text for this
-            AddTextPrinterParameterized3(windowId, FONT_3, 0,
+            AddTextPrinterParameterized3(windowId, FONT_NORMAL_COPY_2, 0,
                                          16 + sFooterTextOffsets[sWonderCardData->card.type],
                                          sTextColorTable[sWonderCardData->gfx->footerTextPal],
                                          0, sWonderCardData->footerLine2Text);
@@ -436,19 +436,19 @@ static void DrawCardWindow(u8 whichWindow)
         {
             s32 x = 0;
             s32 y = sFooterTextOffsets[sWonderCardData->card.type] + 16;
-            s32 spacing = GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING);
+            s32 spacing = GetFontAttribute(FONT_NORMAL_COPY_2, FONTATTR_LETTER_SPACING);
             for (; i < sWonderCardData->recordIdx; i++)
             {
                 // Print stat text
-                AddTextPrinterParameterized3(windowId, FONT_3, x, y, sTextColorTable[sWonderCardData->gfx->footerTextPal], 0, sWonderCardData->statTextData[i].statText);
+                AddTextPrinterParameterized3(windowId, FONT_NORMAL_COPY_2, x, y, sTextColorTable[sWonderCardData->gfx->footerTextPal], 0, sWonderCardData->statTextData[i].statText);
                 if (sWonderCardData->statTextData[i].statNumberText[0] != EOS)
                 {
                     // Print stat number
-                    x += GetStringWidth(FONT_3, sWonderCardData->statTextData[i].statText, spacing);
-                    AddTextPrinterParameterized3(windowId, FONT_2, x, y,
+                    x += GetStringWidth(FONT_NORMAL_COPY_2, sWonderCardData->statTextData[i].statText, spacing);
+                    AddTextPrinterParameterized3(windowId, FONT_NORMAL, x, y,
                                                  sTextColorTable[sWonderCardData->gfx->footerTextPal],
                                                  0, sWonderCardData->statTextData[i].statNumberText);
-                    x += GetStringWidth(FONT_3, sWonderCardData->statTextData[i].statNumberText, spacing) + sWonderCardData->statTextData[i].width;
+                    x += GetStringWidth(FONT_NORMAL_COPY_2, sWonderCardData->statTextData[i].statNumberText, spacing) + sWonderCardData->statTextData[i].width;
                 }
             }
         }

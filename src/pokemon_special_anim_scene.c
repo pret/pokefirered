@@ -415,10 +415,10 @@ void PSA_PrintMessage(u8 messageId)
         DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->textBuf, gText_MonLearnedTMHM);
         break;
     case 4:
-        strWidth += GetStringWidth(FONT_2, gText_Counting_2And, -1);
+        strWidth += GetStringWidth(FONT_NORMAL, gText_Counting_2And, -1);
         // fallthrough
     case 3:
-        strWidth += GetStringWidth(FONT_2, gText_Counting_1, -1);
+        strWidth += GetStringWidth(FONT_NORMAL, gText_Counting_1, -1);
         // fallthrough
     case 2: // 1
         StringCopy(scene->textBuf, s1_2_and_Poof_textPtrs[messageId - 2]);
@@ -443,7 +443,7 @@ void PSA_PrintMessage(u8 messageId)
         return;
     }
 
-    AddTextPrinterParameterized5(0, FONT_2, scene->textBuf, strWidth, 0, textSpeed, NULL, 0, 4);
+    AddTextPrinterParameterized5(0, FONT_NORMAL, scene->textBuf, strWidth, 0, textSpeed, NULL, 0, 4);
 }
 
 void PSA_AfterPoof_ClearMessageWindow(void)
@@ -1513,13 +1513,13 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *beforeStats, u16 *afterStats, u8 bg
 
     for (i = 0; i < 6; i++)
     {
-        AddTextPrinterParameterized3(windowId, FONT_2, 0, i * 15, textColor, TEXT_SKIP_DRAW, sLevelUpWindowStatNames[i]);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, 0, i * 15, textColor, TEXT_SKIP_DRAW, sLevelUpWindowStatNames[i]);
         StringCopy(textbuf, diffStats[i] >= 0 ? gText_LevelUp_Plus : gText_LevelUp_Minus);
-        AddTextPrinterParameterized3(windowId, FONT_2, 56, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, 56, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
         textbuf[0] = CHAR_SPACE;
         x = abs(diffStats[i]) < 10 ? 12 : 6;
         ConvertIntToDecimalStringN(textbuf + 1, abs(diffStats[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
-        AddTextPrinterParameterized3(windowId, FONT_2, x + 56, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, x + 56, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
     }
 }
 
@@ -1555,7 +1555,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgColor, u8 fgColor, 
             ndigits = 1;
         ConvertIntToDecimalStringN(textbuf, statsRearrange[i], STR_CONV_MODE_LEFT_ALIGN, ndigits);
         x = 6 * (4 - ndigits);
-        AddTextPrinterParameterized3(windowId, FONT_2, 0, i * 15, textColor, TEXT_SKIP_DRAW, sLevelUpWindowStatNames[i]);
-        AddTextPrinterParameterized3(windowId, FONT_2, 56 + x, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, 0, i * 15, textColor, TEXT_SKIP_DRAW, sLevelUpWindowStatNames[i]);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, 56 + x, i * 15, textColor, TEXT_SKIP_DRAW, textbuf);
     }
 }

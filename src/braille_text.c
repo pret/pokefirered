@@ -9,11 +9,11 @@ static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
 };
-static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("graphics/fonts/font6.fwjpnfont");
+static const u16 sBrailleGlyphs[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
 
-static void DecompressGlyphFont6(u16);
+static void DecompressGlyph_Braille(u16);
 
-u16 Font6Func(struct TextPrinter *textPrinter)
+u16 FontFunc_Braille(struct TextPrinter *textPrinter)
 {
     u16 char_;
     struct TextPrinterSubStruct *sub;
@@ -129,14 +129,14 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                     textPrinter->state = 3;
                     TextPrinterInitDownArrowCounters(textPrinter);
                     return 3;
-                case 0xF9:
+                case CHAR_EXTRA_SYMBOL:
                     char_ = *textPrinter->printerTemplate.currentChar++| 0x100;
                     break;
-                case 0xF8:
+                case CHAR_KEYPAD_ICON:
                     textPrinter->printerTemplate.currentChar++;
                     return 0;
             }
-            DecompressGlyphFont6(char_);
+            DecompressGlyph_Braille(char_);
             CopyGlyphToWindow(textPrinter);
             textPrinter->printerTemplate.currentX += gGlyphInfo.width + textPrinter->printerTemplate.letterSpacing;
             return 0;
@@ -204,11 +204,11 @@ u16 Font6Func(struct TextPrinter *textPrinter)
     return 1;
 }
 
-static void DecompressGlyphFont6(u16 glyph)
+static void DecompressGlyph_Braille(u16 glyph)
 {
     const u16 *glyphs;
 
-    glyphs = sFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
+    glyphs = sBrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
     DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
     DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
     DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
@@ -217,7 +217,7 @@ static void DecompressGlyphFont6(u16 glyph)
     gGlyphInfo.height = 0x10;
 }
 
-s32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese)
+s32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese)
 {
-    return 0x10;
+    return 16;
 }

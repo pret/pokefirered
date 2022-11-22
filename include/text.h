@@ -13,14 +13,14 @@
 #define TEXT_SKIP_DRAW 0xFF
 
 enum {
-    FONT_0,
-    FONT_1,
-    FONT_2,
-    FONT_3,
-    FONT_4,
-    FONT_5,
+    FONT_SMALL,
+    FONT_NORMAL_COPY_1,
+    FONT_NORMAL,
+    FONT_NORMAL_COPY_2,
+    FONT_MALE,
+    FONT_FEMALE,
     FONT_BRAILLE,
-    FONT_7,
+    FONT_BOLD,
 };
 
 // Return values for font functions
@@ -160,15 +160,13 @@ u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 
-u16 Font0Func(struct TextPrinter *textPrinter);
-u16 Font1Func(struct TextPrinter *textPrinter);
-u16 Font2Func(struct TextPrinter *textPrinter);
-u16 Font3Func(struct TextPrinter *textPrinter);
-u16 Font4Func(struct TextPrinter *textPrinter);
-u16 Font5Func(struct TextPrinter *textPrinter);
-u16 Font7Func(struct TextPrinter *textPrinter);
-u16 Font8Func(struct TextPrinter *textPrinter);
-u16 Font6Func(struct TextPrinter *textPrinter);
+u16 FontFunc_Small(struct TextPrinter *textPrinter);
+u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter);
+u16 FontFunc_Normal(struct TextPrinter *textPrinter);
+u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter);
+u16 FontFunc_Male(struct TextPrinter *textPrinter);
+u16 FontFunc_Female(struct TextPrinter *textPrinter);
+u16 FontFunc_Braille(struct TextPrinter *textPrinter);
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
@@ -187,10 +185,10 @@ u8 GetKeypadIconWidth(u8 keypadIconId);
 u8 GetKeypadIconHeight(u8 keypadIconId);
 u8 GetFontAttribute(u8 fontId, u8 attributeId);
 u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
-void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese);
-void DecompressGlyphFont5(u16 glyphId, bool32 isJapanese);
-s32 GetGlyphWidthFont6(u16 font_type, bool32 isJapanese);
+void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese);
+void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese);
+void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese);
+s32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
 void sub_80062B0(struct Sprite *sprite);
 u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
 void DestroyTextCursorSprite(u8 spriteId);

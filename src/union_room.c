@@ -307,16 +307,16 @@ static void PrintNumPlayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 string
     switch (capacityCode << 8)
     {
     case LINK_GROUP_CAPACITY(0, 2):
-        PrintUnionRoomText(windowId, FONT_2, gTexts_UR_PlayersNeededOrMode[0][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, FONT_NORMAL, gTexts_UR_PlayersNeededOrMode[0][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(0, 4):
-        PrintUnionRoomText(windowId, FONT_2, gTexts_UR_PlayersNeededOrMode[1][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, FONT_NORMAL, gTexts_UR_PlayersNeededOrMode[1][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(2, 5):
-        PrintUnionRoomText(windowId, FONT_2, gTexts_UR_PlayersNeededOrMode[2][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, FONT_NORMAL, gTexts_UR_PlayersNeededOrMode[2][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(3, 5):
-        PrintUnionRoomText(windowId, FONT_2, gTexts_UR_PlayersNeededOrMode[3][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, FONT_NORMAL, gTexts_UR_PlayersNeededOrMode[3][stringId - 1], 0, 2, UR_COLOR_DEFAULT);
         break;
     }
 
@@ -328,11 +328,11 @@ static void PrintPlayerNameAndIdOnWindow(u8 windowId)
     u8 text[12];
     u8 text2[12];
 
-    PrintUnionRoomText(windowId, FONT_2, gSaveBlock2Ptr->playerName, 0, 2, UR_COLOR_DEFAULT);
+    PrintUnionRoomText(windowId, FONT_NORMAL, gSaveBlock2Ptr->playerName, 0, 2, UR_COLOR_DEFAULT);
     StringCopy(text2, gText_UR_ID);
     ConvertIntToDecimalStringN(text, ReadAsU16(gSaveBlock2Ptr->playerTrainerId), STR_CONV_MODE_LEADING_ZEROS, 5);
     StringAppend(text2, text);
-    PrintUnionRoomText(windowId, FONT_0, text2, 0, 16, UR_COLOR_DEFAULT);
+    PrintUnionRoomText(windowId, FONT_SMALL, text2, 0, 16, UR_COLOR_DEFAULT);
 }
 
 static void GetAwaitingCommunicationText(u8 *dst, u8 caseId)
@@ -406,7 +406,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->nPlayerModeWindowId = AddWindow(&sWindowTemplate_NumPlayerMode);
 
         FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
-        PrintUnionRoomText(data->bButtonCancelWindowId, FONT_0, gText_UR_BButtonCancel, 8, 2, UR_COLOR_CANCEL);
+        PrintUnionRoomText(data->bButtonCancelWindowId, FONT_SMALL, gText_UR_BButtonCancel, 8, 2, UR_COLOR_CANCEL);
         PutWindowTilemap(data->bButtonCancelWindowId);
         CopyWindowToVram(data->bButtonCancelWindowId, COPYWIN_GFX);
 
@@ -941,7 +941,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         data->playerNameAndIdWindowId = AddWindow(&sWindowTemplate_PlayerNameAndId);
 
         FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
-        PrintUnionRoomText(data->bButtonCancelWindowId, FONT_0, gText_UR_ChooseJoinCancel, 8, 2, UR_COLOR_CANCEL);
+        PrintUnionRoomText(data->bButtonCancelWindowId, FONT_SMALL, gText_UR_ChooseJoinCancel, 8, 2, UR_COLOR_CANCEL);
         PutWindowTilemap(data->bButtonCancelWindowId);
         CopyWindowToVram(data->bButtonCancelWindowId, COPYWIN_GFX);
 
@@ -3485,7 +3485,7 @@ static u8 CreateTradeBoardWindow(const struct WindowTemplate * template)
     u8 windowId = AddWindow(template);
     DrawStdWindowFrame(windowId, FALSE);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
-    PrintUnionRoomText(windowId, FONT_0, gText_UR_NameWantedOfferLv, 8, 1, UR_COLOR_TRADE_BOARD_OTHER);
+    PrintUnionRoomText(windowId, FONT_SMALL, gText_UR_NameWantedOfferLv, 8, 1, UR_COLOR_TRADE_BOARD_OTHER);
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     return windowId;
@@ -3795,18 +3795,18 @@ static void PrintGroupMemberOnWindow(u8 windowId, u8 x, u8 y, struct RfuPlayer *
 
     ConvertIntToDecimalStringN(gStringVar4, id + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringAppend(gStringVar4, gText_UR_Colon);
-    PrintUnionRoomText(windowId, FONT_0, gStringVar4, x, y, UR_COLOR_DEFAULT);
+    PrintUnionRoomText(windowId, FONT_SMALL, gStringVar4, x, y, UR_COLOR_DEFAULT);
     x += 18;
     activity = player->rfu.data.activity;
     if (player->groupScheduledAnim == UNION_ROOM_SPAWN_IN && !(activity & IN_UNION_ROOM))
     {
         CopyAndTranslatePlayerName2(uname, *player);
-        PrintUnionRoomText(windowId, FONT_2, uname, x, y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_NORMAL, uname, x, y, colorIdx);
         ConvertIntToDecimalStringN(trainerId, player->rfu.data.compatibility.playerTrainerId[0] | (player->rfu.data.compatibility.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, gText_UR_ID);
         StringAppend(gStringVar4, trainerId);
         x += 77;
-        PrintUnionRoomText(windowId, FONT_0, gStringVar4, x, y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_SMALL, gStringVar4, x, y, colorIdx);
     }
 }
 
@@ -3818,12 +3818,12 @@ static void PrintGroupCandidateOnWindow(u8 windowId, u8 x, u8 y, struct RfuPlaye
     if (player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
     {
         CopyAndTranslatePlayerName2(uname, *player);
-        PrintUnionRoomText(windowId, FONT_2, uname, x, y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_NORMAL, uname, x, y, colorIdx);
         ConvertIntToDecimalStringN(id_str, player->rfu.data.compatibility.playerTrainerId[0] | (player->rfu.data.compatibility.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, gText_UR_ID);
         StringAppend(gStringVar4, id_str);
         x += 71;
-        PrintUnionRoomText(windowId, FONT_0, gStringVar4, x, y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_SMALL, gStringVar4, x, y, colorIdx);
     }
 }
 
@@ -3927,17 +3927,17 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data
     u8 type = data->tradeType;
     u8 level = data->tradeLevel;
 
-    PrintUnionRoomText(windowId, FONT_2, playerName, 8, y, colorIdx);
+    PrintUnionRoomText(windowId, FONT_NORMAL, playerName, 8, y, colorIdx);
     if (species == SPECIES_EGG)
     {
-        PrintUnionRoomText(windowId, FONT_2, gText_UR_EggTrade, 68, y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_NORMAL, gText_UR_EggTrade, 68, y, colorIdx);
     }
     else
     {
         BlitMoveInfoIcon(windowId, type + 1, 68, y);
-        PrintUnionRoomText(windowId, FONT_2, gSpeciesNames[species], 118, y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_NORMAL, gSpeciesNames[species], 118, y, colorIdx);
         ConvertIntToDecimalStringN(levelStr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-        PrintUnionRoomText(windowId, FONT_2, levelStr, GetStringRightAlignXOffset(2, levelStr, 218), y, colorIdx);
+        PrintUnionRoomText(windowId, FONT_NORMAL, levelStr, GetStringRightAlignXOffset(2, levelStr, 218), y, colorIdx);
     }
 }
 

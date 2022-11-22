@@ -67,7 +67,7 @@ static void UnionRoomBattle_CreateTextPrinter(u8 windowId, const u8 * str, u8 x,
     s32 letterSpacing = 1;
     s32 lineSpacing = 1;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(sTextColors[0]));
-    AddTextPrinterParameterized4(windowId, FONT_3, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL_COPY_2, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
 }
 
 static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s32 speed)

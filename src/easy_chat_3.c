@@ -711,12 +711,12 @@ static bool8 ECInterfaceCmd_02(void)
     {
         if (*ecWord == 0xFFFF)
         {
-            stringWidth = GetStringWidth(FONT_1, sText_Underscore, 0) * 7;
+            stringWidth = GetStringWidth(FONT_NORMAL_COPY_1, sText_Underscore, 0) * 7;
         }
         else
         {
             CopyEasyChatWord(str, *ecWord);
-            stringWidth = GetStringWidth(FONT_1, str, 0);
+            stringWidth = GetStringWidth(FONT_NORMAL_COPY_1, str, 0);
         }
 
         trueStringWidth = stringWidth + 17;
@@ -1335,16 +1335,16 @@ static void PrintTitleText(void)
     if (titleText == NULL)
         return;
 
-    xOffset = (128 - GetStringWidth(FONT_1, titleText, 0)) / 2u;
+    xOffset = (128 - GetStringWidth(FONT_NORMAL_COPY_1, titleText, 0)) / 2u;
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    EC_AddTextPrinterParameterized2(0, FONT_1, titleText, xOffset, 0, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    EC_AddTextPrinterParameterized2(0, FONT_NORMAL_COPY_1, titleText, xOffset, 0, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void EC_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    if (fontId == FONT_1)
+    if (fontId == FONT_NORMAL_COPY_1)
         y += 2;
     AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
 }
@@ -1352,7 +1352,7 @@ static void EC_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str
 static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8 bg, u8 fg, u8 shadow)
 {
     u8 color[3];
-    if (fontId == FONT_1)
+    if (fontId == FONT_NORMAL_COPY_1)
         y += 2;
     color[0] = bg;
     color[1] = fg;
@@ -1392,17 +1392,17 @@ static void PrintECInterfaceTextById(u8 direction)
 
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     if (text1)
-        EC_AddTextPrinterParameterized(1, FONT_1, text1, 0, 0, TEXT_SKIP_DRAW, NULL);
+        EC_AddTextPrinterParameterized(1, FONT_NORMAL_COPY_1, text1, 0, 0, TEXT_SKIP_DRAW, NULL);
 
     if (text2)
-        EC_AddTextPrinterParameterized(1, FONT_1, text2, 0, 16, TEXT_SKIP_DRAW, NULL);
+        EC_AddTextPrinterParameterized(1, FONT_NORMAL_COPY_1, text2, 0, 16, TEXT_SKIP_DRAW, NULL);
 
     CopyWindowToVram(1, COPYWIN_FULL);
 }
 
 static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos)
 {
-    CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, FONT_1, 0, 2, 0x001, 14, initialCursorPos);
+    CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, FONT_NORMAL_COPY_1, 0, 2, 0x001, 14, initialCursorPos);
 }
 
 static void CreatePhraseFrameWindow(void)
@@ -1469,7 +1469,7 @@ static void PrintECFields(void)
         }
 
         *str = EOS;
-        EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, FONT_1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SKIP_DRAW, NULL);
+        EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, FONT_NORMAL_COPY_1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(sEasyChatGraphicsResources->windowId, COPYWIN_FULL);
@@ -1584,7 +1584,7 @@ static void PrintECGroupsMenu(void)
                 return;
             }
 
-            EC_AddTextPrinterParameterized(2, FONT_1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
+            EC_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
         }
 
         y += 16;
@@ -1596,7 +1596,7 @@ static void PrintEasyChatKeyboardText(void)
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardAlphabet); i++)
-        EC_AddTextPrinterParameterized(2, FONT_1, sEasyChatKeyboardAlphabet[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
+        EC_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_1, sEasyChatKeyboardAlphabet[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintECWordsMenu(void)
@@ -1670,7 +1670,7 @@ static void PrintECRowsWin2(u8 row, u8 remrow)
 
                 CopyEasyChatWordPadded(sEasyChatGraphicsResources->ecPaddedWordBuffer, easyChatWord, 0);
 
-                EC_AddTextPrinterParameterized(2, FONT_1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SKIP_DRAW, NULL);
+                EC_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SKIP_DRAW, NULL);
             }
         }
         y += 16;
@@ -2311,6 +2311,6 @@ static void CreateFooterWindow(void)
     template.baseBlock = 0x030;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    EC_AddTextPrinterParameterized(windowId, FONT_1, gText_DelAllCancelOk, 0, 0, 0, NULL);
+    EC_AddTextPrinterParameterized(windowId, FONT_NORMAL_COPY_1, gText_DelAllCancelOk, 0, 0, 0, NULL);
     PutWindowTilemap(windowId);
 }

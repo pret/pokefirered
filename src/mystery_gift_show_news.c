@@ -360,15 +360,15 @@ static void DrawNewsWindows(void)
     FillWindowPixelBuffer(sWonderNewsData->windowIds[WIN_BODY], 0);
 
     // Print title text
-    x = (224 - GetStringWidth(FONT_3, sWonderNewsData->titleText, GetFontAttribute(FONT_3, FONTATTR_LETTER_SPACING))) / 2;
+    x = (224 - GetStringWidth(FONT_NORMAL_COPY_2, sWonderNewsData->titleText, GetFontAttribute(FONT_NORMAL_COPY_2, FONTATTR_LETTER_SPACING))) / 2;
     if (x < 0)
         x = 0;
-    AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_TITLE], FONT_3, x, 6, sTextColorTable[sWonderNewsData->gfx->titleTextPal], 0, sWonderNewsData->titleText);
+    AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_TITLE], FONT_NORMAL_COPY_2, x, 6, sTextColorTable[sWonderNewsData->gfx->titleTextPal], 0, sWonderNewsData->titleText);
     
     // Print body text
     for (; i < WONDER_NEWS_BODY_TEXT_LINES; ++i)
     {
-        AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_BODY], FONT_3, 0,
+        AddTextPrinterParameterized3(sWonderNewsData->windowIds[WIN_BODY], FONT_NORMAL_COPY_2, 0,
                                      16 * i + 2,
                                      sTextColorTable[sWonderNewsData->gfx->bodyTextPal],
                                      0, sWonderNewsData->bodyText[i]);

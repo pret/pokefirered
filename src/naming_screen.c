@@ -743,7 +743,7 @@ static void DisplaySentToPCMessage(void)
     StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -1698,7 +1698,7 @@ static void HandleDpadMovement(struct Task *task)
 static void DrawNormalTextEntryBox(void)
 {
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_1, sNamingScreen->template->title, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL_COPY_1, sNamingScreen->template->title, 1, 1, 0, NULL);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
 
@@ -1709,7 +1709,7 @@ static void DrawMonTextEntryBox(void)
     StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
     StringAppendN(buffer, sNamingScreen->template->title, 15);
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_1, buffer, 1, 1, 0, NULL);
+    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL_COPY_1, buffer, 1, 1, 0, NULL);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
 
@@ -1762,7 +1762,7 @@ static void DrawGenderIcon(void)
             StringCopy(genderSymbol, gText_FemaleSymbol);
             gender = FEMALE;
         }
-        AddTextPrinterParameterized3(sNamingScreen->windows[2], FONT_2, 0x68, 1, sGenderColors[gender], TEXT_SKIP_DRAW, genderSymbol);
+        AddTextPrinterParameterized3(sNamingScreen->windows[2], FONT_NORMAL, 0x68, 1, sGenderColors[gender], TEXT_SKIP_DRAW, genderSymbol);
     }
 }
 
@@ -1898,7 +1898,7 @@ static void DrawTextEntry(void)
         temp[1] = gExpandedPlaceholder_Empty[0];
         extraWidth = (IsWideLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_2, temp, i * 8 + xpos + extraWidth, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, temp, i * 8 + xpos + extraWidth, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     TryDrawGenderIcon();
@@ -1940,7 +1940,7 @@ static void PrintKeyboardKeys(u8 window, u8 page)
     FillWindowPixelBuffer(window, sFillValues[page]);
 
     for (i = 0; i < KBROW_COUNT; i++)
-        AddTextPrinterParameterized3(window, FONT_1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
+        AddTextPrinterParameterized3(window, FONT_NORMAL_COPY_1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
 
     PutWindowTilemap(window);
 }
@@ -1980,10 +1980,10 @@ static void DrawKeyboardPageOnDeck(void)
 static void PrintControls(void)
 {
     const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
-    int strwidth = GetStringWidth(FONT_0, gText_MoveOkBack, 0);
+    int strwidth = GetStringWidth(FONT_SMALL, gText_MoveOkBack, 0);
 
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_BANNER], PIXEL_FILL(15));
-    AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_0, DISPLAY_WIDTH - 4 - strwidth, 0, color, 0, gText_MoveOkBack);
+    AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_SMALL, DISPLAY_WIDTH - 4 - strwidth, 0, color, 0, gText_MoveOkBack);
     PutWindowTilemap(sNamingScreen->windows[WIN_BANNER]);
     CopyWindowToVram(sNamingScreen->windows[WIN_BANNER], COPYWIN_FULL);
 }

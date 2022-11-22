@@ -265,11 +265,11 @@ static void DiplomaPrintText(void)
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gText_Diploma_Kanto);
     FillWindowPixelBuffer(WIN_TEXT, PIXEL_FILL(0));
     DynamicPlaceholderTextUtil_ExpandPlaceholders(str, gText_Diploma_Player);
-    width = GetStringWidth(FONT_2, str, -1);
-    AddTextPrinterParameterized3(WIN_TEXT, FONT_2, 120 - (width / 2), 4, sTextColors, TEXT_SKIP_DRAW, str);
+    width = GetStringWidth(FONT_NORMAL, str, -1);
+    AddTextPrinterParameterized3(WIN_TEXT, FONT_NORMAL, 120 - (width / 2), 4, sTextColors, TEXT_SKIP_DRAW, str);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(str, gText_Diploma_ThisDocument);
-    width = GetStringWidth(FONT_2, str, -1);
-    AddTextPrinterParameterized3(WIN_TEXT, FONT_2, 120 - (width / 2), 30, sTextColors, TEXT_SKIP_DRAW, str);
-    AddTextPrinterParameterized3(WIN_TEXT, FONT_2, 120, 105, sTextColors, 0, gText_Diploma_GameFreak);
+    width = GetStringWidth(FONT_NORMAL, str, -1);
+    AddTextPrinterParameterized3(WIN_TEXT, FONT_NORMAL, 120 - (width / 2), 30, sTextColors, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized3(WIN_TEXT, FONT_NORMAL, 120, 105, sTextColors, 0, gText_Diploma_GameFreak);
     PutWindowTilemap(WIN_TEXT);
 }

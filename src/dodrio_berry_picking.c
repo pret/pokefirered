@@ -3005,14 +3005,14 @@ static void PrintRecordsText(u8 windowId)
     LoadStdWindowGfx(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, FONT_2, sRecordsTexts[0], 1, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts[0], 1, 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < NUM_RECORD_TYPES; i++)
     {
         ConvertIntToDecimalStringN(strbuf, recordNums[i], STR_CONV_MODE_LEFT_ALIGN, sRecordNumMaxDigits[i]);
-        numWidth = GetStringWidth(FONT_2, strbuf, -1);
-        AddTextPrinterParameterized(windowId, FONT_2, sRecordsTexts[i + 1], 1, sRecordTextYCoords[i][0], TEXT_SKIP_DRAW, NULL);
+        numWidth = GetStringWidth(FONT_NORMAL, strbuf, -1);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts[i + 1], 1, sRecordTextYCoords[i][0], TEXT_SKIP_DRAW, NULL);
         x = DISPLAY_WIDTH - 16 - numWidth;
-        AddTextPrinterParameterized(windowId, FONT_2, strbuf, x, sRecordNumYCoords[i][0], TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, strbuf, x, sRecordNumYCoords[i][0], TEXT_SKIP_DRAW, NULL);
     }
     PutWindowTilemap(windowId);
 }
@@ -4371,7 +4371,7 @@ static void ShowNames(void)
         {
             colorsId = 0;
             playerId = GetPlayerIdByPos(i);
-            left = (56 - GetStringWidth(FONT_0, GetPlayerName(playerId), -1)) / 2u;
+            left = (56 - GetStringWidth(FONT_SMALL, GetPlayerName(playerId), -1)) / 2u;
             window.tilemapLeft = coords->left;
             window.tilemapTop = coords->top;
             sGfx->windowIds[i] = AddWindow(&window);
@@ -4380,7 +4380,7 @@ static void ShowNames(void)
             if (playerId == GetMultiplayerId())
                 colorsId = COLORID_BLUE;
             name = GetPlayerName(playerId);
-            AddTextPrinterParameterized3(sGfx->windowIds[i], FONT_0, left, 1, sTextColorTable[colorsId], TEXT_SKIP_DRAW, name);
+            AddTextPrinterParameterized3(sGfx->windowIds[i], FONT_SMALL, left, 1, sTextColorTable[colorsId], TEXT_SKIP_DRAW, name);
             CopyWindowToVram(sGfx->windowIds[i], COPYWIN_GFX);
             window.baseBlock += 0xE;
             DrawMessageWindow(&window);
@@ -4457,22 +4457,22 @@ static void PrintRankedScores(u8 numPlayers_)
     }
 
     // Print text
-    x = 216 - GetStringWidth(FONT_0, gText_SpacePoints, 0);
+    x = 216 - GetStringWidth(FONT_SMALL, gText_SpacePoints, 0);
     for (i = 0; i < numPlayers; i++)
     {
         u8 colorsId = COLORID_GRAY;
         u8 playerId = playersByRanking[i];
         u32 points = scoreResults[playerId].score;
 
-        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, sRankingTexts[scoreResults[playerId].ranking], 8, sRankingYCoords[i], TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, sRankingTexts[scoreResults[playerId].ranking], 8, sRankingYCoords[i], TEXT_SKIP_DRAW, NULL);
         if (playerId == GetMultiplayerId())
             colorsId =COLORID_BLUE;
         name = GetPlayerName(playerId);
-        AddTextPrinterParameterized3(sGfx->windowIds[1], FONT_0, 28, sRankingYCoords[i], sTextColorTable[colorsId], TEXT_SKIP_DRAW, name);
+        AddTextPrinterParameterized3(sGfx->windowIds[1], FONT_SMALL, 28, sRankingYCoords[i], sTextColorTable[colorsId], TEXT_SKIP_DRAW, name);
         ConvertIntToDecimalStringN(numString, points, STR_CONV_MODE_RIGHT_ALIGN, 7);
-        numWidth = GetStringWidth(FONT_0, numString, -1);
-        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, numString, x - 35, sRankingYCoords[i], TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, gText_SpacePoints, x, sRankingYCoords[i], TEXT_SKIP_DRAW, NULL);
+        numWidth = GetStringWidth(FONT_SMALL, numString, -1);
+        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, numString, x - 35, sRankingYCoords[i], TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, gText_SpacePoints, x, sRankingYCoords[i], TEXT_SKIP_DRAW, NULL);
     }
 }
 
@@ -4503,10 +4503,10 @@ static void ShowResults(void)
     case 2:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[1], PIXEL_FILL(1));
-        strWidth = GetStringWidth(FONT_0, gText_BerryPickingResults, -1);
+        strWidth = GetStringWidth(FONT_SMALL, gText_BerryPickingResults, -1);
         x = (DISPLAY_WIDTH - 16 - strWidth) / 2;
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_0, gText_BerryPickingResults, x, 2, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, gText_10P30P50P50P, 68, 16, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_SMALL, gText_BerryPickingResults, x, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, gText_10P30P50P50P, 68, 16, TEXT_SKIP_DRAW, NULL);
         for (i = 0; i < numPlayers; i++)
         {
             u8 colorsId = COLORID_GRAY;
@@ -4514,7 +4514,7 @@ static void ShowResults(void)
                 colorsId = COLORID_BLUE;
 
             name = GetPlayerName(i);
-            AddTextPrinterParameterized3(sGfx->windowIds[1], FONT_0, 2, sResultsYCoords[i], sTextColorTable[colorsId], TEXT_SKIP_DRAW, name);
+            AddTextPrinterParameterized3(sGfx->windowIds[1], FONT_SMALL, 2, sResultsYCoords[i], sTextColorTable[colorsId], TEXT_SKIP_DRAW, name);
             for (j = 0; j < 4; j++)
             {
                 u32 width;
@@ -4522,13 +4522,13 @@ static void ShowResults(void)
                 u16 maxBerriesPicked = Min(GetHighestBerryResult(j), MAX_BERRIES);
 
                 ConvertIntToDecimalStringN(strBuff_Large, berriesPicked, STR_CONV_MODE_LEFT_ALIGN, 4);
-                width = GetStringWidth(FONT_0, strBuff_Large, -1);
+                width = GetStringWidth(FONT_SMALL, strBuff_Large, -1);
                 
                 // If player got the most of a berry type, highlight their number in red
                 if (maxBerriesPicked == berriesPicked && maxBerriesPicked != 0)
-                    AddTextPrinterParameterized3(sGfx->windowIds[1], FONT_0, sResultsXCoords[j] - width, sResultsYCoords[i], sTextColorTable[1], TEXT_SKIP_DRAW, strBuff_Large);
+                    AddTextPrinterParameterized3(sGfx->windowIds[1], FONT_SMALL, sResultsXCoords[j] - width, sResultsYCoords[i], sTextColorTable[1], TEXT_SKIP_DRAW, strBuff_Large);
                 else
-                    AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, strBuff_Large, sResultsXCoords[j] - width, sResultsYCoords[i], TEXT_SKIP_DRAW, NULL);
+                    AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, strBuff_Large, sResultsXCoords[j] - width, sResultsYCoords[i], TEXT_SKIP_DRAW, NULL);
             }
         }
         CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
@@ -4557,9 +4557,9 @@ static void ShowResults(void)
     case 5:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[1], PIXEL_FILL(1));
-        strWidth = GetStringWidth(FONT_0, gText_AnnouncingRankings, -1);
+        strWidth = GetStringWidth(FONT_SMALL, gText_AnnouncingRankings, -1);
         x = (DISPLAY_WIDTH - 16 - strWidth) / 2;
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_0, gText_AnnouncingRankings, x, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_SMALL, gText_AnnouncingRankings, x, 2, TEXT_SKIP_DRAW, NULL);
         sGfx->state++;
         break;
     case 6:
@@ -4603,14 +4603,14 @@ static void ShowResults(void)
         PlayNewMapMusic(MUS_LEVEL_UP);
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[1], PIXEL_FILL(1));
-        strWidth = GetStringWidth(FONT_0, gText_AnnouncingPrizes, -1);
+        strWidth = GetStringWidth(FONT_SMALL, gText_AnnouncingPrizes, -1);
         x = (DISPLAY_WIDTH - 16 - strWidth) / 2;
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_0, gText_AnnouncingPrizes, x, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_SMALL, gText_AnnouncingPrizes, x, 2, TEXT_SKIP_DRAW, NULL);
         DynamicPlaceholderTextUtil_Reset();
         CopyItemName(GetPrizeItemId(), strBuff_Small);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, strBuff_Small);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(strBuff_Large, gText_FirstPlacePrize);
-        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, strBuff_Large, 8, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, strBuff_Large, 8, 2, TEXT_SKIP_DRAW, NULL);
         prizeState = TryGivePrize();
         if (prizeState != PRIZE_RECEIVED && prizeState != NO_PRIZE)
         {
@@ -4621,7 +4621,7 @@ static void ShowResults(void)
                 DynamicPlaceholderTextUtil_ExpandPlaceholders(strBuff_Large, gText_CantHoldAnyMore);
             else if (prizeState == PRIZE_FILLED_BAG)
                 DynamicPlaceholderTextUtil_ExpandPlaceholders(strBuff_Large, gText_FilledStorageSpace);
-            AddTextPrinterParameterized(sGfx->windowIds[1], FONT_0, strBuff_Large, 8, 40, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(sGfx->windowIds[1], FONT_SMALL, strBuff_Large, 8, 40, TEXT_SKIP_DRAW, NULL);
         }
         CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
         CopyWindowToVram(sGfx->windowIds[1], COPYWIN_GFX);
@@ -4679,10 +4679,10 @@ static void Msg_WantToPlayAgain(void)
         // Print text
         FillWindowPixelBuffer(sGfx->windowIds[WIN_PLAY_AGAIN], PIXEL_FILL(1));
         FillWindowPixelBuffer(sGfx->windowIds[WIN_YES_NO], PIXEL_FILL(1));
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_PLAY_AGAIN], FONT_2, gText_WantToPlayAgain, 0, 6, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_2, gText_Yes, 8, 2, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_2, gText_No, 8, 16, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_2, gText_SelectorArrow2, 0, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_PLAY_AGAIN], FONT_NORMAL, gText_WantToPlayAgain, 0, 6, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_Yes, 8, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_No, 8, 16, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_SelectorArrow2, 0, 2, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sGfx->windowIds[WIN_PLAY_AGAIN], COPYWIN_GFX);
         CopyWindowToVram(sGfx->windowIds[WIN_YES_NO], COPYWIN_GFX);
         sGfx->state++;
@@ -4703,9 +4703,9 @@ static void Msg_WantToPlayAgain(void)
         if (y == PLAY_AGAIN_NONE)
             y = PLAY_AGAIN_YES;
         FillWindowPixelBuffer(sGfx->windowIds[WIN_YES_NO], PIXEL_FILL(1));
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_2, gText_Yes, 8, 2, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_2, gText_No, 8, 16, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_2, gText_SelectorArrow2, 0, y == 1 ? 2 : 16, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_Yes, 8, 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_No, 8, 16, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[WIN_YES_NO], FONT_NORMAL, gText_SelectorArrow2, 0, y == 1 ? 2 : 16, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sGfx->windowIds[WIN_YES_NO], COPYWIN_FULL);
 
         // Increment state only if A or B button have been pressed.
@@ -4758,7 +4758,7 @@ static void Msg_SavingDontTurnOff(void)
     {
     case 0:
         DrawDialogueFrame(0, FALSE);
-        AddTextPrinterParameterized2(0, FONT_2, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         sGfx->state++;
         break;
     case 1:
@@ -4796,7 +4796,7 @@ static void Msg_CommunicationStandby(void)
         break;
     case 1:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_2, gText_CommunicationStandby3, 0, 6, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_CommunicationStandby3, 0, 6, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
         sGfx->state++;
         break;
@@ -4836,7 +4836,7 @@ static void Msg_SomeoneDroppedOut(void)
         break;
     case 1:
         FillWindowPixelBuffer(sGfx->windowIds[0], PIXEL_FILL(1));
-        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_2, gText_SomeoneDroppedOut, 0, 6, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sGfx->windowIds[0], FONT_NORMAL, gText_SomeoneDroppedOut, 0, 6, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(sGfx->windowIds[0], COPYWIN_GFX);
         sGfx->state++;
         break;

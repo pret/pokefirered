@@ -2108,8 +2108,8 @@ void AddMenu(void)
     gStorage->menuWindowId = AddWindow(&gStorage->menuWindow);
     ClearWindowTilemap(gStorage->menuWindowId);
     DrawStdFrameWithCustomTileAndPalette(gStorage->menuWindowId, FALSE, 11, 14);
-    PrintTextArray(gStorage->menuWindowId, FONT_1, 8, 2, 16, gStorage->menuItemsCount, (void *)gStorage->menuItems);
-    Menu_InitCursor(gStorage->menuWindowId, FONT_1, 0, 2, 16, gStorage->menuItemsCount, 0);
+    PrintTextArray(gStorage->menuWindowId, FONT_NORMAL_COPY_1, 8, 2, 16, gStorage->menuItemsCount, (void *)gStorage->menuItems);
+    Menu_InitCursor(gStorage->menuWindowId, FONT_NORMAL_COPY_1, 0, 2, 16, gStorage->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     gStorage->menuUnusedField = 0;
 }

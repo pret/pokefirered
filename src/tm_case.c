@@ -664,7 +664,7 @@ static void InitTMCaseListMenuItems(void)
     gMultiuseListMenuTemplate.itemVerticalPadding = 2;
     gMultiuseListMenuTemplate.upText_Y = 2;
     gMultiuseListMenuTemplate.maxShowed = sTMCaseDynamicResources->maxTMsShown;
-    gMultiuseListMenuTemplate.fontId = FONT_2;
+    gMultiuseListMenuTemplate.fontId = FONT_NORMAL;
     gMultiuseListMenuTemplate.cursorPal = 2;
     gMultiuseListMenuTemplate.fillValue = 0;
     gMultiuseListMenuTemplate.cursorShadowPal = 3;
@@ -676,7 +676,7 @@ static void InitTMCaseListMenuItems(void)
 
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
 {
-    StringCopy(gStringVar4, gText_Font0);
+    StringCopy(gStringVar4, gText_FontSmall);
     if (itemId >= ITEM_HM01)
     {
         StringAppend(gStringVar4, sText_ClearTo18);
@@ -691,7 +691,7 @@ static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
         StringAppend(gStringVar4, gStringVar1);
     }
     StringAppend(gStringVar4, sText_SingleSpace);
-    StringAppend(gStringVar4, gText_Font2);
+    StringAppend(gStringVar4, gText_FontNormal);
     StringAppend(gStringVar4, gMoveNames[ItemIdToBattleMoveId(itemId)]);
     StringCopy(dest, gStringVar4);
 }
@@ -722,7 +722,7 @@ static void List_ItemPrintFunc(u8 windowId, u32 itemIndex, u8 y)
         {
             ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_CASE, itemIndex), STR_CONV_MODE_RIGHT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-            TMCase_Print(windowId, FONT_0, gStringVar4, 126, y, 0, 0, TEXT_SKIP_DRAW, COLOR_DARK);
+            TMCase_Print(windowId, FONT_SMALL, gStringVar4, 126, y, 0, 0, TEXT_SKIP_DRAW, COLOR_DARK);
         }
         else
         {
@@ -739,7 +739,7 @@ static void PrintDescription(s32 itemIndex)
     else
         str = gText_TMCaseWillBePutAway;
     FillWindowPixelBuffer(WIN_DESCRIPTION, 0);
-    TMCase_Print(WIN_DESCRIPTION, FONT_2, str, 2, 3, 1, 0, 0, COLOR_LIGHT);
+    TMCase_Print(WIN_DESCRIPTION, FONT_NORMAL, str, 2, 3, 1, 0, 0, COLOR_LIGHT);
 }
 
 // Darkens (or subsequently lightens) the blue bg tiles around the description window when a TM/HM is selected.
@@ -760,12 +760,12 @@ static void PrintListCursorAtRow(u8 y, u8 colorIdx)
     if (colorIdx == COLOR_CURSOR_ERASE)
     {
         // Never used. Would erase cursor (but also a portion of the list text)
-        FillWindowPixelRect(WIN_LIST, 0, 0, y, GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_WIDTH), GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT));
+        FillWindowPixelRect(WIN_LIST, 0, 0, y, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH), GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT));
         CopyWindowToVram(WIN_LIST, COPYWIN_GFX);
     }
     else
     {
-        TMCase_Print(WIN_LIST, FONT_2, gText_SelectorArrow2, 0, y, 0, 0, 0, colorIdx);
+        TMCase_Print(WIN_LIST, FONT_NORMAL, gText_SelectorArrow2, 0, y, 0, 0, 0, colorIdx);
     }
 }
 
@@ -963,22 +963,22 @@ static void Task_SelectedTMHM_Field(u8 taskId)
 
     // Print context window actions
     AddItemMenuActionTextPrinters(sTMCaseDynamicResources->contextMenuWindowId,
-                                  FONT_2,
-                                  GetMenuCursorDimensionByFont(FONT_2, 0),
+                                  FONT_NORMAL,
+                                  GetMenuCursorDimensionByFont(FONT_NORMAL, 0),
                                   2,
                                   0,
-                                  GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 2,
+                                  GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2,
                                   sTMCaseDynamicResources->numMenuActions,
                                   sMenuActions,
                                   sTMCaseDynamicResources->menuActionIndices);
 
-    Menu_InitCursor(sTMCaseDynamicResources->contextMenuWindowId, FONT_2, 0, 2, GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sTMCaseDynamicResources->numMenuActions, 0);
+    Menu_InitCursor(sTMCaseDynamicResources->contextMenuWindowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sTMCaseDynamicResources->numMenuActions, 0);
     
     // Print label text next to the context window
     strbuf = Alloc(256);
     GetTMNumberAndMoveString(strbuf, gSpecialVar_ItemId);
     StringAppend(strbuf, gText_Var1IsSelected + 2); // +2 skips over the stringvar
-    TMCase_Print(WIN_SELECTED_MSG, FONT_2, strbuf, 0, 2, 1, 0, 0, COLOR_DARK);
+    TMCase_Print(WIN_SELECTED_MSG, FONT_NORMAL, strbuf, 0, 2, 1, 0, 0, COLOR_DARK);
     Free(strbuf);
     if (IS_HM(gSpecialVar_ItemId))
     {
@@ -1068,14 +1068,14 @@ static void Action_Give(u8 taskId)
 
 static void PrintError_ThereIsNoPokemon(u8 taskId)
 {
-    PrintMessageWithFollowupTask(taskId, FONT_2, gText_ThereIsNoPokemon, Task_WaitButtonAfterErrorPrint);
+    PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gText_ThereIsNoPokemon, Task_WaitButtonAfterErrorPrint);
 }
 
 static void PrintError_ItemCantBeHeld(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_ItemCantBeHeld);
-    PrintMessageWithFollowupTask(taskId, FONT_2, gStringVar4, Task_WaitButtonAfterErrorPrint);
+    PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gStringVar4, Task_WaitButtonAfterErrorPrint);
 }
 
 static void Task_WaitButtonAfterErrorPrint(u8 taskId)
@@ -1221,7 +1221,7 @@ static void Task_InitQuantitySelectUI(u8 taskId)
     TMCase_SetWindowBorder1(WIN_SELL_QUANTITY);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-    TMCase_Print(WIN_SELL_QUANTITY, FONT_0, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
+    TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
     SellTM_PrintQuantityAndSalePrice(1, ItemId_GetPrice(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelection)) / 2 * tQuantitySelected);
     PrintPlayersMoney();
     CreateQuantityScrollArrows();
@@ -1235,7 +1235,7 @@ static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 amount)
     FillWindowPixelBuffer(WIN_SELL_QUANTITY, 0x11);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-    TMCase_Print(WIN_SELL_QUANTITY, FONT_0, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
+    TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
     PrintMoneyAmount(WIN_SELL_QUANTITY, 0x38, 0x0A, amount, 0);
 }
 
@@ -1282,7 +1282,7 @@ static void Task_PrintSaleConfirmedText(u8 taskId)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar3, ItemId_GetPrice(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelection)) / 2 * tQuantitySelected, STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
-    PrintMessageWithFollowupTask(taskId, FONT_2, gStringVar4, Task_DoSaleOfTMs);
+    PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gStringVar4, Task_DoSaleOfTMs);
 }
 
 static void Task_DoSaleOfTMs(u8 taskId)
@@ -1418,7 +1418,7 @@ static void Task_Pokedude_Run(u8 taskId)
         break;
     case 8:
         SetDescriptionWindowShade(1);
-        PrintMessageWithFollowupTask(taskId, FONT_4, gPokedudeText_TMTypes, NULL);
+        PrintMessageWithFollowupTask(taskId, FONT_MALE, gPokedudeText_TMTypes, NULL);
         gTasks[taskId].func = Task_Pokedude_Run;
         tPokedudeState++;
         break;
@@ -1440,7 +1440,7 @@ static void Task_Pokedude_Run(u8 taskId)
         break;
     case 18:
         SetDescriptionWindowShade(1);
-        PrintMessageWithFollowupTask(taskId, FONT_4, gPokedudeText_ReadTMDescription, NULL);
+        PrintMessageWithFollowupTask(taskId, FONT_MALE, gPokedudeText_ReadTMDescription, NULL);
         gTasks[taskId].func = Task_Pokedude_Run; // this function
         tPokedudeState++;
         break;
@@ -1523,8 +1523,8 @@ static void PrintMessageWithFollowupTask(u8 taskId, u8 fontId, const u8 * str, T
 
 static void PrintTitle(void)
 {
-    u32 distance = 72 - GetStringWidth(FONT_1, gText_TMCase, 0);
-    AddTextPrinterParameterized3(WIN_TITLE, FONT_1, distance / 2, 1, sTextColors[COLOR_LIGHT], 0, gText_TMCase);
+    u32 distance = 72 - GetStringWidth(FONT_NORMAL_COPY_1, gText_TMCase, 0);
+    AddTextPrinterParameterized3(WIN_TITLE, FONT_NORMAL_COPY_1, distance / 2, 1, sTextColors[COLOR_LIGHT], 0, gText_TMCase);
 }
 
 static void DrawMoveInfoLabels(void)
@@ -1546,7 +1546,7 @@ static void PrintMoveInfo(u16 itemId)
     if (itemId == ITEM_NONE)
     {
         for (i = 0; i < 4; i++)
-            TMCase_Print(WIN_MOVE_INFO, FONT_3, gText_ThreeHyphens, 7, 12 * i, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
+            TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, gText_ThreeHyphens, 7, 12 * i, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
         CopyWindowToVram(WIN_MOVE_INFO, COPYWIN_GFX);
     }
     else
@@ -1563,7 +1563,7 @@ static void PrintMoveInfo(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             str = gStringVar1;
         }
-        TMCase_Print(WIN_MOVE_INFO, FONT_3, str, 7, 12, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
+        TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, str, 7, 12, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
 
         // Print accuracy
         if (gBattleMoves[move].accuracy == 0)
@@ -1573,11 +1573,11 @@ static void PrintMoveInfo(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             str = gStringVar1;
         }
-        TMCase_Print(WIN_MOVE_INFO, FONT_3, str, 7, 24, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
+        TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, str, 7, 24, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
 
         // Print PP
         ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        TMCase_Print(WIN_MOVE_INFO, FONT_3, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
+        TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
 
         CopyWindowToVram(WIN_MOVE_INFO, COPYWIN_GFX);
     }
@@ -1595,7 +1595,7 @@ static void PrintPlayersMoney(void)
 
 static void HandleCreateYesNoMenu(u8 taskId, const struct YesNoFuncTable *ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sYesNoWindowTemplate, FONT_2, 0, 2, 91, 14, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sYesNoWindowTemplate, FONT_NORMAL, 0, 2, 91, 14, ptrs);
 }
 
 static u8 AddContextMenu(u8 * windowId, u8 windowIndex)

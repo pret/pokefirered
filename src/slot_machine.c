@@ -1988,11 +1988,11 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         FillWindowPixelBuffer(1, 0xFF);
         PutWindowTilemap(1);
 
-        x = 236 - GetStringWidth(FONT_0, gString_SlotMachineControls, 0);
+        x = 236 - GetStringWidth(FONT_SMALL, gString_SlotMachineControls, 0);
         textColor[0] = TEXT_DYNAMIC_COLOR_6;
         textColor[1] = TEXT_COLOR_WHITE;
         textColor[2] = TEXT_COLOR_DARK_GRAY;
-        AddTextPrinterParameterized3(1, FONT_0, x, 0, textColor, 0, gString_SlotMachineControls);
+        AddTextPrinterParameterized3(1, FONT_SMALL, x, 0, textColor, 0, gString_SlotMachineControls);
         CopyBgTilemapBufferToVram(0);
 
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | 0x20 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -2265,7 +2265,7 @@ static void Slot_PrintOnWindow0(const u8 * str)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     PutWindowTilemap(0);
     DrawTextBorderOuter(0, 0x001, 15);
-    AddTextPrinterParameterized5(0, FONT_2, str, 1, 2, TEXT_SKIP_DRAW, NULL, 1, 2);
+    AddTextPrinterParameterized5(0, FONT_NORMAL, str, 1, 2, TEXT_SKIP_DRAW, NULL, 1, 2);
 }
 
 static void Slot_ClearWindow0(void)
@@ -2387,7 +2387,7 @@ static void SignalStopWinningLineFlashTask(void)
 
 static void Slot_CreateYesNoMenu(u8 cursorPos)
 {
-    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_2, 0, 2, 10, 13, cursorPos);
+    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_NORMAL, 0, 2, 10, 13, cursorPos);
     Menu_MoveCursorNoWrapAround(cursorPos);
     GetSlotMachineSetupTaskDataPtr()->yesNoMenuActive = TRUE;
 }

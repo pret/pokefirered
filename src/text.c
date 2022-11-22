@@ -20,17 +20,21 @@ static const u8 sTinyDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow
 static const u8 sDoubleArrowTiles1[]       = INCBIN_U8("graphics/fonts/down_arrow_3.4bpp");
 static const u8 sDoubleArrowTiles2[]       = INCBIN_U8("graphics/fonts/down_arrow_4.4bpp");
 
-static const u8 sDownArrowYCoords[]           = { 0x0, 0x10, 0x20, 0x10 };
-static const u8 sWindowVerticalScrollSpeeds[] = { 0x1, 0x2 , 0x4 , 0x0 };
+static const u8 sDownArrowYCoords[]           = { 0, 16, 32, 16 };
+static const u8 sWindowVerticalScrollSpeeds[] = {
+    [OPTIONS_TEXT_SPEED_SLOW] = 1,
+    [OPTIONS_TEXT_SPEED_MID] = 2,
+    [OPTIONS_TEXT_SPEED_FAST] = 4,
+};
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] = {
-    { 0x0, GetGlyphWidthFont0 },
-    { 0x1, GetGlyphWidthFont1 },
-    { 0x2, GetGlyphWidthFont2 },
-    { 0x3, GetGlyphWidthFont3 },
-    { 0x4, GetGlyphWidthFont4 },
-    { 0x5, GetGlyphWidthFont5 },
-    { 0x6, GetGlyphWidthFont6 }
+    { FONT_0, GetGlyphWidthFont0 },
+    { FONT_1, GetGlyphWidthFont1 },
+    { FONT_2, GetGlyphWidthFont2 },
+    { FONT_3, GetGlyphWidthFont3 },
+    { FONT_4, GetGlyphWidthFont4 },
+    { FONT_5, GetGlyphWidthFont5 },
+    { FONT_BRAILLE, GetGlyphWidthFont6 }
 };
 
 static const struct SpriteSheet sUnknown_81EA68C[] =
@@ -57,20 +61,26 @@ static const struct SpriteTemplate sUnknown_81EA6B4 =
     .callback = sub_80062B0,
 };
 
-static const struct KeypadIcon sKeypadIcons[] = {
-    {  0x0,  0x8, 0xC },
-    {  0x1,  0x8, 0xC },
-    {  0x2, 0x10, 0xC },
-    {  0x4, 0x10, 0xC },
-    {  0x6, 0x18, 0xC },
-    {  0x9, 0x18, 0xC },
-    {  0xC,  0x8, 0xC },
-    {  0xD,  0x8, 0xC },
-    {  0xE,  0x8, 0xC },
-    {  0xF,  0x8, 0xC },
-    { 0x20,  0x8, 0xC },
-    { 0x21,  0x8, 0xC },
-    { 0x22,  0x8, 0xC },
+struct
+{
+    u16 tileOffset;
+    u8 width;
+    u8 height;
+} static const sKeypadIcons[] =
+{
+    [CHAR_A_BUTTON]       = {  0x0,  8, 12 },
+    [CHAR_B_BUTTON]       = {  0x1,  8, 12 },
+    [CHAR_L_BUTTON]       = {  0x2, 16, 12 },
+    [CHAR_R_BUTTON]       = {  0x4, 16, 12 },
+    [CHAR_START_BUTTON]   = {  0x6, 24, 12 },
+    [CHAR_SELECT_BUTTON]  = {  0x9, 24, 12 },
+    [CHAR_DPAD_UP]        = {  0xC,  8, 12 },
+    [CHAR_DPAD_DOWN]      = {  0xD,  8, 12 },
+    [CHAR_DPAD_LEFT]      = {  0xE,  8, 12 },
+    [CHAR_DPAD_RIGHT]     = {  0xF,  8, 12 },
+    [CHAR_DPAD_UPDOWN]    = { 0x20,  8, 12 },
+    [CHAR_DPAD_LEFTRIGHT] = { 0x21,  8, 12 },
+    [CHAR_DPAD_NONE]      = { 0x22,  8, 12 },
 };
 
 const u8 gKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
@@ -694,7 +704,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 textPrinter->state = 6;
                 return 2;
-            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
                 textPrinter->state = 1;
                 if (gTextFlags.autoScroll)
                     subStruct->autoScrollDelay = 0;
@@ -732,10 +742,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_FILL_WINDOW:
                 FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 return 2;
-            case EXT_CTRL_CODE_STOP_BGM:
+            case EXT_CTRL_CODE_PAUSE_MUSIC:
                 m4aMPlayStop(&gMPlayInfo_BGM);
                 return 2;
-            case EXT_CTRL_CODE_RESUME_BGM:
+            case EXT_CTRL_CODE_RESUME_MUSIC:
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 return 2;
             case EXT_CTRL_CODE_CLEAR:
@@ -955,7 +965,7 @@ static s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpaci
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
@@ -964,7 +974,7 @@ static s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpaci
                 break;
             }
             break;
-        case CHAR_DYNAMIC_PLACEHOLDER:
+        case CHAR_DYNAMIC:
         case PLACEHOLDER_BEGIN:
             ++strPos;
             break;
@@ -1053,7 +1063,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 default:
                     return 0;
             }
-        case CHAR_DYNAMIC_PLACEHOLDER:
+        case CHAR_DYNAMIC:
             if (bufferPointer == NULL)
                 bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
             while (*bufferPointer != EOS)
@@ -1087,7 +1097,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_SHIFT_DOWN:
                 ++str;
             case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
                 break;
@@ -1231,7 +1241,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
@@ -1240,7 +1250,7 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, int a
                 continue;
             }
             break;
-        case CHAR_DYNAMIC_PLACEHOLDER:
+        case CHAR_DYNAMIC:
         case CHAR_KEYPAD_ICON:
         case CHAR_EXTRA_SYMBOL:
         case PLACEHOLDER_BEGIN:

@@ -73,16 +73,14 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
     if (!gFonts)
         return FALSE;
 
-    sTempTextPrinter.active = 1;
-    sTempTextPrinter.state = 0;
+    sTempTextPrinter.active = TRUE;
+    sTempTextPrinter.state = RENDER_STATE_HANDLE_CHAR;
     sTempTextPrinter.textSpeed = speed;
     sTempTextPrinter.delayCounter = 0;
     sTempTextPrinter.scrollDistance = 0;
 
-    for (i = 0; i < 7; ++i)
-    {
+    for (i = 0; i < (int)ARRAY_COUNT(sTempTextPrinter.subUnion.fields); ++i)
         sTempTextPrinter.subUnion.fields[i] = 0;
-    }
 
     sTempTextPrinter.printerTemplate = *textSubPrinter;
     sTempTextPrinter.callback = callback;
@@ -90,7 +88,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
     sTempTextPrinter.japanese = 0;
 
     GenerateFontHalfRowLookupTable(textSubPrinter->fgColor, textSubPrinter->bgColor, textSubPrinter->shadowColor);
-    if (speed != TEXT_SKIP_DRAW && speed != 0x0)
+    if (speed != TEXT_SKIP_DRAW && speed != 0)
     {
         --sTempTextPrinter.textSpeed;
         sTextPrinters[textSubPrinter->windowId] = sTempTextPrinter;
@@ -98,15 +96,18 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
     else
     {
         sTempTextPrinter.textSpeed = 0;
+        
+        // Render all text (up to limit) at once
         for (j = 0; j < 0x400; ++j)
         {
-            if ((u32)RenderFont(&sTempTextPrinter) == 1)
+            if (RenderFont(&sTempTextPrinter) == RENDER_FINISH)
                 break;
         }
 
+        // All the text is rendered to the window but don't draw it yet.
         if (speed != TEXT_SKIP_DRAW)
           CopyWindowToVram(sTempTextPrinter.printerTemplate.windowId, COPYWIN_GFX);
-        sTextPrinters[textSubPrinter->windowId].active = 0;
+        sTextPrinters[textSubPrinter->windowId].active = FALSE;
     }
     return TRUE;
 }
@@ -114,23 +115,23 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void
 void RunTextPrinters(void)
 {
     int i;
-    u16 temp;
 
-    for (i = 0; i < 0x20; ++i)
+    for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
     {
-        if (sTextPrinters[i].active != 0)
+        if (sTextPrinters[i].active)
         {
-            temp = RenderFont(&sTextPrinters[i]);
-            switch (temp) {
-                case 0:
-                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
-                case 3:
-                    if (sTextPrinters[i].callback != 0)
-                        sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
-                    break;
-                case 1:
-                    sTextPrinters[i].active = 0;
-                    break;
+            u16 renderCmd = RenderFont(&sTextPrinters[i]);
+            switch (renderCmd)
+            {
+            case RENDER_PRINT:
+                CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
+            case RENDER_UPDATE:
+                if (sTextPrinters[i].callback != NULL)
+                    sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderCmd);
+                break;
+            case RENDER_FINISH:
+                sTextPrinters[i].active = FALSE;
+                break;
             }
         }
     }

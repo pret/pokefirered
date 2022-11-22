@@ -1454,7 +1454,7 @@ static void PrintECFields(void)
                 for (k = 0; k < 7; k++)
                 {
                     *str++ = CHAR_EXTRA_SYMBOL;
-                    *str++ = 9;
+                    *str++ = CHAR_UNDERSCORE;
                 }
 
                 str = WriteColorChangeControlCode(str, 0, TEXT_COLOR_DARK_GRAY);

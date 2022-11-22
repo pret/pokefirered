@@ -479,7 +479,7 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
             case EXT_CTRL_CODE_SHIFT_DOWN:
                 src++;
             case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_WAIT_BUTTON:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_WAIT_SE:
             case EXT_CTRL_CODE_FILL_WINDOW:
                 break;

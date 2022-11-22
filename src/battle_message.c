@@ -2195,7 +2195,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
              || *src == B_TXT_TRAINER2_LOSE_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
             {
                 dst[dstId++] = EXT_CTRL_CODE_BEGIN;
-                dst[dstId++] = EXT_CTRL_CODE_WAIT_BUTTON;
+                dst[dstId++] = EXT_CTRL_CODE_PAUSE_UNTIL_PRESS;
             }
         }
         else

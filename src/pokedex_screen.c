@@ -2735,20 +2735,20 @@ void DexScreen_PrintMonHeight(u8 windowId, u16 species, u8 x, u8 y)
             buffer[i++] = feet / 10 + CHAR_0;
             buffer[i++] = feet % 10 + CHAR_0;
         }
-        buffer[i++] = CHAR_SGL_QUOT_RIGHT;
+        buffer[i++] = CHAR_SGL_QUOTE_RIGHT;
         buffer[i++] = inches / 10 + CHAR_0;
         buffer[i++] = inches % 10 + CHAR_0;
-        buffer[i++] = CHAR_DBL_QUOT_RIGHT;
+        buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
         buffer[i++] = EOS;
     }
     else
     {
         buffer[i++] = CHAR_QUESTION_MARK;
         buffer[i++] = CHAR_QUESTION_MARK;
-        buffer[i++] = CHAR_SGL_QUOT_RIGHT;
+        buffer[i++] = CHAR_SGL_QUOTE_RIGHT;
         buffer[i++] = CHAR_QUESTION_MARK;
         buffer[i++] = CHAR_QUESTION_MARK;
-        buffer[i++] = CHAR_DBL_QUOT_RIGHT;
+        buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     }
 
     buffer[i++] = EOS;

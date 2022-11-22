@@ -355,7 +355,7 @@ static void BufferCardText(void)
         // Copy stat texts
         for (i = 0, charsUntilStat = 0; i < WONDER_CARD_TEXT_LENGTH; i++)
         {
-            if (sWonderCardData->card.footerLine2Text[i] != CHAR_DYNAMIC_PLACEHOLDER)
+            if (sWonderCardData->card.footerLine2Text[i] != CHAR_DYNAMIC)
             {
                 // Regular text, just copy as is
                 sWonderCardData->statTextData[sWonderCardData->recordIdx].statText[charsUntilStat] = sWonderCardData->card.footerLine2Text[i];

@@ -6,6 +6,10 @@
 #include "dynamic_placeholder_text_util.h"
 #include "constants/songs.h"
 
+#define TAG_CURSOR 0x8000
+
+#define CURSOR_DELAY 8
+
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 
 static void DecompressGlyph_NormalCopy1(u16 glyphId, bool32 isJapanese);
@@ -18,6 +22,7 @@ static s32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese);
 static s32 GetGlyphWidth_NormalCopy2(u16 glyphId, bool32 isJapanese);
 static s32 GetGlyphWidth_Male(u16 glyphId, bool32 isJapanese);
 static s32 GetGlyphWidth_Female(u16 glyphId, bool32 isJapanese);
+static void SpriteCB_TextCursor(struct Sprite *sprite);
 
 TextFlags gTextFlags;
 
@@ -45,28 +50,28 @@ static const struct GlyphWidthFunc sGlyphWidthFuncs[] = {
     { FONT_BRAILLE,       GetGlyphWidth_Braille }
 };
 
-static const struct SpriteSheet sUnknown_81EA68C[] =
+static const struct SpriteSheet sSpriteSheets_TextCursor[] =
 {
-    {sDoubleArrowTiles1, sizeof(sDoubleArrowTiles1), 0x8000},
-    {sDoubleArrowTiles2, sizeof(sDoubleArrowTiles2), 0x8000},
+    {sDoubleArrowTiles1, sizeof(sDoubleArrowTiles1), TAG_CURSOR},
+    {sDoubleArrowTiles2, sizeof(sDoubleArrowTiles2), TAG_CURSOR},
     {NULL}
 };
 
-static const struct SpritePalette sUnknown_81EA6A4[] =
+static const struct SpritePalette sSpritePalettes_TextCursor[] =
 {
-    {gStandardMenuPalette, 0x8000},
+    {gStandardMenuPalette, TAG_CURSOR},
     {NULL}
 };
 
-static const struct SpriteTemplate sUnknown_81EA6B4 =
+static const struct SpriteTemplate sSpriteTemplate_TextCursor =
 {
-    .tileTag = 0x8000,
-    .paletteTag = 0x8000,
+    .tileTag = TAG_CURSOR,
+    .paletteTag = TAG_CURSOR,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80062B0,
+    .callback = SpriteCB_TextCursor,
 };
 
 struct
@@ -509,7 +514,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 12);
             CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
 
-            subStruct->downArrowDelay = 0x8;
+            subStruct->downArrowDelay = CURSOR_DELAY;
             subStruct->downArrowYPosIdx = (*(u32 *)subStruct << 17 >> 30) + 1;
         }
     }
@@ -616,7 +621,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
                 10,
                 12);
             CopyWindowToVram(windowId, 0x2);
-            *counter = 8;
+            *counter = CURSOR_DELAY;
             ++*yCoordIndex;
         }
     }
@@ -1277,7 +1282,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, 
 #define sDelay data[0]
 #define sState data[1]
 
-void sub_80062B0(struct Sprite *sprite)
+static void SpriteCB_TextCursor(struct Sprite *sprite)
 {
     if (sprite->sDelay)
     {
@@ -1285,7 +1290,7 @@ void sub_80062B0(struct Sprite *sprite)
     }
     else
     {
-        sprite->sDelay = 8;
+        sprite->sDelay = CURSOR_DELAY;
         switch(sprite->sState)
         {
         case 0:
@@ -1306,27 +1311,27 @@ void sub_80062B0(struct Sprite *sprite)
     }
 }
 
-#undef sDelay
-#undef sState
-
-u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
+u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
 {
     u8 spriteId;
-    LoadSpriteSheet(&sUnknown_81EA68C[sheetId & 1]);
-    LoadSpritePalette(sUnknown_81EA6A4);
-    spriteId = CreateSprite(&sUnknown_81EA6B4, x + 3, y + 4, subpriority);
+    LoadSpriteSheet(&sSpriteSheets_TextCursor[sheetId & 1]);
+    LoadSpritePalette(&sSpritePalettes_TextCursor[0]);
+    spriteId = CreateSprite(&sSpriteTemplate_TextCursor, x + 3, y + 4, subpriority);
     gSprites[spriteId].oam.priority = (priority & 3);
     gSprites[spriteId].oam.matrixNum = 0;
-    gSprites[spriteId].data[0] = 8;
+    gSprites[spriteId].sDelay = CURSOR_DELAY;
     return spriteId;
 }
 
 void DestroyTextCursorSprite(u8 spriteId)
 {
     DestroySprite(&gSprites[spriteId]);
-    FreeSpriteTilesByTag(0x8000);
-    FreeSpritePaletteByTag(0x8000);
+    FreeSpriteTilesByTag(TAG_CURSOR);
+    FreeSpritePaletteByTag(TAG_CURSOR);
 }
+
+#undef sDelay
+#undef sState
 
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
 {
@@ -1429,9 +1434,9 @@ void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     int i;
     u8 lastColor;
 
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1456,7 +1461,7 @@ void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1485,7 +1490,7 @@ static s32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
             return 10;
 
         return sFontNormalJapaneseGlyphWidths[glyphId];
@@ -1502,9 +1507,9 @@ static void DecompressGlyph_NormalCopy2(u16 glyphId, bool32 isJapanese)
     int i;
     u8 lastColor;
 
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1533,7 +1538,7 @@ static void DecompressGlyph_NormalCopy2(u16 glyphId, bool32 isJapanese)
 
 static s32 GetGlyphWidth_NormalCopy2(u16 glyphId, bool32 isJapanese)
 {
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
         return 10;
     else
         return sFontNormalLatinGlyphWidths[glyphId];
@@ -1545,9 +1550,9 @@ static void DecompressGlyph_Male(u16 glyphId, bool32 isJapanese)
     int i;
     u8 lastColor;
 
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1572,7 +1577,7 @@ static void DecompressGlyph_Male(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1599,9 +1604,9 @@ static void DecompressGlyph_Male(u16 glyphId, bool32 isJapanese)
 
 static s32 GetGlyphWidth_Male(u16 glyphId, bool32 isJapanese)
 {
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
             return 10;
 
         return sFontMaleJapaneseGlyphWidths[glyphId];
@@ -1616,9 +1621,9 @@ void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese)
     int i;
     u8 lastColor;
 
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1643,7 +1648,7 @@ void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
         {
             lastColor = GetLastTextColor(2);
 
@@ -1670,9 +1675,9 @@ void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese)
 
 static s32 GetGlyphWidth_Female(u16 glyphId, bool32 isJapanese)
 {
-    if(isJapanese == TRUE)
+    if (isJapanese == TRUE)
     {
-        if(glyphId == 0)
+        if (glyphId == 0)
             return 10;
         
         return sFontFemaleJapaneseGlyphWidths[glyphId];

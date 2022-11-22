@@ -189,8 +189,7 @@ void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese);
 void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese);
 void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese);
 s32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
-void sub_80062B0(struct Sprite *sprite);
-u8 CreateTextCursorSpriteForOakSpeech(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
+u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
 void DestroyTextCursorSprite(u8 spriteId);
 
 #endif // GUARD_TEXT_H

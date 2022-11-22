@@ -569,7 +569,7 @@ static void Task_OaksSpeech1(u8 taskId)
         FillBgTilemapBufferRect_Palette0(1, 0xD00E,  0, 19, 30, 1);
         CreateHelpDocsPage1();
         gPaletteFade.bufferTransferDisabled = FALSE;
-        gTasks[taskId].data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xE6, 0x95, 0, 0);
+        gTasks[taskId].data[5] = CreateTextCursorSprite(0, 0xE6, 0x95, 0, 0);
         BlendPalettes(PALETTES_ALL, 0x10, 0x00);
         break;
     case 10:
@@ -748,7 +748,7 @@ static void Task_OakSpeech6(u8 taskId)
         gMain.state = 0;
         data[15] = 16;
         AddTextPrinterParameterized4(data[14], FONT_NORMAL, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[0]);
-        data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xe2, 0x91, 0, 0);
+        data[5] = CreateTextCursorSprite(0, 0xe2, 0x91, 0, 0);
         gSprites[data[5]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[data[5]].oam.priority = 0;
         CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 0);

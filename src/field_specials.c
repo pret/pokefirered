@@ -2487,7 +2487,7 @@ void BrailleCursorToggle(void)
     {
         x = gSpecialVar_0x8004 + 27;
         if (gSpecialVar_0x8006 == 0)
-            sBrailleTextCursorSpriteID = CreateTextCursorSpriteForOakSpeech(0, x, gSpecialVar_0x8005, 0, 0);
+            sBrailleTextCursorSpriteID = CreateTextCursorSprite(0, x, gSpecialVar_0x8005, 0, 0);
         else
             DestroyTextCursorSprite(sBrailleTextCursorSpriteID);
     }

@@ -55,7 +55,7 @@ void MysteryGiftLink_InitSend(struct MysteryGiftLink * link, u32 ident, const vo
     if (size != 0)
         link->sendSize = size;
     else
-        link->sendSize = ME_SEND_BUF_SIZE;
+        link->sendSize = MG_LINK_BUFFER_SIZE;
     link->sendBuffer = src;
 }
 
@@ -99,7 +99,7 @@ static bool32 MGL_Receive(struct MysteryGiftLink * link)
             MGL_ReceiveBlock(link->recvPlayerId, &header, sizeof(header));
             link->recvSize = header.size;
             link->recvCRC = header.crc;
-            if (link->recvSize > ME_SEND_BUF_SIZE)
+            if (link->recvSize > MG_LINK_BUFFER_SIZE)
             {
                 LinkRfu_FatalError();
                 return FALSE;
@@ -167,7 +167,7 @@ static bool32 MGL_Send(struct MysteryGiftLink * link)
             link->sendCRC = header.crc;
             link->sendCounter = 0;
             SendBlock(0, &header, sizeof(header));
-            ++link->state;
+            link->state++;
         }
         break;
     case 1:

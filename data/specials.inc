@@ -398,10 +398,10 @@ gSpecials::
 	def_special BufferUnionRoomPlayerName
 	def_special QuestLog_StartRecordingInputsAfterDeferredEvent
 	def_special GetMartClerkObjectId
-	def_special BattleCardAction
+	def_special GetMysteryGiftCardStat
 	def_special GetQuestLogState
 	def_special QuestLog_CutRecording
-	def_special GetMENewsJisanItemAndState
+	def_special WonderNews_GetRewardInfo
 	def_special GetPCBoxToSendMon
 	def_special OpenMuseumFossilPic
 	def_special CloseMuseumFossilPic

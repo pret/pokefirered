@@ -2,7 +2,6 @@
 #define GUARD_MYSTERY_GIFT_LINK_H
 
 #define MG_LINK_BUFFER_SIZE 0x400
-#define ME_SEND_BUF_SIZE MG_LINK_BUFFER_SIZE
 
 // Send/receive ids for the Client/Server to make sure
 // they're sending/receiving the same thing

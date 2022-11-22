@@ -30,8 +30,8 @@ static void CreateMysteryGiftTask(void);
 static void Task_MysteryGift(u8 taskId);
 extern void CreateEReaderTask(void);
 
-static const u16 sTextboxBorder_Pal[] = INCBIN_U16("graphics/interface/unk_textbox_border.gbapal");
-static const u32 sTextboxBorder_Gfx[] = INCBIN_U32("graphics/interface/unk_textbox_border.4bpp.lz");
+static const u16 sTextboxBorder_Pal[] = INCBIN_U16("graphics/interface/mystery_gift_textbox_border.gbapal");
+static const u32 sTextboxBorder_Gfx[] = INCBIN_U32("graphics/interface/mystery_gift_textbox_border.4bpp.lz");
 
 struct MysteryGiftTaskData
 {
@@ -344,7 +344,7 @@ static const u8 *const sUnusedMenuTexts[] = {
 
 ALIGNED(4) static const u8 sTextColors_TopMenu[3]      = { 0, 1, 2 };
 ALIGNED(4) static const u8 sTextColors_TopMenu_Copy[3] = { 0, 1, 2 };
-ALIGNED(4) static const u8 sMG_Ereader_TextColor_2[3]      = { 1, 2, 3 };
+ALIGNED(4) static const u8 sMG_Ereader_TextColor_2[3]  = { 1, 2, 3 };
 
 static const u8 sText_Test[] = _("テスト");
 static const u8 sText_EonTicket[] = _("むげんのチケット");

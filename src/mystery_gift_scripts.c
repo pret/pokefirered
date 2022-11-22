@@ -153,8 +153,8 @@ static const struct MysteryGiftServerCmd sServerScript_TossPrompt[] = {
     {SVR_SEND},
     {SVR_RECV, MG_LINKID_RESPONSE},
     {SVR_READ_RESPONSE},
-    {SVR_GOTO_IF_EQ, FALSE, sServerScript_SendCard},          // Tossed old card, send new one
-    {SVR_GOTO, .parameter = gServerScript_ClientCanceledCard} // Kept old card, cancel new one
+    {SVR_GOTO_IF_EQ, FALSE, sServerScript_SendCard},    // Tossed old card, send new one
+    {SVR_GOTO, .ptr = gServerScript_ClientCanceledCard} // Kept old card, cancel new one
 };
 
 static const struct MysteryGiftServerCmd sServerScript_HasCard[] = {
@@ -179,7 +179,7 @@ const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderNews[] = {
     {SVR_COPY_GAME_DATA},
     {SVR_CHECK_GAME_DATA},
     {SVR_GOTO_IF_EQ, FALSE, sServerScript_CantSend},
-    {SVR_GOTO, .parameter = sServerScript_SendNews},
+    {SVR_GOTO, .ptr = sServerScript_SendNews},
 };
 
 const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderCard[] = {
@@ -194,5 +194,5 @@ const struct MysteryGiftServerCmd gMysteryGiftServerScript_SendWonderCard[] = {
     {SVR_CHECK_EXISTING_CARD},
     {SVR_GOTO_IF_EQ, HAS_DIFF_CARD, sServerScript_TossPrompt},
     {SVR_GOTO_IF_EQ, HAS_NO_CARD, sServerScript_SendCard},
-    {SVR_GOTO, .parameter = sServerScript_HasCard} // HAS_SAME_CARD
+    {SVR_GOTO, .ptr = sServerScript_HasCard} // HAS_SAME_CARD
 };

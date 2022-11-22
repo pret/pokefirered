@@ -5,27 +5,18 @@
 #include "wonder_news.h"
 #include "constants/items.h"
 
-/*
-    Wonder News related functions.
-    Because this feature is largely unused, the names in here are
-    mostly nebulous and without a real indication of purpose.
-*/
+// Every 4th reward for sending Wonder News to a link partner is a "big" reward.
+#define MAX_SENT_REWARD 4
 
-enum {
-    NEWS_VAL_INVALID,
-    NEWS_VAL_RECV_FRIEND,
-    NEWS_VAL_RECV_WIRELESS,
-    NEWS_VAL_NONE,
-    NEWS_VAL_SENT,
-    NEWS_VAL_SENT_MAX,
-    NEWS_VAL_GET_MAX,
-};
+// Only up to 5 rewards can be received in a short period. After this the player
+// must take 500 steps before any more rewards can be received.
+#define MAX_REWARD 5
 
-static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *);
-static void MENewsJisanIncrementCounterUnk0_5(struct WonderNewsMetadata *);
-static u32 GetMENewsJisanState(struct WonderNewsMetadata *);
-static void MENewsJisanIncrementCounterUnk0_2(struct WonderNewsMetadata *);
-static void MENewsJisanResetCounterUnk0_2(struct WonderNewsMetadata *);
+static u32 GetRewardItem(struct WonderNewsMetadata *);
+static u32 GetRewardType(struct WonderNewsMetadata *);
+static void IncrementRewardCounter(struct WonderNewsMetadata *);
+static void IncrementSentRewardCounter(struct WonderNewsMetadata *);
+static void ResetSentRewardCounter(struct WonderNewsMetadata *);
 
 void WonderNews_SetReward(u32 newsType)
 {
@@ -38,9 +29,11 @@ void WonderNews_SetReward(u32 newsType)
         break;
     case WONDER_NEWS_RECV_FRIEND:
     case WONDER_NEWS_RECV_WIRELESS:
+        // Random berry between ITEM_RAZZ_BERRY and ITEM_NOMEL_BERRY
         data->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_RAZZ_BERRY);
         break;
     case WONDER_NEWS_SENT:
+        // Random berry between ITEM_CHERI_BERRY and ITEM_IAPAPA_BERRY
         data->berry = (Random() % 15) + ITEM_TO_BERRY(ITEM_CHERI_BERRY);
         break;
     }
@@ -48,12 +41,12 @@ void WonderNews_SetReward(u32 newsType)
 
 void WonderNews_Reset(void)
 {
-    struct WonderNewsMetadata *r5 = GetSavedWonderNewsMetadata();
+    struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
-    r5->newsType = 0;
-    r5->unk_0_2 = 0;
-    r5->unk_0_5 = 0;
-    r5->berry = 0;
+    data->newsType = WONDER_NEWS_NONE;
+    data->sentRewardCounter = 0;
+    data->rewardCounter = 0;
+    data->berry = 0;
     VarSet(VAR_WONDER_NEWS_STEP_COUNTER, 0);
 }
 
@@ -62,100 +55,100 @@ void WonderNews_IncrementStepCounter(void)
     u16 *stepCounter = GetVarPointer(VAR_WONDER_NEWS_STEP_COUNTER);
     struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
 
-    if (data->unk_0_5 > 4 && ++(*stepCounter) >= 500)
+    // If the player has reached the reward limit, start counting steps.
+    // When they reach 500 steps reset the reward counter to allow them to
+    // receive rewards again.
+    if (data->rewardCounter >= MAX_REWARD && ++(*stepCounter) >= 500)
     {
-        data->unk_0_5 = 0;
+        data->rewardCounter = 0;
         *stepCounter = 0;
     }
 }
 
-u16 GetMENewsJisanItemAndState(void)
+u16 WonderNews_GetRewardInfo(void)
 {
     u16 *result = &gSpecialVar_Result;
     struct WonderNewsMetadata *data = GetSavedWonderNewsMetadata();
-    u16 r5;
+    u16 rewardType;
 
     if (!IsMysteryGiftEnabled() || !ValidateSavedWonderNews())
-        return 0;
+        return NEWS_REWARD_NONE;
 
-    r5 = GetMENewsJisanState(data);
+    rewardType = GetRewardType(data);
 
-    switch (r5)
+    switch (rewardType)
     {
-    case 0:
+    case NEWS_REWARD_RECV_SMALL:
+    case NEWS_REWARD_RECV_BIG:
+        *result = GetRewardItem(data);
         break;
-    case 1:
-        *result = GetMENewsJisanRewardItem(data);
+    case NEWS_REWARD_SENT_SMALL:
+        *result = GetRewardItem(data);
+        IncrementSentRewardCounter(data);
         break;
-    case 2:
-        *result = GetMENewsJisanRewardItem(data);
+    case NEWS_REWARD_SENT_BIG:
+        *result = GetRewardItem(data);
+        ResetSentRewardCounter(data);
         break;
-    case 3:
-        break;
-    case 4:
-        *result = GetMENewsJisanRewardItem(data);
-        MENewsJisanIncrementCounterUnk0_2(data);
-        break;
-    case 5:
-        *result = GetMENewsJisanRewardItem(data);
-        MENewsJisanResetCounterUnk0_2(data);
-        break;
-    case 6:
+    case NEWS_REWARD_NONE:
+    case NEWS_REWARD_WAITING:
+    case NEWS_REWARD_AT_MAX:
         break;
     }
 
-    return r5;
+    return rewardType;
 }
 
-static u32 GetMENewsJisanRewardItem(struct WonderNewsMetadata *a0)
+static u32 GetRewardItem(struct WonderNewsMetadata *data)
 {
-    u32 r4;
+    u32 itemId;
 
-    a0->newsType = 0;
-    r4 = a0->berry + FIRST_BERRY_INDEX - 1;
-    a0->berry = 0;
-    MENewsJisanIncrementCounterUnk0_5(a0);
-    return r4;
+    data->newsType = WONDER_NEWS_NONE;
+    itemId = data->berry + FIRST_BERRY_INDEX - 1;
+    data->berry = 0;
+    IncrementRewardCounter(data);
+    return itemId;
 }
 
-static void MENewsJisanResetCounterUnk0_2(struct WonderNewsMetadata *a0)
+static void ResetSentRewardCounter(struct WonderNewsMetadata *data)
 {
-    a0->unk_0_2 = 0;
+    data->sentRewardCounter = 0;
 }
 
-static void MENewsJisanIncrementCounterUnk0_2(struct WonderNewsMetadata *a0)
+// Track number of times a reward was received (or attmepted to receive) for sending Wonder News to a link partner.
+static void IncrementSentRewardCounter(struct WonderNewsMetadata *data)
 {
-    a0->unk_0_2++;
-    if ((u8)a0->unk_0_2 > 4)
-        a0->unk_0_2 = 4;
+    data->sentRewardCounter++;
+    if (data->sentRewardCounter > MAX_SENT_REWARD)
+        data->sentRewardCounter = MAX_SENT_REWARD;
 }
 
-static void MENewsJisanIncrementCounterUnk0_5(struct WonderNewsMetadata *a0)
+static void IncrementRewardCounter(struct WonderNewsMetadata *data)
 {
-    a0->unk_0_5++;
-    if ((u8)a0->unk_0_5 > 5)
-        a0->unk_0_5 = 5;
+    data->rewardCounter++;
+    if (data->rewardCounter > MAX_REWARD)
+        data->rewardCounter = MAX_REWARD;
 }
 
-static u32 GetMENewsJisanState(struct WonderNewsMetadata *data)
+static u32 GetRewardType(struct WonderNewsMetadata *data)
 {
-    if (data->unk_0_5 == 5)
-        return 6;
+    if (data->rewardCounter == MAX_REWARD)
+        return NEWS_REWARD_AT_MAX;
 
     switch (data->newsType)
     {
     case WONDER_NEWS_NONE:
-        return 3;
+        return NEWS_REWARD_WAITING;
     case WONDER_NEWS_RECV_FRIEND:
-        return 1;
+        return NEWS_REWARD_RECV_SMALL;
     case WONDER_NEWS_RECV_WIRELESS:
-        return 2;
+        return NEWS_REWARD_RECV_BIG;
     case WONDER_NEWS_SENT:
-        if (data->unk_0_2 < 3)
-            return 4;
-        return 5;
+        if (data->sentRewardCounter < MAX_SENT_REWARD - 1)
+            return NEWS_REWARD_SENT_SMALL;
+        return NEWS_REWARD_SENT_BIG;
     default:
         AGB_ASSERT_EX(0, ABSPATH("menews_jisan.c"), 383);
-        return 0;
+        return NEWS_REWARD_NONE;
     }
 }

@@ -476,7 +476,7 @@ void InitQuestionnaireWords(void)
 {
     s32 i;
     u16 *ptr = GetQuestionnaireWordsPtr();
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
         ptr[i] = EC_WORD_UNDEFINED;
 }
 

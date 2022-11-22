@@ -49,7 +49,7 @@ enum {
 
 // Create arguments for SVR_LOAD_CLIENT_SCRIPT or SVR_LOAD_MSG
 // (a script/text size and pointer to send to the client)
-#define PTR_ARG(pointer) .flag = sizeof(pointer), .parameter = pointer
+#define PTR_ARG(pointer) .param = sizeof(pointer), .ptr = pointer
 
 // IDs for server messages when ending a script.
 // Given as the parameter to SVR_RETURN, and resolved to text in GetServerResultMessage
@@ -74,8 +74,8 @@ enum {
 struct MysteryGiftServerCmd
 {
     u32 instr;
-    bool32 flag;
-    const void *parameter;
+    bool32 param;
+    const void *ptr;
 };
 
 struct MysteryGiftServer

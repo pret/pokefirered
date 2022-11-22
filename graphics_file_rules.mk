@@ -66,9 +66,6 @@ $(FONTGFXDIR)/font0_latin.latfont: $(FONTGFXDIR)/font0_latin.png
 $(FONTGFXDIR)/font0_jap.fwjpnfont: $(FONTGFXDIR)/font0_jap.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/font1_latin.latfont: $(FONTGFXDIR)/font1_latin.png
-	$(GFX) $< $@
-
 $(FONTGFXDIR)/font1_jap.fwjpnfont: $(FONTGFXDIR)/font1_jap.png
 	$(GFX) $< $@
 

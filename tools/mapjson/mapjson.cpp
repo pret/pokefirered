@@ -289,7 +289,9 @@ string generate_firered_map_events_text(Json map_data) {
         for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
             auto obj_event = map_data["object_events"].array_items()[i];
             string type = obj_event["type"].string_value();
-            if (type == "object") {
+
+            // If no type field is present, assume it's a regular object event.
+            if (type == "" || type == "object") {
                 text << "\tobject_event " << i + 1 << ", "
                      << obj_event["graphics_id"].string_value() << ", "
                      << obj_event["x"].int_value() << ", "

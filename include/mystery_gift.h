@@ -37,18 +37,6 @@ struct MysteryGiftLinkGameData
     u8 version;
 };
 
-struct MEvent_Str_1
-{
-    u16 status;
-    size_t size;
-    const void *data;
-};
-
-struct MEvent_Str_2
-{
-    u8 fill_00[0x40];
-};
-
 struct WonderGraphics
 {
     u8 titleTextPal:4;

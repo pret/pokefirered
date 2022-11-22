@@ -233,8 +233,6 @@ extern struct RfuGameData gHostRfuGameData;
 extern u8 gHostRfuUsername[];
 extern struct RfuManager gRfu;
 
-void AddTextPrinterToWindow1(const u8 *str);
-bool32 PrintMysteryGiftMenuMessage(u8 * cmdPtr, const u8 * src);
 void LinkRfu_FatalError(void);
 void MG_DrawCheckerboardPattern(void);
 void Rfu_SetCloseLinkCallback(void);

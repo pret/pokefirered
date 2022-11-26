@@ -20,7 +20,7 @@
 #include "list_menu.h"
 #include "load_save.h"
 #include "menu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "mystery_gift_menu.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"

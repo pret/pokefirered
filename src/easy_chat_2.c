@@ -3,7 +3,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "menu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "overworld.h"
 #include "strings.h"
 #include "task.h"
@@ -271,7 +271,7 @@ void ShowEasyChatScreen(void)
         words = gSaveBlock1Ptr->easyChatBattleLost;
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
-        words = GetMEventProfileECWordsMaybe();
+        words = GetQuestionnaireWordsPtr();
         break;
     case EASY_CHAT_TYPE_MAIL:
         words = gSaveBlock1Ptr->mail[gSpecialVar_0x8005].words;

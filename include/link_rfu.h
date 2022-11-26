@@ -233,8 +233,6 @@ extern struct RfuGameData gHostRfuGameData;
 extern u8 gHostRfuUsername[];
 extern struct RfuManager gRfu;
 
-void AddTextPrinterToWindow1(const u8 *str);
-bool32 PrintMysteryGiftMenuMessage(u8 * cmdPtr, const u8 * src);
 void LinkRfu_FatalError(void);
 void MG_DrawCheckerboardPattern(void);
 void Rfu_SetCloseLinkCallback(void);
@@ -324,7 +322,7 @@ void RfuSetNormalDisconnectMode(void);
 void SetUnionRoomChatPlayerData(u32 numPlayers);
 void ClearRecvCommands(void);
 
-#include "mevent_server.h"
-extern const struct mevent_server_cmd gServerScript_ClientCanceledCard[];
+#include "mystery_gift_server.h"
+extern const struct MysteryGiftServerCmd gServerScript_ClientCanceledCard[];
 
 #endif //GUARD_LINK_RFU_H

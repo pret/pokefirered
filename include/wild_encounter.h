@@ -8,6 +8,8 @@
 #define ROCK_WILD_COUNT     5
 #define FISH_WILD_COUNT     10
 
+#define NUM_ALTERING_CAVE_TABLES 9
+
 struct WildPokemon
 {
     u8 minLevel;

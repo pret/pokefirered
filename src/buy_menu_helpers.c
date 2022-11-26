@@ -200,5 +200,5 @@ void BuyMenuQuantityBoxThinBorder(u8 windowId, bool8 copyToVram)
 
 void BuyMenuConfirmPurchase(u8 taskId, const struct YesNoFuncTable *yesNo)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sShopBuyMenuYesNoWindowTemplate, FONT_2, 0, 2, 1, 0xD, yesNo);
+    CreateYesNoMenuWithCallbacks(taskId, &sShopBuyMenuYesNoWindowTemplate, FONT_NORMAL, 0, 2, 1, 0xD, yesNo);
 }

@@ -669,13 +669,13 @@ static void AddMailMessagePrinters(void)
     {
         if (sMailViewResources->messageLinesBuffer[i][0] != EOS && sMailViewResources->messageLinesBuffer[i][0] != CHAR_SPACE)
         {
-            AddTextPrinterParameterized3(0, FONT_1, sMailViewResources->messageLayout->linesLayout[i].lineXoffset + sMailViewResources->messageLayout->messageLeft, y + sMailViewResources->messageLayout->messageTop, sTextColor, 0, sMailViewResources->messageLinesBuffer[i]);
+            AddTextPrinterParameterized3(0, FONT_NORMAL_COPY_1, sMailViewResources->messageLayout->linesLayout[i].lineXoffset + sMailViewResources->messageLayout->messageLeft, y + sMailViewResources->messageLayout->messageTop, sTextColor, 0, sMailViewResources->messageLinesBuffer[i]);
             y += sMailViewResources->messageLayout->linesLayout[i].lineHeight;
         }
     }
-    width = GetStringWidth(FONT_1, gText_From, 0);
-    AddTextPrinterParameterized3(1, FONT_1, sMailViewResources->nameX, sMailViewResources->messageLayout->nameY, sTextColor, 0, gText_From);
-    AddTextPrinterParameterized3(1, FONT_1, sMailViewResources->nameX + width, sMailViewResources->messageLayout->nameY, sTextColor, 0, sMailViewResources->authorNameBuffer);
+    width = GetStringWidth(FONT_NORMAL_COPY_1, gText_From, 0);
+    AddTextPrinterParameterized3(1, FONT_NORMAL_COPY_1, sMailViewResources->nameX, sMailViewResources->messageLayout->nameY, sTextColor, 0, gText_From);
+    AddTextPrinterParameterized3(1, FONT_NORMAL_COPY_1, sMailViewResources->nameX + width, sMailViewResources->messageLayout->nameY, sTextColor, 0, sMailViewResources->authorNameBuffer);
     CopyWindowToVram(0, COPYWIN_FULL);
     CopyWindowToVram(1, COPYWIN_FULL);
 }

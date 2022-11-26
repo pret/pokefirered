@@ -220,7 +220,7 @@ static const u8 sWireless_RSEtoASCIITable[] = {
     [CHAR_y] = 'y',
     [CHAR_z] = 'z',
     0x20, 0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f,
-    [CHAR_DYNAMIC_PLACEHOLDER] = ' ',
+    [CHAR_DYNAMIC] = ' ',
     [CHAR_KEYPAD_ICON] = ' ',
     [CHAR_EXTRA_SYMBOL] = ' ',
     [CHAR_PROMPT_SCROLL] = ' ',

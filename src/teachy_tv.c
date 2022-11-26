@@ -240,7 +240,7 @@ static const struct ListMenuTemplate sListMenuTemplate =
     .lettersSpacing = 0x0,
     .itemVerticalPadding = 0x0,
     .scrollMultiple = 0x1,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0x0,
 };
 
@@ -676,7 +676,7 @@ static void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 static void TeachyTvInitTextPrinter(const u8 *text)
 {
     gTextFlags.autoScroll = 0;
-    AddTextPrinterParameterized2(0, FONT_4, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
+    AddTextPrinterParameterized2(0, FONT_MALE, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
 }
 
 static void TeachyTvFree(void)

@@ -223,7 +223,7 @@ static const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
     .scrollMultiple = 0,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -268,7 +268,7 @@ static const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
     .scrollMultiple = 0,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -289,7 +289,7 @@ static const struct ListMenuTemplate sListMenu_ReceiveToss = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
     .scrollMultiple = 0,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -310,7 +310,7 @@ static const struct ListMenuTemplate sListMenu_ReceiveSend = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 0,
     .scrollMultiple = 0,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -331,7 +331,7 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .lettersSpacing = 0,
     .itemVerticalPadding = 2,
     .scrollMultiple = 0,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0
 };
 
@@ -471,14 +471,14 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
     if (!isEReader)
     {
         options = useCancel == TRUE ? gText_PickOKExit : gText_PickOKCancel;
-        AddTextPrinterParameterized4(0, FONT_2, 2, 2, 0, 0, sTextColors_TopMenu, 0, gText_MysteryGift2);
-        width = 222 - GetStringWidth(FONT_0, options, 0);
-        AddTextPrinterParameterized4(0, FONT_0, width, 2, 0, 0, sTextColors_TopMenu, 0, options);
+        AddTextPrinterParameterized4(0, FONT_NORMAL, 2, 2, 0, 0, sTextColors_TopMenu, 0, gText_MysteryGift2);
+        width = 222 - GetStringWidth(FONT_SMALL, options, 0);
+        AddTextPrinterParameterized4(0, FONT_SMALL, width, 2, 0, 0, sTextColors_TopMenu, 0, options);
     }
     else
     {
-        AddTextPrinterParameterized4(0, FONT_2, 2, 2, 0, 0, sTextColors_TopMenu, 0, gJPText_MysteryGift);
-        AddTextPrinterParameterized4(0, FONT_0, 120, 2, 0, 0, sTextColors_TopMenu, 0, gJPText_DecideStop);
+        AddTextPrinterParameterized4(0, FONT_NORMAL, 2, 2, 0, 0, sTextColors_TopMenu, 0, gJPText_MysteryGift);
+        AddTextPrinterParameterized4(0, FONT_SMALL, 120, 2, 0, 0, sTextColors_TopMenu, 0, gJPText_DecideStop);
     }
     CopyWindowToVram(0, COPYWIN_GFX);
     PutWindowTilemap(0);
@@ -525,7 +525,7 @@ void AddTextPrinterToWindow1(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     FillWindowPixelBuffer(1, 0x11);
-    AddTextPrinterParameterized4(1, FONT_2, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
+    AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
     DrawTextBorderOuter(1, 0x001, 0xF);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_FULL);
@@ -630,7 +630,7 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
     width = 0;
     for (i = 0; i < listMenuTemplate.totalItems; i++)
     {
-        u32 curWidth = GetStringWidth(FONT_2, listMenuTemplate.items[i].label, listMenuTemplate.lettersSpacing);
+        u32 curWidth = GetStringWidth(FONT_NORMAL, listMenuTemplate.items[i].label, listMenuTemplate.lettersSpacing);
         if (curWidth > width)
             width = curWidth;
     }
@@ -661,7 +661,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
         else
             *windowId = AddWindow(&sWindowTemplate_YesNoMsg);
         FillWindowPixelBuffer(*windowId, 0x11);
-        AddTextPrinterParameterized4(*windowId, FONT_2, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
+        AddTextPrinterParameterized4(*windowId, FONT_NORMAL, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
         CopyWindowToVram(*windowId, COPYWIN_GFX);
         PutWindowTilemap(*windowId);
@@ -674,7 +674,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
             windowTemplate.tilemapTop = 9;
         else
             windowTemplate.tilemapTop = 15;
-        CreateYesNoMenu(&windowTemplate, FONT_2, 0, 2, 10, 14, 0);
+        CreateYesNoMenu(&windowTemplate, FONT_NORMAL, 0, 2, 10, 14, 0);
         (*textState)++;
         break;
     case 2:
@@ -718,7 +718,7 @@ static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cann
             StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithNews);
         *windowId = AddWindow(&sWindowTemplate_GiftSelect);
         FillWindowPixelBuffer(*windowId, 0x11);
-        AddTextPrinterParameterized4(*windowId, FONT_2, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
+        AddTextPrinterParameterized4(*windowId, FONT_NORMAL, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
         DrawTextBorderOuter(*windowId, 0x001, 0x0F);
         CopyWindowToVram(*windowId, COPYWIN_GFX);
         PutWindowTilemap(*windowId);

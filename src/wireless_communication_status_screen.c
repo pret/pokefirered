@@ -260,15 +260,15 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
 
     // Print title
-    width = 192 - GetStringWidth(FONT_3, sHeaderTexts[0], 0);
-    WCSS_AddTextPrinterParameterized(0, FONT_3, sHeaderTexts[0], width / 2, 6, COLOR_TITLE);
+    width = 192 - GetStringWidth(FONT_NORMAL_COPY_2, sHeaderTexts[0], 0);
+    WCSS_AddTextPrinterParameterized(0, FONT_NORMAL_COPY_2, sHeaderTexts[0], width / 2, 6, COLOR_TITLE);
 
     // Print label for each group (excluding total)
     for (i = 0; i < NUM_GROUPTYPES - 1; i++)
-        WCSS_AddTextPrinterParameterized(1, FONT_3, sHeaderTexts[i + 1], 0, 30 * i + 10, COLOR_NORMAL);
+        WCSS_AddTextPrinterParameterized(1, FONT_NORMAL_COPY_2, sHeaderTexts[i + 1], 0, 30 * i + 10, COLOR_NORMAL);
 
     // Print label for total
-    WCSS_AddTextPrinterParameterized(1, FONT_3, sHeaderTexts[i + 1], 0, 30 * i + 10, COLOR_TOTAL);
+    WCSS_AddTextPrinterParameterized(1, FONT_NORMAL_COPY_2, sHeaderTexts[i + 1], 0, 30 * i + 10, COLOR_TOTAL);
 
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_GFX);
@@ -306,9 +306,9 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != GROUPTYPE_TOTAL)
-                    WCSS_AddTextPrinterParameterized(2, FONT_3, gStringVar4, 4, 30 * i + 10, COLOR_NORMAL);
+                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_2, gStringVar4, 4, 30 * i + 10, COLOR_NORMAL);
                 else
-                    WCSS_AddTextPrinterParameterized(2, FONT_3, gStringVar4, 4, 100, COLOR_TOTAL);
+                    WCSS_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_2, gStringVar4, 4, 100, COLOR_TOTAL);
             }
             PutWindowTilemap(2);
             CopyWindowToVram(2, COPYWIN_FULL);
@@ -367,7 +367,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
         break;
     // default: UB
     }
-    AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == FONT_0 ? 0 : 1, 0, textColor, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == FONT_SMALL ? 0 : 1, 0, textColor, TEXT_SKIP_DRAW, str);
 }
 
 static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * groupCounts)

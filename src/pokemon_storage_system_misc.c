@@ -1147,7 +1147,7 @@ void PrintItemDescription(void)
         description = ItemId_GetDescription(gStorage->displayMonItemId);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    AddTextPrinterParameterized5(2, FONT_2, description, 2, 0, 0, NULL, 0, 0);
+    AddTextPrinterParameterized5(2, FONT_NORMAL, description, 2, 0, 0, NULL, 0, 0);
 }
 
 void InitItemInfoWindow(void)

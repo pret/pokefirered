@@ -569,7 +569,7 @@ static void Task_OaksSpeech1(u8 taskId)
         FillBgTilemapBufferRect_Palette0(1, 0xD00E,  0, 19, 30, 1);
         CreateHelpDocsPage1();
         gPaletteFade.bufferTransferDisabled = FALSE;
-        gTasks[taskId].data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xE6, 0x95, 0, 0);
+        gTasks[taskId].data[5] = CreateTextCursorSprite(0, 0xE6, 0x95, 0, 0);
         BlendPalettes(PALETTES_ALL, 0x10, 0x00);
         break;
     case 10:
@@ -593,7 +593,7 @@ static void CreateHelpDocsPage1(void)
     sOakSpeechResources->unk_0014[0] = AddWindow(sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012]);
     PutWindowTilemap(sOakSpeechResources->unk_0014[0]);
     FillWindowPixelBuffer(sOakSpeechResources->unk_0014[0], 0x00);
-    AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[0], FONT_2, 2, 0, 1, 1, sTextColor_HelpSystem, 0, gNewGame_HelpDocs1);
+    AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[0], FONT_NORMAL, 2, 0, 1, 1, sTextColor_HelpSystem, 0, gNewGame_HelpDocs1);
     CopyWindowToVram(sOakSpeechResources->unk_0014[0], COPYWIN_FULL);
     FillBgTilemapBufferRect_Palette0(1, 0x3000, 1, 3, 5, 16);
     CopyBgTilemapBufferToVram(1);
@@ -615,7 +615,7 @@ static void Task_OakSpeech4(u8 taskId)
             sOakSpeechResources->unk_0014[i] = AddWindow(&sHelpDocsWindowTemplatePtrs[sOakSpeechResources->unk_0012][i]);
             PutWindowTilemap(sOakSpeechResources->unk_0014[i]);
             FillWindowPixelBuffer(sOakSpeechResources->unk_0014[i], 0x00);
-            AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[i], FONT_2, 6, 0, 1, 1, sTextColor_HelpSystem, 0, sHelpDocsPtrs[i + r7 * 3]);
+            AddTextPrinterParameterized4(sOakSpeechResources->unk_0014[i], FONT_NORMAL, 6, 0, 1, 1, sTextColor_HelpSystem, 0, sHelpDocsPtrs[i + r7 * 3]);
             CopyWindowToVram(sOakSpeechResources->unk_0014[i], COPYWIN_FULL);
         }
 
@@ -747,8 +747,8 @@ static void Task_OakSpeech6(u8 taskId)
         sOakSpeechResources->unk_0012 = 0;
         gMain.state = 0;
         data[15] = 16;
-        AddTextPrinterParameterized4(data[14], FONT_2, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[0]);
-        data[5] = CreateTextCursorSpriteForOakSpeech(0, 0xe2, 0x91, 0, 0);
+        AddTextPrinterParameterized4(data[14], FONT_NORMAL, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[0]);
+        data[5] = CreateTextCursorSprite(0, 0xe2, 0x91, 0, 0);
         gSprites[data[5]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[data[5]].oam.priority = 0;
         CreatePikaOrGrassPlatformSpriteAndLinkToCurrentTask(taskId, 0);
@@ -807,7 +807,7 @@ static void Task_OakSpeech7(u8 taskId)
         if (data[15] <= 0)
         {
             FillWindowPixelBuffer(data[14], 0x00);
-            AddTextPrinterParameterized4(data[14], FONT_2, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[sOakSpeechResources->unk_0012]);
+            AddTextPrinterParameterized4(data[14], FONT_NORMAL, 3, 5, 1, 0, sTextColor_OakSpeech, 0, sNewGameAdventureIntroTextPointers[sOakSpeechResources->unk_0012]);
             if (sOakSpeechResources->unk_0012 == 0)
             {
                 ClearTopBarWindow();
@@ -906,11 +906,11 @@ static void Task_OakSpeech9(u8 taskId)
     if (str != gStringVar4) \
     { \
         StringExpandPlaceholders(gStringVar4, str); \
-        AddTextPrinterParameterized2(0, FONT_4, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
+        AddTextPrinterParameterized2(0, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
     } \
     else \
     { \
-        AddTextPrinterParameterized2(0, FONT_4, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
+        AddTextPrinterParameterized2(0, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
     } \
     CopyWindowToVram(0, COPYWIN_FULL); \
 })
@@ -1076,12 +1076,12 @@ static void Task_OakSpeech19(u8 taskId)
         sOakSpeechResources->textColor[0] = 1;
         sOakSpeechResources->textColor[1] = 2;
         sOakSpeechResources->textColor[2] = 3;
-        AddTextPrinterParameterized3(gTasks[taskId].data[13], FONT_2, 8, 1, sOakSpeechResources->textColor, 0, gText_Boy);
+        AddTextPrinterParameterized3(gTasks[taskId].data[13], FONT_NORMAL, 8, 1, sOakSpeechResources->textColor, 0, gText_Boy);
         sOakSpeechResources->textColor[0] = 1;
         sOakSpeechResources->textColor[1] = 2;
         sOakSpeechResources->textColor[2] = 3;
-        AddTextPrinterParameterized3(gTasks[taskId].data[13], FONT_2, 8, 17, sOakSpeechResources->textColor, 0, gText_Girl);
-        Menu_InitCursor(gTasks[taskId].data[13], FONT_2, 0, 1, GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 2, 0);
+        AddTextPrinterParameterized3(gTasks[taskId].data[13], FONT_NORMAL, 8, 17, sOakSpeechResources->textColor, 0, gText_Girl);
+        Menu_InitCursor(gTasks[taskId].data[13], FONT_NORMAL, 0, 1, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 2, 0);
         CopyWindowToVram(gTasks[taskId].data[13], COPYWIN_FULL);
         gTasks[taskId].func = Task_OakSpeech20;
     }
@@ -1263,7 +1263,7 @@ static void Task_OakSpeech26(u8 taskId)
                 data[3]--;
             else
             {
-                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], FONT_2, 0, 2, GetStdWindowBaseTileNum(), 14, 0);
+                CreateYesNoMenu(&sNewGameAdventureIntroWindowTemplates[2], FONT_NORMAL, 0, 2, GetStdWindowBaseTileNum(), 14, 0);
                 gTasks[taskId].func = Task_OakSpeech27;
             }
         }
@@ -1871,16 +1871,16 @@ static void PrintNameChoiceOptions(u8 taskId, u8 hasPlayerBeenNamed)
     PutWindowTilemap(data[13]);
     DrawStdFrameWithCustomTileAndPalette(data[13], 1, GetStdWindowBaseTileNum(), 14);
     FillWindowPixelBuffer(gTasks[taskId].data[13], 0x11);
-    AddTextPrinterParameterized(data[13], FONT_2, gOtherText_NewName, 8, 1, 0, NULL);
+    AddTextPrinterParameterized(data[13], FONT_NORMAL, gOtherText_NewName, 8, 1, 0, NULL);
     if (hasPlayerBeenNamed == FALSE)
         textPtrs = gSaveBlock2Ptr->playerGender == MALE ? sMaleNameChoices : sFemaleNameChoices;
     else
         textPtrs = sRivalNameChoices;
     for (i = 0; i < 4; i++)
     {
-        AddTextPrinterParameterized(data[13], FONT_2, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
+        AddTextPrinterParameterized(data[13], FONT_NORMAL, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
     }
-    Menu_InitCursor(data[13], FONT_2, 0, 1, 16, 5, 0);
+    Menu_InitCursor(data[13], FONT_NORMAL, 0, 1, 16, 5, 0);
     CopyWindowToVram(data[13], COPYWIN_FULL);
 }
 

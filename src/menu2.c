@@ -500,11 +500,11 @@ void Menu_PrintFormatIntlPlayerName(u8 windowId, const u8 * src, u16 x, u16 y)
     StringExpandPlaceholders(gStringVar4, src);
     if (i != 5)
     {
-        AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, x, y, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, 0xFF, NULL);
     }
     else
     {
-        AddTextPrinterParameterized5(windowId, FONT_2, gStringVar4, x, y, 0xFF, NULL, 0, 0);
+        AddTextPrinterParameterized5(windowId, FONT_NORMAL, gStringVar4, x, y, 0xFF, NULL, 0, 0);
     }
 }
 

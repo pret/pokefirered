@@ -110,7 +110,7 @@ u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
-        if (*src != CHAR_DYNAMIC_PLACEHOLDER)
+        if (*src != CHAR_DYNAMIC)
         {
             *dest++ = *src++;
         }

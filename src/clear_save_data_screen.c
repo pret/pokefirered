@@ -106,11 +106,11 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         break;
     case 4:
         DrawStdFrameWithCustomTileAndPalette(1, TRUE, 0x001, 0xF);
-        AddTextPrinterParameterized4(1, FONT_2, 0, 3, 1, 1, sTextColor, 0, gText_ClearAllSaveData);
+        AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 3, 1, 1, sTextColor, 0, gText_ClearAllSaveData);
         CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 5:
-        CreateYesNoMenu(&sWindowTemplates[0], FONT_2, 0, 2, 0x001, 0xF, 1);
+        CreateYesNoMenu(&sWindowTemplates[0], FONT_NORMAL, 0, 2, 0x001, 0xF, 1);
         CopyBgTilemapBufferToVram(0);
         break;
     default:
@@ -138,7 +138,7 @@ static void Task_HandleYesNoMenu(u8 taskId)
         case 0:
             PlaySE(SE_SELECT);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
-            AddTextPrinterParameterized4(1, FONT_2, 0, 3, 1, 1, sTextColor, 0, gText_ClearingData);
+            AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 3, 1, 1, sTextColor, 0, gText_ClearingData);
             CopyWindowToVram(1, COPYWIN_FULL);
             ClearSaveData();
             break;

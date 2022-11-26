@@ -28,7 +28,7 @@
 #include "pokedex.h"
 #include "text_window.h"
 #include "menu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "naming_screen.h"
 #include "party_menu.h"
 #include "dynamic_placeholder_text_util.h"
@@ -1950,20 +1950,20 @@ void QuestLog_TryRecordDepartedLocation(void)
     }
 }
 
-u16 BattleCardAction(void)
+u16 GetMysteryGiftCardStat(void)
 {
     switch (gSpecialVar_Result)
     {
-    case 0:
-        return MEvent_GetBattleCardCount(3);
-    case 1:
-        return MEvent_GetBattleCardCount(4);
-    case 2:
-        return MEvent_GetBattleCardCount(0);
-    case 3:
-        return MEvent_GetBattleCardCount(1);
-    case 4:
-        return MEvent_GetBattleCardCount(2);
+    case GET_NUM_STAMPS:
+        return MysteryGift_GetCardStat(CARD_STAT_NUM_STAMPS);
+    case GET_MAX_STAMPS:
+        return MysteryGift_GetCardStat(CARD_STAT_MAX_STAMPS);
+    case GET_CARD_BATTLES_WON:
+        return MysteryGift_GetCardStat(CARD_STAT_BATTLES_WON);
+    case GET_CARD_BATTLES_LOST:
+        return MysteryGift_GetCardStat(CARD_STAT_BATTLES_LOST);
+    case GET_CARD_NUM_TRADES:
+        return MysteryGift_GetCardStat(CARD_STAT_NUM_TRADES);
     default:
         AGB_ASSERT_EX(0, ABSPATH("scr_tool.c"), 3873);
         return 0;

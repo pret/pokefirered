@@ -10,7 +10,7 @@
 #include "link.h"
 #include "load_save.h"
 #include "m4a.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "quest_log.h"

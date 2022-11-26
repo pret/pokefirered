@@ -481,7 +481,7 @@ static void Task_ExecuteMainMenuSelection(u8 taskId)
             TrySetUpQuestLogScenes_ElseContinueFromSave(taskId);
             break;
         case MAIN_MENU_MYSTERYGIFT:
-            SetMainCallback2(c2_mystery_gift);
+            SetMainCallback2(CB2_InitMysteryGift);
             HelpSystem_Disable();
             FreeAllWindowBuffers();
             DestroyTask(taskId);

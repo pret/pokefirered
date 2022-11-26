@@ -5,7 +5,7 @@
 #include "new_menu_helpers.h"
 #include "pokemon_icon.h"
 #include "mystery_gift_menu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "battle_anim.h"
 #include "constants/mystery_gift.h"
 

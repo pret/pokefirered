@@ -22,7 +22,7 @@
 #include "berry.h"
 #include "easy_chat.h"
 #include "union_room_chat.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "renewable_hidden_items.h"
 #include "trainer_tower.h"
 #include "script.h"
@@ -143,7 +143,7 @@ void NewGameInitData(void)
     ResetTrainerFanClub();
     UnionRoomChat_InitializeRegisteredTexts();
     ResetMiniGamesResults();
-    InitMEventData();
+    ClearMysteryGift();
     SetAllRenewableItemFlags();
     WarpToPlayersRoom();
     RunScriptImmediately(EventScript_ResetAllMapFlags);

@@ -1141,7 +1141,7 @@ extern const u8 gText_PeopleBattling[];
 extern const u8 gText_PeopleInUnionRoom[];
 extern const u8 gText_PeopleCommunicating[];
 
-// mevent
+// mystery_gift
 extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
 extern const u8 gJPText_SelectConnectFromEReaderMenu[];
 extern const u8 gJPText_SelectConnectWithGBA[];

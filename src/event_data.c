@@ -129,7 +129,7 @@ bool32 IsMysteryGiftEnabled(void)
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLED);
 }
 
-void ResetMysteryEventFlags(void)
+void ClearMysteryGiftFlags(void)
 {
     FlagClear(FLAG_MYSTERY_GIFT_DONE);
     FlagClear(FLAG_MYSTERY_GIFT_1);
@@ -149,7 +149,7 @@ void ResetMysteryEventFlags(void)
     FlagClear(FLAG_MYSTERY_GIFT_15);
 }
 
-void ResetMysteryEventVars(void)
+void ClearMysteryGiftVars(void)
 {
     VarSet(VAR_EVENT_PICHU_SLOT, 0);
     VarSet(VAR_MYSTERY_GIFT_1,  0);

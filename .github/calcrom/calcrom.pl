@@ -68,6 +68,7 @@ while (my $line = <$file>)
 }
 
 my @sorted = sort { $a->[1] <=> $b->[1] } @pairs;
+(my $elffname = $ARGV[0]) =~ s/\.map/.elf/;
 
 # Note that the grep filters out all branch labels. It also requires a minimum
 # line length of 5, to filter out a ton of generated symbols (like AcCn). No
@@ -78,16 +79,17 @@ my @sorted = sort { $a->[1] <=> $b->[1] } @pairs;
 #
 # You'd expect this to take a while, because of uniq. It runs in under a second,
 # though. Uniq is pretty fast!
-my $base_cmd = "nm pokefirered.elf | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
+my $base_cmd = "nm $elffname | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
 
-# This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
+# This looks for Unknown_, Unknown_, or sub_, followed by an address. Note that
 # it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
-my $undoc_cmd = "grep '[Uu]nknown_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
+my $undoc_regex = "'[Uu]nknown_[0-9a-fA-F]\\{5,7\\}\\|sub_[0-9a-fA-F]\\{5,7\\}'";
 
 # This looks for every symbol with an address at the end of it. Some things are
 # given a name based on their type / location, but still have an unknown purpose.
 # For example, FooMap_EventScript_FFFFFFF.
-my $partial_doc_cmd = "grep '_[0-38][0-9a-fA-F]\\{5,6\\}'";
+# The above may be double counted here, and will need to be filtered out.
+my $partial_doc_regex = "'_[0-28][0-9a-fA-F]\\{5,7\\}'";
 
 my $count_cmd = "wc -l";
 
@@ -104,7 +106,7 @@ my $total_syms_as_string;
 
 my $undocumented_as_string;
 (run (
-    command => "$base_cmd | $undoc_cmd | $count_cmd",
+    command => "$base_cmd | grep $undoc_regex | $count_cmd",
     buffer => \$undocumented_as_string,
     timeout => 60
 ))
@@ -112,7 +114,7 @@ my $undocumented_as_string;
 
 my $partial_documented_as_string;
 (run (
-    command => "$base_cmd | $partial_doc_cmd | $count_cmd",
+    command => "$base_cmd | grep $partial_doc_regex | grep -v $undoc_regex | $count_cmd",
     buffer => \$partial_documented_as_string,
     timeout => 60
 ))
@@ -121,16 +123,19 @@ my $partial_documented_as_string;
 # Performing addition on a string converts it to a number. Any string that fails
 # to convert to a number becomes 0. So if our converted number is 0, but our string
 # is nonzero, then the conversion was an error.
+$undocumented_as_string =~ s/^\s+|\s+$//g;
 my $undocumented = $undocumented_as_string + 0;
-(($undocumented != 0) and ($undocumented_as_string ne "0"))
+(($undocumented != 0) or (($undocumented == 0) and ($undocumented_as_string eq "0")))
     or die "ERROR: Cannot convert string to num: '$undocumented_as_string'";
 
+$partial_documented_as_string =~ s/^\s+|\s+$//g;
 my $partial_documented = $partial_documented_as_string + 0;
-(($partial_documented != 0) and ($partial_documented_as_string ne "0"))
-	or die "ERROR: Cannot convert string to num: '$partial_documented_as_string'";
+(($partial_documented != 0) or (($partial_documented == 0) and ($partial_documented_as_string eq "0")))
+    or die "ERROR: Cannot convert string to num: '$partial_documented_as_string'";
 
+$total_syms_as_string =~ s/^\s+|\s+$//g;
 my $total_syms = $total_syms_as_string + 0;
-(($total_syms != 0) and ($total_syms_as_string ne "0"))
+(($total_syms != 0) or (($total_syms == 0) and ($total_syms_as_string eq "0")))
     or die "ERROR: Cannot convert string to num: '$total_syms_as_string'";
 
 ($total_syms != 0)
@@ -139,9 +144,6 @@ my $total_syms = $total_syms_as_string + 0;
 my $total = $src + $asm;
 my $srcPct = sprintf("%.4f", 100 * $src / $total);
 my $asmPct = sprintf("%.4f", 100 * $asm / $total);
-
-# partial_documented is double-counting the unknown_* and sub_* symbols.
-$partial_documented = $partial_documented - $undocumented;
 
 my $documented = $total_syms - ($undocumented + $partial_documented);
 my $docPct = sprintf("%.4f", 100 * $documented / $total_syms);

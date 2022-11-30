@@ -197,9 +197,9 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
         ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.floorNum);
         maxWidth = gMapHeader.floorNum != 0x7F ? 152 : 176;
     }
-    xpos = (maxWidth - GetStringWidth(FONT_2, mapName, -1)) / 2;
+    xpos = (maxWidth - GetStringWidth(FONT_NORMAL, mapName, -1)) / 2;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, FONT_2, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
 }
 
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 floorNum)

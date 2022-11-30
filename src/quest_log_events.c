@@ -18,6 +18,12 @@
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
+enum {
+    STEP_RECORDING_MODE_0,
+    STEP_RECORDING_MODE_1,
+    STEP_RECORDING_MODE_2,
+};
+
 struct DeferredLinkEvent
 {
     u16 id;
@@ -39,7 +45,7 @@ static bool8 TryDeferLinkEvent(u16, const u16 *);
 static bool8 TryDeferTrainerBattleEvent(u16, const u16 *);
 static bool8 IsEventWithSpecialEncounterSpecies(u16, const u16 *);
 static void SetQuestLogEventToActive(u16);
-static u16 *QL_RecordAction_FE(u16 *, u16);
+static u16 *QL_RecordAction_Wait(u16 *, u16);
 static u16 *RecordEvent_SwitchedPartyOrder(u16 *, const struct QuestLogEvent_SwitchedPartyOrder *);
 static u16 *RecordEvent_UsedItem(u16 *, const struct QuestLogEvent_Item *);
 static u16 *RecordEvent_GaveHeldItemFromPartyMenu(u16 *, const struct QuestLogEvent_Item *);
@@ -163,9 +169,9 @@ static const RecordEventFunc sRecordEventFuncs[] = {
     [QL_EVENT_USED_FIELD_MOVE]               = (RecordEventFunc) RecordEvent_UsedFieldMove,
     [QL_EVENT_BOUGHT_ITEM]                   = (RecordEventFunc) RecordEvent_BoughtItem,
     [QL_EVENT_SOLD_ITEM]                     = (RecordEventFunc) RecordEvent_SoldItem,
-    [QL_EVENT_ACTION_FF]                     = NULL,
+    [QL_EVENT_SCENE_END]                     = NULL,
     [QL_EVENT_OBTAINED_STORY_ITEM]           = (RecordEventFunc) RecordEvent_ObtainedStoryItem,
-    [QL_EVENT_ACTION_FE]                     = NULL,
+    [QL_EVENT_WAIT]                          = NULL,
     [QL_EVENT_ARRIVED]                       = (RecordEventFunc) RecordEvent_ArrivedInLocation
 };
 
@@ -209,9 +215,9 @@ static const u16 *(*const sLoadEventFuncs[])(const u16 *) = {
     [QL_EVENT_USED_FIELD_MOVE]               = LoadEvent_UsedFieldMove,
     [QL_EVENT_BOUGHT_ITEM]                   = LoadEvent_BoughtItem,
     [QL_EVENT_SOLD_ITEM]                     = LoadEvent_SoldItem,
-    [QL_EVENT_ACTION_FF]                     = NULL,
+    [QL_EVENT_SCENE_END]                     = NULL,
     [QL_EVENT_OBTAINED_STORY_ITEM]           = LoadEvent_ObtainedStoryItem,
-    [QL_EVENT_ACTION_FE]                     = NULL,
+    [QL_EVENT_WAIT]                          = NULL,
     [QL_EVENT_ARRIVED]                       = LoadEvent_ArrivedInLocation
 };
 
@@ -255,9 +261,9 @@ static const u8 sQuestLogEventCmdSizes[] = {
     [QL_EVENT_USED_FIELD_MOVE] = 8,
     [QL_EVENT_BOUGHT_ITEM] = 14,
     [QL_EVENT_SOLD_ITEM] = 14,
-    [QL_EVENT_ACTION_FF] = 2,
+    [QL_EVENT_SCENE_END] = 2,
     [QL_EVENT_OBTAINED_STORY_ITEM] = 8,
-    [QL_EVENT_ACTION_FE] = 4,
+    [QL_EVENT_WAIT] = 4,
     [QL_EVENT_ARRIVED] = 6
 };
 
@@ -455,7 +461,7 @@ void SetQuestLogEvent(u16 eventId, const u16 * data)
 {
     u16 *r1;
 
-    if (eventId == QL_EVENT_DEPARTED && sEventShouldNotRecordSteps == 2)
+    if (eventId == QL_EVENT_DEPARTED && sEventShouldNotRecordSteps == STEP_RECORDING_MODE_2)
     {
         QL_EnableRecordingSteps();
         return;
@@ -476,7 +482,7 @@ void SetQuestLogEvent(u16 eventId, const u16 * data)
         return;
 
     // Link events handled above. If we're in an active link, don't record any other events.
-    if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
+    if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE)
         return;
 
     if (TryDeferTrainerBattleEvent(eventId, data) == TRUE)
@@ -527,16 +533,16 @@ void SetQuestLogEvent(u16 eventId, const u16 * data)
 
     if (r1 == NULL)
     {
-        FinishRecordingQuestLogScene();
+        QL_FinishRecordingScene();
         r1 = ShouldRegisterEvent(eventId, data);
-        if (r1 == NULL)
+        if (!r1)
             return;
     }
 
     gQuestLogRecordingPointer = r1;
-    if (sEventShouldNotRecordSteps == 0)
+    if (sEventShouldNotRecordSteps == STEP_RECORDING_MODE_0)
         return;
-    FinishRecordingQuestLogScene();
+    QL_FinishRecordingScene();
 }
 
 static bool8 InQuestLogDisabledLocation(void)
@@ -640,7 +646,7 @@ static bool8 ShouldRegisterEvent_HandleBeatStoryTrainer(u16 eventId, const u16 *
 
 void QL_EnableRecordingSteps(void)
 {
-    sEventShouldNotRecordSteps = 0;
+    sEventShouldNotRecordSteps = STEP_RECORDING_MODE_0;
 }
 
 static u16 *ShouldRegisterEvent(u16 eventId, const u16 * data)
@@ -729,15 +735,15 @@ void QuestLogEvents_HandleEndTrainerBattle(void)
         SetQuestLogEventToActive(sDeferredEvent.id);
         resp = sRecordEventFuncs[sDeferredEvent.id](gQuestLogRecordingPointer, sDeferredEvent.data);
         gQuestLogRecordingPointer = resp;
-        TryRecordEvent41_IncCursor(1);
+        QL_RecordWait(1);
         ResetDeferredLinkEvent();
-        FinishRecordingQuestLogScene();
+        QL_FinishRecordingScene();
     }
 }
 
-void TryRecordEvent41_IncCursor(u16 a0)
+void QL_RecordWait(u16 duration)
 {
-    gQuestLogRecordingPointer = QL_RecordAction_FE(gQuestLogRecordingPointer, a0);
+    gQuestLogRecordingPointer = QL_RecordAction_Wait(gQuestLogRecordingPointer, duration);
     gQuestLogCurActionIdx++;
 }
 
@@ -836,19 +842,19 @@ void sub_8113BD8(void)
     sPlayedTheSlots = FALSE;
 }
 
-u16 *QL_RecordAction_FF(u16 *a0)
+u16 *QL_RecordAction_SceneEnd(u16 *a0)
 {
-    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_ACTION_FF]))
+    if (!QL_IsRoomToSaveAction(a0, sQuestLogEventCmdSizes[QL_EVENT_SCENE_END]))
         return NULL;
-    a0[0] = QL_EVENT_ACTION_FF;
+    a0[0] = QL_EVENT_SCENE_END;
     return a0 + 1;
 }
 
-u16 *QL_LoadAction_FF(u16 *a0, struct QuestLogAction * a1)
+u16 *QL_LoadAction_SceneEnd(u16 *a0, struct QuestLogAction * a1)
 {
-    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_ACTION_FF]))
+    if (!QL_IsRoomToSaveAction(a0, sQuestLogEventCmdSizes[QL_EVENT_SCENE_END]))
         return NULL;
-    a1->type = QL_ACTION_FF;
+    a1->type = QL_ACTION_SCENE_END;
     a1->duration = 0;
     a1->data.raw[0] = 0;
     a1->data.raw[1] = 0;
@@ -857,20 +863,20 @@ u16 *QL_LoadAction_FF(u16 *a0, struct QuestLogAction * a1)
     return a0 + 1;
 }
 
-static u16 *QL_RecordAction_FE(u16 *a0, u16 a1)
+static u16 *QL_RecordAction_Wait(u16 *a0, u16 duration)
 {
-    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_ACTION_FE]))
+    if (!QL_IsRoomToSaveAction(a0, sQuestLogEventCmdSizes[QL_EVENT_WAIT]))
         return NULL;
-    a0[0] = QL_EVENT_ACTION_FE;
-    a0[1] = a1;
+    a0[0] = QL_EVENT_WAIT;
+    a0[1] = duration;
     return a0 + 2;
 }
 
-u16 *QL_LoadAction_FE(u16 *a0, struct QuestLogAction * a1)
+u16 *QL_LoadAction_Wait(u16 *a0, struct QuestLogAction * a1)
 {
-    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_ACTION_FE]))
+    if (!QL_IsRoomToSaveAction(a0, sQuestLogEventCmdSizes[QL_EVENT_WAIT]))
         return NULL;
-    a1->type = QL_ACTION_FE;
+    a1->type = QL_ACTION_WAIT;
     a1->duration = a0[1];
     a1->data.raw[0] = 0;
     a1->data.raw[1] = 0;
@@ -883,7 +889,7 @@ u16 *QL_RecordAction_Input(u16 *script, struct QuestLogAction * a1)
 {
     u8 *r6 = (u8 *)script + 4;
 
-    if (!WillCommandOfSizeFitInSav1Record(script, sQuestLogEventCmdSizes[QL_EVENT_INPUT]))
+    if (!QL_IsRoomToSaveAction(script, sQuestLogEventCmdSizes[QL_EVENT_INPUT]))
         return NULL;
     script[0] = QL_EVENT_INPUT;
     script[1] = a1->duration;
@@ -898,7 +904,7 @@ u16 *QL_LoadAction_Input(u16 *a0, struct QuestLogAction * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_INPUT]))
+    if (!QL_IsRoomToSaveAction(a0, sQuestLogEventCmdSizes[QL_EVENT_INPUT]))
         return NULL;
     a1->type = QL_ACTION_INPUT;
     a1->duration = a0[1];
@@ -914,7 +920,7 @@ u16 *QL_RecordAction_MovementOrGfxChange(u16 *script, struct QuestLogAction * a1
     u16 *r4 = script;
     u8 *r6 = (u8 *)script + 4;
 
-    if (!WillCommandOfSizeFitInSav1Record(r4, sQuestLogEventCmdSizes[QL_EVENT_MOVEMENT]))
+    if (!QL_IsRoomToSaveAction(r4, sQuestLogEventCmdSizes[QL_EVENT_MOVEMENT]))
         return NULL;
     if (a1->type == QL_ACTION_MOVEMENT)
         r4[0] = QL_EVENT_MOVEMENT;
@@ -933,7 +939,7 @@ u16 *QL_LoadAction_MovementOrGfxChange(u16 *a0, struct QuestLogAction * a1)
     u16 *r5 = a0;
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!WillCommandOfSizeFitInSav1Record(r5, sQuestLogEventCmdSizes[QL_EVENT_MOVEMENT]))
+    if (!QL_IsRoomToSaveAction(r5, sQuestLogEventCmdSizes[QL_EVENT_MOVEMENT]))
         return NULL;
     if (r5[0] == QL_EVENT_MOVEMENT)
         a1->type = QL_ACTION_MOVEMENT;
@@ -959,8 +965,7 @@ static u16 *RecordEventHeader(u16 eventId, u16 *dest)
     else
         cmdSize = sQuestLogEventCmdSizes[eventId] - 4;
 
-    // Is there room to record this?
-    if (!sub_8110944(dest, cmdSize))
+    if (!QL_IsRoomToSaveEvent(dest, cmdSize))
         return NULL;
 
     record = (void *)dest;
@@ -1048,7 +1053,7 @@ static u16 *RecordEvent_UsedItem(u16 *dest, const struct QuestLogEvent_Item * da
     rItemParam = data->itemParam;
 
     if (data->itemId == ITEM_ESCAPE_ROPE)
-        sEventShouldNotRecordSteps = 2;
+        sEventShouldNotRecordSteps = STEP_RECORDING_MODE_2;
 
     return record + 3;
 }
@@ -1235,7 +1240,7 @@ static u16 *RecordEvent_UsedPkmnCenter(u16 *dest, const u16 * data)
     if (gUnknown_203B044.id == QL_EVENT_USED_PKMN_CENTER && gUnknown_203B044.unk_1 != 0)
         return record;
 
-    if (!sub_8110944(dest, sQuestLogEventCmdSizes[QL_EVENT_USED_PKMN_CENTER]))
+    if (!QL_IsRoomToSaveEvent(dest, sQuestLogEventCmdSizes[QL_EVENT_USED_PKMN_CENTER]))
         return NULL;
 
     record[0] = QL_EVENT_USED_PKMN_CENTER;
@@ -1725,7 +1730,7 @@ static u16 *RecordEvent_DefeatedTrainer(u16 eventId, u16 *dest, const struct Que
 
 static u16 *RecordEvent_DefeatedGymLeader(u16 *dest, const struct QuestLogEvent_TrainerBattle * data)
 {
-    sEventShouldNotRecordSteps = 1;
+    sEventShouldNotRecordSteps = STEP_RECORDING_MODE_1;
     return RecordEvent_DefeatedTrainer(QL_EVENT_DEFEATED_GYM_LEADER, dest, data);
 }
 
@@ -1750,7 +1755,7 @@ static u16 *RecordEvent_DefeatedWildMon(u16 *dest, const struct QuestLogEvent_Wi
 {
     u16 *body = dest;
     u8 *footer = (u8 *)dest + sizeof(struct QuestLogEvent_WildBattle);
-    if (!sub_8110944(body, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
+    if (!QL_IsRoomToSaveEvent(body, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
         return NULL;
     if (footer[0] == 0 && footer[1] == 0)
     {
@@ -1772,7 +1777,7 @@ static u16 *RecordEvent_DefeatedWildMon(u16 *dest, const struct QuestLogEvent_Wi
 static const u16 *LoadEvent_DefeatedWildMon(const u16 *a0)
 {
     const u8 *data;
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
+    if (!QL_IsRoomToSaveEvent(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
         return NULL;
 
     data = (const u8 *)a0 + 8;
@@ -1836,7 +1841,7 @@ static bool8 IsSpeciesFromSpecialEncounter(u16 species)
 
 static u16 *RecordEvent_DefeatedEliteFourMember(u16 *dest, const struct QuestLogEvent_TrainerBattle * data)
 {
-    sEventShouldNotRecordSteps = 1;
+    sEventShouldNotRecordSteps = STEP_RECORDING_MODE_1;
     return RecordEvent_DefeatedTrainer(QL_EVENT_DEFEATED_E4_MEMBER, dest, data);
 }
 
@@ -1856,21 +1861,21 @@ static const u16 *LoadEvent_DefeatedEliteFourMember(const u16 *eventData)
 
 static u16 *RecordEvent_DefeatedChampion(u16 *dest, const struct QuestLogEvent_TrainerBattle * data)
 {
-    if (!sub_8110944(dest, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
+    if (!QL_IsRoomToSaveEvent(dest, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
     dest[0] = QL_EVENT_DEFEATED_CHAMPION | (2 << QL_CMD_UNK_SHIFT);
     dest[1] = gQuestLogCurActionIdx;
     dest[2] = data->speciesOpponent;
     dest[3] = data->speciesPlayer;
     *((u8 *)dest + 8) = data->hpFractionId;
-    sEventShouldNotRecordSteps = 1;
+    sEventShouldNotRecordSteps = STEP_RECORDING_MODE_1;
     return dest + 5;
 }
 
 static const u16 *LoadEvent_DefeatedChampion(const u16 *a0)
 {
     const u8 *r5;
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
+    if (!QL_IsRoomToSaveEvent(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
 
     r5 = (const u8 *)a0 + 8;
@@ -1900,7 +1905,7 @@ static const u16 *LoadEvent_DefeatedChampion(const u16 *a0)
 
 static u16 *RecordEvent_DefeatedNormalTrainer(u16 *dest, const struct QuestLogEvent_TrainerBattle * data)
 {
-    sEventShouldNotRecordSteps = 1;
+    sEventShouldNotRecordSteps = STEP_RECORDING_MODE_1;
     return RecordEvent_DefeatedTrainer(QL_EVENT_DEFEATED_TRAINER, dest, data);
 }
 
@@ -1944,7 +1949,7 @@ static u16 *RecordEvent_DepartedLocation(u16 *dest, const struct QuestLogEvent_D
     rMapSec = data->mapSec;
     rLocationId = data->locationId;
     if (rLocationId == QL_LOCATION_SAFARI_ZONE)
-        sEventShouldNotRecordSteps = 1;
+        sEventShouldNotRecordSteps = STEP_RECORDING_MODE_1;
 
     return (u16 *)(record + 2);
 }
@@ -2031,9 +2036,9 @@ static u16 *RecordEvent_UsedFieldMove(u16 *dest, const struct QuestLogEvent_Fiel
     record[0] = data->fieldMove;
     record[1] = data->mapSec;
     if (record[0] == FIELD_MOVE_TELEPORT || record[0] == FIELD_MOVE_DIG)
-        sEventShouldNotRecordSteps = 2;
+        sEventShouldNotRecordSteps = STEP_RECORDING_MODE_2;
     else
-        sEventShouldNotRecordSteps = 1;
+        sEventShouldNotRecordSteps = STEP_RECORDING_MODE_1;
     return (u16 *)(record + 2);
 }
 

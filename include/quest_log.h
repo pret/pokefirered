@@ -204,7 +204,7 @@ void SaveQuestLogData(void);
 void QuestLog_CutRecording(void);
 u8 sub_8112CAC(void);
 void ResetDeferredLinkEvent(void);
-void FinishRecordingQuestLogScene(void);
+void QL_FinishRecordingScene(void);
 void QuestLogEvents_HandleEndTrainerBattle(void);
 void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
@@ -235,13 +235,13 @@ u8 GetQuestLogStartType(void);
 void sub_81113E4(void);
 void sub_8111438(void);
 void StartRecordingQuestLogAction(u16 eventId);
-bool8 WillCommandOfSizeFitInSav1Record(u16 *cursor, size_t size);
-bool8 sub_8110944(const void *a0, size_t cmdSize);
+bool8 QL_IsRoomToSaveAction(const void *cursor, size_t size);
+bool8 QL_IsRoomToSaveEvent(const void *cursor, size_t size);
 
 void sub_8113BD8(void);
 void ResetUnk203B044(void);
-u16 *QL_RecordAction_FF(u16 *);
-u16 *QL_LoadAction_FE(u16 *, struct QuestLogAction *);
+u16 *QL_RecordAction_SceneEnd(u16 *);
+u16 *QL_LoadAction_Wait(u16 *, struct QuestLogAction *);
 u16 *QL_RecordAction_Input(u16 *, struct QuestLogAction *);
 u16 *QL_LoadAction_Input(u16 *, struct QuestLogAction *);
 u16 *QL_RecordAction_MovementOrGfxChange(u16 *, struct QuestLogAction *);
@@ -249,9 +249,9 @@ u16 *QL_LoadAction_MovementOrGfxChange(u16 *, struct QuestLogAction *);
 void QL_EnableRecordingSteps(void);
 u16 *QuestLog_SkipCommand(u16 *, u16 **);
 void sub_8113ABC(const u16 *);
-u16 *QL_LoadAction_FF(u16 *, struct QuestLogAction *);
+u16 *QL_LoadAction_SceneEnd(u16 *, struct QuestLogAction *);
 bool8 sub_8113AE8(const u16 *);
 bool8 sub_8113B44(const u16 *);
-void TryRecordEvent41_IncCursor(u16);
+void QL_RecordWait(u16);
 
 #endif //GUARD_QUEST_LOG_H

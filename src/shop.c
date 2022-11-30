@@ -207,14 +207,14 @@ static u8 CreateShopMenu(u8 a0)
     gShopData.martType = GetMartTypeFromItemList(a0);
     gShopData.selectedRow = 0;
     if (ContextNpcGetTextColor() == NPC_TEXT_COLOR_MALE)
-        gShopData.fontId = FONT_4;
+        gShopData.fontId = FONT_MALE;
     else
-        gShopData.fontId = FONT_5;
+        gShopData.fontId = FONT_FEMALE;
     
     sShopMenuWindowId = AddWindow(&sShopMenuWindowTemplate);
     SetStdWindowBorderStyle(sShopMenuWindowId, 0);
-    PrintTextArray(sShopMenuWindowId, FONT_2, GetMenuCursorDimensionByFont(FONT_2, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
-    Menu_InitCursor(sShopMenuWindowId, FONT_2, 0, 2, 16, 3, 0);
+    PrintTextArray(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
+    Menu_InitCursor(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 3, 0);
     PutWindowTilemap(sShopMenuWindowId);
     CopyWindowToVram(sShopMenuWindowId, COPYWIN_MAP);
     return CreateTask(Task_ShopMenu, 8);
@@ -536,8 +536,8 @@ bool8 BuyMenuBuildListMenuTemplate(void)
     gMultiuseListMenuTemplate.upText_Y = 2;
     gMultiuseListMenuTemplate.fontId = 2;
     gMultiuseListMenuTemplate.fillValue = 0;
-    gMultiuseListMenuTemplate.cursorPal = GetFontAttribute(FONT_2, FONTATTR_COLOR_FOREGROUND);
-    gMultiuseListMenuTemplate.cursorShadowPal = GetFontAttribute(FONT_2, FONTATTR_COLOR_SHADOW);
+    gMultiuseListMenuTemplate.cursorPal = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_FOREGROUND);
+    gMultiuseListMenuTemplate.cursorShadowPal = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_SHADOW);
     gMultiuseListMenuTemplate.moveCursorFunc = BuyMenuPrintItemDescriptionAndShowItemIcon;
     gMultiuseListMenuTemplate.itemPrintFunc = BuyMenuPrintPriceInList;
     gMultiuseListMenuTemplate.scrollMultiple = 0;
@@ -586,13 +586,13 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
             CreateItemMenuIcon(ITEMS_COUNT, gShopData.itemSlot);
         
         gShopData.itemSlot ^= 1;
-        BuyMenuPrint(5, FONT_2, description, 0, 3, 2, 1, 0, 0);
+        BuyMenuPrint(5, FONT_NORMAL, description, 0, 3, 2, 1, 0, 0);
     }
     else //TM Mart
     {
         FillWindowPixelBuffer(6, PIXEL_FILL(0));
         LoadTmHmNameInMart(item);
-        BuyMenuPrint(5, FONT_2, description, 2, 3, 1, 0, 0, 0);
+        BuyMenuPrint(5, FONT_NORMAL, description, 2, 3, 1, 0, 0, 0);
     }
 }
 
@@ -603,13 +603,13 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, itemid_get_market_price(item), 0, 4);
+        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 4);
         x = 4 - StringLength(gStringVar1);
         loc = gStringVar4;
         while (x-- != 0)
             *loc++ = 0;
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
-        BuyMenuPrint(windowId, FONT_0, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
+        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
 }
 
@@ -620,14 +620,14 @@ static void LoadTmHmNameInMart(s32 item)
         ConvertIntToDecimalStringN(gStringVar1, item - ITEM_DEVON_SCOPE, 2, 2);
         StringCopy(gStringVar4, gText_NumberClear01);
         StringAppend(gStringVar4, gStringVar1);
-        BuyMenuPrint(6, FONT_0, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
+        BuyMenuPrint(6, FONT_SMALL, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
         StringCopy(gStringVar4, gMoveNames[ItemIdToBattleMoveId(item)]);
-        BuyMenuPrint(6, FONT_2, gStringVar4, 0, 0x10, 0, 0, 0, 1);
+        BuyMenuPrint(6, FONT_NORMAL, gStringVar4, 0, 0x10, 0, 0, 0, 1);
     }
     else
     {
-        BuyMenuPrint(6, FONT_0, gText_ThreeHyphens, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
-        BuyMenuPrint(6, FONT_2, gText_SevenHyphens, 0, 0x10, 0, 0, 0, 1);
+        BuyMenuPrint(6, FONT_SMALL, gText_ThreeHyphens, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
+        BuyMenuPrint(6, FONT_NORMAL, gText_SevenHyphens, 0, 0x10, 0, 0, 0, 1);
     }
 }
 
@@ -645,12 +645,12 @@ static void BuyMenuPrintCursorAtYPosition(u8 y, u8 a1)
 {
     if (a1 == 0xFF)
     {
-        FillWindowPixelRect(4, 0, 1, y, GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_WIDTH), GetFontAttribute(FONT_2, FONTATTR_MAX_LETTER_HEIGHT));
+        FillWindowPixelRect(4, 0, 1, y, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH), GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT));
         CopyWindowToVram(4, COPYWIN_GFX);
     }
     else
     {
-        BuyMenuPrint(4, FONT_2, gText_SelectorArrow2, 1, y, 0, 0, 0, a1);
+        BuyMenuPrint(4, FONT_NORMAL, gText_SelectorArrow2, 1, y, 0, 0, 0, a1);
     }
 }
 
@@ -865,7 +865,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     PrintMoneyAmount(3, 0x36, 0xA, gShopData.itemPrice, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-    BuyMenuPrint(3, FONT_0, gStringVar4, 2, 0xA, 0, 0, 0, 1);
+    BuyMenuPrint(3, FONT_SMALL, gStringVar4, 2, 0xA, 0, 0, 0, 1);
 }
 
 static void Task_BuyMenu(u8 taskId)
@@ -891,7 +891,7 @@ static void Task_BuyMenu(u8 taskId)
             BuyMenuRemoveScrollIndicatorArrows();
             BuyMenuPrintCursor(tListTaskId, 2);
             RecolorItemDescriptionBox(1);
-            gShopData.itemPrice = itemid_get_market_price(itemId);
+            gShopData.itemPrice = ItemId_GetPrice(itemId);
             if (!IsEnoughMoney(&gSaveBlock1Ptr->money, gShopData.itemPrice))
             {
                 BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);
@@ -915,12 +915,12 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     BuyMenuQuantityBoxThinBorder(1, 0);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_InBagVar1);
-    BuyMenuPrint(1, FONT_2, gStringVar4, 0, 2, 0, 0, 0, 1);
+    BuyMenuPrint(1, FONT_NORMAL, gStringVar4, 0, 2, 0, 0, 0, 1);
     tItemCount = 1;
     BuyMenuQuantityBoxNormalBorder(3, 0);
     BuyMenuPrintItemQuantityAndPrice(taskId);
     ScheduleBgCopyTilemapToVram(0);
-    maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / itemid_get_market_price(tItemId);
+    maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / ItemId_GetPrice(tItemId);
     if (maxQuantity > 99)
         gShopData.maxQuantity = 99;
     else
@@ -938,7 +938,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, gShopData.maxQuantity) == TRUE)
     {
-        gShopData.itemPrice = itemid_get_market_price(tItemId) * tItemCount;
+        gShopData.itemPrice = ItemId_GetPrice(tItemId) * tItemCount;
         BuyMenuPrintItemQuantityAndPrice(taskId);
     }
     else
@@ -1100,7 +1100,7 @@ void RecordItemTransaction(u16 itemId, u16 quantity, u8 logEventId)
     {
         // logEventId will either be 1 (bought) or 2 (sold)
         // so for buying it will add the full price and selling will add half price
-        history->totalMoney += (itemid_get_market_price(itemId) >> (logEventId - 1)) * quantity;
+        history->totalMoney += (ItemId_GetPrice(itemId) >> (logEventId - 1)) * quantity;
         if (history->totalMoney > 999999)
             history->totalMoney = 999999;
     }    

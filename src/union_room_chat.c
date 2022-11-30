@@ -128,39 +128,151 @@ static const u8 sKeyboardPageMaxRow[] =
     9
 };
 
-static const u8 sCaseToggleTable[] = {
-    0x00, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
-    0x1D, 0x1E, 0x00, 0x20, 0x21, 0x22, 0x23, 0x24,
-    0x25, 0x26, 0x27, 0x28, 0x29, 0x15, 0x01, 0x02,
-    0x00, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x00,
-    0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
-    0x13, 0x14, 0x2A, 0x2B, 0x2C, 0x2D, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x35, 0x36, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x53, 0x54, 0x55, 0x56, 0x00,
-    0x00, 0x00, 0x6F, 0x5B, 0x5C, 0x5D, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x5A,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x84, 0x85, 0x86, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7,
-    0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF,
-    0xB0, 0xB1, 0xB2, 0xB3, 0xB4, 0xB5, 0xB6, 0xB7,
-    0xB8, 0xB9, 0xBA, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9,
-    0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1,
-    0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9,
-    0xEA, 0xEB, 0xEC, 0xED, 0xEE, 0xBB, 0xBC, 0xBD,
-    0xBE, 0xBF, 0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5,
-    0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD,
-    0xCE, 0xCF, 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xEF,
-    0xF0, 0xF4, 0xF5, 0xF6, 0xF1, 0xF2, 0xF3, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+static const u8 sCaseToggleTable[256] = {
+    [CHAR_A] = CHAR_a,
+    [CHAR_B] = CHAR_b,
+    [CHAR_C] = CHAR_c,
+    [CHAR_D] = CHAR_d,
+    [CHAR_E] = CHAR_e,
+    [CHAR_F] = CHAR_f,
+    [CHAR_G] = CHAR_g,
+    [CHAR_H] = CHAR_h,
+    [CHAR_I] = CHAR_i,
+    [CHAR_J] = CHAR_j,
+    [CHAR_K] = CHAR_k,
+    [CHAR_L] = CHAR_l,
+    [CHAR_M] = CHAR_m,
+    [CHAR_N] = CHAR_n,
+    [CHAR_O] = CHAR_o,
+    [CHAR_P] = CHAR_p,
+    [CHAR_Q] = CHAR_q,
+    [CHAR_R] = CHAR_r,
+    [CHAR_S] = CHAR_s,
+    [CHAR_T] = CHAR_t,
+    [CHAR_U] = CHAR_u,
+    [CHAR_V] = CHAR_v,
+    [CHAR_W] = CHAR_w,
+    [CHAR_X] = CHAR_x,
+    [CHAR_Y] = CHAR_y,
+    [CHAR_Z] = CHAR_z,
+    [CHAR_a] = CHAR_A,
+    [CHAR_b] = CHAR_B,
+    [CHAR_c] = CHAR_C,
+    [CHAR_d] = CHAR_D,
+    [CHAR_e] = CHAR_E,
+    [CHAR_f] = CHAR_F,
+    [CHAR_g] = CHAR_G,
+    [CHAR_h] = CHAR_H,
+    [CHAR_i] = CHAR_I,
+    [CHAR_j] = CHAR_J,
+    [CHAR_k] = CHAR_K,
+    [CHAR_l] = CHAR_L,
+    [CHAR_m] = CHAR_M,
+    [CHAR_n] = CHAR_N,
+    [CHAR_o] = CHAR_O,
+    [CHAR_p] = CHAR_P,
+    [CHAR_q] = CHAR_Q,
+    [CHAR_r] = CHAR_R,
+    [CHAR_s] = CHAR_S,
+    [CHAR_t] = CHAR_T,
+    [CHAR_u] = CHAR_U,
+    [CHAR_v] = CHAR_V,
+    [CHAR_w] = CHAR_W,
+    [CHAR_x] = CHAR_X,
+    [CHAR_y] = CHAR_Y,
+    [CHAR_z] = CHAR_Z,
+    [CHAR_A_GRAVE] = CHAR_a_GRAVE,
+    [CHAR_A_ACUTE] = CHAR_a_ACUTE,
+    [CHAR_A_CIRCUMFLEX] = CHAR_a_CIRCUMFLEX,
+    [CHAR_A_DIAERESIS] = CHAR_a_DIAERESIS,
+    [CHAR_C_CEDILLA] = CHAR_c_CEDILLA,
+    [CHAR_E_GRAVE] = CHAR_e_GRAVE,
+    [CHAR_E_ACUTE] = CHAR_e_ACUTE,
+    [CHAR_E_CIRCUMFLEX] = CHAR_e_CIRCUMFLEX,
+    [CHAR_E_DIAERESIS] = CHAR_e_DIAERESIS,
+    [CHAR_I_GRAVE] = CHAR_i_GRAVE,
+    [CHAR_I_ACUTE] = CHAR_i_ACUTE,
+    [CHAR_I_CIRCUMFLEX] = CHAR_i_CIRCUMFLEX,
+    [CHAR_I_DIAERESIS] = CHAR_i_DIAERESIS,
+    [CHAR_O_GRAVE] = CHAR_o_GRAVE,
+    [CHAR_O_ACUTE] = CHAR_o_ACUTE,
+    [CHAR_O_CIRCUMFLEX] = CHAR_o_CIRCUMFLEX,
+    [CHAR_O_DIAERESIS] = CHAR_o_DIAERESIS,
+    [CHAR_OE] = CHAR_oe,
+    [CHAR_U_GRAVE] = CHAR_u_GRAVE,
+    [CHAR_U_ACUTE] = CHAR_u_ACUTE,
+    [CHAR_U_CIRCUMFLEX] = CHAR_u_CIRCUMFLEX,
+    [CHAR_U_DIAERESIS] = CHAR_u_DIAERESIS,
+    [CHAR_N_TILDE] = CHAR_n_TILDE,
+    [CHAR_ESZETT] = CHAR_ESZETT,
+    [CHAR_a_GRAVE] = CHAR_A_GRAVE,
+    [CHAR_a_ACUTE] = CHAR_A_ACUTE,
+    [CHAR_a_CIRCUMFLEX] = CHAR_A_CIRCUMFLEX,
+    [CHAR_a_DIAERESIS] = CHAR_A_DIAERESIS,
+    [CHAR_c_CEDILLA] = CHAR_C_CEDILLA,
+    [CHAR_e_GRAVE] = CHAR_E_GRAVE,
+    [CHAR_e_ACUTE] = CHAR_E_ACUTE,
+    [CHAR_e_CIRCUMFLEX] = CHAR_E_CIRCUMFLEX,
+    [CHAR_e_DIAERESIS] = CHAR_E_DIAERESIS,
+    [CHAR_i_GRAVE] = CHAR_I_GRAVE,
+    [CHAR_i_ACUTE] = CHAR_I_ACUTE,
+    [CHAR_i_CIRCUMFLEX] = CHAR_I_CIRCUMFLEX,
+    [CHAR_i_DIAERESIS] = CHAR_I_DIAERESIS,
+    [CHAR_o_GRAVE] = CHAR_O_GRAVE,
+    [CHAR_o_ACUTE] = CHAR_O_ACUTE,
+    [CHAR_o_CIRCUMFLEX] = CHAR_O_CIRCUMFLEX,
+    [CHAR_o_DIAERESIS] = CHAR_O_DIAERESIS,
+    [CHAR_oe] = CHAR_OE,
+    [CHAR_u_GRAVE] = CHAR_U_GRAVE,
+    [CHAR_u_ACUTE] = CHAR_U_ACUTE,
+    [CHAR_u_CIRCUMFLEX] = CHAR_U_CIRCUMFLEX,
+    [CHAR_u_DIAERESIS] = CHAR_U_DIAERESIS,
+    [CHAR_n_TILDE] = CHAR_N_TILDE,
+    [CHAR_0] = CHAR_0,
+    [CHAR_1] = CHAR_1,
+    [CHAR_2] = CHAR_2,
+    [CHAR_3] = CHAR_3,
+    [CHAR_4] = CHAR_4,
+    [CHAR_5] = CHAR_5,
+    [CHAR_6] = CHAR_6,
+    [CHAR_7] = CHAR_7,
+    [CHAR_8] = CHAR_8,
+    [CHAR_9] = CHAR_9,
+    [CHAR_PK] = CHAR_PK,
+    [CHAR_MN] = CHAR_MN,
+    [CHAR_PO] = CHAR_PO,
+    [CHAR_KE] = CHAR_KE,
+    [CHAR_SUPER_E]  = CHAR_SUPER_E,
+    [CHAR_SUPER_ER] = CHAR_SUPER_ER,
+    [CHAR_SUPER_RE] = CHAR_SUPER_RE,
+    [CHAR_PERIOD] = CHAR_PERIOD,
+    [CHAR_COMMA] = CHAR_COMMA,
+    [CHAR_COLON] = CHAR_COLON,
+    [CHAR_SEMICOLON] = CHAR_SEMICOLON,
+    [CHAR_EXCL_MARK] = CHAR_EXCL_MARK,
+    [CHAR_QUESTION_MARK] = CHAR_QUESTION_MARK,
+    [CHAR_HYPHEN] = CHAR_HYPHEN,
+    [CHAR_SLASH] = CHAR_SLASH,
+    [CHAR_ELLIPSIS] = CHAR_ELLIPSIS,
+    [CHAR_LEFT_PAREN] = CHAR_LEFT_PAREN,
+    [CHAR_RIGHT_PAREN] = CHAR_RIGHT_PAREN,
+    [CHAR_AMPERSAND] = CHAR_AMPERSAND,
+    [CHAR_DBL_QUOTE_LEFT] = CHAR_DBL_QUOTE_LEFT,
+    [CHAR_DBL_QUOTE_RIGHT] = CHAR_DBL_QUOTE_RIGHT,
+    [CHAR_SGL_QUOTE_LEFT] = CHAR_SGL_QUOTE_LEFT,
+    [CHAR_SGL_QUOTE_RIGHT] = CHAR_SGL_QUOTE_RIGHT,
+    [CHAR_MASCULINE_ORDINAL] = CHAR_MASCULINE_ORDINAL,
+    [CHAR_FEMININE_ORDINAL] = CHAR_FEMININE_ORDINAL,
+    [CHAR_BULLET] = CHAR_BULLET,
+    [CHAR_EQUALS] = CHAR_EQUALS,
+    [CHAR_MULT_SIGN] = CHAR_MULT_SIGN,
+    [CHAR_PERCENT] = CHAR_PERCENT,
+    [CHAR_LESS_THAN] = CHAR_LESS_THAN,
+    [CHAR_GREATER_THAN] = CHAR_GREATER_THAN,
+    [CHAR_MALE] = CHAR_MALE,
+    [CHAR_FEMALE] = CHAR_FEMALE,
+    [CHAR_CURRENCY] = CHAR_CURRENCY,
+    [CHAR_BLACK_TRIANGLE] = CHAR_BLACK_TRIANGLE,
 };
 
 const u8 *const gUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = {
@@ -324,7 +436,7 @@ static void ChatEntryRoutine_Join(void)
         sWork->routineState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader())
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             if (SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
                 sWork->routineState++;
@@ -527,14 +639,14 @@ static void ChatEntryRoutine_AskQuitChatting(void)
             sWork->routineState = 3;
             break;
         case 0:
-            Rfu_UnionRoomChat_StopLinkManager();
+            Rfu_StopPartnerSearch();
             PrepareSendBuffer_Disband(sWork->sendMessageBuffer);
             sWork->routineState = 4;
             break;
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
         {
             if (sWork->multiplayerId == 0)
                 sWork->routineState = 6;
@@ -577,15 +689,15 @@ static void ChatEntryRoutine_ExitChat(void)
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
             sWork->routineState++;
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 1) && !RfuHasFoundNewLeader())
+        if ((GetBlockReceivedStatus() & 1) && !Rfu_IsPlayerExchangeActive())
             sWork->routineState++;
         break;
     case 5:
-        if (IsLinkTaskFinished() && !RfuHasFoundNewLeader())
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sWork->exitDelayTimer = 0;
@@ -620,7 +732,7 @@ static void ChatEntryRoutine_Drop(void)
         }
         break;
     case 1:
-        if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !RfuHasFoundNewLeader())
+        if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sWork->exitDelayTimer = 0;
@@ -666,7 +778,7 @@ static void ChatEntryRoutine_Disbanded(void)
         }
         break;
     case 2:
-        if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !RfuHasFoundNewLeader())
+        if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sWork->exitDelayTimer = 0;
@@ -704,7 +816,7 @@ static void ChatEntryRoutine_SendMessage(void)
         sWork->routineState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !RfuHasFoundNewLeader() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+        if (IsLinkTaskFinished() == TRUE && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
             sWork->routineState++;
         break;
     case 2:
@@ -1144,7 +1256,7 @@ static void PrepareSendBuffer_Leave(u8 *arg0)
     arg0[0] = CHAT_MESSAGE_LEAVE;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
     arg0[1 + (PLAYER_NAME_LENGTH + 1)] = sWork->multiplayerId;
-    sub_80FB9D0();
+    RfuSetNormalDisconnectMode();
 }
 
 static void PrepareSendBuffer_Drop(u8 *arg0)
@@ -1355,7 +1467,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         }
 
         tBlockReceivedStatus = GetBlockReceivedStatus();
-        if (!tBlockReceivedStatus && RfuHasFoundNewLeader())
+        if (!tBlockReceivedStatus && Rfu_IsPlayerExchangeActive())
             return;
 
         tI = 0;
@@ -1409,13 +1521,13 @@ static void Task_ReceiveChatMessage(u8 taskId)
             // You're the leader, and the person who left is not you
             if (GetLinkPlayerCount() == 2)
             {
-                Rfu_UnionRoomChat_StopLinkManager();
+                Rfu_StopPartnerSearch();
                 sWork->exitType = CHATEXIT_LEADER_LAST;
                 DestroyTask(taskId);
                 return;
             }
 
-            sub_80FBD6C(tCurrLinkPlayer);
+            Rfu_DisconnectPlayerById(tCurrLinkPlayer);
         }
 
         tState = 3;
@@ -1433,10 +1545,10 @@ static void Task_ReceiveChatMessage(u8 taskId)
         DestroyTask(taskId);
         break;
     case 2:
-        if (!RfuHasFoundNewLeader())
+        if (!Rfu_IsPlayerExchangeActive())
         {
             if (sWork->multiplayerId == 0)
-                sub_80FB030(sWork->linkPlayerCount);
+                SetUnionRoomChatPlayerData(sWork->linkPlayerCount);
 
             tState = 1;
         }

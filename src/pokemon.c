@@ -34,6 +34,7 @@
 #include "constants/trainers.h"
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
+#include "constants/union_room.h"
 
 #define SPECIES_TO_HOENN(name)      [SPECIES_##name - 1] = HOENN_DEX_##name
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
@@ -1643,7 +1644,9 @@ static const u16 sDeoxysBaseStats[] =
 };
 #endif
 
-const u16 gLinkPlayerFacilityClasses[] = 
+// The classes used by other players in the Union Room.
+// These should correspond with the overworld graphics in sUnionRoomObjGfxIds
+const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] = 
 {
     // Male
     FACILITY_CLASS_COOLTRAINER_M,
@@ -6031,19 +6034,19 @@ void SetDeoxysStats(void)
 u16 GetUnionRoomTrainerPic(void)
 {
     u8 linkId = GetMultiplayerId() ^ 1;
-    u32 arrId = gLinkPlayers[linkId].trainerId & 7;
 
-    arrId |= gLinkPlayers[linkId].gender << 3;
-    return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
+    u32 arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
+    return FacilityClassToPicIndex(gUnionRoomFacilityClasses[arrId]);
 }
 
 u16 GetUnionRoomTrainerClass(void)
 {
     u8 linkId = GetMultiplayerId() ^ 1;
-    u32 arrId = gLinkPlayers[linkId].trainerId & 7;
 
-    arrId |= gLinkPlayers[linkId].gender << 3;
-    return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
+    u32 arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
+    return gFacilityClassToTrainerClass[gUnionRoomFacilityClasses[arrId]];
 }
 
 void CreateEventLegalEnemyMon(void)

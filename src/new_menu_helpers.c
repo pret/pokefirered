@@ -58,106 +58,98 @@ static const struct WindowTemplate sYesNo_WindowTemplate =
 
 static const struct FontInfo gFontInfos[] = 
 {
-    {
-        .fontFunction = Font0Func,
-        .maxLetterWidth = 0x8,
-        .maxLetterHeight = 0xD,
-        .letterSpacing = 0x0,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_SMALL] = {
+        .fontFunction = FontFunc_Small,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 13,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
-        .fontFunction = Font1Func,
-        .maxLetterWidth = 0x8,
-        .maxLetterHeight = 0xE,
-        .letterSpacing = 0x0,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_NORMAL_COPY_1] = {
+        .fontFunction = FontFunc_NormalCopy1,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
-        .fontFunction = Font2Func,
-        .maxLetterWidth = 0xA,
-        .maxLetterHeight = 0xE,
-        .letterSpacing = 0x1,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_NORMAL] = {
+        .fontFunction = FontFunc_Normal,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 1,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
-        .fontFunction = Font3Func,
-        .maxLetterWidth = 0xA,
-        .maxLetterHeight = 0xE,
-        .letterSpacing = 0x1,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_NORMAL_COPY_2] = {
+        .fontFunction = FontFunc_NormalCopy2,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 1,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
-        .fontFunction = Font4Func,
-        .maxLetterWidth = 0xA,
-        .maxLetterHeight = 0xE,
-        .letterSpacing = 0x0,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_MALE] = {
+        .fontFunction = FontFunc_Male,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
-        .fontFunction = Font5Func,
-        .maxLetterWidth = 0xA,
-        .maxLetterHeight = 0xE,
-        .letterSpacing = 0x0,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_FEMALE] = {
+        .fontFunction = FontFunc_Female,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
-        .fontFunction = Font6Func,
-        .maxLetterWidth = 0x8,
-        .maxLetterHeight = 0x10,
-        .letterSpacing = 0x0,
-        .lineSpacing = 0x2,
-        .unk = 0x0,
-        .fgColor = 0x2,
-        .bgColor = 0x1,
-        .shadowColor = 0x3,
+    [FONT_BRAILLE] = {
+        .fontFunction = FontFunc_Braille,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
     },
-    {
+    [FONT_BOLD] = {
         .fontFunction = NULL,
-        .maxLetterWidth = 0x8,
-        .maxLetterHeight = 0x8,
-        .letterSpacing = 0x0,
-        .lineSpacing = 0x0,
-        .unk = 0x0,
-        .fgColor = 0x1,
-        .bgColor = 0x2,
-        .shadowColor = 0xF,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 1,
+        .bgColor = 2,
+        .shadowColor = 15,
     }
 };
 
 static const u8 gMenuCursorDimensions[][2] = 
 {
-    { 0x8,  0xD },
-    { 0x8,  0xE },
-    { 0x8,  0xE },
-    { 0x8,  0xE },
-    { 0x8,  0xE },
-    { 0x8,  0xE },
-    { 0x8, 0x10 },
-    { 0x0,  0x0 }
+    [FONT_SMALL]         = { 8,  13 },
+    [FONT_NORMAL_COPY_1] = { 8,  14 },
+    [FONT_NORMAL]        = { 8,  14 },
+    [FONT_NORMAL_COPY_2] = { 8,  14 },
+    [FONT_MALE]          = { 8,  14 },
+    [FONT_FEMALE]        = { 8,  14 },
+    [FONT_BRAILLE]       = { 8,  16 },
+    [FONT_BOLD]          = {}
 };
 
 static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
@@ -436,23 +428,23 @@ void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress)
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;    
     color = ContextNpcGetTextColor();
     if (color == NPC_TEXT_COLOR_MALE)
-        AddTextPrinterParameterized2(0, FONT_4, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_BLUE, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_MALE, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_BLUE, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     else if (color == NPC_TEXT_COLOR_FEMALE)
-        AddTextPrinterParameterized2(0, FONT_5, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_FEMALE, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     else // NPC_TEXT_COLOR_MON / NPC_TEXT_COLOR_NEUTRAL
-        AddTextPrinterParameterized2(0, FONT_2, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetTextSpeedSetting(), nptr, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, FONT_2, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 void LoadStdWindowFrameGfx(void)
@@ -655,12 +647,12 @@ void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *string, TaskFunc 
 
 void DisplayYesNoMenuDefaultYes(void)
 {
-    CreateYesNoMenu(&sYesNo_WindowTemplate, FONT_2, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
+    CreateYesNoMenu(&sYesNo_WindowTemplate, FONT_NORMAL, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
 }
 
 void DisplayYesNoMenuDefaultNo(void)
 {
-    CreateYesNoMenu(&sYesNo_WindowTemplate, FONT_2, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 1);
+    CreateYesNoMenu(&sYesNo_WindowTemplate, FONT_NORMAL, 0, 2, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 1);
 }
 
 u8 GetTextSpeedSetting(void)

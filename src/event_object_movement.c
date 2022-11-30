@@ -4686,7 +4686,7 @@ u8 GetAcroWheelieDirectionAnimNum(u8 direction)
     return sAcroBunnyHopBackWheelDirectionAnimNums[direction];
 }
 
-u8 Unref_GetAnimNums_080634A0(u8 direction)
+u8 GetAcroBunnyHopFrontWheelDirectionAnimNum(u8 direction)
 {
     return sAcroBunnyHopFrontWheelDirectionAnimNums[direction];
 }

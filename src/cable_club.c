@@ -10,7 +10,7 @@
 #include "link.h"
 #include "load_save.h"
 #include "m4a.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "quest_log.h"
@@ -89,7 +89,7 @@ static void PrintNumPlayersInLink(u16 windowId, s32 numPlayers)
     ConvertIntToDecimalStringN(gStringVar1, numPlayers, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStdWindowBorderStyle(windowId, FALSE);
     StringExpandPlaceholders(gStringVar4, gText_NumPlayerLink);
-    AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
@@ -897,7 +897,7 @@ static void Task_StartWiredTrade(u8 taskId)
     case 3:
         if (!gReceivedRemoteLinkPlayers)
         {
-            SetMainCallback2(CB2_ReturnFromLinkTrade);
+            SetMainCallback2(CB2_StartCreateTradeMenu);
             DestroyTask(taskId);
         }
         break;
@@ -929,7 +929,7 @@ static void Task_StartWirelessTrade(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            UnionRoom_CreateTask_CallCB2ReturnFromLinkTrade();
+            CreateTask_CreateTradeMenu();
             DestroyTask(taskId);
         }
         break;

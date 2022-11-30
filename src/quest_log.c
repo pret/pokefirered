@@ -117,7 +117,7 @@ static void QLogCB_Recording(void);
 static void QLogCB_Playback(void);
 static void SetPlayerInitialCoordsAtScene(u8);
 static void SetNPCInitialCoordsAtScene(u8);
-static void TryRecordEvent39_GoToNextScene(void);
+static void RecordSceneEnd(void);
 static void BackUpTrainerRematchesToVars(void);
 static void BackUpMapLayoutToVar(void);
 static void SetGameStateAtScene(u8);
@@ -241,22 +241,23 @@ void RunQuestLogCB(void)
         sQuestLogCB();
 }
 
-bool8 sub_8110944(const void *a0, size_t cmdSize)
+bool8 QL_IsRoomToSaveEvent(const void * cursor, size_t size)
 {
-    void *r2 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].script;
-    void *r0 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
-    r0 -= cmdSize;
-    if ((const void *)a0 < r2 || (const void *)a0 > r0)
+    const void *start = gSaveBlock1Ptr->questLog[sCurrentSceneNum].script;
+    const void *end = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
+    end -= size;
+    if (cursor < start || cursor > end)
         return FALSE;
     return TRUE;
 }
 
-bool8 WillCommandOfSizeFitInSav1Record(u16 *cursor, size_t size)
+// Identical to QL_IsRoomToSaveEvent
+bool8 QL_IsRoomToSaveAction(const void * cursor, size_t size)
 {
-    void *start = gSaveBlock1Ptr->questLog[sCurrentSceneNum].script;
-    void *end = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
+    const void *start = gSaveBlock1Ptr->questLog[sCurrentSceneNum].script;
+    const void *end = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
     end -= size;
-    if ((void *)cursor < start || (void *)cursor > end)
+    if (cursor < start || cursor > end)
         return FALSE;
     return TRUE;
 }
@@ -275,7 +276,7 @@ static void QLogCB_Recording(void)
     if (TryRecordActionSequence(sQuestLogActionRecordBuffer) != 1)
     {
         gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
-        TryRecordEvent39_GoToNextScene();
+        RecordSceneEnd();
         gQuestLogState = 0;
         sQuestLogCB = NULL;
     }
@@ -412,9 +413,9 @@ static void BackUpMapLayoutToVar(void)
     VarSet(VAR_QLBAK_MAP_LAYOUT, gSaveBlock1Ptr->mapLayoutId);
 }
 
-static void TryRecordEvent39_GoToNextScene(void)
+static void RecordSceneEnd(void)
 {
-    QL_RecordAction_FF(gQuestLogRecordingPointer);
+    QL_RecordAction_SceneEnd(gQuestLogRecordingPointer);
     if (++sCurrentSceneNum >= QUEST_LOG_SCENE_COUNT)
         sCurrentSceneNum = 0;
 }
@@ -446,7 +447,7 @@ static bool8 TryRecordActionSequence(struct QuestLogAction * actions)
 
     if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
     {
-        gQuestLogRecordingPointer = QL_RecordAction_FF(gQuestLogRecordingPointer);
+        gQuestLogRecordingPointer = QL_RecordAction_SceneEnd(gQuestLogRecordingPointer);
         return FALSE;
     }
     gUnknown_203ADFC = gQuestLogCurActionIdx;
@@ -536,7 +537,7 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
         StringAppend(gStringVar4, gStringVar1);
     }
 
-    AddTextPrinterParameterized4(sWindowIds[WIN_TOP_BAR], FONT_2, 2, 2, 1, 2, sTextColors, 0, gStringVar4);
+    AddTextPrinterParameterized4(sWindowIds[WIN_TOP_BAR], FONT_NORMAL, 2, 2, 1, 2, sTextColors, 0, gStringVar4);
     PutWindowTilemap(sWindowIds[WIN_TOP_BAR]);
     PutWindowTilemap(sWindowIds[WIN_BOTTOM_BAR]);
     CopyWindowToVram(sWindowIds[WIN_TOP_BAR], COPYWIN_GFX);
@@ -793,12 +794,12 @@ static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogAction * a1)
             script = QL_LoadAction_MovementOrGfxChange(script, &a1[r6]);
             r6++;
             break;
-        case QL_EVENT_ACTION_FF:
-            script = QL_LoadAction_FF(script, &a1[r6]);
+        case QL_EVENT_SCENE_END:
+            script = QL_LoadAction_SceneEnd(script, &a1[r6]);
             r6++;
             break;
-        case QL_EVENT_ACTION_FE:
-            script = QL_LoadAction_FE(script, &a1[r6]);
+        case QL_EVENT_WAIT:
+            script = QL_LoadAction_Wait(script, &a1[r6]);
             r6++;
             break;
         default: // Normal event
@@ -1023,7 +1024,7 @@ static void DrawSceneDescription(void)
 
     PutWindowTilemap(sWindowIds[WIN_DESCRIPTION]);
     CopyDescriptionWindowTiles(sWindowIds[WIN_DESCRIPTION]);
-    AddTextPrinterParameterized4(sWindowIds[WIN_DESCRIPTION], FONT_2, 2, sQuestLogTextLineYCoords[numLines], 1, 0, sTextColors, 0, gStringVar4);
+    AddTextPrinterParameterized4(sWindowIds[WIN_DESCRIPTION], FONT_NORMAL, 2, sQuestLogTextLineYCoords[numLines], 1, 0, sTextColors, 0, gStringVar4);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1262,12 +1263,12 @@ static void QL_SlightlyDarkenSomePals(void)
     Free(buffer);
 }
 
-void FinishRecordingQuestLogScene(void)
+void QL_FinishRecordingScene(void)
 {
     if (gQuestLogState == QL_STATE_RECORDING)
     {
         TryRecordActionSequence(sQuestLogActionRecordBuffer);
-        TryRecordEvent39_GoToNextScene();
+        RecordSceneEnd();
         gQuestLogState = 0;
         sQuestLogCB = NULL;
         gUnknown_203AE04 = NULL;
@@ -1281,8 +1282,8 @@ void QuestLog_CutRecording(void)
     if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_0 && gQuestLogState == QL_STATE_RECORDING)
     {
         TryRecordActionSequence(sQuestLogActionRecordBuffer);
-        TryRecordEvent41_IncCursor(1);
-        TryRecordEvent39_GoToNextScene();
+        QL_RecordWait(1);
+        RecordSceneEnd();
         gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
         gQuestLogState = 0;
         sQuestLogCB = NULL;
@@ -1315,7 +1316,7 @@ static void SortQuestLogInSav1(void)
 
 void SaveQuestLogData(void)
 {
-    if (MenuHelpers_LinkSomething() != TRUE)
+    if (MenuHelpers_IsLinkActive() != TRUE)
     {
         QuestLog_CutRecording();
         SortQuestLogInSav1();
@@ -1538,7 +1539,7 @@ static void SetUpQuestLogAction(u8 kind, struct QuestLogAction *actions, u16 siz
         {
             sCurSceneActions[i] = (struct QuestLogAction){
                 .duration = 0xFFFF,
-                .type = QL_ACTION_FF
+                .type = QL_ACTION_SCENE_END
             };
         }
         gQuestLogCurActionIdx = 0;
@@ -1616,12 +1617,13 @@ void sub_8112B3C(void)
                         // End
                         gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
                         break;
-                    case QL_ACTION_FE:
+                    case QL_ACTION_WAIT:
                         break;
-                    case QL_ACTION_FF:
+                    case QL_ACTION_SCENE_END:
                         gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
                         break;
                     }
+
                     if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_0)
                         break;
                     if (++gQuestLogCurActionIdx >= sMaxActionsInScene)
@@ -1630,8 +1632,8 @@ void sub_8112B3C(void)
                         break;
                     }
                     sNextActionDelay = sCurSceneActions[gQuestLogCurActionIdx].duration;
-                } while (gQuestLogPlaybackState != QL_PLAYBACK_STATE_3
-                      && (sNextActionDelay == 0 || sNextActionDelay == 0xFFFF));
+
+                } while (gQuestLogPlaybackState != QL_PLAYBACK_STATE_3 && (sNextActionDelay == 0 || sNextActionDelay == 0xFFFF));
             }
         }
         else if (gQuestLogCurActionIdx >= sMaxActionsInScene)

@@ -12,6 +12,7 @@ SECTIONS {
         . = 0x1C000;
 
 <EWRAM>
+        src/*.o(.ewram_data);
 
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
@@ -26,6 +27,8 @@ SECTIONS {
     {
         /* .bss starts at 0x3000000 */
 <BSS>
+        src/*.o(.bss);
+        data/*.o(.bss);
 
         /* .bss.code starts at 0x30028E0 */
         src/m4a.o(.bss.code);
@@ -45,8 +48,8 @@ SECTIONS {
     ALIGN(4)
     {
         src/rom_header.o(.text);
-	src/rom_header_gf.o(.text*);
-	src/crt0.o(.text);
+        src/rom_header_gf.o(.text*);
+        src/crt0.o(.text);
         src/main.o(.text);
         src/gpu_regs.o(.text);
         src/dma3_manager.o(.text);
@@ -249,7 +252,7 @@ SECTIONS {
         src/trainer_fan_club.o(.text);
         src/quest_log_events.o(.text);
         src/union_room.o(.text);
-        src/rfu_union_tool.o(.text);
+        src/union_room_player_avatar.o(.text);
         src/union_room_battle.o(.text);
         src/pokemon_special_anim.o(.text);
         src/pokemon_special_anim_scene.o(.text);
@@ -275,13 +278,14 @@ SECTIONS {
         src/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
-        src/mevent.o(.text);
-        src/mevent_server_helpers.o(.text);
-        src/mevent_client.o(.text);
-        src/mevent_server.o(.text);
+        src/ereader_screen.o(.text);
+        src/mystery_gift.o(.text);
+        src/mystery_gift_link.o(.text);
+        src/mystery_gift_client.o(.text);
+        src/mystery_gift_server.o(.text);
         src/mystery_gift_show_card.o(.text);
         src/mystery_gift_show_news.o(.text);
-        src/menews_jisan.o(.text);
+        src/wonder_news.o(.text);
         src/seagallop.o(.text);
         src/pokemon_jump.o(.text);
         src/berry_crush.o(.text);
@@ -542,7 +546,7 @@ SECTIONS {
         src/trainer_fan_club.o(.rodata);
         src/quest_log_events.o(.rodata);
         src/union_room.o(.rodata);
-        src/rfu_union_tool.o(.rodata);
+        src/union_room_player_avatar.o(.rodata);
         src/union_room_battle.o(.rodata);
         src/union_room_message.o(.rodata);
         src/pokemon_special_anim.o(.rodata);
@@ -568,15 +572,16 @@ SECTIONS {
         src/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);
-        src/mevent.o(.rodata);
-        src/mevent_server_helpers.o(.rodata);
-        src/mevent_client.o(.rodata);
-        src/mevent_server.o(.rodata);
+        src/ereader_screen.o(.rodata);
+        src/mystery_gift.o(.rodata);
+        src/mystery_gift_link.o(.rodata);
+        src/mystery_gift_client.o(.rodata);
+        src/mystery_gift_server.o(.rodata);
         src/mystery_gift_show_card.o(.rodata);
         src/mystery_gift_show_news.o(.rodata);
-        src/mevent_scripts.o(.rodata);
-        src/menews_jisan.o(.rodata);
-        src/menews_jisan.o(.rodata.str1.4);
+        src/mystery_gift_scripts.o(.rodata);
+        src/wonder_news.o(.rodata);
+        src/wonder_news.o(.rodata.str1.4);
         src/seagallop.o(.rodata);
         src/pokemon_jump.o(.rodata);
         src/berry_crush.o(.rodata);
@@ -1024,6 +1029,14 @@ SECTIONS {
     {
         src/graphics.o(.rodata);
     } =0
+
+    extra :
+    ALIGN(4)
+    {
+        src/*.o(.text);
+        src/*.o(.rodata);
+        data/*.o(.rodata);
+    } = 0
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

@@ -6,7 +6,7 @@
 #include "trade.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "graphics.h"
 #include "strings.h"
 #include "menu.h"
@@ -771,7 +771,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 action)
     }
 }
 
-void CB2_InitTradeAnim_LinkTrade(void)
+void CB2_LinkTrade(void)
 {
     switch (gMain.state)
     {
@@ -935,16 +935,16 @@ static void TradeAnimInit_LoadGfx(void)
     SetBgTilemapBuffer(3, Alloc(BG_SCREEN_SIZE));
     DeactivateAllTextPrinters();
     // Doing the graphics load...
-    DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
+    DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
+    LZDecompressWram(gBattleInterface_Textbox_Tilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x000, 0x20);
     InitWindows(sTradeMessageWindowTemplates);
     // ... and doing the same load again
-    DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
+    DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
+    LZDecompressWram(gBattleInterface_Textbox_Tilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x000, 0x20);
 }
 
 static void CB2_InitTradeAnim_InGameTrade(void)
@@ -2666,7 +2666,7 @@ static void CB2_HandleTradeEnded(void)
     case 8:
         if (IsBGMStopped() == TRUE)
         {
-            if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
+            if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
             {
                 SetLinkStandbyCallback();
             }
@@ -2678,7 +2678,7 @@ static void CB2_HandleTradeEnded(void)
         }
         break;
     case 9:
-        if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
+        if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
         {
             if (IsLinkRfuTaskFinished())
             {
@@ -2763,7 +2763,7 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, s8 speed)
     sTradeData->textColor[0] = 15;
     sTradeData->textColor[1] = 1;
     sTradeData->textColor[2] = 6;
-    AddTextPrinterParameterized4(windowId, FONT_2, 0, 2, 0, 2, sTradeData->textColor, speed, str);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 2, sTradeData->textColor, speed, str);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 

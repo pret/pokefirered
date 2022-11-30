@@ -632,7 +632,7 @@ static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest)
 {
     s32 i;
     ConvertEasyChatWordsToString(dest, ecWords, 3, 2);
-    if ((unsigned)GetStringWidth(FONT_2, dest, -1) > 196)
+    if ((unsigned)GetStringWidth(FONT_NORMAL, dest, -1) > 196)
     {
         // Has to be printed 2x3
         ConvertEasyChatWordsToString(dest, ecWords, 2, 3);
@@ -721,7 +721,7 @@ static void CB2_EndTrainerTowerBattle(void)
 
 static void Task_DoTrainerTowerBattle(u8 taskId)
 {
-    if (BT_IsDone() == TRUE)
+    if (IsBattleTransitionDone() == TRUE)
     {
         gMain.savedCallback = CB2_EndTrainerTowerBattle;
         CleanupOverworldWindowsAndTilemaps();
@@ -741,7 +741,7 @@ static void DoTrainerTowerBattle(void)
     BuildEnemyParty();
     CreateTask(Task_DoTrainerTowerBattle, 1);
     PlayMapChosenOrBattleBGM(0);
-    BT_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
+    BattleTransition_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
 }
 
 static void TrainerTowerGetChallengeType(void)
@@ -905,15 +905,15 @@ static void ShowResultsBoard(void)
     windowId = AddWindow(sTimeBoardWindowTemplate);
     LoadStdWindowFrameGfx();
     DrawStdWindowFrame(windowId, FALSE);
-    AddTextPrinterParameterized(windowId, FONT_2, gText_TimeBoard, 74, 0, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_TimeBoard, 74, 0, TEXT_SKIP_DRAW, NULL);
 
     for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
         PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime));
 
         StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
-        AddTextPrinterParameterized(windowId, FONT_2, gTrainerTowerChallengeTypeTexts[i - 1], 24, 36 + 20 * i, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(windowId, FONT_2, gStringVar4, 96, 46 + 20 * i, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gTrainerTowerChallengeTypeTexts[i - 1], 24, 36 + 20 * i, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 96, 46 + 20 * i, TEXT_SKIP_DRAW, NULL);
     }
 
     PutWindowTilemap(windowId);
@@ -1059,14 +1059,14 @@ void PrintTrainerTowerRecords(void)
     SetUpTrainerTowerDataStruct();
     FillWindowPixelRect(0, PIXEL_FILL(0), 0, 0, 216, 144);
     ValidateOrResetCurTrainerTowerRecord();
-    AddTextPrinterParameterized3(0, FONT_2, 0x4a, 0, sTextColors, 0, gText_TimeBoard);
+    AddTextPrinterParameterized3(0, FONT_NORMAL, 0x4a, 0, sTextColors, 0, gText_TimeBoard);
 
     for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
         PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&gSaveBlock1Ptr->trainerTower[i].bestTime));
         StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
-        AddTextPrinterParameterized3(windowId, FONT_2, 0x18, 0x24 + 0x14 * i, sTextColors, 0, gTrainerTowerChallengeTypeTexts[i]);
-        AddTextPrinterParameterized3(windowId, FONT_2, 0x60, 0x24 + 0x14 * i, sTextColors, 0, gStringVar4);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, 0x18, 0x24 + 0x14 * i, sTextColors, 0, gTrainerTowerChallengeTypeTexts[i]);
+        AddTextPrinterParameterized3(windowId, FONT_NORMAL, 0x60, 0x24 + 0x14 * i, sTextColors, 0, gStringVar4);
     }
 
     PutWindowTilemap(windowId);

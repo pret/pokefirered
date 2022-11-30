@@ -1,17 +1,21 @@
 #ifndef GUARD_TM_CASE_H
 #define GUARD_TM_CASE_H
 
-enum TmCaseType
-{
-    TMCASE_FROMFIELD,
-    TMCASE_FROMPARTYGIVE,
-    TMCASE_FROMMARTSELL,
-    TMCASE_FROMPOKEMONSTORAGEPC,
-    TMCASE_FROMBATTLE,
-    TMCASE_NA
+// Values for 'type' argument to InitTMCase
+enum {
+    TMCASE_FIELD,
+    TMCASE_GIVE_PARTY,
+    TMCASE_SELL,
+    TMCASE_GIVE_PC,
+    TMCASE_POKEDUDE,
+    TMCASE_REOPENING,
 };
 
-void InitTMCase(u8 a0, void (* a1)(void), u8 a2);
+// Alternative value for 'allowSelectClose' argument to InitTMCase.
+// Indicates that the previous value should be preserved
+#define TMCASE_KEEP_PREV 0xFF
+
+void InitTMCase(u8 type, void (* exitCallback)(void), bool8 allowSelectClose);
 void ResetTMCaseCursorPos(void);
 void Pokedude_InitTMCase(void);
 

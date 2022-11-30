@@ -103,8 +103,8 @@ extern const u8 gText_ItemCantBeHeld[];
 extern const u8 gText_TMCase[];
 extern const u8 gText_Close[];
 extern const u8 gText_TMCaseWillBePutAway[];
-extern const u8 gText_FontSize0[];
-extern const u8 gText_FontSize2[];
+extern const u8 gText_FontSmall[];
+extern const u8 gText_FontNormal[];
 extern const u8 gText_OhNoICantBuyThat[];
 extern const u8 gText_HowManyWouldYouLikeToSell[];
 extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
@@ -1141,7 +1141,7 @@ extern const u8 gText_PeopleBattling[];
 extern const u8 gText_PeopleInUnionRoom[];
 extern const u8 gText_PeopleCommunicating[];
 
-// mevent
+// mystery_gift
 extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
 extern const u8 gJPText_SelectConnectFromEReaderMenu[];
 extern const u8 gJPText_SelectConnectWithGBA[];

@@ -2292,15 +2292,15 @@ static void PrintDisplayMonInfo(void)
     if (gStorage->boxOption != OPTION_MOVE_ITEMS)
     {
         for (i = 0, y = 0; i < 3; i++, y += 14)
-            AddTextPrinterParameterized(0, FONT_2, gStorage->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(0, FONT_NORMAL, gStorage->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
 
-        AddTextPrinterParameterized(0, FONT_0, gStorage->displayMonTexts[3], 6, y + 2, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, gStorage->displayMonTexts[3], 6, y + 2, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(0, FONT_0, gStorage->displayMonTexts[3], 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(0, FONT_SMALL, gStorage->displayMonTexts[3], 6, 0, TEXT_SKIP_DRAW, NULL);
         for (i = 0, y = 15; i < 3; i++, y += 14)
-            AddTextPrinterParameterized(0, FONT_2, gStorage->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(0, FONT_NORMAL, gStorage->displayMonTexts[i], i == 2 ? 10 : 6, y, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(0, COPYWIN_GFX);
@@ -2585,7 +2585,7 @@ static void PrintStorageMessage(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStorage->actionText, sMessages[id].text);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    AddTextPrinterParameterized(1, FONT_1, gStorage->actionText, 0, 2, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(1, FONT_NORMAL_COPY_1, gStorage->actionText, 0, 2, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(1, 2, 13);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);
@@ -2594,7 +2594,7 @@ static void PrintStorageMessage(u8 id)
 
 static void ShowYesNoWindow(s8 cursorPos)
 {
-    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_1, 0, 2, 11, 14, 1);
+    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_NORMAL_COPY_1, 0, 2, 11, 14, 1);
     Menu_MoveCursorNoWrapAround(cursorPos);
 }
 

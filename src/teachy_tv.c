@@ -240,7 +240,7 @@ static const struct ListMenuTemplate sListMenuTemplate =
     .lettersSpacing = 0x0,
     .itemVerticalPadding = 0x0,
     .scrollMultiple = 0x1,
-    .fontId = FONT_2,
+    .fontId = FONT_NORMAL,
     .cursorKind = 0x0,
 };
 
@@ -676,7 +676,7 @@ static void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 static void TeachyTvInitTextPrinter(const u8 *text)
 {
     gTextFlags.autoScroll = 0;
-    AddTextPrinterParameterized2(0, FONT_4, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
+    AddTextPrinterParameterized2(0, FONT_MALE, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
 }
 
 static void TeachyTvFree(void)
@@ -1179,9 +1179,9 @@ static void TeachyTvPrepBattle(u8 taskId)
     InitPokedudePartyAndOpponent();
     PlayMapChosenOrBattleBGM(MUS_DUMMY);
     if (sStaticResources.whichScript == TTVSCR_BATTLE)
-        data[6] = B_TRANSITION_WHITEFADE_IN_STRIPES;
+        data[6] = B_TRANSITION_WHITE_BARS_FADE;
     else
-        data[6] = B_TRANSITION_SLICED_SCREEN;
+        data[6] = B_TRANSITION_SLICE;
     data[7] = 0;
     gTasks[taskId].func = TeachyTvPreBattleAnimAndSetBattleCallback;
 }
@@ -1192,11 +1192,11 @@ static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId)
     switch (data[7])
     {
     case 0:
-        BT_StartOnField(data[6]);
+        BattleTransition_StartOnField(data[6]);
         ++data[7];
         break;
     case 1:
-        if (BT_IsDone())
+        if (IsBattleTransitionDone())
         {
             SetMainCallback2(CB2_InitBattle);
             DestroyTask(taskId);

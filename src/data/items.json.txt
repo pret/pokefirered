@@ -20,7 +20,7 @@ const struct Item gItems[] = {
         .description = gItemDescription_{{ item.itemId }},
 ## endif
         .importance = {{ item.importance }},
-        .exitsBagOnUse = {{ item.exitsBagOnUse }},
+        .registrability = {{ item.registrability }},
         .pocket = {{ item.pocket }},
         .type = {{ item.type }},
         .fieldUseFunc = {{ item.fieldUseFunc }},

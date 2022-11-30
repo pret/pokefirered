@@ -94,7 +94,7 @@ static const u8 sHelpMessageTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMI
 
 static void PrintHelpMessageText(const u8 *text)
 {
-    AddTextPrinterParameterized4(sHelpMessageWindowId, FONT_2, 2, 5, 1, 1, sHelpMessageTextColors, -1, text);
+    AddTextPrinterParameterized4(sHelpMessageWindowId, FONT_NORMAL, 2, 5, 1, 1, sHelpMessageTextColors, -1, text);
 }
 
 void PrintTextOnHelpMessageWindow(const u8 *text, u8 mode)

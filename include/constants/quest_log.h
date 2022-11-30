@@ -61,9 +61,9 @@
 #define QL_EVENT_USED_FIELD_MOVE                36
 #define QL_EVENT_BOUGHT_ITEM                    37
 #define QL_EVENT_SOLD_ITEM                      38
-#define QL_EVENT_ACTION_FF                      39 // Null
+#define QL_EVENT_SCENE_END                      39 // Null
 #define QL_EVENT_OBTAINED_STORY_ITEM            40
-#define QL_EVENT_ACTION_FE                      41 // Null
+#define QL_EVENT_WAIT                           41 // Null
 #define QL_EVENT_ARRIVED                        42
 
 #define QL_EVENT_USED_POKEMART (QL_EVENT_BOUGHT_ITEM - 1) // Used as a start pos for QL_EVENT_BOUGHT_ITEM / QL_EVENT_SOLD_ITEM
@@ -146,11 +146,11 @@
 #define QL_INPUT_A      9
 #define QL_INPUT_B      10
 
-#define QL_ACTION_MOVEMENT 0
-#define QL_ACTION_GFX_CHANGE 1
-#define QL_ACTION_INPUT 2
-#define QL_ACTION_3 3
-#define QL_ACTION_FE 0xFE
-#define QL_ACTION_FF 0xFF
+#define QL_ACTION_MOVEMENT     0
+#define QL_ACTION_GFX_CHANGE   1
+#define QL_ACTION_INPUT        2
+#define QL_ACTION_3            3
+#define QL_ACTION_WAIT       254
+#define QL_ACTION_SCENE_END  255
 
 #endif //GUARD_CONSTANTS_QUEST_LOG_H

@@ -278,31 +278,27 @@ const struct OamData gOamData_BattlerPlayer =
     .affineParam = 0,
 };
 
-// not used
-static const union AnimCmd gUnknown_824F020[] =
+static const union AnimCmd sAnim_Unused[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_JUMP(0),
 };
 
-// not used
-static const union AnimCmd *const gUnknown_824F028[] =
+static const union AnimCmd *const sAnims_Unused[] =
 {
-    gUnknown_824F020,
+    sAnim_Unused,
 };
 
-// not used
-static const union AffineAnimCmd gUnknown_824F02C[] =
+static const union AffineAnimCmd sAffineAnim_Unused[] =
 {
     AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 4),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 0x3C),
     AFFINEANIMCMD_JUMP(1),
 };
 
-// not used
-static const union AffineAnimCmd *const gUnknown_824F044[] =
+static const union AffineAnimCmd *const sAffineAnims_Unused[] =
 {
-    gUnknown_824F02C,
+    sAffineAnim_Unused,
 };
 
 static const s8 sPlayerThrowXTranslation[] = { -32, -16, -16, -32, -32, 0, 0, 0 };
@@ -1773,7 +1769,7 @@ void CB2_InitEndLinkBattle(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
     InitBattleBgsVideo();
-    LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0, 64);
     LoadBattleMenuWindowGfx();
     ResetSpriteData();
     ResetTasks();

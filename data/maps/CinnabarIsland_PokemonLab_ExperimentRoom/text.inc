@@ -64,7 +64,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor::
     .string "So!\n"
     .string "You hurry and give me that!\p"
-    .string "{FONT_2}{PLAYER} handed over the\n"
+    .string "{FONT_NORMAL}{PLAYER} handed over the\n"
     .string "{STR_VAR_2} to the weird doctor.$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk::

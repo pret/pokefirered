@@ -882,7 +882,7 @@ static void CB2_FinishEReaderBattle(void)
 
 static void Task_WaitBT(u8 taskId)
 {
-    if (BT_IsDone() == TRUE)
+    if (IsBattleTransitionDone() == TRUE)
     {
         gMain.savedCallback = CB2_FinishEReaderBattle;
         CleanupOverworldWindowsAndTilemaps();
@@ -910,7 +910,7 @@ void StartSpecialBattle(void)
         CreateTask(Task_WaitBT, 1);
         PlayMapChosenOrBattleBGM(0);
         transition = BattleSetup_GetBattleTowerBattleTransition();
-        BT_StartOnField(transition);
+        BattleTransition_StartOnField(transition);
         break;
     case 1: // secret base battle
         for (i = 0; i < PARTY_SIZE; i++)
@@ -922,7 +922,7 @@ void StartSpecialBattle(void)
         CreateTask(Task_WaitBT, 1);
         PlayMapChosenOrBattleBGM(0);
         transition = BattleSetup_GetBattleTowerBattleTransition();
-        BT_StartOnField(transition);
+        BattleTransition_StartOnField(transition);
         break;
     case 2: // e-reader trainer battle
         ZeroEnemyPartyMons();
@@ -936,7 +936,7 @@ void StartSpecialBattle(void)
         CreateTask(Task_WaitBT, 1);
         PlayMapChosenOrBattleBGM(0);
         transition = BattleSetup_GetBattleTowerBattleTransition();
-        BT_StartOnField(transition);
+        BattleTransition_StartOnField(transition);
         break;
     }
 }

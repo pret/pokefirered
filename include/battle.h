@@ -88,7 +88,7 @@ struct TrainerMonNoItemCustomMoves
     u16 iv;
     u8 lvl;
     u16 species;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
 
 struct TrainerMonItemCustomMoves
@@ -97,8 +97,13 @@ struct TrainerMonItemCustomMoves
     u8 lvl;
     u16 species;
     u16 heldItem;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
+
+#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
+#define NO_ITEM_CUSTOM_MOVES(party) { .NoItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
+#define ITEM_DEFAULT_MOVES(party) { .ItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
+#define ITEM_CUSTOM_MOVES(party) { .ItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM
 
 union TrainerMonPtr
 {
@@ -115,7 +120,7 @@ struct Trainer
     /*0x02*/ u8 encounterMusic_gender; // last bit is gender
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[12];
-    /*0x10*/ u16 items[4];
+    /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
@@ -576,7 +581,7 @@ struct BattleBarInfo
     u8 healthboxSpriteId;
     s32 maxValue;
     s32 oldValue;
-    s32 receivedValue;
+    s32 receivedValue; // if positive/negative, fills the bar to the left/right respectively
     s32 currValue;
 };
 

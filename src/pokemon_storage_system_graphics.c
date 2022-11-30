@@ -1442,7 +1442,7 @@ static void CycleBoxTitleColor(void)
 
 static s16 GetBoxTitleBaseX(const u8 *string)
 {
-    return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_1, string, 0) / 2;
+    return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_NORMAL_COPY_1, string, 0) / 2;
 }
 
 // Sprite data for box scroll arrows

@@ -3,7 +3,7 @@ CableClub_OnTransition::
 	end
 
 CableClub_EventScript_HideOrShowMysteryGiftMan::
-	specialvar VAR_RESULT, ValidateReceivedWonderCard
+	specialvar VAR_RESULT, ValidateSavedWonderCard
 	goto_if_eq VAR_RESULT, FALSE, EventScript_HideMysteryGiftMan
 	clearflag FLAG_HIDE_MG_DELIVERYMEN
 	return
@@ -796,7 +796,7 @@ CableClub_EventScript_EnterUnionRoom::
 	special SetCableClubWarp
 	warpspinenter MAP_UNION_ROOM, 7, 11
 	waitstate
-	special UnionRoomSpecial
+	special RunUnionRoom
 	waitstate
 	end
 

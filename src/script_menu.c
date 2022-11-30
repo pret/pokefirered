@@ -711,7 +711,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
     u8 windowId;
     const struct MenuAction * list;
 
-    if ((ignoreBpress & 2) || QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
+    if ((ignoreBpress & 2) || QL_AvoidDisplay(QL_DestroyAbortedDisplay) != TRUE)
     {
         ignoreBpress &= 1;
         count = gScriptMultiChoiceMenus[mcId].count;
@@ -729,7 +729,7 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
         height = GetMCWindowHeight(count);
         windowId = CreateWindowFromRect(left, top, width, height);
         SetStdWindowBorderStyle(windowId, FALSE);
-        if (mcId == 30 || mcId == 13 || mcId == 41)
+        if (mcId == MULTICHOICE_GAME_CORNER_TMPRIZES || mcId == MULTICHOICE_BIKE_SHOP || mcId == MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES)
             MultichoiceList_PrintItems(windowId, FONT_NORMAL, 8, 2, 14, count, list, 0, 2);
         else
             MultichoiceList_PrintItems(windowId, FONT_NORMAL, 8, 2, 14, count, list, 0, 2);
@@ -769,7 +769,7 @@ static u8 GetMCWindowHeight(u8 count)
 static void CreateMCMenuInputHandlerTask(u8 ignoreBpress, u8 count, u8 windowId, u8 mcId)
 {
     u8 taskId;
-    if (mcId == 39 || mcId == 47 || mcId == 50)
+    if (mcId == MULTICHOICE_TRADE_CENTER_COLOSSEUM || mcId == MULTICHOICE_TRADE_COLOSSEUM_CRUSH || mcId == MULTICHOICE_TRADE_COLOSSEUM_2)
         sDelay = 12;
     else
         sDelay = 0;
@@ -845,11 +845,12 @@ bool8 ScriptMenu_YesNo(u8 unused, u8 stuff)
     if (FuncIsActiveTask(Task_YesNoMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
-    if (!QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites))
-    {
-        DisplayYesNoMenuDefaultYes();
-        CreateTask(Task_YesNoMenu_HandleInput, 80);
-    }
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay))
+        return TRUE;
+
+    DisplayYesNoMenuDefaultYes();
+    CreateTask(Task_YesNoMenu_HandleInput, 80);
     return TRUE;
 }
 
@@ -900,20 +901,22 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 co
     if (FuncIsActiveTask(Hask_MultichoiceGridMenu_HandleInput) == TRUE)
         return FALSE;
     gSpecialVar_Result = SCR_MENU_UNSET;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
-    {
-        list = gScriptMultiChoiceMenus[multichoiceId].list;
-        count = gScriptMultiChoiceMenus[multichoiceId].count;
-        width = GetMenuWidthFromList(list, count) + 1;
-        rowCount = count / columnCount;
-        taskId = CreateTask(Hask_MultichoiceGridMenu_HandleInput, 80);
-        gTasks[taskId].data[4] = a4;
-        gTasks[taskId].data[6] = CreateWindowFromRect(left, top, width * columnCount, rowCount * 2);
-        SetStdWindowBorderStyle(gTasks[taskId].data[6], FALSE);
-        MultichoiceGrid_PrintItems(gTasks[taskId].data[6], FONT_NORMAL_COPY_1, width * 8, 16, columnCount, rowCount, list);
-        MultichoiceGrid_InitCursor(gTasks[taskId].data[6], FONT_NORMAL_COPY_1, 0, 1, width * 8, columnCount, rowCount, 0);
-        ScheduleBgCopyTilemapToVram(0);
-    }
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return TRUE;
+
+    list = gScriptMultiChoiceMenus[multichoiceId].list;
+    count = gScriptMultiChoiceMenus[multichoiceId].count;
+    width = GetMenuWidthFromList(list, count) + 1;
+    rowCount = count / columnCount;
+    taskId = CreateTask(Hask_MultichoiceGridMenu_HandleInput, 80);
+    gTasks[taskId].data[4] = a4;
+    gTasks[taskId].data[6] = CreateWindowFromRect(left, top, width * columnCount, rowCount * 2);
+    SetStdWindowBorderStyle(gTasks[taskId].data[6], FALSE);
+    MultichoiceGrid_PrintItems(gTasks[taskId].data[6], FONT_NORMAL_COPY_1, width * 8, 16, columnCount, rowCount, list);
+    MultichoiceGrid_InitCursor(gTasks[taskId].data[6], FONT_NORMAL_COPY_1, 0, 1, width * 8, columnCount, rowCount, 0);
+    ScheduleBgCopyTilemapToVram(0);
+
     return TRUE;
 }
 
@@ -1032,7 +1035,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
 {
     u8 spriteId;
     u8 taskId;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) == TRUE)
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
         return TRUE;
     if (FindTaskIdByFunc(Task_ScriptShowMonPic) != 0xFF)
         return FALSE;
@@ -1116,7 +1119,7 @@ bool8 OpenMuseumFossilPic(void)
 {
     u8 spriteId;
     u8 taskId;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) == TRUE)
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
         return TRUE;
     if (FindTaskIdByFunc(Task_WaitMuseumFossilPic) != 0xFF)
         return FALSE;
@@ -1169,7 +1172,7 @@ static void DestroyScriptMenuWindow(u8 windowId)
     RemoveWindow(windowId);
 }
 
-void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
+void QL_DestroyAbortedDisplay(void)
 {
     u8 taskId;
     s16 *data;
@@ -1205,44 +1208,45 @@ void DrawSeagallopDestinationMenu(void)
     u8 windowId;
     u8 i;
     gSpecialVar_Result = SCR_MENU_UNSET;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return;
+
+    if (gSpecialVar_0x8005 == 1)
     {
-        if (gSpecialVar_0x8005 == 1)
-        {
-            if (gSpecialVar_0x8004 < SEAGALLOP_FIVE_ISLAND)
-                r4 = SEAGALLOP_FIVE_ISLAND;
-            else
-                r4 = SEAGALLOP_FOUR_ISLAND;
-            nitems = 5;
-            top = 2;
-        }
+        if (gSpecialVar_0x8004 < SEAGALLOP_FIVE_ISLAND)
+            r4 = SEAGALLOP_FIVE_ISLAND;
         else
-        {
-            r4 = SEAGALLOP_VERMILION_CITY;
-            nitems = 6;
-            top = 0;
-        }
-        cursorWidth = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
-        fontHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
-        windowId = CreateWindowFromRect(17, top, 11, nitems * 2);
-        SetStdWindowBorderStyle(windowId, FALSE);
-        for (i = 0; i < nitems - 2; i++)
-        {
-            if (r4 != gSpecialVar_0x8004)
-                AddTextPrinterParameterized(windowId, FONT_NORMAL, sSeagallopDestStrings[r4], cursorWidth, i * 16 + 2, 0xFF, NULL);
-            else
-                i--;
-            r4++;
-            if (r4 == SEAGALLOP_CINNABAR_ISLAND)
-                r4 = SEAGALLOP_VERMILION_CITY;
-        }
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Other, cursorWidth, i * 16 + 2, 0xFF, NULL);
-        i++;
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
-        Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, 16, nitems, 0);
-        CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
-        ScheduleBgCopyTilemapToVram(0);
+            r4 = SEAGALLOP_FOUR_ISLAND;
+        nitems = 5;
+        top = 2;
     }
+    else
+    {
+        r4 = SEAGALLOP_VERMILION_CITY;
+        nitems = 6;
+        top = 0;
+    }
+    cursorWidth = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
+    fontHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
+    windowId = CreateWindowFromRect(17, top, 11, nitems * 2);
+    SetStdWindowBorderStyle(windowId, FALSE);
+    for (i = 0; i < nitems - 2; i++)
+    {
+        if (r4 != gSpecialVar_0x8004)
+            AddTextPrinterParameterized(windowId, FONT_NORMAL, sSeagallopDestStrings[r4], cursorWidth, i * 16 + 2, 0xFF, NULL);
+        else
+            i--;
+        r4++;
+        if (r4 == SEAGALLOP_CINNABAR_ISLAND)
+            r4 = SEAGALLOP_VERMILION_CITY;
+    }
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Other, cursorWidth, i * 16 + 2, 0xFF, NULL);
+    i++;
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gOtherText_Exit, cursorWidth, i * 16 + 2, 0xFF, NULL);
+    Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, 16, nitems, 0);
+    CreateMCMenuInputHandlerTask(FALSE, nitems, windowId, 0xFF);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 u16 GetSelectedSeagallopDestination(void)

@@ -819,7 +819,7 @@ static void QL_LoadMapNormal(void)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     sub_8110920();
-    sub_8111708();
+    QL_RestoreMapLayoutId();
     LoadSaveblockMapHeader();
     InitMap();
 }

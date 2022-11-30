@@ -1095,18 +1095,19 @@ void DrawElevatorCurrentFloorWindow(void)
 {
     const u8 *floorname;
     u32 strwidth;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
-    {
-        sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
-        LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
-        DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, gText_NowOn, 0, 2, 0xFF, NULL);
-        floorname = sFloorNamePointers[gSpecialVar_0x8005];
-        strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, floorname, 56 - strwidth, 16, 0xFF, NULL);
-        PutWindowTilemap(sElevatorCurrentFloorWindowId);
-        CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
-    }
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return;
+
+    sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
+    LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
+    DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, gText_NowOn, 0, 2, 0xFF, NULL);
+    floorname = sFloorNamePointers[gSpecialVar_0x8005];
+    strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, floorname, 56 - strwidth, 16, 0xFF, NULL);
+    PutWindowTilemap(sElevatorCurrentFloorWindowId);
+    CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
 }
 
 void CloseElevatorCurrentFloorWindow(void)
@@ -1164,91 +1165,92 @@ void ListMenu(void)
 {
     u8 taskId;
     struct Task *task;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return;
+        
+    taskId = CreateTask(Task_CreateScriptListMenu, 8);
+    task = &gTasks[taskId];
+    switch (gSpecialVar_0x8004)
     {
-        taskId = CreateTask(Task_CreateScriptListMenu, 8);
-        task = &gTasks[taskId];
-        switch (gSpecialVar_0x8004)
-        {
-        case LISTMENU_BADGES:
-            task->data[0] = 4;
-            task->data[1] = 9;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 12;
-            task->data[5] = 7;
-            task->data[6] = 1;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_SILPHCO_FLOORS:
-            task->data[0] = 7;
-            task->data[1] = 12;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            task->data[7] = sElevatorScroll;
-            task->data[8] = sElevatorCursorPos;
-            break;
-        case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 6;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 8;
-            task->data[6] = 1;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_BERRY_POWDER:
-            task->data[0] = 7;
-            task->data[1] = 12;
-            task->data[2] = 16;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
-            task->data[0] = 3;
-            task->data[1] = 3;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 6;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case 99:
-            break;
-        default:
-            gSpecialVar_Result = 0x7F;
-            DestroyTask(taskId);
-            break;
-        }
+    case LISTMENU_BADGES:
+        task->data[0] = 4;
+        task->data[1] = 9;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 12;
+        task->data[5] = 7;
+        task->data[6] = 1;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_SILPHCO_FLOORS:
+        task->data[0] = 7;
+        task->data[1] = 12;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 12;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        task->data[7] = sElevatorScroll;
+        task->data[8] = sElevatorCursorPos;
+        break;
+    case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
+        task->data[0] = 4;
+        task->data[1] = 4;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 8;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
+        task->data[0] = 4;
+        task->data[1] = 6;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 8;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
+        task->data[0] = 4;
+        task->data[1] = 4;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 17;
+        task->data[5] = 8;
+        task->data[6] = 1;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_BERRY_POWDER:
+        task->data[0] = 7;
+        task->data[1] = 12;
+        task->data[2] = 16;
+        task->data[3] = 1;
+        task->data[4] = 17;
+        task->data[5] = 12;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
+        task->data[0] = 3;
+        task->data[1] = 3;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 6;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case 99:
+        break;
+    default:
+        gSpecialVar_Result = 0x7F;
+        DestroyTask(taskId);
+        break;
     }
 }
 

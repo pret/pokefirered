@@ -113,15 +113,15 @@ void DisplayBerryPowderVendorMenu(void)
 {
     struct WindowTemplate template;
 
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
-    {
-        template = SetWindowTemplateFields(0, 1, 1, 8, 3, 15, 32);
-        sBerryPowderVendorWindowId = AddWindow(&template);
-        FillWindowPixelBuffer(sBerryPowderVendorWindowId, 0);
-        PutWindowTilemap(sBerryPowderVendorWindowId);
-        LoadStdWindowGfx(sBerryPowderVendorWindowId, 0x21D, 0xD0);
-        DrawPlayerPowderAmount(sBerryPowderVendorWindowId, 0x21D, 0xD, GetBerryPowder());
-    }
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return;
+
+    template = SetWindowTemplateFields(0, 1, 1, 8, 3, 15, 32);
+    sBerryPowderVendorWindowId = AddWindow(&template);
+    FillWindowPixelBuffer(sBerryPowderVendorWindowId, 0);
+    PutWindowTilemap(sBerryPowderVendorWindowId);
+    LoadStdWindowGfx(sBerryPowderVendorWindowId, 0x21D, 0xD0);
+    DrawPlayerPowderAmount(sBerryPowderVendorWindowId, 0x21D, 0xD, GetBerryPowder());
 }
 
 void RemoveBerryPowderVendorMenu(void)

@@ -69,11 +69,17 @@ enum {
 // sQuestLogActionRecordBuffer should be large enough to fill a scene's script with the maximum number of actions
 #define SCRIPT_BUFFER_SIZE (sizeof(gSaveBlock1Ptr->questLog[0].script) / sizeof(struct QuestLogAction))
 
+enum {
+    END_MODE_NONE,
+    END_MODE_FINISH,
+    END_MODE_SCENE,
+};
+
 struct PlaybackControl
 {
     u8 state:4;
     u8 playingEvent:2;
-    u8 sceneEndMode:2;
+    u8 endMode:2;
     u8 cursor;
     u8 timer;
     u8 overlapTimer;
@@ -118,8 +124,8 @@ static void QLogCB_Playback(void);
 static void SetPlayerInitialCoordsAtScene(u8);
 static void SetNPCInitialCoordsAtScene(u8);
 static void RecordSceneEnd(void);
-static void BackUpTrainerRematchesToVars(void);
-static void BackUpMapLayoutToVar(void);
+static void BackUpTrainerRematches(void);
+static void BackUpMapLayout(void);
 static void SetGameStateAtScene(u8);
 static u8 TryRecordActionSequence(struct QuestLogAction *);
 static void Task_BeginQuestLogPlayback(u8);
@@ -128,19 +134,19 @@ static void QLPlayback_InitOverworldState(void);
 static void SetPokemonCounts(void);
 static u16 QuestLog_GetPartyCount(void);
 static u16 QuestLog_GetBoxMonCount(void);
-static void sub_8111688(void);
+static void RestoreTrainerRematches(void);
 static void ReadQuestLogScriptFromSav1(u8, struct QuestLogAction *);
-static void QuestLog_BeginFadeAtEndOfScene(s8 delay);
+static void DoSceneEndTransition(s8 delay);
+static void DoSkipToEndTransition(s8 delay);
 static void QuestLog_AdvancePlayhead(void);
 static void QuestLog_StartFinalScene(void);
-static void Task_RunPlaybackCB(u8);
+static void Task_AvoidDisplay(u8);
 static void QuestLog_PlayCurrentEvent(void);
 static void HandleShowQuestLogMessage(void);
 static u8 GetQuestLogTextDisplayDuration(void);
 static void DrawSceneDescription(void);
 static void CopyDescriptionWindowTiles(u8);
 static void QuestLog_CloseTextWindow(void);
-static void QuestLog_SkipToEndOfPlayback(s8 delay);
 static void QuestLog_WaitFadeAndCancelPlayback(void);
 static bool8 FieldCB2_FinalScene(void);
 static void Task_FinalScene_WaitFade(u8);
@@ -205,7 +211,7 @@ void SetQuestLogRecordAndPlaybackPointers(void *oldPointer)
         if (gQuestLogState == QL_STATE_PLAYBACK)
         {
             int r3;
-            for (r3 = 0; r3 < (int)NELEMS(gUnknown_203AE0C); r3++)
+            for (r3 = 0; r3 < (int)ARRAY_COUNT(gUnknown_203AE0C); r3++)
                 if (gUnknown_203AE0C[r3])
                     gUnknown_203AE0C[r3] = (void *)gUnknown_203AE0C[r3] + offset;
         }
@@ -287,18 +293,18 @@ static void QLogCB_Playback(void)
     if (sPlaybackControl.state == 2)
         sPlaybackControl.state = 0;
 
-    if (sPlaybackControl.sceneEndMode == 0)
+    if (sPlaybackControl.endMode == END_MODE_NONE)
     {
         if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_0 
          || sPlaybackControl.state == 1 
-         || (sPlaybackControl.cursor < NELEMS(gUnknown_203AE0C) 
+         || (sPlaybackControl.cursor < ARRAY_COUNT(gUnknown_203AE0C) 
           && gUnknown_203AE0C[sPlaybackControl.cursor] != NULL))
             QuestLog_PlayCurrentEvent();
         else
         {
-            sPlaybackControl.sceneEndMode = 2;
+            sPlaybackControl.endMode = END_MODE_SCENE;
             LockPlayerFieldControls();
-            QuestLog_BeginFadeAtEndOfScene(0);
+            DoSceneEndTransition(0);
         }
     }
 }
@@ -328,8 +334,8 @@ void StartRecordingQuestLogAction(u16 eventId)
     SetPokemonCounts();
     SetPlayerInitialCoordsAtScene(sCurrentSceneNum);
     SetNPCInitialCoordsAtScene(sCurrentSceneNum);
-    BackUpTrainerRematchesToVars();
-    BackUpMapLayoutToVar();
+    BackUpTrainerRematches();
+    BackUpMapLayout();
     SetGameStateAtScene(sCurrentSceneNum);
     gUnknown_203ADFC = 0;
     SetUpQuestLogAction(2, sQuestLogActionRecordBuffer, sizeof(sQuestLogActionRecordBuffer));
@@ -389,26 +395,32 @@ static void SetGameStateAtScene(u8 sceneNum)
     CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, sizeof(gSaveBlock1Ptr->vars));
 }
 
-static void BackUpTrainerRematchesToVars(void)
+static void BackUpTrainerRematches(void)
 {
     u16 i, j;
-    u16 sp0[4];
+    u16 vars[4];
 
-    for (i = 0; i < 4; i++)
+    // Save the contents of gSaveBlock1Ptr->trainerRematches to the 4 saveblock
+    // vars starting at VAR_QLBAK_TRAINER_REMATCHES. The rematch array is 100 bytes
+    // long, but each byte is only ever 0 or 1 to indicate that a rematch is available.
+    // They're compressed into single bits across 4 u16 save vars, which is only enough
+    // to save 64 elements of gSaveBlock1Ptr->trainerRematches. 64 however is the maximum
+    // that could ever be used, as its the maximum number of NPCs per map (OBJECT_EVENT_TEMPLATES_COUNT).
+    for (i = 0; i < ARRAY_COUNT(vars); i++)
     {
-        sp0[i] = 0;
+        vars[i] = 0;
+
+        // 16 bits per var
         for (j = 0; j < 16; j++)
         {
             if (gSaveBlock1Ptr->trainerRematches[16 * i + j])
-            {
-                sp0[i] += (1 << j);
-            }
+                vars[i] += (1 << j);
         }
-        VarSet(VAR_QLBAK_TRAINER_REMATCHES + i, sp0[i]);
+        VarSet(VAR_QLBAK_TRAINER_REMATCHES + i, vars[i]);
     }
 }
 
-static void BackUpMapLayoutToVar(void)
+static void BackUpMapLayout(void)
 {
     VarSet(VAR_QLBAK_MAP_LAYOUT, gSaveBlock1Ptr->mapLayoutId);
 }
@@ -623,7 +635,7 @@ void sub_81113E4(void)
 
     CpuCopy16(questLog->flags, gSaveBlock1Ptr->flags, sizeof(gSaveBlock1Ptr->flags));
     CpuCopy16(questLog->vars, gSaveBlock1Ptr->vars, sizeof(gSaveBlock1Ptr->vars));
-    sub_8111688();
+    RestoreTrainerRematches();
 }
 
 struct PokemonAndSomethingElse
@@ -735,35 +747,36 @@ static u16 QuestLog_GetBoxMonCount(void)
     return count;
 }
 
-static void sub_8111688(void)
+// Inverse of BackUpTrainerRematches
+static void RestoreTrainerRematches(void)
 {
     u16 i, j;
-    u16 sp0[4];
+    u16 vars[4];
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(vars); i++)
     {
-        sp0[i] = VarGet(VAR_QLBAK_TRAINER_REMATCHES + i);
+        vars[i] = VarGet(VAR_QLBAK_TRAINER_REMATCHES + i);
 
+        // 16 bits per var
         for (j = 0; j < 16; j++)
         {
-            if (sp0[i] & 1)
+            if (vars[i] & 1)
                 gSaveBlock1Ptr->trainerRematches[16 * i + j] = 30;
             else
                 gSaveBlock1Ptr->trainerRematches[16 * i + j] = 0;
-            sp0[i] >>= 1;
+            vars[i] >>= 1;
         }
     }
 }
 
-void sub_8111708(void)
+// Inverse of BackUpMapLayout
+void QL_RestoreMapLayoutId(void)
 {
-    struct MapHeader sp0;
-
     gSaveBlock1Ptr->mapLayoutId = VarGet(VAR_QLBAK_MAP_LAYOUT);
     if (gSaveBlock1Ptr->mapLayoutId == 0)
     {
-        sp0 = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-        gSaveBlock1Ptr->mapLayoutId = sp0.mapLayoutId;
+        struct MapHeader header = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+        gSaveBlock1Ptr->mapLayoutId = header.mapLayoutId;
     }
 }
 
@@ -775,7 +788,7 @@ static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogAction * a1)
     u16 r9 = 0;
 
     memset(a1, 0, 32 * sizeof(struct QuestLogAction));
-    for (i = 0; i < NELEMS(gUnknown_203AE0C); i++)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_203AE0C); i++)
     {
         gUnknown_203AE0C[i] = NULL;
     }
@@ -814,7 +827,7 @@ static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogAction * a1)
     }
 }
 
-static void QuestLog_BeginFadeAtEndOfScene(s8 delay)
+static void DoSceneEndTransition(s8 delay)
 {
     FadeScreen(FADE_TO_BLACK, delay);
     sQuestLogCB = QuestLog_AdvancePlayhead;
@@ -822,19 +835,19 @@ static void QuestLog_BeginFadeAtEndOfScene(s8 delay)
 
 static void QuestLog_AdvancePlayhead(void)
 {
-    if (!gPaletteFade.active)
+    if (gPaletteFade.active)
+        return;
+
+    LockPlayerFieldControls();
+    if (++sCurrentSceneNum < QUEST_LOG_SCENE_COUNT && gSaveBlock1Ptr->questLog[sCurrentSceneNum].startType != 0)
     {
-        LockPlayerFieldControls();
-        if (++sCurrentSceneNum < QUEST_LOG_SCENE_COUNT && gSaveBlock1Ptr->questLog[sCurrentSceneNum].startType != 0)
-        {
-            sNumScenes--;
-            QLPlayback_InitOverworldState();
-        }
-        else
-        {
-            gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
-            QuestLog_StartFinalScene();
-        }
+        sNumScenes--;
+        QLPlayback_InitOverworldState();
+    }
+    else
+    {
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
+        QuestLog_StartFinalScene();
     }
 }
 
@@ -855,54 +868,71 @@ void QuestLog_AdvancePlayhead_(void)
     QuestLog_AdvancePlayhead();
 }
 
-bool8 QuestLog_SchedulePlaybackCB(void (*callback)(void))
+#define tTimer data[0]
+#define tState data[1]
+#define DATA_IDX_CALLBACK 14 // data[14] and data[15]
+
+// This is used to avoid recording or displaying certain windows or images, like a shop menu.
+// During playback it returns TRUE (meaning the action should be avoided) and calls the
+// provided callback, which would be used to e.g. destroy any resources that were set up to do
+// whatever is being avoided. In all cases the provided callback will be QL_DestroyAbortedDisplay.
+// If we are not currently in playback return FALSE (meaning allow the action to occur) and
+// stop recording (if we are currently).
+bool8 QL_AvoidDisplay(void (*callback)(void))
 {
     u8 taskId;
 
     switch (gQuestLogState)
     {
-        case QL_STATE_RECORDING:
-            QuestLog_CutRecording();
-            break;
-        case QL_STATE_PLAYBACK:
-            gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
-            taskId = CreateTask(Task_RunPlaybackCB, 80);
-            gTasks[taskId].data[0] = 0;
-            gTasks[taskId].data[1] = 0;
-            SetWordTaskArg(taskId, 14, (uintptr_t)callback);
-            return TRUE;
+    case QL_STATE_RECORDING:
+        QuestLog_CutRecording();
+        break;
+    case QL_STATE_PLAYBACK:
+        gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
+        taskId = CreateTask(Task_AvoidDisplay, 80);
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tState = 0;
+        SetWordTaskArg(taskId, DATA_IDX_CALLBACK, (uintptr_t)callback);
+        return TRUE;
     }
     return FALSE;
 }
 
-static void Task_RunPlaybackCB(u8 taskId)
+static void Task_AvoidDisplay(u8 taskId)
 {
     void (*routine)(void);
     s16 *data = gTasks[taskId].data;
 
-    switch (data[1])
+    switch (tState)
     {
     case 0:
-        if (++data[0] == 0x7F)
+        // Instead of displaying anything, wait and then end the scene.
+        if (++tTimer == 127)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
-            sPlaybackControl.sceneEndMode = 2;
-            data[1]++;
+            sPlaybackControl.endMode = END_MODE_SCENE;
+            tState++;
         }
         break;
     case 1:
         if (!gPaletteFade.active)
         {
             gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
-            routine = (void (*)(void)) GetWordTaskArg(taskId, 14);
+            
+            // Call the provided function (if any). In practice this is always QL_DestroyAbortedDisplay
+            routine = (void (*)(void)) GetWordTaskArg(taskId, DATA_IDX_CALLBACK);
             if (routine != NULL)
                 routine();
+
             DestroyTask(taskId);
             sQuestLogCB = QuestLog_AdvancePlayhead;
         }
         break;
     }
 }
+
+#undef tTimer
+#undef tState
 
 static void QuestLog_PlayCurrentEvent(void)
 {
@@ -924,7 +954,7 @@ static void QuestLog_PlayCurrentEvent(void)
             sPlaybackControl.overlapTimer = 0;
         }
     }
-    if (sPlaybackControl.cursor < NELEMS(gUnknown_203AE0C))
+    if (sPlaybackControl.cursor < ARRAY_COUNT(gUnknown_203AE0C))
     {
         if (sub_8113B44(gUnknown_203AE0C[sPlaybackControl.cursor]) == 1)
             HandleShowQuestLogMessage();
@@ -981,26 +1011,29 @@ bool8 sub_8111C2C(void)
 
 void HandleQuestLogInput(void)
 {
-    if (sPlaybackControl.sceneEndMode != 0)
+    // Ignore input if we're currently ending a scene/playback
+    if (sPlaybackControl.endMode != END_MODE_NONE)
         return;
 
     if (JOY_NEW(A_BUTTON))
     {
-        sPlaybackControl.sceneEndMode = 2;
+        // Pressed A, skip to next scene
+        sPlaybackControl.endMode = END_MODE_SCENE;
         gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
-        QuestLog_BeginFadeAtEndOfScene(-3);
+        DoSceneEndTransition(-3);
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        sPlaybackControl.sceneEndMode = 1;
+        // Pressed B, end playback
+        sPlaybackControl.endMode = END_MODE_FINISH;
         gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;
-        QuestLog_SkipToEndOfPlayback(-3);
+        DoSkipToEndTransition(-3);
     }
 }
 
 bool8 QuestLogScenePlaybackIsEnding(void)
 {
-    if (sPlaybackControl.sceneEndMode != 0)
+    if (sPlaybackControl.endMode != END_MODE_NONE)
         return TRUE;
     return FALSE;
 }
@@ -1072,7 +1105,7 @@ static void QuestLog_CloseTextWindow(void)
     CopyWindowToVram(sWindowIds[WIN_BOTTOM_BAR], COPYWIN_MAP);
 }
 
-static void QuestLog_SkipToEndOfPlayback(s8 delay)
+static void DoSkipToEndTransition(s8 delay)
 {
     FadeScreen(FADE_TO_BLACK, delay);
     sQuestLogCB = QuestLog_WaitFadeAndCancelPlayback;
@@ -1134,7 +1167,7 @@ static void Task_QuestLogScene_SavedGame(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (sPlaybackControl.sceneEndMode != 1)
+        if (sPlaybackControl.endMode != END_MODE_FINISH)
         {
             GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
             StringExpandPlaceholders(gStringVar4, gText_QuestLog_SavedGameAtLocation);
@@ -1154,7 +1187,7 @@ static void Task_WaitAtEndOfQuestLog(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (JOY_NEW(A_BUTTON | B_BUTTON) || task->tTimer >= 127 || sPlaybackControl.sceneEndMode == 1)
+    if (JOY_NEW(A_BUTTON | B_BUTTON) || task->tTimer >= 127 || sPlaybackControl.endMode == END_MODE_FINISH)
     {
         QuestLog_CloseTextWindow();
         task->tTimer = 0;
@@ -1207,7 +1240,7 @@ static void Task_EndQuestLog(u8 taskId)
             tState++;
         break;
     default:
-        if (sPlaybackControl.sceneEndMode == 1)
+        if (sPlaybackControl.endMode == END_MODE_FINISH)
             ShowMapNamePopup(TRUE);
         CpuCopy16(sPalettesBackup, gPlttBufferUnfaded, PLTT_SIZE);
         Free(sPalettesBackup);
@@ -1618,6 +1651,8 @@ void sub_8112B3C(void)
                         gQuestLogPlaybackState = QL_PLAYBACK_STATE_3;
                         break;
                     case QL_ACTION_WAIT:
+                        // Nothing. The wait action uses sNextActionDelay to add a pause to playback.
+                        // When the counter is finished and this is reached there's nothing else that needs to be done.
                         break;
                     case QL_ACTION_SCENE_END:
                         gQuestLogPlaybackState = QL_PLAYBACK_STATE_0;

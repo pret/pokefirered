@@ -764,7 +764,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int minPlayers, int maxPlayers)
             {
                 if (gLinkPlayers[0].linkType == LINKTYPE_TRADE_SETUP)
                 {
-                    switch (Trade_CalcLinkPlayerCompatibilityParam())
+                    switch (GetGameProgressForLinkTrade())
                     {
                     case TRADE_BOTH_PLAYERS_READY:
                         sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;

@@ -4822,10 +4822,10 @@ extern const u8 gMonIcon_QuestionMark[];
 
 // trade
 extern const u16 gTradeMenu_Pal[];
-extern const u16 gTradeButtons_Pal[];
+extern const u16 gTradeCursor_Pal[];
 extern const u16 gTradeMenu_Gfx[];
-extern const u16 gUnknown_8E9E9FC[];
-extern const u16 gTradeButtons_Gfx[];
+extern const u16 gTradeMenu_Tilemap[];
+extern const u16 gTradeCursor_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
 
 // mon_markings

@@ -28,6 +28,7 @@
 	.include "src/ereader_helpers.o"
 	.include "src/digit_obj_util.o"
 	.include "src/m4a_1.o"
+	.include "data/sound_data.o"
 	.include "src/agb_flash.o"
 	.include "*libgcc.a:dp-bit.o"
 	.include "*libgcc.a:fp-bit.o"

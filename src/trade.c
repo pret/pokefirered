@@ -1423,7 +1423,7 @@ static void SetActiveMenuOptions(void)
         }
         else
         {
-            // Absent partner pokemno
+            // Absent partner pokemon
             sTradeMenu->optionsActive[i + PARTY_SIZE] = FALSE;
         }
     }

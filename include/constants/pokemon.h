@@ -177,6 +177,10 @@
 #define NUM_NATURE_STATS (NUM_STATS - 1) // excludes HP
 #define NUM_BATTLE_STATS (NUM_STATS + 2) // includes Accuracy and Evasion
 
+#define STAT_DECREASE   -1
+#define STAT_NEUTRAL     0
+#define STAT_INCREASE   +1
+
 #define MIN_STAT_STAGE     0
 #define DEFAULT_STAT_STAGE 6
 #define MAX_STAT_STAGE    12

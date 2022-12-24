@@ -1353,34 +1353,34 @@ static const struct SpindaSpot sSpindaSpotGraphics[] =
 
 #include "data/pokemon/item_effects.h"
 
-static const s8 sNatureStatTable[][5] =
+static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {
-    // Atk Def Spd Sp.Atk Sp.Def
-    {    0,  0,  0,     0,     0}, // Hardy
-    {   +1, -1,  0,     0,     0}, // Lonely
-    {   +1,  0, -1,     0,     0}, // Brave
-    {   +1,  0,  0,    -1,     0}, // Adamant
-    {   +1,  0,  0,     0,    -1}, // Naughty
-    {   -1, +1,  0,     0,     0}, // Bold
-    {    0,  0,  0,     0,     0}, // Docile
-    {    0, +1, -1,     0,     0}, // Relaxed
-    {    0, +1,  0,    -1,     0}, // Impish
-    {    0, +1,  0,     0,    -1}, // Lax
-    {   -1,  0, +1,     0,     0}, // Timid
-    {    0, -1, +1,     0,     0}, // Hasty
-    {    0,  0,  0,     0,     0}, // Serious
-    {    0,  0, +1,    -1,     0}, // Jolly
-    {    0,  0, +1,     0,    -1}, // Naive
-    {   -1,  0,  0,    +1,     0}, // Modest
-    {    0, -1,  0,    +1,     0}, // Mild
-    {    0,  0, -1,    +1,     0}, // Quiet
-    {    0,  0,  0,     0,     0}, // Bashful
-    {    0,  0,  0,    +1,    -1}, // Rash
-    {   -1,  0,  0,     0,    +1}, // Calm
-    {    0, -1,  0,     0,    +1}, // Gentle
-    {    0,  0, -1,     0,    +1}, // Sassy
-    {    0,  0,  0,    -1,    +1}, // Careful
-    {    0,  0,  0,     0,     0}, // Quirky
+                    //  Atk             Def             Spd             Sp.Atk          Sp.Def
+    [NATURE_HARDY]   = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_LONELY]  = {STAT_INCREASE,  STAT_DECREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_BRAVE]   = {STAT_INCREASE,  STAT_NEUTRAL,   STAT_DECREASE,  STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_ADAMANT] = {STAT_INCREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_DECREASE,  STAT_NEUTRAL},
+    [NATURE_NAUGHTY] = {STAT_INCREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_DECREASE},
+    [NATURE_BOLD]    = {STAT_DECREASE,  STAT_INCREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_DOCILE]  = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_RELAXED] = {STAT_NEUTRAL,   STAT_INCREASE,  STAT_DECREASE,  STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_IMPISH]  = {STAT_NEUTRAL,   STAT_INCREASE,  STAT_NEUTRAL,   STAT_DECREASE,  STAT_NEUTRAL},
+    [NATURE_LAX]     = {STAT_NEUTRAL,   STAT_INCREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_DECREASE},
+    [NATURE_TIMID]   = {STAT_DECREASE,  STAT_NEUTRAL,   STAT_INCREASE,  STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_HASTY]   = {STAT_NEUTRAL,   STAT_DECREASE,  STAT_INCREASE,  STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_SERIOUS] = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_JOLLY]   = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_INCREASE,  STAT_DECREASE,  STAT_NEUTRAL},
+    [NATURE_NAIVE]   = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_INCREASE,  STAT_NEUTRAL,   STAT_DECREASE},
+    [NATURE_MODEST]  = {STAT_DECREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_INCREASE,  STAT_NEUTRAL},
+    [NATURE_MILD]    = {STAT_NEUTRAL,   STAT_DECREASE,  STAT_NEUTRAL,   STAT_INCREASE,  STAT_NEUTRAL},
+    [NATURE_QUIET]   = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_DECREASE,  STAT_INCREASE,  STAT_NEUTRAL},
+    [NATURE_BASHFUL] = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
+    [NATURE_RASH]    = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_INCREASE,  STAT_DECREASE},
+    [NATURE_CALM]    = {STAT_DECREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_INCREASE},
+    [NATURE_GENTLE]  = {STAT_NEUTRAL,   STAT_DECREASE,  STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_INCREASE},
+    [NATURE_SASSY]   = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_DECREASE,  STAT_NEUTRAL,   STAT_INCREASE},
+    [NATURE_CAREFUL] = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_DECREASE,  STAT_INCREASE},
+    [NATURE_QUIRKY]  = {STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL,   STAT_NEUTRAL},
 };
 
 #include "data/pokemon/tmhm_learnsets.h"
@@ -5247,26 +5247,40 @@ u8 GetTrainerEncounterMusicId(u16 trainer)
     return gTrainers[trainer].encounterMusic_gender & 0x7F;
 }
 
-static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
+static u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
 {
-    if (statIndex < 1 || statIndex > 5)
-    {
-        // should just be "return n", but it wouldn't match without this
-        u16 retVal = n;
-        retVal++;
-        retVal--;
-        return retVal;
-    }
+// Because this is a u16 it will be unable to store the
+// result of the multiplication for any stat > 595 for a
+// positive nature and > 728 for a negative nature.
+// Neither occur in the base game, but this can happen if
+// any Nature-affected base stat is increased to a value
+// above 248. The closest by default is Shuckle at 230.
+#ifdef BUGFIX
+    u32 retVal;
+#else
+    u16 retVal;
+#endif
+
+    // Don't modify HP, Accuracy, or Evasion by nature
+    if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
+        return stat;
 
     switch (sNatureStatTable[nature][statIndex - 1])
     {
-    case 1:
-        return (u16)(n * 110) / 100;
-    case -1:
-        return (u16)(n * 90) / 100;
+    case STAT_INCREASE:
+        retVal = stat * 110;
+        retVal /= 100;
+        break;
+    case STAT_DECREASE:
+        retVal = stat * 90;
+        retVal /= 100;
+        break;
+    default:
+        retVal = stat;
+        break;
     }
 
-    return n;
+    return retVal;
 }
 
 void AdjustFriendship(struct Pokemon *mon, u8 event)

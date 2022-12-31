@@ -236,7 +236,8 @@ gOakSpeech_Text_RememberRivalsName::
     .string "His name is {RIVAL}!\p$"
 
 gOakSpeech_Text_LetsGo::
-    .string "{PLAYER}!\pYour very own POKéMON legend is\n"
+    .string "{PLAYER}!\p"
+    .string "Your very own POKéMON legend is\n"
     .string "about to unfold!\p"
     .string "A world of dreams and adventures\n"
     .string "with POKéMON awaits! Let's go!$"

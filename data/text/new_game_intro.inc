@@ -154,7 +154,7 @@ gControlsGuide_Text_LRButtons::
     .string "game, or on how to do things,\n"
     .string "press the L or R Button.$"
 
-gOakText_AskPlayerGender::
+gOakSpeech_Text_AskPlayerGender::
     .string "Now tell me. Are you a boy?\n"
     .string "Or are you a girl?$"
 

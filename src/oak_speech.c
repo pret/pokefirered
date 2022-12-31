@@ -1276,7 +1276,7 @@ static void Task_OakSpeech_AskPlayerGender(u8 taskId)
         {
             tTrainerPicPosX = -60;
             ClearTrainerPic();
-            OakSpeechPrintMessage(gOakText_AskPlayerGender, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_AskPlayerGender, sOakSpeechResources->textSpeed);
             gTasks[taskId].func = Task_OakSpeech_ShowGenderOptions;
         }
     }
@@ -1374,6 +1374,7 @@ static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
     }
 }
+
 static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;

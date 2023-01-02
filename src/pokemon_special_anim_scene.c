@@ -153,31 +153,31 @@ static const struct OamData sOamData_MonSprite = {
 };
 
 
-static const union AffineAnimCmd gAffineAnim_Zoom_0[] = {
+static const union AffineAnimCmd sAffineAnim_Zoom_0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gAffineAnim_Zoom_1[] = {
+static const union AffineAnimCmd sAffineAnim_Zoom_1[] = {
     AFFINEANIMCMD_FRAME(0x155, 0x155, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gAffineAnim_Zoom_2[] = {
+static const union AffineAnimCmd sAffineAnim_Zoom_2[] = {
     AFFINEANIMCMD_FRAME(0x1AA, 0x1AA, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gAffineAnim_Zoom_3[] = {
+static const union AffineAnimCmd sAffineAnim_Zoom_3[] = {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_END
 };
 
 static const union AffineAnimCmd *const sAffineAnimTable_Zoom[] = {
-    gAffineAnim_Zoom_0,
-    gAffineAnim_Zoom_1,
-    gAffineAnim_Zoom_2,
-    gAffineAnim_Zoom_3
+    sAffineAnim_Zoom_0,
+    sAffineAnim_Zoom_1,
+    sAffineAnim_Zoom_2,
+    sAffineAnim_Zoom_3
 };
 
 static const struct SpriteTemplate sSpriteTemplate_MonSprite = {
@@ -236,13 +236,13 @@ static const struct OamData sOamData_LevelUpVertical = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnim_LevelUpVertical[] = {
+static const union AnimCmd sAnim_LevelUpVertical[] = {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END
 };
 
 static const union AnimCmd *const sAnimTable_LevelUpVertical[] = {
-    gAnim_LevelUpVertical
+    sAnim_LevelUpVertical
 };
 
 static const struct SpriteTemplate sSpriteTemplate_LevelUpVertical = {
@@ -295,22 +295,22 @@ static const struct OamData sOamData_UseItem_OutwardSpiralDots = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gAnim_UseItem_OutwardSpiralDots_0[] = {
+static const union AnimCmd sAnim_UseItem_OutwardSpiralDots_0[] = {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(1,  8),
     ANIMCMD_FRAME(2,  4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnim_UseItem_OutwardSpiralDots_1[] = {
+static const union AnimCmd sAnim_UseItem_OutwardSpiralDots_1[] = {
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END
 };
 
 static const union AnimCmd *const sAnimTable_UseItem_OutwardSpiralDots[] = {
-    gAnim_UseItem_OutwardSpiralDots_0,
-    gAnim_UseItem_OutwardSpiralDots_1
+    sAnim_UseItem_OutwardSpiralDots_0,
+    sAnim_UseItem_OutwardSpiralDots_1
 };
 
 static const struct SpriteTemplate sSpriteTemplate_UseItem_OutwardSpiralDots = {

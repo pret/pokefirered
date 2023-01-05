@@ -114,13 +114,13 @@ extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x8;
 
-static const u16 sControlsGuide_Pal[] = INCBIN_U16("graphics/oak_speech/controls_guide/palette.gbapal");
-static const u32 sControlsGuide_Tiles[] = INCBIN_U32("graphics/oak_speech/controls_guide/tiles.4bpp.lz");
-static const u32 sPikachuIntro_Tilemap[] = INCBIN_U32("graphics/oak_speech/pikachu_intro/tilemap.bin.lz");
-static const u32 sOakSpeech_Background_Tiles[] = INCBIN_U32("graphics/oak_speech/background.4bpp.lz");
-static const u32 sOakSpeech_Background_Tilemap[] = INCBIN_U32("graphics/oak_speech/background.bin.lz");
-static const u16 sControlsGuide_Tilemap_Page2[] = INCBIN_U16("graphics/oak_speech/controls_guide/page_2.bin");
-static const u16 sControlsGuide_Tilemap_Page3[] = INCBIN_U16("graphics/oak_speech/controls_guide/page_3.bin");
+static const u16 sOakSpeech_Background_Pals[] = INCBIN_U16("graphics/oak_speech/bg_pals.gbapal"); // Shared by the Controls Guide, Pikachu Intro and Oak Speech scenes
+static const u32 sControlsGuide_PikachuIntro_Background_Tiles[] = INCBIN_U32("graphics/oak_speech/bg_tiles.4bpp.lz");
+static const u32 sPikachuIntro_Background_Tilemap[] = INCBIN_U32("graphics/oak_speech/pikachu_intro/tilemap.bin.lz");
+static const u32 sOakSpeech_Background_Tiles[] = INCBIN_U32("graphics/oak_speech/oak_speech_bg.4bpp.lz");
+static const u32 sOakSpeech_Background_Tilemap[] = INCBIN_U32("graphics/oak_speech/oak_speech_bg.bin.lz");
+static const u16 sControlsGuide_Tilemap_Page2[] = INCBIN_U16("graphics/oak_speech/controls_guide_page_2.bin");
+static const u16 sControlsGuide_Tilemap_Page3[] = INCBIN_U16("graphics/oak_speech/controls_guide_page_3.bin");
 static const u16 sOakSpeech_Leaf_Pal[] = INCBIN_U16("graphics/oak_speech/leaf/pal.gbapal");
 static const u32 sOakSpeech_Leaf_Tiles[] = INCBIN_U32("graphics/oak_speech/leaf/pic.8bpp.lz");
 static const u16 sOakSpeech_Red_Pal[] = INCBIN_U16("graphics/oak_speech/red/pal.gbapal");
@@ -752,13 +752,13 @@ static void Task_NewGameScene(u8 taskId)
         InitStandardTextBoxWindows();
         InitTextBoxGfxAndPrinters();
         Menu_LoadStdPalAt(0xD0);
-        LoadPalette(sControlsGuide_Pal, 0, 0x80);
+        LoadPalette(sOakSpeech_Background_Pals, 0, 0x80);
         LoadPalette(GetTextWindowPalette(2) + 15, 0, 2);
         break;
     case 5:
         sOakSpeechResources->textSpeed = GetTextSpeedSetting();
         gTextFlags.canABSpeedUpPrint = TRUE;
-        DecompressAndCopyTileDataToVram(1, sControlsGuide_Tiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sControlsGuide_PikachuIntro_Background_Tiles, 0, 0, 0);
         break;
     case 6:
         if (FreeTempTileDataBuffersIfPossible())
@@ -950,7 +950,7 @@ static void Task_PikachuIntro_LoadPage1(u8 taskId)
         PlayBGM(MUS_NEW_GAME_INTRO);
         ClearTopBarWindow();
         TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
-        sOakSpeechResources->pikachuIntroTilemap = MallocAndDecompress(sPikachuIntro_Tilemap, &size);
+        sOakSpeechResources->pikachuIntroTilemap = MallocAndDecompress(sPikachuIntro_Background_Tilemap, &size);
         CopyToBgTilemapBufferRect(1, sOakSpeechResources->pikachuIntroTilemap, 0, 2, 30, 19);
         CopyBgTilemapBufferToVram(1);
         Free(sOakSpeechResources->pikachuIntroTilemap);
@@ -1823,7 +1823,7 @@ static void CB2_ReturnFromNamingScreen(void)
         FreeAllWindowBuffers();
         InitStandardTextBoxWindows();
         InitTextBoxGfxAndPrinters();
-        LoadPalette(sControlsGuide_Pal, 0, 0xE0);
+        LoadPalette(sOakSpeech_Background_Pals, 0, 0xE0);
         break;
     case 4:
         DecompressAndCopyTileDataToVram(1, sOakSpeech_Background_Tiles, 0, 0, 0);

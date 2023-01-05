@@ -763,7 +763,7 @@ static void Task_NewGameScene(u8 taskId)
     case 6:
         if (FreeTempTileDataBuffersIfPossible())
             return;
-        ClearDialogWindowAndFrame(0, TRUE);
+        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
         FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 32);
         CopyBgTilemapBufferToVram(1);
         break;
@@ -1119,18 +1119,18 @@ static void Task_OakSpeech_Init(u8 taskId)
     }
 }
 
-#define OakSpeechPrintMessage(str, speed) ({                                                                                                 \
-    DrawDialogueFrame(0, FALSE);                                                                                                             \
-    if (str != gStringVar4)                                                                                                                  \
-    {                                                                                                                                        \
-        StringExpandPlaceholders(gStringVar4, str);                                                                                          \
-        AddTextPrinterParameterized2(0, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
-    }                                                                                                                                        \
-    else                                                                                                                                     \
-    {                                                                                                                                        \
-        AddTextPrinterParameterized2(0, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
-    }                                                                                                                                        \
-    CopyWindowToVram(0, COPYWIN_FULL);                                                                                                       \
+#define OakSpeechPrintMessage(str, speed) ({                                                                                                                 \
+    DrawDialogueFrame(WIN_INTRO_TEXTBOX, FALSE);                                                                                                             \
+    if (str != gStringVar4)                                                                                                                                  \
+    {                                                                                                                                                        \
+        StringExpandPlaceholders(gStringVar4, str);                                                                                                          \
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
+    }                                                                                                                                                        \
+    else                                                                                                                                                     \
+    {                                                                                                                                                        \
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
+    }                                                                                                                                                        \
+    CopyWindowToVram(WIN_INTRO_TEXTBOX, COPYWIN_FULL);                                                                                                       \
 })
 
 static void Task_OakSpeech_WelcomeToTheWorld(u8 taskId)
@@ -1152,7 +1152,7 @@ static void Task_OakSpeech_WelcomeToTheWorld(u8 taskId)
 
 static void Task_OakSpeech_ThisWorld(u8 taskId)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         OakSpeechPrintMessage(gOakSpeech_Text_ThisWorld, sOakSpeechResources->textSpeed);
         gTasks[taskId].tTimer = 30;
@@ -1165,7 +1165,7 @@ static void Task_OakSpeech_ReleaseNidoranFFromPokeBall(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 spriteId;
 
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         if (tTimer != 0)
             tTimer--;
@@ -1198,7 +1198,7 @@ static void Task_OakSpeech_IsInhabitedFarAndWide(u8 taskId)
 
 static void Task_OakSpeech_IStudyPokemon(u8 taskId)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         OakSpeechPrintMessage(gOakSpeech_Text_IStudyPokemon, sOakSpeechResources->textSpeed);
         gTasks[taskId].func = Task_OakSpeech_ReturnNidoranFToPokeBall;
@@ -1209,9 +1209,9 @@ static void Task_OakSpeech_ReturnNidoranFToPokeBall(u8 taskId)
 {
     u8 spriteId;
 
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
-        ClearDialogWindowAndFrame(0, TRUE);
+        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
         spriteId = gTasks[taskId].tNidoranFSpriteId;
         gTasks[taskId].tPokeBallSpriteId = CreateTradePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, 100, 66, 0, 0, 32, 0xFFFF1F3F);
         gTasks[taskId].tTimer = 48;
@@ -1253,9 +1253,9 @@ static void Task_OakSpeech_FadeOutOak(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
-        ClearDialogWindowAndFrame(0, 1);
+        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, 1);
         CreateFadeInTask(taskId, 2);
         tTimer = 48;
         gTasks[taskId].func = Task_OakSpeech_AskPlayerGender;
@@ -1284,7 +1284,7 @@ static void Task_OakSpeech_AskPlayerGender(u8 taskId)
 
 static void Task_OakSpeech_ShowGenderOptions(u8 taskId)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         gTasks[taskId].tMenuWindowId = AddWindow(&sIntro_WindowTemplates[WIN_INTRO_BOYGIRL]);
         PutWindowTilemap(gTasks[taskId].tMenuWindowId);
@@ -1367,7 +1367,7 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
 
 static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sOakSpeechResources->hasPlayerBeenNamed = FALSE;
@@ -1379,7 +1379,7 @@ static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         if (tTrainerPicPosX > -60)
         {
@@ -1470,7 +1470,7 @@ static void Task_OakSpeech_ConfirmName(u8 taskId)
             tNameNotConfirmed = FALSE;
             tTimer = 25;
         }
-        else if (!IsTextPrinterActive(0))
+        else if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
         {
             if (tTimer != 0)
             {
@@ -1533,9 +1533,9 @@ static void Task_OakSpeech_FadeOutPlayerPic(u8 taskId)
 
 static void Task_OakSpeech_FadeOutRivalPic(u8 taskId)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
-        ClearDialogWindowAndFrame(0, 1);
+        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
         CreateFadeInTask(taskId, 2);
         gTasks[taskId].func = Task_OakSpeech_ReshowPlayersPic;
     }
@@ -1602,7 +1602,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
 
 static void Task_OakSpeech_FadeOutBGM(u8 taskId)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
         if (gTasks[taskId].tTimer != 0)
         {

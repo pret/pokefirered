@@ -497,8 +497,8 @@ const struct Tileset gTileset_SilphCo =
 {
     .isCompressed = TRUE,
     .isSecondary = TRUE,
-    .tiles = gTilesetTiles_SilphCo,
-    .palettes = gTilesetPalettes_SilphCo,
+    .tiles = gTilesetTiles_Condominiums,
+    .palettes = gTilesetPalettes_Condominiums,
     .metatiles = gMetatiles_SilphCo,
     .metatileAttributes = gMetatileAttributes_SilphCo,
     .callback = InitTilesetAnim_SilphCo,
@@ -585,8 +585,8 @@ const struct Tileset gTileset_Condominiums =
 {
     .isCompressed = TRUE,
     .isSecondary = TRUE,
-    .tiles = gTilesetTiles_SilphCo,
-    .palettes = gTilesetPalettes_SilphCo,
+    .tiles = gTilesetTiles_Condominiums,
+    .palettes = gTilesetPalettes_Condominiums,
     .metatiles = gMetatiles_Condominiums,
     .metatileAttributes = gMetatileAttributes_Condominiums,
     .callback = NULL,

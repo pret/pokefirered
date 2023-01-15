@@ -94,7 +94,7 @@
 
 // gTileset_VermilionCity
 #define METATILE_VermilionCity_Door               0x29E
-#define METATILE_VermilionCity_PokemonFanClubDoor 0x2E1 // Used to reference door tiles in field_door.c, but the metatile in the tileset is dummied
+#define METATILE_VermilionCity_SSAnneWarp         0x2E1
 
 // gTileset_VermilionGym
 #define METATILE_VermilionGym_Floor                             0x281

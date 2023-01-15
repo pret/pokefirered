@@ -922,9 +922,11 @@ const u16 gTilesetPalettes_SeaCottage[][16] =
 	INCBIN_U16("data/tilesets/secondary/sea_cottage/palettes/15.gbapal"),
 };
 
-const u32 gTilesetTiles_SilphCo[] = INCBIN_U32("data/tilesets/secondary/condominiums/tiles.4bpp.lz");
+// Shared by SilphCo
+const u32 gTilesetTiles_Condominiums[] = INCBIN_U32("data/tilesets/secondary/condominiums/tiles.4bpp.lz");
 
-const u16 gTilesetPalettes_SilphCo[][16] =
+// Shared by SilphCo
+const u16 gTilesetPalettes_Condominiums[][16] =
 {
 	INCBIN_U16("data/tilesets/secondary/condominiums/palettes/00.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/condominiums/palettes/01.gbapal"),

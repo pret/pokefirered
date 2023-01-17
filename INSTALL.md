@@ -404,20 +404,15 @@ If you aren't in the pokefirered directory already, then **change directory** to
 ```bash
 cd pokefirered
 ```
-To build **pokefirered.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
+To build **pokefirered.gba** (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
-make compare
+make
 ```
-If an OK is returned, then the installation went smoothly.
+If it has built successfully you will have the output file **pokefirered.gba** in your project folder.
 <details>
 <summary>Note for Windows...</summary>
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
-
-To build **pokefirered.gba** with your changes:
-```bash
-make
-```
 
 ## Build pokeleafgreen and REV1
 Pokemon FireRed and LeafGreen were both released together. As such, this project is capable of building both ROMs. To do so, simply run
@@ -449,11 +444,20 @@ Replace `<output of nproc>` with the number that the `nproc` command returned.
 
 `nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-## Debug info
+## Compare ROM to the original
 
-To build **pokefirered.elf** with enhanced debug info:
+For contributing, or if you'd simply like to verify that your ROM is identical to the original game, run:
 ```bash
-make DINFO=1
+make compare  # or compare_leafgreen, compare_firered_rev1, compare_leafgreen_rev1
+```
+If it matches, you will see the following at the end of the output:
+```bash
+pokefirered.gba: OK
+```
+If there are any changes from the original game, you will instead see:
+```bash
+pokefirered.gba: FAILED
+shasum: WARNING: 1 computed checksum did NOT match
 ```
 
 ## devkitARM's C compiler

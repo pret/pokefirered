@@ -497,7 +497,7 @@ u8 BattleSetup_GetTerrainId(void)
             return BATTLE_TERRAIN_WATER;
         return BATTLE_TERRAIN_PLAIN;
     }
-    if (MetatileBehavior_IsDeepSemiDeepOrSplashingWater(tileBehavior))
+    if (MetatileBehavior_IsDeepWaterTerrain(tileBehavior))
         return BATTLE_TERRAIN_WATER;
     if (MetatileBehavior_IsSurfable(tileBehavior))
         return BATTLE_TERRAIN_POND;

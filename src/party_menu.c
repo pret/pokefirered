@@ -4063,7 +4063,7 @@ static bool8 SetUpFieldMove_Surf(void)
     s16 x, y;
     
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    if (MetatileBehavior_IsSemiDeepWater(MapGridGetMetatileBehaviorAt(x, y)) != TRUE
+    if (MetatileBehavior_IsFastWater(MapGridGetMetatileBehaviorAt(x, y)) != TRUE
      && PartyHasMonWithSurf() == TRUE
      && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
@@ -4085,7 +4085,7 @@ static void DisplayCantUseSurfMessage(void)
     else
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-        if (MetatileBehavior_IsSemiDeepWater(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+        if (MetatileBehavior_IsFastWater(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
             DisplayPartyMenuStdMessage(PARTY_MSG_CURRENT_TOO_FAST);
         else if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE17))
               && ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE17))

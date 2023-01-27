@@ -4892,7 +4892,7 @@ extern const u32 gFile_graphics_battle_transitions_vs_frame_tilemap[];
 // berry_crush
 extern const u16 gBerryCrush_Crusher_Pal[];
 extern const u32 gBerryCrush_Crusher_Gfx[];
-extern const u32 gBerryCrush_Crusher_Tilemap[];
+extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
 // easy_chat_3
 extern const u32 gEasyChatWindow_Gfx[];

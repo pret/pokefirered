@@ -2883,10 +2883,10 @@ extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
 
 // teachy_tv
-extern const u8 gUnknown_8E86240[];
-extern const u8 gUnknown_8E86BE8[];
-extern const u8 gUnknown_8E86D6C[];
-extern const u32 gUnknown_8E86F98[];
+extern const u8 gTeachyTv_Gfx[];
+extern const u8 gTeachyTvScreen_Tilemap[];
+extern const u8 gTeachyTvTitle_Tilemap[];
+extern const u32 gTeachTv_Pal[];
 
 // berry_fix_program
 extern const u8 gBerryFixGameboy_Gfx[];

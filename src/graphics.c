@@ -1127,10 +1127,10 @@ const u32 gBuyMenuFrame_Pal[] = INCBIN_U32("graphics/shop_menu/shop_menu.gbapal.
 
 const u32 gUnknown_8E861A8[] = INCBIN_U32("graphics/unknown/unknown_E861A8.bin.lz");
 
-const u8 gUnknown_8E86240[] = INCBIN_U8("graphics/teachy_tv/tiles.4bpp.lz");
-const u8 gUnknown_8E86BE8[] = INCBIN_U8("graphics/teachy_tv/bg1_tilemap.bin.lz");
-const u8 gUnknown_8E86D6C[] = INCBIN_U8("graphics/teachy_tv/bg2_tilemap.bin.lz");
-const u32 gUnknown_8E86F98[] = INCBIN_U32("graphics/teachy_tv/palettes.gbapal.lz");
+const u8 gTeachyTv_Gfx[] = INCBIN_U8("graphics/teachy_tv/tiles.4bpp.lz");
+const u8 gTeachyTvScreen_Tilemap[] = INCBIN_U8("graphics/teachy_tv/screen.bin.lz");
+const u8 gTeachyTvTitle_Tilemap[] = INCBIN_U8("graphics/teachy_tv/title.bin.lz");
+const u32 gTeachTv_Pal[] = INCBIN_U32("graphics/teachy_tv/tiles.gbapal.lz");
 
 const u32 gUnknown_8E87010[] = INCBIN_U32("graphics/unknown/unknown_E87010.gbapal.lz");
 

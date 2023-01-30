@@ -251,7 +251,11 @@ static const struct DoorGraphics sDoorGraphics[] = {
     {METATILE_CeruleanCity_Door,                           DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_Cerulean, sDoorAnimPalettes_Cerulean},
     {METATILE_LavenderTown_Door,                           DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_Lavender, sDoorAnimPalettes_Lavender},
     {METATILE_VermilionCity_Door,                          DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_Vermilion, sDoorAnimPalettes_Vermilion},
-    {METATILE_VermilionCity_PokemonFanClubDoor,            DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_PokemonFanClub, sDoorAnimPalettes_PokemonFanClub},
+/*  Below was presumably intended for the door to the Pokemon Fan Club. The metatile is surrounded by metatiles for the fan club building.
+    Its animation tiles are similar to the Vermilion door above, and the building on the map uses that metatile instead. The unused tiles
+    have the pokeball above the door in view, but on the map the pokeball above the door is too high to be in view.
+    The metatile below was subsequently re-used for the warp to enter the SS Anne from the harbor, which has no door. */
+    {METATILE_VermilionCity_SSAnneWarp,                    DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_PokemonFanClub, sDoorAnimPalettes_PokemonFanClub},
     {METATILE_CeladonCity_DeptStoreDoor,                   DOOR_SOUND_SLIDING, 0, sDoorAnimTiles_DeptStore, sDoorAnimPalettes_DeptStore},
     {METATILE_FuchsiaCity_Door,                            DOOR_SOUND_NORMAL,  0, sDoorAnimTiles_Fuchsia, sDoorAnimPalettes_Fuchsia},
     {METATILE_FuchsiaCity_SafariZoneDoor,                  DOOR_SOUND_SLIDING, 0, sDoorAnimTiles_SafariZone, sDoorAnimPalettes_SafariZone},

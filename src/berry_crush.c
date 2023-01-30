@@ -3274,7 +3274,7 @@ static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame * game)
     u8 i = 0;
     u8 *crusherGfx;
 
-    LZ77UnCompWram(gBerryCrush_Crusher_Tilemap, gDecompressionBuffer);
+    LZ77UnCompWram(gBerryCrush_TextWindows_Tilemap, gDecompressionBuffer);
     for (crusherGfx = gDecompressionBuffer; i < game->playerCount; ++i)
     {
         CopyToBgTilemapBufferRect(

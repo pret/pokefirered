@@ -2883,10 +2883,10 @@ extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
 
 // teachy_tv
-extern const u8 gUnknown_8E86240[];
-extern const u8 gUnknown_8E86BE8[];
-extern const u8 gUnknown_8E86D6C[];
-extern const u32 gUnknown_8E86F98[];
+extern const u8 gTeachyTv_Gfx[];
+extern const u8 gTeachyTvScreen_Tilemap[];
+extern const u8 gTeachyTvTitle_Tilemap[];
+extern const u32 gTeachyTv_Pal[];
 
 // berry_fix_program
 extern const u8 gBerryFixGameboy_Gfx[];
@@ -4822,10 +4822,10 @@ extern const u8 gMonIcon_QuestionMark[];
 
 // trade
 extern const u16 gTradeMenu_Pal[];
-extern const u16 gTradeButtons_Pal[];
+extern const u16 gTradeCursor_Pal[];
 extern const u16 gTradeMenu_Gfx[];
-extern const u16 gUnknown_8E9E9FC[];
-extern const u16 gTradeButtons_Gfx[];
+extern const u16 gTradeMenu_Tilemap[];
+extern const u16 gTradeCursor_Gfx[];
 extern const u16 gTradeMenuMonBox_Tilemap[];
 
 // mon_markings
@@ -4892,7 +4892,7 @@ extern const u32 gFile_graphics_battle_transitions_vs_frame_tilemap[];
 // berry_crush
 extern const u16 gBerryCrush_Crusher_Pal[];
 extern const u32 gBerryCrush_Crusher_Gfx[];
-extern const u32 gBerryCrush_Crusher_Tilemap[];
+extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
 // easy_chat_3
 extern const u32 gEasyChatWindow_Gfx[];

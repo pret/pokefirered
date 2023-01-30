@@ -4,7 +4,7 @@
 
 static const bool8 sBehaviorSurfable[NUM_METATILE_BEHAVIORS] = {
     [MB_POND_WATER]         = TRUE,
-    [MB_SEMI_DEEP_WATER]    = TRUE,
+    [MB_FAST_WATER]         = TRUE,
     [MB_DEEP_WATER]         = TRUE,
     [MB_WATERFALL]          = TRUE,
     [MB_OCEAN_WATER]        = TRUE,
@@ -209,9 +209,10 @@ bool8 MetatileBehavior_IsSurfable(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSemiDeepWater(u8 metatileBehavior)
+// Water that's too fast to surf on
+bool8 MetatileBehavior_IsFastWater(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SEMI_DEEP_WATER)
+    if (metatileBehavior == MB_FAST_WATER)
         return TRUE;
     else
         return FALSE;
@@ -476,7 +477,7 @@ bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 {
-    if (metatileBehavior >= MB_SEMI_DEEP_WATER && metatileBehavior <= MB_DEEP_WATER)
+    if (metatileBehavior >= MB_FAST_WATER && metatileBehavior <= MB_DEEP_WATER)
         return TRUE;
     else
         return FALSE;
@@ -514,9 +515,9 @@ bool8 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDeepSemiDeepOrSplashingWater(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDeepWaterTerrain(u8 metatileBehavior)
 {
-    if ((metatileBehavior >= MB_SEMI_DEEP_WATER && metatileBehavior <= MB_DEEP_WATER)
+    if ((metatileBehavior >= MB_FAST_WATER && metatileBehavior <= MB_DEEP_WATER)
       || metatileBehavior == MB_OCEAN_WATER)
         return TRUE;
     else

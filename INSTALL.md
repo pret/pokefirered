@@ -9,7 +9,7 @@ If you run into trouble, ask for help on Discord or IRC (see [README.md](README.
 
 ## Windows
 Windows has instructions for building with three possible terminals, providing 3 different options in case the user stumbles upon unexpected errors.
-- [Windows 10 (WSL1)](#windows-10-wsl1) (**Fastest, highly recommended**, Windows 10 only)
+- [Windows 10/11 (WSL1)](#windows-1011-wsl1) (**Fastest, highly recommended**, Windows 10 and 11 only)
 - [Windows (msys2)](#windows-msys2) (Second fastest)
 - [Windows (Cygwin)](#windows-cygwin) (Slowest)
 
@@ -26,7 +26,7 @@ All of the Windows instructions assume that the default drive is C:\\. If this d
 
 **A note of caution**: As Windows 7 is officially unsupported by Microsoft and Windows 8 has very little usage, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10 instructions.
 
-## Windows 10 (WSL1)
+## Windows 10/11 (WSL1)
 WSL1 is the preferred terminal to build **pokefirered**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).
 - If WSL (Debian or Ubuntu) is **not installed**, then go to [Installing WSL1](#Installing-WSL1).
 - Otherwise, if WSL is installed, but it **hasn't previously been set up for another decompilation project**, then go to [Setting up WSL1](#Setting-up-WSL1).
@@ -404,20 +404,15 @@ If you aren't in the pokefirered directory already, then **change directory** to
 ```bash
 cd pokefirered
 ```
-To build **pokefirered.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
+To build **pokefirered.gba** (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
-make compare
+make
 ```
-If an OK is returned, then the installation went smoothly.
+If it has built successfully you will have the output file **pokefirered.gba** in your project folder.
 <details>
 <summary>Note for Windows...</summary>
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
-
-To build **pokefirered.gba** with your changes:
-```bash
-make
-```
 
 ## Build pokeleafgreen and REV1
 Pokemon FireRed and LeafGreen were both released together. As such, this project is capable of building both ROMs. To do so, simply run
@@ -449,11 +444,20 @@ Replace `<output of nproc>` with the number that the `nproc` command returned.
 
 `nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-## Debug info
+## Compare ROM to the original
 
-To build **pokefirered.elf** with enhanced debug info:
+For contributing, or if you'd simply like to verify that your ROM is identical to the original game, run:
 ```bash
-make DINFO=1
+make compare  # or compare_leafgreen, compare_firered_rev1, compare_leafgreen_rev1
+```
+If it matches, you will see the following at the end of the output:
+```bash
+pokefirered.gba: OK
+```
+If there are any changes from the original game, you will instead see:
+```bash
+pokefirered.gba: FAILED
+shasum: WARNING: 1 computed checksum did NOT match
 ```
 
 ## devkitARM's C compiler

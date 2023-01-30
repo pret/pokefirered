@@ -12,7 +12,7 @@
 #define MB_MOUNTAIN_TOP 0x0C
 //
 #define MB_POND_WATER 0x10
-#define MB_SEMI_DEEP_WATER 0x11
+#define MB_FAST_WATER 0x11
 #define MB_DEEP_WATER 0x12
 #define MB_WATERFALL 0x13
 //

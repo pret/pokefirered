@@ -5780,7 +5780,7 @@ bool32 IsHMMove2(u16 move)
     return FALSE;
 }
 
-bool8 IsPokeSpriteNotFlipped(u16 species)
+bool8 IsMonSpriteNotFlipped(u16 species)
 {
     return gBaseStats[species].noFlip;
 }

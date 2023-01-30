@@ -469,7 +469,7 @@ void MultichoiceList_PrintItems(u8 windowId, u8 fontId, u8 left, u8 top, u8 line
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void UnionRoomAndTradeMenuPrintOptions(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *strs)
+void PrintMenuTable(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *strs)
 {
     u8 left = GetMenuCursorDimensionByFont(fontId, 0);
 

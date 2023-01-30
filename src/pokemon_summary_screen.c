@@ -4035,7 +4035,7 @@ static void PokeSum_CreateMonPicSprite(void)
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
 
-    if (!IsPokeSpriteNotFlipped(species))
+    if (!IsMonSpriteNotFlipped(species))
         gSprites[spriteId].hFlip = TRUE;
     else
         gSprites[spriteId].hFlip = FALSE;
@@ -4162,7 +4162,7 @@ static void PokeSum_CreateMonIconSprite(void)
             sMonSummaryScreen->monIconSpriteId = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);
     }
 
-    if (!IsPokeSpriteNotFlipped(species))
+    if (!IsMonSpriteNotFlipped(species))
         gSprites[sMonSummaryScreen->monIconSpriteId].hFlip = TRUE;
     else
         gSprites[sMonSummaryScreen->monIconSpriteId].hFlip = FALSE;

@@ -1195,7 +1195,7 @@ static void PrintKeyboardSwapTextsOnWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    UnionRoomAndTradeMenuPrintOptions(3, FONT_NORMAL, 14, 5, sKeyboardSwapTexts);
+    PrintMenuTable(3, FONT_NORMAL, 14, 5, sKeyboardSwapTexts);
     Menu_InitCursor(3, FONT_NORMAL, 0, 0, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }

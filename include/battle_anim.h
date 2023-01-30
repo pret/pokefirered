@@ -258,7 +258,7 @@ void InitAnimBgTilemapBuffer(u32 bgId, const void *src);
 void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src);
 u8 GetBattleBgPaletteNum(void);
 void ToggleBg3Mode(bool8 arg0);
-void TradeMenuBouncePartySprites(struct Sprite *sprite);
+void Trade_MoveSelectedMonToTarget(struct Sprite *sprite);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void StartAnimLinearTranslation(struct Sprite *sprite);

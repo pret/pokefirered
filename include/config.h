@@ -13,6 +13,28 @@
 // Fire Red likely forgot to define NDEBUG/NOAGBPRN before release, leading
 // to the inclusion of asserts in the retail ROM.
 
+#ifndef NDEBUG
+#define PRETTY_PRINT_OFF (0)
+#define PRETTY_PRINT_MINI_PRINTF (1)
+#define PRETTY_PRINT_LIBC (2)
+
+#define LOG_HANDLER_AGB_PRINT (0)
+#define LOG_HANDLER_NOCASH_PRINT (1)
+#define LOG_HANDLER_MGBA_PRINT (2)
+
+// Use this switch to choose a handler for pretty printing.
+// NOTE: mini_printf supports a custom pretty printing formatter to display preproc encoded strings. (%S)
+//       some libc distributions (especially dkp arm-libc) will fail to link pretty printing.
+#define PRETTY_PRINT_HANDLER (PRETTY_PRINT_OFF)
+
+// Use this switch to choose a handler for printf output.
+// NOTE: These will only work on the respective emulators and should not be used in a productive environment.
+//       Some emulators or real hardware might (and is allowed to) crash if they are used.
+//       AGB_PRINT is supported on respective debug units.
+
+#define LOG_HANDLER (LOG_HANDLER_AGB_PRINT)
+#endif // NDEBUG
+
 // Define the game version for use elsewhere
 #if defined(FIRERED)
 #define GAME_VERSION VERSION_FIRE_RED

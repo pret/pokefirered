@@ -104,11 +104,11 @@ static u16 sNumFlagsOrVars;
 static EWRAM_DATA u8 sCurrentSceneNum = 0;
 static EWRAM_DATA u8 sNumScenes = 0;
 EWRAM_DATA u8 gQuestLogState = 0;
-static EWRAM_DATA u16 gUnknown_203ADFC = 0;
+static EWRAM_DATA u16 sRecordSequenceStartIdx = 0;
 static EWRAM_DATA u8 sWindowIds[WIN_COUNT] = {0};
 EWRAM_DATA u16 *gUnknown_203AE04 = NULL;
 EWRAM_DATA u16 *gQuestLogRecordingPointer = NULL;
-static EWRAM_DATA u16 *gUnknown_203AE0C[32] = {NULL};
+static EWRAM_DATA u16 *sUnknown_203AE0C[32] = {NULL};
 static EWRAM_DATA void (* sQuestLogCB)(void) = NULL;
 static EWRAM_DATA u16 *sPalettesBackup = NULL;
 static EWRAM_DATA struct PlaybackControl sPlaybackControl = {0};
@@ -210,10 +210,10 @@ void SetQuestLogRecordAndPlaybackPointers(void *oldPointer)
             gQuestLogRecordingPointer = (void *)gQuestLogRecordingPointer + offset;
         if (gQuestLogState == QL_STATE_PLAYBACK)
         {
-            int r3;
-            for (r3 = 0; r3 < (int)ARRAY_COUNT(gUnknown_203AE0C); r3++)
-                if (gUnknown_203AE0C[r3])
-                    gUnknown_203AE0C[r3] = (void *)gUnknown_203AE0C[r3] + offset;
+            int i;
+            for (i = 0; i < (int)ARRAY_COUNT(sUnknown_203AE0C); i++)
+                if (sUnknown_203AE0C[i])
+                    sUnknown_203AE0C[i] = (void *)sUnknown_203AE0C[i] + offset;
         }
     }
 }
@@ -297,8 +297,8 @@ static void QLogCB_Playback(void)
     {
         if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_0 
          || sPlaybackControl.state == 1 
-         || (sPlaybackControl.cursor < ARRAY_COUNT(gUnknown_203AE0C) 
-          && gUnknown_203AE0C[sPlaybackControl.cursor] != NULL))
+         || (sPlaybackControl.cursor < ARRAY_COUNT(sUnknown_203AE0C) 
+          && sUnknown_203AE0C[sPlaybackControl.cursor] != NULL))
             QuestLog_PlayCurrentEvent();
         else
         {
@@ -337,7 +337,7 @@ void StartRecordingQuestLogAction(u16 eventId)
     BackUpTrainerRematches();
     BackUpMapLayout();
     SetGameStateAtScene(sCurrentSceneNum);
-    gUnknown_203ADFC = 0;
+    sRecordSequenceStartIdx = 0;
     SetUpQuestLogAction(2, sQuestLogActionRecordBuffer, sizeof(sQuestLogActionRecordBuffer));
     TryRecordActionSequence(sQuestLogActionRecordBuffer);
     SetQuestLogState(QL_STATE_RECORDING);
@@ -436,7 +436,7 @@ static bool8 TryRecordActionSequence(struct QuestLogAction * actions)
 {
     u16 i;
 
-    for (i = gUnknown_203ADFC; i < gQuestLogCurActionIdx; i++)
+    for (i = sRecordSequenceStartIdx; i < gQuestLogCurActionIdx; i++)
     {
         if (gQuestLogRecordingPointer == NULL)
             return FALSE;
@@ -462,7 +462,7 @@ static bool8 TryRecordActionSequence(struct QuestLogAction * actions)
         gQuestLogRecordingPointer = QL_RecordAction_SceneEnd(gQuestLogRecordingPointer);
         return FALSE;
     }
-    gUnknown_203ADFC = gQuestLogCurActionIdx;
+    sRecordSequenceStartIdx = gQuestLogCurActionIdx;
     return TRUE;
 }
 
@@ -788,10 +788,8 @@ static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogAction * a1)
     u16 r9 = 0;
 
     memset(a1, 0, 32 * sizeof(struct QuestLogAction));
-    for (i = 0; i < ARRAY_COUNT(gUnknown_203AE0C); i++)
-    {
-        gUnknown_203AE0C[i] = NULL;
-    }
+    for (i = 0; i < ARRAY_COUNT(sUnknown_203AE0C); i++)
+        sUnknown_203AE0C[i] = NULL;
 
     script = gSaveBlock1Ptr->questLog[sceneNum].script;
     for (i = 0; i < 32; i++)
@@ -816,9 +814,9 @@ static void ReadQuestLogScriptFromSav1(u8 sceneNum, struct QuestLogAction * a1)
             r6++;
             break;
         default: // Normal event
-            script = QuestLog_SkipCommand(script, &gUnknown_203AE0C[r9]);
+            script = QuestLog_SkipCommand(script, &sUnknown_203AE0C[r9]);
             if (r9 == 0)
-                sub_8113ABC(gUnknown_203AE0C[0]);
+                sub_8113ABC(sUnknown_203AE0C[0]);
             r9++;
             break;
         }
@@ -954,11 +952,11 @@ static void QuestLog_PlayCurrentEvent(void)
             sPlaybackControl.overlapTimer = 0;
         }
     }
-    if (sPlaybackControl.cursor < ARRAY_COUNT(gUnknown_203AE0C))
+    if (sPlaybackControl.cursor < ARRAY_COUNT(sUnknown_203AE0C))
     {
-        if (sub_8113B44(gUnknown_203AE0C[sPlaybackControl.cursor]) == 1)
+        if (sub_8113B44(sUnknown_203AE0C[sPlaybackControl.cursor]) == 1)
             HandleShowQuestLogMessage();
-        else if (sub_8113AE8(gUnknown_203AE0C[sPlaybackControl.cursor]) == 1)
+        else if (sub_8113AE8(sUnknown_203AE0C[sPlaybackControl.cursor]) == 1)
             HandleShowQuestLogMessage();
     }
 }

@@ -793,7 +793,7 @@ bool8 sub_8113AE8(const u16 *a0)
 {
     const u16 *r0 = a0;
 
-    if (a0 == NULL) // checks must be separate to match
+    if (a0 == NULL)
         return FALSE;
     if (r0[1] > gQuestLogCurActionIdx)
         return FALSE;
@@ -1093,14 +1093,14 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
         if (rItemParam != 0xFFFF)
         {
             StringCopy(gStringVar3, gMoveNames[rItemParam]);
-            if (rItemId > ITEM_TM50)
+            if (rItemId >= ITEM_HM01)
                 StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonReplacedMoveWithHM);
             else
                 StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonReplacedMoveWithTM);
         }
         else
         {
-            if (rItemId > ITEM_TM50)
+            if (rItemId >= ITEM_HM01)
                 StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonLearnedMoveFromHM);
             else
                 StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonLearnedMoveFromTM);

@@ -1343,16 +1343,16 @@ const u16 gUnionRoomChatPanelBgPal_7[] = INCBIN_U16("graphics/interface/union_ro
 const u32 gUnionRoomChatPanelBgTiles[] = INCBIN_U32("graphics/interface/union_room_chat_panel.4bpp.lz");
 const u32 gUnionRoomChatPanelBgMap[] = INCBIN_U32("graphics/interface/union_room_chat_panel.bin.lz");
 
-const u16 gCreditsMonBackdropPals[][16] =
+const u16 gCreditsMonPokeball_Pals[][16] =
 {
-    INCBIN_U16("graphics/credits/charizard.gbapal"),
-    INCBIN_U16("graphics/credits/venusaur.gbapal"),
-    INCBIN_U16("graphics/credits/blastoise.gbapal"),
-    INCBIN_U16("graphics/credits/pikachu.gbapal"),
+    INCBIN_U16("graphics/credits/pokeball_charizard.gbapal"),
+    INCBIN_U16("graphics/credits/pokeball_venusaur.gbapal"),
+    INCBIN_U16("graphics/credits/pokeball_blastoise.gbapal"),
+    INCBIN_U16("graphics/credits/pokeball_pikachu.gbapal"),
 };
 
-const u32 gCreditsPokeballBgGfxTiles[] = INCBIN_U32("graphics/credits/unk_8EAAB98.4bpp.lz");
-const u32 gCreditsPokeballBgGfxMap[] = INCBIN_U32("graphics/credits/unk_8EAB30C.bin.lz");
+const u32 gCreditsMonPokeball_Tiles[] = INCBIN_U32("graphics/credits/pokeball.4bpp.lz");
+const u32 gCreditsMonPokeball_Tilemap[] = INCBIN_U32("graphics/credits/pokeball.bin.lz");
 
 #ifdef FIRERED
 const u16 gGraphics_TitleScreen_GameTitleLogoPals[] = INCBIN_U16("graphics/title_screen/firered/game_title_logo.gbapal");
@@ -1382,9 +1382,9 @@ const u16 gTitleScreen_Slash_Pal[] = INCBIN_U16("graphics/title_screen/leafgreen
 
 const u32 gTitleScreen_BlankSprite_Tiles[] = INCBIN_U32("graphics/title_screen/blank_sprite.4bpp.lz");
 
-const u16 gCreditsAllRightsReservedGfxPal[] = INCBIN_U16("graphics/credits/unk_8EAE548.gbapal");
-const u8 gCreditsAllRightsReservedGfxTiles[] = INCBIN_U8("graphics/credits/unk_8EAE548.4bpp.lz");
-const u8 gCreditsAllRightsReservedGfxMap[] = INCBIN_U8("graphics/credits/unk_8EAE548.bin.lz");
+const u16 gCreditsCopyright_Pal[] = INCBIN_U16("graphics/credits/copyright.gbapal");
+const u8 gCreditsCopyright_Tiles[] = INCBIN_U8("graphics/credits/copyright.4bpp.lz");
+const u8 gCreditsCopyright_Tilemap[] = INCBIN_U8("graphics/credits/copyright.bin.lz");
 
 const u32 gUnknown_8EAEA00[] = INCBIN_U32("graphics/link/gba.gbapal");
 const u32 gTradeGba2_Pal[] = INCBIN_U32("graphics/link/gba_pal2.gbapal");

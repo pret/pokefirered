@@ -4343,12 +4343,12 @@ extern const u32 gPartyMenuBg_Tilemap[];
 extern const u32 gPartyMenuBg_Pal[];
 
 // credits
-extern const u32 gCreditsPokeballBgGfxTiles[];
-extern const u32 gCreditsPokeballBgGfxMap[];
-extern const u16 gCreditsMonBackdropPals[][16];
-extern const u16 gCreditsAllRightsReservedGfxPal[];
-extern const u8 gCreditsAllRightsReservedGfxTiles[];
-extern const u8 gCreditsAllRightsReservedGfxMap[];
+extern const u32 gCreditsMonPokeball_Tiles[];
+extern const u32 gCreditsMonPokeball_Tilemap[];
+extern const u16 gCreditsMonPokeball_Pals[][16];
+extern const u16 gCreditsCopyright_Pal[];
+extern const u8 gCreditsCopyright_Tiles[];
+extern const u8 gCreditsCopyright_Tilemap[];
 
 // berry_pouch
 extern const u32 gBerryPouchSpriteTiles[];

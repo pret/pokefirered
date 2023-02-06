@@ -70,6 +70,8 @@
 #define MULTICHOICE_JOIN_OR_LEAD                               63
 #define MULTICHOICE_TRAINER_TOWER_MODE                         64
 
+#define MULTICHOICE_NONE                                      255
+
 #define LISTMENU_BADGES                    0
 #define LISTMENU_SILPHCO_FLOORS            1
 #define LISTMENU_ROCKET_HIDEOUT_FLOORS     2

@@ -2,6 +2,7 @@ TILESETGFXDIR := data/tilesets
 FONTGFXDIR := graphics/fonts
 FAMECHECKERGFXDIR := graphics/fame_checker
 INTERFACEGFXDIR := graphics/interface
+PARTYMENUGFXDIR := graphics/party_menu
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
 UNKNOWNGFXDIR := graphics/unknown
@@ -199,7 +200,7 @@ $(MASKSGFXDIR)/unknown_D2EC24.4bpp: %.4bpp: %.png
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 16 -Wnum_tiles
 
-$(INTERFACEGFXDIR)/party_menu_misc.4bpp: %.4bpp: %.png
+$(PARTYMENUGFXDIR)/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)

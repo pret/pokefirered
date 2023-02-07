@@ -70,12 +70,9 @@ u8 gPcmDmaCounter;
 
 // These variables are not defined in RS or Emerald, and are never read.
 // They were likely used to debug the audio engine and VCount interrupt.
-// Define NDEBUG in include/config.h to remove these variables.
-#ifndef NDEBUG
 u8 sVcountAfterSound;
 u8 sVcountAtIntr;
 u8 sVcountBeforeSound;
-#endif
 
 static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 
@@ -146,7 +143,13 @@ void AgbMain()
 
     SetNotInSaveFailedScreen();
 
+#ifndef NDEBUG
+#if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
+    (void) MgbaOpen();
+#elif (LOG_HANDLER == LOG_HANDLER_AGB_PRINT)
     AGBPrintInit();
+#endif
+#endif
 
 #if REVISION == 1
     if (gFlashMemoryPresent != TRUE)

@@ -75,6 +75,12 @@
 	inc _num_traps
 	.endm
 
+	@ Defines a weather coord event for map data. Any coord event is treated as a weather coord event if its script is NULL.
+	@ NOTE: In FRLG, the weather handling functions are dummied out. See src/coord_event_weather.c
+	.macro coord_weather_event x:req, y:req, elevation:req, weather:req
+	coord_event \x, \y, \elevation, \weather, 0, NULL
+	.endm
+
 	@ Defines a generic background event for map data. Mirrors the struct layout of BgEvent in include/global.fieldmap.h
 	@ 'kind' is any BG_EVENT_* constant (see include/constants/event_bg.h).
 	@ 'arg6' is used differently depending on the bg event type. 'arg7' and 'arg8' are only used by bg_hidden_item_event.

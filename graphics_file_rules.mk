@@ -17,7 +17,6 @@ EVENTOBJGFXDIR := graphics/object_events
 FIELDEFFECTSGFXDIR := graphics/field_effects
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
-SLOTMACHINEGFXDIR := graphics/slot_machine
 TEACHYTVGFXDIR := graphics/teachy_tv
 SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
@@ -245,10 +244,6 @@ $(ROULETTEGFXDIR)/poke_icons2.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
 									$(ROULETTEGFXDIR)/makuhita.4bpp
 	@cat $^ >$@
 
-$(SLOTMACHINEGFXDIR)/reel_time_gfx.4bpp: $(SLOTMACHINEGFXDIR)/reel_time_pikachu.4bpp \
-										 $(SLOTMACHINEGFXDIR)/reel_time_machine.4bpp
-	@cat $^ >$@
-
 $(UNUSEDGFXDIR)/intro_birch_beauty.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 822 -Wnum_tiles
 
@@ -462,11 +457,14 @@ graphics/link/321start.4bpp: %.4bpp: %.png
 $(TEXTWINDOWGFXDIR)/signpost.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19 -Wnum_tiles
 
-$(SLOTMACHINEGFXDIR)/unk_8466620.4bpp: %.4bpp: %.png
+$(SLOTMACHINEGFXDIR)/firered/combos_window.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 66 -Wnum_tiles
 
-$(SLOTMACHINEGFXDIR)/unk_84659d0.4bpp: %.4bpp: %.png
+$(SLOTMACHINEGFXDIR)/firered/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 138 -Wnum_tiles
+
+$(SLOTMACHINEGFXDIR)/leafgreen/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 134 -Wnum_tiles
 
 $(TEACHYTVGFXDIR)/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles

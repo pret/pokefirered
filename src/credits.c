@@ -133,6 +133,11 @@ enum CreditsMap
     CREDITS_MAP_ROUTE21_NORTH
 };
 
+enum {
+    GFXTAG_CHARACTER = 0x2000, // Player/Rival
+    GFXTAG_GROUND,
+};
+
 struct CreditsResources
 {
     u8 mainseqno;
@@ -160,9 +165,9 @@ struct CreditsScrcmd
 
 struct CreditsTextHeader
 {
-    const u8 * unk_0;
-    const u8 * unk_4;
-    bool8 unk_8;
+    const u8 * title;
+    const u8 * names;
+    bool8 unused;
 };
 
 struct CompressedGraphicsHeader
@@ -175,12 +180,12 @@ struct CompressedGraphicsHeader
 struct CreditsTaskData
 {
     u8 spriteMoveCmd;
-    u8 playerSpriteId;
-    u16 playerTilesTag;
-    u16 field_04;
+    u8 characterSpriteId; // Player or rival
+    u16 characterTilesTag;
+    u16 characterPalTag;
     u8 groundSpriteId;
     u16 groundTilesTag;
-    u16 field_0A;
+    u16 groundPalTag;
 };
 
 static EWRAM_DATA struct CreditsResources * sCreditsMgr = NULL;
@@ -223,144 +228,148 @@ static const struct BgTemplate sBgTemplates_MonSceneOrTheEnd[] = {
 
 static const struct WindowTemplate sWindowTemplates_Charizard[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x0b,
-        .tilemapTop = 0x06,
-        .width = 0x08,
-        .height = 0x08,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 6,
+        .width = 8,
+        .height = 8,
+        .paletteNum = 10,
         .baseBlock = 0x0008
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x0a,
-        .tilemapTop = 0x05,
-        .width = 0x0a,
-        .height = 0x0a,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 10,
+        .tilemapTop = 5,
+        .width = 10,
+        .height = 10,
+        .paletteNum = 10,
         .baseBlock = 0x0048
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x09,
-        .tilemapTop = 0x03,
-        .width = 0x0c,
-        .height = 0x0d,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 9,
+        .tilemapTop = 3,
+        .width = 12,
+        .height = 13,
+        .paletteNum = 10,
         .baseBlock = 0x00ac
     }, DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sWindowTemplates_Venusaur[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x0b,
-        .tilemapTop = 0x06,
-        .width = 0x08,
-        .height = 0x08,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 6,
+        .width = 8,
+        .height = 8,
+        .paletteNum = 10,
         .baseBlock = 0x0008
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x0a,
-        .tilemapTop = 0x05,
-        .width = 0x0a,
-        .height = 0x0a,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 10,
+        .tilemapTop = 5,
+        .width = 10,
+        .height = 10,
+        .paletteNum = 10,
         .baseBlock = 0x0048
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x09,
-        .tilemapTop = 0x05,
-        .width = 0x0c,
-        .height = 0x0a,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 9,
+        .tilemapTop = 5,
+        .width = 12,
+        .height = 10,
+        .paletteNum = 10,
         .baseBlock = 0x00ac
     }, DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sWindowTemplates_Blastoise[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x0b,
-        .tilemapTop = 0x06,
-        .width = 0x08,
-        .height = 0x08,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 6,
+        .width = 8,
+        .height = 8,
+        .paletteNum = 10,
         .baseBlock = 0x0008
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x0a,
-        .tilemapTop = 0x05,
-        .width = 0x0a,
-        .height = 0x0a,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 10,
+        .tilemapTop = 5,
+        .width = 10,
+        .height = 10,
+        .paletteNum = 10,
         .baseBlock = 0x0048
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x0a,
-        .tilemapTop = 0x04,
-        .width = 0x0a,
-        .height = 0x0c,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 10,
+        .tilemapTop = 4,
+        .width = 10,
+        .height = 12,
+        .paletteNum = 10,
         .baseBlock = 0x00ac
     }, DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sWindowTemplates_Pikachu[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x0b,
-        .tilemapTop = 0x06,
-        .width = 0x08,
-        .height = 0x08,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 11,
+        .tilemapTop = 6,
+        .width = 8,
+        .height = 8,
+        .paletteNum = 10,
         .baseBlock = 0x0008
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x0a,
-        .tilemapTop = 0x05,
-        .width = 0x0a,
-        .height = 0x0a,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 10,
+        .tilemapTop = 5,
+        .width = 10,
+        .height = 10,
+        .paletteNum = 10,
         .baseBlock = 0x0048
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x09,
-        .tilemapTop = 0x04,
-        .width = 0x0c,
-        .height = 0x0c,
-        .paletteNum = 0x0a,
+        .bg = 0,
+        .tilemapLeft = 9,
+        .tilemapTop = 4,
+        .width = 12,
+        .height = 12,
+        .paletteNum = 10,
         .baseBlock = 0x00ac
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sPalette_OneBlackThenAllWhite[] = INCBIN_U16("graphics/credits/unk_840C630.gbapal");
-static const u32 sAffineCircleGfx[] = INCBIN_U32("graphics/credits/unk_840C650.8bpp.lz");
-static const u32 sAffineCircleMap[] = INCBIN_U32("graphics/credits/unk_840CA54.bin.lz");
-static const u32 sWindow1Map_Charizard[] = INCBIN_U32("graphics/credits/unk_840CB8C.bin.lz");
-static const u32 sWindow2Map_Charizard[] = INCBIN_U32("graphics/credits/unk_840D228.bin.lz");
-static const u32 sUnusedTilemap[] = INCBIN_U32("graphics/credits/unk_840DC0C.bin.lz");
-static const u32 sWindow1Map_Venusaur[] = INCBIN_U32("graphics/credits/unk_840E158.bin.lz");
-static const u32 sWindow2Map_Venusaur[] = INCBIN_U32("graphics/credits/unk_840E904.bin.lz");
-static const u32 sWindow1Map_Blastoise[] = INCBIN_U32("graphics/credits/unk_840F240.bin.lz");
-static const u32 sWindow2Map_Blastoise[] = INCBIN_U32("graphics/credits/unk_840F944.bin.lz");
-static const u32 sWindow1Map_Pikachu[] = INCBIN_U32("graphics/credits/unk_8410198.bin.lz");
-static const u32 sWindow2Map_Pikachu[] = INCBIN_U32("graphics/credits/unk_84105B4.bin.lz");
+static const u16 sCreditsMonCircle_Pal[] = INCBIN_U16("graphics/credits/white_circle.gbapal");
+static const u32 sCreditsMonCircle_Tiles[] = INCBIN_U32("graphics/credits/white_circle.8bpp.lz");
+static const u32 sCreditsMonCircle_Tilemap[] = INCBIN_U32("graphics/credits/white_circle.bin.lz");
+
+static const u32 sCharizard1_Tiles[] = INCBIN_U32("graphics/credits/charizard_1.4bpp.lz");
+static const u32 sCharizard2_Tiles[] = INCBIN_U32("graphics/credits/charizard_2.4bpp.lz");
+
+static const u32 sVenusaurUnused_Tiles[] = INCBIN_U32("graphics/credits/venusaur_unused.4bpp.lz");
+static const u32 sVenusaur1_Tiles[] = INCBIN_U32("graphics/credits/venusaur_1.4bpp.lz");
+static const u32 sVenusaur2_Tiles[] = INCBIN_U32("graphics/credits/venusaur_2.4bpp.lz");
+
+static const u32 sBlastoise1_Tiles[] = INCBIN_U32("graphics/credits/blastoise_1.4bpp.lz");
+static const u32 sBlastoise2_Tiles[] = INCBIN_U32("graphics/credits/blastoise_2.4bpp.lz");
+
+static const u32 sPikachu1_Tiles[] = INCBIN_U32("graphics/credits/pikachu_1.4bpp.lz");
+static const u32 sPikachu2_Tiles[] = INCBIN_U32("graphics/credits/pikachu_2.4bpp.lz");
 
 static const u32 sUnused = 0xF0;
 
-static const u16 sTheEndGfxPal[] = INCBIN_U16("graphics/credits/unk_8410B20.gbapal");
-static const u8 sTheEndGfxTiles[] = INCBIN_U8("graphics/credits/unk_8410B20.4bpp.lz");
-static const u8 sTheEndGfxMap[] = INCBIN_U8("graphics/credits/unk_8410B20.bin.lz");
+static const u16 sTheEnd_Pal[] = INCBIN_U16("graphics/credits/the_end.gbapal");
+static const u8 sTheEnd_Tiles[] = INCBIN_U8("graphics/credits/the_end.4bpp.lz");
+static const u8 sTheEnd_Tilemap[] = INCBIN_U8("graphics/credits/the_end.bin.lz");
 
 static const struct CompressedGraphicsHeader sCopyrightOrTheEndGfxHeaders[] = {
     {
-        .tiles = gCreditsAllRightsReservedGfxTiles,
-        .map = gCreditsAllRightsReservedGfxMap,
-        .palette = gCreditsAllRightsReservedGfxPal
+        .tiles = gCreditsCopyright_Tiles,
+        .map = gCreditsCopyright_Tilemap,
+        .palette = gCreditsCopyright_Pal
     }, {
-        .tiles = sTheEndGfxTiles,
-        .map = sTheEndGfxMap,
-        .palette = sTheEndGfxPal
+        .tiles = sTheEnd_Tiles,
+        .map = sTheEnd_Tilemap,
+        .palette = sTheEnd_Pal
     }
 };
 
@@ -454,18 +463,18 @@ static const struct WindowTemplate sCreditsWindowTemplate = {
     .baseBlock = 0x008
 };
 
-static const u16 sMalePlayerSpritePal[] = INCBIN_U16("graphics/credits/unk_8410E10.gbapal");
-static const u32 sMalePlayerSpriteGfx[] = INCBIN_U32("graphics/credits/unk_8410E30.4bpp.lz");
-static const u16 sFemalePlayerSpritePal[] = INCBIN_U16("graphics/credits/unk_8411BF8.gbapal");
-static const u32 sFemalePlayerSpriteGfx[] = INCBIN_U32("graphics/credits/unk_8411C18.4bpp.lz");
-static const u16 sRivalSpritePal[] = INCBIN_U16("graphics/credits/unk_84129A0.gbapal");
-static const u32 sRivalSpriteGfx[] = INCBIN_U32("graphics/credits/unk_84129C0.4bpp.lz");
-static const u16 sGroundSpritePal_Grass[] = INCBIN_U16("graphics/credits/unk_8413318.gbapal");
-static const u32 sGroundSpriteGfx_Grass[] = INCBIN_U32("graphics/credits/unk_8413338.4bpp.lz");
-static const u16 sGroundSpritePal_Dirt[] = INCBIN_U16("graphics/credits/unk_8413854.gbapal");
-static const u32 sGroundSpriteGfx_Dirt[] = INCBIN_U32("graphics/credits/unk_8413874.4bpp.lz");
-static const u16 sGroundSpritePal_City[] = INCBIN_U16("graphics/credits/unk_8413D98.gbapal");
-static const u32 sGroundSpriteGfx_City[] = INCBIN_U32("graphics/credits/unk_8413DB8.4bpp.lz");
+static const u16 sPlayerMale_Pal[]     = INCBIN_U16("graphics/credits/player_male.gbapal");
+static const u32 sPlayerMale_Tiles[]   = INCBIN_U32("graphics/credits/player_male.4bpp.lz");
+static const u16 sPlayerFemale_Pal[]   = INCBIN_U16("graphics/credits/player_female.gbapal");
+static const u32 sPlayerFemale_Tiles[] = INCBIN_U32("graphics/credits/player_female.4bpp.lz");
+static const u16 sRival_Pal[]          = INCBIN_U16("graphics/credits/rival.gbapal");
+static const u32 sRival_Tiles[]        = INCBIN_U32("graphics/credits/rival.4bpp.lz");
+static const u16 sGround_Grass_Pal[]   = INCBIN_U16("graphics/credits/ground_grass.gbapal");
+static const u32 sGround_Grass_Tiles[] = INCBIN_U32("graphics/credits/ground_grass.4bpp.lz");
+static const u16 sGround_Dirt_Pal[]    = INCBIN_U16("graphics/credits/ground_dirt.gbapal");
+static const u32 sGround_Dirt_Tiles[]  = INCBIN_U32("graphics/credits/ground_dirt.4bpp.lz");
+static const u16 sGround_City_Pal[]    = INCBIN_U16("graphics/credits/ground_city.gbapal");
+static const u32 sGround_City_Tiles[]  = INCBIN_U32("graphics/credits/ground_city.4bpp.lz");
 
 static const u16 sPlayerRivalSpriteParams[][3] = {
     { 0, 3, 1 },
@@ -703,7 +712,7 @@ void DoCredits(void)
 {
     sCreditsMgr = AllocZeroed(sizeof(*sCreditsMgr));
     ResetTasks();
-    sCreditsMgr->taskId = 0xFF;
+    sCreditsMgr->taskId = TASK_NONE;
     sCreditsMgr->unk_1D = 0;
     ResetSpriteData();
     SetMainCallback2(CB2_Credits);
@@ -790,8 +799,8 @@ static bool32 DoOverworldMapScrollScene(u8 whichMon)
         if (!Overworld_DoScrollSceneForCredits(&sCreditsMgr->ovwldseqno, sOverworldMapScenes[sCreditsMgr->whichMon], QL_TINT_NONE))
             return FALSE;
         CreateCreditsWindow();
-        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0x247C);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(36, DISPLAY_HEIGHT - 36));
         SwitchWin1OffWin0On();
         InitBgDarkenEffect();
         Menu_LoadStdPalAt(0xF0);
@@ -811,8 +820,8 @@ static s32 RollCredits(void)
     {
     case CREDITSSCENE_INIT_WIN0:
         SwitchWin1OffWin0On();
-        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0x4F51);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(DISPLAY_HEIGHT / 2 - 1, DISPLAY_HEIGHT / 2 + 1));
         sCreditsMgr->mainseqno = CREDITSSCENE_SETUP_DARKEN_EFFECT;
         return 0;
     case CREDITSSCENE_SETUP_DARKEN_EFFECT:
@@ -912,13 +921,13 @@ static s32 RollCredits(void)
     case CREDITSSCENE_PRINT_ADDPRINTER1:
         if (gPaletteFade.active)
             return sCreditsMgr->canSpeedThrough;
-        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8; // unused
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_NORMAL_COPY_1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_0);
+        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unused;
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_NORMAL_COPY_1, 2, 6, 0, 0, sTextColor_Header, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].title);
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_ADDPRINTER2;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_ADDPRINTER2:
-        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_8;
-        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_NORMAL, 8, 6, 0, 0, sTextColor_Regular, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unk_4);
+        win0v[0] = sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].unused;
+        AddTextPrinterParameterized4(sCreditsMgr->windowId, FONT_NORMAL, 8, 6, 0, 0, sTextColor_Regular, -1, sCreditsTexts[sCreditsScript[sCreditsMgr->scrcmdidx].param].names);
         sCreditsMgr->mainseqno = CREDITSSCENE_PRINT_DELAY;
         return sCreditsMgr->canSpeedThrough;
     case CREDITSSCENE_PRINT_DELAY:
@@ -1042,29 +1051,29 @@ static void LoadCreditsMonPic(u8 whichMon)
         InitWindows(sWindowTemplates_Charizard);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         LoadMonPicInWindow(SPECIES_CHARIZARD, SHINY_ODDS, 0, TRUE, 10, 0);
-        CopyToWindowPixelBuffer(1, (const void *)sWindow1Map_Charizard, 0, 0);
-        CopyToWindowPixelBuffer(2, (const void *)sWindow2Map_Charizard, 0, 0);
+        CopyToWindowPixelBuffer(1, (const void *)sCharizard1_Tiles, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)sCharizard2_Tiles, 0, 0);
         break;
     case CREDITSMON_VENUSAUR:
         InitWindows(sWindowTemplates_Venusaur);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         LoadMonPicInWindow(SPECIES_VENUSAUR, SHINY_ODDS, 0, TRUE, 10, 0);
-        CopyToWindowPixelBuffer(1, (const void *)sWindow1Map_Venusaur, 0, 0);
-        CopyToWindowPixelBuffer(2, (const void *)sWindow2Map_Venusaur, 0, 0);
+        CopyToWindowPixelBuffer(1, (const void *)sVenusaur1_Tiles, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)sVenusaur2_Tiles, 0, 0);
         break;
     case CREDITSMON_BLASTOISE:
         InitWindows(sWindowTemplates_Blastoise);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         LoadMonPicInWindow(SPECIES_BLASTOISE, SHINY_ODDS, 0, TRUE, 10, 0);
-        CopyToWindowPixelBuffer(1, (const void *)sWindow1Map_Blastoise, 0, 0);
-        CopyToWindowPixelBuffer(2, (const void *)sWindow2Map_Blastoise, 0, 0);
+        CopyToWindowPixelBuffer(1, (const void *)sBlastoise1_Tiles, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)sBlastoise2_Tiles, 0, 0);
         break;
     case CREDITSMON_PIKACHU:
         InitWindows(sWindowTemplates_Pikachu);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         LoadMonPicInWindow(SPECIES_PIKACHU, SHINY_ODDS, 0, TRUE, 10, 0);
-        CopyToWindowPixelBuffer(1, (const void *)sWindow1Map_Pikachu, 0, 0);
-        CopyToWindowPixelBuffer(2, (const void *)sWindow2Map_Pikachu, 0, 0);
+        CopyToWindowPixelBuffer(1, (const void *)sPikachu1_Tiles, 0, 0);
+        CopyToWindowPixelBuffer(2, (const void *)sPikachu2_Tiles, 0, 0);
         break;
     }
     CopyWindowToVram(0, COPYWIN_GFX);
@@ -1108,19 +1117,19 @@ static bool32 DoCreditsMonScene(void)
         ResetBgsAndClearDma3BusyFlags(1);
         InitBgsFromTemplates(1, sBgTemplates_MonSceneOrTheEnd, NELEMS(sBgTemplates_MonSceneOrTheEnd));
         SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         sCreditsMgr->creditsMonTimer = 0;
         sCreditsMgr->unk_0E = 0;
         SetBgAffine(2, 0x8000, 0x8000, 0x78, 0x50, sCreditsMgr->creditsMonTimer, sCreditsMgr->creditsMonTimer, 0);
-        DecompressAndLoadBgGfxUsingHeap(1, gCreditsPokeballBgGfxTiles, 0x2000, 0, 0);
-        DecompressAndLoadBgGfxUsingHeap(2, sAffineCircleGfx, 0x2000, 0, 0);
-        DecompressAndLoadBgGfxUsingHeap(1, gCreditsPokeballBgGfxMap, 0x500, 0, 1);
-        DecompressAndLoadBgGfxUsingHeap(2, sAffineCircleMap, 0x400, 0, 1);
-        LoadPalette(gCreditsMonBackdropPals[sCreditsMgr->whichMon], 0, 0x20);
-        LoadPalette(sPalette_OneBlackThenAllWhite, 0xF0, 0x20);
+        DecompressAndLoadBgGfxUsingHeap(1, gCreditsMonPokeball_Tiles, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(2, sCreditsMonCircle_Tiles, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, gCreditsMonPokeball_Tilemap, 0x500, 0, 1);
+        DecompressAndLoadBgGfxUsingHeap(2, sCreditsMonCircle_Tilemap, 0x400, 0, 1);
+        LoadPalette(gCreditsMonPokeball_Pals[sCreditsMgr->whichMon], 0, 0x20);
+        LoadPalette(sCreditsMonCircle_Pal, 0xF0, 0x20);
         LoadCreditsMonPic(sCreditsMgr->whichMon);
         SetVBlankCallback(VBlankCB);
         EnableInterrupts(INTR_FLAG_VBLANK);
@@ -1236,8 +1245,8 @@ static bool32 DoCopyrightOrTheEndGfxScene(void)
         ResetTasks();
         ResetBgsAndClearDma3BusyFlags(1);
         InitBgsFromTemplates(0, sBgTemplates_MonSceneOrTheEnd, 1);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
         DecompressAndLoadBgGfxUsingHeap(0, sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].tiles, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(0, sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].map, 0x800, 0, 1);
         LoadPalette(sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].palette, 0x00, 0x200);
@@ -1276,9 +1285,9 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
     case 0:
         break;
     case 1:
-        if (gSprites[data->playerSpriteId].x != 0xD0)
+        if (gSprites[data->characterSpriteId].x != 0xD0)
         {
-            gSprites[data->playerSpriteId].x--;
+            gSprites[data->characterSpriteId].x--;
             gSprites[data->groundSpriteId].x--;
         }
         else
@@ -1289,9 +1298,9 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
     case 2:
         if (sCreditsMgr->unk_1D & 1)
         {
-            if (gSprites[data->playerSpriteId].y != 0x50)
+            if (gSprites[data->characterSpriteId].y != 0x50)
             {
-                gSprites[data->playerSpriteId].y--;
+                gSprites[data->characterSpriteId].y--;
                 gSprites[data->groundSpriteId].y--;
             }
             else
@@ -1303,7 +1312,7 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
     case 3:
         if (sCreditsMgr->mainseqno == 15)
         {
-            gSprites[data->playerSpriteId].x--;
+            gSprites[data->characterSpriteId].x--;
             gSprites[data->groundSpriteId].x--;
         }
         break;
@@ -1312,15 +1321,15 @@ static void Task_MovePlayerAndGroundSprites(u8 taskId)
 
 static void DestroyPlayerOrRivalSprite(void)
 {
-    if (sCreditsMgr->taskId != 0xFF)
+    if (sCreditsMgr->taskId != TASK_NONE)
     {
         struct CreditsTaskData * data = (void *)gTasks[sCreditsMgr->taskId].data;
-        FreeSpriteTilesByTag(data->playerTilesTag);
-        DestroySprite(&gSprites[data->playerSpriteId]);
+        FreeSpriteTilesByTag(data->characterTilesTag);
+        DestroySprite(&gSprites[data->characterSpriteId]);
         FreeSpriteTilesByTag(data->groundTilesTag);
         DestroySprite(&gSprites[data->groundSpriteId]);
         DestroyTask(sCreditsMgr->taskId);
-        sCreditsMgr->taskId = 0xFF;
+        sCreditsMgr->taskId = TASK_NONE;
     }
 }
 
@@ -1332,7 +1341,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
     struct SpriteTemplate sprTemplate;
     struct CompressedSpriteSheet sprSheet;
 
-    if (sCreditsMgr->taskId == 0xFF)
+    if (sCreditsMgr->taskId == TASK_NONE)
     {
         taskId = CreateTask(Task_MovePlayerAndGroundSprites, 0);
         data = (void *)gTasks[taskId].data;
@@ -1341,97 +1350,97 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
         {
         default:
         case 0:
-            x = 0xd0;
-            y = 0x50;
+            x = DISPLAY_WIDTH - 32;
+            y = DISPLAY_HEIGHT / 2;
             break;
         case 1:
-            x = 0x110;
-            y = 0x50;
+            x = DISPLAY_WIDTH + 32;
+            y = DISPLAY_HEIGHT / 2;
             break;
         case 2:
-            x = 0xd0;
-            y = 0xa0;
+            x = DISPLAY_WIDTH - 32;
+            y = DISPLAY_HEIGHT;
             break;
         }
         data->spriteMoveCmd = sPlayerRivalSpriteParams[whichScene][2];
-        data->playerTilesTag = 0x2000;
-        data->field_04 = 0xFFFF;
+        data->characterTilesTag = GFXTAG_CHARACTER;
+        data->characterPalTag = TAG_NONE;
         switch (sPlayerRivalSpriteParams[whichScene][0])
         {
         case 0:
             // Player
             if (gSaveBlock2Ptr->playerGender == MALE)
             {
-                sprSheet.data = sMalePlayerSpriteGfx;
+                sprSheet.data = sPlayerMale_Tiles;
                 sprSheet.size = 0x3000;
-                sprSheet.tag = data->playerTilesTag;
+                sprSheet.tag = data->characterTilesTag;
                 LoadCompressedSpriteSheet(&sprSheet);
-                LoadPalette(sMalePlayerSpritePal, 0x1F0, 0x20);
+                LoadPalette(sPlayerMale_Pal, 0x1F0, sizeof(sPlayerMale_Pal));
             }
             else
             {
-                sprSheet.data = sFemalePlayerSpriteGfx;
+                sprSheet.data = sPlayerFemale_Tiles;
                 sprSheet.size = 0x3000;
-                sprSheet.tag = data->playerTilesTag;
+                sprSheet.tag = data->characterTilesTag;
                 LoadCompressedSpriteSheet(&sprSheet);
-                LoadPalette(sFemalePlayerSpritePal, 0x1F0, 0x20);
+                LoadPalette(sPlayerFemale_Pal, 0x1F0, sizeof(sPlayerFemale_Pal));
             }
             break;
         case 1:
             // Rival
-            sprSheet.data = sRivalSpriteGfx;
+            sprSheet.data = sRival_Tiles;
             sprSheet.size = 0x3000;
-            sprSheet.tag = data->playerTilesTag;
+            sprSheet.tag = data->characterTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sRivalSpritePal, 0x1F0, 0x20);
+            LoadPalette(sRival_Pal, 0x1F0, sizeof(sRival_Pal));
             break;
         }
         sprTemplate = sPlayerOrRivalSpriteTemplate;
-        sprTemplate.tileTag = data->playerTilesTag;
-        data->playerSpriteId = CreateSprite(&sprTemplate, x, y, 0);
-        gSprites[data->playerSpriteId].oam.paletteNum = 0xF;
-        gSprites[data->playerSpriteId].subpriority = 0;
+        sprTemplate.tileTag = data->characterTilesTag;
+        data->characterSpriteId = CreateSprite(&sprTemplate, x, y, 0);
+        gSprites[data->characterSpriteId].oam.paletteNum = 15;
+        gSprites[data->characterSpriteId].subpriority = 0;
 
-        data->groundTilesTag = 0x2001;
-        data->field_0A = 0xFFFF;
+        data->groundTilesTag = GFXTAG_GROUND;
+        data->groundPalTag = TAG_NONE;
         switch (sPlayerRivalSpriteParams[whichScene][1])
         {
         case 0:
-            sprSheet.data = sGroundSpriteGfx_Grass;
+            sprSheet.data = sGround_Grass_Tiles;
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGroundSpritePal_Grass, 0x1E0, 0x20);
+            LoadPalette(sGround_Grass_Pal, 0x1E0, sizeof(sGround_Grass_Pal));
             sprTemplate = sGroundSpriteTemplate_Running;
             break;
         case 1:
-            sprSheet.data = sGroundSpriteGfx_Grass;
+            sprSheet.data = sGround_Grass_Tiles;
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGroundSpritePal_Grass, 0x1E0, 0x20);
+            LoadPalette(sGround_Grass_Pal, 0x1E0, sizeof(sGround_Grass_Pal));
             sprTemplate = sGroundSpriteTemplate_Static;
             break;
         case 2:
-            sprSheet.data = sGroundSpriteGfx_Dirt;
+            sprSheet.data = sGround_Dirt_Tiles;
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGroundSpritePal_Dirt, 0x1E0, 0x20);
+            LoadPalette(sGround_Dirt_Pal, 0x1E0, sizeof(sGround_Dirt_Pal));
             sprTemplate = sGroundSpriteTemplate_Running;
             break;
         case 3:
-            sprSheet.data = sGroundSpriteGfx_City;
+            sprSheet.data = sGround_City_Tiles;
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGroundSpritePal_City, 0x1E0, 0x20);
+            LoadPalette(sGround_City_Pal, 0x1E0, sizeof(sGround_City_Pal));
             sprTemplate = sGroundSpriteTemplate_Running;
             break;
         }
         sprTemplate.tileTag = data->groundTilesTag;
-        data->groundSpriteId = CreateSprite(&sprTemplate, x, y + 0x26, 0);
-        gSprites[data->groundSpriteId].oam.paletteNum = 0xE;
+        data->groundSpriteId = CreateSprite(&sprTemplate, x, y + 38, 0);
+        gSprites[data->groundSpriteId].oam.paletteNum = 14;
         gSprites[data->groundSpriteId].subpriority = 1;
     }
 }

@@ -4837,9 +4837,9 @@ extern const u32 gFile_graphics_misc_confetti_sheet[];
 extern const u32 gFile_graphics_misc_confetti_palette[];
 
 // learn_move
-extern const u16 gUnknown_8E97DDC[];
-extern const u32 gUnknown_8E97DFC[];
-extern const u32 gUnknown_8E97EC4[];
+extern const u16 gMoveRelearner_Pal[];
+extern const u32 gMoveRelearner_Gfx[];
+extern const u32 gMoveRelearner_Tilemap[];
 
 // shop menu
 extern const u32 gBuyMenuFrame_Gfx[];

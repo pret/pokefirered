@@ -400,9 +400,9 @@ static void MoveRelearnerLoadBgGfx(void)
         SetBgTilemapBuffer(1, sMoveRelearner->bg1TilemapBuffer);
         LoadUserWindowGfx(0, 1, 0xE0);
         ListMenuLoadStdPalAt(0xD0, 1);
-        LoadPalette(gUnknown_8E97DDC, 0x00, 0x20);
-        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_8E97DFC, 0, 0, 0);
-        CopyToBgTilemapBuffer(1, gUnknown_8E97EC4, 0, 0);
+        LoadPalette(gMoveRelearner_Pal, 0x00, 0x20);
+        DecompressAndLoadBgGfxUsingHeap(1, gMoveRelearner_Gfx, 0, 0, 0);
+        CopyToBgTilemapBuffer(1, gMoveRelearner_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);

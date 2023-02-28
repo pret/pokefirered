@@ -1750,15 +1750,15 @@ u16 StickerManGetBragFlags(void)
 
 u16 GetHiddenItemAttr(u32 hiddenItem, u8 attr)
 {
-    if (attr == 0)
-        return hiddenItem & 0xFFFF;
-    else if (attr == 1)
-        return ((hiddenItem >> 16) & 0xFF) + 1000;
-    else if (attr == 2)
-        return (hiddenItem >> 24) & 0x7F;
-    else if (attr == 3)
-        return (hiddenItem >> 31) & 0x01;
-    else
+    if (attr == HIDDEN_ITEM_ITEM)
+        return GET_HIDDEN_ITEM_ITEM(hiddenItem);
+    else if (attr == HIDDEN_ITEM_FLAG)
+        return GET_HIDDEN_ITEM_FLAG(hiddenItem) + FLAG_HIDDEN_ITEMS_START;
+    else if (attr == HIDDEN_ITEM_QUANTITY)
+        return GET_HIDDEN_ITEM_QUANTITY(hiddenItem);
+    else if (attr == HIDDEN_ITEM_UNDERFOOT)
+        return GET_HIDDEN_ITEM_UNDERFOOT(hiddenItem);
+    else // Invalid
         return 1;
 }
 

@@ -50,6 +50,31 @@ enum
     TILE_TERRAIN_WATERFALL,
 };
 
+// Identifiers for the hidden item data stored in BgEvent's u32 hiddenItem
+enum
+{
+    HIDDEN_ITEM_ITEM,
+    HIDDEN_ITEM_FLAG,
+    HIDDEN_ITEM_QUANTITY,
+    HIDDEN_ITEM_UNDERFOOT
+};
+
+// Masks/shifts to read the data above from the u32 hiddenItem, calculated from size.
+#define HIDDEN_ITEM_ITEM_BITS      16
+#define HIDDEN_ITEM_FLAG_BITS       8
+#define HIDDEN_ITEM_QUANTITY_BITS   7
+#define HIDDEN_ITEM_UNDERFOOT_BITS  1
+
+#define HIDDEN_ITEM_ITEM_SHIFT      0
+#define HIDDEN_ITEM_FLAG_SHIFT      (HIDDEN_ITEM_ITEM_SHIFT + HIDDEN_ITEM_ITEM_BITS)
+#define HIDDEN_ITEM_QUANTITY_SHIFT  (HIDDEN_ITEM_FLAG_SHIFT + HIDDEN_ITEM_FLAG_BITS)
+#define HIDDEN_ITEM_UNDERFOOT_SHIFT (HIDDEN_ITEM_QUANTITY_SHIFT + HIDDEN_ITEM_QUANTITY_BITS)
+
+#define GET_HIDDEN_ITEM_ITEM(raw)     (((raw) >> HIDDEN_ITEM_ITEM_SHIFT)      & ((1 << HIDDEN_ITEM_ITEM_BITS) - 1))
+#define GET_HIDDEN_ITEM_FLAG(raw)     (((raw) >> HIDDEN_ITEM_FLAG_SHIFT)      & ((1 << HIDDEN_ITEM_FLAG_BITS) - 1))
+#define GET_HIDDEN_ITEM_QUANTITY(raw) (((raw) >> HIDDEN_ITEM_QUANTITY_SHIFT)  & ((1 << HIDDEN_ITEM_QUANTITY_BITS) - 1))
+#define GET_HIDDEN_ITEM_UNDERFOOT(raw)(((raw) >> HIDDEN_ITEM_UNDERFOOT_SHIFT) & ((1 << HIDDEN_ITEM_UNDERFOOT_BITS) - 1))
+
 typedef void (*TilesetCB)(void);
 
 struct Tileset
@@ -133,13 +158,7 @@ struct BgEvent
     u8 kind; // The "kind" field determines how to access bgUnion union below.
     union {
         u8 *script;
-        struct {
-            u32 itemId:16;
-            u32 hiddenItemId:8; // flag offset to determine flag lookup
-            u32 quantity:7;
-            u32 isUnderfoot:1;
-        } hiddenItemStr;
-        u32 hiddenItem;
+        u32 hiddenItem; // Contains all the hidden item data. See GET_HIDDEN_ITEM_* defines further up
     } bgUnion;
 };
 

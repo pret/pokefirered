@@ -7,6 +7,7 @@
 #include "link.h"
 #include "save_failed_screen.h"
 #include "fieldmap.h"
+#include "pokemon_storage_system.h"
 #include "gba/flash_internal.h"
 
 static u8 HandleWriteSector(u16 sectorId, const struct SaveSectorLocation *locations);

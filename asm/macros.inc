@@ -1,7 +1,6 @@
 	.include "asm/macros/asm.inc"
 	.include "asm/macros/function.inc"
 	.include "asm/macros/movement.inc"
-	.include "asm/macros/pokemon_data.inc"
 	.include "asm/macros/ec.inc"
 	.include "asm/macros/map.inc"
 	.include "asm/macros/m4a.inc"

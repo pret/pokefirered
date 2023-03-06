@@ -3,14 +3,6 @@
 
 #include "global.h"
 
-enum HiddenItemAttr
-{
-    HIDDEN_ITEM_ID = 0,
-    HIDDEN_ITEM_FLAG,
-    HIDDEN_ITEM_QUANTITY,
-    HIDDEN_ITEM_UNDERFOOT
-};
-
 u8 GetLeadMonIndex(void);
 s32 CountDigits(s32 number);
 void TV_PrintIntToStringVar(u8 varidx, s32 number);

@@ -413,50 +413,41 @@ const u32 gBattleAnimSpritePal_BlueFlames[] = INCBIN_U32("graphics/battle_anims/
 
 const u32 gBattleAnimSpriteGfx_BlueFlames2[] = INCBIN_U32("graphics/battle_anims/sprites/blue_flames_2.4bpp.lz");
 
-// Contest
+// Contest (unused)
 
-const u32 gUnusedGfx_OldContest[] = INCBIN_U32("graphics/unused/old_contest.4bpp.lz");
-const u32 gUnusedPal_OldContest[] = INCBIN_U32("graphics/unused/old_contest.gbapal.lz");
-const u32 gUnusedTilemap_OldContest[] = INCBIN_U32("graphics/unused/old_contest.bin.lz");
+const u32 gJpContest_Gfx1[] = INCBIN_U32("graphics/contest/japanese/composite_1.4bpp.lz");
+const u32 gJpContest_Pal[] = INCBIN_U32("graphics/contest/japanese/palette.gbapal.lz");
+const u32 gJpContest_Bg_Tilemap[] = INCBIN_U32("graphics/contest/japanese/bg.bin.lz");
+const u32 gJpContest_Windows_Tilemap[] = INCBIN_U32("graphics/contest/japanese/windows.bin.lz");
+const u32 gJpContest_Numbers_Gfx[] = INCBIN_U32("graphics/contest/japanese/numbers.4bpp.lz");
+const u32 gJpContest_Numbers_Pal[] = INCBIN_U32("graphics/contest/japanese/numbers.gbapal.lz");
+const u32 gJpContest_Gfx2[] = INCBIN_U32("graphics/contest/japanese/composite_2.4bpp.lz");
 
-const u32 gFile_graphics_unknown_unknown_D15BE8_tilemap[] = INCBIN_U32("graphics/unknown/unknown_D15BE8.bin.lz");
+const u32 gContest_Interface_Pal[] = INCBIN_U32("graphics/contest/interface.gbapal.lz");
+const u32 gContest_Audience_Tilemap[] = INCBIN_U32("graphics/contest/audience.bin.lz");
+const u32 gContest_Interface_Tilemap[] = INCBIN_U32("graphics/contest/interface.bin.lz");
 
-const u32 gFile_graphics_unused_numbers_sheet[] = INCBIN_U32("graphics/unused/numbers.4bpp.lz"); // From ruby
-const u32 gFile_graphics_unused_numbers_palette[] = INCBIN_U32("graphics/unused/numbers.gbapal.lz"); // From ruby
+const u32 gJpContest_Interface_Tilemap[] = INCBIN_U32("graphics/contest/japanese/interface.bin.lz");
+const u32 gJpContest_Audience_Tilemap[] = INCBIN_U32("graphics/contest/japanese/audience.bin.lz");
 
-const u32 gUnusedGfx_OldContest2[] = INCBIN_U32("graphics/unused/old_contest_2.4bpp.lz");
-const u32 gOldContestPalette[] = INCBIN_U32("graphics/unused/old_contest_2.gbapal.lz");
-const u32 gOldContestGfx[] = INCBIN_U32("graphics/unused/old_contest_2.bin.lz");
+const u32 gContest_Curtain_Tilemap[] = INCBIN_U32("graphics/contest/curtain.bin.lz");
+const u32 gContest_Interface_Gfx[] = INCBIN_U32("graphics/contest/interface.4bpp.lz");
+const u32 gContest_Audience_Gfx[] = INCBIN_U32("graphics/contest/audience.4bpp.lz");
+const u32 gContest_Faces_Gfx[] = INCBIN_U32("graphics/contest/faces.4bpp.lz");
+const u32 gContest_JudgeSymbols_Gfx[] = INCBIN_U32("graphics/contest/judge_symbols.4bpp.lz");
+const u32 gContest_JudgeSymbols_Pal[] = INCBIN_U32("graphics/contest/judge_symbols.gbapal.lz");
+const u8 gContest_SliderHeart_Gfx[] = INCBIN_U8("graphics/contest/slider_heart.4bpp");
 
-const u32 gFile_graphics_unknown_unknown_D172A8_tilemap[] = INCBIN_U32("graphics/unknown/unknown_D172A8.bin.lz");
+const u32 gJpContest_Voltage_Gfx[] = INCBIN_U32("graphics/contest/japanese/voltage.4bpp.lz");
+const u32 gJpContest_Voltage_Pal[] = INCBIN_U32("graphics/contest/japanese/voltage.gbapal.lz");
 
-const u32 gFile_graphics_unknown_unknown_D17548_tilemap[] = INCBIN_U32("graphics/unknown/unknown_D17548.bin.lz");
+const u32 gJpContestResults_Gfx[] = INCBIN_U32("graphics/contest/japanese/results.4bpp.lz");
 
-const u32 gFile_graphics_unknown_unknown_D17654_tilemap[] = INCBIN_U32("graphics/unknown/unknown_D17654.bin.lz");
+const u32 gContestResults_WinnerBanner_Tilemap[] = INCBIN_U32("graphics/contest/results_winner_banner.bin.lz");
+const u32 gContestResults_Interface_Tilemap[] = INCBIN_U32("graphics/contest/results_interface.bin.lz");
+const u32 gContestResults_Bg_Tilemap[] = INCBIN_U32("graphics/contest/results_bg.bin.lz");
+const u32 gContestResults_Pal[] = INCBIN_U32("graphics/contest/results.gbapal.lz");
 
-const u32 gFile_graphics_unknown_unknown_D17AB8_tilemap[] = INCBIN_U32("graphics/unknown/unknown_D17AB8.bin.lz");
-
-const u32 gContestMiscGfx[] = INCBIN_U32("graphics/contest/misc.4bpp.lz");
-
-const u32 gContestAudienceGfx[] = INCBIN_U32("graphics/contest/audience.4bpp.lz");
-
-const u32 gContestFacesSheetGfx[] = INCBIN_U32("graphics/contest/faces.4bpp.lz");
-
-const u32 gContestJudgeSymbolsGfx[] = INCBIN_U32("graphics/contest/judge_symbols.4bpp.lz");
-const u32 gContestJudgeSymbolsPal[] = INCBIN_U32("graphics/contest/judge_symbols.gbapal.lz");
-
-const u8 gContestHeartGfx[] = INCBIN_U8("graphics/contest/heart.4bpp");
-
-const u32 gFile_graphics_unknown_unknown_D196E4_sheet[] = INCBIN_U32("graphics/unknown/unknown_D196E4.4bpp.lz");
-const u32 gFile_graphics_unknown_unknown_D196E4_palette[] = INCBIN_U32("graphics/unknown/unknown_D196E4.gbapal.lz");
-
-const u32 gContestMisc2Gfx[] = INCBIN_U32("graphics/contest/misc_2.4bpp.lz");
-
-const u32 gContestMiscTilemap1[] = INCBIN_U32("graphics/contest/misc_2_tilemap_1.bin.lz");
-const u32 gContestMiscTilemap2[] = INCBIN_U32("graphics/contest/misc_2_tilemap_2.bin.lz");
-const u32 gContestMiscTilemap3[] = INCBIN_U32("graphics/contest/misc_2_tilemap_3.bin.lz");
-
-const u32 gContestMiscPal[] = INCBIN_U32("graphics/contest/misc.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.4bpp.lz");
 const u32 gBattleAnimSpritePal_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.gbapal.lz");
@@ -532,9 +523,9 @@ const u32 gBattleAnimSpritePal_RazorLeaf[] = INCBIN_U32("graphics/battle_anims/s
 const u32 gBattleAnimSpriteGfx_MistCloud[] = INCBIN_U32("graphics/battle_anims/sprites/mist_cloud.4bpp.lz");
 const u32 gBattleAnimSpritePal_MistCloud[] = INCBIN_U32("graphics/battle_anims/sprites/mist_cloud.gbapal.lz");
 
-const u32 gFile_graphics_unknown_unknown_D1BE74_sheet[] = INCBIN_U32("graphics/unknown/unknown_D1BE74.4bpp.lz");
-const u32 gFile_graphics_unknown_unknown_D1BE74_palette[] = INCBIN_U32("graphics/unknown/unknown_D1BE74.gbapal.lz");
-const u32 gFile_graphics_unknown_unknown_D1BE74_tilemap[] = INCBIN_U32("graphics/unknown/unknown_D1BE74.bin.lz");
+const u32 gBattleAnimUnusedGfx_Lights[] = INCBIN_U32("graphics/battle_anims/unused/lights.4bpp.lz");
+const u32 gBattleAnimUnusedPal_Lights[] = INCBIN_U32("graphics/battle_anims/unused/lights.gbapal.lz");
+const u32 gBattleAnimUnusedTilemap_Lights[] = INCBIN_U32("graphics/battle_anims/unused/lights.bin.lz");
 
 const u32 gBattleAnimSpriteGfx_WhirlwindLines[] = INCBIN_U32("graphics/battle_anims/sprites/whirlwind_lines.4bpp.lz");
 const u32 gBattleAnimSpritePal_WhirlwindLines[] = INCBIN_U32("graphics/battle_anims/sprites/whirlwind_lines.gbapal.lz");
@@ -1011,8 +1002,7 @@ const u32 gBattleAnimBgTilemap_Ghost[] = INCBIN_U32("graphics/battle_anims/backg
 const u32 gBattleAnimSpritePal_WhipHit[] = INCBIN_U32("graphics/battle_anims/sprites/whip_hit.gbapal.lz");
 
 const u32 gBattleAnimBgPalette_SolarBeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/solarbeam.gbapal.lz");
-
-const u32 gFile_graphics_unknown_unknown_E7CFB0_tilemap[] = INCBIN_U32("graphics/unknown/unknown_E7CFB0.bin.lz");
+const u32 gBattleAnimBgTilemap_SolarBeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/solarbeam.bin.lz"); // Unused
 
 const u32 gFile_graphics_berry_blender_center_sheet[] = INCBIN_U32("graphics/berry_blender/center.8bpp.lz");
 

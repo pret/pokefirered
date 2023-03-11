@@ -98,7 +98,7 @@ static const u8 *const s1_2_and_Poof_textPtrs[] = {
     gText_Poof,
 };
 
-static const u16 sUnref_84599A4[] = {
+static const u16 sUnusedArray[] = {
     0, 16, 68
 };
 

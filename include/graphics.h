@@ -4866,9 +4866,9 @@ extern const u16 gBattleInterface_Healthbox_Pal[];
 extern const u16 gBattleInterface_Healthbar_Pal[];
 
 // item_menu
-extern const u32 gUnknown_8E830CC[];
-extern const u32 gUnknown_8E832C0[];
-extern const u32 gUnknown_8E83444[];
+extern const u32 gBagBg_Gfx[];
+extern const u32 gBagBg_Tilemap[];
+extern const u32 gBagBg_ItemPC_Tilemap[];
 extern const u32 gBagBgPalette[];
 extern const u32 gBagBgPalette_FemaleOverride[];
 

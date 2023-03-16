@@ -332,7 +332,7 @@ extern const u32 gBgTilemap_PokeSum_MovesListForDelete[];
 extern const u32 gBgTilemap_TrainerMemo_Details[];
 extern const u32 gBgTilemap_PokeSum_MoveDetailsForDelete[];
 extern const u32 gBgTilemap_TrainerMemo_Egg[];
-extern const u16 gTrainerMemoPal1[];
+extern const u16 gTrainerMemoPal[];
 extern const u32 gPokeSumBgTiles[];
 extern const u16 gPokeSummary_ExpBarPals[];
 extern const u32 gPokeSummary_StatusAilmentIconTiles[];
@@ -2007,16 +2007,16 @@ static u8 PokeSum_HandleLoadBgGfx(void)
     switch (sMonSummaryScreen->loadBgGfxStep)
     {
     case 0:
-        LoadPalette(gTrainerMemoPal1, 0, 0x20 * 5);
+        LoadPalette(gTrainerMemoPal, 0, 0x20 * 5);
         if (IsMonShiny(&sMonSummaryScreen->currentMon) == TRUE && !sMonSummaryScreen->isEgg)
         {
-            LoadPalette(&gTrainerMemoPal1[16 * 6], 0, 0x20);
-            LoadPalette(&gTrainerMemoPal1[16 * 5], 0x10, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 6], 0, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 5], 0x10, 0x20);
         }
         else
         {
-            LoadPalette(&gTrainerMemoPal1[16 * 0], 0, 0x20);
-            LoadPalette(&gTrainerMemoPal1[16 * 1], 0x10, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 0], 0, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 1], 0x10, 0x20);
         }
 
         break;
@@ -5079,13 +5079,13 @@ static void Task_PokeSum_SwitchDisplayedPokemon(u8 taskId)
 
         if (IsMonShiny(&sMonSummaryScreen->currentMon) == TRUE && !sMonSummaryScreen->isEgg)
         {
-            LoadPalette(&gTrainerMemoPal1[16 * 6], 0, 0x20);
-            LoadPalette(&gTrainerMemoPal1[16 * 5], 0x10, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 6], 0, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 5], 0x10, 0x20);
         }
         else
         {
-            LoadPalette(&gTrainerMemoPal1[16 * 0], 0, 0x20);
-            LoadPalette(&gTrainerMemoPal1[16 * 1], 0x10, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 0], 0, 0x20);
+            LoadPalette(&gTrainerMemoPal[16 * 1], 0x10, 0x20);
         }
 
         sMonSummaryScreen->switchMonTaskState++;

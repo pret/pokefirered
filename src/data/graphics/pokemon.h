@@ -1658,7 +1658,7 @@ const u32 gMonShinyPalette_Hitmontop[] = INCBIN_U32("graphics/pokemon/hitmontop/
 const u8 gMonIcon_Hitmontop[] = INCBIN_U8("graphics/pokemon/hitmontop/icon.4bpp");
 
 // This might be undefined memory garbage. Its all 00s except for 1 0F. Its also not referenced.
-const u32 gUndefined_8DD1E90[] = INCBIN_U32("data/garbage_8DD2290.bin");
+const u32 gUnusedGarbage[] = INCBIN_U32("graphics/pokemon/hitmontop/unused_garbage.bin");
 
 const u8 gMonFootprint_Hitmontop[] = INCBIN_U8("graphics/pokemon/hitmontop/footprint.1bpp");
 

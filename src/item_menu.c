@@ -562,16 +562,16 @@ static bool8 DoLoadBagGraphics(void)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, gUnknown_8E830CC, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gBagBg_Gfx, 0, 0, 0);
         sBagMenuDisplay->data[0]++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             if (gBagMenuState.location != ITEMMENULOCATION_ITEMPC)
-                LZDecompressWram(gUnknown_8E832C0, sBagBgTilemapBuffer);
+                LZDecompressWram(gBagBg_Tilemap, sBagBgTilemapBuffer);
             else
-                LZDecompressWram(gUnknown_8E83444, sBagBgTilemapBuffer);
+                LZDecompressWram(gBagBg_ItemPC_Tilemap, sBagBgTilemapBuffer);
             sBagMenuDisplay->data[0]++;
         }
         break;

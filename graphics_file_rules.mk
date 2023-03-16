@@ -31,6 +31,7 @@ HALLOFFAMEGFXDIR := graphics/hall_of_fame
 MAPPREVIEWGFXDIR := graphics/map_preview
 NAMINGGFXDIR := graphics/naming_screen
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
+JPCONTESTGFXDIR := graphics/contest/japanese
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -158,20 +159,20 @@ $(BATINTGFXDIR)/level_up_banner.4bpp: %.4bpp: %.png
 $(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox1.gbapal $(BATINTGFXDIR)/textbox2.gbapal
 	cat $^ > $@
 
-$(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_floor.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_symbols.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_meter.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_classes.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
+$(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
+								  $(JPCONTESTGFXDIR)/floor.4bpp \
+								  $(JPCONTESTGFXDIR)/frame_2.4bpp \
+								  $(JPCONTESTGFXDIR)/symbols.4bpp \
+								  $(JPCONTESTGFXDIR)/meter.4bpp \
+								  $(JPCONTESTGFXDIR)/classes.4bpp \
+								  $(JPCONTESTGFXDIR)/numbers_2.4bpp
 	@cat $^ >$@
 
-$(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp \
-									$(UNUSEDGFXDIR)/old_contest_2_2.4bpp
+$(JPCONTESTGFXDIR)/composite_2.4bpp: $(JPCONTESTGFXDIR)/interface.4bpp \
+									$(JPCONTESTGFXDIR)/audience.4bpp
 	@cat $^ >$@
 
-$(UNKNOWNGFXDIR)/unknown_D196E4.4bpp: %.4bpp: %.png
+$(JPCONTESTGFXDIR)/voltage.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36 -Wnum_tiles
 
 $(BTLANMSPRGFXDIR)/ice_crystals.4bpp: $(BTLANMSPRGFXDIR)/ice_crystals_0.4bpp \
@@ -193,7 +194,7 @@ $(BTLANMSPRGFXDIR)/spark.4bpp: $(BTLANMSPRGFXDIR)/spark_0.4bpp \
 						  $(BTLANMSPRGFXDIR)/spark_1.4bpp
 	@cat $^ >$@
 
-$(MASKSGFXDIR)/unknown_D2EC24.4bpp: %.4bpp: %.png
+$(MASKSGFXDIR)/unused_level_up.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 14 -Wnum_tiles
 
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
@@ -502,7 +503,7 @@ graphics/pokemon/heracross/unk_icon.4bpp: %.4bpp: %.png
 graphics/misc/emoticons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(ITEMMENUGFXDIR)/bag_tiles.4bpp: %.4bpp: %.png
+$(ITEMMENUGFXDIR)/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
 
 $(INTROGFXDIR)/scene_1/grass.4bpp: %.4bpp: %.png

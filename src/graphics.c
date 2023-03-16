@@ -1191,24 +1191,22 @@ const u16 gEasyChatButtonWindow_Pal[] = INCBIN_U16("graphics/easy_chat/button_wi
 const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window.4bpp.lz");
 const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode.4bpp.lz");
 
-const u32 gPokeSumBgTiles[] = INCBIN_U32("graphics/interface/trainer_memo.4bpp.lz");
-const u32 gTrainerMemoPal[] = INCBIN_U32("graphics/interface/trainer_memo_pal.gbapal");
-
-const u32 gPokeSummary_ExpBarTiles[] = INCBIN_U32("graphics/interface/summary_exp_bar.4bpp.lz");
-const u32 gPokeSummary_HpBarTiles[] = INCBIN_U32("graphics/interface/summary_hp_bar.4bpp.lz");
-const u16 gPokeSummary_ExpBarPals[] = INCBIN_U16("graphics/interface/summary_exp_bar.gbapal"); // hp bar uses this too
-
-const u32 gBgTilemap_TrainerMemo_Details[] = INCBIN_U32("graphics/interface/trainer_memo.bin.lz");
-const u32 gBgTilemap_TrainerMemo_Stats[] = INCBIN_U32("graphics/interface/trainer_memo_2.bin.lz");
-const u32 gBgTilemap_PokeSum_MovesListForDelete[] = INCBIN_U32("graphics/interface/trainer_memo_3.bin.lz");
-const u32 gBgTilemap_PokeSum_MoveDetailsForDelete[] = INCBIN_U32("graphics/interface/trainer_memo_4.bin.lz");
-const u32 gBgTilemap_TrainerMemo_Egg[] = INCBIN_U32("graphics/interface/trainer_memo_5.bin.lz");
+const u32 gSummaryScreen_Bg_Gfx[] = INCBIN_U32("graphics/summary_screen/bg.4bpp.lz");
+const u32 gSummaryScreen_Bg_Pal[] = INCBIN_U32("graphics/summary_screen/bg.gbapal");
+const u32 gSummaryScreen_ExpBar_Gfx[] = INCBIN_U32("graphics/summary_screen/exp_bar.4bpp.lz");
+const u32 gSummaryScreen_HpBar_Gfx[] = INCBIN_U32("graphics/summary_screen/hp_bar.4bpp.lz");
+const u16 gSummaryScreen_HpExpBar_Pal[] = INCBIN_U16("graphics/summary_screen/exp_bar.gbapal"); // hp bar uses this too
+const u32 gSummaryScreen_PageInfo_Tilemap[] = INCBIN_U32("graphics/summary_screen/page_info.bin.lz");
+const u32 gSummaryScreen_PageSkills_Tilemap[] = INCBIN_U32("graphics/summary_screen/page_skills.bin.lz");
+const u32 gSummaryScreen_PageMoves_Tilemap[] = INCBIN_U32("graphics/summary_screen/page_moves.bin.lz");
+const u32 gSummaryScreen_PageMovesInfo_Tilemap[] = INCBIN_U32("graphics/summary_screen/page_moves_info.bin.lz");
+const u32 gSummaryScreen_PageEgg_Tilemap[] = INCBIN_U32("graphics/summary_screen/page_egg.bin.lz");
 
 const u16 gUnusedRedPalette[] = INCBIN_U16("graphics/unused/red_palette.gbapal");
 
 const u32 gEasyChatRectangleCursor_Gfx[] = INCBIN_U32("graphics/easy_chat/rectangle_cursor.4bpp.lz");
-const u16 gPokeSummary_StatusAilmentIconPals[] = INCBIN_U16("graphics/interface/status_ailment_icons.gbapal");
-const u32 gPokeSummary_StatusAilmentIconTiles[] = INCBIN_U32("graphics/interface/status_ailment_icons.4bpp.lz");
+const u16 gSummaryScreen_StatusAilmentIcon_Pal[] = INCBIN_U16("graphics/summary_screen/status_ailment_icons.gbapal");
+const u32 gSummaryScreen_StatusAilmentIcon_Gfx[] = INCBIN_U32("graphics/summary_screen/status_ailment_icons.4bpp.lz");
 
 const u16 gDexScreen_TopMenuIconPals_AtoZ[] = INCBIN_U16("graphics/pokedex/cat_icon_abc.gbapal");
 const u32 gDexScreen_TopMenuIconTiles_AtoZ[] = INCBIN_U32("graphics/pokedex/cat_icon_abc.4bpp.lz");
@@ -1234,10 +1232,10 @@ const u16 gFameCheckerBgTiles[] = INCBIN_U16("graphics/fame_checker/bg.4bpp");
 const u16 gFameCheckerBg3Tilemap[] = INCBIN_U16("graphics/fame_checker/tilemap3.bin");
 const u16 gFameCheckerBg2Tilemap[] = INCBIN_U16("graphics/fame_checker/tilemap2.bin");
 
-const u16 gLinkMiscMenu_Pal[] = INCBIN_U16("graphics/interface/union_room_chat.gbapal");
-const u32 gLinkMiscMenu_Gfx[] = INCBIN_U32("graphics/interface/union_room_chat.4bpp.lz");
-const u32 gLinkMiscMenu_Tilemap[] = INCBIN_U32("graphics/interface/union_room_chat.bin.lz");
-const u32 gUnionRoomChatIcons[] = INCBIN_U32("graphics/interface/union_room_chat_icons.4bpp.lz");
+const u16 gUnionRoomChat_Bg_Pal[] = INCBIN_U16("graphics/union_room_chat/bg.gbapal");
+const u32 gUnionRoomChat_Bg_Gfx[] = INCBIN_U32("graphics/union_room_chat/bg.4bpp.lz");
+const u32 gUnionRoomChat_Bg_Tilemap[] = INCBIN_U32("graphics/union_room_chat/bg.bin.lz");
+const u32 gUnionRoomChat_Icons_Gfx[] = INCBIN_U32("graphics/union_room_chat/icons.4bpp.lz");
 
 const u16 gTilesetPalettes_General[][16] =
 {
@@ -1324,9 +1322,9 @@ const u16 gTilesetPalettes_DepartmentStore[][16] =
 
 const u32 gTilesetTiles_DepartmentStore[] = INCBIN_U32("data/tilesets/secondary/department_store/tiles.4bpp.lz");
 
-const u16 gUnionRoomChatPanelBgPal_7[] = INCBIN_U16("graphics/interface/union_room_chat_panel.gbapal");
-const u32 gUnionRoomChatPanelBgTiles[] = INCBIN_U32("graphics/interface/union_room_chat_panel.4bpp.lz");
-const u32 gUnionRoomChatPanelBgMap[] = INCBIN_U32("graphics/interface/union_room_chat_panel.bin.lz");
+const u16 gUnionRoomChat_Panel_Pal[] = INCBIN_U16("graphics/union_room_chat/panel.gbapal");
+const u32 gUnionRoomChat_Panel_Gfx[] = INCBIN_U32("graphics/union_room_chat/panel.4bpp.lz");
+const u32 gUnionRoomChat_Panel_Tilemap[] = INCBIN_U32("graphics/union_room_chat/panel.bin.lz");
 
 const u16 gCreditsMonPokeball_Pals[][16] =
 {

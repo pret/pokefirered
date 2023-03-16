@@ -49,16 +49,16 @@ static void Task_LevelUpVerticalSprites(u8 taskId);
 static void CreateLevelUpVerticalSprite(u8 taskId, s16 *data);
 static void SpriteCB_LevelUpVertical(struct Sprite *sprite);
 
-static const u16 sBgPals_PSA_Any[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845963C.gbapal");
-static const u16 sBgPals_PSA_Anim4[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845965C.gbapal");
-static const u32 sBg3Tiles_PSA[] = INCBIN_U32("graphics/pokemon_special_anim/unk_845967C.4bpp.lz");
-static const u32 sBg3Map_PSA[] = INCBIN_U32("graphics/pokemon_special_anim/unk_845973C.bin.lz");
-static const u16 sSpritePals_LevelUpVertical[] = INCBIN_U16("graphics/pokemon_special_anim/unk_8459868.gbapal");
-static const u32 sSpriteTiles_LevelUpVertical[] = INCBIN_U32("graphics/pokemon_special_anim/unk_8459888.4bpp.lz");
-static const u16 sSpritePals_Star[] = INCBIN_U16("graphics/pokemon_special_anim/unk_84598A4.gbapal");
-static const u32 sSpriteTiles_Star[] = INCBIN_U32("graphics/pokemon_special_anim/unk_84598C4.4bpp.lz");
-static const u16 sSpritePals_UseItem_OutwardSpiralDots[] = INCBIN_U16("graphics/pokemon_special_anim/unk_8459940.gbapal");
-static const u32 sSpriteTiles_UseItem_OutwardSpiralDots[] = INCBIN_U32("graphics/pokemon_special_anim/unk_8459960.4bpp.lz");
+static const u16 sBg_Pal[] = INCBIN_U16("graphics/pokemon_special_anim/bg.gbapal");
+static const u16 sBg_TmHm_Pal[] = INCBIN_U16("graphics/pokemon_special_anim/bg_tm_hm.gbapal");
+static const u32 sBg_Gfx[] = INCBIN_U32("graphics/pokemon_special_anim/bg.4bpp.lz");
+static const u32 sBg_Tilemap[] = INCBIN_U32("graphics/pokemon_special_anim/bg.bin.lz");
+static const u16 sLevelUp_Pal[] = INCBIN_U16("graphics/pokemon_special_anim/level_up.gbapal");
+static const u32 sLevelUp_Gfx[] = INCBIN_U32("graphics/pokemon_special_anim/level_up.4bpp.lz");
+static const u16 sStar_Pal[] = INCBIN_U16("graphics/pokemon_special_anim/star.gbapal");
+static const u32 sStar_Gfx[] = INCBIN_U32("graphics/pokemon_special_anim/star.4bpp.lz");
+static const u16 sOutwardSpiralDots_Pal[] = INCBIN_U16("graphics/pokemon_special_anim/outward_spiral_dots.gbapal");
+static const u32 sOutwardSpiralDots_Gfx[] = INCBIN_U32("graphics/pokemon_special_anim/outward_spiral_dots.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -116,24 +116,24 @@ static const s8 sStarCoordOffsets[][2] = {
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_Star = {
-    sSpriteTiles_Star,
+    sStar_Gfx,
     0x80,
     2
 };
 
 static const struct SpritePalette sSpritePalette_Star = {
-    sSpritePals_Star,
+    sStar_Pal,
     2
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_UseItem_OutwardSpiralDots = {
-    sSpriteTiles_UseItem_OutwardSpiralDots,
+    sOutwardSpiralDots_Gfx,
     0x60,
     5
 };
 
 static const struct SpritePalette sSpritePalette_UseItem_OutwardSpiralDots = {
-    sSpritePals_UseItem_OutwardSpiralDots,
+    sOutwardSpiralDots_Pal,
     5
 };
 
@@ -633,12 +633,12 @@ bool8 PSA_IsCopyingLevelUpWindowToVram(void)
 
 static void LoadBgGfxByAnimType(u16 animType)
 {
-    CopyToBgTilemapBuffer(3, sBg3Map_PSA, 0, 0x000);
-    DecompressAndCopyTileDataToVram(3, sBg3Tiles_PSA, 0, 0x000, 0);
+    CopyToBgTilemapBuffer(3, sBg_Tilemap, 0, 0x000);
+    DecompressAndCopyTileDataToVram(3, sBg_Gfx, 0, 0x000, 0);
     if (animType != 4)
-        LoadPalette(sBgPals_PSA_Any, 0x00, 0x20);
+        LoadPalette(sBg_Pal, 0x00, 0x20);
     else
-        LoadPalette(sBgPals_PSA_Anim4, 0x00, 0x20);
+        LoadPalette(sBg_TmHm_Pal, 0x00, 0x20);
 }
 
 void PSA_CreateMonSpriteAtCloseness(u8 closeness)
@@ -1382,9 +1382,9 @@ void CreateLevelUpVerticalSpritesTask(u16 x, u16 y, u16 tileTag, u16 paletteTag,
     static struct SpritePalette spritePalette;
     u8 taskId;
     spriteSheet.tag = tileTag;
-    spriteSheet.data = sSpriteTiles_LevelUpVertical;
-    spriteSheet.size = sSpriteTiles_LevelUpVertical[0] >> 8;
-    spritePalette.data = sSpritePals_LevelUpVertical;
+    spriteSheet.data = sLevelUp_Gfx;
+    spriteSheet.size = sLevelUp_Gfx[0] >> 8;
+    spritePalette.data = sLevelUp_Pal;
     spritePalette.tag = paletteTag;
     LoadCompressedSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);

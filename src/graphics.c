@@ -1232,10 +1232,10 @@ const u16 gFameCheckerBgTiles[] = INCBIN_U16("graphics/fame_checker/bg.4bpp");
 const u16 gFameCheckerBg3Tilemap[] = INCBIN_U16("graphics/fame_checker/tilemap3.bin");
 const u16 gFameCheckerBg2Tilemap[] = INCBIN_U16("graphics/fame_checker/tilemap2.bin");
 
-const u16 gLinkMiscMenu_Pal[] = INCBIN_U16("graphics/interface/union_room_chat.gbapal");
-const u32 gLinkMiscMenu_Gfx[] = INCBIN_U32("graphics/interface/union_room_chat.4bpp.lz");
-const u32 gLinkMiscMenu_Tilemap[] = INCBIN_U32("graphics/interface/union_room_chat.bin.lz");
-const u32 gUnionRoomChatIcons[] = INCBIN_U32("graphics/interface/union_room_chat_icons.4bpp.lz");
+const u16 gUnionRoomChat_Bg_Pal[] = INCBIN_U16("graphics/union_room_chat/bg.gbapal");
+const u32 gUnionRoomChat_Bg_Gfx[] = INCBIN_U32("graphics/union_room_chat/bg.4bpp.lz");
+const u32 gUnionRoomChat_Bg_Tilemap[] = INCBIN_U32("graphics/union_room_chat/bg.bin.lz");
+const u32 gUnionRoomChat_Icons_Gfx[] = INCBIN_U32("graphics/union_room_chat/icons.4bpp.lz");
 
 const u16 gTilesetPalettes_General[][16] =
 {
@@ -1322,9 +1322,9 @@ const u16 gTilesetPalettes_DepartmentStore[][16] =
 
 const u32 gTilesetTiles_DepartmentStore[] = INCBIN_U32("data/tilesets/secondary/department_store/tiles.4bpp.lz");
 
-const u16 gUnionRoomChatPanelBgPal_7[] = INCBIN_U16("graphics/interface/union_room_chat_panel.gbapal");
-const u32 gUnionRoomChatPanelBgTiles[] = INCBIN_U32("graphics/interface/union_room_chat_panel.4bpp.lz");
-const u32 gUnionRoomChatPanelBgMap[] = INCBIN_U32("graphics/interface/union_room_chat_panel.bin.lz");
+const u16 gUnionRoomChat_Panel_Pal[] = INCBIN_U16("graphics/union_room_chat/panel.gbapal");
+const u32 gUnionRoomChat_Panel_Gfx[] = INCBIN_U32("graphics/union_room_chat/panel.4bpp.lz");
+const u32 gUnionRoomChat_Panel_Tilemap[] = INCBIN_U32("graphics/union_room_chat/panel.bin.lz");
 
 const u16 gCreditsMonPokeball_Pals[][16] =
 {

@@ -119,9 +119,9 @@ static void InitScanlineEffect(void);
 static void FillScanlineEffectWithValue1col(s16 a0);
 static void FillScanlineEffectWithValue2col(s16 a0);
 
-static const u16 sUnionRoomChatPanelBgPal_C[] = INCBIN_U16("graphics/union_room_chat/unk_845AA24.gbapal");
-static const u16 sBg1Pal8[] = INCBIN_U16("graphics/union_room_chat/unk_845AA44.gbapal");
-static const u16 sWin0PalF[] = INCBIN_U16("graphics/union_room_chat/unk_845AA64.gbapal");
+static const u16 sUnionRoomChat_TextEntry_Pal[] = INCBIN_U16("graphics/union_room_chat/text_entry.gbapal");
+static const u16 gUnionRoomChat_Unused_Pal[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded, but nothing uses it
+static const u16 sUnionRoomChat_Messages_Pal[] = INCBIN_U16("graphics/union_room_chat/messages.gbapal");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -1259,10 +1259,10 @@ static void ClearBg0(void)
 
 static void LoadUnionRoomChatPanelGfx(void)
 {
-    LoadPalette(gUnionRoomChatPanelBgPal_7, 0x70, 0x20);
-    LoadPalette(sUnionRoomChatPanelBgPal_C, 0xC0, 0x20);
-    DecompressAndCopyTileDataToVram(1, gUnionRoomChatPanelBgTiles, 0, 0, 0);
-    CopyToBgTilemapBuffer(1, gUnionRoomChatPanelBgMap, 0, 0);
+    LoadPalette(gUnionRoomChat_Panel_Pal, 0x70, 0x20);
+    LoadPalette(sUnionRoomChat_TextEntry_Pal, 0xC0, 0x20);
+    DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Panel_Gfx, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, gUnionRoomChat_Panel_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 
@@ -1270,21 +1270,21 @@ static void LoadLinkMiscMenuGfx(void)
 {
     u8 *ptr;
 
-    LoadPalette(gLinkMiscMenu_Pal, 0, 0x20);
-    ptr = DecompressAndCopyTileDataToVram(2, gLinkMiscMenu_Gfx, 0, 0, 0);
-    CopyToBgTilemapBuffer(2, gLinkMiscMenu_Tilemap, 0, 0);
+    LoadPalette(gUnionRoomChat_Bg_Pal, 0, 0x20);
+    ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Bg_Gfx, 0, 0, 0);
+    CopyToBgTilemapBuffer(2, gUnionRoomChat_Bg_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(2);
 }
 
 static void LoadBg1Pal8(void)
 {
-    LoadPalette(sBg1Pal8, 0x80, 0x20);
+    LoadPalette(gUnionRoomChat_Unused_Pal, 0x80, 0x20);
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, DMA3_32BIT);
 }
 
 static void LoadWin0(void)
 {
-    LoadPalette(sWin0PalF, 0xF0, 0x20);
+    LoadPalette(sUnionRoomChat_Messages_Pal, 0xF0, 0x20);
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(0, COPYWIN_FULL);

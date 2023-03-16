@@ -4,6 +4,14 @@
 #include "graphics.h"
 #include "union_room_chat.h"
 
+enum {
+    GFXTAG_SELECTOR_CURSOR,
+    GFXTAG_CHAR_SELECT_CURSOR,
+    GFXTAG_TEXT_ENTRY_CURSOR,
+    GFXTAG_R_BUTTON,
+    GFXTAG_ICONS,
+};
+
 struct UnionRoomChat3
 {
     struct Sprite *selectorCursorSprite;
@@ -19,18 +27,38 @@ static EWRAM_DATA struct UnionRoomChat3 *sWork = NULL;
 static void SpriteCB_TextEntryCursor(struct Sprite *sprite);
 static void SpriteCB_CharacterSelectCursor(struct Sprite *sprite);
 
-static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/unk_845AC14.gbapal");
-static const u32 sSelectorCursorGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AC34.4bpp.lz");
-static const u32 sHorizontalBarGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AEB8.4bpp.lz");
-static const u32 sMenuCursorGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AED8.4bpp.lz");
-static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AF04.4bpp.lz");
+static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/objects.gbapal");
+static const u32 sSelectorCursor_Gfx[] = INCBIN_U32("graphics/union_room_chat/selector_cursor.4bpp.lz");
+static const u32 sTextEntryCursor_Gfx[] = INCBIN_U32("graphics/union_room_chat/text_entry_cursor.4bpp.lz");
+static const u32 sCharacterSelectCursor_Gfx[] = INCBIN_U32("graphics/union_room_chat/character_select_cursor.4bpp.lz");
+static const u32 sRButton_Gfx[] = INCBIN_U32("graphics/union_room_chat/r_button.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {sSelectorCursorGfxTiles, 0x1000, 0},
-    {sMenuCursorGfxTiles, 0x0040, 1},
-    {sHorizontalBarGfxTiles, 0x0040, 2},
-    {sRButtonGfxTiles, 0x0080, 3},
-    {gUnionRoomChatIcons, 0x0400, 4}
+    {
+        .data = sSelectorCursor_Gfx,
+        .size = 128 * TILE_SIZE_4BPP,
+        .tag = GFXTAG_SELECTOR_CURSOR
+    },
+    {
+        .data = sCharacterSelectCursor_Gfx,
+        .size = 2 * TILE_SIZE_4BPP,
+        .tag = GFXTAG_CHAR_SELECT_CURSOR
+    },
+    {
+        .data = sTextEntryCursor_Gfx,
+        .size = 2 * TILE_SIZE_4BPP,
+        .tag = GFXTAG_TEXT_ENTRY_CURSOR
+    },
+    {
+        .data = sRButton_Gfx,
+        .size = 4 * TILE_SIZE_4BPP,
+        .tag = GFXTAG_R_BUTTON
+    },
+    {
+        .data = gUnionRoomChat_Icons_Gfx,
+        .size = 32 * TILE_SIZE_4BPP,
+        .tag = GFXTAG_ICONS
+    },
 };
 
 static const struct SpritePalette sSpritePalette = {
@@ -71,7 +99,7 @@ static const union AnimCmd *const sSpriteAnims_SelectorCursor[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_SelectorCursor = {
-    .tileTag = 0,
+    .tileTag = GFXTAG_SELECTOR_CURSOR,
     .paletteTag = 0,
     .oam = &sOamData_64x32_1,
     .anims = sSpriteAnims_SelectorCursor,
@@ -86,7 +114,7 @@ static const struct OamData sOamData_8x16_2 = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor = {
-    .tileTag = 2,
+    .tileTag = GFXTAG_TEXT_ENTRY_CURSOR,
     .paletteTag = 0,
     .oam = &sOamData_8x16_2,
     .anims = gDummySpriteAnimTable,
@@ -95,7 +123,7 @@ static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_CharacterSelectCursor = {
-    .tileTag = 1,
+    .tileTag = GFXTAG_CHAR_SELECT_CURSOR,
     .paletteTag = 0,
     .oam = &sOamData_8x16_2,
     .anims = gDummySpriteAnimTable,
@@ -143,7 +171,7 @@ static const union AnimCmd *const sSpriteAnimTable_UnionRoomChatIcons[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_RButton = {
-    .tileTag = 3,
+    .tileTag = GFXTAG_R_BUTTON,
     .paletteTag = 0,
     .oam = &sOamData_16x16_2,
     .anims = gDummySpriteAnimTable,
@@ -152,7 +180,7 @@ static const struct SpriteTemplate sSpriteTemplate_RButton = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_UnionRoomChatIcons = {
-    .tileTag = 4,
+    .tileTag = GFXTAG_ICONS,
     .paletteTag = 0,
     .oam = &sOamData_32x16_2,
     .anims = sSpriteAnimTable_UnionRoomChatIcons,

@@ -287,7 +287,7 @@ static void SetNormalHiddenItem(u8 taskId)
 static bool8 HiddenItemAtPos(const struct MapEvents * events, s16 x, s16 y)
 {
     u8 bgEventCount = events->bgEventCount;
-    struct BgEvent * bgEvents = events->bgEvents;
+    const struct BgEvent * bgEvents = events->bgEvents;
     u16 eventFlag;
     int i;
 
@@ -309,7 +309,7 @@ static bool8 HiddenItemAtPos(const struct MapEvents * events, s16 x, s16 y)
     return FALSE;
 }
 
-static bool8 HiddenItemInConnectedMapAtPos(struct MapConnection * connection, s32 x, s32 y)
+static bool8 HiddenItemInConnectedMapAtPos(const struct MapConnection * connection, s32 x, s32 y)
 {
     const struct MapHeader * mapHeader;
     u16 localX, localY;
@@ -372,7 +372,7 @@ static void FindHiddenItemsInConnectedMaps(u8 taskId)
                 || var2 > curY
                 || curY >= height)
             {
-                struct MapConnection * conn = GetMapConnectionAtPos(curX, curY);
+                const struct MapConnection * conn = GetMapConnectionAtPos(curX, curY);
                 if (conn != NULL && HiddenItemInConnectedMapAtPos(conn, curX, curY) == TRUE)
                     RegisterHiddenItemRelativeCoordsIfCloser(taskId, curX - x, curY - y);
             }

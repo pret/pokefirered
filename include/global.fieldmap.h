@@ -92,10 +92,10 @@ struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
-    /*0x08*/ u16 *border;
-    /*0x0c*/ u16 *map;
-    /*0x10*/ struct Tileset *primaryTileset;
-    /*0x14*/ struct Tileset *secondaryTileset;
+    /*0x08*/ const u16 *border;
+    /*0x0c*/ const u16 *map;
+    /*0x10*/ const struct Tileset *primaryTileset;
+    /*0x14*/ const struct Tileset *secondaryTileset;
     /*0x18*/ u8 borderWidth;
     /*0x19*/ u8 borderHeight;
 };
@@ -148,7 +148,7 @@ struct CoordEvent
     u8 elevation;
     u16 trigger;
     u16 index;
-    u8 *script;
+    const u8 *script;
 };
 
 struct BgEvent
@@ -157,7 +157,7 @@ struct BgEvent
     u8 elevation;
     u8 kind; // The "kind" field determines how to access bgUnion union below.
     union {
-        u8 *script;
+        const u8 *script;
         u32 hiddenItem; // Contains all the hidden item data. See GET_HIDDEN_ITEM_* defines further up
     } bgUnion;
 };
@@ -168,10 +168,10 @@ struct MapEvents
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
-    struct ObjectEventTemplate *objectEvents;
-    struct WarpEvent *warps;
-    struct CoordEvent *coordEvents;
-    struct BgEvent *bgEvents;
+    const struct ObjectEventTemplate *objectEvents;
+    const struct WarpEvent *warps;
+    const struct CoordEvent *coordEvents;
+    const struct BgEvent *bgEvents;
 };
 
 struct MapConnection
@@ -185,7 +185,7 @@ struct MapConnection
 struct MapConnections
 {
     s32 count;
-    struct MapConnection *connections;
+    const struct MapConnection *connections;
 };
 
 struct MapHeader

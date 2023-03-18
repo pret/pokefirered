@@ -1031,7 +1031,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
-        gStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
+        gStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         if (gStorage->displayMonSpecies != SPECIES_NONE)
         {
             sanityIsBagEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
@@ -1054,7 +1054,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
-        gStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
+        gStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (gStorage->displayMonSpecies != SPECIES_NONE)
         {
             u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);

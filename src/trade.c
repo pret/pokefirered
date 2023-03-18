@@ -948,7 +948,7 @@ static void CB2_CreateTradeMenu(void)
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon * mon = &gPlayerParty[i];
-            sTradeMenu->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
+            sTradeMenu->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES_OR_EGG),
                                                                 SpriteCB_MonIcon,
                                                                 (sTradeMonSpriteCoords[i][0] * 8) + 14,
                                                                 (sTradeMonSpriteCoords[i][1] * 8) - 12,
@@ -960,7 +960,7 @@ static void CB2_CreateTradeMenu(void)
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PARTNER]; i++)
         {
             struct Pokemon * mon = &gEnemyParty[i];
-            sTradeMenu->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
+            sTradeMenu->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL),
                                                                 SpriteCB_MonIcon,
                                                                 (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                                 (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
@@ -1145,7 +1145,7 @@ void CB2_ReturnToTradeMenuFromSummary(void)
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PLAYER]; i++)
         {
             sTradeMenu->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(
-                GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL),
+                GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL),
                 SpriteCB_MonIcon,
                 sTradeMonSpriteCoords[i][0] * 8 + 14,
                 sTradeMonSpriteCoords[i][1] * 8 - 12,
@@ -1157,7 +1157,7 @@ void CB2_ReturnToTradeMenuFromSummary(void)
         for (i = 0; i < sTradeMenu->partyCounts[TRADE_PARTNER]; i++)
         {
             sTradeMenu->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(
-                GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL),
+                GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG, NULL),
                 SpriteCB_MonIcon,
                 sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8 + 14,
                 sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8 - 12,
@@ -1964,7 +1964,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 cursor
     // Partner cant trade illegitimate Deoxys or Mew
     partnerSpecies = GetMonData(&gEnemyParty[sTradeMenu->partnerCursorPosition % PARTY_SIZE], MON_DATA_SPECIES);
     if ((partnerSpecies == SPECIES_DEOXYS || partnerSpecies == SPECIES_MEW)
-        && !GetMonData(&gEnemyParty[sTradeMenu->partnerCursorPosition % PARTY_SIZE], MON_DATA_EVENT_LEGAL))
+        && !GetMonData(&gEnemyParty[sTradeMenu->partnerCursorPosition % PARTY_SIZE], MON_DATA_MODERN_FATEFUL_ENCOUNTER))
         return PARTNER_MON_INVALID;
 
     if (hasLiveMon != 0)
@@ -2747,7 +2747,7 @@ static u32 CanTradeSelectedMon(struct Pokemon * playerParty, int partyCount, int
 
     for (i = 0; i < partyCount; i++)
     {
-        species2[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES2);
+        species2[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES_OR_EGG);
         species[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES);
     }
 
@@ -2790,7 +2790,7 @@ static u32 CanTradeSelectedMon(struct Pokemon * playerParty, int partyCount, int
 
     if (species[monIdx] == SPECIES_DEOXYS || species[monIdx] == SPECIES_MEW)
     {
-        if (!GetMonData(&playerParty[monIdx], MON_DATA_EVENT_LEGAL))
+        if (!GetMonData(&playerParty[monIdx], MON_DATA_MODERN_FATEFUL_ENCOUNTER))
             return CANT_TRADE_INVALID_MON;
     }
 
@@ -2855,17 +2855,17 @@ s32 GetGameProgressForLinkTrade(void)
     return TRADE_BOTH_PLAYERS_READY;
 }
 
-static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
+static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isModernFatefulEncounter)
 {
     if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
     {
-        if (!isEventLegal)
+        if (!isModernFatefulEncounter)
             return TRUE;
     }
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal)
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isModernFatefulEncounter)
 {
     bool8 playerHasNationalDex = player.hasNationalDex;
     bool8 playerCanLinkNationally = player.canLinkNationally;
@@ -2890,7 +2890,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     }
 
     // Cannot trade illegitimate Deoxys/Mew
-    if (IsDeoxysOrMewUntradable(playerSpecies, isEventLegal))
+    if (IsDeoxysOrMewUntradable(playerSpecies, isModernFatefulEncounter))
         return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
 
     if (partnerSpecies == SPECIES_EGG)
@@ -2902,8 +2902,8 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     else
     {
         // Player's Pokémon must be of the type the partner requested
-        if (gBaseStats[playerSpecies2].type1 != requestedType
-         && gBaseStats[playerSpecies2].type2 != requestedType)
+        if (gSpeciesInfo[playerSpecies2].types[0] != requestedType
+         && gSpeciesInfo[playerSpecies2].types[1] != requestedType)
             return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
     }
 
@@ -2933,11 +2933,11 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal)
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isModernFatefulEncounter)
 {
     bool8 hasNationalDex = player.hasNationalDex;
 
-    if (IsDeoxysOrMewUntradable(species, isEventLegal))
+    if (IsDeoxysOrMewUntradable(species, isModernFatefulEncounter))
         return CANT_REGISTER_MON;
 
     if (hasNationalDex)

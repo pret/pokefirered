@@ -796,7 +796,7 @@ void CheckPartyBattleTowerBanlist(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        species2 = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        species2 = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
         hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);

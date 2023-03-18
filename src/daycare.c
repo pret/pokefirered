@@ -1092,13 +1092,13 @@ void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation)
     u8 metLocation;
     u8 isEgg;
 
-    CreateMon(mon, species, EGG_HATCH_LEVEL, 32, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     metLevel = 0;
     ball = ITEM_POKE_BALL;
     language = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
-    SetMonData(mon, MON_DATA_FRIENDSHIP, &gBaseStats[species].eggCycles);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
     if (setHotSpringsLocation)
@@ -1119,13 +1119,13 @@ static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *
     u8 language;
 
     personality = daycare->offspringPersonality | (Random() << 16);
-    CreateMon(mon, species, EGG_HATCH_LEVEL, 32, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
     metLevel = 0;
     ball = ITEM_POKE_BALL;
     language = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
-    SetMonData(mon, MON_DATA_FRIENDSHIP, &gBaseStats[species].eggCycles);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
 }
@@ -1284,8 +1284,8 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         trainerIds[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_OT_ID);
         personality = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_PERSONALITY);
         genders[i] = GetGenderFromSpeciesAndPersonality(species[i], personality);
-        eggGroups[i][0] = gBaseStats[species[i]].eggGroup1;
-        eggGroups[i][1] = gBaseStats[species[i]].eggGroup2;
+        eggGroups[i][0] = gSpeciesInfo[species[i]].eggGroups[0];
+        eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroups[1];
     }
 
     // check unbreedable egg group
@@ -1594,42 +1594,34 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 {
     u16 species;
     u32 personality, pokerus;
-    u8 i, friendship, language, gameMet, markings, isEventLegal;
-    u16 moves[4];
+    u8 i, friendship, language, gameMet, markings, isModernFatefulEncounter;
+    u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
 
 
     species = GetMonData(egg, MON_DATA_SPECIES);
 
-    for (i = 0; i < 4; i++)
-    {
+    for (i = 0; i < MAX_MON_MOVES; i++)
         moves[i] = GetMonData(egg, MON_DATA_MOVE1 + i);
-    }
 
     personality = GetMonData(egg, MON_DATA_PERSONALITY);
 
     for (i = 0; i < NUM_STATS; i++)
-    {
         ivs[i] = GetMonData(egg, MON_DATA_HP_IV + i);
-    }
 
 //    language = GetMonData(egg, MON_DATA_LANGUAGE);
     gameMet = GetMonData(egg, MON_DATA_MET_GAME);
     markings = GetMonData(egg, MON_DATA_MARKINGS);
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
-    isEventLegal = GetMonData(egg, MON_DATA_EVENT_LEGAL);
+    isModernFatefulEncounter = GetMonData(egg, MON_DATA_MODERN_FATEFUL_ENCOUNTER);
 
-    CreateMon(temp, species, EGG_HATCH_LEVEL, 32, TRUE, personality, 0, 0);
+    CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
-    for (i = 0; i < 4; i++)
-    {
+    for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
-    }
 
     for (i = 0; i < NUM_STATS; i++)
-    {
         SetMonData(temp, MON_DATA_HP_IV + i,  &ivs[i]);
-    }
 
     language = GAME_LANGUAGE;
     SetMonData(temp, MON_DATA_LANGUAGE, &language);
@@ -1639,7 +1631,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     friendship = 120;
     SetMonData(temp, MON_DATA_FRIENDSHIP, &friendship);
     SetMonData(temp, MON_DATA_POKERUS, &pokerus);
-    SetMonData(temp, MON_DATA_EVENT_LEGAL, &isEventLegal);
+    SetMonData(temp, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &isModernFatefulEncounter);
 
     *egg = *temp;
 }

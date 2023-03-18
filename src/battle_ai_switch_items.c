@@ -54,8 +54,8 @@ static bool8 ShouldSwitchIfWonderGuard(void)
         for (i = 0; i < PARTY_SIZE; ++i)
         {
             if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0
-             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG
+             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+             || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
              || i == gBattlerPartyIndexes[gActiveBattler])
                 continue;
             GetMonData(&gEnemyParty[i], MON_DATA_SPECIES); // Unused return value.
@@ -120,8 +120,8 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         u8 monAbility;
 
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
-         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE)
-         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
          || (i == gBattlerPartyIndexes[battlerIn1])
          || (i == gBattlerPartyIndexes[battlerIn2])
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
@@ -129,9 +129,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
         if (GetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM) != ABILITY_NONE)
-            monAbility = gBaseStats[species].abilities[1];
+            monAbility = gSpeciesInfo[species].abilities[1];
         else
-            monAbility = gBaseStats[species].abilities[0];
+            monAbility = gSpeciesInfo[species].abilities[0];
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
             // we found a mon
@@ -265,8 +265,8 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         u8 monAbility;
 
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
-         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE)
-         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
          || (i == gBattlerPartyIndexes[battlerIn1])
          || (i == gBattlerPartyIndexes[battlerIn2])
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
@@ -274,9 +274,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
             continue;
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
         if (GetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM) != ABILITY_NONE)
-            monAbility = gBaseStats[species].abilities[1];
+            monAbility = gSpeciesInfo[species].abilities[1];
         else
-            monAbility = gBaseStats[species].abilities[0];
+            monAbility = gSpeciesInfo[species].abilities[0];
         moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (moveFlags & flags)
         {
@@ -330,8 +330,8 @@ static bool8 ShouldSwitch(void)
     for (i = 0; i < PARTY_SIZE; ++i)
     {
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
-         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE)
-         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+         || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
          || (i == gBattlerPartyIndexes[battlerIn1])
          || (i == gBattlerPartyIndexes[battlerIn2])
          || (i == *(gBattleStruct->monToSwitchIntoId + battlerIn1))
@@ -472,8 +472,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
                 && i != *(gBattleStruct->monToSwitchIntoId + battlerIn1)
                 && i != *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             {
-                u8 type1 = gBaseStats[species].type1;
-                u8 type2 = gBaseStats[species].type2;
+                u8 type1 = gSpeciesInfo[species].types[0];
+                u8 type2 = gSpeciesInfo[species].types[1];
                 u8 typeDmg = 10;
                 ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type1, type1, type2, &typeDmg);
                 ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type2, type1, type2, &typeDmg);
@@ -551,9 +551,9 @@ static u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u
         return AI_ITEM_HEAL_HP;
     else if (itemEffect[3] & ITEM3_STATUS_ALL)
         return AI_ITEM_CURE_CONDITION;
-    else if (itemEffect[0] & (ITEM0_HIGH_CRIT | ITEM0_X_ATTACK) || itemEffect[1] != 0 || itemEffect[2] != 0)
+    else if (itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK) || itemEffect[1] != 0 || itemEffect[2] != 0)
         return AI_ITEM_X_STAT;
-    else if (itemEffect[3] & ITEM3_MIST)
+    else if (itemEffect[3] & ITEM3_GUARD_SPEC)
         return AI_ITEM_GUARD_SPECS;
     else
         return AI_ITEM_NOT_RECOGNIZABLE;
@@ -567,8 +567,8 @@ static bool8 ShouldUseItem(void)
 
     for (i = 0; i < PARTY_SIZE; ++i)
         if (GetMonData(&gEnemyParty[i], MON_DATA_HP) != 0
-         && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+         && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+         && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
             ++validMons;
     for (i = 0; i < MAX_TRAINER_ITEMS; ++i)
     {
@@ -650,7 +650,7 @@ static bool8 ShouldUseItem(void)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x8;
             if (itemEffects[2] & ITEM2_X_ACCURACY)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x20;
-            if (itemEffects[0] & ITEM0_HIGH_CRIT)
+            if (itemEffects[0] & ITEM0_DIRE_HIT)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x80;
             shouldUse = TRUE;
             break;

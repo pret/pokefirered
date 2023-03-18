@@ -199,7 +199,7 @@ bool8 PlayerHasGrassPokemonInParty(void)
         )
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
-            if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
+            if (gSpeciesInfo[species].types[0] == TYPE_GRASS || gSpeciesInfo[species].types[1] == TYPE_GRASS)
                 return TRUE;
         }
     }
@@ -423,7 +423,7 @@ bool8 IsStarterFirstStageInParty(void)
     u8 i;
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == species)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == species)
             return TRUE;
     }
     return FALSE;
@@ -515,7 +515,7 @@ u8 GetLeadMonIndex(void)
     for (i = 0; i < partyCount; i++)
     {
         pokemon = &gPlayerParty[i];
-        if (GetMonData(pokemon, MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(pokemon, MON_DATA_SPECIES2, NULL) != SPECIES_NONE)
+        if (GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG && GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
             return i;
     }
     return 0;
@@ -523,7 +523,7 @@ u8 GetLeadMonIndex(void)
 
 u16 GetPartyMonSpecies(void)
 {
-    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
 }
 
 bool8 IsMonOTNameNotPlayers(void)
@@ -1716,7 +1716,7 @@ void UpdateTrainerCardPhotoIcons(void)
     partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
-        species[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);
+        species[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
         personality[i] = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL);
     }
     VarSet(VAR_TRAINER_CARD_MON_ICON_1, SpeciesToMailSpecies(species[0], personality[0]));
@@ -1768,7 +1768,7 @@ bool8 DoesPlayerPartyContainSpecies(void)
     u8 i;
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004)
             return TRUE;
     }
     return FALSE;
@@ -2232,7 +2232,7 @@ bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
     gSpecialVar_0x8007 = leadMonSlot;
     for (i = 0; i < NELEMS(sCapeBrinkCompatibleSpecies); i++)
     {
-        if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_SPECIES2, NULL) == sCapeBrinkCompatibleSpecies[i])
+        if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_SPECIES_OR_EGG, NULL) == sCapeBrinkCompatibleSpecies[i])
         {
             tutorMonId = i;
             break;
@@ -2500,7 +2500,7 @@ bool8 PlayerPartyContainsSpeciesWithPlayerID(void)
     u8 i;
     for (i = 0; i < playerCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004 
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004 
             && GetPlayerTrainerId() == GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL))
             return TRUE;
     }

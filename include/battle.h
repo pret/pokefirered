@@ -518,7 +518,7 @@ struct BattleScripting
     u8 pursuitDoublesAttacker;
     u8 reshowMainState;
     u8 reshowHelperState;
-    u8 field_23;
+    u8 levelUpHP;
 };
 
 struct BattleSpriteInfo

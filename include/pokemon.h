@@ -4,7 +4,6 @@
 #include "global.h"
 #include "sprite.h"
 #include "constants/pokemon.h"
-#include "pokemon_storage_system.h"
 
 struct PokemonSubstruct0
 {
@@ -13,12 +12,13 @@ struct PokemonSubstruct0
     u32 experience;
     u8 ppBonuses;
     u8 friendship;
+    u16 filler;
 };
 
 struct PokemonSubstruct1
 {
-    u16 moves[4];
-    u8 pp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
 };
 
 struct PokemonSubstruct2
@@ -56,26 +56,42 @@ struct PokemonSubstruct3
  /* 0x07 */ u32 isEgg:1;
  /* 0x07 */ u32 abilityNum:1;
 
- /* 0x08 */ u32 coolRibbon:3;
- /* 0x08 */ u32 beautyRibbon:3;
- /* 0x08 */ u32 cuteRibbon:3;
- /* 0x09 */ u32 smartRibbon:3;
- /* 0x09 */ u32 toughRibbon:3;
- /* 0x09 */ u32 championRibbon:1;
- /* 0x0A */ u32 winningRibbon:1;
- /* 0x0A */ u32 victoryRibbon:1;
- /* 0x0A */ u32 artistRibbon:1;
- /* 0x0A */ u32 effortRibbon:1;
- /* 0x0A */ u32 marineRibbon:1; // never distributed
- /* 0x0A */ u32 landRibbon:1; // never distributed
- /* 0x0A */ u32 skyRibbon:1; // never distributed
- /* 0x0A */ u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- /* 0x0B */ u32 nationalRibbon:1;
- /* 0x0B */ u32 earthRibbon:1;
- /* 0x0B */ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- /* 0x0B */ u32 unusedRibbons:4; // discarded in Gen 4
- /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in FRLG & Gen 4+ summary screens; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
+ /* 0x08 */ u32 coolRibbon:3;               // Stores the highest contest rank achieved in the Cool category.
+ /* 0x08 */ u32 beautyRibbon:3;             // Stores the highest contest rank achieved in the Beauty category.
+ /* 0x08 */ u32 cuteRibbon:3;               // Stores the highest contest rank achieved in the Cute category.
+ /* 0x09 */ u32 smartRibbon:3;              // Stores the highest contest rank achieved in the Smart category.
+ /* 0x09 */ u32 toughRibbon:3;              // Stores the highest contest rank achieved in the Tough category.
+ /* 0x09 */ u32 championRibbon:1;           // Given when defeating the Champion. Because both RSE and FRLG use it, later generations don't specify from which region it comes from.
+ /* 0x0A */ u32 winningRibbon:1;            // Given at the Battle Tower's Level 50 challenge by winning a set of seven battles that extends the current streak to 56 or more.
+ /* 0x0A */ u32 victoryRibbon:1;            // Given at the Battle Tower's Level 100 challenge by winning a set of seven battles that extends the current streak to 56 or more.
+ /* 0x0A */ u32 artistRibbon:1;             // Given at the Contest Hall by winning a Master Rank contest with at least 800 points, and agreeing to have the Pokémon's portrait placed in the museum after being offered.
+ /* 0x0A */ u32 effortRibbon:1;             // Given at Slateport's market to Pokémon with maximum EVs.
+ /* 0x0A */ u32 marineRibbon:1;             // Never distributed.
+ /* 0x0A */ u32 landRibbon:1;               // Never distributed.
+ /* 0x0A */ u32 skyRibbon:1;                // Never distributed.
+ /* 0x0A */ u32 countryRibbon:1;            // Distributed during Pokémon Festa '04 and '05 to tournament winners.
+ /* 0x0B */ u32 nationalRibbon:1;           // Given to purified Shadow Pokémon in Colosseum/XD.
+ /* 0x0B */ u32 earthRibbon:1;              // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
+ /* 0x0B */ u32 worldRibbon:1;              // Distributed during Pokémon Festa '04 and '05 to tournament winners.
+ /* 0x0B */ u32 unusedRibbons:4;            // Discarded in Gen 4.
+
+ // The functionality of this bit changed in FRLG:
+ // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
+ // In FRLG & Emerald, this controls Mew & Deoxys obedience and whether they can be traded.
+ // If set, a Pokémon is a fateful encounter in FRLG's summary screen if hatched & for all Pokémon in Gen 4+ summary screens.
+ // Set for in-game event island legendaries, events distributed after a certain date, & Pokémon from XD: Gale of Darkness.
+ // Not to be confused with METLOC_FATEFUL_ENCOUNTER.
+ /* 0x0B */ u32 modernFatefulEncounter:1;
 };
+
+// Number of bytes in the largest Pokémon substruct.
+// They are assumed to be the same size, and will be padded to
+// the largest size by the union.
+// By default they are all 12 bytes.
+#define NUM_SUBSTRUCT_BYTES (max(sizeof(struct PokemonSubstruct0),     \
+                             max(sizeof(struct PokemonSubstruct1),     \
+                             max(sizeof(struct PokemonSubstruct2),     \
+                                 sizeof(struct PokemonSubstruct3)))))
 
 union PokemonSubstruct
 {
@@ -83,7 +99,7 @@ union PokemonSubstruct
     struct PokemonSubstruct1 type1;
     struct PokemonSubstruct2 type2;
     struct PokemonSubstruct3 type3;
-    u16 raw[6];
+    u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
 };
 
 struct BoxPokemon
@@ -103,7 +119,7 @@ struct BoxPokemon
 
     union
     {
-        u32 raw[12];
+        u32 raw[(NUM_SUBSTRUCT_BYTES * 4) / 4]; // *4 because there are 4 substructs, /4 because it's u32, not u8
         union PokemonSubstruct substructs[4];
     } secure;
 };
@@ -123,19 +139,11 @@ struct Pokemon
     u16 spDefense;
 };
 
-struct PokemonStorage
-{
-    /*0x0000*/ u8 currentBox;
-    /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
-    /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
-    /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
-};
-
 struct BattleTowerPokemon
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
-    /*0x04*/ u16 moves[4];
+    /*0x04*/ u16 moves[MAX_MON_MOVES];
     /*0x0C*/ u8 level;
     /*0x0D*/ u8 ppBonuses;
     /*0x0E*/ u8 hpEV;
@@ -154,11 +162,9 @@ struct BattleTowerPokemon
              u32 gap:1;
              u32 abilityNum:1;
     /*0x1C*/ u32 personality;
-    /*0x20*/ u8 nickname[11];
+    /*0x20*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x2B*/ u8 friendship;
 };
-
-#define BATTLE_STATS_NO 8
 
 struct BattlePokemon
 {
@@ -168,7 +174,7 @@ struct BattlePokemon
     /*0x06*/ u16 speed;
     /*0x08*/ u16 spAttack;
     /*0x0A*/ u16 spDefense;
-    /*0x0C*/ u16 moves[4];
+    /*0x0C*/ u16 moves[MAX_MON_MOVES];
     /*0x14*/ u32 hpIV:5;
     /*0x14*/ u32 attackIV:5;
     /*0x15*/ u32 defenseIV:5;
@@ -177,12 +183,12 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 abilityNum:1;
-    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
+    /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
     /*0x23*/ u8 unknown;
-    /*0x24*/ u8 pp[4];
+    /*0x24*/ u8 pp[MAX_MON_MOVES];
     /*0x28*/ u16 hp;
     /*0x2A*/ u8 level;
     /*0x2B*/ u8 friendship;
@@ -190,7 +196,7 @@ struct BattlePokemon
     /*0x2E*/ u16 item;
     /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x3B*/ u8 ppBonuses;
-    /*0x3C*/ u8 otName[8];
+    /*0x3C*/ u8 otName[PLAYER_NAME_LENGTH + 1];
     /*0x44*/ u32 experience;
     /*0x48*/ u32 personality;
     /*0x4C*/ u32 status1;
@@ -198,7 +204,7 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
-struct BaseStats
+struct SpeciesInfo
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -206,8 +212,7 @@ struct BaseStats
  /* 0x03 */ u8 baseSpeed;
  /* 0x04 */ u8 baseSpAttack;
  /* 0x05 */ u8 baseSpDefense;
- /* 0x06 */ u8 type1;
- /* 0x07 */ u8 type2;
+ /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
  /* 0x09 */ u8 expYield;
  /* 0x0A */ u16 evYield_HP:2;
@@ -216,14 +221,13 @@ struct BaseStats
  /* 0x0A */ u16 evYield_Speed:2;
  /* 0x0B */ u16 evYield_SpAttack:2;
  /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 item1;
- /* 0x0E */ u16 item2;
+ /* 0x0C */ u16 itemCommon;
+ /* 0x0E */ u16 itemRare;
  /* 0x10 */ u8 genderRatio;
  /* 0x11 */ u8 eggCycles;
  /* 0x12 */ u8 friendship;
  /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroup1;
- /* 0x15 */ u8 eggGroup2;
+ /* 0x14 */ u8 eggGroups[2];
  /* 0x16 */ u8 abilities[2];
  /* 0x18 */ u8 safariZoneFleeRate;
  /* 0x19 */ u8 bodyColor : 7;
@@ -243,20 +247,13 @@ struct BattleMove
     u8 flags;
 };
 
-extern const struct BattleMove gBattleMoves[];
-
-// Battle move flags
-#define FLAG_MAKES_CONTACT          (1 << 0)
-#define FLAG_PROTECT_AFFECTED       (1 << 1)
-#define FLAG_MAGIC_COAT_AFFECTED    (1 << 2)
-#define FLAG_SNATCH_AFFECTED        (1 << 3)
-#define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
-#define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
+#define SPINDA_SPOT_WIDTH 16
+#define SPINDA_SPOT_HEIGHT 16
 
 struct SpindaSpot
 {
     u8 x, y;
-    u16 image[16];
+    u16 image[SPINDA_SPOT_HEIGHT];
 };
 
 struct __attribute__((packed)) LevelUpMove
@@ -265,54 +262,12 @@ struct __attribute__((packed)) LevelUpMove
     u16 level:7;
 };
 
-enum
-{
-    GROWTH_MEDIUM_FAST,
-    GROWTH_ERRATIC,
-    GROWTH_FLUCTUATING,
-    GROWTH_MEDIUM_SLOW,
-    GROWTH_FAST,
-    GROWTH_SLOW
-};
-
-enum
-{
-    BODY_COLOR_RED,
-    BODY_COLOR_BLUE,
-    BODY_COLOR_YELLOW,
-    BODY_COLOR_GREEN,
-    BODY_COLOR_BLACK,
-    BODY_COLOR_BROWN,
-    BODY_COLOR_PURPLE,
-    BODY_COLOR_GRAY,
-    BODY_COLOR_WHITE,
-    BODY_COLOR_PINK
-};
-
-#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
-#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
-#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
-#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
-#define EVO_TRADE            0x0005 // Pokémon is traded
-#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
-#define EVO_ITEM             0x0007 // specified item is used on Pokémon
-#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
-#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
-#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
-#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
-#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
-#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
-#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
-#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
-
 struct Evolution
 {
     u16 method;
     u16 param;
     u16 targetSpecies;
 };
-
-#define EVOS_PER_MON 5
 
 #define NUM_UNOWN_FORMS 28
 
@@ -323,11 +278,14 @@ struct Evolution
     | (((personality) & 0x00000003) >> 0)  \
 ) % NUM_UNOWN_FORMS)
 
+#define GET_SHINY_VALUE(otId, personality) (HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality))
+
+extern const struct BattleMove gBattleMoves[];
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
-extern const struct BaseStats gBaseStats[];
+extern const struct SpeciesInfo gSpeciesInfo[];
 extern const u8 *const gItemEffectTable[];
 extern const u8 gStatStageRatios[][2];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
@@ -459,11 +417,11 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
 void SetDeoxysStats(void);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
-void CreateEventLegalEnemyMon(void);
+void CreateEnemyEventMon(void);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);
-struct OakSpeechNidoranFStruct *OakSpeechNidoranFSetup(u8 battlePosition, bool8 enable);
-void OakSpeechNidoranFFreeResources(void);
-void *OakSpeechNidoranFGetBuffer(u8 bufferId);
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode);
+void DestroyMonSpritesGfxManager(void);
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
 
 #endif // GUARD_POKEMON_H

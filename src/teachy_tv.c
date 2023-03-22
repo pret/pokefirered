@@ -95,7 +95,7 @@ static u8 TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(s16 x, s16 y);
 static void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
 static void TeachyTvRestorePlayerPartyCallback(void);
 static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
-static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size);
+static void TeachyTvLoadMapTilesetToBuffer(const struct Tileset *ts, u8 *dstBuffer, u16 size);
 static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapLayout *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
 static void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(const u16 *metaTilesArray, u8 *blockBuf, u8 *tileset);
 static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
@@ -1276,7 +1276,7 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     Free(blockIndicesBuffer);
 }
 
-static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size)
+static void TeachyTvLoadMapTilesetToBuffer(const struct Tileset *ts, u8 *dstBuffer, u16 size)
 {
     if (ts)
     {

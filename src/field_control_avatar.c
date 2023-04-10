@@ -495,11 +495,11 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     case 5:
     case 6:
     case BG_EVENT_HIDDEN_ITEM:
-        if (GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_UNDERFOOT) == TRUE)
+        if (GetHiddenItemAttr(bgEvent->bgUnion.hiddenItem, HIDDEN_ITEM_UNDERFOOT) == TRUE)
             return NULL;
-        gSpecialVar_0x8005 = GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_ID);
-        gSpecialVar_0x8004 = GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_FLAG);
-        gSpecialVar_0x8006 = GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_QUANTITY);
+        gSpecialVar_0x8005 = GetHiddenItemAttr(bgEvent->bgUnion.hiddenItem, HIDDEN_ITEM_ITEM);
+        gSpecialVar_0x8004 = GetHiddenItemAttr(bgEvent->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG);
+        gSpecialVar_0x8006 = GetHiddenItemAttr(bgEvent->bgUnion.hiddenItem, HIDDEN_ITEM_QUANTITY);
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         gSpecialVar_Facing = direction;
@@ -1008,7 +1008,7 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
 static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     s32 i;
-    struct WarpEvent *warpEvent = mapHeader->events->warps;
+    const struct WarpEvent *warpEvent = mapHeader->events->warps;
     u8 warpCount = mapHeader->events->warpCount;
 
     for (i = 0; i < warpCount; i++, warpEvent++)
@@ -1022,7 +1022,7 @@ static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 e
     return -1;
 }
 
-static const u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
+static const u8 *TryRunCoordEventScript(const struct CoordEvent *coordEvent)
 {
     if (coordEvent != NULL)
     {
@@ -1045,7 +1045,7 @@ static const u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
 static const u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     s32 i;
-    struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
+    const struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
     u8 coordEventCount = mapHeader->events->coordEventCount;
 
     for (i = 0; i < coordEventCount; i++)
@@ -1101,7 +1101,7 @@ const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position)
 static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     u8 i;
-    struct BgEvent *bgEvents = mapHeader->events->bgEvents;
+    const struct BgEvent *bgEvents = mapHeader->events->bgEvents;
     u8 bgEventCount = mapHeader->events->bgEventCount;
 
     for (i = 0; i < bgEventCount; i++)

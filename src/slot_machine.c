@@ -13,48 +13,92 @@
 #include "strings.h"
 #include "constants/songs.h"
 
-#define SLOT_IMAGE_7         0
-#define SLOT_IMAGE_ROCKET    1
-#define SLOT_IMAGE_PIKACHU   2
-#define SLOT_IMAGE_PSYDUCK   3
-#define SLOT_IMAGE_CHERRIES  4
-#define SLOT_IMAGE_MAGNEMITE 5
-#define SLOT_IMAGE_SHELLDER  6
+#define NUM_REELS 3
+#define REEL_LENGTH 21 // Total number of icons per reel
 
-#define SLOT_PAYOUT_NONE      0
-#define SLOT_PAYOUT_CHERRIES2 1
-#define SLOT_PAYOUT_CHERRIES3 2
-#define SLOT_PAYOUT_MAGSHELL  3
-#define SLOT_PAYOUT_PIKAPSY   4
-#define SLOT_PAYOUT_ROCKET    5
-#define SLOT_PAYOUT_7         6
+// Only 4 icons are actually visible per reel at a single
+// time, with 1 on deck. Only 3 visible when not spinning.
+#define REEL_LOAD_LENGTH 5
 
-#define ROWATTR_COL1POS 0
-#define ROWATTR_COL2POS 1
-#define ROWATTR_COL3POS 2
-#define ROWATTR_MINBET  3
+// 3 horizontal, 2 diagonal
+#define NUM_MATCH_LINES 5
 
-#define SLOTTASK_GFX_INIT            0
-#define SLOTTASK_FADEOUT_EXIT        1
-#define SLOTTASK_UPDATE_LINE_LIGHTS  2
-#define SLOTTASK_CLEFAIRY_BOUNCE     3
-#define SLOTTASK_ANIM_WIN            4
-#define SLOTTASK_END_ANIM_WIN        5
-#define SLOTTASK_ANIM_LOSE           6
-#define SLOTTASK_ANIM_BETTING        7
-#define SLOTTASK_SHOW_AMOUNTS        8
-#define SLOTTASK_MSG_NO_COINS        9
-#define SLOTTASK_ASK_QUIT           10
-#define SLOTTASK_DESTROY_YESNO      11
-#define SLOTTASK_PRESS_BUTTON       12
-#define SLOTTASK_RELEASE_BUTTONS    13
-#define SLOTTASK_SHOWHELP           14
-#define SLOTTASK_HIDEHELP           15
+#define NUM_BUTTON_TILES 4
+#define NUM_DIGIT_SPRITES 4
+
+enum {
+    PALSLOT_LINE_NORMAL = 4, // Loaded as part of sBg_Pal
+    PALSLOT_LINE_BET,
+    PALSLOT_LINE_MATCH,
+};
+
+enum {
+    GFXTAG_REEL_ICONS,
+    GFXTAG_CLEFAIRY,
+    GFXTAG_DIGITS,
+};
+
+enum {
+    PALTAG_REEL_ICONS_0,
+    PALTAG_REEL_ICONS_1,
+    PALTAG_REEL_ICONS_2,
+    PALTAG_REEL_ICONS_3,
+    PALTAG_REEL_ICONS_4,
+    PALTAG_CLEFAIRY,
+    PALTAG_DIGITS,
+};
+
+enum {
+    ICON_7,
+    ICON_ROCKET,
+    ICON_PIKACHU,
+    ICON_PSYDUCK,   // Psyduck in FR, Slowpoke in LG
+    ICON_CHERRIES,
+    ICON_MAGNEMITE, // Magnemite in FR, Voltorb in LG
+    ICON_SHELLDER,  // Shellder in FR, Staryu in LG
+};
+
+enum {
+    PAYOUT_NONE,
+    PAYOUT_CHERRIES2,
+    PAYOUT_CHERRIES3,
+    PAYOUT_MAGSHELL,
+    PAYOUT_PIKAPSY,
+    PAYOUT_ROCKET,
+    PAYOUT_7,
+    NUM_PAYOUT_TYPES
+};
+
+enum {
+    ROWATTR_COL1POS,
+    ROWATTR_COL2POS,
+    ROWATTR_COL3POS,
+    ROWATTR_MINBET,
+};
+
+enum {
+    SLOTTASK_GFX_INIT,
+    SLOTTASK_FADEOUT_EXIT,
+    SLOTTASK_UPDATE_LINE_LIGHTS,
+    SLOTTASK_CLEFAIRY_BOUNCE,
+    SLOTTASK_ANIM_WIN,
+    SLOTTASK_END_ANIM_WIN,
+    SLOTTASK_ANIM_LOSE,
+    SLOTTASK_ANIM_BETTING,
+    SLOTTASK_SHOW_AMOUNTS,
+    SLOTTASK_MSG_NO_COINS,
+    SLOTTASK_ASK_QUIT,
+    SLOTTASK_DESTROY_YESNO,
+    SLOTTASK_PRESS_BUTTON,
+    SLOTTASK_RELEASE_BUTTONS,
+    SLOTTASK_SHOWHELP,
+    SLOTTASK_HIDEHELP,
+};
 
 struct SlotMachineState
 {
     MainCallback savedCallback;
-    u16 machineidx;
+    u16 machineIdx;
     u16 currentReel;
     u16 machineBias;
     u16 slotRewardClass;
@@ -62,22 +106,22 @@ struct SlotMachineState
     u16 bet;
     u8 taskId;
     u8 spinReelsTaskId;
-    bool32 reelIsSpinning[3];
-    s16 reelPositions[3];
-    s16 reelSubpixel[3];
-    s16 destReelPos[3];
-    s16 reelStopOrder[3];
+    bool32 reelIsSpinning[NUM_REELS];
+    s16 reelPositions[NUM_REELS];
+    s16 reelSubpixel[NUM_REELS];
+    s16 destReelPos[NUM_REELS];
+    s16 reelStopOrder[NUM_REELS];
     u32 reel2BiasInPlay;
-    bool32 winFlags[5];
+    bool32 winFlags[NUM_MATCH_LINES];
     u16 payout;
 };
 
 struct SlotMachineGfxManager
 {
-    u32 field_00[3];
-    struct Sprite *reelIconSprites[3][5];
-    struct Sprite *creditDigitSprites[4];
-    struct Sprite *payoutDigitSprites[4];
+    u32 field_00[NUM_REELS]; // Never read
+    struct Sprite *reelIconSprites[NUM_REELS][REEL_LOAD_LENGTH];
+    struct Sprite *creditDigitSprites[NUM_DIGIT_SPRITES];
+    struct Sprite *payoutDigitSprites[NUM_DIGIT_SPRITES];
     struct Sprite *clefairySprites[2];
     vu16 * reelIconAffineParamPtr;
 };
@@ -96,13 +140,13 @@ struct SlotMachineSetupTaskData
     // align 2
     s32 bg1X;
     bool32 yesNoMenuActive;
-    u16 buttonPressedTiles[3][4];
-    u16 buttonReleasedTiles[3][4];
-    u8 field_005C[0x800];
-    u8 bg0TilemapBuffer[0x800];
-    u8 bg1TilemapBuffer[0x800];
-    u8 bg2TilemapBuffer[0x800];
-    u8 bg3TilemapBuffer[0x800];
+    u16 buttonPressedTiles[NUM_REELS][NUM_BUTTON_TILES];
+    u16 buttonReleasedTiles[NUM_REELS][NUM_BUTTON_TILES];
+    u8 unusedBuffer[BG_SCREEN_SIZE];
+    u8 bg0TilemapBuffer[BG_SCREEN_SIZE];
+    u8 bg1TilemapBuffer[BG_SCREEN_SIZE];
+    u8 bg2TilemapBuffer[BG_SCREEN_SIZE];
+    u8 bg3TilemapBuffer[BG_SCREEN_SIZE];
 }; // size: 285C
 
 struct LineStateTileIdxList
@@ -198,7 +242,7 @@ static const u8 sSecondReelBiasCheckIndices[][2] = {
     {0x04, 0x06}
 };
 
-static const u8 sThirdReelBiasCheckIndices[][3] = {
+static const u8 sThirdReelBiasCheckIndices[NUM_MATCH_LINES][3] = {
     {0x00, 0x03, 0x06}, // top row
     {0x01, 0x04, 0x07}, // middle row
     {0x02, 0x05, 0x08}, // bottom row
@@ -206,7 +250,7 @@ static const u8 sThirdReelBiasCheckIndices[][3] = {
     {0x02, 0x04, 0x06}  // bl-tr
 };
 
-static const u8 sRowAttributes[][4] = {
+static const u8 sRowAttributes[NUM_MATCH_LINES][4] = {
     {0x00, 0x04, 0x08, 0x03}, // tl-br
     {0x00, 0x03, 0x06, 0x02}, // top row
     {0x01, 0x04, 0x07, 0x01}, // middle row
@@ -214,150 +258,193 @@ static const u8 sRowAttributes[][4] = {
     {0x02, 0x04, 0x06, 0x03}  // bl-tr
 };
 
-static const u16 sReelBiasChances[][7] = {
-    {0x1fa1, 0x2eab, 0x3630, 0x39f3, 0x3bd4, 0x3bfc, 0x0049},
-    {0x1f97, 0x2ea2, 0x3627, 0x39e9, 0x3bca, 0x3bf8, 0x0049},
-    {0x1f91, 0x2e9b, 0x3620, 0x39e3, 0x3bc4, 0x3bf4, 0x0049},
-    {0x1f87, 0x2e92, 0x3617, 0x39d9, 0x3bba, 0x3bef, 0x0050},
-    {0x1f7f, 0x2e89, 0x360e, 0x39d1, 0x3bb2, 0x3bea, 0x0050},
-    {0x1fc9, 0x2efc, 0x3696, 0x3a63, 0x3c49, 0x3c8b, 0x0073},
+static const u16 sReelBiasChances[][NUM_PAYOUT_TYPES] = {
+    {
+        [PAYOUT_NONE]      = 0x1fa1,
+        [PAYOUT_CHERRIES2] = 0x2eab,
+        [PAYOUT_CHERRIES3] = 0x3630,
+        [PAYOUT_MAGSHELL]  = 0x39f3,
+        [PAYOUT_PIKAPSY]   = 0x3bd4,
+        [PAYOUT_ROCKET]    = 0x3bfc,
+        [PAYOUT_7]         = 0x0049,
+    },
+    {
+        [PAYOUT_NONE]      = 0x1f97,
+        [PAYOUT_CHERRIES2] = 0x2ea2,
+        [PAYOUT_CHERRIES3] = 0x3627,
+        [PAYOUT_MAGSHELL]  = 0x39e9,
+        [PAYOUT_PIKAPSY]   = 0x3bca,
+        [PAYOUT_ROCKET]    = 0x3bf8,
+        [PAYOUT_7]         = 0x0049,
+    },
+    {
+        [PAYOUT_NONE]      = 0x1f91,
+        [PAYOUT_CHERRIES2] = 0x2e9b,
+        [PAYOUT_CHERRIES3] = 0x3620,
+        [PAYOUT_MAGSHELL]  = 0x39e3,
+        [PAYOUT_PIKAPSY]   = 0x3bc4,
+        [PAYOUT_ROCKET]    = 0x3bf4,
+        [PAYOUT_7]         = 0x0049,
+    },
+    {
+        [PAYOUT_NONE]      = 0x1f87,
+        [PAYOUT_CHERRIES2] = 0x2e92,
+        [PAYOUT_CHERRIES3] = 0x3617,
+        [PAYOUT_MAGSHELL]  = 0x39d9,
+        [PAYOUT_PIKAPSY]   = 0x3bba,
+        [PAYOUT_ROCKET]    = 0x3bef,
+        [PAYOUT_7]         = 0x0050,
+    },
+    {
+        [PAYOUT_NONE]      = 0x1f7f,
+        [PAYOUT_CHERRIES2] = 0x2e89,
+        [PAYOUT_CHERRIES3] = 0x360e,
+        [PAYOUT_MAGSHELL]  = 0x39d1,
+        [PAYOUT_PIKAPSY]   = 0x3bb2,
+        [PAYOUT_ROCKET]    = 0x3bea,
+        [PAYOUT_7]         = 0x0050,
+    },
+    {
+        [PAYOUT_NONE]      = 0x1fc9,
+        [PAYOUT_CHERRIES2] = 0x2efc,
+        [PAYOUT_CHERRIES3] = 0x3696,
+        [PAYOUT_MAGSHELL]  = 0x3a63,
+        [PAYOUT_PIKAPSY]   = 0x3c49,
+        [PAYOUT_ROCKET]    = 0x3c8b,
+        [PAYOUT_7]         = 0x0073,
+    },
 };
 
-static const u8 sReelIconAnimByReelAndPos[][21] = {
+static const u8 sReelIconAnimByReelAndPos[NUM_REELS][REEL_LENGTH] = {
     {
-        SLOT_IMAGE_7,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_CHERRIES,
-        SLOT_IMAGE_ROCKET,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_7,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_ROCKET,
-        SLOT_IMAGE_CHERRIES,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_7,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_ROCKET,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_PIKACHU
+        ICON_7,
+        ICON_PSYDUCK,
+        ICON_CHERRIES,
+        ICON_ROCKET,
+        ICON_PIKACHU,
+        ICON_SHELLDER,
+        ICON_PIKACHU,
+        ICON_MAGNEMITE,
+        ICON_7,
+        ICON_SHELLDER,
+        ICON_PSYDUCK,
+        ICON_ROCKET,
+        ICON_CHERRIES,
+        ICON_PIKACHU,
+        ICON_SHELLDER,
+        ICON_7,
+        ICON_MAGNEMITE,
+        ICON_PIKACHU,
+        ICON_ROCKET,
+        ICON_SHELLDER,
+        ICON_PIKACHU
     }, {
-        SLOT_IMAGE_7,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_CHERRIES,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_ROCKET,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_CHERRIES,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_CHERRIES,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_7,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_CHERRIES,
-        SLOT_IMAGE_ROCKET,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_CHERRIES
+        ICON_7,
+        ICON_MAGNEMITE,
+        ICON_CHERRIES,
+        ICON_PSYDUCK,
+        ICON_ROCKET,
+        ICON_MAGNEMITE,
+        ICON_CHERRIES,
+        ICON_PSYDUCK,
+        ICON_PIKACHU,
+        ICON_MAGNEMITE,
+        ICON_CHERRIES,
+        ICON_PSYDUCK,
+        ICON_7,
+        ICON_MAGNEMITE,
+        ICON_CHERRIES,
+        ICON_ROCKET,
+        ICON_PSYDUCK,
+        ICON_SHELLDER,
+        ICON_MAGNEMITE,
+        ICON_PSYDUCK,
+        ICON_CHERRIES
     }, {
-        SLOT_IMAGE_7,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_PIKACHU,
-        SLOT_IMAGE_PSYDUCK,
-        SLOT_IMAGE_MAGNEMITE,
-        SLOT_IMAGE_SHELLDER,
-        SLOT_IMAGE_ROCKET
+        ICON_7,
+        ICON_PSYDUCK,
+        ICON_SHELLDER,
+        ICON_MAGNEMITE,
+        ICON_PIKACHU,
+        ICON_PSYDUCK,
+        ICON_SHELLDER,
+        ICON_MAGNEMITE,
+        ICON_PIKACHU,
+        ICON_PSYDUCK,
+        ICON_MAGNEMITE,
+        ICON_SHELLDER,
+        ICON_PIKACHU,
+        ICON_PSYDUCK,
+        ICON_MAGNEMITE,
+        ICON_SHELLDER,
+        ICON_PIKACHU,
+        ICON_PSYDUCK,
+        ICON_MAGNEMITE,
+        ICON_SHELLDER,
+        ICON_ROCKET
     },
 };
 
 static const u16 sPayoutTable[] = {
-    [SLOT_PAYOUT_NONE]      =   0,
-    [SLOT_PAYOUT_CHERRIES2] =   2,
-    [SLOT_PAYOUT_CHERRIES3] =   6,
-    [SLOT_PAYOUT_MAGSHELL]  =   8,
-    [SLOT_PAYOUT_PIKAPSY]   =  15,
-    [SLOT_PAYOUT_ROCKET]    = 100,
-    [SLOT_PAYOUT_7]         = 300
+    [PAYOUT_NONE]      =   0,
+    [PAYOUT_CHERRIES2] =   2,
+    [PAYOUT_CHERRIES3] =   6,
+    [PAYOUT_MAGSHELL]  =   8,
+    [PAYOUT_PIKAPSY]   =  15,
+    [PAYOUT_ROCKET]    = 100,
+    [PAYOUT_7]         = 300
 };
 
-static const u16 sSpritePal_ReelIcons_0[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
-static const u16 sSpritePal_ReelIcons_1[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
-static const u16 sSpritePal_ReelIcons_2[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
-static const u16 sSpritePal_ReelIcons_3[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
-static const u16 sSpritePal_ReelIcons_4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
 #if defined(FIRERED)
-static const u32 sSpriteTiles_ReelIcons[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
-static const u16 sSpritePal_Clefairy[] = INCBIN_U16("graphics/slot_machine/unk_846506c.gbapal");
-static const u32 sSpriteTiles_Clefairy[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+static const u16 sReelIcons_Pal[][16] = INCBIN_U16("graphics/slot_machine/firered/reel_icons.gbapal");
+static const u32 sReelIcons_Tiles[]   = INCBIN_U32("graphics/slot_machine/firered/reel_icons.4bpp.lz");
+static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/firered/clefairy.gbapal");
+static const u32 sClefairy_Tiles[]    = INCBIN_U32("graphics/slot_machine/firered/clefairy.4bpp.lz");
 #elif defined(LEAFGREEN)
-static const u32 sSpriteTiles_ReelIcons[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464434.4bpp.lz");
-static const u16 sSpritePal_Clefairy[] = INCBIN_U16("graphics/slot_machine/unk_lg_8464a3c.gbapal");
-static const u32 sSpriteTiles_Clefairy[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464a3c.4bpp.lz");
+static const u16 sReelIcons_Pal[][16] = INCBIN_U16("graphics/slot_machine/leafgreen/reel_icons.gbapal");
+static const u32 sReelIcons_Tiles[]   = INCBIN_U32("graphics/slot_machine/leafgreen/reel_icons.4bpp.lz");
+static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/leafgreen/clefairy.gbapal");
+static const u32 sClefairy_Tiles[]    = INCBIN_U32("graphics/slot_machine/leafgreen/clefairy.4bpp.lz");
 #endif
-static const u16 sSpritePal_Digits[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
-static const u32 sSpriteTiles_Digits[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
+static const u16 sDigits_Pal[]        = INCBIN_U16("graphics/slot_machine/digits.gbapal");
+static const u32 sDigits_Tiles[]      = INCBIN_U32("graphics/slot_machine/digits.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {(const void *)sSpriteTiles_ReelIcons, 0xe00, 0},
-    {(const void *)sSpriteTiles_Clefairy,  0xc00, 1},
-    {(const void *)sSpriteTiles_Digits,    0x280, 2},
+    {.data = sReelIcons_Tiles, .size = 0xe00, .tag = GFXTAG_REEL_ICONS},
+    {.data = sClefairy_Tiles,  .size = 0xc00, .tag = GFXTAG_CLEFAIRY},
+    {.data = sDigits_Tiles,    .size = 0x280, .tag = GFXTAG_DIGITS},
 };
 
 static const struct SpritePalette sSpritePalettes[] = {
-    {sSpritePal_ReelIcons_0, 0},
-    {sSpritePal_ReelIcons_1, 1},
-    {sSpritePal_ReelIcons_2, 2},
-    {sSpritePal_ReelIcons_3, 3},
-    {sSpritePal_ReelIcons_4, 4},
-    {sSpritePal_Clefairy,    5},
-    {sSpritePal_Digits,      6},
-    {NULL}
+    {.data = sReelIcons_Pal[0], .tag = PALTAG_REEL_ICONS_0},
+    {.data = sReelIcons_Pal[1], .tag = PALTAG_REEL_ICONS_1},
+    {.data = sReelIcons_Pal[2], .tag = PALTAG_REEL_ICONS_2},
+    {.data = sReelIcons_Pal[3], .tag = PALTAG_REEL_ICONS_3},
+    {.data = sReelIcons_Pal[4], .tag = PALTAG_REEL_ICONS_4},
+    {.data = sClefairy_Pal,     .tag = PALTAG_CLEFAIRY},
+    {.data = sDigits_Pal,       .tag = PALTAG_DIGITS},
+    {}
 };
 
+static const u16 sReelIconPaletteTags[] = {
 #if defined(FIRERED)
-static const u16 sReelIconPaletteTags[] = {
-    [SLOT_IMAGE_7]         = 2,
-    [SLOT_IMAGE_ROCKET]    = 2,
-    [SLOT_IMAGE_PIKACHU]   = 0,
-    [SLOT_IMAGE_PSYDUCK]   = 0,
-    [SLOT_IMAGE_CHERRIES]  = 2,
-    [SLOT_IMAGE_MAGNEMITE] = 4,
-    [SLOT_IMAGE_SHELLDER]  = 3
-};
+    [ICON_7]         = PALTAG_REEL_ICONS_2,
+    [ICON_ROCKET]    = PALTAG_REEL_ICONS_2,
+    [ICON_PIKACHU]   = PALTAG_REEL_ICONS_0,
+    [ICON_PSYDUCK]   = PALTAG_REEL_ICONS_0,
+    [ICON_CHERRIES]  = PALTAG_REEL_ICONS_2,
+    [ICON_MAGNEMITE] = PALTAG_REEL_ICONS_4,
+    [ICON_SHELLDER]  = PALTAG_REEL_ICONS_3,
 #elif defined(LEAFGREEN)
-static const u16 sReelIconPaletteTags[] = {
-    [SLOT_IMAGE_7]         = 2,
-    [SLOT_IMAGE_ROCKET]    = 2,
-    [SLOT_IMAGE_PIKACHU]   = 0,
-    [SLOT_IMAGE_PSYDUCK]   = 3,
-    [SLOT_IMAGE_CHERRIES]  = 2,
-    [SLOT_IMAGE_MAGNEMITE] = 1,
-    [SLOT_IMAGE_SHELLDER]  = 1
-};
+    [ICON_7]         = PALTAG_REEL_ICONS_2,
+    [ICON_ROCKET]    = PALTAG_REEL_ICONS_2,
+    [ICON_PIKACHU]   = PALTAG_REEL_ICONS_0,
+    [ICON_PSYDUCK]   = PALTAG_REEL_ICONS_3,
+    [ICON_CHERRIES]  = PALTAG_REEL_ICONS_2,
+    [ICON_MAGNEMITE] = PALTAG_REEL_ICONS_1,
+    [ICON_SHELLDER]  = PALTAG_REEL_ICONS_1,
 #endif
+};
 
 static const u16 sReelIconAffineParams[] = {
     0x0120, 0x011f, 0x011e, 0x011d, 0x011c, 0x011b, 0x011a, 0x0119, 0x0118, 0x0117, 0x0116, 0x0115, 0x0114, 0x0113, 0x0112, 0x0111,
@@ -451,13 +538,13 @@ static const union AnimCmd sAnimCmd_ReelIcon_Shellder_2[] = {
 };
 
 static const union AnimCmd *const sAnimTable_ReelIcons[] = {
-    sAnimCmd_ReelIcon_7,
-    sAnimCmd_ReelIcon_Rocket,
-    sAnimCmd_ReelIcon_Pikachu,
-    sAnimCmd_ReelIcon_Psyduck,
-    sAnimCmd_ReelIcon_Cherries,
-    sAnimCmd_ReelIcon_Magnemite,
-    sAnimCmd_ReelIcon_Shellder,
+    [ICON_7]         = sAnimCmd_ReelIcon_7,
+    [ICON_ROCKET]    = sAnimCmd_ReelIcon_Rocket,
+    [ICON_PIKACHU]   = sAnimCmd_ReelIcon_Pikachu,
+    [ICON_PSYDUCK]   = sAnimCmd_ReelIcon_Psyduck,
+    [ICON_CHERRIES]  = sAnimCmd_ReelIcon_Cherries,
+    [ICON_MAGNEMITE] = sAnimCmd_ReelIcon_Magnemite,
+    [ICON_SHELLDER]  = sAnimCmd_ReelIcon_Shellder,
     sAnimCmd_ReelIcon_Pikachu_2,
     sAnimCmd_ReelIcon_Psyduck_2,
     sAnimCmd_ReelIcon_Cherries_2,
@@ -475,8 +562,8 @@ static const union AffineAnimCmd *const sAffineAnimTable_ReelIcons_Unused[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ReelIcons = {
-    .tileTag = 0,
-    .paletteTag = 0,
+    .tileTag = GFXTAG_REEL_ICONS,
+    .paletteTag = PALTAG_REEL_ICONS_0,
     .oam = &sOamData_ReelIcons,
     .anims = sAnimTable_ReelIcons,
     .images = NULL,
@@ -564,8 +651,8 @@ static const union AnimCmd *const sAnimTable_Digits[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Digits = {
-    .tileTag = 2,
-    .paletteTag = 6,
+    .tileTag = GFXTAG_DIGITS,
+    .paletteTag = PALTAG_DIGITS,
     .oam = &sOamData_Digits,
     .anims = sAnimTable_Digits,
     .images = NULL,
@@ -620,8 +707,8 @@ static const union AnimCmd *const sAnimTable_Clefairy[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Clefairy = {
-    .tileTag = 1,
-    .paletteTag = 5,
+    .tileTag = GFXTAG_CLEFAIRY,
+    .paletteTag = PALTAG_CLEFAIRY,
     .oam = &sOamData_Clefairy,
     .anims = sAnimTable_Clefairy,
     .images = NULL,
@@ -649,36 +736,25 @@ bool8 (*const sSlotMachineSetupTasks[])(u8 *, struct SlotMachineSetupTaskData *)
 };
 
 #if defined(FIRERED)
-static const u16 sBgPal_00[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
-static const u16 sBgPal_10[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
-static const u16 sBgPal_20[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
-static const u16 sBgPal_30[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
-static const u16 sBgPal_40[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
-static const u32 sBg2Tiles_00[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
-static const u32 sBg2Map[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
-static const u16 sBgPal_50[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
-static const u16 sBgPal_VictoryFlash[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
+static const u16 sBg_Pal[][16]             = INCBIN_U16("graphics/slot_machine/firered/bg.gbapal");
+static const u32 sBg_Tiles[]               = INCBIN_U32("graphics/slot_machine/firered/bg.4bpp.lz");
+static const u32 sBg_Tilemap[]             = INCBIN_U32("graphics/slot_machine/firered/bg.bin.lz");
+static const u16 sBgPal_MatchLines[]       = INCBIN_U16("graphics/slot_machine/firered/match_lines.gbapal");
+static const u16 sBgPal_PayoutLight[][16]  = INCBIN_U16("graphics/slot_machine/firered/payout_lights.gbapal");
+static const u32 sButtonPressed_Tiles[]    = INCBIN_U32("graphics/slot_machine/firered/button_pressed.4bpp.lz");
+static const u16 sCombosWindow_Pal[]       = INCBIN_U16("graphics/slot_machine/firered/combos_window.gbapal");
+static const u32 sCombosWindow_Tiles[]     = INCBIN_U32("graphics/slot_machine/firered/combos_window.4bpp.lz");
+static const u32 sCombosWindow_Tilemap[]   = INCBIN_U32("graphics/slot_machine/firered/combos_window.bin.lz");
 #elif defined(LEAFGREEN)
-static const u16 sBgPal_00[] = INCBIN_U16("graphics/slot_machine/unk_lg_84652bc.gbapal");
-static const u16 sBgPal_10[] = INCBIN_U16("graphics/slot_machine/unk_lg_84652dc.gbapal");
-static const u16 sBgPal_20[] = INCBIN_U16("graphics/slot_machine/unk_lg_84652fc.gbapal");
-static const u16 sBgPal_30[] = INCBIN_U16("graphics/slot_machine/unk_lg_846531c.gbapal");
-static const u16 sBgPal_40[] = INCBIN_U16("graphics/slot_machine/unk_lg_846533c.gbapal");
-static const u32 sBg2Tiles_00[] = INCBIN_U32("graphics/slot_machine/unk_lg_846535c.4bpp.lz");
-static const u32 sBg2Map[] = INCBIN_U32("graphics/slot_machine/unk_lg_8465ab8.bin.lz");
-static const u16 sBgPal_50[] = INCBIN_U16("graphics/slot_machine/unk_lg_8465d9c.gbapal");
-static const u16 sBgPal_VictoryFlash[] = INCBIN_U16("graphics/slot_machine/unk_lg_8465dbc.gbapal","graphics/slot_machine/unk_lg_8465ddc.gbapal", "graphics/slot_machine/unk_lg_8465dfc.gbapal");
-#endif
-static const u32 sBg2Tiles_C0[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
-static const u16 sBgPal_70[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
-static const u16 sBgPal_80[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
-static const u16 sBgPal_90[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
-#if defined(FIRERED)
-static const u32 sBg1Tiles[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
-static const u32 sBg1Map[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
-#elif defined(LEAFGREEN)
-static const u32 sBg1Tiles[] = INCBIN_U32("graphics/slot_machine/unk_lg_8465f00.4bpp.lz");
-static const u32 sBg1Map[] = INCBIN_U32("graphics/slot_machine/unk_lg_8466278.bin.lz");
+static const u16 sBg_Pal[][16]             = INCBIN_U16("graphics/slot_machine/leafgreen/bg.gbapal");
+static const u32 sBg_Tiles[]               = INCBIN_U32("graphics/slot_machine/leafgreen/bg.4bpp.lz");
+static const u32 sBg_Tilemap[]             = INCBIN_U32("graphics/slot_machine/leafgreen/bg.bin.lz");
+static const u16 sBgPal_MatchLines[]       = INCBIN_U16("graphics/slot_machine/leafgreen/match_lines.gbapal");
+static const u16 sBgPal_PayoutLight[][16]  = INCBIN_U16("graphics/slot_machine/leafgreen/payout_lights.gbapal");
+static const u32 sButtonPressed_Tiles[]    = INCBIN_U32("graphics/slot_machine/leafgreen/button_pressed.4bpp.lz");
+static const u16 sCombosWindow_Pal[]       = INCBIN_U16("graphics/slot_machine/leafgreen/combos_window.gbapal");
+static const u32 sCombosWindow_Tiles[]     = INCBIN_U32("graphics/slot_machine/leafgreen/combos_window.4bpp.lz");
+static const u32 sCombosWindow_Tilemap[]   = INCBIN_U32("graphics/slot_machine/leafgreen/combos_window.bin.lz");
 #endif
 
 static const struct BgTemplate sBgTemplates[] = {
@@ -758,15 +834,15 @@ static const u16 sLineTiles_BLTR[] = {
     0x0204, 0x0205, 0x0206, 0x0224, 0x0225, 0x0226, 0x01e7, 0x0207, 0x018c, 0x01ac, 0x0131, 0x0151, 0x00d6, 0x00f6, 0x00b7, 0x00b8, 0x00b9, 0x00d7, 0x00d8, 0x00d9
 };
 
-static const struct LineStateTileIdxList sLineStateTileIdxs[] = {
-    { sLineTiles_TLBR, NELEMS(sLineTiles_TLBR) },
-    { sLineTiles_TopRow, NELEMS(sLineTiles_TopRow) },
-    { sLineTiles_MiddleRow, NELEMS(sLineTiles_MiddleRow) },
-    { sLineTiles_BottomRow, NELEMS(sLineTiles_BottomRow) },
-    { sLineTiles_BLTR, NELEMS(sLineTiles_BLTR) }
+static const struct LineStateTileIdxList sLineStateTileIdxs[NUM_MATCH_LINES] = {
+    { sLineTiles_TLBR, ARRAY_COUNT(sLineTiles_TLBR) },
+    { sLineTiles_TopRow, ARRAY_COUNT(sLineTiles_TopRow) },
+    { sLineTiles_MiddleRow, ARRAY_COUNT(sLineTiles_MiddleRow) },
+    { sLineTiles_BottomRow, ARRAY_COUNT(sLineTiles_BottomRow) },
+    { sLineTiles_BLTR, ARRAY_COUNT(sLineTiles_BLTR) }
 };
 
-static const u8 sWInningLineFlashPalIdxs[2] = {2, 4};
+static const u8 sWinningLineFlashPalIdxs[2] = {2, 4};
 
 static const struct WindowTemplate sYesNoWindowTemplate = {
     .bg = 0,
@@ -778,7 +854,7 @@ static const struct WindowTemplate sYesNoWindowTemplate = {
     .baseBlock = 0x9F
 };
 
-static const u16 sReelButtonMapTileIdxs[][4] = {
+static const u16 sReelButtonMapTileIdxs[NUM_REELS][NUM_BUTTON_TILES] = {
     {0x0229, 0x022a, 0x0249, 0x024a},
     {0x022e, 0x022f, 0x024e, 0x024f},
     {0x0233, 0x0234, 0x0253, 0x0254}
@@ -792,9 +868,9 @@ void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
         SetMainCallback2(savedCallback);
     else
     {
-        if (machineIdx > 5)
+        if (machineIdx >= ARRAY_COUNT(sReelBiasChances))
             machineIdx = 0;
-        sSlotMachineState->machineidx = machineIdx;
+        sSlotMachineState->machineIdx = machineIdx;
         sSlotMachineState->savedCallback = savedCallback;
         InitSlotMachineState(sSlotMachineState);
         SetMainCallback2(CB2_InitSlotMachine);
@@ -809,12 +885,12 @@ static void InitSlotMachineState(struct SlotMachineState * ptr)
     ptr->bet = 0;
     ptr->payout = 0;
     // for whatever reason, the loop does not use the ptr param
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
         sSlotMachineState->reelIsSpinning[i] = FALSE;
-        sSlotMachineState->reelPositions[i]  =     0;
-        sSlotMachineState->reelSubpixel[i]   =     0;
-        sSlotMachineState->destReelPos[i]    =    21;
+        sSlotMachineState->reelPositions[i] = 0;
+        sSlotMachineState->reelSubpixel[i] = 0;
+        sSlotMachineState->destReelPos[i] = REEL_LENGTH;
     }
 }
 
@@ -952,16 +1028,16 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         if (IsReelSpinning(sSlotMachineState->currentReel) == 0 && !IsSlotMachineSetupTaskActive(0))
         {
             sSlotMachineState->currentReel++;
-            if (sSlotMachineState->currentReel >= 3)
+            if (sSlotMachineState->currentReel >= NUM_REELS)
             {
                 sSlotMachineState->slotRewardClass = CalcPayout();
                 sSlotMachineState->bet = 0;
                 sSlotMachineState->currentReel = 0;
-                if (sSlotMachineState->slotRewardClass == SLOT_PAYOUT_NONE)
+                if (sSlotMachineState->slotRewardClass == PAYOUT_NONE)
                     SetMainTask(MainTask_DarnNoPayout);
                 else
                 {
-                    if (sSlotMachineState->slotRewardClass == SLOT_PAYOUT_7)
+                    if (sSlotMachineState->slotRewardClass == PAYOUT_7)
                         IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
                     ResetMachineBias();
                     SetMainTask(MainTask_WinHandlePayout);
@@ -1098,7 +1174,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
     switch (data[0])
     {
     case 0:
-        if (sSlotMachineState->slotRewardClass == SLOT_PAYOUT_ROCKET || sSlotMachineState->slotRewardClass == SLOT_PAYOUT_7)
+        if (sSlotMachineState->slotRewardClass == PAYOUT_ROCKET || sSlotMachineState->slotRewardClass == PAYOUT_7)
             PlayFanfare(MUS_SLOTS_JACKPOT);
         else
             PlayFanfare(MUS_SLOTS_WIN);
@@ -1201,7 +1277,7 @@ static void Task_SpinReels(u8 taskId)
 
     s32 i;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
         if (sSlotMachineState->reelIsSpinning[i] || sSlotMachineState->reelSubpixel[i] != 0)
         {
@@ -1213,12 +1289,12 @@ static void Task_SpinReels(u8 taskId)
                     sSlotMachineState->reelSubpixel[i] = 0;
                     sSlotMachineState->reelPositions[i]--;
                     if (sSlotMachineState->reelPositions[i] < 0)
-                        sSlotMachineState->reelPositions[i] = 20;
+                        sSlotMachineState->reelPositions[i] = REEL_LENGTH - 1;
                 }
                 if (sSlotMachineState->reelPositions[i] != sSlotMachineState->destReelPos[i])
                     continue;
             }
-            sSlotMachineState->destReelPos[i] = 21;
+            sSlotMachineState->destReelPos[i] = REEL_LENGTH;
             sSlotMachineState->reelIsSpinning[i] = FALSE;
         }
     }
@@ -1229,10 +1305,8 @@ static void StartReels(void)
 {
     s32 i;
 
-    for (i = 0; i < 3; i++)
-    {
+    for (i = 0; i < NUM_REELS; i++)
         sSlotMachineState->reelIsSpinning[i] = TRUE;
-    }
 }
 
 static void StopCurrentReel(u16 whichReel, u16 whichReel2)
@@ -1263,7 +1337,7 @@ static s16 GetNextReelPosition(u16 whichReel)
     {
         position--;
         if (position < 0)
-            position = 20;
+            position = REEL_LENGTH - 1;
     }
     return position;
 }
@@ -1282,7 +1356,7 @@ static void StopReel1(u16 whichReel)
         {
             for (j = 0, destPos = nextPos - i + 1; j < 3; j++, destPos++)
             {
-                if (destPos >= 21)
+                if (destPos >= REEL_LENGTH)
                     destPos = 0;
                 if (TestReelIconAttribute(1, sReelIconAnimByReelAndPos[whichReel][destPos]))
                     break;
@@ -1298,7 +1372,7 @@ static void StopReel1(u16 whichReel)
     {
         for (i = 0, destPos = nextPos + 1; i < 3; i++, destPos++)
         {
-            if (destPos >= 21)
+            if (destPos >= REEL_LENGTH)
                 destPos = 0;
             if (TestReelIconAttribute(sSlotMachineState->machineBias, sReelIconAnimByReelAndPos[whichReel][destPos]))
             {
@@ -1310,7 +1384,7 @@ static void StopReel1(u16 whichReel)
         for (i = 0, destPos = nextPos; i < 4; i++, destPos--)
         {
             if (destPos < 0)
-                destPos = 20;
+                destPos = REEL_LENGTH - 1;
             if (TestReelIconAttribute(sSlotMachineState->machineBias, sReelIconAnimByReelAndPos[whichReel][destPos]))
             {
                 posToSample[numPosToSample] = i + 1;
@@ -1328,7 +1402,7 @@ static void StopReel1(u16 whichReel)
     }
     destPos = nextPos - destPos;
     if (destPos < 0)
-        destPos += 21;
+        destPos += REEL_LENGTH;
     sSlotMachineState->reelStopOrder[0] = whichReel;
     sSlotMachineState->destReelPos[whichReel] = destPos;
 }
@@ -1342,11 +1416,11 @@ static void StopReel2(u16 whichReel)
 
     firstStoppedReelId = sSlotMachineState->reelStopOrder[0];
     firstStoppedReelPos = sSlotMachineState->reelPositions[firstStoppedReelId] + 1;
-    if (firstStoppedReelPos >= 21)
+    if (firstStoppedReelPos >= REEL_LENGTH)
         firstStoppedReelPos = 0;
     nextPos = GetNextReelPosition(whichReel);
     pos = nextPos + 1;
-    if (pos >= 21)
+    if (pos >= REEL_LENGTH)
         pos = 0;
     numPossiblePositions = 0;
     for (i = 0; i < 5; i++)
@@ -1358,12 +1432,12 @@ static void StopReel2(u16 whichReel)
         }
         pos--;
         if (pos < 0)
-            pos = 20;
+            pos = REEL_LENGTH - 1;
     }
     if (numPossiblePositions == 0)
     {
         sSlotMachineState->reel2BiasInPlay = 0;
-        if (sSlotMachineState->machineBias == SLOT_PAYOUT_ROCKET || sSlotMachineState->machineBias == SLOT_PAYOUT_7)
+        if (sSlotMachineState->machineBias == PAYOUT_ROCKET || sSlotMachineState->machineBias == PAYOUT_7)
             pos = 4;
         else
             pos = 0;
@@ -1375,7 +1449,7 @@ static void StopReel2(u16 whichReel)
     }
     pos = nextPos - pos;
     if (pos < 0)
-        pos += 21;
+        pos += REEL_LENGTH;
     sSlotMachineState->reelStopOrder[1] = whichReel;
     sSlotMachineState->destReelPos[whichReel] = pos;
 }
@@ -1405,7 +1479,7 @@ static void StopReel3(u16 whichReel)
     }
     if (numPossiblePositions == 0)
     {
-        if (sSlotMachineState->machineBias == SLOT_PAYOUT_ROCKET || sSlotMachineState->machineBias == SLOT_PAYOUT_7)
+        if (sSlotMachineState->machineBias == PAYOUT_ROCKET || sSlotMachineState->machineBias == PAYOUT_7)
             pos = 4;
         else
             pos = 0;
@@ -1414,7 +1488,7 @@ static void StopReel3(u16 whichReel)
         pos = possiblePositions[0];
     pos = nextPos - pos;
     if (pos < 0)
-        pos += 21;
+        pos += REEL_LENGTH;
     sSlotMachineState->destReelPos[whichReel] = pos;
 }
 
@@ -1431,10 +1505,10 @@ static bool32 TwoReelBiasCheck(s32 reel0id, s32 reel0pos, s32 reel1id, s32 reel1
         icons[3 * reel0id + i] = sReelIconAnimByReelAndPos[reel0id][reel0pos];
         icons[3 * reel1id + i] = sReelIconAnimByReelAndPos[reel1id][reel1pos];
         reel0pos++;
-        if (reel0pos >= 21)
+        if (reel0pos >= REEL_LENGTH)
             reel0pos = 0;
         reel1pos++;
-        if (reel1pos >= 21)
+        if (reel1pos >= REEL_LENGTH)
             reel1pos = 0;
     }
 
@@ -1501,40 +1575,40 @@ static bool32 OneReelBiasCheck(s32 reelId, s32 reelPos, s32 biasIcon)
     firstStoppedPos = sSlotMachineState->reelPositions[sSlotMachineState->reelStopOrder[0]] + 1;
     secondStoppedPos = sSlotMachineState->reelPositions[sSlotMachineState->reelStopOrder[1]] + 1;
     reelPos++;
-    if (firstStoppedPos >= 21)
+    if (firstStoppedPos >= REEL_LENGTH)
         firstStoppedPos = 0;
-    if (secondStoppedPos >= 21)
+    if (secondStoppedPos >= REEL_LENGTH)
         secondStoppedPos = 0;
-    if (reelPos >= 21)
+    if (reelPos >= REEL_LENGTH)
         reelPos = 0;
     for (i = 0; i < 3; i++)
     {
         icons[sSlotMachineState->reelStopOrder[0] * 3 + i] = sReelIconAnimByReelAndPos[sSlotMachineState->reelStopOrder[0]][firstStoppedPos];
         icons[sSlotMachineState->reelStopOrder[1] * 3 + i] = sReelIconAnimByReelAndPos[sSlotMachineState->reelStopOrder[1]][secondStoppedPos];
         icons[reelId * 3 + i] = sReelIconAnimByReelAndPos[reelId][reelPos];
-        if (++firstStoppedPos >= 21)
+        if (++firstStoppedPos >= REEL_LENGTH)
             firstStoppedPos = 0;
-        if (++secondStoppedPos >= 21)
+        if (++secondStoppedPos >= REEL_LENGTH)
             secondStoppedPos = 0;
-        if (++reelPos >= 21)
+        if (++reelPos >= REEL_LENGTH)
             reelPos = 0;
     }
     switch (biasIcon)
     {
-    case SLOT_PAYOUT_NONE:
+    case PAYOUT_NONE:
         for (i = 0; i < 3; i++)
         {
             if (TestReelIconAttribute(1, icons[i]))
                 return FALSE;
         }
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < NUM_MATCH_LINES; i++)
         {
             if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][2]])
                 return FALSE;
         }
         return TRUE;
-    case SLOT_PAYOUT_CHERRIES2:
-        for (i = 0; i < 5; i++)
+    case PAYOUT_CHERRIES2:
+        for (i = 0; i < NUM_MATCH_LINES; i++)
         {
             if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && TestReelIconAttribute(biasIcon, icons[sThirdReelBiasCheckIndices[i][0]]))
                 return FALSE;
@@ -1545,15 +1619,15 @@ static bool32 OneReelBiasCheck(s32 reelId, s32 reelPos, s32 biasIcon)
                 return TRUE;
         }
         return FALSE;
-    case SLOT_PAYOUT_CHERRIES3:
-        for (i = 0; i < 5; i++)
+    case PAYOUT_CHERRIES3:
+        for (i = 0; i < NUM_MATCH_LINES; i++)
         {
             if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && TestReelIconAttribute(biasIcon, icons[sThirdReelBiasCheckIndices[i][0]]))
                 return TRUE;
         }
         return FALSE;
     }
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_MATCH_LINES; i++)
     {
         if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][2]] && TestReelIconAttribute(biasIcon, icons[sThirdReelBiasCheckIndices[i][0]]))
             return TRUE;
@@ -1565,19 +1639,19 @@ static bool32 TestReelIconAttribute(s32 attr, s32 icon)
 {
     switch (attr)
     {
-    case SLOT_PAYOUT_NONE:
+    case PAYOUT_NONE:
         return icon ^ 4 ? TRUE : FALSE;
-    case SLOT_PAYOUT_CHERRIES2:
-    case SLOT_PAYOUT_CHERRIES3:
-        return icon == SLOT_IMAGE_CHERRIES ? TRUE : FALSE;
-    case SLOT_PAYOUT_MAGSHELL:
-        return icon == SLOT_IMAGE_MAGNEMITE || icon == SLOT_IMAGE_SHELLDER ? TRUE : FALSE;
-    case SLOT_PAYOUT_PIKAPSY:
-        return icon == SLOT_IMAGE_PIKACHU || icon == SLOT_IMAGE_PSYDUCK ? TRUE : FALSE;
-    case SLOT_PAYOUT_ROCKET:
-        return icon == SLOT_IMAGE_ROCKET ? TRUE : FALSE;
-    case SLOT_PAYOUT_7:
-        return icon == SLOT_IMAGE_7 ? TRUE : FALSE;
+    case PAYOUT_CHERRIES2:
+    case PAYOUT_CHERRIES3:
+        return icon == ICON_CHERRIES ? TRUE : FALSE;
+    case PAYOUT_MAGSHELL:
+        return icon == ICON_MAGNEMITE || icon == ICON_SHELLDER ? TRUE : FALSE;
+    case PAYOUT_PIKAPSY:
+        return icon == ICON_PIKACHU || icon == ICON_PSYDUCK ? TRUE : FALSE;
+    case PAYOUT_ROCKET:
+        return icon == ICON_ROCKET ? TRUE : FALSE;
+    case PAYOUT_7:
+        return icon == ICON_7 ? TRUE : FALSE;
     default:
         return FALSE;
     }
@@ -1588,18 +1662,18 @@ static u8 ReelIconToPayoutRank(s32 iconId)
     switch (iconId)
     {
     default:
-    case SLOT_IMAGE_CHERRIES:
-        return SLOT_PAYOUT_CHERRIES2;
-    case SLOT_IMAGE_MAGNEMITE:
-    case SLOT_IMAGE_SHELLDER:
-        return SLOT_PAYOUT_MAGSHELL;
-    case SLOT_IMAGE_PIKACHU:
-    case SLOT_IMAGE_PSYDUCK:
-        return SLOT_PAYOUT_PIKAPSY;
-    case SLOT_IMAGE_ROCKET:
-        return SLOT_PAYOUT_ROCKET;
-    case SLOT_IMAGE_7:
-        return SLOT_PAYOUT_7;
+    case ICON_CHERRIES:
+        return PAYOUT_CHERRIES2;
+    case ICON_MAGNEMITE:
+    case ICON_SHELLDER:
+        return PAYOUT_MAGSHELL;
+    case ICON_PIKACHU:
+    case ICON_PSYDUCK:
+        return PAYOUT_PIKAPSY;
+    case ICON_ROCKET:
+        return PAYOUT_ROCKET;
+    case ICON_7:
+        return PAYOUT_7;
     }
 }
 
@@ -1607,22 +1681,22 @@ static void CalcSlotBias(void)
 {
     u16 rval = Random() / 4;
     s32 i;
-    const u16 * biasChances = sReelBiasChances[sSlotMachineState->machineidx];
-    for (i = 0; i < 6; i++)
+    const u16 * biasChances = sReelBiasChances[sSlotMachineState->machineIdx];
+    for (i = 0; i < NUM_PAYOUT_TYPES - 1; i++)
     {
         if (rval < biasChances[i])
             break;
     }
-    if (sSlotMachineState->machineBias < SLOT_PAYOUT_ROCKET)
+    if (sSlotMachineState->machineBias < PAYOUT_ROCKET)
     {
         if (sSlotMachineState->biasCooldown == 0)
         {
-            if ((Random() & 0x3FFF) < biasChances[SLOT_PAYOUT_7])
+            if ((Random() & 0x3FFF) < biasChances[PAYOUT_7])
                 sSlotMachineState->biasCooldown = (Random() & 1) ? 5 : 60;
         }
         if (sSlotMachineState->biasCooldown != 0)
         {
-            if (i == 0 && (Random() & 0x3FFF) < 0x2CCC) // 70%
+            if (i == 0 && (Random() & 0x3FFF) < (int)(0.7 * 0x3FFF)) // 70%
                 sSlotMachineState->biasCooldown = (Random() & 1) ? 5 : 60;
             sSlotMachineState->biasCooldown--;
         }
@@ -1642,7 +1716,7 @@ static u16 CalcPayout(void)
     s32 reel1pos, reel2pos, reel3pos;
     s32 bestMatch;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_MATCH_LINES; i++)
         sSlotMachineState->winFlags[i] = FALSE;
 
     bestMatch = 0;
@@ -1653,20 +1727,20 @@ static u16 CalcPayout(void)
     for (i = 0; i < 3; i++)
     {
         reel1pos++;
-        if (reel1pos >= 21)
+        if (reel1pos >= REEL_LENGTH)
             reel1pos = 0;
         reel2pos++;
-        if (reel2pos >= 21)
+        if (reel2pos >= REEL_LENGTH)
             reel2pos = 0;
         reel3pos++;
-        if (reel3pos >= 21)
+        if (reel3pos >= REEL_LENGTH)
             reel3pos = 0;
         visibleIcons[0 * 3 + i] = sReelIconAnimByReelAndPos[0][reel1pos];
         visibleIcons[1 * 3 + i] = sReelIconAnimByReelAndPos[1][reel2pos];
         visibleIcons[2 * 3 + i] = sReelIconAnimByReelAndPos[2][reel3pos];
     }
     sSlotMachineState->payout = 0;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_MATCH_LINES; i++)
     {
         if (sSlotMachineState->bet >= sRowAttributes[i][ROWATTR_MINBET])
         {
@@ -1699,16 +1773,16 @@ static u8 GetPlayerBet(void)
     return sSlotMachineState->bet;
 }
 
-static bool32 GetWinFlagByLine(int a0)
+static bool32 GetWinFlagByLine(int lineId)
 {
-    return sSlotMachineState->winFlags[a0];
+    return sSlotMachineState->winFlags[lineId];
 }
 
 static bool32 LoadSpriteGraphicsAndAllocateManager(void)
 {
     s32 i;
 
-    for (i = 0; i < NELEMS(sSpriteSheets); i++)
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets); i++)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
     LoadSpritePalettes(sSpritePalettes);
     sSlotMachineGfxManager = Alloc(sizeof(*sSlotMachineGfxManager));
@@ -1731,13 +1805,11 @@ static void InitGfxManager(struct SlotMachineGfxManager * manager)
 {
     s32 i, j;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
         manager->field_00[i] = 0;
-        for (j = 0; j < 5; j++)
-        {
+        for (j = 0; j < REEL_LOAD_LENGTH; j++)
             manager->reelIconSprites[i][j] = NULL;
-        }
     }
 }
 
@@ -1747,9 +1819,9 @@ static void CreateReelIconSprites(void)
     s32 i, j;
     s32 spriteId;
     s32 animId;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < REEL_LOAD_LENGTH; j++)
         {
             spriteId = CreateSprite(&sSpriteTemplate_ReelIcons, 80 + 40 * i, 44 + 24 * j, 2);
             animId =  sReelIconAnimByReelAndPos[i][j];
@@ -1772,11 +1844,11 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
     s32 i, j;
     s32 reelPos, ypos;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
         reelPos = *reelPosPtr;
         ypos = *yposPtr * 8;
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < REEL_LOAD_LENGTH; j++)
         {
             sSlotMachineGfxManager->reelIconSprites[i][j]->y2 = ypos;
             {
@@ -1791,7 +1863,7 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
             }
             sSlotMachineGfxManager->reelIconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[sReelIconAnimByReelAndPos[i][reelPos]]);
             reelPos++;
-            if (reelPos >= 21)
+            if (reelPos >= REEL_LENGTH)
                 reelPos = 0;
         }
         reelPosPtr++;
@@ -1819,11 +1891,11 @@ static void CreateScoreDigitSprites(void)
     s32 i;
     s32 spriteId;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_DIGIT_SPRITES; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_Digits, 0x55 + 7 * i, 30, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_Digits, 85 + 7 * i, 30, 0);
         sSlotMachineGfxManager->creditDigitSprites[i] = &gSprites[spriteId];
-        spriteId = CreateSprite(&sSpriteTemplate_Digits, 0x85 + 7 * i, 30, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_Digits, 133 + 7 * i, 30, 0);
         sSlotMachineGfxManager->payoutDigitSprites[i] = &gSprites[spriteId];
     }
 }
@@ -1836,7 +1908,7 @@ static void UpdateCoinsDisplay(void)
     s32 divisor = 1000;
     s32 quotient;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_DIGIT_SPRITES; i++)
     {
         quotient = coins / divisor;
         StartSpriteAnim(sSlotMachineGfxManager->creditDigitSprites[i], quotient);
@@ -1850,11 +1922,9 @@ static void UpdateCoinsDisplay(void)
 
 static void CreateClefairySprites(void)
 {
-    s32 spriteId;
-
-    spriteId = CreateSprite(&sSpriteTemplate_Clefairy, 0x10, 0x88, 1);
+    s32 spriteId = CreateSprite(&sSpriteTemplate_Clefairy, 16, 136, 1);
     sSlotMachineGfxManager->clefairySprites[0] = &gSprites[spriteId];
-    spriteId = CreateSprite(&sSpriteTemplate_Clefairy, 0xE0, 0x88, 1);
+    spriteId = CreateSprite(&sSpriteTemplate_Clefairy, DISPLAY_WIDTH - 16, 136, 1);
     sSlotMachineGfxManager->clefairySprites[1] = &gSprites[spriteId];
     sSlotMachineGfxManager->clefairySprites[1]->hFlip = TRUE;
 }
@@ -1862,10 +1932,8 @@ static void CreateClefairySprites(void)
 static void SetClefairySpriteAnim(u8 animId)
 {
     s32 i;
-    for (i = 0; i < 2; i++)
-    {
+    for (i = 0; i < (int)ARRAY_COUNT(sSlotMachineGfxManager->clefairySprites); i++)
         StartSpriteAnim(sSlotMachineGfxManager->clefairySprites[i], animId);
-    }
 }
 
 static bool32 CreateSlotMachine(void)
@@ -1875,7 +1943,7 @@ static bool32 CreateSlotMachine(void)
     struct SlotMachineSetupTaskData * ptr = Alloc(sizeof(struct SlotMachineSetupTaskData));
     if (ptr == NULL)
         return FALSE;
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(ptr->tasks); i++)
         ptr->tasks[i].active = 0;
     ptr->yesNoMenuActive = FALSE;
     SetWordTaskArg(CreateTask(Task_SlotMachine, 2), 0, (uintptr_t)ptr);
@@ -1898,7 +1966,7 @@ static void Task_SlotMachine(u8 taskId)
     struct SlotMachineSetupTaskData * ptr = (void *)GetWordTaskArg(taskId, 0);
     s32 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(ptr->tasks); i++)
     {
         if (ptr->tasks[i].active)
             ptr->tasks[i].active = sSlotMachineSetupTasks[ptr->tasks[i].funcno](&ptr->tasks[i].state, ptr);
@@ -1958,7 +2026,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgPositions();
         ResetBgsAndClearDma3BusyFlags(FALSE);
-        InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         InitWindows(sWindowTemplates);
 
         SetBgTilemapBuffer(3, ptr->bg3TilemapBuffer);
@@ -1966,29 +2034,29 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         CopyBgTilemapBufferToVram(3);
 
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(2, sBg2Tiles_00, 0, 0x00, 0);
-        DecompressAndCopyTileDataToVram(2, sBg2Tiles_C0, 0, 0xC0, 0);
+        DecompressAndCopyTileDataToVram(2, sBg_Tiles, 0, 0x00, 0);
+        DecompressAndCopyTileDataToVram(2, sButtonPressed_Tiles, 0, 0xC0, 0);
         SetBgTilemapBuffer(2, ptr->bg2TilemapBuffer);
-        CopyToBgTilemapBuffer(2, sBg2Map, 0, 0x00);
+        CopyToBgTilemapBuffer(2, sBg_Tilemap, 0, 0x00);
         CopyBgTilemapBufferToVram(2);
-        LoadPalette(sBgPal_00, 0x00, 0xA0);
-        LoadPalette(sBgPal_50, 0x50, 0x20);
-        LoadPalette(sBgPal_70, 0x70, 0x60);
+        LoadPalette(sBg_Pal, 0x00, sizeof(sBg_Pal));
+        LoadPalette(sBgPal_MatchLines, PALSLOT_LINE_BET * 16, sizeof(sBgPal_MatchLines));
+        LoadPalette(sCombosWindow_Pal, 0x70, sizeof(sCombosWindow_Pal));
         LoadColor(RGB(30, 30, 31), pal);
         LoadUserWindowGfx2(0, 0x00A, 0xD0);
         LoadStdWindowGfxOnBg(0, 0x001, 0xF0);
 
         SetBgTilemapBuffer(0, ptr->bg0TilemapBuffer);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 32, 30);
-        DecompressAndCopyTileDataToVram(1, sBg1Tiles, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(1, sBg1Map, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(1, sCombosWindow_Tiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sCombosWindow_Tilemap, 0, 0, 1);
         CopyBgTilemapBufferToVram(1);
 
         LoadPalette(GetTextWindowPalette(2), 0xE0, 0x20);
         FillWindowPixelBuffer(1, 0xFF);
         PutWindowTilemap(1);
 
-        x = 236 - GetStringWidth(FONT_SMALL, gString_SlotMachineControls, 0);
+        x = DISPLAY_WIDTH - 4 - GetStringWidth(FONT_SMALL, gString_SlotMachineControls, 0);
         textColor[0] = TEXT_DYNAMIC_COLOR_6;
         textColor[1] = TEXT_COLOR_WHITE;
         textColor[2] = TEXT_COLOR_DARK_GRAY;
@@ -2278,20 +2346,20 @@ static void SetLineStatesByBet(u16 * bgTilemapBuffer)
     switch (GetPlayerBet())
     {
     case 0:
-        SetLineState(bgTilemapBuffer, 0, 4);
-        SetLineState(bgTilemapBuffer, 1, 4);
-        SetLineState(bgTilemapBuffer, 2, 4);
-        SetLineState(bgTilemapBuffer, 3, 4);
-        SetLineState(bgTilemapBuffer, 4, 4);
+        SetLineState(bgTilemapBuffer, 0, PALSLOT_LINE_NORMAL);
+        SetLineState(bgTilemapBuffer, 1, PALSLOT_LINE_NORMAL);
+        SetLineState(bgTilemapBuffer, 2, PALSLOT_LINE_NORMAL);
+        SetLineState(bgTilemapBuffer, 3, PALSLOT_LINE_NORMAL);
+        SetLineState(bgTilemapBuffer, 4, PALSLOT_LINE_NORMAL);
         break;
     case 3:
-        SetLineState(bgTilemapBuffer, 0, 5);
-        SetLineState(bgTilemapBuffer, 4, 5);
+        SetLineState(bgTilemapBuffer, 0, PALSLOT_LINE_BET);
+        SetLineState(bgTilemapBuffer, 4, PALSLOT_LINE_BET);
     case 2:
-        SetLineState(bgTilemapBuffer, 1, 5);
-        SetLineState(bgTilemapBuffer, 3, 5);
+        SetLineState(bgTilemapBuffer, 1, PALSLOT_LINE_BET);
+        SetLineState(bgTilemapBuffer, 3, PALSLOT_LINE_BET);
     case 1:
-        SetLineState(bgTilemapBuffer, 2, 5);
+        SetLineState(bgTilemapBuffer, 2, PALSLOT_LINE_BET);
         break;
     }
 }
@@ -2318,11 +2386,11 @@ static void Task_FlashWinningLine(u8 taskId)
     switch (data[0])
     {
     case 0:
-        LoadPalette(sBgPal_50, 0x60, 0x20);
-        for (i = 0; i < 5; i++)
+        LoadPalette(sBgPal_MatchLines, PALSLOT_LINE_MATCH * 16, sizeof(sBgPal_MatchLines));
+        for (i = 0; i < NUM_MATCH_LINES; i++)
         {
             if (GetWinFlagByLine(i))
-                SetLineState(GetBgTilemapBuffer(2), i, 6);
+                SetLineState(GetBgTilemapBuffer(2), i, PALSLOT_LINE_MATCH);
         }
         CopyBgTilemapBufferToVram(2);
         data[0]++;
@@ -2331,7 +2399,7 @@ static void Task_FlashWinningLine(u8 taskId)
         if (data[1] == 0)
         {
             u16 y = gSineTable[data[2]] >> 7;
-            LoadPalette(&sBgPal_VictoryFlash[16 * y], 0x10, 0x20);
+            LoadPalette(&sBgPal_PayoutLight[y], 0x10, sizeof(sBgPal_PayoutLight[0]));
             data[2] += 32;
             data[2] &= 0x7F;
             data[1] = 8;
@@ -2344,7 +2412,7 @@ static void Task_FlashWinningLine(u8 taskId)
             data[4] += 8;
             data[4] &= 0x7F;
             data[5] = gSineTable[data[4]] >> 5;
-            BlendPalettes(0x00000040, data[5], RGB_BLACK);
+            BlendPalettes(1 << PALSLOT_LINE_MATCH, data[5], RGB_BLACK);
         }
         else
         {
@@ -2354,22 +2422,24 @@ static void Task_FlashWinningLine(u8 taskId)
                 data[4] = 0;
                 data[5]++;
                 data[5] &= 1;
-                BlendPalettes(0x00000040, data[5] * 8, RGB_BLACK);
+                BlendPalettes(1 << PALSLOT_LINE_MATCH, data[5] * 8, RGB_BLACK);
             }
         }
 
-        for (i = 0; i < NELEMS(sWInningLineFlashPalIdxs); i++)
-        {
-            gPlttBufferFaded[sWInningLineFlashPalIdxs[i] + 0x60] = gPlttBufferUnfaded[sWInningLineFlashPalIdxs[i] + 0x60];
-        }
+        for (i = 0; i < ARRAY_COUNT(sWinningLineFlashPalIdxs); i++)
+            gPlttBufferFaded[sWinningLineFlashPalIdxs[i] + PALSLOT_LINE_MATCH * 16] = gPlttBufferUnfaded[sWinningLineFlashPalIdxs[i] + PALSLOT_LINE_MATCH * 16];
         break;
     case 2:
-        for (i = 0; i < 5; i++)
+        // Restore match lines to normal color 
+        for (i = 0; i < NUM_MATCH_LINES; i++)
         {
             if (GetWinFlagByLine(i))
-                SetLineState(GetBgTilemapBuffer(2), i, 4);
+                SetLineState(GetBgTilemapBuffer(2), i, PALSLOT_LINE_NORMAL);
         }
-        LoadPalette(sBgPal_10, 0x10, 0x20);
+        
+        // Restore payout lights to normal color
+        LoadPalette(&sBg_Pal[1], 0x10, sizeof(sBg_Pal[1]));
+
         CopyBgTilemapBufferToVram(2);
         data[0]++;
         break;
@@ -2408,9 +2478,9 @@ static void InitReelButtonTileMem(void)
     struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
     u16 * buffer = GetBgTilemapBuffer(2);
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < NUM_BUTTON_TILES; j++)
         {
             u16 idx = sReelButtonMapTileIdxs[i][j];
             data->buttonReleasedTiles[i][j] = buffer[idx];
@@ -2421,12 +2491,12 @@ static void InitReelButtonTileMem(void)
 
 static void SetReelButtonPressed(u8 reel)
 {
-    if (reel < 3)
+    if (reel < NUM_REELS)
     {
         s32 i;
         struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
         u16 * buffer = GetBgTilemapBuffer(2);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < NUM_BUTTON_TILES; i++)
         {
             u16 idx = sReelButtonMapTileIdxs[reel][i];
             buffer[idx] = data->buttonPressedTiles[reel][i];
@@ -2440,9 +2510,9 @@ static void ReleaseReelButtons(void)
     struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
     u16 * buffer = GetBgTilemapBuffer(2);
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_REELS; i++)
     {
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < NUM_BUTTON_TILES; j++)
         {
             u16 idx = sReelButtonMapTileIdxs[i][j];
             buffer[idx] = data->buttonReleasedTiles[i][j];

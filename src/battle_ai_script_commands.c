@@ -1113,8 +1113,8 @@ static void Cmd_count_alive_pokemon(void)
     {
         if (i != battlerOnField1 && i != battlerOnField2
          && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
         {
             AI_THINKING_STRUCT->funcResult++;
         }
@@ -1165,25 +1165,25 @@ static void Cmd_get_ability(void)
             return;
         }
 
-        if (gBaseStats[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
+        if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
         {
-            if (gBaseStats[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
+            if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[1] != ABILITY_NONE)
             {
                 // AI has no knowledge of opponent, so it guesses which ability.
                 if (Random() % 2)
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[0];
+                    AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0];
                 else
-                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[1];
+                    AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1];
             }
             else
             {
-                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[0];
+                AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[0];
             }
         }
         else
         {
              // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
-            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[battlerId].species].abilities[1];
+            AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1];
         }
     }
     else

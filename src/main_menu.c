@@ -120,8 +120,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
     [MAIN_MENU_WINDOW_COUNT] = DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sBgPal00[] = INCBIN_U16("graphics/main_menu/unk_8234648.gbapal");
-static const u16 sBgPal15[] = INCBIN_U16("graphics/main_menu/unk_8234668.gbapal");
+static const u16 sBg_Pal[] = INCBIN_U16("graphics/main_menu/bg.gbapal");
+static const u16 sTextbox_Pal[] = INCBIN_U16("graphics/main_menu/textbox.gbapal");
 
 static const u8 sTextColor1[] = { 10, 11, 12 };
 
@@ -196,8 +196,8 @@ static bool32 MainMenuGpuInit(u8 a0)
     ChangeBgY(2, 0, 0);
     InitWindows(sWindowTemplate);
     DeactivateAllTextPrinters();
-    LoadPalette(sBgPal00, 0x00, 0x20);
-    LoadPalette(sBgPal15, 0xF0, 0x20);
+    LoadPalette(sBg_Pal, 0x00, 0x20);
+    LoadPalette(sTextbox_Pal, 0xF0, 0x20);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     SetGpuReg(REG_OFFSET_WININ, 0);

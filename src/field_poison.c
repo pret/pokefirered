@@ -12,7 +12,7 @@
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
 {
-    u16 species = GetMonData(pokemon, MON_DATA_SPECIES2);
+    u16 species = GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
     if (species == SPECIES_NONE || species == SPECIES_EGG)
         return FALSE;
     return TRUE;
@@ -62,7 +62,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             {
                 FaintFromFieldPoison(tPartyId);
                 ShowFieldMessage(gText_PkmnFainted3);
-                data[0]++;
+                tState++;
                 return;
             }
         }

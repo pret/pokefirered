@@ -24,15 +24,15 @@ EWRAM_DATA u8 gGlobalFieldTintMode = QL_TINT_NONE;
 static const struct ConnectionFlags sDummyConnectionFlags = {};
 
 static void InitMapLayoutData(struct MapHeader *);
-static void InitBackupMapLayoutData(u16 *, u16, u16);
+static void InitBackupMapLayoutData(const u16 *, u16, u16);
 static void InitBackupMapLayoutConnections(struct MapHeader *);
 static void FillSouthConnection(struct MapHeader const *, struct MapHeader const *, s32);
 static void FillNorthConnection(struct MapHeader const *, struct MapHeader const *, s32);
 static void FillWestConnection(struct MapHeader const *, struct MapHeader const *, s32);
 static void FillEastConnection(struct MapHeader const *, struct MapHeader const *, s32);
 static void LoadSavedMapView(void);
-static struct MapConnection *GetIncomingConnection(u8, s32, s32);
-static bool8 IsPosInIncomingConnectingMap(u8, s32, s32, struct MapConnection *);
+static const struct MapConnection *GetIncomingConnection(u8, s32, s32);
+static bool8 IsPosInIncomingConnectingMap(u8, s32, s32, const struct MapConnection *);
 static bool8 IsCoordInIncomingConnectingMap(s32, s32, s32, s32);
 static u32 GetAttributeByMetatileIdAndMapLayout(const struct MapLayout *, u16, u8);
 
@@ -82,7 +82,7 @@ static const u8 sMetatileAttrShifts[METATILE_ATTRIBUTE_COUNT] = {
     [METATILE_ATTRIBUTE_7]              = 31
 };
 
-const struct MapHeader * GetMapHeaderFromConnection(struct MapConnection * connection)
+const struct MapHeader * GetMapHeaderFromConnection(const struct MapConnection * connection)
 {
     return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
@@ -112,7 +112,7 @@ static void InitMapLayoutData(struct MapHeader * mapHeader)
     InitBackupMapLayoutConnections(mapHeader);
 }
 
-static void InitBackupMapLayoutData(u16 *map, u16 width, u16 height)
+static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
 {
     s32 y;
     u16 *dest = VMap.map;
@@ -129,7 +129,7 @@ static void InitBackupMapLayoutData(u16 *map, u16 width, u16 height)
 static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 {
     s32 count;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     s32 i;
 
     gMapConnectionFlags = sDummyConnectionFlags;
@@ -173,7 +173,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 static void FillConnection(s32 x, s32 y, const struct MapHeader *connectedMapHeader, s32 x2, s32 y2, s32 width, s32 height)
 {
     s32 i;
-    u16 *src;
+    const u16 *src;
     u16 *dest;
     s32 mapWidth;
 
@@ -628,7 +628,7 @@ bool32 CanCameraMoveInDirection(s32 direction)
     return TRUE;
 }
 
-static void SetPositionFromConnection(struct MapConnection *connection, int direction, s32 x, s32 y)
+static void SetPositionFromConnection(const struct MapConnection *connection, int direction, s32 x, s32 y)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -656,7 +656,7 @@ static void SetPositionFromConnection(struct MapConnection *connection, int dire
 bool8 CameraMove(s32 x, s32 y)
 {
     s32 direction;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     s32 old_x, old_y;
     gCamera.active = FALSE;
     direction = GetPostCameraMoveMapBorderId(x, y);
@@ -683,10 +683,10 @@ bool8 CameraMove(s32 x, s32 y)
     return gCamera.active;
 }
 
-struct MapConnection *GetIncomingConnection(u8 direction, s32 x, s32 y)
+const struct MapConnection *GetIncomingConnection(u8 direction, s32 x, s32 y)
 {
     s32 count;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     const struct MapConnections *connections = gMapHeader.connections;
     s32 i;
 
@@ -705,7 +705,7 @@ struct MapConnection *GetIncomingConnection(u8 direction, s32 x, s32 y)
 
 }
 
-static bool8 IsPosInIncomingConnectingMap(u8 direction, s32 x, s32 y, struct MapConnection *connection)
+static bool8 IsPosInIncomingConnectingMap(u8 direction, s32 x, s32 y, const struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -742,7 +742,7 @@ static bool32 IsCoordInConnectingMap(s32 coord, s32 max)
     return FALSE;
 }
 
-static s32 IsPosInConnectingMap(struct MapConnection *connection, s32 x, s32 y)
+static s32 IsPosInConnectingMap(const struct MapConnection *connection, s32 x, s32 y)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -758,10 +758,10 @@ static s32 IsPosInConnectingMap(struct MapConnection *connection, s32 x, s32 y)
     return FALSE;
 }
 
-struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
+const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
 {
     s32 count;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     s32 i;
     u8 direction;
     if (!gMapHeader.connections)

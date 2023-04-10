@@ -67,9 +67,9 @@ static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *);
 static void RemoveObjectEventInternal(struct ObjectEvent *);
 static u16 GetObjectEventFlagIdByObjectEventId(u8);
 static void UpdateObjectEventVisibility(struct ObjectEvent *, struct Sprite *);
-static void MakeObjectTemplateFromObjectEventTemplate(struct ObjectEventTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
+static void MakeObjectTemplateFromObjectEventTemplate(const struct ObjectEventTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 static void GetObjectEventMovingCameraOffset(s16 *, s16 *);
-static struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8);
+static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8);
 static void LoadObjectEventPalette(u16);
 static void RemoveObjectEventIfOutsideView(struct ObjectEvent *);
 static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y);
@@ -84,13 +84,13 @@ static void ObjectCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
 static void CameraObject_2(struct Sprite *);
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count);
+static const struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, const struct ObjectEventTemplate *templates, u8 count);
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
-static bool8 ShouldInitObjectEventStateFromTemplate(struct ObjectEventTemplate *, u8, s16, s16);
-static bool8 TemplateIsObstacleAndWithinView(struct ObjectEventTemplate *, s16, s16);
-static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(struct ObjectEventTemplate *, s16, s16);
-static void SetHideObstacleFlag(struct ObjectEventTemplate *);
+static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemplate *, u8, s16, s16);
+static bool8 TemplateIsObstacleAndWithinView(const struct ObjectEventTemplate *, s16, s16);
+static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(const struct ObjectEventTemplate *, s16, s16);
+static void SetHideObstacleFlag(const struct ObjectEventTemplate *);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
 static u8 MovementType_RaiseHandAndStop_Callback(struct ObjectEvent *, struct Sprite *);
@@ -1309,7 +1309,7 @@ static u8 GetObjectEventIdByLocalId(u8 localId)
     return OBJECT_EVENTS_COUNT;
 }
 
-static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup)
+static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup)
 {
     struct ObjectEvent *objectEvent;
     const struct MapHeader *mapHeader;
@@ -1388,7 +1388,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     return objectEventId;
 }
 
-static bool8 ShouldInitObjectEventStateFromTemplate(struct ObjectEventTemplate *template, bool8 isClone, s16 x, s16 y)
+static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, bool8 isClone, s16 x, s16 y)
 {
     if (isClone && !TemplateIsObstacleAndWithinView(template, x, y))
         return FALSE;
@@ -1399,7 +1399,7 @@ static bool8 ShouldInitObjectEventStateFromTemplate(struct ObjectEventTemplate *
     return TRUE;
 }
 
-static bool8 TemplateIsObstacleAndWithinView(struct ObjectEventTemplate *template, s16 x, s16 y)
+static bool8 TemplateIsObstacleAndWithinView(const struct ObjectEventTemplate *template, s16 x, s16 y)
 {
     if (template->graphicsId == OBJ_EVENT_GFX_CUT_TREE || template->graphicsId == OBJ_EVENT_GFX_ROCK_SMASH_ROCK)
     {
@@ -1422,7 +1422,7 @@ static bool8 TemplateIsObstacleAndWithinView(struct ObjectEventTemplate *templat
     return TRUE;
 }
 
-static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(struct ObjectEventTemplate *template, s16 unused1, s16 unused2)
+static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(const struct ObjectEventTemplate *template, s16 unused1, s16 unused2)
 {
     if (IsMapTypeOutdoors(GetCurrentMapType()))
     {
@@ -1459,7 +1459,7 @@ static bool8 TemplateIsObstacleAndVisibleFromConnectingMap(struct ObjectEventTem
     return TRUE;
 }
 
-static void SetHideObstacleFlag(struct ObjectEventTemplate *template)
+static void SetHideObstacleFlag(const struct ObjectEventTemplate *template)
 {
     if (template->flagId >= FLAG_TEMP_11 && template->flagId <= FLAG_TEMP_1F)
         FlagSet(template->flagId);
@@ -1549,7 +1549,7 @@ void Unref_RemoveAllObjectEventsExceptPlayer(void)
     }
 }
 
-static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 spriteId;
     u8 objectEventId;
@@ -1599,7 +1599,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     return objectEventId;
 }
 
-static u8 TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 objectEventId;
     struct SpriteTemplate spriteTemplate;
@@ -1653,7 +1653,7 @@ int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 
 
 u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    struct ObjectEventTemplate *objectEventTemplate;
+    const struct ObjectEventTemplate *objectEventTemplate;
     s16 cameraX, cameraY;
 
     objectEventTemplate = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
@@ -1691,7 +1691,7 @@ static void CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(u16 graphics
     CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, sMovementTypeCallbacks[movementType], spriteTemplate, subspriteTables);
 }
 
-static void MakeObjectTemplateFromObjectEventTemplate(struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
+static void MakeObjectTemplateFromObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
 {
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(objectEventTemplate->graphicsId, objectEventTemplate->objUnion.normal.movementType, spriteTemplate, subspriteTables);
 }
@@ -2516,7 +2516,7 @@ const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId)
 
 static u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    struct ObjectEventTemplate *obj = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+    const struct ObjectEventTemplate *obj = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
 #ifdef UBFIX
     // BUG: The function may return NULL, and attempting to read from NULL may freeze the game using modern compilers.
     if (obj == NULL)
@@ -2571,9 +2571,9 @@ u8 GetObjectEventBerryTreeId(u8 objectEventId)
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
 
-static struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    struct ObjectEventTemplate *templates;
+    const struct ObjectEventTemplate *templates;
     const struct MapHeader *mapHeader;
     u8 count;
 
@@ -2591,7 +2591,7 @@ static struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 loca
     return FindObjectEventTemplateByLocalId(localId, templates, count);
 }
 
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count)
+static const struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, const struct ObjectEventTemplate *templates, u8 count)
 {
     u8 i;
 

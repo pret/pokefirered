@@ -302,8 +302,8 @@ static void SetBattlePartyIds(void)
                     if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
                          && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG))
                         {
                             gBattlerPartyIndexes[i] = j;
@@ -313,8 +313,8 @@ static void SetBattlePartyIds(void)
                     else
                     {
                         if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
                          && !GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG))
                         {
                             gBattlerPartyIndexes[i] = j;
@@ -328,7 +328,7 @@ static void SetBattlePartyIds(void)
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE  // Probably a typo by Game Freak. The rest use SPECIES2.
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
                          && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG)
                          && gBattlerPartyIndexes[i - 2] != j)
                         {
@@ -339,8 +339,8 @@ static void SetBattlePartyIds(void)
                     else
                     {
                         if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
                          && !GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG)
                          && gBattlerPartyIndexes[i - 2] != j)
                         {

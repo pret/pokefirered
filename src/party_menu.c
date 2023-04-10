@@ -110,7 +110,7 @@ enum
 
 struct PartyMenuBoxInfoRects
 {
-    void (*blitFunc)(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 isEgg);
+    void (*blitFunc)(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP);
     u8 dimensions[24];
     u8 descTextLeft;
     u8 descTextTop;
@@ -145,8 +145,8 @@ struct PartyMenuBox
     u8 statusSpriteId;
 };
 
-static void BlitBitmapToPartyWindow_LeftColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 isEgg);
-static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 isEgg);
+static void BlitBitmapToPartyWindow_LeftColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP);
+static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP);
 static void CursorCB_Summary(u8 taskId);
 static void CursorCB_Switch(u8 taskId);
 static void CursorCB_Cancel1(u8 taskId);
@@ -2184,35 +2184,35 @@ static void BlitBitmapToPartyWindow(u8 windowId, const u8 *tileNums, u8 menuBoxW
     }
 }
 
-static void BlitBitmapToPartyWindow_LeftColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 isEgg)
+static void BlitBitmapToPartyWindow_LeftColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP)
 {
     if (width == 0 && height == 0)
     {
         width = 10;
         height = 7;
     }
-    if (!isEgg)
-        BlitBitmapToPartyWindow(windowId, sMainSlotTileNums, 10, x, y, width, height);
+    if (!hideHP)
+        BlitBitmapToPartyWindow(windowId, sSlotTilemap_Main, 10, x, y, width, height);
     else
-        BlitBitmapToPartyWindow(windowId, sMainSlotTileNums_Egg, 10, x, y, width, height);
+        BlitBitmapToPartyWindow(windowId, sSlotTilemap_MainNoHP, 10, x, y, width, height);
 }
 
-static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 isEgg)
+static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP)
 {
     if (width == 0 && height == 0)
     {
         width = 18;
         height = 3;
     }
-    if (!isEgg)
-        BlitBitmapToPartyWindow(windowId, sOtherSlotsTileNums, 18, x, y, width, height);
+    if (!hideHP)
+        BlitBitmapToPartyWindow(windowId, sSlotTilemap_Wide, 18, x, y, width, height);
     else
-        BlitBitmapToPartyWindow(windowId, sOtherSlotsTileNums_Egg, 18, x, y, width, height);
+        BlitBitmapToPartyWindow(windowId, sSlotTilemap_WideNoHP, 18, x, y, width, height);
 }
 
 static void DrawEmptySlot(u8 windowId)
 {
-    BlitBitmapToPartyWindow(windowId, sEmptySlotTileNums, 18, 0, 0, 18, 3);
+    BlitBitmapToPartyWindow(windowId, sSlotTilemap_WideEmpty, 18, 0, 0, 18, 3);
 }
 
 #define LOAD_PARTY_BOX_PAL(paletteIds, paletteOffsets)                                    \
@@ -2652,7 +2652,7 @@ static void CreatePartyMonIconSprite(struct Pokemon *mon, struct PartyMenuBox *m
     // If in a multi battle, show partners Deoxys icon as Normal forme
     if (IsMultiBattle() == TRUE && gMain.inBattle)
         handleDeoxys = (sMultiBattlePartnersPartyMask[slot] ^ handleDeoxys) ? TRUE : FALSE;
-    species2 = GetMonData(mon, MON_DATA_SPECIES2);
+    species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     CreatePartyMonIconSpriteParameterized(species2, GetMonData(mon, MON_DATA_PERSONALITY), menuBox, 1, handleDeoxys);
     UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
 }
@@ -3357,8 +3357,8 @@ static void SetSwitchedPartyOrderQuestLogEvent(void)
 {
     struct QuestLogEvent_SwitchedPartyOrder * data = Alloc(sizeof(*data));
 
-    data->species1 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
-    data->species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId2], MON_DATA_SPECIES2);
+    data->species1 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES_OR_EGG);
+    data->species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId2], MON_DATA_SPECIES_OR_EGG);
     SetQuestLogEvent(QL_EVENT_SWITCHED_PARTY_ORDER, (const u16 *)data);
     Free(data);
 }
@@ -3847,11 +3847,11 @@ static void CursorCB_Store(u8 taskId)
 // Register mon for the Trading Board in Union Room
 static void CursorCB_Register(u8 taskId)
 {
-    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
+    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES_OR_EGG);
     u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
-    u8 isEventLegal = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_EVENT_LEGAL);
+    u8 isModernFatefulEncounter = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MODERN_FATEFUL_ENCOUNTER);
 
-    switch (CanRegisterMonForTradingBoard(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), species2, species, isEventLegal))
+    switch (CanRegisterMonForTradingBoard(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), species2, species, isModernFatefulEncounter))
     {
     case CANT_REGISTER_MON:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
@@ -3874,10 +3874,10 @@ static void CursorCB_Register(u8 taskId)
 
 static void CursorCB_Trade1(u8 taskId)
 {
-    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
+    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES_OR_EGG);
     u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
-    u8 isEventLegal = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_EVENT_LEGAL);
-    u32 stringId = GetUnionRoomTradeMessageId(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), gRfuPartnerCompatibilityData, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, isEventLegal);
+    u8 isModernFatefulEncounter = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MODERN_FATEFUL_ENCOUNTER);
+    u32 stringId = GetUnionRoomTradeMessageId(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), gRfuPartnerCompatibilityData, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, isModernFatefulEncounter);
 
     if (stringId != UR_TRADE_MSG_NONE)
     {
@@ -4133,7 +4133,7 @@ static void SetSwappedHeldItemQuestLogEvent(struct Pokemon *mon, u16 item, u16 i
 {
     struct QuestLogEvent_SwappedHeldItem *data = Alloc(sizeof(*data));
 
-    data->species = GetMonData(mon, MON_DATA_SPECIES2);
+    data->species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     data->takenItemId = item;
     data->givenItemId = item2;
     if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
@@ -4147,7 +4147,7 @@ static void SetUsedFieldMoveQuestLogEvent(struct Pokemon *mon, u8 fieldMove)
 {
     struct QuestLogEvent_FieldMove *data = Alloc(sizeof(*data));
 
-    data->species = GetMonData(mon, MON_DATA_SPECIES2);
+    data->species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     data->fieldMove = fieldMove;
     switch (data->fieldMove)
     {
@@ -4181,7 +4181,7 @@ void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData)
     Free(map);
 
     data = Alloc(sizeof(*data));
-    data->species = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_SPECIES2);
+    data->species = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_SPECIES_OR_EGG);
     data->fieldMove = FIELD_MOVE_FLY;
     data->mapSec = mapHeader->regionMapSectionId;
     SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (const u16 *)data);
@@ -5336,7 +5336,7 @@ u8 GetItemEffectType(u16 item)
         itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
         itemEffect = gItemEffectTable[item - ITEM_POTION];
-    if ((itemEffect[0] & (ITEM0_HIGH_CRIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_MIST))
+    if ((itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)
         return ITEM_EFFECT_SACRED_ASH;

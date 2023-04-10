@@ -2,6 +2,7 @@ TILESETGFXDIR := data/tilesets
 FONTGFXDIR := graphics/fonts
 FAMECHECKERGFXDIR := graphics/fame_checker
 INTERFACEGFXDIR := graphics/interface
+PARTYMENUGFXDIR := graphics/party_menu
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
 UNKNOWNGFXDIR := graphics/unknown
@@ -17,7 +18,6 @@ EVENTOBJGFXDIR := graphics/object_events
 FIELDEFFECTSGFXDIR := graphics/field_effects
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
-SLOTMACHINEGFXDIR := graphics/slot_machine
 TEACHYTVGFXDIR := graphics/teachy_tv
 SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
@@ -31,6 +31,7 @@ HALLOFFAMEGFXDIR := graphics/hall_of_fame
 MAPPREVIEWGFXDIR := graphics/map_preview
 NAMINGGFXDIR := graphics/naming_screen
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
+JPCONTESTGFXDIR := graphics/contest/japanese
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -158,20 +159,20 @@ $(BATINTGFXDIR)/level_up_banner.4bpp: %.4bpp: %.png
 $(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox1.gbapal $(BATINTGFXDIR)/textbox2.gbapal
 	cat $^ > $@
 
-$(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_floor.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_symbols.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_meter.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_classes.4bpp \
-								  $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
+$(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
+								  $(JPCONTESTGFXDIR)/floor.4bpp \
+								  $(JPCONTESTGFXDIR)/frame_2.4bpp \
+								  $(JPCONTESTGFXDIR)/symbols.4bpp \
+								  $(JPCONTESTGFXDIR)/meter.4bpp \
+								  $(JPCONTESTGFXDIR)/classes.4bpp \
+								  $(JPCONTESTGFXDIR)/numbers_2.4bpp
 	@cat $^ >$@
 
-$(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp \
-									$(UNUSEDGFXDIR)/old_contest_2_2.4bpp
+$(JPCONTESTGFXDIR)/composite_2.4bpp: $(JPCONTESTGFXDIR)/interface.4bpp \
+									$(JPCONTESTGFXDIR)/audience.4bpp
 	@cat $^ >$@
 
-$(UNKNOWNGFXDIR)/unknown_D196E4.4bpp: %.4bpp: %.png
+$(JPCONTESTGFXDIR)/voltage.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36 -Wnum_tiles
 
 $(BTLANMSPRGFXDIR)/ice_crystals.4bpp: $(BTLANMSPRGFXDIR)/ice_crystals_0.4bpp \
@@ -193,13 +194,13 @@ $(BTLANMSPRGFXDIR)/spark.4bpp: $(BTLANMSPRGFXDIR)/spark_0.4bpp \
 						  $(BTLANMSPRGFXDIR)/spark_1.4bpp
 	@cat $^ >$@
 
-$(MASKSGFXDIR)/unknown_D2EC24.4bpp: %.4bpp: %.png
+$(MASKSGFXDIR)/unused_level_up.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 14 -Wnum_tiles
 
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 16 -Wnum_tiles
 
-$(INTERFACEGFXDIR)/party_menu_misc.4bpp: %.4bpp: %.png
+$(PARTYMENUGFXDIR)/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
@@ -243,10 +244,6 @@ $(ROULETTEGFXDIR)/poke_icons2.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
 									$(ROULETTEGFXDIR)/azurill.4bpp \
 									$(ROULETTEGFXDIR)/skitty.4bpp \
 									$(ROULETTEGFXDIR)/makuhita.4bpp
-	@cat $^ >$@
-
-$(SLOTMACHINEGFXDIR)/reel_time_gfx.4bpp: $(SLOTMACHINEGFXDIR)/reel_time_pikachu.4bpp \
-										 $(SLOTMACHINEGFXDIR)/reel_time_machine.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/intro_birch_beauty.4bpp: %.4bpp: %.png
@@ -462,11 +459,14 @@ graphics/link/321start.4bpp: %.4bpp: %.png
 $(TEXTWINDOWGFXDIR)/signpost.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19 -Wnum_tiles
 
-$(SLOTMACHINEGFXDIR)/unk_8466620.4bpp: %.4bpp: %.png
+$(SLOTMACHINEGFXDIR)/firered/combos_window.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 66 -Wnum_tiles
 
-$(SLOTMACHINEGFXDIR)/unk_84659d0.4bpp: %.4bpp: %.png
+$(SLOTMACHINEGFXDIR)/firered/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 138 -Wnum_tiles
+
+$(SLOTMACHINEGFXDIR)/leafgreen/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 134 -Wnum_tiles
 
 $(TEACHYTVGFXDIR)/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles
@@ -482,9 +482,6 @@ $(TITLESCREENGFXDIR)/firered/box_art_mon.4bpp: %.4bpp: %.png
 
 $(TITLESCREENGFXDIR)/leafgreen/box_art_mon.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 123 -Wnum_tiles
-
-$(CREDITSGFXDIR)/unk_8EAE548.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 77 -Wnum_tiles
 
 POKEDEXAREAMARKERSDATADIR := graphics/pokedex/area_markers
 
@@ -506,7 +503,7 @@ graphics/pokemon/heracross/unk_icon.4bpp: %.4bpp: %.png
 graphics/misc/emoticons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(ITEMMENUGFXDIR)/bag_tiles.4bpp: %.4bpp: %.png
+$(ITEMMENUGFXDIR)/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
 
 $(INTROGFXDIR)/scene_1/grass.4bpp: %.4bpp: %.png

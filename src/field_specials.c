@@ -199,7 +199,7 @@ bool8 PlayerHasGrassPokemonInParty(void)
         )
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
-            if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
+            if (gSpeciesInfo[species].types[0] == TYPE_GRASS || gSpeciesInfo[species].types[1] == TYPE_GRASS)
                 return TRUE;
         }
     }
@@ -423,7 +423,7 @@ bool8 IsStarterFirstStageInParty(void)
     u8 i;
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == species)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == species)
             return TRUE;
     }
     return FALSE;
@@ -515,7 +515,7 @@ u8 GetLeadMonIndex(void)
     for (i = 0; i < partyCount; i++)
     {
         pokemon = &gPlayerParty[i];
-        if (GetMonData(pokemon, MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(pokemon, MON_DATA_SPECIES2, NULL) != SPECIES_NONE)
+        if (GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG && GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
             return i;
     }
     return 0;
@@ -523,7 +523,7 @@ u8 GetLeadMonIndex(void)
 
 u16 GetPartyMonSpecies(void)
 {
-    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
 }
 
 bool8 IsMonOTNameNotPlayers(void)
@@ -1718,7 +1718,7 @@ void UpdateTrainerCardPhotoIcons(void)
     partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
-        species[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);
+        species[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
         personality[i] = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL);
     }
     VarSet(VAR_TRAINER_CARD_MON_ICON_1, SpeciesToMailSpecies(species[0], personality[0]));
@@ -1752,15 +1752,15 @@ u16 StickerManGetBragFlags(void)
 
 u16 GetHiddenItemAttr(u32 hiddenItem, u8 attr)
 {
-    if (attr == 0)
-        return hiddenItem & 0xFFFF;
-    else if (attr == 1)
-        return ((hiddenItem >> 16) & 0xFF) + 1000;
-    else if (attr == 2)
-        return (hiddenItem >> 24) & 0x7F;
-    else if (attr == 3)
-        return (hiddenItem >> 31) & 0x01;
-    else
+    if (attr == HIDDEN_ITEM_ITEM)
+        return GET_HIDDEN_ITEM_ITEM(hiddenItem);
+    else if (attr == HIDDEN_ITEM_FLAG)
+        return GET_HIDDEN_ITEM_FLAG(hiddenItem) + FLAG_HIDDEN_ITEMS_START;
+    else if (attr == HIDDEN_ITEM_QUANTITY)
+        return GET_HIDDEN_ITEM_QUANTITY(hiddenItem);
+    else if (attr == HIDDEN_ITEM_UNDERFOOT)
+        return GET_HIDDEN_ITEM_UNDERFOOT(hiddenItem);
+    else // Invalid
         return 1;
 }
 
@@ -1770,7 +1770,7 @@ bool8 DoesPlayerPartyContainSpecies(void)
     u8 i;
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004)
             return TRUE;
     }
     return FALSE;
@@ -2079,30 +2079,30 @@ void DaisyMassageServices(void)
 }
 
 static const u16 sEliteFourLightingPalettes[][16] = {
-    INCBIN_U16("graphics/field_specials/unk_83F5F50.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F5F70.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F5F90.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F5FB0.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F5FD0.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F5FF0.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6010.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6030.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6050.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6070.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6090.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F60B0.gbapal")
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_0.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_1.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_2.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_3.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_4.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_5.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_6.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_7.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_8.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_9.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_10.gbapal"),
+    INCBIN_U16("graphics/field_specials/elite_four_lighting_11.gbapal")
 };
 
 static const u16 sChampionRoomLightingPalettes[][16] = {
-    INCBIN_U16("graphics/field_specials/unk_83F60D0.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F60F0.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6110.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6130.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6150.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6170.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6190.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F61B0.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F61D0.gbapal")
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_0.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_1.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_2.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_3.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_4.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_5.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_6.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_7.gbapal"),
+    INCBIN_U16("graphics/field_specials/champion_room_lighting_8.gbapal")
 };
 
 static const u8 sEliteFourLightingTimers[] = {
@@ -2234,7 +2234,7 @@ bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
     gSpecialVar_0x8007 = leadMonSlot;
     for (i = 0; i < NELEMS(sCapeBrinkCompatibleSpecies); i++)
     {
-        if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_SPECIES2, NULL) == sCapeBrinkCompatibleSpecies[i])
+        if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_SPECIES_OR_EGG, NULL) == sCapeBrinkCompatibleSpecies[i])
         {
             tutorMonId = i;
             break;
@@ -2321,17 +2321,17 @@ void CutMoveOpenDottedHoleDoor(void)
 }
 
 static const u16 sDeoxysObjectPals[][16] = {
-    INCBIN_U16("graphics/field_specials/unk_83F6206.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6226.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6246.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6266.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6286.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F62A6.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F62C6.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F62E6.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6306.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6326.gbapal"),
-    INCBIN_U16("graphics/field_specials/unk_83F6346.gbapal")
+    INCBIN_U16("graphics/field_specials/deoxys_rock_0.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_1.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_2.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_3.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_4.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_5.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_6.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_7.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_8.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_9.gbapal"),
+    INCBIN_U16("graphics/field_specials/deoxys_rock_10.gbapal")
 };
 
 static const u8 sDeoxysCoords[][2] = {
@@ -2502,7 +2502,7 @@ bool8 PlayerPartyContainsSpeciesWithPlayerID(void)
     u8 i;
     for (i = 0; i < playerCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004 
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004 
             && GetPlayerTrainerId() == GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL))
             return TRUE;
     }

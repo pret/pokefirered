@@ -2680,12 +2680,12 @@ static void SetPokeStorageQuestLogEvent(u8 action)
     if (sInPartyMenu)
     {
         box2 = TOTAL_BOXES_COUNT;
-        species2 = GetMonData(&gPlayerParty[GetBoxCursorPosition()], MON_DATA_SPECIES2);
+        species2 = GetMonData(&gPlayerParty[GetBoxCursorPosition()], MON_DATA_SPECIES_OR_EGG);
     }
     else
     {
         box2 = StorageGetCurrentBox();
-        species2 = GetCurrentBoxMonData(GetBoxCursorPosition(), MON_DATA_SPECIES2);
+        species2 = GetCurrentBoxMonData(GetBoxCursorPosition(), MON_DATA_SPECIES_OR_EGG);
     }
     questLogData = &gStorage->questLogData;
 

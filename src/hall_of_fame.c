@@ -390,7 +390,7 @@ static void Task_Hof_InitMonData(u8 taskId)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
         {
-            sHofMonPtr[0].mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            sHofMonPtr[0].mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
             sHofMonPtr[0].mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
             sHofMonPtr[0].mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sHofMonPtr[0].mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);

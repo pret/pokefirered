@@ -22,45 +22,55 @@
 // Blue  - "0 0 255\r\n"
 // Brown - "150 75 0\r\n"
 
-#define MAX_LINE_LENGTH 11
 
 void ReadJascPaletteLine(FILE *fp, char *line)
 {
     int c;
     int length = 0;
+    int numSpaces = 0; 
 
     for (;;)
     {
         c = fgetc(fp);
 
-        if (c == '\r')
-        {
+        // CRLF or CR
+        if (c == '\r') {
             c = fgetc(fp);
-
-            if (c != '\n')
-                FATAL_ERROR("CR line endings aren't supported.\n");
+            if (c != '\n') {
+                // put it back!
+                ungetc(c, fp);
+            }
 
             line[length] = 0;
-
             return;
         }
 
-        if (c == '\n')
-            FATAL_ERROR("LF line endings aren't supported.\n");
-
-        if (c == EOF)
-            FATAL_ERROR("Unexpected EOF. No CRLF at end of file.\n");
-
-        if (c == 0)
-            FATAL_ERROR("NUL character in file.\n");
-
-        if (length == MAX_LINE_LENGTH)
-        {
+        // LF only
+        if (c == '\n'){
             line[length] = 0;
-            FATAL_ERROR("The line \"%s\" is too long.\n", line);
+            return;
         }
 
-        line[length++] = c;
+        if (c == 0)
+            FATAL_ERROR("NULL character in file.\n");
+
+        if (c == 0)
+            FATAL_ERROR("Unexpected EOF. No CRLF, CR, or LF at end of file.\n");
+            
+        // Count the number of spaces encountered
+        // Should be 2 then a newline. If 3, then
+        // there's an alpha afterward. Keep reading
+        // to consume chars, but don't save them
+        if (c == ' ') 
+            numSpaces++;
+
+        if (numSpaces < 3) {
+            line[length] = c;
+        } else if (numSpaces == 3) {
+            line[length] = 0;
+        }
+
+        length++;
     }
 }
 

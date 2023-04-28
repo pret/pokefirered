@@ -9,19 +9,24 @@
 // Read/write Paint Shop Pro palette files.
 
 // Format of a Paint Shop Pro palette file, line by line:
-// "JASC-PAL\r\n" (signature)
-// "0100\r\n" (version; seems to always be "0100")
-// "<NUMBER_OF_COLORS>\r\n" (number of colors in decimal)
+// "JASC-PAL" (signature)
+// "0100" (version; seems to always be "0100")
+// "<NUMBER_OF_COLORS>" (number of colors in decimal)
 //
 // <NUMBER_OF_COLORS> times:
-// "<RED> <GREEN> <BLUE>\r\n" (color entry)
+// "<RED> <GREEN> <BLUE> <ALPHA (optional)>" (color entry)
+//
+// Line endings can be /r/n or /r or /n
 //
 // Each color component is a decimal number from 0 to 255.
 // Examples:
-// Black - "0 0 0\r\n"
-// Blue  - "0 0 255\r\n"
-// Brown - "150 75 0\r\n"
+// Black - "0 0 0"
+// Blue  - "0 0 255"
+// Brown - "150 75 0"
+// Cyan  - "255 255 255 255"
 
+
+#define MAX_LINE_LENGTH 15
 
 void ReadJascPaletteLine(FILE *fp, char *line)
 {

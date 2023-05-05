@@ -14,7 +14,7 @@
 // "<NUMBER_OF_COLORS>" (number of colors in decimal)
 //
 // <NUMBER_OF_COLORS> times:
-// "<RED> <GREEN> <BLUE> <ALPHA (optional)>" (color entry)
+// "<RED> <GREEN> <BLUE> <ALPHA (discarded if present)>" (color entry)
 //
 // Line endings can be \r\n or \r or \n
 //
@@ -23,7 +23,7 @@
 // Black - "0 0 0"
 // Blue  - "0 0 255"
 // Brown - "150 75 0"
-// Cyan  - "255 255 255 255"
+// White  - "255 255 255 255"
 
 
 #define MAX_LINE_LENGTH 15
@@ -33,6 +33,9 @@ void ReadJascPaletteLine(FILE *fp, char *line)
     int c;
     int length = 0;
     int numSpaces = 0; 
+
+    // Clear the string for better error reporting
+    memset(line, 0, MAX_LINE_LENGTH+1); 
 
     for (;;)
     {
@@ -55,12 +58,6 @@ void ReadJascPaletteLine(FILE *fp, char *line)
             line[length] = 0;
             return;
         }
-
-        if (c == 0)
-            FATAL_ERROR("NUL character in file.\n");
-
-        if (c == 0)
-            FATAL_ERROR("Unexpected EOF. No CRLF, CR, or LF at end of file.\n");
             
         // Count the number of spaces encountered
         // Should be 2 then a newline. If 3, then
@@ -70,6 +67,9 @@ void ReadJascPaletteLine(FILE *fp, char *line)
             numSpaces++;
 
         if (numSpaces < 3) {
+
+            if (length == MAX_LINE_LENGTH)
+                FATAL_ERROR("Line \"%s\" is too long.\n", line);
             line[length] = c;
         } else if (numSpaces == 3) {
             line[length] = 0;

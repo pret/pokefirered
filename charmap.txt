@@ -78,10 +78,12 @@ SUPER_RE    = A0
 '?'         = AC
 '.'         = AD
 '-'         = AE
+'·'         = AF
 '…'         = B0
 '“'         = B1
 '”'         = B2
 '‘'         = B3
+'’'         = B4
 '\''        = B4
 '♂'         = B5
 '♀'         = B6
@@ -323,12 +325,7 @@ TALL_PLUS   = FC 0C FB
 '？' = AC
 '。' = AD
 'ー' = AE
-'·' = AF
 '‥' = B0
-
-DYNAMIC = F7
-KEYGFX = F8
-EXTRA = F9
 
 STRING = FD
 
@@ -414,7 +411,7 @@ B_BUFF3 = FD 30
 NAME_END = FC 00
 
 @ special 0xF7 character
-SPECIAL_F7  =   F7
+DYNAMIC  =   F7
 
 @ more text functions
 
@@ -424,20 +421,20 @@ SHADOW = FC 03 @ same as fc 01
 COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
 PALETTE = FC 05 @ used in credits
 FONT = FC 06 @ Given a font id, or use font constants below instead
-RESET_SIZE = FC 07
+RESET_FONT = FC 07
 PAUSE = FC 08 @ manually print the wait byte after this, havent mapped them
 PAUSE_UNTIL_PRESS = FC 09
 WAIT_SE = FC 0A
 PLAY_BGM = FC 0B
 ESCAPE = FC 0C
-SHIFT_TEXT = FC 0D @ shift rightward by 1-byte arg
-SHIFT_DOWN = FC 0E @ shift downward by 1-byte arg
+SHIFT_RIGHT = FC 0D
+SHIFT_DOWN = FC 0E
 FILL_WINDOW = FC 0F
 PLAY_SE = FC 10
 CLEAR = FC 11
 SKIP = FC 12
 CLEAR_TO = FC 13
-SPACING = FC 14
+MIN_LETTER_SPACING = FC 14
 JPN = FC 15
 ENG = FC 16
 PAUSE_MUSIC = FC 17

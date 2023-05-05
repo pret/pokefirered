@@ -6,9 +6,9 @@
 #include "gfx.h"
 #include "util.h"
 
-// Read/write Paint Shop Pro palette files.
+// Read/write JASC palette files.
 
-// Format of a Paint Shop Pro palette file, line by line:
+// Format of a JASC palette file, line by line:
 // "JASC-PAL" (signature)
 // "0100" (version; seems to always be "0100")
 // "<NUMBER_OF_COLORS>" (number of colors in decimal)
@@ -16,7 +16,7 @@
 // <NUMBER_OF_COLORS> times:
 // "<RED> <GREEN> <BLUE> <ALPHA (optional)>" (color entry)
 //
-// Line endings can be /r/n or /r or /n
+// Line endings can be \r\n or \r or \n
 //
 // Each color component is a decimal number from 0 to 255.
 // Examples:
@@ -57,7 +57,7 @@ void ReadJascPaletteLine(FILE *fp, char *line)
         }
 
         if (c == 0)
-            FATAL_ERROR("NULL character in file.\n");
+            FATAL_ERROR("NUL character in file.\n");
 
         if (c == 0)
             FATAL_ERROR("Unexpected EOF. No CRLF, CR, or LF at end of file.\n");

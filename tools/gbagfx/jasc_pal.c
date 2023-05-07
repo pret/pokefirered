@@ -2,155 +2,87 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 #include "global.h"
 #include "gfx.h"
 #include "util.h"
 
-// Read/write Paint Shop Pro palette files.
+// Read/write JASC palette files.
 
-// Format of a Paint Shop Pro palette file, line by line:
-// "JASC-PAL\r\n" (signature)
-// "0100\r\n" (version; seems to always be "0100")
-// "<NUMBER_OF_COLORS>\r\n" (number of colors in decimal)
+// Format of a JASC palette file, line by line:
+// "JASC-PAL" (signature)
+// "0100" (version; seems to always be "0100")
+// "<NUMBER_OF_COLORS>" (number of colors in decimal)
 //
 // <NUMBER_OF_COLORS> times:
-// "<RED> <GREEN> <BLUE>\r\n" (color entry)
+// "<RED> <GREEN> <BLUE> <ALPHA (discarded if present)>" (color entry)
+//
+// Line endings can be \r\n or \n
 //
 // Each color component is a decimal number from 0 to 255.
 // Examples:
-// Black - "0 0 0\r\n"
-// Blue  - "0 0 255\r\n"
-// Brown - "150 75 0\r\n"
+// Black - "0 0 0"
+// Blue  - "0 0 255"
+// Brown - "150 75 0"
+// White  - "255 255 255 255"
+//                       ^~~ ignored
 
-#define MAX_LINE_LENGTH 11
+// 15 chars of color info, \r\n or \n, and \0
+#define MAX_LINE_LENGTH 18
 
-void ReadJascPaletteLine(FILE *fp, char *line)
+int ReadJascPaletteLine(FILE *fp, char *line)
 {
-    int c;
-    int length = 0;
-
-    for (;;)
-    {
-        c = fgetc(fp);
-
-        if (c == '\r')
-        {
-            c = fgetc(fp);
-
-            if (c != '\n')
-                FATAL_ERROR("CR line endings aren't supported.\n");
-
-            line[length] = 0;
-
-            return;
-        }
-
-        if (c == '\n')
-            FATAL_ERROR("LF line endings aren't supported.\n");
-
-        if (c == EOF)
-            FATAL_ERROR("Unexpected EOF. No CRLF at end of file.\n");
-
-        if (c == 0)
-            FATAL_ERROR("NUL character in file.\n");
-
-        if (length == MAX_LINE_LENGTH)
-        {
-            line[length] = 0;
-            FATAL_ERROR("The line \"%s\" is too long.\n", line);
-        }
-
-        line[length++] = c;
-    }
+    // Read line up to first newline char (inclusive) or [MAX_LINE_LENGTH-1]
+    if(fgets(line, MAX_LINE_LENGTH, fp) == NULL)
+        return 0;
+    line[strcspn(line, "\r\n")] = 0; // Terminate the line at the first newline char
+    return 1;
 }
 
 void ReadJascPalette(char *path, struct Palette *palette)
 {
-    char line[MAX_LINE_LENGTH + 1];
+    char line_buffer[MAX_LINE_LENGTH];
+    int red, green, blue;
+    int numColors;
 
-    FILE *fp = fopen(path, "rb");
+    FILE *fp = fopen(path, "r");
 
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open JASC-PAL file \"%s\" for reading.\n", path);
+    if (!fp)
+        FATAL_ERROR("Cannot open JASC-PAL file \"%s\" with error: %s\n", path, strerror(errno));
 
-    ReadJascPaletteLine(fp, line);
+    // Check JASC-PAL Header
+    ReadJascPaletteLine(fp, line_buffer);
+    if (strcmp(line_buffer, "JASC-PAL") != 0)
+        FATAL_ERROR("Invalid signature, expected \"JASC-PAL\", read: \"%s\"\n",line_buffer);
 
-    if (strcmp(line, "JASC-PAL") != 0)
-        FATAL_ERROR("Invalid JASC-PAL signature.\n");
-
-    ReadJascPaletteLine(fp, line);
-
-    if (strcmp(line, "0100") != 0)
+    ReadJascPaletteLine(fp, line_buffer);
+    if (strcmp(line_buffer, "0100") != 0)
         FATAL_ERROR("Unsuported JASC-PAL version.\n");
 
-    ReadJascPaletteLine(fp, line);
+    // Get number of colors in palette
+    ReadJascPaletteLine(fp, line_buffer);
+    numColors = strtol(line_buffer, NULL, 10);
 
-    if (!ParseNumber(line, NULL, 10, &palette->numColors))
-        FATAL_ERROR("Failed to parse number of colors.\n");
-
-    if (palette->numColors < 1 || palette->numColors > 256)
-        FATAL_ERROR("%d is an invalid number of colors. The number of colors must be in the range [1, 256].\n", palette->numColors);
-
-    for (int i = 0; i < palette->numColors; i++)
+    // Check for sensible number of colors
+    if (numColors > 0 && numColors <= 256)
     {
-        ReadJascPaletteLine(fp, line);
+        palette->numColors = numColors;
+    } else {
+        FATAL_ERROR("Out-of-Bounds number of colors specifed: %i. Maximum supported is 256\n", numColors);
+    }
 
-        char *s = line;
-        char *end;
-
-        int red;
-        int green;
-        int blue;
-
-        if (!ParseNumber(s, &end, 10, &red))
-            FATAL_ERROR("Failed to parse red color component.\n");
-
-        s = end;
-
-        if (*s != ' ')
-            FATAL_ERROR("Expected a space after red color component.\n");
-
-        s++;
-
-        if (*s < '0' || *s > '9')
-            FATAL_ERROR("Expected only a space between red and green color components.\n");
-
-        if (!ParseNumber(s, &end, 10, &green))
-            FATAL_ERROR("Failed to parse green color component.\n");
-
-        s = end;
-
-        if (*s != ' ')
-            FATAL_ERROR("Expected a space after green color component.\n");
-
-        s++;
-
-        if (*s < '0' || *s > '9')
-            FATAL_ERROR("Expected only a space between green and blue color components.\n");
-
-        if (!ParseNumber(s, &end, 10, &blue))
-            FATAL_ERROR("Failed to parse blue color component.\n");
-
-        if (*end != 0)
-            FATAL_ERROR("Garbage after blue color component.\n");
-
-        if (red < 0 || red > 255)
-            FATAL_ERROR("Red color component (%d) is outside the range [0, 255].\n", red);
-
-        if (green < 0 || green > 255)
-            FATAL_ERROR("Green color component (%d) is outside the range [0, 255].\n", green);
-
-        if (blue < 0 || blue > 255)
-            FATAL_ERROR("Blue color component (%d) is outside the range [0, 255].\n", blue);
+    // Get color entries
+    for (int i = 0; i < numColors; ++i)
+    {
+        if (ReadJascPaletteLine(fp, line_buffer) == 0)
+            FATAL_ERROR("Failed to read color index %i\n", i);
+        if (sscanf(line_buffer, "%d %d %d", &red, &green, &blue) != 3)
+            FATAL_ERROR("Invalid color format in color \"%s\"\n", line_buffer);
 
         palette->colors[i].red = red;
         palette->colors[i].green = green;
         palette->colors[i].blue = blue;
     }
-
-    if (fgetc(fp) != EOF)
-        FATAL_ERROR("Garbage after color data.\n");
-
     fclose(fp);
 }
 

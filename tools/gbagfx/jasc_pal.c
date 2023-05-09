@@ -61,14 +61,15 @@ void ReadJascPalette(char *path, struct Palette *palette)
 
     // Get number of colors in palette
     ReadJascPaletteLine(fp, line_buffer);
-    numColors = strtol(line_buffer, NULL, 10);
+    if (!ParseNumber(line_buffer, NULL, 10, &numColors))
+        FATAL_ERROR("Failed to parse number of colours.\n");
 
     // Check for sensible number of colors
     if (numColors > 0 && numColors <= 256)
     {
         palette->numColors = numColors;
     } else {
-        FATAL_ERROR("Out-of-Bounds number of colors specifed: %i. Maximum supported is 256\n", numColors);
+        FATAL_ERROR("%i is an invalid number of colours. The number of colours must be in the range [0, 256]\n", numColors);
     }
 
     // Get color entries
@@ -78,6 +79,13 @@ void ReadJascPalette(char *path, struct Palette *palette)
             FATAL_ERROR("Failed to read color index %i\n", i);
         if (sscanf(line_buffer, "%d %d %d", &red, &green, &blue) != 3)
             FATAL_ERROR("Invalid color format in color \"%s\"\n", line_buffer);
+
+        if (red < 0 || red > 255)
+            FATAL_ERROR("Red color component %d is invalid. Accepted range is [0, 255]", red);
+        if (green < 0 || green > 255)
+            FATAL_ERROR("Green color component %d is invalid. Accepted range is [0, 255]", green);
+        if (blue < 0 || blue > 255)
+            FATAL_ERROR("Blue color component %d is invalid. Accepted range is [0, 255]", blue);
 
         palette->colors[i].red = red;
         palette->colors[i].green = green;

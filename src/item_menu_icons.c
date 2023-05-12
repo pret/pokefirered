@@ -327,14 +327,14 @@ u8 AddItemIconObject(u16 tilesTag, u16 paletteTag, u16 itemId)
     if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconGfxPtr(itemId, 0), sItemIconTilesBuffer);
+    LZDecompressWram(GetItemIconGfxPtr(itemId, ITEMICON_TILES), sItemIconTilesBuffer);
     CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
     spriteSheet.data = sItemIconTilesBufferPadded;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
 
-    spritePalette.data = GetItemIconGfxPtr(itemId, 1);
+    spritePalette.data = GetItemIconGfxPtr(itemId, ITEMICON_PAL);
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
@@ -358,14 +358,14 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
     if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconGfxPtr(itemId, 0), sItemIconTilesBuffer);
+    LZDecompressWram(GetItemIconGfxPtr(itemId, ITEMICON_TILES), sItemIconTilesBuffer);
     CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
     spriteSheet.data = sItemIconTilesBufferPadded;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
 
-    spritePalette.data = GetItemIconGfxPtr(itemId, 1);
+    spritePalette.data = GetItemIconGfxPtr(itemId, ITEMICON_PAL);
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
@@ -410,7 +410,8 @@ void DestroyItemMenuIcon(u8 idx)
     }
 }
 
-const void *GetItemIconGfxPtr(u16 itemId, u8 attrId)
+// attrId is either ITEMICON_TILES or ITEMICON_PAL
+const u32 *GetItemIconGfxPtr(u16 itemId, u8 attrId)
 {
     if (itemId > ITEMS_COUNT)
         itemId = ITEM_NONE;

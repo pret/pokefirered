@@ -1129,12 +1129,12 @@ static void SetItemIconActive(u8 id, bool8 show)
 
 static const u32 *GetItemIconPic(u16 itemId)
 {
-    return GetItemIconGfxPtr(itemId, 0);
+    return GetItemIconGfxPtr(itemId, ITEMICON_TILES);
 }
 
 static const u32 *GetItemIconPalette(u16 itemId)
 {
-    return GetItemIconGfxPtr(itemId, 1);
+    return GetItemIconGfxPtr(itemId, ITEMICON_PAL);
 }
 
 void PrintItemDescription(void)

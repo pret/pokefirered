@@ -3,6 +3,12 @@
 
 #include "global.h"
 
+// Values for 2nd argument to GetItemIconGfxPtr
+enum {
+    ITEMICON_TILES,
+    ITEMICON_PAL,
+};
+
 extern const struct CompressedSpriteSheet gSpriteSheet_BagMale;
 extern const struct CompressedSpriteSheet gSpriteSheet_BagFemale;
 extern const struct CompressedSpritePalette gSpritePalette_Bag;
@@ -22,7 +28,7 @@ void UpdateSwapLinePos(s16 x, u16 y);
 void SetSwapLineInvisibility(bool8 invisible);
 void SetBagVisualPocketId(u8);
 void ShakeBagSprite(void);
-const void *GetItemIconGfxPtr(u16 itemId, u8 ptrId);
+const u32 *GetItemIconGfxPtr(u16 itemId, u8 ptrId);
 void CreateBagSprite(u8 animNum);
 
 #endif // GUARD_ITEM_MENU_ICONS

@@ -69,7 +69,7 @@ void ReadJascPalette(char *path, struct Palette *palette)
     {
         palette->numColors = numColors;
     } else {
-        FATAL_ERROR("%i is an invalid number of colours. The number of colours must be in the range [0, 256]\n", numColors);
+        FATAL_ERROR("%i is an invalid number of colours. The number of colours must be in the range [1, 256]\n", numColors);
     }
 
     // Get color entries
@@ -81,11 +81,11 @@ void ReadJascPalette(char *path, struct Palette *palette)
             FATAL_ERROR("Invalid color format in color \"%s\"\n", line_buffer);
 
         if (red < 0 || red > 255)
-            FATAL_ERROR("Red color component %d is invalid. Accepted range is [0, 255]", red);
+            FATAL_ERROR("Red color component %d is invalid. Accepted range is [0, 255]\n", red);
         if (green < 0 || green > 255)
-            FATAL_ERROR("Green color component %d is invalid. Accepted range is [0, 255]", green);
+            FATAL_ERROR("Green color component %d is invalid. Accepted range is [0, 255]\n", green);
         if (blue < 0 || blue > 255)
-            FATAL_ERROR("Blue color component %d is invalid. Accepted range is [0, 255]", blue);
+            FATAL_ERROR("Blue color component %d is invalid. Accepted range is [0, 255]\n", blue);
 
         palette->colors[i].red = red;
         palette->colors[i].green = green;

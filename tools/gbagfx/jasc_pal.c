@@ -63,17 +63,20 @@ void ReadJascPalette(char *path, struct Palette *palette)
         FATAL_ERROR("Cannot open JASC-PAL file \"%s\" with error: %s\n", path, strerror(errno));
 
     // Check JASC-PAL Header
-    ReadJascPaletteLine(fp, line_buffer);
+    if (ReadJascPaletteLine(fp, line_buffer) == 0)
+        FATAL_ERROR("Failed to read JASC-PAL header.\n");
     if (strcmp(line_buffer, "JASC-PAL") != 0)
         FATAL_ERROR("Invalid signature, expected \"JASC-PAL\", read: \"%s\"\n",line_buffer);
 
-    ReadJascPaletteLine(fp, line_buffer);
+    if (ReadJascPaletteLine(fp, line_buffer) == 0)
+        FATAL_ERROR("Failed to read version.\n");
     if (strcmp(line_buffer, "0100") != 0)
         FATAL_ERROR("Unsuported JASC-PAL version.\n");
 
     // Get number of colors in palette
-    ReadJascPaletteLine(fp, line_buffer);
-    if (!ParseNumber(line_buffer, NULL, 10, &numColors))
+    if (ReadJascPaletteLine(fp, line_buffer) == 0)
+        FATAL_ERROR("Failed to read number of colors.\n");
+    if (strlen(line_buffer) > 3 || !ParseNumber(line_buffer, NULL, 10, &numColors))
         FATAL_ERROR("Failed to parse number of colours.\n");
 
     // Check for sensible number of colors

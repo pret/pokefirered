@@ -32,10 +32,22 @@
 
 int ReadJascPaletteLine(FILE *fp, char *line)
 {
+    int end = 0;
+
     // Read line up to first newline char (inclusive) or [MAX_LINE_LENGTH-1]
     if(fgets(line, MAX_LINE_LENGTH, fp) == NULL)
         return 0;
-    line[strcspn(line, "\r\n")] = 0; // Terminate the line at the first newline char
+
+    end = strcspn(line, "\r\n"); // Find index of first newline.
+
+    // Max length of 4-channel colour is 15 chars, so max length of resulting
+    // string should be 16 including \0. If end-of-line is > 15, there's a chance
+    // we've left newline chars unread for the next line, so we should error out
+    if (end > MAX_LINE_LENGTH -3) {
+        FATAL_ERROR("Line is too long: %s\n", line);
+    } else {
+        line[end] = 0; // Terminate the line at the first newline char
+    }
     return 1;
 }
 

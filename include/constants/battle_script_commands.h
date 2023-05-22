@@ -1,34 +1,31 @@
 #ifndef GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 
-// Battle Scripting and BattleCommunication addresses
-#define sPAINSPLIT_HP gBattleScripting
-#define sBIDE_DMG gBattleScripting + 4
-#define sMULTIHIT_STRING gBattleScripting + 8
-#define sDMG_MULTIPLIER gBattleScripting + 0xE
-#define sTWOTURN_STRINGID gBattleScripting + 0xF
-#define sB_ANIM_ARG1 gBattleScripting + 0x10
-#define sB_ANIM_ARG2 gBattleScripting + 0x11
-#define sTRIPLE_KICK_POWER gBattleScripting + 0x12
-#define sMOVEEND_STATE gBattleScripting + 0x14
-#define sBATTLER_WITH_ABILITY gBattleScripting + 0x15
-#define sMULTIHIT_EFFECT gBattleScripting + 0x16
-#define sBATTLER gBattleScripting + 0x17
-#define sB_ANIM_TURN gBattleScripting + 0x18
-#define sB_ANIM_TARGETS_HIT gBattleScripting + 0x19
-#define sSTATCHANGER gBattleScripting + 0x1A
-#define sSTAT_ANIM_PLAYED gBattleScripting + 0x1B
-#define sGIVEEXP_STATE gBattleScripting + 0x1C
-#define sBATTLE_STYLE gBattleScripting + 0x1D
-#define sLVLBOX_STATE gBattleScripting + 0x1E
-#define sLEARNMOVE_STATE gBattleScripting + 0x1F
-#define sFIELD_20 gBattleScripting + 0x20
-#define sRESHOW_MAIN_STATE gBattleScripting + 0x21
-#define sRESHOW_HELPER_STATE gBattleScripting + 0x22
-#define sFIELD_23 gBattleScripting + 0x23
-#define sWINDOWS_TYPE gBattleScripting + 0x24
-#define sMULTIPLAYER_ID gBattleScripting + 0x25
-#define sSPECIAL_TRAINER_BATTLE_TYPE gBattleScripting + 0x26
+// The following correspond to the struct members of BattleScripting by adding their offset
+#define sPAINSPLIT_HP                gBattleScripting + 0x00 // painSplitHp
+#define sBIDE_DMG                    gBattleScripting + 0x04 // bideDmg
+#define sMULTIHIT_STRING             gBattleScripting + 0x08 // multihitString
+#define sDMG_MULTIPLIER              gBattleScripting + 0x0E // dmgMultiplier
+#define sTWOTURN_STRINGID            gBattleScripting + 0x0F // twoTurnsMoveStringId
+#define sB_ANIM_ARG1                 gBattleScripting + 0x10 // animArg1
+#define sB_ANIM_ARG2                 gBattleScripting + 0x11 // animArg2
+#define sTRIPLE_KICK_POWER           gBattleScripting + 0x12 // tripleKickPower
+#define sMOVEEND_STATE               gBattleScripting + 0x14 // moveendState
+#define sBATTLER_WITH_ABILITY        gBattleScripting + 0x15 // battlerWithAbility
+#define sMULTIHIT_EFFECT             gBattleScripting + 0x16 // multihitMoveEffect
+#define sBATTLER                     gBattleScripting + 0x17 // battler
+#define sB_ANIM_TURN                 gBattleScripting + 0x18 // animTurn
+#define sB_ANIM_TARGETS_HIT          gBattleScripting + 0x19 // animTargetsHit
+#define sSTATCHANGER                 gBattleScripting + 0x1A // statChanger
+#define sSTAT_ANIM_PLAYED            gBattleScripting + 0x1B // statAnimPlayed
+#define sGIVEEXP_STATE               gBattleScripting + 0x1C // getexpState
+#define sBATTLE_STYLE                gBattleScripting + 0x1D // battleStyle
+#define sLVLBOX_STATE                gBattleScripting + 0x1E // drawlvlupboxState
+#define sLEARNMOVE_STATE             gBattleScripting + 0x1F // learnMoveState
+#define sPURSUIT_DOUBLES_ATTACKER    gBattleScripting + 0x20 // pursuitDoublesAttacker
+#define sRESHOW_MAIN_STATE           gBattleScripting + 0x21 // reshowMainState
+#define sRESHOW_HELPER_STATE         gBattleScripting + 0x22 // reshowHelperState
+#define sLVLUP_HP                    gBattleScripting + 0x23 // levelUpHP
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0

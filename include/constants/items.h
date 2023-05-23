@@ -177,9 +177,16 @@
 #define ITEM_LANSAT_BERRY 173
 #define ITEM_STARF_BERRY 174
 #define ITEM_ENIGMA_BERRY 175
-#define ITEM_0B0 176
-#define ITEM_0B1 177
-#define ITEM_0B2 178
+
+#define FIRST_BERRY_INDEX ITEM_CHERI_BERRY
+#define LAST_BERRY_INDEX  ITEM_ENIGMA_BERRY
+
+#define ITEM_UNUSED_BERRY_1 176
+#define ITEM_UNUSED_BERRY_2 177
+#define ITEM_UNUSED_BERRY_3 178
+
+#define MAX_BERRY_INDEX ITEM_UNUSED_BERRY_3
+
 #define ITEM_BRIGHT_POWDER 179
 #define ITEM_WHITE_HERB 180
 #define ITEM_MACHO_BRACE 181
@@ -440,8 +447,6 @@
 
 #define ITEMS_COUNT 375
 
-#define FIRST_BERRY_INDEX ITEM_CHERI_BERRY
-#define LAST_BERRY_INDEX ITEM_ENIGMA_BERRY
 #define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF
 
@@ -454,6 +459,6 @@
 #define SUPER_ROD 2
 
 // Check if the item is one that can be used on a Pokemon.
-#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
+#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

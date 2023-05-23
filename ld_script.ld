@@ -11,7 +11,7 @@ SECTIONS {
 
         . = 0x1C000;
 
-<EWRAM>
+        INCLUDE "sym_ewram.ld"
         src/*.o(.ewram_data);
 
         *libc.a:impure.o(.data);
@@ -26,7 +26,7 @@ SECTIONS {
     ALIGN(4)
     {
         /* .bss starts at 0x3000000 */
-<BSS>
+        INCLUDE "sym_bss.ld"
         src/*.o(.bss);
         data/*.o(.bss);
 
@@ -34,7 +34,7 @@ SECTIONS {
         src/m4a.o(.bss.code);
 
         /* COMMON starts at 0x30030E0 */
-<COMMON>
+        INCLUDE "sym_common.ld"
 
         *libc.a:sbrkr.o(COMMON);
         end = .;

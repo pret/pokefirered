@@ -438,7 +438,7 @@ void AnimTask_LevelUpHealthBox(u8 taskId)
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemap(animBgData.bgId, gUnusedLevelupAnimationTilemap);
     AnimLoadCompressedBgGfx(animBgData.bgId, gUnusedLevelupAnimationGfx, animBgData.tilesOffset);
-    LoadCompressedPalette(gCureBubblesPal, animBgData.paletteId << 4, 32);
+    LoadCompressedPalette(gCureBubblesPal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
     gBattle_BG1_X = -gSprites[spriteId3].x + 32;
     gBattle_BG1_Y = -gSprites[spriteId3].y - 32;
     gTasks[taskId].data[1] = 640;
@@ -518,10 +518,10 @@ void DoLoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, u8 battler)
     spriteId2 = gSprites[healthBoxSpriteId].data[5];
     *paletteId1 = AllocSpritePalette(TAG_HEALTHBOX_PALS_1);
     *paletteId2 = AllocSpritePalette(TAG_HEALTHBOX_PALS_2);
-    offset1 = (gSprites[healthBoxSpriteId].oam.paletteNum * 16) + 0x100;
-    offset2 = (gSprites[spriteId2].oam.paletteNum * 16) + 0x100;
-    LoadPalette(&gPlttBufferUnfaded[offset1], *paletteId1 * 16 + 0x100, 0x20);
-    LoadPalette(&gPlttBufferUnfaded[offset2], *paletteId2 * 16 + 0x100, 0x20);
+    offset1 = OBJ_PLTT_ID(gSprites[healthBoxSpriteId].oam.paletteNum);
+    offset2 = OBJ_PLTT_ID(gSprites[spriteId2].oam.paletteNum);
+    LoadPalette(&gPlttBufferUnfaded[offset1], OBJ_PLTT_ID(*paletteId1), PLTT_SIZE_4BPP);
+    LoadPalette(&gPlttBufferUnfaded[offset2], OBJ_PLTT_ID(*paletteId2), PLTT_SIZE_4BPP);
     gSprites[healthBoxSpriteId].oam.paletteNum = *paletteId1;
     gSprites[spriteId1].oam.paletteNum = *paletteId1;
     gSprites[spriteId2].oam.paletteNum = *paletteId2;
@@ -584,7 +584,7 @@ static void AnimTask_FlashHealthboxOnLevelUp_Step(u8 taskId)
             if (gTasks[taskId].data[2] > 16)
                 gTasks[taskId].data[2] = 16;
 
-            paletteOffset = paletteNum * 16 + 0x100;
+            paletteOffset = OBJ_PLTT_ID(paletteNum);
             BlendPalette(paletteOffset + colorOffset, 1, gTasks[taskId].data[2], RGB(20, 27, 31));
             if (gTasks[taskId].data[2] == 16)
                 gTasks[taskId].data[1]++;
@@ -594,7 +594,7 @@ static void AnimTask_FlashHealthboxOnLevelUp_Step(u8 taskId)
             if (gTasks[taskId].data[2] < 0)
                 gTasks[taskId].data[2] = 0;
 
-            paletteOffset = paletteNum * 16 + 0x100;
+            paletteOffset = OBJ_PLTT_ID(paletteNum);
             BlendPalette(paletteOffset + colorOffset, 1, gTasks[taskId].data[2], RGB(20, 27, 31));
             if (gTasks[taskId].data[2] == 0)
                 DestroyAnimVisualTask(taskId);
@@ -1874,12 +1874,12 @@ u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 battler, u32 selectedPalettes, u8
 
     if (!unfadeLater)
     {
-        BlendPalette(battler * 16 + 0x100, 16, 0, sBallOpenFadeColors[ballId]);
+        BlendPalette(OBJ_PLTT_ID(battler), 16, 0, sBallOpenFadeColors[ballId]);
         gTasks[taskId].data[1] = 1;
     }
     else
     {
-        BlendPalette(battler * 16 + 0x100, 16, 16, sBallOpenFadeColors[ballId]);
+        BlendPalette(OBJ_PLTT_ID(battler), 16, 16, sBallOpenFadeColors[ballId]);
         gTasks[taskId].data[0] = 16;
         gTasks[taskId].data[1] = -1;
         gTasks[taskId].func = Task_FadeMon_ToNormal;
@@ -1895,7 +1895,7 @@ static void Task_FadeMon_ToBallColor(u8 taskId)
 
     if (gTasks[taskId].data[2] <= 16)
     {
-        BlendPalette(gTasks[taskId].data[3] * 16 + 0x100, 16, gTasks[taskId].data[0], sBallOpenFadeColors[ballId]);
+        BlendPalette(OBJ_PLTT_ID(gTasks[taskId].data[3]), 16, gTasks[taskId].data[0], sBallOpenFadeColors[ballId]);
         gTasks[taskId].data[0] += gTasks[taskId].data[1];
         gTasks[taskId].data[2]++;
     }
@@ -1923,7 +1923,7 @@ static void Task_FadeMon_ToNormal_Step(u8 taskId)
 
     if (gTasks[taskId].data[2] <= 16)
     {
-        BlendPalette(gTasks[taskId].data[3] * 16 + 0x100, 16, gTasks[taskId].data[0], sBallOpenFadeColors[ballId]);
+        BlendPalette(OBJ_PLTT_ID(gTasks[taskId].data[3]), 16, gTasks[taskId].data[0], sBallOpenFadeColors[ballId]);
         gTasks[taskId].data[0] += gTasks[taskId].data[1];
         gTasks[taskId].data[2]++;
     }

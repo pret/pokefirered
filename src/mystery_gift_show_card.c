@@ -215,7 +215,7 @@ s32 WonderCard_Enter(void)
             if (FreeTempTileDataBuffersIfPossible())
                 return 0;
             gPaletteFade.bufferTransferDisabled = TRUE;
-            LoadPalette(sWonderCardData->gfx->pal, 0x10, 0x20);
+            LoadPalette(sWonderCardData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
             LZ77UnCompWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
             CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, 30, 20, 0, 0, 30, 20, 1, 0x008, 0);
             CopyBgTilemapBufferToVram(2);

@@ -459,7 +459,7 @@ void sub_8110FCC(void)
 
 static bool8 FieldCB2_QuestLogStartPlaybackWithWarpExit(void)
 {
-    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     SetQuestLogState(QL_STATE_PLAYBACK);
     FieldCB_DefaultWarpExit();
     sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
@@ -469,7 +469,7 @@ static bool8 FieldCB2_QuestLogStartPlaybackWithWarpExit(void)
 
 static bool8 FieldCB2_QuestLogStartPlaybackStandingInPlace(void)
 {
-    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     SetQuestLogState(QL_STATE_PLAYBACK);
     FieldCB_WarpExitFadeFromBlack();
     sQuestLogCurrentScene = (struct UnkStruct_203AE94){};
@@ -1071,12 +1071,12 @@ void QuestLog_InitPalettesBackup(void)
 
 void QuestLog_BackUpPalette(u16 offset, u16 size)
 {
-    CpuCopy16(gPlttBufferUnfaded + offset, sPalettesBackup + offset, size * 2);
+    CpuCopy16(&gPlttBufferUnfaded[offset], &sPalettesBackup[offset], PLTT_SIZEOF(size));
 }
 
 static bool8 FieldCB2_FinalScene(void)
 {
-    LoadPalette(GetTextWindowPalette(4), 0xF0, 0x20);
+    LoadPalette(GetTextWindowPalette(4), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     DrawPreviouslyOnQuestHeader(0);
     FieldCB_WarpExitFadeFromBlack();
     CreateTask(Task_FinalScene_WaitFade, 0xFF);
@@ -1199,8 +1199,8 @@ static bool8 sub_81121D8(u8 taskId)
     if (data[1] > 15)
         return TRUE;
 
-    CopyPaletteInvertedTint(gPlttBufferUnfaded + 0x01, gPlttBufferFaded + 0x01, 0xDF, 0x0F - data[1]);
-    CopyPaletteInvertedTint(gPlttBufferUnfaded + 0x100, gPlttBufferFaded + 0x100, 0x100, 0x0F - data[1]);
+    CopyPaletteInvertedTint(&gPlttBufferUnfaded[BG_PLTT_ID(0) + 1], &gPlttBufferFaded[BG_PLTT_ID(0) + 1], 0xDF, 0x0F - data[1]);
+    CopyPaletteInvertedTint(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferFaded[OBJ_PLTT_ID(0)], 0x100, 0x0F - data[1]);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[0], 0x00, 0, sQuestLogHeaderWindowTemplates[0].height * 8 - 1 - data[1], sQuestLogHeaderWindowTemplates[0].width * 8, 1);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[1], 0x00, 0, data[1], sQuestLogHeaderWindowTemplates[1].width * 8, 1);
     CopyWindowToVram(sQuestLogHeaderWindowIds[0], COPYWIN_GFX);
@@ -1214,9 +1214,9 @@ static void QL_SlightlyDarkenSomePals(void)
     u16 *buffer = Alloc(PLTT_SIZE);
     CpuCopy16(sPalettesBackup, buffer, PLTT_SIZE);
     SlightlyDarkenPalsInWeather(sPalettesBackup, sPalettesBackup, 13 * 16);
-    SlightlyDarkenPalsInWeather(sPalettesBackup + 17 * 16, sPalettesBackup + 17 * 16, 1 * 16);
-    SlightlyDarkenPalsInWeather(sPalettesBackup + 22 * 16, sPalettesBackup + 22 * 16, 4 * 16);
-    SlightlyDarkenPalsInWeather(sPalettesBackup + 27 * 16, sPalettesBackup + 27 * 16, 5 * 16);
+    SlightlyDarkenPalsInWeather(&sPalettesBackup[OBJ_PLTT_ID(1)], &sPalettesBackup[OBJ_PLTT_ID(1)], 1 * 16);
+    SlightlyDarkenPalsInWeather(&sPalettesBackup[OBJ_PLTT_ID(6)], &sPalettesBackup[OBJ_PLTT_ID(6)], 4 * 16);
+    SlightlyDarkenPalsInWeather(&sPalettesBackup[OBJ_PLTT_ID(11)], &sPalettesBackup[OBJ_PLTT_ID(11)], 5 * 16);
     CpuCopy16(sPalettesBackup, gPlttBufferUnfaded, PLTT_SIZE);
     CpuCopy16(buffer, sPalettesBackup, PLTT_SIZE);
     Free(buffer);

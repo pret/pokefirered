@@ -30,7 +30,7 @@ static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
     .tilemapTop = 0,
     .width = 30,
     .height = 2,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x008
 };
 

@@ -171,7 +171,7 @@ s32 WonderNews_Enter(void)
         if (FreeTempTileDataBuffersIfPossible())
             return 0;
         gPaletteFade.bufferTransferDisabled = TRUE;
-        LoadPalette(sWonderNewsData->gfx->pal, 0x10, 0x20);
+        LoadPalette(sWonderNewsData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LZ77UnCompWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
         CopyRectToBgTilemapBufferRect(1, sWonderNewsData->bgTilemapBuffer, 0, 0, 30, 3, 0, 0, 30, 3, 1, 8, 0);
         CopyRectToBgTilemapBufferRect(3, sWonderNewsData->bgTilemapBuffer, 0, 3, 30, 23, 0, 3, 30, 23, 1, 8, 0);

@@ -341,7 +341,7 @@ void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 an
     FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, 32, 32);
     LoadBgGfxByAnimType(animType);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    LoadUserWindowGfx(0, 0x000, 0xe0);
+    LoadUserWindowGfx(0, 0x000, BG_PLTT_ID(14));
     CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
     ShowBg(3);
@@ -370,7 +370,7 @@ void PSA_ShowMessageWindow(void)
 {
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    DrawTextBorderOuter(0, 0x001, 0xE);
+    DrawTextBorderOuter(0, 0x001, 14);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -612,7 +612,7 @@ bool8 PSA_LevelUpVerticalSpritesTaskIsRunning(void)
 // Unused
 void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
 {
-    DrawTextBorderOuter(1, 0x001, 0xE);
+    DrawTextBorderOuter(1, 0x001, 14);
     DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_FULL);
@@ -636,9 +636,9 @@ static void LoadBgGfxByAnimType(u16 animType)
     CopyToBgTilemapBuffer(3, sBg_Tilemap, 0, 0x000);
     DecompressAndCopyTileDataToVram(3, sBg_Gfx, 0, 0x000, 0);
     if (animType != 4)
-        LoadPalette(sBg_Pal, 0x00, 0x20);
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
     else
-        LoadPalette(sBg_TmHm_Pal, 0x00, 0x20);
+        LoadPalette(sBg_TmHm_Pal, BG_PLTT_ID(0), sizeof(sBg_TmHm_Pal));
 }
 
 void PSA_CreateMonSpriteAtCloseness(u8 closeness)

@@ -243,116 +243,116 @@ static const struct WindowTemplate sWindowTemplates_Main[] = {
 
 static const struct WindowTemplate sWindowTemplates_Variable[] = {
     {
-        .bg = 0x02,
-        .tilemapLeft = 0x18,
-        .tilemapTop = 0x0f,
-        .width = 0x05,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 24,
+        .tilemapTop = 15,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x1d1
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x11,
-        .tilemapTop = 0x09,
-        .width = 0x0c,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 17,
+        .tilemapTop = 9,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x1d1
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x01,
-        .tilemapTop = 0x01,
-        .width = 0x08,
-        .height = 0x03,
-        .paletteNum = 0x0c,
+        .bg = 2,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 8,
+        .height = 3,
+        .paletteNum = 12,
         .baseBlock = 0x201
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x17,
-        .tilemapTop = 0x0f,
-        .width = 0x06,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 23,
+        .tilemapTop = 15,
+        .width = 6,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x219
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x15,
-        .tilemapTop = 0x09,
-        .width = 0x06,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 21,
+        .tilemapTop = 9,
+        .width = 6,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x219
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x02,
-        .tilemapTop = 0x0f,
-        .width = 0x1a,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x231
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x0e,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .bg = 2,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x231
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x0f,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .bg = 2,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 15,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x269
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x10,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .bg = 2,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 16,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x2a5
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x17,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .bg = 2,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 23,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x2e5
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x16,
-        .tilemapTop = 0x11,
-        .width = 0x07,
-        .height = 0x02,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 22,
+        .tilemapTop = 17,
+        .width = 7,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 0x199
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x16,
-        .tilemapTop = 0x0f,
-        .width = 0x07,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 22,
+        .tilemapTop = 15,
+        .width = 7,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x199
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x16,
-        .tilemapTop = 0x0d,
-        .width = 0x07,
-        .height = 0x06,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 22,
+        .tilemapTop = 13,
+        .width = 7,
+        .height = 6,
+        .paletteNum = 15,
         .baseBlock = 0x199
     }, {
-        .bg = 0x02,
-        .tilemapLeft = 0x16,
-        .tilemapTop = 0x0b,
-        .width = 0x07,
-        .height = 0x08,
-        .paletteNum = 0x0f,
+        .bg = 2,
+        .tilemapLeft = 22,
+        .tilemapTop = 11,
+        .width = 7,
+        .height = 8,
+        .paletteNum = 15,
         .baseBlock = 0x199
     }
 };
@@ -618,9 +618,9 @@ static bool8 BerryPouchLoadGfx(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gBerryPouchBgPals, 0, 0x60);
+        LoadCompressedPalette(gBerryPouchBgPals, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         if (gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBerryPouchBgPal0FemaleOverride, 0, 0x20);
+            LoadCompressedPalette(gBerryPouchBgPal0FemaleOverride, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         sResources->data[0]++;
         break;
     case 3:
@@ -1411,10 +1411,10 @@ static void BerryPouchInitWindows(void)
     u8 i;
     InitWindows(sWindowTemplates_Main);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x001, 0xE0);
-    LoadMenuMessageWindowGfx(0, 0x013, 0xD0);
-    LoadStdWindowGfx(0, 0x00A, 0xC0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowGfx(0, 0x001, BG_PLTT_ID(14));
+    LoadMenuMessageWindowGfx(0, 0x013, BG_PLTT_ID(13));
+    LoadStdWindowGfx(0, 0x00A, BG_PLTT_ID(12));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i < 3; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     PutWindowTilemap(0);
@@ -1438,9 +1438,9 @@ static u8 GetOrCreateVariableWindow(u8 winIdx)
     {
         sVariableWindowIds[winIdx] = AddWindow(&sWindowTemplates_Variable[winIdx]);
         if (winIdx == 2 || winIdx == 6 || winIdx == 7 || winIdx == 8 || winIdx == 9)
-            DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x00A, 0xC);
+            DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x00A, 12);
         else
-            DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x001, 0xE);
+            DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x001, 14);
         ScheduleBgCopyTilemapToVram(2);
         retval = sVariableWindowIds[winIdx];
     }
@@ -1449,7 +1449,7 @@ static u8 GetOrCreateVariableWindow(u8 winIdx)
 
 static void VariableWindowSetAltFrameTileAndPalette(u8 winIdx)
 {
-    DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x001, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x001, 14);
 }
 
 static void DestroyVariableWindow(u8 winIdx)
@@ -1490,12 +1490,12 @@ void DisplayItemMessageInBerryPouch(u8 taskId, u8 fontId, const u8 * str, TaskFu
 
 static void CreateYesNoMenuWin3(u8 taskId, const struct YesNoFuncTable *ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[3], FONT_NORMAL, 0, 2, 0x001, 0xE, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[3], FONT_NORMAL, 0, 2, 0x001, 14, ptrs);
 }
 
 static void CreateYesNoMenuWin4(u8 taskId, const struct YesNoFuncTable *ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[4], FONT_NORMAL, 0, 2, 0x001, 0xE, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_Variable[4], FONT_NORMAL, 0, 2, 0x001, 14, ptrs);
 }
 
 static void PrintMoneyInWin2(void)

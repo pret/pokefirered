@@ -242,7 +242,7 @@ void UnionRoomChat_UpdateObjPalCycle(int arg0)
 {
     const u16 *palette = &sUnionRoomChatInterfacePal[arg0 * 2 + 1];
     u8 index = IndexOfSpritePaletteTag(0);
-    LoadPalette(palette, index * 16 + 0x101, 4);
+    LoadPalette(palette, OBJ_PLTT_ID(index) + 1, PLTT_SIZEOF(2));
 }
 
 void UnionRoomChat_SetSelectorCursorClosedImage(void)

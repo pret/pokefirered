@@ -576,9 +576,9 @@ static bool8 DoLoadBagGraphics(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gBagBgPalette, 0x00, 0x60);
+        LoadCompressedPalette(gBagBgPalette, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         if (!BagIsTutorial() && gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBagBgPalette_FemaleOverride, 0x00, 0x20);
+            LoadCompressedPalette(gBagBgPalette_FemaleOverride, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         sBagMenuDisplay->data[0]++;
         break;
     case 3:
@@ -922,20 +922,20 @@ static void ShowBagOrBeginWin0OpenTask(void)
     u16 paldata = RGB_BLACK;
     u8 taskId;
 
-    LoadPalette(&paldata, 0x00, 0x02);
+    SetBackdropFromPalette(&paldata);
     SetGpuReg(REG_OFFSET_WININ, 0);
     SetGpuReg(REG_OFFSET_WINOUT, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     if (gBagMenuState.bagOpen == TRUE)
     {
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 0));
     }
     else
     {
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
-        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT));
         taskId = CreateTask(Task_AnimateWin0v, 0);
         gTasks[taskId].data[0] = 192;
         gTasks[taskId].data[1] = -16;

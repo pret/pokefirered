@@ -201,7 +201,7 @@ u8 CreatePokedexAreaMarkers(u16 species, u16 tilesTag, u8 palIdx, u8 y)
     spriteSheet.size = 0x4A0;
     spriteSheet.tag = tilesTag;
     LoadCompressedSpriteSheet(&spriteSheet);
-    LoadPalette(sMarkerPal, 0x100 + 16 * palIdx, 0x20);
+    LoadPalette(sMarkerPal, OBJ_PLTT_ID(palIdx), sizeof(sMarkerPal));
 
     // Get marker subsprites
     taskId = CreateTask(Task_ShowAreaMarkers, 0);

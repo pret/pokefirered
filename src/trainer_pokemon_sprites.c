@@ -81,7 +81,7 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
         if (paletteTag == TAG_NONE)
         {
             sCreatingSpriteTemplate.paletteTag = TAG_NONE;
-            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
+            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
         }
         else
         {
@@ -94,7 +94,7 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
         if (paletteTag == TAG_NONE)
         {
             sCreatingSpriteTemplate.paletteTag = TAG_NONE;
-            LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, 0x100 + paletteSlot * 0x10, 0x20);
+            LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
         }
         else
         {
@@ -107,9 +107,9 @@ void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8 palett
 void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 paletteSlot, bool8 isTrainer)
 {
     if (!isTrainer)
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), paletteSlot * 0x10, 0x20);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
     else
-        LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, paletteSlot * 0x10, 0x20);
+        LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, BG_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
 }
 
 void AssignSpriteAnimsTable(bool8 isTrainer)

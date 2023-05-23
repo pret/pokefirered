@@ -75,7 +75,7 @@ static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s3
     switch (*state)
     {
     case 0:
-        DrawTextBorderOuter(0, 0x001, 0xD);
+        DrawTextBorderOuter(0, 0x001, 13);
         UnionRoomBattle_CreateTextPrinter(0, str, 0, 2, speed);
         PutWindowTilemap(0);
         CopyWindowToVram(0, COPYWIN_FULL);
@@ -120,8 +120,8 @@ void CB2_UnionRoomBattle(void)
         ClearWindowTilemap(0);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        LoadStdWindowGfx(0, 1, 0xD0);
+        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
+        LoadStdWindowGfx(0, 1, BG_PLTT_ID(13));
         Menu_LoadStdPal();
         SetVBlankCallback(VBlankCB_UnionRoomBattle);
         gMain.state++;

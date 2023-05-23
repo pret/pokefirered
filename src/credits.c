@@ -803,9 +803,9 @@ static bool32 DoOverworldMapScrollScene(u8 whichMon)
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(36, DISPLAY_HEIGHT - 36));
         SwitchWin1OffWin0On();
         InitBgDarkenEffect();
-        Menu_LoadStdPalAt(0xF0);
-        gPlttBufferUnfaded[0xFF] = RGB_BLACK;
-        gPlttBufferFaded[0xFF] = RGB_BLACK;
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
+        gPlttBufferUnfaded[BG_PLTT_ID(15) + 15] = RGB_BLACK;
+        gPlttBufferFaded[BG_PLTT_ID(15) + 15] = RGB_BLACK;
         return TRUE;
     default:
         return FALSE;
@@ -827,9 +827,9 @@ static s32 RollCredits(void)
     case CREDITSSCENE_SETUP_DARKEN_EFFECT:
         InitBgDarkenEffect();
         CreateCreditsWindow();
-        Menu_LoadStdPalAt(0xF0);
-        gPlttBufferUnfaded[0xFF] = RGB_BLACK;
-        gPlttBufferFaded[0xFF] = RGB_BLACK;
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
+        gPlttBufferUnfaded[BG_PLTT_ID(15) + 15] = RGB_BLACK;
+        gPlttBufferFaded[BG_PLTT_ID(15) + 15] = RGB_BLACK;
         sCreditsMgr->mainseqno = CREDITSSCENE_OPEN_WIN0;
         return 0;
     case CREDITSSCENE_OPEN_WIN0:
@@ -1128,15 +1128,15 @@ static bool32 DoCreditsMonScene(void)
         DecompressAndLoadBgGfxUsingHeap(2, sCreditsMonCircle_Tiles, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(1, gCreditsMonPokeball_Tilemap, 0x500, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(2, sCreditsMonCircle_Tilemap, 0x400, 0, 1);
-        LoadPalette(gCreditsMonPokeball_Pals[sCreditsMgr->whichMon], 0, 0x20);
-        LoadPalette(sCreditsMonCircle_Pal, 0xF0, 0x20);
+        LoadPalette(gCreditsMonPokeball_Pals[sCreditsMgr->whichMon], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(sCreditsMonCircle_Pal, BG_PLTT_ID(15), sizeof(sCreditsMonCircle_Pal));
         LoadCreditsMonPic(sCreditsMgr->whichMon);
         SetVBlankCallback(VBlankCB);
         EnableInterrupts(INTR_FLAG_VBLANK);
         sCreditsMgr->subseqno++;
         break;
     case 1:
-        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, PIXEL_FILL(1));
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 17);
         PutWindowTilemap(0);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(1);
@@ -1249,7 +1249,7 @@ static bool32 DoCopyrightOrTheEndGfxScene(void)
         ChangeBgY(0, 0, BG_COORD_SET);
         DecompressAndLoadBgGfxUsingHeap(0, sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].tiles, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(0, sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].map, 0x800, 0, 1);
-        LoadPalette(sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].palette, 0x00, 0x200);
+        LoadPalette(sCopyrightOrTheEndGfxHeaders[sCreditsMgr->whichMon].palette, BG_PLTT_ID(0), 16 * PLTT_SIZE_4BPP);
         SetVBlankCallback(VBlankCB);
         EnableInterrupts(INTR_FLAG_VBLANK);
         sCreditsMgr->subseqno++;
@@ -1375,7 +1375,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
                 sprSheet.size = 0x3000;
                 sprSheet.tag = data->characterTilesTag;
                 LoadCompressedSpriteSheet(&sprSheet);
-                LoadPalette(sPlayerMale_Pal, 0x1F0, sizeof(sPlayerMale_Pal));
+                LoadPalette(sPlayerMale_Pal, OBJ_PLTT_ID(15), sizeof(sPlayerMale_Pal));
             }
             else
             {
@@ -1383,7 +1383,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
                 sprSheet.size = 0x3000;
                 sprSheet.tag = data->characterTilesTag;
                 LoadCompressedSpriteSheet(&sprSheet);
-                LoadPalette(sPlayerFemale_Pal, 0x1F0, sizeof(sPlayerFemale_Pal));
+                LoadPalette(sPlayerFemale_Pal, OBJ_PLTT_ID(15), sizeof(sPlayerFemale_Pal));
             }
             break;
         case 1:
@@ -1392,7 +1392,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
             sprSheet.size = 0x3000;
             sprSheet.tag = data->characterTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sRival_Pal, 0x1F0, sizeof(sRival_Pal));
+            LoadPalette(sRival_Pal, OBJ_PLTT_ID(15), sizeof(sRival_Pal));
             break;
         }
         sprTemplate = sPlayerOrRivalSpriteTemplate;
@@ -1410,7 +1410,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGround_Grass_Pal, 0x1E0, sizeof(sGround_Grass_Pal));
+            LoadPalette(sGround_Grass_Pal, OBJ_PLTT_ID(14), sizeof(sGround_Grass_Pal));
             sprTemplate = sGroundSpriteTemplate_Running;
             break;
         case 1:
@@ -1418,7 +1418,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGround_Grass_Pal, 0x1E0, sizeof(sGround_Grass_Pal));
+            LoadPalette(sGround_Grass_Pal, OBJ_PLTT_ID(14), sizeof(sGround_Grass_Pal));
             sprTemplate = sGroundSpriteTemplate_Static;
             break;
         case 2:
@@ -1426,7 +1426,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGround_Dirt_Pal, 0x1E0, sizeof(sGround_Dirt_Pal));
+            LoadPalette(sGround_Dirt_Pal, OBJ_PLTT_ID(14), sizeof(sGround_Dirt_Pal));
             sprTemplate = sGroundSpriteTemplate_Running;
             break;
         case 3:
@@ -1434,7 +1434,7 @@ static void LoadPlayerOrRivalSprite(u8 whichScene)
             sprSheet.size = 0x3000;
             sprSheet.tag = data->groundTilesTag;
             LoadCompressedSpriteSheet(&sprSheet);
-            LoadPalette(sGround_City_Pal, 0x1E0, sizeof(sGround_City_Pal));
+            LoadPalette(sGround_City_Pal, OBJ_PLTT_ID(14), sizeof(sGround_City_Pal));
             sprTemplate = sGroundSpriteTemplate_Running;
             break;
         }

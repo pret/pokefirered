@@ -450,3 +450,43 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	call PalletTown_EventScript_SignLadyShowSign
 	release
 	end
+
+PalletTown_EventScript_RollDice::
+	msgbox PalletTown_Text_RollDice, MSGBOX_SIGN
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	random 3
+	call_if_eq VAR_RESULT, 0, PalletTown_EventScript_ShowRandomManOne
+	call_if_eq VAR_RESULT, 1, PalletTown_EventScript_ShowRandomManTwo
+	call_if_eq VAR_RESULT, 2, PalletTown_EventScript_ShowRandomManThree
+	warp MAP_PALLET_TOWN, 4, 18
+	end
+
+PalletTown_EventScript_ShowRandomManOne::
+	clearflag FLAG_0x0B0
+	setflag FLAG_0x0B1
+	setflag FLAG_0x0B2
+	return
+
+PalletTown_EventScript_ShowRandomManTwo::
+	setflag FLAG_0x0B0
+	clearflag FLAG_0x0B1
+	setflag FLAG_0x0B2
+	return
+
+PalletTown_EventScript_ShowRandomManThree::
+	setflag FLAG_0x0B0
+	setflag FLAG_0x0B1
+	clearflag FLAG_0x0B2
+	return
+
+PalletTown_EventScript_RandomManOne::
+	msgbox PalletTown_Text_IAmRandomDudeOne, MSGBOX_NPC
+	end
+
+PalletTown_EventScript_RandomManTwo::
+	msgbox PalletTown_Text_IAmRandomDudeTwo, MSGBOX_NPC
+	end
+
+PalletTown_EventScript_RandomManThree::
+	msgbox PalletTown_Text_IAmRandomDudeThree, MSGBOX_NPC
+	end

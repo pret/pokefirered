@@ -65,3 +65,22 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "Good for you, good for you.\n"
     .string "Hohoho.$"
 
+PalletTown_Text_RollDice::
+    .string "Rolling!\p"
+    .string "What happened?\n"
+    .string "Lets see$"
+
+PalletTown_Text_IAmRandomDudeOne::
+    .string "I'm visible!\p"
+    .string "I am the first dude\n"
+    .string "out of three.$"
+
+PalletTown_Text_IAmRandomDudeTwo::
+    .string "I'm visible!\p"
+    .string "I am the second dude\n"
+    .string "out of three.$"
+
+PalletTown_Text_IAmRandomDudeThree::
+    .string "I'm visible!\p"
+    .string "I am the third dude\n"
+    .string "out of three.$"

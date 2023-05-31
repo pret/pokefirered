@@ -57,6 +57,9 @@
 // Contests
 #define CONTEST_CATEGORIES_COUNT  5
 
+// Hidden Oaks
+#define HIDDEN_OAK_SPAWN_COUNT 1
+
 // string lengths
 #define ITEM_NAME_LENGTH 14
 #define POKEMON_NAME_LENGTH 10

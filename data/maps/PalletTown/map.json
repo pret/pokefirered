@@ -80,7 +80,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HidingOak_EventScript_FoundOak_1",
-      "flag": "FLAG_0x0B0"
+      "flag": "HIDDEN_OAK_INVISIBLE_FLAG_1"
     },
     {
       "type": "object",
@@ -94,7 +94,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HidingOak_EventScript_FoundOak_2",
-      "flag": "FLAG_0x0B1"
+      "flag": "HIDDEN_OAK_INVISIBLE_FLAG_2"
     },
     {
       "type": "object",
@@ -108,7 +108,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HidingOak_EventScript_FoundOak_3",
-      "flag": "FLAG_0x0B2"
+      "flag": "HIDDEN_OAK_INVISIBLE_FLAG_3"
     },
     {
       "type": "object",
@@ -122,7 +122,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HidingOak_EventScript_FoundOak_4",
-      "flag": "FLAG_0x0B3"
+      "flag": "HIDDEN_OAK_INVISIBLE_FLAG_4"
     },
     {
       "type": "object",
@@ -136,7 +136,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HidingOak_EventScript_FoundOak_5",
-      "flag": "FLAG_0x0B4"
+      "flag": "HIDDEN_OAK_INVISIBLE_FLAG_5"
     }
   ],
   "warp_events": [
@@ -238,7 +238,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "HidingOak_EventScript_SpawnOaks"
+      "script": "HidingOak_EventScript_StartHunt"
     },
     {
       "type": "sign",
@@ -246,7 +246,15 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "HidingOak_EventScript_HideAllOaks"
+      "script": "HidingOak_EventScript_ResetHunt"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HidingOak_EventScript_TryEndHunt"
     }
   ]
 }

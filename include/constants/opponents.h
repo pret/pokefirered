@@ -754,4 +754,6 @@
 #define NUM_TRAINERS                             743
 #define MAX_TRAINERS_COUNT                       768
 
+#define MAX_HIDDEN_OAK_COUNT                     5
+
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

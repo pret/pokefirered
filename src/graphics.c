@@ -1078,8 +1078,8 @@ const u32 gStatusPal_Icons[] = INCBIN_U32("graphics/interface/status_icons.gbapa
 const u32 gBagBg_Gfx[] = INCBIN_U32("graphics/item_menu/bg.4bpp.lz");
 const u32 gBagBg_Tilemap[] = INCBIN_U32("graphics/item_menu/bg.bin.lz");
 const u32 gBagBg_ItemPC_Tilemap[] = INCBIN_U32("graphics/item_menu/bg_item_pc.bin.lz");
-const u32 gBagBgPalette[] = INCBIN_U32("graphics/item_menu/bag_pal1.gbapal.lz"); // palette 1 (Boy + misc Pal)
-const u32 gBagBgPalette_FemaleOverride[] = INCBIN_U32("graphics/item_menu/bag_pal2.gbapal.lz"); // palette 2 (Girl)
+const u32 gBagBgPalette[] = INCBIN_U32("graphics/item_menu/bg.gbapal.lz"); // palette 1 (Boy + misc Pal)
+const u32 gBagBgPalette_FemaleOverride[] = INCBIN_U32("graphics/item_menu/bg_female.gbapal.lz"); // palette 2 (Girl)
 
 const u32 gBagMale_Gfx[] = INCBIN_U32("graphics/interface/bag_male.4bpp.lz");
 const u32 gBagFemale_Gfx[] = INCBIN_U32("graphics/interface/bag_female.4bpp.lz");

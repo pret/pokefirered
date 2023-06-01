@@ -4464,9 +4464,9 @@ extern const u32 gBuyMenuFrame_Pal[];
 extern const u16 gPPTextPalette[];
 
 // trainer card
-extern const u16 gKantoTrainerCard_Pal[];
+extern const u16 gKantoTrainerCardBlue_Pal[];
 extern const u32 gKantoTrainerCard_Gfx[];
-extern const u16 gHoennTrainerCard_Pal[];
+extern const u16 gHoennTrainerCardGreen_Pal[];
 extern const u32 gHoennTrainerCard_Gfx[];
 
 // battle_interface

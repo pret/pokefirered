@@ -3934,7 +3934,7 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data
     }
     else
     {
-        BlitMoveInfoIcon(windowId, type + 1, 68, y);
+        BlitMenuInfoIcon(windowId, type + 1, 68, y);
         PrintUnionRoomText(windowId, FONT_NORMAL, gSpeciesNames[species], 118, y, colorIdx);
         ConvertIntToDecimalStringN(levelStr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
         PrintUnionRoomText(windowId, FONT_NORMAL, levelStr, GetStringRightAlignXOffset(2, levelStr, 218), y, colorIdx);

@@ -177,10 +177,10 @@ u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseT
     window.baseBlock = baseTile;
     sTopBarWindowId = AddWindow(&window);
     if (palette > 15)
-        palette = 15 * 16;
+        palette = BG_PLTT_ID(15);
     else
-        palette *= 16;
-    LoadPalette(GetTextWindowPalette(2), palette, 0x20);
+        palette = BG_PLTT_ID(palette);
+    LoadPalette(GetTextWindowPalette(2), palette, PLTT_SIZE_4BPP);
     return sTopBarWindowId;
 }
 

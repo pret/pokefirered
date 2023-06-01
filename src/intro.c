@@ -405,7 +405,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] = {
 	    .tilemapTop = 4,
 	    .width = 18,
 	    .height = 9,
-	    .paletteNum = 0xD,
+	    .paletteNum = 13,
 	    .baseBlock = 0x000
     },
     [WIN_COUNT] = DUMMY_WIN_TEMPLATE
@@ -930,7 +930,7 @@ static bool8 SetUpCopyrightScreen(void)
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT + sizeof(vu16), PLTT_SIZE - sizeof(vu16));
         ResetPaletteFade();
-        LoadCopyrightGraphics(0 * BG_CHAR_SIZE, 7 * BG_SCREEN_SIZE, 0);
+        LoadCopyrightGraphics(0 * BG_CHAR_SIZE, 7 * BG_SCREEN_SIZE, BG_PLTT_ID(0));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -1025,15 +1025,15 @@ static void CB2_SetUpIntro(void)
         DmaFill16(3, 0, VRAM, VRAM_SIZE);
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
-        FillPalette(RGB_BLACK, 0, 0x400);
+        FillPalette(RGB_BLACK, 0, PLTT_SIZE);
         ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, sBgTemplates_GameFreakScene, ARRAY_COUNT(sBgTemplates_GameFreakScene));
         break;
     case 1:
-        LoadPalette(sGameFreakBg_Pal, 0x00, sizeof(sGameFreakBg_Pal));
+        LoadPalette(sGameFreakBg_Pal, BG_PLTT_ID(0), sizeof(sGameFreakBg_Pal));
         DecompressAndCopyTileDataToVram(BG_GF_BACKGROUND, sGameFreakBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_GF_BACKGROUND, sGameFreakBg_Map, 0, 0, 1);
-        LoadPalette(sGameFreakLogo_Pal, 0xD0, sizeof(sGameFreakLogo_Pal));
+        LoadPalette(sGameFreakLogo_Pal, BG_PLTT_ID(13), sizeof(sGameFreakLogo_Pal));
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
@@ -1113,7 +1113,7 @@ static void IntroCB_Init(struct IntroSequenceData * this)
         InitWindows(sWindowTemplates);
         LZ77UnCompWram(sGameFreakText_Gfx, this->gameFreakTextGfx);
         LZ77UnCompWram(sGameFreakLogo_Gfx, this->gameFreakLogoGfx);
-        FillBgTilemapBufferRect(BG_GF_TEXT_LOGO, 0x000, 0, 0, 32, 32, 0x11);
+        FillBgTilemapBufferRect(BG_GF_TEXT_LOGO, 0x000, 0, 0, 32, 32, 17);
         FillWindowPixelBuffer(WIN_GF_TEXT_LOGO, PIXEL_FILL(0));
         BlitBitmapToWindow(WIN_GF_TEXT_LOGO, this->gameFreakTextGfx, 0, 40, 144, 16);
         PutWindowTilemap(WIN_GF_TEXT_LOGO);
@@ -1293,8 +1293,8 @@ static void IntroCB_Scene1(struct IntroSequenceData * this)
     {
     case 0:
         SetVBlankCallback(NULL);
-        LoadPalette(sScene1_Grass_Pal, 16 * PALSLOT_SCENE1_GRASS, sizeof(sScene1_Grass_Pal));
-        LoadPalette(sScene1_Bg_Pal, 16 * PALSLOT_SCENE1_BG, sizeof(sScene1_Bg_Pal));
+        LoadPalette(sScene1_Grass_Pal, BG_PLTT_ID(PALSLOT_SCENE1_GRASS), sizeof(sScene1_Grass_Pal));
+        LoadPalette(sScene1_Bg_Pal, BG_PLTT_ID(PALSLOT_SCENE1_BG), sizeof(sScene1_Bg_Pal));
         BlendPalettes((1 << PALSLOT_SCENE1_GRASS) | (1 << PALSLOT_SCENE1_BG), 16, RGB_WHITE);
         InitBgsFromTemplates(0, sBgTemplates_Scene1, ARRAY_COUNT(sBgTemplates_Scene1));
         DecompressAndCopyTileDataToVram(BG_SCENE1_BACKGROUND, sScene1_Bg_Gfx, 0, 0, 0);
@@ -1439,9 +1439,9 @@ static void IntroCB_Scene2(struct IntroSequenceData * this)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             SetVBlankCallback(NULL);
-            LoadPalette(sScene2_Bg_Pal, 0x10, sizeof(sScene2_Bg_Pal));
-            LoadPalette(sGengar_Pal, 0x50, sizeof(sGengar_Pal));
-            LoadPalette(sScene2_NidorinoClose_Pal, 0x60, sizeof(sScene2_NidorinoClose_Pal));
+            LoadPalette(sScene2_Bg_Pal, BG_PLTT_ID(1), sizeof(sScene2_Bg_Pal));
+            LoadPalette(sGengar_Pal, BG_PLTT_ID(5), sizeof(sGengar_Pal));
+            LoadPalette(sScene2_NidorinoClose_Pal, BG_PLTT_ID(6), sizeof(sScene2_NidorinoClose_Pal));
             BlendPalettes(PALETTES_ALL & ~1, 16, RGB_WHITE);
             DecompressAndCopyTileDataToVram(BG_SCENE2_PLANTS, sScene2_Plants_Gfx, 0, 0, 0);
             DecompressAndCopyTileDataToVram(BG_SCENE2_PLANTS, sScene2_Plants_Map, 0, 0, 1);
@@ -1553,8 +1553,8 @@ static void IntroCB_Scene3_Entrance(struct IntroSequenceData * this)
     switch (this->state)
     {
     case 0:
-        LoadPalette(sScene3_Bg_Pal, 0x10, sizeof(sScene3_Bg_Pal));
-        LoadPalette(sGengar_Pal, 0x50, sizeof(sGengar_Pal));
+        LoadPalette(sScene3_Bg_Pal, BG_PLTT_ID(1), sizeof(sScene3_Bg_Pal));
+        LoadPalette(sGengar_Pal, BG_PLTT_ID(5), sizeof(sGengar_Pal));
         BlendPalettes(PALETTES_ALL & ~1, 16, RGB_WHITE);
         InitBgsFromTemplates(0, sBgTemplates_Scene3, ARRAY_COUNT(sBgTemplates_Scene3));
         DecompressAndCopyTileDataToVram(BG_SCENE3_BACKGROUND, sScene3_Bg_Gfx, 0, 0, 0);
@@ -1831,7 +1831,7 @@ static void IntroCB_Scene3_Fight(struct IntroSequenceData * this)
     case 13:
         if (++this->timer > 8)
         {
-            CpuFill16(RGB_WHITE, gPlttBufferUnfaded + 16, 64);
+            CpuFill16(RGB_WHITE, &gPlttBufferUnfaded[BG_PLTT_ID(1)], 2 * PLTT_SIZE_4BPP);
             BeginNormalPaletteFade(PALETTES_ALL & ~1, -2, 0, 16, RGB_BLACK);
             this->state++;
         }
@@ -1916,7 +1916,7 @@ static void IntroCB_ExitToTitleScreen(struct IntroSequenceData * this)
     switch (this->state)
     {
     case 0:
-        FillPalette(RGB_BLACK, 0, 0x400);
+        FillPalette(RGB_BLACK, 0, PLTT_SIZE);
         this->state++;
         break;
     case 1:

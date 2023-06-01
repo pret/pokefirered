@@ -8,8 +8,7 @@
 #define gPaletteFade_delay            (gPaletteFade.multipurpose2) // normal and hardware fade
 #define gPaletteFade_submode          (gPaletteFade.multipurpose2) // fast fade
 
-#define PLTT_BUFFER_SIZE 0x200
-#define PLTT_DECOMP_BUFFER_SIZE (PLTT_BUFFER_SIZE * 2)
+#define PLTT_BUFFER_SIZE (PLTT_SIZE / sizeof(u16))
 
 #define PALETTE_FADE_STATUS_DELAY 2
 #define PALETTE_FADE_STATUS_ACTIVE 1
@@ -19,6 +18,13 @@
 #define PALETTES_BG      0x0000FFFF
 #define PALETTES_OBJECTS 0xFFFF0000
 #define PALETTES_ALL     (PALETTES_BG | PALETTES_OBJECTS)
+
+#define PLTT_ID(n) ((n) * 16)
+#define BG_PLTT_OFFSET 0x000
+#define OBJ_PLTT_OFFSET 0x100
+#define BG_PLTT_ID(n) (BG_PLTT_OFFSET + PLTT_ID(n))
+#define OBJ_PLTT_ID(n) (OBJ_PLTT_OFFSET + PLTT_ID(n))
+#define OBJ_PLTT_ID2(n) (PLTT_ID((n) + 16))
 
 enum
 {
@@ -79,5 +85,15 @@ void CopyPaletteInvertedTint(const u16 *src, u16 *dst, u16 count, u8 tone);
 void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u16 color, u8 priority, u8 id);
 bool32 IsBlendPalettesGraduallyTaskActive(u8 var);
 void DestroyBlendPalettesGraduallyTask(void);
+
+static inline void SetBackdropFromColor(u16 color)
+{
+  FillPalette(color, 0, PLTT_SIZEOF(1));
+}
+
+static inline void SetBackdropFromPalette(const u16 *palette)
+{
+  LoadPalette(palette, 0, PLTT_SIZEOF(1));
+}
 
 #endif // GUARD_PALETTE_H

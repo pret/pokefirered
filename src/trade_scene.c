@@ -627,7 +627,7 @@ static void SpriteCB_LinkMonShadow(struct Sprite *sprite)
     {
         if (++sprite->data[0] == 12)
             sprite->data[0] = 0;
-        LoadPalette(&sLinkMonShadow_Pal[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
+        LoadPalette(&sLinkMonShadow_Pal[sprite->data[0]], OBJ_PLTT_ID2(sprite->oam.paletteNum) + 4, PLTT_SIZEOF(1));
     }
 }
 
@@ -940,13 +940,13 @@ static void TradeAnimInit_LoadGfx(void)
     DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
     LZDecompressWram(gBattleInterface_Textbox_Tilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x000, 0x20);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     InitWindows(sTradeMessageWindowTemplates);
     // ... and doing the same load again
     DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
     LZDecompressWram(gBattleInterface_Textbox_Tilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
-    LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0x000, 0x20);
+    LoadCompressedPalette(gBattleInterface_Textbox_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
 
 static void CB2_InitInGameTrade(void)
@@ -1120,7 +1120,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         sTradeAnim->bg2hofs = 0xB4;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256);
-        LoadPalette(gTradeGba2_Pal, 0x10, 0x60);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(1), 0x1420, 0x1000);
         DmaCopy16Defvars(3, gTradeOrHatchMonShadowTilemap, (void *)BG_SCREEN_ADDR(18), 0x1000);
         break;
@@ -1158,7 +1158,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         }
         break;
     case 3:
-        LoadPalette(sWirelessSignalAnimPals_Off, 0x30, 0x20);
+        LoadPalette(sWirelessSignalAnimPals_Off, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         LZ77UnCompVram(sWirelessSignal4bpp, BG_CHAR_ADDR(1));
         LZ77UnCompVram(sWirelessSignalTilemap, BG_SCREEN_ADDR(18));
         sTradeAnim->bg2vofs = 0x50;
@@ -1211,7 +1211,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         sTradeAnim->bg2hofs = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256);
-        LoadPalette(gTradeGba2_Pal, 0x10, 0x60);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 3 * PLTT_SIZE_4BPP);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *)BG_CHAR_ADDR(1), 0x1420, 0x1000);
         DmaCopy16Defvars(3, gTradeOrHatchMonShadowTilemap, (void *)BG_SCREEN_ADDR(18), 0x1000);
         break;
@@ -2791,16 +2791,16 @@ static void Task_AnimateWirelessSignal(u8 taskId)
     if (!tSignalComingBack)
     {
         if (paletteIdx == 0x100)
-            LoadPalette(sWirelessSignalAnimPals_Off, 0x30, 0x20);
+            LoadPalette(sWirelessSignalAnimPals_Off, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         else
-            LoadPalette(&sWirelessSignalAnimPals_Outbound[paletteIdx], 0x30, 0x20);
+            LoadPalette(&sWirelessSignalAnimPals_Outbound[paletteIdx], BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     }
     else
     {
         if (paletteIdx == 0x100)
-            LoadPalette(sWirelessSignalAnimPals_Off, 0x30, 0x20);
+            LoadPalette(sWirelessSignalAnimPals_Off, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         else
-            LoadPalette(&sWirelessSignalAnimPals_Inbound[paletteIdx], 0x30, 0x20);
+            LoadPalette(&sWirelessSignalAnimPals_Inbound[paletteIdx], BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     }
 
     if (sWirelessSignalAnimParams[tIdx][0] == 0 && tCounter == 0)

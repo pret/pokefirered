@@ -4,6 +4,7 @@
 #include "util.h"
 #include "task.h"
 #include "trig.h"
+#include "palette.h"
 #include "constants/songs.h"
 
 static void AnimFireSpiralInward(struct Sprite *sprite);
@@ -1239,7 +1240,7 @@ void AnimTask_BlendBackground(u8 taskId)
     struct BattleAnimBgData animBg;
 
     GetBattleAnimBg1Data(&animBg);
-    BlendPalette(animBg.paletteId * 16, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]);
+    BlendPalette(BG_PLTT_ID(animBg.paletteId), 16, gBattleAnimArgs[0], gBattleAnimArgs[1]);
     DestroyAnimVisualTask(taskId);
 }
 

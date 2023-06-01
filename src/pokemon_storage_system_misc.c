@@ -118,7 +118,7 @@ static bool8 MultiMove_Function_Start(void)
     {
     case 0:
         HideBg(0);
-        LoadMonIconPalettesAt(0x80);
+        LoadMonIconPalettesAt(BG_PLTT_ID(8));
         sMultiMove->state++;
         break;
     case 1:
@@ -167,7 +167,7 @@ static bool8 MultiMove_Function_Single(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             SetCursorPriorityTo1();
-            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             ShowBg(0);
             return FALSE;
         }
@@ -273,7 +273,7 @@ static bool8 MultiMove_Function_PlaceMons(void)
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             SetCursorPriorityTo1();
             ShowBg(0);
             return FALSE;
@@ -703,8 +703,7 @@ void CreateItemIconSprites(void)
             LoadCompressedSpriteSheet(&spriteSheet);
             gStorage->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * TILE_SIZE_4BPP + (void *)(OBJ_VRAM0);
             gStorage->itemIcons[i].palIndex = AllocSpritePalette(PALTAG_ITEM_ICON_0 + i);
-            gStorage->itemIcons[i].palIndex *= 16;
-            gStorage->itemIcons[i].palIndex += 0x100;
+            gStorage->itemIcons[i].palIndex = OBJ_PLTT_ID(gStorage->itemIcons[i].palIndex);
             spriteTemplate.tileTag = GFXTAG_ITEM_ICON_0 + i;
             spriteTemplate.paletteTag = PALTAG_ITEM_ICON_0 + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
@@ -1060,7 +1059,7 @@ static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
 
     CpuFastCopy(gStorage->itemIconBuffer, gStorage->itemIcons[id].tiles, 0x200);
     LZ77UnCompWram(itemPal, gStorage->itemIconBuffer);
-    LoadPalette(gStorage->itemIconBuffer, gStorage->itemIcons[id].palIndex, 0x20);
+    LoadPalette(gStorage->itemIconBuffer, gStorage->itemIcons[id].palIndex, PLTT_SIZE_4BPP);
 }
 
 static void SetItemIconAffineAnim(u8 id, u8 animNum)

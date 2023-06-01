@@ -1126,7 +1126,7 @@ void DestroyMonIcon(struct Sprite *sprite)
 void LoadMonIconPalettes(void)
 {
     u8 i;
-    for (i = 0; i < NELEMS(gMonIconPaletteTable); i++)
+    for (i = 0; i < ARRAY_COUNT(gMonIconPaletteTable); i++)
         LoadSpritePalette(&gMonIconPaletteTable[i]);
 }
 
@@ -1151,7 +1151,7 @@ void LoadMonIconPalette(u16 species)
 void FreeMonIconPalettes(void)
 {
     u8 i;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < ARRAY_COUNT(gMonIconPaletteTable); i++)
         FreeSpritePaletteByTag(gMonIconPaletteTable[i].tag);
 }
 
@@ -1179,12 +1179,12 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
 void LoadMonIconPalettesAt(u16 offset)
 {
     int i;
-    if (offset <= 0x100 - 0x60)
+    if (offset <= BG_PLTT_ID(16 - ARRAY_COUNT(gMonIconPaletteTable)))
     {
-        for (i = 0; i < (int)NELEMS(gMonIconPaletteTable); i++)
+        for (i = 0; i < (int)ARRAY_COUNT(gMonIconPaletteTable); i++)
         {
-            LoadPalette(gMonIconPaletteTable[i].data, offset, 0x20);
-            offset += 0x10;
+            LoadPalette(gMonIconPaletteTable[i].data, offset, PLTT_SIZE_4BPP);
+            offset += 16;
         }
     }
 }

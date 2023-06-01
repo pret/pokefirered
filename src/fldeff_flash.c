@@ -154,11 +154,13 @@ static const struct FlashStruct sTransitionTypes[] = {
     }, {0}
 };
 
-static const u16 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/field_effects/flash_white.gbapal");
-static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/field_effects/flash_black.gbapal");
-static const u16 sCaveTransitionPalette_Gradient[] = INCBIN_U16("graphics/field_effects/flash_gradient.gbapal");
-static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/field_effects/flash_effect_map.bin.lz");
-static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/field_effects/flash_effect_tiles.4bpp.lz");
+static const u16 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/cave_transition/white.gbapal");
+static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/cave_transition/black.gbapal");
+
+static const u16 sCaveTransitionPalette_Enter[] = INCBIN_U16("graphics/cave_transition/enter.gbapal");
+static const u16 sCaveTransitionPalette_Exit[] = INCBIN_U16("graphics/cave_transition/exit.gbapal");
+static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.lz");
+static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/cave_transition/tiles.4bpp.lz");
 
 bool8 SetUpFieldMove_Flash(void)
 {
@@ -299,8 +301,8 @@ static void Task_FlashTransition_Exit_1(u8 taskId)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
     LZ77UnCompVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
-    LoadPalette(sCaveTransitionPalette_White, 0xE0, 0x20);
-    LoadPalette(sCaveTransitionPalette_Gradient + 8, 0xE0, 0x10);
+    LoadPalette(sCaveTransitionPalette_White, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_White));
+    LoadPalette(sCaveTransitionPalette_Exit, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_Exit));
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -328,17 +330,17 @@ static void Task_FlashTransition_Exit_2(u8 taskId)
 
 static void Task_FlashTransition_Exit_3(u8 taskId)
 {
-    u16 r4;
+    u16 count;
     SetGpuReg(REG_OFFSET_BLDALPHA, (16 << 8) + 16);
-    r4 = gTasks[taskId].data[2];
-    if (r4 < 8)
+    count = gTasks[taskId].data[2];
+    if (count < 8)
     {
         gTasks[taskId].data[2]++;
-        LoadPalette(sCaveTransitionPalette_Gradient + 8 + r4, 0xE0, 0x10 - 2 * r4);
+        LoadPalette(&sCaveTransitionPalette_Exit[count], BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_Exit) - PLTT_SIZEOF(count));
     }
     else
     {
-        LoadPalette(sCaveTransitionPalette_White, 0x00, 0x20);
+        LoadPalette(sCaveTransitionPalette_White, BG_PLTT_ID(0), sizeof(sCaveTransitionPalette_White));
         gTasks[taskId].func = Task_FlashTransition_Exit_4;
         gTasks[taskId].data[2] = 8;
     }
@@ -372,8 +374,8 @@ static void Task_FlashTransition_Enter_1(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(31));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
-    LoadPalette(sCaveTransitionPalette_White, 0xE0, 0x20);
-    LoadPalette(sCaveTransitionPalette_Black, 0, 0x20);
+    LoadPalette(sCaveTransitionPalette_White, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_White));
+    LoadPalette(sCaveTransitionPalette_Black, BG_PLTT_ID(0), sizeof(sCaveTransitionPalette_Black));
     gTasks[taskId].func = Task_FlashTransition_Enter_2;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
@@ -382,13 +384,12 @@ static void Task_FlashTransition_Enter_1(u8 taskId)
 
 static void Task_FlashTransition_Enter_2(u8 taskId)
 {
-    u16 r4;
-    r4 = gTasks[taskId].data[2];
-    if (r4 < 16)
+    u16 count = gTasks[taskId].data[2];
+    if (count < 16)
     {
         gTasks[taskId].data[2]++;
         gTasks[taskId].data[2]++;
-        LoadPalette(&sCaveTransitionPalette_Gradient[16 - (r4 + 1)], 0xE0, 2 * (r4 + 1));
+        LoadPalette(&sCaveTransitionPalette_Enter[15 - count], BG_PLTT_ID(14), PLTT_SIZEOF(count + 1));
     }
     else
     {
@@ -408,7 +409,7 @@ static void Task_FlashTransition_Enter_3(u8 taskId)
     }
     else
     {
-        LoadPalette(sCaveTransitionPalette_Black, 0x00, 0x20);
+        LoadPalette(sCaveTransitionPalette_Black, BG_PLTT_ID(0), sizeof(sCaveTransitionPalette_Black));
         SetMainCallback2(gMain.savedCallback);
     }
 }

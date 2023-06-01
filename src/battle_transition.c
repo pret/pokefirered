@@ -655,7 +655,7 @@ static void Task_BattleTransition(u8 taskId)
 static bool8 Transition_StartIntro(struct Task *task)
 {
     SetWeatherScreenFadeOut();
-    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, sizeof(gPlttBufferUnfaded));
+    CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
     if (sTasks_Intro[task->tTransitionId] != NULL)
     {
         CreateTask(sTasks_Intro[task->tTransitionId], 4);
@@ -937,7 +937,7 @@ static bool8 BigPokeball_Init(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     CpuFill16(0, tilemap, BG_SCREEN_SIZE);
     CpuCopy16(sBigPokeball_Gfx, tileset, sizeof(sBigPokeball_Gfx));
-    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
+    LoadPalette(sFieldEffectPal_Pokeball, BG_PLTT_ID(15), sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
     return FALSE;
 }
@@ -1108,7 +1108,7 @@ static bool8 PokeballsTrail_Init(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     CpuCopy16(sSlidingPokeball_Tilemap, tileset, sizeof(sSlidingPokeball_Tilemap));
     CpuFill32(0, tilemap, BG_SCREEN_SIZE);
-    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
+    LoadPalette(sFieldEffectPal_Pokeball, BG_PLTT_ID(15), sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
     return FALSE;
 }
@@ -1906,8 +1906,8 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     
     GetBg0TilesDst(&tilemap, &tileset);
     CpuCopy16(sMugshotBanner_Gfx, tileset, sizeof(sMugshotBanner_Gfx));
-    LoadPalette(sOpponentMugshotsPals[task->tMugshotId], 0xF0, 0x20);
-    LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender], 0xFA, 0xC);
+    LoadPalette(sOpponentMugshotsPals[task->tMugshotId], BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(16 - 10));
     
     for (i = 0; i < 20; i++)
         for (j = 0; j < 32; j++, mugshotsMap++)
@@ -2588,7 +2588,7 @@ static bool8 GridSquares_Init(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     CpuCopy16(sGridSquare_Gfx, tileset, 0x20);
     CpuFill16(0xF0 << 8, tilemap, BG_SCREEN_SIZE);
-    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, sizeof(sFieldEffectPal_Pokeball));
+    LoadPalette(sFieldEffectPal_Pokeball, BG_PLTT_ID(15), sizeof(sFieldEffectPal_Pokeball));
     task->tState++;
     return FALSE;
 }

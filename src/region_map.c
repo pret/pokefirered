@@ -961,8 +961,8 @@ static void TintMapEdgesPalette(void)
     u16 mapEdgesPal[16];
     CpuCopy16(&sRegionMap_Pal[0x20], mapEdgesPal, sizeof(mapEdgesPal));
     RegionMap_DarkenPalette(mapEdgesPal, NELEMS(mapEdgesPal), 95);
-    LoadPalette(mapEdgesPal, 0x20, sizeof(mapEdgesPal));
-    LoadPalette(&sRegionMap_Pal[0x2F], 0x2F, sizeof(sRegionMap_Pal[0x2F]));
+    LoadPalette(mapEdgesPal, BG_PLTT_ID(2), sizeof(mapEdgesPal));
+    LoadPalette(&sRegionMap_Pal[0x2F], BG_PLTT_ID(2) + 15, PLTT_SIZEOF(1));
 }
 
 static void InitRegionMap(u8 type)
@@ -1105,18 +1105,18 @@ static bool8 LoadRegionMapGfx(void)
     switch (sRegionMap->loadGfxState)
     {
     case 0:
-        LoadPalette(sTopBar_Pal, 0xC0, sizeof(sTopBar_Pal));
+        LoadPalette(sTopBar_Pal, BG_PLTT_ID(12), sizeof(sTopBar_Pal));
         break;
     case 1:
         LoadPalette(sRegionMap_Pal, 0, sizeof(sRegionMap_Pal));
         TintMapEdgesPalette();
         if (sRegionMap->type != REGIONMAP_TYPE_NORMAL)
         {
-            LoadPalette(&sTopBar_Pal[15], 16 * 0, sizeof(sTopBar_Pal[15]));
-            LoadPalette(&sTopBar_Pal[15], 16 * 1, sizeof(sTopBar_Pal[15]));
-            LoadPalette(&sTopBar_Pal[15], 16 * 2, sizeof(sTopBar_Pal[15]));
-            LoadPalette(&sTopBar_Pal[15], 16 * 3, sizeof(sTopBar_Pal[15]));
-            LoadPalette(&sTopBar_Pal[15], 16 * 4, sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(0), sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(1), sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(2), sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(3), sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(4), sizeof(sTopBar_Pal[15]));
         }
         break;
     case 2:
@@ -1972,7 +1972,7 @@ static bool8 LoadMapPreviewGfx(void)
         LoadBgTiles(2, sDungeonMapPreview->tiles, sizeof(sDungeonMapPreview->tiles), 0);
         break;
     case 3:
-        LoadPalette(sDungeonMapPreview->mapPreviewInfo->palptr, 0xD0, 0x60);
+        LoadPalette(sDungeonMapPreview->mapPreviewInfo->palptr, BG_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
         break;
     default:
         return TRUE;
@@ -2073,7 +2073,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
             sDungeonMapPreview->blue -= 5;
             CpuCopy16(sDungeonMapPreview->mapPreviewInfo->palptr, sDungeonMapPreview->palette, 0x60);
             TintPalette_CustomTone(sDungeonMapPreview->palette, 48, sDungeonMapPreview->red, sDungeonMapPreview->green, sDungeonMapPreview->blue);
-            LoadPalette(sDungeonMapPreview->palette, 0xD0, sizeof(sDungeonMapPreview->palette));
+            LoadPalette(sDungeonMapPreview->palette, BG_PLTT_ID(13), sizeof(sDungeonMapPreview->palette));
         }
         sDungeonMapPreview->timer++;
         break;
@@ -2416,19 +2416,19 @@ static void Task_MapOpenAnim(u8 taskId)
         sMapOpenCloseAnim->openState++;
         break;
     case 10:
-        LoadPalette(&sTopBar_Pal[15], 16 * 0, sizeof(sTopBar_Pal[15]));
-        LoadPalette(&sTopBar_Pal[15], 16 * 1, sizeof(sTopBar_Pal[15]));
-        LoadPalette(&sTopBar_Pal[15], 16 * 2, sizeof(sTopBar_Pal[15]));
-        LoadPalette(&sTopBar_Pal[15], 16 * 3, sizeof(sTopBar_Pal[15]));
-        LoadPalette(&sTopBar_Pal[15], 16 * 4, sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(0), sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(1), sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(2), sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(3), sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(4), sizeof(sTopBar_Pal[15]));
         sMapOpenCloseAnim->openState++;
         break;
     case 11:
-        FillBgTilemapBufferRect(1, 0x002, 0, 1, 1, 1, 0x2);
-        FillBgTilemapBufferRect(1, 0x003, 1, 1, 1, 1, 0x2);
-        FillBgTilemapBufferRect(1, 0x03E, 28, 1, 1, 1, 0x2);
-        FillBgTilemapBufferRect(1, 0x03F, 29, 1, 1, 1, 0x2);
-        FillBgTilemapBufferRect(1, 0x03D, 2, 1, 26, 1, 0x2);
+        FillBgTilemapBufferRect(1, 0x002, 0, 1, 1, 1, 2);
+        FillBgTilemapBufferRect(1, 0x003, 1, 1, 1, 1, 2);
+        FillBgTilemapBufferRect(1, 0x03E, 28, 1, 1, 1, 2);
+        FillBgTilemapBufferRect(1, 0x03F, 29, 1, 1, 1, 2);
+        FillBgTilemapBufferRect(1, 0x03D, 2, 1, 26, 1, 2);
         CopyBgTilemapBufferToVram(1);
         m4aSongNumStop(SE_CARD_OPEN);
         PlaySE(SE_ROTATING_GATE);
@@ -2569,7 +2569,7 @@ static void Task_MapCloseAnim(u8 taskId)
         sMapOpenCloseAnim->closeState++;
         break;
     case 2:
-        LoadPalette(sRegionMap_Pal, 0, sizeof(sRegionMap_Pal));
+        LoadPalette(sRegionMap_Pal, BG_PLTT_ID(0), sizeof(sRegionMap_Pal));
         sMapOpenCloseAnim->closeState++;
         break;
     case 3:

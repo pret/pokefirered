@@ -978,10 +978,10 @@ static u16 GetButtonPalOffset(u8 button)
 {
     const u16 palOffsets[BUTTON_COUNT + 1] =
     {
-        [BUTTON_PAGE]  = IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP) * 16 + 0x10E,
-        [BUTTON_BACK]  = IndexOfSpritePaletteTag(PALTAG_BACK_BUTTON) * 16 + 0x10E,
-        [BUTTON_OK]    = IndexOfSpritePaletteTag(PALTAG_OK_BUTTON) * 16 + 0x10E,
-        [BUTTON_COUNT] = IndexOfSpritePaletteTag(PALTAG_OK_BUTTON) * 16 + 0x101,
+        [BUTTON_PAGE]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP)) + 14,
+        [BUTTON_BACK]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_BACK_BUTTON)) + 14,
+        [BUTTON_OK]    = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_OK_BUTTON)) + 14,
+        [BUTTON_COUNT] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_OK_BUTTON)) + 1,
     };
 
     return palOffsets[button];
@@ -1060,7 +1060,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
     {
         s8 gb = sprite->sColor;
         s8 r = sprite->sColor >> 1;
-        u16 index = IndexOfSpritePaletteTag(PALTAG_CURSOR) * 16 + 0x0101;
+        u16 index = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_CURSOR)) + 1;
 
         MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
     }
@@ -1872,9 +1872,9 @@ static void CreateHelperTasks(void)
 
 static void LoadPalettes(void)
 {
-    LoadPalette(gNamingScreenMenu_Pal, 0, sizeof(gNamingScreenMenu_Pal));
-    LoadPalette(gNamingScreenKeyboard_Pal, 0xA0, 0x20);
-    LoadPalette(GetTextWindowPalette(2), 0xB0, 0x20);
+    LoadPalette(gNamingScreenMenu_Pal, BG_PLTT_ID(0), sizeof(gNamingScreenMenu_Pal));
+    LoadPalette(gNamingScreenKeyboard_Pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+    LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(11), PLTT_SIZE_4BPP);
 }
 
 static void DecompressToBgTilemapBuffer(u8 bg, const u32 *src)

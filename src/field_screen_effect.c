@@ -394,7 +394,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
     case 0:
         windowId = AddWindow(&sWindowTemplate_WhiteoutText);
         gTasks[taskId].tWindowId = windowId;
-        Menu_LoadStdPalAt(0xF0);
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_FULL);

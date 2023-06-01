@@ -730,7 +730,7 @@ static const struct WindowTemplate sElevatorCurrentFloorWindowTemplate = {
     .tilemapTop = 1,
     .width = 7,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x008
 };
 
@@ -1098,8 +1098,8 @@ void DrawElevatorCurrentFloorWindow(void)
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
-        LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, 0xD0);
-        DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 0xD);
+        LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, BG_PLTT_ID(13));
+        DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 13);
         AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, gText_NowOn, 0, 2, 0xFF, NULL);
         floorname = sFloorNamePointers[gSpecialVar_0x8005];
         strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
@@ -2142,13 +2142,13 @@ void DoPokemonLeagueLightingEffect(void)
         {
             data[0] = sChampionRoomLightingTimers[0];
             data[2] = 8;
-            LoadPalette(sChampionRoomLightingPalettes[0], 0x70, 0x20);
+            LoadPalette(sChampionRoomLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         }
         else
         {
             data[0] = sEliteFourLightingTimers[0];
             data[2] = 11;
-            LoadPalette(sEliteFourLightingPalettes[0], 0x70, 0x20);
+            LoadPalette(sEliteFourLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         }
         data[1] = 0;
         ApplyGlobalTintToPaletteSlot(7, 1);
@@ -2171,12 +2171,12 @@ static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
         {
             data[0] = sChampionRoomLightingTimers[data[1]];
-            LoadPalette(sChampionRoomLightingPalettes[data[1]], 0x70, 0x20);
+            LoadPalette(sChampionRoomLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         }
         else
         {
             data[0] = sEliteFourLightingTimers[data[1]];
-            LoadPalette(sEliteFourLightingPalettes[data[1]], 0x70, 0x20);
+            LoadPalette(sEliteFourLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         }
         ApplyGlobalTintToPaletteSlot(7, 1);
     }
@@ -2188,13 +2188,9 @@ static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
     if (FlagGet(FLAG_TEMP_4) != FALSE)
     {
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
-        {
-            LoadPalette(sChampionRoomLightingPalettes[8], 0x70, 0x20);
-        }
+            LoadPalette(sChampionRoomLightingPalettes[8], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         else
-        {
-            LoadPalette(sEliteFourLightingPalettes[11], 0x70, 0x20);
-        }
+            LoadPalette(sEliteFourLightingPalettes[11], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         ApplyGlobalTintToPaletteSlot(7, 1);
         if (gPaletteFade.active)
         {
@@ -2407,7 +2403,7 @@ static void Task_DoDeoxysTriangleInteraction(u8 taskId)
 static void MoveDeoxysObject(u8 num)
 {
     u8 mapObjId;
-    LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
+    LoadPalette(sDeoxysObjectPals[num], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
     ApplyGlobalFieldPaletteTint(10);
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)
@@ -2453,7 +2449,7 @@ void IncrementBirthIslandRockStepCount(void)
 void SetDeoxysTrianglePalette(void)
 {
     u8 num = VarGet(VAR_DEOXYS_INTERACTION_NUM);
-    LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
+    LoadPalette(sDeoxysObjectPals[num], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
     ApplyGlobalFieldPaletteTint(10);
 }
 

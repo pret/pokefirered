@@ -1428,7 +1428,7 @@ static void LoadMonIconGfx(void)
         break;
     }
 
-    LoadPalette(sTrainerCardDataPtr->monIconPals, 80, 192);
+    LoadPalette(sTrainerCardDataPtr->monIconPals, BG_PLTT_ID(5), sizeof(sTrainerCardDataPtr->monIconPals));
     for (i = 0; i < PARTY_SIZE; i++)
     {
         LoadBgTiles(3, GetMonIconTiles(sTrainerCardDataPtr->trainerCard.monSpecies[i], 0), 512, 16 * i + 32);
@@ -1454,10 +1454,10 @@ static void PrintStickersOnCard(void)
 
 static void LoadStickerGfx(void)
 {
-    LoadPalette(sTrainerCardStickerPal1, 176, 32);
-    LoadPalette(sTrainerCardStickerPal2, 192, 32);
-    LoadPalette(sTrainerCardStickerPal3, 208, 32);
-    LoadPalette(sTrainerCardStickerPal4, 224, 32);
+    LoadPalette(sTrainerCardStickerPal1, BG_PLTT_ID(11), sizeof(sTrainerCardStickerPal1));
+    LoadPalette(sTrainerCardStickerPal2, BG_PLTT_ID(12), sizeof(sTrainerCardStickerPal2));
+    LoadPalette(sTrainerCardStickerPal3, BG_PLTT_ID(13), sizeof(sTrainerCardStickerPal3));
+    LoadPalette(sTrainerCardStickerPal4, BG_PLTT_ID(14), sizeof(sTrainerCardStickerPal4));
     LoadBgTiles(3, sTrainerCardDataPtr->stickerTiles, 1024, 128);
 }
 
@@ -1479,24 +1479,24 @@ static bool8 SetTrainerCardBgsAndPals(void)
         break;
     case 2:
         if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
-            LoadPalette(sHoennTrainerCardStarPals[sTrainerCardDataPtr->trainerCard.rse.stars], 0, 96);
+            LoadPalette(sHoennTrainerCardStarPals[sTrainerCardDataPtr->trainerCard.rse.stars], BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         else
-            LoadPalette(sKantoTrainerCardStarPals[sTrainerCardDataPtr->trainerCard.rse.stars], 0, 96);
+            LoadPalette(sKantoTrainerCardStarPals[sTrainerCardDataPtr->trainerCard.rse.stars], BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         break;
     case 3:
         if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
-            LoadPalette(sHoennTrainerCardBadges_Pal, 48, 32);
+            LoadPalette(sHoennTrainerCardBadges_Pal, BG_PLTT_ID(3), sizeof(sHoennTrainerCardBadges_Pal));
         else
-            LoadPalette(sKantoTrainerCardBadges_Pal, 48, 32);
+            LoadPalette(sKantoTrainerCardBadges_Pal, BG_PLTT_ID(3), sizeof(sKantoTrainerCardBadges_Pal));
         break;
     case 4:
         if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE && sTrainerCardDataPtr->trainerCard.rse.gender != MALE)
-            LoadPalette(sHoennTrainerCardFemaleBackground_Pal, 16, 32);
+            LoadPalette(sHoennTrainerCardFemaleBackground_Pal, BG_PLTT_ID(1), sizeof(sHoennTrainerCardFemaleBackground_Pal));
         else if (sTrainerCardDataPtr->trainerCard.rse.gender != MALE)
-            LoadPalette(sKantoTrainerCardFemaleBackground_Pal, 16, 32);
+            LoadPalette(sKantoTrainerCardFemaleBackground_Pal, BG_PLTT_ID(1), sizeof(sKantoTrainerCardFemaleBackground_Pal));
         break;
     case 5:
-        LoadPalette(sTrainerCardGold_Pal, 64, 32);
+        LoadPalette(sTrainerCardGold_Pal, BG_PLTT_ID(4), sizeof(sTrainerCardGold_Pal));
         break;
     case 6:
         SetBgTilemapBuffer(0, sTrainerCardDataPtr->cardTilemapBuffer);

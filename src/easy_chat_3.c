@@ -1319,13 +1319,13 @@ static void SetGpuRegsForEasyChatInit(void)
 static void LoadEasyChatPals(void)
 {
     ResetPaletteFade();
-    LoadPalette(gEasyChatWindow_Pal, 0, 32);
-    LoadPalette(sTextInputFrameOrange_Pal,  1 * 16, 32);
-    LoadPalette(sTextInputFrameGreen_Pal,  4 * 16, 32);
-    LoadPalette(sTitleText_Pal, 10 * 16, 8);
-    LoadPalette(sText_Pal, 11 * 16, 10);
-    LoadPalette(sText_Pal, 15 * 16, 10);
-    LoadPalette(sText_Pal,  3 * 16, 10);
+    LoadPalette(gEasyChatWindow_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadPalette(sTextInputFrameOrange_Pal, BG_PLTT_ID(1), sizeof(sTextInputFrameOrange_Pal));
+    LoadPalette(sTextInputFrameGreen_Pal, BG_PLTT_ID(4), sizeof(sTextInputFrameGreen_Pal));
+    LoadPalette(sTitleText_Pal, BG_PLTT_ID(10), sizeof(sTitleText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(11), sizeof(sText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(15), sizeof(sText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(3), sizeof(sText_Pal));
 }
 
 static void PrintTitleText(void)
@@ -1363,7 +1363,7 @@ static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *st
 static void PrintECInstructionsText(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    LoadUserWindowGfx(1, 1, 0xE0);
+    LoadUserWindowGfx(1, 1, BG_PLTT_ID(14));
     DrawTextBorderOuter(1, 1, 14);
     PrintECInterfaceTextById(0);
     PutWindowTilemap(1);

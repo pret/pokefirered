@@ -2753,7 +2753,7 @@ extern const u32 gItemIcon_QuestionMark[];
 extern const u32 gItemIconPalette_QuestionMark[];
 
 // fame_checker
-extern const u16 gFameCheckerBgPals[0x30];
+extern const u16 gFameCheckerBgPals[][16];
 extern const u16 gFameCheckerBgTiles[0xa50];
 extern const u16 gFameCheckerBg3Tilemap[0x400];
 extern const u16 gFameCheckerBg2Tilemap[0x400];

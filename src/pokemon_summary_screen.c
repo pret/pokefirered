@@ -2006,22 +2006,22 @@ static u8 PokeSum_HandleLoadBgGfx(void)
     switch (sMonSummaryScreen->loadBgGfxStep)
     {
     case 0:
-        LoadPalette(gSummaryScreen_Bg_Pal, 0, 0x20 * 5);
+        LoadPalette(gSummaryScreen_Bg_Pal, BG_PLTT_ID(0), 5 * PLTT_SIZE_4BPP);
         if (IsMonShiny(&sMonSummaryScreen->currentMon) == TRUE && !sMonSummaryScreen->isEgg)
         {
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 6], 0, 0x20);
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 5], 0x10, 0x20);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 6], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 5], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
         else
         {
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 0], 0, 0x20);
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 1], 0x10, 0x20);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 0], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 1], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
 
         break;
     case 1:
-        ListMenuLoadStdPalAt(0x60, 1);
-        LoadPalette(sTextHeaderPalette, 0x70, 0x20);
+        ListMenuLoadStdPalAt(BG_PLTT_ID(6), 1);
+        LoadPalette(sTextHeaderPalette, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         break;
     case 2:
         ResetTempTileDataBuffers();
@@ -2039,7 +2039,7 @@ static u8 PokeSum_HandleLoadBgGfx(void)
         break;
 
     default:
-        LoadPalette(sTextMovesPalette, 0x80, 0x20);
+        LoadPalette(sTextMovesPalette, BG_PLTT_ID(8), PLTT_SIZE_4BPP);
         return TRUE;
     }
 
@@ -5078,13 +5078,13 @@ static void Task_PokeSum_SwitchDisplayedPokemon(u8 taskId)
 
         if (IsMonShiny(&sMonSummaryScreen->currentMon) == TRUE && !sMonSummaryScreen->isEgg)
         {
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 6], 0, 0x20);
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 5], 0x10, 0x20);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 6], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 5], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
         else
         {
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 0], 0, 0x20);
-            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 1], 0x10, 0x20);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 0], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadPalette(&gSummaryScreen_Bg_Pal[16 * 1], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
 
         sMonSummaryScreen->switchMonTaskState++;

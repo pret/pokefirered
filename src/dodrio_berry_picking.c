@@ -3002,8 +3002,8 @@ static void PrintRecordsText(u8 windowId)
     recordNums[1] = gSaveBlock2Ptr->berryPick.bestScore;
     recordNums[2] = gSaveBlock2Ptr->berryPick.berriesPickedInRow;
 
-    LoadStdWindowGfx(windowId, 0x21D, 0xD0);
-    DrawTextBorderOuter(windowId, 0x21D, 0xD);
+    LoadStdWindowGfx(windowId, 0x21D, BG_PLTT_ID(13));
+    DrawTextBorderOuter(windowId, 0x21D, 13);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts[0], 1, 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < NUM_RECORD_TYPES; i++)
@@ -4161,12 +4161,12 @@ static void ResetBerryAndStatusBarSprites(void)
 static void LoadWindowFrameGfx(u8 frameId)
 {
     LoadBgTiles(BG_INTERFACE, GetUserWindowGraphics(frameId)->tiles, 0x120, 1);
-    LoadPalette(GetUserWindowGraphics(frameId)->palette, 0xA0, 0x20);
+    LoadPalette(GetUserWindowGraphics(frameId)->palette, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
 
 static void DBP_LoadStdWindowGfx(void)
 {
-    LoadStdWindowGfx(0, 0xA, 0xB0);
+    LoadStdWindowGfx(0, 0xA, BG_PLTT_ID(11));
 }
 
 static void ResetGfxState(void)
@@ -4926,7 +4926,7 @@ static bool32 LoadBgGfx(void)
     switch (sGfx->loadState)
     {
     case 0:
-        LoadPalette(sBg_Pal, 0, sizeof(sBg_Pal));
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
         break;
     case 1:
         ResetTempTileDataBuffers();
@@ -4942,7 +4942,7 @@ static bool32 LoadBgGfx(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
+        LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
     default:
         sGfx->loadState = 0;

@@ -397,7 +397,7 @@ static void EvoTask_PostEvoSparklesSet2Init(u8 taskId)
     SetEvoSparklesMatrices();
     gTasks[taskId].data[15] = 0;
     IsMovingBackgroundTaskRunning();
-    CpuCopy16(&gPlttBufferFaded[32], &gPlttBufferUnfaded[32], 96);
+    CpuCopy16(&gPlttBufferFaded[BG_PLTT_ID(2)], &gPlttBufferUnfaded[BG_PLTT_ID(2)], 3 * PLTT_SIZE_4BPP);
     BeginNormalPaletteFade(0xFFF90F1C, 0, 0, 16, RGB_WHITE);
     gTasks[taskId].func = EvoTask_CreatePostEvoSparklesSet2;
     PlaySE(SE_M_PETAL_DANCE);
@@ -448,7 +448,7 @@ static void EvoTask_PostEvoSparklesSet2TradeInit(u8 taskId)
     SetEvoSparklesMatrices();
     gTasks[taskId].data[15] = 0;
     IsMovingBackgroundTaskRunning();
-    CpuCopy16(&gPlttBufferFaded[32], &gPlttBufferUnfaded[32], 96);
+    CpuCopy16(&gPlttBufferFaded[BG_PLTT_ID(2)], &gPlttBufferUnfaded[BG_PLTT_ID(2)], 3 * PLTT_SIZE_4BPP);
     BeginNormalPaletteFade(0xFFF90F00, 0, 0, 16, RGB_WHITE);
     gTasks[taskId].func = EvoTask_CreatePostEvoSparklesSet2Trade;
     PlaySE(SE_M_PETAL_DANCE);
@@ -511,12 +511,12 @@ u8 CycleEvolutionMonSprite(u8 preEvoSpriteId, u8 postEvoSpriteId)
     gSprites[preEvoSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[preEvoSpriteId].oam.matrixNum = 30;
     gSprites[preEvoSpriteId].invisible = FALSE;
-    CpuCopy16(palette, &gPlttBufferFaded[256 + 16 * gSprites[preEvoSpriteId].oam.paletteNum], 32);
+    CpuCopy16(palette, &gPlttBufferFaded[OBJ_PLTT_ID(gSprites[preEvoSpriteId].oam.paletteNum)], PLTT_SIZE_4BPP);
     gSprites[postEvoSpriteId].callback = SpriteCallbackDummy_MonSprites;
     gSprites[postEvoSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[postEvoSpriteId].oam.matrixNum = 31;
     gSprites[postEvoSpriteId].invisible = FALSE;
-    CpuCopy16(palette, &gPlttBufferFaded[256 + 16 * gSprites[postEvoSpriteId].oam.paletteNum], 32);
+    CpuCopy16(palette, &gPlttBufferFaded[OBJ_PLTT_ID(gSprites[postEvoSpriteId].oam.paletteNum)], PLTT_SIZE_4BPP);
     gTasks[taskId].EvoGraphicsTaskEvoStop = FALSE;
     return taskId;
 }

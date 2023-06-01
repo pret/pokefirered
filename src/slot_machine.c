@@ -800,7 +800,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 20,
         .height = 4,
-        .paletteNum = 0x0f,
+        .paletteNum = 15,
         .baseBlock = 0x04f
     }, {
         .bg = 0,
@@ -808,7 +808,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
-        .paletteNum = 0x0e,
+        .paletteNum = 14,
         .baseBlock = 0x013
     },
     DUMMY_WIN_TEMPLATE
@@ -1998,10 +1998,10 @@ static bool32 IsSlotMachineSetupTaskActive(u8 taskId)
     return GetSlotMachineSetupTaskDataPtr()->tasks[taskId].active;
 }
 
-static inline void LoadColor(u16 color, u16 *pal)
+static inline void SetBackdropColor(u16 color, u16 *pal)
 {
     *pal = color;
-    LoadPalette(pal, 0x00, 0x02);
+    SetBackdropFromPalette(pal);
 }
 
 static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData * ptr)
@@ -2039,12 +2039,12 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         SetBgTilemapBuffer(2, ptr->bg2TilemapBuffer);
         CopyToBgTilemapBuffer(2, sBg_Tilemap, 0, 0x00);
         CopyBgTilemapBufferToVram(2);
-        LoadPalette(sBg_Pal, 0x00, sizeof(sBg_Pal));
-        LoadPalette(sBgPal_MatchLines, PALSLOT_LINE_BET * 16, sizeof(sBgPal_MatchLines));
-        LoadPalette(sCombosWindow_Pal, 0x70, sizeof(sCombosWindow_Pal));
-        LoadColor(RGB(30, 30, 31), pal);
-        LoadUserWindowGfx2(0, 0x00A, 0xD0);
-        LoadStdWindowGfxOnBg(0, 0x001, 0xF0);
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
+        LoadPalette(sBgPal_MatchLines, BG_PLTT_ID(PALSLOT_LINE_BET), sizeof(sBgPal_MatchLines));
+        LoadPalette(sCombosWindow_Pal, BG_PLTT_ID(7), sizeof(sCombosWindow_Pal));
+        SetBackdropColor(RGB(30, 30, 31), pal);
+        LoadUserWindowGfx2(0, 0x00A, BG_PLTT_ID(13));
+        LoadStdWindowGfxOnBg(0, 0x001, BG_PLTT_ID(15));
 
         SetBgTilemapBuffer(0, ptr->bg0TilemapBuffer);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 2, 32, 30);
@@ -2052,7 +2052,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         DecompressAndCopyTileDataToVram(1, sCombosWindow_Tilemap, 0, 0, 1);
         CopyBgTilemapBufferToVram(1);
 
-        LoadPalette(GetTextWindowPalette(2), 0xE0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         FillWindowPixelBuffer(1, 0xFF);
         PutWindowTilemap(1);
 
@@ -2386,7 +2386,7 @@ static void Task_FlashWinningLine(u8 taskId)
     switch (data[0])
     {
     case 0:
-        LoadPalette(sBgPal_MatchLines, PALSLOT_LINE_MATCH * 16, sizeof(sBgPal_MatchLines));
+        LoadPalette(sBgPal_MatchLines, BG_PLTT_ID(PALSLOT_LINE_MATCH), sizeof(sBgPal_MatchLines));
         for (i = 0; i < NUM_MATCH_LINES; i++)
         {
             if (GetWinFlagByLine(i))
@@ -2399,7 +2399,7 @@ static void Task_FlashWinningLine(u8 taskId)
         if (data[1] == 0)
         {
             u16 y = gSineTable[data[2]] >> 7;
-            LoadPalette(&sBgPal_PayoutLight[y], 0x10, sizeof(sBgPal_PayoutLight[0]));
+            LoadPalette(&sBgPal_PayoutLight[y], BG_PLTT_ID(1), sizeof(sBgPal_PayoutLight[0]));
             data[2] += 32;
             data[2] &= 0x7F;
             data[1] = 8;
@@ -2427,7 +2427,7 @@ static void Task_FlashWinningLine(u8 taskId)
         }
 
         for (i = 0; i < ARRAY_COUNT(sWinningLineFlashPalIdxs); i++)
-            gPlttBufferFaded[sWinningLineFlashPalIdxs[i] + PALSLOT_LINE_MATCH * 16] = gPlttBufferUnfaded[sWinningLineFlashPalIdxs[i] + PALSLOT_LINE_MATCH * 16];
+            gPlttBufferFaded[sWinningLineFlashPalIdxs[i] + BG_PLTT_ID(PALSLOT_LINE_MATCH)] = gPlttBufferUnfaded[sWinningLineFlashPalIdxs[i] + BG_PLTT_ID(PALSLOT_LINE_MATCH)];
         break;
     case 2:
         // Restore match lines to normal color 
@@ -2438,7 +2438,7 @@ static void Task_FlashWinningLine(u8 taskId)
         }
         
         // Restore payout lights to normal color
-        LoadPalette(&sBg_Pal[1], 0x10, sizeof(sBg_Pal[1]));
+        LoadPalette(&sBg_Pal[1], BG_PLTT_ID(1), sizeof(sBg_Pal[1]));
 
         CopyBgTilemapBufferToVram(2);
         data[0]++;

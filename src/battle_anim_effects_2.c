@@ -1744,7 +1744,7 @@ void AnimTask_AirCutterProjectile(u8 taskId)
 static void AnimVoidLines(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, FALSE);
-    sprite->data[0] = 0x100 + (IndexOfSpritePaletteTag(sVoidLinesSpriteTemplate.paletteTag) << 4);
+    sprite->data[0] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(sVoidLinesSpriteTemplate.paletteTag));
     sprite->callback = AnimVoidLines_Step;
 }
 
@@ -2687,9 +2687,7 @@ static void AnimUproarRing(struct Sprite *sprite)
     u8 index = IndexOfSpritePaletteTag(ANIM_TAG_THIN_RING);
     
     if (index != 0xFF)
-    {
-        BlendPalette(((index << 20) + 0x1010000) >> 16, 15, gBattleAnimArgs[5], gBattleAnimArgs[4]);
-    }
+        BlendPalette(OBJ_PLTT_ID(index) + 1, 15, gBattleAnimArgs[5], gBattleAnimArgs[4]);
 
     StartSpriteAffineAnim(sprite, 1);
     sprite->callback = AnimSpriteOnMonPos;
@@ -3045,7 +3043,7 @@ void AnimTask_LoadMusicNotesPals(u8 taskId)
     gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
     LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->multiUseBuffer);
     for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
-        LoadPalette(&gMonSpritesGfxPtr->multiUseBuffer[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
+        LoadPalette(&gMonSpritesGfxPtr->multiUseBuffer[i * 32], OBJ_PLTT_ID(paletteNums[i]), PLTT_SIZE_4BPP);
 
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
     DestroyAnimVisualTask(taskId);
@@ -3282,7 +3280,7 @@ void AnimTask_HeartsBackground(u8 taskId)
     GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBg_AttractTilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBg_AttractGfx, animBg.tilesOffset);
-    LoadCompressedPalette(gBattleAnimBg_AttractPal, animBg.paletteId * 16, 32);
+    LoadCompressedPalette(gBattleAnimBg_AttractPal, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
     if (IsContest())
         RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
     
@@ -3370,7 +3368,7 @@ void AnimTask_ScaryFace(u8 taskId)
         AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBgTilemap_ScaryFaceOpponent);
 
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_ScaryFaceGfx, animBg.tilesOffset);
-    LoadCompressedPalette(gBattleAnim_ScaryFacePal, animBg.paletteId * 16, 32);
+    LoadCompressedPalette(gBattleAnim_ScaryFacePal, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
     if (IsContest())
         RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 0);
     

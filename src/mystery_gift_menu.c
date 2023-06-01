@@ -87,110 +87,110 @@ static const struct BgTemplate sBGTemplates[] = {
 
 static const struct WindowTemplate sMainWindows[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x00,
-        .tilemapTop = 0x00,
-        .width = 0x1e,
-        .height = 0x02,
-        .paletteNum = 0x0f,
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 0x0013
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x01,
-        .tilemapTop = 0x0f,
-        .width = 0x1c,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 15,
+        .width = 28,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x004f
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x00,
-        .tilemapTop = 0x0f,
-        .width = 0x1e,
-        .height = 0x05,
-        .paletteNum = 0x0d,
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 15,
+        .width = 30,
+        .height = 5,
+        .paletteNum = 13,
         .baseBlock = 0x004f
     },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sWindowTemplate_YesNoMsg_Wide = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x0f,
-    .width = 0x1c,
-    .height = 0x04,
-    .paletteNum = 0x0f,
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 28,
+    .height = 4,
+    .paletteNum = 15,
     .baseBlock = 0x00e5
 };
 
 static const struct WindowTemplate sWindowTemplate_YesNoMsg = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x0f,
-    .width = 0x14,
-    .height = 0x04,
-    .paletteNum = 0x0f,
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 20,
+    .height = 4,
+    .paletteNum = 15,
     .baseBlock = 0x00e5
 };
 
 static const struct WindowTemplate sWindowTemplate_GiftSelect = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x0f,
-    .width = 0x13,
-    .height = 0x04,
-    .paletteNum = 0x0f,
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 19,
+    .height = 4,
+    .paletteNum = 15,
     .baseBlock = 0x00e5
 };
 
 static const struct WindowTemplate sWindowTemplate_ThreeOptions = {
-    .bg = 0x00,
-    .tilemapLeft = 0x08,
-    .tilemapTop = 0x05,
-    .width = 0x0e,
-    .height = 0x05,
-    .paletteNum = 0x0e,
+    .bg = 0,
+    .tilemapLeft = 8,
+    .tilemapTop = 5,
+    .width = 14,
+    .height = 5,
+    .paletteNum = 14,
     .baseBlock = 0x0155
 };
 
 static const struct WindowTemplate sWindowTemplate_YesNoBox = {
-    .bg = 0x00,
-    .tilemapLeft = 0x17,
-    .tilemapTop = 0x0f,
-    .width = 0x06,
-    .height = 0x04,
-    .paletteNum = 0x0e,
+    .bg = 0,
+    .tilemapLeft = 23,
+    .tilemapTop = 15,
+    .width = 6,
+    .height = 4,
+    .paletteNum = 14,
     .baseBlock = 0x0155
 };
 
 static const struct WindowTemplate sWindowTemplate_GiftSelect_3Options = {
-    .bg = 0x00,
-    .tilemapLeft = 0x16,
-    .tilemapTop = 0x0c,
-    .width = 0x07,
-    .height = 0x07,
-    .paletteNum = 0x0e,
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 12,
+    .width = 7,
+    .height = 7,
+    .paletteNum = 14,
     .baseBlock = 0x0155
 };
 
 static const struct WindowTemplate sWindowTemplate_GiftSelect_2Options = {
-    .bg = 0x00,
-    .tilemapLeft = 0x16,
-    .tilemapTop = 0x0e,
-    .width = 0x07,
-    .height = 0x05,
-    .paletteNum = 0x0e,
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 14,
+    .width = 7,
+    .height = 5,
+    .paletteNum = 14,
     .baseBlock = 0x0155
 };
 
 static const struct WindowTemplate sWindowTemplate_GiftSelect_1Option = {
-    .bg = 0x00,
-    .tilemapLeft = 0x16,
-    .tilemapTop = 0x0f,
-    .width = 0x07,
-    .height = 0x04,
-    .paletteNum = 0x0e,
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 15,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 14,
     .baseBlock = 0x0155
 };
 
@@ -392,8 +392,8 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
 
-        LoadUserWindowGfx2(0, 10, 0xE0);
-        LoadStdWindowGfxOnBg(0,  1, 0xF0);
+        LoadUserWindowGfx2(0, 10, BG_PLTT_ID(14));
+        LoadStdWindowGfxOnBg(0,  1, BG_PLTT_ID(15));
         DecompressAndLoadBgGfxUsingHeap(3, sTextboxBorder_Gfx, 0x100, 0, 0);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();
@@ -404,11 +404,11 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         gMain.state++;
         break;
     case 1:
-        LoadPalette(sTextboxBorder_Pal, 0, 0x20);
-        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
-        FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0x11);
-        FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
-        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
+        LoadPalette(sTextboxBorder_Pal, BG_PLTT_ID(0), sizeof(sTextboxBorder_Pal));
+        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 17);
+        FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 17);
+        FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 17);
         MG_DrawCheckerboardPattern();
         PrintMysteryGiftOrEReaderTopMenu(isEReader, FALSE);
         gMain.state++;
@@ -486,23 +486,23 @@ void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
 
 void MG_DrawTextBorder(u8 windowId)
 {
-    DrawTextBorderOuter(windowId, 0x01, 0xF);
+    DrawTextBorderOuter(windowId, 0x01, 15);
 }
 
 void MG_DrawCheckerboardPattern(void)
 {
     s32 i = 0, j;
 
-    FillBgTilemapBufferRect(3, 0x003, 0, 0, 32, 2, 0x11);
+    FillBgTilemapBufferRect(3, 0x003, 0, 0, 32, 2, 17);
 
     for (i = 0; i < 18; i++)
     {
         for (j = 0; j < 32; j++)
         {
             if ((i & 1) != (j & 1))
-                FillBgTilemapBufferRect(3, 1, j, i + 2, 1, 1, 0x11);
+                FillBgTilemapBufferRect(3, 1, j, i + 2, 1, 1, 17);
             else
-                FillBgTilemapBufferRect(3, 2, j, i + 2, 1, 1, 0x11);
+                FillBgTilemapBufferRect(3, 2, j, i + 2, 1, 1, 17);
         }
     }
 }
@@ -512,10 +512,10 @@ void ClearScreenInBg0(bool32 ignoreTopTwoRows)
     switch (ignoreTopTwoRows)
     {
     case 0:
-        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x11);
+        FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 17);
         break;
     case 1:
-        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 0x11);
+        FillBgTilemapBufferRect(0, 0, 0, 2, 32, 30, 17);
         break;
     }
     CopyBgTilemapBufferToVram(0);
@@ -526,7 +526,7 @@ void AddTextPrinterToWindow1(const u8 *str)
     StringExpandPlaceholders(gStringVar4, str);
     FillWindowPixelBuffer(1, 0x11);
     AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
-    DrawTextBorderOuter(1, 0x001, 0xF);
+    DrawTextBorderOuter(1, 0x001, 15);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_FULL);
 }
@@ -637,7 +637,7 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
     finalWidth = (((width + 9) / 8) + 2) & ~1;
     windowTemplate.width = finalWidth;
     windowTemplate.tilemapLeft = (30 - finalWidth) / 2;
-    response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, 0x00A, 0xE0);
+    response = DoMysteryGiftListMenu(&windowTemplate, &listMenuTemplate, 1, 0x00A, BG_PLTT_ID(14));
     if (response != LIST_NOTHING_CHOSEN)
     {
         ClearWindowTilemap(2);
@@ -662,7 +662,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
             *windowId = AddWindow(&sWindowTemplate_YesNoMsg);
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, FONT_NORMAL, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
-        DrawTextBorderOuter(*windowId, 0x001, 0x0F);
+        DrawTextBorderOuter(*windowId, 0x001, 15);
         CopyWindowToVram(*windowId, COPYWIN_GFX);
         PutWindowTilemap(*windowId);
         (*textState)++;
@@ -719,7 +719,7 @@ static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cann
         *windowId = AddWindow(&sWindowTemplate_GiftSelect);
         FillWindowPixelBuffer(*windowId, 0x11);
         AddTextPrinterParameterized4(*windowId, FONT_NORMAL, 0, 2, 0, 2, sMG_Ereader_TextColor_2, 0, gStringVar4);
-        DrawTextBorderOuter(*windowId, 0x001, 0x0F);
+        DrawTextBorderOuter(*windowId, 0x001, 15);
         CopyWindowToVram(*windowId, COPYWIN_GFX);
         PutWindowTilemap(*windowId);
         (*textState)++;
@@ -729,16 +729,16 @@ static s32 HandleMysteryGiftListMenu(u8 * textState, u16 * windowId, bool32 cann
         if (cannotSend)
         {
             if (!cannotToss)
-                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_2Options, &sListMenu_ReceiveToss, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_2Options, &sListMenu_ReceiveToss, 1, 0x00A, BG_PLTT_ID(14));
             else
-                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_1Option, &sListMenu_Receive, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_1Option, &sListMenu_Receive, 1, 0x00A, BG_PLTT_ID(14));
         }
         else
         {
             if (!cannotToss)
-                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_3Options, &sListMenu_ReceiveSendToss, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_3Options, &sListMenu_ReceiveSendToss, 1, 0x00A, BG_PLTT_ID(14));
             else
-                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_2Options, &sListMenu_ReceiveSend, 1, 0x00A, 0xE0);
+                input = DoMysteryGiftListMenu(&sWindowTemplate_GiftSelect_2Options, &sListMenu_ReceiveSend, 1, 0x00A, BG_PLTT_ID(14));
         }
         if (input != LIST_NOTHING_CHOSEN)
         {

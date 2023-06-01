@@ -459,7 +459,7 @@ static void AnimDefensiveWall(struct Sprite *sprite)
     }
     if (IsContest())
         sprite->y += 9;
-    sprite->data[0] = 256 + IndexOfSpritePaletteTag(gBattleAnimArgs[2]) * 16;
+    sprite->data[0] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(gBattleAnimArgs[2]));
     sprite->callback = AnimDefensiveWall_Step2;
     sprite->callback(sprite);
 }

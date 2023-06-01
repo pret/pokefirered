@@ -204,15 +204,11 @@ static void CB2_SetUpSeagallopScene(void)
     case 3:
         LoadBgTiles(3, sWaterTiles, sizeof(sWaterTiles), 0);
         if (GetDirectionOfTravel() == DIRN_EASTBOUND)
-        {
             CopyToBgTilemapBufferRect(3, sWaterTilemap_EB, 0, 0, 32, 32);
-        }
         else
-        {
             CopyToBgTilemapBufferRect(3, sWaterTilemap_WB, 0, 0, 32, 32);
-        }
-        LoadPalette(sWaterPal, 0x40, 0x20);
-        LoadPalette(GetTextWindowPalette(2), 0xF0, 0x20);
+        LoadPalette(sWaterPal, BG_PLTT_ID(4), sizeof(sWaterPal));
+        LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 4:

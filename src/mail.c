@@ -560,16 +560,17 @@ static bool8 DoInitMailView(void)
         CopyBgTilemapBufferToVram(2);
         break;
     case 12:
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
-        gPlttBufferUnfaded[15 * 16 + 10] = sGfxHeaders[sMailViewResources->mailType].textpals[0];
-        gPlttBufferFaded[15 * 16 + 10] = sGfxHeaders[sMailViewResources->mailType].textpals[0];
-        gPlttBufferUnfaded[15 * 16 + 11] = sGfxHeaders[sMailViewResources->mailType].textpals[1];
-        gPlttBufferFaded[15 * 16 + 11] = sGfxHeaders[sMailViewResources->mailType].textpals[1];
-        LoadPalette(sGfxHeaders[sMailViewResources->mailType].pal, 0x00, 0x20);
-        gPlttBufferUnfaded[0 * 16 + 10] = sGenderPals[gSaveBlock2Ptr->playerGender][0];
-        gPlttBufferFaded[0 * 16 + 10] = sGenderPals[gSaveBlock2Ptr->playerGender][0];
-        gPlttBufferUnfaded[0 * 16 + 11] = sGenderPals[gSaveBlock2Ptr->playerGender][1];
-        gPlttBufferFaded[0 * 16 + 11] = sGenderPals[gSaveBlock2Ptr->playerGender][1];
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        gPlttBufferUnfaded[BG_PLTT_ID(15) + 10] = sGfxHeaders[sMailViewResources->mailType].textpals[0];
+        gPlttBufferFaded[BG_PLTT_ID(15) + 10] = sGfxHeaders[sMailViewResources->mailType].textpals[0];
+        gPlttBufferUnfaded[BG_PLTT_ID(15) + 11] = sGfxHeaders[sMailViewResources->mailType].textpals[1];
+        gPlttBufferFaded[BG_PLTT_ID(15) + 11] = sGfxHeaders[sMailViewResources->mailType].textpals[1];
+
+        LoadPalette(sGfxHeaders[sMailViewResources->mailType].pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        gPlttBufferUnfaded[BG_PLTT_ID(0) + 10] = sGenderPals[gSaveBlock2Ptr->playerGender][0];
+        gPlttBufferFaded[BG_PLTT_ID(0) + 10] = sGenderPals[gSaveBlock2Ptr->playerGender][0];
+        gPlttBufferUnfaded[BG_PLTT_ID(0) + 11] = sGenderPals[gSaveBlock2Ptr->playerGender][1];
+        gPlttBufferFaded[BG_PLTT_ID(0) + 11] = sGenderPals[gSaveBlock2Ptr->playerGender][1];
         break;
     case 13:
         if (sMailViewResources->messageExists)

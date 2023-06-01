@@ -1810,7 +1810,7 @@ static void CB2_EggHatch_0(void)
     case 2:
         DecompressAndLoadBgGfxUsingHeap(0, gBattleInterface_Textbox_Gfx, 0, 0, 0);
         CopyToBgTilemapBuffer(0, gBattleInterface_Textbox_Tilemap, 0, 0);
-        LoadCompressedPalette(gBattleInterface_Textbox_Pal, 0, 0x20);
+        LoadCompressedPalette(gBattleInterface_Textbox_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 3:
@@ -1834,7 +1834,7 @@ static void CB2_EggHatch_0(void)
         break;
     case 7:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
+        LoadPalette(gTradeGba2_Pal, BG_PLTT_ID(1), 5 * PLTT_SIZE_4BPP);
         LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
         CopyToBgTilemapBuffer(1, gTradeOrHatchMonShadowTilemap, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
@@ -1948,8 +1948,8 @@ static void CB2_EggHatch_1(void)
     case 9:
         if (!IsTextPrinterActive(sEggHatchData->windowId))
         {
-            LoadUserWindowGfx2(sEggHatchData->windowId, 0x140, 0xE0);
-            CreateYesNoMenu(&sYesNoWinTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x140, 0xE, 0);
+            LoadUserWindowGfx2(sEggHatchData->windowId, 0x140, BG_PLTT_ID(14));
+            CreateYesNoMenu(&sYesNoWinTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x140, 14, 0);
             sEggHatchData->CB2_state++;
         }
         break;

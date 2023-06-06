@@ -26,6 +26,7 @@
 #include "script_menu.h"
 #include "data.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "text_window.h"
 #include "menu.h"
 #include "mystery_gift.h"
@@ -190,6 +191,7 @@ bool8 PlayerHasGrassPokemonInParty(void)
     u8 i;
     struct Pokemon * pokemon;
     u16 species;
+    u32 personality;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -199,7 +201,9 @@ bool8 PlayerHasGrassPokemonInParty(void)
         )
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
-            if (gSpeciesInfo[species].types[0] == TYPE_GRASS || gSpeciesInfo[species].types[1] == TYPE_GRASS)
+            personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
+            //if (gSpeciesInfo[species].types[0] == TYPE_GRASS || gSpeciesInfo[species].types[1] == TYPE_GRASS)
+            if (DeriveDynamicTyping(gSpeciesInfo[species].types[0], gSpeciesInfo[species].types[1], personality, 1) == TYPE_GRASS || DeriveDynamicTyping(gSpeciesInfo[species].types[0], gSpeciesInfo[species].types[1], personality, 0) == TYPE_GRASS)
                 return TRUE;
         }
     }

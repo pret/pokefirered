@@ -4,7 +4,7 @@
 static const u16 sBulbasaurLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(4, MOVE_GROWL),
-    LEVEL_UP_MOVE(7, MOVE_LEECH_SEED),
+    LEVEL_UP_MOVE(5, MOVE_LEECH_SEED), // adjusted lower to prevent issues with encountering ghost types early on
     LEVEL_UP_MOVE(10, MOVE_VINE_WHIP),
     LEVEL_UP_MOVE(15, MOVE_POISON_POWDER),
     LEVEL_UP_MOVE(15, MOVE_SLEEP_POWDER),
@@ -54,7 +54,7 @@ static const u16 sVenusaurLevelUpLearnset[] = {
 static const u16 sCharmanderLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(1, MOVE_GROWL),
-    LEVEL_UP_MOVE(7, MOVE_EMBER),
+    LEVEL_UP_MOVE(5, MOVE_EMBER), // adjusted lower to prevent issues with encountering ghost types early on
     LEVEL_UP_MOVE(13, MOVE_METAL_CLAW),
     LEVEL_UP_MOVE(19, MOVE_SMOKESCREEN),
     LEVEL_UP_MOVE(25, MOVE_SCARY_FACE),
@@ -101,7 +101,7 @@ static const u16 sCharizardLevelUpLearnset[] = {
 static const u16 sSquirtleLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(4, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE(7, MOVE_BUBBLE),
+    LEVEL_UP_MOVE(5, MOVE_BUBBLE), // adjusted lower to prevent issues with encountering ghost types early on
     LEVEL_UP_MOVE(10, MOVE_WITHDRAW),
     LEVEL_UP_MOVE(13, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(18, MOVE_BITE),

@@ -2104,8 +2104,11 @@ static void BufferMonInfo(void)
         return;
     }
 
-    sMonSummaryScreen->monTypes[0] = gSpeciesInfo[dexNum].types[0];
-    sMonSummaryScreen->monTypes[1] = gSpeciesInfo[dexNum].types[1];
+    sMonSummaryScreen->monTypes[0] = DeriveDynamicTyping(gSpeciesInfo[dexNum].types[0], gSpeciesInfo[dexNum].types[1], GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_PERSONALITY), 1);
+    sMonSummaryScreen->monTypes[1] = DeriveDynamicTyping(gSpeciesInfo[dexNum].types[0], gSpeciesInfo[dexNum].types[1], GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_PERSONALITY), 0);
+
+    //sMonSummaryScreen->monTypes[0] = gSpeciesInfo[dexNum].types[0];
+    //sMonSummaryScreen->monTypes[1] = gSpeciesInfo[dexNum].types[1];
 
     GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_NICKNAME, tempStr);
     StringCopyN_Multibyte(sMonSummaryScreen->summary.nicknameStrBuf, tempStr, POKEMON_NAME_LENGTH);

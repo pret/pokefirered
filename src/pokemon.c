@@ -2181,6 +2181,103 @@ void BoxMonToMon(struct BoxPokemon *src, struct Pokemon *dest)
     CalculateMonStats(dest);
 }
 
+u8 DeriveDynamicTyping(u8 ogType1, u8 ogType2, u32 personality, bool8 isPrimary) 
+{
+    bool8 isMonoType = ogType1 == ogType2;
+    // Derive bits for decision making
+    u32 modifiedTypeRatio = personality % 100;
+    u8 newType1 = ogType1;  // default to original type
+    u8 newType2 = ogType2;  // default to original type
+
+    u8 nextType; 
+    // NOTE: The mod must be at least NUM_TYPES * modifiedTypeRatio so that theres no coupling between 
+    // chosen types and whether the primary or secondary is affected.      
+
+    u32 modType = personality % 1700; 
+    if (modType < 100) {
+        nextType = TYPE_NORMAL;
+    }
+    else if (modType < 200) {
+        nextType = TYPE_FIGHTING;
+    }
+    else if (modType < 300) {
+        nextType = TYPE_FLYING;
+    }
+    else if (modType < 400) {
+        nextType = TYPE_POISON;
+    }
+    else if (modType < 500) {
+        nextType = TYPE_GROUND;
+    }
+    else if (modType < 600) {
+        nextType = TYPE_ROCK;
+    }
+    else if (modType < 700) {
+        nextType = TYPE_BUG;
+    }
+    else if (modType < 800) {
+        nextType = TYPE_GHOST;
+    }
+    else if (modType < 900) {
+        nextType = TYPE_STEEL;
+    }
+    else if (modType < 1000) {
+        nextType = TYPE_FIRE;
+    }
+    else if (modType < 1100) {
+        nextType = TYPE_WATER;
+    }
+    else if (modType < 1200) {
+        nextType = TYPE_GRASS;
+    }    
+    else if (modType < 1300) {
+        nextType = TYPE_ELECTRIC;
+    }
+    else if (modType < 1400) {
+        nextType = TYPE_PSYCHIC;
+    }
+    else if (modType < 1500) {
+        nextType = TYPE_ICE;
+    }
+    else if (modType < 1600) {
+        nextType = TYPE_DRAGON;
+    }
+    else if (modType < 1700) {
+        nextType = TYPE_DARK;
+    }
+    else {
+        // Not reachable unless the mod function is improperly configured
+        nextType = TYPE_NONE;
+    }
+
+    if (modifiedTypeRatio < 33) {
+        // Gives modified primary type a smaller chance of happening (1/3)
+        if (isMonoType) {
+            // preserve monotyping, but set to new type
+            newType1 = nextType;
+            newType2 = nextType;
+        }
+        else {
+            // modify primary type
+            newType1 = nextType;
+        }
+    } 
+    else if (modifiedTypeRatio < 97) {
+        // modify secondary type 63% of the time
+        newType2 = nextType;
+    }
+    // otherwise, 3% of the time preserve original typing!
+    // Note that we actually see original typing closer to ~6% of the time, since theres a 1/17
+    // chance that the newType is the same as the type it attempts to replace!
+
+    if (isPrimary) {
+        return newType1;
+    }
+    else {
+        return newType2;
+    }
+}
+
 static u8 GetLevelFromMonExp(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
@@ -3323,6 +3420,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)
 #define SET32(lhs) (lhs) = data[0] + (data[1] << 8) + (data[2] << 16) + (data[3] << 24)
 
+// This is where we want to do shennanigans
+
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
 {
     const u8 *data = dataArg;
@@ -3906,6 +4005,7 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     u16 *hpSwitchout;
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH * 2]; // Why is the nickname array here longer in FR/LG?
+    u8 updatedType1, updatedType2;
 
     gBattleMons[battlerId].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battlerId].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
@@ -3938,8 +4038,10 @@ static void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
     gBattleMons[battlerId].abilityNum = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ABILITY_NUM, NULL);
     gBattleMons[battlerId].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID, NULL);
-    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];
-    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];
+    gBattleMons[battlerId].type1 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[battlerId].species].types[0], gSpeciesInfo[gBattleMons[battlerId].species].types[1], GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL), 1);
+    gBattleMons[battlerId].type2 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[battlerId].species].types[0], gSpeciesInfo[gBattleMons[battlerId].species].types[1], GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL), 0);
+    //gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];
+    //gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];
     gBattleMons[battlerId].ability = GetAbilityBySpecies(gBattleMons[battlerId].species, gBattleMons[battlerId].abilityNum);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gBattleMons[battlerId].nickname, nickname);

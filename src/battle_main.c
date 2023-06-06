@@ -24,6 +24,7 @@
 #include "party_menu.h"
 #include "pokeball.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "quest_log.h"
 #include "random.h"
 #include "roamer.h"
@@ -2508,8 +2509,10 @@ void FaintClearSetData(void)
         *(i * 8 + gActiveBattler * 2 + (u8 *)(gBattleStruct->lastTakenMoveFrom) + 1) = 0;
     }
     gBattleResources->flags->flags[gActiveBattler] = 0;
-    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
-    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
+    gBattleMons[gActiveBattler].type1 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 1);
+    gBattleMons[gActiveBattler].type2 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 0);
+    //gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
+    //gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
 }
 
 static void BattleIntroGetMonsData(void)
@@ -2573,8 +2576,11 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             for (i = 0; i < sizeof(struct BattlePokemon); i++)
                 ptr[i] = gBattleBufferB[gActiveBattler][4 + i];
 
-            gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
-            gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
+            gBattleMons[gActiveBattler].type1 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 1);
+            gBattleMons[gActiveBattler].type2 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 0);
+
+            //gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
+            //gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
             gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
             hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(gActiveBattler)];
             *hpOnSwitchout = gBattleMons[gActiveBattler].hp;
@@ -3160,8 +3166,10 @@ static void HandleTurnActionSelectionState(void)
                         struct ChooseMoveStruct moveInfo;
 
                         moveInfo.species = gBattleMons[gActiveBattler].species;
-                        moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
-                        moveInfo.monType2 = gBattleMons[gActiveBattler].type2;
+                        moveInfo.monType1 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 1);
+                        moveInfo.monType2 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 0);
+                        //moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
+                        //moveInfo.monType2 = gBattleMons[gActiveBattler].type2;
                         for (i = 0; i < MAX_MON_MOVES; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[gActiveBattler].moves[i];

@@ -4,6 +4,7 @@
 #include "util.h"
 #include "random.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "money.h"
 #include "pokemon_icon.h"
 #include "mail.h"
@@ -1510,11 +1511,13 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     return flags;
 }
 
-u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
+u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility, u32 personality)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
+    u8 type1 = DeriveDynamicTyping(gSpeciesInfo[targetSpecies].types[0], gSpeciesInfo[targetSpecies].types[1], personality, 1);
+    u8 type2 = DeriveDynamicTyping(gSpeciesInfo[targetSpecies].types[0], gSpeciesInfo[targetSpecies].types[1], personality, 0);
+    //u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
     u8 moveType;
 
     if (move == MOVE_STRUGGLE)
@@ -4480,8 +4483,10 @@ static void Cmd_switchindataupdate(void)
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
         monData[i] = gBattleBufferB[gActiveBattler][4 + i];
 
-    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
-    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
+    gBattleMons[gActiveBattler].type1 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 1);
+    gBattleMons[gActiveBattler].type2 = DeriveDynamicTyping(gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0], gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1], GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PERSONALITY), 0);
+    //gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
+    //gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
     gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
 
     // check knocked off item

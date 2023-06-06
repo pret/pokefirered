@@ -1552,6 +1552,8 @@ static u32 CopyPlayerMonData(u8 monId, u8 *dst)
         battleMon.isEgg = GetMonData(&gPlayerParty[monId], MON_DATA_IS_EGG);
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
+        battleMon.type1 = DeriveDynamicTyping(gSpeciesInfo[GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES)].types[0], gSpeciesInfo[GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES)].types[1], GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY), 1);
+        battleMon.type2 = DeriveDynamicTyping(gSpeciesInfo[GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES)].types[0], gSpeciesInfo[GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES)].types[1], GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY), 0);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
         StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&gPlayerParty[monId], MON_DATA_OT_NAME, battleMon.otName);

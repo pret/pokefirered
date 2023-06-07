@@ -1349,20 +1349,20 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         {
             tTrainerPicPosX = 0;
             // OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
-            gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
+            gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
         }
     }
 }
 
-// static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
-// {
-//     if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
-//     {
-//         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-//         sOakSpeechResources->hasPlayerBeenNamed = FALSE;
-//         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
-//     }
-// }
+static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
+{
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        sOakSpeechResources->hasPlayerBeenNamed = FALSE;
+        gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
+    }
+}
 
 static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
 {

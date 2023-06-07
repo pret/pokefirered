@@ -12,7 +12,7 @@ SECTIONS {
         . = 0x1C000;
 
         INCLUDE "sym_ewram.ld"
-        src/*.o(.ewram_data);
+        src/*.o(ewram_data);
 
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);

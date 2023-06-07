@@ -66,7 +66,7 @@ static void Task_OakSpeech_IStudyPokemon(u8);
 static void Task_OakSpeech_ReturnNidoranFToPokeBall(u8);
 static void Task_OakSpeech_TellMeALittleAboutYourself(u8);
 static void Task_OakSpeech_FadeOutOak(u8);
-static void Task_OakSpeech_AskPlayerGender(u8);
+//static void Task_OakSpeech_AskPlayerGender(u8);
 static void Task_OakSpeech_ShowGenderOptions(u8);
 static void Task_OakSpeech_HandleGenderInput(u8);
 static void Task_OakSpeech_ClearGenderWindows(u8);
@@ -1255,13 +1255,13 @@ static void Task_OakSpeech_FadeOutOak(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
-    {
-        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, 1);
-        CreateFadeInTask(taskId, 2);
-        tTimer = 48;
-        gTasks[taskId].func = Task_OakSpeech_AskPlayerGender;
-    }
+    // if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    // {
+    //     ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, 1);
+    //     CreateFadeInTask(taskId, 2);
+    //     tTimer = 48;
+    //     gTasks[taskId].func = Task_OakSpeech_AskPlayerGender;
+    // }
 }
 
 // static void Task_OakSpeech_AskPlayerGender(u8 taskId)

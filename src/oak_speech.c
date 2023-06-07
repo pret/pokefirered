@@ -1349,20 +1349,20 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         {
             tTrainerPicPosX = 0;
             // OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
-            gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
+            gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
         }
     }
 }
 
-static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
-{
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
-    {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        sOakSpeechResources->hasPlayerBeenNamed = FALSE;
-        gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
-    }
-}
+// static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
+// {
+//     if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+//     {
+//         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+//         sOakSpeechResources->hasPlayerBeenNamed = FALSE;
+//         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
+//     }
+// }
 
 static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
 {
@@ -1428,17 +1428,9 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
-        if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
-        {
-            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
-        }
-        else
-        {
-            ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
-            RemoveWindow(gTasks[taskId].tMenuWindowId);
-            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
-        }
+        ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
+        RemoveWindow(gTasks[taskId].tMenuWindowId);
+        DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
         DestroyPikachuOrPlatformSprites(taskId, SPRITE_TYPE_PLATFORM);
         FreeAllWindowBuffers();
     }

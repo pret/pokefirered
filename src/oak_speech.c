@@ -1405,7 +1405,7 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
     {
     case 0: // NEW NAME
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
         break;
     case 1: // Default name options

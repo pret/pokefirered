@@ -208,8 +208,8 @@ gOakSpeech_Text_IStudyPokemon::
     .string "I study POKéMON as a profession.\p$"
 
 gOakSpeech_Text_TellMeALittleAboutYourself::
-    .string "But first, tell me a little about\n"
-    .string "yourself.\p$"
+    .string "I'm so glad you're playing\n"
+    .string "this game Emma!\p$"
 
 gOakSpeech_Text_YourNameWhatIsIt::
     .string "Let's begin with your name.\n"

@@ -594,10 +594,10 @@ static const u8 *const sMaleNameChoices[] =
     gNameChoice_Kene,
     gNameChoice_Geki,
 #elif defined(LEAFGREEN)
+    gNameChoice_Remi,
     gNameChoice_Green,
     gNameChoice_Leaf,
-    gNameChoice_Gary,
-    gNameChoice_Remi,
+
 #endif
     gNameChoice_Jak,
     gNameChoice_Janne,
@@ -646,9 +646,8 @@ static const u8 *const sFemaleNameChoices[] =
 static const u8 *const sRivalNameChoices[] =
 {
 #if defined(FIRERED)
-    gNameChoice_Green,
-    gNameChoice_Gary,
     gNameChoice_Remi,
+    gNameChoice_Green,
 #elif defined(LEAFGREEN)
     gNameChoice_Red,
     gNameChoice_Ash,
@@ -1401,15 +1400,14 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
     s8 input = Menu_ProcessInput();
     switch (input)
     {
-    case 0: // NEW NAME
+    case 0: // Default name options
+    case 1: // Default name options
+    case 2: // NEW NAME
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
         break;
-    case 1: // Default name options
-    case 2: //
     case 3: //
-    case 4: //
         PlaySE(SE_SELECT);
         ClearStdWindowAndFrameToTransparent(tMenuWindowId, TRUE);
         RemoveWindow(tMenuWindowId);

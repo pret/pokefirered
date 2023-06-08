@@ -13,9 +13,6 @@ gNameChoice_Leaf::
 gNameChoice_Fire::
     .string "FIRE$"
 
-gNameChoice_Gary::
-    .string "GARY$"
-
 gNameChoice_Remi::
     .string "REMI$"
 

@@ -1349,20 +1349,20 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         {
             tTrainerPicPosX = 0;
             // OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
-            gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
+            gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
         }
     }
 }
 
-// static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
-// {
-//     if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
-//     {
-//         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-//         sOakSpeechResources->hasPlayerBeenNamed = FALSE;
-//         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
-//     }
-// }
+static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
+{
+    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        sOakSpeechResources->hasPlayerBeenNamed = FALSE;
+        gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
+    }
+}
 
 static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
 {
@@ -1405,7 +1405,7 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
     {
     case 0: // NEW NAME
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 20000, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
         break;
     case 1: // Default name options
@@ -1473,7 +1473,7 @@ static void Task_OakSpeech_HandleConfirmNameInput(u8 taskId)
     {
     case 0: // YES
         PlaySE(SE_SELECT);
-        gTasks[taskId].tTimer = 40;
+        gTasks[taskId].tTimer = 50;
         if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
         {
             ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
@@ -1505,6 +1505,7 @@ static void Task_OakSpeech_FadeOutPlayerPic(u8 taskId)
     if (tTrainerPicFadeState != 0)
     {
         ClearTrainerPic();
+        tTimer = 3;
         if (tTimer != 0)
             tTimer--;
         else

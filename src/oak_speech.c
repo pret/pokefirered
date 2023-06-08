@@ -1371,12 +1371,12 @@ static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
         {
             tTrainerPicPosX -= 2;
             gSpriteCoordOffsetX += 2;
-            ChangeBgX(2, 0x200, BG_COORD_SUB);
+            // ChangeBgX(2, 0x200, BG_COORD_SUB);
         }
         else
         {
             tTrainerPicPosX = -60;
-            PrintNameChoiceOptions(taskId, sOakSpeechResources->hasPlayerBeenNamed);
+            // PrintNameChoiceOptions(taskId, sOakSpeechResources->hasPlayerBeenNamed);
             gTasks[taskId].func = Task_OakSpeech_HandleRivalNameInput;
         }
     }

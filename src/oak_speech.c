@@ -1405,7 +1405,7 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
     {
     case 0: // NEW NAME
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(PALETTES_ALL, 20000, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
         break;
     case 1: // Default name options
@@ -1428,9 +1428,17 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
-        RemoveWindow(gTasks[taskId].tMenuWindowId);
-        DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
+        GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
+        if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
+        {
+            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
+        }
+        else
+        {
+            ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
+            RemoveWindow(gTasks[taskId].tMenuWindowId);
+            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
+        }
         DestroyPikachuOrPlatformSprites(taskId, SPRITE_TYPE_PLATFORM);
         FreeAllWindowBuffers();
     }

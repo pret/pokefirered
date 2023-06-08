@@ -1399,9 +1399,9 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
     s16 *data = gTasks[taskId].data;
     // s8 input = Menu_ProcessInput();
 
-        PlaySE(SE_SELECT);
-        // ClearStdWindowAndFrameToTransparent(tMenuWindowId, TRUE);
-        // RemoveWindow(tMenuWindowId);
+        // PlaySE(SE_SELECT);
+        ClearStdWindowAndFrameToTransparent(tMenuWindowId, TRUE);
+        RemoveWindow(tMenuWindowId);
         GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
         tNameNotConfirmed = TRUE;
         gTasks[taskId].func = Task_OakSpeech_ConfirmName;

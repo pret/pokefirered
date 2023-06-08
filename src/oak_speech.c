@@ -1348,7 +1348,7 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         else
         {
             tTrainerPicPosX = 0;
-            // OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
             gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
         }
     }
@@ -1481,7 +1481,7 @@ static void Task_OakSpeech_HandleConfirmNameInput(u8 taskId)
     {
     case 0: // YES
         PlaySE(SE_SELECT);
-        gTasks[taskId].tTimer = 50;
+        gTasks[taskId].tTimer = 40;
         if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
         {
             ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
@@ -1513,7 +1513,6 @@ static void Task_OakSpeech_FadeOutPlayerPic(u8 taskId)
     if (tTrainerPicFadeState != 0)
     {
         ClearTrainerPic();
-        tTimer = 3;
         if (tTimer != 0)
             tTimer--;
         else

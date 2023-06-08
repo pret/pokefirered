@@ -16,11 +16,8 @@ gNameChoice_Fire::
 gNameChoice_Gary::
     .string "GARY$"
 
-gNameChoice_Kaz::
-    .string "KAZ$"
-
-gNameChoice_Toru::
-    .string "TORU$"
+gNameChoice_Remi::
+    .string "REMI$"
 
 gNameChoice_Ash::
     .string "ASH$"

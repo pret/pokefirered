@@ -7,15 +7,6 @@
 
 #include "global.h"
 
-extern const u8 gUnknown_0823B4E8[];
-extern const u8 gUnknown_0823B5E9[];
-extern const u8 EventScript_275BB7[];
-extern const u8 EventScript_275D0C[];
-extern const u8 EventScript_275D1F[];
-extern const u8 EventScript_275D2E[];
-extern const u8 EventScript_2766A2[];
-extern const u8 EventScript_2766A6[];
-
 extern const u8 gTVBravoTrainerText00[];
 extern const u8 gTVBravoTrainerText01[];
 extern const u8 gTVBravoTrainerText02[];
@@ -364,16 +355,6 @@ extern const u8 gPokeNewsTextLilycove_Ending[];
 extern const u8 gPokeNewsTextBlendMaster_Upcoming[];
 extern const u8 gPokeNewsTextBlendMaster_Ongoing[];
 extern const u8 gPokeNewsTextBlendMaster_Ending[];
-extern const u8 SecretBase_RedCave1_Text_274966[];
-extern const u8 SecretBase_RedCave1_Text_274D13[];
-extern const u8 SecretBase_RedCave1_Text_274FFE[];
-extern const u8 SecretBase_RedCave1_Text_275367[];
-extern const u8 SecretBase_RedCave1_Text_2756C7[];
-extern const u8 SecretBase_RedCave1_Text_274B24[];
-extern const u8 SecretBase_RedCave1_Text_274E75[];
-extern const u8 SecretBase_RedCave1_Text_2751E1[];
-extern const u8 SecretBase_RedCave1_Text_2754F6[];
-extern const u8 SecretBase_RedCave1_Text_2758CC[];
 
 extern const u8 gText_LtSurge[];
 extern const u8 gText_Koga[];
@@ -780,7 +761,6 @@ extern const u8 Help_Text_AboutThisGame[];
 extern const u8 Help_Text_TypeMatchupList[];
 extern const u8 Help_Text_Exit[];
 extern const u8 Help_Text_Cancel[];
-extern const u8 gUnknown_81B2E76[];
 extern const u8 Help_Text_DescWhatShouldIDo[];
 extern const u8 Help_Text_DescHowDoIDoThis[];
 extern const u8 Help_Text_DescWhatDoesThisTermMean[];

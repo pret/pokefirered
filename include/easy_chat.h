@@ -71,7 +71,6 @@ u8 GetECSelectGroupRowsAbove(void);
 void GetECSelectWordCursorCoords(s8 *arg0, s8 *arg1);
 u8 GetECSelectWordRowsAbove(void);
 u8 GetECSelectWordNumRows(void);
-u8 unref_sub_80FFE60(void);
 bool32 ShouldDrawECUpArrow(void);
 bool32 ShouldDrawECDownArrow(void);
 

@@ -74,273 +74,273 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_PhotoFlash              @ FLDEFF_PHOTO_FLASH
 
 gFldEffScript_ExclamationMarkIcon::
-	callnative FldEff_ExclamationMarkIcon1
-	end 
+	field_eff_callnative FldEff_ExclamationMarkIcon1
+	field_eff_end 
 
 gFldEffScript_UseCutOnGrass::
-	callnative FldEff_UseCutOnGrass
-	end 
+	field_eff_callnative FldEff_UseCutOnGrass
+	field_eff_end 
 
 gFldEffScript_UseCutOnTree::
-	callnative FldEff_UseCutOnTree
-	end 
+	field_eff_callnative FldEff_UseCutOnTree
+	field_eff_end 
 
 gFldEffScript_Shadow::
-	callnative FldEff_Shadow
-	end 
+	field_eff_callnative FldEff_Shadow
+	field_eff_end 
 
 gFldEffScript_TallGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_TallGrass
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_TallGrass
+	field_eff_end 
 
 gFldEffScript_Ripple::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_Ripple
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_Ripple
+	field_eff_end 
 
 gFldEffScript_FieldMoveShowMon::
-	callnative FldEff_FieldMoveShowMon
-	end 
+	field_eff_callnative FldEff_FieldMoveShowMon
+	field_eff_end 
 
 gFldEffScript_Ash::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_Ash
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_Ash
+	field_eff_end 
 
 gFldEffScript_SurfBlob::
-	callnative FldEff_SurfBlob
-	end 
+	field_eff_callnative FldEff_SurfBlob
+	field_eff_end 
 
 gFldEffScript_UseSurf::
-	callnative FldEff_UseSurf
-	end 
+	field_eff_callnative FldEff_UseSurf
+	field_eff_end 
 
 gFldEffScript_Dust::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Dust
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Dust
+	field_eff_end 
 
 gFldEffScript_UseSecretPowerCave::
-	end 
+	field_eff_end 
 
 gFldEffScript_JumpTallGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_JumpTallGrass
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_JumpTallGrass
+	field_eff_end 
 
 gFldEffScript_SandFootprints::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_SandFootprints
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_SandFootprints
+	field_eff_end 
 
 gFldEffScript_JumpBigSplash::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_JumpBigSplash
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_JumpBigSplash
+	field_eff_end 
 
 gFldEffScript_Splash::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Splash
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Splash
+	field_eff_end 
 
 gFldEffScript_JumpSmallSplash::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_JumpSmallSplash
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_JumpSmallSplash
+	field_eff_end 
 
 gFldEffScript_LongGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_LongGrass
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_LongGrass
+	field_eff_end 
 
 gFldEffScript_JumpLongGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_JumpLongGrass
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_JumpLongGrass
+	field_eff_end 
 
 gFldEffScript_UnusedGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_UnusedGrass
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_UnusedGrass
+	field_eff_end 
 
 gFldEffScript_UnusedGrass2::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_UnusedGrass2
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_UnusedGrass2
+	field_eff_end 
 
 gFldEffScript_UnusedSand::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_UnusedSand
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_UnusedSand
+	field_eff_end 
 
 gFldEffScript_UnusedWaterSurfacing::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_UnusedWaterSurfacing
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_UnusedWaterSurfacing
+	field_eff_end 
 
 gFldEffScript_BerryTreeGrowthSparkle::
-	callnative FldEff_BerryTreeGrowthSparkle
-	end 
+	field_eff_callnative FldEff_BerryTreeGrowthSparkle
+	field_eff_end 
 
 gFldEffScript_DeepSandFootprints::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_DeepSandFootprints
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_DeepSandFootprints
+	field_eff_end 
 
 gFldEffScript_PokecenterHeal::
-	loadfadedpal gSpritePalette_PokeballGlow 
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_PokecenterHeal
-	end 
+	field_eff_loadfadedpal gSpritePalette_PokeballGlow 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_PokecenterHeal
+	field_eff_end 
 
 gFldEffScript_UseSecretPowerTree::
-	end 
+	field_eff_end 
 
 gFldEffScript_UseSecretPowerShrub::
-	end 
+	field_eff_end 
 
 gFldEffScript_TreeDisguise::
-	callnative ShowTreeDisguiseFieldEffect
-	end 
+	field_eff_callnative ShowTreeDisguiseFieldEffect
+	field_eff_end 
 
 gFldEffScript_MountainDisguise::
-	callnative ShowMountainDisguiseFieldEffect
-	end 
+	field_eff_callnative ShowMountainDisguiseFieldEffect
+	field_eff_end 
 
 gFldEffScript_NpcflyOut::
-	callnative FldEff_NpcFlyOut
-	end 
+	field_eff_callnative FldEff_NpcFlyOut
+	field_eff_end 
 
 gFldEffScript_FlyOut::
-	callnative FldEff_FlyOut 
-	end 
+	field_eff_callnative FldEff_FlyOut 
+	field_eff_end 
 
 gFldEffScript_FlyIn::
-	callnative FldEff_FlyIn
-	end 
+	field_eff_callnative FldEff_FlyIn
+	field_eff_end 
 
 gFldEffScript_QuestionMarkIcon::
-	callnative FldEff_QuestionMarkIcon
-	end 
+	field_eff_callnative FldEff_QuestionMarkIcon
+	field_eff_end 
 
 gFldEffScript_FeetInFlowingWater::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_FeetInFlowingWater
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_FeetInFlowingWater
+	field_eff_end 
 
 gFldEffScript_BikeTireTracks::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_BikeTireTracks
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_BikeTireTracks
+	field_eff_end 
 
 gFldEffScript_SandDisguise::
-	callnative ShowSandDisguiseFieldEffect
-	end 
+	field_eff_callnative ShowSandDisguiseFieldEffect
+	field_eff_end 
 
 gFldEffScript_UseRockSmash::
-	callnative FldEff_UseRockSmash
-	end 
+	field_eff_callnative FldEff_UseRockSmash
+	field_eff_end 
 
 gFldEffScript_UseStrength::
-	callnative FldEff_UseStrength
-	end 
+	field_eff_callnative FldEff_UseStrength
+	field_eff_end 
 
 gFldEffScript_UseDig::
-	callnative FldEff_UseDig
-	end 
+	field_eff_callnative FldEff_UseDig
+	field_eff_end 
 
 gFldEffScript_SandPile::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_SandPile
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_SandPile
+	field_eff_end 
 
 gFldEffScript_ShortGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_ShortGrass
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_ShortGrass
+	field_eff_end 
 
 gFldEffScript_HotSpringsWater::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_HotSpringsWater
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_HotSpringsWater
+	field_eff_end 
 
 gFldEffScript_UseWaterfall::
-	callnative FldEff_UseWaterfall
-	end 
+	field_eff_callnative FldEff_UseWaterfall
+	field_eff_end 
 
 gFldEffScript_UseDive::
-	callnative FldEff_UseDive
-	end 
+	field_eff_callnative FldEff_UseDive
+	field_eff_end 
 
 gFldEffScript_Pokeball::
-	loadpal gSpritePalette_Pokeball
-	callnative FldEff_PokeballTrail
-	end 
+	field_eff_loadpal gSpritePalette_Pokeball
+	field_eff_callnative FldEff_PokeballTrail
+	field_eff_end 
 
 gFldEffScript_XIcon::
-	callnative FldEff_XIcon
-	end 
+	field_eff_callnative FldEff_XIcon
+	field_eff_end 
 
 gFldEffScript_Nop47::
-	end 
+	field_eff_end 
 
 gFldEffScript_Nop48::
-	end 
+	field_eff_end 
 
 gFldEffScript_PopOutOfAsh::
-	loadfadedpal_callnative gSpritePalette_Ash, FldEff_PopOutOfAsh
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_Ash, FldEff_PopOutOfAsh
+	field_eff_end 
 
 gFldEffScript_LavaridgeGymWarp::
-	loadfadedpal_callnative gSpritePalette_Ash, FldEff_LavaridgeGymWarp
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_Ash, FldEff_LavaridgeGymWarp
+	field_eff_end 
 
 gFldEffScript_SweetScent::
-	callnative FldEff_SweetScent
-	end 
+	field_eff_callnative FldEff_SweetScent
+	field_eff_end 
 
 gFldEffScript_SandPillar::
-	end 
+	field_eff_end 
 
 gFldEffScript_Bubbles::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Bubbles
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_Bubbles
+	field_eff_end 
 
 gFldEffScript_Sparkle::
-	loadfadedpal_callnative gSpritePalette_SmallSparkle, FldEff_Sparkle
-	end 
+	field_eff_loadfadedpal_callnative gSpritePalette_SmallSparkle, FldEff_Sparkle
+	field_eff_end 
 
 gFldEffScript_SecretPowerCave::
-	end 
+	field_eff_end 
 
 gFldEffScript_SecretPowerTree::
-	end 
+	field_eff_end 
 
 gFldEffScript_SecretPowerShrub::
-	end 
+	field_eff_end 
 
 gFldEffScript_CutGrass::
-	loadfadedpal_callnative gFldEffPalette_CutGrass, FldEff_CutGrass
-	end 
+	field_eff_loadfadedpal_callnative gFldEffPalette_CutGrass, FldEff_CutGrass
+	field_eff_end 
 
 gFldEffScript_FieldMoveShowMonInit::
-	callnative FldEff_FieldMoveShowMonInit
-	end 
+	field_eff_callnative FldEff_FieldMoveShowMonInit
+	field_eff_end 
 
 gFldEffScript_UseFlyAncientTomb::
-	end 
+	field_eff_end 
 
 gFldEffScript_PcturnOn::
-	end 
+	field_eff_end 
 
 gFldEffScript_HallOfFameRecord::
-	loadfadedpal gSpritePalette_PokeballGlow 
-	loadfadedpal_callnative gSpritePalette_HofMonitor, FldEff_HallOfFameRecord
-	end 
+	field_eff_loadfadedpal gSpritePalette_PokeballGlow 
+	field_eff_loadfadedpal_callnative gSpritePalette_HofMonitor, FldEff_HallOfFameRecord
+	field_eff_end 
 
 gFldEffScript_UseTeleport::
-	callnative FldEff_UseTeleport
-	end 
+	field_eff_callnative FldEff_UseTeleport
+	field_eff_end 
 
 gFldEffScript_SmileyFaceIcon::
-	callnative FldEff_SmileyFaceIcon
-	end 
+	field_eff_callnative FldEff_SmileyFaceIcon
+	field_eff_end 
 
 gFldEffScript_UseVsSeeker::
-	callnative FldEff_UseVsSeeker
-	end 
+	field_eff_callnative FldEff_UseVsSeeker
+	field_eff_end 
 
 gFldEffScript_DoubleExclMarkIcon::
-	callnative FldEff_DoubleExclMarkIcon
-	end 
+	field_eff_callnative FldEff_DoubleExclMarkIcon
+	field_eff_end 
 
 gFldEffScript_MoveDeoxysRock::
-	callnative FldEff_MoveDeoxysRock
-	end 
+	field_eff_callnative FldEff_MoveDeoxysRock
+	field_eff_end 
 
 gFldEffScript_DestroyDeoxysRock::
-	callnative FldEff_DestroyDeoxysRock
-	end 
+	field_eff_callnative FldEff_DestroyDeoxysRock
+	field_eff_end 
 
 gFldEffScript_PhotoFlash::
-	callnative FldEff_PhotoFlash
-	end 
+	field_eff_callnative FldEff_PhotoFlash
+	field_eff_end 

@@ -224,7 +224,7 @@
 	.byte 0x24
 	.endm
 
-	.macro get_last_used_move battler:req
+	.macro get_last_used_bank_move battler:req
 	.byte 0x25
 	.byte \battler
 	.endm
@@ -264,7 +264,7 @@
 	.byte 0x2b
 	.endm
 
-	.macro count_alive_pokemon battler:req
+	.macro count_usable_party_mons battler:req
 	.byte 0x2c
 	.byte \battler
 	.endm

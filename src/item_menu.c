@@ -1448,7 +1448,7 @@ static void Task_FieldItemContextMenuHandleInput(u8 taskId)
         input = Menu_ProcessInputNoWrapAround();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             sItemMenuContextActions[ITEMMENUACTION_CANCEL].func.void_u8(taskId);
             break;

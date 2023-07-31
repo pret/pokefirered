@@ -1122,7 +1122,7 @@ static void MainTask_ConfirmExitGame(u8 taskId)
             data[0] = 3;
             break;
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             SetSlotMachineSetupTask(SLOTTASK_DESTROY_YESNO, 0);
             data[0] = 4;
             break;

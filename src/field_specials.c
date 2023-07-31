@@ -1412,7 +1412,7 @@ static void Task_ListMenuHandleInput(u8 taskId)
     input = ListMenu_ProcessInput(task->data[14]);
     switch (input)
     {
-    case -1:
+    case MENU_B_PRESSED:
         break;
     case -2:
         gSpecialVar_Result = 0x7F;

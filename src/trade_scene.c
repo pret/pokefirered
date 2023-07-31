@@ -113,10 +113,10 @@ struct {
     /*0x104*/ u8 textColor[3];
     /*0x107*/ u8 filler_107[1];
     /*0x108*/ bool8 isCableTrade;
-    /*0x109*/ u8 win0left;
-    /*0x10A*/ u8 win0top;
-    /*0x10B*/ u8 win0right;
-    /*0x10C*/ u8 win0bottom;
+    /*0x109*/ u8 wirelessWinLeft;
+    /*0x10A*/ u8 wirelessWinTop;
+    /*0x10B*/ u8 wirelessWinRight;
+    /*0x10C*/ u8 wirelessWinBottom;
 } static EWRAM_DATA * sTradeAnim = NULL;
 
 static void SpriteCB_LinkMonGlow(struct Sprite *sprite);
@@ -2829,9 +2829,9 @@ static void Task_OpenCenterWhiteColumn(u8 taskId)
 
     if (data[0] == 0)
     {
-        sTradeAnim->win0left = sTradeAnim->win0right = DISPLAY_WIDTH / 2;
-        sTradeAnim->win0top = 0;
-        sTradeAnim->win0bottom = DISPLAY_HEIGHT;
+        sTradeAnim->wirelessWinLeft = sTradeAnim->wirelessWinRight = DISPLAY_WIDTH / 2;
+        sTradeAnim->wirelessWinTop = 0;
+        sTradeAnim->wirelessWinBottom = DISPLAY_HEIGHT;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |
@@ -2839,14 +2839,14 @@ static void Task_OpenCenterWhiteColumn(u8 taskId)
                                     WININ_WIN0_OBJ);
     }
 
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(sTradeAnim->win0left, sTradeAnim->win0right));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(sTradeAnim->win0top, sTradeAnim->win0bottom));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(sTradeAnim->wirelessWinLeft, sTradeAnim->wirelessWinRight));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(sTradeAnim->wirelessWinTop, sTradeAnim->wirelessWinBottom));
 
     data[0]++;
-    sTradeAnim->win0left -= 5;
-    sTradeAnim->win0right += 5;
+    sTradeAnim->wirelessWinLeft -= 5;
+    sTradeAnim->wirelessWinRight += 5;
 
-    if (sTradeAnim->win0left < 80)
+    if (sTradeAnim->wirelessWinLeft < 80)
         DestroyTask(taskId);
 }
 
@@ -2856,24 +2856,24 @@ static void Task_CloseCenterWhiteColumn(u8 taskId)
 
     if (data[0] == 0)
     {
-        sTradeAnim->win0left = 80;
-        sTradeAnim->win0right = DISPLAY_WIDTH - 80;
+        sTradeAnim->wirelessWinLeft = 80;
+        sTradeAnim->wirelessWinRight = DISPLAY_WIDTH - 80;
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |
                                     WININ_WIN0_BG1 |
                                     WININ_WIN0_OBJ);
     }
 
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(sTradeAnim->win0left, sTradeAnim->win0right));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(sTradeAnim->win0top, sTradeAnim->win0bottom));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(sTradeAnim->wirelessWinLeft, sTradeAnim->wirelessWinRight));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(sTradeAnim->wirelessWinTop, sTradeAnim->wirelessWinBottom));
 
-    if (sTradeAnim->win0left != DISPLAY_WIDTH / 2)
+    if (sTradeAnim->wirelessWinLeft != DISPLAY_WIDTH / 2)
     {
         data[0]++;
-        sTradeAnim->win0left += 5;
-        sTradeAnim->win0right -= 5;
+        sTradeAnim->wirelessWinLeft += 5;
+        sTradeAnim->wirelessWinRight -= 5;
 
-        if (sTradeAnim->win0left > DISPLAY_WIDTH / 2 - 5)
+        if (sTradeAnim->wirelessWinLeft > DISPLAY_WIDTH / 2 - 5)
             BlendPalettes(0x8, 0, RGB_WHITEALPHA);
     }
     else

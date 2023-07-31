@@ -519,7 +519,7 @@ bool8 DoesCurrentMapHaveFishingMons(void)
 void FishingWildEncounter(u8 rod)
 {
     GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
-    IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
+    IncrementGameStat(GAME_STAT_FISHING_ENCOUNTERS);
     StartWildBattle();
 }
 

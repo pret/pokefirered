@@ -224,7 +224,7 @@
 	.byte 0x24
 	.endm
 
-	.macro get_last_used_bank_move battler:req
+	.macro get_last_used_move battler:req
 	.byte 0x25
 	.byte \battler
 	.endm

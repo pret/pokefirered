@@ -309,7 +309,7 @@ static const struct WindowTemplate sWindowTemplate_TradingBoardMain = {
     .baseBlock = 0x039
 };
 
-static const struct ListMenuItem sTradeBoardListMenuItems[] = {
+static const struct ListMenuItem sListMenuItems_TradeBoard[] = {
     {gText_UR_EmptyString, LIST_HEADER},
     {gText_UR_EmptyString, 0},
     {gText_UR_EmptyString, 1},
@@ -323,10 +323,10 @@ static const struct ListMenuItem sTradeBoardListMenuItems[] = {
 };
 
 static const struct ListMenuTemplate sListMenuTemplate_TradeBoard = {
-    .items = sTradeBoardListMenuItems,
+    .items = sListMenuItems_TradeBoard,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = TradeBoardListMenuItemPrintFunc,
-    .totalItems = ARRAY_COUNT(sTradeBoardListMenuItems),
+    .totalItems = ARRAY_COUNT(sListMenuItems_TradeBoard),
     .maxShowed = 5,
     .windowId = 0,
     .header_X = 0,

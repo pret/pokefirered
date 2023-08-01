@@ -97,7 +97,7 @@ BattleScript_SuccessBallThrowEnd::
 	finishturn
 
 BattleScript_OldMan_Pokedude_CaughtMessage::
-	printstring STRINGID_GOTCHAPKMNCAUGHT_OLDMANORDUDE
+	printstring STRINGID_GOTCHAPKMNCAUGHTOLDMANORDUDE
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	endlinkbattle
 	finishturn

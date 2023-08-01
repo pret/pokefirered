@@ -843,14 +843,14 @@ AI_CV_DreamEater_End:
 
 AI_CV_MirrorMove:
 	if_target_faster AI_CV_MirrorMove2
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	if_not_in_hwords AI_CV_MirrorMove_EncouragedMovesToMirror, AI_CV_MirrorMove2
 	if_random_less_than 128, AI_CV_MirrorMove_End
 	score +2
 	goto AI_CV_MirrorMove_End
 
 AI_CV_MirrorMove2:
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	if_in_hwords AI_CV_MirrorMove_EncouragedMovesToMirror, AI_CV_MirrorMove_End
 	if_random_less_than 80, AI_CV_MirrorMove_End
 	score -1
@@ -941,10 +941,10 @@ AI_CV_DefenseUp3:
 
 AI_CV_DefenseUp4:
 	if_hp_less_than AI_USER, 40, AI_CV_DefenseUp_ScoreDown2
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_DefenseUp5
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_type_from_result
 	if_not_in_bytes AI_CV_DefenseUp_PhysicalTypes, AI_CV_DefenseUp_ScoreDown2
 	if_random_less_than 60, AI_CV_DefenseUp_End
@@ -1021,10 +1021,10 @@ AI_CV_SpDefUp3:
 
 AI_CV_SpDefUp4:
 	if_hp_less_than AI_USER, 40, AI_CV_SpDefUp_ScoreDown2
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_SpDefUp5
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_type_from_result
 	if_in_bytes AI_CV_SpDefUp_PhysicalTypes, AI_CV_SpDefUp_ScoreDown2
 	if_random_less_than 60, AI_CV_SpDefUp_End
@@ -1662,7 +1662,7 @@ AI_CV_Substitute3:
 
 AI_CV_Substitute4:
 	if_target_faster AI_CV_Substitute_End
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_equal EFFECT_SLEEP, AI_CV_Substitute5
 	if_equal EFFECT_TOXIC, AI_CV_Substitute5
@@ -1709,7 +1709,7 @@ AI_CV_Recharge_End:
 
 AI_CV_Disable:
 	if_target_faster AI_CV_Disable_End
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_Disable2
 	score +1
@@ -1737,7 +1737,7 @@ AI_CV_Counter2:
 
 AI_CV_Counter3:
 @	if_has_move AI_USER, MOVE_MIRROR_COAT, AI_CV_Counter7  @ Improvement in Emerald
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_Counter5
 	if_target_not_taunted AI_CV_Counter4
@@ -1745,7 +1745,7 @@ AI_CV_Counter3:
 	score +1
 
 AI_CV_Counter4:
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_type_from_result
 	if_not_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_ScoreDown1
 	if_random_less_than 100, AI_CV_Counter_End
@@ -1793,7 +1793,7 @@ AI_CV_Counter_PhysicalTypeList:
 AI_CV_Encore:
 	if_any_move_disabled AI_TARGET, AI_CV_Encore2
 	if_target_faster AI_CV_Encore_ScoreDown2
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_in_bytes AI_CV_Encore_EncouragedMovesToEncore, AI_CV_Encore_ScoreDown2
 
@@ -2028,7 +2028,7 @@ AI_CV_Protect:
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Protect_ScoreUp2
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Protect_ScoreUp2
 	if_status3 AI_TARGET, STATUS3_YAWN, AI_CV_Protect_ScoreUp2
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_ScoreUp2
 	goto AI_CV_Protect2
@@ -2049,7 +2049,7 @@ AI_CV_Protect4:
 	goto AI_CV_Protect_End
 
 AI_CV_Protect3:
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_End
 
@@ -2255,7 +2255,7 @@ AI_CV_MirrorCoat2:
 
 AI_CV_MirrorCoat3:
 @	if_has_move AI_USER, MOVE_COUNTER, AI_CV_MirrorCoat_ScoreUp4  @ Improvement in Emerald
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_MirrorCoat5
 	if_target_not_taunted AI_CV_MirrorCoat4
@@ -2263,7 +2263,7 @@ AI_CV_MirrorCoat3:
 	score +1
 
 AI_CV_MirrorCoat4:
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_type_from_result
 	if_not_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_ScoreDown1
 	if_random_less_than 100, AI_CV_MirrorCoat_End
@@ -2353,7 +2353,7 @@ AI_CV_SemiInvulnerable_CheckIceType:
 
 AI_CV_SemiInvulnerable5:
 	if_target_faster AI_CV_SemiInvulnerable_End
-	get_last_used_bank_move AI_TARGET
+	get_last_used_move AI_TARGET
 	get_move_effect_from_result
 	if_not_equal EFFECT_LOCK_ON, AI_CV_SemiInvulnerable_TryEncourage
 	goto AI_CV_SemiInvulnerable_End
@@ -2447,7 +2447,7 @@ AI_CV_SmellingSalt_End:
 
 AI_CV_Trick:
 	get_hold_effect AI_USER
-	if_in_bytes AI_CV_Trick_EffectsToEncourage2, AI_CV_Trick3
+	if_in_bytes AI_CV_Trick_ChoiceEffects, AI_CV_Trick3
 	if_in_bytes AI_CV_Trick_EffectsToEncourage, AI_CV_Trick4
 
 AI_CV_Trick2:
@@ -2456,7 +2456,7 @@ AI_CV_Trick2:
 
 AI_CV_Trick3:
 	get_hold_effect AI_TARGET
-	if_in_bytes AI_CV_Trick_EffectsToEncourage2, AI_CV_Trick2
+	if_in_bytes AI_CV_Trick_ChoiceEffects, AI_CV_Trick2
 	score +5
 	goto AI_CV_Trick_End
 
@@ -2479,7 +2479,7 @@ AI_CV_Trick_EffectsToEncourage:
 	.byte HOLD_EFFECT_CHOICE_BAND
 	.byte -1
 
-AI_CV_Trick_EffectsToEncourage2:
+AI_CV_Trick_ChoiceEffects:
 	.byte HOLD_EFFECT_CHOICE_BAND
 	.byte -1
 
@@ -2922,7 +2922,7 @@ AI_PreferBatonPass_GoForBatonPass:
 @	goto Score_Plus1
 @
 @AI_PreferBatonPass3:
-@	get_last_used_bank_move AI_USER
+@	get_last_used_move AI_USER
 @	if_in_hwords AI_PreferBatonPass_ProtectMoves, Score_Minus2
 @	score +2
 @	end

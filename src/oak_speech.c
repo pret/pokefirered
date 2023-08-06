@@ -1418,8 +1418,6 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
         break;
     case 1: // Default name options
     case 2: //
-    case 3: //
-    case 4: //
         PlaySE(SE_SELECT);
         ClearStdWindowAndFrameToTransparent(tMenuWindowId, TRUE);
         RemoveWindow(tMenuWindowId);

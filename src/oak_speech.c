@@ -594,11 +594,8 @@ static const u8 *const sMaleNameChoices[] =
     gNameChoice_Kene,
     gNameChoice_Geki,
 #elif defined(LEAFGREEN)
-    gNameChoice_Green,
-    gNameChoice_Leaf,
-    gNameChoice_Gary,
-    gNameChoice_Kaz,
-    gNameChoice_Toru,
+    gNameChoice_Leaf
+
 #endif
     gNameChoice_Jak,
     gNameChoice_Janne,

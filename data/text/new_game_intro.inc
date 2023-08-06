@@ -1,9 +1,6 @@
 gOtherText_NewName::
     .string "NEW NAME$"
 
-gNameChoice_Green::
-    .string "GREEN$"
-
 gNameChoice_Red::
     .string "RED$"
 
@@ -13,14 +10,11 @@ gNameChoice_Leaf::
 gNameChoice_Fire::
     .string "FIRE$"
 
-gNameChoice_Gary::
-    .string "GARY$"
+gNameChoice_Remi::
+    .string "REMI$"
 
-gNameChoice_Kaz::
-    .string "KAZ$"
-
-gNameChoice_Toru::
-    .string "TORU$"
+gNameChoice_Elle::
+    .string "ELLE$"
 
 gNameChoice_Ash::
     .string "ASH$"

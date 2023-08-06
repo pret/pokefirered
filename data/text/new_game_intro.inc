@@ -13,11 +13,14 @@ gNameChoice_Leaf::
 gNameChoice_Fire::
     .string "FIRE$"
 
-gNameChoice_Remi::
-    .string "REMI$"
+gNameChoice_Gary::
+    .string "GARY$"
 
-gNameChoice_Elle::
-    .string "ELLE$"
+gNameChoice_Kaz::
+    .string "KAZ$"
+
+gNameChoice_Toru::
+    .string "TORU$"
 
 gNameChoice_Ash::
     .string "ASH$"
@@ -205,21 +208,22 @@ gOakSpeech_Text_IStudyPokemon::
     .string "I study POKéMON as a profession.\p$"
 
 gOakSpeech_Text_TellMeALittleAboutYourself::
-    .string " "
+    .string "But first, tell me a little about\n"
+    .string "yourself.\p$"
 
 gOakSpeech_Text_YourNameWhatIsIt::
-    .string "I'm so glad you're playing\n"
-    .string "this game Emma!\p$"
+    .string "Let's begin with your name.\n"
+    .string "What is it?\p$"
 
 gOakSpeech_Text_SoYourNameIsPlayer::
     .string "Right…\n"
     .string "So your name is {PLAYER}.$"
 
 gOakSpeech_Text_WhatWasHisName::
-    .string "This is my granddaughter.\p"
-    .string "She's been your rival since you both\n"
+    .string "This is my grandson.\p"
+    .string "He's been your rival since you both\n"
     .string "were babies.\p"
-    .string "…Erm, what was her name now?$"
+    .string "…Erm, what was his name now?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
     .string "Your rival's name, what was it now?$"
@@ -229,7 +233,7 @@ gOakSpeech_Text_ConfirmRivalName::
 
 gOakSpeech_Text_RememberRivalsName::
     .string "That's right! I remember now!\n"
-    .string "Her name is {RIVAL}!\p$"
+    .string "His name is {RIVAL}!\p$"
 
 gOakSpeech_Text_LetsGo::
     .string "{PLAYER}!\p"

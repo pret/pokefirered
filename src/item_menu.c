@@ -109,7 +109,7 @@ static void BeginMovingItemInPocket(u8 taskId, s16 itemIndex);
 static void Task_MoveItemInPocket_HandleInput(u8 taskId);
 static void ExecuteMoveItemInPocket(u8 taskId, u32 itemIndex);
 static void AbortMovingItemInPocket(u8 taskId, u32 itemIndex);
-static void CopyBagListBgTileRowToTilemapBuffer(u8 a0);
+static void DrawItemListRow(u8 row);
 static void Task_ItemContext_FieldOrBattle(u8 taskId);
 static void Task_FieldItemContextMenuHandleInput(u8 taskId);
 static void Task_ItemMenuAction_Use(u8 taskId);
@@ -185,20 +185,10 @@ static const u8 *const sPocketNames[] = {
     gText_PokeBalls2
 };
 
-static const u16 sBagListBgTiles[][18] = {
-    INCBIN_U16("graphics/item_menu/bagmap_0.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_1.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_2.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_3.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_4.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_5.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_6.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_7.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_8.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_9.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_A.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_B.bin")
-};
+#define LIST_TILES_WIDTH  18
+#define LIST_TILES_HEIGHT 12
+
+static const u16 sItemListTilemap[LIST_TILES_WIDTH * LIST_TILES_HEIGHT] = INCBIN_U16("graphics/item_menu/list.bin");
 
 static const struct MenuAction sItemMenuContextActions[] = {
     [ITEMMENUACTION_USE] = {gOtherText_Use, {.void_u8 = Task_ItemMenuAction_Use}},
@@ -309,6 +299,10 @@ static const struct ScrollArrowsTemplate sPocketSwitchArrowPairTemplate = {
 
 static const u8 sBlit_SelectButton[] = INCBIN_U8("graphics/interface/select_button.4bpp");
 
+#define tSwitchDir     data[11]
+#define tSwitchCounter data[12]
+#define tSwitchState   data[13]
+
 void GoToBagMenu(u8 location, u8 pocket, MainCallback bagCallback)
 {
     u8 i;
@@ -327,8 +321,8 @@ void GoToBagMenu(u8 location, u8 pocket, MainCallback bagCallback)
         sBagMenuDisplay->itemOriginalLocation = 0xFF;
         sBagMenuDisplay->itemMenuIcon = 0;
         sBagMenuDisplay->inhibitItemDescriptionPrint = FALSE;
-        sBagMenuDisplay->pocketScrollArrowsTask = 0xFF;
-        sBagMenuDisplay->pocketSwitchArrowsTask = 0xFF;
+        sBagMenuDisplay->pocketScrollArrowsTask = TASK_NONE;
+        sBagMenuDisplay->pocketSwitchArrowsTask = TASK_NONE;
         if (location == ITEMMENULOCATION_ITEMPC)
             sBagMenuDisplay->pocketSwitchMode = 1;
         else if (location == ITEMMENULOCATION_OLD_MAN)
@@ -1152,9 +1146,9 @@ static u8 ProcessPocketSwitchInput(u8 taskId, u8 pocketId)
 static void SwitchPockets(u8 taskId, s16 direction, bool16 a2)
 {
     s16 *data = gTasks[taskId].data;
-    data[13] = 0;
-    data[12] = 0;
-    data[11] = direction;
+    tSwitchState = 0;
+    tSwitchCounter = 0;
+    tSwitchDir = direction;
     if (!a2)
     {
         ClearWindowTilemap(0);
@@ -1176,35 +1170,36 @@ static void Task_AnimateSwitchPockets(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!MenuHelpers_IsLinkActive() && !BagIsTutorial())
     {
-        switch (ProcessPocketSwitchInput(taskId, gBagMenuState.pocket + data[11]))
+        switch (ProcessPocketSwitchInput(taskId, gBagMenuState.pocket + tSwitchDir))
         {
         case 1:
-            gBagMenuState.pocket += data[11];
+            gBagMenuState.pocket += tSwitchDir;
             SwitchTaskToFollowupFunc(taskId);
             SwitchPockets(taskId, -1, TRUE);
             return;
         case 2:
-            gBagMenuState.pocket += data[11];
+            gBagMenuState.pocket += tSwitchDir;
             SwitchTaskToFollowupFunc(taskId);
             SwitchPockets(taskId,  1, TRUE);
             return;
         }
     }
-    switch (data[13])
+    switch (tSwitchState)
     {
     case 0:
-        if (data[12] != 0x7FFF)
+        // Animate the item list being revealed from the bottom row up
+        if (tSwitchCounter != SHRT_MAX)
         {
-            data[12]++;
-            CopyBagListBgTileRowToTilemapBuffer(data[12]);
-            if (data[12] == 12)
-                data[12] = 0x7FFF;
+            tSwitchCounter++;
+            DrawItemListRow(tSwitchCounter);
+            if (tSwitchCounter == LIST_TILES_HEIGHT)
+                tSwitchCounter = SHRT_MAX;
         }
-        if (data[12] == 0x7FFF)
-            data[13]++;
+        if (tSwitchCounter == SHRT_MAX)
+            tSwitchState++;
         break;
     case 1:
-        gBagMenuState.pocket += data[11];
+        gBagMenuState.pocket += tSwitchDir;
         PrintBagPocketName();
         Bag_BuildListMenuTemplate(gBagMenuState.pocket);
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
@@ -1332,9 +1327,10 @@ static void UpdateQuantityToTossOrDeposit(s16 value, u8 ndigits)
     BagPrintTextOnWindow(r6, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
-static void CopyBagListBgTileRowToTilemapBuffer(u8 frame)
+// row of 0 is the bottom row in the list, up to LIST_TILES_HEIGHT at the top
+static void DrawItemListRow(u8 row)
 {
-    CopyToBgTilemapBufferRect(1, sBagListBgTiles[12 - frame], 11, 13 - frame, 18, 1);
+    CopyToBgTilemapBufferRect(1, &sItemListTilemap[(LIST_TILES_HEIGHT - row) * LIST_TILES_WIDTH], 11, 1 + LIST_TILES_HEIGHT - row, LIST_TILES_WIDTH, 1);
     ScheduleBgCopyTilemapToVram(1);
 }
 

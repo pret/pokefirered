@@ -44,7 +44,6 @@ struct Main
     /*0x439*/ u8 field_439_x4:1;
 };
 
-extern u8 gUnknown_3001764;
 extern struct Main gMain;
 extern bool8 gSoftResetDisabled;
 extern bool8 gLinkVSyncDisabled;

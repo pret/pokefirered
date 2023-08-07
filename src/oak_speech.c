@@ -616,29 +616,11 @@ static const u8 *const sMaleNameChoices[] =
 static const u8 *const sFemaleNameChoices[] =
 {
 #if defined(FIRERED)
-    gNameChoice_Red,
-    gNameChoice_Fire,
+    gNameChoice_Emma,
 #elif defined(LEAFGREEN)
     gNameChoice_Green,
     gNameChoice_Leaf,
 #endif
-    gNameChoice_Omi,
-    gNameChoice_Jodi,
-    gNameChoice_Amanda,
-    gNameChoice_Hillary,
-    gNameChoice_Makey,
-    gNameChoice_Michi,
-    gNameChoice_Paula,
-    gNameChoice_June,
-    gNameChoice_Cassie,
-    gNameChoice_Rey,
-    gNameChoice_Seda,
-    gNameChoice_Kiko,
-    gNameChoice_Mina,
-    gNameChoice_Norie,
-    gNameChoice_Sai,
-    gNameChoice_Momo,
-    gNameChoice_Suzi
 };
 
 static const u8 *const sRivalNameChoices[] =

@@ -1223,39 +1223,7 @@ static void Task_OakSpeech_TellMeALittleAboutYourself(u8 taskId)
         else
         {
             OakSpeechPrintMessage(gOakSpeech_Text_TellMeALittleAboutYourself, sOakSpeechResources->textSpeed);
-            gTasks[taskId].func = Task_OakSpeech_FadeOutOak;
-        }
-    }
-}
-
-static void Task_OakSpeech_FadeOutOak(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
-    {
-        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, 1);
-        CreateFadeInTask(taskId, 2);
-        tTimer = 48;
-        gTasks[taskId].func = Task_OakSpeech_AskPlayerGender;
-    }
-}
-
-static void Task_OakSpeech_AskPlayerGender(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (tTrainerPicFadeState != 0)
-    {
-        if (tTimer != 0)
-        {
-            tTimer--;
-        }
-        else
-        {
-            tTrainerPicPosX = -60;
-            ClearTrainerPic();
-            OakSpeechPrintMessage(gOakSpeech_Text_AskPlayerGender, sOakSpeechResources->textSpeed);
+            CreateFadeInTask(taskId, 2);
             gTasks[taskId].func = Task_OakSpeech_ShowGenderOptions;
         }
     }
@@ -1263,24 +1231,7 @@ static void Task_OakSpeech_AskPlayerGender(u8 taskId)
 
 static void Task_OakSpeech_ShowGenderOptions(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
-    {
-        // gTasks[taskId].tMenuWindowId = AddWindow(&sIntro_WindowTemplates[WIN_INTRO_BOYGIRL]);
-        // PutWindowTilemap(gTasks[taskId].tMenuWindowId);
-        // DrawStdFrameWithCustomTileAndPalette(gTasks[taskId].tMenuWindowId, TRUE, GetStdWindowBaseTileNum(), 14);
-        // FillWindowPixelBuffer(gTasks[taskId].tMenuWindowId, PIXEL_FILL(1));
-        // sOakSpeechResources->textColor[0] = 1;
-        // sOakSpeechResources->textColor[1] = 2;
-        // sOakSpeechResources->textColor[2] = 3;
-        // AddTextPrinterParameterized3(gTasks[taskId].tMenuWindowId, FONT_NORMAL, 8, 1, sOakSpeechResources->textColor, 0, gText_Boy);
-        // sOakSpeechResources->textColor[0] = 1;
-        // sOakSpeechResources->textColor[1] = 2;
-        // sOakSpeechResources->textColor[2] = 3;
-        // AddTextPrinterParameterized3(gTasks[taskId].tMenuWindowId, FONT_NORMAL, 8, 17, sOakSpeechResources->textColor, 0, gText_Girl);
-        // Menu_InitCursor(gTasks[taskId].tMenuWindowId, FONT_NORMAL, 0, 1, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 2, 0);
-        // CopyWindowToVram(gTasks[taskId].tMenuWindowId, COPYWIN_FULL);
-        gTasks[taskId].func = Task_OakSpeech_HandleGenderInput;
-    }
+    gTasks[taskId].func = Task_OakSpeech_HandleGenderInput;
 }
 
 static void Task_OakSpeech_HandleGenderInput(u8 taskId)
@@ -1313,10 +1264,7 @@ static void Task_OakSpeech_ClearGenderWindows(u8 taskId)
 
 static void Task_OakSpeech_LoadPlayerPic(u8 taskId)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
-        LoadTrainerPic(MALE_PLAYER_PIC, 0);
-    else
-        LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+    LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
     CreateFadeOutTask(taskId, 2);
     gTasks[taskId].tTimer = 32;
     gTasks[taskId].func = Task_OakSpeech_YourNameWhatIsIt;
@@ -1416,7 +1364,7 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
         GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
         if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
         {
-            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
+            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen); //Need to fix
         }
         else
         {

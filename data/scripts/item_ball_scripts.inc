@@ -454,8 +454,8 @@ SilphCo_8F_EventScript_ItemIron::
 	finditem ITEM_IRON
 	end
 
-SilphCo_11F_EventScript_ItemZinc::
-	finditem ITEM_ZINC
+SilphCo_11F_EventScript_ItemUpgrade::
+	finditem ITEM_UP_GRADE
 	end
 
 PokemonMansion_1F_EventScript_ItemProtein::

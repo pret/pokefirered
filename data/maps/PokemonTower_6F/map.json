@@ -9,7 +9,7 @@
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,
   "allow_escaping": true,
-  "allow_running": false,
+  "allow_running": true,
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",

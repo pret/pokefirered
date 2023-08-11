@@ -179,7 +179,7 @@
 #define ITEM_ENIGMA_BERRY 175
 
 #define FIRST_BERRY_INDEX ITEM_CHERI_BERRY
-#define LAST_BERRY_INDEX  ITEM_ENIGMA_BERRY
+#define LAST_BERRY_INDEX ITEM_ENIGMA_BERRY
 
 #define ITEM_UNUSED_BERRY_1 176
 #define ITEM_UNUSED_BERRY_2 177
@@ -447,18 +447,18 @@
 
 #define ITEMS_COUNT 375
 
-#define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
+#define ITEM_TO_BERRY(itemId) (((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF
 
 #define NUM_TECHNICAL_MACHINES 50
-#define NUM_HIDDEN_MACHINES     8
+#define NUM_HIDDEN_MACHINES 8
 
 // Secondary IDs for rods
-#define OLD_ROD   0
-#define GOOD_ROD  1
+#define OLD_ROD 0
+#define GOOD_ROD 1
 #define SUPER_ROD 2
 
 // Check if the item is one that can be used on a Pokemon.
-#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
+#define IS_POKEMON_ITEM(item) ((((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)) || (item) == ITEM_DRAGON_SCALE || (item) == ITEM_KINGS_ROCK || (item) == ITEM_UP_GRADE || (item) == ITEM_METAL_COAT || (item) == ITEM_DEEP_SEA_SCALE || (item) == ITEM_DEEP_SEA_TOOTH)
 
-#endif  // GUARD_CONSTANTS_ITEMS_H
+#endif // GUARD_CONSTANTS_ITEMS_H

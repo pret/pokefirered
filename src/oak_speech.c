@@ -321,7 +321,7 @@ static const struct WindowTemplate sIntro_WindowTemplates[NUM_INTRO_WINDOWS + 1]
         .tilemapLeft = 2,
         .tilemapTop = 2,
         .width = 12,
-        .height = 10,
+        .height = 6,
         .paletteNum = 15,
         .baseBlock = 1
     },

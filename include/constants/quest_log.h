@@ -5,11 +5,11 @@
 #define QL_STATE_PLAYBACK      2
 #define QL_STATE_PLAYBACK_LAST 3
 
-#define QL_PLAYBACK_STATE_0 0
-#define QL_PLAYBACK_STATE_1 1
-#define QL_PLAYBACK_STATE_2 2
-#define QL_PLAYBACK_STATE_3 3
-#define QL_PLAYBACK_STATE_4 4
+#define QL_PLAYBACK_STATE_STOPPED            0
+#define QL_PLAYBACK_STATE_RUNNING            1
+#define QL_PLAYBACK_STATE_RECORDING          2
+#define QL_PLAYBACK_STATE_ACTION_END         3
+#define QL_PLAYBACK_STATE_RECORDING_NO_DELAY 4
 
 #define QL_START_NORMAL 1
 #define QL_START_WARP   2
@@ -149,7 +149,7 @@
 #define QL_ACTION_MOVEMENT     0
 #define QL_ACTION_GFX_CHANGE   1
 #define QL_ACTION_INPUT        2
-#define QL_ACTION_3            3
+#define QL_ACTION_EMPTY        3
 #define QL_ACTION_WAIT       254
 #define QL_ACTION_SCENE_END  255
 

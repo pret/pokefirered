@@ -7,7 +7,7 @@
 #include "quest_log.h"
 #include "constants/trainers.h"
 
-static void sub_812C334(s32 *, s32 *);
+static void GetLinkMultiBattlePlayerIndexes(s32 *, s32 *);
 
 void TrySetQuestLogBattleEvent(void)
 {
@@ -93,8 +93,8 @@ void TrySetQuestLogBattleEvent(void)
 
 void TrySetQuestLogLinkBattleEvent(void)
 {
-    s32 sp0;
-    s32 sp4[2];
+    s32 partnerIdx;
+    s32 opponentIdxs[2];
     u16 eventId;
     s32 i;
     bool32 inUnionRoom;
@@ -106,12 +106,12 @@ void TrySetQuestLogLinkBattleEvent(void)
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             eventId = QL_EVENT_LINK_BATTLED_MULTI;
-            sub_812C334(&sp0, sp4);
+            GetLinkMultiBattlePlayerIndexes(&partnerIdx, opponentIdxs);
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
             {
-                data->playerNames[0][i] = gLinkPlayers[sp0].name[i];
-                data->playerNames[1][i] = gLinkPlayers[sp4[0]].name[i];
-                data->playerNames[2][i] = gLinkPlayers[sp4[1]].name[i];
+                data->playerNames[0][i] = gLinkPlayers[partnerIdx].name[i];
+                data->playerNames[1][i] = gLinkPlayers[opponentIdxs[0]].name[i];
+                data->playerNames[2][i] = gLinkPlayers[opponentIdxs[1]].name[i];
             }
         }
         else
@@ -135,16 +135,16 @@ void TrySetQuestLogLinkBattleEvent(void)
     }
 }
 
-static void sub_812C334(s32 * a0, s32 * a1)
+static void GetLinkMultiBattlePlayerIndexes(s32 * partnerIdx, s32 * opponentIdxs)
 {
     s32 i;
-    s32 _optimized_out = 0;
-    u8 r2 = gLinkPlayers[gBattleStruct->multiplayerId].id ^ 2;
+    s32 numOpponentsFound = 0;
+    u8 partnerId = gLinkPlayers[gBattleStruct->multiplayerId].id ^ 2;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        if (r2 == gLinkPlayers[i].id)
-            a0[0] = i;
+        if (partnerId == gLinkPlayers[i].id)
+            *partnerIdx = i;
         else if (i != gBattleStruct->multiplayerId)
-            a1[_optimized_out++] = i;
+            opponentIdxs[numOpponentsFound++] = i;
     }
 }

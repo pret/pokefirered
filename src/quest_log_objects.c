@@ -129,7 +129,7 @@ void QL_LoadObjects(const struct QuestLogScene * questLog, const struct ObjectEv
     CpuCopy16(gObjectEvents, gSaveBlock1Ptr->objectEvents, sizeof(gObjectEvents));
 }
 
-void sub_815A540(void)
+void QL_TryStopSurfing(void)
 {
     if (gQuestLogState == QL_STATE_PLAYBACK)
     {

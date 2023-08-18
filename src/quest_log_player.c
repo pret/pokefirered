@@ -42,7 +42,7 @@ void QuestLogUpdatePlayerSprite(u8 state)
 
 bool32 QuestLogTryRecordPlayerAvatarGfxTransition(u8 state)
 {
-    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_2)
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_RECORDING)
     {
         QuestLogRecordPlayerAvatarGfxTransition(state);
         return TRUE;
@@ -77,7 +77,7 @@ static void QL_GfxTransition_Fish(void)
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
 
-    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_1 || gQuestLogPlaybackState == QL_PLAYBACK_STATE_3)
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_RUNNING || gQuestLogPlaybackState == QL_PLAYBACK_STATE_ACTION_END)
     {
         u8 taskId;
         LockPlayerFieldControls();

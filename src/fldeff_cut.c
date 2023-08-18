@@ -79,7 +79,7 @@ static const struct OamData sOamData_FldEff_CutGrass = {
     .size = SPRITE_SIZE(8x8),
     .tileNum = 0x001,
     .priority = 1,
-    .paletteNum = 0x1,
+    .paletteNum = 1,
     .affineParam = 0
 };
 

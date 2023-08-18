@@ -1205,9 +1205,9 @@ static void LoadWallpaperGfx(u8 boxId, s8 direction)
     DrawWallpaper(gStorage->wallpaperBgTilemapBuffer, gStorage->wallpaperTilemap, gStorage->wallpaperLoadDir, gStorage->wallpaperOffset);
 
     if (gStorage->wallpaperLoadDir != 0)
-        LoadPalette(wallpaper->palettes, (gStorage->wallpaperOffset * 32) + 0x40, 0x40);
+        LoadPalette(wallpaper->palettes, BG_PLTT_ID(4) + BG_PLTT_ID(gStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
     else
-        CpuCopy16(wallpaper->palettes, &gPlttBufferUnfaded[(gStorage->wallpaperOffset * 32) + 0x40], 0x40);
+        CpuCopy16(wallpaper->palettes, &gPlttBufferUnfaded[BG_PLTT_ID(4) + BG_PLTT_ID(gStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
 
     DecompressAndLoadBgGfxUsingHeap(2, wallpaper->tiles, 0, 256 * gStorage->wallpaperOffset, 0);
 
@@ -1281,12 +1281,12 @@ static void InitBoxTitle(u8 boxId)
     gStorage->wallpaperPalBits = 0x3F0;
 
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
-    gStorage->boxTitlePalOffset = 0x10e + 16 * tagIndex;
-    gStorage->wallpaperPalBits |= 0x10000 << tagIndex;
+    gStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
+    gStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
-    gStorage->boxTitleAltPalOffset = 0x10e + 16 * tagIndex;
-    gStorage->wallpaperPalBits |= 0x10000 << tagIndex;
+    gStorage->boxTitleAltPalOffset = OBJ_PLTT_ID(tagIndex) + 14;
+    gStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     StringCopyPadded(gStorage->boxTitleText, GetBoxNamePtr(boxId), 0, 8);
     DrawTextWindowAndBufferTiles(gStorage->boxTitleText, gStorage->boxTitleTiles, 0, 0, gStorage->boxTitleUnused, 2);
@@ -1387,9 +1387,9 @@ static void CycleBoxTitleColor(void)
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
     if (gStorage->boxTitleCycleId == 0)
-        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + gStorage->boxTitlePalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[gStorage->boxTitlePalOffset], PLTT_SIZEOF(2));
     else
-        CpuCopy16(sBoxTitleColors[wallpaperId], gPlttBufferUnfaded + gStorage->boxTitleAltPalOffset, 4);
+        CpuCopy16(sBoxTitleColors[wallpaperId], &gPlttBufferUnfaded[gStorage->boxTitleAltPalOffset], PLTT_SIZEOF(2));
 }
 
 static s16 GetBoxTitleBaseX(const u8 *string)

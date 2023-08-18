@@ -43,12 +43,12 @@ static bool8 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offset
 
 void palette_bg_faded_fill_white(void)
 {
-    CpuFastFill16(RGB_WHITE, gPlttBufferFaded, 0x400);
+    CpuFastFill16(RGB_WHITE, gPlttBufferFaded, PLTT_SIZE);
 }
 
 void palette_bg_faded_fill_black(void)
 {
-    CpuFastFill16(RGB_BLACK, gPlttBufferFaded, 0x400);
+    CpuFastFill16(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 }
 
 void WarpFadeInScreen(void)

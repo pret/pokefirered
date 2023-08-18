@@ -17,6 +17,8 @@
 #include "data.h"
 #include "constants/songs.h"
 
+#define INTRO_SPECIES SPECIES_NIDORAN_F
+
 enum
 {
     WIN_INTRO_TEXTBOX,
@@ -751,9 +753,9 @@ static void Task_NewGameScene(u8 taskId)
         gPaletteFade.bufferTransferDisabled = TRUE;
         InitStandardTextBoxWindows();
         InitTextBoxGfxAndPrinters();
-        Menu_LoadStdPalAt(0xD0);
-        LoadPalette(sOakSpeech_Background_Pals, 0, 0x80);
-        LoadPalette(GetTextWindowPalette(2) + 15, 0, 2);
+        Menu_LoadStdPalAt(BG_PLTT_ID(13));
+        LoadPalette(sOakSpeech_Background_Pals, BG_PLTT_ID(0), sizeof(sOakSpeech_Background_Pals));
+        LoadPalette(GetTextWindowPalette(2) + 15, BG_PLTT_ID(0), PLTT_SIZEOF(1));
         break;
     case 5:
         sOakSpeechResources->textSpeed = GetTextSpeedSetting();
@@ -919,7 +921,7 @@ static void Task_ControlsGuide_Clear(u8 taskId)
         CopyBgTilemapBufferToVram(1);
         DestroyTextCursorSprite(gTasks[taskId].tTextCursorSpriteId);
         sOakSpeechResources->windowIds[0] = RGB_BLACK;
-        LoadPalette(sOakSpeechResources->windowIds, 0, 2);
+        LoadPalette(sOakSpeechResources->windowIds, BG_PLTT_ID(0), PLTT_SIZEOF(1));
         gTasks[taskId].tTimer = 32;
         gTasks[taskId].func = Task_PikachuIntro_LoadPage1;
     }
@@ -1191,7 +1193,7 @@ static void Task_OakSpeech_IsInhabitedFarAndWide(u8 taskId)
         if (gTasks[taskId].tTimer == 32)
         {
             OakSpeechPrintMessage(gOakSpeech_Text_IsInhabitedFarAndWide, sOakSpeechResources->textSpeed);
-            PlayCry_Normal(SPECIES_NIDORAN_F, 0);
+            PlayCry_Normal(INTRO_SPECIES, 0);
         }
     }
 }
@@ -1737,7 +1739,7 @@ static void Task_OakSpeech_FadePlayerPicWhite(u8 taskId)
     {
         if (tUnderflowingTimer <= 0 && tSecondaryTimer != 0)
             tSecondaryTimer--;
-        BlendPalette(0x40, 0x20, tBlendCoefficient, RGB_WHITE);
+        BlendPalette(BG_PLTT_ID(4), 0x20, tBlendCoefficient, RGB_WHITE);
         tBlendCoefficient++;
         tUnderflowingTimer--;
         tPlayerPicFadeWhiteTimer = tSecondaryTimer;
@@ -1745,8 +1747,8 @@ static void Task_OakSpeech_FadePlayerPicWhite(u8 taskId)
         {
             for (i = 0; i < 32; i++)
             {
-                gPlttBufferFaded[i + 0x40] = RGB_WHITE;
-                gPlttBufferUnfaded[i + 0x40] = RGB_WHITE;
+                gPlttBufferFaded[i + BG_PLTT_ID(4)] = RGB_WHITE;
+                gPlttBufferUnfaded[i + BG_PLTT_ID(4)] = RGB_WHITE;
             }
             DestroyTask(taskId);
         }
@@ -1823,7 +1825,13 @@ static void CB2_ReturnFromNamingScreen(void)
         FreeAllWindowBuffers();
         InitStandardTextBoxWindows();
         InitTextBoxGfxAndPrinters();
-        LoadPalette(sOakSpeech_Background_Pals, 0, 0xE0);
+        // Below is reading 48 colors beyond the background palette (into the tiles that follow it).
+        // This color range is used by the player and rival pic, which will overwrite them with the correct colors.
+#ifdef BUGFIX
+        LoadPalette(sOakSpeech_Background_Pals, BG_PLTT_ID(0), sizeof(sOakSpeech_Background_Pals));
+#else
+        LoadPalette(sOakSpeech_Background_Pals, BG_PLTT_ID(0), sizeof(sOakSpeech_Background_Pals) + PLTT_SIZEOF(48));
+#endif
         break;
     case 4:
         DecompressAndCopyTileDataToVram(1, sOakSpeech_Background_Tiles, 0, 0, 0);
@@ -1876,9 +1884,9 @@ static void CreateNidoranFSprite(u8 taskId)
 {
     u8 spriteId;
 
-    DecompressPicFromTable(&gMonFrontPicTable[SPECIES_NIDORAN_F], MonSpritesGfxManager_GetSpritePtr(0), SPECIES_NIDORAN_F);
-    LoadCompressedSpritePaletteUsingHeap(&gMonPaletteTable[SPECIES_NIDORAN_F]);
-    SetMultiuseSpriteTemplateToPokemon(SPECIES_NIDORAN_F, 0);
+    DecompressPicFromTable(&gMonFrontPicTable[INTRO_SPECIES], MonSpritesGfxManager_GetSpritePtr(0), INTRO_SPECIES);
+    LoadCompressedSpritePaletteUsingHeap(&gMonPaletteTable[INTRO_SPECIES]);
+    SetMultiuseSpriteTemplateToPokemon(INTRO_SPECIES, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 96, 96, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.priority = 1;
@@ -1962,19 +1970,19 @@ static void LoadTrainerPic(u16 whichPic, u16 tileOffset)
     switch (whichPic)
     {
     case MALE_PLAYER_PIC:
-        LoadPalette(sOakSpeech_Red_Pal, 0x40, 0x40);
+        LoadPalette(sOakSpeech_Red_Pal, BG_PLTT_ID(4), sizeof(sOakSpeech_Red_Pal));
         LZ77UnCompVram(sOakSpeech_Red_Tiles, (void *)VRAM + 0x600 + tileOffset);
         break;
     case FEMALE_PLAYER_PIC:
-        LoadPalette(sOakSpeech_Leaf_Pal, 0x40, 0x40);
+        LoadPalette(sOakSpeech_Leaf_Pal, BG_PLTT_ID(4), sizeof(sOakSpeech_Leaf_Pal));
         LZ77UnCompVram(sOakSpeech_Leaf_Tiles, (void *)VRAM + 0x600 + tileOffset);
         break;
     case RIVAL_PIC:
-        LoadPalette(sOakSpeech_Rival_Pal, 0x60, 0x40);
+        LoadPalette(sOakSpeech_Rival_Pal, BG_PLTT_ID(6), sizeof(sOakSpeech_Rival_Pal));
         LZ77UnCompVram(sOakSpeech_Rival_Tiles, (void *)VRAM + 0x600 + tileOffset);
         break;
     case OAK_PIC:
-        LoadPalette(sOakSpeech_Oak_Pal, 0x60, 0x40);
+        LoadPalette(sOakSpeech_Oak_Pal, BG_PLTT_ID(6), sizeof(sOakSpeech_Oak_Pal));
         LZ77UnCompVram(sOakSpeech_Oak_Tiles, (void *)VRAM + 0x600 + tileOffset);
         break;
     default:

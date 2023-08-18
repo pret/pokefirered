@@ -338,7 +338,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     if (IsContest())
         RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_masks_curse_sheet, animBgData.tilesOffset);
-    LoadPalette(sRgbWhite, animBgData.paletteId * 16 + 1, 2);
+    LoadPalette(sRgbWhite, BG_PLTT_ID(animBgData.paletteId) + 1, PLTT_SIZEOF(1));
     gBattle_BG1_X = -gSprites[spriteId].x + 32;
     gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     gTasks[taskId].data[0] = newSpriteId;
@@ -465,28 +465,28 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     switch (sAnimStatsChangeData->data[1])
     {
     case 0:
-        LoadCompressedPalette(gBattleStatMask2_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask2_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 1:
-        LoadCompressedPalette(gBattleStatMask1_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask1_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 2:
-        LoadCompressedPalette(gBattleStatMask3_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask3_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 3:
-        LoadCompressedPalette(gBattleStatMask4_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask4_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 4:
-        LoadCompressedPalette(gBattleStatMask6_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask6_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 5:
-        LoadCompressedPalette(gBattleStatMask7_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask7_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 6:
-        LoadCompressedPalette(gBattleStatMask8_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask8_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     default:
-        LoadCompressedPalette(gBattleStatMask5_Pal, animBgData.paletteId * 16, 32);
+        LoadCompressedPalette(gBattleStatMask5_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     }
     gBattle_BG1_X = 0;
@@ -618,13 +618,13 @@ static void AnimTask_Flash_Step(u8 taskId)
             {
                 if ((task->data[15] >> i) & 1)
                 {
-                    u16 paletteOffset = i * 16;
+                    u16 paletteOffset = BG_PLTT_ID(i);
                     BlendPalette(paletteOffset, 16, task->data[2], 0xFFFF);
                 }
 
                 if ((task->data[14] >> i) & 1)
                 {
-                    u16 paletteOffset = i * 16 + 0x100;
+                    u16 paletteOffset = OBJ_PLTT_ID(i);
                     BlendPalette(paletteOffset, 16, task->data[2], 0);
                 }
             }
@@ -645,7 +645,7 @@ static void SetPalettesToColor(u32 selectedPalettes, u16 color)
 
     for (i = 0; i < 32; selectedPalettes >>= 1, ++i)
         if (selectedPalettes & 1)
-            for (curOffset = i * 16, paletteOffset = curOffset; curOffset < paletteOffset + 16; ++curOffset)
+            for (curOffset = PLTT_ID(i), paletteOffset = curOffset; curOffset < paletteOffset + 16; ++curOffset)
                 gPlttBufferFaded[curOffset] = color;
 }
 
@@ -764,7 +764,7 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 scrollSpeed, u8 battler1
     if (IsContest())
         RelocateBattleBgPal(animBgData.paletteId, animBgData.bgTilemap, 0, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gfx, animBgData.tilesOffset);
-    LoadCompressedPalette(palette, animBgData.paletteId * 16, 32);
+    LoadCompressedPalette(palette, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gTasks[taskId].data[1] = scrollSpeed;
@@ -867,7 +867,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[paletteIndex * 16], 32);
+    memcpy(&gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[PLTT_ID(paletteIndex)], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -885,7 +885,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], 32);
+    memcpy(&gPlttBufferUnfaded[PLTT_ID(paletteIndex)], &gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -903,7 +903,7 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gPlttBufferFaded[paletteIndex * 16], 32);
+    memcpy(&gPlttBufferUnfaded[PLTT_ID(paletteIndex)], &gPlttBufferFaded[PLTT_ID(paletteIndex)], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 

@@ -40,7 +40,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 5,
         .width = 6,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x00A
     }, {
         .bg = 0,
@@ -48,7 +48,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 23,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x022
     }, DUMMY_WIN_TEMPLATE
 };
@@ -101,16 +101,16 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         SaveClearScreen_GpuInit();
         break;
     case 3:
-        LoadStdWindowGfx(0, 0x001, 0xF0);
-        LoadStdWindowGfx(1, 0x001, 0xF0);
+        LoadStdWindowGfx(0, 0x001, BG_PLTT_ID(15));
+        LoadStdWindowGfx(1, 0x001, BG_PLTT_ID(15));
         break;
     case 4:
-        DrawStdFrameWithCustomTileAndPalette(1, TRUE, 0x001, 0xF);
+        DrawStdFrameWithCustomTileAndPalette(1, TRUE, 0x001, 15);
         AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 3, 1, 1, sTextColor, 0, gText_ClearAllSaveData);
         CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 5:
-        CreateYesNoMenu(&sWindowTemplates[0], FONT_NORMAL, 0, 2, 0x001, 0xF, 1);
+        CreateYesNoMenu(&sWindowTemplates[0], FONT_NORMAL, 0, 2, 0x001, 15, 1);
         CopyBgTilemapBufferToVram(0);
         break;
     default:

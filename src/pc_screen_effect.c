@@ -83,7 +83,7 @@ static void Task_PCScreenEffect_TurnOn(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDY, 0);
             SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntBak);
             BlendPalettes(PALETTES_ALL, 0, RGB_BLACK);
-            gPlttBufferFaded[0] = 0;
+            gPlttBufferFaded[BG_PLTT_ID(0)] = 0;
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->tWin0Left, task->tWin0Right));
         if (task->tWin0Left)
@@ -117,7 +117,7 @@ static void Task_PCScreenEffect_TurnOff(u8 taskId)
     switch (task->tState)
     {
     case 0:
-        gPlttBufferFaded[0] = 0;
+        gPlttBufferFaded[BG_PLTT_ID(0)] = 0;
         break;
     case 1:
         task->tWin0Left = 0;
@@ -152,7 +152,7 @@ static void Task_PCScreenEffect_TurnOff(u8 taskId)
             task->tWin0Left = 120;
             task->tWin0Right = 120;
             BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
-            gPlttBufferFaded[0] = 0;
+            gPlttBufferFaded[BG_PLTT_ID(0)] = 0;
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->tWin0Left, task->tWin0Right));
         if (task->tWin0Left != 120)

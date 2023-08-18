@@ -663,11 +663,11 @@ static void MainCB2_LoadFameChecker(void)
         case 3:
             LoadBgTiles(3, gFameCheckerBgTiles, sizeof(gFameCheckerBgTiles), 0);
             CopyToBgTilemapBufferRect(3, gFameCheckerBg3Tilemap, 0, 0, 32, 32);
-            LoadPalette(gFameCheckerBgPals + 0x00, 0x00, 0x40);
-            LoadPalette(gFameCheckerBgPals + 0x10, 0x10, 0x20);
+            LoadPalette(&gFameCheckerBgPals[0], BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+            LoadPalette(&gFameCheckerBgPals[1], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
             CopyToBgTilemapBufferRect(2, gFameCheckerBg2Tilemap, 0, 0, 32, 32);
             CopyToBgTilemapBufferRect_ChangePalette(1, sFameCheckerTilemap, 30, 0, 32, 32, 0x11);
-            LoadPalette(GetTextWindowPalette(2), 0xF0, 0x20);
+            LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
             gMain.state++;
             break;
         case 4:
@@ -1335,40 +1335,44 @@ static void SpriteCB_FCSpinningPokeball(struct Sprite *sprite)
     }
 }
 
+#define PERSON_PAL_NUM 6
+#define PERSON_X  148
+#define PERSON_Y   66
+
 static u8 CreatePersonPicSprite(u8 fcPersonIdx)
 {
     u8 spriteId;
     if (fcPersonIdx == FAMECHECKER_DAISY)
     {
-        spriteId = CreateSprite(&sDaisySpriteTemplate, 0x94, 0x42, 0);
-        LoadPalette(sDaisySpritePalette, 0x160, 0x20);
-        gSprites[spriteId].oam.paletteNum = 6;
+        spriteId = CreateSprite(&sDaisySpriteTemplate, PERSON_X, PERSON_Y, 0);
+        LoadPalette(sDaisySpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sDaisySpritePalette));
+        gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else if (fcPersonIdx == FAMECHECKER_MRFUJI)
     {
-        spriteId = CreateSprite(&sFujiSpriteTemplate, 0x94, 0x42, 0);
-        LoadPalette(sFujiSpritePalette, 0x160, 0x20);
-        gSprites[spriteId].oam.paletteNum = 6;
+        spriteId = CreateSprite(&sFujiSpriteTemplate, PERSON_X, PERSON_Y, 0);
+        LoadPalette(sFujiSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sFujiSpritePalette));
+        gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else if (fcPersonIdx == FAMECHECKER_OAK)
     {
-        spriteId = CreateSprite(&sOakSpriteTemplate, 0x94, 0x42, 0);
-        LoadPalette(sOakSpritePalette, 0x160, 0x20);
-        gSprites[spriteId].oam.paletteNum = 6;
+        spriteId = CreateSprite(&sOakSpriteTemplate, PERSON_X, PERSON_Y, 0);
+        LoadPalette(sOakSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sOakSpritePalette));
+        gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else if (fcPersonIdx == FAMECHECKER_BILL)
     {
-        spriteId = CreateSprite(&sBillSpriteTemplate, 0x94, 0x42, 0);
-        LoadPalette(sBillSpritePalette, 0x160, 0x20);
-        gSprites[spriteId].oam.paletteNum = 6;
+        spriteId = CreateSprite(&sBillSpriteTemplate, PERSON_X, PERSON_Y, 0);
+        LoadPalette(sBillSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sBillSpritePalette));
+        gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else
     {
-        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], 1, 0x94, 0x42, 6, 0xFFFF);
+        spriteId = CreateTrainerPicSprite(sFameCheckerTrainerPicIdxs[fcPersonIdx], TRUE, PERSON_X, PERSON_Y, PERSON_PAL_NUM, TAG_NONE);
     }
     gSprites[spriteId].callback = SpriteCB_FCSpinningPokeball;
     if (gSaveBlock1Ptr->fameChecker[fcPersonIdx].pickState == FCPICKSTATE_SILHOUETTE)
-        LoadPalette(sSilhouettePalette, 0x160, 0x20);
+        LoadPalette(sSilhouettePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sSilhouettePalette));
     return spriteId;
 }
 

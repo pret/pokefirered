@@ -20,27 +20,27 @@ static const u8 sTextColors[][3] = {
 static const struct WindowTemplate sDefaultBagWindowsStd[] = {
     {
         .bg = 0,
-        .tilemapLeft = 0x0b,
-        .tilemapTop = 0x01,
-        .width = 0x12,
-        .height = 0x0c,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 11,
+        .tilemapTop = 1,
+        .width = 18,
+        .height = 12,
+        .paletteNum = 15,
         .baseBlock = 0x008a
     }, {
         .bg = 0,
-        .tilemapLeft = 0x05,
-        .tilemapTop = 0x0e,
-        .width = 0x19,
-        .height = 0x06,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 5,
+        .tilemapTop = 14,
+        .width = 25,
+        .height = 6,
+        .paletteNum = 15,
         .baseBlock = 0x0162
     }, {
         .bg = 0,
-        .tilemapLeft = 0x01,
-        .tilemapTop = 0x01,
-        .width = 0x09,
-        .height = 0x02,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 0x01f8
     }, DUMMY_WIN_TEMPLATE
 };
@@ -48,27 +48,27 @@ static const struct WindowTemplate sDefaultBagWindowsStd[] = {
 static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
     {
         .bg = 0,
-        .tilemapLeft = 0x0b,
-        .tilemapTop = 0x01,
-        .width = 0x12,
-        .height = 0x0c,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 11,
+        .tilemapTop = 1,
+        .width = 18,
+        .height = 12,
+        .paletteNum = 15,
         .baseBlock = 0x008a
     }, {
         .bg = 0,
-        .tilemapLeft = 0x05,
-        .tilemapTop = 0x0e,
-        .width = 0x19,
-        .height = 0x06,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 5,
+        .tilemapTop = 14,
+        .width = 25,
+        .height = 6,
+        .paletteNum = 15,
         .baseBlock = 0x0162
     }, {
         .bg = 0,
-        .tilemapLeft = 0x01,
-        .tilemapTop = 0x01,
-        .width = 0x08,
-        .height = 0x02,
-        .paletteNum = 0x0C,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 8,
+        .height = 2,
+        .paletteNum = 12,
         .baseBlock = 0x01f8
     }, DUMMY_WIN_TEMPLATE
 };
@@ -80,7 +80,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x242
     }, {
         .bg = 0,
@@ -88,7 +88,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 9,
         .width = 12,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x242
     }, {
         .bg = 0,
@@ -96,7 +96,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 1,
         .width = 8,
         .height = 3,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x272
     }, {
         .bg = 0,
@@ -104,7 +104,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 6,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x28a
     }, {
         .bg = 0,
@@ -112,7 +112,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 9,
         .width = 6,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x28a
     }, {
         .bg = 0,
@@ -120,7 +120,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 26,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x2a2
     }, {
         .bg = 0,
@@ -128,7 +128,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 14,
         .height = 4,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x2a2
     }, {
         .bg = 0,
@@ -136,7 +136,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 15,
         .height = 4,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x2da
     }, {
         .bg = 0,
@@ -144,7 +144,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 16,
         .height = 4,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x316
     }, {
         .bg = 0,
@@ -152,7 +152,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 23,
         .height = 4,
-        .paletteNum = 0xC,
+        .paletteNum = 12,
         .baseBlock = 0x356
     }, {
         .bg = 0,
@@ -160,7 +160,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 17,
         .width = 7,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x20a
     }, {
         .bg = 0,
@@ -168,7 +168,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 7,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x20a
     }, {
         .bg = 0,
@@ -176,7 +176,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 13,
         .width = 7,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x20a
     }, {
         .bg = 0,
@@ -184,7 +184,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 11,
         .width = 7,
         .height = 8,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x20a
     }
 };
@@ -202,10 +202,10 @@ void InitBagWindows(void)
     else
         InitWindows(sDefaultBagWindowsDeposit);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x64, 0xE0);
-    LoadMenuMessageWindowGfx(0, 0x6D, 0xD0);
-    LoadStdWindowGfx(0, 0x81, 0xC0);
-    LoadPalette(sBagWindowPalF, 0xF0, 0x20);
+    LoadUserWindowGfx(0, 0x64, BG_PLTT_ID(14));
+    LoadMenuMessageWindowGfx(0, 0x6D, BG_PLTT_ID(13));
+    LoadStdWindowGfx(0, 0x81, BG_PLTT_ID(12));
+    LoadPalette(sBagWindowPalF, BG_PLTT_ID(15), sizeof(sBagWindowPalF));
     for (i = 0; i < 3; i++)
     {
         FillWindowPixelBuffer(i, 0x00);
@@ -232,7 +232,7 @@ void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused)
 void BagDrawDepositItemTextBox(void)
 {
     u32 x;
-    DrawStdFrameWithCustomTileAndPalette(2, FALSE, 0x081, 0x0C);
+    DrawStdFrameWithCustomTileAndPalette(2, FALSE, 0x081, 12);
     x = 0x40 - GetStringWidth(FONT_SMALL, gText_DepositItem, 0);
     AddTextPrinterParameterized(2, FONT_SMALL, gText_DepositItem, x / 2, 1, 0, NULL);
 }
@@ -244,11 +244,11 @@ u8 ShowBagWindow(u8 whichWindow, u8 nItems)
         sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow + nItems]);
         if (whichWindow != 6)
         {
-            DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x064, 0xE);
+            DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x064, 14);
         }
         else
         {
-            DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x081, 0xC);
+            DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x081, 12);
         }
         ScheduleBgCopyTilemapToVram(0);
     }
@@ -293,12 +293,12 @@ u8 GetBagWindow(u8 whichWindow)
 
 void BagCreateYesNoMenuBottomRight(u8 taskId, const struct YesNoFuncTable * ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[3], FONT_NORMAL, 0, 2, 0x064, 0x0E, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[3], FONT_NORMAL, 0, 2, 0x064, 14, ptrs);
 }
 
 void BagCreateYesNoMenuTopRight(u8 taskId, const struct YesNoFuncTable * ptrs)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[4], FONT_NORMAL, 0, 2, 0x064, 0x0E, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[4], FONT_NORMAL, 0, 2, 0x064, 14, ptrs);
 }
 
 void BagPrintMoneyAmount(void)
@@ -308,5 +308,5 @@ void BagPrintMoneyAmount(void)
 
 void BagDrawTextBoxOnWindow(u8 windowId)
 {
-    DrawTextBorderOuter(windowId, 0x064, 0x0E);
+    DrawTextBorderOuter(windowId, 0x064, 14);
 }

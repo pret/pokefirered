@@ -212,10 +212,10 @@ static void CB2_InitWirelessCommunicationScreen(void)
     ChangeBgY(0, 0, BG_COORD_SET);
     ChangeBgX(1, 0, BG_COORD_SET);
     ChangeBgY(1, 0, BG_COORD_SET);
-    LoadPalette(sPalettes, 0, 0x20);
-    Menu_LoadStdPalAt(0xf0);
+    LoadPalette(sPalettes, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    Menu_LoadStdPalAt(BG_PLTT_ID(15));
     DynamicPlaceholderTextUtil_Reset();
-    FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0xF);
+    FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 15);
     CopyBgTilemapBufferToVram(1);
     SetMainCallback2(CB2_RunWirelessCommunicationScreen);
     RunTasks();
@@ -247,7 +247,7 @@ static void CyclePalette(s16 * counter, s16 * palIdx)
         *counter = 0;
     }
     idx = *palIdx + 2; // +2 skips over default.pal and the empty black palette after it
-    LoadPalette(sPalettes[idx], 0, 16);
+    LoadPalette(sPalettes[idx], BG_PLTT_ID(0), PLTT_SIZEOF(8));
 }
 
 static void PrintHeaderTexts(void)

@@ -45,7 +45,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .tilemapTop = 1,
         .width = 27,
         .height = 18,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x014
     }, DUMMY_WIN_TEMPLATE
 };
@@ -109,7 +109,7 @@ static void MainCB2_SetUp(void)
         break;
     case 3:
         LoadFrameGfxOnBg(3);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 4:
@@ -564,5 +564,5 @@ static void LoadFrameGfxOnBg(u8 bg)
 {
     LoadBgTiles(bg, sTiles, 0xC0, 0);
     CopyToBgTilemapBufferRect(bg, sTilemap, 0, 0, 32, 32);
-    LoadPalette(sPalette, 0, 0x20);
+    LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }

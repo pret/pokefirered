@@ -333,7 +333,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     LoadCompressedSpriteSheet(&spriteSheet);
     if (arrowInfo->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * arrowInfo->palNum) + 0x100, 0x20);
+        LoadPalette(sRedArrowPal, OBJ_PLTT_ID(arrowInfo->palNum), sizeof(sRedArrowPal));
     }
     else
     {
@@ -539,7 +539,7 @@ u8 ListMenuAddRedOutlineCursorObject(const struct CursorStruct *cursor)
     LoadCompressedSpriteSheet(&spriteSheet);
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
+        LoadPalette(sRedArrowPal, OBJ_PLTT_ID(cursor->palNum), sizeof(sRedArrowPal));
     }
     else
     {
@@ -612,7 +612,7 @@ static u8 ListMenuAddRedArrowCursorObject(const struct CursorStruct *cursor)
     LoadCompressedSpriteSheet(&spriteSheet);
     if (cursor->palTag == TAG_NONE)
     {
-        LoadPalette(sRedArrowPal, (16 * cursor->palNum) + 0x100, 0x20);
+        LoadPalette(sRedArrowPal, OBJ_PLTT_ID(cursor->palNum), sizeof(sRedArrowPal));
     }
     else
     {

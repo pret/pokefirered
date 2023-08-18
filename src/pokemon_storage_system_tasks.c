@@ -534,7 +534,7 @@ static void Task_InitPokeStorage(u8 taskId)
         PutWindowTilemap(0);
         ClearWindowTilemap(1);
         CpuFill32(0, (void *)VRAM, 0x200);
-        LoadUserWindowGfx(1, 0xB, 0xE0);
+        LoadUserWindowGfx(1, 0xB, BG_PLTT_ID(14));
         break;
     case 3:
         ResetAllBgCoords();
@@ -2147,13 +2147,13 @@ static void LoadsMiscSpritePalette(void)
 
 static void InitPalettesAndSprites(void)
 {
-    LoadPalette(gPokeStorageInterface_Pal, 0, 0x20);
-    LoadPalette(gPokeStorageInterface_NoDisplayMon_Pal, 0x20, 0x20);
-    LoadPalette(sItemInfoFrame_Pal, 0xF0, 0x20);
+    LoadPalette(gPokeStorageInterface_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadPalette(gPokeStorageInterface_NoDisplayMon_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+    LoadPalette(sItemInfoFrame_Pal, BG_PLTT_ID(15), sizeof(sItemInfoFrame_Pal));
     if (gStorage->boxOption != OPTION_MOVE_ITEMS)
-        LoadPalette(sScrollingBg_Pal, 0x30, sizeof(sScrollingBg_Pal));
+        LoadPalette(sScrollingBg_Pal, BG_PLTT_ID(3), sizeof(sScrollingBg_Pal));
     else
-        LoadPalette(sScrollingBgMoveItems_Pal, 0x30, sizeof(sScrollingBgMoveItems_Pal));
+        LoadPalette(sScrollingBgMoveItems_Pal, BG_PLTT_ID(3), sizeof(sScrollingBgMoveItems_Pal));
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     CreateDisplayMonSprite();
@@ -2256,7 +2256,7 @@ static void CreateDisplayMonSprite(void)
             break;
 
         gStorage->displayMonSprite = &gSprites[spriteId];
-        gStorage->displayMonPalOffset = palSlot * 16 + 0x100;
+        gStorage->displayMonPalOffset = OBJ_PLTT_ID(palSlot);
         gStorage->displayMonTilePtr = (void *)OBJ_VRAM0 + tileStart * 32;
     } while (FALSE);
 
@@ -2277,7 +2277,7 @@ static void LoadDisplayMonGfx(u16 species, u32 personality)
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gStorage->tileBuffer, species, personality);
         LZ77UnCompWram(gStorage->displayMonPalette, gStorage->displayMonPalBuffer);
         CpuCopy32(gStorage->tileBuffer, gStorage->displayMonTilePtr, 0x800);
-        LoadPalette(gStorage->displayMonPalBuffer, gStorage->displayMonPalOffset, 0x20);
+        LoadPalette(gStorage->displayMonPalBuffer, gStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
         gStorage->displayMonSprite->invisible = FALSE;
     }
     else
@@ -2337,7 +2337,7 @@ static void UpdateWaveformAnimation(void)
 static void InitSupplementalTilemaps(void)
 {
     LZ77UnCompWram(gPokeStoragePartyMenu_Tilemap, gStorage->partyMenuTilemapBuffer);
-    LoadPalette(gPokeStoragePartyMenu_Pal, 0x10, 0x20);
+    LoadPalette(gPokeStoragePartyMenu_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
     TilemapUtil_SetTilemap(TILEMAP_PARTY_MENU, 1, gStorage->partyMenuTilemapBuffer, 12, 22);
     TilemapUtil_SetTilemap(TILEMAP_CLOSE_BUTTON, 1, sCloseBoxButton_Tilemap, 9, 4);
     TilemapUtil_SetPos(TILEMAP_PARTY_MENU, 10, 0);
@@ -2545,7 +2545,7 @@ static bool8 DoShowPartyMenu(void)
 static void InitPokeStorageBg0(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
-    LoadStdWindowGfx(1, 2, 0xD0);
+    LoadStdWindowGfx(1, 2, BG_PLTT_ID(13));
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     CopyBgTilemapBufferToVram(0);
 }

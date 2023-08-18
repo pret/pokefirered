@@ -196,8 +196,8 @@ static bool32 MainMenuGpuInit(u8 a0)
     ChangeBgY(2, 0, 0);
     InitWindows(sWindowTemplate);
     DeactivateAllTextPrinters();
-    LoadPalette(sBg_Pal, 0x00, 0x20);
-    LoadPalette(sTextbox_Pal, 0xF0, 0x20);
+    LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
+    LoadPalette(sTextbox_Pal, BG_PLTT_ID(15), sizeof(sTextbox_Pal));
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     SetGpuReg(REG_OFFSET_WININ, 0);
@@ -343,7 +343,7 @@ static void Task_PrintMainMenuText(u8 taskId)
         pal = RGB(4, 16, 31);
     else
         pal = RGB(31, 3, 21);
-    LoadPalette(&pal, 0xF1, 2);
+    LoadPalette(&pal, BG_PLTT_ID(15) + 1, PLTT_SIZEOF(1));
     switch (gTasks[taskId].tMenuType)
     {
     case MAIN_MENU_NEWGAME:
@@ -678,13 +678,13 @@ static void PrintBadgeCount(void)
 static void LoadUserFrameToBg(u8 bgId)
 {
     LoadBgTiles(bgId, GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1B1);
-    LoadPalette(GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->palette, 0x20, 0x20);
+    LoadPalette(GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
     MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 
 static void SetStdFrame0OnBg(u8 bgId)
 {
-    LoadStdWindowGfx(MAIN_MENU_WINDOW_NEWGAME_ONLY, 0x1B1, 0x20);
+    LoadStdWindowGfx(MAIN_MENU_WINDOW_NEWGAME_ONLY, 0x1B1, BG_PLTT_ID(2));
     MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 

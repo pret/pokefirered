@@ -17,6 +17,10 @@
 #include "constants/abilities.h"
 #include "constants/items.h"
 
+#define MAX_ENCOUNTER_RATE 1600
+
+#define HEADER_NONE 0xFFFF
+
 struct WildEncounterData
 {
     u32 rngState;
@@ -42,7 +46,7 @@ static void AddToWildEncounterRateBuff(u8 encouterRate);
 
 #include "data/wild_encounters.h"
 
-static const u8 sUnownLetterSlots[][12] = {
+static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
   //  A   A   A   A   A   A   A   A   A   A   A   ?
     { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 27},
   //  C   C   C   D   D   D   H   H   H   U   U   O
@@ -198,7 +202,7 @@ static u16 GetCurrentMapWildMonHeaderId(void)
         }
     }
 
-    return -1;
+    return HEADER_NONE;
 }
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void)
@@ -226,13 +230,13 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
     ZeroEnemyPartyMons();
     if (species != SPECIES_UNOWN)
     {
-        CreateMonWithNature(&gEnemyParty[0], species, level, 32, Random() % 25);
+        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);
     }
     else
     {
         chamber = gSaveBlock1Ptr->location.mapNum - MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER);
         personality = GenerateUnownPersonalityByLetter(sUnownLetterSlots[chamber][slot]);
-        CreateMon(&gEnemyParty[0], species, level, 32, TRUE, personality, FALSE, 0);
+        CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, TRUE, personality, FALSE, 0);
     }
 }
 
@@ -248,7 +252,7 @@ static u32 GenerateUnownPersonalityByLetter(u8 letter)
 
 u8 GetUnownLetterByPersonalityLoByte(u32 personality)
 {
-    return (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 0x1C;
+    return GET_UNOWN_LETTER(personality);
 }
 
 enum
@@ -295,9 +299,9 @@ static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
     return info->wildPokemon[slot].species;
 }
 
-static bool8 DoWildEncounterRateDiceRoll(u16 a0)
+static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
 {
-    if (WildEncounterRandom() % 1600 < a0)
+    if (WildEncounterRandom() % MAX_ENCOUNTER_RATE < encounterRate)
         return TRUE;
     return FALSE;
 }
@@ -322,8 +326,8 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
             break;
         }
     }
-    if (encounterRate > 1600)
-        encounterRate = 1600;
+    if (encounterRate > MAX_ENCOUNTER_RATE)
+        encounterRate = MAX_ENCOUNTER_RATE;
     return DoWildEncounterRateDiceRoll(encounterRate);
 }
 
@@ -357,7 +361,7 @@ bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetatileBehavior)
         return FALSE;
 
     headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId != 0xFFFF)
+    if (headerId != HEADER_NONE)
     {
         if (ExtractMetatileAttribute(currMetatileAttrs, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
         {
@@ -442,7 +446,7 @@ bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetatileBehavior)
 void RockSmashWildEncounter(void)
 {
     u16 headerIdx = GetCurrentMapWildMonHeaderId();
-    if (headerIdx == 0xFFFF)
+    if (headerIdx == HEADER_NONE)
         gSpecialVar_Result = FALSE;
     else if (gWildMonHeaders[headerIdx].rockSmashMonsInfo == NULL)
         gSpecialVar_Result = FALSE;
@@ -464,7 +468,7 @@ bool8 SweetScentWildEncounter(void)
 
     PlayerGetDestCoords(&x, &y);
     headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId != 0xFFFF)
+    if (headerId != HEADER_NONE)
     {
         if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
         {
@@ -505,7 +509,7 @@ bool8 SweetScentWildEncounter(void)
 bool8 DoesCurrentMapHaveFishingMons(void)
 {
     u16 headerIdx = GetCurrentMapWildMonHeaderId();
-    if (headerIdx == 0xFFFF)
+    if (headerIdx == HEADER_NONE)
         return FALSE;
     if (gWildMonHeaders[headerIdx].fishingMonsInfo == NULL)
         return FALSE;
@@ -527,7 +531,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
 
     *isWaterMon = FALSE;
     headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId == 0xFFFF)
+    if (headerId == HEADER_NONE)
         return SPECIES_NONE;
     landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
     waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
@@ -559,7 +563,7 @@ u16 GetLocalWaterMon(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
-    if (headerId != 0xFFFF)
+    if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo * waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
 
@@ -669,7 +673,7 @@ static u16 WildEncounterRandom(void)
 static u8 GetMapBaseEncounterCooldown(u8 encounterType)
 {
     u16 headerIdx = GetCurrentMapWildMonHeaderId();
-    if (headerIdx == 0xFFFF)
+    if (headerIdx == HEADER_NONE)
         return 0xFF;
     if (encounterType == TILE_ENCOUNTER_LAND)
     {

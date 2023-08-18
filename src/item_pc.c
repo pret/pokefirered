@@ -130,51 +130,51 @@ static const u8 sTextColors[][3] = {
 static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0,
-        .tilemapLeft = 0x07,
-        .tilemapTop = 0x01,
-        .width = 0x13,
-        .height = 0x0c,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 7,
+        .tilemapTop = 1,
+        .width = 19,
+        .height = 12,
+        .paletteNum = 15,
         .baseBlock = 0x02bf
     }, {
         .bg = 0,
-        .tilemapLeft = 0x05,
-        .tilemapTop = 0x0e,
-        .width = 0x19,
-        .height = 0x06,
-        .paletteNum = 0x0d,
+        .tilemapLeft = 5,
+        .tilemapTop = 14,
+        .width = 25,
+        .height = 6,
+        .paletteNum = 13,
         .baseBlock = 0x0229
     }, {
         .bg = 0,
-        .tilemapLeft = 0x01,
-        .tilemapTop = 0x01,
-        .width = 0x05,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x0215
     }, {
         .bg = 0,
-        .tilemapLeft = 0x18,
-        .tilemapTop = 0x0f,
-        .width = 0x05,
-        .height = 0x04,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 24,
+        .tilemapTop = 15,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0x0201
     }, {
         .bg = 0,
-        .tilemapLeft = 0x16,
-        .tilemapTop = 0x0d,
-        .width = 0x07,
-        .height = 0x06,
-        .paletteNum = 0x0f,
+        .tilemapLeft = 22,
+        .tilemapTop = 13,
+        .width = 7,
+        .height = 6,
+        .paletteNum = 15,
         .baseBlock = 0x01d7
     }, {
         .bg = 0,
-        .tilemapLeft = 0x02,
-        .tilemapTop = 0x0f,
-        .width = 0x1a,
-        .height = 0x04,
-        .paletteNum = 0x0b,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 11,
         .baseBlock = 0x016f
     }, DUMMY_WIN_TEMPLATE
 };
@@ -182,27 +182,27 @@ static const struct WindowTemplate sWindowTemplates[] = {
 static const struct WindowTemplate sSubwindowTemplates[] = {
     {
         .bg = 0,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x0e,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 14,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x0137
     }, {
         .bg = 0,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x10,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 16,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x0137
     }, {
         .bg = 0,
-        .tilemapLeft = 0x06,
-        .tilemapTop = 0x0f,
-        .width = 0x17,
-        .height = 0x04,
-        .paletteNum = 0x0c,
+        .tilemapLeft = 6,
+        .tilemapTop = 15,
+        .width = 23,
+        .height = 4,
+        .paletteNum = 12,
         .baseBlock = 0x009b
     }
 };
@@ -443,7 +443,7 @@ static bool8 ItemPc_LoadGraphics(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gItemPcBgPals, 0x00, 0x60);
+        LoadCompressedPalette(gItemPcBgPals, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         sStateDataPtr->data[0]++;
         break;
     case 3:
@@ -1069,11 +1069,11 @@ static void ItemPc_InitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x3C0, 0xE0);
-    LoadStdWindowGfx(0, 0x3A3, 0xC0);
-    LoadMenuMessageWindowGfx(0, 0x3AC, 0xB0);
-    LoadPalette(GetTextWindowPalette(2), 0xD0, 0x20);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowGfx(0, 0x3C0, BG_PLTT_ID(14));
+    LoadStdWindowGfx(0, 0x3A3, BG_PLTT_ID(12));
+    LoadMenuMessageWindowGfx(0, 0x3AC, BG_PLTT_ID(11));
+    LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i < 3; i++)
     {
         FillWindowPixelBuffer(i, 0x00);
@@ -1111,7 +1111,7 @@ static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 
 
 static void ItemPc_SetBorderStyleOnWindow(u8 windowId)
 {
-    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x3C0, 0x0E);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x3C0, 14);
 }
 
 static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
@@ -1119,7 +1119,7 @@ static u8 ItemPc_GetOrCreateSubwindow(u8 idx)
     if (sSubmenuWindowIds[idx] == 0xFF)
     {
         sSubmenuWindowIds[idx] = AddWindow(&sSubwindowTemplates[idx]);
-        DrawStdFrameWithCustomTileAndPalette(sSubmenuWindowIds[idx], TRUE, 0x3A3, 0x0C);
+        DrawStdFrameWithCustomTileAndPalette(sSubmenuWindowIds[idx], TRUE, 0x3A3, 12);
     }
 
     return sSubmenuWindowIds[idx];

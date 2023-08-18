@@ -787,8 +787,8 @@ static void InitTradeMenu(void)
     gPaletteFade.bufferTransferDisabled = TRUE;
 
     SetVBlankCallback(VBlankCB_TradeMenu);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x14);
-    LoadPalette(gStandardMenuPalette, 0xD0, 0x14);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZEOF(10));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(13), PLTT_SIZEOF(10));
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     SetBgTilemapBuffer(1, sTradeMenu->tilemapBuffer);
@@ -803,9 +803,9 @@ static void InitTradeMenu(void)
             ClearWindowTilemap(i);
             FillWindowPixelBuffer(i, PIXEL_FILL(0));
         }
-        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
-        LoadStdWindowGfx(0, 0x014, 0xC0);
-        LoadUserWindowGfx(2, 0x001, 0xE0);
+        FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
+        LoadStdWindowGfx(0, 0x014, BG_PLTT_ID(12));
+        LoadUserWindowGfx(2, 0x001, BG_PLTT_ID(14));
         LoadMonIconPalettes();
         sTradeMenu->bufferPartyState = 0;
         sTradeMenu->callbackId = CB_MAIN_MENU;
@@ -1372,7 +1372,7 @@ static void LoadTradeBgGfx(u8 state)
     switch (state)
     {
     case 0:
-        LoadPalette(gTradeMenu_Pal, 0x00, 0x60);
+        LoadPalette(gTradeMenu_Pal, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         LoadBgTiles(1, gTradeMenu_Gfx, 0x1280, 0);
         CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenu_Tilemap, 0, 0, 32, 20, 0);
         LoadBgTilemap(2, sTradeStripesBG2Tilemap, 0x800, 0);

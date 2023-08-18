@@ -3039,22 +3039,22 @@ static void LoadPokeJumpGfx(void)
         ResetTempTileDataBuffers();
         LoadSpriteSheetsAndPalettes(sPokemonJumpGfx);
         InitDigitPrinters();
-        LoadPalette(sBg_Pal, 0, 0x20);
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Tilemap, 0, 0, 1);
-        LoadPalette(sVenusaur_Pal, 0x30, 0x20);
+        LoadPalette(sVenusaur_Pal, BG_PLTT_ID(3), sizeof(sVenusaur_Pal));
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(sBonuses_Pal, 0x10, 0x20);
+        LoadPalette(sBonuses_Pal, BG_PLTT_ID(1), sizeof(sBonuses_Pal));
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_BONUSES, sBonuses_Tilemap, 0, 0, 1);
-        LoadPalette(sInterface_Pal, 0x20, 0x20);
+        LoadPalette(sInterface_Pal, BG_PLTT_ID(2), sizeof(sInterface_Pal));
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        LoadStdWindowGfxOnBg(0, 1, 0xE0);
-        LoadUserWindowGfx2(0, 0x00A, 0xD0);
+        LoadStdWindowGfxOnBg(0, 1, BG_PLTT_ID(14));
+        LoadUserWindowGfx2(0, 0x00A, BG_PLTT_ID(13));
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -3472,7 +3472,7 @@ static u32 AddMessageWindow(u32 left, u32 top, u32 width, u32 height)
     window.tilemapTop = top;
     window.width = width;
     window.height = height;
-    window.paletteNum = 0xF;
+    window.paletteNum = 15;
     window.baseBlock = 0x43;
 
     windowId = AddWindow(&window);
@@ -3493,7 +3493,7 @@ static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
     window.paletteNum = 2;
     window.baseBlock = 0x2B;
 
-    CreateYesNoMenu(&window, FONT_NORMAL, 0, 2, 0x00a, 0xD, a);
+    CreateYesNoMenu(&window, FONT_NORMAL, 0, 2, 0x00a, 13, a);
 }
 
 // "Points" for jump score and "times" for number of jumps in a row
@@ -4554,8 +4554,8 @@ static void PrintRecordsText(u16 windowId)
     recordNums[1] = records->bestJumpScore;
     recordNums[2] = records->excellentsInRow;
 
-    LoadStdWindowGfx(windowId, 0x21D, 0xD0);
-    DrawTextBorderOuter(windowId, 0x21D, 0xD);
+    LoadStdWindowGfx(windowId, 0x21D, BG_PLTT_ID(13));
+    DrawTextBorderOuter(windowId, 0x21D, 13);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized5(windowId, FONT_NORMAL, gText_PkmnJumpRecords, 0, 0, TEXT_SKIP_DRAW, NULL, 1, 0);
     for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)

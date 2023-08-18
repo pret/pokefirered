@@ -551,7 +551,7 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
 
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 
-    if (template->tileTag == 0xFFFF)
+    if (template->tileTag == TAG_NONE)
     {
         s16 tileNum;
         sprite->images = template->images;
@@ -574,7 +574,7 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
     if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
         InitSpriteAffineAnim(sprite);
 
-    if (template->paletteTag != 0xFFFF)
+    if (template->paletteTag != TAG_NONE)
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(template->paletteTag);
 
     return index;
@@ -868,7 +868,7 @@ void ResetAllSprites(void)
 
 void FreeSpriteTiles(struct Sprite *sprite)
 {
-    if (sprite->template->tileTag != 0xFFFF)
+    if (sprite->template->tileTag != TAG_NONE)
         FreeSpriteTilesByTag(sprite->template->tileTag);
 }
 
@@ -1514,7 +1514,7 @@ void FreeSpriteTilesByTag(u16 tag)
         for (i = start; i < start + count; i++)
             FREE_SPRITE_TILE(i);
 
-        sSpriteTileRangeTags[index] = 0xFFFF;
+        sSpriteTileRangeTags[index] = TAG_NONE;
     }
 }
 
@@ -1524,7 +1524,7 @@ void FreeSpriteTileRanges(void)
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
-        sSpriteTileRangeTags[i] = 0xFFFF;
+        sSpriteTileRangeTags[i] = TAG_NONE;
         SET_SPRITE_TILE_RANGE(i, 0, 0);
     }
 }
@@ -1533,7 +1533,7 @@ u16 GetSpriteTileStartByTag(u16 tag)
 {
     u8 index = IndexOfSpriteTileTag(tag);
     if (index == 0xFF)
-        return 0xFFFF;
+        return TAG_NONE;
     return sSpriteTileRanges[index * 2];
 }
 
@@ -1554,16 +1554,16 @@ u16 GetSpriteTileTagByTileStart(u16 start)
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
-        if (sSpriteTileRangeTags[i] != 0xFFFF && sSpriteTileRanges[i * 2] == start)
+        if (sSpriteTileRangeTags[i] != TAG_NONE && sSpriteTileRanges[i * 2] == start)
             return sSpriteTileRangeTags[i];
     }
 
-    return 0xFFFF;
+    return TAG_NONE;
 }
 
 void AllocSpriteTileRange(u16 tag, u16 start, u16 count)
 {
-    u8 freeIndex = IndexOfSpriteTileTag(0xFFFF);
+    u8 freeIndex = IndexOfSpriteTileTag(TAG_NONE);
     sSpriteTileRangeTags[freeIndex] = tag;
     SET_SPRITE_TILE_RANGE(freeIndex, start, count);
 }
@@ -1572,8 +1572,8 @@ void FreeAllSpritePalettes(void)
 {
     u8 i;
     gReservedSpritePaletteCount = 0;
-    for (i = 0; i < 16; i++)
-        sSpritePaletteTags[i] = 0xFFFF;
+    for (i = 0; i < ARRAY_COUNT(sSpritePaletteTags); i++)
+        sSpritePaletteTags[i] = TAG_NONE;
 }
 
 u8 LoadSpritePalette(const struct SpritePalette *palette)
@@ -1583,7 +1583,7 @@ u8 LoadSpritePalette(const struct SpritePalette *palette)
     if (index != 0xFF)
         return index;
 
-    index = IndexOfSpritePaletteTag(0xFFFF);
+    index = IndexOfSpritePaletteTag(TAG_NONE);
 
     if (index == 0xFF)
     {
@@ -1592,7 +1592,7 @@ u8 LoadSpritePalette(const struct SpritePalette *palette)
     else
     {
         sSpritePaletteTags[index] = palette->tag;
-        DoLoadSpritePalette(palette->data, index * 16);
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
         return index;
     }
 }
@@ -1605,14 +1605,14 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
             break;
 }
 
-void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
+static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
 {
-    LoadPalette(src, paletteOffset + 0x100, 32);
+    LoadPalette(src, paletteOffset + OBJ_PLTT_OFFSET, PLTT_SIZE_4BPP);
 }
 
 u8 AllocSpritePalette(u16 tag)
 {
-    u8 index = IndexOfSpritePaletteTag(0xFFFF);
+    u8 index = IndexOfSpritePaletteTag(TAG_NONE);
     if (index == 0xFF)
     {
         return 0xFF;
@@ -1643,7 +1643,7 @@ void FreeSpritePaletteByTag(u16 tag)
 {
     u8 index = IndexOfSpritePaletteTag(tag);
     if (index != 0xFF)
-        sSpritePaletteTags[index] = 0xFFFF;
+        sSpritePaletteTags[index] = TAG_NONE;
 }
 
 void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables)

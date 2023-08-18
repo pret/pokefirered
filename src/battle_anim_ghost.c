@@ -625,7 +625,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
                 task->data[2] = 0;
                 task->data[3] = 16;
                 task->data[13] = GetAnimBattlerSpriteId(ANIM_TARGET);
-                task->data[4] = (gSprites[task->data[13]].oam.paletteNum + 16) * 16;
+                task->data[4] = OBJ_PLTT_ID2(gSprites[task->data[13]].oam.paletteNum);
                 if (position == 1)
                 {
                     u16 mask = DISPCNT_BG1_ON;
@@ -644,8 +644,8 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
         }
         break;
     case 1:
-        task->data[14] = (task->data[14] + 16) * 16;
-        CpuCopy32(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], 0x20);
+        task->data[14] = OBJ_PLTT_ID2(task->data[14]);
+        CpuCopy32(&gPlttBufferUnfaded[task->data[4]], &gPlttBufferFaded[task->data[14]], PLTT_SIZE_4BPP);
         BlendPalette(task->data[4], 16, 10, RGB(13, 0, 15));
         ++task->data[15];
         break;
@@ -1290,10 +1290,10 @@ static void AnimTask_GhostGetOut_Step1(u8 taskId)
         task->data[3] = 16;
         task->data[4] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         task->data[5] = gSprites[task->data[4]].oam.priority;
-        task->data[6] = (gSprites[task->data[4]].oam.paletteNum + 16) << 4;
+        task->data[6] = OBJ_PLTT_ID2(gSprites[task->data[4]].oam.paletteNum);
         gSprites[task->data[4]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[task->data[4]].oam.priority = 3;
-        task->data[7] = 128;
+        task->data[7] = BG_PLTT_ID(8);
         break;
     case 1:
         ++task->data[1];
@@ -1320,7 +1320,7 @@ static void AnimTask_GhostGetOut_Step1(u8 taskId)
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
         GetBattleAnimBgData(&animBgData, 2);
         AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnim_ScaryFaceGfx, animBgData.tilesOffset);
-        LoadCompressedPalette(gBattleAnim_ScaryFacePal, 16 * animBgData.paletteId, 0x20);
+        LoadCompressedPalette(gBattleAnim_ScaryFacePal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case 3:
         GetBattleAnimBgData(&animBgData, 2);
@@ -1422,7 +1422,7 @@ static void AnimTask_GhostGetOut_Step3(u8 taskId)
         break;
     case 3:
         InitBattleAnimBg(2);
-        FillPalette(RGB_BLACK, 0x90, 0x20);
+        FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         SetAnimBgAttribute(2, BG_ANIM_CHAR_BASE_BLOCK, 0);
         task->data[1] = 12;
         break;

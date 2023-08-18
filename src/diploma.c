@@ -243,7 +243,7 @@ static bool8 DiplomaLoadGfx(void)
             return FALSE;
         break;
     case 3:
-        LoadPalette(sDiplomaPal, 0, sizeof(sDiplomaPal));
+        LoadPalette(sDiplomaPal, BG_PLTT_ID(0), sizeof(sDiplomaPal));
         // fallthrough
     default:
         // Finished

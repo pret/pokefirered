@@ -845,19 +845,19 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
     case QL_TINT_NONE:
         return;
     case QL_TINT_GRAYSCALE:
-        TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
+        TintPalette_GrayScale(&gPlttBufferUnfaded[offset], size);
         break;
     case QL_TINT_SEPIA:
-        TintPalette_SepiaTone(gPlttBufferUnfaded + offset, size);
+        TintPalette_SepiaTone(&gPlttBufferUnfaded[offset], size);
         break;
     case QL_TINT_BACKUP_GRAYSCALE:
         QuestLog_BackUpPalette(offset, size);
-        TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
+        TintPalette_GrayScale(&gPlttBufferUnfaded[offset], size);
         break;
     default:
         return;
     }
-    CpuCopy16(gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, size * sizeof(u16));
+    CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(size));
 }
 
 void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
@@ -867,19 +867,19 @@ void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
     case QL_TINT_NONE:
         return;
     case QL_TINT_GRAYSCALE:
-        TintPalette_GrayScale(gPlttBufferUnfaded + slot * 16, count * 16);
+        TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
         break;
     case QL_TINT_SEPIA:
-        TintPalette_SepiaTone(gPlttBufferUnfaded + slot * 16, count * 16);
+        TintPalette_SepiaTone(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
         break;
     case QL_TINT_BACKUP_GRAYSCALE:
-        QuestLog_BackUpPalette(slot * 16, count * 16);
-        TintPalette_GrayScale(gPlttBufferUnfaded + slot * 16, count * 16);
+        QuestLog_BackUpPalette(BG_PLTT_ID(slot), count * 16);
+        TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
         break;
     default:
         return;
     }
-    CpuFastCopy(gPlttBufferUnfaded + slot * 16, gPlttBufferFaded + slot * 16, count * 16 * sizeof(u16));
+    CpuFastCopy(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], &gPlttBufferFaded[BG_PLTT_ID(slot)], count * PLTT_SIZE_4BPP);
 }
 
 static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)
@@ -890,8 +890,8 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
     {
         if (tileset->isSecondary == FALSE)
         {
-            LoadPalette(&black, destOffset, 2);
-            LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - 2);
+            LoadPalette(&black, destOffset, PLTT_SIZEOF(1));
+            LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - PLTT_SIZEOF(1));
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
         }
         else if (tileset->isSecondary == TRUE)
@@ -924,12 +924,12 @@ void CopySecondaryTilesetToVramUsingHeap(const struct MapLayout *mapLayout)
 
 static void LoadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
+    LoadTilesetPalette(mapLayout->primaryTileset, BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
 }
 
 void LoadSecondaryTilesetPalette(const struct MapLayout *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
+    LoadTilesetPalette(mapLayout->secondaryTileset, BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);
 }
 
 void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)

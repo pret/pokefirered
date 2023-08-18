@@ -1259,8 +1259,8 @@ static void ClearBg0(void)
 
 static void LoadUnionRoomChatPanelGfx(void)
 {
-    LoadPalette(gUnionRoomChat_Panel_Pal, 0x70, 0x20);
-    LoadPalette(sUnionRoomChat_TextEntry_Pal, 0xC0, 0x20);
+    LoadPalette(gUnionRoomChat_Panel_Pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+    LoadPalette(sUnionRoomChat_TextEntry_Pal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
     DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Panel_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gUnionRoomChat_Panel_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
@@ -1270,7 +1270,7 @@ static void LoadLinkMiscMenuGfx(void)
 {
     u8 *ptr;
 
-    LoadPalette(gUnionRoomChat_Bg_Pal, 0, 0x20);
+    LoadPalette(gUnionRoomChat_Bg_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Bg_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(2, gUnionRoomChat_Bg_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(2);
@@ -1278,13 +1278,13 @@ static void LoadLinkMiscMenuGfx(void)
 
 static void LoadBg1Pal8(void)
 {
-    LoadPalette(gUnionRoomChat_Unused_Pal, 0x80, 0x20);
+    LoadPalette(gUnionRoomChat_Unused_Pal, BG_PLTT_ID(8), PLTT_SIZE_4BPP);
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, DMA3_32BIT);
 }
 
 static void LoadWin0(void)
 {
-    LoadPalette(sUnionRoomChat_Messages_Pal, 0xF0, 0x20);
+    LoadPalette(sUnionRoomChat_Messages_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(0, COPYWIN_FULL);
@@ -1307,9 +1307,9 @@ static void LoadWin1(void)
 static void LoadWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    LoadUserWindowGfx(3, 1, 0xD0);
-    LoadStdWindowGfx(3, 0xA, 0x20);
-    LoadPalette(gStandardMenuPalette, 0xE0,  0x20);
+    LoadUserWindowGfx(3, 1, BG_PLTT_ID(13));
+    LoadStdWindowGfx(3, 0xA, BG_PLTT_ID(2));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(14),  PLTT_SIZE_4BPP);
 }
 
 static void InitScanlineEffect(void)

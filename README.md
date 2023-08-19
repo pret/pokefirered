@@ -32,8 +32,14 @@ Other disassembly and/or decompilation projects:
 * [**Pokémon Pinball: Ruby & Sapphire**](https://github.com/pret/pokepinballrs)
 * [**Pokémon Emerald**](https://github.com/pret/pokeemerald)
 * [**Pokémon Mystery Dungeon: Red Rescue Team**](https://github.com/pret/pmd-red)
-
+* [**Pokémon Diamond and Pearl**](https://github.com/pret/pokediamond)
+* [**Pokémon Platinum**](https://github.com/pret/pokeplatinum) 
+* [**Pokémon HeartGold and SoulSilver**](https://github.com/pret/pokeheartgold)
+* [**Pokémon Mystery Dungeon: Explorers of Sky**](https://github.com/pret/pmd-sky)
 
 ## Contacts
 
-You can find us on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://web.libera.chat/?#pret).
+You can find us on:
+
+* [Discord (PRET, #pokefirered)](https://discord.gg/d5dubZ3)
+* [IRC](https://web.libera.chat/?#pret)

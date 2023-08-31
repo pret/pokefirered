@@ -69,17 +69,6 @@ struct ShopData
     /*0x18*/ u16 unk18;
 };
 
-struct MartHistory
-{
-    /*0x00*/ u32 unk0;
-    /*0x04*/ u16 unk4;
-    /*0x06*/ u16 unk6;
-    /*0x08*/ u8 unk8;
-    /*0x09*/ u8 unk9;
-    /*0x0A*/ u8 unkA;
-    /*0x0B*/ u8 unkB;
-}; /* size = 12 */
-
 static EWRAM_DATA s16 sViewportObjectEvents[OBJECT_EVENTS_COUNT][4] = {0};
 EWRAM_DATA struct ShopData gShopData = {0};
 static EWRAM_DATA u8 sShopMenuWindowId = 0;
@@ -89,7 +78,7 @@ EWRAM_DATA u16 (*gShopTilemapBuffer3)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer4)[0x400] = {0};
 EWRAM_DATA struct ListMenuItem *sShopMenuListMenu = {0};
 static EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
-EWRAM_DATA struct MartHistory gShopMenuHistory[2] = {0};
+EWRAM_DATA struct QuestLogEvent_Shop sHistory[2] = {0};
 
 //Function Declarations
 static u8 CreateShopMenu(u8 a0);
@@ -146,7 +135,7 @@ static void ExitBuyMenu(u8 taskId);
 static void Task_ExitBuyMenu(u8 taskId);
 static void DebugFunc_PrintPurchaseDetails(u8 taskId);
 static void DebugFunc_PrintShopMenuHistoryBeforeClearMaybe(void);
-static void RecordQuestLogItemPurchase(void);
+static void RecordTransactionForQuestLog(void);
 
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
@@ -305,7 +294,7 @@ static void CB2_GoToSellMenu(void)
 static void Task_HandleShopMenuQuit(u8 taskId)
 {
     ClearShopMenuWindow();
-    RecordQuestLogItemPurchase();
+    RecordTransactionForQuestLog();
     DestroyTask(taskId);
     if (gShopData.callback != NULL)
         gShopData.callback();
@@ -995,7 +984,7 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     {
         BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
         DebugFunc_PrintPurchaseDetails(taskId);
-        RecordItemPurchase(tItemId, tItemCount, 1);
+        RecordItemTransaction(tItemId, tItemCount, QL_EVENT_BOUGHT_ITEM - QL_EVENT_USED_POKEMART);
     }
     else
     {
@@ -1066,59 +1055,67 @@ static void DebugFunc_PrintShopMenuHistoryBeforeClearMaybe(void)
 {
 }
 
-void RecordItemPurchase(u16 item, u16 quantity, u8 a2)
+// Records a transaction during a single shopping session.
+// This is for the Quest Log to save information about the player's purchases/sales when they finish.
+void RecordItemTransaction(u16 itemId, u16 quantity, u8 logEventId)
 {
-    struct MartHistory *history;
+    struct QuestLogEvent_Shop *history;
     
-    if (gShopMenuHistory[0].unkA == a2)
+    // There should only be a single entry for buying/selling respectively,
+    // so if one has already been created then get it first.
+    if (sHistory[0].logEventId == logEventId)
     {
-        history = &gShopMenuHistory[0];
+        history = &sHistory[0];
     }
-    else if (gShopMenuHistory[1].unkA == a2)
+    else if (sHistory[1].logEventId == logEventId)
     {
-        history = &gShopMenuHistory[1];
+        history = &sHistory[1];
     }
     else
     {
-        if (gShopMenuHistory[0].unkA == 0)
-            history = &gShopMenuHistory[0];
+        // First transaction of this type, save it in an empty slot
+        if (sHistory[0].logEventId == 0)
+            history = &sHistory[0];
         else
-            history = &gShopMenuHistory[1];
-        history->unkA = a2;
+            history = &sHistory[1];
+        history->logEventId = logEventId;
+    }
+
+    // Set flag if this isn't the first time we've bought/sold in this session
+    if (history->lastItemId != ITEM_NONE)
+        history->hasMultipleTransactions = TRUE;
+    
+    history->lastItemId = itemId;
+
+    // Add to number of items bought/sold
+    if (history->itemQuantity < 999)
+    {
+        history->itemQuantity += quantity;
+        if (history->itemQuantity > 999)
+            history->itemQuantity = 999;
     }
     
-    if (history->unk4 != 0)
+    // Add to amount of money spent buying or earned selling
+    if (history->totalMoney < 999999)
     {
-        history->unk9 = 1;
-    }
-    
-    history->unk4 = item;
-    if (history->unk6 < 999)
-    {
-        history->unk6 += quantity;
-        if (history->unk6 > 999)
-            history->unk6 = 999;
-    }
-    
-    if (history->unk0 < 999999)
-    {
-        history->unk0 += (ItemId_GetPrice(item) >> (a2 - 1)) * quantity;
-        if (history->unk0 > 999999)
-            history->unk0 = 999999;
+        // logEventId will either be 1 (bought) or 2 (sold)
+        // so for buying it will add the full price and selling will add half price
+        history->totalMoney += (ItemId_GetPrice(itemId) >> (logEventId - 1)) * quantity;
+        if (history->totalMoney > 999999)
+            history->totalMoney = 999999;
     }    
 }
 
-static void RecordQuestLogItemPurchase(void)
+// Will record QL_EVENT_BOUGHT_ITEM and/or QL_EVENT_SOLD_ITEM, or nothing.
+static void RecordTransactionForQuestLog(void)
 {
-    u16 v;
-
-    v = gShopMenuHistory[0].unkA;
-    if (v != 0)
-        SetQuestLogEvent(v + QL_EVENT_USED_POKEMART, (const u16 *)&gShopMenuHistory[0]);
+    u16 eventId = sHistory[0].logEventId;
+    if (eventId != 0)
+        SetQuestLogEvent(eventId + QL_EVENT_USED_POKEMART, (const u16 *)&sHistory[0]);
     
-    v = gShopMenuHistory[1].unkA;
-    if (v != 0)
-        SetQuestLogEvent(v + QL_EVENT_USED_POKEMART, (const u16 *)&gShopMenuHistory[1]);
+    eventId = sHistory[1].logEventId;
+    if (eventId != 0)
+        SetQuestLogEvent(eventId + QL_EVENT_USED_POKEMART, (const u16 *)&sHistory[1]);
 }
 
 void CreatePokemartMenu(const u16 *itemsForSale)
@@ -1127,9 +1124,9 @@ void CreatePokemartMenu(const u16 *itemsForSale)
     CreateShopMenu(MART_TYPE_REGULAR);
     SetShopMenuCallback(ScriptContext_Enable);
     DebugFunc_PrintShopMenuHistoryBeforeClearMaybe();
-    memset(&gShopMenuHistory, 0, sizeof(gShopMenuHistory));
-    gShopMenuHistory[0].unk8 = gMapHeader.regionMapSectionId;
-    gShopMenuHistory[1].unk8 = gMapHeader.regionMapSectionId;
+    memset(&sHistory, 0, sizeof(sHistory));
+    sHistory[0].mapSec = gMapHeader.regionMapSectionId;
+    sHistory[1].mapSec = gMapHeader.regionMapSectionId;
 }
 
 void CreateDecorationShop1Menu(const u16 *itemsForSale)

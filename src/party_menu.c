@@ -3355,12 +3355,12 @@ static void SwitchPartyMon(void)
 
 static void SetSwitchedPartyOrderQuestLogEvent(void)
 {
-    u16 *buffer = Alloc(2 * sizeof(u16));
+    struct QuestLogEvent_SwitchedPartyOrder * data = Alloc(sizeof(*data));
 
-    buffer[0] = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES_OR_EGG);
-    buffer[1] = GetMonData(&gPlayerParty[gPartyMenu.slotId2], MON_DATA_SPECIES_OR_EGG);
-    SetQuestLogEvent(QL_EVENT_SWITCHED_PARTY_ORDER, buffer);
-    Free(buffer);
+    data->species1 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES_OR_EGG);
+    data->species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId2], MON_DATA_SPECIES_OR_EGG);
+    SetQuestLogEvent(QL_EVENT_SWITCHED_PARTY_ORDER, (const u16 *)data);
+    Free(data);
 }
 
 // Finish switching mons or using Softboiled
@@ -4131,67 +4131,61 @@ static bool8 SetUpFieldMove_Waterfall(void)
 
 static void SetSwappedHeldItemQuestLogEvent(struct Pokemon *mon, u16 item, u16 item2)
 {
-    u16 *ptr = Alloc(4 * sizeof(u16));
+    struct QuestLogEvent_SwappedHeldItem *data = Alloc(sizeof(*data));
 
-    ptr[2] = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-    ptr[0] = item;
-    ptr[1] = item2;
+    data->species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    data->takenItemId = item;
+    data->givenItemId = item2;
     if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
-        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM_PC, ptr);
+        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM_PC, (void *)data);
     else
-        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM, ptr);
-    Free(ptr);
+        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM, (void *)data);
+    Free(data);
 }
-
-struct FieldMoveWarpParams
-{
-    u16 species;
-    u8 fieldMove;
-    u8 regionMapSectionId;
-};
 
 static void SetUsedFieldMoveQuestLogEvent(struct Pokemon *mon, u8 fieldMove)
 {
-    struct FieldMoveWarpParams *ptr = Alloc(sizeof(*ptr));
+    struct QuestLogEvent_FieldMove *data = Alloc(sizeof(*data));
 
-    ptr->species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-    ptr->fieldMove = fieldMove;
-    switch (ptr->fieldMove)
+    data->species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    data->fieldMove = fieldMove;
+    switch (data->fieldMove)
     {
     case FIELD_MOVE_TELEPORT:
-        ptr->regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum)->regionMapSectionId;
+        data->mapSec = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum)->regionMapSectionId;
         break;
     case FIELD_MOVE_DIG:
-        ptr->regionMapSectionId = gMapHeader.regionMapSectionId;
+        data->mapSec = gMapHeader.regionMapSectionId;
         break;
     default:
-        ptr->regionMapSectionId = 0xFF;
+        data->mapSec = 0xFF;
     }
-    SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (u16 *)ptr);
-    Free(ptr);
+    SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (const u16 *)data);
+    Free(data);
 }
 
 void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData)
 {
     const struct MapHeader *mapHeader;
-    struct FieldMoveWarpParams *ptr2;
+    struct QuestLogEvent_FieldMove *data;
     struct
     {
-        s8 mapGroup;
-        s8 mapNum;
-        u32 unk_4;
-    } *ptr = Alloc(sizeof(*ptr));
+        s8 group;
+        s8 num;
+        u32 unused;
+    } *map = Alloc(sizeof(*map));
 
-    ptr->mapGroup = healLocCtrlData[0];
-    ptr->mapNum = healLocCtrlData[1];
-    mapHeader = Overworld_GetMapHeaderByGroupAndId(ptr->mapGroup, ptr->mapNum);
-    Free(ptr);
-    ptr2 = Alloc(4);
-    ptr2->species = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_SPECIES_OR_EGG);
-    ptr2->fieldMove = FIELD_MOVE_FLY;
-    ptr2->regionMapSectionId = mapHeader->regionMapSectionId;
-    SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (u16 *)ptr2);
-    Free(ptr2);
+    map->group = healLocCtrlData[0];
+    map->num = healLocCtrlData[1];
+    mapHeader = Overworld_GetMapHeaderByGroupAndId(map->group, map->num);
+    Free(map);
+
+    data = Alloc(sizeof(*data));
+    data->species = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_SPECIES_OR_EGG);
+    data->fieldMove = FIELD_MOVE_FLY;
+    data->mapSec = mapHeader->regionMapSectionId;
+    SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (const u16 *)data);
+    Free(data);
 }
 
 void CB2_ShowPartyMenuForItemUse(void)

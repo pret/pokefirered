@@ -449,7 +449,7 @@ struct BattleStruct
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
-    u8 field_182;
+    u8 lastAttackerToFaintOpponent;
     // align 4
     union {
         struct LinkBattlerHeader linkBattlerHeader;

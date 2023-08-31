@@ -21,7 +21,7 @@ struct FieldInput
     u8 dpadDirection;
 };
 
-extern struct FieldInput gInputToStoreInQuestLogMaybe;
+extern struct FieldInput gFieldInputRecord;
 
 void RestartWildEncounterImmunitySteps(void);
 void ClearPoisonStepCounter(void);

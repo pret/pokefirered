@@ -1,4 +1,4 @@
 gQuestLogPlaybackState
-sNumEventsInLogEntry
+sMaxActionsInScene
 gQuestLogFieldInput
-sCurQuestLogEntry
+sCurSceneActions

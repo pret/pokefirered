@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "event_scripts.h"
 #include "random.h"
+#include "constants/trainer_fan_club.h"
 
 struct TrainerFanClub
 {
@@ -17,17 +18,6 @@ struct TrainerFanClub
 #define GET_TRAINER_FAN_CLUB_FLAG(flag) (fanClub->fanFlags >> (flag) & 1)
 #define SET_TRAINER_FAN_CLUB_FLAG(flag) (fanClub->fanFlags |= 1 << (flag))
 #define FLIP_TRAINER_FAN_CLUB_FLAG(flag)(fanClub->fanFlags ^= 1 << (flag))
-
-#define FANCLUB_MEMBER1        0
-#define FANCLUB_MEMBER2        1
-#define FANCLUB_MEMBER3        2
-#define FANCLUB_MEMBER4        3
-#define FANCLUB_MEMBER5        4
-#define FANCLUB_MEMBER6        5
-#define FANCLUB_MEMBER7        6
-#define FANCLUB_MEMBER8        7
-
-#define NUM_TRAINER_FAN_CLUB_MEMBERS  8
 
 static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *);
 static void UpdateTrainerFanClubGameClear(struct TrainerFanClub *);

@@ -23,7 +23,6 @@
 #include "fieldmap.h"
 #include "event_object_movement.h"
 #include "money.h"
-#include "quest_log.h"
 #include "script.h"
 #include "constants/songs.h"
 #include "constants/items.h"
@@ -78,7 +77,6 @@ EWRAM_DATA u16 (*gShopTilemapBuffer3)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer4)[0x400] = {0};
 EWRAM_DATA struct ListMenuItem *sShopMenuListMenu = {0};
 static EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
-EWRAM_DATA struct QuestLogEvent_Shop sHistory[2] = {0};
 
 //Function Declarations
 static u8 CreateShopMenu(u8 a0);
@@ -135,7 +133,6 @@ static void ExitBuyMenu(u8 taskId);
 static void Task_ExitBuyMenu(u8 taskId);
 static void DebugFunc_PrintPurchaseDetails(u8 taskId);
 static void DebugFunc_PrintShopMenuHistoryBeforeClearMaybe(void);
-static void RecordTransactionForQuestLog(void);
 
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
@@ -294,7 +291,6 @@ static void CB2_GoToSellMenu(void)
 static void Task_HandleShopMenuQuit(u8 taskId)
 {
     ClearShopMenuWindow();
-    RecordTransactionForQuestLog();
     DestroyTask(taskId);
     if (gShopData.callback != NULL)
         gShopData.callback();
@@ -984,7 +980,6 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     {
         BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
         DebugFunc_PrintPurchaseDetails(taskId);
-        RecordItemTransaction(tItemId, tItemCount, QL_EVENT_BOUGHT_ITEM - QL_EVENT_USED_POKEMART);
     }
     else
     {
@@ -1055,78 +1050,12 @@ static void DebugFunc_PrintShopMenuHistoryBeforeClearMaybe(void)
 {
 }
 
-// Records a transaction during a single shopping session.
-// This is for the Quest Log to save information about the player's purchases/sales when they finish.
-void RecordItemTransaction(u16 itemId, u16 quantity, u8 logEventId)
-{
-    struct QuestLogEvent_Shop *history;
-    
-    // There should only be a single entry for buying/selling respectively,
-    // so if one has already been created then get it first.
-    if (sHistory[0].logEventId == logEventId)
-    {
-        history = &sHistory[0];
-    }
-    else if (sHistory[1].logEventId == logEventId)
-    {
-        history = &sHistory[1];
-    }
-    else
-    {
-        // First transaction of this type, save it in an empty slot
-        if (sHistory[0].logEventId == 0)
-            history = &sHistory[0];
-        else
-            history = &sHistory[1];
-        history->logEventId = logEventId;
-    }
-
-    // Set flag if this isn't the first time we've bought/sold in this session
-    if (history->lastItemId != ITEM_NONE)
-        history->hasMultipleTransactions = TRUE;
-    
-    history->lastItemId = itemId;
-
-    // Add to number of items bought/sold
-    if (history->itemQuantity < 999)
-    {
-        history->itemQuantity += quantity;
-        if (history->itemQuantity > 999)
-            history->itemQuantity = 999;
-    }
-    
-    // Add to amount of money spent buying or earned selling
-    if (history->totalMoney < 999999)
-    {
-        // logEventId will either be 1 (bought) or 2 (sold)
-        // so for buying it will add the full price and selling will add half price
-        history->totalMoney += (ItemId_GetPrice(itemId) >> (logEventId - 1)) * quantity;
-        if (history->totalMoney > 999999)
-            history->totalMoney = 999999;
-    }    
-}
-
-// Will record QL_EVENT_BOUGHT_ITEM and/or QL_EVENT_SOLD_ITEM, or nothing.
-static void RecordTransactionForQuestLog(void)
-{
-    u16 eventId = sHistory[0].logEventId;
-    if (eventId != 0)
-        SetQuestLogEvent(eventId + QL_EVENT_USED_POKEMART, (const u16 *)&sHistory[0]);
-    
-    eventId = sHistory[1].logEventId;
-    if (eventId != 0)
-        SetQuestLogEvent(eventId + QL_EVENT_USED_POKEMART, (const u16 *)&sHistory[1]);
-}
-
 void CreatePokemartMenu(const u16 *itemsForSale)
 {    
     SetShopItemsForSale(itemsForSale);
     CreateShopMenu(MART_TYPE_REGULAR);
     SetShopMenuCallback(ScriptContext_Enable);
     DebugFunc_PrintShopMenuHistoryBeforeClearMaybe();
-    memset(&sHistory, 0, sizeof(sHistory));
-    sHistory[0].mapSec = gMapHeader.regionMapSectionId;
-    sHistory[1].mapSec = gMapHeader.regionMapSectionId;
 }
 
 void CreateDecorationShop1Menu(const u16 *itemsForSale)

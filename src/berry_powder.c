@@ -3,7 +3,6 @@
 #include "load_save.h"
 #include "menu.h"
 #include "palette.h"
-#include "quest_log.h"
 #include "script_menu.h"
 #include "string_util.h"
 #include "strings.h"
@@ -113,9 +112,6 @@ void PrintPlayerBerryPowderAmount(void)
 void DisplayBerryPowderVendorMenu(void)
 {
     struct WindowTemplate template;
-
-    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
-        return;
 
     template = SetWindowTemplateFields(0, 1, 1, 8, 3, 15, 32);
     sBerryPowderVendorWindowId = AddWindow(&template);

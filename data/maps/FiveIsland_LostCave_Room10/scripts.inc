@@ -26,7 +26,6 @@ FiveIsland_LostCave_Room10_EventScript_FindSelphyScene::
 	applymovement LOCALID_SELPHY, FiveIsland_LostCave_Room10_Movement_SelphyApproach
 	waitmovement 0
 	msgbox FiveIsland_LostCave_Room10_Text_SelphyIntro
-	goto_if_questlog FiveIsland_LostCave_Room10_EventScript_SelphyQuestLog
 	trainerbattle_no_intro TRAINER_LADY_SELPHY, FiveIsland_LostCave_Room10_Text_SelphyDefeat
 	msgbox FiveIsland_LostCave_Room10_Text_MayIAskYouToTakeMeHome
 	closemessage
@@ -42,12 +41,6 @@ FiveIsland_LostCave_Room10_EventScript_SetSelphyFound::
 	setvar VAR_MAP_SCENE_FIVE_ISLAND_LOST_CAVE_ROOM10, 1
 	setvar VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1
 	return
-
-FiveIsland_LostCave_Room10_EventScript_SelphyQuestLog::
-	settrainerflag TRAINER_LADY_SELPHY
-	call FiveIsland_LostCave_Room10_EventScript_SetSelphyFound
-	releaseall
-	end
 
 FiveIsland_LostCave_Room10_Movement_SelphyWander::
 	walk_left

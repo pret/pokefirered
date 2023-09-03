@@ -55,7 +55,6 @@
 #define BATTLE_TYPE_BATTLE_TOWER       (1 << 8)
 #define BATTLE_TYPE_OLD_MAN_TUTORIAL   (1 << 9) // Used in pokeemerald as BATTLE_TYPE_WALLY_TUTORIAL.
 #define BATTLE_TYPE_ROAMER             (1 << 10)
-#define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
 #define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
 #define BATTLE_TYPE_GHOST_UNVEILED     (1 << 13) // Re-use of BATTLE_TYPE_LEGENDARY, when combined with BATTLE_TYPE_GHOST

@@ -12,7 +12,6 @@
 #include "event_scripts.h"
 #include "script.h"
 #include "link.h"
-#include "quest_log.h"
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -578,9 +577,6 @@ bool8 UpdateRepelCounter(void)
     u16 steps;
 
     if (InUnionRoom() == TRUE)
-        return FALSE;
-
-    if (gQuestLogState == QL_STATE_PLAYBACK)
         return FALSE;
 
     steps = VarGet(VAR_REPEL_STEP_COUNT);

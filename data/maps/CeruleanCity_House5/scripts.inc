@@ -168,7 +168,6 @@ CeruleanCity_House5_EventScript_NotEnoughBerryPowder::
 
 CeruleanCity_House5_EventScript_BerryCrushRankings::
 	lockall
-	goto_if_questlog EventScript_ReleaseEnd
 	special ShowBerryCrushRankings
 	waitstate
 	releaseall

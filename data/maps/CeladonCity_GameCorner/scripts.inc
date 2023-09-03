@@ -21,7 +21,6 @@ CeladonCity_GameCorner_EventScript_InfoClerk::
 	end
 
 CeladonCity_GameCorner_EventScript_CoinsClerk::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	showmoneybox 0, 0

@@ -3,7 +3,6 @@
 #include "task.h"
 #include "event_data.h"
 #include "text_window.h"
-#include "quest_log.h"
 #include "region_map.h"
 #include "strings.h"
 
@@ -27,7 +26,7 @@ static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 {
     u8 taskId;
-    if (FlagGet(FLAG_DONT_SHOW_MAP_NAME_POPUP) != TRUE && !QL_IS_PLAYBACK_STATE)
+    if (FlagGet(FLAG_DONT_SHOW_MAP_NAME_POPUP) != TRUE)
     {
         taskId = FindTaskIdByFunc(Task_MapNamePopup);
         if (taskId == TASK_NONE)

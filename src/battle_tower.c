@@ -924,20 +924,6 @@ void StartSpecialBattle(void)
         transition = BattleSetup_GetBattleTowerBattleTransition();
         BattleTransition_StartOnField(transition);
         break;
-    case 2: // e-reader trainer battle
-        ZeroEnemyPartyMons();
-
-        for (i = 0; i < 3; i++)
-            CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->battleTower.ereaderTrainer.party[i]);
-
-        gBattleTypeFlags = (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER);
-        gTrainerBattleOpponent_A = 0;
-
-        CreateTask(Task_WaitBT, 1);
-        PlayMapChosenOrBattleBGM(0);
-        transition = BattleSetup_GetBattleTowerBattleTransition();
-        BattleTransition_StartOnField(transition);
-        break;
     }
 }
 
@@ -1254,39 +1240,6 @@ void GiveBattleTowerPrize(void)
         gSpecialVar_Result = 0;
         gSaveBlock2Ptr->battleTower.var_4AE[battleTowerLevelType] = 6;
     }
-}
-
-void AwardBattleTowerRibbons(void)
-{
-    s32 i;
-    u32 partyIndex;
-    struct Pokemon *pokemon;
-    u8 ribbonType;
-    u8 battleTowerLevelType = gSaveBlock2Ptr->battleTower.battleTowerLevelType;
-
-    if (battleTowerLevelType != 0)
-        ribbonType = MON_DATA_VICTORY_RIBBON;
-    else
-        ribbonType = MON_DATA_WINNING_RIBBON;
-
-    gSpecialVar_Result = 0;
-
-    if (GetCurrentBattleTowerWinStreak(battleTowerLevelType) > 55)
-    {
-        for (i = 0; i < 3; i++)
-        {
-            partyIndex = gSaveBlock2Ptr->battleTower.selectedPartyMons[i] - 1;
-            pokemon = &gPlayerParty[partyIndex];
-            if (!GetMonData(pokemon, ribbonType))
-            {
-                gSpecialVar_Result = 1;
-                SetMonData(pokemon, ribbonType, &gSpecialVar_Result);
-            }
-        }
-    }
-
-    if (gSpecialVar_Result != 0)
-        IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
 }
 
 // This is a leftover debugging function that is used to populate the E-Reader

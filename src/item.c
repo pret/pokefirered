@@ -5,7 +5,6 @@
 #include "item.h"
 #include "item_use.h"
 #include "load_save.h"
-#include "quest_log.h"
 #include "strings.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
@@ -563,41 +562,6 @@ u16 BagGetQuantityByItemId(u16 itemId)
     }
 
     return 0;
-}
-
-void TrySetObtainedItemQuestLogEvent(u16 itemId)
-{
-    // Only some key items trigger this event
-    if (itemId == ITEM_OAKS_PARCEL
-     || itemId == ITEM_POKE_FLUTE
-     || itemId == ITEM_SECRET_KEY
-     || itemId == ITEM_BIKE_VOUCHER
-     || itemId == ITEM_GOLD_TEETH
-     || itemId == ITEM_OLD_AMBER
-     || itemId == ITEM_CARD_KEY
-     || itemId == ITEM_LIFT_KEY
-     || itemId == ITEM_HELIX_FOSSIL
-     || itemId == ITEM_DOME_FOSSIL
-     || itemId == ITEM_SILPH_SCOPE
-     || itemId == ITEM_BICYCLE
-     || itemId == ITEM_TOWN_MAP
-     || itemId == ITEM_VS_SEEKER
-     || itemId == ITEM_TEACHY_TV
-     || itemId == ITEM_RAINBOW_PASS
-     || itemId == ITEM_TEA
-     || itemId == ITEM_POWDER_JAR
-     || itemId == ITEM_RUBY
-     || itemId == ITEM_SAPPHIRE)
-    {
-        if (itemId != ITEM_TOWN_MAP || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_RIVALS_HOUSE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_RIVALS_HOUSE)))
-        {
-            struct QuestLogEvent_StoryItem * data = malloc(sizeof(*data));
-            data->itemId = itemId;
-            data->mapSec = gMapHeader.regionMapSectionId;
-            SetQuestLogEvent(QL_EVENT_OBTAINED_STORY_ITEM, (const u16 *)data);
-            free(data);
-        }
-    }
 }
 
 u16 SanitizeItemId(u16 itemId)

@@ -77,8 +77,6 @@
 #define PARTY_SIZE 6
 #define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
 
-#define QUEST_LOG_SCENE_COUNT 4
-
 #define NUM_TOWER_CHALLENGE_TYPES 4
 
 #define MALE   0

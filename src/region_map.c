@@ -4026,7 +4026,6 @@ static void SetFlyWarpDestination(u16 mapsec)
     if (sMapFlyDestinations[idx][2])
     {
         SetWarpDestinationToHealLocation(sMapFlyDestinations[idx][2]);
-        SetUsedFlyQuestLogEvent(sMapFlyDestinations[idx]);
     }
     else
     {

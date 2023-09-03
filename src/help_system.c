@@ -8,7 +8,6 @@
 #include "link.h"
 #include "overworld.h"
 #include "pokedex.h"
-#include "quest_log.h"
 #include "save.h"
 #include "save_location.h"
 #include "strings.h"
@@ -1909,11 +1908,8 @@ void HelpSystem_Disable(void)
 
 void HelpSystem_Enable(void)
 {
-    if (!QL_IS_PLAYBACK_STATE)
-    {
-        gHelpSystemEnabled = TRUE;
-        HelpSystem_EnableToggleWithRButton();
-    }
+    gHelpSystemEnabled = TRUE;
+    HelpSystem_EnableToggleWithRButton();
 }
 
 void HelpSystem_DisableToggleWithRButton(void)

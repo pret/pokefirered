@@ -90,8 +90,6 @@ FourIsland_House2_EventScript_MeetStickerMan::
 FourIsland_House2_EventScript_StickerManAskForBrag::
 	applymovement LOCALID_STICKER_MAN, Common_Movement_FacePlayer
 	waitmovement 0
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	goto_if_eq VAR_0x8008, 0, FourIsland_House2_EventScript_NothingToBragAbout
 	message FourIsland_House2_Text_BragAboutWhatToday
 	waitmessage

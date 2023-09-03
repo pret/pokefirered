@@ -22,8 +22,6 @@ MtEmber_Summit_EventScript_ShowMoltres::
 	return
 
 MtEmber_Summit_EventScript_Moltres::
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	lock
 	faceplayer
 	setwildbattle SPECIES_MOLTRES, 50

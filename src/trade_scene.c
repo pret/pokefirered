@@ -20,7 +20,6 @@
 #include "evolution_scene.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
-#include "quest_log.h"
 #include "help_system.h"
 #include "new_menu_helpers.h"
 #include "pokedex.h"
@@ -107,7 +106,6 @@ struct {
     /*0xF0*/ u16 monSpecies[2];
     /*0xF4*/ u16 cachedMapMusic;
     /*0xF6*/ u8 unk_F6;
-    /*0xF8*/ struct QuestLogEvent_Traded questLogData;
     /*0x104*/ u8 textColor[3];
     /*0x107*/ u8 filler_107[1];
     /*0x108*/ bool8 isCableTrade;
@@ -142,7 +140,6 @@ static void CB2_WaitTradeComplete(void);
 static void CB2_SaveAndEndTrade(void);
 static void CB2_FreeTradeAnim(void);
 static void Task_InGameTrade(u8 taskId);
-static void CheckPartnersMonForRibbons(void);
 static void Task_AnimateWirelessSignal(u8 taskId);
 static void Task_OpenCenterWhiteColumn(u8 taskId);
 static void Task_CloseCenterWhiteColumn(u8 taskId);
@@ -881,9 +878,6 @@ void CB2_LinkTrade(void)
     case 10:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
-        sTradeAnim->questLogData.speciesSent = GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], MON_DATA_SPECIES_OR_EGG);
-        sTradeAnim->questLogData.speciesReceived = GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_SPECIES_OR_EGG);
-        memcpy(sTradeAnim->questLogData.partnerName, gLinkPlayers[GetMultiplayerId() ^ 1].name, PLAYER_NAME_LENGTH);
         gMain.state++;
         break;
     case 11:
@@ -1762,7 +1756,6 @@ static bool8 DoTradeAnim_Cable(void)
             sTradeAnim->state++;
         break;
     case STATE_CHECK_RIBBONS:
-        CheckPartnersMonForRibbons();
         sTradeAnim->state++;
         break;
     case STATE_END_LINK_TRADE:
@@ -2262,7 +2255,6 @@ static bool8 DoTradeAnim_Wireless(void)
             sTradeAnim->state++;
         break;
     case STATE_CHECK_RIBBONS:
-        CheckPartnersMonForRibbons();
         sTradeAnim->state++;
         break;
     case STATE_END_LINK_TRADE:
@@ -2471,12 +2463,6 @@ static void CreateInGameTradePokemonInternal(u8 playerSlot, u8 inGameTradeIdx)
     SetMonData(tradeMon, MON_DATA_OT_NAME, inGameTrade->otName);
     SetMonData(tradeMon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
     SetMonData(tradeMon, MON_DATA_ABILITY_NUM, &inGameTrade->abilityNum);
-    SetMonData(tradeMon, MON_DATA_BEAUTY, &inGameTrade->conditions[1]);
-    SetMonData(tradeMon, MON_DATA_CUTE, &inGameTrade->conditions[2]);
-    SetMonData(tradeMon, MON_DATA_COOL, &inGameTrade->conditions[0]);
-    SetMonData(tradeMon, MON_DATA_SMART, &inGameTrade->conditions[3]);
-    SetMonData(tradeMon, MON_DATA_TOUGH, &inGameTrade->conditions[4]);
-    SetMonData(tradeMon, MON_DATA_SHEEN, &inGameTrade->sheen);
     SetMonData(tradeMon, MON_DATA_MET_LOCATION, &metLocation);
     mailNum = 0;
     if (inGameTrade->heldItem != ITEM_NONE)
@@ -2595,13 +2581,8 @@ static void CB2_SaveAndEndTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 50:
-        if (InUnionRoom())
+        if (!InUnionRoom())
         {
-            SetQuestLogEvent(QL_EVENT_LINK_TRADED_UNION, (void *)&sTradeAnim->questLogData);
-        }
-        else
-        {
-            SetQuestLogEvent(QL_EVENT_LINK_TRADED, (void *)&sTradeAnim->questLogData);
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
         }
         if (gWirelessCommType)
@@ -2753,17 +2734,6 @@ static void Task_InGameTrade(u8 taskId)
         gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
-}
-
-static void CheckPartnersMonForRibbons(void)
-{
-    u8 numRibbons = 0;
-    u8 i;
-    for (i = 0; i < (MON_DATA_UNUSED_RIBBONS - MON_DATA_CHAMPION_RIBBON); i++)
-        numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
-
-    if (numRibbons != 0)
-        FlagSet(FLAG_SYS_RIBBON_GET);
 }
 
 void LoadTradeAnimGfx(void)

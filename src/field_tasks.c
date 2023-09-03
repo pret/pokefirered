@@ -8,7 +8,6 @@
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
-#include "quest_log.h"
 #include "script.h"
 #include "task.h"
 #include "constants/field_tasks.h"
@@ -77,7 +76,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!ArePlayerFieldControlsLocked() && !QL_IS_PLAYBACK_STATE)
+    if (!ArePlayerFieldControlsLocked())
         UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);
 }
 

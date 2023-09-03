@@ -12,6 +12,11 @@
 #include "constants/easy_chat.h"
 #include "constants/rgb.h"
 
+// gGlobalFieldTintMode
+#define TINT_NONE              0
+#define TINT_GRAYSCALE         1
+#define TINT_SEPIA             2
+
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
@@ -411,11 +416,6 @@ struct Roamer
     /*0x0A*/ u16 hp;
     /*0x0C*/ u8 level;
     /*0x0D*/ u8 status;
-    /*0x0E*/ u8 cool;
-    /*0x0F*/ u8 beauty;
-    /*0x10*/ u8 cute;
-    /*0x11*/ u8 smart;
-    /*0x12*/ u8 tough;
     /*0x13*/ bool8 active;
     /*0x14*/ u8 filler[0x8];
 };
@@ -548,71 +548,6 @@ struct RecordMixingDayCareMail
     struct DayCareMail mail[DAYCARE_MON_COUNT];
     u32 numDaycareMons;
     bool16 holdsItem[DAYCARE_MON_COUNT];
-};
-
-struct QuestLogObjectEventTemplate
-{
-    u32 x:8;
-    u32 negx:1;
-    u32 y:8;
-    u32 negy:1;
-    u32 elevation:6;
-    u32 movementType:8;
-};
-
-struct QuestLogObjectEvent
-{
-    /*0x00*/ u8 active:1;
-    /*0x00*/ u8 triggerGroundEffectsOnStop:1;
-    /*0x00*/ u8 disableCoveringGroundEffects:1;
-    /*0x00*/ u8 landingJump:1;
-    /*0x00*/ u8 frozen:1;
-    /*0x00*/ u8 facingDirectionLocked:1;
-    /*0x00*/ u8 disableAnim:1;
-    /*0x00*/ u8 enableAnim:1;
-    /*0x01*/ u8 inanimate:1;
-    /*0x01*/ u8 invisible:1;
-    /*0x01*/ u8 offScreen:1;
-    /*0x01*/ u8 trackedByCamera:1;
-    /*0x01*/ u8 isPlayer:1;
-    /*0x01*/ u8 spriteAnimPausedBackup:1;
-    /*0x01*/ u8 spriteAffineAnimPausedBackup:1;
-    /*0x01*/ u8 disableJumpLandingGroundEffect:1;
-    /*0x02*/ u8 fixedPriority:1;
-    /*0x02*/ u8 facingDirection:4;
-    /*0x02*/ u8 unused:3;
-    /*0x03*/ u8 currentElevation:4;
-    /*0x03*/ u8 previousElevation:4;
-    /*0x04*/ u8 graphicsId;
-    /*0x05*/ u8 movementType;
-    /*0x06*/ u8 trainerType;
-    /*0x07*/ u8 localId;
-    /*0x08*/ u8 mapNum;
-    /*0x09*/ u8 mapGroup;
-    /*0x0a*/ s16 x;
-    /*0x0c*/ s16 y;
-    /*0x0e*/ u8 trainerRange_berryTreeId;
-    /*0x0f*/ u8 previousMetatileBehavior;
-    /*0x10*/ u8 directionSequenceIndex;
-    /*0x11*/ u8 animId;
-};
-
-// This represents all the data needed to display a single scene for the "Quest Log" when the player resumes playing.
-//
-struct QuestLogScene
-{
-    /*0x0000*/ u8 startType; // QL_START_NORMAL / QL_START_WARP
-    /*0x0001*/ u8 mapGroup;
-    /*0x0002*/ u8 mapNum;
-    /*0x0003*/ u8 warpId;
-    /*0x0004*/ s16 x;
-    /*0x0006*/ s16 y;
-    /*0x0008*/ struct QuestLogObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
-    /*0x0148*/ u8 flags[NUM_FLAG_BYTES];
-    /*0x02c8*/ u16 vars[VARS_COUNT];
-    /*0x0468*/ struct QuestLogObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
-    /*0x0568*/ u16 script[128];
-    /*0x0668*/ u16 end[0];
 };
 
 #include "fame_checker.h"
@@ -779,7 +714,6 @@ struct SaveBlock1
     /*0x0EE0*/ u8 flags[NUM_FLAG_BYTES];
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x1300*/ struct QuestLogScene questLog[QUEST_LOG_SCENE_COUNT];
     /*0x2CA0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CAC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CB8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];

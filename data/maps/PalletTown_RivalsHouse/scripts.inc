@@ -43,8 +43,6 @@ PalletTown_RivalsHouse_EventScript_HeardBattledRival::
 	end
 
 PalletTown_RivalsHouse_EventScript_GroomMon::
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	goto_if_lt VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500, PalletTown_RivalsHouse_EventScript_RateMonFriendship
 	msgbox PalletTown_RivalsHouse_Text_LikeMeToGroomMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, PalletTown_RivalsHouse_EventScript_DeclineGrooming

@@ -2,7 +2,6 @@ FourIsland_Mart_MapScripts::
 	.byte 0
 
 FourIsland_Mart_EventScript_Clerk::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

@@ -1558,10 +1558,7 @@ void BufferStringBattle(u16 stringId)
                 }
                 else
                 {
-                    if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                        stringPtr = sText_Trainer1WantsToBattle;
-                    else
-                        stringPtr = sText_LinkTrainerWantsToBattle;
+                    stringPtr = sText_LinkTrainerWantsToBattle;
                 }
             }
             else
@@ -1618,8 +1615,6 @@ void BufferStringBattle(u16 stringId)
             {
                 if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
                     stringPtr = sText_Trainer1SentOutPkmn;
-                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                    stringPtr = sText_Trainer1SentOutPkmn;
                 else
                     stringPtr = sText_LinkTrainerSentOutPkmn;
             }
@@ -1670,8 +1665,6 @@ void BufferStringBattle(u16 stringId)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_LinkTrainerMultiSentOutPkmn;
-                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                    stringPtr = sText_Trainer1SentOutPkmn2;
                 else
                     stringPtr = sText_LinkTrainerSentOutPkmn2;
             }
@@ -1703,8 +1696,6 @@ void BufferStringBattle(u16 stringId)
                 stringPtr = sText_GotAwaySafely;
             else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                 stringPtr = sText_TwoWildFled;
-            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                stringPtr = sText_Trainer1Fled;
             else
                 stringPtr = sText_WildFled;
         }
@@ -1725,21 +1716,6 @@ void BufferStringBattle(u16 stringId)
                     break;
                 case B_OUTCOME_DREW:
                     stringPtr = sText_PlayerBattledToDrawVsTwo;
-                    break;
-                }
-            }
-            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-            {
-                switch (gBattleTextBuff1[0])
-                {
-                case B_OUTCOME_WON:
-                    stringPtr = sText_PlayerDefeatedLinkTrainerTrainer1;
-                    break;
-                case B_OUTCOME_LOST:
-                    stringPtr = sText_PlayerLostAgainstTrainer1;
-                    break;
-                case B_OUTCOME_DREW:
-                    stringPtr = sText_PlayerBattledToDrawTrainer1;
                     break;
                 }
             }
@@ -2040,43 +2016,21 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = gAbilityNames[sBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
-                if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-                    toCpy = gTrainerClassNames[GetSecretBaseTrainerNameIndex()];
-                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                    toCpy = gTrainerClassNames[GetUnionRoomTrainerClass()];
-                else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+                if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                     toCpy = gTrainerClassNames[GetBattleTowerTrainerClassNameId()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
                     toCpy = gTrainerClassNames[GetTrainerTowerOpponentClass()];
-                else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                    toCpy = gTrainerClassNames[GetEreaderTrainerClassId()];
                 else
                     toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent_A].trainerClass];
                 break;
             case B_TXT_TRAINER1_NAME: // trainer1 name
-                if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-                {
-                    for (i = 0; i < (s32)NELEMS(gBattleResources->secretBase->trainerName); i++)
-                        text[i] = gBattleResources->secretBase->trainerName[i];
-                    text[i] = EOS;
-                    toCpy = text;
-                }
-                if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                {
-                    toCpy = gLinkPlayers[multiplayerId ^ BIT_SIDE].name;
-                }
-                else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+                if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                 {
                     GetBattleTowerTrainerName(text);
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
                 {
                     GetTrainerTowerOpponentName(text);
-                    toCpy = text;
-                }
-                else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                {
-                    CopyEReaderTrainerName5(text);
                     toCpy = text;
                 }
                 else

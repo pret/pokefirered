@@ -3,7 +3,6 @@
 #include "overworld.h"
 #include "script.h"
 #include "new_menu_helpers.h"
-#include "quest_log.h"
 #include "fieldmap.h"
 
 struct ConnectionFlags
@@ -19,7 +18,7 @@ EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
-EWRAM_DATA u8 gGlobalFieldTintMode = QL_TINT_NONE;
+EWRAM_DATA u8 gGlobalFieldTintMode = TINT_NONE;
 
 static const struct ConnectionFlags sDummyConnectionFlags = {};
 
@@ -842,17 +841,13 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
     switch (gGlobalFieldTintMode)
     {
-    case QL_TINT_NONE:
+    case TINT_NONE:
         return;
-    case QL_TINT_GRAYSCALE:
+    case TINT_GRAYSCALE:
         TintPalette_GrayScale(&gPlttBufferUnfaded[offset], size);
         break;
-    case QL_TINT_SEPIA:
+    case TINT_SEPIA:
         TintPalette_SepiaTone(&gPlttBufferUnfaded[offset], size);
-        break;
-    case QL_TINT_BACKUP_GRAYSCALE:
-        QuestLog_BackUpPalette(offset, size);
-        TintPalette_GrayScale(&gPlttBufferUnfaded[offset], size);
         break;
     default:
         return;
@@ -864,17 +859,13 @@ void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
     switch (gGlobalFieldTintMode)
     {
-    case QL_TINT_NONE:
+    case TINT_NONE:
         return;
-    case QL_TINT_GRAYSCALE:
+    case TINT_GRAYSCALE:
         TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
         break;
-    case QL_TINT_SEPIA:
+    case TINT_SEPIA:
         TintPalette_SepiaTone(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
-        break;
-    case QL_TINT_BACKUP_GRAYSCALE:
-        QuestLog_BackUpPalette(BG_PLTT_ID(slot), count * 16);
-        TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
         break;
     default:
         return;

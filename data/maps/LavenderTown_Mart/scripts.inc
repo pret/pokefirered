@@ -14,7 +14,6 @@ LavenderTown_Mart_EventScript_Youngster::
 	end
 
 LavenderTown_Mart_EventScript_Clerk::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

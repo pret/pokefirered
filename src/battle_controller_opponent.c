@@ -490,7 +490,6 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         battleMon.speed = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF);
-        battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
         battleMon.abilityNum = GetMonData(&gEnemyParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gEnemyParty[monId], MON_DATA_OT_ID);
         GetMonData(&gEnemyParty[monId], MON_DATA_NICKNAME, nickname);
@@ -599,10 +598,6 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_MET_LEVEL);
         size = 1;
         break;
-    case REQUEST_MET_GAME_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_MET_GAME);
-        size = 1;
-        break;
     case REQUEST_POKEBALL_BATTLE:
         dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_POKEBALL);
         size = 1;
@@ -647,12 +642,6 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         dst[2] = (data32 & 0x00FF0000) >> 16;
         dst[3] = (data32 & 0xFF000000) >> 24;
         size = 4;
-        break;
-    case REQUEST_CHECKSUM_BATTLE:
-        data16 = GetMonData(&gEnemyParty[monId], MON_DATA_CHECKSUM);
-        dst[0] = data16;
-        dst[1] = data16 >> 8;
-        size = 2;
         break;
     case REQUEST_STATUS_BATTLE:
         data32 = GetMonData(&gEnemyParty[monId], MON_DATA_STATUS);
@@ -707,50 +696,6 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         dst[0] = data16;
         dst[1] = data16 >> 8;
         size = 2;
-        break;
-    case REQUEST_COOL_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_COOL);
-        size = 1;
-        break;
-    case REQUEST_BEAUTY_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY);
-        size = 1;
-        break;
-    case REQUEST_CUTE_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_CUTE);
-        size = 1;
-        break;
-    case REQUEST_SMART_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SMART);
-        size = 1;
-        break;
-    case REQUEST_TOUGH_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_TOUGH);
-        size = 1;
-        break;
-    case REQUEST_SHEEN_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SHEEN);
-        size = 1;
-        break;
-    case REQUEST_COOL_RIBBON_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_COOL_RIBBON);
-        size = 1;
-        break;
-    case REQUEST_BEAUTY_RIBBON_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY_RIBBON);
-        size = 1;
-        break;
-    case REQUEST_CUTE_RIBBON_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_CUTE_RIBBON);
-        size = 1;
-        break;
-    case REQUEST_SMART_RIBBON_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SMART_RIBBON);
-        size = 1;
-        break;
-    case REQUEST_TOUGH_RIBBON_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_TOUGH_RIBBON);
-        size = 1;
         break;
     }
     return size;
@@ -906,9 +851,6 @@ static void SetOpponentMonData(u8 monId)
     case REQUEST_MET_LEVEL_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_MET_LEVEL, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case REQUEST_MET_GAME_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_MET_GAME, &gBattleBufferA[gActiveBattler][3]);
-        break;
     case REQUEST_POKEBALL_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_POKEBALL, &gBattleBufferA[gActiveBattler][3]);
         break;
@@ -941,9 +883,6 @@ static void SetOpponentMonData(u8 monId)
     case REQUEST_PERSONALITY_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_PERSONALITY, &gBattleBufferA[gActiveBattler][3]);
         break;
-    case REQUEST_CHECKSUM_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_CHECKSUM, &gBattleBufferA[gActiveBattler][3]);
-        break;
     case REQUEST_STATUS_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_STATUS, &gBattleBufferA[gActiveBattler][3]);
         break;
@@ -970,39 +909,6 @@ static void SetOpponentMonData(u8 monId)
         break;
     case REQUEST_SPDEF_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_COOL_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_COOL, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_BEAUTY_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_CUTE_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_CUTE, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_SMART_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SMART, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_TOUGH_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_TOUGH, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_SHEEN_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SHEEN, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_COOL_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_COOL_RIBBON, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_BEAUTY_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_CUTE_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_CUTE_RIBBON, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_SMART_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SMART_RIBBON, &gBattleBufferA[gActiveBattler][3]);
-        break;
-    case REQUEST_TOUGH_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     }
 }
@@ -1122,14 +1028,10 @@ static void OpponentHandleDrawTrainerPic(void)
 {
     u32 trainerPicId;
 
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-        trainerPicId = GetSecretBaseTrainerPicIndex();
-    else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+    if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicId = GetBattleTowerTrainerFrontSpriteId();
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
         trainerPicId = GetTrainerTowerTrainerFrontSpriteId();
-    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicId = GetEreaderTrainerFrontSpriteId();
     else
         trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
@@ -1152,14 +1054,10 @@ static void OpponentHandleTrainerSlide(void)
 {
     u32 trainerPicId;
 
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-        trainerPicId = GetSecretBaseTrainerPicIndex();
-    else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+    if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicId = GetBattleTowerTrainerFrontSpriteId();
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
         trainerPicId = GetTrainerTowerTrainerFrontSpriteId();
-    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicId = GetEreaderTrainerFrontSpriteId();
     else
         trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);

@@ -1,5 +1,6 @@
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
+MODERN ?= 1
 
 # don't use dkP's base_tools anymore
 # because the redefinition of $(CC) conflicts
@@ -339,7 +340,7 @@ $(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(ROM): $(ELF)
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(OBJCOPY) -O binary $< $@
 
 # "friendly" target names for convenience sake
 firered:                ; @$(MAKE) GAME_VERSION=FIRERED

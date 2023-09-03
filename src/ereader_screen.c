@@ -43,8 +43,6 @@ static void Task_EReader(u8);
 
 struct EReaderData gEReaderData;
 
-extern const u8 gMultiBootProgram_EReader_Start[];
-extern const u8 gMultiBootProgram_EReader_End[];
 
 static void EReader_Load(struct EReaderData *eReader, size_t size, const void *data)
 {
@@ -386,7 +384,6 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, gMultiBootProgram_EReader_Start);
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

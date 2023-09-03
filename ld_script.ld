@@ -63,7 +63,6 @@ SECTIONS {
         src/sprite.o(.text);
         src/string_util.o(.text);
         src/link.o(.text);
-        src/multiboot.o(.text);
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
@@ -247,10 +246,8 @@ SECTIONS {
         src/item_pc.o(.text);
         src/mailbox_pc.o(.text);
         src/menu.o(.text);
-        src/quest_log.o(.text);
         src/help_message.o(.text);
         src/trainer_fan_club.o(.text);
-        src/quest_log_events.o(.text);
         src/union_room.o(.text);
         src/union_room_player_avatar.o(.text);
         src/union_room_battle.o(.text);
@@ -261,7 +258,6 @@ SECTIONS {
         src/union_room_chat_display.o(.text);
         src/union_room_chat_objects.o(.text);
         src/help_system.o(.text);
-        src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
         src/menu2.o(.text);
         src/oak_speech.o(.text);
@@ -278,7 +274,6 @@ SECTIONS {
         src/slot_machine.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
-        src/ereader_screen.o(.text);
         src/mystery_gift.o(.text);
         src/mystery_gift_link.o(.text);
         src/mystery_gift_client.o(.text);
@@ -292,10 +287,8 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
         src/text_window.o(.text);
-        src/quest_log_player.o(.text);
         src/dodrio_berry_picking.o(.text);
         src/battle_controller_pokedude.o(.text);
-        src/quest_log_objects.o(.text);
         src/dodrio_berry_picking_comm.o(.text);
         src/teachy_tv.o(.text);
         src/ereader_helpers.o(.text);
@@ -306,7 +299,6 @@ SECTIONS {
         src/trainer_tower.o(.text);
         src/berry_powder.o(.text);
         src/minigame_countdown.o(.text);
-        src/berry_fix_program.o(.text);
     } =0
 
     script_data :
@@ -324,7 +316,6 @@ SECTIONS {
     lib_text :
     ALIGN(4)
     {
-        src/libgcnmultiboot.o(.text);
         src/m4a_1.o(.text);
         src/m4a.o(.text);
         src/agb_flash.o(.text);
@@ -541,10 +532,8 @@ SECTIONS {
         src/mailbox_pc.o(.rodata);
         src/decoration.o(.rodata);
         src/menu.o(.rodata);
-        src/quest_log.o(.rodata);
         src/help_message.o(.rodata);
         src/trainer_fan_club.o(.rodata);
-        src/quest_log_events.o(.rodata);
         src/union_room.o(.rodata);
         src/union_room_player_avatar.o(.rodata);
         src/union_room_battle.o(.rodata);
@@ -572,7 +561,6 @@ SECTIONS {
         src/slot_machine.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);
-        src/ereader_screen.o(.rodata);
         src/mystery_gift.o(.rodata);
         src/mystery_gift_link.o(.rodata);
         src/mystery_gift_client.o(.rodata);
@@ -588,7 +576,6 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
-        src/quest_log_player.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/battle_controller_pokedude.o(.rodata);
         src/teachy_tv.o(.rodata);
@@ -598,7 +585,6 @@ SECTIONS {
         src/renewable_hidden_items.o(.rodata);
         src/trainer_tower.o(.rodata);
         src/minigame_countdown.o(.rodata);
-        src/berry_fix_program.o(.rodata);
         src/keyboard_text.o(.rodata);
         src/trainer_tower_sets.o(.rodata);
         src/move_descriptions.o(.rodata);
@@ -1013,14 +999,6 @@ SECTIONS {
         *libc.a:readr.o(.rodata);
 
         . = ALIGN(4);
-    } =0
-
-    multiboot_data :
-    ALIGN(4)
-    {
-        data/multiboot_ereader.o(.rodata);
-        data/multiboot_berry_glitch_fix.o(.rodata);
-        data/multiboot_pokemon_colosseum.o(.rodata);
     } =0
 
     . = 0x08D00000;

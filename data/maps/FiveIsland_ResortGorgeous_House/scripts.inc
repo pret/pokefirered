@@ -7,8 +7,6 @@ FiveIsland_ResortGorgeous_House_MapScripts::
 	.byte 0
 
 FiveIsland_ResortGorgeous_House_EventScript_Selphy::
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	lock
 	faceplayer
 	goto_if_set SHOWN_REQUESTED_MON, FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest

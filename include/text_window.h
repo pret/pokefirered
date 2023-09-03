@@ -22,6 +22,5 @@ void DrawTextBorderInner(u8 windowId, u16 tileNum, u8 palNum);
 void LoadHelpMessageWindowGfx(u8 windowId, u16 destOffset, u8 palIdx);
 void LoadSignpostWindowGfx(u8 windowId, u16 destOffset, u8 palIdx);
 void LoadStdWindowTiles(u8 windowId, u16 destOffset);
-void LoadQuestLogWindowTiles(u8 windowId, u16 destOffset);
 
 #endif // GUARD_TEXT_WINDOW_H

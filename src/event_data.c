@@ -1,9 +1,6 @@
 #include "global.h"
 #include "event_data.h"
 #include "item_menu.h"
-#include "quest_log.h"
-
-static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, u8 a1);
 
 #define NUM_SPECIAL_FLAGS  (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
 #define NUM_TEMP_FLAGS     (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
@@ -34,8 +31,6 @@ EWRAM_DATA u16 gSpecialVar_TextColor = 0;
 EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
-
-u16 gLastQuestLogStoredFlagOrVarIdx;
 
 extern u16 *const gSpecialVars[];
 
@@ -190,46 +185,9 @@ u16 *GetVarPointer(u16 idx)
         return NULL;
     if (idx < SPECIAL_VARS_START)
     {
-        switch (gQuestLogPlaybackState)
-        {
-        case QL_PLAYBACK_STATE_STOPPED:
-        default:
-            break;
-        case QL_PLAYBACK_STATE_RUNNING:
-            ptr = QuestLogGetFlagOrVarPtr(FALSE, idx);
-            if (ptr != NULL)
-                gSaveBlock1Ptr->vars[idx - VARS_START] = *ptr;
-            break;
-        case QL_PLAYBACK_STATE_RECORDING:
-            if (IsFlagOrVarStoredInQuestLog(idx - VARS_START, TRUE) == TRUE)
-            {
-                gLastQuestLogStoredFlagOrVarIdx = idx - VARS_START;
-                QuestLogSetFlagOrVar(FALSE, idx, gSaveBlock1Ptr->vars[idx - VARS_START]);
-            }
-            break;
-        }
         return &gSaveBlock1Ptr->vars[idx - VARS_START];
     }
     return gSpecialVars[idx - SPECIAL_VARS_START];
-}
-
-static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, bool8 isVar)
-{
-    if (!isVar)
-    {
-        if (idx < STORY_FLAGS_START)
-            return FALSE;
-        if (idx >= SYS_FLAGS && idx < PERMA_SYS_FLAGS_START)
-            return FALSE;
-    }
-    else
-    {
-        if (idx < VAR_ICE_STEP_COUNT - VARS_START)
-            return FALSE;
-        if (idx >= VAR_MAP_SCENE_PALLET_TOWN_OAK - VARS_START && idx < VAR_PORTHOLE - VARS_START)
-            return FALSE;
-    }
-    return TRUE;
 }
 
 u16 VarGet(u16 idx)
@@ -261,24 +219,6 @@ u8 *GetFlagAddr(u16 idx)
         return NULL;
     if (idx < SPECIAL_FLAGS_START)
     {
-        switch (gQuestLogPlaybackState)
-        {
-        case QL_PLAYBACK_STATE_STOPPED:
-        default:
-            break;
-        case QL_PLAYBACK_STATE_RUNNING:
-            ptr = QuestLogGetFlagOrVarPtr(TRUE, idx);
-            if (ptr != NULL)
-                gSaveBlock1Ptr->flags[idx / 8] = *ptr;
-            break;
-        case QL_PLAYBACK_STATE_RECORDING:
-            if (IsFlagOrVarStoredInQuestLog(idx, FALSE) == TRUE)
-            {
-                gLastQuestLogStoredFlagOrVarIdx = idx;
-                QuestLogSetFlagOrVar(TRUE, idx, gSaveBlock1Ptr->flags[idx / 8]);
-            }
-            break;
-        }
         return &gSaveBlock1Ptr->flags[idx / 8];
     }
     return &sSpecialFlags[(idx - SPECIAL_FLAGS_START) / 8];

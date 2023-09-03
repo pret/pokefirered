@@ -2789,7 +2789,6 @@ static void PokeSum_PrintTrainerMemo_Mon(void)
 static void PokeSum_PrintTrainerMemo_Egg(void)
 {
     u8 metLocation;
-    u8 version;
     u8 chosenStrIndex = 0;
 
     metLocation = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_LOCATION);
@@ -2800,11 +2799,7 @@ static void PokeSum_PrintTrainerMemo_Egg(void)
             chosenStrIndex = 4;
         else
         {
-            version = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
-
-            if (version != VERSION_LEAF_GREEN && version != VERSION_FIRE_RED)
-                chosenStrIndex = 1;
-            else if (metLocation == METLOC_SPECIAL_EGG)
+            if (metLocation == METLOC_SPECIAL_EGG)
                 chosenStrIndex = 2;
 
             if (chosenStrIndex == 0 || chosenStrIndex == 2)
@@ -2818,14 +2813,8 @@ static void PokeSum_PrintTrainerMemo_Egg(void)
             chosenStrIndex = 4;
         else
         {
-            version = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
 
-            if (version != VERSION_LEAF_GREEN && version != VERSION_FIRE_RED)
-            {
-                if (metLocation == METLOC_SPECIAL_EGG)
-                    chosenStrIndex = 5;
-            }
-            else if (metLocation == METLOC_SPECIAL_EGG)
+            if (metLocation == METLOC_SPECIAL_EGG)
                 chosenStrIndex = 2;
 
             if (PokeSum_BufferOtName_IsEqualToCurrentOwner(&sMonSummaryScreen->currentMon) == FALSE)
@@ -5198,16 +5187,7 @@ static bool32 PokeSum_IsMonBoldOrGentle(u8 nature)
 
 static bool32 CurrentMonIsFromGBA(void)
 {
-    u8 version = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_GAME);
-
-    if (version == VERSION_LEAF_GREEN
-        || version == VERSION_FIRE_RED
-        || version == VERSION_RUBY
-        || version == VERSION_SAPPHIRE
-        || version == VERSION_EMERALD)
-        return TRUE;
-
-    return FALSE;
+    return TRUE;
 }
 
 static bool32 MapSecIsInKantoOrSevii(u8 mapSec)

@@ -39,13 +39,6 @@ void LoadStdWindowGfxOnBg(u8 bgId, u16 destOffset, u8 palOffset)
 }
 
 // Unused
-// Equivalent to LoadQuestLogWindowTiles, but takes a bg id directly
-static void LoadQuestLogWindowTilesOnBg(u8 bgId, u16 destOffset)
-{
-    LoadBgTiles(bgId, gQuestLogWindow_Gfx, 0x280, destOffset);
-}
-
-// Unused
 // Equivalent to LoadUserWindowGfxByFrame, but takes a bg id directly
 static void LoadUserWindowGfxByFrameOnBg(u8 bgId, u8 frameType, u16 destOffset, u8 palOffset)
 {
@@ -86,11 +79,6 @@ void LoadStdWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
 void LoadStdWindowTiles(u8 windowId, u16 destOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gStdTextWindow_Gfx, 0x120, destOffset);
-}
-
-void LoadQuestLogWindowTiles(u8 windowId, u16 destOffset)
-{
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gQuestLogWindow_Gfx, 0x280, destOffset);
 }
 
 static void LoadUserWindowGfxByFrame(u8 windowId, u8 frameType, u16 destOffset, u8 palOffset)

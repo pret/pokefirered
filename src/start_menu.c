@@ -24,7 +24,6 @@
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "script.h"
-#include "quest_log.h"
 #include "new_game.h"
 #include "event_scripts.h"
 #include "field_weather.h"
@@ -782,7 +781,6 @@ static u8 SaveDialogCB_AskOverwriteOrReplacePreviousFileHandleInput(void)
 
 static u8 SaveDialogCB_PrintSavingDontTurnOffPower(void)
 {
-    SaveQuestLogData();
     PrintSaveTextWithFollowupFunc(gText_SavingDontTurnOffThePower, SaveDialogCB_DoSave);
     return SAVECB_RETURN_CONTINUE;
 }

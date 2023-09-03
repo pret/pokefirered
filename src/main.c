@@ -14,7 +14,6 @@
 #include "battle_controllers.h"
 #include "scanline_effect.h"
 #include "save_failed_screen.h"
-#include "quest_log.h"
 
 extern u32 intr_main[];
 
@@ -213,7 +212,6 @@ static void InitMainCallbacks(void)
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
-    gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
 }
 
 static void CallCallbacks(void)

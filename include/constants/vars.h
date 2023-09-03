@@ -82,8 +82,7 @@
 // Bits 0-11 are the number of mons in all boxes
 // with the species sanity bit set.
 // Bits 12-15 are the same for the player's party.
-// Used by Quest Log.
-#define VAR_QUEST_LOG_MON_COUNTS           0x4027
+#define VAR_0x4027                         0x4027
 #define VAR_WONDER_NEWS_STEP_COUNTER       0x4028
 #define VAR_0x4029                         0x4029
 #define VAR_0x402A                         0x402A
@@ -124,7 +123,7 @@
 #define VAR_EGG_BRAG_STATE                 0x404A
 #define VAR_LINK_WIN_BRAG_STATE            0x404B
 #define VAR_POKELOT_RND2                   0x404C
-#define VAR_QL_ENTRANCE                    0x404D
+#define VAR_0x404D                         0x404D
 #define VAR_NATIONAL_DEX                   0x404E
 #define VAR_LOTAD_SIZE_RECORD              0x404F
 

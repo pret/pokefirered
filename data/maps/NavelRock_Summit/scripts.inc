@@ -33,8 +33,6 @@ NavelRock_Summit_EventScript_TryRemoveHoOh::
 	return
 
 NavelRock_Summit_EventScript_HoOh::
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject

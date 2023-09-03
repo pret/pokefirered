@@ -10,7 +10,6 @@ FuchsiaCity_Mart_EventScript_Gentleman::
 	end
 
 FuchsiaCity_Mart_EventScript_Clerk::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

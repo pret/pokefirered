@@ -7,8 +7,6 @@ CeruleanCity_House4_MapScripts::
 	.byte 0
 
 CeruleanCity_House4_EventScript_WonderNewsBerryMan::
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	lock
 	specialvar REWARD_TYPE, WonderNews_GetRewardInfo
 	copyvar REWARD_ITEM, VAR_RESULT

@@ -14,7 +14,6 @@ CeladonCity_DepartmentStore_2F_EventScript_FloorSign::
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_ClerkItems::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou
@@ -40,7 +39,6 @@ CeladonCity_DepartmentStore_2F_Items::
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

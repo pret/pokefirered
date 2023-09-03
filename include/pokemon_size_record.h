@@ -14,6 +14,4 @@ void CompareLotadSize(void);
 void InitHeracrossSizeRecord(void);
 void InitMagikarpSizeRecord(void);
 
-void GiveGiftRibbonToParty(u8 index, u8 ribbonId);
-
 #endif // GUARD_POKEMON_SIZE_RECORD_H

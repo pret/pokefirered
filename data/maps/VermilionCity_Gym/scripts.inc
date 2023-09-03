@@ -141,8 +141,6 @@ VermilionCity_Gym_EventScript_TrashCan15::
 	end
 
 VermilionCity_Gym_EventScript_TrashCan::
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	copyvar SWITCH1_ID, VAR_TEMP_0
 	copyvar SWITCH2_ID, VAR_TEMP_1
 	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, VermilionCity_Gym_EventScript_LocksAlreadyOpen

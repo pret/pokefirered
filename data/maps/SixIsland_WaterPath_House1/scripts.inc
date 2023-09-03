@@ -4,8 +4,6 @@ SixIsland_WaterPath_House1_MapScripts::
 SixIsland_WaterPath_House1_EventScript_Beauty::
 	lock
 	faceplayer
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	setvar VAR_0x8004, SPECIES_HERACROSS
 	specialvar VAR_RESULT, DoesPlayerPartyContainSpecies
 	goto_if_eq VAR_RESULT, FALSE, SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty

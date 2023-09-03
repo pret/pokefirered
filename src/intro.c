@@ -3,7 +3,6 @@
 #include "m4a.h"
 #include "task.h"
 #include "scanline_effect.h"
-#include "libgcnmultiboot.h"
 #include "new_menu_helpers.h"
 #include "link.h"
 #include "menu.h"
@@ -149,7 +148,6 @@ struct IntroSequenceData
     u8 unused1[0x2080];
 }; // size: 0x28BC
 
-static EWRAM_DATA struct GcmbStruct sGcmb = {0};
 static EWRAM_DATA u16 sUnusedScene3Var0 = 0; // Set but never read
 static EWRAM_DATA u16 sUnusedScene3Var1 = 0; // Set but never read
 static EWRAM_DATA u16 sNidorinoJumpMult = 0;
@@ -242,9 +240,6 @@ static void SpriteCB_NidorinoCry(struct Sprite *sprite);
 static void SpriteCB_NidorinoRecoil(struct Sprite *sprite);
 static void SpriteCB_NidorinoHop(struct Sprite *sprite);
 static void SpriteCB_NidorinoAttack(struct Sprite *sprite);
-
-extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
-extern const u32 gMultiBootProgram_PokemonColosseum_End[];
 
 static const u16 sCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
 static const u8 sCopyright_Gfx[]  = INCBIN_U8( "graphics/intro/copyright.4bpp.lz");
@@ -910,7 +905,6 @@ static void LoadCopyrightGraphics(u16 charBase, u16 screenBase, u16 palOffset)
 
 static void SerialCB_CopyrightScreen(void)
 {
-    GameCubeMultiBoot_HandleSerialInterrupt(&sGcmb);
 }
 
 static bool8 SetUpCopyrightScreen(void)
@@ -941,46 +935,12 @@ static bool8 SetUpCopyrightScreen(void)
         SetVBlankCallback(VBlankCB_Copyright);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetSerialCallback(SerialCB_CopyrightScreen);
-        GameCubeMultiBoot_Init(&sGcmb);
         // fallthrough
     default:
         UpdatePaletteFade();
         gMain.state++;
-        GameCubeMultiBoot_Main(&sGcmb);
         break;
     case 140:
-        GameCubeMultiBoot_Main(&sGcmb);
-        if (sGcmb.gcmb_field_2 != 1)
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gMain.state++;
-        }
-        break;
-    case 141:
-        if (!UpdatePaletteFade())
-        {
-            gMain.state++;
-            if (sGcmb.gcmb_field_2 != 0)
-            {
-                if (sGcmb.gcmb_field_2 == 2)
-                {
-                    if (*(u32 *)(EWRAM_START + 0xAC) == COLOSSEUM_GAME_CODE)
-                    {
-                        CpuCopy16(gMultiBootProgram_PokemonColosseum_Start, (void *)EWRAM_START, 0x28000);
-                        *(u32 *)(EWRAM_START + 0xAC) = COLOSSEUM_GAME_CODE;
-                    }
-                    GameCubeMultiBoot_ExecuteProgram(&sGcmb);
-                }
-            }
-            else
-            {
-                GameCubeMultiBoot_Quit();
-                SetSerialCallback(SerialCB);
-            }
-            return FALSE;
-        }
-        break;
-    case 142:
         ResetSerial();
         SetMainCallback2(CB2_WaitFadeBeforeSetUpIntro);
         break;

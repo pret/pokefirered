@@ -33,7 +33,6 @@
 #include "tm_case.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-#include "constants/quest_log.h"
 
 #define FREE_IF_SET(ptr) ({ if (ptr) Free(ptr); })
 
@@ -1931,7 +1930,6 @@ static void Task_FinalizeSaleToShop(u8 taskId)
     PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
     AddMoney(&gSaveBlock1Ptr->money, ItemId_GetPrice(gSpecialVar_ItemId) / 2 * data[8]);
-    RecordItemTransaction(gSpecialVar_ItemId, data[8], QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
     DestroyListMenuTask(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
     Pocket_CalculateNItemsAndMaxShowed(gBagMenuState.pocket);
     PocketCalculateInitialCursorPosAndItemsAbove(gBagMenuState.pocket);
@@ -2006,7 +2004,6 @@ static void Task_TryDoItemDeposit(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (AddPCItem(gSpecialVar_ItemId, data[8]) == TRUE)
     {
-        ItemUse_SetQuestLogEvent(QL_EVENT_DEPOSITED_ITEM_PC, 0, gSpecialVar_ItemId, 0xFFFF);
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_DepositedStrVar2StrVar1s);

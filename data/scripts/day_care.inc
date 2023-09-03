@@ -1,5 +1,4 @@
 Route5_PokemonDayCare_EventScript_DaycareMan::
-	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	showmoneybox 0, 0

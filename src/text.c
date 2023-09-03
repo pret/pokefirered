@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "m4a.h"
-#include "quest_log.h"
 #include "graphics.h"
 #include "dynamic_placeholder_text_util.h"
 #include "constants/songs.h"
@@ -535,7 +534,7 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
 bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
-    u8 delay = (gQuestLogState == QL_STATE_PLAYBACK) ? 50 : 120;
+    u8 delay = 120;
 
     if (subStruct->autoScrollDelay == delay)
     {
@@ -724,8 +723,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 currChar |= *textPrinter->printerTemplate.currentChar << 8;
                 textPrinter->printerTemplate.currentChar++;
-                if (!QL_IS_PLAYBACK_STATE)
-                    PlayBGM(currChar);
+                PlayBGM(currChar);
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_PLAY_SE:
                 currChar = *textPrinter->printerTemplate.currentChar;

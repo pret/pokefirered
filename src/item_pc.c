@@ -21,7 +21,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "constants/items.h"
-#include "constants/quest_log.h"
 #include "constants/songs.h"
 
 struct ItemPcResources
@@ -896,7 +895,6 @@ static void ItemPc_DoWithdraw(u8 taskId)
 
     if (AddBagItem(itemId, data[8]) == TRUE)
     {
-        ItemUse_SetQuestLogEvent(QL_EVENT_WITHDREW_ITEM_PC, NULL, itemId, 0xFFFF);
         CopyItemName(itemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_WithdrewQuantItem);

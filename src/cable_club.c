@@ -13,7 +13,6 @@
 #include "mystery_gift.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
-#include "quest_log.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "start_menu.h"

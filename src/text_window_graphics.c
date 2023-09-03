@@ -29,7 +29,6 @@ static const u16 sUserFrame_Type9_Pal[] = INCBIN_U16("graphics/text_window/type9
 static const u16 sUserFrame_Type10_Pal[] = INCBIN_U16("graphics/text_window/type10.gbapal");
 
 const u16 gStdTextWindow_Gfx[] = INCBIN_U16("graphics/text_window/std.4bpp");
-const u16 gQuestLogWindow_Gfx[] = INCBIN_U16("graphics/text_window/quest_log.4bpp");
 
 const u16 gTextWindowPalettes[][16] = {
     INCBIN_U16("graphics/text_window/stdpal_0.gbapal"),

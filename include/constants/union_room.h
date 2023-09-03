@@ -26,9 +26,7 @@
 #define ACTIVITY_WONDER_CARD_DUP    6 // Duplicates of later WONDER constants
 #define ACTIVITY_WONDER_NEWS_DUP    7 //
 #define ACTIVITY_CARD               8
-#define ACTIVITY_POKEMON_JUMP       9
 #define ACTIVITY_BERRY_CRUSH        10
-#define ACTIVITY_BERRY_PICK         11
 #define ACTIVITY_SEARCH             12
 #define ACTIVITY_SPIN_TRADE         13
 #define ACTIVITY_ITEM_TRADE         14 // Replaced with ACTIVITY_BATTLE_TOWER_OPEN in Emerald

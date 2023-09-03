@@ -870,8 +870,8 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
 
     trainerCard->rse.caughtAllHoenn = HasAllKantoMons();
     trainerCard->hasAllMons = HasAllMons();
-    trainerCard->berriesPicked = gSaveBlock2Ptr->berryPick.berriesPicked;
-    trainerCard->jumpsInRow = gSaveBlock2Ptr->pokeJump.jumpsInRow;
+    trainerCard->berriesPicked = 0;
+    trainerCard->jumpsInRow = 0;
 
     trainerCard->berryCrushPoints = GetCappedGameStat(GAME_STAT_BERRY_CRUSH_POINTS, 0xFFFF);
     trainerCard->unionRoomNum = GetCappedGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES, 0xFFFF);

@@ -1117,20 +1117,10 @@ JoyfulGameCorner_EventScript_InfoMan2::
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_POKEJUMP_DODRIO, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_PokemonJumpInfo
-	case 1, CableClub_EventScript_DodrioBerryPickingInfo
+	case 0, CableClub_EventScript_MinigameInfoExit
+	case 1, CableClub_EventScript_MinigameInfoExit
 	case 2, CableClub_EventScript_MinigameInfoExit
 	case SCR_MENU_CANCEL, CableClub_EventScript_MinigameInfoExit
-	end
-
-CableClub_EventScript_PokemonJumpInfo::
-	msgbox Text_PokemonJumpInfo
-	release
-	end
-
-CableClub_EventScript_DodrioBerryPickingInfo::
-	msgbox Text_DodrioBerryPickingInfo
-	release
 	end
 
 CableClub_EventScript_MinigameInfoExit::
@@ -1143,110 +1133,8 @@ JoyfulGameCorner_EventScript_MinigameAttendant::
 	faceplayer
 	message Text_WelcomeCanYouWait
 	waitmessage
-	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_AdapterNotConnectedMinigame
-	delay 60
-	special HelpSystem_Disable
-	message Text_PlayWhichGame
-	waitmessage
-	multichoice 0, 0, MULTICHOICE_POKEJUMP_DODRIO, FALSE
-	switch VAR_RESULT
-	case 0, CableClub_EventScript_PlayPokemonJump
-	case 1, CableClub_EventScript_PlayDodrioBerryPicking
-	case 2, CableClub_EventScript_AbortMinigame
-	case SCR_MENU_CANCEL, CableClub_EventScript_AbortMinigame
-	end
-
-CableClub_EventScript_PlayPokemonJump::
-	setvar VAR_0x8005, 0
-	special IsPokemonJumpSpeciesInParty
-	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_NoEligiblePkmn
-	msgbox Text_EnterWhichPokemon
-	setvar VAR_0x8005, 0
-	special ChooseMonForWirelessMinigame
-	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, CableClub_EventScript_AbortMinigame
-	call EventScript_AskSaveGame
-	goto_if_eq VAR_RESULT, 0, CableClub_EventScript_AbortMinigame
-	setvar VAR_0x8004, LINK_GROUP_POKEMON_JUMP
-	goto CableClub_EventScript_ChooseLinkLeaderMinigame
-	end
-
-CableClub_EventScript_PlayDodrioBerryPicking::
-	setvar VAR_0x8005, 1
-	special IsDodrioInParty
-	goto_if_eq VAR_RESULT, 0, CableClub_EventScript_NoEligiblePkmn
-	msgbox Text_EnterWhichPokemon
-	setvar VAR_0x8005, 1
-	special ChooseMonForWirelessMinigame
-	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, CableClub_EventScript_AbortMinigame
-	call EventScript_AskSaveGame
-	goto_if_eq VAR_RESULT, 0, CableClub_EventScript_AbortMinigame
-	setvar VAR_0x8004, LINK_GROUP_BERRY_PICKING
-	goto CableClub_EventScript_ChooseLinkLeaderMinigame
-	end
-
-CableClub_EventScript_ChooseLinkLeaderMinigame::
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	message CableClub_Text_ChooseGroupLeader
-	waitmessage
-	call EventScript_RestorePrevTextColor
-	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
-	switch VAR_RESULT
-	case 0, CableClub_EventScript_TryJoinMinigameLinkGroup
-	case 1, CableClub_EventScript_TryBecomeMinigameLinkLeader
-	case 2, CableClub_EventScript_AbortMinigame
-	case SCR_MENU_CANCEL, CableClub_EventScript_AbortMinigame
-	end
-
-CableClub_EventScript_TryBecomeMinigameLinkLeader::
-	call CableClub_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterMinigame
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderMinigame
-	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryBecomeMinigameLinkLeader
-	release
-	return
-
-CableClub_EventScript_TryJoinMinigameLinkGroup::
-	call CableClub_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterMinigame
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderMinigame
-	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinMinigameLinkGroup
-	release
-	return
-
-CableClub_EventScript_EnterMinigame::
-	messageautoscroll Text_AllGoodToGo
-	waitmessage
-	delay 120
-	closemessage
-	copyvar VAR_0x8007, VAR_LAST_TALKED
-	call CableClub_EventScript_OpenGameCornerBarrier
-	special DrawWholeMapView
-	playse SE_CLICK
-	delay 60
-	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
-	waitmovement 0
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterMinigameRoom
-	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	release
-	waitstate
-	end
-
-CableClub_EventScript_AdapterNotConnectedMinigame::
 	msgbox Text_AdapterNotConnectedMinigame
 	release
-	end
-
-CableClub_EventScript_NoEligiblePkmn::
-	msgbox EventScript_ExplainPokemonJumpRequirements, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, CableClub_EventScript_AbortMinigame
-	call_if_eq VAR_0x8005, 0, CableClub_EventScript_ExplainPokemonJumpRequirements
-	call_if_eq VAR_0x8005, 1, CableClub_EventScript_ExplainDodrioBerryPickingRequirements
-	goto CableClub_EventScript_AbortMinigame
 	end
 
 CableClub_EventScript_ExplainPokemonJumpRequirements::
@@ -1259,15 +1147,11 @@ CableClub_EventScript_ExplainDodrioBerryPickingRequirements::
 
 TwoIsland_JoyfulGameCorner_EventScript_ShowPokemonJumpRecords::
 	lockall
-	special ShowPokemonJumpRecords
-	waitstate
 	releaseall
 	end
 
 TwoIsland_JoyfulGameCorner_EventScript_ShowDodrioBerryPickingRecords::
 	lockall
-	special ShowDodrioBerryPickingRecords
-	waitstate
 	releaseall
 	end
 

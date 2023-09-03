@@ -282,14 +282,11 @@ SECTIONS {
         src/mystery_gift_show_news.o(.text);
         src/wonder_news.o(.text);
         src/seagallop.o(.text);
-        src/pokemon_jump.o(.text);
         src/berry_crush.o(.text);
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
         src/text_window.o(.text);
-        src/dodrio_berry_picking.o(.text);
         src/battle_controller_pokedude.o(.text);
-        src/dodrio_berry_picking_comm.o(.text);
         src/teachy_tv.o(.text);
         src/ereader_helpers.o(.text);
         src/digit_obj_util.o(.text);
@@ -571,12 +568,10 @@ SECTIONS {
         src/wonder_news.o(.rodata);
         src/wonder_news.o(.rodata.str1.4);
         src/seagallop.o(.rodata);
-        src/pokemon_jump.o(.rodata);
         src/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
-        src/dodrio_berry_picking.o(.rodata);
         src/battle_controller_pokedude.o(.rodata);
         src/teachy_tv.o(.rodata);
         src/digit_obj_util.o(.rodata);

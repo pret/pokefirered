@@ -5,7 +5,6 @@
 #include "cable_club.h"
 #include "data.h"
 #include "decompress.h"
-#include "dodrio_berry_picking.h"
 #include "dynamic_placeholder_text_util.h"
 #include "easy_chat.h"
 #include "event_data.h"
@@ -25,7 +24,6 @@
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
-#include "pokemon_jump.h"
 #include "random.h"
 #include "save_location.h"
 #include "script.h"
@@ -342,9 +340,7 @@ static void GetAwaitingCommunicationText(u8 *dst, u8 caseId)
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_BATTLE_MULTI:
     case ACTIVITY_TRADE:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_WONDER_CARD:
     case ACTIVITY_WONDER_NEWS:
         // BUG: argument *dst isn't used, instead it always prints to gStringVar4
@@ -706,9 +702,7 @@ static void Leader_GetAcceptNewMemberPrompt(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, gText_UR_PlayerContactedYouShareX);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
         StringExpandPlaceholders(dst, gText_UR_PlayerContactedYouAddToMembers);
         break;
     }
@@ -741,9 +735,7 @@ static void GetYouAskedToJoinGroupPleaseWaitMessage(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, gText_UR_AwaitingPlayersResponse);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
         StringExpandPlaceholders(dst, gText_UR_PlayerHasBeenAskedToRegisterYouPleaseWait);
         break;
     }
@@ -761,9 +753,7 @@ static void GetGroupLeaderSentAnOKMessage(u8 *dst, u8 caseId)
         StringExpandPlaceholders(dst, gText_UR_PlayerSentBackOK);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
         StringExpandPlaceholders(dst, gText_UR_PlayerOKdRegistration);
         break;
     }
@@ -1026,9 +1016,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             case ACTIVITY_BATTLE_MULTI:
             case ACTIVITY_TRADE:
             case ACTIVITY_CHAT:
-            case ACTIVITY_POKEMON_JUMP:
             case ACTIVITY_BERRY_CRUSH:
-            case ACTIVITY_BERRY_PICK:
             case ACTIVITY_SPIN_TRADE:
             case ACTIVITY_ITEM_TRADE:
             case ACTIVITY_WONDER_CARD:
@@ -1547,9 +1535,7 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_BATTLE_MULTI:
     case ACTIVITY_TRADE:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
-    case ACTIVITY_BERRY_PICK:
     case ACTIVITY_SPIN_TRADE:
     case ACTIVITY_ITEM_TRADE:
         SaveLinkTrainerNames();
@@ -1618,17 +1604,9 @@ static void Task_StartActivity(u8 taskId)
         CreateTrainerCardInBuffer(gBlockSendBuffer, FALSE);
         SetMainCallback2(CB2_ShowCard);
         break;
-    case ACTIVITY_POKEMON_JUMP:
-        WarpForWirelessMinigame(USING_MINIGAME, 5, 1);
-        StartPokemonJump(GetCursorSelectionMonId(), CB2_LoadMap);
-        break;
     case ACTIVITY_BERRY_CRUSH:
         WarpForWirelessMinigame(USING_BERRY_CRUSH, 9, 1);
         StartBerryCrush(CB2_LoadMap);
-        break;
-    case ACTIVITY_BERRY_PICK:
-        WarpForWirelessMinigame(USING_MINIGAME, 5, 1);
-        StartDodrioBerryPicking(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     }
 

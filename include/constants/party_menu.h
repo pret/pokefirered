@@ -78,7 +78,6 @@
 #define PARTY_ACTION_SOFTBOILED         10
 #define PARTY_ACTION_CHOOSE_AND_CLOSE   11
 #define PARTY_ACTION_MOVE_TUTOR         12
-#define PARTY_ACTION_MINIGAME           13
 #define PARTY_ACTION_REUSABLE_ITEM      14
 
 // IDs for DisplayPartyMenuStdMessage, to display the message at the bottom of the party menu

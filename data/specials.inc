@@ -399,14 +399,11 @@ gSpecials::
 	def_special OpenMuseumFossilPic
 	def_special CloseMuseumFossilPic
 	def_special ChooseMonForMoveTutor
-	def_special ChooseMonForWirelessMinigame
 	def_special SetBattledTrainerFlag
 	def_special SetHelpContextForMap
 	def_special DoSSAnneDepartureCutscene
-	def_special IsPokemonJumpSpeciesInParty
 	def_special IsNationalPokedexEnabled
 	def_special CallTrainerTowerFunc
-	def_special ShowPokemonJumpRecords
 	def_special BufferTMHMMoveName
 	def_special DaisyMassageServices
 	def_special HelpSystem_Disable
@@ -423,7 +420,6 @@ gSpecials::
 	def_special CapeBrinkGetMoveToTeachLeadPokemon
 	def_special HasLearnedAllMovesFromCapeBrinkTutor
 	def_special DoCredits
-	def_special ShowDodrioBerryPickingRecords
 	def_special DrawSeagallopDestinationMenu
 	def_special GetSelectedSeagallopDestination
 	def_special GetSeagallopNumber
@@ -439,7 +435,6 @@ gSpecials::
 	def_special Script_ResetUnionRoomTrade
 	def_special PlayerPartyContainsSpeciesWithPlayerID
 	def_special AnimateTeleporterHousing
-	def_special IsDodrioInParty
 	def_special AnimateTeleporterCable
 	def_special InitElevatorFloorSelectMenuPos
 	def_special UpdateLoreleiDollCollection

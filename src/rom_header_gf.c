@@ -25,8 +25,6 @@ struct GFRomHeader
     u32 flagsOffset;
     u32 varsOffset;
     u32 pokedexOffset;
-    u32 seen1Offset;
-    u32 seen2Offset;
     u32 pokedexVar;
     u32 pokedexFlag;
     u32 mysteryGiftFlag;
@@ -109,8 +107,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
-    .seen1Offset = offsetof(struct SaveBlock1, seen1),
-    .seen2Offset = offsetof(struct SaveBlock1, seen2),
     .pokedexVar = VAR_0x403C - VARS_START,
     .pokedexFlag = FLAG_0x838,
     .mysteryGiftFlag = FLAG_SYS_MYSTERY_GIFT_ENABLED,

@@ -702,7 +702,6 @@ struct SaveBlock1
     /*0x0430*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x0464*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x054c*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
-    /*0x05F8*/ u8 seen1[DEX_FLAGS_NO];
     /*0x062C*/ u16 berryBlenderRecords[3]; // unused
     /*0x0632*/ u8 unused_632[6];
     /*0x0638*/ u16 trainerRematchStepCounter;

@@ -5,7 +5,6 @@
 #include "load_save.h"
 #include "task.h"
 #include "link.h"
-#include "save_failed_screen.h"
 #include "fieldmap.h"
 #include "pokemon_storage_system.h"
 #include "gba/flash_internal.h"
@@ -698,7 +697,6 @@ u8 TrySavingData(u8 saveType)
     }
     else
     {
-        DoSaveFailedScreen(saveType);
         gSaveAttemptStatus = SAVE_STATUS_ERROR;
         return SAVE_STATUS_ERROR;
     }
@@ -719,7 +717,7 @@ bool8 LinkFullSave_WriteSector(void)
 {
     u8 status = HandleWriteIncrementalSector(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
-        DoSaveFailedScreen(SAVE_NORMAL);
+        return TRUE;
 
     if (status == SAVE_STATUS_ERROR)
         return TRUE;
@@ -730,8 +728,6 @@ bool8 LinkFullSave_WriteSector(void)
 bool8 LinkFullSave_ReplaceLastSector(void)
 {
     HandleReplaceSectorAndVerify(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
-    if (gDamagedSaveSectors)
-        DoSaveFailedScreen(SAVE_NORMAL);
 
     return FALSE;
 }
@@ -739,8 +735,6 @@ bool8 LinkFullSave_ReplaceLastSector(void)
 bool8 LinkFullSave_SetLastSectorSignature(void)
 {
     CopySectorSignatureByte(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
-    if (gDamagedSaveSectors)
-        DoSaveFailedScreen(SAVE_NORMAL);
 
     return FALSE;
 }
@@ -778,8 +772,6 @@ bool8 WriteSaveBlock1Sector(void)
         WriteSectorSignatureByte(sectorId, gRamSaveSectorLocations);
         finished = TRUE;
     }
-    if (gDamagedSaveSectors)
-        DoSaveFailedScreen(SAVE_LINK);
 
     return finished;
 }

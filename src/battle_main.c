@@ -15,7 +15,6 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "graphics.h"
-#include "help_system.h"
 #include "item.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -623,24 +622,6 @@ void CB2_InitBattle(void)
     else
     {
         CB2_InitBattleInternal();
-        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            {
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                    SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_DOUBLE);
-                else
-                    SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_SINGLE);
-            }
-            else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            {
-                SetHelpContext(HELPCONTEXT_SAFARI_BATTLE);
-            }
-            else
-            {
-                SetHelpContext(HELPCONTEXT_WILD_BATTLE);
-            }
-        }
     }
 }
 

@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "dynamic_placeholder_text_util.h"
-#include "help_system.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -318,7 +317,6 @@ void EnterUnionRoomChat(void)
     sWork = Alloc(sizeof(struct UnionRoomChat));
     InitChatWork(sWork);
     gKeyRepeatStartDelay = 20;
-    HelpSystem_DisableToggleWithRButton();
     SetVBlankCallback(NULL);
     SetMainCallback2(CB2_LoadInterface);
 }
@@ -1003,7 +1001,6 @@ static void ChatEntryRoutine_SaveAndExit(void)
     case 13:
         if (!gPaletteFade.active)
         {
-            HelpSystem_EnableToggleWithRButton();
             UnionRoomChat_FreeGraphicsWork();
             FreeChatWork();
             SetMainCallback2(CB2_ReturnToField);

@@ -6,7 +6,6 @@
 #include "save.h"
 #include "data.h"
 #include "m4a.h"
-#include "help_system.h"
 #include "hall_of_fame.h"
 #include "pc_screen_effect.h"
 #include "new_menu_helpers.h"
@@ -318,7 +317,6 @@ static bool8 InitHallOfFameScreen(void)
     switch (gMain.state)
     {
     case 0:
-        gHelpSystemEnabled = FALSE;
         SetVBlankCallback(NULL);
         ClearVramOamPltt_LoadHofPal();
         sHofGfxPtr = AllocZeroed(sizeof(struct HofGfx));

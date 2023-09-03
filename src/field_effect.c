@@ -12,7 +12,6 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-#include "help_system.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
@@ -1278,7 +1277,6 @@ static bool8 FallWarpEffect_7(struct Task *task)
     {
         VarSet(VAR_TEMP_1, 1);
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
-        SetHelpContext(HELPCONTEXT_SURFING);
     }
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
     return FALSE;
@@ -3048,7 +3046,6 @@ static void UseSurfEffect_5(struct Task *task)
         UnlockPlayerFieldControls();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
         DestroyTask(FindTaskIdByFunc(Task_FldEffUseSurf));
-        SetHelpContext(HELPCONTEXT_SURFING);
     }
 }
 

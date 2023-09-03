@@ -223,7 +223,6 @@ SECTIONS {
         src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/diploma.o(.text);
-        src/save_failed_screen.o(.text);
         src/clear_save_data_screen.o(.text);
         src/evolution_graphics.o(.text);
         src/fldeff_teleport.o(.text);
@@ -257,7 +256,6 @@ SECTIONS {
         src/union_room_chat.o(.text);
         src/union_room_chat_display.o(.text);
         src/union_room_chat_objects.o(.text);
-        src/help_system.o(.text);
         src/fame_checker.o(.text);
         src/menu2.o(.text);
         src/oak_speech.o(.text);
@@ -508,7 +506,6 @@ SECTIONS {
         src/credits.o(.rodata);
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
-        src/save_failed_screen.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/new_menu_helpers.o(.rodata);
@@ -541,7 +538,6 @@ SECTIONS {
         src/union_room_chat.o(.rodata);
         src/union_room_chat_display.o(.rodata);
         src/union_room_chat_objects.o(.rodata);
-        src/help_system.o(.rodata);
         src/fame_checker.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);

@@ -1,8 +1,6 @@
 EventScript_PC::
 	lockall
 	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
-	setvar VAR_0x8004, HELPCONTEXT_PC
-	special Script_SetHelpContext
 	setvar VAR_0x8004, 0
 	special AnimatePcTurnOn
 	playse SE_PC_ON
@@ -49,8 +47,6 @@ EventScript_AccessPokemonStorage::
 	msgbox Text_OpenedPkmnStorage
 	special ShowPokemonStorageSystemPC
 	waitstate
-	setvar VAR_0x8004, HELPCONTEXT_PC
-	special Script_SetHelpContext
 	goto EventScript_PCMainMenu
 	end
 
@@ -66,19 +62,14 @@ EventScript_TurnOffPC::
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
 	special AnimatePcTurnOff
-	special SetHelpContextForMap
 	releaseall
 	end
 
 EventScript_AccessHallOfFame::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_TurnOffPC
 	playse SE_PC_LOGIN
-	setvar VAR_0x8004, HELPCONTEXT_PC_MISC
-	special BackupHelpContext
-	special Script_SetHelpContext
 	special HallOfFamePCBeginFade
 	waitstate
-	special RestoreHelpContext
 	goto EventScript_ChoosePCMenu
 	end
 

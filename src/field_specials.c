@@ -20,7 +20,6 @@
 #include "menu_indicators.h"
 #include "random.h"
 #include "mail_data.h"
-#include "help_system.h"
 #include "pokemon_storage_system.h"
 #include "script_menu.h"
 #include "data.h"
@@ -1486,7 +1485,6 @@ static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 
 void ForcePlayerToStartSurfing(void)
 {
-    SetHelpContext(HELPCONTEXT_SURFING);
     SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
 }
 

@@ -385,9 +385,6 @@ gSpecials::
 	def_special TakePokemonFromRoute5Daycare
 	def_special DoSeagallopFerryScene
 	def_special DoesPlayerPartyContainSpecies
-	def_special Script_SetHelpContext
-	def_special BackupHelpContext
-	def_special RestoreHelpContext
 	def_special ValidateSavedWonderCard
 	def_special SetUnlockedPokedexFlags
 	def_special InitUnionRoom
@@ -400,14 +397,11 @@ gSpecials::
 	def_special CloseMuseumFossilPic
 	def_special ChooseMonForMoveTutor
 	def_special SetBattledTrainerFlag
-	def_special SetHelpContextForMap
 	def_special DoSSAnneDepartureCutscene
 	def_special IsNationalPokedexEnabled
 	def_special CallTrainerTowerFunc
 	def_special BufferTMHMMoveName
 	def_special DaisyMassageServices
-	def_special HelpSystem_Disable
-	def_special HelpSystem_Enable
 	def_special SetPostgameFlags
 	def_special HasAtLeastOneBerry
 	def_special DisplayBerryPowderVendorMenu

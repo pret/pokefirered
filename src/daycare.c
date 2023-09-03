@@ -24,7 +24,6 @@
 #include "graphics.h"
 #include "scanline_effect.h"
 #include "naming_screen.h"
-#include "help_system.h"
 #include "field_fadetransition.h"
 #include "trade.h"
 #include "constants/daycare.h"
@@ -1749,7 +1748,6 @@ void EggHatch(void)
     LockPlayerFieldControls();
     CreateTask(Task_EggHatch, 10);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
-    HelpSystem_Disable();
 }
 
 static void Task_EggHatch(u8 taskID)
@@ -1855,7 +1853,6 @@ static void EggHatchSetMonNickname(void)
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     FreeMonSpritesGfx();
     Free(sEggHatchData);
-    HelpSystem_Enable();
     SetMainCallback2(CB2_ReturnToField);
 }
 
@@ -1978,7 +1975,6 @@ static void CB2_EggHatch_1(void)
             UnsetBgTilemapBuffer(1);
             Free(sEggHatchData);
             SetMainCallback2(CB2_ReturnToField);
-            HelpSystem_Enable();
         }
         break;
     }

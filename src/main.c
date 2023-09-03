@@ -6,14 +6,12 @@
 #include "m4a.h"
 #include "random.h"
 #include "gba/flash_internal.h"
-#include "help_system.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "play_time.h"
 #include "intro.h"
 #include "battle_controllers.h"
 #include "scanline_effect.h"
-#include "save_failed_screen.h"
 
 extern u32 intr_main[];
 
@@ -138,9 +136,6 @@ void AgbMain()
     SetDefaultFontsPointer();
 
     gSoftResetDisabled = FALSE;
-    gHelpSystemEnabled = FALSE;
-
-    SetNotInSaveFailedScreen();
 
 #ifndef NDEBUG
 #if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
@@ -216,14 +211,11 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
-    if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
-    {
-        if (gMain.callback1)
-            gMain.callback1();
+    if (gMain.callback1)
+        gMain.callback1();
 
-        if (gMain.callback2)
-            gMain.callback2();
-    }
+    if (gMain.callback2)
+        gMain.callback2();
 }
 
 void SetMainCallback2(MainCallback callback)

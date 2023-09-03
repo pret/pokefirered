@@ -44,7 +44,5 @@ void SE12PanpotControl(s8 pan);
 bool8 IsSEPlaying(void);
 bool8 IsBGMPlaying(void);
 bool8 IsSpecialSEPlaying(void);
-void SetBGMVolume_SuppressHelpSystemReduction(u16 volume);
-void BGMVolumeMax_EnableHelpSystemReduction(void);
 
 #endif // GUARD_SOUND_H

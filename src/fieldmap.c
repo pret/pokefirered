@@ -15,6 +15,7 @@ struct ConnectionFlags
 
 struct BackupMapLayout VMap;
 EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
+EWRAM_DATA u16 gBackupMapData2[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
@@ -103,6 +104,7 @@ static void InitMapLayoutData(struct MapHeader * mapHeader)
 {
     const struct MapLayout * mapLayout = mapHeader->mapLayout;
     CpuFastFill16(MAPGRID_UNDEFINED, gBackupMapData, sizeof(gBackupMapData));
+    CpuFastFill16(MAPGRID_UNDEFINED, gBackupMapData2, sizeof(gBackupMapData2));
     VMap.map = gBackupMapData;
     VMap.Xsize = mapLayout->width + MAP_OFFSET_W;
     VMap.Ysize = mapLayout->height + MAP_OFFSET_H;
@@ -116,6 +118,9 @@ static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
     s32 y;
     u16 *dest = VMap.map;
     dest += VMap.Xsize * 7 + MAP_OFFSET;
+
+    LZ77UnCompWram(map, gBackupMapData2);
+    map = gBackupMapData2;
 
     for (y = 0; y < height; y++)
     {
@@ -176,8 +181,9 @@ static void FillConnection(s32 x, s32 y, const struct MapHeader *connectedMapHea
     u16 *dest;
     s32 mapWidth;
 
+    LZ77UnCompWram(connectedMapHeader->mapLayout->map, gBackupMapData2);
     mapWidth = connectedMapHeader->mapLayout->width;
-    src = &connectedMapHeader->mapLayout->map[mapWidth * y2 + x2];
+    src = &gBackupMapData2[mapWidth * y2 + x2];
     dest = &VMap.map[VMap.Xsize * y + x];
 
     for (i = 0; i < height; i++)

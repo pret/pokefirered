@@ -65,3 +65,6 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "Good for you, good for you.\n"
     .string "Hohoho.$"
 
+PalletTown_Text_PressStartToOpenMenu::
+	.string "TRAINER TIPS\p"
+	.string "Press START to open the MENU!$"

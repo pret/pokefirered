@@ -213,24 +213,6 @@
       "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR",
       "var_value": "0",
       "script": "ViridianCity_EventScript_GymDoorLocked"
-    },
-    {
-      "type": "trigger",
-      "x": 20,
-      "y": 8,
-      "elevation": 3,
-      "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
-      "var_value": "1",
-      "script": "ViridianCity_EventScript_TutorialTriggerLeft"
-    },
-    {
-      "type": "trigger",
-      "x": 22,
-      "y": 8,
-      "elevation": 3,
-      "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
-      "var_value": "1",
-      "script": "ViridianCity_EventScript_TutorialTriggerRight"
     }
   ],
   "bg_events": [

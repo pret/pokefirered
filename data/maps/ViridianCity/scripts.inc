@@ -9,19 +9,12 @@ ViridianCity_MapScripts::
 ViridianCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
 	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_SetOldManBlockingRoad
-	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_SetOldManStandingByRoad
-	call_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_SetOldManNormal
+	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_SetOldManNormal
 	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0, ViridianCity_EventScript_TryUnlockGym
 	end
 
 ViridianCity_EventScript_SetOldManNormal::
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OLD_MAN_1
-	return
-
-ViridianCity_EventScript_SetOldManStandingByRoad::
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OLD_MAN_1
-	setobjectxyperm LOCALID_TUTORIAL_MAN, 21, 8
-	setobjectmovementtype LOCALID_TUTORIAL_MAN, MOVEMENT_TYPE_LOOK_AROUND
 	return
 
 ViridianCity_EventScript_SetOldManBlockingRoad::
@@ -101,45 +94,12 @@ ViridianCity_EventScript_OldManGymLeaderReturned::
 ViridianCity_EventScript_TutorialOldMan::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE01_GET, ViridianCity_EventScript_AskIfTeachyTVHelpful
-	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_TutorialCompleted
-	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_TutorialStart
+	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_TutorialCompleted
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_TutorialNotReady
-	end
-
-ViridianCity_EventScript_AskIfTeachyTVHelpful::
-	msgbox ViridianCity_Text_HowsTeachyTVHelping, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ViridianCity_EventScript_TeachyTVNotHelpful
-	msgbox ViridianCity_Text_MyGrandsonOnTheShow
-	release
-	end
-
-ViridianCity_EventScript_TeachyTVNotHelpful::
-	msgbox ViridianCity_Text_TooBusyForTeachyTV
-	release
 	end
 
 ViridianCity_EventScript_TutorialCompleted::
 	msgbox ViridianCity_Text_WeakenMonsFirstToCatch
-	release
-	end
-
-ViridianCity_EventScript_TutorialStart::
-	call ViridianCity_EventScript_DoTutorialBattle
-	release
-	end
-
-@ Unused
-ViridianCity_EventScript_WatchToLearnBasics::
-	msgbox ViridianCity_Text_WatchThatToLearnBasics
-	release
-	end
-
-@ Unused. Starts battle after the post battle text, which is odd.
-ViridianCity_EventScript_TutorialUnused::
-	msgbox ViridianCity_Text_ThatWasEducationalTakeThis
-	special StartOldManTutorialBattle
-	waitstate
 	release
 	end
 
@@ -200,38 +160,3 @@ ViridianCity_EventScript_RoadBlocked::
 ViridianCity_Movement_WalkDown::
 	walk_down
 	step_end
-
-ViridianCity_EventScript_TutorialTriggerLeft::
-	lockall
-	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	call ViridianCity_EventScript_DoTutorialBattle
-	release
-	end
-
-ViridianCity_EventScript_TutorialTriggerRight::
-	lockall
-	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	call ViridianCity_EventScript_DoTutorialBattle
-	release
-	end
-
-ViridianCity_EventScript_DoTutorialBattle::
-	msgbox ViridianCity_Text_ShowYouHowToCatchMons
-	closemessage
-	special StartOldManTutorialBattle
-	waitstate
-	lock
-	faceplayer
-	msgbox ViridianCity_Text_ThatWasEducationalTakeThis
-	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	giveitem ITEM_TEACHY_TV
-	msgbox ViridianCity_Text_WatchThatToLearnBasics
-	return

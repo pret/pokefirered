@@ -1179,13 +1179,8 @@ PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter::
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	call_if_set FLAG_OPENED_START_MENU, PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene
 	release
 	end
-
-PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene::
-	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
-	return
 
 PalletTown_ProfessorOaksLab_Movement_RivalWalksToCharmander::
 	walk_down

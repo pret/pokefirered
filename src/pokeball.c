@@ -386,17 +386,9 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     switch (throwCaseId)
     {
     case POKEBALL_PLAYER_SENDOUT:
-        if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-        {
-            x = 32;
-            y = 64;
-        }
-        else
-        {
-            gender = !!gender; // something unknown got optimized out
-            x = 48;
-            y = 70;
-        }
+        gender = !!gender; // something unknown got optimized out
+        x = 48;
+        y = 70;
 
         gBattlerTarget = battlerId;
         gSprites[ballSpriteId].x = x;

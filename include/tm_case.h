@@ -7,7 +7,6 @@ enum {
     TMCASE_GIVE_PARTY,
     TMCASE_SELL,
     TMCASE_GIVE_PC,
-    TMCASE_POKEDUDE,
     TMCASE_REOPENING,
 };
 
@@ -17,6 +16,5 @@ enum {
 
 void InitTMCase(u8 type, void (* exitCallback)(void), bool8 allowSelectClose);
 void ResetTMCaseCursorPos(void);
-void Pokedude_InitTMCase(void);
 
 #endif //GUARD_TM_CASE_H

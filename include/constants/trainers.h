@@ -172,8 +172,6 @@
 #define TRAINER_BACK_PIC_LEAF                   1
 #define TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN  2
 #define TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY      3
-#define TRAINER_BACK_PIC_POKEDUDE               4
-#define TRAINER_BACK_PIC_OLD_MAN                5
 
 // Special Trainer Ids.
 #define TRAINER_LINK_OPPONENT       0x800

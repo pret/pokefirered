@@ -3020,7 +3020,6 @@ BattleScript_WildMonFled::
 	end2
 
 BattleScript_PrintCantRunFromTrainer::
-	jumpifbattletype BATTLE_TYPE_FIRST_BATTLE, BattleScript_LeftoverBirchString
 	printstring STRINGID_NORUNNINGFROMTRAINERS
 	end2
 

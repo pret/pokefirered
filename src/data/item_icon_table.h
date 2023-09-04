@@ -389,7 +389,6 @@ static const u32 *const sItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_FAME_CHECKER]   = {gItemIcon_FameChecker, gItemIconPalette_FameChecker},
     [ITEM_TM_CASE]        = {gItemIcon_TMCase, gItemIconPalette_TMCase},
     [ITEM_BERRY_POUCH]    = {gItemIcon_BerryPouch, gItemIconPalette_BerryPouch},
-    [ITEM_TEACHY_TV]      = {gItemIcon_TeachyTV, gItemIconPalette_TeachyTV},
     [ITEM_TRI_PASS]       = {gItemIcon_TriPass, gItemIconPalette_TriPass},
     [ITEM_RAINBOW_PASS]   = {gItemIcon_RainbowPass, gItemIconPalette_RainbowPass},
     [ITEM_TEA]            = {gItemIcon_Tea, gItemIconPalette_Tea},

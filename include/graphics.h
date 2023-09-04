@@ -2652,8 +2652,6 @@ extern const u32 gTrainerPalette_RSBrendan1[];
 extern const u32 gTrainerPalette_RSMay1[];
 extern const u32 gTrainerPalette_LeafBackPic[];
 extern const u32 gTrainerPalette_RedBackPic[];
-extern const u32 gTrainerPalette_PokedudeBackPic[];
-extern const u32 gTrainerPalette_OldManBackPic[];
 extern const u32 gTrainerPalette_RSPokemonBreederM[];
 extern const u32 gTrainerPalette_RSPokemonBreederF[];
 extern const u32 gTrainerPalette_RSPokemonRangerM[];
@@ -2774,12 +2772,6 @@ extern const u16 gStandardMenuPalette[];
 // egg_hatch
 extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
-
-// teachy_tv
-extern const u8 gTeachyTv_Gfx[];
-extern const u8 gTeachyTvScreen_Tilemap[];
-extern const u8 gTeachyTvTitle_Tilemap[];
-extern const u32 gTeachyTv_Pal[];
 
 // item_pc
 extern const u8 gItemPcTiles[];
@@ -3953,8 +3945,6 @@ extern const u8 gBerryPouchBg1Tilemap[];
 
 extern const u8 gTrainerBackPic_Red[];
 extern const u8 gTrainerBackPic_Leaf[];
-extern const u8 gTrainerBackPic_Pokedude[];
-extern const u8 gTrainerBackPic_OldMan[];
 extern const u8 gTrainerBackPic_RSBrendan[];
 extern const u8 gTrainerBackPic_RSMay[];
 

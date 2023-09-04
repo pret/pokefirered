@@ -295,11 +295,7 @@ static void DoTrainerBattle(void)
 
 void StartOldManTutorialBattle(void)
 {
-    CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
-    LockPlayerFieldControls();
-    gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
-    gBattleTypeFlags = BATTLE_TYPE_OLD_MAN_TUTORIAL;
-    CreateBattleStartTask(B_TRANSITION_SLICE, 0);
+
 }
 
 void StartScriptedWildBattle(void)
@@ -393,25 +389,6 @@ void StartRegiBattle(void)
     CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RS_VS_TRAINER);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
-}
-
-// Unused
-static void EndPokedudeBattle(void)
-{
-    LoadPlayerParty();
-    CB2_EndWildBattle();
-}
-
-// Unused
-static void StartPokedudeBattle(void)
-{
-    LockPlayerFieldControls();
-    FreezeObjectEvents();
-    StopPlayerAvatar();
-    gMain.savedCallback = EndPokedudeBattle;
-    SavePlayerParty();
-    InitPokedudePartyAndOpponent();
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
 static void CB2_EndWildBattle(void)

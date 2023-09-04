@@ -60,22 +60,6 @@ const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
     gTrainerBackPic_Leaf + 0x2000, 0x0800,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[] =
-{
-    gTrainerBackPic_Pokedude, 0x0800,
-    gTrainerBackPic_Pokedude + 0x0800, 0x0800,
-    gTrainerBackPic_Pokedude + 0x1000, 0x0800,
-    gTrainerBackPic_Pokedude + 0x1800, 0x0800,
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =
-{
-    gTrainerBackPic_OldMan, 0x0800,
-    gTrainerBackPic_OldMan + 0x0800, 0x0800,
-    gTrainerBackPic_OldMan + 0x1000, 0x0800,
-    gTrainerBackPic_OldMan + 0x1800, 0x0800,
-};
-
 const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[] =
 {
     gTrainerBackPic_RSBrendan, 0x0800,

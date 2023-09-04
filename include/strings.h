@@ -108,8 +108,6 @@ extern const u8 gText_OhNoICantBuyThat[];
 extern const u8 gText_HowManyWouldYouLikeToSell[];
 extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
 extern const u8 gText_TurnedOverItemsWorthYen[];
-extern const u8 gPokedudeText_TMTypes[];
-extern const u8 gPokedudeText_ReadTMDescription[];
 extern const u8 gFameCheckerText_Cancel[];
 extern const u8 gText_SelectorArrow2[];
 extern const u8 gFameCheckerText_FameCheckerWillBeClosed[];
@@ -121,28 +119,6 @@ extern const u8 gFameCheckerOakName[]; // "OAK$"
 extern const u8 gFameCheckerDaisyName[]; // "DAISY$"
 extern const u8 gFameCheckerBillName[]; // "BILL$"
 extern const u8 gFameCheckerMrFujiName[]; // "FUJI$"
-
-// teachy_tv
-extern const u8 gTeachyTvString_TeachBattle[];
-extern const u8 gTeachyTvString_StatusProblems[];
-extern const u8 gTeachyTvString_TypeMatchups[];
-extern const u8 gTeachyTvString_CatchPkmn[];
-extern const u8 gTeachyTvString_AboutTMs[];
-extern const u8 gTeachyTvString_RegisterItem[];
-extern const u8 gTeachyTvString_Cancel[];
-extern const u8 gTeachyTvText_PokedudeSaysHello[];
-extern const u8 gTeachyTvText_BattleScript1[];
-extern const u8 gTeachyTvText_StatusScript1[];
-extern const u8 gTeachyTvText_MatchupsScript1[];
-extern const u8 gTeachyTvText_CatchingScript1[];
-extern const u8 gTeachyTvText_TMsScript1[];
-extern const u8 gTeachyTvText_RegisterScript1[];
-extern const u8 gTeachyTvText_BattleScript2[];
-extern const u8 gTeachyTvText_StatusScript2[];
-extern const u8 gTeachyTvText_MatchupsScript2[];
-extern const u8 gTeachyTvText_CatchingScript2[];
-extern const u8 gTeachyTvText_TMsScript2[];
-extern const u8 gTeachyTvText_RegisterScript2[];
 
 // help_system_812B1E0
 extern const u8 gText_HelpSystemControls_A_Next[];
@@ -239,28 +215,6 @@ extern const u8 gText_OakNoRunningFromATrainer[];
 extern const u8 gText_WinEarnsPrizeMoney[];
 extern const u8 gText_HowDissapointing[];
 extern const u8 gText_WhatWillOldManDo[];
-
-// battle_controller_pokedude
-extern const u8 Pokedude_Text_SpeedierBattlerGoesFirst[];
-extern const u8 Pokedude_Text_MyRattataFasterThanPidgey[];
-extern const u8 Pokedude_Text_BattlersTakeTurnsAttacking[];
-extern const u8 Pokedude_Text_MyRattataWonGetsEXP[];
-extern const u8 Pokedude_Text_UhOhRattataPoisoned[];
-extern const u8 Pokedude_Text_HealStatusRightAway[];
-extern const u8 Pokedude_Text_UsingItemTakesTurn[];
-extern const u8 Pokedude_Text_YayWeManagedToWin[];
-extern const u8 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass[];
-extern const u8 Pokedude_Text_GrassEffectiveAgainstWater[];
-extern const u8 Pokedude_Text_LetsTryShiftingMons[];
-extern const u8 Pokedude_Text_ShiftingUsesTurn[];
-extern const u8 Pokedude_Text_ButterfreeDoubleResistsGrass[];
-extern const u8 Pokedude_Text_ButterfreeGoodAgainstOddish[];
-extern const u8 Pokedude_Text_YeahWeWon[];
-extern const u8 Pokedude_Text_WeakenMonBeforeCatching[];
-extern const u8 Pokedude_Text_BestIfTargetStatused[];
-extern const u8 Pokedude_Text_CantDoubleUpOnStatus[];
-extern const u8 Pokedude_Text_LetMeThrowBall[];
-extern const u8 Pokedude_Text_PickBestKindOfBall[];
 
 // party_menu
 extern const u8 gText_ChoosePokemon[];

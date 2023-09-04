@@ -69,8 +69,6 @@ void ClearSelectedPartyOrder(void);
 void ChooseMonForTradingBoard(u8 menuType, MainCallback callback);
 void ChooseMonForMoveTutor(void);
 void OpenPartyMenuInTutorialBattle(u8 partyAction);
-void Pokedude_OpenPartyMenuInBattle(void);
-void Pokedude_ChooseMonForInBattleItem(void);
 void EnterPartyFromItemMenuInBattle(void);
 void BufferBattlePartyCurrentOrder(void);
 void BufferBattlePartyCurrentOrderBySide(u8 battlerId, u8 flankId);

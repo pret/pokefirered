@@ -49,7 +49,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "teachy_tv.h"
 #include "text_window.h"
 #include "tm_case.h"
 #include "trade.h"
@@ -371,10 +370,6 @@ static void Task_FirstBattleEnterParty_StartPrintMsg2(u8 taskId);
 static void Task_FirstBattleEnterParty_RunPrinterMsg2(u8 taskId);
 static void Task_FirstBattleEnterParty_FadeNormal(u8 taskId);
 static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId);
-static void Task_PartyMenu_PokedudeStep(u8 taskId);
-static void Task_PartyMenuFromBag_PokedudeStep(u8 taskId);
-static bool8 PartyMenuPokedudeIsCancelled(u8 taskId);
-static void PartyMenuHandlePokedudeCancel(void);
 static void PartyMenu_Oak_PrintText(u8 windowId, const u8 *str);
 static u8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void);
 static void FirstBattleEnterParty_DestroyVoiceoverWindow(u8 windowId);
@@ -1916,85 +1911,6 @@ static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId)
         else
             DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
         gTasks[taskId].func = Task_HandleChooseMonInput;
-    }
-}
-
-// Pokedude switches Pokemon
-static void Task_PartyMenu_Pokedude(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    data[0] = 0;
-    gTasks[taskId].func = Task_PartyMenu_PokedudeStep;
-}
-
-static void Task_PartyMenu_PokedudeStep(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (!gPaletteFade.active && PartyMenuPokedudeIsCancelled(taskId) != TRUE)
-    {
-        switch (data[0])
-        {
-        case 80:
-            UpdateCurrentPartySelection(&gPartyMenu.slotId, MENU_DIR_RIGHT);
-            break;
-        case 160:
-            PlaySE(SE_SELECT);
-            CreateSelectionWindow();
-            break;
-        case 240:
-            PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
-            sCursorOptions[sPartyMenuInternal->actions[0]].func(taskId);
-            break;
-        }
-        ++data[0];
-    }
-}
-
-static bool8 PartyMenuPokedudeIsCancelled(u8 taskId)
-{
-    if (JOY_NEW(B_BUTTON))
-    {
-        sPartyMenuInternal->exitCallback = PartyMenuHandlePokedudeCancel;
-        Task_ClosePartyMenu(taskId);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static void PartyMenuHandlePokedudeCancel(void)
-{
-    FreeRestoreBattleData();
-    LoadPlayerParty();
-    SetTeachyTvControllerModeToResume();
-    SetMainCallback2(CB2_ReturnToTeachyTV);
-}
-
-// Pokedude uses item on his own Pokemon
-static void Task_PartyMenuFromBag_Pokedude(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    data[0] = 0;
-    gTasks[taskId].func = Task_PartyMenuFromBag_PokedudeStep;
-}
-
-static void Task_PartyMenuFromBag_PokedudeStep(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (!gPaletteFade.active && PartyMenuPokedudeIsCancelled(taskId) != TRUE)
-    {
-        if (data[0] != 80)
-        {
-            ++data[0];
-        }
-        else
-        {
-            sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
-            gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
-        }
     }
 }
 
@@ -5645,74 +5561,32 @@ static u8 GetPartyLayoutFromBattleType(void)
 
 void OpenPartyMenuInTutorialBattle(u8 partyAction)
 {
-    if (!BtlCtrl_OakOldMan_TestState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
-    {
-        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
-                      GetPartyLayoutFromBattleType(),
-                      partyAction,
-                      FALSE,
-                      PARTY_MSG_NONE,
-                      Task_FirstBattleEnterParty_WaitFadeIn,
-                      SetCB2ToReshowScreenAfterMenu);
-        BtlCtrl_OakOldMan_SetState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU);
-    }
-    else
-    {
-        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
-                      GetPartyLayoutFromBattleType(),
-                      partyAction,
-                      FALSE,
-                      PARTY_MSG_CHOOSE_MON,
-                      Task_HandleChooseMonInput,
-                      SetCB2ToReshowScreenAfterMenu);
-    }
-    ReshowBattleScreenDummy();
-    UpdatePartyToBattleOrder();
-}
-
-void Pokedude_OpenPartyMenuInBattle(void)
-{
-    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_CHOOSE_MON, Task_PartyMenu_Pokedude, SetCB2ToReshowScreenAfterMenu);
-    ReshowBattleScreenDummy();
-    UpdatePartyToBattleOrder();
-}
-
-void Pokedude_ChooseMonForInBattleItem(void)
-{
-    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_REUSABLE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, Task_PartyMenuFromBag_Pokedude, CB2_BagMenuFromBattle);
+    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
+                    GetPartyLayoutFromBattleType(),
+                    partyAction,
+                    FALSE,
+                    PARTY_MSG_CHOOSE_MON,
+                    Task_HandleChooseMonInput,
+                    SetCB2ToReshowScreenAfterMenu);
     ReshowBattleScreenDummy();
     UpdatePartyToBattleOrder();
 }
 
 void EnterPartyFromItemMenuInBattle(void)
 {
-    if (!BtlCtrl_OakOldMan_TestState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
-    {
-        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
-                      GetPartyLayoutFromBattleType(),
-                      PARTY_ACTION_USE_ITEM,
-                      FALSE,
-                      PARTY_MSG_NONE,
-                      Task_FirstBattleEnterParty_WaitFadeIn,
-                      CB2_BagMenuFromBattle);
-        BtlCtrl_OakOldMan_SetState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU);
-    }
-    else
-    {
-        MainCallback callback;
+    MainCallback callback;
 
-        if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
-            callback = CB2_ReturnToBerryPouchMenu;
-        else
-            callback = CB2_BagMenuFromBattle;
-        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
-                      GetPartyLayoutFromBattleType(),
-                      PARTY_ACTION_USE_ITEM,
-                      FALSE,
-                      PARTY_MSG_USE_ON_WHICH_MON,
-                      Task_HandleChooseMonInput,
-                      callback);
-    }
+    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
+        callback = CB2_ReturnToBerryPouchMenu;
+    else
+        callback = CB2_BagMenuFromBattle;
+    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
+                    GetPartyLayoutFromBattleType(),
+                    PARTY_ACTION_USE_ITEM,
+                    FALSE,
+                    PARTY_MSG_USE_ON_WHICH_MON,
+                    Task_HandleChooseMonInput,
+                    callback);
     ReshowBattleScreenDummy();
     UpdatePartyToBattleOrder();
 }

@@ -16,22 +16,6 @@ static const union AnimCmd sAnimCmd_Leaf_1[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnimCmd_Pokedude_1[] = {
-    ANIMCMD_FRAME(1, 24),
-    ANIMCMD_FRAME(2, 9),
-    ANIMCMD_FRAME(3, 24),
-    ANIMCMD_FRAME(0, 9),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnimCmd_OldMan_1[] = {
-    ANIMCMD_FRAME(1, 24),
-    ANIMCMD_FRAME(2, 9),
-    ANIMCMD_FRAME(3, 24),
-    ANIMCMD_FRAME(0, 9),
-    ANIMCMD_END
-};
-
 static const union AnimCmd sAnimCmd_RSBrendan_1[] = {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
@@ -60,16 +44,6 @@ const union AnimCmd *const sBackAnims_Leaf[] = {
     sAnimCmd_Leaf_1
 };
 
-const union AnimCmd *const sBackAnims_Pokedude[] = {
-    sAnim_GeneralFrame0,
-    sAnimCmd_Pokedude_1
-};
-
-const union AnimCmd *const sBackAnims_OldMan[] = {
-    sAnim_GeneralFrame0,
-    sAnimCmd_OldMan_1
-};
-
 const union AnimCmd *const sBackAnims_RSBrendan[] = {
     sAnim_GeneralFrame3,
     sAnimCmd_RSBrendan_1
@@ -84,7 +58,5 @@ const union AnimCmd *const *const gTrainerBackAnimsPtrTable[] = {
     sBackAnims_Red,
     sBackAnims_Leaf,
     sBackAnims_RSBrendan,
-    sBackAnims_RSMay,
-    sBackAnims_Pokedude,
-    sBackAnims_OldMan
+    sBackAnims_RSMay
 };

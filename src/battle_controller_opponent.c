@@ -301,15 +301,7 @@ static void CompleteOnHealthbarDone(void)
     }
     else
     {
-        if (!BtlCtrl_OakOldMan_TestState2Flag(1) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
-        {
-            BtlCtrl_OakOldMan_SetState2Flag(1);
-            gBattlerControllerFuncs[gActiveBattler] = PrintOakText_InflictingDamageIsKey;
-        }
-        else
-        {
-            OpponentBufferExecCompleted();
-        }
+        OpponentBufferExecCompleted();
     }
 }
 
@@ -1214,18 +1206,6 @@ static void OpponentHandlePrintString(void)
         BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-    {
-        switch (*stringId)
-        {
-        case 0x17F:
-            gBattlerControllerFuncs[gActiveBattler] = PrintOakText_HowDisappointing;
-            return;
-        case 0xE3:
-            gBattlerControllerFuncs[gActiveBattler] = PrintOakText_OakNoRunningFromATrainer;
-            return;
-        }
-    }
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
@@ -1250,7 +1230,7 @@ static void OpponentHandleChooseMove(void)
     u8 chosenMoveId;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
     {
 
         BattleAI_SetupAIData();

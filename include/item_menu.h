@@ -26,7 +26,6 @@ extern u16 gSpecialVar_ItemId;
 // Exported ROM declarations
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void ResetBagCursorPositions(void);
-void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);
 void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void ItemMenu_StartFadeToExitCallback(u8 taskId);

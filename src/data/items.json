@@ -5915,22 +5915,6 @@
       "secondaryId": 0
     },
     {
-      "english": "TEACHY TV",
-      "itemId": "ITEM_TEACHY_TV",
-      "price": 0,
-      "holdEffect": "HOLD_EFFECT_NONE",
-      "holdEffectParam": 0,
-      "description_english": "A television set that is tuned to\\na program with useful tips for\\nnovice TRAINERS.",
-      "importance": 1,
-      "registrability": 1,
-      "pocket": "POCKET_KEY_ITEMS",
-      "type": "ITEM_TYPE_FIELD",
-      "fieldUseFunc": "FieldUseFunc_TeachyTv",
-      "battleUsage": 0,
-      "battleUseFunc": "NULL",
-      "secondaryId": 0
-    },
-    {
       "english": "TRI-PASS",
       "itemId": "ITEM_TRI_PASS",
       "price": 0,

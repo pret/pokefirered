@@ -86,55 +86,27 @@ static void InitSinglePlayerBtlControllers(void)
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
         gBattleMainFunc = BeginBattleIntro;
-        if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-        {
-            gBattlerControllerFuncs[0] = SetControllerToPokedude;
-            gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToPokedude;
-            gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-            gBattlersCount = 2;
-        }
+        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+            gBattlerControllerFuncs[0] = SetControllerToSafari;
         else
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                gBattlerControllerFuncs[0] = SetControllerToSafari;
-            else if (gBattleTypeFlags & (BATTLE_TYPE_OLD_MAN_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
-                gBattlerControllerFuncs[0] = SetControllerToOakOrOldMan;
-            else
-                gBattlerControllerFuncs[0] = SetControllerToPlayer;
-            gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToOpponent;
-            gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-            gBattlersCount = 2;
-        }
+            gBattlerControllerFuncs[0] = SetControllerToPlayer;
+        gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+        gBattlerControllerFuncs[1] = SetControllerToOpponent;
+        gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+        gBattlersCount = 2;
     }
     else
     {
         gBattleMainFunc = BeginBattleIntro;
-        if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-        {
-            gBattlerControllerFuncs[0] = SetControllerToPokedude;
-            gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToPokedude;
-            gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-            gBattlerControllerFuncs[2] = SetControllerToPokedude;
-            gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
-            gBattlerControllerFuncs[3] = SetControllerToPokedude;
-            gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
-            gBattlersCount = MAX_BATTLERS_COUNT;
-        }
-        else
-        {
-            gBattlerControllerFuncs[0] = SetControllerToPlayer;
-            gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-            gBattlerControllerFuncs[1] = SetControllerToOpponent;
-            gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-            gBattlerControllerFuncs[2] = SetControllerToPlayer;
-            gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
-            gBattlerControllerFuncs[3] = SetControllerToOpponent;
-            gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
-            gBattlersCount = MAX_BATTLERS_COUNT;
-        }
+        gBattlerControllerFuncs[0] = SetControllerToPlayer;
+        gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+        gBattlerControllerFuncs[1] = SetControllerToOpponent;
+        gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+        gBattlerControllerFuncs[2] = SetControllerToPlayer;
+        gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
+        gBattlerControllerFuncs[3] = SetControllerToOpponent;
+        gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
+        gBattlersCount = MAX_BATTLERS_COUNT;
     }
 }
 

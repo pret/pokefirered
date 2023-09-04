@@ -14,7 +14,6 @@
 #include "link.h"
 #include "money.h"
 #include "shop.h"
-#include "teachy_tv.h"
 #include "pokemon_storage_system.h"
 #include "party_menu.h"
 #include "data.h"
@@ -105,14 +104,6 @@ static EWRAM_DATA struct {
     u8 unused[8];
 } * sTMCaseDynamicResources = NULL;
 
-// Save the player's bag state when the Pokedude's bag is being shown
-static EWRAM_DATA struct {
-    struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
-    struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
-    u16 selectedRow;
-    u16 scrollOffset;
-} * sPokedudeBagBackup = NULL;
-
 static EWRAM_DATA void *sTilemapBuffer = NULL;
 static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
 static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
@@ -158,8 +149,6 @@ static void Task_QuantitySelect_HandleInput(u8 taskId);
 static void Task_PrintSaleConfirmedText(u8 taskId);
 static void Task_DoSaleOfTMs(u8 taskId);
 static void Task_AfterSale_ReturnToList(u8 taskId);
-static void Task_Pokedude_Start(u8 taskId);
-static void Task_Pokedude_Run(u8 taskId);
 static void InitWindowTemplatesAndPals(void);
 static void TMCase_Print(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 static void TMCase_SetWindowBorder1(u8 windowId);
@@ -463,9 +452,6 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
 #define tQuantityOwned    data[2]
 #define tQuantitySelected data[8]
 
-#define tPokedudeState data[8] // Re-used
-#define tPokedudeTimer data[9]
-
 static bool8 DoSetUpTMCaseUI(void)
 {
     u8 taskId;
@@ -534,10 +520,7 @@ static bool8 DoSetUpTMCaseUI(void)
         gMain.state++;
         break;
     case 14:
-        if (sTMCaseStaticResources.menuType == TMCASE_POKEDUDE)
-            taskId = CreateTask(Task_Pokedude_Start, 0);
-        else
-            taskId = CreateTask(Task_HandleListInput, 0);
+        taskId = CreateTask(Task_HandleListInput, 0);
         gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sTMCaseStaticResources.scrollOffset, sTMCaseStaticResources.selectedRow);
         gMain.state++;
         break;
@@ -1317,164 +1300,6 @@ static void Task_AfterSale_ReturnToList(u8 taskId)
     }
 }
 
-void Pokedude_InitTMCase(void)
-{
-    sPokedudeBagBackup = AllocZeroed(sizeof(*sPokedudeBagBackup));
-    memcpy(sPokedudeBagBackup->bagPocket_TMHM, gSaveBlock1Ptr->bagPocket_TMHM, sizeof(gSaveBlock1Ptr->bagPocket_TMHM));
-    memcpy(sPokedudeBagBackup->bagPocket_KeyItems, gSaveBlock1Ptr->bagPocket_KeyItems, sizeof(gSaveBlock1Ptr->bagPocket_KeyItems));
-    sPokedudeBagBackup->selectedRow = sTMCaseStaticResources.selectedRow;
-    sPokedudeBagBackup->scrollOffset = sTMCaseStaticResources.scrollOffset;
-    ClearItemSlots(gSaveBlock1Ptr->bagPocket_TMHM, ARRAY_COUNT(gSaveBlock1Ptr->bagPocket_TMHM));
-    ClearItemSlots(gSaveBlock1Ptr->bagPocket_KeyItems, ARRAY_COUNT(gSaveBlock1Ptr->bagPocket_KeyItems));
-    ResetTMCaseCursorPos();
-    AddBagItem(ITEM_TM01, 1);
-    AddBagItem(ITEM_TM03, 1);
-    AddBagItem(ITEM_TM09, 1);
-    AddBagItem(ITEM_TM35, 1);
-    InitTMCase(TMCASE_POKEDUDE, CB2_ReturnToTeachyTV, 0);
-}
-
-static void Task_Pokedude_Start(u8 taskId)
-{
-    s16 * data = gTasks[taskId].data;
-
-    if (!gPaletteFade.active)
-    {
-        tPokedudeState = 0;
-        tPokedudeTimer = 0;
-        gTasks[taskId].func = Task_Pokedude_Run;
-    }
-}
-
-#define POKEDUDE_INPUT_DELAY 101
-
-static void Task_Pokedude_Run(u8 taskId)
-{
-    s16 * data = gTasks[taskId].data;
-
-    if (JOY_NEW(B_BUTTON))
-    {
-        if (tPokedudeState < 21)
-        {
-            tPokedudeState = 21;
-            SetTeachyTvControllerModeToResume();
-        }
-    }
-
-    switch (tPokedudeState)
-    {
-    case 0:
-        BeginNormalPaletteFade(0xFFFF8405, 4, 0, 6, 0);
-        SetDescriptionWindowShade(1);
-        tPokedudeState++;
-        break;
-    case 1:
-    case 11:
-        if (!gPaletteFade.active)
-        {
-            if (++tPokedudeTimer > POKEDUDE_INPUT_DELAY)
-            {
-                tPokedudeTimer = 0;
-                tPokedudeState++;
-            }
-        }
-        break;
-    case 2:
-    case 3:
-    case 4:
-    case 12:
-    case 13:
-    case 14:
-        if (tPokedudeTimer == 0)
-        {
-            gMain.newKeys = 0;
-            gMain.newAndRepeatedKeys = DPAD_DOWN;
-            ListMenu_ProcessInput(tListTaskId);
-        }
-        if (++tPokedudeTimer > POKEDUDE_INPUT_DELAY)
-        {
-            tPokedudeTimer = 0;
-            tPokedudeState++;
-        }
-        break;
-    case 5:
-    case 6:
-    case 7:
-    case 15:
-    case 16:
-    case 17:
-        if (tPokedudeTimer == 0)
-        {
-            gMain.newKeys = 0;
-            gMain.newAndRepeatedKeys = DPAD_UP;
-            ListMenu_ProcessInput(tListTaskId);
-        }
-        if (++tPokedudeTimer > POKEDUDE_INPUT_DELAY)
-        {
-            tPokedudeTimer = 0;
-            tPokedudeState++;
-        }
-        break;
-    case 8:
-        SetDescriptionWindowShade(1);
-        PrintMessageWithFollowupTask(taskId, FONT_MALE, gPokedudeText_TMTypes, NULL);
-        gTasks[taskId].func = Task_Pokedude_Run;
-        tPokedudeState++;
-        break;
-    case 9:
-    case 19:
-        RunTextPrinters();
-        if (!IsTextPrinterActive(WIN_MESSAGE))
-            tPokedudeState++;
-        break;
-    case 10:
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-        {
-            SetDescriptionWindowShade(0);
-            BeginNormalPaletteFade(0x00000400, 0, 6, 0, 0);
-            ClearDialogWindowAndFrameToTransparent(WIN_MESSAGE, FALSE);
-            ScheduleBgCopyTilemapToVram(1);
-            tPokedudeState++;
-        }
-        break;
-    case 18:
-        SetDescriptionWindowShade(1);
-        PrintMessageWithFollowupTask(taskId, FONT_MALE, gPokedudeText_ReadTMDescription, NULL);
-        gTasks[taskId].func = Task_Pokedude_Run; // this function
-        tPokedudeState++;
-        break;
-    case 20:
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-            tPokedudeState++;
-        break;
-    case 21:
-        if (!gPaletteFade.active)
-        {
-            // Restore the player's bag
-            memcpy(gSaveBlock1Ptr->bagPocket_TMHM, sPokedudeBagBackup->bagPocket_TMHM, sizeof(gSaveBlock1Ptr->bagPocket_TMHM));
-            memcpy(gSaveBlock1Ptr->bagPocket_KeyItems, sPokedudeBagBackup->bagPocket_KeyItems, sizeof(gSaveBlock1Ptr->bagPocket_KeyItems));
-            DestroyListMenuTask(tListTaskId, NULL, NULL);
-            sTMCaseStaticResources.selectedRow = sPokedudeBagBackup->selectedRow;
-            sTMCaseStaticResources.scrollOffset = sPokedudeBagBackup->scrollOffset;
-            Free(sPokedudeBagBackup);
-            CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
-            CB2_SetUpReshowBattleScreenAfterMenu();
-            BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, 0);
-            tPokedudeState++;
-        }
-        break;
-    default:
-        if (!gPaletteFade.active)
-        {
-            SetMainCallback2(sTMCaseStaticResources.exitCallback);
-            RemoveScrollArrows();
-            DestroyTMCaseBuffers();
-            DestroyTask(taskId);
-        }
-        break;
-    }
-}
-
 static void InitWindowTemplatesAndPals(void)
 {
     u8 i;
@@ -1648,8 +1473,6 @@ static void TintDiscpriteByType(u8 type)
 {
     u8 palOffset = PLTT_ID(IndexOfSpritePaletteTag(TAG_DISC));
     LoadPalette(sTMSpritePaletteBuffer + sTMSpritePaletteOffsetByType[type], OBJ_PLTT_OFFSET + palOffset, PLTT_SIZE_4BPP);
-    if (sTMCaseStaticResources.menuType == TMCASE_POKEDUDE)
-        BlendPalettes(1 << (16 + palOffset), 4, RGB_BLACK);
 }
 
 static void SetDiscSpritePosition(struct Sprite *sprite, u8 tmIdx)

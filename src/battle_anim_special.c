@@ -762,18 +762,10 @@ void AnimTask_ThrowBallSpecial(u8 taskId)
     u8 subpriority;
     u8 spriteId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL)
-    {
-        x = 28;
-        y = 11;
-    }
-    else
-    {
-        x = 23;
-        y = 11;
-        if (gSaveBlock2Ptr->playerGender == FEMALE)
-            y = 13;
-    }
+    x = 23;
+    y = 11;
+    if (gSaveBlock2Ptr->playerGender == FEMALE)
+        y = 13;
 
     ballId = ItemIdToBallId(gLastUsedItem);
     subpriority = GetBattlerSpriteSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;

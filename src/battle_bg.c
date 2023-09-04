@@ -698,15 +698,6 @@ void LoadBattleMenuWindowGfx(void)
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 14] = RGB(31, 31, 31);
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 15] = RGB( 26,  26,  25);
     CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(5) + 12], &gPlttBufferFaded[BG_PLTT_ID(5) + 12], PLTT_SIZEOF(4));
-
-    if (gBattleTypeFlags & (BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_POKEDUDE))
-    {
-        Menu_LoadStdPalAt(BG_PLTT_ID(7));
-        LoadMenuMessageWindowGfx(0, 0x030, BG_PLTT_ID(7));
-
-        gPlttBufferUnfaded[BG_PLTT_ID(7) + 6] = RGB( 0,  0,  0);
-        CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(7) + 6], &gPlttBufferFaded[BG_PLTT_ID(7) + 6], PLTT_SIZEOF(1));
-    }
 }
 
 void DrawMainBattleBackground(void)
@@ -998,10 +989,6 @@ void DrawBattleEntryBackground(void)
         gBattle_BG2_Y = -164;
         LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-    {
-        LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_GRASS);
-    }
     else if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER))
     {
         LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
@@ -1051,11 +1038,6 @@ static u8 GetBattleTerrainOverride(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER))
     {
         return BATTLE_TERRAIN_LINK;
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-    {
-        gBattleTerrain = BATTLE_TERRAIN_GRASS;
-        return BATTLE_TERRAIN_GRASS;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {

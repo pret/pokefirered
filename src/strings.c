@@ -981,8 +981,6 @@ const u8 gString_SlotMachineControls[] = _("{DPAD_LEFTRIGHT}COMBOS {DPAD_DOWN}WA
 const u8 gText_TeachyTV[] = _("おしえテレビ");
 const u8 gText_End[] = _("おしまい");
 
-#include "data/text/teachy_tv.h"
-
 const u8 gString_Bill[] = _("BILL");
 const u8 gString_Someone[] = _("SOMEONE");
 const u8 gString_Help[] = _("HELP");

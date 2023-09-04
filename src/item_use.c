@@ -27,7 +27,6 @@
 #include "script.h"
 #include "strings.h"
 #include "task.h"
-#include "teachy_tv.h"
 #include "tm_case.h"
 #include "vs_seeker.h"
 #include "constants/sound.h"
@@ -513,33 +512,14 @@ static void InitBerryPouchFromBattle(void)
 
 void FieldUseFunc_TeachyTv(u8 taskId)
 {
-    if (gTasks[taskId].data[3] == 0)
-    {
-        ItemMenu_SetExitCallback(InitTeachyTvFromBag);
-        ItemMenu_StartFadeToExitCallback(taskId);
-    }
-    else
-    {
-        StopPokemonLeagueLightingEffectTask();
-        FadeScreen(FADE_TO_BLACK, 0);
-        gTasks[taskId].func = Task_InitTeachyTvFromField;
-    }
 }
 
 static void InitTeachyTvFromBag(void)
 {
-    InitTeachyTvController(0, CB2_BagMenuFromStartMenu);
 }
 
 static void Task_InitTeachyTvFromField(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        CleanupOverworldWindowsAndTilemaps();
-        SetFieldCallback2ForItemUse();
-        InitTeachyTvController(0, CB2_ReturnToField);
-        DestroyTask(taskId);
-    }
 }
 
 void FieldUseFunc_Repel(u8 taskId)

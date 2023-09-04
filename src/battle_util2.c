@@ -10,13 +10,6 @@ void AllocateBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
         InitTrainerTowerBattleStruct();
-    if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-    {
-        s32 i;
-
-        for (i = 0; i < 4; i++)
-            gPokedudeBattlerStates[i] = AllocZeroed(sizeof(struct PokedudeBattlerState));
-    }
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
 
@@ -44,15 +37,6 @@ void FreeBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
         FreeTrainerTowerBattleStruct();
-    if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-    {
-        s32 i;
-
-        for (i = 0; i < 4; i++)
-        {
-            FREE_AND_SET_NULL(gPokedudeBattlerStates[i]);
-        }
-    }
     if (gBattleResources != NULL)
     {
         FREE_AND_SET_NULL(gBattleStruct);

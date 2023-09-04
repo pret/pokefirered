@@ -284,8 +284,6 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
         src/text_window.o(.text);
-        src/battle_controller_pokedude.o(.text);
-        src/teachy_tv.o(.text);
         src/ereader_helpers.o(.text);
         src/digit_obj_util.o(.text);
         src/ss_anne.o(.text);
@@ -568,8 +566,6 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
-        src/battle_controller_pokedude.o(.rodata);
-        src/teachy_tv.o(.rodata);
         src/digit_obj_util.o(.rodata);
         src/ss_anne.o(.rodata);
         src/cereader_tool.o(.rodata);
@@ -922,7 +918,6 @@ SECTIONS {
         sound/songs/midi/mus_mystery_gift.o(.rodata);
         sound/songs/midi/mus_berry_pick.o(.rodata);
         sound/songs/midi/mus_sevii_cave.o(.rodata);
-        sound/songs/midi/mus_teachy_tv_show.o(.rodata);
         sound/songs/midi/mus_sevii_route.o(.rodata);
         sound/songs/midi/mus_sevii_dungeon.o(.rodata);
         sound/songs/midi/mus_sevii_123.o(.rodata);
@@ -936,7 +931,6 @@ SECTIONS {
         sound/songs/midi/mus_encounter_deoxys.o(.rodata);
         sound/songs/midi/mus_trainer_tower.o(.rodata);
         sound/songs/midi/mus_slow_pallet.o(.rodata);
-        sound/songs/midi/mus_teachy_tv_menu.o(.rodata);
     }
 
     lib_rodata :

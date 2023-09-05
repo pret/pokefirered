@@ -23,6 +23,7 @@
 *.id2
 *.latfont
 *.lz
+*.lzp
 *.map
 *.nam
 *.o

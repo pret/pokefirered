@@ -442,6 +442,89 @@ void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char *
     free(compressedData);
 }
 
+void HandleLZCompressPlusCommand(char *inputPath, char *outputPath, int argc, char **argv)
+{
+    int overflowSize = 0;
+    int minDistance = 2; // default, for compatibility with LZ77UnCompVram()
+
+    for (int i = 3; i < argc; i++)
+    {
+        char *option = argv[i];
+
+        if (strcmp(option, "-overflow") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No size following \"-overflow\".\n");
+
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &overflowSize))
+                FATAL_ERROR("Failed to parse overflow size.\n");
+
+            if (overflowSize < 1)
+                FATAL_ERROR("Overflow size must be positive.\n");
+        }
+        else if (strcmp(option, "-search") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No size following \"-overflow\".\n");
+
+            i++;
+
+            if (!ParseNumber(argv[i], NULL, 10, &minDistance))
+                FATAL_ERROR("Failed to parse LZ min search distance.\n");
+
+            if (minDistance < 1)
+                FATAL_ERROR("LZ min search distance must be positive.\n");
+        }
+        else
+        {
+            FATAL_ERROR("Unrecognized option \"%s\".\n", option);
+        }
+    }
+
+    // The overflow option allows a quirk in some of Ruby/Sapphire's tilesets
+    // to be reproduced. It works by appending a number of zeros to the data
+    // before compressing it and then amending the LZ header's size field to
+    // reflect the expected size. This will cause an overflow when decompressing
+    // the data.
+
+    int fileSize;
+    unsigned char *buffer = ReadWholeFileZeroPadded(inputPath, &fileSize, overflowSize);
+	unsigned char *bufferComp = malloc(0x900);
+
+    int offset = 0x100;
+    uint8_t bit = 0x80;
+    int x;
+    for(x = 0; x < 0x100; x++)
+        bufferComp[x] = 0;
+    for(x = 0; x < 0x800; x++){
+        if(buffer[x]){
+            bufferComp[x >> 3] |= bit;
+            bufferComp[offset++] = buffer[x];
+        }
+        bit >>= 1;
+        if(!bit)
+            bit = 0x80;
+    }
+    offset += 3;  // pad to the word
+    offset &= 0xFFFFFC;
+
+    int compressedSize;
+    unsigned char *compressedData = LZCompress(bufferComp, offset + overflowSize, &compressedSize, minDistance);
+
+    compressedData[1] = (unsigned char)fileSize;
+    compressedData[2] = (unsigned char)(fileSize >> 8);
+    compressedData[3] = (unsigned char)(fileSize >> 16);
+
+    free(buffer);
+    free(bufferComp);
+
+    WriteWholeFile(outputPath, compressedData, compressedSize);
+
+    free(compressedData);
+}
+
 void HandleLZDecompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     int fileSize;
@@ -569,6 +652,7 @@ int main(int argc, char **argv)
         { "png", "fwjpnfont", HandlePngToFullwidthJapaneseFontCommand },
         { NULL, "huff", HandleHuffCompressCommand },
         { NULL, "lz", HandleLZCompressCommand },
+        { NULL, "lzp", HandleLZCompressPlusCommand },
         { "huff", NULL, HandleHuffDecompressCommand },
         { "lz", NULL, HandleLZDecompressCommand },
         { NULL, "rl", HandleRLCompressCommand },

@@ -82,6 +82,16 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *des
 
 void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
+    u8 *buffer;
+    u8 *bufferDest = dest;
+    int x;
+    int bit;
+    int offset;
+
+    buffer = AllocZeroed(0x900);
+    if (!buffer)
+        return TRUE;
+
     if (species == SPECIES_UNOWN)
     {
         u16 i = (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 3)) % 0x1C;
@@ -92,14 +102,28 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
         else
             i += SPECIES_UNOWN_B - 1;
         if (!isFrontPic)
-            LZ77UnCompWram(gMonBackPicTable[i].data, dest);
+            LZ77UnCompWram(gMonBackPicTable[i].data, buffer);
         else
-            LZ77UnCompWram(gMonFrontPicTable[i].data, dest);
+            LZ77UnCompWram(gMonFrontPicTable[i].data, buffer);
     }
     else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
-        LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
+        LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
     else
-        LZ77UnCompWram(src->data, dest);
+        LZ77UnCompWram(src->data, buffer);
+
+    offset = 0x100;
+    bit = 0x80;
+    for(x = 0; x < 0x800; x++){
+        if(buffer[x >> 3] & bit)
+            bufferDest[x] = buffer[offset++];
+        else
+            bufferDest[x] = 0;
+        bit >>= 1;
+        if(!bit)
+            bit = 0x80;
+    }
+
+    Free(buffer);
 
     DuplicateDeoxysTiles(dest, species);
     DrawSpindaSpots(species, personality, dest, isFrontPic);
@@ -326,6 +350,16 @@ void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteShee
 
 void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
+    u8 *buffer;
+    u8 *bufferDest = dest;
+    int x;
+    int bit;
+    int offset;
+
+    buffer = AllocZeroed(0x900);
+    if (!buffer)
+        return TRUE;
+
     if (species == SPECIES_UNOWN)
     {
         u16 i = (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 3)) % 0x1C;
@@ -336,17 +370,32 @@ void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src
         else
             i += SPECIES_UNOWN_B - 1;
         if (!isFrontPic)
-            LZ77UnCompWram(gMonBackPicTable[i].data, dest);
+            LZ77UnCompWram(gMonBackPicTable[i].data, buffer);
         else
-            LZ77UnCompWram(gMonFrontPicTable[i].data, dest);
+            LZ77UnCompWram(gMonFrontPicTable[i].data, buffer);
     }
     else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
     {
-        LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
+        LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
     }
     else
     {
-        LZ77UnCompWram(src->data, dest);
+        LZ77UnCompWram(src->data, buffer);
     }
+
+    offset = 0x100;
+    bit = 0x80;
+    for(x = 0; x < 0x800; x++){
+        if(buffer[x >> 3] & bit)
+            bufferDest[x] = buffer[offset++];
+        else
+            bufferDest[x] = 0;
+        bit >>= 1;
+        if(!bit)
+            bit = 0x80;
+    }
+
+    Free(buffer);
+
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }

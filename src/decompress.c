@@ -62,10 +62,18 @@ void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePale
 
 void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffer, s32 species)
 {
+    u8 *bufferPlus;
+
+    bufferPlus = AllocZeroed(0x900);
+    if (!bufferPlus)
+        return TRUE;
+
     if (species > NUM_SPECIES)
-        LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
+        LZ77UnCompWram(gMonFrontPicTable[0].data, bufferPlus);
     else
-        LZ77UnCompWram(src->data, buffer);
+        LZ77UnCompWram(src->data, bufferPlus);
+    DecompressPlus(bufferPlus, buffer);
+    Free(bufferPlus);
     DuplicateDeoxysTiles(buffer, species);
 }
 
@@ -83,14 +91,11 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *des
 void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
     u8 *buffer;
-    u8 *bufferDest = dest;
-    int x;
-    int bit;
-    int offset;
 
     buffer = AllocZeroed(0x900);
     if (!buffer)
         return TRUE;
+
 
     if (species == SPECIES_UNOWN)
     {
@@ -111,18 +116,7 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
     else
         LZ77UnCompWram(src->data, buffer);
 
-    offset = 0x100;
-    bit = 0x80;
-    for(x = 0; x < 0x800; x++){
-        if(buffer[x >> 3] & bit)
-            bufferDest[x] = buffer[offset++];
-        else
-            bufferDest[x] = 0;
-        bit >>= 1;
-        if(!bit)
-            bit = 0x80;
-    }
-
+    DecompressPlus(buffer, dest);
     Free(buffer);
 
     DuplicateDeoxysTiles(dest, species);
@@ -331,10 +325,18 @@ u32 GetDecompressedDataSize(const u8 *ptr)
 
 void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *buffer, s32 species)
 {
+    u8 *bufferPlus;
+
+    bufferPlus = AllocZeroed(0x900);
+    if (!bufferPlus)
+        return TRUE;
+
     if (species > NUM_SPECIES)
-        LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
+        LZ77UnCompWram(gMonFrontPicTable[0].data, bufferPlus);
     else
-        LZ77UnCompWram(src->data, buffer);
+        LZ77UnCompWram(src->data, bufferPlus);
+    DecompressPlus(bufferPlus, buffer);
+    Free(bufferPlus);
 }
 
 void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality)
@@ -351,10 +353,6 @@ void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteShee
 void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
 {
     u8 *buffer;
-    u8 *bufferDest = dest;
-    int x;
-    int bit;
-    int offset;
 
     buffer = AllocZeroed(0x900);
     if (!buffer)
@@ -383,19 +381,27 @@ void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src
         LZ77UnCompWram(src->data, buffer);
     }
 
+    DecompressPlus(buffer, dest);
+    Free(buffer);
+
+    DrawSpindaSpots(species, personality, dest, isFrontPic);
+}
+
+void DecompressPlus(u8 *src, u8 *dest)
+{
+    int x;
+    int bit;
+    int offset;
+
     offset = 0x100;
     bit = 0x80;
     for(x = 0; x < 0x800; x++){
-        if(buffer[x >> 3] & bit)
-            bufferDest[x] = buffer[offset++];
+        if(src[x >> 3] & bit)
+            dest[x] = src[offset++];
         else
-            bufferDest[x] = 0;
+            dest[x] = 0;
         bit >>= 1;
         if(!bit)
             bit = 0x80;
     }
-
-    Free(buffer);
-
-    DrawSpindaSpots(species, personality, dest, isFrontPic);
 }

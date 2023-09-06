@@ -1364,20 +1364,12 @@ Cry_Altaria::
 	.incbin "sound/direct_sound_samples/cries/altaria.bin"
 
 	.align 2
-Cry_Unused265::
-	.incbin "sound/direct_sound_samples/cries/unused_265.bin"
-
-	.align 2
 Cry_Taillow::
 	.incbin "sound/direct_sound_samples/cries/taillow.bin"
 
 	.align 2
 Cry_Swellow::
 	.incbin "sound/direct_sound_samples/cries/swellow.bin"
-
-	.align 2
-Cry_Unused268::
-	.incbin "sound/direct_sound_samples/cries/unused_268.bin"
 
 	.align 2
 Cry_Spinda::

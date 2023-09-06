@@ -110,12 +110,6 @@
 	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), \quantity | (\underfoot << 7)
 	.endm
 
-	@ Defines a background secret base event for map data.
-	@ Unused by FRLG
-	.macro bg_secret_base_event x:req, y:req, elevation:req, secret_base_id:req
-	bg_event \x, \y, \elevation, BG_EVENT_SECRET_BASE, \secret_base_id
-	.endm
-
 	@ Defines the table of event data for a map. Mirrors the struct layout of MapEvents in include/global.fieldmap.h
 	.macro map_events npcs:req, warps:req, traps:req, signs:req
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs

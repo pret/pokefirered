@@ -529,7 +529,7 @@ string generate_layout_headers_text(Json layouts_data) {
         text << border_label << "::\n"
              << "\t.incbin \"" << json_to_string(layout, "border_filepath") << "\"\n\n"
              << blockdata_label << "::\n"
-             << "\t.incbin \"" << json_to_string(layout, "blockdata_filepath") << "\"\n\n"
+             << "\t.incbin \"" << json_to_string(layout, "blockdata_filepath") << ".lz\"\n\n"
              << "\t.align 2\n"
              << layoutName << "::\n"
              << "\t.4byte " << json_to_string(layout, "width") << "\n"

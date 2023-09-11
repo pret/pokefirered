@@ -4290,7 +4290,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_RivalPokenonTowerSquirtle),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_RivalPokemonTowerSquirtle),
     },
     [TRAINER_RIVAL_POKEMON_TOWER_BULBASAUR] = {
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,
@@ -4300,7 +4300,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_RivalPokenonTowerBulbasaur),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_RivalPokemonTowerBulbasaur),
     },
     [TRAINER_RIVAL_POKEMON_TOWER_CHARMANDER] = {
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,
@@ -4310,7 +4310,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_RivalPokenonTowerCharmander),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_RivalPokemonTowerCharmander),
     },
     [TRAINER_RIVAL_SILPH_SQUIRTLE] = {
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,

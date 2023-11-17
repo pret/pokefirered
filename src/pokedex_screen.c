@@ -1898,7 +1898,6 @@ static int DexScreen_InputHandler_GetShoulderInput(void)
             return 2;
         else
             return 0;
-    case OPTIONS_BUTTON_MODE_HELP:
     default:
         return 0;
     }

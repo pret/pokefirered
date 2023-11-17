@@ -5,7 +5,6 @@
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
 #include "graphics.h"
-#include "help_system.h"
 #include "item.h"
 #include "item_menu.h"
 #include "mail_data.h"
@@ -23,7 +22,6 @@
 #include "tilemap_util.h"
 #include "trig.h"
 #include "constants/items.h"
-#include "constants/help_system.h"
 #include "constants/songs.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *gStorage = NULL;
@@ -422,7 +420,6 @@ void EnterPokeStorage(u8 boxOption)
         sMovingItemId = 0;
         gStorage->state = 0;
         gStorage->taskId = CreateTask(Task_InitPokeStorage, 3);
-        SetHelpContext(HELPCONTEXT_BILLS_PC);
         sLastUsedBox = StorageGetCurrentBox();
         SetMainCallback2(CB2_PokeStorage);
     }
@@ -440,7 +437,6 @@ void CB2_ReturnToPokeStorage(void)
         gStorage->isReopening = TRUE;
         gStorage->state = 0;
         gStorage->taskId = CreateTask(Task_InitPokeStorage, 3);
-        SetHelpContext(HELPCONTEXT_BILLS_PC);
         SetMainCallback2(CB2_PokeStorage);
     }
 }

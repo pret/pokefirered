@@ -6,7 +6,6 @@
 #include "m4a.h"
 #include "random.h"
 #include "gba/flash_internal.h"
-#include "help_system.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "play_time.h"
@@ -139,7 +138,6 @@ void AgbMain()
     SetDefaultFontsPointer();
 
     gSoftResetDisabled = FALSE;
-    gHelpSystemEnabled = FALSE;
 
     SetNotInSaveFailedScreen();
 
@@ -218,7 +216,7 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
-    if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
+    if (!RunSaveFailedScreen())
     {
         if (gMain.callback1)
             gMain.callback1();

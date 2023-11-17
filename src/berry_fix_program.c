@@ -6,7 +6,6 @@
 #include "sprite.h"
 #include "task.h"
 #include "scanline_effect.h"
-#include "help_system.h"
 #include "m4a.h"
 
 enum {
@@ -104,7 +103,6 @@ void CB2_InitBerryFixProgram(void)
     ResetSpriteData();
     ResetTasks();
     ScanlineEffect_Stop();
-    gHelpSystemEnabled = FALSE;
     taskId = CreateTask(Task_BerryFixMain, 0);
     gTasks[taskId].tState = STATE_BEGIN;
     SetMainCallback2(CB2_BerryFix);

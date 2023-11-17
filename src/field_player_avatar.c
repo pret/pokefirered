@@ -9,7 +9,6 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
-#include "help_system.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
@@ -1636,7 +1635,6 @@ static void Task_WaitStopSurfing(u8 taskId)
         UnfreezeObjectEvents();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
         DestroyTask(taskId);
-        SetHelpContextForMap();
     }
 }
 

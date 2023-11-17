@@ -13,7 +13,6 @@
 #include "strings.h"
 #include "util.h"
 #include "cereader_tool.h"
-#include "help_system.h"
 #include "constants/songs.h"
 
 struct EReaderTaskData
@@ -511,7 +510,6 @@ static void Task_EReader(u8 taskId)
             data->state = ER_STATE_START;
         break;
     case ER_STATE_END:
-        HelpSystem_Enable();
         Free(data->unusedBuffer);
         DestroyTask(taskId);
         SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);

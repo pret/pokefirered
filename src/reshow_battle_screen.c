@@ -3,7 +3,6 @@
 #include "link.h"
 #include "data.h"
 #include "scanline_effect.h"
-#include "help_system.h"
 #include "battle.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
@@ -26,24 +25,6 @@ void ReshowBattleScreenAfterMenu(void)
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     gBattleScripting.reshowMainState = 0;
     gBattleScripting.reshowHelperState = 0;
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_DOUBLE);
-            else
-                SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_SINGLE);
-        }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-        {
-            SetHelpContext(HELPCONTEXT_SAFARI_BATTLE);
-        }
-        else
-        {
-            SetHelpContext(HELPCONTEXT_WILD_BATTLE);
-        }
-    }
     SetMainCallback2(CB2_ReshowBattleScreenAfterMenu);
 }
 

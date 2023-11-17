@@ -35,10 +35,8 @@
 	.include "list_menu.o"
 	.include "quest_log.o"
 	.include "party_menu.o"
-	.include "help_system.o"
 	.align 4
 	.include "fame_checker.o"
-	.include "help_system_util.o"
 	.align 4
 	.include "ereader_screen.o"
 	.align 4

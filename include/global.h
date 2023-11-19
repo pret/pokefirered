@@ -74,7 +74,7 @@
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
-#if MODERN
+#if MODERN || defined(__INTELLISENSE__)
 #define abs(x) (((x) < 0) ? -(x) : (x))
 #endif
 

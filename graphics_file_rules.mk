@@ -141,11 +141,11 @@ $(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hp_bar_anim.4bpp \
 							$(INTERFACEGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
 
-$(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
-										  $(UNUSEDGFXDIR)/yellow_frame.bin \
-										  $(UNUSEDGFXDIR)/green_frame.bin \
-										  $(UNUSEDGFXDIR)/blank_frame.bin
-	@cat $^ >$@
+# $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
+# 										  $(UNUSEDGFXDIR)/yellow_frame.bin \
+# 										  $(UNUSEDGFXDIR)/green_frame.bin \
+# 										  $(UNUSEDGFXDIR)/blank_frame.bin
+# 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 353 -Wnum_tiles

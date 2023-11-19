@@ -1,0 +1,4 @@
+CompileFlags:
+    Remove: [-mthumb-interwork, -fhex-asm]
+    Add: [-mcpu=arm7tdmi, -Itools/agbcc/include, -iquoteinclude, -D__INTELLISENSE__, -DFIRERED, -DREVISION=0, -DENGLISH, -DMODERN=0, -Wno-deprecated-non-prototype, -Wno-unknown-escape-sequence, -Wno-pointer-sign, -Wno-constant-conversion, -Wno-gnu-folding-constant]
+    Compiler: /usr/bin/arm-none-eabi-gcc

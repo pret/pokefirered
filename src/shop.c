@@ -60,7 +60,7 @@ struct ShopData
     /*0x0C*/ u16 selectedRow;
     /*0x0E*/ u16 scrollOffset;
     /*0x10*/ u16 itemCount;
-    /*0x12*/ u16 field12;
+    /*0x12*/ u16 itemsShowed;
     /*0x14*/ u16 maxQuantity;
     /*0x16*/ u16 martType:4;    // 0x1 if tm list
              u16 fontId:5;
@@ -553,7 +553,7 @@ bool8 BuyMenuBuildListMenuTemplate(void)
     else
         gMultiuseListMenuTemplate.maxShowed = sShopData.itemCount + 1;
 
-    sShopData.field12 = gMultiuseListMenuTemplate.maxShowed;
+    sShopData.itemsShowed = gMultiuseListMenuTemplate.maxShowed;
     return TRUE;
 }
 
@@ -689,12 +689,12 @@ static void BuyMenuAddScrollIndicatorArrows(void)
     if (sShopData.martType != MART_TYPE_TMHM)
     {
         sShopData.unk16_11 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 160, 8, 104,
-            (sShopData.itemCount - sShopData.field12) + 1, 110, 110, &sShopData.scrollOffset);
+            (sShopData.itemCount - sShopData.itemsShowed) + 1, 110, 110, &sShopData.scrollOffset);
     }
     else
     {
         sShopData.unk16_11 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 160, 8, 88,
-            (sShopData.itemCount - sShopData.field12) + 1, 110, 110, &sShopData.scrollOffset);
+            (sShopData.itemCount - sShopData.itemsShowed) + 1, 110, 110, &sShopData.scrollOffset);
     }
 }
 

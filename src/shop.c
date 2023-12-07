@@ -70,7 +70,7 @@ struct ShopData
 };
 
 static EWRAM_DATA s16 sViewportObjectEvents[OBJECT_EVENTS_COUNT][4] = {0};
-EWRAM_DATA struct ShopData sShopData = {0};
+static EWRAM_DATA struct ShopData sShopData = {0};
 static EWRAM_DATA u8 sShopMenuWindowId = 0;
 EWRAM_DATA u16 (*gShopTilemapBuffer1)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer2)[0x400] = {0};

@@ -224,8 +224,8 @@ static u8 GetMartTypeFromItemList(u32 martType)
 {
     u16 i;
 
-    if (martType == MART_TYPE_REGULAR)
-        return MART_TYPE_REGULAR;
+    if (martType != MART_TYPE_REGULAR)
+        return martType;
 
     for (i = 0; i < sShopData.itemCount && sShopData.itemList[i] != 0; i++)
     {

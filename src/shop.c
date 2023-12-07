@@ -81,7 +81,7 @@ static EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
 EWRAM_DATA struct QuestLogEvent_Shop sHistory[2] = {0};
 
 //Function Declarations
-static u8 CreateShopMenu(u8 a0);
+static u8 CreateShopMenu(u8 martType);
 static u8 GetMartTypeFromItemList(u32 a0);
 static void SetShopItemsForSale(const u16 *items);
 static void SetShopMenuCallback(MainCallback callback);
@@ -202,9 +202,9 @@ static const struct BgTemplate sShopBuyMenuBgTemplates[4] =
 };
 
 // Functions
-static u8 CreateShopMenu(u8 a0)
+static u8 CreateShopMenu(u8 martType)
 {
-    sShopData.martType = GetMartTypeFromItemList(a0);
+    sShopData.martType = GetMartTypeFromItemList(martType);
     sShopData.selectedRow = 0;
     if (ContextNpcGetTextColor() == NPC_TEXT_COLOR_MALE)
         sShopData.fontId = FONT_MALE;
@@ -220,12 +220,12 @@ static u8 CreateShopMenu(u8 a0)
     return CreateTask(Task_ShopMenu, 8);
 }
 
-static u8 GetMartTypeFromItemList(u32 a0)
+static u8 GetMartTypeFromItemList(u32 martType)
 {
     u16 i;
 
-    if (a0)
-        return a0;
+    if (martType == MART_TYPE_REGULAR)
+        return MART_TYPE_REGULAR;
 
     for (i = 0; i < sShopData.itemCount && sShopData.itemList[i] != 0; i++)
     {

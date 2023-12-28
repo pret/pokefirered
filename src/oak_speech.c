@@ -1101,11 +1101,11 @@ static void Task_OakSpeech_Init(u8 taskId)
     if (str != gStringVar4)                                                                                                                                  \
     {                                                                                                                                                        \
         StringExpandPlaceholders(gStringVar4, str);                                                                                                          \
-        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_FEMALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
     }                                                                                                                                                        \
     else                                                                                                                                                     \
     {                                                                                                                                                        \
-        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_FEMALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
     }                                                                                                                                                        \
     CopyWindowToVram(WIN_INTRO_TEXTBOX, COPYWIN_FULL);                                                                                                       \
 })
@@ -1220,9 +1220,9 @@ static void Task_OakSpeech_TellMeALittleAboutYourself(u8 taskId)
         }
         else
         {
-            OakSpeechPrintMessage(gOakSpeech_Text_TellMeALittleAboutYourself, sOakSpeechResources->textSpeed);
-            CreateFadeInTask(taskId, 2);
-            gTasks[taskId].func = Task_OakSpeech_ShowGenderOptions;
+            // OakSpeechPrintMessage(gOakSpeech_Text_TellMeALittleAboutYourself, sOakSpeechResources->textSpeed);
+            // CreateFadeInTask(taskId, 2);
+            gTasks[taskId].func = Task_OakSpeech_FadeInRivalPic;
         }
     }
 }
@@ -1282,7 +1282,9 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         {
             tTrainerPicPosX = 0;
             OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
-            gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
+            sOakSpeechResources->hasPlayerBeenNamed = TRUE;
+            gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
+            //gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
         }
     }
 }
@@ -1360,15 +1362,21 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
     if (!gPaletteFade.active)
     {
         GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
-        if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
-        {
-            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen); //Need to fix
-        }
-        else
+        if (sOakSpeechResources->hasPlayerBeenNamed == TRUE)
         {
             ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
             RemoveWindow(gTasks[taskId].tMenuWindowId);
             DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
+            // DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen); //Need to fix
+        }
+        else
+        {
+            // ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
+            // RemoveWindow(gTasks[taskId].tMenuWindowId);
+            // DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
+            //DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
+            sOakSpeechResources->hasPlayerBeenNamed == FALSE;
+            gTasks[taskId].func = Task_OakSpeech_FadeOutPlayerPic;
         }
         DestroyPikachuOrPlatformSprites(taskId, SPRITE_TYPE_PLATFORM);
         FreeAllWindowBuffers();
@@ -1475,12 +1483,9 @@ static void Task_OakSpeech_AskRivalsName(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (tTrainerPicFadeState != 0)
-    {
-        OakSpeechPrintMessage(gOakSpeech_Text_WhatWasHisName, sOakSpeechResources->textSpeed);
-        sOakSpeechResources->hasPlayerBeenNamed = TRUE;
-        gTasks[taskId].func = Task_OakSpeech_MoveRivalDisplayNameOptions;
-    }
+    OakSpeechPrintMessage(gOakSpeech_Text_WhatWasHisName, sOakSpeechResources->textSpeed);
+    sOakSpeechResources->hasPlayerBeenNamed = TRUE;
+    gTasks[taskId].func = Task_OakSpeech_MoveRivalDisplayNameOptions;
 }
 
 static void Task_OakSpeech_ReshowPlayersPic(u8 taskId)
@@ -1496,10 +1501,7 @@ static void Task_OakSpeech_ReshowPlayersPic(u8 taskId)
         }
         else
         {
-            if (gSaveBlock2Ptr->playerGender == MALE)
-                LoadTrainerPic(MALE_PLAYER_PIC, 0);
-            else
-                LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+            LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
             gTasks[taskId].tTrainerPicPosX = 0;
             gSpriteCoordOffsetX = 0;
             ChangeBgX(2, 0, BG_COORD_SET);
@@ -1513,6 +1515,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
 {
     if (gTasks[taskId].tTrainerPicFadeState != 0)
     {
+        // These two lines are causing the "A'" problem. Removing them skips the final message, but works. 
         StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_LetsGo);
         OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
         gTasks[taskId].tTimer = 30;

@@ -1367,16 +1367,12 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
             ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
             RemoveWindow(gTasks[taskId].tMenuWindowId);
             DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
-            // DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen); //Need to fix
         }
         else
         {
-            // ClearStdWindowAndFrameToTransparent(gTasks[taskId].tMenuWindowId, TRUE);
-            // RemoveWindow(gTasks[taskId].tMenuWindowId);
-            // DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
-            //DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
             sOakSpeechResources->hasPlayerBeenNamed == FALSE;
             gTasks[taskId].func = Task_OakSpeech_FadeOutPlayerPic;
+            // Need to Set name to Emma
         }
         DestroyPikachuOrPlatformSprites(taskId, SPRITE_TYPE_PLATFORM);
         FreeAllWindowBuffers();
@@ -1515,7 +1511,6 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
 {
     if (gTasks[taskId].tTrainerPicFadeState != 0)
     {
-        // These two lines are causing the "A'" problem. Removing them skips the final message, but works. 
         StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_LetsGo);
         OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
         gTasks[taskId].tTimer = 30;

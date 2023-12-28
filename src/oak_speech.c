@@ -1371,6 +1371,7 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
         else
         {
             sOakSpeechResources->hasPlayerBeenNamed == FALSE;
+            GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
             gTasks[taskId].func = Task_OakSpeech_FadeOutPlayerPic;
             // Need to Set name to Emma
         }
@@ -2063,6 +2064,7 @@ static void GetDefaultName(u8 hasPlayerBeenNamed, u8 rivalNameChoice)
         else
             src = sFemaleNameChoices[Random() % ARRAY_COUNT(sFemaleNameChoices)];
         dest = gSaveBlock2Ptr->playerName;
+        // Need to make this save the default name, the only name is already Emma.
     }
     else
     {

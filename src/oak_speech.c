@@ -627,7 +627,7 @@ static const u8 *const sRivalNameChoices[2] =
 {
 #if defined(FIRERED)
     gNameChoice_Remi,
-    gNameChoice_Elle
+    gNameChoice_Ellie
 #elif defined(LEAFGREEN)
     gNameChoice_Red,
     gNameChoice_Ash

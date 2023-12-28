@@ -13,8 +13,8 @@ gNameChoice_Leaf::
 gNameChoice_Fire::
     .string "FIRE$"
 
-gNameChoice_Elle::
-    .string "ELLE$"
+gNameChoice_Ellie::
+    .string "ELLIE$"
 
 gNameChoice_Ash::
     .string "ASH$"
@@ -166,10 +166,10 @@ gOakSpeech_Text_SoYourNameIsPlayer::
     .string "So your name is {PLAYER}.$"
 
 gOakSpeech_Text_WhatWasHisName::
-    .string "This is my grandson.\p"
-    .string "He's been your rival since you both\n"
+    .string "This is your cousin.\p"
+    .string "She's been your rival since you both\n"
     .string "were babies.\p"
-    .string "…Erm, what was his name now?$"
+    .string "…Erm, what was her name again?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
     .string "Your rival's name, what was it now?$"
@@ -179,7 +179,7 @@ gOakSpeech_Text_ConfirmRivalName::
 
 gOakSpeech_Text_RememberRivalsName::
     .string "That's right! I remember now!\n"
-    .string "His name is {RIVAL}!\p$"
+    .string "Her name is {RIVAL}!\p$"
 
 gOakSpeech_Text_LetsGo::
     .string "{PLAYER}!\p"

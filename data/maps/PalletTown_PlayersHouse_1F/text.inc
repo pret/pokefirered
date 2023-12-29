@@ -30,7 +30,7 @@ PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
 PalletTown_PlayersHouse_1F_Text_FriendsOnTV::
     .string "Looks like MOM is watching\n"
     .string "FRIENDS again.\p"
-    .string "I better get out of the way\l"
+    .string "I better get out of the way\n"
     .string "before she yells at me.\p"
     .string "MOM: OH MY GAWWWD!$"
 

@@ -1,8 +1,8 @@
 gOtherText_NewName::
     .string "NEW NAME$"
 
-gNameChoice_Green::
-    .string "GREEN$"
+gNameChoice_Remi::
+    .string "REMI$"
 
 gNameChoice_Red::
     .string "RED$"
@@ -13,14 +13,8 @@ gNameChoice_Leaf::
 gNameChoice_Fire::
     .string "FIRE$"
 
-gNameChoice_Gary::
-    .string "GARY$"
-
-gNameChoice_Kaz::
-    .string "KAZ$"
-
-gNameChoice_Toru::
-    .string "TORU$"
+gNameChoice_Ellie::
+    .string "ELLIE$"
 
 gNameChoice_Ash::
     .string "ASH$"
@@ -73,56 +67,8 @@ gNameChoice_Tosh::
 gNameChoice_Roak::
     .string "ROAK$"
 
-gNameChoice_Omi::
-    .string "OMI$"
-
-gNameChoice_Jodi::
-    .string "JODI$"
-
-gNameChoice_Amanda::
-    .string "AMANDA$"
-
-gNameChoice_Hillary::
-    .string "HILLARY$"
-
-gNameChoice_Makey::
-    .string "MAKEY$"
-
-gNameChoice_Michi::
-    .string "MICHI$"
-
-gNameChoice_Paula::
-    .string "PAULA$"
-
-gNameChoice_June::
-    .string "JUNE$"
-
-gNameChoice_Cassie::
-    .string "CASSIE$"
-
-gNameChoice_Rey::
-    .string "REY$"
-
-gNameChoice_Seda::
-    .string "SEDA$"
-
-gNameChoice_Kiko::
-    .string "KIKO$"
-
-gNameChoice_Mina::
-    .string "MINA$"
-
-gNameChoice_Norie::
-    .string "NORIE$"
-
-gNameChoice_Sai::
-    .string "SAI$"
-
-gNameChoice_Momo::
-    .string "MOMO$"
-
-gNameChoice_Suzi::
-    .string "SUZI$"
+gNameChoice_Emma::
+    .string "EMMA$"
 
 gControlsGuide_Text_Intro::
     .string "The various buttons will be explained in\n"
@@ -220,10 +166,10 @@ gOakSpeech_Text_SoYourNameIsPlayer::
     .string "So your name is {PLAYER}.$"
 
 gOakSpeech_Text_WhatWasHisName::
-    .string "This is my grandson.\p"
-    .string "He's been your rival since you both\n"
+    .string "This is your cousin.\p"
+    .string "She's been your rival since you both\n"
     .string "were babies.\p"
-    .string "…Erm, what was his name now?$"
+    .string "…Erm, what was her name again?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
     .string "Your rival's name, what was it now?$"
@@ -233,7 +179,7 @@ gOakSpeech_Text_ConfirmRivalName::
 
 gOakSpeech_Text_RememberRivalsName::
     .string "That's right! I remember now!\n"
-    .string "His name is {RIVAL}!\p$"
+    .string "Her name is {RIVAL}!\p$"
 
 gOakSpeech_Text_LetsGo::
     .string "{PLAYER}!\p"

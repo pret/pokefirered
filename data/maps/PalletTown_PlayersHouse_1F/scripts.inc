@@ -71,5 +71,4 @@ PalletTown_PlayersHouse_1F_EventScript_Dad::
 PalletTown_PlayersHouse_1F_EventScript_DadTest::
 	msgbox PalletTown_PlayersHouse_1F_Text_DadTest
 	applymovement LOCALID_DAD, Common_Movement_Smile
-	applymovement LOCALID_DAD, Common_Movement_FaceRight
 	return

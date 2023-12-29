@@ -28,10 +28,11 @@ PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
     .string "…I better go, too.$"
 
 PalletTown_PlayersHouse_1F_Text_FriendsOnTV::
-    .string "Looks like MOM is watching FRIENDS again.\n"
+    .string "Looks like MOM is watching\l"
+    .string "FRIENDS again.\n"
     .string "I better get out of the way before\l"
     .string "she yells at me.\p"
-    .string "MOM: DOWN IN FRONT!$"
+    .string "MOM: OH MY GAWWWD!$"
 
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Oops, wrong side…$"

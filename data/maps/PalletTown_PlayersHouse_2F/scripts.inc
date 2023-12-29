@@ -20,8 +20,8 @@ PalletTown_PlayersHouse_2F_FirstWarpIn::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 1
 	end
 
-PalletTown_PlayersHouse_2F_EventScript_NES::
-	msgbox PalletTown_PlayersHouse_2F_Text_PlayedWithNES, MSGBOX_SIGN
+PalletTown_PlayersHouse_2F_EventScript_Switch::
+	msgbox PalletTown_PlayersHouse_2F_Text_PlayedWithSwitch, MSGBOX_SIGN
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_Sign::

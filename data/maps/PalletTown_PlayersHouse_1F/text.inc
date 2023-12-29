@@ -27,11 +27,11 @@ PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
     .string "tracks.\p"
     .string "…I better go, too.$"
 
-PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad::
-    .string "There's a movie on TV.\n"
-    .string "A girl with her hair in pigtails is\l"
-    .string "walking up a brick road.\p"
-    .string "…I better go, too.$"
+PalletTown_PlayersHouse_1F_Text_FriendsOnTV::
+    .string "Looks like MOM is watching FRIENDS again.\n"
+    .string "I better get out of the way before\l"
+    .string "she yells at me.\p"
+    .string "MOM: DOWN IN FRONT!$"
 
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Oops, wrong side…$"

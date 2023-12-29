@@ -52,5 +52,5 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenMale::
 	return
 
 PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
-	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
+	msgbox PalletTown_PlayersHouse_1F_Text_FriendsOnTV
 	return

@@ -8,6 +8,9 @@ Common_Movement_ExclamationMark::
 
 Common_Movement_Smile::
 	emote_smile
+	delay_16
+	delay_16
+	delay_16
 	face_original_direction
 	step_end
 

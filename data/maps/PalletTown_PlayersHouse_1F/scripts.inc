@@ -58,6 +58,8 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 PalletTown_PlayersHouse_1F_EventScript_Dad::
 	lock
 	faceplayer
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
 	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_DadTest
 	closemessage
 	applymovement 2, Common_Movement_FaceOriginalDirection

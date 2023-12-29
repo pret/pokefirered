@@ -11,6 +11,8 @@ Common_Movement_Smile::
 	delay_16
 	delay_16
 	delay_16
+	delay_16
+	delay_16
 	face_original_direction
 	step_end
 

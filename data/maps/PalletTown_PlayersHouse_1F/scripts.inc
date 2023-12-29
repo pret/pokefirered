@@ -1,4 +1,5 @@
 .equ LOCALID_MOM, 1
+.equ LOCALID_DAD, 2
 
 PalletTown_PlayersHouse_1F_MapScripts::
 	.byte 0
@@ -62,11 +63,13 @@ PalletTown_PlayersHouse_1F_EventScript_Dad::
 	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
 	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_DadTest
 	closemessage
-	applymovement 2, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_DAD, Common_Movement_FaceRight
 	waitmovement 0
 	release
 	end
 
 PalletTown_PlayersHouse_1F_EventScript_DadTest::
 	msgbox PalletTown_PlayersHouse_1F_Text_DadTest
+	applymovement LOCALID_DAD, Common_Movement_Smile
+	applymovement LOCALID_DAD, Common_Movement_FaceRight
 	return

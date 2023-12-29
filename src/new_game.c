@@ -109,6 +109,7 @@ void NewGameInitData(void)
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
 
     StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
+    gSaveBlock2Ptr->playerGender = FEMALE;
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();

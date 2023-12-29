@@ -111,6 +111,7 @@ extern const u8 gText_ABUTTONNext[];
 extern const u8 gText_ABUTTONNext_BBUTTONBack[];
 extern const u8 gText_Boy[];
 extern const u8 gText_Girl[];
+static const u8 sOakSpeech_Text_Emma[] = _("EMMA");
 extern const struct OamData gOamData_AffineOff_ObjBlend_32x32;
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
@@ -1101,11 +1102,11 @@ static void Task_OakSpeech_Init(u8 taskId)
     if (str != gStringVar4)                                                                                                                                  \
     {                                                                                                                                                        \
         StringExpandPlaceholders(gStringVar4, str);                                                                                                          \
-        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_FEMALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
     }                                                                                                                                                        \
     else                                                                                                                                                     \
     {                                                                                                                                                        \
-        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_FEMALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
     }                                                                                                                                                        \
     CopyWindowToVram(WIN_INTRO_TEXTBOX, COPYWIN_FULL);                                                                                                       \
 })
@@ -1239,7 +1240,6 @@ static void Task_OakSpeech_HandleGenderInput(u8 taskId)
     {
     case 0: // GIRL
         gSaveBlock2Ptr->playerGender = FEMALE;
-        break;
     case MENU_B_PRESSED:
     case MENU_NOTHING_CHOSEN:
         return;
@@ -1512,6 +1512,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
 {
     if (gTasks[taskId].tTrainerPicFadeState != 0)
     {
+        StringCopy(gSaveBlock2Ptr->playerName, sOakSpeech_Text_Emma);
         StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_LetsGo);
         OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
         gTasks[taskId].tTimer = 30;

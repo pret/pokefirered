@@ -54,3 +54,17 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenMale::
 PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 	msgbox PalletTown_PlayersHouse_1F_Text_FriendsOnTV
 	return
+
+PalletTown_PlayersHouse_1F_EventScript_Dad::
+	lock
+	faceplayer
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_DadTest
+	closemessage
+	applymovement 2, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_DadTest::
+	msgbox PalletTown_PlayersHouse_1F_Text_DadTest
+	return

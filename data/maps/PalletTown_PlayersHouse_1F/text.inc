@@ -37,3 +37,6 @@ PalletTown_PlayersHouse_1F_Text_FriendsOnTV::
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Oops, wrong side…$"
 
+PalletTown_PlayersHouse_1F_Text_DadTest::
+    .string "DAD: I love you Emma!"
+

@@ -1789,8 +1789,12 @@ static void Task_ItemContext_Sell(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (gSpecialVar_ItemId == ITEM_TM_CASE)
     {
-        ItemMenu_SetExitCallback(GoToTMCase_Sell);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        //CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringCopy(gStringVar1, gText_TMsAndHMs);
+        StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
+        DisplayItemMessageInBag(taskId, GetDialogBoxFontId(), gStringVar4, Task_ReturnToBagFromContextMenu);
+        // ItemMenu_SetExitCallback(GoToTMCase_Sell);
+        // ItemMenu_StartFadeToExitCallback(taskId);
     }
     else if (gSpecialVar_ItemId == ITEM_BERRY_POUCH)
     {

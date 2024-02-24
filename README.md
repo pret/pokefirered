@@ -1,3 +1,15 @@
+# pokefrlg_enhanced
+
+Modification of Pokémon FireRed/LeafGreen which aims to enhance the original experience
+by introducing concepts and mechanics from later pkmn-games as well as some new things and QoL improvements.
+
+Here's a list of what's been implemented so far:
+* running indoors
+* TMs have been made reusable
+* RTC-functionality
+* no more version-exclusive pkmn
+* alternative evolution methods for trade-evos
+
 # Pokémon FireRed and LeafGreen
 
 [![Build Status][travis-badge]][travis]

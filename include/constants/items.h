@@ -445,7 +445,10 @@
 #define ITEM_RUBY 373
 #define ITEM_SAPPHIRE 374
 
-#define ITEMS_COUNT 375
+// new items for frlg_combined
+#define ITEM_LINKING_CORD 375
+
+#define ITEMS_COUNT 376
 
 #define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF
@@ -459,6 +462,10 @@
 #define SUPER_ROD 2
 
 // Check if the item is one that can be used on a Pokemon.
-#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
+#define IS_POKEMON_ITEM(item) (\
+((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX) \
+|| (item) == ITEM_KINGS_ROCK || (item) == ITEM_METAL_COAT || (item) == ITEM_DRAGON_SCALE \
+|| (item) == ITEM_UP_GRADE || (item) == ITEM_DEEP_SEA_TOOTH || (item) == ITEM_DEEP_SEA_SCALE \
+|| (item) == ITEM_LINKING_CORD)
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

@@ -80,9 +80,12 @@ extern const u8 gText_ApostropheSBase[];
 extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
 extern const u8 gText_RegisteredDataDeleted[];
+
+// wallclock
 extern const u8 gText_Confirm3[];
 extern const u8 gText_Cancel4[];
 extern const u8 gText_IsThisTheCorrectTime[];
+
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
 extern const u8 gText_EggNickname[];
@@ -503,6 +506,7 @@ extern const u8 gText_ABtnRegistrationCounter[];
 extern const u8 gText_SaveFileCorrupted[];
 extern const u8 gText_SaveFileHasBeenDeleted[];
 extern const u8 gText_1MSubCircuitBoardNotInstalled[];
+extern const u8 gText_BatteryRunDry[];
 extern const u8 gText_NewGame[];
 extern const u8 gText_Continue[];
 extern const u8 gText_MysteryGift[];
@@ -609,6 +613,7 @@ extern const u8 gText_StoreItemsInThePC[];
 extern const u8 gText_GoBackToThePreviousMenu[];
 extern const u8 gText_ItemStorage[];
 extern const u8 gText_Mailbox[];
+extern const u8 gText_WallClock[];
 extern const u8 gText_TurnOff[];
 extern const u8 gText_WithdrawItem2[];
 extern const u8 gText_DepositItem2[];
@@ -621,6 +626,20 @@ extern const u8 gText_WhatWouldYouLikeToDoWithPlayersMail[];
 extern const u8 gText_MessageWillBeLost[];
 extern const u8 gText_BagIsFull[];
 extern const u8 gText_MailReturnedToBagMessageErased[];
+extern const u8 gText_InGameClockUsable[];
+
+// reset rtc screen texts
+extern const u8 gText_Day[];
+extern const u8 gText_Colon3[];
+extern const u8 gText_Confirm2[];
+extern const u8 gText_PresentTime[];
+extern const u8 gText_PreviousTime[];
+extern const u8 gText_ResetRTCConfirmCancel[];
+extern const u8 gText_NoSaveFileCantSetTime[];
+extern const u8 gText_PleaseResetTime[];
+extern const u8 gText_ClockHasBeenReset[];
+extern const u8 gText_SaveCompleted[];
+extern const u8 gText_SaveFailed[];
 
 // start_menu
 extern const u8 gText_MenuPokedex[];
@@ -631,6 +650,7 @@ extern const u8 gText_MenuOption[];
 extern const u8 gText_MenuExit[];
 extern const u8 gText_MenuRetire[];
 extern const u8 gText_MenuSafariStats[];
+extern const u8 gText_MenuInGameTime[];
 extern const u8 gStartMenuDesc_Pokedex[];
 extern const u8 gStartMenuDesc_Pokemon[];
 extern const u8 gStartMenuDesc_Bag[];
@@ -762,16 +782,12 @@ extern const u8 gText_SodaPop[];
 extern const u8 gText_Lemonade[];
 extern const u8 gText_Bicycle_Price[];
 extern const u8 gText_NoThanks[];
-extern const u8 gText_Abra_180Coins[];
-extern const u8 gText_Clefairy_500Coins[];
-extern const u8 gText_Dratini_2800Coins[];
-extern const u8 gText_Scyther_5500Coins[];
+extern const u8 gText_Abra_150Coins[];
+extern const u8 gText_Clefairy_600Coins[];
+extern const u8 gText_Pinsir_3000Coins[];
+extern const u8 gText_Scyther_3000Coins[];
+extern const u8 gText_Dratini_5000Coins[];
 extern const u8 gText_Porygon_9999Coins[];
-extern const u8 gText_Abra_120Coins[];
-extern const u8 gText_Clefairy_750Coins[];
-extern const u8 gText_Pinsir_2500Coins[];
-extern const u8 gText_Dratini_4600Coins[];
-extern const u8 gText_Porygon_6500Coins[];
 extern const u8 gText_NoThanks_2[];
 extern const u8 gText_HelixFossil[];
 extern const u8 gText_DomeFossil[];
@@ -959,6 +975,7 @@ extern const u8 gText_InBagVar1[];
 extern const u8 gText_Var1AndYouWantedVar2[];
 extern const u8 gText_HereYouGoThankYou[];
 extern const u8 gText_NoMoreRoomForThis[];
+extern const u8 gText_YouAlreadyHaveThis[];
 
 // pokedex_screen
 extern const u8 gText_PokedexTableOfContents[];

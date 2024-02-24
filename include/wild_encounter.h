@@ -3,10 +3,10 @@
 
 #include "global.h"
 
-#define LAND_WILD_COUNT     12
-#define WATER_WILD_COUNT    5
+#define LAND_WILD_COUNT     24
+#define WATER_WILD_COUNT    10
 #define ROCK_WILD_COUNT     5
-#define FISH_WILD_COUNT     10
+#define FISH_WILD_COUNT     15
 
 #define NUM_ALTERING_CAVE_TABLES 9
 

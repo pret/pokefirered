@@ -162,8 +162,8 @@ gSpecials::
 	def_special NullFieldSpecial  @ Cable Car specials
 	def_special NullFieldSpecial
 	def_special Overworld_PlaySpecialMapMusic
-	def_special NullFieldSpecial  @ Wall Clock specials
-	def_special NullFieldSpecial
+	def_special StartWallClock	  @ Wall Clock specials
+	def_special Special_ViewWallClock
 	def_special NullFieldSpecial
 	def_special StartOldManTutorialBattle
 	def_special ChangePokemonNickname
@@ -215,7 +215,7 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special EnterSafariMode
 	def_special ExitSafariMode
-	def_special NullFieldSpecial  @ Misc Hoenn specials
+	def_special GetWeekCount  	  @ Misc Hoenn specials
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial

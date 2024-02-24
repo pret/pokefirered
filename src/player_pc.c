@@ -19,6 +19,9 @@
 #include "item_menu.h"
 #include "item_pc.h"
 #include "party_menu.h"
+#include "event_data.h"
+#include "clock.h"
+#include "field_specials.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
@@ -43,6 +46,7 @@ static void Task_DrawPlayerPcTopMenu(u8 taskId);
 static void Task_TopMenuHandleInput(u8 taskId);
 static void Task_PlayerPcItemStorage(u8 taskId);
 static void Task_PlayerPcMailbox(u8 taskId);
+static void Task_PlayerPcViewClock(u8 taskId);
 static void Task_PlayerPcTurnOff(u8 taskId);
 static void Task_CreateItemStorageSubmenu(u8 taskId, u8 cursorPos);
 static void PrintStringOnWindow0WithDialogueFrame(const u8 *str);
@@ -85,11 +89,12 @@ static const u8 *const sItemStorageActionDescriptionPtrs[] = {
 static const struct MenuAction sMenuActions_TopMenu[] = {
     {gText_ItemStorage, Task_PlayerPcItemStorage},
     {gText_Mailbox, Task_PlayerPcMailbox},
+    {gText_WallClock, Task_PlayerPcViewClock},
     {gText_TurnOff, Task_PlayerPcTurnOff}
 };
 
-static const u8 sItemOrder_BedroomPC[] = { 0, 1, 2 };
-static const u8 sItemOrder_PlayerPC[] = { 0, 1, 2 };
+static const u8 sItemOrder_BedroomPC[] = { 0, 1, 2, 3 };
+static const u8 sItemOrder_PlayerPC[] = { 0, 1, 3 };
 
 static const struct MenuAction sMenuActions_ItemPc[] = {
     {gText_WithdrawItem2, Task_PlayerPcWithdrawItem},
@@ -155,7 +160,7 @@ void BedroomPC(void)
     gPlayerPcMenuManager.notInRoom = FALSE;
     BackupHelpContext();
     sItemOrder = sItemOrder_BedroomPC;
-    sTopMenuItemCount = 3;
+    sTopMenuItemCount = 4;
     taskId = CreateTask(TaskDummy, 0);
     DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);
 }
@@ -252,6 +257,14 @@ static void Task_PlayerPcMailbox(u8 taskId)
             DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_TheresNoMailHere, Task_ReturnToTopMenu);
         }
     }
+}
+
+static void Task_PlayerPcViewClock(u8 taskId)
+{
+    if (!FlagGet(FLAG_SYS_CLOCK_SET))
+        StartWallClock();
+    else
+        Special_ViewWallClock();
 }
 
 static void Task_PlayerPcTurnOff(u8 taskId)

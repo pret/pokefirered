@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "bike.h"
+#include "clock.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect_helpers.h"
@@ -69,6 +70,26 @@ static void Task_RunPerStepCallback(u8 taskId)
     sPerStepCallbacks[idx](taskId);
 }
 
+#define tState data[0]
+
+static void RunTimeBasedEvents(s16 *data)
+{
+    switch (tState)
+    {
+        case 0:
+            if (*gMain.vblankCounter1 & 0x1000)
+            {
+                DoTimeBasedEvents();
+                tState++;
+            }
+            break;
+        case 1:
+            if (!(*gMain.vblankCounter1 & 0x1000))
+                tState--;
+            break;
+    }
+}
+
 #define tAmbientCryState data[1]
 #define tAmbientCryDelay data[2]
 
@@ -78,8 +99,13 @@ static void Task_RunTimeBasedEvents(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     if (!ArePlayerFieldControlsLocked() && !QL_IS_PLAYBACK_STATE)
+    {
+        RunTimeBasedEvents(data);
         UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);
+    }
 }
+
+#undef tState
 
 void SetUpFieldTasks(void)
 {

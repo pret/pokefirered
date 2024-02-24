@@ -14,6 +14,7 @@
 #include "safari_zone.h"
 #include "start_menu.h"
 #include "menu.h"
+#include "rtc.h"
 #include "load_save.h"
 #include "strings.h"
 #include "menu_helpers.h"
@@ -65,6 +66,7 @@ static EWRAM_DATA u8 sNumStartMenuItems = 0;
 static EWRAM_DATA u8 sStartMenuOrder[MAX_STARTMENU_ITEMS] = {};
 static EWRAM_DATA s8 sDrawStartMenuState[2] = {};
 static EWRAM_DATA u8 sSafariZoneStatsWindowId = 0;
+static EWRAM_DATA u8 sInGameTimeWindowId = 0;
 static ALIGNED(4) EWRAM_DATA u8 sSaveStatsWindowId = 0;
 
 static u8 (*sSaveDialogCB)(void);
@@ -130,6 +132,16 @@ static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
     .tilemapTop = 1,
     .width = 10,
     .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x008
+};
+
+static const struct WindowTemplate sInGameTimeWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 4,
+    .height = 2,
     .paletteNum = 15,
     .baseBlock = 0x008
 };
@@ -264,6 +276,19 @@ static void DrawSafariZoneStatsWindow(void)
     CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
 }
 
+static void DrawInGameTimeWindow(void)
+{
+    sInGameTimeWindowId = AddWindow(&sInGameTimeWindowTemplate);
+    PutWindowTilemap(sInGameTimeWindowId);
+    DrawStdWindowFrame(sInGameTimeWindowId, FALSE);
+    RtcCalcLocalTime();
+    ConvertIntToDecimalStringN(gStringVar1, gLocalTime.hours, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar4, gText_MenuInGameTime);
+    AddTextPrinterParameterized(sInGameTimeWindowId, FONT_NORMAL, gStringVar4, 3, 2, 0xFF, NULL);
+    CopyWindowToVram(sInGameTimeWindowId, COPYWIN_GFX);
+}
+
 static void DestroySafariZoneStatsWindow(void)
 {
     if (GetSafariZoneFlag())
@@ -271,6 +296,16 @@ static void DestroySafariZoneStatsWindow(void)
         ClearStdWindowAndFrameToTransparent(sSafariZoneStatsWindowId, FALSE);
         CopyWindowToVram(sSafariZoneStatsWindowId, COPYWIN_GFX);
         RemoveWindow(sSafariZoneStatsWindowId);
+    }
+}
+
+static void DestroyInGameTimeWindow(void)
+{
+    if (!GetSafariZoneFlag() && FlagGet(FLAG_SYS_CLOCK_SET))
+    {
+        ClearStdWindowAndFrameToTransparent(sInGameTimeWindowId, FALSE);
+        CopyWindowToVram(sInGameTimeWindowId, COPYWIN_GFX);
+        RemoveWindow(sInGameTimeWindowId);
     }
 }
 
@@ -316,15 +351,20 @@ static s8 DoDrawStartMenu(void)
         sDrawStartMenuState[0]++;
         break;
     case 3:
+        if (!GetSafariZoneFlag() && FlagGet(FLAG_SYS_CLOCK_SET))
+            DrawInGameTimeWindow();
+        sDrawStartMenuState[0]++;
+        break;
+    case 4:
         if (GetSafariZoneFlag())
             DrawSafariZoneStatsWindow();
         sDrawStartMenuState[0]++;
         break;
-    case 4:
+    case 5:
         if (PrintStartMenuItems(&sDrawStartMenuState[1], 2) == TRUE)
             sDrawStartMenuState[0]++;
         break;
-    case 5:
+    case 6:
         sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
         if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
         {
@@ -436,6 +476,7 @@ static bool8 StartCB_HandleInput(void)
     if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         DestroySafariZoneStatsWindow();
+        DestroyInGameTimeWindow();
         DestroyHelpMessageWindow_();
         CloseStartMenu();
         return TRUE;
@@ -468,6 +509,7 @@ static bool8 StartMenuPokedexCallback(void)
         IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
+        DestroyInGameTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OpenPokedexFromStartMenu);
         return TRUE;
@@ -481,6 +523,7 @@ static bool8 StartMenuPokemonCallback(void)
     {
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
+        DestroyInGameTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_PartyMenuFromStartMenu);
         return TRUE;
@@ -494,6 +537,7 @@ static bool8 StartMenuBagCallback(void)
     {
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
+        DestroyInGameTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_BagMenuFromStartMenu);
         return TRUE;
@@ -507,6 +551,7 @@ static bool8 StartMenuPlayerCallback(void)
     {
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
+        DestroyInGameTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
         ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
@@ -526,6 +571,7 @@ static bool8 StartMenuOptionCallback(void)
     {
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
+        DestroyInGameTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OptionsMenuFromStartMenu);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
@@ -537,6 +583,7 @@ static bool8 StartMenuOptionCallback(void)
 static bool8 StartMenuExitCallback(void)
 {
     DestroySafariZoneStatsWindow();
+    DestroyInGameTimeWindow();
     DestroyHelpMessageWindow_();
     CloseStartMenu();
     return TRUE;
@@ -545,6 +592,7 @@ static bool8 StartMenuExitCallback(void)
 static bool8 StartMenuSafariZoneRetireCallback(void)
 {
     DestroySafariZoneStatsWindow();
+    DestroyInGameTimeWindow();
     DestroyHelpMessageWindow_();
     CloseStartMenu();
     SafariZoneRetirePrompt();

@@ -14,6 +14,7 @@
 #include "decompress.h"
 #include "util.h"
 #include "trig.h"
+#include "load_save.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
 
@@ -992,12 +993,15 @@ void CB2_InitCopyrightScreenAfterBootup(void)
 {
     if (!SetUpCopyrightScreen())
     {
+        SeedRngAndSetTrainerId();
+        SetSaveBlocksPointers();
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
         LoadGameSave(SAVE_NORMAL);
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
             Sav2_ClearSetDefault();
         SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+        InitHeap(gHeap, HEAP_SIZE);
     }
 }
 

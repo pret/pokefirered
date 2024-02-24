@@ -268,27 +268,7 @@ static const u8 sItemEffect_XSpecial[8] = {
     STAT_BOOST_FRIENDSHIP_CHANGE,
 };
 
-static const u8 sItemEffect_SunStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-static const u8 sItemEffect_MoonStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-static const u8 sItemEffect_FireStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-static const u8 sItemEffect_ThunderStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-static const u8 sItemEffect_WaterStone[6] = {
-    [4] = ITEM4_EVO_STONE,
-};
-
-static const u8 sItemEffect_LeafStone[6] = {
+static const u8 sItemEffect_EvoItem[6] = {
     [4] = ITEM4_EVO_STONE,
 };
 
@@ -384,12 +364,12 @@ const u8 *const gItemEffectTable[] =
     [ITEM_X_SPEED - ITEM_POTION]       = sItemEffect_XSpeed,
     [ITEM_X_ACCURACY - ITEM_POTION]    = sItemEffect_XAccuracy,
     [ITEM_X_SPECIAL - ITEM_POTION]     = sItemEffect_XSpecial,
-    [ITEM_SUN_STONE - ITEM_POTION]     = sItemEffect_SunStone,
-    [ITEM_MOON_STONE - ITEM_POTION]    = sItemEffect_MoonStone,
-    [ITEM_FIRE_STONE - ITEM_POTION]    = sItemEffect_FireStone,
-    [ITEM_THUNDER_STONE - ITEM_POTION] = sItemEffect_ThunderStone,
-    [ITEM_WATER_STONE - ITEM_POTION]   = sItemEffect_WaterStone,
-    [ITEM_LEAF_STONE - ITEM_POTION]    = sItemEffect_LeafStone,
+    [ITEM_SUN_STONE - ITEM_POTION]     = sItemEffect_EvoItem,
+    [ITEM_MOON_STONE - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_FIRE_STONE - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_THUNDER_STONE - ITEM_POTION] = sItemEffect_EvoItem,
+    [ITEM_WATER_STONE - ITEM_POTION]   = sItemEffect_EvoItem,
+    [ITEM_LEAF_STONE - ITEM_POTION]    = sItemEffect_EvoItem,
     [ITEM_CHERI_BERRY - ITEM_POTION]   = sItemEffect_CheriBerry,
     [ITEM_CHESTO_BERRY - ITEM_POTION]  = sItemEffect_ChestoBerry,
     [ITEM_PECHA_BERRY - ITEM_POTION]   = sItemEffect_PechaBerry,
@@ -401,4 +381,11 @@ const u8 *const gItemEffectTable[] =
     [ITEM_LUM_BERRY - ITEM_POTION]     = sItemEffect_LumBerry,
     [ITEM_SITRUS_BERRY - ITEM_POTION]  = sItemEffect_SitrusBerry,
     [LAST_BERRY_INDEX - ITEM_POTION]   = NULL,
+    [ITEM_LINKING_CORD - ITEM_POTION]  = sItemEffect_EvoItem,
+    [ITEM_KINGS_ROCK - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_METAL_COAT - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_DRAGON_SCALE - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_UP_GRADE - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_DEEP_SEA_TOOTH - ITEM_POTION]    = sItemEffect_EvoItem,
+    [ITEM_DEEP_SEA_SCALE - ITEM_POTION]    = sItemEffect_EvoItem,
 };

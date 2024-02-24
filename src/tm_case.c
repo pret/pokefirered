@@ -717,9 +717,12 @@ static void List_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *li
 
 static void List_ItemPrintFunc(u8 windowId, u32 itemIndex, u8 y)
 {
+    u16 tmItemId;
+
     if (itemIndex != LIST_CANCEL)
     {
-        if (!IS_HM(BagGetItemIdByPocketPosition(POCKET_TM_CASE, itemIndex)))
+        tmItemId = BagGetItemIdByPocketPosition(POCKET_TM_CASE, itemIndex);
+        if (!IS_HM(tmItemId))
         {
             ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_CASE, itemIndex), STR_CONV_MODE_RIGHT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
@@ -727,7 +730,8 @@ static void List_ItemPrintFunc(u8 windowId, u32 itemIndex, u8 y)
         }
         else
         {
-            PlaceHMTileInWindow(windowId, 8, y);
+            if (tmItemId >= ITEM_HM01 && tmItemId <= ITEM_HM08)
+                PlaceHMTileInWindow(windowId, 8, y);
         }
     }
 }

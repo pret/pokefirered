@@ -1242,9 +1242,9 @@ static void TradeBufferOTnameAndNicknames(void)
     }
     else
     {
-        inGameTrade = &sInGameTrades[gSpecialVar_0x8004];
-        StringCopy(gStringVar1, inGameTrade->otName);
-        StringCopy_Nickname(gStringVar3, inGameTrade->nickname);
+        GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, gStringVar1);
+        GetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, nickname);
+        StringCopy_Nickname(gStringVar3, nickname);
         GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
         StringCopy_Nickname(gStringVar2, nickname);
     }

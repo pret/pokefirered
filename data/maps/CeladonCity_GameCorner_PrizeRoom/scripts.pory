@@ -1,0 +1,263 @@
+mapscripts CeladonCity_GameCorner_PrizeRoom_MapScripts {}
+
+// script for object_id == 1
+script CeladonCity_GameCorner_PrizeRoom_EventScript_BaldingMan { 
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_FancyThatPorygon, MSGBOX_NPC)
+    end
+}
+
+// script for object_id == 2
+script CeladonCity_GameCorner_PrizeRoom_EventScript_OldMan {
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_RakedItInToday, MSGBOX_NPC)
+    end
+}
+
+// script for object_id == 3
+script CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons {
+    lock
+    faceplayer
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase)
+        end
+    }
+    goto_if_questlog(EventScript_ReleaseEnd)
+    showcoinsbox(0, 0)
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes)
+
+    message(CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize)
+    waitmessage
+    multichoice(11, 0, MULTICHOICE_GAME_CORNER_POKEMON_PRIZES, FALSE)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            setvar(VAR_TEMP_1, SPECIES_ABRA)
+            setvar(VAR_TEMP_2, 150)
+        case 1:
+            setvar(VAR_TEMP_1, SPECIES_CLEFAIRY)
+            setvar(VAR_TEMP_2, 600)
+        case 2:
+            setvar(VAR_TEMP_1, SPECIES_PINSIR)
+            setvar(VAR_TEMP_2, 3000)
+        case 3:
+            setvar(VAR_TEMP_1, SPECIES_SCYTHER)
+            setvar(VAR_TEMP_2, 3000)
+        case 4:
+            setvar(VAR_TEMP_1, SPECIES_DRATINI)
+            setvar(VAR_TEMP_2, 5000)
+        case 5:
+            setvar(VAR_TEMP_1, SPECIES_PORYGON)
+            setvar(VAR_TEMP_2, 9999)
+        case 6:
+        case 127:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+            end
+    }
+
+    bufferspeciesname(STR_VAR_1, VAR_TEMP_1)
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+        end
+    }
+    checkcoins(VAR_RESULT)
+    if (var(VAR_RESULT) < VAR_TEMP_2) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins)
+        end
+    }
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    switch (var(VAR_TEMP_1)) {
+        case SPECIES_ABRA:
+            givemon(VAR_TEMP_1, 8)
+        case SPECIES_CLEFAIRY:
+            givemon(VAR_TEMP_1, 10)
+        case SPECIES_PINSIR:
+        case SPECIES_SCYTHER:
+            givemon(VAR_TEMP_1, 20)
+        case SPECIES_DRATINI:
+            givemon(VAR_TEMP_1, 23)
+        case SPECIES_PORYGON:
+            givemon(VAR_TEMP_1, 25)
+    }
+
+    switch (var(VAR_RESULT)) {
+        case 0:
+            call(CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMon)
+            if (var(VAR_RESULT) == YES) {
+                getpartysize
+                subvar(VAR_RESULT, 1)
+                copyvar(VAR_0x8004, VAR_RESULT)
+                call(EventScript_ChangePokemonNickname)
+            }
+        case 1:
+            call(CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMon)
+            if (var(VAR_RESULT) == YES) {
+                call(EventScript_NameReceivedBoxMon)
+            }
+            call(EventScript_TransferredToPC)
+        case 2:
+            textcolor(NPC_TEXT_COLOR_NEUTRAL)
+            msgbox(Text_NoMoreRoomForPokemon)
+    }
+    goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    end
+}
+script CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMon {
+    removecoins(VAR_TEMP_2)
+    updatecoinsbox(0, 5)
+    bufferspeciesname(STR_VAR_1, VAR_TEMP_1)
+    playfanfare(MUS_LEVEL_UP)
+    message(Text_PlayerObtainedTheMon)
+    waitmessage
+    waitfanfare
+    msgbox(Text_GiveNicknameToThisMon, MSGBOX_YESNO)
+    return
+}
+
+// script for object_id == 4
+script CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs {
+    lock
+    faceplayer
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase)
+        end
+    }
+    goto_if_questlog(EventScript_ReleaseEnd)
+    showcoinsbox(0, 0)
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes)
+	message(CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize)
+	waitmessage
+	multichoice(11, 0, MULTICHOICE_GAME_CORNER_TMPRIZES, FALSE)
+	switch (var(VAR_RESULT)) {
+    	case 0:
+        	setvar(VAR_TEMP_1, ITEM_TM13)
+	        setvar(VAR_TEMP_2, 4000)
+        	buffermovename(STR_VAR_2, MOVE_ICE_BEAM)
+	    case 1:
+	        setvar(VAR_TEMP_1, ITEM_TM23)
+        	setvar(VAR_TEMP_2, 3500)
+        	buffermovename(STR_VAR_2, MOVE_IRON_TAIL)
+    	case 2:
+        	setvar(VAR_TEMP_1, ITEM_TM24)
+        	setvar(VAR_TEMP_2, 4000)
+        	buffermovename(STR_VAR_2, MOVE_THUNDERBOLT)
+	    case 3:
+        	setvar(VAR_TEMP_1, ITEM_TM30)
+        	setvar(VAR_TEMP_2, 4500)
+        	buffermovename(STR_VAR_2, MOVE_SHADOW_BALL)
+    	case 4:
+        	setvar(VAR_TEMP_1, ITEM_TM35)
+        	setvar(VAR_TEMP_2, 4000)
+        	buffermovename(STR_VAR_2, MOVE_FLAMETHROWER)
+	    case 5:
+	    case 127:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+            end
+    }
+	msgbox(CeladonCity_GameCorner_PrizeRoom_Text_YouWantTM, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+        end
+    }
+	goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize)
+    end
+}
+
+// script for object_id == 5
+script CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems {
+	lock
+	faceplayer
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+    	goto(CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase)
+        end
+    }
+	goto_if_questlog(EventScript_ReleaseEnd)
+	showcoinsbox(0, 0)
+	msgbox(CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes)
+	message(CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize)
+	waitmessage
+	multichoice(10, 0, MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES, FALSE)
+	switch (var(VAR_RESULT)) {
+	    case 0:
+        	setvar(VAR_TEMP_1, ITEM_SMOKE_BALL)
+        	setvar(VAR_TEMP_2, 800)
+	    case 1:
+    	    setvar(VAR_TEMP_1, ITEM_MIRACLE_SEED)
+	        setvar(VAR_TEMP_2, 1000)
+	    case 2:
+        	setvar(VAR_TEMP_1, ITEM_CHARCOAL)
+        	setvar(VAR_TEMP_2, 1000)
+	    case 3:
+        	setvar(VAR_TEMP_1, ITEM_MYSTIC_WATER)
+        	setvar(VAR_TEMP_2, 1000)
+	    case 4:
+        	setvar(VAR_TEMP_1, ITEM_YELLOW_FLUTE)
+        	setvar(VAR_TEMP_2, 1600)
+	    case 5:
+	    case 127:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+            end
+    }
+	bufferitemname(STR_VAR_1, VAR_TEMP_1)
+	msgbox(CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+        end
+    }
+	goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize)
+    end
+}
+
+// bottom-level scripts
+script CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase {
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_CoinCaseRequired)
+    release
+    end
+}
+
+script CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize {
+	bufferitemname(STR_VAR_1, VAR_TEMP_1)
+	checkcoins(VAR_RESULT)
+    if (var(VAR_RESULT) < VAR_TEMP_2) {
+        goto(CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins)
+        end
+    }
+    switch (var(VAR_TEMP_1)) {
+        case ITEM_TM13:
+        case ITEM_TM23:
+        case ITEM_TM24:
+        case ITEM_TM30:
+        case ITEM_TM35:
+            checkitem(VAR_TEMP_1)
+            if (var(VAR_RESULT) == TRUE) {
+                textcolor(NPC_TEXT_COLOR_NEUTRAL)
+                msgbox(gText_YouAlreadyHaveThis)
+                goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+                end
+            }
+        default:
+    	checkitemspace(VAR_TEMP_1)
+        if (!var(VAR_RESULT)) {
+            textcolor(NPC_TEXT_COLOR_NEUTRAL)
+            msgbox(Text_TooBadBagFull)
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+            end
+        }
+    }
+	removecoins(VAR_TEMP_2)
+	updatecoinsbox(0, 5)
+	giveitem(VAR_TEMP_1)
+	goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    end
+}
+
+script CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins {
+    msgbox(CeladonCity_GameCorner_PrizeRoom_Text_NeedMoreCoins)
+    goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    end
+}
+
+script CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange {
+    hidecoinsbox(0, 0)
+    release
+    end
+}

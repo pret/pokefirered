@@ -64,6 +64,7 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/multiboot.o(.text);
+        src/rtc.o(.text);
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
@@ -107,6 +108,8 @@ SECTIONS {
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
         src/field_tasks.o(.text);
+        src/clock.o(.text);
+        src/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         src/tileset_anims.o(.text);
         src/palette.o(.text);
@@ -190,10 +193,12 @@ SECTIONS {
         src/region_map.o(.text);
         src/image_processing_effects.o(.text);
         src/battle_ai_script_commands.o(.text);
+        src/wallclock.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
+        src/time_events.o(.text);
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
@@ -331,6 +336,7 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/agb_flash_le.o(.text);
+        src/siirtc.o(.text);
         src/librfu_stwi.o(.text);
         src/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
@@ -404,6 +410,8 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/rtc.o(.rodata);
+        src/reset_rtc_screen.o(.rodata);
         src/main_menu.o(.rodata);
         src/data.o(.rodata);
         src/battle_bg.o(.rodata);
@@ -499,7 +507,9 @@ SECTIONS {
         src/region_map.o(.rodata);
         src/image_processing_effects.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
+        src/wallclock.o(.rodata);
         src/fldeff_flash.o(.rodata);
+        src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         src/evolution_scene.o(.rodata);
@@ -969,6 +979,7 @@ SECTIONS {
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
+        src/siirtc.o(.rodata);
         src/librfu_rfu.o(.rodata);
         src/librfu_sio32id.o(.rodata);
         src/isagbprn.o(.rodata);

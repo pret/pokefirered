@@ -2781,6 +2781,13 @@ extern const u8 gTeachyTvScreen_Tilemap[];
 extern const u8 gTeachyTvTitle_Tilemap[];
 extern const u32 gTeachyTv_Pal[];
 
+// wall clock
+extern const u32 gWallClock_Gfx[];
+extern const u16 gWallClockMale_Pal[];
+extern const u16 gWallClockFemale_Pal[];
+extern const u32 gWallClockStart_Tilemap[];
+extern const u32 gWallClockView_Tilemap[];
+
 // berry_fix_program
 extern const u8 gBerryFixGameboy_Gfx[];
 extern const u8 gBerryFixGameboy_Tilemap[];
@@ -3282,6 +3289,9 @@ extern const u32 gItemIconPalette_Ruby[];
 extern const u32 gItemIconPalette_Sapphire[];
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
+// new items for frlg_combined
+extern const u32 gItemIcon_LinkingCord[];
+extern const u32 gItemIconPalette_LinkingCord[];
 
 // battle_anim_utility_funcs
 extern const u32 gFile_graphics_battle_anims_masks_curse_sheet[];

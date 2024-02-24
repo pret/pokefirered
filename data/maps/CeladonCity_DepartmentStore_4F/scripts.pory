@@ -1,0 +1,39 @@
+mapscripts CeladonCity_DepartmentStore_4F_MapScripts {}
+
+script CeladonCity_DepartmentStore_4F_EventScript_Man {
+	msgbox(CeladonCity_DepartmentStore_4F_Text_GettingPokeDollAsPresent, MSGBOX_NPC)
+	end
+}
+
+script CeladonCity_DepartmentStore_4F_EventScript_Youngster {
+	msgbox(CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll, MSGBOX_NPC)
+	end
+}
+
+script CeladonCity_DepartmentStore_4F_EventScript_FloorSign {
+	msgbox(CeladonCity_DepartmentStore_4F_Text_FloorSign, MSGBOX_SIGN)
+	end
+}
+
+script CeladonCity_DepartmentStore_4F_EventScript_Clerk {
+	goto_if_questlog(EventScript_ReleaseEnd)
+	lock
+	faceplayer
+	message(Text_MayIHelpYou)
+	waitmessage
+	pokemart(CeladonCity_DepartmentStore_4F_Items)
+	msgbox(Text_PleaseComeAgain)
+	release
+	end
+}
+
+mart CeladonCity_DepartmentStore_4F_Items {
+	ITEM_POKE_DOLL
+	ITEM_RETRO_MAIL
+	ITEM_FIRE_STONE
+	ITEM_THUNDER_STONE
+	ITEM_WATER_STONE
+	ITEM_LEAF_STONE
+    ITEM_LINKING_CORD
+	ITEM_NONE
+}

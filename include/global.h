@@ -1,6 +1,8 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#define BUGFIX
+
 #include "config.h"
 #include "gba/gba.h"
 #include <string.h>

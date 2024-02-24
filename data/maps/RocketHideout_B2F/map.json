@@ -13,7 +13,7 @@
   "show_map_name": true,
   "floor_number": -2,
   "battle_scene": "MAP_BATTLE_SCENE_INDOOR_2",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
@@ -123,6 +123,10 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

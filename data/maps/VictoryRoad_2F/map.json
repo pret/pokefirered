@@ -13,7 +13,7 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
@@ -283,5 +283,7 @@
       "script": "VictoryRoad_2F_EventScript_FloorSwitch2"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+
+  ]
 }

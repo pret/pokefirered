@@ -13,7 +13,7 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
@@ -154,5 +154,7 @@
       "script": "EventScript_SetEnteringCyclingRoad"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+
+  ]
 }

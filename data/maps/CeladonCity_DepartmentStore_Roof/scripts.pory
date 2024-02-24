@@ -1,0 +1,482 @@
+mapscripts CeladonCity_DepartmentStore_Roof_MapScripts {
+    MAP_SCRIPT_ON_LOAD: CeladonCity_DepartmentStore_Roof_On_Load
+}
+
+script CeladonCity_DepartmentStore_Roof_On_Load {
+    specialvar(VAR_RESULT, GetStarterSpecies)
+    switch (var(VAR_RESULT)) {
+        case SPECIES_BULBASAUR:
+            setflag(FLAG_HIDE_MIMI)
+        case SPECIES_CHARMANDER:
+            setflag(FLAG_HIDE_LILLY)
+        case SPECIES_SQUIRTLE:
+            setflag(FLAG_HIDE_JAKE)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl {
+	goto_if_questlog(EventScript_ReleaseEnd)
+	special(QuestLog_CutRecording)
+	lock
+	faceplayer
+	call(CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks)
+    if (var(VAR_TEMP_1) == 0) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink)
+        end
+    }
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks {
+	setvar(VAR_TEMP_1, 0)
+	checkitem(ITEM_FRESH_WATER)
+    if (var(VAR_RESULT) == TRUE) {
+	    addvar(VAR_TEMP_1, 1)
+    }
+    checkitem(ITEM_SODA_POP)
+    if (var(VAR_RESULT) == TRUE) {
+	    addvar(VAR_TEMP_1, 2)
+    }
+	checkitem(ITEM_LEMONADE)
+    if (var(VAR_RESULT) == TRUE) {
+	    addvar(VAR_TEMP_1, 4)
+    }
+	return
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_ImThirstyGiveHerDrink, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        end
+    }
+	textcolor(NPC_TEXT_COLOR_NEUTRAL)
+	message(CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink)
+	waitmessage
+	textcolor(NPC_TEXT_COLOR_FEMALE)
+	switch (var(VAR_TEMP_1)) {
+    	case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater)
+	    case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop)
+    	case 3:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop)
+	    case 4:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade)
+    	case 5:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade)
+	    case 6:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade)
+    	case 7:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER, FALSE)
+	switch (var(VAR_RESULT)) {
+    	case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+	    case 1:
+    	case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_SODA_POP, FALSE)
+	switch (var(VAR_RESULT)) {
+	    case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+    	case 1:
+	    case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP, FALSE)
+	switch (var(VAR_RESULT)) {
+    	case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+	    case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+    	case 2:
+	    case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_LEMONADE, FALSE)
+	switch (var(VAR_RESULT)) {
+	    case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+    	case 1:
+	    case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_LEMONADE, FALSE)
+	switch (var(VAR_RESULT)) {
+    	case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+	    case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+    	case 2:
+	    case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_SODA_POP_LEMONADE, FALSE)
+	switch (var(VAR_RESULT)) {
+    	case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+	    case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+    	case 2:
+	    case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks {
+	multichoice(0, 0, MULTICHOICE_THIRSTY_GIRL_FRESH_WATER_SODA_POP_LEMONADE, FALSE)
+	switch (var(VAR_RESULT)) {
+	    case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+    	case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+	    case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+    	case 3:
+	    case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
+    end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater {
+	setvar(VAR_0x8008, ITEM_FRESH_WATER)
+	setvar(VAR_0x8009, ITEM_TM16)
+    if (flag(FLAG_GOT_TM16_FROM_THIRSTY_GIRL)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+        end
+    }
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_YayFreshWaterHaveThis)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop {
+	setvar(VAR_0x8008, ITEM_SODA_POP)
+	setvar(VAR_0x8009, ITEM_TM20)
+    if (flag(FLAG_GOT_TM20_FROM_THIRSTY_GIRL)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+        end
+    }
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade {
+	setvar(VAR_0x8008, ITEM_LEMONADE)
+	setvar(VAR_0x8009, ITEM_TM33)
+    if (flag(FLAG_GOT_TM33_FROM_THIRSTY_GIRL)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+        end
+    }
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink {
+	bufferitemname(STR_VAR_1, VAR_0x8008)
+	bufferitemname(STR_VAR_2, VAR_0x8009)
+	removeitem(VAR_0x8008)
+	checkitemspace(VAR_0x8009)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward)
+        end
+    }
+	additem(VAR_0x8009)
+	textcolor(NPC_TEXT_COLOR_NEUTRAL)
+	playfanfare(MUS_LEVEL_UP)
+	message(Text_ReceivedItemFromLittleGirl)
+	waitmessage
+	waitfanfare
+	putitemaway(VAR_0x8009)
+	call(EventScript_RestorePrevTextColor)
+    switch (var(VAR_0x8008)) {
+        case ITEM_FRESH_WATER:
+            call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16)
+        case ITEM_SODA_POP:
+            call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20)
+        case ITEM_LEMONADE:
+            call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33)
+    }
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16 {
+	setflag(FLAG_GOT_TM16_FROM_THIRSTY_GIRL)
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_ExplainTM16)
+	return
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20 {
+	setflag(FLAG_GOT_TM20_FROM_THIRSTY_GIRL)
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_ExplainTM20)
+	return
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33 {
+	setflag(FLAG_GOT_TM33_FROM_THIRSTY_GIRL)
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_ExplainTM33)
+	return
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_DontHaveSpaceForThis)
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink {
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_ImThirstyIWantDrink)
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_ImNotThirstyAfterAll)
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_CooltrainerM {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_MySisterIsImmature, MSGBOX_NPC)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_FloorSign {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_FloorSign, MSGBOX_SIGN)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine {
+	lockall
+	message(CeladonCity_DepartmentStore_Roof_Text_VendingMachineWhatDoesItHave)
+	waitmessage
+	showmoneybox(0, 0)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink {
+	multichoice(12, 0, MULTICHOICE_CELADON_VENDING_MACHINE, FALSE)
+	copyvar(VAR_TEMP_1, VAR_RESULT)
+	switch (var(VAR_TEMP_1)) {
+    	case 0:
+            setvar(VAR_TEMP_0, ITEM_FRESH_WATER)
+            checkmoney(200)
+	    case 1:
+            setvar(VAR_TEMP_0, ITEM_SODA_POP)
+            checkmoney(300)
+    	case 2:
+            setvar(VAR_TEMP_0, ITEM_LEMONADE)
+            checkmoney(350)
+        case 3:
+        case 127:
+            msgbox(CeladonCity_DepartmentStore_Roof_Text_NotThirsty)
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine)
+            end
+    }
+    if (var(VAR_TEMP_1) < 3) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink)
+    }
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink {
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney)
+        end
+    }
+	checkitemspace(VAR_TEMP_0)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink)
+        end
+    }
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            removemoney(200)
+        case 1:
+            removemoney(300)
+        case 2:
+            removemoney(350)
+    }
+	updatemoneybox
+	bufferitemname(STR_VAR_1, VAR_TEMP_0)
+	playse(SE_VEND)
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_DrinkCanPoppedOut)
+	additem(VAR_TEMP_0)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_ChooseNewDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ChooseNewDrink {
+	message(CeladonCity_DepartmentStore_Roof_Text_VendingMachineWhatDoesItHave)
+	waitmessage
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_NotEnoughMoney)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink {
+	msgbox(CeladonCity_DepartmentStore_Roof_Text_NoMoreRoomForStuff)
+	goto(CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine)
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine {
+	hidemoneybox
+	releaseall
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_Mimi {
+	lock
+	faceplayer
+	setvar(VAR_0x8008, INGAME_TRADE_BULBASAUR)
+	call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_CABBAGE_TRADE)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_AlreadyTraded)
+        end
+    }
+	msgbox(Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade)
+        end
+    }
+	call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade)
+        end
+    }
+	call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != value(VAR_0x8009)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotRequestedMon)
+        end
+    }
+	call(EventScript_DoInGameTrade)
+	msgbox(Trade_Text_Thanks)
+	setflag(FLAG_DID_CABBAGE_TRADE)
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_Lilly {
+	lock
+	faceplayer
+	setvar(VAR_0x8008, INGAME_TRADE_CHARMANDER)
+	call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_BLAZE_TRADE)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_AlreadyTraded)
+        end
+    }
+	msgbox(Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade)
+        end
+    }
+	call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade)
+        end
+    }
+	call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != value(VAR_0x8009)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotRequestedMon)
+        end
+    }
+	call(EventScript_DoInGameTrade)
+	msgbox(Trade_Text_Thanks)
+	setflag(FLAG_DID_BLAZE_TRADE)
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_Jake {
+	lock
+	faceplayer
+	setvar(VAR_0x8008, INGAME_TRADE_SQUIRTLE)
+	call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_TORTO_TRADE)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_AlreadyTraded)
+        end
+    }
+	msgbox(Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade)
+        end
+    }
+	call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade)
+        end
+    }
+	call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != value(VAR_0x8009)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotRequestedMon)
+        end
+    }
+	call(EventScript_DoInGameTrade)
+	msgbox(Trade_Text_Thanks)
+	setflag(FLAG_DID_TORTO_TRADE)
+	release
+	end
+}
+
+script CeladonCity_DepartmentStore_Roof_EventScript_DeclineTrade {
+	msgbox(Trade_Text_WellIfYouDontWantTo)
+	release
+	end
+}
+script CeladonCity_DepartmentStore_Roof_EventScript_NotRequestedMon {
+	bufferspeciesname(STR_VAR_1, VAR_0x8009)
+	msgbox(Trade_Text_ThisIsntMon)
+	release
+	end
+}
+script CeladonCity_DepartmentStore_Roof_EventScript_AlreadyTraded {
+	msgbox(Trade_Text_HasTradedMonGrownStronger)
+	release
+	end
+}

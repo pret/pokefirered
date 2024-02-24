@@ -13,7 +13,7 @@
   "show_map_name": true,
   "floor_number": 127,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
@@ -42,6 +42,48 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl",
       "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_Mimi",
+      "flag": "FLAG_HIDE_MIMI"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_Lilly",
+      "flag": "FLAG_HIDE_LILLY"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
+      "x": 1,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_Jake",
+      "flag": "FLAG_HIDE_JAKE"
     }
   ],
   "warp_events": [
@@ -53,7 +95,9 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

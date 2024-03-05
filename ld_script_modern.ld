@@ -63,6 +63,8 @@ SECTIONS {
     	*(.rodata*);
     } =0
 
+    __rom_end = .;
+
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }
     .debug_pubnames 0 : { *(.debug_pubnames) }

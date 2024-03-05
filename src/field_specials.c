@@ -3,6 +3,7 @@
 #include "quest_log.h"
 #include "list_menu.h"
 #include "diploma.h"
+#include "debug.h"
 #include "script.h"
 #include "field_player_avatar.h"
 #include "overworld.h"
@@ -213,6 +214,9 @@ void AnimatePcTurnOn(void)
 {
     u8 taskId;
 
+    if (gIsDebugPC)
+        return;
+
     if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE)
     {
         taskId = CreateTask(Task_AnimatePcTurnOn, 8);
@@ -289,6 +293,12 @@ void AnimatePcTurnOff()
     s8 deltaX = 0;
     s8 deltaY = 0;
     u8 direction = GetPlayerFacingDirection();
+
+    if (gIsDebugPC)
+    {
+        gIsDebugPC = FALSE;
+        return;
+    }
 
     switch (direction)
     {
@@ -2552,4 +2562,9 @@ static void Task_WingFlapSound(u8 taskId)
     }
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);
+}
+
+u16 ScriptGetPartyMonSpecies(void)
+{
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
 }

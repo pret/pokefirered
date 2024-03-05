@@ -769,6 +769,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_CLEAR_TEXT_TO:
             case EXT_CTRL_CODE_CLEAR_TO:
                 {
                     widthHelper = *textPrinter->printerTemplate.currentChar;
@@ -777,7 +778,11 @@ u16 RenderText(struct TextPrinter *textPrinter)
                     width = widthHelper - textPrinter->printerTemplate.currentX;
                     if (width > 0)
                     {
-                        ClearTextSpan(textPrinter, width);
+                        if (currChar == EXT_CTRL_CODE_CLEAR_TEXT_TO) 
+                            ClearTextSpanDebug(textPrinter, width);
+                        else
+                            ClearTextSpan(textPrinter, width);
+
                         textPrinter->printerTemplate.currentX += width;
                         return RENDER_PRINT;
                     }
@@ -966,6 +971,7 @@ static s32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpaci
             case EXT_CTRL_CODE_SHIFT_DOWN:
             case EXT_CTRL_CODE_CLEAR:
             case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_CLEAR_TEXT_TO:
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 ++strPos;
@@ -1121,6 +1127,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_SKIP:
                 lineWidth = *++str;
                 break;
+            case EXT_CTRL_CODE_CLEAR_TEXT_TO:
             case EXT_CTRL_CODE_CLEAR_TO:
                 if (*++str > lineWidth)
                     lineWidth = *str;
@@ -1240,6 +1247,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str, int a3, int a4, int a5, 
             case EXT_CTRL_CODE_SHIFT_DOWN:
             case EXT_CTRL_CODE_CLEAR:
             case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_CLEAR_TEXT_TO:
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 ++strPos;

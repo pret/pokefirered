@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "scanline_effect.h"
 #include "overworld.h"
+#include "debug.h"
 #include "link.h"
 #include "pokedex.h"
 #include "item_menu.h"
@@ -34,6 +35,7 @@
 #include "option_menu.h"
 #include "save_menu_util.h"
 #include "help_system.h"
+#include "config/debug.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 
@@ -48,6 +50,7 @@ enum StartMenuOption
     STARTMENU_EXIT,
     STARTMENU_RETIRE,
     STARTMENU_PLAYER2,
+    STARTMENU_DEBUG,
     MAX_STARTMENU_ITEMS
 };
 
@@ -71,6 +74,7 @@ static u8 (*sSaveDialogCB)(void);
 static u8 sSaveDialogDelay;
 static bool8 sSaveDialogIsPrinting;
 
+static void BuildDebugStartMenu(void);
 static void SetUpStartMenu_Link(void);
 static void SetUpStartMenu_UnionRoom(void);
 static void SetUpStartMenu_SafariZone(void);
@@ -87,6 +91,7 @@ static bool8 StartMenuOptionCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkPlayerCallback(void);
+static bool8 StartMenuDebugCallback(void);
 static bool8 StartCB_Save1(void);
 static bool8 StartCB_Save2(void);
 static void StartMenu_PrepareForSave(void);
@@ -111,6 +116,9 @@ static void task50_after_link_battle_save(u8 taskId);
 static void PrintSaveStats(void);
 static void CloseSaveStatsWindow(void);
 static void CloseStartMenu(void);
+static void HideStartMenuDebug(void);
+
+static const u8 sText_MenuDebug[] = _("DEBUG");
 
 static const struct MenuAction sStartMenuActionTable[] = {
     { gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback} },
@@ -121,7 +129,8 @@ static const struct MenuAction sStartMenuActionTable[] = {
     { gText_MenuOption, {.u8_void = StartMenuOptionCallback} },
     { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
     { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
-    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} }
+    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} },
+    { sText_MenuDebug, {.u8_void = StartMenuDebugCallback} }
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -143,7 +152,8 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Option,
     gStartMenuDesc_Exit,
     gStartMenuDesc_Retire,
-    gStartMenuDesc_Player
+    gStartMenuDesc_Player,
+    gStartMenuDesc_Debug,
 };
 
 static const struct BgTemplate sBGTemplates_AfterLinkSaveMessage[] = {
@@ -195,18 +205,42 @@ static void SetUpStartMenu(void)
 {
     sNumStartMenuItems = 0;
     if (IsUpdateLinkStateCBActive() == TRUE)
+    {
         SetUpStartMenu_Link();
+    }
     else if (InUnionRoom() == TRUE)
+    {
         SetUpStartMenu_UnionRoom();
+    }
     else if (GetSafariZoneFlag() == TRUE)
+    {
         SetUpStartMenu_SafariZone();
+    }
     else
-        SetUpStartMenu_NormalField();
+    {
+        if (DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE)
+            BuildDebugStartMenu();
+        else
+            SetUpStartMenu_NormalField();
+    }
 }
 
 static void AppendToStartMenuItems(u8 newEntry)
 {
     AppendToList(sStartMenuOrder, &sNumStartMenuItems, newEntry);
+}
+
+static void BuildDebugStartMenu(void)
+{
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+        AppendToStartMenuItems(STARTMENU_POKEDEX);
+    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+        AppendToStartMenuItems(STARTMENU_POKEMON);
+    AppendToStartMenuItems(STARTMENU_BAG);
+    AppendToStartMenuItems(STARTMENU_PLAYER);
+    AppendToStartMenuItems(STARTMENU_SAVE);
+    AppendToStartMenuItems(STARTMENU_OPTION);
+    AppendToStartMenuItems(STARTMENU_DEBUG);
 }
 
 static void SetUpStartMenu_NormalField(void)
@@ -447,6 +481,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
 {
     if (sStartMenuCallback != StartMenuSaveCallback
      && sStartMenuCallback != StartMenuExitCallback
+     && sStartMenuCallback != StartMenuDebugCallback
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
         StopPokemonLeagueLightingEffectTask();
@@ -540,6 +575,27 @@ static bool8 StartMenuExitCallback(void)
     DestroyHelpMessageWindow_();
     CloseStartMenu();
     return TRUE;
+}
+
+static bool8 StartMenuDebugCallback(void)
+{
+    DestroySafariZoneStatsWindow();
+    DestroyHelpMessageWindow_();
+    HideStartMenuDebug(); // Hide start menu without enabling movement
+
+#if DEBUG_OVERWORLD_MENU == TRUE
+    FreezeObjectEvents();
+    Debug_ShowMainMenu();
+#endif
+
+    return TRUE;
+}
+
+static void HideStartMenuDebug(void)
+{
+    PlaySE(SE_SELECT);
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
+    RemoveStartMenuWindow();
 }
 
 static bool8 StartMenuSafariZoneRetireCallback(void)

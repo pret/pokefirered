@@ -191,7 +191,6 @@ struct CreditsTaskData
 static EWRAM_DATA struct CreditsResources * sCreditsMgr = NULL;
 EWRAM_DATA bool8 gHasHallOfFameRecords = FALSE;
 
-static void CB2_Credits(void);
 static s32 RollCredits(void);
 static bool32 DoCreditsMonScene(void);
 static bool32 DoCopyrightOrTheEndGfxScene(void);
@@ -718,7 +717,7 @@ void DoCredits(void)
     SetMainCallback2(CB2_Credits);
 }
 
-static void CB2_Credits(void)
+void CB2_Credits(void)
 {
     switch (RollCredits())
     {

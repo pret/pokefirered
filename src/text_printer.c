@@ -1,5 +1,6 @@
 #include "global.h"
 #include "window.h"
+#include "blit.h"
 #include "text.h"
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
@@ -323,4 +324,32 @@ static void CopyGlyphToWindow_Parameterized(void *tileData, u16 currentX, u16 cu
 
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 {
+}
+
+// this is an implementation of text clearing that RSE uses
+void ClearTextSpanDebug(struct TextPrinter *textPrinter, u32 width)
+{
+    struct Window *window;
+    struct Bitmap pixels_data;
+    struct GlyphInfo *glyph;
+    u8 *glyphHeight;
+
+    if (sLastTextBgColor != TEXT_COLOR_TRANSPARENT)
+    {
+        window = &gWindows[textPrinter->printerTemplate.windowId];
+        pixels_data.pixels = window->tileData;
+        pixels_data.width = window->window.width << 3;
+        pixels_data.height = window->window.height << 3;
+
+        glyph = &gGlyphInfo;
+        glyphHeight = &glyph->height;
+
+        FillBitmapRect4Bit(
+            &pixels_data,
+            textPrinter->printerTemplate.currentX,
+            textPrinter->printerTemplate.currentY,
+            width,
+            *glyphHeight,
+            sLastTextBgColor);
+    }
 }

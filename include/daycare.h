@@ -23,6 +23,8 @@ void SetDaycareCompatibilityString(void);
 bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio);
 void ShowDaycareLevelMenu(void);
 void ChooseSendDaycareMon(void);
+s8 Daycare_FindEmptySpot(struct DayCare *daycare);
+u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 
 void ScriptHatchMon(void);
 void EggHatch(void);

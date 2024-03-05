@@ -159,6 +159,7 @@ void DecompressGlyphTile(const u16 *src, u16 *dest);
 u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
+void ClearTextSpanDebug(struct TextPrinter *textPrinter, u32 width);
 
 u16 FontFunc_Small(struct TextPrinter *textPrinter);
 u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter);

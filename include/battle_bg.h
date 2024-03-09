@@ -2,6 +2,14 @@
 #define GUARD_BATTLE_BG_H
 
 #include "bg.h"
+struct BattleBackground
+{
+    const void *tileset;
+    const void *tilemap;
+    const void *entryTileset;
+    const void *entryTilemap;
+    const void *palette;
+};
 
 extern const struct BgTemplate gBattleBgTemplates[];
 

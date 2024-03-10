@@ -642,6 +642,44 @@ static const u8 *const sEggOriginTexts[] = {
     gText_PokeSum_EggOrigin_Trade
 };
 
+//static const u16 sIVRankingsPal[] = INCBIN_U16("graphics/interface/ivs/ivs.gbapal");
+static const u8 sIVRankings_E_Minus[] = INCBIN_U8("graphics/interface/ivs/e_minus.4bpp");
+static const u8 sIVRankings_E[] = INCBIN_U8("graphics/interface/ivs/e.4bpp");
+static const u8 sIVRankings_E_Plus[] = INCBIN_U8("graphics/interface/ivs/e_plus.4bpp");
+static const u8 sIVRankings_D_Minus[] = INCBIN_U8("graphics/interface/ivs/d_minus.4bpp");
+static const u8 sIVRankings_D[] = INCBIN_U8("graphics/interface/ivs/d.4bpp");
+static const u8 sIVRankings_D_Plus[] = INCBIN_U8("graphics/interface/ivs/d_plus.4bpp");
+static const u8 sIVRankings_C_Minus[] = INCBIN_U8("graphics/interface/ivs/c_minus.4bpp");
+static const u8 sIVRankings_C[] = INCBIN_U8("graphics/interface/ivs/c.4bpp");
+static const u8 sIVRankings_C_Plus[] = INCBIN_U8("graphics/interface/ivs/c_plus.4bpp");
+static const u8 sIVRankings_B_Minus[] = INCBIN_U8("graphics/interface/ivs/b_minus.4bpp");
+static const u8 sIVRankings_B[] = INCBIN_U8("graphics/interface/ivs/b.4bpp");
+static const u8 sIVRankings_B_Plus[] = INCBIN_U8("graphics/interface/ivs/b_plus.4bpp");
+static const u8 sIVRankings_A_Minus[] = INCBIN_U8("graphics/interface/ivs/a_minus.4bpp");
+static const u8 sIVRankings_A[] = INCBIN_U8("graphics/interface/ivs/a.4bpp");
+static const u8 sIVRankings_A_Plus[] = INCBIN_U8("graphics/interface/ivs/a_plus.4bpp");
+static const u8 sIVRankings_S[] = INCBIN_U8("graphics/interface/ivs/s.4bpp");
+
+static const u8 * const sIVRankings_Images[] =
+{
+    [0 ... 2] = sIVRankings_E_Minus,
+    [3 ... 4] = sIVRankings_E,
+    [5 ... 6] = sIVRankings_E_Plus,
+    [7 ... 8] = sIVRankings_D_Minus,
+    [9 ... 10] = sIVRankings_D,
+    [11 ... 12] = sIVRankings_D_Plus,
+    [13 ... 14] = sIVRankings_C_Minus,
+    [15 ... 16] = sIVRankings_C,
+    [17 ... 18] = sIVRankings_C_Plus,
+    [19 ... 20] = sIVRankings_B_Minus,
+    [21 ... 22] = sIVRankings_B,
+    [23 ... 24] = sIVRankings_B_Plus,
+    [25 ... 26] = sIVRankings_A_Minus,
+    [27 ... 28] = sIVRankings_A,
+    [29 ... 30] = sIVRankings_A_Plus,
+    [31] = sIVRankings_S,
+};
+
 static const u8 sPrintMoveTextColors[][3] = {
     {0, 7, 8},
     {0, 1, 2},
@@ -2518,6 +2556,15 @@ u8 GetNatureTextColor(s8 natureMod)
 static void PrintSkillsPage(void)
 {
     const s8 *natureMod = sNatureStatTable[GetNature(&sMonSummaryScreen->currentMon)];
+    u8 hpIv, atkIv, defIv, spAtkIv, spDefIv, spdIv;
+    
+    hpIv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV);
+    atkIv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK_IV);
+    defIv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_DEF_IV);
+    spAtkIv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPATK_IV);
+    spDefIv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPDEF_IV);
+    spdIv = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPEED_IV);
+
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 14 + sMonSkillsPrinterXpos->curHpStr, 4, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.curHpStrBuf);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 50 + sMonSkillsPrinterXpos->atkStr, 22, sNatureTextColors[GetNatureTextColor(natureMod[STAT_ATK - 1])], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK]);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 50 + sMonSkillsPrinterXpos->defStr, 35, sNatureTextColors[GetNatureTextColor(natureMod[STAT_DEF - 1])], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_DEF]);
@@ -2526,6 +2573,12 @@ static void PrintSkillsPage(void)
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 50 + sMonSkillsPrinterXpos->speStr, 74, sNatureTextColors[GetNatureTextColor(natureMod[STAT_SPEED - 1])], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_SPE]);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 15 + sMonSkillsPrinterXpos->expStr, 87, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.expPointsStrBuf);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 15 + sMonSkillsPrinterXpos->toNextLevel, 100, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.expToNextLevelStrBuf);
+    BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sIVRankings_Images[hpIv], 0, 0, 8, 8, 15, 6, 8, 8);
+    BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sIVRankings_Images[atkIv], 0, 0, 8, 8, 15, 23, 8, 8);
+    BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sIVRankings_Images[defIv], 0, 0, 8, 8, 15, 36, 8, 8);
+    BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sIVRankings_Images[spAtkIv], 0, 0, 8, 8, 15, 49, 8, 8);
+    BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sIVRankings_Images[spDefIv], 0, 0, 8, 8, 15, 62, 8, 8);
+    BlitBitmapRectToWindow(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sIVRankings_Images[spdIv], 0, 0, 8, 8, 15, 75, 8, 8);
 }
 
 #define GetMoveNamePrinterYpos(x) ((x) * 28 + 5)

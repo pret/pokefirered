@@ -3236,6 +3236,7 @@ extern const u32 gItemIconPalette_GroundTMHM[];
 extern const u32 gItemIconPalette_GhostTMHM[];
 extern const u32 gItemIconPalette_RockTMHM[];
 extern const u32 gItemIconPalette_FlyingTMHM[];
+extern const u32 gItemIconPalette_FairyTMHM[];
 // FireRed/LeafGreen key items
 extern const u32 gItemIcon_OaksParcel[];
 extern const u32 gItemIconPalette_OaksParcel[];

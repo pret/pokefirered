@@ -1368,6 +1368,8 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     s16 offset_y;
     u8 front_x = sBattlerCoords[0][1].x;
     u8 front_y;
+    const void *src;
+    void *dst;
 
     DestroySprite(&gSprites[data->frontspriteId]);
     DestroySprite(&gSprites[data->backspriteId]);
@@ -1391,6 +1393,14 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     LoadCompressedSpritePaletteWithTag(palette, species);
     //Front
     HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+    //additional sprite handling wiz1989
+    DebugPrintf("species = %S\n", gSpeciesNames[species]);
+    src = gMonSpritesGfxPtr->sprites[1];
+    dst = (void *)(VRAM + 0x10000 + gSprites[gBattlerSpriteIds[1]].oam.tileNum * 32);
+    DmaCopy32(3, src, dst, 0x800);
+    gSprites[gBattlerSpriteIds[1]].y = GetBattlerSpriteDefault_Y(1);
+    //StartSpriteAnim(&gSprites[gBattlerSpriteIds[1]], gBattleMonForms[1]);
+
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isShiny, 1);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
     gMultiuseSpriteTemplate.paletteTag = species;

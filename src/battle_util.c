@@ -2570,6 +2570,17 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_HP_CHANGE;
                 }
                 break;
+            case HOLD_EFFECT_RESTORE_PCT_HP:
+                if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)
+                {
+                    gBattleMoveDamage = (gBattleMons[battlerId].maxHP * battlerHoldEffectParam) / 100;
+                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
+                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
+                    gBattleMoveDamage *= -1;
+                    BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
+                    effect = ITEM_HP_CHANGE;
+                }
+                break;
             case HOLD_EFFECT_RESTORE_PP:
                 if (!moveTurn)
                 {

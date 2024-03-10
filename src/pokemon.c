@@ -4289,6 +4289,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (data == 0)
                                 data = 1;
                             break;
+                        case ITEM6_HEAL_QUARTER:
+                            data = GetMonData(mon, MON_DATA_MAX_HP, NULL) / 4;
+                            if (data == 0)
+                                data = 1;
+                            break;
                         case ITEM6_HEAL_HP_LVL_UP:
                             data = gBattleScripting.levelUpHP;
                             break;

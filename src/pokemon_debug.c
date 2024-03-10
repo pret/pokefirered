@@ -894,12 +894,16 @@ static void ResetPokemonDebugWindows(void)
 void CB2_Debug_Pokemon(void)
 {
     u8 taskId;
+    const void *src;
+    void *dst;
     const u32 *palette;
     struct PokemonDebugMenu *data;
     u16 species;
     s16 offset_y;
     u8 front_x = sBattlerCoords[0][1].x;
     u8 front_y;
+
+    DebugPrintf("switch case: %d", gMain.state);
 
     switch (gMain.state)
     {
@@ -963,6 +967,14 @@ void CB2_Debug_Pokemon(void)
             LoadCompressedSpritePaletteWithTag(palette, species);
             //Front
             HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, MALE_PERSONALITY);
+            //additional sprite handling wiz1989
+            DebugPrintf("species = %S\n", gSpeciesNames[species]);
+            src = gMonSpritesGfxPtr->sprites[1];
+            dst = (void *)(VRAM + 0x10000 + gSprites[gBattlerSpriteIds[1]].oam.tileNum * 32);
+            DmaCopy32(3, src, dst, 0x800);
+            gSprites[gBattlerSpriteIds[1]].y = GetBattlerSpriteDefault_Y(1);
+            //StartSpriteAnim(&gSprites[gBattlerSpriteIds[1]], gBattleMonForms[1]);
+
             data->isShiny = FALSE;
             data->isFemale = FALSE;
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isShiny, 1);
@@ -973,6 +985,7 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->frontspriteId].oam.paletteNum = 1;
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
+
             //Front Shadow
             LoadAndCreateEnemyShadowSpriteCustom(data, species);
 

@@ -1358,7 +1358,7 @@ static const struct SpindaSpot sSpindaSpotGraphics[] =
 
 #include "data/pokemon/item_effects.h"
 
-static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
+const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {                      // Attack  Defense  Speed  Sp.Atk  Sp.Def
     [NATURE_HARDY]   = {    0,      0,      0,      0,      0   },
     [NATURE_LONELY]  = {   +1,     -1,      0,      0,      0   },

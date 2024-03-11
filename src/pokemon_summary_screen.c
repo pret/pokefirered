@@ -5032,30 +5032,23 @@ static void PokeSum_SeekToNextMon(u8 taskId, s8 direction)
 
 static s8 SeekToNextMonInSingleParty(s8 direction)
 {
-    struct Pokemon * partyMons = sMonSummaryScreen->monList.mons;
-    s8 seekDelta = 0;
+    struct Pokemon *partyMons = sMonSummaryScreen->monList.mons;
+    u8 index = sLastViewedMonIndex;
+    u8 numMons = sMonSummaryScreen->lastIndex + 1;
+    direction += numMons;
 
-    if (sMonSummaryScreen->curPageIndex == 0)
-    {
-        if (direction == -1 && sLastViewedMonIndex == 0)
-            return -1;
-        else if (direction == 1 && sLastViewedMonIndex >= sMonSummaryScreen->lastIndex)
-            return -1;
-        else
-            return sLastViewedMonIndex + direction;
-    }
+    index = (index + direction) % numMons;
 
-    while (TRUE)
-    {
-        seekDelta += direction;
-        if (0 > sLastViewedMonIndex + seekDelta || sLastViewedMonIndex + seekDelta > sMonSummaryScreen->lastIndex)
-            return -1;
-
-        if (GetMonData(&partyMons[sLastViewedMonIndex + seekDelta], MON_DATA_IS_EGG) == 0)
-            return sLastViewedMonIndex + seekDelta;
-    }
-
-    return -1;
+    // skip over any Eggs unless on the Info page
+    if (sMonSummaryScreen->curPageIndex != PSS_PAGE_INFO)
+        while (GetMonData(&partyMons[index], MON_DATA_IS_EGG))
+            index = (index + direction) % numMons;
+    
+    // to avoid "scrolling" to the same Pokemon
+    if (index == sLastViewedMonIndex)
+        return -1;
+    else
+        return index;
 }
 
 static u8 PokeSum_CanSeekToMon(struct Pokemon * partyMons)

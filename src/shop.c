@@ -608,7 +608,10 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
         loc = gStringVar4;
         while (x-- != 0)
             *loc++ = 0;
-        StringExpandPlaceholders(loc, gText_PokedollarVar1);
+        if (ItemId_GetPocket(item) == POCKET_TM_CASE && (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)))
+            StringCopy(loc, gText_SoldOut2);
+        else
+            StringExpandPlaceholders(loc, gText_PokedollarVar1);
         BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
 }
@@ -892,18 +895,30 @@ static void Task_BuyMenu(u8 taskId)
             BuyMenuPrintCursor(tListTaskId, 2);
             RecolorItemDescriptionBox(1);
             sShopData.itemPrice = ItemId_GetPrice(itemId);
-            if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData.itemPrice))
+            if (ItemId_GetPocket(itemId) == POCKET_TM_CASE && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
+            {
+                BuyMenuDisplayMessage(taskId, gText_SoldOut, BuyMenuReturnToItemList);
+            }
+            else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData.itemPrice))
             {
                 BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);
-            }
-            else if (ItemId_GetPocket(itemId) == POCKET_TM_CASE && CheckBagHasItem(itemId, 1))
-            {
-                BuyMenuDisplayMessage(taskId, gText_YouAlreadyHaveThis, BuyMenuReturnToItemList);
             }
             else
             {
                 CopyItemName(itemId, gStringVar1);
-                BuyMenuDisplayMessage(taskId, gText_Var1CertainlyHowMany, Task_BuyHowManyDialogueInit);
+                if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
+                {
+                    ConvertIntToDecimalStringN(gStringVar2, sShopData.itemPrice, STR_CONV_MODE_LEFT_ALIGN, 6);
+                    StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
+
+                    tItemCount = 1;
+                    sShopData.itemPrice = ItemId_GetPrice(itemId) * tItemCount;
+                    BuyMenuDisplayMessage(taskId, gStringVar4, CreateBuyMenuConfirmPurchaseWindow);
+                }
+                else
+                {
+                    BuyMenuDisplayMessage(taskId, gText_Var1CertainlyHowMany, Task_BuyHowManyDialogueInit);
+                }
             }
             break;
         }
@@ -986,9 +1001,10 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     PutWindowTilemap(4);
     if (AddBagItem(tItemId, tItemCount) == TRUE)
     {
-        BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
+        RedrawListMenu(tListTaskId);
         DebugFunc_PrintPurchaseDetails(taskId);
         RecordItemTransaction(tItemId, tItemCount, QL_EVENT_BOUGHT_ITEM - QL_EVENT_USED_POKEMART);
+        BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
     }
     else
     {

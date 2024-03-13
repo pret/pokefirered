@@ -7,8 +7,4 @@
 #define DEBUG_OVERWORLD_TRIGGER_EVENT   pressedStartButton  // The event that opens the menu when holding the key(s) defined in DEBUG_OVERWORLD_HELD_KEYS.
 #define DEBUG_OVERWORLD_IN_MENU         TRUE                // Replaces the overworld debug menu button combination with a start menu entry (above Pokédex).
 
-// todo
-// Pokémon Debug
-//#define DEBUG_POKEMON_MENU              TRUE    // Enables a debug menu for pokemon sprites and icons, accessed by pressing SELECT in the summary screen.
-
 #endif // GUARD_CONFIG_DEBUG_H

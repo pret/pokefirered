@@ -7,7 +7,8 @@
 //Ghoulslash:           https://github.com/ghoulslash/pokeemerald
 //Jaizu:                https://jaizu.moe/
 //Other pokeemerald-expansion contributors, including:
-//Lunos, MGriffin, DizzyEgg, Jasper/Bassoonian, psf, RavePossum
+//Lunos, MGriffin, DizzyEgg, Jasper/Bassoonian, psf
+//pokefirered port: RavePossum
 #include "global.h"
 #include "battle.h"
 #include "coins.h"

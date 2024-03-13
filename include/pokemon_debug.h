@@ -53,7 +53,6 @@ struct PokemonDebugMenu
     u8 iconspriteId;
     u8 frontShadowSpriteId;
     bool8 isShiny;
-    bool8 isFemale;
     struct PokemonDebugModifyArrows modifyArrows;
     struct PokemonDebugOptionArrows optionArrows;
     struct PokemonDebugYPosModifiyArrows yPosModifyArrows;

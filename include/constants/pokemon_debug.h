@@ -6,8 +6,6 @@
 #define DEBUG_MON_BACK_Y 80
 #define DEBUG_ICON_X 220
 #define DEBUG_ICON_Y 140
-#define DEBUG_MON_SHINY 0
-#define DEBUG_MON_NORMAL 9
 
 #define MODIFY_DIGITS_MAX 4
 #define MODIFY_DIGITS_ARROW_X 129
@@ -17,11 +15,6 @@
 #define OPTIONS_ARROW_1_X 4
 #define OPTIONS_ARROW_2_X 236
 #define OPTIONS_ARROW_Y 119
-
-#define GENDER_MALE 0
-#define GENDER_FEMALE 1
-#define MON_PIC_BACK 0
-#define MON_PIC_FRONT 1
 
 //Sprite offset
 #define MAX_Y_OFFSET 20

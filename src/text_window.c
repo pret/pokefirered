@@ -175,3 +175,8 @@ const u16 *GetTextWindowPalette(u8 id)
 
     return (const u16 *)(gTextWindowPalettes) + id;
 }
+
+const u16 *GetOverworldTextboxPalettePtr(void)
+{
+    return gStandardMenuPalette;
+}

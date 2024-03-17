@@ -20,7 +20,6 @@ static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * template, s16
 static void DestroyMonIconInternal(struct Sprite *sprite);
 static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 
-
 const u16 gMonIconPalettes[][16] = {
     INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal"),
     INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_1.gbapal"),

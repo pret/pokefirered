@@ -6,6 +6,7 @@
 #include "task.h"
 
 extern const u16 gMenuMessageWindow_Gfx[];
+extern const u16 gStandardMenuPalette[];
 
 void ClearScheduledBgCopiesToVram(void);
 void ScheduleBgCopyTilemapToVram(u8 bgId);

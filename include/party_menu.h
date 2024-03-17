@@ -25,6 +25,7 @@ extern u8 gSelectedMonPartyId;
 extern MainCallback gPostMenuFieldCallback;
 extern u8 gSelectedOrderFromParty[3];
 extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
+extern const struct SpriteTemplate gSpriteTemplate_StatusIcons;
 
 extern void (*gItemUseCB)(u8, TaskFunc);
 
@@ -82,5 +83,6 @@ u8 GetPartyIdFromBattlePartyId(u8 battlePartyId);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 void ChoosePartyMonByMenuType(u8 menuType);
+void LoadPartyMenuAilmentGfx(void);
 
 #endif // GUARD_PARTY_MENU_H

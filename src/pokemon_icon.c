@@ -18,6 +18,7 @@ struct MonIconSpriteTemplate
 
 static u8 CreateMonIconSprite(const struct MonIconSpriteTemplate * template, s16 x, s16 y, u8 subpriority);
 static void DestroyMonIconInternal(struct Sprite *sprite);
+static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 
 const u16 gMonIconPalettes[][16] = {
     INCBIN_U16("graphics/pokemon/icon_palettes/icon_palette_0.gbapal"),
@@ -1169,6 +1170,18 @@ void FreeMonIconPalette(u16 species)
     u8 palIndex;
     palIndex = gMonIconPaletteIndices[species];
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
+}
+
+void FreeAndDestroyMonIconSprite(struct Sprite *sprite)
+{
+    FreeAndDestroyMonIconSprite_(sprite);
+}
+
+static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite)
+{
+    struct SpriteFrameImage image = { NULL, sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] };
+    sprite->images = &image;
+    DestroySprite(sprite);
 }
 
 void SpriteCB_MonIcon(struct Sprite *sprite)

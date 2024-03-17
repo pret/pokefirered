@@ -297,6 +297,7 @@ extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
 extern const u8 gPPUpGetMask[];
+extern const u8 *const gMonFootprintTable[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

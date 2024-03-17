@@ -2353,7 +2353,7 @@ static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, stru
 
     if (species == SPECIES_NONE)
         return;
-    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, gSpeciesNames[species]) == 0)
+    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, gSpeciesInfo[species].speciesName) == 0)
         return;
     switch (gender)
     {
@@ -4718,7 +4718,7 @@ u16 ItemIdToBattleMoveId(u16 item)
 {
     u16 tmNumber = item - ITEM_TM01_FOCUS_PUNCH;
 
-    return sTMHMMoves[tmNumber];
+    return gTMHMMoves[tmNumber];
 }
 
 bool8 IsMoveHm(u16 move)
@@ -4726,7 +4726,7 @@ bool8 IsMoveHm(u16 move)
     u8 i;
 
     for (i = 0; i < NUM_HIDDEN_MACHINES - 1; ++i) // no dive
-        if (sTMHMMoves[i + NUM_TECHNICAL_MACHINES] == move)
+        if (gTMHMMoves[i + NUM_TECHNICAL_MACHINES] == move)
             return TRUE;
     return FALSE;
 }

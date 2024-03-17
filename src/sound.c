@@ -380,8 +380,6 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u32 chorus;
     u32 index;
     u8 table;
-
-    species--;
     
     // Set default values
     // May be overridden depending on mode.
@@ -474,29 +472,34 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     // If you wish to expand pokemon, you need to
     // append new cases to the switch.
     species = SpeciesToCryId(species);
-    index = species % 128;
-    table = species / 128;
-
-    #define GET_CRY(speciesIndex, tableId, reversed) \
-        ((reversed) ? &gCryTable_Reverse[(128 * (tableId)) + (speciesIndex)] : &gCryTable[(128 * (tableId)) + (speciesIndex)])
-
-    switch (table)
+    if (species != 0)
     {
-    case 0:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 0, reverse));
-        break;
-    case 1:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 1, reverse));
-        break;
-    case 2:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 2, reverse));
-        break;
-    case 3:
-        gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 3, reverse));
-        break;
+        species--;
+        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
     }
+    // index = species % 128;
+    // table = species / 128;
 
-    #undef GET_CRY
+    // #define GET_CRY(speciesIndex, tableId, reversed) \
+    //     ((reversed) ? &gCryTable_Reverse[(128 * (tableId)) + (speciesIndex)] : &gCryTable[(128 * (tableId)) + (speciesIndex)])
+
+    // switch (table)
+    // {
+    // case 0:
+    //     gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 0, reverse));
+    //     break;
+    // case 1:
+    //     gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 1, reverse));
+    //     break;
+    // case 2:
+    //     gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 2, reverse));
+    //     break;
+    // case 3:
+    //     gMPlay_PokemonCry = SetPokemonCryTone(GET_CRY(index, 3, reverse));
+    //     break;
+    // }
+
+    // #undef GET_CRY
 }
 
 bool8 IsCryFinished(void)

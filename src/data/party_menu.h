@@ -1194,7 +1194,7 @@ static const u8 *const sUnionRoomTradeMessages[] =
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
 
-static const u16 sTMHMMoves[] =
+const u16 gTMHMMoves[] =
 {
     MOVE_FOCUS_PUNCH,
     MOVE_DRAGON_CLAW,

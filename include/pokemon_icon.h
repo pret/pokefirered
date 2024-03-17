@@ -3,10 +3,10 @@
 
 #include "global.h"
 
-extern const u8 *const gMonIconTable[];
+// extern const u8 *const gMonIconTable[];
 extern const struct SpritePalette gMonIconPaletteTable[];
 extern const u16 gMonIconPalettes[][16];
-extern const u8 gMonIconPaletteIndices[];
+// extern const u8 gMonIconPaletteIndices[];
 
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);
 const u8 *GetMonIconTiles(u16 iconSpecies, bool32 extra);

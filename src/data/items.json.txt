@@ -1,7 +1,7 @@
 {{ doNotModifyHeader }}
 ## for item in items
 ## if item.pocket == "POCKET_TM_CASE"
-extern const u8 gMoveDescription_{{ item.moveId }}[];
+extern const u8 s{{ item.moveId }}Description[];
 ## endif
 {% if item.itemId != "ITEM_NONE" %}const u8 gItemDescription_{{ item.itemId }}[] = _("{{ item.description_english }}");{% endif %}
 ## endfor
@@ -15,7 +15,7 @@ const struct Item gItems[] = {
         .holdEffect = {{ item.holdEffect }},
         .holdEffectParam = {{ item.holdEffectParam }},
 ## if item.pocket == "POCKET_TM_CASE"
-        .description = gMoveDescription_{{ item.moveId }},
+        .description = s{{ item.moveId }}Description,
 ## else
         .description = gItemDescription_{{ item.itemId }},
 ## endif

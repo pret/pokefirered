@@ -720,7 +720,7 @@ static u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 count)
         if (count == 0)
             StringAppend(gStringVar1, gText_BattleTowerBan_Space);
         count++;
-        StringAppend(gStringVar1, gSpeciesNames[species]);
+        StringAppend(gStringVar1, gSpeciesInfo[species].speciesName);
         switch (count)
         {
         case 2:

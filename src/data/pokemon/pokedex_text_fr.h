@@ -173,12 +173,12 @@ const u8 gArbokPokedexText[] = _(
 
 const u8 gArbokPokedexTextUnused[] = _("");
 
-const u8 gPikachuPokedexText[] = _(
-    "It has small electric sacs on both its\n"
-    "cheeks. If threatened, it looses electric\n"
-    "charges from the sacs.");
+// const u8 gPikachuPokedexText[] = _(
+//     "It has small electric sacs on both its\n"
+//     "cheeks. If threatened, it looses electric\n"
+//     "charges from the sacs.");
 
-const u8 gPikachuPokedexTextUnused[] = _("");
+// const u8 gPikachuPokedexTextUnused[] = _("");
 
 const u8 gRaichuPokedexText[] = _(
     "Its electric charges can reach even\n"
@@ -1207,12 +1207,12 @@ const u8 gLanturnPokedexText[] = _(
 
 const u8 gLanturnPokedexTextUnused[] = _("");
 
-const u8 gPichuPokedexText[] = _(
-    "Despite its small size, it can zap even\n"
-    "adult humans. However, if it does so, it\n"
-    "also surprises itself.");
+// const u8 gPichuPokedexText[] = _(
+//     "Despite its small size, it can zap even\n"
+//     "adult humans. However, if it does so, it\n"
+//     "also surprises itself.");
 
-const u8 gPichuPokedexTextUnused[] = _("");
+// const u8 gPichuPokedexTextUnused[] = _("");
 
 const u8 gCleffaPokedexText[] = _(
     "When numerous meteors illuminate the\n"
@@ -1410,12 +1410,12 @@ const u8 gMisdreavusPokedexText[] = _(
 
 const u8 gMisdreavusPokedexTextUnused[] = _("");
 
-const u8 gUnownPokedexText[] = _(
-    "Its flat, thin body is always stuck on\n"
-    "walls. Its shape appears to have some\n"
-    "meaning.");
+// const u8 gUnownPokedexText[] = _(
+//     "Its flat, thin body is always stuck on\n"
+//     "walls. Its shape appears to have some\n"
+//     "meaning.");
 
-const u8 gUnownPokedexTextUnused[] = _("");
+// const u8 gUnownPokedexTextUnused[] = _("");
 
 const u8 gWobbuffetPokedexText[] = _(
     "To keep its pitch-black tail hidden, it\n"

@@ -5,7 +5,7 @@
 // Unused
 const u8 *GetPokedexCategoryName(u16 dexNum)
 {
-    return gPokedexEntries[dexNum].categoryName;
+    return gSpeciesInfo[dexNum].categoryName;
 }
 
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
@@ -13,9 +13,9 @@ u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
     switch (data)
     {
     case 0:  // height
-        return gPokedexEntries[dexNum].height;
+        return gSpeciesInfo[dexNum].height;
     case 1:  // weight
-        return gPokedexEntries[dexNum].weight;
+        return gSpeciesInfo[dexNum].weight;
     default:
         return 1;
     }

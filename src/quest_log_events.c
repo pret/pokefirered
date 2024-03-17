@@ -1023,7 +1023,7 @@ static void QuestLog_GetSpeciesName(u16 species, u8 *dest, u8 stringVarId)
     else
     {
         if (species != SPECIES_EGG)
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gSpeciesNames[species]);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gSpeciesInfo[species].speciesName);
         else
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gText_EggNickname);
     }

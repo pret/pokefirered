@@ -18,17 +18,17 @@ struct MonCoords
 #define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 
-extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
+// extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[][MOVE_NAME_LENGTH + 1];
 
 extern const u8 gTrainerClassNames[][13];
 
-extern const struct MonCoords gMonFrontPicCoords[];
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const struct MonCoords gMonBackPicCoords[];
-extern const struct CompressedSpriteSheet gMonBackPicTable[];
-extern const struct CompressedSpritePalette gMonPaletteTable[];
-extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+// extern const struct MonCoords gMonFrontPicCoords[];
+// extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+// extern const struct MonCoords gMonBackPicCoords[];
+// extern const struct CompressedSpriteSheet gMonBackPicTable[];
+// extern const struct CompressedSpritePalette gMonPaletteTable[];
+// extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
@@ -59,5 +59,8 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_OldMan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_RSMay[];
+
+
+extern const union AnimCmd sAnim_GeneralFrame0[];
 
 #endif // GUARD_DATA_H

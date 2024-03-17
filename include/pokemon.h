@@ -5,6 +5,9 @@
 #include "sprite.h"
 #include "constants/pokemon.h"
 
+
+#define FORM_SPECIES_END (0xffff)
+
 struct PokemonSubstruct0
 {
     u16 species;
@@ -205,7 +208,7 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
-struct SpeciesInfo
+struct SpeciesInfo /*0x8C*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -215,24 +218,88 @@ struct SpeciesInfo
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 expYield;
- /* 0x0A */ u16 evYield_HP:2;
- /* 0x0A */ u16 evYield_Attack:2;
- /* 0x0A */ u16 evYield_Defense:2;
- /* 0x0A */ u16 evYield_Speed:2;
- /* 0x0B */ u16 evYield_SpAttack:2;
- /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 itemCommon;
- /* 0x0E */ u16 itemRare;
- /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
- /* 0x12 */ u8 friendship;
- /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroups[2];
- /* 0x16 */ u8 abilities[2];
- /* 0x18 */ u8 safariZoneFleeRate;
- /* 0x19 */ u8 bodyColor : 7;
+ /* 0x09 */ u8 padding1;
+ /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
+ /* 0x0C */ u16 evYield_HP:2;
+            u16 evYield_Attack:2;
+            u16 evYield_Defense:2;
+            u16 evYield_Speed:2;
+ /* 0x0D */ u16 evYield_SpAttack:2;
+            u16 evYield_SpDefense:2;
+            u16 padding2:4;
+ /* 0x0E */ u16 itemCommon;
+ /* 0x10 */ u16 itemRare;
+ /* 0x12 */ u8 genderRatio;
+ /* 0x13 */ u8 eggCycles;
+ /* 0x14 */ u8 friendship;
+ /* 0x15 */ u8 growthRate;
+ /* 0x16 */ u8 eggGroups[2];
+ /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
+ /* 0x1E */ u8 safariZoneFleeRate;
+            // Pokédex data
+ /* 0x1F */ u8 categoryName[13];
+ /* 0x1F */ u8 speciesName[POKEMON_NAME_LENGTH + 1];
+ /* 0x2C */ u16 cryId;
+ /* 0x2E */ u16 natDexNum;
+ /* 0x30 */ u16 height; //in decimeters
+ /* 0x32 */ u16 weight; //in hectograms
+ /* 0x34 */ u16 pokemonScale;
+ /* 0x36 */ u16 pokemonOffset;
+ /* 0x38 */ u16 trainerScale;
+ /* 0x3A */ u16 trainerOffset;
+ /* 0x3C */ const u8 *description;
+ /* 0x40 */ u8 bodyColor : 7;
+            // Graphical Data
             u8 noFlip : 1;
+ /* 0x41 */ u8 frontAnimDelay;
+ /* 0x42 */ u8 frontAnimId;
+ /* 0x43 */ u8 backAnimId;
+ /* 0x44 */ const union AnimCmd *const *frontAnimFrames;
+ /* 0x48 */ const u32 *frontPic;
+ /* 0x4C */ const u32 *frontPicFemale;
+ /* 0x50 */ const u32 *backPic;
+ /* 0x54 */ const u32 *backPicFemale;
+ /* 0x58 */ const u32 *palette;
+ /* 0x5C */ const u32 *paletteFemale;
+ /* 0x60 */ const u32 *shinyPalette;
+ /* 0x64 */ const u32 *shinyPaletteFemale;
+ /* 0x68 */ const u8 *iconSprite;
+ /* 0x6C */ const u8 *iconSpriteFemale;
+ /* 0x70 */ const u8 *footprint;
+            // All Pokémon pics are 64x64, but this data table defines where in this 64x64 frame the sprite's non-transparent pixels actually are.
+ /* 0x74 */ u8 frontPicSize; // The dimensions of this drawn pixel area.
+ /* 0x74 */ u8 frontPicSizeFemale; // The dimensions of this drawn pixel area.
+ /* 0x75 */ u8 frontPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
+ /* 0x76 */ u8 backPicSize; // The dimensions of this drawn pixel area.
+ /* 0x76 */ u8 backPicSizeFemale; // The dimensions of this drawn pixel area.
+ /* 0x77 */ u8 backPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
+ /* 0x78 */ u8 iconPalIndex:3;
+            u8 iconPalIndexFemale:3;
+            u8 padding3:2;
+ /* 0x79 */ u8 enemyMonElevation; // This determines how much higher above the usual position the enemy Pokémon is during battle. Species that float or fly have nonzero values.
+            // Flags
+ /* 0x7A */ u32 isLegendary:1;
+            u32 isMythical:1;
+            u32 isUltraBeast:1;
+            u32 isParadoxForm:1;
+            u32 isMegaEvolution:1;
+            u32 isPrimalReversion:1;
+            u32 isUltraBurst:1;
+            u32 isGigantamax:1;
+            u32 isAlolanForm:1;
+            u32 isGalarianForm:1;
+            u32 isHisuianForm:1;
+            u32 isPaldeanForm:1;
+            u32 cannotBeTraded:1;
+            u32 allPerfectIVs:1;
+            u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
+            u32 padding4:17;
+            // Move Data
+ /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
+ /* 0x84 */ const u16 *teachableLearnset;
+ /* 0x88 */ const struct Evolution *evolutions;
+ /* 0x84 */ const u16 *formSpeciesIdTable;
+ /* 0x84 */ const struct FormChange *formChangeTable;
 };
 
 struct BattleMove
@@ -257,11 +324,27 @@ struct SpindaSpot
     u16 image[SPINDA_SPOT_HEIGHT];
 };
 
-struct __attribute__((packed)) LevelUpMove
+
+struct LevelUpMove
 {
-    u16 move:9;
-    u16 level:7;
+    u16 move;
+    u16 level;
 };
+
+struct FormChange
+{
+    u16 method;
+    u16 targetSpecies;
+    u16 param1;
+    u16 param2;
+    u16 param3;
+};
+
+// struct __attribute__((packed)) LevelUpMove
+// {
+//     u16 move:9;
+//     u16 level:7;
+// };
 
 struct Evolution
 {
@@ -292,7 +375,7 @@ extern const u8 gStatStageRatios[][2];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
-extern const u16 *const gLevelUpLearnsets[];
+// extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
@@ -375,7 +458,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u16 HoennToNationalOrder(u16 hoennNum);
 u16 SpeciesToCryId(u16 species);
-void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, bool8 isFrontPic);
+void DrawSpindaSpots(u32 species, u32 personality, u8 *dest, bool8 isFrontPic);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 bool8 GetPlayerFlankId(void);
 bool16 GetLinkTrainerFlankId(u8 linkPlayerId);
@@ -399,8 +482,8 @@ void PlayBattleBGM(void);
 void PlayMapChosenOrBattleBGM(u16 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
 const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
-const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
-const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
+const u32 *GetMonSpritePalStruct(struct Pokemon *mon);
+const u32 *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor);
@@ -424,5 +507,11 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode);
 void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
+
+
+
+u16 SanitizeSpeciesId(u16 species);
+bool32 IsSpeciesEnabled(u16 species);
+u32 GetUnownSpeciesId(u32 personality);
 
 #endif // GUARD_POKEMON_H

@@ -25,6 +25,7 @@ extern u8 gSelectedMonPartyId;
 extern MainCallback gPostMenuFieldCallback;
 extern u8 gSelectedOrderFromParty[3];
 extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
+extern const u16 gTMHMMoves[];
 
 extern void (*gItemUseCB)(u8, TaskFunc);
 

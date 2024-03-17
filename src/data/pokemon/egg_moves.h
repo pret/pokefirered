@@ -171,7 +171,7 @@ const u16 gEggMoves[] = {
               MOVE_REVERSAL,
               MOVE_BEAT_UP,
               MOVE_REVENGE,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLINGSALT),
 
     egg_moves(GROWLITHE,
               MOVE_BODY_SLAM,
@@ -204,7 +204,7 @@ const u16 gEggMoves[] = {
               MOVE_MEDITATE,
               MOVE_ROLLING_KICK,
               MOVE_ENCORE,
-              MOVE_SMELLING_SALT,
+              MOVE_SMELLINGSALT,
               MOVE_COUNTER,
               MOVE_ROCK_SLIDE),
 
@@ -347,7 +347,7 @@ const u16 gEggMoves[] = {
               MOVE_MAGNITUDE,
               MOVE_BODY_SLAM,
               MOVE_CURSE,
-              MOVE_SMELLING_SALT,
+              MOVE_SMELLINGSALT,
               MOVE_SLEEP_TALK,
               MOVE_SNORE,
               MOVE_SUBSTITUTE),
@@ -732,7 +732,7 @@ const u16 gEggMoves[] = {
               MOVE_CRUNCH,
               MOVE_HEAL_BELL,
               MOVE_SNORE,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLINGSALT),
 
     egg_moves(QWILFISH,
               MOVE_FLAIL,
@@ -915,7 +915,7 @@ const u16 gEggMoves[] = {
               MOVE_ENDURE,
               MOVE_SWAGGER,
               MOVE_ROCK_SLIDE,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLINGSALT),
 
     egg_moves(MUDKIP,
               MOVE_REFRESH,
@@ -984,7 +984,7 @@ const u16 gEggMoves[] = {
               MOVE_BATON_PASS,
               MOVE_WISH,
               MOVE_TRICK,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLINGSALT),
 
     egg_moves(WINGULL,
               MOVE_MIST,
@@ -1207,7 +1207,7 @@ const u16 gEggMoves[] = {
               MOVE_SNORE,
               MOVE_SWAGGER,
               MOVE_EXTRASENSORY,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLINGSALT),
 
     egg_moves(CLAMPERL,
               MOVE_REFRESH,
@@ -1258,7 +1258,7 @@ const u16 gEggMoves[] = {
               MOVE_ENDEAVOR,
               MOVE_BODY_SLAM,
               MOVE_STOMP,
-              MOVE_SMELLING_SALT),
+              MOVE_SMELLINGSALT),
 
     egg_moves(CASTFORM,
               MOVE_FUTURE_SIGHT,

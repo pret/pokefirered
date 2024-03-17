@@ -1110,7 +1110,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         // Buffer species name
         txtPtr = gStorage->displayMonSpeciesNameText;
         *(txtPtr)++ = CHAR_SLASH;
-        StringCopyPadded(txtPtr, gSpeciesNames[gStorage->displayMonSpecies], CHAR_SPACE, 5);
+        StringCopyPadded(txtPtr, gSpeciesInfo[gStorage->displayMonSpecies].speciesName, CHAR_SPACE, 5);
 
         // Buffer gender and level
         txtPtr = gStorage->displayMonGenderAndLevelText;

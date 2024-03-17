@@ -1,6 +1,13 @@
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
+MEMORY
+{
+    EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
+    IWRAM (rwx) : ORIGIN = 0x3000000, LENGTH = 32K
+    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 32M
+}
+
 SECTIONS {
     . = 0x2000000;
 
@@ -18,7 +25,7 @@ SECTIONS {
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
         . = 0x40000;
-    }
+    } > EWRAM
 
     . = 0x3000000;
 
@@ -40,7 +47,7 @@ SECTIONS {
         end = .;
 
         . = 0x8000;
-    }
+    } > IWRAM
 
     . = 0x8000000;
 
@@ -307,7 +314,7 @@ SECTIONS {
         src/berry_powder.o(.text);
         src/minigame_countdown.o(.text);
         src/berry_fix_program.o(.text);
-    } =0
+    } > ROM =0
 
     script_data :
     ALIGN(4)
@@ -319,7 +326,7 @@ SECTIONS {
         data/battle_scripts_2.o(script_data);
         data/battle_ai_scripts.o(script_data);
         data/mystery_event_script_cmd_table.o(script_data);
-    } =0
+    } > ROM =0
 
     lib_text :
     ALIGN(4)
@@ -388,7 +395,7 @@ SECTIONS {
         *libc.a:libcfunc.o(.text);
         *libc.a:lseekr.o(.text);
         *libc.a:readr.o(.text);
-    } =0
+    } > ROM =0
 
     .rodata :
     SUBALIGN(4)
@@ -601,14 +608,13 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         src/keyboard_text.o(.rodata);
         src/trainer_tower_sets.o(.rodata);
-        src/move_descriptions.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-    } =0
+    } > ROM =0
 
     song_data :
     ALIGN(4)
@@ -960,7 +966,7 @@ SECTIONS {
         sound/songs/midi/mus_trainer_tower.o(.rodata);
         sound/songs/midi/mus_slow_pallet.o(.rodata);
         sound/songs/midi/mus_teachy_tv_menu.o(.rodata);
-    }
+    } > ROM =0
 
     lib_rodata :
     SUBALIGN(4)
@@ -1013,7 +1019,7 @@ SECTIONS {
         *libc.a:readr.o(.rodata);
 
         . = ALIGN(4);
-    } =0
+    } > ROM =0
 
     multiboot_data :
     ALIGN(4)
@@ -1021,14 +1027,14 @@ SECTIONS {
         data/multiboot_ereader.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
-    } =0
+    } > ROM =0
 
     . = 0x08D00000;
     gfx_data :
     ALIGN(4)
     {
         src/graphics.o(.rodata);
-    } =0
+    } > ROM =0
 
     extra :
     ALIGN(4)
@@ -1036,7 +1042,7 @@ SECTIONS {
         src/*.o(.text);
         src/*.o(.rodata);
         data/*.o(.rodata);
-    } = 0
+    } > ROM =0
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

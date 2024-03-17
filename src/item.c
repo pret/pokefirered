@@ -16,6 +16,8 @@ EWRAM_DATA struct BagPocket gBagPockets[NUM_BAG_POCKETS] = {};
 void SortAndCompactBagPocket(struct BagPocket * pocket);
 
 // Item descriptions and data
+#include "constants/moves.h"
+#include "pokemon_summary_screen.h"
 #include "data/items.h"
 
 u16 GetBagItemQuantity(u16 * ptr)

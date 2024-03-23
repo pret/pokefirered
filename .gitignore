@@ -61,3 +61,4 @@ prefabs.json
 .vscode/*.*
 *.js
 *.sym
+src/data/map_group_count.h

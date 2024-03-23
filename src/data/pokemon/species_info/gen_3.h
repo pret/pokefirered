@@ -1616,7 +1616,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #endif //P_FAMILY_WINGULL
 
 #if P_FAMILY_RALTS
-#define RALTS_FAMILY_TYPE2 (P_UPDATED_TYPES >= GEN_6 ? TYPE_PSYCHIC : TYPE_PSYCHIC)
+#define RALTS_FAMILY_TYPE2 (P_UPDATED_TYPES >= GEN_6 ? TYPE_FAIRY : TYPE_PSYCHIC)
 
 #if P_UPDATED_EGG_GROUPS >= GEN_8
     #define RALTS_FAMILY_EGG_GROUPS { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_AMORPHOUS }
@@ -2931,7 +2931,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 
 #if P_FAMILY_MAWILE
 #if P_UPDATED_TYPES >= GEN_6
-    #define MAWILE_TYPES { TYPE_STEEL, TYPE_STEEL }
+    #define MAWILE_TYPES { TYPE_STEEL, TYPE_FAIRY }
 #else
     #define MAWILE_TYPES { TYPE_STEEL, TYPE_STEEL }
 #endif
@@ -4916,7 +4916,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 110,
         .baseSpDefense = 105,
-        .types = { TYPE_DRAGON, TYPE_DRAGON },
+        .types = { TYPE_DRAGON, TYPE_FAIRY },
         .expYield = 207,
         .abilities = { ABILITY_PIXILATE, ABILITY_PIXILATE, ABILITY_PIXILATE },
         .cryId = CRY_ALTARIA_MEGA,

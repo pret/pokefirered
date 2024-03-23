@@ -44,7 +44,6 @@ ld_script_ruby.txt
 ld_script_sapphire.txt
 sound/**/*.bin
 sound/songs/midi/*.s
-src/data/items.h
 src/data/wild_encounters.h
 src/data/region_map/region_map_entries.h
 src/data/region_map/region_map_entry_strings.h

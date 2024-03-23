@@ -3,7 +3,9 @@
 ## if item.pocket == "POCKET_TM_CASE"
 extern const u8 s{{ item.moveId }}Description[];
 ## endif
-{% if item.itemId != "ITEM_NONE" %}const u8 gItemDescription_{{ item.itemId }}[] = _("{{ item.description_english }}");{% endif %}
+{% if item.itemId != "ITEM_NONE" %}
+const u8 gItemDescription_{{ item.itemId }}[] = _("{{ item.description_english }}");
+{% endif %}
 ## endfor
 const u8 gItemDescription_ITEM_NONE[] = _("?????");
 

@@ -3980,7 +3980,6 @@ static void DebugAction_PartyBoxes_AccessPC(u8 taskId)
 {
     gIsDebugPC = TRUE;
     Debug_DestroyMenu_Full_Script(taskId, EventScript_PC);
-    //gIsDebugPC = FALSE;
 }
 
 static void DebugAction_PartyBoxes_MoveReminder(u8 taskId)

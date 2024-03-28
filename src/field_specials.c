@@ -34,6 +34,7 @@
 #include "party_menu.h"
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
+#include "config/debug.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/maps.h"
@@ -214,8 +215,10 @@ void AnimatePcTurnOn(void)
 {
     u8 taskId;
 
+#if DEBUG_OVERWORLD_MENU == TRUE
     if (gIsDebugPC)
         return;
+#endif
 
     if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE)
     {
@@ -294,11 +297,13 @@ void AnimatePcTurnOff()
     s8 deltaY = 0;
     u8 direction = GetPlayerFacingDirection();
 
+#if DEBUG_OVERWORLD_MENU == TRUE
     if (gIsDebugPC)
     {
         gIsDebugPC = FALSE;
         return;
     }
+#endif
 
     switch (direction)
     {

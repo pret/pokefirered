@@ -1,0 +1,88 @@
+raw `
+.set LOCALID_MEMORIAL_MAN, 1
+
+FiveIsland_MemorialPillar_MapScripts::
+	.byte 0
+
+FiveIsland_MemorialPillar_EventScript_MemorialMan::
+	lock
+	goto_if_set FLAG_GOT_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_AlreadyGotTM42
+	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_ReturnedForTM42
+	msgbox FiveIsland_MemorialPillar_Text_ScrubScrub
+	closemessage
+	applymovement LOCALID_MEMORIAL_MAN, Common_Movement_FacePlayer
+	waitmovement 0
+	delay 45
+	msgbox FiveIsland_MemorialPillar_Text_YourMonsLookHealthy
+	applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	msgbox FiveIsland_MemorialPillar_Text_ThisIsWhereIBuriedMyOnix
+	release
+	end
+
+FiveIsland_MemorialPillar_EventScript_AlreadyGotTM42::
+	msgbox FiveIsland_MemorialPillar_Text_ScrubScrubTectonix
+	release
+	end
+
+FiveIsland_MemorialPillar_EventScript_ReturnedForTM42::
+	msgbox FiveIsland_MemorialPillar_Text_StillHaveThingAsMyThanks
+	giveitem ITEM_TM42
+	goto_if_eq VAR_RESULT, FALSE, FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
+	call FiveIsland_MemorialPillar_EventScript_ReceivedTM42
+	release
+	end
+
+FiveIsland_MemorialPillar_EventScript_Memorial::
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	lockall
+	goto_if_set FLAG_GOT_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
+	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced
+	msgbox FiveIsland_MemorialPillar_Text_HereLiesTectonixLemonadeOffering
+	checkitem ITEM_LEMONADE
+	goto_if_eq VAR_RESULT, TRUE, FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade
+	releaseall
+	end
+
+FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade::
+	msgbox FiveIsland_MemorialPillar_Text_LeaveAnotherLemonadeOffering, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, FiveIsland_MemorialPillar_EventScript_PlaceLemonade
+	releaseall
+	end
+
+FiveIsland_MemorialPillar_EventScript_PlaceLemonade::
+	removeitem ITEM_LEMONADE
+	msgbox FiveIsland_MemorialPillar_Text_PlacedCanOfLemonade
+	closemessage
+	applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	delay 45
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	textcolor NPC_TEXT_COLOR_MALE
+	msgbox FiveIsland_MemorialPillar_Text_ThankYouPleaseTakeThis
+	giveitem ITEM_TM42
+	goto_if_eq VAR_RESULT, FALSE, FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
+	call FiveIsland_MemorialPillar_EventScript_ReceivedTM42
+	releaseall
+	end
+
+FiveIsland_MemorialPillar_EventScript_ReceivedTM42::
+	msgbox FiveIsland_MemorialPillar_Text_BeGoodToYourMonsToo
+	applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	setflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
+	return
+
+FiveIsland_MemorialPillar_EventScript_NoRoomForTM42::
+	setflag FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR
+	msgbox FiveIsland_MemorialPillar_Text_DontHaveRoomForIt
+	releaseall
+	end
+
+FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced::
+	msgbox FiveIsland_MemorialPillar_Text_HereLiesTectonix
+	releaseall
+	end
+`

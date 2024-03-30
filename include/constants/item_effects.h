@@ -2,18 +2,17 @@
 #define GUARD_CONSTANTS_ITEM_EFFECTS_H
 
 // field 0 masks
-#define ITEM0_X_ATTACK          0x0F
-#define ITEM0_DIRE_HIT          0x30 // Works the same way as move Focus Energy.
+#define ITEM0_DIRE_HIT          0x30 // Works the same way as the move Focus Energy.
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
 
-// field 1 masks
-#define ITEM1_X_SPEED           0x0F
-#define ITEM1_X_DEFEND          0xF0
-
-// field 2 masks
-#define ITEM2_X_SPATK           0x0F
-#define ITEM2_X_ACCURACY        0xF0
+// new field 1 masks
+#define ITEM1_X_ATTACK          STAT_ATK
+#define ITEM1_X_DEFENSE         STAT_DEF
+#define ITEM1_X_SPEED           STAT_SPEED
+#define ITEM1_X_SPATK           STAT_SPATK
+#define ITEM1_X_SPDEF           STAT_SPDEF
+#define ITEM1_X_ACCURACY        STAT_ACC
 
 // field 3 masks
 #define ITEM3_CONFUSION         0x1
@@ -31,7 +30,7 @@
 #define ITEM4_EV_HP             0x1
 #define ITEM4_EV_ATK            0x2
 #define ITEM4_HEAL_HP           0x4
-#define ITEM4_HEAL_PP_ALL       0x8
+#define ITEM4_HEAL_PP           0x8
 #define ITEM4_HEAL_PP_ONE       0x10
 #define ITEM4_PP_UP             0x20
 #define ITEM4_REVIVE            0x40
@@ -49,7 +48,9 @@
 
 #define ITEM5_FRIENDSHIP_ALL    (ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID | ITEM5_FRIENDSHIP_HIGH)
 
-// fields 6 and onwards are item-specific arguments
+#define ITEM10_IS_VITAMIN       0x1
+
+// fields 6 and onwards (except field 10) are item-specific arguments
 #define ITEM_EFFECT_ARG_START 6
 
 // Special HP recovery amounts for ITEM4_HEAL_HP
@@ -65,6 +66,10 @@
 #define ITEM6_ADD_EV       10
 #define ITEM6_SUBTRACT_EV -10
 #define ITEM6_ADD_ONE_EV    1
+<<<<<<< HEAD
+=======
+#define ITEM6_RESET_EV      0
+>>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
 
 // Used for GetItemEffectType.
 #define ITEM_EFFECT_X_ITEM 0
@@ -73,7 +78,7 @@
 #define ITEM_EFFECT_CURE_POISON 3
 #define ITEM_EFFECT_CURE_SLEEP 4
 #define ITEM_EFFECT_CURE_BURN 5
-#define ITEM_EFFECT_CURE_FREEZE 6
+#define ITEM_EFFECT_CURE_FREEZE_FROSTBITE 6
 #define ITEM_EFFECT_CURE_PARALYSIS 7
 #define ITEM_EFFECT_CURE_CONFUSION 8
 #define ITEM_EFFECT_CURE_INFATUATION 9

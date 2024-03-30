@@ -1,14 +1,13 @@
 #ifndef GUARD_FIELD_POISON_H
 #define GUARD_FIELD_POISON_H
 
-#include "global.h"
+// Exported type declarations
 
-enum {
-    FLDPSN_NONE,
-    FLDPSN_PSN,
-    FLDPSN_FNT
-};
+// Exported RAM declarations
 
+// Exported ROM declarations
+
+void TryFieldPoisonWhiteOut(void);
 s32 DoPoisonFieldEffect(void);
 
 #endif //GUARD_FIELD_POISON_H

@@ -9,12 +9,16 @@
 #define FANFARE_OBTAIN_BADGE         5
 #define FANFARE_MOVE_DELETED         6
 #define FANFARE_OBTAIN_BERRY         7
-#define FANFARE_SLOTS_JACKPOT        8
-#define FANFARE_SLOTS_WIN            9
-#define FANFARE_TOO_BAD             10
-#define FANFARE_POKE_FLUTE          11
-#define FANFARE_KEY_ITEM            12
-#define FANFARE_DEX_EVAL            13
+#define FANFARE_AWAKEN_LEGEND        8
+#define FANFARE_SLOTS_JACKPOT        9
+#define FANFARE_SLOTS_WIN           10
+#define FANFARE_TOO_BAD             11
+#define FANFARE_RG_POKE_FLUTE       12
+#define FANFARE_RG_OBTAIN_KEY_ITEM  13
+#define FANFARE_RG_DEX_RATING       14
+#define FANFARE_OBTAIN_B_POINTS     15
+#define FANFARE_OBTAIN_SYMBOL       16
+#define FANFARE_REGISTER_MATCH_CALL 17
 
 #define CRY_MODE_NORMAL        0 // Default
 #define CRY_MODE_DOUBLES       1 // Shortened cry for double battles
@@ -41,4 +45,4 @@
 #define CRY_VOLUME    120
 #define CRY_VOLUME_RS 125
 
-#endif //GUARD_CONSTANTS_SOUND_H
+#endif // GUARD_CONSTANTS_SOUND_H

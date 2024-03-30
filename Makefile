@@ -105,15 +105,16 @@ LIB += -lnosys
 endif
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
-GFX := tools/gbagfx/gbagfx
-AIF := tools/aif2pcm/aif2pcm
-MID := tools/mid2agb/mid2agb
-SCANINC := tools/scaninc/scaninc
-PREPROC := tools/preproc/preproc
-RAMSCRGEN := tools/ramscrgen/ramscrgen
-FIX := tools/gbafix/gbafix
-MAPJSON := tools/mapjson/mapjson
-JSONPROC := tools/jsonproc/jsonproc
+GFX := tools/gbagfx/gbagfx$(EXE)
+AIF := tools/aif2pcm/aif2pcm$(EXE)
+MID := tools/mid2agb/mid2agb$(EXE)
+SCANINC := tools/scaninc/scaninc$(EXE)
+PREPROC := tools/preproc/preproc$(EXE)
+RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
+FIX := tools/gbafix/gbafix$(EXE)
+MAPJSON := tools/mapjson/mapjson$(EXE)
+JSONPROC := tools/jsonproc/jsonproc$(EXE)
+SCRIPT := tools/poryscript/poryscript$(EXE)
 
 PERL := perl
 
@@ -203,6 +204,7 @@ mostlyclean: tidy
 	$(RM) $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	$(RM) $(AUTO_GEN_TARGETS)
+	rm -f $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
@@ -224,6 +226,7 @@ include songs.mk
 %.png: ;
 %.pal: ;
 %.aif: ;
+%.pory: ;
 
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
@@ -234,6 +237,7 @@ include songs.mk
 %.rl: % ; $(GFX) $< $@
 $(CRY_SUBDIR)/%.bin: $(CRY_SUBDIR)/%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
+data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json
 sound/songs/%.s: sound/songs/%.mid
 	$(MID) $< $@
 

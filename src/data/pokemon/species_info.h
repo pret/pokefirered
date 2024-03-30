@@ -1,12 +1,34 @@
+#include "constants/abilities.h"
+#include "species_info/shared_dex_text.h"
+
+// Macros for ease of use.
+
+#define EVOLUTION(...) (const struct Evolution[]) { __VA_ARGS__, { EVOLUTIONS_END }, }
+
+#if P_FOOTPRINTS
+#define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite,
+#else
+#define FOOTPRINT(sprite)
+#endif
+
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.SALAMENC
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
 
+<<<<<<< HEAD
+=======
+#define MON_TYPES(type1, ...) { type1, DEFAULT(type1, __VA_ARGS__) }
+#define MON_EGG_GROUPS(group1, ...) { group1, DEFAULT(group1, __VA_ARGS__) }
+
+#define FLIP    0
+#define NO_FLIP 1
+
+>>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
 const struct SpeciesInfo gSpeciesInfo[] =
 {
-    [SPECIES_NONE] = {0},
-    [SPECIES_BULBASAUR] =
+    [SPECIES_NONE] =
     {
+<<<<<<< HEAD
         .baseHP = 45,
         .baseAttack = 49,
         .baseDefense = 49,
@@ -33,9 +55,53 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+=======
+        .speciesName = _("??????????"),
+        .cryId = CRY_NONE,
+        .natDexNum = NATIONAL_DEX_NONE,
+        .categoryName = _("Unknown"),
+        .height = 0,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "This is a newly discovered Pokémon.\n"
+            "It is currently under investigation.\n"
+            "No detailed information is available\n"
+            "at this time."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_None,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .levelUpLearnset = sNoneLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+>>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
     },
-    [SPECIES_IVYSAUR] =
+
+    #include "species_info/gen_1_families.h"
+    #include "species_info/gen_2_families.h"
+    #include "species_info/gen_3_families.h"
+    #include "species_info/gen_4_families.h"
+    #include "species_info/gen_5_families.h"
+    #include "species_info/gen_6_families.h"
+    #include "species_info/gen_7_families.h"
+    #include "species_info/gen_8_families.h"
+    #include "species_info/gen_9_families.h"
+
+    [SPECIES_EGG] =
     {
+<<<<<<< HEAD
         .baseHP = 60,
         .baseAttack = 62,
         .baseDefense = 63,
@@ -62,9 +128,26 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+=======
+        .frontPic = gMonFrontPic_Egg,
+        .frontPicSize = MON_COORDS_SIZE(24, 24),
+        .frontPicYOffset = 20,
+        .backPic = gMonFrontPic_Egg,
+        .backPicSize = MON_COORDS_SIZE(24, 24),
+        .backPicYOffset = 20,
+        .palette = gMonPalette_Egg,
+        .shinyPalette = gMonPalette_Egg,
+        .iconSprite = gMonIcon_Egg,
+        .iconPalIndex = 1,
+>>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
     },
-    [SPECIES_VENUSAUR] =
+
+    /* You may add any custom species below this point based on the following structure: */
+
+    /*
+    [SPECIES_NONE] =
     {
+<<<<<<< HEAD
         .baseHP = 80,
         .baseAttack = 82,
         .baseDefense = 83,
@@ -4777,10 +4860,22 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_Defense = 0,
         .evYield_Speed = 0,
         .evYield_SpAttack = 0,
+=======
+        .baseHP        = 1,
+        .baseAttack    = 1,
+        .baseDefense   = 1,
+        .baseSpeed     = 1,
+        .baseSpAttack  = 1,
+        .baseSpDefense = 1,
+        .types = MON_TYPES(TYPE_MYSTERY),
+        .catchRate = 255,
+        .expYield = 67,
+        .evYield_HP = 1,
+        .evYield_Defense = 1,
+>>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
         .evYield_SpDefense = 1,
-        .itemCommon = ITEM_NONE,
-        .itemRare = ITEM_NONE,
         .genderRatio = PERCENT_FEMALE(50),
+<<<<<<< HEAD
         .eggCycles = 15,
         .friendship = 255,
         .growthRate = GROWTH_FAST,
@@ -20944,4 +21039,58 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
     
     
+=======
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .abilities = { ABILITY_NONE, ABILITY_CURSED_BODY, ABILITY_DAMP },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("??????????"),
+        .cryId = CRY_NONE,
+        .natDexNum = NATIONAL_DEX_NONE,
+        .categoryName = _("Unknown"),
+        .height = 0,
+        .weight = 0,
+        .description = COMPOUND_STRING(
+            "This is a newly discovered Pokémon.\n"
+            "It is currently under investigation.\n"
+            "No detailed information is available\n"
+            "at this time."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        //.frontPicFemale = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSizeFemale = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_None,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        //.backPicFemale = gMonBackPic_CircledQuestionMarkF,
+        //.backPicSizeFemale = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 7,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.paletteFemale = gMonPalette_CircledQuestionMarkF,
+        .shinyPaletteFemale = gMonShinyPalette_CircledQuestionMarkF,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        //.iconSpriteFemale = gMonIcon_QuestionMarkF,
+        //.iconPalIndexFemale = 1,
+        //FOOTPRINT(None)
+        .levelUpLearnset = sNoneLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_NONE},
+                                {EVO_ITEM, ITEM_MOOMOO_MILK, SPECIES_NONE}),
+        //.formSpeciesIdTable = sNoneFormSpeciesIdTable,
+        //.formChangeTable = sNoneFormChangeTable,
+        .allPerfectIVs = TRUE,
+    },
+    */
+>>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
 };

@@ -127,5 +127,4 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_YVELTAL] = 5,
     [SPECIES_HOOPA] = 13,
 
-
 };

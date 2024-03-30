@@ -1,0 +1,47 @@
+raw `
+.set LOCALID_SCIENTIST, 1
+
+SixIsland_RuinValley_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, SixIsland_RuinValley_OnLoad
+	.byte 0
+
+SixIsland_RuinValley_OnLoad::
+	call_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, SixIsland_RuinValley_EventScript_OpenDottedHoleDoor
+	end
+
+SixIsland_RuinValley_EventScript_OpenDottedHoleDoor::
+	setmetatile 24, 24, METATILE_SeviiIslands67_DottedHoleDoor_Open, 0
+	return
+
+SixIsland_RuinValley_EventScript_Scientist::
+	lock
+	msgbox SixIsland_RuinValley_Text_CantFigureOutHowToGetInside
+	applymovement LOCALID_SCIENTIST, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox SixIsland_RuinValley_Text_IFoundThisPlace
+	applymovement LOCALID_SCIENTIST, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+SixIsland_RuinValley_EventScript_DottedHoleDoor::
+	lockall
+	goto_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, SixIsland_RuinValley_EventScript_DottedHoleDoorOpen
+	msgbox SixIsland_RuinValley_Text_CheckDoorMoreThoroughly, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor
+	msgbox SixIsland_RuinValley_Text_SeveralDotsOnTheDoor
+	braillemessage Braille_Text_Cut
+	waitbuttonpress
+	releaseall
+	end
+
+SixIsland_RuinValley_EventScript_DottedHoleDoorOpen::
+	msgbox SixIsland_RuinValley_Text_DoorIsOpen
+	releaseall
+	end
+
+SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor::
+	msgbox SixIsland_RuinValley_Text_LeftDoorAlone
+	releaseall
+	end
+`

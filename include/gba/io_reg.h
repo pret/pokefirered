@@ -482,6 +482,7 @@
 #define REG_SIODATA32   (*(vu32 *)REG_ADDR_SIODATA32)
 #define REG_SIOMLT_SEND (*(vu16 *)REG_ADDR_SIOMLT_SEND)
 #define REG_SIOMLT_RECV (*(vu64 *)REG_ADDR_SIOMLT_RECV)
+#define REG_SIOMULTI(n) (*(vu16 *)(REG_ADDR_SIOMULTI0 + (n) * 2))
 #define REG_SIOMULTI0   (*(vu16 *)REG_ADDR_SIOMULTI0)
 #define REG_SIOMULTI1   (*(vu16 *)REG_ADDR_SIOMULTI1)
 #define REG_SIOMULTI2   (*(vu16 *)REG_ADDR_SIOMULTI2)
@@ -501,23 +502,24 @@
 // I/O register fields
 
 // DISPCNT
-#define DISPCNT_MODE_0       0x0000 // BG0: text, BG1: text, BG2: text,   BG3: text
-#define DISPCNT_MODE_1       0x0001 // BG0: text, BG1: text, BG2: affine, BG3: off
-#define DISPCNT_MODE_2       0x0002 // BG0: off,  BG1: off,  BG2: affine, BG3: affine
-#define DISPCNT_MODE_3       0x0003 // Bitmap mode, 240x160, BGR555 color
-#define DISPCNT_MODE_4       0x0004 // Bitmap mode, 240x160, 256 color palette
-#define DISPCNT_MODE_5       0x0005 // Bitmap mode, 160x128, BGR555 color
-#define DISPCNT_OBJ_1D_MAP   0x0040
-#define DISPCNT_FORCED_BLANK 0x0080
-#define DISPCNT_BG0_ON       0x0100
-#define DISPCNT_BG1_ON       0x0200
-#define DISPCNT_BG2_ON       0x0400
-#define DISPCNT_BG3_ON       0x0800
-#define DISPCNT_BG_ALL_ON    0x0F00
-#define DISPCNT_OBJ_ON       0x1000
-#define DISPCNT_WIN0_ON      0x2000
-#define DISPCNT_WIN1_ON      0x4000
-#define DISPCNT_OBJWIN_ON    0x8000
+#define DISPCNT_MODE_0          0x0000 // BG0: text, BG1: text, BG2: text,   BG3: text
+#define DISPCNT_MODE_1          0x0001 // BG0: text, BG1: text, BG2: affine, BG3: off
+#define DISPCNT_MODE_2          0x0002 // BG0: off,  BG1: off,  BG2: affine, BG3: affine
+#define DISPCNT_MODE_3          0x0003 // Bitmap mode, 240x160, BGR555 color
+#define DISPCNT_MODE_4          0x0004 // Bitmap mode, 240x160, 256 color palette
+#define DISPCNT_MODE_5          0x0005 // Bitmap mode, 160x128, BGR555 color
+#define DISPCNT_HBLANK_INTERVAL 0x0020 // Allow access to OAM during H-Blank
+#define DISPCNT_OBJ_1D_MAP      0x0040
+#define DISPCNT_FORCED_BLANK    0x0080
+#define DISPCNT_BG0_ON          0x0100
+#define DISPCNT_BG1_ON          0x0200
+#define DISPCNT_BG2_ON          0x0400
+#define DISPCNT_BG3_ON          0x0800
+#define DISPCNT_BG_ALL_ON       0x0F00
+#define DISPCNT_OBJ_ON          0x1000
+#define DISPCNT_WIN0_ON         0x2000
+#define DISPCNT_WIN1_ON         0x4000
+#define DISPCNT_OBJWIN_ON       0x8000
 
 // DISPSTAT
 #define DISPSTAT_VBLANK      0x0001 // in V-Blank
@@ -609,7 +611,6 @@
 
 // BLDALPHA
 #define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
-#define BLDALPHA_BLEND2(target1, target2) ((target1) | ((target2) << 8))
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000
@@ -663,6 +664,7 @@
 #define TIMER_64CLK       0x01
 #define TIMER_256CLK      0x02
 #define TIMER_1024CLK     0x03
+#define TIMER_COUNTUP     0x04
 #define TIMER_INTR_ENABLE 0x40
 #define TIMER_ENABLE      0x80
 
@@ -709,7 +711,7 @@
 #define KEY_INTR_ENABLE 0x4000
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
-#define DPAD_ANY        0x00F0
+#define DPAD_ANY        ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN))
 #define JOY_EXCL_DPAD   0x030F
 
 // interrupt flags

@@ -63,6 +63,7 @@ void AGBPrintInit(void);
 
 #define AGB_WARNING_EX(exp, file, line) (exp) ? ((void *)0) : DebugAssert(file, line, #exp, FALSE);
 #define AGB_ASSERT_EX(exp, file, line) (exp) ? ((void *)0) : DebugAssert(file, line, #exp, TRUE);
+
 #endif
 
 #endif // GUARD_GBA_ISAGBPRINT_H

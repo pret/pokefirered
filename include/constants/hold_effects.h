@@ -67,10 +67,6 @@
 #define HOLD_EFFECT_LUCKY_PUNCH    63
 #define HOLD_EFFECT_METAL_POWDER   64
 #define HOLD_EFFECT_THICK_CLUB     65
-<<<<<<< HEAD
-#define HOLD_EFFECT_STICK          66
-#define HOLD_EFFECT_FAIRY_POWER    67
-=======
 #define HOLD_EFFECT_LEEK           66
 
 // Gen4 hold effects.
@@ -175,6 +171,5 @@
 #define HOLD_EFFECT_PARAM_GRASSY_TERRAIN    1
 #define HOLD_EFFECT_PARAM_MISTY_TERRAIN     2
 #define HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN   3
->>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
 
 #endif // GUARD_HOLD_EFFECTS_H

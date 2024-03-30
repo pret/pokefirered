@@ -66,10 +66,7 @@
 #define ITEM6_ADD_EV       10
 #define ITEM6_SUBTRACT_EV -10
 #define ITEM6_ADD_ONE_EV    1
-<<<<<<< HEAD
-=======
 #define ITEM6_RESET_EV      0
->>>>>>> 68601624c9e19df6e184ca722b057d87fc6584ff
 
 // Used for GetItemEffectType.
 #define ITEM_EFFECT_X_ITEM 0

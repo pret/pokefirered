@@ -29,45 +29,47 @@ static EWRAM_DATA union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
 static EWRAM_DATA u32 sUnused = 0;
 
 static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
-{
-    { // Single battle
-        { 72, 80 },
-        { 176, 40 },
-        { 48, 40 },
-        { 112, 80 },
-    },
-    { // Double battle
-        { 32, 80 },
-        { 200, 40 },
-        { 90, 88 },
-        { 152, 32 },
-    },
+    {
+        {
+            // Single battle
+            {72, 80},
+            {176, 40},
+            {48, 40},
+            {112, 80},
+        },
+        {
+            // Double battle
+            {32, 80},
+            {200, 40},
+            {90, 88},
+            {152, 32},
+        },
 };
 
 // One entry for each of the four Castform forms.
 const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS] =
-{
-    [CASTFORM_NORMAL] = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 17 },
-    [CASTFORM_FIRE]   = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
-    [CASTFORM_WATER]  = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
-    [CASTFORM_ICE]    = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
+    {
+        [CASTFORM_NORMAL] = {.size = MON_COORDS_SIZE(32, 32), .y_offset = 17},
+        [CASTFORM_FIRE] = {.size = MON_COORDS_SIZE(48, 48), .y_offset = 9},
+        [CASTFORM_WATER] = {.size = MON_COORDS_SIZE(32, 48), .y_offset = 9},
+        [CASTFORM_ICE] = {.size = MON_COORDS_SIZE(64, 48), .y_offset = 8},
 };
 
 static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
-{
-    [CASTFORM_NORMAL] = 13,
-    [CASTFORM_FIRE]   = 14,
-    [CASTFORM_WATER]  = 13,
-    [CASTFORM_ICE]    = 13,
+    {
+        [CASTFORM_NORMAL] = 13,
+        [CASTFORM_FIRE] = 14,
+        [CASTFORM_WATER] = 13,
+        [CASTFORM_ICE] = 13,
 };
 
 // Y position of the backsprite for each of the four Castform forms.
 static const u8 sCastformBackSpriteYCoords[NUM_CASTFORM_FORMS] =
-{
-    [CASTFORM_NORMAL] = 0,
-    [CASTFORM_FIRE]   = 0,
-    [CASTFORM_WATER]  = 0,
-    [CASTFORM_ICE]    = 0,
+    {
+        [CASTFORM_NORMAL] = 0,
+        [CASTFORM_FIRE] = 0,
+        [CASTFORM_WATER] = 0,
+        [CASTFORM_ICE] = 0,
 };
 
 // Placeholders for pokemon sprites to be created for a move animation effect (e.g. Role Play / Snatch)
@@ -75,31 +77,30 @@ static const u8 sCastformBackSpriteYCoords[NUM_CASTFORM_FORMS] =
 #define TAG_MOVE_EFFECT_MON_2 55126
 
 static const struct SpriteTemplate sSpriteTemplates_MoveEffectMons[] =
-{
     {
-        .tileTag = TAG_MOVE_EFFECT_MON_1,
-        .paletteTag = TAG_MOVE_EFFECT_MON_1,
-        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
-        .anims = gDummySpriteAnimTable,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
-    },
-    {
-        .tileTag = TAG_MOVE_EFFECT_MON_2,
-        .paletteTag = TAG_MOVE_EFFECT_MON_2,
-        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
-        .anims = gDummySpriteAnimTable,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
-    }
-};
+        {
+            .tileTag = TAG_MOVE_EFFECT_MON_1,
+            .paletteTag = TAG_MOVE_EFFECT_MON_1,
+            .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+            .anims = gDummySpriteAnimTable,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        },
+        {
+            .tileTag = TAG_MOVE_EFFECT_MON_2,
+            .paletteTag = TAG_MOVE_EFFECT_MON_2,
+            .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+            .anims = gDummySpriteAnimTable,
+            .images = NULL,
+            .affineAnims = gDummySpriteAffineAnimTable,
+            .callback = SpriteCallbackDummy,
+        }};
 
 static const struct SpriteSheet sSpriteSheets_MoveEffectMons[] =
-{
-    { gMiscBlank_Gfx, MON_PIC_SIZE, TAG_MOVE_EFFECT_MON_1 },
-    { gMiscBlank_Gfx, MON_PIC_SIZE, TAG_MOVE_EFFECT_MON_2 },
+    {
+        {gMiscBlank_Gfx, MON_PIC_SIZE, TAG_MOVE_EFFECT_MON_1},
+        {gMiscBlank_Gfx, MON_PIC_SIZE, TAG_MOVE_EFFECT_MON_2},
 };
 
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
@@ -155,21 +156,7 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
-        if (species == SPECIES_UNOWN)
-        {
-            spriteInfo = gBattleSpritesDataPtr->battlerData;
-            if (!spriteInfo[battlerId].transformSpecies)
-                personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-            else
-                personality = gTransformedPersonalities[battlerId];
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                coordSpecies = species;
-            else
-                coordSpecies = letter + SPECIES_UNOWN_B - 1;
-            ret = gMonBackPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
+        if (species == SPECIES_CASTFORM)
         {
             ret = sCastformBackSpriteYCoords[gBattleMonForms[battlerId]];
         }
@@ -184,21 +171,7 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
     }
     else
     {
-        if (species == SPECIES_UNOWN)
-        {
-            spriteInfo = gBattleSpritesDataPtr->battlerData;
-            if (!spriteInfo[battlerId].transformSpecies)
-                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-            else
-                personality = gTransformedPersonalities[battlerId];
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                coordSpecies = species;
-            else
-                coordSpecies = letter + SPECIES_UNOWN_B - 1;
-            ret = gMonFrontPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
+        if (species == SPECIES_CASTFORM)
         {
             ret = gCastformFrontSpriteCoords[gBattleMonForms[battlerId]].y_offset;
         }
@@ -383,18 +356,18 @@ void StoreSpriteCallbackInData6(struct Sprite *sprite, SpriteCallback callback)
 static void SetCallbackToStoredInData6(struct Sprite *sprite)
 {
     u32 callback = (u16)sprite->data[6] | (sprite->data[7] << 16);
-    
+
     sprite->callback = (SpriteCallback)callback;
 }
 
 // Sprite data for TranslateSpriteInCircle/Ellipse and related
-#define sCirclePos    data[0]
-#define sAmplitude    data[1]
-#define sCircleSpeed  data[2]
-#define sDuration     data[3]
+#define sCirclePos data[0]
+#define sAmplitude data[1]
+#define sCircleSpeed data[2]
+#define sDuration data[3]
 
 // TranslateSpriteInGrowingCircle
-#define sAmplitudeSpeed  data[4]
+#define sAmplitudeSpeed data[4]
 #define sAmplitudeChange data[5]
 
 // TranslateSpriteInEllipse
@@ -402,9 +375,9 @@ static void SetCallbackToStoredInData6(struct Sprite *sprite)
 #define sAmplitudeY data[4]
 
 // TranslateSpriteInLissajousCurve
-#define sCirclePosX   sCirclePos
+#define sCirclePosX sCirclePos
 #define sCircleSpeedX sCircleSpeed
-#define sCirclePosY   data[4]
+#define sCirclePosY data[4]
 #define sCircleSpeedY data[5]
 
 // x = a * sin(theta0 + dtheta * t)
@@ -462,7 +435,7 @@ static void TranslateSpriteInLissajousCurve(struct Sprite *sprite)
         sprite->y2 = Cos(sprite->sCirclePosY, sprite->sAmplitude);
         sprite->sCirclePosX += sprite->sCircleSpeedX;
         sprite->sCirclePosY += sprite->sCircleSpeedY;
-        
+
         if (sprite->sCirclePosX >= 0x100)
             sprite->sCirclePosX -= 0x100;
         else if (sprite->sCirclePosX < 0)
@@ -527,16 +500,16 @@ void WaitAnimForDuration(struct Sprite *sprite)
 }
 
 // Sprite data for ConvertPosDataToTranslateLinearData
-#define sStepsX  data[0]
-#define sStartX  data[1]
+#define sStepsX data[0]
+#define sStartX data[1]
 #define sTargetX data[2]
-#define sStartY  data[3]
+#define sStartY data[3]
 #define sTargetY data[4]
 
 // Sprite data for TranslateSpriteLinear
 #define sMoveSteps data[0]
-#define sSpeedX    data[1]
-#define sSpeedY    data[2]
+#define sSpeedX data[1]
+#define sSpeedY data[2]
 
 static void AnimPosToTranslateLinear(struct Sprite *sprite)
 {
@@ -862,8 +835,8 @@ bool8 IsDoubleBattle(void)
     return IS_DOUBLE_BATTLE();
 }
 
-#define BG_ANIM_PAL_1        8
-#define BG_ANIM_PAL_2        9
+#define BG_ANIM_PAL_1 8
+#define BG_ANIM_PAL_2 9
 
 void GetBattleAnimBg1Data(struct BattleAnimBgData *animBgData)
 {
@@ -1421,7 +1394,6 @@ void AnimSpriteOnMonPos(struct Sprite *sprite)
         else
             InitSpritePosToAnimTarget(sprite, var);
         ++sprite->data[0];
-
     }
     else if (sprite->animEnded || sprite->affineAnimEnded)
     {
@@ -2001,7 +1973,6 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
     u16 species;
     u32 personality;
     u16 letter;
-    u16 unownSpecies;
     s32 ret;
     const struct MonCoords *coords;
     struct BattleSpriteInfo *spriteInfo;
@@ -2019,22 +1990,14 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             species = spriteInfo[battlerId].transformSpecies;
             personality = gTransformedPersonalities[battlerId];
         }
-        if (species == SPECIES_UNOWN)
+
+        if (species > NUM_SPECIES)
         {
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                unownSpecies = SPECIES_UNOWN;
-            else
-                unownSpecies = letter + SPECIES_UNOWN_B - 1;
-            coords = &gMonBackPicCoords[unownSpecies];
-        }
-        else if (species > NUM_SPECIES)
-        {
-            coords = &gMonBackPicCoords[0];
+            coords = &gMonFrontPicCoords[0];
         }
         else
         {
-            coords = &gMonBackPicCoords[species];
+            coords = &gMonFrontPicCoords[species];
         }
     }
     else
@@ -2051,16 +2014,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             personality = gTransformedPersonalities[battlerId];
         }
 
-        if (species == SPECIES_UNOWN)
-        {
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                unownSpecies = SPECIES_UNOWN;
-            else
-                unownSpecies = letter + SPECIES_UNOWN_B - 1;
-            coords = &gMonFrontPicCoords[unownSpecies];
-        }
-        else if (species == SPECIES_CASTFORM)
+        if (species == SPECIES_CASTFORM)
         {
             coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
         }
@@ -2199,16 +2153,16 @@ void AnimSpinningSparkle(struct Sprite *sprite)
 
 // Task and sprite data for AnimTask_AttackerPunchWithTrace
 #define tBattlerSpriteId data[0]
-#define tMoveSpeed       data[1]
-#define tState           data[2]
-#define tCounter         data[3]
-#define tPaletteNum      data[4]
+#define tMoveSpeed data[1]
+#define tState data[2]
+#define tCounter data[3]
+#define tPaletteNum data[4]
 #define tNumTracesActive data[5]
-#define tPriority        data[6]
+#define tPriority data[6]
 
 #define sActiveTime data[0]
-#define sTaskId     data[1]
-#define sSpriteId   data[2]
+#define sTaskId data[1]
+#define sSpriteId data[2]
 
 void AnimTask_AttackerPunchWithTrace(u8 taskId)
 {
@@ -2226,7 +2180,7 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
 
     dest = OBJ_PLTT_ID2(task->tPaletteNum);
     src = OBJ_PLTT_ID2(gSprites[task->tBattlerSpriteId].oam.paletteNum);
-    
+
     // Set trace's priority based on battler's subpriority
     task->tPriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
     if (task->tPriority == 20 || task->tPriority == 40)

@@ -235,6 +235,10 @@ struct SpeciesInfo
             u8 noFlip : 1;
 };
 
+#define MOVE_CATEGORY_PHYSICAL 0
+#define MOVE_CATEGORY_SPECIAL 1
+#define MOVE_CATEGORY_STATUS 2
+
 struct BattleMove
 {
     u8 effect;
@@ -242,11 +246,30 @@ struct BattleMove
     u8 type;
     u8 accuracy;
     u8 pp;
-    u8 secondaryEffectChance;
+    const struct AdditionalEffect *additionalEffects;
+    u32 numAdditionalEffects:2;
+    u32 criticalHitStage:2;
+    u32 alwaysCriticalHit:1;
+    u32 thawsUser:1;
+    u32 recoil:7;
+    u32 argument;
     u8 target;
     s8 priority;
     u8 flags;
+    u8 category;
 };
+
+struct AdditionalEffect
+{
+    u16 moveEffect;
+    u8 self:1;
+    u8 onlyIfTargetRaisedStats:1;
+    u8 onChargeTurnOnly:1;
+    u8 chance; // 0% = effect certain, primary effect
+};
+
+#define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
+#define ADDITIONAL_EFFECTS(...) EFFECTS_ARR( __VA_ARGS__ ), .numAdditionalEffects = ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ ))
 
 #define SPINDA_SPOT_WIDTH 16
 #define SPINDA_SPOT_HEIGHT 16

@@ -707,418 +707,28 @@ void StartNewGameScene(void)
 
 static void Task_NewGameScene(u8 taskId)
 {
-    switch (gMain.state)
-    {
-    case 0:
-        SetVBlankCallback(NULL);
-        SetHBlankCallback(NULL);
-        DmaFill16(3, 0, VRAM, VRAM_SIZE);
-        DmaFill32(3, 0, OAM, OAM_SIZE);
-        DmaFill16(3, 0, PLTT + sizeof(u16), PLTT_SIZE - 2);
-        ResetPaletteFade();
-        ScanlineEffect_Stop();
-        ResetSpriteData();
-        FreeAllSpritePalettes();
-        ResetTempTileDataBuffers();
-        SetHelpContext(HELPCONTEXT_NEW_GAME);
-        break;
-    case 1:
-        sOakSpeechResources = AllocZeroed(sizeof(*sOakSpeechResources));
-        CreateMonSpritesGfxManager(1, 1);
-        break;
-    case 2:
-        SetGpuReg(REG_OFFSET_WIN0H, 0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0);
-        SetGpuReg(REG_OFFSET_WIN1H, 0);
-        SetGpuReg(REG_OFFSET_WIN1V, 0);
-        SetGpuReg(REG_OFFSET_WININ, 0);
-        SetGpuReg(REG_OFFSET_WINOUT, 0);
-        SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetGpuReg(REG_OFFSET_BLDY, 0);
-        break;
-    case 3:
-        ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(1, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-        SetBgTilemapBuffer(1, sOakSpeechResources->bg1TilemapBuffer);
-        SetBgTilemapBuffer(2, sOakSpeechResources->bg2TilemapBuffer);
-        ChangeBgX(1, 0, BG_COORD_SET);
-        ChangeBgY(1, 0, BG_COORD_SET);
-        ChangeBgX(2, 0, BG_COORD_SET);
-        ChangeBgY(2, 0, BG_COORD_SET);
-        gSpriteCoordOffsetX = 0;
-        gSpriteCoordOffsetY = 0;
-        break;
-    case 4:
-        gPaletteFade.bufferTransferDisabled = TRUE;
-        InitStandardTextBoxWindows();
-        InitTextBoxGfxAndPrinters();
-        Menu_LoadStdPalAt(BG_PLTT_ID(13));
-        LoadPalette(sOakSpeech_Background_Pals, BG_PLTT_ID(0), sizeof(sOakSpeech_Background_Pals));
-        LoadPalette(GetTextWindowPalette(2) + 15, BG_PLTT_ID(0), PLTT_SIZEOF(1));
-        break;
-    case 5:
-        sOakSpeechResources->textSpeed = GetTextSpeedSetting();
-        gTextFlags.canABSpeedUpPrint = TRUE;
-        DecompressAndCopyTileDataToVram(1, sControlsGuide_PikachuIntro_Background_Tiles, 0, 0, 0);
-        break;
-    case 6:
-        if (FreeTempTileDataBuffersIfPossible())
-            return;
-        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 32);
-        CopyBgTilemapBufferToVram(1);
-        break;
-    case 7:
-        CreateTopBarWindowLoadPalette(0, 30, 0, 13, 0x1C4);
-        FillBgTilemapBufferRect_Palette0(1, 0xD00F, 0,  0, 30, 2);
-        FillBgTilemapBufferRect_Palette0(1, 0xD002, 0,  2, 30, 1);
-        FillBgTilemapBufferRect_Palette0(1, 0xD00E, 0, 19, 30, 1);
-        ControlsGuide_LoadPage1();
-        gPaletteFade.bufferTransferDisabled = FALSE;
-        gTasks[taskId].tTextCursorSpriteId = CreateTextCursorSprite(0, 230, 149, 0, 0);
-        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-        break;
-    case 10:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-        ShowBg(0);
-        ShowBg(1);
-        SetVBlankCallback(VBlankCB_NewGameScene);
-        PlayBGM(MUS_NEW_GAME_INSTRUCT);
-        gTasks[taskId].func = Task_ControlsGuide_HandleInput;
-        gMain.state = 0;
-        return;
-    }
-
-    gMain.state++;
+    Task_OakSpeech_Init;
 }
-
-static void ControlsGuide_LoadPage1(void)
-{
-    TopBarWindowPrintTwoStrings(gText_Controls, gText_ABUTTONNext, FALSE, 0, TRUE);
-    sOakSpeechResources->windowIds[0] = AddWindow(sControlsGuide_WindowTemplates[sOakSpeechResources->currentPage]);
-    PutWindowTilemap(sOakSpeechResources->windowIds[0]);
-    FillWindowPixelBuffer(sOakSpeechResources->windowIds[0], PIXEL_FILL(0));
-    AddTextPrinterParameterized4(sOakSpeechResources->windowIds[0], FONT_NORMAL, 2, 0, 1, 1, sTextColor_White, 0, gControlsGuide_Text_Intro);
-    CopyWindowToVram(sOakSpeechResources->windowIds[0], COPYWIN_FULL);
-    FillBgTilemapBufferRect_Palette0(1, 0x3000, 1, 3, 5, 16);
-    CopyBgTilemapBufferToVram(1);
-}
-
-static void Task_ControlsGuide_LoadPage(u8 taskId)
-{
-    u8 currWindow = 0;
-    u8 page2Or3 = sOakSpeechResources->currentPage - 1; // 0 if page 2, 1 if page 3
-    if (sOakSpeechResources->currentPage == CONTROLS_GUIDE_PAGE_1)
-    {
-        ControlsGuide_LoadPage1();
-    }
-    else
-    {
-        TopBarWindowPrintString(gText_ABUTTONNext_BBUTTONBack, 0, TRUE);
-        for (currWindow = CONTROLS_GUIDE_PAGES_2_3_WINDOW_TOP; currWindow < NUM_CONTROLS_GUIDE_PAGES_2_3_WINDOWS; currWindow++)
-        {
-            sOakSpeechResources->windowIds[currWindow] = AddWindow(&sControlsGuide_WindowTemplates[sOakSpeechResources->currentPage][currWindow]);
-            PutWindowTilemap(sOakSpeechResources->windowIds[currWindow]);
-            FillWindowPixelBuffer(sOakSpeechResources->windowIds[currWindow], PIXEL_FILL(0));
-            AddTextPrinterParameterized4(sOakSpeechResources->windowIds[currWindow], FONT_NORMAL, 6, 0, 1, 1, sTextColor_White, 0, sControlsGuide_Pages2And3_Strings[currWindow + page2Or3 * CONTROLS_GUIDE_STRINGS_PER_PAGE]);
-            CopyWindowToVram(sOakSpeechResources->windowIds[currWindow], COPYWIN_FULL);
-        }
-
-        if (sOakSpeechResources->currentPage == CONTROLS_GUIDE_PAGE_2)
-            CopyToBgTilemapBufferRect(1, sControlsGuide_Tilemap_Page2, 1, 3, 5, 16);
-        else // CONTROLS_GUIDE_PAGE_3
-            CopyToBgTilemapBufferRect(1, sControlsGuide_Tilemap_Page3, 1, 3, 5, 16);
-        CopyBgTilemapBufferToVram(1);
-    }
-    BeginNormalPaletteFade(PALETTES_OBJECTS | 0xDFFF, -1, 16, 0, GetTextWindowPalette(2)[15]);
-    gTasks[taskId].func = Task_ControlsGuide_HandleInput;
-}
-
-static void Task_ControlsGuide_HandleInput(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        if(JOY_NEW((A_BUTTON | B_BUTTON)))
-        {
-            if (JOY_NEW(A_BUTTON))
-            {
-                gTasks[taskId].tDelta = 1;
-
-                if (sOakSpeechResources->currentPage < CONTROLS_GUIDE_PAGE_3)
-                    BeginNormalPaletteFade(PALETTES_OBJECTS | 0xDFFF, -1, 0, 16, GetTextWindowPalette(2)[15]);
-            }
-            else // B_BUTTON
-            {
-                if (sOakSpeechResources->currentPage == CONTROLS_GUIDE_PAGE_1)
-                    return;
-
-                gTasks[taskId].tDelta = -1;
-                BeginNormalPaletteFade(PALETTES_OBJECTS | 0xDFFF, -1, 0, 16, GetTextWindowPalette(2)[15]);
-            }
-
-            PlaySE(SE_SELECT);
-            gTasks[taskId].func = Task_ControlsGuide_ChangePage;
-        }
-    }
-}
-
-static void Task_ControlsGuide_ChangePage(u8 taskId)
-{
-    u8 numWindows = 0;
-    u8 i;
-
-    if (!gPaletteFade.active)
-    {
-        switch (sOakSpeechResources->currentPage)
-        {
-        case CONTROLS_GUIDE_PAGE_1:
-            numWindows = NUM_CONTROLS_GUIDE_PAGE_1_WINDOWS;
-            break;
-        case CONTROLS_GUIDE_PAGE_2:
-        case CONTROLS_GUIDE_PAGE_3:
-            numWindows = NUM_CONTROLS_GUIDE_PAGES_2_3_WINDOWS;
-            break;
-        }
-        sOakSpeechResources->currentPage += gTasks[taskId].tDelta;
-        if (sOakSpeechResources->currentPage < NUM_CONTROLS_GUIDE_PAGES)
-        {
-            for (i = 0; i < numWindows; i++)
-            {
-                FillWindowPixelBuffer(sOakSpeechResources->windowIds[i], PIXEL_FILL(0));
-                ClearWindowTilemap(sOakSpeechResources->windowIds[i]);
-                CopyWindowToVram(sOakSpeechResources->windowIds[i], COPYWIN_FULL);
-                RemoveWindow(sOakSpeechResources->windowIds[i]);
-                sOakSpeechResources->windowIds[i] = 0;
-            }
-            gTasks[taskId].func = Task_ControlsGuide_LoadPage;
-        }
-        else
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, 0);
-            gTasks[taskId].func = Task_ControlsGuide_Clear;
-        }
-    }
-}
-
-#undef tDelta
-
-static void Task_ControlsGuide_Clear(u8 taskId)
-{
-    u8 i = 0;
-    if (!gPaletteFade.active)
-    {
-        for (i = 0; i < NUM_CONTROLS_GUIDE_PAGES_2_3_WINDOWS; i++)
-        {
-            FillWindowPixelBuffer(sOakSpeechResources->windowIds[i], PIXEL_FILL(0));
-            ClearWindowTilemap(sOakSpeechResources->windowIds[i]);
-            CopyWindowToVram(sOakSpeechResources->windowIds[i], COPYWIN_FULL);
-            RemoveWindow(sOakSpeechResources->windowIds[i]);
-            sOakSpeechResources->windowIds[i] = 0;
-        }
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 2, 30, 18);
-        CopyBgTilemapBufferToVram(1);
-        DestroyTextCursorSprite(gTasks[taskId].tTextCursorSpriteId);
-        sOakSpeechResources->windowIds[0] = RGB_BLACK;
-        LoadPalette(sOakSpeechResources->windowIds, BG_PLTT_ID(0), PLTT_SIZEOF(1));
-        gTasks[taskId].tTimer = 32;
-        gTasks[taskId].func = Task_PikachuIntro_LoadPage1;
-    }
-}
-
-enum
-{
-    PIKACHU_INTRO_SET_GPU_REGS,
-    PIKACHU_INTRO_HANDLE_INPUT,
-    PIKACHU_INTRO_PRINT_PAGE_TEXT,
-    PIKACHU_INTRO_FADE_IN_PAGE,
-    PIKACHU_INTRO_EXIT,
-};
-
-#define tBlendTarget data[15]
-
-static void Task_PikachuIntro_LoadPage1(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-    u32 size = 0;
-
-    if (tTimer != 0)
-    {
-        tTimer--;
-    }
-    else
-    {
-        PlayBGM(MUS_NEW_GAME_INTRO);
-        ClearTopBarWindow();
-        TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
-        sOakSpeechResources->pikachuIntroTilemap = MallocAndDecompress(sPikachuIntro_Background_Tilemap, &size);
-        CopyToBgTilemapBufferRect(1, sOakSpeechResources->pikachuIntroTilemap, 0, 2, 30, 19);
-        CopyBgTilemapBufferToVram(1);
-        Free(sOakSpeechResources->pikachuIntroTilemap);
-        sOakSpeechResources->pikachuIntroTilemap = NULL;
-        tTextboxWindowId = AddWindow(&sIntro_WindowTemplates[WIN_INTRO_TEXTBOX]);
-        PutWindowTilemap(tTextboxWindowId);
-        FillWindowPixelBuffer(tTextboxWindowId, PIXEL_FILL(0));
-        CopyWindowToVram(tTextboxWindowId, COPYWIN_FULL);
-        sOakSpeechResources->currentPage = PIKACHU_INTRO_PAGE_1;
-        gMain.state = PIKACHU_INTRO_SET_GPU_REGS;
-        tBlendTarget = 16;
-        AddTextPrinterParameterized4(tTextboxWindowId, FONT_NORMAL, 3, 5, 1, 0, sTextColor_DarkGray, 0, sPikachuIntro_Strings[PIKACHU_INTRO_PAGE_1]);
-        tTextCursorSpriteId = CreateTextCursorSprite(0, 226, 145, 0, 0);
-        gSprites[tTextCursorSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-        gSprites[tTextCursorSpriteId].oam.priority = 0;
-        CreatePikachuOrPlatformSprites(taskId, SPRITE_TYPE_PIKACHU);
-        BeginNormalPaletteFade(PALETTES_ALL, 2, 16, 0, 0);
-        gTasks[taskId].func = Task_PikachuIntro_HandleInput;
-    }
-}
-
-static void Task_PikachuIntro_HandleInput(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-    switch (gMain.state)
-    {
-    case PIKACHU_INTRO_SET_GPU_REGS:
-        if (!gPaletteFade.active)
-        {
-            SetGpuReg(REG_OFFSET_WIN0H, DISPLAY_WIDTH);
-            SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(16, DISPLAY_HEIGHT));
-            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ);
-            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ);
-            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-            gMain.state = PIKACHU_INTRO_HANDLE_INPUT;
-        }
-        break;
-    case PIKACHU_INTRO_HANDLE_INPUT:
-        if (JOY_NEW((A_BUTTON | B_BUTTON)))
-        {
-            if (JOY_NEW(A_BUTTON))
-            {
-                sOakSpeechResources->currentPage++;
-            }
-            else // B_BUTTON
-            {
-                if (sOakSpeechResources->currentPage != PIKACHU_INTRO_PAGE_1)
-                    sOakSpeechResources->currentPage--;
-                else
-                    break;
-            }
-            PlaySE(SE_SELECT);
-            if (sOakSpeechResources->currentPage == NUM_PIKACHU_INTRO_PAGES)
-            {
-                gMain.state = PIKACHU_INTRO_EXIT;
-            }
-            else
-            {
-                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
-                SetGpuReg(REG_OFFSET_BLDALPHA, (16 - tBlendTarget) | tBlendTarget);
-                gMain.state++;
-            }
-        }
-        break;
-    case PIKACHU_INTRO_PRINT_PAGE_TEXT:
-        tBlendTarget -= 2;
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(tBlendTarget, 16 - tBlendTarget));
-        if (tBlendTarget <= 0)
-        {
-            FillWindowPixelBuffer(tTextboxWindowId, PIXEL_FILL(0));
-            AddTextPrinterParameterized4(tTextboxWindowId, FONT_NORMAL, 3, 5, 1, 0, sTextColor_DarkGray, 0, sPikachuIntro_Strings[sOakSpeechResources->currentPage]);
-            if (sOakSpeechResources->currentPage == PIKACHU_INTRO_PAGE_1)
-            {
-                ClearTopBarWindow();
-                TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
-            }
-            else
-            {
-                ClearTopBarWindow();
-                TopBarWindowPrintString(gText_ABUTTONNext_BBUTTONBack, 0, 1);
-            }
-            gMain.state++;
-        }
-        break;
-    case PIKACHU_INTRO_FADE_IN_PAGE:
-        tBlendTarget += 2;
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(tBlendTarget, 16 - tBlendTarget));
-        if (tBlendTarget >= 16)
-        {
-            tBlendTarget = 16;
-            SetGpuReg(REG_OFFSET_BLDCNT, 0);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-            gMain.state = PIKACHU_INTRO_HANDLE_INPUT;
-        }
-        break;
-    case PIKACHU_INTRO_EXIT:
-        DestroyTextCursorSprite(gTasks[taskId].tTextCursorSpriteId);
-        PlayBGM(MUS_NEW_GAME_EXIT);
-        tBlendTarget = 24;
-        gMain.state++;
-        break;
-    default:
-        if (tBlendTarget != 0)
-        {
-            tBlendTarget--;
-        }
-        else
-        {
-            gMain.state = 0;
-            sOakSpeechResources->currentPage = 0;
-            SetGpuReg(REG_OFFSET_WIN0H, 0);
-            SetGpuReg(REG_OFFSET_WIN0V, 0);
-            SetGpuReg(REG_OFFSET_WININ, 0);
-            SetGpuReg(REG_OFFSET_WINOUT, 0);
-            ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-            BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_PikachuIntro_Clear;
-        }
-        break;
-    }
-}
-
-#undef tBlendTarget
-
-static void Task_PikachuIntro_Clear(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
-    {
-        DestroyTopBarWindow();
-        FillWindowPixelBuffer(tTextboxWindowId, PIXEL_FILL(0));
-        ClearWindowTilemap(tTextboxWindowId);
-        CopyWindowToVram(tTextboxWindowId, COPYWIN_FULL);
-        RemoveWindow(tTextboxWindowId);
-        tTextboxWindowId = 0;
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
-        CopyBgTilemapBufferToVram(1);
-        DestroyPikachuOrPlatformSprites(taskId, SPRITE_TYPE_PIKACHU);
-        tTimer = 80;
-        gTasks[taskId].func = Task_OakSpeech_Init;
-    }
-}
-
 static void Task_OakSpeech_Init(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    u32 size = 0;
-    if (tTimer != 0)
-    {
-        tTimer--;
-    }
-    else
-    {
-        sOakSpeechResources->oakSpeechBackgroundTiles = MallocAndDecompress(sOakSpeech_Background_Tiles, &size);
-        LoadBgTiles(1, sOakSpeechResources->oakSpeechBackgroundTiles, size, 0);
-        CopyToBgTilemapBuffer(1, sOakSpeech_Background_Tilemap, 0, 0);
-        CopyBgTilemapBufferToVram(1);
-        CreateNidoranFSprite(taskId);
-        LoadTrainerPic(OAK_PIC, 0);
-        CreatePikachuOrPlatformSprites(taskId, SPRITE_TYPE_PLATFORM);
-        PlayBGM(MUS_ROUTE24);
-        BeginNormalPaletteFade(PALETTES_ALL, 5, 16, 0, RGB_BLACK);
-        tTimer = 80;
-        ShowBg(2);
-        gTasks[taskId].func = Task_OakSpeech_WelcomeToTheWorld;
-    }
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+    SetGpuReg(REG_OFFSET_WIN0H, 0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0);
+    SetGpuReg(REG_OFFSET_WIN1H, 0);
+    SetGpuReg(REG_OFFSET_WIN1V, 0);
+    SetGpuReg(REG_OFFSET_WININ, 0);
+    SetGpuReg(REG_OFFSET_WINOUT, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+
+    gTasks[taskId].func = Task_OakSpeech_AskPlayerGender;
+
+    ScanlineEffect_Stop();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetAllPicSprites();
 }
 
 #define OakSpeechPrintMessage(str, speed) ({                                                                                                                 \
@@ -1586,7 +1196,7 @@ static void Task_OakSpeech_ReshowPlayersPic(u8 taskId)
             gSpriteCoordOffsetX = 0;
             ChangeBgX(2, 0, BG_COORD_SET);
             CreateFadeOutTask(taskId, 2);
-            gTasks[taskId].func = Task_OakSpeech_LetsGo;
+            gTasks[taskId].func = Task_OakSpeech_FreeResources;
         }
     }
 }
@@ -1598,7 +1208,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_LetsGo);
         OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
         gTasks[taskId].tTimer = 30;
-        gTasks[taskId].func = Task_OakSpeech_FadeOutBGM;
+        gTasks[taskId].func = Task_OakSpeech_FreeResources;
     }
 }
 
@@ -1613,7 +1223,7 @@ static void Task_OakSpeech_FadeOutBGM(u8 taskId)
         else
         {
             FadeOutBGM(4);
-            gTasks[taskId].func = Task_OakSpeech_SetUpExitAnimation;
+            gTasks[taskId].func = Task_OakSpeech_FreeResources;
         }
     }
 }

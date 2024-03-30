@@ -5,6 +5,8 @@
 #include "scanline_effect.h"
 #include "trig.h"
 #include "util.h"
+#include "sprite.h"
+#include "sprite.c"
 
 static void AnimUnusedBagSteal(struct Sprite *sprite);
 static void AnimUnusedBagSteal_Step(struct Sprite *sprite);

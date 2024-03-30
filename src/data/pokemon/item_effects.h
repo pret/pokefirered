@@ -222,6 +222,55 @@ static const u8 sItemEffect_PPMax[9] = {
     VITAMIN_FRIENDSHIP_CHANGE(6),
 };
 
+#define FEATHER_FRIENDSHIP_CHANGE(i)             \
+    [(i) + 0] = 3, /* Friendship change, low */  \
+    [(i) + 1] = 2, /* Friendship change, mid */  \
+    [(i) + 2] = 1  /* Friendship change, high */
+
+static const u8 sItemEffect_HpFeather[10] = {
+    [4] = ITEM4_EV_HP,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_ADD_ONE_EV,
+    FEATHER_FRIENDSHIP_CHANGE(7),
+    [10] = 0,
+};
+
+static const u8 sItemEffect_AtkFeather[10] = {
+    [4] = ITEM4_EV_ATK,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_ADD_ONE_EV,
+    FEATHER_FRIENDSHIP_CHANGE(7),
+    [10] = 0,
+};
+
+static const u8 sItemEffect_DefFeather[10] = {
+    [5] = ITEM5_EV_DEF | ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_ADD_ONE_EV,
+    FEATHER_FRIENDSHIP_CHANGE(7),
+    [10] = 0,
+};
+
+static const u8 sItemEffect_SpeedFeather[10] = {
+    [5] = ITEM5_EV_SPEED | ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_ADD_ONE_EV,
+    FEATHER_FRIENDSHIP_CHANGE(7),
+    [10] = 0,
+};
+
+static onst u8 sItemEffect_SpatkFeather[10] = {
+    [5] = ITEM5_EV_SPATK | ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_ADD_ONE_EV,
+    FEATHER_FRIENDSHIP_CHANGE(7),
+    [10] = 0,
+};
+
+static const u8 sItemEffect_SpdefFeather[10] = {
+    [5] = ITEM5_EV_SPDEF | ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_ADD_ONE_EV,
+    FEATHER_FRIENDSHIP_CHANGE(7),
+    [10] = 0,
+};
+
 #define STAT_BOOST_FRIENDSHIP_CHANGE      \
     [6] = 1, /* Friendship change, low */ \
     [7] = 1  /* Friendship change, mid */
@@ -332,7 +381,7 @@ static const u8 sItemEffect_LumBerry[6] = {
 
 static const u8 sItemEffect_SitrusBerry[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 30, // Amount of HP to recover
+    [6] = ITEM6_HEAL_HP_QUARTER,
 };
 
 const u8 *const gItemEffectTable[] =

@@ -588,7 +588,7 @@ AI_CBM_BulkUp::
 	end
 
 AI_CBM_WaterSport::
-	if_status3 AI_USER, STATUS3_WATERSPORT, Score_Minus10
+	if_status3 AI_USER, STATUS_FIELD_WATERSPORT, Score_Minus10
 	end
 
 AI_CBM_CalmMind::

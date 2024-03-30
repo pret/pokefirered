@@ -112,7 +112,8 @@
 #define TYPE_ICE            15
 #define TYPE_DRAGON         16
 #define TYPE_DARK           17
-#define NUMBER_OF_MON_TYPES 18
+#define TYPE_FAIRY          18
+#define NUMBER_OF_MON_TYPES 19
 
 // Pokemon egg groups
 #define EGG_GROUP_NONE         0
@@ -241,6 +242,14 @@
 #define FLAG_SNATCH_AFFECTED        (1 << 3)
 #define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
 #define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
+#define FLAG_IGNORES_ABILITY        (1 << 6)
+#define FLAG_IGNORES_STAT_CHANGES   (1 << 7)
+#define FLAG_DAMAGES_UNDERGROUND    (1 << 8)
+#define FLAG_DAMAGES_UNDERWATER     (1 << 9)
+#define FLAG_DAMAGES_AIRBORNE       (1 << 10)
+#define FLAG_DAMAGES_AIRBORNE_DOUBLE (1 << 11)
+#define FLAG_IGNORES_SUBSTITUTE     (1 << 12)
+#define FLAG_GRAVITY_AFFECTED       (1 << 13)
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0

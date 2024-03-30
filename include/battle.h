@@ -64,6 +64,8 @@ enum {
 #define MOVE_TARGET_USER                (1 << 4)
 #define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
 #define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
+#define MOVE_TARGET_ALLY                (1 << 7)
+#define MOVE_TARGET_ALL_BATTLERS        ((1 << 8) | MOVE_TARGET_USER)
 
 // For the second argument of GetMoveTarget, when no target override is needed
 #define NO_TARGET_OVERRIDE 0
@@ -135,6 +137,7 @@ struct ResourceFlags
 };
 
 #define RESOURCE_FLAG_FLASH_FIRE 1
+#define RESOURCE_FLAG_ROOST 2
 
 struct DisableStruct
 {
@@ -177,43 +180,62 @@ struct ProtectStruct
 {
     /* field_0 */
     u32 protected:1;
+    u32 spikyShielded:1;
+    u32 kingsShielded:1;
+    u32 banefulBunkered:1;
+    u32 obstructed:1;
     u32 endured:1;
     u32 noValidMoves:1;
     u32 helpingHand:1;
     u32 bounceMove:1;
     u32 stealMove:1;
-    u32 flag0Unknown:1;
     u32 prlzImmobility:1;
-    /* field_1 */
     u32 confusionSelfDmg:1;
-    u32 targetNotAffected:1;
+    u32 targetAffected:1;
     u32 chargingTurn:1;
-    u32 fleeType:2; // for RunAway and Smoke Ball
+    u32 fleeType:2; // 0: Normal, 1: FLEE_ITEM, 2: FLEE_ABILITY
     u32 usedImprisonedMove:1;
     u32 loveImmobility:1;
     u32 usedDisabledMove:1;
-    /* field_2 */
-    u32 usedTauntedMove:1;      // 0x1
-    u32 flag2Unknown:1;         // 0x2
-    u32 flinchImmobility:1;     // 0x4
-    u32 notFirstStrike:1;       // 0x8
-    u32 flag_x10 : 1;           // 0x10
-    u32 flag_x20 : 1;           // 0x20
-    u32 flag_x40 : 1;           // 0x40
-    u32 flag_x80 : 1;           // 0x80
-    u32 field3 : 8;
-
+    u32 usedTauntedMove:1;
+    u32 flag2Unknown:1; // Only set to 0 once. Checked in 'WasUnableToUseMove' function.
+    u32 flinchImmobility:1;
+    u32 notFirstStrike:1;
+    u32 palaceUnableToUseMove:1;
+    u32 usesBouncedMove:1;
+    u32 usedHealBlockedMove:1;
+    u32 usedGravityPreventedMove:1;
+    u32 powderSelfDmg:1;
+    u32 usedThroatChopPreventedMove:1;
+    u32 statRaised:1;
+    u32 usedMicleBerry:1;
+    u32 usedCustapBerry:1;    // also quick claw
+    u32 touchedProtectLike:1;
+    // End of 32-bit bitfield
+    u16 disableEjectPack:1;
+    u16 statFell:1;
+    u16 pranksterElevated:1;
+    u16 quickDraw:1;
+    u16 beakBlastCharge:1;
+    u16 quash:1;
+    u16 shellTrap:1;
+    u16 maxGuarded:1;
+    u16 silkTrapped:1;
+    u16 burningBulwarked:1;
+    u16 eatMirrorHerb:1;
+    u16 activateOpportunist:2; // 2 - to copy stats. 1 - stats copied (do not repeat). 0 - no stats to copy
+    u16 usedAllySwitch:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
-    u16 fieldE;
 };
 
 extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 
 struct SpecialStatus
 {
+    u8 changedStatsBattlerId;
     u8 statLowered:1;             // 0x1
     u8 lightningRodRedirected:1;  // 0x2
     u8 restoredBattlerSprite:1;   // 0x4
@@ -222,7 +244,18 @@ struct SpecialStatus
     u8 ppNotAffectedByPressure:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
-    u8 field1[3];
+    u8 focusSashed:1;
+    u8 sturdied:1;
+    u8 stormDrainRedirected:1;
+    u8 switchInAbilityDone:1;
+    u8 switchInItemDone:1;
+    u8 instructedChosenTarget:3;
+    u8 berryReduced:1;
+    u8 rototillerAffected:1;
+    u8 damagedMons:4; // Mons that have been damaged directly by using a move, includes substitute.
+    u8 dancerUsedMove:1;
+    u8 dancerOriginalTarget:3;
+    u8 afterYou:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -234,23 +267,19 @@ struct SpecialStatus
 
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 
-struct SideTimer
+struct FieldTimer
 {
-    /*0x00*/ u8 reflectTimer;
-    /*0x01*/ u8 reflectBattlerId;
-    /*0x02*/ u8 lightscreenTimer;
-    /*0x03*/ u8 lightscreenBattlerId;
-    /*0x04*/ u8 mistTimer;
-    /*0x05*/ u8 mistBattlerId;
-    /*0x06*/ u8 safeguardTimer;
-    /*0x07*/ u8 safeguardBattlerId;
-    /*0x08*/ u8 followmeTimer;
-    /*0x09*/ u8 followmeTarget;
-    /*0x0A*/ u8 spikesAmount;
-    /*0x0B*/ u8 fieldB;
+    u8 mudSportTimer;
+    u8 waterSportTimer;
+    u8 wonderRoomTimer;
+    u8 magicRoomTimer;
+    u8 trickRoomTimer;
+    u8 terrainTimer;
+    u8 gravityTimer;
+    u8 fairyLockTimer;
 };
 
-extern struct SideTimer gSideTimers[];
+extern struct FieldTimer gFieldTimers;
 
 struct WishFutureKnock
 {
@@ -411,6 +440,7 @@ struct BattleStruct
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
+    u32 fieldStatus;
     u8 field_88; // unused
     u8 field_89; // unused
     u8 field_8A; // unused
@@ -450,6 +480,13 @@ struct BattleStruct
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     u8 lastAttackerToFaintOpponent;
+    u8 roostTypes[MAX_BATTLERS_COUNT][2];
+    u16 moveEffect2;
+    u8 forcedSwitch:4;
+    u8 storedHealingWish:4; // Each battler as a bit.
+    u8 storedLunarDance:4; // Each battler as a bit.
+    u8 pledgeMove:1;
+    u8 enduredDamage;
     // align 4
     union {
         struct LinkBattlerHeader linkBattlerHeader;
@@ -472,17 +509,33 @@ extern struct BattleStruct *gBattleStruct;
         typeArg = gBattleMoves[move].type;                            \
 }
 
-#define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
-#define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+#define IS_MOVE_PHYSICAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL)
+#define IS_MOVE_SPECIAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL)
+#define IS_MOVE_STATUS(move)(gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
+
+#define IS_MOVE_RECOIL(move)(gMovesInfo[move].recoil > 0 || gMovesInfo[move].effect == EFFECT_RECOIL_IF_MISS)
 
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
+
 #define SET_BATTLER_TYPE(battlerId, type)   \
 {                                           \
     gBattleMons[battlerId].type1 = type;    \
     gBattleMons[battlerId].type2 = type;    \
 }
+
+#define RESTORE_BATTLER_TYPE(battlerId)                                                     \
+{                                                                                           \
+    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
+    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];   \                                          \
+}
+
+#define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD          \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD        \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_MAT_BLOCK)
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))
@@ -522,6 +575,43 @@ struct BattleScripting
     u8 reshowHelperState;
     u8 levelUpHP;
 };
+
+struct SideTimer
+{
+    u8 reflectTimer;
+    u8 reflectBattlerId;
+    u8 lightscreenTimer;
+    u8 lightscreenBattlerId;
+    u8 mistTimer;
+    u8 mistBattlerId;
+    u8 safeguardTimer;
+    u8 safeguardBattlerId;
+    u8 spikesAmount;
+    u8 toxicSpikesAmount;
+    u8 stealthRockAmount;
+    u8 stickyWebAmount;
+    u8 stickyWebBattlerId;
+    u8 stickyWebBattlerSide; // Used for Court Change
+    u8 auroraVeilTimer;
+    u8 auroraVeilBattlerId;
+    u8 tailwindTimer;
+    u8 tailwindBattlerId;
+    u8 luckyChantTimer;
+    u8 luckyChantBattlerId;
+    u8 steelsurgeAmount;
+    // Timers below this point are not swapped by Court Change
+    u8 followmeTimer;
+    u8 followmeTarget:3;
+    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
+    u8 retaliateTimer;
+    u8 damageNonTypesTimer;
+    u8 damageNonTypesType;
+    u8 rainbowTimer;
+    u8 seaOfFireTimer;
+    u8 swampTimer;
+};
+
+extern struct SideTimer gSideTimers[NUM_BATTLE_SIDES];
 
 struct BattleSpriteInfo
 {
@@ -649,6 +739,7 @@ extern u16 gMoveToLearn;
 extern u16 gBattleMovePower;
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern u16 gCurrentMove;
+extern u8 gBattlerAbility;
 extern u16 gChosenMove;
 extern u16 gCalledMove;
 extern u8 gCritMultiplier;

@@ -65,3 +65,36 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "Good for you, good for you.\n"
     .string "Hohoho.$"
 
+PalletTown_Text_Charmander:
+	.string "DAD: I heard all the noise next door.\p"
+	.string "I'm so happy you chose CHARMANDER!\n"
+	.string "That was my first POKéMON too!\p"
+	.string "With lots of training, your\n"
+	.string "CHARMANDER will grow into\l"
+	.string "a strong CHARIZARD,\l"
+	.string "like mine!$"
+
+PalletTown_Text_Squirtle:
+	.string "DAD: I heard all the noise next door.\p"
+	.string "Looks like you picked SQUIRTLE!\n"
+	.string "That's AUNT JAMIE's favorite POKéMON.\p"
+    .string "Your SQUIRTLE will grow into a\n" 
+    .string "BLASTOISE, just make sure to keep\l"
+    .string "it away from ELECTRIC POKéMON!$"
+
+PalletTown_Text_Bulbasaur:
+	.string "DAD: I heard all the noise next door.\p"
+	.string "Sounds to me like you picked\n" 
+    .string "BULBASAUR!\p" 
+    .string "That is MOM's favorite POKéMON.\n"
+    .string "She'll be so happy\l"
+    .string "to know you picked it!\p"
+    .string "Your BULBASAUR will grow into a\n"
+    .string "VENUSAUR, just make sure to keep\l"
+    .string "it away from FIRE POKéMON!$"
+
+Text_Heading_Home:
+	.string "DAD: I'm headed home, have fun on\n"
+	.string "your journey!\p"
+	.string "Don't forget to tell your MOM and I\n"
+	.string "about your progress!$"

@@ -1,5 +1,6 @@
-.equ LOCALID_SIGN_LADY, 1
-.equ LOCALID_PROF_OAK,  3
+.equ LOCALID_SIGN_LADY, 3
+.equ LOCALID_PROF_OAK,  1
+.equ LOCALID_DAD, 4
 
 .equ SIGN_LADY_READY, VAR_TEMP_2
 
@@ -450,3 +451,119 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	call PalletTown_EventScript_SignLadyShowSign
 	release
 	end
+
+PalletTown_EventScript_DadStarterCheck::
+	lockall
+	addobject LOCALID_DAD
+	applymovement LOCALID_DAD, PalletTown_Movement_DadWalkToEmma
+	waitmovement 0
+	call PalletTown_EventScript_CheckForCharmander
+	release
+	end
+	
+PalletTown_EventScript_CheckForCharmander::
+ 	setvar 0x8005, SPECIES_CHARMANDER
+	special CheckSpecies
+ 	goto_if_eq VAR_RESULT, TRUE, PalletTown_EventScript_EmmaChoseCharmander
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_EventScript_CheckForSquirtle
+	return
+
+PalletTown_EventScript_CheckForSquirtle::
+ 	setvar 0x8005, SPECIES_SQUIRTLE
+	special CheckSpecies
+ 	goto_if_eq VAR_RESULT, TRUE, PalletTown_EventScript_EmmaChoseSquirtle
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_EventScript_EmmaChoseBulbasaur
+	return
+
+
+PalletTown_EventScript_EmmaChoseCharmander::
+	lockall
+	msgbox PalletTown_Text_Charmander, MSGBOX_SIGN
+	showmonpic SPECIES_CHARIZARD, 10, 3
+	playmoncry SPECIES_CHARIZARD, CRY_MODE_NORMAL
+	waitmoncry
+	delay 80
+	hidemonpic
+	msgbox Text_Heading_Home, MSGBOX_SIGN
+	applymovement LOCALID_DAD, PalletTown_Movement_DadLeaveEmmaCharmander
+	waitmovement 0
+	removeobject LOCALID_DAD
+	return
+
+PalletTown_EventScript_EmmaChoseSquirtle::
+	lockall
+	msgbox PalletTown_Text_Squirtle, MSGBOX_SIGN
+	showmonpic SPECIES_BLASTOISE, 10, 3
+	playmoncry SPECIES_BLASTOISE, CRY_MODE_NORMAL
+	waitmoncry
+	delay 80
+	hidemonpic
+	msgbox Text_Heading_Home, MSGBOX_SIGN
+	applymovement LOCALID_DAD, PalletTown_Movement_DadLeaveEmma
+	waitmovement 0
+	removeobject LOCALID_DAD
+	return
+
+PalletTown_EventScript_EmmaChoseBulbasaur::
+	lockall
+	msgbox PalletTown_Text_Bulbasaur, MSGBOX_SIGN
+	showmonpic SPECIES_VENUSAUR, 10, 3
+	playmoncry SPECIES_VENUSAUR, CRY_MODE_NORMAL
+	waitmoncry
+	delay 80
+	hidemonpic
+	msgbox Text_Heading_Home, MSGBOX_SIGN
+	applymovement LOCALID_DAD, PalletTown_Movement_DadLeaveEmma
+	waitmovement 0
+	removeobject LOCALID_DAD
+	return
+
+PalletTown_Movement_DadWalkToEmma::
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	jump_down
+	emote_double_exclamation_mark
+	walk_faster_down
+	walk_faster_down
+	jump_down
+	walk_faster_right
+	step_end
+
+PalletTown_Movement_DadLeaveEmmaCharmander::
+	walk_left
+	jump_in_place_left
+	emote_smile
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+PalletTown_Movement_DadLeaveEmma::
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end

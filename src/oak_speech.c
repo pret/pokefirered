@@ -1343,7 +1343,7 @@ static void Task_OakSpeech_HandleRivalNameInput(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_OakSpeech_DoNamingScreen;
         break;
-    i scase 1: // Default name options
+    case 1: // Default name options
     case 2: //
         PlaySE(SE_SELECT);
         ClearStdWindowAndFrameToTransparent(tMenuWindowId, TRUE);

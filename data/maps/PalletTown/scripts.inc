@@ -455,7 +455,7 @@ PalletTown_EventScript_SignLadyStartShowSign::
 PalletTown_EventScript_DadTrigger::
 	lockall
 	setvar VAR_TEMP_8, 1
-	goto PalletTown_EventScript_DadTriggerTwo
+	goto PalletTown_EventScript_DadStarterCheck
 	end	
 
 PalletTown_EventScript_DadTriggerTwo::

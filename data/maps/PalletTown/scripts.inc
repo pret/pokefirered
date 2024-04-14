@@ -452,12 +452,19 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	release
 	end
 
+PalletTown_EventScript_DadTrigger::
+	lockall
+	setvar VAR_TEMP_8, 1
+	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_DadStarterCheck
+	end	
+
 PalletTown_EventScript_DadStarterCheck::
 	lockall
 	addobject LOCALID_DAD
 	applymovement LOCALID_DAD, PalletTown_Movement_DadWalkToEmma
 	waitmovement 0
 	call PalletTown_EventScript_CheckForCharmander
+	setvar VAR_TEMP_8, 0
 	release
 	end
 	

@@ -452,16 +452,6 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	release
 	end
 
-PalletTown_EventScript_DadTrigger::
-	lockall
-	goto PalletTown_EventScript_DadStarterCheck
-	release
-	end	
-
-PalletTown_EventScript_DadTriggerTwo::
- 	call_if_eq VAR_TEMP_8, 1, PalletTown_EventScript_DadStarterCheck
-	end
-
 PalletTown_EventScript_DadStarterCheck::
 	lockall
 	addobject LOCALID_DAD
@@ -469,7 +459,6 @@ PalletTown_EventScript_DadStarterCheck::
 	waitmovement 0
 	call PalletTown_EventScript_CheckForCharmander
 	release
-	setvar VAR_TEMP_8, 0
 	end
 	
 PalletTown_EventScript_CheckForCharmander::

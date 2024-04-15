@@ -462,7 +462,7 @@ PalletTown_EventScript_DadStarterCheck::
 	addobject LOCALID_DAD
 	applymovement LOCALID_DAD, PalletTown_Movement_DadWalkToEmma
 	waitmovement 0
-	call_if_eq 0x40FE, 1, PalletTown_EventScript_CheckForCharmander
+	call_if_eq 0x40FE, 0, PalletTown_EventScript_CheckForCharmander
 	release
 	end
 	
@@ -493,7 +493,7 @@ PalletTown_EventScript_EmmaChoseCharmander::
 	applymovement LOCALID_DAD, PalletTown_Movement_DadLeaveEmmaCharmander
 	waitmovement 0
 	removeobject LOCALID_DAD
-	setvar 0x40FE, 0
+	setvar 0x40FE, 1
 	return
 
 PalletTown_EventScript_EmmaChoseSquirtle::
@@ -508,7 +508,7 @@ PalletTown_EventScript_EmmaChoseSquirtle::
 	applymovement LOCALID_DAD, PalletTown_Movement_DadLeaveEmma
 	waitmovement 0
 	removeobject LOCALID_DAD
-	setvar 0x40FE, 0
+	setvar 0x40FE, 1
 	return
 
 PalletTown_EventScript_EmmaChoseBulbasaur::
@@ -523,7 +523,7 @@ PalletTown_EventScript_EmmaChoseBulbasaur::
 	applymovement LOCALID_DAD, PalletTown_Movement_DadLeaveEmma
 	waitmovement 0
 	removeobject LOCALID_DAD
-	setvar 0x40FE, 0
+	setvar 0x40FE, 1
 	return
 
 PalletTown_Movement_DadWalkToEmma::

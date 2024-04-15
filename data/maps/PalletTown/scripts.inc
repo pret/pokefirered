@@ -456,6 +456,7 @@ PalletTown_EventScript_DadTrigger::
 	lockall
 	setvar 0x40FE, 1
 	goto PalletTown_EventScript_DadStarterCheck
+	setvar 0x40FE, 0
 	end
 
 PalletTown_EventScript_DadStarterCheck::

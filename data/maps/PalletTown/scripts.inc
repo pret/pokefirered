@@ -576,7 +576,7 @@ PalletTown_Movement_DadLeaveEmma::
 	walk_left
 	step_end
 
-PalletTown_EventScript_Mew
+PalletTown_EventScript_Mew::
 	lockall
 	setflag(FLAG_0x8FD)
 	playmoncry(SPECIES_MEW, CRY_MODE_ENCOUNTER)

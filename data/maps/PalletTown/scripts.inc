@@ -578,7 +578,7 @@ PalletTown_Movement_DadLeaveEmma::
 
 PalletTown_EventScript_Mew
 	lockall
-	setflag(FLAG_UNUSED_0x496)
+	setflag(FLAG_0x8FD)
 	playmoncry(SPECIES_MEW, CRY_MODE_ENCOUNTER)
 	delay(40)
 	waitmoncry

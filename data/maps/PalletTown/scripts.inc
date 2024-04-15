@@ -465,6 +465,7 @@ PalletTown_EventScript_DadStarterCheck::
 	applymovement LOCALID_DAD, PalletTown_Movement_DadWalkToEmma
 	waitmovement 0
 	call_if_eq 0x40FE, 1, PalletTown_EventScript_CheckForCharmander
+	setvar 0x40FE, 0
 	release
 	end
 	

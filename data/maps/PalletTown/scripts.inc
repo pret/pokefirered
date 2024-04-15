@@ -452,10 +452,6 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	release
 	end
 
-#
-# DAD EVENT
-#
-
 PalletTown_EventScript_DadTrigger::
 	lockall
 	goto_if_eq 0x40FE, 0, PalletTown_EventScript_DadStarterCheck
@@ -579,8 +575,4 @@ PalletTown_Movement_DadLeaveEmma::
 	walk_left
 	walk_left
 	step_end
-
-#
-# Testing Rare Encounter
-#
 

@@ -94,7 +94,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": ""
+      "flag": "FLAG_0x8FD"
     }
   ],
   "warp_events": [

@@ -425,7 +425,7 @@ PalletTown_EventScript_SignLadyTrigger::
 	applymovement LOCALID_SIGN_LADY, Common_Movement_WalkInPlaceFasterRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	call PalletTown_EventScript_SignLadyShowSign
+	call_if_eq  PalletTown_EventScript_SignLadyShowSign
 	releaseall
 	end
 
@@ -452,13 +452,18 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	release
 	end
 
+PalletTown_EventScript_DadTrigger::
+	lockall
+	setvar 0x4020, 1
+	goto PalletTown_EventScript_DadStarterCheck
+	end
+
 PalletTown_EventScript_DadStarterCheck::
 	lockall
 	addobject LOCALID_DAD
 	applymovement LOCALID_DAD, PalletTown_Movement_DadWalkToEmma
 	waitmovement 0
-	call PalletTown_EventScript_CheckForCharmander
-	setvar VAR_TEMP_0, 1
+	call_if_eq 0x4020, 1, PalletTown_EventScript_CheckForCharmander
 	release
 	end
 	

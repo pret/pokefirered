@@ -1,7 +1,6 @@
 .equ LOCALID_SIGN_LADY, 3
 .equ LOCALID_PROF_OAK,  1
 .equ LOCALID_DAD, 4
-
 .equ SIGN_LADY_READY, VAR_TEMP_2
 
 PalletTown_MapScripts::
@@ -218,6 +217,7 @@ PalletTown_EventScript_OakTrigger::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
 	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	setflag FLAG_DONT_TRANSITION_MUSIC
+	setvar 0x40FE, 1
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, 12
 	waitstate
 	releaseall
@@ -454,7 +454,6 @@ PalletTown_EventScript_SignLadyStartShowSign::
 
 PalletTown_EventScript_DadTrigger::
 	lockall
-	setvar 0x40FE, 1
 	goto PalletTown_EventScript_DadStarterCheck
 	setvar 0x40FE, 0
 	end

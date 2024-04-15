@@ -576,3 +576,12 @@ PalletTown_Movement_DadLeaveEmma::
 	walk_left
 	step_end
 
+PalletTown_EventScript_Mew
+	lockall
+	setflag(FLAG_UNUSED_0x496)
+	playmoncry(SPECIES_MEW, CRY_MODE_ENCOUNTER)
+	delay(40)
+	waitmoncry
+	setwildbattle(SPECIES_MEW, 5, ITEM_LEFTOVERS)
+	dowildbattle
+	releaseall

@@ -88,7 +88,7 @@
       "x": 3,
       "y": 18,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE",
+      "movement_type": "MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE",
       "movement_range_x": 10,
       "movement_range_y": 10,
       "trainer_type": "TRAINER_TYPE_NONE",

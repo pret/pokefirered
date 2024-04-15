@@ -455,7 +455,6 @@ PalletTown_EventScript_SignLadyStartShowSign::
 PalletTown_EventScript_DadTrigger::
 	lockall
 	goto PalletTown_EventScript_DadStarterCheck
-	setvar 0x40FE, 0
 	end
 
 PalletTown_EventScript_DadStarterCheck::

@@ -579,9 +579,9 @@ PalletTown_Movement_DadLeaveEmma::
 PalletTown_EventScript_Mew::
 	lockall
 	setflag(FLAG_0x8FD)
-	playmoncry(SPECIES_MEW, CRY_MODE_ENCOUNTER)
+	playmoncry SPECIES_MEW, 0
 	delay(40)
 	waitmoncry
-	setwildbattle(SPECIES_MEW, 5, ITEM_LEFTOVERS)
+	setwildbattle SPECIES_MEW, 2, ITEM_LEFTOVERS
 	dowildbattle
 	releaseall

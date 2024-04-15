@@ -454,7 +454,7 @@ PalletTown_EventScript_SignLadyStartShowSign::
 
 PalletTown_EventScript_DadTrigger::
 	lockall
-	setvar 0x4020, 1
+	setvar 0x40FE, 1
 	goto PalletTown_EventScript_DadStarterCheck
 	end
 
@@ -463,7 +463,7 @@ PalletTown_EventScript_DadStarterCheck::
 	addobject LOCALID_DAD
 	applymovement LOCALID_DAD, PalletTown_Movement_DadWalkToEmma
 	waitmovement 0
-	call_if_eq 0x4020, 1, PalletTown_EventScript_CheckForCharmander
+	call_if_eq 0x40FE, 1, PalletTown_EventScript_CheckForCharmander
 	release
 	end
 	

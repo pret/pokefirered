@@ -598,4 +598,3 @@ PalletTown_EventScript_Mew::
 	setflag FLAG_FOUGHT_MEW
 	release
 	end
-	

@@ -98,3 +98,6 @@ Text_Heading_Home:
 	.string "your journey!\p"
 	.string "Don't forget to tell your MOM and I\n"
 	.string "about your progress!$"
+
+PalletTown_Text_Mew::
+	.string "Mew!$"

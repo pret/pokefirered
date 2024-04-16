@@ -577,11 +577,25 @@ PalletTown_Movement_DadLeaveEmma::
 	step_end
 
 PalletTown_EventScript_Mew::
-	lockall
-	setflag(FLAG_0x8FD)
-	playmoncry SPECIES_MEW, 0
-	delay(40)
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_MEW, CRY_MODE_ENCOUNTER
+	message PalletTown_Text_Mew
+	waitmessage
 	waitmoncry
-	setwildbattle SPECIES_MEW, 2, ITEM_LEFTOVERS
-	dowildbattle
-	releaseall
+	delay 20
+	playbgm MUS_ENCOUNTER_GYM_LEADER, 0
+	waitbuttonpress
+	setwildbattle SPECIES_MEW, 70
+	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	special StartLegendaryBattle
+	waitstate
+	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	specialvar VAR_RESULT, GetBattleOutcome
+	setflag FLAG_FOUGHT_MEW
+	release
+	end
+	

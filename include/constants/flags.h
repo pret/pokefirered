@@ -725,6 +725,7 @@
 
 #define FLAG_GOT_POWDER_JAR                              0x2BB
 #define FLAG_FOUGHT_MEWTWO                               0x2BC
+#define FLAG_FOUGHT_MEW                                  0x3D7
 #define FLAG_FOUGHT_MOLTRES                              0x2BD
 #define FLAG_FOUGHT_ARTICUNO                             0x2BE
 #define FLAG_FOUGHT_ZAPDOS                               0x2BF
@@ -1009,7 +1010,6 @@
 #define FLAG_0x3D4               0x3D4
 #define FLAG_0x3D5               0x3D5
 #define FLAG_0x3D6               0x3D6
-#define FLAG_0x3D7               0x3D7
 #define FLAG_MYSTERY_GIFT_DONE   0x3D8
 #define FLAG_MYSTERY_GIFT_1      0x3D9
 #define FLAG_MYSTERY_GIFT_2      0x3DA

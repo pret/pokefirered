@@ -872,8 +872,7 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_WRAP:  // wrap
                 if ((gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED) && gBattleMons[gActiveBattler].hp != 0)
                 {
-                    gBattleMons[gActiveBattler].status2 -= STATUS2_WRAPPED_TURN(1);
-                    if (gBattleMons[gActiveBattler].status2 & STATUS2_WRAPPED)  // damaged by wrap
+                    if (--gDisableStructs[gActiveBattler].wrapTurns != 0)  // damaged by wrap
                     {
                         gBattleScripting.animArg1 = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 0);
                         gBattleScripting.animArg2 = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 1);
@@ -889,6 +888,7 @@ u8 DoBattlerEndTurnEffects(void)
                     }
                     else  // broke free
                     {
+                        gBattleMons[gActiveBattler].status2 &= ~STATUS2_WRAPPED;
                         gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
                         gBattleTextBuff1[1] = B_BUFF_MOVE;
                         gBattleTextBuff1[2] = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 0);
@@ -2328,14 +2328,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITYEFFECT_MUD_SPORT:
                 for (i = 0; i < gBattlersCount; i++)
                 {
-                    if (gStatuses3[i] & STATUS3_MUDSPORT)
+                    if (gStatuses4[i] & STATUS4_MUD_SPORT)
                         effect = i + 1;
                 }
                 break;
             case ABILITYEFFECT_WATER_SPORT:
                 for (i = 0; i < gBattlersCount; i++)
                 {
-                    if (gStatuses3[i] & STATUS3_WATERSPORT)
+                    if (gStatuses4[i] & STATUS4_WATER_SPORT)
                         effect = i + 1;
                 }
                 break;
@@ -3250,3 +3250,59 @@ u8 IsMonDisobedient(void)
         }
     }
 }
+
+u32 GetBattlerAbility(u32 battler)
+{
+    // if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
+    //     return ABILITY_NONE;
+
+    // if (IsNeutralizingGasOnField() && !IsNeutralizingGasBannedAbility(gBattleMons[battler].ability))
+    //     return ABILITY_NONE;
+
+    // if (IsMyceliumMightOnField())
+    //     return ABILITY_NONE;
+
+    // if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
+    //         && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
+    //         || gBattleMoves[gCurrentMove].ignoresTargetAbility)
+    //         && sAbilitiesAffectedByMoldBreaker[gBattleMons[battler].ability]
+    //         && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
+    //         && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
+    //         && gCurrentTurnActionNumber < gBattlersCount)
+    //     return ABILITY_NONE;
+
+    return gBattleMons[battler].ability;
+}
+
+u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating)
+{
+    if (checkNegating)
+    {
+        // if (gStatuses3[battler] & STATUS3_EMBARGO)
+        //     return HOLD_EFFECT_NONE;
+        // if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
+        //     return HOLD_EFFECT_NONE;
+        if (GetBattlerAbility(battler) == ABILITY_KLUTZ)
+            return HOLD_EFFECT_NONE;
+    }
+
+    gPotentialItemEffectBattler = battler;
+
+    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
+        return gEnigmaBerries[battler].holdEffect;
+    else
+        return ItemId_GetHoldEffect(gBattleMons[battler].item);
+}
+
+bool32 IsBattlerAlive(u32 battler)
+{
+    if (gBattleMons[battler].hp == 0)
+        return FALSE;
+    else if (battler >= gBattlersCount)
+        return FALSE;
+    else if (gAbsentBattlerFlags & gBitTable[battler])
+        return FALSE;
+    else
+        return TRUE;
+}
+

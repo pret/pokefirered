@@ -136,6 +136,8 @@ static void Cmd_end(void);
 static void Cmd_if_level_compare(void);
 static void Cmd_if_target_taunted(void);
 static void Cmd_if_target_not_taunted(void);
+static void Cmd_if_status4(void);
+static void Cmd_if_not_status4(void);
 
 static void RecordLastUsedMoveByTarget(void);
 static void BattleAI_DoAIProcessing(void);
@@ -240,6 +242,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_level_compare,                 // 0x5B
     Cmd_if_target_taunted,                // 0x5C
     Cmd_if_target_not_taunted,            // 0x5D
+    Cmd_if_status4,                       // 0x5E
+    Cmd_if_not_status4,                   // 0x5F
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1944,6 +1948,42 @@ static void Cmd_if_target_not_taunted(void)
         sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 1);
     else
         sAIScriptPtr += 5;
+}
+
+static void Cmd_if_status4(void)
+{
+    u16 battlerId;
+    u32 status;
+
+    if (sAIScriptPtr[1] == AI_USER)
+        battlerId = gBattlerAttacker;
+    else
+        battlerId = gBattlerTarget;
+
+    status = T1_READ_32(sAIScriptPtr + 2);
+
+    if (gStatuses4[battlerId] & status)
+        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 6);
+    else
+        sAIScriptPtr += 10;
+}
+
+static void Cmd_if_not_status4(void)
+{
+    u16 battlerId;
+    u32 status;
+
+    if (sAIScriptPtr[1] == AI_USER)
+        battlerId = gBattlerAttacker;
+    else
+        battlerId = gBattlerTarget;
+
+    status = T1_READ_32(sAIScriptPtr + 2);
+
+    if (!(gStatuses4[battlerId] & status))
+        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 6);
+    else
+        sAIScriptPtr += 10;
 }
 
 static void AIStackPushVar(const u8 *var)

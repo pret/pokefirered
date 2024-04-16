@@ -458,7 +458,25 @@
 #define GOOD_ROD  1
 #define SUPER_ROD 2
 
-// Check if the item is one that can be used on a Pokemon.
-#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
+// Item parameters for EXP Candies
+#define EXP_100   1
+#define EXP_800   2
+#define EXP_3000  3
+#define EXP_10000 4
+#define EXP_30000 5
+
+// Item battle script IDs (need to be non-zero)
+#define EFFECT_ITEM_RESTORE_HP              1
+#define EFFECT_ITEM_CURE_STATUS             2
+#define EFFECT_ITEM_HEAL_AND_CURE_STATUS    3
+#define EFFECT_ITEM_INCREASE_STAT           4
+#define EFFECT_ITEM_SET_MIST                5
+#define EFFECT_ITEM_SET_FOCUS_ENERGY        6
+#define EFFECT_ITEM_ESCAPE                  7
+#define EFFECT_ITEM_THROW_BALL              8
+#define EFFECT_ITEM_REVIVE                  9
+#define EFFECT_ITEM_RESTORE_PP              10
+#define EFFECT_ITEM_INCREASE_ALL_STATS      11
+#define EFFECT_ITEM_POKEFLUTE               12
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

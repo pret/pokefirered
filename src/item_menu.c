@@ -1683,17 +1683,44 @@ static void Task_ItemMenuAction_Cancel(u8 taskId)
     Task_RedrawArrowsAndReturnToBagMenuSelect(taskId);
 }
 
+void ItemUseInBattle_BagMenu(u8 taskId)
+{
+
+}
+
 static void Task_ItemMenuAction_BattleUse(u8 taskId)
 {
-    if (ItemId_GetBattleFunc(gSpecialVar_ItemId) != NULL)
-    {
-        HideBagWindow(10);
-        HideBagWindow(6);
-        PutWindowTilemap(0);
-        PutWindowTilemap(1);
-        CopyWindowToVram(0, COPYWIN_MAP);
-        ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
+    // Safety check
+    u16 type = ItemId_GetType(gSpecialVar_ItemId);
+    if (!ItemId_GetBattleUsage(gSpecialVar_ItemId))
+        return;
+
+    HideBagWindow(10);
+    HideBagWindow(6);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    CopyWindowToVram(0, COPYWIN_MAP);   
+    
+    if (gSpecialVar_ItemId == ITEM_BERRY_POUCH) {
+        BattleUseFunc_BerryPouch(taskId);
+        return;
     }
+    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY) {
+        ItemUseInBattle_EnigmaBerry(taskId);
+        return;
+    }
+    
+    DebugPrintfLevel(MGBA_LOG_WARN, "Task_ItemMenuAction_BattleUse");
+
+    // if (type == ITEM_TYPE_BAG_MENU)
+    //     ItemUseInBattle_BagMenu(taskId);
+    // else if (type == ITEM_TYPE_PARTY_MENU)
+    //     ItemUseInBattle_PartyMenu(taskId);
+    // else if (type == ITEM_USE_PARTY_MENU_MOVES)
+    //     ItemUseInBattle_PartyMenuChooseMove(taskId);
+
+    
+    ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
 }
 
 static void Task_ItemContext_FieldGive(u8 taskId)
@@ -2177,11 +2204,11 @@ void InitPokedudeBag(u8 a0)
         cb2 = CB2_ReturnToTeachyTV;
         location = a0;
         break;
-    case 7:
+    case ITEMMENULOCATION_TTVSCR_STATUS:
         cb2 = SetCB2ToReshowScreenAfterMenu2;
         location = ITEMMENULOCATION_TTVSCR_STATUS;
         break;
-    case 8:
+    case ITEMMENULOCATION_TTVSCR_CATCHING:
         cb2 = SetCB2ToReshowScreenAfterMenu2;
         location = ITEMMENULOCATION_TTVSCR_CATCHING;
         break;

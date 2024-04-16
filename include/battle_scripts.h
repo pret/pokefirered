@@ -234,6 +234,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
+extern const u8 *const gBattleScriptsForAIUsingItems[];
 extern const u8 *const gBattlescriptsForSafariActions[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

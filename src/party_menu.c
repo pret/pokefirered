@@ -869,7 +869,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
             DisplayPartyPokemonDataToTeachMove(slot, item, 0);
             break;
         case 2: // Evolution stone
-            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item) != SPECIES_NONE)
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
             break;
@@ -4330,7 +4330,7 @@ static bool8 IsHPRecoveryItem(u16 item)
     if (item == ITEM_ENIGMA_BERRY)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
-        effect = gItemEffectTable[item - ITEM_POTION];
+        effect = gItemEffectTable[item];
     if (effect[4] & ITEM4_HEAL_HP)
         return TRUE;
     else
@@ -4416,6 +4416,39 @@ static bool8 IsItemFlute(u16 item)
     return FALSE;
 }
 
+
+
+// Battle scripts called in HandleAction_UseItem
+// void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
+// {
+//     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+//     if (CannotUsePartyBattleItem(gSpecialVar_ItemId, mon))
+//     {
+//         gPartyMenuUseExitCallback = FALSE;
+//         PlaySE(SE_SELECT);
+//         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+//         ScheduleBgCopyTilemapToVram(2);
+//         gTasks[taskId].func = task;
+//     }
+//     else
+//     {
+//         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
+//         gPartyMenuUseExitCallback = TRUE;
+//         PlaySE(SE_SELECT);
+//         RemoveBagItem(gSpecialVar_ItemId, 1);
+//         ScheduleBgCopyTilemapToVram(2);
+//         gTasks[taskId].func = task;
+//     }
+// }
+
+// void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
+// {
+//     PlaySE(SE_SELECT);
+//     DisplayPartyMenuStdMessage(PARTY_MSG_RESTORE_WHICH_MOVE);
+//     ShowMoveSelectWindow(gPartyMenu.slotId);
+//     gTasks[taskId].func = Task_HandleRestoreWhichMoveInput;
+// }
+
 static bool8 ExecuteTableBasedItemEffect_(u8 partyMonIndex, u16 item, u8 monMoveIndex)
 {
     if (gMain.inBattle)
@@ -4426,39 +4459,7 @@ static bool8 ExecuteTableBasedItemEffect_(u8 partyMonIndex, u16 item, u8 monMove
 
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
 {
-    u16 hp;
-    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 item = gSpecialVar_ItemId;
-    bool8 canHeal;
-
-    if (!NotUsingHPEVItemOnShedinja(mon, item))
-    {
-        canHeal = TRUE;
-    }
-    else
-    {
-        if (IsHPRecoveryItem(item) == TRUE)
-        {
-            hp = GetMonData(mon, MON_DATA_HP);
-            if (hp == GetMonData(mon, MON_DATA_MAX_HP))
-                canHeal = FALSE;
-        }
-        canHeal = PokemonItemUseNoEffect(mon, item, gPartyMenu.slotId, 0);
-    }
-    PlaySE(SE_SELECT);
-    if (canHeal)
-    {
-        gPartyMenuUseExitCallback = FALSE;
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = func;
-    }
-    else
-    {
-        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
-        Task_DoUseItemAnim(taskId);
-        gItemUseCB = ItemUseCB_MedicineStep;
-    }
+    ItemUseCB_MedicineStep(taskId, func);
 }
 
 void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
@@ -4466,13 +4467,16 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
     u16 hp = 0;
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
-    bool8 canHeal;
-    bool8 cannotHeal;
+    bool8 canHeal, cannotUse;
 
-    if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
-        cannotHeal = TRUE;
+    DebugPrintfLevel(MGBA_LOG_WARN, "ItemUseCB_MedicineStep");
+    if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE) {
+        DebugPrintfLevel(MGBA_LOG_WARN, "Shedinja");
+        cannotUse = TRUE;
+    }
     else
     {
+        DebugPrintfLevel(MGBA_LOG_WARN, "notShedinja");
         canHeal = IsHPRecoveryItem(item);
         if (canHeal == TRUE)
         {
@@ -4481,10 +4485,11 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
                 canHeal = FALSE;
         }
 
-        cannotHeal = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, item, 0);
+        DebugPrintfLevel(MGBA_LOG_WARN, "next: ExecuteTableBasedItemEffect");
+        cannotUse = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
     }
 
-    if (cannotHeal != FALSE)
+    if (cannotUse != FALSE)
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
@@ -4596,7 +4601,7 @@ void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func)
     if (item == ITEM_ENIGMA_BERRY)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
-        effect = gItemEffectTable[item - ITEM_POTION];
+        effect = gItemEffectTable[item];
 
     if (!(effect[4] & ITEM4_HEAL_PP_ONE))
     {
@@ -5166,7 +5171,7 @@ static void Task_TryLearningNextMove(u8 taskId)
 static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
+    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
 
     if (targetSpecies != SPECIES_NONE)
     {
@@ -5318,24 +5323,29 @@ static void CB2_UseEvolutionStone(void)
 static bool8 MonCanEvolve(void)
 {
     if (!IsNationalPokedexEnabled()
-     && GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVO_MODE_ITEM_USE, gSpecialVar_ItemId) > KANTO_DEX_COUNT)
+     && GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVO_MODE_ITEM_USE, gSpecialVar_ItemId, NULL) > KANTO_DEX_COUNT)
         return FALSE;
     else
         return TRUE;
 }
 
+const u8* GetItemEffect(u16 item)
+{
+    if (item == ITEM_ENIGMA_BERRY)
+        return gSaveBlock1Ptr->enigmaBerry.itemEffect;
+    else
+        return gItemEffectTable[item];
+}
+
 u8 GetItemEffectType(u16 item)
 {
-    const u8 *itemEffect;
     u32 statusCure;
+    const u8 *itemEffect = GetItemEffect(item);
 
-    if (!IS_POKEMON_ITEM(item))
-        return ITEM_EFFECT_NONE;
     // Read the item's effect properties.
-    if (item == ITEM_ENIGMA_BERRY)
-        itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        itemEffect = gItemEffectTable[item - ITEM_POTION];
+    if (itemEffect == NULL)
+        return ITEM_EFFECT_NONE;
+
     if ((itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)

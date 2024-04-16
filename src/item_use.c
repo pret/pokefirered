@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "berry_pouch.h"
 #include "berry_powder.h"
 #include "bike.h"
@@ -69,6 +70,7 @@ static void UseFameCheckerFromBag(void);
 static void Task_UseFameCheckerFromField(u8 taskId);
 static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
 static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
+static bool32 CannotUseBagBattleItem(u16 itemId);
 
 // unknown unused data.
 // It's curiously about the size of an array of values indexed by species (including padding),
@@ -799,16 +801,22 @@ static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
     }
 }
 
+// void ItemUseInBattle_PartyMenu(u8 taskId)
+// {
+//     gItemUseCB = ItemUseCB_BattleScript;
+//     ItemUse_SwitchToPartyMenuInBattle(taskId);
+// }
+
+// void ItemUseInBattle_PartyMenuChooseMove(u8 taskId)
+// {
+//     gItemUseCB = ItemUseCB_BattleChooseMove;
+//     ItemUse_SwitchToPartyMenuInBattle(taskId);
+// }
+
 void BattleUseFunc_Medicine(u8 taskId)
 {
+    DebugPrintfLevel(MGBA_LOG_WARN, "BattleUseFunc_Medicine");
     gItemUseCB = ItemUseCB_MedicineStep;
-    ItemUse_SwitchToPartyMenuInBattle(taskId);
-}
-
-// Unused. Sacred Ash cannot be used in battle
-static void BattleUseFunc_SacredAsh(u8 taskId)
-{
-    gItemUseCB = ItemUseCB_SacredAsh;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
@@ -828,6 +836,140 @@ void BattleUseFunc_PokeDoll(u8 taskId)
     }
     else
         PrintNotTheTimeToUseThat(taskId, 0);
+}
+
+static u32 GetBallThrowableState(void)
+{
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+     && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+        return BALL_THROW_UNABLE_TWO_MONS;
+    else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
+        return BALL_THROW_UNABLE_NO_ROOM;
+    else if (B_SEMI_INVULNERABLE_CATCH >= GEN_4 && (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE))
+        return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
+    else if (FlagGet(B_FLAG_NO_CATCHING))
+        return BALL_THROW_UNABLE_DISABLED_FLAG;
+
+    return BALL_THROW_ABLE;
+}
+
+bool32 CanThrowBall(void)
+{
+    return (GetBallThrowableState() == BALL_THROW_ABLE);
+}
+
+static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
+static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be used\nright now!\p");
+void ItemUseInBattle_PokeBall(u8 taskId)
+{
+    switch (GetBallThrowableState())
+    {
+    case BALL_THROW_ABLE:
+    default:
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        // Task_FadeAndCloseBagMenu(taskId);
+        ItemMenu_StartFadeToExitCallback(taskId);
+        break;
+    case BALL_THROW_UNABLE_TWO_MONS:
+        PrintNotTheTimeToUseThat(taskId, 0);
+        // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
+        break;
+    case BALL_THROW_UNABLE_NO_ROOM:
+        PrintNotTheTimeToUseThat(taskId, 0);
+        // DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
+        break;
+    case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
+        PrintNotTheTimeToUseThat(taskId, 0);
+        // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
+        break;
+    case BALL_THROW_UNABLE_DISABLED_FLAG:
+        PrintNotTheTimeToUseThat(taskId, 0);
+        // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, CloseItemMessage);
+        break;
+    }
+}
+
+
+// Returns whether an item can be used in battle and sets the fail text.
+static bool32 CannotUseBagBattleItem(u16 itemId)
+{
+    u8 cannotUse = FALSE;
+    u16 battleUsage = ItemId_GetBattleUsage(itemId);
+    const u8* failStr = NULL;
+
+    // Embargo Check
+    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
+        || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
+    {
+        return TRUE;
+    }
+    // X-Items
+    if (battleUsage == EFFECT_ITEM_INCREASE_STAT
+        && gBattleMons[gBattlerInMenuId].statStages[gItemEffectTable[itemId][1]] == MAX_STAT_STAGE)
+    {
+        cannotUse++;
+    }
+    // Dire Hit
+    if (battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY
+        && (gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY))
+    {
+        cannotUse++;
+    }
+    // Guard Spec
+    if (battleUsage == EFFECT_ITEM_SET_MIST
+        && gSideStatuses[GetBattlerSide(gBattlerInMenuId)] & SIDE_STATUS_MIST)
+    {
+        cannotUse++;
+    }
+    // Escape Items
+    if (battleUsage == EFFECT_ITEM_ESCAPE
+        && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        cannotUse++;
+    }
+    // Poke Balls
+    if (battleUsage == EFFECT_ITEM_THROW_BALL)
+    {
+        switch (GetBallThrowableState())
+        {
+            case BALL_THROW_UNABLE_TWO_MONS:
+                failStr = sText_CantThrowPokeBall_TwoMons;
+                cannotUse++;
+                break;
+            case BALL_THROW_UNABLE_NO_ROOM:
+                failStr = gText_BoxFull;
+                cannotUse++;
+                break;
+            case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
+                failStr = sText_CantThrowPokeBall_SemiInvulnerable;
+                cannotUse++;
+                break;
+            case BALL_THROW_UNABLE_DISABLED_FLAG:
+                failStr = sText_CantThrowPokeBall_Disabled;
+                cannotUse++;
+                break;
+        }
+    }
+    // Max Mushrooms
+    // if (battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS)
+    // {
+    //     u32 i;
+    //     for (i = 1; i < NUM_STATS; i++)
+    //     {
+    //         if (CompareStat(gBattlerInMenuId, i, MAX_STAT_STAGE, CMP_EQUAL))
+    //         {
+    //             cannotUse++;
+    //             break;
+    //         }
+    //     }
+    // }
+
+    if (failStr != NULL)
+        StringExpandPlaceholders(gStringVar4, failStr);
+    else
+        StringExpandPlaceholders(gStringVar4, gText_WontHaveEffect);
+    return cannotUse;
 }
 
 void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)

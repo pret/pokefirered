@@ -553,6 +553,20 @@
 	.4byte \ptr
 	.endm
 
+	.macro if_status4 battler:req, status:req, ptr:req
+	.byte 0x5e
+	.byte \battler
+	.4byte \status
+	.4byte \ptr
+	.endm
+
+	.macro if_not_status4 battler:req, status:req, ptr:req
+	.byte 0x5f
+	.byte \battler
+	.4byte \status
+	.4byte \ptr
+	.endm
+
 @ useful script macros
 	.macro get_curr_move_type
 	get_type AI_TYPE_MOVE

@@ -97,8 +97,9 @@
 #define STATUS1_TOXIC_POISON     (1 << 7)
 #define STATUS1_TOXIC_COUNTER    (1 << 8 | 1 << 9 | 1 << 10 | 1 << 11)
 #define STATUS1_TOXIC_TURN(num)  ((num) << 8)
+#define STATUS1_FROSTBITE        (1 << 12)
 #define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
-#define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
+#define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE)
 
 // Volatile status ailments
 // These are removed after exiting the battle or switching out
@@ -113,8 +114,8 @@
 #define STATUS2_LOCK_CONFUSE          (1 << 10 | 1 << 11) // e.g. Thrash
 #define STATUS2_LOCK_CONFUSE_TURN(num)((num) << 10)
 #define STATUS2_MULTIPLETURNS         (1 << 12)
-#define STATUS2_WRAPPED               (1 << 13 | 1 << 14 | 1 << 15)
-#define STATUS2_WRAPPED_TURN(num)     ((num) << 13)
+#define STATUS2_WRAPPED               (1 << 13)
+#define STATUS2_POWDER                (1 << 14)
 #define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
 #define STATUS2_FOCUS_ENERGY          (1 << 20)
@@ -146,12 +147,31 @@
 #define STATUS3_IMPRISONED_OTHERS       (1 << 13)
 #define STATUS3_GRUDGE                  (1 << 14)
 #define STATUS3_CANT_SCORE_A_CRIT       (1 << 15)
-#define STATUS3_MUDSPORT                (1 << 16)
-#define STATUS3_WATERSPORT              (1 << 17)
+#define STATUS3_GASTRO_ACID             (1 << 16)
+#define STATUS3_EMBARGO                 (1 << 17)
 #define STATUS3_UNDERWATER              (1 << 18)
 #define STATUS3_INTIMIDATE_POKES        (1 << 19)
 #define STATUS3_TRACE                   (1 << 20)
-#define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
+#define STATUS3_SMACKED_DOWN            (1 << 21)
+#define STATUS3_ME_FIRST                (1 << 22)
+#define STATUS3_TELEKINESIS             (1 << 23)
+#define STATUS3_PHANTOM_FORCE           (1 << 24)
+#define STATUS3_MIRACLE_EYED            (1 << 25)
+#define STATUS3_MAGNET_RISE             (1 << 26)
+#define STATUS3_HEAL_BLOCK              (1 << 27)
+#define STATUS3_AQUA_RING               (1 << 28)
+#define STATUS3_LASER_FOCUS             (1 << 29)
+#define STATUS3_POWER_TRICK             (1 << 30)
+#define STATUS3_SKY_DROPPED             (1 << 31) // Target of Sky Drop
+#define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE)
+
+#define STATUS4_ELECTRIFIED             (1 << 0)
+#define STATUS4_MUD_SPORT               (1 << 1)    // Only used if B_SPORT_TURNS < GEN_6
+#define STATUS4_WATER_SPORT             (1 << 2)    // Only used if B_SPORT_TURNS < GEN_6
+#define STATUS4_INFINITE_CONFUSION      (1 << 3)    // Used for Berserk Gene
+#define STATUS4_SALT_CURE               (1 << 4)
+#define STATUS4_SYRUP_BOMB              (1 << 5)
+#define STATUS4_GLAIVE_RUSH             (1 << 6)
 
 // Not really sure what a "hitmarker" is.
 #define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.

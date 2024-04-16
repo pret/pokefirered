@@ -580,12 +580,12 @@ static bool8 ShouldUseItem(void)
         if (i && validMons > (gBattleResources->battleHistory->itemsNo - i) + 1)
             continue;
         item = gBattleResources->battleHistory->trainerItems[i];
-        if (item == ITEM_NONE || gItemEffectTable[item - ITEM_POTION] == NULL)
+        if (item == ITEM_NONE || gItemEffectTable[item] == NULL)
             continue;
         if (item == ITEM_ENIGMA_BERRY)
             itemEffects = gSaveBlock1Ptr->enigmaBerry.itemEffect;
         else
-            itemEffects = gItemEffectTable[item - ITEM_POTION];
+            itemEffects = gItemEffectTable[item];
         *(gBattleStruct->AI_itemType + gActiveBattler / 2) = GetAI_ItemType(item, itemEffects);
         switch (*(gBattleStruct->AI_itemType + gActiveBattler / 2))
         {

@@ -37,6 +37,38 @@
 #include "constants/pokemon.h"
 #include "constants/maps.h"
 
+// Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
+//
+// For example accuracycheck is defined as:
+//
+//     .macro accuracycheck failInstr:req, move:req
+//     .byte 0x1
+//     .4byte \failInstr
+//     .2byte \move
+//     .endm
+//
+// Which corresponds to:
+//
+//     CMD_ARGS(const u8 *failInstr, u16 move);
+//
+// The arguments can be accessed as cmd->failInstr and cmd->move.
+// gBattlescriptCurrInstr = cmd->nextInstr; advances to the next instruction.
+#define CMD_ARGS(...) const struct __attribute__((packed)) { u8 opcode; MEMBERS(__VA_ARGS__) const u8 nextInstr[0]; } *const cmd UNUSED = (const void *)gBattlescriptCurrInstr
+#define VARIOUS_ARGS(...) CMD_ARGS(u8 battler, u8 id, ##__VA_ARGS__)
+#define NATIVE_ARGS(...) CMD_ARGS(void (*func)(void), ##__VA_ARGS__)
+
+#define MEMBERS(...) VARARG_8(MEMBERS_, __VA_ARGS__)
+#define MEMBERS_0()
+#define MEMBERS_1(a) a;
+#define MEMBERS_2(a, b) a; b;
+#define MEMBERS_3(a, b, c) a; b; c;
+#define MEMBERS_4(a, b, c, d) a; b; c; d;
+#define MEMBERS_5(a, b, c, d, e) a; b; c; d; e;
+#define MEMBERS_6(a, b, c, d, e, f) a; b; c; d; e; f;
+#define MEMBERS_7(a, b, c, d, e, f, g) a; b; c; d; e; f; g;
+#define MEMBERS_8(a, b, c, d, e, f, g, h) a; b; c; d; e; f; g; h;
+
+
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
@@ -2487,7 +2519,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 3) + 3); // 3-6 turns
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED;
+                    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_GRIP_CLAW)
+                        gDisableStructs[gEffectBattler].wrapTurns = B_BINDING_TURNS >= GEN_5 ? 7 : 5;
+                    else
+                        gDisableStructs[gEffectBattler].wrapTurns = B_BINDING_TURNS >= GEN_5 ? (Random() % 2) + 4 : (Random() % 4) + 2;
 
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 0) = gCurrentMove;
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 1) = gCurrentMove >> 8;
@@ -9319,18 +9355,18 @@ static void Cmd_settypebasedhalvers(void)
 
     if (gBattleMoves[gCurrentMove].effect == EFFECT_MUD_SPORT)
     {
-        if (!(gStatuses3[gBattlerAttacker] & STATUS3_MUDSPORT))
+        if (!(gStatuses4[gBattlerAttacker] & STATUS4_MUD_SPORT))
         {
-            gStatuses3[gBattlerAttacker] |= STATUS3_MUDSPORT;
+            gStatuses4[gBattlerAttacker] |= STATUS4_MUD_SPORT;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
             worked = TRUE;
         }
     }
     else // Water Sport
     {
-        if (!(gStatuses3[gBattlerAttacker] & STATUS3_WATERSPORT))
+        if (!(gStatuses4[gBattlerAttacker] & STATUS4_WATER_SPORT))
         {
-            gStatuses3[gBattlerAttacker] |= STATUS3_WATERSPORT;
+            gStatuses4[gBattlerAttacker] |= STATUS4_WATER_SPORT;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
             worked = TRUE;
         }
@@ -9458,6 +9494,14 @@ static void Cmd_removelightscreenreflect(void)
     }
 
     gBattlescriptCurrInstr++;
+}
+
+u8 GetCatchingBattler(void)
+{
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)))
+        return GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+    else
+        return GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
 }
 
 static void Cmd_handleballthrow(void)
@@ -9884,3 +9928,177 @@ static void Cmd_finishturn(void)
     gCurrentActionFuncId = B_ACTION_FINISHED;
     gCurrentTurnActionNumber = gBattlersCount;
 }
+
+void BS_GetBattlerSide(void)
+{
+    // NATIVE_ARGS(u8 battler);
+    // gBattleCommunication[0] = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
+    // gBattlescriptCurrInstr = cmd->nextInstr;
+    gBattlescriptCurrInstr++;
+}
+
+void BS_ItemRestoreHP(void)
+{
+    gBattlescriptCurrInstr++;
+    // NATIVE_ARGS();
+    // u16 healAmount;
+    // u32 battler = MAX_BATTLERS_COUNT;
+    // u32 healParam = GetItemEffect(gLastUsedItem)[6];
+    // u32 side = GetBattlerSide(gBattlerAttacker);
+    // struct Pokemon *party = GetSideParty(side);
+    // u16 hp = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP);
+    // u16 maxHP = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_MAX_HP);
+    // gBattleCommunication[MULTIUSE_STATE] = 0;
+
+    // // Track the number of Revives used in a battle.
+    // if (hp == 0 && side == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
+    //     gBattleResults.numRevivesUsed++;
+
+    // // Check if the recipient is an active battler.
+    // if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+    //     battler = gBattlerAttacker;
+    // else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+    //     battler = BATTLE_PARTNER(gBattlerAttacker);
+
+    // // Get amount to heal.
+    // switch (healParam)
+    // {
+    //     case ITEM6_HEAL_HP_FULL:
+    //         healAmount = maxHP;
+    //         break;
+    //     case ITEM6_HEAL_HP_HALF:
+    //         healAmount = maxHP / 2;
+    //         break;
+    //     case ITEM6_HEAL_HP_QUARTER:
+    //         healAmount = maxHP / 4;
+    //         break;
+    //     default:
+    //         healAmount = healParam;
+    //         break;
+    // }
+    // if (hp + healAmount > maxHP)
+    //     healAmount = maxHP - hp;
+
+    // gBattleScripting.battler = battler;
+    // PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
+
+    // // Heal is applied as move damage if battler is active.
+    // if (battler != MAX_BATTLERS_COUNT && hp != 0)
+    // {
+    //     gBattleMoveDamage = -healAmount;
+    //     gBattlescriptCurrInstr = cmd->nextInstr;
+    // }
+    // else
+    // {
+    //     hp += healAmount;
+    //     SetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP, &hp);
+
+    //     // Revived battlers on the field need to be brought back.
+    //     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battler != MAX_BATTLERS_COUNT)
+    //     {
+    //         gAbsentBattlerFlags &= ~gBitTable[battler];
+    //         gBattleCommunication[MULTIUSE_STATE] = TRUE;
+    //     }
+    //     gBattlescriptCurrInstr = BattleScript_ItemRestoreHP_Party;
+    // }
+}
+
+void BS_ItemCureStatus(void)
+{
+    gBattlescriptCurrInstr++;
+    // NATIVE_ARGS();
+    // u32 battler = gBattlerAttacker;
+    // u32 side = GetBattlerSide(gBattlerAttacker);
+    // struct Pokemon *party = GetSideParty(side);
+
+    // // Heal Status2 conditions if battler is active.
+    // if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+    // {
+    //     gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
+    // }
+    // else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+    // {
+    //     gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
+    //     battler = BATTLE_PARTNER(gBattlerAttacker);
+    // }
+
+    // // Heal Status1 conditions.
+    // HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], GetItemStatus1Mask(gLastUsedItem), battler);
+
+    // if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
+    //     gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;
+    // if (GetItemStatus2Mask(gLastUsedItem) & STATUS2_CONFUSION)
+    //     gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
+
+    // gBattleScripting.battler = battler;
+    // PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
+    // gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ItemIncreaseStat(void)
+{
+    gBattlescriptCurrInstr++;
+    // NATIVE_ARGS();
+    // u16 statId = GetItemEffect(gLastUsedItem)[1];
+    // u16 stages = ItemId_GetHoldEffectParam(gLastUsedItem);
+    // SET_STATCHANGER(statId, stages, FALSE);
+    // gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ItemRestorePP(void)
+{
+    gBattlescriptCurrInstr++;
+    // NATIVE_ARGS();
+    // const u8 *effect = GetItemEffect(gLastUsedItem);
+    // u32 i, pp, maxPP, moveId, loopEnd;
+    // u32 battler = MAX_BATTLERS_COUNT;
+    // struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];
+
+    // // Check whether to apply to all moves.
+    // if (effect[4] & ITEM4_HEAL_PP_ONE)
+    // {
+    //     i = gBattleStruct->itemMoveIndex[gBattlerAttacker];
+    //     loopEnd = i + 1;
+    // }
+    // else
+    // {
+    //     i = 0;
+    //     loopEnd = MAX_MON_MOVES;
+    // }
+
+    // // Check if the recipient is an active battler.
+    // if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+    //     battler = gBattlerAttacker;
+    // else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+    //     battler = BATTLE_PARTNER(gBattlerAttacker);
+
+    // // Heal PP!
+    // for (; i < loopEnd; i++)
+    // {
+    //     pp = GetMonData(mon, MON_DATA_PP1 + i, NULL);
+    //     moveId = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
+    //     maxPP = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), i);
+    //     if (pp != maxPP)
+    //     {
+    //         pp += effect[6];
+    //         if (pp > maxPP)
+    //             pp = maxPP;
+    //         SetMonData(mon, MON_DATA_PP1 + i, &pp);
+
+    //         // Update battler PP if needed.
+    //         if (battler != MAX_BATTLERS_COUNT
+    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[battler]
+    //             && MOVE_IS_PERMANENT(battler, i))
+    //         {
+    //             gBattleMons[battler].pp[i] = pp;
+    //         }
+    //     }
+    // }
+    // gBattleScripting.battler = battler;
+    // PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(mon, MON_DATA_SPECIES));
+    // gBattlescriptCurrInstr = cmd->nextInstr;
+}
+

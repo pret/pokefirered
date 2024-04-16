@@ -188,6 +188,7 @@ EWRAM_DATA u8 gUnusedFirstBattleVar2 = 0;
 EWRAM_DATA u16 gSideStatuses[2] = {0};
 EWRAM_DATA struct SideTimer gSideTimers[2] = {0};
 EWRAM_DATA u32 gStatuses3[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u32 gStatuses4[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gPauseCounterBattle = 0;
 EWRAM_DATA u16 gPaydayMoney = 0;
@@ -2229,6 +2230,7 @@ static void BattleStartClearSetData(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         gStatuses3[i] = 0;
+        gStatuses4[i] = 0;
 
         dataPtr = (u8 *)&gDisableStructs[i];
         for (j = 0; j < sizeof(struct DisableStruct); j++)
@@ -2359,7 +2361,8 @@ void SwitchInClearSetData(void)
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
         gBattleMons[gActiveBattler].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
-        gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
+        gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED);
+        gStatuses4[gActiveBattler] &= (STATUS4_MUD_SPORT | STATUS4_WATER_SPORT);
         for (i = 0; i < gBattlersCount; i++)
         {
             if (GetBattlerSide(gActiveBattler) != GetBattlerSide(i)
@@ -2375,6 +2378,7 @@ void SwitchInClearSetData(void)
     {
         gBattleMons[gActiveBattler].status2 = 0;
         gStatuses3[gActiveBattler] = 0;
+        gStatuses4[gActiveBattler] = 0;
     }
 
     for (i = 0; i < gBattlersCount; i++)
@@ -2449,6 +2453,7 @@ void FaintClearSetData(void)
 
     gBattleMons[gActiveBattler].status2 = 0;
     gStatuses3[gActiveBattler] = 0;
+    gStatuses4[gActiveBattler] = 0;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3198,7 +3203,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
-                        BtlController_EmitChooseItem(0, gBattleStruct->battlerPartyOrders[gActiveBattler]);
+                        BtlController_EmitChooseItem(BUFFER_A, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                         MarkBattlerForControllerExec(gActiveBattler);
                     }
                     break;
@@ -3902,7 +3907,7 @@ static void TryEvolvePokemon(void)
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits);
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, NULL);
                 if (species != SPECIES_NONE)
                 {
                     gBattleMainFunc = WaitForEvoSceneToFinish;
@@ -4163,22 +4168,26 @@ static void HandleAction_UseItem(void)
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
-    if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForBallThrow[gLastUsedItem];
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) {
+        // change to index minus 1
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem)];
     }
-    else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[0];
-    }
-    else if (gLastUsedItem == ITEM_POKE_FLUTE)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[1];
-    }
-    else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-    {
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
-    }
+    // if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball
+    // {
+    //     gBattlescriptCurrInstr = gBattlescriptsForBallThrow[gLastUsedItem];
+    // }
+    // else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
+    // {
+    //     gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[0];
+    // }
+    // else if (gLastUsedItem == ITEM_POKE_FLUTE)
+    // {
+    //     gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[1];
+    // }
+    // else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+    // {
+    //     gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
+    // }
     else
     {
         gBattleScripting.battler = gBattlerAttacker;
@@ -4230,7 +4239,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
+        gBattlescriptCurrInstr = gBattleScriptsForAIUsingItems[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2) - 1];
     }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
@@ -4384,7 +4393,7 @@ static void HandleAction_SafariZoneBallThrow(void)
     gBattle_BG0_Y = 0;
     --gNumSafariBalls;
     gLastUsedItem = ITEM_SAFARI_BALL;
-    gBattlescriptCurrInstr = gBattlescriptsForBallThrow[ITEM_SAFARI_BALL];
+    gBattlescriptCurrInstr = BattleScript_SafariBallThrow;
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 

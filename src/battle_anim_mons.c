@@ -818,15 +818,15 @@ void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffse
     sprite->y += gBattleAnimArgs[1];
 }
 
-u8 GetBattlerSide(u8 battlerId)
-{
-    return GET_BATTLER_SIDE2(battlerId);
-}
+// u8 GetBattlerSide(u8 battlerId)
+// {
+//     return GET_BATTLER_SIDE2(battlerId);
+// }
 
-u8 GetBattlerPosition(u8 battlerId)
-{
-    return GET_BATTLER_POSITION(battlerId);
-}
+// u8 GetBattlerPosition(u8 battlerId)
+// {
+//     return GET_BATTLER_POSITION(battlerId);
+// }
 
 u8 GetBattlerAtPosition(u8 position)
 {

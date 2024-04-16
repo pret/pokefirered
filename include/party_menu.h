@@ -51,6 +51,7 @@ bool8 FieldCallback_PrepareFadeInFromMenu(void);
 void CB2_ReturnToPartyMenuFromFlyMap(void);
 void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData);
 void CB2_ShowPartyMenuForItemUse(void);
+void ItemUseCB_BattleScript(u8 taskId, TaskFunc task);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func);
 void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func);
 void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func);
@@ -83,5 +84,7 @@ u8 GetPartyIdFromBattlePartyId(u8 battlePartyId);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 void ChoosePartyMonByMenuType(u8 menuType);
+
+const u8* GetItemEffect(u16 item);
 
 #endif // GUARD_PARTY_MENU_H

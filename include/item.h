@@ -3,24 +3,26 @@
 
 #include "global.h"
 
+
+
 typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
-    u16 itemId;
-    u8 name[ITEM_NAME_LENGTH];
     u16 price;
+    u8 secondaryId; // only used for fishing rods
+    ItemUseFunc fieldUseFunc;
+    const u8 *description;
+    u8 name[ITEM_NAME_LENGTH];
     u8 holdEffect;
     u8 holdEffectParam;
-    const u8 *description;
     u8 importance;
-    u8 registrability;
     u8 pocket;
     u8 type; // unused for balls
-    ItemUseFunc fieldUseFunc;
     u8 battleUsage;
     ItemUseFunc battleUseFunc;
-    u8 secondaryId; // only used for fishing rods
+    // u8 registrability;
+    // u16 itemId;
 };
 
 struct BagPocket
@@ -55,7 +57,6 @@ bool8 CheckPCHasItem(u16 itemId, u16 count);
 bool8 AddPCItem(u16 itemId, u16 count);
 void SwapRegisteredBike(void);
 const u8 *ItemId_GetName(u16 itemId);
-u16 ItemId_GetId(u16 itemId);
 u16 ItemId_GetPrice(u16 itemId);
 u8 ItemId_GetHoldEffect(u16 itemId);
 u8 ItemId_GetHoldEffectParam(u16 itemId);

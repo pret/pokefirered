@@ -168,7 +168,8 @@ struct DisableStruct
     /*0x18*/ u8 unk18_a_2 : 2;
     /*0x18*/ u8 mimickedMoves : 4;
     /*0x19*/ u8 rechargeTimer;
-    /*0x1A*/ u8 unk1A[2];
+    /*0x1A*/ u8 unk1A[1];
+    u8 wrapTurns;
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -685,6 +686,7 @@ extern u8 gMultiHitCounter;
 extern struct BattleScripting gBattleScripting;
 extern u8 gBattlerFainted;
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
+extern u32 gStatuses4[MAX_BATTLERS_COUNT];
 extern u8 gSentPokesToOpponent[2];
 extern const u8 *gBattlescriptCurrInstr;
 extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
@@ -722,5 +724,26 @@ extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
+
+static inline u32 GetBattlerPosition(u32 battler)
+{
+    return gBattlerPositions[battler];
+}
+
+static inline u32 GetBattlerSide(u32 battler)
+{
+    return GetBattlerPosition(battler) & BIT_SIDE;
+}
+
+static inline struct Pokemon *GetSideParty(u32 side)
+{
+    return (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+}
+
+static inline struct Pokemon *GetBattlerParty(u32 battler)
+{
+    return GetSideParty(GetBattlerSide(battler));
+}
+
 
 #endif // GUARD_BATTLE_H

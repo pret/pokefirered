@@ -1378,3 +1378,31 @@
 	.macro jumpifnotbattletype flags:req, jumpptr:req
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
+	
+	.macro callnative func:req
+	.byte 0xff
+	.4byte \func
+	.endm
+
+@ callnative macros
+	.macro itemrestorehp
+	callnative BS_ItemRestoreHP
+	.endm
+
+	.macro itemcurestatus
+	callnative BS_ItemCureStatus
+	.endm
+
+	.macro itemincreasestat
+	callnative BS_ItemIncreaseStat
+	.endm
+
+	.macro itemrestorepp
+	callnative BS_ItemRestorePP
+	.endm
+	
+	@ returns B_SIDE_x to gBattleCommunication[0]
+	.macro getbattlerside battler:req
+	callnative BS_GetBattlerSide
+	.byte \battler
+	.endm

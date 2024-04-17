@@ -598,3 +598,8 @@ PalletTown_EventScript_Mew::
 	setflag FLAG_FOUGHT_MEW
 	release
 	end
+
+PalletTown_EventScript_DadBattle::
+	trainerbattle_single TRAINER_MASTER_DAD, PalletTown_Text_Dad_Battle_Intro, PalletTown_Text_Dad_Battle_Defeat
+	msgbox PalletTown_Text_DadPostBattle, MSGBOX_AUTOCLOSE
+	end

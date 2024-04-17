@@ -101,3 +101,13 @@ Text_Heading_Home:
 
 PalletTown_Text_Mew::
 	.string "Mew!$"
+
+PalletTown_Text_DadPostBattle::
+    .string "Emma!\n"
+    .string "I'm so proud of you!$"
+
+PalletTown_Text_Dad_Battle_Intro::
+    .string "Let's battle$"
+
+PalletTown_Text_Dad_Battle_Defeat::
+    .string "You won!$"

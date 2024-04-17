@@ -10860,3 +10860,48 @@ static const struct TrainerMonNoItemDefaultMoves sParty_CueBallPaxton[] = {
         .species = SPECIES_MUK,
     },
 };
+
+static const struct TrainerMonItemCustomMoves sParty_MasterDad[] = {
+    {
+        .iv = 255,
+        .lvl = 97,
+        .species = SPECIES_RHYDON,
+        .heldItem = ITEM_SHELL_BELL,
+        .moves = {MOVE_EARTHQUAKE, MOVE_HORN_DRILL, MOVE_DOUBLE_EDGE, MOVE_ROCK_SLIDE},
+    },
+    {
+        .iv = 255,
+        .lvl = 94,
+        .species = SPECIES_GENGAR,
+        .heldItem = ITEM_QUICK_CLAW,
+        .moves = {MOVE_HYPNOSIS, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_PSYCHIC},
+    },
+    {
+        .iv = 255,
+        .lvl = 95,
+        .species = SPECIES_AERODACTYL,
+        .heldItem = ITEM_SHELL_BELL,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_DOUBLE_EDGE, MOVE_SKY_ATTACK, MOVE_AERIAL_ACE},
+    },
+    {
+        .iv = 255,
+        .lvl = 98,
+        .species = SPECIES_POLIWRATH,
+        .heldItem = ITEM_LEFTOVERS,
+        .moves = {MOVE_BRICK_BREAK, MOVE_ICE_PUNCH, MOVE_HYPNOSIS, MOVE_WATERFALL},
+    },
+    {
+        .iv = 255,
+        .lvl = 100,
+        .species = SPECIES_CHARIZARD,
+        .heldItem = ITEM_CHARCOAL,
+        .moves = {MOVE_FLAMETHROWER, MOVE_BLAST_BURN, MOVE_DRAGON_CLAW, MOVE_THUNDER_PUNCH},
+    },
+    {
+        .iv = 255,
+        .lvl = 94,
+        .species = SPECIES_DRAGONITE,
+        .heldItem = ITEM_LEFTOVERS,
+        .moves = {MOVE_DRAGON_DANCE, MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_BRICK_BREAK},
+    },
+};

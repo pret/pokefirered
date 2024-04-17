@@ -10864,6 +10864,13 @@ static const struct TrainerMonNoItemDefaultMoves sParty_CueBallPaxton[] = {
 static const struct TrainerMonItemCustomMoves sParty_MasterDad[] = {
     {
         .iv = 255,
+        .lvl = 100,
+        .species = SPECIES_CHARIZARD,
+        .heldItem = ITEM_CHARCOAL,
+        .moves = {MOVE_FLAMETHROWER, MOVE_BLAST_BURN, MOVE_DRAGON_CLAW, MOVE_THUNDER_PUNCH},
+    },
+    {
+        .iv = 255,
         .lvl = 97,
         .species = SPECIES_RHYDON,
         .heldItem = ITEM_SHELL_BELL,
@@ -10871,14 +10878,14 @@ static const struct TrainerMonItemCustomMoves sParty_MasterDad[] = {
     },
     {
         .iv = 255,
-        .lvl = 94,
+        .lvl = 98,
         .species = SPECIES_GENGAR,
         .heldItem = ITEM_QUICK_CLAW,
         .moves = {MOVE_HYPNOSIS, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_PSYCHIC},
     },
     {
         .iv = 255,
-        .lvl = 95,
+        .lvl = 96,
         .species = SPECIES_AERODACTYL,
         .heldItem = ITEM_SHELL_BELL,
         .moves = {MOVE_ROCK_SLIDE, MOVE_DOUBLE_EDGE, MOVE_SKY_ATTACK, MOVE_AERIAL_ACE},
@@ -10892,14 +10899,7 @@ static const struct TrainerMonItemCustomMoves sParty_MasterDad[] = {
     },
     {
         .iv = 255,
-        .lvl = 100,
-        .species = SPECIES_CHARIZARD,
-        .heldItem = ITEM_CHARCOAL,
-        .moves = {MOVE_FLAMETHROWER, MOVE_BLAST_BURN, MOVE_DRAGON_CLAW, MOVE_THUNDER_PUNCH},
-    },
-    {
-        .iv = 255,
-        .lvl = 94,
+        .lvl = 97,
         .species = SPECIES_DRAGONITE,
         .heldItem = ITEM_LEFTOVERS,
         .moves = {MOVE_DRAGON_DANCE, MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_BRICK_BREAK},

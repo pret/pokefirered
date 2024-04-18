@@ -57,18 +57,18 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 	return
 
 PalletTown_PlayersHouse_1F_EventScript_Dad::
-	lock
+	lockall
 	faceplayer
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_DadTest
-	closemessage
-	applymovement LOCALID_DAD, Common_Movement_FaceRight
+	goto_if_set FLAG_DEFEATED_CHAMP, PalletTown_PlayersHouse_1F_EventScript_DadBattle
+	msgbox PalletTown_PlayersHouse_1F_EventScript_DadBattle_TooWeak, MSGBOX_AUTOCLOSE
+	applymovement LOCALID_DAD, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-PalletTown_PlayersHouse_1F_EventScript_DadTest::
-	msgbox PalletTown_PlayersHouse_1F_Text_DadTest
-	applymovement LOCALID_DAD, Common_Movement_Smile
-	return
+PalletTown_PlayersHouse_1F_EventScript_DadBattle::
+	lockall
+	trainerbattle_single TRAINER_MASTER_DAD, PalletTown_PlayersHouse_1F_Text_Dad_Battle_Intro, PalletTown_PlayersHouse_1F_Text_Dad_Battle_Defeat
+	msgbox PalletTown_PlayersHouse_1F_Text_DadPostBattle, MSGBOX_AUTOCLOSE
+	release
+	end

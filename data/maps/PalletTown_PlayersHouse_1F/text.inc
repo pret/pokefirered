@@ -39,3 +39,28 @@ PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
 
 PalletTown_PlayersHouse_1F_Text_DadTest::
     .string "DAD: I love you Emma!$"
+
+PalletTown_PlayersHouse_1F_Text_DadPostBattle::
+    .string "Emma!\n"
+    .string "I'm so proud of you!$"
+
+PalletTown_PlayersHouse_1F_Text_Dad_Battle_Intro::
+    .string "I've been training for 25 years...\n"
+    .string "I won't go easy on you!$"
+
+PalletTown_PlayersHouse_1F_Text_Dad_Battle_Defeat::
+    .string "EMMA!\n"
+    .string "I'm so proud of you!\p"
+    .string "I hope you've had fun playing\n"
+    .string "this game I made for you."
+    .string "I love you so much!$"
+
+PalletTown_PlayersHouse_1F_EventScript_DadBattle_TooWeak::
+    .string "You're not strong enough\n"
+    .string "to battle me... yet.\p"
+    .string "Try exploring the world,\n"
+    .string "catching new POKEMON,\p"
+    .string "collecting more GYM BAGDES\n"
+    .string "and battling other trainers.\p"
+    .string "If you need any help just ask!\p"
+    .string "I love you EMMA!$"

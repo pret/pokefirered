@@ -3306,3 +3306,54 @@ bool32 IsBattlerAlive(u32 battler)
         return TRUE;
 }
 
+// This function is the body of "jumpifstat", but can be used dynamically in a function
+bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind)
+{
+    bool32 ret = FALSE;
+    u8 statValue = gBattleMons[battler].statStages[statId];
+
+    // Because this command is used as a way of checking if a stat can be lowered/raised,
+    // we need to do some modification at run-time.
+    if (GetBattlerAbility(battler) == ABILITY_CONTRARY)
+    {
+        if (cmpKind == CMP_GREATER_THAN)
+            cmpKind = CMP_LESS_THAN;
+        else if (cmpKind == CMP_LESS_THAN)
+            cmpKind = CMP_GREATER_THAN;
+
+        if (cmpTo == MIN_STAT_STAGE)
+            cmpTo = MAX_STAT_STAGE;
+        else if (cmpTo == MAX_STAT_STAGE)
+            cmpTo = MIN_STAT_STAGE;
+    }
+
+    switch (cmpKind)
+    {
+    case CMP_EQUAL:
+        if (statValue == cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_NOT_EQUAL:
+        if (statValue != cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_GREATER_THAN:
+        if (statValue > cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_LESS_THAN:
+        if (statValue < cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_COMMON_BITS:
+        if (statValue & cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_NO_COMMON_BITS:
+        if (!(statValue & cmpTo))
+            ret = TRUE;
+        break;
+    }
+
+    return ret;
+}

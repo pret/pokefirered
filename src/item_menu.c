@@ -1683,11 +1683,6 @@ static void Task_ItemMenuAction_Cancel(u8 taskId)
     Task_RedrawArrowsAndReturnToBagMenuSelect(taskId);
 }
 
-void ItemUseInBattle_BagMenu(u8 taskId)
-{
-
-}
-
 static void Task_ItemMenuAction_BattleUse(u8 taskId)
 {
     // Safety check
@@ -1712,15 +1707,15 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
     
     DebugPrintfLevel(MGBA_LOG_WARN, "Task_ItemMenuAction_BattleUse");
 
-    // if (type == ITEM_TYPE_BAG_MENU)
-    //     ItemUseInBattle_BagMenu(taskId);
-    // else if (type == ITEM_TYPE_PARTY_MENU)
-    //     ItemUseInBattle_PartyMenu(taskId);
-    // else if (type == ITEM_USE_PARTY_MENU_MOVES)
-    //     ItemUseInBattle_PartyMenuChooseMove(taskId);
-
-    
-    ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
+    if (type == ITEM_TYPE_BAG_MENU) {
+        ItemUseInBattle_BagMenu(taskId);
+    }
+    else if (type == ITEM_TYPE_PARTY_MENU) {
+        ItemUseInBattle_PartyMenu(taskId);
+    }
+    else if (type == ITEM_TYPE_PARTY_MENU_MOVES) {
+        ItemUseInBattle_PartyMenuChooseMove(taskId);
+    }
 }
 
 static void Task_ItemContext_FieldGive(u8 taskId)
@@ -2130,12 +2125,14 @@ void InitOldManBag(void)
     GoToBagMenu(ITEMMENULOCATION_OLD_MAN, OPEN_BAG_ITEMS, SetCB2ToReshowScreenAfterMenu2);
 }
 
+#define tFrameCounter data[8]
+
 static void Task_Bag_OldManTutorial(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        switch (data[8])
+        switch (tFrameCounter)
         {
         case 102:
         case 204:
@@ -2162,9 +2159,11 @@ static void Task_Bag_OldManTutorial(u8 taskId)
             gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }
-        data[8]++;
+        tFrameCounter++;
     }
 }
+
+#undef tFrameCounter
 
 static void Task_Pokedude_FadeFromBag(u8 taskId)
 {

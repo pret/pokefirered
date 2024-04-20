@@ -62,6 +62,7 @@
 
 // string lengths
 #define ITEM_NAME_LENGTH 14
+#define ITEM_NAME_PLURAL_LENGTH ITEM_NAME_LENGTH + 2 // 2 is used for the instance where a word's suffix becomes y->ies
 #define POKEMON_NAME_LENGTH 10
 #define PLAYER_NAME_LENGTH   7
 #define MAIL_WORDS_COUNT 9

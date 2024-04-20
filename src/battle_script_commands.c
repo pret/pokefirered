@@ -30,6 +30,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
 #include "constants/items.h"
+#include "constants/item_effects.h"
 #include "constants/hold_effects.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
@@ -340,6 +341,7 @@ static void Cmd_subattackerhpbydmg(void);
 static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
+static void Cmd_callnative(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -591,6 +593,14 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_removeattackerstatus1,                   //0xF5
     Cmd_finishaction,                            //0xF6
     Cmd_finishturn,                              //0xF7
+    NULL,                                        //0xF8
+    NULL,                                        //0xF9
+    NULL,                                        //0xFA
+    NULL,                                        //0xFB
+    NULL,                                        //0xFC
+    NULL,                                        //0xFD
+    NULL,                                        //0xFE
+    Cmd_callnative,                              //0xFF
 };
 
 struct StatFractions
@@ -1963,6 +1973,7 @@ static void Cmd_resultmessage(void)
 {
     u32 stringId = 0;
 
+
     if (gBattleControllerExecFlags)
         return;
 
@@ -1970,10 +1981,12 @@ static void Cmd_resultmessage(void)
     {
         stringId = gMissStringIds[gBattleCommunication[MISS_TYPE]];
         gBattleCommunication[MSG_DISPLAY] = 1;
+        DebugPrintfLevel(MGBA_LOG_WARN, "Cmd_resultmessage: missed");
     }
     else
     {
         gBattleCommunication[MSG_DISPLAY] = 1;
+        DebugPrintfLevel(MGBA_LOG_WARN, "Cmd_resultmessage: not missed = %d", gMoveResultFlags & (u8)(~MOVE_RESULT_MISSED));
         switch (gMoveResultFlags & (u8)(~MOVE_RESULT_MISSED))
         {
         case MOVE_RESULT_SUPER_EFFECTIVE:
@@ -2042,6 +2055,7 @@ static void Cmd_resultmessage(void)
         }
     }
 
+    DebugPrintfLevel(MGBA_LOG_WARN, "Cmd_resultmessage: stringId = %d", stringId);
     if (stringId)
         PrepareStringBattle(stringId, gBattlerAttacker);
 
@@ -2050,11 +2064,16 @@ static void Cmd_resultmessage(void)
 
 static void Cmd_printstring(void)
 {
+    CMD_ARGS(u16 id);
+
     if (gBattleControllerExecFlags == 0)
     {
-        u16 var = T2_READ_16(gBattlescriptCurrInstr + 1);
-        PrepareStringBattle(var, gBattlerAttacker);
-        gBattlescriptCurrInstr += 3;
+        u16 id = cmd->id;
+
+        DebugPrintfLevel(MGBA_LOG_WARN, "id: %d", id);
+        DebugPrintfLevel(MGBA_LOG_WARN, "gBattlerAttacker: %d", gBattlerAttacker);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        PrepareStringBattle(id, gBattlerAttacker);
         gBattleCommunication[MSG_DISPLAY] = 1;
     }
 }
@@ -2206,6 +2225,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_POISON:
+            DebugPrintfLevel(MGBA_LOG_WARN, "SetMoveEffect: poison");
             if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
@@ -2332,6 +2352,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_TOXIC_POISON:
+            DebugPrintfLevel(MGBA_LOG_WARN, "SetMoveEffect: toxic poison");
             if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
                 gLastUsedAbility = ABILITY_IMMUNITY;
@@ -2349,24 +2370,30 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABILITY_PREVENTS_MOVE_STATUS;
                 }
+                DebugPrintfLevel(MGBA_LOG_WARN, "SetMoveEffect: toxic poison ability immunity");
                 return;
             }
             if ((IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) || IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
                 && (gHitMarker & HITMARKER_STATUS_ABILITY_EFFECT)
                 && (primary == TRUE || certain == MOVE_EFFECT_CERTAIN))
             {
+                DebugPrintfLevel(MGBA_LOG_WARN, "SetMoveEffect: toxic poison type immunity");
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_PSNPrevention;
 
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STATUS_HAD_NO_EFFECT;
                 return;
             }
-            if (gBattleMons[gEffectBattler].status1)
+            if (gBattleMons[gEffectBattler].status1) {
+                DebugPrintfLevel(MGBA_LOG_WARN, "SetMoveEffect: toxic poison already has status: %d", gBattleMons[gEffectBattler].status1);
                 break;
+            }
             if (!IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) && !IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
             {
-                if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY)
+                if (gBattleMons[gEffectBattler].ability == ABILITY_IMMUNITY) {
+                    DebugPrintfLevel(MGBA_LOG_WARN, "SetMoveEffect: toxic poison ability immunity");
                     break;
+                }
 
                 // It's redundant, because at this point we know the status1 value is 0.
                 gBattleMons[gEffectBattler].status1 &= ~STATUS1_TOXIC_POISON;
@@ -2984,10 +3011,14 @@ static void Cmd_jumpifstatus(void)
     u32 flags = T2_READ_32(gBattlescriptCurrInstr + 2);
     const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
 
-    if (gBattleMons[battlerId].status1 & flags && gBattleMons[battlerId].hp != 0)
+    if (gBattleMons[battlerId].status1 & flags && gBattleMons[battlerId].hp != 0) {
+        DebugPrintfLevel(MGBA_LOG_WARN, "Cmd_jumpifstatus alrdy poisoned");
         gBattlescriptCurrInstr = jumpPtr;
-    else
+    }
+    else {
         gBattlescriptCurrInstr += 10;
+        DebugPrintfLevel(MGBA_LOG_WARN, "Cmd_jumpifstatus not poisoned");
+    }
 }
 
 static void Cmd_jumpifstatus2(void)
@@ -3700,6 +3731,7 @@ static void Cmd_setbyte(void)
 {
     u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     *memByte = gBattlescriptCurrInstr[5];
+    DebugPrintfLevel(MGBA_LOG_WARN, "setbyte: %d", gBattlescriptCurrInstr[5]);
 
     gBattlescriptCurrInstr += 6;
 }
@@ -6247,6 +6279,14 @@ static void Cmd_various(void)
         if (!IsFanfareTaskInactive())
             return;
         break;
+    case VARIOUS_PLAY_MOVE_ANIMATION:
+    {
+        VARIOUS_ARGS(u16 move);
+        BtlController_EmitMoveAnimation(BUFFER_A, cmd->move, gBattleScripting.animTurn, 0, 0, gBattleMons[gActiveBattler].friendship, &gDisableStructs[gActiveBattler]);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
@@ -9929,176 +9969,190 @@ static void Cmd_finishturn(void)
     gCurrentTurnActionNumber = gBattlersCount;
 }
 
+static void Cmd_callnative(void)
+{
+    CMD_ARGS(void (*func)(void));
+    void (*func)(void) = cmd->func;
+    func();
+}
+
 void BS_GetBattlerSide(void)
 {
-    // NATIVE_ARGS(u8 battler);
-    // gBattleCommunication[0] = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
-    // gBattlescriptCurrInstr = cmd->nextInstr;
-    gBattlescriptCurrInstr++;
+    NATIVE_ARGS(u8 battler);
+    gBattleCommunication[0] = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_ItemRestoreHP(void)
 {
-    gBattlescriptCurrInstr++;
-    // NATIVE_ARGS();
-    // u16 healAmount;
-    // u32 battler = MAX_BATTLERS_COUNT;
-    // u32 healParam = GetItemEffect(gLastUsedItem)[6];
-    // u32 side = GetBattlerSide(gBattlerAttacker);
-    // struct Pokemon *party = GetSideParty(side);
-    // u16 hp = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP);
-    // u16 maxHP = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_MAX_HP);
-    // gBattleCommunication[MULTIUSE_STATE] = 0;
+    NATIVE_ARGS();
+    u16 healAmount;
+    u32 battler = MAX_BATTLERS_COUNT;
+    u32 healParam = GetItemEffect(gLastUsedItem)[6];
+    u32 side = GetBattlerSide(gBattlerAttacker);
+    struct Pokemon *party = GetSideParty(side);
+    u8 itemPartyIndex = gBattleStruct->itemPartyIndex[gBattlerAttacker];
+    u16 hp = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP);
+    u16 maxHP = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_MAX_HP);
+    u32 species = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES);
+    gBattleCommunication[MULTIUSE_STATE] = 0;
 
-    // // Track the number of Revives used in a battle.
-    // if (hp == 0 && side == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
-    //     gBattleResults.numRevivesUsed++;
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestoreHP1, itemPartyIndex: %d", itemPartyIndex);
+    // Track the number of Revives used in a battle.
+    if (hp == 0 && side == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
+        gBattleResults.numRevivesUsed++;
 
-    // // Check if the recipient is an active battler.
-    // if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
-    //     battler = gBattlerAttacker;
-    // else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
-    //     battler = BATTLE_PARTNER(gBattlerAttacker);
+    // Check if the recipient is an active battler.
+    if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+        battler = gBattlerAttacker;
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+        battler = BATTLE_PARTNER(gBattlerAttacker);
 
-    // // Get amount to heal.
-    // switch (healParam)
-    // {
-    //     case ITEM6_HEAL_HP_FULL:
-    //         healAmount = maxHP;
-    //         break;
-    //     case ITEM6_HEAL_HP_HALF:
-    //         healAmount = maxHP / 2;
-    //         break;
-    //     case ITEM6_HEAL_HP_QUARTER:
-    //         healAmount = maxHP / 4;
-    //         break;
-    //     default:
-    //         healAmount = healParam;
-    //         break;
-    // }
-    // if (hp + healAmount > maxHP)
-    //     healAmount = maxHP - hp;
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestoreHP2");
+    // Get amount to heal.
+    switch (healParam)
+    {
+        case ITEM6_HEAL_HP_FULL:
+            healAmount = maxHP;
+            break;
+        case ITEM6_HEAL_HP_HALF:
+            healAmount = maxHP / 2;
+            break;
+        case ITEM6_HEAL_HP_QUARTER:
+            healAmount = maxHP / 4;
+            break;
+        default:
+            healAmount = healParam;
+            break;
+    }
+    if (hp + healAmount > maxHP)
+        healAmount = maxHP - hp;
 
-    // gBattleScripting.battler = battler;
-    // PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
+    gBattleScripting.battler = battler;
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestoreHP Species: %d", species);
+    PREPARE_SPECIES_BUFFER(gBattleTextBuff1, species);
 
-    // // Heal is applied as move damage if battler is active.
-    // if (battler != MAX_BATTLERS_COUNT && hp != 0)
-    // {
-    //     gBattleMoveDamage = -healAmount;
-    //     gBattlescriptCurrInstr = cmd->nextInstr;
-    // }
-    // else
-    // {
-    //     hp += healAmount;
-    //     SetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP, &hp);
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestoreHP3 Battler: %d",battler);
+    // Heal is applied as move damage if battler is active.
+    if (battler != MAX_BATTLERS_COUNT && hp != 0)
+    {
+        gBattleMoveDamage = -healAmount;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        hp += healAmount;
+        SetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP, &hp);
 
-    //     // Revived battlers on the field need to be brought back.
-    //     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battler != MAX_BATTLERS_COUNT)
-    //     {
-    //         gAbsentBattlerFlags &= ~gBitTable[battler];
-    //         gBattleCommunication[MULTIUSE_STATE] = TRUE;
-    //     }
-    //     gBattlescriptCurrInstr = BattleScript_ItemRestoreHP_Party;
-    // }
+        // Revived battlers on the field need to be brought back.
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battler != MAX_BATTLERS_COUNT)
+        {
+            gAbsentBattlerFlags &= ~gBitTable[battler];
+            gBattleCommunication[MULTIUSE_STATE] = TRUE;
+        }
+        DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestoreHP: BattleScript_ItemRestoreHP_Party");
+        gBattlescriptCurrInstr = BattleScript_ItemRestoreHP_Party;
+    }
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestoreHP4");
 }
 
 void BS_ItemCureStatus(void)
 {
-    gBattlescriptCurrInstr++;
-    // NATIVE_ARGS();
-    // u32 battler = gBattlerAttacker;
-    // u32 side = GetBattlerSide(gBattlerAttacker);
-    // struct Pokemon *party = GetSideParty(side);
+    NATIVE_ARGS();
+    u32 battler = gBattlerAttacker;
+    u32 side = GetBattlerSide(gBattlerAttacker);
+    struct Pokemon *party = GetSideParty(side);
 
-    // // Heal Status2 conditions if battler is active.
-    // if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
-    // {
-    //     gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
-    // }
-    // else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
-    // {
-    //     gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
-    //     battler = BATTLE_PARTNER(gBattlerAttacker);
-    // }
+    // Heal Status2 conditions if battler is active.
+    if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+    {
+        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+    {
+        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
+        battler = BATTLE_PARTNER(gBattlerAttacker);
+    }
 
-    // // Heal Status1 conditions.
-    // HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], GetItemStatus1Mask(gLastUsedItem), battler);
+    // Heal Status1 conditions.
+    HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], GetItemStatus1Mask(gLastUsedItem), battler);
 
-    // if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
-    //     gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;
-    // if (GetItemStatus2Mask(gLastUsedItem) & STATUS2_CONFUSION)
-    //     gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
+    if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
+        gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;
+    if (GetItemStatus2Mask(gLastUsedItem) & STATUS2_CONFUSION)
+        gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
 
-    // gBattleScripting.battler = battler;
-    // PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
-    // gBattlescriptCurrInstr = cmd->nextInstr;
+    gBattleScripting.battler = battler;
+    PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_ItemIncreaseStat(void)
 {
-    gBattlescriptCurrInstr++;
-    // NATIVE_ARGS();
-    // u16 statId = GetItemEffect(gLastUsedItem)[1];
-    // u16 stages = ItemId_GetHoldEffectParam(gLastUsedItem);
-    // SET_STATCHANGER(statId, stages, FALSE);
-    // gBattlescriptCurrInstr = cmd->nextInstr;
+    NATIVE_ARGS();
+    u16 statId = GetItemEffect(gLastUsedItem)[1];
+    u16 stages = ItemId_GetHoldEffectParam(gLastUsedItem);
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemIncreaseStat: statId=%d", statId);
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemIncreaseStat: stages=%d", stages);
+    SET_STATCHANGER(statId, stages, FALSE);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_ItemRestorePP(void)
 {
-    gBattlescriptCurrInstr++;
-    // NATIVE_ARGS();
-    // const u8 *effect = GetItemEffect(gLastUsedItem);
-    // u32 i, pp, maxPP, moveId, loopEnd;
-    // u32 battler = MAX_BATTLERS_COUNT;
-    // struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];
+    NATIVE_ARGS();
+    const u8 *effect = GetItemEffect(gLastUsedItem);
+    u32 i, pp, maxPP, moveId, loopEnd;
+    u32 battler = MAX_BATTLERS_COUNT;
+    struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
 
+    DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemRestorePP: species=%d", species);
     // // Check whether to apply to all moves.
-    // if (effect[4] & ITEM4_HEAL_PP_ONE)
-    // {
-    //     i = gBattleStruct->itemMoveIndex[gBattlerAttacker];
-    //     loopEnd = i + 1;
-    // }
-    // else
-    // {
-    //     i = 0;
-    //     loopEnd = MAX_MON_MOVES;
-    // }
+    if (effect[4] & ITEM4_HEAL_PP_ONE)
+    {
+        i = gBattleStruct->itemMoveIndex[gBattlerAttacker];
+        loopEnd = i + 1;
+    }
+    else
+    {
+        i = 0;
+        loopEnd = MAX_MON_MOVES;
+    }
 
-    // // Check if the recipient is an active battler.
-    // if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
-    //     battler = gBattlerAttacker;
-    // else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
-    //     battler = BATTLE_PARTNER(gBattlerAttacker);
+    // Check if the recipient is an active battler.
+    if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+        battler = gBattlerAttacker;
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+        battler = BATTLE_PARTNER(gBattlerAttacker);
 
-    // // Heal PP!
-    // for (; i < loopEnd; i++)
-    // {
-    //     pp = GetMonData(mon, MON_DATA_PP1 + i, NULL);
-    //     moveId = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
-    //     maxPP = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), i);
-    //     if (pp != maxPP)
-    //     {
-    //         pp += effect[6];
-    //         if (pp > maxPP)
-    //             pp = maxPP;
-    //         SetMonData(mon, MON_DATA_PP1 + i, &pp);
+    // Heal PP!
+    for (; i < loopEnd; i++)
+    {
+        pp = GetMonData(mon, MON_DATA_PP1 + i, NULL);
+        moveId = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
+        maxPP = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), i);
+        if (pp != maxPP)
+        {
+            pp += effect[6];
+            if (pp > maxPP)
+                pp = maxPP;
+            SetMonData(mon, MON_DATA_PP1 + i, &pp);
 
-    //         // Update battler PP if needed.
-    //         if (battler != MAX_BATTLERS_COUNT
-    //             && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[battler]
-    //             && MOVE_IS_PERMANENT(battler, i))
-    //         {
-    //             gBattleMons[battler].pp[i] = pp;
-    //         }
-    //     }
-    // }
-    // gBattleScripting.battler = battler;
-    // PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(mon, MON_DATA_SPECIES));
-    // gBattlescriptCurrInstr = cmd->nextInstr;
+            // Update battler PP if needed.
+            if (battler != MAX_BATTLERS_COUNT
+                && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[battler]
+                && MOVE_IS_PERMANENT(battler, i))
+            {
+                gBattleMons[battler].pp[i] = pp;
+            }
+        }
+    }
+    gBattleScripting.battler = battler;
+    PREPARE_SPECIES_BUFFER(gBattleTextBuff1, species);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

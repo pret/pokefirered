@@ -444,8 +444,9 @@
 #define ITEM_POWDER_JAR 372
 #define ITEM_RUBY 373
 #define ITEM_SAPPHIRE 374
+#define ITEM_MAX_MUSHROOMS 375
 
-#define ITEMS_COUNT 375
+#define ITEMS_COUNT 376
 
 #define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF

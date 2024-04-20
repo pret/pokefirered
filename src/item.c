@@ -5,9 +5,11 @@
 #include "item.h"
 #include "item_use.h"
 #include "load_save.h"
+#include "party_menu.h"
 #include "quest_log.h"
 #include "strings.h"
 #include "constants/hold_effects.h"
+#include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 
@@ -659,12 +661,42 @@ bool8 ItemId_GetBattleUsage(u16 itemId)
     return gItems[SanitizeItemId(itemId)].battleUsage;
 }
 
-ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
-{
-    return gItems[SanitizeItemId(itemId)].battleUseFunc;
-}
-
 u8 ItemId_GetSecondaryId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].secondaryId;
+}
+
+
+u32 GetItemStatus1Mask(u16 itemId)
+{
+    const u8 *effect = GetItemEffect(itemId);
+    switch (effect[3])
+    {
+        case ITEM3_PARALYSIS:
+            return STATUS1_PARALYSIS;
+        case ITEM3_FREEZE:
+            return STATUS1_FREEZE | STATUS1_FROSTBITE;
+        case ITEM3_BURN:
+            return STATUS1_BURN;
+        case ITEM3_POISON:
+            return STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER;
+        case ITEM3_SLEEP:
+            return STATUS1_SLEEP;
+        case ITEM3_STATUS_ALL:
+            return STATUS1_ANY | STATUS1_TOXIC_COUNTER;
+    }
+    return 0;
+}
+
+u32 GetItemStatus2Mask(u16 itemId)
+{
+    const u8 *effect = GetItemEffect(itemId);
+    if (effect[3] & ITEM3_STATUS_ALL)
+        return STATUS2_INFATUATION | STATUS2_CONFUSION;
+    else if (effect[0] & ITEM0_INFATUATION)
+        return STATUS2_INFATUATION;
+    else if (effect[3] & ITEM3_CONFUSION)
+        return STATUS2_CONFUSION;
+    else
+        return 0;
 }

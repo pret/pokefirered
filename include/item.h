@@ -9,20 +9,21 @@ typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
-    u16 price;
-    u8 secondaryId; // only used for fishing rods
+    u32 price;
+    u16 secondaryId; // only used for fishing rods
     ItemUseFunc fieldUseFunc;
     const u8 *description;
+    const u8 *effect;
     u8 name[ITEM_NAME_LENGTH];
+    u8 pluralName[ITEM_NAME_PLURAL_LENGTH];
     u8 holdEffect;
     u8 holdEffectParam;
     u8 importance;
     u8 pocket;
     u8 type; // unused for balls
     u8 battleUsage;
+    u8 flingPower;
     ItemUseFunc battleUseFunc;
-    // u8 registrability;
-    // u16 itemId;
 };
 
 struct BagPocket
@@ -38,6 +39,7 @@ enum {
     ITEM_TYPE_FIELD,
     ITEM_TYPE_UNUSED, // Used for Pokeblock case in RSE
     ITEM_TYPE_BAG_MENU, // No exit callback, stays in bag menu
+    ITEM_TYPE_PARTY_MENU_MOVES,
 };
 
 extern const struct Item gItems[];
@@ -68,7 +70,6 @@ u8 ItemId_GetPocket(u16 itemId);
 u8 ItemId_GetType(u16 itemId);
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
-ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 u16 ItemId_GetPrice(u16 itemId);
 void ClearBag(void);
@@ -91,5 +92,8 @@ void SortAndCompactBagPocket(struct BagPocket * pocket);
 u8 CountItemsInPC(void);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
 bool8 HasAtLeastOneBerry(void);
+
+u32 GetItemStatus1Mask(u16 itemId);
+u32 GetItemStatus2Mask(u16 itemId);
 
 #endif // GUARD_ITEM_H

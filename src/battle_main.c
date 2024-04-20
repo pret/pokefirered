@@ -3144,6 +3144,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
+                        gBattleStruct->itemPartyIndex[gActiveBattler] = PARTY_SIZE;
                         BtlController_EmitChooseAction(0, gChosenActionByBattler[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
                         MarkBattlerForControllerExec(gActiveBattler);
                         gBattleCommunication[gActiveBattler]++;
@@ -4170,6 +4171,7 @@ static void HandleAction_UseItem(void)
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) {
         // change to index minus 1
+        DebugPrintfLevel(MGBA_LOG_WARN, "BattleUsage: %d", ItemId_GetBattleUsage(gLastUsedItem));
         gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem)];
     }
     // if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball

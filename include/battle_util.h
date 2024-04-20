@@ -93,7 +93,9 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
+// new
 u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 bool32 IsBattlerAlive(u32 battler);
+bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 
 #endif // GUARD_BATTLE_UTIL_H

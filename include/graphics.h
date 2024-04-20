@@ -3282,6 +3282,8 @@ extern const u32 gItemIconPalette_Ruby[];
 extern const u32 gItemIconPalette_Sapphire[];
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
+extern const u32 gItemIcon_MaxMushrooms[];
+extern const u32 gItemIconPalette_MaxMushrooms[];
 
 // battle_anim_utility_funcs
 extern const u32 gFile_graphics_battle_anims_masks_curse_sheet[];

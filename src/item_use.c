@@ -68,8 +68,8 @@ static void UseTownMapFromBag(void);
 static void Task_UseTownMapFromField(u8 taskId);
 static void UseFameCheckerFromBag(void);
 static void Task_UseFameCheckerFromField(u8 taskId);
-static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
-static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
+// static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId);
+// static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId);
 static bool32 CannotUseBagBattleItem(u16 itemId);
 
 // unknown unused data.
@@ -756,36 +756,36 @@ void BattleUseFunc_PokeFlute(u8 taskId)
 
 void BattleUseFunc_StatBooster(u8 taskId)
 {
-    if (ExecuteTableBasedItemEffect(&gPlayerParty[gBattlerPartyIndexes[gBattlerInMenuId]], gSpecialVar_ItemId, gBattlerPartyIndexes[gBattlerInMenuId], 0))
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_WontHaveEffect, Task_ReturnToBagFromContextMenu);
-    else
-    {
-        gTasks[taskId].data[8] = 0;
-        gTasks[taskId].func = Task_BattleUse_StatBooster_DelayAndPrint;
-    }
+    // if (ExecuteTableBasedItemEffect(&gPlayerParty[gBattlerPartyIndexes[gBattlerInMenuId]], gSpecialVar_ItemId, gBattlerPartyIndexes[gBattlerInMenuId], 0))
+    //     DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_WontHaveEffect, Task_ReturnToBagFromContextMenu);
+    // else
+    // {
+    //     gTasks[taskId].data[8] = 0;
+    //     gTasks[taskId].func = Task_BattleUse_StatBooster_DelayAndPrint;
+    // }
 }
 
-static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
+// static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
+// {
+//     s16 *data = gTasks[taskId].data;
 
-    if (++data[8] > 7)
-    {
-        u16 itemId = gSpecialVar_ItemId;
-        PlaySE(SE_USE_ITEM);
-        RemoveBagItem(itemId, 1);
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, Battle_PrintStatBoosterEffectMessage(itemId), Task_BattleUse_StatBooster_WaitButton_ReturnToBattle);
-    }
-}
+//     if (++data[8] > 7)
+//     {
+//         u16 itemId = gSpecialVar_ItemId;
+//         PlaySE(SE_USE_ITEM);
+//         RemoveBagItem(itemId, 1);
+//         DisplayItemMessageInBag(taskId, FONT_NORMAL, Battle_PrintStatBoosterEffectMessage(itemId), Task_BattleUse_StatBooster_WaitButton_ReturnToBattle);
+//     }
+// }
 
-static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
-{
-    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
-    {
-        Bag_BeginCloseWin0Animation();
-        ItemMenu_StartFadeToExitCallback(taskId);
-    }
-}
+// static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
+// {
+//     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+//     {
+//         Bag_BeginCloseWin0Animation();
+//         ItemMenu_StartFadeToExitCallback(taskId);
+//     }
+// }
 
 static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
@@ -801,17 +801,17 @@ static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
     }
 }
 
-// void ItemUseInBattle_PartyMenu(u8 taskId)
-// {
-//     gItemUseCB = ItemUseCB_BattleScript;
-//     ItemUse_SwitchToPartyMenuInBattle(taskId);
-// }
+void ItemUseInBattle_PartyMenu(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_BattleScript;
+    ItemUse_SwitchToPartyMenuInBattle(taskId);
+}
 
-// void ItemUseInBattle_PartyMenuChooseMove(u8 taskId)
-// {
-//     gItemUseCB = ItemUseCB_BattleChooseMove;
-//     ItemUse_SwitchToPartyMenuInBattle(taskId);
-// }
+void ItemUseInBattle_PartyMenuChooseMove(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_BattleChooseMove;
+    ItemUse_SwitchToPartyMenuInBattle(taskId);
+}
 
 void BattleUseFunc_Medicine(u8 taskId)
 {
@@ -872,19 +872,23 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         ItemMenu_StartFadeToExitCallback(taskId);
         break;
     case BALL_THROW_UNABLE_TWO_MONS:
-        PrintNotTheTimeToUseThat(taskId, 0);
+        PrintNotTheTimeToUseThat(taskId, FALSE);
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, Task_ReturnToBagFromContextMenu);
         // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
         break;
     case BALL_THROW_UNABLE_NO_ROOM:
-        PrintNotTheTimeToUseThat(taskId, 0);
+        PrintNotTheTimeToUseThat(taskId, FALSE);
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_BoxFull, Task_ReturnToBagFromContextMenu);
         // DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
         break;
     case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
-        PrintNotTheTimeToUseThat(taskId, 0);
+        PrintNotTheTimeToUseThat(taskId, FALSE);
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, Task_ReturnToBagFromContextMenu);
         // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         break;
     case BALL_THROW_UNABLE_DISABLED_FLAG:
-        PrintNotTheTimeToUseThat(taskId, 0);
+        PrintNotTheTimeToUseThat(taskId, FALSE);
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, Task_ReturnToBagFromContextMenu);
         // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, CloseItemMessage);
         break;
     }
@@ -952,18 +956,18 @@ static bool32 CannotUseBagBattleItem(u16 itemId)
         }
     }
     // Max Mushrooms
-    // if (battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS)
-    // {
-    //     u32 i;
-    //     for (i = 1; i < NUM_STATS; i++)
-    //     {
-    //         if (CompareStat(gBattlerInMenuId, i, MAX_STAT_STAGE, CMP_EQUAL))
-    //         {
-    //             cannotUse++;
-    //             break;
-    //         }
-    //     }
-    // }
+    if (battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS)
+    {
+        u32 i;
+        for (i = 1; i < NUM_STATS; i++)
+        {
+            if (CompareStat(gBattlerInMenuId, i, MAX_STAT_STAGE, CMP_EQUAL))
+            {
+                cannotUse++;
+                break;
+            }
+        }
+    }
 
     if (failStr != NULL)
         StringExpandPlaceholders(gStringVar4, failStr);
@@ -1064,4 +1068,22 @@ void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon *pokemon, u16 itemId, u
         data->species = 0xFFFF;
     SetQuestLogEvent(eventId, (void *)data);
     Free(data);
+}
+
+void ItemUseInBattle_BagMenu(u8 taskId)
+{
+    if (CannotUseBagBattleItem(gSpecialVar_ItemId))
+    {
+        DebugPrintfLevel(MGBA_LOG_WARN, "ItemUseInBattle_BagMenu failure");
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_ReturnToBagFromContextMenu);
+    }
+    else
+    {
+        DebugPrintfLevel(MGBA_LOG_WARN, "ItemUseInBattle_BagMenu success");
+        PlaySE(SE_SELECT);
+        if (!(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (ItemId_GetBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
+            RemoveUsedItem();
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+    }
 }

@@ -399,6 +399,10 @@ static void Task_ReplaceMoveWithTMHM(u8 taskId);
 static void CB2_UseEvolutionStone(void);
 static bool8 MonCanEvolve(void);
 
+static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon);
+static void ShowMoveSelectWindow(u8 slot);
+static void Task_HandleRestoreWhichMoveInput(u8 taskId);
+
 static EWRAM_DATA struct PartyMenuInternal *sPartyMenuInternal = NULL;
 EWRAM_DATA struct PartyMenu gPartyMenu = {0};
 static EWRAM_DATA struct PartyMenuBox *sPartyMenuBoxes = NULL;
@@ -4416,38 +4420,95 @@ static bool8 IsItemFlute(u16 item)
     return FALSE;
 }
 
+static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)
+{
+    u8 i;
+    u8 cannotUse = FALSE;
+    u16 battleUsage = ItemId_GetBattleUsage(itemId);
+    u16 hp = GetMonData(mon, MON_DATA_HP);
 
+    // Embargo Check
+    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
+        || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
+    {
+        return FALSE;
+    }
+    // Items that restore HP (Potions, Sitrus Berry, etc.)
+    if (battleUsage == EFFECT_ITEM_RESTORE_HP && (hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP)))
+    {
+        cannotUse++;
+    }
+    // Items that cure status (Burn Heal, Awakening, etc.)
+    if (battleUsage == EFFECT_ITEM_CURE_STATUS
+        && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
+        || (gPartyMenu.slotId == 0 && gBattleMons[gBattlerInMenuId].status2 & GetItemStatus2Mask(itemId))))
+    {
+        cannotUse++;
+    }
+    // Items that restore HP and cure status (Full Restore)
+    if (battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS
+        && (hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP))
+        && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
+        || (gPartyMenu.slotId == 0 && gBattleMons[gBattlerInMenuId].status2 & GetItemStatus2Mask(itemId))))
+    {
+        cannotUse++;
+    }
+    // Items that revive a party member
+    if (battleUsage == EFFECT_ITEM_REVIVE && hp != 0)
+    {
+        cannotUse++;
+    }
+    // Items that restore PP (Elixir, Ether, Leppa Berry)
+    if (battleUsage == EFFECT_ITEM_RESTORE_PP)
+    {
+        if (GetItemEffect(itemId)[6] == ITEM4_HEAL_PP)
+        {
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (GetMonData(mon, MON_DATA_PP1 + i) < CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + i), GetMonData(mon, MON_DATA_PP_BONUSES), i));
+                    break;
+            }
+            if (i == MAX_MON_MOVES)
+                cannotUse++;
+        }
+        else if (GetMonData(mon, MON_DATA_PP1 + gPartyMenu.data[0]) == CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + gPartyMenu.data[0]), GetMonData(mon, MON_DATA_PP_BONUSES), gPartyMenu.data[0]))
+        {
+            cannotUse++;
+        }
+    }
+    return cannotUse;
+}
 
 // Battle scripts called in HandleAction_UseItem
-// void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
-// {
-//     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-//     if (CannotUsePartyBattleItem(gSpecialVar_ItemId, mon))
-//     {
-//         gPartyMenuUseExitCallback = FALSE;
-//         PlaySE(SE_SELECT);
-//         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-//         ScheduleBgCopyTilemapToVram(2);
-//         gTasks[taskId].func = task;
-//     }
-//     else
-//     {
-//         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
-//         gPartyMenuUseExitCallback = TRUE;
-//         PlaySE(SE_SELECT);
-//         RemoveBagItem(gSpecialVar_ItemId, 1);
-//         ScheduleBgCopyTilemapToVram(2);
-//         gTasks[taskId].func = task;
-//     }
-// }
+void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    if (CannotUsePartyBattleItem(gSpecialVar_ItemId, mon))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+    else
+    {
+        gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_SELECT);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+}
 
-// void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
-// {
-//     PlaySE(SE_SELECT);
-//     DisplayPartyMenuStdMessage(PARTY_MSG_RESTORE_WHICH_MOVE);
-//     ShowMoveSelectWindow(gPartyMenu.slotId);
-//     gTasks[taskId].func = Task_HandleRestoreWhichMoveInput;
-// }
+void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
+{
+    PlaySE(SE_SELECT);
+    DisplayPartyMenuStdMessage(PARTY_MSG_RESTORE_WHICH_MOVE);
+    ShowMoveSelectWindow(gPartyMenu.slotId);
+    gTasks[taskId].func = Task_HandleRestoreWhichMoveInput;
+}
 
 static bool8 ExecuteTableBasedItemEffect_(u8 partyMonIndex, u16 item, u8 monMoveIndex)
 {
@@ -4640,10 +4701,7 @@ static void ReturnToUseOnWhichMon(u8 taskId)
 
 static void TryUsePPItemOutsideBattle(u8 taskId)
 {
-    bool8 noEffect = PokemonItemUseNoEffect(&gPlayerParty[gPartyMenu.slotId],
-                                            gSpecialVar_ItemId,
-                                            gPartyMenu.slotId,
-                                            gPartyMenu.ppMoveSlot);
+    bool8 noEffect = ExecuteTableBasedItemEffect(&gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, gPartyMenu.slotId, gPartyMenu.ppMoveSlot);
     PlaySE(SE_SELECT);
     if (noEffect)
     {
@@ -4695,6 +4753,8 @@ static void TryUsePPItemInBattle(u8 taskId)
     }
     else
     {
+        gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
+        gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data[0];
         gPartyMenuUseExitCallback = TRUE;
         mon = &gPlayerParty[ptr->slotId];
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
@@ -5024,10 +5084,12 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
+    u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 noEffect;
+    bool8 cannotUseEffect;
 
     if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
-        noEffect = PokemonItemUseNoEffect(mon, item, gPartyMenu.slotId, 0);
+        cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
     else
         noEffect = TRUE;
     PlaySE(SE_SELECT);
@@ -5297,11 +5359,8 @@ static void Task_SacredAshDisplayHPRestored(u8 taskId)
 
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc func)
 {
-    bool8 noEffect;
-
     PlaySE(SE_SELECT);
-    noEffect = PokemonItemUseNoEffect(&gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, gPartyMenu.slotId, 0);
-    if (noEffect)
+    if (ExecuteTableBasedItemEffect(&gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, gPartyMenu.slotId, 0))
     {
         gPartyMenuUseExitCallback = FALSE;
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
@@ -5346,7 +5405,7 @@ u8 GetItemEffectType(u16 item)
     if (itemEffect == NULL)
         return ITEM_EFFECT_NONE;
 
-    if ((itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
+    if ((itemEffect[0] & ITEM0_DIRE_HIT) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)
         return ITEM_EFFECT_SACRED_ASH;
@@ -5392,7 +5451,7 @@ u8 GetItemEffectType(u16 item)
         return ITEM_EFFECT_PP_UP;
     else if (itemEffect[5] & ITEM5_PP_MAX)
         return ITEM_EFFECT_PP_MAX;
-    else if (itemEffect[4] & (ITEM4_HEAL_PP_ALL | ITEM4_HEAL_PP_ONE))
+    else if (itemEffect[4] & (ITEM4_HEAL_PP | ITEM4_HEAL_PP_ONE))
         return ITEM_EFFECT_HEAL_PP;
     else
         return ITEM_EFFECT_NONE;

@@ -85,6 +85,8 @@ void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 void ChoosePartyMonByMenuType(u8 menuType);
 
+// pokeemerald
+void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task);
 const u8* GetItemEffect(u16 item);
 
 #endif // GUARD_PARTY_MENU_H

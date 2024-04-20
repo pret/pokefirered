@@ -114,22 +114,22 @@ static const u8 sItemEffect_RevivalHerb[10] = {
 };
 
 static const u8 sItemEffect_Ether[7] = {
-    [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP_ALL,
+    [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP,
     [6] = 10, // Amount of PP to recover
 };
 
 static const u8 sItemEffect_MaxEther[7] = {
-    [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP_ALL,
+    [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP,
     [6] = ITEM6_HEAL_PP_FULL,
 };
 
 static const u8 sItemEffect_Elixir[7] = {
-    [4] = ITEM4_HEAL_PP_ALL,
+    [4] = ITEM4_HEAL_PP,
     [6] = 10, // Amount of PP to recover
 };
 
 static const u8 sItemEffect_MaxElixir[7] = {
-    [4] = ITEM4_HEAL_PP_ALL,
+    [4] = ITEM4_HEAL_PP,
     [6] = ITEM6_HEAL_PP_FULL,
 };
 
@@ -239,13 +239,13 @@ static const u8 sItemEffect_DireHit[8] = {
 };
 
 static const u8 sItemEffect_XAttack[8] = {
-    [0] = 1, // ITEM0_X_ATTACK
+    [1] = ITEM1_X_ATTACK,
     [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
     STAT_BOOST_FRIENDSHIP_CHANGE
 };
 
 static const u8 sItemEffect_XDefend[8] = {
-    [1] = 1 << 4, /// ITEM1_X_DEFEND
+    [1] = 1 << 4, /// ITEM1_X_DEFENSE
     [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
     STAT_BOOST_FRIENDSHIP_CHANGE,
 };
@@ -313,7 +313,7 @@ static const u8 sItemEffect_AspearBerry[6] = {
 };
 
 static const u8 sItemEffect_LeppaBerry[7] = {
-    [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP_ALL,
+    [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP,
     [6] = 10, // Amount of PP to recover
 };
 

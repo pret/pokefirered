@@ -236,5 +236,6 @@ extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattleScriptsForAIUsingItems[];
 extern const u8 *const gBattlescriptsForSafariActions[];
+extern const u8 BattleScript_ItemRestoreHP_Party[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

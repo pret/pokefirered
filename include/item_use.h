@@ -42,6 +42,10 @@ void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseEscapeRopeOnCurrMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 
+void ItemUseInBattle_BagMenu(u8 taskId);
+void ItemUseInBattle_PartyMenu(u8 taskId);
+void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
+
 enum {
     BALL_THROW_UNABLE_TWO_MONS,
     BALL_THROW_UNABLE_NO_ROOM,

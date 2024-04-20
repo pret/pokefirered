@@ -1249,6 +1249,11 @@
 	.byte 0xf7
 	.endm
 
+	.macro callnative func:req
+	.byte 0xff
+	.4byte \func
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1301,6 +1306,14 @@
 	.macro waitfanfare battler:req
 	various \battler, VARIOUS_WAIT_FANFARE
 	.endm
+
+	@ pokeemerald
+
+	.macro playmoveanimation battler:req, move:req
+	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
+	.2byte \move
+	.endm
+
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
@@ -1377,11 +1390,6 @@
 
 	.macro jumpifnotbattletype flags:req, jumpptr:req
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
-	.endm
-	
-	.macro callnative func:req
-	.byte 0xff
-	.4byte \func
 	.endm
 
 @ callnative macros

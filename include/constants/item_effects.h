@@ -2,18 +2,17 @@
 #define GUARD_CONSTANTS_ITEM_EFFECTS_H
 
 // field 0 masks
-#define ITEM0_X_ATTACK          0x0F
 #define ITEM0_DIRE_HIT          0x30 // Works the same way as move Focus Energy.
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
 
 // field 1 masks
-#define ITEM1_X_SPEED           0x0F
-#define ITEM1_X_DEFEND          0xF0
-
-// field 2 masks
-#define ITEM2_X_SPATK           0x0F
-#define ITEM2_X_ACCURACY        0xF0
+#define ITEM1_X_ATTACK          STAT_ATK
+#define ITEM1_X_DEFENSE         STAT_DEF
+#define ITEM1_X_SPEED           STAT_SPEED
+#define ITEM1_X_SPATK           STAT_SPATK
+#define ITEM1_X_SPDEF           STAT_SPDEF
+#define ITEM1_X_ACCURACY        STAT_ACC
 
 // field 3 masks
 #define ITEM3_CONFUSION         0x1
@@ -31,7 +30,7 @@
 #define ITEM4_EV_HP             0x1
 #define ITEM4_EV_ATK            0x2
 #define ITEM4_HEAL_HP           0x4
-#define ITEM4_HEAL_PP_ALL       0x8
+#define ITEM4_HEAL_PP           0x8
 #define ITEM4_HEAL_PP_ONE       0x10
 #define ITEM4_PP_UP             0x20
 #define ITEM4_REVIVE            0x40
@@ -66,6 +65,8 @@
 // Amount of EV modified by ITEM4_EV_HP, ITEM4_EV_ATK, ITEM5_EV_DEF, ITEM5_EV_SPEED, ITEM5_EV_SPDEF and ITEM5_EV_SPATK
 #define ITEM6_ADD_EV       10
 #define ITEM6_SUBTRACT_EV -10
+#define ITEM6_ADD_ONE_EV    1
+#define ITEM6_RESET_EV      0
 
 // Used for GetItemEffectType.
 #define ITEM_EFFECT_X_ITEM 0

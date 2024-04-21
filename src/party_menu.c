@@ -1875,9 +1875,9 @@ static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
 
-    if (item >= ITEM_TM01_FOCUS_PUNCH)
+    if (item >= ITEM_TM01)
     {
-        if (!CanMonLearnTMHM(mon, item - ITEM_TM01_FOCUS_PUNCH))
+        if (!CanMonLearnTMHM(mon, item - ITEM_TM01))
             return CANNOT_LEARN_MOVE;
         else
             move = ItemIdToBattleMoveId(item);
@@ -4334,7 +4334,7 @@ static bool8 IsHPRecoveryItem(u16 item)
     if (item == ITEM_ENIGMA_BERRY)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
-        effect = gItemEffectTable[item];
+        effect = ItemId_GetEffect(item);
     if (effect[4] & ITEM4_HEAL_HP)
         return TRUE;
     else
@@ -4461,7 +4461,7 @@ static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)
     // Items that restore PP (Elixir, Ether, Leppa Berry)
     if (battleUsage == EFFECT_ITEM_RESTORE_PP)
     {
-        if (GetItemEffect(itemId)[6] == ITEM4_HEAL_PP)
+        if (ItemId_GetEffect(itemId)[6] == ITEM4_HEAL_PP)
         {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
@@ -4662,7 +4662,7 @@ void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func)
     if (item == ITEM_ENIGMA_BERRY)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
-        effect = gItemEffectTable[item];
+        effect = ItemId_GetEffect(item);
 
     if (!(effect[4] & ITEM4_HEAL_PP_ONE))
     {
@@ -4781,7 +4781,7 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc func)
 
 u16 ItemIdToBattleMoveId(u16 item)
 {
-    u16 tmNumber = item - ITEM_TM01_FOCUS_PUNCH;
+    u16 tmNumber = item - ITEM_TM01;
 
     return gTMHMMoves[tmNumber];
 }
@@ -5393,13 +5393,13 @@ const u8* GetItemEffect(u16 item)
     if (item == ITEM_ENIGMA_BERRY)
         return gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
-        return gItemEffectTable[item];
+        return ItemId_GetEffect(item);
 }
 
 u8 GetItemEffectType(u16 item)
 {
     u32 statusCure;
-    const u8 *itemEffect = GetItemEffect(item);
+    const u8 *itemEffect = ItemId_GetEffect(item);
 
     // Read the item's effect properties.
     if (itemEffect == NULL)

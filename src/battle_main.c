@@ -4164,6 +4164,7 @@ static void HandleAction_Switch(void)
 
 static void HandleAction_UseItem(void)
 {
+    DebugPrintfLevel(MGBA_LOG_ERROR, "BattleUsage: start");
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -4171,7 +4172,7 @@ static void HandleAction_UseItem(void)
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) {
         // change to index minus 1
-        DebugPrintfLevel(MGBA_LOG_WARN, "BattleUsage: %d", ItemId_GetBattleUsage(gLastUsedItem));
+        DebugPrintfLevel(MGBA_LOG_ERROR, "BattleUsage: %d", ItemId_GetBattleUsage(gLastUsedItem));
         gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem)];
     }
     // if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball

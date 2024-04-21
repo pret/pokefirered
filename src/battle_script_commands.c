@@ -9547,7 +9547,6 @@ u8 GetCatchingBattler(void)
 static void Cmd_handleballthrow(void)
 {
     u8 ballMultiplier = 0;
-
     if (gBattleControllerExecFlags)
         return;
 
@@ -9988,7 +9987,7 @@ void BS_ItemRestoreHP(void)
     NATIVE_ARGS();
     u16 healAmount;
     u32 battler = MAX_BATTLERS_COUNT;
-    u32 healParam = GetItemEffect(gLastUsedItem)[6];
+    u32 healParam = ItemId_GetEffect(gLastUsedItem)[6];
     u32 side = GetBattlerSide(gBattlerAttacker);
     struct Pokemon *party = GetSideParty(side);
     u8 itemPartyIndex = gBattleStruct->itemPartyIndex[gBattlerAttacker];
@@ -10092,7 +10091,7 @@ void BS_ItemCureStatus(void)
 void BS_ItemIncreaseStat(void)
 {
     NATIVE_ARGS();
-    u16 statId = GetItemEffect(gLastUsedItem)[1];
+    u16 statId = ItemId_GetEffect(gLastUsedItem)[1];
     u16 stages = ItemId_GetHoldEffectParam(gLastUsedItem);
     DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemIncreaseStat: statId=%d", statId);
     DebugPrintfLevel(MGBA_LOG_WARN, "BS_ItemIncreaseStat: stages=%d", stages);
@@ -10103,7 +10102,7 @@ void BS_ItemIncreaseStat(void)
 void BS_ItemRestorePP(void)
 {
     NATIVE_ARGS();
-    const u8 *effect = GetItemEffect(gLastUsedItem);
+    const u8 *effect = ItemId_GetEffect(gLastUsedItem);
     u32 i, pp, maxPP, moveId, loopEnd;
     u32 battler = MAX_BATTLERS_COUNT;
     struct Pokemon *mon = (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) ? &gPlayerParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]] : &gEnemyParty[gBattleStruct->itemPartyIndex[gBattlerAttacker]];

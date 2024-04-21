@@ -363,7 +363,7 @@ static const struct SpindaSpot sSpindaSpotGraphics[] =
     {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
 };
 
-#include "data/pokemon/item_effects.h"
+// #include "data/pokemon/item_effects.h"
 
 static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {                      // Attack  Defense  Speed  Sp.Atk  Sp.Def
@@ -3104,22 +3104,29 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         battlerId = MAX_BATTLERS_COUNT;
     }
 
+    // // Skip using the item if it won't do anything
+    // if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY)
+    //     return TRUE;
+
+    // // Get item effect
+    // if (item == ITEM_ENIGMA_BERRY)
+    // {
+    //     if (gMain.inBattle)
+    //         itemEffect = gEnigmaBerries[gActiveBattler].itemEffect;
+    //     else
+    //         itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
+    // }
+    // else
+    // {
+    //     itemEffect = gItemEffectTable[item];
+    // }
     // Skip using the item if it won't do anything
-    if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY)
+    if (ItemId_GetEffect(item) == NULL && item != ITEM_ENIGMA_BERRY)
         return TRUE;
 
     // Get item effect
-    if (item == ITEM_ENIGMA_BERRY)
-    {
-        if (gMain.inBattle)
-            itemEffect = gEnigmaBerries[gActiveBattler].itemEffect;
-        else
-            itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    }
-    else
-    {
-        itemEffect = gItemEffectTable[item];
-    }
+    itemEffect = ItemId_GetEffect(item);
+
     for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
     {
         switch (i)
@@ -3555,7 +3562,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     offset = ITEM_EFFECT_ARG_START;
 
-    temp = gItemEffectTable[itemId];
+    temp = ItemId_GetEffect(itemId);
 
     if (!temp && itemId != ITEM_ENIGMA_BERRY)
         return 0;

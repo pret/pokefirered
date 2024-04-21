@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "item.h"
 #include "random.h"
 #include "util.h"
 #include "constants/abilities.h"
@@ -580,12 +581,12 @@ static bool8 ShouldUseItem(void)
         if (i && validMons > (gBattleResources->battleHistory->itemsNo - i) + 1)
             continue;
         item = gBattleResources->battleHistory->trainerItems[i];
-        if (item == ITEM_NONE || gItemEffectTable[item] == NULL)
+        if (item == ITEM_NONE)
             continue;
-        if (item == ITEM_ENIGMA_BERRY)
-            itemEffects = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-        else
-            itemEffects = gItemEffectTable[item];
+        itemEffects = ItemId_GetEffect(item);
+        if (itemEffects == NULL)
+            continue;
+
         *(gBattleStruct->AI_itemType + gActiveBattler / 2) = GetAI_ItemType(item, itemEffects);
         switch (*(gBattleStruct->AI_itemType + gActiveBattler / 2))
         {

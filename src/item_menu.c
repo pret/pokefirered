@@ -1705,7 +1705,6 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
         return;
     }
     
-    DebugPrintfLevel(MGBA_LOG_WARN, "Task_ItemMenuAction_BattleUse");
 
     if (type == ITEM_TYPE_BAG_MENU) {
         ItemUseInBattle_BagMenu(taskId);

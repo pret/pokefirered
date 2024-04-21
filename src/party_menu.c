@@ -1171,6 +1171,7 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
                 if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
                     sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
                 gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
+                DebugPrintfLevel(MGBA_LOG_ERROR, "HandleChooseMonSelection call gItemUseCB");
             }
             break;
         case PARTY_ACTION_MOVE_TUTOR:
@@ -2095,6 +2096,7 @@ static void Task_PartyMenuFromBag_PokedudeStep(u8 taskId)
         {
             sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
             gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
+            DebugPrintfLevel(MGBA_LOG_ERROR, "Task_PartyMenuFromBag_PokedudeStep call gItemUseCB");
         }
     }
 }
@@ -4324,6 +4326,7 @@ static void Task_SetSacredAshCB(u8 taskId)
         if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
             sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
         gItemUseCB(taskId, Task_ClosePartyMenuAfterText); // ItemUseCB_SacredAsh in this case
+        DebugPrintfLevel(MGBA_LOG_ERROR, "Task_SetSacredAshCB call gItemUseCB");
     }
 }
 
@@ -5080,20 +5083,29 @@ static void Task_TryLearningNextMoveAfterText(u8 taskId)
         Task_TryLearningNextMove(taskId);
 }
 
+#define SOME_OFFSET 6
+
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    struct PartyMenuInternal *ptr = sPartyMenuInternal;
+    s16 *arrayPtr = ptr->data;
     u16 item = gSpecialVar_ItemId;
     u16 *itemPtr = &gSpecialVar_ItemId;
-    bool8 noEffect;
     bool8 cannotUseEffect;
 
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL) 
+    {
+        GetMonLevelUpWindowStats(mon, gTasks[taskId].data);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
+        GetMonLevelUpWindowStats(mon, &gTasks[taskId].data[NUM_STATS]);
+    }
     else
-        noEffect = TRUE;
+    {
+        cannotUseEffect = TRUE;
+    }
     PlaySE(SE_SELECT);
-    if (noEffect)
+    if (cannotUseEffect)
     {
         gPartyMenuUseExitCallback = FALSE;
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
@@ -5102,6 +5114,21 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     }
     else
     {
+        // |working modified without animation
+        // Task_DoUseItemAnim(taskId);
+        // u8 level = GetMonData(mon, MON_DATA_LEVEL);
+        // gPartyMenuUseExitCallback = TRUE;
+        // UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+        // RemoveBagItem(gSpecialVar_ItemId, 1);
+        // PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
+        // GetMonNickname(mon, gStringVar1);
+        // ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+        // StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
+        // DisplayPartyMenuMessage(gStringVar4, TRUE);
+        // ScheduleBgCopyTilemapToVram(2);
+        // gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
+
+        // |original
         Task_DoUseItemAnim(taskId);
         gItemUseCB = ItemUseCB_RareCandyStep;
     }
@@ -5113,10 +5140,11 @@ static void ItemUseCB_RareCandyStep(u8 taskId, TaskFunc func)
     struct PartyMenuInternal *ptr = sPartyMenuInternal;
     s16 *arrayPtr = ptr->data;
     u8 level;
+    u8 i;
 
-    GetMonLevelUpWindowStats(mon, arrayPtr);
-    ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
-    GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
+    // GetMonLevelUpWindowStats(mon, arrayPtr);
+    // ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
+    // GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
@@ -5169,7 +5197,8 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
     s16 *arrayPtr = sPartyMenuInternal->data;
 
     arrayPtr[12] = CreateLevelUpStatsWindow();
-    DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    // DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    DrawLevelUpWindowPg1(arrayPtr[12], gTasks[taskId].data, &gTasks[taskId].data[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }

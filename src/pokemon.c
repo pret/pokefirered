@@ -3104,22 +3104,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         battlerId = MAX_BATTLERS_COUNT;
     }
 
-    // // Skip using the item if it won't do anything
-    // if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY)
-    //     return TRUE;
-
-    // // Get item effect
-    // if (item == ITEM_ENIGMA_BERRY)
-    // {
-    //     if (gMain.inBattle)
-    //         itemEffect = gEnigmaBerries[gActiveBattler].itemEffect;
-    //     else
-    //         itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    // }
-    // else
-    // {
-    //     itemEffect = gItemEffectTable[item];
-    // }
     // Skip using the item if it won't do anything
     if (ItemId_GetEffect(item) == NULL && item != ITEM_ENIGMA_BERRY)
         return TRUE;

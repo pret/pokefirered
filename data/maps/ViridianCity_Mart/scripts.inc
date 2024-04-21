@@ -82,6 +82,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_ETHER
 	.2byte ITEM_LEPPA_BERRY
 	.2byte ITEM_MAX_MUSHROOMS
+	.2byte ITEM_PUNCHING_GLOVE
 	.2byte ITEM_NONE
 	release
 	end

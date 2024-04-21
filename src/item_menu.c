@@ -1696,6 +1696,7 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);   
     
+    DebugPrintfLevel(MGBA_LOG_ERROR, "Task_ItemMenuAction_BattleUse gSpecialVar_ItemId=%d", gSpecialVar_ItemId);
     if (gSpecialVar_ItemId == ITEM_BERRY_POUCH) {
         BattleUseFunc_BerryPouch(taskId);
         return;

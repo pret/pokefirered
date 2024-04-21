@@ -11084,7 +11084,7 @@ const struct Item gItems[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_TmCase,
     },
 
     [ITEM_BERRY_POUCH] =
@@ -11099,7 +11099,8 @@ const struct Item gItems[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .battleUsage = EFFECT_ITEM_OPEN_BERRY_POUCH,
+        .fieldUseFunc = ItemUseOutOfBattle_BerryPouch,
     },
 
     [ITEM_POKEMON_BOX_LINK] =
@@ -11711,8 +11712,8 @@ const struct Item gItems[] =
 
     [ITEM_PUNCHING_GLOVE] =
     {
-        .name = _("PunchingGlove"),
-        .price = 15000,
+        .name = _("PnchingGlove"),
+        .price = 2,
         .holdEffect = HOLD_EFFECT_PUNCHING_GLOVE,
         .description = COMPOUND_STRING(
             "Powers up punching\n"

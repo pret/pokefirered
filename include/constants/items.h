@@ -1079,6 +1079,7 @@
 #define EFFECT_ITEM_REVIVE                  9
 #define EFFECT_ITEM_RESTORE_PP              10
 #define EFFECT_ITEM_INCREASE_ALL_STATS      11
+#define EFFECT_ITEM_OPEN_BERRY_POUCH        12
 
 // Enigma Berry dummy constant
 #define EFFECT_ITEM_ENIGMA_BERRY_EREADER    1

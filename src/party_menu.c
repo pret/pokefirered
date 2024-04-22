@@ -404,6 +404,7 @@ static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleRestoreWhichMoveInput(u8 taskId);
 
 static EWRAM_DATA struct PartyMenuInternal *sPartyMenuInternal = NULL;
+static EWRAM_DATA s16 sLevelUpStatsBeforeAfter[NUM_STATS * 2];
 EWRAM_DATA struct PartyMenu gPartyMenu = {0};
 static EWRAM_DATA struct PartyMenuBox *sPartyMenuBoxes = NULL;
 static EWRAM_DATA u8 *sPartyBgGfxTilemap = NULL;
@@ -4326,7 +4327,6 @@ static void Task_SetSacredAshCB(u8 taskId)
         if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
             sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
         gItemUseCB(taskId, Task_ClosePartyMenuAfterText); // ItemUseCB_SacredAsh in this case
-        DebugPrintfLevel(MGBA_LOG_ERROR, "Task_SetSacredAshCB call gItemUseCB");
     }
 }
 
@@ -5096,9 +5096,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
 
     if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL) 
     {
-        GetMonLevelUpWindowStats(mon, gTasks[taskId].data);
+        GetMonLevelUpWindowStats(mon, sLevelUpStatsBeforeAfter);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
-        GetMonLevelUpWindowStats(mon, &gTasks[taskId].data[NUM_STATS]);
+        GetMonLevelUpWindowStats(mon, &sLevelUpStatsBeforeAfter[NUM_STATS]);
     }
     else
     {
@@ -5114,21 +5114,6 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     }
     else
     {
-        // |working modified without animation
-        // Task_DoUseItemAnim(taskId);
-        // u8 level = GetMonData(mon, MON_DATA_LEVEL);
-        // gPartyMenuUseExitCallback = TRUE;
-        // UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-        // RemoveBagItem(gSpecialVar_ItemId, 1);
-        // PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
-        // GetMonNickname(mon, gStringVar1);
-        // ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-        // StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
-        // DisplayPartyMenuMessage(gStringVar4, TRUE);
-        // ScheduleBgCopyTilemapToVram(2);
-        // gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
-
-        // |original
         Task_DoUseItemAnim(taskId);
         gItemUseCB = ItemUseCB_RareCandyStep;
     }
@@ -5137,14 +5122,13 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
 static void ItemUseCB_RareCandyStep(u8 taskId, TaskFunc func)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    struct PartyMenuInternal *ptr = sPartyMenuInternal;
-    s16 *arrayPtr = ptr->data;
     u8 level;
     u8 i;
 
-    // GetMonLevelUpWindowStats(mon, arrayPtr);
-    // ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
-    // GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
+    for (i = 0; i < NUM_STATS * 2; i++) {
+        sPartyMenuInternal->data[i] = sLevelUpStatsBeforeAfter[i];
+    }
+
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
@@ -5197,8 +5181,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
     s16 *arrayPtr = sPartyMenuInternal->data;
 
     arrayPtr[12] = CreateLevelUpStatsWindow();
-    // DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    DrawLevelUpWindowPg1(arrayPtr[12], gTasks[taskId].data, &gTasks[taskId].data[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(2);
 }

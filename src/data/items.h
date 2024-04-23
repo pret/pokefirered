@@ -941,7 +941,7 @@ const struct Item gItems[] =
     [ITEM_ELIXIR] =
     {
         .name = _("Elixir"),
-        .price = (I_PRICE >= GEN_2) ? 3000 : 1,
+        .price = (I_PRICE >= GEN_2) ? 2 : 1,
         .holdEffectParam = 10,
         .description = COMPOUND_STRING(
             "Restores the PP\n"
@@ -9363,7 +9363,7 @@ const struct Item gItems[] =
     [ITEM_TM10] =
     {
         .name = _("TM10"),
-        .price = 3000,
+        .price = 2,
         .description = COMPOUND_STRING(
             "The attack power\n"
             "varies among\n"
@@ -9408,7 +9408,7 @@ const struct Item gItems[] =
     [ITEM_TM13] =
     {
         .name = _("TM13"),
-        .price = 3000,
+        .price = 2,
         .description = COMPOUND_STRING(
             "Fires an icy cold\n"
             "beam that may\n"

@@ -71,6 +71,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_RARE_CANDY
 	.2byte ITEM_TM02
+	.2byte ITEM_TM10
 	.2byte ITEM_PECHA_BERRY
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_X_ATTACK
@@ -80,6 +81,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_MASTER_BALL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_ETHER
+	.2byte ITEM_ELIXIR
 	.2byte ITEM_LEPPA_BERRY
 	.2byte ITEM_MAX_MUSHROOMS
 	.2byte ITEM_PUNCHING_GLOVE

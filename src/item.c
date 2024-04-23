@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "item.h"
 #include "item_use.h"
+#include "item_menu.h"
 #include "load_save.h"
 #include "party_menu.h"
 #include "quest_log.h"
@@ -659,7 +660,32 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 
 bool8 ItemId_GetBattleUsage(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].battleUsage;
+    u16 item = SanitizeItemId(itemId);    
+    if (item == ITEM_ENIGMA_BERRY)
+    {
+        switch (GetItemEffectType(gSpecialVar_ItemId))
+        {
+            case ITEM_EFFECT_X_ITEM:
+                return EFFECT_ITEM_INCREASE_STAT;
+            case ITEM_EFFECT_HEAL_HP:
+                return EFFECT_ITEM_RESTORE_HP;
+            case ITEM_EFFECT_CURE_POISON:
+            case ITEM_EFFECT_CURE_SLEEP:
+            case ITEM_EFFECT_CURE_BURN:
+            case ITEM_EFFECT_CURE_FREEZE:
+            case ITEM_EFFECT_CURE_PARALYSIS:
+            case ITEM_EFFECT_CURE_ALL_STATUS:
+            case ITEM_EFFECT_CURE_CONFUSION:
+            case ITEM_EFFECT_CURE_INFATUATION:
+                return EFFECT_ITEM_CURE_STATUS;
+            case ITEM_EFFECT_HEAL_PP:
+                return EFFECT_ITEM_RESTORE_PP;
+            default:
+                return 0;
+        }
+    }
+    else
+        return gItems[item].battleUsage;
 }
 
 u8 ItemId_GetSecondaryId(u16 itemId)
@@ -677,15 +703,6 @@ const u8 *ItemId_GetEffect(u32 itemId)
     {
         return gItems[SanitizeItemId(itemId)].effect;
     }
-
-    // if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-    // #if FREE_ENIGMA_BERRY == FALSE
-    //     return gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    // #else
-    //     return 0;
-    // #endif //FREE_ENIGMA_BERRY
-    // else
-    //     return gItems[SanitizeItemId(itemId)].effect;
 }
 
 

@@ -32,13 +32,11 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId);
 void ItemUseInBattle_EnigmaBerry(u8 taskId);
 void ItemUseOutOfBattle_Itemfinder(u8 taskId);
 void Task_UseDigEscapeRopeOnField(u8 taskId);
-void BattleUseFunc_PokeBallEtc(u8 taskId);
 void BattleUseFunc_BerryPouch(u8 taskId);
 void BattleUseFunc_PokeFlute(u8 taskId);
 void BattleUseFunc_StatBooster(u8 taskId);
 void BattleUseFunc_Medicine(u8 taskId);
 void BattleUseFunc_Ether(u8 taskId);
-void BattleUseFunc_PokeDoll(u8 taskId);
 u8 CanUseEscapeRopeOnCurrMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 
@@ -53,5 +51,7 @@ enum {
     BALL_THROW_ABLE,
     BALL_THROW_UNABLE_DISABLED_FLAG,
 };
+
+bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon);
 
 #endif //GUARD_ITEM_USE_H

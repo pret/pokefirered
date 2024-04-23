@@ -2407,7 +2407,6 @@ static void PlayerHandleChooseAction(void)
 {
     s32 i;
 
-    DebugPrintfLevel(MGBA_LOG_ERROR, "PlayerHandleChooseAction: start0");
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
     BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);

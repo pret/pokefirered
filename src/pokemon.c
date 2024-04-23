@@ -3037,19 +3037,6 @@ const u32 sExpCandyExperienceTable[] = {
 // Returns TRUE if the item has no effect on the Pokémon, FALSE otherwise
 bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex, bool8 usedByAI)
 {
-    // u32 data;
-    // s32 friendship;
-    // s32 cmdIndex;
-    // bool8 retVal = TRUE;
-    // const u8 *itemEffect;
-    // u8 idx = ITEM_EFFECT_ARG_START;
-    // u32 i;
-    // s8 friendshipChange = 0;
-    // u8 holdEffect;
-    // u8 battleMonId = MAX_BATTLERS_COUNT;
-    // u16 heldItem;
-    // u8 val;
-    // u32 evDelta;
     u32 dataUnsigned;
     s32 dataSigned, evCap;
     s32 friendship;
@@ -3067,7 +3054,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     s8 evChange;
     u16 evCount;
 
-    DebugPrintfLevel(MGBA_LOG_WARN, "PokemonUseItemEffects");
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (heldItem == ITEM_ENIGMA_BERRY)
@@ -3300,7 +3286,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))
                         {
                             // Restore HP
-                            DebugPrintfLevel(MGBA_LOG_WARN, "PokemonUseItemEffects: RestoreHP");
                             dataUnsigned = GetMonData(mon, MON_DATA_HP, NULL) + dataUnsigned;
                             if (dataUnsigned > GetMonData(mon, MON_DATA_MAX_HP, NULL))
                                 dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL);
@@ -3507,17 +3492,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battleId)
 {
     u32 status = GetMonData(mon, MON_DATA_STATUS, NULL);
-    DebugPrintfLevel(MGBA_LOG_WARN, "HealStatusConditions: heal mask: %d", healMask);
 
     if (status & healMask)
     {
         status &= ~healMask;
         SetMonData(mon, MON_DATA_STATUS, &status);
-        DebugPrintfLevel(MGBA_LOG_WARN, "HealStatusConditions: healed status (%d)", status);
         if (gMain.inBattle && battleId != MAX_BATTLERS_COUNT) {
-            DebugPrintfLevel(MGBA_LOG_WARN, "HealStatusConditions: healed status (%d) in battle", gBattleMons[battleId].status1);
             gBattleMons[battleId].status1 &= ~healMask;
-            DebugPrintfLevel(MGBA_LOG_WARN, "HealStatusConditions: after healed status: %d", gBattleMons[battleId].status1);
         }
         return FALSE;
     }
@@ -3873,15 +3854,15 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
     if (!nationalNum)
         return 0;
 
-    species = 0;
+    species = 1;
 
-    while (species < NUM_SPECIES - 1 && gSpeciesInfo[species].natDexNum != nationalNum)
+    while (species < NUM_SPECIES && gSpeciesInfo[species].natDexNum != nationalNum)
         species++;
 
-    if (species == NUM_SPECIES - 1)
-        return 0;
+    if (species == NUM_SPECIES)
+        return NATIONAL_DEX_NONE;
 
-    return species + 1;
+    return species;
 }
 
 static u16 NationalToHoennOrder(u16 nationalNum)

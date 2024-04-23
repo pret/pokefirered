@@ -314,7 +314,7 @@ static void Task_SetSacredAshCB(u8 taskId);
 static void CB2_ReturnToBagMenu(void);
 static u8 GetPartyIdFromBattleSlot(u8 slot);
 static void Task_DisplayHPRestoredMessage(u8 taskId);
-static void SetSelectedMoveForPPItem(u8 taskId);
+static void SetSelectedMoveForItem(u8 taskId);
 static void ReturnToUseOnWhichMon(u8 taskId);
 static void TryUsePPItemInBattle(u8 taskId);
 static void ItemUseCB_LearnedMove(u8 taskId, TaskFunc func);
@@ -402,6 +402,7 @@ static bool8 MonCanEvolve(void);
 static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleRestoreWhichMoveInput(u8 taskId);
+static void TryUseItemOnMove(u8 taskId);
 
 static EWRAM_DATA struct PartyMenuInternal *sPartyMenuInternal = NULL;
 static EWRAM_DATA s16 sLevelUpStatsBeforeAfter[NUM_STATS * 2];
@@ -1172,7 +1173,6 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
                 if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
                     sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
                 gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
-                DebugPrintfLevel(MGBA_LOG_ERROR, "HandleChooseMonSelection call gItemUseCB");
             }
             break;
         case PARTY_ACTION_MOVE_TUTOR:
@@ -2097,7 +2097,6 @@ static void Task_PartyMenuFromBag_PokedudeStep(u8 taskId)
         {
             sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
             gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
-            DebugPrintfLevel(MGBA_LOG_ERROR, "Task_PartyMenuFromBag_PokedudeStep call gItemUseCB");
         }
     }
 }
@@ -4486,7 +4485,7 @@ static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    if (CannotUsePartyBattleItem(gSpecialVar_ItemId, mon))
+    if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
@@ -4533,14 +4532,11 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal, cannotUse;
 
-    DebugPrintfLevel(MGBA_LOG_WARN, "ItemUseCB_MedicineStep");
     if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE) {
-        DebugPrintfLevel(MGBA_LOG_WARN, "Shedinja");
         cannotUse = TRUE;
     }
     else
     {
-        DebugPrintfLevel(MGBA_LOG_WARN, "notShedinja");
         canHeal = IsHPRecoveryItem(item);
         if (canHeal == TRUE)
         {
@@ -4548,8 +4544,6 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
             if (hp == GetMonData(mon, MON_DATA_MAX_HP))
                 canHeal = FALSE;
         }
-
-        DebugPrintfLevel(MGBA_LOG_WARN, "next: ExecuteTableBasedItemEffect");
         cannotUse = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
     }
 
@@ -4651,29 +4645,22 @@ static void Task_HandleRestoreWhichMoveInput(u8 taskId)
             ReturnToUseOnWhichMon(taskId);
         }
         else
-            SetSelectedMoveForPPItem(taskId);
+        {
+            SetSelectedMoveForItem(taskId);
+        }
     }
 }
 
 #define ppMoveSlot data[0]
 
-void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func)
+void ItemUseCB_PPRecovery(u8 taskId, TaskFunc func)
 {
-    const u8 *effect;
-    u16 item = gSpecialVar_ItemId;
+    const u8 *effect = ItemId_GetEffect(gSpecialVar_ItemId);
 
-    if (item == ITEM_ENIGMA_BERRY)
-        effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        effect = ItemId_GetEffect(item);
-
-    if (!(effect[4] & ITEM4_HEAL_PP_ONE))
+    if (effect == NULL || !(effect[4] & ITEM4_HEAL_PP_ONE))
     {
         gPartyMenu.ppMoveSlot = 0;
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
-            TryUsePPItemInBattle(taskId);
-        else
-            TryUsePPItemOutsideBattle(taskId);
+        TryUseItemOnMove(taskId);
     }
     else
     {
@@ -4684,14 +4671,51 @@ void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func)
     }
 }
 
-static void SetSelectedMoveForPPItem(u8 taskId)
+static void SetSelectedMoveForItem(u8 taskId)
 {
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     gPartyMenu.ppMoveSlot = Menu_GetCursorPos();
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
-        TryUsePPItemInBattle(taskId);
-    else
-        TryUsePPItemOutsideBattle(taskId);
+    TryUseItemOnMove(taskId);
+}
+
+static void TryUseItemOnMove(u8 taskId) {
+    struct PartyMenu *ptr = &gPartyMenu;
+    struct Pokemon *mon = &gPlayerParty[ptr->slotId];
+    if (gMain.inBattle) {
+        if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
+        {
+            gPartyMenuUseExitCallback = FALSE;
+            PlaySE(SE_SELECT);
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        }
+        else
+        {
+            gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
+            gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data[0];
+            gPartyMenuUseExitCallback = TRUE;
+            ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        }
+    } else {
+        s16 *moveSlot = &gPartyMenu.ppMoveSlot;
+        if (ExecuteTableBasedItemEffect(mon, gSpecialVar_ItemId, ptr->slotId, *moveSlot))
+        {
+            PlaySE(SE_SELECT);
+            gPartyMenuUseExitCallback = FALSE;
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        } 
+        else
+        {
+            Task_DoUseItemAnim(taskId);
+            gItemUseCB = ItemUseCB_RestorePP;
+        }
+    }
 }
 
 static void ReturnToUseOnWhichMon(u8 taskId)
@@ -4705,9 +4729,10 @@ static void ReturnToUseOnWhichMon(u8 taskId)
 static void TryUsePPItemOutsideBattle(u8 taskId)
 {
     bool8 noEffect = ExecuteTableBasedItemEffect(&gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, gPartyMenu.slotId, gPartyMenu.ppMoveSlot);
-    PlaySE(SE_SELECT);
+    
     if (noEffect)
     {
+        PlaySE(SE_SELECT);
         gPartyMenuUseExitCallback = FALSE;
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
@@ -4722,10 +4747,9 @@ static void TryUsePPItemOutsideBattle(u8 taskId)
 
 static void ItemUseCB_RestorePP(u8 taskId, TaskFunc func)
 {
-    u16 move;
+    u16 move = MOVE_NONE;
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
 
-    ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, (u8)gPartyMenu.ppMoveSlot);
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlaySE(SE_USE_ITEM);
@@ -4733,7 +4757,7 @@ static void ItemUseCB_RestorePP(u8 taskId, TaskFunc func)
     move = GetMonData(mon, gPartyMenu.ppMoveSlot + MON_DATA_MOVE1);
     StringCopy(gStringVar1, gMoveNames[move]);
     GetMedicineItemEffectMessage(gSpecialVar_ItemId);
-    DisplayPartyMenuMessage(gStringVar4, 1);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }
@@ -4744,9 +4768,9 @@ static void TryUsePPItemInBattle(u8 taskId)
     s16 *moveSlot = &gPartyMenu.ppMoveSlot;
     u16 item = gSpecialVar_ItemId;
     struct PartyMenu *ptr = &gPartyMenu;
-    struct Pokemon *mon;
+    struct Pokemon *mon = &gPlayerParty[ptr->slotId];
 
-    if (ExecuteTableBasedItemEffect_(ptr->slotId, item, *moveSlot))
+    if (CannotUseItemsInBattle(item, mon))
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
@@ -4759,14 +4783,8 @@ static void TryUsePPItemInBattle(u8 taskId)
         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
         gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data[0];
         gPartyMenuUseExitCallback = TRUE;
-        mon = &gPlayerParty[ptr->slotId];
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
-        PlaySE(SE_USE_ITEM);
         RemoveBagItem(item, 1);
-        move = GetMonData(mon, MON_DATA_MOVE1 + *moveSlot);
-        StringCopy(gStringVar1, gMoveNames[move]);
-        GetMedicineItemEffectMessage(item);
-        DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
@@ -5088,9 +5106,6 @@ static void Task_TryLearningNextMoveAfterText(u8 taskId)
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    struct PartyMenuInternal *ptr = sPartyMenuInternal;
-    s16 *arrayPtr = ptr->data;
-    u16 item = gSpecialVar_ItemId;
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
 

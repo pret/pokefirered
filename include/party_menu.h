@@ -54,7 +54,7 @@ void CB2_ShowPartyMenuForItemUse(void);
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func);
 void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func);
-void ItemUseCB_TryRestorePP(u8 taskId, TaskFunc func);
+void ItemUseCB_PPRecovery(u8 taskId, TaskFunc func);
 void ItemUseCB_PPUp(u8 taskId, TaskFunc func);
 u16 ItemIdToBattleMoveId(u16 item);
 bool8 IsMoveHm(u16 move);

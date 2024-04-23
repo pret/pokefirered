@@ -4164,7 +4164,6 @@ static void HandleAction_Switch(void)
 
 static void HandleAction_UseItem(void)
 {
-    DebugPrintfLevel(MGBA_LOG_ERROR, "BattleUsage: start");
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;

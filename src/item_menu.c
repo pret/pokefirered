@@ -1696,7 +1696,6 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);   
     
-    DebugPrintfLevel(MGBA_LOG_ERROR, "Task_ItemMenuAction_BattleUse gSpecialVar_ItemId=%d", gSpecialVar_ItemId);
     if (gSpecialVar_ItemId == ITEM_BERRY_POUCH) {
         BattleUseFunc_BerryPouch(taskId);
         return;
@@ -2041,6 +2040,8 @@ static void Task_TryDoItemDeposit(u8 taskId)
     }
 }
 
+#define tIsFieldUse data[3]
+
 bool8 UseRegisteredKeyItemOnField(void)
 {
     u8 taskId;
@@ -2058,7 +2059,7 @@ bool8 UseRegisteredKeyItemOnField(void)
             StopPlayerAvatar();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
-            gTasks[taskId].data[3] = 1;
+            gTasks[taskId].tIsFieldUse = TRUE;
             return TRUE;
         }
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
@@ -2066,6 +2067,8 @@ bool8 UseRegisteredKeyItemOnField(void)
     ScriptContext_SetupScript(EventScript_BagItemCanBeRegistered);
     return TRUE;
 }
+
+#undef tIsFieldUse
 
 static bool8 BagIsTutorial(void)
 {

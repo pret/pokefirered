@@ -23,7 +23,6 @@ struct Item
     u8 type; // unused for balls
     u8 battleUsage;
     u8 flingPower;
-    ItemUseFunc battleUseFunc;
 };
 
 struct BagPocket

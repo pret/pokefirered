@@ -84,7 +84,13 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_ELIXIR
 	.2byte ITEM_LEPPA_BERRY
 	.2byte ITEM_MAX_MUSHROOMS
-	.2byte ITEM_PUNCHING_GLOVE
+	.2byte ITEM_EXP_CANDY_XS
+	.2byte ITEM_EXP_CANDY_S
+	.2byte ITEM_EXP_CANDY_M
+	.2byte ITEM_EXP_CANDY_L
+	.2byte ITEM_EXP_CANDY_XL
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_ICE_STONE
 	.2byte ITEM_NONE
 	release
 	end

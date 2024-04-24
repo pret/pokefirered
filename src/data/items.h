@@ -1714,7 +1714,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy XS"),
         .pluralName = _("Exp.Candies XS"),
-        .price = 20,
+        .price = 2,
         .holdEffectParam = EXP_100,
         .description = COMPOUND_STRING(
             "Gives a very small\n"
@@ -1731,7 +1731,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy S"),
         .pluralName = _("Exp.Candies S"),
-        .price = 240,
+        .price = 2,
         .holdEffectParam = EXP_800,
         .description = COMPOUND_STRING(
             "Gives a small\n"
@@ -1748,7 +1748,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy M"),
         .pluralName = _("Exp.Candies M"),
-        .price = 1000,
+        .price = 2,
         .holdEffectParam = EXP_3000,
         .description = COMPOUND_STRING(
             "Gives a moderate\n"
@@ -1765,7 +1765,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy L"),
         .pluralName = _("Exp.Candies L"),
-        .price = 3000,
+        .price = 2,
         .holdEffectParam = EXP_10000,
         .description = COMPOUND_STRING(
             "Gives a large\n"
@@ -1782,7 +1782,7 @@ const struct Item gItems[] =
     {
         .name = _("Exp.Candy XL"),
         .pluralName = _("Exp.Candies L"),
-        .price = 10000,
+        .price = 2,
         .holdEffectParam = EXP_30000,
         .description = COMPOUND_STRING(
             "Gives a very large\n"
@@ -3392,7 +3392,7 @@ const struct Item gItems[] =
     [ITEM_FIRE_STONE] =
     {
         .name = _("Fire Stone"),
-        .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        .price = (I_PRICE >= GEN_7) ? 2 : 2,
         .description = sEvolutionStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
@@ -3440,7 +3440,7 @@ const struct Item gItems[] =
     [ITEM_ICE_STONE] =
     {
         .name = _("Ice Stone"),
-        .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        .price = (I_PRICE >= GEN_7) ? 2 : 2,
         .description = sEvolutionStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
@@ -9243,7 +9243,7 @@ const struct Item gItems[] =
     [ITEM_TM02] =
     {
         .name = _("TM02"),
-        .price = 2,
+        .price = 10000,
         .description = COMPOUND_STRING(
             "Hooks and slashes\n"
             "the foe with long,\n"
